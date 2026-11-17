@@ -1,25 +1,23 @@
 #include "common.h"
-#include "AsdSDK/MdlManagerDestroy.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
-int asdMdlManagerDestroy(int handle);
-
 typedef struct Obj {
     /* 0x0000 */ u8 unk0000[0x95CC];
-    /* 0x95CC */ int model;
+    /* 0x95CC */ AsdMdlObject *model;
 } Obj;
 
 extern Obj *g_unite;
 
 void uniteReleaseModel(void)
 {
-    int *model = &g_unite->model;
+    AsdMdlObject **model = &g_unite->model;
 
-    if (*model != 0) {
+    if (*model != NULL) {
         asdMdlManagerMarkDestroy(*model);
         asdMdlManagerDestroy(*model);
-        *model = 0;
+        *model = NULL;
     }
 }
 

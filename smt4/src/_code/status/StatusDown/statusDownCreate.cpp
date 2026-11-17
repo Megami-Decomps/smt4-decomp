@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -48,15 +49,9 @@ s32 FUN_001ca748(u32 handle);
 s32 FUN_001cca14(u32 handle);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void asdTextSetBaseColor(AsdText *text, u32 value);
-void timerStart(UiSpriteState *sprite, s32 id, s32 arg);
-void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 index);
-void uiSpriteInitializeState(UiSpriteState *sprite, u32 group, s32 image, s32 kind,
-                             UiResourceParameters *owner, u16 id, f32 scale);
 AsdText *asdTextCreate(u32 text);
 void positionStateSet(AsdText *text, s32 arg, u32 color, f32 value);
-void spriteSetLayer(UiSpriteState *sprite, u16 layer);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
 
 /* Allocates and clears the status screen's work area, starts its calc/draw tasks and builds its sprites. */

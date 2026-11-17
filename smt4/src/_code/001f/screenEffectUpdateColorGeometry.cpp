@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail forms &color (r0) before the first product multiply and packs through `vldmia r0, {s1-s4}`; the build adds the address after the product stores and orders the float-to-byte conversions and REV moves differently (helpers, VFP copy, multiply and frame selection match). */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_ScreenEffect.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "gfx/EffectColorMath.h"

@@ -12,7 +12,7 @@ struct QuestAddonScriptWork {
     u8 unk04[8];
     void *commands;
     void *messages;
-    ScriptRunState *script;
+    ScriptProcess *script;
 };
 typedef char QuestAddonScriptWorkOffsets[offsetof(QuestAddonScriptWork, commands) == 0xc &&
     offsetof(QuestAddonScriptWork, messages) == 0x10 &&
@@ -23,11 +23,10 @@ s32 aocPackageGrantsItem(AocSystem *system, u16 id, u32 kind);
 void aocQueueType07(AocSystem *system, u32 id, void **output, u32 flags);
 void aocQueueType08(AocSystem *system, u32 id, void **output, u32 flags);
 void buttonHelpSetPreset(u32 preset);
-ScriptRunState *scrScriptProcessCreate(void *commands, void *messages);
 void textFormatBuffer(char *output, const char *format, ...);
 u32 tableGroupFindEntryIndex(void *commands, const char *entry);
-void scrScriptProcessStartEntry(ScriptRunState *script, u32 entry);
-s32 scrRunOpcodesStub(ScriptRunState *script);
+void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
+s32 scrRunOpcodesStub(ScriptProcess *script);
 
 u32 FUN_0027398c(QuestAddonScriptWork *work)
 {

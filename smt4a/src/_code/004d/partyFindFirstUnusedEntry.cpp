@@ -1,32 +1,25 @@
-#include "shard/Shard0031.h"
-#include <stddef.h>
-
-struct PartySlotCountView : PartyStatusSlots {
-    /* 0x1CA3 */ u8 count;
-};
-typedef char PartySlotCountOffset[offsetof(PartySlotCountView, count) == 0x1CA3 ? 1 : -1];
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartySlotCountView *gameGetSlotTable(void);
-s32 slotTableEntryIsActive(SlotTableEntry *entry);
+s32 slotTableEntryIsActive(SlotRecordA *entry);
 
 /* Return the first free entry when there is room in the ordered party slots. */
 s32 partyFindFirstUnusedEntry(void)
 {
-    PartySlotCountView *table = gameGetSlotTable();
-    PartySlotCountView *ordered = gameGetSlotTable();
+    SaveSlotTableA *table = gameGetSlotTable();
+    SaveSlotTableA *ordered = gameGetSlotTable();
     s32 used = 0;
     for (s32 index = 0; index < 24; ++index) {
-        if (ordered->active.slots[index] < 0)
+        if (ordered->party[index] < 0)
             break;
         ++used;
     }
     s32 capacity = table->count;
     if (used >= capacity)
         return -1;
-    PartySlotCountView *entries = gameGetSlotTable();
+    SaveSlotTableA *entries = gameGetSlotTable();
     for (s32 index = 0; index < 24; ++index) {
-        if (slotTableEntryIsActive(&entries->active.entries[index]) == 0)
+        if (slotTableEntryIsActive(&entries->entries[index]) == 0)
             return index;
     }
     return -1;

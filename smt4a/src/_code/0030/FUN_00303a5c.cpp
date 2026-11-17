@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail uses s1 for the 0.0 constant; the build uses s2. */
 #include "common.h"
-
-extern "C" f32 mathAngleDeltaDegrees(f32, f32);
+#include "util/MathFunctions.h"
 
 // Move an angle toward its target by at most the requested step.
 extern "C" f32 FUN_00303a5c(f32 current, f32 target, f32 step)

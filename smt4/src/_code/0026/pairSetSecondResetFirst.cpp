@@ -1,17 +1,8 @@
-#include "common.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" {
-
-typedef struct Obj {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u32 unk8;
-} Obj;
-
-void pairSetSecondResetFirst(Obj *obj, u32 value)
+/* Shows the secondary image `secondaryImage`, dropping the image. */
+extern "C" void pairSetSecondResetFirst(UiSpriteState *sprite, s32 secondaryImage)
 {
-    obj->unk4 = 0xffffffff;
-    obj->unk8 = value;
+    sprite->image = -1;
+    sprite->secondaryImage = secondaryImage;
 }
-
-} /* extern "C" */

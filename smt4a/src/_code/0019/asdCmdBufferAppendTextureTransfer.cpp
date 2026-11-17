@@ -2,7 +2,6 @@
 #include "gfx/TextureTransferCommand.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 void globalCriticalSectionEnterForward(void);
 void globalCriticalSectionLeaveForward(void);
 void FUN_001963e0(void);
@@ -36,8 +35,8 @@ void asdCmdBufferAppendTextureTransfer(AsdCmdBuffer *buffer, const void *source,
     globalCriticalSectionEnterForward();
     buffer->listCount++;
     if (g_asdGfxContext.activeBuffer == buffer &&
-        g_asdGfxContext.submission.enabled != 0 && g_asdGfxContext.submission.pending == 0) {
-        g_asdGfxContext.submission.pending = 1;
+        g_asdGfxContext.submitEnabled != 0 && g_asdGfxContext.submitPending == 0) {
+        g_asdGfxContext.submitPending = 1;
         FUN_001963e0();
     }
     globalCriticalSectionLeaveForward();

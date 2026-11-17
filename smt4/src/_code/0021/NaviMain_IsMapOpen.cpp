@@ -1,9 +1,9 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 struct NavigationState;
 
 extern "C" {
-extern NaviMain *g_naviMain;
 bool naviStateIsMapOpen(const NavigationState *navigation);
 
 /* Whether the navigation screen exists and is in one of its map-open states. */

@@ -1,9 +1,8 @@
 /* NON_MATCHING: Position snapshots reload their first two components through integer registers instead of retaining the retail mixed integer/VFP pair. */
 #include "map/SceneSpawn.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
-extern SceneViewHeading *g_lmapView;
 u32 table23FindRecordByKey(void);
 SceneSpawnRecord *dataTableGetRecord23(u32 index);
 

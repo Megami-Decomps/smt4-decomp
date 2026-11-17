@@ -1,4 +1,5 @@
 /* NON_MATCHING: identical to retail apart from the constants 1 and 0 living in r6/r7 instead of r7/r6; needs the _ZN9Obj557bd8C1Ev / TargetMarkerEntry constructor / vtable renames applied. */
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/AsdDebug.h"
 #include "battle/btlMain.h"
 #include "battle/btlTargetSelect.h"
@@ -7,18 +8,13 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 /* The state the target selection's draw tasks share (its own sub-object starts at 0x2C). */
-struct TargetSelectDrawState {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u8 unk08[0x84];
-};
 
 struct TargetSelectWork {
     /* 0x00 */ BtlTargetSelect base;
     /* 0x08 */ u8 mode;
     /* 0x09 */ u8 unk09[3];
     /* 0x0C */ UiResourceParameters parameters;
-    /* 0x2C */ TargetSelectDrawState draw;
+    /* 0x2C */ UiSpriteState draw;
 };
 
 extern "C" {
@@ -33,8 +29,6 @@ void payloadWorkRelease();
 void btlTargetSelectDestroy(u32 job);
 void paramsClearPacket(UiResourceParameters *params);
 
-void uiSpriteStateInitFromSource(TargetSelectDrawState *draw, u32 first, u32 second, UiResourceParameters *params, s32 flag, f32 scalar);
-void FUN_0036b644(TargetSelectDrawState *draw, u32 mode);
 
 // Create the information and marker displays with a calculation job and two draw passes.
 void FUN_00363990(BtlMainStateA *owner)

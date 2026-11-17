@@ -1,7 +1,6 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
-extern LmapMainState *g_lmapMainState;
 extern s8 DAT_0049f08c[80];
 void sceneAttachLightChild(void *, s32);
 void FUN_00265b78(s32, s32);

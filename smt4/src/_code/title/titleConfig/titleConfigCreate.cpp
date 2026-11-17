@@ -25,7 +25,7 @@ struct TitleConfigCreateWork {
     /* 0x030 */ u32 voiceStep;
     /* 0x034 */ TitleConfigWordPair savedOptions;
     /* 0x03C */ UiResourceParameters resources;
-    /* 0x05C */ SpritePlaybackView sprite;
+    /* 0x05C */ UiSpriteState sprite;
     /* 0x0E8 */ u8 selector[0x64];
     /* 0x14C */ void *scriptData;
     /* 0x150 */ void *modelData;
@@ -45,9 +45,6 @@ void titleConfigDestroy(void);
 s32 FUN_002cb054(void);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void uiSpriteStateInitFromSource(SpritePlaybackView *sprite, s32 kind, s32 count,
-                   UiResourceParameters *resources, u16 flags, f32 speed);
-void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
 void gridNavigationConfigure(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
 void memFill8(void *destination, u32 value);
 void buttonHelpSetPreset(s32 preset);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00116a54` (_code @ 0x116a54, 0xb80 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -16,7 +17,6 @@ int FUN_00124d24(int);
 int titleOverlayDraw(int);
 int renderCtxCalculateStereoParallax(...);
 int gxResetColorQuadToWhite(void);
-int vec2GetYInt(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int texDrawTableEntryAtStoredOrigin(...);
@@ -54,7 +54,6 @@ extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: asdTextSetBaseColor. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: vec2GetYInt. */
-extern int vec2GetXInt(int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
@@ -154,9 +153,9 @@ char FUN_00116a54(void)
         {
           temp_v6 = renderCtxPackPassFlags(1,0);
           renderStackPushIndexed(g_titleScene,3,temp_v6);
-          temp_v8 = vec2GetXInt(temp_v4 + 0x2f4);
+          temp_v8 = vec2GetXInt((UiSpriteState *)(temp_v4 + 0x2f4));
           temp_v8 = temp_v8 + temp_v5;
-          temp_v9 = vec2GetYInt(temp_v4 + 0x2f4);
+          temp_v9 = vec2GetYInt((UiSpriteState *)(temp_v4 + 0x2f4));
           efctSetSpeed();
           gxResetColorQuadToWhite();
           temp_v0 = *(char *)(temp_v4 + 9);
@@ -211,8 +210,8 @@ char FUN_00116a54(void)
     if ((temp_v4 == 0) || (*(char *)(temp_v4 + 8) != '\x04')) goto LAB_00117048;
     if ((*(char *)(DAT_0043e190 + 8) != '\0') &&
        ((*(char *)(DAT_0043e190 + 0x5f) == '\0' && (*(char *)(DAT_0043e18c + 0x5f) == '\0')))) {
-      temp_v8 = vec2GetXInt(temp_v4 + 0x2f4);
-      vec2GetYInt(temp_v4 + 0x2f4);
+      temp_v8 = vec2GetXInt((UiSpriteState *)(temp_v4 + 0x2f4));
+      vec2GetYInt((UiSpriteState *)(temp_v4 + 0x2f4));
       temp_v6 = renderCtxPackPassFlags(1,0);
       renderStackPushIndexed(g_titleScene,3,temp_v6);
       efctSetSpeed();

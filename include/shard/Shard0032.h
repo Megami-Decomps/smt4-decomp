@@ -3,6 +3,8 @@
 #define SHARD_SHARD0032_H
 
 #include "common.h"
+struct ScriptProcess;
+#include "gamedata/GameSaveDataA.h"
 #include <stddef.h>
 
 /* A menu object; only the fields the helpers touch are named. */
@@ -114,66 +116,10 @@ typedef char SavedUnitRecordALayoutCheck[
     offsetof(SavedUnitRecordA, bits) == 0x38 &&
     offsetof(SavedUnitRecordA, name) == 0x3C ? 1 : -1];
 
-/* A 300-byte unit record built from a table entry. */
-typedef struct UnitRecord {
-    /* 0x00 */ u16 stats[7];
-    /* 0x0E */ u8 unk0E[0x2];
-    /* 0x10 */ u16 unk10;
-    /* 0x12 */ u8 unk12[0xA];
-    /* 0x1C */ u16 unk1C;
-    /* 0x1E */ u16 unk1E;
-    /* 0x20 */ u16 stats2[5];
-    /* 0x2A */ u16 unk2A;
-    /* 0x2C */ u16 unk2C;
-    /* 0x2E */ u8 unk2E[0x2];
-    /* 0x30 */ u32 unk30;
-    union {
-        /* 0x34 */ u8 unk34[0x18];
-        struct {
-            /* 0x34 */ u16 skills[8];
-            /* 0x44 */ u8 unk44[8];
-        } skillList;
-    };
-    /* 0x4C */ u16 name[9];
-    /* 0x5E */ u8 unk5E[0x4];
-    /* 0x62 */ u16 id;
-    /* 0x64 */ u16 unk64;
-    union {
-        /* 0x66 */ u8 unk66[0xC6];
-        struct {
-            /* 0x66 */ u8 unk66BeforeStatus[0xC5];
-            /* 0x12B */ u8 status;
-        } savedState;
-        struct {
-            u8 unk66BeforeInheritance[2];
-            /* 0x68 */ u8 flags[0x40];
-        } inheritance;
-    };
-} UnitRecord;
-
-typedef char UnitRecordSkillsOffsetCheck[
-    offsetof(UnitRecord, skillList.skills) == 0x34 &&
-    offsetof(UnitRecord, savedState.status) == 0x12B &&
-    sizeof(UnitRecord) == 0x12C ? 1 : -1];
-typedef char UnitRecordInheritanceOffsetCheck[
-    offsetof(UnitRecord, inheritance.flags) == 0x68 ? 1 : -1];
+/* A 300-byte unit record built from a table entry: the save block's unit record. */
+typedef SlotRecordA UnitRecord;
 
 /* Party manager data (gameGetSlotTable). */
-/* Party manager data (gameGetSlotTable). */
-typedef struct SummarySource {
-    /* 0x00 */ u8 unk00[0x4];
-    /* 0x04 */ u16 stats[7];
-    /* 0x12 */ u8 unk12[0x3E];
-    /* 0x50 */ u16 name[9];
-    /* 0x62 */ u8 unk62[0x4];
-    /* 0x66 */ s16 unk66;
-    /* 0x68 */ u8 unk68[0x1C3B];
-    /* 0x1CA3 */ s8 unk1CA3;
-    /* 0x1CA4 */ u8 unk1CA4[0xFA8];
-    /* 0x2C4C */ s16 unk2C4C;
-    /* 0x2C4E */ u16 unk2C4E;
-} SummarySource;
-
 /* Summary of the player character, filled by playerSummaryFill. */
 typedef struct PlayerSummary {
     /* 0x00 */ u16 stats[7];
@@ -191,12 +137,6 @@ typedef struct PlayerSummary {
     /* 0x42 */ u8 unk42[0x2];
     /* 0x44 */ s16 unk44;
 } PlayerSummary;
-
-typedef struct Lookup62_64 {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ s16 unk62;
-    /* 0x64 */ s16 unk64;
-} Lookup62_64;
 
 typedef struct StateAtF4 {
     /* 0x00 */ u32 job;
@@ -251,13 +191,6 @@ typedef struct FlagAt4 {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ u8 flag;
 } FlagAt4;
-
-typedef struct ScriptState {
-    /* 0x00 */ u8 unk00[0x3B];
-    /* 0x3B */ u8 unk3B;
-    /* 0x3C */ u8 unk3C[0x6C];
-    /* 0xA8 */ u32 result;
-} ScriptState;
 
 typedef char CampCecEditALayoutCheck[sizeof(StateAtF4) == 0x18C ? 1 : -1];
 

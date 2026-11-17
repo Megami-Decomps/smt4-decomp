@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/AnimatedMessage.h"
 #include "camp/RenderCtxA.h"
 
@@ -25,7 +26,7 @@ void uiDrawAnimatedMessage(AnimatedMessageWork *work)
     efctSetSpeed(1.0f);
     uiSpriteAdvanceAnimation(&work->sprites[1], 1.0f);
     if (work->sprites[0].finished != 0 && uiAnimatedSpriteIsFinished(&work->sprites[1])) {
-        work->sprites[0].completion.channels[2] = 1;
+        work->sprites[0].scaleDone = 1;
     }
 }
 }

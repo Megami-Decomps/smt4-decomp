@@ -1,28 +1,20 @@
-#include "shard/W6_W6Match8_AnimatedSprite.h"
-#include "ui/UiControl.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" {
-void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const SpriteAnimationCommand *animation);
-}
-
-/* The first command of the given group: a command with a position key of -1 ends a group. */
-static __inline const SpriteAnimationCommand *spriteFindGroup(const SpriteAnimationResource *resource, s32 group)
+/* The first command of group `group`: groups are separated by commands whose position key is -1. */
+static __inline SpriteAnimationCommand *findSpriteCommand(UiResourceParameters *resources, s32 group)
 {
-    s32 currentGroup = 0;
-
-    for (u32 i = 0; i < resource->commandBytes / sizeof(SpriteAnimationCommand); i++) {
-        if (currentGroup == group) {
-            return &resource->commands[i];
-        }
-        if (resource->commands[i].positionKey == -1) {
-            currentGroup++;
-        }
+    s32 current = 0;
+    for (u32 i = 0; i < resources->commandBytes / sizeof(SpriteAnimationCommand); ++i) {
+        if (current == group)
+            return &resources->commands[i];
+        if (resources->commands[i].positionKey == -1)
+            ++current;
     }
     return NULL;
 }
 
-extern "C" void uiSpriteSelectAnim(void *object, s32 group)
+/* Runs the sprite's command group `group`. */
+extern "C" void uiSpriteSelectAnim(UiSpriteState *sprite, s16 group)
 {
-    SpritePlaybackView *sprite = static_cast<SpritePlaybackView *>(object);
-    uiSpriteSetAnimationCommand(sprite, spriteFindGroup(sprite->resource, group));
+    uiSpriteSetAnimationCommand(sprite, findSpriteCommand(sprite->resources, group));
 }

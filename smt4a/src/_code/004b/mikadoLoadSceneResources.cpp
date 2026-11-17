@@ -1,11 +1,11 @@
 #include "camp/ScriptPanelResources.h"
+#include "script/scrScriptProcess.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 void textFormatBuffer(char *output, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **output, s32 mode);
-ScriptProcess *scrScriptProcessCreate(void *script, void *messages);
 extern const char DAT_005328e4[];
 extern const char DAT_005328cc[];
 extern const char DAT_005328b4[];

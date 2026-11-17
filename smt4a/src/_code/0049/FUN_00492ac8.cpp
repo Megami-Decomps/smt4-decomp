@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "shard/Shard0049.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 void FUN_00492ac8(u32 unused, u32 value)
 {

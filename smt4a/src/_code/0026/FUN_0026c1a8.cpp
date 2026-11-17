@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard0033.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
@@ -9,7 +10,6 @@ void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(s32 kind, s32 value);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 sprite, f32 scale);
 void efctSetSpeed(f32 alpha);
-f32 vec2GetSpeed(const void *object);
 
 u32 FUN_0026c1a8(void)
 {

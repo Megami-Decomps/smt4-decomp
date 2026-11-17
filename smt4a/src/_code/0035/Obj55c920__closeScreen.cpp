@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ScriptProcess;
@@ -16,7 +17,6 @@ struct CampCommonWork {
 };
 
 extern "C" {
-void scrScriptProcessDestroy(ScriptProcess *script);
 void asdMemFree(void *block);
 void FUN_002c85b0(s32 mode);
 void gameGlobalsSetMenuOpenFlag(s32 mode);

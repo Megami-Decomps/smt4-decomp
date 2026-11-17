@@ -10,12 +10,10 @@ struct SpriteSetupOwner {
     u8 unk0c40[0x728]; // 0x0c40
     u8 flags[3];        // 0x1368
     u8 unk136b;         // 0x136b
-    UiAnimatedSprite sprite; // 0x136c
+    UiSpriteState sprite; // 0x136c
 };
 
 extern "C" {
-void uiSpriteInitializeState(UiAnimatedSprite*, u32, u32, u32, UiSpriteParentPrefix*, u16, f32);
-void uiSpriteSetKeyframe(UiAnimatedSprite*, s32, s32);
 
 // Initialize the group's sprite and select its fifth keyframe.
 void uiSpriteGroupInitialize(SpriteSetupOwner* owner)
@@ -23,7 +21,7 @@ void uiSpriteGroupInitialize(SpriteSetupOwner* owner)
     owner->flags[1] = 1;
     owner->flags[0] = 0;
     owner->flags[2] = 0;
-    uiSpriteInitializeState(&owner->sprite, 0x13, 0x111a, 0x1c, &owner->parent, 0x15, 1.0f);
+    uiSpriteInitializeState(&owner->sprite, 0x13, 0x111a, 0x1c, (UiResourceParameters *)(&owner->parent), 0x15, 1.0f);
     uiSpriteSetKeyframe(&owner->sprite, 5, 0);
 }
 }

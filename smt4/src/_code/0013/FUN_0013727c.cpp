@@ -2,7 +2,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 void FUN_0013780c(AsdCmdBuffer* buffer, u32 source, u32 sourceWidth, u32 sourceHeight,
                   u32 sourceFormat, u32 destination, u32 destinationWidth,
                   u32 destinationHeight, u32 destinationFormat, u32 mode, u32 flags, u32 option);

@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "code/Code0029.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 struct PlayLogEntry {
     /* 0x00 */ u8 unk00[2];
@@ -43,7 +44,6 @@ void uiDrawListScrollBar(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s3
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
 void FUN_002907c4(char *out, u32 value);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
-s32 vec2GetXInt(void *row);
 void textFormatBuffer(char *out, const char *format, ...);
 void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y);
 s32 fontMeasureLineAdvance(const char *text, u32 font);
@@ -52,7 +52,7 @@ void FUN_00194b14(void)
 {
     PlayLogView *log = g_playLog;
     for (s32 row = 0; row < (s32)FUN_0029d644(log->list); row++) {
-        s32 x = vec2GetXInt(&log->rows[row]);
+        s32 x = vec2GetXInt((const UiSpriteState *)&log->rows[row]);
         if (row == 0)
             texDrawCompositeSprite(2, PLAYLOG_FONT_TABLE, 0, x, 0, 0xB);
         if ((s32)FUN_0029d644(log->list) - 1 == row) {

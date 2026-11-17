@@ -1,8 +1,8 @@
 #include "common.h"
 #include "shard/Shard0034.h"
-#include "shard/Shard004B.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 
@@ -10,7 +10,7 @@ u32 randRange(u32 range);
 
 /* Rolls whether two demons trigger an event: the chance grows with the player flag, each demon's
  * flags, and doubles when either demon belongs to race 35. */
-bool FUN_004da520(u32 unused, ScaledRecordValues *first, ScaledRecordValues *second)
+bool FUN_004da520(u32 unused, SlotRecordA *first, SlotRecordA *second)
 {
     NkmBaseRecordA *firstRecord = nkmBaseGetRecord(first->id);
     NkmBaseRecordA *secondRecord = nkmBaseGetRecord(second->id);
@@ -19,16 +19,16 @@ bool FUN_004da520(u32 unused, ScaledRecordValues *first, ScaledRecordValues *sec
     if (gameGetPlayerData()->ailments & 0x200) {
         chance = 7;
     }
-    if (first->flags & 2) {
+    if (first->ailments & 2) {
         chance++;
     }
-    if (second->flags & 2) {
+    if (second->ailments & 2) {
         chance++;
     }
-    if (first->flags & 0x200) {
+    if (first->ailments & 0x200) {
         chance += 3;
     }
-    if (second->flags & 0x200) {
+    if (second->ailments & 0x200) {
         chance += 3;
     }
     if (firstRecord->race == 35 || secondRecord->race == 35) {

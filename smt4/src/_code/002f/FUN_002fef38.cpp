@@ -19,8 +19,8 @@ u32 FUN_002fef38()
             (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->data.id == id) {
             if (entry->data.equipA != NULL) {
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->data.equipA->skillIds[slot]));
-                    if (skill != NULL && skill->classification.category == 3) {
+                    const SkillDataRecord *skill = skillDataFindById(entry->data.equipA->skillIds[slot]);
+                    if (skill != NULL && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
                     }
@@ -28,8 +28,8 @@ u32 FUN_002fef38()
             }
             if (entry->data.equipB != NULL) {
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->data.equipB->skillIds[slot]));
-                    if (skill != NULL && skill->classification.category == 3) {
+                    const SkillDataRecord *skill = skillDataFindById(entry->data.equipB->skillIds[slot]);
+                    if (skill != NULL && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
                     }
@@ -38,8 +38,8 @@ u32 FUN_002fef38()
             if (entry->data.devil != NULL) {
                 const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(entry->data.id));
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(record->skills[slot]));
-                    if (skill != NULL && skill->classification.category == 3) {
+                    const SkillDataRecord *skill = skillDataFindById(record->skills[slot]);
+                    if (skill != NULL && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
                     }

@@ -1,21 +1,7 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 #include "gamedata/GameFlags.h"
 #include "script/scrScriptProcess.h"
-struct ScriptState;
-/* The script fields are beyond the shared map-state prefix. */
-struct LmapScriptRuntimeView {
-    LmapMainStateA map;
-    u8 unk0F8[0x934];
-    void *code;
-    void *strings;
-    ScriptResource *script;
-    u32 completionFlag;
-    u8 unkA3C[0x8918];
-    s32 state;
-};
-typedef char LmapScriptRuntimeOffsets[(offsetof(LmapScriptRuntimeView, code) == 0xA2C && offsetof(LmapScriptRuntimeView, state) == 0x9354) ? 1 : -1];
 extern "C" {
-extern LmapMainStateA *g_lmapMainState;
 s32 pairedAvailabilityGetState(s32 display);
 u32 getByteTableAValue(void);
 void byteTableASetValue(u32 value);
@@ -23,17 +9,16 @@ u32 byteTableAGetValue3(void);
 void byteTableASetValue3(u32 value);
 s32 FUN_00162ea4(void);
 void titleSetSlotValueState2(s32 display, s32 mode);
-u32 scrRunOpcodesStub(ScriptState *state);
+u32 scrRunOpcodesStub(ScriptProcess *state);
 
 void messageSlotSet(s32 slot);
-void scrScriptProcessDestroy(ScriptResource *script);
 void asdMemFree(void *memory);
 s32 pairedAvailabilityBothReady(void);
 
 u32 FUN_002dfa18(void)
 {
-    LmapScriptRuntimeView *work = reinterpret_cast<LmapScriptRuntimeView *>(g_lmapMainState);
-    switch (work->state) {
+    LmapMainStateA *map = g_lmapMainState;
+    switch (map->scriptState) {
     case 0:
         if ((pairedAvailabilityGetState(0) != 3 || pairedAvailabilityGetState(1) != 3) && getByteTableAValue())
             byteTableASetValue(0);
@@ -45,19 +30,19 @@ u32 FUN_002dfa18(void)
             titleSetSlotValueState2(0, 5);
             titleSetSlotValueState2(1, 5);
             byteTableASetValue(0);
-            work->state = 2;
+            map->scriptState = 2;
             return 0;
         }
-        if (scrRunOpcodesStub(reinterpret_cast<ScriptState *>(work->script)) == 2) {
-            if (work->completionFlag)
-                gameFlagSetValue(work->completionFlag, 1, 1);
+        if (scrRunOpcodesStub(map->script) == 2) {
+            if (map->scriptCompletionFlag)
+                gameFlagSetValue(map->scriptCompletionFlag, 1, 1);
             messageSlotSet(0);
-            scrScriptProcessDestroy(work->script);
-            work->script = 0;
-            asdMemFree(work->code);
-            work->code = 0;
-            asdMemFree(work->strings);
-            work->strings = 0;
+            scrScriptProcessDestroy(map->script);
+            map->script = NULL;
+            asdMemFree(map->scriptCode);
+            map->scriptCode = NULL;
+            asdMemFree(map->scriptStrings);
+            map->scriptStrings = NULL;
             return 1;
         }
         break;
@@ -65,7 +50,7 @@ u32 FUN_002dfa18(void)
         break;
     case 2:
         if (pairedAvailabilityBothReady())
-            work->state = 0;
+            map->scriptState = 0;
         break;
     }
     return 0;

@@ -8,7 +8,7 @@ struct SWinWork {
     u32 unk04;
     u32 values[8];
     UiResourceParameters parameters;
-    UiAnimatedSprite sprite;
+    UiSpriteState sprite;
 };
 typedef char SWinWorkLayoutCheck[sizeof(SWinWork) == 0xD4 &&
     offsetof(SWinWork, parameters) == 0x28 && offsetof(SWinWork, sprite) == 0x48 ? 1 : -1];
@@ -25,8 +25,6 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 void paramsClearPacket(UiResourceParameters *packet);
 
-void uiSpriteStateInitFromSource(UiAnimatedSprite *sprite, s32 group, s32 entry, UiResourceParameters *parameters,
-    s32 flags, f32 speed);
 
 void FUN_00285020(s32 raisedPriority)
 {

@@ -1,12 +1,11 @@
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"
 #include "battle/BtlMainAccess.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 extern "C" {
 u32 scrGetArg(u32 argument);
-PartyDamageSlotsIV *gameGetSlotTable();
-StatBlock *gameGetUnitRecord(s32 index);
 s32 flagWordTestBit(const StatBlock *unit, u32 bit);
 s32 slotUnitIsInActiveParty(const StatBlock *unit);
 u32 randNextInRange(u32 maximum);
@@ -15,14 +14,12 @@ void scrSetResult(s32 result);
 // Choose an eligible reserve demon, falling back to an eligible active combatant.
 u32 btlScriptChooseEligiblePartyDemon()
 {
-    struct StockCountView { PartyDamageSlotsIV slots; u8 count; };
-    typedef char StockCountOffset[offsetof(StockCountView, count) == 0x910b ? 1 : -1];
     u32 excludedId = scrGetArg(0);
     s8 candidates[24] = {0};
     s32 result = -1;
     s8 candidateCount = 0;
     s8 activeCount = 0;
-    for (s32 slot = 0; slot < reinterpret_cast<StockCountView *>(gameGetSlotTable())->count; ++slot) {
+    for (s32 slot = 0; slot < gameGetSlotTable()->stockCount; ++slot) {
         s8 index = gameGetSlotTable()->stock[slot];
         if (index >= 0) {
             StatBlock *unit = gameGetUnitRecord(index);

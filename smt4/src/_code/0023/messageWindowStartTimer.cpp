@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 
 extern "C" {
 
-extern int timerStart(void *timer, int kind, int arg);
-extern int uiSpriteStateInitFromSource(void *timer, int a, int b, void *layout, int c, f32 scale);
 
 /* Starts the message window's open (nonzero `open`) or close animation timer; returns 1. */
 u32 messageWindowStartTimer(int open)

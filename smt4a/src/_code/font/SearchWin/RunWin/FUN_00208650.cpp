@@ -4,6 +4,7 @@
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 /* The run window (only the fields read here). */
 struct RunWin {
@@ -25,8 +26,6 @@ extern RunWin *g_runWin;
 
 void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 void gxResetColorQuadToWhite(void);
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
@@ -39,8 +38,8 @@ u8 FUN_00208650(void)
     if (win->active != 0 && win->visible != 0) {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x14F, 0, 0, 109);
-        s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-        s32 y = vec2GetYInt(win->anchor);
+        s32 x = vec2GetXInt((const UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+        s32 y = vec2GetYInt((const UiSpriteState *)win->anchor);
         efctSetSpeed(win->alpha);
         RenderCtxA *scene = g_renderCtx;
         texDrawCompositeSprite(2, 8, 19, x, y, 110);

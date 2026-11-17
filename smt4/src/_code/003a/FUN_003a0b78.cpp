@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -21,11 +22,7 @@ typedef struct PopupTask {
 
 extern int pointConvertToFloat(void *panel, u32 x, u32 y);
 extern int FUN_00233240(void *intro, int arg);
-extern int uiSlidingSpriteAdvance(PopupCursor *cursor, int arg);
 extern int FUN_0029e0f8(void);
-extern u32 vec2GetYInt(PopupCursor *cursor);
-extern u32 vec2GetXInt(PopupCursor *cursor);
-extern s8 uiSpriteGetCompletionState(const PopupCursor *cursor);
 
 /* Per-frame update: step 0 starts the intro, step 1 follows the cursor and, once confirmed, picks the next state from the choice. */
 void FUN_003a0b78(PopupTask *task)
@@ -41,11 +38,11 @@ void FUN_003a0b78(PopupTask *task)
     }
     if (task->step == 1) {
         cursor = &task->cursor;
-        uiSlidingSpriteAdvance(cursor, 0);
-        y = vec2GetYInt(cursor);
-        x = vec2GetXInt(cursor);
+        uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
+        y = vec2GetYInt((const UiSpriteState *)cursor);
+        x = vec2GetXInt((const UiSpriteState *)cursor);
         pointConvertToFloat(task->panel, x, y);
-        if (uiSpriteGetCompletionState(cursor) != 0) {
+        if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) != 0) {
             switch (task->choice) {
             case 0:
             case 1:

@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 gameOptionsClassifyMode(void);
-void FUN_003eb760(BtlMainStateA *battle, void *parameters, const BattleSlotSourceRecordA *source);
+void FUN_003eb760(BtlMainStateA *battle, void *parameters, const PartySlotA *source);
 void FUN_004ca63c(BtlMainStateA *battle, void *parameters, s32 kind, s32 index, s32 mode);
 void optionsApplyOverride(s32 value);
 void FUN_004d9ebc(s32 mode);
@@ -27,15 +27,9 @@ void battleApplyOptionOverrides(BtlMainStateA *battle)
         /* 0x000 */ u8 unk000[0x130];
         /* 0x130 */ u64 suppressed;
     };
-    /* This player record lies past the shared slot-table prefix. */
-    struct PlayerSlotView {
-        /* 0x0000 */ u8 unk0000[0x1CA4];
-        /* 0x1CA4 */ BattleSlotSourceRecordA player;
-    };
     typedef char OptionViewOffsetsCheck[offsetof(OptionStateView, mode) == 0x150 &&
         offsetof(OptionStateView, overrideValue) == 0x3028 &&
-        offsetof(OptionMaskView, suppressed) == 0x130 &&
-        offsetof(PlayerSlotView, player) == 0x1CA4 ? 1 : -1];
+        offsetof(OptionMaskView, suppressed) == 0x130 ? 1 : -1];
     BtlCombatantEntryA temporary;
     OptionStateView *options = (OptionStateView *)battle;
     u64 suppressed = ((OptionMaskView *)&g_btlMain)->suppressed;
@@ -73,9 +67,8 @@ void battleApplyOptionOverrides(BtlMainStateA *battle)
             }
         }
     }
-    PlayerSlotView *slots = (PlayerSlotView *)gameGetSlotTable();
-    BattleSlotSourceRecordA *player = &slots->player;
-    if (player->id != 0) {
+    PartySlotA *player = &gameGetSlotTable()->player;
+    if (player->record.id != 0) {
         FUN_003eb760(battle, &temporary.data, player);
         FUN_004ca63c(battle, &temporary.data, 2, 54, 0);
     }

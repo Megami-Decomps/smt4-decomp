@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "code/Code004a_Smt4a.h"
 
 extern "C" {
 
 void FUN_00231cdc(BtlUiObjCA *obj, u32 a, s32 b, u32 c);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004a92d0(u32 unused, u32 first, u32 second)
 {

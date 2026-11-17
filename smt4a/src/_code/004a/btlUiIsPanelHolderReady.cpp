@@ -1,31 +1,20 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 
-typedef struct BtlUiPanel {
-    /* 0x0000 */ u8 unk0000[0x28C4];
-    /* 0x28C4 */ u8 holder[1];
-} BtlUiPanel;
-
-typedef struct BtlUiView {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ BtlUiPanel *panel;
-} BtlUiView;
-
-extern BtlUiView g_btlUi;
-
 u8 FUN_00270bfc(void *holder);
 
-/* Returns 1 when there is no panel, otherwise FUN_00270bfc's result for the panel's holder. */
+/* Returns 1 when there is no battle UI, otherwise FUN_00270bfc's result for its objC. */
 u8 btlUiIsPanelHolderReady(u32 arg0)
 {
-    BtlUiPanel *panel = g_btlUi.panel;
+    BtlUiA *ui = g_btlUi.ui;
 
-    if (panel == NULL) {
+    if (ui == NULL) {
         return 1;
     }
-    return FUN_00270bfc(panel->holder);
+    return FUN_00270bfc(&ui->objC);
 }
 
 } /* extern "C" */

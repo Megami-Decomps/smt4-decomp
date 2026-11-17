@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation only: retail copies the UI pointer into r6 for the inlined panel refresh (case 14) and keeps selection/flags in r7/r8. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 void uiSpriteSetKeyframeThree(BtlUiObjBA *sprite);
@@ -8,7 +8,6 @@ void FUN_002cc96c(BtlUiObjCA *widget);
 void FUN_00321500(BtlUiObjAA *widget);
 s32 spriteOperationGetModeThreeCompletion(BtlUiObjBA *widget);
 s32 menu32ModeIsNot6(BtlUiObjAA *widget);
-extern BtlUiGlobalsA g_btlUi;
 
 /* Refreshes the menu and sprite when the menu is not in mode 6 and the sprite accepts. */
 static __inline void refreshMenuSprite(BtlUiA *ui)

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004995b0` (_code @ 0x4995b0, 0x5a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int scrScriptProcessStartEntry(...);
 int statsSetFlag(...);
 
 int FUN_00148bb8(...);
-int uiSpriteAdvanceAnimation(unsigned int *);
 int buttonHelpSetText(...);
 int scrRunOpcodesStub(...);
 int messageWindowIsState1(...);
@@ -36,8 +36,6 @@ extern unsigned char LAB_004999c8; /* 0x4999c8 */
 
 /* Supplied declaration required: FUN_00148bb8. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
-extern unsigned int vec2GetXInt(unsigned int *);
-extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: buttonHelpSetText. */
@@ -80,9 +78,9 @@ void _ZN9Obj53604412FUN_004995b0Ev(unsigned int *param_1)
       if (temp_v0 == 3 || temp_v0 == 4) {
         scrRunOpcodesStub(param_1[99]);
         scrRunOpcodesStub(param_1[100]);
-        uiSpriteAdvanceAnimation(puVar6);
-        temp_v1 = vec2GetYInt(puVar6);
-        temp_v2 = vec2GetXInt(puVar6);
+        uiSpriteAdvanceAnimation((UiSpriteState *)puVar6, 1.0f);
+        temp_v1 = vec2GetYInt((const UiSpriteState *)puVar6);
+        temp_v2 = vec2GetXInt((const UiSpriteState *)puVar6);
         pointConvertToFloat(param_1 + 0xe9,temp_v2,temp_v1);
         temp_v3 = messageWindowIsState1((int)*(char *)((int)param_1 + 0x502));
         if (temp_v3 != 0) {
@@ -121,9 +119,9 @@ void _ZN9Obj53604412FUN_004995b0Ev(unsigned int *param_1)
     else {
       scrRunOpcodesStub(param_1[99]);
       scrRunOpcodesStub(param_1[100]);
-      uiSpriteAdvanceAnimation(puVar6);
-      temp_v1 = vec2GetYInt(puVar6);
-      temp_v2 = vec2GetXInt(puVar6);
+      uiSpriteAdvanceAnimation((UiSpriteState *)puVar6, 1.0f);
+      temp_v1 = vec2GetYInt((const UiSpriteState *)puVar6);
+      temp_v2 = vec2GetXInt((const UiSpriteState *)puVar6);
       pointConvertToFloat(param_1 + 0xe9,temp_v2,temp_v1);
       if (*(char *)((int)param_1 + 0x502) != '\0') {
         *param_1 = *param_1 & 0xfffff0ff;

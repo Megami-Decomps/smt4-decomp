@@ -11,7 +11,7 @@ typedef struct ByteAtD {
     /* 0x0D */ u8 unk0D;
 } ByteAtD;
 
-struct ScriptRunState;
+struct ScriptProcess;
 typedef struct ScriptHolder {
     union {
         /* 0x00 */ u8 unk00[8];
@@ -26,7 +26,7 @@ typedef struct ScriptHolder {
     /* 0x10 */ void *buf10;
     union {
         /* 0x14 */ u32 proc14;
-        /* 0x14 */ ScriptRunState *process;
+        /* 0x14 */ ScriptProcess *process;
     };
 } ScriptHolder;
 typedef char ScriptHolderPhaseOffsetCheck[

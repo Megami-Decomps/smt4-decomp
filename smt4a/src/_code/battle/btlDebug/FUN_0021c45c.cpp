@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021c45c` (_code @ 0x21c45c, 0xca0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "battle/btlDebug.h"
@@ -8,12 +9,7 @@
 extern "C" {
 
 int qsort(...);
-int uiSpriteStateInitFromSource(...);
-int uiSpriteInitializeState(...);
 int nkmBaseGetRecord(void);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(...);
 int rangeSelectionSelectEndpoint(...);
 int gameGetSlotRecord(...);
 int wordTripleClear(...);
@@ -127,10 +123,10 @@ void FUN_0021c45c(int param_1,int param_2)
   temp_v5 = 0;
   do {
     temp_v6 = param_1 + temp_v5 * 0x8c;
-    uiSpriteStateInitFromSource(temp_v6 + 0x73c,0xd,0,param_1,6);
-    uiSpriteSelectAnim(temp_v6 + 0x73c,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v6 + 0x73c),0xd,0, (UiResourceParameters *)(param_1),6, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(temp_v6 + 0x73c),0);
     temp_v2 = temp_v6 + 0x9f8;
-    uiSpriteStateInitFromSource(temp_v2,0xd,0,param_1,6);
+    uiSpriteStateInitFromSource((UiSpriteState *)temp_v2,0xd,0, (UiResourceParameters *)(param_1),6, 1.0f);
     if (temp_v5 == 0) {
       temp_v4 = 0xb;
       temp_v2 = temp_v1;
@@ -138,103 +134,103 @@ void FUN_0021c45c(int param_1,int param_2)
     else {
       temp_v4 = 10;
     }
-    uiSpriteSetImageKeyframe(temp_v2,temp_v4,0);
+    uiSpriteSetImageKeyframe((UiSpriteState *)temp_v2,temp_v4,0);
     temp_v2 = temp_v6 + 0xc28;
-    uiSpriteStateInitFromSource(temp_v2,0xd,0x1b,param_1,0x1f);
+    uiSpriteStateInitFromSource((UiSpriteState *)temp_v2,0xd,0x1b, (UiResourceParameters *)(param_1),0x1f, 1.0f);
     uiStoreTextureEntryCenter(temp_v2,0xd,0x45);
-    uiSpriteSelectAnim(temp_v2,6);
-    uiSpriteStateInitFromSource(temp_v6 + 0x145c,0xd,0x1c8,param_1,0x1a);
-    uiSpriteSelectAnim(temp_v6 + 0x145c,0xb);
+    uiSpriteSelectAnim((UiSpriteState *)temp_v2,6);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v6 + 0x145c),0xd,0x1c8, (UiResourceParameters *)(param_1),0x1a, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(temp_v6 + 0x145c),0xb);
     temp_v2 = temp_v6 + 0x168c;
-    uiSpriteStateInitFromSource(temp_v2,0xd,0xbba,param_1,0x1a);
+    uiSpriteStateInitFromSource((UiSpriteState *)temp_v2,0xd,0xbba, (UiResourceParameters *)(param_1),0x1a, 1.0f);
     uiStoreTextureEntryCenter(temp_v2,0xd,0x1ca);
-    uiSpriteSelectAnim(temp_v2,0xd);
+    uiSpriteSelectAnim((UiSpriteState *)temp_v2,0xd);
     temp_v6 = temp_v6 + 0x18bc;
-    uiSpriteStateInitFromSource(temp_v6,0xd,0xbbe,param_1,0x25);
+    uiSpriteStateInitFromSource((UiSpriteState *)temp_v6,0xd,0xbbe, (UiResourceParameters *)(param_1),0x25, 1.0f);
     uiStoreTextureEntryCenter(temp_v6,0xd,0x1ca);
-    uiSpriteSelectAnim(temp_v6,0xe);
+    uiSpriteSelectAnim((UiSpriteState *)temp_v6,0xe);
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 4);
-  uiSpriteStateInitFromSource(param_1 + 0x96c,0xd,0x5e,param_1,6);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x96c),0xd,0x5e, (UiResourceParameters *)(param_1),6, 1.0f);
   temp_v1 = *temp_v9[3];
   FUN_003eb200();
   if (temp_v1 != 0) {
-    uiSpriteSetKeyframe(param_1 + 0x96c,0xd,0);
+    uiSpriteSetKeyframe((UiSpriteState *)(param_1 + 0x96c),0xd,0);
   }
-  uiSpriteStateInitFromSource(param_1 + 0x20,0xd,0xdb,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x20,0x1b);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x20),0xd,0xdb, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x20),0x1b);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c;
-    uiSpriteStateInitFromSource(temp_v5 + 0x138,0xd,0xdd,param_1,6);
-    uiSpriteSelectAnim(temp_v5 + 0x138,0x1b);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v5 + 0x138),0xd,0xdd, (UiResourceParameters *)(param_1),6, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(temp_v5 + 0x138),0x1b);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
-  uiSpriteStateInitFromSource(param_1 + 0xac,0xd,0xde,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0xac,1);
-  uiSpriteStateInitFromSource(param_1 + 0x598,0xd,0x4a,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x598,2);
-  uiSpriteStateInitFromSource(param_1 + 0x624,0xd,0x96,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x624,3);
-  uiSpriteStateInitFromSource(param_1 + 0x6b0,0xd,0x9c,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x6b0,0x1e);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0xac),0xd,0xde, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0xac),1);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x598),0xd,0x4a, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x598),2);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x624),0xd,0x96, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x624),3);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x6b0),0xd,0x9c, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x6b0),0x1e);
   temp_v1 = 0;
   do {
-    uiSpriteStateInitFromSource(param_1 + temp_v1 * 0x8c + 0xe58,0xd,0x72,param_1,6);
+    uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + temp_v1 * 0x8c + 0xe58),0xd,0x72, (UiResourceParameters *)(param_1),6, 1.0f);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c + 0x2294;
-    uiSpriteStateInitFromSource(temp_v5,7,2000,param_1,0xf1);
-    uiSpriteSelectAnim(temp_v5,4);
+    uiSpriteStateInitFromSource((UiSpriteState *)temp_v5,7,2000, (UiResourceParameters *)(param_1),0xf1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)temp_v5,4);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x19);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c;
-    uiSpriteStateInitFromSource(temp_v5 + 0x3040,0xd,1000,param_1,0xf1);
-    uiSpriteSelectAnim(temp_v5 + 0x3040,5);
-    uiSpriteStateInitFromSource(temp_v5 + 0x32fc,0xd,0x3ea,param_1,0xf1);
-    uiSpriteSelectAnim(temp_v5 + 0x32fc,5);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v5 + 0x3040),0xd,1000, (UiResourceParameters *)(param_1),0xf1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(temp_v5 + 0x3040),5);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v5 + 0x32fc),0xd,0x3ea, (UiResourceParameters *)(param_1),0xf1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(temp_v5 + 0x32fc),5);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c + 0x35b8;
-    uiSpriteInitializeState(temp_v5,0xd,0xffffffff,0xf,param_1,0xf1);
-    uiSpriteSelectAnim(temp_v5,7);
+    uiSpriteInitializeState((UiSpriteState *)temp_v5,0xd,0xffffffff,0xf, (UiResourceParameters *)(param_1),0xf1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)temp_v5,7);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
-  uiSpriteStateInitFromSource(param_1 + 0x11a0,0xd,0x110,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x11a0,0x1b);
-  uiSpriteStateInitFromSource(param_1 + 0x1344,0xd,0,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x1344,9);
-  uiSpriteStateInitFromSource(param_1 + 0x13d0,0xd,0,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x13d0,9);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x11a0),0xd,0x110, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x11a0),0x1b);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x1344),0xd,0, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1344),9);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x13d0),0xd,0, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x13d0),9);
   FUN_0020d3d4(param_1);
-  uiSpriteStateInitFromSource(param_1 + 0x122c,0xd,0x124,param_1,6);
-  uiSpriteSelectAnim(param_1 + 0x122c,8);
-  uiSpriteStateInitFromSource(param_1 + 0x12b8,0xd,0,param_1,6);
-  uiSpriteStateInitFromSource(param_1 + 0x2208,0xd,0,param_1,6);
-  uiSpriteStateInitFromSource(param_1 + 0x1aec,0xd,0xfa9,param_1,0x42);
-  uiSpriteSetImageKeyframe(param_1 + 0x1aec,0x1b,0);
-  uiSpriteStateInitFromSource(param_1 + 0x1b78,0xd,0xfa9,param_1,0x42);
-  uiSpriteSelectAnim(param_1 + 0x1b78,0x14);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x122c),0xd,0x124, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x122c),8);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x12b8),0xd,0, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x2208),0xd,0, (UiResourceParameters *)(param_1),6, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x1aec),0xd,0xfa9, (UiResourceParameters *)(param_1),0x42, 1.0f);
+  uiSpriteSetImageKeyframe((UiSpriteState *)(param_1 + 0x1aec),0x1b,0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x1b78),0xd,0xfa9, (UiResourceParameters *)(param_1),0x42, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b78),0x14);
   temp_v1 = param_1 + 0x1c04;
-  uiSpriteStateInitFromSource(temp_v1,0xd,0xfbd,param_1,0x42);
-  uiSpriteStateInitFromSource(param_1 + 0x1c90,0xd,0xfbe,param_1,0x42);
-  uiSpriteSelectAnim(param_1 + 0x1c90,0x15);
+  uiSpriteStateInitFromSource((UiSpriteState *)temp_v1,0xd,0xfbd, (UiResourceParameters *)(param_1),0x42, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x1c90),0xd,0xfbe, (UiResourceParameters *)(param_1),0x42, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1c90),0x15);
   uiStoreTextureEntryCenter(temp_v1,0xd,0xfc1);
   temp_v5 = param_1 + 0x1d1c;
-  uiSpriteStateInitFromSource(temp_v5,0xd,0xfbf,param_1,0x42);
-  uiSpriteSelectAnim(temp_v5,0x16);
+  uiSpriteStateInitFromSource((UiSpriteState *)temp_v5,0xd,0xfbf, (UiResourceParameters *)(param_1),0x42, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)temp_v5,0x16);
   rangeSelectionSelectEndpoint(temp_v5,0xe,0);
   uiStoreTextureEntryCenter(temp_v1,0xd,0xfc2);
   temp_v1 = 0;
   do {
-    uiSpriteStateInitFromSource(param_1 + temp_v1 * 0x8c + 0x1da8,0xd,0xfbf,param_1,0x42);
-    uiSpriteSetImageKeyframe(temp_v5,0x28,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + temp_v1 * 0x8c + 0x1da8),0xd,0xfbf, (UiResourceParameters *)(param_1),0x42, 1.0f);
+    uiSpriteSetImageKeyframe((UiSpriteState *)temp_v5,0x28,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   temp_v0 = FUN_003e53ec();

@@ -1,6 +1,7 @@
 /* NON_MATCHING: float register allocation differs (retail keeps scale in s16, power in s17) and the 0x44a0 flag word is addressed through a separate add. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BattleBalanceRow.h"
 #include "battle/BtlGlobals.h"
 
@@ -20,9 +21,7 @@ f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 defender);
 AffinityRates btlEntryBuildSummary(BtlMainState* main, BtlEntry* entry);
 void selectionCopySupportedValue(u32 id, u32* out);
-u32* skillDataFindById(s32 id);
 s32 playerGetSkillRank(s32 id);
-s32 FUN_00283ebc(u32* record, s32 rank, s32 mode);
 
 // Computes a damage amount for an attack by `attackerId` on `defenderId` from
 // the attacker's stats, the party's skill rank bonus and the defender's affinity.
@@ -48,7 +47,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
 
     s32 rankBonus = 0;
     if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
-        u32* record = skillDataFindById(partyId);
+        const SkillDataRecord* record = skillDataFindById(partyId);
         if (record != NULL) rankBonus = FUN_00283ebc(record, playerGetSkillRank(partyId), 1);
     }
 

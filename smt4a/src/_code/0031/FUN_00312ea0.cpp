@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the path mover step; retail keeps the distance, the direction components and the new heading in s16..s20 across the atan2/angle calls and lays the waypoint-advance block before the move, which armcc here orders differently. */
 #include "common.h"
+#include "util/MathFunctions.h"
 
 struct PathVec3 {
     f32 x, y, z;
@@ -36,7 +37,6 @@ extern PathQueue *g_vectorQueueWork;
 
 f32 distSpatial(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 f32 __hardfp_atan2f(f32 y, f32 x); /* __hardfp_atan2f */
-f32 mathAngleDeltaDegrees(f32 from, f32 to);
 
 /* Moves the walker one step toward its target waypoint, turning its heading gradually; when the
  * waypoint is reached it advances to the next pair, wrapping to the start at the end. */

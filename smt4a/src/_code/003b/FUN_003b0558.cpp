@@ -1,11 +1,11 @@
 /* NON_MATCHING: zero is hoisted into a saved register and widget-reset branches merge; retail inline hints differ. */
 #include "ui/PartyPanelStateA.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 #include "shard/Shard0031.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-PartyStatusSlots *gameGetSlotTable(void);
-BattleSlotSourceRecordA *gameGetSlotRecord(s32 slot);
 void FUN_002ade88(void);
 void partyPanelChangeState(s32 mode, s32 enabled);
 void FUN_0020d934(void);
@@ -15,7 +15,7 @@ void FUN_0023fc38(void);
 void FUN_003b0558(void)
 {
     PartyPanelStateA *panel = g_partyPanel;
-    PartyStatusSlots *party = gameGetSlotTable();
+    SaveSlotTableA *party = gameGetSlotTable();
     if (!panel)
         return;
     --panel->fusionParentCount;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001add9c` (_code @ 0x1add9c, 0x5ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 
@@ -13,8 +14,6 @@ int FUN_002036b8(unsigned int, unsigned int);
 int FUN_00215d68(...);
 int uiDrawListScrollBar(...);
 int debugDrawText(...);
-int vec2GetYInt(...);
-int vec2GetXInt(...);
 int texDrawCompositeSprite(...);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -110,8 +109,8 @@ unsigned int FUN_001add9c(void)
   switch(temp_v5) {
   case 3:
   case 4:
-    temp_v7 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v8 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v7 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v8 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     FUN_002036b8(temp_v7,temp_v8);
     break;
   case 5:
@@ -122,12 +121,12 @@ unsigned int FUN_001add9c(void)
     if ((!temp_v13) && (*(int *)(temp_v3 + 0x400) == 10)) {
       temp_v13 = 2;
     }
-    temp_v4 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v11 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v4 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     FUN_001dddd8(temp_v4,temp_v11,temp_v13);
-    temp_v5 = vec2GetXInt(temp_v3 + 0x254);
+    temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x254));
     temp_v5 = temp_v5 + temp_v4;
-    temp_v4 = vec2GetYInt(temp_v3 + 0x254);
+    temp_v4 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x254));
     temp_v4 = temp_v4 + temp_v11;
     temp_v0 = *(short *)(temp_v3 + 0x474);
     temp_v1 = *(short *)(temp_v3 + 0x472);
@@ -137,13 +136,13 @@ unsigned int FUN_001add9c(void)
                  (int)temp_v0,0x79,0);
     break;
   case 6:
-    temp_v5 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v11 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     FUN_001dddd8(temp_v5,temp_v11,0);
     FUN_001f1bc4(temp_v5,temp_v11);
-    temp_v4 = vec2GetXInt(temp_v3 + 0x254);
+    temp_v4 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x254));
     temp_v5 = temp_v5 + temp_v4;
-    temp_v4 = vec2GetYInt(temp_v3 + 0x254);
+    temp_v4 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x254));
     temp_v4 = temp_v4 + temp_v11;
     temp_v1 = *(short *)(temp_v3 + 0x472);
     temp_v0 = *(short *)(temp_v3 + 0x474);
@@ -160,8 +159,8 @@ unsigned int FUN_001add9c(void)
     if ((*(int *)(temp_v3 + 0x400) == 0xb) && (*(char *)(temp_v3 + 0x252) != '\0')) {
       temp_v7 = 1;
     }
-    temp_v8 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v6 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v8 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     FUN_002d96d4(temp_v8,temp_v6,0,temp_v7);
     break;
   case 0xd:
@@ -169,8 +168,8 @@ unsigned int FUN_001add9c(void)
     if ((*(int *)(temp_v3 + 0x400) == 0xd) && (*(char *)(temp_v3 + 0x252) != '\0')) {
       temp_v7 = 1;
     }
-    temp_v8 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v6 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v8 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     FUN_001eef8c(temp_v8,temp_v6,temp_v7);
     break;
   case 0xf:
@@ -191,8 +190,8 @@ unsigned int FUN_001add9c(void)
         temp_v13 = 3;
       }
     }
-    temp_v8 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v6 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v8 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     temp_v5 = *(int *)(temp_v3 + 0x400);
     temp_v14 = temp_v5 == 0x21;
     if (temp_v14) {
@@ -209,13 +208,13 @@ unsigned int FUN_001add9c(void)
     if ((*(int *)(temp_v3 + 0x400) == 0x1a) && (*(char *)(temp_v3 + 0x252) != '\0')) {
       temp_v7 = 1;
     }
-    temp_v8 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v6 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v8 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     FUN_002d96d4(temp_v8,temp_v6,1,temp_v7);
     break;
   case 0x1b:
-    temp_v7 = vec2GetXInt(temp_v3 + 0x1c8);
-    temp_v8 = vec2GetYInt(temp_v3 + 0x1c8);
+    temp_v7 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
+    temp_v8 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
     FUN_00215d68(temp_v7,temp_v8);
   }
   temp_v5 = gameDataGetSortPreferences();

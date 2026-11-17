@@ -2,16 +2,9 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 
-
 extern "C" {
-extern struct AocMainBlock *g_aocMain;
 extern u32 g_aocSystem;
 }
-
-struct AocMainBlock {
-    /* 0x000 */ u8 unk000[0x754];
-    /* 0x754 */ u32 flags;
-};
 
 extern "C" {
 void aocMenuSetButtonHelp(AocMenu *menu, s32 a, s32 b);
@@ -26,11 +19,10 @@ void aocClearDisplayFlag(u32 system);
 void aocReleasePackageOwner(u32 system);
 }
 
-
 extern "C" void FUN_00392e74(AocMenu *menu)
 {
     u8 *raw = (u8 *)menu;
-    if ((u32)(menu->step - 4) < 11 && FUN_002ad1e0((u8 *)g_aocMain + 0x98)) {
+    if ((u32)(menu->step - 4) < 11 && FUN_002ad1e0(&g_aocMain->operationDone)) {
         g_aocMain->flags &= ~0x10000u;
         aocMenuSetButtonHelp(menu, -1, 0);
         jobOwnerFreeSlotAndStop(menu->jobOwner);
@@ -50,7 +42,7 @@ extern "C" void FUN_00392e74(AocMenu *menu)
         u32 *result = (u32 *)(raw + 0x214);
         result[0] = 0;
         result[1] = 0;
-        FUN_00126fb8((u8 *)g_aocMain + 0x80);
+        FUN_00126fb8(&g_aocMain->queryResult);
         g_aocMain->flags &= ~0x10000u;
         if (menu->step == 10) {
             aocClearDisplayFlag(g_aocSystem);

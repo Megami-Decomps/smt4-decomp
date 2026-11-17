@@ -6,7 +6,7 @@
 
 struct SpritePresetBank {
     UiResourceParameters parameters;
-    UiAnimatedSprite sprites[13];
+    UiSpriteState sprites[13];
 };
 
 typedef char SpritePresetBankPacketLayoutCheck[

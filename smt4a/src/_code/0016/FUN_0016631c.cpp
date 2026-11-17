@@ -20,7 +20,7 @@ void FUN_0016631c(MenuState *menu, const TextureTableEntryIV *layout)
         u8 prefix[0x18];
         s16 icon;
         u8 padding1A[0x22];
-        SpritePlaybackView sprite;
+        UiSpriteState sprite;
         u8 paddingC8[0x1A4];
         char label[0x40];
         u8 padding2AC[5];

@@ -1,5 +1,5 @@
 #include "ui/MenuState.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -14,12 +14,12 @@ void menuStateStartConfirm(void)
     menu->unk2bc = 0;
     if (menu->type != 6) {
         menu->mode = 4;
-        uiSpriteSelectAnim(menu->panelA, 1);
+        uiSpriteSelectAnim((UiSpriteState *)menu->panelA, 1);
         return;
     }
     menu->mode = 6;
-    uiSpriteSelectAnim(menu->panelA, 1);
-    uiSpriteSelectAnim(menu->panelB, 4);
+    uiSpriteSelectAnim((UiSpriteState *)menu->panelA, 1);
+    uiSpriteSelectAnim((UiSpriteState *)menu->panelB, 4);
 }
 
 } /* extern "C" */

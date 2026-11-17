@@ -1,18 +1,17 @@
 #include "shard/W6_W6Match4_CampCecResumeState.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-ScriptRunState *scrScriptProcessCreate(void *resource, u32 entry);
-void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
-s32 scrRunOpcodesStub(ScriptRunState *script);
+void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
+s32 scrRunOpcodesStub(ScriptProcess *script);
 void sysPlaySe(s32 sound);
 void cecProcessStart(void);
 void cecProcessCall4(void);
 void cecProcessDestroy(void);
 void FUN_002a6480(u16 value);
 void partyPanelRefreshFromSlotTable(void);
-SlotTable *gameGetSlotTable(void);
 s32 bitsAt60Test(SlotRecordA *record, u32 flags);
 void bitsAt60Clear(SlotRecordA *record, u32 flags);
 
@@ -23,7 +22,7 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
     switch (state->exchange.scriptStep) {
     case 0:
         if (state->launch.resource != NULL && state->launch.entry != 0) {
-            ScriptRunState *script = scrScriptProcessCreate(state->launch.resource, state->launch.entry);
+            ScriptProcess *script = scrScriptProcessCreate(state->launch.resource, state->launch.entry);
             s32 entry = state->exchange.exchangeKind == 1 ? 25 : 26;
             state->launch.script = script;
             scrScriptProcessStartEntry(script, entry);
@@ -37,11 +36,11 @@ u32 FUN_0036cfb0(CampCecResumeState *state)
         break;
     case 1:
         if (scrRunOpcodesStub(state->launch.script) == 2) {
-            SlotTable *slots = gameGetSlotTable();
+            SaveSlotTableA *slots = gameGetSlotTable();
             for (s32 index = 0; index < 24; ++index) {
-                if (slots->slots[index] >= 0) {
-                    if (bitsAt60Test(gameGetSlotRecord(slots->slots[index]), 2) != 0) {
-                        bitsAt60Clear(gameGetSlotRecord(slots->slots[index]), 4);
+                if (slots->party[index] >= 0) {
+                    if (bitsAt60Test(gameGetSlotRecord(slots->party[index]), 2) != 0) {
+                        bitsAt60Clear(gameGetSlotRecord(slots->party[index]), 4);
                     }
                 }
             }

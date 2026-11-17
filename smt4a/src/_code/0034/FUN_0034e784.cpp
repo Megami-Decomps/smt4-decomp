@@ -1,8 +1,8 @@
 /* NON_MATCHING: recovered signed panel flag, speed accessors and offset pair; clip-rectangle argument scheduling and cached-state scratch registers still differ. */
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
-#include "util/MathFunctions.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -33,8 +33,6 @@ typedef char GaugePanelOffsets[
 extern "C" {
 void efctSetSpeed(f32 speed);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
-s32 vec2GetYInt(void *vector);
-f32 vec2GetSpeed(const void *vector);
 }
 
 /* Draw the two-part gauge frame at the slot position, with the lower part shortened by `shrink` rows. */
@@ -48,13 +46,13 @@ extern "C" void FUN_0034e784(u8 *panel, s32 rows)
         shrink = 40;
     if (view->slot > 3)
         return;
-    s32 x = vec2GetXInt(&view->position);
-    s32 y = vec2GetYInt(&view->position);
-    f32 scale = vec2GetSpeed(&view->position);
+    s32 x = vec2GetXInt((UiSpriteState *)(&view->position));
+    s32 y = vec2GetYInt((UiSpriteState *)(&view->position));
+    f32 scale = vec2GetSpeed((UiSpriteState *)(&view->position));
     GaugePanelView::Offset offset = view->offset;
     x += offset.x;
     y += offset.y;
-    efctSetSpeed(vec2GetSpeed(&view->firstPosition) * scale);
+    efctSetSpeed(vec2GetSpeed((UiSpriteState *)(&view->firstPosition)) * scale);
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(13, view->slot + 0x52);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);

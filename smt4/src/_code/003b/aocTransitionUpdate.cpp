@@ -12,11 +12,10 @@ struct NavigationPosition {
     f32 x, y, z;
 };
 extern "C" {
-extern AocMain *g_aocMain;
 extern JumpDestination DAT_0049fd14;
-void FUN_0028d664(AocObjC *, u32);
-s32 FUN_0027398c(AocObjC *);
-void helpResourcesRelease(AocObjC *);
+void FUN_0028d664(AocScriptHolder *, u32);
+s32 FUN_0027398c(AocScriptHolder *);
+void helpResourcesRelease(AocScriptHolder *);
 void saveSetNavigationPosition(const NavigationPosition *);
 void gameCopyPersistentSave();
 void gameSynchronizeMapState(ContentTransition *);

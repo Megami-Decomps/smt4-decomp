@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021775c` (_code @ 0x21775c, 0x7b8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
@@ -41,8 +42,6 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
-extern int vec2GetXInt(void);
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 extern unsigned int flagValueRead(unsigned int);
@@ -83,8 +82,8 @@ void FUN_0021775c(int param_1,int param_2)
   int temp_v16;
   
   temp_v1 = g_camp + 0x6e4;
-  temp_v2 = vec2GetXInt();
-  temp_v3 = vec2GetYInt(temp_v1);
+  temp_v2 = vec2GetXInt((UiSpriteState *)temp_v1);
+  temp_v3 = vec2GetYInt((UiSpriteState *)temp_v1);
   temp_v1 = temp_v2;
   if (temp_v2 < 0) {
     temp_v1 = -temp_v2;

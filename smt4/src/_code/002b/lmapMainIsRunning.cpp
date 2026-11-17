@@ -1,4 +1,4 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
@@ -6,7 +6,6 @@ void slotOwnerDestroyAllSlots(LmapObj *obj);
 void asdMemFree(void *block);
 s32 jobFind(u32 job);
 
-extern LmapMainState *g_lmapMainState;
 
 /* Returns 1 while the map job runs or the block is to be kept; otherwise frees the block and
  * returns 0. */

@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 s32 playSceneAcceptsInput(BtlUiObjC *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 void btlUiGetAcceptedSelection(u32 unused, u16 *outA, u16 *outB)
 {

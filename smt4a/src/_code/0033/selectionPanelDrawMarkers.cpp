@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -31,17 +31,15 @@ typedef char SelectionPanelWorkOffsetsCheck[
 
 extern "C" {
 void efctSetSpeed(float speed);
-f32 vec2GetSpeed(const void *position);
-s32 vec2GetYInt(const void *object);
 
 
 /* Draws the selection panel's frame, then either every shown slot's marker or only the chosen slot's. */
 void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
 {
     if (work->hidden == 0 && work->selected <= 3) {
-        s32 baseX = vec2GetXInt(work->position);
-        s32 baseY = vec2GetYInt(work->position);
-        const float opacity = vec2GetSpeed(work->position);
+        s32 baseX = vec2GetXInt((UiSpriteState *)work->position);
+        s32 baseY = vec2GetYInt((UiSpriteState *)work->position);
+        const float opacity = vec2GetSpeed((UiSpriteState *)work->position);
         efctSetSpeed(opacity);
         TextureTableEntryIV *frame = asdTMTexTableEntryAt(0xd, work->selected + 0x5a);
         renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
@@ -52,7 +50,7 @@ void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
         RenderCtxA *context = g_renderCtx;
         renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
         efctSetSpeed(1.0f);
-        efctSetSpeed(vec2GetSpeed(work->fadeObject) * opacity);
+        efctSetSpeed(vec2GetSpeed((UiSpriteState *)work->fadeObject) * opacity);
         if (drawAll != 0) {
             s32 slot = 0;
             do {
@@ -61,7 +59,7 @@ void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
                     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
                     efctSetSpeed(opacity);
                     texDrawTableEntryAtStoredOrigin(2, 0xd, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
-                    efctSetSpeed(vec2GetSpeed(work->fadeObject));
+                    efctSetSpeed(vec2GetSpeed((UiSpriteState *)work->fadeObject));
                     texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
                     texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
                     texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);
@@ -76,7 +74,7 @@ void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)
             renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
             efctSetSpeed(opacity);
             texDrawTableEntryAtStoredOrigin(2, 0xd, 0x1cb, marker->x + baseX, marker->y + baseY, 0x2e);
-            efctSetSpeed(vec2GetSpeed(work->fadeObject));
+            efctSetSpeed(vec2GetSpeed((UiSpriteState *)work->fadeObject));
             texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4b, marker->x + baseX, marker->y + baseY, 0x2e);
             texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4a, marker->x + baseX, marker->y + baseY, 0x2e);
             texDrawTableEntryAtStoredOrigin(2, 0xd, 0x4c, marker->x + baseX, marker->y + baseY, 0x2e);

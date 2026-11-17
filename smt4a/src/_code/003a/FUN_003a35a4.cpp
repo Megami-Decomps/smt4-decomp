@@ -1,5 +1,6 @@
 /* NON_MATCHING: named current-map comparison fixes loads/registers; cmp operands remain reversed. */
 #include "gamedata/NaviDestinationRecord.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/NaviMain.h"
 #include "map/mapDepart.h"
@@ -9,7 +10,6 @@ const NaviDestinationRecord* dataTableGetEntry49(u8);
 void pair20638Set(NaviTransitionState*, s32, s32, s32);
 void menuEnterState11(NaviTransitionState*);
 void FUN_0048d248(NaviTransitionState*, s32);
-extern NaviMainA* g_naviMain;
 
 void FUN_003a35a4(void)
 {

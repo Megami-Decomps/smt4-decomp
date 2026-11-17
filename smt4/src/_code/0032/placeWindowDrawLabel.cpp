@@ -3,6 +3,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 struct PlaceWindowPosition {
     u8 unk00[0xc];
@@ -23,8 +24,6 @@ struct PlaceWindowWork {
 extern "C" {
 extern PlaceWindowWork *g_placeWin;
 u32 renderCtxPackPassFlags(u32 slot, u32 flags);
-s32 vec2GetXInt(const PlaceWindowPosition *position);
-s32 vec2GetYInt(const PlaceWindowPosition *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void texDrawCompositeSprite(s32 layer, u32 group, u32 frame, s32 x, s32 y, s32 flags);
 void gxResetColorQuadToWhite(void);
@@ -40,8 +39,8 @@ u32 placeWindowDrawLabel(void)
     RenderCtx *context = g_titleScene;
     u32 state = renderCtxPackPassFlags(1, 0);
     renderCtxPushA(context, state);
-    s32 x = vec2GetXInt(&window->position) + static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
-    s32 y = vec2GetYInt(&window->position);
+    s32 x = vec2GetXInt((const UiSpriteState *)&window->position) + static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
+    s32 y = vec2GetYInt((const UiSpriteState *)&window->position);
     texDrawCompositeSprite(2, 0xe, 0xe, x, y, 0x65);
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0xe, 0x10b);
     textDrawString(3, 0xffffffff, window->text,

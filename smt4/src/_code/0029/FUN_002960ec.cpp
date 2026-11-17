@@ -1,5 +1,5 @@
 /* NON_MATCHING: armcc threads the first iteration of the first loop (`i == 0` known on entry) where retail tests i == 0 each pass; view/index/complete registers follow from that. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 struct StagedAnimationView {
     u8 prefix[0x2D84];
     UiSpriteState first[6];
@@ -18,9 +18,7 @@ typedef char StagedAnimationOffsets[offsetof(StagedAnimationView, first) == 0x2D
     offsetof(StagedAnimationView, soundEnabled) == 0x3618 &&
     offsetof(StagedAnimationView, soundPlayed) == 0x3648 ? 1 : -1];
 extern "C" {
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void soundPlaySeUnpanned(u32 sound);
-s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
 u32 FUN_002960ec(StagedAnimationView *view)
 {
     u32 complete = 1;
@@ -44,7 +42,7 @@ u32 FUN_002960ec(StagedAnimationView *view)
         }
     }
     for (s32 i = 0; i < 6; ++i) {
-        if (view->reveals[i].verticalTrack.frame >= 14) {
+        if (view->reveals[i].alphaFrame >= 14) {
             ++view->counters[i];
             if (view->counters[i] >= 65536)
                 view->counters[i] = 0;

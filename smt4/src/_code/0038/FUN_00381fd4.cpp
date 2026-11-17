@@ -1,5 +1,6 @@
 /* NON_MATCHING: anchor operand allocation and repeated mode-comparison scheduling differ; process modes use the real inlined setter. */
 #include "ui/SpriteAnchorGroup.h"
+#include "script/scrScriptProcess.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "code/Code002c.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -7,8 +8,7 @@
 
 extern "C" {
 extern const u8 DAT_00405878[23];
-ScriptRunState *scrScriptProcessCreate(void *buffer, void *arguments);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void titleSetSlotValueState2(s32 index, s32 mode);
 
 void FUN_00381fd4(SpriteAnchorGroupWork *work)

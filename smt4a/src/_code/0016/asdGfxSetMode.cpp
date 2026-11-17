@@ -1,4 +1,4 @@
-#include "shard/Block61a470.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpersSmt4a.h"
 
 extern "C" {
@@ -7,9 +7,9 @@ extern "C" {
 void asdGfxSetMode(s32 code, u32 unused, s32 offset)
 {
     if (code == 0x400 || (offset = code - 0x401) == 0) {
-        g_asdGfxContext.state = code - 0x400;
+        g_asdGfxContext.activeTarget = code - 0x400;
     } else if (offset == 0xF) {
-        g_asdGfxContext.state = 2;
+        g_asdGfxContext.activeTarget = 2;
     }
 }
 

@@ -1,6 +1,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 // The panel's effect state (observed fields).
 struct TitlePanelEffect {
@@ -29,7 +30,6 @@ extern "C" {
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *vector);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
@@ -43,7 +43,7 @@ void titlePanelDraw(TitlePanel *panel)
     gxResetColorQuadToWhite();
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     renderCtxSelectTexture(g_titleScene, 0);
-    f32 speed = vec2GetSpeed(&panel->effect);
+    f32 speed = vec2GetSpeed((const UiSpriteState *)&panel->effect);
     efctSetSpeed(speed);
     texDrawCompositeSprite(2, 0x2e, 0, panel->frameX, 0, 0xb);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));

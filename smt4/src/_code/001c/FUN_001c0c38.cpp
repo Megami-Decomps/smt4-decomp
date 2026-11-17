@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail hoists `work + 0x400` for the 0x4C6 flag read and lays the mode == 1 branch of the first loop out of line; ours keeps both inline (flag read directly through work) */
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
@@ -8,10 +9,7 @@ extern ButtonHelpQueuedSelections DAT_0043da50;
 void FUN_00220984(void);
 void FUN_002ae028(u8 *help);
 void FUN_002b8454(u8 slot, u8 kind, u16 value, s32 defer);
-void uiSlidingSpriteAdvance(ButtonHelpDisplayUnit *unit, s32 flag);
-void uiSpriteAdvanceAnimation(ButtonHelpDisplayUnit *unit);
 void buttonHelpSetPreset(u32 preset);
-s8 uiSpriteGetCompletionState(const ButtonHelpDisplayUnit *record);
 
 /* Per-frame update of the button help: runs the current state (1 opens, 2 idles, 3 closes), applies
  * a preset that was waiting and the queued selections, then advances the frame counter. */

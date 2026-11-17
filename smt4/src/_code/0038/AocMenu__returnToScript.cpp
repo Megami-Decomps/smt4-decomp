@@ -2,14 +2,10 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match8_AocQuestReturn.h"
-#include "shard/W6_W6Match8_ScriptStateMode.h"
+#include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
-void _ZN7AocMain12queueRequestE17RequestParametersji(QueuedRequestState *state, const RequestParameters *parameters, u32 argument, s32 mode);
-void scrScriptProcessDestroy(ScriptState *process);
-ScriptState *scrScriptProcessCreate(void *script, void *messages);
 void msgWindowReset();
 void messageBannerBeginClose();
 void ifTouchRegionRemove();
@@ -28,9 +24,9 @@ void AocMenu::returnToScript()
         }
         scrScriptProcessDestroy(work->process);
         work->process = NULL;
-        ScriptState *process = scrScriptProcessCreate(work->script, work->messages);
+        ScriptProcess *process = scrScriptProcessCreate(work->script, work->messages);
         work->process = process;
-        ((ScriptStateModeView *)process)->mode = 2;
+        process->mode = 2;
         msgWindowReset();
         messageBannerBeginClose();
         ifTouchRegionRemove();
@@ -50,7 +46,7 @@ void AocMenu::returnToScript()
             } else {
                 argument = (g_aocMain->flags & 0x100) != 0 ? 2 : 1;
             }
-            _ZN7AocMain12queueRequestE17RequestParametersji((QueuedRequestState *)g_aocMain, &parameters, argument, 0);
+            g_aocMain->queueRequest(parameters, argument, 0);
             work->substate = 1;
             return;
         }

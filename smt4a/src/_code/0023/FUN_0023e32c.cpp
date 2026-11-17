@@ -4,6 +4,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/Shard0032.h"
 #include "map/lmapMain.h"
+#include "gamedata/SaveSlotRecord.h"
 #include "gamedata/SaveSlotTable.h"
 
 static inline u16 saveRequirementFlags(const SavedUnitRecordA &saved)
@@ -13,7 +14,6 @@ static inline u16 saveRequirementFlags(const SavedUnitRecordA &saved)
 }
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-BattleSlotSourceRecordA *gameGetSlotRecord(s32 index);
 u32 randRange(u32 maximum);
 
 // Choose an unlocked demon of the requested level that is neither excluded nor already owned.
@@ -50,7 +50,7 @@ u32 FUN_0023e32c(u32 excludedA, u32 excludedB, u32 excludedC, u32 level)
         s32 slot = 0;
         for (; slot < 24; ++slot) {
             if (static_cast<u32>(party->party[slot]) < 24) {
-                const BattleSlotSourceRecordA *owned = gameGetSlotRecord(gameGetSlotTable()->party[slot]);
+                const SlotRecordA *owned = gameGetSlotRecord(gameGetSlotTable()->party[slot]);
                 if (owned->id == entry->id)
                     break;
             }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: final renderCtxPopState becomes a tail call (retail keeps bl + shared epilogue); register choice for the last widget pointer/x also differs. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "ui/MessageMain.h"
@@ -7,9 +8,6 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
-f32 vec2GetSpeed(void *vec);
 u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);

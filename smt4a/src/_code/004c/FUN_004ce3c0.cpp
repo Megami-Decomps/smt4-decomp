@@ -1,5 +1,6 @@
 /* NON_MATCHING: Spring of Healing setup/teardown and hard-float arguments are recovered; root/model register allocation and shared epilogues differ. */
 #include "shard/HealingSceneWork.h"
+#include "script/scrScriptProcess.h"
 #include "game/GameStateA.h"
 #include "code/Code0013.h"
 #include "Model/MoriModelManager.h"
@@ -29,7 +30,6 @@ void FUN_0035d03c(u32 value);
 s32 FUN_0040ab8c(HealingModel *model);
 void moriModelContentLoadBody(HealingModel *model, u32 value);
 void modelPlayClip(void *object, u32 animation, u32 mode, f32 speed, f32 blend);
-ScriptProcess *scrScriptProcessCreate(void *heapA, void *heapB);
 void *dataTableFileGetTable(void *file, u32 index);
 void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
@@ -94,7 +94,7 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
             for (s32 index = 0; index < 3; ++index)
                 registerHealingModel(work->models[index]);
             work->script = scrScriptProcessCreate(work->heapA, work->heapB);
-            work->script->state = 2;
+            work->script->mode = 2;
             void *table = dataTableFileGetTable(work->tableFile, 0);
             work->entries = dataTableGetEntries(table);
             work->count = dataTableGetCount(table);

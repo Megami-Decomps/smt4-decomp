@@ -1,5 +1,5 @@
 #include "shard/S1ListPanel.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtxTitle.h"
 struct ScrollingWidgetView {
     u8 prefix[0xC8];
@@ -15,9 +15,6 @@ void efctSetSpeed(f32 speed);
 void FUN_00230d84(void *sprites, u32 id, s32 x, s32 y, u32 color);
 void FUN_00231bcc(void *sprites, u32 id, s32 x, s32 y, u32 color, u32 mode);
 void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
-f32 vec2GetSpeed(const UiSpriteState *sprite);
-s32 vec2GetXInt(const UiSpriteState *sprite);
-s32 vec2GetYInt(const UiSpriteState *sprite);
 
 void uiDrawScrollingSelectionEntry(ScrollingWidgetView *widget, s32 index, u32 color, s32 selected)
 {

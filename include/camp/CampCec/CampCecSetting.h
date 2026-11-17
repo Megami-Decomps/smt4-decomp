@@ -3,12 +3,13 @@
 #define CAMP_CAMPCEC_CAMPCECSETTING_H
 
 #include "common.h"
+struct ScriptProcess;
 
 #define CAMPCECSETTING_ITEM_COUNT 7
 
 typedef struct CampCecSetting {
     /* 0x00 */ u32 task;         /* the screen's task handle */
-    /* 0x04 */ u32 resource;     /* released on close */
+    /* 0x04 */ ScriptProcess *resource; /* the settings script, released on close */
     /* 0x08 */ void *heapA;      /* heap block, freed on close */
     /* 0x0C */ void *heapB;      /* heap block, freed on close */
     /* 0x10 */ s32 items[CAMPCECSETTING_ITEM_COUNT];  /* menu entry ids, 0..6 */

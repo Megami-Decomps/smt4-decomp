@@ -12,7 +12,6 @@ struct AocEntryPanel {
 
 extern "C" {
 
-extern AocMain *g_aocMain;
 void asdMemFreeSlot(void *block);
 AsdText *asdTextCreate(u32 flags);
 void positionStateSet(AsdText *text, u32 first, u32 second, f32 scale);

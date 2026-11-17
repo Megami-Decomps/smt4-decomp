@@ -6,7 +6,6 @@ extern "C" {
 
 void asdMdlLightBatchRemove(AsdMdlNode *node);
 void asdMdlListDestroyModels(AsdMdlObject *obj);
-void asdMdlManagerReleaseResources(AsdMdlNode *node, void *data);
 s32 asdMdlNodeGetCount(const AsdMdlNode *node);
 LookupListNode *lookupListFindByKey(const LookupList *list, u32 key);
 IndexedNode *indexedListErase(IndexedList *list, IndexedNode *node);

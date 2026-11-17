@@ -4,6 +4,8 @@
 #include "shard/Shard004B.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "code/Code004b_Smt4a.h"
 
 /* A skill record of data table 4. */
 struct SkillCostRecord {
@@ -13,9 +15,7 @@ struct SkillCostRecord {
 
 extern "C" {
 s32 FUN_0028809c(s32 slot, u32 target, SkillCostRecord *skill, s32 preview, s32 mode);
-PlayerData *gameGetSlotRecord(s32 slot);
 s32 FUN_003df57c(u32 cost, s32 mode);
-s32 skillGetAdjustedCost(const ItemRankRecord *unit, u32 cost);
 
 /* Uses skill `id` from party slot `slot` (the player when negative) on `target`; when it takes
  * effect outside preview, pays its cost from the user's MP. Returns 1 for an unknown skill. */
@@ -34,10 +34,10 @@ s32 FUN_00333694(s32 slot, u32 target, u32 id, s32 preview)
                 player->mp = 0;
             }
         } else {
-            PlayerData *unit = gameGetSlotRecord(slot);
-            unit->unk2C -= skillGetAdjustedCost((const ItemRankRecord *)unit, skill->cost);
-            if (unit->unk2C < 0) {
-                unit->unk2C = 0;
+            SlotRecordA *unit = gameGetSlotRecord(slot);
+            unit->mp -= skillGetAdjustedCost(unit, skill->cost);
+            if (unit->mp < 0) {
+                unit->mp = 0;
             }
         }
     }

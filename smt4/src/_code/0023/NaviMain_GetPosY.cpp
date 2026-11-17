@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 u32 NaviMain_GetPosY(void)
 {

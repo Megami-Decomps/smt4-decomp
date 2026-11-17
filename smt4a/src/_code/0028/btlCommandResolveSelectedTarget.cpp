@@ -1,9 +1,9 @@
 #include "battle/BattleCommandTargets.h"
 #include "gamedata/SkillDataRecord.h"
 #include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartyStatusSlots *gameGetSlotTable();
 void FUN_002ccde8(BattleCommandTargets *command, u16 *kind, s16 *skill);
 s32 listCursorGetRowOfChildIfUnblocked(void *selection);
 s32 FUN_002c7bb0(u32 actor, s32 target, u32 skill, s32 *result);
@@ -16,7 +16,7 @@ u32 btlCommandResolveSelectedTarget(BattleCommandTargets *command)
     FUN_002ccde8(command, &kind, &skill);
     s32 selected = listCursorGetRowOfChildIfUnblocked(command->targetSelection);
     if (selected != 0) {
-        PartyStatusSlots *slots = gameGetSlotTable();
+        SaveSlotTableA *slots = gameGetSlotTable();
         s32 target = slots->reserve[selected - 1];
         FUN_002c7bb0(command->actorIndex - 1, target, skill,
             &command->results[selected]);

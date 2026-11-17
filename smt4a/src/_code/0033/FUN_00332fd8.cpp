@@ -1,12 +1,9 @@
 /* NON_MATCHING: VFP constant allocation only: retail keeps 0.0f in the first saved register s16 and uses six saved VFP registers (d8-d10) where the build lands the zero in s21 and needs seven; the string, jump-table labels and vector initialisers now match. */
 #include "common.h"
+#include "util/MathFunctions.h"
 #include "Model/ModelList.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
-
-struct MapPoint {
-    f32 x, y, z;
-};
 
 /* The flags block (accessed fields). */
 struct MapGridState {
@@ -29,13 +26,12 @@ struct MapFlagsBlock {
 
 extern "C" {
 s32 FUN_002393cc(s32 scene);
-f32 mathPositionHeadingDegrees(MapPoint from, MapPoint to);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
 f32 libm_sinf(f32 radians);
 f32 libm_cosf(f32 radians);
 void sceneRegisterBoxEffect(s32 a, s32 b, const char *name, s32 c, s32 d, s32 e, s32 f0, s32 f1, s32 f2, s32 f3,
                             s32 f4, s32 f5, s32 f6, s32 f7, s32 g, s32 h, s32 kind, s32 i, s32 j, s32 k,
-                            MapPoint position, MapPoint size, f32 heading);
+                            MapVector position, MapVector size, f32 heading);
 
 /* Place the fountain box effect in front of the map target, facing along the rounded cardinal heading. */
 void FUN_00332fd8(void)
@@ -47,11 +43,11 @@ void FUN_00332fd8(void)
     s32 gridX = grid->gridX;
     s32 gridY = grid->gridY;
     s32 scene = FUN_003857c8(static_cast<s32>(*reinterpret_cast<f32 *>(reinterpret_cast<u8 *>(block) + 0x15C4)));
-    MapPoint from;
+    MapVector from;
     from.x = static_cast<f32>(gridX);
     from.y = 0.0f;
     from.z = static_cast<f32>(gridY);
-    MapPoint to;
+    MapVector to;
     to.x = static_cast<f32>(grid->targetX);
     to.y = 0.0f;
     to.z = static_cast<f32>(grid->targetY);
@@ -68,11 +64,11 @@ void FUN_00332fd8(void)
     f32 radians = heading * 0.017453292f;
     x -= libm_sinf(radians) * 250.0f;
     z -= libm_cosf(radians) * 250.0f;
-    MapPoint position;
+    MapVector position;
     position.x = x;
     position.y = 0.0f;
     position.z = z;
-    MapPoint size;
+    MapVector size;
     size.x = 200.0f;
     size.y = 200.0f;
     size.z = 120.0f;

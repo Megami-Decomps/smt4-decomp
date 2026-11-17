@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 int naviReleaseTextureNode(u32 *block);
 int buttonHelpRelease(void);

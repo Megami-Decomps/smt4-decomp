@@ -1,5 +1,6 @@
 #include "common.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "ui/UiSpriteApi.h"
 
 struct SpriteTransitionWork {
     u32 unk000;
@@ -24,10 +25,6 @@ static inline void beginSpriteTransitionState(SpriteTransitionWork *work, u32 st
 struct ObjectFlagState;
 extern "C" {
 void uiSpriteBankApplyPreset(void *sprite, s32 preset);
-void FUN_00167458(void *motion, s32 mode);
-s32 vec2GetYInt(const void *motion);
-s32 vec2GetXInt(const void *motion);
-s32 uiSpriteGetCompletionState(const ObjectFlagState *state);
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
 
 // Start the panel sprite, track its motion and advance to the page's completion state.
@@ -38,11 +35,11 @@ void _ZN9Obj53604429panelUpdatePageExitTransitionEv(SpriteTransitionWork *work)
         work->phase = 1;
     } else if (work->phase == 1) {
         void *motion = work->motion;
-        FUN_00167458(motion, 0);
-        s32 y = vec2GetYInt(motion);
-        s32 x = vec2GetXInt(motion);
+        FUN_00167458((UiSpriteState *)motion, 0);
+        s32 y = vec2GetYInt((const UiSpriteState *)motion);
+        s32 x = vec2GetXInt((const UiSpriteState *)motion);
         pointConvertToFloat(work->position, x, y);
-        if (uiSpriteGetCompletionState(reinterpret_cast<const ObjectFlagState *>(motion))) {
+        if (uiSpriteGetCompletionState((const UiSpriteState *)(reinterpret_cast<const ObjectFlagState *>(motion)))) {
             switch (work->page) {
             case 0: case 1: case 2: case 3: case 4: case 5: case 6:
                 if (!FUN_0023b3d0())

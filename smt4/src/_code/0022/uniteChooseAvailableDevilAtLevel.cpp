@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match2_RecordValue.h"
 #include "util/Random.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 struct FusionLevelParty {
     u8 unk0000[0x90f0];
@@ -13,7 +14,6 @@ struct FusionLevelParty {
 extern "C" {
 bool gameRecordCopy(u32, GameSavedItem *);
 u32 gameFlagIsSet(u32);
-u8 *gameGetSlotTable();
 
 u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, u32 level)
 {

@@ -1,13 +1,11 @@
 /* NON_MATCHING: initial-state store scheduling, resource-address pooling and sprite-index multiply registers differ. */
 #include "shard/S3SceneWidget.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include <string.h>
 
 extern "C" {
 void uiInitializeEightTimerSet(void *timers);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 table, u32 image, UiResourceParameters *parameters, u32 flags, f32 scale);
 
 void drawParameterBlockClear(UiResourceParameters *parameters);
 extern const u8 DAT_00404e08[];

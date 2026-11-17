@@ -1,5 +1,6 @@
 /* Opens the run window: allocates and clears its work area, creates its task and draw task and
  * sets up its sound player and UI. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "font/SearchWin/RunWin.h"
@@ -11,8 +12,6 @@ extern "C" {
 
 typedef void (*VoidFunc)(void);
 
-void uiSpriteStateInitFromSource(void *ui, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
-int spriteStartAnimationByIndex(void *ui, int arg);
 
 int memClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
@@ -47,8 +46,8 @@ void runWinOpen(void)
     taskCreateDraw("RunWin DrawDown", 0xe9, 0, 0, runWinDraw, 0, 0, run->task);
     drawParameterBlockClear(run->sound);
     paramsInit(reinterpret_cast<UiResourceParameters *>(run->sound), sRunWinPacketA, 0x24, sRunWinPacketB, 0x24, 0, 0, 0, 0, sRunWinPacketC, 0x70);
-    uiSpriteStateInitFromSource(run->ui, 0xe, 0x87, reinterpret_cast<UiResourceParameters *>(run->sound), 1, 1.0f);
-    spriteStartAnimationByIndex(run->ui, 0);
+    uiSpriteStateInitFromSource((UiSpriteState *)run->ui, 0xe, 0x87, reinterpret_cast<UiResourceParameters *>(run->sound), 1, 1.0f);
+    spriteStartAnimationByIndex((UiSpriteState *)run->ui, 0);
 }
 
 } /* extern "C" */

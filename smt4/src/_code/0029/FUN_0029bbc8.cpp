@@ -1,11 +1,10 @@
 /* NON_MATCHING: stock compaction loop branch layout and register allocation differ. */
 #include "common.h"
 #include "gamedata/UnitStats.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-StatBlock *gameGetUnitRecord(u32);
 
 // Remove a unit from both party lists and compact the stock list.
 u32 FUN_0029bbc8(u32 unitIndex)

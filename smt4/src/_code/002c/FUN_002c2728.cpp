@@ -49,7 +49,6 @@ static __inline bool handleInsertSorted(RegistryView *registry, GfxHandleNode *n
 }
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern GfxHandleAllocator g_gfxAllocateCallback;
 
 // Allocate fresh handle records, keeping each hash bucket sorted by id.

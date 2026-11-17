@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00164490` (_code @ 0x164490, 0x598 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
@@ -9,7 +10,6 @@
 extern "C" {
 
 int texDrawCompositeSprite(...);
-int vec2GetXInt(...);
 int efctSetSpeed(void);
 int FUN_00169e38(...);
 int renderCtxPopState(...);
@@ -30,7 +30,6 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169e38. */
@@ -65,12 +64,12 @@ void FUN_00164490(int param_1)
   
   temp_v2 = gameFlagIsSet(0x402);
   if (temp_v2 != 0) {
-    temp_v2 = vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
-    temp_v3 = vec2GetYInt(((int)g_messageMain.banner) + 0xb00);
+    temp_v2 = vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
+    temp_v3 = vec2GetYInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
     if ('\0' < *(char *)(((int)g_messageMain.banner) + 0x94)) {
-      temp_v4 = vec2GetXInt(((int)g_messageMain.banner) + 0xb8c);
+      temp_v4 = vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb8c));
       temp_v2 = temp_v2 + temp_v4;
-      temp_v4 = vec2GetYInt(((int)g_messageMain.banner) + 0xb8c);
+      temp_v4 = vec2GetYInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb8c));
       temp_v3 = temp_v3 + temp_v4;
     }
     temp_v5 = renderCtxPackPassFlags(1,0);
@@ -125,8 +124,8 @@ void FUN_00164490(int param_1)
     temp_v12 = 0.25f;
     if (*(char *)(((int)g_messageMain.banner) + 0x16d) != '\0') {
       temp_v14 = temp_v12;
-      temp_v5 = vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
-      temp_v3 = vec2GetYInt(temp_v2 + 0xb00);
+      temp_v5 = vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
+      temp_v3 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0xb00));
       temp_v12 = temp_v14;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v13 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -138,8 +137,8 @@ void FUN_00164490(int param_1)
     }
     temp_v2 = ((int)g_messageMain.banner);
     if (*(char *)(((int)g_messageMain.banner) + 0x17d) != '\0') {
-      temp_v5 = vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
-      temp_v3 = vec2GetYInt(temp_v2 + 0xb00);
+      temp_v5 = vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
+      temp_v3 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0xb00));
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v14 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v4 = (int)asdTMTexTableEntryAt(8,0x100);

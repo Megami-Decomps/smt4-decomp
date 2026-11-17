@@ -5,13 +5,14 @@
 #include "shard/W9_W9Match7_ModifierLists.h"
 #include "gamedata/DataTableAccess.h"
 #include "code/Code004b_Smt4a.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 s32 gameDataFlagTestBit(u32 bit);
 s32 FUN_0034a304(const AttributeModifierLists *record, s32 rank, s32 kind);
 
 // Apply unlocked cost reductions and the holder's skill-rank modifiers, clamping to one.
-s32 skillGetAdjustedCost(const ItemRankRecord *holder, u32 skillId)
+s32 skillGetAdjustedCost(const SlotRecordA *holder, u32 skillId)
 {
     SkillDataRecordA *record = skillDataFindById(skillId);
     if (record) {
@@ -28,8 +29,8 @@ s32 skillGetAdjustedCost(const ItemRankRecord *holder, u32 skillId)
         s32 rank = 0;
         if (holder) {
             for (s32 index = 0; index < 8; ++index) {
-                if (holder->items[index] == skillId) {
-                    rank = holder->ranks[index];
+                if (holder->skills[index] == skillId) {
+                    rank = holder->skillRanks[index];
                     break;
                 }
             }

@@ -2,7 +2,6 @@
 
 extern "C" {
 
-extern AsdGfxContext g_asdGfxContext;
 
 /* Sets a state value of the active command buffer: 0x200 stores `value` in unk2c, 0x20f stores
  * whether it is non-zero in flag3d. */

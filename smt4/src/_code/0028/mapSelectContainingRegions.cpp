@@ -1,6 +1,7 @@
 /* NON_MATCHING: retained region-table base recovered; input/zero VFP grouping and region/edge index registers differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameState.h"
+#include "util/MathFunctions.h"
 
 struct RegionEdge {
     MapVector origin;
@@ -26,7 +27,6 @@ struct RegionPoint {
 extern "C" {
 extern MapRegionTable DAT_004c14a0;
 void FUN_0025247c(f32 *out, f32 fromX, f32 fromY, f32 fromZ, f32 toX, f32 toY, f32 toZ);
-f32 mathVec3Dot(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 // Select the containing map region independently for ordinary and alternate kinds.
 void mapSelectContainingRegions(RegionPoint point)

@@ -1,4 +1,4 @@
-/* AsdSDK model attribute table: a model object (the part this code uses) whose loaded file holds
+/* AsdSDK model attribute table: a model's loaded file (AsdMdlNode in AsdMdlManager.h) holds
  * "ATBC" containers of "EPLSIGN" entries. The model keeps one record per matching entry sub-range. */
 #ifndef SHARD_S3ASDMODELATTR_H
 #define SHARD_S3ASDMODELATTR_H
@@ -38,8 +38,12 @@ typedef struct AsdEplEntry {
 
 /* The queued file request the model is loaded from. */
 typedef struct AsdModelFile {
-    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x00 */ s32 refCount;      /* models sharing the image */
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 *begin;         /* the model data */
     /* 0x0C */ u8 *data;          /* the loaded file: an "ATBC" container */
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ u8 *cursor;        /* read position while the model's node is built */
 } AsdModelFile;
 
 /* One record built per entry id (0xC bytes). */
@@ -59,15 +63,6 @@ typedef struct AsdModelAttrRecords {
     /* 0x00 */ s32 count;
     /* 0x04 */ AsdModelAttrRecord *items;
 } AsdModelAttrRecords;
-
-typedef struct AsdModelAttrModel {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ AsdModelFile *file;
-    /* 0x008 */ u8 unk008[0x8C];
-    /* 0x094 */ AsdModelAttrContainers containers;
-    /* 0x098 */ u8 unk098[8];
-    /* 0x0A0 */ AsdModelAttrRecords records;
-} AsdModelAttrModel;
 
 /* The container count followed by the record array. */
 typedef struct AsdModelAttrSet {

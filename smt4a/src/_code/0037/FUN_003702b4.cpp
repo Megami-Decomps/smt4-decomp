@@ -1,13 +1,12 @@
 /* NON_MATCHING: retail batches the three phase wrap loops (and skips the constant x phase's) before the table lookups, keeps the rotation in a different register/VFP schedule and pushes r4-r6 where this pushes r4-r7; the same phase-sampler family as FUN_001a1c28/FUN_0044b5f4. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-#include "map/lmapMain.h"
+#include "map/LmapViewGlobals.h"
 #include "gfx/CameraMatrixCache.h"
 #include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
 extern const PhaseTrigEntry g_sinCosTable[256];
-extern LmapExtraA *g_lmapView;
 
 s32 scrGetArg(u32 index);
 void FUN_00303460(s32 mode);
@@ -51,8 +50,8 @@ u32 FUN_003702b4(void)
     g_gameState.scriptCameraTarget.y = y;
     g_gameState.scriptCameraTarget.z = z;
     g_gameState.scriptCameraFov = 40.0f;
-    if (g_lmapView->camera.mode != 3) {
-        g_lmapView->camera.enabled = 1;
+    if (g_lmapView->mode != 3) {
+        g_lmapView->enabled = 1;
         FUN_00303460(3);
         mapSetSceneState(0x1d);
     }

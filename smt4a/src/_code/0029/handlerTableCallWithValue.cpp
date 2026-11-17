@@ -2,14 +2,14 @@
 
 extern "C" {
 
-/* Runs the handler's callback at 0x30 (if its type has one) on the resource data and `arg`. */
-void handlerTableCallWithValue(Resource *resource, s32 arg)
+/* Sets the resource's packed tint through its type's handler, if it has one. */
+void handlerTableCallWithValue(Resource *resource, u32 color)
 {
-    void (*callback)(void *data, s32 arg);
+    void (*callback)(void *data, u32 color);
 
-    callback = g_handlerTable[resource->type].callback30;
+    callback = g_handlerTable[resource->type].setPackedColor;
     if (callback != NULL) {
-        callback(resource->data, arg);
+        callback(resource->data, color);
         return;
     }
 }

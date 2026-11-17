@@ -1,8 +1,8 @@
 /* NON_MATCHING: the byte counter now matches; the payload counter loads usage/alignment into r1/r3 where retail uses r3/r1. */
 #include "sys/AllocationTracking.h"
+#include "classes/AllocatorState.h"
 
 extern "C" {
-extern AllocationTracking DAT_00465120;
 u32 FUN_002b30fc(const AllocationHeader *);
 
 static void addCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)

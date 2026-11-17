@@ -8,10 +8,10 @@ typedef struct SceneResources {
     /* 0x08 */ u32 unk08;
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ void *resource10;
-    /* 0x14 */ ScriptResource *resource14;
+    /* 0x14 */ ScriptProcess *resource14;
     /* 0x18 */ void *resource18;
     /* 0x1C */ void *resource1C;
-    /* 0x20 */ ScriptResource *resource20;
+    /* 0x20 */ ScriptProcess *resource20;
     /* 0x24 */ void *resource24;
 } SceneResources;
 
@@ -20,7 +20,6 @@ extern SceneResources *g_callbackWork;
 int jobStop(void *context, int arg);
 int messageSetScriptDisplayMode(void);
 void asdMemFree(void *memory);
-void scrScriptProcessDestroy(ScriptResource *resource);
 int dataTableFree(int arg);
 void asdOperatorDelete(void *memory);
 int btlTalkBustUpDestroy(void);

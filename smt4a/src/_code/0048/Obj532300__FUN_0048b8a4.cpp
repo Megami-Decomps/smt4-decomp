@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "shard/NaviMain_GetCurrentMap.h"
 #include "ui/NaviCategorySelection.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
 #include "map/lmapMain.h"
 
@@ -17,15 +17,11 @@ static __inline void flagsClearBits(u32 *flags, u32 bits)
 }
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(UiSpriteState *, f32);
 void uiSpriteBankApplyPreset(void *, s32);
 void FUN_0048a378(NaviCategorySelectionWork *);
 void FUN_0048821c(NaviCategorySelectionWork *, u32);
-s32 vec2GetXInt(UiSpriteState *);
-s32 vec2GetYInt(UiSpriteState *);
 void pointConvertToFloat(FloatPoint *, s32, s32);
 void naviMainSetCurrentMap(void *, u32);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 void _ZN9Obj53230012FUN_0048b8a4Ev(NaviCategorySelectionWork *owner)
 {

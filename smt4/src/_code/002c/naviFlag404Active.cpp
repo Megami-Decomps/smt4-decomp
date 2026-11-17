@@ -1,8 +1,7 @@
-#include "common.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
 
-extern void *g_naviMain;
 
 extern s32 gameFlagIsSet(u32 flag);
 extern s32 inputIsQuestConfirmPressed(void);

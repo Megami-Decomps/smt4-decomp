@@ -1,10 +1,11 @@
 /* NON_MATCHING: same block-ordering difference as FUN_0026d3e0: retail lays out the stock and active-party `unk42 == 0` arms after the non-stock path; armcc here keeps each pair adjacent. */
 #include "battle/BtlMainAccess.h"
 #include "ui/PartyPanelState.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "battle/BattleUnitSlot.h"
 #include "code/Code0026.h"
 #include "ui/PartyPanel.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 namespace {
 struct BtlUnitExtra {
@@ -20,7 +21,6 @@ struct BtlUnitView {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-PartyDamageSlotsIV *gameGetSlotTable();
 s32 appGetRemainingCapacity(u16 item);
 s32 FUN_0029a9d4(u16 item, u32 flag);
 s32 listCursorGetRowIfUnblocked(void *selection);
@@ -34,7 +34,7 @@ s32 partyWidgetGetCost(PartyPanelWidget *widget);
 void FUN_0026d144(void *selection, s32 stockOnly)
 {
     PartyPanelState *panel = g_partyPanel;
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     s32 value = 0;
     s32 index;
 

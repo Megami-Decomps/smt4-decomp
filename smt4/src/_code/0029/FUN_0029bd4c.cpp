@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDown.h"
 
 extern "C" {
 
-int timerStart(void *timer, s32 arg0, s32 arg1);
 int ifTouchRegionRemove(void);
 void __aeabi_memset4(void *block, u32 size, u32 value);
 

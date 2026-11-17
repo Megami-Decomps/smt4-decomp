@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cc36c` (_code @ 0x2cc36c, 0x5b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "code/Code0015.h"
@@ -7,10 +8,6 @@
 
 extern "C" {
 
-int uiSpriteAdvanceAnimation(int);
-int pairSetSecondResetFirst(int, int);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a1850(unsigned int *, int, unsigned int);
 int FUN_00358e94(...);
 int uiStoreTextureEntryCenter(...);
@@ -91,12 +88,12 @@ void FUN_002cc36c(int param_1)
           temp_v4 = 0;
           if (temp_v4 < temp_v2) {
             do {
-              uiSpriteSetImageKeyframe(temp_v5 + temp_v4 * 0x8c + 0x75b4,0xc,0);
+              uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v5 + temp_v4 * 0x8c + 0x75b4),0xc,0);
               temp_v4 = temp_v4 + 1;
             } while (temp_v4 < temp_v2);
           }
-          uiSpriteSetImageKeyframe(temp_v5 + 0x7870,0xc,0);
-          uiSpriteSetImageKeyframe(temp_v5 + 0x78fc,0xc,0);
+          uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v5 + 0x7870),0xc,0);
+          uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v5 + 0x78fc),0xc,0);
         }
         else if (*(char *)(temp_v5 + 0x763e) != '\0') {
           *(unsigned char *)(temp_v5 + 0x7994) = 0;
@@ -110,14 +107,14 @@ void FUN_002cc36c(int param_1)
       temp_v4 = 0;
       if (temp_v4 < temp_v2) {
         do {
-          uiSpriteAdvanceAnimation(temp_v5 + temp_v4 * 0x8c + 0x75b4);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + temp_v4 * 0x8c + 0x75b4), 1.0f);
           piVar4 = (int *)(temp_v5 + temp_v4 * 4 + 0x7998);
           temp_v4 = temp_v4 + 1;
           *piVar4 = *piVar4 + 1;
         } while (temp_v4 < temp_v2);
       }
-      uiSpriteAdvanceAnimation(temp_v5 + 0x7870);
-      uiSpriteAdvanceAnimation(temp_v5 + 0x78fc);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0x7870), 1.0f);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0x78fc), 1.0f);
       if (*(char *)(temp_v5 + 0x7994) == '\0') goto LAB_002cc580;
     }
     else {
@@ -149,7 +146,7 @@ LAB_002cc580:
           *(unsigned char *)(temp_v5 + 0xb64c) = 0;
         }
         if (*(int *)(temp_v5 + 0xb650) >= 3) {
-          uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0xb5b4), 1.0f);
         }
       }
       else {
@@ -159,9 +156,9 @@ LAB_002cc580:
           if (*(int *)(temp_v5 + 0xb650) >= 0xc) {
 LAB_002cc6b0:
             if (*(short *)(temp_v5 + 0xb610) != 0xc) {
-              uiSpriteSetImageKeyframe(temp_v5 + 0xb5b4,0xc,0);
+              uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v5 + 0xb5b4),0xc,0);
               if (*(int *)(temp_v5 + 0xb650) >= 3) {
-                uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
+                uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0xb5b4), 1.0f);
               }
             }
             else if (*(char *)(temp_v5 + 0xb63e) != '\0') {
@@ -169,17 +166,17 @@ LAB_002cc6b0:
               *(unsigned char *)(temp_v5 + 0xb64c) = 0;
             }
             else if (*(int *)(temp_v5 + 0xb650) >= 3) {
-              uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
+              uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0xb5b4), 1.0f);
             }
           }
           else if (*(int *)(temp_v5 + 0xb650) >= 3) {
-            uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0xb5b4), 1.0f);
           }
         }
         else {
           if (*(int *)(temp_v5 + 0xb650) >= 0x12) goto LAB_002cc6b0;
           if (*(int *)(temp_v5 + 0xb650) >= 3) {
-            uiSpriteAdvanceAnimation(temp_v5 + 0xb5b4);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0xb5b4), 1.0f);
           }
         }
       }
@@ -207,10 +204,10 @@ LAB_002cc760:
           else if (temp_v1 == '\x03') {
             temp_v3 = 0x3f1;
           }
-          pairSetFirstResetSecond((void *)(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4),temp_v3);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4)),temp_v3);
         }
         else {
-          pairSetSecondResetFirst(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4,0xf);
+          pairSetSecondResetFirst((UiSpriteState *)(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4),0xf);
         }
         temp_v10 = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
         temp_v12 = (int)temp_v9;
@@ -230,7 +227,7 @@ LAB_002cc760:
         uiStoreTextureEntryCenter(temp_v6,0xd,0x416);
         FUN_00358e94(temp_v6,(int)(short)(int)*(float *)(temp_v5 + 0xb640),
                      (int)(short)(int)*(float *)(temp_v5 + 0xb644));
-        uiSpriteSelectAnim(temp_v6,9);
+        uiSpriteSelectAnim((UiSpriteState *)temp_v6,9);
         *(unsigned char *)(temp_v4 + 0xf080) = 0;
         pcVar7 = (char *)(temp_v2 + 0x11874);
         temp_v1 = *(char *)(temp_v2 + 0x11874) + '\x01';

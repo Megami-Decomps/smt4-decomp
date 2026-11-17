@@ -6,8 +6,6 @@ extern "C" {
 s32 asdFsIsSdCardDetected(void);
 u32 objGetFlagBit16(void *object);
 
-extern AocMain *g_aocMain;
-
 /* One add-on content slot of the SD card list. */
 typedef struct AocSdSlot {
     /* 0x00 */ s32 handle;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail looks the track node up as items[index * stride + 0] (mla) with the runtime type constant kept in r7, and assigns different saved registers (model r6, motion r5, node r4); ours uses mul and r4/r7/r5. Everything else, including the tail call into the record rebuild, has the same shape (139 rows against 146). */
-#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "util/MemoryHelpers_VariantB.h"
 #include "classes/Obj557dcc.h"
 
@@ -7,12 +7,12 @@ extern "C" {
 
 extern const AsdTypeInfo DAT_004722a0;
 
-void asdModelBuildAttributeRecordsForKey(AsdModelAttrModel *model, u8 *data, s32 key);
+void asdModelBuildAttributeRecordsForKey(AsdMdlNode *model, u8 *data, s32 key);
 
 /* Switches the model to motion `motionIndex`: a pending motion takes over the playing track node's slot,
  * the playing motion is set and its blend clamped to the limit, then the attribute records are rebuilt
  * for the new motion. */
-void modelSelectPrimaryMotion(AsdMotionModel *model, s32 motionIndex, f32 blend)
+void modelSelectPrimaryMotion(AsdMdlNode *model, s32 motionIndex, f32 blend)
 {
     AsdMotionInstance *active;
     s32 i;
@@ -22,8 +22,8 @@ void modelSelectPrimaryMotion(AsdMotionModel *model, s32 motionIndex, f32 blend)
         return;
     }
     if ((model->flags & 1) != 0) {
-        AsdTrackOwner *owner = model->owner;
-        AsdTrackNode *node = owner->activeTarget != NULL ? owner->list->items[owner->index * owner->list->stride] : NULL;
+        AsdMdlSceneNode *sceneNode = model->sceneNode;
+        AsdTrackNode *node = sceneNode->activeTarget != NULL ? sceneNode->trackList->items[sceneNode->activeIndex * sceneNode->trackList->stride] : NULL;
 
         if (node != NULL) {
             const AsdTypeInfo *type = node->vtbl->getType(node);
@@ -79,7 +79,7 @@ void modelSelectPrimaryMotion(AsdMotionModel *model, s32 motionIndex, f32 blend)
         model->records.items = NULL;
     }
     model->records.count = 0;
-    asdModelBuildAttributeRecordsForKey((AsdModelAttrModel *)model, model->file->data, motionIndex);
+    asdModelBuildAttributeRecordsForKey(model, model->file->data, motionIndex);
 }
 
 } /* extern "C" */

@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard0034.h"
 
 /* Compare two record pointers by their floating-point sort keys. */

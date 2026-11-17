@@ -1,11 +1,9 @@
 #include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-extern u32 g_aocMain;
-
 extern s32 packageFindRecordByName(u32 a, u32 b, u32 c);
-extern s32 objHasFlagBit16(u32 main);
 
 /* Returns 1 when objHasFlagBit16 passes (only checked when `check` is set) and packageFindRecordByName(a, 0x10, b) succeeds. */
 u32 FUN_00470b18(u32 a, u32 b, s32 check)

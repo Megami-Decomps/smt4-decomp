@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 int FUN_0039c954(u32 *block);
 

@@ -1,9 +1,9 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "common.h"
 #include "map/MapSceneAccess.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 extern void FUN_00486328(void *request, u32 id, s32 a, s32 b, s32 c, s32 d, f32 x, f32 y, f32 z);
 

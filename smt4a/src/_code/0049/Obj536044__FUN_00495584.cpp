@@ -1,4 +1,5 @@
 // Finish the map-scene animation, then wait for its script before advancing.
+#include "ui/UiSpriteApi.h"
 #include "classes/Obj536044.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include <stddef.h>
@@ -9,11 +10,7 @@ void FUN_003e5858(void *script);
 s32 fourPtrsAllNull(void *script);
 void uiSpriteBankApplyPreset(SpritePresetBank *, s32 preset);
 void buttonHelpSetText(s32 channel, u32 color);
-void uiSpriteAdvanceAnimation(UiAnimatedSprite *, f32 speed);
-s32 vec2GetXInt(const UiAnimatedSprite *);
-s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
-s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 }
 
 // The animation fields lie beyond the documented class prefix.
@@ -41,7 +38,7 @@ void Obj536044::FUN_00495584()
         if (substate != 2)
             return;
     } else {
-        UiAnimatedSprite *sprite = &state->bank.sprites[1];
+        UiSpriteState *sprite = &state->bank.sprites[1];
         uiSpriteAdvanceAnimation(sprite, 1.0f);
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);

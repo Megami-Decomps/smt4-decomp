@@ -1,5 +1,6 @@
 /* NON_MATCHING: task handle and signed rotating-marker remainder contract restored; message-ID initialization lifetime and marker-grid temporaries still differ. */
 #include "common.h"
+#include "addon/aocMain.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
@@ -10,7 +11,6 @@
 
 extern "C" {
 
-
 /* The job work area (only the fields read here). */
 typedef struct LoadingWork {
     /* 0x0000 */ u8 unk0000[0x1798];
@@ -18,11 +18,9 @@ typedef struct LoadingWork {
     /* 0x179C */ s32 messageIndex;
 } LoadingWork;
 
-extern u8 *g_aocMain;
-
 s32 renderCtxPackPassFlags(s32 a, s32 b);
 void texDrawCompositeSprite(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
-void FUN_00473754(u8 *aoc, s32 text, u8 buffer[1024]);
+void FUN_00473754(AocMain *aoc, s32 text, u8 buffer[1024]);
 s32 curveEvaluateStandard(u8 *buffer, u32 kind);
 
 /* Draws the loading message with its spinning marker: the message text for the current index,
@@ -31,7 +29,7 @@ s32 curveEvaluateStandard(u8 *buffer, u32 kind);
 s32 FUN_00478ac4(u32 job)
 {
     LoadingWork *work = (LoadingWork *)jobGetWork(job);
-    u8 *aoc = g_aocMain;
+    AocMain *aoc = g_aocMain;
     u32 frame = work->frame;
     u8 text[1024];
     u32 messageIds[4] = {0x6E, 0x6F, 0x70, 0x71};

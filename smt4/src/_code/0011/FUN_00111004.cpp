@@ -7,7 +7,6 @@
 #include "addon/AocSystem.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 s32 FUN_00121e50(AocSystem *system);
 void aocReleasePackageOwner(AocSystem *system);
 void kernelThreadJoinAndClose(u32 *waitHandle);
@@ -20,7 +19,7 @@ u32 FUN_00111004(u32 handle)
     AocJobWork *work = (AocJobWork *)jobGetWork(handle);
 
     if (work->operationActive == 1 && work->requestId == work->completedId &&
-        FUN_00121e50(g_aocSystem) != 0 && FUN_002ad1e0(&g_aocMain->objB) != 0) {
+        FUN_00121e50(g_aocSystem) != 0 && FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         aocReleasePackageOwner(g_aocSystem);
         RequestParameters request;

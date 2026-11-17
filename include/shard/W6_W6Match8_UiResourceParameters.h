@@ -2,18 +2,9 @@
 #define SHARD_W6_W6MATCH8_UI_RESOURCE_PARAMETERS_H
 
 #include "common.h"
-#include <stddef.h>
+#include "ui/UiSpriteState.h"
 
-struct UiResourceParameters {
-    /* 0x00 */ u16 counts[5];
-    /* 0x0A */ u16 unk0a;
-    /* 0x0C */ const void *chunks[5];
-};
-
-typedef char UiResourceParametersLayoutCheck[
-    offsetof(UiResourceParameters, counts) == 0 &&
-    offsetof(UiResourceParameters, chunks) == 0xc &&
-    sizeof(UiResourceParameters) == 0x20 ? 1 : -1];
+/* UiResourceParameters, a UI sprite's animation resource, is declared with the sprite. */
 
 extern "C" void paramsInit(UiResourceParameters *parameters,
     const void *first, u16 firstBytes, const void *second, u16 secondBytes,

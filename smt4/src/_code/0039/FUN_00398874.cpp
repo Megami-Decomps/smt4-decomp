@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "ui/UiControl.h"
 #include "quest_center/qcMain.h"
@@ -21,17 +22,14 @@ typedef struct CursorMenu {
     /* 0x708 */ u8 timer[1];
 } CursorMenu;
 
-s32 uiSpriteAdvanceAnimation(void *timer);
 void FUN_00232848(void);
 void messageOwnerSetState(CursorMenu *menu, s32 state);
-void timerStart(void *timer, s32 a, s32 b);
-s32 vec2GetXInt(void *timer);
 
 /* Toggles the menu's zoomed view on input, restoring the saved cursor when leaving it,
  * and samples the transition timer. */
 void FUN_00398874(CursorMenu *menu)
 {
-    if (uiSpriteAdvanceAnimation(menu->timer) != 0) {
+    if (uiSpriteAdvanceAnimation((UiSpriteState *)menu->timer) != 0) {
         if (menu->zoomed) {
             menu->page = menu->savedPage;
             menu->zoomed = 0;
@@ -48,9 +46,9 @@ void FUN_00398874(CursorMenu *menu)
             buttonHelpSetPreset(151);
         }
         messageOwnerSetState(menu, 11);
-        timerStart(menu->timer, 0, 0);
+        timerStart((UiSpriteState *)menu->timer, 0, 0);
     }
-    menu->timerValue = vec2GetXInt(menu->timer);
+    menu->timerValue = vec2GetXInt((UiSpriteState *)menu->timer);
 }
 
 } /* extern "C" */

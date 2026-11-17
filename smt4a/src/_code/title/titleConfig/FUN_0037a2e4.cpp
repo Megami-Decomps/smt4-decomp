@@ -1,4 +1,5 @@
 /* NON_MATCHING: the save-block byte reads (0x27E90..0x27E94) and the settings global take different registers/address forms (retail loads each offset from a literal, ours shares one base), and the frame needs r7 */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "title/titleConfig.h"
 #include "AsdSDK/AsdDebug.h"
@@ -31,9 +32,6 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(vo
                    void *owner, u32 job);
 void paramsClearPacket(UiResourceParameters *params);
 
-void uiSpriteStateInitFromSource(void *sprite, u32 anim, u32 frame, const void *source, u16 layer, f32 scale);
-void uiSpriteSetKeyframe(void *sprite, s32 key, s32 restart);
-void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 restart);
 void gridNavigationConfigure(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
 void fillTwoWordsWithByte(void *destination, u32 value);
 void sysPlaySe(s32 sound);
@@ -54,9 +52,9 @@ void FUN_0037a2e4(void)
     taskCreateDraw("TITLE_CONFIG D", 0xea, 0, 0, FUN_0032ba8c, NULL, NULL, config->job);
     paramsClearPacket(&config->params);
     paramsInit(&config->params, DAT_00536bec, 0x30, DAT_00536bec + 0x30, 0x30, 0, 0, 0, 0, 0, 0);
-    uiSpriteStateInitFromSource(config->window, 36, 0, &config->params, 201, 1.0f);
-    uiSpriteSetKeyframe(config->window, 2, 0);
-    uiSpriteSetImageKeyframe(config->window, 0, 0);
+    uiSpriteStateInitFromSource((UiSpriteState *)config->window, 36, 0, &config->params, 201, 1.0f);
+    uiSpriteSetKeyframe((UiSpriteState *)config->window, 2, 0);
+    uiSpriteSetImageKeyframe((UiSpriteState *)config->window, 0, 0);
     config->cursorScale = 1.0f;
     config->cursorFrames = 30;
     gridNavigationConfigure(config->cursor, 3, 3, 1, 0, 1);

@@ -14,7 +14,8 @@ struct Obj422214Owner {
     /* 0x180 */ u8 contents[0x800];
     /* 0x980 */ u8 unk980[0x20];
     /* 0x9A0 */ nn::fnd::DateTime modified;
-    /* 0x9A8 */ u32 unk9A8;
+    /* 0x9A8 */ u16 unk9A8;
+    /* 0x9AA */ u16 contentId;  /* the id the AOC menu passes to its purchase and license requests */
     /* 0x9AC */ u8 flags[8];
     /* 0x9B4 */ u8 unk9B4[8];
     /* 0x9BC */ Obj422214 buffers;

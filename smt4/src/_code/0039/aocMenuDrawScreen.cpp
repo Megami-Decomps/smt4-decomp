@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "classes/AocMenu.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 
 extern "C" {
@@ -17,7 +18,6 @@ f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void effectRenderTransformedInstance(void* instance, f32 offset);
 void renderCtxResetColorScale(RenderCtx* scene);
-f32 vec2GetSpeed(const void *animation);
 
 // Draws the menu screen (frame, shadow and its 24 effect instances) and then runs the
 // selected entry's handler.
@@ -31,7 +31,7 @@ void aocMenuDrawScreen(AocMenu* screen)
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 7, 0));
     s32 x = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.38f);
     texDrawCompositeSprite(2, 0x11, 0, 0, 0, 0xb);
-    efctSetSpeed(vec2GetSpeed(screen->animated.effects[24]));
+    efctSetSpeed(vec2GetSpeed((const UiSpriteState *)screen->animated.effects[24]));
     texDrawTableEntryAtStoredOrigin(2, 0x1d, 2000, x, 0, 0xb);
     efctSetSpeed(1.0f);
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.36f);

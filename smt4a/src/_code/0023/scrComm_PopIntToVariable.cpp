@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script command: pops an integer into the script variable named by the current instruction; returns 1. */
-u32 scrComm_PopIntToVariable(ScriptVmProcess *process)
+u32 scrComm_PopIntToVariable(ScriptProcess *process)
 {
     s32 value = scrPopInt(process);
 

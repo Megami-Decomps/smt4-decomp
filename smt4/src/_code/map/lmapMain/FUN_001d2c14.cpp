@@ -1,7 +1,7 @@
 /* NON_MATCHING: words[] clear becomes __aeabi_memclr4 instead of retail's pair-unrolled loop; scene vector copies group differently, the optional three-word clear uses separate stores and task callback declarations still lack native handle types. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapMainGlobals.h"
 #include "shard/SaveWork.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -20,7 +20,6 @@ void FUN_002d5088(void);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, s32 (*update)(), void (*draw)(void),
                    void *work, u32 owner);
 
-extern LmapMainState *g_lmapMainState; /* 0x447060 */
 
 /* Allocates and initialises the field map's state block, resets the scene camera and starts the map's job and draw task. */
 void FUN_001d2c14(void)
@@ -36,20 +35,20 @@ void FUN_001d2c14(void)
     FUN_00280ac0(1);
     state->unk09 = 0;
     state->unk0A = 0;
-    state->unk0B = 0;
+    state->external = 0;
     state->unk0C = 0;
     state->unk10 = 0;
-    if (g_lmapMainState->unkCC != 0) {
-        g_lmapMainState->unkCC = 0;
-        g_lmapMainState->unkD0 = 0;
-        g_lmapMainState->unkD4 = 0;
+    if (g_lmapMainState->state != 0) {
+        g_lmapMainState->state = 0;
+        g_lmapMainState->stateStep = 0;
+        g_lmapMainState->stateTime = 0;
     }
     state->unkC8Float = 1.0f;
     state->unkC4 = 1.0f;
-    state->unk40 = 0x65;
+    state->mapId = 0x65;
     state->unk4C = 0;
     state->unk4E = 0;
-    state->unk48 = 1;
+    state->areaId = 1;
     scene = g_lmapScene;
     scene->pose.position.x = -554.0f;
     scene->pose.position.y = 0.01f;

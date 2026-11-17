@@ -1,4 +1,5 @@
 /* NON_MATCHING: the resource packets are now defined here in retail's order (presets + packet A, packets B and C, packet E), so paramsInit's pointers derive from one literal by the same chained subtraction; remaining: callee-saved register numbering (retail keeps g_buttonHelp in r9, the work in r8, constants 1/0 in fp/sl). */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -34,10 +35,8 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void uiSpriteStateInitFromSource(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, UiResourceParameters *resources,
-                  u16 flags, f32 speed);
-void FUN_00262210(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, s32 mode);
-void uiStoreTextureEntryCenter(ButtonHelpDisplayUnit *unit, s32 kind, s32 count);
+void FUN_00262210(UiSpriteState *unit, s32 kind, s32 count, s32 mode);
+void uiStoreTextureEntryCenter(UiSpriteState *unit, s32 kind, s32 count);
 u32 asdTextCreate(s32 arg);
 void asdTextSetBaseColor(u32 text, u32 color);
 void positionStateSet(u32 text, s32 arg, u32 color, f32 value);
@@ -77,12 +76,12 @@ void buttonHelpCreate(void)
         ButtonHelpWork *units = globals->work;
         units->mode = 0;
         for (s32 i = 0; i < 2; i++) {
-            units->units[i].value = 2;
+            units->units[i].layer = 2;
             uiStoreTextureEntryCenter(&units->units[i], 0x12, 0);
             units->units[i].active = 1;
-            units->units[i].unk0C = 0;
-            units->units[i].unk10 = 0;
-            units->units[i].unk14 = 0;
+            units->units[i].x = 0;
+            units->units[i].y = 0;
+            units->units[i].z = 0;
         }
         help->unk4C5 = 0;
         help->unk04C6[0] = 1;

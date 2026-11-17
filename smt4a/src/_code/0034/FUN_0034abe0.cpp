@@ -7,6 +7,7 @@
 #include "addon/LookupRecord.h"
 #include "camp/CampStateQueries.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -81,8 +82,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetXInt(unsigned int *);
-extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
@@ -577,16 +576,16 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   }
   efctSetSpeed();
   if (!((temp_v2 == 1 || temp_v2 == 2) || temp_v2 == 6)) {
-    temp_v9 = vec2GetYInt(puVar2 + 0x2c);
+    temp_v9 = vec2GetYInt((const UiSpriteState *)(puVar2 + 0x2c));
     temp_v0 = *(short *)(temp_v1 + 10);
-    temp_v8 = vec2GetXInt(puVar2 + 0x2c);
+    temp_v8 = vec2GetXInt((const UiSpriteState *)(puVar2 + 0x2c));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x3e,(int)&param_1->field_0x0 + *(short *)(temp_v1 + 8) + temp_v8,
                  temp_v9 + param_2 + (int)temp_v0,0x83);
   }
   else {
-    temp_v9 = vec2GetYInt(puVar2 + 0x2c);
+    temp_v9 = vec2GetYInt((const UiSpriteState *)(puVar2 + 0x2c));
     temp_v0 = *(short *)(temp_v1 + 10);
-    temp_v8 = vec2GetXInt(puVar2 + 0x2c);
+    temp_v8 = vec2GetXInt((const UiSpriteState *)(puVar2 + 0x2c));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x27e,(int)&param_1->field_0x0 + *(short *)(temp_v1 + 8) + temp_v8,
                  temp_v9 + param_2 + (int)temp_v0,0x83);
   }

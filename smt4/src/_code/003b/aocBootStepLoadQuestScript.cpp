@@ -2,11 +2,9 @@
 
 extern "C" {
 
-extern AocMain *g_aocMain;
-
-s32 questSysUpdateLoad(AocObjC *holder);
-void FUN_002895a8(AocObjC *holder);
-void FUN_00289608(AocObjC *holder, s32 arg);
+s32 questSysUpdateLoad(AocScriptHolder *holder);
+void FUN_002895a8(AocScriptHolder *holder);
+void FUN_00289608(AocScriptHolder *holder, s32 arg);
 s32 gameJumpRequestIsPending(void);
 void gameJumpRequestClear(void);
 void FUN_0022af9c(s32 enabled);

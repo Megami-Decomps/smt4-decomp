@@ -38,7 +38,7 @@ typedef struct ListMenu {
 typedef char ListMenuAnimationLayout[
     offsetof(ListMenu, hidden) == 0x630 &&
     offsetof(ListMenu, iconBAnimation) == 0xBCC &&
-    offsetof(ListMenu, iconBAnimation.unk20) == 0xBEC &&
+    offsetof(ListMenu, iconBAnimation.alpha) == 0xBEC &&
     offsetof(ListMenu, iconA) == 0xC60 &&
     offsetof(ListMenu, iconB) == 0xC68 &&
     sizeof(ListMenu) == 0xC6C ? 1 : -1];

@@ -3,7 +3,6 @@
 
 extern "C" {
 extern QuadVectorState DAT_006306f8;
-void vectorSetAllOne(QuadVector *vector);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *vectors, void (*constructor)(QuadVector *), u32 size, u32 count);
 void quadSetOrderedVectors(const QuadVector *first, const QuadVector *second, const QuadVector *third, const QuadVector *fourth, s32 mode, s32 preserveW);
 

@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 void FUN_0048b86c(NaviTransitionState *navigation, u32 argument);
 
 // Forward `argument` to the navigation menu's transition state when the menu exists.

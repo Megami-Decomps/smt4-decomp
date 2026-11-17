@@ -1,9 +1,9 @@
 #include "gamedata/NkmBaseRecordA.h"
-#include "shard/Shard003F.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 
-u16 FUN_003f3908(Lookup62 *unit)
+u16 FUN_003f3908(const SlotRecordA *unit)
 {
     NkmBaseRecordA *rec = nkmBaseGetRecord(unit->id);
 

@@ -4,7 +4,7 @@
 
 struct SpriteIntroTransitionWork {
     u8 unk000[0x5AC];
-    UiAnimatedSprite sprites[6];
+    UiSpriteState sprites[6];
     u8 unk8F4[0x454];
     s32 phase;
     s32 timer;
@@ -13,7 +13,6 @@ typedef char SpriteIntroTransitionOffsetsCheck[
     offsetof(SpriteIntroTransitionWork, phase) == 0xD48 &&
     offsetof(SpriteIntroTransitionWork, timer) == 0xD4C ? 1 : -1];
 extern "C" {
-void uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 speed);
 
 /* Finishes the first two sprites, waits seventeen frames, then starts the remaining intro group. */
 u32 FUN_00335384(SpriteIntroTransitionWork *work)

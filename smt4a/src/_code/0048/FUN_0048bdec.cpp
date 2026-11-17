@@ -3,6 +3,7 @@
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
+#include "ui/UiSpriteApi.h"
 
 // Map selection screen: only the members this update touches.
 struct MapScreen {
@@ -29,18 +30,12 @@ struct MapScreenListBlock {
 
 extern "C" {
 
-s32 uiSpriteAdvanceAnimation(void* sprite, f32 step);
-void FUN_00167458(void* sprite, s32 arg);
-void uiSpriteSetImageKeyframe(void* sprite, s32 image, s32 keyframe);
-s8 uiSpriteGetCompletionState(const void* sprite);
 void dialogClose(s32 arg);
 void FUN_002d22c0(s32 arg);
 void FUN_0048821c(MapScreen* screen, s32 mapIndex);
 void FUN_0048a378(MapScreen* screen);
 void FUN_0048d248(MapScreen* screen, u32 value);
 void naviMainSetCurrentMap(void* cursor, s32 mapIndex);
-u32 vec2GetXInt(void* sprite);
-u32 vec2GetYInt(void* sprite);
 void pointConvertToFloat(void* pointer, u32 x, u32 y);
 
 #define SCREEN_BYTE(screen, offset) (*reinterpret_cast<u8*>(reinterpret_cast<u8*>(screen) + (offset)))
@@ -58,15 +53,15 @@ void FUN_0048bdec(MapScreen* screen)
     MapScreenListBlock* list = reinterpret_cast<MapScreenListBlock*>(reinterpret_cast<u8*>(screen) + 0x20600);
     if (phase == 0) {
         if (list->active != 0) {
-            for (s32 i = 0; i < 6; i++) uiSpriteAdvanceAnimation(screen->listSprites[i], 1.0f);
-            uiSpriteAdvanceAnimation(SCREEN_PTR(screen, 0x112c), 1.0f);
-            uiSpriteAdvanceAnimation(SCREEN_PTR(screen, 0x10a0), 1.0f);
+            for (s32 i = 0; i < 6; i++) uiSpriteAdvanceAnimation((UiSpriteState *)screen->listSprites[i], 1.0f);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x112c)), 1.0f);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x10a0)), 1.0f);
         }
-        uiSpriteAdvanceAnimation(titleSprite, 1.0f);
+        uiSpriteAdvanceAnimation((UiSpriteState *)titleSprite, 1.0f);
         void* menuSprite = screen->menuSprite;
-        if (uiSpriteAdvanceAnimation(menuSprite, 1.0f) != 0) screen->phase = 1;
-        u32 y = vec2GetYInt(menuSprite);
-        u32 x = vec2GetXInt(menuSprite);
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)menuSprite, 1.0f) != 0) screen->phase = 1;
+        u32 y = vec2GetYInt((const UiSpriteState *)menuSprite);
+        u32 x = vec2GetXInt((const UiSpriteState *)menuSprite);
         pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
         *dirtyA = 1;
         *dirtyB = 1;
@@ -74,7 +69,7 @@ void FUN_0048bdec(MapScreen* screen)
         naviMainSetCurrentMap(SCREEN_PTR(screen, 0x4cc), screen->mapIndex);
         FUN_00492ac8(reinterpret_cast<u32>(SCREEN_PTR(screen, 0x4cc)), 0);
         FUN_0048821c(screen, screen->mapIndex);
-        uiSpriteSetImageKeyframe(titleSprite, 2, 0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)titleSprite, 2, 0);
         if (g_gameState.naviMapPending != 0) {
             g_gameState.naviMapPending = 0;
             screen->selectedMarker = *reinterpret_cast<u32*>(SCREEN_PTR(screen, 0x20510));
@@ -97,17 +92,17 @@ void FUN_0048bdec(MapScreen* screen)
         }
         screen->phase = 2;
     } else if (phase == 2) {
-        uiSpriteAdvanceAnimation(titleSprite, 1.0f);
-        uiSpriteAdvanceAnimation(SCREEN_PTR(screen, 0x1014), 1.0f);
+        uiSpriteAdvanceAnimation((UiSpriteState *)titleSprite, 1.0f);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x1014)), 1.0f);
         void* pointerSprite = screen->pointerSprite;
-        FUN_00167458(pointerSprite, 0);
-        if (uiSpriteGetCompletionState(pointerSprite) != 0) {
+        FUN_00167458((UiSpriteState *)pointerSprite, 0);
+        if (uiSpriteGetCompletionState((const UiSpriteState *)pointerSprite) != 0) {
             if (screen->mapIndex > 100) screen->flags &= 0xfffdffff;
             pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), 0, 0);
             screen->flags &= 0xffffeff7;
         } else {
-            u32 y = vec2GetYInt(pointerSprite);
-            u32 x = vec2GetXInt(pointerSprite);
+            u32 y = vec2GetYInt((const UiSpriteState *)pointerSprite);
+            u32 x = vec2GetXInt((const UiSpriteState *)pointerSprite);
             pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
         }
         *dirtyA = 1;

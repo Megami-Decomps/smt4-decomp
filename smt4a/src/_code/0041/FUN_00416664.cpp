@@ -7,7 +7,7 @@
 struct BattleLabelEntryViewA {
     u8 unk00[0x14];
     union {
-        UiAnimatedSprite sprite;
+        UiSpriteState sprite;
         struct { u8 unk14[0x18]; s16 x; s16 y; } position;
     };
     u8 active;
@@ -26,7 +26,7 @@ s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void effectRenderTransformedInstance(UiAnimatedSprite *sprite, f32 offset);
+void effectRenderTransformedInstance(UiSpriteState *sprite, f32 offset);
 void FUN_00164168(u32 message, s32 x, s32 y, u32 color, s32 mode, s32 flags, f32 scale);
 
 void FUN_00416664(BattleLabelEntryViewA *entries)
@@ -46,7 +46,7 @@ void FUN_00416664(BattleLabelEntryViewA *entries)
             const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(8, 142);
             s32 centerX = anchor->x + anchor->placement->width / 2;
             s32 y = anchor->y;
-            if (entry->kind == 2 && ((s8)entry->sprite.completion.channels[2] & (s8)entry->sprite.completion.channels[1])) {
+            if (entry->kind == 2 && ((s8)entry->sprite.scaleDone & (s8)entry->sprite.alphaDone)) {
                 FUN_00164168(entry->message, entry->position.x + centerX - entry->textWidth / 2 + offset,
                              entry->position.y + y, 61, 6, 0, 1.0f);
             }

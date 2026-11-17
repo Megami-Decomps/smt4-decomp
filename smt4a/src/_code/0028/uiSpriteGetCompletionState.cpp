@@ -1,12 +1,7 @@
-#include "common.h"
+#include "ui/UiSpriteApi.h"
 
-struct ObjectFlagState {
-    /* 0x00 */ u8 unk00[0x8a];
-    /* 0x8A */ s8 flag;
-};
-
-/* Read the signed flag stored by the owning object. */
-extern "C" s32 uiSpriteGetCompletionState(const ObjectFlagState *state)
+/* The finished flag: every track of the sprite is done. */
+extern "C" s8 uiSpriteGetCompletionState(const UiSpriteState *sprite)
 {
-    return state->flag;
+    return sprite->finished;
 }

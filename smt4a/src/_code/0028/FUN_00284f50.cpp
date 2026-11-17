@@ -1,9 +1,8 @@
 #include "common.h"
 #include "Model/MoriModelShadowMap.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
-
-void vec2GetXInt(u8 *member);
 
 typedef struct Object {
     /* 0x00 */ u8 unk00[0x34];
@@ -15,7 +14,7 @@ extern Object *g_placeWin;
 s32 FUN_00284f50(void)
 {
     if (g_placeWin != NULL) {
-        vec2GetXInt(g_placeWin->member34);
+        vec2GetXInt((const UiSpriteState *)g_placeWin->member34);
         return;
     }
 }

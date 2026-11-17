@@ -1,8 +1,7 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
-extern LmapMainState *g_lmapMainState;
 s32 FUN_002c2a04(u32 channel);
 s32 FUN_002897e0();
 void FUN_002897d0(s32 enabled);

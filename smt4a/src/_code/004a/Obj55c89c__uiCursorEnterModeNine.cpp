@@ -1,6 +1,7 @@
 #include "common.h"
 #include "classes/Obj55c89c.h"
 #include "test/BustupViewer.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -23,10 +24,6 @@ typedef struct CursorOwner {
     /* 0xA874 */ u16 mode;
 } CursorOwner;
 
-void uiSpriteAdvanceAnimation(CursorSprite *sprite, f32 rate);
-s8 uiSpriteGetCompletionState(const void *record);
-s32 vec2GetXInt(CursorSprite *sprite);
-s32 vec2GetYInt(CursorSprite *sprite);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 s32 FUN_0026c3a0(void);
 s32 utilityReturnSuccess(void *object);
@@ -40,12 +37,12 @@ extern "C" void _ZN9Obj55c89c21uiCursorEnterModeNineEv(CursorOwner *owner)
 {
     CursorSprite *cursor = &owner->cursor;
     owner->mode = 9;
-    uiSpriteAdvanceAnimation(cursor, 1.0f);
-    pointConvertToFloat(owner->position, vec2GetXInt(cursor), vec2GetYInt(cursor));
+    uiSpriteAdvanceAnimation((UiSpriteState *)cursor, 1.0f);
+    pointConvertToFloat(owner->position, vec2GetXInt((const UiSpriteState *)cursor), vec2GetYInt((const UiSpriteState *)cursor));
     if (FUN_0026c3a0() == 0) {
         return;
     }
-    if (uiSpriteGetCompletionState(cursor) == 0) {
+    if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) == 0) {
         return;
     }
     if (buttonHelpStateIsNot3() == 0) {

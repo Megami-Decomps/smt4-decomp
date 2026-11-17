@@ -1,6 +1,5 @@
 /* NON_MATCHING: block layout and register allocation differ (retail hoists menu + entry*2 into a stack slot and tests kinds 0/13 and 1 in separate chains) */
 #include "common.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "status/StatusCamera.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/SaveSlotTableIV.h"

@@ -1,12 +1,8 @@
 #include "classes/Obj422248.h"
+#include "addon/aocMain.h"
 
-struct AocManager {
-    /* 0x00 */ u8 unk00[0x88];
-    /* 0x88 */ u8 resources[1];
-};
-extern "C" AocManager *g_aocMain;
-extern "C" void kernelThreadJoinAndClose(void *);
-extern "C" void asdMemFreeNonNull(void *);
+extern "C" void kernelThreadJoinAndClose(AocWorkerThread *thread);
+extern "C" void asdMemFreeNonNull(void *memory);
 
 void Obj422248::operator delete(void *memory)
 {
@@ -15,5 +11,5 @@ void Obj422248::operator delete(void *memory)
 
 Obj422248::~Obj422248()
 {
-    kernelThreadJoinAndClose(g_aocMain->resources);
+    kernelThreadJoinAndClose(&g_aocMain->thread);
 }

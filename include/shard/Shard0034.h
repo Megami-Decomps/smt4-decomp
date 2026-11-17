@@ -2,6 +2,7 @@
 #ifndef SHARD_SHARD0034_H
 #define SHARD_SHARD0034_H
 
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/FloatSortRecord.h"
 
@@ -338,23 +339,14 @@ typedef char ModelParameterFloatRecordSizeCheck[sizeof(ModelParameterFloatRecord
 typedef char ModelPropertyNodeSizeCheck[sizeof(ModelPropertyNode) == 0x158 ? 1 : -1];
 typedef char ModelPropertyControllerSizeCheck[sizeof(ModelPropertyController) == 0x84 ? 1 : -1];
 
-struct EmbeddedFlagState {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ s16 mode;
-    /* 0x52 */ u8 unk52[2];
-    /* 0x54 */ u8 enabled;
-    /* 0x55 */ u8 unk55[0x35];
-    /* 0x8A */ s8 flag;
-};
 struct EmbeddedFlagOwner {
     /* 0x000 */ u8 unk000[0x2DC];
-    /* 0x2DC */ EmbeddedFlagState state;
+    /* 0x2DC */ UiSpriteState state;
 };
-typedef char EmbeddedFlagStateSizeCheck[sizeof(EmbeddedFlagState) == 0x8C ? 1 : -1];
 
-static __inline s32 embeddedFlagStateMode(const EmbeddedFlagState *state)
+static __inline s32 embeddedFlagStateMode(const UiSpriteState *state)
 {
-    return state->mode;
+    return state->positionKey;
 }
 
 /* Owner of the three command channels reset by the 0x294414 helper. */

@@ -2,13 +2,11 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 void FUN_00224ce0(u32 id, s32 *firstOut, s32 *secondOut, s32 flag);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(void *vec);
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 }
 
@@ -42,12 +40,12 @@ extern "C" void FUN_00218238(SpritePanel *panel, u32 id, s32 x, s32 y, s32 shado
         s32 offsetX = 0;
         s32 offsetY = 0;
         if (panel->mode == 1) {
-            offsetX = vec2GetXInt(panel->offset);
-            offsetY = vec2GetYInt(panel->offset);
+            offsetX = vec2GetXInt((const UiSpriteState *)panel->offset);
+            offsetY = vec2GetYInt((const UiSpriteState *)panel->offset);
         }
         texDrawTableEntryAtStoredOrigin(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x35);
         if (panel->mode == 1) {
-            efctSetSpeed(vec2GetSpeed(panel->offset));
+            efctSetSpeed(vec2GetSpeed((const UiSpriteState *)panel->offset));
             setTitleRenderState(g_titleScene, packNibblesAndByte(6, 1, 0));
             texDrawTableEntryAtStoredOrigin(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x36);
             setTitleRenderState(g_titleScene, packNibblesAndByte(6, 7, 0));

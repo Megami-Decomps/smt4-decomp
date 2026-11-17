@@ -1,11 +1,11 @@
 #include "camp/ScriptPanelResources.h"
+#include "script/scrScriptProcess.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "camp/Camp.h"
 #include "code/Code004b_Smt4a.h"
 extern "C" {
 void asdMemFree(void *memory);
-void scrScriptProcessDestroy(ScriptProcess *process);
 void asdTMTexTableReleaseNode(s32 table, u32 node);
 void cameraResourcesRelease(u32 handle);
 void FUN_00214da4(void);

@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 s32 gameFlagIsSet(u32 id);
 s32 menu32State387CIs345(BtlUiObjCA *obj);
 
-extern BtlUiGlobalsA g_btlUi;
 
 bool btlUiCanStartMenu(void)
 {

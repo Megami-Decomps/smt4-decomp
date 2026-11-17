@@ -45,23 +45,6 @@ public:
 };
 
 
-// Known application prefix containing both independently owned request buffers.
-struct AocApplicationRequestView {
-    u8 prefix[0x80];
-    /* 0x080 */ u32 source;
-    u8 padding084[0x524];
-    /* 0x5A8 */ AocBufferRequest *primary;
-    /* 0x5AC */ void *primaryBuffer;
-    /* 0x5B0 */ AocAuxBufferRequest *auxiliary;
-    /* 0x5B4 */ void *auxiliaryBuffer;
-};
-typedef char AocApplicationRequestOffsets[
-    sizeof(AocApplicationRequestView) == 0x5B8 &&
-    offsetof(AocApplicationRequestView, source) == 0x80 &&
-    offsetof(AocApplicationRequestView, primary) == 0x5A8 &&
-    offsetof(AocApplicationRequestView, primaryBuffer) == 0x5AC &&
-    offsetof(AocApplicationRequestView, auxiliary) == 0x5B0 &&
-    offsetof(AocApplicationRequestView, auxiliaryBuffer) == 0x5B4 ? 1 : -1];
 typedef char AocRequestBaseSizeCheck[sizeof(AocRequestBase) == 4 ? 1 : -1];
 typedef char AocBufferRequestLayoutCheck[
     sizeof(AocBufferRequest) == 0x10 && offsetof(AocBufferRequest, source) == 0 &&

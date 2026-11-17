@@ -6,8 +6,7 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
-s32 sysLightEventTryWait(AocObjB *event);
+s32 sysLightEventTryWait(LightEvent *event);
 u32 jyoucyuGetTableEntry(s32 index);
 RequestParameters aocResolveMountPath(AocSystemA *system, u32 id);
 
@@ -21,7 +20,7 @@ u32 FUN_00472350(u32 unusedA, u32 unusedB, u32 id)
     request.result = WindowStatusResult(0);
     request.kind = 100;
 
-    if (sysLightEventTryWait(&g_aocMain->objB) != 0) {
+    if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         request.kind = 200;
     } else {
@@ -34,7 +33,7 @@ u32 FUN_00472350(u32 unusedA, u32 unusedB, u32 id)
     g_aocSystem->getPendingRequest();
     g_aocMain->flags = (g_aocMain->flags & ~0x10000u) | 0x10;
     if (legacyResourceIdRemap(&request.result) != 0xC9413891) {
-        if (sysLightEventTryWait(&g_aocMain->objB) != 0) {
+        if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
             g_aocMain->flags &= ~0x10000u;
         } else if (request.kind != 200) {
             QueuedRequestHandle handle = {request.result.code, request.result.description};

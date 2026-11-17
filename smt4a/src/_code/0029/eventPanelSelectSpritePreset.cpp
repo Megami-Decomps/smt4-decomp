@@ -1,19 +1,16 @@
 /* NON_MATCHING: `animated` is a byte argument (its store now follows the option stores as in retail); remaining: armcc stores `initialized` before `mode`, and stores the delay after the writeback frame/state stores where retail stores it first. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 
-struct EventPanelSprite { u8 data[0x8c]; };
 struct EventPanelPresetWork {
     u8 unk000[0x20];
-    EventPanelSprite sprites[7];
+    UiSpriteState sprites[7];
     u32 frame, state, mode;
     u8 optionA, optionB, initialized, animated;
     u32 delay;
 };
 extern "C" {
-void pairSetSecondResetFirst(EventPanelSprite *, u32);
-void uiSpriteSelectAnim(EventPanelSprite *, u32);
-void uiSpriteSetKeyframe(EventPanelSprite *, u32, u32);
 s32 btlIsDefeatSuppressed();
 
 void eventPanelSelectSpritePreset(EventPanelPresetWork *work, s32 mode, u8 optionB, u8 optionA, u8 animated)

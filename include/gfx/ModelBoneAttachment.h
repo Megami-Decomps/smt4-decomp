@@ -1,11 +1,11 @@
 #ifndef GFX_MODELBONEATTACHMENT_H
 #define GFX_MODELBONEATTACHMENT_H
-#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gfx/ModelBoneLookup.h"
 #include "gfx/HandleRegistry.h"
 struct ModelBoneAttachmentRoot {
     u8 unk00[8];
-    AsdMotionModel *model;
+    AsdMdlNode *model;
     GfxHandleNode *children;
 };
 struct ModelBoneAttachment {

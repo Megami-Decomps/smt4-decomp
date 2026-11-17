@@ -1,14 +1,7 @@
 #include "common.h"
-
-namespace {
-struct PassiveSkillRecord {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u32 affinity;
-};
-}
+#include "shard/PassiveSkill.h"
 
 extern "C" {
-const PassiveSkillRecord* passiveSkillLookupRecord(u32);
 u32 affinityShouldReplaceState(s32 current, s32 incoming);
 
 /* Resolve the strongest passive response among the eight equipped skill ids. */

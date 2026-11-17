@@ -1,9 +1,8 @@
 #include "common.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
-extern int uiSlidingSpriteAdvance(void *block, u32 a);
-extern u32 vec2GetXInt(void *block);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[1];
@@ -20,11 +19,11 @@ void FUN_00398830(Obj *obj)
 {
     u32 value;
 
-    if (uiSlidingSpriteAdvance(obj->block, 0) != 0) {
+    if (uiSlidingSpriteAdvance((UiSpriteState *)obj->block, 0) != 0) {
         obj->unk001 = 2;
         obj->unk00C = 0;
     }
-    value = vec2GetXInt(obj->block);
+    value = vec2GetXInt((const UiSpriteState *)obj->block);
     obj->unk0A4 = value;
 }
 

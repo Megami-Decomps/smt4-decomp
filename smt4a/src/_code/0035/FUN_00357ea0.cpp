@@ -1,10 +1,10 @@
 /* NON_MATCHING: Shared-enable materialization, the mode-zero fast branch, and float-bit comparison registers differ. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/JobWork.h"
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(void *state, f32 step);
 s32 FUN_0040898c(JobAnimationTargetPrefixA *target);
 }
 
@@ -22,7 +22,7 @@ static s32 floatRepresentation(f32 value)
 extern "C" u32 FUN_00357ea0(u32 process)
 {
     JobAnimationWorkPrefixA *work = (JobAnimationWorkPrefixA *)jobGetWork(process);
-    uiSpriteAdvanceAnimation(work->unk2C, 1.0f);
+    uiSpriteAdvanceAnimation((UiSpriteState *)work->unk2C, 1.0f);
 
     const bool enabled = (work->code != 0x71);
     work->target->enabled = enabled;

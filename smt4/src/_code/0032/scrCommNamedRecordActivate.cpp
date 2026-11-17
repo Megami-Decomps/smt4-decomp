@@ -4,9 +4,7 @@ extern "C" {
 
 extern s32 scrGetArg(s32 index);
 extern u32 scrGetArgString(s32 index);
-extern void namedRecordActivate(AocObjC *obj, s32 id, u32 string);
-
-extern AocMain *g_aocMain;
+extern void namedRecordActivate(AocScriptHolder *obj, s32 id, u32 string);
 
 /* Script command: passes the first argument and the second argument string to namedRecordActivate. */
 s32 scrCommNamedRecordActivate(void)

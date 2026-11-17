@@ -1,6 +1,7 @@
 /* NON_MATCHING: same operations and call order as retail; retail keeps the 0.0f term in s22, the attacker/target ids in r6/r8 and the skill bonus in r8 across the attack-info copy, and moves base/rate with one vmov.f64; the build allocates r6-r9/fp and s17-s21 differently. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BattleBalanceRow.h"
 #include "battle/BtlGlobals.h"
 
@@ -19,13 +20,11 @@ f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 target);
 AttackInfo btlEntryBuildSummary(BtlMainState *state, BtlEntry *entry);
 void selectionCopySupportedValue(u16 value, u32 *output);
-void *skillDataFindById(void *player);
-u32 playerGetSkillRank(void *player);
-s32 FUN_00283ebc(void *record, u32 rank, s32 flag);
+u32 playerGetSkillRank(u32 skillId);
 
 // Damage of an attack by `attackerId` on `targetId`: the magic-scaled base power through the combatants' stat
 // factors, the attack's power percent, the skill bonus and the target's resistance for the attack.
-s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base, f32 rate, s32 second)
+s32 FUN_003be918(u32 skillId, s32 attackerId, s32 targetId, s32 first, f32 base, f32 rate, s32 second)
 {
     f32 zero = 0.0f;
     f32 sideFactor = 1.0f;
@@ -46,9 +45,9 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
 
     s32 skillBonus = 0;
     if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
-        void *record = skillDataFindById(player);
+        const SkillDataRecord *record = skillDataFindById(skillId);
         if (record != NULL) {
-            skillBonus = FUN_00283ebc(record, playerGetSkillRank(player), 1);
+            skillBonus = FUN_00283ebc(record, playerGetSkillRank(skillId), 1);
         }
     }
 

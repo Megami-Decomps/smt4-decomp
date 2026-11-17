@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 void naviMainEnterState4(NaviTransitionState *navigation);
 
 // Switch the navigation menu to state 4 when it exists.

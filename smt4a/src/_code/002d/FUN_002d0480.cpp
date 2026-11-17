@@ -1,6 +1,8 @@
 /* NON_MATCHING: stack frame is 80 bytes against retail's 48 (armcc copies the by-value Vector3 arguments of distSpatial/mathPositionHeadingDegrees through temporaries; retail loads them straight from the probe locals with vldmia), and the step-sign compare is emitted with swapped operands. */
 #include "common.h"
+#include "map/LmapViewGlobals.h"
 #include "game/GameStateA.h"
+#include "util/MathFunctions.h"
 
 typedef MapVector Vector3;
 
@@ -11,26 +13,15 @@ struct ViewState {
     /* 0x24 */ f32 heading;      /* degrees */
 };
 
-/* The map view the scan reads. */
-struct MapViewState {
-    /* 0x000 */ u8 unk000[0x50];
-    /* 0x050 */ Vector3 target;
-    /* 0x05C */ u8 unk05C[0x1BC];
-    /* 0x218 */ f32 raised;      /* nonzero while the camera is raised */
-};
-
 /* The ray the collision test works on: from the camera position outwards. */
 extern "C" {
 
 extern ViewState g_battleViewState;
-extern MapViewState *g_lmapView;
 
 f32 libm_sinf(f32 radians);
 f32 libm_cosf(f32 radians);
 s32 FUN_00330108(Vector3 *end, Vector3 *start, u8 *hit);
 f32 distSpatial(Vector3 start, Vector3 end);
-f32 mathPositionHeadingDegrees(Vector3 from, Vector3 to);
-f32 mathAngleDeltaDegrees(f32 from, f32 to);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
 
 /* When enabled, probes the view for obstacles in front of the camera and, if the line of sight is
@@ -74,7 +65,7 @@ void FUN_002d0480(s32 enabled)
     }
     bestDistance = distSpatial(start, end);
     step = 90.0f;
-    if (mathAngleDeltaDegrees(bestHeading, mathPositionHeadingDegrees(g_battleViewState.position, g_lmapView->target)) < 0.0f) {
+    if (mathAngleDeltaDegrees(bestHeading, mathPositionHeadingDegrees(g_battleViewState.position, g_lmapView->savedEye)) < 0.0f) {
         step = -90.0f;
     }
     offset = 0.0f;

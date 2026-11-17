@@ -39,9 +39,7 @@ void FUN_003b5064(void)
         g_mapSelection.values[1] = saved->resumePoint.position.y;
         g_mapSelection.values[2] = saved->resumePoint.position.z;
         g_mapSelection.values[3] = saved->resumePoint.heading;
-        union { u32 bits; f32 value; } cameraHeading;
-        cameraHeading.bits = saved->resumePoint.viewValue;
-        g_mapSelection.values[4] = cameraHeading.value;
+        g_mapSelection.values[4] = saved->resumePoint.viewHeading;
         return;
     }
     case 2:

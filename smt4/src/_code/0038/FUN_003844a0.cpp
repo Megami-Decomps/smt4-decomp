@@ -2,6 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 void gxSubmitDrawZeroExtraParams(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
-f32 vec2GetSpeed(const void *object);
 void FUN_0038368c(TitleOverlay *overlay);
 void renderCtxResetColorScale(RenderCtx *ctx);
 
@@ -41,7 +41,7 @@ void FUN_003844a0(TitleOverlay *overlay)
     efctSetSpeed(1.0f);
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     if ((overlay->flags & 0x80) != 0) {
-        u8 alpha = (u8)(u32)(vec2GetSpeed(&overlay->fadeAnimation) * 192.0f);
+        u8 alpha = (u8)(u32)(vec2GetSpeed((const UiSpriteState *)&overlay->fadeAnimation) * 192.0f);
 
         renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_titleScene, 0);

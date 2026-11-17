@@ -1,10 +1,10 @@
 #pragma once
 #include "common.h"
-#include "shard/Shard004B.h"
+#include "gamedata/GameSaveDataA.h"
 
 /* Game-data, flag and record accessors. */
 extern "C" {
 
-s32 recordGetScaledMaximum(const ScaledRecordValues *record);
+s32 recordGetScaledMaximum(const SlotRecordA *record);
 
 } /* extern "C" */

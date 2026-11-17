@@ -3,12 +3,13 @@
 #define BATTLE_BTLAISCRIPT_H
 
 #include "common.h"
+struct ScriptProcess;
 #include <stddef.h>
 
 /* The script runner's state, one heap block owned by a module global. */
 typedef struct BtlAiScript {
     /* 0x00 */ void *data;    /* heap block the script runs on */
-    /* 0x04 */ void *process; /* script process object (freed with the script-process destroyer) */
+    /* 0x04 */ ScriptProcess *process; /* the script's process */
     /* 0x08 */ u8 unk08[4];
     /* 0x0C */ u32 unk0C;     /* cleared when the runner is created */
     /* 0x10 */ char path[0x80]; /* script file name the runner loads */

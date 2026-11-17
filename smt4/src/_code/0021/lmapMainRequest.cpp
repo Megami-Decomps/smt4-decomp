@@ -1,22 +1,18 @@
 #include "common.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
-struct LocalMapWork {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u8 requested;
-};
-extern LocalMapWork *g_lmapMainState;
 
-static __inline void lmapSetRequested(LocalMapWork *map, u8 value)
+static __inline void lmapSetFreeOnEnd(LmapMainState *map, u8 value)
 {
-    map->requested = value;
+    map->freeOnEnd = value;
 }
 
-/* Set the local map's request flag. */
+/* Asks for the map's block to be freed once its job ends. */
 void lmapMainRequest(void)
 {
-    lmapSetRequested(g_lmapMainState, 1);
+    lmapSetFreeOnEnd(g_lmapMainState, 1);
 }
 
 }

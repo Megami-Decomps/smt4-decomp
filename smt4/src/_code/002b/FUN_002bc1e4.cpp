@@ -1,7 +1,6 @@
 /* NON_MATCHING: command writer uses different scratch registers and paired stores in its termination commands. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern u32 *g_commandBufferCursor;
 extern u32 *g_commandBufferEnd;
 void nngxLockEnter(void);
@@ -54,9 +53,9 @@ void FUN_002bc1e4(void)
     buffer->committedOffset = buffer->writeOffset;
     nngxLockEnter();
     ++buffer->listCount;
-    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled &&
-            !g_asdGfxContext.submission.pending) {
-        g_asdGfxContext.submission.pending = 1;
+    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submitEnabled &&
+            !g_asdGfxContext.submitPending) {
+        g_asdGfxContext.submitPending = 1;
         FUN_002ba2b8();
     }
     nngxLockLeave();

@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail retains an unreachable zero-ID iterator guard; readable fixed-range iteration omits it, and selector/state registers differ. */
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDown.h"
 
 
@@ -15,7 +16,6 @@ s32 FUN_00262cb0(u16 id);
 s32 table8Type5GetValue(u32 id);
 void uniteRequestScriptEntry(s32 mode);
 void buttonHelpSetPreset(s32 preset);
-void timerStart(void *timer, s32 running, s32 initial);
 s32 statusGetAvailableChoiceCount();
 void gridNavigationConfigure(void *selector, s32 count, s32 rows, s32 wrap, s32, s32);
 

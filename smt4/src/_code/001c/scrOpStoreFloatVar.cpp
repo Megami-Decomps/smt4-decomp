@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 scrOpStoreFloatVar(ScriptVmProcess *process)
+s32 scrOpStoreFloatVar(ScriptProcess *process)
 {
     f32 value = scrPopFloat(process);
 

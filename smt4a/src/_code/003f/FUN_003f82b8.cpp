@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
+#include "ui/UiSpriteApi.h"
 
 
 struct RenderCtx;
@@ -24,9 +25,6 @@ struct CampStatusScreen {
 };
 
 extern "C" {
-s32 vec2GetXInt(const void *position);
-s32 vec2GetYInt(const void *position);
-f32 vec2GetSpeed(const void *position);
 void efctSetSpeed(f32 speed);
 void FUN_003f5b14(void *owner, s32 y, u32 color, s32 firstX, s32 secondX, f32 alpha);
 void FUN_003f5d94(void *owner, s32 x, s32 y, f32 alpha);
@@ -37,18 +35,18 @@ void FUN_00164168(void *panel, s32 x, s32 y, u32 color, u32 layer, s32 value, f3
 // Draw the camp status screen for its current mode at the main sprite's position, then reset the draw speed.
 void FUN_003f82b8(CampStatusScreen *screen)
 {
-    s32 x = vec2GetXInt(screen->spriteA);
-    s32 y = vec2GetYInt(screen->spriteA);
-    f32 speed = vec2GetSpeed(screen->spriteA);
+    s32 x = vec2GetXInt((const UiSpriteState *)screen->spriteA);
+    s32 y = vec2GetYInt((const UiSpriteState *)screen->spriteA);
+    f32 speed = vec2GetSpeed((const UiSpriteState *)screen->spriteA);
 
     switch (screen->mode) {
     case 0:
     case 1:
     case 2:
     case 3: {
-        s32 secondX = vec2GetXInt(screen->spriteB);
-        s32 secondY = vec2GetYInt(screen->spriteB);
-        f32 secondSpeed = vec2GetSpeed(screen->spriteB);
+        s32 secondX = vec2GetXInt((const UiSpriteState *)screen->spriteB);
+        s32 secondY = vec2GetYInt((const UiSpriteState *)screen->spriteB);
+        f32 secondSpeed = vec2GetSpeed((const UiSpriteState *)screen->spriteB);
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         s32 drawX = x + parallax;
         efctSetSpeed(speed);

@@ -46,10 +46,8 @@ extern "C" {
 
 extern GimicList *g_mapGimic;
 
-void asdMdlManagerMarkDestroy(GimicObject *object);
 s32 FUN_0027cda0(void);
 void FUN_002671f4(s32 id, f32 x, f32 y, f32 z, f32 w, f32 a, f32 b, f32 c);
-void nodeSetTranslation(GimicObject *object, s32 index, f32 *position);
 void modelPartSetRotationDegrees(GimicObject *object, s32 index, f32 a, f32 b, f32 c);
 void modelSelectPrimaryMotion(GimicObject *object, f32 speed);
 
@@ -63,7 +61,8 @@ void FUN_00274fac(void)
         if (g_mapGimic->mode == 0) {
             for (i = 23; i >= 0; i--) {
                 if (g_mapGimic->entries[i].object != NULL) {
-                    asdMdlManagerMarkDestroy(g_mapGimic->entries[i].object);
+                    /* GimicObject is this unit's partial view of the model object (AsdMdlObject). */
+                    asdMdlManagerMarkDestroy(reinterpret_cast<AsdMdlObject *>(g_mapGimic->entries[i].object));
                 }
             }
         } else if (g_mapGimic->mode == 1) {
@@ -114,7 +113,8 @@ void FUN_00274fac(void)
                 entry->object->owner->model[0x1F6] = 1;
             }
             if (entry->dirty != 0) {
-                nodeSetTranslation(entry->object, 0, entry->position);
+                /* TODO: retail passes the object here as the model; see the GimicObject view. */
+                nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(entry->object), 0, entry->position);
                 modelPartSetRotationDegrees(entry->object, 0, 350.0f, entry->position[3], 350.0f);
                 if (((GimicNode *)entry->object)->motion != entry->motion) {
                     modelSelectPrimaryMotion(entry->object, 350.0f);

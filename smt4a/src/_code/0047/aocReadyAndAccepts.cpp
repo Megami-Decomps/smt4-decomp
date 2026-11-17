@@ -1,11 +1,8 @@
 #include "common.h"
+#include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
-
-extern u32 g_aocMain;
-
-s32 objHasFlagBit16(u32 aoc);
 
 /* True when the add-on content is ready and a package has a kind-0x38 record keyed `id`. */
 u32 aocReadyAndAccepts(AocSystemA *system, u32 id)

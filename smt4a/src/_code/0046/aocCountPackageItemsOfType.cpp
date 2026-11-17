@@ -5,7 +5,7 @@
 extern "C" {
 
 s32 asdFsIsSdCardDetected(void);
-s32 objGetFlagBit16(AocMainA *main);
+s32 objGetFlagBit16(AocMain *main);
 
 /* Counts the items of the given type across all valid packages; without an SD card clears AOC flag 0x10000 and returns 0. */
 s32 aocCountPackageItemsOfType(AocSystemA *system, s32 type)

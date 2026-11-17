@@ -31,14 +31,6 @@ typedef struct EffBlock {
     /* 0x28 */ void *ownedB;
 } EffBlock;
 
-/* One entry of the per-kind handler table (g_handlerTable, 0x44 bytes each): what a block's
- * `unk08` data object is made and copied with. */
-typedef struct EffBlockHandler {
-    /* 0x00 */ void *(*create)(EffBlock *src);   /* builds the data object for a block like `src` */
-    /* 0x04 */ u8 unk04[0x10];
-    /* 0x14 */ void *(*clone)(void *data);       /* copies a data object */
-    /* 0x18 */ u8 unk18[0x2c];
-} EffBlockHandler;
 
 /* Blob A's data address, or NULL if it has none. */
 static __inline void *effBlockDataA(EffBlock *block)

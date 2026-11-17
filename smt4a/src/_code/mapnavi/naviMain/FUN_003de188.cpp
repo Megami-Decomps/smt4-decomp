@@ -1,10 +1,10 @@
 /* NON_MATCHING: the queued-request block (offsets 0x1688..0x169c of the game flag block) is addressed through per-field pool constants in retail, so it keeps only r4-r9; the build CSEs the six field addresses into extra registers (sl/fp) and merges the 0x28/0x2c stores into an stm. naviMainDrawFade is a callback at 0x2ba728 that has no unit/symbol yet. */
 #include "AsdSDK/AsdDebug.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/NaviMain.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
@@ -44,7 +44,7 @@ void FUN_003de188(u32 unused, u32 argument)
     DeferredNavigationRequest *queued = (DeferredNavigationRequest *)gameFlagsGetBlock();
 
     navigation->active = 0;
-    navigation->unk00009 = 0;
+    navigation->positionSet = 0;
     navigation->posX = 0;
     navigation->posY = 0;
     navigation->thirdValue = 0;

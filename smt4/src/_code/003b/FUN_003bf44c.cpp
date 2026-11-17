@@ -3,6 +3,7 @@
 #include "common.h"
 #include "battle/BattleBalanceRow.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 // The timer override is beyond the shared IV battle-state prefix.
 struct BattleAmountWork {
@@ -10,7 +11,6 @@ struct BattleAmountWork {
     s32 elapsedMinutes; // 0x2f2c, -1 uses the system clock
 };
 extern "C" {
-void *gameGetSlotTable();
 u32 clockGetSecondsSinceStart();
 u32 saveBlockGetPlaySeconds();
 f32 FUN_002b99b8(f32 base, f32 exponent);

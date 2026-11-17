@@ -1,4 +1,4 @@
-/* The script virtual machine's process: an instruction cursor over 4-byte instructions and a small
+/* The script virtual machine's process (ScriptProcess): an instruction cursor over 4-byte instructions and a small
  * tagged value stack. The opcode handlers return 1 to keep running. */
 #ifndef SCRIPT_SCRIPTVM_H
 #define SCRIPT_SCRIPTVM_H
@@ -39,41 +39,48 @@ union ScriptVmValue {
     f32 f;
 };
 
-/* A jump target: the instruction index to continue at. */
+/* A name or label table entry of a script file (0x20 bytes): a function's name and the
+ * instruction index it starts at, or a jump target. */
 struct ScriptVmLabel {
-    /* 0x00 */ u8 unk00[0x18];
+    /* 0x00 */ s8 name[0x18];
     /* 0x18 */ s32 target;
     /* 0x1C */ u8 unk1c[4];
 };
 
-struct ScriptVmProcess {
-    /* 0x00 */ u8 unk00[0x18];
+struct ScriptFile;
+struct ScriptFileSection;
+
+/* A running script (scrScriptProcess.cpp, 0x10C bytes as scrScriptProcessCreate allocates it):
+ * the interpreter state every opcode and command receives, plus its links in the process list. */
+struct ScriptProcess {
+    /* 0x00 */ s8 name[0x18];                 /* the entry function's name */
     /* 0x18 */ s32 pc;                         /* index of the current instruction */
     /* 0x1C */ s32 depth;                      /* values on the stack */
     /* 0x20 */ u8 tags[0x1c];                  /* ScriptVmTag of each stack value */
     /* 0x3C */ ScriptVmValue values[0x1c];     /* the stack */
-    /* 0xAC */ union {
-        u8 unkAC[0xc];
-        struct {
-            u8 unkAC[8];
-            ScriptVmLabel *functions;
-        } tables;
-    };
+    /* 0xAC */ ScriptFile *file;
+    /* 0xB0 */ ScriptFileSection *sections;   /* the file's section table */
+    /* 0xB4 */ ScriptVmLabel *functions;      /* the file's name table */
     /* 0xB8 */ ScriptVmLabel *labels;
     /* 0xBC */ ScriptVmInstruction *code;
     /* 0xC0 */ u32 commandOwner;              /* the message commands' context word */
     /* 0xC4 */ u8 *dataBase;                  /* the script's data block; string operands are offsets into it */
-    /* 0xC8 */ u8 unkC8[4];
+    /* 0xC8 */ s32 functionIndex;             /* the entry function's name table index */
     /* 0xCC */ s32 stepCount;                 /* times the script has been stepped */
     /* 0xD0 */ u32 commandFrame;              /* frames the running command has waited */
-    /* 0xD4 */ u8 unkD4[4];
+    /* 0xD4 */ void *allocation;              /* heap block a command allocated, freed with the process */
     /* 0xD8 */ u32 workValues[4];             /* the script's work words */
     /* 0xE8 */ ScriptVmValue *intVariables;   /* values of the integer variables */
     /* 0xEC */ ScriptVmValue *floatVariables; /* values of the float variables */
+    /* 0xF0 */ ScriptProcess *prev;           /* links in g_scrScriptResources */
+    /* 0xF4 */ ScriptProcess *next;
+    /* 0xF8 */ u32 unkF8;
+    /* 0xFC */ u8 unkFC[0xC];
+    /* 0x108 */ s32 mode;                     /* run mode: callers set 2 to start the script */
 };
 
 /* Pushes a tagged value. Plain static (not __inline): armcc auto-inlines it with right-to-left argument evaluation, which the opcodes' load order shows. */
-static void scriptVmPush(ScriptVmProcess *process, u8 tag, u32 value)
+static void scriptVmPush(ScriptProcess *process, u8 tag, u32 value)
 {
     process->tags[process->depth] = tag;
     process->values[process->depth].u = value;
@@ -82,21 +89,23 @@ static void scriptVmPush(ScriptVmProcess *process, u8 tag, u32 value)
 
 /* Pushes a float value (tag SCRIPT_VM_TAG_FLOAT). Plain static like scriptVmPush; the f32
  * parameter (rather than its bits) gives retail's register order in the float opcodes. */
-static void scriptVmPushFloat(ScriptVmProcess *process, f32 value)
+static void scriptVmPushFloat(ScriptProcess *process, f32 value)
 {
     process->tags[process->depth] = SCRIPT_VM_TAG_FLOAT;
     process->values[process->depth].f = value;
     process->depth++;
 }
 
-typedef char ScriptVmProcessLayout[
-    offsetof(ScriptVmProcess, pc) == 0x18 && offsetof(ScriptVmProcess, tags) == 0x20 &&
-    offsetof(ScriptVmProcess, values) == 0x3c && offsetof(ScriptVmProcess, tables.functions) == 0xb4 &&
-    offsetof(ScriptVmProcess, labels) == 0xb8 && offsetof(ScriptVmProcess, code) == 0xbc &&
-    offsetof(ScriptVmProcess, commandOwner) == 0xc0 && offsetof(ScriptVmProcess, dataBase) == 0xc4 && offsetof(ScriptVmProcess, stepCount) == 0xcc && offsetof(ScriptVmProcess, commandFrame) == 0xd0 &&
-    offsetof(ScriptVmProcess, workValues) == 0xd8 &&
-    offsetof(ScriptVmProcess, intVariables) == 0xe8 && offsetof(ScriptVmProcess, floatVariables) == 0xec &&
-    sizeof(ScriptVmProcess) == 0xf0 && sizeof(ScriptVmValue) == 4 &&
+typedef char ScriptProcessLayout[
+    offsetof(ScriptProcess, pc) == 0x18 && offsetof(ScriptProcess, tags) == 0x20 &&
+    offsetof(ScriptProcess, values) == 0x3c && offsetof(ScriptProcess, functions) == 0xb4 &&
+    offsetof(ScriptProcess, labels) == 0xb8 && offsetof(ScriptProcess, code) == 0xbc &&
+    offsetof(ScriptProcess, commandOwner) == 0xc0 && offsetof(ScriptProcess, dataBase) == 0xc4 && offsetof(ScriptProcess, stepCount) == 0xcc && offsetof(ScriptProcess, commandFrame) == 0xd0 &&
+    offsetof(ScriptProcess, workValues) == 0xd8 &&
+    offsetof(ScriptProcess, intVariables) == 0xe8 && offsetof(ScriptProcess, floatVariables) == 0xec &&
+    offsetof(ScriptProcess, allocation) == 0xd4 && offsetof(ScriptProcess, prev) == 0xf0 &&
+    offsetof(ScriptProcess, mode) == 0x108 &&
+    sizeof(ScriptProcess) == 0x10c && sizeof(ScriptVmValue) == 4 &&
     sizeof(ScriptVmLabel) == 0x20 ? 1 : -1];
 
 /* The interpreter's global state: the binary operators' operand and result registers and the
@@ -110,7 +119,7 @@ struct ScriptContext {
     /* 0x14 */ f32 floatResult;
     /* 0x18 */ u32 topTag;        /* tag of the top of the stack */
     /* 0x1C */ u32 belowTag;      /* tag of the value below it */
-    /* 0x20 */ ScriptVmProcess *active;
+    /* 0x20 */ ScriptProcess *active;
 };
 
 typedef char ScriptContextLayout[
@@ -125,8 +134,8 @@ extern f32 g_scrFloatVars[0x180]; /* script float variables */
 extern "C" {
 
 /* Pops the top stack value of `process` as a float / an int, resolving variable references. */
-f32 scrPopFloat(ScriptVmProcess *process);
-s32 scrPopInt(ScriptVmProcess *process);
+f32 scrPopFloat(ScriptProcess *process);
+s32 scrPopInt(ScriptProcess *process);
 
 } /* extern "C" */
 

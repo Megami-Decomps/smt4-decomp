@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail loads the 0x12DC mode offset from its own pool word for the final store (the build derives it from 0x12F0) and schedules the kind-offset load after the instance load. */
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard0033.h"
 #include "font/ComWin/ComWin.h"
 
@@ -35,7 +36,6 @@ typedef char MenuSessionResetOffsetsCheck[offsetof(MenuSessionResetViewIV, first
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
-void timerStart(UiSpriteState *sprite, s32 duration, u32 flags);
 
 void FUN_0029e788()
 {

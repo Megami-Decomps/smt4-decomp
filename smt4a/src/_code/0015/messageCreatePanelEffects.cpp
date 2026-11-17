@@ -1,10 +1,9 @@
 #include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 void efctSetSpeed(f32);
-f32 vec2GetSpeed(const void *object);
 }
 
 /* Create four message effects using the panel's base and accent speed multipliers. */

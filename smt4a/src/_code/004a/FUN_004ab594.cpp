@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail keeps the unrolled reserve-mask tests as generic sign-extended 64-bit ANDs (constants 2/4/8 in registers, mask loaded by ldrd through an add-immediate address, one extra callee-saved register); built folds them to constants. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
 
@@ -11,7 +11,6 @@ struct BattlePartySelectionView {
 };
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 s32 FUN_002cc9e0(BtlUiObjCA *widget, u32 mode);
 u64 __aeabi_llsl(u64 value, u32 count);
 

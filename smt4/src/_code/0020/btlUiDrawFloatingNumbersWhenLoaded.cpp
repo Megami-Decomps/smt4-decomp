@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int btlDrawFloatingNumbers(void *obj, int arg);
 
-extern BtlUiGlobals g_btlUi;
 
 /* Counts the set entries of tables 0x14 (5 entries) and 0x15 (4 entries); with 9 or more, calls btlDrawFloatingNumbers. Returns 0. */
 s32 btlUiDrawFloatingNumbersWhenLoaded(u32 job)

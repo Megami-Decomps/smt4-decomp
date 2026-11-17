@@ -4,11 +4,11 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/S1Mover.h"
+#include "util/MathFunctions.h"
 
 struct MapVector;
 
 extern "C" {
-f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 void lmapSceneBeginPositionTransition(f32 x, f32 y, f32 z, f32 endX, f32 endY, f32 endZ);
 void lmapSceneBeginPositionTransition(f32 x, f32 y, f32 z, f32 endX, f32 endY, f32 endZ);
 }
@@ -97,7 +97,6 @@ void eplSlotApplyParameters(s32 index, s32 arg);
 extern "C" {
 #endif
 
-f32 mathVec3Dot(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 #ifdef __cplusplus
 }

@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "common.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 void byteScreenFadeUpdateDraw(void *fade);
 

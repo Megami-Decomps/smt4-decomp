@@ -1,8 +1,7 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern BtlUiGlobals g_btlUi;
 void btlUiTargetClear(BtlUiObjC *obj);
 
 /* Adds `id` to the battle UI's listed ids unless it is already there, then refreshes the column object. */

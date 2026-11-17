@@ -1,8 +1,7 @@
 /* NON_MATCHING: singleton panel-resume helper recovers both UI base registers, but their copy is made inside mode 14 rather than at entry. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiGlobals g_btlUi;
 void FUN_00206270(BtlUiObjC *);
 void playSceneTimerSubStart(BtlUiObjB *);
 void playSceneFadeInStart(BtlUiObjA *);

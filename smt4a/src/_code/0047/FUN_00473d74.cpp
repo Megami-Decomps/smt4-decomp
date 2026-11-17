@@ -1,7 +1,6 @@
 #include "common.h"
+#include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
-
-struct AocMain;
 
 extern "C" {
 u8 FUN_001d25dc(WindowStatusResult *result);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: ui pointer load and frame now match retail; only the address of command.position (`add lr, sp, #8`) is computed after the kind store here and before it in retail. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 struct UiPosition {
     f32 x, y, z;
@@ -15,7 +15,6 @@ struct BattleUiCommand {
 };
 
 extern "C" {
-extern BtlUiGlobals g_btlUi;
 u32 FUN_002d00a4(BtlUiObjC *, const BattleUiCommand *);
 
 // Queue a battle-UI command with its position and four halfword parameters.

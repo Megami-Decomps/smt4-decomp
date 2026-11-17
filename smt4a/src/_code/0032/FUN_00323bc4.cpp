@@ -5,7 +5,7 @@ extern "C" {
 // Duration reported by the resource type's handler, -1 when it has none.
 static s32 resourceDuration(Resource *resource)
 {
-    s32 (*duration)(void *) = g_handlerTable[resource->type].timeline.duration;
+    s32 (*duration)(void *) = g_handlerTable[resource->type].duration;
     if (duration == NULL) {
         return -1;
     }

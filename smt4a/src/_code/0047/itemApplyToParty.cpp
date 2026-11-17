@@ -1,9 +1,9 @@
 #include "shard/Shard0031.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 s32 itemApplyToMember(s32 slot, ConsumableRecordA *item, s32 mode, u32 *first, u32 *second);
-PartyStatusSlots *gameGetSlotTable(void);
 void flagValueSub(s32 itemId, s32 amount);
 
 /* Applies an item to the player and every filled party slot; returns 0 (consuming the item outside
@@ -16,9 +16,9 @@ s32 itemApplyToParty(s32 itemId, s32 mode)
         if (itemApplyToMember(-1, item, mode, NULL, NULL) == 0) {
             used = true;
         }
-        PartyStatusSlots *table = gameGetSlotTable();
+        SaveSlotTableA *table = gameGetSlotTable();
         for (s32 i = 0; i < 0x18; i++) {
-            s8 slot = table->active.slots[i];
+            s8 slot = table->party[i];
             if (slot >= 0 && itemApplyToMember(slot, item, mode, NULL, NULL) == 0) {
                 used = true;
             }

@@ -4,6 +4,7 @@
 #include "map/mapDepart.h"
 #include "map/MapActionMarker.h"
 #include "util/TrigF32.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ int FUN_0027fca0(unsigned int);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int mapEaseSceneHeading(void);
-f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 int buttonHelpSetPreset(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */

@@ -1,11 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/SelectionNotification.h"
 
-extern "C" void uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 delta);
-extern "C" void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 frame);
 extern "C" void FUN_0048a378(SelectionNotificationState *work);
 extern "C" s32 buttonHelpIsNotActive(void);
 struct ObjectFlagState;
-extern "C" s32 uiSpriteGetCompletionState(const ObjectFlagState *state);
 
 extern "C" void _ZN9Obj53230043selectionNotificationAdvanceEntryAnimationsEv(SelectionNotificationState *work)
 {
@@ -22,7 +20,7 @@ extern "C" void _ZN9Obj53230043selectionNotificationAdvanceEntryAnimationsEv(Sel
         }
         uiSpriteAdvanceAnimation(&work->auxiliary[1], 1.0f);
         uiSpriteAdvanceAnimation(&work->auxiliary[0], 1.0f);
-        if (uiSpriteGetCompletionState(reinterpret_cast<const ObjectFlagState *>(&work->entries[5])) && buttonHelpIsNotActive()) {
+        if (uiSpriteGetCompletionState((UiSpriteState *)(reinterpret_cast<const ObjectFlagState *>(&work->entries[5]))) && buttonHelpIsNotActive()) {
             work->state = 2;
             work->phase = 0;
         }

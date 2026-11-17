@@ -1,9 +1,8 @@
 /* NON_MATCHING: typed queue records fold position/attribute addresses differently and shorten the saved-register set. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "map/mapDepart.h"
 
 extern "C" {
-extern BtlUiGlobals g_btlUi;
 
 u32 FUN_0028a0d0(u32 flags, u32 value, u8 first, u8 second, s32 enabled, u32 mode, f32 x, f32 y, f32 z)
 {

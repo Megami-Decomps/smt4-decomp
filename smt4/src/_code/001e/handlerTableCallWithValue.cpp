@@ -1,28 +1,16 @@
-#include "common.h"
+#include "shard/Resource.h"
 
 extern "C" {
 
-typedef struct HandlerEntry {
-    /* 0x00 */ u8 unk00[0x30];
-    /* 0x30 */ void (*handler)(u32 arg, s32 value);
-    /* 0x34 */ u8 unk34[0x10];
-} HandlerEntry;
-
-typedef struct Request {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u16 index;
-    /* 0x6 */ u8 unk6[2];
-    /* 0x8 */ u32 arg;
-} Request;
-
-extern HandlerEntry g_handlerTable[];
-
-void handlerTableCallWithValue(Request *request, s32 value)
+/* Sets the resource's packed tint through its type's handler, if it has one. */
+void handlerTableCallWithValue(Resource *resource, u32 color)
 {
-    void (*handler)(u32 arg, s32 value) = g_handlerTable[request->index].handler;
+    void (*callback)(void *data, u32 color);
 
-    if (handler != NULL) {
-        handler(request->arg, value);
+    callback = g_handlerTable[resource->type].setPackedColor;
+    if (callback != NULL) {
+        callback(resource->data, color);
+        return;
     }
 }
 

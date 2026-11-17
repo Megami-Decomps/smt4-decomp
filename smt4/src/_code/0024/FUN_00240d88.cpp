@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00240d88` (_code @ 0x240d88, 0xaa0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
@@ -42,8 +43,6 @@ extern unsigned int demonGetRaceLabel(short, unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -82,8 +81,8 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   temp_v15 = param_2;
   temp_v16 = param_3;
-  temp_v1 = vec2GetXInt(temp_v9 + 0x354);
-  temp_v2 = vec2GetYInt(temp_v9 + 0x354);
+  temp_v1 = vec2GetXInt((UiSpriteState *)(temp_v9 + 0x354));
+  temp_v2 = vec2GetYInt((UiSpriteState *)(temp_v9 + 0x354));
   temp_v11 = 0xffffffff;
   temp_v10 = 0.0f;
   temp_v0 = *(short *)(g_screenStateWork + 0x1e);
@@ -292,9 +291,9 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     }
     else {
       if (temp_v16 != 0) {
-        temp_v5 = vec2GetXInt(temp_v9 + 0x610);
+        temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v9 + 0x610));
         temp_v5 = temp_v5 + *(short *)(temp_v3 + 8);
-        temp_v4 = vec2GetYInt(temp_v9 + 0x610);
+        temp_v4 = vec2GetYInt((UiSpriteState *)(temp_v9 + 0x610));
         temp_v4 = temp_v4 + *(short *)(temp_v3 + 10);
         if (temp_v10 < *(float *)(temp_v9 + 0x630)) {
           efctSetSpeed();

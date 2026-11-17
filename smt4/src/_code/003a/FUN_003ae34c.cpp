@@ -1,4 +1,4 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlMain.h"
 
@@ -6,7 +6,6 @@ extern "C" {
 
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
-extern BtlUiGlobals g_btlUi;
 
 /* Stores a unit record in the UI slot of the battle unit it names (first four units). */
 void FUN_003ae34c(u32 unused, BtlUiUnitRecord *record)

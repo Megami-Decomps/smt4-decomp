@@ -15,7 +15,7 @@ int FUN_00429934(int *, AocCatalogRequest *);
 int FUN_00429c08(int *, AocCatalogRequest *, int);
 int stringFormatUnbounded(...);
 int FUN_00473980(...);
-void aocApplicationRecreateDecoder(AocApplicationRequestView *app);
+void aocApplicationRecreateDecoder(struct AocMain *app);
 int FUN_004760bc(void);
 
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
@@ -233,7 +233,7 @@ void FUN_004767a8(int param_1)
     temp_v12[2] = temp_v0 + 0xe3;
     iStack_a4 = *(int *)(temp_v0 + 0x364);
   }
-  aocApplicationRecreateDecoder(reinterpret_cast<AocApplicationRequestView *>(temp_v0));
+  aocApplicationRecreateDecoder(reinterpret_cast<struct AocMain *>(temp_v0));
   FUN_00426e18(&temp_v8,*(unsigned int *)(temp_v0 + 0x5b0),*(unsigned int *)(temp_v0 + 0x684),0x40,temp_v12
               );
   *(unsigned int *)(param_1 + 0xc) = temp_v8;

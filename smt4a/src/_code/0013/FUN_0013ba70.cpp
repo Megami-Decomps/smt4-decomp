@@ -1,10 +1,8 @@
 #include "common.h"
+#include "addon/aocMain.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-struct AocMain;
-
 extern "C" {
-extern AocMain *g_aocMain;
 void *FUN_001482c0(void *memory);
 
 // Creates the 0xd68-byte add-on main object.

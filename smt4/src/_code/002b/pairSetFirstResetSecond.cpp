@@ -1,19 +1,8 @@
-#include "common.h"
-#include "sys/RuntimeObjects.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" {
-
-typedef struct Obj {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u32 unk8;
-} Obj;
-
-void pairSetFirstResetSecond(void *handle, u32 value)
+/* Shows image `image` of the sprite's texture table, dropping the secondary image. */
+extern "C" void pairSetFirstResetSecond(UiSpriteState *sprite, s32 image)
 {
-    Obj *obj = static_cast<Obj *>(handle);
-    obj->unk4 = value;
-    obj->unk8 = 0xffffffff;
+    sprite->image = image;
+    sprite->secondaryImage = -1;
 }
-
-} /* extern "C" */

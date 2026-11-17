@@ -13,10 +13,10 @@ struct NavigationFadeWork {
     /* 0x00164 */ u8 unk00164[0x368];
     /* 0x004CC */ u8 scene[4];
     /* 0x004D0 */ u8 unk004D0[0x770];
-    /* 0x00C40 */ UiAnimatedSprite sprites[6];
+    /* 0x00C40 */ UiSpriteState sprites[6];
     /* 0x00F88 */ u8 unk00F88[0x118];
-    /* 0x010A0 */ UiAnimatedSprite headerSprite;
-    /* 0x0112C */ UiAnimatedSprite footerSprite;
+    /* 0x010A0 */ UiSpriteState headerSprite;
+    /* 0x0112C */ UiSpriteState footerSprite;
     /* 0x011B8 */ u8 unk011B8[0x69D8];
     /* 0x07B90 */ u8 flag7B90;
     /* 0x07B91 */ u8 flag7B91;

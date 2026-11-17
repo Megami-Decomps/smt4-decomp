@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 
 extern "C" {

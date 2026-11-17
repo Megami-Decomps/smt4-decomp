@@ -5,6 +5,7 @@
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern ItemWindow *g_sWin;
 
 s32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *motion);
 s32 textureIdIsLoaded(s16 item);
 u32 texDrawTableEntrySized(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, s32 flag);
 
@@ -61,7 +61,7 @@ u32 sWinDrawItemIcon(void)
     s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + (frame->x - (s32)(width >> 1)) + window->offsetX;
     s32 y = frame->y - (s32)(height >> 1);
 
-    efctSetSpeed(vec2GetSpeed(&window->motion));
+    efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&window->motion));
     if (textureIdIsLoaded((s16)window->item) != 0) {
         texDrawTableEntrySized(2, 0x34, texture, x, y, width, height, 21);
     }

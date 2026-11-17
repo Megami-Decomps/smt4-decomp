@@ -1,5 +1,5 @@
 #include "map/NavigationInterpolation.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 /* The navigation panel's work block (see NavigationFadeWork for the shared prefix). */
 struct NavigationIntroWork {

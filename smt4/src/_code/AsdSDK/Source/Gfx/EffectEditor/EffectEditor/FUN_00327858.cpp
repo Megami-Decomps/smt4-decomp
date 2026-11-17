@@ -1,4 +1,5 @@
 /* NON_MATCHING: Paired default-state addresses and reset stores are formed differently. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 #include "AsdSDK/EffectEditorDefaults.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"

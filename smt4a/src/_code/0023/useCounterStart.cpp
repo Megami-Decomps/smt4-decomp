@@ -1,6 +1,6 @@
 /* NON_MATCHING: the global pool load is placed before the push (retail: right after it) and the count/value/loop scratch registers are numbered differently; the loop reads count in its condition like retail. */
 #include "shard/Shard0033.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "event/2dEvent/2dEventTex.h"
 
 extern "C" {

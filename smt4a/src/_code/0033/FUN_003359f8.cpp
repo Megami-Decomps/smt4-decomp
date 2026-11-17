@@ -3,20 +3,14 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct PartyInsertionStateView {
     u8 prefix[0x2000];
     s16 count;
 };
-/* SlotTable ends at 0x1CA0; the owning block supplies the member count. */
-struct PartyInsertionSlots {
-    SlotTable table;
-    u8 padding[3];
-    u8 count;
-};
 extern "C" {
 s32 scrGetArg(u32);
-PartyInsertionSlots *gameGetSlotTable(void);
 void FUN_004fcf0c(s32, s32, s32, s32, s32, s32);
 }
 
@@ -46,10 +40,10 @@ extern "C" u32 FUN_003359f8(void)
             }
         }
         if (freeSlot >= 0) {
-            PartyInsertionSlots *slots = gameGetSlotTable();
+            SaveSlotTableA *slots = gameGetSlotTable();
             s32 member = -1;
             for (s32 i = 0; i < slots->count; ++i) {
-                if (slots->table.slots[i] == id - 0x6D) {
+                if (slots->party[i] == id - 0x6D) {
                     member = i;
                     break;
                 }

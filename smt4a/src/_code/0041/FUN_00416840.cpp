@@ -1,10 +1,9 @@
 /* NON_MATCHING: finished/visible flag loads and frame reload scheduling differ; animation speed restored. */
+#include "ui/UiSpriteApi.h"
 #include "ui/AnimatedMessageSlots.h"
 
 extern "C" {
-void uiSpriteAdvanceAnimation(UiSpriteState *, f32);
 void msgBoxFlagsClearBit7(u32);
-void pairSetFirstResetSecond(UiSpriteState *, s32);
 
 // Advance twelve message indicators through opening, looping, and closing animations.
 void FUN_00416840(AnimatedMessageSlot *slots)

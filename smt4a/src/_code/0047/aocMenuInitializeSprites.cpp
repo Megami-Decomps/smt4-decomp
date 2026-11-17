@@ -1,11 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include "text/TextDraw.h"
 #include "addon/AocSystem_Smt4a.h"
 
-struct AocUiSprite {
-    u8 data[0x8c];
-};
 
 struct AocSpriteLayout {
     s8 frames[24];
@@ -14,8 +12,8 @@ struct AocSpriteLayout {
 struct AocMenuSprites {
     /* 0x0000 */ u8 unk0000[0x35c];
     /* 0x035c */ UiResourceParameters parameters;
-    /* 0x037c */ AocUiSprite entries[24];
-    /* 0x109c */ AocUiSprite header;
+    /* 0x037c */ UiSpriteState entries[24];
+    /* 0x109c */ UiSpriteState header;
     /* 0x1128 */ u8 unk1128[0x88];
     /* 0x11b0 */ u8 panel[0x415];
     /* 0x15c5 */ u8 ready;
@@ -28,14 +26,12 @@ extern "C" {
 extern const char DAT_00526308[];
 void paramsClearPacket(UiResourceParameters *);
 
-void uiSpriteStateInitFromSource(AocUiSprite *, s32 group, s32 image, UiResourceParameters *, s32 flags, f32 scale);
-void uiSpriteSetImageKeyframe(AocUiSprite *, s32 keyframe, s32 flags);
-void uiStoreTextureEntryCenter(AocUiSprite *, s32 group, s32 image);
+void uiStoreTextureEntryCenter(UiSpriteState *, s32 group, s32 image);
 void FUN_0015f258(void *panel);
 u32 spriteHandleCreate(s32 flags);
 void positionStateSet(u32 handle, s32 slot, u32 color, f32 duration);
 void FUN_004cf7cc(void *control);
-void aocMenuSetReadyFlag(AocMainA *owner, u8 ready);
+void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
 
 // Initialize the AOC menu's common sprite resources, entry frames and background.
 void aocMenuInitializeSprites(AocMenuSprites *menu)

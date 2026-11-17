@@ -1,12 +1,13 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "shard/NaviMain_GetCursorPos.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 u8 *NaviMain_GetCursorPos(void)
 {
-    return g_naviMain->cursorPos;
+    /* Callers read the cursor through the byte pointer the shared prototype returns. */
+    return reinterpret_cast<u8 *>(&g_naviMain->cursor);
 }
 
 } /* extern "C" */

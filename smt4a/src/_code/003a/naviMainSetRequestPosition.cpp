@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "common.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 void menuRequestActivate(u32 *request, s32 mode, s32 x, s32 y);
 

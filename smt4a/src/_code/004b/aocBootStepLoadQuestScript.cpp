@@ -3,9 +3,9 @@
 
 extern "C" {
 
-s32 scriptHolderUpdateForward(AocMainAObjC *holder);
-void scriptHolderFree2(AocMainAObjC *holder);
-void FUN_0047e430(AocMainAObjC *holder, s32 arg);
+s32 scriptHolderUpdateForward(AocScriptHolder *holder);
+void scriptHolderFree2(AocScriptHolder *holder);
+void FUN_0047e430(AocScriptHolder *holder, s32 arg);
 s32 gameBlockByte27E98Is1To3(void);
 void FUN_004731d8(void);
 void infoWinSetValue(s32 enabled);

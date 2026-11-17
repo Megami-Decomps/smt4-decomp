@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "ui/UiSpriteApi.h"
 
 /* Window, menu, dialog and touch-region control. */
 extern "C" {
@@ -36,7 +37,5 @@ void statusDownSwitchTab(u32 tab);
 
 void touchLayoutRebuildRegions(void *layout);
 
-/* `sprite` is any playing sprite object (its resource and playback state are at fixed offsets). */
-void uiSpriteSelectAnim(void *sprite, s32 group);
 
 } /* extern "C" */

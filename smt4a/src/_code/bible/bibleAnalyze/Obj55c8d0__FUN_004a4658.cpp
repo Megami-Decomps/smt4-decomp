@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack frame (key/message placement), saved-register numbering and the state/step STRD pair differ; branch layout now matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
@@ -43,8 +44,6 @@ u32 shopListItemGetId(const BibleAnalyzeListEntry *entry);
 extern AnalyzeSuffixGlobals DAT_0057f0a0;
 extern const char DAT_0052b5bc[], DAT_0052b5c4[];
 s32 entryDispatchUpdate(void *buttons, s32 index);
-s32 vec2GetYInt(const f32 *point);
-s32 vec2GetXInt(const f32 *point);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 void sysPlaySe(u32 sound);
 const char *dataLookupDisplayName(u32 *key, u32 id);
@@ -62,8 +61,8 @@ void Obj55c8d0::FUN_004a4658()
     s32 activated = entryDispatchUpdate(screen->block0DC, screen->unkA872);
     AnalyzeButtonsView *buttons = reinterpret_cast<AnalyzeButtonsView *>(screen);
     f32 *position = buttons->buttons[screen->unkA872].position;
-    s32 y = vec2GetYInt(position);
-    s32 x = vec2GetXInt(position);
+    s32 y = vec2GetYInt((UiSpriteState *)position);
+    s32 x = vec2GetXInt((UiSpriteState *)position);
     pointConvertToFloat(screen->cursor.position, x, y);
     if (activated == 0)
         return;

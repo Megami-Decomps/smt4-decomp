@@ -1,13 +1,11 @@
 /* NON_MATCHING: unit/denominator register retention replaces retail spills/reloads; inner-loop limit and minimum-experience branch lowering differ, possibly under alternate optimization. */
 #include "shard/PadState.h"
+#include "shard/PassiveSkill.h"
+#include "result/Result.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTableIV.h"
 
-struct ExperienceResult {
-    u8 unk0000[0x35b4];
-    s32 playerExperience;
-    s32 unitExperience[24];
-};
 struct ExperienceParty {
     u8 unk0000[0x90f0];
     s8 slots[24];
@@ -22,23 +20,16 @@ struct ExperienceUnit {
     u8 resultIndex;
     u8 unk4b;
 };
-struct ExperienceSkill {
-    u8 unk00[0x2f];
-    u8 percentage;
-};
 
 extern "C" {
-extern ExperienceResult *g_result;
-u8 *gameGetSlotTable();
 u16 dataTable09Sub3GetRecord(s32, s32);
 u8 playerPadTestBit(u32);
 ExperienceUnit *gameGetUnitRecord(u32);
-ExperienceSkill *passiveSkillLookupRecord(u32);
 
 // Each reward consists of the base experience followed by the defeated unit's level.
 void resultAddExperienceReward(const s32 *reward)
 {
-    ExperienceResult *result = g_result;
+    ResultWork *result = g_result;
     ExperienceParty *party = (ExperienceParty *)gameGetSlotTable();
     PadState *player = reinterpret_cast<PadState *>(gameGetPlayerData());
     s32 base = reward[0];
@@ -48,7 +39,7 @@ void resultAddExperienceReward(const s32 *reward)
         playerExperience = 1;
     }
     if (!playerPadTestBit(1) && !playerPadTestBit(10)) {
-        result->playerExperience += playerExperience;
+        result->totalExperience += playerExperience;
     }
     for (s32 index = 0; index < 24; ++index) {
         if (party->slots[index] < 0) {
@@ -64,9 +55,9 @@ void resultAddExperienceReward(const s32 *reward)
         for (s32 skillIndex = 0; skillIndex < 8; ++skillIndex) {
             u16 skillId = experienceUnit->skills[skillIndex];
             if (skillId != 0) {
-                ExperienceSkill *skill = passiveSkillLookupRecord(skillId);
-                if (skill != NULL && skill->percentage != 0) {
-                    multiplier = (f32)(u32)skill->percentage * 0.01f * multiplier;
+                const PassiveSkillRecord *skill = passiveSkillLookupRecord(skillId);
+                if (skill != NULL && skill->experience.expBonus != 0) {
+                    multiplier = (f32)(u32)skill->experience.expBonus * 0.01f * multiplier;
                 }
             }
         }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00149ae0` (_code @ 0x149ae0, 0xca4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
 
@@ -112,7 +113,6 @@ extern int DAT_0058919c; /* 0x58919c */
 extern int DAT_005891a0; /* 0x5891a0 */
 extern int g_commandBufferCursor; /* 0x5b40e0 */
 extern int g_commandBufferEnd; /* 0x5b40e4 */
-extern unsigned int g_asdGfxContext; /* 0x61a470 */
 extern unsigned int DAT_0061a474; /* 0x61a474 */
 extern unsigned int DAT_0061a478; /* 0x61a478 */
 extern unsigned int DAT_0061a47c; /* 0x61a47c */
@@ -177,8 +177,8 @@ unsigned int FUN_00149ae0(romwright_code *param_1,romwright_code *param_2)
   if ((param_1 == (romwright_code *)0x0 || param_2 == (romwright_code *)0x0) || (DAT_0061a480 != '\0')) {
     return 0;
   }
-  sysMemClear(&g_asdGfxContext,0x180);
-  g_asdGfxContext = 0xf0;
+  sysMemClear(&g_asdGfxContext,sizeof(g_asdGfxContext));
+  g_asdGfxContext.unk000 = 0xf0;
   DAT_0061a474 = 0xf0;
   DAT_0061a478 = 400;
   DAT_0061a47c = 0x140;

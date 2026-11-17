@@ -1,9 +1,9 @@
 /* NON_MATCHING (b1454): arm layout and the absolute-value compare match; retail loads previous/point as vldmia triples (vldm, vstmia {s1-s3}) and keeps the point kind load per arm. */
 #include "shard/W6_W6Match2_VectorQueue.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
 extern VectorQueueWork *g_vectorQueueWork;
-f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 // Finish the active path by storing each point's direction toward its predecessor.
 void FUN_001e33e4(void)

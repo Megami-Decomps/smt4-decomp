@@ -1,12 +1,12 @@
-#include "common.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
 
-void vec3CopyFromOffsetC(u32 *obj)
+void vec3CopyFromOffsetC(u32 *object)
 {
-    obj[0] = obj[3];
-    obj[1] = obj[4];
-    obj[2] = obj[5];
+    object[0] = object[3];
+    object[1] = object[4];
+    object[2] = object[5];
 }
 
 } /* extern "C" */

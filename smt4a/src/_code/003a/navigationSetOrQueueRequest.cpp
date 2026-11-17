@@ -1,9 +1,9 @@
 /* Applies a navigation request now, or saves it until the navigation screen opens. */
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
 
 void navigationSetOrQueueRequest(u32 first, u32 second, u32 third, f32 x, f32 y)

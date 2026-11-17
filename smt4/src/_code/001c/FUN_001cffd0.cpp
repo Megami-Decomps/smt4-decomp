@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
+#include "shard/PassiveSkill.h"
 
 /* A skill-learning candidate pool: pick the best candidate and move it to the chosen list. */
 struct SkillPicker {
@@ -19,8 +20,6 @@ struct SkillPicker {
 
 extern "C" {
 s32 idMapLookup(u32 id);
-void *passiveSkillLookupRecord(u32 id);
-s32 FUN_0026a604(void *passive, void *skill);
 
 /* Scores every candidate (power, plus a bonus for the wanted kind and for a held passive that
  * boosts it, minus a penalty for kinds and elements already chosen), moves the best one (the lower id
@@ -41,7 +40,7 @@ u32 FUN_001cffd0(SkillPicker *picker)
         s32 kind = idMapLookup(skill);
         if (picker->wantedKind == kind)
             score += 1.0f;
-        void *skillData = skillDataFindById(skill);
+        const SkillDataRecord *skillData = skillDataFindById(skill);
         if (skillData != NULL) {
             for (s32 j = 0; j < picker->passiveCount; j++) {
                 if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), skillData)) {

@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 

@@ -7,9 +7,8 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 s32 FUN_00176474(AocSystemA *system);
-s32 sysLightEventTryWait(AocObjB *event);
+s32 sysLightEventTryWait(LightEvent *event);
 void aocReleasePackageOwner(AocSystemA *system);
 void FUN_001b3428(u32 *waitHandle);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
@@ -21,7 +20,7 @@ u32 FUN_0015f0f4(u32 job)
     AocJobWork *work = (AocJobWork *)jobGetWork(job);
 
     if (work->operationActive == 1 && work->requestId == work->completedId &&
-        FUN_00176474(g_aocSystem) != 0 && sysLightEventTryWait(&g_aocMain->objB) != 0) {
+        FUN_00176474(g_aocSystem) != 0 && sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         aocReleasePackageOwner(g_aocSystem);
         RequestParameters request;

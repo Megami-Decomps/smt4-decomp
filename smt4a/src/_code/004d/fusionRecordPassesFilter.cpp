@@ -42,7 +42,6 @@ typedef char RecordFilterOffsets[sizeof(RecordFilter) == 0x1B8 &&
 
 extern "C" {
 
-s32 slotRecordFindById(u32 id);
 
 /* Whether the record `recordId` passes the filter, with the two member ids given for the party-slot conditions. */
 s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32 recordId)

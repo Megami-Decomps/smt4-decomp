@@ -1,4 +1,5 @@
 /* NON_MATCHING: clear-mode stores/calls are predicated, while global-work loading, mode-loop NOP placement and the common exit differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
 struct ButtonHelpContextRecord {
@@ -9,10 +10,8 @@ struct ButtonHelpContextRecord {
 
 extern "C" {
 ButtonHelpContextRecord *dataTableGetEntry0e(u32 context);
-void spriteStartAnimationByIndex(ButtonHelpDisplayUnit *unit, s32 selected);
 void ifTouchDecrementTimer(void);
-void FUN_002a9fdc(ButtonHelpDisplayUnit *unit, s32 state, s32 mode);
-void timerStart(ButtonHelpDisplayUnit *unit, s32 state, s32 mode);
+void FUN_002a9fdc(UiSpriteState *unit, s32 state, s32 mode);
 }
 
 static __inline void buttonHelpReleaseSelections(ButtonHelpSelectionViewIV *work)

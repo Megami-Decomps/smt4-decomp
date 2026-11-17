@@ -1,10 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "gfx/SpritePartDraw.h"
 /* NON_MATCHING: label-draw argument setup/literal ordering, frame /5 multiply operands, and final zero-return scheduling differ; loading-dot loop instructions agree. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
-#include "gfx/SpritePartDraw.h"
 #include "text/TextDraw.h"
-#include "util/MathFunctions.h"
 #include "gfx/StereoParallax.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "camp/RenderCtx.h"
@@ -53,7 +52,6 @@ extern "C" {
 extern RunWin *DAT_0043e170;
 
 void gxResetColorQuadToWhite(void);
-s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 alpha);
 u32 renderCtxPackPassFlags(s32 a, s32 b);
 
@@ -66,8 +64,8 @@ u8 FUN_001acdd8(void)
         renderCtxSelectStereoLayout(g_titleScene);
         RenderCtx *first = g_titleScene;
         titleScenePushFirst(first, renderCtxPackPassFlags(1, 0));
-        s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
-        s32 y = vec2GetYInt(win->anchor);
+        s32 x = vec2GetXInt((UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
+        s32 y = vec2GetYInt((UiSpriteState *)win->anchor);
         efctSetSpeed(win->alpha);
         texDrawCompositeSprite(2, 14, 0x14, x, y, 101);
         RenderCtx *scene = g_titleScene;

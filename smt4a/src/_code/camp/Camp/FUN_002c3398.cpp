@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c3398` (_code @ 0x2c3398, 0x644 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "game/GameStateA.h"
 #include "romwright_types.h"
@@ -16,12 +17,9 @@ int scrollListSetSelectionTracked(...);
 int gameGlobalsSetMenuOpenFlag(...);
 int slotPlacementAssignSlotPosition(...);
 
-int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
 int gameGetSlotTable(...);
 int __aeabi_memset4(...);
 int FUN_0020d700(...);
@@ -167,29 +165,29 @@ void FUN_002c3398(void)
   paramsClearPacket();
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar4),&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,
                0x4d0);
-  uiSpriteStateInitFromSource(puVar2 + 0x196,0x14,0,puVar4,0xc9);
-  uiSpriteStateInitFromSource(puVar2 + 0x1b9,0x14,0,puVar4,0xc9);
-  uiSpriteSetKeyframe(puVar2 + 0x1b9,1,0);
-  uiSpriteStateInitFromSource(puVar2 + 0x1dc,0x14,0,puVar4,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x1dc,10);
-  uiSpriteStateInitFromSource(puVar2 + 0x1ff,0x14,0,puVar4,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x1ff,2);
-  uiSpriteStateInitFromSource(puVar2 + 0x222,0x14,0,puVar4,0xc9);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x196),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x1b9),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
+  uiSpriteSetKeyframe((UiSpriteState *)(puVar2 + 0x1b9),1,0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x1dc),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x1dc),10);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x1ff),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x1ff),2);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x222),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
   temp_v6 = 0;
   do {
-    uiSpriteStateInitFromSource(puVar2 + temp_v6 * 0x23 + 0x245,0x14,0x22,puVar4,0xc9);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + temp_v6 * 0x23 + 0x245),0x14,0x22, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
-  uiSpriteStateInitFromSource(puVar2 + 0x35d,0x14,0,puVar4,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x35d,1);
-  uiSpriteStateInitFromSource(puVar2 + 0x380,0x14,0,puVar4,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x380,9);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x35d),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x35d),1);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x380),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x380),9);
   campSetSpriteAnimationPreset(2,1,0xffffffff,0);
   FUN_002f78a0(puVar2);
-  uiSpriteStateInitFromSource(puVar2 + 0x682,0x14,0,puVar4,2);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x682),0x14,0, (UiResourceParameters *)(puVar4),2, 1.0f);
   *(unsigned char *)(puVar2 + 0x6c8) = 0;
-  uiSpriteStateInitFromSource(puVar2 + 0x6a5,0x14,0,puVar4,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x6a5,0xb);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x6a5),0x14,0, (UiResourceParameters *)(puVar4),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x6a5),0xb);
   puVar4 = g_camp;
   puVar11 = g_camp + 0xcac;
   *(unsigned char *)puVar11 = 0;
@@ -422,7 +420,7 @@ LAB_002c49c4:
                 }
                 else {
                   *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
-                  uiSpriteSetKeyframe(temp_v1 + 0x180,5,0);
+                  uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + 0x180),5,0);
                   temp_v2 = 0;
                   do {
                     slotPlacementAssignSlotPosition(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),
@@ -446,7 +444,7 @@ LAB_002c49c4:
               }
               else {
                 *(unsigned int *)(g_partyPanel + 0x2c) = *(unsigned int *)(g_partyPanel + 0x2c) ^ 1;
-                uiSpriteSetKeyframe(temp_v1 + 0x180,4,0);
+                uiSpriteSetKeyframe((UiSpriteState *)(temp_v1 + 0x180),4,0);
                 temp_v2 = 0;
                 do {
                   slotPlacementAssignSlotPosition(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0xa10),

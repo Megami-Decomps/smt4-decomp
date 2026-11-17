@@ -1,9 +1,9 @@
 #include "shard/Shard0032.h"
 #include "shard/W6_W6Match3_ContentWordList.h"
 #include <string.h>
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-UnitRecord *slotRecordFindById(u32 id);
 void unitRecordBuild(u32 id, UnitRecord *record);
 void FUN_0035ad50(u32 id, UnitRecord *record);
 void unitRecomputeDerivedStats(UnitRecord *record);
@@ -11,7 +11,7 @@ void unitRecomputeDerivedStats(UnitRecord *record);
 // Union inherited flags from the twelve selected saved or template unit records.
 void unitRecordMergeInheritedFlags(u32, const ContentWordList *sources, UnitRecord *destination)
 {
-    memset(destination->inheritance.flags, 0, sizeof(destination->inheritance.flags));
+    memset(destination->inheritedFlags, 0, sizeof(destination->inheritedFlags));
     UnitRecord temporary;
     const UnitRecord *record = reinterpret_cast<const UnitRecord *>(sources);
     for (s32 index = 0; index < 12; ++index) {
@@ -28,7 +28,7 @@ void unitRecordMergeInheritedFlags(u32, const ContentWordList *sources, UnitReco
                 record = &temporary;
             }
             for (s32 byte = 0; byte < 0x40; ++byte) {
-                destination->inheritance.flags[byte] |= record->inheritance.flags[byte];
+                destination->inheritedFlags[byte] |= record->inheritedFlags[byte];
             }
         }
     }

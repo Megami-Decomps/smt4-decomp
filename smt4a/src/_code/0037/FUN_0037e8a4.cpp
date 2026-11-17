@@ -1,9 +1,10 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 164 rows); register allocation and constant hoisting (0.26f parallax depth, layer ids) differ */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "util/MathFunctions.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/SaveSlotTable.h"
 
 // Draw-state stack embedded in the render context.
 struct DrawRing {
@@ -40,10 +41,8 @@ extern "C" {
 
 extern RenderCtx* g_renderCtx;
 
-s32 vec2GetYInt(void* sprite);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void efctSetSpeed(f32 speed);
-void* saveSlotFindSelected(void);
 
 static void setDrawState(s32 value)
 {
@@ -61,8 +60,8 @@ static void setDrawState(s32 value)
 void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
 {
     void* titleSprite = hud->titleSprite;
-    s32 baseX = vec2GetXInt(titleSprite);
-    s32 baseY = vec2GetYInt(titleSprite);
+    s32 baseX = vec2GetXInt((UiSpriteState *)titleSprite);
+    s32 baseY = vec2GetYInt((UiSpriteState *)titleSprite);
     s32 x = baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(reinterpret_cast<UiSprite*>(titleSprite)->scale * alpha);
     for (s32 i = 0; i < 3; i++) texDrawTableEntryAtStoredOrigin(2, 0x14, 0xc08 + i, x, baseY, 0xbf);
@@ -71,8 +70,8 @@ void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
     void* cardSprite = hud->cardSprite;
     if (hud->cardVisible == 0 || saveSlotFindSelected() == NULL) return;
 
-    s32 cardX = vec2GetXInt(cardSprite);
-    s32 cardY = vec2GetYInt(cardSprite);
+    s32 cardX = vec2GetXInt((UiSpriteState *)cardSprite);
+    s32 cardY = vec2GetYInt((UiSpriteState *)cardSprite);
     TextureTableEntryIV* frame = asdTMTexTableEntryAt(0x14, 0xbd9);
     s32 frameX = cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + frame->x;
     s32 frameY = cardY + frame->y;

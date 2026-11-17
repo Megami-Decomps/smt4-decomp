@@ -4,15 +4,15 @@
 #include "camp/CampCec/CampCecSetting.h"
 #include "script/scrScriptProcess.h"
 #include "code/Code002e_Smt4a.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
 extern CampCecSetting *g_campCecSetting;
 
-u32 scrScriptProcessCreate(void *fileA, void *fileB);
-s32 scrRunOpcodesStub(u32 script);
-void scrScriptProcessStartEntry(u32 script, s32 entry);
-void scriptProcessSetMode(ScriptRunState *script, s32 mode);
+s32 scrRunOpcodesStub(ScriptProcess *script);
+void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
+void scriptProcessSetMode(ScriptProcess *script, s32 mode);
 s32 messageGetChoiceResult(void);
 void sysPlaySe(s32 id);
 s32 cecProcessGetValue(void);
@@ -27,7 +27,6 @@ void stateAtF4Destroy(void);
 void gameDataBlocksSetFlagBits(u32 flag, s32 value);
 s32 gameDataTestFlags(u32 flag);
 
-void gameGetSlotTable(void);
 
 /* The CEC settings screen's per-frame update (the task callback campCecSettingOpen installs):
  * creates the script from the two loaded files, then steps through the answer flow (stages 0-9)
@@ -39,10 +38,10 @@ u32 FUN_002c049c(void)
 
     if (setting->started == 0) {
         if (setting->heapA != NULL && setting->heapB != NULL) {
-            u32 script = scrScriptProcessCreate(setting->heapA, setting->heapB);
+            ScriptProcess *script = scrScriptProcessCreate(setting->heapA, setting->heapB);
 
             setting->resource = script;
-            scriptProcessSetMode(reinterpret_cast<ScriptRunState *>(script), 2);
+            scriptProcessSetMode(script, 2);
             setting->started = 1;
         }
     } else if (setting->done == 0) {

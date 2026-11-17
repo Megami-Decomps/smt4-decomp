@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: corrected next-dot snapshot, native aligned label copy, and signed animation getter; font-settings ownership, stack layout and saved work/context registers still differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -38,8 +38,6 @@ void renderCtxPopState(RenderCtxA *context, s32 index);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
-void uiSpriteAdvanceAnimation(void *anchor, f32 alpha);
-s8 uiSpriteGetCompletionState(const void *animation);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
@@ -52,7 +50,7 @@ void FUN_0048b514(SpinnerWork *work)
     efctSetSpeed(1.0f);
     gxResetColorQuadToWhite();
     u8 *anchor = (u8 *)work + 0x12DC;
-    texDrawCompositeSprite(2, 19, 29, vec2GetXInt(anchor), 0, 211);
+    texDrawCompositeSprite(2, 19, 29, vec2GetXInt((UiSpriteState *)anchor), 0, 211);
     work->tick = (work->tick + 1) % g_uiTextFontSettings.tickLength;
     if (work->tick <= 0)
         work->phase++;
@@ -62,26 +60,26 @@ void FUN_0048b514(SpinnerWork *work)
         TextureTableEntryIV *point = asdTMTexTableEntryAt(19, 0x1124 + i);
         points[i].x = (f32)point->x;
         points[i].y = (f32)point->y;
-        texDrawTableEntryAtStoredOrigin(1, 19, 0x1121, vec2GetXInt(anchor) + point->x, point->y, 6);
+        texDrawTableEntryAtStoredOrigin(1, 19, 0x1121, vec2GetXInt((UiSpriteState *)anchor) + point->x, point->y, 6);
     }
-    texDrawTableEntryAtStoredOrigin(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[work->phase].x), (s32)points[work->phase].y, 6);
-    texDrawTableEntryAtStoredOrigin(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[next].x), (s32)points[next].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1123, (s32)((f32)vec2GetXInt((UiSpriteState *)anchor) + points[work->phase].x), (s32)points[work->phase].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1122, (s32)((f32)vec2GetXInt((UiSpriteState *)anchor) + points[next].x), (s32)points[next].y, 6);
     s32 opposite = (work->phase + 4) & 7;
     s32 oppositeNext = (opposite + 1) & 7;
-    texDrawTableEntryAtStoredOrigin(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[opposite].x), (s32)points[opposite].y, 6);
-    texDrawTableEntryAtStoredOrigin(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[oppositeNext].x), (s32)points[oppositeNext].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1123, (s32)((f32)vec2GetXInt((UiSpriteState *)anchor) + points[opposite].x), (s32)points[opposite].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 19, 0x1122, (s32)((f32)vec2GetXInt((UiSpriteState *)anchor) + points[oppositeNext].x), (s32)points[oppositeNext].y, 6);
     TextureTableEntryIV *label = asdTMTexTableEntryAt(19, 0x1120);
     char text[27];
     __aeabi_memcpy4(text, "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44", sizeof(text));
-    textDrawString(4, g_uiTextFontSettings.font, text, (f32)(vec2GetXInt(anchor) - 20 + label->x), (f32)label->y, 0.0f,
+    textDrawString(4, g_uiTextFontSettings.font, text, (f32)(vec2GetXInt((UiSpriteState *)anchor) - 20 + label->x), (f32)label->y, 0.0f,
                  0.0f, 1.0f);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
-    uiSpriteAdvanceAnimation(anchor, 1.0f);
+    uiSpriteAdvanceAnimation((UiSpriteState *)anchor, 1.0f);
     if (work->requested == 0) {
         return;
     }
-    if (uiSpriteGetCompletionState(anchor) != 0) {
+    if (uiSpriteGetCompletionState((UiSpriteState *)anchor) != 0) {
         work->shown = 1;
     }
 }

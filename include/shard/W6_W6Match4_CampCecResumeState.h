@@ -11,9 +11,9 @@ struct CampCecResumeState {
         struct {
             u8 unk000[0xE4];
             /* 0x0E4 */ void *resource;
-            /* 0x0E8 */ u32 entry;
+            /* 0x0E8 */ void *entry;   /* the script's owner word */
             u8 unk0EC[8];
-            /* 0x0F4 */ ScriptRunState *script;
+            /* 0x0F4 */ ScriptProcess *script;
         } launch;
     };
     u32 state; // 0x144

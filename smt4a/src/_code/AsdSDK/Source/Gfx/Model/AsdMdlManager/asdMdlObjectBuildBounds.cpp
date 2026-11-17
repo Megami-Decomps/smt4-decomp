@@ -29,7 +29,7 @@ void nn_math_ARMv6_VEC3TransformAsm_2A87B4(AsdMdlVec3 *result, const AsdMdlMtx33
  * highest vertical extent of each record's parts. */
 u32 asdMdlObjectBuildBounds(AsdMdlObject *object)
 {
-    if (object != NULL && object->node != NULL && object->node->data != NULL) {
+    if (object != NULL && object->node != NULL && object->node->file != NULL) {
         s32 recordCount = object->node->count;
         if (recordCount > 0) {
             asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdMdlManager.cpp", 1115);

@@ -3,8 +3,6 @@
 #include "font/PlaceWin.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-struct ScriptFile;
-struct ScriptProcessWork;
 
 /* A place-window scene (only the fields the start-up touches). */
 struct PlaceScene {
@@ -17,9 +15,9 @@ struct PlaceScene {
     /* 0x00018 */ s32 placeKey;
     /* 0x0001C */ u8 unk0001C[0x144];
     /* 0x00160 */ ScriptFile *scriptFile;
-    /* 0x00164 */ u32 scriptOwner;
-    /* 0x00168 */ ScriptRunState *scriptA;
-    /* 0x0016C */ ScriptRunState *scriptB;
+    /* 0x00164 */ void *scriptOwner;
+    /* 0x00168 */ ScriptProcess *scriptA;
+    /* 0x0016C */ ScriptProcess *scriptB;
     /* 0x00170 */ u8 unk00170[0x15BD0];
     /* 0x15D40 */ u32 jobA;
     /* 0x15D44 */ u32 jobB;
@@ -36,8 +34,7 @@ struct PlaceRecord {
 extern "C" {
 s32 jobIsValid(u32 job);
 s32 eventTexJobSlotsDone(u32 job);
-ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void titleSetSlotValueState2(s32 a, s32 b);
 void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(s32 value, s32 arg);
@@ -66,7 +63,7 @@ static bool placeFlagsAnySet()
  * text and switches to state 1 when any of the place flags is set (state 3 when none is). */
 void FUN_003a0d64(PlaceScene *scene)
 {
-    if (scene->scriptFile == NULL || scene->scriptOwner == 0)
+    if (scene->scriptFile == NULL || scene->scriptOwner == NULL)
         return;
     if (!asdTMTexTableNodeIsLoaded(0x2B, 0))
         return;
@@ -75,9 +72,9 @@ void FUN_003a0d64(PlaceScene *scene)
     if (jobIsValid(scene->jobB) && !eventTexJobSlotsDone(scene->jobB))
         return;
 
-    scene->scriptA = reinterpret_cast<ScriptRunState *>(scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner));
+    scene->scriptA = scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner);
     scriptProcessSetMode(scene->scriptA, 2);
-    scene->scriptB = reinterpret_cast<ScriptRunState *>(scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner));
+    scene->scriptB = scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner);
     scriptProcessSetMode(scene->scriptB, 2);
     titleSetSlotValueState2(0, 10);
     titleSetSlotValueState2(1, 10);

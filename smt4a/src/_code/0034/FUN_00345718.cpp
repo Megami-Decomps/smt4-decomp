@@ -1,11 +1,8 @@
 /* NON_MATCHING: retail loads the panel global twice (the first through a removed one-instruction getter armcc knew preserved the flags: `cmp r0,#0` precedes both loads) and keeps different argument registers across the two indicator branches. */
 #include "ui/MessageMainA.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, s32 animation, s32 flags,
-                  void *source, s32 kind, f32 scale);
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 keyframe, s32 flags);
 
 // Select the message panel's enabled or disabled indicator animation.
 u32 FUN_00345718(s32 enabled)

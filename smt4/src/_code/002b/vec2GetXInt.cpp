@@ -1,16 +1,7 @@
-#include "common.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" {
-
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ int value;   /* 20.12 fixed point */
-} Obj;
-
-/* Integer part of the fixed-point value. */
-int vec2GetXInt(Obj *obj)
+/* The sprite's x position in whole pixels. */
+extern "C" s32 vec2GetXInt(const UiSpriteState *sprite)
 {
-    return obj->value >> 0xc;
+    return sprite->x >> 12;
 }
-
-} /* extern "C" */

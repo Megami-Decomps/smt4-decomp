@@ -3,6 +3,12 @@
 #include "common.h"
 #include <stddef.h>
 
+/* One rank bonus of a skill: a kind and its amount. */
+struct SkillRankBonus {
+    /* 0x0 */ u8 kind;
+    /* 0x1 */ u8 amount;
+};
+
 /* IV's skill record: one row of battle/SkillData.tbb table 0 (the game's data table 4, section 0; 0x68 bytes; the same fields up to 0x40 as Apocalypse's
  * SkillDataRecordA): skillDataFindById() searches the records with a stride of 0x68. */
 struct SkillDataRecord {
@@ -11,9 +17,10 @@ struct SkillDataRecord {
         struct {
             /* 0x00 */ u8 unk00[0x23];
             /* 0x23 */ u8 category;
+            /* 0x24 */ u16 sortKey; /* the skill list order (skills only; the listing sort key is at 0x2C) */
         } sort;
         struct {
-            /* 0x00 */ u8 unk00[0x20];
+            /* 0x00 */ char name[0x20]; /* the resource name (the sentinel "0": none) */
             /* 0x20 */ u16 id;
         } identity;
         struct {
@@ -50,20 +57,45 @@ struct SkillDataRecord {
             /* 0x32 */ s8 effects[4];
         } effectList;
         struct {
+            u8 prefix[6];
+            /* 0x32 */ u8 splash;
+            /* 0x33 */ u8 hitsAll;
+            /* 0x34 */ u8 hitsRow;
+            /* 0x35 */ u8 rangeFlags; /* tested with 2 */
+        } range;
+        struct {
             u8 prefix[0xA];
             /* 0x36 */ u8 enabled;
         } specialAvailability;
         struct {
+            /* 0x2C */ u8 prefix[0xA];
+            /* 0x36 */ u16 fixedCost : 12; /* the fixed cost value (4000 is excluded from passive matches) */
+            /* 0x36 */ u16 fixedCostHigh : 4;
+        } costs;
+        struct {
             u8 prefix[0xD];
             /* 0x39 */ u8 flags;
         } itemUse;
+        struct {
+            u8 prefix[0xC];
+            /* 0x38 */ u32 rankFlags; /* the sign bit locks the rank bonuses */
+        } rankInfo;
     };
-    /* 0x3C */ u32 flags;
-    /* 0x40 */ u8 unk40[0x28];
+    union {
+        /* 0x3C */ u32 flags;
+        /* 0x3C */ u8 menuCategory; /* the category (1-based) battle code tests with btlEntryHasSkillCategory */
+    };
+    /* 0x40 */ u8 unk40[3];
+    /* 0x43 */ u8 percentCost; /* the percentage cost, used when `costs.fixedCost` is 0 */
+    /* 0x44 */ u8 unk44[0x14];
+    /* 0x58 */ SkillRankBonus rankBonuses[8]; /* (kind, amount) pairs, a zero kind ends the list */
 };
 typedef char Table04RecordSizeCheck[sizeof(SkillDataRecord) == 0x68 &&
     offsetof(SkillDataRecord, properties) == 0x28 && offsetof(SkillDataRecord, flags) == 0x3C &&
-    offsetof(SkillDataRecord, identity.id) == 0x20 && offsetof(SkillDataRecord, sort.category) == 0x23 ? 1 : -1];
+    offsetof(SkillDataRecord, identity.id) == 0x20 && offsetof(SkillDataRecord, sort.category) == 0x23 &&
+    offsetof(SkillDataRecord, sort.sortKey) == 0x24 && offsetof(SkillDataRecord, costs.prefix) == 0x2C &&
+    offsetof(SkillDataRecord, percentCost) == 0x43 && offsetof(SkillDataRecord, menuCategory) == 0x3C &&
+    offsetof(SkillDataRecord, rankInfo.rankFlags) == 0x38 && offsetof(SkillDataRecord, rankBonuses) == 0x58 ? 1 : -1];
 
 /* Apocalypse's skill record: one row of battle/SkillData.tbb table 0 (data table 4, section 0; 0x88 bytes): skills and items. skillDataFindById()
  * searches the records with a stride of 0x88 bytes (retail passes 0x88 to libc_bsearch). */
@@ -73,9 +105,10 @@ struct SkillDataRecordA {
         struct {
             /* 0x00 */ u8 unk00[0x23];
             /* 0x23 */ u8 category;
+            /* 0x24 */ u16 sortKey; /* the skill list order (the listing sort key is at 0x2C) */
         } sort;
         struct {
-            /* 0x00 */ u8 unk00[0x20];
+            /* 0x00 */ char name[0x20]; /* the resource name (the sentinel "0": none) */
             /* 0x20 */ u16 id;
         } identity;
         struct {
@@ -120,11 +153,17 @@ struct SkillDataRecordA {
             /* 0x39 */ u8 flags;
         } itemUse;
     };
-    /* 0x3C */ u32 flags;
+    union {
+        /* 0x3C */ u32 flags;
+        /* 0x3C */ u8 menuCategory; /* the category (1-based) battle code tests with btlEntryHasSkillCategory */
+    };
     /* 0x40 */ u8 unk40[0x22];
     /* 0x62 */ u8 stages[9][2];
     /* 0x74 */ u8 unk74[0x12];
-    /* 0x86 */ u16 unk86;
+    union {
+        /* 0x86 */ u16 unk86;
+        /* 0x86 */ s16 targetKind; /* 6: no target (read signed by the status-cure selection) */
+    };
 };
 /* A record of data table 4, section 1 (0x48 bytes; smt4a skill records): `id` at 0x20 is the key of
  * dataTable41FindById(). */
@@ -166,7 +205,8 @@ typedef char Table04RecordAOffsets[offsetof(SkillDataRecordA, properties) == 0x2
     offsetof(SkillDataRecordA, flags) == 0x3C ? 1 : -1];
 typedef char Table04RecordASizeCheck[sizeof(SkillDataRecordA) == 0x88 &&
     offsetof(SkillDataRecordA, stages) == 0x62 && offsetof(SkillDataRecordA, unk86) == 0x86 ? 1 : -1];
-typedef char Table04CategoryOffsetCheck[offsetof(SkillDataRecordA, sort.category) == 0x23 ? 1 : -1];
+typedef char Table04CategoryOffsetCheck[offsetof(SkillDataRecordA, sort.category) == 0x23 &&
+    offsetof(SkillDataRecordA, sort.sortKey) == 0x24 && offsetof(SkillDataRecordA, menuCategory) == 0x3C ? 1 : -1];
 typedef char Table04IdentityOffsetCheck[offsetof(SkillDataRecordA, identity.id) == 0x20 ? 1 : -1];
 typedef char Table04ExtraRecordOffsets[sizeof(Table04ExtraRecord) == 0x48 &&
     offsetof(Table04ExtraRecord, id) == 0x20 && offsetof(Table04ExtraRecord, flags) == 0x44 ? 1 : -1];

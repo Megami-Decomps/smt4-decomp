@@ -2,7 +2,7 @@
 #define UI_PLACETEXTTRANSITION_H
 
 #include "common.h"
-#include "shard/ScriptProcess.h"
+#include "script/scrScriptProcess.h"
 #include <stddef.h>
 
 struct PlaceTextTableCursor {

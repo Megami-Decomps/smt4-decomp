@@ -1,11 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001eef8c` (_code @ 0x1eef8c, 0x15b4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/W6_W6Match3_RotationY.h"
 #include "code/Code0029.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 
@@ -61,7 +63,6 @@ extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029e6f0. */
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -72,8 +73,6 @@ extern int *gameGetSlotTable(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -354,9 +353,9 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       FUN_0029a17c((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v9,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,
                    (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
-      temp_v6 = vec2GetYInt(temp_v2 + 0xb0);
+      temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0xb0));
       temp_v0 = *(short *)(temp_v4 + 10);
-      temp_v13 = vec2GetXInt(temp_v2 + 0xb0);
+      temp_v13 = vec2GetXInt((UiSpriteState *)(temp_v2 + 0xb0));
       texDrawTableEntryAtStoredOrigin(2,0x24,0x131,temp_v13 + temp_v9 + (int)*(short *)(temp_v4 + 8),
                    temp_v6 + temp_v8 + (int)temp_v0,0x83);
       temp_v6 = g_titleScene;

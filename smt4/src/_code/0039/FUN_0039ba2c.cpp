@@ -1,6 +1,6 @@
 #include "shard/S1ListPanel.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
@@ -25,12 +25,9 @@ void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
 void renderCtxPopState(RenderCtx *context, s32 stack);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
-s32 vec2GetXInt(const UiSpriteState *sprite);
 void texDrawCompositeSprite(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
-void uiSpriteAdvanceAnimation(UiSpriteState *sprite);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 /* Draws the title banner and its centered caption; marks it complete once its closing animation ends. */
 void FUN_0039ba2c(TitleBannerView *banner)

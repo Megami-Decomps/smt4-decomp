@@ -1,4 +1,6 @@
 #include "code/Code0023.h"
+#include "addon/aocMain.h"
+#include "classes/Obj422214Owner.h"
 /* NON_MATCHING: retail's states return through the shared epilogue with different register assignment (process in r4, g_aocMain in r6), copies the polled five-word result through ldm/stm pairs and tests the 0x66/0x67 kinds with the removed-inline gotos of the original; this build lays the cases out differently. */
 #include "classes/AocMenu.h"
 #include "common.h"
@@ -41,17 +43,11 @@ struct AocMenuProcess {
     /* 0x358 */ void *script;
 };
 
-struct AocGlobals {
-    /* 0x000 */ u8 unk000[0x678];
-    /* 0x678 */ u8 *units;
-};
-
 extern "C" {
-extern AocGlobals *g_aocMain;
 
 void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
 void FUN_00234124(AocMenuProcess *process, const RequestParameters *request);
-RequestParameters FUN_002341d4(AocGlobals *aoc);
+RequestParameters FUN_002341d4(AocMain *aoc);
 s32 strIsEmpty(u32 *record);
 u8 byteIsAtLeast100(u32 *record);
 s32 legacyResourceIdRemap(const RequestParameters *record);
@@ -62,7 +58,7 @@ void AocMenu::runResultProcess()
 {
     AocMenuProcess * process = reinterpret_cast<AocMenuProcess *>(this);
     RequestParameters record;
-    AocGlobals *aoc = g_aocMain;
+    AocMain *aoc = g_aocMain;
     switch (process->phase) {
     case 0: {
         AocMenuObject *object = (AocMenuObject *)&process->unk20C;
@@ -103,7 +99,7 @@ void AocMenu::runResultProcess()
         AocMenuObject *object = (AocMenuObject *)&process->unk20C;
         FUN_00233fcc(object, 2);
         process->active = object;
-        object->result[4] = *(u16 *)(aoc->units + flaggedValueHolderGetTotal(process->holder) * 0x9c8 + 0x9aa);
+        object->result[4] = aoc->records[flaggedValueHolderGetTotal(process->holder)].contentId;
         process->phase = 3;
         return;
     }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037b7e4` (_code @ 0x37b7e4, 0x518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "gamedata/GameFlags.h"
 #include "romwright_types.h"
@@ -7,7 +8,6 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 
 int taskCreateDraw(...);
@@ -111,7 +111,7 @@ void FUN_0037b7e4(void)
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 0x26),
       &DAT_0052c050, 0xb4, &DAT_0052c104, 0x150, &DAT_0052c254, 0x30,
       NULL, 0, &DAT_0052c284, 0x4d0);
-  uiSpriteStateInitFromSource(puVar2 + 3,0x2e,1000,puVar2 + 0x26,0x65);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 3),0x2e,1000, (UiResourceParameters *)(puVar2 + 0x26),0x65, 1.0f);
   temp_v5 = 0;
   do {
     temp_v1 = spriteHandleCreate(0);

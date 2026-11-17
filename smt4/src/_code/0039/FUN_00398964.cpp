@@ -1,6 +1,5 @@
 #include "common.h"
-#include "ui/UiSpriteState.h"
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 
 struct PartOwner {
     u8 unk000[0xa4];

@@ -1,16 +1,7 @@
-#include "common.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" {
-
-typedef struct Fixed {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ s32 value;
-} Fixed;
-
-/* Returns the word at 0xC as an integer (its fixed-point value shifted down by 12 bits). */
-s32 vec2GetXInt(Fixed *object)
+/* The sprite's x position in whole pixels. */
+extern "C" s32 vec2GetXInt(const UiSpriteState *sprite)
 {
-    return object->value >> 12;
+    return sprite->x >> 12;
 }
-
-} /* extern "C" */

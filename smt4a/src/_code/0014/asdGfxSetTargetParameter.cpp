@@ -1,22 +1,20 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {
 
-extern GfxTargetParameters g_asdGfxContext;
-
-/* Sets either target parameter or both, according to the selector. */
-void asdGfxSetTargetParameter(u32 selector, u32 value)
+/* Sets the display callback of the top (0x400) or bottom (0x401) display, or (0x402) of both. */
+void asdGfxSetTargetParameter(u32 display, AsdGfxDisplayCallback callback)
 {
-    switch (selector) {
+    switch (display) {
     case 0x400:
-        g_asdGfxContext.first = value;
+        g_asdGfxContext.displayCallbacks[0] = callback;
         break;
     case 0x401:
-        g_asdGfxContext.second = value;
+        g_asdGfxContext.displayCallbacks[1] = callback;
         break;
     case 0x402:
-        g_asdGfxContext.first = value;
-        g_asdGfxContext.second = value;
+        g_asdGfxContext.displayCallbacks[0] = callback;
+        g_asdGfxContext.displayCallbacks[1] = callback;
         break;
     }
 }

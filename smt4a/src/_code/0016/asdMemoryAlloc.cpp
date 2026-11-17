@@ -1,17 +1,12 @@
 /* NON_MATCHING: identical except one compiler nop {0} that retail places between the unlock failure test and its branch in the special-heap path. */
 #include "nn/svc.h"
+#include "classes/AllocatorState.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
-struct AllocatorLock {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 *mutex; /* handle of the mutex guarding the heaps */
-};
-
 extern "C" {
 
-extern AllocatorLock g_allocationAddressRanges;
 
 void asdAllocatorLock(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, s32 extra);

@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"

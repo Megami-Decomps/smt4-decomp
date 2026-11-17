@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/MathFunctions.h"
 
 struct Position {
     f32 x, y, z;
@@ -6,7 +7,6 @@ struct Position {
 
 extern "C" {
 f32 __hardfp_atan2f(f32 x, f32 z);
-f32 mathAngleDeltaDegrees(f32 current, f32 target);
 
 // Absolute heading error between the current facing and the X/Z direction to a point.
 f32 mathAbsHeadingErrorToPoint(Position from, f32 heading, Position to)

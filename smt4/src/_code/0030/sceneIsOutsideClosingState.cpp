@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/PlayScene.h"
 
 /* Reports whether the scene is absent or outside state thirty-one. */

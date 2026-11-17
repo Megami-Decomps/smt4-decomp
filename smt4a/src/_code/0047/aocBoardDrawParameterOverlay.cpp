@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "gfx/DrawParameterOwner.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
@@ -17,7 +18,6 @@ typedef char ParameterOverlayWorkSpeedOffsetCheck[
 extern "C" {
 s32 renderCtxPackPassFlags(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *animation);
 void gxResetColorQuadToWhite(void);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -33,7 +33,7 @@ u32 aocBoardDrawParameterOverlay(u32 job)
         return enabled;
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    efctSetSpeed(vec2GetSpeed(work->animation));
+    efctSetSpeed(vec2GetSpeed((UiSpriteState *)work->animation));
     texDrawTableEntryAtStoredOrigin(2, 8, 0x14F, 0, 0, 6);
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);

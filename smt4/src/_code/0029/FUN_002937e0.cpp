@@ -2,6 +2,7 @@
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "gamedata/SaveSlotTableIV.h"
 struct SlotTable;
 /* Capacity is beyond the shared slot-table prefix. */
 struct PartyCapacityView {
@@ -9,7 +10,6 @@ struct PartyCapacityView {
     u8 capacity;
 };
 extern "C" {
-SlotTable *gameGetSlotTable(void);
 s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 listCursorGetRowIfUnblocked(const GridNavigation *grid);
 void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);

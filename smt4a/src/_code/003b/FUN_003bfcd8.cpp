@@ -1,12 +1,11 @@
 /* NON_MATCHING: scheduling only: retail loads the 1.0f scale before the panel stores and keeps the panel in r0 before `return 1`. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
 u32 scrGetArg(u32 index);
-void uiSpriteStateInitFromSource(void *sprite, s32 anim, s32 frame, void *source, f32 scale, s32 layer);
-void pairSetFirstResetSecond(void *pair, s32 first);
 
 /* Opens the message panel and starts its sprite; `mode` selects the panel variant. */
 static __inline void messagePanelOpen(u8 mode)
@@ -23,7 +22,7 @@ static __inline void messagePanelOpen(u8 mode)
     panel->unk0092 = 0;
     panel->popupShown = 0;
     panel->unk016D = 0;
-    uiSpriteStateInitFromSource(&panel->sprites[17], 8, -1, &panel->parameters, 1.0f, 11);
+    uiSpriteStateInitFromSource(&panel->sprites[17], 8, -1, &panel->parameters, 11, 1.0f);
     pairSetFirstResetSecond(&panel->sprites[17], 0);
     uiSpriteSelectAnim(&panel->sprites[17], 6);
 }

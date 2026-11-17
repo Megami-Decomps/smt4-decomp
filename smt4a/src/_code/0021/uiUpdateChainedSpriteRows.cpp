@@ -4,9 +4,9 @@
 
 struct ChainedSpriteWork {
     u8 unk0000[0x3900];
-    UiAnimatedSprite first[6];
+    UiSpriteState first[6];
     u8 unk3c48[0x8c];
-    UiAnimatedSprite second[6];
+    UiSpriteState second[6];
     u8 unk401c[0x364];
     s32 counters[6];
     u8 unk4398[0x58];
@@ -16,7 +16,6 @@ struct ChainedSpriteWork {
 };
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 delta);
 
 u32 uiUpdateChainedSpriteRows(ChainedSpriteWork *work)
 {
@@ -42,7 +41,7 @@ u32 uiUpdateChainedSpriteRows(ChainedSpriteWork *work)
         }
     }
     for (s32 i = 0; i < 6; ++i) {
-        if (work->second[i].frame >= 14) {
+        if (work->second[i].alphaFrame >= 14) {
             if (++work->counters[i] >= 0x10000) {
                 work->counters[i] = 0;
             }

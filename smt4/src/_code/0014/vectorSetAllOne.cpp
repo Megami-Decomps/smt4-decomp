@@ -1,14 +1,10 @@
-#include "common.h"
-
-extern "C" {
+#include "shard/W6_W6Match7_QuadVectors.h"
 
 /* Initializes all four components to one. */
-void vectorSetAllOne(f32 *components)
+extern "C" void vectorSetAllOne(QuadVector *vector)
 {
-    components[0] = 1.0f;
-    components[1] = 1.0f;
-    components[2] = 1.0f;
-    components[3] = 1.0f;
+    vector->xyz.x = 1.0f;
+    vector->xyz.y = 1.0f;
+    vector->xyz.z = 1.0f;
+    vector->w = 1.0f;
 }
-
-} /* extern "C" */

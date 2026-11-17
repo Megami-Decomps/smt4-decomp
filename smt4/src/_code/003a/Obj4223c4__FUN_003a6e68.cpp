@@ -6,11 +6,10 @@
 #include "ui/TimerSlot.h"
 #include <stddef.h>
 #include "status/StatusCamera.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 s32 uiAnimationAdvanceChannel(void *, s32);
-s32 vec2GetYInt(const TimerSlot *);
-s32 vec2GetXInt(const TimerSlot *);
 void pointConvertToFloat(FloatPoint *, s32, s32);
 void buttonHelpSetPreset(s32);
 void FUN_0029d960(void *);
@@ -59,8 +58,8 @@ void Obj4223c4::FUN_003a6e68()
     OpeningScreenView *view = reinterpret_cast<OpeningScreenView *>(screen);
     s32 completed = uiAnimationAdvanceChannel(&view->animation, view->selectedChannel);
     TimerSlot *timer = &view->animation.timers[view->selectedChannel];
-    s32 y = vec2GetYInt(timer);
-    s32 x = vec2GetXInt(timer);
+    s32 y = vec2GetYInt((const UiSpriteState *)timer);
+    s32 x = vec2GetXInt((const UiSpriteState *)timer);
     pointConvertToFloat(&view->position, x, y);
     if (completed == 0)
         return;

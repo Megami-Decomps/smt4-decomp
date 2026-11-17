@@ -9,6 +9,8 @@
 #include "map/MapVector.h"
 
 struct AsdMdlObject;
+class Obj557af8;
+class Obj557c48;
 
 /* The field map's global state (Apocalypse). Only the fields the readable code touches are named. */
 typedef struct LmapMain {
@@ -36,24 +38,27 @@ typedef struct LmapMainState {
     /* 0x08 */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
     /* 0x09 */ u8 unk09;
     /* 0x0A */ u8 unk0A;
-    /* 0x0B */ u8 unk0B;
+    /* 0x0B */ s8 external;      /* nonzero: FUN_002fb7dc steps the map instead of FUN_0026493c */
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ u8 unk14[0x2C];
-    /* 0x40 */ s32 unk40;
+    /* 0x40 */ s32 mapId;
     /* 0x44 */ u8 unk44[4];
-    /* 0x48 */ u32 unk48;
+    /* 0x48 */ u32 areaId;
     /* 0x4C */ u16 unk4C;
     /* 0x4E */ u16 unk4E;
-    /* 0x50 */ u8 unk50[0x74];
+    /* 0x50 */ f32 angle;
+    /* 0x54 */ u8 unk54[0x40];
+    /* 0x94 */ u8 angleReset;
+    /* 0x95 */ u8 unk95[0x2F];
     /* 0xC4 */ f32 unkC4;
     union {
         /* 0xC8 */ s32 unkC8;     /* float bits */
         /* 0xC8 */ f32 unkC8Float;
     };
-    /* 0xCC */ u32 unkCC;
-    /* 0xD0 */ u32 unkD0;
-    /* 0xD4 */ u32 unkD4;
+    /* 0xCC */ u32 state;     /* lmapMainStateSet */
+    /* 0xD0 */ u32 stateStep; /* cleared when the state changes */
+    /* 0xD4 */ u32 stateTime; /* cleared when the state changes */
     /* 0xD8 */ u8 unkD8[4];
     /* 0xDC */ f32 unkDC;
     /* 0xE0 */ u8 unkE0;
@@ -65,8 +70,10 @@ typedef struct LmapMainState {
     /* 0xED */ u8 unkED[0x8A3];
     /* 0x990 */ u8 unk990;
     /* 0x991 */ u8 unk991[3];
-    /* 0x994 */ u32 unk994;
-    /* 0x998 */ u8 unk998[8];
+    /* 0x994 */ s32 unk994;
+    /* 0x998 */ u8 unk998;
+    /* 0x999 */ s8 bgmSuppressed;  /* nonzero: lmapUpdateMapBgm leaves the BGM alone */
+    /* 0x99A */ u8 unk99A[6];
     /* 0x9A0 */ u8 unk9A0;
     /* 0x9A1 */ u8 unk9A1[3];
     /* 0x9A4 */ u32 unk9A4[6];
@@ -180,96 +187,116 @@ typedef struct LmapMainStateA {
     /* 0x04 */ u8 unk04[4];
     /* 0x08 */ u8 freeOnEnd;
     /* 0x09 */ u8 unk09[2];
-    /* 0x0B */ s8 unk0B;
+    /* 0x0B */ s8 external;
     /* 0x0C */ u8 unk0C[0x34];
     /* 0x40 */ u32 mapId;
     /* 0x44 */ u32 unk44;
     /* 0x48 */ u32 areaId;
     /* 0x4C */ u8 unk4C[0x7C];
     /* 0xC8 */ s32 unkC8;         /* float bits */
-    /* 0xCC */ u32 unkCC;
-    /* 0xD0 */ u8 unkD0[0x24];
+    /* 0xCC */ u32 state;         /* lmapMainStateSet */
+    /* 0xD0 */ u32 stateStep;     /* cleared when the state changes */
+    /* 0xD4 */ u32 stateTime;     /* cleared when the state changes */
+    /* 0xD8 */ u8 unkD8[0x1C];
     /* 0xF4 */ LmapObj obj;
+    /* 0xF5 */ u8 unk0F5[0x8EC];
+    /* 0x9E1 */ s8 bgmBlocked;    /* nonzero: lmapUpdateMapBgm leaves the BGM alone */
+    /* 0x9E2 */ u8 unk9E2[0x4A];
+    /* 0xA2C */ void *scriptCode;        /* the map script's code, strings and process (FUN_002dfa18) */
+    /* 0xA30 */ void *scriptStrings;
+    /* 0xA34 */ struct ScriptProcess *script;
+    /* 0xA38 */ u32 scriptCompletionFlag; /* game flag set when the script finishes, or 0 */
+    /* 0xA3C */ u8 unkA3C[0x8918];
+    /* 0x9354 */ s32 scriptState;
 } LmapMainStateA;
 
-/* Another map block (Apocalypse), reached through the word after DAT_005806a0. */
-typedef struct LmapExtraA {
-    union {
-        /* 0x000 */ u8 unk000[0xB0];
-        struct {
-            /* 0x000 */ s32 mode;
-            /* 0x004 */ s32 unk004;
-            /* 0x008 */ s32 unk008;
-            /* 0x00C */ u8 unk00C[0x14];
-            /* 0x020 */ MapVector up;
-            /* 0x02C */ MapVector upCopy;
-            /* 0x038 */ MapVector eye;
-            /* 0x044 */ MapVector target;
-            /* 0x050 */ MapVector savedEye;
-            /* 0x05C */ MapVector savedTarget;
-            /* 0x068 */ u8 unk068[0x38];
-            /* 0x0A0 */ f32 parameterA0;
-            /* 0x0A4 */ f32 parameterA4;
-            /* 0x0A8 */ u8 enabled;
-            /* 0x0A9 */ u8 unk0A9[3];
-            /* 0x0AC */ u32 state;
-        } camera;
-        struct {
-            u8 unk000[0x18];
-            f32 heading;
-            f32 heightBias;
-        } followPose;
-    };
-    /* 0x0B0 */ s32 unkB0;
+/* The field map's camera view (Apocalypse), kept by g_lmapView (and, in the camera module's own
+ * functions, through LmapViewHolderA). It holds the look-at camera (eye, target, up), the follow
+ * camera's heading and per-preset distances, the camera move, a prioritised request and an optional
+ * animated camera clip. */
+typedef struct LmapViewA {
+    /* 0x000 */ s32 mode;           /* camera mode (FUN_00303460) */
+    /* 0x004 */ s32 phase;
+    /* 0x008 */ s32 unk008;
+    /* 0x00C */ s32 unk00C;
+    /* 0x010 */ u8 unk010[4];
+    /* 0x014 */ u32 unk014;
+    /* 0x018 */ f32 heading;        /* the follow camera's heading, degrees */
+    /* 0x01C */ f32 heightBias;     /* added to the follow camera's heights */
+    /* 0x020 */ MapVector up;
+    /* 0x02C */ MapVector upCopy;
+    /* 0x038 */ MapVector eye;
+    /* 0x044 */ MapVector target;
+    /* 0x050 */ MapVector savedEye;    /* the applied eye (cameraGetHeadingDegrees) */
+    /* 0x05C */ MapVector savedTarget; /* the applied target */
+    /* 0x068 */ MapVector lookFrom;    /* FUN_003a7348 measures the direction from here ... */
+    /* 0x074 */ MapVector lookTo;      /* ... to here */
+    /* 0x080 */ f32 unk080;
+    /* 0x084 */ u8 unk084[0x18];
+    /* 0x09C */ f32 scale;
+    /* 0x0A0 */ f32 parameterA0;
+    /* 0x0A4 */ f32 parameterA4;
+    /* 0x0A8 */ u8 enabled;
+    /* 0x0A9 */ u8 unk0A9[3];
+    /* 0x0AC */ u32 state;
+    /* 0x0B0 */ s32 contextMode;    /* -3..2 (FUN_003033d4); compared with a map-interface record's destination */
     /* 0x0B4 */ u8 flagB4;
     /* 0x0B5 */ u8 flagB5;
     /* 0x0B6 */ u16 timer;
     /* 0x0B8 */ u16 step;
     /* 0x0BA */ u8 unk0BA[2];
     /* 0x0BC */ MapVector axis;
-    /* 0x0C8 */ s32 unkC8;
-    union {
-        /* 0x0CC */ u8 unk0CC[0x140];
-        struct {
-            f32 targetHeight[16];
-            f32 eyeHeight[16];
-            f32 lateralDistance[16];
-            f32 rearDistance[16];
-        } followPresets;
-    };
-    /* 0x20C */ s32 unk20C;
-    union {
-        /* 0x210 */ u8 unk210[0x98];
-        struct {
-            /* 0x210 */ f32 unk210F;
-            /* 0x214 */ f32 unk214F;
-            /* 0x218 */ u8 unk218[8];
-            /* 0x220 */ u8 flag220;
-            /* 0x221 */ u8 unk221[3];
-            /* 0x224 */ VectorPairTransitionA parameters;
-            /* 0x298 */ f32 unk298;
-        } cameraTransition;
-    };
-    /* 0x2A8 */ u32 unk2A8;
-    /* 0x2AC */ s32 priority;
-    /* 0x2B0 */ s16 unk2B0;
+    /* 0x0C8 */ s32 contextValue;   /* the context value FUN_003033d4 returns */
+    /* 0x0CC */ f32 targetHeight[16];    /* follow-camera presets, one column per preset */
+    /* 0x10C */ f32 eyeHeight[16];
+    /* 0x14C */ f32 lateralDistance[16];
+    /* 0x18C */ f32 rearDistance[16];
+    /* 0x1CC */ f32 fieldOfView[16];     /* degrees (42, 43) */
+    /* 0x20C */ s32 contextOverride;  /* -1: FUN_003033d4 derives the value from contextMode */
+    /* 0x210 */ f32 unk210;
+    /* 0x214 */ f32 unk214;
+    /* 0x218 */ f32 raised;         /* nonzero while the camera is raised */
+    /* 0x21C */ f32 unk21C;
+    /* 0x220 */ u8 moving;          /* the camera move below is running */
+    /* 0x221 */ u8 unk221[3];
+    /* 0x224 */ VectorPairTransitionA move; /* the camera move (FUN_0033a374 steps it) */
+    /* 0x298 */ f32 unk298;
+    /* 0x29C */ MapVector targetOffset; /* added to the target (FUN_00324b68) */
+    /* 0x2A8 */ u32 requestActive;  /* a request (FUN_002d1f40) is pending */
+    /* 0x2AC */ s32 priority;       /* the pending request's priority */
+    /* 0x2B0 */ s16 requestId;
     /* 0x2B2 */ s16 unk2B2;
     /* 0x2B4 */ s16 unk2B4;
     /* 0x2B6 */ s16 unk2B6;
     /* 0x2B8 */ u8 unk2B8;
     /* 0x2B9 */ u8 unk2B9[3];
-    /* 0x2BC */ u32 unk2BC;
-    /* 0x2C0 */ u8 unk2C0[0x44];
+    /* 0x2BC */ Obj557af8 *clip; /* the animated camera clip (FUN_0035243c), or NULL */
+    /* 0x2C0 */ MapVector homeEye;     /* the static pose restored when the clip ends */
+    /* 0x2CC */ MapVector homeTarget;
+    /* 0x2D8 */ u8 unk2D8[0x2C];
     /* 0x304 */ u8 unk304;
-} LmapExtraA;
+    /* 0x305 */ u8 unk305;
+    /* 0x306 */ u8 unk306[2];
+    /* 0x308 */ f32 height;
+    /* 0x30C */ f32 unk30C;
+    /* 0x310 */ f32 unk310;
+    /* 0x314 */ Obj557c48 *modelManager; /* g_handleRegistry at reset; its +0x0C takes the camera */
+} LmapViewA;
+typedef char LmapViewAOffsetsCheck[offsetof(LmapViewA, heading) == 0x18 && offsetof(LmapViewA, up) == 0x20 &&
+    offsetof(LmapViewA, savedEye) == 0x50 && offsetof(LmapViewA, lookTo) == 0x74 &&
+    offsetof(LmapViewA, state) == 0xAC && offsetof(LmapViewA, contextMode) == 0xB0 &&
+    offsetof(LmapViewA, axis) == 0xBC && offsetof(LmapViewA, targetHeight) == 0xCC &&
+    offsetof(LmapViewA, fieldOfView) == 0x1CC && offsetof(LmapViewA, contextOverride) == 0x20C &&
+    offsetof(LmapViewA, move) == 0x224 && offsetof(LmapViewA, targetOffset) == 0x29C &&
+    offsetof(LmapViewA, priority) == 0x2AC && offsetof(LmapViewA, clip) == 0x2BC &&
+    offsetof(LmapViewA, unk304) == 0x304 && offsetof(LmapViewA, height) == 0x308 &&
+    sizeof(LmapViewA) == 0x318 ? 1 : -1];
 
-typedef char LmapExtraASizeCheck[sizeof(LmapExtraA) == 0x308 ? 1 : -1];
-typedef char LmapExtraATransitionOffset[offsetof(LmapExtraA, cameraTransition.parameters) == 0x224 ? 1 : -1];
-
-typedef struct LmapExtraGlobalsA {
+/* The camera module's globals at 0x5806a0; the word after is g_lmapView. */
+typedef struct LmapViewHolderA {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ LmapExtraA *extra;
-} LmapExtraGlobalsA;
+    /* 0x04 */ LmapViewA *view;
+} LmapViewHolderA;
 
 /* An actor the Apocalypse map scene drives: its controller handle at 0x04. */
 typedef struct LmapActorA {
@@ -391,28 +418,9 @@ typedef char LmapSceneAOffsetsCheck[offsetof(LmapSceneA, pose) == 0x1C && offset
 
 
 /* Retail 32-bit layout invariants. */
-typedef char LmapMainStateASizeCheck[sizeof(LmapMainStateA) == 0xF8 ? 1 : -1];
-typedef char LmapExtraASizeCheck[sizeof(LmapExtraA) == 0x308 ? 1 : -1];
-
-typedef char LmapExtraACameraOffsetsCheck[
-    offsetof(LmapExtraA, camera.up) == 0x20 &&
-    offsetof(LmapExtraA, camera.eye) == 0x38 &&
-    offsetof(LmapExtraA, camera.target) == 0x44 &&
-    offsetof(LmapExtraA, camera.savedEye) == 0x50 &&
-    offsetof(LmapExtraA, camera.savedTarget) == 0x5C &&
-    offsetof(LmapExtraA, camera.parameterA0) == 0xA0 &&
-    offsetof(LmapExtraA, camera.parameterA4) == 0xA4 &&
-    offsetof(LmapExtraA, camera.enabled) == 0xA8 &&
-    offsetof(LmapExtraA, camera.state) == 0xAC &&
-    offsetof(LmapExtraA, unkB0) == 0xB0 &&
-    sizeof(LmapExtraA) == 0x308 ? 1 : -1];
-typedef char LmapExtraAFollowOffsetsCheck[
-    offsetof(LmapExtraA, followPose.heading) == 0x18 &&
-    offsetof(LmapExtraA, followPose.heightBias) == 0x1C &&
-    offsetof(LmapExtraA, followPresets.targetHeight) == 0xCC &&
-    offsetof(LmapExtraA, followPresets.eyeHeight) == 0x10C &&
-    offsetof(LmapExtraA, followPresets.lateralDistance) == 0x14C &&
-    offsetof(LmapExtraA, followPresets.rearDistance) == 0x18C ? 1 : -1];
+typedef char LmapMainStateAOffsetsCheck[offsetof(LmapMainStateA, state) == 0xCC &&
+    offsetof(LmapMainStateA, obj) == 0xF4 && offsetof(LmapMainStateA, bgmBlocked) == 0x9E1 &&
+    offsetof(LmapMainStateA, scriptCode) == 0xA2C && offsetof(LmapMainStateA, scriptState) == 0x9354 ? 1 : -1];
 
 extern "C" {
 u32 gameDataCopySaveEntry(u32 index, void *dest);

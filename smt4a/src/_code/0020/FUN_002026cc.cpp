@@ -2,10 +2,10 @@
 
 extern "C" {
 
-int scrFloatOp(ScriptVmProcess *process, int command);
+int scrFloatOp(ScriptProcess *process, int command);
 
 /* Script opcode: applies float operation 6 to the stack, then steps past itself. */
-u32 FUN_002026cc(ScriptVmProcess *process)
+u32 FUN_002026cc(ScriptProcess *process)
 {
     scrFloatOp(process, 6);
     process->pc++;

@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void bufferedValueGetFirstReady(BtlUiObjCA *obj);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004aba54(void)
 {

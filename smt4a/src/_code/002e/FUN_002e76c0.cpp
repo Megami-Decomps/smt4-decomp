@@ -1,6 +1,7 @@
 /* NON_MATCHING: aggregate copy uses __aeabi_memcpy4 rather than __aeabi_memcpy4; loop registers and memset lowering also differ. */
 #include "common.h"
 #include <string.h>
+#include "gamedata/SaveSlotTable.h"
 
 struct PartyChoiceRecord {
     /* 0x000 */ u8 unk000[300];
@@ -28,7 +29,6 @@ struct PartySelectionOwner {
 };
 extern "C" {
 extern PartySelectionOwner g_callbackOwnerSlots;
-PartyChoiceRecord *partyGetSlot(u32 index);
 void gridNavigationConfigure(u8 *menu, s32 count, s32 visible, s32 a, s32 b, s32 c);
 void scrollListSetSelectionTracked(u8 *menu);
 

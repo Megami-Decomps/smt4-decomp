@@ -1,15 +1,8 @@
+#include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
-namespace {
-struct AocMainView {
-    u8 unk00[0x7C]; // 0x00
-    u8 service7c;   // 0x7C; start of an opaque subobject
-};
-}
-
 extern "C" {
-extern AocMainView *g_aocMain;
 void FUN_00161a10(void);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 
@@ -17,9 +10,9 @@ s32 legacyResourceIdRemap(const WindowStatusResult *result);
 WindowStatusOperationResult _ZN9Obj4221e47vfunc0cEv(Obj4221e4 *)
 {
     WindowStatusOperationResult output(1);
-    AocMainView *main = g_aocMain;
+    AocMain *main = g_aocMain;
     FUN_00161a10();
-    output.result = FUN_004288e0(&main->service7c);
+    output.result = FUN_004288e0(&main->service);
     bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&output.result));
     if (succeeded) {
         output.status = 0;

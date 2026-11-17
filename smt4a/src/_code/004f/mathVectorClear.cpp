@@ -1,10 +1,9 @@
-#include "common.h"
+#include "util/MathFunctions.h"
 
-struct Vector3 { f32 x, y, z; };
 /* Clears the vector. */
-extern "C" void mathVectorClear(Vector3 *vector)
+extern "C" void mathVectorClear(f32 *vector)
 {
-    vector->z = 0.0f;
-    vector->y = 0.0f;
-    vector->x = 0.0f;
+    vector[2] = 0.0f;
+    vector[1] = 0.0f;
+    vector[0] = 0.0f;
 }

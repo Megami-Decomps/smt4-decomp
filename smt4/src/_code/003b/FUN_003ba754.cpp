@@ -1,12 +1,11 @@
 #include "common.h"
+#include "addon/aocMain.h"
 #include "gamedata/Table1bOr1c.h"
 #include "map/mapDepart.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "game/GameState.h"
 
-struct ScriptFile;
-struct ScriptProcessWork;
 
 // The map scene block (only the fields this function touches).
 struct MapSceneView {
@@ -21,29 +20,20 @@ struct MapSceneView {
     u8 restored;        // 0x6cc
     u8 unk6cd[0x69f];
     ScriptFile *scriptFile; // 0xd6c
-    u32 scriptOwner;       // 0xd70
-    ScriptRunState *scriptProcess; // 0xd74
+    void *scriptOwner;       // 0xd70
+    ScriptProcess *scriptProcess; // 0xd74
     u8 unkd78[0x38];
     s32 result;         // 0xdb0
 };
 
-
-struct AocMainView {
-    u8 unk00[0xc1];
-    u8 skipRestore;     // 0xc1
-};
-
 extern "C" {
-extern AocMainView *g_aocMain;
-
 
 void FUN_0022b29c(MapSceneView *scene, s32 mode, u32 flag);
 void bgmReleaseStopped(void);
 void mapDepartSetTarget(s32 first, s32 second, u32 third);
 s32 FUN_0027d8c8(void);
 void gameRestoreWorkSave(s32 kind);
-ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void soundChannelRequestIfEnabled(s32 id, s32 flag, s32 frames);
 void titleSetSlotValueState2(s32 channel, s32 frames);
 s32 gameFlagIsSet(u32 flag);
@@ -53,8 +43,7 @@ s32 FUN_002c2a04(s32 channel);
 // then resets the game state to the scene's departure mode.
 void FUN_003ba754(MapSceneView *scene)
 {
-    ScriptRunState *process = reinterpret_cast<ScriptRunState *>(
-        scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner));
+    ScriptProcess *process = scrScriptProcessCreate(scene->scriptFile, scene->scriptOwner);
     scene->scriptProcess = process;
     scriptProcessSetMode(process, 2);
     s32 mode = scene->mode;

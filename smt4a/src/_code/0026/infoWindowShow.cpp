@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 
 extern "C" {
 
-extern void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 arg);
-extern void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
 
 void infoWindowShow(u32 argA, u32 argB, u8 style)
 {

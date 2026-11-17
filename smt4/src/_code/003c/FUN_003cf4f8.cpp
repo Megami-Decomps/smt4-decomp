@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild of the enemy target-candidate builder; the local action-info block (29 bytes in retail) and the duplicated candidate array are laid out differently by armcc, and retail's 0x85-entry clear loop pairs two stores per iteration. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
+#include "gamedata/SkillDataLookup.h"
 
 /* The action a battle unit is about to use (as btlEntryBuildSummary fills it). */
 struct BattleActionInfo {
@@ -33,19 +34,8 @@ struct EnemyAiContext {
     /* 0x00 */ BtlMainState *battle;
 };
 
-struct SkillRecord40 {
-    /* 0x00 */ u8 unk00[0x23];
-    /* 0x23 */ u8 kind;
-    /* 0x24 */ u8 unk24[0xE];
-    /* 0x32 */ u8 splash;
-    /* 0x33 */ u8 hitsAll;
-    /* 0x34 */ u8 hitsRow;
-    /* 0x35 */ u8 flags;
-};
-
 extern "C" {
 void btlEntryBuildSummary(BattleActionInfo *info, BtlMainState *battle, u32 unit);
-SkillRecord40 *skillDataFindById(s16 id);
 s32 FUN_00229914(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 randRange(u32 limit);
 
@@ -68,10 +58,10 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
         return;
     bool broadSkill = false;
     if (info.skill != 0) {
-        SkillRecord40 *skill = skillDataFindById(info.skill);
+        const SkillDataRecord *skill = skillDataFindById(info.skill);
         if (skill != NULL) {
-            if (skill->kind != 4 && skill->splash == 0) {
-                if (skill->hitsAll != 0 || skill->hitsRow != 0 || (skill->flags & 2))
+            if (skill->sort.category != 4 && skill->range.splash == 0) {
+                if (skill->range.hitsAll != 0 || skill->range.hitsRow != 0 || (skill->range.rangeFlags & 2))
                     broadSkill = true;
             } else {
                 broadSkill = true;

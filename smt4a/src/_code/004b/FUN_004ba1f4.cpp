@@ -2,14 +2,12 @@
 #include "shard/Shard004B.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 extern const u8 DAT_00532924[];
 void paramsClearPacket(UiResourceParameters *packet);
 
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, s32 imageBank, s32 animation, UiResourceParameters *packet, s32 flags, f32 scale);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 flags);
 void FUN_004cf7cc(SpritePresetBank *bank);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, s32 preset);
 

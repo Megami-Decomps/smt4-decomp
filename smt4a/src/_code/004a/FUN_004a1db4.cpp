@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (172 vs 173 rows); retail uses a larger callee-saved set (push {r3-r9,lr}) and different register allocation */
 #include "common.h"
 #include "code/Code002a.h"
+#include "ui/UiSpriteApi.h"
 
 // Selection state of the animated page UI.
 struct AnimatedPageSelection {
@@ -29,8 +30,6 @@ extern AnimatedPageSelection g_animatedPageSelection;
 
 s32 useCounterIsFinished(void);
 void entryDispatchUpdate(void* sprite, s32 mode);
-u32 vec2GetXInt(void* sprite);
-u32 vec2GetYInt(void* sprite);
 void pointConvertToFloat(void* pointer, u32 x, u32 y);
 s32 gameGetMode(void);
 s32 statusDownGetFlag(void);
@@ -63,8 +62,8 @@ void FUN_004a1db4(StatusMenu* menu)
 
     entryDispatchUpdate(menu->rowSprite, menu->mode);
     void* sprite = reinterpret_cast<u8*>(menu) + menu->mode * 0x8c + 0xfc;
-    u32 y = vec2GetYInt(sprite);
-    u32 x = vec2GetXInt(sprite);
+    u32 y = vec2GetYInt((const UiSpriteState *)sprite);
+    u32 x = vec2GetXInt((const UiSpriteState *)sprite);
     pointConvertToFloat(menu->pointer, x, y);
 
     if (gameGetMode() != 0 && statusDownGetFlag() == 0) {

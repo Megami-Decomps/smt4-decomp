@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-s32 vec2GetXInt(const void *position);
-s32 vec2GetYInt(const void *position);
 void efctSetSpeed(f32 speed);
 
 void messageDrawPairedFrameSprites(u32 leftBase, u32 leftOverlay, u32 leftEdge,

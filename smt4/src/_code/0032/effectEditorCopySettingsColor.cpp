@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 
 /* Copies the colour at 0x88 of the source block into the effect editor. */

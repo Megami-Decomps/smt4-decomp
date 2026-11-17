@@ -1,5 +1,4 @@
 /* NON_MATCHING: ailment tests combine into a mask and HP-clamp register allocation differs from retail. */
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/GameDataAccess_Smt4.h"
 #include "gamedata/GamePlayerData.h"

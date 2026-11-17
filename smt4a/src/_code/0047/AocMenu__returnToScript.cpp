@@ -2,13 +2,10 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match8_AocQuestReturn.h"
-#include "shard/W6_W6Match8_ScriptStateMode.h"
+#include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
-void scrScriptProcessDestroy(ScriptState *process);
-ScriptState *scrScriptProcessCreate(void *script, void *messages);
 void msgWindowReset();
 void messageBannerRestartOrClear();
 void ifTouchRegionRemove();
@@ -36,9 +33,9 @@ void AocMenu::returnToScript()
         }
         scrScriptProcessDestroy(work->process);
         work->process = NULL;
-        ScriptState *process = scrScriptProcessCreate(work->script, work->messages);
+        ScriptProcess *process = scrScriptProcessCreate(work->script, work->messages);
         work->process = process;
-        ((ScriptStateModeView *)process)->mode = 2;
+        process->mode = 2;
         msgWindowReset();
         messageBannerRestartOrClear();
         ifTouchRegionRemove();

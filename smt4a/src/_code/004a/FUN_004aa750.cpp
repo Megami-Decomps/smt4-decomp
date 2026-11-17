@@ -1,8 +1,8 @@
 #include "battle/BtlUiObjCQuery.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern BtlUiGlobalsA g_btlUi;
 
 u32 FUN_004aa750(u32 block)
 {

@@ -1,7 +1,7 @@
 /* NON_MATCHING: allocation diagnostic metadata/NOP is absent; sprite/page registers and defaults relocation differ. */
 #include "camp/PlayLog/PlayLog.h"
 #include "classes/Obj4221a4.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
@@ -33,9 +33,6 @@ void asdTMTexTableLoadSprites(u32 table);
 void loadSlotEnsureLoaded(u32 slot);
 void paramsClearPacket(UiResourceParameters *parameters);
 
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 table, s32 image, UiResourceParameters *parameters, s32 active, f32 scale);
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 channel, s32 frame);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
 void FUN_0022feb0(void *work);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
 void gridNavigationConfigure(Obj4221a4 *window, u32 count, s32 rows, s32 first, s32 second, s32 third);

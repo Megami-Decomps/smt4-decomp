@@ -1,14 +1,13 @@
 /* NON_MATCHING: initial registration branch layout and zero/one constant registers differ; -O2 candidate. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "code/Code0037.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 struct BannerDemon { u8 unk00[4]; u16 id; };
 extern "C" {
 u32 scrGetArg(u32);
 s32 scrGetCommandFrame();
-void uiSpriteStateInitFromSource(UiSpriteState *, s32, s32, void *, s32, f32);
-void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
-void *saveSlotFindById(u16);
 void FUN_004bd410(u16);
 void sysPlayVoice(u32);
 

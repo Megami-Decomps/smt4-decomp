@@ -1,9 +1,8 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/PlayScene.h"
 
 extern "C" {
 
-extern BtlUiGlobals g_btlUi;
 s32 sceneIsOutsideClosingState(const PlayScene *scene);
 
 /* Reports whether the battle UI's third widget is outside state thirty-one. */

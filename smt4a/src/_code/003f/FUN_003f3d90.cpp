@@ -1,11 +1,11 @@
 #include "ui/PartyPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "result/WhisperEffect.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 PartyMember* partyPanelGetMember(s32 index);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 }
 
 /* Starts the panel's main effect and the three member effects at (x, y); each member effect runs at
@@ -17,7 +17,7 @@ static __inline void startPanelEffects(u32 x, u32 y, f32 speed)
     for (s32 index = 0; index < 3; ++index) {
         PartyMember* member = partyPanelGetMember(index + 13);
         if (member != NULL) {
-            efctSetSpeed(vec2GetSpeed(member) * speed);
+            efctSetSpeed(vec2GetSpeed((const UiSpriteState *)member) * speed);
         }
         texDrawTableEntryAtStoredOrigin(2, 0x11, index + 0xB8, x, y, 0xCE);
         efctSetSpeed(speed);

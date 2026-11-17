@@ -1,17 +1,17 @@
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 void FUN_004a0bac(s32 a, s32 b);
 s32 scrWorkGetValue(s32 index);
 void scrWorkSetValue(s32 index, s32 value);
 s32 messageForwardDefaultMode(s32 buffer, s32 message, s32 line, s32 a, s32 b);
-u8 *gameGetSlotRecord(s32 index);
 u32 dataTable01GetRecordWithAocOverride(u32 id);
 void messageSetScriptDisplayMode(void);
 s32 scrGetCommandFrame(void);
-s8 *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 s32 dataTableValueOrZero(s32 slot);
 u32 gameGetPlayerName(void);
@@ -46,9 +46,9 @@ s32 FUN_00348850(s32 phase)
             break;
         case 2: {
             s32 count = gameSlotTableFindFree();
-            s8 *slots = gameGetSlotTable();
+            SaveSlotTableA *slots = gameGetSlotTable();
             while (scrWorkGetValue(2) < count) {
-                gameGetSlotRecord(slots[0x1C88 + scrWorkGetValue(2)]);
+                gameGetSlotRecord(slots->party[scrWorkGetValue(2)]);
                 scrWorkSetValue(2, scrWorkGetValue(2) + 1);
             }
             if (scrWorkGetValue(2) >= count) {
@@ -58,8 +58,8 @@ s32 FUN_00348850(s32 phase)
         }
         /* fall through */
         case 3: {
-            u8 *unit = gameGetSlotRecord(gameGetSlotTable()[0x1C88 + scrWorkGetValue(2)]);
-            scrSetStringSlot(0x28, reinterpret_cast<const char *>(dataTable01GetRecordWithAocOverride(*reinterpret_cast<u16 *>(unit + 0x62))));
+            SlotRecordA *unit = gameGetSlotRecord(gameGetSlotTable()->party[scrWorkGetValue(2)]);
+            scrSetStringSlot(0x28, reinterpret_cast<const char *>(dataTable01GetRecordWithAocOverride(unit->id)));
             result = messageForwardDefaultMode(buffer, 13, scrWorkGetValue(1), 6, 0);
             scrWorkSetValue(1, scrWorkGetValue(1) + 1);
             if (result == 1) {

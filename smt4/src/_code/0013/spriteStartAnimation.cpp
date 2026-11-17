@@ -1,71 +1,70 @@
 /* NON_MATCHING: compiler hoists animation/key pointers across channel stores and uses r6 rather than lr for sequence scanning. */
-#include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
-
-static inline SpriteSequenceEntry *findSpriteSequence(SpriteAnimationResource *resource, s16 sequence)
+/* The first frame of sequence `sequence`: each sequence ends with an image of -1. */
+static inline UiSpriteFrameKey *findSpriteSequence(UiResourceParameters *resources, s16 sequence)
 {
     s32 group = 0;
-    for (u32 index = 0; index < resource->sequenceBytes / sizeof(SpriteSequenceEntry); ++index) {
+    for (u32 index = 0; index < resources->frameKeyBytes / sizeof(UiSpriteFrameKey); ++index) {
         if (group == sequence)
-            return &resource->sequence[index];
-        if (resource->sequence[index].value == -1)
+            return &resources->frameKeys[index];
+        if (resources->frameKeys[index].image == -1)
             ++group;
     }
     return NULL;
 }
 
-/* Activate an animation command and initialize its selected playback channels. */
-extern "C" void spriteStartAnimation(SpritePlaybackView *sprite, const SpriteAnimationCommand *animation)
+/* Runs a command list: starts the key each track's first command names. */
+extern "C" void spriteStartAnimation(UiSpriteState *sprite, const SpriteAnimationCommand *command)
 {
-    sprite->animation = animation;
-    if (animation == NULL)
+    sprite->commands = command;
+    if (command == NULL)
         return;
-    sprite->animationFrame = 0;
-    sprite->animationLoop = 0;
-    sprite->animationTime = 0;
-    sprite->animationStep = 0;
-    sprite->running = 1;
-    if (animation->positionKey > -1)
-        timerStart(sprite, (s16)animation->positionKey, animation->positionMode);
-    if (sprite->animation->frameKey > -1) {
-        s16 key = sprite->animation->frameKey;
-        s8 mode = sprite->animation->frameMode;
+    sprite->positionStep = 0;
+    sprite->alphaStep = 0;
+    sprite->scaleStep = 0;
+    sprite->frameStep = 0;
+    sprite->commandsRunning = 1;
+    if (command->positionKey > -1)
+        timerStart(sprite, (s16)command->positionKey, command->positionReverse);
+    if (sprite->commands->alphaKey > -1) {
+        s16 key = sprite->commands->alphaKey;
+        s8 reverse = sprite->commands->alphaReverse;
+        if (sprite->alphaKeys != NULL) {
+            sprite->alphaKey = key;
+            sprite->alphaFrame = 0;
+            sprite->alphaDone = 0;
+            sprite->finished = 0;
+            sprite->alphaReverse = reverse;
+            const UiSpriteScalarKey *value = &sprite->alphaKeys[sprite->alphaKey];
+            sprite->alpha = reverse == 0 ? value->first : value->last;
+        }
+    }
+    if (sprite->commands->scaleKey > -1) {
+        s16 key = sprite->commands->scaleKey;
+        s8 reverse = sprite->commands->scaleReverse;
+        if (sprite->scaleKeys != NULL) {
+            sprite->scaleKey = key;
+            sprite->scaleFrame = 0;
+            sprite->scaleDone = 0;
+            sprite->finished = 0;
+            sprite->scaleReverse = reverse;
+            const UiSpriteScalarKey *value = &sprite->scaleKeys[sprite->scaleKey];
+            f32 scale = reverse == 0 ? value->first : value->last;
+            sprite->scale[0] = scale;
+            sprite->scale[1] = scale;
+            sprite->scale[2] = scale;
+        }
+    }
+    if (sprite->commands->frameSequence > -1) {
+        sprite->frameKeys = findSpriteSequence(sprite->resources, (s16)sprite->commands->frameSequence);
         if (sprite->frameKeys != NULL) {
-            sprite->frameKey = key;
-            sprite->frameFrame = 0;
-            sprite->completed[1] = 0;
+            sprite->frameIndex = 0;
+            sprite->frameElapsed = 0;
+            sprite->frameDone = 0;
             sprite->finished = 0;
-            sprite->frameMode = mode;
-            const SpriteValueKey *value = &sprite->frameKeys[sprite->frameKey];
-            sprite->frameValue = mode == 0 ? value->first : value->second;
-        }
-    }
-    if (sprite->animation->colorKey > -1) {
-        s16 key = sprite->animation->colorKey;
-        s8 mode = sprite->animation->colorMode;
-        if (sprite->colorKeys != NULL) {
-            sprite->colorKey = key;
-            sprite->colorFrame = 0;
-            sprite->completed[2] = 0;
-            sprite->finished = 0;
-            sprite->colorMode = mode;
-            const SpriteValueKey *value = &sprite->colorKeys[sprite->colorKey];
-            u32 color = mode == 0 ? value->first : value->second;
-            sprite->colors[0] = color;
-            sprite->colors[1] = color;
-            sprite->colors[2] = color;
-        }
-    }
-    if (sprite->animation->sequence > -1) {
-        sprite->sequence = findSpriteSequence(sprite->resource, (s16)sprite->animation->sequence);
-        if (sprite->sequence != NULL) {
-            sprite->sequenceFrame = 0;
-            sprite->sequenceCount = 0;
-            sprite->completed[3] = 0;
-            sprite->finished = 0;
-            sprite->sequenceValue = sprite->sequence->value;
-            sprite->sequenceSentinel = -1u;
+            sprite->image = sprite->frameKeys->image;
+            sprite->secondaryImage = -1;
         }
     }
 }

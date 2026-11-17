@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail writes each {frame = 0, state = N} pair with one stm from fresh constants and ends case 3/9 with its own inlined epilogue, and indexes the switch from 0; this build hoists the zero into r6, stores the pair with two str and subtracts 2 before the table. */
 #include "common.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 struct PanelTimer {
     s32 frame; /* frames spent in the current state */
@@ -18,13 +18,11 @@ struct SpritePanel {
 typedef char SpritePanelOffsets[sizeof(SpritePanel) == 0x408 ? 1 : -1];
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 step);
 s32 FUN_00163e84(s32 index);
 void slotSetRequest(u32 index, u32 value, u32 extra);
 void screenFadeSlotReset(u32 index);
 /* Sets the sprite's visibility.active byte / reads its signed completion flag. */
 void workSetStateByte(UiSpriteState *sprite, u8 state);
-s32 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 }
 
 static __inline PanelTimer panelStartState(s32 state)

@@ -1,4 +1,5 @@
 #include "shard/Shard0047.h"
+#include "addon/aocMain.h"
 #include "addon/aocApplication.h"
 
 extern "C" {
@@ -6,7 +7,7 @@ extern "C" {
 extern u32 dataTableValueOrZero(u32 index);
 extern void fileSectionGetData(u32 handle, s32 id, u32 *out);
 
-s32 FUN_00473910(u8 *unused, u32 id)
+s32 FUN_00473910(AocMain *, u32 id)
 {
     u32 handle = dataTableValueOrZero(0x40);
 

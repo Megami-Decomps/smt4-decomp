@@ -1,78 +1,56 @@
-#include "common.h"
+#include "shard/Resource.h"
 
 extern "C" {
 
-typedef struct HandlerEntry {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ void (*release)(u32 arg);
-    /* 0x14 */ u8 unk14[0x30];
-} HandlerEntry;
+void asdMemFree(void *memory);
 
-extern HandlerEntry g_handlerTable[]; /* 0x464110 */
-
-typedef struct Request {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 index;
-    /* 0x06 */ u8 unk06[2];
-    /* 0x08 */ u32 arg;
-    /* 0x0C */ u8 unk0C[4];
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 bufferA;
-    /* 0x1C */ u8 unk1C[4];
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u32 unk24;
-    /* 0x28 */ u32 bufferB;
-} Request;
-
-int asdMemFree(u32 ptr);
+/* Destroys a resource: releases its data through the handler for its type, frees its two buffers and the resource itself. */
+static __inline void resourceDestroy(Resource *resource)
+{
+    if (resource->data != NULL) {
+        g_handlerTable[resource->type].release(resource->data);
+    }
+    if (resource->bufferA != NULL) {
+        asdMemFree(resource->bufferA);
+        resource->sizeA = 0;
+        resource->countA = 0;
+        resource->bufferA = NULL;
+    }
+    if (resource->bufferB != NULL) {
+        asdMemFree(resource->bufferB);
+        resource->sizeB = 0;
+        resource->countB = 0;
+        resource->bufferB = NULL;
+    }
+    asdMemFree(resource);
+}
 
 typedef struct Node {
-    /* 0x00 */ u8 unk00[0x90];
-    /* 0x90 */ Request *request;
+    /* 0x00 */ u8 unk00[0x8C];
+    /* 0x8C */ struct Node *firstChild;    /* only meaningful on the list head */
+    /* 0x90 */ Resource *resource;
     /* 0x94 */ u8 unk94[4];
-    /* 0x98 */ u32 flags;
+    /* 0x98 */ u32 flags;                  /* bit 0: the resource is shared and not owned */
     /* 0x9C */ u8 unk9C[0x10];
     /* 0xAC */ struct Node *next;
 } Node;
 
-typedef struct Owner {
-    /* 0x00 */ u8 unk00[0x8C];
-    /* 0x8C */ Node *head;
-} Owner;
-
-/* Releases every node of the owner's list (and its request, unless flag 1 marks it as borrowed), then the owner. */
-void resourceListDestroy(Owner *owner)
+/* Frees a list of nodes: each node's resource (unless shared) and the node itself, then the list head. */
+void resourceListDestroy(Node *list)
 {
-    Node *node = owner->head;
+    Node *node;
     Node *next;
-    Request *request;
 
+    node = list->firstChild;
     while (node != NULL) {
         next = node->next;
         if ((node->flags & 1) == 0) {
-            request = node->request;
-            if (request->arg != 0) {
-                g_handlerTable[request->index].release(request->arg);
-            }
-            if (request->bufferA != 0) {
-                asdMemFree(request->bufferA);
-                request->unk10 = 0;
-                request->unk14 = 0;
-                request->bufferA = 0;
-            }
-            if (request->bufferB != 0) {
-                asdMemFree(request->bufferB);
-                request->unk20 = 0;
-                request->unk24 = 0;
-                request->bufferB = 0;
-            }
-            asdMemFree((u32)request);
+            resourceDestroy(node->resource);
         }
-        asdMemFree((u32)node);
+        asdMemFree(node);
         node = next;
     }
-    asdMemFree((u32)owner);
+    asdMemFree(list);
 }
 
 } /* extern "C" */

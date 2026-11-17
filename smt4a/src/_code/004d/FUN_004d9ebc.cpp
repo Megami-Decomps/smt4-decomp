@@ -1,9 +1,9 @@
 #include "gamedata/UnitStatInitialization.h"
 #include "shard/Shard0032.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 InitializedUnitStatsA *gameGetOptions(void);
-UnitRecord *gameGetPlayerData(void);
 s32 equipmentTableFindIndexById(u32 categoryId, u16 playerId);
 void sysMemClear(void *, u32);
 
@@ -14,7 +14,7 @@ void FUN_004d9ebc(u32 categoryId)
     s32 variant = -1;
     for (s32 i = 0; i < 3; ++i) {
         if (unit->partyCategories[i] == categoryId) {
-            variant = equipmentTableFindIndexById(categoryId, gameGetPlayerData()->id);
+            variant = equipmentTableFindIndexById(categoryId, gameGetPlayerData()->level);
             break;
         }
     }

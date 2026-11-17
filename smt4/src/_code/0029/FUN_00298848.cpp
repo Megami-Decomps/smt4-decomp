@@ -2,11 +2,11 @@
 #include "gamedata/SkillDataRecord.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SkillDataLookup.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 s32 FUN_0026c464(void *, s32, s32);
 s32 FUN_0026c654(void *, s32, s32, s32);
-SlotTable *gameGetSlotTable(void);
 }
 
 extern "C" u32 FUN_00298848(s32 skillId, void *context)

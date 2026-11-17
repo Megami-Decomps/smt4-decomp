@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the 0.2 factor in s17 and the shared draw tail laid out differently (190 vs 184 rows); the row drawing logic is the same. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -24,8 +25,6 @@ typedef struct ListMenuWork {
 s32 objectApplyIfUnblocked(void *list);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 listCursorGetRowIfUnblocked(void *list);
-s32 vec2GetXInt(const void *vector);
-s32 vec2GetYInt(const void *vector);
 void efctSetSpeed(f32 speed);
 
 /* Draws one row of the list menu at the offset (`*x`, `*y`) + (`offsetX`, `offsetY`): a plain row
@@ -74,8 +73,8 @@ void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selected
         s32 index = listCursorGetRowIfUnblocked(work->list);
 
         if (work->pageIds[row] == work->slotIds[index + base]) {
-            *x = vec2GetXInt(work->slide) + *x;
-            *y = vec2GetYInt(work->slide) + *y;
+            *x = vec2GetXInt((const UiSpriteState *)work->slide) + *x;
+            *y = vec2GetYInt((const UiSpriteState *)work->slide) + *y;
             efctSetSpeed(work->slideSpeed * scale);
         }
     }

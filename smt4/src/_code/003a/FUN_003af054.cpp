@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void btlUiGetSelectedColumnValue(BtlUiObjC *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 void FUN_003af054(void)
 {

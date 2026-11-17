@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/PlayScene.h"
 #include <stddef.h>
 #include "code/Code0029_Smt4.h"

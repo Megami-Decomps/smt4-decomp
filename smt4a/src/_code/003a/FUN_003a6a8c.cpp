@@ -4,8 +4,6 @@
 extern "C" {
 
 u16 gameDataBlocksGetCounter(void);
-void uiSpriteStateInitFromSource(void *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
-void pairSetFirstResetSecond(void *sprite, s32 value);
 
 /* Script command: opens the counter panel in mode 10 with the current counter value and starts its sprite animation. */
 u32 FUN_003a6a8c(void)

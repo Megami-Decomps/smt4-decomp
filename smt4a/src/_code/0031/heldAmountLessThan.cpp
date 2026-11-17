@@ -1,18 +1,18 @@
 #include "shard/Shard0031.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-extern SlotTable *gameGetSlotTable(void);
-extern Lookup62 *gameGetSlotRecord(s8 slot);
-extern s32 recordGetScaledMaximum(Lookup62 *entry);
-extern Lookup62 *partyGetSlot(u32 index);
-extern u32 partySlotIsOccupied(Lookup62 *entry);
+extern s32 recordGetScaledMaximum(SlotRecordA *entry);
+extern u32 partySlotIsOccupied(PartySlotA *entry);
 
 /* True when the amount asked for is more than what is held (id < 0: the player value). */
 u32 heldAmountLessThan(s32 amount, u32 id)
 {
-    Lookup62 *entry;
-    SlotTable *table;
+    SlotRecordA *entry;
+    PartySlotA *slot;
+    SaveSlotTableA *table;
     s32 i;
     u32 j;
 
@@ -23,7 +23,7 @@ u32 heldAmountLessThan(s32 amount, u32 id)
     } else {
         table = gameGetSlotTable();
         for (i = 0; i < 0x18; i++) {
-            if (table->slots[i] >= 0 && (entry = gameGetSlotRecord(table->slots[i])) != NULL && entry->id == id) {
+            if (table->party[i] >= 0 && (entry = gameGetSlotRecord(table->party[i])) != NULL && entry->id == id) {
                 if (recordGetScaledMaximum(entry) < amount) {
                     return 1;
                 }
@@ -31,8 +31,8 @@ u32 heldAmountLessThan(s32 amount, u32 id)
             }
         }
         for (j = 0; (s32)j < 0xC; j++) {
-            entry = partyGetSlot(j & 0xFFFF);
-            if (entry != NULL && partySlotIsOccupied(entry) == 0 && entry->id == id) {
+            slot = partyGetSlot(j & 0xFFFF);
+            if (slot != NULL && partySlotIsOccupied(slot) == 0 && slot->record.id == id) {
                 return 1;
             }
         }

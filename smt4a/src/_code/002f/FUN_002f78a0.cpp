@@ -1,10 +1,10 @@
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 struct MenuSpriteBankView {
     u8 unk0000[0x18];
     u32 state;
     u8 unk001c[0x61c];
-    UiSpriteSource source; /* 0x638 */
+    UiResourceParameters source; /* 0x638 */
     u8 unk0658[0x834];
     UiSpriteState slots[13]; /* 0xe8c */
     UiSpriteState label; /* 0x15a8 */
@@ -16,9 +16,6 @@ typedef char MenuSpriteBankOffsets[offsetof(MenuSpriteBankView, slots) == 0xe8c 
     offsetof(MenuSpriteBankView, cursor) == 0x197c ? 1 : -1];
 
 extern "C" {
-void uiSpriteStateInitFromSource(UiSpriteState *, u32, u32, UiSpriteSource *, u32, f32);
-void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
-void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
 
 /* Initialize the repeating menu sprites and their label, cursor and indicator. */
 void FUN_002f78a0(MenuSpriteBankView *work)

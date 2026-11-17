@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018f660` (_code @ 0x18f660, 0x127c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,10 +10,7 @@ int statusDownRestoreTabForMode(void);
 int FUN_00296284(...);
 int statusCameraApply(void);
 int eventQueueAddUnique(...);
-int uiSlidingSpriteAdvance(...);
 int eventQueueAddUniqueIfValid(...);
-int timerStart(...);
-int spriteStartAnimationByIndex(...);
 int FUN_002c1658(...);
 int __aeabi_uidivmod(...);
 
@@ -38,7 +36,6 @@ int FUN_0029ae60(int);
 int lmapSceneSetUnk134(int);
 int FUN_002a09b4(unsigned char *, int);
 int nkmEnemyFindById(void);
-int uiSpriteAdvanceAnimation(...);
 int asdOperatorNew(void);
 int VectorSignedToFloat(...);
 
@@ -122,7 +119,6 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-extern unsigned int vec2GetXInt(char *);
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 extern int padIsButtonPressed(unsigned int);
@@ -170,11 +166,11 @@ unsigned int FUN_0018f660(void)
   pcVar4 = DAT_0044e144;
   pcVar5 = DAT_0044e144 + 0x15c;
   DAT_0044e144[0x12ec] = '\0';
-  uiSpriteAdvanceAnimation(pcVar5);
-  uiSpriteAdvanceAnimation(pcVar4 + 0x1e8);
+  uiSpriteAdvanceAnimation((UiSpriteState *)pcVar5);
+  uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x1e8));
   if (pcVar4[0x1eb4] != '\0') {
-    uiSpriteAdvanceAnimation(pcVar4 + 0x274);
-    uiSpriteAdvanceAnimation(pcVar4 + 0x300);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x274));
+    uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x300));
     if ((pcVar4[0x2fe] != '\0') && (pcVar4[0x38a] != '\0')) {
       pcVar4[0x1eb4] = '\0';
     }
@@ -195,7 +191,7 @@ unsigned int FUN_0018f660(void)
     }
     FUN_002950e8(pcVar4 + 0x418,1);
     FUN_002950e8(pcVar4 + 0x4a4,0);
-    if ((*(int *)(pcVar4 + 0x10) >= 6) && (temp_v7 = uiSpriteAdvanceAnimation(pcVar4 + 0x530), temp_v7 != 0)) {
+    if ((*(int *)(pcVar4 + 0x10) >= 6) && (temp_v7 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x530)), temp_v7 != 0)) {
       pcVar4[0x12dc] = '\0';
       pcVar4[0x12dd] = '\0';
       pcVar4[0x12de] = '\0';
@@ -207,7 +203,7 @@ unsigned int FUN_0018f660(void)
     temp_v2 = 1;
     temp_v7 = 6;
     do {
-      temp_v4 = uiSpriteAdvanceAnimation(pcVar4 + temp_v7 * 0x8c + 0x44);
+      temp_v4 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + temp_v7 * 0x8c + 0x44));
       if (temp_v4 == 0) {
         temp_v2 = 0;
       }
@@ -441,7 +437,7 @@ LAB_0018fbe4:
       FUN_00297684(*(unsigned int *)pcVar13);
       temp_v7 = objSlotsAllEmpty(*(unsigned int *)pcVar13);
       if (temp_v7 != 0) {
-        temp_v6 = vec2GetXInt(pcVar4 + 0x38c);
+        temp_v6 = vec2GetXInt((UiSpriteState *)(pcVar4 + 0x38c));
         temp_v15 = *(float *)(pcVar4 + 0x1e88);
         temp_v16 = *(unsigned int *)(pcVar4 + 0x1e8c);
         temp_v10 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -452,7 +448,7 @@ LAB_0018fbe4:
         objSetAnglesDegrees(*(unsigned int *)pcVar13,pcVar4 + 0x1e90);
 LAB_0018fd84:
         if ((pcVar4[0x12f2] != '\0') || ((*pcVar5 != '\x03' && (*pcVar5 != '\t')))) {
-          timerStart(pcVar4 + 0x38c,1,0);
+          timerStart((UiSpriteState *)(pcVar4 + 0x38c),1,0);
           pcVar4[0x12f2] = '\0';
         }
         if (*(int *)(pcVar4 + 0x12e0) != 0) {
@@ -472,9 +468,9 @@ LAB_0018fd84:
               pcVar4[0x6cd] = '\0';
               pcVar4[0x759] = '\0';
               pcVar4[0x7e5] = '\0';
-              timerStart(pcVar4 + 0x648,8,0);
-              timerStart(pcVar4 + 0x6d4,9,0);
-              spriteStartAnimationByIndex(pcVar4 + 0x760,5);
+              timerStart((UiSpriteState *)(pcVar4 + 0x648),8,0);
+              timerStart((UiSpriteState *)(pcVar4 + 0x6d4),9,0);
+              spriteStartAnimationByIndex((UiSpriteState *)(pcVar4 + 0x760),5);
               pcVar5 = DAT_0044e144;
               pcVar5[0x10] = '\0';
               pcVar5[0x11] = '\0';
@@ -526,9 +522,9 @@ LAB_0018fe5c:
     }
     break;
   case 7:
-    temp_v7 = uiSpriteAdvanceAnimation(pcVar4 + 0x648);
-    if (((temp_v7 != 0) && (temp_v7 = uiSpriteAdvanceAnimation(pcVar4 + 0x6d4), temp_v7 != 0)) &&
-       (temp_v7 = uiSpriteAdvanceAnimation(pcVar4 + 0x760), temp_v7 != 0)) {
+    temp_v7 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x648));
+    if (((temp_v7 != 0) && (temp_v7 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x6d4)), temp_v7 != 0)) &&
+       (temp_v7 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x760)), temp_v7 != 0)) {
       pcVar5 = DAT_0044e144;
       pcVar5[0x10] = '\0';
       pcVar5[0x11] = '\0';
@@ -596,7 +592,7 @@ LAB_0018ffcc:
           objSetAnglesDegrees(*(unsigned int *)pcVar5,pcVar4 + 0x1e90);
           statusCameraApply();
           FUN_00297684(*(unsigned int *)pcVar5);
-          temp_v6 = vec2GetXInt(pcVar4 + 0x38c);
+          temp_v6 = vec2GetXInt((UiSpriteState *)(pcVar4 + 0x38c));
           temp_v16 = *(unsigned int *)(pcVar4 + 0x1e88);
           temp_v17 = *(unsigned int *)(pcVar4 + 0x1e8c);
           temp_v12 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -759,7 +755,7 @@ LAB_00190190:
               FUN_002c1658(10,1);
               if (temp_v7 != 0) {
                 pcVar4[0x12f0] = pcVar4[0x12f0] != '\x01';
-                timerStart(pcVar4 + 0x5bc,7,0);
+                timerStart((UiSpriteState *)(pcVar4 + 0x5bc),7,0);
                 temp_v6 = 0x100016d;
                 eventQueueAddUniqueIfValid(temp_v6);
               }
@@ -801,15 +797,15 @@ joined_r0x00190660:
   if (pcVar4[0x1e67] != '\t') {
     if (*(int *)(pcVar4 + 0x12dc) >= 4) {
       if ((*(int *)(pcVar4 + 0x18) >= 10) && (pcVar4[0xd62] != '\0')) {
-        uiSlidingSpriteAdvance(pcVar4 + 0x7ec,1);
-        uiSlidingSpriteAdvance(pcVar4 + 0xd64,0);
+        uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + 0x7ec),1);
+        uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + 0xd64),0);
       }
       else {
         temp_v7 = 0;
         do {
           if (temp_v7 <= *(int *)(pcVar4 + 0x18)) {
-            uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0x7ec,1);
-            uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0xd64,0);
+            uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + temp_v7 * 0x8c + 0x7ec),1);
+            uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + temp_v7 * 0x8c + 0xd64),0);
           }
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 10);
@@ -820,22 +816,22 @@ joined_r0x00190660:
   else if (*(int *)(pcVar4 + 0x12dc) >= 8) {
     FUN_002950e8(pcVar4 + 0x418,1);
     FUN_002950e8(pcVar4 + 0x4a4,0);
-    if ((*(int *)(pcVar4 + 0x1c) >= 6) && (temp_v7 = uiSpriteAdvanceAnimation(pcVar4 + 0x530), temp_v7 != 0)) {
+    if ((*(int *)(pcVar4 + 0x1c) >= 6) && (temp_v7 = uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x530)), temp_v7 != 0)) {
       pcVar4[0x20] = '\x01';
     }
     if (pcVar4[0x20] == '\0') {
       *(int *)(pcVar4 + 0x1c) = *(int *)(pcVar4 + 0x1c) + 1;
     }
     if ((*(int *)(pcVar4 + 0x18) >= 10) && (pcVar4[0xd62] != '\0')) {
-      uiSlidingSpriteAdvance(pcVar4 + 0x7ec,1);
-      uiSlidingSpriteAdvance(pcVar4 + 0xd64,0);
+      uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + 0x7ec),1);
+      uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + 0xd64),0);
     }
     else {
       temp_v7 = 0;
       do {
         if (temp_v7 <= *(int *)(pcVar4 + 0x18)) {
-          uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0x7ec,1);
-          uiSlidingSpriteAdvance(pcVar4 + temp_v7 * 0x8c + 0xd64,0);
+          uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + temp_v7 * 0x8c + 0x7ec),1);
+          uiSlidingSpriteAdvance((UiSpriteState *)(pcVar4 + temp_v7 * 0x8c + 0xd64),0);
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 10);
@@ -843,8 +839,8 @@ joined_r0x00190660:
     }
   }
   if (*(int *)(pcVar4 + 0x12dc) >= 7) {
-    uiSpriteAdvanceAnimation(pcVar4 + 0x44);
-    uiSpriteAdvanceAnimation(pcVar4 + 0xd0);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x44));
+    uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0xd0));
     temp_v4 = (int)*(short *)(pcVar4 + 0x1300);
     temp_v7 = 0;
     if (temp_v4 != 0x155) {
@@ -863,7 +859,7 @@ joined_r0x00190660:
       __aeabi_uidivmod(*piVar14,(int)in_s0);
       *piVar14 = temp_v8;
     }
-    uiSpriteAdvanceAnimation(pcVar4 + 0x5bc);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(pcVar4 + 0x5bc));
   }
   *(int *)(pcVar4 + 0x10) = *(int *)(pcVar4 + 0x10) + 1;
   *(int *)(pcVar4 + 0x14) = *(int *)(pcVar4 + 0x14) + 1;

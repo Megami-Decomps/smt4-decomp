@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 201 rows); retail also inlines a percent-bonus step on the gold whose percentage is constant 0 (folded away), and orders registers differently */
 #include "common.h"
+#include "shard/PassiveSkill.h"
+#include "result/Result.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
@@ -15,24 +17,6 @@ struct RewardInput {
     u8 unk3d;               // 0x3d
 };
 
-// Result-screen accumulator.
-struct ResultData {
-    u8 unk0000[0x35b4];
-    u32 totalExperience;            // 0x35b4
-    u32 unitExperience[24];         // 0x35b8 (indexed by the unit's result slot)
-    u32 itemIds[6];                 // 0x3618
-    u32 itemCounts[6];              // 0x3630
-    u32 gold;                       // 0x3650
-    u8 unk3654[0xd641 - 0x3654];
-    u8 unkd641;                     // 0xd641
-    u8 unkd642;                     // 0xd642
-};
-
-
-struct PassiveRecord {
-    u8 unk00[0x2f];
-    u8 expBonus;            // 0x2f: percent bonus (0 = none)
-};
 
 struct SlotTable {
     u8 unk0000[0x90f0];
@@ -42,23 +26,21 @@ struct SlotTable {
 
 extern "C" {
 
-extern ResultData* g_result;
 
 SlotTable* gameGetSlotTable(void);
 u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 s32 playerPadTestBit(s32 bit);
-PassiveRecord* passiveSkillLookupRecord(u32 skill);
 
 // Adds a battle's rewards to the result screen: gold, dropped items (merged by id), the
 // player's and every party member's experience share (skills with an experience bonus scale
 // it, members out of the active party get 30%).
 void FUN_00214568(RewardInput* reward)
 {
-    ResultData* result = g_result;
+    ResultWork* result = g_result;
     SlotTable* slotTable = gameGetSlotTable();
     PlayerDataIV* player = gameGetPlayerData();
-    result->unkd641 = reward->unk3c;
-    result->unkd642 = reward->unk3d;
+    result->rewardFlagA = reward->unk3c;
+    result->rewardFlagB = reward->unk3d;
     result->gold += reward->gold;
     for (s32 i = 0; i < 6; i++) {
         u32 id = reward->itemIds[i];
@@ -96,9 +78,9 @@ void FUN_00214568(RewardInput* reward)
         for (s32 k = 0; k < 8; k++) {
             u32 skill = unit->skills.ids[k];
             if (skill == 0) continue;
-            PassiveRecord* passive = passiveSkillLookupRecord(skill);
-            if (passive != NULL && passive->expBonus != 0) {
-                bonus = (f32)passive->expBonus * 0.01f * bonus;
+            const PassiveSkillRecord* passive = passiveSkillLookupRecord(skill);
+            if (passive != NULL && passive->experience.expBonus != 0) {
+                bonus = (f32)passive->experience.expBonus * 0.01f * bonus;
             }
         }
         u32 scaled = (u32)(share * (s32)(bonus * 100.0f)) / 100;

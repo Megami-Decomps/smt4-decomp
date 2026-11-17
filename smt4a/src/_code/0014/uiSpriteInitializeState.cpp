@@ -1,30 +1,32 @@
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void sysMemClear(void *memory, u32 size);
 
-/* Initializes the sprite state and its five source-dependent channels. */
-void uiSpriteInitializeState(UiSpriteState *sprite, u32 value0, u32 value1, u32 value2, UiSpriteSource *source, u16 id, f32 value)
+/* Clears the sprite and sets its texture table, images, animation resource (whose tables the tracks take), id
+   and opacity, at scale 1 with every track done. */
+void uiSpriteInitializeState(UiSpriteState *sprite, u32 textureTable, s32 image, s32 secondaryImage,
+                             UiResourceParameters *resources, u16 id, f32 alpha)
 {
     sysMemClear(sprite, sizeof(UiSpriteState));
-    sprite->unk00 = value0;
-    sprite->unk04 = value1;
-    sprite->unk08 = value2;
-    sprite->unk20 = value;
-    sprite->unk38 = id;
-    sprite->unk24 = 1.0f;
-    sprite->unk28 = 1.0f;
-    sprite->unk2C = 1.0f;
-    sprite->source = source;
-    sprite->unk4C = source->unk0C;
-    sprite->unk58 = source->unk10;
-    sprite->unk64 = source->unk14;
-    sprite->unk70 = source->unk18;
-    sprite->unk78 = source->unk1C;
-    sprite->unk86[0] = 1;
-    sprite->unk86[1] = 1;
-    sprite->unk86[2] = 1;
-    sprite->unk86[3] = 1;
-    sprite->unk86[4] = 1;
+    sprite->textureTable = textureTable;
+    sprite->image = image;
+    sprite->secondaryImage = secondaryImage;
+    sprite->alpha = alpha;
+    sprite->id = id;
+    sprite->scale[0] = 1.0f;
+    sprite->scale[1] = 1.0f;
+    sprite->scale[2] = 1.0f;
+    sprite->resources = resources;
+    sprite->positionKeys = resources->positionKeys;
+    sprite->alphaKeys = resources->alphaKeys;
+    sprite->scaleKeys = resources->scaleKeys;
+    sprite->frameKeys = resources->frameKeys;
+    sprite->commands = resources->commands;
+    sprite->positionDone = 1;
+    sprite->alphaDone = 1;
+    sprite->scaleDone = 1;
+    sprite->frameDone = 1;
+    sprite->finished = 1;
 }
 }

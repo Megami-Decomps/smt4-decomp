@@ -1,8 +1,8 @@
 /* NON_MATCHING: the first category update now matches; in the payload update retail loads usage into r3 and the alignment into r1 (build: r1 and r3). */
 #include "sys/AllocationTracking.h"
+#include "classes/AllocatorState.h"
 
 extern "C" {
-extern AllocationTracking g_allocationAddressRanges;
 u32 FUN_0019c40c(AllocationHeaderA *allocation);
 
 static void addCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)

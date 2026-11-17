@@ -1,4 +1,5 @@
 #include "shard/Shard004C.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 
@@ -7,19 +8,19 @@ typedef struct Source4C {
     /* 0x166 */ u16 unk166;
     /* 0x168 */ u8 unk168[0x290];
     /* 0x3F8 */ s32 unk3F8;
-    /* 0x3FC */ Halves34 *source3FC;
-    /* 0x400 */ Halves34 *source400;
-    /* 0x404 */ Halves34 *source404;
+    /* 0x3FC */ SlotRecordA *source3FC;
+    /* 0x400 */ SlotRecordA *source400;
+    /* 0x404 */ SlotRecordA *source404;
 } Source4C;
 
 extern void playerGetWords(u16 *out, s32 a);
 extern void FUN_0035bd94(u16 id, u16 *out, u32 count);
-extern void halves34Copy(Halves34 *src, u16 *out);
+extern void halves34Copy(const SlotRecordA *src, u16 *out);
 
 /* Fills `out` with the halves of the active source: the first non-null entry, else the default record. */
 void source4CCopyHalves(Source4C *obj, u16 *out)
 {
-    Halves34 *source;
+    SlotRecordA *source;
 
     if (obj->unk3F8 != 0) {
         playerGetWords(out, 1);

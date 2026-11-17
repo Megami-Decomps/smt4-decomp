@@ -1,13 +1,13 @@
 #include "camp/PartyResourceWork.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 void asdMemFree(void *);
 void dataTableFree16(void);
 void statusBustUpPortraitRelease(s32, s32);
-PartyTextureSlot *partyGetSlot(u32);
-s32 partySlotIsOccupied(const PartyTextureSlot *);
+s32 partySlotIsOccupied(const PartySlotA *);
 void ifTouchRegionRemove(void);
 void campButtonHelpRelease(void);
 void helpTexturesRelease(void);
@@ -27,10 +27,10 @@ void partyReleasePreviewResources(PartyResourceWork *work)
         }
     }
     for (s32 i = 0; i < 12; ++i) {
-        PartyTextureSlot *slot = partyGetSlot((u16)i);
+        PartySlotA *slot = partyGetSlot((u16)i);
         if (partySlotIsOccupied(slot)) {
             /* The canonical NkmBaseRecordA is only the 0x40-byte prefix. */
-            const NkmBaseRecordA *record = nkmBaseGetRecord(slot->id);
+            const NkmBaseRecordA *record = nkmBaseGetRecord(slot->record.id);
             statusBustUpPortraitRelease((s16)(record->model + 1), 0);
         }
     }

@@ -1,5 +1,5 @@
 #include "font/SearchWin/SearchWin.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 extern SearchWinWork* DAT_0057f584;

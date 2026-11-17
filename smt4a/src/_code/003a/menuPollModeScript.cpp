@@ -1,5 +1,6 @@
 /* NON_MATCHING: the compiler shares the scriptState store between cases, unlike retail's r6 constant and writeback store to the state subobject. */
 #include "common.h"
+#include "script/scrScriptProcess.h"
 #include "battle/btlEvent.h"
 
 struct MenuScriptState {
@@ -19,7 +20,6 @@ struct MenuScriptState {
 };
 
 extern "C" {
-void *scrScriptProcessCreate(void *script, void *data);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(s32 id);
 void cecProcessCall4(void);

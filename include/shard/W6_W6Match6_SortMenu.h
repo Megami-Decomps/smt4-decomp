@@ -2,12 +2,12 @@
 #define SHARD_W6_W6MATCH6_SORT_MENU_H
 
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "ui/UiSpriteApi.h"
 
-struct SortMenuSprite { u8 data[0x8c]; };
 struct SortMenuWork {
     u32 calculate, draw;
     UiResourceParameters parameters;
-    SortMenuSprite sprites[13]; // 0x28
+    UiSpriteState sprites[13]; // 0x28
     u32 frame; // 0x744
     u8 unk748[5];
     u8 initialized, option, unk74f;

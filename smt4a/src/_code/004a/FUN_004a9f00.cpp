@@ -1,9 +1,8 @@
 /* NON_MATCHING: the zero-depth VFP constant is loaded two instructions earlier than retail. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void FUN_00336aec(BtlUiObjCA *, u32, s32, u32, u32, s32);
 void FUN_004a9588(BtlUiA *, u32, u32, u32, u32, s32, f32, f32, f32);
 }

@@ -1,7 +1,7 @@
 #include "script/ScriptVm.h"
 
 /* Script opcode: pushes the address `operand` bytes into the script's data block. */
-extern "C" s32 FUN_001dc850(ScriptVmProcess *process)
+extern "C" s32 FUN_001dc850(ScriptProcess *process)
 {
     u8 *base = process->dataBase;
     u8 *address = base + process->code[process->pc].decoded.operand;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001afc0c` (_code @ 0x1afc0c, 0x7c8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -23,7 +24,6 @@ int resourceRunOperationIfUnblocked(...);
 int FUN_0029efd8(int, int);
 int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [8], int, int);
 int eventQueueAddUniqueIfValid(...);
-int timerStart(...);
 int FUN_002c1658(...);
 int asdMemFree(void);
 int SBORROW4(...);
@@ -108,7 +108,7 @@ void FUN_001afc0c(void)
     temp_v11 = 1;
     FUN_002c1658();
     if (temp_v11 != 0) {
-      timerStart(temp_v1 + 0x34,2,0);
+      timerStart((UiSpriteState *)(temp_v1 + 0x34),2,0);
       temp_v11 = g_uiQuest;
       temp_v6 = *(unsigned int *)(g_uiQuest + 4);
       *(unsigned int *)(g_uiQuest + 4) = 3;
@@ -205,7 +205,7 @@ void FUN_001afc0c(void)
             temp_v9 = *(int *)(temp_v1 + 0x5cc);
           }
           if (temp_v9 != *(int *)(temp_v1 + 0x5c8)) {
-            timerStart(temp_v1 + 0x1d8,3,0);
+            timerStart((UiSpriteState *)(temp_v1 + 0x1d8),3,0);
             temp_v9 = g_uiQuest;
             temp_v6 = *(unsigned int *)(g_uiQuest + 4);
             *(unsigned int *)(g_uiQuest + 4) = 5;
@@ -224,7 +224,7 @@ void FUN_001afc0c(void)
               *(unsigned int *)(temp_v1 + 0x5cc) = 0;
             }
             if (*(int *)(temp_v1 + 0x5cc) != *(int *)(temp_v1 + 0x5c8)) {
-              timerStart(temp_v1 + 0x1d8,2,0);
+              timerStart((UiSpriteState *)(temp_v1 + 0x1d8),2,0);
               temp_v9 = g_uiQuest;
               temp_v6 = *(unsigned int *)(g_uiQuest + 4);
               *(unsigned int *)(g_uiQuest + 4) = 5;
@@ -418,7 +418,7 @@ LAB_001b02f8:
                 temp_v9 = 1;
                 FUN_002c1658();
                 if (temp_v9 != 0) {
-                  timerStart(temp_v1 + 0x34,2,0);
+                  timerStart((UiSpriteState *)(temp_v1 + 0x34),2,0);
                   temp_v9 = g_uiQuest;
                   temp_v6 = *(unsigned int *)(g_uiQuest + 4);
                   *(unsigned int *)(g_uiQuest + 4) = 3;

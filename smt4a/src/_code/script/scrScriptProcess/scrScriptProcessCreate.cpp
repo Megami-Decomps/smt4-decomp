@@ -3,77 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "script/scrScriptProcess.h"
 
-#define SCRIPT_SECTION_NAMES 0
-#define SCRIPT_SECTION_LABELS 1
-#define SCRIPT_SECTION_CODE 2
-#define SCRIPT_SECTION_DATA 3
-#define SCRIPT_SECTION_STRINGS 4
-
-/* A section table entry of a script file (0x10 bytes). */
-struct ScriptFileSection {
-    /* 0x00 */ u32 type;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ s32 size;
-    /* 0x0C */ u32 offset;          /* from the start of the file */
-};
-
-/* A script file ("FLW0"): header, then the section table (observed fields). */
-struct ScriptFile {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ char magic[4];
-    /* 0x0C */ u8 unk0C[4];
-    /* 0x10 */ s32 sectionCount;
-    /* 0x14 */ s16 localCount;       /* integer locals */
-    /* 0x16 */ s16 floatCount;       /* float locals */
-    /* 0x18 */ u8 unk18[8];
-    /* 0x20 */ ScriptFileSection section[1];
-};
-
-/* A name table entry (0x20 bytes, observed fields). */
-struct ScriptName {
-    /* 0x00 */ s8 name[0x18];
-    /* 0x18 */ u32 value;
-    /* 0x1C */ u8 unk1C[4];
-};
-
-/* A running script (0x10C bytes, observed fields). */
-struct ScriptProcessWork {
-    /* 0x000 */ s8 name[0x18];
-    /* 0x018 */ u32 nameValue;
-    /* 0x01C */ u32 zero1C[8];
-    /* 0x03C */ u8 state[0x70];
-    /* 0x0AC */ ScriptFile *file;
-    /* 0x0B0 */ ScriptFileSection *sections;
-    /* 0x0B4 */ ScriptName *names;
-    /* 0x0B8 */ u8 *labels;
-    /* 0x0BC */ u8 *code;
-    /* 0x0C0 */ u32 owner;
-    /* 0x0C4 */ u8 *strings;
-    /* 0x0C8 */ s32 nameIndex;
-    /* 0x0CC */ u32 unk0CC;
-    /* 0x0D0 */ u32 unk0D0;
-    /* 0x0D4 */ u8 unk0D4[4];
-    /* 0x0D8 */ u32 unk0D8;
-    /* 0x0DC */ u32 unk0DC;
-    /* 0x0E0 */ u32 unk0E0;
-    /* 0x0E4 */ u32 unk0E4;
-    /* 0x0E8 */ s32 *locals;
-    /* 0x0EC */ f32 *floatLocals;
-    /* 0x0F0 */ ScriptProcessWork *prev;
-    /* 0x0F4 */ ScriptProcessWork *next;
-    /* 0x0F8 */ u32 unk0F8;
-    /* 0x0FC */ u8 unk0FC[0x10];
-};
-
-struct ScriptProcessList {
-    s32 count;
-    ScriptProcessWork *head;
-    ScriptProcessWork *tail;
-};
-
 extern "C" {
-
-extern ScriptProcessList g_scrScriptResources;
 
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 enabled);
 void sysMemClear(void *memory, u32 size);
@@ -81,13 +11,14 @@ void sysMemClear(void *memory, u32 size);
 /* Creates a script process from a loaded script file: finds the file's sections, copies the first
  * name, allocates the local tables and appends the process to the process list. Returns the process,
  * or NULL when the file is not a usable script. */
-ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner)
+ScriptProcess *scrScriptProcessCreate(void *script, void *owner)
 {
-    ScriptProcessWork *process = NULL;
-    ScriptFileSection *sections = file->section;
-    ScriptName *names = NULL;
-    u8 *labels = NULL;
-    u8 *code = NULL;
+    ScriptFile *file = (ScriptFile *)script;
+    ScriptProcess *process = NULL;
+    ScriptFileSection *sections = file->sections;
+    ScriptVmLabel *names = NULL;
+    ScriptVmLabel *labels = NULL;
+    ScriptVmInstruction *code = NULL;
     u8 *strings = NULL;
     s32 nameIndex = 0;
     s32 i;
@@ -98,13 +29,13 @@ ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner)
     for (i = 0; i < file->sectionCount; i++) {
         switch (sections[i].type) {
         case SCRIPT_SECTION_NAMES:
-            names = (ScriptName *)((u8 *)file + sections[i].offset);
+            names = (ScriptVmLabel *)((u8 *)file + sections[i].offset);
             break;
         case SCRIPT_SECTION_LABELS:
-            labels = (u8 *)file + sections[i].offset;
+            labels = (ScriptVmLabel *)((u8 *)file + sections[i].offset);
             break;
         case SCRIPT_SECTION_CODE:
-            code = (u8 *)file + sections[i].offset;
+            code = (ScriptVmInstruction *)((u8 *)file + sections[i].offset);
             break;
         case SCRIPT_SECTION_DATA:
             break;
@@ -117,49 +48,51 @@ ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner)
     }
     if (file != NULL && sections != NULL && names != NULL && code != NULL && sections[0].size > 0) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\script\\scrScriptProcess.cpp", 139);
-        process = (ScriptProcessWork *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(ScriptProcessWork), 0);
-        sysMemClear(process, sizeof(ScriptProcessWork));
+        process = (ScriptProcess *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(ScriptProcess), 0);
+        sysMemClear(process, sizeof(ScriptProcess));
         if (process != NULL) {
             for (i = 0; (process->name[i] = names[nameIndex].name[i]) != 0; i++) {
             }
-            process->nameValue = names[nameIndex].value;
+            process->pc = names[nameIndex].target;
+            /* Clears the stack depth and tags as eight words. */
+            u32 *stackWords = (u32 *)&process->depth;
             for (i = 0; i < 8; i++) {
-                process->zero1C[i] = 0;
+                stackWords[i] = 0;
             }
-            sysMemClear(process->state, 0x70);
+            sysMemClear(process->values, sizeof(process->values));
             process->code = code;
             process->file = file;
             process->sections = sections;
-            process->names = names;
+            process->functions = names;
             process->labels = labels;
-            process->owner = owner;
-            process->strings = strings;
-            process->nameIndex = nameIndex;
-            process->unk0CC = 0;
-            process->unk0D0 = 0;
-            process->locals = NULL;
-            process->floatLocals = NULL;
+            process->commandOwner = (u32)owner;
+            process->dataBase = strings;
+            process->functionIndex = nameIndex;
+            process->stepCount = 0;
+            process->commandFrame = 0;
+            process->intVariables = NULL;
+            process->floatVariables = NULL;
             process->prev = NULL;
             process->next = NULL;
-            process->unk0F8 = 0;
-            process->unk0E4 = 0;
-            process->unk0E0 = 0;
-            process->unk0DC = 0;
-            process->unk0D8 = 0;
-            if (file->localCount > 0) {
+            process->unkF8 = 0;
+            process->workValues[3] = 0;
+            process->workValues[2] = 0;
+            process->workValues[1] = 0;
+            process->workValues[0] = 0;
+            if (file->intVariableCount > 0) {
                 asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\script\\scrScriptProcess.cpp", 182);
-                process->locals = (s32 *)asdMemoryAlloc(0x100, 0x100, 0, file->localCount << 2, 0);
-                for (i = 0; i < file->localCount; i++) {
-                    process->locals[i] = 0;
+                process->intVariables = (ScriptVmValue *)asdMemoryAlloc(0x100, 0x100, 0, file->intVariableCount << 2, 0);
+                for (i = 0; i < file->intVariableCount; i++) {
+                    process->intVariables[i].i = 0;
                 }
             }
-            if (file->floatCount <= 0) {
-                process->floatLocals = NULL;
+            if (file->floatVariableCount <= 0) {
+                process->floatVariables = NULL;
             } else {
                 asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\script\\scrScriptProcess.cpp", 191);
-                process->floatLocals = (f32 *)asdMemoryAlloc(0x100, 0x100, 0, file->floatCount << 2, 0);
-                for (i = 0; i < file->floatCount; i++) {
-                    process->floatLocals[i] = 0.0f;
+                process->floatVariables = (ScriptVmValue *)asdMemoryAlloc(0x100, 0x100, 0, file->floatVariableCount << 2, 0);
+                for (i = 0; i < file->floatVariableCount; i++) {
+                    process->floatVariables[i].f = 0.0f;
                 }
             }
             if (g_scrScriptResources.tail != NULL) {
@@ -173,7 +106,7 @@ ScriptProcessWork *scrScriptProcessCreate(ScriptFile *file, u32 owner)
                 process->prev = NULL;
                 process->next = NULL;
             }
-                g_scrScriptResources.count++;
+            g_scrScriptResources.count++;
         }
     }
     return process;

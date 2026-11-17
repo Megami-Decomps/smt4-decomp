@@ -3,14 +3,14 @@
 #include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 extern "C" {
 s32 nw_anim_res_ResAnim_IsFullBakedAnim(void **resource);
-void nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(AsdTrackOwner *owner, s32 enabled);
+void nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(AsdMdlSceneNode *owner, s32 enabled);
 ModelBoneAnimationInstance *FUN_00154080(ModelBoneAnimationCreateInfo *info, void *allocator);
 
 // Build an animation for the model's active skeleton target, then bind it.
-ModelBoneAnimationInstance *FUN_0014f07c(AsdTrackOwner *owner, void *resource, u32 options)
+ModelBoneAnimationInstance *FUN_0014f07c(AsdMdlSceneNode *owner, void *resource, u32 options)
 {
     ModelBoneAnimationTarget *target = owner->activeTarget;
-    ModelBoneResource *modelResource = ModelBoneResource::cast(owner->model.resource);
+    ModelBoneResource *modelResource = ModelBoneResource::cast(owner->boneResource);
     ModelBoneSkeleton *skeleton = modelResource->skeleton.get();
     if (nw_anim_res_ResAnim_IsFullBakedAnim(&resource))
         nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(owner, 1);

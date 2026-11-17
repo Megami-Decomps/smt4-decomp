@@ -1,11 +1,11 @@
 #include "common.h"
 #include "code/Code0028.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 
 extern void *gameGetUnitRecord(void);
-extern u8 *gameGetSlotTable(void);
 
 typedef struct Unit {
     /* 0x00 */ u8 unk00[0xE];

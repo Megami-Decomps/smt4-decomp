@@ -1,6 +1,7 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "test/BustupViewer.h"
+#include "ui/UiSpriteApi.h"
 
 struct EnemyPopup {
     /* 0x000 */ u8 unk000[8];
@@ -15,9 +16,6 @@ struct EnemyPopup {
 
 extern "C" {
 
-s32 uiSpriteAdvanceAnimation(u8 *sprite, f32 speed);
-s32 vec2GetXInt(u8 *sprite);
-s32 vec2GetYInt(u8 *sprite);
 void pointConvertToFloat(u8 *point, s32 x, s32 y);
 void uiSpriteBankApplyPreset(u8 *bank, s32 preset);
 void FUN_00168980(s32 sound);
@@ -39,11 +37,11 @@ void _ZN9Obj53230012FUN_0048bd2cEv(EnemyPopup *popup)
         break;
     case 1:
         sprite = popup->sprite;
-        if (uiSpriteAdvanceAnimation(sprite, 1.0f) != 0 && buttonHelpStateIsNot3() != 0) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)sprite, 1.0f) != 0 && buttonHelpStateIsNot3() != 0) {
             popup->state = 2;
             popup->flags |= 2;
         }
-        pointConvertToFloat(popup->position, vec2GetXInt(sprite), vec2GetYInt(sprite));
+        pointConvertToFloat(popup->position, vec2GetXInt((const UiSpriteState *)sprite), vec2GetYInt((const UiSpriteState *)sprite));
         break;
     }
 }

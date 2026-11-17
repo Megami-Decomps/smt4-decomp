@@ -1,7 +1,7 @@
 /* NON_MATCHING: initial scissor-stack addressing/flush registers and blend-address scheduling differ. */
+#include "ui/UiSpriteApi.h"
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "util/MathFunctions.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
@@ -17,7 +17,6 @@ typedef char MaskedSpriteWidgetPositionCheck[
 
 extern "C" {
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
-s32 vec2GetYInt(const void *position);
 void renderPopStateStacks();
 
 void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
@@ -33,8 +32,8 @@ void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
     }
     FUN_00168e00(frame->x + x, frame->y + y, frame->placement->width, frame->placement->height);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
-    s32 targetY = vec2GetYInt(widget->position) + y;
-    s32 targetX = vec2GetXInt(widget->position) + x;
+    s32 targetY = vec2GetYInt((UiSpriteState *)widget->position) + y;
+    s32 targetX = vec2GetXInt((UiSpriteState *)widget->position) + x;
     texDrawTableEntryAtStoredOrigin(2, 0x12, foreground, targetX, targetY, 0xDD);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     if (scissored) {

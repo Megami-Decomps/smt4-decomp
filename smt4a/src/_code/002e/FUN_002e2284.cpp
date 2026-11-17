@@ -9,11 +9,10 @@ s32 bgmGetStateById(u32 id);
 s32 FUN_002e2114(u32 *holder);
 void campCecResetCameraHolder(u32 *holder);
 void linkHolderApplyFlag(u32 *holder, s32 flags);
-ScriptRunState *scrScriptProcessCreate(void *resource, u32 entry);
 void progressConditionsUpdateUnlocks(void);
 s32 gameFlagIsSet(u32 flag);
 void sysPlaySe(u32 id);
-void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void campHideNumericBanner(void);
 
 u32 FUN_002e2284(CampCecResumeState *work)

@@ -1,13 +1,13 @@
 /* NON_MATCHING: jump table, shared pc store and label-target registers now match; only the two offset constants (2, 24) trade r2/r3. */
 #include "script/ScriptVm.h"
 
-static __inline u32 labelTarget(ScriptVmProcess *process)
+static __inline u32 labelTarget(ScriptProcess *process)
 {
     return process->labels[process->code[process->pc].decoded.operand].target;
 }
 
 /* Continue after a true value, otherwise branch to the instruction's label. */
-extern "C" u32 FUN_002026f0(ScriptVmProcess *process)
+extern "C" u32 FUN_002026f0(ScriptProcess *process)
 {
     u32 nextPc;
     bool taken = false;

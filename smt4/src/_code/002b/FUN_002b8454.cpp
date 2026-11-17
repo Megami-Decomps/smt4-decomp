@@ -1,4 +1,5 @@
 /* NON_MATCHING: retained queued-value base matches; saved-register allocation for queued arrays, sentinel and active flag still differs. */
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
@@ -33,17 +34,17 @@ void FUN_002b8454(u32 slot, s32 kind, s32 value, s32 defer)
     work->kinds[slot].value = value;
     if (kind == 7 || kind == 9 || kind == 10 || kind == 11 || kind == 12 ||
         kind == 13 || kind == 14 || kind == 15 || kind == 16 || kind == 17) {
-        work->units[slot].selection.target = 1;
-        work->units[slot].selection.state = 18;
-        work->units[slot].selection.current = -1;
+        work->units[slot].secondaryImage = 1;
+        work->units[slot].textureTable = 18;
+        work->units[slot].image = -1;
     } else if (kind == 8) {
-        work->units[slot].selection.target = 4;
-        work->units[slot].selection.state = 18;
-        work->units[slot].selection.current = -1;
+        work->units[slot].secondaryImage = 4;
+        work->units[slot].textureTable = 18;
+        work->units[slot].image = -1;
     } else {
-        work->units[slot].selection.state = 18;
-        work->units[slot].selection.current = 3;
-        work->units[slot].selection.target = -1;
+        work->units[slot].textureTable = 18;
+        work->units[slot].image = 3;
+        work->units[slot].secondaryImage = -1;
     }
 }
 }

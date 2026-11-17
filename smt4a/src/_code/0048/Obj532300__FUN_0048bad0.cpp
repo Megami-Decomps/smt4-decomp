@@ -2,6 +2,7 @@
 #include "game/GameStateA.h"
 #include "shard/NaviMain_GetCurrentMap.h"
 #include "map/lmapMain.h"
+#include "ui/UiSpriteApi.h"
 
 #define NAVI_FLAG_SLIDE_DONE 0x02000000
 #define NAVI_FLAG_CLOSING 0x01000000
@@ -39,19 +40,13 @@ struct NaviMenu {
 
 extern "C" {
 
-s32 uiSpriteAdvanceAnimation(void *sprite, f32 delta);
-s8 uiSpriteGetCompletionState(const void *sprite);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
-void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 restart);
-void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 restart);
 void FUN_002d22c0(s32 value);
 void FUN_0048821c(NaviMenu *menu, u32 map);
 void FUN_0048a378(NaviMenu *menu);
 void FUN_0048d248(NaviMenu *menu, u32 value);
 void naviMainSetCurrentMap(void *state, u32 map);
 u32 naviMainGetRequestedMap(void *state);
-s32 vec2GetXInt(const void *vector);
-s32 vec2GetYInt(const void *vector);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 
 /* Steps the navi menu's open animation: step 0 sets everything up, step 1 plays it until the title
@@ -76,29 +71,29 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
             FUN_0048821c(menu, map);
         }
         FUN_0048d248(menu, FUN_00492c84(menu->mapState));
-        uiSpriteSetImageKeyframe(menu->imageSpriteA, 3, 0);
-        uiSpriteSetImageKeyframe(menu->imageSpriteB, 5, 0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)menu->imageSpriteA, 3, 0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)menu->imageSpriteB, 5, 0);
         FUN_0048a378(menu);
         for (i = 0; i < NAVI_SLOT_COUNT; i++) {
-            uiSpriteSetKeyframe(menu->slotSprites[i], 4, 0);
+            uiSpriteSetKeyframe((UiSpriteState *)menu->slotSprites[i], 4, 0);
         }
     } else if (menu->step == 1) {
         void *titleSprite = menu->titleSprite;
-        if (uiSpriteAdvanceAnimation(titleSprite, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)titleSprite, 1.0f) != 0) {
             menu->flags &= ~NAVI_FLAG_SLIDE_DONE;
             FUN_002d22c0(1);
             g_gameState.naviMapPending = 1;
             menu->step = 2;
         }
-        pointConvertToFloat(menu->cursorPoint, vec2GetXInt(titleSprite), vec2GetYInt(titleSprite));
+        pointConvertToFloat(menu->cursorPoint, vec2GetXInt((const UiSpriteState *)titleSprite), vec2GetYInt((const UiSpriteState *)titleSprite));
         for (i = 0; i < NAVI_SLOT_COUNT; i++) {
-            uiSpriteAdvanceAnimation(menu->slotSprites[i], 1.0f);
+            uiSpriteAdvanceAnimation((UiSpriteState *)menu->slotSprites[i], 1.0f);
         }
-        uiSpriteAdvanceAnimation(menu->backSprite, 1.0f);
-        uiSpriteAdvanceAnimation(&menu->frameSprite, 1.0f);
+        uiSpriteAdvanceAnimation((UiSpriteState *)menu->backSprite, 1.0f);
+        uiSpriteAdvanceAnimation((UiSpriteState *)&menu->frameSprite, 1.0f);
     } else if (menu->step == 2) {
-        if (uiSpriteGetCompletionState(&menu->frameSprite) == 0) {
-            uiSpriteAdvanceAnimation(&menu->frameSprite, 1.0f);
+        if (uiSpriteGetCompletionState((const UiSpriteState *)&menu->frameSprite) == 0) {
+            uiSpriteAdvanceAnimation((UiSpriteState *)&menu->frameSprite, 1.0f);
         }
         menu->mode = 2;
         menu->step = 0;

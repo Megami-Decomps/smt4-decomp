@@ -1,10 +1,10 @@
 /* NON_MATCHING: instructions and layout match retail; only the register assignment differs (retail keeps the banner pointer in r7 and the style in r6, sprite pointers in r8/r9/sl vs mine). */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "script/ScriptArgs.h"
 #include "ui/UiControl.h"
 
 extern "C" {
-void uiSpriteStateInitFromSource(void *sprite, u32 table, u32 id, void *source, u32 group, f32 scale);
 
 /* Script command: create the banner's sprites and start its fade-in animation; true while it has not begun. */
 u8 FUN_003c55e8(void)

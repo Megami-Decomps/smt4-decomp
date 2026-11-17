@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs 212 rows); retail loads the g_ifTouch address before the prologue and shares base-address adds differently */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include <math.h>
 #include "shard/W6_W6Match5_EntryCollection.h"

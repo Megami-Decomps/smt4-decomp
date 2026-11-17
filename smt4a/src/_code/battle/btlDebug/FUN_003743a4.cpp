@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003743a4` (_code @ 0x3743a4, 0x12cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
@@ -57,8 +58,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetXInt(void);
-extern int vec2GetYInt(int);
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
@@ -123,11 +122,11 @@ void FUN_003743a4(int param_1)
   int *temp_v22;
   
   temp_v17 = (unsigned char *)0x0;
-  temp_v2 = vec2GetXInt();
-  temp_v3 = vec2GetYInt(param_1 + 0x11a0);
-  temp_v4 = vec2GetXInt();
+  temp_v2 = vec2GetXInt((UiSpriteState *)(param_1 + 0x11a0));
+  temp_v3 = vec2GetYInt((UiSpriteState *)(param_1 + 0x11a0));
+  temp_v4 = vec2GetXInt((UiSpriteState *)(param_1 + 0x12b8));
   temp_v4 = temp_v4 + temp_v2;
-  temp_v2 = vec2GetYInt(param_1 + 0x12b8);
+  temp_v2 = vec2GetYInt((UiSpriteState *)(param_1 + 0x12b8));
   temp_v2 = temp_v2 + temp_v3;
   efctSetSpeed();
   temp_v16[1] = 0xab;

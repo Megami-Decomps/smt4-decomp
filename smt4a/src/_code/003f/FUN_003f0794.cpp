@@ -17,7 +17,7 @@ struct BattleLoader {
     void *slot2280;          // 0x2280
     void *slot2284;          // 0x2284
     void *slot2288;          // 0x2288
-    ScriptRunState *process; // 0x228c
+    ScriptProcess *process; // 0x228c
     u8 unk2290[0x4d08 - 0x2290];
     u16 flags;              // 0x4d08: bit 0 = finished
     u16 step;               // 0x4d0a
@@ -54,8 +54,7 @@ void FUN_00470e64(u32 aoc);
 void btlStageLoadTable(void);
 void battleMapAccessoryLoad(void);
 s32 jyoucyuEnsureResidentEntry(void);
-ScriptRunState *scrScriptProcessCreate(const void *script, u32 owner);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void FUN_003cdb28(void);
 void FUN_003ce360(void);
 
@@ -95,7 +94,7 @@ void FUN_003f0794(BattleLoader* loader)
             loader->slot2280 = g_btlMain.resident.files[0];
             loader->slot2284 = g_btlMain.resident.files[1];
             loader->slot2288 = g_btlMain.resident.files[2];
-            loader->process = scrScriptProcessCreate(loader->slot2288, reinterpret_cast<u32>(loader->slot2280));
+            loader->process = scrScriptProcessCreate(loader->slot2288, loader->slot2280);
             scriptProcessSetMode(loader->process, 0);
             loader->step++;
             /* fall through */

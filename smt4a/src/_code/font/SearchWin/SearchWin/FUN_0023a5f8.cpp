@@ -4,6 +4,7 @@
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 /* Pushes the evaluated state on the title scene's first stack. */
 static __inline void titleScenePushFirst(RenderCtxA *scene, s32 state)
@@ -49,8 +50,6 @@ extern RunWin *DAT_0057f584;
 
 void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 void gxResetColorQuadToWhite(void);
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
@@ -65,8 +64,8 @@ u8 FUN_0023a5f8(void)
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *first = g_renderCtx;
         titleScenePushFirst(first, renderCtxPackPassFlags(1, 0));
-        s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-        s32 y = vec2GetYInt(win->anchor);
+        s32 x = vec2GetXInt((const UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+        s32 y = vec2GetYInt((const UiSpriteState *)win->anchor);
         efctSetSpeed(win->alpha);
         texDrawCompositeSprite(2, 8, 0x14, x, y, 101);
         RenderCtxA *scene = g_renderCtx;

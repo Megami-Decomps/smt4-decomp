@@ -1,4 +1,5 @@
 /* NON_MATCHING: float constants, UV division scheduling and quad-argument register reuse differ; 64 built versus 68 retail rows. */
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"

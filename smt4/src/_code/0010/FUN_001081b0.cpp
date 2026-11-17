@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 #include "title/titleMain.h"
 #include "camp/RenderCtxTitle.h"

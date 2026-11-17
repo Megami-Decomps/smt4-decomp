@@ -1,11 +1,10 @@
 /* NON_MATCHING: camera-vector load grouping, saved angle registers, and visibility flag predication differ. */
 #include "map/DestructibleModels.h"
 #include "game/GameStateA.h"
-#include "map/lmapMain.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 extern MapDestructibleModels *g_mapHakai;
-extern LmapExtraA *g_lmapView;
 f32 mathPositionHeadingDegrees(f32, f32, f32, f32, f32, f32);
 f32 mathAngleDeltaDegrees(f32, f32);
 void controllerSetDestination(ControllerPose *, const MapVector *);
@@ -17,9 +16,9 @@ void FUN_0027461c(void)
 {
     // ControllerPose's legacy header also defines LmapScene; avoid that conflicting definition here.
     struct ControllerFlagsView { u32 unk00; u32 flags; };
-    LmapExtraA *view = g_lmapView;
-    f32 viewHeading = mathPositionHeadingDegrees(view->camera.savedEye.x, view->camera.savedEye.y, view->camera.savedEye.z,
-                                               view->camera.savedTarget.x, view->camera.savedTarget.y, view->camera.savedTarget.z);
+    LmapViewA *view = g_lmapView;
+    f32 viewHeading = mathPositionHeadingDegrees(view->savedEye.x, view->savedEye.y, view->savedEye.z,
+                                               view->savedTarget.x, view->savedTarget.y, view->savedTarget.z);
     for (s32 i = 0; i < 16; ++i) {
         MapDestructibleModels *work = g_mapHakai;
         MapDestructibleEntry *entry = &work->entries[i];
@@ -35,10 +34,10 @@ void FUN_0027461c(void)
                     flags->flags &= ~3u;
                 if (entry->index == 2 && !(flags->flags & 1)) {
                     f32 limit = 50.0f;
-                    MapVector *viewPosition = &g_lmapView->camera.savedEye;
+                    MapVector *viewPosition = &g_lmapView->savedEye;
                     f32 heading = mathPositionHeadingDegrees(viewPosition->x, viewPosition->y, viewPosition->z,
                                                             entry->position.x, entry->position.y, entry->position.z);
-                    if (g_lmapView->unkB0 == -1)
+                    if (g_lmapView->contextMode == -1)
                         limit = 70.0f;
                     f32 delta = mathAngleDeltaDegrees(viewHeading, heading);
                     if (!(delta > -limit && delta < limit))

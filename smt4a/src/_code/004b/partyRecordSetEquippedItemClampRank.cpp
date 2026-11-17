@@ -1,5 +1,6 @@
 #include "shard/Shard004B.h"
 #include "gamedata/SkillDataRecord.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 s32 FUN_0035e458(u32 item);
@@ -7,12 +8,12 @@ s32 FUN_0035d89c(u32 item);
 }
 
 /* Set one equipped item and clamp its inherited category rank to the item limits. */
-extern "C" void partyRecordSetEquippedItemClampRank(ItemRankRecord *record, u32 item, s32 slot)
+extern "C" void partyRecordSetEquippedItemClampRank(SlotRecordA *record, u32 item, s32 slot)
 {
     if (record == NULL || slot >= 8) {
         return;
     }
-    record->items[slot] = (u16)item;
+    record->skills[slot] = (u16)item;
     ItemRankDefinition *definition = (ItemRankDefinition *)skillDataFindById(item);
     s8 rank = 0;
     if (definition != NULL && definition->category < 18) {
@@ -26,5 +27,5 @@ extern "C" void partyRecordSetEquippedItemClampRank(ItemRankRecord *record, u32 
     } else if (minimum > rank) {
         rank = (s8)minimum;
     }
-    record->ranks[slot] = rank;
+    record->skillRanks[slot] = rank;
 }

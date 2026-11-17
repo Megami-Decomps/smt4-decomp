@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b2e50` (_code @ 0x4b2e50, 0xbfc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -39,7 +39,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -163,9 +162,9 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
         temp_v2 = temp_v14 + temp_v7;
         temp_v0 = *(char *)(temp_v2 + 0x1c88);
         temp_v3 = param_1 + ((int)(temp_v13 + ((unsigned int)(temp_v13 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-        temp_v4 = vec2GetXInt(reinterpret_cast<const void *>(temp_v3 + 0xac));
+        temp_v4 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v3 + 0xac)));
         temp_v12 = temp_v12 + temp_v4;
-        temp_v3 = vec2GetYInt(temp_v3 + 0xac);
+        temp_v3 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0xac));
         temp_v11 = temp_v11 + temp_v3;
         temp_v3 = param_1 + (temp_v0 + 1) * 0x28;
         FUN_004b3a4c(param_1,temp_v1,(int)*(char *)(temp_v2 + 0x1c88),temp_v13,temp_v12,temp_v11,
@@ -178,9 +177,9 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
           temp_v10 = (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v11;
           temp_v3 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v12;
           if (*(char *)(temp_v15 + 0x8a) == '\0') {
-            temp_v4 = vec2GetXInt(reinterpret_cast<const void *>(temp_v15));
+            temp_v4 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v15)));
             temp_v3 = temp_v4 + temp_v3;
-            temp_v2 = vec2GetYInt(temp_v2);
+            temp_v2 = vec2GetYInt((UiSpriteState *)temp_v2);
             temp_v10 = temp_v10 + temp_v2;
           }
           texDrawTableEntryAtStoredOrigin(2,0x11,0xb5,temp_v3,temp_v10,0x79);
@@ -207,9 +206,9 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
         temp_v13 = partySlotMatchesSelected();
         if (temp_v13 == 0) {
           temp_v2 = param_1 + ((int)(temp_v7 + ((unsigned int)(temp_v7 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-          temp_v13 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x3f4));
+          temp_v13 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0x3f4)));
           temp_v12 = temp_v12 + temp_v13;
-          temp_v13 = vec2GetYInt(temp_v2 + 0x3f4);
+          temp_v13 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0x3f4));
           temp_v11 = temp_v11 + temp_v13;
           temp_v13 = param_1 + (temp_v9 + 0x19) * 0x28;
           FUN_004b5db8(param_1,temp_v1,temp_v9,temp_v7,temp_v12,temp_v11,(int)*(short *)(temp_v13 + 0x7888),
@@ -248,9 +247,9 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
       temp_v4 = *(char *)(temp_v14 + temp_v12 + 0x1c88) + 1;
       temp_v13 = gameGetSlotRecord();
       temp_v3 = param_1 + ((int)(temp_v11 + ((unsigned int)(temp_v11 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-      temp_v2 = vec2GetXInt(reinterpret_cast<const void *>(temp_v3 + 0xac));
+      temp_v2 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v3 + 0xac)));
       temp_v7 = temp_v7 + temp_v2;
-      temp_v2 = vec2GetYInt(temp_v3 + 0xac);
+      temp_v2 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0xac));
       temp_v1 = temp_v1 + temp_v2;
       temp_v2 = param_1 + temp_v4 * 0x28;
       temp_v3 = temp_v2 + 0x7800;
@@ -325,9 +324,9 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
       temp_v11 = partySlotMatchesSelected();
       if (temp_v11 == 0) {
         temp_v13 = param_1 + ((int)(temp_v12 + ((unsigned int)(temp_v12 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-        temp_v11 = vec2GetXInt(reinterpret_cast<const void *>(temp_v13 + 0x3f4));
+        temp_v11 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v13 + 0x3f4)));
         temp_v7 = temp_v7 + temp_v11;
-        temp_v11 = vec2GetYInt(temp_v13 + 0x3f4);
+        temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v13 + 0x3f4));
         temp_v1 = temp_v1 + temp_v11;
         temp_v11 = param_1 + (temp_v9 + 0x19) * 0x28;
         temp_v13 = temp_v11 + 0x7800;

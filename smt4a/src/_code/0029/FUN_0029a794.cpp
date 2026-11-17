@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail addresses the second cleared record through a base at DAT_005f1cbc+0xb8 and keeps the fourth key table's address in ip (stack-argument stm grouping differs); stores and calls otherwise identical. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
@@ -8,9 +9,6 @@
 #include "gamedata/GameDataAccess.h"
 
 /* A 0x8C-byte UI sprite; only the data the initializers below pass around. */
-struct SceneSprite {
-    u8 unk00[0x8c];
-};
 
 /* Animation key rows handed to paramsInit (frame, scale pair, count/mode). */
 struct SceneScaleKey {
@@ -59,8 +57,8 @@ struct SceneWork {
     /* 0x0b0 */ u32 unk0b0[20];
     /* 0x100 */ u8 unk100[0x28];
     /* 0x128 */ UiResourceParameters packet;
-    /* 0x148 */ SceneSprite sprite;
-    /* 0x1d4 */ SceneSprite sprites[5];
+    /* 0x148 */ UiSpriteState sprite;
+    /* 0x1d4 */ UiSpriteState sprites[5];
     /* 0x490 */ u32 unk490;
     /* 0x494 */ u8 unk494[0xc];
     /* 0x4a0 */ u32 unk4a0[10];
@@ -99,9 +97,6 @@ extern "C" {
 extern SceneRecords DAT_005f1cbc;
 void FUN_00352eec(void);
 
-void uiSpriteStateInitFromSource(SceneSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
-void uiSpriteSetKeyframe(SceneSprite *sprite, s32 keyframe, s32 restart);
-void uiSpriteSelectAnim(SceneSprite *sprite, s32 animation);
 
 /* Clear the scene's work areas; when `savePoint` is set, record the current map point into the flags block first. */
 void FUN_0029a794(SceneWork *work, s32 savePoint)

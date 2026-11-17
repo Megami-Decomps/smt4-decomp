@@ -20,16 +20,16 @@ struct CampResultStateView {
     u8 unkD60[0xC];
     void *firstMessages;
     void *firstScript;
-    ScriptRunState *firstProcess;
+    ScriptProcess *firstProcess;
     u8 unkD78[8];
     void *informationWindow;
     u8 unkD84[0x10];
     void *secondMessages;
     void *secondScript;
-    ScriptRunState *secondProcess;
+    ScriptProcess *secondProcess;
     void *resultScript;
     void *resultMessages;
-    ScriptRunState *resultProcess;
+    ScriptProcess *resultProcess;
     u8 unkDAC[4];
     u32 operation;
 };
@@ -38,15 +38,13 @@ typedef char CampResultStateOffsets[
     offsetof(CampResultStateView, informationWindow) == 0xD80 && offsetof(CampResultStateView, operation) == 0xDB0 ? 1 : -1];
 
 extern "C" {
-extern AocMain *g_aocMain;
 s32 listUpdateRevealTransition(FlaggedValueHolder *value);
-s32 scrRunOpcodesStub(ScriptRunState *process);
+s32 scrRunOpcodesStub(ScriptProcess *process);
 void buttonHelpSelectByProgress(CampResultStateView *work);
 u16 flaggedValueHolderGetTotal(const FlaggedValueHolder *value);
 s32 tableGroupFindEntryIndex(const void *script, const char *entry);
-void scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 void dialogOpen(s32 mode);
 void infoWinSetMessage(void *window, u32 message);
 
@@ -57,8 +55,8 @@ void FUN_003b8c40(CampResultStateView *work)
         return;
     buttonHelpSelectByProgress(work);
     work->selection = flaggedValueHolderGetTotal(&work->value);
-    if (g_aocMain->unk0A9[0x18]) {
-        g_aocMain->unk0A9[0x18] = 0;
+    if (g_aocMain->skipRestore) {
+        g_aocMain->skipRestore = 0;
         work->state = 10;
         work->timer = 0;
         return;

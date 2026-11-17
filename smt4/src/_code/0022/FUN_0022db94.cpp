@@ -1,5 +1,5 @@
 /* NON_MATCHING: layout, uxth of the u32 id, x-before-y order and the (0.0f, 1.0f) scale constants match retail; the sum for y is allocated to r1 instead of retail's ip (a single register difference). */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/S1ListPanel.h"
 
 struct ListLabelWork {

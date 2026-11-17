@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ extern int statusGetAvailableChoiceCount(void);
 extern int FUN_00298848(unsigned int, unsigned int);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
-extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
 extern int aocIndexValueOrDefault(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */

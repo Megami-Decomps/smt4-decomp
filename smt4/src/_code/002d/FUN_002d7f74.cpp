@@ -1,4 +1,5 @@
 /* NON_MATCHING: two spots differ: the stack context is loaded into another register for the first push and first pop (retail builds the stack address in place in r4), and the third push (the stack's own top state as its argument) addresses its count through a literal offset where retail adds 0x10C0 and uses an immediate; layout, calls and offsets agree */
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "camp/RenderCtxTitle.h"

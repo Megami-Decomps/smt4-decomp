@@ -29,14 +29,14 @@ u32 legacyResourceIdRemap(const u32 *result);
 s32 resourceResultMatchesKnownRanges(const u32 *result);
 s32 resourceResultMatchesRemappedCodes(const u32 *result);
 s32 queryResultFailureOnly(const u32 *result);
-void FUN_00473d74(AocMainA *main, u32 result, u32 detail);
+void FUN_00473d74(AocMain *main, u32 result, u32 detail);
 void FUN_0047bc90(SelectionTransition *transition, const RequestParameters *parameters);
 
 // Complete a queued add-on operation, routing retriable/permanent errors to the error transition.
 void FUN_00476e58(SelectionTransition *transition, u32 unused, s32 nextState)
 {
-    AocMainA *main = g_aocMain;
-    FUN_001b3428(main->query.operation);
+    AocMain *main = g_aocMain;
+    FUN_001b3428(&main->thread);
     if (legacyResourceIdRemap(&transition->query.result.result.code) == 0xc9413891u)
         return;
     FUN_00473d74(g_aocMain, transition->query.result.result.code, transition->query.result.result.description);
@@ -45,7 +45,7 @@ void FUN_00476e58(SelectionTransition *transition, u32 unused, s32 nextState)
         return;
     }
     if (resourceResultMatchesRemappedCodes(&transition->query.result.result.code) ||
-        nnResultIsFailure(queryResultFailureOnly(&main->query.result))) {
+        nnResultIsFailure(queryResultFailureOnly(&main->queryResult))) {
         leaveTransition(transition, 3);
         return;
     }

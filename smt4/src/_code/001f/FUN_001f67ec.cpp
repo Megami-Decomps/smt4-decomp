@@ -1,4 +1,5 @@
 /* NON_MATCHING: the 0.0f spawn depth is loaded into s23 at the top in retail (here after FUN_002573d8), the colour word/alpha loads use different registers, and the pool loads of the angle constants are ordered differently. */
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "shard/Shard0036.h"
 #include "camp/RenderCtxTitle.h"

@@ -1,8 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfd94` (_code @ 0x2bfd94, 0x47c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/MathFunctions.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -38,7 +38,6 @@ extern int g_campCecRanking; /* 0x57f11c */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
@@ -88,8 +87,8 @@ int FUN_002bfd94(void)
       temp_v3 = asdTMTexTableNodeIsLoaded(0x2e,1);
       temp_v4 = 0;
       if (temp_v3 != 0) {
-        temp_v4 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0xc));
-        temp_v3 = vec2GetYInt(temp_v2 + 0xc);
+        temp_v4 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0xc)));
+        temp_v3 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0xc));
         efctSetSpeed();
         texDrawTableEntryAtStoredOrigin(2,0x2e,0x44d,temp_v4,temp_v3,0x65);
         texDrawCompositeSprite(2,0x2e,0x1a,temp_v4,temp_v3,0x65);

@@ -1,4 +1,4 @@
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ListTransitionWork {
@@ -16,9 +16,6 @@ struct ListTransitionWork {
 };
 extern "C" {
 s32 rangeLimitMin(ListTransitionWork *);
-void uiSpriteAdvanceAnimation(UiSpriteState *);
-void uiSlidingSpriteAdvance(UiSpriteState *, s32);
-s8 uiSpriteGetCompletionState(const UiSpriteState *);
 }
 
 extern "C" s32 listUpdateRevealTransition(ListTransitionWork *work)

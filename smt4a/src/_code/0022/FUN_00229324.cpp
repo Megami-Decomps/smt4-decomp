@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: readable rebuild from asm of a scene overlay draw (the slide-in banner and the mark sprites inside render states); armcc here orders the render-state operations, keeps the scene pointer and the banner sprite in other registers than retail, and loads the owner global after the push. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
@@ -33,8 +33,6 @@ extern OverlayOwner g_engineCleanupOwner;
 s32 scriptProcessCreateWhenReady(OverlayScene *scene);
 u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
-u32 vec2GetYInt(void *vec);
-s32 uiSpriteGetCompletionState(const u8 *sprite);
 void FUN_004b0164(OverlayScene *scene, u32 x, u32 y);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);
@@ -51,7 +49,7 @@ u32 FUN_00229324(void)
     u32 firstState = renderCtxPackPassFlags(1, 0);
     renderStackPushCounted(&ctx->stackA, firstState);
     ctx = g_renderCtx;
-    if (scene->state == 13 && scene->step == 5 && uiSpriteGetCompletionState(scene->banner) == 0) {
+    if (scene->state == 13 && scene->step == 5 && uiSpriteGetCompletionState((UiSpriteState *)scene->banner) == 0) {
         if (scene->timer < 16) {
             s32 offset = scene->timer * -30;
             if (offset < -240)
@@ -74,7 +72,7 @@ u32 FUN_00229324(void)
         if (scene->state != 0) {
             u32 secondState = renderCtxPackPassFlags(1, 0);
             renderStackPushCounted(&ctx->stackA, secondState);
-            FUN_004b0164(scene, vec2GetXInt(scene->position), vec2GetYInt(scene->position));
+            FUN_004b0164(scene, vec2GetXInt((UiSpriteState *)scene->position), vec2GetYInt((UiSpriteState *)scene->position));
             renderStackPop(&g_renderCtx->stackA);
         }
         renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));

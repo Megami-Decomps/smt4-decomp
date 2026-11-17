@@ -1,5 +1,5 @@
 #include "shard/NaviMain.h"
-extern "C" NaviMain *g_naviMain;
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" void naviSetMapSlot(void *, u32, u32, u32, u32, u32, u32, u32, u32);
 

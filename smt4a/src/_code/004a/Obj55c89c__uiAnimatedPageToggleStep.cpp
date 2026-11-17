@@ -2,6 +2,7 @@
 #include "common.h"
 #include "classes/Obj55c89c.h"
 #include "code/Code002a.h"
+#include "ui/UiSpriteApi.h"
 
 struct PageAnimationTrack {
     u8 point[0x8c];
@@ -27,8 +28,6 @@ struct PageSelectionGlobals {
 extern "C" {
 extern PageSelectionGlobals g_animatedPageSelection;
 void entryDispatchUpdate(void *animation, s32 track);
-s32 vec2GetYInt(const void *point);
-s32 vec2GetXInt(const void *point);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 void uiSpriteBankApplyPreset(void *animation, s32 preset);
 s32 objectGetIndexedSignedFlag(void *animation, s32 track);
@@ -49,8 +48,8 @@ void Obj55c89c::uiAnimatedPageToggleStep()
     AnimatedPage * page = reinterpret_cast<AnimatedPage *>(this);
     entryDispatchUpdate(page->animation, page->track);
     const void *point = page->tracks[page->track].point;
-    s32 y = vec2GetYInt(point);
-    s32 x = vec2GetXInt(point);
+    s32 y = vec2GetYInt((const UiSpriteState *)point);
+    s32 x = vec2GetXInt((const UiSpriteState *)point);
     pointConvertToFloat(page->position, x, y);
     if (page->phase == 0) {
         pageSelectTrack(page, 9);

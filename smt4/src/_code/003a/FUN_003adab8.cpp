@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 s32 gameFlagIsSet(u32 id);
 s32 playSceneStateIsActive(BtlUiObjC *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 bool FUN_003adab8(void)
 {

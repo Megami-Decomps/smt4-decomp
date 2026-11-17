@@ -1,10 +1,9 @@
 /* NON_MATCHING: retail keeps the zero arguments in a callee-saved register (r5/r6 split, 5-register frame) and orders the stack-argument stores differently. */
-#include "shard/W6_W6Match2_MemoryDebug.h"
+#include "classes/AllocatorState.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
-extern MemoryDebugState DAT_00465120;
 extern const char DAT_00409c58[]; /* "asdMemMap" */
 extern u32 DAT_0046515c;
 
@@ -35,8 +34,8 @@ void FUN_00102e34(void)
         DAT_00465120.mapProcess = NULL;
         return;
     }
-    DAT_00465120.settings->limit = 0x08800000;
-    DAT_00465120.settings->flags |= 1;
+    DAT_00465120.usage->limit = 0x08800000;
+    DAT_00465120.usage->debugFlags |= 1;
     DAT_0046515c = 0;
     DAT_00465120.mapProcess = memoryDebugStartProcess(DAT_00409c58, 0x15e, memoryDebugRefresh,
                                                       jobClearWorkSlot, &DAT_0046515c);

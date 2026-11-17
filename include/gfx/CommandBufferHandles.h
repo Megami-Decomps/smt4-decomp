@@ -2,18 +2,11 @@
 #define GFX_COMMANDBUFFERHANDLES_H
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
-/* The registry link lies beyond the recovered AsdCmdBuffer prefix. */
-struct CommandBufferHandleNode {
-    AsdCmdBuffer buffer;
-    /* 0x40 */ CommandBufferHandleNode *next;
-};
 struct CommandBufferHandleAllocator {
     void *(*allocate)(u32 heap, u32 type, u32 options, u32 size);
     u32 unk04;
     u32 nextId;
 };
-typedef char CommandBufferHandleNodeOffsetCheck[
-    offsetof(CommandBufferHandleNode, next) == 0x40 && sizeof(CommandBufferHandleNode) == 0x44 ? 1 : -1];
 typedef char CommandBufferHandleAllocatorOffsetCheck[
     offsetof(CommandBufferHandleAllocator, nextId) == 8 ? 1 : -1];
 
@@ -21,12 +14,12 @@ typedef char CommandBufferHandleAllocatorOffsetCheck[
 static inline bool commandBufferTryAssign(AsdGfxContext *context, CommandBufferHandleNode *node,
                                         u32 id, u32 *handle)
 {
-    CommandBufferHandleNode *head = (CommandBufferHandleNode *)context->bufferRegistry.buckets[id & 31];
+    CommandBufferHandleNode *head = context->buffers[id & 31];
     if (!head) {
         *handle = id;
         node->buffer.unk00 = id;
         node->next = NULL;
-        context->bufferRegistry.buckets[id & 31] = &node->buffer;
+        context->buffers[id & 31] = node;
         return true;
     }
     if (head->buffer.unk00 == id)
@@ -34,8 +27,8 @@ static inline bool commandBufferTryAssign(AsdGfxContext *context, CommandBufferH
     if (id < head->buffer.unk00) {
         *handle = id;
         node->buffer.unk00 = id;
-        node->next = (CommandBufferHandleNode *)context->bufferRegistry.buckets[id & 31];
-        context->bufferRegistry.buckets[id & 31] = &node->buffer;
+        node->next = context->buffers[id & 31];
+        context->buffers[id & 31] = node;
         return true;
     }
     CommandBufferHandleNode *previous = head;

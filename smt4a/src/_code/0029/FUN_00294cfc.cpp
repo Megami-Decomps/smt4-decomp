@@ -1,6 +1,7 @@
 /* NON_MATCHING: picks a hint popup for a candidate from the list (level window, not yet known or recent) and records it in the recent list; written from the decompilation and the retail disassembly, loop structure and register allocation not compared with retail */
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmBaseRecordA.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "code/Code0015.h"
 #include "code/Code002a_Smt4a.h"
 #include "gamedata/GamePlayerData.h"
@@ -25,15 +26,6 @@ struct HintCandidates {
     /* 0x14 */ u16 ids[6];
 };
 
-struct HintRecord {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u16 levelRequirement;   /* bit 15 is a flag */
-    /* 0x04 */ u8 unk04[6];
-    /* 0x0A */ u16 flagsB;
-    /* 0x0C */ u8 unk0C[0xA];
-    /* 0x16 */ u16 flagsA;
-};
-
 #define HINT_CANDIDATE_COUNT 6
 #define HINT_RECENT_COUNT 6
 #define HINT_KNOWN_COUNT 32
@@ -50,7 +42,6 @@ SaveSlotView *saveSlotFindSelected(void);
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(u32 maximum);
 HintCandidates *dataTable02GetRecordWithAocPackage(u32 owner);
-HintRecord *nkmEnemyFindById(u32 id);
 const char *popupSelectWeightedMessage(s32 kind, u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
@@ -86,11 +77,11 @@ void FUN_00294cfc(u32 owner)
         u32 id = candidates->ids[i];
         if (FUN_002a4b28(id) != 0)
             continue;
-        HintRecord *record = nkmEnemyFindById(id);
-        if ((nkmBaseGetRecord(id)->flags & 1) != 0 && (nkmEnemyFindById((u16)id)->flagsA & 4) != 0
+        NkmEnemyRecordA *record = nkmEnemyFindById(id);
+        if ((nkmBaseGetRecord(id)->flags & 1) != 0 && (nkmEnemyFindById((u16)id)->flags & 4) != 0
             && !hintInList(DAT_005f190c, HINT_KNOWN_COUNT, id)
             && !hintInList(DAT_005f18ec, HINT_RECENT_COUNT, id)) {
-            s32 requirement = record->levelRequirement & 0x7FFF;
+            s32 requirement = record->level & 0x7FFF;
             if (level >= requirement && requirement >= lowest) {
                 chosen = id;
                 break;

@@ -3,7 +3,6 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "script/ScriptArgs.h"
 

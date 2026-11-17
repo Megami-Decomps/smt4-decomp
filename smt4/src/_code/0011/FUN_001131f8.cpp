@@ -1,13 +1,12 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {
 
-extern GfxCallbackState g_asdGfxContext;
-
-/* Sets the graphics callback and its enable state. */
-void FUN_001131f8(CallbackBinding binding, u32 enabled)
+/* Sets the submission wait timeout and the callback run when it expires. */
+void FUN_001131f8(s64 timeout, void (*onTimeout)(void))
 {
-    gfxCallbackSlotSet(g_asdGfxContext, binding, enabled);
+    g_asdGfxContext.onTimeout = onTimeout;
+    g_asdGfxContext.timeout = timeout;
 }
 
 } /* extern "C" */

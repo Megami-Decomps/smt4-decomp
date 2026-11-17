@@ -13,7 +13,6 @@ void campButtonHelpAcquire();
 void commonBgStopChildAndBeginTransition();
 void sysPlaySe(s32 sound);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void titleRestartSlotState3(s32 screen, s32 alpha);
 s32 onesRoomTeardown(u32 job);
@@ -35,7 +34,7 @@ void FUN_002758fc(s32 inactive)
     sysPlaySe(0xa4);
     room->dataA = asdLoadFileSyncDefault("ones_room/onesRoom.bf");
     room->dataB = asdLoadFileSyncDefault("ones_room/onesRoom.mbm");
-    ScriptRunState *process = scrScriptProcessCreate(room->dataA, room->dataB);
+    ScriptProcess *process = scrScriptProcessCreate(room->dataA, room->dataB);
     room->process = process;
     process->mode = 2;
     scrScriptProcessStartEntry(room->process, 0);

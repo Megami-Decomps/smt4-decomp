@@ -46,7 +46,7 @@ void FUN_0023f788(BattleCommandTargets *command)
             if (unit == NULL)
                 continue;
         }
-        skills = *reinterpret_cast<const SkillList *>(unit->skillList.skills);
+        skills = *reinterpret_cast<const SkillList *>(unit->skills);
         s32 written = 0;
         for (s32 index = 0; index < 8; ++index) {
             u16 skill = skills.ids[index];

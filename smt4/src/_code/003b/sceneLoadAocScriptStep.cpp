@@ -5,15 +5,13 @@ extern "C" {
 
 int buttonHelpSelectByProgress(void *scene);
 int FUN_002305e8(int a);
-void scrLoaderReset(AocObjC *loader);
-void scrLoaderFreeBuffers(AocObjC *loader);
-u32 FUN_002736e8(AocObjC *loader);
+void scrLoaderReset(AocScriptHolder *loader);
+void scrLoaderFreeBuffers(AocScriptHolder *loader);
+u32 FUN_002736e8(AocScriptHolder *loader);
 int FUN_0027db24(int a);
 int dialogOpen(int a, int b);
 int infoWinSetMessage(u32 a, int b);
 int buttonHelpSetPreset(int preset);
-
-extern AocMain *g_aocMain;
 
 typedef struct SceneLoadText {
     /* 0x00 */ u8 unk00[2];

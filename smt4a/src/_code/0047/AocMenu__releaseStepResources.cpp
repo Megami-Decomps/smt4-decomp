@@ -9,14 +9,6 @@ struct CountAt30;
 struct CountAt5A;
 struct JobOwner;
 struct JobFlagsWork;
-struct AocMainA;
-struct AocQuestRefreshView {
-    AocMain main;
-    u8 unk0758[0x429];
-    u8 refreshB81;
-    u8 unk0b82[0x1ce];
-    u8 refreshD50;
-};
 struct QuestShutdownWork {
     u32 flags;
     s32 state;
@@ -29,7 +21,7 @@ struct QuestShutdownWork {
     u8 unk0344[0xc];
     void *scriptBuffer;
     u32 unk0354;
-    u32 process;
+    ScriptProcess *process;
     u8 unk035c[0xe54];
     u8 owner[0x420]; // 0x11b0
     u8 unk15d0[0x1d0];
@@ -40,17 +32,15 @@ struct QuestShutdownWork {
     void **slot;
 };
 extern "C" {
-extern AocMain *g_aocMain;
 extern AocDisplay *g_aocDisplay;
 void releaseEntriesA(CountAt30 *entries);
 void releaseEntriesB(CountAt5A *entries);
 void jobOwnerFreeSlotAndStop(JobOwner *owner);
 void jobFlagsWorkStop(JobFlagsWork *work);
 void ifTouchRegionRemove();
-void scrScriptProcessDestroy(u32 process);
 void asdMemFree(void *buffer);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
-void aocMenuSetReadyFlag(AocMainA *owner, u8 ready);
+void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
 
 void AocMenu::releaseStepResources()
 {
@@ -58,9 +48,8 @@ void AocMenu::releaseStepResources()
     QuestShutdownWork *work = (QuestShutdownWork *)object;
     AocMain *main = g_aocMain;
     main->flags &= ~0x100;
-    AocQuestRefreshView *refresh = (AocQuestRefreshView *)main;
-    refresh->refreshD50 = 1;
-    aocMenuSetReadyFlag(reinterpret_cast<AocMainA *>(main), 1);
+    main->mode = 1;
+    aocMenuSetReadyFlag(main, 1);
     g_aocMain->flags &= ~0x70;
     g_aocDisplay->operationActive = 0;
     releaseEntriesB((CountAt5A *)work->entriesB);
@@ -77,9 +66,9 @@ void AocMenu::releaseStepResources()
     }
     asdMemFreeSlot(work->slot);
     work->slot = NULL;
-    if (work->process != 0) {
+    if (work->process != NULL) {
         scrScriptProcessDestroy(work->process);
-        work->process = 0;
+        work->process = NULL;
     }
     if (work->scriptBuffer != NULL) {
         asdMemFree(work->scriptBuffer);

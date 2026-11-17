@@ -1,5 +1,6 @@
 /* NON_MATCHING: allocation-size register reuse, count multiply operands and resolved-data pointer lifetime differ. */
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
+#include "gfx/ModelBoneLookup.h"
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdDebug.h"
@@ -63,7 +64,7 @@ EffObjectParticle *FUN_003aa6c0(ObjectParticleResourceView *resource)
                     memcpySrcFirst(data, particle->creation.modelData, size);
                     AsdMdlObject *model = asdMdlManagerCreateFromSource(particle->creation.modelData, size, 7);
                     particle->creation.model = model;
-                    model->node->resource->state->flags->flags = 1;
+                    model->node->sceneNode->skeleton->resource->flags = 1;
                 }
                 FUN_003b8ecc(&particle->object);
             }

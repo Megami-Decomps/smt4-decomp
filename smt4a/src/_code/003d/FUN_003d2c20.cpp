@@ -1,24 +1,13 @@
 #include "common.h"
-#include <stddef.h>
-
-/* This view reaches beyond the shared ActiveSkillRecord prefix. */
-struct ActiveSkillStatusView {
-    u8 unk00[0x3c];
-    u32 effect; // 0x3c
-    u8 unk40[0x46];
-    s16 targetKind; // 0x86
-};
-typedef char ActiveSkillStatusOffsets[
-    offsetof(ActiveSkillStatusView, effect) == 0x3c &&
-    offsetof(ActiveSkillStatusView, targetKind) == 0x86 ? 1 : -1];
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 // Select the current status ailments affected by a skill's cure effect.
-u32 FUN_003d2c20(const ActiveSkillStatusView *skill, u32 ailments)
+u32 FUN_003d2c20(const SkillDataRecordA *skill, u32 ailments)
 {
     u32 result = 0;
-    if ((skill->effect & 0x7f) != 0 && ailments != 0 && skill->targetKind != 6) {
-        u32 effect = skill->effect & 0x7f;
+    if ((skill->flags & 0x7f) != 0 && ailments != 0 && skill->targetKind != 6) {
+        u32 effect = skill->flags & 0x7f;
         if (effect == 22) {
             if (ailments & 0x20) result = 0x20;
             if (ailments & 0x40) result |= 0x40;

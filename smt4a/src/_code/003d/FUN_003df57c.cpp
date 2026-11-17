@@ -2,18 +2,18 @@
 #include "gamedata/SkillDataRecord.h"
 #include "shard/Shard004B.h"
 #include "gamedata/DataTableAccess.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-ItemRankRecord *gameGetPlayerData(void);
 s32 gameDataFlagTestBit(u32 flag);
 s32 FUN_002efc44(const SkillDataRecordA *record, s32 rank, s32 kind);
 }
 
-static inline s32 findEquippedSkillRank(const ItemRankRecord *player, u32 id)
+static inline s32 findEquippedSkillRank(const PlayerDataA *player, u32 id)
 {
     for (s32 index = 0; index < 8; ++index) {
-        if (player->items[index] == id) {
-            return player->ranks[index];
+        if (player->skills[index] == id) {
+            return player->skillRanks[index];
         }
     }
     return 0;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: IDENTICAL when the unit is compiled with -O2 (needs a cflags entry: -O2 -Otime); under the default -O3 armcc merges the flag stores of states 0 and 2 into one predicated tail. */
 #include "common.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
+#include "ui/UiSpriteApi.h"
 
 struct PositionedTransition {
     /* 0x000 */ u8 unk000[8];
@@ -19,9 +20,6 @@ struct PositionedTransition {
 };
 extern "C" {
 void FUN_00233240(void *transition, s32 value);
-s32 uiSpriteAdvanceAnimation(void *motion);
-s32 vec2GetYInt(void *motion);
-s32 vec2GetXInt(void *motion);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 
 /* Starts a transition, follows its integer position, then clears the active flag. */
@@ -34,11 +32,11 @@ void FUN_002311a4(PositionedTransition *work)
         work->state = 1;
     } else if (work->state == 1) {
         u8 *motion = work->motion;
-        if (uiSpriteAdvanceAnimation(motion) != 0) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)motion) != 0) {
             work->state = 2;
         }
-        s32 y = vec2GetYInt(motion);
-        pointConvertToFloat(&work->position, vec2GetXInt(motion), y);
+        s32 y = vec2GetYInt((const UiSpriteState *)motion);
+        pointConvertToFloat(&work->position, vec2GetXInt((const UiSpriteState *)motion), y);
     } else if (work->state == 2) {
         work->animating = 0;
     }

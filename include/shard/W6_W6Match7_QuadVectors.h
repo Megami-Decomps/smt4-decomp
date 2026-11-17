@@ -11,6 +11,10 @@ struct QuadVector {
     f32 w;
 };
 
+/* QuadVector's default constructor (array-constructed through __aeabi_vec_ctor_nocookie_nodtor): all four
+   components one. */
+extern "C" void vectorSetAllOne(QuadVector *vector);
+
 struct QuadVectorState {
     /* 0x00 */ u8 unk00[0x2c];
     /* 0x2c */ QuadVector corners[4];

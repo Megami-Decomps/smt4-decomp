@@ -1,4 +1,5 @@
 /* NON_MATCHING: the 60-byte preset copy now matches retail (local struct copy: one vldmia/vstmia of 15 registers); retail keeps one preserved register and stack word fewer (r7 for the frame pointer global, 4-byte frame) than the build (r8, 8 bytes). */
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTexA.h"
 
 static __inline void frameTransitionPresetsCopy(const FrameTexTransitionPresets *source, FrameTexTransitionPresets *destination)
@@ -10,9 +11,6 @@ extern "C" {
 extern const FrameTexTransitionPresets g_frameTransitionDefaultPresets;
 void sysPlayVoice(u32 sound);
 void FUN_003b7b4c(FrameTexWorkA *work);
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 group, u32 id,
-                  UiResourceParameters *resources, u16 flags, f32 speed);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 restart);
 
 /* Resets (0), opens (1) or closes (2) the CAMP transition. */
 void frameTransitionSetMode(s32 mode)

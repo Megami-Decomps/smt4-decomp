@@ -1,4 +1,5 @@
 /* NON_MATCHING: the state/prevState stores: retail writes them with `stmib r0!, {r1, r2}` then stateTime via the updated r0; armcc here stores stateTime first and uses add + stm. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "font/ComWin/ComWin.h"
 
@@ -22,7 +23,6 @@ typedef struct UiQuest {
 extern UiQuest *g_uiQuest; /* 0x43dd50 */
 
 extern int buttonHelpSetPreset(int preset);
-extern int timerStart(u8 *timer, int a, int b);
 extern int soundPlaySeUnpanned(u32 arg);
 
 /* Opens page `page` of the quest screen: starts its timer and animations and enters state 17. */
@@ -32,9 +32,9 @@ void FUN_00203640(u16 page)
 
     quest->page = page;
     quest->unk5e8 = 0;
-    timerStart(quest->timer, 1, 0);
-    spriteStartAnimationByIndex(quest->anim0, 2);
-    spriteStartAnimationByIndex(quest->anim1, 3);
+    timerStart((UiSpriteState *)quest->timer, 1, 0);
+    spriteStartAnimationByIndex((UiSpriteState *)quest->anim0, 2);
+    spriteStartAnimationByIndex((UiSpriteState *)quest->anim1, 3);
     quest = g_uiQuest;
     quest->prevState = quest->state;
     quest->state = 17;

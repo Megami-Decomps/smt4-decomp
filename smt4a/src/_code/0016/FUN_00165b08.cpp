@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00165b08` (_code @ 0x165b08, 0x808 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
@@ -13,8 +14,6 @@ int renderCtxPopState(...);
 
 int textFormatBuffer(...);
 int textDrawString(...);
-int vec2GetXInt(...);
-int vec2GetYInt(...);
 int efctSetSpeed(void);
 int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
 int FUN_00180310(...);
@@ -86,8 +85,8 @@ void FUN_00165b08(void)
   unsigned char temp_v18 [100];
   
   temp_v7 = ((int)g_messageMain.banner);
-  vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
-  vec2GetYInt(((int)g_messageMain.banner) + 0xb00);
+  vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
+  vec2GetYInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
   temp_v2 = renderCtxPackPassFlags(1,0);
   renderStackPushIndexed(g_renderCtx,3,temp_v2);
   gxResetColorQuadToWhite();
@@ -101,16 +100,16 @@ void FUN_00165b08(void)
     temp_v12 = 0;
     temp_v4 = partySlotIsOccupied();
     if (temp_v4 != 0) {
-      temp_v4 = vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
-      temp_v5 = vec2GetYInt(((int)g_messageMain.banner) + 0xb00);
+      temp_v4 = vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
+      temp_v5 = vec2GetYInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
       temp_v8 = 0;
       do {
         if (*(int *)(temp_v7 + 0x9c) < temp_v8) break;
         temp_v6 = saveSlotFindById(*(unsigned int *)(temp_v7 + temp_v8 * 4 + 0xac) & 0xffff);
         if ((*(char *)(temp_v7 + temp_v8 + 0xdc) == '\0') &&
            (*(short *)(temp_v3 + 300) == *(short *)(temp_v6 + 300))) {
-          temp_v4 = vec2GetXInt(((int)g_messageMain.banner) + temp_v8 * 0x8c + 0xdbc);
-          temp_v5 = vec2GetYInt(((int)g_messageMain.banner) + temp_v8 * 0x8c + 0xdbc);
+          temp_v4 = vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + temp_v8 * 0x8c + 0xdbc));
+          temp_v5 = vec2GetYInt((UiSpriteState *)(((int)g_messageMain.banner) + temp_v8 * 0x8c + 0xdbc));
           temp_v12 = 1;
           break;
         }
@@ -183,8 +182,8 @@ LAB_00165eec:
     }
     if ((temp_v12 && temp_v14 != 0) && (temp_v14 = *(unsigned int *)(temp_v7 + temp_v9 * 4 + 0xac), temp_v14 != 0)) {
       temp_v3 = saveSlotFindById(temp_v14 & 0xffff);
-      temp_v4 = vec2GetXInt(((int)g_messageMain.banner) + temp_v9 * 0x8c + 0xdbc);
-      temp_v5 = vec2GetYInt(((int)g_messageMain.banner) + temp_v9 * 0x8c + 0xdbc);
+      temp_v4 = vec2GetXInt((UiSpriteState *)(((int)g_messageMain.banner) + temp_v9 * 0x8c + 0xdbc));
+      temp_v5 = vec2GetYInt((UiSpriteState *)(((int)g_messageMain.banner) + temp_v9 * 0x8c + 0xdbc));
       efctSetSpeed();
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc34));
       temp_v6 = (int)*(short *)(temp_v8 + 10);

@@ -5,6 +5,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "map/MapVector.h"
 
 struct BattleViewObject {
     /* 0x00 */ void *vtable;
@@ -19,9 +20,8 @@ public:
     /* 0x04 */ BattleViewObject *object;
 };
 
-struct BattleViewVec3 {
-    f32 x, y, z;
-};
+/* A battle-view position: the shared 3-float vector. */
+typedef MapVector BattleViewVec3;
 
 struct BattleViewState {
     union {

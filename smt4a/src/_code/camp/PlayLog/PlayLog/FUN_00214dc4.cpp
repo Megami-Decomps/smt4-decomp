@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214dc4` (_code @ 0x214dc4, 0x47c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -76,7 +76,7 @@ void FUN_00214dc4(void)
   if (0 < temp_v1) {
     temp_v13 = temp_v0 + 0x400;
     do {
-      temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + temp_v8 * 0x8c + 0x20));
+      temp_v1 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v0 + temp_v8 * 0x8c + 0x20)));
       efctSetSpeed();
       if (temp_v8 == 0) {
         if (*(char *)(temp_v13 + 0x88) != '\0') {

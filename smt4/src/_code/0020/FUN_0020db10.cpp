@@ -18,7 +18,7 @@ AsdMdlObject *asdMdlManagerCreateFromSource(void *source, u32 param, u32 size);
 static void prepareModel(AsdMdlObject *model)
 {
     model->flags |= 2;
-    model->node->resource->positionFollowed = 0;
+    model->node->sceneNode->positionFollowed = 0;
 }
 
 void FUN_0020db10(void)

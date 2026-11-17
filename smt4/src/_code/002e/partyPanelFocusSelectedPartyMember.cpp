@@ -1,8 +1,8 @@
 #include "ui/PartyPanelState.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-u8 *gameGetSlotTable();
 void timerStart(void *, s32, s32);
 void slotPlacementAssignSlotAndPosition(PartyPanelWidget *, u32);
 void FUN_002937e0();

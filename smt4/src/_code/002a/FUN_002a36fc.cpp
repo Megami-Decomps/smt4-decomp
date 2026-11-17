@@ -1,19 +1,12 @@
 /* NON_MATCHING: retail evaluates the handler call's vector argument (add r1, sp, #16) before the null test and then conditionally executes the call (ldrne/blxne), copies the 4th vector component back from the scratch memory, and keeps the globals in r8/r9; ours branches around the call and uses r6/r7. */
 #include "common.h"
+#include "shard/Resource.h"
 
 struct Vec4 {
     f32 x;
     f32 y;
     f32 z;
     f32 w;
-};
-
-/* A particle emitter's engine-side object: its type indexes the handler table. */
-struct EmitterObject {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 type;
-    /* 0x06 */ u8 unk06[2];
-    /* 0x08 */ u32 handle;
 };
 
 /* One particle of an emitter set (a linked list through `next`). */
@@ -29,7 +22,7 @@ struct Particle {
     /* 0x6C */ u8 unk6C[0x18];
     /* 0x84 */ u32 flags2;
     /* 0x88 */ u8 unk88[8];
-    /* 0x90 */ EmitterObject *emitter;
+    /* 0x90 */ Resource *emitter;
     /* 0x94 */ u8 unk94[0x18];
     /* 0xAC */ Particle *next;
 };
@@ -53,15 +46,6 @@ struct EmitterSet {
 };
 
 /* Per-emitter-type callbacks (0x44 bytes each). */
-struct EmitterHandler {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ void (*placed)(u32 handle, const Vec4 *position);
-    /* 0x24 */ u8 unk24[4];
-    /* 0x28 */ void (*plain)(u32 handle, f32 intensity);
-    /* 0x2C */ void (*colored)(u32 handle, const Vec4 *color);
-    /* 0x30 */ u8 unk30[0x14];
-};
-
 /* Scratch vectors shared by the update functions (starting at 0x4EA81C). */
 struct EmitterScratch {
     /* 0x000 */ u8 unk000[0x100];
@@ -71,7 +55,6 @@ struct EmitterScratch {
 
 extern "C" {
 
-extern EmitterHandler g_handlerTable[];
 extern EmitterScratch DAT_004ea81c;
 
 /* Multiplies each component of the vector by `factor`. */
@@ -107,8 +90,8 @@ void FUN_002a36fc(EmitterSet *set, f32 deltaTime)
             if ((particle->flags2 & PARTICLE_TIME_SCALED) != 0) {
                 factor = factor * scaledTime;
             }
-            if (g_handlerTable[particle->emitter->type].plain != NULL) {
-                g_handlerTable[particle->emitter->type].plain(particle->emitter->handle, factor);
+            if (g_handlerTable[particle->emitter->type].setIntensity != NULL) {
+                g_handlerTable[particle->emitter->type].setIntensity(particle->emitter->data, factor);
             }
         } else {
             Vec4 color;
@@ -121,8 +104,8 @@ void FUN_002a36fc(EmitterSet *set, f32 deltaTime)
             }
             scale(DAT_004ea81c.first, factor);
             color = DAT_004ea81c.first;
-            if (g_handlerTable[particle->emitter->type].colored != NULL) {
-                g_handlerTable[particle->emitter->type].colored(particle->emitter->handle, &color);
+            if (g_handlerTable[particle->emitter->type].setColor != NULL) {
+                g_handlerTable[particle->emitter->type].setColor(particle->emitter->data, &color);
             }
         }
         if ((particle->flags & PARTICLE_HAS_OFFSET) != 0) {
@@ -138,8 +121,8 @@ void FUN_002a36fc(EmitterSet *set, f32 deltaTime)
             scale(DAT_004ea81c.second, scaledTime);
             add(DAT_004ea81c.first, DAT_004ea81c.second);
             position = DAT_004ea81c.first;
-            if (g_handlerTable[particle->emitter->type].placed != NULL) {
-                g_handlerTable[particle->emitter->type].placed(particle->emitter->handle, &position);
+            if (g_handlerTable[particle->emitter->type].setPosition != NULL) {
+                g_handlerTable[particle->emitter->type].setPosition(particle->emitter->data, &position);
             }
         }
     }

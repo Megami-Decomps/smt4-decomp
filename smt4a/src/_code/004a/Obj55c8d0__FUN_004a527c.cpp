@@ -1,6 +1,7 @@
 #include "common.h"
 #include "classes/Obj55c8d0.h"
 #include "test/BustupViewer.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -22,12 +23,8 @@ typedef struct MotionScreenWork {
 
 s32 FUN_0026c3a0(void);
 void FUN_002c8538(s32 enabled);
-s32 uiSpriteAdvanceAnimation(void *motion, f32 step);
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 s32 utilityReturnSuccess(void *value);
-s8 uiSpriteGetCompletionState(const void *record);
 
 /* Advances the screen's motion and follows its position; once the active motion finishes, moves to state 7. */
 }
@@ -40,9 +37,9 @@ void Obj55c8d0::FUN_004a527c()
     }
     UiMotionSprite *motion = &work->motion;
     work->mode = 9;
-    uiSpriteAdvanceAnimation(motion, 1.0f);
-    pointConvertToFloat(work->position, vec2GetXInt(motion), vec2GetYInt(motion));
-    if (FUN_0026c3a0() && uiSpriteGetCompletionState(motion) != 0 && buttonHelpStateIsNot3() && !utilityReturnSuccess(work->unk0096)) {
+    uiSpriteAdvanceAnimation((UiSpriteState *)motion, 1.0f);
+    pointConvertToFloat(work->position, vec2GetXInt((const UiSpriteState *)motion), vec2GetYInt((const UiSpriteState *)motion));
+    if (FUN_0026c3a0() && uiSpriteGetCompletionState((const UiSpriteState *)motion) != 0 && buttonHelpStateIsNot3() && !utilityReturnSuccess(work->unk0096)) {
         work->state = 7;
         work->substate = 0;
     }

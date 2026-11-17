@@ -1,4 +1,5 @@
 /* NON_MATCHING: loop and navigation setup now match; only the cursor clamp test loads row/column into r1/r2 the other way round. */
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDown.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"

@@ -1,10 +1,9 @@
 /* NON_MATCHING: center fallback block placement, saved-register allocation and final coordinate additions differ. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern BtlUiGlobals g_btlUi;
 void FUN_00289fa8(BtlUi *ui, u32 id, u32 mode, f32 x, f32 y, f32 z);
 
 void FUN_0023c9e8(u32, s32 kind, u32 id, s32 x, s32 y)

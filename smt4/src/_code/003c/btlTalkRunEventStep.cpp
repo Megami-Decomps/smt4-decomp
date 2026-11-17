@@ -21,7 +21,7 @@ struct BattleEventStep {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ void *tableData;
     /* 0x0c */ void *modelData;
-    /* 0x10 */ ScriptRunState *process;
+    /* 0x10 */ ScriptProcess *process;
     /* 0x14 */ void *script;
     /* 0x18 */ s32 state;
     /* 0x1c */ u8 unk1c[0x9c];
@@ -39,15 +39,14 @@ extern void *g_btlUiBlock;
 
 u32 FUN_00246454(s32 actor, u32 options, BtlEntry *unit);
 void battleSelectButtonHelpPreset(s32 preset);
-u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
-ScriptRunState *scrScriptProcessCreate(void *file, u32 owner);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void buttonHelpSetPreset(s32 preset);
 void FUN_003c06ac(BattleEventStep *step);
 void FUN_003dbe68(void *state);
 s32 btlEventAreResourcesReady(void *state);
 s32 FUN_003dcc34(void *state);
-s32 scrRunOpcodesStub(ScriptRunState *process);
+s32 scrRunOpcodesStub(ScriptProcess *process);
 s32 nodeListCountActiveById(void *reflect, s32 id);
 
 // Steps the state machine: 0 starts the load, 1 waits for the resources and starts the script, 2 runs it and copies its
@@ -78,7 +77,7 @@ s32 btlTalkRunEventStep(BattleEventStep *step)
         if (step->tableData == NULL || step->modelData == NULL || step->script == NULL) {
             return 0;
         }
-        step->process = scrScriptProcessCreate(step->modelData, reinterpret_cast<u32>(step->script));
+        step->process = scrScriptProcessCreate(step->modelData, step->script);
         scriptProcessSetMode(step->process, 1);
         scrScriptProcessStartEntry(step->process, 0);
         buttonHelpSetPreset(0x3c);

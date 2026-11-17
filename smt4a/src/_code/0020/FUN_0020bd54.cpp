@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020bd54` (_code @ 0x20bd54, 0xd8c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -58,7 +58,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -135,9 +134,9 @@ void FUN_0020bd54(void)
     if ((*(char *)(temp_v9 + 0x5ac) != '\0') &&
        (temp_v8 = temp_v5 + temp_v7 * 0x8c, *(char *)(temp_v8 + 0xb9) != '\0')) {
       acStack_a0[temp_v7] = '\x01';
-      temp_v2 = vec2GetXInt(reinterpret_cast<const void *>(temp_v8 + 0x34));
+      temp_v2 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v8 + 0x34)));
       aiStack_d0[temp_v7] = temp_v2 + *(short *)(temp_v8 + 0x4c);
-      temp_v2 = vec2GetYInt(temp_v8 + 0x34);
+      temp_v2 = vec2GetYInt((UiSpriteState *)(temp_v8 + 0x34));
       aiStack_b8[temp_v7] = temp_v2 + *(short *)(temp_v8 + 0x4e);
       temp_v12 = VectorFloatToUnsigned(*(float *)(temp_v8 + 0x54) * temp_v17,3);
       temp_v6 = (temp_v12 & 0xff) - 0x100;

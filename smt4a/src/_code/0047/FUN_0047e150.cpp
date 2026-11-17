@@ -1,5 +1,6 @@
 /* NON_MATCHING: switch return blocks merge differently, process-mode constant is saved, and argument loads are rescheduled. */
 #include "addon/ItemEventStartup.h"
+#include "script/scrScriptProcess.h"
 #include "addon/aocMain.h"
 #include "quest_center/QuestRecordA.h"
 #include "addon/AocSystemA.h"
@@ -10,11 +11,10 @@ void textFormatBuffer(char *, const char *, ...);
 void aocQueueType07(AocSystemA *, u32, void **, u32);
 void aocQueueType08(AocSystemA *, u32, void **, u32);
 void sysPlaySe(u32);
-ScriptRunState *scrScriptProcessCreate(void *, void *);
 u32 tableGroupFindEntryIndex(void *, const char *);
-void scrScriptProcessStartEntry(ScriptRunState *, u32);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
-u32 scrRunOpcodesStub(ScriptRunState *);
+void scrScriptProcessStartEntry(ScriptProcess *, u32);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
+u32 scrRunOpcodesStub(ScriptProcess *);
 
 u32 FUN_0047e150(ItemEventStartup *work)
 {
@@ -46,7 +46,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
         if (!item)
             work->state = 3;
         sysPlaySe(0x92);
-        ScriptRunState *process = scrScriptProcessCreate(work->script, work->messages);
+        ScriptProcess *process = scrScriptProcessCreate(work->script, work->messages);
         work->process = process;
         scriptProcessSetMode(process, 2);
         textFormatBuffer(path, "e%03d_%02d", item->event.package, item->event.entry);

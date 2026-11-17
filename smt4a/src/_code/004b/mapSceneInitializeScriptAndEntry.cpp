@@ -1,11 +1,7 @@
 #include "common.h"
+#include "addon/aocMain.h"
 #include "game/GameStateA.h"
 #include "script/scrScriptProcess.h"
-
-struct AocMainView {
-    /* 0x00 */ u8 unk00[0xC1];
-    /* 0xC1 */ u8 unk0C1;
-};
 
 /* The scene controller's work (observed prefix). */
 struct SceneStartWork {
@@ -21,17 +17,14 @@ struct SceneStartWork {
     /* 0x0A89 */ u8 unk0A89[0x69F];
     /* 0x1128 */ void *script;
     /* 0x112C */ void *scriptData;
-    /* 0x1130 */ ScriptRunState *process;
+    /* 0x1130 */ ScriptProcess *process;
     /* 0x1134 */ u8 unk1134[0x38];
     /* 0x116C */ u32 entryKind;
 };
 
 extern "C" {
 
-extern AocMainView *g_aocMain;
-
-ScriptRunState *scrScriptProcessCreate(void *script, void *data);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 rosterGetLeaderId(void);
 s32 FUN_001bd118(void);
 void FUN_004b6bc4(SceneStartWork *work, s32 mode, s32 arg);
@@ -87,7 +80,7 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
             case 2:
                 break;
             }
-        } else if (g_aocMain->unk0C1 != 0 || gameDataTableGetFlag() == 6) {
+        } else if (g_aocMain->skipRestore != 0 || gameDataTableGetFlag() == 6) {
             FUN_00239b10(2);
             FUN_00215978(0);
         } else if (gameDataTableGetFlag() == 1) {

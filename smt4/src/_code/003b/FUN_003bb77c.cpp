@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/S1ListMenu.h"
 
 extern "C" {

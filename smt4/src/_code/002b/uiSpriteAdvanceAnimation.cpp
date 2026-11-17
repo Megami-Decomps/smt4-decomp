@@ -1,77 +1,73 @@
 /* NON_MATCHING: only register allocation differs - retail keeps each computed position component in r1 (lsl r1,r0,#12; str r1 / add r1,r1,r0) and reloads the sequence table pointer after advancing the step; armcc here uses r0 and keeps the pointer. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
-void timerStart(UiSpriteState *sprite, u32 frame, u32 alternate);
-void FUN_002b1e08(UiSpriteState *sprite);
-void controllerUpdateUniformScaleTrack(UiSpriteState *sprite);
-void spriteSequencePlayerAdvance(UiSpriteState *sprite);
 
-/* Advances a sprite's position keyframe by a frame (interpolating between its two points, then walking its keyframe
-   sequence), updates its other tracks and returns whether every track has finished. */
+/* Advances a sprite's position key by a frame (interpolating between its two points, then walking the track's
+   commands), updates its other tracks and returns whether every track has finished. */
 s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite)
 {
-    if (sprite == NULL || ((s32)sprite->unk04 < 0 && (s32)sprite->unk08 < 0)) {
+    if (sprite == NULL || (sprite->image < 0 && sprite->secondaryImage < 0)) {
         return 1;
     }
-    if (sprite->completion.horizontal == 0 && sprite->keyframes != NULL) {
-        UiSpriteKeyframe *key = &sprite->keyframes[sprite->animation];
-        if (key->duration <= sprite->motionFrame) {
-            if (key->rewind != 0) {
-                if (sprite->keyframeTrack.alternate != 0) {
-                    sprite->slide.x = key->altX << 12;
-                    sprite->slide.y = key->altY << 12;
+    if (sprite->positionDone == 0 && sprite->positionKeys != NULL) {
+        UiSpritePositionKey *key = &sprite->positionKeys[sprite->positionKey];
+        if (key->duration <= (s16)sprite->positionFrame) { // retail compares it signed (ldrsh) but steps it as a u16
+            if (key->loop != 0) {
+                if (sprite->positionReverse != 0) {
+                    sprite->x = key->endX << 12;
+                    sprite->y = key->endY << 12;
                 } else {
-                    sprite->slide.x = key->x << 12;
-                    sprite->slide.y = key->y << 12;
+                    sprite->x = key->startX << 12;
+                    sprite->y = key->startY << 12;
                 }
-                sprite->keyframeTrack.elapsed = 0;
+                sprite->positionFrame = 0;
             } else {
-                if (sprite->keyframeTrack.alternate != 0) {
-                    sprite->slide.x = key->x << 12;
-                    sprite->slide.y = key->y << 12;
+                if (sprite->positionReverse != 0) {
+                    sprite->x = key->startX << 12;
+                    sprite->y = key->startY << 12;
                 } else {
-                    sprite->slide.x = key->altX << 12;
-                    sprite->slide.y = key->altY << 12;
+                    sprite->x = key->endX << 12;
+                    sprite->y = key->endY << 12;
                 }
-                if (sprite->keyframeSequence.enabled != 0 && sprite->keyframeSteps != NULL &&
-                    sprite->keyframeSteps[sprite->keyframeSequence.step].frame != -1) {
-                    sprite->keyframeSequence.step = sprite->keyframeSequence.step + 1;
-                    UiSpriteKeyframeStep *step = &sprite->keyframeSteps[sprite->keyframeSequence.step];
-                    if (step->frame == -1 || step->frame == -3) {
-                        sprite->completion.horizontal = 1;
-                    } else if (step->frame == -2) {
-                        sprite->keyframeSequence.step = 0;
-                        timerStart(sprite, (s16)sprite->keyframeSteps[0].frame, sprite->keyframeSteps[0].alternate);
+                if (sprite->commandsRunning != 0 && sprite->commands != NULL &&
+                    sprite->commands[sprite->positionStep].positionKey != -1) {
+                    sprite->positionStep = sprite->positionStep + 1;
+                    const SpriteAnimationCommand *step = &sprite->commands[sprite->positionStep];
+                    if (step->positionKey == -1 || step->positionKey == -3) {
+                        sprite->positionDone = 1;
+                    } else if (step->positionKey == -2) {
+                        sprite->positionStep = 0;
+                        timerStart(sprite, (s16)sprite->commands[0].positionKey, sprite->commands[0].positionReverse);
                     } else {
-                        timerStart(sprite, (s16)step->frame, step->alternate);
+                        timerStart(sprite, (s16)step->positionKey, step->positionReverse);
                     }
                 } else {
-                    sprite->completion.horizontal = 1;
+                    sprite->positionDone = 1;
                 }
             }
         } else {
-            if (sprite->keyframeTrack.alternate != 0) {
-                sprite->slide.x += ((key->x - key->altX) << 12) / key->duration;
-                sprite->slide.y += ((key->y - key->altY) << 12) / key->duration;
+            if (sprite->positionReverse != 0) {
+                sprite->x += ((key->startX - key->endX) << 12) / key->duration;
+                sprite->y += ((key->startY - key->endY) << 12) / key->duration;
             } else {
-                sprite->slide.x += ((key->altX - key->x) << 12) / key->duration;
-                sprite->slide.y += ((key->altY - key->y) << 12) / key->duration;
+                sprite->x += ((key->endX - key->startX) << 12) / key->duration;
+                sprite->y += ((key->endY - key->startY) << 12) / key->duration;
             }
-            sprite->keyframeTrack.elapsed++;
+            sprite->positionFrame++;
         }
     }
     FUN_002b1e08(sprite);
     controllerUpdateUniformScaleTrack(sprite);
     spriteSequencePlayerAdvance(sprite);
-    if (sprite->completion.horizontal != 0 && sprite->completion.vertical != 0 &&
-        sprite->completion.scale != 0 && sprite->completion.opacity != 0) {
-        sprite->animationFlags.completed = 1;
+    if (sprite->positionDone != 0 && sprite->alphaDone != 0 &&
+        sprite->scaleDone != 0 && sprite->frameDone != 0) {
+        sprite->finished = 1;
     } else {
-        sprite->animationFlags.completed = 0;
+        sprite->finished = 0;
     }
-    sprite->visibility.active = 1;
-    return sprite->animationFlags.completed;
+    sprite->updated = 1;
+    return sprite->finished;
 }
 
 } /* extern "C" */

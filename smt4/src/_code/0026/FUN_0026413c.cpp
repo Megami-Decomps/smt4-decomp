@@ -1,5 +1,5 @@
 /* NON_MATCHING: the button state is kept in different registers and the turn start / hold-to-rotate paths are laid out in another order; the camera turn behaviour is the same. */
-#include "common.h"
+#include "map/LmapMainGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "game/GameState.h"
 
@@ -24,15 +24,6 @@ typedef struct MapCameraTurn {
 } MapCameraTurn;
 
 
-/* The map state's heading mirror and the reset flag. */
-typedef struct MapHeadingState {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ f32 angle;
-    /* 0x54 */ u8 unk54[0x40];
-    /* 0x94 */ u8 reset;
-} MapHeadingState;
-
-extern MapHeadingState *g_lmapMainState;
 extern MapCameraTurn *DAT_004474f4;
 
 s32 inputIsQuestMenuPressed(void);
@@ -44,7 +35,7 @@ f32 mathGetShortestAngleDelta(f32 angle, f32 target);
  * quest menu button) starts a half-turn that then runs by 15 degrees a frame. */
 void FUN_0026413c(void)
 {
-    MapHeadingState *state = g_lmapMainState;
+    LmapMainState *state = g_lmapMainState;
     MapCameraTurn *camera = DAT_004474f4;
     s32 left = 0;
     s32 right = 0;
@@ -52,7 +43,7 @@ void FUN_0026413c(void)
     f32 step = 3.0f;
 
     camera->angle = state->angle;
-    if (state->reset != 0) {
+    if (state->angleReset != 0) {
         camera->turning = 0;
         camera->held = 0;
         camera->cooldown = 10;

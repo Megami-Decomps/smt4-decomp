@@ -13,7 +13,6 @@ void campCommonBgAcquire();
 void campButtonHelpAcquire();
 void commonBgStopChildAndBeginTransition();
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *scrScriptProcessCreate(void *scriptFile, void *messageFile);
 void titleRestartSlotState3(s32 screen, s32 alpha);
 u32 FUN_00241058();
 u32 FUN_00290688();
@@ -37,7 +36,7 @@ void clearSaveCreate(s32 mode)
     work->heapA = asdLoadFileSyncDefault("clear_save/clearSave.bf");
     void *messages = asdLoadFileSyncDefault("clear_save/clearSave.mbm");
     work->heapB = messages;
-    ScriptRunState *script = scrScriptProcessCreate(work->heapA, messages);
+    ScriptProcess *script = scrScriptProcessCreate(work->heapA, messages);
     work->resource = reinterpret_cast<u32>(script);
     script->mode = 2;
     asdTMTexTablePrepareNodeImage(0, 0x83);

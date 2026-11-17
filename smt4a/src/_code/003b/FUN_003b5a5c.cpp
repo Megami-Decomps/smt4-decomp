@@ -1,5 +1,5 @@
 #include "ui/MessageMainA.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include <string.h>
 
 struct MessageRemovalModeViewA {
@@ -13,8 +13,6 @@ u32 scrGetArg(u32);
 MessageIconUnit *saveSlotFindById(u32);
 u32 partySlotIsOccupied(const MessageIconUnit *);
 s32 scrGetCommandFrame();
-void uiSpriteStateInitFromSource(UiSpriteState *, s32, s32, void *, s32, f32);
-void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
 void sysPlayVoice(u32);
 
 u32 FUN_003b5a5c()

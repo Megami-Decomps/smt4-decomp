@@ -1,8 +1,8 @@
 #include "shard/Shard0033.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
-extern void *partyGetSlot(u32 index);
 extern u32 partySlotIsOccupied(void *entry);
 
 /* Counts how many of the 12 slots partySlotIsOccupied reports as non-zero. */

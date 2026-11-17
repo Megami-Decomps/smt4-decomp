@@ -1,10 +1,10 @@
 /* NON_MATCHING: scheduling only: same stores and calls, but retail loads g_messageMain first and interleaves the constant moves and the vstr differently. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
 
-void uiSpriteStateInitFromSource(void *record, u32 value0, u32 value4, void *source, u16 value38, f32 value20);
 
 /* Shows the value popup on the banner window with `value` and its float form, and starts its sprite animation. */
 u32 FUN_003a6b10(s32 value)

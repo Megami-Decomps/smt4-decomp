@@ -1,12 +1,10 @@
 /* NON_MATCHING: panel initialization constants and register allocation differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 u32 scrGetArg(u32);
-void uiSpriteStateInitFromSource(void *, s32, s32, void *, s32, f32);
-void pairSetFirstResetSecond(void *, s32);
-void uiSpriteSelectAnim(void *, s32);
 
 // Prepare the message panel animation and store the requested display value.
 u32 FUN_003a69c0(void)

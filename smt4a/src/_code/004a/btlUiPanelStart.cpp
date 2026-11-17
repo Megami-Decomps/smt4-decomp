@@ -1,43 +1,22 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 #include "ui/UiControl_VariantA.h"
 
 extern "C" {
 
-typedef struct BtlUiPanel004ab854 {
-    /* 0x00 */ u8 unk00[4];
-} BtlUiPanel004ab854;
-
-typedef struct BtlUiMenu004ab854 {
-    /* 0x0000 */ u8 unk0000[0x23f8];
-    /* 0x23f8 */ u8 subobject[0xbc];
-    /* 0x24b4 */ BtlUiPanel004ab854 panel;
-} BtlUiMenu004ab854;
-
-typedef struct BtlUiWorkspace004ab854 {
-    /* 0x0000 */ u8 unk0000[8];
-    /* 0x0008 */ BtlUiMenu004ab854 menu;
-} BtlUiWorkspace004ab854;
-
-typedef struct BtlUi004ab854 {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ BtlUiWorkspace004ab854 *workspace;
-} BtlUi004ab854;
-
-s32 FUN_00280030(BtlUiPanel004ab854 *panel);
-BtlUiPanel004ab854 *FUN_00502754(u8 *subobject); /* returns the subobject's panel (+0xBC) */
-void uiWorkEndState1(BtlUiMenu004ab854 *menu);
-void owner2DCInitSub(BtlUiPanel004ab854 *panel);
-
-extern BtlUi004ab854 g_btlUi; /* 0x57a9b8 */
+s32 FUN_00280030(void *panel);
+void *FUN_00502754(u8 *subobject); /* returns the subobject's panel (+0xBC) */
+void uiWorkEndState1(BtlUiObjAA *menu);
+void owner2DCInitSub(BtlUiObjBA *panel);
 
 /* When the menu is not in mode 5 and the panel accepts, runs the menu step and initialises the panel. */
 void btlUiPanelStart(void)
 {
-    BtlUiWorkspace004ab854 *workspace = g_btlUi.workspace;
+    BtlUiA *ui = g_btlUi.ui;
 
-    if (menu32ModeIsNot5(&workspace->menu) != 0 && FUN_00280030(FUN_00502754(workspace->menu.subobject)) != 0) {
-        uiWorkEndState1(&workspace->menu);
-        owner2DCInitSub(&workspace->menu.panel);
+    if (menu32ModeIsNot5(&ui->objA) != 0 && FUN_00280030(FUN_00502754(ui->objA.tail.subobject)) != 0) {
+        uiWorkEndState1(&ui->objA);
+        owner2DCInitSub(&ui->objB);
     }
 }
 

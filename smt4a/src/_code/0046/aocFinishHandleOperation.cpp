@@ -3,7 +3,6 @@
 #include "nn/Result.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 id, u32 flags);
 WindowStatusResult sdkCreateEncodedResourceDescriptor(void *parameters, AocHandleSource *source);
 WindowStatusResult FUN_00426fe4(void *destination, void *source);

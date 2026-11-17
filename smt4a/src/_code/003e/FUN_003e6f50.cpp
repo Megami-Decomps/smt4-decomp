@@ -1,5 +1,6 @@
 /* NON_MATCHING: script-mode setter and phase switch match; state-7 tail merging and result-state store scheduling differ. */
 #include "battle/BtlMainAccess.h"
+#include "script/scrScriptProcess.h"
 #include "battle/btlGameOver.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
@@ -11,7 +12,6 @@ extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
 void FUN_004f7b84(void *aux, const char *name);
 s32 FUN_004f6d34(void *aux);
 void *gameDataBlocksGetSaveData(void);
-void *scrScriptProcessCreate(void *process, void *data);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 s32 scrRunOpcodesStub(void *process);
 void campCommonBgRelease(void);

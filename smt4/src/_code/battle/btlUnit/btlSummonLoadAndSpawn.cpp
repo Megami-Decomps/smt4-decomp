@@ -1,6 +1,7 @@
 /* NON_MATCHING: steps the battle summon effect load/spawn (state 0 finds or loads the effect resource, state 1 waits for it and creates the effect objects); written from the decompilation, the descending free-slot searches and branch layout not compared with retail */
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "battle/BattleUnitSlot.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 
 #define SUMMON_CACHE_SLOTS 0x2A
@@ -91,7 +92,6 @@ extern BattleVersionResources *DAT_00435d18;
 extern BtlMainEffectState *g_btlMainState;
 extern u32 DAT_00439a24, DAT_00439a28, DAT_00439a38, DAT_00439cf8;
 
-void nkmEnemyFindById(u32 id);
 u32 idSlotsFindEntryById(BtlSummonState *state, s32 id);
 s32 nkdwHeaderParse(u32 resource);
 void aocHandleButtons(u32 resource, s32 mode);

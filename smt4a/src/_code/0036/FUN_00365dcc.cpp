@@ -1,21 +1,13 @@
 /* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 
 /* The map scene as the overview camera drives it. */
 #define DEGREES_TO_RADIANS 0.017453292f
 
-/* The controller whose pose the overview hands back. */
-struct OverviewController {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ f32 heading;
-    /* 0x1c */ u8 unk1c[0x94];
-    /* 0xb0 */ s32 mode;
-};
 
 extern "C" {
-extern OverviewController *g_lmapView;
 
 void mapEaseSceneHeading(void);
 void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 direction);
@@ -57,7 +49,7 @@ void FUN_00365dcc(void)
         g_lmapScene->pose.targetPosition.z = g_lmapScene->pose.targetPosition.z + libm_cosf(g_gameState.pointHeading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
         FUN_00303460(11);
-        g_lmapView->mode = -2;
+        g_lmapView->contextMode = -2;
         sysPlaySe(0xdd);
         FUN_00233e10(1, g_gameState.overviewRecord);
         MapVector viewPosition = g_gameState.overviewPosition;
@@ -86,7 +78,7 @@ void FUN_00365dcc(void)
             g_lmapScene->stateTime = 0;
         } else if (padButtonIsPressed(5) || inputIsQuestMenuPressed()) {
             g_lmapView->heading = g_lmapScene->pose.targetHeading;
-            g_lmapView->mode = 0;
+            g_lmapView->contextMode = 0;
             FUN_00303460(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;
@@ -116,7 +108,7 @@ void FUN_00365dcc(void)
         if (!mapIfHasSelection()) {
             mapIfReleaseSlot2();
             g_lmapView->heading = g_lmapScene->pose.targetHeading;
-            g_lmapView->mode = 0;
+            g_lmapView->contextMode = 0;
             FUN_00303460(0);
             g_lmapScene->state = g_lmapScene->state + 1;
             g_lmapScene->stateTime = 0;

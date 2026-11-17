@@ -1,10 +1,10 @@
 #include "shard/Shard0034.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "code/Code004b_Smt4a.h"
 
 extern "C" {
 
 extern s32 FUN_003df57c(u32 id, s32 flag);
-extern u32 gameGetSlotRecord(s32 index);
-extern s32 skillGetAdjustedCost(u32 data, u32 id);
 extern void itemSortCompareByCategoryAndId(KindRef *a, KindRef *b);
 
 /* If the two references rate the same, hands them to itemSortCompareByCategoryAndId. */

@@ -6,7 +6,6 @@
 #include "code/Code004f_VariantA.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 
 // A content entry as the loader walks it: 0x30 bytes, the count of u16 items at 0x28.
 struct AocListEntry {
@@ -49,7 +48,7 @@ void FUN_004733cc(AocListJob *job)
         return;
     }
     AocListEntry *entry;
-    table30GetEntryB(&entry, aoc->contentTable, job->entryIndex);
+    table30GetEntryB(&entry, aoc->contentRequest, job->entryIndex);
     u32 itemCount = FUN_004ffd4c(&entry);
     // Retail forwards an uninitialised nothrow tag in r1.
     u32 nothrowTag;

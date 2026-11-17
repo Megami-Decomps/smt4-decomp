@@ -2,6 +2,7 @@
 #include "camp/Unite/UniteGlobals.h"
 #include "shard/Shard0032.h"
 #include "util/BitsAndBytes_VariantB.h"
+#include "gamedata/SaveSlotRecord.h"
 
 // The packed pair uses a 64-bit allocation unit. Keep this view local so its
 // alignment does not change the published, partial UniteWorkA layout.
@@ -16,7 +17,6 @@ struct FusionResultPairView {
 typedef char FusionResultPairViewSizeCheck[sizeof(FusionResultPairView) == 8 ? 1 : -1];
 
 extern "C" {
-UnitRecord *slotRecordFindById(u32 id);
 void unitRecordBuild(s32 id, UnitRecord *out);
 void __aeabi_memcpy4(void *out, const void *source, u32 size);
 void recordMergeByteMasks(void *context, UnitRecord *first, UnitRecord *second,
@@ -40,11 +40,11 @@ u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)
         FUN_0028a538(pair->resultId, first, second);
         for (s32 i = 0; i < 24; ++i) {
             if (work->inheritanceA.skills[i] != 0 &&
-                !arrayContainsU16(out->skillList.skills, 8, work->inheritanceA.skills[i])) {
+                !arrayContainsU16(out->skills, 8, work->inheritanceA.skills[i])) {
                 s32 count = getUnlockedSlotCount(out);
                 for (s32 slot = 0; slot < count; ++slot) {
-                    if (out->skillList.skills[slot] == 0) {
-                        out->skillList.skills[slot] = work->inheritanceA.skills[i];
+                    if (out->skills[slot] == 0) {
+                        out->skills[slot] = work->inheritanceA.skills[i];
                         break;
                     }
                 }

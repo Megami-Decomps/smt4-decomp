@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fc720` (_code @ 0x1fc720, 0x1694 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -216,7 +216,7 @@ void FUN_001fc720(int param_1,int param_2)
         if (*(int *)(temp_v2 + 0x524) >= 9) {
           temp_v8 = uiSearchPrimary(temp_v23);
           if (temp_v8 == temp_v11 + 1) {
-            temp_v17 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x2e4));
+            temp_v17 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0x2e4)));
           }
           goto LAB_001fc9d0;
         }
@@ -227,7 +227,7 @@ LAB_001fc9d0:
           if (*(int *)(temp_v2 + 0x654) == temp_v11) {
             temp_v17 = *(int *)(temp_v2 + 0x524);
             if (temp_v17 >= 9) {
-              temp_v17 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x2e4));
+              temp_v17 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0x2e4)));
               goto LAB_001fca00;
             }
             temp_v17 = temp_v17 * -0x28;
@@ -246,7 +246,7 @@ LAB_001fca00:
               temp_v17 = temp_v17 * -0x28;
             }
             else {
-              temp_v17 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x2e4));
+              temp_v17 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0x2e4)));
             }
           }
         }

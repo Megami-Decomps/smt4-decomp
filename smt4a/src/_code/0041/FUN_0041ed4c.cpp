@@ -4,6 +4,7 @@
 #include "code/Code0023.h"
 #include "code/Code002c.h"
 #include "code/Code0033.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 extern void *g_handleRegistry;
@@ -12,7 +13,6 @@ void FUN_002f0384(s32 enabled);
 void FUN_0041dcc0(SavedUnitSelection *editor);
 s32 byte1IsZero();
 void FUN_0023b45c(s32 enabled);
-UnitRecord *gameGetPlayerData();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0038b5fc(s32 kind, u16 value);
 void buttonHelpSetText(s32 slot, u32 color);

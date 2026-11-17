@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011340c` (_code @ 0x11340c, 0x3d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -32,8 +33,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002ba1e0. */
-extern unsigned int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -134,8 +133,8 @@ void FUN_0011340c(unsigned int param_1)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x18);
     if (*(char *)(temp_v0 + 0x24) == '\0') {
-      temp_v5 = vec2GetXInt(temp_v0 + 0xe00);
-      temp_v10 = vec2GetYInt(temp_v0 + 0xe00);
+      temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v0 + 0xe00));
+      temp_v10 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0xe00));
       texDrawCompositeSprite(2,0x1d,10,temp_v5 + (int)temp_v6,temp_v10,0x15);
     }
     temp_v0 = g_titleScene;

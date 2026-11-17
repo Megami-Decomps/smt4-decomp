@@ -2,6 +2,7 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 struct PartyComparisonWidget {
     u8 position[0x20];
@@ -32,9 +33,6 @@ struct PartyComparisonScene {
 
 extern "C" {
 void efctSetSpeed(f32);
-f32 vec2GetSpeed(const void *);
-s32 vec2GetXInt(const void *);
-s32 vec2GetYInt(const void *);
 
 void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFull)
 {
@@ -48,13 +46,13 @@ void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFul
         if (forceFull == 0 && scene->selected != row)
             efctSetSpeed(0.5f);
         TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x15, row + 0x36);
-        s32 localX = vec2GetXInt(scene->widgets[row].position) + sprite->x;
-        s32 localY = vec2GetYInt(scene->widgets[row].position) + sprite->y;
-        s32 x = vec2GetXInt(scene->origin) + localX + offsetX;
-        s32 y = vec2GetYInt(scene->origin) + localY + offsetY;
+        s32 localX = vec2GetXInt((const UiSpriteState *)scene->widgets[row].position) + sprite->x;
+        s32 localY = vec2GetYInt((const UiSpriteState *)scene->widgets[row].position) + sprite->y;
+        s32 x = vec2GetXInt((const UiSpriteState *)scene->origin) + localX + offsetX;
+        s32 y = vec2GetYInt((const UiSpriteState *)scene->origin) + localY + offsetY;
         if (!scene->suppressed[row]) {
             if (scene->faded[row])
-                efctSetSpeed(vec2GetSpeed(&scene->widgets[row + 5]));
+                efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&scene->widgets[row + 5])));
             if (scene->values[row] < scene->values[scene->selected]) {
                 texDrawTableEntryAtStoredOrigin(2, 0x15, 0x12, x, y, 0x1f);
                 texDrawTableEntryAtStoredOrigin(2, 0x15, scene->values[row] + 0x17, x, y, 0x24);

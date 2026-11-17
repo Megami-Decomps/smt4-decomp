@@ -1,8 +1,7 @@
-#include "util/MathFunctions.h"
 /* NON_MATCHING: work/coordinate and zero saved registers differ, and the switch default branch uses a different layout. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "Model/MoriModelShadowMap.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantC.h"
@@ -15,10 +14,8 @@ struct PositionedMenuDrawWork {
 };
 extern "C" {
 s32 renderCtxPackPassFlags(u32 first, u32 second);
-s32 vec2GetYInt(const UiSpriteState *position);
 void FUN_003f66dc(PositionedMenuDrawWork *work, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 s32 FUN_003f7f90(PositionedMenuDrawWork *work, s32 value)

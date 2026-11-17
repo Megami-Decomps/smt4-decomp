@@ -4,6 +4,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 struct TitleLoadingScene {
     /* 0x000 */ u8 unk000[0x9ED];
@@ -31,10 +32,8 @@ u32 renderCtxPackPassFlags(u32 slot, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
-s32 vec2GetXInt(void *state);
 void texDrawCompositeSprite(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
-void uiSpriteAdvanceAnimation(void *state);
 
 /* Draws the title loading ring: the backdrop, nine dots with the current and the opposite pair
  * highlighted, and the caption; confirms the load when the origin sprite has finished. */
@@ -45,7 +44,7 @@ void FUN_0039bd04(TitleLoadingScene *scene)
     efctSetSpeed(1.0f);
     gxResetColorQuadToWhite();
     void *origin = scene->cursor;
-    s32 originX = vec2GetXInt(origin);
+    s32 originX = vec2GetXInt((const UiSpriteState *)origin);
     texDrawCompositeSprite(2, 0x1C, 0x1D, originX, 0, 0xD3);
 
     scene->step = (scene->step + 1) % (u32)DAT_0044cdc8;
@@ -60,21 +59,21 @@ void FUN_0039bd04(TitleLoadingScene *scene)
         TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x1C, i + 0x1124);
         dots[i].x = (f32)frame->x;
         dots[i].y = (f32)frame->y;
-        texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1121, vec2GetXInt(origin) + frame->x, frame->y, 6);
+        texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1121, vec2GetXInt((const UiSpriteState *)origin) + frame->x, frame->y, 6);
     }
-    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt(origin) + dots[scene->phase].x), (s32)dots[scene->phase].y, 6);
-    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt(origin) + dots[next].x), (s32)dots[next].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt((const UiSpriteState *)origin) + dots[scene->phase].x), (s32)dots[scene->phase].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt((const UiSpriteState *)origin) + dots[next].x), (s32)dots[next].y, 6);
     s32 opposite = (scene->phase + 4) & 7;
     s32 oppositeNext = (opposite + 1) & 7;
-    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt(origin) + dots[opposite].x), (s32)dots[opposite].y, 6);
-    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt(origin) + dots[oppositeNext].x), (s32)dots[oppositeNext].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt((const UiSpriteState *)origin) + dots[opposite].x), (s32)dots[opposite].y, 6);
+    texDrawTableEntryAtStoredOrigin(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt((const UiSpriteState *)origin) + dots[oppositeNext].x), (s32)dots[oppositeNext].y, 6);
 
     TextureTableEntryIV *caption = asdTMTexTableEntryAt(0x1C, 0x1120);
     char text[0x1B] = "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44";
-    textDrawString(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
+    textDrawString(4, DAT_0044cdd0, text, (f32)(vec2GetXInt((const UiSpriteState *)origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
-    uiSpriteAdvanceAnimation(origin);
+    uiSpriteAdvanceAnimation((UiSpriteState *)origin);
     if (scene->requested != 0 && scene->cursor[0x8A] != 0)
         scene->confirmed = 1;
 }

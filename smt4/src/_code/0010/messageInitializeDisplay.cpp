@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 #include "sys/Task.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"

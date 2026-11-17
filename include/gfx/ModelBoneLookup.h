@@ -44,7 +44,12 @@ struct ModelBoneMatrixProviderVtable {
     u32 unk18;
     ModelBoneMatrixSet *(*getMatrices)(ModelBoneMatrixProvider *provider);
 };
-struct ModelBoneMatrixProvider { ModelBoneMatrixProviderVtable *vtable; };
+/* The scene node's skeleton: its matrices, and the skeleton resource it was built from. */
+struct ModelBoneMatrixProvider {
+    ModelBoneMatrixProviderVtable *vtable;
+    u8 unk04[4];
+    ModelBoneSkeleton *resource; // 0x08
+};
 typedef char ModelBoneLookupLayoutCheck[
     offsetof(ModelBoneResource, skeleton) == 0xe0 && sizeof(ModelBoneResource) == 0xe4 &&
     offsetof(ModelBoneSkeleton, dictionary) == 0x1c && offsetof(ModelBoneSkeleton, flags) == 0x28 &&

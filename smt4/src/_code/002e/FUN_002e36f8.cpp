@@ -1,8 +1,8 @@
 /* NON_MATCHING: initial loop counters and redundant widget zero/one register materialization differ. */
 #include "ui/PartyPanelState.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitRecordAccess.h"
 
 static void setWidgetExcluded(PartyPanelWidget *widget, u8 excluded)
 {
@@ -10,7 +10,6 @@ static void setWidgetExcluded(PartyPanelWidget *widget, u8 excluded)
 }
 extern "C" {
 const StatBlock *partyMemberFindById(u16);
-const StatBlock *gameGetUnitRecord(s32);
 void __aeabi_memset4(void *, u32, s32);
 
 void FUN_002e36f8()

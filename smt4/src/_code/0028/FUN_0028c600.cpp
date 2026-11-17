@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/PlayScene.h"
 
 extern "C" {

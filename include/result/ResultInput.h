@@ -44,6 +44,10 @@ struct ResultInputWork {
             s32 slot; /* 0x3C */
             u8 player; /* 0x40 */
         } preparation;
+        struct {
+            u8 unk00[0x20];
+            ResultInputPosition position; /* 0x20: origin of the upper-screen result sprites */
+        } screen;
     };
     /* 0x00AC */ ResultInputPosition menuPosition;
     /* 0x00B4 */ u8 unk00B4[0x458];
@@ -62,6 +66,10 @@ struct ResultInputWork {
             u8 prefix5A0[0x18];
             /* 0x05B8 */ f32 effectSpeed;
         } detailAnimation;
+        struct {
+            u8 prefix5A0[0x19C];
+            /* 0x073C */ u8 curtainSprite[0x8C]; /* the closing curtain's UI sprite */
+        } curtain;
     };
     /* 0x352C */ s32 state;
 };
@@ -79,6 +87,8 @@ typedef char ResultInputResourceOffsets[
 typedef char ResultInputAnimationOffsets[
     offsetof(ResultInputWork, rewardAnimation.effectSpeed) == 0x52C &&
     offsetof(ResultInputWork, detailAnimation.effectSpeed) == 0x5B8 &&
+    offsetof(ResultInputWork, curtain.curtainSprite) == 0x73C &&
+    offsetof(ResultInputWork, screen.position) == 0x20 &&
     sizeof(ResultInputWork) == 0x3530 ? 1 : -1];
 typedef char ResultInputPreparationOffsets[
     offsetof(ResultInputWork, preparation.state) == 8 &&

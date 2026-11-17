@@ -1,5 +1,6 @@
 #include "common.h"
 #include "game/GameState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -25,9 +26,6 @@ void pointConvertToFloat(void *out, s32 x, s32 y);
 void FUN_00233240(void *animation, s32 mode);
 void buttonHelpSetContext(s32 sound);
 s32 buttonHelpStateIsNot3(void);
-s32 vec2GetYInt(Vec2Point *point);
-s32 vec2GetXInt(Vec2Point *point);
-s32 uiSpriteAdvanceAnimation(Vec2Point *point);
 
 /* Opens the panel (playing sound 0x1b unless muted), then follows its pointer until a confirmed press closes it. */
 void FUN_0039c348(CursorPanel *panel)
@@ -42,11 +40,11 @@ void FUN_0039c348(CursorPanel *panel)
     } else if (panel->state == 1) {
         Vec2Point *pointer = &panel->pointer;
 
-        if (uiSpriteAdvanceAnimation(pointer) != 0 && buttonHelpStateIsNot3() != 0) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)pointer) != 0 && buttonHelpStateIsNot3() != 0) {
             panel->state = 2;
             panel->flags |= 2;
         }
-        pointConvertToFloat(panel->position, vec2GetXInt(pointer), vec2GetYInt(pointer));
+        pointConvertToFloat(panel->position, vec2GetXInt((const UiSpriteState *)pointer), vec2GetYInt((const UiSpriteState *)pointer));
     }
 }
 

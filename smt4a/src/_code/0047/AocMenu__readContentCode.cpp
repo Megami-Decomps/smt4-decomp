@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match5_SelectionTransition.h"
 
 extern "C" {
-u32 systemKeyboardReadUtf8(AocMainA *main, char *output, const u16 *hint, u32 capacity, s32 password, s32 filter, void *requestOption);
+u32 systemKeyboardReadUtf8(AocMain *main, char *output, const u16 *hint, u32 capacity, s32 password, s32 filter, void *requestOption);
 void multibyteToUtf16(u16 *destination, const char *source, u32 capacity);
 void aocLoadingTaskStart(SelectionTransition *transition, u32 request);
 void aocMenuSetButtonHelp(SelectionTransition *transition, u32 selection, s32 mode);

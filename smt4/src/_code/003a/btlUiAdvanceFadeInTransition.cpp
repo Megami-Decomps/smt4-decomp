@@ -1,4 +1,4 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -9,7 +9,6 @@ s32 uiSpriteOperationIsComplete(BtlUiObjB *obj);
 s32 playSceneIsFadeOutDone(BtlUiObjA *obj);
 void FUN_0033c6f8(u32 arg);
 
-extern BtlUiGlobals g_btlUi;
 
 void btlUiAdvanceFadeInTransition(void)
 {

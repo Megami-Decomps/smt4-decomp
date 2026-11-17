@@ -1,4 +1,5 @@
 /* NON_MATCHING: the toggle's block layout now follows retail (all paths end in the shared return), but armcc if-converts the latched toggle into one call (retail keeps two arms and cross-jumps the 0x100016D call into the final arm's) and keeps the zero and 0x100016E in extra saved registers. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"

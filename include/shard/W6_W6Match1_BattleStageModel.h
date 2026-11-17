@@ -1,14 +1,15 @@
 #ifndef SHARD_W6_W6MATCH1_BATTLE_STAGE_MODEL_H
 #define SHARD_W6_W6MATCH1_BATTLE_STAGE_MODEL_H
 
-#include "shard/W4_Match1b_Node.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/os/Thread.h"
 #include <stddef.h>
 
+/* A stage model object (an AsdMdlObject; the battle code reaches its model as `owner`). */
 struct BattleStageNode {
     u8 unk00[8];
-    NodeOwner* owner;
+    AsdMdlNode* owner; // 0x08
 };
 
 

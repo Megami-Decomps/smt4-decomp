@@ -11,7 +11,7 @@ struct ScriptCommand {
 
 extern ScriptCommand DAT_00533f90[];
 
-s32 FUN_00227980(ScriptVmProcess *script)
+s32 FUN_00227980(ScriptProcess *script)
 {
     s32 position = script->pc;
     ScriptCommand *command = &DAT_00533f90[script->code[position].decoded.operand];

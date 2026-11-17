@@ -1,10 +1,9 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
 void naviMainEnterState6IfActive(void);
 
-extern LmapMainStateA *g_lmapMainState;
 
 void lmapMainCallIfActive2(void)
 {

@@ -6,8 +6,7 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
-s32 sysLightEventTryWait(AocObjB *event);
+s32 sysLightEventTryWait(LightEvent *event);
 u32 jyoucyuGetTableEntry(s32 index);
 
 /* The AOC job step: takes the content system's pending request (or the one it already holds),
@@ -20,7 +19,7 @@ u32 FUN_0047219c(void)
     request.result = WindowStatusResult(request.word3);
     request.kind = 100;
 
-    if (sysLightEventTryWait(&g_aocMain->objB) != 0) {
+    if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000u;
         request.kind = 200;
     } else {
@@ -32,7 +31,7 @@ u32 FUN_0047219c(void)
     g_aocSystem->getPendingRequest();
     g_aocMain->flags = (g_aocMain->flags & ~0x10000u) | 0x10;
     if (legacyResourceIdRemap(&request.result) != 0xC9413891) {
-        if (sysLightEventTryWait(&g_aocMain->objB) != 0) {
+        if (sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
             g_aocMain->flags &= ~0x10000u;
         } else if (request.kind != 200) {
             QueuedRequestHandle handle = {request.result.code, request.result.description};

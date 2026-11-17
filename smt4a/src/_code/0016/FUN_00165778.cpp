@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (218 vs 210 rows); retail builds the translate/scale matrices with individual stores and a 16-word copy of the camera matrix, and keeps the scale-derived offsets in float registers */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
-#include "util/MathFunctions.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "text/TextDraw.h"
@@ -56,10 +56,10 @@ void FUN_00165778(ItemBadge* badge, TextureTableEntryIV* frame)
     skinObjectUpdateMatrices(g_renderCtx);
 
     TextureTableEntryIV* rect = asdTMTexTableEntryAt(8, 427);
-    texDrawTableEntryAtStoredOrigin(2, 8, 424, rect->x + vec2GetXInt(badge->anchor), rect->y, 101);
+    texDrawTableEntryAtStoredOrigin(2, 8, 424, rect->x + vec2GetXInt((UiSpriteState *)badge->anchor), rect->y, 101);
     TextureTableEntryIV* countRect = asdTMTexTableEntryAt(8, 426);
     if (badge->mode != 3) {
-        FUN_00180310(6, rect->x + countRect->x + vec2GetXInt(badge->anchor), rect->y + countRect->y, 1, 2, 121, "%d", badge->count);
+        FUN_00180310(6, rect->x + countRect->x + vec2GetXInt((UiSpriteState *)badge->anchor), rect->y + countRect->y, 1, 2, 121, "%d", badge->count);
         return;
     }
 

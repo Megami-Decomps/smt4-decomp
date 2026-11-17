@@ -2,6 +2,7 @@
 #include "battle/BtlEntry.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 namespace {
 struct PartyStatusCache {
@@ -34,7 +35,6 @@ struct PartyUnitRecord {
 }
 
 extern "C" {
-u8* gameGetSlotTable();
 const PartyUnitRecord* gameGetUnitRecord(u32);
 
 /* Refresh one cached HP/MP/level row, optionally rereading its summoned-unit index. */

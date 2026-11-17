@@ -1,7 +1,7 @@
 #include "shard/GameGlobals.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtxTitle.h"
 /* Float aliases in the shared byte padding at +0x301 would shift its alignment. */
 struct GameIconAnimationView {
@@ -17,7 +17,6 @@ extern "C" {
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 location, f32 depth);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 
 /* Draws the three animated game icons at their stereo screen positions while icon mode 3 or 9 is shown. */
 u8 FUN_001cdef8(void)

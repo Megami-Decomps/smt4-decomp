@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 int naviSetMapSlot(u32 *block, u32 a, int b, int c, int d, int e, int f, int g, int h);
 

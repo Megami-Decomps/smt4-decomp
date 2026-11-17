@@ -1,10 +1,10 @@
 /* Closes the CEC settings screen: frees its heap blocks and resource, kills its task and frees the work area. */
 #include "common.h"
 #include "camp/CampCec/CampCecSetting.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
-int scrScriptProcessDestroy(u32 resource);
 int asdMemFree(void *ptr);               /* heap free */
 int jobStop(u32 task, int flags);     /* kill a task */
 

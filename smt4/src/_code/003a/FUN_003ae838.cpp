@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "code/Code003a.h"
 
 extern "C" {
 
 void saveIsSelectionOutsideRange(BtlUiObjC *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 void FUN_003ae838(void)
 {

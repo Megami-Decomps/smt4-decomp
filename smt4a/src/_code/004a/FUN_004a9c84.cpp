@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void FUN_00336b54(BtlUiObjCA *obj, s32 arg);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004a9c84(void)
 {

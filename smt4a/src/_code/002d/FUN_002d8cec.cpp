@@ -15,13 +15,7 @@ struct ModelGroupResumeSlot {
     u8 unk25[7];
 };
 struct ModelGroupsModeView { u8 unk00[0xC]; u16 mode; };
-/* The node's animation lies beyond the shared node prefix. */
-struct ModelResumeNode {
-    AsdMdlNode node;
-    u8 unk30[8];
-    s32 animation;
-};
-typedef char ModelGroupResumeOffsets[(sizeof(ModelGroupResumeSlot) == 0x2C && offsetof(ModelGroupResumeSlot, animation) == 0x14 && offsetof(ModelResumeNode, animation) == 0x38) ? 1 : -1];
+typedef char ModelGroupResumeOffsets[(sizeof(ModelGroupResumeSlot) == 0x2C && offsetof(ModelGroupResumeSlot, animation) == 0x14) ? 1 : -1];
 extern "C" {
 extern ModelGroups *g_modelGroups;
 void FUN_0029570c(void);
@@ -35,7 +29,7 @@ static inline void suspendModelGroupSlot(ModelGroupResumeSlot *slot)
     AsdMdlObject *model = slot->model;
     if (!(model->flags & 2)) {
         model->flags |= 2;
-        model->node->resource->positionFollowed = 0;
+        model->node->sceneNode->positionFollowed = 0;
         faderSetValue(slot->model->node, 0.0f);
     }
 }
@@ -44,7 +38,7 @@ static inline void showModelGroupSlot(ModelGroupResumeSlot *slot)
     AsdMdlObject *model = slot->model;
     if (model->flags & 2) {
         model->flags &= ~2;
-        model->node->resource->positionFollowed = 1;
+        model->node->sceneNode->positionFollowed = 1;
         faderSetValue(slot->model->node, 1.0f);
     }
 }
@@ -69,7 +63,7 @@ extern "C" void FUN_002d8cec(void)
                         suspendModelGroupSlot(slot);
                     nodeSetTranslation(slot->model->node, 0, slot->position);
                     FUN_0036bb1c(slot->model->node, 0, 0.0f, slot->yaw, 0.0f);
-                    if (reinterpret_cast<ModelResumeNode *>(slot->model->node)->animation != slot->animation)
+                    if (slot->model->node->currentMotion != slot->animation)
                         FUN_001ac2d4(slot->model->node, slot->animation, 0.0f);
                     slot->dirty = 0;
                 }

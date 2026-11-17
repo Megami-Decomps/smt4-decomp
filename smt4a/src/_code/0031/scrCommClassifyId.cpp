@@ -1,4 +1,5 @@
 #include "shard/Shard0031.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 
@@ -6,8 +7,7 @@ extern u32 scrGetArg(s32 index);
 extern void scrSetResult(u32 value);
 extern u32 gameStockContainsEntry(u32 id);
 extern u32 partyFindSlotById(u32 id);
-extern u32 gameGetSlotRecord(u32 lookup);
-extern s32 bitsAt60Test(u32 data, u32 flag);
+extern s32 bitsAt60Test(SlotRecordA *record, u32 flag);
 
 /* Script command: classifies the id given as argument 0 and returns the class through scrSetResult. */
 u32 scrCommClassifyId(void)

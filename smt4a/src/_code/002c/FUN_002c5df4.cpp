@@ -1,9 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c5df4` (_code @ 0x2c5df4, 0x918 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
-extern unsigned char* g_lmapView;
 
 void FUN_0035d1e0(float x, float z, float heading);
 float cameraGetHeadingDegrees(void);
@@ -137,7 +137,7 @@ void FUN_002c5df4(void)
     if (DAT_0060ff9c != '\0') {
       {
         float cameraHeading = cameraGetHeadingDegrees();
-        FUN_0035d1e0(*(float*)(g_lmapView + 0x50),*(float*)(g_lmapView + 0x58),cameraHeading);
+        FUN_0035d1e0(g_lmapView->savedEye.x,g_lmapView->savedEye.z,cameraHeading);
       }
       temp_v5 = temp_v22;
       temp_v23[0] = 0;

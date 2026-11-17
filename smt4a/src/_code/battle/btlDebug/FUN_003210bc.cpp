@@ -1,7 +1,7 @@
 /* NON_MATCHING: overlay-relative addresses, saved registers and threshold-constant hoisting differ. */
 #include "battle/btlUI.h"
 #include "camp/RenderCtx.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include <stdlib.h>
 #include "Model/MoriModelShadowMap.h"
 

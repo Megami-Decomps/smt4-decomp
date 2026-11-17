@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_TextureHolder.h"
 
 /* A texture resource: its image kind is a u16 at 0x1C. */

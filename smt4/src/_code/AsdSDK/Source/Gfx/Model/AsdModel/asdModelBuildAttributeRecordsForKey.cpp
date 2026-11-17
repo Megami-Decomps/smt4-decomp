@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps model/data/key in stack slots (push {r0-r2}, data and key reloaded in the scans) with one 16-byte block local shared by both scans and reaches the model through sub-object pointers (r8 = &model->records, fp = &model->containers); the scan helper here inlines with its own block copies (frame 68 vs 16+). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/S3AsdModelAttr.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -44,7 +44,7 @@ static __inline AsdEplEntry *atbcFindEntry(u8 *data, s32 index)
 
 /* Rebuilds the model's attribute records for `key`: one record per id of every matching entry
  * of the file's containers. */
-void asdModelBuildAttributeRecordsForKey(AsdModelAttrModel *model, u8 *data, s32 key)
+void asdModelBuildAttributeRecordsForKey(AsdMdlNode *model, u8 *data, s32 key)
 {
     s32 total = 0;
 

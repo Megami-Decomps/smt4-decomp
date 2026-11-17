@@ -1,10 +1,10 @@
 /* NON_MATCHING: selected-slot base is retained separately from its parent, changing registers and one address add; distance arguments schedule differently. */
 #include "map/MapStateSlots.h"
 #include "map/LmapGlobals.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
 extern MapStateSlots *g_mapStateSlots;
-f32 mathDistanceBetweenPoints(f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ);
 
 // Rank the three nearest active eligible map slots and publish their scene positions.
 void FUN_001fc0a8(void)

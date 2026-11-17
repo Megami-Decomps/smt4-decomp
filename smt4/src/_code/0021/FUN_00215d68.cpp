@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 
@@ -71,7 +73,6 @@ extern unsigned int FUN_0029dde0(void);
 extern int listCursorGetRowIfUnblocked(unsigned int *);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
-extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -82,8 +83,6 @@ extern int *gameGetSlotTable(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
-extern int vec2GetYInt(unsigned int *);
-extern int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -249,8 +248,8 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     FUN_0029a17c((int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                  *(short *)(temp_v2 + 10) + param_2,(int)**(short **)(temp_v2 + 0xc),
                  (int)(*(short **)(temp_v2 + 0xc))[1],1);
-    temp_v8 = vec2GetYInt(puVar2 + 0x2c);
-    temp_v2 = vec2GetXInt(puVar2 + 0x2c);
+    temp_v8 = vec2GetYInt((const UiSpriteState *)(puVar2 + 0x2c));
+    temp_v2 = vec2GetXInt((const UiSpriteState *)(puVar2 + 0x2c));
     texDrawTableEntryAtStoredOrigin(2,0x24,0x156,(int)&param_1->field_0x0 + temp_v2,temp_v8 + param_2,0x83);
     temp_v8 = g_titleScene;
     piVar16 = (int *)(g_titleScene + 0x130c);

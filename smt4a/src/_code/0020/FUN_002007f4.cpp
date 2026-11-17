@@ -1,5 +1,5 @@
 /* NON_MATCHING: completion getter calls match; cached display bases and the state/constant register allocation (retail keeps 1 in r7 and 0 in r6, loads 1 again for display.finished) differ. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 struct BufferedRowsDisplay {
     u8 unk00[0x68];
@@ -35,8 +35,6 @@ typedef char BufferedRowsOffsets[
     offsetof(BufferedRowsWork, selected) == 0x6f0 &&
     sizeof(BufferedRowsPayload) == 0x130 ? 1 : -1];
 extern "C" {
-void uiSpriteAdvanceAnimation(UiSpriteState *, f32);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void __aeabi_memcpy4(void *, const void *, u32);
 void gridNavigationConfigure(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
 

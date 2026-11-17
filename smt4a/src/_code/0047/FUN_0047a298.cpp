@@ -1,6 +1,8 @@
 /* NON_MATCHING: only the g_renderCtx / text-array register pair (r9, r8) is swapped. */
+#include "ui/UiSpriteApi.h"
 #include "shard/S1ListPanel.h"
 #include "shard/W4_Match3_AocMainA.h"
+#include "addon/aocApplication.h"
 #include <stddef.h>
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
@@ -23,19 +25,16 @@ typedef char CheckDrawWorkPosition[offsetof(AocDrawWork, alternate) == 0x185c ? 
 
 extern "C" {
 AocDrawWork *jobGetWork(u32 job);
-s32 vec2GetXInt(const AocDrawPosition *position);
-s32 vec2GetYInt(const AocDrawPosition *position);
 u32 renderCtxPackPassFlags(s32 mode, s32 option);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
-s32 FUN_00473910(AocMainA *main, s32 id);
-s32 FUN_00473754(AocMainA *main, s32 id, AocDrawText *text);
+s32 FUN_00473754(AocMain *main, s32 id, AocDrawText *text);
 }
 
 // Draw the expansion-content information panel at its mode-selected position.
 extern "C" s32 FUN_0047a298(u32 job)
 {
     AocDrawWork *work = jobGetWork(job);
-    AocMainA *main = g_aocMain;
+    AocMain *main = g_aocMain;
     if (work->flags & 0x1000) {
         AocDrawPosition *position;
         if (work->mode == 0 || work->mode == 1)
@@ -44,8 +43,8 @@ extern "C" s32 FUN_0047a298(u32 job)
             position = &work->alternate;
         else
             return 0;
-        s32 x = vec2GetXInt(position);
-        s32 y = vec2GetYInt(position);
+        s32 x = vec2GetXInt((UiSpriteState *)position);
+        s32 y = vec2GetYInt((UiSpriteState *)position);
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));

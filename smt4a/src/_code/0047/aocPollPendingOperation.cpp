@@ -5,7 +5,6 @@
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 s32 FUN_0047d904(void *request, nn::Result *code, u32 *detail);
 WindowStatusResult FUN_00473acc(ResourceLookup *lookup);
 void FUN_001764dc(AocMain *main);
@@ -22,7 +21,7 @@ WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
         nn::Result queryCode;
         u32 queryDetail;
         if (FUN_0047d904(step->request, &queryCode, &queryDetail)) {
-            if (nnResultIsFailure(queryResultFailureOnly(&main->operation.queryResult))) {
+            if (nnResultIsFailure(queryResultFailureOnly(&main->queryResult))) {
                 WindowStatusResult failure = FUN_00473acc(reinterpret_cast<ResourceLookup *>(main));
                 step->result = failure;
                 if (nnResultIsFailure(legacyResourceIdRemap(&step->result))) {

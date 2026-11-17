@@ -5,8 +5,8 @@
 
 struct BattleUiActionVector { f32 x, y, z; };
 struct BattleUiActionSlot {
-    /* 0x000 */ SpritePlaybackView firstSprite;
-    /* 0x08C */ SpritePlaybackView secondSprite;
+    /* 0x000 */ UiSpriteState firstSprite;
+    /* 0x08C */ UiSpriteState secondSprite;
     /* 0x118 */ u16 state;
     /* 0x11A */ u16 frame;
     /* 0x11C */ f32 progress;

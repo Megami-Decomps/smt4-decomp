@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation and constant scheduling only (retail keeps the zero vector components in a separate s-register copy and holds the work/camera pointers in r7/r8) */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include <math.h>

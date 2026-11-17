@@ -4,12 +4,12 @@
 #include "camp/Config/Config.h"
 #include "shard/S1ListPanel.h"
 #include "util/BitsAndBytes.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 extern ConfigWorkA *g_config;
 
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *position);
 
 // Draw one Config row's frame sprites (selected pair, plain pair or a four-segment bar) at (x, y).
 void configDrawRowFrame(s32 x, s32 y, s32 selected, s32 wide, s32 locked, f32 speed)
@@ -20,7 +20,7 @@ void configDrawRowFrame(s32 x, s32 y, s32 selected, s32 wide, s32 locked, f32 sp
         texDrawTableEntryAtStoredOrigin(2, 36, 111, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 36, 149, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 36, 150, x, y, 11);
-        efctSetSpeed(vec2GetSpeed(&config->draw) * speed);
+        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&config->draw) * speed);
         texDrawTableEntryAtStoredOrigin(2, 36, 151, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 36, 152, x, y, 11);
     } else if (selected == 0) {
@@ -36,7 +36,7 @@ void configDrawRowFrame(s32 x, s32 y, s32 selected, s32 wide, s32 locked, f32 sp
         texDrawTableEntryAtStoredOrigin(2, 36, 111, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 36, 141, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 36, 142, x, y, 11);
-        efctSetSpeed(vec2GetSpeed(&config->draw) * speed);
+        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&config->draw) * speed);
         texDrawTableEntryAtStoredOrigin(2, 36, 143, x, y, 11);
         texDrawTableEntryAtStoredOrigin(2, 36, 144, x, y, 11);
     }

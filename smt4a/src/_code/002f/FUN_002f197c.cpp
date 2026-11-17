@@ -3,6 +3,8 @@
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -76,8 +78,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetXInt(unsigned int *);
-extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180114. */
 /* Supplied declaration required: FUN_00180310. */
@@ -89,7 +89,6 @@ extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
-extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
 extern unsigned int *uniteGetWork(void);
 /* Supplied declaration required: gameDataCopySaveEntry. */
@@ -288,13 +287,13 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
 LAB_002f2034:
   efctSetSpeed();
   if (temp_v16 != 0) {
-    temp_v7 = vec2GetYInt(puVar2 + 0x2c);
-    temp_v2 = vec2GetXInt(puVar2 + 0x2c);
+    temp_v7 = vec2GetYInt((const UiSpriteState *)(puVar2 + 0x2c));
+    temp_v2 = vec2GetXInt((const UiSpriteState *)(puVar2 + 0x2c));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x28e,(int)&param_1->field_0x0 + temp_v2,temp_v7 + param_2,0x83);
   }
   else {
-    temp_v7 = vec2GetYInt(puVar2 + 0x2c);
-    temp_v2 = vec2GetXInt(puVar2 + 0x2c);
+    temp_v7 = vec2GetYInt((const UiSpriteState *)(puVar2 + 0x2c));
+    temp_v2 = vec2GetXInt((const UiSpriteState *)(puVar2 + 0x2c));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x156,(int)&param_1->field_0x0 + temp_v2,temp_v7 + param_2,0x83);
   }
   efctSetSpeed();

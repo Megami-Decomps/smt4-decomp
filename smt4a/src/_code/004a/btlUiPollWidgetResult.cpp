@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 int FUN_002cccf8(BtlUiObjCA *obj);
 int FUN_002ccde8(BtlUiObjCA *obj, u16 *idA, u16 *idB);
 
-extern BtlUiGlobalsA g_btlUi;
 
 /* Polls the widget; when it reports a result, reads its two ids and switches the UI state to 0xE or 0. */
 int btlUiPollWidgetResult(void)

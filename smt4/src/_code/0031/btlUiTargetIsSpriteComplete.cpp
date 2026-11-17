@@ -1,5 +1,5 @@
 #include "common.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 struct TargetState {
     /* 0x000 */ u8 unk00[0x1c4];

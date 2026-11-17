@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00186a48` (_code @ 0x186a48, 0x6bc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -38,8 +39,6 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -73,12 +72,12 @@ void FUN_00186a48(void)
   temp_v11 = 0;
   temp_v0 = *(unsigned short *)(g_uiQuest + 0x97e);
   if (*(int *)(g_uiQuest + 4) == 0x11) {
-    temp_v10 = vec2GetXInt(g_uiQuest + 0x34);
-    temp_v11 = vec2GetYInt(temp_v1 + 0x34);
+    temp_v10 = vec2GetXInt((UiSpriteState *)(g_uiQuest + 0x34));
+    temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0x34));
   }
   if (*(int *)(temp_v1 + 4) == 0x13) {
-    temp_v9 = vec2GetXInt(temp_v1 + 0x34);
-    temp_v8 = vec2GetYInt(temp_v1 + 0x34);
+    temp_v9 = vec2GetXInt((UiSpriteState *)(temp_v1 + 0x34));
+    temp_v8 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0x34));
   }
   temp_v12 = 0.3f;
   renderCtxCalculateStereoParallax(g_titleScene);

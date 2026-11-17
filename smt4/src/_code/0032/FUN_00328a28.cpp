@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match5_IndexedRecord.h"
 #include "gfx/EffectEditorStorage.h"
 extern "C" {

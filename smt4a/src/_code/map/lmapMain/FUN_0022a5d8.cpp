@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a5d8` (_code @ 0x22a5d8, 0xcd0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -52,7 +52,6 @@ extern unsigned int DAT_005f1b00; /* 0x5f1b00 */
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
@@ -421,8 +420,8 @@ unsigned int FUN_0022a5d8(void)
     temp_v2 = uiSearchPrimary(temp_v19);
     if (temp_v2 < temp_v8) {
       efctSetSpeed();
-      temp_v10 = vec2GetYInt(temp_v1 + 0x6b8);
-      temp_v5 = vec2GetXInt(reinterpret_cast<const void *>(temp_v1 + 0x6b8));
+      temp_v10 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0x6b8));
+      temp_v5 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v1 + 0x6b8)));
       temp_v16 = (int)*(short *)(temp_v1 + 0x76c);
       iStack_184 = (int)*(short *)(temp_v1 + 0x76e);
       uStack_180 = 0xfb;

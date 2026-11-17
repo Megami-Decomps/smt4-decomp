@@ -1,10 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 #include "shard/GameDataBlocks.h"
 
 extern "C" {
-void pairSetFirstResetSecond(void *pair, u32 first);
-void uiSpriteStateInitFromSource(void *widget, u32 mode, s32 value, const void *text, u32 kind, f32 scale);
-void spriteStartAnimationByIndex(void *widget, u32 mode);
 GameSaveBody *gameDataBlocksGetSaveData();
 
 u32 messageInitializeSavedBanner()

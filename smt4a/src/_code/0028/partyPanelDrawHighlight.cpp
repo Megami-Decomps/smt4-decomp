@@ -4,10 +4,10 @@
 #include "ui/PartyPanelStateA.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 
 // Draw the panel sprite, temporarily changing render state for its highlighted variant.
 void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted, f32 speed)
@@ -15,7 +15,7 @@ void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted
     PartyPanelStateA *panel = g_partyPanel;
     TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x11, index + 0x57);
     if (highlighted) {
-        efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
+        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
         RenderCtxA *context = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackSet(&context->stackB, state);

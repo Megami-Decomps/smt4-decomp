@@ -14,7 +14,6 @@ static inline s32 aocResultLevel(u32 result)
 }
 
 extern "C" {
-extern AocMain *g_aocMain;
 u32 legacyResourceIdRemap(WindowStatusResult *result);
 s32 FUN_0038b420(AocMain *main, WindowStatusResult result);
 u32 resourceResultMatchesKnownRanges(const u32 *result);
@@ -34,7 +33,7 @@ void FUN_00233e70(ScreenTransitionState *transition, u32 unused, u32 nextState)
     };
     ResultTransitionView *work = reinterpret_cast<ResultTransitionView *>(transition);
     AocMain *main = g_aocMain;
-    kernelThreadJoinAndClose(&main->objA);
+    kernelThreadJoinAndClose(&main->thread);
     if (legacyResourceIdRemap(&work->result.handle) == 0xC9413891)
         return;
     FUN_0038b420(g_aocMain, work->result.handle);
@@ -42,7 +41,7 @@ void FUN_00233e70(ScreenTransitionState *transition, u32 unused, u32 nextState)
         transition->flags = 4;
         transition->phase = 0;
     } else if (resourceResultMatchesRemappedCodes(&work->result.handle.code) ||
-               nnResultIsFailure(queryResultFailureOnly(&main->operation.queryResult))) {
+               nnResultIsFailure(queryResultFailureOnly(&main->queryResult))) {
         transition->flags = 3;
         transition->phase = 0;
     } else {

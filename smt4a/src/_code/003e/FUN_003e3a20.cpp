@@ -47,12 +47,12 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
 {
     UnitRecord original;
     unitRecordBuild(target->id, &original);
-    InheritanceSkillList previous = *(const InheritanceSkillList *)original.skillList.skills;
-    FUN_004cd4b8(&original, (s16)(target->level - original.unk64));
+    InheritanceSkillList previous = *(const InheritanceSkillList *)original.skills;
+    FUN_004cd4b8(&original, (s16)(target->level - original.level));
     for (s32 index = 0; index < 5; ++index)
         original.stats[index + 2] = target->stats[index];
     unitRecomputeDerivedStats(&original);
-    original.unk30 = FUN_004cc8d8(original.id, original.unk64) - 1;
+    original.experience = FUN_004cc8d8(original.id, original.level) - 1;
     UnitRecord preview;
     __aeabi_memcpy4(&preview, &original, sizeof(preview));
     u16 inherited[8] = {0};

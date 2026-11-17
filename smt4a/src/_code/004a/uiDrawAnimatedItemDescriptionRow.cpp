@@ -5,6 +5,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "ui/UiSpriteApi.h"
 
 struct ItemRowEntry {
     s16 label; // 0x00
@@ -27,8 +28,6 @@ extern "C" {
 extern const char DAT_0052b4b4[];
 extern const char DAT_0052b4c4[];
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);
-s32 vec2GetXInt(const void *position);
-s32 vec2GetYInt(const void *position);
 void btlDrawLayeredHud(ItemRowContext *context, s32 x, s32 y, s32 label);
 void efctSetSpeed(f32 speed);
 void FUN_00185e84(s32 effect, s32 x, s32 y, s32 layer, s32 first, s32 second);
@@ -46,8 +45,8 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
     s32 spacing = asdTMTexTableEntryAt(12, 130)->height & 0x7fff;
     TextureTableEntryIV *placement = asdTMTexTableEntryAt(12, placementIndex + 135);
     s32 horizontalOffset = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
-    s32 rowX = vec2GetXInt(context->rows[rowIndex].position);
-    s32 rowY = vec2GetYInt(context->rows[rowIndex].position);
+    s32 rowX = vec2GetXInt((const UiSpriteState *)context->rows[rowIndex].position);
+    s32 rowY = vec2GetYInt((const UiSpriteState *)context->rows[rowIndex].position);
     f32 speed = context->rows[rowIndex].speed;
     s32 x = placement->x + rowX + horizontalOffset;
     s32 y = spacing * rowIndex + placement->y + rowY;

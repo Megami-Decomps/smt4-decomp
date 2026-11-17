@@ -5,7 +5,6 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 void asdOperatorDeleteB(void *items);
 void *asdOperatorNewE(u32 size);
 s32 asdFsIsSdCardDetected();

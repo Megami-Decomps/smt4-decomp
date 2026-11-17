@@ -1,10 +1,8 @@
 #include "common.h"
+#include "addon/aocMain.h"
 #include "addon/AocSystem.h"
 
 extern "C" {
-
-extern u32 g_aocMain;
-extern s32 objHasFlagBit16(u32 main);
 
 /* Whether add-on content is present and a package has a kind-0x1d record keyed `id`. */
 u32 aocContentLookupSucceeds(AocSystem *system, u32 id)

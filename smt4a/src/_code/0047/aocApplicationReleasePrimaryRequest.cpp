@@ -1,19 +1,20 @@
 #include "addon/AocBufferRequest.h"
+#include "addon/aocMain.h"
 
 
 extern "C" {
 void asdMemFree(void* memory);
 
 // Release the owned object and backing allocation.
-void aocApplicationReleasePrimaryRequest(AocApplicationRequestView *owner)
+void aocApplicationReleasePrimaryRequest(AocMain *owner)
 {
-    if (owner->primary != NULL) {
-        delete owner->primary;
-        owner->primary = NULL;
+    if (owner->contentRequest != NULL) {
+        delete owner->contentRequest;
+        owner->contentRequest = NULL;
     }
-    if (owner->primaryBuffer != NULL) {
-        asdMemFree(owner->primaryBuffer);
-        owner->primaryBuffer = NULL;
+    if (owner->contentBuffer != NULL) {
+        asdMemFree(owner->contentBuffer);
+        owner->contentBuffer = NULL;
     }
 }
 }

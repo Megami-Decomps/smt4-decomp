@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard004A.h"
 #include "code/Code002a.h"
 
@@ -17,8 +18,6 @@ typedef struct Menu4B {
 } Menu4B;
 
 extern void entryDispatchUpdate(u8 *block, s32 page);
-extern u32 vec2GetXInt(u8 *entry);
-extern u32 vec2GetYInt(u8 *entry);
 extern void pointConvertToFloat(u8 *block, u32 a, u32 b);
 extern s32 gameGetMode(void);
 extern u8 statusDownGetFlag(void);
@@ -40,7 +39,7 @@ void menu4BUpdate(Menu4B *obj)
 
     entryDispatchUpdate(obj->block0DC, obj->page);
     entry = (u8 *)obj + obj->page * 0x8C + 0xFC;
-    pointConvertToFloat(obj->blockC8, vec2GetXInt(entry), vec2GetYInt(entry));
+    pointConvertToFloat(obj->blockC8, vec2GetXInt((UiSpriteState *)entry), vec2GetYInt((UiSpriteState *)entry));
     if (gameGetMode() != 0 && statusDownGetFlag() == 0) {
         obj->state = 5;
         obj->unk18 = 0;

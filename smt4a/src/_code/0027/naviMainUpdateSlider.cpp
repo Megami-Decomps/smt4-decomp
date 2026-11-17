@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "common.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 /* Global object with two sub-objects: one at 0x68 and one at 0x206bc. */
 

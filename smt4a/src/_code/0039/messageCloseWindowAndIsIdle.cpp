@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 
 extern "C" {
 
-void uiSpriteSelectAnim(void *sprite, s32 anim);
 s32 scrGetCommandFrame(void);
 
 /* Starts the banner window's close animation on a fresh command frame; true when it is not busy. */

@@ -1,4 +1,5 @@
 /* NON_MATCHING: the visible-window loop remains partially unrolled rather than retail's straight-line stores, changing saved registers and the dialog call frame. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/Shard0031.h"
 #include "code/Code002a_VariantA.h"
@@ -39,7 +40,6 @@ typedef struct DialogWorkView {
     s16 panelA;
 } DialogWorkView;
 
-void uiSpriteAdvanceAnimation(void *state, f32 scale);
 void FUN_00228b04(void *list, s32 arg);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 ifTouchGetSelectionMode(void);
@@ -47,17 +47,15 @@ s32 FUN_003450d4(void *list, const TextureTableEntryIV *touchArea, void *panel, 
 s32 padQueryLogicalKey(s32 which, s32 arg);
 void eventQueueAddUniqueIfValid(u32 event);
 void FUN_003f6abc(DialogWork *work);
-void uiSpriteSetKeyframe(void *sprite, s32 a, s32 b);
-void uiSpriteSetImageKeyframe(void *sprite, s32 a, ...);
 void dialogEnterState(DialogWork *work, s32 state, s32 arg);
 
 /* Updates the selection dialog: pulses its three highlights, blinks, refreshes the visible window
  * of ids around the cursor, and reacts to confirm (accept the entry) or cancel. */
 void FUN_003f5ed8(DialogWork *work)
 {
-    uiSpriteAdvanceAnimation(work->pulseA, 1.0f);
-    uiSpriteAdvanceAnimation(work->pulseB, 1.0f);
-    uiSpriteAdvanceAnimation(work->pulseC, 1.0f);
+    uiSpriteAdvanceAnimation((UiSpriteState *)work->pulseA, 1.0f);
+    uiSpriteAdvanceAnimation((UiSpriteState *)work->pulseB, 1.0f);
+    uiSpriteAdvanceAnimation((UiSpriteState *)work->pulseC, 1.0f);
     work->blinkTimer--;
     if (work->blinkTimer <= 0) {
         work->blinkTimer = 30;
@@ -94,18 +92,18 @@ void FUN_003f5ed8(DialogWork *work)
     if ((padQueryLogicalKey(0, 1) != 0 || touchMode == 6) && *work->selected != 0) {
         eventQueueAddUniqueIfValid(0x100020E);
         FUN_003f6abc(work);
-        uiSpriteSetKeyframe((u8 *)work + 0x1F8, 1, 0);
-        uiSpriteSetImageKeyframe((u8 *)work + 0x1F8, 0, 0);
-        uiSpriteSetKeyframe((u8 *)work + 0x540, 2, 0);
-        uiSpriteSetImageKeyframe((u8 *)work + 0x540, 1, 0);
+        uiSpriteSetKeyframe((UiSpriteState *)((u8 *)work + 0x1F8), 1, 0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)((u8 *)work + 0x1F8), 0, 0);
+        uiSpriteSetKeyframe((UiSpriteState *)((u8 *)work + 0x540), 2, 0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)((u8 *)work + 0x540), 1, 0);
         if (flagsBGetBit1(work->selectedId) != 0) {
             gameFlagsSetAlternateMode(work->selectedId, 0);
         }
         dialogEnterState(work, 5, 0);
     } else if (padQueryLogicalKey(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);
-        uiSpriteSetKeyframe((u8 *)work + 0x16C, 2, 0);
-        uiSpriteSetImageKeyframe((u8 *)work + 0x16C, 1, 0);
+        uiSpriteSetKeyframe((UiSpriteState *)((u8 *)work + 0x16C), 2, 0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)((u8 *)work + 0x16C), 1, 0);
         dialogEnterState(work, 2, 0);
     }
 }

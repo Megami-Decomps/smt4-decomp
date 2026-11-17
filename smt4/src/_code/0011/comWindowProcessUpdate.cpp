@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 
 struct CommonWindowProcess {
@@ -11,7 +12,6 @@ struct CommonWindowProcess {
 
 extern "C" {
 extern CommonWindowProcess *g_comWin;
-s32 uiSpriteAdvanceAnimation(void *window);
 }
 
 // Update the active common window and advance its state timer.
@@ -23,16 +23,16 @@ extern "C" s32 comWindowProcessUpdate(void *context)
     case 3: // Waiting for the next request.
         break;
     case 1:
-        if (uiSpriteAdvanceAnimation(work->firstWindow)) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)work->firstWindow)) {
             work->state = 2;
             work->timer = 0;
         }
         break;
     case 2:
-        uiSpriteAdvanceAnimation(work->secondWindow);
+        uiSpriteAdvanceAnimation((UiSpriteState *)work->secondWindow);
         break;
     case 4:
-        if (uiSpriteAdvanceAnimation(work->firstWindow))
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)work->firstWindow))
             work->state = 0;
         break;
     }

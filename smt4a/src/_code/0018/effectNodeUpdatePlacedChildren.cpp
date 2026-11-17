@@ -1,43 +1,26 @@
 /* NON_MATCHING: near (206 rows against 207): retail copies the origin/offset vectors with mixed ldr/ldm and keeps the saved orientation in s16-s19, the node flags in r8 and the callback table in r7, with a 9-register push; ours uses plain ldm/stm vector copies and different VFP/saved-register assignments. Control flow, constants and the render-state push/pop agree. */
+#include "shard/Resource.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 
-struct EffectVec4 {
+struct Vec4 {
     f32 x, y, z, w;
 };
 
 /* Scratch positions shared by the effect update (accessed at 0x100 and 0x110). */
 extern struct EffectScratch {
     u8 unk00[0x100];
-    EffectVec4 position;    // 0x100
-    EffectVec4 offset;      // 0x110
+    Vec4 position;    // 0x100
+    Vec4 offset;      // 0x110
 } DAT_006471dc;
 
-/* The effect definition a node runs: handler type and argument. */
-struct EffectDef {
-    u8 unk00[4];
-    u16 type;           // 0x04
-    u8 unk06[2];
-    void *argument;     // 0x08
-};
-
-/* Per-type handler table entry (0x44 bytes). */
-struct EffectHandler {
-    u8 unk00[0xC];
-    void (*update)(void *argument);                     // 0x0C
-    u8 unk10[0x10];
-    void (*attach)(void *argument, const EffectVec4 *position);  // 0x20
-    void (*orient)(void *argument, const f32 *matrix);  // 0x24
-    u8 unk28[0x1C];
-};
-extern "C" EffectHandler g_handlerTable[];
 
 /* An effect node (accessed fields). */
 struct EffectNode {
-    EffectVec4 offset;          // 0x00
+    Vec4 offset;          // 0x00
     u8 unk10[0x30];
-    EffectVec4 origin;          // 0x40
-    EffectVec4 orientation;     // 0x50
+    Vec4 origin;          // 0x40
+    Vec4 orientation;     // 0x50
     f32 scale;                  // 0x60
     u8 unk64[4];
     u32 flags;                  // 0x68
@@ -48,7 +31,7 @@ struct EffectNode {
     s32 frame;                  // 0x84 (children: flags2 at the same offset)
     u8 unk88[4];
     EffectNode *firstChild;     // 0x8C
-    EffectDef *def;             // 0x90
+    Resource *resource;             // 0x90
     u8 unk94[0x18];
     EffectNode *next;           // 0xAC
 };
@@ -57,15 +40,15 @@ struct EffectNode {
 
 extern "C" {
 
-s32 FUN_001ad5ec(EffectNode *node, const EffectVec4 *position, f32 *matrix);
+s32 FUN_001ad5ec(EffectNode *node, const Vec4 *position, f32 *matrix);
 void FUN_001acb48(EffectNode *node, const f32 *matrix);
 
 /* Places the effect node and updates every child that has started, with the title scene's render state
  * duplicated for the duration; the node's "placed" flag is cleared afterwards. */
 void effectNodeUpdatePlacedChildren(EffectNode *node)
 {
-    EffectVec4 position;
-    EffectVec4 childOffset;
+    Vec4 position;
+    Vec4 childOffset;
     f32 matrix[9];
     f32 scale;
     s32 lastFrame;
@@ -84,7 +67,7 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
     position = DAT_006471dc.position;
     flags = node->flags;
     if ((flags & 0x60) != 0 && (flags & EFFECT_NODE_PLACED) == 0) {
-        EffectVec4 orientation = node->orientation;
+        Vec4 orientation = node->orientation;
 
         FUN_001ad5ec(node, &position, matrix);
         FUN_001acb48(node, matrix);
@@ -100,7 +83,7 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
         }
         if ((flags & EFFECT_NODE_PLACED) == 0) {
             if ((child->flags & 0x18) != 0) {
-                EffectHandler *handler;
+                ResourceHandler *handler;
 
                 DAT_006471dc.position = position;
                 if ((child->flags & 4) != 0) {
@@ -118,22 +101,22 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
                 DAT_006471dc.position.z += DAT_006471dc.offset.z;
                 DAT_006471dc.position.w += DAT_006471dc.offset.w;
                 childOffset = DAT_006471dc.position;
-                handler = &g_handlerTable[child->def->type];
-                if (handler->attach != NULL) {
-                    handler->attach(child->def->argument, &childOffset);
+                handler = &g_handlerTable[child->resource->type];
+                if (handler->setPosition != NULL) {
+                    handler->setPosition(child->resource->data, &childOffset);
                 }
             }
             if ((child->flags & 0x60) != 0) {
-                EffectHandler *handler;
+                ResourceHandler *handler;
 
                 FUN_001ad5ec(child, &position, matrix);
-                handler = &g_handlerTable[child->def->type];
-                if (handler->orient != NULL) {
-                    handler->orient(child->def->argument, matrix);
+                handler = &g_handlerTable[child->resource->type];
+                if (handler->setOrientation != NULL) {
+                    handler->setOrientation(child->resource->data, matrix);
                 }
             }
         }
-        g_handlerTable[child->def->type].update(child->def->argument);
+        g_handlerTable[child->resource->type].update(child->resource->data);
     }
     node->flags &= ~EFFECT_NODE_PLACED;
     renderStackPop(&g_renderCtx->stackB);

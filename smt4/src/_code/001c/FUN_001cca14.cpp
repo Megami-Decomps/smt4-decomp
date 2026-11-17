@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cca14` (_code @ 0x1cca14, 0x1494 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/Unite/UniteWork.h"
@@ -28,7 +29,6 @@ int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int dataFindKindRecordWithAocOverrides(...);
-int vec2GetXInt(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_0032bc00(...);
@@ -84,7 +84,6 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -133,8 +132,8 @@ unsigned int FUN_001cca14(void)
   int temp_v25;
   
   temp_v12 = g_statusDown;
-  temp_v1 = vec2GetXInt(g_statusDown + 0x28);
-  temp_v2 = vec2GetYInt(temp_v12 + 0x28);
+  temp_v1 = vec2GetXInt((UiSpriteState *)(g_statusDown + 0x28));
+  temp_v2 = vec2GetYInt((UiSpriteState *)(temp_v12 + 0x28));
   temp_v10 = g_statusDown;
   temp_v13 = *(int *)(temp_v12 + 0x400);
   if (temp_v13 == 1) {
@@ -267,9 +266,9 @@ LAB_001ccb9c:
       FUN_0029a17c((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v13 + 8) + temp_v1,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v2,
                    (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
-      temp_v12 = vec2GetYInt(temp_v19 + 600);
+      temp_v12 = vec2GetYInt((UiSpriteState *)(temp_v19 + 600));
       temp_v0 = *(short *)(temp_v10 + 10);
-      temp_v13 = vec2GetXInt(temp_v19 + 600);
+      temp_v13 = vec2GetXInt((UiSpriteState *)(temp_v19 + 600));
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x473,temp_v13 + temp_v1 + (int)*(short *)(temp_v10 + 8),
                    temp_v12 + temp_v2 + (int)temp_v0,0xc9);
       temp_v12 = g_titleScene;
@@ -521,7 +520,7 @@ LAB_001ccb9c:
                   temp_v15 = romwright_piece_4_4(0xffffffd8,*(int *)(temp_v10 + 0x40c) * -0x28);
                 }
                 else {
-                  temp_v15 = vec2GetXInt(temp_v10 + 0x2e4);
+                  temp_v15 = vec2GetXInt((UiSpriteState *)(temp_v10 + 0x2e4));
                 }
                 temp_v14 = 0x8400ff;
               }
@@ -535,7 +534,7 @@ LAB_001ccb9c:
                 temp_v15 = romwright_piece_4_4(0xffffffd8,*(int *)(temp_v10 + 0x40c) * -0x28);
               }
               else {
-                temp_v15 = vec2GetXInt(temp_v10 + 0x2e4);
+                temp_v15 = vec2GetXInt((UiSpriteState *)(temp_v10 + 0x2e4));
                 temp_v14 = 0x8400ff;
               }
             }

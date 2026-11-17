@@ -1,8 +1,8 @@
+#include "gamedata/SaveSlotTableIV.h"
 /* Compares signed party-slot IDs in active-party then stock order. */
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable(void);
 
 s32 partyCompareSlotOrder(const s8 *left, const s8 *right)
 {
@@ -15,7 +15,7 @@ s32 partyCompareSlotOrder(const s8 *left, const s8 *right)
         if (second != 127) {
             s32 firstPosition = -1;
             s32 secondPosition = -1;
-            PartyDamageSlotsIV *party = gameGetSlotTable();
+            SaveSlotTableIV *party = gameGetSlotTable();
             for (s32 i = 0; i < 3; ++i) {
                 if (firstPosition < 0 && party->active[i] == first) {
                     firstPosition = i;

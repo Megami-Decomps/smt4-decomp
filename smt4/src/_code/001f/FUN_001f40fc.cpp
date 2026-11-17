@@ -1,4 +1,5 @@
 /* NON_MATCHING: highlighted help segment register allocation and byte-count reloads differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 

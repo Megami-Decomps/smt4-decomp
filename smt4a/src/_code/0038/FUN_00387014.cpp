@@ -1,9 +1,8 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
-extern LmapMainStateA *g_lmapMainState;
 void FUN_00386720(void);
 void FUN_003401a4(LmapMainStateA *state);
 void FUN_0036a434(LmapMainStateA *state);
@@ -19,7 +18,7 @@ void FUN_00387014(void)
     GameStateA *game = &g_gameState;
     LmapMainStateA *state = g_lmapMainState;
     if (game->unk5C8 == 0) {
-        if (state->unk0B != 0) {
+        if (state->external != 0) {
             FUN_00386720();
         } else {
             FUN_003401a4(state);

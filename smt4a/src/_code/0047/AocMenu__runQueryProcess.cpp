@@ -1,6 +1,7 @@
 /* NON_MATCHING: content-menu update with a second query handler (kind 4) and the 0x66/0x67 result tails; written like FUN_0038e374, block layout and constant registers not compared with retail */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
+#include "classes/Obj422214Owner.h"
 #include "util/BitsAndBytes.h"
 
 /* The query operation the menu is polling (its deleting destructor is vtable slot 1). */
@@ -12,16 +13,6 @@ public:
 };
 
 /* A queried slot record: the 16-bit value read for a slot (+0x9AA of each 0x9C8-byte record). */
-struct AocSlotRecord {
-    /* 0x000 */ u8 unk000[0x9AA];
-    /* 0x9AA */ u16 value;
-    /* 0x9AC */ u8 unk9AC[0x1C];
-};
-
-struct AocSlotTable {
-    /* 0x00 */ u8 unk00[0x678];
-    /* 0x678 */ AocSlotRecord *records;
-};
 
 /* A handler's own state: only the word the menu fills in after creating it. */
 struct AocQueryHandlerState {
@@ -43,7 +34,6 @@ struct AocQueryMenu {
 };
 
 extern "C" {
-extern AocSlotTable *g_aocMain;
 
 void FUN_00476e58(AocQueryMenu *menu, s32 first, s32 second);
 AocQueryHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
@@ -60,7 +50,7 @@ void AocMenu::runQueryProcess()
 {
     AocQueryMenu * menu = reinterpret_cast<AocQueryMenu *>(this);
     RequestParameters result;
-    AocSlotTable *aocMain = g_aocMain;
+    AocMain *aocMain = g_aocMain;
 
     switch (menu->step) {
     case 3:
@@ -108,7 +98,7 @@ void AocMenu::runQueryProcess()
         AocQueryHandler *created = windowCreateStatusOperation(menu->handlerStorage, 4);
         menu->handler = created;
         s32 slot = flaggedValueHolderGetTotal(menu->slotHolder);
-        ((AocQueryHandlerState *)created)->slotValue = aocMain->records[slot].value;
+        ((AocQueryHandlerState *)created)->slotValue = aocMain->records[slot].contentId;
         menu->step = 3;
         return;
     }

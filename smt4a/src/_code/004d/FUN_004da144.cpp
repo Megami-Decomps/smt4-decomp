@@ -1,10 +1,10 @@
 /* NON_MATCHING: the selection loop and the inlined unit reset match; only the registers of the copied statistics differ (retail: health r1, mana r2, stat2 r3, stat4 ip, stat5 r5, stat6 r6). */
 #include "gamedata/UnitStatInitialization.h"
 #include "shard/Shard0032.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 InitializedUnitStatsA *gameGetOptions(void);
-UnitRecord *gameGetPlayerData(void);
 u32 randRange(u32 maximum);
 s32 equipmentTableFindIndexById(u32 categoryId, u16 playerId);
 void sysMemClear(void *data, u32 size);
@@ -16,7 +16,7 @@ static __inline void unitResetCategory(u32 categoryId)
     s32 variant = -1;
     for (s32 i = 0; i < 3; ++i) {
         if (unit->partyCategories[i] == categoryId) {
-            variant = equipmentTableFindIndexById(categoryId, gameGetPlayerData()->id);
+            variant = equipmentTableFindIndexById(categoryId, gameGetPlayerData()->level);
             break;
         }
     }

@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 s32 menu32ModeIsNot4(BtlUiObjAA *obj);
 
-extern BtlUiGlobalsA g_btlUi;
 
 s32 FUN_004aaf94(void)
 {

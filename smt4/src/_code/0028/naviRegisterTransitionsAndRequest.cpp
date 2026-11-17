@@ -1,9 +1,9 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 struct NavigationState;
 
 extern "C" {
-extern NaviMain *g_naviMain;
 void naviRegisterUnknownFlagPairs(s32 firstId, s32 firstValue, s32 secondId, s32 secondValue, s32 thirdId, s32 thirdValue);
 s32 naviAreTransitionFlagsReady(NavigationState* navigation);
 void naviRequestStateChange(NavigationState* navigation);

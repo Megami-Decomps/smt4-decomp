@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void selectionSlotsClear(BtlUiObjAA *obj);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void btlUiClearSelectionSlots(void)
 {

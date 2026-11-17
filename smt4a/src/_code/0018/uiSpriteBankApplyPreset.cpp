@@ -1,9 +1,7 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 
 extern "C" {
-void uiSpriteSelectAnim(UiAnimatedSprite *sprite, s32 animation);
-void uiSpriteSetKeyframe(UiAnimatedSprite *sprite, s32 keyframe, s32 alternate);
-void uiSpriteSetImageKeyframe(UiAnimatedSprite *sprite, s32 keyframe, s32 alternate);
 
 // Select one preset in the bank: each preset drives its own sprite; the four paired entries also choose an image.
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset)

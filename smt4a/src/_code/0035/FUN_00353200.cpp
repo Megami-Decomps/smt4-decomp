@@ -1,16 +1,12 @@
 /* NON_MATCHING: retail has separate wide-area and normal-area branches that each hold their own step/distance constants in saved VFP registers and copies vectors with ldm/stm pairs; ours selects the step first (151 rows against 157). */
 #include "common.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 #include "game/GameStateA.h"
+#include "util/MathFunctions.h"
 
 struct MapEnemyState {
     /* 0x0000 */ u8 unk0000[0x3D84];
     /* 0x3D84 */ s32 attempts;       /* spawn attempts made so far; later ones are tried further out and wider */
-};
-
-struct LmapViewState {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ f32 heading;
 };
 
 /* The enemy being placed (observed fields). */
@@ -23,14 +19,12 @@ struct EnemyPlacement {
 extern "C" {
 
 extern MapEnemyState *g_mapEnemy;
-extern LmapViewState *g_lmapView;
 
 u32 randRange(u32 limit);
 f32 libm_sinf(f32 radians);
 f32 libm_cosf(f32 radians);
 s32 FUN_0036d984(MapVector *start, MapVector *end, s32 flags);
 s32 FUN_0025ef68(MapVector *position, MapVector *ground, s32 flags);
-f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 
 /* Tries up to four spots around the player (alternating left/right of the view heading, further out and
  * with a tighter spread after twelve attempts) and places the enemy on the first one the probe reaches

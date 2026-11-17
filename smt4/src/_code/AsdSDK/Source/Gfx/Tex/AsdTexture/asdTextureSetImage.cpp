@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
@@ -9,7 +10,6 @@ u32 FUN_002c3984(void);
 f32 FUN_002a66e0(u32 format, u32 type, u32* hardwareFormat);
 u32 osVirtToPhysAddress(u32 address);
 void* asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
-void FUN_002a666c(const void* source, void* destination, u32 bytes);
 
 void asdTextureSetImage(AsdTexture* texture)
 {

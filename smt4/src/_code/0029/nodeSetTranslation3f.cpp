@@ -1,18 +1,16 @@
-#include "common.h"
-#include "shard/W4_Match1b_Node.h"
-#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Node.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
-/* Sets the translation column of the owner's node transform and flags it as changed. */
-void nodeSetTranslation3f(NodeOwner *owner, f32 x, f32 y, f32 z)
+/* Sets the translation column of the model's scene-node transform and flags it as changed. */
+void nodeSetTranslation3f(AsdMdlNode *node, s32 index, NodeVec3 translation)
 {
-    NodeObject *object = owner->object;
+    AsdMdlSceneNode *sceneNode = node->sceneNode;
 
-    object->transform.m[0][3] = x;
-    object->transform.m[1][3] = y;
-    object->transform.m[2][3] = z;
-    object->transform.flags |= NODE_FLAG_TRANSFORM_DIRTY;
+    sceneNode->transform.m[0][3] = translation.x;
+    sceneNode->transform.m[1][3] = translation.y;
+    sceneNode->transform.m[2][3] = translation.z;
+    sceneNode->transform.flags |= NODE_FLAG_TRANSFORM_DIRTY;
 }
 
 } /* extern "C" */

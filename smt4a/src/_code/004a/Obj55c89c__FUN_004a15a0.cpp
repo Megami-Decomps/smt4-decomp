@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the target flag update differs: retail forms the flags address with a write-back load (ldrh r1, [r0, #4]!; strh r1, [r0]), the build addresses [r0, #4] twice. */
+#include "ui/UiSpriteApi.h"
 #include "classes/Obj55c8d0.h"
 #include "classes/Obj55c89c.h"
 #include "shard/S1ListMenu.h"
@@ -21,8 +22,6 @@ struct BibleSelectionTarget {
 
 extern "C" {
 s32 entryDispatchUpdate(void *, s32);
-s32 vec2GetXInt(const Vec2Int *);
-s32 vec2GetYInt(const Vec2Int *);
 void pointConvertToFloat(SelectionRectangle *, s32, s32);
 void sysPlaySe(u32);
 void FUN_0032cfe0(Obj55c8d0 *);
@@ -51,8 +50,8 @@ void Obj55c89c::FUN_004a15a0()
     SelectionView *selection = reinterpret_cast<SelectionView *>(menu);
     s32 changed = entryDispatchUpdate(menu->unk0dc, selection->selectedIndex);
     const Vec2Int *position = &selection->entries[selection->selectedIndex].position;
-    s32 y = vec2GetYInt(position);
-    s32 x = vec2GetXInt(position);
+    s32 y = vec2GetYInt((UiSpriteState *)position);
+    s32 x = vec2GetXInt((UiSpriteState *)position);
     pointConvertToFloat(&menu->rectangle, x, y);
     if (!changed)
         return;

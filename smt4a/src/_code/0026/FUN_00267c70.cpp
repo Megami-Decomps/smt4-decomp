@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/UiSpriteApi.h"
 
 /* The engine object's cursor positions and mode, as this refresh reads them. */
 struct EngineCursorView {
@@ -19,8 +20,6 @@ extern "C" {
 extern EngineCursorRef g_engineCleanupOwner;
 s32 scriptProcessCreateWhenReady(EngineCursorView *view);
 void FUN_004b2e50(EngineCursorView *view, s32 a, s32 b);
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
 void FUN_004b4f9c(EngineCursorView *view, s32 x, s32 y);
 void FUN_004b40f4(EngineCursorView *view, s32 x, s32 y);
 void FUN_004b1a00(EngineCursorView *view, s32 x, s32 y);
@@ -40,20 +39,20 @@ u32 FUN_00267c70(void)
     }
     switch (view->mode) {
     case 11: {
-        s32 x = vec2GetXInt(view->gridCursor);
-        s32 y = vec2GetYInt(view->gridCursor);
+        s32 x = vec2GetXInt((const UiSpriteState *)view->gridCursor);
+        s32 y = vec2GetYInt((const UiSpriteState *)view->gridCursor);
         FUN_004b4f9c(view, x, y);
         break;
     }
     case 19: {
-        s32 x = vec2GetXInt(view->pageCursor);
-        s32 y = vec2GetYInt(view->pageCursor);
+        s32 x = vec2GetXInt((const UiSpriteState *)view->pageCursor);
+        s32 y = vec2GetYInt((const UiSpriteState *)view->pageCursor);
         FUN_004b40f4(view, x, y);
         break;
     }
     case 18: {
-        s32 x = vec2GetXInt(view->listCursor);
-        s32 y = vec2GetYInt(view->listCursor);
+        s32 x = vec2GetXInt((const UiSpriteState *)view->listCursor);
+        s32 y = vec2GetYInt((const UiSpriteState *)view->listCursor);
         FUN_004b1a00(view, x, y);
         break;
     }

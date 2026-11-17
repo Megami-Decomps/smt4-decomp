@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTexA.h"
 
 extern "C" {
 
-s32 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 /* Whether the CAMP transition is complete: true unless it is running and either of its two closing widgets is still animating. */
 u32 FUN_003309e0(void)

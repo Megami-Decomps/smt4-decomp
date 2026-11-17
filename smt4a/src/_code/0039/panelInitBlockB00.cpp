@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "shard/Shard0039.h"
 
 extern "C" {
-
-extern s32 vec2GetXInt(void *block);
 
 void panelInitBlockB00(void)
 {

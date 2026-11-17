@@ -1,65 +1,66 @@
 /* NON_MATCHING: control flow and stores match; the frame-key address is formed after the step store (retail before it) and the sequence-step lookup allocates r2/r5/r6 differently. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
-static inline UiSpriteFrameKey *spriteFrameSet(UiSpriteSource *source, s16 requested)
+static inline UiSpriteFrameKey *spriteFrameSet(UiResourceParameters *resources, s16 requested)
 {
     s32 section = 0;
-    for (u32 i = 0; i < (source->frameAnimation.frameTableBytes >> 2); ++i) {
+    for (u32 i = 0; i < (resources->frameKeyBytes >> 2); ++i) {
         if (section == requested) {
-            return &source->frameKeys[i];
+            return &resources->frameKeys[i];
         }
-        if (source->frameKeys[i].image == -1) {
+        if (resources->frameKeys[i].image == -1) {
             ++section;
         }
     }
     return NULL;
 }
 
-// Advance image keys, loop markers and the image channel's multi-sequence continuation.
+// Advances the image-frame track by `rate` frames: shows the next frame, restarts the sequence at -2 and, at its end (-1),
+// continues with the next command's frame sequence.
 extern "C" void FUN_00181948(UiSpriteState *sprite, f32 rate)
 {
-    if (sprite->frameFlags.completed != 0 || sprite->frameKeys == NULL) {
-        sprite->frameFlags.completed = 1;
+    if (sprite->frameDone != 0 || sprite->frameKeys == NULL) {
+        sprite->frameDone = 1;
         return;
     }
     UiSpriteFrameKey *keys = sprite->frameKeys;
-    u16 duration = (u32)((f32)keys[sprite->frameTrack.key].duration / rate);
-    if (sprite->frameTrack.elapsed < duration) {
-        ++sprite->frameTrack.elapsed;
+    u16 duration = (u32)((f32)keys[sprite->frameIndex].duration / rate);
+    if (sprite->frameElapsed < duration) {
+        ++sprite->frameElapsed;
         return;
     }
-    sprite->frameTrack.elapsed = 0;
-    ++sprite->frameTrack.key;
-    s32 image = keys[sprite->frameTrack.key].image;
+    sprite->frameElapsed = 0;
+    ++sprite->frameIndex;
+    s32 image = keys[sprite->frameIndex].image;
     if (image == -1) {
-        if (sprite->frameSequenceState.enabled != 0 && sprite->frameSequence != NULL &&
-            sprite->frameSequence[sprite->frameSequenceState.step].key != -1) {
-            ++sprite->frameSequenceState.step;
-            s32 next = sprite->frameSequence[sprite->frameSequenceState.step].key;
+        if (sprite->commandsRunning != 0 && sprite->commands != NULL &&
+            sprite->commands[sprite->frameStep].frameSequence != -1) {
+            ++sprite->frameStep;
+            s32 next = sprite->commands[sprite->frameStep].frameSequence;
             if (next != -1 && next != -3) {
-                keys = spriteFrameSet(sprite->source, (s16)next);
+                keys = spriteFrameSet(sprite->resources, (s16)next);
                 sprite->frameKeys = keys;
                 if (keys == NULL) {
                     return;
                 }
-                sprite->frameTrack.key = 0;
-                sprite->frameTrack.elapsed = 0;
-                sprite->frameFlags.completed = 0;
-                sprite->completion.complete = 0;
-                sprite->unk04 = keys->image;
-                sprite->unk08 = ~0u;
+                sprite->frameIndex = 0;
+                sprite->frameElapsed = 0;
+                sprite->frameDone = 0;
+                sprite->finished = 0;
+                sprite->image = keys->image;
+                sprite->secondaryImage = -1;
                 return;
             }
         }
-        sprite->frameFlags.completed = 1;
+        sprite->frameDone = 1;
         return;
     }
     if (image == -2) {
-        sprite->frameTrack.key = 0;
-        sprite->unk04 = keys->image;
-        sprite->unk08 = ~0u;
+        sprite->frameIndex = 0;
+        sprite->image = keys->image;
+        sprite->secondaryImage = -1;
         return;
     }
-    sprite->unk08 = ~0u;
-    sprite->unk04 = image;
+    sprite->secondaryImage = -1;
+    sprite->image = image;
 }

@@ -1,10 +1,10 @@
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-extern void skillDataFindById(s32 arg);
 extern s32 FUN_0029a9d4(s32 arg, s32 mode);
 extern s32 appGetRemainingCapacity(s32 arg);
 

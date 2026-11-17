@@ -1,4 +1,5 @@
-/* AsdSDK/Source/Gfx/Model/AsdMdlManager.c: the part of a model object the motion selection touches. */
+/* AsdSDK/Source/Gfx/Model/AsdMdlManager.c: the motion instances and animation tracks a model plays
+ * (the model itself is AsdMdlNode in AsdMdlManager.h). */
 #ifndef ASDSDK_SOURCE_GFX_MODEL_ASDMOTIONMODEL_H
 #define ASDSDK_SOURCE_GFX_MODEL_ASDMOTIONMODEL_H
 
@@ -101,109 +102,12 @@ typedef struct AsdTrackList {
     }
 } AsdTrackList;
 
-typedef struct AsdTrackOwner {
-    union {
-        u8 unk000[0x28];
-        struct {
-            u8 unk00[8];
-            ModelBoneResource *resource; // 0x008
-            u8 unk0c[0x1c];
-        } model;
-    };
-    /* 0x028 */ AsdTrackList *list;
-    union {
-        /* 0x02C */ u8 unk02C[0x1FC];
-        struct {
-            /* 0x02C */ u8 unk02C[0x60];
-            /* 0x08C */ SkeletonMatrix34 defaultMatrix;
-        } transform;
-        struct {
-            /* 0x02C */ u8 unk02C[0x11C];
-            /* 0x148 */ s32 active;
-            /* 0x14C */ s32 index;
-            union {
-                u8 unk150[0xD8];
-                struct {
-                    u8 unk150[0xd0];
-                    ModelBoneMatrixProvider *provider; // 0x220
-                    u32 unk224;
-                } skeleton;
-            };
-        } secondary;
-    };
-    /* 0x228 */ ModelBoneAnimationTarget *activeTarget;
-    /* 0x22C */ s32 index;
-} AsdTrackOwner;
-
-/* A model object: the motion table, the playing motion, a pending replacement and the attribute records. */
-typedef struct AsdMotionModel {
-    /* 0x00 */ u32 flags;                /* bit 0: a pending motion should replace the playing one */
-    /* 0x04 */ AsdModelFile *file;
-    /* 0x08 */ u8 unk08[0x24];
-    /* 0x2C */ AsdTrackOwner *owner;
-    /* 0x30 */ void **motionTable;
-    /* 0x34 */ s32 motionCount;
-    /* 0x38 */ s32 currentMotion;
-    /* 0x3C */ u8 unk3C[0x10];
-    /* 0x4C */ AsdMotionInstance *active;
-    /* 0x50 */ AsdMotionInstance *pending;
-    union {
-        /* 0x54 */ u8 unk54[0x24];
-        struct {
-            /* 0x54 */ void **motionTable;
-            /* 0x58 */ s32 motionCount;
-            /* 0x5C */ s32 currentMotion;
-            /* 0x60 */ AsdMotionInstance *instance;
-            /* 0x64 */ u8 unk64[0x14];
-        } secondary;
-    };
-    /* 0x78 */ f32 speed;
-    union {
-        /* 0x7C */ u8 unk7C[0x18];
-        struct {
-            /* 0x7C */ f32 speed;
-            /* 0x80 */ u8 unk80[0x14];
-        } secondaryRate;
-    };
-    /* 0x94 */ AsdModelAttrContainers containers;
-    /* 0x98 */ u8 unk98[8];
-    /* 0xA0 */ AsdModelAttrRecords records;
-} AsdMotionModel;
-
-typedef char AsdMotionModelLayoutCheck[
-    offsetof(AsdMotionModel, owner) == 0x2C && offsetof(AsdMotionModel, motionCount) == 0x34 &&
-    offsetof(AsdMotionModel, active) == 0x4C && offsetof(AsdMotionModel, speed) == 0x78 &&
-    offsetof(AsdMotionModel, containers) == 0x94 && offsetof(AsdMotionModel, records) == 0xA0 ? 1 : -1];
 typedef char AsdMotionInstanceLayoutCheck[
     offsetof(AsdMotionInstance, blend) == 0x38 && offsetof(AsdMotionInstance, interpolate) == 0x4C &&
     offsetof(AsdMotionInstance, blendChanged) == 0x58 ? 1 : -1];
 typedef char AsdTrackNodeLayoutCheck[
     offsetof(AsdTrackNode, slot) == 0x14 && offsetof(AsdTrackNode, channelB) == 0x34 &&
     offsetof(AsdTrackNode, handedOver) == 0x41 ? 1 : -1];
-typedef char AsdSecondaryMotionLayoutCheck[
-    offsetof(AsdTrackOwner, secondary.active) == 0x148 &&
-    offsetof(AsdTrackOwner, secondary.index) == 0x14c && sizeof(AsdTrackOwner) == 0x230 &&
-    offsetof(AsdMotionModel, secondary.motionTable) == 0x54 &&
-    offsetof(AsdMotionModel, secondary.motionCount) == 0x58 &&
-    offsetof(AsdMotionModel, secondary.currentMotion) == 0x5c &&
-    offsetof(AsdMotionModel, secondary.instance) == 0x60 &&
-    offsetof(AsdMotionModel, secondaryRate.speed) == 0x7c &&
+typedef char AsdTrackNodeSizeCheck[
     sizeof(AsdTrackNode) == 0x44 && offsetof(AsdTrackBlendNode, blendLimit) == 0x48 ? 1 : -1];
-typedef char AsdTrackOwnerBoneLayoutCheck[
-    offsetof(AsdTrackOwner, model.resource) == 8 &&
-    offsetof(AsdTrackOwner, secondary.skeleton.provider) == 0x220 &&
-    sizeof(AsdTrackOwner) == 0x230 ? 1 : -1];
-typedef char AsdTrackOwnerDefaultMatrixLayoutCheck[
-    offsetof(AsdTrackOwner, transform.defaultMatrix) == 0x8c &&
-    sizeof(AsdTrackOwner) == 0x230 ? 1 : -1];
-
-/* The longest blend the playing motion allows; 0 when nothing is playing. */
-static __inline f32 asdMotionModelBlendLimit(const AsdMotionModel *model)
-{
-    if (model->motionCount > 0 && model->active != NULL) {
-        return model->active->blendLimit;
-    }
-    return 0.0f;
-}
-
 #endif

@@ -1,11 +1,10 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 
 extern "C" {
 
-void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 arg);
 void asdTextDrawDirectoryEntry(void *text, s32 a1, s32 color, s32 a3, s32 a4, const char *entry, u32 arg);
 f32 effectSpawnDefaultArguments(void *text);
-s32 vec2GetXInt(void *sprite);
 
 /* Sets the info window's message text and lays out its label around the text width. */
 void infoWinSetText(const char *entry, u32 arg)

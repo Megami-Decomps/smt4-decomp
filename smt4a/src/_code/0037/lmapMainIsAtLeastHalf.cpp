@@ -1,8 +1,7 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
-extern LmapMainStateA *g_lmapMainState;
 
 /* True when unkC8, read as float bits, is at least 0.5. */
 bool lmapMainIsAtLeastHalf(void)

@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "battle/BattleHelpers_Smt4a.h"
 
 extern "C" {
 
 void workTablesClear(BtlUiObjCA *obj);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void btlUIClearWorkTables(void)
 {

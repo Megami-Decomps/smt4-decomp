@@ -21,26 +21,18 @@ struct AocPurchaseMenu {
     u8 unk224[0x12C];
     void *scriptFile;
     void *scriptBuffer;
-    ScriptRunState *script;
+    ScriptProcess *script;
     u8 unk35C[0xDD4];
     char prompt[0x80];
-};
-// The menu mode at 0xd50 lies beyond the canonical main-block prefix.
-struct AocPurchaseMainView {
-    AocMain main;
-    u8 unk758[0x5F8];
-    u8 mode;
 };
 typedef char AocPurchaseMenuOffsetsCheck[
     offsetof(AocPurchaseMenu, window) == 0x208 &&
     offsetof(AocPurchaseMenu, operation) == 0x210 &&
     offsetof(AocPurchaseMenu, script) == 0x358 &&
-    offsetof(AocPurchaseMenu, prompt) == 0x1130 &&
-    offsetof(AocPurchaseMainView, mode) == 0xD50 ? 1 : -1];
+    offsetof(AocPurchaseMenu, prompt) == 0x1130 ? 1 : -1];
 }
 
 extern "C" {
-extern AocMain *g_aocMain;
 extern const char DAT_003ff148[];
 s32 FUN_00361960(void);
 void FUN_0036196c(void);
@@ -48,7 +40,6 @@ void FUN_00126fb8(u32 *result);
 void aocMenuInitializePanelSprites(void *context);
 void asdTMTexTablePrepareNodeImage(u32 group, s32 image);
 void *fileSlotGetBuffer(u32 slot);
-ScriptRunState *scrScriptProcessCreate(void *file, void *buffer);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
 
 void AocMenu::openPurchaseList()
@@ -57,7 +48,7 @@ void AocMenu::openPurchaseList()
     if (FUN_00361960() != 0)
         FUN_0036196c();
     g_aocSystem->getPendingRequest();
-    FUN_00126fb8(&g_aocMain->operation.queryResult);
+    FUN_00126fb8(&g_aocMain->queryResult);
     WindowStatusOperationResult operation(0);
     menu->operation = operation;
     aocMenuInitializePanelSprites(menu);
@@ -77,7 +68,7 @@ void AocMenu::openPurchaseList()
     }
     AocMain *main = g_aocMain;
     main->flags &= ~0x70u;
-    reinterpret_cast<AocPurchaseMainView *>(main)->mode = 2;
+    main->mode = 2;
     memClear(menu->prompt, sizeof(menu->prompt));
     __aeabi_memcpy4(menu->prompt, "Please select content to purchase.", 0x23);
 }

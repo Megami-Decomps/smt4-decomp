@@ -1,11 +1,11 @@
 #include "shard/Shard0036.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
 
 extern u32 scrGetArg(s32 index);
 extern u32 scrGetCommandFrame(void);
 extern u16 dataTable0aSub0GetValueById(u32 id);
-extern void saveSlotFindById(u32 id);
 extern void campArousalSkillStart(s32 id, u16 value);
 extern u32 FUN_003c5fdc(void);
 

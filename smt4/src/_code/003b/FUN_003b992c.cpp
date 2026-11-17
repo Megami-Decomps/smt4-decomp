@@ -1,20 +1,19 @@
 /* NON_MATCHING: the hoisted script/message/process field addresses take different callee-saved registers, and the
  * message file is passed from the reloaded field instead of the load result (an extra mov). */
 #include "event/EventScriptScene.h"
+#include "script/scrScriptProcess.h"
 #include "battle/btlEvent.h"
 #include "game/GameState.h"
 
 extern "C" {
 void FUN_0022b778(EventScriptScene *scene);
-void scrScriptProcessDestroy(ScriptRunState *process);
 void asdMemFree(void *allocation);
 void messageSetConfirmDisplayMode();
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *script, const char *name);
-void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 
 // Load and run the selected event script, then release both script resources when it ends.
 void FUN_003b992c(EventScriptScene *scene)

@@ -7,6 +7,7 @@
 #define ASDSDK_SOURCE_GFX_EFFECT_EFFPARTSALLOC_H
 
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
+#include "shard/Resource.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
@@ -15,7 +16,6 @@ extern "C" {
 #endif
 
 extern const char g_effPartsSourcePath[]; /* __FILE__ of effParts.cpp */
-extern EffBlockHandler g_handlerTable[];
 
 #ifdef __cplusplus
 }

@@ -5,12 +5,9 @@
 
 extern "C" {
 
-
 int _ZN9Obj4221d4D1Ev(...);
 int aocPackageOwnerFreeTables(AocSystemA *owner);
 int __aeabi_vec_delete(void *handle, int (*callback)(...));
-
-extern AocMainA *g_aocMain;
 
 /* Tears the owner down: clears its counters, destroys its package array with _ZN9Obj4221d4D1Ev, then clears flag 0x10000 in the global block. */
 void aocReleasePackageOwner(AocSystemA *owner)

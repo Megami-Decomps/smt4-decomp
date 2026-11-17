@@ -16,11 +16,10 @@ void *FUN_00289de4(AocSystem *system, u32 event, u32 kind);
 void *aocBufferQueueDisplay(AocSystem *system, u32 event, u32 kind);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
-ScriptRunState *scrScriptProcessCreate(void *script, void *messages);
 s32 FUN_002897f0(u32 event, char *entryName);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *entryName);
-void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 // Load a map event's script/messages from DLC or ROM and start its named entry.
 u32 FUN_00270e34(void)
@@ -61,12 +60,12 @@ u32 FUN_00270e34(void)
         messages = asdLoadFileSyncDefault(messagePath);
         map->messageData = messages;
     }
-    ScriptRunState *process = scrScriptProcessCreate(map->scriptData, messages);
+    ScriptProcess *process = scrScriptProcessCreate(map->scriptData, messages);
     map->scriptProcess = process;
     scriptProcessSetMode(process, 2);
     map->completionFlag = FUN_002897f0(event->event, event->entryName);
     u32 entry = tableGroupFindEntryIndex(static_cast<TableGroupHeader *>(map->scriptData), event->entryName);
-    scrScriptProcessStartEntry(static_cast<ScriptRunState *>(map->scriptProcess), entry);
+    scrScriptProcessStartEntry(static_cast<ScriptProcess *>(map->scriptProcess), entry);
     return 1;
 }
 }

@@ -1,7 +1,7 @@
 #include "map/LmapGlobals.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
-f32 mathAngleDeltaDegrees(f32 current, f32 target);
 
 // Ease the scene heading toward its saved target, with a minimum five-degree step.
 void mapEaseSceneHeading()

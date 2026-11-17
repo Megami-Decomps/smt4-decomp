@@ -1,33 +1,35 @@
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/AsdMemUtil.h"
 
-// Clear the sprite state, install its initial values, and copy the channels from the source.
-static __inline void uiSpriteInitializeState(UiSpriteState *sprite, u32 value0, u32 value1, u32 value2,
-                                             UiSpriteSource *source, u16 id, f32 value)
+// uiSpriteInitializeState, inlined.
+static __inline void uiSpriteInitializeStateInline(UiSpriteState *sprite, u32 textureTable, s32 image, s32 secondaryImage,
+                                                   UiResourceParameters *resources, u16 id, f32 alpha)
 {
     sysMemClear(sprite, sizeof(UiSpriteState));
-    sprite->unk00 = value0;
-    sprite->unk04 = value1;
-    sprite->unk08 = value2;
-    sprite->unk20 = value;
-    sprite->unk38 = id;
-    sprite->unk24 = 1.0f;
-    sprite->unk28 = 1.0f;
-    sprite->unk2C = 1.0f;
-    sprite->source = source;
-    sprite->unk4C = source->unk0C;
-    sprite->unk58 = source->unk10;
-    sprite->unk64 = source->unk14;
-    sprite->unk70 = source->unk18;
-    sprite->unk78 = source->unk1C;
-    sprite->unk86[0] = 1;
-    sprite->unk86[1] = 1;
-    sprite->unk86[2] = 1;
-    sprite->unk86[3] = 1;
-    sprite->unk86[4] = 1;
+    sprite->textureTable = textureTable;
+    sprite->image = image;
+    sprite->secondaryImage = secondaryImage;
+    sprite->alpha = alpha;
+    sprite->id = id;
+    sprite->scale[0] = 1.0f;
+    sprite->scale[1] = 1.0f;
+    sprite->scale[2] = 1.0f;
+    sprite->resources = resources;
+    sprite->positionKeys = resources->positionKeys;
+    sprite->alphaKeys = resources->alphaKeys;
+    sprite->scaleKeys = resources->scaleKeys;
+    sprite->frameKeys = resources->frameKeys;
+    sprite->commands = resources->commands;
+    sprite->positionDone = 1;
+    sprite->alphaDone = 1;
+    sprite->scaleDone = 1;
+    sprite->frameDone = 1;
+    sprite->finished = 1;
 }
 
-extern "C" void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 value0, u32 value1, UiSpriteSource *source, u16 id, f32 value)
+/* Initializes the sprite without a secondary image. */
+extern "C" void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 textureTable, s32 image,
+                                            UiResourceParameters *resources, u16 id, f32 alpha)
 {
-    uiSpriteInitializeState(sprite, value0, value1, -1, source, id, value);
+    uiSpriteInitializeStateInline(sprite, textureTable, image, -1, resources, id, alpha);
 }

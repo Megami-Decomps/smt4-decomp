@@ -1,14 +1,13 @@
 /* NON_MATCHING: the blink arms and label coordinates now match; retail evaluates the label y argument before x and keeps both in caller-saved registers. */
 #include "shard/S3SceneWidget.h"
 #include "shard/TextureDrawCall.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void efctSetSpeed(f32);
-f32 vec2GetSpeed(const void *object);
 void texDrawCompositeSprite(u32, u32, u32, s32, s32, s32);
 
 void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fade)

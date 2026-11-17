@@ -1,9 +1,9 @@
 #include "shard/HealingSceneWork.h"
+#include "script/scrScriptProcess.h"
 #include "Model/MoriModelManager.h"
 
 extern "C" {
 void asdMemFree(void *block);
-void scrScriptProcessDestroy(ScriptProcess *script);
 void placeWinRelease(void);
 void asdCameraInitAreas(void);
 void mapReleaseTableTexture(void);

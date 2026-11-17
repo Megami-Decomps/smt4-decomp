@@ -1,19 +1,6 @@
-#include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-
-typedef struct BtlUiPanel {
-    /* 0x0000 */ u8 unk0000[8];
-    /* 0x0008 */ u8 scene[0x21F8];
-    /* 0x2200 */ u8 timer[1];
-} BtlUiPanel;
-
-typedef struct BtlUiView {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ BtlUiPanel *panel;
-} BtlUiView;
-
-extern BtlUiView g_btlUi;
 
 s32 playSceneIsFadeOutDone(void *scene);
 s32 uiSpriteOperationIsComplete(void *timer);
@@ -23,11 +10,11 @@ int playSceneTimerSubStart(void *timer);
 /* Once the panel's scene has faded out and uiSpriteOperationIsComplete accepts its timer, fades the scene back in and starts the timer. */
 void btlUiPanelFadeInWhenReady(void)
 {
-    BtlUiPanel *panel = g_btlUi.panel;
+    BtlUi *ui = g_btlUi.ui;
 
-    if (playSceneIsFadeOutDone(panel->scene) != 0 && uiSpriteOperationIsComplete(panel->timer) != 0) {
-        playSceneFadeInStart(panel->scene);
-        playSceneTimerSubStart(panel->timer);
+    if (playSceneIsFadeOutDone(&ui->objA) != 0 && uiSpriteOperationIsComplete(&ui->objB) != 0) {
+        playSceneFadeInStart(&ui->objA);
+        playSceneTimerSubStart(&ui->objB);
     }
 }
 

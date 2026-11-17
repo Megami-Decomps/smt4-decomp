@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/InfoWinA.h"
 #include "AsdSDK/AsdDebug.h"
@@ -25,9 +26,6 @@ void FUN_00155ca8(void);
 u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
 void paramsClearPacket(UiResourceParameters* parameters);
 
-void uiSpriteStateInitFromSource(UiSpriteState*, u32 group, u32 id, const UiResourceParameters*, u16 flags, f32 speed);
-void uiSpriteSetKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
-void uiSpriteSetImageKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
 void* spriteHandleCreate(u32 flags);
 void uiObjectSetColorRgb(void* sprite, s32 value);
 void positionStateSet(void* sprite, u32 first, u32 second, f32 scale);

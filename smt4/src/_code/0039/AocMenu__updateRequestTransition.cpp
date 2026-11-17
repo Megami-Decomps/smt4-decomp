@@ -1,7 +1,6 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "addon/AocRequestTransition.h"
-extern "C" AocMain *g_aocMain;
 extern "C" void _ZN7AocMain12queueRequestE17RequestParametersji(AocMain *, const RequestParameters *, s32, s32);
 
 /* Submit an AOC request, then release its completion callback when it finishes. */

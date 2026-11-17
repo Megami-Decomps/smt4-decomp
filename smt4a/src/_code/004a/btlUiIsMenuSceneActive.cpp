@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 s32 menu32ModeIsNot5(BtlUiObjAA *obj);
 s32 uiSceneIsActive(BtlUiObjBA *obj);
 
-extern BtlUiGlobalsA g_btlUi;
 
 bool btlUiIsMenuSceneActive(void)
 {

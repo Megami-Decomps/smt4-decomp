@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "common.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 s32 stageAssetsLoaded(void);
 int NaviMain_UpdateDiscovery(void *discovery);

@@ -20,10 +20,10 @@ struct SpriteAnchorGroupWork {
     u8 padding59C[4];
     /* 0x5A0 */ void *firstBuffer;
     /* 0x5A4 */ void *firstArguments;
-    /* 0x5A8 */ ScriptRunState *firstProcess;
+    /* 0x5A8 */ ScriptProcess *firstProcess;
     /* 0x5AC */ void *secondBuffer;
     /* 0x5B0 */ void *secondArguments;
-    /* 0x5B4 */ ScriptRunState *secondProcess;
+    /* 0x5B4 */ ScriptProcess *secondProcess;
 };
 typedef char SpriteAnchorGroupLayoutCheck[
     sizeof(SpriteAnchor) == 8 && sizeof(SpriteAnchorGroupWork) == 0x5B8 &&

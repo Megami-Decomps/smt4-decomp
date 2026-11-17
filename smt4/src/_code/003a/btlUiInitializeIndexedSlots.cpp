@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void indexedSlotInit(BtlUiObjC *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 void btlUiInitializeIndexedSlots(void)
 {

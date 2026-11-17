@@ -4,31 +4,36 @@
 #define SHARD_RESOURCE_H
 
 #include "common.h"
+#include <stddef.h>
 
-typedef struct Handler {
-    /* 0x00 */ u8 unk00[0x10];
+struct EffBlock;
+struct Vec4;
+
+/* One resource kind's operations (g_handlerTable, indexed by Resource::type). Each takes the
+ * resource's payload (Resource::data); unset operations are NULL. */
+struct ResourceHandler {
+    /* 0x00 */ void *(*create)(EffBlock *src);                       /* builds a payload for a block like `src` */
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ void (*run)(void *data);
+    /* 0x0C */ void (*update)(void *data);
     /* 0x10 */ void (*release)(void *data);
-    /* 0x14 */ u8 unk14[8];
+    /* 0x14 */ void *(*clone)(void *data);                           /* copies a payload */
+    /* 0x18 */ u8 unk18[4];
     /* 0x1C */ void (*callback)(void *data);
-    /* 0x20 */ void (*callback20)(void *data, s32 arg);
-    /* 0x24 */ void (*callback24)(void *data, s32 arg);
-    /* 0x28 */ void (*callback28)(void *data);
-    /* 0x2C */ void (*callback2C)(void *data, u32 arg);
-    /* 0x30 */ void (*callback30)(void *data, s32 arg);
-    /* 0x34 */ union {
-        u8 unk34[0x10];
-        struct {
-            u8 unk34[4];
-            s32 (*isActive)(void *data);
-            u8 unk3C[8];
-        } status;
-        struct {
-            /* 0x34 */ u8 unk34BeforeDuration[0xC];
-            /* 0x40 */ s32 (*duration)(void *data);
-        } timeline;
-    };
-} Handler;                      /* 0x44 */
-typedef char HandlerSizeCheck[sizeof(Handler) == 0x44 ? 1 : -1];
+    /* 0x20 */ void (*setPosition)(void *data, const Vec4 *position);
+    /* 0x24 */ void (*setOrientation)(void *data, const f32 *orientation); /* a rotation matrix */
+    /* 0x28 */ void (*setIntensity)(void *data, f32 intensity);
+    /* 0x2C */ void (*setColor)(void *data, const Vec4 *color);
+    /* 0x30 */ void (*setPackedColor)(void *data, u32 color); /* a packed 8-bit RGBA tint */
+    /* 0x34 */ u8 unk34[4];
+    /* 0x38 */ s32 (*isActive)(void *data);
+    /* 0x3C */ u8 unk3C[4];
+    /* 0x40 */ s32 (*duration)(void *data);
+};
+typedef char ResourceHandlerLayoutCheck[offsetof(ResourceHandler, release) == 0x10 &&
+    offsetof(ResourceHandler, clone) == 0x14 && offsetof(ResourceHandler, callback) == 0x1C &&
+    offsetof(ResourceHandler, setPackedColor) == 0x30 && offsetof(ResourceHandler, isActive) == 0x38 &&
+    offsetof(ResourceHandler, duration) == 0x40 && sizeof(ResourceHandler) == 0x44 ? 1 : -1];
 
 typedef struct Resource {
     /* 0x00 */ u8 unk00[4];
@@ -76,6 +81,6 @@ typedef char ResourceSizingRecordSizeCheck[sizeof(ResourceSizingRecord) == 0x14 
 typedef char ResourceSizingGroupSizeCheck[sizeof(ResourceSizingGroup) == 0x20 ? 1 : -1];
 typedef char ResourceSizingStateSizeCheck[sizeof(ResourceSizingState) == 0xA0 ? 1 : -1];
 
-extern Handler g_handlerTable[];
+extern "C" ResourceHandler g_handlerTable[];
 
 #endif

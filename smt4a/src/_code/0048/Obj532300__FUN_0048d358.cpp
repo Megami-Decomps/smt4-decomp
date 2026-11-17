@@ -1,6 +1,7 @@
 #include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameStateA.h"
 #include "test/BustupViewer.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -15,9 +16,6 @@ typedef struct PresetCursorView {
     /* 0x590 */ u8 cursor[0x8C];
 } PresetCursorView;
 
-s32 uiSpriteAdvanceAnimation(void *sprite, f32 rate);
-s32 vec2GetXInt(void *sprite);
-s32 vec2GetYInt(void *sprite);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void FUN_00168980(s32 sound);
@@ -36,11 +34,11 @@ void _ZN9Obj53230012FUN_0048d358Ev(PresetCursorView *view)
         break;
     case 1: {
         void *cursor = view->cursor;
-        if (uiSpriteAdvanceAnimation(cursor, 1.0f) && buttonHelpStateIsNot3()) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)cursor, 1.0f) && buttonHelpStateIsNot3()) {
             view->state = 2;
             view->flags |= 2;
         }
-        pointConvertToFloat(view->position, vec2GetXInt(cursor), vec2GetYInt(cursor));
+        pointConvertToFloat(view->position, vec2GetXInt((const UiSpriteState *)cursor), vec2GetYInt((const UiSpriteState *)cursor));
         break;
     }
     }

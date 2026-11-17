@@ -5,6 +5,7 @@
 #include "gamedata/FlagValueIsPositive.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "gamedata/SaveSlotRecord.h"
 
 /* The command slots of one selection. */
 struct CommandSlots {
@@ -62,7 +63,6 @@ void scrollListSetSelectionTracked(ScrollSelection *list, s32 index);
 void *sysMemClear(void *destination, u32 size);
 s32 FUN_0047fbb4(u32 id);
 s32 FUN_0047fd9c(s32 id, void *unit);
-void *gameGetSlotRecord(s32 index);
 u32 btlMainGetUnk14(void);
 void qsort(void *elements, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
 int dataTableCompareIdsByOrder(const void *first, const void *second);

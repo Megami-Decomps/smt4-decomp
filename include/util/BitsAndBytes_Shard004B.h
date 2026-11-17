@@ -1,10 +1,10 @@
 #pragma once
 #include "common.h"
-#include "shard/Shard004B.h"
+#include "gamedata/GameSaveDataA.h"
 
 /* Bit, byte and array helpers. */
 extern "C" {
 
-void bitsAt60Clear(BitsAt60 *obj, u16 mask);
+void bitsAt60Clear(SlotRecordA *obj, u16 mask);
 
 } /* extern "C" */

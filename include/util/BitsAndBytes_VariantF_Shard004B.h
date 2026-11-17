@@ -1,10 +1,10 @@
 #pragma once
 #include "common.h"
-#include "shard/Shard004B.h"
+#include "gamedata/GameSaveDataA.h"
 
 /* Bit, byte and array helpers. */
 extern "C" {
 
-u8 bitsAt60Test(BitsAt60 *obj, u8 bit);
+u8 bitsAt60Test(SlotRecordA *obj, u8 bit);
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -17,7 +17,6 @@ void btlEditorNotifyNoop(u32 job);
 s32 FUN_001b72e0(u32 job);
 s32 FUN_001e4bf0(u32 job);
 s32 btlUiDrawFloatingNumbersWhenLoaded(u32 job);
-extern BtlUiGlobals g_btlUi;
 
 // Allocate battle UI storage and register its calculation and screen draw passes.
 void btlUiCreateTasks(BattleUiTaskOwner *owner)

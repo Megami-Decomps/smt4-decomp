@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c3fd4` (_code @ 0x1c3fd4, 0x48d8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -101,9 +102,6 @@ int scrScriptProcessCreate(unsigned int, unsigned int);
 int FUN_0029acb0(void);
 int gameGetSlotTable(...);
 int ifTouchRegionRemove(void);
-int uiSlidingSpriteAdvance(...);
-int timerStart(...);
-int uiSpriteAdvanceAnimation(...);
 int __aeabi_memset4(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -286,11 +284,11 @@ unsigned int FUN_001c3fd4(void)
   }
   temp_v4 = gameGetSlotTable(*(int *)(g_partyPanel + 0x1c));
   temp_v24 = 0;
-  uiSpriteAdvanceAnimation(temp_v1 + 0x68);
-  uiSpriteAdvanceAnimation(temp_v1 + 0xf4);
-  uiSpriteAdvanceAnimation(temp_v1 + 0x20c);
+  uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v1 + 0x68));
+  uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v1 + 0xf4));
+  uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v1 + 0x20c));
   temp_v5 = temp_v1 + 0x4c8;
-  uiSpriteAdvanceAnimation();
+  uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v1 + 0x4c8));
   FUN_0026dafc(partyPanelPollSelectedStatusColor());
   temp_v6 = *(int *)(temp_v1 + 0x1c);
   if ((((temp_v6 == 0 || temp_v6 == 0x15) || (temp_v6 == 0xe || temp_v6 == 0xd)) ||
@@ -320,20 +318,20 @@ unsigned int FUN_001c3fd4(void)
     if (temp_v6 < 0) {
       temp_v6 = 0;
       do {
-        timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,8,0);
+        timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),8,0);
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
-      timerStart(temp_v5,8,0);
+      timerStart((UiSpriteState *)temp_v5,8,0);
     }
     else {
       temp_v6 = gameGetFlagByte12e8();
       if (0 < temp_v6) {
         temp_v6 = 0;
         do {
-          timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,7,0);
+          timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 4);
-        timerStart(temp_v5,7,0);
+        timerStart((UiSpriteState *)temp_v5,7,0);
       }
     }
     if (*(char *)(temp_v1 + 0x66c) == '\v') {
@@ -360,7 +358,7 @@ unsigned int FUN_001c3fd4(void)
     do {
       temp_v4 = temp_v1 + temp_v6 * 0x8c + 0x298;
       if (*(short *)(temp_v1 + 0x2e8) != 5) {
-        uiSlidingSpriteAdvance(temp_v4,0);
+        uiSlidingSpriteAdvance((UiSpriteState *)temp_v4,0);
         if (temp_v6 == 3) {
           temp_v0 = *(char *)(temp_v1 + 0x4c6);
 joined_r0x001c43a0:
@@ -390,7 +388,7 @@ joined_r0x001c43a0:
         }
       }
       else {
-        uiSlidingSpriteAdvance(temp_v4,1);
+        uiSlidingSpriteAdvance((UiSpriteState *)temp_v4,1);
         if (temp_v6 == 3) {
           temp_v0 = *(char *)(temp_v1 + 0x4c6);
           goto joined_r0x001c43a0;
@@ -411,13 +409,13 @@ joined_r0x001c43a0:
       temp_v6 = FUN_002015a4();
       if (temp_v6 < 0) {
         *(unsigned int *)(temp_v1 + 0x2c) = *(unsigned int *)(temp_v1 + 0x2c) ^ 1;
-        timerStart(temp_v1 + 0x180,4,0);
+        timerStart((UiSpriteState *)(temp_v1 + 0x180),4,0);
       }
       else {
         temp_v6 = FUN_002015a4();
         if (0 < temp_v6) {
           *(unsigned int *)(temp_v1 + 0x2c) = *(unsigned int *)(temp_v1 + 0x2c) ^ 1;
-          timerStart(temp_v1 + 0x180,5,0);
+          timerStart((UiSpriteState *)(temp_v1 + 0x180),5,0);
         }
       }
       temp_v14 = 0;
@@ -427,10 +425,10 @@ joined_r0x001c43a0:
     break;
   case 3:
     if (*(short *)(temp_v1 + 0x1d0) != 5) {
-      temp_v6 = uiSlidingSpriteAdvance(temp_v1 + 0x180,0);
+      temp_v6 = uiSlidingSpriteAdvance((UiSpriteState *)(temp_v1 + 0x180),0);
     }
     else {
-      temp_v6 = uiSlidingSpriteAdvance(temp_v1 + 0x180,1);
+      temp_v6 = uiSlidingSpriteAdvance((UiSpriteState *)(temp_v1 + 0x180),1);
     }
     if (temp_v6 != 0) {
       partyPanelSetState(*(unsigned int *)(temp_v1 + 0x24),1);
@@ -1405,7 +1403,7 @@ LAB_001c6598:
                           __aeabi_memset4(temp_v4 + 0x67c,0x3c,0xffffffff);
                           temp_v6 = 0;
                           do {
-                            timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,7,0);
+                            timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
                             temp_v6 = temp_v6 + 1;
                           } while (temp_v6 < 4);
                           goto LAB_001c5c34;
@@ -1578,11 +1576,11 @@ LAB_001c653c:
                           __aeabi_memset4(temp_v4 + 0x67c,0x3c,0xffffffff);
                           temp_v6 = 0;
                           do {
-                            timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,7,0);
+                            timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
                             temp_v6 = temp_v6 + 1;
                           } while (temp_v6 < 4);
 LAB_001c5c34:
-                          timerStart(temp_v5,7,0);
+                          timerStart((UiSpriteState *)temp_v5,7,0);
                           buttonHelpSetPreset(0x5d);
                           *(unsigned char *)(temp_v1 + 0xb42) = 2;
                           *(unsigned int *)(temp_v1 + 0x20) = 0xb;
@@ -1653,10 +1651,10 @@ LAB_001c6680:
                 __aeabi_memset4(temp_v6 + 0x67c,0x3c,0xffffffff);
                 temp_v6 = 0;
                 do {
-                  timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,7,0);
+                  timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),7,0);
                   temp_v6 = temp_v6 + 1;
                 } while (temp_v6 < 4);
-                timerStart(temp_v5,7,0);
+                timerStart((UiSpriteState *)temp_v5,7,0);
                 FUN_0026c9c0();
                 buttonHelpSetPreset(0x5d);
                 messageMainFinishWindow();
@@ -2007,14 +2005,14 @@ LAB_001c6d98:
             FUN_0026d670();
             temp_v6 = 0;
             do {
-              timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,4,0);
+              timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 4);
             if (*(char *)(temp_v1 + 0x42) != '\0') {
-              timerStart(temp_v5,6,0);
+              timerStart((UiSpriteState *)temp_v5,6,0);
             }
             else {
-              timerStart(temp_v5,4,0);
+              timerStart((UiSpriteState *)temp_v5,4,0);
             }
             buttonHelpSetText(0,0x323232ff);
             FUN_0026c214();
@@ -2076,14 +2074,14 @@ joined_r0x001c7220:
               FUN_0029c4ac(0);
               temp_v6 = 0;
               do {
-                timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,4,0);
+                timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 4);
               if (*(char *)(temp_v1 + 0x42) != '\0') {
-                timerStart(temp_v5,6,0);
+                timerStart((UiSpriteState *)temp_v5,6,0);
               }
               else {
-                timerStart(temp_v5,4,0);
+                timerStart((UiSpriteState *)temp_v5,4,0);
               }
               *(unsigned char *)(temp_v1 + 0x66c) = 10;
               *(unsigned int *)(temp_v1 + 0x20) = 8;
@@ -2167,8 +2165,8 @@ LAB_001c7700:
     }
 LAB_001c7720:
     if (*(int *)(temp_v1 + 0x18) != 8) {
-      uiSpriteAdvanceAnimation();
-      uiSpriteAdvanceAnimation(temp_v1 + 0x5e0);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v1 + 0x554));
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v1 + 0x5e0));
       if ((*(int *)(temp_v1 + 0x18) >= 0x29) && (*(char *)(temp_v1 + 0x5de) != '\0')) {
         FUN_0017fbc4();
         *(unsigned char *)(temp_v1 + 0x34) = 1;
@@ -2195,8 +2193,8 @@ LAB_001c7720:
         uiStoreTextureEntryCenter(temp_v1 + 0x554,0x19,temp_v4 + 0x31);
         uiStoreTextureEntryCenter(temp_v1 + 0x5e0,0x19,temp_v4 + 0x31);
       }
-      spriteStartAnimationByIndex((void *)(temp_v1 + 0x554),3);
-      spriteStartAnimationByIndex((void *)(temp_v1 + 0x5e0),4);
+      spriteStartAnimationByIndex((UiSpriteState *)((void *)(temp_v1 + 0x554)),3);
+      spriteStartAnimationByIndex((UiSpriteState *)((void *)(temp_v1 + 0x5e0)),4);
       eventQueueAddUnique(0x10001e1);
     }
     break;
@@ -2619,7 +2617,7 @@ LAB_001c7c50:
   case 0x15:
     temp_v6 = 0;
     do {
-      uiSpriteAdvanceAnimation(temp_v1 + temp_v6 * 0x8c + 0x298);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298));
       temp_v24 = g_partyPanel;
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 4);
@@ -2798,14 +2796,14 @@ LAB_001c8644:
   if (temp_v6 < 0) {
     temp_v6 = 0;
     do {
-      timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,5,0);
+      timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),5,0);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 4);
     if (*(char *)(temp_v1 + 0x42) == '\0') {
-      timerStart(temp_v5,5,0);
+      timerStart((UiSpriteState *)temp_v5,5,0);
     }
     else {
-      timerStart(temp_v5,6,0);
+      timerStart((UiSpriteState *)temp_v5,6,0);
     }
   }
   else {
@@ -2813,14 +2811,14 @@ LAB_001c8644:
     if (0 < temp_v6) {
       temp_v6 = 0;
       do {
-        timerStart(temp_v1 + temp_v6 * 0x8c + 0x298,4,0);
+        timerStart((UiSpriteState *)(temp_v1 + temp_v6 * 0x8c + 0x298),4,0);
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
       if (*(char *)(temp_v1 + 0x42) != '\0') {
-        timerStart(temp_v5,6,0);
+        timerStart((UiSpriteState *)temp_v5,6,0);
       }
       else {
-        timerStart(temp_v5,4,0);
+        timerStart((UiSpriteState *)temp_v5,4,0);
       }
     }
   }

@@ -8,8 +8,6 @@ struct Vec3 {
 
 extern "C" {
 
-AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, s32 heap);
-void nodeSetTranslation(void *node, s32 index, const Vec3 *translation);
 void modelPartSetRotationDegrees(void *node, s32 index, Vec3 scale);
 
 /* Creates the map action-manhole marker model at the given position (xyz, w) and starts it. */
@@ -24,7 +22,7 @@ void FUN_001fa760(MapMarkerPosition position)
     block->position = position;
     block->model = asdMdlManagerCreateLoaded("map/all/action_manhole.bam", 7);
     lightOwnerRegister(block->model, 1);
-    nodeSetTranslation(block->model->node, 0, (const Vec3 *)&block->position);
+    nodeSetTranslation(block->model->node, 0, &block->position.x);
     scale.x = 0.0f;
     scale.y = block->position.w;
     scale.z = 0.0f;

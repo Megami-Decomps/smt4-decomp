@@ -8,7 +8,7 @@ s32 __aeabi_idivmod(s32 a, s32 b);
 /* Pops two values and pushes the result of operation `op`: 0 add, 1 subtract, 2 multiply, 3 divide
  * (modulo for integers), 4 or, 5 and, 6 equal, 7 not equal, 8 less, 9 greater, 10 less or equal,
  * 11 greater or equal. The comparison and logic results are integers. */
-void scrFloatOp(ScriptVmProcess *process, u32 op)
+void scrFloatOp(ScriptProcess *process, u32 op)
 {
     g_scrContext.topTag = process->tags[process->depth - 1];
     g_scrContext.belowTag = process->tags[process->depth - 2];

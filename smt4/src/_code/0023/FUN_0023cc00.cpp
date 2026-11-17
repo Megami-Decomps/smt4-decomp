@@ -1,11 +1,9 @@
 /* NON_MATCHING: only the final zero-depth VFP literal load is scheduled before two argument moves. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gfx/SpriteTextureRect.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-struct BattleUiDrawGlobals { u8 unk00[0x20]; BtlUi *ui; };
 extern "C" {
-extern BattleUiDrawGlobals g_btlUi;
 void FUN_00289f18(BtlUiObjC *widget, u32 style, u32 kind, u32 value, u32 options, u32 enabled);
 void FUN_0028a0d0(BtlUi *ui, u32 style, u32 value, u32 options, u32 color, u32 flags, f32 x, f32 y, f32 z);
 

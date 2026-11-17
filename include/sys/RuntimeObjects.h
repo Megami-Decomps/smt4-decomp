@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "ui/UiSpriteApi.h"
 
 /* Runtime object, job and event helpers. */
 extern "C" {
@@ -19,9 +20,6 @@ u32 jobStop(u32 handle, u16 delay);
 
 u32 legacyResourceIdRemap(const void *resource);
 
-/* Sets the word at 0x04 of `object` (a sprite's animation selection) to `first` and the word at
- * 0x08 to -1. */
-void pairSetFirstResetSecond(void *object, u32 first);
 
 void refCountIncrement(int *counter);
 

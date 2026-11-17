@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "shard/Shard0031.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 extern s32 stateSetterIsState4Or6Or16(u8 *sub);
 

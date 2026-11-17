@@ -1,105 +1,72 @@
 /* NON_MATCHING (b1454): retail narrows the next segment index twice (call-site cast, then again after the s16 store inside the start helper) and lays the inlined reverse select out differently; the scale add order now matches. */
-#include "common.h"
+#include "ui/UiSpriteApi.h"
 
-struct ScaleSegment {
-    f32 start;
-    f32 end;
-    u16 frames;
-    u8 loop;
-    u8 unk0b;
-};
-struct ScaleSequenceEntry {
-    u8 unk00[0x14];
-    s32 segment;
-    s8 reverse;
-    u8 unk19[3];
-};
-struct ScaleController {
-    u8 unk00[0x24];
-    f32 scale[3];
-    u8 unk30[0x34];
-    const ScaleSegment *segments;
-    s16 segmentIndex;
-    s16 frame;
-    s8 reverse;
-    u8 unk6d[0xb];
-    const ScaleSequenceEntry *sequence;
-    u8 unk7c[4];
-    s16 sequenceIndex;
-    u8 unk82[2];
-    u8 sequencing;
-    u8 unk85[3];
-    u8 complete;
-    u8 unk89;
-    u8 reset;
-    u8 unk8b;
-};
-
-static __inline f32 scaleSegmentStart(const ScaleSegment *segment, s32 reverse)
+static __inline f32 scaleSegmentStart(const UiSpriteScalarKey *segment, s32 reverse)
 {
-    return reverse ? segment->end : segment->start;
+    return reverse ? segment->last : segment->first;
 }
 
-static __inline f32 scaleSegmentEnd(const ScaleSegment *segment, s32 reverse)
+static __inline f32 scaleSegmentEnd(const UiSpriteScalarKey *segment, s32 reverse)
 {
-    return reverse ? segment->start : segment->end;
+    return reverse ? segment->first : segment->last;
 }
 
-static void startScaleSegment(ScaleController *controller,
-                              s16 index, s8 reverse)
+static void startScaleSegment(UiSpriteState *sprite, s16 index, s8 reverse)
 {
-    controller->segmentIndex = index;
-    controller->frame = 0;
-    controller->reverse = reverse;
-    controller->reset = 0;
-    const ScaleSegment *segment = &controller->segments[index];
+    sprite->scaleKey = index;
+    sprite->scaleFrame = 0;
+    sprite->scaleReverse = reverse;
+    sprite->finished = 0;
+    const UiSpriteScalarKey *segment = &sprite->scaleKeys[index];
     f32 scale = scaleSegmentStart(segment, reverse);
-    controller->scale[0] = scale;
-    controller->scale[1] = scale;
-    controller->scale[2] = scale;
+    sprite->scale[0] = scale;
+    sprite->scale[1] = scale;
+    sprite->scale[2] = scale;
 }
 
-extern "C" void controllerUpdateUniformScaleTrack(ScaleController *controller)
+/* Advances the scale track: interpolates its key, then loops it or continues with the next command; the scale stays
+   uniform. */
+extern "C" void controllerUpdateUniformScaleTrack(UiSpriteState *sprite)
 {
-    if (controller->complete || controller->segments == NULL) {
+    if (sprite->scaleDone || sprite->scaleKeys == NULL) {
         return;
     }
-    const ScaleSegment *segment = &controller->segments[controller->segmentIndex];
-    u32 frames = segment->frames;
-    if (controller->frame >= (s32)frames) {
-        s8 reverse = controller->reverse;
+    const UiSpriteScalarKey *segment = &sprite->scaleKeys[sprite->scaleKey];
+    u32 frames = segment->duration;
+    if ((s16)sprite->scaleFrame >= (s32)frames) {
+        s8 reverse = sprite->scaleReverse;
         if (segment->loop) {
-            controller->scale[0] = scaleSegmentStart(segment, reverse);
-            controller->frame = 0;
+            sprite->scale[0] = scaleSegmentStart(segment, reverse);
+            sprite->scaleFrame = 0;
         } else {
-            controller->scale[0] = scaleSegmentEnd(segment, reverse);
-            if (!(controller->sequencing && controller->sequence != NULL &&
-                  controller->sequence[controller->sequenceIndex].segment != -1)) {
-                controller->complete = 1;
+            sprite->scale[0] = scaleSegmentEnd(segment, reverse);
+            if (!(sprite->commandsRunning && sprite->commands != NULL &&
+                  sprite->commands[sprite->scaleStep].scaleKey != -1)) {
+                sprite->scaleDone = 1;
             } else {
-                ++controller->sequenceIndex;
-                const ScaleSequenceEntry *next = &controller->sequence[controller->sequenceIndex];
-                if (next->segment == -1 || next->segment == -3) {
-                    controller->complete = 1;
-                } else if (next->segment == -2) {
-                    controller->sequenceIndex = 0;
-                    const ScaleSequenceEntry *first = controller->sequence;
-                    startScaleSegment(controller, (s16)first->segment, first->reverse);
+                ++sprite->scaleStep;
+                const SpriteAnimationCommand *next = &sprite->commands[sprite->scaleStep];
+                if (next->scaleKey == -1 || next->scaleKey == -3) {
+                    sprite->scaleDone = 1;
+                } else if (next->scaleKey == -2) {
+                    sprite->scaleStep = 0;
+                    const SpriteAnimationCommand *first = sprite->commands;
+                    startScaleSegment(sprite, (s16)first->scaleKey, first->scaleReverse);
                 } else {
-                    startScaleSegment(controller, (s16)next->segment, next->reverse);
+                    startScaleSegment(sprite, (s16)next->scaleKey, next->scaleReverse);
                 }
             }
         }
     } else {
         f32 step;
-        if (controller->reverse) {
-            step = (segment->start - segment->end) / (f32)frames;
+        if (sprite->scaleReverse) {
+            step = (segment->first - segment->last) / (f32)frames;
         } else {
-            step = (segment->end - segment->start) / (f32)frames;
+            step = (segment->last - segment->first) / (f32)frames;
         }
-        ++controller->frame;
-        controller->scale[0] = controller->scale[0] + step;
+        ++sprite->scaleFrame;
+        sprite->scale[0] = sprite->scale[0] + step;
     }
-    controller->scale[1] = controller->scale[0];
-    controller->scale[2] = controller->scale[0];
+    sprite->scale[1] = sprite->scale[0];
+    sprite->scale[2] = sprite->scale[0];
 }

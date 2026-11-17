@@ -1,15 +1,13 @@
 /* NON_MATCHING: starts a scroll of the sprite list pool by `delta` entries with `count` rows moving; written from the decompilation, the sprite address arithmetic and loop shapes not compared with retail */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 
-struct ListSprite {
-    /* 0x00 */ u8 data[0x8C];
-};
 
 /* The sprite pool of the list screen: six banks of ten sprites and the scroll state after them. */
 struct ListPool {
     /* 0x0000 */ u8 unk0000[0x20];
-    /* 0x0020 */ ListSprite sprites[0x3D];
+    /* 0x0020 */ UiSpriteState sprites[0x3D];
     /* 0x217C */ s32 phase;
     /* 0x2180 */ s32 mode;
     /* 0x2184 */ s32 alternate;      /* selects the second sprite style */
@@ -25,7 +23,6 @@ struct ListPool {
 #define LIST_SCROLL_SOUND 0x1000173
 
 extern "C" {
-void spriteStartAnimationByIndex(ListSprite *sprite, s32 animation);
 void soundPlaySeUnpanned(u32 sound);
 
 void FUN_001e0de0(ListPool *pool, s32 delta, s32 count)
@@ -47,7 +44,7 @@ void FUN_001e0de0(ListPool *pool, s32 delta, s32 count)
         for (s32 i = 0; i < pool->count; i++) {
             s32 slot = index - pool->offset - i;
             pairSetFirstResetSecond(&pool->sprites[slot + 0x13], pool->alternate == 0 ? 7 : 8);
-            ListSprite *upper = &pool->sprites[slot + 0x31];
+            UiSpriteState *upper = &pool->sprites[slot + 0x31];
             spriteStartAnimationByIndex(upper, 10);
             pairSetFirstResetSecond(upper, pool->alternate != 0 ? 0xFA7 : 0xFA6);
         }

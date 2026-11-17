@@ -1,31 +1,9 @@
 /* NON_MATCHING: retail hoists the shared float coordinates into registers s16-s26 before the mode tests and reuses them across the layouts (so the (25, 1) layout shares the (25, 2) code); this build reloads each constant per block. The stores themselves are identical. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-
-namespace {
-/* One row of the screen's anchor table: three coordinates and the row's other state. */
-struct AnchorRow {
-    /* 0x00 */ f32 x[3];
-    /* 0x0c */ u8 unk0c[0x34];
-};
-
-/* The screen work area (the part this layout code sets). */
-struct AnchorWork {
-    /* 0x000 */ u8 unk000[0xd4];
-    /* 0x0d4 */ AnchorRow anchors[5];
-    /* 0x214 */ u8 unk214[0x305 - 0x214];
-    /* 0x305 */ u8 dirty;
-};
-
-/* The global that holds the work area pointer at +4. */
-struct AnchorGlobals {
-    u32 unk00;
-    AnchorWork *work;
-};
-}
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
-extern AnchorGlobals DAT_005806a0;
 void FUN_00352a14(void);
 s32 gameFlagIsSet(u32 flag);
 
@@ -33,38 +11,38 @@ s32 gameFlagIsSet(u32 flag);
    selects the fixed first layout. */
 void FUN_0033a690(s32 mode, s32 subMode)
 {
-    AnchorWork *work = DAT_005806a0.work;
-    work->dirty = 0;
+    LmapViewA *view = DAT_005806a0.view;
+    view->unk305 = 0;
     FUN_00352a14();
     if (mode == 10 && subMode == 8) {
-        work = DAT_005806a0.work;
-        work->anchors[0].x[1] = 100.0f;
-        work->anchors[1].x[1] = 200.0f;
-        work->anchors[2].x[1] = 0.0f;
-        work->anchors[3].x[1] = 380.0f;
-        work->anchors[4].x[1] = 42.0f;
+        view = DAT_005806a0.view;
+        view->targetHeight[3] = 100.0f;
+        view->eyeHeight[3] = 200.0f;
+        view->lateralDistance[3] = 0.0f;
+        view->rearDistance[3] = 380.0f;
+        view->fieldOfView[3] = 42.0f;
     }
     if (g_gameState.mapId == 1) {
         if (g_gameState.areaId != 1) {
             return;
         }
         if (gameFlagIsSet(114) && !gameFlagIsSet(177)) {
-            work = DAT_005806a0.work;
-            work->anchors[1].x[0] = 110.0f;
-            work->anchors[2].x[0] = 0.0f;
-            work->anchors[3].x[0] = 480.0f;
-            work->anchors[4].x[0] = 47.0f;
-            work->anchors[1].x[1] = 220.0f;
-            work->anchors[2].x[1] = 0.0f;
-            work->anchors[3].x[1] = 480.0f;
-            work->anchors[4].x[1] = 47.0f;
-            work->anchors[0].x[2] = 170.0f;
-            work->anchors[1].x[2] = 130.0f;
-            work->anchors[2].x[2] = 40.0f;
-            work->anchors[3].x[2] = 250.0f;
-            work->anchors[4].x[2] = 47.0f;
-            work->anchors[0].x[0] = 190.0f;
-            work->anchors[0].x[1] = 180.0f;
+            view = DAT_005806a0.view;
+            view->eyeHeight[2] = 110.0f;
+            view->lateralDistance[2] = 0.0f;
+            view->rearDistance[2] = 480.0f;
+            view->fieldOfView[2] = 47.0f;
+            view->eyeHeight[3] = 220.0f;
+            view->lateralDistance[3] = 0.0f;
+            view->rearDistance[3] = 480.0f;
+            view->fieldOfView[3] = 47.0f;
+            view->targetHeight[4] = 170.0f;
+            view->eyeHeight[4] = 130.0f;
+            view->lateralDistance[4] = 40.0f;
+            view->rearDistance[4] = 250.0f;
+            view->fieldOfView[4] = 47.0f;
+            view->targetHeight[2] = 190.0f;
+            view->targetHeight[3] = 180.0f;
         }
     }
     if (g_gameState.mapId == 4) {
@@ -72,54 +50,54 @@ void FUN_0033a690(s32 mode, s32 subMode)
             return;
         }
         if (gameFlagIsSet(244) && !gameFlagIsSet(246)) {
-            work = DAT_005806a0.work;
-            work->anchors[1].x[0] = 100.0f;
-            work->anchors[2].x[0] = 0.0f;
-            work->anchors[3].x[0] = 480.0f;
-            work->anchors[4].x[0] = 47.0f;
-            work->anchors[1].x[1] = 220.0f;
-            work->anchors[2].x[1] = 0.0f;
-            work->anchors[3].x[1] = 480.0f;
-            work->anchors[4].x[1] = 47.0f;
-            work->anchors[0].x[2] = 170.0f;
-            work->anchors[1].x[2] = 130.0f;
-            work->anchors[2].x[2] = 40.0f;
-            work->anchors[3].x[2] = 250.0f;
-            work->anchors[4].x[2] = 47.0f;
-            work->anchors[0].x[0] = 190.0f;
-            work->anchors[0].x[1] = 180.0f;
+            view = DAT_005806a0.view;
+            view->eyeHeight[2] = 100.0f;
+            view->lateralDistance[2] = 0.0f;
+            view->rearDistance[2] = 480.0f;
+            view->fieldOfView[2] = 47.0f;
+            view->eyeHeight[3] = 220.0f;
+            view->lateralDistance[3] = 0.0f;
+            view->rearDistance[3] = 480.0f;
+            view->fieldOfView[3] = 47.0f;
+            view->targetHeight[4] = 170.0f;
+            view->eyeHeight[4] = 130.0f;
+            view->lateralDistance[4] = 40.0f;
+            view->rearDistance[4] = 250.0f;
+            view->fieldOfView[4] = 47.0f;
+            view->targetHeight[2] = 190.0f;
+            view->targetHeight[3] = 180.0f;
         }
     }
     if (g_gameState.mapId == 25) {
         if (g_gameState.areaId == 1 || g_gameState.areaId == 2) {
-            work = DAT_005806a0.work;
-            work->anchors[0].x[0] = 170.0f;
-            work->anchors[1].x[0] = 210.0f;
-            work->anchors[2].x[0] = 0.0f;
-            work->anchors[3].x[0] = 280.0f;
-            work->anchors[4].x[0] = 75.0f;
-            work->anchors[0].x[1] = 100.0f;
-            work->anchors[1].x[1] = 220.0f;
-            work->anchors[2].x[1] = 0.0f;
-            work->anchors[3].x[1] = 280.0f;
-            work->anchors[4].x[1] = 75.0f;
-            work->anchors[0].x[2] = 150.0f;
-            work->anchors[1].x[2] = 160.0f;
-            work->anchors[2].x[2] = 40.0f;
-            work->anchors[3].x[2] = 100.0f;
-            work->anchors[4].x[2] = 75.0f;
+            view = DAT_005806a0.view;
+            view->targetHeight[2] = 170.0f;
+            view->eyeHeight[2] = 210.0f;
+            view->lateralDistance[2] = 0.0f;
+            view->rearDistance[2] = 280.0f;
+            view->fieldOfView[2] = 75.0f;
+            view->targetHeight[3] = 100.0f;
+            view->eyeHeight[3] = 220.0f;
+            view->lateralDistance[3] = 0.0f;
+            view->rearDistance[3] = 280.0f;
+            view->fieldOfView[3] = 75.0f;
+            view->targetHeight[4] = 150.0f;
+            view->eyeHeight[4] = 160.0f;
+            view->lateralDistance[4] = 40.0f;
+            view->rearDistance[4] = 100.0f;
+            view->fieldOfView[4] = 75.0f;
         } else {
             return;
         }
     }
     s32 current = g_gameState.mapId;
     if (current == 28 || current == 29 || current == 30 || current == 31 || current == 32) {
-        work = DAT_005806a0.work;
-        work->anchors[0].x[0] = 170.0f;
-        work->anchors[1].x[0] = 250.0f;
-        work->anchors[2].x[0] = 0.0f;
-        work->anchors[3].x[0] = 490.0f;
-        work->anchors[4].x[0] = 43.0f;
+        view = DAT_005806a0.view;
+        view->targetHeight[2] = 170.0f;
+        view->eyeHeight[2] = 250.0f;
+        view->lateralDistance[2] = 0.0f;
+        view->rearDistance[2] = 490.0f;
+        view->fieldOfView[2] = 43.0f;
     }
 }
 

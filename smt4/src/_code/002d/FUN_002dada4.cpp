@@ -1,20 +1,8 @@
 /* NON_MATCHING: logic and instruction mix match; the allocator spills a different set of accumulators (retail keeps the mp percent and the first two stat bonuses in registers, hp percent and the rest on the stack). */
 #include "common.h"
-
-namespace {
-struct PassiveSkillRecord {
-    /* 0x00 */ u8 unk00[0x24];
-    /* 0x24 */ u8 hpPercentTens;
-    /* 0x25 */ u8 mpPercentTens;
-    /* 0x26 */ u8 unk26[2];
-    /* 0x28 */ u8 statBonus[5];
-    /* 0x2D */ u8 unk2D[0xB];
-    /* 0x38 */ u32 kind;
-};
-}
+#include "shard/PassiveSkill.h"
 
 extern "C" {
-const PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
 
 /* Apply the stat-boosting passive skills (kind 10) to a unit's hp, mp and five stats. */
 void FUN_002dada4(s16 *stats, const u16 *skills, s32 skillCount)
@@ -31,14 +19,14 @@ void FUN_002dada4(s16 *stats, const u16 *skills, s32 skillCount)
             continue;
         }
         const PassiveSkillRecord *skill = passiveSkillLookupRecord(skills[i]);
-        if (skill != NULL && ((skill->kind >> 6) & 0x1F) == 10) {
+        if (skill != NULL && ((skill->affinity >> 6) & 0x1F) == 10) {
             hpPercent += skill->hpPercentTens * 10;
             mpPercent += skill->mpPercentTens * 10;
-            bonusA = (s16)(bonusA + skill->statBonus[0]);
-            bonusB = (s16)(bonusB + skill->statBonus[1]);
-            bonusC = (s16)(bonusC + skill->statBonus[2]);
-            bonusD = (s16)(bonusD + skill->statBonus[3]);
-            bonusE = (s16)(bonusE + skill->statBonus[4]);
+            bonusA = (s16)(bonusA + skill->stats.statBonus[0]);
+            bonusB = (s16)(bonusB + skill->stats.statBonus[1]);
+            bonusC = (s16)(bonusC + skill->stats.statBonus[2]);
+            bonusD = (s16)(bonusD + skill->stats.statBonus[3]);
+            bonusE = (s16)(bonusE + skill->stats.statBonus[4]);
         }
     }
     u32 hp = stats[0];

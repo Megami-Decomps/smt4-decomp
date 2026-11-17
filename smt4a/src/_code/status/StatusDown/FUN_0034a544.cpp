@@ -1,4 +1,5 @@
 /* NON_MATCHING: the zeroed-field stores, the sprite setup scheduling and the pooled constants are laid out differently from retail (252 vs 249 rows); the screen setup is the same. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "util/MemoryHelpers.h"
 #include "common.h"
@@ -21,10 +22,7 @@ void sysMemClear(void *block, u32 size);
 u32 taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), u32 c, u32 d, void *process);
 void paramsClearPacket(void *packet);
 
-void uiSpriteStateInitFromSource(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
 void statusDownSetSpriteMode(s32 a, s32 b);
-void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 flag);
-void uiSpriteInitializeState(void *sprite, u32 group, s32 id, u32 size, void *owner, u32 anim, f32 scale);
 AsdText *spriteHandleCreate(u32 kind);
 void positionStateSet(AsdText *text, u32 a, u32 color, f32 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);

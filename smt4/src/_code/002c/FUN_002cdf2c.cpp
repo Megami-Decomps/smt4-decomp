@@ -1,5 +1,7 @@
 /* NON_MATCHING: the item merge loops and the passive-bonus loop are unrolled/scheduled differently from retail (207 vs 232 rows); the spoils application is the same. */
 #include "common.h"
+#include "shard/PassiveSkill.h"
+#include "result/Result.h"
 #include "code/Code0029.h"
 #include "gamedata/UnitRecordAccess.h"
 
@@ -14,17 +16,6 @@ typedef struct BattleSpoils {
     /* 0x38 */ u16 battleId;
 } BattleSpoils;
 
-/* The result screen block (only the fields written here, by their offsets). */
-typedef struct ResultBlock {
-    /* 0x0000 */ u8 unk0000[0x35B4];
-    /* 0x35B4 */ s32 totalExperience;
-    /* 0x35B8 */ s32 shareBySlot[24];
-    /* 0x3618 */ s32 gainedItemId[6];
-    /* 0x3630 */ s32 gainedItemCount[6];
-    /* 0x3648 */ u8 unk3648[8];
-    /* 0x3650 */ s32 totalGold;
-} ResultBlock;
-
 /* The party slot table (only the fields read here). */
 typedef struct PartySlots {
     u8 unk0000[0x90F0];
@@ -33,16 +24,10 @@ typedef struct PartySlots {
 } PartySlots;
 
 
-typedef struct PassiveRecord {
-    u8 unk00[0x2F];
-    u8 percent;                      /* the experience bonus percent */
-} PassiveRecord;
-
-extern ResultBlock *g_result;
 
 PartySlots *gameGetSlotTable(void);
 void *gameGetPlayerData(void);
-void resultSetMenuState(ResultBlock *result, s32 arg);
+void resultSetMenuState(ResultWork *result, s32 arg);
 void FUN_00269dc8(void);
 void FUN_00203640(u16 battleId);
 s32 mapMainIsBusy(void);
@@ -56,7 +41,6 @@ void soundChannelRequestIfEnabled(u32 id, s32 arg);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(StatBlock *unit, u32 bit);
-PassiveRecord *passiveSkillLookupRecord(u32 skill);
 
 /* Applies a finished battle's spoils to the result screen: stops the battle music, adds gold and
  * the items (merging stacks), counts the battle, adds the experience and shares it out to the
@@ -64,7 +48,7 @@ PassiveRecord *passiveSkillLookupRecord(u32 skill);
  * get 30%). */
 void FUN_002cdf2c(BattleSpoils *spoils)
 {
-    ResultBlock *result = g_result;
+    ResultWork *result = g_result;
     PartySlots *slots = gameGetSlotTable();
 
     gameGetPlayerData();
@@ -82,7 +66,7 @@ void FUN_002cdf2c(BattleSpoils *spoils)
     s32 gold = spoils->gold;
     s32 itemTotal = 0;
 
-    result->totalGold += gold;
+    result->gold += gold;
     for (s32 i = 0; i < 6; i++) {
         s32 id = spoils->itemId[i];
 
@@ -90,13 +74,13 @@ void FUN_002cdf2c(BattleSpoils *spoils)
             continue;
         }
         for (s32 j = 0; j < 6; j++) {
-            if (result->gainedItemId[j] == id) {
-                result->gainedItemCount[j] += spoils->itemCount[i];
+            if (result->itemIds[j] == id) {
+                result->itemCounts[j] += spoils->itemCount[i];
                 break;
             }
-            if (result->gainedItemId[j] == 0) {
-                result->gainedItemId[j] = id;
-                result->gainedItemCount[j] = spoils->itemCount[i];
+            if (result->itemIds[j] == 0) {
+                result->itemIds[j] = id;
+                result->itemCounts[j] = spoils->itemCount[i];
                 break;
             }
         }
@@ -141,14 +125,14 @@ void FUN_002cdf2c(BattleSpoils *spoils)
             u32 skill = unit->skills.ids[k];
 
             if (skill != 0) {
-                PassiveRecord *record = passiveSkillLookupRecord(skill);
+                const PassiveSkillRecord *record = passiveSkillLookupRecord(skill);
 
-                if (record != NULL && record->percent != 0) {
-                    multiplier = (f32)record->percent * 0.01f * multiplier;
+                if (record != NULL && record->experience.expBonus != 0) {
+                    multiplier = (f32)record->experience.expBonus * 0.01f * multiplier;
                 }
             }
         }
-        result->shareBySlot[unit->growth.slot] += (share * (s32)(multiplier * 100.0f)) / 100;
+        result->unitExperience[unit->growth.slot] += (share * (s32)(multiplier * 100.0f)) / 100;
     }
 }
 

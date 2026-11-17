@@ -1,50 +1,23 @@
 /* NON_MATCHING: retail spills r0-r3 and the position vector at different frame offsets and merges the slot-field addressing into shared base registers; the logic is the same. */
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/S1Mover.h"
 #include "code/Code0015.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* One number popup of the battle UI (0x400 bytes, starting at 0x75B4 of the UI block): five digit
- * sprites and the state that places them. */
-typedef struct BtlUiNumberSlot {
-    /* 0x000 */ u8 digitSprites[5][0x8C];
-    /* 0x2BC */ u8 unk2bc[0x118];
-    /* 0x3D4 */ Vec3f position;
-    /* 0x3E0 */ u8 active;
-    /* 0x3E1 */ u8 anchored;      /* whether the position was clamped on screen */
-    /* 0x3E2 */ u8 unk3e2[2];
-    /* 0x3E4 */ u32 digitTimers[5];
-    /* 0x3F8 */ s32 number;
-    /* 0x3FC */ u8 unk3fc;
-    /* 0x3FD */ u8 unk3fd[3];
-} BtlUiNumberSlot;
-
-typedef struct BtlUiNumberBlock {
-    /* 0x0000 */ u8 unk0000[0x75B4];
-    /* 0x75B4 */ BtlUiNumberSlot slots[1];
-} BtlUiNumberBlock;
-
-typedef struct BtlUiGlobals {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ BtlUiNumberBlock *block;
-} BtlUiGlobals;
-
-extern BtlUiGlobals g_btlUi;
-
 void FUN_002a1850(Vec3f *position, s32 arg, u32 value);
 u32 FUN_004aaff0(u32 handle, s32 slot);
-void uiSpriteSelectAnim(void *sprite, s32 anim);
 void uiStoreTextureEntryCenter(void *sprite, u32 kind, u32 index);
 void FUN_00358e94(void *sprite, s16 x, s16 y);
-void pairSetFirstResetSecond(void *sprite, s32 value);
 
 /* Starts a number popup in `slot`: places it at `position` (kept on screen when `anchored`), then
  * sets up one sprite per decimal digit of `number`, most significant first. */
 void FUN_004a9740(u32 handle, s32 slot, s32 number, u32 unused, Vec3f position, s32 small, s32 alt, s32 anchored)
 {
-    BtlUiNumberBlock *block = g_btlUi.block;
+    BtlUiA *ui = g_btlUi.ui;
     BtlUiNumberSlot *popup;
 
     if (anchored != 0) {
@@ -57,21 +30,21 @@ void FUN_004a9740(u32 handle, s32 slot, s32 number, u32 unused, Vec3f position, 
             position.y = 0.0f;
         }
     }
-    popup = (BtlUiNumberSlot *)((u8 *)block + slot * 0x400 + 0x75B4);
+    popup = &ui->objD.numbers.slots[slot];
     popup->active = 1;
     popup->anchored = anchored;
     popup->number = number;
     popup->position.x = position.x;
     popup->position.y = position.y;
     popup->position.z = position.z;
-    popup->unk3fc = 0;
+    popup->disabled = 0;
 
     u32 digitOffset = FUN_004aaff0(handle, slot);
     s32 divisor = 10000;
 
     for (s32 i = 4; i >= 0; i--) {
         popup->digitTimers[i] = 0;
-        void *sprite = popup->digitSprites[i];
+        UiSpriteState *sprite = &popup->digitSprites[i];
 
         uiSpriteSelectAnim(sprite, 3);
         uiStoreTextureEntryCenter(sprite, 13, i + 0x41A);

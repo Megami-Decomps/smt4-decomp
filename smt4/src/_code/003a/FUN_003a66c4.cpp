@@ -3,26 +3,14 @@
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/GamePlayerData.h"
-
-struct StepUnitRecord {
-    /* 0x00 */ u8 unk00[0x0E];
-    /* 0x0E */ s16 maxHp;
-    /* 0x10 */ s16 maxMp;
-    /* 0x12 */ u8 unk12[0x18];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ s16 mp;
-    /* 0x2E */ u8 unk2E[6];
-    /* 0x34 */ u16 skills[8];
-    /* 0x44 */ u16 flags;
-};
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-StepUnitRecord *gameGetUnitRecord(s32 slot);
 
 /* A percentage of max, never negative. */
-static u32 unitHasFlag(const StepUnitRecord *unit, u32 bit)
+static u32 unitHasFlag(const StatBlock *unit, u32 bit)
 {
-    return (static_cast<u32>(unit->flags) & (1 << (bit & 0xFF))) != 0;
+    return (static_cast<u32>(unit->ailments) & (1 << (bit & 0xFF))) != 0;
 }
 
 static s32 percentOfMax(s32 max, s32 percent)
@@ -32,7 +20,7 @@ static s32 percentOfMax(s32 max, s32 percent)
 }
 
 /* Heals the unit by a percentage of its maximum HP, keeping the result in 1..max. */
-static void unitHealHpPercent(StepUnitRecord *unit, s32 percent)
+static void unitHealHpPercent(StatBlock *unit, s32 percent)
 {
     s32 max = unit->maxHp;
     s32 hp = unit->hp + percentOfMax(max, percent);
@@ -55,7 +43,7 @@ static void healSideUnits(s32 percent, s32 count)
     const s8 *side = gameGetSlotTable()->active;
     for (s32 i = 0; i < count; ++i) {
         if (side[i] >= 0) {
-            StepUnitRecord *unit = gameGetUnitRecord(side[i]);
+            StatBlock *unit = gameGetUnitRecord(side[i]);
             if (!unitHasFlag(unit, 1) && !unitHasFlag(unit, 10) && !unitHasFlag(unit, 2))
                 unitHealHpPercent(unit, percent);
         }
@@ -68,12 +56,12 @@ static void healRegenSkillUnits(s32 percent, s32 count)
     const s8 *side = gameGetSlotTable()->active;
     for (s32 i = 0; i < count; ++i) {
         if (side[i] >= 0) {
-            StepUnitRecord *unit = gameGetUnitRecord(side[i]);
+            StatBlock *unit = gameGetUnitRecord(side[i]);
             if (!unitHasFlag(unit, 1) && !unitHasFlag(unit, 10) && !unitHasFlag(unit, 2)) {
                 u16 skills[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
                 if (unit != NULL) {
                     for (s32 k = 0; k < 8; ++k)
-                        skills[k] = unit->skills[k];
+                        skills[k] = unit->resist[k];
                 }
                 for (s32 k = 0; k < 9; ++k) {
                     if (skills[k] != 0 && skills[k] == 0x1C6) {

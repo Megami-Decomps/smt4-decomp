@@ -1,12 +1,8 @@
 /* NON_MATCHING: flag extraction now matches (and #16; lsrs #4); retail allocates the flag word in r2 and updates it in place (bic r2, r2, #112) where the build uses r1/r3 (register choice only). */
 #include "common.h"
+#include "addon/aocMain.h"
 
 namespace {
-
-struct AocMainView {
-    u8 unk00[0x754]; // 0x000
-    u32 unk754;     // 0x754
-};
 
 struct AocResultView {
     u8 unk00[0x108]; // 0x000
@@ -25,15 +21,14 @@ struct AocRequestView {
 }
 
 extern "C" {
-extern AocMainView* g_aocMain;
 void asdMemFree(void* allocation);
 AocResultView* scrScriptProcessCreate(void* storage, void* source);
 
 // Consume completion flags, releasing failed requests or recording the constructed result.
 u32 FUN_004d7e20(AocRequestView* request)
 {
-    const u32 flags = g_aocMain->unk754;
-    g_aocMain->unk754 = flags & ~0x70u;
+    const u32 flags = g_aocMain->flags;
+    g_aocMain->flags = flags & ~0x70u;
 
     u32 failed = (flags & 0x10u) >> 4;
     if (failed) {

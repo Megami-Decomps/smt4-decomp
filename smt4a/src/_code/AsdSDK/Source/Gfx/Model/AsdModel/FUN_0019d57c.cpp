@@ -1,6 +1,6 @@
 /* NON_MATCHING: as in FUN_001ad2a4, retail keeps the two arguments in the stack frame (push {r0, r1}) and reloads the file pointer for every container scan; the allocation and the scan order otherwise follow retail (about 240 diff lines). */
 #include "common.h"
-#include "shard/S3AsdModelAttr.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
@@ -15,7 +15,7 @@ extern const char DAT_0053d1a0[];  /* "EPLSIGN" */
 
 /* Rebuilds the model's attribute records from the file's containers: one record per id of every entry that has bit 0
  * of its flags set (the key-less sibling of FUN_001ad2a4). */
-void FUN_0019d57c(AsdModelAttrModel *model, u8 *data)
+void FUN_0019d57c(AsdMdlNode *model, u8 *data)
 {
     AsdEplBlockHeader block;
     AsdEplEntry *entry;

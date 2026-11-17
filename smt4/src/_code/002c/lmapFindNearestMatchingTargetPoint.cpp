@@ -1,6 +1,7 @@
 /* NON_MATCHING: float conversions are allocated directly to preserved registers, argument lifetimes differ, and loop-count scheduling moves; candidate -O2. */
 #include "shard/S1Mover.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "util/MathFunctions.h"
 
 struct Entry;
 struct MapTargetPoint {
@@ -17,7 +18,6 @@ extern "C" {
 extern MapObjectRequest *g_mapObj;
 s32 dataTableGetRecordFortyFive(void);
 Entry *mapObjGetCombinedEntry(u32 index);
-f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 void lmapFindNearestMatchingTargetPoint(s32 firstKind, s32 secondKind, s32 thirdKind,
                   Vec3f *output, f32 *yaw, s32 direction, Vec3f origin)

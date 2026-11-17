@@ -1,16 +1,14 @@
 /* NON_MATCHING: only the unit-loop affinity call's argument setup differs: retail loads unit (r1), 11 (r2), then the output address (r0). */
-#include "shard/Shard0031.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 #include "shard/Shard0034.h"
-#include "shard/Shard004B.h"
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-PartyStatusSlots *gameGetSlotTable(void);
-BitsAt60 *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
 s32 randRange(s32 maximum);
 void demonBuildAffinitySlots(u16 *affinities, const PlayerDataA *player);
-void affinityResolveUnitSlot(u16 *affinity, const BitsAt60 *unit, u32 element);
+void affinityResolveUnitSlot(u16 *affinity, const SlotRecordA *unit, u32 element);
 
 static inline s32 statusAffinityAllows(u16 affinity)
 {
@@ -20,7 +18,7 @@ static inline s32 statusAffinityAllows(u16 affinity)
     return 1;
 }
 
-static inline s32 unitAffinityAllows(BitsAt60 *unit, u16 *affinities)
+static inline s32 unitAffinityAllows(SlotRecordA *unit, u16 *affinities)
 {
     affinityResolveUnitSlot(affinities, unit, 11);
     return statusAffinityAllows(affinities[0]);
@@ -54,7 +52,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
     case 0:
     case 1:
         count = gameSlotTableFindFree();
-        slots = gameGetSlotTable()->active.slots;
+        slots = gameGetSlotTable()->party;
         break;
     case 2:
     case 3:
@@ -68,20 +66,20 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
         if (slots[index] < 0) {
             continue;
         }
-        BitsAt60 *unit = gameGetSlotRecord(slots[index]);
-        if (unit->bits & 2) {
+        SlotRecordA *unit = gameGetSlotRecord(slots[index]);
+        if (unit->ailments & 2) {
             continue;
         }
-        if (unit->bits & 0x400) {
+        if (unit->ailments & 0x400) {
             continue;
         }
-        if (unit->bits & mask) {
+        if (unit->ailments & mask) {
             continue;
         }
         if (randRange(99) < chance) {
             if (condition == 5 && !unitAffinityAllows(unit, affinities))
                 continue;
-            unit->bits |= mask;
+            unit->ailments |= mask;
         }
     }
 }

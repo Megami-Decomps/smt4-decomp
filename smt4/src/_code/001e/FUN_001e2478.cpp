@@ -1,12 +1,11 @@
 /* NON_MATCHING: direction intermediate stores are folded, and scene-position snapshots use integer copies. */
-#include "map/LmapGlobals.h"
+#include "map/LmapMainGlobals.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 #include "gamedata/DataTableAccess_AocTable23.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
-extern LmapMainState *g_lmapMainState;
 u32 table23FindRecordByKey(s32 map, s32 group, u32 point);
-f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
 
 // Move the map scene from its current position or a named waypoint toward another waypoint.
 void FUN_001e2478(s32 startGroup, u32 startPoint, s32 targetGroup, u32 targetPoint)
@@ -43,7 +42,7 @@ void FUN_001e2478(s32 startGroup, u32 startPoint, s32 targetGroup, u32 targetPoi
     work->target.x = target->x;
     work->target.y = target->y;
     work->target.z = target->z;
-    f32 distance = mathDistanceBetweenPoints(work->start, work->target);
+    f32 distance = mathDistanceBetweenPoints(work->start.x, work->start.y, work->start.z, work->target.x, work->target.y, work->target.z);
     work->direction.x = work->target.x - work->start.x;
     work->direction.y = work->target.y - work->start.y;
     work->direction.z = work->target.z - work->start.z;

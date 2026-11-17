@@ -6,7 +6,7 @@ Obj422318::Obj422318(s32 mode)
 {
     unk24 = 0;
     child = NULL;
-    handle = 0;
+    handle = NULL;
     flags = 0;
     timerFlags = 1;
     unk0c = 0;

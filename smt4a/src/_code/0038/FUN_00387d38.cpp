@@ -5,9 +5,9 @@
 #include "event/2dEvent/EventEffect.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartyStatusSlots *gameGetSlotTable();
 void FUN_003c1060();
 void FUN_00331380(s32 value);
 void sysPlaySe(s32 sound);
@@ -40,7 +40,7 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
         state->previousId = state->selectedId;
         state->selectedId = FUN_003b6fc4();
         state->destination = -1;
-        PartyStatusSlots *party = gameGetSlotTable();
+        SaveSlotTableA *party = gameGetSlotTable();
         for (s32 index = 0; index < 3; ++index) {
             if (party->reserve[index] >= 0 &&
                 gameGetSlotRecord(party->reserve[index])->id == state->selectedId &&
@@ -52,9 +52,9 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
         }
         if (state->destination == -1) {
             for (s32 index = 0; index < 24; ++index) {
-                if (party->active.slots[index] >= 0 &&
-                    gameGetSlotRecord(party->active.slots[index])->id == state->selectedId &&
-                    gameGetSlotRecord(party->active.slots[index])->id == state->source->record.ailments) {
+                if (party->party[index] >= 0 &&
+                    gameGetSlotRecord(party->party[index])->id == state->selectedId &&
+                    gameGetSlotRecord(party->party[index])->id == state->source->record.ailments) {
                     FUN_003c1060();
                     state->destination = 5;
                     break;

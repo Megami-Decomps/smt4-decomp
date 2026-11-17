@@ -1,17 +1,12 @@
 /* NON_MATCHING: twin of the IV FUN_002a3ab0 - retail holds the matrix and base quaternion in VFP registers across the loop and passes the result halves through a stack pair; the VFP load/multiply-accumulate order differs. */
 #include "common.h"
+#include "shard/Resource.h"
 
-namespace {
 struct Vec4 {
     f32 x, y, z, w;
 };
 
-struct SkelOwner {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 type;
-    /* 0x06 */ u8 unk06[2];
-    /* 0x08 */ void *object;
-};
+namespace {
 
 /* A joint of the pose chain. */
 struct SkelNode {
@@ -26,7 +21,7 @@ struct SkelNode {
     /* 0x74 */ f32 scaleB;
     /* 0x78 */ u8 unk78[0x14];
     /* 0x8c */ SkelNode *firstChild;
-    /* 0x90 */ SkelOwner *owner;
+    /* 0x90 */ Resource *resource;
     /* 0x94 */ u8 unk94[0x18];
     /* 0xac */ SkelNode *next;
 };
@@ -40,17 +35,10 @@ struct SkelWorkspace {
     /* 0x140 */ f32 matrix[16];          /* built from the quaternion */
 };
 
-/* A row of the per-type handler table (0x44 bytes). */
-struct SkelHandler {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ void (*apply)(void *object, Vec4 rotation);
-    /* 0x24 */ u8 unk24[0x20];
-};
 }
 
 extern "C" {
 extern SkelWorkspace DAT_006471dc;
-extern SkelHandler g_handlerTable[];
 void FUN_001bc460(void);
 
 /* Poses the joint chain below `root`: the workspace quaternion is root's rotation plus the given offset, and
@@ -100,10 +88,11 @@ void FUN_001b4eb8(SkelNode *root, Vec4 *offsetIn)
         workspace->quaternion.y = workspace->quaternion.y + workspace->offset.y;
         workspace->quaternion.z = workspace->quaternion.z + workspace->offset.z;
         workspace->quaternion.w = workspace->quaternion.w + workspace->offset.w;
-        SkelOwner *owner = node->owner;
-        void (*apply)(void *, Vec4) = g_handlerTable[owner->type].apply;
+        Resource *resource = node->resource;
+        /* The position handler; retail passes the vector by value here. */
+        void (*apply)(void *, Vec4) = reinterpret_cast<void (*)(void *, Vec4)>(g_handlerTable[resource->type].setPosition);
         if (apply != NULL) {
-            apply(owner->object, workspace->quaternion);
+            apply(resource->data, workspace->quaternion);
         }
     }
 }

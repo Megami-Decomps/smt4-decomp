@@ -1,13 +1,12 @@
 /* NON_MATCHING: index -= 4 (unfolded), arm order and positive final guard now match; retail also merges the state-6 tails into the state-8 tail (b 178) and copies the state-6 part pointer through r0 into r5, ours keeps separate tails. */
 #include "ui/PartyPanelState.h"
 #include "gamedata/UnitStats.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 s32 objectPartRunUnlessLocked(void *part);
 s32 listCursorGetRowIfUnblocked(void *part);
-PartyDamageSlotsIV *gameGetSlotTable(void);
-StatBlock *gameGetUnitRecord(s32 slot);
 }
 
 static __inline s32 selectedPartyPositionToSlot(s32 position)

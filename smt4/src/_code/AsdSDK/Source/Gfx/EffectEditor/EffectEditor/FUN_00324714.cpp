@@ -1,4 +1,5 @@
 /* NON_MATCHING: related-item argument registers, catalog-loop hoisting and count-update branches differ. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 extern "C" {
 extern EffectSelectionContext DAT_0044f858;

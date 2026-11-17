@@ -1,5 +1,5 @@
 /* NON_MATCHING: the motion getter now matches; the saved registers holding zero and the range-work global are exchanged. */
-#include "shard/W4_Match1b_Node.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 #include "game/GameState.h"
@@ -7,15 +7,10 @@
 
 struct Inner0020ffe0;
 namespace {
-struct RangeModel {
-    /* 0x00 */ NodeOwner transform;
-    /* 0x30 */ u8 unk30[8];
-    /* 0x38 */ s32 motion;
-};
 struct RangeModelBinding {
     /* 0x00 */ u32 flags;
     /* 0x04 */ u32 unk04;
-    /* 0x08 */ RangeModel* model;
+    /* 0x08 */ AsdMdlNode* model;
 };
 struct RangeModelSlot {
     /* 0x00 */ RangeModelBinding* binding;
@@ -51,18 +46,17 @@ struct RangeWork {
 
 inline void setModelEnabled(RangeModelBinding* binding, u8 enabled)
 {
-    reinterpret_cast<AnimationVisualPart*>(binding->model->transform.object)->enabled = enabled;
+    reinterpret_cast<AnimationVisualPart*>(binding->model->sceneNode)->enabled = enabled;
 }
 }
 
 extern "C" {
 extern RangeWork* g_mapRangeWork;
-void modelSetScale(RangeModel*, f32);
-void nodeSetPropertyScale(RangeModel*, f32);
-void nodeSetTranslation(NodeOwner*, u32, const NodeVec3*);
-void modelPartSetRotationDegrees(NodeOwner*, u32, f32, f32, f32);
-void modelSelectPrimaryMotion(RangeModel*, s32, f32);
-void modelSelectSecondaryMotion(RangeModel*, s32, f32);
+void modelSetScale(AsdMdlNode*, f32);
+void nodeSetPropertyScale(AsdMdlNode*, f32);
+void modelPartSetRotationDegrees(AsdMdlNode*, s32, f32, f32, f32);
+void modelSelectPrimaryMotion(AsdMdlNode*, s32, f32);
+void modelSelectSecondaryMotion(AsdMdlNode*, s32, f32);
 u32 modelGetCurrentMotion(Inner0020ffe0 *model);
 
 /* Apply visibility and queued transforms to the sixteen active range entries. */
@@ -91,8 +85,8 @@ void mapRangeUpdateModelVisibilityAndTransforms()
                 setModelEnabled(binding, 1);
             }
             if (entry->transformPending) {
-                nodeSetTranslation(&binding->model->transform, 0, &entry->position);
-                modelPartSetRotationDegrees(&binding->model->transform, 0, 0.0f, entry->heading, 0.0f);
+                nodeSetTranslation(binding->model, 0, &entry->position.x);
+                modelPartSetRotationDegrees(binding->model, 0, 0.0f, entry->heading, 0.0f);
                 if ((s32)modelGetCurrentMotion(reinterpret_cast<Inner0020ffe0 *>(binding->model)) != entry->motion) {
                     modelSelectPrimaryMotion(binding->model, entry->motion, 0.0f);
                     modelSelectSecondaryMotion(binding->model, entry->motion, 0.0f);

@@ -3,6 +3,7 @@
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SaveSlotTable.h"
+#include "util/BitsAndBytes_VariantF_Shard004B.h"
 
 struct TalkCandidateParty {
     u8 unk0000[0x1c88];
@@ -18,13 +19,11 @@ struct TalkCandidateMasks {
     u64 unk20;
     u64 excluded;
 };
-struct BitsAt60;
 
 extern "C" {
 extern TalkCandidateMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32);
 void scrSetResult(s32);
-u8 bitsAt60Test(BitsAt60 *, u8);
 u32 FUN_004bd0d8(SlotRecordA *);
 u32 randRange(s32);
 
@@ -42,8 +41,8 @@ u32 btlTalkChooseRandomPartyTarget()
             s8 slot = ((TalkCandidateParty *)gameGetSlotTable())->slots[index];
             if (slot >= 0) {
                 SlotRecordA *record = gameGetSlotRecord(slot);
-                if (!bitsAt60Test((BitsAt60 *)record, 1) &&
-                    !bitsAt60Test((BitsAt60 *)record, 10) && record->id != excludedId) {
+                if (!bitsAt60Test(record, 1) &&
+                    !bitsAt60Test(record, 10) && record->id != excludedId) {
                     if (!FUN_004bd0d8(record)) {
                         candidates[available] = slot;
                         ++available;

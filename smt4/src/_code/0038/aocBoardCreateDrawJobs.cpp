@@ -1,13 +1,13 @@
 #include "gfx/DrawParameterOwner.h"
+#include "addon/aocMain.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
-extern u32 g_aocMain;
 extern const char DAT_003ff778[]; // "Aoc board CALC"
 extern const char DAT_003ff768[]; // "Aoc board UP L"
 extern const char DAT_003ff758[]; // "Aoc board UP R"
 extern const char DAT_003ff748[]; // "Aoc board DOWN"
-u32 FUN_002347b8(u32, u32, void *);
+u32 FUN_002347b8(AocMain *main, u32 resource, void *strings);
 s32 FUN_0038a1e0(u32);
 s32 FUN_0038a478(u32);
 s32 aocBoardDrawParameterOverlay(u32);

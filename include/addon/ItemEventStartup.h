@@ -8,7 +8,7 @@ struct ItemEventStartup {
     u8 unk04[8];
     void *script;
     void *messages;
-    ScriptRunState *process;
+    ScriptProcess *process;
 };
 typedef char ItemEventStartupLayoutCheck[offsetof(ItemEventStartup, script) == 0xC &&
     offsetof(ItemEventStartup, process) == 0x14 && sizeof(ItemEventStartup) == 0x18 ? 1 : -1];

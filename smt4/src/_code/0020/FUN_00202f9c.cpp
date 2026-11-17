@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "gamedata/GameDataAccess_Smt4.h"
 
-struct ScriptResource;
+struct ScriptProcess;
 
 extern "C" {
 
@@ -15,7 +15,7 @@ typedef struct SceneState {
     /* 0x005 */ u8 unk005[0x23B];
     /* 0x240 */ void *buffer240;
     /* 0x244 */ void *buffer244;
-    /* 0x248 */ ScriptResource *buffer248;
+    /* 0x248 */ ScriptProcess *buffer248;
     /* 0x24C */ u8 unk24C[0x104];
     /* 0x350 */ void *buffer350;
     /* 0x354 */ u8 unk354[0xC];
@@ -40,7 +40,7 @@ int msgWindowReset(void);
 int messageMainSetEnabled(int arg);
 int gameGlobalsSetSelected(int arg);
 int buttonHelpSetText(int arg0, int color);
-void scrScriptProcessDestroy(ScriptResource *resource);
+void scrScriptProcessDestroy(ScriptProcess *resource);
 int ifTouchRegionRemove(void);
 int jobStop(void *context, int arg);
 

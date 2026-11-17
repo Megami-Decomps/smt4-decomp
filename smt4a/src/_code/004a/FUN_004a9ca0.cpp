@@ -1,4 +1,4 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BtlUnitLinkA {
     u8 unk00[0x62];  // 0x00
@@ -20,7 +20,6 @@ extern "C" {
 
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
-extern BtlUiGlobalsA g_btlUi;
 
 /* Stores a unit record in the UI slot of the battle unit it names (first four units). */
 void FUN_004a9ca0(u32 unused, BtlUiUnitRecordA *record)

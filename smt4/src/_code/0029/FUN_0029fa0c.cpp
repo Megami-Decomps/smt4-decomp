@@ -2,13 +2,13 @@
 #include "gamedata/FusionRecipe.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match2_RecordValue.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "battle/btlHelp.h"
 #include "gamedata/DataTableAccess_Smt4.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 gameFlagIsSet(u32 flag);
 bool gameRecordCopy(u32 id, GameSavedItem *record);
 s32 gameCountUnits(void);
@@ -20,7 +20,7 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
     struct CompleteRecipeView { FusionRecipe recipe; u16 result; };
     typedef char CompleteRecipeResultOffset[offsetof(CompleteRecipeView, result) == 0x1A ? 1 : -1];
     u16 written = 0;
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     for (u16 index = 0; index < dataTable05Sub4GetCount(); ++index) {
         const CompleteRecipeView *entry = (const CompleteRecipeView *)dataTable54FindById(index);
         if (!entry)

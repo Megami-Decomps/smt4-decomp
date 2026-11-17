@@ -4,7 +4,6 @@
 
 extern "C" {
 
-extern AllocatorState g_allocationAddressRanges;
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 
 /* Takes the allocator lock (a kernel mutex), reporting a failed wait. */

@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "classes/Obj4222ac.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
@@ -9,14 +10,14 @@ struct Obj4222acTransition {
     u8 unk1c[0x2A0];
     f32 progress;
 };
+/* NodeEnableResource is this code's partial view of the model (AsdMdlNode). */
 extern "C" {
 extern Obj4222acTransition *DAT_004474f4;
-void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
 void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 }
 
-static __inline NodeEnableNode *modelOf(u32 handle)
+static __inline NodeEnableNode *modelOf(AsdMdlObject *handle)
 {
     return (NodeEnableNode *)handle;
 }
@@ -58,10 +59,10 @@ void Obj4222ac::updateMotion()
                 amount = 1;
             }
             translated[1] += amount * 100.0f;
-            nodeSetTranslation(modelOf(handle)->resource, 0, translated);
+            nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->resource), 0, translated);
             modelPartSetRotationDegrees(modelOf(handle)->resource, 0, amount * -60.0f, DAT_004474f4->heading + 180.0f, 0);
         } else {
-            nodeSetTranslation(modelOf(handle)->resource, 0, translated);
+            nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->resource), 0, translated);
             modelPartSetRotationDegrees(modelOf(handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
         }
         nodeSetScale(modelOf(handle)->resource, 0, scale[0], scale[1], scale[2]);

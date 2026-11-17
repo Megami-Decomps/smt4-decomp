@@ -1,7 +1,9 @@
 /* NON_MATCHING: shared phase helpers outline differently, state-null checks merge, and round-reset/effect aggregate scheduling differs from retail. */
 #include "battle/BattleUnitSlot.h"
+#include "addon/aocMain.h"
 #include <stddef.h>
 #include "game/GameState.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 struct BattleTaskActor {
     u8 unk00[0x50];
@@ -117,7 +119,6 @@ struct BattleTaskUnit {
     u8 unk2c[0xeec];
     u32 pending;
 };
-struct BattleTaskAocMain { u8 unk00[0xa8]; u32 controller; };
 typedef char BattleTaskActorSizeCheck[sizeof(BattleTaskActor) == 0x114 ? 1 : -1];
 typedef char BattleTaskReserveSizeCheck[sizeof(BattleTaskReserve) == 0x288 ? 1 : -1];
 typedef char BattleTaskParametersSizeCheck[sizeof(BattleTaskParameters) == 0x74 ? 1 : -1];
@@ -129,7 +130,6 @@ extern BattleTaskGlobals g_btlMainState;
 extern void *g_btlUiBlock, *g_btlActionReflect, *g_btlEvent, *g_btlScriptUnit, *g_btlAiScript;
 extern void *DAT_00435d18, *g_btlMain;
 extern BattleTaskGate *DAT_004398d4;
-extern BattleTaskAocMain *g_aocMain;
 s32 jobIsValid(u32 job);
 s32 spriteTablesLoadedEnough(void *ui);
 s32 jyoucyuEnsureResidentEntry();
@@ -183,7 +183,6 @@ BattleTaskScript *scrScriptProcessCreate(void *data, u32 flags);
 s32 screenFadesAllReady();
 void frameTexResetFlags();
 void soundChannelStopAll(u32 channels);
-void *gameGetSlotTable();
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void *rt_memcpy(void *destination, const void *source, u32 size);
 void *saveGetUnlockFlagBlock();
@@ -195,8 +194,8 @@ void sequenceRequestFlushDeferred();
 void FUN_0027db24(u32 result);
 void FUN_002faf88();
 void asdSequenceRequestInitial();
-s32 FUN_0039440c(void *controller);
-void FUN_00394508(void *controller);
+s32 FUN_0039440c(AocScriptHolder *controller);
+void FUN_00394508(AocScriptHolder *controller);
 s32 gameStateIsFlagSetAndLarge();
 void asdSequenceRequest(u32 sequence, const void *parameters, u32 size);
 s32 FUN_00287800();
@@ -389,8 +388,8 @@ static inline void completeBattleTask(BattleTaskContext *work)
                 asdSequenceRequestInitial();
             }
         } else if (work->result == 14) {
-            if (!FUN_0039440c(&g_aocMain->controller))
-                FUN_00394508(&g_aocMain->controller);
+            if (!FUN_0039440c(&g_aocMain->scriptHolder))
+                FUN_00394508(&g_aocMain->scriptHolder);
         } else if (sequenceRequestIsDeferred()) {
             sequenceRequestFlushDeferred();
         } else if (gameStateIsFlagSetAndLarge()) {

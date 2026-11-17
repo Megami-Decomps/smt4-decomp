@@ -2,9 +2,11 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "battle/btlAction.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitStats.h"
 struct BtlUi;
 struct BtlEntry;
 /* Queued IDs and entry slots are outside the short shared prefixes. */
@@ -21,7 +23,6 @@ struct BattleSummaryBuffer {
 extern "C" {
 extern BtlUi *g_btlUiBlock;
 void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const NkmEnemyRecord *definition);
-PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 flagWordTestBit(const void *owner, u32 bit);
 void objectFlagsClear(void *owner, u32 flags);
 void btlSummaryInitializeSavedDemon(BtlMainState *battle, BtlUnitData *data, StatBlock *unit, s32 slot);
@@ -35,7 +36,7 @@ void FUN_003c1248(s32 kind, s32 source, s32 target, s32 animate)
     BtlMainState *battle = btlGetMainState();
     BattleSummaryBuffer summary;
     if (!kind) {
-        PartyDamageSlotsIV *party = gameGetSlotTable();
+        SaveSlotTableIV *party = gameGetSlotTable();
         StatBlock *unit = gameGetUnitRecord(party->stock[source]);
         if (flagWordTestBit(unit, 1)) {
             unit->hp = unit->maxHp;

@@ -4,7 +4,6 @@
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-extern EngineUnitsRef g_engineCleanupOwner;
 extern const char DAT_00533cf4[];
 extern const char DAT_00533ce8[];
 extern const char DAT_00533cd4[];

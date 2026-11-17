@@ -1,8 +1,6 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 
-extern "C" AocMain *g_aocMain;
-
 static __inline bool aocOperationBusy(u32 flags)
 {
     if (flags & 4)

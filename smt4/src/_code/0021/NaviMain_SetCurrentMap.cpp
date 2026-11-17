@@ -1,23 +1,16 @@
-#include "common.h"
+#include "mapnavi/NaviMainGlobals.h"
+
 extern "C" {
-struct MapCounter {
-    u32 map;
-    u32 counter;
-};
-struct NavigationMapWork {
-    u8 unk00[0x28];
-    MapCounter current;
-    u8 unk30[0x10];
-    u32 field;
-};
-extern NavigationMapWork *g_naviMain;
+
 void naviFieldSetCurrentMap(u32 *field, u32 map);
 
 /* Select the current navigation map and reset its counter. */
 void NaviMain_SetCurrentMap(u32 map)
 {
-    MapCounter current = {map, 0};
-    g_naviMain->current = current;
-    naviFieldSetCurrentMap(&g_naviMain->field, map);
+    NaviMain *navi = g_naviMain;
+    navi->currentMap = map;
+    navi->unk2C = 0;
+    naviFieldSetCurrentMap(navi->state, map);
 }
+
 }

@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a7bb8` (_code @ 0x2a7bb8, 0x1abc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -7,6 +7,7 @@
 #include "addon/LookupRecord.h"
 #include "camp/CampStateQueries.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -57,7 +58,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
@@ -67,7 +67,6 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
-extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
 /* Supplied declaration required: gameDataCopySaveEntry. */
 extern int recordGetModeForId(int);
@@ -407,16 +406,16 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   efctSetSpeed();
   if (((!(temp_v6 == 1 || temp_v6 == 2)) && (!(temp_v6 == 6 || temp_v14 == 1))) &&
      ((!(temp_v14 == 2 || temp_v14 == 6) && (!((temp_v10 == 1 || temp_v10 == 2) || temp_v10 == 6))))) {
-    temp_v11 = vec2GetYInt(temp_v2 + 0xb0);
+    temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0xb0));
     temp_v1 = *(short *)(temp_v4 + 10);
-    temp_v12 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0xb0));
+    temp_v12 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0xb0)));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x131,temp_v12 + temp_v9 + (int)*(short *)(temp_v4 + 8),
                  temp_v11 + temp_v8 + (int)temp_v1,0x83);
   }
   else {
-    temp_v11 = vec2GetYInt(temp_v2 + 0xb0);
+    temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0xb0));
     temp_v1 = *(short *)(temp_v4 + 10);
-    temp_v12 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0xb0));
+    temp_v12 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0xb0)));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x28a,temp_v12 + temp_v9 + (int)*(short *)(temp_v4 + 8),
                  temp_v11 + temp_v8 + (int)temp_v1,0x83);
   }

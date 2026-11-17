@@ -15,7 +15,6 @@ struct StateWithExtraSlots {
 
 extern "C" {
 extern MapStateSlots *g_mapStateSlots;
-void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
 void modelPartSetRotationDegrees(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 void modelSelectPrimaryMotion(AsdMdlNode *node, f32 blend);
 void modelSelectSecondaryMotion(AsdMdlNode *node, u32 motion, f32 blend);
@@ -32,12 +31,12 @@ void FUN_00275364(void)
                 if (g_gameState.loading != 0) {
                     if ((model->flags & 2) == 0) {
                         model->flags |= 2;
-                        model->node->resource->positionFollowed = 0;
+                        model->node->sceneNode->positionFollowed = 0;
                     }
                 } else {
                     if ((model->flags & 2) != 0) {
                         model->flags &= ~2;
-                        model->node->resource->positionFollowed = 1;
+                        model->node->sceneNode->positionFollowed = 1;
                     }
                     if (slot->motion.mode != 0) {
                         nodeSetTranslation(model->node, 0, slot->motion.position);
@@ -70,12 +69,12 @@ void FUN_00275364(void)
             if (g_gameState.loading != 0) {
                 if ((flags & 2) == 0) {
                     model->flags = flags | 2;
-                    model->node->resource->positionFollowed = 0;
+                    model->node->sceneNode->positionFollowed = 0;
                 }
             } else {
                 if ((flags & 2) != 0) {
                     model->flags = flags & ~2;
-                    model->node->resource->positionFollowed = 1;
+                    model->node->sceneNode->positionFollowed = 1;
                 }
                 if (slot->motion.mode != 0) {
                     nodeSetTranslation(model->node, 0, slot->motion.position);

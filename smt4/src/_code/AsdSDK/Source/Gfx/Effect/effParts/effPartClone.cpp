@@ -1,6 +1,7 @@
 /* NON_MATCHING: structure matches retail; register allocation is permuted (retail keeps the part in r5 and the zero in r9, the kind in sl) and the inlined block clone narrows the handler index differently, as in FUN_00222180. */
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
+#include "shard/Resource.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -47,7 +48,6 @@ struct EffOrientation {
 
 extern "C" {
 extern const char g_effPartsSourcePath[];
-extern EffBlockHandler g_handlerTable[];
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 category, u32 track);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void effPartInitDefaults(void *part);

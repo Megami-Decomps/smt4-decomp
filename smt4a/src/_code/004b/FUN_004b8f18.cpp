@@ -34,8 +34,8 @@ struct MapReturnSaveValuesA {
 typedef char MapReturnSaveValuesSizeCheck[sizeof(MapReturnSaveValuesA) == 24 ? 1 : -1];
 extern "C" {
 void infoWinSetValue(s32);
-s32 FUN_0047e150(AocMainAObjC *);
-void helpResourcesRelease(AocMainAObjC *);
+s32 FUN_0047e150(AocScriptHolder *);
+void helpResourcesRelease(AocScriptHolder *);
 void gameDataSaveSetValues(const MapReturnSaveValuesA *);
 void gameDataCopySaveToWork();
 void __ARM_common_memcpy4_6(void *, const u16 *);

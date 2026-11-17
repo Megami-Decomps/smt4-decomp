@@ -3,6 +3,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
 
 // Status icon strip of one party member: only the fields used here.
 struct StatusStrip {
@@ -25,7 +26,6 @@ struct UnitStatus {
 extern "C" {
 
 
-UnitStatus* gameGetSlotRecord(s32 index);
 UnitStatus* btlMainGetUnk14(void);
 void effectDispatchSelector(s16 icon, s32 x, s32 y, s32 kind, f32 alpha);
 void FUN_0035ae58(s32 x, s32 y, s32 w, s32 h, s32 arg);

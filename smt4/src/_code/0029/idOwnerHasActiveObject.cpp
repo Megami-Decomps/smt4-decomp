@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/PassiveSkill.h"
 
 extern "C" {
 
@@ -7,13 +8,6 @@ typedef struct IdOwner {
     /* 0x34 */ u16 ids[8];
 } IdOwner;
 
-typedef struct IdObject {
-    /* 0x00 */ u8 unk00[0x35];
-    /* 0x35 */ u8 active;
-} IdObject;
-
-extern IdObject *passiveSkillLookupRecord(u32 id);
-
 /* Returns 1 when any of the owner's eight ids resolves to an active object. */
 u32 idOwnerHasActiveObject(IdOwner *owner)
 {
@@ -21,9 +15,9 @@ u32 idOwnerHasActiveObject(IdOwner *owner)
 
     for (i = 0; i < 8; i++) {
         if (owner->ids[i] != 0) {
-            IdObject *object = passiveSkillLookupRecord(owner->ids[i]);
+            const PassiveSkillRecord *object = passiveSkillLookupRecord(owner->ids[i]);
 
-            if (object != NULL && object->active != 0) {
+            if (object != NULL && object->rank.tier != 0) {
                 return 1;
             }
         }

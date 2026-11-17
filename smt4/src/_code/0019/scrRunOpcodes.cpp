@@ -2,11 +2,11 @@
 
 extern "C" {
 
-typedef int (*OpcodeHandler)(ScriptVmProcess *process);
+typedef int (*OpcodeHandler)(ScriptProcess *process);
 extern OpcodeHandler g_scriptOpcodeHandlers[];  /* opcode handler table */
 
 /* Runs opcode handlers until one yields (1) or finishes the script (0 -> 2). */
-u32 scrRunOpcodes(ScriptVmProcess *process)
+u32 scrRunOpcodes(ScriptProcess *process)
 {
     while (1) {
         int result = g_scriptOpcodeHandlers[process->code[process->pc].decoded.opcode](process);

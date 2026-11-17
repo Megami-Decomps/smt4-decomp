@@ -1,9 +1,9 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 /* Applies a signed setting to the global manager's sub-system and, when requested, re-applies its state. */
 #include "common.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 void NaviMain_EnterState1(u32 *state);
 void backgroundConsumeReset(u32 *state);

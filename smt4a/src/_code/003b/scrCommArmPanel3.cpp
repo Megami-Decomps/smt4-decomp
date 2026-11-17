@@ -1,6 +1,6 @@
 #include "ui/MessageMainA.h"
 #include "shard/Shard003B.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 

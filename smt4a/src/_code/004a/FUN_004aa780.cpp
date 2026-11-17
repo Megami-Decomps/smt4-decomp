@@ -1,9 +1,8 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/X14_BtlUiClose.h"
 
 extern "C" {
 
-extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004aa780(u32 unused, u8 value)
 {

@@ -2,6 +2,7 @@
 #include "battle/BtlEntry.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 namespace {
 struct RequestedUnitWork {
@@ -21,7 +22,6 @@ struct RequestedUnitSlots {
 
 extern "C" {
 s32 partyPanelGetRequestedUnitId();
-u8* gameGetSlotTable();
 void FUN_002579bc(s32 index);
 
 s32 campCecClassifyRequestedUnit(void* context)

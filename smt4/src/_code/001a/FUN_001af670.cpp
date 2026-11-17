@@ -3,6 +3,7 @@
 #include "ui/PartyPanel.h"
 #include "code/Code001a_Smt4.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 u32 dataTable24Sub0GetRecordS90X(u32);
@@ -10,7 +11,6 @@ const u16 *dataTable24Sub0GetRecordS90(u32);
 s32 FUN_002240b4(u32);
 void texDrawCompositeSprite(s32, s32, s32, s32, s32, s32);
 void efctSetSpeed(f32);
-f32 vec2GetSpeed(const void *object);
 void textDrawString(s32, u32, const u16 *, f32, f32, f32, f32, f32);
 
 // Draw a highlighted or ordinary entry label with its availability indicator.
@@ -23,12 +23,12 @@ void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 s
         texDrawCompositeSprite(2, 36, 16, x, y, 101);
         texDrawTableEntryAtStoredOrigin(2, 36, 0x95, x, y, 106);
         if (FUN_002240b4(record)) {
-            efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect));
+            efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&static_cast<LabelOwnerView *>(owner)->effect)));
             texDrawTableEntryAtStoredOrigin(2, 36, 0x97, x, y, 109);
             efctSetSpeed(speed);
             texDrawTableEntryAtStoredOrigin(2, 36, 0x91, x, y, 111);
         } else {
-            efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect));
+            efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&static_cast<LabelOwnerView *>(owner)->effect)));
             texDrawTableEntryAtStoredOrigin(2, 36, 0x96, x, y, 111);
             efctSetSpeed(speed);
         }

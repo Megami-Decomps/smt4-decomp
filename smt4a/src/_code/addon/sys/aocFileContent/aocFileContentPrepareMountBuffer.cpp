@@ -14,7 +14,6 @@ struct AocFileContentWork {
 }
 
 extern "C" {
-extern AocMain* g_aocMain;
 extern const char g_aocFileContentSourcePath[];
 extern const char g_aocMountNameFormat[];
 void asdMemFree(void*);
@@ -24,7 +23,7 @@ s32 textFormatBuffer(char*, const char*, ...);
 u32 legacyResourceIdRemap(const WindowStatusResult *);
 u32 FUN_0042a410(u32*, u32, u32, u32, u32, u32);
 u32 jyoucyuGetTableEntry(u32);
-s32 sysLightEventTryWait(AocObjB*);
+s32 sysLightEventTryWait(LightEvent*);
 
 /* Prepare the content mount's work buffer and publish any translated failure. */
 WindowStatusOperationResult aocFileContentPrepareMountBuffer(void* context, u32 content)
@@ -42,7 +41,7 @@ WindowStatusOperationResult aocFileContentPrepareMountBuffer(void* context, u32 
         output.status = 100;
         output.result = result;
         if (legacyResourceIdRemap(&result) != 0xC9413891 &&
-            sysLightEventTryWait(&g_aocMain->objB) != 0) {
+            sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
             g_aocMain->flags &= ~0x10000U;
             output.status = 200;
         }

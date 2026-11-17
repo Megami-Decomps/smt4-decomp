@@ -1,6 +1,6 @@
 /* NON_MATCHING: remaining: the menu-state store group: retail emits `stmib r0!, {r1, r2}` then `str r6, [r0, #8]`, the build stores the timer first and uses `stm` with an extra add (72 vs 71 rows) */
 #include "shard/W5_W5Match7_UiQuest.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include <stddef.h>
 
 extern "C" {

@@ -10,9 +10,9 @@ struct SpritePairWork {
     u8 unk01c[4];
     s32 count;
     u8 unk024[0x244];
-    UiAnimatedSprite first; // 0x268
+    UiSpriteState first; // 0x268
     u8 unk2f4[0x8c];
-    UiAnimatedSprite second; // 0x380
+    UiSpriteState second; // 0x380
 };
 struct SpriteIndices2 { u32 ids[2]; };
 struct SpriteIndices3 { u32 ids[3]; };
@@ -35,7 +35,7 @@ struct SpritePairTwoIndexSets {
 extern "C" {
 extern const SpritePairIndexSets DAT_004040d4;
 extern const SpritePairTwoIndexSets DAT_00403cd4;
-void pairSetHalves(UiAnimatedSprite* sprite, s16 first, s16 second);
+void pairSetHalves(UiSpriteState* sprite, s16 first, s16 second);
 
 // Size the selection's two sprites from the table entries chosen for a two-, three- or four-entry list.
 void uiLayoutSelectionSpritePair(SpritePairWork* work)

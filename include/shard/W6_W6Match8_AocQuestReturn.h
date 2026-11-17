@@ -18,7 +18,7 @@ struct AocQuestReturnView {
     u8 unk224[0x12c];
     void *script;
     void *messages;
-    ScriptState *process;
+    ScriptProcess *process;
 };
 
 #endif

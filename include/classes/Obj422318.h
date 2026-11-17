@@ -7,7 +7,6 @@
 
 extern "C" {
 void asdMemFreeNonNull(void *block);
-int asdMdlManagerMarkDestroy(u32 handle);
 }
 
 /* The child an Obj422318 deletes on destruction. */
@@ -52,7 +51,7 @@ public:
     /* 0x58 */ s32 frames;
     /* 0x5C */ u8 unk5c[0xC];
     /* 0x68 */ Obj422318Child *child;
-    /* 0x6C */ u32 handle;
+    /* 0x6C */ AsdMdlObject *handle;
     /* 0x70 */ u32 flags;
 };
 
@@ -68,10 +67,10 @@ Obj422318::~Obj422318()
         delete child;
         child = NULL;
     }
-    if (handle != 0) {
+    if (handle != NULL) {
         asdMdlManagerMarkDestroy(handle);
-        asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
-        handle = 0;
+        asdMdlManagerDestroy(handle);
+        handle = NULL;
     }
 }
 

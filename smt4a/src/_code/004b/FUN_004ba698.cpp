@@ -1,13 +1,10 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 s32 rangeGetMinimumLimit(SequentialAnimationPrefixA *state);
-void uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 step);
-void FUN_00167458(UiSpriteState *sprite, s32 mode);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 // Reveals the rows up to the current progress, then reports whether the intro and the last row finished.
 s32 FUN_004ba698(SequentialAnimationPrefixA *state)

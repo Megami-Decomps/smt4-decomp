@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void uiSceneGetActiveState(BtlUiObjCA *obj);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void btlUiGetActiveState(void)
 {

@@ -1,7 +1,7 @@
 /* NON_MATCHING: per-frame step of the lmap intro/exit scene (eases the camera, then a state machine: set up the camera behind the player, wait, hand to the map, and the exit steps that switch back to scene 1 / 0x10); written from the decompilation, the arguments of distSpatial / mathPositionHeadingDegrees / the trig helpers are not recovered (called with the angle where one is visible) and the u32 copies of the float targets are kept */
 #include "common.h"
 #include "game/GameStateA.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 
 #define LMAP_STATE_SETUP 0
 #define LMAP_STATE_SETTLE 1
@@ -23,16 +23,9 @@
 #define LMAP_BUTTON_ACCEPT 5
 #define LMAP_SOUND_ENTER 0xDD
 
-struct LmapView {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ f32 heading;
-    /* 0x1C */ u8 unk1C[0x94];
-    /* 0xB0 */ s32 selection;
-};
 
 extern "C" {
 
-extern LmapView *g_lmapView;
 
 void FUN_00233e10(s32 active, u32 record);
 void mapSetSceneState(u32 scene);
@@ -83,7 +76,7 @@ void FUN_0036749c(void)
             lmapPlaceBehind(scene, scene->pose.targetHeading);
         }
         FUN_00303460(10);
-        g_lmapView->selection = -1;
+        g_lmapView->contextMode = -1;
         sysPlaySe(LMAP_SOUND_ENTER);
         FUN_00233e10(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
@@ -111,7 +104,7 @@ void FUN_0036749c(void)
             g_lmapScene->stateTime = 0;
         } else if (padButtonIsPressed(LMAP_BUTTON_ACCEPT) != 0 || inputIsQuestMenuPressed() != 0) {
             g_lmapView->heading = g_lmapScene->pose.targetHeading;
-            g_lmapView->selection = 0;
+            g_lmapView->contextMode = 0;
             FUN_00303460(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;

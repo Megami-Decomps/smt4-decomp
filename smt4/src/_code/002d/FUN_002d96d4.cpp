@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -95,8 +96,6 @@ extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
-extern int vec2GetYInt(unsigned int *);
-extern int vec2GetXInt(unsigned int *);
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -347,9 +346,9 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                      (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,
                      (int)**(short **)(temp_v13 + 0xc),(int)(*(short **)(temp_v13 + 0xc))[1],1);
-        temp_v4 = vec2GetYInt(puVar4 + 0x2c);
+        temp_v4 = vec2GetYInt((const UiSpriteState *)(puVar4 + 0x2c));
         temp_v0 = *(short *)(temp_v3 + 10);
-        temp_v13 = vec2GetXInt(puVar4 + 0x2c);
+        temp_v13 = vec2GetXInt((const UiSpriteState *)(puVar4 + 0x2c));
         texDrawTableEntryAtStoredOrigin(2,0x24,0x3e,(int)&param_1->field_0x0 + *(short *)(temp_v3 + 8) + temp_v13,
                      temp_v4 + param_2 + (int)temp_v0,0x83);
         temp_v4 = g_titleScene;

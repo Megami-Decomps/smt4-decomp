@@ -1,14 +1,14 @@
 #include "common.h"
-#include "shard/S3AsdModelAttr.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
 void resourceListDestroy(void *handle);
 void asdMemFree(void *ptr);
-void FUN_001ad2a4(AsdModelAttrModel *model, u8 *data, s32 key);
+void FUN_001ad2a4(AsdMdlNode *model, u8 *data, s32 key);
 
 /* Releases the model's attribute records, then rebuilds them for `key`. */
-void FUN_001ad22c(AsdModelAttrModel *model, s32 key)
+void FUN_001ad22c(AsdMdlNode *model, s32 key)
 {
     if (model->records.count != 0) {
         for (s32 i = 0; i < model->records.count; i++) {

@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script opcode: pushes the instruction's 16-bit operand as an integer. */
-u32 FUN_001c1e2c(ScriptVmProcess *process)
+u32 FUN_001c1e2c(ScriptProcess *process)
 {
     scriptVmPush(process, SCRIPT_VM_TAG_INT, process->code[process->pc].decoded.operand);
     process->pc++;

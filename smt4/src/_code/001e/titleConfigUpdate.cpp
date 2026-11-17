@@ -1,5 +1,7 @@
 /* NON_MATCHING: ARMCC merges input/navigation tails and retains the configuration work in r4 rather than retail's r5. */
+#include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
+#include "script/scrScriptProcess.h"
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -7,7 +9,6 @@
 extern "C" {
 extern TitleConfigCallbackView *g_titleConfig;
 extern TitleConfigValues g_titleConfigValues;
-s32 uiSpriteAdvanceAnimation(const void *window);
 u16 ifTouchRegionAddRequested(u32 group, u32 item);
 s32 resourceRunOperationIfUnblocked(const void *cursor);
 s32 listCursorGetRowIfUnblocked(const void *cursor);
@@ -15,7 +16,6 @@ const void *dataTableGet(u32 table, u32 group);
 const TitleConfigHelpEntry *dataTableGetEntries(const void *table);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_00259e98(void);
-void *scrScriptProcessCreate(void *dataA, void *dataB);
 s32 ifTouchGetSelectionModeForRegion(s32 button);
 s32 FUN_002c1658(u32 action, u32 repeat);
 s32 bgmVolumeToStep(u32 value);
@@ -39,7 +39,6 @@ u32 FUN_002bfdc4(void);
 void FUN_002bfc24(u32 player, u32 sound, u32 bank, u32 priority);
 s32 FUN_0029efd8(void *cursor, u32 enabled);
 void scrScriptProcessStartEntry(void *process, u32 entry);
-void timerStart(void *window, s32 period, s32 value);
 void __ARM_common_memcpy4_8(TitleConfigValues *values, const void *saved);
 s32 scrRunOpcodesStub(void *process);
 s32 messageMainGetChoiceResult(void);
@@ -50,7 +49,7 @@ u32 titleConfigUpdate(void)
     TitleConfigCallbackView *work = g_titleConfig;
     switch (work->state) {
     case 0: {
-        if (!asdTMTexTableNodeIsLoaded(0x2F, 0) || !uiSpriteAdvanceAnimation(work->window) ||
+        if (!asdTMTexTableNodeIsLoaded(0x2F, 0) || !uiSpriteAdvanceAnimation((UiSpriteState *)work->window) ||
             work->dataA == NULL || work->dataB == NULL) {
             return 0;
         }
@@ -162,7 +161,7 @@ u32 titleConfigUpdate(void)
             work->state = 2;
         } else if (FUN_002c1658(1, 1)) {
             eventQueueAddUniqueIfValid(0x100016E);
-            timerStart(work->window, 1, 0);
+            timerStart((UiSpriteState *)work->window, 1, 0);
             __ARM_common_memcpy4_8(&g_titleConfigValues, work->saved);
             titleConfigApplyAudio();
             audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
@@ -180,7 +179,7 @@ u32 titleConfigUpdate(void)
             work->state = 1;
             return 0;
         case 0:
-            timerStart(work->window, 1, 0);
+            timerStart((UiSpriteState *)work->window, 1, 0);
             work->state = 3;
             g_titleConfigValues.changed = 1;
             return 0;
@@ -188,7 +187,7 @@ u32 titleConfigUpdate(void)
             return 0;
         }
     case 3:
-        if (uiSpriteAdvanceAnimation(work->window)) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)work->window)) {
             work->state = 4;
         }
         return 0;

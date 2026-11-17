@@ -1,9 +1,8 @@
 /* NON_MATCHING: frame (0x40 registered request + scratch) and branch layout match; armcc loads the stack arguments as {variant, flags} + label where retail loads variant + {flags, label}. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/W9_W9Match1_ResourceRequest.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 u32 resourceRequestRegisterOrUpdate(void *registry, const ResourceRequest *request);
 void unitInitializeFromTemplate(u32 kind, void *scratch);
 u32 randomGetUpperSixBits(const void *scratch, u32 index);

@@ -6,7 +6,6 @@
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern DriverMemoryCallbacks g_gfxAllocateCallback;
 extern u8 *g_commandBufferCursor;
 extern u8 *g_commandBufferEnd;
@@ -26,7 +25,7 @@ void FUN_0012316c(s32 bytes, s32 records)
         buffer->size = bytes;
         buffer->unk0c = 0;
         buffer->listCount = 0;
-        buffer->unk10 = 0;
+        buffer->submittedBytes = 0;
         buffer->unk28 = 0;
         buffer->unk24 = 0;
         buffer->unk34 = 0;

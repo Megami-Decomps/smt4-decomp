@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018854c` (_code @ 0x18854c, 0xf98 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -13,7 +14,6 @@ int campRefreshEquipmentCategory(...);
 int beginStatusPanelClose(void);
 int messageBannerInitSelection(...);
 int asdMdlManagerDestroy(...);
-int timerStart(...);
 
 int campReleaseScreenTouchRegions(...);
 int flaggedEntrySetValueB(...);
@@ -711,7 +711,7 @@ joined_r0x00188f3c:
       beginStatusPanelClose();
       gameGlobalsSetSelected(0);
       FUN_00299900(0);
-      timerStart(temp_v5 + 0x6d4,3,0);
+      timerStart((UiSpriteState *)(temp_v5 + 0x6d4),3,0);
       *(unsigned int *)(temp_v5 + 0x20) = 6;
       temp_v9 = g_camp;
       puVar11 = (unsigned int *)(g_camp + 0x18);

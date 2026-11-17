@@ -3,6 +3,7 @@
 #include "shard/Shard0031.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "code/Code0018.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 s32 FUN_003e0024();
@@ -10,9 +11,7 @@ s32 FUN_003e0154();
 s32 FUN_003e0034();
 s32 FUN_003e0164();
 s32 gameSlotTableFindFree();
-SlotTable *gameGetSlotTable();
 s32 recordGetScaledMaximum(SlotRecordA *unit);
-PartySlotA *partyGetSlot(u16 slot);
 
 // Check whether the player, stored party, or support roster needs HP/MP/status recovery.
 u32 FUN_004ced50()
@@ -26,10 +25,10 @@ u32 FUN_004ced50()
     if (hp < maxHp || mp < maxMp || reinterpret_cast<PlayerStatusView *>(player)->status != 0)
         return 1;
     s32 count = gameSlotTableFindFree();
-    SlotTable *party = gameGetSlotTable();
+    SaveSlotTableA *party = gameGetSlotTable();
     for (s32 index = 0; index < count; ++index) {
-        if (party->slots[index] >= 0) {
-            SlotRecordA *unit = gameGetSlotRecord(party->slots[index]);
+        if (party->party[index] >= 0) {
+            SlotRecordA *unit = gameGetSlotRecord(party->party[index]);
             s32 hp = unit->hp;
             s32 maxHp = recordGetScaledMaximum(unit);
             if (hp < maxHp || unit->mp < unit->maxMp)

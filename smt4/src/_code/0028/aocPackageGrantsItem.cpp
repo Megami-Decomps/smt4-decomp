@@ -2,8 +2,6 @@
 #include "addon/AocSystem.h"
 
 extern "C" {
-extern u32 g_aocMain;
-s32 objHasFlagBit16(u32 aoc);
 
 // Report whether a mounted content package grants the item (optionally only while content is available).
 s32 aocPackageGrantsItem(AocSystem *system, u32 itemId, s32 checkAvailable)

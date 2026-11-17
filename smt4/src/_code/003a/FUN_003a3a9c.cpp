@@ -5,7 +5,7 @@
 #include "classes/Obj55ca08.h"
 
 extern "C" {
-s32 scrRunOpcodesStub(ScriptRunState *);
+s32 scrRunOpcodesStub(ScriptProcess *);
 void buttonHelpSetText(u32, u32);
 void messageTargetSetValue(u32, u32);
 void FUN_0022fb64(SelectMenu *);
@@ -34,7 +34,7 @@ void FUN_003a3a9c(SelectMenu *menu)
         u32 state;
         u32 phase;
         u8 unk0C[0x15C];
-        ScriptRunState *process;
+        ScriptProcess *process;
         u8 unk16C[0x23C];
         u8 sprites[0x480];
         u8 controls[0x34];

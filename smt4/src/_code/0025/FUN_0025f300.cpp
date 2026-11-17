@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/PlayScene.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
@@ -8,10 +9,7 @@ struct SpriteInfo;
 // Keep the common sprite coordinate prefix without importing a conflicting render-context variant.
 struct SceneSpriteCoordinates { u8 prefix[8]; s16 x, y; };
 extern "C" {
-s32 vec2GetXInt(UiSpriteState* animation);
-s32 vec2GetYInt(UiSpriteState* animation);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 SpriteInfo* asdTMTexTableEntryAt(u32 table, s32 id);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 

@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
 namespace {
 /* A list box widget: only used through its address. */
@@ -35,9 +36,6 @@ struct PartyMenu {
     /* 0x344c */ u8 unk344c[0x34];
     /* 0x3480 */ u16 usable[60];          /* the usable ids */
 };
-
-/* A unit record of the slot table. */
-struct UnitRecord;
 }
 
 extern "C" {
@@ -55,8 +53,7 @@ void gridNavigationConfigure(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d
 void scrollListSetSelectionMarkChanged(ListBox *box, s32 value);
 s32 flagValueIsPositive(u32 id);
 s32 FUN_0028e9a0(u32 id);
-UnitRecord *gameGetUnitRecord(s32 index);
-s32 FUN_00394d90(u32 id, UnitRecord *unit);
+s32 FUN_00394d90(u32 id, StatBlock *unit);
 s16 btlMainStateGetPartyCaptureId(BtlMainState *state);
 void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_0021960c(const void *a, const void *b);
@@ -122,7 +119,7 @@ void FUN_00199424(PartyMenu *menu)
         if (flagValueIsPositive(id) != 0 && FUN_0028e9a0(id) != 0) {
             if (menu->page != 0) {
                 if (gameGetSlotTable()->active[menu->page - 1] >= 0) {
-                    UnitRecord *unit = gameGetUnitRecord(gameGetSlotTable()->active[menu->page - 1]);
+                    StatBlock *unit = gameGetUnitRecord(gameGetSlotTable()->active[menu->page - 1]);
                     if (unit != NULL && FUN_00394d90(id, unit) != 0) {
                         menu->usable[usableCount] = (u16)id;
                         usableCount++;

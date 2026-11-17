@@ -1,4 +1,5 @@
 /* NON_MATCHING: the sprite grid loops are strength-reduced differently from retail (226 vs 234 rows: retail keeps separate row base registers per grid); the reset sequence is the same. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "ui/UiControl.h"
@@ -33,8 +34,6 @@ void FUN_002cdad4(void *state);
 void FUN_0021c45c(void *state, BtlOwner *owner);
 void paramsClearPacket(void *packet);
 
-void uiSpriteStateInitFromSource(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
-void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 flag);
 void *asdOperatorNew(u32 size, BtlOwner *allocator);
 void *FUN_003f9ab0(void *object);
 
@@ -72,27 +71,27 @@ void FUN_004a8ef4(void *unused, BtlOwner *owner)
         for (s32 i = 0; i < 5; i++) {
             u8 *sprite = BTL_UI(base, 0x75B4 + i * 0x8C);
 
-            uiSpriteStateInitFromSource(sprite, 7, 2000, params, 0xF1, 1.0f);
-            uiSpriteSelectAnim(sprite, 3);
+            uiSpriteStateInitFromSource((UiSpriteState *)sprite, 7, 2000, (UiResourceParameters *)(params), 0xF1, 1.0f);
+            uiSpriteSelectAnim((UiSpriteState *)sprite, 3);
         }
-        uiSpriteStateInitFromSource(BTL_UI(base, 0x7870), 0xD, 1000, params, 0xF1, 1.0f);
-        uiSpriteSelectAnim(BTL_UI(base, 0x7870), 8);
-        uiSpriteStateInitFromSource(BTL_UI(base, 0x78FC), 0xD, 0x3EA, params, 0xF1, 1.0f);
-        uiSpriteSelectAnim(BTL_UI(base, 0x78FC), 8);
+        uiSpriteStateInitFromSource((UiSpriteState *)(BTL_UI(base, 0x7870)), 0xD, 1000, (UiResourceParameters *)(params), 0xF1, 1.0f);
+        uiSpriteSelectAnim((UiSpriteState *)(BTL_UI(base, 0x7870)), 8);
+        uiSpriteStateInitFromSource((UiSpriteState *)(BTL_UI(base, 0x78FC)), 0xD, 0x3EA, (UiResourceParameters *)(params), 0xF1, 1.0f);
+        uiSpriteSelectAnim((UiSpriteState *)(BTL_UI(base, 0x78FC)), 8);
         u8 *plate = ui + row * 0xA0;
 
         *BTL_UI(plate, 0xB64C) = 0;
-        uiSpriteStateInitFromSource(BTL_UI(plate, 0xB5B4), 0xD, 0x3EE, params, 0xF1, 1.0f);
-        uiSpriteSelectAnim(BTL_UI(plate, 0xB5B4), 9);
+        uiSpriteStateInitFromSource((UiSpriteState *)(BTL_UI(plate, 0xB5B4)), 0xD, 0x3EE, (UiResourceParameters *)(params), 0xF1, 1.0f);
+        uiSpriteSelectAnim((UiSpriteState *)(BTL_UI(plate, 0xB5B4)), 9);
     }
     for (s32 i = 0; i < 12; i++) {
         u8 *entry = ui + i * 0x14C;
 
         *(u16 *)BTL_UI(entry, 0x11A2C) = 0;
-        uiSpriteStateInitFromSource(BTL_UI(entry, 0x11914), 0xD, 0xBBA, ui + 0x7508, 0xF1, 1.0f);
-        uiSpriteSelectAnim(BTL_UI(entry, 0x11914), 10);
-        uiSpriteStateInitFromSource(BTL_UI(entry, 0x119A0), 0xD, 0xBBE, ui + 0x7508, 0xF1, 1.0f);
-        uiSpriteSelectAnim(BTL_UI(entry, 0x119A0), 11);
+        uiSpriteStateInitFromSource((UiSpriteState *)(BTL_UI(entry, 0x11914)), 0xD, 0xBBA, (UiResourceParameters *)(ui + 0x7508), 0xF1, 1.0f);
+        uiSpriteSelectAnim((UiSpriteState *)(BTL_UI(entry, 0x11914)), 10);
+        uiSpriteStateInitFromSource((UiSpriteState *)(BTL_UI(entry, 0x119A0)), 0xD, 0xBBE, (UiResourceParameters *)(ui + 0x7508), 0xF1, 1.0f);
+        uiSpriteSelectAnim((UiSpriteState *)(BTL_UI(entry, 0x119A0)), 11);
     }
     void *window = asdOperatorNew(0x420, owner);
 
@@ -107,15 +106,15 @@ void FUN_004a8ef4(void *unused, BtlOwner *owner)
         *(u16 *)BTL_UI(slot, 0x12F3C) = 0;
         *(u32 *)BTL_UI(slot, 0x12F40) = 0;
         *(u32 *)BTL_UI(slot, 0x12F44) = 0;
-        uiSpriteStateInitFromSource(sprite, 0xC, 0x84, ui + 0x7508, 0xB, 1.0f);
-        uiSpriteSelectAnim(sprite, 13);
+        uiSpriteStateInitFromSource((UiSpriteState *)sprite, 0xC, 0x84, (UiResourceParameters *)(ui + 0x7508), 0xB, 1.0f);
+        uiSpriteSelectAnim((UiSpriteState *)sprite, 13);
     }
     *BTL_UI(ui, 0x6168) = 0;
     if ((owner->flags & 0x40000) != 0) {
         *BTL_UI(ui, 0x6168) = 1;
     }
-    uiSpriteStateInitFromSource(BTL_UI(ui, 0x7528), 8, 0, params, 1, 1.0f);
-    uiSpriteSetImageKeyframe(BTL_UI(ui, 0x7528), 13, 0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(BTL_UI(ui, 0x7528)), 8, 0, (UiResourceParameters *)(params), 1, 1.0f);
+    uiSpriteSetImageKeyframe((UiSpriteState *)(BTL_UI(ui, 0x7528)), 13, 0);
 }
 
 }

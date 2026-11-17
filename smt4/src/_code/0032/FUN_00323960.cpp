@@ -1,4 +1,5 @@
 /* NON_MATCHING: the two editor blocks are defined here (DAT_0044f578, 0x2e0 bytes, then DAT_0044f858) so armcc derives the first from the second like retail (`sub r1, r5, #736`); remaining: retail reloads the list straight into r0 for the second call (ours caches it in r2) and the pool order differs. The retail blocks are initialised .data holding code/string pointers: a shared editor-data source must replace these zero stand-ins. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"

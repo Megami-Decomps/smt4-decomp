@@ -1,19 +1,17 @@
-#include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
-PartyStatusSlots *gameGetSlotTable(void);
-
 /* Returns the demon's index in the slot table, or -1. */
-static s32 slotTableIndexOf(SlotTableEntry *demon)
+static s32 slotTableIndexOf(SlotRecordA *demon)
 {
     if (demon == NULL) {
         return -1;
     }
-    SlotTableEntry *entry = gameGetSlotTable()->active.entries;
+    SlotRecordA *entry = gameGetSlotTable()->entries;
     s32 i;
     for (i = 0; i < 0x18; i++, entry++) {
-        if (entry == demon || entry->slotId == demon->slotId) {
+        if (entry == demon || entry->tableIndex == demon->tableIndex) {
             return i;
         }
     }
@@ -21,7 +19,7 @@ static s32 slotTableIndexOf(SlotTableEntry *demon)
 }
 
 /* Returns whether the demon is one of the three reserve picks. */
-bool FUN_004bd0d8(SlotTableEntry *demon)
+bool FUN_004bd0d8(SlotRecordA *demon)
 {
     s32 index = slotTableIndexOf(demon);
 

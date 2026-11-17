@@ -1,10 +1,9 @@
-#include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 #include "shard/Shard0034.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-PartyStatusSlots *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 
 /* Returns the average level of a party group: 0 = player and active demons, 1 = active demons,
@@ -24,7 +23,7 @@ f32 partyGetAverageLevel(s32 group)
     case 0:
     case 1:
         slotCount = gameSlotTableFindFree();
-        slots = gameGetSlotTable()->active.slots;
+        slots = gameGetSlotTable()->party;
         break;
     case 2:
     case 3:

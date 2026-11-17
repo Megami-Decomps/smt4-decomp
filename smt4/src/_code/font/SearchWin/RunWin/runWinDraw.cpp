@@ -1,10 +1,9 @@
 /* NON_MATCHING: dots, pool order and divisions now match; the label coordinates load point.y/point.x into other registers (and schedule the z/width float loads and r2 argument differently), and retail sets r0=0 before releasing the frame. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/SpritePartDraw.h"
-#include "gfx/SpritePartDraw.h"
 #include "text/TextDraw.h"
-#include "util/MathFunctions.h"
 #include "gfx/StereoParallax.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "camp/RenderCtx.h"
@@ -29,7 +28,6 @@ extern "C" {
 extern RunWin *g_runWin;
 
 void gxResetColorQuadToWhite(void);
-s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 alpha);
 
 /* Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their
@@ -40,8 +38,8 @@ u8 runWinDraw(void)
     if (win->active != 0 && win->visible != 0) {
         renderCtxSelectStereoLayout(g_titleScene);
         texDrawTableEntryAtStoredOrigin(2, 14, 0x14F, 0, 0, 109);
-        s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
-        s32 y = vec2GetYInt(win->anchor);
+        s32 x = vec2GetXInt((UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
+        s32 y = vec2GetYInt((UiSpriteState *)win->anchor);
         efctSetSpeed(win->alpha);
         texDrawCompositeSprite(2, 14, 19, x, y, 110);
         RenderCtx *scene = g_titleScene;

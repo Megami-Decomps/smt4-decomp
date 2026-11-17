@@ -4,12 +4,11 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxA.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
 
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 scale);
 void FUN_00164168(u32 icon, s32 x, s32 y, s32 z, s32 a, s32 value);
@@ -22,8 +21,8 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed);
  * scroll bar below. */
 void FUN_0049e3f8(ListPanel *panel)
 {
-    s32 x = vec2GetXInt(panel->position);
-    s32 y = vec2GetYInt(panel->position);
+    s32 x = vec2GetXInt((const UiSpriteState *)panel->position);
+    s32 y = vec2GetYInt((const UiSpriteState *)panel->position);
     f32 speed = panel->speed;
 
     efctSetSpeed(speed);
