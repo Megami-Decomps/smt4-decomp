@@ -38,7 +38,7 @@ struct SkelWorkspace {
 }
 
 extern "C" {
-extern SkelWorkspace DAT_004ea81c;
+extern SkelWorkspace g_vectorScratch;
 void gfxQuaternionWorkspaceBuildMatrix(void);
 
 /* Poses the joint chain below `root`: the workspace quaternion is root's rotation plus the given offset, and
@@ -46,7 +46,7 @@ void gfxQuaternionWorkspaceBuildMatrix(void);
    type handler gets the result. */
 void FUN_002a3ab0(SkelNode *root, Vec4 *offsetIn)
 {
-    SkelWorkspace *workspace = &DAT_004ea81c;
+    SkelWorkspace *workspace = &g_vectorScratch;
     workspace->quaternion = *offsetIn;
     root->local = *offsetIn;
     workspace->offset = root->base;

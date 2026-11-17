@@ -18,16 +18,16 @@ static void addCategoryPayloadBytes(u32 bytes, AllocationUsage *usage, u32 categ
 // Account for a backing allocation and append it to the active allocation list.
 void FUN_0019a64c(AllocationHeaderA *allocation)
 {
-    AllocationUsage *usage = g_allocationAddressRanges.usage;
+    AllocationUsage *usage = g_asdMemState.usage;
     ++usage->count;
     usage->bytes += allocation->size;
     if ((usage->tag & 0xff) < 8) {
         u32 category = FUN_0019c40c(allocation);
-        addCategoryBytes(allocation->size, g_allocationAddressRanges.usage, category);
+        addCategoryBytes(allocation->size, g_asdMemState.usage, category);
         category = FUN_0019c40c(allocation);
-        addCategoryPayloadBytes(allocation->size - allocation->alignment - 0x40, g_allocationAddressRanges.usage, category);
+        addCategoryPayloadBytes(allocation->size - allocation->alignment - 0x40, g_asdMemState.usage, category);
     }
-    usage = g_allocationAddressRanges.usage;
+    usage = g_asdMemState.usage;
     AllocationLink *link = &allocation->link;
     if (usage->head == NULL) {
         usage->tail = link;
@@ -36,10 +36,10 @@ void FUN_0019a64c(AllocationHeaderA *allocation)
         link->previous = NULL;
     } else {
         link->previous = usage->tail;
-        g_allocationAddressRanges.usage->tail = link;
+        g_asdMemState.usage->tail = link;
         link->previous->next = link;
         link->next = NULL;
     }
-    allocation->tag = g_allocationAddressRanges.usage->tag;
+    allocation->tag = g_asdMemState.usage->tag;
 }
 }

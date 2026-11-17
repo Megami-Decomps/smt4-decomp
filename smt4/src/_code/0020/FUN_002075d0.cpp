@@ -17,7 +17,7 @@ static __inline void vector4Subtract(Vector4 *minuend, const Vector4 *subtrahend
 }
 
 extern "C" {
-extern CameraVectorScratch DAT_004ea81c;
+extern CameraVectorScratch g_vectorScratch;
 void renderGetCameraViewMatrix(Matrix44* output);
 
 // Compute the normalized XYZ direction from the current camera origin to a target.
@@ -25,20 +25,20 @@ void FUN_002075d0(const Vector4* target, Vector4* output)
 {
     Matrix44 view;
     renderGetCameraViewMatrix(&view);
-    vector4Copy(target, &DAT_004ea81c.direction);
-    DAT_004ea81c.origin.x = view.values[3];
-    DAT_004ea81c.origin.y = view.values[7];
-    DAT_004ea81c.origin.z = view.values[11];
-    DAT_004ea81c.origin.w = 0.0f;
-    vector4Subtract(&DAT_004ea81c.direction, &DAT_004ea81c.origin);
-    f32 length = sqrtf(DAT_004ea81c.direction.x * DAT_004ea81c.direction.x +
-                       DAT_004ea81c.direction.y * DAT_004ea81c.direction.y +
-                       DAT_004ea81c.direction.z * DAT_004ea81c.direction.z);
+    vector4Copy(target, &g_vectorScratch.direction);
+    g_vectorScratch.origin.x = view.values[3];
+    g_vectorScratch.origin.y = view.values[7];
+    g_vectorScratch.origin.z = view.values[11];
+    g_vectorScratch.origin.w = 0.0f;
+    vector4Subtract(&g_vectorScratch.direction, &g_vectorScratch.origin);
+    f32 length = sqrtf(g_vectorScratch.direction.x * g_vectorScratch.direction.x +
+                       g_vectorScratch.direction.y * g_vectorScratch.direction.y +
+                       g_vectorScratch.direction.z * g_vectorScratch.direction.z);
     if (length > 0.0f) {
-        DAT_004ea81c.direction.x /= length;
-        DAT_004ea81c.direction.y /= length;
-        DAT_004ea81c.direction.z /= length;
+        g_vectorScratch.direction.x /= length;
+        g_vectorScratch.direction.y /= length;
+        g_vectorScratch.direction.z /= length;
     }
-    *output = DAT_004ea81c.direction;
+    *output = g_vectorScratch.direction;
 }
 }

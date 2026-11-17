@@ -21,7 +21,7 @@ static __inline void *memoryDebugStartProcess(const char *name, s32 id, u32 (*up
         return NULL;
     }
     jobSetParent(NULL, process);
-    DAT_00465120.lastMapProcess = process;
+    g_asdMemState.lastMapProcess = process;
     return process;
 }
 
@@ -29,15 +29,15 @@ static __inline void *memoryDebugStartProcess(const char *name, s32 id, u32 (*up
  * and starts it. */
 void FUN_00102e34(void)
 {
-    if (DAT_00465120.mapProcess != NULL) {
-        jobStop(DAT_00465120.mapProcess, 0);
-        DAT_00465120.mapProcess = NULL;
+    if (g_asdMemState.mapProcess != NULL) {
+        jobStop(g_asdMemState.mapProcess, 0);
+        g_asdMemState.mapProcess = NULL;
         return;
     }
-    DAT_00465120.usage->limit = 0x08800000;
-    DAT_00465120.usage->debugFlags |= 1;
+    g_asdMemState.usage->limit = 0x08800000;
+    g_asdMemState.usage->debugFlags |= 1;
     DAT_0046515c = 0;
-    DAT_00465120.mapProcess = memoryDebugStartProcess(DAT_00409c58, 0x15e, memoryDebugRefresh,
+    g_asdMemState.mapProcess = memoryDebugStartProcess(DAT_00409c58, 0x15e, memoryDebugRefresh,
                                                       jobClearWorkSlot, &DAT_0046515c);
 }
 

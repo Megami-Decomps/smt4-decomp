@@ -50,7 +50,7 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern unsigned int *g_activeTextureSlot; /* 0x4475d0 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
@@ -139,7 +139,7 @@ void MapMain_DrawMinimapIcons(void)
     temp_v5 = (float)temp_v18;
     if (0 < (int)g_activeTextureSlot[temp_v1 + 1]) {
       temp_v13 = (float)g_activeTextureSlot[temp_v1 + 0x101];
-      temp_v3 = *(float *)(DAT_004474f4 + 0x4c) - (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
+      temp_v3 = *(float *)(g_mapCamera + 0x4c) - (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
       __hardfp_atan2f();
       temp_v3 = temp_v3 * temp_v17 * temp_v5;
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 <= temp_v3) << 0x1d);

@@ -6,7 +6,7 @@ extern "C" {
 void FUN_00246afc(RenderSubmissionPacket* packet, const f32* position, const f32* rotation, const f32* scale);
 void FUN_00256a50(RenderSubmissionPacket* packet, u32 mode);
 u32 FUN_00269694(RenderSubmissionOwner* owner, const u32* color);
-extern EffectColorProductState DAT_004ea81c;
+extern EffectColorProductState g_vectorScratch;
 
 // Apply the owner's color and draw settings to a current-frame submission (colors inlined).
 void FUN_00303f24(RenderSubmission* submission)
@@ -18,13 +18,13 @@ void FUN_00303f24(RenderSubmission* submission)
         return;
 
     u32 ownerColor = FUN_00269694(owner, &owner->color);
-    effectColorUnpack(submission->color, &DAT_004ea81c.factor);
-    effectColorUnpack(ownerColor, &DAT_004ea81c.color);
-    DAT_004ea81c.color.red *= DAT_004ea81c.factor.red;
-    DAT_004ea81c.color.green *= DAT_004ea81c.factor.green;
-    DAT_004ea81c.color.blue *= DAT_004ea81c.factor.blue;
-    DAT_004ea81c.color.alpha *= DAT_004ea81c.factor.alpha;
-    u32 color = effectColorPack(&DAT_004ea81c.color);
+    effectColorUnpack(submission->color, &g_vectorScratch.factor);
+    effectColorUnpack(ownerColor, &g_vectorScratch.color);
+    g_vectorScratch.color.red *= g_vectorScratch.factor.red;
+    g_vectorScratch.color.green *= g_vectorScratch.factor.green;
+    g_vectorScratch.color.blue *= g_vectorScratch.factor.blue;
+    g_vectorScratch.color.alpha *= g_vectorScratch.factor.alpha;
+    u32 color = effectColorPack(&g_vectorScratch.color);
     RenderSubmissionColor packed;
     packed.channels.red = __rev(color) >> 24;
     packed.channels.green = __rev(color) >> 16;

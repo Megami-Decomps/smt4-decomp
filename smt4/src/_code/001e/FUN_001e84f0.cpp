@@ -71,7 +71,7 @@ unsigned int FUN_001e84f0(void)
   iVar19 = DAT_0044ea00;
   iVar18 = DAT_00447a78;
   if ((((DAT_0049fc9c != 0) && (DAT_0049f93e == '\0')) && (DAT_0049f940 == '\0')) &&
-     (*DAT_004474f4 != 3)) {
+     (*g_mapCamera != 3)) {
     iVar21 = 0;
     fVar3 = (float)renderCtxPackPassFlags(5,0);
     piVar16 = (int *)(iVar19 + 0x124c);
@@ -131,7 +131,7 @@ unsigned int FUN_001e84f0(void)
 joined_r0x001e8660:
           if (DAT_0049fb46 != 0) {
 LAB_001e867c:
-            in_s0 = (float)DAT_004474f4[0x13];
+            in_s0 = (float)g_mapCamera[0x13];
             mathDistanceBetweenPoints();
             iVar8 = *(int *)(iVar8 + 0x1e4);
             if (((!(iVar8 == 1 || iVar8 == 3)) && (!(iVar8 == 2 || iVar8 == 4))) &&

@@ -9,7 +9,7 @@ extern "C" {
 s32 jobClearCachedWork(u32 job)
 {
     jobGetWork(job);
-    g_allocationAddressRanges.lastMapProcess = NULL;
+    g_asdMemState.lastMapProcess = NULL;
     return 0;
 }
 

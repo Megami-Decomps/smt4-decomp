@@ -56,7 +56,7 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int *DAT_004474f4; /* 0x4474f4 */
+extern int *g_mapCamera; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern float g_fixedCameraPosition; /* 0x49f8f8 */
@@ -152,12 +152,12 @@ void FUN_0030860c(void)
   temp_v24 = 0.0f;
   temp_v26 = *(float *)(g_lmapScene + 0x1c);
   temp_v28 = *(float *)(g_lmapScene + 0x24);
-  if ((int)romwright_sqrt_4(((float)DAT_004474f4[0x16] - (float)DAT_004474f4[0x13]) *
-                ((float)DAT_004474f4[0x16] - (float)DAT_004474f4[0x13]) +
-                ((float)DAT_004474f4[0x17] - (float)DAT_004474f4[0x14]) *
-                ((float)DAT_004474f4[0x17] - (float)DAT_004474f4[0x14]) +
-                ((float)DAT_004474f4[0x18] - (float)DAT_004474f4[0x15]) *
-                ((float)DAT_004474f4[0x18] - (float)DAT_004474f4[0x15])) < 0x43480000) {
+  if ((int)romwright_sqrt_4(((float)g_mapCamera[0x16] - (float)g_mapCamera[0x13]) *
+                ((float)g_mapCamera[0x16] - (float)g_mapCamera[0x13]) +
+                ((float)g_mapCamera[0x17] - (float)g_mapCamera[0x14]) *
+                ((float)g_mapCamera[0x17] - (float)g_mapCamera[0x14]) +
+                ((float)g_mapCamera[0x18] - (float)g_mapCamera[0x15]) *
+                ((float)g_mapCamera[0x18] - (float)g_mapCamera[0x15])) < 0x43480000) {
     temp_v30 = 200.0f;
   }
   else {
@@ -214,7 +214,7 @@ void FUN_0030860c(void)
   }
   pfVar9 = (float *)asdModelGetStatic38();
   *pfVar9 = temp_v30;
-  if ((*DAT_004474f4 == 0xc) && (DAT_004474f4[1] >= 100)) {
+  if ((*g_mapCamera == 0xc) && (g_mapCamera[1] >= 100)) {
     temp_v14 = (*(float *)(g_lmapScene + 0x4c) + 180.0f) * 0.7111111f;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v24 <= temp_v14) << 0x1d);
     for (temp_v14 = romwright_fabs_4(temp_v14); temp_v15 = temp_v24, (int)temp_v14 >= 0x47800000; temp_v14 = temp_v14 - 65536.0f)

@@ -11,7 +11,7 @@ void FUN_00324b68(MapVector eye, MapVector target)
 {
     MapVector destination = target;
     MapVector position = eye;
-    LmapViewA *view = DAT_005806a0.view;
+    LmapViewA *view = g_lmapViewHolder.view;
     destination.x += view->targetOffset.x;
     destination.y += view->targetOffset.y;
     destination.z += view->targetOffset.z;

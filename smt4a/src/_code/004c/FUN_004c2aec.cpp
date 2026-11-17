@@ -18,8 +18,8 @@ s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amou
     if (percentage > 0) {
         s32 bonus;
         if (target) {
-            if (source && !(DAT_005713f0.affinity & source->flags) &&
-                (DAT_005713f0.affinity & target->flags)) {
+            if (source && !(g_btlSkillResponseMasks.affinity & source->flags) &&
+                (g_btlSkillResponseMasks.affinity & target->flags)) {
                 bonus = target->data.maxHp * percentage / 200;
             } else {
                 bonus = target->data.maxHp * percentage / 100;
@@ -38,8 +38,8 @@ s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amou
     if (bonusPercentage > 0) {
         amount = (1.0f + (f32)bonusPercentage * 0.01f) * amount;
     }
-    if (source && target && !(DAT_005713f0.affinity & source->flags) &&
-        (DAT_005713f0.affinity & target->flags) && (s32)amount > 9999) {
+    if (source && target && !(g_btlSkillResponseMasks.affinity & source->flags) &&
+        (g_btlSkillResponseMasks.affinity & target->flags) && (s32)amount > 9999) {
         amount = 9999.0f;
     }
     return (s32)amount;

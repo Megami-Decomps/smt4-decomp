@@ -13,7 +13,7 @@ struct PlayerTrack {
 
 extern "C" {
 
-extern PlayerTrack *DAT_004474f4;
+extern PlayerTrack *g_mapCamera;
 
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
@@ -33,7 +33,7 @@ u32 FUN_00310f44(void)
         scrSetResult((s32)g_gameState.cameraTarget.z);
         break;
     case 3: {
-        PlayerTrack *track = DAT_004474f4;
+        PlayerTrack *track = g_mapCamera;
 
         f32 dx = track->toX - track->fromX;
         f32 dz = track->toZ - track->fromZ;

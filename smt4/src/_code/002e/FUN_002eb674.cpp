@@ -12,7 +12,7 @@ struct MapTransitionAuxiliary {
 
 extern "C" {
 extern MapMain *g_mapMain;
-extern MapTransitionAuxiliary *DAT_004474f4;
+extern MapTransitionAuxiliary *g_mapCamera;
 void mapAdjustPositionToGround(MapVector *position);
 
 void FUN_002eb674()
@@ -28,7 +28,7 @@ void FUN_002eb674()
         g_gameState.savedObjectId = g_gameState.currentObjectId;
         memcpy(&g_gameState.savedPosition, &g_lmapScene->pose.position, sizeof(MapVector));
         g_gameState.savedHeading = g_lmapScene->pose.heading;
-        g_gameState.savedHeadingCopy = DAT_004474f4->value;
+        g_gameState.savedHeadingCopy = g_mapCamera->value;
         g_gameState.targetMapId = map->mapId;
         g_gameState.targetAreaId = map->areaId;
         g_gameState.targetPosition = g_gameState.position;

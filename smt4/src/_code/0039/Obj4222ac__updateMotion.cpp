@@ -12,7 +12,7 @@ struct Obj4222acTransition {
 };
 /* NodeEnableResource is this code's partial view of the model (AsdMdlNode). */
 extern "C" {
-extern Obj4222acTransition *DAT_004474f4;
+extern Obj4222acTransition *g_mapCamera;
 void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 }
@@ -51,8 +51,8 @@ void Obj4222ac::updateMotion()
             basePosition[1] + position[1],
             basePosition[2] + position[2]
         };
-        if (DAT_004474f4->progress > 0.9f) {
-            f32 amount = (DAT_004474f4->progress - 0.9f) * 10.0f;
+        if (g_mapCamera->progress > 0.9f) {
+            f32 amount = (g_mapCamera->progress - 0.9f) * 10.0f;
             if (amount < 0) {
                 amount = 0;
             } else if (amount > 1) {
@@ -60,7 +60,7 @@ void Obj4222ac::updateMotion()
             }
             translated[1] += amount * 100.0f;
             nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->resource), 0, translated);
-            modelPartSetRotationDegrees(modelOf(handle)->resource, 0, amount * -60.0f, DAT_004474f4->heading + 180.0f, 0);
+            modelPartSetRotationDegrees(modelOf(handle)->resource, 0, amount * -60.0f, g_mapCamera->heading + 180.0f, 0);
         } else {
             nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->resource), 0, translated);
             modelPartSetRotationDegrees(modelOf(handle)->resource, 0, rotation[0], rotation[1], rotation[2]);

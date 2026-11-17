@@ -16,7 +16,7 @@ struct AllocationPrefix {
 // Only ordinary allocations have the prefix/header that can hold a release callback.
 extern "C" u32 asdMemorySetReleaseCallback(void* allocation, const void* callback, void* argument)
 {
-    const AllocatorStateA *ranges = &g_allocationAddressRanges;
+    const AllocatorStateA *ranges = &g_asdMemState;
     u32 firstBase = ranges->regionBase[2];
     u32 secondBase = ranges->regionBase[3];
     u32 address = (u32)allocation;

@@ -6,7 +6,7 @@ extern "C" {
 /* Classifies an address in one of four registered graphics memory regions. */
 u32 FUN_0019c40c(u32 address)
 {
-    const AllocatorStateA *ranges = &g_allocationAddressRanges;
+    const AllocatorStateA *ranges = &g_asdMemState;
     if (address < ranges->regionBase[0] || ranges->regionBase[0] + ranges->regionSize[0] < address) {
         if (ranges->regionBase[1] <= address && address <= ranges->regionSize[1] + ranges->regionBase[1]) {
             return 1;

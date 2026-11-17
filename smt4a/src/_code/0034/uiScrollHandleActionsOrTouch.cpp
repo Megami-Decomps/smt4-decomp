@@ -19,7 +19,7 @@ void eventQueueAddUnique(u32);
 /* Apply the first accepted mode or touch selection, reporting blocked modes and optional changes. */
 u32 uiScrollHandleActionsOrTouch(FlaggedEntry *entry, const TextureTableEntryIV *rectangle,
                  const s16 *ids, u32 firstKey, u32 secondKey, u32 thirdKey,
-                 bool *blockedMode, s32 secondary, s32 notify)
+                 s8 *blockedMode, s32 secondary, s32 notify)
 {
     u32 result = 0;
     recordGetModeForId((s16)secondKey);

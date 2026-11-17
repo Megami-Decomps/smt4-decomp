@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail takes the handle's address as the one literal and the slot pointer by `sub r1, r4, #28` (both are objects of one block, g_allocationAddressRanges at 0x5b4028, defined in this unit's data); separate externs, or a struct view, load the base or a second literal. */
+/* NON_MATCHING: retail takes the handle's address as the one literal and the slot pointer by `sub r1, r4, #28` (both are objects of one block, g_asdMemState at 0x5b4028, defined in this unit's data); separate externs, or a struct view, load the base or a second literal. */
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
 

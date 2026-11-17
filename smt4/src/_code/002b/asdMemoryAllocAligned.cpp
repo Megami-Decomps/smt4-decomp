@@ -38,7 +38,7 @@ static __inline void *asdMemoryBlockInit(AsdMemoryBlock *block, u32 size, u16 al
 /* Allocates `size` cleared bytes aligned to `alignment` (at least 0x80); the block header sits below. */
 void *asdMemoryAllocAligned(u32 heap, u32 kind, u32 flags, u32 size, u32 alignment, s32 tag)
 {
-    nn_os_CriticalSection_Enter(DAT_00465120.lock);
+    nn_os_CriticalSection_Enter(g_asdMemState.lock);
     if (alignment < 0x80) {
         alignment = 0x80;
     }
@@ -47,7 +47,7 @@ void *asdMemoryAllocAligned(u32 heap, u32 kind, u32 flags, u32 size, u32 alignme
     AsdMemoryBlock *block = FUN_002b24d8(heap, kind, flags, total, tag);
     void *data = asdMemoryBlockInit(block, total, alignment, 0);
     rt_memclr(data, size);
-    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    nn_os_CriticalSection_Leave(g_asdMemState.lock);
     return data;
 }
 

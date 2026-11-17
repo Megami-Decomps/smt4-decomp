@@ -3,18 +3,18 @@
 
 extern "C" {
 
-extern CameraVectorScratch DAT_004ea81c;
+extern CameraVectorScratch g_vectorScratch;
 
 /* Multiplies the scratch quaternion `direction` by the quaternion `origin`, storing the product in `direction`. */
 void FUN_002a2c00(void)
 {
-    Vector4 a = DAT_004ea81c.direction;
-    Vector4 b = DAT_004ea81c.origin;
+    Vector4 a = g_vectorScratch.direction;
+    Vector4 b = g_vectorScratch.origin;
 
-    DAT_004ea81c.direction.x = (a.y * b.z - a.z * b.y) + b.x * a.w + a.x * b.w;
-    DAT_004ea81c.direction.y = (a.z * b.x - a.x * b.z) + b.y * a.w + a.y * b.w;
-    DAT_004ea81c.direction.z = (a.x * b.y - a.y * b.x) + b.z * a.w + a.z * b.w;
-    DAT_004ea81c.direction.w = a.w * b.w - (a.x * b.x + a.y * b.y + a.z * b.z);
+    g_vectorScratch.direction.x = (a.y * b.z - a.z * b.y) + b.x * a.w + a.x * b.w;
+    g_vectorScratch.direction.y = (a.z * b.x - a.x * b.z) + b.y * a.w + a.y * b.w;
+    g_vectorScratch.direction.z = (a.x * b.y - a.y * b.x) + b.z * a.w + a.z * b.w;
+    g_vectorScratch.direction.w = a.w * b.w - (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 } /* extern "C" */

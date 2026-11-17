@@ -13,7 +13,7 @@ f32 libm_sinf(f32 value);
 f32 FUN_0024c418(f32 first, f32 second);
 void FUN_003f6b88(f32 pitch, f32 yaw, f32 roll);
 void FUN_002a2c00(void);
-extern RenderVectorState DAT_004ea81c;
+extern RenderVectorState g_vectorScratch;
 
 void FUN_0025c8f0(RenderVectorOverride *override, u32 source, Vector4 *output)
 {
@@ -29,11 +29,11 @@ void FUN_0025c8f0(RenderVectorOverride *override, u32 source, Vector4 *output)
         f32 yaw = FUN_0024c418(direction[0], direction[2]);
         FUN_003f6b88(pitch, yaw * 0.02454369328916073f, 0.0f);
         if (override->flags & 0x40) {
-            vector4Copy(&DAT_004ea81c.current, &DAT_004ea81c.previous);
-            DAT_004ea81c.current = override->value;
+            vector4Copy(&g_vectorScratch.current, &g_vectorScratch.previous);
+            g_vectorScratch.current = override->value;
             FUN_002a2c00();
         }
-        *output = DAT_004ea81c.current;
+        *output = g_vectorScratch.current;
     } else {
         *output = override->value;
     }

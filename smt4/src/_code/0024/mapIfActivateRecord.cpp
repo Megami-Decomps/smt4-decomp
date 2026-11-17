@@ -29,7 +29,7 @@ struct MapActivationContext {
 };
 
 extern "C" {
-extern MapActivationContext *DAT_004474f4;
+extern MapActivationContext *g_mapCamera;
 Vec3f FUN_003e0e60(const Vec3f *value, f32 scale);
 
 u32 mapIfActivateRecord(u8 enabled, s32 index)
@@ -38,7 +38,7 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
     state->unk17 = enabled;
     MapIfRecord *record = index == -1 ? NULL : &g_mapIf.state->records[index];
     MapActivationRecord *details = reinterpret_cast<MapActivationRecord *>(record);
-    if (index != -1 && record->active && DAT_004474f4->destination != details->destination)
+    if (index != -1 && record->active && g_mapCamera->destination != details->destination)
         state->unk17 = 0;
     if (state->unk17 == 0) {
         MapIfRecord *records = state->records;
@@ -78,7 +78,7 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
             soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
     } else {
         record->state = 7;
-        if (!(g_gameState.inputBlocked != 0 && DAT_004474f4->mode == 0)) {
+        if (!(g_gameState.inputBlocked != 0 && g_mapCamera->mode == 0)) {
             if (g_gameState.mapId >= 100)
                 soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
             else

@@ -4,7 +4,7 @@
 extern "C" {
 f32 FUN_001b63b0(f32);
 f32 FUN_001a1ee0(f32);
-extern QuaternionWorkspace DAT_006471dc;
+extern QuaternionWorkspace g_vectorScratch;
 }
 
 /* Convert Euler angles in radians to the workspace's rotation quaternion. */
@@ -24,5 +24,5 @@ extern "C" void FUN_001bc2f0(f32 x, f32 y, f32 z)
     rotation.y = cosZ * sinY * cosX - sinZ * cosY * sinX;
     rotation.z = sinZ * cosY * cosX + cosZ * sinY * sinX;
     rotation.w = cosZ * cosY * cosX - sinZ * sinY * sinX;
-    DAT_006471dc.rotation = rotation;
+    g_vectorScratch.rotation = rotation;
 }

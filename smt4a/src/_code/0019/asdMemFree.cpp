@@ -28,15 +28,15 @@ void asdMemFree(void *memory)
 {
     asdAllocatorLock();
     u32 address = (u32)memory;
-    u32 firstStart = g_allocationAddressRanges.regionBase[2];
-    u32 secondStart = g_allocationAddressRanges.regionBase[3];
-    if ((firstStart <= address && address <= firstStart + g_allocationAddressRanges.regionSize[2]) ||
-        (secondStart <= address && address <= secondStart + g_allocationAddressRanges.regionSize[3])) {
+    u32 firstStart = g_asdMemState.regionBase[2];
+    u32 secondStart = g_asdMemState.regionBase[3];
+    if ((firstStart <= address && address <= firstStart + g_asdMemState.regionSize[2]) ||
+        (secondStart <= address && address <= secondStart + g_asdMemState.regionSize[3])) {
         asdMemoryFreeRegion(memory);
-        allocatorUnlock(g_allocationAddressRanges);
+        allocatorUnlock(g_asdMemState);
     } else {
         asdMemoryFreeRegion(FUN_0017fe8c(memory));
-        allocatorUnlock(g_allocationAddressRanges);
+        allocatorUnlock(g_asdMemState);
     }
 }
 

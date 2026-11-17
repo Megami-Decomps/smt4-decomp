@@ -6,7 +6,7 @@ extern "C" {
 /* Sets the view's context override to `value`, resets its axis timer and points its axis along +Z. */
 void blockResetAxis(s32 value)
 {
-    LmapViewA *view = DAT_005806a0.view;
+    LmapViewA *view = g_lmapViewHolder.view;
 
     view->contextOverride = value;
     view->flagB4 = 0;

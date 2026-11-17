@@ -17,12 +17,12 @@ void *asdMemAlloc(int heap, u32 a, u32 b, u32 size, u32 c)
 {
     void *block;
 
-    nn_os_CriticalSection_Enter(DAT_00465120.lock);
+    nn_os_CriticalSection_Enter(g_asdMemState.lock);
     block = asdMemoryAlloc(heap, a, b, size, c);
     if (block != NULL) {
         rt_memclr(block, size);
     }
-    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    nn_os_CriticalSection_Leave(g_asdMemState.lock);
     return block;
 }
 

@@ -52,7 +52,7 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_mapEnemy; /* 0x447600 */
 
 
@@ -181,7 +181,7 @@ LAB_001fa01c:
               *(float *)(temp_v4 + 0x184) = temp_v18;
               *(float *)(temp_v4 + 0x188) = temp_v22;
               *(float *)(temp_v4 + 0x18c) = temp_v19;
-              temp_v9 = *(float *)(DAT_004474f4 + 0x4c) - temp_v18;
+              temp_v9 = *(float *)(g_mapCamera + 0x4c) - temp_v18;
               __hardfp_atan2f();
               temp_v9 = temp_v9 * temp_v26 * (float)temp_v27;
               temp_v10 = 0;

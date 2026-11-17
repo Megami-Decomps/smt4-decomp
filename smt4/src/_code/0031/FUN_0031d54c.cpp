@@ -35,7 +35,7 @@ typedef struct {
 } param_3_stack;
 
 extern int g_aocMain; /* 0x432fc8 */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_mapMain; /* 0x447e28 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int DAT_0049f920; /* 0x49f920 */
@@ -232,7 +232,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v1 + 0x4c) = temp_v6;
       *(unsigned int *)(temp_v1 + 0x50) = temp_v6;
       temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v6;
+      *(unsigned int *)(g_mapCamera + 0x18) = temp_v6;
     }
     navigationSetArguments(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
     navigationApplyArguments(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
@@ -244,7 +244,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_00273840(0);
     lmapSetSceneId(1);
     *(unsigned char *)(temp_v2 + 0x47) = 1;
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     DAT_0049fb45 = 1;
     DAT_0049fb46 = 1;
     DAT_0049f934 = 0;
@@ -273,7 +273,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_00273840(0);
     lmapSetSceneId(1);
     *(unsigned char *)(temp_v2 + 0x47) = 1;
-    *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
+    *(unsigned char *)(g_mapCamera + 0xa4) = 1;
     DAT_0049fb45 = 1;
     DAT_0049fb46 = 1;
     DAT_0049fb47 = 0;

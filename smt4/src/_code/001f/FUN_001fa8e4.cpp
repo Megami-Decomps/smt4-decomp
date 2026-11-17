@@ -40,7 +40,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } void_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f934; /* 0x49f934 */
@@ -169,7 +169,7 @@ void FUN_001fa8e4(void)
         if (temp_v7 != 0) {
           temp_v8 = g_gameState.mapId;
         }
-        if ((temp_v7 != 0 && temp_v8 != 0x24) && (*(int *)(DAT_004474f4 + 0xac) == 0)) {
+        if ((temp_v7 != 0 && temp_v8 != 0x24) && (*(int *)(g_mapCamera + 0xac) == 0)) {
           *(unsigned int *)(temp_v2 + 0xd94) = 0;
           lmapSetSceneId(3);
           gameCounterAddSaturating(0x14,1);
@@ -207,7 +207,7 @@ void FUN_001fa8e4(void)
       temp_v0 = 1;
     }
     temp_v22 = CONCAT44(0x447a0000,temp_v13);
-    if (*(int *)(DAT_004474f4 + 0xac) != 0) {
+    if (*(int *)(g_mapCamera + 0xac) != 0) {
       temp_v0 = 1;
     }
     if ((DAT_0049f93d != '\0') && (DAT_0049fce8 == '\0')) {
@@ -272,14 +272,14 @@ void FUN_001fa8e4(void)
       }
       *(unsigned char *)(g_lmapScene + 0x10) = 1;
       temp_v19 = CONCAT44(0x43b40000,temp_v18);
-      temp_v12 = temp_v24 - *(float *)(DAT_004474f4 + 0x18);
+      temp_v12 = temp_v24 - *(float *)(g_mapCamera + 0x18);
       if (temp_v12 < temp_v17) {
         temp_v12 = temp_v12 + 360.0f;
       }
       if ((int)temp_v12 >= 0x43b40001) {
         temp_v12 = temp_v12 - 360.0f;
       }
-      if (*(int *)(DAT_004474f4 + 0xc4) != 3) {
+      if (*(int *)(g_mapCamera + 0xc4) != 3) {
         temp_v12 = calcHeadingRoundedTo32Directions(temp_v12);
       }
       else {

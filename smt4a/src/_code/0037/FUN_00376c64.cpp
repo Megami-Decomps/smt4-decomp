@@ -36,11 +36,11 @@ void FUN_002d1e44(CameraMoveRequest *request);
 void FUN_00376c64(void)
 {
     s32 index = FUN_003033d4();
-    LmapViewA *view = DAT_005806a0.view;
+    LmapViewA *view = g_lmapViewHolder.view;
 
     if (view->phase != 0) {
         if (view->phase == 1 && FUN_0033a374(view) != 0) {
-            view = DAT_005806a0.view;
+            view = g_lmapViewHolder.view;
             view->raised = 0.0f;
             view->unk21C = 0.0f;
             view->heading = view->move.heading;
@@ -51,7 +51,7 @@ void FUN_00376c64(void)
             view->savedTarget.y = view->move.value.target.first.y;
             view->savedTarget.z = view->move.value.target.first.z;
             FUN_00303460(0);
-            view = DAT_005806a0.view;
+            view = g_lmapViewHolder.view;
             view->phase++;
             view->unk008 = 0;
         }
@@ -73,7 +73,7 @@ void FUN_00376c64(void)
     view->unk00C = 0;
     request.from = view->savedTarget;
     request.to = view->savedEye;
-    view = DAT_005806a0.view;
+    view = g_lmapViewHolder.view;
     view->heading = mathPositionHeadingDegrees(g_lmapScene->pose.position, g_lmapScene->movementCurrent);
     f32 turned = (view->heading - 90.0f) * 0.017453292f;
     f32 facing = view->heading * 0.017453292f;
@@ -92,7 +92,7 @@ void FUN_00376c64(void)
     request.frames = 20;
     request.unk6c = 0.0f;
     FUN_002d1e44(&request);
-    view = DAT_005806a0.view;
+    view = g_lmapViewHolder.view;
     view->moving = 1;
     view->phase++;
     view->unk008 = 0;

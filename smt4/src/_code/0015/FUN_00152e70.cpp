@@ -6,12 +6,12 @@ extern "C" {
 /* Saves the original halfword on first entry and applies the scoped value. */
 void FUN_00152e70(u16 value)
 {
-    AllocatorState *state = &DAT_00465120;
+    AllocatorState *state = &g_asdMemState;
     AllocationUsage *target = state->usage;
-    if (DAT_00465120.tagDepth == 0) {
-        DAT_00465120.tagPrevious = target->tag;
+    if (g_asdMemState.tagDepth == 0) {
+        g_asdMemState.tagPrevious = target->tag;
     }
-    ++DAT_00465120.tagDepth;
+    ++g_asdMemState.tagDepth;
     target->tag = value;
 }
 

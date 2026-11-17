@@ -1,12 +1,12 @@
 #include "gfx/QuaternionWorkspace.h"
 
-extern "C" QuaternionMatrixWorkspaceView DAT_004ea81c;
+extern "C" QuaternionMatrixWorkspaceView g_vectorScratch;
 
 /* Convert the workspace quaternion into its homogeneous rotation matrix. */
 extern "C" void gfxQuaternionWorkspaceBuildMatrix(void)
 {
-    const RotationQuaternion *q = &DAT_004ea81c.workspace.rotation;
-    f32 (*m)[4] = DAT_004ea81c.matrix;
+    const RotationQuaternion *q = &g_vectorScratch.workspace.rotation;
+    f32 (*m)[4] = g_vectorScratch.matrix;
     f32 xx = q->x * q->x;
     f32 yy = q->y * q->y;
     f32 zz = q->z * q->z;

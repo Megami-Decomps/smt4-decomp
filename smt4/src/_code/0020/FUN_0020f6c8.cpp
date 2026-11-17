@@ -51,7 +51,7 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_mapIf; /* 0x447a78 */
 extern int DAT_00447a7c; /* 0x447a7c */
 extern int DAT_00447a80; /* 0x447a80 */
@@ -176,10 +176,10 @@ void FUN_0020f6c8(void)
     temp_v13 = *(float *)(g_lmapScene + 0x1c);
     temp_v15 = *(float *)(g_lmapScene + 0x20);
     temp_v14 = *(float *)(g_lmapScene + 0x24);
-    temp_v17 = *(float *)(DAT_004474f4 + 0x18) * temp_v18;
+    temp_v17 = *(float *)(g_mapCamera + 0x18) * temp_v18;
     mathRemPio2f();
     temp_v13 = temp_v13 + temp_v17 * temp_v16;
-    temp_v18 = *(float *)(DAT_004474f4 + 0x18) * temp_v18;
+    temp_v18 = *(float *)(g_mapCamera + 0x18) * temp_v18;
     FUN_00282390();
     temp_v14 = temp_v14 + temp_v18 * temp_v16;
     temp_v15 = temp_v15 + 400.0f;
@@ -195,11 +195,11 @@ void FUN_0020f6c8(void)
     temp_v14 = *(float *)(g_lmapScene + 0x24);
     if (*(char *)(temp_v2 + 0x1d) != '\x02') {
       temp_v10 = 90.0f;
-      temp_v17 = (*(float *)(DAT_004474f4 + 0x18) + 90.0f) * 0.017453292f;
+      temp_v17 = (*(float *)(g_mapCamera + 0x18) + 90.0f) * 0.017453292f;
       mathRemPio2f();
       temp_v9 = 50.0f;
       temp_v13 = temp_v13 + temp_v17 * 50.0f;
-      temp_v18 = (*(float *)(DAT_004474f4 + 0x18) + temp_v10) * temp_v18;
+      temp_v18 = (*(float *)(g_mapCamera + 0x18) + temp_v10) * temp_v18;
       FUN_00282390();
       temp_v14 = temp_v14 + temp_v18 * temp_v9;
       temp_v15 = temp_v15 + temp_v16;
@@ -212,11 +212,11 @@ void FUN_0020f6c8(void)
     }
     else {
       temp_v10 = 130.0f;
-      temp_v16 = (*(float *)(DAT_004474f4 + 0x18) + 130.0f) * 0.017453292f;
+      temp_v16 = (*(float *)(g_mapCamera + 0x18) + 130.0f) * 0.017453292f;
       mathRemPio2f();
       temp_v9 = 30.0f;
       temp_v13 = temp_v13 + temp_v16 * 30.0f;
-      temp_v18 = (*(float *)(DAT_004474f4 + 0x18) + temp_v10) * temp_v18;
+      temp_v18 = (*(float *)(g_mapCamera + 0x18) + temp_v10) * temp_v18;
       FUN_00282390();
       temp_v14 = temp_v14 + temp_v18 * temp_v9;
       temp_v15 = temp_v15 + 150.0f;
@@ -228,7 +228,7 @@ void FUN_0020f6c8(void)
       temp_v18 = temp_v15 + temp_v18 * 2.0f + *(float *)(temp_v1 + 0xccd0) * temp_v17;
     }
   }
-  temp_v17 = *(float *)(DAT_004474f4 + 0x4c) - temp_v13;
+  temp_v17 = *(float *)(g_mapCamera + 0x4c) - temp_v13;
   __hardfp_atan2f();
   temp_v19 = 0;
   if (g_gameState.mapId >= 100) {

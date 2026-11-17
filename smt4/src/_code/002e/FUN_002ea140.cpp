@@ -33,7 +33,7 @@ struct LmapView {
 
 extern "C" {
 
-extern LmapView *DAT_004474f4;
+extern LmapView *g_mapCamera;
 
 
 
@@ -87,7 +87,7 @@ void FUN_002ea140(void)
             lmapPlaceBehind(scene, scene->pose.targetHeading);
         }
         FUN_0027fc14(10);
-        DAT_004474f4->selection = -1;
+        g_mapCamera->selection = -1;
         buttonHelpSetPreset(LMAP_BUTTON_HELP_PRESET);
         mapIfActivateRecord(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
@@ -114,8 +114,8 @@ void FUN_002ea140(void)
             g_lmapScene->state = LMAP_STATE_ENTER;
             g_lmapScene->stateTime = 0;
         } else if (padIsButtonPressed(LMAP_BUTTON_ACCEPT) != 0 || inputIsQuestMenuPressed() != 0) {
-            DAT_004474f4->heading = g_lmapScene->pose.targetHeading;
-            DAT_004474f4->selection = 0;
+            g_mapCamera->heading = g_lmapScene->pose.targetHeading;
+            g_mapCamera->selection = 0;
             FUN_0027fc14(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;

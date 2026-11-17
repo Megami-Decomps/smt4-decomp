@@ -4,7 +4,7 @@
 #include "gamedata/DataTableAccess_AocTable23.h"
 
 extern "C" {
-extern SceneViewHeading *DAT_004474f4;
+extern SceneViewHeading *g_mapCamera;
 u32 table23FindRecordByKey(void);
 
 /* Restores the spawn position, both position snapshots, and the scene and view headings. */
@@ -23,6 +23,6 @@ void FUN_002d4e58(void)
     scene->pose.previousPosition.z = scene->pose.position.z;
     scene->pose.heading = static_cast<f32>(record->heading);
     scene->pose.targetHeading = scene->pose.heading;
-    DAT_004474f4->heading = static_cast<f32>(record->heading);
+    g_mapCamera->heading = static_cast<f32>(record->heading);
 }
 }

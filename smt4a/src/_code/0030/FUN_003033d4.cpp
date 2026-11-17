@@ -8,7 +8,7 @@ extern "C" {
 s32 FUN_003033d4(void)
 {
     FlagWorkBanks *flags = gameFlagsGetBlock();
-    LmapViewA *context = DAT_005806a0.view;
+    LmapViewA *context = g_lmapViewHolder.view;
     s32 override = context->contextOverride;
     s32 value = context->contextValue;
     if (override != -1) {

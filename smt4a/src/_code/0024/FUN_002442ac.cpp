@@ -9,7 +9,7 @@ extern Obj557c48 *g_handleRegistry;
 // Reset the map camera's defaults, transitions, and tracked resource handle.
 void FUN_002442ac(void)
 {
-    LmapViewA *camera = DAT_005806a0.view;
+    LmapViewA *camera = g_lmapViewHolder.view;
     camera->mode = 0;
     camera->phase = 0;
     camera->unk008 = 0;
@@ -58,7 +58,7 @@ void FUN_002442ac(void)
     camera->axis.y = 0.0f;
     camera->axis.z = 1.0f;
     FUN_00352a14();
-    camera = DAT_005806a0.view;
+    camera = g_lmapViewHolder.view;
     camera->clip = NULL;
     camera->modelManager = g_handleRegistry;
     FUN_00303710();

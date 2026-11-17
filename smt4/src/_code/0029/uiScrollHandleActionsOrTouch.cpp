@@ -17,7 +17,7 @@ void flaggedEntrySetValueB(FlaggedEntry *, s32);
 void eventQueueAddUnique(u32);
 
 u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const TextureTableEntryIV *sprite, const s16 *actions,
-                  s32 firstAction, s32 secondAction, s32 thirdAction, bool *specialAction,
+                  s32 firstAction, s32 secondAction, s32 thirdAction, s8 *specialAction,
                   s32 alternateAxis, s32 notify)
 {
     u32 result = 0;
@@ -69,7 +69,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const TextureTableEntryIV 
         if (changed)
             eventQueueAddUnique(0x100016c);
     }
-    *specialAction = special;
+    *specialAction = special != 0;
     return result;
 }
 }

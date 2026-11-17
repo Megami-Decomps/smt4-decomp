@@ -38,7 +38,7 @@ typedef struct {
     unsigned int sp84; /* 0x84: local_84 */
 } void_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int g_mapStateSlots; /* 0x44cd88 */
 extern signed char DAT_0049f934; /* 0x49f934 */
@@ -163,7 +163,7 @@ joined_r0x002706c8:
           if ((*(char *)(temp_v23 + 0x12) == '\0') && (DAT_0049f934 == '\0')) {
             if ((DAT_0049fc84 == 0) || (DAT_0049fc84 == 4)) {
               temp_v3 = FUN_0027ee9c();
-              if (((temp_v3 != 0) && (*(char *)(DAT_004474f4 + 0xb0) == '\0')) && (temp_v17[0] != 0))
+              if (((temp_v3 != 0) && (*(char *)(g_mapCamera + 0xb0) == '\0')) && (temp_v17[0] != 0))
               {
                 DAT_0049fa58 = 0;
                 DAT_0049fa5c = 0;

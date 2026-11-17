@@ -9,7 +9,7 @@ extern "C" {
 s32 jobClearWorkSlot(u32 job)
 {
     jobGetWork(job);
-    DAT_00465120.lastMapProcess = NULL;
+    g_asdMemState.lastMapProcess = NULL;
     return 0;
 }
 

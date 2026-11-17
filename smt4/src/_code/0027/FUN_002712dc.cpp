@@ -110,7 +110,7 @@ extern unsigned int g_sinCosTable; /* 0x407ed0 */
 extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int *DAT_004474f4; /* 0x4474f4 */
+extern int *g_mapCamera; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int *g_lmapScene; /* 0x447e88 */
 extern int iRam00447e8c; /* 0x447e8c */
@@ -476,7 +476,7 @@ void FUN_002712dc(void)
           if (temp_v7 != 0) {
             puVar5 = g_gameState;
           }
-          if ((temp_v7 != 0 && puVar5 != (unsigned int *)0x24) && (DAT_004474f4[0x2b] == 0)) {
+          if ((temp_v7 != 0 && puVar5 != (unsigned int *)0x24) && (g_mapCamera[0x2b] == 0)) {
             *(unsigned int *)(temp_v31 + 0xd94) = 0;
             lmapSetSceneId(3);
             gameCounterAddSaturating(0x14,1);
@@ -514,7 +514,7 @@ void FUN_002712dc(void)
         temp_v15 = 1;
       }
       temp_v39 = CONCAT44(0x447a0000,temp_v17);
-      if (DAT_004474f4[0x2b] != 0) {
+      if (g_mapCamera[0x2b] != 0) {
         temp_v15 = 1;
       }
       if ((DAT_0049f93d != '\0') && (DAT_0049fce8 == '\0')) {
@@ -580,14 +580,14 @@ void FUN_002712dc(void)
         }
         *(unsigned char *)(g_lmapScene + 4) = 1;
         temp_v37 = CONCAT44(0x43b40000,temp_v34);
-        temp_v19 = fStack_64 - (float)DAT_004474f4[6];
+        temp_v19 = fStack_64 - (float)g_mapCamera[6];
         if (temp_v19 < temp_v36) {
           temp_v19 = temp_v19 + 360.0f;
         }
         if ((int)temp_v19 >= 0x43b40001) {
           temp_v19 = temp_v19 - 360.0f;
         }
-        if (DAT_004474f4[0x31] != 3) {
+        if (g_mapCamera[0x31] != 3) {
           temp_v19 = calcHeadingRoundedTo32Directions(temp_v19);
         }
         else {
@@ -1590,7 +1590,7 @@ LAB_002c9a70:
                 g_lmapScene[0x14] = temp_v7;
               }
               FUN_0027fc14(10);
-              DAT_004474f4[0x2b] = -1;
+              g_mapCamera[0x2b] = -1;
               buttonHelpSetPreset(0xdb);
               mapIfActivateRecord(1,DAT_0049f99c);
               FUN_001fa760();
@@ -1631,8 +1631,8 @@ LAB_002c9a70:
           else {
             temp_v7 = padIsButtonPressed(5);
             if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-              piVar22 = DAT_004474f4;
-              DAT_004474f4[6] = g_lmapScene[0x14];
+              piVar22 = g_mapCamera;
+              g_mapCamera[6] = g_lmapScene[0x14];
               piVar22[0x2b] = 0;
               FUN_0027fc14(0);
               piVar22 = g_lmapScene;
@@ -1684,8 +1684,8 @@ LAB_002c9a70:
       temp_v7 = mapIfHasSelection();
       if (temp_v7 == 0) {
         mapIfReleaseSlot0();
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[6] = g_lmapScene[0x14];
+        piVar22 = g_mapCamera;
+        g_mapCamera[6] = g_lmapScene[0x14];
         piVar22[0x2b] = 0;
         FUN_0027fc14(0);
         temp_v7 = g_lmapScene[1];
@@ -1783,7 +1783,7 @@ LAB_002c9a70:
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v17) * temp_v19);
               piVar22[0x14] = (int)DAT_0049f9ac;
               FUN_0027fc14(0xb);
-              DAT_004474f4[0x2b] = -2;
+              g_mapCamera[0x2b] = -2;
               buttonHelpSetPreset(0xdb);
               mapIfActivateRecord(1,DAT_0049f99c);
               {
@@ -1833,8 +1833,8 @@ LAB_002c9a70:
           else {
             temp_v7 = padIsButtonPressed(5);
             if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-              piVar22 = DAT_004474f4;
-              DAT_004474f4[6] = g_lmapScene[0x14];
+              piVar22 = g_mapCamera;
+              g_mapCamera[6] = g_lmapScene[0x14];
               piVar22[0x2b] = 0;
               FUN_0027fc14(0);
               piVar22 = g_lmapScene;
@@ -1886,8 +1886,8 @@ LAB_002c9a70:
       temp_v7 = mapIfHasSelection();
       if (temp_v7 == 0) {
         mapIfReleaseSlot1();
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[6] = g_lmapScene[0x14];
+        piVar22 = g_mapCamera;
+        g_mapCamera[6] = g_lmapScene[0x14];
         piVar22[0x2b] = 0;
         FUN_0027fc14(0);
         temp_v7 = g_lmapScene[1];
@@ -1941,8 +1941,8 @@ LAB_002c9a70:
           mapIfReleaseSlot2();
           piVar23 = g_lmapScene;
           g_lmapScene[0x1a] = temp_v13;
-          piVar22 = DAT_004474f4;
-          DAT_004474f4[6] = piVar23[0x14];
+          piVar22 = g_mapCamera;
+          g_mapCamera[6] = piVar23[0x14];
           piVar22[0x2b] = 0;
           FUN_0027fc14(0);
           piVar22 = g_lmapScene;
@@ -1956,7 +1956,7 @@ LAB_002c9a70:
         if (temp_v7 < 0x37) {
           if (temp_v7 == 0x32) {
             DAT_0049fb46 = 0;
-            DAT_004474f4[3] = 2;
+            g_mapCamera[3] = 2;
             piVar22[0x15] = 5;
             piVar22[0x16] = 0x40400000;
             piVar22[0x2d] = (int)((float)piVar22[0x29] - (float)piVar22[8]);
@@ -2098,7 +2098,7 @@ LAB_002c9a70:
         piVar22[0xc] = temp_v7;
         piVar22[0x14] = (int)DAT_0049f9ac;
         FUN_0027fc14(0xc);
-        DAT_004474f4[0x2b] = -3;
+        g_mapCamera[0x2b] = -3;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1,DAT_0049f99c);
         {
@@ -2163,8 +2163,8 @@ LAB_002c9a70:
         else {
           temp_v7 = padIsButtonPressed(5);
           if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-            piVar22 = DAT_004474f4;
-            DAT_004474f4[6] = g_lmapScene[0x14];
+            piVar22 = g_mapCamera;
+            g_mapCamera[6] = g_lmapScene[0x14];
             piVar22[0x2b] = 0;
             FUN_0027fc14(0);
             piVar22 = g_lmapScene;
@@ -2180,7 +2180,7 @@ LAB_002c9a70:
         break;
       case 10:
         DAT_0049fb46 = 0;
-        DAT_004474f4[3] = 1;
+        g_mapCamera[3] = 1;
         piVar22[0x15] = 5;
         piVar22[0x16] = 0x40400000;
         piVar22[0x2c] = (int)((float)piVar22[0x28] - (float)piVar22[7]);
@@ -2295,11 +2295,11 @@ LAB_002e94f0:
         g_lmapScene[2] = temp_v7 + 1;
         if (temp_v7 + 1 == 1) {
           mapIfReleaseSlot2();
-          piVar22 = DAT_004474f4;
-          DAT_004474f4[6] = g_lmapScene[0x14];
+          piVar22 = g_mapCamera;
+          g_mapCamera[6] = g_lmapScene[0x14];
           piVar22[0x2b] = 0;
           FUN_0027fc14(0);
-          *(unsigned char *)(DAT_004474f4 + 0x29) = 1;
+          *(unsigned char *)(g_mapCamera + 0x29) = 1;
         }
         if (g_lmapScene[2] == 3) {
           FUN_0027fae4();
@@ -2459,7 +2459,7 @@ LAB_002e94f0:
                 else {
                   temp_v7 = 4;
                 }
-                DAT_004474f4[3] = temp_v7;
+                g_mapCamera[3] = temp_v7;
                 fStack_3c = (float)piVar22[0xb];
                 fStack_38 = (float)piVar22[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
@@ -2488,8 +2488,8 @@ LAB_002e94f0:
               else {
                 temp_v7 = padIsButtonPressed(5);
                 if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-                  piVar22 = DAT_004474f4;
-                  DAT_004474f4[6] = g_lmapScene[0x14];
+                  piVar22 = g_mapCamera;
+                  g_mapCamera[6] = g_lmapScene[0x14];
                   piVar22[0x2b] = 0;
                   FUN_0027fc14(0);
                   piVar22 = g_lmapScene;
@@ -2528,7 +2528,7 @@ LAB_002e94f0:
           piVar22[0xc] = temp_v7;
           piVar22[0x14] = (int)DAT_0049f9ac;
           FUN_0027fc14(0xc);
-          DAT_004474f4[0x2b] = -3;
+          g_mapCamera[0x2b] = -3;
           buttonHelpSetPreset(0xdb);
           mapIfActivateRecord(1,DAT_0049f99c);
           {
@@ -2595,8 +2595,8 @@ LAB_002e94f0:
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v7 = mapIfHasSelection(), temp_v7 == 0)) {
         mapDestroySecondaryModel();
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[6] = (int)((float)g_lmapScene[0x14] + temp_v18);
+        piVar22 = g_mapCamera;
+        g_mapCamera[6] = (int)((float)g_lmapScene[0x14] + temp_v18);
         piVar22[0x2b] = 0;
         FUN_0027fc14(0);
         piVar22 = g_lmapScene;
@@ -2649,8 +2649,8 @@ LAB_002e94f0:
               else {
                 temp_v7 = padIsButtonPressed(5);
                 if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-                  piVar22 = DAT_004474f4;
-                  DAT_004474f4[6] = g_lmapScene[0x14];
+                  piVar22 = g_mapCamera;
+                  g_mapCamera[6] = g_lmapScene[0x14];
                   piVar22[0x2b] = 0;
                   FUN_0027fc14(0);
                   piVar22 = g_lmapScene;
@@ -2719,7 +2719,7 @@ LAB_002e94f0:
             g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v19) * temp_v35);
           }
           FUN_0027fc14(10);
-          DAT_004474f4[0x2b] = -1;
+          g_mapCamera[0x2b] = -1;
           buttonHelpSetPreset(0xdb);
           mapIfActivateRecord(1,DAT_0049f99c);
           temp_v7 = g_lmapScene[1];
@@ -2814,8 +2814,8 @@ LAB_002e94f0:
                   else {
                     temp_v7 = padIsButtonPressed(5);
                     if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-                      piVar22 = DAT_004474f4;
-                      DAT_004474f4[6] = g_lmapScene[0x14];
+                      piVar22 = g_mapCamera;
+                      g_mapCamera[6] = g_lmapScene[0x14];
                       piVar22[0x2b] = 0;
                       FUN_0027fc14(0);
                       piVar22 = g_lmapScene;
@@ -2864,7 +2864,7 @@ LAB_002e94f0:
               temp_v18 = ((float)piVar22[0x14] + temp_v34) * temp_v18;
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v18) * temp_v19);
               FUN_0027fc14(10);
-              DAT_004474f4[0x2b] = -1;
+              g_mapCamera[0x2b] = -1;
               buttonHelpSetPreset(0xdb);
               mapIfActivateRecord(1,DAT_0049f99c);
               {
@@ -2946,7 +2946,7 @@ LAB_002e94f0:
         }
         else {
           DAT_0049fb46 = 0;
-          DAT_004474f4[3] = 2;
+          g_mapCamera[3] = 2;
           piVar22[0x15] = 5;
           piVar22[0x16] = 0x40400000;
           piVar22[0x2c] = (int)((float)piVar22[0x28] - (float)piVar22[7]);
@@ -2976,8 +2976,8 @@ LAB_002e94f0:
             mapIfReleaseSlot2();
             piVar23 = g_lmapScene;
             g_lmapScene[0x1a] = temp_v13;
-            piVar22 = DAT_004474f4;
-            DAT_004474f4[6] = piVar23[0x14];
+            piVar22 = g_mapCamera;
+            g_mapCamera[6] = piVar23[0x14];
             piVar22[0x2b] = 0;
             FUN_0027fc14(0);
             piVar22 = g_lmapScene;
@@ -3078,8 +3078,8 @@ LAB_002e94f0:
                   else {
                     temp_v7 = padIsButtonPressed(6);
                     if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-                      piVar22 = DAT_004474f4;
-                      DAT_004474f4[6] = g_lmapScene[0x14];
+                      piVar22 = g_mapCamera;
+                      g_mapCamera[6] = g_lmapScene[0x14];
                       piVar22[0x2b] = 0;
                       FUN_0027fc14(0);
                       piVar22 = g_lmapScene;
@@ -3124,7 +3124,7 @@ LAB_002e94f0:
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v18) * temp_v19);
               piVar22[0x14] = (int)DAT_0049f9ac;
               FUN_0027fc14(0xd);
-              DAT_004474f4[0x2b] = 1;
+              g_mapCamera[0x2b] = 1;
               buttonHelpSetPreset(0xda);
               mapIfActivateRecord(1,DAT_0049f99c);
               FUN_0019db68();
@@ -3140,8 +3140,8 @@ LAB_002e94f0:
                 if (temp_v7 != 0) {
 LAB_002d472c:
                   mapIfReleaseSlot3();
-                  piVar22 = DAT_004474f4;
-                  DAT_004474f4[6] = g_lmapScene[0x14];
+                  piVar22 = g_mapCamera;
+                  g_mapCamera[6] = g_lmapScene[0x14];
                   piVar22[0x2b] = 0;
                   FUN_0027fc14(0);
                   piVar22 = g_lmapScene;
@@ -3208,7 +3208,7 @@ LAB_002d472c:
         }
         else {
           DAT_0049fb46 = 0;
-          DAT_004474f4[3] = 1;
+          g_mapCamera[3] = 1;
           piVar22[0x15] = 0x15;
           piVar22[0x16] = 0x40a00000;
           piVar22[1] = piVar22[1] + 1;
@@ -3247,9 +3247,9 @@ LAB_002d472c:
         }
         else {
           temp_v7 = screenFadesAllReady();
-          piVar22 = DAT_004474f4;
+          piVar22 = g_mapCamera;
           if (temp_v7 != 0) {
-            DAT_004474f4[6] = g_lmapScene[0x14];
+            g_mapCamera[6] = g_lmapScene[0x14];
             piVar22[0x2b] = 0;
             FUN_0027fc14(0);
             piVar22 = g_lmapScene;
@@ -3368,7 +3368,7 @@ LAB_002d472c:
               if (temp_v7 != 0) {
                 g_lmapScene[1] = 10;
                 piVar22[2] = 0;
-                DAT_004474f4[3] = 2;
+                g_mapCamera[3] = 2;
                 fStack_3c = (float)piVar22[0xb];
                 fStack_38 = (float)piVar22[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
@@ -3397,8 +3397,8 @@ LAB_002d472c:
               else {
                 temp_v7 = padIsButtonPressed(6);
                 if ((temp_v7 != 0) || (temp_v7 = inputIsQuestMenuPressed(), temp_v7 != 0)) {
-                  piVar22 = DAT_004474f4;
-                  DAT_004474f4[6] = g_lmapScene[0x14];
+                  piVar22 = g_mapCamera;
+                  g_mapCamera[6] = g_lmapScene[0x14];
                   piVar22[0x2b] = 0;
                   FUN_0027fc14(0);
                   piVar22 = g_lmapScene;
@@ -3442,7 +3442,7 @@ LAB_002d472c:
           g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v17) * temp_v19);
           piVar22[0x14] = (int)DAT_0049f9ac;
           FUN_0027fc14(0xd);
-          DAT_004474f4[0x2b] = 1;
+          g_mapCamera[0x2b] = 1;
           buttonHelpSetPreset(0xda);
           mapIfActivateRecord(1,DAT_0049f99c);
           FUN_0019db68();
@@ -3502,8 +3502,8 @@ LAB_002d472c:
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v7 = mapIfHasSelection(), temp_v7 == 0)) {
         mapDestroyOverlayModel();
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[6] = g_lmapScene[0x14];
+        piVar22 = g_mapCamera;
+        g_mapCamera[6] = g_lmapScene[0x14];
         piVar22[0x2b] = 0;
         FUN_0027fc14(0);
         piVar22 = g_lmapScene;
@@ -3787,8 +3787,8 @@ LAB_002d472c:
             if (temp_v7 == 10) {
               g_lmapScene[0x15] = 0x13;
               piVar22[0x16] = 0x40a00000;
-              piVar23 = DAT_004474f4;
-              DAT_004474f4[0x83] = 0;
+              piVar23 = g_mapCamera;
+              g_mapCamera[0x83] = 0;
               piVar23[0x84] = 0;
               piVar22[0x1a] = 0;
               piVar22[7] = piVar22[10];
@@ -4455,9 +4455,9 @@ LAB_0027142c:
     piVar22[0xd] = temp_v31;
     piVar22[0xe] = (int)temp_v17;
     piVar22[0xf] = temp_v7;
-    piVar22 = DAT_004474f4;
-    piVar23 = DAT_004474f4 + 7;
-    *(unsigned char *)(DAT_004474f4 + 0x87) = 0;
+    piVar22 = g_mapCamera;
+    piVar23 = g_mapCamera + 7;
+    *(unsigned char *)(g_mapCamera + 0x87) = 0;
     *piVar22 = 0xf;
     piVar22[1] = 0;
     piVar22[2] = 0;
@@ -4480,13 +4480,13 @@ LAB_0027142c:
     temp_v31 = DAT_0049f9e8;
     temp_v7 = DAT_0049f9e4;
     piVar23 = g_lmapScene;
-    piVar22 = DAT_004474f4;
-    switch(*DAT_004474f4) {
+    piVar22 = g_mapCamera;
+    switch(*g_mapCamera) {
     case 0:
       FUN_002d1e4c();
       break;
     case 1:
-      temp_v17 = (float)DAT_004474f4[6];
+      temp_v17 = (float)g_mapCamera[6];
       mathGetShortestAngleDelta();
       temp_v5 = in_fpscr & 0xfffffff;
       temp_v18 = temp_v17;
@@ -4496,24 +4496,24 @@ LAB_0027142c:
       temp_v19 = temp_v18 * 0.2f;
       in_fpscr = temp_v5 | ((unsigned int)(temp_v19 <= temp_v18) << 0x1d);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
-        DAT_004474f4[6] = g_lmapScene[0x14];
+        g_mapCamera[6] = g_lmapScene[0x14];
       }
       else {
         in_fpscr = temp_v5 | ((unsigned int)(0.0f <= temp_v17) << 0x1d);
         if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
-          temp_v19 = (float)DAT_004474f4[6] - temp_v19;
+          temp_v19 = (float)g_mapCamera[6] - temp_v19;
         }
         else {
-          temp_v19 = (float)DAT_004474f4[6] + temp_v19;
+          temp_v19 = (float)g_mapCamera[6] + temp_v19;
         }
-        DAT_004474f4[6] = (int)temp_v19;
+        g_mapCamera[6] = (int)temp_v19;
       }
       break;
     case 2:
-      DAT_004474f4[6] = g_lmapScene[0x14];
+      g_mapCamera[6] = g_lmapScene[0x14];
       break;
     case 3:
-      DAT_004474f4[0x1c] = DAT_0049f9e0;
+      g_mapCamera[0x1c] = DAT_0049f9e0;
       piVar22[0x1d] = temp_v7;
       piVar22[0x1e] = temp_v31;
       temp_v31 = DAT_0049f9f4;
@@ -4524,7 +4524,7 @@ LAB_0027142c:
       piVar22[0x1f] = DAT_0049f9f8;
       break;
     case 4:
-      DAT_004474f4[0x23] = DAT_0049f9fc;
+      g_mapCamera[0x23] = DAT_0049f9fc;
       piVar22[0x24] = temp_v13;
       piVar22[0x25] = temp_v4;
       temp_v31 = DAT_0049fa10;
@@ -4540,7 +4540,7 @@ LAB_0027142c:
       temp_v17 = 0.017453292f;
       temp_v18 = (float)g_lmapScene[8];
       temp_v7 = g_lmapScene[9];
-      DAT_004474f4[0x16] = g_lmapScene[7];
+      g_mapCamera[0x16] = g_lmapScene[7];
       piVar22[0x17] = (int)temp_v18;
       piVar22[0x18] = temp_v7;
       piVar22[0x17] = (int)(temp_v18 + 150.0f);
@@ -4552,9 +4552,9 @@ LAB_0027142c:
       piVar22[0x14] = (int)(temp_v18 + 150.0f);
       temp_v18 = (float)piVar23[0x14] * 0.017453292f;
       temp_v19 = 600.0f;
-      DAT_004474f4[0x13] = (int)((float)DAT_004474f4[0x13] + mathRemPio2f(temp_v18) * 600.0f);
+      g_mapCamera[0x13] = (int)((float)g_mapCamera[0x13] + mathRemPio2f(temp_v18) * 600.0f);
       temp_v17 = (float)g_lmapScene[0x14] * temp_v17;
-      DAT_004474f4[0x15] = (int)((float)DAT_004474f4[0x15] + FUN_00282390(temp_v17) * temp_v19);
+      g_mapCamera[0x15] = (int)((float)g_mapCamera[0x15] + FUN_00282390(temp_v17) * temp_v19);
       break;
     case 7:
       temp_v18 = (float)g_lmapScene[0x13];
@@ -4565,26 +4565,26 @@ LAB_0027142c:
       if (temp_v31 != 0x5a) {
         temp_v7 = temp_v31 - 0x100;
       }
-      temp_v17 = (float)DAT_004474f4[0xa4] * 0.017453292f;
+      temp_v17 = (float)g_mapCamera[0xa4] * 0.017453292f;
       if (!(temp_v31 != 0x5a && temp_v7 != 0xe)) {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xc] = (int)mathRemPio2f(temp_v17);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xc] = (int)mathRemPio2f(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[10] = 0;
       }
       else {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[10] = (int)mathRemPio2f(temp_v17);
+        piVar22 = g_mapCamera;
+        g_mapCamera[10] = (int)mathRemPio2f(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[0xc] = 0;
       }
-      piVar22 = DAT_004474f4;
-      temp_v18 = (float)DAT_004474f4[0xa4] + 10.0f;
-      DAT_004474f4[0xa4] = (int)temp_v18;
+      piVar22 = g_mapCamera;
+      temp_v18 = (float)g_mapCamera[0xa4] + 10.0f;
+      g_mapCamera[0xa4] = (int)temp_v18;
       if ((int)temp_v18 >= 0x43340001) {
         temp_v18 = 180.0f;
       }
@@ -4599,29 +4599,29 @@ LAB_0027142c:
       if (temp_v31 != 0x5a) {
         temp_v7 = temp_v31 - 0x100;
       }
-      temp_v17 = (float)DAT_004474f4[0xa4] * 0.017453292f;
+      temp_v17 = (float)g_mapCamera[0xa4] * 0.017453292f;
       if (!(temp_v31 != 0x5a && temp_v7 != 0xe)) {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xc] = (int)mathRemPio2f(temp_v17);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xc] = (int)mathRemPio2f(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[10] = 0;
       }
       else {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[10] = (int)mathRemPio2f(temp_v17);
+        piVar22 = g_mapCamera;
+        g_mapCamera[10] = (int)mathRemPio2f(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[0xc] = 0;
       }
-      temp_v18 = (float)DAT_004474f4[0xa4];
+      temp_v18 = (float)g_mapCamera[0xa4];
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 < 0.0f) << 0x1f) |
               ((unsigned int)(temp_v18 == 0.0f) << 0x1e);
       in_fpscr = temp_v5 | ((unsigned int)(temp_v18 != temp_v18) << 0x1c);
       temp_v2 = (unsigned char)(temp_v5 >> 0x18);
-      piVar22 = DAT_004474f4;
+      piVar22 = g_mapCamera;
       if ((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         temp_v18 = 0.0f;
       }
@@ -4636,26 +4636,26 @@ LAB_0027142c:
       if (temp_v31 != 0x5a) {
         temp_v7 = temp_v31 - 0x100;
       }
-      temp_v17 = (float)DAT_004474f4[0xa4] * 0.017453292f;
+      temp_v17 = (float)g_mapCamera[0xa4] * 0.017453292f;
       if (!(temp_v31 != 0x5a && temp_v7 != 0xe)) {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xc] = (int)mathRemPio2f(temp_v17);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xc] = (int)mathRemPio2f(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[10] = 0;
       }
       else {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[10] = (int)mathRemPio2f(temp_v17);
+        piVar22 = g_mapCamera;
+        g_mapCamera[10] = (int)mathRemPio2f(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
+        piVar22 = g_mapCamera;
+        g_mapCamera[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[0xc] = 0;
       }
-      piVar22 = DAT_004474f4;
-      temp_v18 = (float)DAT_004474f4[0xa4] - 10.0f;
-      DAT_004474f4[0xa4] = (int)temp_v18;
+      piVar22 = g_mapCamera;
+      temp_v18 = (float)g_mapCamera[0xa4] - 10.0f;
+      g_mapCamera[0xa4] = (int)temp_v18;
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 < 0.0f) << 0x1f) |
               ((unsigned int)(temp_v18 == 0.0f) << 0x1e);
       in_fpscr = temp_v5 | ((unsigned int)(temp_v18 != temp_v18) << 0x1c);
@@ -4666,16 +4666,16 @@ LAB_0027142c:
       piVar22[0xa4] = (int)temp_v18;
       break;
     case 10:
-      temp_v7 = DAT_004474f4[1];
-      piVar22 = DAT_004474f4 + 0x88;
+      temp_v7 = g_mapCamera[1];
+      piVar22 = g_mapCamera + 0x88;
       if (temp_v7 == 0) {
-        iStack_98 = DAT_004474f4[0x16];
-        iStack_94 = DAT_004474f4[0x17];
-        iStack_90 = DAT_004474f4[0x18];
+        iStack_98 = g_mapCamera[0x16];
+        iStack_94 = g_mapCamera[0x17];
+        iStack_90 = g_mapCamera[0x18];
         temp_v17 = 0.017453292f;
-        iStack_84 = DAT_004474f4[0x15];
-        iStack_8c = DAT_004474f4[0x13];
-        iStack_88 = DAT_004474f4[0x14];
+        iStack_84 = g_mapCamera[0x15];
+        iStack_8c = g_mapCamera[0x13];
+        iStack_88 = g_mapCamera[0x14];
         temp_v19 = (float)g_lmapScene[10];
         temp_v36 = (float)g_lmapScene[0xb];
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
@@ -4703,8 +4703,8 @@ LAB_0027142c:
         fStack_74 = temp_v34;
         fStack_70 = temp_v20;
         FUN_00282228(&iStack_98);
-        piVar22 = DAT_004474f4;
-        *(unsigned char *)(DAT_004474f4 + 0x87) = 1;
+        piVar22 = g_mapCamera;
+        *(unsigned char *)(g_mapCamera + 0x87) = 1;
         piVar23 = piVar22 + 1;
         *piVar23 = *piVar23 + 1;
         piVar22[2] = 0;
@@ -4745,23 +4745,23 @@ LAB_0027142c:
           fStack_74 = temp_v18;
           fStack_70 = temp_v34;
           FUN_00282228(&iStack_98);
-          piVar22 = DAT_004474f4;
-          DAT_004474f4[1] = DAT_004474f4[1] + 1;
+          piVar22 = g_mapCamera;
+          g_mapCamera[1] = g_mapCamera[1] + 1;
           piVar22[2] = 0;
         }
         break;
       }
       if ((temp_v7 != 2) || (temp_v7 = vectorPairTransitionStep(), temp_v7 == 0)) break;
-      piVar22 = DAT_004474f4;
-      DAT_004474f4[1] = DAT_004474f4[1] + 1;
+      piVar22 = g_mapCamera;
+      g_mapCamera[1] = g_mapCamera[1] + 1;
       piVar22[2] = 0;
       break;
     case 0xb:
-      temp_v7 = DAT_004474f4[1];
-      piVar23 = DAT_004474f4 + 0x88;
+      temp_v7 = g_mapCamera[1];
+      piVar23 = g_mapCamera + 0x88;
       if (temp_v7 == 0) {
-        piVar23 = DAT_004474f4 + 0x16;
-        DAT_004474f4[3] = 0;
+        piVar23 = g_mapCamera + 0x16;
+        g_mapCamera[3] = 0;
         iStack_98 = *piVar23;
         iStack_94 = piVar22[0x17];
         iStack_90 = piVar22[0x18];
@@ -4795,8 +4795,8 @@ LAB_0027142c:
         fStack_74 = temp_v36;
         fStack_70 = temp_v21;
         FUN_00282228(&iStack_98);
-        piVar22 = DAT_004474f4;
-        *(unsigned char *)(DAT_004474f4 + 0x87) = 1;
+        piVar22 = g_mapCamera;
+        *(unsigned char *)(g_mapCamera + 0x87) = 1;
         piVar23 = piVar22 + 1;
         *piVar23 = *piVar23 + 1;
         piVar22[2] = 0;
@@ -4837,8 +4837,8 @@ LAB_0027142c:
           fStack_2c = 0.0f;
           fStack_70 = temp_v21;
           FUN_00282228(&iStack_98);
-          piVar22 = DAT_004474f4;
-          DAT_004474f4[1] = DAT_004474f4[1] + 1;
+          piVar22 = g_mapCamera;
+          g_mapCamera[1] = g_mapCamera[1] + 1;
           piVar22[2] = 0;
         }
         break;
@@ -4846,8 +4846,8 @@ LAB_0027142c:
       if (temp_v7 != 2) break;
       temp_v7 = vectorPairTransitionStep();
       if (temp_v7 != 0) {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[1] = DAT_004474f4[1] + 1;
+        piVar22 = g_mapCamera;
+        g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar22[2] = 0;
       }
       break;
@@ -4858,16 +4858,16 @@ LAB_0027142c:
       FUN_001f87d4();
       break;
     case 0xe:
-      temp_v7 = DAT_004474f4[1];
-      piVar22 = DAT_004474f4 + 0x88;
+      temp_v7 = g_mapCamera[1];
+      piVar22 = g_mapCamera + 0x88;
       if (temp_v7 == 0) {
-        iStack_98 = DAT_004474f4[0x16];
-        iStack_94 = DAT_004474f4[0x17];
-        iStack_90 = DAT_004474f4[0x18];
+        iStack_98 = g_mapCamera[0x16];
+        iStack_94 = g_mapCamera[0x17];
+        iStack_90 = g_mapCamera[0x18];
         temp_v17 = 0.017453292f;
-        iStack_84 = DAT_004474f4[0x15];
-        iStack_8c = DAT_004474f4[0x13];
-        iStack_88 = DAT_004474f4[0x14];
+        iStack_84 = g_mapCamera[0x15];
+        iStack_8c = g_mapCamera[0x13];
+        iStack_88 = g_mapCamera[0x14];
         temp_v35 = (float)g_lmapScene[10];
         temp_v34 = (float)g_lmapScene[0xb];
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
@@ -4898,8 +4898,8 @@ LAB_0027142c:
         fStack_2c = 0.0f;
         fStack_70 = temp_v18;
         FUN_00282228(&iStack_98);
-        piVar22 = DAT_004474f4;
-        *(unsigned char *)(DAT_004474f4 + 0x87) = 1;
+        piVar22 = g_mapCamera;
+        *(unsigned char *)(g_mapCamera + 0x87) = 1;
         piVar23 = piVar22 + 1;
         *piVar23 = *piVar23 + 1;
         piVar22[2] = 0;
@@ -4946,8 +4946,8 @@ LAB_0027142c:
           fStack_74 = temp_v19;
           fStack_70 = temp_v18;
           FUN_00282228(&iStack_98);
-          piVar22 = DAT_004474f4;
-          DAT_004474f4[1] = DAT_004474f4[1] + 1;
+          piVar22 = g_mapCamera;
+          g_mapCamera[1] = g_mapCamera[1] + 1;
           piVar22[2] = 0;
         }
         break;
@@ -4955,8 +4955,8 @@ LAB_0027142c:
       if (temp_v7 != 2) break;
       temp_v7 = vectorPairTransitionStep();
       if (temp_v7 != 0) {
-        piVar22 = DAT_004474f4;
-        DAT_004474f4[1] = DAT_004474f4[1] + 1;
+        piVar22 = g_mapCamera;
+        g_mapCamera[1] = g_mapCamera[1] + 1;
         piVar22[2] = 0;
       }
       break;
@@ -4972,12 +4972,12 @@ LAB_0027142c:
     temp_v18 = 0.0f;
     temp_v19 = (float)g_lmapScene[7];
     temp_v34 = (float)g_lmapScene[9];
-    if ((int)romwright_sqrt_4(((float)DAT_004474f4[0x16] - (float)DAT_004474f4[0x13]) *
-                  ((float)DAT_004474f4[0x16] - (float)DAT_004474f4[0x13]) +
-                  ((float)DAT_004474f4[0x17] - (float)DAT_004474f4[0x14]) *
-                  ((float)DAT_004474f4[0x17] - (float)DAT_004474f4[0x14]) +
-                  ((float)DAT_004474f4[0x18] - (float)DAT_004474f4[0x15]) *
-                  ((float)DAT_004474f4[0x18] - (float)DAT_004474f4[0x15])) < 0x43480000) {
+    if ((int)romwright_sqrt_4(((float)g_mapCamera[0x16] - (float)g_mapCamera[0x13]) *
+                  ((float)g_mapCamera[0x16] - (float)g_mapCamera[0x13]) +
+                  ((float)g_mapCamera[0x17] - (float)g_mapCamera[0x14]) *
+                  ((float)g_mapCamera[0x17] - (float)g_mapCamera[0x14]) +
+                  ((float)g_mapCamera[0x18] - (float)g_mapCamera[0x15]) *
+                  ((float)g_mapCamera[0x18] - (float)g_mapCamera[0x15])) < 0x43480000) {
       temp_v36 = 200.0f;
     }
     else {
@@ -5036,7 +5036,7 @@ LAB_0027142c:
     fStack_1c = temp_v29;
     pfVar10 = (float *)asdModelGetStatic38();
     *pfVar10 = temp_v36;
-    if ((*DAT_004474f4 == 0xc) && (DAT_004474f4[1] >= 100)) {
+    if ((*g_mapCamera == 0xc) && (g_mapCamera[1] >= 100)) {
       temp_v20 = ((float)g_lmapScene[0x13] + 180.0f) * 0.7111111f;
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v20) << 0x1d);
       for (temp_v20 = romwright_fabs_4(temp_v20); temp_v29 = temp_v18, (int)temp_v20 >= 0x47800000;

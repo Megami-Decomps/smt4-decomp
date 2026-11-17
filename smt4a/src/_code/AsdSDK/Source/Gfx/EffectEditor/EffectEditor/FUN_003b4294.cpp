@@ -65,7 +65,7 @@ extern float g_effectRingScratchColor; /* 0x5c1120 */
 extern float DAT_005c1124; /* 0x5c1124 */
 extern float DAT_005c1128; /* 0x5c1128 */
 extern float DAT_005c112c; /* 0x5c112c */
-extern unsigned char DAT_006471dc; /* 0x6471dc */
+extern unsigned char g_vectorScratch; /* 0x6471dc */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -327,7 +327,7 @@ void FUN_003b4294(fn_003b4294_arg0 *param_1)
               } while (temp_v4 < 5);
               puVar10 = (unsigned int *)&DAT_006472dc;
               if (temp_v29 >= 2) {
-                puVar10 = (unsigned int *)&DAT_006471dc;
+                puVar10 = (unsigned int *)&g_vectorScratch;
               }
               temp_v30 = 1;
               if (temp_v30 < temp_v29) {

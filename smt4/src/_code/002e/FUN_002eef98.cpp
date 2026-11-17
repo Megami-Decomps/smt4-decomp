@@ -26,7 +26,7 @@ struct SceneState {
 extern "C" {
 
 extern TrigEntry g_sinCosTable[];
-extern SceneState* DAT_004474f4;
+extern SceneState* g_mapCamera;
 
 u32 scrGetArg(u32 index);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32* dst, f32* matrix, f32* src);
@@ -87,8 +87,8 @@ u32 FUN_002eef98(void)
     g_gameState.cameraTarget.z = z;
     g_gameState.cameraFov = fov;
 
-    if (DAT_004474f4->sceneId != 3) {
-        DAT_004474f4->changed = 1;
+    if (g_mapCamera->sceneId != 3) {
+        g_mapCamera->changed = 1;
         FUN_0027fc14(3);
         lmapSetSceneId(0x1d);
     }

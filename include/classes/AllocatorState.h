@@ -8,7 +8,7 @@
 /* The engine allocator's global state: a scoped allocation tag, the mutex that guards the heaps,
  * the usage record of the active heap, the asdMemMap debug display's processes, and the base and
  * size of the four heap regions (main, extra, VRAM A, VRAM B).
- * IV: DAT_00465120 (0x3C bytes); Apocalypse: g_allocationAddressRanges at 0x5B4028 (0x40 bytes,
+ * IV: g_asdMemState (0x3C bytes); Apocalypse: g_asdMemState at 0x5B4028 (0x40 bytes,
  * one more word before the regions). */
 struct AllocatorState {
     /* 0x00 */ u16 tagPrevious;          /* usage tag saved by the outermost tag scope */
@@ -43,9 +43,7 @@ typedef char AllocatorStateALayoutCheck[offsetof(AllocatorStateA, usage) == 0x08
     offsetof(AllocatorStateA, debugEnabled) == 0x18 && offsetof(AllocatorStateA, regionBase) == 0x20 &&
     sizeof(AllocatorStateA) == 0x40 ? 1 : -1];
 
-extern "C" {
-extern AllocatorState DAT_00465120;
-extern AllocatorStateA g_allocationAddressRanges;
-}
+/* g_asdMemState, declared per game (its type differs). */
+#include "classes/AllocatorStateGlobal.h"
 
 #endif

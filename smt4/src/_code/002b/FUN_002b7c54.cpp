@@ -31,13 +31,13 @@ typedef struct RenderGlobals {
     /* 0x08 */ Renderer *renderer;
 } RenderGlobals;
 
-extern RenderGlobals DAT_00465120;
+extern RenderGlobals g_asdMemState;
 
 /* Queues one vertex into the batch (flushing a full batch to the renderer), or, without a batch or
  * batch callback, draws it immediately with its coordinates truncated to integers. */
 void FUN_002b7c54(VertexBatch *batch, s32 color, f32 x, f32 y, f32 z, f32 w)
 {
-    if (DAT_00465120.renderer->drawBatch != NULL && batch != NULL) {
+    if (g_asdMemState.renderer->drawBatch != NULL && batch != NULL) {
         batch->vertices[batch->count].x = x;
         batch->vertices[batch->count].y = y;
         batch->vertices[batch->count].z = z;
@@ -45,12 +45,12 @@ void FUN_002b7c54(VertexBatch *batch, s32 color, f32 x, f32 y, f32 z, f32 w)
         batch->vertices[batch->count].color = color;
         batch->count++;
         if (batch->count >= VERTEX_BATCH) {
-            DAT_00465120.renderer->drawBatch(batch->vertices, VERTEX_BATCH);
+            g_asdMemState.renderer->drawBatch(batch->vertices, VERTEX_BATCH);
             batch->count = 0;
         }
         return;
     }
-    DAT_00465120.renderer->drawPoint((s32)x, (s32)y, (s32)z, (s32)w, color);
+    g_asdMemState.renderer->drawPoint((s32)x, (s32)y, (s32)z, (s32)w, color);
 }
 
 } /* extern "C" */

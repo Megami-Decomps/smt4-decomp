@@ -9,7 +9,7 @@ void FUN_00395904(void);
 /* Sets the camera block's mode and resets its transition state. */
 void FUN_00303460(s32 mode)
 {
-    LmapViewA *camera = DAT_005806a0.view;
+    LmapViewA *camera = g_lmapViewHolder.view;
 
     camera->moving = 0;
     camera->mode = mode;

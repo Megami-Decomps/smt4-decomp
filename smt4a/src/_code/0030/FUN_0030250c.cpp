@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern unsigned char DAT_005806a0; /* 0x5806a0 */
+extern unsigned char g_lmapViewHolder; /* 0x5806a0 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: libm_cosf. */
@@ -68,7 +68,7 @@ void FUN_0030250c(void)
   unsigned int temp_v19;
   unsigned char temp_v20 [24];
   
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x218) = 0;
+  *(unsigned int *)((*(int *)((unsigned char *)&g_lmapViewHolder + 0x4)) + 0x218) = 0;
   puVar1 = (unsigned int *)&temp_v8;
   FUN_002e34a4(puVar1,&temp_v11,&temp_v5,temp_v20);
   if (puVar1 != (unsigned int *)0x0) {
@@ -82,12 +82,12 @@ void FUN_0030250c(void)
     temp_v16 = temp_v6;
     temp_v19 = temp_v7;
     temp_v0 = FUN_003033d4();
-    temp_v1 = *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x18) * 0.017453292f;
+    temp_v1 = *(float *)((*(int *)((unsigned char *)&g_lmapViewHolder + 0x4)) + 0x18) * 0.017453292f;
     libm_sinf();
-    temp_v1 = *(float *)(g_lmapScene + 0x1c) - temp_v1 * *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + temp_v0 * 4 + 0x18c);
+    temp_v1 = *(float *)(g_lmapScene + 0x1c) - temp_v1 * *(float *)((*(int *)((unsigned char *)&g_lmapViewHolder + 0x4)) + temp_v0 * 4 + 0x18c);
     libm_cosf();
     FUN_0029406c(&temp_v2,&temp_v14,&temp_v17);
-    *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x218) = temp_v1 - *(float *)(g_lmapScene + 0x20);
+    *(float *)((*(int *)((unsigned char *)&g_lmapViewHolder + 0x4)) + 0x218) = temp_v1 - *(float *)(g_lmapScene + 0x20);
   }
   return;
 }

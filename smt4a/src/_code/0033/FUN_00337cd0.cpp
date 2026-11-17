@@ -22,7 +22,7 @@ static u32 effectColorPackFrom(EffectColor color)
 }
 
 extern "C" {
-extern EffectColorProductState DAT_006471dc;
+extern EffectColorProductState g_vectorScratch;
 void renderCtxSetPackedColor(u32);
 f32 FUN_0034f8b4(const u8 *, s32, s32);
 u32 FUN_0038136c(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
@@ -53,10 +53,10 @@ void FUN_00337cd0(ScreenEffectJob *job)
     }
     u32 color = FUN_0038136c(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);
-    effectColorAssign(&DAT_006471dc.factor, &DAT_006471dc.color);
+    effectColorAssign(&g_vectorScratch.factor, &g_vectorScratch.color);
     renderCtxSetPackedColor(color);
-    effectColorScale(&DAT_006471dc.factor, &DAT_006471dc.color);
-    u32 packed = effectColorPackFrom(DAT_006471dc.color);
+    effectColorScale(&g_vectorScratch.factor, &g_vectorScratch.color);
+    u32 packed = effectColorPackFrom(g_vectorScratch.color);
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

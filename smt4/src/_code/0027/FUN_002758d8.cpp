@@ -4,7 +4,7 @@
 #include "shard/SaveWork.h"
 
 extern "C" {
-extern void *DAT_004474f4;
+extern void *g_mapCamera;
 
 void FUN_002758d8(void)
 {
@@ -37,7 +37,7 @@ void FUN_002758d8(void)
         save->position[1] = g_lmapScene->pose.position.y;
         save->position[2] = g_lmapScene->pose.position.z;
         save->sceneHeading = g_lmapScene->pose.targetHeading;
-        save->cameraValue = ((CameraSnapshotSource *)DAT_004474f4)->value;
+        save->cameraValue = ((CameraSnapshotSource *)g_mapCamera)->value;
         return;
     case 2:
         save->mode = (u8)context->mapId;

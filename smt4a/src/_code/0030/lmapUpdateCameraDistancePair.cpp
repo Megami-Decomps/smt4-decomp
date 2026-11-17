@@ -17,7 +17,7 @@ void lmapUpdateCameraDistancePair(void)
     } distance;
 
     LmapSceneA *scene = g_lmapScene;
-    LmapViewA *view = DAT_005806a0.view;
+    LmapViewA *view = g_lmapViewHolder.view;
     MapVector scenePosition;
     scenePosition.x = scene->pose.position.x;
     scenePosition.y = 0.0f;
@@ -35,10 +35,10 @@ void lmapUpdateCameraDistancePair(void)
             distance.value = 20.0f;
         }
         uiSetFloatPair(&g_localCamera, distance.value,
-                       DAT_005806a0.view->scale);
+                       g_lmapViewHolder.view->scale);
     } else {
         uiSetFloatPair(&g_localCamera, 140.0f,
-                       DAT_005806a0.view->scale);
+                       g_lmapViewHolder.view->scale);
     }
 }
 }

@@ -25,7 +25,7 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } void_stack;
 
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 
 extern int vectorPairTransitionStep(void);
@@ -80,15 +80,15 @@ void FUN_00208504(void)
   temp_v4 = 350.0f;
   temp_v10 = 140.0f;
   temp_v8 = 150.0f;
-  temp_v1 = DAT_004474f4 + 0x220;
-  switch(*(unsigned int *)(DAT_004474f4 + 4)) {
+  temp_v1 = g_mapCamera + 0x220;
+  switch(*(unsigned int *)(g_mapCamera + 4)) {
   case 0:
-    temp_v14 = *(unsigned int *)(DAT_004474f4 + 0x58);
-    uStack_b4 = *(unsigned int *)(DAT_004474f4 + 0x5c);
-    uStack_b0 = *(unsigned int *)(DAT_004474f4 + 0x60);
-    temp_v16 = *(unsigned int *)(DAT_004474f4 + 0x50);
-    temp_v15 = *(unsigned int *)(DAT_004474f4 + 0x4c);
-    temp_v17 = *(unsigned int *)(DAT_004474f4 + 0x54);
+    temp_v14 = *(unsigned int *)(g_mapCamera + 0x58);
+    uStack_b4 = *(unsigned int *)(g_mapCamera + 0x5c);
+    uStack_b0 = *(unsigned int *)(g_mapCamera + 0x60);
+    temp_v16 = *(unsigned int *)(g_mapCamera + 0x50);
+    temp_v15 = *(unsigned int *)(g_mapCamera + 0x4c);
+    temp_v17 = *(unsigned int *)(g_mapCamera + 0x54);
     temp_v8 = *(float *)(g_lmapScene + 0x1c);
     temp_v12 = *(float *)(g_lmapScene + 0x20);
     temp_v4 = *(float *)(g_lmapScene + 0x4c) * 0.017453292f;
@@ -118,8 +118,8 @@ void FUN_00208504(void)
     temp_v22 = temp_v13;
     temp_v26 = temp_v6;
     FUN_00282228(&temp_v14);
-    temp_v1 = DAT_004474f4;
-    *(unsigned char *)(DAT_004474f4 + 0x21c) = 1;
+    temp_v1 = g_mapCamera;
+    *(unsigned char *)(g_mapCamera + 0x21c) = 1;
     piVar1 = (int *)(temp_v1 + 4);
     *piVar1 = *piVar1 + 1;
     *(unsigned int *)(temp_v1 + 8) = 0;
@@ -162,8 +162,8 @@ void FUN_00208504(void)
       temp_v22 = temp_v12;
       temp_v26 = temp_v6;
       FUN_00282228(&temp_v14);
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
@@ -205,8 +205,8 @@ void FUN_00208504(void)
       temp_v22 = temp_v12;
       temp_v26 = temp_v6;
       FUN_00282228(&temp_v14);
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
@@ -248,8 +248,8 @@ void FUN_00208504(void)
       temp_v22 = temp_v12;
       temp_v26 = temp_v6;
       FUN_00282228(&temp_v14);
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
@@ -291,8 +291,8 @@ void FUN_00208504(void)
       temp_v21 = temp_v4;
       temp_v22 = temp_v11;
       FUN_00282228(&temp_v14);
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
@@ -335,8 +335,8 @@ void FUN_00208504(void)
       temp_v22 = temp_v8;
       temp_v26 = temp_v6;
       FUN_00282228(&temp_v14);
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
@@ -344,8 +344,8 @@ void FUN_00208504(void)
   case 6:
     temp_v1 = vectorPairTransitionStep();
     if (temp_v1 != 0) {
-      temp_v1 = DAT_004474f4;
-      *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
+      temp_v1 = g_mapCamera;
+      *(int *)(g_mapCamera + 4) = *(int *)(g_mapCamera + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }

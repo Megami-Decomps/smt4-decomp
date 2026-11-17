@@ -28,7 +28,7 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } void_stack;
 
-extern int *DAT_004474f4; /* 0x4474f4 */
+extern int *g_mapCamera; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern signed char DAT_0049f93e; /* 0x49f93e */
@@ -91,7 +91,7 @@ void FUN_00274798(void)
           *puVar3 = *puVar3 & 0xfffffffd;
           *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 1;
         }
-        if (*DAT_004474f4 == 3) {
+        if (*g_mapCamera == 3) {
           temp_v0 = *(short *)(temp_v1 + 0x12);
           puVar3 = *(unsigned int **)(temp_v1 + 0x3c);
           temp_v4 = *puVar3;
@@ -130,17 +130,17 @@ LAB_002748b4:
                 *(unsigned int *)(temp_v1 + 0x28) = *(unsigned int *)(temp_v8 + 0x28);
               }
             }
-            if (((*(char *)(g_deferredMapModels + 0xe3c) == '\0') && (*DAT_004474f4 != 3)) &&
+            if (((*(char *)(g_deferredMapModels + 0xe3c) == '\0') && (*g_mapCamera != 3)) &&
                (*(char *)(temp_v1 + 0xe) == '\0')) {
-              temp_v11 = DAT_004474f4[0x13];
+              temp_v11 = g_mapCamera[0x13];
               FUN_002878e4();
               if (temp_v11 < 0x42aa0000) {
-                if (*(float *)(temp_v1 + 0x20) < (float)DAT_004474f4[0x14]) {
+                if (*(float *)(temp_v1 + 0x20) < (float)g_mapCamera[0x14]) {
                   temp_v12 = 250.0f;
                   if (*(short *)(temp_v1 + 0x12) == 5 || *(short *)(temp_v1 + 0x12) == 6) {
                     temp_v12 = 130.0f;
                   }
-                  if ((float)DAT_004474f4[0x14] - *(float *)(temp_v1 + 0x20) < temp_v12) {
+                  if ((float)g_mapCamera[0x14] - *(float *)(temp_v1 + 0x20) < temp_v12) {
                     puVar3 = *(unsigned int **)(temp_v1 + 0x3c);
                     temp_v4 = *puVar3;
                     temp_v5 = temp_v4 & 2;
@@ -228,7 +228,7 @@ LAB_002748b4:
               }
             }
             else {
-              temp_v12 = (float)DAT_004474f4[0x13];
+              temp_v12 = (float)g_mapCamera[0x13];
               mathPositionHeadingDegrees();
               temp_v8 = 0;
               temp_v15 = 50.0f;
@@ -238,7 +238,7 @@ LAB_002748b4:
                 if (*(char *)(temp_v9 + 0xc) != '\0') {
                   temp_v16 = temp_v15;
                   mathPositionHeadingDegrees();
-                  if (DAT_004474f4[0x2b] == -1) {
+                  if (g_mapCamera[0x2b] == -1) {
                     temp_v16 = (float)temp_v17;
                   }
                   temp_v14 = temp_v12;
@@ -296,7 +296,7 @@ LAB_002748b4:
               }
             }
             *(int *)(temp_v1 + 0x30) = temp_v8;
-            if ((*(char *)(g_deferredMapModels + 0xe3c) == '\0') && (*DAT_004474f4 != 3)) {
+            if ((*(char *)(g_deferredMapModels + 0xe3c) == '\0') && (*g_mapCamera != 3)) {
               puVar3 = *(unsigned int **)(temp_v1 + 0x3c);
               temp_v4 = *puVar3;
               temp_v5 = temp_v4 & 2;

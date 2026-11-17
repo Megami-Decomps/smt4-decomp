@@ -12,13 +12,13 @@ struct CameraScratchTransform {
     /* 0x140 */ Matrix44 transform;
 };
 
-extern CameraScratchTransform DAT_004ea81c;
+extern CameraScratchTransform g_vectorScratch;
 
 // Transforms the scratch direction by the scratch matrix (row vector times matrix, w ignored).
 void FUN_00245ed0(void)
 {
-    const f32 (*m)[4] = (const f32 (*)[4])DAT_004ea81c.transform.values;
-    Vector4 *v = &DAT_004ea81c.direction;
+    const f32 (*m)[4] = (const f32 (*)[4])g_vectorScratch.transform.values;
+    Vector4 *v = &g_vectorScratch.direction;
     f32 x = v->x;
     f32 y = v->y;
     f32 z = v->z;

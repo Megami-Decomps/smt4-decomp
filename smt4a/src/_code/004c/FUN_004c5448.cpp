@@ -25,7 +25,7 @@ struct BattleModifierCategoryMasks {
     u64 innate;
 };
 extern "C" {
-extern BattleModifierCategoryMasks DAT_005713f0;
+extern BattleModifierCategoryMasks g_btlSkillResponseMasks;
 s32 FUN_002efc44(const AttributeModifierLists *record, s32 count, s32 kind);
 s32 FUN_0034a304(const AttributeModifierLists *record, s32 count, s32 kind);
 s32 FUN_004bd098(IdOwner *owner, u32 id);
@@ -50,18 +50,18 @@ extern "C" s32 FUN_004c5448(u32 entryId, u32 skillId)
 {
     BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), entryId);
     u64 flags = entry->flags;
-    if (flags & DAT_005713f0.pad) {
+    if (flags & g_btlSkillResponseMasks.pad) {
         const BattleModifierSkillView *skill = (const BattleModifierSkillView *)skillDataFindById(skillId);
         if (skill)
             return FUN_002efc44(&skill->modifiers, padGetMappedValue(skillId), 1);
-    } else if (flags & DAT_005713f0.equipment) {
+    } else if (flags & g_btlSkillResponseMasks.equipment) {
         const BattleModifierSkillView *skill = (const BattleModifierSkillView *)skillDataFindById(skillId);
         if (skill) {
             s32 first = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->data.secondaryRecord), skillId), 1);
             s32 second = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->data.secondaryRecord), skillId), 5);
             return first + second;
         }
-    } else if (flags & DAT_005713f0.innate) {
+    } else if (flags & g_btlSkillResponseMasks.innate) {
         const BattleModifierSkillView *skill = (const BattleModifierSkillView *)skillDataFindById(skillId);
         if (skill) {
             s32 first = FUN_0034a304(&skill->modifiers, nativeCategoryModifier(entry, skill), 1);

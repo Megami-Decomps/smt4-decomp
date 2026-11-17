@@ -31,7 +31,7 @@ struct Matrix34 {
 
 extern "C" {
 
-extern CameraScratchRotation DAT_004ea81c;
+extern CameraScratchRotation g_vectorScratch;
 void matrix44SetIdentity(void);
 void FUN_003f6c7c(void);
 void gfxQuaternionWorkspaceBuildMatrix(void);
@@ -40,12 +40,12 @@ void gfxQuaternionWorkspaceBuildMatrix(void);
 void gfxQuaternionToMatrix34(Matrix34 *output, const Vector4 *quaternion)
 {
     matrix44SetIdentity();
-    DAT_004ea81c.rotation = *quaternion;
+    g_vectorScratch.rotation = *quaternion;
     FUN_003f6c7c();
     gfxQuaternionWorkspaceBuildMatrix();
-    output->row0 = DAT_004ea81c.row0;
-    output->row1 = DAT_004ea81c.row1;
-    output->row2 = DAT_004ea81c.row2;
+    output->row0 = g_vectorScratch.row0;
+    output->row1 = g_vectorScratch.row1;
+    output->row2 = g_vectorScratch.row2;
     output->translation.x = 0.0f;
     output->translation.y = 0.0f;
     output->translation.z = 0.0f;

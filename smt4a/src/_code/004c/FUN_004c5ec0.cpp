@@ -14,7 +14,7 @@ struct ChanceSkillMasks {
 };
 
 extern "C" {
-extern ChanceSkillMasks DAT_005713f0;
+extern ChanceSkillMasks g_btlSkillResponseMasks;
 void source4CCopyHalves(BtlCombatantEntryA *unit, u16 *skills);
 s32 lcgRandomRange(u32 range);
 
@@ -36,7 +36,7 @@ u16 FUN_004c5ec0(u32 unitId)
             if (chance != 0) {
                 s32 roll = lcgRandomRange(99);
 
-                if (battle->flags & DAT_005713f0.alwaysProc) {
+                if (battle->flags & g_btlSkillResponseMasks.alwaysProc) {
                     roll = 0;
                 }
                 if ((s32)chance > roll) {

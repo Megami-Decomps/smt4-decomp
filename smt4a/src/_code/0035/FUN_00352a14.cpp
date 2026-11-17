@@ -6,7 +6,7 @@ extern "C" {
 // Initialize the remaining per-camera preset columns after the base defaults.
 void FUN_00352a14(void)
 {
-    LmapViewA *camera = DAT_005806a0.view;
+    LmapViewA *camera = g_lmapViewHolder.view;
     camera->targetHeight[1] = 145.0f;
     camera->eyeHeight[1] = 165.0f;
     camera->lateralDistance[1] = 40.0f;

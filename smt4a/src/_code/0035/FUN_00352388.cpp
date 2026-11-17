@@ -13,11 +13,11 @@ void FUN_00352388(void)
 {
     LmapViewA *view;
 
-    if (DAT_005806a0.view->clip != NULL) {
-        delete DAT_005806a0.view->clip;
-        DAT_005806a0.view->clip = NULL;
+    if (g_lmapViewHolder.view->clip != NULL) {
+        delete g_lmapViewHolder.view->clip;
+        g_lmapViewHolder.view->clip = NULL;
     }
-    view = DAT_005806a0.view;
+    view = g_lmapViewHolder.view;
     view->target = view->homeTarget;
     view->eye = view->homeEye;
     view->savedTarget = view->homeTarget;

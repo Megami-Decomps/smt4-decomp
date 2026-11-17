@@ -9,7 +9,7 @@ struct SoundListener {
 };
 
 extern SoundActorQueue *DAT_00448c20;
-extern SoundListener *DAT_004474f4;
+extern SoundListener *g_mapCamera;
 /* Hearing radius of each sound actor id, indexed by id - 0x1000000 (lies at 0x4482b8, just before DAT_00448c20). */
 extern f32 DAT_004482b8[];
 
@@ -30,7 +30,7 @@ void FUN_001d36cc(void)
             continue;
         }
         f32 radius = DAT_004482b8[entry->soundId - 0x1000000];
-        f32 distance = mathDistanceBetweenPoints(DAT_004474f4->position, entry->position);
+        f32 distance = mathDistanceBetweenPoints(g_mapCamera->position, entry->position);
         if (!entry->started) {
             if (distance < radius) {
                 entry->handle = soundActorStartOnFreeChannel(entry->soundId, entry->position);

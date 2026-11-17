@@ -30,7 +30,7 @@ extern "C" {
 s32 bitsAt60Test(SlotRecordA *record, u32 bit);
 s32 lcgRandomRange(u32 maximum);
 
-extern BattleAssistMasks DAT_005713f0;
+extern BattleAssistMasks g_btlSkillResponseMasks;
 
 u32 btlSelectFirstPartyAssistParticipant()
 {
@@ -65,7 +65,7 @@ u32 btlSelectFirstPartyAssistParticipant()
             break;
         }
         const BtlMainStateA *state = btlGetMainState();
-        if (state->markerMasks.bits & DAT_005713f0.guarantee) {
+        if (state->markerMasks.bits & g_btlSkillResponseMasks.guarantee) {
             chance = 100;
         }
         if (lcgRandomRange(99) < chance && selected < 1) {
@@ -75,7 +75,7 @@ u32 btlSelectFirstPartyAssistParticipant()
     }
     if (selected > 0) {
         gameFlagSetValue(0x11d6, 1, 1);
-        btlGetMainState()->stateFlags64.bits |= DAT_005713f0.activate;
+        btlGetMainState()->stateFlags64.bits |= g_btlSkillResponseMasks.activate;
         return 1;
     }
     return 0;

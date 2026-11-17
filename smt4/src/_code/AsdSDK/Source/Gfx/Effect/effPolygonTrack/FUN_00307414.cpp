@@ -27,7 +27,7 @@ struct PolygonTrackPrimitive {
 };
 
 extern "C" {
-extern EffectColorProductState DAT_004ea81c;
+extern EffectColorProductState g_vectorScratch;
 extern u8 DAT_00472560; /* the default vertex color, one byte per channel */
 extern u8 DAT_00472561;
 extern u8 DAT_00472562;
@@ -50,26 +50,26 @@ void FUN_00307414(RenderSubmission *submission)
     }
 
     u32 emitterColor = FUN_00269694(emitter, &emitter->color);
-    effectColorUnpack(submission->color, &DAT_004ea81c.factor);
-    effectColorUnpack(emitterColor, &DAT_004ea81c.color);
-    DAT_004ea81c.color.red *= DAT_004ea81c.factor.red;
-    DAT_004ea81c.color.green *= DAT_004ea81c.factor.green;
-    DAT_004ea81c.color.blue *= DAT_004ea81c.factor.blue;
-    DAT_004ea81c.color.alpha *= DAT_004ea81c.factor.alpha;
-    u32 base = effectColorPack(&DAT_004ea81c.color);
+    effectColorUnpack(submission->color, &g_vectorScratch.factor);
+    effectColorUnpack(emitterColor, &g_vectorScratch.color);
+    g_vectorScratch.color.red *= g_vectorScratch.factor.red;
+    g_vectorScratch.color.green *= g_vectorScratch.factor.green;
+    g_vectorScratch.color.blue *= g_vectorScratch.factor.blue;
+    g_vectorScratch.color.alpha *= g_vectorScratch.factor.alpha;
+    u32 base = effectColorPack(&g_vectorScratch.color);
 
     u32 duration = emitter->duration;
     for (u32 i = 0; i < emitter->vertexCount; i++) {
         EffectColor *out = &primitive->colors[(u16)i];
         if (*entries < duration) {
             u32 curveColor = FUN_00269694(emitter->colorCurve, emitter->envelope, *entries, duration);
-            effectColorUnpack(curveColor, &DAT_004ea81c.factor);
-            effectColorUnpack(base, &DAT_004ea81c.color);
-            DAT_004ea81c.color.red *= DAT_004ea81c.factor.red;
-            DAT_004ea81c.color.green *= DAT_004ea81c.factor.green;
-            DAT_004ea81c.color.blue *= DAT_004ea81c.factor.blue;
-            DAT_004ea81c.color.alpha *= DAT_004ea81c.factor.alpha;
-            effectColorUnpack(effectColorPack(&DAT_004ea81c.color), out);
+            effectColorUnpack(curveColor, &g_vectorScratch.factor);
+            effectColorUnpack(base, &g_vectorScratch.color);
+            g_vectorScratch.color.red *= g_vectorScratch.factor.red;
+            g_vectorScratch.color.green *= g_vectorScratch.factor.green;
+            g_vectorScratch.color.blue *= g_vectorScratch.factor.blue;
+            g_vectorScratch.color.alpha *= g_vectorScratch.factor.alpha;
+            effectColorUnpack(effectColorPack(&g_vectorScratch.color), out);
         } else {
             out->red = (f32)DAT_00472560 * (1.0f / 255.0f);
             out->green = (f32)DAT_00472561 * (1.0f / 255.0f);

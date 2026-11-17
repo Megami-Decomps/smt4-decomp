@@ -224,7 +224,7 @@ extern unsigned char DAT_004043b8; /* 0x4043b8 */
 extern int g_aocMain; /* 0x432fc8 */
 extern int g_aocSystem; /* 0x433158 */
 extern unsigned int *g_lmapMainState; /* 0x447060 */
-extern int DAT_004474f4; /* 0x4474f4 */
+extern int g_mapCamera; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern unsigned char g_fixedCamera; /* 0x49f3f0 */
@@ -729,7 +729,7 @@ unsigned int FUN_001d3e3c(void)
           *(unsigned int *)(temp_v6 + 0x4c) = temp_v7;
           *(unsigned int *)(temp_v6 + 0x50) = temp_v7;
           temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v7;
+          *(unsigned int *)(g_mapCamera + 0x18) = temp_v7;
         }
       }
       else {
@@ -1089,7 +1089,7 @@ unsigned int FUN_001d3e3c(void)
             if (DAT_0049f954 != 0x30) {
               if (DAT_0049f954 == 0x31) {
                 temp_v6 = FUN_0027ee9c();
-                if ((temp_v6 == 0) || (*(char *)(DAT_004474f4 + 0xb0) != '\0')) goto LAB_001d58a0;
+                if ((temp_v6 == 0) || (*(char *)(g_mapCamera + 0xb0) != '\0')) goto LAB_001d58a0;
                 DAT_0049f934 = '\x01';
                 temp_v16 = (unsigned int)DAT_0049fa19;
                 temp_v15 = (unsigned int)DAT_0049fa18;
@@ -1141,7 +1141,7 @@ unsigned int FUN_001d3e3c(void)
                       if (DAT_0049f954 == 0x3c) {
                         *(unsigned char *)((int)puVar7 + 0xe1) = 1;
                         temp_v6 = FUN_0027ee9c();
-                        if ((temp_v6 != 0) && (*(char *)(DAT_004474f4 + 0xb0) == '\0')) {
+                        if ((temp_v6 != 0) && (*(char *)(g_mapCamera + 0xb0) == '\0')) {
                           navigationResetTimer();
                           temp_v16 = (unsigned int)DAT_0049fa19;
                           temp_v15 = (unsigned int)DAT_0049fa18;
@@ -1172,7 +1172,7 @@ LAB_001d58a0:
                       mapSelectNearbyDeferredModel();
                       if ((*(char *)(g_deferredMapModels + 0xe0c) != '\0') &&
                          ((temp_v6 = FUN_0027ee9c(), temp_v6 != 0 &&
-                          (*(char *)(DAT_004474f4 + 0xb0) == '\0')))) {
+                          (*(char *)(g_mapCamera + 0xb0) == '\0')))) {
                         DAT_0049f934 = '\x01';
                         DAT_0049f974 = -1;
                         libc_strcpy(&DAT_0049f978,g_deferredMapModels + 0xe1c);
@@ -1231,7 +1231,7 @@ LAB_001d58a0:
                       return 0;
                     }
                     temp_v6 = FUN_0027ee9c();
-                    if ((temp_v6 == 0) || (*(char *)(DAT_004474f4 + 0xb0) != '\0'))
+                    if ((temp_v6 == 0) || (*(char *)(g_mapCamera + 0xb0) != '\0'))
                     goto LAB_001d58a0;
                     DAT_0049f934 = '\x01';
                     if (DAT_0049f9c0 != 5) {
@@ -1263,7 +1263,7 @@ LAB_001d58a0:
                     break;
                   }
                   temp_v6 = FUN_0027ee9c();
-                  if ((temp_v6 == 0) || (*(char *)(DAT_004474f4 + 0xb0) != '\0')) goto LAB_001d58a0;
+                  if ((temp_v6 == 0) || (*(char *)(g_mapCamera + 0xb0) != '\0')) goto LAB_001d58a0;
                   DAT_0049f934 = '\x01';
                   if (DAT_0049f9dc == -1) {
                     puVar7[3] = 0x34;
@@ -1290,7 +1290,7 @@ LAB_001d58a0:
                 }
                 else {
                   temp_v6 = FUN_0027ee9c();
-                  if ((temp_v6 == 0) || (*(char *)(DAT_004474f4 + 0xb0) != '\0')) goto LAB_001d58a0;
+                  if ((temp_v6 == 0) || (*(char *)(g_mapCamera + 0xb0) != '\0')) goto LAB_001d58a0;
                   DAT_0049f934 = '\x01';
                   DAT_0049fb45 = 1;
                   DAT_0049fb46 = 0;
@@ -1327,7 +1327,7 @@ LAB_001d58a0:
             }
             else {
               temp_v6 = FUN_0027ee9c();
-              if ((temp_v6 == 0) || (*(char *)(DAT_004474f4 + 0xb0) != '\0')) goto LAB_001d58a0;
+              if ((temp_v6 == 0) || (*(char *)(g_mapCamera + 0xb0) != '\0')) goto LAB_001d58a0;
               DAT_0049f934 = '\x01';
               temp_v16 = (unsigned int)DAT_0049fa19;
               temp_v15 = (unsigned int)DAT_0049fa18;
@@ -1354,7 +1354,7 @@ LAB_001d58a0:
           }
           else {
             temp_v6 = FUN_0027ee9c();
-            if ((temp_v6 == 0) || (*(char *)(DAT_004474f4 + 0xb0) != '\0')) goto LAB_001d58a0;
+            if ((temp_v6 == 0) || (*(char *)(g_mapCamera + 0xb0) != '\0')) goto LAB_001d58a0;
             DAT_0049f934 = '\x01';
             temp_v16 = (unsigned int)DAT_0049fa19;
             temp_v15 = (unsigned int)DAT_0049fa18;
@@ -1384,7 +1384,7 @@ LAB_001d58a0:
         }
         else {
           temp_v6 = FUN_0027ee9c();
-          if ((temp_v6 == 0) || (*(char *)(DAT_004474f4 + 0xb0) != '\0')) goto LAB_001d58a0;
+          if ((temp_v6 == 0) || (*(char *)(g_mapCamera + 0xb0) != '\0')) goto LAB_001d58a0;
           DAT_0049f934 = '\x01';
           if (DAT_0049f9dc != -1) {
             temp_v6 = FUN_00276264();
@@ -1554,7 +1554,7 @@ joined_r0x001d535c:
     }
     FUN_00275be8(0);
     if (DAT_0049f950 == '\0') {
-      *(unsigned short *)(DAT_004474f4 + 0xb2) = 0xd;
+      *(unsigned short *)(g_mapCamera + 0xb2) = 0xd;
       DAT_0049f934 = 0;
       puVar7[3] = 0xb;
       puVar7[4] = 0;
@@ -1600,7 +1600,7 @@ joined_r0x001d535c:
           temp_v17 = *(unsigned int *)(g_lmapScene + 0x20);
           temp_v18 = (unsigned int)*(unsigned char **)(g_lmapScene + 0x24);
           temp_v19 = *(unsigned int *)(g_lmapScene + 0x4c);
-          temp_v20 = *(unsigned int *)(DAT_004474f4 + 0x18);
+          temp_v20 = *(unsigned int *)(g_mapCamera + 0x18);
           saveSetNavigationPosition(&temp_v15);
           gameCopyPersistentSave();
           puVar7[3] = 0x60;
@@ -1614,7 +1614,7 @@ joined_r0x001d535c:
           temp_v17 = *(unsigned int *)(g_lmapScene + 0x20);
           temp_v18 = (unsigned int)*(unsigned char **)(g_lmapScene + 0x24);
           temp_v19 = *(unsigned int *)(g_lmapScene + 0x4c);
-          temp_v20 = *(unsigned int *)(DAT_004474f4 + 0x18);
+          temp_v20 = *(unsigned int *)(g_mapCamera + 0x18);
           saveSetNavigationPosition(&temp_v15);
           gameCopyPersistentSave();
           FUN_00264794();
@@ -3508,8 +3508,8 @@ LAB_001d4774:
   temp_v9 = 0x42100000;
   FUN_002c1e30(&g_fixedCamera,1);
   FUN_00298d50(&g_fixedCamera);
-  temp_v6 = DAT_004474f4;
-  *(unsigned int *)(DAT_004474f4 + 0xc4) = 0;
+  temp_v6 = g_mapCamera;
+  *(unsigned int *)(g_mapCamera + 0xc4) = 0;
   *(unsigned int *)(temp_v6 + 200) = 0x43160000;
   *(unsigned int *)(temp_v6 + 0x108) = 0x452f0000;
   *(unsigned int *)(temp_v6 + 0x188) = 0x44fa0000;

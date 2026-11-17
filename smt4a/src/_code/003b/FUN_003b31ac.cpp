@@ -7,7 +7,7 @@ void asdGxSetEffectColorFromRGBA8(u32 color);
 void FUN_002b3c9c(RenderSubmissionPacket *, u32 mode);
 u32 FUN_0038136c(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00221cb0(void);
-extern EffectColorProductState DAT_006471dc;
+extern EffectColorProductState g_vectorScratch;
 
 // Apply the owner's interpolated color, transform and depth mode while visible.
 void FUN_003b31ac(RenderSubmission *submission)
@@ -19,7 +19,7 @@ void FUN_003b31ac(RenderSubmission *submission)
     }
     u32 ownerColor = FUN_0038136c(owner, &owner->color, submission->frame, owner->frame);
     asdGxSetEffectColorFromRGBA8(submission->color);
-    effectColorCopy(&DAT_006471dc.color, &DAT_006471dc.factor);
+    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
     asdGxSetEffectColorFromRGBA8(ownerColor);
     FUN_002f8a54();
     u32 color = FUN_00221cb0();

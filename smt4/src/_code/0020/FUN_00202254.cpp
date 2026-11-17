@@ -5,7 +5,7 @@
 
 extern "C" {
 
-extern unsigned char* DAT_004474f4;
+extern unsigned char* g_mapCamera;
 
 int modelPartSetRotationDegrees(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, float *);
@@ -102,7 +102,7 @@ void FUN_00202254(void)
     if (DAT_004bd0dc != '\0') {
       {
         float cameraHeading = cameraGetTargetAngle();
-        FUN_002e29c0(*(float*)(DAT_004474f4 + 0x4c),*(float*)(DAT_004474f4 + 0x54),cameraHeading);
+        FUN_002e29c0(*(float*)(g_mapCamera + 0x4c),*(float*)(g_mapCamera + 0x54),cameraHeading);
       }
       temp_v2 = temp_v18;
       temp_v19[0] = 0;

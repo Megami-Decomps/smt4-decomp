@@ -4,7 +4,7 @@ extern "C" {
 
 void engineResetStateTime(void)
 {
-    DAT_005806a0.view->heightBias = 0.0f;
+    g_lmapViewHolder.view->heightBias = 0.0f;
 }
 
 } /* extern "C" */

@@ -18,7 +18,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_005713f0; /* 0x5713f0 */
+extern unsigned int g_btlSkillResponseMasks; /* 0x5713f0 */
 extern unsigned int DAT_005713f4; /* 0x5713f4 */
 extern unsigned int DAT_005713f8; /* 0x5713f8 */
 extern unsigned int DAT_005713fc; /* 0x5713fc */
@@ -246,7 +246,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   temp_v4 = puVar3[1];
   if (!((temp_v4 & DAT_005713fc) == 0 && (temp_v2 & DAT_005713f8) == 0)) {
     temp_v4 = temp_v4 | DAT_005713f4;
-    *puVar3 = temp_v2 | DAT_005713f0;
+    *puVar3 = temp_v2 | g_btlSkillResponseMasks;
     puVar3[1] = temp_v4;
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     temp_v1 = *(int *)(temp_v1 + 0x1ed4) + param_1 * 0x1d0;
@@ -264,7 +264,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
       return;
     }
     temp_v4 = temp_v4 | DAT_005713f4;
-    *puVar3 = temp_v2 | DAT_005713f0;
+    *puVar3 = temp_v2 | g_btlSkillResponseMasks;
     puVar3[1] = temp_v4;
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     temp_v1 = *(int *)(temp_v1 + 0x1ed4) + param_1 * 0x1d0;

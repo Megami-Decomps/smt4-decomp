@@ -7,7 +7,7 @@
 
 extern "C" {
 extern MapEnvironmentEntry DAT_0049fb1c;
-extern MapCameraWork *DAT_004474f4;
+extern MapCameraWork *g_mapCamera;
 void mapEnvironmentApplySelectedEntry();
 u32 FUN_0025bb34(u32 group, const char *name, u32 flags);
 
@@ -18,7 +18,7 @@ void FUN_002d5374()
         DAT_0049fb1c.unk26 = DAT_0049fb1c.unk24;
     }
     mapEnvironmentApplySelectedEntry();
-    const MapCameraWork *camera = DAT_004474f4;
+    const MapCameraWork *camera = g_mapCamera;
     f32 dx = camera->eyeSnapshot.x - camera->targetSnapshot.x;
     f32 dy = camera->eyeSnapshot.y - camera->targetSnapshot.y;
     f32 dz = camera->eyeSnapshot.z - camera->targetSnapshot.z;
@@ -38,7 +38,7 @@ void FUN_002d5374()
     if (length >= 120.0f) {
         length = 120.0f;
     }
-    camera = DAT_004474f4;
+    camera = g_mapCamera;
     x = camera->targetSnapshot.x + directionX * length;
     y = g_lmapScene->pose.position.y + 130.0f;
     z = camera->targetSnapshot.z + directionZ * length;

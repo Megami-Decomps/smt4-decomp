@@ -7420,3 +7420,8 @@
 0035ae58 gxSetMirroredClippedScissor inferred SMT4 twin FUN_0029a17c; exact byte/relocation match with shared coordinate-packing helper and separately refreshed scene snapshots.
 002a74ac uniteResultInitialize inferred Initializes fusion-result textures, render target, stage model/camera, tone-specific script and sprites; exact IV counterpart with Apocalypse resource constructors and layout.
 0052f3c0 sUniteResultSpriteKeys inferred size:0xe0 Final sprite-command packet for uniteResultInitialize; static compiled bytes independently compared against native image.
+006471dc g_vectorScratch inferred Vector and matrix scratch workspace. Twin of smt4 g_vectorScratch.
+005713f0 g_btlSkillResponseMasks inferred Table of u64 masks the battle code tests a skill's response against (20 units).
+005806a0 g_lmapViewHolder inferred Holds the lmap view (its .view is g_lmapView's object).
+005b4028 DAT_005b4028 inferred Name withdrawn: the block is the whole allocator state (renamed g_asdMemState).
+005b4028 g_asdMemState inferred The engine allocator state; twin of smt4 g_asdMemState (region bases/sizes are only part of it).

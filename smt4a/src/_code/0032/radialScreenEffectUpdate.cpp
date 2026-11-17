@@ -3,7 +3,7 @@
 #include "gfx/EffectColorMath.h"
 
 extern "C" {
-extern EffectColorProductState DAT_006471dc;
+extern EffectColorProductState g_vectorScratch;
 f32 FUN_0034f8b4(const u8 *, s32, s32);
 f32 screenEffectProjectWorldRadius(f32 radius);
 u32 FUN_0038136c(const u8 *, const ScreenEffectWeightTrack *, s32, s32);
@@ -33,10 +33,10 @@ void radialScreenEffectUpdate(RadialScreenEffectJob *job)
         output->maximum.x = radius + 200.0f;
         output->maximum.y = radius + 120.0f;
     } else {
-        DAT_006471dc.color = job->position;
+        g_vectorScratch.color = job->position;
         radius = screenEffectProjectWorldRadius(job->radiusScale * radius);
-        f32 x = DAT_006471dc.color.red;
-        f32 y = DAT_006471dc.color.green;
+        f32 x = g_vectorScratch.color.red;
+        f32 y = g_vectorScratch.color.green;
         output->center.x = x;
         output->center.y = y;
         output->minimum.x = x - radius;
@@ -46,10 +46,10 @@ void radialScreenEffectUpdate(RadialScreenEffectJob *job)
     }
     u32 sampledColor = FUN_0038136c(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);
-    effectColorCopy(&DAT_006471dc.color, &DAT_006471dc.factor);
+    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
     renderCtxSetPackedColor(sampledColor);
-    effectColorMultiply(&DAT_006471dc.color, &DAT_006471dc.color, &DAT_006471dc.factor);
-    u32 packed = effectColorPack(DAT_006471dc.color);
+    effectColorMultiply(&g_vectorScratch.color, &g_vectorScratch.color, &g_vectorScratch.factor);
+    u32 packed = effectColorPack(g_vectorScratch.color);
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

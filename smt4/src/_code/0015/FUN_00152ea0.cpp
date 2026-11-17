@@ -6,9 +6,9 @@ extern "C" {
 /* Restores the saved halfword after leaving the outermost scope. */
 void FUN_00152ea0(void)
 {
-    if (DAT_00465120.tagDepth != 0) {
-        if (--DAT_00465120.tagDepth == 0) {
-            DAT_00465120.usage->tag = DAT_00465120.tagPrevious;
+    if (g_asdMemState.tagDepth != 0) {
+        if (--g_asdMemState.tagDepth == 0) {
+            g_asdMemState.usage->tag = g_asdMemState.tagPrevious;
         }
     }
 }
