@@ -6886,3 +6886,4 @@
 0035ae58 gxSetMirroredClippedScissor
 002a74ac uniteResultInitialize
 002c7e6c statusAcquireSharedResources
+002cdad4 btlEventPanelInitialize

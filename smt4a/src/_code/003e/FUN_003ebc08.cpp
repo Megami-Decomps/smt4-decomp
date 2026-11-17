@@ -1,5 +1,5 @@
 /* NON_MATCHING: Retail ldr r3, [pc, #140] differs from recovered ldr r0, [pc, #132]. */
-#include "common.h"
+#include "battle/btlUI.h"
 
 struct BattleStateLocalView {
     u8 unk00[0x4C70];
@@ -17,7 +17,7 @@ struct BattleUiLocalView {
 
 extern "C" {
 extern BattleUiLocalView* g_btlUiBlock;
-void FUN_004a9a50(BattleUiLocalView* ui, s8 firstDelta, s8 secondDelta);
+
 void FUN_004aaa80(BattleUiLocalView* ui, s8 firstDelta, s8 secondDelta);
 
 // Dispatch wrapped UI deltas by mode, then snapshot the current state pair.

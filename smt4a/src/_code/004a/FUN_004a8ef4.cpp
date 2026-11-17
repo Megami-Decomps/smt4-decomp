@@ -30,7 +30,7 @@ extern u8 DAT_0052ae44[];
 extern u8 DAT_0052af04[];
 
 void itemListScreenInit(void *state);
-void FUN_002cdad4(void *state);
+void btlEventPanelInitialize(void *state);
 void FUN_0021c45c(void *state, BtlOwner *owner);
 void paramsClearPacket(void *packet);
 
@@ -52,7 +52,7 @@ void FUN_004a8ef4(void *unused, BtlOwner *owner)
     *BTL_UI(ui, 0x7505) = 0;
     *BTL_UI(ui, 0x7506) = 0;
     itemListScreenInit(ui + 8);
-    FUN_002cdad4(BTL_UI(ui, 0x24BC));
+    btlEventPanelInitialize(BTL_UI(ui, 0x24BC));
     FUN_0021c45c(BTL_UI(ui, 0x28C4), owner);
     ui = (u8 *)g_btlUi.block;
     *(u16 *)BTL_UI(ui, 0x6B56) = 0;

@@ -69700,12 +69700,12 @@
     },
     {
       "address": "0x2cdad4",
-      "function": "FUN_002cdad4",
+      "function": "btlEventPanelInitialize",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002cdad4.o",
+      "object": "build/obj/_code/002c/btlEventPanelInitialize.o",
       "size": 568,
-      "source": "src/_code/002c/FUN_002cdad4.cpp",
-      "target": "orig/target/_code/002c/FUN_002cdad4.o",
+      "source": "src/_code/002c/btlEventPanelInitialize.cpp",
+      "target": "orig/target/_code/002c/btlEventPanelInitialize.o",
       "thumb": false
     },
     {
