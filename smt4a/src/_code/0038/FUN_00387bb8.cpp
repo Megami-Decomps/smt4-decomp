@@ -1,4 +1,4 @@
-/* NON_MATCHING: refresh-store placement matches; initial scheduling and case-6 return folding differ. */
+/* NON_MATCHING: only case 6 differs: when FUN_00284e94 fails retail returns its known-zero r0 straight from the pop, this build branches to the shared `mov r0, r6` exit. */
 #include "camp/CampCec/CharacterRefreshWork.h"
 #include "event/2dEvent/EventEffect.h"
 

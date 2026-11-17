@@ -139,16 +139,22 @@ typedef struct BtlActionGlobalsA {
         } buttons;
     };
     /* 0x78 */ u64 untargetableMask; /* entry flags that rule a combatant out */
-    /* 0x80 */ u8 unk80[0xA8];
+    /* 0x80 */ u8 unk80[0x58];
+    /* 0xD8 */ u64 aiActMask;       /* battle state bits that let the AI script act (FUN_004ec950) */
+    /* 0xE0 */ u8 unkE0[0x48];
     /* 0x128 */ u64 interruptMask; /* actor flag bits that block the skill start */
-    /* 0x130 */ u8 unk130[0x88];
+    /* 0x130 */ u8 unk130[0x50];
+    /* 0x180 */ u64 aiMenuMask;     /* battle state bits that make the AI open a menu command */
+    /* 0x188 */ u64 aiTargetMask;   /* battle state bits that make the AI pick a target command */
+    /* 0x190 */ u8 unk190[0x28];
 } BtlActionGlobalsA;
 
 typedef char BtlActionGlobalsALayoutCheck[offsetof(BtlActionGlobalsA, targetableMask) == 0x10 &&
     offsetof(BtlActionGlobalsA, untargetableMask) == 0x78 && sizeof(BtlActionGlobalsA) == 0x1B8 ? 1 : -1];
 typedef char BtlActionClearedFlagsOffsetCheck[
     offsetof(BtlActionGlobalsA, clearedFlags.mask) == 0x58 &&
-    offsetof(BtlActionGlobalsA, interruptMask) == 0x128 ? 1 : -1];
+    offsetof(BtlActionGlobalsA, interruptMask) == 0x128 && offsetof(BtlActionGlobalsA, aiActMask) == 0xD8 &&
+    offsetof(BtlActionGlobalsA, aiMenuMask) == 0x180 && offsetof(BtlActionGlobalsA, aiTargetMask) == 0x188 ? 1 : -1];
 typedef char BtlActionInteractionMasksOffsetCheck[
     offsetof(BtlActionGlobalsA, interaction.requiredMask) == 0x30 &&
     offsetof(BtlActionGlobalsA, interaction.reachMask) == 0x38 &&

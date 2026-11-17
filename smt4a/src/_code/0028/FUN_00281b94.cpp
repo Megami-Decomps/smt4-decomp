@@ -1,438 +1,247 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00281b94` (_code @ 0x281b94, 0xb48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the control flow, calls, constants and most data accesses match; what differs is
+ * the inlined three-axis sin/cos sampling (retail serialises the three float->u16 conversions through
+ * one VFP register and needs only s0-s15 there, this build converts all three at once and spills into
+ * s23/s27/s28, so it saves r4-fp and d8-d14 instead of r4-sl and d8-d13) and, following from that, the
+ * stack layout (retail frame 0x108 with the matrix at sp+0, outputs at sp+0x30.., inputs at 0x80, 0x8c,
+ * 0xa4, 0xc8, 0xec; this build 0xec). The same rotation inline is unmatched in FUN_0024bfb8 in IV (0x218
+ * bytes), the best test bed for it. */
+#include "common.h"
+#include <math.h>
+#include "nw/math/MTX33.h"
+#include "shard/W6_W6Match6_CollisionQuad.h"
+#include "shard/W6_W6Match6_PhaseTrig.h"
 
 extern "C" {
-
-int FUN_002c0b98(...);
-int VectorFloatToUnsigned(...);
-int VectorUnsignedToFloat(...);
-int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
-
-/* stack frame of param_1: 40 slot(s), 160 byte(s) */
-typedef struct {
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spC4; /* 0xc4: local_c4 */
-    unsigned int spC8; /* 0xc8: local_c8 */
-    unsigned int spCC; /* 0xcc: local_cc */
-    unsigned int spD0; /* 0xd0: local_d0 */
-    unsigned int spD4; /* 0xd4: local_d4 */
-    unsigned int spD8; /* 0xd8: local_d8 */
-    unsigned int spF8; /* 0xf8: local_f8 */
-    unsigned int spFC; /* 0xfc: local_fc */
-    unsigned int sp100; /* 0x100: local_100 */
-    unsigned int sp104; /* 0x104: local_104 */
-    unsigned int sp108; /* 0x108: local_108 */
-    unsigned int sp10C; /* 0x10c: local_10c */
-    unsigned int sp110; /* 0x110: local_110 */
-    unsigned int sp114; /* 0x114: local_114 */
-    unsigned int sp118; /* 0x118: local_118 */
-    unsigned int sp11C; /* 0x11c: local_11c */
-    unsigned int sp120; /* 0x120: local_120 */
-    unsigned int sp124; /* 0x124: local_124 */
-    unsigned int sp128; /* 0x128: local_128 */
-    unsigned int sp12C; /* 0x12c: local_12c */
-    unsigned int sp130; /* 0x130: local_130 */
-    unsigned int sp134; /* 0x134: local_134 */
-    unsigned int sp138; /* 0x138: local_138 */
-    unsigned int sp13C; /* 0x13c: local_13c */
-    unsigned int sp140; /* 0x140: local_140 */
-    unsigned int sp144; /* 0x144: local_144 */
-    unsigned int sp148; /* 0x148: local_148 */
-    unsigned int sp14C; /* 0x14c: local_14c */
-    unsigned int sp150; /* 0x150: local_150 */
-    unsigned int sp154; /* 0x154: local_154 */
-    unsigned int sp158; /* 0x158: local_158 */
-} param_1_stack;
-
-extern unsigned int g_sinCosTable; /* 0x536d14 */
-extern unsigned int DAT_00536d18; /* 0x536d18 */
-extern unsigned int DAT_00536d1c; /* 0x536d1c */
-extern unsigned int DAT_00536d20; /* 0x536d20 */
-
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002c0b98. */
-/* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-
-
-/* WARNING: Removing unreachable block (ram,0x0028256c) */
-/* WARNING: Removing unreachable block (ram,0x002822a4) */
-/* WARNING: Removing unreachable block (ram,0x00281ffc) */
-/* WARNING: Removing unreachable block (ram,0x00281d2c) */
-/* WARNING: Removing unreachable block (ram,0x00281d3c) */
-/* WARNING: Removing unreachable block (ram,0x0028200c) */
-/* WARNING: Removing unreachable block (ram,0x002822b4) */
-/* WARNING: Removing unreachable block (ram,0x0028257c) */
-/* WARNING: Removing unreachable block (ram,0x00281c6c) */
-
-void FUN_00281b94(unsigned int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr, in_s0, in_s1, in_s2, in_s3, in_s4, in_s6; 17 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int in_fpscr;
-  unsigned int temp_v1;
-  float in_s0;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float in_s1;
-  float temp_v6;
-  float in_s2;
-  float temp_v7;
-  float in_s3;
-  float temp_v8;
-  float in_s4;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float in_s6;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  unsigned int temp_v17;
-  float temp_v18;
-  float temp_v19;
-  float temp_v20;
-  float temp_v21;
-  unsigned int temp_v22;
-  float temp_v23;
-  float temp_v24;
-  float temp_v25;
-  unsigned int temp_v26;
-  float temp_v27;
-  float temp_v28;
-  float temp_v29;
-  unsigned int temp_v30;
-  float temp_v31;
-  float temp_v32;
-  float temp_v33;
-  float temp_v34;
-  float temp_v35;
-  float temp_v36;
-  float temp_v37;
-  float temp_v38;
-  float temp_v39;
-  float temp_v40;
-  float temp_v41;
-  float temp_v42;
-  unsigned char temp_v43 [32];
-  float temp_v44;
-  float temp_v45;
-  unsigned int temp_v46;
-  float temp_v47;
-  float temp_v48;
-  float temp_v49;
-  float temp_v50 [2];
-  float temp_v51;
-  float temp_v52;
-  float temp_v53;
-  float temp_v54;
-  float temp_v55 [2];
-  float temp_v56;
-  
-  temp_v8 = 0.0f;
-  temp_v18 = 0.7111111f;
-  temp_v47 = -(in_s4 * 0.5f);
-  temp_v15 = in_s6 * 0.5f;
-  temp_v14 = in_s4 * 0.5f;
-  temp_v50[0] = -(in_s4 * 0.5f);
-  temp_v17 = 0x3f800000;
-  temp_v48 = 0.0f;
-  temp_v53 = 0.0f;
-  temp_v44 = 0.0f;
-  temp_v45 = 0.0f;
-  temp_v46 = 0x3f800000;
-  temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= in_s3 * 0.7111111f) << 0x1d);
-  temp_v16 = 65536.0f;
-  for (temp_v9 = romwright_fabs_4(in_s3 * 0.7111111f); (int)temp_v9 >= 0x47800000; temp_v9 = temp_v9 - 65536.0f) {
-  }
-  temp_v2 = VectorFloatToUnsigned(0,3);
-  temp_v3 = VectorFloatToUnsigned(temp_v9,3);
-  temp_v4 = VectorFloatToUnsigned(0,3);
-  temp_v0 = temp_v2 & 0xff;
-  temp_v6 = (float)VectorUnsignedToFloat(temp_v2 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v2 = temp_v3 & 0xff;
-  temp_v7 = (float)VectorUnsignedToFloat(temp_v3 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v3 = temp_v4 & 0xff;
-  temp_v5 = (float)VectorUnsignedToFloat(temp_v4 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v13 = (float)(&g_sinCosTable)[temp_v2 * 4] + (temp_v9 - temp_v7) * (float)(&DAT_00536d1c)[temp_v2 * 4];
-  temp_v29 = (float)(&DAT_00536d18)[temp_v2 * 4] +
-              (temp_v9 - temp_v7) * (float)(&DAT_00536d20)[temp_v2 * 4];
-  temp_v7 = (float)(&DAT_00536d18)[temp_v0 * 4] + (0.0f - temp_v6) * (float)(&DAT_00536d20)[temp_v0 * 4];
-  temp_v9 = (float)(&g_sinCosTable)[temp_v0 * 4] + (0.0f - temp_v6) * (float)(&DAT_00536d1c)[temp_v0 * 4];
-  temp_v6 = (float)(&g_sinCosTable)[temp_v3 * 4] + (0.0f - temp_v5) * (float)(&DAT_00536d1c)[temp_v3 * 4];
-  temp_v5 = (float)(&DAT_00536d18)[temp_v3 * 4] + (0.0f - temp_v5) * (float)(&DAT_00536d20)[temp_v3 * 4];
-  if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
-    temp_v13 = -temp_v13;
-  }
-  temp_v19 = temp_v5 * temp_v29;
-  temp_v27 = -temp_v13;
-  temp_v23 = temp_v6 * temp_v29;
-  temp_v28 = temp_v9 * temp_v29;
-  temp_v29 = temp_v7 * temp_v29;
-  temp_v20 = temp_v9 * temp_v5 * temp_v13 - temp_v7 * temp_v6;
-  temp_v21 = temp_v9 * temp_v6 + temp_v7 * temp_v5 * temp_v13;
-  temp_v25 = temp_v7 * temp_v6 * temp_v13 - temp_v9 * temp_v5;
-  temp_v24 = temp_v7 * temp_v5 + temp_v9 * temp_v6 * temp_v13;
-  temp_v22 = 0;
-  temp_v26 = 0;
-  temp_v30 = 0;
-  temp_v49 = temp_v15;
-  temp_v51 = temp_v15;
-  temp_v52 = temp_v14;
-  temp_v54 = temp_v15;
-  temp_v55[0] = temp_v14;
-  temp_v56 = temp_v15;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v31,&temp_v19,&temp_v47);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v34,&temp_v19,&temp_v52);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v37,&temp_v19,temp_v55);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v40,&temp_v19,temp_v50);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v43,&temp_v19,&temp_v44);
-  temp_v31 = temp_v31 + in_s0;
-  temp_v32 = temp_v32 + in_s1;
-  temp_v33 = temp_v33 + in_s2;
-  temp_v34 = temp_v34 + in_s0;
-  temp_v35 = temp_v35 + in_s1;
-  temp_v36 = temp_v36 + in_s2;
-  temp_v37 = temp_v37 + in_s0;
-  temp_v38 = temp_v38 + in_s1;
-  temp_v39 = temp_v39 + in_s2;
-  temp_v40 = temp_v40 + in_s0;
-  temp_v41 = temp_v41 + in_s1;
-  temp_v42 = temp_v42 + in_s2;
-  FUN_002c0b98(param_1);
-  temp_v5 = -temp_v15;
-  temp_v9 = (in_s3 + 90.0f) * temp_v18;
-  temp_v1 = (temp_v1 & 0xfffffff) | ((unsigned int)(temp_v8 <= temp_v9) << 0x1d);
-  for (temp_v9 = romwright_fabs_4(temp_v9); temp_v6 = temp_v8, (int)temp_v9 >= 0x47800000; temp_v9 = temp_v9 - temp_v16) {
-  }
-  for (; (int)temp_v6 >= 0x47800000; temp_v6 = temp_v6 - temp_v16) {
-  }
-  temp_v4 = VectorFloatToUnsigned(temp_v8,3);
-  temp_v0 = VectorFloatToUnsigned(temp_v9,3);
-  temp_v2 = VectorFloatToUnsigned(temp_v6,3);
-  temp_v3 = temp_v0 & 0xff;
-  temp_v10 = (float)VectorUnsignedToFloat(temp_v0 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v0 = temp_v4 & 0xff;
-  temp_v7 = (float)VectorUnsignedToFloat(temp_v4 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v11 = (float)VectorUnsignedToFloat(temp_v2 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v2 = temp_v2 & 0xff;
-  temp_v13 = (float)(&g_sinCosTable)[temp_v0 * 4] + (temp_v8 - temp_v7) * (float)(&DAT_00536d1c)[temp_v0 * 4];
-  temp_v12 = (float)(&DAT_00536d18)[temp_v0 * 4] + (temp_v8 - temp_v7) * (float)(&DAT_00536d20)[temp_v0 * 4];
-  temp_v7 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v9 - temp_v10) * (float)(&DAT_00536d1c)[temp_v3 * 4];
-  temp_v29 = (float)(&DAT_00536d18)[temp_v3 * 4] +
-              (temp_v9 - temp_v10) * (float)(&DAT_00536d20)[temp_v3 * 4];
-  temp_v9 = (float)(&g_sinCosTable)[temp_v2 * 4] + (temp_v6 - temp_v11) * (float)(&DAT_00536d1c)[temp_v2 * 4];
-  temp_v6 = (float)(&DAT_00536d18)[temp_v2 * 4] + (temp_v6 - temp_v11) * (float)(&DAT_00536d20)[temp_v2 * 4];
-  if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
-    temp_v7 = -temp_v7;
-  }
-  temp_v19 = temp_v6 * temp_v29;
-  temp_v27 = -temp_v7;
-  temp_v23 = temp_v9 * temp_v29;
-  temp_v28 = temp_v13 * temp_v29;
-  temp_v29 = temp_v12 * temp_v29;
-  temp_v20 = temp_v13 * temp_v6 * temp_v7 - temp_v12 * temp_v9;
-  temp_v25 = temp_v12 * temp_v9 * temp_v7 - temp_v13 * temp_v6;
-  temp_v21 = temp_v13 * temp_v9 + temp_v12 * temp_v6 * temp_v7;
-  temp_v24 = temp_v12 * temp_v6 + temp_v13 * temp_v9 * temp_v7;
-  temp_v22 = 0;
-  temp_v26 = 0;
-  temp_v30 = 0;
-  temp_v44 = temp_v8;
-  temp_v45 = temp_v8;
-  temp_v46 = temp_v17;
-  temp_v47 = temp_v5;
-  temp_v48 = temp_v8;
-  temp_v49 = temp_v14;
-  temp_v50[0] = temp_v5;
-  temp_v51 = temp_v14;
-  temp_v52 = temp_v15;
-  temp_v53 = temp_v8;
-  temp_v54 = temp_v14;
-  temp_v55[0] = temp_v15;
-  temp_v56 = temp_v14;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v31,&temp_v19,&temp_v47);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v34,&temp_v19,&temp_v52);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v37,&temp_v19,temp_v55);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v40,&temp_v19,temp_v50);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v43,&temp_v19,&temp_v44);
-  temp_v31 = temp_v31 + in_s0;
-  temp_v32 = temp_v32 + in_s1;
-  temp_v33 = temp_v33 + in_s2;
-  temp_v34 = temp_v34 + in_s0;
-  temp_v35 = temp_v35 + in_s1;
-  temp_v36 = temp_v36 + in_s2;
-  temp_v37 = temp_v37 + in_s0;
-  temp_v38 = temp_v38 + in_s1;
-  temp_v39 = temp_v39 + in_s2;
-  temp_v40 = temp_v40 + in_s0;
-  temp_v41 = temp_v41 + in_s1;
-  temp_v42 = temp_v42 + in_s2;
-  FUN_002c0b98(param_1);
-  temp_v47 = -temp_v14;
-  temp_v9 = (in_s3 + 180.0f) * temp_v18;
-  temp_v1 = (temp_v1 & 0xfffffff) | ((unsigned int)(temp_v8 <= temp_v9) << 0x1d);
-  for (temp_v9 = romwright_fabs_4(temp_v9); temp_v6 = temp_v8, (int)temp_v9 >= 0x47800000; temp_v9 = temp_v9 - temp_v16) {
-  }
-  for (; (int)temp_v6 >= 0x47800000; temp_v6 = temp_v6 - temp_v16) {
-  }
-  temp_v3 = VectorFloatToUnsigned(temp_v8,3);
-  temp_v0 = VectorFloatToUnsigned(temp_v9,3);
-  temp_v4 = VectorFloatToUnsigned(temp_v6,3);
-  temp_v2 = temp_v0 & 0xff;
-  temp_v13 = (float)VectorUnsignedToFloat(temp_v0 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v0 = temp_v3 & 0xff;
-  temp_v7 = (float)VectorUnsignedToFloat(temp_v3 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v3 = temp_v4 & 0xff;
-  temp_v11 = (float)VectorUnsignedToFloat(temp_v4 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v10 = (float)(&g_sinCosTable)[temp_v2 * 4] + (temp_v9 - temp_v13) * (float)(&DAT_00536d1c)[temp_v2 * 4]
-  ;
-  temp_v29 = (float)(&DAT_00536d18)[temp_v2 * 4] +
-              (temp_v9 - temp_v13) * (float)(&DAT_00536d20)[temp_v2 * 4];
-  temp_v9 = (float)(&g_sinCosTable)[temp_v0 * 4] + (temp_v8 - temp_v7) * (float)(&DAT_00536d1c)[temp_v0 * 4];
-  temp_v7 = (float)(&DAT_00536d18)[temp_v0 * 4] + (temp_v8 - temp_v7) * (float)(&DAT_00536d20)[temp_v0 * 4];
-  temp_v13 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v6 - temp_v11) * (float)(&DAT_00536d1c)[temp_v3 * 4];
-  temp_v6 = (float)(&DAT_00536d18)[temp_v3 * 4] + (temp_v6 - temp_v11) * (float)(&DAT_00536d20)[temp_v3 * 4];
-  if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
-    temp_v10 = -temp_v10;
-  }
-  temp_v19 = temp_v6 * temp_v29;
-  temp_v27 = -temp_v10;
-  temp_v23 = temp_v13 * temp_v29;
-  temp_v28 = temp_v9 * temp_v29;
-  temp_v29 = temp_v7 * temp_v29;
-  temp_v20 = temp_v9 * temp_v6 * temp_v10 - temp_v7 * temp_v13;
-  temp_v25 = temp_v7 * temp_v13 * temp_v10 - temp_v9 * temp_v6;
-  temp_v21 = temp_v9 * temp_v13 + temp_v7 * temp_v6 * temp_v10;
-  temp_v24 = temp_v7 * temp_v6 + temp_v9 * temp_v13 * temp_v10;
-  temp_v22 = 0;
-  temp_v26 = 0;
-  temp_v30 = 0;
-  temp_v44 = temp_v8;
-  temp_v45 = temp_v8;
-  temp_v46 = temp_v17;
-  temp_v48 = temp_v8;
-  temp_v49 = temp_v15;
-  temp_v50[0] = temp_v47;
-  temp_v51 = temp_v15;
-  temp_v52 = temp_v14;
-  temp_v53 = temp_v8;
-  temp_v54 = temp_v15;
-  temp_v55[0] = temp_v14;
-  temp_v56 = temp_v15;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v31,&temp_v19,&temp_v47);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v34,&temp_v19,&temp_v52);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v37,&temp_v19,temp_v55);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v40,&temp_v19,temp_v50);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v43,&temp_v19,&temp_v44);
-  temp_v31 = temp_v31 + in_s0;
-  temp_v32 = temp_v32 + in_s1;
-  temp_v33 = temp_v33 + in_s2;
-  temp_v34 = temp_v34 + in_s0;
-  temp_v35 = temp_v35 + in_s1;
-  temp_v36 = temp_v36 + in_s2;
-  temp_v37 = temp_v37 + in_s0;
-  temp_v38 = temp_v38 + in_s1;
-  temp_v39 = temp_v39 + in_s2;
-  temp_v40 = temp_v40 + in_s0;
-  temp_v41 = temp_v41 + in_s1;
-  temp_v42 = temp_v42 + in_s2;
-  FUN_002c0b98(param_1);
-  temp_v18 = (in_s3 + 270.0f) * temp_v18;
-  temp_v1 = (temp_v1 & 0xfffffff) | ((unsigned int)(temp_v8 <= temp_v18) << 0x1d);
-  for (temp_v18 = romwright_fabs_4(temp_v18); temp_v9 = temp_v8, (int)temp_v18 >= 0x47800000; temp_v18 = temp_v18 - temp_v16) {
-  }
-  for (; (int)temp_v9 >= 0x47800000; temp_v9 = temp_v9 - temp_v16) {
-  }
-  temp_v2 = VectorFloatToUnsigned(temp_v8,3);
-  temp_v3 = VectorFloatToUnsigned(temp_v18,3);
-  temp_v4 = VectorFloatToUnsigned(temp_v9,3);
-  temp_v0 = temp_v2 & 0xff;
-  temp_v13 = (float)VectorUnsignedToFloat(temp_v2 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v2 = temp_v3 & 0xff;
-  temp_v6 = (float)VectorUnsignedToFloat(temp_v3 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v3 = temp_v4 & 0xff;
-  temp_v16 = (float)VectorUnsignedToFloat(temp_v4 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v10 = (float)(&g_sinCosTable)[temp_v0 * 4] + (temp_v8 - temp_v13) * (float)(&DAT_00536d1c)[temp_v0 * 4];
-  temp_v11 = (float)(&g_sinCosTable)[temp_v2 * 4] + (temp_v18 - temp_v6) * (float)(&DAT_00536d1c)[temp_v2 * 4];
-  temp_v7 = (float)(&g_sinCosTable)[temp_v3 * 4] + (temp_v9 - temp_v16) * (float)(&DAT_00536d1c)[temp_v3 * 4];
-  temp_v13 = (float)(&DAT_00536d18)[temp_v0 * 4] + (temp_v8 - temp_v13) * (float)(&DAT_00536d20)[temp_v0 * 4];
-  temp_v9 = (float)(&DAT_00536d18)[temp_v3 * 4] + (temp_v9 - temp_v16) * (float)(&DAT_00536d20)[temp_v3 * 4]
-  ;
-  temp_v29 = (float)(&DAT_00536d18)[temp_v2 * 4] +
-              (temp_v18 - temp_v6) * (float)(&DAT_00536d20)[temp_v2 * 4];
-  if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
-    temp_v11 = -temp_v11;
-  }
-  temp_v19 = temp_v9 * temp_v29;
-  temp_v27 = -temp_v11;
-  temp_v23 = temp_v7 * temp_v29;
-  temp_v28 = temp_v10 * temp_v29;
-  temp_v29 = temp_v13 * temp_v29;
-  temp_v20 = temp_v10 * temp_v9 * temp_v11 - temp_v13 * temp_v7;
-  temp_v21 = temp_v10 * temp_v7 + temp_v13 * temp_v9 * temp_v11;
-  temp_v25 = temp_v13 * temp_v7 * temp_v11 - temp_v10 * temp_v9;
-  temp_v24 = temp_v13 * temp_v9 + temp_v10 * temp_v7 * temp_v11;
-  temp_v22 = 0;
-  temp_v26 = 0;
-  temp_v30 = 0;
-  temp_v44 = temp_v8;
-  temp_v45 = temp_v8;
-  temp_v46 = temp_v17;
-  temp_v47 = temp_v5;
-  temp_v48 = temp_v8;
-  temp_v49 = temp_v14;
-  temp_v50[0] = temp_v5;
-  temp_v51 = temp_v14;
-  temp_v52 = temp_v15;
-  temp_v53 = temp_v8;
-  temp_v54 = temp_v14;
-  temp_v55[0] = temp_v15;
-  temp_v56 = temp_v14;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v31,&temp_v19,&temp_v47);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v34,&temp_v19,&temp_v52);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v37,&temp_v19,temp_v55);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v40,&temp_v19,temp_v50);
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(temp_v43,&temp_v19,&temp_v44);
-  temp_v31 = temp_v31 + in_s0;
-  temp_v32 = temp_v32 + in_s1;
-  temp_v33 = temp_v33 + in_s2;
-  temp_v34 = temp_v34 + in_s0;
-  temp_v35 = temp_v35 + in_s1;
-  temp_v36 = temp_v36 + in_s2;
-  temp_v37 = temp_v37 + in_s0;
-  temp_v38 = temp_v38 + in_s1;
-  temp_v39 = temp_v39 + in_s2;
-  temp_v40 = temp_v40 + in_s0;
-  temp_v41 = temp_v41 + in_s1;
-  temp_v42 = temp_v42 + in_s2;
-  FUN_002c0b98(param_1);
-  return;
+extern const PhaseTrigEntry g_sinCosTable[];
+/* nn::math::VEC3Transform for a 3x4 matrix: output = matrix * (input, 1). */
+void nn_math_ARMv6_VEC3TransformAsm_2AD44C(nw::math::VEC3 *output, const nw::math::MTX34 *matrix,
+                                           const nw::math::VEC3 *input);
+/* Appends a four-corner quad (corners in order, then its normal) to the collision list. */
+void FUN_002c0b98(u16 tag, CollisionVector a, CollisionVector b, CollisionVector c, CollisionVector d,
+                  CollisionVector normal);
 }
 
-} /* extern "C" */
+/* nn::math MTX34RotXYZFIdx (angles in 1/256 turns): the three table samples run side by side, each
+ * wrapped below 65536 first. */
+static __forceinline void mtx34RotXYZFIdx(nw::math::MTX34 *out, f32 fIdxX, f32 fIdxY, f32 fIdxZ)
+{
+    int negX = (fIdxX < 0.0f) ? 1 : 0;
+    int negY = (fIdxY < 0.0f) ? 1 : 0;
+    int negZ = (fIdxZ < 0.0f) ? 1 : 0;
+    f32 absX = fabsf(fIdxX);
+    f32 absY = fabsf(fIdxY);
+    f32 absZ = fabsf(fIdxZ);
+    while (absX >= 65536.0f) {
+        absX -= 65536.0f;
+    }
+    while (absY >= 65536.0f) {
+        absY -= 65536.0f;
+    }
+    while (absZ >= 65536.0f) {
+        absZ -= 65536.0f;
+    }
+    u16 idxX = (u16)absX;
+    u16 idxY = (u16)absY;
+    u16 idxZ = (u16)absZ;
+    f32 rX = absX - (f32)idxX;
+    f32 rY = absY - (f32)idxY;
+    f32 rZ = absZ - (f32)idxZ;
+    const PhaseTrigEntry *entryX = &g_sinCosTable[idxX & 0xff];
+    const PhaseTrigEntry *entryY = &g_sinCosTable[idxY & 0xff];
+    const PhaseTrigEntry *entryZ = &g_sinCosTable[idxZ & 0xff];
+    f32 sinx = entryX->sine + rX * entryX->sineDelta;
+    f32 cosx = entryX->cosine + rX * entryX->cosineDelta;
+    f32 siny = entryY->sine + rY * entryY->sineDelta;
+    f32 cosy = entryY->cosine + rY * entryY->cosineDelta;
+    f32 sinz = entryZ->sine + rZ * entryZ->sineDelta;
+    f32 cosz = entryZ->cosine + rZ * entryZ->cosineDelta;
+    if (negX) {
+        sinx = -sinx;
+    }
+    if (negY) {
+        siny = -siny;
+    }
+    if (negZ) {
+        sinz = -sinz;
+    }
+    f32 f1, f2;
+
+    out->m[0][0] = cosz * cosy;
+    out->m[1][0] = sinz * cosy;
+    out->m[2][1] = sinx * cosy;
+    out->m[2][2] = cosx * cosy;
+
+    f1 = cosx * sinz;
+    f2 = sinx * cosz;
+    out->m[0][1] = f2 * siny - f1;
+    out->m[1][2] = f1 * siny - f2;
+
+    f1 = sinx * sinz;
+    f2 = cosx * cosz;
+    out->m[0][2] = f2 * siny + f1;
+    out->m[1][1] = f1 * siny + f2;
+    out->m[2][0] = -siny;
+
+    /* The translation is cleared with integer stores (retail writes a zero core register). */
+    *(u32 *)&out->m[0][3] = 0;
+    *(u32 *)&out->m[1][3] = 0;
+    *(u32 *)&out->m[2][3] = 0;
+}
+
+/* The collision quads keep their own vector type; nn::math transforms nw::math::VEC3 in place of it. */
+static __inline void transformPoint(CollisionVector *out, const nw::math::MTX34 *matrix, const nw::math::VEC3 *v)
+{
+    nn_math_ARMv6_VEC3TransformAsm_2AD44C((nw::math::VEC3 *)out, matrix, v);
+}
+
+/* Adds the four upright walls of a box to the collision list: a width x depth footprint centred on
+ * position, height tall, turned by angle degrees about Y. Each wall is a quad in the XY plane at
+ * z = half extent, rotated by angle, angle + 90, + 180 and + 270. */
+extern "C" void FUN_00281b94(u16 tag, nw::math::VEC3 position, f32 angle, f32 width, f32 height, f32 depth)
+{
+    CollisionVector p0, p1, p2, p3, n;
+    nw::math::VEC3 corner0, corner1, corner2, corner3, normal;
+    nw::math::MTX34 rotation;
+    f32 halfWidth = width * 0.5f;
+    f32 halfDepth = depth * 0.5f;
+
+    corner0.x = -halfWidth;
+    corner0.y = 0.0f;
+    corner0.z = halfDepth;
+    corner1.x = halfWidth;
+    corner1.y = 0.0f;
+    corner1.z = halfDepth;
+    corner2.x = halfWidth;
+    corner2.y = height;
+    corner2.z = halfDepth;
+    corner3.x = -halfWidth;
+    corner3.y = height;
+    corner3.z = halfDepth;
+    normal.x = 0.0f;
+    normal.y = 0.0f;
+    normal.z = 1.0f;
+    mtx34RotXYZFIdx(&rotation, 0.0f, angle * (256.0f / 360.0f), 0.0f);
+    transformPoint(&p0, &rotation, &corner0);
+    transformPoint(&p1, &rotation, &corner1);
+    transformPoint(&p2, &rotation, &corner2);
+    transformPoint(&p3, &rotation, &corner3);
+    transformPoint(&n, &rotation, &normal);
+    p0.x += position.x;
+    p0.y += position.y;
+    p0.z += position.z;
+    p1.x += position.x;
+    p1.y += position.y;
+    p1.z += position.z;
+    p2.x += position.x;
+    p2.y += position.y;
+    p2.z += position.z;
+    p3.x += position.x;
+    p3.y += position.y;
+    p3.z += position.z;
+    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+
+    corner0.x = -halfDepth;
+    corner0.y = 0.0f;
+    corner0.z = halfWidth;
+    corner1.x = halfDepth;
+    corner1.y = 0.0f;
+    corner1.z = halfWidth;
+    corner2.x = halfDepth;
+    corner2.y = height;
+    corner2.z = halfWidth;
+    corner3.x = -halfDepth;
+    corner3.y = height;
+    corner3.z = halfWidth;
+    normal.x = 0.0f;
+    normal.y = 0.0f;
+    normal.z = 1.0f;
+    mtx34RotXYZFIdx(&rotation, 0.0f, (angle + 90.0f) * (256.0f / 360.0f), 0.0f);
+    transformPoint(&p0, &rotation, &corner0);
+    transformPoint(&p1, &rotation, &corner1);
+    transformPoint(&p2, &rotation, &corner2);
+    transformPoint(&p3, &rotation, &corner3);
+    transformPoint(&n, &rotation, &normal);
+    p0.x += position.x;
+    p0.y += position.y;
+    p0.z += position.z;
+    p1.x += position.x;
+    p1.y += position.y;
+    p1.z += position.z;
+    p2.x += position.x;
+    p2.y += position.y;
+    p2.z += position.z;
+    p3.x += position.x;
+    p3.y += position.y;
+    p3.z += position.z;
+    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+
+    corner0.x = -halfWidth;
+    corner0.y = 0.0f;
+    corner0.z = halfDepth;
+    corner1.x = halfWidth;
+    corner1.y = 0.0f;
+    corner1.z = halfDepth;
+    corner2.x = halfWidth;
+    corner2.y = height;
+    corner2.z = halfDepth;
+    corner3.x = -halfWidth;
+    corner3.y = height;
+    corner3.z = halfDepth;
+    normal.x = 0.0f;
+    normal.y = 0.0f;
+    normal.z = 1.0f;
+    mtx34RotXYZFIdx(&rotation, 0.0f, (angle + 180.0f) * (256.0f / 360.0f), 0.0f);
+    transformPoint(&p0, &rotation, &corner0);
+    transformPoint(&p1, &rotation, &corner1);
+    transformPoint(&p2, &rotation, &corner2);
+    transformPoint(&p3, &rotation, &corner3);
+    transformPoint(&n, &rotation, &normal);
+    p0.x += position.x;
+    p0.y += position.y;
+    p0.z += position.z;
+    p1.x += position.x;
+    p1.y += position.y;
+    p1.z += position.z;
+    p2.x += position.x;
+    p2.y += position.y;
+    p2.z += position.z;
+    p3.x += position.x;
+    p3.y += position.y;
+    p3.z += position.z;
+    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+
+    corner0.x = -halfDepth;
+    corner0.y = 0.0f;
+    corner0.z = halfWidth;
+    corner1.x = halfDepth;
+    corner1.y = 0.0f;
+    corner1.z = halfWidth;
+    corner2.x = halfDepth;
+    corner2.y = height;
+    corner2.z = halfWidth;
+    corner3.x = -halfDepth;
+    corner3.y = height;
+    corner3.z = halfWidth;
+    normal.x = 0.0f;
+    normal.y = 0.0f;
+    normal.z = 1.0f;
+    mtx34RotXYZFIdx(&rotation, 0.0f, (angle + 270.0f) * (256.0f / 360.0f), 0.0f);
+    transformPoint(&p0, &rotation, &corner0);
+    transformPoint(&p1, &rotation, &corner1);
+    transformPoint(&p2, &rotation, &corner2);
+    transformPoint(&p3, &rotation, &corner3);
+    transformPoint(&n, &rotation, &normal);
+    p0.x += position.x;
+    p0.y += position.y;
+    p0.z += position.z;
+    p1.x += position.x;
+    p1.y += position.y;
+    p1.z += position.z;
+    p2.x += position.x;
+    p2.y += position.y;
+    p2.z += position.z;
+    p3.x += position.x;
+    p3.y += position.y;
+    p3.z += position.z;
+    FUN_002c0b98(tag, p0, p1, p2, p3, n);
+}

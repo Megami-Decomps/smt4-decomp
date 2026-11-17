@@ -315,7 +315,9 @@ shared object, does not cast the object to a local view, and does not redeclare 
 - Converting a unit to the shared struct must keep it IDENTICAL (or, for a near miss, no worse).
 - `python -B tools/declcheck.py [BASE]` (run by CI on every change) fails when the lines a change adds
   to a unit redeclare a function, global or struct that a shared header declares. Moving a declaration
-  into a shared header never fails it; `--all` counts the older local copies still to remove.
+  into a shared header never fails it; `--all` counts the older local copies still to remove. A local
+  declaration kept on purpose, because the shared one's types change this caller's code, carries
+  `// declcheck: local (reason)` on its line.
 
 ### Contracts
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the first guard differs: retail branches straight to the epilogue (r0 is already 0) where this build branches to the shared `mov r0, #0`. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
@@ -34,7 +33,13 @@ s32 eventFlagForScene(s32 scene);
 /* Once both FUN_002c2a04 slots report 3, stops the battle's jobs and starts the follow-up job (flag 0x817). */
 s32 FUN_0023f194(BtlEndTask *task)
 {
-    if (task->unk0C != 0 && task->unk14 != 0) {
+    if (task->unk0C == 0) {
+        return 0;
+    }
+    if (task->unk14 == 0) {
+        return 0;
+    }
+    {
         if (FUN_002c2a04(0) == 3 && FUN_002c2a04(1) == 3) {
             BtlMainState *state = btlGetMainState();
             FUN_0033a780(reinterpret_cast<BattleActionHistoryState *>(state));

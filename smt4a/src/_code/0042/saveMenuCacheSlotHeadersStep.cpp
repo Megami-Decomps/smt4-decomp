@@ -1,6 +1,13 @@
-/* NON_MATCHING: the mode switch loads the old mode into r1 and the new mode into r0 in retail (the reverse here) and the final tail call sets r1 before the increment. */
+/* NON_MATCHING: only the mode switch's store order differs: retail stores the new mode before the remembered one (here the remembered mode is stored first; the shared enterMode shape with FUN_0041f110 gives retail's registers). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/SaveSlotHeaderWork.h"
+
+/* Switches to another mode, remembering the one it leaves. */
+static void enterMode(SaveSlotHeaderWork *work, u8 mode)
+{
+    work->previousMode = work->mode;
+    work->mode = mode;
+}
 
 extern "C" {
 u32 scrRunOpcodesStub(ScriptProcess *script);
@@ -13,12 +20,18 @@ const void *gameDataBlocksGetTable();
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void sysMemClear(void *destination, u32 size);
 
+/* Starts the save/load process on a slot (numbered from 1) in the given mode. */
+static void startSaveLoad(s32 slot, s32 mode)
+{
+    saveLoadProcessCreate(slot, mode);
+}
+
 // Cache the five save-slot headers, then wait for the final animation and script.
 void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
 {
     switch (work->step) {
     case 0:
-        saveLoadProcessCreate(work->slotIndex + 1, 1);
+        startSaveLoad(work->slotIndex + 1, 1);
         FUN_0041e3a0(work, 0);
         ++work->step;
         // Fall through to the first slot's completion poll.
@@ -47,7 +60,7 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
         s32 next = work->slotIndex + 1;
         work->slotIndex = next;
         if (next < 5) {
-            saveLoadProcessCreate(next + 1, 1);
+            startSaveLoad(next + 1, 1);
             return;
         }
         work->ready = 1;
@@ -71,8 +84,7 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
             }
             work->scriptPending = 0;
         }
-        work->previousMode = work->mode;
-        work->mode = 0x13;
+        enterMode(work, 0x13);
         work->step = 0;
         work->phase = 0;
         return;

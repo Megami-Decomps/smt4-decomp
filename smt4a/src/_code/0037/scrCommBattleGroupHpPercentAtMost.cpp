@@ -1,4 +1,4 @@
-/* NON_MATCHING: scalar range uses an 8-byte frame versus retail 40; range order, total registers and final exclusion-mask operands differ. */
+/* NON_MATCHING: the range record (count + entries) gives retail's 40-byte frame and loads; remaining: the exclusion-mask AND registers and the hp/maxHp totals swap r5/r6 (retail loads the pair with ldm in the special-entry tail). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -17,13 +17,17 @@ u32 scrCommBattleGroupHpPercentAtMost()
     s32 kind = btlResolveEntryChoice(scrGetArg(1));
     s32 totalHp = 0;
     s32 totalMaxHp = 0;
-    struct { s32 count; s32 first; } range;
-    btlGetEntryChoiceRange(kind, &range.first, &range.count);
-    for (s32 index = range.first; index < range.count + range.first; ++index) {
+    struct {
+        s32 count;
+        s32 entries[8];
+    } range;
+    btlGetEntryChoiceRange(kind, range.entries, &range.count);
+    s32 first = range.entries[0];
+    for (s32 index = first; index < range.count + range.entries[0]; ++index) {
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (g_btlCandidateMasks.required & entry->flags) != 0 &&
-            (g_btlCandidateMasks.excluded & entry->flags) == 0) {
+            (entry->flags & g_btlCandidateMasks.excluded) == 0) {
             s32 hp = entry->data.hp;
             s32 maxHp = entry->data.maxHp;
             totalHp += hp;

@@ -1,25 +1,20 @@
-/* NON_MATCHING: the middle word of the three-word script-handle copy uses r1 instead of retail r2, and the last step stores the done flag before the step (retail: step first, flag loaded before it); all instructions otherwise agree. */
 #include "common.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 #include "battle/btlMain.h"
+#include "script/scrScriptProcess.h"
 
 /* The resident handles the main battle state offers; the loader copies them over one by one. */
 struct BtlMainStateHandles {
     /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u32 scriptA;
-    /* 0x10 */ u32 scriptB;
-    /* 0x14 */ u32 script;
+    /* 0x0C */ void *scriptA;
+    /* 0x10 */ void *scriptB;
+    /* 0x14 */ void *script;
     /* 0x18 */ u32 resource0;
     /* 0x1C */ u32 resource1;
     /* 0x20 */ u32 resource2;
     /* 0x24 */ u32 resource5;
     /* 0x28 */ u32 resource4;
     /* 0x2C */ u32 resource6;
-};
-
-struct ScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 mode;
 };
 
 /* The battle loader's work (observed fields). */
@@ -31,9 +26,9 @@ struct BtlLoader {
     /* 0x223C */ u32 resource5;
     /* 0x2240 */ u32 resource4;
     /* 0x2244 */ u32 resource6;
-    /* 0x2248 */ u32 scriptA;
-    /* 0x224C */ u32 scriptB;
-    /* 0x2250 */ u32 script;
+    /* 0x2248 */ void *scriptA;
+    /* 0x224C */ void *scriptB;
+    /* 0x2250 */ void *script;
     /* 0x2254 */ ScriptProcess *process;
     /* 0x2258 */ u8 unk2258[0x27A4];
     /* 0x49FC */ u16 flags;
@@ -50,7 +45,7 @@ extern BtlMainStateHandles g_btlMainState;
 void FUN_00394cc4(void);
 void *btlLoaderGetLock(BtlLoader *loader);
 s32 jyoucyuEnsureResidentEntry(void);
-ScriptProcess *scrScriptProcessCreate(void);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 resourceFindActiveIndex(u32 id);
 void FUN_00328d2c(void);
 void FUN_00328fa4(void);
@@ -72,8 +67,8 @@ void FUN_00339b64(BtlLoader *loader)
             loader->scriptA = g_btlMainState.scriptA;
             loader->scriptB = g_btlMainState.scriptB;
             loader->script = g_btlMainState.script;
-            loader->process = scrScriptProcessCreate();
-            loader->process->mode = 0;
+            loader->process = scrScriptProcessCreate(loader->script, loader->scriptA);
+            scriptProcessSetMode(loader->process, 0);
             loader->step++;
         case 2:
             if (loader->script == 0) {
@@ -130,8 +125,8 @@ void FUN_00339b64(BtlLoader *loader)
         case 12:
             loader->step++;
         case 13:
-            loader->flags |= LOADER_DONE;
             loader->step++;
+            loader->flags |= LOADER_DONE;
         }
     } while ((loader->flags & LOADER_DONE) == 0);
 }

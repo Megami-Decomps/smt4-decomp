@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reloads the final stat and materializes the unit base before the saved-record lookup. */
+/* NON_MATCHING: only the copy of the current stats into the initial ones differs: retail reloads the last stat halfword, armcc reuses the stored value. */
 #include "battle/UnitInitialization.h"
 #include "battle/btlUnit.h"
 #include "gamedata/PlayerInitialization.h"
@@ -30,10 +30,10 @@ void FUN_003370ac(BtlPartyInitializationStateIV *world)
     BtlEntryInitializationIV entry;
     btlInitializePlayerUnitData((u32)world, reinterpret_cast<BtlUnitData *>(&entry.unit), player);
     FUN_00255e38(reinterpret_cast<SlotWorld *>(world), reinterpret_cast<UnitRecordIn *>(&entry.unit), 0, 0, 0);
-    for (s16 slot = 0; slot < 3; ++slot) {
+    for (u16 slot = 0; slot < 3; ++slot) {
         if (slots->active[slot] >= 0) {
-            const SavedBattleInitialViewIV *saved = reinterpret_cast<const SavedBattleInitialViewIV *>(saveResolvePartySlot(slot));
             BtlUnitInitializationIV *unit = &entry.unit;
+            const SavedBattleInitialViewIV *saved = reinterpret_cast<const SavedBattleInitialViewIV *>(saveResolvePartySlot(slot));
             unit->active = 2;
             unit->selection[2] = gameSlotFindByCategory(reinterpret_cast<const SavedUnitRecord *>(saved));
             unit->status = saved->id;

@@ -7,6 +7,7 @@ extern "C" {
 
 void jobStopIfValidA(Obj *obj);
 
-void pairSetHalves(Obj *obj, u16 a, u16 b);
+/* Sets the halfword pair at 0x18 (a sprite's offset). */
+void pairSetHalves(Obj *obj, s16 a, s16 b);
 
 } /* extern "C" */

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00215d68` (_code @ 0x215d68, 0xbf4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "ui/UiSpriteApi.h"
 #include "gamedata/SaveSlotTableIV.h"
@@ -17,7 +18,6 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(...);
 int demonGetRaceLabel(...);
-int FUN_002bd068(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
@@ -173,7 +173,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
       textFormatBuffer(temp_v15,&LAB_002162d0);
     }
     else {
-      temp_v4 = FUN_002bd068(*puVar6);
+      temp_v4 = (int)FUN_002bd068(*puVar6);
       textFormatBuffer(temp_v15,&LAB_002162d4,temp_v4);
     }
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -298,7 +298,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
           temp_v11 = 0x72e027ff;
         }
         if (*(char *)((int)puVar2 + temp_v1 + 0x522a) != '\0') {
-          temp_v9 = FUN_002bd068(*psVar10);
+          temp_v9 = (int)FUN_002bd068(*psVar10);
           textFormatBuffer(temp_v15,&LAB_002162d4,temp_v9);
         }
         else {

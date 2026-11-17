@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/W6_W6Match3_RotationY.h"
@@ -21,7 +22,6 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int demonGetRaceLabel(...);
-int FUN_002bd068(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
@@ -142,7 +142,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v16 = 0x72e027ff;
       }
     }
-    temp_v7 = FUN_002bd068(*puVar5);
+    temp_v7 = (int)FUN_002bd068(*puVar5);
     textFormatBuffer(temp_v19,"%s",temp_v7);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -207,7 +207,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         texDrawTableEntryAtStoredOrigin(2,0x24,0x114,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,
                      0x6f);
         temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x118));
-        temp_v15 = FUN_002bd068(*psVar13);
+        temp_v15 = (int)FUN_002bd068(*psVar13);
         textFormatBuffer(temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,1);
@@ -256,7 +256,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         texDrawTableEntryAtStoredOrigin(2,0x24,0x114,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,
                      0x6f);
         temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x118));
-        temp_v15 = FUN_002bd068(*psVar13);
+        temp_v15 = (int)FUN_002bd068(*psVar13);
         textFormatBuffer(temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,1);
@@ -382,7 +382,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       if (*(char *)(temp_v3 + 0xe0) == '\x01') {
         temp_v15 = 0x72e027ff;
       }
-      temp_v16 = FUN_002bd068(*psVar13);
+      temp_v16 = (int)FUN_002bd068(*psVar13);
       textFormatBuffer(temp_v19,"%s",temp_v16);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -455,7 +455,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       if (*(char *)(temp_v3 + 0xe0) == '\x02') {
         temp_v15 = 0x72e027ff;
       }
-      temp_v16 = FUN_002bd068(*psVar13);
+      temp_v16 = (int)FUN_002bd068(*psVar13);
       textFormatBuffer(temp_v19,"%s",temp_v16);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);

@@ -43,7 +43,13 @@ static __inline u32 spriteColorPack(f32 level, f32 alpha)
 u32 FUN_00289f10(u32 job)
 {
     SpriteJobWork *work = (SpriteJobWork *)jobGetWork(job);
-    if (work->blocked == 0 && work->visible != 0) {
+    if (work->blocked != 0) {
+        return 0;
+    }
+    if (work->visible == 0) {
+        return 0;
+    }
+    {
         if (work->prepared == 0) {
             FUN_00230038(work);
             work->prepared = 1;

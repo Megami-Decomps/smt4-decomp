@@ -78,7 +78,10 @@ struct UiSpriteState {
     /* 0x18 */ u8 unk18[8];
     /* 0x20 */ f32 alpha;
     /* 0x24 */ f32 scale[3];       /* the scale track sets all three */
-    /* 0x30 */ u8 unk30[8];
+    union {
+        /* 0x30 */ u8 unk30[8];
+        /* 0x30 */ f32 extraScale;  /* the party display sets it from PlayScene::badgeScales */
+    };
     /* 0x38 */ u16 id;
     /* 0x3A */ u16 layer;
     /* 0x3C */ u8 active;

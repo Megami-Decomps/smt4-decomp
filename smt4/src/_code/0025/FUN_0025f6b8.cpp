@@ -1,1250 +1,702 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025f6b8` (_code @ 0x25f6b8, 0x2af0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "battle/BtlMainAccess.h"
-#include "romwright_types.h"
+/* NON_MATCHING: the control flow, calls and data accesses follow retail (about 94% of retail's instructions
+ * line up once registers and stack offsets are ignored), but the register allocation differs from the start
+ * of the loop on: retail keeps 1/7 in a fifth callee-saved VFP register (vpush d8-d10) and 1.0f in s17 for the
+ * whole function, spills other values, and so assigns different registers and stack slots (frame 228 against
+ * 236). The HP/MP gauge calls differ most: retail stores their constant stack arguments in each branch (the MP
+ * position through VFP registers) where this build hoists them, and armcc here cross-jumps two calls retail
+ * keeps apart (the HP gauge's gain/loss calls, the gauge scissor). */
+#include "common.h"
+#include "shard/PlayScene.h"
+#include "shard/GameOptions.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/W6_W6Match2_FormattedTextSource.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
+#include "shard/W6_W6Match6_CecMessageBox.h"
+#include "camp/RenderCtx.h"
+#include "camp/RenderCtxTitle.h"
 #include "camp/Unite/UniteWork.h"
+#include "ui/UiSpriteApi.h"
+#include "ui/UiControl.h"
+#include "ui/AnimatedMessage.h"
+#include "text/TextDraw.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/GameDataAccess.h"
+#include "gamedata/SupportUnitRecord.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/btlMain.h"
+#include "battle/BtlEntry.h"
 #include "code/Code0028.h"
+#include "code/Code0029.h"
+#include "code/Code002b.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "util/BitsAndBytes.h"
+#include "ui/ScreenPoint.h"
+#include "sys/RuntimeObjects_Smt4.h"
+
+struct BtlActor;
+struct FadeObject;
+
+/* A pulsing tint: its colour, the period and the dimmest fraction of each channel. */
+struct PulseColor {
+    /* 0x00 */ u8 r;
+    /* 0x01 */ u8 g;
+    /* 0x02 */ u8 b;
+    /* 0x03 */ u8 a;
+    /* 0x04 */ s32 period;
+    /* 0x08 */ f32 dim;
+};
 
 extern "C" {
 
-int FUN_0025765c(...);
-int FUN_0026e6a0(...);
-int messageKindForward(...);
+extern PulseColor DAT_00435e00;
+
+/* Sets the scissor rectangle. */
+void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
+s32 btlLinkGetMaxHp(BtlUnitLink *record);
+u8 isLowThreshold(s32 current, s16 max);
+void drawSetColorFromRGBA8(u32 packed);
+f32 mathSinFixedAngle(f32 x);
 void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
-int FUN_00293f10(...);
-int fadeObjectResetIfActive(...);
-int categoryGetColor(...);
-int pairSetHalves(...);
+s32 FUN_0026e6a0(s32 a, s32 b, s32 period, s32 time, s32 invert);
+void fadeObjectResetIfActive(FadeObject *object);
+u32 btlActorIsDown(BtlActor *actor);
+SupportUnitRecord *supportUnitGetEntry(s32 kind, u32 index);
+void FUN_002b6940(s32 icon, s32 x, s32 y, s32 z);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-int FUN_002b6940(...);
-int mathSinFixedAngle(void);
-int FUN_002bcf4c(...);
-int gxResetColorQuadToWhite(void);
-int texDrawCompositeSprite(...);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(...);
+s32 FUN_0025765c(s32 element, u32 phase);
+/* Draws an HP gauge (and its pending change) from the sprites of texture table `table`. */
+void FUN_002be90c(s32 value, s32 max, s32 change, u32 base, u32 table, u32 frame, u32 fill, u32 gain,
+                  u32 loss, ScreenPoint position, u32 layer, u32 flags);
+/* Draws an MP gauge, likewise. */
+void FUN_002888a8(s32 value, s32 max, s32 change, u32 base, u32 table, u32 fill, u32 gain, u32 loss,
+                  ScreenPoint position, u32 layer, u32 flags);
+/* Draws a number string with digit sprites (`digits` wide). */
+void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *text);
 
-int btlSourceGetMaxHp(void);
-int btlLinkGetMaxHp(void);
-int FUN_002888a8(...);
-int FUN_0029a17c(...);
-int fontMeasureLineAdvance(...);
-int FUN_002bdf94(...);
-int drawSetColorFromRGBA8(...);
-int textDrawString(...);
-int textFormatBuffer(...);
-int FUN_002be90c(...);
-int vec2GetXInt(...);
-int efctSetSpeed(void);
-int VectorSignedToFloat(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_5: 31 slot(s), 124 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spE4; /* 0xe4: local_e4 */
-    unsigned int spE8; /* 0xe8: local_e8 */
-    unsigned int spF0; /* 0xf0: local_f0 */
-    unsigned int spF4; /* 0xf4: local_f4 */
-    unsigned int spFC; /* 0xfc: local_fc */
-    unsigned int sp100; /* 0x100: local_100 */
-    unsigned int sp104; /* 0x104: local_104 */
-    unsigned int sp110; /* 0x110: local_110 */
-    unsigned int sp114; /* 0x114: local_114 */
-    unsigned int sp118; /* 0x118: local_118 */
-    unsigned int sp11C; /* 0x11c: local_11c */
-    unsigned int sp120; /* 0x120: local_120 */
-    unsigned int sp124; /* 0x124: local_124 */
-    unsigned int sp128; /* 0x128: local_128 */
-    unsigned int sp12C; /* 0x12c: local_12c */
-    unsigned int sp130; /* 0x130: local_130 */
-} param_5_stack;
-
-extern unsigned char LAB_00260730; /* 0x260730 */
-extern unsigned char LAB_00260738; /* 0x260738 */
-extern unsigned char DAT_00435e00; /* 0x435e00 */
-extern unsigned char DAT_00435e01; /* 0x435e01 */
-extern unsigned char DAT_00435e02; /* 0x435e02 */
-extern unsigned char DAT_00435e03; /* 0x435e03 */
-extern unsigned int DAT_00435e04; /* 0x435e04 */
-extern float DAT_00435e08; /* 0x435e08 */
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0025765c. */
-/* Supplied declaration required: btlSourceGetMaxHp. */
-/* Supplied declaration required: btlLinkGetMaxHp. */
-/* Supplied declaration required: FUN_0026e6a0. */
-/* Supplied declaration required: messageKindForward. */
-/* Supplied declaration required: FUN_00288844. */
-/* Supplied declaration required: FUN_002888a8. */
-extern int isLowThreshold(int, int);
-/* Supplied declaration required: FUN_00288ddc. */
-extern int btlActorIsDown(unsigned int);
-/* Supplied declaration required: FUN_00293f10. */
-/* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: fadeObjectResetIfActive. */
-/* Supplied declaration required: categoryGetColor. */
-/* Supplied declaration required: pairSetHalves. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002b6940. */
-extern int supportUnitGetEntry(int, unsigned short);
-extern int gameGetSupportUnitData(void);
-/* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: mathSinFixedAngle. */
-/* Supplied declaration required: FUN_002bcf4c. */
-extern unsigned int FUN_002bd068(unsigned short);
-extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be90c. */
-/* Supplied declaration required: gxResetColorQuadToWhite. */
-extern int vec2GetYInt(int);
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: texDrawCompositeSprite. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Switches scissoring (3: on, 0: off). */
+static __inline void hudSetScissor(s32 state)
 {
-/* irregular: irregular input(s): in_fpscr; 33 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned char *puVar10;
-  unsigned int *puVar11;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int temp_v13;
-  unsigned int *puVar17;
-  int temp_v14;
-  int temp_v15;
-  int temp_v16;
-  int *piVar21;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  unsigned int in_fpscr;
-  unsigned int temp_v19;
-  float temp_v20;
-  unsigned int temp_v21;
-  float temp_v22;
-  float temp_v23;
-  unsigned long long temp_v24;
-  short temp_v25;
-  short temp_v26;
-  int temp_v27;
-  int temp_v28;
-  unsigned char temp_v29 [40];
-  unsigned char temp_v30 [8];
-  int temp_v31;
-  int temp_v32;
-  int temp_v33;
-  int temp_v34;
-  int temp_v35;
-  int temp_v36;
-  unsigned int *temp_v37;
-  int temp_v38;
-  unsigned int temp_v39 [5];
-  unsigned char temp_v40 [8];
-  unsigned char temp_v41 [8];
-  int temp_v42;
-  int temp_v43;
-  int temp_v44;
-  int temp_v45;
-  int iStack_34;
-  int temp_v46;
-  int temp_v47;
-  int iStack_28;
-  
-  temp_v34 = param_1 + 0x3000;
-  temp_v24 = 0x3f80000000000000;
-  temp_v47 = param_3;
-  if (*(char *)(param_1 + 0x3084) != '\0') {
-    temp_v47 = 1;
-  }
-  temp_v28 = param_4 * 8;
-  if (temp_v28 >= 0x29) {
-    temp_v28 = 0x28;
-  }
-  temp_v3 = *(int *)(param_1 + 0x3884);
-  temp_v27 = 0;
-  temp_v4 = *(int *)(param_1 + 0x3888);
-  temp_v15 = 0;
-  temp_v31 = 0;
-  temp_v37 = (unsigned int *)(param_1 + 0x3800);
-  temp_v35 = param_1 + 0x9f8;
-  temp_v38 = param_1 + 0x12b8;
-  temp_v42 = temp_v28 - (temp_v28 >> 0x1f);
-  iStack_34 = param_1;
-  temp_v46 = param_2;
-  iStack_28 = param_4;
-  do {
-    temp_v24 = temp_v24 & 0xffffffff00000000;
-    efctSetSpeed();
-    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v15 + 0x36));
-    temp_v36 = param_1 + temp_v15 * 0x8c;
-    temp_v16 = temp_v36 + 0x73c;
-    temp_v6 = vec2GetXInt(temp_v16);
-    temp_v26 = *(short *)(temp_v5 + 8);
-    temp_v16 = vec2GetYInt(temp_v16);
-    temp_v25 = *(short *)(temp_v5 + 10);
-    temp_v5 = vec2GetXInt(temp_v38);
-    temp_v7 = vec2GetYInt(temp_v38);
-    temp_v12 = param_1 + temp_v15;
-    temp_v43 = temp_v12 + 0x5900;
-    temp_v6 = temp_v6 + temp_v26 + temp_v5 + temp_v3;
-    temp_v5 = temp_v7 + temp_v16 + temp_v25 + temp_v4;
-    if (*(char *)(temp_v12 + 0x5925) != '\0') {
-      temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v15 + 0x46));
-      temp_v7 = *(int *)(param_1 + temp_v15 * 4 + 0x592c);
-      temp_v10 = (unsigned int)(temp_v24 >> 0x20);
-      if (temp_v7 < 7) {
-        VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v24 = (unsigned long long)temp_v10 << 0x20;
-        temp_v5 = ((int)*(short *)(*(int *)(temp_v16 + 0xc) + 2) / 7) * temp_v7 + temp_v5;
-      }
-      else if (temp_v7 < 0x16) {
-        temp_v24 = (unsigned long long)temp_v10 << 0x20;
-        temp_v5 = temp_v5 + *(short *)(*(int *)(temp_v16 + 0xc) + 2);
-      }
-      else if (temp_v7 < 0x1e) {
-        temp_v8 = (int)*(short *)(*(int *)(temp_v16 + 0xc) + 2);
-        temp_v8 = ((int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1d)) >> 3) * (0x16 - temp_v7) + temp_v8;
-        if (*(char *)(temp_v43 + 0x4a) != '\0') {
-          temp_v5 = temp_v5 + temp_v8;
-          VectorSignedToFloat(temp_v7 - 0x16,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v24 = (unsigned long long)temp_v10 << 0x20;
+    renderStackSet(&g_titleScene->scissor, state);
+}
+
+/* A panel's HP gauge: a pending change (`delta`) or the running one (`change` from `base`). */
+static __inline void drawHpGauge(s16 hp, s16 maxHp, s32 delta, s32 change, u32 base, ScreenPoint position)
+{
+    if (delta != 0) {
+        if (delta > 0) {
+            FUN_002be90c(hp, maxHp, delta, 0, 21, 10, 13, 12, 11, position, 21, 0);
+        } else {
+            FUN_002be90c(hp, maxHp, delta, 0, 21, 10, 13, 12, 11, position, 21, 0);
         }
-        else {
-          temp_v5 = temp_v5 - temp_v8;
-          VectorSignedToFloat(temp_v7 - 0x16,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v24 = (unsigned long long)temp_v10 << 0x20;
-        }
-      }
-      efctSetSpeed();
-      temp_v7 = g_titleScene;
-      piVar21 = (int *)(g_titleScene + 0x130c);
-      temp_v8 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = 3;
-      if (*(char *)(temp_v7 + 0x1324) != '\0' || temp_v8 != 3) {
-        (**(romwright_code **)(temp_v7 + 0x1328))(3);
-        *(unsigned char *)(temp_v7 + 0x1324) = 0;
-      }
-      FUN_0029a17c((int)*(short *)(temp_v16 + 8),(int)*(short *)(temp_v16 + 10),
-                   (int)**(short **)(temp_v16 + 0xc),(*(short **)(temp_v16 + 0xc))[1] - temp_v28,1);
+    } else {
+        FUN_002be90c(hp, maxHp, change, base, 21, 10, 13, 12, 11, position, 21, 0);
     }
-    temp_v16 = g_titleScene;
-    if (!(*(char *)(temp_v12 + 0x38d1) == '\0' || temp_v15 < 1)) {
-      if (temp_v46 != 0) {
-        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x3a));
-        temp_v16 = g_titleScene;
-        piVar21 = (int *)(g_titleScene + 0x130c);
-        temp_v12 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = 3;
-        if (*(char *)(temp_v16 + 0x1324) != '\0' || temp_v12 != 3) {
-          (**(romwright_code **)(temp_v16 + 0x1328))(3);
-          *(unsigned char *)(temp_v16 + 0x1324) = 0;
-        }
-        FUN_0029a17c(*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,
-                     (int)**(short **)(temp_v7 + 0xc),(*(short **)(temp_v7 + 0xc))[1] - temp_v28,1);
-        temp_v16 = g_titleScene;
-        temp_v7 = packNibblesAndByte(6,1,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v12 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v12 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))(temp_v7);
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x3a,temp_v6,temp_v5,6);
-        temp_v16 = g_titleScene;
-        temp_v7 = packNibblesAndByte(6,7,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v12 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v12 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))();
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x45));
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x1b,
-                     (int)*(short *)(temp_v16 + 8) + temp_v6 + (int)**(short **)(temp_v16 + 0xc) / 2,
-                     ((int)*(short *)(temp_v16 + 10) + temp_v5 + (int)(*(short **)(temp_v16 + 0xc))[1] / 2
-                     ) - (temp_v42 >> 1),0xb);
-        temp_v5 = g_titleScene;
-        piVar21 = (int *)(g_titleScene + 0x130c);
-        temp_v6 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = 0;
-        if (*(char *)(temp_v5 + 0x1324) != '\0' || temp_v6 != 0) {
-          (**(romwright_code **)(temp_v5 + 0x1328))();
-          *(unsigned char *)(temp_v5 + 0x1324) = 0;
-        }
-      }
-      else {
-        temp_v7 = packNibblesAndByte(6,1,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v12 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v12 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))(temp_v7);
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        texDrawTableEntryAtStoredOrigin(2,0x15,0,temp_v6,temp_v5,6);
-        temp_v16 = g_titleScene;
-        temp_v7 = packNibblesAndByte(6,7,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v12 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v12 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))(temp_v7);
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x35));
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x1b,
-                     (int)*(short *)(temp_v16 + 8) +
-                     temp_v6 + ((*(unsigned short *)(temp_v16 + 4) & 0xffff7fff) >> 1),
-                     (int)*(short *)(temp_v16 + 10) +
-                     temp_v5 + ((*(unsigned short *)(temp_v16 + 6) & 0xffff7fff) >> 1),0xb);
-      }
+}
+
+/* A panel's MP gauge. */
+static __inline void drawMpGauge(s16 mp, s16 maxMp, s32 delta, s32 change, u32 base, s32 x, s32 y)
+{
+    ScreenPoint position = {x, y};
+    if (delta != 0) {
+        FUN_002888a8(mp, maxMp, delta, 0, 21, 14, 16, 15, position, 21, 0);
+    } else {
+        FUN_002888a8(mp, maxMp, change, base, 21, 14, 16, 15, position, 21, 0);
     }
-    else {
-      if (temp_v46 != 0) {
-        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x3a));
-        temp_v16 = g_titleScene;
-        if (*(char *)(temp_v43 + 0x25) == '\0') {
-          piVar21 = (int *)(g_titleScene + 0x130c);
-          temp_v8 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = 3;
-          if (*(char *)(temp_v16 + 0x1324) != '\0' || temp_v8 != 3) {
-            (**(romwright_code **)(temp_v16 + 0x1328))(3);
-            *(unsigned char *)(temp_v16 + 0x1324) = 0;
-          }
-          FUN_0029a17c(*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,
-                       (int)**(short **)(temp_v7 + 0xc),(*(short **)(temp_v7 + 0xc))[1] - temp_v28,1);
+}
+
+/* A panel's shake amplitude with `frames` of its 15 left: eased from 8 pixels down to 0 over a quarter
+ * turn (mathSinFixedAngle takes 256ths of a turn: 40.743664 per radian). */
+static __inline f32 shakeAmplitude(s32 frames)
+{
+    return (1.0f - mathSinFixedAngle((15 - frames) * 1.5707964f / 15.0f * 40.743664f)) * 8.0f;
+}
+
+/* The ailment bits of the unit shown in panel `member` (0 when the panel is empty). */
+static __inline u16 partyMemberAilments(PlayScene *scene, s32 member)
+{
+    u16 ailments = 0;
+    if (member == 0) {
+        ailments = gameGetPlayerData()->ailments;
+    } else if (scene->party.unitIndices[member] >= 0) {
+        ailments = gameGetUnitRecord(scene->party.unitIndices[member])->ailments;
+    }
+    return ailments;
+}
+
+/* Draws the party display: a panel for the player and each party member (frame, name, level, HP and
+ * MP gauges, ailment icons, model) and the guest's panel. */
+void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimGuest)
+{
+    if (scene->unk3084 != 0) {
+        allLit = 1;
+    }
+    s32 shift = lift * 8;
+    if (shift > 40) {
+        shift = 40;
+    }
+    s32 originX = scene->party.originX;
+    s16 maxHp = 0;
+    s32 originY = scene->party.originY;
+    s16 maxMp = 0;
+    f32 alpha;
+    char name[40];
+    char hpText[8];
+    char mpText[8];
+    char levelText[8];
+    s32 member;
+
+    for (member = 0; member < 4; member++) {
+        alpha = 1.0f;
+        if (allLit == 0 && scene->unk305C != member) {
+            alpha = 0.5f;
         }
-        temp_v16 = g_titleScene;
-        temp_v7 = packNibblesAndByte(6,1,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v8 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v8 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))();
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x3a,temp_v6,temp_v5,6);
-        temp_v16 = g_titleScene;
-        temp_v7 = packNibblesAndByte(6,7,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v8 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v8 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))();
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        temp_v10 = (unsigned int)(temp_v24 >> 0x20);
-        if (*(char *)(temp_v12 + 0x38cc) != '\0') {
-          if (temp_v15 != 0) {
-            if (*(char *)(temp_v36 + 0xa82) != '\0') {
-              temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x45));
-              temp_v7 = temp_v36 + 0xc28;
-              temp_v8 = vec2GetXInt();
-              temp_v7 = vec2GetYInt(temp_v7);
-              efctSetSpeed();
-              texDrawTableEntryAtStoredOrigin(2,0x15,0x1b,
-                           *(short *)(temp_v16 + 8) + temp_v6 +
-                           temp_v8 + (int)**(short **)(temp_v16 + 0xc) / 2,
-                           temp_v7 + (int)(*(short **)(temp_v16 + 0xc))[1] / 2 +
-                           *(short *)(temp_v16 + 10) + temp_v5,0x1f);
-              efctSetSpeed();
+        efctSetSpeed(alpha);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(21, member + 0x36);
+        s32 x = vec2GetXInt(&scene->memberFrames[member]) + frame->x;
+        s32 y = vec2GetYInt(&scene->memberFrames[member]) + frame->y;
+        s32 slideX = vec2GetXInt(&scene->timer);
+        s32 slideY = vec2GetYInt(&scene->timer);
+        x = x + slideX + originX;
+        y = y + slideY + originY;
+        TextureTableEntryIV *entry;
+
+        if (scene->slideShown[member] != 0) {
+            TextureTableEntryIV *plate = asdTMTexTableEntryAt(21, member + 0x46);
+            s32 timer = scene->slideTimers[member];
+            if (timer < 7) {
+                alpha = 1.0f - timer * (1.0f / 7.0f);
+                y += plate->placement->height / 7 * timer;
+            } else if (timer < 22) {
+                alpha = 0.0f;
+                y += plate->placement->height;
+            } else if (timer < 30) {
+                if (scene->slideDown[member] != 0) {
+                    y += plate->placement->height / 8 * (22 - timer) + plate->placement->height;
+                    alpha = (timer - 22) * 0.125f;
+                } else {
+                    y -= plate->placement->height / 8 * (22 - timer) + plate->placement->height;
+                    alpha = (timer - 22) * 0.125f;
+                }
             }
-            temp_v24 = (unsigned long long)temp_v10 << 0x20;
-            efctSetSpeed();
-          }
-          else {
-            temp_v24 = (unsigned long long)temp_v10 << 0x20;
-            efctSetSpeed();
-            if (*(char *)((int)temp_v37 + 0xd1) != '\0') {
-              temp_v24 = temp_v24 & 0xffffffff00000000;
-              efctSetSpeed();
+            efctSetSpeed(alpha);
+            hudSetScissor(3);
+            FUN_0029a17c(plate->x, plate->y, plate->placement->width, plate->placement->height - shift, 1);
+        }
+
+        if (scene->party.vacant[member] != 0 && member > 0) {
+            if (expanded != 0) {
+                entry = asdTMTexTableEntryAt(21, 0x3A);
+                hudSetScissor(3);
+                FUN_0029a17c(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - shift, 1);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x3A, x, y, 6);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                entry = asdTMTexTableEntryAt(21, 0x45);
+                texDrawTableEntryAtStoredOrigin(2, 21, 27, entry->x + x + entry->placement->width / 2,
+                                                entry->y + y + entry->placement->height / 2 - shift / 2, 11);
+                hudSetScissor(0);
+            } else {
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 21, 0, x, y, 6);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                entry = asdTMTexTableEntryAt(21, 0x35);
+                texDrawTableEntryAtStoredOrigin(2, 21, 27, entry->x + x + ((entry->width & ~0x8000) >> 1),
+                                                entry->y + y + ((entry->height & ~0x8000) >> 1), 11);
             }
-          }
-        }
-        else if (temp_v15 == 0) {
-          if (*(char *)((int)temp_v37 + 0xd1) != '\0') {
-            temp_v24 = temp_v24 & 0xffffffff00000000;
-            efctSetSpeed();
-          }
-        }
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x3b,temp_v6,temp_v5,0xb);
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x3c,temp_v6,temp_v5,0xb);
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x3d,temp_v6,temp_v5,0xb);
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x3e,temp_v6,temp_v5 - temp_v28,0xb);
-        temp_v16 = g_titleScene;
-        if (*(char *)(temp_v43 + 0x25) == '\0') {
-          piVar21 = (int *)(g_titleScene + 0x130c);
-          temp_v7 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = 0;
-          if (*(char *)(temp_v16 + 0x1324) != '\0' || temp_v7 != 0) {
-            (**(romwright_code **)(temp_v16 + 0x1328))(0);
-            *(unsigned char *)(temp_v16 + 0x1324) = 0;
-          }
-        }
-      }
-      else {
-        temp_v7 = packNibblesAndByte(6,1,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v8 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v8 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))();
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        texDrawTableEntryAtStoredOrigin(2,0x15,0,temp_v6,temp_v5,6);
-        temp_v16 = g_titleScene;
-        temp_v7 = packNibblesAndByte(6,7,0);
-        piVar21 = (int *)(temp_v16 + 0x12ac);
-        temp_v8 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v7;
-        if (*(char *)(temp_v16 + 0x12c4) != '\0' || temp_v8 != temp_v7) {
-          (**(romwright_code **)(temp_v16 + 0x12c8))();
-          *(unsigned char *)(temp_v16 + 0x12c4) = 0;
-        }
-        temp_v10 = (unsigned int)(temp_v24 >> 0x20);
-        if (*(char *)(temp_v12 + 0x38cc) != '\0') {
-          if (temp_v15 != 0) {
-            if (*(char *)(temp_v36 + 0xa82) != '\0') {
-              temp_v16 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x35));
-              temp_v7 = temp_v36 + 0xc28;
-              temp_v8 = vec2GetXInt();
-              temp_v7 = vec2GetYInt(temp_v7);
-              efctSetSpeed();
-              texDrawTableEntryAtStoredOrigin(2,0x15,0x1b,
-                           *(short *)(temp_v16 + 8) + temp_v6 +
-                           temp_v8 + (int)**(short **)(temp_v16 + 0xc) / 2,
-                           temp_v7 + (int)(*(short **)(temp_v16 + 0xc))[1] / 2 +
-                           *(short *)(temp_v16 + 10) + temp_v5,0x1f);
-              efctSetSpeed();
+        } else {
+            if (expanded != 0) {
+                entry = asdTMTexTableEntryAt(21, 0x3A);
+                if (scene->slideShown[member] == 0) {
+                    hudSetScissor(3);
+                    FUN_0029a17c(entry->x + x, entry->y + y, entry->placement->width, entry->placement->height - shift, 1);
+                }
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x3A, x, y, 6);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                if (scene->party.glowShown[member] != 0) {
+                    if (member != 0) {
+                        if (uiSpriteGetCompletionState(&scene->memberGlows[member]) != 0) {
+                            entry = asdTMTexTableEntryAt(21, 0x45);
+                            UiSpriteState *mark = &scene->memberGlowMarks[member];
+                            s32 markX = vec2GetXInt(mark);
+                            s32 markY = vec2GetYInt(mark);
+                            efctSetSpeed(vec2GetSpeed(mark));
+                            texDrawTableEntryAtStoredOrigin(2, 21, 27, entry->x + x + markX + entry->placement->width / 2,
+                                                            markY + entry->placement->height / 2 + entry->y + y, 31);
+                            efctSetSpeed(1.0f);
+                        }
+                        alpha = vec2GetSpeed(&scene->memberGlows[member]);
+                        efctSetSpeed(alpha);
+                    } else {
+                        alpha = vec2GetSpeed(&scene->memberGlows[member]);
+                        efctSetSpeed(alpha);
+                    }
+                }
+                if (member == 0 && scene->party.vacant[member] != 0) {
+                    alpha = vec2GetSpeed(&scene->memberGlows[member]);
+                    efctSetSpeed(alpha);
+                }
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x3B, x, y, 11);
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x3C, x, y, 11);
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x3D, x, y, 11);
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x3E, x, y - shift, 11);
+                if (scene->slideShown[member] == 0) {
+                    hudSetScissor(0);
+                }
+            } else {
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 21, 0, x, y, 6);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                if (scene->party.glowShown[member] != 0) {
+                    if (member == 0) {
+                        alpha = vec2GetSpeed(&scene->memberGlows[member]);
+                        efctSetSpeed(alpha);
+                    } else {
+                        if (uiSpriteGetCompletionState(&scene->memberGlows[member]) != 0) {
+                            entry = asdTMTexTableEntryAt(21, 0x35);
+                            UiSpriteState *mark = &scene->memberGlowMarks[member];
+                            s32 markX = vec2GetXInt(mark);
+                            s32 markY = vec2GetYInt(mark);
+                            efctSetSpeed(vec2GetSpeed(mark));
+                            texDrawTableEntryAtStoredOrigin(2, 21, 27, entry->x + x + markX + entry->placement->width / 2,
+                                                            markY + entry->placement->height / 2 + entry->y + y, 31);
+                            efctSetSpeed(1.0f);
+                        }
+                        alpha = vec2GetSpeed(&scene->memberGlows[member]);
+                        efctSetSpeed(alpha);
+                    }
+                }
+                if (scene->party.vacant[member] != 0 && member == 0) {
+                    alpha = vec2GetSpeed(&scene->memberGlows[member]);
+                    efctSetSpeed(alpha);
+                }
+                texDrawTableEntryAtStoredOrigin(2, 21, 1, x, y, 11);
+                texDrawTableEntryAtStoredOrigin(2, 21, 2, x, y, 11);
+                texDrawTableEntryAtStoredOrigin(2, 21, 3, x, y, 11);
+                texDrawTableEntryAtStoredOrigin(2, 21, 4, x, y, 11);
             }
-            temp_v24 = (unsigned long long)temp_v10 << 0x20;
-            efctSetSpeed();
-          }
-          else {
-            temp_v24 = (unsigned long long)temp_v10 << 0x20;
-            efctSetSpeed();
-          }
-        }
-        if ((*(char *)(temp_v12 + 0x38d1) != '\0') && (temp_v15 == 0)) {
-          temp_v24 = temp_v24 & 0xffffffff00000000;
-          efctSetSpeed();
-        }
-        texDrawTableEntryAtStoredOrigin(2,0x15,1,temp_v6,temp_v5,0xb);
-        texDrawTableEntryAtStoredOrigin(2,0x15,2,temp_v6,temp_v5,0xb);
-        texDrawTableEntryAtStoredOrigin(2,0x15,3,temp_v6,temp_v5,0xb);
-        texDrawTableEntryAtStoredOrigin(2,0x15,4,temp_v6,temp_v5,0xb);
-      }
-      texDrawTableEntryAtStoredOrigin(2,0x15,6,temp_v6,temp_v5,0xe);
-      texDrawTableEntryAtStoredOrigin(2,0x15,7,temp_v6,temp_v5,0xe);
-      texDrawTableEntryAtStoredOrigin(2,0x15,8,temp_v6,temp_v5,0xe);
-      texDrawTableEntryAtStoredOrigin(2,0x15,9,temp_v6,temp_v5,0xe);
-      temp_v16 = param_1 + temp_v15 * 2;
-      temp_v8 = 0;
-      temp_v7 = 0;
-      if (*(char *)(temp_v12 + 0x37bc) != '\0') {
-        temp_v7 = param_1 + temp_v15 * 4;
-        temp_v26 = (short)*(unsigned int *)(temp_v7 + 0x37c8);
-        temp_v8 = (int)temp_v26;
-        temp_v25 = (short)*(unsigned int *)(temp_v7 + 0x37dc);
-        temp_v7 = (int)temp_v25;
-        if (*(char *)(temp_v12 + 0x3804) == '\0') {
-          temp_v8 = (int)-temp_v26;
-          temp_v7 = (int)-temp_v25;
-        }
-      }
-      temp_v44 = temp_v16;
-      textFormatBuffer(temp_v41,&LAB_00260730,(int)*(short *)(temp_v16 + 0x38ea));
-      temp_v45 = 0;
-      if (temp_v15 != 0) {
-        if (-1 < *(short *)(temp_v16 + 0x38f4)) {
-          temp_v12 = param_1 + temp_v15 * 0x604;
-          if (*(short *)(temp_v12 + 0x3946) != 0) {
-            temp_v13 = temp_v12 + 0x3900;
-            *(unsigned short *)(temp_v16 + 0x38d6) = *(unsigned short *)(temp_v12 + 0x392a);
-            *(unsigned short *)(temp_v16 + 0x38e0) = *(unsigned short *)(temp_v12 + 0x392c);
-          }
-          else {
-            temp_v13 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
-          }
-          temp_v12 = temp_v13;
-          btlLinkGetMaxHp();
-          temp_v27 = (int)(short)temp_v12;
-          temp_v31 = (int)*(short *)(temp_v13 + 0x10);
-          temp_v18 = FUN_002bd068(*(unsigned short *)(temp_v13 + 0x46));
-          textFormatBuffer(temp_v29,&LAB_00260738,temp_v18);
-          temp_v45 = FUN_00288ddc(temp_v27,*(unsigned short *)(temp_v13 + 0x46));
-        }
-      }
-      else {
-        temp_v13 = gameGetPlayerData();
-        temp_v12 = temp_v13;
-        btlSourceGetMaxHp();
-        temp_v27 = (int)(short)temp_v12;
-        temp_v31 = (int)*(short *)(temp_v13 + 0x1e);
-        temp_v18 = gameGetPlayerName();
-        textFormatBuffer(temp_v29,&LAB_00260738,temp_v18);
-        temp_v45 = FUN_00288ddc(temp_v27,0xffffffff);
-      }
-      temp_v32 = param_1 + temp_v15 * 4;
-      temp_v33 = *(int *)(temp_v32 + 0x3460);
-      puVar17 = (unsigned int *)(temp_v32 + 0x37f0);
-      temp_v12 = (int)*(short *)(temp_v16 + 0x38d6);
-      if (temp_v33 != 0) {
-        if (temp_v33 >= 1) {
-          FUN_002be90c(temp_v12,temp_v27,temp_v33,0,0x15,10,0xd,0xc,0xb,temp_v6,temp_v5,0x15,0);
-        }
-        else {
-          FUN_002be90c(temp_v12,temp_v27,temp_v33,0,0x15,10,0xd,0xc,0xb,temp_v6,temp_v5,0x15,0);
-        }
-      }
-      else {
-        FUN_002be90c(temp_v12,temp_v27,temp_v8,*puVar17,0x15,10,0xd,0xc,0xb,temp_v6,temp_v5,0x15,0);
-      }
-      if (*(int *)(temp_v32 + 0x3470) != 0) {
-        FUN_002888a8((int)*(short *)(temp_v16 + 0x38e0),temp_v31,*(int *)(temp_v32 + 0x3470),0,0x15,
-                     0xe,0x10,0xf,temp_v6,temp_v5,0x15,0);
-      }
-      else {
-        FUN_002888a8((int)*(short *)(temp_v16 + 0x38e0),temp_v31,temp_v7,*puVar17,0x15,0xe,0x10,0xf,
-                     temp_v6,temp_v5,0x15,0);
-      }
-      temp_v12 = (int)(short)(*(short *)(temp_v16 + 0x38d6) + (short)temp_v8);
-      temp_v7 = (int)(short)(*(short *)(temp_v16 + 0x38e0) + (short)temp_v7);
-      if (temp_v27 < temp_v12) {
-        temp_v12 = temp_v27;
-      }
-      if (temp_v12 < 0) {
-        temp_v12 = 0;
-      }
-      textFormatBuffer(temp_v30,&LAB_00260730,temp_v12);
-      if (temp_v31 < temp_v7) {
-        temp_v7 = temp_v31;
-      }
-      if (temp_v7 < 0) {
-        temp_v7 = 0;
-      }
-      textFormatBuffer(temp_v40,&LAB_00260730,temp_v7);
-      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x1c));
-      puVar10 = temp_v29;
-      fontMeasureLineAdvance(puVar10,1);
-      temp_v7 = ((int)**(short **)(temp_v8 + 0xc) - (int)puVar10) / 2;
-      VectorSignedToFloat(temp_v6 + temp_v7 + (int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorSignedToFloat(*(short *)(temp_v8 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-      textDrawString(1,0xffffffff,temp_v29,temp_v7);
-      temp_v7 = isLowThreshold(temp_v12,temp_v27);
-      if (temp_v7 != 0) {
-        temp_v18 = 0xdc0f14ff;
-        drawSetColorFromRGBA8(temp_v18);
-      }
-      else if (temp_v45 != 0) {
-        temp_v18 = 0x6ef0ffff;
-        drawSetColorFromRGBA8(temp_v18);
-      }
-      efctSetSpeed();
-      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x20));
-      FUN_002bdf94(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,4,0x10,
-                   temp_v30);
-      gxResetColorQuadToWhite();
-      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x24));
-      FUN_002bdf94(0,*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,1,4,0x10,
-                   temp_v40);
-      if (temp_v46 != 0) {
-        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x43));
-      }
-      else {
-        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x33));
-      }
-      temp_v12 = g_titleScene;
-      if (*(char *)(temp_v43 + 0x25) != '\0') {
-        temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v15 + 0x46));
-        temp_v12 = g_titleScene;
-        temp_v8 = (int)*(short *)(temp_v8 + 10) + (int)*(short *)(*(int *)(temp_v8 + 0xc) + 2);
-        temp_v13 = *(short *)(temp_v7 + 10) + temp_v5;
-        if (temp_v13 < temp_v8) {
-          temp_v14 = (int)*(short *)(*(int *)(temp_v7 + 0xc) + 2);
-          if (temp_v8 < (int)*(short *)(temp_v7 + 10) + temp_v5 + temp_v14) {
-            temp_v14 = temp_v8 - temp_v13;
-          }
-          piVar21 = (int *)(g_titleScene + 0x130c);
-          temp_v8 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = 0;
-          if (*(char *)(temp_v12 + 0x1324) != '\0' || temp_v8 != 0) {
-            (**(romwright_code **)(temp_v12 + 0x1328))(0);
-            *(unsigned char *)(temp_v12 + 0x1324) = 0;
-          }
-          temp_v12 = g_titleScene;
-          piVar21 = (int *)(g_titleScene + 0x130c);
-          temp_v8 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = 3;
-          if (*(char *)(temp_v12 + 0x1324) != '\0' || temp_v8 != 3) {
-            (**(romwright_code **)(temp_v12 + 0x1328))(3);
-            *(unsigned char *)(temp_v12 + 0x1324) = 0;
-          }
-          FUN_0029a17c(*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,
-                       (int)**(short **)(temp_v7 + 0xc),temp_v14 - temp_v28,1);
-        }
-      }
-      else {
-        piVar21 = (int *)(g_titleScene + 0x130c);
-        temp_v8 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = 3;
-        if (*(char *)(temp_v12 + 0x1324) != '\0' || temp_v8 != 3) {
-          (**(romwright_code **)(temp_v12 + 0x1328))(3);
-          *(unsigned char *)(temp_v12 + 0x1324) = 0;
-        }
-        FUN_0029a17c(*(short *)(temp_v7 + 8) + temp_v6,*(short *)(temp_v7 + 10) + temp_v5,
-                     (int)**(short **)(temp_v7 + 0xc),(*(short **)(temp_v7 + 0xc))[1] - temp_v28,1);
-      }
-      temp_v7 = temp_v32;
-      temp_v10 = *(unsigned int *)(temp_v32 + 0x385c);
-      if ((int)temp_v10 >= 1) {
-        temp_v23 = *(float *)(temp_v32 + 0x3870);
-        if ((temp_v10 & 1) != 0) {
-          temp_v23 = -temp_v23;
-        }
-        temp_v8 = (int)temp_v23;
-        temp_v23 = (float)VectorSignedToFloat(0xf - temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v23 = temp_v23 * 1.5707964f * 0.06666667f * 40.743664f;
-        temp_v12 = temp_v8;
-        mathSinFixedAngle();
-        *(float *)(temp_v7 + 0x3870) = ((float)(temp_v24 >> 0x20) - temp_v23) * 8.0f;
-      }
-      else {
-        temp_v12 = 0;
-        temp_v8 = 0;
-      }
-      temp_v10 = 1;
-      temp_v17 = 0;
-      puVar11 = (unsigned int *)(temp_v32 + 0x351c);
-      do {
-        temp_v9 = 0;
-        if (temp_v15 != 0) {
-          if (-1 < *(short *)(temp_v16 + 0x38f4)) {
-            temp_v7 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
-            temp_v9 = (unsigned int)*(unsigned short *)(temp_v7 + 0x44);
-          }
-        }
-        else {
-          temp_v7 = gameGetPlayerData();
-          temp_v9 = (unsigned int)*(unsigned short *)(temp_v7 + 0x72);
-        }
-        if ((temp_v9 & (1 << (temp_v10 & 0xff))) != 0) {
-          if (*puVar11 == temp_v17) {
-            categoryGetColor((int)(short)temp_v10);
-            drawSetColorFromRGBA8();
-            break;
-          }
-          temp_v17 = (temp_v17 + 1) & 0xffff;
-        }
-        temp_v10 = temp_v10 + 1;
-      } while ((int)temp_v10 < 0xb);
-      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x44));
-      if (temp_v15 != 0) {
-        piVar21 = (int *)(temp_v32 + 0x340c);
-        temp_v13 = *piVar21;
-        if (0 < temp_v13) {
-          temp_v13 = (int)(short)temp_v13;
-          FUN_00293f10(temp_v13,1);
-          if (temp_v13 != 0) {
-            temp_v14 = temp_v12 + temp_v6 + (int)*(short *)(temp_v7 + 8);
-            temp_v13 = (int)(short)*piVar21;
-            temp_v11 = (int)*(short *)(temp_v7 + 10) + temp_v5 + temp_v8;
-            textureLoadOptionalDemonModel(temp_v13,temp_v14,temp_v11,0x15,1);
-          }
-        }
-      }
-      else {
-        temp_v11 = (int)*(short *)(temp_v7 + 10) + temp_v5 + temp_v8;
-        temp_v14 = temp_v12 + temp_v6 + (int)*(short *)(temp_v7 + 8);
-        temp_v13 = -1;
-        textureLoadOptionalDemonModel(temp_v13,temp_v14,temp_v11,0x15,1);
-      }
-      temp_v7 = temp_v44;
-      if (*(short *)(temp_v44 + 0x5950) != 0) {
-        if (*(short *)(temp_v44 + 0x5950) == 5) {
-          temp_v2 = 0;
-          if (temp_v15 != 0) {
-            if (-1 < *(short *)(temp_v16 + 0x38f4)) {
-              temp_v13 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
-              temp_v2 = *(unsigned short *)(temp_v13 + 0x44);
+            texDrawTableEntryAtStoredOrigin(2, 21, 6, x, y, 14);
+            texDrawTableEntryAtStoredOrigin(2, 21, 7, x, y, 14);
+            texDrawTableEntryAtStoredOrigin(2, 21, 8, x, y, 14);
+            texDrawTableEntryAtStoredOrigin(2, 21, 9, x, y, 14);
+
+            /* the gauges' running change */
+            s16 hpChange = 0;
+            s16 mpChange = 0;
+            if (scene->party.gaugeAnimating[member] != 0) {
+                hpChange = scene->party.hpAnimations[member];
+                mpChange = scene->party.mpAnimations[member];
+                if (scene->party.gaugeRising[member] == 0) {
+                    hpChange = -hpChange;
+                    mpChange = -mpChange;
+                }
             }
-          }
-          else {
-            temp_v13 = gameGetPlayerData();
-            temp_v2 = *(unsigned short *)(temp_v13 + 0x72);
-          }
-          if ((temp_v2 & 0x10) != 0) {
-            efctSetSpeed();
-            temp_v13 = g_titleScene;
-            temp_v14 = packNibblesAndByte(6,1,0);
-            piVar21 = (int *)(temp_v13 + 0x12ac);
-            temp_v11 = piVar21[*piVar21 + 2];
-            piVar21[*piVar21 + 2] = temp_v14;
-            if (*(char *)(temp_v13 + 0x12c4) != '\0' || temp_v11 != temp_v14) {
-              (**(romwright_code **)(temp_v13 + 0x12c8))();
-              *(unsigned char *)(temp_v13 + 0x12c4) = 0;
+            textFormatBuffer(levelText, "%d", scene->party.levels[member]);
+
+            s32 warning = 0;
+            if (member == 0) {
+                PlayerDataIV *player = gameGetPlayerData();
+                maxHp = btlSourceGetMaxHp((BtlUnitSource *)player);
+                maxMp = player->maxMp;
+                textFormatBuffer(name, "%s", gameGetPlayerName());
+                warning = FUN_00288ddc(maxHp, (u32)-1);
+            } else if (scene->party.unitIndices[member] >= 0) {
+                StatBlock *unit;
+                if (scene->party.units[member].id == 0) {
+                    unit = gameGetUnitRecord(scene->party.unitIndices[member]);
+                } else {
+                    unit = &scene->party.units[member];
+                    scene->party.hpShown[member] = unit->hp;
+                    scene->party.mpShown[member] = unit->mp;
+                }
+                maxHp = btlLinkGetMaxHp((BtlUnitLink *)unit);
+                maxMp = unit->maxMp;
+                textFormatBuffer(name, "%s", FUN_002bd068(unit->id));
+                warning = FUN_00288ddc(maxHp, unit->id);
             }
-            temp_v17 = (unsigned int)DAT_00435e01;
-            temp_v10 = (unsigned int)DAT_00435e02;
-            temp_v22 = (float)VectorUnsignedToFloat((unsigned int)DAT_00435e00,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v20 = (float)VectorUnsignedToFloat(temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v23 = (float)VectorUnsignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v19 = VectorFloatToUnsigned(temp_v22 * DAT_00435e08,3);
-            temp_v21 = VectorFloatToUnsigned(temp_v20 * DAT_00435e08,3);
-            temp_v9 = VectorFloatToUnsigned(temp_v23 * DAT_00435e08,3) & 0xff;
-            temp_v13 = FUN_0026e6a0(temp_v19 & 0xff,(unsigned int)DAT_00435e00,DAT_00435e04,
-                                  *(unsigned short *)(temp_v7 + 0x595a),0);
-            temp_v17 = FUN_0026e6a0(temp_v21 & 0xff,temp_v17,DAT_00435e04,*(unsigned short *)(temp_v7 + 0x595a),
-                                  0);
-            temp_v10 = FUN_0026e6a0(temp_v9,temp_v10,DAT_00435e04,*(unsigned short *)(temp_v7 + 0x595a),0);
-            drawSetColorFromRGBA8((temp_v13 << 0x18) | ((temp_v17 & 0xff) << 0x10) | ((temp_v10 & 0xff) << 8) |
-                         (unsigned int)DAT_00435e03);
-            temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x43));
-            texDrawTableEntryAtStoredOrigin(2,0x15,2000,(int)*(short *)(temp_v13 + 8) + temp_v12 + temp_v6,
-                         (int)*(short *)(temp_v13 + 10) + temp_v5 + temp_v8,0x1f);
+
+            ScreenPoint position = {x, y};
+            drawHpGauge(scene->party.hpShown[member], maxHp, scene->party.hpDeltas[member], hpChange,
+                        scene->party.gaugeBases[member], position);
+            drawMpGauge(scene->party.mpShown[member], maxMp, scene->party.mpDeltas[member], mpChange,
+                        scene->party.gaugeBases[member], x, y);
+
+            s16 hp = scene->party.hpShown[member] + hpChange;
+            s16 mp = scene->party.mpShown[member] + mpChange;
+            if (hp > maxHp) {
+                hp = maxHp;
+            }
+            if (hp < 0) {
+                hp = 0;
+            }
+            textFormatBuffer(hpText, "%d", hp);
+            if (mp > maxMp) {
+                mp = maxMp;
+            }
+            if (mp < 0) {
+                mp = 0;
+            }
+            textFormatBuffer(mpText, "%d", mp);
+
+            entry = asdTMTexTableEntryAt(21, 28);
+            s32 advance = fontMeasureLineAdvance(name, 1);
+            s32 center = (entry->placement->width - advance) / 2;
+            s32 nameX = x + center + entry->x;
+            s32 nameY = entry->y + y;
+            textDrawString(1, (u32)-1, name, nameX, nameY, 0.9f, 0.0f, alpha);
+            if (isLowThreshold(hp, maxHp)) {
+                drawSetColorFromRGBA8(0xDC0F14FF);
+            } else if (warning != 0) {
+                drawSetColorFromRGBA8(0x6EF0FFFF);
+            }
+            efctSetSpeed(alpha);
+            entry = asdTMTexTableEntryAt(21, 32);
+            FUN_002bdf94(0, entry->x + x, entry->y + y, 1, 4, 16, hpText);
             gxResetColorQuadToWhite();
-            temp_v13 = g_titleScene;
-            temp_v14 = packNibblesAndByte(6,7,0);
-            piVar21 = (int *)(temp_v13 + 0x12ac);
-            temp_v11 = piVar21[*piVar21 + 2];
-            piVar21[*piVar21 + 2] = temp_v14;
-            if (*(char *)(temp_v13 + 0x12c4) != '\0' || temp_v11 != temp_v14) {
-              (**(romwright_code **)(temp_v13 + 0x12c8))();
-              *(unsigned char *)(temp_v13 + 0x12c4) = 0;
+            entry = asdTMTexTableEntryAt(21, 36);
+            FUN_002bdf94(0, entry->x + x, entry->y + y, 1, 4, 16, mpText);
+
+            TextureTableEntryIV *gauge;
+            if (expanded != 0) {
+                gauge = asdTMTexTableEntryAt(21, 0x43);
+            } else {
+                gauge = asdTMTexTableEntryAt(21, 0x33);
             }
-            efctSetSpeed();
-          }
-          else {
-            *(unsigned short *)(temp_v7 + 0x5950) = 0;
-          }
-        }
-        efctSetSpeed();
-        if (temp_v46 != 0) {
-          texDrawTableEntryAtStoredOrigin(2,0x15,0x1c8,temp_v6 + temp_v12,temp_v8 + temp_v5,0x1a);
-          temp_v26 = (short)temp_v8;
-          temp_v25 = (short)temp_v12;
-        }
-        else {
-          texDrawTableEntryAtStoredOrigin(2,0x15,0x1c7,temp_v6 + temp_v12,temp_v8 + temp_v5,0x1a);
-          temp_v26 = (short)temp_v8;
-          temp_v25 = (short)temp_v12;
-        }
-        efctSetSpeed();
-        temp_v12 = g_titleScene;
-        piVar21 = (int *)(g_titleScene + 0x130c);
-        temp_v8 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = 0;
-        if (*(char *)(temp_v12 + 0x1324) != '\0' || temp_v8 != 0) {
-          (**(romwright_code **)(temp_v12 + 0x1328))(0);
-          *(unsigned char *)(temp_v12 + 0x1324) = 0;
-        }
-        if (temp_v46 != 0) {
-          temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x1ca));
-        }
-        else {
-          temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x1c9));
-        }
-        temp_v26 = (short)temp_v5 + temp_v26;
-        temp_v25 = (short)temp_v6 + temp_v25;
-        pairSetHalves(temp_v36 + 0x1600,
-                     (int)(short)(*(short *)(temp_v12 + 8) + *(short *)(temp_v7 + 0x59a6) + temp_v25),
-                     (int)(short)(*(short *)(temp_v12 + 10) + *(short *)(temp_v7 + 0x59b0) + temp_v26));
-        fadeObjectResetIfActive(temp_v36 + 0x1600);
-        temp_v8 = g_titleScene;
-        if (*(char *)(temp_v36 + 0x18b5) != '\0') {
-          temp_v13 = packNibblesAndByte(6,1,0);
-          piVar21 = (int *)(temp_v8 + 0x12ac);
-          temp_v14 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = temp_v13;
-          if (*(char *)(temp_v8 + 0x12c4) != '\0' || temp_v14 != temp_v13) {
-            (**(romwright_code **)(temp_v8 + 0x12c8))(temp_v13);
-            *(unsigned char *)(temp_v8 + 0x12c4) = 0;
-          }
-          temp_v8 = temp_v36 + 0x1830;
-          pairSetHalves(temp_v8,(int)(short)(*(short *)(temp_v12 + 8) + temp_v25),
-                       (int)(short)(*(short *)(temp_v12 + 10) + temp_v26));
-          *(unsigned int *)(temp_v8 + 0x30) = *(unsigned int *)(temp_v32 + 0x5964);
-          fadeObjectResetIfActive(temp_v8);
-          fadeObjectResetIfActive(temp_v8);
-          temp_v12 = g_titleScene;
-          temp_v8 = packNibblesAndByte(6,7,0);
-          piVar21 = (int *)(temp_v12 + 0x12ac);
-          temp_v13 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = temp_v8;
-          if (*(char *)(temp_v12 + 0x12c4) != '\0' || temp_v13 != temp_v8) {
-            (**(romwright_code **)(temp_v12 + 0x12c8))(temp_v8);
-            *(unsigned char *)(temp_v12 + 0x12c4) = 0;
-          }
-        }
-      }
-      gxResetColorQuadToWhite();
-      if (temp_v46 != 0) {
-        texDrawTableEntryAtStoredOrigin(2,0x15,0x3f,temp_v6,temp_v5 - temp_v28,0x1f);
-        temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x42));
-        FUN_002bdf94(0,*(short *)(temp_v12 + 8) + temp_v6,(*(short *)(temp_v12 + 10) + temp_v5) - temp_v28,1
-                     ,2,0x24,temp_v41);
-      }
-      else {
-        texDrawTableEntryAtStoredOrigin(2,0x15,5,temp_v6,temp_v5,0x1f);
-        temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x26));
-        FUN_002bdf94(0,*(short *)(temp_v12 + 8) + temp_v6,*(short *)(temp_v12 + 10) + temp_v5,1,2,0x24,
-                     temp_v41);
-      }
-      temp_v17 = 0;
-      temp_v10 = 1;
-      do {
-        temp_v9 = 0;
-        if (temp_v15 != 0) {
-          if (-1 < *(short *)(temp_v16 + 0x38f4)) {
-            temp_v12 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
-            temp_v9 = (unsigned int)*(unsigned short *)(temp_v12 + 0x44);
-          }
-        }
-        else {
-          temp_v12 = gameGetPlayerData();
-          temp_v9 = (unsigned int)*(unsigned short *)(temp_v12 + 0x72);
-        }
-        if ((temp_v9 & (1 << (temp_v10 & 0xff))) != 0) {
-          if (temp_v10 == 4) {
-            temp_v0 = *(char *)(temp_v43 + 0x78);
-            temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v17 * 2 + 0x27));
-            *(short *)(temp_v7 + 0x5992) = *(short *)(temp_v12 + 8) + (short)temp_v6;
-            *(short *)(temp_v7 + 0x599c) = *(short *)(temp_v12 + 10) + (short)temp_v5;
-            if (temp_v0 != '\0') {
-              temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v17 * 2 + 0x28));
-              FUN_00288844(*(short *)(temp_v12 + 8) + temp_v6,*(short *)(temp_v12 + 10) + temp_v5,0x24);
-              temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v17 * 2 + 0x27));
-              messageKindForward((int)(short)temp_v10,*(short *)(temp_v12 + 8) + temp_v6,
-                           *(short *)(temp_v12 + 10) + temp_v5,0x24);
+            if (scene->slideShown[member] != 0) {
+                TextureTableEntryIV *plate = asdTMTexTableEntryAt(21, member + 0x46);
+                s32 bottom = plate->y + plate->placement->height;
+                s32 top = gauge->y + y;
+                if (bottom > top) {
+                    s32 height = gauge->placement->height;
+                    if (gauge->y + y + height > bottom) {
+                        height = bottom - top;
+                    }
+                    hudSetScissor(0);
+                    hudSetScissor(3);
+                    FUN_0029a17c(gauge->x + x, gauge->y + y, gauge->placement->width, height - shift, 1);
+                }
+            } else {
+                hudSetScissor(3);
+                FUN_0029a17c(gauge->x + x, gauge->y + y, gauge->placement->width, gauge->placement->height - shift, 1);
             }
-          }
-          else {
-            temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v17 * 2 + 0x28));
-            FUN_00288844(*(short *)(temp_v12 + 8) + temp_v6,*(short *)(temp_v12 + 10) + temp_v5,0x24);
-            temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v17 * 2 + 0x27));
-            messageKindForward((int)(short)temp_v10,*(short *)(temp_v12 + 8) + temp_v6,
-                         *(short *)(temp_v12 + 10) + temp_v5,0x24);
-          }
-          temp_v17 = (temp_v17 + 1) & 0xffff;
-          if (temp_v17 >= 6) break;
+
+            s32 shakeX;
+            s32 shakeY;
+            s32 shake = scene->party.shakeTimers[member];
+            if (shake > 0) {
+                f32 amplitude = scene->party.shakeAmplitudes[member];
+                if (shake & 1) {
+                    amplitude = -amplitude;
+                }
+                shakeY = shakeX = (s32)amplitude;
+                scene->party.shakeAmplitudes[member] =
+                    shakeAmplitude(shake);
+            } else {
+                shakeY = shakeX = 0;
+            }
+
+            /* tint the model with the colour of the selected ailment */
+            u16 count = 0;
+            for (s32 ailment = 1; ailment < 11; ailment++) {
+                if (partyMemberAilments(scene, member) & (1 << ailment)) {
+                    if (scene->party.ailmentCursors[member] == count) {
+                        drawSetColorFromRGBA8(categoryGetColor((s16)ailment));
+                        break;
+                    }
+                    count++;
+                }
+            }
+            entry = asdTMTexTableEntryAt(21, 0x44);
+            if (member != 0) {
+                if (scene->party.modelIds[member] > 0) {
+                    if (FUN_00293f10((s16)scene->party.modelIds[member], 1) != 0) {
+                        textureLoadOptionalDemonModel((s16)scene->party.modelIds[member], shakeX + x + entry->x,
+                                                      entry->y + (y + shakeY), 21, 1);
+                    }
+                }
+            } else {
+                textureLoadOptionalDemonModel(-1, shakeX + x + entry->x, entry->y + (y + shakeY), 21, 1);
+            }
+
+            u16 badge = scene->badges[member];
+            if (badge != 0) {
+                if (badge == 5) {
+                    if (partyMemberAilments(scene, member) & 0x10) {
+                        efctSetSpeed(1.0f);
+                        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                        u8 red = DAT_00435e00.r;
+                        u8 green = DAT_00435e00.g;
+                        u8 blue = DAT_00435e00.b;
+                        u8 dimRed = (u32)(red * DAT_00435e00.dim);
+                        u8 dimGreen = (u32)(green * DAT_00435e00.dim);
+                        u8 dimBlue = (u32)(blue * DAT_00435e00.dim);
+                        u32 pulseRed = FUN_0026e6a0(dimRed, red, DAT_00435e00.period, scene->badgeTimers[member], 0);
+                        u8 pulseGreen = FUN_0026e6a0(dimGreen, green, DAT_00435e00.period, scene->badgeTimers[member], 0);
+                        u8 pulseBlue = FUN_0026e6a0(dimBlue, blue, DAT_00435e00.period, scene->badgeTimers[member], 0);
+                        drawSetColorFromRGBA8(pulseRed << 24 | pulseGreen << 16 | pulseBlue << 8 | DAT_00435e00.a);
+                        entry = asdTMTexTableEntryAt(21, 0x43);
+                        texDrawTableEntryAtStoredOrigin(2, 21, 2000, entry->x + (shakeX + x), entry->y + (y + shakeY), 31);
+                        gxResetColorQuadToWhite();
+                        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                        efctSetSpeed(alpha);
+                    } else {
+                        scene->badges[member] = 0;
+                    }
+                }
+                efctSetSpeed(vec2GetSpeed(&scene->badgeFades[member]));
+                if (expanded != 0) {
+                    texDrawTableEntryAtStoredOrigin(2, 21, 0x1C8, x + shakeX, y + shakeY, 26);
+                } else {
+                    texDrawTableEntryAtStoredOrigin(2, 21, 0x1C7, x + shakeX, y + shakeY, 26);
+                }
+                efctSetSpeed(alpha);
+                hudSetScissor(0);
+                TextureTableEntryIV *icon;
+                if (expanded != 0) {
+                    icon = asdTMTexTableEntryAt(21, 0x1CA);
+                } else {
+                    icon = asdTMTexTableEntryAt(21, 0x1C9);
+                }
+                s32 iconX = x + shakeX;
+                s32 iconY = y + shakeY;
+                pairSetHalves((Obj *)&scene->badgeIcons[member], icon->x + scene->badgeOffsetX[member] + iconX,
+                              icon->y + scene->badgeOffsetY[member] + iconY);
+                fadeObjectResetIfActive((FadeObject *)&scene->badgeIcons[member]);
+                if (scene->badgeIconsLarge[member].updated != 0) {
+                    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                    UiSpriteState *large = &scene->badgeIconsLarge[member];
+                    pairSetHalves((Obj *)large, icon->x + iconX, icon->y + iconY);
+                    large->extraScale = scene->badgeScales[member];
+                    fadeObjectResetIfActive((FadeObject *)large);
+                    fadeObjectResetIfActive((FadeObject *)large);
+                    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                }
+            }
+            gxResetColorQuadToWhite();
+
+            if (expanded != 0) {
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x3F, x, y - shift, 31);
+                entry = asdTMTexTableEntryAt(21, 0x42);
+                FUN_002bdf94(0, entry->x + x, entry->y + y - shift, 1, 2, 36, levelText);
+            } else {
+                texDrawTableEntryAtStoredOrigin(2, 21, 5, x, y, 31);
+                entry = asdTMTexTableEntryAt(21, 0x26);
+                FUN_002bdf94(0, entry->x + x, entry->y + y, 1, 2, 36, levelText);
+            }
+
+            /* the icons of up to six ailments */
+            count = 0;
+            for (s32 ailment = 1; ailment < 11; ailment++) {
+                if (partyMemberAilments(scene, member) & (1 << ailment)) {
+                    bool shown = true;
+                    if (ailment == 4) {
+                        if (scene->ailmentIconShown[member] == 0) {
+                            shown = false;
+                        }
+                        entry = asdTMTexTableEntryAt(21, 0x27 + count * 2);
+                        scene->ailmentIconX[member] = entry->x + x;
+                        scene->ailmentIconY[member] = entry->y + y;
+                    }
+                    if (shown) {
+                        entry = asdTMTexTableEntryAt(21, 0x28 + count * 2);
+                        FUN_00288844(entry->x + x, entry->y + y, 36);
+                        entry = asdTMTexTableEntryAt(21, 0x27 + count * 2);
+                        messageKindForward((s16)ailment, entry->x + x, entry->y + y, 36);
+                    }
+                    count++;
+                    if (count >= 6) {
+                        break;
+                    }
+                }
+            }
+            hudSetScissor(0);
+            gxResetColorQuadToWhite();
         }
-        temp_v10 = temp_v10 + 1;
-      } while ((int)temp_v10 < 0xb);
-      temp_v5 = g_titleScene;
-      piVar21 = (int *)(g_titleScene + 0x130c);
-      temp_v6 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = 0;
-      if (*(char *)(temp_v5 + 0x1324) != '\0' || temp_v6 != 0) {
-        (**(romwright_code **)(temp_v5 + 0x1328))();
-        *(unsigned char *)(temp_v5 + 0x1324) = 0;
-      }
-      gxResetColorQuadToWhite();
-    }
-    if ((*(char *)(temp_v43 + 0x25) != '\0') &&
-       (temp_v10 = *(int *)(param_1 + temp_v15 * 4 + 0x592c) - 0x1d, temp_v10 < 0xc)) {
-      VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v24 = temp_v24 & 0xffffffff00000000;
-      efctSetSpeed();
-      temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v15 + 0x52));
-      temp_v5 = g_titleScene;
-      temp_v16 = packNibblesAndByte(6,1,0);
-      piVar21 = (int *)(temp_v5 + 0x12ac);
-      temp_v7 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = temp_v16;
-      if (*(char *)(temp_v5 + 0x12c4) != '\0' || temp_v7 != temp_v16) {
-        (**(romwright_code **)(temp_v5 + 0x12c8))();
-        *(unsigned char *)(temp_v5 + 0x12c4) = 0;
-      }
-      texDrawTableEntryAtStoredOrigin(2,0x15,0x4f,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0x2e);
-      texDrawTableEntryAtStoredOrigin(2,0x15,0x4e,(int)*(short *)(temp_v6 + 8),*(short *)(temp_v6 + 10) - temp_v28,0x2e);
-      temp_v5 = g_titleScene;
-      piVar21 = (int *)(g_titleScene + 0x130c);
-      temp_v16 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = 3;
-      if (*(char *)(temp_v5 + 0x1324) != '\0' || temp_v16 != 3) {
-        (**(romwright_code **)(temp_v5 + 0x1328))();
-        *(unsigned char *)(temp_v5 + 0x1324) = 0;
-      }
-      FUN_0029a17c((int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),
-                   (int)**(short **)(temp_v6 + 0xc),(*(short **)(temp_v6 + 0xc))[1] - temp_v28,1);
-      temp_v5 = g_titleScene;
-      temp_v16 = packNibblesAndByte(6,1,0);
-      piVar21 = (int *)(temp_v5 + 0x12ac);
-      temp_v7 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = temp_v16;
-      if (*(char *)(temp_v5 + 0x12c4) != '\0' || temp_v7 != temp_v16) {
-        (**(romwright_code **)(temp_v5 + 0x12c8))();
-        *(unsigned char *)(temp_v5 + 0x12c4) = 0;
-      }
-      texDrawTableEntryAtStoredOrigin(2,0x15,0x50,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0x2e);
-      texDrawTableEntryAtStoredOrigin(2,0x15,0x51,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0x2e);
-      temp_v5 = g_titleScene;
-      piVar21 = (int *)(g_titleScene + 0x130c);
-      temp_v6 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = 0;
-      if (*(char *)(temp_v5 + 0x1324) != '\0' || temp_v6 != 0) {
-        (**(romwright_code **)(temp_v5 + 0x1328))();
-        *(unsigned char *)(temp_v5 + 0x1324) = 0;
-      }
-      temp_v5 = g_titleScene;
-      temp_v6 = packNibblesAndByte(6,7,0);
-      piVar21 = (int *)(temp_v5 + 0x12ac);
-      temp_v16 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = temp_v6;
-      if (*(char *)(temp_v5 + 0x12c4) != '\0' || temp_v16 != temp_v6) {
-        (**(romwright_code **)(temp_v5 + 0x12c8))();
-        *(unsigned char *)(temp_v5 + 0x12c4) = 0;
-      }
-    }
-    efctSetSpeed();
-    temp_v23 = (float)(temp_v24 >> 0x20);
-    temp_v15 = temp_v15 + 1;
-  } while (temp_v15 < 4);
-  if ((*(int *)(temp_v34 + 0x48) == 0x1f) || (*(int *)(temp_v34 + 0x4c) == 0x1f)) {
-    efctSetSpeed();
-    texDrawTableEntryAtStoredOrigin(2,0xe,0x106,0,0,0x33);
-    efctSetSpeed();
-  }
-  temp_v3 = gameGetSupportUnitData();
-  if ((*(short *)(temp_v3 + 0x46) != 0) &&
-     (temp_v4 = reinterpret_cast<int>(btlGetMainState()), (*(unsigned int *)(temp_v4 + 0x44a0) & 0x40000) == 0)) {
-    temp_v10 = *(unsigned int *)(param_1 + 0x386c);
-    if ((int)temp_v10 < 1) {
-      temp_v4 = 0;
-    }
-    else {
-      temp_v20 = (float)temp_v37[0x20] * 0.5f;
-      if ((temp_v10 & 1) != 0) {
-        temp_v20 = -temp_v20;
-      }
-      temp_v4 = (int)temp_v20;
-      temp_v20 = (float)VectorSignedToFloat(0xf - temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v20 = temp_v20 * 1.5707964f * 0.06666667f * 40.743664f;
-      mathSinFixedAngle();
-      temp_v37[0x20] = (temp_v23 - temp_v20) * 8.0f;
-    }
-    if ((temp_v47 == 0) && (*(int *)(temp_v34 + 0x5c) != 4)) {
-      temp_v23 = 0.5f;
-    }
-    if (param_5 != 0) {
-      temp_v23 = 0.5f;
-    }
-    efctSetSpeed();
-    if (temp_v46 != 0) {
-      temp_v15 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x71));
-    }
-    else {
-      temp_v15 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x70));
-    }
-    temp_v5 = btlActorIsDown(*(unsigned int *)(temp_v34 + 0x40));
-    if ((temp_v5 != 0) && (temp_v5 = FUN_002b6ad0(), temp_v5 != 0)) {
-      temp_v5 = vec2GetXInt();
-      temp_v6 = temp_v5 + temp_v4 + (int)*(short *)(temp_v15 + 8);
-      temp_v5 = vec2GetYInt(param_1 + 0x96c);
-      temp_v4 = temp_v5 + temp_v4 + (int)*(short *)(temp_v15 + 10);
-    }
-    else {
-      temp_v5 = vec2GetXInt();
-      temp_v6 = temp_v5 + temp_v4 + (int)*(short *)(temp_v15 + 8);
-      temp_v5 = vec2GetYInt(param_1 + 0x7c8);
-      temp_v4 = temp_v5 + temp_v4 + (int)*(short *)(temp_v15 + 10);
-    }
-    temp_v5 = vec2GetXInt(temp_v38);
-    temp_v5 = temp_v5 + temp_v6;
-    temp_v6 = vec2GetYInt(temp_v38);
-    temp_v15 = g_titleScene;
-    temp_v6 = temp_v6 + temp_v4;
-    temp_v4 = packNibblesAndByte(6,1,0);
-    piVar21 = (int *)(temp_v15 + 0x12ac);
-    temp_v16 = piVar21[*piVar21 + 2];
-    piVar21[*piVar21 + 2] = temp_v4;
-    if (*(char *)(temp_v15 + 0x12c4) != '\0' || temp_v16 != temp_v4) {
-      (**(romwright_code **)(temp_v15 + 0x12c8))();
-      *(unsigned char *)(temp_v15 + 0x12c4) = 0;
-    }
-    temp_v4 = temp_v6 - temp_v28;
-    texDrawTableEntryAtStoredOrigin(2,0x15,0x5e,temp_v5,temp_v4,0x38);
-    if ((*(int *)(temp_v34 + 0x48) == 0x1f) || (*(int *)(temp_v34 + 0x4c) == 0x1f)) {
-      efctSetSpeed();
-      texDrawTableEntryAtStoredOrigin(2,0x15,0x5e,temp_v5,temp_v4,0x38);
-      efctSetSpeed();
-    }
-    temp_v15 = g_titleScene;
-    temp_v16 = packNibblesAndByte(6,7,0);
-    piVar21 = (int *)(temp_v15 + 0x12ac);
-    temp_v7 = piVar21[*piVar21 + 2];
-    piVar21[*piVar21 + 2] = temp_v16;
-    if (*(char *)(temp_v15 + 0x12c4) != '\0' || temp_v7 != temp_v16) {
-      (**(romwright_code **)(temp_v15 + 0x12c8))();
-      *(unsigned char *)(temp_v15 + 0x12c4) = 0;
-    }
-    texDrawTableEntryAtStoredOrigin(2,0x15,0x5f,temp_v5,temp_v4,0x3d);
-    texDrawTableEntryAtStoredOrigin(2,0x15,0x60,temp_v5,temp_v4,0x3d);
-    texDrawTableEntryAtStoredOrigin(2,0x15,0x61,temp_v5,temp_v4,0x3d);
-    texDrawTableEntryAtStoredOrigin(2,0x15,0x62,temp_v5,temp_v4,0x3d);
-    texDrawTableEntryAtStoredOrigin(2,0x15,99,temp_v5,temp_v4,0x3d);
-    texDrawTableEntryAtStoredOrigin(2,0x15,100,temp_v5,temp_v4,0x42);
-    texDrawTableEntryAtStoredOrigin(2,0x15,0x65,temp_v5,temp_v4,0x42);
-    temp_v15 = 0;
-    if (*(char *)(param_1 + 0x37c0) != '\0') {
-      if (*(char *)(param_1 + 0x380d) == '\0') {
-        temp_v15 = (int)(short)*(unsigned int *)(param_1 + 0x37d8);
-      }
-      if (*(char *)(param_1 + 0x3808) == '\0') {
-        temp_v15 = (int)(short)-(short)temp_v15;
-      }
-    }
-    FUN_002be90c((int)*(short *)((int)temp_v37 + 0xde),(int)*(short *)(temp_v3 + 0xe),temp_v15,*temp_v37
-                 ,0x15,0x66,0x69,0x68,0x67,temp_v5,temp_v4,0x47,0);
-    temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x6f));
-    temp_v15 = FUN_002b6ad0();
-    if (temp_v15 != 0) {
-      if ((*(unsigned short *)(temp_v3 + 0x44) & 2) != 0) {
-        categoryGetColor(1);
-        drawSetColorFromRGBA8();
-      }
-      temp_v3 = supportUnitGetEntry((int)*(short *)(temp_v3 + 0x604),*(unsigned short *)(temp_v3 + 0x606));
-      FUN_002b6940(*(unsigned short *)(temp_v3 + 0x5a),*(short *)(temp_v4 + 8) + temp_v5,
-                   (*(short *)(temp_v4 + 10) + temp_v6) - temp_v28,0x42);
-      gxResetColorQuadToWhite();
-      temp_v3 = gameGetSupportUnitData();
-      temp_v10 = (unsigned int)*(unsigned short *)(temp_v3 + 0x604);
-      FUN_002bcf4c(temp_v10);
-      textFormatBuffer(temp_v29,temp_v10);
-    }
-    else {
-      if ((*(unsigned short *)(temp_v3 + 0x44) & 2) != 0) {
-        categoryGetColor(1);
-        drawSetColorFromRGBA8();
-      }
-      uiDrawDemonIcon((int)*(short *)(temp_v3 + 0x46),*(short *)(temp_v4 + 8) + temp_v5,
-                   (*(short *)(temp_v4 + 10) + temp_v6) - temp_v28,0x42,0);
-      gxResetColorQuadToWhite();
-      temp_v18 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
-      textFormatBuffer(temp_v29,temp_v18);
-    }
-    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x6e));
-    temp_v20 = 0.0f;
-    VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((*(short *)(temp_v3 + 10) + temp_v6) - temp_v28,(unsigned char)(in_fpscr >> 0x16) & 3);
-    textDrawString(2,0xff,temp_v29);
-    temp_v3 = FUN_002b6ad0();
-    if ((temp_v3 != 0) && ((*(int *)(temp_v34 + 0x48) == 0x1f || (*(int *)(temp_v34 + 0x4c) == 0x1f)))
-       ) {
-      if (*(char *)(temp_v34 + 0x81) != '\0') {
-        if ((int)temp_v23 >= 0x3f800000) {
-          efctSetSpeed();
+
+        if (scene->slideShown[member] != 0) {
+            s32 fade = scene->slideTimers[member] - 29;
+            if ((u32)fade < 12) {
+                alpha = fade / 12.0f;
+                efctSetSpeed(alpha);
+                entry = asdTMTexTableEntryAt(21, member + 0x52);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x4F, entry->x, entry->y, 46);
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x4E, entry->x, entry->y - shift, 46);
+                hudSetScissor(3);
+                FUN_0029a17c(entry->x, entry->y, entry->placement->width, entry->placement->height - shift, 1);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x50, entry->x, entry->y, 46);
+                texDrawTableEntryAtStoredOrigin(2, 21, 0x51, entry->x, entry->y, 46);
+                hudSetScissor(0);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+            }
         }
-        temp_v3 = g_titleScene;
-        temp_v4 = packNibblesAndByte(6,1,0);
-        piVar21 = (int *)(temp_v3 + 0x12ac);
-        temp_v15 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v4;
-        if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v15 != temp_v4) {
-          (**(romwright_code **)(temp_v3 + 0x12c8))();
-          *(unsigned char *)(temp_v3 + 0x12c4) = 0;
-        }
-        texDrawCompositeSprite(2,0x15,0xc,0,0,0x5b);
-        temp_v3 = g_titleScene;
-        temp_v4 = packNibblesAndByte(6,7,0);
-        piVar21 = (int *)(temp_v3 + 0x12ac);
-        temp_v15 = piVar21[*piVar21 + 2];
-        piVar21[*piVar21 + 2] = temp_v4;
-        if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v15 != temp_v4) {
-          (*(romwright_code *)piVar21[7])();
-          *(unsigned char *)(piVar21 + 6) = 0;
-        }
-        efctSetSpeed();
-      }
-      else {
-        temp_v23 = *(float *)(param_1 + 0x1364);
-        if (temp_v23 > temp_v20) {
-          efctSetSpeed();
-          temp_v4 = vec2GetXInt(param_1 + 0x1344);
-          temp_v3 = g_titleScene;
-          temp_v15 = packNibblesAndByte(6,1,0);
-          piVar21 = (int *)(temp_v3 + 0x12ac);
-          temp_v5 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = temp_v15;
-          if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v5 != temp_v15) {
-            (**(romwright_code **)(temp_v3 + 0x12c8))();
-            *(unsigned char *)(temp_v3 + 0x12c4) = 0;
-          }
-          texDrawTableEntryAtStoredOrigin(2,0x15,0x1b4,temp_v4,0,0x51);
-          texDrawTableEntryAtStoredOrigin(2,0x15,0x1b4,temp_v4,0,0x51);
-          temp_v3 = g_titleScene;
-          temp_v15 = packNibblesAndByte(6,7,0);
-          piVar21 = (int *)(temp_v3 + 0x12ac);
-          temp_v5 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = temp_v15;
-          if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v5 != temp_v15) {
-            (**(romwright_code **)(temp_v3 + 0x12c8))();
-            *(unsigned char *)(temp_v3 + 0x12c4) = 0;
-          }
-          temp_v15 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x1b9));
-          temp_v3 = g_titleScene;
-          piVar21 = (int *)(g_titleScene + 0x130c);
-          temp_v5 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = 3;
-          if (*(char *)(temp_v3 + 0x1324) != '\0' || temp_v5 != 3) {
-            (**(romwright_code **)(temp_v3 + 0x1328))();
-            *(unsigned char *)(temp_v3 + 0x1324) = 0;
-          }
-          FUN_0029a17c(*(short *)(temp_v15 + 8) + temp_v4,(int)*(short *)(temp_v15 + 10),
-                       (int)**(short **)(temp_v15 + 0xc),(int)(*(short **)(temp_v15 + 0xc))[1],1);
-          temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x1ba));
-          temp_v15 = gameGetSupportUnitData();
-          temp_v1 = *(unsigned short *)(temp_v15 + 0x606);
-          temp_v15 = gameGetSupportUnitData();
-          temp_v15 = supportUnitGetEntry((int)*(short *)(temp_v15 + 0x604),temp_v1);
-          textureLoadOptionalDemonModel((int)(short)(*(short *)(temp_v15 + 0x5a) + 1),*(short *)(temp_v3 + 8) + temp_v4,
-                       (int)*(short *)(temp_v3 + 10),0x54,0);
-          temp_v3 = g_titleScene;
-          piVar21 = (int *)(g_titleScene + 0x130c);
-          temp_v15 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = 0;
-          if (*(char *)(temp_v3 + 0x1324) != '\0' || temp_v15 != 0) {
-            (**(romwright_code **)(temp_v3 + 0x1328))(0);
-            *(unsigned char *)(temp_v3 + 0x1324) = 0;
-          }
-          texDrawCompositeSprite(2,0x15,10,temp_v4,0,0x56);
-          if ((int)temp_v23 >= 0x3f800000) {
-            efctSetSpeed();
-          }
-          temp_v3 = g_titleScene;
-          temp_v15 = packNibblesAndByte(6,1,0);
-          piVar21 = (int *)(temp_v3 + 0x12ac);
-          temp_v5 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = temp_v15;
-          if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v5 != temp_v15) {
-            (**(romwright_code **)(temp_v3 + 0x12c8))();
-            *(unsigned char *)(temp_v3 + 0x12c4) = 0;
-          }
-          texDrawCompositeSprite(2,0x15,0xc,0,0,0x5b);
-          texDrawCompositeSprite(2,0x15,0xb,temp_v4,0,0x5b);
-          temp_v3 = g_titleScene;
-          temp_v4 = packNibblesAndByte(6,7,0);
-          piVar21 = (int *)(temp_v3 + 0x12ac);
-          temp_v15 = piVar21[*piVar21 + 2];
-          piVar21[*piVar21 + 2] = temp_v4;
-          if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v15 != temp_v4) {
-            (*(romwright_code *)piVar21[7])();
-            *(unsigned char *)(piVar21 + 6) = 0;
-          }
-          efctSetSpeed();
-        }
-      }
+        efctSetSpeed(1.0f);
     }
-    efctSetSpeed();
-  }
-  temp_v4 = 0;
-  temp_v3 = 0x71;
-  temp_v39[0] = 0x46;
-  temp_v39[1] = 0x47;
-  temp_v39[2] = 0x48;
-  temp_v39[3] = 0x49;
-  temp_v39[4] = 0x71;
-  do {
-    if (*(char *)(param_1 + temp_v4 + 0x389c) != '\0') {
-      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v39[temp_v4]));
-      temp_v15 = g_titleScene;
-      temp_v6 = packNibblesAndByte(6,1,0);
-      piVar21 = (int *)(temp_v15 + 0x12ac);
-      temp_v16 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = temp_v6;
-      if (*(char *)(temp_v15 + 0x12c4) != '\0' || temp_v16 != temp_v6) {
-        (**(romwright_code **)(temp_v15 + 0x12c8))();
-        *(unsigned char *)(temp_v15 + 0x12c4) = 0;
-      }
-      temp_v15 = param_1 + temp_v4 * 4;
-      FUN_0025765c(*(unsigned int *)(temp_v15 + 0x38b8),*(unsigned int *)(temp_v15 + 0x38a4));
-      drawSetColorFromRGBA8();
-      temp_v15 = g_titleScene;
-      temp_v18 = 2000;
-      piVar21 = (int *)(g_titleScene + 0x130c);
-      if (temp_v4 == 4) {
-        temp_v18 = 0x7d1;
-      }
-      temp_v6 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = 3;
-      if (*(char *)(temp_v15 + 0x1324) != '\0' || temp_v6 != 3) {
-        (**(romwright_code **)(temp_v15 + 0x1328))();
-        *(unsigned char *)(temp_v15 + 0x1324) = 0;
-      }
-      if (temp_v46 != 0) {
-        temp_v3 = temp_v28;
-      }
-      temp_v15 = (int)(*(short **)(temp_v5 + 0xc))[1];
-      if (temp_v46 != 0) {
-        temp_v15 = temp_v15 - temp_v3;
-      }
-      else {
-        temp_v15 = temp_v15 - 0x28;
-      }
-      FUN_0029a17c((int)*(short *)(temp_v5 + 8),(int)*(short *)(temp_v5 + 10),
-                   (int)**(short **)(temp_v5 + 0xc),temp_v15,1);
-      texDrawTableEntryAtStoredOrigin(2,0x15,temp_v18,(int)*(short *)(temp_v5 + 8),(int)*(short *)(temp_v5 + 10),0xe7);
-      temp_v15 = g_titleScene;
-      piVar21 = (int *)(g_titleScene + 0x130c);
-      temp_v5 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = 0;
-      if (*(char *)(temp_v15 + 0x1324) != '\0' || temp_v5 != 0) {
-        (**(romwright_code **)(temp_v15 + 0x1328))();
-        *(unsigned char *)(temp_v15 + 0x1324) = 0;
-      }
-      gxResetColorQuadToWhite();
-      temp_v15 = g_titleScene;
-      temp_v5 = packNibblesAndByte(6,7,0);
-      piVar21 = (int *)(temp_v15 + 0x12ac);
-      temp_v6 = piVar21[*piVar21 + 2];
-      piVar21[*piVar21 + 2] = temp_v5;
-      if (*(char *)(temp_v15 + 0x12c4) != '\0' || temp_v6 != temp_v5) {
-        (**(romwright_code **)(temp_v15 + 0x12c8))();
-        *(unsigned char *)(temp_v15 + 0x12c4) = 0;
-      }
+
+    if (scene->state == 0x1F || scene->mode == 0x1F) {
+        efctSetSpeed(vec2GetSpeed(&scene->blockE));
+        texDrawTableEntryAtStoredOrigin(2, 14, 0x106, 0, 0, 51);
+        efctSetSpeed(alpha);
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 5);
-  return;
+
+    GameOptions *guest = (GameOptions *)gameGetSupportUnitData();
+    if (guest->unk46 != 0 && (btlGetMainState()->battleFlags & 0x40000) == 0) {
+        s32 shakeX;
+        s32 shakeY;
+        s32 shake = scene->party.shakeTimers[4];
+        if (shake > 0) {
+            f32 amplitude = scene->party.shakeAmplitudes[4] * 0.5f;
+            if (shake & 1) {
+                amplitude = -amplitude;
+            }
+            shakeY = shakeX = (s32)amplitude;
+            scene->party.shakeAmplitudes[4] =
+                shakeAmplitude(shake);
+        } else {
+            shakeY = shakeX = 0;
+        }
+        alpha = 1.0f;
+        if (allLit == 0 && scene->unk305C != 4) {
+            alpha = 0.5f;
+        }
+        if (dimGuest != 0) {
+            alpha = 0.5f;
+        }
+        efctSetSpeed(alpha);
+        TextureTableEntryIV *entry;
+        if (expanded != 0) {
+            entry = asdTMTexTableEntryAt(21, 0x71);
+        } else {
+            entry = asdTMTexTableEntryAt(21, 0x70);
+        }
+        s32 x;
+        s32 y;
+        if (btlActorIsDown(scene->guestActor) != 0 && FUN_002b6ad0() != 0) {
+            x = vec2GetXInt(&scene->timerC) + shakeX + entry->x;
+            y = vec2GetYInt(&scene->timerC) + shakeY + entry->y;
+        } else {
+            x = vec2GetXInt(&scene->memberFrames[1]) + shakeX + entry->x;
+            y = vec2GetYInt(&scene->memberFrames[1]) + shakeY + entry->y;
+        }
+        x = vec2GetXInt(&scene->timer) + x;
+        y = vec2GetYInt(&scene->timer) + y;
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+        s32 top = y - shift;
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x5E, x, top, 56);
+        if (scene->state == 0x1F || scene->mode == 0x1F) {
+            efctSetSpeed(vec2GetSpeed(&scene->blockE));
+            texDrawTableEntryAtStoredOrigin(2, 21, 0x5E, x, top, 56);
+            efctSetSpeed(alpha);
+        }
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x5F, x, top, 61);
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x60, x, top, 61);
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x61, x, top, 61);
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x62, x, top, 61);
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x63, x, top, 61);
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x64, x, top, 66);
+        texDrawTableEntryAtStoredOrigin(2, 21, 0x65, x, top, 66);
+
+        maxHp = guest->guest.maxHp;
+        s16 hp = scene->party.hpShown[4];
+        s16 hpChange = 0;
+        if (scene->party.gaugeAnimating[4] != 0) {
+            if (scene->party.hpAnimationHeld[4] == 0) {
+                hpChange = scene->party.hpAnimations[4];
+            }
+            if (scene->party.gaugeRising[4] == 0) {
+                hpChange = -hpChange;
+            }
+        }
+        ScreenPoint position = {x, top};
+        FUN_002be90c(hp, maxHp, hpChange, scene->party.gaugeBases[4], 21, 0x66, 0x69, 0x68, 0x67, position, 71, 0);
+
+        entry = asdTMTexTableEntryAt(21, 0x6F);
+        if (FUN_002b6ad0() != 0) {
+            if (guest->guest.ailments & 2) {
+                drawSetColorFromRGBA8(categoryGetColor(1));
+            }
+            SupportUnitRecord *record = supportUnitGetEntry((s16)guest->unk604, guest->supportIndex);
+            FUN_002b6940(record->demon.id, entry->x + x, entry->y + y - shift, 66);
+            gxResetColorQuadToWhite();
+            textFormatBuffer(name, FUN_002bcf4c(((GameOptions *)gameGetSupportUnitData())->unk604)->name);
+        } else {
+            if (guest->guest.ailments & 2) {
+                drawSetColorFromRGBA8(categoryGetColor(1));
+            }
+            uiDrawDemonIcon((s16)guest->unk46, entry->x + x, entry->y + y - shift, 66, 0);
+            gxResetColorQuadToWhite();
+            textFormatBuffer(name, FUN_002bd068(guest->unk46));
+        }
+        entry = asdTMTexTableEntryAt(21, 0x6E);
+        textDrawString(2, 0xFF, name, entry->x + x, entry->y + y - shift, 0.72265625f, 0.0f, alpha);
+
+        if (FUN_002b6ad0() != 0 && (scene->state == 0x1F || scene->mode == 0x1F)) {
+            if (scene->unk3081 != 0) {
+                if (alpha >= 1.0f) {
+                    efctSetSpeed(vec2GetSpeed(&scene->intro.animation));
+                }
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawCompositeSprite(2, 21, 12, 0, 0, 91);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                efctSetSpeed(1.0f);
+            } else {
+                alpha = vec2GetSpeed(&scene->blockE);
+                if (alpha > 0.0f) {
+                    efctSetSpeed(alpha);
+                    s32 flashX = vec2GetXInt(&scene->blockE);
+                    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                    texDrawTableEntryAtStoredOrigin(2, 21, 0x1B4, flashX, 0, 81);
+                    texDrawTableEntryAtStoredOrigin(2, 21, 0x1B4, flashX, 0, 81);
+                    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                    entry = asdTMTexTableEntryAt(21, 0x1B9);
+                    hudSetScissor(3);
+                    FUN_0029a17c(entry->x + flashX, entry->y, entry->placement->width, entry->placement->height, 1);
+                    entry = asdTMTexTableEntryAt(21, 0x1BA);
+                    u16 index = ((GameOptions *)gameGetSupportUnitData())->supportIndex;
+                    SupportUnitRecord *record =
+                        supportUnitGetEntry((s16)((GameOptions *)gameGetSupportUnitData())->unk604, index);
+                    textureLoadOptionalDemonModel((s16)(record->demon.id + 1), entry->x + flashX, entry->y, 84, 0);
+                    hudSetScissor(0);
+                    texDrawCompositeSprite(2, 21, 10, flashX, 0, 86);
+                    if (alpha >= 1.0f) {
+                        efctSetSpeed(vec2GetSpeed(&scene->intro.animation));
+                    }
+                    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                    texDrawCompositeSprite(2, 21, 12, 0, 0, 91);
+                    texDrawCompositeSprite(2, 21, 11, flashX, 0, 91);
+                    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+                    efctSetSpeed(1.0f);
+                }
+            }
+        }
+        efctSetSpeed(1.0f);
+    }
+
+    /* the elements' markers */
+    s32 elementIcons[5] = {0x46, 0x47, 0x48, 0x49, 0x71};
+    for (s32 element = 0; element < 5; element++) {
+        if (scene->party.elementShown[element] != 0) {
+            TextureTableEntryIV *entry = asdTMTexTableEntryAt(21, elementIcons[element]);
+            renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+            drawSetColorFromRGBA8(FUN_0025765c(scene->party.elements[element], scene->party.elementPhases[element]));
+            s32 image = 2000;
+            if (element == 4) {
+                image = 2001;
+            }
+            hudSetScissor(3);
+            s32 height = entry->placement->height;
+            FUN_0029a17c(entry->x, entry->y, entry->placement->width, expanded != 0 ? height - shift : height - 40, 1);
+            texDrawTableEntryAtStoredOrigin(2, 21, image, entry->x, entry->y, 231);
+            hudSetScissor(0);
+            gxResetColorQuadToWhite();
+            renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+        }
+    }
 }
 
 } /* extern "C" */

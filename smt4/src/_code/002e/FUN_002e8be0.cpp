@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
+/* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18 and permutes the 40.0f and view-z registers) */
 #include "map/mapDepart.h"
 #include "map/LmapGlobals.h"
 #include "util/TrigF32.h"
@@ -52,13 +52,12 @@ void FUN_002e8be0(void)
         g_mapCamera->contextMode = -2;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1, g_gameState.overviewRecord);
-        MapVector viewPosition;
-        viewPosition.x = g_gameState.overviewPosition.x;
-        viewPosition.y = g_gameState.overviewPosition.y;
-        viewPosition.z = g_gameState.overviewPosition.z;
-        viewPosition.x = viewPosition.x + mathRemPio2f(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        viewPosition.z = viewPosition.z + FUN_00282390(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        FUN_001b4478(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.heading);
+        f32 viewX = g_gameState.overviewPosition.x;
+        f32 viewY = g_gameState.overviewPosition.y;
+        f32 viewZ = g_gameState.overviewPosition.z;
+        viewX += mathRemPio2f(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        viewZ += FUN_00282390(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        FUN_001b4478(viewX, viewY, viewZ, g_gameState.heading);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
         break;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the bank load is not predicated before the null branch, and halfword/bit-clear pointer registers differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "shard/ItemStackLimit.h"
 
@@ -11,8 +10,8 @@ extern "C" void flagValueSub(s32 id, u32 amount)
         return;
     }
     const FlagValueRange *range = reinterpret_cast<const FlagValueRange *>(itemCategoryFindByItemId(id));
+    u8 bankId = range ? range->bank : 0;
     if (range != NULL) {
-        u8 bankId = range->bank;
         FlagValueStorage *storage = flagValueGetStorage();
         u8 *bank;
         switch (bankId) {
@@ -32,18 +31,14 @@ extern "C" void flagValueSub(s32 id, u32 amount)
         }
         s32 index = id - range->firstId;
         if (range->width == 0) {
-            bank[index / 8] &= ~(1 << (index % 8));
+            u8 *flag = &bank[index / 8];
+            s32 bit = index % 8;
+            *flag &= ~(1 << bit);
             return;
         }
         if (range->width == 1) {
             u16 *value = reinterpret_cast<u16 *>(bank) + index;
-            u32 remaining = *value;
-            if (remaining < amount) {
-                remaining = 0;
-            } else {
-                remaining -= amount;
-            }
-            *value = remaining;
+            *value = *value < amount ? 0 : *value - amount;
         }
     }
 }

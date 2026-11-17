@@ -1,6 +1,6 @@
 #include "ui/UiSpriteApi.h"
 #include "gfx/SpritePartDraw.h"
-/* NON_MATCHING: label-draw argument setup/literal ordering, frame /5 multiply operands, and final zero-return scheduling differ; loading-dot loop instructions agree. */
+/* NON_MATCHING: label-draw argument setup/literal ordering and the frame /5 multiply operands differ; loading-dot loop instructions agree. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -60,7 +60,13 @@ u32 renderCtxPackPassFlags(s32 a, s32 b);
 u8 FUN_001acdd8(void)
 {
     RunWin *win = DAT_0043e170;
-    if (win->active != 0 && win->visible != 0) {
+    if (win->active == 0) {
+        return 0;
+    }
+    if (win->visible == 0) {
+        return 0;
+    }
+    {
         renderCtxSelectStereoLayout(g_titleScene);
         RenderCtx *first = g_titleScene;
         titleScenePushFirst(first, renderCtxPackPassFlags(1, 0));

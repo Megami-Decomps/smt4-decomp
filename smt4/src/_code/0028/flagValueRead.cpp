@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial bank load is not predicated; bit-mask register and false-result return branch differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "code/Code0028.h"
 
@@ -10,10 +9,10 @@ const FlagValueRange *itemCategoryFindByItemId(s32 id);
 s32 flagValueRead(s32 id)
 {
     const FlagValueRange *range = itemCategoryFindByItemId(id);
+    u8 bankIndex = range ? range->bank : 0;
     if (range == NULL) {
         return 0;
     }
-    u8 bankIndex = range->bank;
     FlagValueStorage *storage = saveGetUnlockFlagBlock();
     u8 *bank;
     switch (bankIndex) {
@@ -31,14 +30,16 @@ s32 flagValueRead(s32 id)
     case 11: bank = storage->bank12; break;
     default: bank = NULL; break;
     }
-    s32 index = id - range->firstId;
+    id -= range->firstId;
     switch (range->width) {
-    case 0:
-        return (bank[index / 8] & (1 << (index % 8))) != 0;
-    case 1:
-        return reinterpret_cast<u16 *>(bank)[index];
-    default:
-        return 0;
+    case 0: {
+        const u8 *flag = &bank[id / 8];
+        const s32 bit = id % 8;
+        return (*flag & (1u << bit)) != 0;
     }
+    case 1:
+        return reinterpret_cast<u16 *>(bank)[id];
+    }
+    return 0;
 }
 }

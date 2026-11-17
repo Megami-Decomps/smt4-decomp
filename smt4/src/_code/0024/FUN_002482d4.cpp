@@ -1,4 +1,3 @@
-/* NON_MATCHING: global matrix addresses fold into large offsets, changing base registers and VFP load scheduling; 107 vs 106 instructions, no stack matrix copy. */
 #include "gfx/VectorScratch.h"
 namespace {
 inline void premultiply(Matrix44 &right, const Matrix44 &left)
@@ -29,6 +28,7 @@ extern "C" {
 // Premultiply the current matrix by the next matrix in the global transform work.
 void FUN_002482d4()
 {
-    premultiply(g_vectorScratch.matrix.matrix, g_vectorScratch.stored.matrix);
+    const Matrix44 &next = g_vectorScratch.stored.matrix;
+    premultiply(g_vectorScratch.matrix.matrix, next);
 }
 }

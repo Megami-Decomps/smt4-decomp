@@ -1,4 +1,4 @@
-/* NON_MATCHING: the gates now match (signed blocked byte gives the shared 0x1400 base); remaining: retail zeroes r0 on the blocked exit (movne r0, #0) and branches past the final `mov r0, #0`, which it schedules before the pending store, and one height copy swaps r0/r1. */
+/* NON_MATCHING: the gates now match (signed blocked byte gives the shared 0x1400 base); remaining: one height copy (half to quarter) swaps r0/r1. */
 #include "frame_tex/FrameTexA.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
@@ -14,7 +14,19 @@ s32 renderSurfaceDownsampleJob(u32 job)
 {
     FrameTexWorkA *work = (FrameTexWorkA *)jobGetWork(job);
     work->hdr.capturedLeft = 0;
-    if (work->hdr.enabled && work->hdr.ready && work->sceneSurface && !work->captureBlocked) {
+    if (!work->hdr.enabled) {
+        return 0;
+    }
+    if (!work->hdr.ready) {
+        return 0;
+    }
+    if (work->sceneSurface == NULL) {
+        return 0;
+    }
+    if (work->captureBlocked) {
+        return 0;
+    }
+    {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         work->sceneSurface->dimensions.width = 512;
         work->sceneSurface->dimensions.height = 512;

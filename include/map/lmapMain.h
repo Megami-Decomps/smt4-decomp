@@ -138,7 +138,7 @@ typedef struct LmapScene {
     /* 0x000 */ s32 mode;      /* scene mode (lmapSetSceneId); 28 is the overview */
     /* 0x004 */ s32 state;     /* step within the mode */
     /* 0x008 */ s32 stateTime; /* frames in the step */
-    /* 0x00C */ u8 unk00C[4];
+    /* 0x00C */ s32 struggleCount; /* mode 31: stick turns and button presses, added to the frames held */
     /* 0x010 */ u8 unk010;
     /* 0x011 */ u8 unk011[3];
     /* 0x014 */ f32 unk014;
@@ -154,7 +154,9 @@ typedef struct LmapScene {
     /* 0x06C */ u8 unk06C;
     /* 0x06D */ u8 unk06D[3];
     /* 0x070 */ u32 unk070;
-    /* 0x074 */ f32 unk074[4];
+    /* 0x074 */ f32 unk074[2];
+    /* 0x07C */ f32 slideStep;     /* mode 37: distance slid per frame, eased down to 4 */
+    /* 0x080 */ f32 unk080;
     /* 0x084 */ u32 unk084;
     /* 0x088 */ u8 unk088;
     /* 0x089 */ u8 unk089[7];

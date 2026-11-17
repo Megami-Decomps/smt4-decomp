@@ -15,6 +15,7 @@
 #include "shard/S1Mover.h"
 #include "gfx/QuaternionWorkspace.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
+#include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 
 /* One 16-byte scratch value. */
 union VectorScratchValue {
@@ -25,6 +26,7 @@ union VectorScratchValue {
     IntegrationVector4 integration;
     EffectEditorWords words;
     Vec3f direction;
+    PolyVec4 poly;
 };
 
 /* Two rows of a 4x4 matrix: matrixCopyToGlobal copies a matrix in two such 32-byte blocks. */

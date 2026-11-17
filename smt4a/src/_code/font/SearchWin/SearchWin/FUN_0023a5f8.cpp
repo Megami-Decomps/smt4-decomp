@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the search window's loading-dots draw (title-scene variant of FUN_0023a5f8); armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
+/* NON_MATCHING: early returns now give retail's shared zero-result epilogue; remaining: the textDrawString argument loads (colour/0.0f/0.566f pool order) and the frame /5 smull operand order. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -60,7 +60,11 @@ u32 renderCtxPackPassFlags(s32 a, s32 b);
 u8 FUN_0023a5f8(void)
 {
     RunWin *win = DAT_0057f584;
-    if (win->active != 0 && win->visible != 0) {
+    if (win->active == 0)
+        return 0;
+    if (win->visible == 0)
+        return 0;
+    {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *first = g_renderCtx;
         titleScenePushFirst(first, renderCtxPackPassFlags(1, 0));

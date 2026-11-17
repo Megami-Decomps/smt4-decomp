@@ -1,4 +1,4 @@
-/* NON_MATCHING: callback handle and shared draw coordinates recovered; push expression order and job-loop address sharing differ. */
+/* NON_MATCHING: the three render-state pushes match (stack B uses the counted direct push); remaining: retail forms &work->jobs[i] once at the loop top and loads the handle before the drawAll branch (both arms call jobIsValid on it). */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "code/Code0038.h"
@@ -43,7 +43,7 @@ s32 FUN_002ad180(u32 job)
     renderStackPush(&context->additional.stackC, state);
     context = g_renderCtx;
     state = packNibblesAndByte(6, 7, 0);
-    renderStackPush(&context->stackB, state);
+    renderStackPushCountedDirect(&context->stackB, state);
     for (s32 i = 0; i < work->jobCount; i++) {
         if (g_eventTex->drawAll != 0) {
             if (!jobIsValid(work->jobs[i]))

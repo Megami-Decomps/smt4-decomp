@@ -1,4 +1,4 @@
-/* NON_MATCHING: only register assignment of the preview-mode/phase constants and the position of the source-byte store differ from retail. */
+/* NON_MATCHING: the mode store is now the linker-inlined scriptProcessSetMode call; only the source-byte load and the preview-mode/phase constant registers are scheduled differently from retail. */
 #include "classes/Obj42247c.h"
 #include "classes/Obj4223c4.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -8,6 +8,7 @@
 #include "script/scrScriptProcess.h"
 
 extern "C" {
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 utilityReturnSuccess(const void *input);
 void buttonHelpSetPreset(u32 preset);
 void *partyMemberFindById(u16 id);
@@ -47,7 +48,7 @@ void Obj4223c4::FUN_003a76b8()
     if (view->isScreenReady() != 0 && utilityReturnSuccess(state->input) == 0) {
         ScriptProcess *preview = scrScriptProcessCreate(state->handleA, state->handleB);
         state->preview = preview;
-        preview->mode = 2;
+        scriptProcessSetMode(preview, 2);
         state->phase = 1;
         state->timer = 0;
         state->source = 1;

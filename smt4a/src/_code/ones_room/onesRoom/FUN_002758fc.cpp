@@ -1,4 +1,3 @@
-/* NON_MATCHING: the block is now cleared with memset like retail (five zero words through the allocation); only the freeOnEnd store is scheduled before the active load (retail: after). */
 #include "ones_room/onesRoom.h"
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/AsdDebug.h"
@@ -17,6 +16,7 @@ void scrScriptProcessStartEntry(void *process, s32 entry);
 void titleRestartSlotState3(s32 screen, s32 alpha);
 s32 onesRoomTeardown(u32 job);
 void onesRoomRequestTransition();
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 /* Create the room resources, start its script, and install its lifetime job. */
 void FUN_002758fc(s32 inactive)
@@ -36,7 +36,7 @@ void FUN_002758fc(s32 inactive)
     room->dataB = asdLoadFileSyncDefault("ones_room/onesRoom.mbm");
     ScriptProcess *process = scrScriptProcessCreate(room->dataA, room->dataB);
     room->process = process;
-    process->mode = 2;
+    scriptProcessSetMode(process, 2);
     scrScriptProcessStartEntry(room->process, 0);
     room->freeOnEnd = 0;
     if (room->active) {

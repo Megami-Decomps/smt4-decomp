@@ -1,4 +1,4 @@
-/* NON_MATCHING: bank/category register lifetimes and changed-bit address computation differ from retail. */
+/* NON_MATCHING: only the final changed-bit update's registers differ (retail loads the byte into r3 and the 1 into r2); same remaining difference as smt4 FUN_00295a18. */
 #include "common.h"
 #include "shard/ItemStackLimit.h"
 
@@ -28,6 +28,26 @@ extern "C" void FUN_0041849c(u16 id);
 extern "C" FlagValueStorage *flagValueGetStorage(void);
 extern "C" u32 itemGetStackLimit(s32 id);
 
+/* The storage bank of a flag category. */
+static __inline u8 *flagValueBank(FlagValueStorage *storage, u8 category)
+{
+    switch (category) {
+    case 0: return storage->bank0;
+    case 1: return storage->bank1;
+    case 2: return storage->bank2;
+    case 3: return storage->bank3;
+    case 4: return storage->bank4;
+    case 5: return storage->bank5;
+    case 6: return storage->bank6;
+    case 7: return storage->bank7;
+    case 8: return storage->bank8;
+    case 9: return storage->bank9;
+    case 10: return storage->bank10;
+    case 12: return storage->bank12;
+    default: return NULL;
+    }
+}
+
 /* Add to a capped numeric flag, or set a boolean flag, and record the changed id. */
 extern "C" void flagValueAdd(s32 id, u32 amount)
 {
@@ -35,44 +55,31 @@ extern "C" void flagValueAdd(s32 id, u32 amount)
         return;
     FUN_0041849c((u16)id);
     FlagValueDescription *description = reinterpret_cast<FlagValueDescription *>(itemCategoryFindByItemId(id));
-    if (description == NULL)
-        return;
-    u8 category = description->category;
-    FlagValueStorage *storage = flagValueGetStorage();
-    u8 *bank;
-    switch (category) {
-    case 1: bank = storage->bank1; break;
-    case 2: bank = storage->bank2; break;
-    case 3: bank = storage->bank3; break;
-    case 4: bank = storage->bank4; break;
-    case 5: bank = storage->bank5; break;
-    case 6: bank = storage->bank6; break;
-    case 7: bank = storage->bank7; break;
-    case 8: bank = storage->bank8; break;
-    case 9: bank = storage->bank9; break;
-    case 10: bank = storage->bank10; break;
-    case 12: bank = storage->bank12; break;
-    case 0: bank = storage->bank0; break;
-    default: bank = NULL; break;
+    u8 category = description ? description->category : 0;
+    if (description != NULL) {
+        FlagValueStorage *storage = flagValueGetStorage();
+        u8 *bank = flagValueBank(storage, category);
+        s32 index = id - description->firstId;
+        switch (description->storageType) {
+        case 0: {
+            u8 *byte = &bank[index / 8];
+            *byte |= 1u << (index % 8);
+            break;
+        }
+        case 1: {
+            u32 maximum = itemGetStackLimit(id);
+            u16 *value = &((u16 *)bank)[index];
+            u32 sum = *value + amount;
+            if (sum >= maximum)
+                *value = maximum;
+            else
+                *value = sum;
+            break;
+        }
+        }
+        storage = flagValueGetStorage();
+        s32 changed = id - 1;
+        if ((u32)(changed >> 3) < 252)
+            storage->changed[changed >> 3] |= (u8)(1u << (changed & 7));
     }
-    s32 index = id - description->firstId;
-    switch (description->storageType) {
-    case 0:
-        bank[index / 8] |= 1u << (index % 8);
-        break;
-    case 1: {
-        u32 maximum = itemGetStackLimit(id);
-        u16 *value = &((u16 *)bank)[index];
-        u32 sum = *value + amount;
-        if (sum >= maximum)
-            *value = maximum;
-        else
-            *value = sum;
-        break;
-    }
-    }
-    storage = flagValueGetStorage();
-    s32 changedByte = (id - 1) >> 3;
-    if ((u32)changedByte < 252)
-        storage->changed[changedByte] |= 1u << ((id - 1) & 7);
 }

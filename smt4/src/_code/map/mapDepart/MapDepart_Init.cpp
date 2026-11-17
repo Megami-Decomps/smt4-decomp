@@ -1,4 +1,3 @@
-/* NON_MATCHING: with the copy in a helper the shared destination block is placed after mode 2 as in retail; armcc still branches `bne end; b mode2` where retail has `beq mode2; b end`, and stores the work global from r4 instead of r0. */
 #include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -39,7 +38,7 @@ void FUN_002f4b2c(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 firstDelay, u16 lastDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
-/* Past story stage 100 the request also carries the destination's state. */
+/* From map 100 on the request also carries the destination's state. */
 static __inline void mapDepartCopyDestination(MapDepartureInitView *work, const MapDepartureRequest *request)
 {
     if (g_gameState.mapId >= 100) {
@@ -50,33 +49,31 @@ static __inline void mapDepartCopyDestination(MapDepartureInitView *work, const 
     }
 }
 
+/* Allocates the departure work from the request (or a default departure) and starts its process and the
+ * 3D and 2D search tasks. */
 void MapDepart_Init(const MapDepartureRequest *request)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapDepart.cpp", 173);
-    MapDepartureInitView *work = (MapDepartureInitView *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapDepartureInitView), 1);
-    g_mapDepart = &work->prefix;
+    g_mapDepart = (MapDepart *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapDepartureInitView), 1);
+    MapDepartureInitView *work = (MapDepartureInitView *)g_mapDepart;
     MapSaveBlock *location = gameGetMapBlock();
     if (request != NULL) {
-        switch (request->mode) {
-        case 0:
+        if (request->mode == 0) {
             MapDepart_InitState(&work->prefix, 1);
             work->mode = 0;
             work->map = request->map;
             location->departureMapId = request->map;
             mapDepartCopyDestination(work, request);
-            break;
-        case 1:
+        } else if (request->mode == 1) {
             MapDepart_InitState(&work->prefix, 0);
             work->mode = 1;
             work->entry = request->entry;
             mapDepartCopyDestination(work, request);
-            break;
-        case 2:
+        } else if (request->mode == 2) {
             MapDepart_InitState(&work->prefix, 0);
             work->mode = 2;
             work->entry = request->entry;
             mapDepartCopyDestination(work, request);
-            break;
         }
     } else {
         MapDepart_InitState(&work->prefix, 1);

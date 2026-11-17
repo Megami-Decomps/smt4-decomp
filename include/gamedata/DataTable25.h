@@ -7,7 +7,10 @@
 struct AocSystem;
 
 struct DataTable25Record {
-    /* 0x00 */ u8 unk00[0x20];
+    union {
+        /* 0x00 */ u8 unk00[0x20];
+        /* 0x00 */ char name[0x20];
+    };
     /* 0x20 */ u16 id;
     /* 0x22 */ u8 unk22[0x2c - 0x22];
 };

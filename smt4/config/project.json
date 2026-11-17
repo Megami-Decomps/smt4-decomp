@@ -84160,7 +84160,18 @@
       "size": 108,
       "source": "src/_code/0035/FUN_003531dc.cpp",
       "target": "orig/target/_code/0035/FUN_003531dc.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x353248",
@@ -84550,7 +84561,18 @@
       "size": 88,
       "source": "src/_code/0035/handleRequestSubmit.cpp",
       "target": "orig/target/_code/0035/handleRequestSubmit.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x354dac",

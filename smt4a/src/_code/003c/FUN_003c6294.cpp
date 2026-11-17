@@ -1,4 +1,4 @@
-/* NON_MATCHING: selected counter column and found flag use swapped r5/r6 registers. */
+/* NON_MATCHING: mask tests now match; only the selected counter column and the found flag use swapped r5/r6 registers. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/btlMain.h"
@@ -25,9 +25,9 @@ s32 FUN_003c6294(void)
     u8 found = 0;
     for (s32 i = 0; i < 109; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->data.id == id) {
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->data.id == id) {
             found = 1;
             // A local view avoids changing the shared combatant's still-unclassified padding.
             struct CounterView {

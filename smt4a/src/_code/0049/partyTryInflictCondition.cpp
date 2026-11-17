@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the unit-loop affinity call's argument setup differs: retail loads unit (r1), 11 (r2), then the output address (r0). */
 #include "gamedata/SaveSlotRecord.h"
 #include "gamedata/SaveSlotTable.h"
 #include "shard/Shard0034.h"
@@ -18,10 +17,11 @@ static inline s32 statusAffinityAllows(u16 affinity)
     return 1;
 }
 
-static inline s32 unitAffinityAllows(SlotRecordA *unit, u16 *affinities)
+static inline s32 unitAffinityAllows(SlotRecordA *unit)
 {
-    affinityResolveUnitSlot(affinities, unit, 11);
-    return statusAffinityAllows(affinities[0]);
+    u16 affinity;
+    affinityResolveUnitSlot(&affinity, unit, 11);
+    return statusAffinityAllows(affinity);
 }
 
 /* Apply a probabilistic status to the selected player and party groups. */
@@ -31,7 +31,6 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
         return;
     }
     u32 mask = 1u << condition;
-    u16 affinities[21];
     if ((group == 0 || group == 2 || group == 3) &&
         (gameGetPlayerData()->ailments & 2) == 0 &&
         (gameGetPlayerData()->ailments & 0x400) == 0 &&
@@ -39,6 +38,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
         randRange(99) < chance) {
         s32 canApply = 1;
         if (condition == 5) {
+            u16 affinities[21];
             demonBuildAffinitySlots(affinities, gameGetPlayerData());
             canApply = statusAffinityAllows(affinities[11]);
         }
@@ -77,7 +77,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
             continue;
         }
         if (randRange(99) < chance) {
-            if (condition == 5 && !unitAffinityAllows(unit, affinities))
+            if (condition == 5 && !unitAffinityAllows(unit))
                 continue;
             unit->ailments |= mask;
         }

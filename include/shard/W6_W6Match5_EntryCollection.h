@@ -42,7 +42,8 @@ extern "C" {
 extern "C" {
 #endif
 
-unsigned int FUN_002bd068(short arg0);
+/* The name of devil `id`. */
+const char *FUN_002bd068(u16 id);
 
 #ifdef __cplusplus
 }

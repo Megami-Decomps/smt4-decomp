@@ -1,4 +1,3 @@
-/* NON_MATCHING: code identical to retail (limit compares kept as VFP through the isBelow/isAbove helpers); only the literal-pool order differs: retail pools the -17.0 limit before the g_btlCamera address, the build after it. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
@@ -66,10 +65,11 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
         direction = 3;
         break;
     default:
+        const f32 farLeft = -17.0f; /* the outer left limit, relative to the camera's center angle */
         union { u32 bits; f32 value; } word;
         word.bits = g_btlCamera->centerBits;
         f32 center = word.value;
-        if (isBelow(angle, center + -17.0f))
+        if (isBelow(angle, center + farLeft))
             direction = 5;
         else if (isBelow(angle, center + -9.0f))
             direction = 4;

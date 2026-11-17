@@ -1,4 +1,4 @@
-/* NON_MATCHING: scoped visibility and linker speed getter recover frame and tail call; reset-speed constant lifetime and row pointer schedule differ. */
+/* NON_MATCHING: only the load of the reset speed 1.0f into s17 is scheduled later than retail's (right after the selection offset). */
 #include "common.h"
 #include "code/Code002a.h"
 #include "ui/UiSpriteApi.h"
@@ -52,14 +52,14 @@ s32 flaggedValueHolderGetTotal(void *list);
 void FUN_004a5ea0(PanelWork *work, s32 index, s32 selected, s32 id, f32 scale);
 void owner4ASetSizeAndCall(PanelWork *work, u32 style);
 
-static __inline bool panelIntersectsHorizontalView(PanelWork *work)
+static bool panelIntersectsHorizontalView(PanelWork *work)
 {
     PanelPair position;
     PanelPair size;
     words2Copy(work->panel, &position);
     pairAt8Get(work->panel, &size);
     f32 right = position.x + size.x;
-    return right < 320.0f && right > -320.0f;
+    return reinterpret_cast<const s32 &>(right) < 0x43a00000 && reinterpret_cast<const u32 &>(right) < 0xc3a00000;
 }
 
 /* Draws the panel's rows when it is on screen: sets its six frame parts from the shared style,
@@ -74,6 +74,7 @@ void FUN_004a5344(PanelWork *work)
     const PanelSelection *selection = reinterpret_cast<const PanelSelection *>(work);
     const PanelScaleBank *bank = reinterpret_cast<const PanelScaleBank *>(work);
     f32 scale = vec2GetSpeed((const UiSpriteState *)&bank->entries[selection->index]);
+    const f32 resetSpeed = 1.0f; /* restored after the rows; retail keeps it in s17 throughout */
     u32 style = ((PanelWorkView *)work)->style;
 
     FUN_004935c8(work->panel, 1, 0, 0, style, scale);
@@ -91,18 +92,19 @@ void FUN_004a5344(PanelWork *work)
     s32 visible = rangeGetMinimumLimit(work->list);
     PanelRow *rows = ((PanelWorkView *)work)->rows;
 
-    for (s32 i = 0; i < visible; i++) {
-        if (work->mode != 2 || FUN_0031d174(work->list) != i) {
-            FUN_004a5ea0(work, i, 0, rows[first + i].id, scale);
-        }
+    s32 row;
+    for (row = 0; row < visible; ++row) {
+        if (work->mode != 2 || FUN_0031d174(work->list) != row)
+            FUN_004a5ea0(work, row, 0, rows[first + row].id, scale);
     }
     if (work->count > 0 && work->mode == 2) {
-        s32 id = rows[flaggedValueHolderGetTotal(work->list)].id;
-
-        FUN_004a5ea0(work, FUN_0031d174(work->list), 1, id, scale);
+        s32 selected = flaggedValueHolderGetTotal(work->list);
+        s16 id = rows[selected].id;
+        s32 selectedRow = FUN_0031d174(work->list);
+        FUN_004a5ea0(work, selectedRow, 1, id, scale);
     }
     owner4ASetSizeAndCall(work, style);
-    efctSetSpeed(1.0f);
+    efctSetSpeed(resetSpeed);
 }
 
 }

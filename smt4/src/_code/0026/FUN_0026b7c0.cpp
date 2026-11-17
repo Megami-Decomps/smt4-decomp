@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the stock-cost loop test differs: retail loads the user (ldrsh r0) before the slot unit (r1) and compares r1 with r0; written either way round, armcc swaps one of the two. */
+/* NON_MATCHING: only the stock-cost loop compare differs: retail loads the selection first (as here) but compares the stock unit with it (`cmp r1, r0`); written the other way round, armcc loads the stock unit first. */
 #include "ui/PartyPanelState.h"
 #include "gamedata/SaveSlotTableIV.h"
 
@@ -25,7 +25,7 @@ void FUN_0026b7c0(void)
                 partyWidgetSetCost(panel->characters[index + 1], -appGetRemainingCapacity(panel->previewItem));
         }
         for (s32 index = 0; index < 24; ++index) {
-            if (static_cast<s32>(panel->entries[index].packedIndex) == panel->selection)
+            if (panel->selection == static_cast<s32>(panel->entries[index].packedIndex))
                 partyWidgetSetCost(panel->demons[index], -appGetRemainingCapacity(panel->previewItem));
         }
     }

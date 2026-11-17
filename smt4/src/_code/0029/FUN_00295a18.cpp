@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the predicated `ldrbne` of the range's bank index and the register pair of the final discovery-bit update differ. */
+/* NON_MATCHING: only the final discovery-bit update's registers differ (retail loads the byte into r3 and the 1 into r2); same remaining difference as smt4a flagValueAdd. */
 #include "shard/W6_W6Match2_SaveFlags.h"
 
 extern "C" {
@@ -15,8 +15,8 @@ extern "C" void FUN_00295a18(u32 flag, u32 amount)
         return;
     FUN_00348e88((u16)flag);
     SavedCounterRange *range = itemCategoryFindByItemId(flag);
+    u8 bankIndex = range ? range->bank : 0;
     if (range != NULL) {
-        u8 bankIndex = range->bank;
         SavedCounterBanks *save = saveGetUnlockFlagBlock();
         u8 *bank = savedCounterBank(save, bankIndex);
         s32 index = flag - range->first;
@@ -40,6 +40,6 @@ extern "C" void FUN_00295a18(u32 flag, u32 amount)
         save = saveGetUnlockFlagBlock();
         s32 discovery = flag - 1;
         if ((u32)(discovery >> 3) <= 256)
-            save->seenFlags[discovery >> 3] |= 1u << (discovery & 7);
+            save->seenFlags[discovery >> 3] |= (u8)(1u << (discovery & 7));
     }
 }

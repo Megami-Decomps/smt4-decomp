@@ -1,4 +1,3 @@
-/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (no VFP: retail copies the saved descriptor pair (ldrd/strd r6:r7) with core registers); the default build uses VFP. Needs that unit cflags. */
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "nn/os/IpcCommandBuffer.h"

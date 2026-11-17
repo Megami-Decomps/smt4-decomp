@@ -1,4 +1,4 @@
-/* NON_MATCHING: map-block and player pointers occupy opposite callee-saved registers; trigger owner and marker stores now match. */
+/* NON_MATCHING: only the map-block and player pointers occupy opposite callee-saved registers (r7/r6 here, r6/r7 in retail). */
 #include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
 #include "map/LmapGlobals.h"
@@ -8,20 +8,7 @@
 #include "game/GameState.h"
 #include "gamedata/GamePlayerData.h"
 
-/* The encounter trigger state kept beside the game state block (0x49FA1C). */
-struct EncounterTriggerState {
-    u8 unk00[0x7C];
-    u8 sourceActive;
-    u8 unk7D[0x15];
-    u16 sourceKind;
-    u16 delay;
-    u16 modelId;
-    u8 unk98;
-    u8 approach;
-};
-
 extern "C" {
-extern EncounterTriggerState DAT_0049fa1c;
 f32 mathDistanceBetweenPoints(MapVector from, MapVector to);
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
@@ -38,8 +25,7 @@ u32 FUN_00253968(MapEnemyEntry *enemy)
 {
     MapSaveBlock *mapBlock = gameGetMapBlock();
     PlayerDataIV *player = gameGetPlayerData();
-    EncounterTriggerState *trigger = &DAT_0049fa1c;
-    if (trigger->sourceActive != 0 && trigger->sourceKind != 0) {
+    if (g_gameState.event.encounterSourceActive != 0 && g_gameState.event.encounterSourceKind != 0) {
         bool approaching = isSourceApproaching(enemy->position);
         if (!approaching && (enemy->kind == 6 || enemy->kind == 16) && enemy->behavior == 4) {
             MapVector shifted = enemy->position;
@@ -48,9 +34,9 @@ u32 FUN_00253968(MapEnemyEntry *enemy)
             approaching = isSourceApproaching(shifted);
         }
         if (approaching) {
-        if (trigger->delay == 0) {
-            trigger->delay = 8;
-            trigger->modelId = enemy->index;
+        if (g_gameState.event.encounterDelay == 0) {
+            g_gameState.event.encounterDelay = 8;
+            g_gameState.event.encounterEnemyIndex = enemy->index;
             f32 heading = mathPositionHeadingDegrees(enemy->position, g_gameState.event.encounterSourcePosition);
             g_gameState.event.encounterMarkerPosition.x = enemy->position.x;
             g_gameState.event.encounterMarkerPosition.y = enemy->position.y + 110.0f;
@@ -65,7 +51,7 @@ u32 FUN_00253968(MapEnemyEntry *enemy)
                     g_gameState.event.encounterApproach = 0;
             }
             SoundActorQueuePosition soundPosition = { enemy->position.x, enemy->position.y + 110.0f, enemy->position.z };
-            soundActorStartOnFreeChannel(trigger->approach != 0 ? 0x1000187 : 0x1000185, soundPosition);
+            soundActorStartOnFreeChannel(g_gameState.event.encounterApproach != 0 ? 0x1000187 : 0x1000185, soundPosition);
         }
             return 1;
         }

@@ -8,7 +8,9 @@ Shared headers are everything under include/ and each game's <game>/include/. A 
 that writes its own prototype or `extern` of a name one of them declares, or its own `struct X {` for a
 type one of them defines, keeps a second description of something that already has one (see
 docs/CONTRIBUTING.md, "One struct per object"). Only lines the change adds are checked: moving a
-declaration into a shared header never fails, even while older units still carry local copies.
+declaration into a shared header never fails, even while older units still carry local copies. A local
+declaration kept on purpose (the shared one's types change this caller's code) carries the comment
+`// declcheck: local (reason)` on its line.
 """
 import os
 import re
@@ -18,13 +20,16 @@ from pathlib import Path
 
 ROOT = Path(os.path.abspath(__file__)).parent.parent
 COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
-PROTO = re.compile(r"^[ \t]*(?:extern\s+(?:\"C\"\s+)?)?(?:static\s+)?(?:const\s+)?[A-Za-z_][\w:<>]*[\s\*&]+([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^()]*\)[^;{}()]*)*\)\s*;", re.M)
+PROTO = re.compile(r"^[ \t]*(?:extern\s+(?:\"C\"\s+)?)?(?:static\s+)?(?:const\s+)?(?!(?:else|return|do|case|goto|throw|delete|new|if|while|for|switch)\b)[A-Za-z_][\w:<>]*[\s\*&]+([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^()]*\)[^;{}()]*)*\)\s*;", re.M)
 EXTERN = re.compile(r"^[ \t]*extern\s+(?:\"C\"\s+)?(?:const\s+)?(?:struct\s+)?[A-Za-z_][\w:]*[\s\*]+([A-Za-z_]\w*)\s*(?:\[[^\]]*\])?\s*;", re.M)
 STRUCT = re.compile(r"\b(?:struct|class|union)\s+([A-Za-z_]\w*)\s*(?::[^{;]*)?\{")
 SKIP = {"return", "if", "while", "for", "switch", "sizeof", "operator", "else", "new", "delete"}
 
 
 def names_in(text):
+    # A line marked `// declcheck: local (reason)` keeps its local declaration on purpose (the shared
+    # one's types do not fit this caller yet); it is not counted.
+    text = "\n".join(line for line in text.splitlines() if "declcheck: local" not in line)
     text = COMMENT.sub("", text)
     decls = {m[1] for m in PROTO.finditer(text) if m[1] not in SKIP} | {m[1] for m in EXTERN.finditer(text)}
     return decls, {m[1] for m in STRUCT.finditer(text)}

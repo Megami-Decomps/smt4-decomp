@@ -1,4 +1,3 @@
-/* NON_MATCHING: written like FUN_002f7418 (same registers and calls); only the loop's value-kind test is placed after the epilogue where retail keeps it in the loop body. */
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
@@ -19,8 +18,9 @@ u32 FUN_002f7528(void)
     for (i = first; i < first + count; i++) {
         BtlEntry *unit = &btlGetMainState()->entries[i];
 
-        if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
-            && ((unit->data.values[slot] & 0xFC00) == 0 || unit->data.values[slot] >> 10 == 2)) {
+        if ((unit->flags & 0x10) != 0 || (unit->flags & 1) == 0 || (unit->flags & 0x40) != 0)
+            continue;
+        if ((unit->data.values[slot] & 0xFC00) == 0 || unit->data.values[slot] >> 10 == 2) {
             scrSetResult(1);
             return 1;
         }

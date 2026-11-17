@@ -24,7 +24,7 @@ extern "C" {
 extern const BattleMarkerOptionMasks DAT_005715f8;
 u32 asdListBoxGetSelectedItemId(u32 listBox);
 s32 listBoxItemHasOwner(u32 listBox, u32 item);
-s32 *asdListBoxGetIntValuePtr(u32 listBox);
+s32 *asdListBoxGetIntValuePtr(u32 listBox, u32 item); // declcheck: local (the shared header's s32 types make this function worse (104 -> 151 diff lines))
 s32 battleTalkGetBustState(void);
 void btlTalkBustUpReleaseAllSlots(void);
 void messageMainApplyClose(void);
@@ -56,7 +56,7 @@ void FUN_004d3360(BattleMarkerMenu *menu, BtlMainStateA *state)
         break;
     }
     case 2:
-        state->negotiation.bustupIndex = *asdListBoxGetIntValuePtr(menu->listBox);
+        state->negotiation.bustupIndex = *asdListBoxGetIntValuePtr(menu->listBox, item);
         break;
     case 3:
         if (listBoxItemHasOwner(menu->listBox, item) != 0) {

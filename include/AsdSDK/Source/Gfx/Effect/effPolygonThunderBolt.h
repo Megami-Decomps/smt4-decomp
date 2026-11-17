@@ -9,20 +9,42 @@
 
 /* Parameter block of a bolt-strip thunder effect. */
 typedef struct ThunderBoltParams {
-    /* 0x00 */ u8 unk00[0x38];
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s32 duration;    /* frames the effect runs for, 0 = forever */
     /* 0x38 */ u32 boltCount;
     /* 0x3C */ u32 level;       /* strip rows, at least 3 */
-    /* 0x40 */ u8 unk40[0x28];
+    /* 0x40 */ s32 restFrames;  /* random pause between two strikes of a bolt */
+    /* 0x44 */ f32 amplitude;   /* sideways swing of the bolt */
+    /* 0x48 */ u8 unk48[0x20];
     /* 0x68 */ f32 rampIn;      /* fraction of the strip that fades in */
     /* 0x6C */ f32 rampOut;     /* fraction where the fade out begins */
     /* 0x70 */ u32 colorA;      /* alpha in the top byte */
     /* 0x74 */ u32 colorB;
     /* 0x78 */ u32 colorC;
+    /* 0x7C */ f32 coreWidth;   /* half width of the bright core */
+    /* 0x80 */ f32 glowWidth;   /* extra half width of the glow around the core */
+    /* 0x84 */ f32 length;      /* bolt length along the effect's axis */
 } ThunderBoltParams;
 
 typedef char ThunderBoltParamsLayoutCheck[
-    offsetof(ThunderBoltParams, boltCount) == 0x38 && offsetof(ThunderBoltParams, colorC) == 0x78 &&
-    sizeof(ThunderBoltParams) == 0x7C ? 1 : -1];
+    offsetof(ThunderBoltParams, duration) == 0x34 && offsetof(ThunderBoltParams, boltCount) == 0x38 &&
+    offsetof(ThunderBoltParams, amplitude) == 0x44 && offsetof(ThunderBoltParams, colorC) == 0x78 &&
+    offsetof(ThunderBoltParams, length) == 0x84 ? 1 : -1];
+
+/* One arc of a branching-strip thunder effect (0xC bytes). */
+typedef struct ThunderArc {
+    /* 0x00 */ PolyGeom *geom;
+    /* 0x04 */ s32 delay;       /* -1 strikes; counts up to -1 while resting */
+    /* 0x08 */ u32 flash;       /* top byte: strike brightness, -0x40 per rebuilt frame */
+} ThunderArc;
+
+/* The arcs of the effect: a pointer to the array and the array itself. */
+typedef struct ThunderArcBlock {
+    /* 0x00 */ ThunderArc *arcs;
+    /* 0x04 */ ThunderArc storage[1];
+} ThunderArcBlock;
+
+typedef char ThunderArcLayoutCheck[sizeof(ThunderArc) == 0xC && offsetof(ThunderArcBlock, storage) == 4 ? 1 : -1];
 
 /* The three vertex colours of one strip step: 0x14 bytes, the last two repeat the first two. */
 typedef struct ThunderBoltVertex {

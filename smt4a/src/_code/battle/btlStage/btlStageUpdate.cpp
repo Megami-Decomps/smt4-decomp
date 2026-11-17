@@ -1,4 +1,3 @@
-/* NON_MATCHING: context assignment and stage-ID validation loads schedule differently in state one. */
 #include "battle/btlStage.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match1_BattleStageModelA.h"
@@ -22,6 +21,20 @@ void objectOwner3Release(BtlStage *stage);
 void FUN_00401198(BtlStage *stage);
 void FUN_0040128c(FrameColorUpdateWork *stage);
 
+/* Starts loading the stage model of the stage ID pair (stage 1 variant 1 when either is unset), sharing the
+ * battle's stage context. */
+static __inline void stageStartLoad(BtlStage *stage)
+{
+    s32 id = stage->apocalypse.identifiers.stageId;
+    s32 variant;
+    if (id < 0 || (variant = stage->apocalypse.identifiers.stageVariant) < 0) {
+        id = 1;
+        variant = 1;
+    }
+    stage->context = g_btlStage.context;
+    FUN_00400d80(stage, id, variant, 0x1C0);
+}
+
 // Load, initialize, update or release the stage model and saturate its lifecycle frame counter.
 u32 btlStageUpdate(BtlStage *stage, s32 enabled)
 {
@@ -36,14 +49,7 @@ u32 btlStageUpdate(BtlStage *stage, s32 enabled)
         break;
     case 1: {
         FUN_002c23cc(0);
-        stage->context = g_btlStage.context;
-        s32 id = stage->apocalypse.identifiers.stageId;
-        s32 variant;
-        if (id < 0 || (variant = stage->apocalypse.identifiers.stageVariant) < 0) {
-            id = 1;
-            variant = 1;
-        }
-        FUN_00400d80(stage, id, variant, 0x1C0);
+        stageStartLoad(stage);
         stage->state = 2;
         break;
     }

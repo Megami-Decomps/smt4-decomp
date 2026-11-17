@@ -14,11 +14,11 @@ typedef struct OuterFUN_0020ffe8 {
 } OuterFUN_0020ffe8;
 
 /* A debug hook armlink removed (the jump to it became a nop). */
-__declspec(noreturn) __weak void FUN_0020ffe8_hook(void *obj);
+__declspec(noreturn) __weak void FUN_0020ffe8_hook(void *obj, u32 animation, f32 start, f32 blend);
 
-void FUN_0020ffe8(OuterFUN_0020ffe8 *outer)
+void FUN_0020ffe8(OuterFUN_0020ffe8 *outer, u32 animation, f32 start, f32 blend)
 {
-    FUN_0020ffe8_hook(outer->inner->child);
+    FUN_0020ffe8_hook(outer->inner->child, animation, start, blend);
 }
 
 } /* extern "C" */
