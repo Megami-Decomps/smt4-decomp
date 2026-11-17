@@ -1,3 +1,4 @@
+#include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f3dc` (_code @ 0x19f3dc, 0x6a4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -78,7 +79,7 @@ extern int FUN_002897c0(void);
 /* Supplied declaration required: FUN_002897d0. */
 extern int FUN_002897e0(void);
 /* Supplied declaration required: FUN_002897f0. */
-extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
+
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: FUN_00289c98. */
@@ -201,7 +202,7 @@ unsigned int FUN_0019f3dc(void)
       }
       scrScriptProcessStartEntry(puVar2[0xc],temp_v3);
       puVar2[7] = 0;
-      temp_v1 = scrScriptProcessGetEntry(puVar2[0xc],puVar2[6]);
+      temp_v1 = reinterpret_cast<unsigned int>(scrScriptProcessGetEntry(reinterpret_cast<ScriptProcess*>(puVar2[0xc]),puVar2[6]));
       temp_v5 = puVar2[5];
       FUN_002897f0(temp_v5,temp_v1);
       puVar2[2] = puVar2[2] + 1;

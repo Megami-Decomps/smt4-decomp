@@ -1,3 +1,4 @@
+#include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b7f78` (_code @ 0x1b7f78, 0x8098 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
@@ -635,7 +636,7 @@ extern int dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_00289608. */
 extern int screenFadesAllReady(void);
 /* Supplied declaration required: FUN_002897f0. */
-extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
+
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
@@ -4750,7 +4751,7 @@ LAB_001be80c:
       scrScriptProcessCreate(temp_v10,temp_v9);
       puVar23[0x25] = temp_v10;
       *(unsigned int *)(temp_v10 + 0x108) = 2;
-      temp_v16 = scrScriptProcessGetEntry(puVar23[0x25],puVar23[0x22]);
+      temp_v16 = reinterpret_cast<unsigned int>(scrScriptProcessGetEntry(reinterpret_cast<ScriptProcess*>(puVar23[0x25]),puVar23[0x22]));
       temp_v13 = puVar23[0x19];
       FUN_002897f0(temp_v13,temp_v16);
       puVar23[0x26] = temp_v13;

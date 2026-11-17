@@ -172,7 +172,7 @@ struct MapEnemyEntryA {
     /* 0x128 */ MapVector velocity;
     /* 0x134 */ f32 wait;
     /* 0x138 */ u16 timer138;
-    /* 0x13A */ u16 timer13A;
+    /* 0x13A */ s16 timer13A; /* -1 suppresses marker updates. */
     /* 0x13C */ u8 flag13C;
     /* 0x13D */ u8 flag13D;
     /* 0x13E */ u8 flag13E;

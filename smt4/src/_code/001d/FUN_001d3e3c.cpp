@@ -1,3 +1,4 @@
+#include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3e3c` (_code @ 0x1d3e3c, 0x5448 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
@@ -474,7 +475,7 @@ extern int table1bOr1cGetRecordValue(void);
 /* Supplied declaration required: FUN_00289608. */
 extern int screenFadesAllReady(void);
 /* Supplied declaration required: FUN_002897f0. */
-extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
+
 /* Supplied declaration required: FUN_0028a420. */
 /* Supplied declaration required: FUN_0028d664. */
 extern int gameJumpRequestIsPending(void);
@@ -2242,7 +2243,7 @@ LAB_001d6bd0:
     scrScriptProcessCreate(temp_v6,temp_v7);
     puVar17[0x27b] = temp_v6;
     *(unsigned int *)(temp_v6 + 0x108) = 2;
-    temp_v7 = scrScriptProcessGetEntry(puVar17[0x27b],puVar17[0x278]);
+    temp_v7 = reinterpret_cast<unsigned int>(scrScriptProcessGetEntry(reinterpret_cast<ScriptProcess*>(puVar17[0x27b]),puVar17[0x278]));
     temp_v10 = puVar17[0x26f];
     FUN_002897f0(temp_v10,temp_v7);
     puVar17[0x27c] = temp_v10;

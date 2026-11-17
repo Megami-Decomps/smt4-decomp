@@ -1,4 +1,4 @@
-#include "common.h"
+#include "battle/BattleSlotSkillApi.h"
 #include "gamedata/SkillDataLookup.h"
 
 extern "C" {
@@ -7,16 +7,8 @@ typedef struct Slot {
     /* 0x00 */ u8 unk00[0x48];
     /* 0x48 */ s16 active;
     /* 0x4A */ u8 unk4A;
-    /* 0x4B */ u8 rank;
+    /* 0x4B */ u8 unk4B;
 } Slot;
-
-typedef struct SlotOwner {
-    /* 0x0000 */ u8 unk0000[0x8C];
-    /* 0x008C */ u16 ids[0x14];
-    /* 0x00B4 */ s16 idCount;
-    /* 0x00B6 */ u8 unk00B6[0x2E7E];
-    /* 0x2F34 */ u32 rank;
-} SlotOwner;
 
 extern Slot *saveGetIndexedMapValue(int index);
 
@@ -33,19 +25,19 @@ static __inline s32 countActiveSlots(void)
 }
 
 /* Finds the id in the owner's list whose slot has the owner's rank (or, with no valid rank, the number of active slots). */
-u32 FUN_0028d24c(SlotOwner *owner)
+u32 FUN_0028d24c(BtlMainState *owner)
 {
-    s32 rank = owner->rank;
+    s32 rank = owner->slotSelection.count;
     s32 i;
 
     if ((u32)(rank - 1) > 3) {
         rank = countActiveSlots();
     }
     if (rank >= 1) {
-        for (i = 0; i < owner->idCount; i++) {
-            u32 id = owner->ids[i];
+        for (i = 0; i < owner->slotSkills.count; i++) {
+            u32 id = owner->slotSkills.ids[i];
 
-            if (reinterpret_cast<Slot *>(skillDataFindById(id))->rank == rank) {
+            if (skillDataFindById(id)->slotCount == rank) {
                 return id;
             }
         }

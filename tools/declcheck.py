@@ -11,6 +11,10 @@ docs/CONTRIBUTING.md, "One struct per object"). Only lines the change adds are c
 declaration into a shared header never fails, even while older units still carry local copies. A local
 declaration kept on purpose (the shared one's types change this caller's code) carries the comment
 `// declcheck: local (reason)` on its line.
+
+It also reports, without failing, each `static` (or `static __inline`/`inline`) function the change adds
+to a unit that the unit then calls only once: such a helper needs evidence besides the diff (a twin, a
+sibling doing the same, a header declaring it, or a real function's body; see docs/CONTRIBUTING.md).
 """
 import os
 import re
@@ -23,6 +27,8 @@ COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
 PROTO = re.compile(r"^[ \t]*(?:extern\s+(?:\"C\"\s+)?)?(?:static\s+)?(?:const\s+)?(?!(?:else|return|do|case|goto|throw|delete|new|if|while|for|switch)\b)[A-Za-z_][\w:<>]*[\s\*&]+([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^()]*\)[^;{}()]*)*\)\s*;", re.M)
 EXTERN = re.compile(r"^[ \t]*extern\s+(?:\"C\"\s+)?(?:const\s+)?(?:struct\s+)?[A-Za-z_][\w:]*[\s\*]+([A-Za-z_]\w*)\s*(?:\[[^\]]*\])?\s*;", re.M)
 STRUCT = re.compile(r"\b(?:struct|class|union)\s+([A-Za-z_]\w*)\s*(?::[^{;]*)?\{")
+STATIC = re.compile(r"^[ \t]*static\s+(?:(?:__inline|inline|__forceinline)\s+)?(?:const\s+)?(?:struct\s+)?[A-Za-z_][\w:<>]*(?:\s+const)?[\s\*&]+([A-Za-z_]\w*)\s*\(", re.M)
+KEYWORDS = r"(?!(?:return|else|case|goto|throw|delete|new|if|while|for|switch|do)\b)"
 SKIP = {"return", "if", "while", "for", "switch", "sizeof", "operator", "else", "new", "delete"}
 
 
@@ -62,6 +68,30 @@ def added_lines(base):
     return {path: "\n".join(lines) for path, lines in out.items()}
 
 
+def single_use_helpers(added, text):
+    """Static functions whose definition the added lines hold and that the unit calls exactly once."""
+    added, text = COMMENT.sub("", added), COMMENT.sub("", text)
+    found = []
+    for name in sorted({m[1] for m in STATIC.finditer(added)}):
+        definition = re.search(rf"^[ \t]*static\b[^;{{}}]*\b{name}\s*\([^;{{}}]*\)\s*\{{", text, re.M)
+        if definition is None:
+            continue  # a prototype, or the line was not a function after all
+        declarations = len(re.findall(rf"^[ \t]*{KEYWORDS}(?:static\s+)?(?:(?:__inline|inline|__forceinline)\s+)?(?:const\s+)?"
+                                      rf"(?:struct\s+)?[A-Za-z_][\w:<>]*(?:\s+const)?[\s\*&]+{name}\s*\(", text, re.M))
+        uses = len(re.findall(rf"\b{name}\b", text)) - declarations
+        if uses == 1 and re.search(rf"\b{name}\s*\(", text[:definition.start()] + text[definition.end():]):
+            found.append(name)
+    return found
+
+
+def defined_elsewhere(name, path):
+    """The other units that define a static function of this name (a twin or sibling to compare)."""
+    listed = subprocess.run(["git", "grep", "-l", "-w", name, "--", "smt4/src", "smt4a/src"], cwd=ROOT,
+                            capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.split()
+    return [other for other in listed if other != path and name in
+            {m[1] for m in STATIC.finditer((ROOT / other).read_text(encoding="utf-8", errors="replace"))}]
+
+
 def main():
     if "--all" in sys.argv:
         total = 0
@@ -74,11 +104,14 @@ def main():
         return
     base = sys.argv[1] if len(sys.argv) > 1 else "HEAD~1"
     shared = {}
-    new = []
+    new, helpers = [], []
     for path, text in sorted(added_lines(base).items()):
         game = game_of(path)
         if game is None:
             continue
+        if (ROOT / path).exists():
+            whole = (ROOT / path).read_text(encoding="utf-8", errors="replace")
+            helpers += [(path, name) for name in single_use_helpers(text, whole)]
         if game not in shared:
             shared[game] = shared_names(game)
         decls, types = shared[game]
@@ -86,6 +119,12 @@ def main():
         stem = Path(path).stem
         new += [f"{path}: declares {n}" for n in sorted((d & decls) - {stem})]
         new += [f"{path}: defines struct {n}" for n in sorted(t & types)]
+    if helpers:  # a report, never a failure
+        print(f"{len(helpers)} new single-use helpers (needs evidence: twin, sibling, header, or real function body):")
+        for path, name in helpers:
+            others = defined_elsewhere(name, path)
+            also = f" (also defined in {', '.join(others[:2])}{' ...' if len(others) > 2 else ''})" if others else ""
+            print(f"  {path}: {name}{also}")
     if new:
         print(f"{len(new)} new local redeclarations of names a shared header declares (include the header instead):")
         for c in new[:60]:

@@ -107,6 +107,11 @@ typedef struct BtlMainState {
             u8 prefix[0xF2];
             /* 0x00F2 */ u16 devilId;
         } devil;
+        struct {
+            u8 prefix[0x8C];
+            /* 0x008C */ u16 ids[20];
+            /* 0x00B4 */ s16 count;
+        } slotSkills;
     };
     /* 0x1E84 */ s16 unitTotal;
     /* 0x1E86 */ u8 unk1E86[2];
@@ -175,6 +180,10 @@ typedef struct BtlMainState {
             u8 unk1FD8[0xF2E];
             /* 0x2F06 */ s16 order[12];
         } turnOrder;
+        struct {
+            u8 prefix1FD8[0xF5C];
+            /* 0x2F34 */ s32 count;
+        } slotSelection;
     };
     union {
         /* 0x44A0 */ u32 battleFlags;
@@ -890,5 +899,10 @@ s32 btlFindEntryNonzeroRecordValue(u32 id);
 extern "C" {
 BattleRosterRecordA *btlFindMarkedReserveRecord(BtlMainStateA *state);
 }
+
+
+typedef char BtlMainSlotSkillOffsets[offsetof(BtlMainState, slotSkills.ids) == 0x8C &&
+    offsetof(BtlMainState, slotSkills.count) == 0xB4 &&
+    offsetof(BtlMainState, slotSelection.count) == 0x2F34 ? 1 : -1];
 
 #endif

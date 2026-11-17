@@ -88,7 +88,9 @@ struct SkillDataRecord {
     };
     /* 0x40 */ u8 unk40[3];
     /* 0x43 */ u8 percentCost; /* the percentage cost, used when `costs.fixedCost` is 0 */
-    /* 0x44 */ u8 unk44[0x14];
+    /* 0x44 */ u8 unk44[7];
+    /* 0x4B */ u8 slotCount; /* selected by the battle slot-count skill lookup */
+    /* 0x4C */ u8 unk4C[12];
     /* 0x58 */ SkillRankBonus rankBonuses[8]; /* (kind, amount) pairs, a zero kind ends the list */
 };
 typedef char Table04RecordSizeCheck[sizeof(SkillDataRecord) == 0x68 &&

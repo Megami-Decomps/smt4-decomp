@@ -1,29 +1,19 @@
-#include "common.h"
+#include "script/scrScriptProcess.h"
+#include "script/ScriptEntryLookup.h"
 
 extern "C" {
 
-typedef struct Header {
-    /* 0x0 */ u8 unk0[8];
-    /* 0x8 */ s32 count;
-} Header;
-
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[0xB0];
-    /* 0xB0 */ Header *header;
-    /* 0xB4 */ int entries;
-} Obj;
-
-/* Address of the 0x20-byte entry `index`, or 0 when out of range. */
-int scrScriptProcessGetEntry(Obj *obj, int index)
+/* The first section describes the 0x20-byte function-name entries. */
+ScriptVmLabel *scrScriptProcessGetEntry(ScriptProcess *process, s32 index)
 {
-    int entry;
+    ScriptVmLabel *entry;
 
-    if ((index >= 0) && (obj->header->count > index)) {
-        entry = obj->entries + index * 0x20;
+    if ((index >= 0) && (process->sections->size > index)) {
+        entry = process->functions + index;
     } else {
-        entry = 0;
+        entry = NULL;
     }
     return entry;
 }
 
-} /* extern "C" */
+}
