@@ -10,7 +10,7 @@ enum { PRIORITY_BUCKETS = 128 };
 
 /* Re-sort the player's priority list: bucket the sounds by priority (clamped to 0..127), then gather
  * the buckets back in ascending order, taking each bucket from its end when `reverse` is set. */
-void FUN_001738a4(SoundPlayer *player, s32 reverse)
+void FUN_001738a4(SoundPlayerA *player, s32 reverse)
 {
     static LinkList buckets[PRIORITY_BUCKETS];
 
@@ -19,7 +19,7 @@ void FUN_001738a4(SoundPlayer *player, s32 reverse)
     }
     while (player->priorityList.count != 0) {
         ListNode *node = player->priorityList.node.next;
-        PlayerSound *sound = playerSoundFromPriorityNode(node);
+        PlayerSoundA *sound = playerSoundFromPriorityNode(node);
 
         nw_ut_internal_LinkListImpl_erase_2BAE30(&player->priorityList, node);
         LinkList *bucket = &buckets[__usat(sound->playerPriority + sound->priority, 7)];
@@ -28,7 +28,7 @@ void FUN_001738a4(SoundPlayer *player, s32 reverse)
     for (int i = 0; i < PRIORITY_BUCKETS; i++) {
         while (buckets[i].count != 0) {
             if (reverse) {
-                PlayerSound *sound = playerSoundFromPriorityNode(buckets[i].node.prev);
+                PlayerSoundA *sound = playerSoundFromPriorityNode(buckets[i].node.prev);
 
                 nw_ut_internal_LinkListImpl_erase_2BAE30(&buckets[i], &sound->priorityNode);
                 nw_ut_internal_LinkListImpl_insert(&player->priorityList, &player->priorityList.node, &sound->priorityNode);

@@ -12,7 +12,7 @@ void nameEntriesRegisterVerNames(void *work)
     s32 i;
 
     for (i = 0; i < 11; i++) {
-        BtlEffectSlot *entry = &owner->markerSlots[i];
+        BtlEffectFileSlot *entry = &owner->markerSlots[i];
         char *data = static_cast<char *>(entry->file);
 
         if (data[0] == 'V' && data[1] == 'E' && data[2] == 'R') {

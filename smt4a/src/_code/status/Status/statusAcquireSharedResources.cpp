@@ -7,18 +7,19 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
+#include "AsdSDK/AsdMemUtil.h"
+#include "code/Code0015_Smt4a.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "ui/ParamsClearPacket.h"
+#include "shard/W6_W6Match2_FormattedTextSource.h"
+#include "game/GameGlobalsRef.h"
+
 extern "C" {
 
-int textFormatBuffer(...);
-int asdProcessCreateSimple(...);
 
 void positionStateSet(u32 object, u32 first, u32 second, f32 scale);
-int taskCreateDraw(...);
-void *asdMemoryAllocTracked(u32,u32,u32,u32,u32);
-void *sysMemClear(void *,u32);
 int FUN_0034a544(...);
 int FUN_003e4140(...);
-int paramsClearPacket(...);
 
 
 
@@ -104,7 +105,6 @@ static const SpriteAnimationCommand sCommands[] = {
     {-3,0,{0,0,0},-3,-2,0,{0,0,0},-3,0,{0,0,0}},
     {-1,0,{0,0,0},-1,-1,0,{0,0,0},-1,0,{0,0,0}},
 };
-extern ObjBRef g_gameGlobals; /* 0x588fd0 */
 
 
 
@@ -127,11 +127,11 @@ void statusAcquireSharedResources(void)
     }
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.instance);
     sysMemClear(workWords,0x20f4);
-    *workWords = asdProcessCreateSimple("Status Calc",4,0,0,FUN_00208c08,0,0);
-    taskCreateDraw("Status DrawBackUpLeft",0x65,0,0,FUN_0026c1a8,0,0,*workWords);
-    taskCreateDraw("Status DrawBackUpRight",0xcc,0,0,FUN_0026c1a8,0,0,*workWords);
-    taskCreateDraw("Status DrawUpLeft",0x81,0,0,FUN_0022b2d4,0,0,*workWords);
-    taskCreateDraw("Status DrawUpRight",0xdd,0,0,FUN_0022b2d4,0,0,*workWords);
+    *workWords = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Status Calc"),4,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_00208c08),0,0);
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpLeft"),0x65,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c1a8),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpRight"),0xcc,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c1a8),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpLeft"),0x81,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0022b2d4),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpRight"),0xdd,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0022b2d4),0,0,reinterpret_cast<void *>(*workWords));
     FUN_0034a544();
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.instance);
     *(unsigned short *)(reinterpret_cast<u32 *>(g_gameGlobals.instance) + 0x4e3) = 0;
@@ -141,7 +141,7 @@ void statusAcquireSharedResources(void)
     *(unsigned char *)(workWords + 0x82c) = 1;
     g_gameGlobals.ownsStatusModel = 0;
     *(unsigned char *)((int)workWords + 0x20b1) = 1;
-    textFormatBuffer(workWords + 0x81a,"");
+    textFormatBuffer(reinterpret_cast<char *>(workWords + 0x81a),"");
     workWords[0x82a] = 0xffffffff;
     *(unsigned char *)(workWords + 0x82b) = 0;
     *(unsigned char *)((int)workWords + 0x2012) = 1;
@@ -166,7 +166,7 @@ void statusAcquireSharedResources(void)
     resourceWords[0x82d] = handle;
     uiObjectSetColorRgb(handle,0xffffffff);
     positionStateSet(resourceWords[0x82d],0,0x646464ff,0.0f);
-    paramsClearPacket(workWords + 9);
+    paramsClearPacket(reinterpret_cast<UiResourceParameters *>(workWords + 9));
     paramsInit(reinterpret_cast<UiResourceParameters *>(workWords + 9), sPositionKeys,sizeof(sPositionKeys),sAlphaKeys,sizeof(sAlphaKeys),0,0,0,0,sCommands,sizeof(sCommands));
     uiSpriteStateInitFromSource((UiSpriteState *)(workWords + 0x106),0xf,0, (UiResourceParameters *)(workWords + 9),1, 1.0f);
     uiSpriteSetKeyframe((UiSpriteState *)(workWords + 0x106),1,0);

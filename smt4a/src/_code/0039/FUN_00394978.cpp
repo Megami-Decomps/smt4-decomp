@@ -1,16 +1,10 @@
 /* NON_MATCHING: same loop; retail tests the count with an unsigned `bxls lr` guard before the push and keeps the index in r1 from the start, this build emits `bxeq lr` and a different register assignment. */
 #include "common.h"
-
-struct Vertex {
-    /* 0x00 */ f32 r;
-    /* 0x04 */ f32 g;
-    /* 0x08 */ f32 b;
-    /* 0x0C */ f32 a;
-};
+#include "gfx/VertexColor.h"
 
 struct Geometry {
     /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Vertex *vertices;
+    /* 0x04 */ VertexColor *vertices;
 };
 
 struct Record {
@@ -45,7 +39,7 @@ extern "C" void FUN_00394978(Object *object)
     Record *record = mesh->records;
     u32 i;
     for (i = 0; i < count; i++) {
-        Vertex *vertex = &mesh->geometry->vertices[(u16)i];
+        VertexColor *vertex = &mesh->geometry->vertices[(u16)i];
         const f32 scale = 1.0f / 255.0f;
 
         vertex->r = DAT_005c1130[0] * scale * scale;

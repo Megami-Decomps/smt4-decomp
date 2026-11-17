@@ -1,5 +1,6 @@
 #include "classes/Obj557f74.h"
 #include <new>
+#include "ui/RequestObjectOwner.h"
 
 /* An allocator: slot 0 hands out `size` bytes with the given alignment. */
 class BlockAllocator {
@@ -23,16 +24,12 @@ struct ObjectRequest {
 };
 
 /* The part of the owner this function reads. */
-struct ObjectOwner {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u8 compact;
-};
 
 extern "C" {
 
 // Creates and sets up the object for a request unless the request is to be skipped; returns
 // whether it was created.
-u32 uiCreateRequestObject(ObjectOwner *owner, BlockAllocator *allocator, ObjectRequest *request, Obj557f74 **created)
+u32 uiCreateRequestObject(RequestObjectOwner *owner, BlockAllocator *allocator, ObjectRequest *request, Obj557f74 **created)
 {
     if (request->skip != 0) {
         return 0;

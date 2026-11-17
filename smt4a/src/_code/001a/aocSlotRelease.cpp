@@ -1,15 +1,8 @@
 /* NON_MATCHING: retail tests the handle before the push (ldrne/cmnne, bxeq); armcc tests only NULL there and the handle after the prologue. */
 #include "common.h"
+#include "addon/AocSlot.h"
 
 extern "C" {
-
-typedef struct AocSlot {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ u32 node;
-    /* 0x14 */ u8 unk14[0x6C];
-    /* 0x80 */ s32 active;
-    /* 0x84 */ s32 handle;
-} AocSlot;
 
 extern u32 g_aocSystem;
 

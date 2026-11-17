@@ -6,6 +6,10 @@
 #include "shard/GameGlobals.h"
 #include "bible/bibleAnalyze.h"
 
+#include "AsdSDK/AsdMemUtil.h"
+#include "code/Code002c_Smt4.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_UiResourceParameters.h"
+
 extern "C" {
 
 
@@ -13,11 +17,7 @@ extern "C" {
 
 
 
-void memClear(void *,u32);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
 int statusDownCreate(...);
-int drawParameterBlockClear(...);
 
 
 
@@ -105,11 +105,11 @@ void statusAcquireSharedResources(void)
     }
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.data);
     memClear(workWords,0x1ebc);
-    *workWords = asdProcessCreateSimple("Status Calc",2,0,0,FUN_0018f660,0,0);
-    taskCreateDraw("Status DrawBackUpLeft",0x65,0,0,FUN_001cdef8,0,0,*workWords);
-    taskCreateDraw("Status DrawBackUpRight",0xcc,0,0,FUN_001cdef8,0,0,*workWords);
-    taskCreateDraw("Status DrawUpLeft",0x7d,0,0,FUN_001a321c,0,0,*workWords);
-    taskCreateDraw("Status DrawUpRight",0xdb,0,0,FUN_001a321c,0,0,*workWords);
+    *workWords = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Status Calc"),2,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0018f660),0,0);
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpLeft"),0x65,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001cdef8),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpRight"),0xcc,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001cdef8),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpLeft"),0x7d,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001a321c),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpRight"),0xdb,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001a321c),0,0,reinterpret_cast<void *>(*workWords));
     statusDownCreate();
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.data);
     *(unsigned short *)(reinterpret_cast<u32 *>(g_gameGlobals.data) + 0x4bf) = 0;
@@ -125,7 +125,7 @@ void statusAcquireSharedResources(void)
     workWords[0x4b7] = 1;
     *(unsigned char *)(workWords + 0x79f) = 0;
     *(unsigned char *)((int)workWords + 0x1e7d) = 0;
-    drawParameterBlockClear(workWords + 9);
+    drawParameterBlockClear(reinterpret_cast<UiResourceParameters *>(workWords + 9));
     paramsInit(reinterpret_cast<UiResourceParameters *>(workWords + 9), sPositionKeys,sizeof(sPositionKeys),sAlphaKeys,sizeof(sAlphaKeys),0,0,0,0,sCommands,sizeof(sCommands));
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(workWords + 0xe3),0x17,0,reinterpret_cast<UiResourceParameters *>(workWords + 9),1,1.0f);
     timerStart(reinterpret_cast<UiSpriteState *>(workWords + 0xe3),1,0);

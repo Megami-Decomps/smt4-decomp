@@ -1,12 +1,8 @@
 #include "common.h"
-
-struct TerminalGlobals {
-    /* 0x00 */ void *work;
-    /* 0x04 */ s32 selection;
-};
+#include "Terminal/TerminalSelectionGlobals.h"
 
 extern "C" {
-extern TerminalGlobals g_tmnl;
+extern TerminalSelectionGlobals g_tmnl;
 s32 scrGetArg(u32 index);
 }
 

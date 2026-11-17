@@ -5,12 +5,12 @@ extern "C" {
 
 void nw_ut_internal_LinkListImpl_erase_2B743C(LinkList *list);
 void nw_ut_internal_LinkListImpl_insert(LinkList *list, ListNode *pos, ListNode *node);
-void FUN_001743b8(PlayerSound *sound);
-void FUN_001738a4(SoundPlayer *player, s32 reverse);
+void FUN_001743b8(PlayerSoundA *sound);
+void FUN_001738a4(SoundPlayerA *player, s32 reverse);
 
 /* Move the ready pending sounds to the ready list, update every active sound, then re-sort the
  * priority list. */
-void FUN_00173818(SoundPlayer *player)
+void FUN_00173818(SoundPlayerA *player)
 {
     LinkListIterator it = linkListBegin(&player->pendingList);
     if (it != linkListEndIter(&player->pendingList)) {

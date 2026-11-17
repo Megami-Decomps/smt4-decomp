@@ -1,7 +1,7 @@
 #include "shard/S3AsdCec.h"
 
 extern "C" {
-extern AsdCec g_asdCec;
+extern AsdCecBoxHolder g_asdCec;
 s32 FUN_00358518(u32 handle, u32 value);
 
 /* Applies a message-box operation and reports success. */

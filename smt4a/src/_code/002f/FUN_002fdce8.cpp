@@ -7,7 +7,7 @@ struct OnlineResult {
     u32 detail; // 0x08
 };
 
-struct OnlineJob {
+struct OnlineJobError {
     u8 unk00[0x70]; // 0x00
     u8 error[0x60]; // 0x70
     u32 instanceId; // 0xd0
@@ -21,10 +21,10 @@ OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable* table, u32 id);
 void FUN_002f3dc4(OnlineInstance* instance, OnlineResult* result);
 void FUN_002f3dde(OnlineInstance* instance, OnlineResult* result);
 void FUN_002e9f00(void* error, s32 code);
-void onlineJobSetStateDone(OnlineJob* job);
+void onlineJobSetStateDone(OnlineJobError* job);
 
 // Delivers a completion result to the instance and finishes the job.
-void FUN_002fdce8(OnlineJob* job, const OnlineResult* status)
+void FUN_002fdce8(OnlineJobError* job, const OnlineResult* status)
 {
     OnlineInstance* instance = onlineInstanceTableFind(
         onlineInstanceTableGetCurrent(), job->instanceId);

@@ -1,3 +1,8 @@
+#include "ui/UiSpriteApi.h"
+#include "shard/W6_W6Match2_FormattedTextSource.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "quest_center/qcMain.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_UiResourceParameters.h"
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "shard/W6_W6Match1_Table25Record.h"
@@ -87,21 +92,12 @@ void FUN_00343e5c(UniteRenderTarget *target, u32 extent, u32 options, u32 width,
 void FUN_00258618(UniteRenderTarget *target);
 void FUN_00258408(const char *name);
 void FUN_00258170(UniteRenderTarget *target);
-u32 asdMdlManagerCreateLoaded(const char *path, s32 heap);
 u32 asdCameraLoadFromFile(const char *path);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
-void drawParameterBlockClear(UiResourceParameters *resources);
 
-void uiSpriteStateInitFromSource(UniteSprite *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
-void uiSpriteInitializeState(UniteSprite *sprite, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
-void timerStart(UniteSprite *sprite, s32 animation, s32 flags);
-void spriteStartAnimationByIndex(UniteSprite *sprite, s32 animation);
 void FUN_002a9fdc(UniteSprite *sprite, s32 a, s32 b);
-void spriteSetLayer(UniteSprite *sprite, u16 layer);
 void spriteSetVisible(UniteSprite *sprite, u8 visible);
 void uiStoreTextureEntryCenter(UniteSprite *sprite, s32 kind, s32 count);
-void buttonHelpSetPreset(s32 preset);
 
 /* Starts the fusion-result screen: loads the result devils' textures, the stage model and camera
    (by how many devils are fused), the message script and builds its sprites. */
@@ -125,23 +121,23 @@ void uniteResultInitialize(void)
     FUN_0033dcec(work->resultTexture, 7, 1);
     if (work->materialCount == 2) {
         if (work->sacrifice) {
-            work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2_ac.bam", 7);
+            work->model = reinterpret_cast<u32>(asdMdlManagerCreateLoaded("camp/jakyou_union2_ac.bam", 7));
             work->camera = asdCameraLoadFromFile("camp/jakyou_union2_ac.bccam");
         } else {
-            work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2.bam", 7);
+            work->model = reinterpret_cast<u32>(asdMdlManagerCreateLoaded("camp/jakyou_union2.bam", 7));
             work->camera = asdCameraLoadFromFile("camp/jakyou_union2.bccam");
         }
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }
     if (work->materialCount == 3) {
-        work->model = asdMdlManagerCreateLoaded("camp/jakyou_union3.bam", 7);
+        work->model = reinterpret_cast<u32>(asdMdlManagerCreateLoaded("camp/jakyou_union3.bam", 7));
         work->camera = asdCameraLoadFromFile("camp/jakyou_union3.bccam");
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }
     if (work->materialCount == 4) {
-        work->model = asdMdlManagerCreateLoaded("camp/jakyou_union4.bam", 7);
+        work->model = reinterpret_cast<u32>(asdMdlManagerCreateLoaded("camp/jakyou_union4.bam", 7));
         work->camera = asdCameraLoadFromFile("camp/jakyou_union4.bccam");
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
@@ -158,20 +154,20 @@ void uniteResultInitialize(void)
     drawParameterBlockClear(&work->resources);
     paramsInit(&work->resources, sKeysFirst, 0x24, sKeysSecond, 0x30, sKeysThird, 0xc, NULL, 0, sUniteResultSpriteKeys, 0xe0);
     for (s32 i = 0; i <= 5; i++) {
-        uiSpriteStateInitFromSource(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
-        timerStart(&work->sprites[i], 0, 0);
+        uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0x24, 0, &work->resources, 1, 1.0f);
+        timerStart(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0, 0);
     }
     for (s32 i = 6; i <= 9; i++) {
-        uiSpriteStateInitFromSource(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
-        spriteStartAnimationByIndex(&work->sprites[i], 0);
+        uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0x24, 0, &work->resources, 1, 1.0f);
+        spriteStartAnimationByIndex(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0);
     }
-    uiSpriteInitializeState(&work->panel, 0x24, -1, 0x18, &work->resources, 0x65, 1.0f);
+    uiSpriteInitializeState(reinterpret_cast<UiSpriteState *>(&work->panel), 0x24, -1, 0x18, &work->resources, 0x65, 1.0f);
     FUN_002a9fdc(&work->panel, 0, 0);
-    spriteSetLayer(&work->panel, 2);
+    spriteSetLayer(reinterpret_cast<UiSpriteState *>(&work->panel), 2);
     uiStoreTextureEntryCenter(&work->panel, 0x24, 0x21c);
     spriteSetVisible(&work->panel, 1);
-    uiSpriteStateInitFromSource(&work->cursor, 0x24, 0, &work->resources, 1, 1.0f);
-    spriteStartAnimationByIndex(&work->cursor, 2);
+    uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->cursor), 0x24, 0, &work->resources, 1, 1.0f);
+    spriteStartAnimationByIndex(reinterpret_cast<UiSpriteState *>(&work->cursor), 2);
     buttonHelpSetPreset(0x61);
     g_screenStateWork->state = 1;
     g_screenStateWork->phase = 0;

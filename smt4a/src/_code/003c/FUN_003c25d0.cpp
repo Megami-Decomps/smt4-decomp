@@ -4,7 +4,7 @@
 #include "code/Code004a.h"
 #include "battle/BtlUiGlobal.h"
 
-struct BtlCombatantEntryA {
+struct BtlEntryFlagWords {
     u32 flags[2]; // 0x00
 };
 
@@ -19,7 +19,7 @@ extern BattleClearPreset g_battleMaskPresets;
 // Clear the configured combatant flags and reset the battle UI mode.
 u32 FUN_003c25d0()
 {
-    BtlCombatantEntryA* entry = btlGetMainState()->entries;
+    BtlEntryFlagWords* entry = (BtlEntryFlagWords*)btlGetMainState()->entries;
     u32 lowMask = ~g_battleMaskPresets.clearMask[0];
     entry->flags[1] &= ~g_battleMaskPresets.clearMask[1];
     entry->flags[0] &= lowMask;

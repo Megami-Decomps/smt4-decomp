@@ -12,17 +12,17 @@ void* FUN_0031dac4(void* file);
 
 void* FUN_00316f70(void* data, u32 flags)
 {
-    struct FileView {
+    struct FileDataView {
         void* data;
     };
     struct ResultView {
         u8 unk00[0x20];
-        FileView* file;
+        FileDataView* file;
         void* source;
     };
-    typedef char FileLayoutChecks[sizeof(FileView) == 4 &&
+    typedef char FileLayoutChecks[sizeof(FileDataView) == 4 &&
         offsetof(ResultView, file) == 0x20 && offsetof(ResultView, source) == 0x24 ? 1 : -1];
-    FileView* file = static_cast<FileView*>(asdOperatorNew(sizeof(FileView)));
+    FileDataView* file = static_cast<FileDataView*>(asdOperatorNew(sizeof(FileDataView)));
     if (file) {
         file->data = data;
     }

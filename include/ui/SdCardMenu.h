@@ -25,14 +25,14 @@ struct MenuText {
 };
 
 /* A menu entry (0x44 bytes): position, the table row, the "no card" label and its two icons. */
-struct MenuEntry {
+struct SdCardMenuEntry {
     /* 0x00 */ ScaledPair position;
     /* 0x0C */ u32 row[6];
     /* 0x24 */ MenuText label;
     /* 0x3C */ u32 iconOn;
     /* 0x40 */ u32 iconOff;
 };
-typedef char MenuEntrySizeCheck[sizeof(MenuEntry) == 0x44 ? 1 : -1];
+typedef char MenuEntrySizeCheck[sizeof(SdCardMenuEntry) == 0x44 ? 1 : -1];
 
 /* The scale pair that pair10Clear finishes clearing (the pair itself ends 0x18 bytes in). */
 struct MenuPair {
@@ -43,7 +43,7 @@ struct MenuPair {
 };
 
 /* The menu's scrolling list widget (operated through the list helpers). */
-struct MenuList {
+struct SdCardMenuList {
     u8 unk000[0x24C];
 };
 
@@ -62,12 +62,12 @@ struct SdCardMenu {
     /* 0x308 */ s32 listValue;
     /* 0x30C */ u8 valid;
     /* 0x30D */ u8 unk30D[0xCB];
-    /* 0x3D8 */ MenuList list;
+    /* 0x3D8 */ SdCardMenuList list;
     /* 0x624 */ ScaledPair cleared;
     /* 0x630 */ u32 enabled;
     /* 0x634 */ u32 row[6];
     /* 0x64C */ MenuText label;
-    /* 0x664 */ MenuEntry entries[2];
+    /* 0x664 */ SdCardMenuEntry entries[2];
     /* 0x6EC */ ScaledPair secondCleared;
     /* 0x6F8 */ MenuPair pair;
     /* 0x710 */ ScaledPair thirdCleared;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-typedef __packed struct Settings {
+typedef __packed struct PackedSettingsRecord {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u8 unk08;
@@ -21,10 +21,10 @@ typedef __packed struct Settings {
     /* 0x2A */ u32 unk2A;
     /* 0x2E */ u32 unk2E;
     /* 0x32 */ u32 unk32;
-} Settings;
+} PackedSettingsRecord;
 
 /* Clears every field. The record is packed: its words sit at unaligned offsets from 0x1E on. */
-void FUN_0015f448(Settings *settings)
+void FUN_0015f448(PackedSettingsRecord *settings)
 {
     settings->unk00 = 0;
     settings->unk04 = 0;

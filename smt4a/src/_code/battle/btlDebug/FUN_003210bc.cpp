@@ -24,7 +24,7 @@ void FUN_003210bc(BtlUiA *ui, s32 eye)
         s32 value;
         u8 padding3FC[4];
     };
-    struct Label {
+    struct EyeLabelSprite {
         UiSpriteState sprite;
         u8 padding8C[0xC];
         u8 active;
@@ -34,9 +34,9 @@ void FUN_003210bc(BtlUiA *ui, s32 eye)
     struct OverlayView {
         u8 prefix[0x75B4];
         Number numbers[16];
-        Label labels[16];
+        EyeLabelSprite labels[16];
     };
-    typedef char OverlayOffsets[sizeof(Number) == 0x400 && sizeof(Label) == 0xA0 &&
+    typedef char OverlayOffsets[sizeof(Number) == 0x400 && sizeof(EyeLabelSprite) == 0xA0 &&
         offsetof(OverlayView, labels) == 0xB5B4 ? 1 : -1];
     OverlayView *overlays = reinterpret_cast<OverlayView *>(ui);
     struct SortEntry { s8 index; u8 active; u8 priority; u8 padding; } order[16];
@@ -60,7 +60,7 @@ void FUN_003210bc(BtlUiA *ui, s32 eye)
             if (number->value >= 10) effectRenderTransformedInstance(&number->digits[1], (f32)parallax);
             effectRenderTransformedInstance(&number->digits[0], (f32)parallax);
         }
-        Label *label = &overlays->labels[index];
+        EyeLabelSprite *label = &overlays->labels[index];
         if (label->active && label->eye == eye)
             effectRenderTransformedInstance(&label->sprite, (f32)parallax);
     }

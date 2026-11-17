@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "sound/BgmSlot.h"
 
 #define BGM_SLOT_COUNT 2
 
@@ -8,16 +9,6 @@
 #define BGM_SLOT_SWITCHING 0x30 /* either bit: the slot is changing tracks */
 
 /* One BGM playback slot. */
-typedef struct BgmSlot {
-    /* 0x00 */ u32 handle;     /* sound slot passed to handlerFinishById */
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 fadeFrames;
-    /* 0x0C */ s32 id;         /* BGM id playing in the slot */
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 flags;      /* BGM_SLOT_* */
-} BgmSlot;
 
 extern "C" {
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/S1ModelEffect.h"
 #include "map/mapCommon.h"
 #include "game/GameStateA.h"
 #include "Model/MoriModelContent.h"
@@ -9,7 +10,6 @@
 extern "C" {
 
 TexFile *asdTMTexTableLoadSprites(s32 index);
-void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 
 void mapFilterLoad(void);
 void FUN_00244220(void);

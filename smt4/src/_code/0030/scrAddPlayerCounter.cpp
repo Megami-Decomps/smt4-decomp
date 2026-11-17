@@ -3,10 +3,10 @@
 
 extern "C" {
 
-typedef struct Player {
+typedef struct ScriptPlayer {
     /* 0x000 */ u8 unk000[0x1B4];
     /* 0x1B4 */ int counter;
-} Player;
+} ScriptPlayer;
 
 int scrGetArg(int index);
 
@@ -14,7 +14,7 @@ int scrGetArg(int index);
 u32 scrAddPlayerCounter(void)
 {
     int amount = scrGetArg(0);
-    Player *player = reinterpret_cast<Player *>(btlGetMainState());
+    ScriptPlayer *player = reinterpret_cast<ScriptPlayer *>(btlGetMainState());
     int *counter = &player->counter;
 
     *counter += amount;

@@ -24,7 +24,7 @@ void textureCachePollReady(void);
 /* The battle effect work past the unit loaders: five move-out effect files and their load state. */
 struct MoveOutEffectWork {
     /* 0x0000 */ u8 unk0000[0x2CDC];
-    /* 0x2CDC */ BtlEffectSlot slots[5];
+    /* 0x2CDC */ BtlEffectFileSlot slots[5];
     /* 0x2F98 */ s32 state;
 };
 
@@ -56,7 +56,7 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
     } else {
         effects = g_btlEffect.work;
         for (i = 0; i < 5; i++) {
-            BtlEffectSlot *slot = &effects->slots[i];
+            BtlEffectFileSlot *slot = &effects->slots[i];
             char path[128];
             char formatted[128];
             slot->handle = 0xFF;
@@ -80,12 +80,12 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
     }
     effects = g_btlEffect.work;
     for (i = 0; i < 5; i++) {
-        BtlEffectSlot slot = effects->slots[i];
+        BtlEffectFileSlot slot = effects->slots[i];
         if ((slot.flags & 1) && slot.file == NULL)
             return 0;
     }
     for (i = 0; i < 5; i++) {
-        BtlEffectSlot *slot = &effects->slots[i];
+        BtlEffectFileSlot *slot = &effects->slots[i];
         const char *file = (const char *)slot->file;
         if (file[0] == 'V' && file[1] == 'E' && file[2] == 'R') {
             slot->handle = keyedRecordRegisterName(slot->name);

@@ -1,3 +1,4 @@
+#include "sys/RuntimeObjects_Smt4a.h"
 #include "battle/btlUI.h"
 #include "ui/UiSpriteState.h"
 #include "ui/UiSpriteApi.h"
@@ -46,7 +47,6 @@ static const SpriteAnimationCommand sPanelKeysD[] = {
 
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 group, u32 image);
 void spriteSetVisible(UiSpriteState *sprite, u8 visible);
-void pairSetHalves(UiSpriteState *sprite, s32 width, s32 height);
 
 /* Builds the panel's six sprites and their resource parameters. */
 void btlEventPanelInitialize(BtlUiObjBA *panel)
@@ -69,7 +69,7 @@ void btlEventPanelInitialize(BtlUiObjBA *panel)
     uiSpriteInitializeState(&panel->sprites[2], 0xc, -1, 2, (UiResourceParameters *)(panel), 0x3d, 1.0f);
     spriteSetLayer(&panel->sprites[2], 1);
     spriteSetVisible(&panel->sprites[2], 1);
-    pairSetHalves(&panel->sprites[2], 200, 0x78);
+    pairSetHalves(reinterpret_cast<Holder *>(&panel->sprites[2]), 200, 0x78);
     uiSpriteSelectAnim(&panel->sprites[2], 2);
     uiSpriteInitializeState(&panel->sprites[1], 0xc, -1, 0, (UiResourceParameters *)(panel), 0x47, 1.0f);
     spriteSetLayer(&panel->sprites[1], 2);

@@ -25,16 +25,16 @@ public:
     /* 0x44 */ u32 field44;
 };
 
-typedef struct AocSlot {
+typedef struct AocLoaderRecord {
     /* 0x0 */ u32 state; /* bit 0: requested, bit 1: record copied */
     /* 0x4 */ u32 id;
-} AocSlot;
+} AocLoaderRecord;
 
 typedef struct AocLoader {
     /* 0x0000 */ u8 unk0000[0x1074];
     /* 0x1074 */ AocRecord records[47];
     /* 0x1DAC */ u8 unk1DAC[0x238];
-    /* 0x1FE4 */ AocSlot slots[1];
+    /* 0x1FE4 */ AocLoaderRecord slots[1];
 } AocLoader;
 
 typedef struct AocLoaderTask {
@@ -65,7 +65,7 @@ AocLoaderTask *aocLoaderUpdateRecords(AocLoaderTask *task, AocLoader *loader)
 
     for (i = 0; i < task->count; i++) {
         AocRecord *record = idSlotsFindEntryById(loader, loader->slots[i].id);
-        AocSlot *slot = &loader->slots[i];
+        AocLoaderRecord *slot = &loader->slots[i];
 
         if ((slot->state & 1) == 0) {
             if (nkdwHeaderParse(record) == 0) {

@@ -34,14 +34,14 @@ typedef struct MeshFace {
     s32 unk14;
 } MeshFace;
 
-typedef struct CollisionMesh {
+typedef struct CollisionQuadMesh {
     /* 0x00 */ CollisionVec3 *vertices;     /* stride 0x10 */
     /* 0x04 */ u8 unk04[4];
     /* 0x08 */ CollisionVec3 *normals;      /* stride 0x10 */
     /* 0x0C */ u8 unk0c[0x1C];
     /* 0x28 */ MeshFace *faces;
     /* 0x2C */ u32 faceCount;
-} CollisionMesh;
+} CollisionQuadMesh;
 
 /* The collision builder's global state. */
 typedef struct CollisionBuild {
@@ -50,7 +50,7 @@ typedef struct CollisionBuild {
     /* 0x14 */ u8 unk14[0x10];
     /* 0x24 */ CollisionQuad *quads;
     /* 0x28 */ u8 unk28[8];
-    /* 0x30 */ CollisionMesh *mesh;
+    /* 0x30 */ CollisionQuadMesh *mesh;
 } CollisionBuild;
 
 extern CollisionBuild g_mapCollision;

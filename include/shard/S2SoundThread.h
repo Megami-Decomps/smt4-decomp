@@ -4,11 +4,11 @@
 
 #include "common.h"
 
-typedef struct SoundThread SoundThread;
+typedef struct NnSoundThread NnSoundThread;
 
 typedef void (*SoundThreadCallback)(void *arg);
 
-struct SoundThread {
+struct NnSoundThread {
     /* 0x00 */ u32 processTicksLow;        /* system ticks spent in the passes, accumulated when profiling */
     /* 0x04 */ u32 processTicksHigh;
     /* 0x08 */ u8 profileEnabled;

@@ -3,12 +3,12 @@
 
 extern "C" {
 
-typedef struct QuestCenterBlock {
+typedef struct QuestCenterAvailability {
     /* 0x000 */ u8 unk000[0x25C];
     /* 0x25C */ u8 maxAvailable[1]; /* per area: most quests seen as available */
-} QuestCenterBlock;
+} QuestCenterAvailability;
 
-QuestCenterBlock *gameGetQuestCenterBlock(void);
+QuestCenterAvailability *gameGetQuestCenterBlock(void);
 s32 questRequirementsMet(u16 id);
 
 /* Raises the area's recorded maximum to the number of quests in it that are available now. */

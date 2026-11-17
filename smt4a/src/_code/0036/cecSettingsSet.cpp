@@ -1,27 +1,20 @@
 /* Sets the current object's four setting bytes from the raw values (mode, level, id, extra). */
 #include "common.h"
 #include "network/CecControl.h"
+#include "cec/CecSettings.h"
 
 extern "C" {
 
-typedef struct Settings {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u8 mode;
-    /* 0x09 */ u8 level;
-    /* 0x0A */ u8 id;
-    /* 0x0B */ u8 extra;
-} Settings;
-
 typedef struct SettingsHolder {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ Settings *settings;
+    /* 0x04 */ CecSettings *settings;
 } SettingsHolder;
 
 extern SettingsHolder g_asdCec;
 
 void cecSettingsSet(s32 mode, s32 level, s32 id, s32 extra)
 {
-    Settings *settings = g_asdCec.settings;
+    CecSettings *settings = g_asdCec.settings;
 
     if (settings == NULL) {
         return;

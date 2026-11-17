@@ -20,7 +20,7 @@ extern void nn_os_LightEvent_Wait(void *event);
 
 /* The sound thread loop: each pass runs the sound callbacks and, when profiling, adds the
  * ticks the pass took to the thread's tick counter. `arg` is the thread entry argument (unused). */
-void FUN_001560dc(SoundThread *thread, void *arg)
+void FUN_001560dc(NnSoundThread *thread, void *arg)
 {
     thread->running = 1;
     do {

@@ -1,11 +1,8 @@
 /* NON_MATCHING: retail exits with bxls before pushing registers (shrink-wrapped empty-count guard) and uses r0/r1 differently; armcc here pushes first. The owner's group/params pair is now a sub-block so the writeback load matches. */
 #include "common.h"
+#include "gfx/Vec4.h"
 
-struct Vec4 {
-    f32 x, y, z, w;
-};
-
-struct Vertex {
+struct ColoredIndexedVertex {
     /* 0x00 */ s32 index;
     /* 0x04 */ u8 unk04[0x2c];
 };
@@ -16,7 +13,7 @@ struct ColorTable {
 };
 
 struct VertexGroup {
-    /* 0x00 */ Vertex *vertices;
+    /* 0x00 */ ColoredIndexedVertex *vertices;
     /* 0x04 */ ColorTable *table;
 };
 
@@ -45,7 +42,7 @@ void FUN_003078e4(GroupOwner *owner)
     GroupRefs *refs = &owner->refs;
     VertexGroup *group = refs->group;
     u32 count = refs->params->count;
-    Vertex *vertex = group->vertices;
+    ColoredIndexedVertex *vertex = group->vertices;
     for (u32 i = 0; i < count; i++) {
         Vec4 *color = &group->table->colors[(u16)i];
         color->x = DAT_00472560[0] * (1.0f / 255.0f) * (1.0f / 255.0f);

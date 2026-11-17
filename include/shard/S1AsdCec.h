@@ -12,9 +12,9 @@ typedef struct AsdCecRequest {
     /* 0x18 */ s32 box;          /* open message box handle */
 } AsdCecRequest;
 
-typedef struct AsdCec {
+typedef struct AsdCecRequestHolder {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ AsdCecRequest *request;
-} AsdCec;
+} AsdCecRequestHolder;
 
 #endif

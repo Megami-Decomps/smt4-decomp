@@ -28,6 +28,8 @@ tools/similar.py      finds, for each unproven function, the proven functions wh
 tools/triage.py       sorts the unproven functions by what their fdiff shows (order, operands, registers, shape)
 tools/worktrees.py    git worktrees for parallel work: each links orig/ and build/tools/ to this checkout,
                       builds and relinks on its own, and hands back its changes as a patch
+tools/declcheck.py    fails when a unit redeclares a function, global or struct a shared header declares
+                      (older cases listed in tools/declcheck_baseline.txt; CI runs it)
 tools/layout.py       field offsets of struct views from the compiler, and every view of one object merged
                       by offset (--anchor SYMBOL): the input for one declaration per object
 ```

@@ -5,7 +5,7 @@ struct AsdCecMessageBox;
 
 extern "C" {
 
-extern AsdCec g_asdCec;
+extern AsdCecRequestHolder g_asdCec;
 
 s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 titleId, u32 messageId);
 s32 FUN_0042f318(s32 box, s32 flag);

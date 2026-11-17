@@ -25,17 +25,17 @@ typedef struct UnitOwner {
     /* 0x400 */ UnitCharacter *character;
 } UnitOwner;
 
-typedef struct UnitStats {
+typedef struct ScriptUnitMode {
     /* 0x000 */ u8 unk000[0x1BE];
     /* 0x1BE */ u16 mode;
     /* 0x1C0 */ s16 selected;
-} UnitStats;
+} ScriptUnitMode;
 
 typedef struct BtlScriptUnitView {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ UnitOwner *owner;
     /* 0x24 */ u8 unk24[4];
-    /* 0x28 */ UnitStats *stats;
+    /* 0x28 */ ScriptUnitMode *stats;
 } BtlScriptUnitView;
 
 extern u32 g_btlScriptUnit;
@@ -61,7 +61,7 @@ s32 FUN_003ef738(void)
         return 0;
     }
     if (FUN_004aba3c(g_btlUiBlock) == -1) {
-        UnitStats *stats = reinterpret_cast<BtlScriptUnitView *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->stats;
+        ScriptUnitMode *stats = reinterpret_cast<BtlScriptUnitView *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->stats;
 
         if (stats->mode != 2) {
             return 0;

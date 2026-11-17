@@ -1,11 +1,7 @@
 #include "common.h"
 #include "gamedata/DataTableAccess_Smt4a.h"
+#include "gamedata/PairedKeyRecord.h"
 
-struct PairedKeyRecord {
-    u16 second; // 0x00
-    u16 first;  // 0x02
-    u32 value;  // 0x04
-};
 struct PairedKeyTable {
     u32 size; // 0x00: total byte size including header
 };

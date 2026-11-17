@@ -1,30 +1,5 @@
 #include "common.h"
-
-struct ListValue;
-struct ListValueVtable {
-    void (*destroy)(ListValue *);
-};
-struct ListValue {
-    ListValueVtable *vtable; // 0x00
-};
-struct ListNode {
-    ListNode *next; // 0x00
-    ListNode *previous; // 0x04
-    ListValue value; // 0x08
-};
-struct PooledList {
-    u32 unk00;
-    ListNode *freeNodes; // 0x04
-    u32 unk08[2];
-    ListNode *sentinel; // 0x10
-    u32 count; // 0x14
-};
-
-struct ListIterator {
-    ListNode *node;
-    explicit ListIterator(ListNode *value) : node(value) {}
-    ListIterator(const ListIterator &other) : node(other.node) {}
-};
+#include "stl/PooledList.h"
 
 // Unlink an element, destroy its value, and return the following iterator.
 extern "C" ListIterator FUN_002fd642(PooledList *list, const ListIterator &position)

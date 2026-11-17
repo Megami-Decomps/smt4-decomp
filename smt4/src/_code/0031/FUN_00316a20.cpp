@@ -1,21 +1,15 @@
 /* NON_MATCHING: the links sub-block pointer (ldr r3,[r0,#60]!) now matches retail; retail also hoists `mov r1,#0` and returns with bxls before the push, the build emits bxeq and a second loop-entry test. */
 #include "common.h"
+#include "gfx/VertexColor.h"
 
 struct SlotEntry {
     /* 0x00 */ s32 id;
     /* 0x04 */ u8 unk04[0x2c];
 };
 
-struct Vertex {
-    /* 0x00 */ f32 r;
-    /* 0x04 */ f32 g;
-    /* 0x08 */ f32 b;
-    /* 0x0C */ f32 a;
-};
-
 struct VertexBuffer {
     /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Vertex *vertices;
+    /* 0x04 */ VertexColor *vertices;
 };
 
 struct SlotList {
@@ -56,7 +50,7 @@ void FUN_00316a20(SlotOwner *self)
         return;
     }
     for (u32 index = 0; index < count; index++) {
-        Vertex *vertex = &list->buffer->vertices[(u16)index];
+        VertexColor *vertex = &list->buffer->vertices[(u16)index];
 
         vertex->r = DAT_00472560[0] * (1.0f / 255.0f) * (1.0f / 255.0f);
         vertex->g = DAT_00472560[1] * (1.0f / 255.0f) * (1.0f / 255.0f);

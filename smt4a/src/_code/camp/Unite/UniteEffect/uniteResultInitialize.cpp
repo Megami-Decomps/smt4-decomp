@@ -1,3 +1,10 @@
+#include "ui/UiSpriteApi.h"
+#include "shard/W6_W6Match2_FormattedTextSource.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
+#include "shard/S1ModelEffect.h"
+#include "ui/ParamsClearPacket.h"
+#include "script/scrScriptProcess.h"
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match1_Table25Record.h"
@@ -56,7 +63,6 @@ static const s32 sUniteResultSpriteKeys[56] = {
     -3, 0, -3, -2, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
 };
 
-extern "C" void *asdMemoryAllocTraced(u32, const char*, s32);
 inline void *operator new(u32, void *storage) throw() { return storage; }
 
 static inline const NkmBaseRecordA *getDevilRecord(u16 id)
@@ -67,7 +73,6 @@ static inline const NkmBaseRecordA *getDevilRecord(u16 id)
 extern "C" {
 extern UniteScreenWork *DAT_0057f2c4;
 u32 FUN_00409fe8(u16, u32, u32);
-void *asdLoadFileWithSize(const char *, u32 *, s32);
 Table25Record *FUN_003316b4(s32);
 
 
@@ -87,17 +92,8 @@ void FUN_0040c190(UniteRenderTarget *target);
 void FUN_003d2a00(const char *name);
 void FUN_001fc348(UniteRenderTarget *target);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
-u32 asdLoadFileSyncDefault(const char *path);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
-u32 scrScriptProcessCreate(u32 script, u32 messages);
-void paramsClearPacket(UiResourceParameters *resources);
 
-void uiSpriteStateInitFromSource(UniteSprite *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
-void uiSpriteInitializeState(UniteSprite *sprite, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
-void uiSpriteSetKeyframe(UniteSprite *sprite, s32 animation, s32 flags);
-void uiSpriteSelectAnim(UniteSprite *sprite, s32 animation);
 void rangeSelectionSelectEndpoint(UniteSprite *sprite, s32 a, s32 b);
-void spriteSetLayer(UniteSprite *sprite, u16 layer);
 void spriteSetVisible(UniteSprite *sprite, u8 visible);
 void uiStoreTextureEntryCenter(UniteSprite *sprite, s32 kind, s32 count);
 void sysPlaySe(s32 preset);
@@ -179,29 +175,29 @@ void uniteResultInitialize(void)
     for (s32 i = 0; i < work->materialCount; i++) {
         statusBustUpPortraitAcquire((s16)work->materialDevils[i], 1);
     }
-    work->scriptFile = asdLoadFileSyncDefault("battle/DevilLvUp.bf");
+    work->scriptFile = reinterpret_cast<u32>(asdLoadFileSyncDefault("battle/DevilLvUp.bf"));
     char path[64];
     const NkmBaseRecordA *record = getDevilRecord(work->resultDevil);
     textFormatBuffer(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_003316b4((s8)devilRecordGetTone(record))->unk01));
-    work->messageFile = asdLoadFileSyncDefault(path);
-    work->script = scrScriptProcessCreate(work->scriptFile, work->messageFile);
+    work->messageFile = reinterpret_cast<u32>(asdLoadFileSyncDefault(path));
+    work->script = reinterpret_cast<u32>(scrScriptProcessCreate(reinterpret_cast<void *>(work->scriptFile), reinterpret_cast<void *>(work->messageFile)));
     paramsClearPacket(&work->resources);
     paramsInit(&work->resources, sKeysFirst, 0x24, sKeysSecond, 0x30, sKeysThird, 0xc, NULL, 0, sUniteResultSpriteKeys, 0xe0);
     for (s32 i = 0; i <= 5; i++) {
-        uiSpriteStateInitFromSource(&work->sprites[i], 0x1a, 0, &work->resources, 1, 1.0f);
-        uiSpriteSetKeyframe(&work->sprites[i], 0, 0);
+        uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0x1a, 0, &work->resources, 1, 1.0f);
+        uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0, 0);
     }
     for (s32 i = 6; i <= 9; i++) {
-        uiSpriteStateInitFromSource(&work->sprites[i], 0x1a, 0, &work->resources, 1, 1.0f);
-        uiSpriteSelectAnim(&work->sprites[i], 0);
+        uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0x1a, 0, &work->resources, 1, 1.0f);
+        uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(&work->sprites[i]), 0);
     }
-    uiSpriteInitializeState(&work->panel, 0x1a, -1, 0x18, &work->resources, 0x65, 1.0f);
+    uiSpriteInitializeState(reinterpret_cast<UiSpriteState *>(&work->panel), 0x1a, -1, 0x18, &work->resources, 0x65, 1.0f);
     rangeSelectionSelectEndpoint(&work->panel, 0, 0);
-    spriteSetLayer(&work->panel, 2);
+    spriteSetLayer(reinterpret_cast<UiSpriteState *>(&work->panel), 2);
     uiStoreTextureEntryCenter(&work->panel, 0x1a, 0x21c);
     spriteSetVisible(&work->panel, 1);
-    uiSpriteStateInitFromSource(&work->cursor, 0x1a, 0, &work->resources, 1, 1.0f);
-    uiSpriteSelectAnim(&work->cursor, 2);
+    uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&work->cursor), 0x1a, 0, &work->resources, 1, 1.0f);
+    uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(&work->cursor), 2);
     sysPlaySe(99);
     DAT_0057f2c4->state = 1;
     DAT_0057f2c4->phase = 0;

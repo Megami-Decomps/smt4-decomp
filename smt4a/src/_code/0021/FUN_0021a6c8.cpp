@@ -10,7 +10,7 @@ struct ListEntry {
     /* 0x3C */ u8 unk3C[4];
 };
 
-struct ListWork {
+struct CentredListWork {
     /* 0x0000 */ u8 unk0000[0x4850];
     /* 0x4850 */ s32 count;
     /* 0x4854 */ u8 unk4854[2];
@@ -31,7 +31,7 @@ static __inline s32 listCentreSlot(s32 local, s32 size)
     return (size & 1) != 0 ? local + (5 - size) / 2 : local + (4 - size) / 2;
 }
 
-void FUN_0021a6c8(ListWork *work)
+void FUN_0021a6c8(CentredListWork *work)
 {
     qsort(work->entries, work->count, LIST_ENTRY_STRIDE, FUN_00270d30);
 

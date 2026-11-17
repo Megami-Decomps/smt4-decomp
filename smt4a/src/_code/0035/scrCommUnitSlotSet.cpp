@@ -2,14 +2,14 @@
 
 extern "C" {
 
-typedef struct UnitStats {
+typedef struct ScriptUnitSlots {
     /* 0x000 */ u8 unk000[0x3b4];
     /* 0x3b4 */ u32 slots[16];
-} UnitStats;
+} ScriptUnitSlots;
 
 typedef struct BtlUnit {
     /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ UnitStats *stats;
+    /* 0x20 */ ScriptUnitSlots *stats;
 } BtlUnit;
 
 extern u32 g_btlScriptUnit;
@@ -26,7 +26,7 @@ u32 scrCommUnitSlotSet(void)
     if (slot >= 16) {
         return 1;
     }
-    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+    ScriptUnitSlots *stats = btlUnitGet(g_btlScriptUnit)->stats;
 
     stats->slots[slot] = value;
     return 1;

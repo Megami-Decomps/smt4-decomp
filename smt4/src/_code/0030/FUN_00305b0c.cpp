@@ -1,8 +1,5 @@
 #include "common.h"
-
-struct Vec4 {
-    f32 x, y, z, w;
-};
+#include "gfx/Vec4.h"
 
 struct Object00305b0c {
     /* 0x00 */ u8 unk00[0x30];

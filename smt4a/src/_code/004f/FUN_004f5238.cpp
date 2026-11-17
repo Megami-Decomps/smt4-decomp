@@ -14,7 +14,7 @@ s32 FUN_004f5238(BtlEffectFiles *work, u32 a, u32 b, s32 group, s32 index, u32 c
     if (group >= 11)
         return 0;
     char name[64] = { 0 };
-    BtlEffectSlot *slot;
+    BtlEffectFileSlot *slot;
     switch (group) {
     case 0:
         if (index >= 4)

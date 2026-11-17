@@ -52,10 +52,10 @@ typedef char CallbackControllerCatalogOffsetsCheck[
     offsetof(CallbackControllerWork, list.touchScroll) == 0x216 &&
     sizeof(CallbackControllerWork) == 0x21C ? 1 : -1];
 
-struct CallbackController {
+struct CallbackControllerGlobal {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ void *work;
 };
-extern "C" CallbackController g_callbackController;
+extern "C" CallbackControllerGlobal g_callbackController;
 
 #endif

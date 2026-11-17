@@ -4,14 +4,14 @@ struct ModelRenderState {
     u8 unk000[0x1f6];
     u8 enabled; // 0x1f6
 };
-struct ModelInstance {
+struct ModelRenderHolder {
     u8 unk00[0x2c];
     ModelRenderState *renderState; // 0x2c
 };
 struct ModelResource {
     u32 flags; // 0x00
     u32 unk04;
-    ModelInstance *model; // 0x08
+    ModelRenderHolder *model; // 0x08
 };
 struct ModelSlot {
     ModelResource *resource; // 0x00

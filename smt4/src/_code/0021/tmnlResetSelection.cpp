@@ -1,13 +1,10 @@
 #include "common.h"
 #include "Terminal/tmnlMain.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "Terminal/TerminalGlobals.h"
 
 extern "C" {
 
-struct TerminalGlobals {
-    /* 0x00 */ TmnlWork *work;
-    /* 0x04 */ s32 selection;
-};
 extern TerminalGlobals g_tmnl;
 extern u32 DAT_00432ce4;
 

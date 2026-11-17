@@ -1,6 +1,6 @@
 #include "shard/W6_W6Match5_OnlineResult.h"
 
-struct OnlineJob {
+struct OnlineJobResult {
     u8 unk00[0x68];
     u32 instanceId; // 0x68
     u8 unk6c[0x14];
@@ -16,10 +16,10 @@ s32 _ZNK18OnlineResultRecord7isValidEv(const s32 *);
 void FUN_002f3dc4(OnlineInstance *, const OnlineCallbackResult *);
 void FUN_002f3dde(OnlineInstance *, const OnlineCallbackResult *);
 void FUN_002e9f00(s32 *, s32);
-void onlineJobSetStateDone(OnlineJob *);
+void onlineJobSetStateDone(OnlineJobResult *);
 
 // Deliver an online result to its instance, then complete the job.
-void FUN_0030c720(OnlineJob *job, const OnlineCallbackResult *result)
+void FUN_0030c720(OnlineJobResult *job, const OnlineCallbackResult *result)
 {
     OnlineInstance *instance = onlineInstanceTableFind(onlineInstanceTableGetCurrent(),
                                                        job->instanceId);

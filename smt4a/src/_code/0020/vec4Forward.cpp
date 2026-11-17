@@ -1,13 +1,7 @@
 #include "common.h"
+#include "gfx/Vec4.h"
 
 extern "C" {
-
-typedef struct Vec4 {
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 w;
-} Vec4;
 
 extern void asd3dSoundActorSetPosition(u32 handle, Vec4 *value);
 

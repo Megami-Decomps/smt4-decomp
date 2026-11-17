@@ -6,7 +6,7 @@ void asdMemFree(void *block);
 void sysMemClear(void *block, s32 bytes);
 
 /* Empties one effect slot: no handle, no name, no loaded file, no flags. */
-static void clearEffectSlot(BtlEffectSlot *slot)
+static void clearEffectSlot(BtlEffectFileSlot *slot)
 {
     slot->handle = 0xFF;
     sysMemClear(slot->name, 0x80);
