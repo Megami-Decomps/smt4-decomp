@@ -3,6 +3,17 @@
 #define MAP_MAPDEPART_H
 
 #include "common.h"
+
+/* Request consumed by MapDepart_Init; the second argument is its byte size. */
+struct MapDepartureRequest {
+    s32 mode;
+    s32 map;
+    s32 entry;
+    u32 unk0C;
+    u32 destinationState[4];
+};
+typedef char MapDepartureRequestSize[sizeof(MapDepartureRequest) == 0x20 ? 1 : -1];
+
 #include <stddef.h>
 
 /* The departure block, kept by a module global. */
