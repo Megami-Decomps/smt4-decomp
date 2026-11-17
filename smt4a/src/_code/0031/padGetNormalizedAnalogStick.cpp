@@ -36,7 +36,13 @@ u32 padGetNormalizedAnalogStick(f32 *outX, f32 *outY, u32 index)
         maximum = calibration->maximum[2];
     }
     f32 range = (f32)(maximum - minimum);
-    if (index < 2 && index <= state->count) {
+    if (index >= 2) {
+        return 0;
+    }
+    if (index > state->count) {
+        return 0;
+    }
+    {
         PadAnalogSample *sample;
         bool locked = (state->flags & 1) != 0;
         if (locked || (state->flags & 2) != 0)

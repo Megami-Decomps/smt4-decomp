@@ -1,4 +1,3 @@
-/* NON_MATCHING: one instruction differs: retail rematerialises the handler result with `mov r5, #2` after storing the script mode, the build copies the 2 already in r1 (`mov r5, r1`); result placement, u32/u8 results, nested ifs and early returns do not change it. */
 #include "battle/BtlStageStackRegion.h"
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
@@ -38,6 +37,7 @@ void linkHolderApplyFlag(void *scene, u32 flag);
 void gameDataRemoveHomeButtonHold(u32 reason);
 void gameDataFlagsClearAndRefresh(u32 reason);
 void asdMemFree(void *block);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 }
 
 /* Waits for the communication thread to end, then finalizes it and closes its handle. */
@@ -75,7 +75,7 @@ s32 campCecStopCommThread(CampCecThreadWork *work)
         campCecResetViewState(g_campCec->modelScene);
         linkHolderApplyFlag(g_campCec->modelScene, 0);
         work->script = scrScriptProcessCreate(work->scriptFile, work->scriptBuffer);
-        work->script->mode = 2;
+        scriptProcessSetMode(work->script, 2);
         result = 2;
         work->nextState = 1;
     }

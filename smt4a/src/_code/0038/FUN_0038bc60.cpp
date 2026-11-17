@@ -27,12 +27,10 @@ u32 FUN_0038bc60(void)
         property = 11;
     u32 value = scrGetArg(2);
     for (s32 index = 0; index < 109; ++index) {
-        BtlMainStateA *state = btlGetMainState();
-        BtlCombatantEntryA *entry = &state->entries[index];
-        u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) != 0 &&
-            (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 &&
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
+            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
             entry->data.id == unitId &&
             reinterpret_cast<const PropertyView *>(entry)->values[property] == value) {
             scrSetResult(1);

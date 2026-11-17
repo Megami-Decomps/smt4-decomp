@@ -156,7 +156,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     texDrawCompositeSprite(2,0x24,0xc,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x24,0xd8,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xdc));
-    temp_v6 = FUN_002bd068(*psVar7);
+    temp_v6 = (unsigned int)FUN_002bd068(*psVar7);
     textFormatBuffer(temp_v12,"%s",temp_v6);
     puVar9 = temp_v12;
     fontMeasureLineAdvance(puVar9,1);

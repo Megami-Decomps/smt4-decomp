@@ -1,4 +1,4 @@
-/* NON_MATCHING: control flow, field-by-field parameter copy and call sequence match; only the register numbering differs (retail resource r4 / i r5 / entry r6 / work r7, armcc picks r7 / r4 / r5 / r6). */
+/* NON_MATCHING: control flow, the entry address formed before the resource search, the parameter copy and the call sequence match; only the work/resource registers are swapped (retail work r7 / resource r4, here r4 / r7). */
 #include "common.h"
 
 /* A loaded model resource: an id and the model parameters copied into the battle's slot table. */
@@ -109,13 +109,12 @@ s32 nkdwHeaderParse(ModelResource *resource);
  * parameters into the slot table; returns 1 once every load has finished. */
 extern "C" u32 FUN_0033ac58(BattleModelWork *work)
 {
+    s32 i;
     u32 done = 1;
-    ModelResource *resource;
-    ModelLoadEntry *entry;
 
-    for (s32 i = 0; i < work->loadCount; i++) {
-        resource = work->findResource(work->loads[i].resourceId);
-        entry = &work->loads[i];
+    for (i = 0; i < work->loadCount; i++) {
+        ModelResource *resource = work->findResource(work->loads[i].resourceId);
+        ModelLoadEntry *entry = &work->loads[i];
         if ((entry->flags & 1) == 0) {
             if (nkdwHeaderParse(resource) == 0) {
                 done = 0;

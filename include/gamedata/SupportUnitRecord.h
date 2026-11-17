@@ -23,6 +23,10 @@ struct SupportUnitRecord {
             u8 unk26[0x22];
             /* 0x48 */ char name[0x14];
         } aiScript;
+        struct {
+            u8 unk26[0x34];
+            /* 0x5A */ u16 id;  /* the record's demon (its icon and model) */
+        } demon;
     };
 };
 

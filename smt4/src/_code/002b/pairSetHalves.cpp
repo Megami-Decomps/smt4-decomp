@@ -9,7 +9,7 @@ typedef struct Obj {
     /* 0x1A */ u16 unk1A;
 } Obj;
 
-void pairSetHalves(Obj *obj, u16 a, u16 b)
+void pairSetHalves(Obj *obj, s16 a, s16 b)
 {
     obj->unk18 = a;
     obj->unk1A = b;

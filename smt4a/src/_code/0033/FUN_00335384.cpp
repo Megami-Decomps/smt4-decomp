@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase-one `++phase` folds to the constant 2 (retail adds 1 to the loaded switch value) and the sprite-pointer base add is scheduled after the first move; the case 2/3 shared completion block matches. */
+/* NON_MATCHING: only phase one differs: `++phase` folds to the constant 2 where retail adds 1 to the loaded switch value (and so reads the timer into r1). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "ui/UiControl.h"
 
@@ -18,7 +18,8 @@ extern "C" {
 u32 FUN_00335384(SpriteIntroTransitionWork *work)
 {
     u32 result = 0;
-    switch (work->phase) {
+    s32 phase = work->phase;
+    switch (phase) {
     case 0:
         uiSpriteAdvanceAnimation(&work->sprites[0], 1.0f);
         uiSpriteAdvanceAnimation(&work->sprites[1], 1.0f);

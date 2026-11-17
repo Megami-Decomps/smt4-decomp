@@ -1,4 +1,4 @@
-/* NON_MATCHING: dots, pool order and divisions now match; the label coordinates load point.y/point.x into other registers (and schedule the z/width float loads and r2 argument differently), and retail sets r0=0 before releasing the frame. */
+/* NON_MATCHING: dots, pool order and divisions now match, and the early returns give retail's zero-result epilogue; the label coordinates load point.y/point.x into other registers (and schedule the z/width float loads and r2 argument differently). */
 #include "ui/UiSpriteApi.h"
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
@@ -35,43 +35,45 @@ void efctSetSpeed(f32 alpha);
 u8 runWinDraw(void)
 {
     RunWin *win = g_runWin;
-    if (win->active != 0 && win->visible != 0) {
-        renderCtxSelectStereoLayout(g_titleScene);
-        texDrawTableEntryAtStoredOrigin(2, 14, 0x14F, 0, 0, 109);
-        s32 x = vec2GetXInt((UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
-        s32 y = vec2GetYInt((UiSpriteState *)win->anchor);
-        efctSetSpeed(win->alpha);
-        texDrawCompositeSprite(2, 14, 19, x, y, 110);
-        RenderCtx *scene = g_titleScene;
-        s32 state = packNibblesAndByte(6, 1, 0);
-        renderStackPushCountedDirect(&scene->stackB, state);
-        texDrawTableEntryAtStoredOrigin(2, 14, 0x150, x, 0, 111);
-        texDrawTableEntryAtStoredOrigin(2, 14, 0x151, x, 0, 111);
-        renderStackPop(&g_titleScene->stackB);
-        TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x153);
-        u32 color = 0xF49800FF;
-        f32 labelY = (f32)(labelPoint->y + y);
-        f32 labelX = (f32)(labelPoint->x + (x - 14));
-        textDrawString(4, color, reinterpret_cast<const char *>(win->label), labelX, labelY, 0.56640625f, 0.0f, win->alpha);
-        s32 lit = (win->frame / 5) % 8;
-        s32 litPrevious = (lit + 7) % 8;
-        s32 lit2 = (win->frame / 5 + 4) % 8;
-        s32 lit2Previous = (lit2 + 7) % 8;
-        for (s32 row = 0; row < 3; row++) {
-            for (s32 column = 0; column < 3; column++) {
-                s32 index = row * 3 + column;
-                TextureTableEntryIV *dot = asdTMTexTableEntryAt(14, 0x157 + index);
-                if (lit == index || lit2 == index)
-                    texDrawTableEntryAtStoredOrigin(2, 14, 0x155, dot->x + x, dot->y, 111);
-                else if (litPrevious == index || lit2Previous == index)
-                    texDrawTableEntryAtStoredOrigin(2, 14, 0x156, dot->x + x, dot->y, 111);
-                else
-                    texDrawTableEntryAtStoredOrigin(2, 14, 0x154, dot->x + x, dot->y, 111);
-            }
+    if (win->active == 0)
+        return 0;
+    if (win->visible == 0)
+        return 0;
+    renderCtxSelectStereoLayout(g_titleScene);
+    texDrawTableEntryAtStoredOrigin(2, 14, 0x14F, 0, 0, 109);
+    s32 x = vec2GetXInt((UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
+    s32 y = vec2GetYInt((UiSpriteState *)win->anchor);
+    efctSetSpeed(win->alpha);
+    texDrawCompositeSprite(2, 14, 19, x, y, 110);
+    RenderCtx *scene = g_titleScene;
+    s32 state = packNibblesAndByte(6, 1, 0);
+    renderStackPushCountedDirect(&scene->stackB, state);
+    texDrawTableEntryAtStoredOrigin(2, 14, 0x150, x, 0, 111);
+    texDrawTableEntryAtStoredOrigin(2, 14, 0x151, x, 0, 111);
+    renderStackPop(&g_titleScene->stackB);
+    TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x153);
+    u32 color = 0xF49800FF;
+    f32 labelY = (f32)(labelPoint->y + y);
+    f32 labelX = (f32)(labelPoint->x + (x - 14));
+    textDrawString(4, color, reinterpret_cast<const char *>(win->label), labelX, labelY, 0.56640625f, 0.0f, win->alpha);
+    s32 lit = (win->frame / 5) % 8;
+    s32 litPrevious = (lit + 7) % 8;
+    s32 lit2 = (win->frame / 5 + 4) % 8;
+    s32 lit2Previous = (lit2 + 7) % 8;
+    for (s32 row = 0; row < 3; row++) {
+        for (s32 column = 0; column < 3; column++) {
+            s32 index = row * 3 + column;
+            TextureTableEntryIV *dot = asdTMTexTableEntryAt(14, 0x157 + index);
+            if (lit == index || lit2 == index)
+                texDrawTableEntryAtStoredOrigin(2, 14, 0x155, dot->x + x, dot->y, 111);
+            else if (litPrevious == index || lit2Previous == index)
+                texDrawTableEntryAtStoredOrigin(2, 14, 0x156, dot->x + x, dot->y, 111);
+            else
+                texDrawTableEntryAtStoredOrigin(2, 14, 0x154, dot->x + x, dot->y, 111);
         }
-        gxResetColorQuadToWhite();
-        efctSetSpeed(1.0f);
     }
+    gxResetColorQuadToWhite();
+    efctSetSpeed(1.0f);
     return 0;
 }
 

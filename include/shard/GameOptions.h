@@ -6,7 +6,16 @@
 #include <stddef.h>
 
 typedef struct GameOptions {
-    /* 0x0000 */ u8 unk0000[0x46];
+    union {
+        /* 0x0000 */ u8 unk0000[0x46];
+        /* the guest unit's record (a StatBlock prefix) */
+        struct {
+            u8 unk0000[0xE];
+            /* 0x000E */ s16 maxHp;
+            u8 unk0010[0x34];
+            /* 0x0044 */ u16 ailments;   /* bit 1: dead */
+        } guest;
+    };
     /* 0x0046 */ u16 unk46;
     union {
         /* 0x0048 */ u8 unk0048[0x5BC];
@@ -28,6 +37,9 @@ typedef struct GameOptions {
 typedef char GameOptionsLayoutCheck[sizeof(GameOptions) == 0x610 &&
     offsetof(GameOptions, supportIndex) == 0x606 &&
     offsetof(GameOptions, flags) == 0x608 ? 1 : -1];
+typedef char GameOptionsGuestOffsets[
+    offsetof(GameOptions, guest.maxHp) == 0xE && offsetof(GameOptions, guest.ailments) == 0x44 &&
+    offsetof(GameOptions, unk46) == 0x46 ? 1 : -1];
 typedef char GameOptionsInheritanceOffsets[
     offsetof(GameOptions, inheritance.flags) == 0x4C &&
     offsetof(GameOptions, inheritance.counts) == 0x8C ? 1 : -1];

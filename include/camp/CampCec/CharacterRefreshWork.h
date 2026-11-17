@@ -18,7 +18,7 @@ struct CharacterRefreshWork {
     /* 0x0FC */ u8 unk0FC[0xC];
     /* 0x108 */ u16 mode;
     /* 0x10A */ u8 unk10A[6];
-    /* 0x110 */ u8 refresh;
+    /* 0x110 */ s8 refresh;
     /* 0x111 */ u8 unk111;
     /* 0x112 */ u8 ready;
     /* 0x113 */ u8 unk113[0x39];

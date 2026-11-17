@@ -1,4 +1,4 @@
-/* NON_MATCHING: x is now one expression (offset + parallax) and the text position adds the frame offset second, like retail; remaining: the text call loads its color/depth constants in a different order and the zero return is materialised before the stack restore. */
+/* NON_MATCHING: x is now one expression (offset + parallax) and the text position adds the frame offset second, like retail; remaining: the text call loads its color/depth constants in a different order. */
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -17,7 +17,10 @@ void efctSetSpeed(f32 speed);
 u32 placeWindowDrawLabel(void)
 {
     PlaceWindow *window = g_placeWin;
-    if (!window->state || !window->visible) {
+    if (!window->state) {
+        return 0;
+    }
+    if (!window->visible) {
         return 0;
     }
     renderCtxSelectStereoLayout(g_titleScene);

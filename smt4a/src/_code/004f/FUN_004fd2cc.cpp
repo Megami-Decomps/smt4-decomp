@@ -11,7 +11,13 @@ u8 FUN_004fd2cc(s32 actor, u32 options, s32 allSlots, s32 slot,
                 s32 parameter, u32 scalarBits, f32 value)
 {
     BtlMainStateA *battle = btlGetMainState();
-    if (battle->environmentModel.loaded && battle->environmentModel.ready) {
+    if (!battle->environmentModel.loaded) {
+        return 0;
+    }
+    if (!battle->environmentModel.ready) {
+        return 0;
+    }
+    {
         if (allSlots) {
             s32 index = 0;
             for (s32 i = 0; i < 4; ++i) {

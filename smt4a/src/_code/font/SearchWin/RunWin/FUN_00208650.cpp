@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected retail parallax (0.25f) and label color (0x57d8ffff); label coordinate conversion, signed /5 and %8 scheduling, and zero-result epilogue still differ. */
+/* NON_MATCHING: corrected retail parallax (0.25f) and label color (0x57d8ffff); the early returns give retail's shared zero-result epilogue; label coordinate conversion and the signed /5 and %8 scheduling still differ. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -35,7 +35,11 @@ s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 u8 FUN_00208650(void)
 {
     RunWin *win = g_runWin;
-    if (win->active != 0 && win->visible != 0) {
+    if (win->active == 0)
+        return 0;
+    if (win->visible == 0)
+        return 0;
+    {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x14F, 0, 0, 109);
         s32 x = vec2GetXInt((const UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);

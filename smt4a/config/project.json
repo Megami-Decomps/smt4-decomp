@@ -30716,7 +30716,18 @@
       "size": 256,
       "source": "src/_code/0016/FUN_00161074.cpp",
       "target": "orig/target/_code/0016/FUN_00161074.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x16117c",
@@ -72497,7 +72508,17 @@
       "size": 68,
       "source": "src/_code/002e/scrCommMessageShowPlainBody.cpp",
       "target": "orig/target/_code/002e/scrCommMessageShowPlainBody.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x2e486c",
@@ -132541,7 +132562,10 @@
       "size": 332,
       "source": "src/_code/003f/FUN_003ff73c.cpp",
       "target": "orig/target/_code/003f/FUN_003ff73c.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "FUN_003ff524"
+      ]
     },
     {
       "address": "0x3ff888",

@@ -1,4 +1,3 @@
-/* NON_MATCHING: debug trace, frame layout, ReadMessage's unk=1 argument and the result tests now match; retail evaluates the open result as and/cmp/movlt (the build uses lsrs) and arranges the else-close block and the message-box field loads differently. */
 #include "nn/Result.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
@@ -31,9 +30,11 @@ u8 asdCecReadOutboxMessage(u32 index, void *out)
 
     nn_cec_CTR_Message_Message_sub_object(&message);
     _ZN12CecMessageIdC1Ev(&id);
-    box = g_asdCec.cec->box;
-    result = asdCecMessageBoxOpen(box, g_asdCec.cec->unk00, g_asdCec.cec->unk04);
-    bool opened = !nnResultIsFailure(result);
+    result = asdCecMessageBoxOpen(g_asdCec.cec->box, g_asdCec.cec->unk00, g_asdCec.cec->unk04);
+    u8 opened = 1;
+    if ((s32)(result & 0x80000000) < 0) {
+        opened = 0;
+    }
     if (!(g_asdCec.cec->box->outboxCount != 0)) {
         asdCecMessageBoxClose(g_asdCec.cec->box);
     } else {

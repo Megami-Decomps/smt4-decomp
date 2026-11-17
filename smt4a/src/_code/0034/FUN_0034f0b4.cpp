@@ -1,36 +1,29 @@
-/* NON_MATCHING: retail forms both pair addresses as add #4096; ldr #952 (built puts the second through a 0x13b8 literal) and keeps the two reloads in index order. */
-#include "common.h"
-#include "camp/Unite/UniteGlobals.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
-#include "gamedata/NkmBaseRecordA.h"
+/* NON_MATCHING: written like fusionComparePairPriority/FUN_002b27d4; the first comparison matches, the second forms the second pair's address through a 0x13b8 literal in retail (ldr r1, [r1, r2]) where this build uses add #4096; ldr #952 for both. */
+#include "shard/W6_W6Match8_FusionCompare.h"
 
-extern "C" {
-}
-
-static inline s32 compareFusionRecords(u32 leftId, u32 rightId)
+static __inline s32 comparePairMember(u32 firstId, u32 secondId)
 {
-    const NkmBaseRecordA *left = nkmBaseGetRecord(leftId);
-    const NkmBaseRecordA *right = nkmBaseGetRecord(rightId);
-    s32 result = s32(right->race) - s32(left->race);
+    const NkmBaseRecordA *first = nkmBaseGetRecord(firstId);
+    const NkmBaseRecordA *second = nkmBaseGetRecord(secondId);
+    s32 result = second->race - first->race;
     if (result == 0) {
-        result = s32(left->level) - s32(right->level);
+        result = first->level - second->level;
         if (result == 0)
-            result = s32(right->id) - s32(left->id);
+            result = second->id - first->id;
     }
     return result;
 }
 
-extern "C" s32 FUN_0034f0b4(const u16 *leftIndex, const u16 *rightIndex)
+// Sort fusion pairs by the race (descending), level and id of each ingredient.
+extern "C" s32 FUN_0034f0b4(const u16 *first, const u16 *second)
 {
     UniteWorkA *work = g_unite;
-    u32 right = work->pairList.pairs[*rightIndex].packedIds;
-    u32 left = work->pairList.pairs[*leftIndex].packedIds;
-    s32 result = compareFusionRecords(left & 0x7fffU, right & 0x7fffU);
+    u32 left = work->pairList.pairs[*first].packedIds;
+    u32 right = work->pairList.pairs[*second].packedIds;
+    s32 result = comparePairMember(left & 0x7fff, right & 0x7fff);
     if (result == 0) {
-        left = work->pairList.pairs[*leftIndex].packedIds;
-        right = work->pairList.pairs[*rightIndex].packedIds;
-        result = compareFusionRecords((left & 0x3fffffffU) >> 15, (right & 0x3fffffffU) >> 15);
+        result = comparePairMember((work->pairList.pairs[*first].packedIds & 0x3fffffff) >> 15,
+                                   (work->pairList.pairs[*second].packedIds & 0x3fffffff) >> 15);
     }
     return result;
 }
-

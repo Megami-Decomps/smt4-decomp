@@ -59,3 +59,5 @@ contentIndexGetValue = 0xe1d000b0; // 0x1d0fa0 (FUN_001d0ea0, twin of smt4 FUN_0
 packScissorCoordinates = 0xe1800801; // inferred removed helper x | (y << 16); FUN_0035ae58 +0x64/+0xac; renderSetClippedScissor +0x13c/+0x180 retain r0/r1 argument copies; see docs/scissor-coordinate-packing.md
 
 uniteRenderTargetSetTexture = 0xe5801004; // FUN_002a74ac +0x70: texture in r1, target in r0, store +4; IV counterpart FUN_0021a374.
+
+partyWidgetSetTransitionKind = 0xe5c01028; // FUN_002ade88: ldr r0,[r7,#2580]; mov r1,#0; strb r1,[r0,#40] in place of a call (same shape as partyWidgetSetTransitionActive)

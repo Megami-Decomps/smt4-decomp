@@ -1,4 +1,3 @@
-/* NON_MATCHING: the status is an nn::Result from a callee declared returning nn::Result (fixes retail's lsrs-before-copy order); remaining: retail saves the owner in r5 and the output in r6 (ours r6/r5). */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 

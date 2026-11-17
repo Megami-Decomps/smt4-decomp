@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop and the A/B pushes now match; only the stackC push schedules its count increment (add r2,r1,#1) after the old-top load where retail does it first. */
+/* NON_MATCHING: all three pushes now match; only the merged draw tail differs: retail copies the origin with one vldmia {s0-s1}, this build loads the two floats separately (x into s1). */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
@@ -45,8 +45,7 @@ s32 FUN_001f42d4(u32 job)
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPushCounted(&context->stackA, state);
     context = g_titleScene;
-    state = gxPackFadeKindAlphaWord(6, 0.0f);
-    renderStackPush(&context->additional.stackC, state);
+    renderCtxPushC(context, gxPackFadeKindAlphaWord(6, 0.0f));
     context = g_titleScene;
     state = packNibblesAndByte(6, 7, 0);
     renderStackPushCountedDirect(&context->stackB, state);

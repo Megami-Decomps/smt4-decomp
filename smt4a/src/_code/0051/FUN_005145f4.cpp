@@ -1,10 +1,7 @@
-/* NON_MATCHING: base registers, offsets and instruction count match; only the VFP multiply/load scheduling of three early loads differs. */
 #include "gfx/VectorScratch.h"
 namespace {
-void premultiply(const Matrix44 *leftMatrix, Matrix44 *rightMatrix)
+inline void premultiply(Matrix44 &right, const Matrix44 &left)
 {
-    const Matrix44 &left = *leftMatrix;
-    Matrix44 &right = *rightMatrix;
     Matrix44 result = {{
         left.values[0]*right.values[0] + left.values[4]*right.values[1] + left.values[8]*right.values[2] + left.values[12]*right.values[3],
         left.values[1]*right.values[0] + left.values[5]*right.values[1] + left.values[9]*right.values[2] + left.values[13]*right.values[3],
@@ -31,7 +28,7 @@ extern "C" {
 // Premultiply the current matrix by the next matrix in the global transform work.
 void FUN_005145f4()
 {
-    VectorScratch *scratch = &g_vectorScratch;
-    premultiply(&scratch->stored.matrix, &scratch->matrix.matrix);
+    const Matrix44 &next = g_vectorScratch.stored.matrix;
+    premultiply(g_vectorScratch.matrix.matrix, next);
 }
 }

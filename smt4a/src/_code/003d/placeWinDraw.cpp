@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 12 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: early returns give retail's shared zero-result epilogue and the one-expression x its add order; 6 lines remain: the textDrawString call loads its colour/text/0.0f/0.566f arguments in a different order (same in the run/search-window siblings). */
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
@@ -18,22 +18,23 @@ void efctSetSpeed(f32 speed);
 u8 placeWinDraw(void)
 {
     PlaceWindow *window = g_placeWin;
-    if (window->state && window->visible) {
-        renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
-        RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-        s32 x = vec2GetXInt(&window->animation);
-        s32 translatedX = x + static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
-        s32 y = vec2GetYInt(&window->animation);
-        texDrawCompositeSprite(2, 8, 0xe, translatedX, y, 0x65);
-        TextureTableEntryIV *sprite = asdTMTexTableEntryAt(8, 0x10b);
-        textDrawString(3, 0xffffffff, window->text,
-                      static_cast<f32>(sprite->x + translatedX),
-                      static_cast<f32>(sprite->y + y), 0.56640625f, 0.0f, 1.0f);
-        gxResetColorQuadToWhite();
-        efctSetSpeed(1.0f);
-        renderStackPop(&g_renderCtx->stackA);
-    }
+    if (!window->state)
+        return 0;
+    if (!window->visible)
+        return 0;
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    RenderCtxA *context = g_renderCtx;
+    renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
+    s32 translatedX = vec2GetXInt(&window->animation) + static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
+    s32 y = vec2GetYInt(&window->animation);
+    texDrawCompositeSprite(2, 8, 0xe, translatedX, y, 0x65);
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(8, 0x10b);
+    textDrawString(3, 0xffffffff, window->text,
+                  static_cast<f32>(sprite->x + translatedX),
+                  static_cast<f32>(sprite->y + y), 0.56640625f, 0.0f, 1.0f);
+    gxResetColorQuadToWhite();
+    efctSetSpeed(1.0f);
+    renderStackPop(&g_renderCtx->stackA);
     return 0;
 }
 }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler forwards stack arguments through VFP while retail uses core-register block copies; candidate O2. */
 #include "shard/W6_W6Match2_HandleRequest.h"
 #include "nn/Result.h"
 

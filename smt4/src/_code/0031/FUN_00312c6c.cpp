@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the loop's exit test differs: retail compares `cmp count, index; bgt`, the build `cmp index, count; blt`. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
@@ -31,12 +30,12 @@ u32 FUN_00312c6c(void)
     s32 cumulative = 0;
     s32 result = 0;
     for (s32 index = 0; index < count; ++index) {
-        if (weights[index] != 0) {
-            cumulative += weights[index];
-            if (roll < cumulative) {
-                result = index + 1;
-                break;
-            }
+        if (weights[index] == 0)
+            continue;
+        cumulative += weights[index];
+        if (cumulative > roll) {
+            result = index + 1;
+            break;
         }
     }
     scrSetResult(result);

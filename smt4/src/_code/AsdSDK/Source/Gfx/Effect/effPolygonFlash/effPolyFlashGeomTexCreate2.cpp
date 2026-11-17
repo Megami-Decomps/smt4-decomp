@@ -1,4 +1,4 @@
-/* NON_MATCHING: code shape matches retail (geometry re-read from the block, kept in r0 into the replace arm); only the loop's segment count and UV store base swap r2/r3. */
+/* NON_MATCHING: with the geometry in a local the loop registers match; retail only copies it to r6 on the default-texture path (the replace arm passes r0 straight through), here it is copied before the branch. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
@@ -30,12 +30,12 @@ PolyGeomBlock *effPolyFlashGeomTexCreate2(PolyParams *params, void *texture)
 
     params->unk70 = (params->unk70 <= 1) ? 1 : params->unk70;
     block->geom = effGeomCreateRepeatedIndexList(params->segments & 0xffff, 2, 4, &g_effQuadIndexList, 76);
+    PolyGeom *geom = block->geom;
     if (texture == NULL) {
-        PolyGeom *geom = block->geom;
         geom->unk04 = sysGetTableWord(18);
         refCountIncrement(reinterpret_cast<int *>(geom->unk04));
     } else {
-        textureSlotReplace(block->geom, texture);
+        textureSlotReplace(geom, texture);
     }
     u32 segments = params->segments;
     if (segments != 0) {

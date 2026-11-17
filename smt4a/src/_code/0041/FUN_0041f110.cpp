@@ -1,4 +1,4 @@
-/* NON_MATCHING: enterMode's two values use exchanged registers; the mode and remembered-mode stores now have the retail order. */
+/* NON_MATCHING: enterMode's registers now match; retail stores the new mode before the remembered one (here the remembered mode is stored first). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/SaveSlotHeaderWork.h"
 #include "network/DataStore/DataStoreMain.h"
@@ -13,9 +13,8 @@ void FUN_0022e774(void);
 /* Switches to another mode, remembering the one it leaves. */
 static void enterMode(SaveSlotHeaderWork *work, u8 mode)
 {
-    u8 previousMode = work->mode;
+    work->previousMode = work->mode;
     work->mode = mode;
-    work->previousMode = previousMode;
 }
 
 static void releaseRegisteredHandle(RegisteredHandle *&handle)

@@ -1,7 +1,8 @@
-/* NON_MATCHING: 10 diff lines left: the hi-word AND of the last target-mask test uses the other operand order, and the final aiState store loads the slot base after the current slot where retail loads the base first */
+/* NON_MATCHING: 10 diff lines left: the final command store materialises the constant 4 after the slot multiply where retail sets it before (register allocation; every other store/test shape tried disturbs the 64-bit mask tests) */
 #include "battle/BattleUnitRecordState.h"
 #include "gamedata/GameFlags.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/BtlGlobals.h"
 
 /* What btlEntryBuildSummary reports about the unit's pending command. */
 struct BtlAiCommandInfo {
@@ -29,31 +30,17 @@ struct BtlAiCommand {
     /* 0x38 */ u8 scratch[0x85];
 };
 
-/* One unit's AI slot (0x1254 bytes each). */
-struct BtlAiUnitSlot {
-    /* 0x000 */ u8 unk000[9];
-    /* 0x009 */ u8 aiState;
-    /* 0x00a */ u8 unk00a[0x124a];
-};
-
-/* g_btlAction beyond its published prefix: the unit-record block and the state masks the AI tests. */
-struct BtlActionAiView {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ BtlAiUnitSlot *slots;
-    /* 0x008 */ u8 unk008[0xd0];
-    /* 0x0d8 */ u64 actMask;
-    /* 0x0e0 */ u8 unk0e0[0xa0];
-    /* 0x180 */ u64 menuMask;
-    /* 0x188 */ u64 targetMask;
-};
-
-typedef char BtlActionAiViewLayoutCheck[offsetof(BtlActionAiView, actMask) == 0xd8 &&
-    offsetof(BtlActionAiView, menuMask) == 0x180 && offsetof(BtlActionAiView, targetMask) == 0x188 ? 1 : -1];
-
 static __inline void beginCommand(BtlAiCommand *cmd, u16 param)
 {
     cmd->record->state = 2;
     cmd->record->param = param;
+}
+
+/* The unit in one of the action module's slots (btlUnitGet without its range checks). */
+static __inline BtlUnitA *slotUnit(s32 index)
+{
+    BtlActionSlotA &slot = g_btlAction.slots[index];
+    return &slot.unit;
 }
 
 extern "C" {
@@ -84,15 +71,14 @@ void btlUiQueueMenuAction(BtlUiA *uiBlock, s32 action, s32 a);
 void FUN_004eb838(BattleUnitRecordState *units, BtlAiCommand *cmd);
 
 extern u32 g_btlAiScript;
-extern BtlActionAiView g_btlAction;
 
 /* Drive one AI command for the active unit; returns 0 when the AI should not act. */
 u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
 {
     if ((btlScriptUnitHasFlags(units->battle) != 0 || FUN_004c87e0() == 0) &&
         stateAtCIs4(g_btlAiScript) != 0 && jobIsValid(units->battle->uiJobs.menuJob) == 0) {
-        if ((units->battle->stateFlags64.bits & g_btlAction.actMask) != 0 &&
-            (units->battle->stateFlags64.bits & g_btlAction.targetMask) == 0) {
+        if ((units->battle->stateFlags64.bits & g_btlAction.aiActMask) != 0 &&
+            (units->battle->stateFlags64.bits & g_btlAction.aiTargetMask) == 0) {
             BtlAiRecord *record = cmd->record;
 
             if (record->state == 0 && record->param == 0) {
@@ -130,13 +116,13 @@ u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
                 sysMemClear(cmd->scratch, 0x85);
             }
         }
-        if ((g_btlAction.menuMask & units->battle->stateFlags64.bits) != 0) {
+        if ((g_btlAction.aiMenuMask & units->battle->stateFlags64.bits) != 0) {
             sysMemClear(cmd->scratch, 0x85);
             FUN_004e8454(units);
             beginCommand(cmd, FUN_003f0bd8(units->battle, 0));
             btlUnitSetParam(units, 1, 0, 1);
         }
-        if ((g_btlAction.targetMask & units->battle->stateFlags64.bits) != 0) {
+        if ((units->battle->stateFlags64.bits & g_btlAction.aiTargetMask) != 0) {
             sysMemClear(cmd->scratch, 0x85);
             FUN_004e8454(units);
             beginCommand(cmd, FUN_003f1a9c(units->battle, 0));
@@ -154,12 +140,7 @@ u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
                  FUN_003f25e8(units->battle) != 0) &&
                 btlScriptUnitHasFlags(units->battle) == 0 && btlStateHasSelectionGateFlag(units->battle) == 0 && action != 0) {
                 btlUiQueueMenuAction(g_btlUiBlock, (s16)action, 1);
-                {
-                    /* The AI slots are addressed in 0x495-word strides, like the other action-slot users. */
-                    u32 *records = reinterpret_cast<u32 *>(g_btlAction.slots);
-                    BtlAiUnitSlot *slot = reinterpret_cast<BtlAiUnitSlot *>(records + units->battle->unitRecord.currentSlot * 0x495);
-                    slot->aiState = 4;
-                }
+                slotUnit(units->battle->unitRecord.currentSlot)->command = 4;
             } else {
                 FUN_004eb838(units, cmd);
             }

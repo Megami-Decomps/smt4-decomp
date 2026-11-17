@@ -1,10 +1,10 @@
 #include "common.h"
 #include <string.h>
+#include "shard/W6_W6Match5_EntryCollection.h"
 
 extern "C" {
 extern const char *const DAT_0040333c[21];
 extern const char *const DAT_00403390[8];
-const char *FUN_002bd068(u16 id);
 const char *aocEntryDataById(u32 index, u32 group);
 const char *aocIndexValueOrDefault(u32 index);
 s32 libc_sprintf(char *output, const char *format, ...);

@@ -46,7 +46,8 @@ struct GameStateEventBlock {
     /* 0x04 */ char activeEntryText[0x18];
     /* 0x1C */ u8 scriptFlag;
     /* 0x1D */ s8 bgmReleased;
-    /* 0x1E */ u8 unk1E[0x27];
+    /* 0x1E */ u8 unk1E[0x26];
+    /* 0x44 */ s8 faceOverview;      /* mode 5 turns the player toward overviewPosition and eases it in slowly */
     /* 0x45 */ s8 scriptPending;
     /* 0x46 */ u8 unk46[2];
     /* 0x48 */ u32 scriptId;
@@ -65,7 +66,7 @@ struct GameStateEventBlock {
     /* 0x94 */ s16 encounterDelay;
     /* 0x96 */ s16 encounterEnemyIndex;
     /* 0x98 */ u8 encounterForced;
-    /* 0x99 */ u8 encounterApproach;
+    /* 0x99 */ s8 encounterApproach;
     /* 0x9A */ u8 encounterBackAttack;
     /* 0x9B */ u8 encounterHasMarker;
     /* 0x9C */ s16 encounterMarkerX;
@@ -104,7 +105,7 @@ struct GameStateMapBlock {
     /* 0x44 */ u16 unk44;
     /* 0x46 */ u16 unk46;
     /* 0x48 */ s32 actionState;
-    /* 0x4C */ u8 actionOption;
+    /* 0x4C */ s8 actionOption;
     /* 0x4D */ u8 unk4D[4];
     /* 0x51 */ s8 bgResetPending;      /* set when the common background must be rebuilt */
     /* 0x52 */ u8 unk52[2];

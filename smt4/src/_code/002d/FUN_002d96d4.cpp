@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d96d4` (_code @ 0x2d96d4, 0x14d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 #include "status/StatusCamera.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "ui/UiSpriteApi.h"
@@ -20,7 +21,6 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int demonGetRaceLabel(...);
-int FUN_002bd068(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
@@ -239,7 +239,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
               textFormatBuffer(temp_v20,"\?\?\?");
             }
             else {
-              temp_v9 = FUN_002bd068(*psVar8);
+              temp_v9 = (int)FUN_002bd068(*psVar8);
               textFormatBuffer(temp_v20,"%s",temp_v9);
             }
             VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2
@@ -389,7 +389,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           textFormatBuffer(temp_v20,&LAB_002daba8);
         }
         else {
-          temp_v11 = FUN_002bd068(*psVar8);
+          temp_v11 = (int)FUN_002bd068(*psVar8);
           textFormatBuffer(temp_v20,&LAB_002daba4,temp_v11);
         }
         VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
@@ -545,7 +545,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             textFormatBuffer(temp_v20,"\?\?\?");
           }
           else {
-            temp_v11 = FUN_002bd068(*puVar10);
+            temp_v11 = (int)FUN_002bd068(*puVar10);
             textFormatBuffer(temp_v20,"%s",temp_v11);
           }
           temp_v6 = FUN_0029dde0();

@@ -1,4 +1,4 @@
-/* NON_MATCHING: ARMCC hoists state constants into r7/r8 and emits separate final status/state stores instead of retail's stm; control flow and relocations are reconstructed. */
+/* NON_MATCHING: the mode store is the linker-inlined scriptProcessSetMode call; armcc still hoists the state constant 3 into r7 (retail keeps 0 there and rematerialises 3) and schedules the final status/state stores differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "event/eventCommand.h"
@@ -19,6 +19,7 @@ struct GameOverTransition {
 };
 
 extern "C" {
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void asdTMTexTableLoadTmx(u32 table, u32 flags);
 void asdTMTexTableReleaseNode(u32 table, u32 index);
 s32 campButtonHelpIsActive(void);
@@ -53,7 +54,7 @@ extern "C" u32 FUN_004cef24(GameOverTransition* transition)
                 }
             }
             transition->process = scrScriptProcessCreate(transition->scriptData, transition->messageData);
-            transition->process->mode = 1;
+            scriptProcessSetMode(transition->process, 1);
             scrScriptProcessStartEntry(transition->process, 0);
             if (transition->mode != 2) {
                 transition->state = 4;

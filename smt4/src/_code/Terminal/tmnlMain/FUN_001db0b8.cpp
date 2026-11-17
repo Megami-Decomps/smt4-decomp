@@ -1,4 +1,3 @@
-/* NON_MATCHING: three constant questSetPackedFlag calls load r1 before r0; retail loads r0 before r1. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
@@ -25,19 +24,25 @@ void FUN_0021f354(void);
 extern TmnlWork *g_tmnl;
 
 
+/* Sets or clears a quest's packed availability flag (the terminal's local wrapper). */
+static void tmnlSetQuestFlag(u32 id, s32 enabled)
+{
+    questSetPackedFlag(id, enabled);
+}
+
 // Open the terminal: allocate and reset its work area, unlock the first quest flags and start its processes.
 void FUN_001db0b8(const u32 *entry)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\Terminal\\tmnlMain.cpp", 249);
     TmnlWork *work = g_tmnl = (TmnlWork *)asdMemAlloc(256, 256, 0, sizeof(TmnlWork) + 0x4C, 1);
     if (questTestPackedFlag(10) == 0) {
-        questSetPackedFlag(10, 1);
+        tmnlSetQuestFlag(10, 1);
     }
     if (questTestPackedFlag(12) == 0) {
-        questSetPackedFlag(12, 1);
+        tmnlSetQuestFlag(12, 1);
     }
     if (questTestPackedFlag(11) == 0 && gameFlagIsSet(0x277) != 0) {
-        questSetPackedFlag(11, 1);
+        tmnlSetQuestFlag(11, 1);
     }
     gameFlagSetValue(0x465, 0, 1);
     work->unk05 = 1;

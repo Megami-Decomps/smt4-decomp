@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before the message buffer allocation. */
 #include "nn/Result.h"
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "network/CecControl_AsdCec.h"
 
@@ -27,30 +27,34 @@ u8 asdCecReadOutboxMessage(u32 index, void *out)
     u8 ok = 0;
     void *buffer;
     u32 bufferSize;
-    void *body;
-    u32 bodySize;
 
     nn_cec_CTR_Message_Message_sub_object(&message);
     _ZN12CecMessageIdC1Ev(&id);
-    box = g_asdCec.cec->box;
-    result = asdCecMessageBoxOpen(box, g_asdCec.cec->unk00, g_asdCec.cec->unk04);
-    if (g_asdCec.cec->box->outboxCount != 0) {
-        if ((result & 0x80000000) == 0) {
+    result = asdCecMessageBoxOpen(g_asdCec.cec->box, g_asdCec.cec->unk00, g_asdCec.cec->unk04);
+    u8 opened = 1;
+    if ((s32)(result & 0x80000000) < 0) {
+        opened = 0;
+    }
+    if (!(g_asdCec.cec->box->outboxCount != 0)) {
+        asdCecMessageBoxClose(g_asdCec.cec->box);
+    } else {
+        if (opened) {
             box = g_asdCec.cec->box;
             nn_cec_CTR_MessageBox_GetMessageId(box, &id, ASD_CEC_OUTBOX, index);
             bufferSize = asdCecMessageBoxGetMessageSize(g_asdCec.cec->box, ASD_CEC_OUTBOX, index);
+            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 1526);
             buffer = asdMemoryAlloc(0x100, 0x100, 0, bufferSize, 1);
-            result = nn_cec_CTR_MessageBox_ReadMessage_3579D4(g_asdCec.cec->box, &message, buffer, bufferSize, 0, &id);
-            ok = !nnResultIsFailure(result);
-            if (ok) {
+            result = nn_cec_CTR_MessageBox_ReadMessage_3579D4(g_asdCec.cec->box, &message, buffer, bufferSize, 1, &id);
+            if ((s32)(result & 0x80000000) >= 0) {
+                void *body;
+                u32 bodySize;
                 asdCecMessageGetBody(&message, &body, &bodySize);
                 rt_memcpy(out, body, bodySize);
+                ok = 1;
             }
             asdMemFree(buffer);
             asdCecMessageBoxClose(g_asdCec.cec->box);
         }
-    } else {
-        asdCecMessageBoxClose(g_asdCec.cec->box);
     }
     return ok;
 }

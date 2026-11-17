@@ -1,4 +1,3 @@
-/* NON_MATCHING: registry base/bucket and insertion traversal registers differ; newly inserted nodes now update the current slot as retail does. */
 #include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {

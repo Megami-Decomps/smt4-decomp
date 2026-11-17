@@ -12,6 +12,11 @@ typedef struct PolyVec4 {
     f32 x, y, z, w;
 } PolyVec4;
 
+/* A vertex position. */
+typedef struct PolyVec3 {
+    f32 x, y, z;
+} PolyVec3;
+
 typedef struct PolyObject PolyObject;
 
 /* Callback table entry of effPolygonFlash.c (stride 0x1c, indexed by PolyObject.kind). */
@@ -45,7 +50,9 @@ typedef struct PolyQuadUV {
 
 /* The vertex buffer of a polygon geometry. */
 typedef struct PolyGeomBuf {
-    /* 0x00 */ u8 unk00[0x38];
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ PolyVec3 *positions; /* one xyz per vertex */
+    /* 0x34 */ u8 unk34[4];
     /* 0x38 */ u8 *colors;      /* 4 bytes per vertex */
     /* 0x3C */ PolyQuadUV *uv;  /* one quad per segment */
 } PolyGeomBuf;

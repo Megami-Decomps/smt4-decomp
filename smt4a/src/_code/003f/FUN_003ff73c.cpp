@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the saved-register list differs: retail pushes {r3-r8, lr} (no r9 alignment pad; FUN_003ff524 is a stackless leaf compiled in the same multifile run, but it is not proven yet). */
 #include "battle/RestorationEffect.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 extern "C" void FUN_003ff524(u16 *mask, s32 kind);
