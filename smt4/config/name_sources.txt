@@ -4906,3 +4906,5 @@
 002b45e8 itemTableGetEquipmentRecord inferred Finds an equipment record by id in item/ItemTable.tbb table 2 (0xA8-byte rows in IV: id 0x50, buy 0x9C, sell 0xA0).
 002b63c0 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).
 0029a17c gxSetMirroredClippedScissor inferred Mirror viewport origin against320/400 by240 screen, clip negative bounds, apply minimum/maximum render-state stacks; exact match with recovered coordinate-packing helper and scene snapshots.
+001eea88 uniteResultInitialize inferred Initializes fusion-result presentation: material/render-target textures, fusion model and camera, tone-specific message script, sprite packets and UI state. Exact with source-visible tone getter.
+00403440 sUniteResultSpriteKeys inferred size:0xe0 Sprite command/key table passed as final paramsInit packet by uniteResultInitialize; complete static bytes verified during matched relink.

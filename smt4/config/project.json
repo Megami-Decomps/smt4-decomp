@@ -26393,12 +26393,12 @@
     },
     {
       "address": "0x1eea88",
-      "function": "FUN_001eea88",
+      "function": "uniteResultInitialize",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001eea88.o",
+      "object": "build/obj/_code/001e/uniteResultInitialize.o",
       "size": 1004,
-      "source": "src/_code/001e/FUN_001eea88.cpp",
-      "target": "orig/target/_code/001e/FUN_001eea88.o",
+      "source": "src/_code/001e/uniteResultInitialize.cpp",
+      "target": "orig/target/_code/001e/uniteResultInitialize.o",
       "thumb": false
     },
     {

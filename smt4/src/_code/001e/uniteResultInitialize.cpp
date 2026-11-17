@@ -1,6 +1,6 @@
-/* NON_MATCHING: only the devilRecordGetTone call (armlink-inlined ldrb) differs: the build emits nop hints (2 before, 1 after) around it that retail does not have; everything else identical */
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
+#include "shard/W6_W6Match1_Table25Record.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 /* A 0x8C-byte UI sprite. */
@@ -45,7 +45,7 @@ struct UniteScreenWork {
 static const s32 sKeysFirst[9] = { 320, 0, 8, 1310720, 0, 8, 0, 0, 1 };
 static const f32 sKeysSecond[12] = { 0, 1.0f, 8, 1.0f, 1.0f, 1, 0, 0.3f, 15, 0.3f, 0, 5 };
 static const f32 sKeysThird[3] = { 0, 1.0f, 8 };
-static const s32 sKeysFourth[56] = {
+static const s32 sUniteResultSpriteKeys[56] = {
     1, 0, -3, 0, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
     2, 0, -3, 1, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
     -3, 0, -3, 2, 0, -3, 0, -3, 0, -3, 3, 0, -3, 0,
@@ -61,7 +61,13 @@ extern "C" {
 extern UniteScreenWork *g_screenStateWork;
 
 void FUN_0021a374(UniteRenderTarget *target, u32 texture);
-u8 devilRecordGetTone(const NkmBaseRecord *record);
+/* This getter was visible to the caller before armlink replaced its call with
+ * the single byte load. Keeping its ordinary body here also preserves the
+ * compiler's knowledge of its side effects and register use. */
+u8 devilRecordGetTone(const NkmBaseRecord *record)
+{
+    return record->talkTone;
+}
 void statusCameraDestroy(void);
 void statusCameraSelectPreset(s32 preset);
 u32 eventResourceCacheAcquire(s32 model, s32 mode);
@@ -75,7 +81,6 @@ u32 asdMdlManagerCreateLoaded(const char *path, s32 heap);
 u32 asdCameraLoadFromFile(const char *path);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 u32 asdLoadFileSyncDefault(const char *path);
-const char *FUN_002cdecc(s8 tone);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 scrScriptProcessCreate(u32 script, u32 messages);
 void drawParameterBlockClear(UiResourceParameters *resources);
@@ -92,7 +97,7 @@ void buttonHelpSetPreset(s32 preset);
 
 /* Starts the fusion-result screen: loads the result devils' textures, the stage model and camera
    (by how many devils are fused), the message script and builds its sprites. */
-void FUN_001eea88(void)
+void uniteResultInitialize(void)
 {
     UniteScreenWork *work = g_screenStateWork;
     statusCameraDestroy();
@@ -139,11 +144,11 @@ void FUN_001eea88(void)
     work->scriptFile = asdLoadFileSyncDefault("battle/DevilLvUp.bf");
     char path[64];
     const NkmBaseRecord *record = getDevilRecord(work->resultDevil);
-    textFormatBuffer(path, "battle/DevilMsg/%s.mbm", FUN_002cdecc(devilRecordGetTone(record)) + 1);
+    textFormatBuffer(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_002cdecc((s8)devilRecordGetTone(record))->unk01));
     work->messageFile = asdLoadFileSyncDefault(path);
     work->script = scrScriptProcessCreate(work->scriptFile, work->messageFile);
     drawParameterBlockClear(&work->resources);
-    paramsInit(&work->resources, sKeysFirst, 0x24, sKeysSecond, 0x30, sKeysThird, 0xc, NULL, 0, sKeysFourth, 0xe0);
+    paramsInit(&work->resources, sKeysFirst, 0x24, sKeysSecond, 0x30, sKeysThird, 0xc, NULL, 0, sUniteResultSpriteKeys, 0xe0);
     for (s32 i = 0; i <= 5; i++) {
         uiSpriteStateInitFromSource(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
         timerStart(&work->sprites[i], 0, 0);

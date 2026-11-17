@@ -52570,13 +52570,13 @@
       "target_path": "orig/target/_code/001e/screenIsStateEight.o"
     },
     {
-      "base_path": "build/obj/_code/001e/FUN_001eea88.o",
+      "base_path": "build/obj/_code/001e/uniteResultInitialize.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001eea88",
+            "name": "uniteResultInitialize",
             "size": 1004,
             "vram": "0x1eea88"
           }
@@ -52584,10 +52584,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001e/FUN_001eea88.cpp"
+        "source_path": "src/_code/001e/uniteResultInitialize.cpp"
       },
-      "name": "_code/001e/FUN_001eea88",
-      "target_path": "orig/target/_code/001e/FUN_001eea88.o"
+      "name": "_code/001e/uniteResultInitialize",
+      "target_path": "orig/target/_code/001e/uniteResultInitialize.o"
     },
     {
       "base_path": "build/obj/_code/001e/FUN_001eef8c.o",
