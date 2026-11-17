@@ -63467,12 +63467,12 @@
     },
     {
       "address": "0x2d1ce0",
-      "function": "FUN_002d1ce0",
+      "function": "mapBgLoadArchivesStep",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d1ce0.o",
+      "object": "build/obj/_code/002d/mapBgLoadArchivesStep.o",
       "size": 308,
-      "source": "src/_code/002d/FUN_002d1ce0.cpp",
-      "target": "orig/target/_code/002d/FUN_002d1ce0.o",
+      "source": "src/_code/002d/mapBgLoadArchivesStep.cpp",
+      "target": "orig/target/_code/002d/mapBgLoadArchivesStep.o",
       "thumb": false
     },
     {

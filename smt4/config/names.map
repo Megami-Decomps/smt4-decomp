@@ -5257,3 +5257,4 @@
 001eea88 uniteResultInitialize
 0028c040 statusAcquireSharedResources
 0031c344 itemApplyPermanentStatBoost
+002d1ce0 mapBgLoadArchivesStep
