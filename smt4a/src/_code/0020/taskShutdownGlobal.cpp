@@ -16,18 +16,18 @@ struct Object {
     /* 0x00 */ const ObjectVtbl *vtbl;
 };
 
-typedef struct Task {
+typedef struct GlobalTask {
     /* 0x00 */ u32 job;
     /* 0x04 */ u8 stopped;
     /* 0x05 */ u8 unk05[3];
     /* 0x08 */ Object *object;
-} Task;
-extern Task *DAT_00588e2c;
+} GlobalTask;
+extern GlobalTask *DAT_00588e2c;
 
 /* Shuts down the global task: stops and destroys its object, stops its job and frees the task. */
 void taskShutdownGlobal(void)
 {
-    Task *task;
+    GlobalTask *task;
 
     task = DAT_00588e2c;
     if (DAT_00588e2c != NULL) {

@@ -1,6 +1,5 @@
 #include "common.h"
-
-namespace { struct Label { u16 value; u16 text; }; struct Labels { Label entries[4]; u8 flag; }; }
+#include "ui/Labels.h"
 
 extern "C" {
 /* Reads or updates the requested object state. */

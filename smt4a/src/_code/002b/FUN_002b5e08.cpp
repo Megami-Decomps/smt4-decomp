@@ -9,7 +9,7 @@ struct TreasureRecord {
     /* 0x05 */ u8 maxCount;
     /* 0x06 */ u8 minLevel;
     /* 0x07 */ u8 maxLevel;
-    struct Slot {
+    struct TreasureSlot {
         u16 item;
         u8 kind;       /* 0: a fixed roll */
         u8 chance;     /* percent */
@@ -98,7 +98,7 @@ s32 FUN_002b5e08(u32 unused, u32 *ids, u8 *isNew, s32 *count, s32 index)
     if (count != NULL)
         *count = wanted;
     for (s32 slot = 0; slot < 3; slot++) {
-        TreasureRecord::Slot *entry = &record->slots[slot];
+        TreasureRecord::TreasureSlot *entry = &record->slots[slot];
         if (entry->item != 0 && entry->chance != 0 && entry->kind == 0) {
             if ((u16)(randRange(99) + 1) <= entry->chance) {
                 flagValueAdd(entry->item, 1);

@@ -22,7 +22,7 @@ struct BtlEffectRequest {
 };
 
 /* A loaded effect file of the battle's effect work. */
-struct BtlEffectSlot {
+struct BtlEffectFileSlot {
     /* 0x00 */ u8 handle;      /* keyed-record id, 0xFF while unregistered */
     /* 0x01 */ u8 unk01[3];
     /* 0x04 */ void *file;
@@ -36,7 +36,7 @@ struct BtlEffectWorkA {
     /* 0x0000 */ u8 unk0000[0x1F54];
     /* 0x1F54 */ BtlEffectRequest *request;
     /* 0x1F58 */ u8 unk1F58[0x234];
-    /* 0x218C */ BtlEffectSlot slots[8];
+    /* 0x218C */ BtlEffectFileSlot slots[8];
     /* 0x264C */ u8 unk264C[0xD5C];
     /* 0x33A8 */ u32 numberedEffect;
     /* 0x33AC */ u8 numberedIndex;
@@ -47,12 +47,12 @@ struct BtlEffectWork {
     /* 0x0000 */ u8 unk0000[0x1CFC];
     /* 0x1CFC */ BtlEffectRequest *request;
     /* 0x1D00 */ u8 unk1D00[0x230];
-    /* 0x1F30 */ BtlEffectSlot slots[8];
+    /* 0x1F30 */ BtlEffectFileSlot slots[8];
     /* 0x23F0 */ u8 unk23F0[0xC44];
     /* 0x3034 */ u32 numberedEffect;
     /* 0x3038 */ u8 numberedIndex;
 };
 
-typedef char BtlEffectSlotLayoutCheck[sizeof(BtlEffectSlot) == 0x8C && offsetof(BtlEffectSlot, flags) == 0x88 ? 1 : -1];
+typedef char BtlEffectFileSlotLayoutCheck[sizeof(BtlEffectFileSlot) == 0x8C && offsetof(BtlEffectFileSlot, flags) == 0x88 ? 1 : -1];
 
 #endif

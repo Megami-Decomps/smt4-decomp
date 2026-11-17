@@ -81,7 +81,7 @@ u32 FUN_003db7dc(BtlEffectWork *work)
                     textFormatBuffer(file, DAT_004008c4, name);
                     libc_strcpy(path, file);
                     if (libc_strlen(path) != 0) {
-                        BtlEffectSlot *slot = &work->slots[4 + i];
+                        BtlEffectFileSlot *slot = &work->slots[4 + i];
                         libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
                         if (keyedRecordFindByName(slot->name) == 0xff) {
                             asdLoadFileAsyncSimple(path, &slot->file, 0);

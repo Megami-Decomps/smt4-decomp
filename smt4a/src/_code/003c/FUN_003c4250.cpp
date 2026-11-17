@@ -9,12 +9,12 @@ extern "C" {
 
 
 /* The battle window (only the fields used here). */
-typedef struct GaugeOwner {
+typedef struct GaugeDrawOwner {
     /* 0x0000 */ u8 unk0000[0x17C];
     /* 0x017C */ f32 closingSpeed;
     /* 0x0180 */ u8 unk0180[0x1E98];
     /* 0x2018 */ u8 mode;
-} GaugeOwner;
+} GaugeDrawOwner;
 
 
 f32 jobGetScalarValue(void);
@@ -39,7 +39,7 @@ static __inline s32 gaugeWidth(u32 id, s32 value, s32 *height)
 /* Draws a two-part HP gauge at (`x`, `y`): the filled bar up to `current`, and either the
  * recovering part (when `target` is higher) or the damage part (when it is lower); `chunk` draws
  * the recent-damage flash. */
-void FUN_003c4250(GaugeOwner *owner, s32 x, s32 y, s32 target, s32 current, s32 chunk)
+void FUN_003c4250(GaugeDrawOwner *owner, s32 x, s32 y, s32 target, s32 current, s32 chunk)
 {
     f32 scale = jobGetScalarValue();
     s32 flash = 0;

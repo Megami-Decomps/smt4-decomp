@@ -1,13 +1,5 @@
 #include "common.h"
-
-struct RampParameter {
-    /* 0x00 */ u8 unk00[0xc];
-    /* 0x0c */ s32 riseEnd;
-    /* 0x10 */ s32 holdEnd;
-    /* 0x14 */ s32 fallEnd;
-    /* 0x18 */ f32 riseStep;
-    /* 0x1c */ f32 fallStep;
-};
+#include "effect/RampParameter.h"
 
 extern "C" {
 

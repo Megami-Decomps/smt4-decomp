@@ -8,10 +8,10 @@ typedef struct Config {
     /* 0x04 */ u8 strict;
 } Config;
 
-typedef struct Globals {
+typedef struct OnlineConfigGlobals {
     /* 0x00 */ u8 unk00[0x2C];
     /* 0x2C */ Config *config;
-} Globals;
+} OnlineConfigGlobals;
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x66];
@@ -22,7 +22,7 @@ typedef struct Entry {
     /* 0xDC */ u8 data[4];
 } Entry;
 
-extern Globals DAT_005949d8;
+extern OnlineConfigGlobals DAT_005949d8;
 
 int FUN_002eb6ae(Entry *entry, u32 flags);
 u32 onlineSockAddrEquals(void *a, void *b);

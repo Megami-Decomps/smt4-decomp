@@ -18,7 +18,7 @@ struct BtlEntryView {
     /* 0x254 */ u8 unk254[0x34];
 };
 
-struct BtlUnitView {
+struct BtlUnitEntryView {
     /* 0x000 */ u8 unk000[0x60];
     /* 0x060 */ s16 entryIndex;
     /* 0x062 */ u8 unk062[0xb2];
@@ -26,7 +26,7 @@ struct BtlUnitView {
 
 struct BtlMainStateView {
     /* 0x0000 */ u8 unk0000[0x1e98];
-    /* 0x1E98 */ BtlUnitView *units;
+    /* 0x1E98 */ BtlUnitEntryView *units;
     /* 0x1E9C */ u8 unk1e9c[0x124];
     /* 0x1FC0 */ BtlEntryView *entries;
 };

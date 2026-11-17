@@ -48,7 +48,7 @@ void FUN_0041e58c(SdCardMenu *menu)
     menu->thirdCleared.scale = 0.0f;
     for (i = 0; i < menu->entryCount; i++) {
         bool scrolled = sdCardMenuEntryScrolled(menu, i);
-        MenuEntry *entry = &menu->entries[i];
+        SdCardMenuEntry *entry = &menu->entries[i];
         if (scrolled) {
             entry->iconOn = 0x86;
             entry->iconOff = 0x98;

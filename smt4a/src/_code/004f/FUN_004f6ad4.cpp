@@ -63,7 +63,7 @@ u32 FUN_004f6ad4(BtlEffectWorkA *work)
                     textFormatBuffer(file, DAT_005284c0, name);
                     libc_strcpy(path, file);
                     if (libc_strlen(path) != 0) {
-                        BtlEffectSlot *slot = &work->slots[i];
+                        BtlEffectFileSlot *slot = &work->slots[i];
                         libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
                         if (findRecordByKey(slot->name) == 0xff) {
                             asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->file), 1);

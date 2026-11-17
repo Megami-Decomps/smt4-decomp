@@ -1,11 +1,8 @@
 /* NON_MATCHING: the append now reloads the count after the stores and saves r4/r5 like retail (entries are words, so the stores alias the count); retail keeps a zero in r4 for the failure store, tests handle==owner as `cmp r3, r0` with the failure constant out of line, and loads count then capacity with two ldr where the build uses ldm. */
 #include "nn/Result.h"
+#include "gamedata/WordPair.h"
 
 /* Two words. */
-struct WordPair {
-    u32 first;
-    u32 second;
-};
 
 /* A fixed-capacity array of 8-byte pairs. */
 struct PairArray {

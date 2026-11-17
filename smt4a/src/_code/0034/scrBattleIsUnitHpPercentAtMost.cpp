@@ -8,12 +8,12 @@ typedef struct HpPair {
     /* 0x4 */ s32 max;
 } HpPair;
 
-typedef struct UnitStats {
+typedef struct BattleUnitHpView {
     /* 0x000 */ u8 unk000[2];
     /* 0x002 */ u16 form;
     /* 0x004 */ u8 unk004[0xF0];
     /* 0x0F4 */ HpPair hp;
-} UnitStats;
+} BattleUnitHpView;
 
 typedef struct UnitCounters {
     /* 0x000 */ u8 unk000[0x3B4];
@@ -24,7 +24,7 @@ typedef struct Unit {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ UnitCounters *counters;
     /* 0x24 */ u8 unk24[4];
-    /* 0x28 */ UnitStats *stats;
+    /* 0x28 */ BattleUnitHpView *stats;
 } Unit;
 
 s32 scrGetArg(u32 index);
@@ -36,7 +36,7 @@ int scrSetResult(bool value);
 u32 scrBattleIsUnitHpPercentAtMost(void)
 {
     s32 threshold = scrGetArg(0);
-    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+    BattleUnitHpView *stats = btlUnitGet(g_btlScriptUnit)->stats;
 
     if (stats->form == 0x323 && btlUnitGet(g_btlScriptUnit)->counters->count >= 5) {
         scrSetResult(false);

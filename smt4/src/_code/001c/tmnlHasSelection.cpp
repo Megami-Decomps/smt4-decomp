@@ -1,9 +1,5 @@
 #include "Terminal/tmnlMain.h"
-
-struct TerminalGlobals {
-    /* 0x00 */ TmnlWork *work;
-    /* 0x04 */ s32 selection;
-};
+#include "Terminal/TerminalGlobals.h"
 
 extern "C" {
 

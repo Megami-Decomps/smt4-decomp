@@ -1,11 +1,7 @@
 #include "common.h"
+#include "gamedata/WordPair.h"
 
 extern "C" {
-
-typedef struct WordPair {
-    u32 first;
-    u32 second;
-} WordPair;
 
 extern WordPair DAT_005c0a8c;
 

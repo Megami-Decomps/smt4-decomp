@@ -7,11 +7,11 @@ s32 jobStop(u32 job, s32 flag);
 s32 jobIsValid(u32 job);
 extern u32 g_handleRegistry;
 
-typedef struct Task {
+typedef struct BtlEffectSettingsTask {
     /* 0x00 */ u8 unk00[0x58];
     /* 0x58 */ u32 job;
-} Task;
-Task *jobGetWork(void);
+} BtlEffectSettingsTask;
+BtlEffectSettingsTask *jobGetWork(void);
 
 typedef struct Object Object;
 typedef struct ObjectVtbl {
@@ -31,7 +31,7 @@ extern Global57aa00 g_battleEffectSettings;
 /* Stops the task's job if it is valid, runs FUN_0040afcc and destroys the global object at 0x57AA08. */
 void btlEffectSettingsReleaseTask(void)
 {
-    Task *task;
+    BtlEffectSettingsTask *task;
     s32 valid;
 
     task = jobGetWork();

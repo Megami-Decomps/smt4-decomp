@@ -6,14 +6,14 @@ struct SoundSlots {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ SoundHandle *handles[4];
 };
-struct SoundState {
+struct SoundSlotOwnerA {
     /* 0x000 */ u8 unk000[0x324];
     /* 0x324 */ SoundSlots *slots;
 };
 }
 
 extern "C" {
-extern SoundState g_asdSoundHandleState;
+extern SoundSlotOwnerA g_asdSoundHandleState;
 void asdSoundObjectStop(SoundHandle *handle, s32 frames);
 
 /* Stops an indexed sound, allowing it to fade over the requested frame count. */

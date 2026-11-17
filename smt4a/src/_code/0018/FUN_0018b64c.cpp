@@ -2,11 +2,11 @@
 
 extern "C" {
 
-typedef struct Global5891b0 {
+typedef struct SoundGlobalValue {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ u32 value;
-} Global5891b0;
-extern Global5891b0 DAT_005891b0;
+} SoundGlobalValue;
+extern SoundGlobalValue DAT_005891b0;
 
 void FUN_001a0a48(u32 value);
 

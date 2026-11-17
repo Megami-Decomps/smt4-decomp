@@ -15,7 +15,7 @@ struct ListState {
     u32 count;           // 0x14
 };
 
-struct ListIterator {
+struct PairListIterator {
     ListNode* node;       // 0x00
 };
 
@@ -23,8 +23,8 @@ extern "C" {
 
 void FUN_002fffbe(void* payload);
 
-void FUN_0013266e(ListIterator* result, ListState* list,
-                  ListIterator* position)
+void FUN_0013266e(PairListIterator* result, ListState* list,
+                  PairListIterator* position)
 {
     if (list->sentinel == position->node) {
         result->node = list->sentinel;

@@ -6,14 +6,14 @@ struct SoundSlots {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ SoundHandle *handles[4];
 };
-struct SoundState {
+struct SoundSlotOwner {
     /* 0x000 */ u8 unk000[0x218];
     /* 0x218 */ SoundSlots *slots;
 };
 }
 
 extern "C" {
-extern SoundState DAT_004e2f68;
+extern SoundSlotOwner DAT_004e2f68;
 void basicSoundStopOrFadeOut(SoundHandle *handle, s32 frames);
 
 /* Stops an indexed sound, allowing it to fade over the requested frame count. */

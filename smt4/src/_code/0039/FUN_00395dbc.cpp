@@ -16,7 +16,7 @@ struct ParticleOwner {
     /* 0x58 */ s32 frame;
 };
 
-struct Particle {
+struct VelocityParticle {
     /* 0x00 */ u8 unk00[0x0c];
     /* 0x0c */ ParticleOwner *owner;
     /* 0x10 */ f32 velocityX;
@@ -24,10 +24,10 @@ struct Particle {
     /* 0x18 */ f32 velocityZ;
 };
 
-void FUN_00395830(Particle *particle);
+void FUN_00395830(VelocityParticle *particle);
 
 /* Per-frame update: every tenth frame of the owner runs FUN_00395830, then the owner's position advances by the particle's velocity. */
-void FUN_00395dbc(Particle *particle)
+void FUN_00395dbc(VelocityParticle *particle)
 {
     ParticleOwner *owner = particle->owner;
     ParticleTransform *transform = &owner->transform;

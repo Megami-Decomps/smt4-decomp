@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SkillFlags.h"
+#include "gamedata/PairedKeyRecord.h"
 
 // Result descriptor of a fusion: the two parent ids, the product and its summed cost.
 struct FusionResult {
@@ -11,12 +12,6 @@ struct FusionResult {
     u32 keep : 2;
     u32 product : 15;
     u32 cost : 15;
-};
-
-struct PairedKeyRecord {
-    u16 second; // 0x00
-    u16 first;  // 0x02
-    u32 value;  // 0x04
 };
 
 // The parts of a demon record read here.

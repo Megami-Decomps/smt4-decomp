@@ -9,12 +9,12 @@ typedef struct Queue {
     /* 0x10 */ s32 current;
 } Queue;
 
-typedef struct Player {
+typedef struct QueuePlayer {
     /* 0x00 */ u8 unk00[0xA4];
     /* 0xA4 */ s32 current;
     /* 0xA8 */ u8 unkA8[4];
     /* 0xAC */ Queue *queue;
-} Player;
+} QueuePlayer;
 
 void asdModelAdvanceCommandCursor(void);
 void gfxCommandVectorResetAt(Queue *queue, s32 value);
@@ -23,7 +23,7 @@ void FUN_0017d5f8(void);
 s32 asdGxGetCommandCursor(void);
 
 /* When the player has a queue: if the queue holds unread words, picks its current entry and (if there is one) hands it on; then runs FUN_0017d43c. */
-void FUN_00157be4(Player *player)
+void FUN_00157be4(QueuePlayer *player)
 {
     s32 current;
     Queue *queue;

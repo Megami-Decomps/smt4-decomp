@@ -3,13 +3,9 @@
 #include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 #include "gamedata/PackedIdentifiers.h"
+#include "gamedata/PairedKeyRecord.h"
 
 /* The record the paired-key search returns: its value is the result demon's id. */
-struct PairedKeyRecord {
-    u16 second;
-    u16 first;
-    u32 value;
-};
 
 /* A demon record: the skill slots and the stats the cost sums up. */
 /* The fusion search state: the working skill list of the result. */

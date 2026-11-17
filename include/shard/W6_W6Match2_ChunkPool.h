@@ -7,14 +7,14 @@ template <u32 Stride> struct PoolElement {
     u8 storage[Stride];
 };
 
-template <u32 Stride> struct PoolChunk {
-    PoolChunk* next;               // 0x00
+template <u32 Stride> struct StridedPoolChunk {
+    StridedPoolChunk* next;               // 0x00
     u32 capacity;                   // 0x04
     PoolElement<Stride>* elements;   // 0x08
 };
 
-template <u32 Stride> struct ChunkPool {
-    PoolChunk<Stride>* chunks;       // 0x00
+template <u32 Stride> struct StridedChunkPool {
+    StridedPoolChunk<Stride>* chunks;       // 0x00
     u32 unk04;                       // 0x04
     PoolElement<Stride>* next;       // 0x08
     PoolElement<Stride>* end;        // 0x0c

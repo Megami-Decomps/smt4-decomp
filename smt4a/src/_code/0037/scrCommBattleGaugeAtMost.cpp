@@ -3,21 +3,21 @@
 
 extern "C" {
 
-typedef struct Gauge {
+typedef struct BattleGauge {
     /* 0x0 */ s32 current;
     /* 0x4 */ s32 maximum;
-} Gauge;
+} BattleGauge;
 
-typedef struct GaugeOwner {
+typedef struct BattleGaugeOwner {
     /* 0x000 */ u8 unk000[0x258];
-    /* 0x258 */ Gauge gauge;
-} GaugeOwner;
+    /* 0x258 */ BattleGauge gauge;
+} BattleGaugeOwner;
 
 s32 scrSetResult(s32 value);
-GaugeOwner *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
+BattleGaugeOwner *btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 s32 scrGetArg(s32 index);
 
-static s32 gaugePercent(Gauge *gauge)
+static s32 gaugePercent(BattleGauge *gauge)
 {
     s32 current = gauge->current;
     s32 maximum = gauge->maximum;
@@ -28,7 +28,7 @@ static s32 gaugePercent(Gauge *gauge)
 u32 scrCommBattleGaugeAtMost(void)
 {
     s32 limit = scrGetArg(0);
-    GaugeOwner *owner;
+    BattleGaugeOwner *owner;
 
     btlGetMainState();
     owner = btlFindFirstEntryMatchingCategoryAndRequiredMask();

@@ -7,15 +7,15 @@
 #include "nw/ut/LinkList.h"
 
 /* A playing sound as the player sees it. */
-typedef struct PlayerSound {
+typedef struct PlayerSoundA {
     /* 0x00 */ u8 unk00[0x50];
     /* 0x50 */ s32 priority;
     /* 0x54 */ u8 unk54[0x49];
     /* 0x9D */ u8 playerPriority;
     /* 0x9E */ u8 unk9E[0x62];
-    /* 0x100 */ ListNode activeNode;     /* in SoundPlayer::activeList */
-    /* 0x108 */ ListNode priorityNode;   /* in SoundPlayer::priorityList */
-} PlayerSound;
+    /* 0x100 */ ListNode activeNode;     /* in SoundPlayerA::activeList */
+    /* 0x108 */ ListNode priorityNode;   /* in SoundPlayerA::priorityList */
+} PlayerSoundA;
 
 /* An entry waiting to be started; `state` precedes its list node. */
 typedef struct PendingSound {
@@ -24,21 +24,21 @@ typedef struct PendingSound {
     /* 0x4 */ ListNode node;
 } PendingSound;
 
-typedef struct SoundPlayer {
+typedef struct SoundPlayerA {
     /* 0x00 */ LinkList activeList;
     /* 0x0C */ LinkList priorityList;
     /* 0x18 */ LinkList readyList;
     /* 0x24 */ LinkList pendingList;
-} SoundPlayer;
+} SoundPlayerA;
 
-static __inline PlayerSound *playerSoundFromActiveNode(ListNode *node)
+static __inline PlayerSoundA *playerSoundFromActiveNode(ListNode *node)
 {
-    return (PlayerSound *)((u8 *)node - offsetof(PlayerSound, activeNode));
+    return (PlayerSoundA *)((u8 *)node - offsetof(PlayerSoundA, activeNode));
 }
 
-static __inline PlayerSound *playerSoundFromPriorityNode(ListNode *node)
+static __inline PlayerSoundA *playerSoundFromPriorityNode(ListNode *node)
 {
-    return (PlayerSound *)((u8 *)node - offsetof(PlayerSound, priorityNode));
+    return (PlayerSoundA *)((u8 *)node - offsetof(PlayerSoundA, priorityNode));
 }
 
 static __inline PendingSound *pendingSoundFromNode(ListNode *node)

@@ -25,16 +25,16 @@ public:
     /* 0x44 */ u32 field44;
 };
 
-typedef struct AocSlot {
+typedef struct AocLoaderRecord {
     /* 0x0 */ u32 state; /* bit 0: requested, bit 1: record copied */
     /* 0x4 */ u32 id;
-} AocSlot;
+} AocLoaderRecord;
 
 typedef struct AocLoader {
     /* 0x0000 */ u8 unk0000[0x10B0];
     /* 0x10B0 */ AocRecord records[47];
     /* 0x1DE8 */ u8 unk1DE8[0x234];
-    /* 0x201C */ AocSlot slots[1];
+    /* 0x201C */ AocLoaderRecord slots[1];
 } AocLoader;
 
 typedef struct AocLoaderTask {

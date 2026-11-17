@@ -2,23 +2,23 @@
 
 extern "C" {
 
-typedef struct Gauge {
+typedef struct GaugeLimitValue {
     /* 0x00 */ u8 unk00[0x38];
     /* 0x38 */ f32 limit;
     /* 0x3C */ u8 unk3C[0xC];
     /* 0x48 */ f32 value;
-} Gauge;
+} GaugeLimitValue;
 
-static __inline bool gaugeExceeded(const Gauge *gauge)
+static __inline bool gaugeExceeded(const GaugeLimitValue *gauge)
 {
     return gauge != NULL && gauge->limit < gauge->value;
 }
 
 typedef struct GaugePair {
     /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ Gauge *first;
+    /* 0x14 */ GaugeLimitValue *first;
     /* 0x18 */ u8 unk18[8];
-    /* 0x20 */ Gauge *second;
+    /* 0x20 */ GaugeLimitValue *second;
     /* 0x24 */ u8 unk24[8];
     /* 0x2C */ s32 mode;
 } GaugePair;

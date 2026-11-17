@@ -4,11 +4,11 @@
 
 extern "C" {
 s32 inputTestEnabledRule(u32 id);
-s32 FUN_00228b04(MenuList *list, s32 mode);
-s32 resourceRunOperationIfUnblocked(MenuList *list);
-s32 objectApplyIfUnblocked(MenuList *list);
-void scrollOwnerSetValue(MenuList *list, s32 position);
-void flaggedEntrySetValueA(MenuList *list, s32 value);
+s32 FUN_00228b04(SdCardMenuList *list, s32 mode);
+s32 resourceRunOperationIfUnblocked(SdCardMenuList *list);
+s32 objectApplyIfUnblocked(SdCardMenuList *list);
+void scrollOwnerSetValue(SdCardMenuList *list, s32 position);
+void flaggedEntrySetValueA(SdCardMenuList *list, s32 value);
 void FUN_002f0384(s32 value);
 
 /* Updates the menu list's scroll position and refreshes the entry icons. */
@@ -46,7 +46,7 @@ void FUN_0041e7c0(SdCardMenu *menu)
         menu->busy = 0;
         for (s32 i = 0; i < menu->entryCount; i++) {
             bool scrolled = sdCardMenuEntryScrolled(menu, i);
-            MenuEntry *entry = &menu->entries[i];
+            SdCardMenuEntry *entry = &menu->entries[i];
             if (scrolled) {
                 entry->iconOn = 0x86;
                 entry->iconOff = 0x98;

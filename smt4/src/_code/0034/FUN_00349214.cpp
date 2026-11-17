@@ -24,18 +24,18 @@ typedef struct ListRow {
 } ListRow;
 
 /* The list work block: five rows, the selection count and the mark extent. */
-typedef struct ListWork {
+typedef struct IconListWork {
     /* 0x00 */ u8 rows[0x54];
     /* 0x54 */ s32 count;
     /* 0x58 */ f32 extentX;
     /* 0x5C */ f32 extentY;
-} ListWork;
+} IconListWork;
 
 
 
 /* Draws the five rows of the list: each shown row sets its tag, picks its icon id from its kind
  * and flags, and draws the icon plus the extra marks some states carry. */
-void FUN_00349214(ListWork *work)
+void FUN_00349214(IconListWork *work)
 {
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.7f);
 

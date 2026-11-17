@@ -1,7 +1,7 @@
 #include "common.h"
 #include "classes/Obj55c89c.h"
 
-struct WordPair {
+struct SignedWordPair {
     s32 first;
     s32 second;
 };
@@ -10,7 +10,7 @@ struct StartedTimer {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ u8 active;
     /* 0x11 */ u8 unk11[3];
-    /* 0x14 */ WordPair range;
+    /* 0x14 */ SignedWordPair range;
 };
 
 extern "C" {

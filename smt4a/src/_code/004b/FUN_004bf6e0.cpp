@@ -5,7 +5,7 @@
 
 namespace {
 /* A battle unit record (only the fields the damage scale reads). */
-struct BtlUnitView {
+struct BtlUnitBuffView {
     /* 0x000 */ u8 unk000[0x74];
     /* 0x074 */ s32 affinity[12];      /* indexed by attack kind (7..11 used): -3..3 resist/weak steps */
     /* 0x0a4 */ s32 buffA4;
@@ -32,7 +32,7 @@ extern "C" {
 extern const f32 DAT_0057a6a8[7];       /* damage scale by affinity step, attacker side */
 extern const f32 DAT_0057a6c4[7];       /* damage scale by affinity step, defender side */
 extern u32 g_btlScriptUnit;
-void btlEntryBuildSummary(BtlCommandView *command, void *state, BtlUnitView *unit);
+void btlEntryBuildSummary(BtlCommandView *command, void *state, BtlUnitBuffView *unit);
 
 /* The damage multiplier of attack kind `kind` (7..11) against `unit`: the affinity step scale combined with
    the attacker's and defender's buffs. */
@@ -40,20 +40,20 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
 {
     s32 unit = (s32)unitValue;
     f32 scale = 1.0f;
-    BtlUnitView *defender = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+    BtlUnitBuffView *defender = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
     s32 step = 0;
     if (defender != NULL) {
         step = defender->affinity[kind];
     }
     s32 inverse = -step;
-    BtlUnitView *target = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+    BtlUnitBuffView *target = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
     switch (kind) {
     case 7:
     case 8:
         scale = DAT_0057a6a8[step + 3];
         if ((target->statusFlags & 0x10) != 0) {
             scale *= 1.2f;
-            BtlUnitView *other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+            BtlUnitBuffView *other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
             if (other != NULL && other->buffBC > 0) {
                 scale *= 10.0f;
             }
@@ -61,7 +61,7 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
         break;
     case 9: {
         scale = DAT_0057a6c4[inverse + 3];
-        BtlUnitView *other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+        BtlUnitBuffView *other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
         s32 weak = 0;
         if (other != NULL) {
             weak = other->buffA4;
@@ -74,7 +74,7 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
         break;
     case 11: {
         scale = DAT_0057a6c4[step + 3];
-        BtlUnitView *other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+        BtlUnitBuffView *other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
         s32 strong = 0;
         if (other != NULL) {
             strong = other->buffA4;
@@ -85,19 +85,19 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
     }
     if ((*reinterpret_cast<u32 *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))) & 0x200) == 0) {
         if (kind == 8) {
-            BtlUnitView *other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+            BtlUnitBuffView *other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
             if (other != NULL && other->buffB0 > 0) {
                 scale *= 2.2f;
             }
-            other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+            other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
             if (other != NULL && other->buffA8 > 0) {
                 scale *= 1.25f;
             }
-            other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+            other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
             if (other != NULL && other->buffB8 > 0) {
                 scale *= 3.0f;
             }
-            other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+            other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
             if (other != NULL && other->buff11C > 0) {
                 BtlCommandView command;
                 btlEntryBuildSummary(&command, btlGetMainState(), target);
@@ -106,11 +106,11 @@ f32 FUN_004bf6e0(s32 kind, f32 unitValue)
                 }
             }
         } else if (kind == 7) {
-            BtlUnitView *other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+            BtlUnitBuffView *other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
             if (other != NULL && other->buffAC > 0) {
                 scale *= 2.2f;
             }
-            other = reinterpret_cast<BtlUnitView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
+            other = reinterpret_cast<BtlUnitBuffView *>(btlMainFindEntryByListedId(btlGetMainState(), unit));
             if (other != NULL && other->buffB4 > 0) {
                 scale *= 3.0f;
             }

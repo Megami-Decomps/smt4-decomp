@@ -1,11 +1,8 @@
 #include "shard/Shard0037.h"
+#include "shard/Shard003A.h"
 #include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
-
-typedef struct Entry10 {
-    /* 0x00 */ u8 data[0x10];
-} Entry10;
 
 extern void *dataTableGet(u32 index, u32 type);
 extern Entry10 *dataTableGetEntries(void *table);

@@ -12,12 +12,12 @@ typedef struct Handler {
     /* 0x0 */ HandlerVtbl *vtbl;
 } Handler;
 
-typedef struct Player {
+typedef struct SequenceSoundPlayerView {
     /* 0x00 */ u8 unk00[0x7C];
     /* 0x7C */ Handler *handler;
-} Player;
+} SequenceSoundPlayerView;
 
-void nw_snd_internal_driver_SequenceSoundPlayer_NoteOn(Player *player, u32 a, u32 b)
+void nw_snd_internal_driver_SequenceSoundPlayer_NoteOn(SequenceSoundPlayerView *player, u32 a, u32 b)
 {
     player->handler->vtbl->noteOn(player->handler, player, a, b);
 }

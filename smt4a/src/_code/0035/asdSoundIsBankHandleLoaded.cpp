@@ -3,8 +3,8 @@
 extern "C" {
 
 struct SoundBank { u8 unk00[0x20]; u32 handles[16]; };
-struct SoundState { u8 unk000[0x318]; SoundBank *bank; };
-extern SoundState g_asdSoundHandleState;
+struct SoundBankOwner { u8 unk000[0x318]; SoundBank *bank; };
+extern SoundBankOwner g_asdSoundHandleState;
 
 s32 asdSoundIsBankHandleLoaded(u32 index)
 {

@@ -7,16 +7,16 @@ s32 jobStop(u32 job, s32 flag);
 s32 jobIsValid(u32 job);
 s32 dialogIsActive(void);
 
-typedef struct Task {
+typedef struct DialogTask {
     /* 0x00 */ u8 unk00[0x44];
     /* 0x44 */ u32 job;
-} Task;
-Task *jobGetWork(void);
+} DialogTask;
+DialogTask *jobGetWork(void);
 
 /* Stops the task's job if it is valid, first running dialogClose(1) when dialogIsActive allows it. */
 void FUN_002dec74(void)
 {
-    Task *task;
+    DialogTask *task;
     s32 result;
 
     task = jobGetWork();

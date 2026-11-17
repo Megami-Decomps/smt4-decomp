@@ -1,12 +1,12 @@
 #include "common.h"
 
-struct Vertex {
+struct IndexedVertex28 {
     /* 0x00 */ s32 index;
     /* 0x04 */ u8 unk04[0x18];
 };
 
 struct VertexBuffer {
-    /* 0x00 */ Vertex *vertices;
+    /* 0x00 */ IndexedVertex28 *vertices;
 };
 
 struct VertexParams {
@@ -27,7 +27,7 @@ void FUN_003034c8(VertexOwner *owner)
 {
     VertexBuffer *buffer = owner->buffer;
     VertexParams *params = owner->params;
-    Vertex *vertices = buffer->vertices;
+    IndexedVertex28 *vertices = buffer->vertices;
     s32 count = params->count;
     for (s32 i = 0; i < count; i++) {
         vertices[i].index = -1;

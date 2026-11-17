@@ -6,15 +6,15 @@ extern "C" {
 void asdMemFree(void *memory);
 s32 jobStop(u32 job, s32 flag);
 
-typedef struct Task {
+typedef struct WindowTask {
     /* 0x00 */ u32 job;
-} Task;
-extern Task *g_sWin;
+} WindowTask;
+extern WindowTask *g_sWin;
 
 /* Frees texture entry 0x34, stops the task's job, frees the task and clears the global. */
 void taskWindowRelease(void)
 {
-    Task *task;
+    WindowTask *task;
 
     task = g_sWin;
     if (g_sWin != NULL) {

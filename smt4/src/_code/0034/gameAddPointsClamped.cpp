@@ -2,17 +2,17 @@
 
 extern "C" {
 
-typedef struct QuestCenterBlock {
+typedef struct QuestCenterPointsBlock {
     /* 0x00 */ u8 unk00[0x16];
     /* 0x16 */ u16 points;
-} QuestCenterBlock;
+} QuestCenterPointsBlock;
 
-extern QuestCenterBlock *gameGetQuestCenterBlock(void);
+extern QuestCenterPointsBlock *gameGetQuestCenterBlock(void);
 
 /* Adds `amount` to the quest center's points, capped at 0xFFFF. */
 void gameAddPointsClamped(int amount)
 {
-    QuestCenterBlock *block = gameGetQuestCenterBlock();
+    QuestCenterPointsBlock *block = gameGetQuestCenterBlock();
 
     amount = block->points + amount;
     if (amount >= 0x10000) {

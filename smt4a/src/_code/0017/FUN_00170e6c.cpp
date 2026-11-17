@@ -2,11 +2,11 @@
 
 extern "C" {
 
-typedef struct Global5891b0 {
+typedef struct SoundGlobalActive {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ s8 active;
-} Global5891b0;
-extern Global5891b0 DAT_005891b0;
+} SoundGlobalActive;
+extern SoundGlobalActive DAT_005891b0;
 
 void FUN_0016e758(void);
 void FUN_00189938(void);

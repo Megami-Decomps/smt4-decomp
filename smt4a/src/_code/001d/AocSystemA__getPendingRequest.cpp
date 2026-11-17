@@ -3,9 +3,9 @@
 extern "C" {
 
 /* A 16-byte name buffer that starts at an odd offset. */
-typedef __packed struct NameBuffer {
+typedef __packed struct PendingRequestNameA {
     u32 words[4];
-} NameBuffer;
+} PendingRequestNameA;
 
 typedef struct Pair {
     u32 first;
@@ -20,11 +20,11 @@ typedef struct Node {
 typedef struct Request {
     /* 0x000 */ u8 unk000[0x330];
     /* 0x330 */ u8 pending;
-    /* 0x331 */ NameBuffer name;
+    /* 0x331 */ PendingRequestNameA name;
 } Request;
 
 extern Node *_ZN21WindowOperationResultC1Eh(u32 arg, s32 index);
-extern nn::Result fsUnmountByName(NameBuffer *name);
+extern nn::Result fsUnmountByName(PendingRequestNameA *name);
 extern Pair *_ZN18WindowStatusResultC1Ej(Pair *out, s32 code);
 
 /* Consumes the request's pending name: clears it and, when its lookup code has the high bit set, copies the resulting pair into the node. */

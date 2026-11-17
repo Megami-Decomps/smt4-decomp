@@ -1,14 +1,14 @@
 #include "common.h"
 
-struct GroupItem {
+struct GroupItemFlags {
     u8 unk00;
     u8 enabled; // 0x01
 };
 
 struct ItemPointerList {
-    GroupItem **begin; // 0x00
-    GroupItem **end; // 0x04
-    GroupItem **capacity; // 0x08
+    GroupItemFlags **begin; // 0x00
+    GroupItemFlags **end; // 0x04
+    GroupItemFlags **capacity; // 0x08
 };
 
 struct GroupItemTable {
@@ -18,7 +18,7 @@ struct GroupItemTable {
 
 /* A vector-style iterator over the pointer list. */
 struct ItemIterator {
-    GroupItem **current;
+    GroupItemFlags **current;
 };
 static __inline bool operator!=(const ItemIterator &a, const ItemIterator &b)
 {
