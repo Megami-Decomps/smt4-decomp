@@ -1,5 +1,5 @@
 #include "shard/W5_W5Match5_GameSaveViews.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 // These fields extend beyond the shared table prefix; keep its view local.
 struct DisplaySlotTable {
@@ -29,7 +29,7 @@ void slotNameDisplaySetEntry(SlotNameDisplay *display, s32 entryId)
     if (entryId == 0) {
         display->selectedId = 0;
         display->entryId = 536;
-        DevilRecordA *info = devilGetRecord(536);
+        NkmBaseRecordA *info = nkmBaseGetRecord(536);
         display->sortKey = info->level;
         memcpySrcFirst(info->name, display->name, 16);
         return;

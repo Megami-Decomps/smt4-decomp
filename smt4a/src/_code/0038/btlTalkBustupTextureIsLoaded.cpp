@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -12,7 +12,7 @@ s32 btlTalkBustupTextureIsLoaded(u32 id)
     if (bustup == NULL) {
         return 0;
     }
-    return asdTMTexTableNodeIsLoaded(16, devilGetRecord(id)->model) != 0;
+    return asdTMTexTableNodeIsLoaded(16, nkmBaseGetRecord(id)->model) != 0;
 }
 
 } /* extern "C" */

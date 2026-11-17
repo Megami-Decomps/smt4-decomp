@@ -18,7 +18,7 @@ void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)
     char formatted[128];
     const char *title = NULL;
     if (description) {
-        QuestRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecord *record = questDataGetRecord(id);
         if (record != NULL) {
             title = record->description;
         }
@@ -26,14 +26,14 @@ void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)
         FUN_002bd158(text, formatted);
         textEncodeFontSlot(0x28, formatted);
     } else {
-        QuestRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecord *record = questDataGetRecord(id);
         if (record != NULL) {
             title = record->title;
         }
         textEncodeFontSlot(0x28, title);
     }
     if (showRewards) {
-        QuestRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecord *record = questDataGetRecord(id);
         if (record != NULL) {
             for (s32 index = 0; index < 6; ++index) {
                 switch (record->requirements[index].kind) {

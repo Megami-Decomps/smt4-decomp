@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail loads the 64-bit flag masks with ldm (4-aligned) and tests the skill's usable bits without CSE (tst, then and/cmp); the unit table is indexed through a u32 stride (lsl #2). */
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "util/Random.h"
 
 extern "C" {
@@ -91,7 +91,7 @@ u32 FUN_004e6018(BtlUnitHandle *unit, BtlAiAction *action)
         source4CCopyHalves((u32)action->targets, skills);
         for (s32 i = 0; i < SKILL_SLOTS; i++) {
             if (skills[i] != 0) {
-                SkillRecord *record = (SkillRecord *)dataTable04FindById(skills[i]);
+                SkillRecord *record = (SkillRecord *)skillDataFindById(skills[i]);
 
                 if (record != NULL && (record->flags & SKILL_USABLE_MASK) != 0 &&
                     (record->flags & SKILL_USABLE_MASK) != SKILL_USABLE_NONE) {
@@ -109,7 +109,7 @@ u32 FUN_004e6018(BtlUnitHandle *unit, BtlAiAction *action)
             action->choice->mode = 2;
             action->choice->skillId = skills[pick];
             action->flags |= BTL_ACTION_AI_DONE;
-            if (((dataTable04FindById(skills[pick])->flags >> SKILL_ELEMENT_SHIFT) & 0xF) == SKILL_ELEMENT_ALLY) {
+            if (((skillDataFindById(skills[pick])->flags >> SKILL_ELEMENT_SHIFT) & 0xF) == SKILL_ELEMENT_ALLY) {
                 btlUnitSetParam(unit, 0xF, 0, 1);
             } else {
                 btlUnitSetParam(unit, 2, 0, 1);

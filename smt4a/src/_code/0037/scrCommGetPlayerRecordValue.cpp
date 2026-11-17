@@ -10,7 +10,7 @@ u32 scrCommGetPlayerRecordValue(void)
 {
     u32 id = gameGetPlayerData()->equipped.weapon;
     u8 value = 0;
-    EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+    EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
 
     if (record != NULL) {
         value = record->scriptValue;

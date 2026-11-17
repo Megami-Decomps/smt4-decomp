@@ -12,8 +12,8 @@ s32 FUN_00206d9c(const DevilPairSortEntry *left, const DevilPairSortEntry *right
     } else {
         result = left->count - result;
         if (result == 0) {
-            DevilRecord *leftDevil = devilGetRecord(left->id);
-            DevilRecord *rightDevil = devilGetRecord(right->id);
+            NkmBaseRecord *leftDevil = nkmBaseGetRecord(left->id);
+            NkmBaseRecord *rightDevil = nkmBaseGetRecord(right->id);
             result = leftDevil->race - rightDevil->race;
             if (result == 0) {
                 result = rightDevil->level - leftDevil->level;

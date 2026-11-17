@@ -10,7 +10,7 @@ extern "C" {
 int dataFindKindRecordWithAocOverrides(...);
 int effectDispatchSelector(...);
 int FUN_00167860(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int statDrawClampedDelta(...);
 int dataRecordGetKindValue(...);
 int playerSecondaryGetKindValue(void);
@@ -28,7 +28,7 @@ int asdTMTexTableEntryAt(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int fontMeasureLineAdvance(...);
 int FUN_00185e84(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -68,9 +68,9 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: FUN_00185e84. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned char *gameGetSlotRecord(void);
 extern int flagValueRead(int);
 extern int recordGetModeForId(int);
@@ -193,7 +193,7 @@ void FUN_003743a4(int param_1)
       temp_v3 = param_1 + temp_v18 * 0x40;
       if (*(char *)(temp_v3 + 0x4870) != '\0') {
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 0x4858);
-        dataTable00FindById();
+        nkmEnemyFindById();
         if ((*(unsigned short *)(temp_v5 + 2) & 0x8000) != 0) {
           if (*(char *)(param_1 + 0x4857) != '\0') {
             temp_v6 = asdTMTexTableEntryAt(0xd,0x1a0);
@@ -522,7 +522,7 @@ void FUN_003743a4(int param_1)
       }
       else {
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v17 + 0x62);
-        devilGetRecord();
+        nkmBaseGetRecord();
         if (*(char *)(temp_v5 + 0xc) != '\x01') {
           textFormatBuffer(temp_v19,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
         }

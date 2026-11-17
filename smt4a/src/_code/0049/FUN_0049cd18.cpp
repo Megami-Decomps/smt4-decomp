@@ -61,7 +61,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         switch (aocEntryGetKind(id)) {
         case 1:
         case 12: {
-            ConsumableRecordA *record = dataTable8FindRecord(id);
+            ConsumableRecordA *record = itemTableGetItemRecord(id);
             if (record == NULL)
                 price = PRICE_MISSING;
             else
@@ -75,7 +75,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         case 6:
         case 7:
         case 8: {
-            EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+            EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
             if (record == NULL)
                 price = PRICE_MISSING;
             else
@@ -102,7 +102,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         switch (aocEntryGetKind(id)) {
         case 1:
         case 12: {
-            ConsumableRecordA *record = dataTable8FindRecord(id);
+            ConsumableRecordA *record = itemTableGetItemRecord(id);
             price = record != NULL ? record->buyPrice : PRICE_MISSING;
             if (id == 0x7B2)
                 price = 1000000;
@@ -115,7 +115,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         case 6:
         case 7:
         case 8: {
-            EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+            EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
             price = record == NULL ? PRICE_MISSING : record->buyPrice;
             break;
         }

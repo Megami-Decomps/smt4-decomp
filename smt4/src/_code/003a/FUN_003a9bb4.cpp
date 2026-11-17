@@ -1,9 +1,9 @@
 /* NON_MATCHING: the table-slot and list-head pointers are now precomputed at entry as in retail; retail also keeps the loop counters and data-table pointers in stack slots (88-byte frame vs 56) and orders the nested-loop exits differently. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "game/GameState.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 
@@ -94,11 +94,11 @@ void FUN_003a9bb4(EntryListWork *work)
                     for (s32 j = 0; j < 6; j++) {
                         u16 id = item->ids[j];
 
-                        if (id == 0 || dataTable00FindById(id) == NULL) {
+                        if (id == 0 || nkmEnemyFindById(id) == NULL) {
                             continue;
                         }
-                        DevilRecord *devil = devilGetRecord(id);
-                        Table00Record *record = dataTable00FindById(id);
+                        NkmBaseRecord *devil = nkmBaseGetRecord(id);
+                        NkmEnemyRecord *record = nkmEnemyFindById(id);
 
                         if (devil != NULL && record != NULL
                             && (g_gameState.showAllEntries != 0 || ((record->flags & 1) != 0 && FUN_0029e9cc(devil->id) != 0))) {
@@ -106,7 +106,7 @@ void FUN_003a9bb4(EntryListWork *work)
                             u32 value = 0;
 
                             FUN_0022e17c(&listEntry, devil->id, 0);
-                            Table00Record *found = dataTable00FindById(devil->id);
+                            NkmEnemyRecord *found = nkmEnemyFindById(devil->id);
                             if (found != NULL) {
                                 value = found->money;
                             }

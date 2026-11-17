@@ -7,8 +7,8 @@ extern "C" {
 
 s32 uiCompareBonusAndEntryKey(const SortItem *left, const SortItem *right)
 {
-    EquipmentRecordA *leftData = dataTable08Sub2GetRecord(left->id);
-    EquipmentRecordA *rightData = dataTable08Sub2GetRecord(right->id);
+    EquipmentRecordA *leftData = itemTableGetEquipmentRecord(left->id);
+    EquipmentRecordA *rightData = itemTableGetEquipmentRecord(right->id);
     s16 leftBonus[8];
     s16 rightBonus[8];
     equipmentGetCappedUpgradeBonuses(left->id, leftBonus);

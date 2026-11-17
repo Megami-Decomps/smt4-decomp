@@ -9,7 +9,7 @@ extern s32 playerAlignmentClass(void);
 u32 unitMatchesAlignment(s32 unitId)
 {
     s32 alignment = playerAlignmentClass();
-    EquipmentRecordA *unit = dataTable08Sub2GetRecord(unitId);
+    EquipmentRecordA *unit = itemTableGetEquipmentRecord(unitId);
     u8 flags;
 
     if (unit == NULL) {

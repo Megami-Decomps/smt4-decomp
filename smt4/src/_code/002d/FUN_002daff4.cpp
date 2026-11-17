@@ -7,7 +7,7 @@
 extern "C" {
 
 int messageKindForward(...);
-int dataTable08Sub2GetRecord(void);
+int itemTableGetEquipmentRecord(void);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int itemDrawCategoryBadge(...);
@@ -37,7 +37,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_0028f694. */
 extern int recordAcceptsStickDirection(int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -83,7 +83,7 @@ void FUN_002daff4(int param_1,int param_2,int param_3,int param_4,int param_5)
     return;
   }
   temp_v2 = temp_v13;
-  dataTable08Sub2GetRecord();
+  itemTableGetEquipmentRecord();
   temp_v10 = 0;
   temp_v3 = asdTMTexTableEntryAt(0x1d,param_2 + 0x42e);
   FUN_0028f694(*(short *)(temp_v3 + 8) + param_4,*(short *)(temp_v3 + 10) + param_5,
@@ -124,7 +124,7 @@ void FUN_002daff4(int param_1,int param_2,int param_3,int param_4,int param_5)
 LAB_002db240:
       temp_v10 = (unsigned int)temp_v1;
       if (temp_v10 != 0) {
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         temp_v10 = *(unsigned int *)(temp_v10 + 0x54) & 0x3ff;
       }
       else {
@@ -202,7 +202,7 @@ LAB_002db240:
       temp_v10 = 0;
     }
     else {
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v10 = *(unsigned int *)(temp_v10 + 0x54) & 0x3ff;
     }
     drawSetColorFromRGBA8(0xffffffff);
@@ -274,9 +274,9 @@ LAB_002db240:
     }
     else {
       temp_v8 = temp_v10;
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v6 = (int)*(short *)(temp_v8 + 0x66);
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v4 = (int)*(short *)(temp_v10 + 0x68);
     }
     drawSetColorFromRGBA8(0xffffffff);

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -27,7 +27,7 @@ u32 FUN_0039d804(void)
     for (i = 0; i < 8; i++) {
         u32 id = data->skillIds[i];
 
-        if (id != 0 && dataTable04FindById(id) != NULL) {
+        if (id != 0 && skillDataFindById(id) != NULL) {
             count++;
         }
     }

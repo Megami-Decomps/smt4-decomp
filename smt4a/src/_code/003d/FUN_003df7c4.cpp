@@ -56,7 +56,7 @@ void FUN_003df7c4(PlayerStats *stats)
         u32 id = stats->equipment[slot];
         if (id == 0)
             continue;
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
         if (record == NULL)
             continue;
         for (s32 i = 0; i < 5; i++)
@@ -92,7 +92,7 @@ void FUN_003df7c4(PlayerStats *stats)
     extra.vector[0] = stats->extraVector[0];
     extra.vector[1] = stats->extraVector[1];
     extra.vector[2] = stats->extraVector[2];
-    EquipmentRecordA *last = dataTable08Sub2GetRecord(stats->equipment[6]);
+    EquipmentRecordA *last = itemTableGetEquipmentRecord(stats->equipment[6]);
     extra.special = last != NULL ? last->modifierId : 0;
     FUN_0034cb50(stats->total, &extra, 9);
     if ((s16)stats->hp > (s16)stats->total[0])

@@ -1,6 +1,6 @@
 /* NON_MATCHING: packed-selection loads and three member snapshots use different registers and stack placement. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <stddef.h>
 #include "gamedata/SkillFlags.h"
@@ -139,7 +139,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         for (int i = 0; i < 24; ++i)
             candidates[i] = state->inheritedSkills[i];
 
-        DevilRecord *original = devilGetRecord(originalResultId);
+        NkmBaseRecord *original = nkmBaseGetRecord(originalResultId);
         for (int i = 0; i < 8; ++i) {
             const u16 skill = original->skills[i];
             if (skill != 0 &&
@@ -149,7 +149,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
             }
         }
 
-        if (devilGetRecord(selection->resultId)->race == 51) {
+        if (nkmBaseGetRecord(selection->resultId)->race == 51) {
             FUN_002b7bca(candidates, 32, 2, dataTable06ComparePriority);
             const int unlocked = flagCountUnlockedSlots(member);
             for (int i = 0; i < 32; ++i) {

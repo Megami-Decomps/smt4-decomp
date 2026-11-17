@@ -20,17 +20,17 @@ extern "C" s32 contentGetUpgradedKindValue(u32 id)
     case 4:
     case 5:
     case 6: {
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
         ContentUpgradeBonuses bonuses = {0};
         equipmentGetCappedUpgradeBonuses(id, &bonuses);
         value = record->hpBonus + bonuses.values[0];
         break;
     }
     case 7:
-        value = dataTable08Sub2GetRecord(id)->mpBonus;
+        value = itemTableGetEquipmentRecord(id)->mpBonus;
         break;
     default:
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
         if (record != NULL)
             value = recordGetPercentageScaledBase(record);
         break;

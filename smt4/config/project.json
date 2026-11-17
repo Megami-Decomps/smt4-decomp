@@ -55072,12 +55072,12 @@
     },
     {
       "address": "0x2ae164",
-      "function": "dataTable40FindById",
+      "function": "skillDataFindById",
       "module": "_code",
-      "object": "build/obj/_code/002a/dataTable40FindById.o",
+      "object": "build/obj/_code/002a/skillDataFindById.o",
       "size": 108,
-      "source": "src/_code/002a/dataTable40FindById.cpp",
-      "target": "orig/target/_code/002a/dataTable40FindById.o",
+      "source": "src/_code/002a/skillDataFindById.cpp",
+      "target": "orig/target/_code/002a/skillDataFindById.o",
       "thumb": false
     },
     {
@@ -55584,12 +55584,12 @@
     },
     {
       "address": "0x2b06c4",
-      "function": "dataTable00FindById",
+      "function": "nkmEnemyFindById",
       "module": "_code",
-      "object": "build/obj/_code/002b/dataTable00FindById.o",
+      "object": "build/obj/_code/002b/nkmEnemyFindById.o",
       "size": 132,
-      "source": "src/_code/002b/dataTable00FindById.cpp",
-      "target": "orig/target/_code/002b/dataTable00FindById.o",
+      "source": "src/_code/002b/nkmEnemyFindById.cpp",
+      "target": "orig/target/_code/002b/nkmEnemyFindById.o",
       "thumb": false
     },
     {
@@ -55987,22 +55987,22 @@
     },
     {
       "address": "0x2b45e8",
-      "function": "dataTable08Sub2GetRecord",
+      "function": "itemTableGetEquipmentRecord",
       "module": "_code",
-      "object": "build/obj/_code/002b/dataTable08Sub2GetRecord.o",
+      "object": "build/obj/_code/002b/itemTableGetEquipmentRecord.o",
       "size": 128,
-      "source": "src/_code/002b/dataTable08Sub2GetRecord.cpp",
-      "target": "orig/target/_code/002b/dataTable08Sub2GetRecord.o",
+      "source": "src/_code/002b/itemTableGetEquipmentRecord.cpp",
+      "target": "orig/target/_code/002b/itemTableGetEquipmentRecord.o",
       "thumb": false
     },
     {
       "address": "0x2b4670",
-      "function": "dataTable08Sub1GetRecord",
+      "function": "itemTableGetItemRecord",
       "module": "_code",
-      "object": "build/obj/_code/002b/dataTable08Sub1GetRecord.o",
+      "object": "build/obj/_code/002b/itemTableGetItemRecord.o",
       "size": 128,
-      "source": "src/_code/002b/dataTable08Sub1GetRecord.cpp",
-      "target": "orig/target/_code/002b/dataTable08Sub1GetRecord.o",
+      "source": "src/_code/002b/itemTableGetItemRecord.cpp",
+      "target": "orig/target/_code/002b/itemTableGetItemRecord.o",
       "thumb": false
     },
     {
@@ -56527,12 +56527,12 @@
     },
     {
       "address": "0x2b63c0",
-      "function": "dataTable1bOr1cGetRecord",
+      "function": "questDataGetRecord",
       "module": "_code",
-      "object": "build/obj/_code/002b/dataTable1bOr1cGetRecord.o",
+      "object": "build/obj/_code/002b/questDataGetRecord.o",
       "size": 180,
-      "source": "src/_code/002b/dataTable1bOr1cGetRecord.cpp",
-      "target": "orig/target/_code/002b/dataTable1bOr1cGetRecord.o",
+      "source": "src/_code/002b/questDataGetRecord.cpp",
+      "target": "orig/target/_code/002b/questDataGetRecord.o",
       "thumb": false
     },
     {
@@ -57358,12 +57358,12 @@
     },
     {
       "address": "0x2b9024",
-      "function": "devilGetRecord",
+      "function": "nkmBaseGetRecord",
       "module": "_code",
-      "object": "build/obj/_code/002b/devilGetRecord.o",
+      "object": "build/obj/_code/002b/nkmBaseGetRecord.o",
       "size": 132,
-      "source": "src/_code/002b/devilGetRecord.cpp",
-      "target": "orig/target/_code/002b/devilGetRecord.o",
+      "source": "src/_code/002b/nkmBaseGetRecord.cpp",
+      "target": "orig/target/_code/002b/nkmBaseGetRecord.o",
       "thumb": false
     },
     {

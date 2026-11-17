@@ -11,7 +11,7 @@ int uiQuestSortListByEntryKind(...);
 
 int padQueryLogicalKey(...);
 int uiSpriteSelectAnim(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int FUN_0021a4b0(void);
 int uiFadeRequestHalf(void);
 int resourceRunOperationIfUnblocked(...);
@@ -60,7 +60,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: FUN_0021a4b0. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: asdMemFreeSlot. */
@@ -328,7 +328,7 @@ unsigned int FUN_00215cb8(void)
     temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
       sysPlayVoice(0x1000308);
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       if (*(char *)(temp_v4 + 6) == '\t') {
         temp_v7 = 10;
         if (*(short *)(temp_v4 + 0xd8) != 0) {
@@ -364,7 +364,7 @@ unsigned int FUN_00215cb8(void)
       break;
     }
     temp_v9 = rosterGetLeaderId();
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = gameBlockByte27E98Is1To3(), temp_v9 == 0)) {
       temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
@@ -399,7 +399,7 @@ unsigned int FUN_00215cb8(void)
       break;
     }
     temp_v9 = rosterGetLeaderId();
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = gameBlockByte27E98Is1To3(), temp_v9 == 0)) {
       temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
@@ -469,7 +469,7 @@ unsigned int FUN_00215cb8(void)
     temp_v9 = resourceRunOperationIfUnblocked();
     temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     sysPlaySe(0xe4);
     temp_v9 = rosterHasLeader();
     if (temp_v9 != 0) {
@@ -510,7 +510,7 @@ unsigned int FUN_00215cb8(void)
     temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
     temp_v4 = temp_v8;
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if (*(char *)(temp_v4 + 6) == '\v') {
       flagValueAdd(*(unsigned short *)(temp_v4 + 0xf2),*(unsigned int *)(temp_v4 + 0xf4));
       if (*(short *)(temp_v4 + 0xf2) == 0x39b) {
@@ -774,7 +774,7 @@ joined_r0x002167bc:
       temp_v9 = resourceRunOperationIfUnblocked();
       temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x9ac);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       if (*(char *)(temp_v4 + 6) == '\t') {
         temp_v7 = 10;
         if (*(short *)(temp_v4 + 0xd8) != 0) {

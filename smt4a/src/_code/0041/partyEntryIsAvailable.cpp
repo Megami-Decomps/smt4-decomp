@@ -7,7 +7,7 @@ u32 libc_strlen(const char* text);
 
 u32 partyEntryIsAvailable(u32 index)
 {
-    const QuestRecordA* record = dataTable1bOr1cGetRecord(index);
+    const QuestRecordA* record = questDataGetRecord(index);
     u32 length = libc_strlen(record->token);
     if (length <= 1 && record->token[0] == '0') {
         return 0;

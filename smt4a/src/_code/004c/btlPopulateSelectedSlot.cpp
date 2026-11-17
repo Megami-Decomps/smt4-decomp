@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail pads the register push with ip (frame 1056) where the build extends the frame by 4, and loads the final transition flags after the state store (built hoists it above the compare); all other instructions agree. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct BattleSlotCore { u8 data[0x2ac]; };
 struct BattleSlotScratch {
@@ -76,7 +76,7 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
             FUN_004a9c24(g_btlUiBlock, unit->unitIndex, party->selected[slot], immediate);
         }
     } else {
-        void *definition = dataTable00FindById((u16)battle->slots[slot].id);
+        void *definition = nkmEnemyFindById((u16)battle->slots[slot].id);
         if (definition == NULL)
             return;
         FUN_003eb314(battle, &scratch.core, definition);

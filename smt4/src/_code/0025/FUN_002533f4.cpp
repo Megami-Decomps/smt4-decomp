@@ -1,10 +1,10 @@
 /* NON_MATCHING: return-slot/count spills and template lookup register allocation differ from retail. */
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "util/Random.h"
 #include "addon/AocSystem.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct EncounterTemplateChoice { u16 templateId; u16 weight; };
 struct EncounterTemplateChoices { EncounterTemplateChoice entries[15]; };
@@ -49,7 +49,7 @@ u16 FUN_002533f4(u32 category, u32 index, s32 filterArrangements)
                 for (s32 unitIndex = 0; unitIndex < 6; ++unitIndex) {
                     u16 id = units->units[unitIndex];
                     if (id) {
-                        Table00Record* record = dataTable00FindById(id);
+                        NkmEnemyRecord* record = nkmEnemyFindById(id);
                         if (record && (record->arrangementFirst || record->arrangementSecond)) {
                             accepted = false;
                             break;

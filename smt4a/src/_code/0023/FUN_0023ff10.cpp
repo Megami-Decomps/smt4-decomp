@@ -123,7 +123,7 @@ void FUN_0023ff10(void)
     pageOffset = resourceRunOperationIfUnblocked(list);
     row = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(list));
     id = ui->ids[pageOffset + row];
-    record = dataTable1bOr1cGetRecord(id);
+    record = questDataGetRecord(id);
     if (flags->locked != 0) {
         buttonHelpSelectSlot(5, 1, 0x32, 1);
         buttonHelpSelectSlot(2, 0x12, 0, 1);

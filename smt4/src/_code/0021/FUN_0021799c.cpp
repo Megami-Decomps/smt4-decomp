@@ -14,7 +14,7 @@ int statusPanelSetOpen(...);
 int FUN_0029d8f4(unsigned char [8], int, int);
 int FUN_0029da34(...);
 int FUN_002a0cc8(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int buttonHelpSetPreset(...);
 int eventQueueAddUniqueIfValid(int);
 int timerStart(...);
@@ -53,7 +53,7 @@ extern int FUN_0029e02c(void);
 extern int FUN_0029e0f8(void);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int ifTouchGetSelectionMode(void);
@@ -129,7 +129,7 @@ LAB_002179dc:
         do {
           temp_v1 = param_1 + temp_v6 * 0x2c;
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x5760);
-          dataTable00FindById();
+          nkmEnemyFindById();
           if ((*(unsigned char *)(temp_v4 + 3) & 1) != 0) {
             if (*(char *)(param_1 + 0x575f) != '\0') {
               temp_v0 = ifTouchRegionAddRequested(0x15,0x1a0);
@@ -190,12 +190,12 @@ joined_r0x00217be4:
             FUN_0026a858(*(unsigned short *)(temp_v1 + 0x5760),temp_v9);
             puVar7 = (unsigned short *)FUN_0029acb0();
             temp_v4 = (unsigned int)*puVar7;
-            dataTable00FindById();
+            nkmEnemyFindById();
             temp_v21 = temp_v4;
             psVar6 = (short *)FUN_0029acb0();
             if ((*psVar6 < 1) || ((temp_v21 == 0 || ((*(unsigned short *)(temp_v21 + 0x16) & 1) != 0)))) {
               temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x5760);
-              dataTable00FindById();
+              nkmEnemyFindById();
               if ((temp_v4 != 0) && ((*(unsigned short *)(temp_v4 + 0x16) & 1) == 0)) {
                 temp_v13 = 0;
                 temp_v14 = 0;
@@ -334,7 +334,7 @@ LAB_00217e94:
         FUN_0026a858((unsigned int)*(unsigned short *)(param_1 + 0x5760),temp_v9);
         puVar7 = (unsigned short *)FUN_0029acb0();
         temp_v4 = (unsigned int)*puVar7;
-        dataTable00FindById();
+        nkmEnemyFindById();
         if ((temp_v4 != 0) && ((*(unsigned short *)(temp_v4 + 0x16) & 1) == 0)) {
           temp_v13 = 0;
           temp_v14 = 0;

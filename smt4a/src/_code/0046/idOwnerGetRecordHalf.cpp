@@ -10,7 +10,7 @@ typedef struct IdOwnerA0C {
 
 u16 idOwnerGetRecordHalf(IdOwnerA0C *obj)
 {
-    QuestRecordA *record = dataTable1bOr1cGetRecord(obj->unkA0C & 0xFFFF);
+    QuestRecordA *record = questDataGetRecord(obj->unkA0C & 0xFFFF);
 
     return record->id;
 }

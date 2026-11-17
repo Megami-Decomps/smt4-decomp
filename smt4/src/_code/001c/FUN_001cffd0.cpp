@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rebuild of the skill candidate pick; retail keeps the best score in s17 and the running score in s16, with the 1.0 and 0.01 constants in s18/s19 loaded under the first loop test, which armcc here schedules differently. */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 /* A skill-learning candidate pool: pick the best candidate and move it to the chosen list. */
 struct SkillPicker {
@@ -41,7 +41,7 @@ u32 FUN_001cffd0(SkillPicker *picker)
         s32 kind = idMapLookup(skill);
         if (picker->wantedKind == kind)
             score += 1.0f;
-        void *skillData = dataTable40FindById(skill);
+        void *skillData = skillDataFindById(skill);
         if (skillData != NULL) {
             for (s32 j = 0; j < picker->passiveCount; j++) {
                 if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), skillData)) {

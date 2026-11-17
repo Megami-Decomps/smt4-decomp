@@ -1,7 +1,7 @@
 /* NON_MATCHING: battle unit action timing setup; float chain and the shared hit-type branch (retail jumps back into the first case) are written plainly and not compared with retail */
 #include "common.h"
 #include "code/Code0027.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "battle/BtlGlobals.h"
 
 /* One unit action's camera/timing record. */
@@ -70,7 +70,7 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
                     if (slot >= 0) {
                         slot = btlFindNthActiveSpecialEntry(unit, 1);
                         u16 recordId = *(u16 *)(*(u8 **)(unit + 0x1FC0) + slot * 0x288 + 0xCE);
-                        Table00Record *record = dataTable00FindById(recordId);
+                        NkmEnemyRecord *record = nkmEnemyFindById(recordId);
                         if (record->arrangementFirst == 1 || record->arrangementFirst == 3)
                             near = true;
                     }

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -9,7 +9,7 @@ s32 scrSetResult(s32 value);
 /* Script command: returns the alternate talk tone of the devil record in argument zero. */
 s32 FUN_00318878(void)
 {
-    scrSetResult(devilGetRecord((u16)scrGetArg(0))->talkAlternate);
+    scrSetResult(nkmBaseGetRecord((u16)scrGetArg(0))->talkAlternate);
     return 1;
 }
 

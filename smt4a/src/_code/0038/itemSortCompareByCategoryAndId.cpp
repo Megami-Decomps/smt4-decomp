@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -38,7 +38,7 @@ int itemSortCompareByCategoryAndId(SortItem *a, SortItem *b)
     } else {
         rankA = itemGetCategorySortOrder(a->id);
         subA = dataTable04GetCategoryOrder(a->id);
-        orderA = dataTable04FindById(a->id)->listing.sortKey;
+        orderA = skillDataFindById(a->id)->listing.sortKey;
     }
     if (idIsAbove400(b->id) != 0) {
         rankB = 99;
@@ -47,7 +47,7 @@ int itemSortCompareByCategoryAndId(SortItem *a, SortItem *b)
     } else {
         rankB = itemGetCategorySortOrder(b->id);
         subB = dataTable04GetCategoryOrder(b->id);
-        orderB = dataTable04FindById(b->id)->listing.sortKey;
+        orderB = skillDataFindById(b->id)->listing.sortKey;
     }
     diff = rankB - rankA;
     if (diff == 0) {

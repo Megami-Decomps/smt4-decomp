@@ -19,7 +19,7 @@ u32 FUN_0040b11c(u32 unused, s32 kind, s32 area, s32 point, u32 current)
         const PlayerLocations *player = static_cast<PlayerLocations *>(gameGetPlayerData());
         current = kind == 1 ? player->first : player->second;
     }
-    const EquipmentRecordA *source = dataTable08Sub2GetRecord(current);
+    const EquipmentRecordA *source = itemTableGetEquipmentRecord(current);
     s32 count = 1;
     const DestinationConnection *connection = NULL;
     const DestinationConnection *records = &DAT_00588358.single;

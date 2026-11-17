@@ -8,7 +8,7 @@ u32 namedVariantTableGetEntries(u32, const char *, s32);
 // Resolve a table entry by its name, excluding the string used for no entry.
 u32 FUN_0037eecc(u32 selection, u16 id, s32 alternate)
 {
-    ConsumableRecordA *entry = dataTable8FindRecord(id);
+    ConsumableRecordA *entry = itemTableGetItemRecord(id);
     if (entry == NULL) {
         return 0;
     }

@@ -9,7 +9,7 @@ void FUN_00250d84(s32 id, s32 flag);
 /* Applies the table-08 record `id` to `owner`; returns 1 when the record is missing, otherwise the apply result (and queues FUN_00250d84 for a plain no-op apply). */
 s32 FUN_0026c710(s32 owner, s32 id, s32 flag)
 {
-    ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+    ConsumableRecord *record = itemTableGetItemRecord(id);
     s32 result;
 
     if (record == NULL) {

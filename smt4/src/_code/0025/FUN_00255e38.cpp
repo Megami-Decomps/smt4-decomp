@@ -1,7 +1,7 @@
 /* NON_MATCHING: close: retail pairs the state/zero stores into strd and allocates record/index to r7/r6 (built r5/r7); all fields and control flow match */
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 /* A unit record as stored in the party tables (0x18C bytes; only the fields this code reads are named). */
 struct UnitRecordIn {
@@ -110,7 +110,7 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
         __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         slot->state = 0x11;
         slot->unk004 = 0;
-        slot->tableRecord = dataTable00FindById(*(u16 *)((u8 *)slot + 0xCE));
+        slot->tableRecord = nkmEnemyFindById(*(u16 *)((u8 *)slot + 0xCE));
         if (*((u8 *)slot + 0x1A0) == 1) {
             slot->state |= 0x100;
         }

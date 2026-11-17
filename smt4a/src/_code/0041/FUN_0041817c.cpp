@@ -42,7 +42,7 @@ static __inline void goalAddProgress(GoalSlot *counters, u16 goalId, u16 target,
     if (goalId == 0) {
         return;
     }
-    QuestRecordA *goal = dataTable1bOr1cGetRecord(goalId);
+    QuestRecordA *goal = questDataGetRecord(goalId);
     if (goal->kind != 1) {
         return;
     }

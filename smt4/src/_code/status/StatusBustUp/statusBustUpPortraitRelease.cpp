@@ -1,8 +1,8 @@
 /* NON_MATCHING: only the reference decrements swap r0/r1 (retail keeps the counter array in r1 and the count in r0); constants and layout now match. */
 #include "status/StatusBustUp.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
@@ -19,11 +19,11 @@ void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)
         if (portrait < 0) {
             portrait = 0;
         } else {
-            DevilRecord *devil = reinterpret_cast<DevilRecord *>(devilGetRecord((u16)portrait));
+            NkmBaseRecord *devil = reinterpret_cast<NkmBaseRecord *>(nkmBaseGetRecord((u16)portrait));
             if (devil == NULL) {
                 return;
             }
-            Table00Record *record = dataTable00FindById((u16)portrait);
+            NkmEnemyRecord *record = nkmEnemyFindById((u16)portrait);
             if (!(record->levelFlags & 1)) {
                 portrait = devil->model + 1;
                 if (portrait >= 614) {

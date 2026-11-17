@@ -13,7 +13,7 @@ u32 FUN_0047fc38(u32 itemId)
     const ItemCategoryEntry *categoryInfo = itemCategoryFindByItemId(itemId);
     u8 category = categoryInfo ? categoryInfo->type : 0;
     EquipmentUpgradeState *upgrades = FUN_00239200();
-    const EquipmentRecordA *bonus = dataTable08Sub2GetRecord(itemId);
+    const EquipmentRecordA *bonus = itemTableGetEquipmentRecord(itemId);
     EquipmentUpgradeModifiers modifiers = {};
     s32 power = 0;
     if (bonus) {

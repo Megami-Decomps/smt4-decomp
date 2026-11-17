@@ -4,7 +4,7 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
 
 /* The battle state words this step reads beyond the shared prefix. */
@@ -104,7 +104,7 @@ u32 FUN_003cbf40(BtlMainState **block, CommandState *work)
     bool done = false;
     s32 value = work->selection->value;
     s32 kind = work->selection->kind;
-    const CostedSkill *skill = reinterpret_cast<const CostedSkill *>(dataTable40FindById(value));
+    const CostedSkill *skill = reinterpret_cast<const CostedSkill *>(skillDataFindById(value));
     CommandInfo info;
     btlEntryBuildSummary(&info, *block, work->entry);
     u32 scope = info.scope;

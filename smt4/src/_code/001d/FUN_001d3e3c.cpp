@@ -106,7 +106,7 @@ int FUN_00281784(void);
 int gameJumpRequestClear(void);
 int FUN_0028a420(...);
 int helpResourcesRelease(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 void animOwnerSetScale(unsigned int, float);
 int FUN_003966a4(...);
 int FUN_00396a98(...);
@@ -500,7 +500,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 struct ModelBoneAttachmentRoot;
 extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 /* Supplied declaration required: slotOwnerDestroyAllSlots. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int infoWindowIsActive(void);
 extern int FUN_002b8694(void);
 /* Supplied declaration required: buttonHelpSetPresetDefault. */
@@ -1514,7 +1514,7 @@ joined_r0x001d535c:
     }
     if (pcVar9[1] != '\0') {
       temp_v8 = (unsigned int)*(unsigned short *)(pcVar9 + 8);
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       DAT_0049fa82 = *(short *)(temp_v8 + 2);
       libc_strcpy(&DAT_0049fa84,temp_v8 + 0x138);
       DAT_0049fa80 = 1;
@@ -2096,7 +2096,7 @@ LAB_001d6bd0:
       temp_v6 = FUN_0027d968();
       if (temp_v6 != -1) {
         temp_v8 = FUN_0027d968() & 0xffff;
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         DAT_0049f970 = (unsigned int)*(unsigned short *)(temp_v8 + 2);
         libc_strcpy(&DAT_0049f978,temp_v8 + 0x128);
         puVar7[0x26f] = DAT_0049f970;
@@ -3318,7 +3318,7 @@ joined_r0x001d8c24:
     if (*(char *)((int)puVar7 + 9) != '\0') {
       temp_v6 = rosterGetLeaderId();
       if ((temp_v6 != 0) && (temp_v4 = table1bOr1cGetRecordValue(), temp_v4 == 6)) {
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         FUN_0026f960(*(unsigned short *)(temp_v6 + 0x148));
         return 0xffffffff;
       }

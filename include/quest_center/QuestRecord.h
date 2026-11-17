@@ -14,8 +14,8 @@ struct QuestReward {
     /* 0x08 */ u32 gold;
 };
 
-/* IV's quest record (data tables 0x1B and 0x1C, 0x1B4 bytes, sorted by id), as
-   dataTable1bOr1cGetRecord returns it; add-on content supplies further records of the same layout.
+/* IV's quest record: a row of event/quest/QuestData.tbb (the game's data tables 0x1B and 0x1C, 0x1B4 bytes, sorted by id), as
+   questDataGetRecord returns it; add-on content supplies further records of the same layout.
    Apocalypse's differs: QuestRecordA in quest_center/QuestRecordA.h. */
 struct QuestRecord {
     /* 0x000 */ u16 id;
@@ -68,7 +68,7 @@ typedef char QuestRecordFieldsCheck[
 extern "C" {
 #endif
 /* The quest record for an id (add-on records first, then tables 0x1B and 0x1C); NULL when none. */
-QuestRecord *dataTable1bOr1cGetRecord(u32 id);
+QuestRecord *questDataGetRecord(u32 id);
 #ifdef __cplusplus
 }
 #endif

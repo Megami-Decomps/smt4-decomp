@@ -15,8 +15,8 @@ int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int btlEntryBuildSummary(...);
 int passiveSkillLookupRecord(void);
 int FUN_00283ebc(...);
-int dataTable40FindById(void);
-int dataTable08Sub1GetRecord(void);
+int skillDataFindById(void);
+int itemTableGetItemRecord(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -78,8 +78,8 @@ extern unsigned int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int playerGetSkillRank(unsigned int);
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: skillDataFindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: memClear. */
 extern unsigned int FUN_003bf554(unsigned int);
 
@@ -144,15 +144,15 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   temp_v40 = param_4;
   temp_v32 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v1 = temp_v39;
-  dataTable40FindById();
+  skillDataFindById();
   temp_v37 = temp_v1;
-  dataTable08Sub1GetRecord();
+  itemTableGetItemRecord();
   temp_v1 = 0;
   if (param_3 != 0) {
     temp_v1 = (unsigned int)*(unsigned short *)(param_3 + 0x62);
   }
   if (param_3 != 0 && temp_v1 != 0) {
-    dataTable40FindById();
+    skillDataFindById();
     temp_v37 = temp_v1;
   }
   puVar3 = temp_v32;
@@ -311,7 +311,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             temp_v8 = temp_v39;
             puVar7 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar7), temp_v3);
-            if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, dataTable40FindById(), temp_v6 != 0)) {
+            if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, skillDataFindById(), temp_v6 != 0)) {
               temp_v3 = playerGetSkillRank(temp_v8);
               FUN_00283ebc(temp_v6,temp_v3,3);
               temp_v14 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);

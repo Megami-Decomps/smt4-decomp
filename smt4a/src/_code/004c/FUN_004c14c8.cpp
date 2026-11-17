@@ -3,7 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
 
 /* Battle state flag masks: the mask whose bits make passive rolls always succeed at 0xA8. */

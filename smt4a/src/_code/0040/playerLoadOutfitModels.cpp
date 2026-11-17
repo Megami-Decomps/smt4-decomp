@@ -14,7 +14,7 @@ extern "C" void playerLoadOutfitModels(void *owner, const OutfitPreviewEquipment
         return;
 
     char path[64];
-    EquipmentRecordA *record = dataTable08Sub2GetRecord(equipment->slots[3]);
+    EquipmentRecordA *record = itemTableGetEquipmentRecord(equipment->slots[3]);
     u32 variant = FUN_0040b11c(owner, 0, record->modelGroup, record->model, 0);
     if (FUN_004085a8(record->modelGroup, record->model)) {
         textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, variant);
@@ -24,7 +24,7 @@ extern "C" void playerLoadOutfitModels(void *owner, const OutfitPreviewEquipment
     }
     FUN_003e573c(owner, 0, path, flags);
 
-    record = dataTable08Sub2GetRecord(equipment->slots[4]);
+    record = itemTableGetEquipmentRecord(equipment->slots[4]);
     variant = FUN_0040b11c(owner, 1, record->modelGroup, record->model, 0);
     if (FUN_004085a8(record->modelGroup, record->model)) {
         textFormatBuffer(path, "player/pl%02d_%03dbd%d.bam", record->modelGroup, record->model, variant);
@@ -33,7 +33,7 @@ extern "C" void playerLoadOutfitModels(void *owner, const OutfitPreviewEquipment
     }
     FUN_003e573c(owner, 1, path, flags);
 
-    record = dataTable08Sub2GetRecord(equipment->slots[5]);
+    record = itemTableGetEquipmentRecord(equipment->slots[5]);
     variant = FUN_0040b11c(owner, 2, record->modelGroup, record->model, 0);
     if (FUN_004085a8(record->modelGroup, record->model)) {
         textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, variant);

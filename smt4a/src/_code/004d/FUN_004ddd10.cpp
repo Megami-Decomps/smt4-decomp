@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int btlEntryBuildSummary(unsigned char [4], int, unsigned int);
 int btlResetSlot(int, int, int);
 int FUN_004ab8e4(unsigned int);
@@ -43,7 +43,7 @@ extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int FUN_003e7adc(int);
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlResetSlot. */
@@ -159,7 +159,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
         if (*(short *)(param_2[10] + 0x1be) == 2) {
           temp_v5 = (int)*(short *)(param_2[10] + 0x1c0);
           temp_v2 = temp_v5;
-          dataTable04FindById();
+          skillDataFindById();
           temp_v0 = '\0';
           if (temp_v2 != 0) {
             temp_v0 = *(char *)(temp_v2 + 0x4d);
@@ -246,7 +246,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
       else {
         temp_v5 = (int)*(short *)(param_2[10] + 0x1c0);
         temp_v2 = temp_v5;
-        dataTable04FindById();
+        skillDataFindById();
         if ((*(short *)(temp_v2 + 0x86) != 0) && (temp_v2 = FUN_004c6b8c(param_2[8],temp_v5), temp_v2 == 0))
         {
           FUN_003f2aac(*param_1,(int)*(short *)(param_2[9] + 0x6a),0);

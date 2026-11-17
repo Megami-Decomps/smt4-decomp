@@ -47,7 +47,7 @@ void FUN_0038358c(QuestClearScene *scene)
 
         if (quest != 0 && table1bOr1cGetRecordValue(quest) == 6) {
             qcMainSetMode(1);
-            FUN_0026f960(dataTable1bOr1cGetRecord(quest)->event.package);
+            FUN_0026f960(questDataGetRecord(quest)->event.package);
             buttonHelpRelease();
         }
         break;

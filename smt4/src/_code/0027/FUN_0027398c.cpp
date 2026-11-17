@@ -33,7 +33,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
 {
     switch (work->state) {
     case 0: {
-        const QuestRecord *definition = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+        const QuestRecord *definition = questDataGetRecord(rosterGetLeaderId());
         if (!definition || !definition->event.package) {
             work->state = 3;
             return 0;
@@ -57,7 +57,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
         if (!work->commands || !work->messages) {
             return 0;
         }
-        const QuestRecord *definition = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+        const QuestRecord *definition = questDataGetRecord(rosterGetLeaderId());
         if (!definition) {
             work->state = 3;
         }

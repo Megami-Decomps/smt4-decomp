@@ -98,7 +98,7 @@ extern u32 DAT_005739b8, DAT_005739bc;     /* flags of a freshly claimed slot */
 extern u32 DAT_0057a638, DAT_0057a63c, DAT_0057a64c;
 extern u32 DAT_0057aa1c;
 
-void dataTable00FindById(u32 id);
+void nkmEnemyFindById(u32 id);
 u32 stateEntryFindById(BtlSummonState *state, s32 id);
 s32 nkdwLoaderParse(u32 resource);
 void aocHandleButtons(u32 resource, s32 mode);
@@ -119,7 +119,7 @@ u32 FUN_003ea2b0(BtlSummonState *state, u32 request)
         return 1;
 
     u32 summon = request & 0xFFFF;
-    dataTable00FindById(summon);
+    nkmEnemyFindById(summon);
     SummonRequest *source = reinterpret_cast<SummonRequest *>(request);
 
     if (state->state == SUMMON_STATE_LOAD) {

@@ -12,9 +12,9 @@ int FUN_00205568(...);
 int idMapLookup(...);
 int passiveSkillLookupRecord(...);
 int dataTable06Sub1GetRecord(...);
-int dataTable40FindById(...);
+int skillDataFindById(...);
 int FUN_002b7bca(...);
-int devilGetRecord(...);
+int nkmBaseGetRecord(...);
 int asdMemFree(...);
 int asdMemoryAlloc(...);
 int rt_memcpy(...);
@@ -57,9 +57,9 @@ extern int FUN_0026a604(unsigned int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
 extern int affinityShouldReplaceState(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: dataTable40FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -125,7 +125,7 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v13 = temp_v2;
   asdMemoryAlloc(0x100,0x100,0,temp_v9,1);
   temp_v19 = temp_v1;
-  devilGetRecord();
+  nkmBaseGetRecord();
   temp_v8[0] = 0;
   temp_v8[1] = 0;
   temp_v1 = 0;
@@ -245,7 +245,7 @@ LAB_0029b3f4:
         temp_v1 = 0;
         do {
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + temp_v1 * 2 + 0x3c);
-          if (((temp_v4 != 0) && (dataTable40FindById(), temp_v4 != 0)) &&
+          if (((temp_v4 != 0) && (skillDataFindById(), temp_v4 != 0)) &&
              (temp_v5 = FUN_0026a604(temp_v3), temp_v5 != 0)) {
             *(unsigned short *)(temp_v17 + temp_v18 * 2) = *(unsigned short *)(temp_v13 + temp_v2 * 2);
             temp_v18 = temp_v18 + 1;

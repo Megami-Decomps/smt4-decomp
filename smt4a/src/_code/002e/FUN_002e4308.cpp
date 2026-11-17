@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -37,7 +37,7 @@ void FUN_002e4308(s16 itemId, u8 arg, s32 usable)
     menu->unk11 = arg;
     menu->flagged = 0;
     if (usable != 0) {
-        DataTable04Record *record = (DataTable04Record *)dataTable04FindById(itemId);
+        DataTable04Record *record = (DataTable04Record *)skillDataFindById(itemId);
         if (record == NULL) {
             usable = 0;
         } else {

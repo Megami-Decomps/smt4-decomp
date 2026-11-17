@@ -19,8 +19,8 @@ static __inline s32 compareUnitSlotsByRace(const s32 *left, const s32 *right)
     }
     StatBlock *first = gameGetUnitRecord(*left);
     StatBlock *second = gameGetUnitRecord(*right);
-    const DevilRecord *firstDevil = devilGetRecord(first->id);
-    const DevilRecord *secondDevil = devilGetRecord(second->id);
+    const NkmBaseRecord *firstDevil = nkmBaseGetRecord(first->id);
+    const NkmBaseRecord *secondDevil = nkmBaseGetRecord(second->id);
     difference = firstDevil->race - secondDevil->race;
     if (difference != 0) {
         return difference;
@@ -41,8 +41,8 @@ extern "C" s32 FUN_001a8268(const s32 *left, const s32 *right)
     } else {
         StatBlock *first = gameGetUnitRecord(*left);
         StatBlock *second = gameGetUnitRecord(*right);
-        const DevilRecord *firstRecord = (const DevilRecord *)devilGetRecord(first->id);
-        const DevilRecord *secondRecord = (const DevilRecord *)devilGetRecord(second->id);
+        const NkmBaseRecord *firstRecord = (const NkmBaseRecord *)nkmBaseGetRecord(first->id);
+        const NkmBaseRecord *secondRecord = (const NkmBaseRecord *)nkmBaseGetRecord(second->id);
         difference = firstRecord->category - secondRecord->category;
         if (difference == 0) {
             return compareUnitSlotsByRace(left, right);

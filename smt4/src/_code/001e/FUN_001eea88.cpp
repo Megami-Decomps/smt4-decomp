@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the devilRecordGetTone call (armlink-inlined ldrb) differs: the build emits nop hints (2 before, 1 after) around it that retail does not have; everything else identical */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 /* A 0x8C-byte UI sprite. */
@@ -52,16 +52,16 @@ static const s32 sKeysFourth[56] = {
     -3, 0, -3, -2, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
 };
 
-static inline const DevilRecord *getDevilRecord(u16 id)
+static inline const NkmBaseRecord *getDevilRecord(u16 id)
 {
-    return (const DevilRecord *)devilGetRecord(id);
+    return (const NkmBaseRecord *)nkmBaseGetRecord(id);
 }
 
 extern "C" {
 extern UniteScreenWork *g_screenStateWork;
 
 void FUN_0021a374(UniteRenderTarget *target, u32 texture);
-u8 devilRecordGetTone(const DevilRecord *record);
+u8 devilRecordGetTone(const NkmBaseRecord *record);
 void statusCameraDestroy(void);
 void statusCameraSelectPreset(s32 preset);
 u32 eventResourceCacheAcquire(s32 model, s32 mode);
@@ -138,7 +138,7 @@ void FUN_001eea88(void)
     }
     work->scriptFile = asdLoadFileSyncDefault("battle/DevilLvUp.bf");
     char path[64];
-    const DevilRecord *record = getDevilRecord(work->resultDevil);
+    const NkmBaseRecord *record = getDevilRecord(work->resultDevil);
     textFormatBuffer(path, "battle/DevilMsg/%s.mbm", FUN_002cdecc(devilRecordGetTone(record)) + 1);
     work->messageFile = asdLoadFileSyncDefault(path);
     work->script = scrScriptProcessCreate(work->scriptFile, work->messageFile);

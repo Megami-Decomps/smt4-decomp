@@ -34,11 +34,11 @@ static __inline s32 inventoryGetTransactionPrice(u16 id, bool selling)
 {
     switch (aocEntryGetKind(id)) {
     case 1: {
-        const ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+        const ConsumableRecord *record = itemTableGetItemRecord(id);
         return record != NULL ? (selling ? record->sellPrice : record->buyPrice) : 99999999;
     }
     case 2: case 3: case 4: case 5: case 6: case 7: case 8: {
-        const EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        const EquipmentRecord *record = itemTableGetEquipmentRecord(id);
         return record != NULL ? (selling ? record->sellPrice : record->buyPrice) : 99999999;
     }
     case 10:

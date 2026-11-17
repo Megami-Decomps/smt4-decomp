@@ -2,9 +2,9 @@
 #include "gamedata/DevilModel.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "addon/AocSystem.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
@@ -20,10 +20,10 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
 
     if (byDevilId) {
         if (id >= 0) {
-            const DevilRecord *devil = (const DevilRecord *)devilGetRecord((u16)id);
+            const NkmBaseRecord *devil = (const NkmBaseRecord *)nkmBaseGetRecord((u16)id);
             if (!devil)
                 return;
-            const Table00Record *override = dataTable00FindById((u16)id);
+            const NkmEnemyRecord *override = nkmEnemyFindById((u16)id);
             if (!(override->levelFlags & 1)) {
                 id = devil->model + 1;
                 if (id >= 0x266)

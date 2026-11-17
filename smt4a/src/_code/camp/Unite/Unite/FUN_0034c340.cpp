@@ -6,9 +6,9 @@ extern "C" {
 
 int qsort(unsigned short *, unsigned int, int, unsigned char *);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int asdMemFree(unsigned short *);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int sysMemClear(unsigned char [88], int);
 int rt_aeabi_memclr(...);
 int dataTable41FindById(void);
@@ -41,9 +41,9 @@ extern unsigned char uiComparePriorityKindAndId; /* 0x38e764 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: dataTable41FindById. */
@@ -93,7 +93,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
   else if (param_4 != (unsigned short *)0x0) {
     temp_v5 = (unsigned int)*param_4;
   }
-  devilGetRecord();
+  nkmBaseGetRecord();
   puVar7 = (unsigned short *)0x100;
   asdMemoryAlloc(0x100,0x100,0,param_2 * 6,1);
   rt_aeabi_memclr();
@@ -135,7 +135,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
         puVar16[1] = (short)temp_v15 + puVar16[1];
         temp_v10 = (unsigned int)*(unsigned char *)(temp_v6 + 2);
         temp_v6 = (unsigned int)*puVar17;
-        dataTable04FindById();
+        skillDataFindById();
         temp_v12 = 0;
         if (temp_v6 != 0) {
           temp_v12 = (unsigned int)*(unsigned short *)(temp_v6 + 0x26);

@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail keeps the entry list in sl and the constant 1 in fp (build swaps them) and updates the window state through a writeback load (ldrh [r0,#4]!). */
 #include "classes/Obj42247c.h"
 #include "classes/Obj4221a4.h"
-#include "gamedata/DevilRecord.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmBaseRecord.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct CompendiumListEntryIV {
     u8 summary[24];
@@ -61,8 +61,8 @@ void FUN_003a8aa0(Obj42247c *screen)
     if (block->mode == 0) {
         s32 total = 0;
         for (s32 id = 1; id < 0x500; ++id) {
-            const DevilRecord *devil = devilGetRecord(static_cast<u16>(id));
-            const Table00Record *base = dataTable00FindById(static_cast<u16>(id));
+            const NkmBaseRecord *devil = nkmBaseGetRecord(static_cast<u16>(id));
+            const NkmEnemyRecord *base = nkmEnemyFindById(static_cast<u16>(id));
             if (devil != NULL && base != NULL && (base->flags & 1)) {
                 ++total;
                 if (FUN_0029e9cc(devil->id)) {

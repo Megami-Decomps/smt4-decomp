@@ -1,7 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "battle/BtlGlobals.h"
@@ -13,8 +13,8 @@ extern "C" {
 // Return the complete affected ailment group when the target has at least one matching ailment.
 u32 btlGetApplicableAilmentMask(u32 skillId, u32 itemId, u32 unused, s32 target)
 {
-    const SkillAilmentView *skill = reinterpret_cast<const SkillAilmentView *>(dataTable40FindById(skillId));
-    const ConsumableRecord *item = dataTable08Sub1GetRecord(itemId);
+    const SkillAilmentView *skill = reinterpret_cast<const SkillAilmentView *>(skillDataFindById(skillId));
+    const ConsumableRecord *item = itemTableGetItemRecord(itemId);
     if ((skill != NULL || item != NULL) &&
         (skill == NULL || (skill->effect & 0x7F) != 0) &&
         (item == NULL || (item->target & 0x7F) != 0)) {

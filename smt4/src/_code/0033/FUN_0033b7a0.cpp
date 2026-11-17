@@ -6,7 +6,7 @@ s32 randNextInRange(u32);
 
 u32 FUN_0033b7a0(const GameUnitSortRecord* unit, s32 trials, u32 forceLowRoll)
 {
-    const DevilRecord* record = (const DevilRecord*)devilGetRecord(unit->id);
+    const NkmBaseRecord* record = (const NkmBaseRecord*)nkmBaseGetRecord(unit->id);
     s32 value = saveIsRecordValueBounded(unit->id);
     s32 chance = record->chance.baseChance + value / 400;
     if (flagBitIsSet(6) != 0) {

@@ -1,11 +1,11 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/Shard003F.h"
 
 extern "C" {
 
 u16 FUN_003f3908(Lookup62 *unit)
 {
-    DevilRecordA *rec = devilGetRecord(unit->id);
+    NkmBaseRecordA *rec = nkmBaseGetRecord(unit->id);
 
     return rec->evolutionTarget;
 }

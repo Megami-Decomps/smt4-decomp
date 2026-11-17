@@ -1,6 +1,6 @@
 /* NON_MATCHING: source-kind setup and first packed category update scheduling differ; -O2 candidate. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 struct SummaryDemonSource {
     u8 unk00[0xe];
@@ -87,7 +87,7 @@ void btlSummaryInitializeSavedDemon(u32 unused, DemonBattleSummary *summary, Sum
         summary->baseResistances[i].value = randomGetLowerTenBits(source, (u8)i);
         summary->baseResistances[i].kind = randomGetUpperSixBits(source, (u8)i);
     }
-    DevilRecord *definition = devilGetRecord(summary->id);
+    NkmBaseRecord *definition = nkmBaseGetRecord(summary->id);
     summary->race = definition->battleRace;
     u8 type = definition->category;
     if (type == 1)

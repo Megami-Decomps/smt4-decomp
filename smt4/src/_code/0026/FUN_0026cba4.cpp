@@ -30,7 +30,7 @@ void FUN_0026cba4(s32 id, s32 isUnit, s32 variant)
             return;
         }
     }
-    record = dataTable08Sub1GetRecord(item);
+    record = itemTableGetItemRecord(item);
     if ((record->useFlags & 2) == 0) {
         FUN_0029c4c8(0);
         return;

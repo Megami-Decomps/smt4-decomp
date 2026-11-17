@@ -25,7 +25,7 @@ int FUN_0029c1c8(int, int, int);
 int slotSetRequest(int, int, unsigned int);
 int unitRecalculateEffectiveStats(...);
 int dataTable06Sub1GetRecord(void);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int dataTable01FindByIdWithAoc(...);
 int FUN_002bd158(...);
 int FUN_002bd2b4(...);
@@ -82,7 +82,7 @@ extern int itemGetFlagBit1(unsigned short);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int FUN_002b89a4(unsigned int);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: FUN_002bd158. */
 /* Supplied declaration required: FUN_002bd2b4. */
@@ -143,7 +143,7 @@ unsigned int FUN_001ebedc(int param_1)
     }
     btlTalkBustUpSetUnk2F4(1);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x126);
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
     FUN_002bd158(temp_v15,temp_v16);
@@ -236,7 +236,7 @@ unsigned int FUN_001ebedc(int param_1)
       } while ((int)temp_v6 < 0x500);
       objectFlagSetBit(temp_v7,2);
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v7 + 0x46);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v9 = flagCountUnlockedSlots(temp_v7);
       temp_v10 = 0;
       temp_v12 = 4;
@@ -360,7 +360,7 @@ LAB_001ec4d0:
     btlTalkBustUpSetDemonTexture(temp_v1,1);
     temp_v6 = FUN_00262f78();
     temp_v6 = temp_v6 & 0xffff;
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
     FUN_002bd158(temp_v15,temp_v16);

@@ -101,7 +101,7 @@ void FUN_00381b8c(QuestCenterScreenStateIV *work)
     messageStatesSetFirst(0);
     qcMainSetMode(0);
     for (u16 id = 350; id < 400; ++id) {
-        const QuestRecord *record = dataTable1bOr1cGetRecord(id);
+        const QuestRecord *record = questDataGetRecord(id);
         if (record != NULL && record->kind == 0 && !questReadRuntimeFlag(id, 1))
             FUN_0028eeb8(id);
     }

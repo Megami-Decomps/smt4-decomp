@@ -1,7 +1,7 @@
 /* NON_MATCHING: the multiplier operand order and the experience clamp compare (retail `cmp limit, value; movle`, here `cmp value, limit; movgt`) differ; the money clamp matches. */
 #include "shard/GameGlobals.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 s32 gameDataGetTableValue(void);
@@ -36,7 +36,7 @@ void FUN_0034dae0(void *unitData, u32 id)
     } else if (progression > 9.0f) {
         progression = 9.0f;
     }
-    const RewardTableView *base = reinterpret_cast<const RewardTableView *>(dataTable00FindById(static_cast<u16>(id)));
+    const RewardTableView *base = reinterpret_cast<const RewardTableView *>(nkmEnemyFindById(static_cast<u16>(id)));
     u16 level = static_cast<u16>(static_cast<s32>(static_cast<f32>(base->level & 0x7FFFu) *
         (progression * 0.55f + 1.0f) + progression * progression * 5.0f));
     unit->level = level;

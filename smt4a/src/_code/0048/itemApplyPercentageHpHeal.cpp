@@ -25,7 +25,7 @@ u32 itemApplyPercentageHpHeal(HealTarget *target, u32 itemId, s32 checkOnly)
     if (target == NULL) {
         return 1;
     }
-    item = dataTable8FindRecord(itemId);
+    item = itemTableGetItemRecord(itemId);
     if (item == NULL || !(item->flags & ITEM_FLAG_HEALS_HP)) {
         return 1;
     }

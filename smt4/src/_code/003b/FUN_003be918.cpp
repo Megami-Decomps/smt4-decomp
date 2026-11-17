@@ -19,7 +19,7 @@ f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 target);
 AttackInfo btlEntryBuildSummary(BtlMainState *state, BtlEntry *entry);
 void selectionCopySupportedValue(u16 value, u32 *output);
-void *dataTable40FindById(void *player);
+void *skillDataFindById(void *player);
 u32 playerGetSkillRank(void *player);
 s32 FUN_00283ebc(void *record, u32 rank, s32 flag);
 
@@ -46,7 +46,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
 
     s32 skillBonus = 0;
     if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
-        void *record = dataTable40FindById(player);
+        void *record = skillDataFindById(player);
         if (record != NULL) {
             skillBonus = FUN_00283ebc(record, playerGetSkillRank(player), 1);
         }

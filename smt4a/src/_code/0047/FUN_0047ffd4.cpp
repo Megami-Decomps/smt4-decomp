@@ -10,9 +10,9 @@ void FUN_0047ffd4(const AffinitySourcePair *equipment, EquipmentAffinityValueA *
 {
     const EquipmentRecordA *sources[2] = { NULL, NULL };
     if (equipment->first != 0)
-        sources[0] = dataTable08Sub2GetRecord(equipment->first);
+        sources[0] = itemTableGetEquipmentRecord(equipment->first);
     if (equipment->second != 0)
-        sources[1] = dataTable08Sub2GetRecord(equipment->second);
+        sources[1] = itemTableGetEquipmentRecord(equipment->second);
     for (s32 affinity = 0; affinity < 21; ++affinity, ++output) {
         s32 modifier = 0;
         bool replaced = false;

@@ -70,7 +70,7 @@ void Obj55c8d0::FUN_004a4658()
     BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeEntryListView *>(screen)->entries;
     if (screen->unk0860 == 0) {
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
-        const DevilRecordA *record = devilGetRecord(entries[index].id);
+        const NkmBaseRecordA *record = nkmBaseGetRecord(entries[index].id);
         sysPlaySe((record->extraFlags & 2) ? 0x121 : 0x30);
     } else {
         sysPlaySe(0x48);

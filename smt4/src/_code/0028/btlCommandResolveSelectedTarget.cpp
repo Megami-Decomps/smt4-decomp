@@ -1,6 +1,6 @@
 #include "shard/PlayScene.h"
 #include "code/Code0026.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 void btlCommandMenuResolveLayout(PlayScene *scene, u16 *kind, s16 *skill);
@@ -37,7 +37,7 @@ u32 btlCommandResolveSelectedTarget(PlayScene *scene)
         FUN_002621b4(scene->unk305C - 1, target, skill, &scene->targeting.targets[selection]);
         party = static_cast<const PartyView *>(gameGetSlotTable());
         if (party->slots[selection - 1] < 0) {
-            const SkillView *record = reinterpret_cast<const SkillView *>(dataTable40FindById(skill));
+            const SkillView *record = reinterpret_cast<const SkillView *>(skillDataFindById(skill));
             if ((record != NULL && record->properties.targeting == 2 && record->category == 3) ||
                 record->id == 0x8b || record->id == 0x136) {
                 return 0;
@@ -46,7 +46,7 @@ u32 btlCommandResolveSelectedTarget(PlayScene *scene)
     } else {
         FUN_002621b4(scene->unk305C - 1, -1, skill, &scene->targeting.targets[0]);
     }
-    const SkillView *record = reinterpret_cast<const SkillView *>(dataTable40FindById(skill));
+    const SkillView *record = reinterpret_cast<const SkillView *>(skillDataFindById(skill));
     if ((record->flags & 0x600) != 0 && scene->unk305C < 4 && scene->targeting.fallback < 0) {
         scene->targeting.targets[scene->unk305C] = scene->targeting.fallback;
     }

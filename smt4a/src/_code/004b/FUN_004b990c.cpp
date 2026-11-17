@@ -28,7 +28,7 @@ int dataTable33TypeCount(...);
 
 int asdMemFree(void);
 int cameraResourcesRelease(unsigned int);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int slotSetRequest(int, int, int);
 int dialogClose(int);
 int FUN_00214da4(void);
@@ -78,7 +78,7 @@ extern int gameFlagsGetBlock(void);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: cameraResourcesRelease. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: slotSetRequest. */
 extern int campIsState51(void);
 /* Supplied declaration required: dialogOpen. */
@@ -219,7 +219,7 @@ void FUN_004b990c(int param_1)
     if (pcVar4[4] != '\0') {
       if (pcVar4[1] != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         g_gameState.eventId = *(unsigned short *)(temp_v3 + 2);
         libc_strcpy((unsigned char *)g_gameState.eventEntryName,temp_v3 + 0xc4);
         g_gameState.eventResult = 1;

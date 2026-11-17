@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int sysMemClear(unsigned int *, int);
 int rt_memclr(int, int);
 int FUN_003edaf0(unsigned int *, int);
@@ -39,7 +39,7 @@ extern unsigned int DAT_0057aa94; /* 0x57aa94 */
 
 extern unsigned int saveSlotFindSelected(void);
 extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int gameGetSlotRecord(void);
 extern unsigned int btlMainGetUnk14(void);
 /* Supplied declaration required: sysMemClear. */
@@ -101,7 +101,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
       *puVar3 = DAT_0057aa48 | DAT_0057aa30;
       puVar3[1] = temp_v1;
       temp_v1 = (unsigned int)*(unsigned short *)((int)puVar3 + 0x166);
-      dataTable00FindById();
+      nkmEnemyFindById();
       puVar3[0x101] = temp_v1;
       if ((char)puVar3[0x8e] == '\x01') {
         temp_v1 = puVar3[1] | DAT_0057aa64;

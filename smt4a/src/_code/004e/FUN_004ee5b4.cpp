@@ -8,8 +8,8 @@ struct BattleUiContext;
 extern "C" {
 
 int FUN_0015f490(...);
-int dataTable8FindRecord(void);
-int dataTable04FindById(void);
+int itemTableGetItemRecord(void);
+int skillDataFindById(void);
 int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
 int btlResetEntryCounters(int);
@@ -41,8 +41,8 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0015f490. */
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_003e7adc(int);
 extern int btlScriptUnitHasFlags(int);
@@ -162,17 +162,17 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   temp_v7 = 0;
   if (*(short *)(temp_v4 + 0x1be) == 2) {
     temp_v7 = (unsigned int)*(short *)(temp_v4 + 0x1c0);
-    if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, dataTable04FindById(), temp_v4 != 0)) &&
+    if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, skillDataFindById(), temp_v4 != 0)) &&
        (*(char *)(temp_v4 + 0x23) == '\x03')) {
       temp_v1 = 1;
     }
   }
   else if (*(short *)(temp_v4 + 0x1be) == 8) {
     temp_v3 = (int)*(short *)(temp_v4 + 0x1c0);
-    dataTable8FindRecord();
+    itemTableGetItemRecord();
     if (temp_v3 != 0) {
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32);
-      if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, dataTable04FindById(), temp_v4 != 0)) &&
+      if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, skillDataFindById(), temp_v4 != 0)) &&
          (*(char *)(temp_v4 + 0x23) == '\x03')) {
         temp_v1 = 1;
       }

@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 
 struct TableEntry {
@@ -37,7 +37,7 @@ u32 FUN_0038b8b8(void)
                 for (s32 slot = 0; slot < 21; slot++) {
                     if (group == record->encodedStats.values[slot] >> 10) {
                         for (const u16 *id = state->idsBegin; id != state->idsEnd; id++) {
-                            TableEntry *entry = (TableEntry *)dataTable04FindById(dataTable8FindRecord(*id)->skillId);
+                            TableEntry *entry = (TableEntry *)skillDataFindById(itemTableGetItemRecord(*id)->skillId);
                             if (entry != NULL && (entry->flags << 16) >> 27 == slot) {
                                 scrSetResult(1);
                                 return 1;

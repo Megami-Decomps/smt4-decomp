@@ -10,7 +10,7 @@ extern "C" {
 int FUN_0029a17c(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
@@ -42,7 +42,7 @@ extern int uniteGetWork(void);
 extern int ifTouchGetSelectionModeForRegion(unsigned int);
 extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -125,7 +125,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
             if ((*(unsigned int *)(temp_v6 + 0x943c) & 0x1fffc) != 0) {
               puVar12 = (unsigned int *)(temp_v6 + 0x9438);
               puVar5 = (unsigned short *)((*(unsigned int *)(temp_v6 + 0x943c) & 0x1ffff) >> 2);
-              devilGetRecord();
+              nkmBaseGetRecord();
               temp_v10 = puVar5;
               texDrawTableEntryAtStoredOrigin(2,0x24,0x65,*(short *)(temp_v2 + 8) + param_1,
                            *(short *)(temp_v2 + 10) + param_2,0xc9);
@@ -217,7 +217,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           temp_v2 = temp_v1 + param_3 * 8;
           puVar12 = (unsigned int *)(temp_v2 + 0x9438);
           puVar5 = (unsigned short *)((*(unsigned int *)(temp_v2 + 0x943c) & 0x1ffff) >> 2);
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v6 = asdTMTexTableEntryAt(0x24,param_3 + 0x87);
           efctSetSpeed();
           texDrawTableEntryAtStoredOrigin(2,0x24,0x76,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,

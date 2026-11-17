@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 
@@ -10,7 +10,7 @@ void scrSetResult(s32 value);
 /* Script command: picks one of the record's three values at random (-1 when none is set) and returns it. */
 s32 FUN_002f76d0(void)
 {
-    Table00Record *record = dataTable00FindById((u16)scrGetArg(0));
+    NkmEnemyRecord *record = nkmEnemyFindById((u16)scrGetArg(0));
     s32 values[3];
     s32 count = 0;
 

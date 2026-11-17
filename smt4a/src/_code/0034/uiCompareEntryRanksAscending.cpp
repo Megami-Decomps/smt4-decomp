@@ -8,8 +8,8 @@ extern "C" {
 
 s32 uiCompareEntryRanksAscending(const SortItem *left, const SortItem *right)
 {
-    EquipmentRecordA *leftData = dataTable08Sub2GetRecord(left->id);
-    EquipmentRecordA *rightData = dataTable08Sub2GetRecord(right->id);
+    EquipmentRecordA *leftData = itemTableGetEquipmentRecord(left->id);
+    EquipmentRecordA *rightData = itemTableGetEquipmentRecord(right->id);
     s32 leftScore = 0;
     s32 rightScore = 0;
     s32 leftRank = DAT_0052b8ac[0].left;
@@ -28,8 +28,8 @@ s32 uiCompareEntryRanksAscending(const SortItem *left, const SortItem *right)
     if (order == 0) {
         order = FUN_00345098(leftScore, rightScore);
         if (order == 0) {
-            leftData = dataTable08Sub2GetRecord(left->id);
-            rightData = dataTable08Sub2GetRecord(right->id);
+            leftData = itemTableGetEquipmentRecord(left->id);
+            rightData = itemTableGetEquipmentRecord(right->id);
             s32 leftKey = leftData->order;
             s32 rightKey = rightData->order;
             order = leftKey - rightKey;

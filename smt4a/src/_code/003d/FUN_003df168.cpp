@@ -58,7 +58,7 @@ static __inline DropEntry *findDropEntry(u16 id)
 // Rolls the reward of encounter `index` into `result`.
 void FUN_003df168(RewardResult *result, s32 index)
 {
-    QuestRecordA *encounter = dataTable1bOr1cGetRecord(index);
+    QuestRecordA *encounter = questDataGetRecord(index);
     if (encounter == NULL) {
         return;
     }

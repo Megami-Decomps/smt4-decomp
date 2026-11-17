@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -23,12 +23,12 @@ s32 FUN_001f61c4(Ref *a, Ref *b)
     Group *groupB = dataTable12FindBySortKey(b->group);
     s32 diff;
 
-    devilGetRecord(a->id);
-    devilGetRecord(b->id);
+    nkmBaseGetRecord(a->id);
+    nkmBaseGetRecord(b->id);
     diff = FUN_00257444(groupA->id) - FUN_00257444(groupB->id);
     if (diff == 0) {
-        DevilRecord *recordA = devilGetRecord(a->id);
-        DevilRecord *recordB = devilGetRecord(b->id);
+        NkmBaseRecord *recordA = nkmBaseGetRecord(a->id);
+        NkmBaseRecord *recordB = nkmBaseGetRecord(b->id);
 
         diff = recordA->race - recordB->race;
         if (diff == 0) {

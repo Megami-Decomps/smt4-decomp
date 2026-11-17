@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the battle command menu's result selection; retail shares its skip/candidate tails by jumps (the draft's six gotos) and computes the work-block offsets from three base registers, which armcc here emits from the structured conditions. */
 #include "battle/BtlMainAccess.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "common.h"
 #include "ui/PartyPanelCapacity.h"
 #include "code/Code002a.h"
@@ -66,7 +66,7 @@ static bool targetCommandAllowed(CommandEntry *entry, MemberRecord *member)
 {
     if ((entry->attributes & 1) || btlIsDefeatSuppressed() == 0 || btlIsDefeatSuppressed() == 0)
         return false;
-    DevilRecordA *info = devilGetRecord(member->equipment);
+    NkmBaseRecordA *info = nkmBaseGetRecord(member->equipment);
     return info != NULL && (info->extraFlags & 4) != 0;
 }
 

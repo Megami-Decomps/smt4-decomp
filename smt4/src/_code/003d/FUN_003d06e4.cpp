@@ -1,6 +1,6 @@
 /* NON_MATCHING: the candidate loop is written three times and the unit scan is a pointer walk (frame 468 now matches); retail tail-duplicates the budget compare into both cost arms and numbers a few callee-saved registers differently. */
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BattleCommandController.h"
 #include "battle/BtlMainAccess.h"
 
@@ -46,7 +46,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
     }
     for (s32 i = 0; i < 9; i++) {
         if (skills[i] != 0) {
-            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
+            SkillInfo *info = reinterpret_cast<SkillInfo *>(skillDataFindById(skills[i]));
             if (info != NULL) {
                 s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
@@ -62,7 +62,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
     }
     for (s32 i = 0; i < 9; i++) {
         if (skills[i] != 0) {
-            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
+            SkillInfo *info = reinterpret_cast<SkillInfo *>(skillDataFindById(skills[i]));
             if (info != NULL) {
                 s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {
@@ -75,7 +75,7 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
     }
     for (s32 i = 0; i < 9; i++) {
         if (skills[i] != 0) {
-            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
+            SkillInfo *info = reinterpret_cast<SkillInfo *>(skillDataFindById(skills[i]));
             if (info != NULL) {
                 s32 cost = (state->entry->flags & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : appGetRemainingCapacity(skills[i]);
                 if (cost <= state->selection->budget) {

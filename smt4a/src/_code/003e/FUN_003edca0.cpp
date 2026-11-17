@@ -1,7 +1,7 @@
 /* NON_MATCHING: decides whether a battle enemy can be recruited (state flags, hp ratio, chance from slot space and level); written from the decompilation, the 64-bit mask tests and branch layout not compared with retail */
 #include "common.h"
 #include "mapnavi/naviMain.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/GamePlayerData.h"
 
 struct BtlMask {
@@ -59,7 +59,7 @@ s32 gameDataFlagTestBit(s32 bit);
 #define RECRUIT_BIT_BONUS 0x3E
 
 /* Chance (percent) from the player/devil level gap, limited by `ceiling`. */
-static __inline s32 recruitLevelChance(s32 ceiling, const Table00RecordA *record)
+static __inline s32 recruitLevelChance(s32 ceiling, const NkmEnemyRecordA *record)
 {
     s32 chance = ((s32)gameGetPlayerData()->level - (s32)(record->level & 0x7FFF)) / 2 + 5;
     if (chance < 0)
@@ -91,7 +91,7 @@ u32 FUN_003edca0(BtlRecruitState *state)
 
         u32 *unitWords = (u32 *)flags;
         u16 devilId = *(u16 *)((u8 *)flags + 0x166);
-        Table00RecordA *record = dataTable00FindById(devilId);
+        NkmEnemyRecordA *record = nkmEnemyFindById(devilId);
         if ((record->flags & BTL_DEVIL_FLAG_NO_RECRUIT) != 0)
             return 0;
         if (btlMaskHit(*flags, DAT_005739b0) || btlMaskHit(*flags, DAT_005739c0))

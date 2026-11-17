@@ -1,6 +1,6 @@
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 extern u32 g_aocSystem;
 void texTableRecordCallWithParams(s32 layer, s32 category, s32 resource, u32 first, u32 second, u32 third);
@@ -15,10 +15,10 @@ static inline s32 isDemonTextureLoaded(s32 id, s32 resolve)
         if (id < 0) {
             resource = 0;
         } else {
-            const DevilRecord *devil = (const DevilRecord *)devilGetRecord((u16)id);
+            const NkmBaseRecord *devil = (const NkmBaseRecord *)nkmBaseGetRecord((u16)id);
             if (!devil)
                 return 0;
-            const Table00Record *record = dataTable00FindById((u16)id);
+            const NkmEnemyRecord *record = nkmEnemyFindById((u16)id);
             if (record->levelFlags & 1) {
                 resource = record->portraitId;
                 category = 35;
@@ -43,8 +43,8 @@ void FUN_001ee4e4(s32 id, u32 first, u32 second, u32 third, s32 resolve)
         if (id < 0) {
             resource = 0;
         } else {
-            const DevilRecord *devil = (const DevilRecord *)devilGetRecord((u16)id);
-            const Table00Record *record = dataTable00FindById((u16)id);
+            const NkmBaseRecord *devil = (const NkmBaseRecord *)nkmBaseGetRecord((u16)id);
+            const NkmEnemyRecord *record = nkmEnemyFindById((u16)id);
             if (!devil)
                 return;
             if (record->levelFlags & 1) {

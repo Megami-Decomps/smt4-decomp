@@ -1,7 +1,7 @@
 /* NON_MATCHING: adds a battle's rewards to the result tally (money, item drops by id, experience for the party and for each demon slot with the reduced share for non-participants); written from the decompilation, the float/int share arithmetic and slot lookups are approximated and not compared with retail */
 #include "common.h"
 #include "mapnavi/naviMain.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "sys/RuntimeObjects.h"
 
 #define REWARD_ITEM_SLOTS 6

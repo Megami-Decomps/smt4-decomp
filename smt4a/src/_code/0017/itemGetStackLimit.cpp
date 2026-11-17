@@ -24,7 +24,7 @@ s32 itemGetStackLimit(u32 id)
     switch (entry->type) {
     case 1:
     case 12: {
-        ConsumableRecordA *record = dataTable8FindRecord(id);
+        ConsumableRecordA *record = itemTableGetItemRecord(id);
         if (record == NULL) {
             return 0;
         }
@@ -40,7 +40,7 @@ s32 itemGetStackLimit(u32 id)
     case 6:
     case 7:
     case 8: {
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
         if (record == NULL) {
             return 0;
         }

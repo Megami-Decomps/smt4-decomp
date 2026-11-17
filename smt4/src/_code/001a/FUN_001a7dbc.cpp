@@ -1,6 +1,6 @@
 /* NON_MATCHING: mode 1's learned-bit set now matches (`(1 << n) | byte`); the mode 0/3 set still gets the and/ldrb registers swapped (retail and r2 / ldrb r0). Slot is s8 (fixes the slot-store scheduling). */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/GameDataBlocks.h"
 
@@ -72,7 +72,7 @@ void FUN_001a7dbc(UnitRecord *unit, s8 slot, u32 id, s32 mode)
         gameDataSetItemFlag(id, 1);
         gameDataSlotSetFlag(id, 1);
     }
-    DevilRecord *record = devilGetRecord((u16)id);
+    NkmBaseRecord *record = nkmBaseGetRecord((u16)id);
     switch (mode) {
     case 0:
     case 3: {

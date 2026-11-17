@@ -3,7 +3,7 @@
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "addon/AocSystem.h"
 
 extern "C" {
@@ -44,7 +44,7 @@ extern "C" u32 FUN_001386f8(u32 id)
         if (Table4SearchRecordIV *record = aocExtraRecordFind(id))
             return (record->flags & 0x40000000u) >> 30;
     } else {
-        RecordSlotQueryPrefixIV *record = reinterpret_cast<RecordSlotQueryPrefixIV *>(dataTable40FindById(id));
+        RecordSlotQueryPrefixIV *record = reinterpret_cast<RecordSlotQueryPrefixIV *>(skillDataFindById(id));
         if (record != 0 && (record->flags & 0x80000000u) == 0) {
             for (s32 slot = 0; slot < 8; slot++) {
                 if (record->slots[slot].used == 0)

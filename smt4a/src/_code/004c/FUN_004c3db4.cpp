@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int gameDataGetTableValue(void);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(unsigned int *);
@@ -25,7 +25,7 @@ extern unsigned int DAT_0057144c; /* 0x57144c */
 extern unsigned int randRange(unsigned int);
 extern int lcgRandomRange(unsigned int);
 extern int gameFlagIsSet(void);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: gameDataGetTableValue. */
 extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: asdOperatorNewD. */
@@ -65,7 +65,7 @@ void FUN_004c3db4(unsigned int *param_1)
   temp_v1 = reinterpret_cast<int>(btlGetMainState());
   piVar12 = (int *)(temp_v1 + 0x1b0);
   temp_v2 = (unsigned int)*(unsigned short *)((int)param_1 + 0x166);
-  dataTable00FindById();
+  nkmEnemyFindById();
   if (temp_v2 != 0) {
     temp_v10 = *(int *)(temp_v2 + 0x74);
     temp_v3 = gameProgressIsAdvanced();

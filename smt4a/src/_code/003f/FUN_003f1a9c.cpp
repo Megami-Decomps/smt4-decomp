@@ -1,7 +1,7 @@
 /* NON_MATCHING: the `__packed` mask gives retail's two immediate-offset ldrs; only the order of the mask word loads around the final ldrd differs. */
 #include "common.h"
 #include "bible/bibleAnalyze.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 namespace {
 
@@ -45,7 +45,7 @@ s32 FUN_003f1a9c(BattleObjectView* object, s32 mode)
     if (id == 0) {
         return 0;
     }
-    if (dataTable04FindById(id) == 0) {
+    if (skillDataFindById(id) == 0) {
         return 0;
     }
 

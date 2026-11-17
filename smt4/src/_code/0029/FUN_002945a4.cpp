@@ -11,7 +11,7 @@ s32 textFormatBuffer(char* destination, const char* format, ...);
 // Replace one outfit part; changing the body also refreshes compatible head and leg models.
 void FUN_002945a4(u32 model, s32 part, u16 equipment, u32 option)
 {
-    EquipmentRecord* record = dataTable08Sub2GetRecord(equipment);
+    EquipmentRecord* record = itemTableGetEquipmentRecord(equipment);
     char path[64];
     switch (part) {
     case 0: {
@@ -40,11 +40,11 @@ void FUN_002945a4(u32 model, s32 part, u16 equipment, u32 option)
     FUN_0023f2e4(model, part, path, option);
     if (part == 1) {
         PlayerEquipmentAppearance* player = reinterpret_cast<PlayerEquipmentAppearance*>(gameGetPlayerData());
-        record = dataTable08Sub2GetRecord(player->head);
+        record = itemTableGetEquipmentRecord(player->head);
         u32 variant = FUN_0023cef0(model, 0, record->modelGroup, record->model, equipment);
         textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, variant);
         FUN_0023f2e4(model, 0, path, option);
-        record = dataTable08Sub2GetRecord(player->legs);
+        record = itemTableGetEquipmentRecord(player->legs);
         variant = FUN_0023cef0(model, 2, record->modelGroup, record->model, equipment);
         textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, variant);
         FUN_0023f2e4(model, 2, path, option);

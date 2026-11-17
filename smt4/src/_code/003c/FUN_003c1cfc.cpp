@@ -62,7 +62,7 @@ struct DevilBattleSummary {
 
 extern "C" DevilBattleSummary FUN_003c1cfc(u16 id)
 {
-    const DevilBattleRecordView *record = (const DevilBattleRecordView *)devilGetRecord(id);
+    const DevilBattleRecordView *record = (const DevilBattleRecordView *)nkmBaseGetRecord(id);
     PackedDevilStatWord attributes = {0};
     PackedDevilStatWord vitals = {0};
     PackedDevilStatWord growth = {0};

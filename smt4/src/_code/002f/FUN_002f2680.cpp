@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/UnitRecordAccess.h"
 
 struct SkillSortItem {
@@ -30,7 +30,7 @@ static __inline u16 skillSortKey(const SkillSortItem *item)
     if (idIsAbove400(item->skillId)) {
         return passiveSkillLookupRecord(item->skillId)->sortKey;
     }
-    return reinterpret_cast<SkillSortRecord *>(dataTable40FindById(item->skillId))->sortKey;
+    return reinterpret_cast<SkillSortRecord *>(skillDataFindById(item->skillId))->sortKey;
 }
 
 /* Tie-break by descending unit sort key (0 without a unit), then itemSortCompareByCategoryAndId. */

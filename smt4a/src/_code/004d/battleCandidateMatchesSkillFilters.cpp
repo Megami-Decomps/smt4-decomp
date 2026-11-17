@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
 struct BattleSkillFilter {
@@ -23,7 +23,7 @@ const u16 *libc_bsearch(const u16 *, const u16 *, u32, u32, s32 (*)(const u16 *,
 
 u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32, u32 demonId)
 {
-    const DevilRecordA *definition = devilGetRecord(demonId);
+    const NkmBaseRecordA *definition = nkmBaseGetRecord(demonId);
     if (filter->requireSkill) {
         if (!libc_bsearch(&filter->skill, filter->skills, filter->skillCount, sizeof(u16), halfwordKeyEmptyLastCompare))
             return 0;

@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct BattleEffectMainHeader {
     u8 unk000[0x113];
@@ -39,7 +39,7 @@ void battleEffectInitializeVariant(BtlMainStateA *battle, BattleEffectSetup *eff
                         effect->variant = 0;
                     } else {
                         s32 index = btlFindSelectionIndexByOrdinal(battle, 1);
-                        Table00RecordA *info = dataTable00FindById(battle->entries[index].id);
+                        NkmEnemyRecordA *info = nkmEnemyFindById(battle->entries[index].id);
                         if (info->bustUp == 1 || info->bustUp == 3) {
                             effect->variant = 1;
                         } else {

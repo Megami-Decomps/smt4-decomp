@@ -54,7 +54,7 @@ int btlReflectSetValuePair(...);
 int FUN_004fbd30(...);
 int FUN_004fee24(...);
 
-int dataTable8FindRecord(void);
+int itemTableGetItemRecord(void);
 int FUN_002c7bf4(...);
 int FUN_0047eccc(...);
 int FUN_0047f138(...);
@@ -72,7 +72,7 @@ int FUN_004fe7b0(...);
 int btlFindEntryBlockByMemberId(...);
 int sysPlaySe(int);
 int gameGetSlotTable(void);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int FUN_00222488(unsigned int *);
 int sysMemClear(int, int);
 int FUN_003756c8(int);
@@ -162,9 +162,9 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable8FindRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00222488. */
 extern unsigned int gameGetSaveSlotData(int);
@@ -433,7 +433,7 @@ LAB_004ebd00:
     puStack_2c = puVar25;
     if (*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) == 2) {
       temp_v5 = (int)*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1c0);
-      dataTable04FindById();
+      skillDataFindById();
       temp_v17 = temp_v16;
       if (temp_v5 != 0) {
         temp_v17 = (unsigned int)*(unsigned char *)(temp_v5 + 0x4d);
@@ -616,7 +616,7 @@ LAB_004ebd00:
         btlCommandExtendAnimationWindow((BtlActorRef*)piVar16,(BtlCommand*)puVar25,(int)temp_v2,temp_v10 + temp_v5,0x1e,0x1e);
         break;
       case 0xc:
-        dataTable04FindById();
+        skillDataFindById();
         if (temp_v17 == 0) break;
         switch(*(unsigned char *)(temp_v17 + 0x60)) {
         default:
@@ -714,7 +714,7 @@ LAB_004ebd00:
         temp_v17 = uStack_74;
         temp_v14 = *piStack_30;
         btlMainFindEntryByListedId(temp_v14,(int)temp_v2);
-        dataTable04FindById();
+        skillDataFindById();
         temp_v19 = '\0';
         if ((temp_v17 != 0) && (temp_v0 = *(char *)(temp_v17 + 0x4d), temp_v0 == '\x01' || temp_v0 == '\x02'))
         {
@@ -816,7 +816,7 @@ code_r0x004ef594:
       iStack_48 = iStack_48 + 1;
     } while (iStack_48 < 0x85);
     temp_v17 = uStack_74;
-    dataTable04FindById();
+    skillDataFindById();
     if ((*puVar25 & 0x200) == 0) {
       if (*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) == 1) {
         btlSlotSetStoreValue((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0xe,0);
@@ -933,7 +933,7 @@ code_r0x004ef7f0:
         if (iStack_68 != 1) {
           if ((iStack_68 == 8) && (iStack_54 == 0)) {
             temp_v18 = uStack_64;
-            dataTable8FindRecord();
+            itemTableGetItemRecord();
             temp_v2 = *(short *)(temp_v18 + 0x32);
             if (temp_v2 != 0) {
               temp_v3 = FUN_002c7bf4(temp_v2);
@@ -1185,7 +1185,7 @@ code_r0x004f054c:
           if (temp_v2 == 8) {
             temp_v2 = *(short *)(temp_v5 + 0x1c0);
             temp_v3 = (int)temp_v2;
-            dataTable8FindRecord();
+            itemTableGetItemRecord();
             if ((*(unsigned char *)(temp_v3 + 0x42) & 1) == 0) {
               flagValueSub((int)temp_v2,1);
             }

@@ -11,8 +11,8 @@ extern UniteWork *g_unite;
 
 static __inline s32 fusionCompareRaceLevelIdA(const u32 *first, const u32 *second)
 {
-    const DevilRecordA *a = devilGetRecord(*first);
-    const DevilRecordA *b = devilGetRecord(*second);
+    const NkmBaseRecordA *a = nkmBaseGetRecord(*first);
+    const NkmBaseRecordA *b = nkmBaseGetRecord(*second);
     s32 result = a->race - b->race;
     if (result == 0) {
         result = b->level - a->level;

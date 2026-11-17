@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 namespace {
 
@@ -29,7 +29,7 @@ u32 dataSelectPrioritizedCandidate(s32 index)
             continue;
         }
 
-        Table00RecordA* candidate = dataTable00FindById(candidateId);
+        NkmEnemyRecordA* candidate = nkmEnemyFindById(candidateId);
         if (candidate == 0) {
             continue;
         }
@@ -39,7 +39,7 @@ u32 dataSelectPrioritizedCandidate(s32 index)
         }
 
         if (selectedId == 0 ||
-            (dataTable00FindById(selectedId)->level & 0x7fff) <
+            (nkmEnemyFindById(selectedId)->level & 0x7fff) <
                 (candidate->level & 0x7fff)) {
             selectedId = candidateId;
         }

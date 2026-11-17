@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -10,7 +10,7 @@ typedef struct Source {
 
 u16 FUN_0033c0c0(Source *source)
 {
-    DevilRecord *record = devilGetRecord(source->id);
+    NkmBaseRecord *record = nkmBaseGetRecord(source->id);
 
     return record->evolutionTarget;
 }

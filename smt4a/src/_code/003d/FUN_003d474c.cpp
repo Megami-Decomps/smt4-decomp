@@ -61,7 +61,7 @@ void FUN_003d474c(void)
             state = partyEntryFlagsBit3(id) != 0 ? 3 : 6;
         }
     } else {
-        QuestRecordA *record = dataTable1bOr1cGetRecord(id);
+        QuestRecordA *record = questDataGetRecord(id);
 
         if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
             if (FUN_003de75c(id) == 0 && FUN_00284dbc(id) == 0) {

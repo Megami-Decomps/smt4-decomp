@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ u32 FUN_00312b28(void)
     if ((state->battleFlags & 2) == 0) {
         u32 devilId = state->devil.devilId;
 
-        if (devilId != 0 && devilGetRecord(devilId) != NULL) {
+        if (devilId != 0 && nkmBaseGetRecord(devilId) != NULL) {
             devilCreateRaceEffect(devilId, 3);
         }
     }

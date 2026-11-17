@@ -8,7 +8,7 @@ extern "C" {
 int textFormatBuffer(...);
 int dataTable01GetRecordWithAocOverride(...);
 int fontMeasureLineAdvance(...);
-int dataTable00FindById(...);
+int nkmEnemyFindById(...);
 int FUN_002a1850(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -51,7 +51,7 @@ extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int gameDataGetTableValue(void);
 extern unsigned char itemIsCollectedWithRelated(fn_00368e10_arg1 *);
 extern int gameProgressIsAdvanced(void);
@@ -89,7 +89,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   pfStack_30 = param_2;
   temp_v7 = param_3;
   temp_v8 = param_4;
-  dataTable00FindById();
+  nkmEnemyFindById();
   pfVar4 = param_2;
   dataTable01GetRecordWithAocOverride(param_2);
   textFormatBuffer(*piVar1 + 4,&LAB_00369218,pfVar4);

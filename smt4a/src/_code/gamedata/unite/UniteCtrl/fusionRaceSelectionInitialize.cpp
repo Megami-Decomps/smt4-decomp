@@ -42,7 +42,7 @@ FusionRaceSelection *fusionRaceSelectionInitialize(FusionRaceSelection *selectio
     sysMemClear(insertionCounts, sizeof(insertionCounts));
     sysMemClear(selection->counts, sizeof(selection->counts));
     for (u32 index = 0; index < count; ++index) {
-        const DevilRecordA *record = devilGetRecord((u16)index);
+        const NkmBaseRecordA *record = nkmBaseGetRecord((u16)index);
         if (record->race < 65 && (record->flags & 1))
             ++selection->counts[record->race];
     }
@@ -55,7 +55,7 @@ FusionRaceSelection *fusionRaceSelectionInitialize(FusionRaceSelection *selectio
         }
     }
     for (u32 index = 0; index < count; ++index) {
-        const DevilRecordA *record = devilGetRecord((u16)index);
+        const NkmBaseRecordA *record = nkmBaseGetRecord((u16)index);
         if (record->race < 65 && (record->flags & 1)) {
             selection->levels[record->race][insertionCounts[record->race]].id = record->id;
             selection->levels[record->race][insertionCounts[record->race]].level = record->level;

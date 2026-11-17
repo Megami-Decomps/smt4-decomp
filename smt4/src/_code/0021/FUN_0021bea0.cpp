@@ -11,7 +11,7 @@ int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_002533f4(int, int, int);
 int mathDistanceBetweenPoints(void);
 int lightOwnerRegister(unsigned int, int);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int gameFlagIsSet(...);
 int randNextInRange(int);
 int contentEntryGetB(void);
@@ -78,7 +78,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int mapGetDepartureIndex(void);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: lightOwnerRegister. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: randNextInRange. */
@@ -255,7 +255,7 @@ LAB_0021c1e4:
           *(int *)(temp_v2 + 0xa4) = temp_v1;
           temp_v1 = spriteTemplateGetPreferredDevilId();
           *(int *)(temp_v2 + 0xa8) = temp_v1;
-          dataTable00FindById();
+          nkmEnemyFindById();
           *(unsigned int *)(temp_v2 + 0x1a4) = (unsigned int)*(unsigned char *)(temp_v1 + 2);
           if ((*(int *)(temp_v2 + 0xa8) < 0x3e9) && (temp_v1 = gameFlagIsSet(0x52a), temp_v1 != 0)) {
             *(unsigned int *)(temp_v2 + 0x1a8) = (unsigned int)*(unsigned char *)(*(int *)(temp_v2 + 0xa8) + 0x447620);
@@ -343,7 +343,7 @@ LAB_0021c204:
     temp_v2 = temp_v5 + temp_v1 * 0x180;
     if (*(char *)(temp_v2 + 0x34) != '\0') {
       temp_v3 = *(unsigned int *)(temp_v2 + 0xa8) & 0xffff;
-      dataTable00FindById();
+      nkmEnemyFindById();
       temp_v3 = (unsigned int)*(unsigned char *)(temp_v3 + 2);
       temp_v7 = 1;
     }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite with packed ten/six-bit slots compiles (171 vs 173 rows); register allocation of the loop-carried pointers differs */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "Model/MoriModelResource.h"
 
 // A ten-bit value with a six-bit companion packed into one halfword.
@@ -121,7 +121,7 @@ void FUN_003eb760(void* unused, BattleEntry* entry, MemberSource* member)
             entry->slotsB[i].high = six;
             entry->slotsC[i] = six & 0x3f;
         }
-        DevilRecordA *info = devilGetRecord(entry->id);
+        NkmBaseRecordA *info = nkmBaseGetRecord(entry->id);
         entry->unk1bb_[0] = info->battleRace;
         if (info->category == 1) {
             entry->unk1bc_[0] = 1;

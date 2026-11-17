@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail unrolls the live-skill search and keeps the rebuilt record base in r7 (156 vs 180 rows); the save-entry comparison is the same. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
 
@@ -100,7 +100,7 @@ s32 FUN_0032fbd0(LiveUnit *unit)
     if (gameDataCopySaveEntry(id, saved) == 0) {
         return matches;
     }
-    devilGetRecord(id);
+    nkmBaseGetRecord(id);
     gameDataCopySaveEntry(id, &entry);
     sysMemClear(&record, 300);
     record.key = entry.key;

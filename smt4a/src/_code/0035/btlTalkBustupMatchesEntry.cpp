@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -12,7 +12,7 @@ s32 btlTalkBustupMatchesEntry(u32 id)
     if (bustup == NULL) {
         return 0;
     }
-    return devilGetRecord(id)->model == bustup->id;
+    return nkmBaseGetRecord(id)->model == bustup->id;
 }
 
 } /* extern "C" */

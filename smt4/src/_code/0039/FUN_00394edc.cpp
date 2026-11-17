@@ -10,10 +10,10 @@ void FUN_00394edc(const AffinitySourcePair *pair, u16 *affinities)
 {
     EquipmentRecord *sources[2] = { NULL, NULL };
     if (pair->first != 0) {
-        sources[0] = dataTable08Sub2GetRecord(pair->first);
+        sources[0] = itemTableGetEquipmentRecord(pair->first);
     }
     if (pair->second != 0) {
-        sources[1] = dataTable08Sub2GetRecord(pair->second);
+        sources[1] = itemTableGetEquipmentRecord(pair->second);
     }
     for (s32 i = 0; i < 18; ++i) {
         s32 adjustment = 0;

@@ -12,7 +12,7 @@ int table8Type5GetValue(void);
 int FUN_0029212c(...);
 int FUN_0029bd4c(void);
 int buttonHelpShowSkillDetails(...);
-int devilGetRecord(...);
+int nkmBaseGetRecord(...);
 int textFormatBuffer(...);
 
 int FUN_0026ab64(...);
@@ -115,7 +115,7 @@ extern int gameDataGetSortPreferences(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int uiSlidingSpriteAdvance(int, unsigned int);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int querySlotHasHandle(void);
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
@@ -1329,7 +1329,7 @@ LAB_001cc6b4:
     else {
       temp_v14 = (unsigned int)*(unsigned short *)(temp_v6 + 0xe30);
       temp_v11 = temp_v14;
-      devilGetRecord(temp_v14,temp_v4);
+      nkmBaseGetRecord(temp_v14,temp_v4);
       dataTable0cLookupById(*(unsigned short *)(temp_v11 + 0x38));
       temp_v7 = FUN_002bd068(temp_v14);
       temp_v12 = demonGetRaceLabel(temp_v14,0);

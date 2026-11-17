@@ -2,8 +2,8 @@
 
 static __inline s32 comparePairMember(u32 firstId, u32 secondId)
 {
-    const DevilRecordA *first = devilGetRecord(firstId);
-    const DevilRecordA *second = devilGetRecord(secondId);
+    const NkmBaseRecordA *first = nkmBaseGetRecord(firstId);
+    const NkmBaseRecordA *second = nkmBaseGetRecord(secondId);
     s32 result = second->race - first->race;
     if (result == 0) {
         result = first->level - second->level;

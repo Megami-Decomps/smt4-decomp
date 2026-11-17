@@ -12,8 +12,8 @@ extern s32 DAT_00402638[2];
 /* Sorts records by their strongest affinity, then their table order. */
 s32 FUN_002dcdd0(const u16 *left, const u16 *right)
 {
-    EquipmentRecord *leftRecord = dataTable08Sub2GetRecord(*left);
-    EquipmentRecord *rightRecord = dataTable08Sub2GetRecord(*right);
+    EquipmentRecord *leftRecord = itemTableGetEquipmentRecord(*left);
+    EquipmentRecord *rightRecord = itemTableGetEquipmentRecord(*right);
     s32 leftAffinity = 0;
     s32 rightAffinity = 0;
     s32 leftIndex = DAT_00402638[0];
@@ -36,8 +36,8 @@ s32 FUN_002dcdd0(const u16 *left, const u16 *right)
     if (difference != 0) {
         return difference;
     }
-    leftRecord = dataTable08Sub2GetRecord(*left);
-    rightRecord = dataTable08Sub2GetRecord(*right);
+    leftRecord = itemTableGetEquipmentRecord(*left);
+    rightRecord = itemTableGetEquipmentRecord(*right);
     return leftRecord->order - rightRecord->order;
 }
 }

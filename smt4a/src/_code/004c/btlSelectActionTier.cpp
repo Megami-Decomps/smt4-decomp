@@ -1,7 +1,7 @@
 /* NON_MATCHING: skill-array zero scheduling, battle mask loads and tier flag updates differ; -O2 candidate. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 struct ActionTierUnit {
     u64 flags;

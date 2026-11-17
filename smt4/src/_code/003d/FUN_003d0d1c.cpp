@@ -1,7 +1,7 @@
 /* NON_MATCHING: the selection masks now use int shifts sign-extended into the 64-bit mask (no __aeabi_llsl); retail keeps the present-flag loop rolled with a signed counter and tests bits 2|0x20 apart from 0x10, and unrolls the selection loop. */
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 // Candidate party member for the battle formation: slot index, rank and race.
 struct FormationCandidate {
@@ -70,7 +70,7 @@ void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
             flagWordTestBit(unit, 2) == 0) {
             candidates[count].slot = i;
             candidates[count].rank = unit->level;
-            candidates[count].race = devilGetRecord(unit->id)->race;
+            candidates[count].race = nkmBaseGetRecord(unit->id)->race;
             count++;
         }
     }

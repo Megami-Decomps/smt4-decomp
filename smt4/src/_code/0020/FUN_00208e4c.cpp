@@ -21,7 +21,7 @@ int mathAbsHeadingErrorToPoint(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int asdMdlManagerDestroy(void);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int SBORROW4(...);
 
 int FUN_002535ec(void);
@@ -112,7 +112,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
 extern int gameGetMapBlock(void);
@@ -1471,7 +1471,7 @@ joined_r0x0020ae6c:
               *(int *)(temp_v3 + 0xa4) = temp_v8;
               temp_v8 = spriteTemplateGetPreferredDevilId();
               *(int *)(temp_v3 + 0xa8) = temp_v8;
-              dataTable00FindById();
+              nkmEnemyFindById();
               *(unsigned int *)(temp_v3 + 0x1a4) = (unsigned int)*(unsigned char *)(temp_v8 + 2);
               if ((*(int *)(temp_v3 + 0xa8) < 0x3e9) && (temp_v8 = gameFlagIsSet(0x52a), temp_v8 != 0)) {
                 temp_v4 = (unsigned int)*(unsigned char *)(*(int *)(temp_v3 + 0xa8) + 0x447620);

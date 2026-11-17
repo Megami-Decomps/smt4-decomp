@@ -3,9 +3,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "code/Code0027.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "battle/BtlGlobals.h"
 
 static inline s32 findAnchorMember(const BtlEntry *entry, s16 id)
@@ -40,7 +40,7 @@ BattleVector3 FUN_0023cd08(BtlMainState *state, s32 index, s32 forceEnemy)
         position = *FUN_002d8c3c(state->arrangement.file);
         position.z += 2.0f;
         BtlUnitData *source = btlFindEntryBlockByMemberId(state, index);
-        u8 kind = dataTable00FindById(source->id)->arrangementFirst;
+        u8 kind = nkmEnemyFindById(source->id)->arrangementFirst;
         f32 height = 0.0f;
         if (kind == 0)
             height = 15.0f;

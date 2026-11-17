@@ -1,5 +1,5 @@
-#ifndef GAMEDATA_DEVILRECORDA_H
-#define GAMEDATA_DEVILRECORDA_H
+#ifndef GAMEDATA_NKMBASERECORDA_H
+#define GAMEDATA_NKMBASERECORDA_H
 
 #include "common.h"
 #include <stddef.h>
@@ -30,10 +30,12 @@ struct DevilLearnedSkillA {
     u16 id;
 };
 
-/* Apocalypse's demon record (data table 0, 0xB4 bytes, sorted by id), as devilGetRecord returns it;
-   add-on content supplies further records of the same layout. IV's differs: DevilRecord in
-   gamedata/DevilRecord.h. */
-struct DevilRecordA {
+/* Apocalypse's demon record (data table 0, 0xB4 bytes, sorted by id), as nkmBaseGetRecord returns it;
+   add-on content supplies further records of the same layout. IV's differs: NkmBaseRecord in
+   gamedata/NkmBaseRecord.h. */
+/* Apocalypse's demon base record: one 0xB4-byte row of battle/NKMBaseTable.tbb table 0, as
+ * nkmBaseGetRecord returns it (IV's layout is NkmBaseRecord, gamedata/NkmBaseRecord.h). */
+struct NkmBaseRecordA {
     /* 0x00 */ u16 id;
     /* 0x02 */ u8 race;
     /* 0x03 */ u8 unk03[3];
@@ -94,19 +96,19 @@ struct DevilRecordA {
     /* 0xB3 */ u8 extraFlags;          /* bit 1: plays the special confirm sound; bit 2: allows the command (FUN_002cc9e0, FUN_0020d3d4) */
 };
 
-typedef char DevilRecordASizeCheck[sizeof(DevilRecordA) == 0xB4 ? 1 : -1];
+typedef char DevilRecordASizeCheck[sizeof(NkmBaseRecordA) == 0xB4 ? 1 : -1];
 typedef char DevilRecordAPrefixCheck[
-    offsetof(DevilRecordA, race) == 0x02 && offsetof(DevilRecordA, level) == 0x06 &&
-    offsetof(DevilRecordA, category) == 0x09 && offsetof(DevilRecordA, flags) == 0x0A &&
-    offsetof(DevilRecordA, element) == 0x0E && offsetof(DevilRecordA, baseHp) == 0x18 &&
-    offsetof(DevilRecordA, mpGrowth) == 0x1D && offsetof(DevilRecordA, stats) == 0x1E &&
-    offsetof(DevilRecordA, statGrowth) == 0x28 ? 1 : -1];
+    offsetof(NkmBaseRecordA, race) == 0x02 && offsetof(NkmBaseRecordA, level) == 0x06 &&
+    offsetof(NkmBaseRecordA, category) == 0x09 && offsetof(NkmBaseRecordA, flags) == 0x0A &&
+    offsetof(NkmBaseRecordA, element) == 0x0E && offsetof(NkmBaseRecordA, baseHp) == 0x18 &&
+    offsetof(NkmBaseRecordA, mpGrowth) == 0x1D && offsetof(NkmBaseRecordA, stats) == 0x1E &&
+    offsetof(NkmBaseRecordA, statGrowth) == 0x28 ? 1 : -1];
 typedef char DevilRecordAFieldsCheck[
-    offsetof(DevilRecordA, evolutionLevel) == 0x30 && offsetof(DevilRecordA, fusionRestrictions) == 0x34 &&
-    offsetof(DevilRecordA, talkTone) == 0x38 && offsetof(DevilRecordA, saveRequirement) == 0x3C &&
-    offsetof(DevilRecordA, skills) == 0x40 && offsetof(DevilRecordA, learnedSkills) == 0x50 && offsetof(DevilRecordA, affinities) == 0x70 &&
-    offsetof(DevilRecordA, model) == 0x9C && offsetof(DevilRecordA, categoryModifiers) == 0xA0 &&
-    offsetof(DevilRecordA, extraActionChance) == 0xB2 && offsetof(DevilRecordA, extraFlags) == 0xB3 ? 1 : -1];
+    offsetof(NkmBaseRecordA, evolutionLevel) == 0x30 && offsetof(NkmBaseRecordA, fusionRestrictions) == 0x34 &&
+    offsetof(NkmBaseRecordA, talkTone) == 0x38 && offsetof(NkmBaseRecordA, saveRequirement) == 0x3C &&
+    offsetof(NkmBaseRecordA, skills) == 0x40 && offsetof(NkmBaseRecordA, learnedSkills) == 0x50 && offsetof(NkmBaseRecordA, affinities) == 0x70 &&
+    offsetof(NkmBaseRecordA, model) == 0x9C && offsetof(NkmBaseRecordA, categoryModifiers) == 0xA0 &&
+    offsetof(NkmBaseRecordA, extraActionChance) == 0xB2 && offsetof(NkmBaseRecordA, extraFlags) == 0xB3 ? 1 : -1];
 
 /* A demon stock entry: demon ID and the number held. */
 struct DevilStock {
@@ -116,9 +118,9 @@ struct DevilStock {
 
 /* The demon record for an id (base table, overridden by add-on records). Retail's definition takes a
    u16 (it only stores the halfword), but its callers pass ids unextended, so they see a u32; the
-   definition file (devilGetRecord.cpp) defines DEVIL_RECORD_A_OWN_PROTOTYPE and declares the u16 one. */
-#ifndef DEVIL_RECORD_A_OWN_PROTOTYPE
-extern "C" DevilRecordA *devilGetRecord(u32 id);
+   definition file (nkmBaseGetRecord.cpp) defines NKM_BASE_RECORD_A_OWN_PROTOTYPE and declares the u16 one. */
+#ifndef NKM_BASE_RECORD_A_OWN_PROTOTYPE
+extern "C" NkmBaseRecordA *nkmBaseGetRecord(u32 id);
 #endif
 
 #endif

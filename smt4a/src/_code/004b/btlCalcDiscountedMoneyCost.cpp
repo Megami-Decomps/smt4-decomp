@@ -1,6 +1,6 @@
 #include "shard/W6_W6Match4_PartyWallet.h"
 #include "shard/W6_W6Match2_LongDivision.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/SaveSlotTable.h"
 
 struct Table04PricingRecord {
@@ -17,7 +17,7 @@ __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 u32 btlCalcDiscountedMoneyCost(u32 id)
 {
     u32 amount = 0;
-    const Table04PricingRecord *record = (const Table04PricingRecord *)dataTable04FindById(id);
+    const Table04PricingRecord *record = (const Table04PricingRecord *)skillDataFindById(id);
     if (record != 0 && record->discountPercent != 0) {
         const PartyWallet *wallet = (const PartyWallet *)gameGetSlotTable();
         s64 money = wallet->money;

@@ -6,8 +6,8 @@ extern "C" {
 /* Sort comparison of two ids: higher grade first, then lower order first. */
 s32 devilIdCompareGradeDesc(u16 *idA, u16 *idB)
 {
-    EquipmentRecord *recordA = dataTable08Sub2GetRecord(*idA);
-    EquipmentRecord *recordB = dataTable08Sub2GetRecord(*idB);
+    EquipmentRecord *recordA = itemTableGetEquipmentRecord(*idA);
+    EquipmentRecord *recordB = itemTableGetEquipmentRecord(*idB);
     s32 diff = recordB->statBonus[1] - recordA->statBonus[1];
 
     if (diff == 0) {

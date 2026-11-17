@@ -1,7 +1,7 @@
-#include "gamedata/DevilRecordA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/NkmBaseRecordA.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/EquipmentRecordA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 namespace {
 
@@ -54,19 +54,19 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
     }
     if (unit->equipment != NULL) {
         if (restricted == 0) {
-            EquipmentRecordA *record = dataTable08Sub2GetRecord(unit->equipment->first);
+            EquipmentRecordA *record = itemTableGetEquipmentRecord(unit->equipment->first);
             if (record != NULL &&
                 (record->element == wanted || (wanted == ELEMENT_ANY && record->specialElement != 0))) {
                 return 1;
             }
-            record = dataTable08Sub2GetRecord(unit->equipment->second);
+            record = itemTableGetEquipmentRecord(unit->equipment->second);
             if (record != NULL &&
                 (record->element == wanted || (wanted == ELEMENT_ANY && record->specialElement != 0))) {
                 return 1;
             }
         }
         for (s32 i = 0; i < 8; i++) {
-            SkillRecord *skill = (SkillRecord *)dataTable04FindById(unit->equipment->skills[i]);
+            SkillRecord *skill = (SkillRecord *)skillDataFindById(unit->equipment->skills[i]);
             if (skill != NULL) {
                 if (restricted == 0) {
                     if (skill->element == wanted) {
@@ -88,14 +88,14 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
     }
     if (unit->demonSkills != NULL) {
         if (restricted == 0) {
-            DevilRecordA *demon = devilGetRecord(unit->demonId);
+            NkmBaseRecordA *demon = nkmBaseGetRecord(unit->demonId);
             if (demon->element == wanted || (wanted == ELEMENT_ANY && demon->special != 0)) {
                 return 1;
             }
         }
         for (s32 i = 0; i < 8; i++) {
             u16 id = unit->demonSkills->skills[i];
-            SkillRecord *skill = (SkillRecord *)dataTable04FindById(id);
+            SkillRecord *skill = (SkillRecord *)skillDataFindById(id);
             if (skill != NULL) {
                 if (restricted == 0) {
                     if (skill->element == wanted) {
@@ -116,9 +116,9 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
         }
     }
     if (unit->skillList != NULL) {
-        Table00RecordA *list = dataTable00FindById(unit->demonId);
+        NkmEnemyRecordA *list = nkmEnemyFindById(unit->demonId);
         for (s32 i = 0; i < 8; i++) {
-            SkillRecord *skill = (SkillRecord *)dataTable04FindById(list->skills[i]);
+            SkillRecord *skill = (SkillRecord *)skillDataFindById(list->skills[i]);
             if (skill != NULL) {
                 if (restricted == 0) {
                     if (skill->element == wanted) {

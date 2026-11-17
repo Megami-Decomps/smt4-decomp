@@ -10,7 +10,7 @@ extern s32 padStickDirectionIsDown(u32);
 /* Whether a quest's required flags, finished quests and stick input all hold. */
 u32 questRequirementsMet(u16 questId)
 {
-    QuestRecord *quest = dataTable1bOr1cGetRecord(questId);
+    QuestRecord *quest = questDataGetRecord(questId);
     if (quest == NULL) {
         return 0;
     }
@@ -62,7 +62,7 @@ u32 questRequirementsMet(u16 questId)
     if (quest->excludedQuests[1] != 0 && questIsCompleted(quest->excludedQuests[1]) != 0) {
         return 0;
     }
-    quest = dataTable1bOr1cGetRecord(questId);
+    quest = questDataGetRecord(questId);
     if (quest == NULL) {
         return 1;
     }

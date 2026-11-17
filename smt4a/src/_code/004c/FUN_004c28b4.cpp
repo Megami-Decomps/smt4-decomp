@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
 
 /* A skill record: its rate at +0x40 and packed class/grade bits at +0x44. */

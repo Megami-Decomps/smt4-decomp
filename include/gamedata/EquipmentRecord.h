@@ -1,5 +1,5 @@
-/* IV's equipment records: data table 8, section 2 (0xA8 bytes each), found by id with
- * dataTable08Sub2GetRecord(). Apocalypse's layout is EquipmentRecordA (gamedata/EquipmentRecordA.h). */
+/* IV's equipment records: item/ItemTable.tbb table 2 (the game's data table 8, section 2; 0xA8 bytes each), found by id with
+ * itemTableGetEquipmentRecord(). Apocalypse's layout is EquipmentRecordA (gamedata/EquipmentRecordA.h). */
 #ifndef GAMEDATA_EQUIPMENTRECORD_H
 #define GAMEDATA_EQUIPMENTRECORD_H
 
@@ -68,7 +68,7 @@ typedef char EquipmentRecordOffsetCheck[sizeof(EquipmentRecord) == 0xA8 &&
 extern "C" {
 
 /* The equipment record with `id`: the add-on's when it has one, else a search of data table 8/2. */
-EquipmentRecord *dataTable08Sub2GetRecord(u32 id);
+EquipmentRecord *itemTableGetEquipmentRecord(u32 id);
 
 } /* extern "C" */
 

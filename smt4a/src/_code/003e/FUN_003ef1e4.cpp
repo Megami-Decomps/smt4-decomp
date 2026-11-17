@@ -1,8 +1,8 @@
 /* NON_MATCHING: mask test and branch layout differ (retail loads each u64 mask pair with ldm/ldrd from the g_btlMain base and tests the halves separately) */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/BattleFlagMasks.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/GamePlayerData.h"
 
 /* The battle state (only the fields this decision reads and writes). */
@@ -89,7 +89,7 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
         for (s32 i = 0;; i++) {
             u32 id = battle->enemies[i];
             if (id != 0) {
-                DevilRecordA *model = devilGetRecord(id & 0xffff);
+                NkmBaseRecordA *model = nkmBaseGetRecord(id & 0xffff);
                 if (model != NULL && model->race == 39) {
                     break;
                 }
@@ -119,7 +119,7 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
     }
     for (s32 i = 0; i < 6; i++) {
         if (battle->enemies[i] != 0) {
-            Table00RecordA *record = dataTable00FindById(battle->enemies[i] & 0xffff);
+            NkmEnemyRecordA *record = nkmEnemyFindById(battle->enemies[i] & 0xffff);
             if (record != NULL) {
                 f32 power = (f32)(u32)(record->stats[4] + record->stats[3]);
                 if (power > enemyPower) {

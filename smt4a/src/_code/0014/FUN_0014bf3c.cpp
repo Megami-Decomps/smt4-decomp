@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 struct RaceLabelA {
     char primary[0x10];
@@ -36,7 +36,7 @@ static __inline const char *findRaceLabel(u32 race, s32 alternate)
 /* Selects the demon's race label, preferring add-on text over the built-in table. */
 const char *FUN_0014bf3c(u16 id, s32 alternate)
 {
-    DevilRecordA *demon = devilGetRecord(id);
+    NkmBaseRecordA *demon = nkmBaseGetRecord(id);
     if (demon != NULL) {
         return findRaceLabel(demon->race, alternate);
     }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: option argument reload/scratch allocation and two-float projection copies differ; -O2 candidate. */
 #include "battle/btlTargetSelect.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "code/Code0027.h"
 #include "addon/LookupRecord.h"
 
@@ -43,7 +43,7 @@ void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32
                  u8 option2, u8 option3, u8 option4, u8 option5)
 {
     BtlTargetSelect *selection = g_btlTargetSelect;
-    const Table00Record *definition = dataTable00FindById(id);
+    const NkmEnemyRecord *definition = nkmEnemyFindById(id);
     const char *name = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(id));
     textFormatBuffer(targetInfoPanel(selection)->name, "%s", name);
     const char *category = demonGetRaceLabel(id, 0);

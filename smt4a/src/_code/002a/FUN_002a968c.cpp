@@ -12,7 +12,7 @@ int efctSetSpeed(void);
 int FUN_00180310(...);
 int uiDrawItemOrStatusIcon(...);
 int asdTMTexTableEntryAt(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int FUN_00185e84(...);
 int FUN_0020caec(...);
 int unitRecordBuild(...);
@@ -53,7 +53,7 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: FUN_0020caec. */
 extern int uniteGetWork(void);
@@ -126,20 +126,20 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x4f,param_1,param_2,0x6a);
     if (temp_v10 != 0) {
       psVar3 = (short *)(unsigned int)*(unsigned short *)(temp_v0 + 0x5238);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     else if (param_6 != 0) {
       psVar3 = (short *)((*(unsigned int *)(temp_v0 + 0x13bc) & 0x1ffff) >> 2);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     else if (param_7 != 0) {
       psVar3 = (short *)((*(unsigned int *)(temp_v0 + 0x13bc) & 0x1ffff) >> 2);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     else {
       psVar3 = (short *)((*(unsigned int *)(temp_v0 + (unsigned int)*(unsigned short *)(temp_v0 + 0x6832) * 8 + 0x13bc) &
                          0x1ffff) >> 2);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     temp_v1 = asdTMTexTableEntryAt(0x1a,0x4d);
     temp_v2 = FUN_00180114(*psVar3);

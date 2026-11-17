@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/BtlGlobals.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 extern "C" {
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 s32 gameFlagIsSet(u32 flag);
@@ -45,7 +45,7 @@ u32 FUN_003ed6e8(BtlMainStateA *state)
         const BattleSlotSourceRecordA *source = (const BattleSlotSourceRecordA *)entry->specialMaximum.record;
         if (!source)
             return 0;
-        const DevilRecordA *devil = devilGetRecord(source->id);
+        const NkmBaseRecordA *devil = nkmBaseGetRecord(source->id);
         if (!devil || !devil->extraActionChance)
             return 0;
         if (!(state->stateFlags64.bits & masks->forced)) {

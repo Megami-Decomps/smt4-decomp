@@ -1,7 +1,7 @@
 #include "shard/W5_W5Match2_UniteWork.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
-static inline s32 compareFusionComponents(const DevilRecordA *left, const DevilRecordA *right)
+static inline s32 compareFusionComponents(const NkmBaseRecordA *left, const NkmBaseRecordA *right)
 {
     s32 result = left->race - right->race;
     if (result != 0)
@@ -28,14 +28,14 @@ s32 FUN_002b28d8(const u16 *left, const u16 *right)
     if (result == 0) {
         u16 leftId = work->pairList.pairs[*left].packedIds & 0x7FFF;
         u16 rightId = work->pairList.pairs[*right].packedIds & 0x7FFF;
-        const DevilRecordA *a = devilGetRecord(leftId);
-        const DevilRecordA *b = devilGetRecord(rightId);
+        const NkmBaseRecordA *a = nkmBaseGetRecord(leftId);
+        const NkmBaseRecordA *b = nkmBaseGetRecord(rightId);
         result = compareFusionComponents(a, b);
         if (result == 0) {
             leftId = (work->pairList.pairs[*left].packedIds & 0x3FFFFFFF) >> 15;
             rightId = (work->pairList.pairs[*right].packedIds & 0x3FFFFFFF) >> 15;
-            a = devilGetRecord(leftId);
-            b = devilGetRecord(rightId);
+            a = nkmBaseGetRecord(leftId);
+            b = nkmBaseGetRecord(rightId);
             result = compareFusionComponents(a, b);
         }
     }

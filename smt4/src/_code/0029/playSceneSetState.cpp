@@ -13,7 +13,7 @@ int objectPartRunUnlessLocked(int);
 int FUN_0029e958(...);
 int gridNavigationConfigure(int, int, int, int, int, int);
 int buttonHelpGetMode(void);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int ifTouchRegionAddRequested(...);
 int buttonHelpSetPreset(void);
 int ifTouchRegionRemove(void);
@@ -37,7 +37,7 @@ extern int FUN_0029d644(unsigned int);
 extern int FUN_0029ee54(unsigned int);
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: buttonHelpGetMode. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
@@ -233,7 +233,7 @@ LAB_00298368:
       temp_v4 = param_1 + temp_v1 * 0x2c;
       if (*(char *)(temp_v4 + 0x5778) != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x5760);
-        dataTable00FindById();
+        nkmEnemyFindById();
         if ((*(unsigned char *)(temp_v3 + 3) & 1) != 0) {
           if (*(char *)(param_1 + 0x575f) != '\0') {
             temp_v0 = ifTouchRegionAddRequested(0x15,0x1a0);

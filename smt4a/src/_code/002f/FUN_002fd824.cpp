@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int itemSortCompareRankThenKey(int *, int *);
 int dataTable41FindById(void);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int idIsAbove400(int);
 extern int gameGetSlotRecord(void);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: itemSortCompareRankThenKey. */
 /* Supplied declaration required: dataTable41FindById. */
 
@@ -36,7 +36,7 @@ void FUN_002fd824(int *param_1,int *param_2)
     temp_v3 = *(short *)(temp_v2 + 0x22);
   }
   else {
-    dataTable04FindById();
+    skillDataFindById();
     temp_v3 = *(short *)(temp_v2 + 0x24);
   }
   temp_v1 = idIsAbove400(*param_2);
@@ -46,7 +46,7 @@ void FUN_002fd824(int *param_1,int *param_2)
     temp_v0 = *(short *)(temp_v2 + 0x22);
   }
   else {
-    dataTable04FindById();
+    skillDataFindById();
     temp_v0 = *(short *)(temp_v2 + 0x24);
   }
   if (temp_v3 == temp_v0) {

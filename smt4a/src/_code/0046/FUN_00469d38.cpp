@@ -48,7 +48,7 @@ void FUN_00469d38(StepWork *work)
         source = rosterGetLeaderId();
         if (source != NULL && FUN_001bd118() == 6) {
             qcMainSetMode(1);
-            FUN_00270c58(dataTable1bOr1cGetRecord(reinterpret_cast<u32>(source))->event.package);
+            FUN_00270c58(questDataGetRecord(reinterpret_cast<u32>(source))->event.package);
             campButtonHelpRelease();
         }
         break;

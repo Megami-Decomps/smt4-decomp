@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the register numbers of the final empty-slot search loop (i/temporary) differ. */
 #include "AsdSDK/AsdDebug.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
 // The demon's eight skill ids; copied as one 16-byte block.
@@ -26,7 +26,7 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\nkm\\NkmGrowEvent.cpp", 598);
     u16 *candidates = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 0x3ea, 1);
     s32 rank = 0;
-    const DevilRecordA *definition = devilGetRecord(demon->id);
+    const NkmBaseRecordA *definition = nkmBaseGetRecord(demon->id);
     for (s32 i = 0; i < 8; ++i) {
         if (definition->skills.ids[i]) {
             const CompactSortRecord *skill = findSkillMetadataById(definition->skills.ids[i]);

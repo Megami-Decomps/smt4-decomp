@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail reaches the world and demon-range pointers through one base symbol (+4/+0xc), does not unroll the 24-slot init loop and keeps its world pointer in r4/r5 around the demon-table rebuild; this version unrolls the loop and keeps the world in r5, so the instruction count differs. The stores, calls and loop bounds are the same. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 namespace {
@@ -172,7 +172,7 @@ void FUN_001a1110(void)
     g_gameDataBlocks.demonRange->last = 0;
     DemonRow *row = reinterpret_cast<DemonRow *>(reinterpret_cast<u8 *>(world) + 0xc22c);
     for (s32 i = 0; i < 0x500; i++) {
-        const DevilRecord *record = devilGetRecord((u16)(i + 1));
+        const NkmBaseRecord *record = nkmBaseGetRecord((u16)(i + 1));
         if (record != NULL) {
             if ((record->flags & 1) != 0) {
                 if (g_gameDataBlocks.demonRange->first == 0) {

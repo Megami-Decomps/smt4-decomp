@@ -26,7 +26,7 @@ int FUN_0026b9bc(void);
 int textEncodeFontSlot(int, unsigned int [60]);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int gameGetUnitRecord(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int memCopy(void);
 int __aeabi_memset4(unsigned int [60], int, unsigned int);
 int gameDataFlagsClearAndRefresh(int);
@@ -81,7 +81,7 @@ extern int flagWordTestBit(unsigned int, unsigned int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int recordPackedValue(unsigned short);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: memCopy. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
@@ -262,7 +262,7 @@ unsigned int FUN_002ec588(int param_1)
                 ((int)(short)*puVar14 != (unsigned int)*(unsigned short *)(param_1 + 0x126))) &&
                (temp_v3 = partyHasStoredDemon(*puVar14), temp_v3 == 0)) {
               temp_v4 = (unsigned int)*puVar14;
-              devilGetRecord();
+              nkmBaseGetRecord();
               if ((unsigned int)*(unsigned char *)(temp_v4 + 3) <= *(unsigned char *)(temp_v2 + 0x7a) + 5) {
                 temp_v12[temp_v8] = temp_v7;
                 temp_v8 = temp_v8 + 1;
@@ -401,7 +401,7 @@ unsigned int FUN_002ec588(int param_1)
         if (temp_v11 && puVar14 != (unsigned short *)0x0) {
           temp_v7 = (unsigned int)*puVar14;
         }
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v8 = FUN_002cdecc((int)*(char *)(temp_v7 + 0x30));
         textFormatBuffer(temp_v12,&LAB_002ece48,temp_v8 + 1);
         asdLoadFileAsyncSimple(temp_v12,param_1 + 0xd00,0);

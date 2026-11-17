@@ -3,7 +3,7 @@
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match1_PartySlot.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 #include "battle/BtlGlobals.h"
 
@@ -15,8 +15,8 @@ PartySlotA *gameGetSlotRecord(s32 index);
 
 u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
 {
-    Table04RecordA *item = dataTable04FindById(itemId);
-    ConsumableRecordA *skill = dataTable8FindRecord(skillId);
+    SkillDataRecordA *item = skillDataFindById(itemId);
+    ConsumableRecordA *skill = itemTableGetItemRecord(skillId);
     if (item == NULL && skill == NULL)
         return 0;
     if (item != NULL && (item->flags & 0x7F) == 0)

@@ -3,7 +3,7 @@
 #include "shard/Shard0031.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/Shard004B.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
@@ -17,7 +17,7 @@ s32 skillGetAdjustedCost(const ItemRankRecord *unit, u32 costParameter);
 u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
 {
     u8 applied = 0;
-    const ActiveSkillRecord *skill = (const ActiveSkillRecord *)dataTable04FindById(skillId);
+    const ActiveSkillRecord *skill = (const ActiveSkillRecord *)skillDataFindById(skillId);
     if (skill != NULL) {
         if (FUN_0028809c(source, -1, skill, preview, 0) == 0) {
             applied = 1;

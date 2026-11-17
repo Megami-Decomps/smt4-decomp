@@ -15,7 +15,7 @@ int textFormatBuffer(...);
 int qsort(int, int, int, unsigned char *);
 int uiSpriteAdvanceAnimation(int);
 int dataTable01GetRecordWithAocOverride(unsigned int);
-int devilGetRecord(...);
+int nkmBaseGetRecord(...);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int asdLoadFileSyncDefault(void);
@@ -67,7 +67,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -266,7 +266,7 @@ void FUN_002f5064(int param_1)
       scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x43ac));
       asdMemFree(*(unsigned int *)(param_1 + 0x43b0));
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v0 = *(char *)(temp_v5 + 0x38);
       temp_v4 = dataTableGet(0x25,0);
       pcVar14 = (char *)dataTableGetEntries();
@@ -322,8 +322,8 @@ LAB_002f56d4:
         return;
       }
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
-      devilGetRecord();
-      devilGetRecord(*(unsigned short *)(temp_v5 + 0x32));
+      nkmBaseGetRecord();
+      nkmBaseGetRecord(*(unsigned short *)(temp_v5 + 0x32));
       gameGetPlayerData();
       if (((int)(*(unsigned short *)(temp_v5 + 0x30) - 2) <= (int)(unsigned int)*(unsigned short *)(temp_v2 + 100)) &&
          ((unsigned int)*(unsigned short *)(temp_v2 + 100) < (unsigned int)*(unsigned short *)(temp_v5 + 0x30))) {

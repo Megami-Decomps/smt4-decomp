@@ -13,7 +13,7 @@ int fadeObjectResetIfActive(...);
 int FUN_0029a284(...);
 int fontMeasureLineAdvance(...);
 int FUN_002b75ec(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int textFormatBuffer(...);
 
 int FUN_00187114(int, int);
@@ -78,7 +78,7 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
@@ -442,7 +442,7 @@ LAB_001ccb9c:
     texDrawCompositeSprite(2,0x1a,0xe,temp_v1,temp_v2,0xb3);
     FUN_0029ab54(temp_v1,temp_v2);
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x47e);
-    devilGetRecord();
+    nkmBaseGetRecord();
     if (temp_v8 != 0) {
       if (*(char *)(temp_v8 + 5) == '\x01') {
         texDrawTableEntryAtStoredOrigin(2,0x1a,0x483,temp_v1,temp_v2,0xbf);

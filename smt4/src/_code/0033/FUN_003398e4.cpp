@@ -1,6 +1,6 @@
 /* NON_MATCHING: memset lowers to __aeabi_memset instead of retail __aeabi_memset4 (same as touchLayoutRebuildRegions); the demon-id switch also keeps case 1-3 stores addressed from the world base in retail while built folds them into predicated stores off r7 */
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include <stddef.h>
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -78,7 +78,7 @@ void FUN_003398e4(PartyWorld *world)
             } else if (i == 3) {
                 world->defaults[3] = 0x83;
             }
-            ids[i] = dataTable00FindById((u16)world->defaults[i])->portraitId;
+            ids[i] = nkmEnemyFindById((u16)world->defaults[i])->portraitId;
         }
         world->selectedCount = selected;
     } else {
@@ -89,7 +89,7 @@ void FUN_003398e4(PartyWorld *world)
 
             if (record->demonId != 0) {
                 world->defaults[selected] = record->demonId;
-                ids[selected] = dataTable00FindById(record->demonId)->portraitId;
+                ids[selected] = nkmEnemyFindById(record->demonId)->portraitId;
                 selected++;
             }
         } while (selected < 4 && ++j < 12);

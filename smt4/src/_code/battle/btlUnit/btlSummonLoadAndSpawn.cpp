@@ -91,7 +91,7 @@ extern BattleVersionResources *DAT_00435d18;
 extern BtlMainEffectState *g_btlMainState;
 extern u32 DAT_00439a24, DAT_00439a28, DAT_00439a38, DAT_00439cf8;
 
-void dataTable00FindById(u32 id);
+void nkmEnemyFindById(u32 id);
 u32 idSlotsFindEntryById(BtlSummonState *state, s32 id);
 s32 nkdwHeaderParse(u32 resource);
 void aocHandleButtons(u32 resource, s32 mode);
@@ -110,7 +110,7 @@ u32 btlSummonLoadAndSpawn(BtlSummonState *state, u32 request)
         return 1;
 
     u32 summon = request & 0xFFFF;
-    dataTable00FindById(summon);
+    nkmEnemyFindById(summon);
     SummonRequest *source = reinterpret_cast<SummonRequest *>(request);
 
     if (state->state == SUMMON_STATE_LOAD) {

@@ -144,7 +144,7 @@ int FUN_00280ac0(...);
 int FUN_0028a420(...);
 int FUN_00294834(...);
 int FUN_0029ae60(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 
 int FUN_00275dc4(void);
 int FUN_00275dec(void);
@@ -659,7 +659,7 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdModelSlotRelease. */
 extern int gameCountUnits(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int infoWindowIsActive(void);
 extern int FUN_002b8694(void);
 /* Supplied declaration required: buttonHelpSetPresetDefault. */
@@ -3027,7 +3027,7 @@ LAB_001bb1d4:
     }
     if (pcVar13[1] != '\0') {
       temp_v14 = (unsigned int)*(unsigned short *)(pcVar13 + 8);
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       DAT_0049fa82 = *(short *)(temp_v14 + 2);
       libc_strcpy(&DAT_0049fa84,temp_v14 + 0x138);
       DAT_0049fa80 = 1;
@@ -4520,7 +4520,7 @@ LAB_001bd824:
       temp_v9 = FUN_0027d968();
       if (temp_v9 != -1) {
         temp_v14 = FUN_0027d968() & 0xffff;
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         DAT_0049f970 = (unsigned int)*(unsigned short *)(temp_v14 + 2);
         libc_strcpy(&DAT_0049f978,temp_v14 + 0x128);
         puVar14[0x19] = DAT_0049f970;
@@ -5726,7 +5726,7 @@ joined_r0x001bfcb4:
     if (*(char *)((int)puVar14 + 0xd) != '\0') {
       temp_v10 = rosterGetLeaderId();
       if ((temp_v10 != 0) && (temp_v12 = table1bOr1cGetRecordValue(), temp_v12 == 6)) {
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         FUN_0026f960(*(unsigned short *)(temp_v10 + 0x148));
         return 0xffffffff;
       }

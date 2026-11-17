@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/LevelTable.h"
 
 extern "C" {
@@ -8,7 +8,7 @@ extern "C" {
 s32 devilLevelUpsAffordable(u32 devilId, s32 level, u32 *exp)
 {
     s32 cur = level;
-    s32 step = cur - devilGetRecord(devilId)->level + 1;
+    s32 step = cur - nkmBaseGetRecord(devilId)->level + 1;
     u32 percent;
 
     if (step <= 0) {

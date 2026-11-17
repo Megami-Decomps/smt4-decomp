@@ -5,7 +5,7 @@
 extern "C" {
 
 int saveGetMapFlag(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int memCopy(int, int, int);
 int HintPreloadData(unsigned int *);
 
@@ -20,7 +20,7 @@ extern int FUN_0025981c(void);
 /* Supplied declaration required: saveGetMapFlag. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: memCopy. */
 extern int gameDataBlocksGetSaveData(void);
 extern int cecProcessGetObject(void);
@@ -89,7 +89,7 @@ unsigned int * FUN_002bd2b4(int param_1,int param_2,unsigned char param_3,unsign
     temp_v1 = 0x218;
     *(unsigned short *)(param_1 + 0x34) = 0;
     *(unsigned short *)(param_1 + 0x48) = 0x218;
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v5 = 0x10;
     puVar5 = (unsigned int *)(temp_v1 + 0x3c);
     *(unsigned char *)(param_1 + 0x4a) = *(unsigned char *)(temp_v1 + 3);

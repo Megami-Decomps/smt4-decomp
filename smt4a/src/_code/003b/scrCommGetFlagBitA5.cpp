@@ -1,5 +1,5 @@
 #include "shard/Shard003B.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 
@@ -10,7 +10,7 @@ extern void scrSetResult(u32 value);
 u32 scrCommGetFlagBitA5(void)
 {
     u16 id = scrGetArg(0);
-    Table00RecordA *rec = dataTable00FindById(id);
+    NkmEnemyRecordA *rec = nkmEnemyFindById(id);
 
     scrSetResult((rec->scriptFlags & 3) >> 1);
     return 1;

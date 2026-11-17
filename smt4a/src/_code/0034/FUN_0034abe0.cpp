@@ -22,7 +22,7 @@ int asdTMTexTableEntryAt(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_002a4b28(...);
@@ -90,7 +90,7 @@ extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: FUN_0020caec. */
@@ -211,7 +211,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       do {
         temp_v2 = temp_v1 + temp_v9;
         puVar7 = (unsigned short *)(unsigned int)*(unsigned short *)((int)puVar2 + temp_v2 * 2 + 0x62a0);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v17 = 0;
         if (temp_v18 != 0) {
           temp_v8 = 0;
@@ -374,7 +374,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
     if (0 < temp_v2) {
       do {
         puVar7 = (unsigned short *)(unsigned int)*(unsigned short *)((int)puVar2 + (temp_v1 + temp_v9) * 2 + 0x62a0);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v2 = asdTMTexTableEntryAt(0x1a,temp_v9 + 0xe3);
         temp_v8 = asdTMTexTableEntryAt(0x1a,0xdb);
         temp_v6 = FUN_002a4b28(*puVar7);
@@ -403,7 +403,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       if ((temp_v19 == 0) || (temp_v2 = listCursorGetRowIfUnblocked(temp_v14), temp_v2 != temp_v9)) {
         temp_v2 = temp_v1 + temp_v9;
         psVar6 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + temp_v2 * 2 + 0x62a0);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v17 = 0;
         if (temp_v18 != 0) {
           temp_v8 = 0;
@@ -511,7 +511,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   temp_v2 = resourceRunOperationIfUnblocked(temp_v14);
   temp_v9 = listCursorGetRowIfUnblocked(temp_v14);
   psVar6 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + (temp_v9 + temp_v2) * 2 + 0x62a0);
-  devilGetRecord();
+  nkmBaseGetRecord();
   if (temp_v19 == 0) {
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x272,param_1,param_2,0x97);
     uiDrawListScrollBar(temp_v14,param_1,param_2,0x1a,0x23,0x24,0x25,0x1f,0x21,0x20,0x22,

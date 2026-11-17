@@ -6,9 +6,9 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int dataTable8FindRecord(void);
-int dataTable08Sub2GetRecord(void);
-int dataTable04FindById(void);
+int itemTableGetItemRecord(void);
+int itemTableGetEquipmentRecord(void);
+int skillDataFindById(void);
 int battleAttributeFormatName(...);
 int skillFormatTargetLabel(...);
 int FUN_002c0940(...);
@@ -42,10 +42,10 @@ extern unsigned char LAB_0028b084; /* 0x28b084 */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(void);
 extern unsigned int itemGetStackLimit(int);
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern unsigned int aocEntryGetKind(int);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_002c0940. */
@@ -97,7 +97,7 @@ void FUN_0028a888(int param_1)
   case 1:
   case 0xc:
     temp_v6 = param_1;
-    dataTable8FindRecord();
+    itemTableGetItemRecord();
     if (*(short *)(temp_v6 + 0x4a) != 0) {
       temp_v4 = FUN_002e5c2c();
       FUN_00359974(0x24,temp_v4,0xffffffff,0);
@@ -110,7 +110,7 @@ void FUN_0028a888(int param_1)
     }
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v6 + 0x32);
     if (temp_v5 != 0) {
-      dataTable04FindById();
+      skillDataFindById();
       skillFormatTargetLabel(temp_v12,(*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5);
     }
     else if ((*(unsigned int *)(temp_v6 + 0x68) & 0x20) != 0) {
@@ -129,7 +129,7 @@ void FUN_0028a888(int param_1)
   case 2:
   case 3:
   case 8:
-    dataTable08Sub2GetRecord();
+    itemTableGetEquipmentRecord();
     FUN_00359974(0x24,*(unsigned int *)(param_1 + 0x24) & 0x3ff,0xffffffff,0);
     temp_v0 = *(unsigned char *)(param_1 + 0x28);
     if ((temp_v0 & 0xf) == temp_v0 >> 4) {
@@ -182,7 +182,7 @@ void FUN_0028a888(int param_1)
   case 6:
   case 7:
     temp_v6 = param_1;
-    dataTable08Sub2GetRecord();
+    itemTableGetEquipmentRecord();
     temp_v16 = 0;
     temp_v17 = 0;
     temp_v14 = 0;

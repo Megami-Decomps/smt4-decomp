@@ -1,6 +1,6 @@
 /* NON_MATCHING: growth parameters initialize with byte/halfword stores rather than retail's packed-register construction and spill layout. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/GameDataAccess.h"
 
 struct LevelGrowthParameters {
@@ -45,7 +45,7 @@ extern "C" void demonApplyLevelGrowth(DemonLevelWork *work, s32 levels)
     if (levels <= 0)
         return;
 
-    DevilRecord *record = devilGetRecord(work->id);
+    NkmBaseRecord *record = nkmBaseGetRecord(work->id);
     LevelGrowthParameters parameters = {
         {record->statGrowth[0], record->statGrowth[1], record->statGrowth[2], record->statGrowth[3], record->statGrowth[4]},
         0, record->baseHp, record->baseMp, record->hpGrowth, record->mpGrowth, 0, 0

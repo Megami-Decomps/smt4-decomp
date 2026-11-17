@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int goalConditionsSatisfied(...);
 int FUN_002466a8(void);
 int FUN_00295024(void);
@@ -40,7 +40,7 @@ typedef struct {
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: goalConditionsSatisfied. */
 extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_002466a8. */
@@ -312,7 +312,7 @@ LAB_002358f0:
           temp_v2 = gameGetPlayerData();
           temp_v1 = *(unsigned short *)(temp_v2 + 0x62);
           temp_v2 = gameFlagEntryGetBit(temp_v10,0);
-          if ((temp_v2 == 0) && (temp_v7 = temp_v10, dataTable1bOr1cGetRecord(), temp_v7 != 0)) {
+          if ((temp_v2 == 0) && (temp_v7 = temp_v10, questDataGetRecord(), temp_v7 != 0)) {
             temp_v7 = (unsigned int)*(short *)(temp_v7 + 0x120);
             temp_v12 = temp_v7 == temp_v1;
             if ((int)temp_v7 <= (int)(unsigned int)temp_v1) {

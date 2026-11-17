@@ -12,8 +12,8 @@ u32 randRange(u32 range);
  * flags, and doubles when either demon belongs to race 35. */
 bool FUN_004da520(u32 unused, ScaledRecordValues *first, ScaledRecordValues *second)
 {
-    DevilRecordA *firstRecord = devilGetRecord(first->id);
-    DevilRecordA *secondRecord = devilGetRecord(second->id);
+    NkmBaseRecordA *firstRecord = nkmBaseGetRecord(first->id);
+    NkmBaseRecordA *secondRecord = nkmBaseGetRecord(second->id);
     u16 chance = 1;
 
     if (gameGetPlayerData()->ailments & 0x200) {

@@ -1,5 +1,5 @@
 #include "battle/BattleCommandTargets.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/Shard0031.h"
 
 extern "C" {
@@ -22,7 +22,7 @@ u32 btlCommandResolveSelectedTarget(BattleCommandTargets *command)
             &command->results[selected]);
         slots = gameGetSlotTable();
         if (slots->reserve[selected - 1] < 0) {
-            Table04RecordA *record = dataTable04FindById(skill);
+            SkillDataRecordA *record = skillDataFindById(skill);
             if ((record && record->effectProperties.targeting == 2 && record->sort.category == 3) ||
                 record->identity.id == 0x8B || record->identity.id == 0x136)
                 return 0;
@@ -30,7 +30,7 @@ u32 btlCommandResolveSelectedTarget(BattleCommandTargets *command)
     } else {
         FUN_002c7bb0(command->actorIndex - 1, -1, skill, &command->results[0]);
     }
-    Table04RecordA *record = dataTable04FindById(skill);
+    SkillDataRecordA *record = skillDataFindById(skill);
     if ((record->flags & 0x600) && command->actorIndex < 4 && command->fallback < 0)
         command->results[command->actorIndex] = command->fallback;
     return 1;

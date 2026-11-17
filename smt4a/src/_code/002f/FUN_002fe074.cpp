@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -9,8 +9,8 @@ s32 FUN_002fe074(u16 *idA, u16 *idB)
 {
     u32 setA = FUN_002a4b28(*idA);
     u32 setB = FUN_002a4b28(*idB);
-    DevilRecordA *recordA;
-    DevilRecordA *recordB;
+    NkmBaseRecordA *recordA;
+    NkmBaseRecordA *recordB;
     s32 diff;
 
     if ((setB & ~setA) != 0) {
@@ -19,8 +19,8 @@ s32 FUN_002fe074(u16 *idA, u16 *idB)
     if ((setA & ~setB) != 0) {
         return 1;
     }
-    recordA = devilGetRecord(*idA);
-    recordB = devilGetRecord(*idB);
+    recordA = nkmBaseGetRecord(*idA);
+    recordB = nkmBaseGetRecord(*idB);
     diff = recordA->race - recordB->race;
     if (diff == 0) {
         diff = recordB->level - recordA->level;

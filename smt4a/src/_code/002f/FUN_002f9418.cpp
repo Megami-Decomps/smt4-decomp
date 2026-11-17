@@ -9,8 +9,8 @@ int padQueryLogicalKey(...);
 int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
-int devilGetRecord(void);
-int dataTable00FindById(void);
+int nkmBaseGetRecord(void);
+int nkmEnemyFindById(void);
 int FUN_0021a6c8(int);
 int statusPanelSetOpen(...);
 int FUN_002c7e24(void);
@@ -46,8 +46,8 @@ extern int ifTouchGetSelectionMode(void);
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmBaseGetRecord. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: FUN_0021a6c8. */
 extern int itemIsCollectedWithRelated(unsigned short);
 /* Supplied declaration required: statusPanelSetOpen. */
@@ -134,7 +134,7 @@ LAB_002f9458:
         do {
           temp_v2 = param_1 + temp_v8 * 0x40;
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0x4858);
-          dataTable00FindById();
+          nkmEnemyFindById();
           if ((*(unsigned short *)(temp_v5 + 2) & 0x8000) != 0) {
             temp_v0 = 1;
             if (*(char *)(param_1 + 0x4857) != '\0') {
@@ -173,7 +173,7 @@ LAB_002f9458:
         sysPlaySe(0x35);
         temp_v5 = 0;
         if (temp_v6 != 0) {
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v5 = temp_v6;
         }
         if ((!temp_v0) && ((temp_v5 == 0 || ((*(unsigned char *)(temp_v5 + 0xb3) & 2) == 0)))) break;
@@ -200,11 +200,11 @@ LAB_002f9458:
             unitInitializeFromTemplate(*(unsigned short *)(temp_v2 + 0x4858),temp_v11);
             puVar9 = (unsigned short *)FUN_002c7e24();
             temp_v6 = (unsigned int)*puVar9;
-            dataTable00FindById();
+            nkmEnemyFindById();
             psVar8 = (short *)FUN_002c7e24();
             if ((*psVar8 < 1) || ((temp_v6 == 0 || ((*(unsigned short *)(temp_v6 + 0x16) & 1) != 0)))) {
               temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x4858);
-              dataTable00FindById();
+              nkmEnemyFindById();
               if ((temp_v6 != 0) && ((*(unsigned short *)(temp_v6 + 0x16) & 1) == 0)) {
                 temp_v14 = 0;
                 temp_v15 = 0;
@@ -342,7 +342,7 @@ LAB_002f9924:
         unitInitializeFromTemplate((unsigned int)*(unsigned short *)(param_1 + 0x4858),temp_v11);
         puVar9 = (unsigned short *)FUN_002c7e24();
         temp_v6 = (unsigned int)*puVar9;
-        dataTable00FindById();
+        nkmEnemyFindById();
         if ((temp_v6 != 0) && ((*(unsigned short *)(temp_v6 + 0x16) & 1) == 0)) {
           temp_v14 = 0;
           temp_v15 = 0;
@@ -375,7 +375,7 @@ LAB_002f9924:
       puVar7 = (unsigned short *)FUN_002c7e24();
       puVar9 = (unsigned short *)FUN_002c7e24();
       temp_v6 = (unsigned int)*puVar9;
-      devilGetRecord();
+      nkmBaseGetRecord();
       sysPlaySe(0x35);
       if ((*(unsigned char *)(temp_v6 + 0xb3) & 2) != 0) {
         sysPlaySe(0x11b);

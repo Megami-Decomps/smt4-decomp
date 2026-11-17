@@ -1,4 +1,4 @@
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 union PassiveAffinityProperties {
     u32 raw;

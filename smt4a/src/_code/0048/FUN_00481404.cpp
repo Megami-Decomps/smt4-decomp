@@ -20,7 +20,7 @@ bool FUN_00481404(u16 id)
     if (category->type != 1 && category->type != 12) {
         return false;
     }
-    ConsumableRecordA *entry = dataTable8FindRecord(id);
+    ConsumableRecordA *entry = itemTableGetItemRecord(id);
     if (entry == NULL) {
         return false;
     }

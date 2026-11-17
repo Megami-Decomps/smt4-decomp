@@ -3,7 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 
 struct CandidateIdEntry {
@@ -61,7 +61,7 @@ u32 FUN_003b14b8(void)
                     if (group == record->encodedStats.values[slot] >> 10) {
                         u16 *id = state->ids.begin;
                         while (id != state->ids.end) {
-                            CandidateIdEntry *entry = (CandidateIdEntry *)dataTable04FindById(dataTable8FindRecord(*id)->skillId);
+                            CandidateIdEntry *entry = (CandidateIdEntry *)skillDataFindById(itemTableGetItemRecord(*id)->skillId);
                             if (entry != NULL && (entry->flags << 16) >> 27 == slot) {
                                 candidateIdsErase(&state->ids, id);
                             } else {

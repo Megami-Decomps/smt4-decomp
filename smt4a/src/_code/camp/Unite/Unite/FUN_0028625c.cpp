@@ -7,7 +7,7 @@
 extern "C" {
 
 int qsort(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int asdMemFree(...);
 int gridNavigationConfigure(...);
 int statusPanelSetOpen(...);
@@ -80,7 +80,7 @@ extern int *g_unite; /* 0x57f290 */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: slotRecordFindById. */
 extern int gameGetSlotRecord(int);
@@ -498,7 +498,7 @@ LAB_00286c80:
           if (*temp_v32 != 0) {
             do {
               temp_v12 = (param_1[(int)piVar18 * 2 + 0x4ef] & 0x1ffffU) >> 2;
-              devilGetRecord();
+              nkmBaseGetRecord();
               temp_v4 = gameGetPlayerData();
               if ((int)(*(unsigned short *)(temp_v4 + 0x62) - 10) < (int)(unsigned int)*(unsigned short *)(temp_v12 + 6)) {
                 temp_v4 = temp_v3 * 2;
@@ -543,7 +543,7 @@ LAB_00286c80:
               if (*temp_v32 != 0) {
                 do {
                   temp_v12 = (param_1[(int)piVar18 * 2 + 0x4ef] & 0x1ffffU) >> 2;
-                  devilGetRecord();
+                  nkmBaseGetRecord();
                   temp_v2 = gameGetPlayerData();
                   temp_v2 = *(unsigned short *)(temp_v2 + 0x62) - 10;
                   if (temp_v2 < (int)(unsigned int)*(unsigned short *)(temp_v12 + 6)) {

@@ -65,7 +65,7 @@ static __inline LootTable *questRewardFindLootTable(u16 tableId)
  * its gold (a fixed amount, or a percent of the player's level base). */
 void FUN_00333b74(RewardList *list, void *quest)
 {
-    QuestRecord *record = dataTable1bOr1cGetRecord(reinterpret_cast<u32>(quest));
+    QuestRecord *record = questDataGetRecord(reinterpret_cast<u32>(quest));
 
     if (record == NULL) {
         return;

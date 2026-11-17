@@ -20,7 +20,7 @@ int textEncodeFontSlot(int, unsigned int [32]);
 int FUN_0029cc3c(void);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int gameGetUnitRecord(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int dataTable01FindByIdWithAoc(unsigned int);
 int dataFindKindRecordWithAocOverrides(unsigned int, int);
 int FUN_00383674(void);
@@ -50,7 +50,7 @@ extern int flagWordTestBit(unsigned int, unsigned int);
 extern int sys43e188GetState(void);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
@@ -112,7 +112,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
   temp_v14 = 0;
   QuestCenter_GetActiveEntry();
   temp_v4 = FUN_00383674() & 0xffff;
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   temp_v3 = scrWorkGetValue(3);
   if (temp_v3 < 6) {
     temp_v9 = temp_v4 + temp_v3 * 8;

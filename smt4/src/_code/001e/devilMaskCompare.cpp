@@ -7,8 +7,8 @@ u32 FUN_00298e00(u16 id);
 
 static inline s32 compareDevilRecordOrder(const u16 *first, const u16 *second)
 {
-    QuestRecord *recA = dataTable1bOr1cGetRecord(*first);
-    QuestRecord *recB = dataTable1bOr1cGetRecord(*second);
+    QuestRecord *recA = questDataGetRecord(*first);
+    QuestRecord *recB = questDataGetRecord(*second);
     s32 result = 0;
     if (recA != NULL && recB != NULL)
         result = recA->order - recB->order;

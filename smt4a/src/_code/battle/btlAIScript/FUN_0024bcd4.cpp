@@ -53,7 +53,7 @@ int __aeabi_memcpy4(...);
 
 int sysPlaySe(int);
 int asdMemFree(void);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int scrScriptProcessStartEntry(...);
 int sysMemClear(...);
 int FUN_003756c8(void);
@@ -182,7 +182,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: lookupNameEntry. */
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 extern unsigned int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern unsigned int flagValueGetStorage(void);
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_00215978. */
@@ -367,7 +367,7 @@ unsigned int FUN_0024bcd4(void)
        (temp_v5 = temp_v2, btlFindFirstEntryMatchingCategoryAndRequiredMask(), temp_v5 != 0)) {
       temp_v3 = (int)*(short *)(temp_v5 + 8);
       FUN_004c5da4(temp_v3,1);
-      if ((temp_v3 != 0) && (temp_v10 = temp_v3, dataTable04FindById(), temp_v5 = DAT_00573ad8, temp_v10 != 0)) {
+      if ((temp_v3 != 0) && (temp_v10 = temp_v3, skillDataFindById(), temp_v5 = DAT_00573ad8, temp_v10 != 0)) {
         temp_v7 = *(unsigned int *)(temp_v2 + 0x45a4) | DAT_00573adc;
         *(unsigned int *)(temp_v2 + 0x45a4) = temp_v7;
         if (0 < temp_v3) {

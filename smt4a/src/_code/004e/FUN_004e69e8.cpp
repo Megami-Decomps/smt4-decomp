@@ -3,7 +3,7 @@
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/ConsumableRecordA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
@@ -54,12 +54,12 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
     } else {
         if (kind != 8)
             return;
-        id = dataTable8FindRecord(unit->data->actionArg)->skillId;
+        id = itemTableGetItemRecord(unit->data->actionArg)->skillId;
         if (id == 0)
             return;
     }
     if (id > 0) {
-        const RecordCameraView *record = reinterpret_cast<const RecordCameraView *>(dataTable04FindById(id));
+        const RecordCameraView *record = reinterpret_cast<const RecordCameraView *>(skillDataFindById(id));
         if (record != NULL && record->mode != 1 && record->mode != 0)
             unit->cameraMode = record->mode;
     }

@@ -10,7 +10,7 @@ int textFormatBuffer(...);
 int qsort(int, int, int, unsigned char *);
 int FUN_001628c0(unsigned char *, unsigned int, int, int);
 int gameFlagIsSet(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int asdOperatorNewD(void);
 int sysMemClear(...);
 int asdOperatorDeleteC(int);
@@ -42,7 +42,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: asdOperatorDeleteC. */
@@ -93,7 +93,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
   uStack_28 = param_3;
   if (param_2 != 0) {
     if ((int)param_2 >= 0) {
-      dataTable04FindById();
+      skillDataFindById();
       switch(*(unsigned char *)(param_2 + 0x23)) {
       case 0:
       case 1:

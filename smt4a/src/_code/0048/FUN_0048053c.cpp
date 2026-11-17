@@ -31,7 +31,7 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
         kind = record->category;
     s16 bonuses[7];
     equipmentGetCappedUpgradeBonuses(item, bonuses);
-    const EquipmentRecordA* upgrade = dataTable08Sub2GetRecord(item);
+    const EquipmentRecordA* upgrade = itemTableGetEquipmentRecord(item);
     EquipmentUpgradeModifiers extras = {};
     s32 hp = 0;
     if (upgrade != NULL) {

@@ -12,7 +12,7 @@ int dataTable54FindById(...);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(...);
+int nkmBaseGetRecord(...);
 int demonGetRaceLabel(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
@@ -74,7 +74,7 @@ extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
@@ -152,7 +152,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     texDrawTableEntryAtStoredOrigin(2,0x24,0x14d,param_1,param_2,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x24,0x4f,param_1,param_2,0x6a);
     puVar6 = (unsigned short *)(unsigned int)*(unsigned short *)(puVar2 + 0x1484);
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v2 = asdTMTexTableEntryAt(0x24,0x4d);
     temp_v9 = 0xffffffff;
     temp_v11 = 0xffffffff;
@@ -281,7 +281,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
       do {
         temp_v8 = asdTMTexTableEntryAt(0x24,temp_v1 + 0x157);
         psVar10 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + temp_v1 * 2 + 0x5212);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v2 = *(short *)(temp_v8 + 10) + param_2;
         temp_v3 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8);
         if ((temp_v1 & 1) != 0) {

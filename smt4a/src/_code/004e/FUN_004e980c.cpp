@@ -1,6 +1,6 @@
 /* NON_MATCHING: the 64-bit mask tests and the shift-or updates compile to different instruction groups than retail, and the pair-unrolled selection loop differs; the selection logic is the same. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -90,7 +90,7 @@ void FUN_004e980c(PickOwner *owner, u8 *flags)
         if (record != NULL && bitsAt60Test(record, 1) == 0 && bitsAt60Test(record, 10) == 0) {
             candidates[found].slot = (u8)i;
             candidates[found].key = record->key;
-            candidates[found].rank = devilGetRecord(record->kind)->race;
+            candidates[found].rank = nkmBaseGetRecord(record->kind)->race;
             found++;
         }
     }

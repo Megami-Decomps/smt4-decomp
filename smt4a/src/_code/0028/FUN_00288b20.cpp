@@ -13,7 +13,7 @@ int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_00185e84(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int unitRecordBuild(...);
 int FUN_0035ad50(...);
 int statDrawClampedDelta(...);
@@ -44,7 +44,7 @@ extern int g_statusDown; /* 0x588fe8 */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int slotRecordFindById(void);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int listCursorGetRowIfUnblocked(void);
 extern unsigned int FUN_002a6a24(int);
 extern int objectApplyIfUnblocked(int);
@@ -245,7 +245,7 @@ LAB_00288c34:
           temp_v10 = skillGetAdjustedCost(temp_v11,param_3);
         }
         else {
-          dataTable04FindById();
+          skillDataFindById();
           if (param_3 != 0) {
             temp_v10 = (unsigned int)*(unsigned char *)(param_3 + 0x22);
           }

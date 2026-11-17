@@ -1,9 +1,9 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include <stddef.h>
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "addon/AocSystemA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32);
@@ -20,11 +20,11 @@ void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s
         if ((s32)id < 0) {
             resource = gameFlagIsSet(0x11) ? 0 : 0x25E;
         } else {
-            const DevilRecordA *saved = devilGetRecord((u16)id);
+            const NkmBaseRecordA *saved = nkmBaseGetRecord((u16)id);
             if (saved == NULL) {
                 return;
             }
-            const Table00RecordA *definition = dataTable00FindById((u16)id);
+            const NkmEnemyRecordA *definition = nkmEnemyFindById((u16)id);
             if (definition->level & 0x8000) {
                 resource = definition->battleTextureId;
                 category = 25;

@@ -99,13 +99,13 @@ void FUN_0024d94c(DemonSnapshot *snapshot, DemonSaveRecord *record)
     if ((s16)snapshot->stats.values[6] >= 1000) {
         snapshot->stats.values[6] = 999;
     }
-    if (dataTable08Sub2GetRecord(record->skills.values[0]) != NULL) {
+    if (itemTableGetEquipmentRecord(record->skills.values[0]) != NULL) {
         snapshot->skillEffectA = recordGetPercentageScaledBase();
     }
-    if (dataTable08Sub2GetRecord(record->skills.values[1]) != NULL) {
+    if (itemTableGetEquipmentRecord(record->skills.values[1]) != NULL) {
         snapshot->skillEffectB = recordGetPercentageScaledBase();
     }
-    if (dataTable08Sub2GetRecord(record->skills.values[2]) != NULL) {
+    if (itemTableGetEquipmentRecord(record->skills.values[2]) != NULL) {
         snapshot->skillEffectB = recordGetPercentageScaledBase() + snapshot->skillEffectB;
     }
     FUN_00253d60(&grades, record);

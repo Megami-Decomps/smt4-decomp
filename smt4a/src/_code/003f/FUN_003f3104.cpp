@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 namespace {
 
@@ -21,7 +21,7 @@ s32 gameDataFlagTestBit(u32 bit);
 // Pick a random entry of the demon's character row: the first 12 are chosen on a roll, the rest otherwise.
 u16 FUN_003f3104(CharacterUnit *unit)
 {
-    DevilRecordA *devil = devilGetRecord(unit->devilId);
+    NkmBaseRecordA *devil = nkmBaseGetRecord(unit->devilId);
     CharacterRow *row = dataTableLookupCharacter(devil->packed.characterId);
     s32 index = randRange(11);
     s32 roll = randRange(13);

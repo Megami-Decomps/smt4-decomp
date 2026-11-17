@@ -1,14 +1,14 @@
 /* NON_MATCHING: logic and instruction mix agree; armcc places the shared `return 0` block after the kind tests in retail but after the last handler here (one extra branch). */
 #include "battle/BtlGlobals.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "common.h"
 #include "code/Code0019.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BattleUnit.h"
 
 extern "C" {
 
-/* The skill record returned by dataTable04FindById; only the three words the script command tests are named. */
+/* The skill record returned by skillDataFindById; only the three words the script command tests are named. */
 typedef struct SkillRecord {
     /* 0x00 */ u8 unk00[0x5A];
     /* 0x5A */ u16 words[3];
@@ -70,21 +70,21 @@ s32 FUN_003ef738(void)
     } else {
         skillId = FUN_004aba3c(g_btlUiBlock);
     }
-    record = (SkillRecord *)dataTable04FindById(skillId);
+    record = (SkillRecord *)skillDataFindById(skillId);
     if (record == NULL) {
         return 0;
     }
     if (scriptUnitIsKind(1)) {
         if (record->words[0] != 0) {
-            return devilGetRecord(record->words[0]) != NULL ? (s16)record->words[0] : 0;
+            return nkmBaseGetRecord(record->words[0]) != NULL ? (s16)record->words[0] : 0;
         }
     } else if (scriptUnitIsKind(4)) {
         if (record->words[1] != 0) {
-            return devilGetRecord(record->words[1]) != NULL ? (s16)record->words[1] : 0;
+            return nkmBaseGetRecord(record->words[1]) != NULL ? (s16)record->words[1] : 0;
         }
     } else if (scriptUnitIsKind(3)) {
         if (record->words[2] != 0) {
-            return devilGetRecord(record->words[2]) != NULL ? (s16)record->words[2] : 0;
+            return nkmBaseGetRecord(record->words[2]) != NULL ? (s16)record->words[2] : 0;
         }
     }
     return 0;

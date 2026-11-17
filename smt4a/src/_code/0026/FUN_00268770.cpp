@@ -43,7 +43,7 @@ int padQueryLogicalKey(...);
 int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int gridNavigationConfigure(...);
@@ -92,7 +92,7 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
@@ -260,7 +260,7 @@ unsigned int FUN_00268770(void)
           if (!(temp_v16 && temp_v15)) {
             puVar10 = (unsigned short *)FUN_002c7e24();
             temp_v11 = (unsigned int)*puVar10;
-            devilGetRecord();
+            nkmBaseGetRecord();
             if ((*(unsigned char *)(temp_v11 + 0xb3) & 2) == 0) {
               temp_v7 = 0x31;
             }

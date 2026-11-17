@@ -32,8 +32,8 @@ u32 scrComm_Party_ConfirmSwap(void)
         if (result == 1) {
             scrWorkSetValue(1, 0);
             if (rosterHasLeader()) {
-                const QuestRecord *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
-                const QuestRecord *selected = dataTable1bOr1cGetRecord(id);
+                const QuestRecord *previous = questDataGetRecord(rosterGetLeaderId());
+                const QuestRecord *selected = questDataGetRecord(id);
                 if (previous != NULL && selected != NULL &&
                     ((previous->kind != 5 && previous->kind != 4 &&
                       previous->kind != 1) || selected->kind != 0)) {

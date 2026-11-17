@@ -2,7 +2,7 @@
 #include "common.h"
 #include "mapnavi/naviMain.h"
 #include "code/Code003e.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/GamePlayerData.h"
 
 /* The turn state (only the phase). */

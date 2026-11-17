@@ -18,7 +18,7 @@ int uiDrawItemOrStatusIcon(...);
 int asdTMTexTableEntryAt(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int drawSetColorFromRGBA8(...);
 int FUN_0020caec(...);
 int VectorSignedToFloat(...);
@@ -47,7 +47,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0020caec. */
 extern int recordGetModeForId(unsigned int);
@@ -147,7 +147,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
       temp_v4 = temp_v1 + temp_v3 * 8;
       if ((*(unsigned int *)(temp_v4 + 0x907c) & 0x1fffc) != 0) {
         puVar6 = (unsigned short *)((*(unsigned int *)(temp_v4 + 0x907c) & 0x1ffff) >> 2);
-        devilGetRecord();
+        nkmBaseGetRecord();
         texDrawTableEntryAtStoredOrigin(2,0x1a,0x65,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,
                      0xc9);
         texDrawTableEntryAtStoredOrigin(2,0x1a,0x66,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,
@@ -240,7 +240,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   }
   temp_v2 = temp_v1 + param_3 * 8;
   puVar6 = (unsigned short *)((*(unsigned int *)(temp_v2 + 0x907c) & 0x1ffff) >> 2);
-  devilGetRecord();
+  nkmBaseGetRecord();
   temp_v4 = asdTMTexTableEntryAt(0x1a,param_3 + 0x87);
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x76,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc9);

@@ -12,8 +12,8 @@ u16 uniteFindClosestEligibleCandidate(FusionCandidateTables *tables, u32 race, u
 u32 FUN_004db2b8(FusionCandidateTables *tables, u16 firstId, u16 secondId, PackedIdentifiers *pair)
 {
     u16 result = 0;
-    DevilRecordA *first = devilGetRecord(firstId);
-    DevilRecordA *second = devilGetRecord(secondId);
+    NkmBaseRecordA *first = nkmBaseGetRecord(firstId);
+    NkmBaseRecordA *second = nkmBaseGetRecord(secondId);
     FusionRaceRule *rule = dataTable5Sub3Lookup(first->race, second->id);
     FusionRaceRule *reverse = dataTable5Sub3Lookup(second->race, first->id);
     if (first->id == second->id)

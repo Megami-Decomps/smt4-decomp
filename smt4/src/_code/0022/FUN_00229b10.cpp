@@ -2,7 +2,7 @@
 #include "battle/ActionKindSelection.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
@@ -43,7 +43,7 @@ void FUN_00229b10(BtlMainState **state, const ActionKindSelection *selection)
     bool special = false;
     s16 kind = selection->command->kind;
     if (kind == 3) {
-        const SkillActionView *skill = (const SkillActionView *)dataTable40FindById(selection->command->skill);
+        const SkillActionView *skill = (const SkillActionView *)skillDataFindById(selection->command->skill);
         if (skill != NULL && skill->special != 0) {
             special = true;
         }

@@ -76,7 +76,7 @@ int soundChannelStopAll(...);
 int titleSetSlotValueState2(...);
 
 int eventQueueAddUniqueIfValid(...);
-int dataTable8FindRecord(void);
+int itemTableGetItemRecord(void);
 int FUN_001ffe84(void);
 int FUN_0020dc1c(void);
 int FUN_0021b274(...);
@@ -178,7 +178,7 @@ extern unsigned int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: dataTable8FindRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: buttonHelpSetText. */
 extern int gameGetSlotTable(void);
@@ -958,7 +958,7 @@ unsigned int FUN_003d56dc(void)
     temp_v4 = g_camp[8];
     if (temp_v4 == 0) {
       temp_v4 = 0x7b6;
-      dataTable8FindRecord();
+      itemTableGetItemRecord();
       arousalSkillOpen(*(unsigned short *)(temp_v4 + 0x54));
       puVar12[8] = puVar12[8] + 1;
       goto LAB_003d6870;

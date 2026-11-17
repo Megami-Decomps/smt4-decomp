@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -74,7 +74,7 @@ s32 flagCountUnlockedSlots(SavedUnit *unit);
 /* Builds the unit a demon id starts as (the same sequence as unitInitializeFromSavedRecord). */
 static void initializeFreshUnit(u16 id, FreshUnit *unit)
 {
-    DevilRecord *devil = devilGetRecord(id);
+    NkmBaseRecord *devil = nkmBaseGetRecord(id);
     DemonBaseRecord base;
     gameRecordCopy(id, &base);
     memClear(unit, 0x604);

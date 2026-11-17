@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -16,8 +16,8 @@ int FUN_0035fe34(const DevilStock *a, const DevilStock *b)
     if (b->count == 0) {
         return -1;
     }
-    const DevilRecordA *devilA = devilGetRecord(a->id);
-    const DevilRecordA *devilB = devilGetRecord(b->id);
+    const NkmBaseRecordA *devilA = nkmBaseGetRecord(a->id);
+    const NkmBaseRecordA *devilB = nkmBaseGetRecord(b->id);
     result = devilB->race - devilA->race;
     if (result == 0) {
         result = devilA->level - devilB->level;

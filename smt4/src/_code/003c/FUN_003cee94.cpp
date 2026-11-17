@@ -1,7 +1,7 @@
 /* NON_MATCHING: one shared enabled/normal pair now matches retail; retail also keeps the zero fourth argument in r9 for all three calls, reserves 4 more stack bytes and places the item-resource block differently. */
 #include "battle/ActionKindSelection.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 
 struct BtlMainState;
@@ -37,7 +37,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
     if (kind != 2 && kind != 3) {
         if (kind != 8)
             return;
-        u16 itemResource = dataTable08Sub1GetRecord(resourceId)->skillId;
+        u16 itemResource = itemTableGetItemRecord(resourceId)->skillId;
         if (!itemResource) {
             if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)
                 enabled = 0;
@@ -46,7 +46,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
         }
         resourceId = itemResource;
     }
-    u32 category = (reinterpret_cast<BattleResourceLookupView *>(dataTable40FindById(resourceId))->attributes >> 5) & 0xF;
+    u32 category = (reinterpret_cast<BattleResourceLookupView *>(skillDataFindById(resourceId))->attributes >> 5) & 0xF;
     if (category == 2 || category == 3 || category == 4)
         normal = false;
     if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x2A)

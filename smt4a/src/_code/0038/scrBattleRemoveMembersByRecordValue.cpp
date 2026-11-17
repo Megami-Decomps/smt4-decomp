@@ -10,7 +10,7 @@ extern "C" u32 scrBattleRemoveMembersByRecordValue(void)
     BtlMainStateExtA *battle = btlGetMainStateExt();
     if (enabled != 0) {
         for (std::vector<u16>::iterator member = battle->members.begin(); member != battle->members.end();) {
-            ConsumableRecordA *record = dataTable8FindRecord(*member);
+            ConsumableRecordA *record = itemTableGetItemRecord(*member);
             if (record->value3C == value) {
                 member = battle->members.erase(member);
             } else {

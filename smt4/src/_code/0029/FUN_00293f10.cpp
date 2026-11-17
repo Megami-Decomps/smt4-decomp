@@ -1,7 +1,7 @@
 #include "gamedata/DevilModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "code/Code0029.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 
 // Resolves a demon's model texture and checks that its table node is loaded.
@@ -13,11 +13,11 @@ s32 FUN_00293f10(s32 id, s32 mapped)
         if (id < 0) {
             node = 0;
         } else {
-            DevilRecord* record = reinterpret_cast<DevilRecord*>(devilGetRecord((u16)id));
+            NkmBaseRecord* record = reinterpret_cast<NkmBaseRecord*>(nkmBaseGetRecord((u16)id));
             if (record == NULL) {
                 return 0;
             }
-            Table00Record* overrideRecord = dataTable00FindById((u16)id);
+            NkmEnemyRecord* overrideRecord = nkmEnemyFindById((u16)id);
             if (overrideRecord->levelFlags & 1) {
                 table = 0x23;
                 node = overrideRecord->portraitId;

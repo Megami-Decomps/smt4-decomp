@@ -1,6 +1,6 @@
 #include "battle/btlScript.h"
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -21,12 +21,12 @@ int scrSetResult(int value);
 int scrGetArg(u32 index);
 Record *btlUnitGet(u32 id);
 
-/* Script command: looks up entry (script argument 0) of the current record's value table, resolves it through dataTable04FindById and passes bits 11..15 of its packed word (or 0 if none) to scrSetResult. */
+/* Script command: looks up entry (script argument 0) of the current record's value table, resolves it through skillDataFindById and passes bits 11..15 of its packed word (or 0 if none) to scrSetResult. */
 u32 FUN_003a8dbc(void)
 {
     int index = scrGetArg(0);
     u8 *table = btlUnitGet(g_btlScriptUnit)->table;
-    Skill *skill = (Skill *)dataTable04FindById(*(u16 *)(table + index * 2 + TABLE_VALUES_OFFSET));
+    Skill *skill = (Skill *)skillDataFindById(*(u16 *)(table + index * 2 + TABLE_VALUES_OFFSET));
 
     if (skill != NULL) {
         scrSetResult((skill->packed & 0xffff) >> 11);

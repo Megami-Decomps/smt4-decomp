@@ -18,7 +18,7 @@ void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped)
     u32 equipped = 0;
     switch (aocEntryGetKind(id)) {
     case 1:
-        icon = categoryIdFromIndex(dataTable08Sub1GetRecord(id)->iconKind);
+        icon = categoryIdFromIndex(itemTableGetItemRecord(id)->iconKind);
         break;
     case 0: {
         const ItemCategoryView *record = dataTable08Sub0GetRecord(id);

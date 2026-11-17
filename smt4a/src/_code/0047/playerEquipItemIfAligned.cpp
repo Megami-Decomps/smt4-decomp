@@ -10,7 +10,7 @@ s32 playerAlignmentClass(void);
 void playerEquipItemIfAligned(u32 id)
 {
     s32 alignment = playerAlignmentClass();
-    EquipmentRecordA *item = dataTable08Sub2GetRecord(id);
+    EquipmentRecordA *item = itemTableGetEquipmentRecord(id);
     PlayerDataA *equipment;
 
     if (item == NULL) {
@@ -19,7 +19,7 @@ void playerEquipItemIfAligned(u32 id)
     if (((item->alignments & 1) && alignment == 4) || ((item->alignments & 4) && alignment == 5)
         || ((item->alignments & 2) && alignment == 1)) {
         equipment = gameGetPlayerData();
-        switch (dataTable08Sub2GetRecord(id)->slot) {
+        switch (itemTableGetEquipmentRecord(id)->slot) {
         case 2:
             equipment->equipped.weapon = id;
             break;

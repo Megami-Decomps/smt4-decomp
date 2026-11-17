@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail hoists the header and list address computations above releaseEntriesA; built differs in frame size (28 vs 52 bytes); the party branch is now written first like retail's layout. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "event/2dEvent/2dEventTex.h"
 
@@ -65,7 +65,7 @@ void releaseEntriesB(void *panel);
 void releaseEntriesA(void);
 void slotPoolResetTrackedState(void);
 SlotTable *gameGetSlotTable(void);
-DevilRecordA *dataTable0ProbeEntryById(u16 index);
+NkmBaseRecordA *dataTable0ProbeEntryById(u16 index);
 s32 FUN_0032fbd0(void *slot);
 s32 FUN_002a4b28(u16 id);
 void campFillUnitComparison(u8 *out, u16 id, s32 flag);
@@ -97,7 +97,7 @@ void FUN_004a1958(EntryScreen *screen)
                 PartySlot *slot = (PartySlot *)((u8 *)table + member * 300);
 
                 if (FUN_0032fbd0((u8 *)slot + 0x68) == 0) {
-                    DevilRecordA *record = devilGetRecord(slot->entryId);
+                    NkmBaseRecordA *record = nkmBaseGetRecord(slot->entryId);
                     u8 entry[8];
 
                     campFillUnitComparison(entry, record->id, 1);
@@ -114,7 +114,7 @@ void FUN_004a1958(EntryScreen *screen)
         s32 owned = 0;
 
         for (s32 index = 0; index < 0x4FF; index++) {
-            DevilRecordA *record = dataTable0ProbeEntryById((u16)(index + 1));
+            NkmBaseRecordA *record = dataTable0ProbeEntryById((u16)(index + 1));
 
             if (record != NULL && (record->flags & 1) != 0) {
                 total++;
@@ -131,7 +131,7 @@ void FUN_004a1958(EntryScreen *screen)
         s32 index = 0;
 
         do {
-            DevilRecordA *record = devilGetRecord((u16)(index + 1));
+            NkmBaseRecordA *record = nkmBaseGetRecord((u16)(index + 1));
 
             if (record != NULL && (record->flags & 1) != 0) {
                 if (index == 9 && gameFlagIsSet(0x441) == 0) {

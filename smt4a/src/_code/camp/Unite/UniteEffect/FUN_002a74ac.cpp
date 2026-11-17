@@ -34,7 +34,7 @@ int paramsClearPacket(...);
 
 int asdLoadFileWithSize(...);
 int asdMemoryAllocTraced(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int FUN_001fc348(...);
 int uniteCameraDestroy(void);
 int FUN_003d2a00(...);
@@ -67,7 +67,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: rangeSelectionSelectEndpoint. */
@@ -112,7 +112,7 @@ void FUN_002a74ac(void)
   if (*(short *)(temp_v0 + 0x1e) != 0) {
     do {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + temp_v3 * 2 + 0xe);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v2 = FUN_00409fe8(*(unsigned short *)(temp_v1 + 0x9c),0,1);
       *(unsigned int *)(temp_v0 + temp_v3 * 4 + 0x28) = temp_v2;
       FUN_003fb5d4(temp_v2,7,1);
@@ -130,7 +130,7 @@ void FUN_002a74ac(void)
   }
   FUN_0040c190(temp_v0 + 0x38);
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
-  devilGetRecord();
+  nkmBaseGetRecord();
   temp_v2 = FUN_00409fe8(*(unsigned short *)(temp_v1 + 0x9c),0,1);
   *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
   FUN_003fb5d4(temp_v2,7,1);
@@ -224,7 +224,7 @@ void FUN_002a74ac(void)
   asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 + 0x334) = puVar4;
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
-  devilGetRecord();
+  nkmBaseGetRecord();
   temp_v3 = FUN_003316b4((int)*(char *)(temp_v1 + 0x38));
   textFormatBuffer(temp_v12,"battle/DevilMsg/%s.mbm",temp_v3 + 1);
   puVar4 = temp_v12;

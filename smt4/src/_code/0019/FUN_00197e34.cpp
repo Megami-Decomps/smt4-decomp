@@ -10,7 +10,7 @@ float FUN_0028f4b4(const char *, unsigned int, float);
 int FUN_002907c4(...);
 int questIsCompleted(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int FUN_002b75ec(...);
 int effectRenderTransformedInstance(...);
 int renderCtxCalculateStereoParallax(...);
@@ -59,7 +59,7 @@ extern int FUN_00298e40(unsigned int, int, unsigned char **);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int gameGetFlagBlock(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -168,7 +168,7 @@ void FUN_00197e34(void)
   temp_v15 = 0;
   if (temp_v25 != 0) {
     temp_v7 = temp_v25;
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v13 = questIsCompleted(temp_v25);
     temp_v11 = temp_v4 + (int)temp_v17;
@@ -328,7 +328,7 @@ LAB_00198518:
     return;
   }
   temp_v7 = temp_v25;
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   if (*(char *)(temp_v28[0] + 0xc4) != '\0') {
     temp_v8 = questIsCompleted(temp_v25);
     if (temp_v8 != 0) {

@@ -22,7 +22,7 @@ void FUN_00283f30(Dest *dest, int withSource)
     dest->unk08 = player->skillWords[2];
     dest->unk0C = player->skillWords[3];
     if (withSource != 0) {
-        source = dataTable08Sub2GetRecord(player->equipped.accessory);
+        source = itemTableGetEquipmentRecord(player->equipped.accessory);
         if (source != NULL) {
             dest->unk10 = source->modifierId;
         }

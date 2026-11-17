@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "shard/JobWork.h"
 #include "bible/bibleDevil.h"
 #include "gamedata/GameDataAccess_VariantF.h"
@@ -59,7 +59,7 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
         s32 count = 0;
         for (s32 id = 1; id < 0x500; id++) {
             candidates[id] = 0;
-            DevilRecord *record = devilGetRecord((u16)id);
+            NkmBaseRecord *record = nkmBaseGetRecord((u16)id);
             if (record == NULL || (record->flags & 1) == 0 || record->level < minimum || record->level > maximum) {
                 continue;
             }
@@ -101,7 +101,7 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
     case 4: {
         char name[128];
         char race[128];
-        devilGetRecord((u16)scrWorkGetValue(1));
+        nkmBaseGetRecord((u16)scrWorkGetValue(1));
         memClear(name, 0x80);
         memClear(race, 0x80);
         libc_strcpy(name, dataTable01FindByIdWithAoc((u16)scrWorkGetValue(1)));

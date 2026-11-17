@@ -8,7 +8,7 @@ int drawTextAtRelativePosition(...);
 int FUN_00230d84(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int dataTable01FindByIdWithAoc(void);
 int drawTextAtSnappedRectangle(...);
 int textFormatBuffer(...);
@@ -35,7 +35,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00230d84. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
@@ -157,7 +157,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     drawTextAtSnappedRectangle(param_1 + 200,temp_v14,temp_v9,temp_v8,temp_v8,temp_v4);
     temp_v8 = param_4;
     temp_v13 = 0;
-    dataTable00FindById();
+    nkmEnemyFindById();
     if (temp_v8 != 0) {
       temp_v13 = *(unsigned char *)(temp_v8 + 2);
     }
@@ -174,7 +174,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     drawTextAtRelativePosition(param_1 + 200,0,temp_v1 + temp_v11,temp_v16,0,7,0xffffffff,temp_v10,temp_v15);
     param_4 = param_4 & 0xffff;
     temp_v7 = 0;
-    dataTable00FindById();
+    nkmEnemyFindById();
     if (param_4 != 0) {
       temp_v7 = *(unsigned int *)(param_4 + 0x78);
     }

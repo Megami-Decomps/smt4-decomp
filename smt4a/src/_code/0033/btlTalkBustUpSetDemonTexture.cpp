@@ -1,6 +1,6 @@
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmEnemyLookup.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "event/bustupEvent/BustupTex.h"
 
@@ -29,8 +29,8 @@ void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred)
     };
     PortraitView *portrait = static_cast<PortraitView *>(g_btlTalkBustUp);
     if (portrait != NULL) {
-        portrait->category = dataTable00FindById(demonId)->scriptFlags >> 2;
-        const DevilRecordA *record = reinterpret_cast<const DevilRecordA *>(devilGetRecord(demonId));
+        portrait->category = nkmEnemyFindById(demonId)->scriptFlags >> 2;
+        const NkmBaseRecordA *record = reinterpret_cast<const NkmBaseRecordA *>(nkmBaseGetRecord(demonId));
         portrait->textureNode = record->model;
         portrait->demonId = demonId;
         if (deferred != 0) {

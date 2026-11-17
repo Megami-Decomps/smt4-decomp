@@ -22,7 +22,7 @@ int FUN_00180310(...);
 int asdTMTexTableEntryAt(...);
 int renderCtxCalculateStereoParallax(...);
 int gameFlagBlockGet(void);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int FUN_002c0940(...);
 int partyDrawCategorySelectionIcon(...);
 int VectorSignedToFloat(...);
@@ -71,7 +71,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: gameFlagBlockGet. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern short *dataTableGetEntry37(unsigned int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
@@ -158,7 +158,7 @@ void FUN_00218640(void)
   temp_v19 = 0;
   temp_v25 = temp_v7;
   if (temp_v7 != 0) {
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     temp_v19 = temp_v7;
   }
   temp_v18 = (float)((unsigned long long)temp_v20 >> 0x20);
@@ -346,7 +346,7 @@ LAB_00218d20:
     return;
   }
   temp_v19 = temp_v25;
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   temp_v29 = temp_v19;
   if (*(char *)(temp_v30 + 0xc) != '\0') {
     temp_v9 = partyEntryFlagsBit3(temp_v25);

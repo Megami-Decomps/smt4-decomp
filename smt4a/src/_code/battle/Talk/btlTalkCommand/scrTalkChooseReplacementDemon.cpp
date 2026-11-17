@@ -1,7 +1,7 @@
 /* NON_MATCHING: source/definition/ID registers and valid-successor return-block placement differ; -O2 candidate. */
 #include "AsdSDK/AsdDebug.h"
-#include "gamedata/DevilRecordA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmBaseRecordA.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
@@ -16,10 +16,10 @@ void asdMemFree(void *);
 
 u32 scrTalkChooseReplacementDemon()
 {
-    const Table00RecordA *source = dataTable00FindById((u16)scrGetArg(0));
+    const NkmEnemyRecordA *source = nkmEnemyFindById((u16)scrGetArg(0));
     s16 successorId = source->successorId;
-    const Table00RecordA *successor = dataTable00FindById((u16)successorId);
-    devilGetRecord(successorId);
+    const NkmEnemyRecordA *successor = nkmEnemyFindById((u16)successorId);
+    nkmBaseGetRecord(successorId);
     if (!successorId || !successor || !(successor->flags & 0x80) ||
         gameGetPlayerData()->level < (successor->level & 0x7fffU) || gameStockContainsEntry(successorId)) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Talk\\btlTalkCommand.cpp", 1054);
@@ -40,8 +40,8 @@ u32 scrTalkChooseReplacementDemon()
             if (lower <= 0)
                 lower = 1;
             for (u32 id = 1; id <= 1200; ++id) {
-                const DevilRecordA *demon = devilGetRecord((u16)id);
-                const Table00RecordA *definition = dataTable00FindById((u16)id);
+                const NkmBaseRecordA *demon = nkmBaseGetRecord((u16)id);
+                const NkmEnemyRecordA *definition = nkmEnemyFindById((u16)id);
                 if (lower <= demon->level && demon->level <= upper && (definition->flags & 0x80) &&
                     !gameStockContainsEntry(demon->id)) {
                     dataTable01GetRecordWithAocOverride(demon->id);

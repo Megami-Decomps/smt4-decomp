@@ -13,7 +13,7 @@ int playerGetMappedCategory(void);
 int uiDrawListScrollBar(...);
 int FUN_0029a17c(...);
 int FUN_002b6db0(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 
 int FUN_0028cfd8(void);
 int listGetU16OrZero(...);
@@ -80,7 +80,7 @@ extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
@@ -346,7 +346,7 @@ void FUN_0025d1c4(int param_1)
             }
             else {
               temp_v15 = (unsigned int)*(unsigned short *)(temp_v10 + 0x46);
-              devilGetRecord();
+              nkmBaseGetRecord();
               if (*(char *)(temp_v15 + 10) != '\x01') {
                 textFormatBuffer(temp_v19,"%s","Attack");
               }
@@ -681,7 +681,7 @@ void FUN_0025d1c4(int param_1)
       }
       else {
         temp_v15 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
-        devilGetRecord();
+        nkmBaseGetRecord();
         if (*(char *)(temp_v15 + 10) != '\x01') {
           textFormatBuffer(temp_v19,"%s","Attack");
         }

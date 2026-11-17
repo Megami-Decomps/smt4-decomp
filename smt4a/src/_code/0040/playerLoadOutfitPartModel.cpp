@@ -16,7 +16,7 @@ void playerLoadOutfitPartModel(void *owner, u32 part, u32 flags)
     char path[64];
     switch (part) {
     case 0: {
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(equipment->equipped.head);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(equipment->equipped.head);
         u32 variant = FUN_0040b11c(owner, 0, record->modelGroup, record->model, 0);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, variant);
@@ -27,7 +27,7 @@ void playerLoadOutfitPartModel(void *owner, u32 part, u32 flags)
         break;
     }
     case 1: {
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(equipment->equipped.body);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(equipment->equipped.body);
         u32 variant = FUN_0040b11c(owner, 1, record->modelGroup, record->model, 0);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dbd%d.bam", record->modelGroup, record->model, variant);
@@ -37,7 +37,7 @@ void playerLoadOutfitPartModel(void *owner, u32 part, u32 flags)
         break;
     }
     case 2: {
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(equipment->equipped.legs);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(equipment->equipped.legs);
         u32 variant = FUN_0040b11c(owner, 2, record->modelGroup, record->model, 0);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, variant);

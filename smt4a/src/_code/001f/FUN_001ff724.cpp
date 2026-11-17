@@ -72,13 +72,13 @@ void FUN_001ff724(void)
     for (u16 id = 0; id < 400; id++) {
         if (id < 0x15E && gameFlagEntryGetBit(id, 0) == 0)
             continue;
-        if (id < 0x15E || dataTable1bOr1cGetRecord(id) != NULL) {
+        if (id < 0x15E || questDataGetRecord(id) != NULL) {
             if (dataTable1bOr1cRecordHasFlag1(id) != 0) {
                 menu->primaryList[primaryCount++] = id;
             } else {
                 bool include = true;
                 if (menu->filtered != 0) {
-                    QuestRecordA *quest = dataTable1bOr1cGetRecord(id);
+                    QuestRecordA *quest = questDataGetRecord(id);
                     if (quest == NULL || quest->kind != 0)
                         continue;
                     if (questRequirementBlocks(id))
@@ -124,7 +124,7 @@ void FUN_001ff724(void)
     }
     for (s32 i = 0; i < alternateCount; i++) {
         if (partyEntryFlagsBit1(menu->alternateList[i]) != 0) {
-            QuestRecordA *quest = dataTable1bOr1cGetRecord(menu->alternateList[i]);
+            QuestRecordA *quest = questDataGetRecord(menu->alternateList[i]);
             if (quest != NULL && quest->kind != 0 && quest->kind != 10) {
                 scrollListSetSelectionTracked(&menu->alternateCursor, i);
                 break;

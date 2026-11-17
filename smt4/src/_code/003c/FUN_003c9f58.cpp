@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps 0/1 results in r6 with one shared return, reloads the battle block per access and orders the switch's per-case stores differently; the logic and calls are the same. */
 #include "common.h"
 #include "battle/btlHelp.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BattleCommandController.h"
 #include "gamedata/ConsumableRecord.h"
 
@@ -108,7 +108,7 @@ u32 FUN_003c9f58(BattleBlock **block, CommandState *state)
         return 1;
     case 2:
     case 3:
-        if (FUN_002cf124(dataTable40FindById(state->selection->value)) == 0) {
+        if (FUN_002cf124(skillDataFindById(state->selection->value)) == 0) {
             setActorAction(block, 7);
         } else {
             setActorAction(block, 5);
@@ -131,9 +131,9 @@ u32 FUN_003c9f58(BattleBlock **block, CommandState *state)
         }
         return 1;
     case 8: {
-        ConsumableRecord *record = dataTable08Sub1GetRecord(state->selection->value);
+        ConsumableRecord *record = itemTableGetItemRecord(state->selection->value);
         if (record->skillId != 0) {
-            if (FUN_002cf124(dataTable40FindById(record->skillId)) != 0) {
+            if (FUN_002cf124(skillDataFindById(record->skillId)) != 0) {
                 setActorAction(block, 5);
                 return 1;
             }

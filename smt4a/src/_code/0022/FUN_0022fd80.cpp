@@ -2,7 +2,7 @@
 /* NON_MATCHING: minimum-one guard still emits an extra conditional branch; percentage accumulator now matches retail multiply operand order. */
 #include "shard/Shard0032.h"
 #include "shard/W5_W5Match7_EntrySort.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 const UnitRecord *gameGetPlayerData(void);
@@ -25,7 +25,7 @@ u32 FUN_0022fd80(s32 value, u32 kind)
         case 5: itemId = equipment->stats[5]; break;
         case 6: itemId = equipment->stats[6]; break;
         }
-        const EquipmentRecordA *item = dataTable08Sub2GetRecord(itemId);
+        const EquipmentRecordA *item = itemTableGetEquipmentRecord(itemId);
         if (item != NULL && item->modifierId != 0) {
             const Table04ExtraRecord *modifier = dataTable41FindById(item->modifierId);
             if (modifier != NULL && modifier->modifier.percentage != 0) {

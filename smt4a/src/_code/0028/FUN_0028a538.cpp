@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles; retail keeps the working counters in stack slots/callee-saved registers and spills r0-r2; key bitfield writes differ */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 // Fusion key handed to the skill list builders (same layout as the fusion result descriptor).
 struct FusionKey {
@@ -49,7 +49,7 @@ void unitRecordBuild(u32 id, u8* record);
 s32 getUnlockedSlotCount(u8* record);
 
 // Adds one parent's skills to the primary (flag 0x20) or secondary list, skipping duplicates and the product's own.
-static inline void collectSkills(UniteLists* lists, DevilRecordA *info, PartyUnit* parent, s32& primaryCount, s32& secondaryCount)
+static inline void collectSkills(UniteLists* lists, NkmBaseRecordA *info, PartyUnit* parent, s32& primaryCount, s32& secondaryCount)
 {
     for (s32 i = 0; i < 8; i++) {
         u32 skill = parent->skills[i];
@@ -72,7 +72,7 @@ static inline void collectSkills(UniteLists* lists, DevilRecordA *info, PartyUni
 // (skipping duplicates and the product's own skills) and primes the list box.
 void FUN_0028a538(u32 unused, PartyUnit* first, PartyUnit* second, u32 product)
 {
-    DevilRecordA *info = devilGetRecord(product);
+    NkmBaseRecordA *info = nkmBaseGetRecord(product);
     UniteLists* lists = g_unite;
     for (s32 i = 0; i < 0x18; i++) {
         lists->primary[i] = 0;

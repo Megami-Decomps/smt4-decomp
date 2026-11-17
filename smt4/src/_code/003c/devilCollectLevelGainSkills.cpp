@@ -36,7 +36,7 @@ u32 devilCollectLevelGainSkills(void* context, s32 levelGain, u16* output)
     if (unit->blocked) {
         return 0;
     }
-    const DevilLearningRecord* record = reinterpret_cast<const DevilLearningRecord*>(devilGetRecord(unit->id));
+    const DevilLearningRecord* record = reinterpret_cast<const DevilLearningRecord*>(nkmBaseGetRecord(unit->id));
     LearnedSkill pending[8] = {};
     s32 pendingCount = 0;
     s32 levelIndex = 0;

@@ -13,7 +13,7 @@ int FUN_00333a38(u32 id, int checkFlag)
     int i;
 
     for (i = 0; i < 400; i++) {
-        QuestRecord *record = dataTable1bOr1cGetRecord((u16)i);
+        QuestRecord *record = questDataGetRecord((u16)i);
 
         if (record != NULL && (record->excludedQuests[0] == id || record->excludedQuests[1] == id)
             && (checkFlag == 0 || (*questGetRuntimeStatus(i) & 1) != 0)) {

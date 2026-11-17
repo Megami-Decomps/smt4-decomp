@@ -39,7 +39,7 @@ u32 scrCommTalkBustUpShow(void)
         s32 i;
 
         scrWorkSetValue(0, 0);
-        record = dataTable1bOr1cGetRecord(id);
+        record = questDataGetRecord(id);
         if (goalConditionsSatisfied(id) == 0) {
             scrSetResult(0);
             return 1;
@@ -58,7 +58,7 @@ u32 scrCommTalkBustUpShow(void)
         s32 phase;
 
         dataTableValueOrZero(30);
-        dataTable1bOr1cGetRecord(id);
+        questDataGetRecord(id);
         phase = scrWorkGetValue(0);
         if (phase == 0) {
             if (FUN_0035fcbc() == 0) {

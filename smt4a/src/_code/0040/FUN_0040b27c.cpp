@@ -14,7 +14,7 @@ u32 FUN_004085a8(u32 group, u32 model); /* answers 1 */
  * group 8, model 0. */
 void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
 {
-    EquipmentRecordA *record = dataTable08Sub2GetRecord(equipment);
+    EquipmentRecordA *record = itemTableGetEquipmentRecord(equipment);
     char path[64];
     switch (part) {
     case 0: {
@@ -59,7 +59,7 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
     FUN_003e573c(owner, part, path, flags);
     if (part == 0) {
         PlayerDataA *player = gameGetPlayerData();
-        record = dataTable08Sub2GetRecord(player->equipped.body);
+        record = itemTableGetEquipmentRecord(player->equipped.body);
         u32 variant = FUN_0040b11c(owner, 1, record->modelGroup, record->model, equipment);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dbd%d.bam", record->modelGroup, record->model, variant);
@@ -70,7 +70,7 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
         FUN_003e573c(owner, 1, path, flags);
     } else if (part == 1) {
         PlayerDataA *player = gameGetPlayerData();
-        record = dataTable08Sub2GetRecord(player->equipped.head);
+        record = itemTableGetEquipmentRecord(player->equipped.head);
         u32 variant = FUN_0040b11c(owner, 0, record->modelGroup, record->model, equipment);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, variant);
@@ -79,7 +79,7 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
             textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", 8, 0, variant);
         }
         FUN_003e573c(owner, 0, path, flags);
-        record = dataTable08Sub2GetRecord(player->equipped.legs);
+        record = itemTableGetEquipmentRecord(player->equipped.legs);
         variant = FUN_0040b11c(owner, 2, record->modelGroup, record->model, equipment);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, variant);

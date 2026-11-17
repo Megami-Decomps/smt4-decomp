@@ -1,6 +1,6 @@
 /* NON_MATCHING: logic matches; armcc re-rolls the eight devil skill copies into a loop (retail is straight-line) and allocates rank/bucket/count registers differently. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SkillFlags.h"
 
 /* Table 14 record: rank id and the odds (percent) of shifting the rank. */
@@ -74,7 +74,7 @@ u32 FUN_0033be90(const SkillSet *current, s32 slot, u16 devilId)
 
     u16 known[16];
     *(SkillSet *)known = *current;
-    const DevilRecord *devil = (const DevilRecord *)devilGetRecord(devilId);
+    const NkmBaseRecord *devil = (const NkmBaseRecord *)nkmBaseGetRecord(devilId);
     known[8] = devil->learnedSkills[0].id;
     known[9] = devil->learnedSkills[1].id;
     known[10] = devil->learnedSkills[2].id;

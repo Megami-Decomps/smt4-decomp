@@ -12,7 +12,7 @@ void *dataTableGetEntries(void);
 void *dataTableGet(u32 id, u32 type);
 
 /* Returns the record of data table 8 type 2 for `id`: the add-on's when it has one, else the one found in the table. */
-EquipmentRecordA *dataTable08Sub2GetRecord(u32 id)
+EquipmentRecordA *itemTableGetEquipmentRecord(u32 id)
 {
     EquipmentRecordA key;
     EquipmentRecordA *record;

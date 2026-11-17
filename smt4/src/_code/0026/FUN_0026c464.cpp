@@ -1,12 +1,12 @@
 /* NON_MATCHING: Saved user/preview registers and the shared MP-clamp branch layout differ from retail. */
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-s32 FUN_00258de0(s32 user, s32 target, Table04Record *skill, s32 preview, s32 mode);
+s32 FUN_00258de0(s32 user, s32 target, SkillDataRecord *skill, s32 preview, s32 mode);
 s32 appGetRemainingCapacity(u32 skill);
 s32 FUN_0029a9d4(u32 skill, s32 mode);
 PartyDamageSlotsIV *gameGetSlotTable(void);
@@ -16,7 +16,7 @@ BtlEquip *gameGetPlayerData(void);
 s32 FUN_0026c464(s32 user, u32 skillId, s32 preview)
 {
     bool applied = false;
-    Table04Record *skill = dataTable40FindById(skillId);
+    SkillDataRecord *skill = skillDataFindById(skillId);
     if (skill != NULL) {
         if (FUN_00258de0(user, -1, skill, preview, 0) == 0) {
             applied = true;

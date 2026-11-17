@@ -37,7 +37,7 @@ int FUN_00297684(...);
 int FUN_0029ae60(int);
 int lmapSceneSetUnk134(int);
 int FUN_002a09b4(unsigned char *, int);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int uiSpriteAdvanceAnimation(...);
 int asdOperatorNew(void);
 int VectorSignedToFloat(...);
@@ -116,7 +116,7 @@ extern int FUN_0029e9cc(unsigned short);
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: statusCameraApply. */
 extern unsigned int categoryGetColor(unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
@@ -259,7 +259,7 @@ unsigned int FUN_0018f660(void)
       puVar12 = (unsigned short *)(pcVar4 + 0x1300);
       temp_v14 = DAT_0044e144;
       temp_v3 = (unsigned int)*puVar12;
-      dataTable00FindById();
+      nkmEnemyFindById();
       if ((((temp_v3 == 0) || (temp_v5 = *(unsigned char *)(temp_v3 + 0xa5), (temp_v5 & 1) == 0)) &&
           ((temp_v5 = temp_v14[0x12ed], temp_v5 == 0 ||
            ((temp_v3 != 0 && ((*(unsigned char *)(temp_v3 + 3) & 1) != 0)))))) || ((short)*puVar12 < 0)) {
@@ -275,7 +275,7 @@ unsigned int FUN_0018f660(void)
       }
       else {
         temp_v3 = (unsigned int)*puVar12;
-        dataTable00FindById();
+        nkmEnemyFindById();
         if (*(short *)(temp_v3 + 0xa6) < 1) {
           *(unsigned short *)(pcVar4 + 0x12fe) = *(unsigned short *)(temp_v3 + 0x88);
         }

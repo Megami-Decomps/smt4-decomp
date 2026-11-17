@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail hoists the zero constant into fp and keeps `10 == category` as `mov r1,#10; cmp r1, r0 lsr #8`; the value-box float conversions are scheduled differently and the sprite is re-extended (uxth) before the draw call. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "code/Code0019.h"
@@ -48,7 +48,7 @@ static __inline u16 panelIconSprite(u32 category)
     case 9: slot = 0xbb; break;
     default: slot = -1; break;
     }
-    DevilRecordA *icon = devilGetRecord(slot < 0 ? 0 : category == 9 ? 0x29d : dataTable10FindValue((u16)slot));
+    NkmBaseRecordA *icon = nkmBaseGetRecord(slot < 0 ? 0 : category == 9 ? 0x29d : dataTable10FindValue((u16)slot));
     if (icon == NULL) {
         return 0;
     }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: 64-bit side-mask tests and switch tail merging differ; -O2 candidate. */
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 struct TargetSkill {
     u8 unk00[0x28];
@@ -19,7 +19,7 @@ extern TargetActionGlobals g_btlAction;
 // Derive the side and selection scope encoded by the skill's target mode.
 void btlActionClassifyTargetSide(u32 unused, const TargetUnit *unit, u32 skillId, u32 *side, u32 *scope)
 {
-    const TargetSkill *skill = (const TargetSkill *)dataTable04FindById(skillId);
+    const TargetSkill *skill = (const TargetSkill *)skillDataFindById(skillId);
     if (skill == NULL)
         return;
     switch (skill->targetMode) {

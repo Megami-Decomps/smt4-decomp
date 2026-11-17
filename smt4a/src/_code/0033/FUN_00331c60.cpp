@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation differs: retail spills the member record and keeps the item loop base/limit (r5/r6) in registers and loads the divide-by-100 reciprocal later; logic matches. */
 #include "common.h"
 #include "mapnavi/naviMain.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "sys/RuntimeObjects.h"
 
 /* Battle reward input: base experience and the enemy level it came from. */

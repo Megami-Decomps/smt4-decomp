@@ -66,7 +66,7 @@ void FUN_004a5d5c(ItemListSelectionOwner *owner)
     statusPanelSetOpen(1);
     s32 mode = statusDownGetFlag();
     s32 panel = FUN_0023b3b8();
-    const PreviewRecordFlags *record = reinterpret_cast<const PreviewRecordFlags *>(devilGetRecord(id));
+    const PreviewRecordFlags *record = reinterpret_cast<const PreviewRecordFlags *>(nkmBaseGetRecord(id));
     if ((record->flags & 2) != 0 && mode == 5) {
         panel = 1;
         mode = panel;
@@ -82,7 +82,7 @@ void FUN_004a5d5c(ItemListSelectionOwner *owner)
         return;
     }
     record = reinterpret_cast<const PreviewRecordFlags *>(
-        devilGetRecord(entries[flaggedValueHolderGetTotal(work->cursor)].id));
+        nkmBaseGetRecord(entries[flaggedValueHolderGetTotal(work->cursor)].id));
     if ((record->flags & 2) == 0)
         sysPlaySe(0x30);
     else

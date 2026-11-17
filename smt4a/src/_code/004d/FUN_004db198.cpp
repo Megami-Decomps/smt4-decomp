@@ -9,8 +9,8 @@ u16 FUN_004dc154(void *, u8, u16);
 
 u32 FUN_004db198(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output)
 {
-    const DevilRecordA *first = devilGetRecord(firstId);
-    const DevilRecordA *second = devilGetRecord(secondId);
+    const NkmBaseRecordA *first = nkmBaseGetRecord(firstId);
+    const NkmBaseRecordA *second = nkmBaseGetRecord(secondId);
     const Table05Pair *recipe = dataFindSymmetricPair(first->race, second->race);
     const u8 *levelBias = dataTable5GetEntries();
     if (first->id != second->id && recipe != NULL) {

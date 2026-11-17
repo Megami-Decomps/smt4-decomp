@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 union BattleAttackPreview {
     u32 words[13];
@@ -30,7 +30,7 @@ u32 btlScriptPreviewAttackDamageAgainstId(void)
     s32 id = scrGetArg(0);
     s32 result = 9999;
     BtlMainStateA *battle = btlGetMainState();
-    if (dataTable00FindById(id) != NULL) {
+    if (nkmEnemyFindById(id) != NULL) {
         BtlCombatantEntryA *entries = battle->entries;
         for (s32 index = 4; index < 54; ++index) {
             BtlCombatantEntryA *entry = &entries[index];

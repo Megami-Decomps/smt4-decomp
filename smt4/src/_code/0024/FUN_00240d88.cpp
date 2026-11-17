@@ -9,7 +9,7 @@ extern "C" {
 void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
 int FUN_0029a17c(...);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int FUN_002bdf94(...);
 int textDrawString(...);
 int textFormatBuffer(...);
@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int demonGetRaceLabel(short, unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
@@ -127,7 +127,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
   if (param_1 < (int)(unsigned int)*(unsigned short *)(temp_v7 + 0x1e)) {
     temp_v14 = temp_v7 + param_1 * 2;
     psVar7 = (short *)(unsigned int)*(unsigned short *)(temp_v14 + 0xe);
-    devilGetRecord();
+    nkmBaseGetRecord();
     if (temp_v16 == 0) {
       temp_v4 = asdTMTexTableEntryAt(0x24,0xd2);
       temp_v5 = g_titleScene;

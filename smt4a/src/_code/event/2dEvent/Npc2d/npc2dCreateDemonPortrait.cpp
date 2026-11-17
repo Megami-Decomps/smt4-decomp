@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 void sysMemClear(void *memory, u32 size);
@@ -33,7 +33,7 @@ u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha)
     for (s32 i = 0; i < 6; ++i) {
         work->unk70[i] = 0;
     }
-    work->portraitId = dataTable00FindById((u16)id)->battleTextureId;
+    work->portraitId = nkmEnemyFindById((u16)id)->battleTextureId;
     if (FUN_00162ea4()) {
         work->resourceState = 1;
     } else {

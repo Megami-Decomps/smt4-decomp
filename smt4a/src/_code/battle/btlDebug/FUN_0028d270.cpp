@@ -9,8 +9,8 @@ extern "C" {
 
 int effectDispatchSelector(...);
 int FUN_00167860(...);
-int devilGetRecord(void);
-int dataTable04FindById(void);
+int nkmBaseGetRecord(void);
+int skillDataFindById(void);
 int uiDrawListScrollBar(...);
 int statDrawClampedDelta(...);
 int dataRecordGetKindValue(void);
@@ -81,11 +81,11 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern unsigned int flagValueRead(int);
 extern int recordGetModeForId(int);
 extern int btlMainGetUnk14(void);
@@ -437,7 +437,7 @@ void FUN_0028d270(int param_1)
             }
             else {
               temp_v10 = (unsigned int)*(unsigned short *)(temp_v18 + 0x62);
-              devilGetRecord();
+              nkmBaseGetRecord();
               if (*(char *)(temp_v10 + 0xc) != '\x01') {
                 textFormatBuffer(temp_v20,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
               }
@@ -535,7 +535,7 @@ LAB_0028d9e0:
             temp_v13 = 0;
             if (temp_v9 != 0) {
               puVar6 = temp_v14[1];
-              dataTable04FindById();
+              skillDataFindById();
               temp_v10 = temp_v5;
               if (puVar6 != (unsigned char *)0x0) {
                 temp_v10 = (unsigned int)*(unsigned short *)((int)puVar6 + 0x86);
@@ -884,7 +884,7 @@ LAB_0028d9e0:
       }
       else {
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v18 + 0x62);
-        devilGetRecord();
+        nkmBaseGetRecord();
         if (*(char *)(temp_v10 + 0xc) != '\x01') {
           textFormatBuffer(temp_v20,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
         }
@@ -950,7 +950,7 @@ LAB_0028d9e0:
     temp_v17[0] = 0;
     if (temp_v28 != 0) {
       temp_v3 = temp_v15;
-      dataTable04FindById();
+      skillDataFindById();
       temp_v0 = 0;
       if (temp_v3 != 0) {
         temp_v0 = *(short *)(temp_v3 + 0x86);

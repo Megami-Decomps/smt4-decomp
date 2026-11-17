@@ -1,6 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "addon/AocSystem.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 /* A table2/section2 record; its six item ids sit at +0xC. */
 struct Table02Sub2Entry {
@@ -37,7 +37,7 @@ u32 dataTable02HasFlaggedItem(s32 index)
         for (i = 0; i < 6; i++) {
             u16 id = entry->itemIds[i];
             if (id != 0) {
-                Table00Record *item = dataTable00FindById(id);
+                NkmEnemyRecord *item = nkmEnemyFindById(id);
                 if (item != NULL && (item->levelFlags & 1)) {
                     return 1;
                 }

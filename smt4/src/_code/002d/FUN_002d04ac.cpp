@@ -19,8 +19,8 @@ s32 FUN_002d04ac(const u16 *idA, const u16 *idB)
         result = -1;
     }
     if (result == 0) {
-        QuestRecord *recordA = dataTable1bOr1cGetRecord(*idA);
-        QuestRecord *recordB = dataTable1bOr1cGetRecord(*idB);
+        QuestRecord *recordA = questDataGetRecord(*idA);
+        QuestRecord *recordB = questDataGetRecord(*idB);
         s32 diff = 0;
         if (recordA != NULL && recordB != NULL) {
             diff = recordB->order - recordA->order;

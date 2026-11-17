@@ -1,10 +1,10 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/Shard0032.h"
 
 extern "C" {
 u32 gameStockContainsEntry(u32 id);
 
-static __inline u8 demonEvolutionStatus(const UnitRecord *unit, const DevilRecordA *evolution)
+static __inline u8 demonEvolutionStatus(const UnitRecord *unit, const NkmBaseRecordA *evolution)
 {
     u8 status = 1;
     if (evolution->evolutionTarget != 0 && gameStockContainsEntry(evolution->evolutionTarget) == 0) {
@@ -16,6 +16,6 @@ static __inline u8 demonEvolutionStatus(const UnitRecord *unit, const DevilRecor
 // Report evolution availability, excluding a target already present in the party.
 u8 btlGetDemonEvolutionStatus(const UnitRecord *unit)
 {
-    return demonEvolutionStatus(unit, devilGetRecord(unit->id));
+    return demonEvolutionStatus(unit, nkmBaseGetRecord(unit->id));
 }
 }

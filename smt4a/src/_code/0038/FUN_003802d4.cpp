@@ -1,14 +1,14 @@
 /* NON_MATCHING: unrolled predicated structure now matches retail; only the constant/value register pair (r3/r2) is swapped. */
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "script/ScriptArgs.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 u32 randRange(u16);
 void scrSetResult(s32);
 
 u32 FUN_003802d4(void)
 {
-    Table00RecordA* record = dataTable00FindById((u16)scrGetArg(0));
+    NkmEnemyRecordA* record = nkmEnemyFindById((u16)scrGetArg(0));
     u32 candidates[3];
     s32 count = 0;
     for (s32 index = 0; index < 3; ++index) {

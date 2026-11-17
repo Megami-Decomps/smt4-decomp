@@ -1,8 +1,8 @@
 /* NON_MATCHING: the skill-affinity pass is now an inline helper as in retail and its loop matches; remaining: retail keeps the HP accumulator's 0 in r7 and stores it for unk1c/unk1e, armcc materializes a separate zero (r5) and copies it. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "font/SWin/SWin.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
 #include "map/lmapMain.h"
 
@@ -77,11 +77,11 @@ void FUN_002a6894(DemonRecord* record);
 /* Adds each skill's affinity growth to its affinity bonus, clamped to [-9, 9]. */
 static __inline void demonApplySkillAffinities(DemonRecord *record)
 {
-    if (record == NULL || record->id == 0 || devilGetRecord(record->id) == NULL)
+    if (record == NULL || record->id == 0 || nkmBaseGetRecord(record->id) == NULL)
         return;
     for (s32 i = 0; i < 8; i++) {
         if (record->skills[i] == 0) continue;
-        SkillRecord *skill = (SkillRecord *)dataTable04FindById(record->skills[i]);
+        SkillRecord *skill = (SkillRecord *)skillDataFindById(record->skills[i]);
         if (skill == NULL || skill->affinity >= 18) continue;
         u32 affinity = skill->affinity;
         s8 sum = record->growth[affinity] + record->affinityBonus[i];
@@ -109,7 +109,7 @@ void demonRecordInitialize(DemonRecord* record, u32 slot, u32 id, s32 kind)
         gameItemSetFlag((u16)id, 1);
         FUN_002854d8((u16)id, 1);
     }
-    const DevilRecordA* info = reinterpret_cast<const DevilRecordA *>(devilGetRecord((u16)id));
+    const NkmBaseRecordA* info = reinterpret_cast<const NkmBaseRecordA *>(nkmBaseGetRecord((u16)id));
     s16 hp = 0;
     switch (kind) {
     case 0:

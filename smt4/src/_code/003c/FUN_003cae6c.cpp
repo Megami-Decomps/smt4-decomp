@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail re-evaluates the unit table address (g_btlAction+4, then index * 0xf1c) at every store and keeps the 64-bit mask halves in different registers; the control flow and calls are the same. */
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BattleCommandController.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
@@ -93,11 +93,11 @@ u32 FUN_003cae6c(BtlMainState **block, CommandState *state)
         markChosenTargets(state, mask);
     } else {
         if (kind == 2 || kind == 3) {
-            info = reinterpret_cast<SkillInfo *>(dataTable40FindById(selection->value));
+            info = reinterpret_cast<SkillInfo *>(skillDataFindById(selection->value));
         } else if (kind == 8) {
-            ConsumableRecord *record = dataTable08Sub1GetRecord(selection->value);
+            ConsumableRecord *record = itemTableGetItemRecord(selection->value);
             if (record->skillId != 0) {
-                info = reinterpret_cast<SkillInfo *>(dataTable40FindById(record->skillId));
+                info = reinterpret_cast<SkillInfo *>(skillDataFindById(record->skillId));
             }
         }
         if (info != NULL && info->kind == 7) {

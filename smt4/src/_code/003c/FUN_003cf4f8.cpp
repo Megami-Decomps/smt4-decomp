@@ -45,7 +45,7 @@ struct SkillRecord40 {
 
 extern "C" {
 void btlEntryBuildSummary(BattleActionInfo *info, BtlMainState *battle, u32 unit);
-SkillRecord40 *dataTable40FindById(s16 id);
+SkillRecord40 *skillDataFindById(s16 id);
 s32 FUN_00229914(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 randRange(u32 limit);
 
@@ -68,7 +68,7 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
         return;
     bool broadSkill = false;
     if (info.skill != 0) {
-        SkillRecord40 *skill = dataTable40FindById(info.skill);
+        SkillRecord40 *skill = skillDataFindById(info.skill);
         if (skill != NULL) {
             if (skill->kind != 4 && skill->splash == 0) {
                 if (skill->hitsAll != 0 || skill->hitsRow != 0 || (skill->flags & 2))

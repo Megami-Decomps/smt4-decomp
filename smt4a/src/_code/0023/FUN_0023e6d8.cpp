@@ -1,6 +1,6 @@
 /* NON_MATCHING: the 16-byte equipment copy (ldm/stm) now matches; retail still pushes r0-r2 as spilled arguments, keeps a zero u16 in r6 for the unused flags argument and the result pointer in r8, so the register allocation differs. */
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/GamePlayerData.h"
 
 // A skill or card record (the fields this function reads).

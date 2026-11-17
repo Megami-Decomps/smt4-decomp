@@ -1,7 +1,7 @@
 /* NON_MATCHING: 64-bit mask loads are ldm here but ldrd in retail, the unit-slot address folding differs, and retail keeps 12 more bytes of locals between the extra-target word and the confirm flag (the extra-target query result is larger than the u64 used here) */
 #include "common.h"
 #include "mapnavi/naviMain.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
@@ -142,7 +142,7 @@ u32 FUN_004de37c(BtlActingTask *task, BtlMenuState *menu)
         goto markSelected;
     }
     if (command == 2 || command == 3) {
-        Table04Row *row = (Table04Row *)dataTable04FindById(result->argument);
+        Table04Row *row = (Table04Row *)skillDataFindById(result->argument);
         if (row == NULL) {
             goto scanTargets;
         }
@@ -153,11 +153,11 @@ u32 FUN_004de37c(BtlActingTask *task, BtlMenuState *menu)
             isSpecial = 1;
         }
     } else if (command == 8) {
-        ConsumableRecordA *linked = dataTable8FindRecord(result->argument);
+        ConsumableRecordA *linked = itemTableGetItemRecord(result->argument);
         if (linked->skillId == 0) {
             goto scanTargets;
         }
-        Table04Row *row = (Table04Row *)dataTable04FindById(linked->skillId);
+        Table04Row *row = (Table04Row *)skillDataFindById(linked->skillId);
         if (row == NULL) {
             goto scanTargets;
         }
@@ -209,7 +209,7 @@ scanTargets:
                 btlEntryBuildSummary(&info, task->battle, menu->choiceMask);
                 if (info.kind == 3) {
                     if (info.subtype != 24 && info.subtype != 27 && info.subtype != 1) {
-                        ConsumableRecordA *row = dataTable8FindRecord(info.record);
+                        ConsumableRecordA *row = itemTableGetItemRecord(info.record);
                         if (row != NULL && (((u32 *)row)[26] & 4) != 0) {
                             index = 1;
                             continue;

@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/ItemSortRecord.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
@@ -35,7 +35,7 @@ int itemSortCompareRankThenKey(SortItem *a, SortItem *b)
     } else {
         rankA = itemSortCategoryFromKindRecord(a->id);
         subA = recordKindRank(a->id);
-        orderA = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(a->id))->secondaryKey;
+        orderA = reinterpret_cast<const ItemSortRecord *>(skillDataFindById(a->id))->secondaryKey;
     }
     if (idIsAbove400(b->id) != 0) {
         rankB = 99;
@@ -44,7 +44,7 @@ int itemSortCompareRankThenKey(SortItem *a, SortItem *b)
     } else {
         rankB = itemSortCategoryFromKindRecord(b->id);
         subB = recordKindRank(b->id);
-        orderB = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(b->id))->secondaryKey;
+        orderB = reinterpret_cast<const ItemSortRecord *>(skillDataFindById(b->id))->secondaryKey;
     }
     diff = rankA - rankB;
     if (diff == 0) {

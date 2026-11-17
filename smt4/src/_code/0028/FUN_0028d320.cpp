@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation only: retail saves eight callee-saved registers (fp, plus ip as padding) and hoists the loop limits 4 and 54 into r6; here seven registers and immediate limits. Control flow, switch tables and bitfields match. */
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 /* The part of a skill record the target check reads. */
 struct SkillTargetRecord {
@@ -33,7 +33,7 @@ u32 FUN_0028d320(u32 skillId)
     if (skillId == 0) {
         return 1;
     }
-    SkillTargetRecord *skill = reinterpret_cast<SkillTargetRecord *>(dataTable40FindById(skillId));
+    SkillTargetRecord *skill = reinterpret_cast<SkillTargetRecord *>(skillDataFindById(skillId));
     if (skill == NULL) {
         return 1;
     }

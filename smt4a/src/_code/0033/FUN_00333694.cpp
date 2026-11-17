@@ -2,7 +2,7 @@
  * branches and passes the slot through "subs r0"; this build keeps a clamp per branch. */
 #include "shard/Shard0034.h"
 #include "shard/Shard004B.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/GamePlayerData.h"
 
 /* A skill record of data table 4. */
@@ -21,7 +21,7 @@ s32 skillGetAdjustedCost(const ItemRankRecord *unit, u32 cost);
  * effect outside preview, pays its cost from the user's MP. Returns 1 for an unknown skill. */
 s32 FUN_00333694(s32 slot, u32 target, u32 id, s32 preview)
 {
-    SkillCostRecord *skill = (SkillCostRecord *)dataTable04FindById(id);
+    SkillCostRecord *skill = (SkillCostRecord *)skillDataFindById(id);
     if (skill == NULL) {
         return 1;
     }

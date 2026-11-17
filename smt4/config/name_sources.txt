@@ -4899,3 +4899,9 @@
 0038a134 aocPackageClearFileRefFlagType10 inferred [med] finds package file ref of type 0x10 by id and clears byte 0xD
 003ab948 _ZN9Obj42244827bibleScreenClearListedFlagsEv inferred Member of Obj422448 (handler slot 11): clears each listed flag, then enters state 12.
 003abad4 _ZN9Obj42244830bibleScreenEnableAndResetValueEv inferred Member of Obj422448 (handler slot 0): sets the enabled flag and clears the value after it.
+002b9024 nkmBaseGetRecord inferred Finds a demon's base record by id in battle/NKMBaseTable.tbb table 0 (0x94-byte rows; the game keeps demon data under gamedata/nkm/, nkm = nakama).
+002b06c4 nkmEnemyFindById inferred Finds a demon's enemy record by id in battle/NKMBaseTable.tbb table 1 (0xA8-byte rows: level, HP, MP, stats, drops, AI script).
+002ae164 skillDataFindById inferred Finds a skill record by id in battle/SkillData.tbb table 0 (0x68-byte rows, id at 0x20). Twin of smt4a skillDataFindById.
+002b4670 itemTableGetItemRecord inferred Finds an item record by id in item/ItemTable.tbb table 1 (0x80-byte rows: id 0x60, stack limit 0x71, buy 0x78, sell 0x7C). Twin of smt4a itemTableGetItemRecord.
+002b45e8 itemTableGetEquipmentRecord inferred Finds an equipment record by id in item/ItemTable.tbb table 2 (0xA8-byte rows in IV: id 0x50, buy 0x9C, sell 0xA0).
+002b63c0 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).

@@ -33,7 +33,7 @@ u32 recordPackedValue(u32 id)
     default:
         return 999;
     case 1:
-        record1 = dataTable08Sub1GetRecord(id);
+        record1 = itemTableGetItemRecord(id);
         if (record1 == NULL) {
             return 0;
         }
@@ -48,7 +48,7 @@ u32 recordPackedValue(u32 id)
     case 6:
     case 7:
     case 8:
-        record2 = dataTable08Sub2GetRecord(id);
+        record2 = itemTableGetEquipmentRecord(id);
         if (record2 == NULL) {
             return 0;
         }

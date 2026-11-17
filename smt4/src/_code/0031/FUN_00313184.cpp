@@ -2,7 +2,7 @@
 #include "gamedata/ItemSortCategory.h"
 #include "gamedata/Table8Type5Lookup.h"
 #include "gamedata/ItemSortRecord.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 /* An item as the item sort compares it: its id and its slot (0 when not in a slot). */
 struct ItemSortKey {
@@ -25,7 +25,7 @@ static __inline s32 itemSortCompareCategory(const ItemSortKey *left, const ItemS
         leftKey = 0;
     } else {
         leftRank = itemGetSortCategory(left->id);
-        leftKey = reinterpret_cast<ItemSortRecord *>(dataTable40FindById(left->id))->secondaryKey;
+        leftKey = reinterpret_cast<ItemSortRecord *>(skillDataFindById(left->id))->secondaryKey;
     }
     s32 rightRank;
     u16 rightKey;
@@ -34,7 +34,7 @@ static __inline s32 itemSortCompareCategory(const ItemSortKey *left, const ItemS
         rightKey = 0;
     } else {
         rightRank = itemGetSortCategory(right->id);
-        rightKey = reinterpret_cast<ItemSortRecord *>(dataTable40FindById(right->id))->secondaryKey;
+        rightKey = reinterpret_cast<ItemSortRecord *>(skillDataFindById(right->id))->secondaryKey;
     }
     s32 difference = rightRank - leftRank;
     if (difference == 0)

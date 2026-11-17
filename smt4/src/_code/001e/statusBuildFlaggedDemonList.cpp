@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the first entry store differs: retail computes the entry address in r1 and the id in r2 (built swaps them). */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -33,7 +33,7 @@ void statusBuildFlaggedDemonList(const u8 *flags)
     list->total = 0;
     memClear(list->entries, sizeof(list->entries));
     for (u16 id = 0; id < 0x500; ++id) {
-        const DevilRecord *record = devilGetRecord(id);
+        const NkmBaseRecord *record = nkmBaseGetRecord(id);
         if (record && (record->flags & 1) && record->innateFlag) {
             u16 flag = record->innateFlag;
             if (flags[flag >> 3] & (1 << (flag & 7))) {

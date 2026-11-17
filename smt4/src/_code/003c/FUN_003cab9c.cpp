@@ -1,7 +1,7 @@
 /* NON_MATCHING: contract fixes applied (owner->state passed to the slot helpers, FUN_003dc504(DAT_00435d18) result tested, shared result exit, action-data slot setter, case order); retail merges the command store of four case groups into one tail and loads the slot stride from the pool each time. */
 #include "common.h"
 #include "battle/btlUnit.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/btlAction.h"
 #include "battle/BtlGlobals.h"
 
@@ -120,7 +120,7 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
     case 0xb:
     case 0xc:
         if (work->actor->kind == 2) {
-            DataTable40Record *skill = reinterpret_cast<DataTable40Record *>(dataTable40FindById(work->actor->skill));
+            DataTable40Record *skill = reinterpret_cast<DataTable40Record *>(skillDataFindById(work->actor->skill));
             if (skill != 0 && skill->flag != 0) {
                 if ((owner->state->stateFlags & 0x40) != 0) {
                     work->flags |= 0x80;

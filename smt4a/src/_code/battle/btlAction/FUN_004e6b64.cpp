@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "util/Random.h"
 
 /* The action a battle unit is about to use (as btlEntryBuildSummary fills it). */
@@ -74,7 +74,7 @@ void FUN_004e6b64(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     bool favourGuarding = false;
     bool plainSkill = false;
     if (info.skill != 0) {
-        SkillRecord04 *skill = (SkillRecord04 *)dataTable04FindById(info.skill);
+        SkillRecord04 *skill = (SkillRecord04 *)skillDataFindById(info.skill);
         if (skill != NULL && skill->kind == 4 && skill->splash == 0)
             plainSkill = true;
     }

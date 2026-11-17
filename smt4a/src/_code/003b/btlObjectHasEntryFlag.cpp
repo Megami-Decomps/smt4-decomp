@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -13,7 +13,7 @@ s32 btlObjectHasEntryFlag(Object *object)
     if (btlIsDefeatSuppressed(object) == 0) {
         return 0;
     }
-    DevilRecordA *entry = devilGetRecord(object->id);
+    NkmBaseRecordA *entry = nkmBaseGetRecord(object->id);
     return entry != NULL ? ((entry->extraFlags & 4) >> 2) : 0;
 }
 

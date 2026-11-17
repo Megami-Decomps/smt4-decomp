@@ -8,7 +8,7 @@ extern "C" u32 devilCalcLevelScaledCost(u16 devilId, s32 level)
     if (level < 99) {
         const u32 *costs = (const u32 *)dataTableGetEntries(dataTableGet(9, 1));
         u32 cost = costs[level - 1];
-        const DevilRecord *devil = devilGetRecord(devilId);
+        const NkmBaseRecord *devil = nkmBaseGetRecord(devilId);
         s32 difference = level - devil->level + 1;
         u32 percent;
         if (difference <= 0) {

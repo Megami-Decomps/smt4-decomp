@@ -1,6 +1,6 @@
 /* NON_MATCHING: validation result-code merging, predicate formation and register lifetimes differ. */
 #include "shard/Shard004A.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "code/Code002a_Smt4a.h"
 
 extern "C" {
@@ -31,7 +31,7 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
     s32 selection = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(view->selection));
     Candidate *selected = &view->candidates[selection];
     if (view->mode == 0) {
-        devilGetRecord(selected->id);
+        nkmBaseGetRecord(selected->id);
     }
     u8 reason;
     if (!FUN_002a4b28(id)) {

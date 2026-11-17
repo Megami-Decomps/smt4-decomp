@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match8_StatGrowth.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include <string.h>
 
 extern "C" {
@@ -11,7 +11,7 @@ u32 saveSlotIsActiveWithId(u32 id);
 /* Fills a unit's stat-growth packet from demon `id`'s record: base HP/MP, their growth, the stat growth and the HP/MP at its level. */
 void unitBuildStatGrowthPacket(u32 *packet, u32 id)
 {
-    const DevilRecordA *record = devilGetRecord(id);
+    const NkmBaseRecordA *record = nkmBaseGetRecord(id);
     StatGrowthParameters parameters = {};
     parameters.baseHp = record->baseHp;
     parameters.baseMp = record->baseMp;

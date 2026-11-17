@@ -9,7 +9,7 @@ int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int dataTable01GetRecordWithAocOverride(void);
 int layoutFindTableEntry(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int devilDrawIconRelative(...);
 int drawTextAtRelativePosition(...);
 int uiDrawTableTextureAtRectCorner(int, int, int, int, int);
@@ -39,7 +39,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: layoutFindTableEntry. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: devilDrawIconRelative. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
@@ -157,7 +157,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     drawTextAtSnappedRectangle(param_1 + 200,temp_v13,temp_v8,temp_v7,temp_v7,temp_v3);
     temp_v7 = param_4;
     temp_v12 = 0;
-    dataTable00FindById();
+    nkmEnemyFindById();
     if (temp_v7 != 0) {
       temp_v12 = *(unsigned short *)(temp_v7 + 2) & 0x7fff;
     }
@@ -174,7 +174,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     drawTextAtRelativePosition(param_1 + 200,0,temp_v0 + temp_v10,temp_v15,0,7,0xffffffff,temp_v9,temp_v14);
     param_4 = param_4 & 0xffff;
     temp_v6 = 0;
-    dataTable00FindById();
+    nkmEnemyFindById();
     if (param_4 != 0) {
       temp_v6 = *(unsigned int *)(param_4 + 0x7c);
     }

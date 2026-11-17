@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "classes/Obj55c8d0.h"
 #include "ui/ItemListSelection.h"
 
@@ -41,7 +41,7 @@ void Obj55c8d0::itemListMenuWaitUseCounter()
             sysPlaySe(0x48);
         } else if (menu->mode == 0) {
             ItemListEntry *entries = menu->entries;
-            DevilRecordA *item = devilGetRecord(entries[flaggedValueHolderGetTotal(menu->cursor)].itemId);
+            NkmBaseRecordA *item = nkmBaseGetRecord(entries[flaggedValueHolderGetTotal(menu->cursor)].itemId);
 
             sysPlaySe((item->extraFlags & 2) ? 0x121 : 0x30);
         } else {

@@ -1,9 +1,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "battle/BtlMainAccess.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
@@ -19,7 +19,7 @@ u32 FUN_002fef38()
             (entry->flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
             if (entry->equipA != NULL) {
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(entry->equipA->skillIds[slot]));
+                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->equipA->skillIds[slot]));
                     if (skill != NULL && skill->classification.category == 3) {
                         scrSetResult(1);
                         return 1;
@@ -28,7 +28,7 @@ u32 FUN_002fef38()
             }
             if (entry->equipB != NULL) {
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(entry->equipB->skillIds[slot]));
+                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->equipB->skillIds[slot]));
                     if (skill != NULL && skill->classification.category == 3) {
                         scrSetResult(1);
                         return 1;
@@ -36,9 +36,9 @@ u32 FUN_002fef38()
                 }
             }
             if (entry->devil != NULL) {
-                const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(entry->id));
+                const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(entry->id));
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(record->skills[slot]));
+                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(record->skills[slot]));
                     if (skill != NULL && skill->classification.category == 3) {
                         scrSetResult(1);
                         return 1;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: skill clearing becomes memclr, shared-loop pointer setup and sort-key bitfield packing differ; -O2 candidate. */
 #include "shard/W5_W5Match2_UniteWork.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gamedata/SkillFlags.h"
 
@@ -31,7 +31,7 @@ void FUN_0029b130(u16 *, s32, const FusionSkillSortKey *, u32);
 }
 
 static inline s32 appendInheritedSkills(FusionSkillWork *work, const FusionSkillDemon *parent,
-                                        const DevilRecord *result, s32 count)
+                                        const NkmBaseRecord *result, s32 count)
 {
     for (s32 i = 0; i < 8; ++i) {
         if (parent->skills[i] && (dataTable06Sub1GetRecord(parent->skills[i])->flags & 0x20) &&
@@ -45,7 +45,7 @@ static inline s32 appendInheritedSkills(FusionSkillWork *work, const FusionSkill
 extern "C" void uniteBuildInheritedSkillCandidates(u32 resultId, const FusionSkillDemon *first, const FusionSkillDemon *second)
 {
     FusionSkillWork *work = (FusionSkillWork *)g_unite;
-    const DevilRecord *result = devilGetRecord(resultId);
+    const NkmBaseRecord *result = nkmBaseGetRecord(resultId);
     for (s32 i = 0; i < 24; ++i)
         work->inherited[i] = 0;
     s32 count = appendInheritedSkills(work, first, result, 0);

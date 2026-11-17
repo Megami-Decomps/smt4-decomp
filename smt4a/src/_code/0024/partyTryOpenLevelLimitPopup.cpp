@@ -1,7 +1,7 @@
 /* Prepares an idle party popup from the selected slot when its unit meets the level limit. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct PopupState {
     u32 state;
@@ -39,7 +39,7 @@ void partyTryOpenLevelLimitPopup(void)
         return;
     }
     u32 unitId = g_gameState.unk308;
-    s32 tableLevel = dataTable00FindById((u16)unitId)->level & 0x7FFF;
+    s32 tableLevel = nkmEnemyFindById((u16)unitId)->level & 0x7FFF;
     s32 playerLevel = *(u16 *)((u8 *)gameGetPlayerData() + 0x62);
     if (g_gameState.unk308 == 0 || (playerLevel > tableLevel && playerLevel > tableLevel + 5)) {
         return;

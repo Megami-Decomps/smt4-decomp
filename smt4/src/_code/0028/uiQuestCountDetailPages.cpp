@@ -14,17 +14,17 @@ void uiQuestCountDetailPages(u16 id)
         return;
     quest->panel.page = 1;
     if (quest->panel.detailMode != 0) {
-        if (dataTable1bOr1cGetRecord(id)->flags & 0x40)
+        if (questDataGetRecord(id)->flags & 0x40)
             ++quest->panel.page;
         if (FUN_00241c40(id) > 0)
             ++quest->panel.page;
     }
     if (quest->panel.detailMode == 0) {
         u8 defaultKind = 0;
-        if (idIsAtLeast350(id) && dataTable1bOr1cGetRecord(id)->kind == 0)
+        if (idIsAtLeast350(id) && questDataGetRecord(id)->kind == 0)
             defaultKind = 1;
         if (FUN_00298dc8(id) | defaultKind) {
-            if (dataTable1bOr1cGetRecord(id)->flags & 0x40)
+            if (questDataGetRecord(id)->flags & 0x40)
                 ++quest->panel.page;
             if (FUN_00241c40(id) > 0)
                 ++quest->panel.page;

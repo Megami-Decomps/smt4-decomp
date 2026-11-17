@@ -8,7 +8,7 @@ int FUN_002a6894(...);
 int gameCounterAddSaturating(...);
 
 int qsort(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int slotRecordFindById(...);
 int partyFindSlotById(int);
 int FUN_002a5e7c(...);
@@ -57,7 +57,7 @@ extern int *g_unite; /* 0x57f290 */
 /* Supplied declaration required: qsort. */
 extern int randRange(unsigned int);
 extern unsigned short recordGetScaledMaximum(int);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: slotRecordFindById. */
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: partyFindSlotById. */
@@ -233,7 +233,7 @@ unsigned char FUN_001ff014(int param_1)
     temp_v25 = piVar1[0x22e7];
     temp_v23 = piVar1[0x22e5];
     temp_v24 = piVar1[0x22e6];
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v7 = 0;
     do {
       temp_v8 = temp_v5 + temp_v7 * 2;
@@ -248,7 +248,7 @@ unsigned char FUN_001ff014(int param_1)
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 8);
     temp_v5 = (piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2;
-    devilGetRecord();
+    nkmBaseGetRecord();
     if (!(*(char *)(temp_v5 + 2) == '3' || *(char *)(temp_v5 + 2) == '*')) {
       temp_v7 = 0;
       do {

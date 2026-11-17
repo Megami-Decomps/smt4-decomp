@@ -47,7 +47,7 @@ int btlTalkBustUpReleaseTexture(void);
 int btlCommandMenuResolveLayout(...);
 int btlTalkBustUpSetUnk2F4(int);
 int btlTalkBustUpSetDemonTexture(int, int);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int FUN_002c1658(...);
 int FUN_00318c5c(...);
 int FUN_0033c6f8(...);
@@ -145,7 +145,7 @@ extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: mathSinFixedAngle. */
 extern int padIsButtonRepeat(unsigned int);
@@ -392,7 +392,7 @@ int FUN_0019e138(unsigned int job)
       temp_v12 = btlTalkBustUpIsUnk2F8(*(unsigned int *)(temp_v4 + 0x2268));
       if (temp_v12 == 0) {
         puVar7 = (unsigned short *)0x0;
-        dataTable00FindById();
+        nkmEnemyFindById();
         temp_v8 = 0;
         do {
           if ((int)(short)puVar7[0x44] == *(int *)(temp_v4 + 0x2268)) break;

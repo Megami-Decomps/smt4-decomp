@@ -15,7 +15,7 @@ static __inline bool devilRegistryEligible(u32 index)
 /* Returns whether a demon is available: its unlock flag is set and, when it is linked to a registry record, that record is eligible. */
 u32 devilIsUnlocked(u32 unused, u16 id)
 {
-    DevilRecord *definition = devilGetRecord(id);
+    NkmBaseRecord *definition = nkmBaseGetRecord(id);
     if (definition != NULL && (definition->requiredFlag == 0 || gameFlagIsSet(definition->requiredFlag))) {
         if (!(definition->prerequisite & 1)) {
             return 1;

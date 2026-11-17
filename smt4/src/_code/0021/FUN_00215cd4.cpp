@@ -27,7 +27,7 @@ void FUN_00215cd4(u32 questId)
     timerStart(work->mainSprite, 0, 0);
     uiQuestChangeState(g_uiQuest, 1);
     work->nextState = 0x1D;
-    QuestRecord *record = dataTable1bOr1cGetRecord(questId);
+    QuestRecord *record = questDataGetRecord(questId);
     if (record->flags & 0x40) {
         work->panel.selection = 2;
     } else {

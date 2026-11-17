@@ -1,7 +1,7 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/SpriteTemplatePreferredDevil.h"
 #include "addon/AocSystem.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 /* Table 2 section 2 record: the six candidate demon ids it offers. */
 struct SpriteTemplateRecord {
@@ -42,14 +42,14 @@ u32 spriteTemplateGetPreferredDevilId(s32 index)
         if (id == 0) {
             continue;
         }
-        Table00Record *devil = dataTable00FindById(id);
+        NkmEnemyRecord *devil = nkmEnemyFindById(id);
         if (devil == NULL) {
             continue;
         }
         if (devil->levelFlags & 1) {
             return id;
         }
-        if (best == 0 || devil->level > dataTable00FindById(best)->level) {
+        if (best == 0 || devil->level > nkmEnemyFindById(best)->level) {
             best = id;
         }
     }

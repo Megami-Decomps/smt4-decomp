@@ -6,8 +6,8 @@ extern "C" {
 /* Orders two ids by their record's sort key, descending. */
 int FUN_0039ecc4(u16 *a, u16 *b)
 {
-    EquipmentRecordA *recordA = dataTable08Sub2GetRecord(*a);
-    EquipmentRecordA *recordB = dataTable08Sub2GetRecord(*b);
+    EquipmentRecordA *recordA = itemTableGetEquipmentRecord(*a);
+    EquipmentRecordA *recordB = itemTableGetEquipmentRecord(*b);
 
     return recordB->order - recordA->order;
 }

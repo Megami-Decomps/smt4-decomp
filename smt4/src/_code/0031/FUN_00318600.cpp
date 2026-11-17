@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 
@@ -9,7 +9,7 @@ void scrSetResult(s32 result);
 /* Script command: returns the halfword at offset 0xA0 of the data table 0 entry with the given id. */
 u32 FUN_00318600(void)
 {
-    scrSetResult(dataTable00FindById((u16)scrGetArg(0))->selectionId);
+    scrSetResult(nkmEnemyFindById((u16)scrGetArg(0))->selectionId);
     return 1;
 }
 

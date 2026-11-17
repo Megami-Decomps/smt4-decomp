@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern void dataTable40FindById(s32 arg);
+extern void skillDataFindById(s32 arg);
 extern s32 FUN_0029a9d4(s32 arg, s32 mode);
 extern s32 appGetRemainingCapacity(s32 arg);
 
@@ -14,7 +14,7 @@ s32 FUN_002987d8(s32 unit, s32 arg)
 {
     s32 result = 0;
 
-    dataTable40FindById(arg);
+    skillDataFindById(arg);
     if (unit < 0) {
         PlayerDataIV *player = gameGetPlayerData();
         if (FUN_0029a9d4(arg, 1) <= player->mp) {

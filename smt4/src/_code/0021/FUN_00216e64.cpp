@@ -31,7 +31,7 @@ int FUN_0029d8f4(int, int);
 int scrScriptProcessDestroy(unsigned int);
 int gameGetPlayerData(void);
 int FUN_002b7bca(int, int, int, unsigned char *);
-int devilGetRecord(...);
+int nkmBaseGetRecord(...);
 int dataTable01FindByIdWithAoc(unsigned int);
 int textFormatBuffer(...);
 int uiSpriteAdvanceAnimation(int);
@@ -88,7 +88,7 @@ extern int gameGetUnitRecord(int);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -252,7 +252,7 @@ void FUN_00216e64(int param_1)
       scrScriptProcessDestroy(*puVar16);
       asdMemFree(*(unsigned int *)(param_1 + 0x3578));
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v1 = *(char *)(temp_v6 + 0x30);
       temp_v4 = dataTableGet(0x25,0);
       pcVar15 = (char *)dataTableGetEntries();
@@ -303,8 +303,8 @@ LAB_002174ac:
         return;
       }
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
-      devilGetRecord();
-      devilGetRecord(*(unsigned short *)(temp_v6 + 0x2a));
+      nkmBaseGetRecord();
+      nkmBaseGetRecord(*(unsigned short *)(temp_v6 + 0x2a));
       gameGetPlayerData();
       if (((int)(*(unsigned char *)(temp_v6 + 0x29) - 2) <= (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x48)) &&
          ((unsigned int)*(unsigned char *)(temp_v2 + 0x48) < (unsigned int)*(unsigned char *)(temp_v6 + 0x29))) {

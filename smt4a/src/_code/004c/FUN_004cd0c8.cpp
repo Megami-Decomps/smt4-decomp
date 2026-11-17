@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail keeps duplicate scan indices; the readable loop shares them and changes comparison/register allocation. */
 #include "gamedata/BattleUnitSkills.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 // The battle unit record exposes only a prefix; this view preserves its boundary.
 struct BattleUnitSkillProgressViewA {
@@ -20,7 +20,7 @@ u32 FUN_004cd0c8(BattleUnitSkillProgressViewA* unit, s32 levelIncrease, u16* out
     if (unit->blocked) {
         return 0;
     }
-    DevilRecordA* demon = devilGetRecord(unit->id);
+    NkmBaseRecordA* demon = nkmBaseGetRecord(unit->id);
     DevilLearnedSkillA candidates[8] = {0};
     s32 candidateCount = 0;
     s32 thresholdIndex = 0;

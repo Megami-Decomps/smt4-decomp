@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -16,7 +16,7 @@ u32 FUN_0039d0b8(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            devilGetRecord(entry->id)->category == 1) {
+            nkmBaseGetRecord(entry->id)->category == 1) {
             scrSetResult(1);
             return 1;
         }

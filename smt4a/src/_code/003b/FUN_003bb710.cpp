@@ -1,6 +1,6 @@
 /* NON_MATCHING: Innate-skill aggregate copy grouping, merged-buffer/source addressing and the inherited-skill count loop unrolling differ. */
 #include "shard/W5_W5Match2_UniteWork.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "util/BitsAndBytes_VariantB.h"
 
 extern "C" {
@@ -42,7 +42,7 @@ extern "C" void FUN_003bb710(u32 devilId)
         offsetof(InheritanceView, merged) == 0x8CF0 && offsetof(InheritanceView, cursor) == 0x8E14 &&
         offsetof(InheritanceView, inheritedCount) == 0x8E80 && offsetof(InheritanceView, totalCount) == 0x8E84 ? 1 : -1];
     UniteWork *work = g_unite;
-    DevilRecordA *record = devilGetRecord(devilId);
+    NkmBaseRecordA *record = nkmBaseGetRecord(devilId);
     InheritanceView *inheritance = (InheritanceView *)work;
     inheritance->initial = record->skills;
     sysMemClear(inheritance->merged, sizeof(inheritance->merged));

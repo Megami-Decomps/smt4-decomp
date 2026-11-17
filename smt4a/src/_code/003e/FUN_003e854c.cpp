@@ -1,8 +1,8 @@
 /* NON_MATCHING: combatant flag clearing uses different doubleword stores; setup/temporary pointers and final clear tail call are scheduled differently. */
 #include "battle/btlMain.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 namespace {
 struct InitialPartySource {
@@ -36,7 +36,7 @@ extern "C" {
 extern InitialPartyGlobals g_btlMain;
 void sysMemClear(void *memory, u32 size);
 void btlActionPrepareFromSource(BtlMainStateA *state, InitialPartySource *source, s32 useSaved);
-void FUN_003eb314(BtlMainStateA *state, BtlUnitRecordA *unit, const Table00RecordA *definition);
+void FUN_003eb314(BtlMainStateA *state, BtlUnitRecordA *unit, const NkmEnemyRecordA *definition);
 void FUN_004ca63c(BtlMainStateA *state, const BtlUnitRecordA *unit, s32 kind, s32 slot, u32 flags);
 void sequenceRequestDeferEx(u32 sequence, const void *arguments);
 
@@ -56,13 +56,13 @@ void FUN_003e854c(BtlMainStateA *state)
     BtlCombatantEntryA temporary;
     BtlUnitRecordA *unit = reinterpret_cast<BtlUnitRecordA *>(&temporary.unitParameters.parameterBlock);
     if (g_btlMain.forcedUnitId > 0) {
-        Table00RecordA *definition = dataTable00FindById(static_cast<u16>(g_btlMain.forcedUnitId));
+        NkmEnemyRecordA *definition = nkmEnemyFindById(static_cast<u16>(g_btlMain.forcedUnitId));
         FUN_003eb314(state, unit, definition);
         FUN_004ca63c(state, unit, 1, 4, 0);
     } else {
         for (u16 i = 0; i < 6; ++i) {
             if (work->source.ids[i] != 0) {
-                Table00RecordA *definition = dataTable00FindById(static_cast<u16>(work->source.ids[i]));
+                NkmEnemyRecordA *definition = nkmEnemyFindById(static_cast<u16>(work->source.ids[i]));
                 if (definition != NULL) {
                     FUN_003eb314(state, unit, definition);
                     FUN_004ca63c(state, unit, 1, i + 4, 0);

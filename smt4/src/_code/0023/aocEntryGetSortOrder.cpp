@@ -23,12 +23,12 @@ u16 aocEntryGetSortOrder(const u16 *entry)
     u16 id = *entry;
     switch (aocEntryGetKind(id)) {
     case 1: {
-        ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+        ConsumableRecord *record = itemTableGetItemRecord(id);
         if (record != NULL) order = record->rank;
         break;
     }
     case 2: case 3: case 4: case 5: case 6: case 7: case 8: {
-        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecord *record = itemTableGetEquipmentRecord(id);
         if (record != NULL) order = record->order;
         break;
     }

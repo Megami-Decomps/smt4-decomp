@@ -2,11 +2,11 @@
 #include "AsdSDK/AsdDebugHooks.h"
 #include "shard/Shard004A.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "camp/UnitComparison.h"
 #include "camp/CampStateQueries_UnitComparison.h"
 #include "ui/ItemListSelection.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 namespace {
 struct InventoryCursorState {
@@ -62,8 +62,8 @@ void FUN_004a4848(Screen4A *owner)
     if (work->alternate == 0) {
         s32 total = 0;
         for (s32 id = 1; id < 0x500; ++id) {
-            DevilRecordA *candidate = devilGetRecord((u16)id);
-            Table00RecordA *record = dataTable00FindById((u16)id);
+            NkmBaseRecordA *candidate = nkmBaseGetRecord((u16)id);
+            NkmEnemyRecordA *record = nkmEnemyFindById((u16)id);
             if (candidate != NULL && record != NULL && (record->flags & 1) != 0) {
                 ++total;
                 if (itemIsCollectedWithRelated(candidate->id) != 0) {

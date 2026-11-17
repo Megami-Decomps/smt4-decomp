@@ -1,6 +1,6 @@
 /* NON_MATCHING: structure, calls, constants and instruction count match; remaining differences are register assignment and scheduling: retail keeps zero in r8, the actor slot id in r1 compared as `cmp slot, id`, the height constant in s0 loaded after the data table lookup and the lift in s16 (this build uses s17/s16), reads the data file through a literal offset (`ldr r0, [pc]; ldr r0, [r0, r5]`) instead of `add; ldr`, and joins the slot search at one clamp. */
 #include "gamedata/DataTable.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct BattleVec3 {
     f32 x, y, z;
@@ -115,7 +115,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
             position = *FUN_00348ee8(world->anchor);
             position.z += lift;
             f32 height = 0.0f;
-            switch (dataTable00FindById(btlFindEntryBlockByMemberId(world, index)->id)->bustUp) {
+            switch (nkmEnemyFindById(btlFindEntryBlockByMemberId(world, index)->id)->bustUp) {
             case 0:
                 height = 15.0f;
                 break;

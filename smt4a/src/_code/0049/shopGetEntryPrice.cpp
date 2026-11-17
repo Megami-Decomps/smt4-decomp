@@ -26,7 +26,7 @@ s32 shopGetEntryPrice(const ShopEntry *entry)
     switch (aocEntryGetKind(id)) {
     case 1:
     case 12: {
-        ConsumableRecordA *item = dataTable8FindRecord(id);
+        ConsumableRecordA *item = itemTableGetItemRecord(id);
         price = item != NULL ? item->buyPrice : 99999999;
         if (id == 0x7b2) {
             price = 1000000;
@@ -40,7 +40,7 @@ s32 shopGetEntryPrice(const ShopEntry *entry)
     case 6:
     case 7:
     case 8: {
-        EquipmentRecordA *equip = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *equip = itemTableGetEquipmentRecord(id);
         price = equip == NULL ? 99999999 : equip->buyPrice;
         break;
     }

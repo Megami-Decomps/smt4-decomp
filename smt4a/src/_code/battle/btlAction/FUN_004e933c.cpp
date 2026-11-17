@@ -6,10 +6,10 @@
 extern "C" {
 
 int asdMemoryAllocTracked(int, int, int, int, int);
-int dataTable08Sub2GetRecord(void);
+int itemTableGetEquipmentRecord(void);
 int asdMemFree(void);
 int __ARM_common_memcpy4_8(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int sysMemClear(int [109], int);
 int btlEntryBuildSummary(...);
 int FUN_004c8340(...);
@@ -42,10 +42,10 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 extern int isOutsideRange4To53(int);
@@ -104,7 +104,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
         do {
           temp_v2 = temp_v4 + 0x164 + temp_v1 * 2;
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x118);
-          dataTable04FindById();
+          skillDataFindById();
           if (temp_v3 != 0) {
             *(unsigned short *)(temp_v4 + 0x324) = *(unsigned short *)(temp_v2 + 0x118);
             btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));
@@ -140,7 +140,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
             ((*(unsigned int **)(param_2 + 0x20))[1] & DAT_00571154) != 0) {
           temp_v1 = gameGetPlayerData();
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
-          dataTable08Sub2GetRecord();
+          itemTableGetEquipmentRecord();
           if (temp_v3 != 0) {
             *(unsigned short *)(temp_v4 + 0x324) = 2;
             btlEntryBuildSummary(temp_v10,*param_1,*(unsigned int *)(param_2 + 0x20));

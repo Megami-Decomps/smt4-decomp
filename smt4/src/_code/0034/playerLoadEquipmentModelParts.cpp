@@ -12,15 +12,15 @@ void playerLoadEquipmentModelParts(void *model, const PlayerEquipmentAppearance 
     if (!equipment)
         return;
     char path[64];
-    EquipmentRecord *record = dataTable08Sub2GetRecord(equipment->head);
+    EquipmentRecord *record = itemTableGetEquipmentRecord(equipment->head);
     s32 appearance = FUN_0023cef0(model, 0, record->modelGroup, record->model, 0);
     textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, appearance);
     FUN_0023f2e4(model, 0, path, flags);
-    record = dataTable08Sub2GetRecord(equipment->body);
+    record = itemTableGetEquipmentRecord(equipment->body);
     FUN_0023cef0(model, 0, record->modelGroup, record->model, 0);
     textFormatBuffer(path, "player/pl%02d_%03dbd0.bam", record->modelGroup, record->model);
     FUN_0023f2e4(model, 1, path, flags);
-    record = dataTable08Sub2GetRecord(equipment->legs);
+    record = itemTableGetEquipmentRecord(equipment->legs);
     appearance = FUN_0023cef0(model, 2, record->modelGroup, record->model, 0);
     textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, appearance);
     FUN_0023f2e4(model, 2, path, flags);

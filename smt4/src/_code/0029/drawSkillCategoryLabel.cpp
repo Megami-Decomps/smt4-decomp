@@ -19,7 +19,7 @@ void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style)
     } else if (idIsAtLeast350(skill) != 0) {
         label = highlighted ? 0x41B : 0x41A;
     } else {
-        const QuestRecord *record = dataTable1bOr1cGetRecord(skill);
+        const QuestRecord *record = questDataGetRecord(skill);
         switch (record->kind) {
         case 0:
             label = highlighted ? 0x40A : 0x403;

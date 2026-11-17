@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 struct EntryLevelStatus {
     u8 unk00[0x46]; // 0x00
@@ -13,7 +13,7 @@ s32 partyHasStoredDemon(u16 id);
 // Classify an entry against its record's gated level requirement.
 u32 partyClassifyDemonLevelRequirement(const EntryLevelStatus* entry)
 {
-    DevilRecord *record = devilGetRecord(entry->devilId);
+    NkmBaseRecord *record = nkmBaseGetRecord(entry->devilId);
     u32 status = 1;
     if (record->evolutionTarget != 0 && partyHasStoredDemon(record->evolutionTarget) == 0) {
         if (record->evolutionLevel <= entry->level)

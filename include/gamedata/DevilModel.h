@@ -1,6 +1,6 @@
 #ifndef GAMEDATA_DEVIL_MODEL_H
 #define GAMEDATA_DEVIL_MODEL_H
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

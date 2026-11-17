@@ -1,6 +1,6 @@
 #include "common.h"
 #include <string.h>
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
 
@@ -31,7 +31,7 @@ void partyCaptureEligibleSkills(PartySkillSnapshot *screen)
     memset(&screen->snapshot, 0, sizeof(screen->snapshot));
     for (s32 index = 0; index < 8; ++index) {
         u16 id = gameGetPlayerData()->skills[index];
-        SkillSnapshotInfo *info = reinterpret_cast<SkillSnapshotInfo *>(dataTable40FindById(id));
+        SkillSnapshotInfo *info = reinterpret_cast<SkillSnapshotInfo *>(skillDataFindById(id));
         if (info != NULL && info->excluded == 0 && !idIsAbove400(id)) {
             screen->snapshot.skills[0][count++] = id;
         }
@@ -43,7 +43,7 @@ void partyCaptureEligibleSkills(PartySkillSnapshot *screen)
                 count = 0;
                 for (s32 index = 0; index < 8; ++index) {
                     u32 id = record->skills.ids[index];
-                    SkillSnapshotInfo *info = reinterpret_cast<SkillSnapshotInfo *>(dataTable40FindById(id));
+                    SkillSnapshotInfo *info = reinterpret_cast<SkillSnapshotInfo *>(skillDataFindById(id));
                     if (info != NULL && info->excluded == 0 && !idIsAbove400(id)) {
                         screen->snapshot.skills[member + 1][count++] = id;
                     }

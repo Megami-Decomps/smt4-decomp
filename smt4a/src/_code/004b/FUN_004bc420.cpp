@@ -1,10 +1,10 @@
 /* NON_MATCHING: default-result stack slot, table selection and weighted-loop saved registers differ. */
 #include "battle/WeightedEncounter.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/GameDataEntries.h"
 #include "addon/AocSystemA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 
 extern "C" {
@@ -20,7 +20,7 @@ static bool groupHasPortrait(u16 id)
     const WeightedEncounterGroup *group = dataTable02GetRecordWithAocPackage(id);
     for (s32 i = 0; i < 6; ++i) {
         if (group->members[i]) {
-            const Table00RecordA *member = dataTable00FindById(group->members[i]);
+            const NkmEnemyRecordA *member = nkmEnemyFindById(group->members[i]);
             if (member && (member->bustUp || member->bustUpVariation))
                 return true;
         }

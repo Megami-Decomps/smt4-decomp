@@ -20,7 +20,7 @@ int FUN_00250720(...);
 int FUN_00250d84(...);
 int FUN_0026beb4(...);
 int gameSavedFlagSet(void);
-int dataTable08Sub1GetRecord(void);
+int itemTableGetItemRecord(void);
 int FUN_0033b33c(...);
 int btlLookupEffectValue(...);
 int FUN_003ddae8(...);
@@ -42,7 +42,7 @@ int FUN_00256898(...);
 int btlReflectQueueKind34(...);
 int FUN_00282820(...);
 int messageDismissNumericBanner(int);
-int dataTable40FindById(void);
+int skillDataFindById(void);
 int jyoucyuRowApply(...);
 int FUN_00394a80(...);
 int FUN_003ccaac(unsigned int *, unsigned int *, unsigned int, unsigned int, int, unsigned int, int, int, int, unsigned int, int, int *);
@@ -151,8 +151,8 @@ extern int FUN_0028299c(int);
 extern unsigned int appGetRemainingCapacity(unsigned int);
 extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
 /* Supplied declaration required: messageDismissNumericBanner. */
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: skillDataFindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: FUN_0033b33c. */
 /* Supplied declaration required: jyoucyuRowApply. */
 /* Supplied declaration required: FUN_00394a80. */
@@ -224,7 +224,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
   
   if (*(short *)(param_2[10] + 0x14c) == 2) {
     temp_v2 = (int)*(short *)(param_2[10] + 0x14e);
-    dataTable40FindById();
+    skillDataFindById();
     if ((temp_v2 != 0) && (*(char *)(temp_v2 + 0x45) != '\0')) {
       if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
         temp_v3 = *param_2 | 0x80;
@@ -369,7 +369,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       break;
     case 0xc:
       temp_v3 = temp_v27;
-      dataTable40FindById();
+      skillDataFindById();
       if (temp_v3 != 0) {
         temp_v10 = *(char *)(temp_v3 + 0x56);
         if (temp_v10 == '\x02') {
@@ -442,7 +442,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v12 = temp_v27;
       temp_v15 = *param_1;
       btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v15), (int)temp_v9);
-      dataTable40FindById();
+      skillDataFindById();
       temp_v10 = '\0';
       if ((temp_v12 != 0) && (temp_v0 = *(char *)(temp_v12 + 0x45), temp_v0 == '\x01' || temp_v0 == '\x02')) {
         temp_v10 = temp_v0;
@@ -532,7 +532,7 @@ LAB_003d444c:
     temp_v33 = temp_v33 + 1;
   } while (temp_v33 < 0x85);
   temp_v3 = temp_v27;
-  dataTable40FindById();
+  skillDataFindById();
   if ((*param_2 & 0x200) == 0) {
     if (*(short *)(param_2[10] + 0x14c) != 1) {
       if (temp_v3 != 0) {
@@ -607,7 +607,7 @@ LAB_003d444c:
       if (temp_v28 != 1) {
         if ((temp_v28 == 8) && (!temp_v16)) {
           temp_v12 = temp_v29;
-          dataTable08Sub1GetRecord();
+          itemTableGetItemRecord();
           temp_v12 = (unsigned int)*(unsigned short *)(temp_v12 + 0x62);
           if (temp_v12 != 0) {
             temp_v4 = FUN_0023c684(temp_v12);
@@ -839,7 +839,7 @@ LAB_003d444c:
         if (temp_v9 == 8) {
           temp_v13 = (int)*(short *)(param_2[10] + 0x14e);
           temp_v2 = temp_v13;
-          dataTable08Sub1GetRecord();
+          itemTableGetItemRecord();
           if ((*(unsigned char *)(temp_v2 + 0x6e) & 1) == 0) {
             FUN_00250d84(temp_v13,1);
           }

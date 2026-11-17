@@ -7,7 +7,7 @@ extern "C" {
 /* Reads the record's byte, returning zero when absent. */
 s32 FUN_001bd118(u32 id)
 {
-    QuestRecordA *record = dataTable1bOr1cGetRecord(id);
+    QuestRecordA *record = questDataGetRecord(id);
     return record != NULL ? record->kind : 0;
 }
 }

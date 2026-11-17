@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameDataSetLinkSlot(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int buttonHelpSetPreset(...);
 
 int questClearOwnerModeBitsIfEligible(...);
@@ -61,7 +61,7 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
@@ -311,7 +311,7 @@ void FUN_001afc0c(void)
                 }
                 else {
                   temp_v4 = temp_v10;
-                  dataTable1bOr1cGetRecord();
+                  questDataGetRecord();
                   uiBindRecordRewardText(temp_v10,0,1);
                   if (*(char *)(temp_v4 + 6) != '\0') {
                     temp_v9 = questIsOfferable(temp_v10);

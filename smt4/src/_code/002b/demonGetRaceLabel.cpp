@@ -34,7 +34,7 @@ static inline const char *findRaceLabel(u32 race, s32 alternate)
 
 extern "C" const char *demonGetRaceLabel(u16 id, s32 alternate)
 {
-    DevilRecord *demon = devilGetRecord(id);
+    NkmBaseRecord *demon = nkmBaseGetRecord(id);
     if (demon != NULL) {
         return findRaceLabel(demon->race, alternate);
     }

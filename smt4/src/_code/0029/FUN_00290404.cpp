@@ -50,7 +50,7 @@ void FUN_00290404()
             }
             status = 3;
         }
-    } else if (dataTable1bOr1cGetRecord(quest)->kind) {
+    } else if (questDataGetRecord(quest)->kind) {
         if (questIsOfferable(quest)) {
             if (rosterGetLeaderId() == quest) {
                 status = 0;

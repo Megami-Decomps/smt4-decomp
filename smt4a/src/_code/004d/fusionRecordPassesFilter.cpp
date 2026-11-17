@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include <stddef.h>
 #include "util/BitsAndBytes.h"
 #include "code/Code002a_Smt4a.h"
@@ -52,9 +52,9 @@ SlotRecord *gameGetSlotRecord(s32 slot);
 /* Whether the record `recordId` passes the filter, with the two member ids given for the party-slot conditions. */
 s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32 recordId)
 {
-    DevilRecordA *record = devilGetRecord(recordId);
-    DevilRecordA *first;
-    DevilRecordA *second;
+    NkmBaseRecordA *record = nkmBaseGetRecord(recordId);
+    NkmBaseRecordA *first;
+    NkmBaseRecordA *second;
     s32 count;
 
     if (!(record->flags & 1)) {
@@ -141,8 +141,8 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
     if (filter->limitCount && slotRecordFindById(record->id) != 0) {
         return 0;
     }
-    first = devilGetRecord(memberA);
-    second = devilGetRecord(memberB);
+    first = nkmBaseGetRecord(memberA);
+    second = nkmBaseGetRecord(memberB);
     if (!filter->allowExcludedCategory) {
         if (first->race == 0x26 || second->race == 0x26) {
             return 0;

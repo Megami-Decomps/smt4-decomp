@@ -1,6 +1,6 @@
 /* NON_MATCHING: the polynomial, scale and caps now match; retail keeps a second copy of the level (r6) for the distance, shares the zero in r5 with the early return, and branches to the table lookup placed after the epilogue instead of predicating it. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -25,7 +25,7 @@ extern "C" u32 FUN_004cc8d8(u32 id, s32 level)
             base = amount > 999999 ? 999999 : amount;
         }
     }
-    distance = level - devilGetRecord(id)->level + 1;
+    distance = level - nkmBaseGetRecord(id)->level + 1;
     if (distance <= 0) {
         percentage = 100;
     } else {

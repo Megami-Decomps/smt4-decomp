@@ -1,7 +1,7 @@
 /* NON_MATCHING: only the load form of the packed 64-bit result differs: retail reads it with ldm in the owned-demon compare and ldr/ldr elsewhere, the build uses ldr/ldr and ldrd; prologue, callee contracts, the 24-slot search loop and the 64-bit compare match. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/SaveSlotTable.h"
 #include "util/BitsAndBytes.h"
 #include "gamedata/PackedIdentifiers.h"
@@ -46,7 +46,7 @@ u8 FUN_004da344(UniteWork *work, u32 first, u32 second, s32 special, FusionAvail
     }
     if (output != NULL)
         output->resultId = result.resultIdentifier;
-    const DevilRecordA *record = devilGetRecord(result.resultIdentifier);
+    const NkmBaseRecordA *record = nkmBaseGetRecord(result.resultIdentifier);
     if (record != NULL && computeCountLimit() < record->level) {
         available = 0;
         if (output != NULL)

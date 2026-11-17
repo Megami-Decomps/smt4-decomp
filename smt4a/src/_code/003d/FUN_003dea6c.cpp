@@ -24,13 +24,13 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
     char converted[128];
     const char* title = NULL;
     if (!convertTitle) {
-        QuestRecordA* definition = dataTable1bOr1cGetRecord(definitionId);
+        QuestRecordA* definition = questDataGetRecord(definitionId);
         if (definition) {
             title = definition->title;
         }
         scrSetStringSlot(40, title);
     } else {
-        QuestRecordA* definition = dataTable1bOr1cGetRecord(definitionId);
+        QuestRecordA* definition = questDataGetRecord(definitionId);
         if (definition) {
             title = definition->title;
         }
@@ -39,7 +39,7 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
         scrSetStringSlot(40, converted);
     }
     if (includeArguments) {
-        QuestRecordA* definition = dataTable1bOr1cGetRecord(definitionId);
+        QuestRecordA* definition = questDataGetRecord(definitionId);
         if (definition) {
             for (s32 index = 0; index < 4; ++index) {
                 QuestRequirement *argument = &definition->requirements[index];

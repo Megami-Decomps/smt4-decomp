@@ -4,9 +4,9 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "gamedata/BattleUnitSkills.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
+#include "gamedata/SkillDataRecord.h"
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
@@ -20,7 +20,7 @@ u32 FUN_0038bd74(void)
                 !(g_btlCandidateMasks.excluded & entry->flags) && entry->id == id) {
             if (entry->record) {
                 for (s32 i = 0; i < 8; ++i) {
-                    Table04RecordA *skill = dataTable04FindById(entry->record->skills[i]);
+                    SkillDataRecordA *skill = skillDataFindById(entry->record->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
@@ -29,7 +29,7 @@ u32 FUN_0038bd74(void)
             }
             if (entry->secondaryRecord) {
                 for (s32 i = 0; i < 8; ++i) {
-                    Table04RecordA *skill = dataTable04FindById(entry->secondaryRecord->skills[i]);
+                    SkillDataRecordA *skill = skillDataFindById(entry->secondaryRecord->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
@@ -37,9 +37,9 @@ u32 FUN_0038bd74(void)
                 }
             }
             if (entry->candidate.record) {
-                Table00RecordA *record = dataTable00FindById(entry->id);
+                NkmEnemyRecordA *record = nkmEnemyFindById(entry->id);
                 for (s32 i = 0; i < 8; ++i) {
-                    Table04RecordA *skill = dataTable04FindById(record->skills[i]);
+                    SkillDataRecordA *skill = skillDataFindById(record->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;

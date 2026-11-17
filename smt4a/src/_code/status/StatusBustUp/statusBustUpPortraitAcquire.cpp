@@ -1,11 +1,11 @@
 /* NON_MATCHING: only r7/r8 are swapped: retail keeps g_statusBustUpResources in r7 and &g_aocSystem in r8 (same pool order). The smt4 twin FUN_002942c4 matches with this shape. */
 #include "status/StatusBustUp.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "addon/AocSystemA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
@@ -21,10 +21,10 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
         if (id < 0) {
             id = gameFlagIsSet(17) ? 0 : 606;
         } else {
-            DevilRecordA *devil = devilGetRecord((u16)id);
+            NkmBaseRecordA *devil = nkmBaseGetRecord((u16)id);
             if (devil == NULL)
                 return;
-            Table00RecordA *override = dataTable00FindById((u16)id);
+            NkmEnemyRecordA *override = nkmEnemyFindById((u16)id);
             if (!(override->level & 0x8000)) {
                 id = devil->model + 1;
                 if (id >= 631)

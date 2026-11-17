@@ -1,6 +1,6 @@
 /* NON_MATCHING: loop and navigation setup now match; only the cursor clamp test loads row/column into r1/r2 the other way round. */
 #include "status/StatusDown.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
@@ -18,7 +18,7 @@ void FUN_001ee8b4(const u8 *quantities)
     status->inventory.ownedCount = 0;
     memClear(status->inventory.entries, sizeof(status->inventory.entries));
     for (u16 index = 0; index < 0x500; ++index) {
-        const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(index));
+        const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(index));
         if (record && (record->flags & 1) && quantities[record->id]) {
             status->inventory.entries[status->inventory.count][0] = record->id;
             u8 quantity = quantities[record->id];

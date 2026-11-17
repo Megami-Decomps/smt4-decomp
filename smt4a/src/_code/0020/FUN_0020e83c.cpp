@@ -1,5 +1,5 @@
 #include "shard/W5_W5Match5_GameSaveViews.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -23,8 +23,8 @@ s32 FUN_0020e83c(const s32 *leftSlot, const s32 *rightSlot)
     if (difference != 0) {
         return difference;
     }
-    DevilRecordA *leftInfo = devilGetRecord(leftRecord->entryId);
-    DevilRecordA *rightInfo = devilGetRecord(rightRecord->entryId);
+    NkmBaseRecordA *leftInfo = nkmBaseGetRecord(leftRecord->entryId);
+    NkmBaseRecordA *rightInfo = nkmBaseGetRecord(rightRecord->entryId);
     difference = leftInfo->race - rightInfo->race;
     if (difference != 0) {
         return difference;

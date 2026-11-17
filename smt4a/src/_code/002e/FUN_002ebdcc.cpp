@@ -22,7 +22,7 @@ int flagValueSub(...);
 int FUN_004d0d70(void);
 
 int sysPlaySe(int);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageSlotSet(int);
@@ -69,7 +69,7 @@ extern int gameFlagsGetBlock(void);
 extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern int gameGetOptions(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int goalConditionsSatisfied(unsigned int);
 /* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: FUN_002292ac. */
@@ -147,7 +147,7 @@ unsigned int FUN_002ebdcc(void)
   if (temp_v2 == 0) {
     scrWorkSetValue(0);
     temp_v4 = temp_v1;
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     temp_v2 = goalConditionsSatisfied(temp_v1);
     if (temp_v2 != 0) {
       if (*(char *)(temp_v4 + 6) != '\0') {
@@ -192,7 +192,7 @@ unsigned int FUN_002ebdcc(void)
   }
   temp_v2 = dataTableValueOrZero(0x1e);
   temp_v4 = temp_v1;
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   temp_v3 = scrWorkGetValue(0);
   switch(temp_v3) {
   case 0:

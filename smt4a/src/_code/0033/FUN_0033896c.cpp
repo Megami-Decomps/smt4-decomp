@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 struct VariantRecord {
     u8 unk00[0x36];
@@ -23,7 +23,7 @@ u32 FUN_0033896c(void)
         break;
     }
     for (u32 id = 1; id <= 400; ++id) {
-        const VariantRecord *record = (const VariantRecord *)dataTable04FindById(id);
+        const VariantRecord *record = (const VariantRecord *)skillDataFindById(id);
         if (record != NULL && record->variant == variant) {
             found = id;
             break;

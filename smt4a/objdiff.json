@@ -72925,13 +72925,13 @@
       "target_path": "orig/target/_code/0018/unitHasRankingBonus.o"
     },
     {
-      "base_path": "build/obj/_code/0018/devilGetRecord.o",
+      "base_path": "build/obj/_code/0018/nkmBaseGetRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "devilGetRecord",
+            "name": "nkmBaseGetRecord",
             "size": 132,
             "vram": "0x184310"
           }
@@ -72939,10 +72939,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0018/devilGetRecord.cpp"
+        "source_path": "src/_code/0018/nkmBaseGetRecord.cpp"
       },
-      "name": "_code/0018/devilGetRecord",
-      "target_path": "orig/target/_code/0018/devilGetRecord.o"
+      "name": "_code/0018/nkmBaseGetRecord",
+      "target_path": "orig/target/_code/0018/nkmBaseGetRecord.o"
     },
     {
       "base_path": "build/obj/_code/0018/requestKindToId.o",
@@ -79554,13 +79554,13 @@
       "target_path": "orig/target/_code/0019/FUN_00192484.o"
     },
     {
-      "base_path": "build/obj/_code/0019/dataTable8FindRecord.o",
+      "base_path": "build/obj/_code/0019/itemTableGetItemRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable8FindRecord",
+            "name": "itemTableGetItemRecord",
             "size": 176,
             "vram": "0x192550"
           }
@@ -79568,19 +79568,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/dataTable8FindRecord.cpp"
+        "source_path": "src/_code/0019/itemTableGetItemRecord.cpp"
       },
-      "name": "_code/0019/dataTable8FindRecord",
-      "target_path": "orig/target/_code/0019/dataTable8FindRecord.o"
+      "name": "_code/0019/itemTableGetItemRecord",
+      "target_path": "orig/target/_code/0019/itemTableGetItemRecord.o"
     },
     {
-      "base_path": "build/obj/_code/0019/dataTable08Sub2GetRecord.o",
+      "base_path": "build/obj/_code/0019/itemTableGetEquipmentRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable08Sub2GetRecord",
+            "name": "itemTableGetEquipmentRecord",
             "size": 128,
             "vram": "0x192608"
           }
@@ -79588,10 +79588,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/dataTable08Sub2GetRecord.cpp"
+        "source_path": "src/_code/0019/itemTableGetEquipmentRecord.cpp"
       },
-      "name": "_code/0019/dataTable08Sub2GetRecord",
-      "target_path": "orig/target/_code/0019/dataTable08Sub2GetRecord.o"
+      "name": "_code/0019/itemTableGetEquipmentRecord",
+      "target_path": "orig/target/_code/0019/itemTableGetEquipmentRecord.o"
     },
     {
       "base_path": "build/obj/_code/0019/contentEntryFindById2.o",
@@ -82720,13 +82720,13 @@
       "target_path": "orig/target/_code/0019/FUN_0019caa0.o"
     },
     {
-      "base_path": "build/obj/_code/0019/dataTable00FindById.o",
+      "base_path": "build/obj/_code/0019/nkmEnemyFindById.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable00FindById",
+            "name": "nkmEnemyFindById",
             "size": 132,
             "vram": "0x19cac4"
           }
@@ -82734,10 +82734,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/dataTable00FindById.cpp"
+        "source_path": "src/_code/0019/nkmEnemyFindById.cpp"
       },
-      "name": "_code/0019/dataTable00FindById",
-      "target_path": "orig/target/_code/0019/dataTable00FindById.o"
+      "name": "_code/0019/nkmEnemyFindById",
+      "target_path": "orig/target/_code/0019/nkmEnemyFindById.o"
     },
     {
       "base_path": "build/obj/_code/0019/matrix34RotateVector.o",
@@ -89646,13 +89646,13 @@
       "target_path": "orig/target/_code/001a/asdListInsert.o"
     },
     {
-      "base_path": "build/obj/_code/001a/dataTable04FindById.o",
+      "base_path": "build/obj/_code/001a/skillDataFindById.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable04FindById",
+            "name": "skillDataFindById",
             "size": 108,
             "vram": "0x1aba54"
           }
@@ -89660,10 +89660,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001a/dataTable04FindById.cpp"
+        "source_path": "src/_code/001a/skillDataFindById.cpp"
       },
-      "name": "_code/001a/dataTable04FindById",
-      "target_path": "orig/target/_code/001a/dataTable04FindById.o"
+      "name": "_code/001a/skillDataFindById",
+      "target_path": "orig/target/_code/001a/skillDataFindById.o"
     },
     {
       "base_path": "build/obj/_code/001a/gameFlagBlockGetEntry.o",
@@ -90271,13 +90271,13 @@
       "target_path": "orig/target/_code/001a/FUN_001ad8c4.o"
     },
     {
-      "base_path": "build/obj/_code/001a/dataTable1bOr1cGetRecord.o",
+      "base_path": "build/obj/_code/001a/questDataGetRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable1bOr1cGetRecord",
+            "name": "questDataGetRecord",
             "size": 180,
             "vram": "0x1ad9b4"
           }
@@ -90285,10 +90285,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001a/dataTable1bOr1cGetRecord.cpp"
+        "source_path": "src/_code/001a/questDataGetRecord.cpp"
       },
-      "name": "_code/001a/dataTable1bOr1cGetRecord",
-      "target_path": "orig/target/_code/001a/dataTable1bOr1cGetRecord.o"
+      "name": "_code/001a/questDataGetRecord",
+      "target_path": "orig/target/_code/001a/questDataGetRecord.o"
     },
     {
       "base_path": "build/obj/_code/001a/goalConditionsSatisfied.o",

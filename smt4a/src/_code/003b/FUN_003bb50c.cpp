@@ -1,7 +1,7 @@
 /* NON_MATCHING: original/clip position registers and crop/add-on argument store grouping differ. */
-#include "gamedata/DevilRecordA.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmBaseRecordA.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -25,10 +25,10 @@ void FUN_003bb50c(s32 id, s32 x, s32 y, s32 z, s32 resolve,
         if (id < 0) {
             image = gameFlagIsSet(17) ? 0 : 0x25e;
         } else {
-            const DevilRecordA *record = reinterpret_cast<const DevilRecordA *>(devilGetRecord(static_cast<u16>(id)));
+            const NkmBaseRecordA *record = reinterpret_cast<const NkmBaseRecordA *>(nkmBaseGetRecord(static_cast<u16>(id)));
             if (record == NULL)
                 return;
-            const Table00RecordA *base = dataTable00FindById(static_cast<u16>(id));
+            const NkmEnemyRecordA *base = nkmEnemyFindById(static_cast<u16>(id));
             // The texture-kind flag is in the table header, distinct from the flags at 0x16.
             if (base->level & 0x8000) {
                 image = base->battleTextureId;

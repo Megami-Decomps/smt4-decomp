@@ -17,8 +17,8 @@ s32 FUN_001b18f0(const s32 *left, const s32 *right)
     } else {
         StatBlock *leftUnit = gameGetUnitRecord(*left);
         StatBlock *rightUnit = gameGetUnitRecord(*right);
-        DevilRecord *leftDevil = devilGetRecord(leftUnit->id);
-        DevilRecord *rightDevil = devilGetRecord(rightUnit->id);
+        NkmBaseRecord *leftDevil = nkmBaseGetRecord(leftUnit->id);
+        NkmBaseRecord *rightDevil = nkmBaseGetRecord(rightUnit->id);
         result = leftDevil->race - rightDevil->race;
         if (result == 0)
             return comparePartyUnitsByRankRaceAndId(left, right);

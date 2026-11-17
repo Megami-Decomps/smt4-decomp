@@ -3,8 +3,8 @@
 
 static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
 {
-    const DevilRecord *left = devilGetRecord(leftId);
-    const DevilRecord *right = devilGetRecord(rightId);
+    const NkmBaseRecord *left = nkmBaseGetRecord(leftId);
+    const NkmBaseRecord *right = nkmBaseGetRecord(rightId);
     s32 difference = left->race - right->race;
     if (difference == 0) {
         difference = right->level - left->level;

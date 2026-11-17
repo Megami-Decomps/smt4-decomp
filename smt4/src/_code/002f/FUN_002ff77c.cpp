@@ -1,10 +1,10 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -21,7 +21,7 @@ static __inline u32 entryHasKindThreeItem(const BtlEntry *entry)
 {
     if (entry->equipA != NULL) {
         for (s32 j = 0; j < 8; j++) {
-            const Table04Record *item = dataTable40FindById(entry->equipA->items[j]);
+            const SkillDataRecord *item = skillDataFindById(entry->equipA->items[j]);
             if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }
@@ -29,17 +29,17 @@ static __inline u32 entryHasKindThreeItem(const BtlEntry *entry)
     }
     if (entry->equipB != NULL) {
         for (s32 j = 0; j < 8; j++) {
-            const Table04Record *item = dataTable40FindById(entry->equipB->items[j]);
+            const SkillDataRecord *item = skillDataFindById(entry->equipB->items[j]);
             if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }
         }
     }
     if (entry->devil != NULL) {
-        DevilRecord *devil = devilGetRecord(entry->id);
+        NkmBaseRecord *devil = nkmBaseGetRecord(entry->id);
 
         for (s32 j = 0; j < 8; j++) {
-            const Table04Record *item = dataTable40FindById(devil->skills[j]);
+            const SkillDataRecord *item = skillDataFindById(devil->skills[j]);
             if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }

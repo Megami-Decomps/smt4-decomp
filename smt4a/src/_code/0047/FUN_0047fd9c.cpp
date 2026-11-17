@@ -1,6 +1,6 @@
 #include "gamedata/ConsumableRecordA.h"
-#include "gamedata/Table04Record.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/SkillDataRecord.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -17,11 +17,11 @@ typedef struct UnitRecord {
 s32 FUN_0047fd9c(s32 id, UnitRecord *unit)
 {
     if ((u32)(id - 1) <= 59 || (u32)(id - 0x79f) <= 63) {
-        DevilRecordA *equipment = devilGetRecord(unit->equipment);
+        NkmBaseRecordA *equipment = nkmBaseGetRecord(unit->equipment);
         if (equipment != NULL && (equipment->extraFlags & 4)) {
             return 1;
         }
-        ConsumableRecordA *entry = dataTable8FindRecord(id);
+        ConsumableRecordA *entry = itemTableGetItemRecord(id);
         if (entry->useFlags & 0xf0) {
             for (s32 i = 0; i < 8; i++) {
                 if (unit->skills[i] != 0) {

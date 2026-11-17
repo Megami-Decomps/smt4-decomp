@@ -5,7 +5,7 @@
 extern "C" {
 
 int messageKindForward(...);
-int dataTable08Sub2GetRecord(void);
+int itemTableGetEquipmentRecord(void);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int itemDrawCategoryBadge(...);
@@ -44,7 +44,7 @@ extern unsigned char LAB_00284814; /* 0x284814 */
 /* Supplied declaration required: messageKindForward. */
 extern unsigned int flagValueRead(int);
 extern int recordAcceptsStickDirection(int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -89,7 +89,7 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
     return;
   }
   temp_v7 = temp_v13;
-  dataTable08Sub2GetRecord();
+  itemTableGetEquipmentRecord();
   temp_v10 = 0;
   temp_v2 = asdTMTexTableEntryAt(0x1d,param_2 + 0x40d);
   temp_v3 = asdTMTexTableEntryAt(0x1d,0x514);
@@ -127,7 +127,7 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
 LAB_00284174:
       temp_v10 = (unsigned int)temp_v1;
       if (temp_v10 != 0) {
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         temp_v10 = *(unsigned int *)(temp_v10 + 0x54) & 0x3ff;
       }
       else {
@@ -205,7 +205,7 @@ LAB_00284174:
       temp_v10 = 0;
     }
     else {
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v10 = *(unsigned int *)(temp_v10 + 0x54) & 0x3ff;
     }
     drawSetColorFromRGBA8(0xff);
@@ -277,9 +277,9 @@ LAB_00284174:
     }
     else {
       temp_v8 = temp_v10;
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v5 = (int)*(short *)(temp_v8 + 0x66);
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v3 = (int)*(short *)(temp_v10 + 0x68);
     }
     drawSetColorFromRGBA8(0xff);

@@ -18,16 +18,16 @@ s32 FUN_002d0544(const PackedIdentifiers *packedLeft, const PackedIdentifiers *p
     typedef char FusionOrderViewSize[sizeof(FusionOrderView) == sizeof(PackedIdentifiers) ? 1 : -1];
     const FusionOrderView *left = (const FusionOrderView *)packedLeft;
     const FusionOrderView *right = (const FusionOrderView *)packedRight;
-    DevilRecord *leftRecord = devilGetRecord(left->resultIdentifier);
-    DevilRecord *rightRecord = devilGetRecord(right->resultIdentifier);
+    NkmBaseRecord *leftRecord = nkmBaseGetRecord(left->resultIdentifier);
+    NkmBaseRecord *rightRecord = nkmBaseGetRecord(right->resultIdentifier);
     s32 difference = leftRecord->race - rightRecord->race;
     if (difference == 0) {
         difference = rightRecord->level - leftRecord->level;
         if (difference == 0)
             difference = u32(left->resultIdentifier) - u32(right->resultIdentifier);
     }
-    leftRecord = devilGetRecord(left->firstIdentifier);
-    rightRecord = devilGetRecord(right->firstIdentifier);
+    leftRecord = nkmBaseGetRecord(left->firstIdentifier);
+    rightRecord = nkmBaseGetRecord(right->firstIdentifier);
     if (difference == 0) {
         difference = leftRecord->race - rightRecord->race;
         if (difference == 0) {
@@ -39,8 +39,8 @@ s32 FUN_002d0544(const PackedIdentifiers *packedLeft, const PackedIdentifiers *p
             }
         }
     }
-    leftRecord = devilGetRecord(left->secondIdentifier);
-    rightRecord = devilGetRecord(right->secondIdentifier);
+    leftRecord = nkmBaseGetRecord(left->secondIdentifier);
+    rightRecord = nkmBaseGetRecord(right->secondIdentifier);
     if (difference == 0) {
         difference = leftRecord->race - rightRecord->race;
         if (difference == 0) {

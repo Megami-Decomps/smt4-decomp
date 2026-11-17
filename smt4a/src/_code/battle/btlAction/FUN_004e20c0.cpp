@@ -57,7 +57,7 @@ int FUN_004fe764(...);
 int VectorSignedToFloat(...);
 
 int CONCAT44(unsigned int, double);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int dataTable41FindById(void);
 int btlScriptUnitHasFlags(...);
 int btlMainFindEntryByListedId(...);
@@ -234,7 +234,7 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 extern char randRange(unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int FUN_002c7bf4(unsigned int *);
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: FUN_003e77cc. */
@@ -437,7 +437,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
   puStack_30 = param_2;
   temp_v107 = param_3;
   temp_v108 = param_4;
-  dataTable04FindById();
+  skillDataFindById();
   temp_v59 = 1;
   temp_v93 = 1;
   temp_v12 = 0;

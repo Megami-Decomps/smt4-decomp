@@ -17,7 +17,7 @@ void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
     s32 (*compare)(const void *, const void *));
 
 /* Find the table-8 record for id: downloadable records first, then section 1 (section 6 for kind 12 owners). */
-ConsumableRecordA *dataTable8FindRecord(u32 id)
+ConsumableRecordA *itemTableGetItemRecord(u32 id)
 {
     ConsumableRecordA key;
     key.id = id;

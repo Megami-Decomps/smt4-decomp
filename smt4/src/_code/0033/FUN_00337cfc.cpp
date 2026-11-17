@@ -1,6 +1,6 @@
 /* NON_MATCHING: same instruction stream except the zero constant and the 0xfc00 mask swap r8/r9 and the last skillsB upper-six-bits update keeps its result in r2 (extra mov) in retail */
 #include "gamedata/PackedSkillSlot.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "code/Code002b.h"
 
 /* The persistent unit record the battle unit is built from. */
@@ -51,7 +51,7 @@ struct BattleUnit {
     /* 0x184 */ u32 unk184;
 };
 
-struct DevilRecord;
+struct NkmBaseRecord;
 
 extern "C" {
 u32 randomGetLowerTenBits(const SourceUnit *unit, u32 index);
@@ -106,7 +106,7 @@ void FUN_00337cfc(u32 unused, BattleUnit *unit, SourceUnit *source)
             unit->skillsB[i].unk00 = randomGetUpperSixBits(source, i & 0xFF);
             i++;
         } while (i < 18);
-        const DevilRecord *record = devilGetRecord(unit->id);
+        const NkmBaseRecord *record = nkmBaseGetRecord(unit->id);
         unit->unk14A = record->battleRace;
         u8 kind = record->category;
         if (kind == 1) {

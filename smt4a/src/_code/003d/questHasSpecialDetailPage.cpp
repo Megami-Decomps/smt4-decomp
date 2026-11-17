@@ -5,7 +5,7 @@ u32 partyEntryBitsBit3(s32 index);
 
 u32 questHasSpecialDetailPage(u32 id)
 {
-    if (dataTable1bOr1cGetRecord(id) != NULL) {
+    if (questDataGetRecord(id) != NULL) {
         return partyEntryBitsBit3(id);
     }
     return 0;

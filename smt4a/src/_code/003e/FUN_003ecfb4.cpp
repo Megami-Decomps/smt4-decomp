@@ -1,6 +1,6 @@
 /* NON_MATCHING: saved-register assignment differs (retail keeps the zero in r9 and &initial in r8; ours the reverse) and the 0x1BE clear's address temp is scheduled after the 0x110 stores; otherwise the same instructions. */
 #include "battle/BattleUnitInit.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -18,7 +18,7 @@ void FUN_003ecfb4(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s
 {
     UnitSourceRecord *source;
     s32 i;
-    DevilRecordA *model;
+    NkmBaseRecordA *model;
 
     unit->kind = 8;
     unit->unk008 = -1;
@@ -63,7 +63,7 @@ void FUN_003ecfb4(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s
         unit->learnable[i].category = randomGetUpperSixBits(record, i & 0xFF);
         unit->learnableCategory[i] = unit->learnable[i].category;
     }
-    model = devilGetRecord(unit->sourceId);
+    model = nkmBaseGetRecord(unit->sourceId);
     unit->unk1BB = model->battleRace;
     if (model->category == 1) {
         unit->unk1BC = 1;

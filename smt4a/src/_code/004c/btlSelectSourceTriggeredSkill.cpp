@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SourceMetadata.h"
 #include "bible/bibleAnalyze.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {

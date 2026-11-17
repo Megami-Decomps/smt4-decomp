@@ -3,7 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers_Smt4.h"
 #include "battle/btlAction.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/ConsumableRecord.h"
@@ -28,7 +28,7 @@ void rt_memclr(void *block, u32 size);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 
 /* Skills of category 2, 3 and 4 make the window's choice unavailable to the ordinary targets. */
-static __inline bool skillHasSpecialCategory(const Table04Record *skill)
+static __inline bool skillHasSpecialCategory(const SkillDataRecord *skill)
 {
     u32 category = skill->itemProperties.category;
     return category == 2 || category == 3 || category == 4;
@@ -48,14 +48,14 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
     bool normal = true;
     s32 value = selection->value;
     s32 kind = selection->kind;
-    const Table04Record *skill = dataTable40FindById(value);
-    const ConsumableRecord *record = dataTable08Sub1GetRecord(value);
+    const SkillDataRecord *skill = skillDataFindById(value);
+    const ConsumableRecord *record = itemTableGetItemRecord(value);
     if (kind == 2) {
         if (skill != NULL && skillHasSpecialCategory(skill))
             normal = false;
     } else if (kind == 8) {
         if (record != NULL && record->skillId != 0) {
-            if (dataTable40FindById(record->skillId) == NULL || skillHasSpecialCategory(skill))
+            if (skillDataFindById(record->skillId) == NULL || skillHasSpecialCategory(skill))
                 normal = false;
         }
     }

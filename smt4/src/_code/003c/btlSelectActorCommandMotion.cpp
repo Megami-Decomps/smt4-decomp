@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 
 struct BtlTurnState {
@@ -64,7 +64,7 @@ void btlSelectActorCommandMotion(BtlTurnState **state, BtlTurnActor *actor, s32 
     if (command->kind == 2 || command->kind == 3) {
         skillId = command->id;
     } else if (command->kind == 8) {
-        skillId = dataTable08Sub1GetRecord(command->id)->skillId;
+        skillId = itemTableGetItemRecord(command->id)->skillId;
         if (skillId == 0) {
             return;
         }
@@ -72,7 +72,7 @@ void btlSelectActorCommandMotion(BtlTurnState **state, BtlTurnActor *actor, s32 
         return;
     }
     if (skillId > 0) {
-        skill = reinterpret_cast<BtlSkillRecord *>(dataTable40FindById(skillId));
+        skill = reinterpret_cast<BtlSkillRecord *>(skillDataFindById(skillId));
         if (skill != NULL && skill->motion != 1 && skill->motion != 0) {
             actor->motion = skill->motion;
         }

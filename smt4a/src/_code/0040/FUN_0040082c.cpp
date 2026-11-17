@@ -16,7 +16,7 @@ s32 FUN_0040082c(u32 id)
 {
     if (id == 0)
         return 1;
-    ConsumableRecordA *skill = dataTable8FindRecord(id);
+    ConsumableRecordA *skill = itemTableGetItemRecord(id);
     if (skill == NULL)
         return 1;
     if ((skill->type != 2 && skill->type != 3) || (skill->kind != 1 && skill->kind != 12))

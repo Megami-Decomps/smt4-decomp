@@ -1,10 +1,10 @@
 /* NON_MATCHING: recovered selector/scroller arguments; nested-loop counters and table pointers occupy registers instead of retail's88-byte frame. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "game/GameStateA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "ui/ItemListSelection.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct Unk4cfeb0Scroller;
 extern "C" {
@@ -94,11 +94,11 @@ void FUN_004a5b20(EntryListWork *work)
                     for (s32 j = 0; j < 6; j++) {
                         u16 id = item->ids[j];
 
-                        if (id == 0 || dataTable00FindById(id) == NULL) {
+                        if (id == 0 || nkmEnemyFindById(id) == NULL) {
                             continue;
                         }
-                        DevilRecordA *devil = devilGetRecord(id);
-                        Table00RecordA *record = dataTable00FindById(id);
+                        NkmBaseRecordA *devil = nkmBaseGetRecord(id);
+                        NkmEnemyRecordA *record = nkmEnemyFindById(id);
 
                         if (devil != NULL && record != NULL
                             && (g_gameState.showAllEntries != 0 || ((record->flags & 1) != 0 && itemIsCollectedWithRelated(devil->id) != 0))) {
@@ -106,7 +106,7 @@ void FUN_004a5b20(EntryListWork *work)
                             u32 value = 0;
 
                             campFillUnitComparison(&listEntry, devil->id, 0);
-                            Table00RecordA *found = dataTable00FindById(devil->id);
+                            NkmEnemyRecordA *found = nkmEnemyFindById(devil->id);
                             if (found != NULL) {
                                 value = found->money;
                             }

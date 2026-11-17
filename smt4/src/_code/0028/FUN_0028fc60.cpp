@@ -10,11 +10,11 @@ u32 FUN_0028fc60(u32 id)
 {
     if (id - 1 >= 60)
         return 0;
-    const ConsumableRecord *item = dataTable08Sub1GetRecord(id);
+    const ConsumableRecord *item = itemTableGetItemRecord(id);
     if (item->type != 1 && item->type != 3)
         return 0;
     if (item->target & 0x80) {
-        item = dataTable08Sub1GetRecord(id);
+        item = itemTableGetItemRecord(id);
         if (!item)
             return 0;
         bool applicable = itemApplyToMember(-1, item, 1, 0, 0) == 0;
@@ -34,7 +34,7 @@ u32 FUN_0028fc60(u32 id)
             if (slot < 0)
                 continue;
         }
-        item = dataTable08Sub1GetRecord(id);
+        item = itemTableGetItemRecord(id);
         if (item && itemApplyToMember(slot, item, 1, 0, 0) == 0)
             return 1;
     }

@@ -11,7 +11,7 @@ int handleRegistryRegisterObject(...);
 int randRange(...);
 int asdMemoryAllocTraced(...);
 int gameFlagIsSet(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int distSpatial(void);
 int FUN_002b64c0(...);
 int FUN_002b67a0(int);
@@ -85,7 +85,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b64c0. */
 /* Supplied declaration required: FUN_002b67a0. */
@@ -420,7 +420,7 @@ LAB_003044d0:
       temp_v2 = temp_v6 + temp_v1 * 0x188;
       if (*(char *)(temp_v2 + 0x34) != '\0') {
         temp_v3 = *(unsigned int *)(temp_v2 + 0xa8) & 0xffff;
-        dataTable00FindById();
+        nkmEnemyFindById();
         temp_v8 = 1;
         temp_v3 = *(unsigned short *)(temp_v3 + 2) & 0xffff7fff;
       }
@@ -550,7 +550,7 @@ LAB_00304874:
     *(int *)(temp_v2 + 0xa4) = temp_v0;
     temp_v0 = dataSelectPrioritizedCandidate(temp_v0);
     *(int *)(temp_v2 + 0xa8) = temp_v0;
-    dataTable00FindById();
+    nkmEnemyFindById();
     *(unsigned short *)(temp_v2 + 0x1a8) = *(unsigned short *)(temp_v0 + 2) & 0x7fff;
     temp_v0 = lookupConditionalSixBitValue(*(unsigned int *)(temp_v2 + 0xa4));
     if (temp_v0 != 0) {

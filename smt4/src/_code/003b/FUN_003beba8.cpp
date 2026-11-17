@@ -20,7 +20,7 @@ f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 defender);
 AffinityRates btlEntryBuildSummary(BtlMainState* main, BtlEntry* entry);
 void selectionCopySupportedValue(u32 id, u32* out);
-u32* dataTable40FindById(s32 id);
+u32* skillDataFindById(s32 id);
 s32 playerGetSkillRank(s32 id);
 s32 FUN_00283ebc(u32* record, s32 rank, s32 mode);
 
@@ -48,7 +48,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
 
     s32 rankBonus = 0;
     if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
-        u32* record = dataTable40FindById(partyId);
+        u32* record = skillDataFindById(partyId);
         if (record != NULL) rankBonus = FUN_00283ebc(record, playerGetSkillRank(partyId), 1);
     }
 

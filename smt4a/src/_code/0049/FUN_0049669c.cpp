@@ -2,7 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "event/bustupEvent/BustupTex.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 #define SHOP_KIND_WEAPONS 0
 #define SHOP_KIND_ITEMS 1
@@ -124,7 +124,7 @@ void FUN_0049669c(ShopScene *shop)
             shop->npcModel = 0;
         }
         {
-            u32 model = FUN_00409fe8(dataTable00FindById((u16)npcId)->battleTextureId, 1);
+            u32 model = FUN_00409fe8(nkmEnemyFindById((u16)npcId)->battleTextureId, 1);
 
             shop->npcState = 0;
             shop->npcModel = model;

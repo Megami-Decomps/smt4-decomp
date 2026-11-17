@@ -10,8 +10,8 @@
 #include "addon/AocPackage.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 
-struct DevilRecord;
-struct Table00Record;
+struct NkmBaseRecord;
+struct NkmEnemyRecord;
 struct AocLookupRecord;
 struct AocTableSearchRecord;
 struct QuestRecord;
@@ -36,9 +36,9 @@ typedef struct AocSystem {
     /* 0x350 */ u32 unk350;
     /* 0x354 */ u8 unk354[8];
     /* 0x35C */ u32 devilCount;
-    /* 0x360 */ DevilRecord *devils;
+    /* 0x360 */ NkmBaseRecord *devils;
     /* 0x364 */ u32 table00Count;
-    /* 0x368 */ Table00Record *table00Records;
+    /* 0x368 */ NkmEnemyRecord *table00Records;
     /* 0x36C */ u8 unk36C[8];
     /* 0x374 */ u32 table01Count;
     /* 0x378 */ AocLookupRecord *table01Records;

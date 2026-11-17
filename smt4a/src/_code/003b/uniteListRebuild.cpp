@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -28,7 +28,7 @@ void uniteListRebuild(u32 id)
 
     u32 slotCount;
 
-    unitRecordBuild(devilGetRecord(id)->id, record);
+    unitRecordBuild(nkmBaseGetRecord(id)->id, record);
     slotCount = getUnlockedSlotCount(record);
     unite->selection = 0;
     gridNavigationConfigure(unite->list, slotCount, 8, 1, 1, 1);

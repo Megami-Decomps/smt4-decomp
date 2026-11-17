@@ -17,7 +17,7 @@ u32 FUN_003ded68(s32 id)
         return 0;
     }
     if (gameUnlockRecordRequirementsMet(id) != 0) {
-        QuestRecordA* record = dataTable1bOr1cGetRecord(id);
+        QuestRecordA* record = questDataGetRecord(id);
         if (record != NULL) {
             u32 value = gameGetPlayerData()->value;
             if (record->requiredLevel != 0 && record->requiredLevel <= (s32)value) {

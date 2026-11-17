@@ -1,8 +1,8 @@
 /* NON_MATCHING: control flow and constants now match; the saved registers are permuted (retail: zero r7, &g_aocSystem r8, g_statusBustUpResources r6, table 15 r9). */
 #include "status/StatusBustUp.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
 extern void *g_aocSystem;
@@ -19,7 +19,7 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
         if (id < 0) {
             id = gameFlagIsSet(17) ? 0 : 606;
         } else {
-            DevilRecordA *record = (DevilRecordA *)devilGetRecord((u16)id);
+            NkmBaseRecordA *record = (NkmBaseRecordA *)nkmBaseGetRecord((u16)id);
             if (record == NULL)
                 return;
             // The alternate portrait metadata extends the shared table-zero view.
@@ -30,7 +30,7 @@ void statusBustUpPortraitRelease(s32 id, s32 resolveRecord)
                 s16 portrait;
             };
             typedef char AlternatePortraitOffsets[offsetof(AlternatePortraitView, portrait) == 0x8C ? 1 : -1];
-            AlternatePortraitView *alternate = (AlternatePortraitView *)dataTable00FindById((u16)id);
+            AlternatePortraitView *alternate = (AlternatePortraitView *)nkmEnemyFindById((u16)id);
             if (!(alternate->flags & 0x8000)) {
                 id = record->model + 1;
                 if (id >= 631)

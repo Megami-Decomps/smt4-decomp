@@ -6,8 +6,8 @@ extern "C" {
 /* Compares the record keys selected by two halfword identifiers. */
 s32 dataTable1bOr1cCompareRecordKeys(const u16 *left, const u16 *right)
 {
-    QuestRecordA *a = dataTable1bOr1cGetRecord(*left);
-    QuestRecordA *b = dataTable1bOr1cGetRecord(*right);
+    QuestRecordA *a = questDataGetRecord(*left);
+    QuestRecordA *b = questDataGetRecord(*right);
     if (a == NULL) {
         return 0;
     }

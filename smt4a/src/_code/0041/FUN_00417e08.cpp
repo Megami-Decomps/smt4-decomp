@@ -53,7 +53,7 @@ u32 FUN_00417e08(u16 id)
     } else if (kind != 0 && kind != 10 && kind != 2 && kind != 11) {
         for (i = 1; i < 20; i++) {
             if (roster->stock[i].id != 0) {
-                u8 *record = reinterpret_cast<u8 *>(dataTable1bOr1cGetRecord(roster->stock[i].id));
+                u8 *record = reinterpret_cast<u8 *>(questDataGetRecord(roster->stock[i].id));
 
                 if (record != NULL && record[6] == 6) {
                     clearThreeWords(&roster->stock[i]);

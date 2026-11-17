@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern int gameGetSlotRecord(int);
 
 
@@ -40,9 +40,9 @@ int FUN_002fddd8(int *param_1,int *param_2)
     temp_v1 = gameGetSlotRecord(*param_1);
     temp_v2 = gameGetSlotRecord(*param_2);
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v1 = (unsigned int)*(unsigned char *)(temp_v4 + 2) - (unsigned int)*(unsigned char *)(temp_v3 + 2);
     if (temp_v1 == 0) {
       temp_v1 = 0;
@@ -60,9 +60,9 @@ int FUN_002fddd8(int *param_1,int *param_2)
         temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 100) - (unsigned int)*(unsigned short *)(temp_v0 + 100);
         if (temp_v1 == 0) {
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v1 = (unsigned int)*(unsigned char *)(temp_v4 + 2) - (unsigned int)*(unsigned char *)(temp_v3 + 2);
           if (temp_v1 == 0) {
             return (unsigned int)*(unsigned short *)(temp_v0 + 0x62) - (unsigned int)*(unsigned short *)(temp_v2 + 0x62);

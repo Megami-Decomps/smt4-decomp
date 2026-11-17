@@ -46,8 +46,8 @@ static s32 kindRank(u8 kind)
 /* Compares two record ids by kind rank (higher first), then by order (higher first). */
 s32 recordCompareKindAndOrder(u16 *a, u16 *b)
 {
-    QuestRecord *recordA = dataTable1bOr1cGetRecord(*a);
-    QuestRecord *recordB = dataTable1bOr1cGetRecord(*b);
+    QuestRecord *recordA = questDataGetRecord(*a);
+    QuestRecord *recordB = questDataGetRecord(*b);
     if (recordA == NULL)
         return 0;
     if (recordB == NULL)
@@ -57,8 +57,8 @@ s32 recordCompareKindAndOrder(u16 *a, u16 *b)
     if (diff != 0)
         return diff;
 
-    recordA = dataTable1bOr1cGetRecord(*a);
-    recordB = dataTable1bOr1cGetRecord(*b);
+    recordA = questDataGetRecord(*a);
+    recordB = questDataGetRecord(*b);
     if (recordA == NULL)
         return 0;
     if (recordB == NULL)

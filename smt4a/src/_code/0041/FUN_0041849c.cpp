@@ -29,7 +29,7 @@ void FUN_0041849c(u32 id, u32 amount)
     for (s32 i = 0; i < 400; ++i) {
         u32 isActive = (questGetFlags(i)->flags & 2) >> 1;
         if (isActive) {
-            QuestRecordA *record = dataTable1bOr1cGetRecord((u16)i);
+            QuestRecordA *record = questDataGetRecord((u16)i);
             if (record != NULL && record->kind == 0) {
                 for (s32 j = 0; j < 4; ++j) {
                     if (record->requirements[j].kind == 1 && record->requirements[j].id == id) {

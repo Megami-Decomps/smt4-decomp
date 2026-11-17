@@ -3,9 +3,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "code/Code0027.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "battle/BtlGlobals.h"
 
 /* Find the part occupied by a listed member, or -1 when it is absent. */
@@ -50,7 +50,7 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         position = *FUN_002d8cc8(((ArrangementView *)state)->arrangement);
         position.z += 2.0f;
         BtlUnitData *source = btlFindEntryBlockByMemberId(state, index);
-        u8 kind = dataTable00FindById(source->id)->arrangementFirst;
+        u8 kind = nkmEnemyFindById(source->id)->arrangementFirst;
         f32 height = 0.0f;
         switch (kind) {
         case 0:

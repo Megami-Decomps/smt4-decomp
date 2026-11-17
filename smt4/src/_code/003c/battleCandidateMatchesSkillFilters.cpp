@@ -33,7 +33,7 @@ void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
 u32 battleCandidateMatchesSkillFilters(FusionCandidateFilter *owner, u32 unusedA, u32 unusedB, u16 id)
 {
     FusionSkillFilterView *filter = reinterpret_cast<FusionSkillFilterView *>(owner);
-    const DevilAffinityView *record = reinterpret_cast<const DevilAffinityView *>(devilGetRecord(id));
+    const DevilAffinityView *record = reinterpret_cast<const DevilAffinityView *>(nkmBaseGetRecord(id));
     if (filter->matchSkill) {
         if (!libc_bsearch(&filter->skill, filter->skills, filter->count, sizeof(u16), halfwordKeyEmptyLastCompare))
             return 0;

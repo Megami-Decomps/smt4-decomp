@@ -1,6 +1,6 @@
 #include "gamedata/ItemSortRecord.h"
 #include "gamedata/ItemSortCategory.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 s32 itemSortCompareByCategoryAndId(const s32 *left, const s32 *right);
@@ -16,7 +16,7 @@ s32 itemCompareCategoryDescendingValueAscending(const s32 *left, const s32 *righ
         leftKey = 0;
     } else {
         leftRank = itemGetSortCategory(*left);
-        leftKey = dataTable04FindById(*left)->listing.sortKey;
+        leftKey = skillDataFindById(*left)->listing.sortKey;
     }
     s32 rightRank;
     u16 rightKey;
@@ -25,7 +25,7 @@ s32 itemCompareCategoryDescendingValueAscending(const s32 *left, const s32 *righ
         rightKey = 0;
     } else {
         rightRank = itemGetSortCategory(*right);
-        rightKey = dataTable04FindById(*right)->listing.sortKey;
+        rightKey = skillDataFindById(*right)->listing.sortKey;
     }
     s32 difference = rightRank - leftRank;
     if (difference == 0)

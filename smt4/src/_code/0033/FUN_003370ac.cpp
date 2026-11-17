@@ -2,7 +2,7 @@
 #include "battle/UnitInitialization.h"
 #include "battle/btlUnit.h"
 #include "gamedata/PlayerInitialization.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/SaveSlotTableIV.h"
@@ -63,7 +63,7 @@ void FUN_003370ac(BtlPartyInitializationStateIV *world)
                 unit->initialEncoded[index].value = randomGetLowerTenBits((u32)saved, (u8)index);
                 unit->initialEncoded[index].kind = randomGetUpperSixBits((u32)saved, (u8)index);
             }
-            const DevilBattleInitialInfoIV *info = reinterpret_cast<const DevilBattleInitialInfoIV *>(devilGetRecord(unit->status));
+            const DevilBattleInitialInfoIV *info = reinterpret_cast<const DevilBattleInitialInfoIV *>(nkmBaseGetRecord(unit->status));
             unit->percentage = info->percentage;
             if (info->direction == 1) {
                 unit->direction = 1;

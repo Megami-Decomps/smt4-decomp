@@ -1,6 +1,6 @@
 /* NON_MATCHING: invalid-slot tests and category/priority register allocation differ. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 s32 FUN_0020e83c(const s32 *, const s32 *);
@@ -19,8 +19,8 @@ s32 FUN_00232104(const s32 *left, const s32 *right)
         return -1;
     SlotRecordA *leftSlot = gameGetSlotRecord(*left);
     SlotRecordA *rightSlot = gameGetSlotRecord(*right);
-    const SortInfoView *leftInfo = reinterpret_cast<const SortInfoView *>(devilGetRecord(leftSlot->entryId));
-    const SortInfoView *rightInfo = reinterpret_cast<const SortInfoView *>(devilGetRecord(rightSlot->entryId));
+    const SortInfoView *leftInfo = reinterpret_cast<const SortInfoView *>(nkmBaseGetRecord(leftSlot->entryId));
+    const SortInfoView *rightInfo = reinterpret_cast<const SortInfoView *>(nkmBaseGetRecord(rightSlot->entryId));
     s32 difference = leftInfo->category - rightInfo->category;
     if (difference == 0) {
         if (*left < 0)
@@ -29,8 +29,8 @@ s32 FUN_00232104(const s32 *left, const s32 *right)
             return -1;
         leftSlot = gameGetSlotRecord(*left);
         rightSlot = gameGetSlotRecord(*right);
-        DevilRecordA *leftPriority = devilGetRecord(leftSlot->entryId);
-        DevilRecordA *rightPriority = devilGetRecord(rightSlot->entryId);
+        NkmBaseRecordA *leftPriority = nkmBaseGetRecord(leftSlot->entryId);
+        NkmBaseRecordA *rightPriority = nkmBaseGetRecord(rightSlot->entryId);
         difference = leftPriority->race - rightPriority->race;
         if (difference == 0)
             difference = FUN_0020e83c(left, right);

@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 struct StatusDownState {
     /* 0x000 */ u8 unk000[0x598];
@@ -26,7 +26,7 @@ u32 statusDownGetHelpMessage(s32 kind)
         }
         if (kind == 1) {
             if (inBattle != 0) {
-                if ((devilGetRecord(*FUN_002c7e24())->extraFlags & 2) == 0) {
+                if ((nkmBaseGetRecord(*FUN_002c7e24())->extraFlags & 2) == 0) {
                     message = 49;
                 } else {
                     message = 241;

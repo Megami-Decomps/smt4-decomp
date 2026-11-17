@@ -1,5 +1,5 @@
 /* Tests the availability flag for a standard or add-on table-four entry. */
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 extern void *g_aocSystem;
@@ -33,7 +33,7 @@ u32 FUN_002685cc(u32 id)
             return (record->flags >> 31) + 1;
         }
     } else {
-        Table04RecordA *record = dataTable04FindById(id);
+        SkillDataRecordA *record = skillDataFindById(id);
         if (record != NULL) {
             return ~(record->flags >> 29) & 1;
         }

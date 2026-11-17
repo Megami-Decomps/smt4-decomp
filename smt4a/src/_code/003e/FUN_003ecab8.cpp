@@ -5,9 +5,9 @@
 #include "shard/VersionedResource.h"
 #include "shard/S1Mover.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/DataTableAccess_VariantA.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 namespace {
 /* Resource fields overlap the canonical state's byte-aligned padding. */
@@ -95,7 +95,7 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
         const Vec3f *stage = reinterpret_cast<const Vec3f *>(FUN_00348f74(resources->stagePosition));
         position = *stage;
         position.z += 2.0f;
-        const Table00RecordA *record = dataTable00FindById(btlFindEntryBlockByMemberId(state, index)->id);
+        const NkmEnemyRecordA *record = nkmEnemyFindById(btlFindEntryBlockByMemberId(state, index)->id);
         f32 offset;
         switch (record->bustUp) {
         case 0: offset = 15.0f; break;

@@ -6,7 +6,7 @@ extern "C" {
 /* Finds the named-data payload of a table record. */
 void *dataTableGetNamePayload(u32 index)
 {
-    QuestRecord *record = dataTable1bOr1cGetRecord(index);
+    QuestRecord *record = questDataGetRecord(index);
     return record != NULL ? record->payload : NULL;
 }
 

@@ -1,7 +1,7 @@
 /* Returns the entry's explicit value (+0x50), or, when it has a percentage (+0x54), that percentage of the gameGetSlotTable base; 0 for a NULL entry. */
 #include "common.h"
 #include "shard/S1ListPanel.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -16,7 +16,7 @@ extern s32 *gameGetSlotTable(void);
 s32 FUN_0028d1f4(u32 id)
 {
     s32 result = 0;
-    Entry *entry = reinterpret_cast<Entry *>(dataTable40FindById(id));
+    Entry *entry = reinterpret_cast<Entry *>(skillDataFindById(id));
 
     if (entry != NULL) {
         if (entry->value != 0) {

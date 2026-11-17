@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 
 
 void FUN_002bcddc(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   return;
 }
 

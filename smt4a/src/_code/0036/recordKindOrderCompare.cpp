@@ -1,12 +1,12 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
 /* Compares two record ids by kind (higher first), then by order (lower first), then by id (higher first). */
 s32 recordKindOrderCompare(u16 *a, u16 *b)
 {
-    DevilRecordA *recordA = devilGetRecord(*a);
-    DevilRecordA *recordB = devilGetRecord(*b);
+    NkmBaseRecordA *recordA = nkmBaseGetRecord(*a);
+    NkmBaseRecordA *recordB = nkmBaseGetRecord(*b);
     s32 diff = recordB->race - recordA->race;
 
     if (diff == 0) {

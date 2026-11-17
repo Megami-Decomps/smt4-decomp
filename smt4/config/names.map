@@ -1728,7 +1728,7 @@
 002af5c0 uiSpriteSetImageKeyframe
 002b0174 asdFileRequestRelease
 002b0184 asdFileRequestSetHeapKind
-002b06c4 dataTable00FindById
+002b06c4 nkmEnemyFindById
 002b2770 asdMdlObjectBuildBounds
 002b2b08 resOwnerRunNodeHandlers
 002b4414 libc_strncmp
@@ -1948,11 +1948,11 @@
 0029b990 resultCreateDefault
 002a6100 asdTMTexTableLoadEntryAsyncB
 002ae238 dataTable08Sub0GetRecord
-002b4670 dataTable08Sub1GetRecord
-002b45e8 dataTable08Sub2GetRecord
+002b4670 itemTableGetItemRecord
+002b45e8 itemTableGetEquipmentRecord
 002c30c4 libc_strlen
-002b9024 devilGetRecord
-002b63c0 dataTable1bOr1cGetRecord
+002b9024 nkmBaseGetRecord
+002b63c0 questDataGetRecord
 002cdd90 scrComm_Data_GetRecordValue
 002c3940 rt_aeabi_memclr
 002e4158 scrComm_Party_GetMoney
@@ -4280,7 +4280,7 @@
 00291998 soundRequestEnd
 00296ee0 messageOwnerSetState
 0029f7d4 dataTable54FindById
-002ae164 dataTable40FindById
+002ae164 skillDataFindById
 002bff6c uiPointerHitsRect
 002febf0 scrCommGetItemPrice
 0031cbf8 scrCommGetBattleEntryValue

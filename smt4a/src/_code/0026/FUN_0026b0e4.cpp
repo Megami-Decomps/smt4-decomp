@@ -21,7 +21,7 @@ int FUN_00180310(...);
 int uiDrawItemOrStatusIcon(...);
 int asdTMTexTableEntryAt(...);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int FUN_001fc720(int, int);
 int statusDownDrawIndicatorPairs(...);
 int resourceRunOperationIfUnblocked(...);
@@ -61,7 +61,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001fc720. */
 /* Supplied declaration required: statusDownDrawIndicatorPairs. */
@@ -466,7 +466,7 @@ LAB_0026b644:
     texDrawCompositeSprite(2,0x12,0xe,temp_v0,temp_v1,0xb3);
     statusDownDrawIndicatorPairs(temp_v0,temp_v1);
     temp_v9 = (unsigned int)*(unsigned short *)(temp_v4 + 0x598);
-    devilGetRecord();
+    nkmBaseGetRecord();
     if (temp_v9 != 0) {
       if (*(char *)(temp_v9 + 9) == '\x01') {
         texDrawTableEntryAtStoredOrigin(2,0x12,0x483,temp_v0,temp_v1,0xbf);

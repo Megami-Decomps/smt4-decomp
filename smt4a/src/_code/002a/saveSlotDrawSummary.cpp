@@ -1,6 +1,6 @@
 /* NON_MATCHING: draw offsets use ldrd instead of retail's ldm; color-path registers and decimal-formatter layout also differ. */
 #include "saveLoadUI/saveLoadUI.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/TextureDrawCall.h"
 #include "font/SearchWin/RunWin.h"
 #include "text/TextDraw.h"
@@ -64,14 +64,14 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     }
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x5A, x, y, 0x66);
     if (record->portrait != 0) {
-        const DevilRecordA *portrait = devilGetRecord(record->portrait);
+        const NkmBaseRecordA *portrait = nkmBaseGetRecord(record->portrait);
         position = asdTMTexTableEntryAt(0x2E, 0x78);
         FUN_00169a1c(portrait->model, position->x + x, position->y + y, 0x67);
     }
     if (record->secondaryPortrait != 0) {
         void *unit = reinterpret_cast<void *>(FUN_0019acdc(record->secondaryPortrait, 0));
         u16 id = FUN_0036fcd0(unit, 0);
-        const DevilRecordA *portrait = devilGetRecord(dataTable10FindValue(id));
+        const NkmBaseRecordA *portrait = nkmBaseGetRecord(dataTable10FindValue(id));
         position = asdTMTexTableEntryAt(0x2E, 0x100);
         FUN_00169a1c(portrait->model, position->x + x, position->y + y, 0x67);
     }

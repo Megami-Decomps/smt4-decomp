@@ -1,7 +1,7 @@
 /* NON_MATCHING: effect/targeting tests are the table-record bitfields (target 3 or 8 = single target; retail returns 0 when the single-target query succeeds), the party scan is one loop from slot -1 reusing the previous result for empty slots, and the tails are branch-shaped; armcc still does not predicate the `&&`/`||` chains the way retail does and emits a stray nop after the single-target call. */
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/Shard0031.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 s32 FUN_0026c464(void *, s32, s32);
@@ -11,7 +11,7 @@ SlotTable *gameGetSlotTable(void);
 
 extern "C" u32 FUN_00298848(s32 skillId, void *context)
 {
-    const Table04Record *skill = dataTable40FindById(skillId);
+    const SkillDataRecord *skill = skillDataFindById(skillId);
     if (skill == NULL) return 0;
     if ((skill->effectProperties.mode == 1 || skill->effectProperties.mode == 3) && skill->sort.category == 3) {
         if (skill->effectProperties.targeting == 3 || skill->effectProperties.targeting == 8) {

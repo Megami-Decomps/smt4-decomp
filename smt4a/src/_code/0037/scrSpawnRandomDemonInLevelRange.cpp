@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 namespace {
@@ -59,7 +59,7 @@ u32 scrSpawnRandomDemonInLevelRange(void)
         s32 count = 0;
         for (s32 id = 1; id < 0x500; id++) {
             candidates[id] = 0;
-            DevilRecordA *record = devilGetRecord((u16)id);
+            NkmBaseRecordA *record = nkmBaseGetRecord((u16)id);
             if (record == NULL || (record->flags & 1) == 0 || minimum > record->level || record->level > maximum)
                 continue;
             candidates[count] = id;
@@ -100,7 +100,7 @@ u32 scrSpawnRandomDemonInLevelRange(void)
     case 4: {
         char name[128];
         char race[128];
-        devilGetRecord((u16)scrWorkGetValue(1));
+        nkmBaseGetRecord((u16)scrWorkGetValue(1));
         sysMemClear(name, 0x80);
         sysMemClear(race, 0x80);
         libc_strcpy(name, dataTable01GetRecordWithAocOverride((u16)scrWorkGetValue(1)));

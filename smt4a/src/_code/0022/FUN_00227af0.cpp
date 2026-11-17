@@ -1,6 +1,6 @@
 #include "shard/Shard0033.h"
 #include "shard/PassiveSkill.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "code/Code0022_Smt4a.h"
 
 extern "C" {
@@ -73,7 +73,7 @@ void FUN_00227af0(const char *text)
                     void *unit = gameGetSlotRecord(slot);
                     count = FUN_004bd098(unit, menu->skillId);
                 } else {
-                    const ActiveSkillRecord *skill = (const ActiveSkillRecord *)dataTable04FindById(menu->skillId);
+                    const ActiveSkillRecord *skill = (const ActiveSkillRecord *)skillDataFindById(menu->skillId);
                     count = FUN_004c6bd0(static_cast<s16>(menu->tail.unitId), skill);
                 }
             }

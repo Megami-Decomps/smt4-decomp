@@ -1,6 +1,6 @@
 /* NON_MATCHING: layout only: retail places one shared FUN_004a5d5c tail call right after the mode dispatch and the arms branch back to it; built emits an inline tail call in each arm */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "classes/Obj55c8d0.h"
 #include "shard/Shard004A.h"
 #include "bible/bibleAnalyze.h"
@@ -66,7 +66,7 @@ void Obj55c8d0::FUN_004a4c74()
         if (menu->state.mode == 0) {
             SelectEntry *entries = menu->state.entries;
             s32 total = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->totalHolder));
-            DevilRecordA *item = devilGetRecord(entries[total].itemId);
+            NkmBaseRecordA *item = nkmBaseGetRecord(entries[total].itemId);
             sysPlaySe((item->extraFlags & 2) != 0 ? 0x121 : 0x30);
             FUN_004a5d5c(menu);
             return;

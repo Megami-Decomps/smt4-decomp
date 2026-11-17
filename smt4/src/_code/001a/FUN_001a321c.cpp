@@ -14,7 +14,7 @@ int uiDrawTableTextureSized(...);
 int FUN_002b64b8(void);
 int FUN_002b659c(...);
 int FUN_002b6c34(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
@@ -128,7 +128,7 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002b659c. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int aocIndexValueOrDefault(unsigned int);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
@@ -470,7 +470,7 @@ LAB_001a3ea8:
         pcVar21 = (char *)(temp_v34 + 0x1e66);
         if (*pcVar21 != '\0') {
           puVar18 = (unsigned short *)(unsigned int)*puVar22;
-          devilGetRecord();
+          nkmBaseGetRecord();
         }
         temp_v6 = temp_v34;
         if (*temp_v38 != '\b') {

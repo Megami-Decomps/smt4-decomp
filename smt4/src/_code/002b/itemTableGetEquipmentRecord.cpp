@@ -10,7 +10,7 @@ void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (
 s32 dataTable08Sub2CompareKeys(const void *left, const void *right);
 
 /* Returns the record of data table 8 type 2 for `id`: the add-on's when it has one, else the one found in the table. */
-EquipmentRecord *dataTable08Sub2GetRecord(u32 id)
+EquipmentRecord *itemTableGetEquipmentRecord(u32 id)
 {
     EquipmentRecord key;
     EquipmentRecord *record;

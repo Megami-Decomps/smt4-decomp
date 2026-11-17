@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 /* A selectable entry of the command menu's page list (0x40 bytes). */
 struct CommandPageEntry {
@@ -155,7 +155,7 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
         for (s32 i = 0; i < work->pageCount; i++) {
             CommandPageEntry *page = &work->pages[i];
             if (page->present != 0) {
-                if ((dataTable00FindById(page->id)->level & 0x8000) != 0) {
+                if ((nkmEnemyFindById(page->id)->level & 0x8000) != 0) {
                     if (work->pageFlag != 0) {
                         work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x1A0);
                     } else if (page->value - 0x14A <= 4u || page->value - 0x165 <= 3u) {

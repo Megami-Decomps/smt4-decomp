@@ -38,7 +38,7 @@ int btlEntryBuildSummary(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
 int passiveSkillLookupRecord(void);
-int dataTable40FindById(void);
+int skillDataFindById(void);
 int FUN_003bcda0(int);
 int FUN_003bd1d8(int, int);
 int FUN_003bd2e0(...);
@@ -164,7 +164,7 @@ extern int battleGetEntryHalfword(int, unsigned int);
 extern int FUN_0028299c(int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
 extern int FUN_00293230(int);
-/* Supplied declaration required: dataTable40FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int btlGetApplicableAilmentMask(unsigned int, unsigned int, int, int, unsigned int);
 /* Supplied declaration required: FUN_003bcda0. */
 /* Supplied declaration required: btlRollPassiveSkill. */
@@ -271,7 +271,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   puStack_30 = param_2;
   temp_v70 = param_3;
   temp_v71 = param_4;
-  dataTable40FindById();
+  skillDataFindById();
   temp_v54 = 1;
   temp_v55 = 0;
   temp_v45 = 0;

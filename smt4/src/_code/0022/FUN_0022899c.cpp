@@ -15,8 +15,8 @@ int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_002463e8(...);
 int btlEntryBuildSummary(...);
 int passiveSkillLookupRecord(void);
-int dataTable40FindById(void);
-int dataTable08Sub1GetRecord(void);
+int skillDataFindById(void);
+int itemTableGetItemRecord(void);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -67,8 +67,8 @@ extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: skillDataFindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: memClear. */
 
 
@@ -124,7 +124,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v31 = param_4;
   temp_v27 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v30 = 0;
-  dataTable40FindById();
+  skillDataFindById();
   if (param_1 != 0) {
     switch(*(unsigned char *)(param_1 + 0x23)) {
     case 0:
@@ -140,7 +140,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
       return 0;
     }
   }
-  dataTable08Sub1GetRecord();
+  itemTableGetItemRecord();
   if (param_3 != (fn_0022899c_arg2 *)0x0) {
     temp_v2 = param_3->field_0x64;
     temp_v12 = temp_v2 == 0;

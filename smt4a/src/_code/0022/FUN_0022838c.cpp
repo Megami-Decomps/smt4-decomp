@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int devilGetRecord(void);
-int dataTable04FindById(void);
+int nkmBaseGetRecord(void);
+int skillDataFindById(void);
 int FUN_002a2cbc(void);
 int FUN_002e6340(void);
 int sysMemClear(int, int);
@@ -23,8 +23,8 @@ int __aeabi_memcpy4(unsigned short *, unsigned short *, int);
 extern int DAT_0057f69c; /* 0x57f69c */
 extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: nkmBaseGetRecord. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: FUN_002a2cbc. */
 /* Supplied declaration required: FUN_002e6340. */
 /* Supplied declaration required: sysMemClear. */
@@ -83,7 +83,7 @@ void FUN_0022838c(void)
   *(unsigned short *)((int)puVar1 + 10) = 0;
   do {
     puVar3 = (unsigned short *)((temp_v0 + 1U) & 0xffff);
-    devilGetRecord();
+    nkmBaseGetRecord();
     puVar1 = DAT_0057f6a4;
     if (puVar3 != (unsigned short *)0x0) {
       if ((puVar3[5] & 1) != 0) {
@@ -121,7 +121,7 @@ void FUN_0022838c(void)
       temp_v4 = 0;
       do {
         temp_v1 = (unsigned int)(unsigned short)puVar8[temp_v4 + 0xe];
-        if (((temp_v1 != 0) && (dataTable04FindById(), temp_v1 != 0)) && (*(unsigned short *)(temp_v1 + 0x26) < 0x12)) {
+        if (((temp_v1 != 0) && (skillDataFindById(), temp_v1 != 0)) && (*(unsigned short *)(temp_v1 + 0x26) < 0x12)) {
           *(unsigned char *)((int)puVar8 + temp_v4 + 0x2c) =
                *(unsigned char *)((int)puVar8 + *(unsigned short *)(temp_v1 + 0x26) + 0x3c);
         }

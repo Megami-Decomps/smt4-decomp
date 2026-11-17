@@ -1,5 +1,5 @@
 #include "shard/W4_Match6_BtlEntry.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -13,13 +13,13 @@ s32 btlSlotsHaveReadyUnit(BtlEntry *owner)
 
     if (owner->flags & 0x10) {
         if ((owner->actionList.selected.kind == 2 || owner->actionList.selected.kind == 3) &&
-            (unit = dataTable40FindById(owner->actionList.selected.id)) != NULL && FUN_001ee498(unit)) {
+            (unit = skillDataFindById(owner->actionList.selected.id)) != NULL && FUN_001ee498(unit)) {
             return 1;
         }
     } else {
         for (i = 0; i < 5; i++) {
             if ((owner->actionList.available[i].kind == 2 || owner->actionList.available[i].kind == 3) &&
-                (unit = dataTable40FindById(owner->actionList.available[i].id)) != NULL && FUN_001ee498(unit)) {
+                (unit = skillDataFindById(owner->actionList.available[i].id)) != NULL && FUN_001ee498(unit)) {
                 return 1;
             }
         }

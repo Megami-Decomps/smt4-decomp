@@ -22,7 +22,7 @@ s32 aocItemGetPrice(const AocItemRef *ref)
 
     switch (aocEntryGetKind(id)) {
     case 1: {
-        ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+        ConsumableRecord *record = itemTableGetItemRecord(id);
         price = record == NULL ? AOC_PRICE_MISSING : record->sellPrice;
         break;
     }
@@ -33,7 +33,7 @@ s32 aocItemGetPrice(const AocItemRef *ref)
     case 6:
     case 7:
     case 8: {
-        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecord *record = itemTableGetEquipmentRecord(id);
         price = record == NULL ? AOC_PRICE_MISSING : record->sellPrice;
         break;
     }

@@ -13,7 +13,7 @@ int byte76Set(...);
 int FUN_00352ff8(void);
 int FUN_00353200(void);
 
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int ptrListRemoveClearOwner(...);
 int vec4Forward(...);
 int mathAngleDeltaDegrees(void);
@@ -117,7 +117,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
@@ -1748,7 +1748,7 @@ LAB_002d54c4:
               *(unsigned int *)(temp_v10 + 0xa4) = FUN_004bc420(groupId,temp_v33,0);
               temp_v3 = dataSelectPrioritizedCandidate(*(unsigned int *)(temp_v10 + 0xa4));
               *(int *)(temp_v10 + 0xa8) = temp_v3;
-              dataTable00FindById();
+              nkmEnemyFindById();
               *(unsigned short *)(temp_v10 + 0x1a8) = *(unsigned short *)(temp_v3 + 2) & 0x7fff;
               temp_v3 = lookupConditionalSixBitValue(*(unsigned int *)(temp_v10 + 0xa4));
               if (temp_v3 != 0) {

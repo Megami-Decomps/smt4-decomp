@@ -1,7 +1,7 @@
 /* NON_MATCHING: signed ownership flags and record lookup shape recovered; saved pointer roles, registration guard and owned-model reset stores differ. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 namespace {
 struct EnemySelectionRecord {
@@ -112,7 +112,7 @@ void FUN_00377acc(EnemySlotSelectionView *slot, s32 id, u32 kind)
         }
         slot->behavior = record->behavior;
         slot->packedUnit = record->packedUnit;
-        Table00RecordA *unit = dataTable00FindById((u16)slot->packedUnit);
+        NkmEnemyRecordA *unit = nkmEnemyFindById((u16)slot->packedUnit);
         slot->modelId = unit->level & 0x7FFF;
         s32 variant = FUN_004bb870(slot->behavior);
         if (variant != 0)

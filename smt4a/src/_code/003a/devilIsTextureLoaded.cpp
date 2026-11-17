@@ -1,6 +1,6 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 extern "C" bool asdTMTexTableNodeIsLoaded(u32 table, s32 index);
 
 extern "C" {
@@ -14,12 +14,12 @@ bool devilIsTextureLoaded(s32 id, s32 resolve)
         if (id < 0) {
             index = gameFlagIsSet(17) ? 0 : 0x25e;
         } else {
-            const DevilRecordA *record =
-                (const DevilRecordA *)devilGetRecord((u16)id);
+            const NkmBaseRecordA *record =
+                (const NkmBaseRecordA *)nkmBaseGetRecord((u16)id);
             if (!record) {
                 return false;
             }
-            const Table00RecordA *base = dataTable00FindById((u16)id);
+            const NkmEnemyRecordA *base = nkmEnemyFindById((u16)id);
             if (base->level & 0x8000) {
                 table = 25;
                 index = base->battleTextureId;

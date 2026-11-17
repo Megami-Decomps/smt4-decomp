@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "addon/AocSystem.h"
 
 extern "C" {
@@ -40,7 +40,7 @@ static inline Entry0026a794 *findContentFlagEntry(u32 id)
     return entry;
 }
 
-/* Flag test on entry `id`: ids above 400 come from the add-on content or data table 4 section 1 (bit 30 clear), the rest from dataTable40FindById (sign bit clear gives 1). */
+/* Flag test on entry `id`: ids above 400 come from the add-on content or data table 4 section 1 (bit 30 clear), the rest from skillDataFindById (sign bit clear gives 1). */
 u32 contentEntryFlagTest(u32 id)
 {
     Entry0026a794 *entry;
@@ -52,7 +52,7 @@ u32 contentEntryFlagTest(u32 id)
             return ~(entry->flags >> 30) & 1;
         }
     } else {
-        record = reinterpret_cast<Record0026a794 *>(dataTable40FindById(id));
+        record = reinterpret_cast<Record0026a794 *>(skillDataFindById(id));
         if (record != NULL) {
             return (record->flags >> 31) + 1;
         }

@@ -1,4 +1,4 @@
-/* Compares two ids: by flagValueRead key (descending), then by the byte at +0x43 of their dataTable8FindRecord records (ascending). */
+/* Compares two ids: by flagValueRead key (descending), then by the byte at +0x43 of their itemTableGetItemRecord records (ascending). */
 #include "common.h"
 #include "gamedata/ConsumableRecordA.h"
 
@@ -13,8 +13,8 @@ s32 FUN_002ce4d4(u16 *a, u16 *b)
     s32 diff = keyB - keyA;
 
     if (diff == 0) {
-        ConsumableRecordA *recordA = dataTable8FindRecord(*a);
-        ConsumableRecordA *recordB = dataTable8FindRecord(*b);
+        ConsumableRecordA *recordA = itemTableGetItemRecord(*a);
+        ConsumableRecordA *recordB = itemTableGetItemRecord(*b);
 
         diff = recordA->rank - recordB->rank;
     }

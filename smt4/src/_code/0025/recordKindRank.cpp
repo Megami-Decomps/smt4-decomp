@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/GameDataAccess_Smt4.h"
 
 extern "C" {
@@ -21,7 +21,7 @@ u32 recordKindRank(u32 id)
     if (id == 0) {
         return 99;
     }
-    record = reinterpret_cast<Record *>(dataTable40FindById(id));
+    record = reinterpret_cast<Record *>(skillDataFindById(id));
     rank = 0;
     switch (record->kind) {
     case 0:

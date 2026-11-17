@@ -12,7 +12,7 @@ extern "C" {
 u32 FUN_00394d90(u32 id, PartnerSkillSet *set)
 {
     if (id >= 1 && id <= 60) {
-        ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+        ConsumableRecord *record = itemTableGetItemRecord(id);
 
         if ((record->useFlags & 0xF0) != 0) {
             for (s32 i = 0; i < 8; i++) {

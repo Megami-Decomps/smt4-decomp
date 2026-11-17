@@ -1,6 +1,6 @@
 /* NON_MATCHING: the offset copies now use VFP transfers (pointer copy) as in retail; camera/mask base and flag-mask load allocation still differ. */
 #include "shard/W6_W6Match6_BattleCamera.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -58,7 +58,7 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle
     if (entry->flags & masks->zeroHeight) {
         camera->formation.position.y = 0.0f;
     } else if (entry->flags & masks->demonHeight) {
-        const DevilRecordA *demon = devilGetRecord(entry->id);
+        const NkmBaseRecordA *demon = nkmBaseGetRecord(entry->id);
         switch (demon->packed.formationHeight) {
         case 0: camera->formation.position.y = 0.0f; break;
         case 1: camera->formation.position.y = -3.5f; break;

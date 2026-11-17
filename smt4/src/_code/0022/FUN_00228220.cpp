@@ -16,7 +16,7 @@ int randRange(int);
 int FUN_00246134(...);
 int FUN_002463e8(...);
 int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);
-int dataTable40FindById(void);
+int skillDataFindById(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_8: 13 slot(s), 46 byte(s) */
@@ -48,7 +48,7 @@ typedef struct {
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: dataTable40FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: memClear. */
 
 
@@ -97,7 +97,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
   default:
     if (param_1 != 0xffff) {
       temp_v3 = param_1;
-      dataTable40FindById();
+      skillDataFindById();
       if (param_1 >= 1) {
         if (param_6 != 0) {
           temp_v0 = *(char *)(temp_v3 + 0x23);

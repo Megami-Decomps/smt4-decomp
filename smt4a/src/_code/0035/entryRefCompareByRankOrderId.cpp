@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -9,8 +9,8 @@ typedef struct SortRef {
 /* Comparator: orders two references by rank and order descending, then by id ascending. */
 s32 entryRefCompareByRankOrderId(SortRef *a, SortRef *b)
 {
-    DevilRecordA *entryA = devilGetRecord(a->id);
-    DevilRecordA *entryB = devilGetRecord(b->id);
+    NkmBaseRecordA *entryA = nkmBaseGetRecord(a->id);
+    NkmBaseRecordA *entryB = nkmBaseGetRecord(b->id);
     s32 diff = entryB->race - entryA->race;
 
     if (diff == 0) {

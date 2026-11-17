@@ -10,7 +10,7 @@ typedef struct Obj {
 
 u16 FUN_00383674(Obj *obj)
 {
-    return dataTable1bOr1cGetRecord((u16)obj->id)->id;
+    return questDataGetRecord((u16)obj->id)->id;
 }
 
 } /* extern "C" */

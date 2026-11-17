@@ -11,7 +11,7 @@ u32 FUN_0023cef0(void *, s32 part, s32 group, s32 variant, u16 bodyId)
 {
     if (bodyId == 0)
         bodyId = reinterpret_cast<PlayerEquipmentAppearance *>(gameGetPlayerData())->body;
-    EquipmentRecord *body = dataTable08Sub2GetRecord(bodyId);
+    EquipmentRecord *body = itemTableGetEquipmentRecord(bodyId);
     const EquipmentModelCompatibility *table = DAT_0044d35c;
     s32 count = 15;
     u16 modelId = static_cast<u16>(variant + group * 1000);

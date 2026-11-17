@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 namespace {
 
@@ -13,7 +13,7 @@ struct DevilListView {
 // Mark an existing devil entry, or insert it into the first free slot, if its record qualifies.
 extern "C" void devilListMarkOrInsertQualifiedEntry(DevilListView* list, s32 devilId)
 {
-    DevilRecord *record = devilGetRecord(devilId);
+    NkmBaseRecord *record = nkmBaseGetRecord(devilId);
     if (record == 0 || record->model >= 0x160) {
         return;
     }

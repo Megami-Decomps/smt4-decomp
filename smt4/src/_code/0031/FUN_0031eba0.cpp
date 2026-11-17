@@ -1,8 +1,8 @@
 /* NON_MATCHING: first portrait lookup spills the record pointer and second validation uses different scratch registers. */
-#include "gamedata/DevilRecord.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmBaseRecord.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct PortraitClipBounds {
     s32 top;
@@ -30,10 +30,10 @@ static inline bool resolveClippedPortrait(s32 unit, s32 lookup, u32 &bank, s32 &
         if (unit < 0) {
             image = 0;
         } else {
-            const DevilRecord *devil = reinterpret_cast<const DevilRecord *>(devilGetRecord(static_cast<u16>(unit)));
+            const NkmBaseRecord *devil = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(static_cast<u16>(unit)));
             if (!devil)
                 return false;
-            const Table00Record *record = dataTable00FindById(static_cast<u16>(unit));
+            const NkmEnemyRecord *record = nkmEnemyFindById(static_cast<u16>(unit));
             if (record->levelFlags & 1) {
                 image = record->portraitId;
                 bank = 35;

@@ -9,9 +9,9 @@ extern "C" {
 int btlEntryBuildSummary(unsigned char [2], unsigned int *, unsigned int *);
 int FUN_00283ebc(unsigned int, unsigned int, int);
 int gameGetUnitRecord(...);
-int dataTable40FindById(void);
-int dataTable08Sub2GetRecord(void);
-int dataTable08Sub1GetRecord(void);
+int skillDataFindById(void);
+int itemTableGetEquipmentRecord(void);
+int itemTableGetItemRecord(void);
 int battleGetPassiveAffinityMultiplier(...);
 int FUN_003be918(unsigned int, unsigned int, int, int, int);
 int FUN_003beba8(...);
@@ -50,9 +50,9 @@ extern int randRange(unsigned int);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern unsigned int playerGetSkillRank(unsigned int);
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: skillDataFindById. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: battleGetPassiveAffinityMultiplier. */
 /* Supplied declaration required: FUN_003be918. */
 /* Supplied declaration required: FUN_003beba8. */
@@ -101,8 +101,8 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
   iStack_28 = param_4;
   puVar3 = (unsigned int *)reinterpret_cast<unsigned int *>(btlGetMainState());
   temp_v2 = temp_v22;
-  dataTable40FindById();
-  dataTable08Sub1GetRecord();
+  skillDataFindById();
+  itemTableGetItemRecord();
   puVar6 = puVar3;
   btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar3), param_5);
   puVar5 = puVar3;
@@ -300,7 +300,7 @@ LAB_003be190:
         temp_v13 = romwright_piece_4_4(0x3f800000,temp_v3);
         puVar6 = (unsigned int *)reinterpret_cast<unsigned int *>(btlGetMainState());
         btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar6), param_5);
-        if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, dataTable40FindById(), temp_v7 != 0)) {
+        if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, skillDataFindById(), temp_v7 != 0)) {
           temp_v3 = playerGetSkillRank(temp_v1);
           FUN_00283ebc(temp_v7,temp_v3,2);
         }
@@ -394,7 +394,7 @@ LAB_003be1dc:
     temp_v4 = (int)temp_v16;
     if ((*puVar6 & 6) != 0) {
       temp_v8 = temp_v23;
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v4 = (int)temp_v16;
       if (*(char *)(temp_v8 + 0x52) == '\x02') {
         temp_v3 = 1;

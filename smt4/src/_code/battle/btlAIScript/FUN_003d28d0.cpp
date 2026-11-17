@@ -4,7 +4,7 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
 
 /* Battle state words the dispatcher reads beyond the shared prefix. */
@@ -161,7 +161,7 @@ u32 FUN_003d28d0(BtlMainState **block, u32 phase)
             return 0;
         bool restricted = false;
         if (work->selection->kind == 3) {
-            const Table04Record *skill = dataTable40FindById(work->selection->value);
+            const SkillDataRecord *skill = skillDataFindById(work->selection->value);
             if (skill != NULL && reinterpret_cast<const u8 *>(skill)[0x4b] != 0)
                 restricted = true;
             if ((*block)->editorControl.flags & 0x800) {

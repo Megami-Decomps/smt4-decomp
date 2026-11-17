@@ -11,7 +11,7 @@ u32 scrLookupTableValue(void)
 {
     u16 key = scrGetArg(0);
     int index = scrGetArg(1);
-    QuestRecordA *lookup = dataTable1bOr1cGetRecord(key);
+    QuestRecordA *lookup = questDataGetRecord(key);
 
     scrSetResult(lookup->values[index]);
     return 1;

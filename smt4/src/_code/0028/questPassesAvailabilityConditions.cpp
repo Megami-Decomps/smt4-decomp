@@ -7,7 +7,7 @@ s32 gameFlagIsSet(u32);
 
 u32 questPassesAvailabilityConditions(u16 questId)
 {
-    const QuestRecord *record = dataTable1bOr1cGetRecord(questId);
+    const QuestRecord *record = questDataGetRecord(questId);
     if (!record)
         return 0;
     if (!questRequirementsMet(questId))

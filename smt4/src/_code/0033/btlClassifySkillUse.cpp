@@ -1,12 +1,12 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
-u32 itemEffectCheckApplicable(s32 unit, s32 mode, Table04Record *skill);
+u32 itemEffectCheckApplicable(s32 unit, s32 mode, SkillDataRecord *skill);
 
 // Classify an attempted skill use and report resource-related failures.
 u32 btlClassifySkillUse(s32 unit, u32 skillId)
@@ -24,7 +24,7 @@ u32 btlClassifySkillUse(s32 unit, u32 skillId)
     };
     if (!skillId)
         return 1;
-    Table04Record *skill = dataTable40FindById(skillId);
+    SkillDataRecord *skill = skillDataFindById(skillId);
     if (!skill)
         return 1;
     const SkillRecordView *record = reinterpret_cast<const SkillRecordView *>(skill);

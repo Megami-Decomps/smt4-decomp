@@ -21,7 +21,7 @@ bool questIsOfferable(u16 questId)
     if (questRequirementsMet(questId) == 0) {
         return false;
     }
-    const QuestRecord *record = dataTable1bOr1cGetRecord(questId);
+    const QuestRecord *record = questDataGetRecord(questId);
     if (record->excludedQuests[0] != 0 && questIsCompleted(record->excludedQuests[0]) != 0) {
         return false;
     }
@@ -33,7 +33,7 @@ bool questIsOfferable(u16 questId)
         return false;
     }
     if (questId >= 0x15e) {
-        const QuestRecord *current = dataTable1bOr1cGetRecord(questId);
+        const QuestRecord *current = questDataGetRecord(questId);
         if (current != NULL && current->kind == 9 && g_gameState.mapId == 0x18) {
             return false;
         }

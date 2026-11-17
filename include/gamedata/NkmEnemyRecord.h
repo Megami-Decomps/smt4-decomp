@@ -1,8 +1,9 @@
-/* Data table 0, section 1: the devil compendium's base records (0xA8 bytes each), found by id with
- * dataTable00FindById() (gamedata/Table00Lookup.h of each game). IV's layout is Table00Record,
- * Apocalypse's Table00RecordA. */
-#ifndef GAMEDATA_TABLE00_H
-#define GAMEDATA_TABLE00_H
+/* A demon's enemy record: one 0xA8-byte row of battle/NKMBaseTable.tbb table 1 (the game's data
+ * table 0, section 1): level, HP, MP, stats, drops and AI script of the demon as an enemy. Found by id
+ * with nkmEnemyFindById() (gamedata/NkmEnemyLookup.h of each game). IV's layout is NkmEnemyRecord,
+ * Apocalypse's NkmEnemyRecordA; the demon's base record (table 0) is NkmBaseRecord. */
+#ifndef GAMEDATA_NKMENEMYRECORD_H
+#define GAMEDATA_NKMENEMYRECORD_H
 
 #include "common.h"
 #include <stddef.h>
@@ -15,7 +16,7 @@ struct Table00Choice {
 };
 
 /* IV's record. */
-struct Table00Record {
+struct NkmEnemyRecord {
     /* 0x00 */ u16 id;
     /* 0x02 */ u8 level;
     /* 0x03 */ u8 levelFlags;           /* bit 0: preferred by sprite templates; bit 7: priority */
@@ -50,18 +51,18 @@ struct Table00Record {
     /* 0xA6 */ u8 unkA6[2];
 };
 
-typedef char Table00RecordOffsetCheck[sizeof(Table00Record) == 0xA8 &&
-    offsetof(Table00Record, level) == 2 && offsetof(Table00Record, maxHp) == 4 &&
-    offsetof(Table00Record, stats) == 0xC && offsetof(Table00Record, flags) == 0x16 &&
-    offsetof(Table00Record, resistances) == 0x24 && offsetof(Table00Record, skills) == 0x48 &&
-    offsetof(Table00Record, drops) == 0x58 && offsetof(Table00Record, experience) == 0x6C &&
-    offsetof(Table00Record, money) == 0x78 && offsetof(Table00Record, linkedIds) == 0x7C &&
-    offsetof(Table00Record, portraitId) == 0x88 && offsetof(Table00Record, aiScriptName) == 0x8A &&
-    offsetof(Table00Record, arrangementFirst) == 0x9E && offsetof(Table00Record, selectionId) == 0xA0 &&
-    offsetof(Table00Record, variant) == 0xA4 ? 1 : -1];
+typedef char Table00RecordOffsetCheck[sizeof(NkmEnemyRecord) == 0xA8 &&
+    offsetof(NkmEnemyRecord, level) == 2 && offsetof(NkmEnemyRecord, maxHp) == 4 &&
+    offsetof(NkmEnemyRecord, stats) == 0xC && offsetof(NkmEnemyRecord, flags) == 0x16 &&
+    offsetof(NkmEnemyRecord, resistances) == 0x24 && offsetof(NkmEnemyRecord, skills) == 0x48 &&
+    offsetof(NkmEnemyRecord, drops) == 0x58 && offsetof(NkmEnemyRecord, experience) == 0x6C &&
+    offsetof(NkmEnemyRecord, money) == 0x78 && offsetof(NkmEnemyRecord, linkedIds) == 0x7C &&
+    offsetof(NkmEnemyRecord, portraitId) == 0x88 && offsetof(NkmEnemyRecord, aiScriptName) == 0x8A &&
+    offsetof(NkmEnemyRecord, arrangementFirst) == 0x9E && offsetof(NkmEnemyRecord, selectionId) == 0xA0 &&
+    offsetof(NkmEnemyRecord, variant) == 0xA4 ? 1 : -1];
 
 /* Apocalypse's record. */
-struct Table00RecordA {
+struct NkmEnemyRecordA {
     /* 0x00 */ u16 id;
     /* 0x02 */ u16 level;               /* bit 15 is a flag */
     /* 0x04 */ s32 maxHp;
@@ -88,12 +89,12 @@ struct Table00RecordA {
     /* 0xA6 */ u8 unkA6[2];
 };
 
-typedef char Table00RecordAOffsetCheck[sizeof(Table00RecordA) == 0xA8 &&
-    offsetof(Table00RecordA, level) == 2 && offsetof(Table00RecordA, maxHp) == 4 &&
-    offsetof(Table00RecordA, stats) == 0xC && offsetof(Table00RecordA, flags) == 0x16 &&
-    offsetof(Table00RecordA, skills) == 0x50 && offsetof(Table00RecordA, choices) == 0x60 &&
-    offsetof(Table00RecordA, experience) == 0x74 && offsetof(Table00RecordA, relatedIds) == 0x80 &&
-    offsetof(Table00RecordA, portraitId) == 0x88 && offsetof(Table00RecordA, battleTextureId) == 0x8C &&
-    offsetof(Table00RecordA, bustUp) == 0xA2 && offsetof(Table00RecordA, variant) == 0xA4 && offsetof(Table00RecordA, scriptFlags) == 0xA5 ? 1 : -1];
+typedef char Table00RecordAOffsetCheck[sizeof(NkmEnemyRecordA) == 0xA8 &&
+    offsetof(NkmEnemyRecordA, level) == 2 && offsetof(NkmEnemyRecordA, maxHp) == 4 &&
+    offsetof(NkmEnemyRecordA, stats) == 0xC && offsetof(NkmEnemyRecordA, flags) == 0x16 &&
+    offsetof(NkmEnemyRecordA, skills) == 0x50 && offsetof(NkmEnemyRecordA, choices) == 0x60 &&
+    offsetof(NkmEnemyRecordA, experience) == 0x74 && offsetof(NkmEnemyRecordA, relatedIds) == 0x80 &&
+    offsetof(NkmEnemyRecordA, portraitId) == 0x88 && offsetof(NkmEnemyRecordA, battleTextureId) == 0x8C &&
+    offsetof(NkmEnemyRecordA, bustUp) == 0xA2 && offsetof(NkmEnemyRecordA, variant) == 0xA4 && offsetof(NkmEnemyRecordA, scriptFlags) == 0xA5 ? 1 : -1];
 
 #endif

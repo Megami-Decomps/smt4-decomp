@@ -1,6 +1,6 @@
 /* NON_MATCHING: skill targeting-mode tests and occupied-slot traversal branches are grouped differently. */
 /* Tests the selected skill target or each occupied party slot according to its targeting mode. */
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
 
@@ -10,7 +10,7 @@ s32 FUN_00333694(s32 target, s32 slot, s32 skill, s32 query);
 
 u32 FUN_002684d0(s32 skillId, s32 target)
 {
-    Table04RecordA *skill = dataTable04FindById(skillId);
+    SkillDataRecordA *skill = skillDataFindById(skillId);
     if (skill == NULL) {
         return 0;
     }

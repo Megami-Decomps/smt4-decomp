@@ -1,6 +1,6 @@
-/* NON_MATCHING: plays a demon's voice/motion line: picks the name slot of the 0x7c-byte record for the requested kind (with the random variants), copies the 10-character name, patches its trailing digits / suffix letter from the kind-specific override table, and starts it; written from the decompilation, the argument of devilGetRecord, the field read from its result and the base offset of the name slots inside the record are recovered from lost arguments, and the float scale arrives in s0 (VFP argument) */
+/* NON_MATCHING: plays a demon's voice/motion line: picks the name slot of the 0x7c-byte record for the requested kind (with the random variants), copies the 10-character name, patches its trailing digits / suffix letter from the kind-specific override table, and starts it; written from the decompilation, the argument of nkmBaseGetRecord, the field read from its result and the base offset of the name slots inside the record are recovered from lost arguments, and the float scale arrives in s0 (VFP argument) */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/DataTable.h"
 #include "code/Code0014.h"
 #include "util/Random.h"
@@ -86,7 +86,7 @@ void FUN_0015f490(u32 id, s32 kind, u32 argument, u32 variant, f32 scale)
         return;
     section = dataTableGet(LINE_TABLE, 0);
     s32 recordCount = dataTableGetCount(section);
-    const DevilRecordA *source = devilGetRecord(id & 0xFFFF);
+    const NkmBaseRecordA *source = nkmBaseGetRecord(id & 0xFFFF);
     if (source == NULL)
         return;
     u32 key;

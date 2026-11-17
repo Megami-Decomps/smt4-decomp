@@ -37,7 +37,7 @@ int FUN_004aa0b0(...);
 int VectorSignedToFloat(...);
 
 int padQueryLogicalKey(void);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int FUN_00284ee4(...);
 int btlIsDefeatSuppressed(void);
 int FUN_002c39dc(...);
@@ -110,7 +110,7 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframeThree. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: FUN_001a1ee0. */
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
@@ -449,7 +449,7 @@ unsigned int FUN_002248f8(void)
          (*(unsigned int *)(temp_v10 + 0x45a8) & DAT_0057a9f8) != 0) &&
        (temp_v10 = btlTalkBustUpIsUnk2F8(*(unsigned int *)(temp_v4 + 0x2364)), temp_v10 == 0)) {
       puVar8 = (unsigned short *)0x0;
-      dataTable00FindById();
+      nkmEnemyFindById();
       temp_v8 = 0;
       do {
         if ((int)(short)puVar8[0x46] == *(int *)(temp_v4 + 0x2364)) break;

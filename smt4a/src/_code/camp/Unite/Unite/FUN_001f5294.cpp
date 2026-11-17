@@ -105,7 +105,7 @@ int FUN_0037c8e4(...);
 int FUN_0037e1b0(...);
 
 int qsort(...);
-int devilGetRecord(...);
+int nkmBaseGetRecord(...);
 int uiSpriteSetKeyframe(...);
 int gameGetSlotRecord(...);
 int gameGetSlotTable(void);
@@ -222,7 +222,7 @@ extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: buttonHelpSelectSlot. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00184b90. */
@@ -1423,7 +1423,7 @@ LAB_001f6b9c:
               entryDefIsAvailable(temp_v5,puVar15);
               if (temp_v5 != 0) {
                 puVar12 = puVar15;
-                devilGetRecord();
+                nkmBaseGetRecord();
                 temp_v5 = FUN_002a4b28(*puVar12);
                 if ((temp_v5 != 0) || (temp_v5 = itemIsCollectedWithRelated(*puVar12), temp_v5 != 0)) {
                   temp_v24 = FUN_004da77c(*piVar3,puVar12[3],(int)*(char *)(temp_v4 + 0x43));
@@ -1489,7 +1489,7 @@ LAB_001f707c:
               entryDefIsAvailable(temp_v5,puVar15);
               if (temp_v5 != 0) {
                 puVar12 = puVar15;
-                devilGetRecord();
+                nkmBaseGetRecord();
                 temp_v24 = FUN_002a4b28(*puVar12);
                 temp_v10 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
                 if ((int)temp_v24 == 0) {
@@ -1856,7 +1856,7 @@ LAB_001f77ec:
         temp_v6 = listCursorGetRowIfUnblocked(piVar3 + 0x1876);
         temp_v1 = *(unsigned short *)((int)piVar3 + (temp_v6 + temp_v5) * 2 + 0x62a0);
       }
-      devilGetRecord((unsigned int)temp_v1);
+      nkmBaseGetRecord((unsigned int)temp_v1);
       rt_memclr((int)piVar3 + 0x6832,3000);
       temp_v7 = 0;
       piVar3[0x1cfb] = 0;
@@ -2087,7 +2087,7 @@ LAB_001f77ec:
         if ((char)piVar3[0x1a0c] == '\0') {
           FUN_0031f718((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
           temp_v7 = (piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2;
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v10 = computeCountLimit();
           if (temp_v10 < *(unsigned short *)(temp_v7 + 6)) {
             FUN_002c8550(0xd);
@@ -2306,7 +2306,7 @@ LAB_001f77ec:
             padQueryLogicalKey(0,1);
             if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
               puVar15 = (unsigned short *)((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
-              devilGetRecord();
+              nkmBaseGetRecord();
               temp_v4 = *(int *)(puVar15 + 0x22);
               temp_v5 = *(int *)(puVar15 + 0x24);
               temp_v6 = *(int *)(puVar15 + 0x26);
@@ -2849,7 +2849,7 @@ LAB_001f9868:
     eventQueueAddUniqueIfValid(0x100020e);
     FUN_002c8550(2);
     FUN_0033449c(0);
-    devilGetRecord(*(unsigned short *)((int)piVar3 + 0x66fe));
+    nkmBaseGetRecord(*(unsigned short *)((int)piVar3 + 0x66fe));
     FUN_003bb710(*(unsigned short *)((int)piVar3 + 0x66fe));
     uniteListRebuild(*(unsigned short *)((int)piVar3 + 0x66fe));
     *(short *)(piVar3 + 0x19b4) = (short)piVar3[0x22d8];
@@ -3396,7 +3396,7 @@ LAB_001fac50:
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 0xc);
           piVar3[0x172] = piVar3[0x172] + 1;
-          devilGetRecord((short)piVar3[0x148e]);
+          nkmBaseGetRecord((short)piVar3[0x148e]);
           temp_v26 = 1;
           temp_v25 = (int *)0x0;
           gridNavigationConfigure(piVar3 + 0x19f3,piVar3[0x172],5,1);
@@ -3495,7 +3495,7 @@ LAB_001fac1c:
   case 0x1c:
     temp_v46 = piVar3 + 0x1480;
     puVar15 = (unsigned short *)(unsigned int)*(unsigned short *)(piVar3 + 0x148e);
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v4 = 0;
     temp_v25 = (int *)0x0;
     if ((short)piVar3[0x23de] != 0) {
@@ -3775,7 +3775,7 @@ LAB_001fac1c:
                   temp_v28 = (int *)0x0;
                   temp_v29 = (int *)0x0;
                   temp_v7 = (unsigned int)*(unsigned short *)(g_unite + 0x148e);
-                  devilGetRecord();
+                  nkmBaseGetRecord();
                   temp_v31 = piVar19 + 0x22dc;
                   temp_v34 = temp_v7;
                   sysMemClear(temp_v31,0xc0);
@@ -4020,7 +4020,7 @@ joined_r0x001fbbe8:
         if ((char)piVar3[0x1a0c] == '\0') {
           FUN_0031f718((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
           temp_v7 = (piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2;
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v10 = computeCountLimit();
           if (temp_v10 < *(unsigned short *)(temp_v7 + 6)) {
             FUN_002c8550(0xd);
@@ -4060,7 +4060,7 @@ joined_r0x001fbbe8:
       if (piVar3[0x102] == 0x1c) {
         temp_v29 = piVar3 + 0x1480;
         piVar19 = (int *)(unsigned int)*(unsigned short *)(piVar3 + 0x148e);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v3 = 0;
         temp_v5 = 0;
         temp_v30 = piVar19;

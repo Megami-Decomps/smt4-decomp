@@ -23,7 +23,7 @@ void campCecPreviewEquipmentChoice(u32 itemId)
     OutfitPreviewEquipment equipment;
     __aeabi_memcpy4(&equipment, gameGetPlayerData(), sizeof(equipment));
     if (unitMatchesAlignment(itemId)) {
-        const EquipmentRecordA *item = dataTable08Sub2GetRecord(itemId);
+        const EquipmentRecordA *item = itemTableGetEquipmentRecord(itemId);
         switch (item->slot) {
         case 2: equipment.slots[0] = static_cast<u16>(itemId); break;
         case 3: equipment.slots[1] = static_cast<u16>(itemId); break;

@@ -1,9 +1,9 @@
 #include "gamedata/PartySlots.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" void partyIdsActivateEntry(PartySlots* party, u32 id)
 {
-    const DevilRecordA* record = devilGetRecord(id);
+    const NkmBaseRecordA* record = nkmBaseGetRecord(id);
     if (record == NULL || record->model >= 0x27F) {
         return;
     }

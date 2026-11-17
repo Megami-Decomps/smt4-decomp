@@ -73,14 +73,14 @@ extern "C" void battleInitializeEnemyFormation(BtlMainState *state)
     formation->scaleY = 1.0f;
     FUN_0027dc24(state, battleEnemyFormation(state), 1);
     if (g_btlMainState.enemyOverride > 0) {
-        const DevilDefinition *definition = reinterpret_cast<const DevilDefinition *>(dataTable00FindById((u16)g_btlMainState.enemyOverride));
+        const DevilDefinition *definition = reinterpret_cast<const DevilDefinition *>(nkmEnemyFindById((u16)g_btlMainState.enemyOverride));
         BtlEntry temporary;
         FUN_0023ebc8(state, battleUnitPayload(&temporary), definition);
         FUN_00255e38(state, battleUnitPayload(&temporary), 1, 4, 0);
     } else {
         for (u16 index = 0; index < 6; ++index) {
             if (battleEnemyFormation(state)->ids[index] != 0) {
-                const DevilDefinition *definition = reinterpret_cast<const DevilDefinition *>(dataTable00FindById((u16)battleEnemyFormation(state)->ids[index]));
+                const DevilDefinition *definition = reinterpret_cast<const DevilDefinition *>(nkmEnemyFindById((u16)battleEnemyFormation(state)->ids[index]));
                 if (definition != NULL) {
                     BtlEntry temporary;
                     FUN_0023ebc8(state, battleUnitPayload(&temporary), definition);

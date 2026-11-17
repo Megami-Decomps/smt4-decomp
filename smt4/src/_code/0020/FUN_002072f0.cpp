@@ -19,8 +19,8 @@ static inline s32 compareRaceThenRank(const s32 *left, const s32 *right)
     } else {
         StatBlock *first = gameGetUnitRecord(*left);
         StatBlock *second = gameGetUnitRecord(*right);
-        DevilRecord *firstDemon = devilGetRecord(first->id);
-        DevilRecord *secondDemon = devilGetRecord(second->id);
+        NkmBaseRecord *firstDemon = nkmBaseGetRecord(first->id);
+        NkmBaseRecord *secondDemon = nkmBaseGetRecord(second->id);
         result = secondDemon->race - firstDemon->race;
         if (result == 0) {
             return devilSortCompareUnitRankRaceId(left, right);
@@ -51,8 +51,8 @@ s32 FUN_002072f0(const s32 *left, const s32 *right)
         };
         StatBlock *first = gameGetUnitRecord(*left);
         StatBlock *second = gameGetUnitRecord(*right);
-        DevilPriorityView *firstDemon = (DevilPriorityView *)devilGetRecord(first->id);
-        DevilPriorityView *secondDemon = (DevilPriorityView *)devilGetRecord(second->id);
+        DevilPriorityView *firstDemon = (DevilPriorityView *)nkmBaseGetRecord(first->id);
+        DevilPriorityView *secondDemon = (DevilPriorityView *)nkmBaseGetRecord(second->id);
         order = (s32)secondDemon->priority - firstDemon->priority;
         if (order == 0) {
             return compareRaceThenRank(left, right);

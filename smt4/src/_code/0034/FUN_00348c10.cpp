@@ -30,7 +30,7 @@ void FUN_00348c10(u16 itemId, s32 change)
     if (selected != 0) {
         if (table1bOr1cGetRecordValue(selected) != 1)
             return;
-        const QuestRecord *quest = dataTable1bOr1cGetRecord(selected);
+        const QuestRecord *quest = questDataGetRecord(selected);
         QuestNotificationView *notification = reinterpret_cast<QuestNotificationView *>(gameGetMapBlock());
         for (s32 index = 0; index < 6; ++index) {
             const QuestRequirement &requirement = quest->requirements[index];
@@ -61,7 +61,7 @@ void FUN_00348c10(u16 itemId, s32 change)
         u16 questId = flags->accepted[slot].id;
         if (questId == 0)
             continue;
-        const QuestRecord *quest = dataTable1bOr1cGetRecord(questId);
+        const QuestRecord *quest = questDataGetRecord(questId);
         if (quest->kind != 1)
             continue;
         QuestNotificationView *notification = reinterpret_cast<QuestNotificationView *>(gameGetMapBlock());

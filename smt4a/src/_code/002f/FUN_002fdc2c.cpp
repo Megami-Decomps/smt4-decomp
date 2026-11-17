@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int FUN_002f744c(unsigned char);
 
 
@@ -20,18 +20,18 @@ unsigned int FUN_002fdc2c(unsigned short *param_1,unsigned short *param_2)
   int temp_v3;
   
   temp_v0 = (unsigned int)*param_1;
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   temp_v1 = (unsigned int)*param_2;
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
   if ((temp_v0 != 0 && temp_v1 != 0) &&
      (temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xdc) - (unsigned int)*(unsigned short *)(temp_v1 + 0xdc), temp_v1 == 0)) {
     temp_v1 = (unsigned int)*param_1;
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     temp_v0 = (unsigned int)*param_2;
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if (temp_v1 == 0 || temp_v0 == 0) {
       return 0;
     }
@@ -40,9 +40,9 @@ unsigned int FUN_002fdc2c(unsigned short *param_1,unsigned short *param_2)
     temp_v1 = temp_v2 - temp_v3;
     if (temp_v1 == 0) {
       temp_v1 = (unsigned int)*param_1;
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       temp_v0 = (unsigned int)*param_2;
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       if (temp_v1 == 0 || temp_v0 == 0) {
         return 0;
       }

@@ -23,14 +23,14 @@ static __inline u32 equipmentGetTypeSortValue(u32 id)
     case 6:
     case 7:
     case 8:
-        value = dataTable08Sub2GetRecord(id)->priority;
+        value = itemTableGetEquipmentRecord(id)->priority;
         break;
     case 0:
         value = contentEntryFindById2(id)->value;
         break;
     case 1:
     case 12:
-        value = dataTable8FindRecord(id)->sortFlags & 0xFF;
+        value = itemTableGetItemRecord(id)->sortFlags & 0xFF;
         break;
     }
     return value;

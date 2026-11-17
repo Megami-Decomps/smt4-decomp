@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "script/ScriptArgs.h"
 
@@ -14,7 +14,7 @@ u32 scrCommBtlAnyUnitDevilKind4(void)
         BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-            if (devilGetRecord(unit->id)->category == 4) {
+            if (nkmBaseGetRecord(unit->id)->category == 4) {
                 scrSetResult(1);
                 return 1;
             }

@@ -8,8 +8,8 @@ u32 randNextInRange(u32);
 u32 FUN_003c88f0(u32 tableId, const GameUnitSortRecord* first, const GameUnitSortRecord* second)
 {
     u16 denominator = dataTable05Sub0GetEntries(tableId)->second;
-    DevilRecord* firstDevil = devilGetRecord(first->id);
-    DevilRecord* secondDevil = devilGetRecord(second->id);
+    NkmBaseRecord* firstDevil = nkmBaseGetRecord(first->id);
+    NkmBaseRecord* secondDevil = nkmBaseGetRecord(second->id);
     if (firstDevil->race == 0x23 || secondDevil->race == 0x23) {
         denominator /= 2;
     }

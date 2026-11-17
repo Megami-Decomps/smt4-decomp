@@ -7,7 +7,7 @@ extern "C" {
 
 void asdMemFree(void *block);
 void scrScriptProcessDestroy(void *process);
-u8 *dataTable00FindById(u32 id);
+u8 *nkmEnemyFindById(u32 id);
 void sysMemClear(void *dst, u32 size);
 void textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00240c34(const char *path);
@@ -37,7 +37,7 @@ void FUN_00222488(BtlAiScriptActor *actor)
         script->unk0C = 1;
         g_aocSystem->aiDemonId = -1;
         btlGetMainState();
-        name = (const char *)(dataTable00FindById(actor->demon->id) + 0x8E);
+        name = (const char *)(nkmEnemyFindById(actor->demon->id) + 0x8E);
         sysMemClear(path, sizeof(path));
         textFormatBuffer(path, DAT_00527f94, name);
         if (FUN_00240c34(path) == 0) {

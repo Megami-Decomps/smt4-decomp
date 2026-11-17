@@ -80,7 +80,7 @@ void questCenterInitEntry(void* context)
     qcMainSetMode(0);
     u16 id = 0x15e;
     do {
-        const QuestRecordA* record = dataTable1bOr1cGetRecord(id);
+        const QuestRecordA* record = questDataGetRecord(id);
         if (record && !record->kind && !gameFlagEntryGetBit(id, 1)) {
             FUN_00417e08(id);
         }

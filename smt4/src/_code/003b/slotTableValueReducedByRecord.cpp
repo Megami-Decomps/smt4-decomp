@@ -1,12 +1,12 @@
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
-typedef struct DevilRecord {
+typedef struct NkmBaseRecord {
     /* 0x00 */ u8 unk00[0x38];
     /* 0x38 */ u32 flags;      /* bits 16..22: percentage taken off */
-} DevilRecord;
+} NkmBaseRecord;
 
 extern s32 *gameGetSlotTable(void);
 
@@ -14,7 +14,7 @@ extern s32 *gameGetSlotTable(void);
 s32 slotTableValueReducedByRecord(s32 arg)
 {
     s32 result = 0;
-    DevilRecord *record = reinterpret_cast<DevilRecord *>(dataTable40FindById(arg));
+    NkmBaseRecord *record = reinterpret_cast<NkmBaseRecord *>(skillDataFindById(arg));
 
     if (record != NULL && (record->flags & 0x7F0000) != 0) {
         result = *gameGetSlotTable() * (100 - (s32)((record->flags >> 16) & 0x7F)) / 100;

@@ -15,13 +15,13 @@ s32 FUN_002dc9d4(const DevilSkillEntry *left, const DevilSkillEntry *right)
 {
     const PassiveSkillRecord *leftSkill = dataTable12FindBySortKey(left->skillId);
     const PassiveSkillRecord *rightSkill = dataTable12FindBySortKey(right->skillId);
-    devilGetRecord(left->devilId);
-    devilGetRecord(right->devilId);
+    nkmBaseGetRecord(left->devilId);
+    nkmBaseGetRecord(right->devilId);
     s32 rightCategory = FUN_00257444(static_cast<s16>(rightSkill->sortKey));
     s32 difference = rightCategory - FUN_00257444(static_cast<s16>(leftSkill->sortKey));
     if (difference == 0) {
-        const DevilRecord *leftDevil = devilGetRecord(left->devilId);
-        const DevilRecord *rightDevil = devilGetRecord(right->devilId);
+        const NkmBaseRecord *leftDevil = nkmBaseGetRecord(left->devilId);
+        const NkmBaseRecord *rightDevil = nkmBaseGetRecord(right->devilId);
         difference = rightDevil->race - leftDevil->race;
         if (difference == 0) {
             difference = rightDevil->level - leftDevil->level;

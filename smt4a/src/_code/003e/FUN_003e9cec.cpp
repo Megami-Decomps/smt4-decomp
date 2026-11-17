@@ -1,6 +1,6 @@
 /* NON_MATCHING: two scheduling differences only (the 0x1BE clear's address temp is computed after the 0x110 stores, and one skill-slot bitfield update loads its old halfword after instead of before the shift); 147 rows each. */
 #include "battle/BattleUnitInit.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -16,7 +16,7 @@ void sysMemClear(void *memory, u32 size);
  * one of the party's slots. */
 void FUN_003e9cec(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s32 enemy)
 {
-    DevilRecordA *model;
+    NkmBaseRecordA *model;
     s32 i;
 
     unit->kind = 2;
@@ -31,7 +31,7 @@ void FUN_003e9cec(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s
     unit->clearedD4[0] = 0;
     unit->clearedD4[1] = 0;
     unit->clearedD4[2] = 0;
-    model = devilGetRecord(unit->sourceId);
+    model = nkmBaseGetRecord(unit->sourceId);
     if ((model->extraFlags & 1) != 0) {
         unit->clearedD4[3] = 0;
     } else {

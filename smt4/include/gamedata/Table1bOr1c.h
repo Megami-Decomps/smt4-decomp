@@ -1,4 +1,4 @@
-/* Records of data table 0x1b/0x1c (see dataTable1bOr1cGetRecord). */
+/* Records of data table 0x1b/0x1c (see questDataGetRecord). */
 #ifndef SMT4_GAMEDATA_TABLE1BOR1C_H
 #define SMT4_GAMEDATA_TABLE1BOR1C_H
 

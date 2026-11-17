@@ -42,7 +42,7 @@ int FUN_0029c4c8(...);
 int buttonHelpSetText(...);
 int buttonHelpGetMode(void);
 int partyMemberFindById(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int table08ApplyToParty(...);
 
 int FUN_001d1828(void);
@@ -230,7 +230,7 @@ extern int buttonHelpGetStatus(void);
 extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -1983,7 +1983,7 @@ LAB_001c6d98:
         FUN_002c1658(0,1);
         if (temp_v6 != 0) {
           temp_v15 = (*(unsigned int *)(temp_v1 + 0xb4c) & 0x1ffff) >> 2;
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v10 = FUN_0029dde0();
           if (temp_v10 >= *(unsigned char *)(temp_v15 + 3)) {
             temp_v6 = 0;

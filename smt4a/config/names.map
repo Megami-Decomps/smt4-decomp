@@ -2511,7 +2511,7 @@
 0019a840 asdTextureSetImage
 0019c6bc idIsAbove400
 0019c8c0 resOwnerRunNodeHandlers
-0019cac4 dataTable00FindById
+0019cac4 nkmEnemyFindById
 0019cba8 asdMdlNodeInit
 0019f18c idIsAtLeast350
 001a089c nn_os_LightEvent_Initialize
@@ -2534,7 +2534,7 @@
 001ab888 gameGetSlotTable
 001ab8ac asdFileRequestHasFailed
 001ab940 gameFlagBlockGet
-001aba54 dataTable04FindById
+001aba54 skillDataFindById
 001abac8 gameFlagBlockGetEntry
 001acf08 effGetFrameStep
 001add24 dataTableFree
@@ -5244,7 +5244,7 @@
 003cacf0 scrBtlResetEligibleEntryById
 001a2638 osConvertToPhysicalAddress
 00294970 mapHakaiDeleteObjects
-00192550 dataTable8FindRecord
+00192550 itemTableGetItemRecord
 00244bb4 nameTableFind
 001abae0 asdFileAddEntry
 002deeb8 btlHelpRelease
@@ -5719,7 +5719,7 @@
 002e5ae8 readerSeek
 0035bbc4 keyedRecordsFreeAll
 0032fea0 arrayContainsU16
-00192608 dataTable08Sub2GetRecord
+00192608 itemTableGetEquipmentRecord
 0020e71c slotCountdownTick
 00375b80 devilCompareBySetRaceLevel
 002a4aa4 saveNameBlockReset
@@ -6520,7 +6520,7 @@
 0016f988 asdModelForwardChecked
 00170d8c nn_applet_CTR_detail_CallUtility
 00180280 texTableRecordCall
-00184310 devilGetRecord
+00184310 nkmBaseGetRecord
 0018a45c soundBlockGetPayloadEnd
 0018c87c nw_ut_internal_LinkListImpl_erase_2BAE30
 001927c0 slotOwnerDestroyAllSlots
@@ -6531,7 +6531,7 @@
 001a6c40 _ZN9Obj422224C1Ev
 001aa14c nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue
 001ab89c dataTable00CompareRecordIds
-001ad9b4 dataTable1bOr1cGetRecord
+001ad9b4 questDataGetRecord
 001b6668 nw_ut_internal_LinkListImpl_erase_2B743C
 001ba204 aocTexExpandCompressedData
 001bad18 nw_gfx_SceneBuilder_CreateObjectByResourceType

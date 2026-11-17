@@ -53,7 +53,7 @@ u8 FUN_0034888c(u32 id)
     status->flags = (status->flags & ~2) | 0x1c;
     status->stateFlags &= ~4;
     if (FUN_00298f88(id)) {
-        if (dataTable1bOr1cGetRecord(id)->kind == 1) {
+        if (questDataGetRecord(id)->kind == 1) {
             for (s32 i = 0; i < 4; ++i) {
                 if (active->repeated[i].id == id) {
                     active->repeated[i].id = 0;
@@ -63,7 +63,7 @@ u8 FUN_0034888c(u32 id)
     } else if (reinterpret_cast<ActiveQuests *>(gameGetFlagBlock())->selected == id) {
         active->selected = 0;
         clearSelectedQuestFlags();
-    } else if (!table1bOr1cGetRecordValue(id) && (dataTable1bOr1cGetRecord(id)->flags & 2)) {
+    } else if (!table1bOr1cGetRecordValue(id) && (questDataGetRecord(id)->flags & 2)) {
         FUN_0028eeb8(id);
     }
     return 1;

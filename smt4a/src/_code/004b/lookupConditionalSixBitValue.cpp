@@ -41,7 +41,7 @@ u32 lookupConditionalSixBitValue(u32 id)
             }
         }
         if (gameUnlockRecordRequirementsMet(entry->ownerId)) {
-            const QuestRecordA *owner = dataTable1bOr1cGetRecord(entry->ownerId);
+            const QuestRecordA *owner = questDataGetRecord(entry->ownerId);
             if (owner) {
                 u16 playerValue = gameGetPlayerData()->level;
                 if (owner->requiredLevel && owner->requiredLevel <= playerValue)

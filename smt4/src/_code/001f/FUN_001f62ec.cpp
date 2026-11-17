@@ -17,8 +17,8 @@ static inline s32 entryCategoryPriority(u8 kind)
 }
 extern "C" s32 FUN_001f62ec(const u16 *leftId, const u16 *rightId)
 {
-    const QuestRecord *left = dataTable1bOr1cGetRecord(*leftId);
-    const QuestRecord *right = dataTable1bOr1cGetRecord(*rightId);
+    const QuestRecord *left = questDataGetRecord(*leftId);
+    const QuestRecord *right = questDataGetRecord(*rightId);
     if (!left)
         return 0;
     if (!right)
@@ -26,8 +26,8 @@ extern "C" s32 FUN_001f62ec(const u16 *leftId, const u16 *rightId)
     s32 result = entryCategoryPriority(left->kind) - entryCategoryPriority(right->kind);
     if (result != 0)
         return result;
-    left = dataTable1bOr1cGetRecord(*leftId);
-    right = dataTable1bOr1cGetRecord(*rightId);
+    left = questDataGetRecord(*leftId);
+    right = questDataGetRecord(*rightId);
     if (!left)
         return 0;
     if (!right)

@@ -33,7 +33,7 @@ u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 leve
                 continue;
             }
             if (validate) {
-                DevilRecord *record = devilGetRecord(entry->id);
+                NkmBaseRecord *record = nkmBaseGetRecord(entry->id);
                 if (record->fusionRestrictions & 0x1c00000) {
                     continue;
                 }

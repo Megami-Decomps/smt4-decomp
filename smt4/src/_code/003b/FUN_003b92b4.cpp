@@ -117,7 +117,7 @@ void FUN_003b92b4(SceneWork *work)
         if (entry != NULL && table1bOr1cGetRecordValue(reinterpret_cast<u32>(entry)) == 6) {
             work->record = FUN_0022b8c0(work->sprites);
             gameSynchronizeMapState(work);
-            FUN_0026f960(dataTable1bOr1cGetRecord(reinterpret_cast<u32>(entry))->event.package);
+            FUN_0026f960(questDataGetRecord(reinterpret_cast<u32>(entry))->event.package);
         }
     } else if (work->requestEnding != 0) {
         bgmReleaseStopped();

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 
 extern int g_unite; /* 0x57f290 */
 
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 
 
 int FUN_002fd93c(unsigned short *param_1,unsigned short *param_2)
@@ -26,13 +26,13 @@ int FUN_002fd93c(unsigned short *param_1,unsigned short *param_2)
   puVar5 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x13b8) & 0x7fff);
   puVar6 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x13b8) & 0x7fff);
   puVar2 = puVar5;
-  devilGetRecord();
+  nkmBaseGetRecord();
   puVar3 = puVar6;
-  devilGetRecord();
+  nkmBaseGetRecord();
   temp_v1 = (unsigned int)puVar3[3] - (unsigned int)puVar2[3];
   if (temp_v1 == 0) {
-    devilGetRecord();
-    devilGetRecord();
+    nkmBaseGetRecord();
+    nkmBaseGetRecord();
     temp_v1 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
     if ((temp_v1 == 0) && (temp_v1 = (unsigned int)puVar5[3] - (unsigned int)puVar6[3], temp_v1 == 0)) {
       temp_v1 = (unsigned int)*puVar6 - (unsigned int)*puVar5;
@@ -42,13 +42,13 @@ int FUN_002fd93c(unsigned short *param_1,unsigned short *param_2)
     puVar5 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_1 * 8 + 0x13b8) & 0x3fffffff) >> 0xf);
     puVar6 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_2 * 8 + 0x13b8) & 0x3fffffff) >> 0xf);
     puVar2 = puVar5;
-    devilGetRecord();
+    nkmBaseGetRecord();
     puVar3 = puVar6;
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v1 = (unsigned int)puVar3[3] - (unsigned int)puVar2[3];
     if (temp_v1 == 0) {
-      devilGetRecord();
-      devilGetRecord();
+      nkmBaseGetRecord();
+      nkmBaseGetRecord();
       temp_v1 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
       if ((temp_v1 == 0) && (temp_v1 = (unsigned int)puVar5[3] - (unsigned int)puVar6[3], temp_v1 == 0)) {
         temp_v1 = (unsigned int)*puVar6 - (unsigned int)*puVar5;

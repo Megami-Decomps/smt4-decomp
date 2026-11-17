@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/GamePlayerData.h"
 
 struct Table01Record;
@@ -18,10 +18,10 @@ void asdMemFree(void *memory);
 
 u32 btlTalkCommand_SelectTalkTarget()
 {
-    Table00Record *source = dataTable00FindById((u16)scrGetArg(0));
+    NkmEnemyRecord *source = nkmEnemyFindById((u16)scrGetArg(0));
     u16 target = source->talkTargetId;
-    Table00Record *record = dataTable00FindById(target);
-    devilGetRecord(target);
+    NkmEnemyRecord *record = nkmEnemyFindById(target);
+    nkmBaseGetRecord(target);
     if (target && record && (record->flags & 0x400) &&
         gameGetPlayerData()->level >= record->level && !partyHasStoredDemon(target)) {
         scrSetResult(target);
@@ -47,8 +47,8 @@ u32 btlTalkCommand_SelectTalkTarget()
                 low = 1;
             }
             for (u32 id = 1; id <= 1200; ++id) {
-                DevilRecord *devil = devilGetRecord((u16)id);
-                Table00Record *data = dataTable00FindById((u16)id);
+                NkmBaseRecord *devil = nkmBaseGetRecord((u16)id);
+                NkmEnemyRecord *data = nkmEnemyFindById((u16)id);
                 if (devil->level >= low && devil->level <= high &&
                     (data->flags & 0x400) && !partyHasStoredDemon(devil->id)) {
                     dataTable01FindByIdWithAoc(devil->id);

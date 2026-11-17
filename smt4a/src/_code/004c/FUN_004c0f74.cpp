@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
 
 struct CombatantAffinityPreview {
@@ -43,7 +43,7 @@ u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
 {
     CombatantAffinityPreview action = btlEntryBuildSummary(btlGetMainState(), entry);
     if (action.skill != 0) {
-        AffinitySkillTailView *skill = (AffinitySkillTailView *)dataTable04FindById(action.skill);
+        AffinitySkillTailView *skill = (AffinitySkillTailView *)skillDataFindById(action.skill);
         if (skill != NULL && skill->element != 0 && skill->element - 1 == element)
             return 1;
     }

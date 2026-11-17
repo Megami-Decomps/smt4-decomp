@@ -11,9 +11,9 @@ int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
 int FUN_002b6db0(...);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6940(...);
 int FUN_002b6c34(...);
@@ -66,12 +66,12 @@ extern int listCursorGetRowIfUnblocked(unsigned int);
 extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: FUN_002b6940. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
@@ -150,7 +150,7 @@ void FUN_002f1558(int param_1)
       temp_v13 = param_1 + temp_v3 * 0x2c;
       if (*(char *)(temp_v13 + 0x5778) != '\0') {
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v13 + 0x5760);
-        dataTable00FindById();
+        nkmEnemyFindById();
         if ((*(unsigned char *)(temp_v5 + 3) & 1) != 0) {
           if (*(char *)(param_1 + 0x575f) != '\0') {
             temp_v6 = asdTMTexTableEntryAt(0x15,0x1a0);
@@ -409,7 +409,7 @@ void FUN_002f1558(int param_1)
     }
     else {
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
-      devilGetRecord();
+      nkmBaseGetRecord();
       if (*(char *)(temp_v5 + 10) != '\x01') {
         textFormatBuffer(temp_v18,&LAB_002f1ff4,&LAB_002f1ff8);
       }

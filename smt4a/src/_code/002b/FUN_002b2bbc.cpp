@@ -10,16 +10,16 @@ s32 FUN_002b2bbc(u16 *idA, u16 *idB)
 {
     s16 valuesA[8];
     s16 valuesB[8];
-    EquipmentRecordA *recordA = dataTable08Sub2GetRecord(*idA);
-    EquipmentRecordA *recordB = dataTable08Sub2GetRecord(*idB);
+    EquipmentRecordA *recordA = itemTableGetEquipmentRecord(*idA);
+    EquipmentRecordA *recordB = itemTableGetEquipmentRecord(*idB);
     s32 diff;
 
     equipmentGetCappedUpgradeBonuses(*idA, valuesA);
     equipmentGetCappedUpgradeBonuses(*idB, valuesB);
     diff = (valuesB[0] + recordB->hpBonus) - (valuesA[0] + recordA->hpBonus);
     if (diff == 0) {
-        recordA = dataTable08Sub2GetRecord(*idA);
-        recordB = dataTable08Sub2GetRecord(*idB);
+        recordA = itemTableGetEquipmentRecord(*idA);
+        recordB = itemTableGetEquipmentRecord(*idB);
         diff = recordA->order - recordB->order;
     }
     return diff;

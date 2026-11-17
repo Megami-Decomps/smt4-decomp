@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -33,8 +33,8 @@ s32 btlSkillCompareBySortKey(const u16 *a, const u16 *b)
     if (*b == 0) {
         return 0;
     }
-    void *skillA = dataTable04FindById(*a);
-    void *skillB = dataTable04FindById(*b);
+    void *skillA = skillDataFindById(*a);
+    void *skillB = skillDataFindById(*b);
     if (skillA == NULL) {
         return 0;
     }

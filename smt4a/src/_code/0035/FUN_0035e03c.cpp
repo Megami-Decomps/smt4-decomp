@@ -4,7 +4,7 @@
 #include "mapnavi/naviMain.h"
 
 #include "code/Code002e.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/GamePlayerData.h"
 
 /* A party unit's record (only the fields used here). */

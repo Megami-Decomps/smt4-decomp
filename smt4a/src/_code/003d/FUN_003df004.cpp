@@ -17,7 +17,7 @@ s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress)
 {
     s32 result = 0;
     progress->unk07 = 0;
-    QuestRecordA *definition = dataTable1bOr1cGetRecord(quest);
+    QuestRecordA *definition = questDataGetRecord(quest);
     if (definition == NULL) {
         return result;
     }

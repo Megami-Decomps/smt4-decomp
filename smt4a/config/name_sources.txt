@@ -7410,3 +7410,9 @@
 00432104 ipcServiceSessionRelease inferred [med] drops one reference to the service session, closing the handle on the last
 00301490 onlineSocketObjectConstruct inferred [med] constructs socket address and resets socket object; called by objectNew40
 00497044 _ZN9Obj53604427sceneMarkActiveEnterState21Ev inferred Member of Obj536044 (state 20 handler): sets flag bit 0 and enters command state 21.
+00184310 nkmBaseGetRecord inferred Finds a demon's base record by id in battle/NKMBaseTable.tbb table 0 (0x94-byte rows; the game keeps demon data under gamedata/nkm/, nkm = nakama).
+0019cac4 nkmEnemyFindById inferred Finds a demon's enemy record by id in battle/NKMBaseTable.tbb table 1 (0xA8-byte rows: level, HP, MP, stats, drops, AI script).
+001aba54 skillDataFindById inferred Finds a skill record by id in battle/SkillData.tbb table 0. Twin of smt4 skillDataFindById.
+00192550 itemTableGetItemRecord inferred Finds an item record by id in item/ItemTable.tbb table 1. Twin of smt4 itemTableGetItemRecord.
+00192608 itemTableGetEquipmentRecord inferred Finds an equipment record by id in item/ItemTable.tbb table 2 (0xA8-byte rows in IV: id 0x50, buy 0x9C, sell 0xA0).
+001ad9b4 questDataGetRecord inferred Finds a quest record by id in event/quest/QuestData.tbb (0x1B4-byte rows in IV).

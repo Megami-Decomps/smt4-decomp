@@ -4,8 +4,8 @@ extern "C" u32 partyEntryFlagsBit3(u16 id);
 
 static __inline s32 compareQuestOrder(const u16* left, const u16* right)
 {
-    QuestRecordA* a = dataTable1bOr1cGetRecord(*left);
-    QuestRecordA* b = dataTable1bOr1cGetRecord(*right);
+    QuestRecordA* a = questDataGetRecord(*left);
+    QuestRecordA* b = questDataGetRecord(*right);
     s32 result = 0;
     if (a != NULL && b != NULL) {
         result = b->order - a->order;
@@ -25,8 +25,8 @@ extern "C" s32 FUN_002fdb20(const u16* left, const u16* right)
     if ((completedLeft & ~completedRight) != 0) {
         result = -1;
     } else if (result == 0) {
-        QuestRecordA* a = dataTable1bOr1cGetRecord(*left);
-        QuestRecordA* b = dataTable1bOr1cGetRecord(*right);
+        QuestRecordA* a = questDataGetRecord(*left);
+        QuestRecordA* b = questDataGetRecord(*right);
         if (a == NULL) {
             return 0;
         }

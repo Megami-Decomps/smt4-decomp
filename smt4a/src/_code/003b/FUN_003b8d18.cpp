@@ -4,8 +4,8 @@
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlTables.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ s32 randRange(u32 maximum);
 
 u32 FUN_003b8d18(void)
 {
-    Table00RecordA *record = dataTable00FindById((u16)scrGetArg(0));
+    NkmEnemyRecordA *record = nkmEnemyFindById((u16)scrGetArg(0));
     u32 candidates[128];
     sysMemClear(candidates, sizeof(candidates));
     u8 count = 0;

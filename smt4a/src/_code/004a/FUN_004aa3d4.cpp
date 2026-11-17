@@ -1,6 +1,6 @@
 /* NON_MATCHING: global UI ownership is corrected; attack-label resource accessors and shared case exits still differ. */
 #include "battle/btlUI.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/GameDataAccess.h"
 #include "mapnavi/naviMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -89,7 +89,7 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
             textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
             kindValue = FUN_0022fcb8();
         } else {
-            DevilRecordA *record = devilGetRecord(recordId);
+            NkmBaseRecordA *record = nkmBaseGetRecord(recordId);
             textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b", record->kind);
             kindValue = dataRecordGetKindValue(recordId);
         }

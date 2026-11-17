@@ -14,13 +14,13 @@ extern "C" s32 contentGetKindValue(u32 id)
     case 4:
     case 5:
     case 6:
-        value = dataTable08Sub2GetRecord(id)->hpBonus;
+        value = itemTableGetEquipmentRecord(id)->hpBonus;
         break;
     case 7:
-        value = dataTable08Sub2GetRecord(id)->mpBonus;
+        value = itemTableGetEquipmentRecord(id)->mpBonus;
         break;
     default:
-        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecord *record = itemTableGetEquipmentRecord(id);
         if (record != NULL)
             value = recordGetPercentageScaledBase(record);
         break;

@@ -1,5 +1,5 @@
-/* IV's item records: data table 8, section 1 (0x80 bytes each), found by id with
- * dataTable08Sub1GetRecord(). Apocalypse's layout is ConsumableRecordA (gamedata/ConsumableRecordA.h). */
+/* IV's item records: item/ItemTable.tbb table 1 (the game's data table 8, section 1; 0x80 bytes each), found by id with
+ * itemTableGetItemRecord(). Apocalypse's layout is ConsumableRecordA (gamedata/ConsumableRecordA.h). */
 #ifndef GAMEDATA_CONSUMABLERECORD_H
 #define GAMEDATA_CONSUMABLERECORD_H
 
@@ -42,7 +42,7 @@ typedef char ConsumableRecordOffsetCheck[sizeof(ConsumableRecord) == 0x80 &&
 extern "C" {
 
 /* The item record with `id`: the add-on's first, else a search of data table 8/1. */
-ConsumableRecord *dataTable08Sub1GetRecord(u32 id);
+ConsumableRecord *itemTableGetItemRecord(u32 id);
 
 } /* extern "C" */
 

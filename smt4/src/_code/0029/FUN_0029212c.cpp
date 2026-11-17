@@ -11,9 +11,9 @@ int FUN_002907c4(...);
 int textEncodeFontSlot(...);
 int asdTextDrawDirectoryEntry(...);
 int FUN_0029ede8(...);
-int dataTable40FindById(void);
-int dataTable08Sub2GetRecord(void);
-int dataTable08Sub1GetRecord(void);
+int skillDataFindById(void);
+int itemTableGetEquipmentRecord(void);
+int itemTableGetItemRecord(void);
 int textFormatBuffer(...);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -40,10 +40,10 @@ extern int DAT_0043da2c; /* 0x43da2c */
 extern int FUN_00295cec(void);
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: dataTable40FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern unsigned int aocEntryGetKind(int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 extern unsigned int recordPackedValue(int);
 extern unsigned int aocIndexValueOrDefault(void);
 /* Supplied declaration required: textFormatBuffer. */
@@ -104,7 +104,7 @@ void FUN_0029212c(int param_1)
     return;
   case 1:
     temp_v8 = temp_v5;
-    dataTable08Sub1GetRecord();
+    itemTableGetItemRecord();
     if (*(short *)(temp_v8 + 0x76) != 0) {
       temp_v5 = FUN_00295cec();
       FUN_0029ede8(0x24,temp_v5,0xffffffff,0);
@@ -117,7 +117,7 @@ void FUN_0029212c(int param_1)
     else {
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v8 + 0x62);
       if (temp_v6 != 0) {
-        dataTable40FindById();
+        skillDataFindById();
         skillFormatTargetLabel(&temp_v12,(*(unsigned int *)(temp_v6 + 0x28) & 0x1ff) >> 5);
       }
       else if ((*(unsigned char *)(temp_v8 + 0x6a) & 0x80) != 0) {
@@ -138,7 +138,7 @@ void FUN_0029212c(int param_1)
   case 2:
   case 3:
   case 8:
-    dataTable08Sub2GetRecord();
+    itemTableGetEquipmentRecord();
     FUN_0029ede8(0x24,*(unsigned int *)(temp_v5 + 0x54) & 0x3ff,0xffffffff,0);
     temp_v0 = *(unsigned char *)(temp_v5 + 0x58);
     if ((temp_v0 & 0xf) == temp_v0 >> 4) {
@@ -181,7 +181,7 @@ void FUN_0029212c(int param_1)
   case 5:
   case 6:
   case 7:
-    dataTable08Sub2GetRecord();
+    itemTableGetEquipmentRecord();
     temp_v8 = 0;
     do {
       temp_v10 = (int)*(char *)(temp_v5 + temp_v8 + 0x61);

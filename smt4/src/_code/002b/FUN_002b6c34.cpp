@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001386f8(void);
-int dataTable40FindById(void);
+int skillDataFindById(void);
 int texTableRecordCallWithParams(int, int, unsigned int, int, int, int);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(void);
@@ -23,7 +23,7 @@ extern unsigned char LAB_002b6dac; /* 0x2b6dac */
 
 /* Supplied declaration required: FUN_001386f8. */
 extern int playerGetSkillRank(unsigned int);
-/* Supplied declaration required: dataTable40FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int idIsAbove400(void);
 extern unsigned int categoryIdFromIndex(unsigned int);
 /* Supplied declaration required: texTableRecordCallWithParams. */
@@ -57,7 +57,7 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
     }
     else {
       temp_v2 = param_1;
-      dataTable40FindById();
+      skillDataFindById();
       if (temp_v2 == 0) {
         temp_v0 = 1000;
       }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: draws the status icon of a quest list row (new, in progress, done, locked, selected) and returns the row text colour; written from the decompilation, the dataTable1bOr1cGetRecord argument is inferred and branch layout not compared with retail */
+/* NON_MATCHING: draws the status icon of a quest list row (new, in progress, done, locked, selected) and returns the row text colour; written from the decompilation, the questDataGetRecord argument is inferred and branch layout not compared with retail */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
 #include "shard/TextureDrawCall.h"
@@ -56,7 +56,7 @@ u32 FUN_001af84c(s32 quest, u32 x, u32 y, u32 flags, s32 full)
     u32 normal = full != 0 ? QUEST_COLOR_NORMAL_FULL : QUEST_COLOR_NORMAL_PLAIN;
 
     if (g_uiQuest->detailOpen == 0) {
-        QuestRecord *record = dataTable1bOr1cGetRecord(quest);
+        QuestRecord *record = questDataGetRecord(quest);
         if (record == NULL)
             return normal;
 

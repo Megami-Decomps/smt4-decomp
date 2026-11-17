@@ -24,7 +24,7 @@ s32 QcUtility_CountFlaggedSubQuests(void)
 {
     s32 count = 0;
     for (s32 id = 100; id < 400; ++id) {
-        if (dataTable1bOr1cGetRecord(static_cast<u16>(id)) != NULL) {
+        if (questDataGetRecord(static_cast<u16>(id)) != NULL) {
             u16 index = static_cast<u16>(id);
             if (gameGetFlagBlock()->entries[index].isFlagged()) {
                 ++count;

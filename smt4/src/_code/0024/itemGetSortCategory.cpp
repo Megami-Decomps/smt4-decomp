@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/ItemSortCategory.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -10,7 +10,7 @@ u32 itemGetSortCategory(u32 id)
     if (id == 0) {
         return 99;
     }
-    Table04Record *record = dataTable40FindById(id);
+    SkillDataRecord *record = skillDataFindById(id);
     u32 category = 0;
     switch (record->sort.category) {
     case 0:

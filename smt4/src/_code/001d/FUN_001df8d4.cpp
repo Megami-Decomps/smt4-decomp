@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the learn-order picker; armcc here keeps the best score/rank in different registers and orders the float compares (retail: vcmpe then vcmp on s17/s16 with 0.01f in s19 and 1.0f in s18). */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 /* The skill learn picker. */
 struct SkillPicker {
@@ -43,7 +43,7 @@ u32 FUN_001df8d4(SkillPicker *picker)
         s32 element = idMapLookup(id);
         if (picker->preferredElement == element)
             score += 1.0f;
-        void *skill = dataTable40FindById(id);
+        void *skill = skillDataFindById(id);
         if (skill != NULL) {
             for (s32 j = 0; j < picker->passiveCount; j++) {
                 if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), skill)) {
@@ -75,7 +75,7 @@ u32 FUN_001df8d4(SkillPicker *picker)
         return 0;
     picker->chosen[picker->chosenCount] = picker->candidates[best];
     picker->chosenCount++;
-    void *skill = dataTable40FindById(picker->candidates[best]);
+    void *skill = skillDataFindById(picker->candidates[best]);
     if (skill != NULL) {
         for (s32 j = 0; j < picker->passiveCount; j++) {
             if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), skill)) {

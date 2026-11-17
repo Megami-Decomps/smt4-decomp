@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -18,8 +18,8 @@ int devilCompareBySetCategoryGrade(const u16 *left, const u16 *right)
     if ((leftSet & ~rightSet) != 0) {
         return 1;
     }
-    DevilRecord *a = devilGetRecord(*left);
-    DevilRecord *b = devilGetRecord(*right);
+    NkmBaseRecord *a = nkmBaseGetRecord(*left);
+    NkmBaseRecord *b = nkmBaseGetRecord(*right);
     result = a->race - b->race;
     if (result == 0) {
         result = b->level - a->level;

@@ -1,9 +1,9 @@
 /* NON_MATCHING: the placeholder cell is derived from its icon id like the record cells (retail's four separate mov/str now match); only register assignment differs (x in r9 vs sl, placeholder id loaded predicated after the flag test in retail). */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W5_W5Match7_EntrySort.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 /* The icon sheet cell to draw: source x range, then y range. */
 struct IconRect {
@@ -50,8 +50,8 @@ void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint)
         FUN_001849bc(2, 27, 3000, x, y, z, &rect);
         return;
     }
-    DevilRecordA *record = devilGetRecord((u16)id);
-    if ((dataTable00FindById((u16)id)->level & 0x8000) != 0) {
+    NkmBaseRecordA *record = nkmBaseGetRecord((u16)id);
+    if ((nkmEnemyFindById((u16)id)->level & 0x8000) != 0) {
         texDrawTableEntryAtStoredOrigin(2, 27, 2000, x, y, z);
         return;
     }

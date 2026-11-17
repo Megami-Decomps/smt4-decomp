@@ -26,10 +26,10 @@ u32 FUN_0023e32c(u32 excludedA, u32 excludedB, u32 excludedC, u32 level)
     dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     for (u16 index = 0; index < count; ++index) {
-        const DevilRecordA *entry = devilGetRecord(index);
+        const NkmBaseRecordA *entry = nkmBaseGetRecord(index);
         if (entry->level != level || index == excludedC || index == excludedA || index == excludedB)
             continue;
-        const DevilRecordA *record = devilGetRecord(entry->id);
+        const NkmBaseRecordA *record = nkmBaseGetRecord(entry->id);
         if ((record->fusionRestrictions & 0x1C00000) != 0)
             continue;
         if (record->unlockFlag != 0 && !gameFlagIsSet(record->unlockFlag))

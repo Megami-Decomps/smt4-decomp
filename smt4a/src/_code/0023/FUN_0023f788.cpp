@@ -1,6 +1,6 @@
 #include "battle/BattleCommandTargets.h"
 #include "shard/Shard0032.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 UnitRecord *gameGetPlayerData();
@@ -50,12 +50,12 @@ void FUN_0023f788(BattleCommandTargets *command)
         s32 written = 0;
         for (s32 index = 0; index < 8; ++index) {
             u16 skill = skills.ids[index];
-            if (dataTable04FindById(skill) != NULL && !idIsAbove400(skill))
+            if (skillDataFindById(skill) != NULL && !idIsAbove400(skill))
                 selection->skills.entries[subject].ids[written++] = skill;
         }
     }
     u32 special = FUN_0033896c();
-    if (!dataTable04FindById(special)->specialAvailability.enabled)
+    if (!skillDataFindById(special)->specialAvailability.enabled)
         special = 0;
     selection->specialSkill = special;
 }

@@ -13,7 +13,7 @@ u16 recordGetScaledMaximum(UnitRecord *unit);
 // Restore the saved demon's stats, skills, name, and status into a runtime unit.
 void FUN_0035ad50(u32 id, UnitRecord *unit)
 {
-    devilGetRecord(id);
+    nkmBaseGetRecord(id);
     SavedUnitRecordA saved;
     gameDataCopySaveEntry(id, &saved);
     sysMemClear(unit, 300);

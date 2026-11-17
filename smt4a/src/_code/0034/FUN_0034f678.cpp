@@ -12,8 +12,8 @@ extern "C" void equipmentGetCappedUpgradeBonuses(
 // Compare equipment by unk36, breaking ties by descending unk70.
 extern "C" s32 FUN_0034f678(u16* firstId, u16* secondId)
 {
-    EquipmentRecordA* first = dataTable08Sub2GetRecord(*firstId);
-    EquipmentRecordA* second = dataTable08Sub2GetRecord(*secondId);
+    EquipmentRecordA* first = itemTableGetEquipmentRecord(*firstId);
+    EquipmentRecordA* second = itemTableGetEquipmentRecord(*secondId);
     EquipmentUpgradeBonusesView firstBonuses;
     EquipmentUpgradeBonusesView secondBonuses;
 
@@ -23,8 +23,8 @@ extern "C" s32 FUN_0034f678(u16* firstId, u16* secondId)
     s32 difference = (first->hpBonus + firstBonuses.unk00)
                    - (second->hpBonus + firstBonuses.unk00);
     if (difference == 0) {
-        first = dataTable08Sub2GetRecord(*firstId);
-        second = dataTable08Sub2GetRecord(*secondId);
+        first = itemTableGetEquipmentRecord(*firstId);
+        second = itemTableGetEquipmentRecord(*secondId);
         difference = second->order - first->order;
     }
     return difference;

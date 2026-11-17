@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 struct EntryData {
     /* 0x00 */ u8 unk00[34];
@@ -10,7 +10,7 @@ s32 FUN_002efc44(EntryData *entry, u32 index, s32 kind);
 /* Returns the nonnegative amount remaining below the entry maximum. */
 s32 FUN_003dfed4(u32 id, u32 index)
 {
-    EntryData *entry = (EntryData *)dataTable04FindById(id);
+    EntryData *entry = (EntryData *)skillDataFindById(id);
     if (entry == NULL)
         return 0;
     s32 maximum = entry->maximum;

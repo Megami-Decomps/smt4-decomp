@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the prologue differs: retail loads g_btlUi and the work pointer before materialising the constants 1, 40 and 0 and loads the stack arguments after them, this build hoists the constants first. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SaveLoadProcess.h"
 
 #include "code/Code0020.h"
@@ -81,7 +81,7 @@ void FUN_00227334(u32 unused, u32 kind, s32 value, s32 isSupport, s32 devilId, s
             }
             tableId = gameGetSelectedSupportUnitTableId();
         } else {
-            if (devilGetRecord(devilId)->element != 1) {
+            if (nkmBaseGetRecord(devilId)->element != 1) {
                 textFormatBuffer(label, "Attack");
             } else {
                 textFormatBuffer(label, "Shoot");

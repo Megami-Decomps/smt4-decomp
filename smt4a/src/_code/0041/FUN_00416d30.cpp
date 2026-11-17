@@ -16,7 +16,7 @@ const char *dataTable01GetRecordWithAocOverride(u32);
 const char *FUN_0014bf3c(u16, u32);
 char *libc_strcpy(char *, const char *);
 void textFormatBuffer(char *, const char *, ...);
-u8 devilGetVoiceCategory(const DevilRecordA *record);
+u8 devilGetVoiceCategory(const NkmBaseRecordA *record);
 extern const char DAT_00533c9c[];
 extern const char DAT_00533c84[];
 extern const char DAT_00533c70[];
@@ -37,7 +37,7 @@ void FUN_00416d30(ResultInputWork *work)
             libc_strcpy(name, FUN_0014bf3c(slot->id, 0));
             scrSetStringSlot(0x10, name);
             asdLoadFileAsyncSimple(DAT_00533c70, reinterpret_cast<u32 *>(&work->resources.levelUpScript), 0);
-            s8 voiceCategory = (s8)devilGetVoiceCategory(devilGetRecord(slot->id));
+            s8 voiceCategory = (s8)devilGetVoiceCategory(nkmBaseGetRecord(slot->id));
             DataTableView<DemonMessageArchiveRow> messages(0x25, 0);
             DemonMessageArchiveRow *entry = messages.entries;
             u32 index;

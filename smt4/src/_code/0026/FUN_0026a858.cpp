@@ -1,6 +1,6 @@
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "code/Code0026_Smt4.h"
 
@@ -42,7 +42,7 @@ typedef __packed struct Record {
 /* Builds a record for `id` from its two source tables. */
 void FUN_0026a858(int id, Record *record)
 {
-    Table00Record *a = dataTable00FindById(id);
+    NkmEnemyRecord *a = nkmEnemyFindById(id);
 
     reinterpret_cast<int>(memClear(record, 0x604));
     record->id = (s16)id;
@@ -67,7 +67,7 @@ void FUN_0026a858(int id, Record *record)
     record->unk3E = a->skills[5];
     record->unk40 = a->skills[6];
     record->unk42 = a->skills[7];
-    bitsetSetBit(record, devilGetRecord(id)->innateFlag);
+    bitsetSetBit(record, nkmBaseGetRecord(id)->innateFlag);
     record->unk2A = *(u16 *)&record->unk0E;
     record->unk2C = ((u16 *)record)[8];
 }

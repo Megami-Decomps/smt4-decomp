@@ -1,6 +1,6 @@
 /* NON_MATCHING: store order of the record update and the loop's scheduling differ from retail (150 rows against 147); the compendium percentage uses __aeabi_idivmod as retail does. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 
 /* A party demon record (300 bytes each) as the compendium registration reads it. */
@@ -112,7 +112,7 @@ void FUN_002a5e7c(u32 id)
         listed = 0;
         seen = 0;
         for (index = 0; index < 0x4FF; index++) {
-            DevilRecordA *info = devilGetRecord((u16)(index + 1));
+            NkmBaseRecordA *info = nkmBaseGetRecord((u16)(index + 1));
 
             if (info != NULL && (info->flags & COMPENDIUM_LISTED) != 0) {
                 listed++;

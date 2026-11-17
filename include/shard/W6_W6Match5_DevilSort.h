@@ -2,7 +2,7 @@
 #define SHARD_W6_W6MATCH5_DEVILSORT_H
 
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/RankedDevilEntry.h"
 
 

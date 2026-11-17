@@ -10,13 +10,13 @@ typedef struct SortRef {
 /* Comparator: orders two references by group, then by order, both descending. */
 s32 entryRefCompareByGroupThenOrder(SortRef *a, SortRef *b)
 {
-    EquipmentRecordA *entryA = dataTable08Sub2GetRecord(a->id);
-    EquipmentRecordA *entryB = dataTable08Sub2GetRecord(b->id);
+    EquipmentRecordA *entryA = itemTableGetEquipmentRecord(a->id);
+    EquipmentRecordA *entryB = itemTableGetEquipmentRecord(b->id);
     s32 diff = entryB->traitBits.group - entryA->traitBits.group;
 
     if (diff == 0) {
-        entryA = dataTable08Sub2GetRecord(a->id);
-        entryB = dataTable08Sub2GetRecord(b->id);
+        entryA = itemTableGetEquipmentRecord(a->id);
+        entryB = itemTableGetEquipmentRecord(b->id);
         diff = entryB->order - entryA->order;
     }
     return diff;

@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/ConsumableRecordA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
@@ -31,8 +31,8 @@ u32 btlScriptGetBestEntryCategory(void)
                 selected = id;
             }
         }
-        ConsumableRecordA *entry = dataTable8FindRecord(selected);
-        Table04RecordA *record = dataTable04FindById(entry->skillId);
+        ConsumableRecordA *entry = itemTableGetItemRecord(selected);
+        SkillDataRecordA *record = skillDataFindById(entry->skillId);
         if (record != NULL) {
             category = (record->properties & 0xFFFF) >> 11;
         }

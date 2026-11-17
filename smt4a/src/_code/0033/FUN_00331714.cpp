@@ -7,7 +7,7 @@
 extern "C" {
 
 int gameGetPlayerData(void);
-int dataTable08Sub2GetRecord(void);
+int itemTableGetEquipmentRecord(void);
 int FUN_0020b490(int, int);
 int resourceTableReleaseHandles(void);
 int bgmReleaseStopped(void);
@@ -35,7 +35,7 @@ extern int DAT_00588c44; /* 0x588c44 */
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: gameGetPlayerData. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020b490. */
@@ -180,7 +180,7 @@ void FUN_00331714(int param_1)
           case 6:
             temp_v7 = (unsigned int)puVar9[6];
           }
-          dataTable08Sub2GetRecord();
+          itemTableGetEquipmentRecord();
           temp_v8 = 0;
           if (temp_v7 != 0) {
             temp_v8 = (unsigned int)*(unsigned short *)(temp_v7 + 0x3a);

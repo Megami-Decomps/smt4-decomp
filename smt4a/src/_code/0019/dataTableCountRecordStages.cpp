@@ -1,5 +1,5 @@
 #include "gamedata/DataTable.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/W6_W6Match2_HelpResources.h"
 #include "addon/AocSystemA.h"
 
@@ -33,9 +33,9 @@ u32 dataTableCountRecordStages(u32 id)
             return (u32)record->flags >> 31;
         }
     } else {
-        Table04RecordA *record = dataTable04FindById(id);
+        SkillDataRecordA *record = skillDataFindById(id);
         if (record != NULL && (record->flags & 0x20000000) == 0) {
-            // The stage slots lie beyond the established Table04RecordA prefix.
+            // The stage slots lie beyond the established SkillDataRecordA prefix.
             struct RecordStagesView {
                 u8 unk00[0x62];
                 u8 stages[9][2];

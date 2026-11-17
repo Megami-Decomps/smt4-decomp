@@ -9,7 +9,7 @@ void flagValueSub(s32 id, s32 amount);
 // Apply the record to the value (the target on entry, the result on exit); when it succeeded for a plain request and is not permanent, consume one use.
 s32 FUN_00480140(s32 value, s32 id, s32 plain)
 {
-    ConsumableRecordA *record = dataTable8FindRecord(id);
+    ConsumableRecordA *record = itemTableGetItemRecord(id);
     if (record == NULL) {
         return 1;
     }

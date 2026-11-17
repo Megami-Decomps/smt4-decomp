@@ -1,5 +1,5 @@
 #include "gamedata/UnitStats.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
@@ -9,7 +9,7 @@ extern void unitRecalculateEffectiveStats(StatBlock *block);
 
 void FUN_0029dc74(u32 id, StatBlock *block)
 {
-    DevilRecord *record = devilGetRecord(id);
+    NkmBaseRecord *record = nkmBaseGetRecord(id);
 
     memClear(block, 0x604);
     block->id = id;

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 /* A sortable entry: a unit id and its slot (negative when it has none). */
 struct UnitSortEntry {
@@ -27,7 +27,7 @@ static __inline u32 unitSortLevel(const UnitSortEntry *entry)
     if (idIsAbove400(entry->id)) {
         return dataTable41FindById(entry->id)->stats.level;
     }
-    return ((UnitLowRecord *)dataTable04FindById(entry->id))->level;
+    return ((UnitLowRecord *)skillDataFindById(entry->id))->level;
 }
 
 /* Tie-break by the slots' ranks, higher first (0 without a slot), then itemSortCompareByCategoryAndId. */

@@ -1,8 +1,8 @@
 /* NON_MATCHING: readable rewrite compiles (171 vs 165 rows); retail keeps more values in callee-saved registers across the power loops */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "battle/BattleBalanceRow.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/GamePlayerData.h"
 
 // Battle main state: only the fields the escape roll uses.
@@ -64,7 +64,7 @@ void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
             s32 i = 0;
             for (; i < 6; i++) {
                 u32 id = battle->enemyIds[i];
-                if (id != 0 && devilGetRecord(id & 0xffff)->race == 0x27) break;
+                if (id != 0 && nkmBaseGetRecord(id & 0xffff)->race == 0x27) break;
             }
             if (i >= 6) {
                 battle->flags |= 8;
@@ -94,7 +94,7 @@ void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
         for (s32 i = 0; i < 6; i++) {
             u32 id = battle->enemyIds[i];
             if (id != 0) {
-                Table00Record* record = dataTable00FindById(id & 0xffff);
+                NkmEnemyRecord* record = nkmEnemyFindById(id & 0xffff);
                 if (record != NULL) {
                     u32 power = record->stats[4] + record->stats[3];
                     if ((f32)power > enemyPower) enemyPower = (f32)power;

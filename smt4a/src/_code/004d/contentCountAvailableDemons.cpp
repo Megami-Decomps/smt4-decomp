@@ -25,7 +25,7 @@ u16 contentCountAvailableDemons(void)
         if (entry == NULL) {
             continue;
         }
-        DevilRecordA *demon = devilGetRecord(entry->value);
+        NkmBaseRecordA *demon = nkmBaseGetRecord(entry->value);
         if (demon->unlockFlag != 0 && !gameFlagIsSet(demon->unlockFlag)) {
             continue;
         }

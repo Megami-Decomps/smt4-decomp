@@ -1,6 +1,6 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 extern u32 g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
@@ -19,8 +19,8 @@ void devilDrawResolvedTexture(s32 id, u32 first, u32 second, u32 third, s32 reso
         if (id < 0) {
             resource = !gameFlagIsSet(17) ? 606 : 0;
         } else {
-            const DevilRecordA *devil = devilGetRecord((u16)id);
-            const Table00RecordA *record = dataTable00FindById((u16)id);
+            const NkmBaseRecordA *devil = nkmBaseGetRecord((u16)id);
+            const NkmEnemyRecordA *record = nkmEnemyFindById((u16)id);
             if (devil == NULL)
                 return;
             if (record->level & 0x8000) {

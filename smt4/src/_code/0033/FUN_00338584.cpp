@@ -1,7 +1,7 @@
 /* NON_MATCHING: loop exit sharing, merged flag tests, HP division argument scheduling and chance clamp differ. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "shard/W6_W6Match3_NameFormState.h"
 #include "gamedata/GamePlayerData.h"
 
@@ -24,7 +24,7 @@ u32 FUN_00338584(BtlMainState *state)
         if ((entry->flags & 1) && !(entry->flags & 0x40) && (entry->flags & 0x10)) {
             if (entry == NULL)
                 return 0;
-            Table00Record *metadata = dataTable00FindById(entry->id);
+            NkmEnemyRecord *metadata = nkmEnemyFindById(entry->id);
             if (metadata->flags & 0x10)
                 return 0;
             if ((entry->flags & 0x100000) || (entry->flags & 0x10000000))

@@ -2,7 +2,7 @@
 #define SHARD_W6_W6MATCH8_DEVIL_RECORD_A_H
 
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "ui/UiSpriteKeyframes.h"
 
 #ifdef __cplusplus

@@ -15,7 +15,7 @@ int rosterGetLeaderId(void);
 int useCounterRelease(void);
 int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
 int spriteStartAnimationByIndex(...);
 int soundPlaySeUnpanned(...);
@@ -73,7 +73,7 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
@@ -402,7 +402,7 @@ unsigned int FUN_001956c4(void)
       break;
     }
     soundPlaySeUnpanned(0x100025c);
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if (*(char *)(temp_v4 + 6) != '\x06') {
       if (*(char *)(temp_v4 + 6) != '\t') {
         uiQuestStartSelected();
@@ -445,7 +445,7 @@ unsigned int FUN_001956c4(void)
       break;
     }
     temp_v11 = rosterGetLeaderId();
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = gameJumpRequestIsPending(), temp_v11 == 0)) {
       temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
@@ -480,7 +480,7 @@ unsigned int FUN_001956c4(void)
       break;
     }
     temp_v11 = rosterGetLeaderId();
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if ((*(char *)(temp_v11 + 6) != '\t') || (temp_v11 = gameJumpRequestIsPending(), temp_v11 == 0)) {
       temp_v3 = rosterGetLeaderId();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
@@ -580,7 +580,7 @@ unsigned int FUN_001956c4(void)
       temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
       temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       if (*(char *)(temp_v4 + 6) == '\x06') {
         *(unsigned char *)(temp_v1 + 0x5c5) = 1;
       }
@@ -855,7 +855,7 @@ joined_r0x0019627c:
         temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
         temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         if (*(char *)(temp_v4 + 6) != '\x06') {
           if (*(char *)(temp_v4 + 6) != '\t') {
             soundPlaySeUnpanned(0x100025c);

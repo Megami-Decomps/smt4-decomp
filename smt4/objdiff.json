@@ -108840,13 +108840,13 @@
       "target_path": "orig/target/_code/002a/playerGetSkillRank.o"
     },
     {
-      "base_path": "build/obj/_code/002a/dataTable40FindById.o",
+      "base_path": "build/obj/_code/002a/skillDataFindById.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable40FindById",
+            "name": "skillDataFindById",
             "size": 108,
             "vram": "0x2ae164"
           }
@@ -108854,10 +108854,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/dataTable40FindById.cpp"
+        "source_path": "src/_code/002a/skillDataFindById.cpp"
       },
-      "name": "_code/002a/dataTable40FindById",
-      "target_path": "orig/target/_code/002a/dataTable40FindById.o"
+      "name": "_code/002a/skillDataFindById",
+      "target_path": "orig/target/_code/002a/skillDataFindById.o"
     },
     {
       "base_path": "build/obj/_code/002a/idIsAbove400.o",
@@ -109862,13 +109862,13 @@
       "target_path": "orig/target/_code/002b/partyMemberFindById.o"
     },
     {
-      "base_path": "build/obj/_code/002b/dataTable00FindById.o",
+      "base_path": "build/obj/_code/002b/nkmEnemyFindById.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable00FindById",
+            "name": "nkmEnemyFindById",
             "size": 132,
             "vram": "0x2b06c4"
           }
@@ -109876,10 +109876,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/dataTable00FindById.cpp"
+        "source_path": "src/_code/002b/nkmEnemyFindById.cpp"
       },
-      "name": "_code/002b/dataTable00FindById",
-      "target_path": "orig/target/_code/002b/dataTable00FindById.o"
+      "name": "_code/002b/nkmEnemyFindById",
+      "target_path": "orig/target/_code/002b/nkmEnemyFindById.o"
     },
     {
       "base_path": "build/obj/_code/002b/uiDrawTableTextureSized.o",
@@ -110665,13 +110665,13 @@
       "target_path": "orig/target/_code/002b/aocTable8Type5FindRecord.o"
     },
     {
-      "base_path": "build/obj/_code/002b/dataTable08Sub2GetRecord.o",
+      "base_path": "build/obj/_code/002b/itemTableGetEquipmentRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable08Sub2GetRecord",
+            "name": "itemTableGetEquipmentRecord",
             "size": 128,
             "vram": "0x2b45e8"
           }
@@ -110679,19 +110679,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/dataTable08Sub2GetRecord.cpp"
+        "source_path": "src/_code/002b/itemTableGetEquipmentRecord.cpp"
       },
-      "name": "_code/002b/dataTable08Sub2GetRecord",
-      "target_path": "orig/target/_code/002b/dataTable08Sub2GetRecord.o"
+      "name": "_code/002b/itemTableGetEquipmentRecord",
+      "target_path": "orig/target/_code/002b/itemTableGetEquipmentRecord.o"
     },
     {
-      "base_path": "build/obj/_code/002b/dataTable08Sub1GetRecord.o",
+      "base_path": "build/obj/_code/002b/itemTableGetItemRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable08Sub1GetRecord",
+            "name": "itemTableGetItemRecord",
             "size": 128,
             "vram": "0x2b4670"
           }
@@ -110699,10 +110699,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/dataTable08Sub1GetRecord.cpp"
+        "source_path": "src/_code/002b/itemTableGetItemRecord.cpp"
       },
-      "name": "_code/002b/dataTable08Sub1GetRecord",
-      "target_path": "orig/target/_code/002b/dataTable08Sub1GetRecord.o"
+      "name": "_code/002b/itemTableGetItemRecord",
+      "target_path": "orig/target/_code/002b/itemTableGetItemRecord.o"
     },
     {
       "base_path": "build/obj/_code/002b/libc_bsearch.o",
@@ -111745,13 +111745,13 @@
       "target_path": "orig/target/_code/002b/gameGetPlayerData.o"
     },
     {
-      "base_path": "build/obj/_code/002b/dataTable1bOr1cGetRecord.o",
+      "base_path": "build/obj/_code/002b/questDataGetRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "dataTable1bOr1cGetRecord",
+            "name": "questDataGetRecord",
             "size": 180,
             "vram": "0x2b63c0"
           }
@@ -111759,10 +111759,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/dataTable1bOr1cGetRecord.cpp"
+        "source_path": "src/_code/002b/questDataGetRecord.cpp"
       },
-      "name": "_code/002b/dataTable1bOr1cGetRecord",
-      "target_path": "orig/target/_code/002b/dataTable1bOr1cGetRecord.o"
+      "name": "_code/002b/questDataGetRecord",
+      "target_path": "orig/target/_code/002b/questDataGetRecord.o"
     },
     {
       "base_path": "build/obj/_code/002b/asdLoadFileAsyncDefault.o",
@@ -113386,13 +113386,13 @@
       "target_path": "orig/target/_code/002b/entryListFindById.o"
     },
     {
-      "base_path": "build/obj/_code/002b/devilGetRecord.o",
+      "base_path": "build/obj/_code/002b/nkmBaseGetRecord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "devilGetRecord",
+            "name": "nkmBaseGetRecord",
             "size": 132,
             "vram": "0x2b9024"
           }
@@ -113400,10 +113400,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/devilGetRecord.cpp"
+        "source_path": "src/_code/002b/nkmBaseGetRecord.cpp"
       },
-      "name": "_code/002b/devilGetRecord",
-      "target_path": "orig/target/_code/002b/devilGetRecord.o"
+      "name": "_code/002b/nkmBaseGetRecord",
+      "target_path": "orig/target/_code/002b/nkmBaseGetRecord.o"
     },
     {
       "base_path": "build/obj/_code/002b/nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile.o",

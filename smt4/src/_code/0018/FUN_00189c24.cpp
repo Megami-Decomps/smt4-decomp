@@ -66,7 +66,7 @@ void FUN_00189c24(void)
         if (id < 350 && questReadRuntimeFlag(id, 0) == 0)
             continue;
         if (id >= 350) {
-            if (dataTable1bOr1cGetRecord(id) == NULL)
+            if (questDataGetRecord(id) == NULL)
                 continue;
             if (gameFlagIsSet(7) != 0 && gameFlagIsSet(0x214) == 0)
                 continue;
@@ -77,7 +77,7 @@ void FUN_00189c24(void)
         }
         bool listed = true;
         if (quest->panel.confirming != 0) {
-            QuestRecord *record = dataTable1bOr1cGetRecord(id);
+            QuestRecord *record = questDataGetRecord(id);
             if (record == NULL || record->kind != 0)
                 continue;
             if (questHasOpenObjective(id))
@@ -129,7 +129,7 @@ void FUN_00189c24(void)
     }
     for (s32 i = 0; i < openCount; i++) {
         if (FUN_00298dc8(quest->list[i]) != 0) {
-            QuestRecord *record = dataTable1bOr1cGetRecord(quest->list[i]);
+            QuestRecord *record = questDataGetRecord(quest->list[i]);
             if (record != NULL && record->kind != 0) {
                 scrollListSetSelectionMarkChanged(quest->cursor.data, i);
                 break;

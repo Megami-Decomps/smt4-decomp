@@ -11,7 +11,7 @@ int unitRecalculateEffectiveStats(unsigned char [72]);
 int unitInitializeFromSavedRecord(unsigned int, unsigned char [72]);
 int FUN_0029dc74(...);
 int dataTable06Sub1GetRecord(void);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int FUN_002b99b8(void);
 int dataTableGetEntries(void);
 int dataTableGet(...);
@@ -70,7 +70,7 @@ extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_0029dc74. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: dataTableGet. */
@@ -150,7 +150,7 @@ unsigned int FUN_0029ce60(unsigned int param_1,int param_2,int param_3,unsigned 
   iStack_34 = param_2;
   iStack_30 = param_3;
   uStack_2c = param_4;
-  devilGetRecord();
+  nkmBaseGetRecord();
   temp_v41 = param_1;
   if (param_3 != 0) {
     if (param_2 != 0) {
@@ -206,7 +206,7 @@ LAB_0029cf80:
         temp_v36 = 0;
         temp_v37 = 0;
         memClear(temp_v38,0x500);
-        devilGetRecord();
+        nkmBaseGetRecord();
         bitsetSetBit(temp_v20,*(unsigned short *)(temp_v6 + 0x38));
         unitRecalculateEffectiveStats(temp_v20);
         puVar12 = temp_v20;
@@ -340,7 +340,7 @@ LAB_0029cf80:
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 8);
   temp_v6 = (unsigned int)*(unsigned short *)(puVar12 + 0x46);
-  devilGetRecord();
+  nkmBaseGetRecord();
   temp_v4 = 0;
   temp_v2 = 0;
   do {

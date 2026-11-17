@@ -1,5 +1,5 @@
 /* NON_MATCHING: saved-register assignment differs, including reduction accumulator reuse after the holder scan; instruction count agrees. */
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/Shard004B.h"
 #include "shard/PassiveSkill.h"
 #include "shard/W9_W9Match7_ModifierLists.h"
@@ -13,7 +13,7 @@ s32 FUN_0034a304(const AttributeModifierLists *record, s32 rank, s32 kind);
 // Apply unlocked cost reductions and the holder's skill-rank modifiers, clamping to one.
 s32 skillGetAdjustedCost(const ItemRankRecord *holder, u32 skillId)
 {
-    Table04RecordA *record = dataTable04FindById(skillId);
+    SkillDataRecordA *record = skillDataFindById(skillId);
     if (record) {
         s32 baseCost = record->cost.baseCost;
         s32 reduction = 0;

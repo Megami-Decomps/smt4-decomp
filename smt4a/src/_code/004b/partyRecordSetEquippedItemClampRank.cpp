@@ -1,5 +1,5 @@
 #include "shard/Shard004B.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 s32 FUN_0035e458(u32 item);
@@ -13,7 +13,7 @@ extern "C" void partyRecordSetEquippedItemClampRank(ItemRankRecord *record, u32 
         return;
     }
     record->items[slot] = (u16)item;
-    ItemRankDefinition *definition = (ItemRankDefinition *)dataTable04FindById(item);
+    ItemRankDefinition *definition = (ItemRankDefinition *)skillDataFindById(item);
     s8 rank = 0;
     if (definition != NULL && definition->category < 18) {
         u32 category = definition->category;

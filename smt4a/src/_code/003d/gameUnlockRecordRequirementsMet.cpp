@@ -10,7 +10,7 @@ u32 partyEntryFlagsBit3(s32 member);
 /* Return 1 when the record's required game flag and party members are all satisfied. */
 s32 gameUnlockRecordRequirementsMet(u32 id)
 {
-    QuestRecordA *record = dataTable1bOr1cGetRecord(id);
+    QuestRecordA *record = questDataGetRecord(id);
 
     if (record == NULL) {
         return 0;

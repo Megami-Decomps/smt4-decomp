@@ -28,7 +28,7 @@ int VectorSignedToFloat(...);
 int textFormatBuffer(int, unsigned int);
 int asdOperatorNew(void);
 int uiSpriteAdvanceAnimation(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int gameStateChange(...);
 int FUN_00240170(void);
 int statusCameraSelectPreset(int);
@@ -83,7 +83,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int markerKindGetColor(unsigned int);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: gameStateChange. */
@@ -255,7 +255,7 @@ unsigned int FUN_00208c08(void)
     temp_v3 = DAT_00588fd4;
     if (!(*(char *)(temp_v2 + 0x2018) == '\x03' || *(char *)(temp_v2 + 0x2018) == '\n')) {
       temp_v8 = (unsigned int)*(unsigned short *)(temp_v2 + 0x1390);
-      dataTable00FindById();
+      nkmEnemyFindById();
       if ((((temp_v8 == 0) || (temp_v9 = *(unsigned char *)(temp_v8 + 0xa5), (temp_v9 & 1) == 0)) &&
           ((temp_v9 = *(unsigned char *)(temp_v3 + 0x137d), temp_v9 == 0 ||
            ((temp_v8 != 0 && ((*(unsigned short *)(temp_v8 + 2) & 0x8000) != 0)))))) ||
@@ -272,7 +272,7 @@ unsigned int FUN_00208c08(void)
       }
       else {
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v2 + 0x1390);
-        dataTable00FindById();
+        nkmEnemyFindById();
         if (*(short *)(temp_v8 + 0xa6) < 1) {
           *(unsigned short *)(temp_v2 + 0x138e) = *(unsigned short *)(temp_v8 + 0x8c);
         }

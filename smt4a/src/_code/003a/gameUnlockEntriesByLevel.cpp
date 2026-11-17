@@ -19,7 +19,7 @@ s32 gameUnlockEntriesByLevel(void)
 
     for (id = 100; id < 400; id++) {
         if (gameFlagEntryGetBit(id, 0) == 0 && gameUnlockRecordRequirementsMet(id) != 0) {
-            QuestRecordA *record = dataTable1bOr1cGetRecord((u16)id);
+            QuestRecordA *record = questDataGetRecord((u16)id);
             if (record != NULL && record->requiredLevel != 0 && record->requiredLevel <= level) {
                 u32 flag = itemDataGetValue(id);
                 if (flag != 0) {

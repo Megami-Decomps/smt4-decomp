@@ -17,7 +17,7 @@ u32 FUN_004000a8(void *actor, u32 id)
     if (id == 0) {
         return 1;
     }
-    ConsumableRecordA *record = dataTable8FindRecord(id);
+    ConsumableRecordA *record = itemTableGetItemRecord(id);
     if (record == NULL) {
         return 1;
     }

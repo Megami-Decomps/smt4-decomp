@@ -6,8 +6,8 @@ u32 partyEntryFlagsBit3(u16 id);
 
 static inline s32 compareEntryOrder(const u16 *left, const u16 *right)
 {
-    QuestRecordA *first = dataTable1bOr1cGetRecord(*left);
-    QuestRecordA *second = dataTable1bOr1cGetRecord(*right);
+    QuestRecordA *first = questDataGetRecord(*left);
+    QuestRecordA *second = questDataGetRecord(*right);
     s32 order = 0;
     if (first != NULL && second != NULL) {
         order = first->order - second->order;
@@ -26,8 +26,8 @@ s32 entryCompareFlagsCategoryOrder(const u16 *left, const u16 *right)
     if ((firstFlags & ~secondFlags) != 0) {
         order = 1;
     } else if (order == 0) {
-        QuestRecordA *first = dataTable1bOr1cGetRecord(*left);
-        QuestRecordA *second = dataTable1bOr1cGetRecord(*right);
+        QuestRecordA *first = questDataGetRecord(*left);
+        QuestRecordA *second = questDataGetRecord(*right);
         if (first == NULL) {
             return 0;
         }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the prologue schedule differs: retail loads the g_buttonHelp address before moving the arguments and reads the work pointer right after the frame setup; the build loads the address after them. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "ui/ButtonHelp.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
@@ -26,7 +26,7 @@ void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, 
 void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 devilId, u32 extra)
 {
     ButtonHelpWorkA *work = g_buttonHelp.prefix.work;
-    DevilRecordA *devil = devilGetRecord(devilId);
+    NkmBaseRecordA *devil = nkmBaseGetRecord(devilId);
 
     char text[128];
 

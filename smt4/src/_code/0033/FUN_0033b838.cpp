@@ -1,5 +1,5 @@
 #include "gamedata/UnitStats.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SkillFlags.h"
 
 extern "C" {
@@ -11,7 +11,7 @@ s32 randNextInRange(u32 maximum);
 u32 FUN_0033b838(const StatBlock* unit, s32 attempts, s32 forced)
 {
     if (attempts > 0) {
-        DevilRecord* record = reinterpret_cast<DevilRecord*>(devilGetRecord(unit->id));
+        NkmBaseRecord* record = reinterpret_cast<NkmBaseRecord*>(nkmBaseGetRecord(unit->id));
         s32 chance = saveIsRecordValueBounded(unit->id) / 500 + record->chance.skillChance;
         if (flagBitIsSet(5)) {
             chance += 30;

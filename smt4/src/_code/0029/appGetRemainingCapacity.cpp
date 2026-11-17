@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail predicates the capacity load and the zeroed total on the owner check (ldrbne/movne); this build branches first. */
 #include "common.h"
 #include "status/StatusCamera.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -22,7 +22,7 @@ s32 flagBitIsSet(u32 bit);
  * when `id` has no record. */
 s32 appGetRemainingCapacity(u32 id)
 {
-    AppSlotOwner *owner = reinterpret_cast<AppSlotOwner *>(dataTable40FindById(id));
+    AppSlotOwner *owner = reinterpret_cast<AppSlotOwner *>(skillDataFindById(id));
     if (owner != NULL) {
         s32 capacity = owner->capacity;
         s32 used = 0;

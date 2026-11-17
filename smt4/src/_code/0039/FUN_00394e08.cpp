@@ -10,7 +10,7 @@ s32 padGetStickHorizontalDirection(void);
 void FUN_00394e08(u32 id)
 {
     s32 direction = padGetStickHorizontalDirection();
-    EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+    EquipmentRecord *record = itemTableGetEquipmentRecord(id);
     PlayerDataIV *player;
 
     if (record != NULL) {
@@ -19,7 +19,7 @@ void FUN_00394e08(u32 id)
         if (((directions & 1) != 0 && direction == 4) || ((directions & 4) != 0 && direction == 5) ||
             ((directions & 2) != 0 && direction == 1)) {
             player = gameGetPlayerData();
-            switch (dataTable08Sub2GetRecord(id)->slot) {
+            switch (itemTableGetEquipmentRecord(id)->slot) {
             case 2:
                 player->equipment[0] = id;
                 break;

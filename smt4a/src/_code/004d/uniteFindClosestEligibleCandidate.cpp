@@ -31,7 +31,7 @@ u32 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, 
             }
             u16 id = selection->levels[race][index].id;
             if (checkRecord) {
-                const DevilRecordA *record = devilGetRecord(id);
+                const NkmBaseRecordA *record = nkmBaseGetRecord(id);
                 if (record->fusionRestrictions & 0x1c00000) {
                     continue;
                 }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: the polynomial now matches (level * 0x6DB * 2 + level * 2); retail outlines the table-lookup arm after the return and numbers the saved registers differently. */
 #include "gamedata/DataTable.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/GameDataAccess.h"
 
 static inline u32 unitBaseGrowthCost(s32 level)
@@ -24,7 +24,7 @@ extern "C" u32 FUN_004ccdb8(u32 unit, s32 level, s32 referenceLevel)
         return 0;
     }
     u32 cost = unitBaseGrowthCost(level);
-    s32 difference = referenceLevel - devilGetRecord(unit)->level + 1;
+    s32 difference = referenceLevel - nkmBaseGetRecord(unit)->level + 1;
     u32 scale;
     if (difference <= 0) {
         scale = 100;

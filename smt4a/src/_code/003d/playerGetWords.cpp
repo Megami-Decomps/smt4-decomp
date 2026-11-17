@@ -23,7 +23,7 @@ void playerGetWords(PlayerWords *out, s32 withUnit)
     out->c = player->skillWords[2];
     out->d = player->skillWords[3];
     if (withUnit != 0) {
-        unit = dataTable08Sub2GetRecord(player->equipped.accessory);
+        unit = itemTableGetEquipmentRecord(player->equipped.accessory);
         if (unit != NULL) {
             out->e = unit->modifierId;
         }

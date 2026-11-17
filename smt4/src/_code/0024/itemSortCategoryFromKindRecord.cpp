@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -16,7 +16,7 @@ u32 itemSortCategoryFromKindRecord(u32 id)
     if (id == 0) {
         return 99;
     }
-    KindRecord *record = reinterpret_cast<KindRecord *>(dataTable40FindById(id));
+    KindRecord *record = reinterpret_cast<KindRecord *>(skillDataFindById(id));
     u32 category = 0;
     switch (record->kind) {
     case 4:

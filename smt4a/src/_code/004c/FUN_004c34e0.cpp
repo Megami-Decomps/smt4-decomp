@@ -6,9 +6,9 @@
 extern "C" {
 
 int btlGetMainState(...);
-int dataTable8FindRecord(void);
+int itemTableGetItemRecord(void);
 int gameGetSlotRecord(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int btlEntryBuildSummary(...);
 int FUN_004c4178(unsigned int, unsigned int, int, int, int);
 int SBORROW4(...);
@@ -47,9 +47,9 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: dataTable8FindRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: gameGetSlotRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_004bd098(unsigned int, int);
@@ -98,8 +98,8 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
   iStack_28 = param_4;
   puVar2 = (unsigned int *)btlGetMainState();
   temp_v4 = temp_v21;
-  dataTable04FindById();
-  dataTable8FindRecord();
+  skillDataFindById();
+  itemTableGetItemRecord();
   puVar3 = puVar2;
   btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar2), param_5);
   puVar4 = puVar2;

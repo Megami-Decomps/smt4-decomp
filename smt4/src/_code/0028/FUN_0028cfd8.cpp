@@ -20,7 +20,7 @@ u32 FUN_0028cfd8(u32 skillId)
 {
     if (skillId == 0)
         return 1;
-    ConsumableRecord *skill = dataTable08Sub1GetRecord(skillId);
+    ConsumableRecord *skill = itemTableGetItemRecord(skillId);
     if (skill == NULL)
         return 1;
     if ((skill->type != 2 && skill->type != 3) || skill->kind != 1)

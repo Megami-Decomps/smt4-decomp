@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/ItemSortCategory.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -19,9 +19,9 @@ int sortCompareByCategoryOrder(const u16 *a, const u16 *b)
     int diff = itemGetSortCategory(recordA->category) - itemGetSortCategory(recordB->category);
 
     if (diff == 0) {
-        u16 orderA = dataTable40FindById(recordA->category)->listing.sortKey;
+        u16 orderA = skillDataFindById(recordA->category)->listing.sortKey;
 
-        diff = dataTable40FindById(recordB->category)->listing.sortKey - orderA;
+        diff = skillDataFindById(recordB->category)->listing.sortKey - orderA;
         if (diff == 0) {
             diff = *a - *b;
         }

@@ -40,7 +40,7 @@ void FUN_0028fe0c(u16 quest, u32 state)
         uiBindRecordRewardText(quest, 1, 0);
         s32 reward = FUN_003336dc(quest, state);
         if (reward < 0) {
-            QuestRecord *record = dataTable1bOr1cGetRecord(quest);
+            QuestRecord *record = questDataGetRecord(quest);
             const u8 *text = textConvertToGlyphPairs(record->detail, NULL);
             asdTextDrawFormatted(menu->panel.texts[1], 3, -1, 0, 3, "%s", text);
         } else {

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -45,7 +45,7 @@ u32 FUN_0028d24c(SlotOwner *owner)
         for (i = 0; i < owner->idCount; i++) {
             u32 id = owner->ids[i];
 
-            if (reinterpret_cast<Slot *>(dataTable40FindById(id))->rank == rank) {
+            if (reinterpret_cast<Slot *>(skillDataFindById(id))->rank == rank) {
                 return id;
             }
         }

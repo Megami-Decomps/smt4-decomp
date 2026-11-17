@@ -31,7 +31,7 @@ RosterEntry* gameFindRosterEntry(s32 id);
 // Returns whether every condition of goal `id` is currently satisfied.
 s32 goalConditionsSatisfied(s32 id)
 {
-    QuestRecordA* goal = dataTable1bOr1cGetRecord(id);
+    QuestRecordA* goal = questDataGetRecord(id);
     s32 result = 1;
     if (goal == NULL) return 0;
 

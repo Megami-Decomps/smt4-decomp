@@ -3,7 +3,7 @@
 #include "battle/btlUnit.h"
 #include "battle/btlAction.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/UnitRecordAccess.h"
 struct BtlUi;
 struct BtlEntry;
@@ -20,7 +20,7 @@ struct BattleSummaryBuffer {
 };
 extern "C" {
 extern BtlUi *g_btlUiBlock;
-void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const Table00Record *definition);
+void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const NkmEnemyRecord *definition);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 flagWordTestBit(const void *owner, u32 bit);
 void objectFlagsClear(void *owner, u32 flags);
@@ -55,7 +55,7 @@ void FUN_003c1248(s32 kind, s32 source, s32 target, s32 animate)
         }
     } else {
         const QueuedBattleUnitsView *queue = reinterpret_cast<const QueuedBattleUnitsView *>(battle);
-        const Table00Record *definition = dataTable00FindById(static_cast<u16>(queue->entries[source]));
+        const NkmEnemyRecord *definition = nkmEnemyFindById(static_cast<u16>(queue->entries[source]));
         if (!definition)
             return;
         FUN_0023ebc8(battle, &summary.view.data, definition);

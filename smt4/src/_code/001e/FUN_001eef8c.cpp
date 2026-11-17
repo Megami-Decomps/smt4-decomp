@@ -16,7 +16,7 @@ int FUN_0029e6f0(void);
 int resourceRunOperationIfUnblocked(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int demonGetRaceLabel(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
@@ -64,7 +64,7 @@ extern int listCursorGetRowIfUnblocked(int);
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
@@ -129,7 +129,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     temp_v3 = temp_v2 + 0x6c00;
     puVar5 = (unsigned short *)
              ((*(unsigned int *)(temp_v2 + (unsigned int)*(unsigned short *)(temp_v2 + 0x6ce2) * 8 + 0x1394) & 0x1ffff) >> 2);
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v4 = asdTMTexTableEntryAt(0x24,0x4d);
     temp_v15 = 0xffffffff;
     temp_v5 = FUN_0029dde0();
@@ -201,7 +201,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v10 = temp_v2 + (unsigned int)temp_v1 * 8;
         psVar13 = (short *)(*(unsigned int *)(temp_v10 + 0x1390) & 0x7fff);
         temp_v13 = temp_v10;
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v11 = asdTMTexTableEntryAt(0x24,0x11a);
         texDrawTableEntryAtStoredOrigin(2,0x24,0x113,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,
                      0x6a);
@@ -250,7 +250,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         FUN_002580d4(*psVar13,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,0x7e);
         psVar13 = (short *)((*(unsigned int *)(temp_v10 + 0x1390) & 0x3fffffff) >> 0xf);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v11 = asdTMTexTableEntryAt(0x24,0x11b);
         texDrawTableEntryAtStoredOrigin(2,0x24,0x113,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,
                      0x6a);
@@ -372,7 +372,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       temp_v6 = temp_v2 + (unsigned int)temp_v1 * 8;
       psVar13 = (short *)(*(unsigned int *)(temp_v6 + 0x1390) & 0x7fff);
       temp_v4 = temp_v6;
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v13 = asdTMTexTableEntryAt(0x24,0x13b);
       texDrawTableEntryAtStoredOrigin(2,0x24,0x133,*(short *)(temp_v13 + 8) + temp_v9,*(short *)(temp_v13 + 10) + temp_v8,
                    0x83);
@@ -445,7 +445,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       FUN_002580d4(*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v9,
                    (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,0x9c);
       psVar13 = (short *)((*(unsigned int *)(temp_v6 + 0x1390) & 0x3fffffff) >> 0xf);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v13 = asdTMTexTableEntryAt(0x24,0x13c);
       texDrawTableEntryAtStoredOrigin(2,0x24,0x134,*(short *)(temp_v13 + 8) + temp_v9,*(short *)(temp_v13 + 10) + temp_v8,
                    0x6a);

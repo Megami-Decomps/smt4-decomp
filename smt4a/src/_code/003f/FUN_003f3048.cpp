@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 struct SkillRollUnit {
     /* 0x00 */ u8 unk00[0x34];
@@ -23,13 +23,13 @@ SkillRollMetadata *findSkillMetadataById(u16 id);
  * set) and reports whether a successful roll finds a skill with metadata flag 0x40. */
 s32 FUN_003f3048(SkillRollUnit *unit, s32 tries, s32 force)
 {
-    DevilRecordA *record;
+    NkmBaseRecordA *record;
     s32 chance;
 
     if (tries <= 0) {
         return 0;
     }
-    record = devilGetRecord(unit->id);
+    record = nkmBaseGetRecord(unit->id);
     chance = saveIsRecordValueBounded(unit->id) / 500 + record->packed.skillChance;
     if (gameDataFlagTestBit(5) != 0) {
         chance += 30;

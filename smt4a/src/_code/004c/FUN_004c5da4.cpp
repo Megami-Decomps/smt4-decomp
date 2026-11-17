@@ -1,6 +1,6 @@
 /* NON_MATCHING: initial exclusion-mask AND/OR operands use different scratch registers; the paired flags load matches. */
 #include "battle/BtlMainAccess.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 struct Source4C;
 extern "C" {

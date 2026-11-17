@@ -26,7 +26,7 @@ s32 FUN_002c5ef0(void)
     s32 i;
 
     for (i = 0; i < 400; i++) {
-        QuestRecord *entry = dataTable1bOr1cGetRecord((u16)i);
+        QuestRecord *entry = questDataGetRecord((u16)i);
 
         if (entry != NULL && (entry->flags & 0x80)) {
             u16 index = i;

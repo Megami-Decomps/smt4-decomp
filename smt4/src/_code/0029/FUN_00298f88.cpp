@@ -6,7 +6,7 @@ extern "C" {
 /* Reads or forwards the current state. */
 u32 FUN_00298f88(u32 id)
 {
-    QuestRecord *record = dataTable1bOr1cGetRecord(id);
+    QuestRecord *record = questDataGetRecord(id);
     return record != NULL ? record->flags & 1 : 0;
 }
 }

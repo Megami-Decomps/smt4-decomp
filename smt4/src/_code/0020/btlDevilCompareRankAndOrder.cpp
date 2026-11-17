@@ -6,8 +6,8 @@ extern "C" {
 /* Compares two record ids by rank (higher first), then by order. */
 s32 btlDevilCompareRankAndOrder(u16 *a, u16 *b)
 {
-    EquipmentRecord *recordA = dataTable08Sub2GetRecord(*a);
-    EquipmentRecord *recordB = dataTable08Sub2GetRecord(*b);
+    EquipmentRecord *recordA = itemTableGetEquipmentRecord(*a);
+    EquipmentRecord *recordB = itemTableGetEquipmentRecord(*b);
     s32 diff = recordB->statBonus[0] - recordA->statBonus[0];
 
     if (diff == 0) {

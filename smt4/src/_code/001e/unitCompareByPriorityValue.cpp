@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -14,8 +14,8 @@ s32 unitCompareByPriorityValue(const u16 *left, const u16 *right)
     if (*right == 0) {
         return 0;
     }
-    void *leftRecord = dataTable40FindById(*left);
-    void *rightRecord = dataTable40FindById(*right);
+    void *leftRecord = skillDataFindById(*left);
+    void *rightRecord = skillDataFindById(*right);
     if (leftRecord == NULL) {
         return 0;
     }

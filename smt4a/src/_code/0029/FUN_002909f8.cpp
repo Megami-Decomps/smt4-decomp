@@ -1,6 +1,6 @@
 /* NON_MATCHING: sort-key operand order and the result local now match retail; retail copies leftSlot into r2 (mov r2, r0) before the push instead of loading through r0. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -24,8 +24,8 @@ s32 FUN_002909f8(const s32 *leftSlot, const s32 *rightSlot)
     if (difference != 0) {
         return difference;
     }
-    DevilRecordA *leftInfo = devilGetRecord(leftRecord->entryId);
-    DevilRecordA *rightInfo = devilGetRecord(rightRecord->entryId);
+    NkmBaseRecordA *leftInfo = nkmBaseGetRecord(leftRecord->entryId);
+    NkmBaseRecordA *rightInfo = nkmBaseGetRecord(rightRecord->entryId);
     difference = rightInfo->race - leftInfo->race;
     if (difference != 0) {
         return difference;

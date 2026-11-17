@@ -18,16 +18,16 @@ void playerModelLoadPart(u32 model, s32 part, u32 d)
 
     switch (part) {
     case 0:
-        record = dataTable08Sub2GetRecord(player->equipped.head);
+        record = itemTableGetEquipmentRecord(player->equipped.head);
         textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model,
                          FUN_0023cef0(model, 0, record->modelGroup, record->model, 0));
         break;
     case 1:
-        record = dataTable08Sub2GetRecord(player->equipped.body);
+        record = itemTableGetEquipmentRecord(player->equipped.body);
         textFormatBuffer(path, "player/pl%02d_%03dbd0.bam", record->modelGroup, record->model);
         break;
     case 2:
-        record = dataTable08Sub2GetRecord(player->equipped.legs);
+        record = itemTableGetEquipmentRecord(player->equipped.legs);
         textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model,
                          FUN_0023cef0(model, 2, record->modelGroup, record->model, 0));
         break;

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 namespace {
 struct PurchaseEntry {
@@ -37,7 +37,7 @@ s32 demonPurchaseValidate(PurchaseMenu *menu, u16 id)
     u8 error;
 
     if (!menu->discounted) {
-        devilGetRecord(entry->id);
+        nkmBaseGetRecord(entry->id);
     }
     if (price > gameSlotTableGetHeader()) {
         error = 1;

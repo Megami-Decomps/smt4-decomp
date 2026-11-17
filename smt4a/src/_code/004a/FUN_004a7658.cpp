@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 struct RankedEntry {
     u16 id;  // 0x00
@@ -12,8 +12,8 @@ s32 FUN_004a7658(const RankedEntry* first, const RankedEntry* second)
 {
     s32 order = second->rank - first->rank;
     if (order == 0) {
-        DevilRecordA* a = devilGetRecord(first->id);
-        DevilRecordA* b = devilGetRecord(second->id);
+        NkmBaseRecordA* a = nkmBaseGetRecord(first->id);
+        NkmBaseRecordA* b = nkmBaseGetRecord(second->id);
         order = a->level - b->level;
         if (order == 0) {
             order = second->id - first->id;

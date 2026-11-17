@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 namespace {
 
@@ -18,7 +18,7 @@ u32 affinityShouldReplaceState(s32 current, s32 incoming);
 /* Resolve one affinity of a unit: the demon's base response, overridden by its passive skills. */
 void affinityResolveUnitSlot(DevilAffinity *out, AffinityUnit *unit, s32 kind)
 {
-    DevilRecord *record = devilGetRecord(unit->devilId);
+    NkmBaseRecord *record = nkmBaseGetRecord(unit->devilId);
     s32 state;
 
     out->id = record->affinities[kind].id;

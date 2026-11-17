@@ -1,8 +1,8 @@
 /* NON_MATCHING: learned-rank search remains scalar instead of pair-unrolled, and branch-local discount accumulation differs. */
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/Shard004B.h"
 #include "status/StatusCamera.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 namespace {
 struct SkillCostDiscountView {
@@ -24,7 +24,7 @@ static __inline u8 findLearnedSkillRank(const ItemRankRecord *player, u32 skillI
 }
 
 extern "C" {
-s32 FUN_00283ebc(Table04Record *skill, s32 rank, u32 modifier);
+s32 FUN_00283ebc(SkillDataRecord *skill, s32 rank, u32 modifier);
 s32 flagBitIsSet(u32 flag);
 SkillCostDiscountView *appCostRecordFindById(u16 id);
 ItemRankRecord *gameGetPlayerData(void);
@@ -32,7 +32,7 @@ ItemRankRecord *gameGetPlayerData(void);
 // Apply learned-rank or global cost discounts, keeping a nonzero skill's cost at least one.
 s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank)
 {
-    Table04Record *skill = dataTable40FindById(skillId);
+    SkillDataRecord *skill = skillDataFindById(skillId);
     if (skill == NULL) {
         return 0;
     }

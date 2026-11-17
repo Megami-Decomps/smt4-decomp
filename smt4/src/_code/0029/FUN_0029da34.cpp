@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the initial button-help global/work loads are scheduled differently around saved argument moves. */
 #include "ui/ButtonHelp.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
@@ -20,7 +20,7 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 context)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
-    const DevilRecord *devil = devilGetRecord(devilId);
+    const NkmBaseRecord *devil = nkmBaseGetRecord(devilId);
     if (devil == NULL) {
         work->unk4CB = 0;
         return;

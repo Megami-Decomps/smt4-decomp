@@ -1,11 +1,11 @@
 /* NON_MATCHING: category bit extraction matches; final skill-list success path duplicates rather than sharing the result-setting tail. */
 #include "battle/btlUnit.h"
 #include "gamedata/BattleUnitSkills.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnit.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
@@ -20,7 +20,7 @@ u32 FUN_003a8790(void)
     BtlCombatantEntryA *entry = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->entry;
     if (entry->record) {
         for (s32 index = 0; index < 8; ++index) {
-            const Table04RecordA *skill = dataTable04FindById(entry->record->skills[index]);
+            const SkillDataRecordA *skill = skillDataFindById(entry->record->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
@@ -29,7 +29,7 @@ u32 FUN_003a8790(void)
     }
     if (entry->secondaryRecord) {
         for (s32 index = 0; index < 8; ++index) {
-            const Table04RecordA *skill = dataTable04FindById(entry->secondaryRecord->skills[index]);
+            const SkillDataRecordA *skill = skillDataFindById(entry->secondaryRecord->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
@@ -37,9 +37,9 @@ u32 FUN_003a8790(void)
         }
     }
     if (entry->candidate.record) {
-        const Table00RecordA *demon = dataTable00FindById(entry->id);
+        const NkmEnemyRecordA *demon = nkmEnemyFindById(entry->id);
         for (s32 index = 0; index < 8; ++index) {
-            const Table04RecordA *skill = dataTable04FindById(demon->skills[index]);
+            const SkillDataRecordA *skill = skillDataFindById(demon->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;

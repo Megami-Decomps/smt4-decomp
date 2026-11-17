@@ -1,6 +1,6 @@
 /* NON_MATCHING: bitfield stores into the result and register allocation of the skill-gathering loops differ from retail. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SkillFlags.h"
 
 // Result descriptor of a fusion: the two parent ids, the product and its summed cost.
@@ -56,7 +56,7 @@ FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, 
     result->secondParent = second;
     result->product = pair->value;
 
-    DevilRecord *record = devilGetRecord(pair->value & 0xffff);
+    NkmBaseRecord *record = nkmBaseGetRecord(pair->value & 0xffff);
     for (s32 i = 0; i < 8; i++) {
         if (record->skills[i] != 0) {
             unit->skills[unit->skillCount] = record->skills[i];

@@ -15,7 +15,7 @@ u32 contentGetFirstFlaggedValue(void)
     const u32 count = 0x7de;
     u32 result = 0;
     for (u32 id = 0; id < count + 1; id++) {
-        const ContentFlagsView *record = (const ContentFlagsView *)dataTable8FindRecord(id);
+        const ContentFlagsView *record = (const ContentFlagsView *)itemTableGetItemRecord(id);
         if (record != NULL && (record->flags & 8)) {
             if (id - 1 < count) {
                 result = flagValueRead(id);

@@ -3,7 +3,7 @@
 #include "battle/btlAIScript.h"
 #include "battle/btlMain.h"
 #include "addon/aocMain.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "gamedata/SupportUnitRecord.h"
 #include "code/Code002b.h"
 #include "addon/AocSystem.h"
@@ -50,7 +50,7 @@ void btlAiScriptLoadFile(BtlAiScript *script, BtlAiScriptActor *actor)
             textFormatBuffer(path, DAT_00400454);
         libc_strcpy(script->path, path);
     } else {
-        const char *name = dataTable00FindById(actor->demon->id)->aiScriptName;
+        const char *name = nkmEnemyFindById(actor->demon->id)->aiScriptName;
         memClear(path, sizeof(path));
         textFormatBuffer(path, DAT_00400444, name);
         if (!FUN_002402c4(btlGetMainState(), path))

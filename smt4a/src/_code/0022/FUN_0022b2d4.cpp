@@ -41,7 +41,7 @@ int asdTMTexTableEntryAt(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int gxResetColorQuadToWhite(void);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int drawSetColorFromRGBA8(...);
 int unitGetStereoScreenPosition(...);
 int devilDrawResolvedTexture(...);
@@ -132,7 +132,7 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 extern int unitHasRankingBonus(short);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int gameFlagIsSet(unsigned int);
@@ -276,7 +276,7 @@ unsigned char FUN_0022b2d4(void)
       textDrawString(2,0xff,temp_v29,temp_v27[5]);
       if (*(char *)(temp_v2 + 0x2017) != '\0') {
         puVar5 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v4 + 0x1390);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v10 = temp_v9;
         if (puVar5 != (unsigned short *)0x0) {
           temp_v10 = (unsigned int)*(unsigned short *)(temp_v4 + 0x1390);
@@ -529,7 +529,7 @@ LAB_0022b9b8:
     psVar20 = (short *)0x0;
     if (*(char *)(temp_v2 + 0x2017) != '\0') {
       psVar20 = (short *)(unsigned int)*(unsigned short *)(temp_v28 + 0x1390);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     temp_v4 = temp_v28;
     temp_v21 = (float)((unsigned long long)temp_v22 >> 0x20);

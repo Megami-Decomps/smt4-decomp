@@ -23,11 +23,11 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
     dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     for (u16 id = 0; id < count; ++id) {
-        DevilRecord *candidate = devilGetRecord(id);
+        NkmBaseRecord *candidate = nkmBaseGetRecord(id);
         if (candidate->level != level || id == previousId || id == firstId || id == secondId) {
             continue;
         }
-        DevilRecord *definition = devilGetRecord(candidate->id);
+        NkmBaseRecord *definition = nkmBaseGetRecord(candidate->id);
         if ((definition->fusionRestrictions & 0x1c00000) ||
             (definition->requiredFlag != 0 && !gameFlagIsSet(definition->requiredFlag))) {
             continue;

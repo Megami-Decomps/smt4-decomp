@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -22,8 +22,8 @@ s32 devilCompareNonEmptyFirstB(SortEntry *a, SortEntry *b)
     if (b->count == 0) {
         result = -1;
     } else {
-        DevilRecord *recordA = devilGetRecord(a->id);
-        DevilRecord *recordB = devilGetRecord(b->id);
+        NkmBaseRecord *recordA = nkmBaseGetRecord(a->id);
+        NkmBaseRecord *recordB = nkmBaseGetRecord(b->id);
 
         result = recordA->race - recordB->race;
         if (result == 0) {

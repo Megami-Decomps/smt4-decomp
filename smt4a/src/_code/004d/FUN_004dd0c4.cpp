@@ -51,7 +51,7 @@ struct UiPositionA {
 extern "C" {
 extern u32 g_btlUiBlock;
 
-SkillCategoryView *dataTable04FindById(u32 id);
+SkillCategoryView *skillDataFindById(u32 id);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 void *rt_memclr(void *block, u32 size);
 void FUN_004aa798(u32 ui, void *arg, s32 count);
@@ -91,14 +91,14 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
     bool normal = true;
     s32 value = selection->value;
     s32 kind = selection->kind;
-    const SkillCategoryView *skill = dataTable04FindById(value);
-    const ConsumableRecordA *record = dataTable8FindRecord(value);
+    const SkillCategoryView *skill = skillDataFindById(value);
+    const ConsumableRecordA *record = itemTableGetItemRecord(value);
     if (kind == 2) {
         if (skill != NULL && skillHasSpecialCategory(skill))
             normal = false;
     } else if (kind == 8) {
         if (record != NULL && record->skillId != 0) {
-            if (dataTable04FindById(record->skillId) == NULL || skillHasSpecialCategory(skill))
+            if (skillDataFindById(record->skillId) == NULL || skillHasSpecialCategory(skill))
                 normal = false;
         }
     }

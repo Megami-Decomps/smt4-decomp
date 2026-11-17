@@ -14,7 +14,7 @@ int FUN_00180310(...);
 int asdTMTexTableEntryAt(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
-int dataTable08Sub2GetRecord(void);
+int itemTableGetEquipmentRecord(void);
 int FUN_0026ec00(int, int, unsigned int);
 int FUN_0047fc38(void);
 int equipmentGetCappedUpgradeBonuses(...);
@@ -63,7 +63,7 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern unsigned int flagValueRead(int);
 /* Supplied declaration required: FUN_0026ec00. */
 extern int recordGetModeForId(int);
@@ -116,7 +116,7 @@ void FUN_0034cfc0(int param_1,int param_2,int param_3,int param_4,int param_5)
     return;
   }
   temp_v9 = temp_v22;
-  dataTable08Sub2GetRecord();
+  itemTableGetEquipmentRecord();
   temp_v11 = 0;
   temp_v18 = 0;
   temp_v19 = 0;
@@ -199,7 +199,7 @@ LAB_0034d600:
         temp_v8 = 0;
       }
       else {
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
       }
       drawSetColorFromRGBA8(0xffffffff);
@@ -275,9 +275,9 @@ LAB_0034d85c:
       }
       else {
         temp_v6 = temp_v8;
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         temp_v4 = (int)*(short *)(temp_v6 + 0x36) + (int)(short)temp_v17;
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         temp_v7 = (int)*(short *)(temp_v8 + 0x38) + (int)(*(short *)((unsigned char *)&temp_v17 + 2));
       }
       drawSetColorFromRGBA8(0xffffffff);
@@ -321,7 +321,7 @@ LAB_0034d2c4:
     temp_v8 = 0;
   }
   else {
-    dataTable08Sub2GetRecord();
+    itemTableGetEquipmentRecord();
     temp_v8 = *(unsigned int *)(temp_v8 + 0x24) & 0x3ff;
   }
   drawSetColorFromRGBA8(0xffffffff);

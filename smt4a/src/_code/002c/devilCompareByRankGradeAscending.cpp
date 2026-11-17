@@ -1,12 +1,12 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
 /* qsort-style comparison of two devil ids by rank (ascending), grade (descending) and id (ascending). */
 s32 devilCompareByRankGradeAscending(u16 *a, u16 *b)
 {
-    DevilRecordA *recordA = devilGetRecord(*a);
-    DevilRecordA *recordB = devilGetRecord(*b);
+    NkmBaseRecordA *recordA = nkmBaseGetRecord(*a);
+    NkmBaseRecordA *recordB = nkmBaseGetRecord(*b);
     s32 result = recordA->race - recordB->race;
 
     if (result == 0) {

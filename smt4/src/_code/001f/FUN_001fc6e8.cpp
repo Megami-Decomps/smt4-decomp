@@ -22,7 +22,7 @@ int soundChannelStopAll(...);
 int slotSetRequest(...);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int dataTable01FindByIdWithAoc(...);
 int libc_strcpy(...);
 int asdMemFree(void);
@@ -171,7 +171,7 @@ extern int gameGetSlotTable(void);
 extern int gameGetSupportUnitData(void);
 extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
@@ -723,7 +723,7 @@ LAB_001fd348:
     case 3:
       temp_v3 = gameGetSupportUnitData();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
-      if ((temp_v6 != 0) && (temp_v10 = temp_v6, devilGetRecord(), temp_v10 != 0)) {
+      if ((temp_v6 != 0) && (temp_v10 = temp_v6, nkmBaseGetRecord(), temp_v10 != 0)) {
         memClear(&temp_v16,0x60);
         dataTable01FindByIdWithAoc(temp_v6);
         libc_strcpy(&temp_v16,temp_v6);

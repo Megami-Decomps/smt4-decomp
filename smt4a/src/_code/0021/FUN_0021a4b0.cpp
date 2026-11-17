@@ -49,7 +49,7 @@ void FUN_0021a4b0()
     uiQuestRefreshDetailPages(questId);
     uiSpriteSelectAnim(quest->acceptance.sprite, 2);
     FUN_003dea6c(questId, 0, 1);
-    QuestRecordA *definition = dataTable1bOr1cGetRecord(questId);
+    QuestRecordA *definition = questDataGetRecord(questId);
     if (definition && definition->kind == 11) {
         const SpecialQuestMetadata *metadata = reinterpret_cast<const SpecialQuestMetadata *>(definition);
         char text[132];

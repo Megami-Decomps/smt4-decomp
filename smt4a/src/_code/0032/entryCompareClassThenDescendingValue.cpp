@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/ItemSortCategory.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 s32 idIsAbove400(s32 id);
@@ -16,7 +16,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         leftField = 0;
     } else {
         leftClass = itemGetSortCategory(*left);
-        leftField = dataTable04FindById(*left)->listing.sortKey;
+        leftField = skillDataFindById(*left)->listing.sortKey;
     }
 
     s32 rightClass;
@@ -26,7 +26,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         rightField = 0;
     } else {
         rightClass = itemGetSortCategory(*right);
-        rightField = dataTable04FindById(*right)->listing.sortKey;
+        rightField = skillDataFindById(*right)->listing.sortKey;
     }
 
     s32 difference = leftClass - rightClass;

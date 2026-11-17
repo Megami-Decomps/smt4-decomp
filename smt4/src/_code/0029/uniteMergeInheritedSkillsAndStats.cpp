@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the optional third parent's saturating count increment swaps the index/value registers (r2/r1 instead of r1/r2). */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 struct UnitInheritanceRecord {
     u8 unk00[0x46];
@@ -30,7 +30,7 @@ extern "C" void uniteMergeInheritedSkillsAndStats(void *, const UnitInheritanceR
             result->traits[i] |= second->traits[i];
         }
     }
-    bitsetSetBit(result, devilGetRecord(result->id)->innateFlag);
+    bitsetSetBit(result, nkmBaseGetRecord(result->id)->innateFlag);
     if (hasThird) {
         for (s32 i = 0; i < 0x500; ++i) {
             s32 total = first->ancestors[i] + second->ancestors[i];

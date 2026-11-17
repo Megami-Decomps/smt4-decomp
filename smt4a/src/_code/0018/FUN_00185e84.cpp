@@ -1,5 +1,5 @@
 /* NON_MATCHING: sprite-selection value stays in r2 rather than retail's r0, changing x/y saved-register allocation. */
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -28,7 +28,7 @@ void FUN_00185e84(u32 id, s32 x, s32 y, s32 depth, s32 showUpgrade, s32 adjustme
         if (idIsAbove400(id))
             sprite = 0x419;
         else {
-            const Table04RecordA *record = dataTable04FindById(id);
+            const SkillDataRecordA *record = skillDataFindById(id);
             sprite = record == NULL ? 1000 : requestKindToId(record->properties & 0x1F);
         }
     }

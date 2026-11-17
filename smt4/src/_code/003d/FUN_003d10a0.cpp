@@ -60,7 +60,7 @@ s32 FUN_003d10a0(BtlMainState **state, AiSkillContext *context, AiSkillTarget **
     } else {
         modes.count = 1;
         modes.skills[0] = 1;
-        if (dataTable08Sub2GetRecord(*reinterpret_cast<u16 *>(gameGetPlayerData() + 2)) != 0) {
+        if (itemTableGetEquipmentRecord(*reinterpret_cast<u16 *>(gameGetPlayerData() + 2)) != 0) {
             modes.count = 2;
             modes.skills[1] = 2;
         }

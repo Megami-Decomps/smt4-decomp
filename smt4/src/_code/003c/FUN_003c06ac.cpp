@@ -2,7 +2,7 @@
 #include "battle/BattleAssetWork.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
@@ -20,7 +20,7 @@ void btlReflectQueueKind34(u32 first, u32 second);
 u32 FUN_00256898(u32 first, u32 second);
 
 // Start loading the talk tone, message and script files for a unit's devil.
-static __inline void battleTalkLoadFiles(BattleTalkWork *work, const DevilRecord *record)
+static __inline void battleTalkLoadFiles(BattleTalkWork *work, const NkmBaseRecord *record)
 {
     u32 tone = record->talkAlternate;
     if (tone == 99) {
@@ -39,7 +39,7 @@ static __inline void battleTalkLoadFiles(BattleTalkWork *work, const DevilRecord
 u32 FUN_003c06ac(BattleTalkWork *work)
 {
     const BattleTalkUnitReference *unit = btlFindEntryBlockByMemberId(work->unitId, work->selector);
-    const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(unit->id));
+    const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(unit->id));
     battleTalkLoadFiles(work, record);
     FUN_003dadd8(DAT_00435d18);
     work->ready = 1;

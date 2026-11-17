@@ -43,7 +43,7 @@ extern "C" s32 fusionCollectAvailableRacePartners(const FusionRaceFilterIV *filt
         u8 allowedRaces[56] = {0};
         u32 race;
         if (filter->hasDevil) {
-            race = devilGetRecord(filter->devilId)->race;
+            race = nkmBaseGetRecord(filter->devilId)->race;
         } else {
             race = filter->race;
         }
@@ -64,7 +64,7 @@ extern "C" s32 fusionCollectAvailableRacePartners(const FusionRaceFilterIV *filt
         s32 first = firstFusionDevilId();
         s32 last = lastFusionDevilId();
         for (s32 id = first; id <= last; ++id) {
-            if (itemGetFlagBit1((u16)id) && allowedRaces[devilGetRecord((u16)id)->race]) {
+            if (itemGetFlagBit1((u16)id) && allowedRaces[nkmBaseGetRecord((u16)id)->race]) {
                 output[count++] = (u16)id;
             }
         }

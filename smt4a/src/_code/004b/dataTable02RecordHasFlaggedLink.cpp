@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct Table02Record;
 struct Table02LinkedIds {
@@ -18,7 +18,7 @@ u32 dataTable02RecordHasFlaggedLink(s32 index)
         for (s32 slot = 0; slot < 6; ++slot) {
             u16 id = record->ids[slot];
             if (id != 0) {
-                const Table00RecordA *entry = dataTable00FindById(id);
+                const NkmEnemyRecordA *entry = nkmEnemyFindById(id);
                 if (entry != NULL && (entry->level & 0x8000) != 0) {
                     return 1;
                 }

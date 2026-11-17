@@ -8,7 +8,7 @@
 extern "C" {
 
 int recordGetScaledMaximum(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int slotRecordFindById(...);
 int gameDataCopySaveEntry(...);
 int memcpySrcFirst(int, unsigned int [11], int);
@@ -31,7 +31,7 @@ typedef struct {
 extern int gameDataBlocksGetSaveData(void);
 extern int randRange(unsigned int);
 /* Supplied declaration required: recordGetScaledMaximum. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -87,7 +87,7 @@ void FUN_0037be64(void)
     temp_v7 = (unsigned int)temp_v15;
     gameDataCopySaveEntry(temp_v7,temp_v20);
     temp_v0 = temp_v21;
-    if (((temp_v21 != 0) && (devilGetRecord(), temp_v7 != 0)) && ((*(unsigned short *)(temp_v7 + 10) & 1) != 0)) {
+    if (((temp_v21 != 0) && (nkmBaseGetRecord(), temp_v7 != 0)) && ((*(unsigned short *)(temp_v7 + 10) & 1) != 0)) {
       temp_v13 = 0;
 LAB_0037bf0c:
       temp_v8 = temp_v6 + temp_v13 * 4;

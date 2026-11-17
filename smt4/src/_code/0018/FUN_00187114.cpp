@@ -7,7 +7,7 @@ extern "C" {
 
 int fadeObjectResetIfActive(...);
 int FUN_0029a284(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int fontMeasureLineAdvance(...);
 
 int FUN_0029a17c(...);
@@ -17,7 +17,7 @@ int FUN_0029acb0(void);
 int flagCountUnlockedSlots(...);
 int FUN_0029dc74(...);
 int FUN_0029ee54(...);
-int dataTable40FindById(void);
+int skillDataFindById(void);
 int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
 int FUN_002bdf94(...);
@@ -65,9 +65,9 @@ extern int FUN_0029d644(int);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_0029ee54. */
 extern int listCursorGetRowIfUnblocked(void);
-/* Supplied declaration required: dataTable40FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int partyMemberFindById(unsigned short);
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: aocIndexValueOrDefault. */
@@ -247,7 +247,7 @@ LAB_0018733c:
             temp_v20 = appGetRemainingCapacity();
           }
           else {
-            dataTable40FindById();
+            skillDataFindById();
             if (temp_v7 != 0) {
               temp_v20 = (unsigned int)*(unsigned char *)(temp_v7 + 0x22);
             }
@@ -576,7 +576,7 @@ LAB_00187ce0:
     temp_v8 = asdTMTexTableEntryAt(0x1a,0x544);
     puVar10 = (unsigned short *)FUN_0029acb0();
     temp_v7 = (unsigned int)*puVar10;
-    dataTable00FindById();
+    nkmEnemyFindById();
     if ((temp_v7 == 0) || ((*(unsigned short *)(temp_v7 + 0x16) & 1) != 0)) {
       textFormatBuffer(temp_v16,"\x82m\x82\x8f\x81@\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93\x81@\x82\x81\x82\x92\x82\x85\x81@\x82\x81\x82\x96\x82\x81\x82\x89\x82\x8c\x82\x81\x82\x82\x82\x8c\x82\x85\x81D");
     }

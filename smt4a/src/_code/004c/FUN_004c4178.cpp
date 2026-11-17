@@ -7,7 +7,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int FUN_00243d30(...);
 int FUN_0028cb6c(void);
 int btlEntryBuildSummary(...);
@@ -57,7 +57,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: FUN_00243d30. */
 /* Supplied declaration required: FUN_0028cb6c. */
 /* Supplied declaration required: btlEntryBuildSummary. */
@@ -264,7 +264,7 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
     temp_v7 = temp_v5 * temp_v7;
   }
   if (((temp_v25 != (fn_004c4178_arg0 *)0x0) &&
-      (pfVar8 = temp_v25, dataTable04FindById(), pfVar8 != (fn_004c4178_arg0 *)0x0)) &&
+      (pfVar8 = temp_v25, skillDataFindById(), pfVar8 != (fn_004c4178_arg0 *)0x0)) &&
      (*(short *)&pfVar8->field_0x3a < 0)) {
     FUN_00243d30(*(unsigned short *)(pbVar3 + 0x15e) >> 10);
     temp_v7 = temp_v7 * temp_v5;

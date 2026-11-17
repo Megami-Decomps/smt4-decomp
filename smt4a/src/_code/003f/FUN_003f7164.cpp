@@ -33,7 +33,7 @@ LayoutPart *asdTMTexTableEntryAt(s32 bank, s32 id);
 void texDrawTableEntryAtStoredOrigin(s32 layer, s32 bank, s32 id, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
 IconRecord *dataTable10FindValue(s32 id);
-void devilGetRecord(void);
+void nkmBaseGetRecord(void);
 void FUN_00169a1c(s32 layout, s32 x, s32 y, s32 depth);
 s32 FUN_003f74a8(u32 id, CardEntry *entry, s32 x, s32 y);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -81,7 +81,7 @@ void FUN_003f7164(u32 id, CardEntry *entry, s32 index, u32 arg, s32 offsetX, s32
         } else {
             record = dataTable10FindValue(iconId);
         }
-        devilGetRecord();
+        nkmBaseGetRecord();
         s16 layout = 0;
         if (record != 0) {
             layout = record->iconLayout;

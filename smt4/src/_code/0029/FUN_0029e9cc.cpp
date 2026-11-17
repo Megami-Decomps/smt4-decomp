@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the address register of the g_gameDataBlocks load differs (retail keeps the global in r0 and computes id*5 before loading saveBlock into r2). */
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "shard/GameDataBlocks.h"
 #include "shard/W6_W6Match3_NameFormState.h"
 
@@ -11,7 +11,7 @@ u16 FUN_0029e9cc(u16 id)
     if (id > 0x500) {
         return 0;
     }
-    const Table00Record *record = dataTable00FindById(id);
+    const NkmEnemyRecord *record = nkmEnemyFindById(id);
     if ((record->flags & 1) == 0) {
         return 0;
     }

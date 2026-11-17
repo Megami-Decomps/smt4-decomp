@@ -21,7 +21,7 @@ static __inline QuestRecordA *searchKeyed(const QuestRecordA *key, const void *r
 }
 
 /* Look up an add-on override or a base-table record by its identifier. */
-QuestRecordA *dataTable1bOr1cGetRecord(u32 id)
+QuestRecordA *questDataGetRecord(u32 id)
 {
     u32 tableIds[2] = {0x1b, 0x1c};
     QuestRecordA key;

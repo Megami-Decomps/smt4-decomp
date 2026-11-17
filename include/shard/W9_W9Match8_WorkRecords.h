@@ -1089,7 +1089,7 @@ typedef char FlagGatePrefixALayoutCheck[
     offsetof(FlagGatePrefixA, flagId) == 0x56 &&
     sizeof(FlagGatePrefixA) == 0x58 ? 1 : -1];
 
-/* Observed prefix of the record returned by dataTable1bOr1cGetRecord in Apocalypse.
+/* Observed prefix of the record returned by questDataGetRecord in Apocalypse.
  * This describes the accessed prefix, not the complete allocation extent. */
 struct TextLayoutContextA;
 
@@ -1257,7 +1257,7 @@ typedef char ResourceDescriptorPrefixALayoutCheck[
     sizeof(ResourceDescriptorPrefixA) == 0x20 ? 1 : -1];
 
 // Table 4, subtable 1: the search stride is explicitly 0x3C.
-// This is not the canonical 0x40-byte Table04Record or Table04ExtraRecord.
+// This is not the canonical 0x40-byte SkillDataRecord or Table04ExtraRecord.
 struct Table4SearchRecordIV {
     u8 unk00[0x20];
     u16 id;
@@ -1269,7 +1269,7 @@ typedef char Table4SearchRecordIVLayoutCheck[
     offsetof(Table4SearchRecordIV, flags) == 0x38 &&
     sizeof(Table4SearchRecordIV) == 0x3C ? 1 : -1];
 
-// Observed prefix returned by dataTable40FindById, not a recovered object boundary.
+// Observed prefix returned by skillDataFindById, not a recovered object boundary.
 // Eight two-byte slots follow at 0x58; a slot is free while its first byte is zero.
 struct RecordSlotIV {
     u8 used;

@@ -3,7 +3,7 @@
 
 #include "common.h"
 #include "name/NameFormText.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 // Known prefix of the name-entry form; its initializer installs twelve member callbacks.
 struct NameFormState {

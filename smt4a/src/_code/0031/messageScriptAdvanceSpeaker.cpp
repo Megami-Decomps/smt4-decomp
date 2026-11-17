@@ -33,8 +33,8 @@ u32 messageScriptAdvanceSpeaker(void)
         if (result == 1) {
             scrWorkSetValue(1, 0);
             if (rosterHasLeader()) {
-                QuestRecordA *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
-                QuestRecordA *current = dataTable1bOr1cGetRecord(speakerId);
+                QuestRecordA *previous = questDataGetRecord(rosterGetLeaderId());
+                QuestRecordA *current = questDataGetRecord(speakerId);
                 if (previous && current &&
                     ((previous->kind != 5 && previous->kind != 4 && previous->kind != 1) ||
                      (current->kind != 0 && current->kind != 10)))

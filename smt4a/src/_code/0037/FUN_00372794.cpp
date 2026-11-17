@@ -1,7 +1,7 @@
 /* NON_MATCHING: registers and logic match, but armcc places the playerHasFlagBit and btlMainGetUnk14 calls inline; retail moves both to out-of-line blocks after the return. */
 #include "common.h"
 #include "mapnavi/naviMain.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -44,7 +44,7 @@ u32 FUN_00372794(SkillMenuWork *work, s32 id, SkillUser *user)
     }
     u32 usable = 0;
     if (enabled) {
-        SkillTableEntry *entry = (SkillTableEntry *)dataTable04FindById(id);
+        SkillTableEntry *entry = (SkillTableEntry *)skillDataFindById(id);
         if (entry != NULL && entry->unk86 != 0 && (user == NULL || FUN_004bd098(user, id) >= 0)) {
             usable = 1;
         }

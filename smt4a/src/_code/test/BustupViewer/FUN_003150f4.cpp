@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int bustupViewerResetState(void);
 
 int textFormatBuffer(...);
@@ -41,7 +41,7 @@ extern int padButtonIsPressed(unsigned int);
 extern int dataTableGet(unsigned int, unsigned char);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern int dataTable19FindAddonWord(void);
 extern int scrRunOpcodesStub(void);
 /* Supplied declaration required: asdMemFreeSlot. */
@@ -629,7 +629,7 @@ LAB_00315308:
           }
           else {
             temp_v3 = temp_v3 & 0xffff;
-            dataTable00FindById();
+            nkmEnemyFindById();
             if ((temp_v3 != 0) && (0 < *(short *)(temp_v3 + 0x8c))) goto LAB_00315308;
           }
         }

@@ -1,18 +1,18 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
 /* Sort comparison of two devil ids: by base MP descending, then level ascending, then id descending. */
 s32 FUN_003acd88(u16 *idA, u16 *idB)
 {
-    DevilRecord *recordA = devilGetRecord(*idA);
-    DevilRecord *recordB = devilGetRecord(*idB);
+    NkmBaseRecord *recordA = nkmBaseGetRecord(*idA);
+    NkmBaseRecord *recordB = nkmBaseGetRecord(*idB);
     s32 diff = recordB->baseMp - recordA->baseMp;
 
     if (diff == 0) {
-        recordA = devilGetRecord(*idA);
-        recordB = devilGetRecord(*idB);
+        recordA = nkmBaseGetRecord(*idA);
+        recordB = nkmBaseGetRecord(*idB);
         diff = recordA->level - recordB->level;
         if (diff == 0) {
             diff = *idB - *idA;

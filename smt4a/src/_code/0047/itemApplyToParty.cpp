@@ -11,7 +11,7 @@ void flagValueSub(s32 itemId, s32 amount);
 s32 itemApplyToParty(s32 itemId, s32 mode)
 {
     bool used = false;
-    ConsumableRecordA *item = dataTable8FindRecord(itemId);
+    ConsumableRecordA *item = itemTableGetItemRecord(itemId);
     if (item != NULL) {
         if (itemApplyToMember(-1, item, mode, NULL, NULL) == 0) {
             used = true;

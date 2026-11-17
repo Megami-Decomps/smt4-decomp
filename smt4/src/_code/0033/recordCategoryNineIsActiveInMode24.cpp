@@ -7,7 +7,7 @@ extern "C" s32 recordCategoryNineIsActiveInMode24(u32 recordId)
     if (recordId < 0x15e) {
         return 0;
     }
-    QuestRecord* record = dataTable1bOr1cGetRecord(recordId);
+    QuestRecord* record = questDataGetRecord(recordId);
     if (record == NULL) {
         return 0;
     }

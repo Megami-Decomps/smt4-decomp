@@ -1,5 +1,5 @@
 /* NON_MATCHING: the 0x604-byte unit copy and the cleared stat region schedule differently (retail zeroes sixteen words with individual stores, armcc keeps the temporary's layout in other registers) and the slot-table search keeps its pointers in different registers. */
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/UnitStats.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -109,7 +109,7 @@ void FUN_0022de74(DevilPreviewWork *work)
                 }
             }
             FUN_0029d8a0(id);
-            const DevilRecord *devil = (const DevilRecord *)devilGetRecord(id);
+            const NkmBaseRecord *devil = (const NkmBaseRecord *)nkmBaseGetRecord(id);
             DevilPreviewUnit unit;
 
             __aeabi_memcpy4(&unit, current, sizeof(StatBlock));

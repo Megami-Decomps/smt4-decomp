@@ -1,6 +1,6 @@
 /* NON_MATCHING: target-kind compare now matches retail (bitfield); retail shares one `requiresTargetSelection = 1` store between all arms and reads the flag back through a pool-constant offset, ours duplicates the store and reuses the flag pointer. */
 #include "battle/btlUI.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 
 struct BattleActionDetails {
@@ -30,16 +30,16 @@ void btlUiRouteSelectedAction(void)
     BtlUiObjC *selection = &ui->objC;
     btlCommandMenuResolveLayout(selection, &kind, &id);
     if (kind == 2 || kind == 3) {
-        BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(dataTable40FindById(id));
+        BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(skillDataFindById(id));
         if (details->targetKind == 2 || details->targetKind == 3 || details->targetKind == 4)
             ui->panelState.requiresTargetSelection = 1;
     } else if (kind == 8) {
-        u16 action = dataTable08Sub1GetRecord(id)->skillId;
+        u16 action = itemTableGetItemRecord(id)->skillId;
         if (action) {
-            BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(dataTable40FindById(action));
+            BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(skillDataFindById(action));
             if (details->targetKind == 2 || details->targetKind == 3 || details->targetKind == 4)
                 ui->panelState.requiresTargetSelection = 1;
-        } else if ((dataTable08Sub1GetRecord(id)->target & 0x7f) != 1) {
+        } else if ((itemTableGetItemRecord(id)->target & 0x7f) != 1) {
             ui->panelState.requiresTargetSelection = 1;
         }
     }

@@ -4,7 +4,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "AsdSDK/AsdDebugHooks.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
 
 struct BtlSkill;
@@ -54,7 +54,7 @@ u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
         if (!modelOwnerResetPlayerIfReady(*owner))
             return 0;
         asdDebugHookPtrInt(*owner, reinterpret_cast<const u8 *>(
-            dataTable40FindById(work->command->skill))[0x55]);
+            skillDataFindById(work->command->skill))[0x55]);
         work->sequence.phase = 4;
         break;
     case 4:

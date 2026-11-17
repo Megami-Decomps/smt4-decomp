@@ -1,9 +1,9 @@
 #include "event/3dEvent/EventTextureJob.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern const s8 DAT_0052f6a8[];
@@ -29,7 +29,7 @@ u32 eventCreatePositionedBattleTextureJob(u32 id, EventTexturePosition position)
     work->fadeStep = 0.25f;
     work->stopWhenHidden = 0;
     work->unk17 = 0;
-    work->resourceId = dataTable00FindById((u16)id)->battleTextureId;
+    work->resourceId = nkmEnemyFindById((u16)id)->battleTextureId;
     work->animate = 1;
     if (FUN_00162ea4()) {
         work->state = 1;

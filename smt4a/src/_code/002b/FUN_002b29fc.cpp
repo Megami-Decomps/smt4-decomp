@@ -19,12 +19,12 @@ s32 FUN_002b29fc(const DevilSecondarySortEntry *left, const DevilSecondarySortEn
 {
     SecondarySortRecord *leftSecondary = dataTable12FindBySortKey(left->tableKey);
     SecondarySortRecord *rightSecondary = dataTable12FindBySortKey(right->tableKey);
-    devilGetRecord(left->devilId);
-    devilGetRecord(right->devilId);
+    nkmBaseGetRecord(left->devilId);
+    nkmBaseGetRecord(right->devilId);
     s32 order = FUN_0023e60c(leftSecondary->sortKey) - FUN_0023e60c(rightSecondary->sortKey);
     if (order == 0) {
-        DevilRecordA *leftRecord = devilGetRecord(left->devilId);
-        DevilRecordA *rightRecord = devilGetRecord(right->devilId);
+        NkmBaseRecordA *leftRecord = nkmBaseGetRecord(left->devilId);
+        NkmBaseRecordA *rightRecord = nkmBaseGetRecord(right->devilId);
         order = leftRecord->race - rightRecord->race;
         if (order == 0) {
             order = rightRecord->level - leftRecord->level;

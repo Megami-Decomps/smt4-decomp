@@ -6,8 +6,8 @@
 /* Orders two demons by their data-table priority, then by race, level and ID. */
 static __inline s32 compareFusionPriority(u32 first, u32 second)
 {
-    const DevilRecordA *a = devilGetRecord(first);
-    const DevilRecordA *b = devilGetRecord(second);
+    const NkmBaseRecordA *a = nkmBaseGetRecord(first);
+    const NkmBaseRecordA *b = nkmBaseGetRecord(second);
     s32 firstPriority = dataTableGetEntry0102Value(a->id);
     s32 secondPriority = dataTableGetEntry0102Value(b->id);
     s32 result = firstPriority - secondPriority;

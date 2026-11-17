@@ -8,7 +8,7 @@ int FUN_003f034c(...);
 int FUN_004fbeac(...);
 
 int jyoucyuGetTableEntry(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int FUN_003e892c(int);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
 int FUN_003ebca0(void);
@@ -74,7 +74,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int gameFlagIsSet(unsigned int);
 extern int FUN_0019acdc(unsigned short, unsigned int);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int FUN_003e48bc(void);
 extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003e892c. */
@@ -173,7 +173,7 @@ void FUN_003984ac(int param_1)
             ) || (temp_v6 = param_1, btlFindFirstEntryMatchingCategoryAndRequiredMask(), temp_v6 == 0)) goto LAB_003987dc;
         temp_v6 = (int)*(short *)(temp_v6 + 8);
         btlSelectSourceTriggeredSkill(temp_v6,1);
-        if ((temp_v6 == 0) || (temp_v7 = temp_v6, dataTable04FindById(), temp_v7 == 0)) goto LAB_003987dc;
+        if ((temp_v6 == 0) || (temp_v7 = temp_v6, skillDataFindById(), temp_v7 == 0)) goto LAB_003987dc;
         temp_v3 = *(unsigned int *)(param_1 + 0x45a4) | DAT_00573ae4;
         *puVar6 = *puVar6 | DAT_00573ae0;
         *(unsigned int *)(param_1 + 0x45a4) = temp_v3;

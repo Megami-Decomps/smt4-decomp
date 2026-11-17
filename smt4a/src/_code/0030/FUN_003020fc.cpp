@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int dataTable8FindRecord(void);
-int dataTable08Sub2GetRecord(void);
-int dataTable04FindById(void);
+int itemTableGetItemRecord(void);
+int itemTableGetEquipmentRecord(void);
+int skillDataFindById(void);
 
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
 extern unsigned int DAT_005702a8; /* 0x5702a8 */
 extern unsigned int DAT_005702ac; /* 0x5702ac */
 
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
+/* Supplied declaration required: skillDataFindById. */
 
 
 unsigned int FUN_003020fc(unsigned int *param_1,unsigned int param_2)
@@ -35,16 +35,16 @@ unsigned int FUN_003020fc(unsigned int *param_1,unsigned int param_2)
       temp_v0 = *(short *)((int)param_1 + temp_v3 * 8 + 0x33a);
       if (temp_v0 == 2 || temp_v0 == 3) {
         temp_v2 = (int)(short)param_1[temp_v3 * 2 + 0xcf];
-        dataTable04FindById();
+        skillDataFindById();
         if ((temp_v2 != 0) && (param_2 == (*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb)) {
           return 1;
         }
       }
       if (*(short *)((int)param_1 + temp_v3 * 8 + 0x33a) == 8) {
         temp_v2 = (int)(short)param_1[temp_v3 * 2 + 0xcf];
-        dataTable8FindRecord();
+        itemTableGetItemRecord();
         if (((temp_v2 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32), temp_v1 != 0)) &&
-           ((dataTable04FindById(), temp_v1 != 0 && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb))))
+           ((skillDataFindById(), temp_v1 != 0 && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb))))
         {
           return 1;
         }
@@ -56,7 +56,7 @@ unsigned int FUN_003020fc(unsigned int *param_1,unsigned int param_2)
       }
       if ((temp_v4 && temp_v0 == 2) && (param_1[0xfe] != 0)) {
         temp_v1 = (unsigned int)*(unsigned short *)(param_1[0xfe] + 4);
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         if ((temp_v1 != 0) && (param_2 == *(unsigned int *)(temp_v1 + 0x24) >> 0x14)) {
           return 1;
         }
@@ -67,16 +67,16 @@ unsigned int FUN_003020fc(unsigned int *param_1,unsigned int param_2)
   else {
     if (*(short *)((int)param_1 + 0x32a) == 2 || *(short *)((int)param_1 + 0x32a) == 3) {
       temp_v3 = (int)(short)param_1[0xcb];
-      dataTable04FindById();
+      skillDataFindById();
       if ((temp_v3 != 0) && (param_2 == (*(unsigned int *)(temp_v3 + 0x28) & 0xffff) >> 0xb)) {
         return 1;
       }
     }
     if (*(short *)((int)param_1 + 0x32a) == 8) {
       temp_v3 = (int)(short)param_1[0xcb];
-      dataTable8FindRecord();
+      itemTableGetItemRecord();
       if ((((temp_v3 != 0) && (temp_v1 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32), temp_v1 != 0)) &&
-          (dataTable04FindById(), temp_v1 != 0)) && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb)) {
+          (skillDataFindById(), temp_v1 != 0)) && (param_2 == (*(unsigned int *)(temp_v1 + 0x28) & 0xffff) >> 0xb)) {
         return 1;
       }
     }

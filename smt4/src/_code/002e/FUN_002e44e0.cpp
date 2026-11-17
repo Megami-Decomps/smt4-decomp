@@ -1,7 +1,7 @@
 #include "common.h"
 #include "gamedata/ItemSortCategory.h"
 #include "gamedata/Table8Type5Lookup.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -34,14 +34,14 @@ static __inline s32 sortKeyCompare(SortKey &a, SortKey &b)
         orderA = 0;
     } else {
         rankA = itemGetSortCategory(a.id);
-        orderA = reinterpret_cast<ItemData *>(dataTable40FindById(a.id))->order;
+        orderA = reinterpret_cast<ItemData *>(skillDataFindById(a.id))->order;
     }
     if (idIsAbove400(b.id)) {
         rankB = 99;
         orderB = 0;
     } else {
         rankB = itemGetSortCategory(b.id);
-        orderB = reinterpret_cast<ItemData *>(dataTable40FindById(b.id))->order;
+        orderB = reinterpret_cast<ItemData *>(skillDataFindById(b.id))->order;
     }
     s32 diff = rankA - rankB;
     if (diff == 0)

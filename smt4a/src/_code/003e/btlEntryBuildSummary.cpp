@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int devilGetRecord(void);
-int dataTable8FindRecord(void);
-int dataTable08Sub2GetRecord(void);
-int dataTable04FindById(void);
+int nkmBaseGetRecord(void);
+int itemTableGetItemRecord(void);
+int itemTableGetEquipmentRecord(void);
+int skillDataFindById(void);
 
 /* stack frame of param_3: 16 slot(s), 64 byte(s) */
 typedef struct {
@@ -47,10 +47,10 @@ extern unsigned int DAT_0057399c; /* 0x57399c */
 #define ROMWRIGHT_PIECE_1_1_DEFINED
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: nkmBaseGetRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
+/* Supplied declaration required: skillDataFindById. */
 
 
 void btlEntryBuildSummary(unsigned int *param_1,unsigned int param_2,unsigned int *param_3)
@@ -103,13 +103,13 @@ void btlEntryBuildSummary(unsigned int *param_1,unsigned int param_2,unsigned in
         if ((short)param_3[0xc9] == 2) {
           temp_v18 = (unsigned int)*(unsigned short *)(param_3[0xfe] + 2);
           temp_v5 = temp_v18;
-          dataTable08Sub2GetRecord();
+          itemTableGetEquipmentRecord();
           temp_v0 = *(unsigned char *)(temp_v5 + 0x29);
           temp_v1 = *(unsigned char *)(temp_v5 + 0x7c);
           temp_v15 = temp_v15 | *(unsigned char *)(temp_v5 + 0x28) >> 4;
           temp_v8 = (*(unsigned char *)(temp_v5 + 0x28) & 0xf) << 0x18;
           temp_v6 = (unsigned int)*(unsigned short *)(param_3[0xfe] + 4);
-          dataTable08Sub2GetRecord();
+          itemTableGetEquipmentRecord();
           if (temp_v6 != 0) {
             temp_v2 = *(unsigned char *)(temp_v6 + 0x2a);
             temp_v7 = *(unsigned int *)(temp_v6 + 0x24);
@@ -141,7 +141,7 @@ void btlEntryBuildSummary(unsigned int *param_1,unsigned int param_2,unsigned in
       else {
         temp_v18 = (unsigned int)*(unsigned short *)param_3[0xfe];
         temp_v5 = temp_v18;
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         temp_v13 = (unsigned int)*(unsigned char *)(temp_v5 + 0x2a) << 0x10;
         temp_v8 = (*(unsigned char *)(temp_v5 + 0x28) & 0xf) << 0x18;
         temp_v14 = ((*(unsigned int *)(temp_v5 + 0x24) & 0xffff03ff) << 0x10) | 100;
@@ -169,7 +169,7 @@ void btlEntryBuildSummary(unsigned int *param_1,unsigned int param_2,unsigned in
         temp_v15 = temp_v15 | ((*(unsigned char *)(temp_v5 + 0x18) & 0x3f) >> 3);
         temp_v9 = ((unsigned int)*(unsigned char *)(temp_v5 + 0x1b) << 8) | ((unsigned int)*(unsigned char *)(temp_v5 + 0x1c) << 0x10);
         temp_v5 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-        devilGetRecord();
+        nkmBaseGetRecord();
         temp_v11 = (unsigned int)romwright_piece_1_1(*(unsigned char *)(temp_v5 + 0x13),temp_v1);
       }
       else if (((temp_v5 & DAT_00573998) != 0 || (temp_v6 & DAT_0057399c) != 0) && (param_3[0x100] != 0)
@@ -178,7 +178,7 @@ void btlEntryBuildSummary(unsigned int *param_1,unsigned int param_2,unsigned in
     else {
 LAB_003e9284:
       temp_v8 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v8 + 10);
       temp_v14 = ((unsigned int)*(unsigned short *)(temp_v8 + 0x16) << 0x10) | 100;
       temp_v13 = (unsigned int)*(unsigned char *)(temp_v8 + 0xd) << 0x10;
@@ -195,7 +195,7 @@ LAB_003e9284:
 LAB_003e9384:
     temp_v11 = temp_v5 << 0x10;
     temp_v6 = temp_v5;
-    dataTable04FindById();
+    skillDataFindById();
     if (temp_v6 != 0) {
       temp_v8 = *(unsigned int *)(temp_v6 + 0x28);
       temp_v11 = temp_v11 | *(unsigned char *)(temp_v6 + 0x31);
@@ -240,7 +240,7 @@ LAB_003e9384:
   case 8:
     temp_v4 = (int)(short)param_3[0xc9];
     temp_v18 = temp_v4 << 0x10;
-    dataTable8FindRecord();
+    itemTableGetItemRecord();
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0x32);
     if (temp_v5 != 0) goto LAB_003e9384;
     if ((*(unsigned char *)(temp_v4 + 0x3a) & 0x80) == 0) {
@@ -287,13 +287,13 @@ LAB_003e9384:
     else if ((!((temp_v5 & DAT_00573998) == 0 && (temp_v6 & DAT_0057399c) == 0)) &&
             (param_3[0x100] != 0)) {
       temp_v5 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v14 = (unsigned int)*(unsigned short *)(temp_v5 + 0x14) | (temp_v14 & 0xffff0000);
     }
   }
   else {
     temp_v5 = (unsigned int)*(unsigned short *)((int)param_3 + 0x166);
-    devilGetRecord();
+    nkmBaseGetRecord();
     temp_v14 = (unsigned int)*(unsigned short *)(temp_v5 + 0x14) | (temp_v14 & 0xffff0000);
   }
   *param_1 = temp_v10;

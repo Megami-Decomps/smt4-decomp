@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -21,8 +21,8 @@ u32 FUN_002ce0d8(Ref *a, Ref *b)
     } else {
         result = a->group - groupB;
         if (result == 0) {
-            DevilRecordA *recordA = devilGetRecord(a->id);
-            DevilRecordA *recordB = devilGetRecord(b->id);
+            NkmBaseRecordA *recordA = nkmBaseGetRecord(a->id);
+            NkmBaseRecordA *recordB = nkmBaseGetRecord(b->id);
 
             result = recordA->race - recordB->race;
             if (result == 0) {

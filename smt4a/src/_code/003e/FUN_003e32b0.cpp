@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rebuild of the NPC shop select script driver (step 0 lists up to three entries and starts the script entry for the count, steps 1-3 wait on the script); the stack frame matches retail (84 bytes) but armcc keeps the constants 0/1 in different registers (sl instead of r9) and orders the branch tests differently; the entry index passed in the unknown-selection case is assumed to be the found index. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 /* Record of one shop entry candidate (an id's table record). */
@@ -49,7 +49,7 @@ void FUN_003e32b0(NpcShopSelect *scene)
         fillThreeWordsWithByte(scene->choices, 0xFFFFFFFF);
         ShopSlot *slots = (ShopSlot *)scene;
         for (s32 i = 0; i < 3; i++) {
-            DevilRecordA *record = devilGetRecord(slots[i].id);
+            NkmBaseRecordA *record = nkmBaseGetRecord(slots[i].id);
             if (record == NULL)
                 continue;
             if (record->unlockFlag != 0 && gameFlagIsSet(record->unlockFlag) == 0)

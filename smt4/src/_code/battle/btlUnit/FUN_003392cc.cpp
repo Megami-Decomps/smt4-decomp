@@ -8,7 +8,7 @@ int FUN_0023f410(int, int, int);
 int FUN_00240520(int, unsigned int);
 int FUN_002881bc(void);
 int modelGetBoneTranslationByName(unsigned int, unsigned char *, float *);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00240520. */
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: modelGetBoneTranslationByName. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 
 
 void FUN_003392cc(int param_1)
@@ -100,7 +100,7 @@ void FUN_003392cc(int param_1)
     temp_v11 = 0x3f800000;
     do {
       temp_v0 = *(unsigned int *)(param_1 + temp_v2 * 4 + 0x43a8);
-      dataTable00FindById();
+      nkmEnemyFindById();
       temp_v1 = param_1 + temp_v2 * 0x20;
       *(int *)(temp_v1 + 0x2f3c) = (int)*(short *)(temp_v0 + 0x88);
       *(short *)(temp_v1 + 0x2f40) = (short)temp_v2;

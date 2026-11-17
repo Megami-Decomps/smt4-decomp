@@ -4,7 +4,7 @@
 #include "code/Code0020.h"
 #include "code/Code0023.h"
 #include "shop/shopMain.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 
@@ -157,7 +157,7 @@ void Obj422448::FUN_003abed8()
         return;
     }
     screen->shownSkillId = skillId;
-    Table00Record *rec = dataTable00FindById(0);
+    NkmEnemyRecord *rec = nkmEnemyFindById(0);
     for (s32 i = 0; i <= 1200; i++, rec++) {
         if (rec->selectionId == screen->shownSkillId) {
             u16 help = rec->id;

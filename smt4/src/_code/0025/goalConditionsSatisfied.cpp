@@ -27,7 +27,7 @@ bool unlockFlagTest(u16 id);
 /* Whether the quest `id` can be taken: the requirements of its record are all met. */
 u32 goalConditionsSatisfied(u32 id)
 {
-    QuestRecord *record = dataTable1bOr1cGetRecord(id);
+    QuestRecord *record = questDataGetRecord(id);
     u32 met = 1;
     if (record == NULL) return 0;
 

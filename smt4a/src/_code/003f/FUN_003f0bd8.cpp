@@ -1,7 +1,7 @@
 /* NON_MATCHING: zero-result exits and queued-skill mask scratch-register allocation differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
@@ -20,7 +20,7 @@ u32 FUN_003f0bd8(BtlMainStateA *state, s32 markQueued)
         return 0;
     }
     u32 skill = FUN_004c5da4(actor->unitIndex, markQueued);
-    if (skill == 0 || dataTable04FindById(skill) == NULL) {
+    if (skill == 0 || skillDataFindById(skill) == NULL) {
         return 0;
     }
     if (markQueued) {

@@ -59,7 +59,7 @@ int FUN_0029e788(void);
 int gameSetIconDisplayEnabled(...);
 int FUN_0029ede8(...);
 int gridNavigationConfigure(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
 int dataTable01FindByIdWithAoc(...);
 int textFormatBuffer(...);
@@ -226,7 +226,7 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: uiSlidingSpriteAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
@@ -1060,7 +1060,7 @@ LAB_0018d058:
       libc_strcpy(temp_v26,temp_v9);
       textEncodeFontSlot(0x10,temp_v26);
       temp_v16 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v0 = *(char *)(temp_v16 + 0x30);
       temp_v9 = dataTableGet(0x25,0);
       pcVar18 = (char *)dataTableGetEntries();

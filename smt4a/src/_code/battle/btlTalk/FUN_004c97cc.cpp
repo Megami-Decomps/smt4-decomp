@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (210 vs 228 rows); retail's load-stage fallthrough and mask tests are laid out differently */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "bible/bibleAnalyze.h"
 
 // Talk-window tuning data shared by the battle talk code: three 64-bit side masks.
@@ -86,7 +86,7 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
     switch (window->state) {
     case 0: {
         SideRecord* side = btlFindEntryBlockByMemberId(window->battle, window->sideId);
-        DevilRecordA *info = devilGetRecord(side->id);
+        NkmBaseRecordA *info = nkmBaseGetRecord(side->id);
         textFormatBuffer(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->talkTone]);
         asdLoadFileAsyncSimple(path, &window->toneFile, 1);
         window->modeA = info->talkTone;

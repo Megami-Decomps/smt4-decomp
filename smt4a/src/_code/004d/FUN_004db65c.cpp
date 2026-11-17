@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail updates the two result words with bic/orr masks in registers and stores them with one strd, and re-reads the paired-key record's value after each result store (the result words alias it); this build's u64 bit-field inserts schedule differently and cache the value. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 #include "gamedata/PackedIdentifiers.h"
 
@@ -50,7 +50,7 @@ FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, PackedIdent
             found = 0;
             if (fusionRecordPassesFilter(state, first, second, demonId) != 0) {
                 result->cost = 0;
-                DevilRecordA *demon = devilGetRecord(demonId);
+                NkmBaseRecordA *demon = nkmBaseGetRecord(demonId);
                 for (s32 i = 0; i < 8; i++) {
                     u16 skill = demon->skills.ids[i];
                     if (skill != 0) {

@@ -86,7 +86,7 @@ void playerRecalcStatsFromEquipment(PlayerDataIV *player)
         u16 id = equipmentGet(player, slot);
 
         if (id != 0) {
-            record = dataTable08Sub2GetRecord(id);
+            record = itemTableGetEquipmentRecord(id);
             if (record != NULL) {
                 player->stats[0] += record->statBonus[0];
                 player->stats[1] += record->statBonus[1];
@@ -109,7 +109,7 @@ void playerRecalcStatsFromEquipment(PlayerDataIV *player)
     limits.base = *(const LimitWords *)player->skills;
     player->maxHp += hpBonus;
     player->maxMp += mpBonus;
-    record = dataTable08Sub2GetRecord(player->equipment[6]);
+    record = itemTableGetEquipmentRecord(player->equipment[6]);
     limits.equipExtra = record != NULL ? record->modifierId : 0;
     FUN_002dada4(current, &limits, 9);
     player->hp = (s16)player->hp <= (s16)current->hp ? player->hp : current->hp;

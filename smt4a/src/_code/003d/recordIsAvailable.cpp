@@ -9,7 +9,7 @@ extern s32 gameFlagIsSet(u32 flag);
 /* 1 when the id has a record that is available; 0 if there is none, or flag A is set while flag B is not. */
 u32 recordIsAvailable(s32 id)
 {
-    QuestRecordA *record = dataTable1bOr1cGetRecord(id);
+    QuestRecordA *record = questDataGetRecord(id);
 
     if (record == NULL) {
         return 0;

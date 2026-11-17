@@ -26,7 +26,7 @@ u32 FUN_0047fe44(u32 actor)
             return 1;
         case 1:
         case 0xC: {
-            ConsumableRecordA *a = dataTable8FindRecord(actor);
+            ConsumableRecordA *a = itemTableGetItemRecord(actor);
 
             if (a == NULL) {
                 return 0;
@@ -40,7 +40,7 @@ u32 FUN_0047fe44(u32 actor)
         case 6:
         case 7:
         case 8: {
-            EquipmentRecordA *b = dataTable08Sub2GetRecord(actor);
+            EquipmentRecordA *b = itemTableGetEquipmentRecord(actor);
 
             if (b == NULL) {
                 return 0;

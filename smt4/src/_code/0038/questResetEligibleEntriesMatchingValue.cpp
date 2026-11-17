@@ -19,7 +19,7 @@ s32 questResetEligibleEntriesMatchingValue(u32 matchingValue)
             continue;
 
         QuestRecord* record =
-            dataTable1bOr1cGetRecord(static_cast<u16>(questIndex));
+            questDataGetRecord(static_cast<u16>(questIndex));
         if (record != 0 && record->area != 0 &&
             record->area == matchingValue) {
             flagEntryReset(static_cast<u16>(questIndex));

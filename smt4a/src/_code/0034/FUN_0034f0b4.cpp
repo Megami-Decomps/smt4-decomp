@@ -2,7 +2,7 @@
 #include "common.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 extern UniteWork *g_unite;
@@ -10,8 +10,8 @@ extern UniteWork *g_unite;
 
 static inline s32 compareFusionRecords(u32 leftId, u32 rightId)
 {
-    const DevilRecordA *left = devilGetRecord(leftId);
-    const DevilRecordA *right = devilGetRecord(rightId);
+    const NkmBaseRecordA *left = nkmBaseGetRecord(leftId);
+    const NkmBaseRecordA *right = nkmBaseGetRecord(rightId);
     s32 result = s32(right->race) - s32(left->race);
     if (result == 0) {
         result = s32(left->level) - s32(right->level);

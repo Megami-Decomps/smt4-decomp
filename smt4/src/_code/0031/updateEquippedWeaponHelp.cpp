@@ -20,7 +20,7 @@ void asdTextDrawDirectoryEntry(AsdText *, u32, s32, s32, s32, RelativeDirectory 
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
 {
     ButtonHelpWork *help = g_buttonHelp.work;
-    EquipmentRecord *entry = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.weapon);
+    EquipmentRecord *entry = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.weapon);
     if (!entry) {
         help->unk4CB = 0;
         return;

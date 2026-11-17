@@ -5,7 +5,7 @@ extern "C" {
 
 u32 itemDataIsFlagClear(u32 id)
 {
-    QuestRecordA *item = dataTable1bOr1cGetRecord(id);
+    QuestRecordA *item = questDataGetRecord(id);
     return item != NULL ? (1u & ~item->flags) : 0;
 }
 

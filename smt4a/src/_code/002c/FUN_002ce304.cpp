@@ -6,8 +6,8 @@ extern "C" {
 /* Orders two equipment entries by descending (bonus + capped upgrade value) of one upgrade kind, then by ascending key. */
 s32 FUN_002ce304(const SortItem *left, const SortItem *right)
 {
-    EquipmentRecordA *leftData = dataTable08Sub2GetRecord(left->id);
-    EquipmentRecordA *rightData = dataTable08Sub2GetRecord(right->id);
+    EquipmentRecordA *leftData = itemTableGetEquipmentRecord(left->id);
+    EquipmentRecordA *rightData = itemTableGetEquipmentRecord(right->id);
     s16 leftBonus[7];
     s16 rightBonus[7];
     equipmentGetCappedUpgradeBonuses(left->id, leftBonus);

@@ -6,8 +6,8 @@
 
 extern "C" {
 
-int dataTable8FindRecord(void);
-int dataTable04FindById(void);
+int itemTableGetItemRecord(void);
+int skillDataFindById(void);
 int sysMemClear(...);
 int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);
 int FUN_004bf6e0(...);
@@ -61,8 +61,8 @@ extern unsigned int DAT_00571504; /* 0x571504 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: skillDataFindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlEntryBuildSummary. */
@@ -148,7 +148,7 @@ FUN_004c4604(int param_1,unsigned int param_2,int param_3,unsigned int param_4,u
   default:
     if (param_1 != 0xffff) {
       temp_v4 = param_1;
-      dataTable04FindById();
+      skillDataFindById();
       temp_v1 = 0;
       if (param_1 >= 1) {
         if (param_6 != 0) {
@@ -240,7 +240,7 @@ LAB_004c4810:
             return 0;
           }
           temp_v4 = (int)(short)puVar4[0xc9];
-          dataTable8FindRecord();
+          itemTableGetItemRecord();
           if (temp_v4 == 0) {
             return 0;
           }

@@ -3,8 +3,8 @@
 
 static __inline s32 compareFusionDevils(const u32 *first, const u32 *second)
 {
-    const DevilRecordA *a = devilGetRecord(*first);
-    const DevilRecordA *b = devilGetRecord(*second);
+    const NkmBaseRecordA *a = nkmBaseGetRecord(*first);
+    const NkmBaseRecordA *b = nkmBaseGetRecord(*second);
     s32 result = a->level - b->level;
     if (result == 0) {
         result = fusionCompareRaceLevelIdA(first, second);

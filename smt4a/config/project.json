@@ -36718,12 +36718,12 @@
     },
     {
       "address": "0x184310",
-      "function": "devilGetRecord",
+      "function": "nkmBaseGetRecord",
       "module": "_code",
-      "object": "build/obj/_code/0018/devilGetRecord.o",
+      "object": "build/obj/_code/0018/nkmBaseGetRecord.o",
       "size": 132,
-      "source": "src/_code/0018/devilGetRecord.cpp",
-      "target": "orig/target/_code/0018/devilGetRecord.o",
+      "source": "src/_code/0018/nkmBaseGetRecord.cpp",
+      "target": "orig/target/_code/0018/nkmBaseGetRecord.o",
       "thumb": false
     },
     {
@@ -40047,22 +40047,22 @@
     },
     {
       "address": "0x192550",
-      "function": "dataTable8FindRecord",
+      "function": "itemTableGetItemRecord",
       "module": "_code",
-      "object": "build/obj/_code/0019/dataTable8FindRecord.o",
+      "object": "build/obj/_code/0019/itemTableGetItemRecord.o",
       "size": 176,
-      "source": "src/_code/0019/dataTable8FindRecord.cpp",
-      "target": "orig/target/_code/0019/dataTable8FindRecord.o",
+      "source": "src/_code/0019/itemTableGetItemRecord.cpp",
+      "target": "orig/target/_code/0019/itemTableGetItemRecord.o",
       "thumb": false
     },
     {
       "address": "0x192608",
-      "function": "dataTable08Sub2GetRecord",
+      "function": "itemTableGetEquipmentRecord",
       "module": "_code",
-      "object": "build/obj/_code/0019/dataTable08Sub2GetRecord.o",
+      "object": "build/obj/_code/0019/itemTableGetEquipmentRecord.o",
       "size": 128,
-      "source": "src/_code/0019/dataTable08Sub2GetRecord.cpp",
-      "target": "orig/target/_code/0019/dataTable08Sub2GetRecord.o",
+      "source": "src/_code/0019/itemTableGetEquipmentRecord.cpp",
+      "target": "orig/target/_code/0019/itemTableGetEquipmentRecord.o",
       "thumb": false
     },
     {
@@ -41653,12 +41653,12 @@
     },
     {
       "address": "0x19cac4",
-      "function": "dataTable00FindById",
+      "function": "nkmEnemyFindById",
       "module": "_code",
-      "object": "build/obj/_code/0019/dataTable00FindById.o",
+      "object": "build/obj/_code/0019/nkmEnemyFindById.o",
       "size": 132,
-      "source": "src/_code/0019/dataTable00FindById.cpp",
-      "target": "orig/target/_code/0019/dataTable00FindById.o",
+      "source": "src/_code/0019/nkmEnemyFindById.cpp",
+      "target": "orig/target/_code/0019/nkmEnemyFindById.o",
       "thumb": false
     },
     {
@@ -45130,12 +45130,12 @@
     },
     {
       "address": "0x1aba54",
-      "function": "dataTable04FindById",
+      "function": "skillDataFindById",
       "module": "_code",
-      "object": "build/obj/_code/001a/dataTable04FindById.o",
+      "object": "build/obj/_code/001a/skillDataFindById.o",
       "size": 108,
-      "source": "src/_code/001a/dataTable04FindById.cpp",
-      "target": "orig/target/_code/001a/dataTable04FindById.o",
+      "source": "src/_code/001a/skillDataFindById.cpp",
+      "target": "orig/target/_code/001a/skillDataFindById.o",
       "thumb": false
     },
     {
@@ -45445,12 +45445,12 @@
     },
     {
       "address": "0x1ad9b4",
-      "function": "dataTable1bOr1cGetRecord",
+      "function": "questDataGetRecord",
       "module": "_code",
-      "object": "build/obj/_code/001a/dataTable1bOr1cGetRecord.o",
+      "object": "build/obj/_code/001a/questDataGetRecord.o",
       "size": 180,
-      "source": "src/_code/001a/dataTable1bOr1cGetRecord.cpp",
-      "target": "orig/target/_code/001a/dataTable1bOr1cGetRecord.o",
+      "source": "src/_code/001a/questDataGetRecord.cpp",
+      "target": "orig/target/_code/001a/questDataGetRecord.o",
       "thumb": false
     },
     {

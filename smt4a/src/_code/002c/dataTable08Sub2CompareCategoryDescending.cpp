@@ -4,12 +4,12 @@
 // Sort entry IDs by descending category, then ascending tie key.
 extern "C" s32 dataTable08Sub2CompareCategoryDescending(const SortItem* leftId, const SortItem* rightId)
 {
-    const EquipmentRecordA* left = dataTable08Sub2GetRecord(leftId->id);
-    const EquipmentRecordA* right = dataTable08Sub2GetRecord(rightId->id);
+    const EquipmentRecordA* left = itemTableGetEquipmentRecord(leftId->id);
+    const EquipmentRecordA* right = itemTableGetEquipmentRecord(rightId->id);
     s32 difference = right->element - left->element;
     if (difference == 0) {
-        left = dataTable08Sub2GetRecord(leftId->id);
-        right = dataTable08Sub2GetRecord(rightId->id);
+        left = itemTableGetEquipmentRecord(leftId->id);
+        right = itemTableGetEquipmentRecord(rightId->id);
         difference = left->order - right->order;
     }
     return difference;

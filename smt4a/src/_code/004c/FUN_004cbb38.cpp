@@ -1,6 +1,6 @@
 /* NON_MATCHING: slot search/early-exit layout differs (retail keeps the not-found result in one register shared with the failure state store); register allocation of this/pair also differs. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 struct SlotRecordId {
     /* 0x00 */ u8 unk00[0x62];
@@ -93,7 +93,7 @@ void FUN_004cbb38(TalkScene *scene)
     SavedPair *pair = saveGetSelectedRecordSlot(scene->pairIndex);
     SlotRecordId *record = gameGetSlotRecord(scene->slot);
     char path[64];
-    textFormatBuffer(path, DAT_0052c7c0, FUN_003316b4(devilGetRecord(record->id)->talkTone) + 1);
+    textFormatBuffer(path, DAT_0052c7c0, FUN_003316b4(nkmBaseGetRecord(record->id)->talkTone) + 1);
     scene->portraitFile = asdLoadFileSyncDefault(path);
     scene->portrait = scrScriptProcessCreate(scene->portraitData, scene->portraitFile);
     btlTalkBustUpCreate();

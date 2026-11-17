@@ -15,7 +15,7 @@ FlagEntry *gameFlagBlockGetEntry(void);
 s32 FUN_003de464(u32 id, u8 mask)
 {
     FlagEntry *entry = gameFlagBlockGetEntry();
-    QuestRecordA *record = dataTable1bOr1cGetRecord(id);
+    QuestRecordA *record = questDataGetRecord(id);
 
     if (record == NULL) {
         return -1;

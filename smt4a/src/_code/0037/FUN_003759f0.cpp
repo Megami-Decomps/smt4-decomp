@@ -13,8 +13,8 @@ s32 FUN_003759f0(const u16 *left, const u16 *right)
     QuestRecordA *rightRecord;
     s32 diff;
 
-    leftRecord = dataTable1bOr1cGetRecord(*left);
-    rightRecord = dataTable1bOr1cGetRecord(*right);
+    leftRecord = questDataGetRecord(*left);
+    rightRecord = questDataGetRecord(*right);
     if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
     }
@@ -23,8 +23,8 @@ s32 FUN_003759f0(const u16 *left, const u16 *right)
         return diff;
     }
 
-    leftRecord = dataTable1bOr1cGetRecord(*left);
-    rightRecord = dataTable1bOr1cGetRecord(*right);
+    leftRecord = questDataGetRecord(*left);
+    rightRecord = questDataGetRecord(*right);
     if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
     }
@@ -33,8 +33,8 @@ s32 FUN_003759f0(const u16 *left, const u16 *right)
         return diff;
     }
 
-    leftRecord = dataTable1bOr1cGetRecord(*left);
-    rightRecord = dataTable1bOr1cGetRecord(*right);
+    leftRecord = questDataGetRecord(*left);
+    rightRecord = questDataGetRecord(*right);
     if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
     }

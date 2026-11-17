@@ -1,6 +1,6 @@
 /* NON_MATCHING: the group argument and the section count exchange saved registers (r6/r5), and the hoisted devil->effectGroup load lands in r2 instead of overwriting the record pointer in r1. */
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/DataTable.h"
 #include "util/Random.h"
 
@@ -29,7 +29,7 @@ void devilCreateRaceEffect(u32 devilId, s32 group)
         void *countTable = dataTableGet(0x3f, 0);
         s32 count = dataTableGetCount(countTable);
         s32 selected = 0;
-        DevilRecord *devil = devilGetRecord(static_cast<u16>(devilId));
+        NkmBaseRecord *devil = nkmBaseGetRecord(static_cast<u16>(devilId));
         if (devil != NULL) {
             for (s32 i = 0; i < count; ++i) {
                 if (records[i].race == devil->effectGroup) {

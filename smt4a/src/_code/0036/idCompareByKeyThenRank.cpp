@@ -13,8 +13,8 @@ int idCompareByKeyThenRank(u16 *a, u16 *b)
     int result = keyA - keyB;
 
     if (result == 0) {
-        ConsumableRecordA *recordA = dataTable8FindRecord(*a);
-        ConsumableRecordA *recordB = dataTable8FindRecord(*b);
+        ConsumableRecordA *recordA = itemTableGetItemRecord(*a);
+        ConsumableRecordA *recordB = itemTableGetItemRecord(*b);
 
         result = recordB->rank - recordA->rank;
     }

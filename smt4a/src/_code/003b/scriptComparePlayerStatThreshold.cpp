@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
@@ -13,7 +13,7 @@ u32 scriptComparePlayerStatThreshold(void)
     const s32 playerStat = gameGetPlayerStat(static_cast<u8>(statIndex));
     s32 threshold = 0;
     const u16 entryId = static_cast<u16>(scrGetArg(1));
-    const Table00RecordA* entry = dataTable00FindById(entryId);
+    const NkmEnemyRecordA* entry = nkmEnemyFindById(entryId);
 
     if (entry != 0) {
         switch (static_cast<u8>(statIndex)) {

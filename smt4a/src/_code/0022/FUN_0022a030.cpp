@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "code/Code0022_Smt4a.h"
 #include "gamedata/GamePlayerData.h"
 
@@ -12,7 +12,7 @@ s32 skillGetAdjustedCost(PlayerDataA *record, u32 id);
 u32 FUN_0022a030(s32 slot, u32 skill)
 {
     u32 usable = 0;
-    dataTable04FindById(skill);
+    skillDataFindById(skill);
     if (slot < 0) {
         PlayerDataA *player = gameGetPlayerData();
         if (FUN_003df57c(skill, 1) <= player->mp) {

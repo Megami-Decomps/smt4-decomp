@@ -9,8 +9,8 @@ extern s32 DAT_00402638[4];
 // Compare strongest elemental affinity, its element, and finally the table order.
 s32 dataTable08CompareStrongestAffinity(const u16 *left, const u16 *right)
 {
-    EquipmentRecord *first = dataTable08Sub2GetRecord(*left);
-    EquipmentRecord *second = dataTable08Sub2GetRecord(*right);
+    EquipmentRecord *first = itemTableGetEquipmentRecord(*left);
+    EquipmentRecord *second = itemTableGetEquipmentRecord(*right);
     s32 firstAffinity = 0;
     s32 secondAffinity = 0;
     s32 firstElement = DAT_00402638[2];
@@ -29,8 +29,8 @@ s32 dataTable08CompareStrongestAffinity(const u16 *left, const u16 *right)
     if (result == 0) {
         result = FUN_0028886c(secondAffinity, firstAffinity);
         if (result == 0) {
-            first = dataTable08Sub2GetRecord(*left);
-            second = dataTable08Sub2GetRecord(*right);
+            first = itemTableGetEquipmentRecord(*left);
+            second = itemTableGetEquipmentRecord(*right);
             result = second->order - first->order;
         }
     }

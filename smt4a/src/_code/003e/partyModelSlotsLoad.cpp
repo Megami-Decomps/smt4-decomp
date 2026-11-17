@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -39,13 +39,13 @@ void partyModelSlotsLoad(PartyModelWork *work)
     }
     for (i = 0; i < 12; i++) {
         PartyMember *member = partyGetSlotPreferredFirst(i);
-        DevilRecordA *data;
+        NkmBaseRecordA *data;
         u16 modelId;
 
         if (partySlotIsOccupied(member) == 0) {
             continue;
         }
-        data = devilGetRecord(member->devilId);
+        data = nkmBaseGetRecord(member->devilId);
         if (data == NULL) {
             continue;
         }

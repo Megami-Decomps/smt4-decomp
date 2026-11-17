@@ -8,7 +8,7 @@
 extern "C" {
 
 int fontMeasureLineAdvance(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int fadeObjectResetIfActive(...);
 int FUN_00288b20(...);
 
@@ -20,7 +20,7 @@ int efctSetSpeed(...);
 int FUN_00180310(...);
 int asdTMTexTableEntryAt(...);
 int FUN_00185e84(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int statusDownDrawIndicatorPairs(int, int);
 int FUN_002c7e24(void);
 int unitRecordBuild(int, unsigned char [300]);
@@ -66,9 +66,9 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00185e84. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned char *slotRecordFindById(void);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: statusDownDrawIndicatorPairs. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int itemIsCollectedWithRelated(unsigned short);
@@ -325,7 +325,7 @@ LAB_001fca00:
             temp_v27 = skillGetAdjustedCost(temp_v19);
           }
           else {
-            dataTable04FindById();
+            skillDataFindById();
             if (temp_v5 != 0) {
               temp_v27 = (unsigned int)*(unsigned char *)(temp_v5 + 0x22);
             }
@@ -643,7 +643,7 @@ LAB_001fd57c:
     temp_v12 = asdTMTexTableEntryAt(0x12,0x544);
     puVar8 = (unsigned short *)FUN_002c7e24();
     temp_v5 = (unsigned int)*puVar8;
-    dataTable00FindById();
+    nkmEnemyFindById();
     if (((temp_v5 == 0) || ((*(unsigned short *)(temp_v5 + 0x16) & 1) != 0)) && (temp_v22 != 0x10)) {
       textFormatBuffer(temp_v20,"\x82m\x82\x8f\x81@\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93\x81@\x82\x81\x82\x96\x82\x81\x82\x89\x82\x8c\x82\x81\x82\x82\x82\x8c\x82\x85\x81D");
     }

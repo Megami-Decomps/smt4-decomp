@@ -3,12 +3,12 @@
 // Compare the primary key, then the existing table tie-break key.
 extern "C" s32 FUN_002fdd2c(const SortItem *left, const SortItem *right)
 {
-    EquipmentRecordA *leftData = dataTable08Sub2GetRecord(left->id);
-    EquipmentRecordA *rightData = dataTable08Sub2GetRecord(right->id);
+    EquipmentRecordA *leftData = itemTableGetEquipmentRecord(left->id);
+    EquipmentRecordA *rightData = itemTableGetEquipmentRecord(right->id);
     s32 result = entrySortGetPrimaryKey(leftData) - entrySortGetPrimaryKey(rightData);
     if (result == 0) {
-        leftData = dataTable08Sub2GetRecord(left->id);
-        rightData = dataTable08Sub2GetRecord(right->id);
+        leftData = itemTableGetEquipmentRecord(left->id);
+        rightData = itemTableGetEquipmentRecord(right->id);
         result = leftData->order - rightData->order;
     }
     return result;

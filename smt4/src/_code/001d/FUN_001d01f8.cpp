@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation and compare layout only - retail keeps the cost in s0 and the running score in s16, branches to the take path with a shared tail, and loads the kind bytes in the opposite register order; the logic and calls are identical. */
 #include "common.h"
 #include "gamedata/SkillFlags.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 namespace {
 /* The skill inheritance picker's work: the candidate skills, the passive skills that may follow them and
@@ -46,7 +46,7 @@ u32 FUN_001d01f8(SkillPicker *picker)
         if (picker->element == element) {
             score += 1.0f;
         }
-        void *match = dataTable40FindById(id);
+        void *match = skillDataFindById(id);
         if (match != NULL) {
             for (s32 j = 0; j < picker->passiveCount; j++) {
                 if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), match) != 0) {
@@ -72,7 +72,7 @@ u32 FUN_001d01f8(SkillPicker *picker)
     if (best >= 0) {
         picker->chosen[picker->chosenCount] = picker->candidates[best];
         picker->chosenCount++;
-        void *match = dataTable40FindById(picker->candidates[best]);
+        void *match = skillDataFindById(picker->candidates[best]);
         if (match != NULL) {
             for (s32 j = 0; j < picker->passiveCount; j++) {
                 if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), match) != 0) {

@@ -15,7 +15,7 @@ u32 libc_strlen(const char *s);
 /* Returns whether the record's flag is set: 0 for an empty "0" name, 1 without a flag index, else bit 2 of its flag byte. */
 u32 FUN_00290248(u32 id)
 {
-    QuestRecord *record = dataTable1bOr1cGetRecord(id);
+    QuestRecord *record = questDataGetRecord(id);
     u32 length = libc_strlen(record->token);
 
     u32 result;

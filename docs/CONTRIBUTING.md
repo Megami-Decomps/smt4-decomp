@@ -493,4 +493,10 @@ There are no symbols, so names are chosen. `tools/names.py` applies them everywh
   Nintendo SDK functions keep their flattened names (`nn_fs_..._CloseFile`).
 - Globals: `g_` plus camelCase (`g_taskLists`). Structs and typedefs: PascalCase (`TaskList`).
 - Give twins the same name in both games.
+- Data-table records take the name of the RomFS table file they are a row of (a `.tbb` archive holds
+  several tables): `NkmBaseRecord` is a row of `battle/NKMBaseTable.tbb` table 0 (nkm = nakama: the
+  game keeps demon data under `gamedata/nkm/`), `NkmEnemyRecord` of its table 1, `SkillDataRecord`
+  of `battle/SkillData.tbb`, the item and equipment records of `item/ItemTable.tbb` tables 1 and 2,
+  `QuestRecord` of `event/quest/QuestData.tbb`. Match a struct to its file by the row width and the
+  key field's offset, and cite the file in the header comment.
 - Rename only through `tools/names.py`; renaming by hand breaks the retail target objects.

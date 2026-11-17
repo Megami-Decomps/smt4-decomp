@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int buttonHelpSetText(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int FUN_00212724(void);
 int useCounterStart(void);
 int slotBlockSetPair(...);
@@ -51,7 +51,7 @@ extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: useCounterStart. */
@@ -330,7 +330,7 @@ LAB_0023f080:
                     goto LAB_0023f080;
                   }
                   temp_v6 = temp_v10;
-                  dataTable1bOr1cGetRecord();
+                  questDataGetRecord();
                   FUN_003dea6c(temp_v10,0,1);
                   temp_v0 = *(char *)(temp_v6 + 6);
                   if ((temp_v0 == '\x06' || temp_v0 == '\t') || temp_v0 == '\v') {

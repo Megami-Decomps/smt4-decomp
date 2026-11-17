@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -17,8 +17,8 @@ int devilCompareBySetRaceLevel(const u16 *left, const u16 *right)
     if ((leftSet & ~rightSet) != 0) {
         return -1;
     }
-    const DevilRecordA *a = devilGetRecord(*left);
-    const DevilRecordA *b = devilGetRecord(*right);
+    const NkmBaseRecordA *a = nkmBaseGetRecord(*left);
+    const NkmBaseRecordA *b = nkmBaseGetRecord(*right);
     result = b->race - a->race;
     if (result == 0) {
         result = a->level - b->level;

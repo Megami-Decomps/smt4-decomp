@@ -16,7 +16,7 @@ int dataTable54FindById(void);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int demonGetRaceLabel(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
@@ -87,7 +87,7 @@ extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
@@ -189,7 +189,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           if ((temp_v27 == 0) || (temp_v3 = listCursorGetRowIfUnblocked(temp_v21), temp_v3 != temp_v4)) {
             temp_v3 = (int)temp_v22 + temp_v4;
             psVar8 = (short *)(unsigned int)*(unsigned short *)((int)puVar4 + temp_v3 * 2 + 0x6278);
-            devilGetRecord();
+            nkmBaseGetRecord();
             temp_v25 = 0;
             if (temp_v26 != 0) {
               temp_v13 = 0;
@@ -292,7 +292,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       temp_v4 = resourceRunOperationIfUnblocked(temp_v21);
       temp_v13 = listCursorGetRowIfUnblocked(temp_v21);
       psVar8 = (short *)(unsigned int)*(unsigned short *)((int)puVar4 + (temp_v13 + temp_v4) * 2 + 0x6278);
-      devilGetRecord();
+      nkmBaseGetRecord();
       if (temp_v27 != 0) {
         temp_v25 = 0;
         if (temp_v26 != 0) {
@@ -450,7 +450,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         do {
           temp_v4 = temp_v3 + temp_v13;
           puVar10 = (unsigned short *)(unsigned int)*(unsigned short *)((int)puVar4 + temp_v4 * 2 + 0x6278);
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v25 = 0;
           if (temp_v26 != 0) {
             temp_v10 = 0;
@@ -622,7 +622,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
       if (0 < temp_v4) {
         do {
           puVar10 = (unsigned short *)(unsigned int)*(unsigned short *)((int)puVar4 + (temp_v3 + temp_v13) * 2 + 0x6278);
-          devilGetRecord();
+          nkmBaseGetRecord();
           temp_v4 = asdTMTexTableEntryAt(0x24,temp_v13 + 0xe3);
           temp_v10 = asdTMTexTableEntryAt(0x24,0xdb);
           temp_v7 = itemGetFlagBit1(*puVar10);

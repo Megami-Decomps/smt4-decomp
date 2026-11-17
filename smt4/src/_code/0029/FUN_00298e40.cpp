@@ -20,7 +20,7 @@ static __inline void setRemaining(QuestRequirementProgress *progress, s32 value)
 u32 FUN_00298e40(s32 quest, s32 index, QuestRequirementProgress *progress)
 {
     u32 handled = 0;
-    QuestRecord *definition = dataTable1bOr1cGetRecord(quest);
+    QuestRecord *definition = questDataGetRecord(quest);
     if (definition == NULL)
         return 0;
     switch (definition->requirements[index].kind) {

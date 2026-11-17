@@ -2,7 +2,7 @@
 #include "battle/btlAction.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 #include "battle/BtlGlobals.h"
 
@@ -45,14 +45,14 @@ void dispatchBattleCommandUiVariant(BattleUiOwner *owner, BtlUnitA *context)
     if (command != 2 && command != 3 && command != 8)
         return;
     if (command == 8) {
-        u16 skill = dataTable8FindRecord(id)->skillId;
+        u16 skill = itemTableGetItemRecord(id)->skillId;
         if (!skill) {
             FUN_004f7724(g_btlAux, id, !(context->entry->flags & masks->alternate), mode);
             return;
         }
         id = skill;
     }
-    u32 category = dataTable04FindById(id)->itemProperties.category;
+    u32 category = skillDataFindById(id)->itemProperties.category;
     bool alternateAllowed = true;
     if (category == 2 || category == 3 || category == 4)
         alternateAllowed = false;

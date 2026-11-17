@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct BattleRewardTotals {
     u32 items[6];
@@ -28,7 +28,7 @@ s32 randRange(u32);
 extern "C" void FUN_003be7d0(const BtlEntry *entry)
 {
     BattleRewardTotals *rewards = &reinterpret_cast<BattleRewardView *>(btlGetMainState())->rewards;
-    const Table00Record *record = dataTable00FindById(entry->id);
+    const NkmEnemyRecord *record = nkmEnemyFindById(entry->id);
     if (record != NULL) {
         rewards->experience += record->experience;
         rewards->money += record->money;

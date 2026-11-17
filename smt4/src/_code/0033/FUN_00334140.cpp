@@ -2,10 +2,10 @@
 #include "battle/BattleAssetWork.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern const char DAT_00400918[];
@@ -19,7 +19,7 @@ u32 FUN_00334140(BattleArrangementWork *work, BtlMainState *battle)
     s32 index = btlFindNthActiveSpecialEntry(battle, 1);
     if (index >= 0) {
         battle->battleMask |= 0x4000000;
-        const Table00Record *record = dataTable00FindById(battle->entries[index].id);
+        const NkmEnemyRecord *record = nkmEnemyFindById(battle->entries[index].id);
         char path[128];
         memClear(path, sizeof(path));
         textFormatBuffer(path, DAT_00400918,

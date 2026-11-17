@@ -1,7 +1,7 @@
 /* NON_MATCHING: loops and stores now follow retail; retail pushes an extra register (sl) instead of padding the frame, sets `parent` before the saved-record call, and indexes the counts as [id, base]. */
 #include "shard/GameOptions.h"
 #include "gamedata/FusionRecipe.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include <string.h>
 /* Ingredient sources extend past the shared recipe's ID list. */
@@ -51,7 +51,7 @@ void FUN_003c8980(u32 mode, const FusionParentSources *parents, GameOptions *out
                 ++counts[parentId];
         }
     }
-    const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(parents->recipe.id));
+    const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(parents->recipe.id));
     bitsetSetBit(output, record->innateFlag);
     unitRecalculateEffectiveStats(output);
 }

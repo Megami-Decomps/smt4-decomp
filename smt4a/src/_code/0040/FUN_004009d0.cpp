@@ -1,6 +1,6 @@
 /* NON_MATCHING: the target loops and the scope switch are laid out differently from retail (built 236 rows vs 228); the usability checks are the same. */
 #include "battle/BtlMainAccess.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
 #include "gamedata/SaveSlotTable.h"
 
@@ -55,7 +55,7 @@ u32 FUN_004009d0(s32 id, s32 flag)
 {
     SkillRecord *skill;
 
-    if (id == 0 || (skill = (SkillRecord *)dataTable04FindById(id)) == NULL) {
+    if (id == 0 || (skill = (SkillRecord *)skillDataFindById(id)) == NULL) {
         return 1;
     }
     u32 bits = skill->bits;

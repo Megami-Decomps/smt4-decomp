@@ -11,7 +11,7 @@ extern s32 sceneHolderUpdate(void);
 u32 scrCommRecordProgressWait(void)
 {
     if (scrGetCommandFrame() == 0) {
-        ConsumableRecordA *record = dataTable8FindRecord(0x7B6);
+        ConsumableRecordA *record = itemTableGetItemRecord(0x7B6);
 
         if (record == NULL || record->count == 0) {
             return 1;

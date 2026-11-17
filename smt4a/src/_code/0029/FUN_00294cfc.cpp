@@ -1,6 +1,6 @@
 /* NON_MATCHING: picks a hint popup for a candidate from the list (level window, not yet known or recent) and records it in the recent list; written from the decompilation and the retail disassembly, loop structure and register allocation not compared with retail */
 #include "gamedata/DataTable.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "code/Code0015.h"
 #include "code/Code002a_Smt4a.h"
 #include "gamedata/GamePlayerData.h"
@@ -60,7 +60,7 @@ SaveSlotView *saveSlotFindSelected(void);
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(u32 maximum);
 HintCandidates *dataTable02GetRecordWithAocPackage(u32 owner);
-HintRecord *dataTable00FindById(u32 id);
+HintRecord *nkmEnemyFindById(u32 id);
 void *popupSelectWeightedMessage(s32 kind, u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
@@ -96,8 +96,8 @@ void FUN_00294cfc(u32 owner)
         u32 id = candidates->ids[i];
         if (FUN_002a4b28(id) != 0)
             continue;
-        HintRecord *record = dataTable00FindById(id);
-        if ((devilGetRecord(id)->flags & 1) != 0 && (dataTable00FindById((u16)id)->flagsA & 4) != 0
+        HintRecord *record = nkmEnemyFindById(id);
+        if ((nkmBaseGetRecord(id)->flags & 1) != 0 && (nkmEnemyFindById((u16)id)->flagsA & 4) != 0
             && !hintInList(DAT_005f190c, HINT_KNOWN_COUNT, id)
             && !hintInList(DAT_005f18ec, HINT_RECENT_COUNT, id)) {
             s32 requirement = record->levelRequirement & 0x7FFF;

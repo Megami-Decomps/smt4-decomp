@@ -8,14 +8,14 @@ extern UniteWork *g_unite;
 
 static inline s32 compareFusionPairMember(u16 first, u16 second)
 {
-    const DevilRecordA *a = devilGetRecord(first);
-    const DevilRecordA *b = devilGetRecord(second);
+    const NkmBaseRecordA *a = nkmBaseGetRecord(first);
+    const NkmBaseRecordA *b = nkmBaseGetRecord(second);
     s32 firstKey = dataTableGetEntry0102Value(a->id);
     s32 secondKey = dataTableGetEntry0102Value(b->id);
     s32 result = secondKey - firstKey;
     if (result == 0) {
-        a = devilGetRecord(first);
-        b = devilGetRecord(second);
+        a = nkmBaseGetRecord(first);
+        b = nkmBaseGetRecord(second);
         result = b->race - a->race;
         if (result == 0) {
             result = a->level - b->level;

@@ -1,8 +1,8 @@
 /* NON_MATCHING: table base/candidate registers and result return storage differ. */
 #include "battle/WeightedEncounter.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 extern void *g_aocSystem;
 s32 randRange(u16 maximum);
@@ -28,7 +28,7 @@ u32 FUN_004bc2dc(s32 tableIndex, s32 excludeSpecial)
                 WeightedEncounterGroup *group = dataTable02GetRecordWithAocPackage(entry->id);
                 for (s32 member = 0; member < 6; ++member) {
                     if (group->members[member] != 0) {
-                        Table00RecordA *record = dataTable00FindById(group->members[member]);
+                        NkmEnemyRecordA *record = nkmEnemyFindById(group->members[member]);
                         if (record != NULL && (record->bustUp || record->bustUpVariation)) {
                             excluded = true;
                             break;

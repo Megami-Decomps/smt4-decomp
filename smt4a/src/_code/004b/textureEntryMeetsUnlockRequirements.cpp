@@ -41,7 +41,7 @@ s32 textureEntryMeetsUnlockRequirements(u32 index)
     }
     if (gameUnlockRecordRequirementsMet(entry->id) == 0)
         return 0;
-    QuestRecordA *requirement = dataTable1bOr1cGetRecord(entry->id);
+    QuestRecordA *requirement = questDataGetRecord(entry->id);
     if (requirement == NULL)
         return 0;
     u16 playerLevel = gameGetPlayerData()->level;

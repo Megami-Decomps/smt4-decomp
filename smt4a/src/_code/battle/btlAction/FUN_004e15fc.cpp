@@ -6,7 +6,7 @@
 extern "C" {
 
 
-int dataTable04FindById(int);
+int skillDataFindById(int);
 int sysMemClear(int *, int);
 int btlEntryBuildSummary(unsigned char [28], int, unsigned int);
 int FUN_0047fa50(...);
@@ -47,7 +47,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int FUN_002a7410(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlEntryBuildSummary. */
@@ -121,7 +121,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
   }
   temp_v13 = 0;
   temp_v19 = (int)*(short *)(param_2[10] + 0x1be);
-  dataTable04FindById((int)*(short *)(param_2[10] + 0x1c0));
+  skillDataFindById((int)*(short *)(param_2[10] + 0x1c0));
   btlEntryBuildSummary(temp_v17,*param_1,param_2[8]);
   temp_v0 = DAT_0057117c;
   temp_v12 = DAT_00571178;

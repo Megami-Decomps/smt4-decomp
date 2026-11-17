@@ -70,7 +70,7 @@ int FUN_00245d78(...);
 int naviMainRequestProcessing(...);
 int recTableFireType3(void);
 
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int slotSetRequest(...);
 void frameTransitionSetMode(int);
 int frameTexturesRelease(void);
@@ -99,7 +99,7 @@ int FUN_00482fd4(...);
 
 int sysPlaySe(...);
 int eventQueueAddUnique(...);
-int dataTable08Sub2GetRecord(void);
+int itemTableGetEquipmentRecord(void);
 int FUN_0020ecd4(void);
 int popupTryStartScrollPrompt(...);
 int partyTryOpenLevelLimitPopup(void);
@@ -408,11 +408,11 @@ extern int infoWinHasValue(void);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 /* Supplied declaration required: slotOwnerDestroyAllSlots. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: resourceOwnerReleaseAndReset. */
 extern int gameSlotTableFindFree(void);
@@ -1818,15 +1818,15 @@ LAB_00278b38:
                                       DAT_005f18c8 = (unsigned int)*(unsigned short *)(temp_v8 + 300);
                                       temp_v8 = gameGetPlayerData();
                                       temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 6);
-                                      dataTable08Sub2GetRecord();
+                                      itemTableGetEquipmentRecord();
                                       DAT_005f18cc = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
                                       DAT_005f18d8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
                                       temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 8);
-                                      dataTable08Sub2GetRecord();
+                                      itemTableGetEquipmentRecord();
                                       DAT_005f18d0 = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
                                       DAT_005f18dc = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
                                       temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 10);
-                                      dataTable08Sub2GetRecord();
+                                      itemTableGetEquipmentRecord();
                                       DAT_005f18d4 = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
                                       DAT_005f18e0 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
                                       return 0;
@@ -2303,7 +2303,7 @@ LAB_00278774:
         temp_v23 = 0;
         temp_v8 = gameGetPlayerData();
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 6);
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         if ((DAT_005f18cc != *(unsigned short *)(temp_v10 + 0x40)) ||
            (DAT_005f18d8 != *(unsigned short *)(temp_v10 + 0x42))) {
           DAT_005f18d8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
@@ -2311,7 +2311,7 @@ LAB_00278774:
           DAT_005f18cc = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
         }
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 8);
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         if ((DAT_005f18d0 != *(unsigned short *)(temp_v10 + 0x40)) ||
            (DAT_005f18dc != *(unsigned short *)(temp_v10 + 0x42))) {
           temp_v7 = gameFlagIsSet(0x111d);
@@ -2324,7 +2324,7 @@ LAB_00278774:
           DAT_005f18dc = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
         }
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + 10);
-        dataTable08Sub2GetRecord();
+        itemTableGetEquipmentRecord();
         if ((DAT_005f18d4 != *(unsigned short *)(temp_v10 + 0x40)) ||
            (DAT_005f18e0 != *(unsigned short *)(temp_v10 + 0x42))) {
           DAT_005f18e0 = (unsigned int)*(unsigned short *)(temp_v10 + 0x42);
@@ -2365,7 +2365,7 @@ LAB_00279444:
     }
     if (pcVar11[1] != '\0') {
       temp_v10 = (unsigned int)*(unsigned short *)(pcVar11 + 8);
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       DAT_005f1796 = *(short *)(temp_v10 + 2);
       libc_strcpy(&DAT_005f1798,temp_v10 + 0xc4);
       DAT_005f1794 = 1;
@@ -3148,7 +3148,7 @@ LAB_0027a030:
       temp_v8 = FUN_00398024();
       if (temp_v8 != -1) {
         temp_v10 = FUN_00398024() & 0xffff;
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         DAT_005f1658 = (unsigned int)*(unsigned short *)(temp_v10 + 2);
         libc_strcpy(&DAT_005f1660,temp_v10 + 0xb4);
         puVar2[0x281] = DAT_005f1658;
@@ -4571,7 +4571,7 @@ joined_r0x0027ce58:
     else if (*(char *)((int)puVar2 + 9) != '\0') {
       temp_v8 = rosterGetLeaderId();
       if ((temp_v8 != 0) && (temp_v5 = FUN_001bd118(), temp_v5 == 6)) {
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         FUN_00270c58(*(unsigned short *)(temp_v8 + 0xd4));
         return 0xffffffff;
       }

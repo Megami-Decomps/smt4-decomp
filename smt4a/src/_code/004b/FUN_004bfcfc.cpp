@@ -6,8 +6,8 @@
 extern "C" {
 
 int btlGetMainState(...);
-int dataTable8FindRecord(...);
-int dataTable04FindById(...);
+int itemTableGetItemRecord(...);
+int skillDataFindById(...);
 int sysMemClear(...);
 int dataTable41FindById(...);
 int btlEntryBuildSummary(...);
@@ -71,8 +71,8 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: skillDataFindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: dataTable41FindById. */
@@ -149,7 +149,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
   temp_v41 = param_4;
   temp_v29 = (unsigned int *)btlGetMainState();
   temp_v37 = 0;
-  dataTable04FindById();
+  skillDataFindById();
   if (param_1 != 0) {
     switch(*(unsigned char *)(param_1 + 0x23)) {
     case 0:
@@ -165,7 +165,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
       return 0;
     }
   }
-  dataTable8FindRecord();
+  itemTableGetItemRecord();
   if (param_3 != (fn_004bfcfc_arg2 *)0x0) {
     temp_v2 = param_3->field_0x34;
     temp_v11 = temp_v2 == 0;

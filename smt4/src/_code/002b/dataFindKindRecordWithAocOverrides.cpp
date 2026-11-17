@@ -132,7 +132,7 @@ u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload)
         record = getTable08Sub0Record(id);
         break;
     case 1:
-        record = (u8 *)dataTable08Sub1GetRecord(id);
+        record = (u8 *)itemTableGetItemRecord(id);
         break;
     case 2:
     case 3:
@@ -141,7 +141,7 @@ u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload)
     case 6:
     case 7:
     case 8:
-        record = (u8 *)dataTable08Sub2GetRecord(id);
+        record = (u8 *)itemTableGetEquipmentRecord(id);
         break;
     case 9:
         return getTable08Sub3Record(id);

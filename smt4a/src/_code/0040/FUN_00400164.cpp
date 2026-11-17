@@ -1,10 +1,10 @@
 /* NON_MATCHING: one marker-mask word load is scheduled before rather than after the paired combatant load. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
-s32 FUN_00400564(void *owner, s32 mode, const Table04RecordA *skill);
+s32 FUN_00400564(void *owner, s32 mode, const SkillDataRecordA *skill);
 extern u8 DAT_00573c90[];
 
 /* Validate a skill's effect mode, then request the eligible effect. */
@@ -13,7 +13,7 @@ u32 FUN_00400164(void *owner, u32 skillId)
     if (skillId == 0) {
         return 1;
     }
-    const Table04RecordA *skill = dataTable04FindById(skillId);
+    const SkillDataRecordA *skill = skillDataFindById(skillId);
     if (skill == NULL) {
         return 1;
     }

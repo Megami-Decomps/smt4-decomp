@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail copies the hit/magic points through VFP registers (vldr/vstmia) and keeps the unit vitals in other registers; this build uses core registers */
 #include "battle/BattleUnitInit.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/GameDataAccess.h"
 
 /* An enemy record as the battle reads it when it builds a unit (halfword indexed in the original
@@ -93,7 +93,7 @@ void FUN_003eb314(EnemyBattle *battle, BattleUnitState *unit, EnemyRecord *recor
         unit->learnableCategory[i] = unit->learnable[i].category;
     }
     unit->unk1BB = record->category;
-    DevilRecordA *model = devilGetRecord(unit->sourceId);
+    NkmBaseRecordA *model = nkmBaseGetRecord(unit->sourceId);
     if (model->category == 1) {
         unit->unk1BC = 1;
     } else if (model->category == 4) {

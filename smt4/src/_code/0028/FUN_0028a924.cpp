@@ -25,8 +25,8 @@ int pair40Set(unsigned int, int);
 int partyPanelSetState(...);
 int gameSetIconDisplayEnabled(int);
 int gameGetUnitRecord(...);
-int dataTable40FindById(void);
-int dataTable08Sub1GetRecord(void);
+int skillDataFindById(void);
+int itemTableGetItemRecord(void);
 int buttonHelpSetPreset(...);
 int __aeabi_memset4(int, int, int);
 int FUN_002e36f8(void);
@@ -60,8 +60,8 @@ extern unsigned int objectPartRunUnlessLocked(void);
 extern unsigned int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: skillDataFindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -246,7 +246,7 @@ LAB_0028ad70:
     }
     else {
       temp_v12 = param_2;
-      dataTable08Sub1GetRecord();
+      itemTableGetItemRecord();
       temp_v5 = 0;
       if (temp_v12 != 0) {
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v12 + 0x62);
@@ -276,7 +276,7 @@ LAB_0028ad80:
             *(unsigned char *)(temp_v0 + 0x67b) = 0;
           }
           temp_v6 = param_2;
-          dataTable08Sub1GetRecord();
+          itemTableGetItemRecord();
           if ((*(unsigned char *)(temp_v6 + 0x6a) & 0x80) != 0) {
             *(unsigned int *)(temp_v0 + 0x20) = 10;
             temp_v9 = -1;
@@ -344,7 +344,7 @@ LAB_0028ad80:
       }
     }
     temp_v6 = temp_v5;
-    dataTable40FindById();
+    skillDataFindById();
     if ((*(unsigned char *)(temp_v6 + 0x35) & 8) != 0) {
       *(unsigned char *)(temp_v0 + 0x35) = 1;
       *(unsigned int *)(temp_v0 + 0x20) = 10;

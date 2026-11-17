@@ -32,7 +32,7 @@ u32 FUN_0048144c(s32 id)
     if ((u32)(id - 1) > 59 && (u32)(id - 0x79F) > 63) {
         return 0;
     }
-    ConsumableRecordA *record = dataTable8FindRecord(id);
+    ConsumableRecordA *record = itemTableGetItemRecord(id);
 
     if (record->type != 1 && record->type != 3) {
         return 0;
@@ -44,7 +44,7 @@ u32 FUN_0048144c(s32 id)
             if (member == NULL || partySlotIsOccupied(member) == 0) {
                 continue;
             }
-            ConsumableRecordA *again = dataTable8FindRecord(id);
+            ConsumableRecordA *again = itemTableGetItemRecord(id);
 
             if (again != NULL && (again->flags & 0x20) != 0 && again->effectValue != 0
                 && levelGetExpRequirement(member->key) != member->expected) {
@@ -52,7 +52,7 @@ u32 FUN_0048144c(s32 id)
             }
         }
     } else if ((record->groupFlags & 0x80) != 0) {
-        ConsumableRecordA *item = dataTable8FindRecord(id);
+        ConsumableRecordA *item = itemTableGetItemRecord(id);
 
         if (item != NULL) {
             s32 missing = itemApplyToMember(-1, item, 1, 0, 0) == 0;
@@ -78,7 +78,7 @@ u32 FUN_0048144c(s32 id)
             if (i >= 0 && slot < 0) {
                 continue;
             }
-            ConsumableRecordA *item = dataTable8FindRecord(id);
+            ConsumableRecordA *item = itemTableGetItemRecord(id);
 
             if (item == NULL || itemApplyToMember(slot, item, 1, 0, 0) == 0) {
                 return 1;

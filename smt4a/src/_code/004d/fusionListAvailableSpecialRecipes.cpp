@@ -39,7 +39,7 @@ u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes)
         FusionRecipeEntry *recipe = contentEntryFindById(index);
         if (recipe == NULL)
             continue;
-        const DevilRecordA *result = devilGetRecord(recipe->resultId);
+        const NkmBaseRecordA *result = nkmBaseGetRecord(recipe->resultId);
         if (result->unlockFlag != 0 && !gameFlagIsSet(result->unlockFlag))
             continue;
         if (result->saveRequirement & 1) {

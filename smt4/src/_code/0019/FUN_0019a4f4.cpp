@@ -29,7 +29,7 @@ int beginStatusPanelClose(void);
 int messageDismissNumericBanner(...);
 int buttonHelpSetText(...);
 int uiSpriteSetImageKeyframe(...);
-int dataTable08Sub1GetRecord(...);
+int itemTableGetItemRecord(...);
 int uiSlidingSpriteAdvance(...);
 int timerStart(...);
 struct BtlMainState;
@@ -48,7 +48,7 @@ int sortMenuCreate(...);
 int listCursorGetRowIfUnblocked(...);
 int resourceRunOperationIfUnblocked(...);
 int gameGetUnitRecord(...);
-int dataTable40FindById(void);
+int skillDataFindById(void);
 int buttonHelpSetPreset(...);
 int spriteStartAnimationByIndex(...);
 int asdTMTexTableEntryAt(...);
@@ -158,9 +158,9 @@ extern int flagWordTestBit(unsigned int *, unsigned int);
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: gameGetUnitRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: dataTable40FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: gameGetPlayerData. */
 extern int FUN_002b6ad0(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -597,7 +597,7 @@ LAB_0019aebc:
                              (param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v5 * 2 + 0x341a);
               *(unsigned int *)(param_1 + 0x3068) = temp_v6;
             }
-            dataTable40FindById();
+            skillDataFindById();
             temp_v5 = gameGetSlotTable();
             if (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v5 + 0x9107)) {
               temp_v5 = gameGetSlotTable();
@@ -673,7 +673,7 @@ LAB_0019aebc:
                              0x341c);
               *(unsigned int *)(param_1 + 0x3068) = temp_v6;
             }
-            dataTable40FindById();
+            skillDataFindById();
             temp_v9 = *(unsigned int *)(param_1 + 0x3068);
             temp_v5 = FUN_002987d8(0xffffffff,temp_v9);
             if ((temp_v5 == 0) || (temp_v5 = FUN_0028d320(temp_v9), temp_v5 != 0)) {
@@ -723,7 +723,7 @@ LAB_0019aebc:
           temp_v6 = FUN_0028d24c();
           *(unsigned int *)(param_1 + 0x3068) = temp_v6;
         }
-        dataTable40FindById();
+        skillDataFindById();
         temp_v5 = reinterpret_cast<int>(btlGetMainState());
         if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) == 0) {
           piVar14 = (int *)gameGetSlotTable();
@@ -861,7 +861,7 @@ LAB_0019b58c:
                              (param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v6 * 2 + 0x341a);
             }
             temp_v10 = temp_v6;
-            dataTable40FindById();
+            skillDataFindById();
             temp_v5 = gameGetSlotTable();
             if (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v5 + 0x9107)) {
               temp_v5 = gameGetSlotTable();
@@ -922,7 +922,7 @@ LAB_0019b58c:
                          0x341c);
         }
         temp_v10 = temp_v6;
-        dataTable40FindById();
+        skillDataFindById();
         temp_v5 = FUN_002987d8(0xffffffff,temp_v6);
         if (temp_v5 != 0) {
           FUN_0028d320(temp_v6);
@@ -1008,7 +1008,7 @@ LAB_0019b924:
       temp_v6 = temp_v10;
       FUN_0028cfd8();
       if (temp_v6 == 0) {
-        dataTable08Sub1GetRecord();
+        itemTableGetItemRecord();
         temp_v6 = (unsigned int)*(unsigned short *)(temp_v10 + 0x62);
         if (temp_v6 == 0) {
           playSceneSetState(param_1,0x15,1);
@@ -1016,7 +1016,7 @@ LAB_0019b924:
           eventQueueAddUniqueIfValid(temp_v9);
           break;
         }
-        dataTable40FindById();
+        skillDataFindById();
         temp_v6 = *(unsigned int *)(temp_v6 + 0x28);
         temp_v19 = (temp_v6 & 0x1e0) != 0;
         if (temp_v19) {
@@ -1396,7 +1396,7 @@ joined_r0x0019c3c8:
                          ,temp_v7 + 0x3470);
             temp_v17 = gameGetSlotTable();
             if (*(char *)(temp_v17 + temp_v5 + 0x9107) < '\0') {
-              dataTable08Sub1GetRecord((int)(short)(int)temp_v31);
+              itemTableGetItemRecord((int)(short)(int)temp_v31);
             }
           }
           else {
@@ -1450,7 +1450,7 @@ joined_r0x0019c3c8:
               temp_v7 = gameGetSlotTable();
               if (-1 < *(char *)(temp_v7 + temp_v5 + 0x9107)) break;
               temp_v5 = (int)(short)temp_v32;
-              dataTable08Sub1GetRecord();
+              itemTableGetItemRecord();
               if ((((temp_v5 == 0) || ((*(unsigned char *)(temp_v5 + 0x6a) & 0x80) != 0)) ||
                   (*(short *)(temp_v5 + 0x62) != 0)) || ((*(unsigned char *)(temp_v5 + 0x6a) & 0x7f) == 1))
               break;

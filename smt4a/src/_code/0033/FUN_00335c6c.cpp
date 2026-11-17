@@ -7,8 +7,8 @@
 extern "C" {
 
 int _ZN4__rw15__rw_deallocateEPvji(int, int, int);
-int dataTable8FindRecord(void);
-int dataTable04FindById(void);
+int itemTableGetItemRecord(void);
+int skillDataFindById(void);
 int sysMemClear(int [21], int);
 
 extern unsigned int g_btlCandidateMasks; /* 0x570288 */
@@ -20,8 +20,8 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern unsigned short *_ZN4__rw13__rw_allocateEji(int, unsigned int);
 /* Supplied declaration required: _ZN4__rw15__rw_deallocateEPvji. */
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: sysMemClear. */
 
 
@@ -243,9 +243,9 @@ void FUN_00335c6c(void)
       do {
         temp_v8 = (unsigned int)*puVar23;
         temp_v5 = 0;
-        dataTable8FindRecord();
+        itemTableGetItemRecord();
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v8 + 0x32);
-        dataTable04FindById();
+        skillDataFindById();
         if ((temp_v2 && temp_v8 != 0) && (*(char *)(temp_v8 + 0x23) == '\0')) {
           temp_v5 = 1;
         }
@@ -322,9 +322,9 @@ LAB_00336174:
       if ((unsigned short *)*piVar24 != puVar23) {
         do {
           temp_v8 = (unsigned int)*puVar23;
-          dataTable8FindRecord();
+          itemTableGetItemRecord();
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v8 + 0x32);
-          dataTable04FindById();
+          skillDataFindById();
           if (temp_v8 != 0) {
             temp_v11 = *(unsigned int *)(temp_v8 + 0x28);
             temp_v8 = (temp_v11 & 0xffff) >> 0xb;

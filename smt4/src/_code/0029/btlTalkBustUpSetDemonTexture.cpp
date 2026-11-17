@@ -1,7 +1,7 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "code/Code002a.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "shard/W6_W6Match2_HelpResources.h"
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -22,8 +22,8 @@ void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous)
     if (bustUp == 0)
         return;
 
-    bustUp->recordValue = dataTable00FindById(devilId)->bustUp;
-    bustUp->textureEntry = devilGetRecord(devilId)->model;
+    bustUp->recordValue = nkmEnemyFindById(devilId)->bustUp;
+    bustUp->textureEntry = nkmBaseGetRecord(devilId)->model;
     bustUp->devilId = devilId;
 
     if (asynchronous != 0) {

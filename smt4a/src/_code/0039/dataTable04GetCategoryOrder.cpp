@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
@@ -8,12 +8,12 @@ extern "C" {
 /* Maps the category of table-04 record `id` to its display order (99 when there is no record). */
 u32 dataTable04GetCategoryOrder(u32 id)
 {
-    Table04RecordA *record;
+    SkillDataRecordA *record;
 
     if (id == 0) {
         return 99;
     }
-    record = dataTable04FindById(id);
+    record = skillDataFindById(id);
     switch (record->itemProperties.category) {
     case 8:
         return 0;

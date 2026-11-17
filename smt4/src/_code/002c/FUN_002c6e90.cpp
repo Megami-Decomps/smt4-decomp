@@ -1,18 +1,18 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
 /* Orders two devils by descending rank, descending grade, ascending rank (from fresh records), then descending id. */
 s32 FUN_002c6e90(const u16 *idA, const u16 *idB)
 {
-    DevilRecord *recordA = devilGetRecord(*idA);
-    DevilRecord *recordB = devilGetRecord(*idB);
+    NkmBaseRecord *recordA = nkmBaseGetRecord(*idA);
+    NkmBaseRecord *recordB = nkmBaseGetRecord(*idB);
     s32 order = recordB->level - recordA->level;
 
     if (order == 0) {
-        recordA = devilGetRecord(*idA);
-        recordB = devilGetRecord(*idB);
+        recordA = nkmBaseGetRecord(*idA);
+        recordB = nkmBaseGetRecord(*idB);
         order = recordB->race - recordA->race;
         if (order == 0) {
             order = recordA->level - recordB->level;

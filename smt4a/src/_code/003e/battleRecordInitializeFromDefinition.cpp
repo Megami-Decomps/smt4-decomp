@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 struct BattleStatRecord {
     /* 0x000 */ u16 base[7];
@@ -38,7 +38,7 @@ extern "C" void battleRecordInitializeFromDefinition(BattleStatRecord *record, u
     if (id == 0)
         return;
     record->id = id;
-    DevilRecordA *definition = devilGetRecord(id);
+    NkmBaseRecordA *definition = nkmBaseGetRecord(id);
     record->type = definition->level;
     record->base[0] = definition->baseHp;
     record->base[1] = definition->baseMp;

@@ -14,8 +14,8 @@ static __inline s32 compareSortKeys(const QuestRecordA* left, const QuestRecordA
 // Sorts items by mapped group, breaking ties by the record's sort key.
 extern "C" s32 FUN_002b2b34(const u16* leftId, const u16* rightId)
 {
-    QuestRecordA* left = dataTable1bOr1cGetRecord(*leftId);
-    QuestRecordA* right = dataTable1bOr1cGetRecord(*rightId);
+    QuestRecordA* left = questDataGetRecord(*leftId);
+    QuestRecordA* right = questDataGetRecord(*rightId);
     if (left == NULL || right == NULL) {
         return 0;
     }
@@ -23,5 +23,5 @@ extern "C" s32 FUN_002b2b34(const u16* leftId, const u16* rightId)
     if (result != 0) {
         return result;
     }
-    return compareSortKeys(dataTable1bOr1cGetRecord(*leftId), dataTable1bOr1cGetRecord(*rightId));
+    return compareSortKeys(questDataGetRecord(*leftId), questDataGetRecord(*rightId));
 }

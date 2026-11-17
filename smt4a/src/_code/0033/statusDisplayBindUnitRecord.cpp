@@ -1,6 +1,6 @@
 /* NON_MATCHING: argument/pane live ranges change register allocation, permission handling folds into BIC/early stores, and the final option-byte address is folded; candidate -O2. */
 #include "shard/Shard0033.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 struct StatusUnitRecord {
     u8 unk00[0x34];
@@ -82,7 +82,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
         if (gameProgressIsAdvanced()) {
             FUN_0034dae0(pane, record->id);
         } else {
-            const Table00RecordA *base = dataTable00FindById(record->id);
+            const NkmEnemyRecordA *base = nkmEnemyFindById(record->id);
             if (base != NULL) {
                 pane->maxHp = base->maxHp;
                 pane->maxMp = base->maxMp;
@@ -100,7 +100,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
     flags->changed = 0;
     u8 allowOption = 1;
     if (static_cast<s16>(record->id) >= 0) {
-        const Table00RecordA *base = dataTable00FindById(record->id);
+        const NkmEnemyRecordA *base = nkmEnemyFindById(record->id);
         if (base == NULL) {
             allowOption = 0;
         } else {

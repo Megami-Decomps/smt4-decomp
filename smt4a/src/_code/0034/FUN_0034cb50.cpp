@@ -1,6 +1,6 @@
 /* NON_MATCHING: logic and instruction mix match; the allocator spills a different set of accumulators (retail keeps the mp percent and the first two stat bonuses in registers, hp percent and the rest on the stack). */
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 
 extern "C" {

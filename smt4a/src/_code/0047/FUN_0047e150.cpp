@@ -22,7 +22,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
     char messagesPath[128];
     switch (work->state) {
     case 0: {
-        QuestRecordA *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+        QuestRecordA *item = questDataGetRecord(rosterGetLeaderId());
         if (!item || item->event.package == 0) {
             work->state = 3;
             return 0;
@@ -42,7 +42,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
     case 1: {
         if (!work->script || !work->messages)
             return 0;
-        QuestRecordA *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+        QuestRecordA *item = questDataGetRecord(rosterGetLeaderId());
         if (!item)
             work->state = 3;
         sysPlaySe(0x92);

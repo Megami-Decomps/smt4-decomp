@@ -33,7 +33,7 @@ int btlTalkBustUpSetDemonTexture(unsigned int, int);
 int btlTalkBustUpCreate(void);
 int scrResultStopJobAndReleaseUi(void);
 int resultCreate(int);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int buttonHelpSetPreset(int);
 int dataTable01FindByIdWithAoc(...);
 int FUN_002cdf2c(int *);
@@ -89,7 +89,7 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: partyFindActiveSlotById. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int fileSlotGetBuffer(unsigned int);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int gameGetSupportUnitData(void);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -146,7 +146,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
   if (temp_v1 == 0) {
     scrWorkSetValue(0);
     temp_v3 = temp_v0;
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     temp_v1 = goalConditionsSatisfied(temp_v0);
     if (temp_v1 == 0) {
       scrSetResult(0);
@@ -180,7 +180,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
   }
   temp_v1 = fileSlotGetBuffer(0x1e);
   temp_v3 = temp_v0;
-  dataTable1bOr1cGetRecord();
+  questDataGetRecord();
   temp_v2 = scrWorkGetValue(0);
   switch(temp_v2) {
   case 0:

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -10,8 +10,8 @@ s32 devilCompare(u16 *a, u16 *b)
 {
     u32 flagsA = itemGetFlagBit1(*a);
     u32 flagsB = itemGetFlagBit1(*b);
-    DevilRecord *recordA;
-    DevilRecord *recordB;
+    NkmBaseRecord *recordA;
+    NkmBaseRecord *recordB;
     s32 result;
 
     if ((flagsB & ~flagsA) != 0) {
@@ -19,8 +19,8 @@ s32 devilCompare(u16 *a, u16 *b)
     } else if ((flagsA & ~flagsB) != 0) {
         result = -1;
     } else {
-        recordA = devilGetRecord(*a);
-        recordB = devilGetRecord(*b);
+        recordA = nkmBaseGetRecord(*a);
+        recordB = nkmBaseGetRecord(*b);
         result = recordB->race - recordA->race;
         if (result == 0) {
             result = recordA->level - recordB->level;

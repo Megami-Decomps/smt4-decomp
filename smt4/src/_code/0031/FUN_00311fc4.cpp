@@ -1,9 +1,9 @@
 /* NON_MATCHING: btlEntryHasCategoryThreeSkill shape; only the second equipment loop swaps the base/offset registers of its id load (retail ldr r0 / add r1, built ldr r1 / add r0). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
-#include "gamedata/Table04Record.h"
-#include "gamedata/DevilRecord.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataRecord.h"
+#include "gamedata/NkmBaseRecord.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
@@ -12,7 +12,7 @@ static __inline u32 entryHasSkillCategory(const BtlEntry *entry, u32 category)
 {
     if (entry->equipA != NULL) {
         for (s32 index = 0; index < 8; ++index) {
-            const Table04Record *skill = dataTable40FindById(entry->equipA->items[index]);
+            const SkillDataRecord *skill = skillDataFindById(entry->equipA->items[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }
@@ -20,16 +20,16 @@ static __inline u32 entryHasSkillCategory(const BtlEntry *entry, u32 category)
     }
     if (entry->equipB != NULL) {
         for (s32 index = 0; index < 8; ++index) {
-            const Table04Record *skill = dataTable40FindById(entry->equipB->items[index]);
+            const SkillDataRecord *skill = skillDataFindById(entry->equipB->items[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }
         }
     }
     if (entry->devil != NULL) {
-        DevilRecord *demon = reinterpret_cast<DevilRecord *>(devilGetRecord(entry->id));
+        NkmBaseRecord *demon = reinterpret_cast<NkmBaseRecord *>(nkmBaseGetRecord(entry->id));
         for (s32 index = 0; index < 8; ++index) {
-            const Table04Record *skill = dataTable40FindById(demon->skills[index]);
+            const SkillDataRecord *skill = skillDataFindById(demon->skills[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }

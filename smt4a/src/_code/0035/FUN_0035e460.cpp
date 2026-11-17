@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation and scheduling (retail shares r4 between the flag and the id, stores the search key after the count call and keeps 9 in a register for the loop); logic identical. */
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -16,7 +16,7 @@ typedef struct AocTableEntry {
     /* 0x22 */ u8 unk22[0x26];
 } AocTableEntry;
 
-/* An entry of the data table dataTable04FindById searches: `slot` lists its used slots first. */
+/* An entry of the data table skillDataFindById searches: `slot` lists its used slots first. */
 typedef struct AocItemEntry {
     /* 0x00 */ u8 unk00[0x62];
     /* 0x62 */ AocItemSlot slot[9];
@@ -48,7 +48,7 @@ s32 FUN_0035e460(u32 id, s32 positive)
             libc_bsearch(&key, entries, dataTableGetCount(table), sizeof(AocTableEntry), recordSortEntryCompareByKey);
         }
     } else {
-        AocItemEntry *entry = (AocItemEntry *)dataTable04FindById(id);
+        AocItemEntry *entry = (AocItemEntry *)skillDataFindById(id);
 
         if (entry != NULL) {
             s32 sign = positive != 0 ? 1 : -1;

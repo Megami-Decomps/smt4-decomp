@@ -1,6 +1,6 @@
 /* NON_MATCHING: closer (-1 slots as s16, the flag-bit store before the special test, if/else special): remaining are the prologue store order, retail holding the 0x100 skill-array offset in r1, and armcc strength-reducing the definition side of the skill loop to a post-incremented pointer where retail indexes it. */
 #include "battle/btlUnit.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 namespace {
@@ -80,7 +80,7 @@ void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const EnemyBattleDefi
         skill[18] = definition->skills[index]; /* initialSkills[index] */
     }
     unit->behavior = definition->behavior;
-    DevilRecord *record = reinterpret_cast<DevilRecord *>(devilGetRecord(unit->id));
+    NkmBaseRecord *record = reinterpret_cast<NkmBaseRecord *>(nkmBaseGetRecord(unit->id));
     u8 kind = reinterpret_cast<const u8 *>(record)[5];
     if (kind == 1)
         unit->modelKind = 1;

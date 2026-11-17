@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation and the cursor-row base address (retail adds 0x55c then ldrsb #17; here a literal-pool offset) differ; structure and call order match. */
 #include "common.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 
@@ -39,7 +39,7 @@ extern s32 textFormatBuffer(u8 *destination, const char *format, ...);
 void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
 {
     LayoutSlot *slot;
-    Table00Record *record;
+    NkmEnemyRecord *record;
     u8 text[44];
     s32 alpha = panel->alpha;
     s16 baseX;
@@ -64,13 +64,13 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
     demonIconPanelDrawRow(panel, 1, id, index, selected, alpha);
     FUN_0022db94(panel, id, index, selected, alpha);
     FUN_0022daac(panel, id, index, selected, alpha);
-    record = dataTable00FindById((u16)id);
+    record = nkmEnemyFindById((u16)id);
     kind = 0;
     if (record != NULL) {
         kind = record->level;
     }
     FUN_0022d9c8(panel, kind, index, selected, alpha, -1);
-    record = dataTable00FindById((u16)id);
+    record = nkmEnemyFindById((u16)id);
     count = 0;
     if (record != NULL) {
         count = record->maxHp;
@@ -86,7 +86,7 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
     y = slot->y + baseY;
     textFormatBuffer(text, "%d", count);
     drawTextAtRelativePosition(panel->layout, 0, x, y, 0, 7, color, alpha, text);
-    record = dataTable00FindById((u16)id);
+    record = nkmEnemyFindById((u16)id);
     count = 0;
     if (record != NULL) {
         count = record->maxMp;

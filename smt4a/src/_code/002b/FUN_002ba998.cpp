@@ -13,7 +13,7 @@ int FUN_002b50e4(...);
 int jobStop(...);
 int sysPlaySe(...);
 int dataTable01GetRecordWithAocOverride(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int asdMemFree(void);
 int dialogClose(...);
 int messageForwardDefaultMode(...);
@@ -177,7 +177,7 @@ extern int jobIsValid(unsigned int);
 extern unsigned int recordGetScaledMaximum(void);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: asdMemFree. */
 extern int gameGetOptions(void);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
@@ -1027,7 +1027,7 @@ LAB_002bbdec:
     case 3:
       temp_v6 = gameGetOptions();
       temp_v9 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);
-      if ((temp_v9 != 0) && (temp_v10 = temp_v9, devilGetRecord(), temp_v10 != 0)) {
+      if ((temp_v9 != 0) && (temp_v10 = temp_v9, nkmBaseGetRecord(), temp_v10 != 0)) {
         sysMemClear(temp_v22,0x68);
         dataTable01GetRecordWithAocOverride(temp_v9);
         libc_strcpy(temp_v22,temp_v9);

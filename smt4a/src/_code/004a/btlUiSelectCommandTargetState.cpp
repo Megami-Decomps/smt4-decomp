@@ -1,6 +1,6 @@
 /* NON_MATCHING: register-only with the s8 flag: retail reloads the flag at the end through a pool-literal 0x74b0 + register index and keeps the UI object in r6 and constants in r9,sl,fp,r8. */
 #include "battle/btlUI.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 
 struct Menu32;
@@ -42,21 +42,21 @@ void btlUiSelectCommandTargetState()
     switch (kind) {
     case 2:
     case 3: {
-        const CommandSkillRecord *skill = (const CommandSkillRecord *)dataTable04FindById(id);
+        const CommandSkillRecord *skill = (const CommandSkillRecord *)skillDataFindById(id);
         if (commandRequiresTargetSelection(skill)) {
             target->requiresTargetSelection = 1;
         }
         break;
     }
     case 8: {
-        const ConsumableRecordA *item = dataTable8FindRecord(id);
+        const ConsumableRecordA *item = itemTableGetItemRecord(id);
         if (item->skillId != 0) {
-            const CommandSkillRecord *skill = (const CommandSkillRecord *)dataTable04FindById(item->skillId);
+            const CommandSkillRecord *skill = (const CommandSkillRecord *)skillDataFindById(item->skillId);
             if (commandRequiresTargetSelection(skill)) {
                 target->requiresTargetSelection = 1;
             }
         } else if (!(item->flags & 4)) {
-            item = dataTable8FindRecord(id);
+            item = itemTableGetItemRecord(id);
             if ((item->groupFlags & 0x7f) != 1) {
                 target->requiresTargetSelection = 1;
             }

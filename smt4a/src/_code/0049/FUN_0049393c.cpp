@@ -20,7 +20,7 @@ static inline u32 itemPriority(const u16 *item)
     case 6:
     case 7:
     case 8:
-        priority = dataTable08Sub2GetRecord(id)->priority;
+        priority = itemTableGetEquipmentRecord(id)->priority;
         break;
     case 0:
         priority = contentEntryFindById2(id)->priority;
@@ -30,7 +30,7 @@ static inline u32 itemPriority(const u16 *item)
         // A word alias inside ConsumableRecordA's +0x42 padding would shift union alignment.
         struct PriorityView { u8 unk00[0x44]; u32 properties; };
         typedef char PriorityOffsetCheck[offsetof(PriorityView, properties) == 0x44 ? 1 : -1];
-        priority = ((PriorityView *)dataTable8FindRecord(id))->properties & 0xFF;
+        priority = ((PriorityView *)itemTableGetItemRecord(id))->properties & 0xFF;
         break;
     }
     }

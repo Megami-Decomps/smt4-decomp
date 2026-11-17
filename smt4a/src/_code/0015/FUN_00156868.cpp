@@ -5,10 +5,10 @@ struct Object {
     u8 unk40;       // 0x40
 };
 
-extern "C" Object* dataTable1bOr1cGetRecord(void);
+extern "C" Object* questDataGetRecord(void);
 
 extern "C" u8* FUN_00156868(void)
 {
-    Object* object = dataTable1bOr1cGetRecord();
+    Object* object = questDataGetRecord();
     return object ? &object->unk40 : 0;
 }

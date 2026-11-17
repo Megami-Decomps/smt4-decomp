@@ -12,7 +12,7 @@ u32 scrComm_Data_GetRecordValue(void)
     u16 id = scrGetArg(0);
     int index = scrGetArg(1);
 
-    scrSetResult(dataTable1bOr1cGetRecord(id)->values[index]);
+    scrSetResult(questDataGetRecord(id)->values[index]);
     return 1;
 }
 

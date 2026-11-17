@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 struct SaveEntry4daf18 {
@@ -24,7 +24,7 @@ static inline u32 saveEntryIsActive(u32 index)
 // Whether the demon with this ID is available: not excluded, its unlock flag set and its save entry valid.
 u32 entryDefIsAvailable(void *unused, u16 id)
 {
-    DevilRecordA *entry = devilGetRecord(id);
+    NkmBaseRecordA *entry = nkmBaseGetRecord(id);
     if (entry != NULL && !(entry->fusionRestrictions & 0x200000) &&
         (entry->unlockFlag == 0 || gameFlagIsSet(entry->unlockFlag))) {
         if (entry->saveRequirement & 1) {

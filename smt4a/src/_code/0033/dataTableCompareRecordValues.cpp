@@ -3,8 +3,8 @@
 extern "C" {
 s32 dataTableCompareRecordValues(const u16 *firstIndex, const u16 *secondIndex)
 {
-    QuestRecordA *first = dataTable1bOr1cGetRecord(*firstIndex);
-    QuestRecordA *second = dataTable1bOr1cGetRecord(*secondIndex);
+    QuestRecordA *first = questDataGetRecord(*firstIndex);
+    QuestRecordA *second = questDataGetRecord(*secondIndex);
     if (first == NULL) {
         return 0;
     }

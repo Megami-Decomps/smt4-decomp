@@ -18,8 +18,8 @@ void asdTextDrawDirectoryEntry(u32 handle, u32 directory, u32 color, s32 mode,
 void FUN_00309bc8(u32 context, u32 depth)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
-    EquipmentRecord *firearm = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.firearm);
-    EquipmentRecord *ammunition = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.ammunition);
+    EquipmentRecord *firearm = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.firearm);
+    EquipmentRecord *ammunition = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.ammunition);
     char text[100];
     if (firearm == NULL || ammunition == NULL) {
         work->unk4CB = 0;

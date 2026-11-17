@@ -7,9 +7,9 @@
 extern "C" {
 
 int CONCAT44(...);
-int devilGetRecord(void);
-int dataTable8FindRecord(void);
-int dataTable04FindById(void);
+int nkmBaseGetRecord(void);
+int itemTableGetItemRecord(void);
+int skillDataFindById(void);
 int sysMemClear(...);
 int FUN_002efc44(...);
 int dataTable41FindById(void);
@@ -112,11 +112,11 @@ extern unsigned int uRam005714dc; /* 0x5714dc */
 #endif
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable8FindRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
 extern unsigned int padGetMappedValue(unsigned int);
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002efc44. */
@@ -208,14 +208,14 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   temp_v54 = param_4;
   temp_v45 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v1 = temp_v52;
-  dataTable04FindById();
-  dataTable8FindRecord();
+  skillDataFindById();
+  itemTableGetItemRecord();
   temp_v2 = 0;
   if (param_2 != 0) {
     temp_v2 = (unsigned int)*(unsigned short *)(param_2 + 0x32);
   }
   if (param_2 != 0 && temp_v2 != 0) {
-    dataTable04FindById();
+    skillDataFindById();
     temp_v1 = temp_v2;
   }
   puVar4 = temp_v45;
@@ -640,7 +640,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v8 = puVar11[1];
           if (!((DAT_005713f8 & temp_v10) == 0 && (DAT_005713fc & temp_v8) == 0)) {
             temp_v10 = temp_v2;
-            dataTable04FindById();
+            skillDataFindById();
             if (temp_v10 != 0) {
               temp_v5 = padGetMappedValue(temp_v2);
               FUN_002efc44(temp_v10,temp_v5,3);
@@ -652,7 +652,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           }
           else if (!((DAT_00571408 & temp_v10) == 0 && (DAT_0057140c & temp_v8) == 0)) {
             temp_v10 = temp_v2;
-            dataTable04FindById();
+            skillDataFindById();
             temp_v5 = (unsigned int)(temp_v25 >> 0x20);
             temp_v36 = temp_v10;
             if (temp_v10 != 0) {
@@ -672,7 +672,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
             }
           }
           else if ((temp_v10 & DAT_00571410) != 0 || (temp_v8 & DAT_00571414) != 0) {
-            dataTable04FindById();
+            skillDataFindById();
             temp_v5 = (unsigned int)(temp_v25 >> 0x20);
             temp_v33 = temp_v2;
             if (temp_v2 != 0) {
@@ -683,7 +683,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
               }
               else {
                 temp_v2 = (unsigned int)*(unsigned short *)((int)puVar11 + 0x166);
-                devilGetRecord();
+                nkmBaseGetRecord();
                 temp_v20 = 0;
                 if (temp_v2 != 0) {
                   temp_v20 = (int)*(char *)(temp_v2 + temp_v0 + 0xa0);
@@ -699,7 +699,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
               }
               else {
                 temp_v2 = (unsigned int)*(unsigned short *)((int)temp_v46 + 0x66);
-                devilGetRecord();
+                nkmBaseGetRecord();
                 temp_v20 = 0;
                 if (temp_v2 != 0) {
                   temp_v20 = (int)*(char *)(temp_v2 + temp_v0 + 0xa0);

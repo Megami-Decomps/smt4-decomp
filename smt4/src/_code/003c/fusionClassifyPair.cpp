@@ -12,8 +12,8 @@ FusionRaceRule *dataTable5Sub3Lookup(u8 race, u16 id);
 // Distinguish special two-ingredient recipes, race exceptions and ordinary race-pair fusion.
 u8 fusionClassifyPair(void *owner, u16 firstId, u16 secondId)
 {
-    const DevilRecord *first = devilGetRecord(firstId);
-    const DevilRecord *second = devilGetRecord(secondId);
+    const NkmBaseRecord *first = nkmBaseGetRecord(firstId);
+    const NkmBaseRecord *second = nkmBaseGetRecord(secondId);
     if (first->id == second->id)
         return 0;
     for (u16 index = 0; index < dataTable05Sub4GetCount(); ++index) {

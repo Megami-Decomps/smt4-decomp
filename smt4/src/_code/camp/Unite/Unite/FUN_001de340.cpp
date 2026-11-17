@@ -11,7 +11,7 @@ int statusPanelSetOpen(...);
 int FUN_0029defc(...);
 int gridNavigationConfigure(...);
 int FUN_002b7bca(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int asdMemFree(...);
 
 int FUN_002624c4(...);
@@ -93,7 +93,7 @@ extern int gameCountUnits(void);
 /* Supplied declaration required: partyMemberFindById. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: threadSleepDuration. */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemFree. */
@@ -510,7 +510,7 @@ LAB_001dedf4:
           if (*temp_v29 != 0) {
             do {
               temp_v13 = (param_1[(int)piVar19 * 2 + 0x4e5] & 0x1ffffU) >> 2;
-              devilGetRecord();
+              nkmBaseGetRecord();
               temp_v3 = gameGetPlayerData();
               piVar12 = (int *)(*(unsigned char *)(temp_v3 + 0x76) - 10);
               if ((int)piVar12 < (int)(unsigned int)*(unsigned char *)(temp_v13 + 3)) {
@@ -557,7 +557,7 @@ LAB_001dedf4:
               if (*temp_v29 != 0) {
                 do {
                   temp_v13 = (param_1[(int)piVar19 * 2 + 0x4e5] & 0x1ffffU) >> 2;
-                  devilGetRecord();
+                  nkmBaseGetRecord();
                   temp_v3 = gameGetPlayerData();
                   piVar12 = (int *)(*(unsigned char *)(temp_v3 + 0x76) - 10);
                   if ((int)piVar12 < (int)(unsigned int)*(unsigned char *)(temp_v13 + 3)) {

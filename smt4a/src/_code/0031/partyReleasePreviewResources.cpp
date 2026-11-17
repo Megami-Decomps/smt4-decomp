@@ -1,5 +1,5 @@
 #include "camp/PartyResourceWork.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
@@ -29,8 +29,8 @@ void partyReleasePreviewResources(PartyResourceWork *work)
     for (s32 i = 0; i < 12; ++i) {
         PartyTextureSlot *slot = partyGetSlot((u16)i);
         if (partySlotIsOccupied(slot)) {
-            /* The canonical DevilRecordA is only the 0x40-byte prefix. */
-            const DevilRecordA *record = devilGetRecord(slot->id);
+            /* The canonical NkmBaseRecordA is only the 0x40-byte prefix. */
+            const NkmBaseRecordA *record = nkmBaseGetRecord(slot->id);
             statusBustUpPortraitRelease((s16)(record->model + 1), 0);
         }
     }

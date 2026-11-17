@@ -2,7 +2,7 @@
 /* NON_MATCHING: retail's prologue pushes r0-r3 with the saved registers and reads the entry argument from its pushed slot ([sp+96]) instead of keeping it in a register (frame 76 vs 92); the panel/alternate/textId registers also differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 namespace {
 struct ProfileEntryDrawView {
@@ -59,14 +59,14 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     FUN_004a7fb8(panel, textId, entry, alternate, touchSelectionGetSelected(panelTouchSelection(panel)), fade, scale);
 
     u16 id = static_cast<u16>(textId);
-    Table00RecordA *record = dataTable00FindById(id);
+    NkmEnemyRecordA *record = nkmEnemyFindById(id);
     u32 flags = 0;
     if (record != NULL) {
         flags = record->level & 0x7FFF;
     }
     FUN_004a7814(panel, flags, entry, alternate, fade, 0xFFFFFFFF);
 
-    record = dataTable00FindById(id);
+    record = nkmEnemyFindById(id);
     u32 caption = 0;
     if (record != NULL) {
         caption = record->maxHp;
@@ -86,7 +86,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     textFormatBuffer(text, "%4d", caption);
     drawTextAtRelativePosition(panelLayout(panel), 0, captionX, captionY, 0, 7, color | opacity, fade, text);
 
-    record = dataTable00FindById(id);
+    record = nkmEnemyFindById(id);
     u32 detail = 0;
     if (record != NULL) {
         detail = record->maxMp;

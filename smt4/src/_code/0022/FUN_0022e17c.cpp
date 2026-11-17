@@ -1,6 +1,6 @@
 /* NON_MATCHING: shared base-summary initialization, stock-count addressing and matching-slot pointer reuse differ.
  * The named member at StatBlock+0x4A (growth.slot) changes how armcc lays out the local StatBlock: 111 diff lines, 90 with that byte unnamed. */
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/UnitStats.h"
 
 struct DevilComparisonIdentityView { struct { u16 id; u8 race; u8 level; } sort; u8 category; u8 variant; };
@@ -42,7 +42,7 @@ PartyComparisonSlotsView *gameGetSlotTable();
 
 void FUN_0022e17c(DevilComparisonSummaryView *output, u16 id, s32 useCurrent)
 {
-    const DevilComparisonIdentityView *devil = reinterpret_cast<const DevilComparisonIdentityView *>(devilGetRecord(id));
+    const DevilComparisonIdentityView *devil = reinterpret_cast<const DevilComparisonIdentityView *>(nkmBaseGetRecord(id));
     output->id = devil->sort.id;
     output->race = devil->sort.race;
     output->category = devil->category;

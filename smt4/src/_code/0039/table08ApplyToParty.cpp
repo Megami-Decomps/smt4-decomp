@@ -16,7 +16,7 @@ void FUN_00250d84(u32 id, s32 mode);
 u32 table08ApplyToParty(u32 id, u32 option)
 {
     bool applied = false;
-    ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+    ConsumableRecord *record = itemTableGetItemRecord(id);
     GameSlotTable *table;
     s32 i;
 

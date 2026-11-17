@@ -7,10 +7,10 @@ extern "C" {
 
 int btlGetMainState(...);
 int recordGetScaledMaximum(void);
-int dataTable8FindRecord(void);
-int dataTable08Sub2GetRecord(void);
+int itemTableGetItemRecord(void);
+int itemTableGetEquipmentRecord(void);
 int gameGetSlotRecord(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int btlEntryBuildSummary(...);
 int FUN_004bd098(...);
 int FUN_004c4178(unsigned int, unsigned int, int, int, int);
@@ -57,10 +57,10 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: recordGetScaledMaximum. */
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetItemRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 /* Supplied declaration required: gameGetSlotRecord. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_004bd098. */
@@ -118,8 +118,8 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
   iStack_28 = param_4;
   puVar4 = (unsigned int *)btlGetMainState();
   temp_v6 = temp_v26;
-  dataTable04FindById();
-  dataTable8FindRecord();
+  skillDataFindById();
+  itemTableGetItemRecord();
   puVar5 = puVar4;
   btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar4), param_5);
   puVar6 = puVar4;
@@ -321,7 +321,7 @@ LAB_004c3334:
     temp_v4 = (int)temp_v16;
     if (!((DAT_005713fc & puVar5[1]) == 0 && (DAT_005713f8 & *puVar5) == 0)) {
       temp_v3 = temp_v27;
-      dataTable08Sub2GetRecord();
+      itemTableGetEquipmentRecord();
       temp_v4 = (int)temp_v16;
       if (*(char *)(temp_v3 + 0x22) == '\x02') {
         temp_v5 = 1;

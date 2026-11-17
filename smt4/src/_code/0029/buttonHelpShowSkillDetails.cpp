@@ -3,7 +3,7 @@
 #include "shard/PassiveSkill.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
@@ -36,7 +36,7 @@ void buttonHelpShowSkillDetails(s32 skill)
         } else {
             /* The target/category word is past the shared active-skill prefix. */
             struct ActiveSkillView { u8 unk00[0x28]; u32 flags; };
-            const ActiveSkillView *record = (const ActiveSkillView *)dataTable40FindById(skill);
+            const ActiveSkillView *record = (const ActiveSkillView *)skillDataFindById(skill);
             btlFormatCategoryLabel(label, (record->flags >> 12) & 31);
             textEncodeFontSlot(36, (const u8 *)label);
             skillFormatTargetLabel(label, (record->flags >> 5) & 15);

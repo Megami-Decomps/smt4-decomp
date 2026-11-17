@@ -25,7 +25,7 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
         const CompleteRecipeView *entry = (const CompleteRecipeView *)dataTable54FindById(index);
         if (!entry)
             continue;
-        const DevilRecord *devil = (const DevilRecord *)devilGetRecord(entry->result);
+        const NkmBaseRecord *devil = (const NkmBaseRecord *)nkmBaseGetRecord(entry->result);
         if (devil->requiredFlag && !gameFlagIsSet(devil->requiredFlag))
             continue;
         u16 prerequisite = devil->prerequisite;

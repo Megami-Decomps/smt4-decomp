@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation and scheduling differ (menu/loop index swap, mode byte base hoisted into a register in retail, flag materialised as mov #1/moveq #0); logic matches retail. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 #include "code/Code002a.h"
 
 struct SpriteOffset {
@@ -48,7 +48,7 @@ static u32 statGetValue(const StatEntry *entry, bool compare, u32 kind)
     u32 value = 0;
     if (!compare) {
         if (kind == 0) {
-            DevilRecordA *record = devilGetRecord((u16)entry->id);
+            NkmBaseRecordA *record = nkmBaseGetRecord((u16)entry->id);
             if (record != 0)
                 value = record->level;
         } else if (kind == 1) {

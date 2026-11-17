@@ -1,5 +1,5 @@
-#ifndef GAMEDATA_DEVILRECORD_H
-#define GAMEDATA_DEVILRECORD_H
+#ifndef GAMEDATA_NKMBASERECORD_H
+#define GAMEDATA_NKMBASERECORD_H
 
 #include "common.h"
 #include <stddef.h>
@@ -24,10 +24,11 @@ struct DevilLearnedSkill {
     u16 id;
 };
 
-/* IV's demon record (data table 0, 0x94 bytes, sorted by id), as devilGetRecord returns it; add-on
-   content supplies further records of the same layout. Apocalypse's differs: DevilRecordA in
-   gamedata/DevilRecordA.h. */
-struct DevilRecord {
+/* IV's demon base record: one 0x94-byte row of battle/NKMBaseTable.tbb table 0 (the game's data
+ * table 0; nkm = nakama, the game keeps demon data under gamedata/nkm/), sorted by id, as
+ * nkmBaseGetRecord returns it; add-on content supplies further records of the same layout.
+ * Apocalypse's differs: NkmBaseRecordA in gamedata/NkmBaseRecordA.h. */
+struct NkmBaseRecord {
     /* 0x00 */ u16 id;
     /* 0x02 */ u8 race;
     /* 0x03 */ u8 level;
@@ -68,26 +69,26 @@ struct DevilRecord {
     /* 0x93 */ u8 unk93;
 };
 
-typedef char DevilRecordSizeCheck[sizeof(DevilRecord) == 0x94 ? 1 : -1];
+typedef char DevilRecordSizeCheck[sizeof(NkmBaseRecord) == 0x94 ? 1 : -1];
 typedef char DevilRecordPrefixCheck[
-    offsetof(DevilRecord, race) == 2 && offsetof(DevilRecord, level) == 3 &&
-    offsetof(DevilRecord, category) == 5 && offsetof(DevilRecord, flags) == 6 &&
-    offsetof(DevilRecord, element) == 0x0A ? 1 : -1];
+    offsetof(NkmBaseRecord, race) == 2 && offsetof(NkmBaseRecord, level) == 3 &&
+    offsetof(NkmBaseRecord, category) == 5 && offsetof(NkmBaseRecord, flags) == 6 &&
+    offsetof(NkmBaseRecord, element) == 0x0A ? 1 : -1];
 typedef char DevilRecordAttackCheck[
-    offsetof(DevilRecord, attackProperties) == 8 && offsetof(DevilRecord, attackAilment) == 0x0C &&
-    offsetof(DevilRecord, statGrowth) == 0x24 && offsetof(DevilRecord, battleRace) == 0x33 &&
-    offsetof(DevilRecord, effectGroup) == 0x92 ? 1 : -1];
+    offsetof(NkmBaseRecord, attackProperties) == 8 && offsetof(NkmBaseRecord, attackAilment) == 0x0C &&
+    offsetof(NkmBaseRecord, statGrowth) == 0x24 && offsetof(NkmBaseRecord, battleRace) == 0x33 &&
+    offsetof(NkmBaseRecord, effectGroup) == 0x92 ? 1 : -1];
 typedef char DevilRecordStatsCheck[
-    offsetof(DevilRecord, baseHp) == 0x14 && offsetof(DevilRecord, baseMp) == 0x16 &&
-    offsetof(DevilRecord, mpGrowth) == 0x19 && offsetof(DevilRecord, stats) == 0x1A &&
-    offsetof(DevilRecord, evolutionLevel) == 0x29 && offsetof(DevilRecord, evolutionTarget) == 0x2A ? 1 : -1];
+    offsetof(NkmBaseRecord, baseHp) == 0x14 && offsetof(NkmBaseRecord, baseMp) == 0x16 &&
+    offsetof(NkmBaseRecord, mpGrowth) == 0x19 && offsetof(NkmBaseRecord, stats) == 0x1A &&
+    offsetof(NkmBaseRecord, evolutionLevel) == 0x29 && offsetof(NkmBaseRecord, evolutionTarget) == 0x2A ? 1 : -1];
 typedef char DevilRecordFieldsCheck[
-    sizeof(DevilChanceData) == 4 && offsetof(DevilRecord, chance) == 0x2C &&
-    offsetof(DevilRecord, talkTone) == 0x30 && offsetof(DevilRecord, talkAlternate) == 0x31 &&
-    offsetof(DevilRecord, prerequisite) == 0x34 && offsetof(DevilRecord, requiredFlag) == 0x36 &&
-    offsetof(DevilRecord, innateFlag) == 0x38 && offsetof(DevilRecord, skills) == 0x3C &&
-    offsetof(DevilRecord, learnedSkills) == 0x4C && offsetof(DevilRecord, affinities) == 0x6C &&
-    offsetof(DevilRecord, model) == 0x90 ? 1 : -1];
+    sizeof(DevilChanceData) == 4 && offsetof(NkmBaseRecord, chance) == 0x2C &&
+    offsetof(NkmBaseRecord, talkTone) == 0x30 && offsetof(NkmBaseRecord, talkAlternate) == 0x31 &&
+    offsetof(NkmBaseRecord, prerequisite) == 0x34 && offsetof(NkmBaseRecord, requiredFlag) == 0x36 &&
+    offsetof(NkmBaseRecord, innateFlag) == 0x38 && offsetof(NkmBaseRecord, skills) == 0x3C &&
+    offsetof(NkmBaseRecord, learnedSkills) == 0x4C && offsetof(NkmBaseRecord, affinities) == 0x6C &&
+    offsetof(NkmBaseRecord, model) == 0x90 ? 1 : -1];
 typedef char DevilLearnedSkillOffsets[
     sizeof(DevilLearnedSkill) == 4 && offsetof(DevilLearnedSkill, id) == 2 && sizeof(DevilAffinity) == 2 ? 1 : -1];
 
@@ -96,9 +97,9 @@ extern "C" {
 #endif
 /* The demon record for an id (base table, overridden by add-on records). Retail's definition takes a
    u16 (it only stores the halfword), but its callers pass ids unextended, so they see a u32; the
-   definition file (devilGetRecord.cpp) defines DEVIL_RECORD_OWN_PROTOTYPE and declares the u16 one. */
-#ifndef DEVIL_RECORD_OWN_PROTOTYPE
-DevilRecord *devilGetRecord(u32 id);
+   definition file (nkmBaseGetRecord.cpp) defines NKM_BASE_RECORD_OWN_PROTOTYPE and declares the u16 one. */
+#ifndef NKM_BASE_RECORD_OWN_PROTOTYPE
+NkmBaseRecord *nkmBaseGetRecord(u32 id);
 #endif
 /* Canonical declaration (matches the definition). */
 bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);

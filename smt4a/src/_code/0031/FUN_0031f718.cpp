@@ -1,12 +1,12 @@
 /* NON_MATCHING: presentation-pointer lifetime, maximum-HP reload and eligibility-flag lowering differ. */
 #include "shard/Shard0033.h"
 #include "shard/Shard0032.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/UnitPresentationInfo.h"
 #include <string.h>
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/GameDataAccess.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
@@ -22,7 +22,7 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
 {
     /* The shared session opaque range starts at 0x1391; a typed union there would shift it. */
     struct PresentationView { u8 unk0000[0x1390]; UnitPresentationInfo info; };
-    /* Keep Table00RecordA's original halfword alignment. */
+    /* Keep NkmEnemyRecordA's original halfword alignment. */
     struct BaseStatsView { u16 id, flags; u32 hp, mp; };
     typedef char PresentationOffsets[
         offsetof(PresentationView, info) == 0x1390 &&
@@ -39,7 +39,7 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
         unitInitializeFromTemplate((u16)id, &unit);
         session->unk2017 = 7;
         FUN_0026fd50(info, &unit, 0, flags);
-        Table00RecordA *record = dataTable00FindById((u16)id);
+        NkmEnemyRecordA *record = nkmEnemyFindById((u16)id);
         if (record != NULL) {
             const BaseStatsView *base = (const BaseStatsView *)record;
             info->hp = base->hp;
@@ -61,7 +61,7 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
     }
     session->unk20B0 = 1;
     if (id >= 0) {
-        Table00RecordA *record = dataTable00FindById((u16)id);
+        NkmEnemyRecordA *record = nkmEnemyFindById((u16)id);
         if (record != NULL) {
             allowed = !(record->flags & 0x400);
             if (g_gameGlobals.instance != NULL && g_gameGlobals.instance->unk2017 == 17)

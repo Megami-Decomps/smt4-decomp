@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int libc_strcat(...);
-int dataTable00FindById(void);
+int nkmEnemyFindById(void);
 int randomGetLowerTenBits(int, int);
 int randomGetUpperSixBits(int, int);
 
@@ -20,7 +20,7 @@ extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: dataTable00FindById. */
+/* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int libc_strlen(char *);
 extern int playerPackedEntryLow10(void);
 extern int playerPackedEntryHigh(unsigned char);
@@ -121,7 +121,7 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
   }
   else {
     param_3 = param_3 & 0xffff;
-    dataTable00FindById();
+    nkmEnemyFindById();
     temp_v4 = 0;
     do {
       temp_v0 = temp_v8[temp_v4];

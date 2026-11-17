@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include <string.h>
 
 struct BtlMainStateA;

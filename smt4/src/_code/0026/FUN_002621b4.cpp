@@ -1,6 +1,6 @@
 #include "common.h"
 #include "code/Code0026.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 s32 FUN_00258de0(u32 user, s32 target, void *record, s32 apply, s32 *result);
@@ -9,7 +9,7 @@ s32 FUN_00258de0(u32 user, s32 target, void *record, s32 apply, s32 *result);
 s32 FUN_002621b4(u32 user, s32 target, u32 id, s32 *result)
 {
     *result = 0;
-    void *record = dataTable40FindById(id);
+    void *record = skillDataFindById(id);
     if (record == NULL) {
         return 1;
     }

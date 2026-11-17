@@ -13,7 +13,7 @@ int arrayContainsU16(...);
 int FUN_0029dc74(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6c34(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int FUN_002bdf94(...);
 int textDrawString(...);
 int textFormatBuffer(...);
@@ -77,7 +77,7 @@ extern int FUN_0029ee54(int);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002b6c34. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int demonGetRaceLabel(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
@@ -167,16 +167,16 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     texDrawTableEntryAtStoredOrigin(2,0x24,0x4f,temp_v4,temp_v13,0x6a);
     if (temp_v25 != 0) {
       psVar4 = (short *)(unsigned int)*(unsigned short *)(temp_v1 + 0x5210);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     else if (param_6 != 0) {
       psVar4 = (short *)((*(unsigned int *)(temp_v1 + 0x1394) & 0x1ffff) >> 2);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     else {
       psVar4 = (short *)((*(unsigned int *)(temp_v1 + (unsigned int)*(unsigned short *)(temp_v1 + 0x6ce2) * 8 + 0x1394) &
                          0x1ffff) >> 2);
-      devilGetRecord();
+      nkmBaseGetRecord();
     }
     temp_v2 = asdTMTexTableEntryAt(0x24,0x4d);
     temp_v3 = FUN_002bd068(*psVar4);

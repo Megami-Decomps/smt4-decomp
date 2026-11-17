@@ -23,11 +23,11 @@ u32 FUN_003de75c(u32 id)
     if (!gameUnlockRecordRequirementsMet()) {
         return 0;
     }
-    record = dataTable1bOr1cGetRecord(id);
+    record = questDataGetRecord(id);
     if (gameFlagEntryGetBit(id, 3) && record->kind != ITEM_GROUP_KEY) {
         return 0;
     }
-    if (id >= ITEM_FIRST_LATE_ID && (late = dataTable1bOr1cGetRecord(id)) != NULL
+    if (id >= ITEM_FIRST_LATE_ID && (late = questDataGetRecord(id)) != NULL
         && late->kind == ITEM_GROUP_KEY && g_gameState.mapId == GAME_MODE_KEY_ITEMS_LOCKED) {
         return 0;
     }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: the loop index, skill id and known-list pointer rotate through r3/r1/r2 where retail uses r1/r2/r3. */
 #include "common.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -12,7 +12,7 @@ s32 FUN_004bcaa8(u16 id, u32 level, const u16 *known, s16 *out, s32 skip)
         return 0;
     }
     s32 count = 0;
-    DevilRecordA *devil = devilGetRecord(id);
+    NkmBaseRecordA *devil = nkmBaseGetRecord(id);
     for (s32 i = 0; i < 8; i++) {
         u16 skill = devil->learnedSkills[i].id;
         if (skill != 0 && devil->learnedSkills[i].level > level) {

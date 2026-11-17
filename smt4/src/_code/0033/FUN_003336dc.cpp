@@ -16,7 +16,7 @@ QuestFlagEntry *questGetRuntimeStatus(void);
 s32 FUN_003336dc(u32 id, u8 mask)
 {
     QuestFlagEntry *entry = questGetRuntimeStatus();
-    QuestRecord *record = dataTable1bOr1cGetRecord(id);
+    QuestRecord *record = questDataGetRecord(id);
 
     if (record == NULL) {
         return -1;

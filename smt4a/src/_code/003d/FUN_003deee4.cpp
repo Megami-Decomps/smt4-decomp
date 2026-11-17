@@ -22,20 +22,20 @@ u32 FUN_003deee4(u32 requestedAttribute)
                 continue;
         }
         if (index >= 350) {
-            if (dataTable1bOr1cGetRecord(index) == 0)
+            if (questDataGetRecord(index) == 0)
                 continue;
         }
 
         if (enabled == 0)
             continue;
 
-        QuestRecordA *first = dataTable1bOr1cGetRecord(index);
+        QuestRecordA *first = questDataGetRecord(index);
         const u32 firstAttribute = first != 0
             ? (first->flags & 1) : 0;
         if ((firstAttribute & ~requestedAttribute) != 0)
             continue;
 
-        QuestRecordA *second = dataTable1bOr1cGetRecord(index);
+        QuestRecordA *second = questDataGetRecord(index);
         const u32 secondAttribute = second != 0
             ? (second->flags & 1) : 0;
         if ((requestedAttribute & ~secondAttribute) != 0)

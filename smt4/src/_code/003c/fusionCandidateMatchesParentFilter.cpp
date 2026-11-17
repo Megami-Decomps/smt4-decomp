@@ -10,7 +10,7 @@ s32 partyMemberFindById(u16);
 /* Test result eligibility and the requested parent-slot restrictions. */
 u16 fusionCandidateMatchesParentFilter(const FusionCandidateFilter *filter, u16 firstParent, u16 secondParent, u16 resultId)
 {
-    DevilRecord *result = (DevilRecord *)devilGetRecord(resultId);
+    NkmBaseRecord *result = (NkmBaseRecord *)nkmBaseGetRecord(resultId);
     if (!(result->flags & 1))
         return 0;
     if (filter->matchId) {
@@ -26,8 +26,8 @@ u16 fusionCandidateMatchesParentFilter(const FusionCandidateFilter *filter, u16 
     if (filter->availableOnly && partyMemberFindById(result->id))
         return 0;
 
-    DevilRecord *first = devilGetRecord(firstParent);
-    DevilRecord *second = devilGetRecord(secondParent);
+    NkmBaseRecord *first = nkmBaseGetRecord(firstParent);
+    NkmBaseRecord *second = nkmBaseGetRecord(secondParent);
     if (!filter->allowSpecialRace && (first->race == 0x26 || second->race == 0x26))
         return 0;
     if (filter->requireParents) {

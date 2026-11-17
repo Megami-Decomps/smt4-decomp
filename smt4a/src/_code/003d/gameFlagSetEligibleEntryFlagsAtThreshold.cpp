@@ -2,7 +2,7 @@
 #include "quest_center/QuestRecordA.h"
 #include "gamedata/GameFlags.h"
 
-// Private view of the record returned by dataTable1bOr1cGetRecord.
+// Private view of the record returned by questDataGetRecord.
 extern "C" {
 u8* gameFlagBlockGetEntry(u16 entryId);
 s32 gameUnlockRecordRequirementsMet(u16 entryId);
@@ -18,12 +18,12 @@ void gameFlagSetEligibleEntryFlagsAtThreshold(s32 threshold)
             continue;
         }
 
-        QuestRecordA* record = dataTable1bOr1cGetRecord((u16)entryId);
+        QuestRecordA* record = questDataGetRecord((u16)entryId);
         if (record == 0 || record->requiredLevel == 0 || record->requiredLevel > threshold) {
             continue;
         }
 
-        record = dataTable1bOr1cGetRecord((u16)entryId);
+        record = questDataGetRecord((u16)entryId);
         if (record != 0 && record->value != 0) {
             gameFlagSetValue(record->value, 1, 1);
         }

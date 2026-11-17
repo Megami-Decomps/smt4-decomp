@@ -32,8 +32,8 @@ void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e,
 void FUN_00399e20(s32 textId, u32 flags)
 {
     PanelBlock *block = g_buttonHelp.block;
-    EquipmentRecordA *first = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.gun);
-    EquipmentRecordA *second = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.bullets);
+    EquipmentRecordA *first = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.gun);
+    EquipmentRecordA *second = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.bullets);
     if (first == NULL || second == NULL) {
         block->shown = 0;
         return;

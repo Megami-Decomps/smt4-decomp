@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/ItemSortCategory.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 
 struct EntryRecordView {
     u8 unk00[0x2c]; // 0x00
@@ -21,7 +21,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         leftField = 0;
     } else {
         leftClass = itemGetSortCategory(*left);
-        leftField = reinterpret_cast<EntryRecordView *>(dataTable40FindById(*left))->unk2C;
+        leftField = reinterpret_cast<EntryRecordView *>(skillDataFindById(*left))->unk2C;
     }
 
     s32 rightClass;
@@ -31,7 +31,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         rightField = 0;
     } else {
         rightClass = itemGetSortCategory(*right);
-        rightField = reinterpret_cast<EntryRecordView *>(dataTable40FindById(*right))->unk2C;
+        rightField = reinterpret_cast<EntryRecordView *>(skillDataFindById(*right))->unk2C;
     }
 
     s32 difference = leftClass - rightClass;

@@ -6,7 +6,7 @@ extern "C" {
 /* Computes or forwards the requested value. */
 u32 FUN_00298e00(u32 id)
 {
-    QuestRecord *record = dataTable1bOr1cGetRecord(id);
+    QuestRecord *record = questDataGetRecord(id);
     return record != NULL ? (record->flags & 2) >> 1 : 0;
 }
 }

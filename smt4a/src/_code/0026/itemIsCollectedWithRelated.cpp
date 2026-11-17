@@ -1,6 +1,6 @@
 /* NON_MATCHING: corrected identifier width/saved flag signedness; inventory base offset folds into the member displacement. */
-#include "gamedata/Table00.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyRecord.h"
+#include "gamedata/NkmEnemyLookup.h"
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 extern "C" {
 
@@ -10,7 +10,7 @@ u32 itemIsCollectedWithRelated(u16 id)
     if (id > 0x500) {
         return 0;
     }
-    Table00RecordA* record = dataTable00FindById(id);
+    NkmEnemyRecordA* record = nkmEnemyFindById(id);
     if ((record->flags & 1) == 0) {
         return 0;
     }

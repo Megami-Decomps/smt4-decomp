@@ -1,7 +1,7 @@
 /* NON_MATCHING: only the two key addresses swap callee-saved registers (retail keeps &firstKey in r5 and &secondKey in r6). */
 #include "common.h"
 #include "gamedata/Table8Type5Lookup.h"
-#include "gamedata/DataTable40.h"
+#include "gamedata/SkillDataLookup.h"
 #include "gamedata/UnitRecordAccess.h"
 
 struct PassiveSkillRecord {
@@ -34,12 +34,12 @@ static __inline s32 skillSortCompare(SkillSortKey &a, SkillSortKey &b)
     if (idIsAbove400(a.skillId) != 0) {
         skillA = passiveSkillLookupRecord(a.skillId)->sortKey;
     } else {
-        skillA = reinterpret_cast<SkillRecord *>(dataTable40FindById(a.skillId))->sortKey;
+        skillA = reinterpret_cast<SkillRecord *>(skillDataFindById(a.skillId))->sortKey;
     }
     if (idIsAbove400(b.skillId) != 0) {
         skillB = passiveSkillLookupRecord(b.skillId)->sortKey;
     } else {
-        skillB = reinterpret_cast<SkillRecord *>(dataTable40FindById(b.skillId))->sortKey;
+        skillB = reinterpret_cast<SkillRecord *>(skillDataFindById(b.skillId))->sortKey;
     }
     s32 difference = skillA - skillB;
     if (difference != 0) {

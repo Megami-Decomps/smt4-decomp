@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -20,7 +20,7 @@ s32 flagBitIsSet(u32 bit);
 /* Picks a drop item of the unit's devil: a random common slot, or the rare slot (+12) on a low roll. */
 u16 devilRollDropItem(UnitRecord *unit)
 {
-    DropGroupRecord *group = dataTable14Sub1GetRecord(devilGetRecord(unit->devilId)->chance.dropGroup);
+    DropGroupRecord *group = dataTable14Sub1GetRecord(nkmBaseGetRecord(unit->devilId)->chance.dropGroup);
     s32 slot = randNextInRange(11);
     s32 roll = randNextInRange(13);
 

@@ -55,7 +55,7 @@ int messageMainFinishWindow(void);
 int slotSetRequest(int, int, int);
 int FUN_002a4bac(unsigned int);
 int asdMemFreeNonNull(int);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int asdMemFree(void);
 int commonBgStopChildAndReset(void);
 
@@ -121,7 +121,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: objModelCreateFromSource. */
 /* Supplied declaration required: FUN_002a4bac. */
 /* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int FUN_002b8694(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -230,7 +230,7 @@ void FUN_003ba998(int param_1)
     if (pcVar4[4] != '\0') {
       if (pcVar4[1] != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
-        dataTable1bOr1cGetRecord();
+        questDataGetRecord();
         DAT_0049fa82 = *(unsigned short *)(temp_v3 + 2);
         libc_strcpy(reinterpret_cast<unsigned int *>(&DAT_0049fa84), reinterpret_cast<unsigned int *>(temp_v3 + 0x138));
         DAT_0049fa80 = 1;

@@ -18,7 +18,7 @@ void questRaiseMaxAvailableForArea(u32 area)
     s32 count = 0;
 
     for (s32 id = 0; id < 400; id++) {
-        QuestRecord *record = dataTable1bOr1cGetRecord(static_cast<u16>(id));
+        QuestRecord *record = questDataGetRecord(static_cast<u16>(id));
 
         if (record != NULL && (record->flags & 1) == 0 && record->area == area && questRequirementsMet(id) != 0) {
             count++;

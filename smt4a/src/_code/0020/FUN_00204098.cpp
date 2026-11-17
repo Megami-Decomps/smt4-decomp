@@ -51,7 +51,7 @@ int partyRecordSetEquippedItemClampRank(...);
 
 int textFormatBuffer(...);
 int dataTable01GetRecordWithAocOverride(...);
-int devilGetRecord(void);
+int nkmBaseGetRecord(void);
 int asdLoadFileSyncDefault(void);
 int gridNavigationConfigure(...);
 int FUN_00215bd0(void);
@@ -189,7 +189,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: devilGetRecord. */
+/* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
@@ -1386,7 +1386,7 @@ LAB_00205528:
       libc_strcpy(temp_v39,temp_v11);
       scrSetStringSlot(0x10,temp_v39);
       temp_v13 = (unsigned int)*(unsigned short *)(temp_v7 + 0x62);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v0 = *(char *)(temp_v13 + 0x38);
       temp_v11 = dataTableGet(0x25,0);
       pcVar26 = (char *)dataTableGetEntries();
@@ -2354,7 +2354,7 @@ joined_r0x002073c8:
       libc_strcpy(&temp_v41,temp_v11);
       scrSetStringSlot(0x10,&temp_v41);
       temp_v26 = (unsigned int)*(unsigned short *)(temp_v13 + 0x62);
-      devilGetRecord();
+      nkmBaseGetRecord();
       temp_v0 = *(char *)(temp_v26 + 0x38);
       temp_v11 = dataTableGet(0x25,0);
       pcVar26 = (char *)dataTableGetEntries();

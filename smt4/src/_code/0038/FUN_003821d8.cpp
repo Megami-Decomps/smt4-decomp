@@ -21,7 +21,7 @@ int FUN_0029bbc8(void);
 int partyFindActiveSlotById(int);
 int slotSetRequest(...);
 int buttonHelpSetText(int, int);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 int buttonHelpSetPreset(int);
 int messageSetConfirmDisplayMode(void);
 int FUN_002cdf2c(int *);
@@ -74,7 +74,7 @@ extern int questReadRuntimeFlag(unsigned int, unsigned int);
 /* Supplied declaration required: partyFindActiveSlotById. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
@@ -117,7 +117,7 @@ void FUN_003821d8(unsigned int *param_1)
     temp_v4 = 0;
     do {
       temp_v1 = temp_v4;
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       if (((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\0')) &&
          (temp_v2 = questReadRuntimeFlag(temp_v4,1), temp_v2 != 0)) {
         temp_v0 = *(unsigned short *)(temp_v1 + 0x19c);
@@ -229,9 +229,9 @@ LAB_003822fc:
       break;
     }
     puVar4 = (unsigned short *)(param_1[0x343] & 0xffff);
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     temp_v4 = (unsigned int)*puVar4;
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     temp_v2 = 0;
     do {
       temp_v3 = temp_v4 + temp_v2 * 8;
@@ -262,15 +262,15 @@ LAB_003822fc:
     temp_v15 = 0;
     temp_v16 = 0;
     puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     FUN_00333b74(&temp_v5,*puVar5);
     FUN_002cdf2c(&temp_v5);
     puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     temp_v2 = table1bOr1cGetRecordValue(*puVar5);
     if (temp_v2 == 0) {
       puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
-      dataTable1bOr1cGetRecord();
+      questDataGetRecord();
       FUN_0028eeb8(*puVar5);
     }
     temp_v4 = 7;
@@ -283,7 +283,7 @@ LAB_003822fc:
     scrResultStopJobAndReleaseUi();
     messageSetConfirmDisplayMode();
     puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     FUN_0034888c(*puVar5);
     buttonHelpSetPreset(0xa3);
     scrScriptProcessStartMappedEntry(param_1,&LAB_00382694);

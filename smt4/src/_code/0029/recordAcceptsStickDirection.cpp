@@ -13,7 +13,7 @@ u32 recordAcceptsStickDirection(int id)
     EquipmentRecord *entry;
 
     direction = padGetStickHorizontalDirection();
-    entry = dataTable08Sub2GetRecord(id);
+    entry = itemTableGetEquipmentRecord(id);
     if (entry == NULL) {
         return 0;
     }

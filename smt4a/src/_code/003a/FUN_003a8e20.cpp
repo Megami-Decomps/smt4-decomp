@@ -1,6 +1,6 @@
 #include "battle/btlScript.h"
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
@@ -28,7 +28,7 @@ s32 FUN_003a8e20(void)
 {
     s32 slot = scrGetArg(0);
     UnitData *data = btlUnitGet(g_btlScriptUnit)->data;
-    SkillRecord *record = (SkillRecord *)dataTable04FindById(data->skillIds[slot]);
+    SkillRecord *record = (SkillRecord *)skillDataFindById(data->skillIds[slot]);
 
     if (record != NULL) {
         scrSetResult(record->value);

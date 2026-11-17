@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -35,7 +35,7 @@ void skillHelpUpdateAttributeAndTarget(s32 id)
         textFormatBuffer(text, "\x82\x72\x82\x85\x82\x8c\x82\x86");
         scrSetStringSlot(0x25, reinterpret_cast<const char *>(text));
     } else {
-        Table04RecordA *record = dataTable04FindById(id);
+        SkillDataRecordA *record = skillDataFindById(id);
         char text[0x6C];
         battleAttributeFormatName(text, (record->properties >> 11) & 31u);
         scrSetStringSlot(0x24, reinterpret_cast<const char *>(text));

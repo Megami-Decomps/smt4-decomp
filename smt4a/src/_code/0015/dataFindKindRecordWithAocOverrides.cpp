@@ -66,7 +66,7 @@ void *dataFindKindRecordWithAocOverrides(u32 id)
     }
     case 1:
     case 12:
-        record = dataTable8FindRecord(id);
+        record = itemTableGetItemRecord(id);
         break;
     case 2:
     case 3:
@@ -75,7 +75,7 @@ void *dataFindKindRecordWithAocOverrides(u32 id)
     case 6:
     case 7:
     case 8:
-        record = dataTable08Sub2GetRecord(id);
+        record = itemTableGetEquipmentRecord(id);
         break;
     case 9: {
         SkillRecord key;

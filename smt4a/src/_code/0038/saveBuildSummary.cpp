@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -63,7 +63,7 @@ void saveBuildSummary(SaveSummary *summary)
 {
     SlotTable *table = gameGetSlotTable();
     SaveSlot *slot;
-    DevilRecordA *source;
+    NkmBaseRecordA *source;
     s32 i;
 
     memcpySrcFirst(table->nameA, summary->nameA, 0xe);
@@ -100,7 +100,7 @@ void saveBuildSummary(SaveSummary *summary)
     }
     summary->unk34 = 0;
     summary->id60 = 0x218;
-    source = devilGetRecord(0x218);
+    source = nkmBaseGetRecord(0x218);
     summary->value62 = source->level;
     memcpySrcFirst(source->name, summary->copy50, 0x10);
 }

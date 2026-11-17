@@ -1,6 +1,6 @@
 /* NON_MATCHING: unit-slot address folding ([r0,#9] vs a register offset) and 64-bit mask load forms differ */
 #include "common.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include "code/Code004a_Smt4a.h"
 #include "gamedata/ConsumableRecordA.h"
 
@@ -132,7 +132,7 @@ u32 FUN_004dc72c(BtlActingTask *task, BtlMenuState *menu)
         break;
     case 2:
     case 3:
-        if (FUN_00333758(dataTable04FindById((s16)menu->result->argument))) {
+        if (FUN_00333758(skillDataFindById((s16)menu->result->argument))) {
             action->units[task->battle->unit].phase = 6;
         } else {
             action->units[task->battle->unit].phase = 8;
@@ -155,8 +155,8 @@ u32 FUN_004dc72c(BtlActingTask *task, BtlMenuState *menu)
         }
         break;
     case 8: {
-        ConsumableRecordA *row = dataTable8FindRecord((s16)menu->result->argument);
-        if (row->skillId != 0 && FUN_00333758(dataTable04FindById(row->skillId))) {
+        ConsumableRecordA *row = itemTableGetItemRecord((s16)menu->result->argument);
+        if (row->skillId != 0 && FUN_00333758(skillDataFindById(row->skillId))) {
             action->units[task->battle->unit].phase = 6;
         } else {
             action->units[task->battle->unit].phase = 8;

@@ -1,15 +1,15 @@
 #include "shard/W6_W6Match5_DevilSort.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 // Sort by descending table value, ascending current level, then descending ID.
 extern "C" s32 devilCompareTableValueLevelId(const u16* leftId, const u16* rightId)
 {
-    Table00Record* left = dataTable00FindById(*leftId);
-    Table00Record* right = dataTable00FindById(*rightId);
+    NkmEnemyRecord* left = nkmEnemyFindById(*leftId);
+    NkmEnemyRecord* right = nkmEnemyFindById(*rightId);
     s32 difference = right->maxMp - left->maxMp;
     if (difference == 0) {
-        DevilRecord* leftRecord = devilGetRecord(*leftId);
-        DevilRecord* rightRecord = devilGetRecord(*rightId);
+        NkmBaseRecord* leftRecord = nkmBaseGetRecord(*leftId);
+        NkmBaseRecord* rightRecord = nkmBaseGetRecord(*rightId);
         difference = leftRecord->level - rightRecord->level;
         if (difference == 0) {
             difference = *rightId - *leftId;

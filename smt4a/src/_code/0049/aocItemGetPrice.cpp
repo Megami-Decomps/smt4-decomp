@@ -31,7 +31,7 @@ s32 aocItemGetPrice(AocPricedItem *item)
     switch (aocEntryGetKind(id)) {
     case 1:
     case 12: {
-        ConsumableRecordA *record = dataTable8FindRecord(id);
+        ConsumableRecordA *record = itemTableGetItemRecord(id);
         price = record == NULL ? AOC_PRICE_UNKNOWN : record->sellPrice;
         break;
     }
@@ -42,7 +42,7 @@ s32 aocItemGetPrice(AocPricedItem *item)
     case 6:
     case 7:
     case 8: {
-        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = itemTableGetEquipmentRecord(id);
         price = record == NULL ? AOC_PRICE_UNKNOWN : record->sellPrice;
         break;
     }

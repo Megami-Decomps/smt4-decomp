@@ -6,7 +6,7 @@ extern "C" {
 
 int texDrawCompositeSprite(int, int, int, unsigned int, unsigned int, unsigned int);
 int texDrawTableEntryAtStoredOrigin(...);
-int dataTable1bOr1cGetRecord(void);
+int questDataGetRecord(void);
 
 /* stack frame of param_6: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
+/* Supplied declaration required: questDataGetRecord. */
 extern int FUN_003de75c(void);
 extern int recordIsAvailable(int);
 extern int recordCategoryNineIsActiveInMode24(int);
@@ -81,7 +81,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
     }
   }
   else {
-    dataTable1bOr1cGetRecord();
+    questDataGetRecord();
     if (param_1 == 0) {
       return temp_v2;
     }

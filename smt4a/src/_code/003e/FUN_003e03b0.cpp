@@ -3,11 +3,11 @@
 #include "battle/btlMain.h"
 #include "battle/btlEncount.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;
@@ -26,7 +26,7 @@ void FUN_003e03b0(BattleArrangementLoadState *load, BtlMainStateA *battle)
     s32 index = btlFindSelectionIndexByOrdinal(battle, 1);
     if (index >= 0) {
         battle->stateFlags64.bits |= g_btlEncount.queuedStateMask;
-        Table00RecordA *record = dataTable00FindById(battle->entries[index].id);
+        NkmEnemyRecordA *record = nkmEnemyFindById(battle->entries[index].id);
         char path[128];
         sysMemClear(path, sizeof(path));
         textFormatBuffer(path, "battle/arngmt/%02d_%02d.earg", record->bustUp, record->bustUpVariation);

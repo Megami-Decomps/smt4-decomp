@@ -17,8 +17,8 @@ extern "C" s32 comparePartyUnitsByRankRaceAndId(const s32 *left, const s32 *righ
         const StatBlock *second = gameGetUnitRecord(*right);
         difference = second->level - first->level;
         if (difference == 0) {
-            const DevilRecord *firstDevil = devilGetRecord(first->id);
-            const DevilRecord *secondDevil = devilGetRecord(second->id);
+            const NkmBaseRecord *firstDevil = nkmBaseGetRecord(first->id);
+            const NkmBaseRecord *secondDevil = nkmBaseGetRecord(second->id);
             difference = firstDevil->race - secondDevil->race;
             if (difference == 0) {
                 return first->id - second->id;

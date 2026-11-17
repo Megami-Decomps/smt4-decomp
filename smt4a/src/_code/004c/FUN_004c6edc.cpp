@@ -9,7 +9,7 @@ int playerSetClampedStat(...);
 int recordSetClampedCurrent(...);
 
 int recordGetScaledMaximum(...);
-int dataTable04FindById(void);
+int skillDataFindById(void);
 int btlMainFindEntryByListedId(...);
 int FUN_004c53fc(...);
 int btlAdjustPropertyClamped(...);
@@ -97,7 +97,7 @@ extern unsigned int DAT_00571414; /* 0x571414 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: recordGetScaledMaximum. */
-/* Supplied declaration required: dataTable04FindById. */
+/* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: playerSetClampedStat. */
 extern int FUN_003ea278(unsigned int *, unsigned int *);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -127,7 +127,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
   puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   puVar3 = puVar2;
   btlMainFindEntryByListedId(puVar2,param_1);
-  dataTable04FindById();
+  skillDataFindById();
   if (param_2 == (fn_004c6edc_arg1 *)0x0) {
     return 0;
   }

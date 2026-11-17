@@ -52,7 +52,7 @@ void FUN_002cbca8(s32 slot, u32 targetLow, u32 targetHigh)
     if (slot < 0 && (targetLow != 0 || targetHigh != 0)) {
         return;
     }
-    ConsumableRecordA *item = dataTable8FindRecord(panel->item);
+    ConsumableRecordA *item = itemTableGetItemRecord(panel->item);
     if ((item->useFlags & 2) == 0) {
         FUN_0033449c(0);
         return;

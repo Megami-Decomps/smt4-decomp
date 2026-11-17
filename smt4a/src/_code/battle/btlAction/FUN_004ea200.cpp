@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int dataTable08Sub2GetRecord(void);
+int itemTableGetEquipmentRecord(void);
 int btlEntryBuildSummary(unsigned short [26], int, unsigned int);
 int FUN_004bfcfc(int, int, int, unsigned int *, int, int, int);
 int FUN_004c4604(int, int, int, unsigned int *, int, int, int, unsigned char [8]);
@@ -31,7 +31,7 @@ extern unsigned int *g_btlTargetableMask; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
+/* Supplied declaration required: itemTableGetEquipmentRecord. */
 extern int itemIsCollectedWithRelated(unsigned short);
 extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: btlEntryBuildSummary. */
@@ -67,7 +67,7 @@ unsigned int FUN_004ea200(int *param_1,int param_2,int param_3,unsigned int para
     temp_v8[0] = 1;
     temp_v0 = gameGetPlayerData();
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 2);
-    dataTable08Sub2GetRecord();
+    itemTableGetEquipmentRecord();
     if (temp_v1 != 0) {
       temp_v6 = 2;
       temp_v8[1] = 2;

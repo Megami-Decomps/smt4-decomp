@@ -1,5 +1,5 @@
 /* NON_MATCHING: the loop index and the skill id are exchanged (r2/r1) relative to retail (r1/r2); the inner known-list scan matches. */
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 
 extern "C" {
 
@@ -12,7 +12,7 @@ s32 FUN_0026a9cc(u16 id, u32 level, const u16 *known, s16 *out, s32 skip)
         return 0;
     }
     s32 count = 0;
-    const DevilRecord *devil = reinterpret_cast<const DevilRecord *>(devilGetRecord(id));
+    const NkmBaseRecord *devil = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(id));
     for (s32 i = 0; i < 8; i++) {
         u16 skill = devil->learnedSkills[i].id;
         if (skill != 0 && devil->learnedSkills[i].level > level) {

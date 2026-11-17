@@ -1,10 +1,10 @@
 #include "event/NpcTextureWork.h"
-#include "gamedata/Table00.h"
+#include "gamedata/NkmEnemyRecord.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "gamedata/Table00Lookup.h"
+#include "gamedata/NkmEnemyLookup.h"
 
 extern "C" {
 extern const char DAT_0040357c[];
@@ -27,7 +27,7 @@ void FUN_00252190(u32 npcId, u32 mode, s32 x)
     work->unk08 = mode;
     work->display.stopWhenHidden = 0;
     work->portrait.animate = 1;
-    work->portrait.portraitId = dataTable00FindById(static_cast<u16>(npcId))->portraitId;
+    work->portrait.portraitId = nkmEnemyFindById(static_cast<u16>(npcId))->portraitId;
     if (FUN_002c1d5c() != 0) {
         work->deferred = 1;
     } else {

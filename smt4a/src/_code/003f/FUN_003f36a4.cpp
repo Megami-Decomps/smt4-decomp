@@ -36,7 +36,7 @@ struct UnitSkillSlots {
 
 extern "C" {
 u32 randRange(u32 maximum);
-UnitSkillSlots *devilGetRecord(void *unit);
+UnitSkillSlots *nkmBaseGetRecord(void *unit);
 SkillMeta *findSkillMetadataById(u32 id);
 SkillRankChances *FUN_003f39ac(u32 rank);
 s32 gameDataFlagTestBit(u32 flag);
@@ -81,7 +81,7 @@ s16 FUN_003f36a4(const u16 *sourceSkills, s32 index, void *unit)
     u16 known[SKILL_KNOWN_COUNT] = {0};
     for (s32 i = 0; i < 8; i++)
         known[i] = sourceSkills[i];
-    UnitSkillSlots *slots = devilGetRecord(unit);
+    UnitSkillSlots *slots = nkmBaseGetRecord(unit);
     known[8] = slots->slot0;
     known[9] = slots->slot1;
     known[10] = slots->slot2;

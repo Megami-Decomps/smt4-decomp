@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "gamedata/ConsumableRecordA.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 #include <vector>
 
 extern "C" {
@@ -48,8 +48,8 @@ u32 FUN_003bc83c()
             }
             std::vector<u16>::iterator candidate = candidates.begin();
             while (candidate != candidates.end()) {
-                const ConsumableRecordA *mapping = dataTable8FindRecord(*candidate);
-                const Table04RecordA *skill = dataTable04FindById(mapping->skillId);
+                const ConsumableRecordA *mapping = itemTableGetItemRecord(*candidate);
+                const SkillDataRecordA *skill = skillDataFindById(mapping->skillId);
                 if (skill != NULL && supported[(skill->properties & 0xF800) >> 11] > 0)
                     ++candidate;
                 else

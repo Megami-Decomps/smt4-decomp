@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail moves the roll to r1 before the mask test and loads the battle flag pair with ldrd (the build uses two ldr and keeps the roll in r0) */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "gamedata/Table04Record.h"
+#include "gamedata/SkillDataRecord.h"
 
 struct ChanceSkillUnit {
     u64 flags; /* 0x00 */

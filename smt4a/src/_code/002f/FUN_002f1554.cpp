@@ -46,7 +46,7 @@ void FUN_002f1554(s32 questId)
     currentState->unk10 = 0;
     questState->unk0C = 29;
 
-    QuestRecordA* questEntry = dataTable1bOr1cGetRecord(questId);
+    QuestRecordA* questEntry = questDataGetRecord(questId);
     if (questEntry->flags & 0x20) {
         questState->unk910 = 2;
     } else {

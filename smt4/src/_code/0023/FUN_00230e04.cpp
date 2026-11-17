@@ -18,7 +18,7 @@ u8 FUN_002973ec(void);
 
 static s32 itemGetPrice(u32 id)
 {
-    ConsumableRecord *item = dataTable08Sub1GetRecord(id);
+    ConsumableRecord *item = itemTableGetItemRecord(id);
 
     if (item == NULL) {
         return 99999999;
@@ -28,7 +28,7 @@ static s32 itemGetPrice(u32 id)
 
 static s32 equipGetPrice(u32 id)
 {
-    EquipmentRecord *equip = dataTable08Sub2GetRecord(id);
+    EquipmentRecord *equip = itemTableGetEquipmentRecord(id);
 
     if (equip == NULL) {
         return 99999999;

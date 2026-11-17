@@ -22,7 +22,7 @@ void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
     switch (aocEntryGetKind(id)) {
     case 1:
     case 12:
-        frame = requestKindToId(dataTable8FindRecord(id)->iconKind);
+        frame = requestKindToId(itemTableGetItemRecord(id)->iconKind);
         break;
     case 0: {
         u8 kind = ((ContentIconEntry *)contentEntryFindById2(id))->kind;

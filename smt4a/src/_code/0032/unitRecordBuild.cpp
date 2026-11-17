@@ -1,5 +1,5 @@
 #include "shard/Shard0032.h"
-#include "gamedata/DevilRecordA.h"
+#include "gamedata/NkmBaseRecordA.h"
 
 extern "C" {
 
@@ -12,7 +12,7 @@ extern u16 recordGetScaledMaximum(UnitRecord *unit);
 /* Builds unit record `out` from table entry `id`. */
 void unitRecordBuild(s32 id, UnitRecord *out)
 {
-    DevilRecordA *entry = devilGetRecord(id);
+    NkmBaseRecordA *entry = nkmBaseGetRecord(id);
     s32 i;
 
     sysMemClear(out, 300);

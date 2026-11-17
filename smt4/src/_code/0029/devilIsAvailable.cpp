@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/NkmBaseRecord.h"
 #include "gamedata/GameDataAccess_VariantC.h"
 
 /* A copied game record; only the state halfword is read. */
@@ -24,7 +24,7 @@ static __inline bool gameRecordRegistered(u16 id)
 /* Whether the devil id is available: not excluded, its flag set and its linked game record registered. */
 u32 devilIsAvailable(u32 unused, u16 id)
 {
-    DevilRecord *devil = devilGetRecord(id);
+    NkmBaseRecord *devil = nkmBaseGetRecord(id);
     if (devil != NULL && (devil->fusionRestrictions & 0x200000) == 0 &&
         (devil->requiredFlag == 0 || gameFlagIsSet(devil->requiredFlag))) {
         if (devil->prerequisite & 1) {

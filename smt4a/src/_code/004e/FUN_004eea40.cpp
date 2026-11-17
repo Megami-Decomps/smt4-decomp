@@ -559,7 +559,7 @@ LAB_004ef7f0:
       if (iStack_68 != 1) {
         if ((iStack_68 == 8) && (iStack_54 == 0)) {
           uVar20 = uStack_64;
-          dataTable8FindRecord();
+          itemTableGetItemRecord();
           sVar3 = *(short *)(uVar20 + 0x32);
           if (sVar3 != 0) {
             iVar29 = FUN_002c7bf4(sVar3);
@@ -808,7 +808,7 @@ LAB_004f054c:
         if (sVar3 == 8) {
           sVar3 = *(short *)(uVar20 + 0x1c0);
           iVar29 = (int)sVar3;
-          dataTable8FindRecord();
+          itemTableGetItemRecord();
           if ((*(unsigned char *)(iVar29 + 0x42) & 1) == 0) {
             FUN_00480fc0((int)sVar3,1);
           }

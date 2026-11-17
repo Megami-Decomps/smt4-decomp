@@ -31,8 +31,8 @@ u32 FUN_003c9b94(LeveledLists *owner, u16 firstId, u16 secondId,
         break;
     case 4:
     {
-        DevilRecord *first = devilGetRecord(firstId);
-        DevilRecord *second = devilGetRecord(secondId);
+        NkmBaseRecord *first = nkmBaseGetRecord(firstId);
+        NkmBaseRecord *second = nkmBaseGetRecord(secondId);
         const DevilCombinationTableEntryPrefixIV *entry =
             dataTable05FindByPriorityAndKey(first->race, second->race);
         if (firstId == secondId || entry == NULL)
