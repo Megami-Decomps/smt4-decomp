@@ -5,6 +5,7 @@
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
 #include <string.h>
+#include "addon/AocSystem.h"
 
 struct AocSystem;
 
@@ -103,7 +104,6 @@ struct SpriteDescriptor {
 };
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 Table03Record *aocFindTable03RecordByKey(AocSystem *system, u32 index);
 /* Initialize sprite descriptor `sprite` from record `index` of table 03; the bank and page
    given here replace the record's own when it does not set both. */

@@ -1,10 +1,7 @@
 #include "common.h"
+#include "game/GameState.h"
 
 namespace {
-struct GameStateMapView {
-    /* 0x00 */ u8 unk00[0x26];
-    /* 0x26 */ u8 returning;
-};
 
 struct MapPosition {
     u32 area;
@@ -19,7 +16,6 @@ struct MapMainView {
 
 extern "C" {
 
-extern GameStateMapView g_gameState;
 extern MapMainView *g_mapMain;
 s32 mapGetDepartureIndex(void);
 void FUN_00281784(void);

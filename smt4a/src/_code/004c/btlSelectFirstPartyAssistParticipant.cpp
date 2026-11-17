@@ -27,7 +27,7 @@ struct BattleAssistMasks {
     u64 guarantee;
 };
 extern "C" {
-s32 bitsAt60Test(SlotRecord *record, u32 bit);
+s32 bitsAt60Test(SlotRecordA *record, u32 bit);
 s32 lcgRandomRange(u32 maximum);
 
 extern BattleAssistMasks DAT_005713f0;
@@ -44,7 +44,7 @@ u32 btlSelectFirstPartyAssistParticipant()
         if (slot < 0) {
             continue;
         }
-        SlotRecord *record = gameGetSlotRecord(slot);
+        SlotRecordA *record = gameGetSlotRecord(slot);
         if (!bitsAt60Test(record, 10)) {
             continue;
         }

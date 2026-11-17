@@ -1,5 +1,6 @@
 /* NON_MATCHING: identical except for the push helper's address computation (retail keeps index+1 in r2 and reuses r3), the load order of two float constants and the operand order of the final vmul. */
 #include "camp/RenderCtx.h"
+#include "game/GameStateA.h"
 #include "shard/TextureDrawCall.h"
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
@@ -7,7 +8,6 @@
 extern "C" {
 extern MapIfGlobalsA g_mapIf;
 extern RenderCtxA *g_renderCtx;
-extern GameStateA g_gameState;
 
 u32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
@@ -19,7 +19,7 @@ void FUN_001849bc(u32 kind, u32 layer, u32 sprite, u32 argument, s32 y, u32 orde
 void FUN_002342d0(u32 argument)
 {
     MapIfStateA *state = g_mapIf.state;
-    if (state->fadeMode == 0 || g_gameState.mode >= 100) {
+    if (state->fadeMode == 0 || g_gameState.mapId >= 100) {
         return;
     }
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));

@@ -1,28 +1,5 @@
 #include "common.h"
-
-struct ResetState {
-    u8 reserved000[0x1b0];
-    u8 active;                    // 0x1b0
-    u8 reserved1b1[3];
-    f32 value1b4;                 // 0x1b4
-    f32 value1b8;                 // 0x1b8
-    f32 value1bc;                 // 0x1bc
-    f32 value1c0;                 // 0x1c0
-    u8 reserved1c4[4];
-    u16 flags;                    // 0x1c8
-    u8 reserved1ca[2];
-    u8 flag1cc;                   // 0x1cc
-    u8 flag1cd;                   // 0x1cd
-    u8 flag1ce;                   // 0x1ce
-    u8 reserved1cf[5];
-    u8 flag1d4;                   // 0x1d4
-    u8 reserved1d5[3];
-    u32 value1d8;                 // 0x1d8
-    f32 value1dc;                 // 0x1dc
-    f32 value1e0;                 // 0x1e0
-    f32 value1e4;                 // 0x1e4
-    f32 value1e8;                 // 0x1e8
-};
+#include "game/GameStateA.h"
 
 struct ResetEntry {
     u8 active;                    // 0x000 (owner + 0x034)
@@ -44,7 +21,6 @@ struct EntryCollection {
 };
 
 extern "C" {
-extern ResetState g_gameState;
 extern EntryCollection* g_mapEnemy;
 
 /* Clears the shared game state counters and resets every eligible map enemy entry. */
@@ -53,21 +29,21 @@ void FUN_00272f88(void)
     s32 index;
     EntryCollection* collection = g_mapEnemy;
     const f32 resetValue = 0.0f;
-    g_gameState.active = 0;
-    g_gameState.value1b4 = resetValue;
-    g_gameState.value1b8 = resetValue;
-    g_gameState.value1bc = resetValue;
-    g_gameState.value1c0 = resetValue;
-    g_gameState.flags = 0;
-    g_gameState.flag1cc = 0;
-    g_gameState.flag1cd = 0;
-    g_gameState.flag1ce = 0;
-    g_gameState.flag1d4 = 0;
-    g_gameState.value1d8 = 0;
-    g_gameState.value1dc = resetValue;
-    g_gameState.value1e0 = resetValue;
-    g_gameState.value1e4 = resetValue;
-    g_gameState.value1e8 = resetValue;
+    g_gameState.unk1B0 = 0;
+    g_gameState.unk1B4 = resetValue;
+    g_gameState.unk1B8 = resetValue;
+    g_gameState.unk1BC = resetValue;
+    g_gameState.unk1C0 = resetValue;
+    g_gameState.unk1C8 = 0;
+    g_gameState.unk1CC = 0;
+    g_gameState.unk1CD = 0;
+    g_gameState.unk1CE = 0;
+    g_gameState.unk1D4 = 0;
+    g_gameState.unk1D8 = 0;
+    g_gameState.unk1DC = resetValue;
+    g_gameState.unk1E0 = resetValue;
+    g_gameState.unk1E4 = resetValue;
+    g_gameState.unk1E8 = resetValue;
 
     for (index = 0; index < 40; ++index) {
         ResetEntry& entry = collection->entries[index];

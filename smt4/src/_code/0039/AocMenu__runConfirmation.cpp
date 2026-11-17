@@ -2,6 +2,7 @@
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
+#include "addon/AocSystem.h"
 
 /* An object the menu owns and releases through its deleting destructor. */
 class AocConfirmHandler {
@@ -43,7 +44,6 @@ struct AocConfirmDisplay {
 
 extern "C" {
 extern AocConfirmMain *g_aocMain;
-extern AocSystem *g_aocSystem;
 extern AocConfirmDisplay *g_aocDisplay;
 
 void buttonHelpSetEnabled(u32 value);

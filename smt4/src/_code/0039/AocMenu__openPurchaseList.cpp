@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "addon/AocSystem.h"
 
 namespace {
 struct AocPurchaseMenu {
@@ -40,7 +41,6 @@ typedef char AocPurchaseMenuOffsetsCheck[
 
 extern "C" {
 extern AocMain *g_aocMain;
-extern AocSystem *g_aocSystem;
 extern const char DAT_003ff148[];
 s32 FUN_00361960(void);
 void FUN_0036196c(void);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00208e4c` (_code @ 0x208e4c, 0x4198 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ typedef struct {
 
 extern int g_mapEnemy; /* 0x447600 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f942; /* 0x49f942 */
 extern int DAT_0049f954; /* 0x49f954 */
 extern int DAT_0049fadc; /* 0x49fadc */
@@ -234,7 +234,7 @@ void FUN_00208e4c(void)
             break;
           }
           temp_v16 = 0;
-          if ((g_gameState == 10) && (temp_v6 = gameFlagIsSet(0x17), temp_v6 == 0)) {
+          if ((g_gameState.mapId == 10) && (temp_v6 = gameFlagIsSet(0x17), temp_v6 == 0)) {
             temp_v16 = 1;
           }
           if ((*(char *)(temp_v3 + 0xb1) == '\0') &&

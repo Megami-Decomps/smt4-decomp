@@ -1,5 +1,6 @@
 /* NON_MATCHING: cold blocks now match; retail copies the g_gameState literal with `add r6, r0, #0` (r0 stays the address for the first test) and keeps the request in r4 / settings in r5, ours loads the literal straight into r4. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -23,15 +24,14 @@ void commonBgStopChildAndBeginTransition(void);
 void FUN_00183e58(void);
 void sysPlaySe(s32 sound);
 void uiPlayGatedActionFeedback(void);
-extern GameStateA g_gameState;
 extern NavigationFeedbackFlags DAT_005f19fc;
 
 /* Refreshes map background state and chooses navigation feedback after tearing down button help. */
 void FUN_0048a378(NavigationFeedbackRequest *request)
 {
     NavigationFeedbackMode *settings = reinterpret_cast<NavigationFeedbackMode *>(gameFlagsGetBlock());
-    if ((&g_gameState)->mapFlags.unk295 != 0) {
-        (&g_gameState)->mapFlags.unk295 = 0;
+    if ((&g_gameState)->menuOpen != 0) {
+        (&g_gameState)->menuOpen = 0;
         if (gameFlagIsSet(0x49A) == 0) {
             commonBgStopChildAndBeginTransition();
         } else {
@@ -42,7 +42,7 @@ void FUN_0048a378(NavigationFeedbackRequest *request)
         }
     }
     if (DAT_005f19fc.blocked == 0) {
-        if ((&g_gameState)->controllerFlags.primary == 0) {
+        if ((&g_gameState)->paused == 0) {
             uiPlayGatedActionFeedback();
             return;
         }

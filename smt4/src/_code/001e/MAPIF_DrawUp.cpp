@@ -1,12 +1,8 @@
 #include "common.h"
+#include "game/GameState.h"
 
 extern "C" {
 
-typedef struct GameStateView {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ u8 unk04[0x1E];
-    /* 0x22 */ s8 hidden;
-} GameStateView;
 
 typedef struct MapIf {
     /* 0x0000 */ u8 unk0000[0xCCD8];
@@ -16,7 +12,6 @@ typedef struct MapIf {
 } MapIf;
 
 extern MapIf *g_mapIf;
-extern GameStateView g_gameState;
 
 s32 FUN_001fb5c4(void);
 s32 FUN_001f9ce0(void);
@@ -27,11 +22,11 @@ u32 MAPIF_DrawUp(void)
 {
     MapIf *mapIf = g_mapIf;
 
-    if (g_gameState.hidden == 0) {
+    if (g_gameState.loading == 0) {
         s32 *counter;
 
         FUN_001fb5c4();
-        if (g_gameState.state < 100) {
+        if (g_gameState.mapId < 100) {
             FUN_001f9ce0();
         }
         if (mapIf->counting != 0) {

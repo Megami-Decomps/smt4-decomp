@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b81ec` (_code @ 0x2b81ec, 0xffc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -49,7 +50,6 @@ typedef struct {
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern char s______________________00581290[67]; /* 0x581290 */
-extern int g_gameState; /* 0x5f15fc */
 extern unsigned int *DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern unsigned int DAT_005f1618; /* 0x5f1618 */
@@ -111,7 +111,6 @@ extern int linkHolderCheckFirst(unsigned int);
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: __hardfp_atan2f. */
-
 
 void FUN_002b81ec(void)
 
@@ -205,7 +204,7 @@ void FUN_002b81ec(void)
           temp_v6 = inputIsQuestCancelPressed();
           temp_v5 = 0;
           if (temp_v6 != 0) {
-            temp_v5 = g_gameState;
+            temp_v5 = g_gameState.mapId;
           }
           if ((((temp_v6 != 0 && temp_v5 != 0x24) && (*(int *)(g_lmapView + 0xb0) == 0)) &&
               (temp_v5 = gameFlagIsSet(0x49a), temp_v5 != 0)) && (DAT_005f19ee == '\0' && !temp_v10)) {
@@ -457,7 +456,7 @@ void FUN_002b81ec(void)
         }
       }
       temp_v8 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
-      if (((g_gameState != 0x24) && (temp_v5 = partyAnyMemberHasFlagBit(2,5), temp_v5 != 0)) && (!temp_v1)) {
+      if (((g_gameState.mapId != 0x24) && (temp_v5 = partyAnyMemberHasFlagBit(2,5), temp_v5 != 0)) && (!temp_v1)) {
         temp_v14 = (float)temp_v15;
         distSpatial();
         temp_v14 = *(float *)(g_lmapScene + 0x160) - temp_v14;
@@ -576,10 +575,10 @@ void FUN_002b81ec(void)
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v14) << 0x1d);
           if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) && (temp_v5 = gameDataFlagTestBit(0x85), temp_v5 == 0)) {
             puVar10 = (unsigned int *)&g_gameState;
-            if (g_gameState == 5) {
+            if (g_gameState.mapId == 5) {
               puVar10 = DAT_005f1600;
             }
-            if (!(g_gameState == 5 && puVar10 == (unsigned int *)0x9)) {
+            if (!(g_gameState.mapId == 5 && puVar10 == (unsigned int *)0x9)) {
               *(unsigned int *)(g_lmapScene + 0x15c) = 0x43fa0000;
             }
             else {

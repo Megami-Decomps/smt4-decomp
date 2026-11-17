@@ -3,7 +3,7 @@
 
 #include "common.h"
 #include "name/NameFormText.h"
-#include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 
 // Known prefix of the name-entry form; its initializer installs twelve member callbacks.
 struct NameFormState {
@@ -56,15 +56,6 @@ void *appCostRecordFindById(u16 id);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-Table00Record *dataTable00FindById(u16 id);
-
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {

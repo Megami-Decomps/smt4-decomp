@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 int sysPlaySe(int soundId);
@@ -12,13 +13,13 @@ int gameFlagIsSet(u32 flag);
 void mapOverlaySetOpen(s32 open)
 {
     if (open) {
-        g_gameState.mapFlags.unk295 = 1;
+        g_gameState.menuOpen = 1;
         sub68OwnerCall8();
         commonBgStopChildAndBeginTransition();
         sysPlaySe(0x92);
         return;
     }
-    g_gameState.mapFlags.unk295 = 0;
+    g_gameState.menuOpen = 0;
     if (!gameFlagIsSet(0x49A)) {
         commonBgStopChildAndBeginTransition();
     } else {

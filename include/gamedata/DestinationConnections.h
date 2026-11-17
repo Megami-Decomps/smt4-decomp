@@ -13,20 +13,12 @@ struct DestinationConnectionGroups {
     DestinationConnection single;
     DestinationConnection multiple[59];
 };
-struct DestinationCoordinates {
-    /* 0x00 */ u8 unk00[0x40];
-    /* 0x40 */ u16 area;
-    /* 0x42 */ u16 point;
-};
 typedef char DestinationConnectionLayout[sizeof(DestinationConnection) == 12 &&
-    offsetof(DestinationConnection, sources) == 4 &&
-    offsetof(DestinationCoordinates, area) == 0x40 ? 1 : -1];
+    offsetof(DestinationConnection, sources) == 4 ? 1 : -1];
 typedef char DestinationConnectionGroupsLayout[
     offsetof(DestinationConnection, destination) == 0 &&
     offsetof(DestinationConnection, count) == 8 &&
     offsetof(DestinationConnectionGroups, single) == 0 &&
     offsetof(DestinationConnectionGroups, multiple) == 12 &&
-    sizeof(DestinationConnectionGroups) == 0x2D0 &&
-    offsetof(DestinationCoordinates, point) == 0x42 &&
-    sizeof(DestinationCoordinates) == 0x44 ? 1 : -1];
+    sizeof(DestinationConnectionGroups) == 0x2D0 ? 1 : -1];
 #endif

@@ -1,22 +1,22 @@
 /* Resolves an indexed record across loaded type-38 package tables. */
 #include "addon/PackageSelection.h"
+#include "addon/AocSystemA.h"
+
+extern "C" void *dataTableFileGetTable(void *file, u32 section);
 
 extern "C" {
-s32 packageEntryIsLoaded(PackageEntry *package);
-char (*packageEntryGetDirectory(PackageEntry *package))[0x40];
-u32 packageEntryGetFileCount(PackageEntry *package);
 
-ExtendedPackageIndexedRecord *packageFindIndexedExtendedRecord(PackageList *packages, s32 index)
+ExtendedPackageIndexedRecord *packageFindIndexedExtendedRecord(AocSystemA *system, s32 index)
 {
     s32 base = 0;
-    for (s32 i = 0; i < packages->count; ++i) {
-        PackageEntry *package = &packages->entries[i];
+    for (s32 i = 0; i < system->packageCount; ++i) {
+        AocPackage *package = &system->packages[i];
         if (packageEntryIsLoaded(package)) {
-            char (*records)[0x40] = packageEntryGetDirectory(package);
+            AocPackageDirectoryEntry *records = packageEntryGetDirectory(package);
             u32 count = packageEntryGetFileCount(package);
             for (u32 j = 0; j < count; ++j) {
-                if (records[j][0] == 38) {
-                    void *table = dataTableFileGetTable(package->files[j].fileId, 0);
+                if (records[j].kind == 38) {
+                    void *table = dataTableFileGetTable(package->files[j].data, 0);
                     s32 next = dataTableGetCount(table) + base;
                     if (next >= index) {
                         return (ExtendedPackageIndexedRecord *)dataTableGetEntries(table) + (index - base);

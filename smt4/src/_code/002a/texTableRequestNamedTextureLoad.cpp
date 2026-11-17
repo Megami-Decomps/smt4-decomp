@@ -3,6 +3,7 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 AocPackageFile *packageFindFileByTypeAndId(AocSystem *system, s32 type, s32 id, char *path);
@@ -28,8 +29,8 @@ TexTableNamedEntry *texTableRequestNamedTextureLoad(AocSystem *system, u32 table
     AocPackageFile *file = packageFindFileByTypeAndId(system, type, id, packagePath);
     if (file == NULL)
         return NULL;
-    file->texture.completion = 0;
-    file->texture.result = 0;
+    file->completion = 0;
+    file->result = 0;
     TexTableNamedEntry *entry = asdTMTexTableCallFileB(table, id);
     if (entry == NULL)
         return NULL;

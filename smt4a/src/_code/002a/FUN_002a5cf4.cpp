@@ -1,8 +1,7 @@
-#include "ui/PartyPanelState.h"
+#include "ui/PartyPanelStateA.h"
 #include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
-extern PartyPanelStateA *g_partyPanel;
 
 extern void partyPanelChangeState(s32 a, s32 b);
 extern void FUN_0022e774(void);
@@ -14,11 +13,11 @@ void FUN_002a5cf4(void)
     PartyPanelStateA *panel = g_partyPanel;
 
     if (panel != NULL) {
-        if (panel->animation.mode != 12 && panel->animation.mode != 4 && panel->animation.mode != 15 && panel->animation.mode != 17 && panel->animation.mode != 19) {
+        if (panel->panelState != 12 && panel->panelState != 4 && panel->panelState != 15 && panel->panelState != 17 && panel->panelState != 19) {
             FUN_00230ac0(7, -1, 0, 0);
         }
         FUN_003344b4(0, 0);
-        if (panel->animation.mode != 1 && panel->animation.mode != 6 && panel->animation.mode != 7 && panel->animation.mode != 18) {
+        if (panel->panelState != 1 && panel->panelState != 6 && panel->panelState != 7 && panel->panelState != 18) {
             FUN_0022e774();
         }
         FUN_0038b548(1);

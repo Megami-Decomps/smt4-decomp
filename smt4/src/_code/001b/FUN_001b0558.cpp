@@ -8,7 +8,6 @@ struct PartyHelpRecord {
 };
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 s32 FUN_00282e70(void);
 s32 FUN_00282ccc(void);
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index);

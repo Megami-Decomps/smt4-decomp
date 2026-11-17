@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3018` (_code @ 0x1d3018, 0x490 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ extern int *DAT_004474f4; /* 0x4474f4 */
 extern int g_mapEnemy; /* 0x447600 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern signed char DAT_0049f93c; /* 0x49f93c */
@@ -179,8 +179,8 @@ void FUN_001d3018(void)
   temp_v11 = DAT_004474f4[0x13];
   mathPositionHeadingDegrees();
   temp_v22 = (unsigned long long)temp_v11;
-  if (g_gameState != 0x19) {
-    if ((((g_gameState == 0x1a) || (g_gameState == 0x1b)) || (g_gameState == 0x1c)) &&
+  if (g_gameState.mapId != 0x19) {
+    if ((((g_gameState.mapId == 0x1a) || (g_gameState.mapId == 0x1b)) || (g_gameState.mapId == 0x1c)) &&
        (DAT_0049f920 == 1)) {
       temp_v10 = 60.0f;
     }

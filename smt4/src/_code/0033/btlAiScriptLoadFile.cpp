@@ -6,9 +6,9 @@
 #include "gamedata/DevilRecord.h"
 #include "gamedata/SupportUnitRecord.h"
 #include "code/Code002b.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 extern const char DAT_00400444[]; /* battle/AI/%s.bf */
 extern const char DAT_00400454[]; /* battle/AI/tmp.bf */
 void scrScriptProcessDestroy(void *);
@@ -19,7 +19,6 @@ void memClear(void *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
 s32 FUN_002402c4(BtlMainState *, char *);
 char *libc_strcpy(char *, const char *);
-s32 aocContentLookupSucceeds(AocSystem *, u16);
 
 /* Resolve support-unit or demon AI, falling back to the temporary script. */
 void btlAiScriptLoadFile(BtlAiScript *script, BtlAiScriptActor *actor)

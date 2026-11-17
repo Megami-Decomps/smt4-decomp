@@ -1,18 +1,8 @@
 #include "gamedata/DevilRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-struct DemonTextureDrawRecord {
-    u8 prefix[3];
-    u8 flags;
-    u8 unk04[0x84];
-    s16 alternateId;
-    u8 unk8A[0x1A];
-    u8 variant;
-};
-typedef char DemonTextureDrawRecordOffsets[offsetof(DemonTextureDrawRecord, alternateId) == 0x88 &&
-    offsetof(DemonTextureDrawRecord, variant) == 0xA4 ? 1 : -1];
+#include "gamedata/Table00Lookup.h"
 extern "C" {
 extern u32 g_aocSystem;
-DemonTextureDrawRecord *dataTable00FindById(u32 id);
 void texTableRecordCallWithParams(s32 layer, s32 category, s32 resource, u32 first, u32 second, u32 third);
 void texDrawCompositeSprite(s32 layer, s32 category, s32 variant, u32 first, u32 second, u32 third);
 void FUN_00389ddc(u32 system, s32 id, s32 layer, s32 resource, s32 mode, u32 first, u32 second, u32 third);
@@ -28,9 +18,9 @@ static inline s32 isDemonTextureLoaded(s32 id, s32 resolve)
             const DevilRecord *devil = (const DevilRecord *)devilGetRecord((u16)id);
             if (!devil)
                 return 0;
-            const DemonTextureDrawRecord *record = dataTable00FindById((u16)id);
-            if (record->flags & 1) {
-                resource = record->alternateId;
+            const Table00Record *record = dataTable00FindById((u16)id);
+            if (record->levelFlags & 1) {
+                resource = record->portraitId;
                 category = 35;
                 if (resource >= 129)
                     return 0;
@@ -54,11 +44,11 @@ void FUN_001ee4e4(s32 id, u32 first, u32 second, u32 third, s32 resolve)
             resource = 0;
         } else {
             const DevilRecord *devil = (const DevilRecord *)devilGetRecord((u16)id);
-            const DemonTextureDrawRecord *record = dataTable00FindById((u16)id);
+            const Table00Record *record = dataTable00FindById((u16)id);
             if (!devil)
                 return;
-            if (record->flags & 1) {
-                resource = record->alternateId;
+            if (record->levelFlags & 1) {
+                resource = record->portraitId;
                 category = 35;
                 if (resource >= 129)
                     return;

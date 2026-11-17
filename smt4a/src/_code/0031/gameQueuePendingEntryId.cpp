@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 u32 scrGetArg(u32);
@@ -10,10 +11,10 @@ u32 gameQueuePendingEntryId(void)
     u32 id = scrGetArg(0);
     if (FUN_002a4b28((u16)id) == 0) {
         for (s32 index = 0; index < 32; ++index) {
-            if (g_gameState.pendingEntries.ids[index] == id)
+            if (g_gameState.pendingEntryIds[index] == id)
                 return 1;
-            if (g_gameState.pendingEntries.ids[index] == 0) {
-                g_gameState.pendingEntries.ids[index] = id;
+            if (g_gameState.pendingEntryIds[index] == 0) {
+                g_gameState.pendingEntryIds[index] = id;
                 return 1;
             }
         }

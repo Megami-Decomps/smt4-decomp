@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `NaviMain_UpdateDiscovery` (_code @ 0x39f01c, 0x5f8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ extern unsigned char DAT_00404bb8; /* 0x404bb8 */
 extern unsigned char DAT_00404c00; /* 0x404c00 */
 extern int DAT_0044cdd8; /* 0x44cdd8 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern signed char DAT_0049f941; /* 0x49f941 */
@@ -307,7 +307,7 @@ LAB_0039f450:
        (pairCopy(param_1 + 0x164,temp_v22), (unsigned int)temp_v22[0] < 0xc39f8001)) {
       renderCtxSelectStereoLayout(g_titleScene);
       gxResetColorQuadToWhite();
-      if ((g_gameState != 0x13) ||
+      if ((g_gameState.mapId != 0x13) ||
          ((DAT_0049f920 != 6 && (!(DAT_0049f920 == 7 || DAT_0049f920 == 8))))) {
         if (*(char *)(param_1 + 0xc) != '\0') {
           FUN_003996c8();
@@ -327,8 +327,8 @@ LAB_0039f450:
         FUN_0039bd04(param_1);
       }
       if ((((*(char *)(param_1 + 0xa85) != '\0') && (*(char *)(param_1 + 0xa84) == '\0')) ||
-          ((g_gameState == 0x13 && ((DAT_0049f920 == 6 || DAT_0049f920 == 7) || DAT_0049f920 == 8))
-          )) || (temp_v4 = FUN_00288f78(g_gameState), temp_v4 == 3)) {
+          ((g_gameState.mapId == 0x13 && ((DAT_0049f920 == 6 || DAT_0049f920 == 7) || DAT_0049f920 == 8))
+          )) || (temp_v4 = FUN_00288f78(g_gameState.mapId), temp_v4 == 3)) {
         FUN_0039ba2c(param_1);
         return;
       }

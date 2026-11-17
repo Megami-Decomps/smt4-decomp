@@ -2,6 +2,7 @@
 /* NON_MATCHING: retail's prologue pushes r0-r3 with the saved registers and reads the entry argument from its pushed slot ([sp+96]) instead of keeping it in a register (frame 76 vs 92); the panel/alternate/textId registers also differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "gamedata/Table00Lookup.h"
 
 namespace {
 struct ProfileEntryDrawView {
@@ -12,13 +13,6 @@ struct ProfileEntryDrawView {
     s32 fade;
 };
 
-/* The fields of a demon table record this panel shows. */
-struct DemonCaptionRecord {
-    u8 unk00[2];
-    u16 flags;
-    u32 caption;
-    u32 detail;
-};
 }
 
 static __inline const void *panelTouchSelection(ProfileEntryDrawView *panel)
@@ -33,7 +27,6 @@ static __inline TextLayoutContextA *panelLayout(ProfileEntryDrawView *panel)
 
 extern "C" {
 const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
-DemonCaptionRecord *dataTable00FindById(u16 id);
 s8 touchSelectionGetSelected(const void *selection);
 void FUN_004a7dc8(ProfileEntryDrawView *panel, s32 entry, s32 fade, s32 style);
 void demonIconPanelDrawRow(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
@@ -66,17 +59,17 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     FUN_004a7fb8(panel, textId, entry, alternate, touchSelectionGetSelected(panelTouchSelection(panel)), fade, scale);
 
     u16 id = static_cast<u16>(textId);
-    DemonCaptionRecord *record = dataTable00FindById(id);
+    Table00RecordA *record = dataTable00FindById(id);
     u32 flags = 0;
     if (record != NULL) {
-        flags = record->flags & 0x7FFF;
+        flags = record->level & 0x7FFF;
     }
     FUN_004a7814(panel, flags, entry, alternate, fade, 0xFFFFFFFF);
 
     record = dataTable00FindById(id);
     u32 caption = 0;
     if (record != NULL) {
-        caption = record->caption;
+        caption = record->maxHp;
     }
     char text[60];
     const PanelTextLayoutEntryPrefixA *captionEntry;
@@ -96,7 +89,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     record = dataTable00FindById(id);
     u32 detail = 0;
     if (record != NULL) {
-        detail = record->detail;
+        detail = record->maxMp;
     }
     const PanelTextLayoutEntryPrefixA *detailEntry;
     if (alternate == 0) {

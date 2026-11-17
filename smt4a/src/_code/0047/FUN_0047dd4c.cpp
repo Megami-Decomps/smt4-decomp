@@ -1,5 +1,6 @@
 /* NON_MATCHING: transition-flag lifetime and secondary game-state literal relocation differ. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
@@ -15,7 +16,6 @@ typedef char MapSavedReturnPacketOffsets[
     sizeof(MapSavedReturnPacket) == 0x18 ? 1 : -1];
 
 extern "C" {
-extern GameStateA g_gameState;
 const MapSavedReturnPacket *gameBlockGetArea27E98();
 s32 gameStateIsFlagSetAndLarge();
 s32 lmapMainGetUnk74();

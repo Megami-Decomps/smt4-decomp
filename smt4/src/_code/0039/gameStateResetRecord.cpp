@@ -1,8 +1,8 @@
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 extern "C" {
 
-extern GameState g_gameState;
 
 
 void gameStateResetRecord(GameStateRecord *record)
@@ -15,7 +15,7 @@ void gameStateResetRecord(GameStateRecord *record)
     record->unk2A = 0;
     record->unk2E = 0;
     record->unk32 = 0;
-    g_gameState.unk54 = 0;
+    g_gameState.entryValue = 0;
 }
 
 } /* extern "C" */

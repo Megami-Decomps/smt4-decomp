@@ -1,13 +1,13 @@
 #include "gamedata/DataTable.h"
+#include "addon/AocSystemA.h"
 
 struct Table20Record {
     u8 data[0x30];
 };
-struct AocSystem;
+struct AocSystemA;
 
 extern "C" {
-extern AocSystem* g_aocSystem;
-Table20Record* aocFindPackagePayload(AocSystem* system, u32 index);
+Table20Record* aocFindPackagePayload(AocSystemA* system, u32 index);
 
 // Looks up an addon record, falling back to bounds-checked table 0x20 section one.
 Table20Record* dataTable20FindAddonRecord(u32 index)

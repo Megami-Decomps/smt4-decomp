@@ -1,5 +1,6 @@
 /* NON_MATCHING: draft split of the romwright decompilation of the merged unit (the state machine and the camera update that follows it): the decompiler's temporaries are not yet named. */
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ int FUN_00352568(void);
 
 extern int *g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern float DAT_005f16b0; /* 0x5f16b0 */
 extern float DAT_005f16b4; /* 0x5f16b4 */
 extern float DAT_005f16b8; /* 0x5f16b8 */
@@ -559,7 +559,7 @@ void FUN_00395904(void)
           temp_v26 = 40.0f;
           temp_v34 = temp_v25 + 20.0f;
           temp_v33 = temp_v23 + temp_v24 * 40.0f;
-          if (g_gameState == 0x16) {
+          if (g_gameState.mapId == 0x16) {
             temp_v34 = temp_v34 + 20.0f;
           }
           temp_v24 = *(float *)(g_lmapScene + 0x50) * temp_v21;
@@ -577,7 +577,7 @@ void FUN_00395904(void)
           temp_v21 = (*(float *)(g_lmapScene + 0x50) - temp_v11) * temp_v21;
           libm_cosf();
           temp_v38 = temp_v22 + temp_v21 * temp_v26;
-          if (g_gameState == 0x16) {
+          if (g_gameState.mapId == 0x16) {
             temp_v37 = temp_v37 + 80.0f;
           }
           temp_v45 = 0x1c2;
@@ -607,7 +607,7 @@ void FUN_00395904(void)
       temp_v26 = 40.0f;
       temp_v34 = temp_v25 + 20.0f;
       temp_v33 = temp_v23 + temp_v24 * 40.0f;
-      if (g_gameState == 0x16) {
+      if (g_gameState.mapId == 0x16) {
         temp_v34 = temp_v34 + 20.0f;
       }
       temp_v24 = *(float *)(g_lmapScene + 0x50) * temp_v21;
@@ -625,7 +625,7 @@ void FUN_00395904(void)
       temp_v21 = (*(float *)(g_lmapScene + 0x50) - temp_v11) * temp_v21;
       libm_cosf();
       temp_v38 = temp_v22 + temp_v21 * temp_v26;
-      if (g_gameState == 0x16) {
+      if (g_gameState.mapId == 0x16) {
         temp_v37 = temp_v37 + 80.0f;
       }
       temp_v45 = 0x3c;

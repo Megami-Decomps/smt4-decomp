@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameState.h"
 
 struct PlayerTrack {
     /* 0x00 */ u8 unk00[100];
@@ -12,14 +13,6 @@ struct PlayerTrack {
 
 extern "C" {
 
-extern struct {
-    /* 0x00 */ u8 unk00[0xd0];
-    /* 0xD0 */ f32 value0;
-    /* 0xD4 */ f32 value1;
-    /* 0xD8 */ f32 value2;
-    /* 0xDC */ f32 value5;
-} g_gameState;
-
 extern PlayerTrack *DAT_004474f4;
 
 s32 scrGetArg(u32 index);
@@ -31,13 +24,13 @@ u32 FUN_00310f44(void)
 {
     switch (scrGetArg(0)) {
     case 0:
-        scrSetResult((s32)g_gameState.value0);
+        scrSetResult((s32)g_gameState.cameraTarget.x);
         break;
     case 1:
-        scrSetResult((s32)g_gameState.value1);
+        scrSetResult((s32)g_gameState.cameraTarget.y);
         break;
     case 2:
-        scrSetResult((s32)g_gameState.value2);
+        scrSetResult((s32)g_gameState.cameraTarget.z);
         break;
     case 3: {
         PlayerTrack *track = DAT_004474f4;
@@ -52,7 +45,7 @@ u32 FUN_00310f44(void)
         scrSetResult(500);
         break;
     case 5:
-        scrSetResult((s32)g_gameState.value5);
+        scrSetResult((s32)g_gameState.cameraFov);
         break;
     }
     return 1;

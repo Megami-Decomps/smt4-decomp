@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the two target words in r5/r7 and ORs them once after the early checks, then repeats the slot/player test inside every effect case (jump table layout differs); the build hoists the OR and merges the cases */
 #include "common.h"
 #include "code/Code0033.h"
+#include "gamedata/ConsumableRecordA.h"
 
 /* The seven stats the preview tracks, as the current and maximum value of each (0xe bytes each). */
 struct PartyStatPair {
@@ -20,17 +21,8 @@ struct PartyPanelPreview {
     /* 0x1100 */ u8 unk1100[0x1c];
 };
 
-/* An item record of data table 8. */
-struct ItemRecord {
-    /* 0x00 */ u8 unk00[0x30];
-    /* 0x30 */ u16 effect;
-    /* 0x32 */ u8 unk32[0x10];
-    /* 0x42 */ u8 flags;
-};
-
 extern "C" {
 extern PartyPanelPreview *g_partyPanel;
-ItemRecord *dataTable8FindRecord(s32 item);
 u32 gameGetPlayerData(void);
 u32 gameGetSlotRecord(s32 slot);
 void statusDisplayBindUnitRecord(u32 record, s32 a, s32 b);
@@ -60,8 +52,8 @@ void FUN_002cbca8(s32 slot, u32 targetLow, u32 targetHigh)
     if (slot < 0 && (targetLow != 0 || targetHigh != 0)) {
         return;
     }
-    ItemRecord *item = dataTable8FindRecord(panel->item);
-    if ((item->flags & 2) == 0) {
+    ConsumableRecordA *item = dataTable8FindRecord(panel->item);
+    if ((item->useFlags & 2) == 0) {
         FUN_0033449c(0);
         return;
     }
@@ -74,8 +66,8 @@ void FUN_002cbca8(s32 slot, u32 targetLow, u32 targetHigh)
         __aeabi_memcpy4(&panel->playerStats, (void *)gameGetPlayerData(), 100);
         effectSlot = -1;
     }
-    s16 gain = FUN_00480b10(item->effect, effectSlot);
-    switch (item->effect) {
+    s16 gain = FUN_00480b10(item->id, effectSlot);
+    switch (item->id) {
     case 0x1f:
     case 0x7a0:
         addGain(panel, hasTarget, 2, gain);

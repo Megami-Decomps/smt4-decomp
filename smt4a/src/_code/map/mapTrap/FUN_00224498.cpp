@@ -1,4 +1,5 @@
 #include "map/mapTrap.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "Model/ModelList.h"
 #include "classes/Obj4209cc.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 extern MapTrapA *g_mapTrap;
-extern GameStateA g_gameState;
 extern void *g_handleRegistry;
 void mapTrapClearState();
 void *asdMemoryAllocTraced(u32 size, const char *source, s32 line);
@@ -32,7 +32,7 @@ void FUN_00224498(s32 area, s32 map)
     };
     typedef char DisplayModelsOffsetsCheck[offsetof(DisplayModels, models) == 0x1C ? 1 : -1];
     mapTrapClearState();
-    g_mapTrap->setup.count = g_gameState.trapSetup.count;
+    g_mapTrap->setup.count = g_gameState.trapCount;
     if (g_mapTrap->setup.count > 0) {
         DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
         display->phase = 0;

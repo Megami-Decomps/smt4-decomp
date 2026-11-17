@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the bsearch comparator literal load/store uses r1 instead of retail r0, changing its literal displacement by four bytes. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "gamedata/DataTable.h"
 
 struct MapNameRecord {

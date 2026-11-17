@@ -5,7 +5,7 @@ extern "C" {
 
 u8 FUN_002973ec(void)
 {
-    return g_gameDataBlocks.saveBlock->unk24BB0;
+    return g_gameDataBlocks.saveBlock->body.unk24B28;
 }
 
 } /* extern "C" */

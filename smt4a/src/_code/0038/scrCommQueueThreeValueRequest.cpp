@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
@@ -9,10 +10,10 @@ u32 scrCommQueueThreeValueRequest(void)
     s32 first = scrGetArg(0);
     s32 second = scrGetArg(1);
     s32 third = scrGetArg(2);
-    g_gameState.scriptRequest.pending = 1;
-    g_gameState.scriptRequest.first = first;
-    g_gameState.scriptRequest.second = second;
-    g_gameState.scriptRequest.third = third;
+    g_gameState.scriptRequestPending = 1;
+    g_gameState.scriptRequestValues[0] = first;
+    g_gameState.scriptRequestValues[1] = second;
+    g_gameState.scriptRequestValues[2] = third;
     return 1;
 }
 }

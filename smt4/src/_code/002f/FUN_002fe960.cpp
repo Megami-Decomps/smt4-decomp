@@ -1,13 +1,9 @@
 #include "common.h"
+#include "game/GameState.h"
 
-struct ScreenGameState {
-    u8 unk000[0x251];  // 0x000
-    u8 bgActive;       // 0x251
-};
 
 extern "C" {
 
-extern ScreenGameState g_gameState;
 
 s32 scrGetArg(u32 index);
 void commonBgReset(void);
@@ -22,15 +18,15 @@ s32 FUN_002fe960(void)
     u8 active;
     s32 value = scrGetArg(0);
 
-    active = g_gameState.bgActive;
+    active = g_gameState.map.bgResetPending;
     if (value == 0) {
         if (active != 0) {
-            g_gameState.bgActive = 0;
+            g_gameState.map.bgResetPending = 0;
             commonBgReset();
             FUN_002757a8();
         }
     } else if (active == 0) {
-        g_gameState.bgActive = 1;
+        g_gameState.map.bgResetPending = 1;
         FUN_00275bc8();
         commonBgStopChildAndBeginTransition();
         buttonHelpSetPreset(0x90);

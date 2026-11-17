@@ -1,5 +1,6 @@
 /* NON_MATCHING: creates and initialises the lmap main state (0x9370 bytes) and starts its calc and draw tasks; written from the decompilation, store order and constant materialisation not compared with retail */
 #include "AsdSDK/AsdDebug.h"
+#include "game/GameStateA.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -134,20 +135,10 @@ struct LmapGameBlock {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x21];
-    u8 f005f161d; /* 0x021 */
-    u8 pad022[0x23d];
-    u8 f005f185b; /* 0x25f */
-};
-extern GameStateView g_gameState;
 
 extern u32 g_handleRegistry;
 extern LmapMainState *g_lmapMainState;
 extern LmapScene *g_lmapScene;
-
-
 
 void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void FUN_002c23cc(s32 value);
@@ -249,8 +240,8 @@ void FUN_00272970(void)
     FUN_002442ac();
     gameBlock->unk7C4 = 0;
     gameBlock->unk15D0 = 0;
-    g_gameState.f005f185b = 0;
-    g_gameState.f005f161d = 0;
+    g_gameState.unk25F = 0;
+    g_gameState.paused = 0;
     state->unk9360 = 0;
     state->unk9361 = 0;
     state->unk9362 = 0;

@@ -5,9 +5,9 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "addon/AocSystemA.h"
 struct AocSystemA;
 extern "C" {
-extern AocSystemA *g_aocSystem;
 extern const char DAT_0052f4fc[], DAT_0052f4f0[];
 s32 gameFlagIsSet(u32 flag);
 u32 FUN_00283498(u32 id);

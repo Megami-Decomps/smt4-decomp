@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "test/BustupViewer.h"
 
 struct EnemyPopup {
@@ -13,8 +14,6 @@ struct EnemyPopup {
 };
 
 extern "C" {
-
-extern GameStateA g_gameState;
 
 s32 uiSpriteAdvanceAnimation(u8 *sprite, f32 speed);
 s32 vec2GetXInt(u8 *sprite);
@@ -32,7 +31,7 @@ void _ZN9Obj53230012FUN_0048bd2cEv(EnemyPopup *popup)
     switch (popup->state) {
     case 0:
         uiSpriteBankApplyPreset(popup->spriteBank, 1);
-        if (g_gameState.mapFlags.unk295 == 0) {
+        if (g_gameState.menuOpen == 0) {
             FUN_00168980(0x1b);
         }
         popup->flags |= 0x1000000;

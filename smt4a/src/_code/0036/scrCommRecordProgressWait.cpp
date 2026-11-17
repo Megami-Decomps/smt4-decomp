@@ -1,14 +1,9 @@
 #include "common.h"
+#include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
 
-typedef struct Record {
-    /* 0x00 */ u8 unk00[0x54];
-    /* 0x54 */ u16 count;
-} Record;
-
 extern s32 scrGetCommandFrame(void);
-extern Record *dataTable8FindRecord(u32 id);
 extern s32 arousalSkillOpen(void);
 extern s32 sceneHolderUpdate(void);
 
@@ -16,7 +11,7 @@ extern s32 sceneHolderUpdate(void);
 u32 scrCommRecordProgressWait(void)
 {
     if (scrGetCommandFrame() == 0) {
-        Record *record = dataTable8FindRecord(0x7B6);
+        ConsumableRecordA *record = dataTable8FindRecord(0x7B6);
 
         if (record == NULL || record->count == 0) {
             return 1;

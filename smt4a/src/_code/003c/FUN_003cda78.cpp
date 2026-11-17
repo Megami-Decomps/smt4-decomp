@@ -23,9 +23,9 @@ struct SkillCommandWork {
     DirectSkillView *direct;
 };
 
-static __inline const u16 *slotSkillWords(const SlotRecord *record)
+static __inline const u16 *slotSkillWords(const SlotRecordA *record)
 {
-    return reinterpret_cast<const u16 *>(record->unk00 + 0x34);
+    return reinterpret_cast<const u16 *>(record->unk000 + 0x34);
 }
 
 extern "C" {
@@ -41,7 +41,7 @@ u32 FUN_003cda78(void)
     if (work->selection != NULL) {
         SlotSelectionView *selection = work->selection;
         s32 current = selection->current;
-        SlotRecord *record = gameGetSlotRecord(
+        SlotRecordA *record = gameGetSlotRecord(
             reinterpret_cast<const SlotSelectionEntry *>(selection->entries)[current].slot);
         u32 index = FUN_003a7b74();
         skill = slotSkillWords(record)[index];

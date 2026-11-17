@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -6,12 +7,10 @@ typedef struct Entry {
     /* 0x00 */ u8 unk00[0xc];
 } Entry;
 
-extern AocSystem *g_aocSystem;
 
 void *dataTableGet(u32 table, u32 section);
 Entry *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
-s32 groupedFileTablesCountRecordsOfKind(AocSystem *system, s32 kind, s32 arg);
 Entry *dataArchiveGetMergedRecord(AocSystem *system, u32 index);
 
 /* Returns entry `index` of data table 42: from the base table, then from the add-on content's entries (which follow it); NULL past both. */

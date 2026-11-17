@@ -2,7 +2,6 @@
 #define W6_W6MATCH3_FORWARD_EFFECT_H
 
 #include "common.h"
-#include "gamedata/GroupedFileTables.h"
 #include "shard/W4_Match1b_Node.h"
 
 extern "C" void effectSpawnAheadOfScene(f32 headingOffset, f32 distance);
@@ -21,7 +20,6 @@ void scrCommMessageShowText(u32 a, u32 b);
 extern "C" {
 #endif
 
-u32 groupedFileTablesCountRecordsOfKind(GroupedFileTables *owner, s32 kind, u32 tableIndex);
 
 #ifdef __cplusplus
 }

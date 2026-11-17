@@ -1,10 +1,10 @@
 #include "addon/aocMain.h"
 #include "addon/AocSystem_Smt4.h"
+#include "addon/AocSystem.h"
 
 
 extern "C" {
 /* Uses the indexed add-on value, falling back to the built-in table. */
-extern AocSystem *g_aocSystem;
 extern u32 DAT_00446548[];
 s32 dataTableFindKeyedPayload(void *system, u32 index);
 u32 aocIndexValueOrDefault(u32 index)

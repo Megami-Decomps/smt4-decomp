@@ -6,6 +6,7 @@
 #include "gamedata/DataTable40.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "gamedata/ConsumableRecord.h"
 
 /* The battle UI's position argument, passed by value. */
 struct UiPosition {
@@ -23,7 +24,6 @@ extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 u32 FUN_003aeaa4(u32 ui, u16 kind, u32 value, s16 first, s16 second, u16 third, UiPosition position);
 void FUN_003ae850(u32 ui, void *arg, s32 count);
-SkillLinkRecord *dataTable08Sub1GetRecord(s32 id);
 void rt_memclr(void *block, u32 size);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 
@@ -49,13 +49,13 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
     s32 value = selection->value;
     s32 kind = selection->kind;
     const Table04Record *skill = dataTable40FindById(value);
-    const SkillLinkRecord *record = dataTable08Sub1GetRecord(value);
+    const ConsumableRecord *record = dataTable08Sub1GetRecord(value);
     if (kind == 2) {
         if (skill != NULL && skillHasSpecialCategory(skill))
             normal = false;
     } else if (kind == 8) {
-        if (record != NULL && record->linkedSkill != 0) {
-            if (dataTable40FindById(record->linkedSkill) == NULL || skillHasSpecialCategory(skill))
+        if (record != NULL && record->skillId != 0) {
+            if (dataTable40FindById(record->skillId) == NULL || skillHasSpecialCategory(skill))
                 normal = false;
         }
     }

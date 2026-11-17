@@ -1,6 +1,7 @@
 /* NON_MATCHING: register-only with the s8 flag: retail reloads the flag at the end through a pool-literal 0x74b0 + register index and keeps the UI object in r6 and constants in r9,sl,fp,r8. */
 #include "battle/btlUI.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/ConsumableRecordA.h"
 
 struct Menu32;
 struct BattleTargetFlagView {
@@ -13,14 +14,6 @@ struct CommandSkillRecord {
     u32 target : 4;
     u32 : 23;
 };
-struct CommandItemRecord {
-    u8 unk00[0x32];
-    u16 skill;
-    u8 unk34[6];
-    u8 category;
-    u8 unk3b[0x2d];
-    u32 flags;
-};
 
 static inline bool commandRequiresTargetSelection(const CommandSkillRecord *skill)
 {
@@ -29,7 +22,6 @@ static inline bool commandRequiresTargetSelection(const CommandSkillRecord *skil
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-CommandItemRecord *dataTable8FindRecord(s32 id);
 void FUN_002ccde8(Menu32 *menu, s16 *kind, s16 *id);
 void FUN_002fa7a8(Menu32 *menu);
 void menu32EnterState27(Menu32 *menu);
@@ -57,15 +49,15 @@ void btlUiSelectCommandTargetState()
         break;
     }
     case 8: {
-        const CommandItemRecord *item = dataTable8FindRecord(id);
-        if (item->skill != 0) {
-            const CommandSkillRecord *skill = (const CommandSkillRecord *)dataTable04FindById(item->skill);
+        const ConsumableRecordA *item = dataTable8FindRecord(id);
+        if (item->skillId != 0) {
+            const CommandSkillRecord *skill = (const CommandSkillRecord *)dataTable04FindById(item->skillId);
             if (commandRequiresTargetSelection(skill)) {
                 target->requiresTargetSelection = 1;
             }
         } else if (!(item->flags & 4)) {
             item = dataTable8FindRecord(id);
-            if ((item->category & 0x7f) != 1) {
+            if ((item->groupFlags & 0x7f) != 1) {
                 target->requiresTargetSelection = 1;
             }
         }

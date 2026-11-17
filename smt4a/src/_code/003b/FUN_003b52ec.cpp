@@ -1,3 +1,5 @@
+#include "game/GameStateA.h"
+#include "addon/AocSystemA.h"
 /* NON_MATCHING: near (199 rows against 203): same table walk, flag tests and constants; retail keeps the table id in a stack slot (push {r3,...}), hoists 0xFFFFFFFF into r8 and the match-test constant in fp, evaluates dataTableGet(0x23,7) args in the other order inside the size test and splits the flagB test differently */
 typedef unsigned char u8;
 typedef signed char s8;
@@ -20,26 +22,11 @@ struct EventEntry {
     u16 needSpecial;  /* 0x0A: 1 requires a special enemy kind on the map */
 };
 
-struct AocSystem {
-    u8 pad000[0x41C];
-    s32 extraCount;               /* 0x41C */
-    EventEntry *extraEntries;     /* 0x420 */
-};
-
 struct GameFlagsBlock {
     u8 pad000[0xE88];
     u32 lastEvent;                /* 0xE88 */
 };
 
-extern AocSystem *g_aocSystem;    /* 0x570280 */
-struct GameStateBlock {
-    s32 state;                    /* 0x00 */
-    s32 area;                     /* 0x04 */
-    u8 pad08[31];
-    s8 spawnMode;                 /* 0x27: non-zero selects the spawn-point entries */
-};
-
-extern GameStateBlock g_gameState;           /* 0x5f15fc */
 
 GameFlagsBlock *gameFlagsGetBlock(void);
 s32 mapEnemyHasSpecialKind(void);
@@ -59,15 +46,15 @@ static EventEntry *eventTableEntry(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    if (index < count + g_aocSystem->extraCount) {
-        return &g_aocSystem->extraEntries[index - count];
+    if (index < count + g_aocSystem->table23[7].count) {
+        return &((EventEntry *)g_aocSystem->table23[7].records)[index - count];
     }
     return 0;
 }
 
 static s32 eventTableSize(void)
 {
-    return dataTableGetCount(dataTableGet(0x23, 7)) + g_aocSystem->extraCount;
+    return dataTableGetCount(dataTableGet(0x23, 7)) + g_aocSystem->table23[7].count;
 }
 
 /* The flag requirements of an event entry: flagA (when given) must be set, flagB (when given) clear. */
@@ -102,7 +89,7 @@ EventEntry *FUN_003b52ec(void)
     GameFlagsBlock *flags = gameFlagsGetBlock();
     s32 hasSpecial = mapEnemyHasSpecialKind();
 
-    if (g_gameState.spawnMode != 0) {
+    if (g_gameState.progressEnabled != 0) {
         u32 spawn = lmapGetSpawnIndex();
         if (spawn != 0) {
             for (s32 i = 0; i < eventTableSize(); i++) {
@@ -119,7 +106,7 @@ EventEntry *FUN_003b52ec(void)
     } else {
         for (s32 i = 0; i < eventTableSize(); i++) {
             EventEntry *entry = eventTableEntry(i);
-            if (entry->kind == 1 && entry->stateA == g_gameState.state && entry->stateB == g_gameState.area &&
+            if (entry->kind == 1 && entry->stateA == g_gameState.mapId && entry->stateB == g_gameState.areaId &&
                 eventEntryAvailable(entry, hasSpecial)) {
                 if (flags->lastEvent == (u32)i) {
                     return 0;

@@ -115,7 +115,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
             position = *FUN_00348ee8(world->anchor);
             position.z += lift;
             f32 height = 0.0f;
-            switch (dataTable00FindById(btlFindEntryBlockByMemberId(world, index)->id)->height.value) {
+            switch (dataTable00FindById(btlFindEntryBlockByMemberId(world, index)->id)->bustUp) {
             case 0:
                 height = 15.0f;
                 break;

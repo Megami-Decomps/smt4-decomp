@@ -1,6 +1,5 @@
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
 #include "util/MathFunctions.h"
-extern "C" PartyPanelState *g_partyPanel;
 
 struct InfoWindowUpdateState {
     /* 0x00 */ u8 unk00[8];

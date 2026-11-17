@@ -2,12 +2,11 @@
 #include "battle/btlAction.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/Table8Record.h"
+#include "gamedata/ConsumableRecordA.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
 extern BtlActionGlobals g_btlAction;
-Table8Record *dataTable8FindRecord(s32 id);
 
 // Select an action's camera mode unless battle-state or marked-target flags suppress it.
 void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
@@ -61,7 +60,7 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
     } else {
         if (kind != 8)
             return;
-        id = dataTable8FindRecord(*reinterpret_cast<const s16 *>(unit->data->unk1C0))->unk32;
+        id = dataTable8FindRecord(*reinterpret_cast<const s16 *>(unit->data->unk1C0))->skillId;
         if (id == 0)
             return;
     }

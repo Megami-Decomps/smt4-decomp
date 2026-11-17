@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/SaveWork.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -13,12 +14,7 @@ typedef struct MapBlock {
     /* 0xE60 */ s32 cooldownD[48];
 } MapBlock;
 
-typedef struct GameState {
-    /* 0x000 */ u8 unk000[0x220];
-    /* 0x220 */ s32 tick;
-} GameState;
 
-extern GameState g_gameState; /* 0x49f91c */
 
 extern int FUN_0010b580(void);
 
@@ -28,9 +24,9 @@ void FUN_00105394(void)
     MapBlock *block = reinterpret_cast<MapBlock *>(gameGetMapBlock());
     int i;
 
-    g_gameState.tick = g_gameState.tick + 1;
-    if (g_gameState.tick > 0x708) {
-        g_gameState.tick = 0;
+    g_gameState.map.tick = g_gameState.map.tick + 1;
+    if (g_gameState.map.tick > 0x708) {
+        g_gameState.map.tick = 0;
         for (i = 0; i < 64; i++) {
             if (block->cooldownA[i] != 0 && block->cooldownA[i] != 0xFF) {
                 block->cooldownA[i]--;

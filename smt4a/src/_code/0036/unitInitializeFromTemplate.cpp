@@ -4,14 +4,14 @@
 #include <string.h>
 
 extern "C" {
-Table00Record *dataTable00FindById(u32 id);
+Table00RecordA *dataTable00FindById(u32 id);
 void sysMemClear(void *data, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 // Initialize base, current, and maximum stats from the demon's table record.
 void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
 {
-    // Local views avoid raising Table00Record's alignment or growing DevilRecordA.
+    // Local views avoid raising Table00RecordA's alignment or growing DevilRecordA.
     struct BaseStatsView {
         u16 id, flags;
         u32 hp, mp;
@@ -21,7 +21,7 @@ void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
         u8 prefix[0xA0];
         u16 name[9];
     };
-    const Table00Record *table = dataTable00FindById(id);
+    const Table00RecordA *table = dataTable00FindById(id);
     const BaseStatsView *stats = reinterpret_cast<const BaseStatsView *>(table);
     sysMemClear(unit, 300);
     unit->id = id;
@@ -35,14 +35,14 @@ void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
     unit->stats[3] = stats->magic;
     __aeabi_memcpy4(&unit->unk1C, unit->stats, sizeof(unit->stats));
     memcpy(unit->unk0E, unit->stats, sizeof(unit->stats));
-    unit->skillList.skills[0] = table->skillList.ids[0];
-    unit->skillList.skills[1] = table->skillList.ids[1];
-    unit->skillList.skills[2] = table->skillList.ids[2];
-    unit->skillList.skills[3] = table->skillList.ids[3];
-    unit->skillList.skills[4] = table->skillList.ids[4];
-    unit->skillList.skills[5] = table->skillList.ids[5];
-    unit->skillList.skills[6] = table->skillList.ids[6];
-    unit->skillList.skills[7] = table->skillList.ids[7];
+    unit->skillList.skills[0] = table->skills[0];
+    unit->skillList.skills[1] = table->skills[1];
+    unit->skillList.skills[2] = table->skills[2];
+    unit->skillList.skills[3] = table->skills[3];
+    unit->skillList.skills[4] = table->skills[4];
+    unit->skillList.skills[5] = table->skills[5];
+    unit->skillList.skills[6] = table->skills[6];
+    unit->skillList.skills[7] = table->skills[7];
     const DevilNameView *devil = reinterpret_cast<const DevilNameView *>(devilGetRecord(id));
     __aeabi_memcpy4(unit->name, devil->name, sizeof(unit->name));
     unit->unk2A = *reinterpret_cast<const u16 *>(unit->unk0E);

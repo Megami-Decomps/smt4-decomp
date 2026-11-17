@@ -18,7 +18,6 @@ extern s32 FUN_0025cac0(const void *left, const void *right); /* 0x25cac0 */
 extern s32 devilSortCompareUnitRankRaceId(const void *left, const void *right); /* 0x25cb2c */
 extern s32 FUN_00291f5c(const void *left, const void *right); /* 0x291f5c */
 extern s32 comparePartyUnitsByRankRaceAndId(const void *left, const void *right); /* 0x291fc8 */
-extern PartyPanelState *g_partyPanel;
 
 
 void partyPanelSortEntries(void)
@@ -33,50 +32,50 @@ void partyPanelSortEntries(void)
   ascending = ~(*sortMode >> 7) & 1;
   if ((*sortMode & 0x7f) == 2) {
     if (ascending != 0) {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,&comparePartyUnitsByRankRaceAndId);
+      FUN_002b7bca(panel->entries,0x18,8,&comparePartyUnitsByRankRaceAndId);
     }
     else {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,&devilSortCompareUnitRankRaceId);
+      FUN_002b7bca(panel->entries,0x18,8,&devilSortCompareUnitRankRaceId);
     }
   }
   if ((*sortMode & 0x7f) == 1) {
     if (ascending != 0) {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,FUN_001b18f0);
+      FUN_002b7bca(panel->entries,0x18,8,FUN_001b18f0);
     }
     else {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,devilCompareUnitsByRaceDescending);
+      FUN_002b7bca(panel->entries,0x18,8,devilCompareUnitsByRaceDescending);
     }
   }
   if ((*sortMode & 0x7f) == 4) {
     if (ascending != 0) {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,FUN_00291f5c);
+      FUN_002b7bca(panel->entries,0x18,8,FUN_00291f5c);
     }
     else {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,FUN_0025cac0);
+      FUN_002b7bca(panel->entries,0x18,8,FUN_0025cac0);
     }
   }
   if ((*sortMode & 0x7f) == 5) {
     if (ascending != 0) {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,FUN_0019215c);
+      FUN_002b7bca(panel->entries,0x18,8,FUN_0019215c);
     }
     else {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,FUN_001e1728);
+      FUN_002b7bca(panel->entries,0x18,8,FUN_001e1728);
     }
   }
   if ((*sortMode & 0x7f) == 0x1f) {
     if (ascending != 0) {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,FUN_001a8268);
+      FUN_002b7bca(panel->entries,0x18,8,FUN_001a8268);
     }
     else {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,FUN_002072f0);
+      FUN_002b7bca(panel->entries,0x18,8,FUN_002072f0);
     }
   }
   if ((*sortMode & 0x7f) == 3) {
     if (ascending != 0) {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,&FUN_001a81a8);
+      FUN_002b7bca(panel->entries,0x18,8,&FUN_001a81a8);
     }
     else {
-      FUN_002b7bca(panel->sortableEntries,0x18,8,&entryCompare);
+      FUN_002b7bca(panel->entries,0x18,8,&entryCompare);
     }
   }
   FUN_001d13b0();

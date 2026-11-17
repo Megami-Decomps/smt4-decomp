@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAIScript.h"
+#include "addon/AocSystemA.h"
 #include "script/scrScriptProcess.h"
 #include "quest_center/qcCtrl.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -12,7 +13,6 @@ ScriptRunState *scrScriptProcessCreate(void *data, s32 mode);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 s32 scrRunOpcodesStub(void *process);
 s32 FUN_003efb18(BtlMainStateA *battle);
-extern BtlAiScriptAocSystem *g_aocSystem;
 
 /* Loads and executes a battle AI script, then releases both its process and file data. */
 s32 FUN_003e688c(BtlAiScript *runner)

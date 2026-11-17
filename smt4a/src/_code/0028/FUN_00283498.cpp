@@ -1,10 +1,11 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "code/Code0028_Smt4a.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
-struct AocSystem;
+struct AocSystemA;
 
 /* A record of data table 25 (0x28 bytes); `id` at 0x20 is the search key. */
 struct DataTable25Record {
@@ -13,11 +14,10 @@ struct DataTable25Record {
     /* 0x22 */ u8 unk22[0x28 - 0x22];
 };
 
-extern AocSystem *g_aocSystem;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 signedKeyRecordCompare(const void *a, const void *b);
-DataTable25Record *aocPackageFindRecordById(AocSystem *system, u32 id);
+DataTable25Record *aocPackageFindRecordById(AocSystemA *system, u32 id);
 
 
 /* Finds the record with `id`: the add-on content's override first, else a search of data table 25. */

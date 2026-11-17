@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the shared float coordinates into registers s16-s26 before the mode tests and reuses them across the layouts (so the (25, 1) layout shares the (25, 2) code); this build reloads each constant per block. The stores themselves are identical. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 namespace {
 /* One row of the screen's anchor table: three coordinates and the row's other state. */
@@ -25,11 +26,10 @@ struct AnchorGlobals {
 
 extern "C" {
 extern AnchorGlobals DAT_005806a0;
-extern GameStateA g_gameState;
 void FUN_00352a14(void);
 s32 gameFlagIsSet(u32 flag);
 
-/* Lays out the screen's anchor rows for the current map mode (g_gameState.mode/submode); (10, 8) as arguments
+/* Lays out the screen's anchor rows for the current map mode (g_gameState.mapId/submode); (10, 8) as arguments
    selects the fixed first layout. */
 void FUN_0033a690(s32 mode, s32 subMode)
 {
@@ -44,8 +44,8 @@ void FUN_0033a690(s32 mode, s32 subMode)
         work->anchors[3].x[1] = 380.0f;
         work->anchors[4].x[1] = 42.0f;
     }
-    if (g_gameState.mode == 1) {
-        if (g_gameState.submode != 1) {
+    if (g_gameState.mapId == 1) {
+        if (g_gameState.areaId != 1) {
             return;
         }
         if (gameFlagIsSet(114) && !gameFlagIsSet(177)) {
@@ -67,8 +67,8 @@ void FUN_0033a690(s32 mode, s32 subMode)
             work->anchors[0].x[1] = 180.0f;
         }
     }
-    if (g_gameState.mode == 4) {
-        if (g_gameState.submode != 2) {
+    if (g_gameState.mapId == 4) {
+        if (g_gameState.areaId != 2) {
             return;
         }
         if (gameFlagIsSet(244) && !gameFlagIsSet(246)) {
@@ -90,8 +90,8 @@ void FUN_0033a690(s32 mode, s32 subMode)
             work->anchors[0].x[1] = 180.0f;
         }
     }
-    if (g_gameState.mode == 25) {
-        if (g_gameState.submode == 1 || g_gameState.submode == 2) {
+    if (g_gameState.mapId == 25) {
+        if (g_gameState.areaId == 1 || g_gameState.areaId == 2) {
             work = DAT_005806a0.work;
             work->anchors[0].x[0] = 170.0f;
             work->anchors[1].x[0] = 210.0f;
@@ -112,7 +112,7 @@ void FUN_0033a690(s32 mode, s32 subMode)
             return;
         }
     }
-    s32 current = g_gameState.mode;
+    s32 current = g_gameState.mapId;
     if (current == 28 || current == 29 || current == 30 || current == 31 || current == 32) {
         work = DAT_005806a0.work;
         work->anchors[0].x[0] = 170.0f;

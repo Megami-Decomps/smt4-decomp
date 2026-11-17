@@ -4,6 +4,7 @@
 #include "shard/Shard0036.h"
 #include "shard/S1Mover.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 static __inline SoundActorQueuePosition soundPosition(const Vec3f &value)
 {
@@ -34,7 +35,6 @@ struct MapActivationContext {
 extern "C" {
 extern MapIfState *g_mapIf;
 extern MapActivationContext *DAT_004474f4;
-extern GameState g_gameState;
 Vec3f FUN_003e0e60(const Vec3f *value, f32 scale);
 
 u32 mapIfActivateRecord(u8 enabled, s32 index)
@@ -67,7 +67,7 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
         return 1;
     if (record->display.category >= 0x22) {
         record->state = 7;
-        if (g_gameState.unk18 == 0)
+        if (g_gameState.inputBlocked == 0)
             soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
     } else if (details->destination == -1) {
         record->state = 9;
@@ -80,12 +80,12 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
         soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
     } else if (details->linked == 0) {
         record->state = 15;
-        if (g_gameState.unk18 == 0)
+        if (g_gameState.inputBlocked == 0)
             soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));
     } else {
         record->state = 7;
-        if (!(g_gameState.unk18 != 0 && DAT_004474f4->mode == 0)) {
-            if (g_gameState.unk000 >= 100)
+        if (!(g_gameState.inputBlocked != 0 && DAT_004474f4->mode == 0)) {
+            if (g_gameState.mapId >= 100)
                 soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));
             else
                 soundActorStartOnFreeChannel(0x10001ff, soundPosition(details->position));

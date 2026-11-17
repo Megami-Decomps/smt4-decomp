@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/Table1bOr1c.h"
 #include <string.h>
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -33,15 +34,6 @@ typedef struct SceneWork {
     /* 0xDAC */ u8 returnToMap;
 } SceneWork;
 
-/* The slice of the game state read and written here. */
-typedef struct SceneGameState {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ u8 endingRequested;
-    /* 0x35 */ u8 unk35[0x1F];
-    /* 0x54 */ u32 saveId;
-    /* 0x58 */ u8 unk58[4];
-    /* 0x5C */ char saveName[0x10];
-} SceneGameState;
 
 struct SceneSequenceOptions {
     u32 id;
@@ -54,7 +46,6 @@ struct NamedSceneSequence {
     char name[24];
 };
 
-extern SceneGameState g_gameState;
 extern s32 DAT_0049fd14;
 
 s32 spriteTableFreeLoaded(void *sprites);
@@ -105,8 +96,8 @@ void FUN_003b92b4(SceneWork *work)
         gameCopyPersistentSave();
         NamedSceneSequence payload;
         payload.slot = -1;
-        payload.id = g_gameState.saveId;
-        libc_strcpy(payload.name, g_gameState.saveName);
+        payload.id = g_gameState.entryValue;
+        libc_strcpy(payload.name, g_gameState.entryText);
         asdSequenceRequest(4, &payload, sizeof(payload));
     } else if ((flags & 0x800000) != 0) {
         u32 payload = work->record->id;
@@ -132,7 +123,7 @@ void FUN_003b92b4(SceneWork *work)
     } else if (work->requestEnding != 0) {
         bgmReleaseStopped();
         soundChannelStopAll(15);
-        g_gameState.endingRequested = 1;
+        g_gameState.retainCampResources = 1;
         NamedSceneSequence payload;
         payload.id = 1;
         payload.slot = -1;

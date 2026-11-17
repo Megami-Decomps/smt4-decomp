@@ -1,15 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ed094` (_code @ 0x2ed094, 0x378 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x3d0];
-    int f0049fcec; /* 0x3d0 */
-    int f0049fcf0; /* 0x3d4 */
-};
-extern GameStateView g_gameState;
 
 
 int collisionTestProjectedSpherePlanes(float [11], int, int, int);
@@ -88,8 +82,8 @@ unsigned int FUN_002ed094(float *param_1,float *param_2)
   temp_v13 = *param_1;
   temp_v6 = param_1[1];
   temp_v14 = param_1[2];
-  g_gameState.f0049fcec = -1;
-  g_gameState.f0049fcf0 = -1;
+  g_gameState.unk3D0 = -1;
+  g_gameState.unk3D4 = -1;
   if (0 < (int)DAT_00446fec) {
     puVar2 = (unsigned char *)0x49e45b;
     if ((DAT_00446fec & 1) != 0) {
@@ -195,8 +189,8 @@ unsigned int FUN_002ed094(float *param_1,float *param_2)
                 }
               }
               else {
-                g_gameState.f0049fcec = temp_v1;
-                g_gameState.f0049fcf0 = temp_v3;
+                g_gameState.unk3D0 = temp_v1;
+                g_gameState.unk3D4 = temp_v3;
                 if (temp_v1 == 0) {
                   puVar2 = &DAT_0049e45c;
                   puVar2[temp_v3] = 1;

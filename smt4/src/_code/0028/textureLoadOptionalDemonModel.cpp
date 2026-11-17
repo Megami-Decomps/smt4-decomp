@@ -1,13 +1,13 @@
 #include "addon/aocMain.h"
 #include "gamedata/DevilModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "addon/AocSystem.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
-DevilModelOverride* dataTable00FindById(u16 id);
 s32 recordPrepareLinkedOwner(AocSystem*, u32 table, s32 node);
 void texTableRecordCallWithParams(u32 kind, u32 table, u32 file, s32 x, s32 y, u32 layer);
 void FUN_00388eb4(AocSystem*, s32 id, u32 kind, s32 node, s32 x, s32 y, u32 layer);
-extern AocSystem* g_aocSystem;
 
 // Whether the texture of demon `id` (its model, or its override model) is loaded.
 static inline s32 isDemonTextureLoaded(s32 id, s32 mapped)
@@ -21,9 +21,9 @@ static inline s32 isDemonTextureLoaded(s32 id, s32 mapped)
             const DevilRecord* devil = reinterpret_cast<const DevilRecord*>(devilGetRecord(static_cast<u16>(id)));
             if (!devil)
                 return 0;
-            const DevilModelOverride* record = dataTable00FindById(static_cast<u16>(id));
-            if (record->flags & 1) {
-                resource = record->model;
+            const Table00Record* record = dataTable00FindById(static_cast<u16>(id));
+            if (record->levelFlags & 1) {
+                resource = record->portraitId;
                 category = 0x23;
                 if (resource >= 0x81)
                     return 0;
@@ -49,9 +49,9 @@ void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped)
             const DevilRecord* devil = reinterpret_cast<const DevilRecord*>(devilGetRecord(static_cast<u16>(id)));
             if (!devil)
                 return;
-            const DevilModelOverride* record = dataTable00FindById(static_cast<u16>(id));
-            if (record->flags & 1) {
-                resource = record->model;
+            const Table00Record* record = dataTable00FindById(static_cast<u16>(id));
+            if (record->levelFlags & 1) {
+                resource = record->portraitId;
                 category = 0x23;
                 if (resource >= 0x81)
                     return;

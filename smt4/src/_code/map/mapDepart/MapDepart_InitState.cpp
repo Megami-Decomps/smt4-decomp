@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 /* The departure state machine's block. */
 struct MapDepartState {
@@ -41,7 +42,6 @@ struct MapDepartSavePoint {
 
 extern "C" {
 
-extern GameState g_gameState;
 
 MapDepartSavePoint *gameGetMapBlock(void);
 void mapAdjustPositionToGround(MapVector *position);
@@ -66,22 +66,22 @@ void MapDepart_InitState(MapDepartState *state, s32 save)
     state->unk44 = 0;
     mapAdjustPositionToGround(&g_gameState.position);
     if (save) {
-        point->scale = (s16)g_gameState.unk90Scalar;
-        point->mapId = g_gameState.unk000;
-        point->areaId = g_gameState.unk004Value;
+        point->scale = (s16)g_gameState.overviewHeading;
+        point->mapId = g_gameState.mapId;
+        point->areaId = g_gameState.areaId;
         point->objectId = g_gameState.currentObjectId;
         point->x = (s16)g_gameState.position.x;
         point->y = (s16)g_gameState.position.y;
         point->z = (s16)g_gameState.position.z;
-        point->unk38 = (s16)g_gameState.unkA0;
-        point->unk28 = g_gameState.unkA4;
-        point->unk2A = g_gameState.unkA8;
+        point->unk38 = (s16)g_gameState.heading;
+        point->unk28 = g_gameState.tableKind;
+        point->unk2A = g_gameState.recordId;
     }
     mapBlockLoadTableRecord();
-    GameStateDepartBlock *block = &g_gameState.departReset.block;
-    block->unk50 = 0;
-    block->unkA4 = 0;
-    block->unkA6 = 0;
+    GameStateDepartBlock *block = &g_gameState.depart;
+    block->value = 0;
+    block->counterA = 0;
+    block->counterB = 0;
 }
 
 } /* extern "C" */

@@ -1,4 +1,5 @@
 #include "code/Code002a_VariantA.h"
+#include "game/GameStateA.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00202ea4` (_code @ 0x202ea4, 0xaa0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -41,7 +42,6 @@ typedef struct {
 } void_stack;
 
 extern int g_config; /* 0x57f230 */
-extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: padQueryLogicalKey. */
@@ -74,7 +74,6 @@ extern int uiSearchPrimary(int);
 extern int FUN_003d21dc(void);
 extern int loadSlotIsLoaded(unsigned int);
 /* Supplied declaration required: fillThreeWordsWithByte. */
-
 
 void FUN_00202ea4(void)
 
@@ -119,7 +118,7 @@ void FUN_00202ea4(void)
       }
       else {
         temp_v6 = FUN_003d21dc();
-        if ((temp_v6 == 0) && (g_gameState != 0x2a)) {
+        if ((temp_v6 == 0) && (g_gameState.mapId != 0x2a)) {
           temp_v4 = *(unsigned int *)(temp_v7 + 0x84);
           temp_v9 = 0;
         }
@@ -247,7 +246,7 @@ void FUN_00202ea4(void)
       if (*(char *)(g_config + 0xc0) != '\0') {
         gameDataBlocksGetTableFlag();
         temp_v6 = gameDataBlocksGetTableFlag();
-        if (((temp_v6 == 4) || (temp_v6 = FUN_003d21dc(), temp_v6 != 0)) || (g_gameState == 0x2a)) {
+        if (((temp_v6 == 4) || (temp_v6 = FUN_003d21dc(), temp_v6 != 0)) || (g_gameState.mapId == 0x2a)) {
           eventQueueAddUnique(0x100020f);
           temp_v7 = g_config;
           *(unsigned int *)(g_config + 100) = 2;
@@ -390,7 +389,7 @@ LAB_00203688:
       }
       else {
         temp_v7 = FUN_003d21dc();
-        if ((temp_v7 == 0) && (g_gameState != 0x2a)) {
+        if ((temp_v7 == 0) && (g_gameState.mapId != 0x2a)) {
           temp_v4 = *(unsigned int *)(temp_v6 + 0x84);
           temp_v9 = 0;
         }

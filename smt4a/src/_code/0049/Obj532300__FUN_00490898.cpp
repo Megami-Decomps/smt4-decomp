@@ -1,16 +1,9 @@
 /* NON_MATCHING: retail computes the scene address before the position call and keeps it in r4, copies the position pair with two ldr/str pairs (the copy is overwritten right after), loads 1.0f separately from the sprite fade value and loads g_gameState once up front; this build copies with ldrd/strd, shares the 1.0f in s16 and reloads g_gameState. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "game/GameStateA.h"
 #include "map/NavigationFadeWork.h"
 
-struct GameStateFade {
-    /* 0x000 */ u8 unk000[0x21];
-    /* 0x021 */ u8 fadeInDialog;
-    /* 0x022 */ u8 unk022[0x43E];
-    /* 0x460 */ u8 sceneStateEnabled;
-};
-
 extern "C" {
-extern GameStateFade g_gameState;
 void uiPlayGatedActionFeedback(void);
 void uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 value);
 NavigationPoint *sub68OwnerGetBlock60(void *scene);
@@ -35,7 +28,7 @@ void _ZN9Obj53230012FUN_00490898Ev(NavigationFadeWork *work)
         uiSpriteAdvanceAnimation(&work->footerSprite, 1.0f);
         uiSpriteAdvanceAnimation(&work->headerSprite, 1.0f);
         if (uiSpriteGetCompletionState(&work->sprites[5]) != 0) {
-            if (g_gameState.fadeInDialog) {
+            if (g_gameState.paused) {
                 NavigationPoint point = *sub68OwnerGetBlock60(work->scene);
                 point.x = 1.0f;
                 point.y = 1.0f;
@@ -43,7 +36,7 @@ void _ZN9Obj53230012FUN_00490898Ev(NavigationFadeWork *work)
                 *(u8 *)&work->interpolation.unk02C[0x38] = (u8)work->cursorMode;
                 work->flag7B90 = 1;
                 work->flag7B91 = 1;
-                if (g_gameState.sceneStateEnabled) {
+                if (g_gameState.alternateNaviMap) {
                     FUN_002d22c0(0);
                     lmapEnableSceneState();
                     return;

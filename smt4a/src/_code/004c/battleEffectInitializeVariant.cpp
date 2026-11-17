@@ -2,15 +2,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
+#include "gamedata/Table00Lookup.h"
 
 struct BattleEffectMainHeader {
     u8 unk000[0x113];
     s8 variant;
-};
-
-struct BattleEffectActorInfo {
-    u8 unk00[0xa2];
-    u8 variant;
 };
 
 struct BattleEffectGroup {
@@ -21,7 +17,6 @@ struct BattleEffectGroup {
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *, s32 side);
-BattleEffectActorInfo *dataTable00FindById(u16 id);
 void FUN_004cb9d0(BattleEffectSetup *);
 s32 idSetFindSubjectIndex(BtlMainStateA *, BattleEffectSetup *);
 BattleEffectGroup *btlFindEntryBlockByMemberId(BtlMainStateA *, s32 group);
@@ -44,8 +39,8 @@ void battleEffectInitializeVariant(BtlMainStateA *battle, BattleEffectSetup *eff
                         effect->variant = 0;
                     } else {
                         s32 index = btlFindSelectionIndexByOrdinal(battle, 1);
-                        BattleEffectActorInfo *info = dataTable00FindById(battle->entries[index].id);
-                        if (info->variant == 1 || info->variant == 3) {
+                        Table00RecordA *info = dataTable00FindById(battle->entries[index].id);
+                        if (info->bustUp == 1 || info->bustUp == 3) {
                             effect->variant = 1;
                         } else {
                             effect->variant = 0;

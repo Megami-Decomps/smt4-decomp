@@ -1,12 +1,12 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 
-
-/* Stores `value` in the halfword at 0xC of the record at 0x27E88 of the game-data table. */
+/* Stores `value` in the halfword at 0xC of the saved record (save body + 0x27E00). */
 void FUN_002a6480(u16 value)
 {
-    GameSavedRecordA *record = &g_gameDataBlocks.saveBlock->records.record;
+    GameSavedRecordA *record = &g_gameDataBlocks.saveBlock->body.record;
     record->unk0C = value;
 }
 

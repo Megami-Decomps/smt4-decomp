@@ -65,7 +65,7 @@ u32 FUN_004c9160(s32 kind, void *object, s32 mode, s32 option);
 void FUN_004fe764(s32 unit, CommandMenu *menu, s32 target, s32 value, s32 mode);
 void btlQueueActionMessage(s32 actor, CommandMenu *menu, u32 options, s32 a, s32 b, s32 c, s32 d);
 void FUN_004c9d04(s32 index, s32 a, s32 b);
-SlotRecord *gameGetSlotRecord(s32 slotIndex);
+SlotRecordA *gameGetSlotRecord(s32 slotIndex);
 void FUN_004fcf0c(s32 row, CommandMenu *menu, s32 first, s32 slot, s32 member, s32 last);
 void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *effect, u32 *sound);
 void FUN_0047f7ac(u32 index, u32 value);
@@ -110,9 +110,9 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
             if (unitId >= 0) {
                 for (s32 slot = 0; slot < party->count; slot++) {
                     if (party->slotOf[slot] >= 0) {
-                        SlotRecord *record = gameGetSlotRecord(party->slotOf[slot]);
+                        SlotRecordA *record = gameGetSlotRecord(party->slotOf[slot]);
                         if (record->entryId == unitId) {
-                            record->status.mask &= ~0x400;
+                            record->statusMask &= ~0x400;
                             FUN_004fcf0c(row, menu, 0, slot, member, 0);
                             row += 10;
                         }

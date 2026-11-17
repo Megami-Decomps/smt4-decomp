@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct {
     u8 sub[1];          /* 0x5c */
 } GlobalBlock;
 
-extern GlobalBlock g_gameState;
 
 u32 scrGetArg(...);
 u32 scrGetArgString(u32 index);
@@ -22,8 +22,8 @@ u32 scrGameStateSetEntry(void)
     u32 value = scrGetArg(0);
     u32 entry = scrGetArgString(1);
 
-    g_gameState.value = value;
-    libc_strcpy(reinterpret_cast<unsigned int *>(g_gameState.sub), reinterpret_cast<unsigned int *>(entry));
+    g_gameState.entryValue = value;
+    libc_strcpy(reinterpret_cast<unsigned int *>(g_gameState.entryText), reinterpret_cast<unsigned int *>(entry));
     return 1;
 }
 

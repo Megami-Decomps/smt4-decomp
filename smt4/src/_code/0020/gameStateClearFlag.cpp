@@ -1,12 +1,12 @@
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 extern "C" {
 
-extern GameState g_gameState;
 
 void gameStateClearFlag(void)
 {
-    g_gameState.unk2F8 = 0;
+    g_gameState.map.savedLocationSet = 0;
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_MapState.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -11,13 +11,12 @@ struct MapDepartureWork {
     /* 0x28 */ u32 third;
     /* 0x2C */ u32 fourth;
 };
-extern GameStateCallbackWork g_gameState;
 extern MapDepartureWork *g_mapDepartWork;
 
 /* Reset departure progress when the game selects departure mode one. */
 void mapDepartureInitialize(void)
 {
-    if (g_gameState.departureMode != 1) {
+    if (g_gameState.map.departureMode != 1) {
         g_mapDepartWork->state = 0;
     } else {
         g_mapDepartWork->state = 1;

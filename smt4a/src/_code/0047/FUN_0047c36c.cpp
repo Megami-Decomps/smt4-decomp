@@ -3,6 +3,7 @@
 #include "classes/AocMenu.h"
 #include "classes/WindowOperation.h"
 #include "addon/AocSystemSmt4a.h"
+#include "addon/AocSystemA.h"
 
 struct JobOwner;
 struct JobFlagsWork;
@@ -40,7 +41,6 @@ struct QuestScene {
 
 extern "C" {
 extern AocMain *g_aocMain;
-extern AocSystem *g_aocSystem;
 
 s32 sysLightEventTryWait(AocObjB *event);
 void uiSpriteAdvanceAnimation(PanelSprite *panel, f32 step);
@@ -51,7 +51,7 @@ u32 jobIsValid(u32 job);
 u32 jobStop(u32 job, s32 mode);
 void ifTouchRegionRemove();
 void FUN_0016ccb4(u32 *queryResult);
-void aocReleasePackageOwner(AocSystem *system);
+void aocReleasePackageOwner(AocSystemA *system);
 
 // Runs the scene one frame. While the content is released (states 4..14 with the add-on event signalled) the scene
 // shuts down instead: it stops its job, clears the result and returns to state 17.

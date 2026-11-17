@@ -1,5 +1,6 @@
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "game/GameState.h"
 
 struct TransitionLocation {
     s16 mapId;
@@ -7,7 +8,6 @@ struct TransitionLocation {
 };
 
 extern "C" {
-extern GameState g_gameState;
 void *jyoucyuGetTableEntry(s32);
 s32 gameStateIsFlagSetAndLarge(void);
 

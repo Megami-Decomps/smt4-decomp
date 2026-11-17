@@ -4,7 +4,7 @@ extern "C" {
 
 u8 *saveGetIndexedFlagBytes(void)
 {
-    return g_gameDataBlocks.saveBlock->block1EB80;
+    return g_gameDataBlocks.saveBlock->body.indexedFlags;
 }
 
 } /* extern "C" */

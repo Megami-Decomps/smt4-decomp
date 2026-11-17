@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gamedata/Table00Lookup.h"
 
 struct EventBattleTextureWork {
     u32 id;
@@ -23,13 +24,8 @@ struct EventBattleTextureWork {
     u8 animated;
     u8 unk45[3];
 };
-struct EventBattleTextureRecord {
-    u8 unk00[0x88];
-    s16 textureId;
-};
 
 extern "C" {
-EventBattleTextureRecord *dataTable00FindById(u16 id);
 s32 FUN_002c1d5c(void);
 u32 eventResourceCacheAcquire(s32 textureId, s32 flags);
 u32 uiStepAnimatedContentTask(void *job);
@@ -50,7 +46,7 @@ void *eventCreateBattleTexture(u32 id, f32 x, f32 y)
     work->opacityStep = 0.25f;
     work->stopWhenTransparent = 0;
     work->unk17 = 0;
-    work->textureId = dataTable00FindById(id)->textureId;
+    work->textureId = dataTable00FindById(id)->portraitId;
     work->animated = 1;
     if (FUN_002c1d5c()) {
         work->state = 1;

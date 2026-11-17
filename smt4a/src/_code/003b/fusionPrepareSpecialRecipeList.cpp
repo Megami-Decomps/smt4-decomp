@@ -58,14 +58,14 @@ void fusionPrepareSpecialRecipeList()
     FusionSavedSelection *selection = &reinterpret_cast<FusionSavedPreferences *>(saveGetUserSettingsBlock())->selection;
     soundChannelRequestIfEnabled(recipes->soundChannel, 0, 60);
     if (selection->slots[0] >= 0) {
-        const SlotRecord *slot = gameGetSlotRecord(selection->slots[0]);
+        const SlotRecordA *slot = gameGetSlotRecord(selection->slots[0]);
         if (slot == NULL || slot->entryId != selection->ids[0]) {
             selection->slots[0] = -1;
             selection->ids[0] = 0;
         }
     }
     if (selection->slots[1] >= 0) {
-        const SlotRecord *slot = gameGetSlotRecord(selection->slots[1]);
+        const SlotRecordA *slot = gameGetSlotRecord(selection->slots[1]);
         if (slot == NULL || slot->entryId != selection->ids[1]) {
             selection->slots[1] = -1;
             selection->ids[1] = 0;

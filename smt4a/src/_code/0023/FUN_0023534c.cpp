@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -40,13 +41,7 @@ typedef struct MapObjs {
     /* 0x14 */ MapObjSlot slots[24];
 } MapObjs;
 
-typedef struct GameStateView {
-    /* 0x00 */ u8 unk00[0x23];
-    /* 0x23 */ s8 hideMapObjects;
-} GameStateView;
-
 extern MapObjs *g_mapObj;
-extern GameStateView g_gameState;
 
 void controllerSetDestination(MapObjModel *model, Vec3f *position);
 void controllerSetRotationEulerDegrees(MapObjModel *model, f32 x, f32 y, f32 z);
@@ -67,7 +62,7 @@ void FUN_0023534c(void)
         }
         model = slot->handle->model;
         if (model != NULL) {
-            if (g_gameState.hideMapObjects == 0) {
+            if (g_gameState.departLoading == 0) {
                 model->flags &= ~3;
             } else {
                 model->flags |= 3;

@@ -1,10 +1,10 @@
 /* NON_MATCHING: block layout and the state switch match retail; the mode dispatch branch polarity (bne b4 / b 84 vs beq 84 / b b4) and the final clearing stores' pointer/value registers differ. */
 #include "map/lmapMain.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 extern LmapSceneA *g_lmapScene;
-extern GameStateA g_gameState;
 s32 gameFlagIsSet(u32 flag);
 void lmapClearExtraFlag();
 void FUN_003d2158(u32 handle, s32 enabled);
@@ -19,16 +19,16 @@ void FUN_00354098()
     };
     ExtraTransitionView *extra;
     bool enable = false;
-    if (g_gameState.mode == 1) {
-        if (g_gameState.submode == 1)
+    if (g_gameState.mapId == 1) {
+        if (g_gameState.areaId == 1)
             return;
         enable = gameFlagIsSet(0x72) && !gameFlagIsSet(0xB1);
-    } else if (g_gameState.mode == 2) {
-        if (g_gameState.submode == 5)
+    } else if (g_gameState.mapId == 2) {
+        if (g_gameState.areaId == 5)
             return;
         enable = !gameFlagIsSet(0x91);
-    } else if (g_gameState.mode == 4) {
-        if (g_gameState.submode == 2)
+    } else if (g_gameState.mapId == 4) {
+        if (g_gameState.areaId == 2)
             return;
         enable = gameFlagIsSet(0xF4) && !gameFlagIsSet(0xF6);
     }

@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_UiQuest.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" int sysPlaySe(s32 soundId);
@@ -10,7 +11,7 @@ extern "C" void questUiPlaySelectionSound(void)
     UiQuestApoc *menu = g_uiQuest;
     s32 count = questUiGetInstance(&g_uiQuest)->listState.count;
     if (menu->unk90c) {
-        if (g_gameState.navigation.alternateNaviMap) {
+        if (g_gameState.alternateNaviMap) {
             if (count == 2) {
                 if (menu->listState.selection == 0) {
                     sysPlaySe(0x10F);

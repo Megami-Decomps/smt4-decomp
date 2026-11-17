@@ -8,7 +8,7 @@ void gameSavedItemClearCounter(u32 index)
         return;
     }
     u8 *row = (u8 *)g_gameDataBlocks.saveBlock + index * sizeof(GameSavedItemA);
-    GameSavedItemA *item = (GameSavedItemA *)(row + offsetof(GameSavedItemTableA, items));
+    GameSavedItemA *item = (GameSavedItemA *)(row + offsetof(GameSaveDataA, body.items));
     item->counter = 0;
 }
 

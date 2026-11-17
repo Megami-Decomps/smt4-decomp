@@ -1,5 +1,6 @@
 /* NON_MATCHING: group loop selection, saved registers and animation comparison loads differ. */
 #include "gfx/ModelGroups.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 /* Named floats in the shared slot's padding would raise the union's alignment. */
@@ -23,7 +24,6 @@ struct ModelResumeNode {
 typedef char ModelGroupResumeOffsets[(sizeof(ModelGroupResumeSlot) == 0x2C && offsetof(ModelGroupResumeSlot, animation) == 0x14 && offsetof(ModelResumeNode, animation) == 0x38) ? 1 : -1];
 extern "C" {
 extern ModelGroups *g_modelGroups;
-extern GameStateA g_gameState;
 void FUN_0029570c(void);
 void faderSetValue(AsdMdlNode *node, f32 value);
 void nodeSetTranslation(AsdMdlNode *node, s32 mode, const f32 *position);
@@ -59,7 +59,7 @@ extern "C" void FUN_002d8cec(void)
             ModelGroupSlot *storage = group == 0 ? &g_modelGroups->primary[i] : &g_modelGroups->secondary[i];
             ModelGroupResumeSlot *slot = reinterpret_cast<ModelGroupResumeSlot *>(storage);
             if (slot->active) {
-                if (g_gameState.controllerFlags.secondary) {
+                if (g_gameState.departLoading) {
                     suspendModelGroupSlot(slot);
                     slot->dirty = 1;
                 } else if (slot->dirty) {

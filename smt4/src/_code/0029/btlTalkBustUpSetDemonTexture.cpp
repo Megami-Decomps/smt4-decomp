@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match2_HelpResources.h"
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "addon/AocSystem.h"
 
 /* The demon record, read for its model entry only. */
 struct DevilModelView {
@@ -20,7 +21,6 @@ s32 asdTMTexTablePrepareNodeImage(s32 table, u32 entry);
 s32 FUN_0032c3fc(BattleTalkBustUpPrefixIV *bustUp);
 s32 panelSetupButtons(BattleTalkBustUpPrefixIV *bustUp);
 
-extern AocSystem *g_aocSystem;
 extern BattleTalkBustUpPrefixIV *g_btlTalkBustUp;
 
 void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous)
@@ -29,7 +29,7 @@ void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous)
     if (bustUp == 0)
         return;
 
-    bustUp->recordValue = dataTable00FindById(devilId)->bustUp.value;
+    bustUp->recordValue = dataTable00FindById(devilId)->bustUp;
     bustUp->textureEntry = devilGetRecord(devilId)->model;
     bustUp->devilId = devilId;
 

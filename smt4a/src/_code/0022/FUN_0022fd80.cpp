@@ -1,7 +1,6 @@
 #include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 /* NON_MATCHING: minimum-one guard still emits an extra conditional branch; percentage accumulator now matches retail multiply operand order. */
 #include "shard/Shard0032.h"
-#include "gamedata/EquipmentValueModifier.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 #include "gamedata/Table04Record.h"
 
@@ -26,11 +25,11 @@ u32 FUN_0022fd80(s32 value, u32 kind)
         case 5: itemId = equipment->stats[5]; break;
         case 6: itemId = equipment->stats[6]; break;
         }
-        const EquipmentValueItem *item = reinterpret_cast<const EquipmentValueItem *>(dataTable08Sub2GetRecord(itemId));
+        const EquipmentRecordA *item = dataTable08Sub2GetRecord(itemId);
         if (item != NULL && item->modifierId != 0) {
-            const EquipmentValueModifier *modifier = reinterpret_cast<const EquipmentValueModifier *>(dataTable41FindById(item->modifierId));
-            if (modifier != NULL && modifier->percentage != 0) {
-                multiplier = static_cast<f32>(static_cast<u32>(modifier->percentage)) * 0.01f * multiplier;
+            const Table04ExtraRecord *modifier = dataTable41FindById(item->modifierId);
+            if (modifier != NULL && modifier->modifier.percentage != 0) {
+                multiplier = static_cast<f32>(static_cast<u32>(modifier->modifier.percentage)) * 0.01f * multiplier;
             }
         }
     }

@@ -1,10 +1,10 @@
 #include "shard/PassiveSkill.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
 struct AocSystem;
 
-extern AocSystem *g_aocSystem;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 passiveSkillCompareById(const void *a, const void *b);

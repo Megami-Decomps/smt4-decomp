@@ -12,8 +12,6 @@ int buttonHelpSetPreset(u32 preset);
 int campCecIsActive(void);
 int gameFlagIsSet(u32 flag);
 
-extern PartyPanelState *g_partyPanel;
-
 #define PARTY_MODE_FIELD 0xC
 #define PARTY_MODE_DIALOG 0x10
 #define GAME_FLAG_PARTY_HELP_VARIANT 0x401
@@ -37,42 +35,42 @@ void FUN_0026c214(void)
     if (a != 0) {
         if (plain) {
             if (panel->panelState != PARTY_MODE_DIALOG) {
-                preset = panel->unk42 != 0 ? 0x1E : 0x1D;
+                preset = panel->alternate != 0 ? 0x1E : 0x1D;
             } else {
-                preset = panel->unk42 != 0 ? 0xB8 : 0xB7;
+                preset = panel->alternate != 0 ? 0xB8 : 0xB7;
             }
         } else if (panel->panelState == PARTY_MODE_FIELD && gameFlagIsSet(GAME_FLAG_PARTY_HELP_VARIANT) != 0) {
-            preset = panel->unk42 != 0 ? 0xBF : 0xBE;
+            preset = panel->alternate != 0 ? 0xBF : 0xBE;
         } else {
-            preset = panel->unk42 != 0 ? 0x1C : 0x1B;
+            preset = panel->alternate != 0 ? 0x1C : 0x1B;
         }
     } else if (b < 0) {
         if (plain) {
             if (panel->panelState != PARTY_MODE_DIALOG) {
-                preset = panel->unk42 != 0 ? 4 : 3;
+                preset = panel->alternate != 0 ? 4 : 3;
             } else {
-                preset = panel->unk42 != 0 ? 0xBB : 0xBA;
+                preset = panel->alternate != 0 ? 0xBB : 0xBA;
             }
         } else if (panel->panelState == PARTY_MODE_FIELD && gameFlagIsSet(GAME_FLAG_PARTY_HELP_VARIANT) != 0) {
-            preset = panel->unk42 != 0 ? 0xC3 : 0xC2;
+            preset = panel->alternate != 0 ? 0xC3 : 0xC2;
         } else {
-            preset = panel->unk42 != 0 ? 0x26 : 0x25;
+            preset = panel->alternate != 0 ? 0x26 : 0x25;
         }
     } else if (plain) {
         if (panel->panelState != PARTY_MODE_DIALOG) {
-            preset = panel->unk42 != 0 ? 0x24 : 0x23;
+            preset = panel->alternate != 0 ? 0x24 : 0x23;
         } else {
-            preset = panel->unk42 != 0 ? 0xB6 : 0xB5;
+            preset = panel->alternate != 0 ? 0xB6 : 0xB5;
         }
     } else {
         if (panel->panelState != PARTY_MODE_FIELD) {
-            preset = panel->unk42 != 0 ? 0x22 : 0x21;
+            preset = panel->alternate != 0 ? 0x22 : 0x21;
         } else {
-            preset = panel->unk42 != 0 ? 0xC1 : 0xC0;
+            preset = panel->alternate != 0 ? 0xC1 : 0xC0;
         }
         buttonHelpSetPreset(preset);
         if (FUN_0029dfa8() != 0 && campCecIsActive() != 0) {
-            preset = panel->unk42 == 0 ? 0xE3 : 0xCC;
+            preset = panel->alternate == 0 ? 0xE3 : 0xCC;
         } else {
             apply = false;
         }
@@ -80,7 +78,7 @@ void FUN_0026c214(void)
     if (apply) {
         buttonHelpSetPreset(preset);
     }
-    if (panel->unk17F0 != 0) {
+    if (panel->disabled != 0) {
         FUN_002b8454(3, 0x12, 0, 1);
     } else if (buttonHelpGetEntryValue(3) == 0) {
         FUN_002b8454(3, 3, 0xB, 1);

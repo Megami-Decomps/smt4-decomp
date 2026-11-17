@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -6,7 +7,7 @@ void eventQueueAddUnique(u32 event);
 
 void gameQueueKindEvent(void)
 {
-    switch (g_gameState.eventKind) {
+    switch (g_gameState.selectedKind) {
     case 0: eventQueueAddUnique(0x010002b0); break;
     case 1: eventQueueAddUnique(0x010002b5); break;
     case 2: eventQueueAddUnique(0x010002ba); break;

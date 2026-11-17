@@ -1,8 +1,8 @@
 #include "gamedata/DevilModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "code/Code0029.h"
+#include "gamedata/Table00Lookup.h"
 extern "C" {
-DevilModelOverride* dataTable00FindById(u16);
 
 // Resolves a demon's model texture and checks that its table node is loaded.
 s32 FUN_00293f10(s32 id, s32 mapped)
@@ -17,10 +17,10 @@ s32 FUN_00293f10(s32 id, s32 mapped)
             if (record == NULL) {
                 return 0;
             }
-            DevilModelOverride* overrideRecord = dataTable00FindById((u16)id);
-            if (overrideRecord->flags & 1) {
+            Table00Record* overrideRecord = dataTable00FindById((u16)id);
+            if (overrideRecord->levelFlags & 1) {
                 table = 0x23;
-                node = overrideRecord->model;
+                node = overrideRecord->portraitId;
                 if (node >= 0x81) {
                     return 0;
                 }

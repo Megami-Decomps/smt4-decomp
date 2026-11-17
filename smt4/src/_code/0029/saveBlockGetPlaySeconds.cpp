@@ -5,7 +5,7 @@ extern "C" {
 
 u32 saveBlockGetPlaySeconds(void)
 {
-    return g_gameDataBlocks.saveBlock->unk1F4E0;
+    return g_gameDataBlocks.saveBlock->body.playSeconds;
 }
 
 } /* extern "C" */

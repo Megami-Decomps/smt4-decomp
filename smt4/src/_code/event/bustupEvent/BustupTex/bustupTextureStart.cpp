@@ -6,8 +6,8 @@
 #include "code/Code002a.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "addon/AocSystem.h"
 extern "C" {
-extern AocSystem *g_aocSystem;
 extern const char DAT_004037b0[];
 extern const char DAT_004037a0[];
 s32 gameFlagIsSet(u32 flag);

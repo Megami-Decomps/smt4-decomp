@@ -2,16 +2,15 @@
 #include <stddef.h>
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "addon/AocSystemA.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 const void *devilGetRecord(u32);
-const void *dataTable00FindById(u32);
 s32 gameFlagIsSet(u32);
-struct AocSystem;
-extern AocSystem *g_aocSystem;
-s32 recordPrepareLinkedOwner(AocSystem *, u32, s32);
+s32 recordPrepareLinkedOwner(AocSystemA *, u32, s32);
 void texTableRecordCallWithParams(s32, u32, s32, u32, u32, u32);
-void texBindBindTableNode(AocSystem *, u32, s32, u32, s32, u32, u32, u32);
+void texBindBindTableNode(AocSystemA *, u32, s32, u32, s32, u32, u32, u32);
 
 /* Resolve the demon's texture resource and dispatch or request its operation. */
 void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s32 resolveDemon)

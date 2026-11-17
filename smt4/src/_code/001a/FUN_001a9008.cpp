@@ -2,10 +2,10 @@
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapIfGlobals g_mapIf;
-extern GameState g_gameState;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
 void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
@@ -28,10 +28,10 @@ void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
     work->state.position[1] = y;
     work->state.position[2] = z;
     work->state.heading = heading;
-    if (g_gameState.unk000 == 24) {
+    if (g_gameState.mapId == 24) {
         textFormatBuffer(path, "map/all/m099_fast.bam");
     } else {
-        textFormatBuffer(path, "map/m%03d/m%03d_fast.bam", g_gameState.unk000, g_gameState.unk000);
+        textFormatBuffer(path, "map/m%03d/m%03d_fast.bam", g_gameState.mapId, g_gameState.mapId);
     }
     work->model = asdMdlManagerCreateLoaded(path, 7);
     lightOwnerRegister(work->model, 1);

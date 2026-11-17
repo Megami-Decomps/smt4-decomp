@@ -4,7 +4,6 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 s32 objectPartRunUnlessLocked(void *part);
 s32 listCursorGetRowIfUnblocked(void *part);
 PartyDamageSlotsIV *gameGetSlotTable(void);
@@ -24,40 +23,40 @@ extern "C" s32 FUN_00282ccc(void)
 {
     PartyPanelState *panel = g_partyPanel;
     s32 slot = 0;
-    if (panel->history.unk20 == 6 || panel->sceneState == 6) {
+    if (panel->pendingState == 6 || panel->sceneState == 6) {
         s32 index;
-        if (panel->unk42 != 0) {
-            void *part = panel->transitionParts.stateSixParts.secondary;
+        if (panel->alternate != 0) {
+            void *part = &panel->stockGridAlternate;
             s32 cursor = objectPartRunUnlessLocked(part);
             index = cursor + listCursorGetRowIfUnblocked(part) * 4;
         } else {
-            index = listCursorGetRowIfUnblocked(panel->transitionParts.stateSixParts.primary) * 4 + panel->unk2C * 12;
-            index += objectPartRunUnlessLocked(panel->transitionParts.stateSixParts.primary);
+            index = listCursorGetRowIfUnblocked(&panel->stockGrid) * 4 + panel->page * 12;
+            index += objectPartRunUnlessLocked(&panel->stockGrid);
         }
-        slot = (s32)panel->previewUnits[index].packedIndex;
-    } else if (panel->history.unk20 == 4 || panel->sceneState == 4) {
-        slot = selectedPartyPositionToSlot(objectPartRunUnlessLocked(panel->transitionParts.stateFourPart));
-    } else if (panel->history.unk20 == 8 || panel->sceneState == 8) {
-        void *part = panel->transitionParts.primaryPart;
-        if (panel->unk42 != 0) {
-            part = panel->transitionParts.secondaryPart;
+        slot = (s32)panel->entries[index].packedIndex;
+    } else if (panel->pendingState == 4 || panel->sceneState == 4) {
+        slot = selectedPartyPositionToSlot(objectPartRunUnlessLocked(&panel->partyGrid));
+    } else if (panel->pendingState == 8 || panel->sceneState == 8) {
+        void *part = &panel->fullGrid;
+        if (panel->alternate != 0) {
+            part = &panel->fullGridAlternate;
         }
         if (listCursorGetRowIfUnblocked(part) < 1) {
             slot = selectedPartyPositionToSlot(objectPartRunUnlessLocked(part));
         } else {
             s32 index;
-            if (panel->unk42 != 0) {
+            if (panel->alternate != 0) {
                 s32 cursor = objectPartRunUnlessLocked(part);
                 index = cursor + listCursorGetRowIfUnblocked(part) * 4;
             } else {
-                index = listCursorGetRowIfUnblocked(part) * 4 + panel->unk2C * 12;
+                index = listCursorGetRowIfUnblocked(part) * 4 + panel->page * 12;
                 index += objectPartRunUnlessLocked(part);
             }
             index -= 4;
-            slot = (s32)panel->previewUnits[index].packedIndex;
+            slot = (s32)panel->entries[index].packedIndex;
         }
-    } else if (panel->history.unk20 == 10 || panel->sceneState == 10) {
-        slot = panel->pendingSelection.selection;
+    } else if (panel->pendingState == 10 || panel->sceneState == 10) {
+        slot = panel->selection;
     }
     if (slot >= 0) {
         return (s16)gameGetUnitRecord(slot)->id;

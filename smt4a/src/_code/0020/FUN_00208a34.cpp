@@ -2,9 +2,9 @@
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "addon/AocSystemA.h"
 extern "C" {
 extern ScreenWindowTransition *g_sWin;
-extern AocSystemA *g_aocSystem;
 s32 padQueryLogicalKey(s32 category, s32 mode);
 s32 slotIsActive(u32 state);
 s32 textureIdRecordCompare(const void *key, const void *entry);

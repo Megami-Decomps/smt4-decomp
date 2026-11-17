@@ -11,14 +11,14 @@ struct SubRecordTable {
 
 static __inline SubRecordTable *getSubRecordTable()
 {
-    return reinterpret_cast<SubRecordTable *>(&g_gameDataBlocks.saveBlock->save.sub);
+    return reinterpret_cast<SubRecordTable *>(&g_gameDataBlocks.saveBlock->body);
 }
 
 static __inline SavedRecord100 *getSavedRecord(u32 index)
 {
     SavedRecord100 *record = NULL;
     if (index < 32) {
-        GameDataSub *sub = &g_gameDataBlocks.saveBlock->save.sub;
+        GameSaveBodyA *sub = &g_gameDataBlocks.saveBlock->body;
         record = &reinterpret_cast<SubRecordTable *>(sub)->records[index];
     }
     return record;

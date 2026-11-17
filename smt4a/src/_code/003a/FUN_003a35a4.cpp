@@ -1,5 +1,6 @@
 /* NON_MATCHING: named current-map comparison fixes loads/registers; cmp operands remain reversed. */
 #include "gamedata/NaviDestinationRecord.h"
+#include "game/GameStateA.h"
 #include "shard/NaviMain.h"
 #include "map/mapDepart.h"
 extern "C" {
@@ -9,7 +10,6 @@ void pair20638Set(NaviTransitionState*, s32, s32, s32);
 void menuEnterState11(NaviTransitionState*);
 void FUN_0048d248(NaviTransitionState*, s32);
 extern NaviMainA* g_naviMain;
-extern GameStateA g_gameState;
 
 void FUN_003a35a4(void)
 {
@@ -26,7 +26,7 @@ void FUN_003a35a4(void)
     if (currentMap != destination->mapId) {
         menuEnterState11(&main->transition);
     } else {
-        g_gameState.navigation.naviMapPending = 1;
+        g_gameState.naviMapPending = 1;
         FUN_0048d248(&main->transition, destination->unk32);
     }
 }

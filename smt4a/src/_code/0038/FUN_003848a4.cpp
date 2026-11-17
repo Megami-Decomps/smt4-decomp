@@ -1,8 +1,8 @@
 /* NON_MATCHING: destination selection is correct; global-base reuse and shared tail-call layout differ. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-extern GameStateA g_gameState;
 extern s32 g_mapSelection;
 void asdSequenceRequest(s32 sequence, const void* argument, u32 size);
 

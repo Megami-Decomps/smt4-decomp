@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table00Lookup.h"
 
 struct Table02Record;
 struct Table02LinkedIds {
@@ -6,15 +7,9 @@ struct Table02LinkedIds {
     u16 ids[6];
     u8 unk20[8];
 };
-struct Table00FlagEntry {
-    u8 unk00[2];
-    u16 flags;
-};
 
 extern "C" {
 Table02Record *dataTable02GetRecordWithAocPackage(s32 index);
-const Table00FlagEntry *dataTable00FindById(u16 id);
-
 
 u32 dataTable02RecordHasFlaggedLink(s32 index)
 {
@@ -23,8 +18,8 @@ u32 dataTable02RecordHasFlaggedLink(s32 index)
         for (s32 slot = 0; slot < 6; ++slot) {
             u16 id = record->ids[slot];
             if (id != 0) {
-                const Table00FlagEntry *entry = dataTable00FindById(id);
-                if (entry != NULL && (entry->flags & 0x8000) != 0) {
+                const Table00RecordA *entry = dataTable00FindById(id);
+                if (entry != NULL && (entry->level & 0x8000) != 0) {
                     return 1;
                 }
             }

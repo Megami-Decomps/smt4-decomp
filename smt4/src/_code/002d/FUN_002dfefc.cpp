@@ -4,6 +4,7 @@
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GameDataAccess_VariantE.h"
 #include "shard/SaveWork.h"
+#include "game/GameState.h"
 
 struct MapAppDiscoveryState {
     u8 unk000[0xD9C];
@@ -13,7 +14,6 @@ typedef char MapAppDiscoveryStateOffsetCheck[
     offsetof(MapAppDiscoveryState, discovered) == 0xD9C ? 1 : -1];
 
 extern "C" {
-extern s32 g_gameState;
 extern char DAT_004b7608[];
 extern const char DAT_00404464[];
 u32 FUN_002bfdd4(void);
@@ -40,7 +40,7 @@ void FUN_002dfefc(s32 suppressNotification)
             }
         }
     }
-    if (suppressNotification == 0 && discovered && g_gameState != 0x24 && gameFlagIsSet(0x408) != 0) {
+    if (suppressNotification == 0 && discovered && g_gameState.mapId != 0x24 && gameFlagIsSet(0x408) != 0) {
         DAT_004b7608[0] = '\0';
         textFormatBuffer(DAT_004b7608, DAT_00404464);
         MapIfTimer *timer = g_mapIfTimer;

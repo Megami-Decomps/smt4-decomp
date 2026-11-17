@@ -1,22 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00225ddc` (_code @ 0x225ddc, 0x75c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "code/Code0013.h"
 struct ScriptHolder;
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x8];
-    unsigned int f005f1604; /* 0x008 */
-    u8 pad00c[0x8];
-    int f005f1610; /* 0x014 */
-    u8 pad018[0x44];
-    unsigned int f005f1658; /* 0x05c */
-};
-extern GameStateView g_gameState;
-
 
 int asdSequenceRequest(...);
 int jobStop(...);
@@ -66,8 +56,6 @@ extern unsigned int *g_aocJob; /* 0x57f568 */
 extern unsigned int DAT_005e1f70; /* 0x5e1f70 */
 extern unsigned int DAT_005e1f74; /* 0x5e1f74 */
 extern unsigned char DAT_005e1f78; /* 0x5e1f78 */
-
-
 
 extern signed char DAT_005f1b70; /* 0x5f1b70 */
 extern unsigned int DAT_005f1b74; /* 0x5f1b74 */
@@ -124,7 +112,6 @@ extern int gameBlockByte27E98Is1To3(void);
 extern unsigned int scriptHolderUpdateForward(ScriptHolder *);
 /* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: FUN_0047e430. */
-
 
 unsigned int FUN_00225ddc(void)
 
@@ -357,13 +344,13 @@ unsigned int FUN_00225ddc(void)
       return 0;
     }
     if (DAT_005f1b70 != '\0') {
-      if (g_gameState.f005f1610 == 1) {
+      if (g_gameState.resumeMode == 1) {
         asdSequenceRequest(6,0);
       }
-      if (g_gameState.f005f1610 == 2) {
+      if (g_gameState.resumeMode == 2) {
         asdSequenceRequest(8,0);
       }
-      if (g_gameState.f005f1610 == 3) {
+      if (g_gameState.resumeMode == 3) {
         temp_v5 = romwright_piece_2_2((short)DAT_005f1b78,(short)DAT_005f1b74 - 200);
         asdSequenceRequest(0xe,&temp_v5,4);
       }
@@ -381,7 +368,7 @@ unsigned int FUN_00225ddc(void)
       }
       else {
         FUN_00324c48((unsigned char)pcVar7[1] + 100,pcVar7[2],0xffffffff);
-        g_gameState.f005f1604 = 0xffffffff;
+        g_gameState.currentObjectId = 0xffffffff;
         temp_v2 = 8;
         asdSequenceRequest(temp_v2,0);
       }
@@ -392,7 +379,7 @@ unsigned int FUN_00225ddc(void)
       asdSequenceRequest(temp_v2,0);
     }
     DAT_005f1b70 = '\0';
-    g_gameState.f005f1658 = 0;
+    g_gameState.scriptValue = 0;
     FUN_004731d8();
   }
   jobStop(*g_aocJob,0);

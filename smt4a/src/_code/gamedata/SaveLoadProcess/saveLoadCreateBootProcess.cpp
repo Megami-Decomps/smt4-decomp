@@ -1,5 +1,5 @@
 #include "gamedata/SaveLoadProcessState.h"
-#include "shard/GameDataBlocks.h"
+#include "gamedata/GameSaveBlocks.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -10,7 +10,7 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 cl
 void gameDataAddHomeButtonHold(s32 count);
 void gameDataBlocksAddFlags(u32 flags);
 void gameDataBlocksOrFlagsClearUnk02(s32 enabled);
-GameSaveData *gameDataBlocksGetSaveData(void);
+GameSaveBodyA *gameDataBlocksGetSaveData(void);
 s32 FUN_0037116c(void *work);
 void work8BufDestroy(void *work);
 void saveLoadDrawActivityIcon(void *work);
@@ -35,7 +35,7 @@ u32 saveLoadCreateBootProcess(void)
     gameDataBlocksAddFlags(1);
     gameDataBlocksOrFlagsClearUnk02(1);
     work->result = 0;
-    work->option = gameDataBlocksGetSaveData()->metadata.option;
+    work->option = gameDataBlocksGetSaveData()->option;
     if (work->option == 0) {
         work->option = 1;
     }

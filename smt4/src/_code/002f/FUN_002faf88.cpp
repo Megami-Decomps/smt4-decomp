@@ -1,15 +1,15 @@
-/* NON_MATCHING: now through g_gameState.jump.request.first; retail keeps the first-branch test in r0 (reloading the game-state literal afterwards) and reaches the request word through a second literal, the build keeps one base. */
+/* NON_MATCHING: now through g_gameState.jumpRequest.selection.group; retail keeps the first-branch test in r0 (reloading the game-state literal afterwards) and reaches the request word through a second literal, the build keeps one base. */
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern GameState g_gameState;
 
 // Select the destination sequence, preserving map return data when needed.
 void FUN_002faf88(void)
 {
     s32 sequenceArgument;
-    if (g_gameState.unk2F8Byte != 0) {
+    if (g_gameState.map.savedLocationSet != 0) {
         if ((s32)g_gameState.targetMapId >= 200) {
             sequenceArgument = g_gameState.targetMapId - 200;
             g_gameState.savedAreaId = 0;
@@ -24,10 +24,10 @@ void FUN_002faf88(void)
             g_gameState.savedMapId = g_gameState.targetMapId;
             g_gameState.savedAreaId = g_gameState.targetAreaId;
             g_gameState.savedPosition = g_gameState.targetPosition;
-            g_gameState.unk314 = g_gameState.unk330Scalar;
+            g_gameState.savedHeading = g_gameState.targetHeading;
         }
     } else {
-        s32 requestedMap = (s32)g_gameState.jump.request.first;
+        s32 requestedMap = (s32)g_gameState.jumpRequest.selection.group;
         if (requestedMap == -1) {
             sequenceArgument = 3;
             asdSequenceRequest(14, &sequenceArgument, sizeof(sequenceArgument));

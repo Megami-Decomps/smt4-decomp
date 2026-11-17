@@ -5,6 +5,6 @@
 /* Game-data, flag and record accessors. */
 extern "C" {
 
-bool gameRecordCopy(u32 recordIndex, RecordValue* destination);
+bool gameRecordCopy(u32 recordIndex, GameSavedItem* destination);
 
 } /* extern "C" */

@@ -1,6 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "ui/PartyPanelState.h"
+#include "ui/PartyPanelStateA.h"
 #include "util/BitsAndBytes.h"
 
 struct PanelSpriteOrigin {
@@ -10,7 +10,6 @@ struct PanelSpriteOrigin {
 };
 
 extern "C" {
-extern PartyPanelStateA *g_partyPanel;
 extern RenderCtxA *g_renderCtx;
 PanelSpriteOrigin *asdTMTexTableEntryAt(u32 table, s32 index);
 void efctSetSpeed(f32 speed);
@@ -22,7 +21,7 @@ void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted
     PartyPanelStateA *panel = g_partyPanel;
     PanelSpriteOrigin *origin = asdTMTexTableEntryAt(0x11, index + 0x57);
     if (highlighted) {
-        efctSetSpeed(vec2GetSpeed(panel->animation.speedObject) * speed);
+        efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
         RenderCtxA *context = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackSet(&context->stackB, state);

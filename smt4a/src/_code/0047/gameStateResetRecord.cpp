@@ -1,9 +1,7 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-
-extern GameStateA g_gameState;
-
 
 void gameStateResetRecord(GameStateRecord *record)
 {
@@ -15,7 +13,7 @@ void gameStateResetRecord(GameStateRecord *record)
     record->unk2A = 0;
     record->unk2E = 0;
     record->unk32 = 0;
-    g_gameState.clear.unk5C = 0;
+    g_gameState.scriptValue = 0;
 }
 
 } /* extern "C" */

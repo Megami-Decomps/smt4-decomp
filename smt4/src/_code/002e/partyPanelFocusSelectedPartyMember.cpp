@@ -1,32 +1,12 @@
 #include "ui/PartyPanelState.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
-struct PartyPanelRosterEntry {
-    s32 unit;
-    u32 unk04;
-};
-/* The party panel seen as the selection fields this function reads (PartyPanelState's own unk2C is a u32). */
-struct PartyPanelSelectionFields {
-    /* 0x000 */ u8 unk000[0x2C];
-    /* 0x02C */ s32 expanded;     /* page flag: 1 shows the second roster page */
-    /* 0x030 */ u8 unk030[0x12];
-    /* 0x042 */ u8 cursorOnly;    /* move only the alternate cursor */
-    /* 0x043 */ u8 unk043[0x62D];
-    /* 0x670 */ s32 partyIndex;
-    /* 0x674 */ u8 unk674[0xc4];
-    /* 0x738 */ PartyPanelRosterEntry roster[24];
-    /* 0x7F8 */ u8 unk7f8[0x148];
-    /* 0x940 */ ScrollSelectionOwner regular;
-    ScrollSelectionOwner alternate;
-};
-
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 u8 *gameGetSlotTable();
 void timerStart(void *, s32, s32);
 void slotPlacementAssignSlotAndPosition(PartyPanelWidget *, u32);
 void FUN_002937e0();
-void scrollOwnerSelectIndex(ScrollSelectionOwner *, s32);
+void scrollOwnerSelectIndex(GridNavigation *, s32);
 void scrollListSetSelectionMarkChanged(ScrollSelection *, s32);
 }
 
@@ -36,13 +16,13 @@ static void partyPanelCollapse(void)
     PartyPanelState *panel = g_partyPanel;
     s32 i;
 
-    panel->unk2C ^= 1;
-    timerStart(panel->timerC, 5, 0);
+    panel->page ^= 1;
+    timerStart(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 5, 0);
     for (i = 0; i < 4; i++) {
-        slotPlacementAssignSlotAndPosition(panel->characters[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->characters[i], panel->page);
     }
     for (i = 0; i < 24; i++) {
-        slotPlacementAssignSlotAndPosition(panel->demons[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->demons[i], panel->page);
     }
     FUN_002937e0();
 }
@@ -53,13 +33,13 @@ static void partyPanelExpand(void)
     PartyPanelState *panel = g_partyPanel;
     s32 i;
 
-    panel->unk2C ^= 1;
-    timerStart(panel->timerC, 4, 0);
+    panel->page ^= 1;
+    timerStart(&panel->sprites[PARTY_PANEL_SPRITE_PAGE], 4, 0);
     for (i = 0; i < 4; i++) {
-        slotPlacementAssignSlotAndPosition(panel->characters[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->characters[i], panel->page);
     }
     for (i = 0; i < 24; i++) {
-        slotPlacementAssignSlotAndPosition(panel->demons[i], panel->unk2C);
+        slotPlacementAssignSlotAndPosition(panel->demons[i], panel->page);
     }
     FUN_002937e0();
 }
@@ -69,43 +49,42 @@ static void partyPanelExpand(void)
 extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
 {
     PartyPanelState *panel = g_partyPanel;
-    PartyPanelSelectionFields *fields = reinterpret_cast<PartyPanelSelectionFields *>(panel);
     const s8 *table = reinterpret_cast<const s8 *>(gameGetSlotTable());
     u32 changed = 0;
 
-    if (fields->partyIndex > 0) {
-        s32 unit = table[0x9107 + fields->partyIndex];
+    if (panel->partySlot > 0) {
+        s32 unit = table[0x9107 + panel->partySlot];
         if (unit >= 0) {
             s32 i;
             for (i = 0; i < 24; i++) {
-                s32 rosterUnit = fields->roster[i].unit;
+                s32 rosterUnit = static_cast<s32>(panel->entries[i].packedIndex);
                 if (unit == rosterUnit) {
                     s32 state;
-                    if (fields->cursorOnly != 0) {
-                        scrollOwnerSelectIndex(&fields->alternate, i % 4);
-                        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&fields->alternate), i / 4);
+                    if (panel->alternate != 0) {
+                        scrollOwnerSelectIndex(&panel->stockGridAlternate, i % 4);
+                        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->stockGridAlternate), i / 4);
                         break;
                     }
                     if (i < 12) {
                         if (force == 0) {
-                            state = fields->expanded;
+                            state = panel->page;
                         } else {
                             state = 0;
-                            fields->expanded = 0;
+                            panel->page = 0;
                         }
                         if (force == 0 && state == 1) {
                             changed = 1;
                             partyPanelCollapse();
                         }
-                        scrollOwnerSelectIndex(&fields->regular, i % 4);
-                        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&fields->regular), i / 4);
+                        scrollOwnerSelectIndex(&panel->stockGrid, i % 4);
+                        scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->stockGrid), i / 4);
                         break;
                     }
                     if (force == 0) {
-                        state = fields->expanded;
+                        state = panel->page;
                     } else {
-                        fields->expanded = 1;
-                        state = fields->expanded;
+                        panel->page = 1;
+                        state = panel->page;
                     }
                     if (force == 0) {
                         if (state == 0) {
@@ -114,8 +93,8 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
                         }
                     }
                     i -= 12;
-                    scrollOwnerSelectIndex(&fields->regular, i % 4);
-                    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&fields->regular), i / 4);
+                    scrollOwnerSelectIndex(&panel->stockGrid, i % 4);
+                    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->stockGrid), i / 4);
                     break;
                 }
             }

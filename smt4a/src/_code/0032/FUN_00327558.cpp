@@ -1,18 +1,11 @@
 #include "common.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
 typedef struct DataTableEntry {
     /* 0x00 */ u8 data[0x14];
 } DataTableEntry;
-
-typedef struct AocSystem {
-    /* 0x000 */ u8 unk000[0x3FC];
-    /* 0x3FC */ u32 entryCount;
-    /* 0x400 */ DataTableEntry *entries;
-} AocSystem;
-
-extern AocSystem *g_aocSystem;
 
 u32 dataTableGet(u32 id, u32 section);
 u32 dataTableGetCount(u32 table);
@@ -28,9 +21,9 @@ DataTableEntry *FUN_00327558(u32 index)
     if (index < count) {
         return entries + index;
     }
-    AocSystem *aoc = g_aocSystem;
-    u32 extra = aoc->entryCount;
-    DataTableEntry *extraEntries = aoc->entries;
+    AocSystemA *aoc = g_aocSystem;
+    u32 extra = aoc->table23[3].count;
+    DataTableEntry *extraEntries = (DataTableEntry *)aoc->table23[3].records;
     return index < extra + count ? extraEntries + (index - count) : NULL;
 }
 

@@ -3,7 +3,7 @@
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-GameDataSub *gameDataBlocksGetSaveData(void);
+GameSaveBodyA *gameDataBlocksGetSaveData(void);
 void uiSpriteStateInitFromSource(void *sprite, s32 kind, s32 flags, void *context, u32 parameter, f32 alpha);
 void pairSetFirstResetSecond(void *sprite, s32 state);
 void uiSpriteSelectAnim(void *sprite, s32 animation);

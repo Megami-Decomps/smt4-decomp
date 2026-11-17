@@ -1,6 +1,7 @@
 /* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
 #include "map/mapDepart.h"
 #include "util/TrigF32.h"
+#include "game/GameState.h"
 
 /* The map scene as the overview camera drives it. */
 #define DEGREES_TO_RADIANS 0.017453292f
@@ -21,17 +22,6 @@ struct OverviewScene {
     /* 0x6c */ u8 unk6c;
 };
 
-/* The part of the game state that holds the overview's start pose. */
-struct OverviewGameState {
-    /* 0x000 */ u8 unk000[0x80];
-    /* 0x080 */ s32 overviewRecord;
-    /* 0x084 */ MapVector overviewPosition;
-    /* 0x090 */ f32 overviewHeading;
-    /* 0x094 */ u8 unk094[0xc];
-    /* 0x0a0 */ f32 overviewDirection;
-    /* 0x0a4 */ u8 unk0a4[0x186];
-    /* 0x22a */ u8 transitionCompleted;
-};
 
 /* The controller whose pose the overview hands back. */
 struct OverviewController {
@@ -44,7 +34,6 @@ struct OverviewController {
 extern "C" {
 extern OverviewScene *g_lmapScene;
 extern OverviewController *DAT_004474f4;
-extern OverviewGameState g_gameState;
 
 void mapEaseSceneHeading(void);
 void FUN_001b4478(f32 x, f32 y, f32 z, f32 direction);
@@ -80,8 +69,8 @@ void FUN_002e8be0(void)
         scene->cameraSpeed = 3.0f;
         scene->unk6c = 0;
         scene->target = g_gameState.overviewPosition;
-        g_lmapScene->target.x = g_lmapScene->target.x + mathRemPio2f(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
-        g_lmapScene->target.z = g_lmapScene->target.z + FUN_00282390(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->target.x = g_lmapScene->target.x + mathRemPio2f(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->target.z = g_lmapScene->target.z + FUN_00282390(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->targetHeading = g_gameState.overviewHeading;
         FUN_0027fc14(11);
         DAT_004474f4->mode = -2;
@@ -93,7 +82,7 @@ void FUN_002e8be0(void)
         viewPosition.z = g_gameState.overviewPosition.z;
         viewPosition.x = viewPosition.x + mathRemPio2f(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         viewPosition.z = viewPosition.z + FUN_00282390(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        FUN_001b4478(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.overviewDirection);
+        FUN_001b4478(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.heading);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
         break;
@@ -127,7 +116,7 @@ void FUN_002e8be0(void)
         }
         break;
     case 10:
-        g_gameState.transitionCompleted = 0;
+        g_gameState.map.transitionCompleted = 0;
         scene->cameraMode = 8;
         scene->cameraSpeed = 5.0f;
         FUN_0027fca0(1);

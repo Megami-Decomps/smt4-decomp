@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00231dec` (_code @ 0x231dec, 0x768 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -35,7 +36,6 @@ typedef struct {
 extern unsigned char LAB_00232470; /* 0x232470 */
 extern int DAT_0044cdd8; /* 0x44cdd8 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -159,7 +159,7 @@ void FUN_00231dec(int param_1)
     FUN_00231bcc(param_1 + 0x164,temp_v9,0,0,DAT_0044cdd8,1);
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0xfad);
-  if (((g_gameState != 0x13) || ((DAT_0049f920 != 6 && DAT_0049f920 != 7) && DAT_0049f920 != 8)) &&
+  if (((g_gameState.mapId != 0x13) || ((DAT_0049f920 != 6 && DAT_0049f920 != 7) && DAT_0049f920 != 8)) &&
      ((*(unsigned int *)(param_1 + 0x10) & 0x1000) == 0)) {
     if (*(char *)(param_1 + 0xc) != '\0') {
       NaviMain_GetCurrentMap(temp_v18);

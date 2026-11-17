@@ -1,5 +1,6 @@
 /* NON_MATCHING: the loaded-flag constant uses R1 instead of retail's R2. */
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 struct DevilResourceHeader {
     u32 magic;
@@ -31,7 +32,6 @@ typedef char DevilResourceLayoutCheck[sizeof(DevilResourceHeader) == 0x28 &&
     offsetof(DevilResourceWork, loaded) == 0x3c ? 1 : -1];
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
 extern const char DAT_0052726c[];
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);

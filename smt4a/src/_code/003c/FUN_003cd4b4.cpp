@@ -3,9 +3,9 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA* g_aocSystem;
 s32 gameFlagIsSet(s32 flag);
 
 struct AvailabilityExtension {
@@ -41,7 +41,7 @@ static Table23AvailabilityRecord *availabilityRecordAt(u32 index)
 // Find the first base or add-on availability rule satisfied by the current flags and party.
 Table23AvailabilityRecord* FUN_003cd4b4(s32 id)
 {
-    // This table lies beyond the canonical AocSystem prefix in both games.
+    // This table lies beyond the canonical AocSystemA prefix in both games.
     for (u32 index = 0;
          (s32)index < (s32)tableSectionCount(0x23, 6) +
                          reinterpret_cast<AvailabilityExtension*>(g_aocSystem)->records.count;

@@ -2,9 +2,9 @@
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "addon/aocMain.h"
 #include "shard/W8X15_ModelStatePlayer.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
 void asdTextureRelease(AsdTexture *texture);
 void asdTMTexTableReleaseNode(s32 mode, s32 index);
 void packageFileDisableByKindName(AocSystemA *system, s32 mode, s32 index);

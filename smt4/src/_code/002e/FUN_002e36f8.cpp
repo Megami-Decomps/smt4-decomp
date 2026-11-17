@@ -11,7 +11,6 @@ static void setWidgetExcluded(PartyPanelWidget *widget, u8 excluded)
     reinterpret_cast<PartyPanelExclusionWidgetView *>(widget)->excluded = excluded;
 }
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 const StatBlock *partyMemberFindById(u16);
 const StatBlock *gameGetUnitRecord(s32);
 void __aeabi_memset4(void *, u32, s32);
@@ -21,21 +20,21 @@ void FUN_002e36f8()
     PartyPanelState *panel = g_partyPanel;
     SaveSlotTableIV *slots = gameGetSlotTable();
     for (s32 i = 0; i < 4; ++i) {
-        panel->availability.activeSlots[i] = 0;
+        panel->activeSlots[i] = 0;
         setWidgetExcluded(panel->characters[i], 0);
     }
     for (s32 i = 0; i < 24; ++i) {
-        panel->previewUnits[i].available = 0;
+        panel->entries[i].available = 0;
         setWidgetExcluded(panel->demons[i], 0);
     }
-    __aeabi_memset4(panel->availability.activeSlots, 4, 1);
-    panel->availability.activeSlots[0] = 0;
+    __aeabi_memset4(panel->activeSlots, 4, 1);
+    panel->activeSlots[0] = 0;
     for (s32 i = 0; i < 24; ++i) {
-        if (static_cast<s32>(panel->previewUnits[i].packedIndex) < 0)
-            panel->previewUnits[i].available = 1;
+        if (static_cast<s32>(panel->entries[i].packedIndex) < 0)
+            panel->entries[i].available = 1;
     }
-    for (s32 i = 0; i < panel->exclusions.count; ++i) {
-        s32 id = panel->exclusions.ids[i];
+    for (s32 i = 0; i < panel->fusionParentCount; ++i) {
+        s32 id = panel->fusionParentIds[i];
         if (id < 0)
             continue;
         const StatBlock *excluded = partyMemberFindById(id);
@@ -43,14 +42,14 @@ void FUN_002e36f8()
             continue;
         for (s32 slot = 0; slot < 3; ++slot) {
             if (slots->active[slot] >= 0 && gameGetUnitRecord(slots->active[slot])->id == excluded->id) {
-                panel->availability.activeSlots[slot + 1] = 1;
+                panel->activeSlots[slot + 1] = 1;
                 setWidgetExcluded(panel->characters[slot + 1], 1);
             }
         }
         for (s32 slot = 0; slot < 24; ++slot) {
-            s32 index = panel->previewUnits[slot].packedIndex;
+            s32 index = panel->entries[slot].packedIndex;
             if (index >= 0 && gameGetUnitRecord(index)->id == excluded->id) {
-                panel->previewUnits[slot].available = 1;
+                panel->entries[slot].available = 1;
                 setWidgetExcluded(panel->demons[slot], 1);
             }
         }

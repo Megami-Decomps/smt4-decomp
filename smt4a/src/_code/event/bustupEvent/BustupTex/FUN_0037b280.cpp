@@ -8,6 +8,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "event/bustupEvent/BustupTex.h"
+#include "addon/AocSystemA.h"
 
 // The animation vectors follow the established texture-work prefix.
 struct BustupTextureCreateWorkA {
@@ -18,7 +19,6 @@ struct BustupTextureCreateWorkA {
 extern "C" {
 extern const char DAT_0052f77c[]; // Allocation source path.
 extern const char DAT_0052f76c[]; // Shared "EVE_BustupTex" process name.
-extern AocSystemA* g_aocSystem;
 void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 s32 FUN_00162ea4(void);
 s32 aocRunByName(AocSystemA* system, s32 table, s32 node, u32 option);

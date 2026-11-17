@@ -4,6 +4,7 @@
 #include "classes/SelectionState.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "game/GameState.h"
 
 /* The quest center's globals as the update reads them (qcMain.h's QcGlobals is the 8-byte head). */
 struct QcMainState {
@@ -37,16 +38,10 @@ struct QuestEntry {
     static void *operator new(u32 size);
 };
 
-/* The game state's current-area field the finishing sequence reads. */
-struct QcGameState {
-    /* 0x000 */ u8 unk000[0x2fc];
-    /* 0x2fc */ s32 camera;
-};
 
 extern "C" {
 extern QcMainState g_qcMain;
 extern QcStartSequence DAT_0044dbb0[3];
-extern QcGameState g_gameState;
 void *asdOperatorNew(u32 size);
 s32 gameFlagIsSet(u32 flag);
 s32 gameStateIsFlagSetAndLarge(void);
@@ -181,7 +176,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         if ((work->entry == NULL || entryRequestSequence() == 0) && FUN_00287304() != 0 &&
             g_qcMain.resident == 0) {
             if (gameStateIsFlagSetAndLarge()) {
-                s32 argument = g_gameState.camera - 200;
+                s32 argument = g_gameState.savedMapId - 200;
                 asdSequenceRequest(0xe, &argument, 4);
             } else {
                 asdSequenceRequest(6, NULL, 0);

@@ -85,7 +85,7 @@ void FUN_002a5e7c(u32 id)
         }
     }
     if (id <= COMPENDIUM_MAX_ID) {
-        CompendiumRecord *entry = (CompendiumRecord *)&g_gameDataBlocks.saveBlock->inventory.items[id];
+        CompendiumRecord *entry = (CompendiumRecord *)&g_gameDataBlocks.saveBlock->body.items[id];
         CompendiumRecord record;
         s32 listed;
         s32 seen;
@@ -124,7 +124,7 @@ void FUN_002a5e7c(u32 id)
             if (info != NULL && (info->flags & COMPENDIUM_LISTED) != 0) {
                 listed++;
                 if (info->id <= COMPENDIUM_MAX_ID &&
-                    (g_gameDataBlocks.saveBlock->inventory.items[info->id].bits & COMPENDIUM_SEEN) != 0) {
+                    (g_gameDataBlocks.saveBlock->body.items[info->id].bits & COMPENDIUM_SEEN) != 0) {
                     seen++;
                 }
             }

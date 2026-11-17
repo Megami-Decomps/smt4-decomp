@@ -1,24 +1,11 @@
 #include "addon/aocMain.h"
 #include "shard/W4_Match3_AocMainA.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
-/* One downloadable package record (0x50 bytes). */
-typedef struct AocPackageRecord {
-    u8 unk00[0x50];
-} AocPackageRecord;
-
-/* One item of a package (0x40 bytes); the first byte is its type. */
-typedef struct AocPackageItem {
-    s8 type;
-    u8 unk01[0x3F];
-} AocPackageItem;
-
 s32 asdFsIsSdCardDetected(void);
 s32 objGetFlagBit16(AocMainA *main);
-s32 packageEntryIsLoaded(AocPackageRecord *package);
-AocPackageItem *packageEntryGetDirectory(AocPackageRecord *package);
-u32 packageEntryGetFileCount(AocPackageRecord *package);
 
 /* Counts the items of the given type across all valid packages; without an SD card clears AOC flag 0x10000 and returns 0. */
 s32 aocCountPackageItemsOfType(AocSystemA *system, s32 type)
@@ -34,16 +21,16 @@ s32 aocCountPackageItemsOfType(AocSystemA *system, s32 type)
         return 0;
     }
     count = 0;
-    for (i = 0; i < system->packages.count; i++) {
-        AocPackageRecord *package = &((AocPackageRecord *)system->packages.entries)[i];
+    for (i = 0; i < system->packageCount; i++) {
+        AocPackage *package = &system->packages[i];
 
         if (packageEntryIsLoaded(package)) {
-            AocPackageItem *items = packageEntryGetDirectory(package);
+            AocPackageDirectoryEntry *items = packageEntryGetDirectory(package);
             u32 itemCount = packageEntryGetFileCount(package);
             u32 j;
 
             for (j = 0; j < itemCount; j++) {
-                if (items[j].type == type) {
+                if (items[j].kind == type) {
                     count++;
                 }
             }

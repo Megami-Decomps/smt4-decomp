@@ -1,13 +1,12 @@
 #include "shard/Shard0046.h"
-#include "addon/AocSystem.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
-extern s32 packageFindRecordByName(u32 a, u32 type, u32 b);
-
-u8 aocHasType36(u32 a, u32 b)
+/* Whether a package has a kind-0x36 record keyed `id`. */
+u8 aocHasType36(AocSystemA *system, u32 id)
 {
-    return packageFindRecordByName(a, 0x36, b) != 0;
+    return packageFindRecordByName(system, 0x36, id) != NULL;
 }
 
 } /* extern "C" */

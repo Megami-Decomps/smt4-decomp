@@ -1,12 +1,7 @@
 #include "common.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-
-/* The content system as the AI script loader sees it: a queued add-on script overrides the file. */
-typedef struct AocScriptOverride {
-    /* 0x000 */ u8 unk000[0x444];
-    /* 0x444 */ s32 pendingScript; // -1 when none
-} AocScriptOverride;
 
 typedef struct BtlAiScriptLoader {
     /* 0x00 */ void *file;
@@ -21,9 +16,7 @@ typedef struct ScriptProcess {
     /* 0x108 */ s32 running;
 } ScriptProcess;
 
-extern AocScriptOverride *g_aocSystem;
-
-void aocQueueType1d(AocScriptOverride *system, s32 script, BtlAiScriptLoader *loader, u8 *request);
+void aocQueueType1d(AocSystem *system, s32 script, BtlAiScriptLoader *loader, u8 *request);
 void asdLoadFileAsyncSimple(u8 *request, BtlAiScriptLoader *loader, s32 flags);
 ScriptProcess *scrScriptProcessCreate(void *file, s32 arg);
 void scrScriptProcessStartEntry(void *process, s32 index);
@@ -38,9 +31,9 @@ s32 btlAiScriptLoadStep(BtlAiScriptLoader *loader)
     case 0: // idle
         break;
     case 1:
-        if (g_aocSystem->pendingScript != -1) {
-            aocQueueType1d(g_aocSystem, g_aocSystem->pendingScript, loader, loader->request);
-            g_aocSystem->pendingScript = -1;
+        if (g_aocSystem->aiDemonId != -1) {
+            aocQueueType1d(g_aocSystem, g_aocSystem->aiDemonId, loader, loader->request);
+            g_aocSystem->aiDemonId = -1;
         } else {
             asdLoadFileAsyncSimple(loader->request, loader, 0);
         }

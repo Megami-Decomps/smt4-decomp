@@ -1,10 +1,10 @@
 #include "gamedata/ItemPriorityRecords.h"
+#include "gamedata/EquipmentRecordA.h"
 #include "addon/AocEntryKind.h"
 #include "gamedata/DataTableAccess_VariantD_Table8Record.h"
 
 extern "C" {
 ContentItemPriorityRecord *contentEntryFindById2(u32 id);
-EquipmentItemPriorityRecord *dataTable08Sub2GetRecord(u32 id);
 u16 recordGetCompareValue(const u16 *id);
 }
 
@@ -27,7 +27,7 @@ static inline u32 itemPriority(const u16 *item)
         break;
     case 1:
     case 12: {
-        // A word alias inside Table8Record's +0x42 padding would shift union alignment.
+        // A word alias inside ConsumableRecordA's +0x42 padding would shift union alignment.
         struct PriorityView { u8 unk00[0x44]; u32 properties; };
         typedef char PriorityOffsetCheck[offsetof(PriorityView, properties) == 0x44 ? 1 : -1];
         priority = ((PriorityView *)dataTable8FindRecord(id))->properties & 0xFF;

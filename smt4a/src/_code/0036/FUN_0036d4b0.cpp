@@ -17,7 +17,7 @@ static __inline SavedRecord100 *getSavedRecord(u32 index)
 {
     SavedRecord100 *record = NULL;
     if (index < 32) {
-        SavedRecordBody *body = (SavedRecordBody *)&g_gameDataBlocks.saveBlock->save.sub;
+        SavedRecordBody *body = (SavedRecordBody *)&g_gameDataBlocks.saveBlock->body;
         record = &body->records[index];
     }
     return record;
@@ -29,7 +29,7 @@ static __inline void setSavedRecord(u32 index, const SavedRecord100 *record)
     if (index >= 32) {
         return;
     }
-    SavedRecordBody *body = (SavedRecordBody *)&g_gameDataBlocks.saveBlock->save.sub;
+    SavedRecordBody *body = (SavedRecordBody *)&g_gameDataBlocks.saveBlock->body;
     memcpySrcFirst(record, &body->records[index], sizeof(SavedRecord100));
 }
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d9b50` (_code @ 0x2d9b50, 0x12e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
@@ -64,7 +65,6 @@ typedef struct {
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned int DAT_005f1608; /* 0x5f1608 */
@@ -136,7 +136,6 @@ extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: flagValueSub. */
 extern int inputIsQuestCancelPressed(void);
-
 
 /* WARNING: Removing unreachable block (ram,0x002da738) */
 
@@ -222,7 +221,7 @@ void FUN_002d9b50(void)
           *(unsigned int *)(temp_v6 + 0x26c) = 0;
           FUN_003024a0(1);
         }
-        if (g_gameState == 0x18) {
+        if (g_gameState.mapId == 0x18) {
           temp_v6 = *(int *)(temp_v0 + 0x1520);
           if (temp_v6 != 0) {
             gameFlagSetValue(temp_v6, 1, 1);
@@ -554,7 +553,7 @@ LAB_002da3cc:
           temp_v6 = mapTrapGetUnk38();
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v6 + 0x12);
-          if ((g_gameState != temp_v3) || (DAT_005f1600 != *(unsigned short *)(temp_v6 + 0x14))) {
+          if ((g_gameState.mapId != temp_v3) || (DAT_005f1600 != *(unsigned short *)(temp_v6 + 0x14))) {
             FUN_00365c94(temp_v3,*(unsigned short *)(temp_v6 + 0x14),*(unsigned short *)(temp_v6 + 0x16));
             temp_v6 = mapTrapGetUnk38();
             temp_v3 = (unsigned int)*(unsigned short *)(temp_v6 + 8);

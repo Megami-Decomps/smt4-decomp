@@ -3,10 +3,10 @@
 #include "addon/aocMain.h"
 #include "script/scrScriptProcess.h"
 #include "gamedata/TableGroup.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 extern MapMain *g_mapMain;
-extern AocSystem *g_aocSystem;
 extern const char DAT_004044ec[];
 extern const char DAT_004044d4[];
 void messageSetConfirmDisplayMode(void);

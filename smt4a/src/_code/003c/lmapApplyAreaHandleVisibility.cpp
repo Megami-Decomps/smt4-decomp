@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
 
 struct LmapHandleTable {
@@ -40,8 +41,8 @@ void FUN_00399290(u32 index, s32 enabled);
 void lmapApplyAreaHandleVisibility(void)
 {
     LmapHandleMain *map = g_lmapMainState;
-    if (g_gameState.mode == 0x65) {
-        s32 submode = g_gameState.submode;
+    if (g_gameState.mapId == 0x65) {
+        s32 submode = g_gameState.areaId;
         if (submode == 1) {
             FUN_003cb948(DAT_0058024c);
             return;

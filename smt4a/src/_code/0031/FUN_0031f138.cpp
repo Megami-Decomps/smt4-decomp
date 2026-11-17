@@ -15,7 +15,7 @@ u32 FUN_0031f138(u32 index, s32 value)
         return 0;
     }
     row = (u8 *)g_gameDataBlocks.saveBlock + index * sizeof(GameSavedItemA);
-    entry = (GameSavedItemA *)(row + offsetof(GameSavedItemTableA, items));
+    entry = (GameSavedItemA *)(row + offsetof(GameSaveDataA, body.items));
     if (value > 63) {
         entry->bits |= 0xFC;
     } else {

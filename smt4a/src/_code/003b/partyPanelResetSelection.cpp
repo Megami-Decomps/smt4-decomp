@@ -1,17 +1,16 @@
-#include "common.h"
+#include "ui/PartyPanelStateA.h"
 
 extern "C" {
 
-extern u16 *g_partyPanel;
-
+/* Clears the panel's requested unit and the two words after it (the second to 0xFFFF). */
 void partyPanelResetSelection(void)
 {
-    u16 *p = g_partyPanel;
+    PartyPanelStateA *panel = g_partyPanel;
 
-    if (p != NULL) {
-        p[0x1e] = 0;
-        p[0x20] = 0xffff;
-        p[0x1f] = 0;
+    if (panel != NULL) {
+        panel->requestedUnitId = 0;
+        panel->unk0040 = 0xffff;
+        panel->unk003E = 0;
     }
 }
 

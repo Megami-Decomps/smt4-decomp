@@ -8,20 +8,20 @@ extern "C" {
 
 s32 uiCompareEntryRanksAscending(const SortItem *left, const SortItem *right)
 {
-    EntrySortData *leftData = dataTable08Sub2GetRecord(left->id);
-    EntrySortData *rightData = dataTable08Sub2GetRecord(right->id);
+    EquipmentRecordA *leftData = dataTable08Sub2GetRecord(left->id);
+    EquipmentRecordA *rightData = dataTable08Sub2GetRecord(right->id);
     s32 leftScore = 0;
     s32 rightScore = 0;
     s32 leftRank = DAT_0052b8ac[0].left;
     s32 rightRank = DAT_0052b8ac[0].right;
     for (s32 i = 0; i <= 7; i++) {
-        if (FUN_00345098(leftScore, leftData->ranks[i] >> 10) > 0) {
+        if (FUN_00345098(leftScore, leftData->affinities[i].raw >> 10) > 0) {
             leftRank = i;
-            leftScore = leftData->ranks[i] >> 10;
+            leftScore = leftData->affinities[i].raw >> 10;
         }
-        if (FUN_00345098(rightScore, rightData->ranks[i] >> 10) > 0) {
+        if (FUN_00345098(rightScore, rightData->affinities[i].raw >> 10) > 0) {
             rightRank = i;
-            rightScore = rightData->ranks[i] >> 10;
+            rightScore = rightData->affinities[i].raw >> 10;
         }
     }
     s32 order = leftRank - rightRank;
@@ -30,8 +30,8 @@ s32 uiCompareEntryRanksAscending(const SortItem *left, const SortItem *right)
         if (order == 0) {
             leftData = dataTable08Sub2GetRecord(left->id);
             rightData = dataTable08Sub2GetRecord(right->id);
-            s32 leftKey = leftData->tieKey;
-            s32 rightKey = rightData->tieKey;
+            s32 leftKey = leftData->order;
+            s32 rightKey = rightData->order;
             order = leftKey - rightKey;
         }
     }

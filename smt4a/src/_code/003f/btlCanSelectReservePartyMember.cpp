@@ -45,7 +45,7 @@ u32 btlCanSelectReservePartyMember(const BtlCombatantEntryA *entry)
                 PartyReserveSlots *party = gameGetSlotTable();
                 for (s32 index = 0; index < party->count; ++index) {
                     if (party->slots[index] >= 0) {
-                        SlotRecord *record = gameGetSlotRecord(party->slots[index]);
+                        SlotRecordA *record = gameGetSlotRecord(party->slots[index]);
                         if (record != NULL && record->entryId != id && party->slots[index] >= 0) {
                             return 1;
                         }

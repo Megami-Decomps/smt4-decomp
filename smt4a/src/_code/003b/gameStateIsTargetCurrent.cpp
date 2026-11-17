@@ -1,8 +1,7 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-
-
 
 s32 gameStateIsTargetCurrent(void)
 {

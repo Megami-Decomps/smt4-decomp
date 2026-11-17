@@ -1,24 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273060` (_code @ 0x273060, 0x708 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    signed char f005f1614; /* 0x018 */
-    u8 pad019[0x7];
-    signed char f005f161c; /* 0x020 */
-    signed char f005f161d; /* 0x021 */
-    u8 pad022[0x1];
-    signed char f005f161f; /* 0x023 */
-    u8 pad024[0x1d0];
-    int f005f17f0; /* 0x1f4 */
-    u8 pad1f8[0x2b0];
-    signed char f005f1aa4; /* 0x4a8 */
-};
-extern GameStateView g_gameState;
-
 
 int CONCAT44(double, double);
 int libm_cosf(void);
@@ -44,11 +29,6 @@ extern int *g_lmapView; /* 0x5806a4 */
 extern int g_mapEnemy; /* 0x5806d4 */
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
-
-
-
-
-
 
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1be0; /* 0x5f1be0 */
@@ -85,7 +65,6 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: modelPlayClip. */
 extern int textureEntryMeetsUnlockRequirements(unsigned int);
 
-
 void FUN_00273060(void)
 
 {
@@ -116,7 +95,7 @@ void FUN_00273060(void)
   
   temp_v1 = g_mapEnemy;
   if (DAT_005f1be0 == 0) {
-    if (g_gameState.f005f161f == '\0') {
+    if (g_gameState.departLoading == '\0') {
       if ((*g_lmapView == 3) || (*(char *)(DAT_00581280 + 0xf40) != '\0')) {
         temp_v2 = 0;
         do {
@@ -129,7 +108,7 @@ void FUN_00273060(void)
         } while (temp_v2 < 0x28);
         return;
       }
-      if (g_gameState.f005f161d != '\0') {
+      if (g_gameState.paused != '\0') {
         temp_v2 = 0;
         do {
           temp_v3 = temp_v1 + temp_v2 * 0x188;
@@ -141,7 +120,7 @@ void FUN_00273060(void)
         } while (temp_v2 < 0x28);
         return;
       }
-      if (g_gameState.f005f1aa4 != '\0') {
+      if (g_gameState.unk4A8 != '\0') {
         temp_v2 = 0;
         do {
           temp_v3 = temp_v1 + temp_v2 * 0x188;
@@ -157,11 +136,11 @@ void FUN_00273060(void)
       temp_v7 = DAT_005f1bc4 == '\0';
       temp_v0 = DAT_005f1bc4;
       if (temp_v7) {
-        temp_v0 = g_gameState.f005f1614;
+        temp_v0 = g_gameState.inputBlocked;
       }
       temp_v8 = temp_v7 && temp_v0 == '\0';
       if (temp_v7 && temp_v0 == '\0') {
-        temp_v8 = g_gameState.f005f161c == '\0';
+        temp_v8 = g_gameState.unk020 == '\0';
       }
       if (temp_v8) {
         FUN_003b959c();
@@ -182,8 +161,8 @@ void FUN_00273060(void)
         temp_v14 = *(float *)(temp_v1 + 0x24) * temp_v14;
         libm_cosf();
         *(float *)(temp_v1 + 0x30) = temp_v14 * *(float *)(temp_v1 + 0x20);
-        if (0 < g_gameState.f005f17f0) {
-          g_gameState.f005f17f0 = g_gameState.f005f17f0 - 1;
+        if (0 < g_gameState.unk1F4) {
+          g_gameState.unk1F4 = g_gameState.unk1F4 - 1;
         }
         FUN_002d2834();
       }

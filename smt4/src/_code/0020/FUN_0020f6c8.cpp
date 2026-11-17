@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020f6c8` (_code @ 0x20f6c8, 0x7c4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -57,7 +58,6 @@ extern int DAT_00447a80; /* 0x447a80 */
 extern float DAT_00447a84; /* 0x447a84 */
 extern int g_lmapScene; /* 0x447e88 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
-extern int g_gameState; /* 0x49f91c */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -168,7 +168,7 @@ void FUN_0020f6c8(void)
   temp_v18 = 0.017453292f;
   temp_v16 = 100.0f;
   temp_v17 = 0.5f;
-  if (g_gameState >= 100) {
+  if (g_gameState.mapId >= 100) {
     temp_v2 = lmapMainIsAtLeastHalf();
     if (temp_v2 == 0) {
       return;
@@ -231,7 +231,7 @@ void FUN_0020f6c8(void)
   temp_v17 = *(float *)(DAT_004474f4 + 0x4c) - temp_v13;
   __hardfp_atan2f();
   temp_v19 = 0;
-  if (g_gameState >= 100) {
+  if (g_gameState.mapId >= 100) {
     temp_v17 = temp_v17 * 57.32484f * 0.7111111f;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v17) << 0x1d);
     for (temp_v17 = romwright_fabs_4(temp_v17); (int)temp_v17 >= 0x47800000; temp_v17 = temp_v17 - 65536.0f) {

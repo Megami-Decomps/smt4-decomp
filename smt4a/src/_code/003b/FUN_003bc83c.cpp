@@ -3,14 +3,13 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
-#include "gamedata/Table8Record.h"
+#include "gamedata/ConsumableRecordA.h"
 #include "gamedata/Table04Record.h"
 #include <vector>
 
 extern "C" {
 s32 scrGetArg(s32);
 void sysMemClear(void *, u32);
-const Table8Record *dataTable8FindRecord(u32);
 
 /* Keep only candidates whose skill category is supplied by a matching active combatant. */
 u32 FUN_003bc83c()
@@ -49,8 +48,8 @@ u32 FUN_003bc83c()
             }
             std::vector<u16>::iterator candidate = candidates.begin();
             while (candidate != candidates.end()) {
-                const Table8Record *mapping = dataTable8FindRecord(*candidate);
-                const Table04Record *skill = dataTable04FindById(mapping->unk32);
+                const ConsumableRecordA *mapping = dataTable8FindRecord(*candidate);
+                const Table04RecordA *skill = dataTable04FindById(mapping->skillId);
                 if (skill != NULL && supported[(skill->properties & 0xF800) >> 11] > 0)
                     ++candidate;
                 else

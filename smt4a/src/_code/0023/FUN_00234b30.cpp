@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00234b30` (_code @ 0x234b30, 0x7e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct {
 extern int *g_lmapView; /* 0x5806a4 */
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -56,7 +56,6 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 /* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: candidateGetPreferredValue. */
 extern int slots4FGetActiveValue(int);
-
 
 void FUN_00234b30(void)
 
@@ -165,7 +164,7 @@ void FUN_00234b30(void)
               }
             }
           }
-          if (g_gameState >= 0x65) {
+          if (g_gameState.mapId >= 0x65) {
             temp_v22[0] = (float)((unsigned long long)temp_v16 >> 0x20);
             temp_v23[0] = -1;
             temp_v22[1] = temp_v22[0];
@@ -271,7 +270,7 @@ void FUN_00234b30(void)
                 if (((!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) &&
                     (in_fpscr = temp_v6 | ((unsigned int)(temp_v17 <= temp_v14) << 0x1d),
                     !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) ||
-                   (*(unsigned char *)(temp_v11 + 0xd) = 0, g_gameState == 0x19)) {
+                   (*(unsigned char *)(temp_v11 + 0xd) = 0, g_gameState.mapId == 0x19)) {
                   *(unsigned char *)(temp_v11 + 0xd) = 1;
                 }
               }

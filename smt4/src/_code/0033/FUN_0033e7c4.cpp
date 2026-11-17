@@ -1,5 +1,6 @@
 /* NON_MATCHING: register choice only: retail holds the "loaded" 1 in r2, this build in r1. */
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 
 #define WORLD_DATA_MAGIC 0x57444b4e /* "NKDW" */
 
@@ -35,7 +36,6 @@ struct WorldData {
 
 extern "C" {
 extern const char DAT_003ff7e4[];
-extern AocSystem *g_aocSystem;
 s32 textFormatBuffer(char *output, const char *format, ...);
 s32 FUN_0023e3a4(void *aoc, s32 id, s32 kind);
 void *aocLoadWorldDataFile(AocSystem *aoc, s32 id, const char *path);

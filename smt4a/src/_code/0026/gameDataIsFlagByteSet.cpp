@@ -5,14 +5,14 @@ struct GameDataFlagRegion {
     s8 flags[10];     // 0x15D8
 };
 
-struct GameDataBlock {
+struct GameSaveDataA {
     u8 unk00[0x3E74];              // 0x0000
     GameDataFlagRegion flagRegion; // 0x3E74
 };
 
 struct GameDataBlocks {
     u32 unk00;           // 0x00
-    GameDataBlock* data;  // 0x04
+    GameSaveDataA* data;  // 0x04
 };
 
 extern "C" {

@@ -2,7 +2,6 @@
 #include "status/StatusCamera.h"
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
 void FUN_00292bcc(PartyPanelWidget *widget, u32 value);
 void FUN_00298d28(s32, s32);
@@ -14,9 +13,9 @@ void partyPanelSetState(s32 state, s32 rememberPrevious)
 {
     PartyPanelState *panel = g_partyPanel;
     if (rememberPrevious != 0)
-        panel->history.previousState = panel->sceneState;
+        panel->previousState = panel->sceneState;
     panel->sceneState = state;
-    panel->lifecycle.phase = 0;
+    panel->phase = 0;
     if (state == 23) {
         FUN_002a0cc8(0);
         state = panel->sceneState;
@@ -46,14 +45,14 @@ void partyPanelSetState(s32 state, s32 rememberPrevious)
             partyWidgetSetTransitionPending(panel->demons[index], 0);
         }
         FUN_00298d28(0, 0);
-        if (panel->availability.activeSlots[0] != 0)
+        if (panel->activeSlots[0] != 0)
             FUN_00292bcc(panel->characters[0], 0xFF);
         for (s32 index = 0; index < 3; ++index) {
-            if (panel->availability.activeSlots[index + 1] != 0)
+            if (panel->activeSlots[index + 1] != 0)
                 FUN_00292bcc(panel->characters[index + 1], 0xFF);
         }
         for (s32 index = 0; index < 24; ++index) {
-            if (panel->entryView.entries[index].available != 0)
+            if (panel->entries[index].available != 0)
                 FUN_00292bcc(panel->demons[index], 0xFF);
         }
     }

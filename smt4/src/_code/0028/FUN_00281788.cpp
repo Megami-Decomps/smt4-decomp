@@ -1,5 +1,6 @@
 /* NON_MATCHING: only r5/r6 swap (retail keeps the counts in r6 and the volume table in r5). */
 #include "shard/S1Mover.h"
+#include "game/GameState.h"
 
 /* One culling volume (0x178 bytes): eight corners, a center and six bounding planes. */
 struct CullVolume {
@@ -27,15 +28,10 @@ struct CullVolumeCounts {
     /* 0x04 */ s32 unk04;
 };
 
-struct GameStateCullView {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ s32 cullVolume; /* -1: none */
-};
 
 extern "C" {
 extern CullVolumeCounts DAT_00447a28;
 extern CullVolume DAT_004a1264[160];
-extern GameStateCullView g_gameState;
 
 /* Clears every culling volume and the volume counts. */
 void FUN_00281788(void)
@@ -70,6 +66,6 @@ void FUN_00281788(void)
         volume->unk16d = 0;
     }
     DAT_00447a28.unk04 = 0;
-    g_gameState.cullVolume = -1;
+    g_gameState.area = -1;
 }
 }

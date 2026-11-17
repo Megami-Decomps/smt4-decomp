@@ -1,14 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f9f64` (_code @ 0x1f9f64, 0x518 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x20];
-    signed char f0049f93c; /* 0x020 */
-};
-extern GameStateView g_gameState;
 
 
 int mapInterfaceForwardResource(void);
@@ -147,7 +142,7 @@ void FUN_001f9f64(void)
   unsigned int temp_v54;
   
   temp_v0 = g_mapEnemy;
-  if ((*(int *)(g_mapEnemy + 4) == 8) && (g_gameState.f0049f93c == '\0')) {
+  if ((*(int *)(g_mapEnemy + 4) == 8) && (g_gameState.unk020 == '\0')) {
     temp_v25 = 220.0f;
     temp_v21 = 20.0f;
     temp_v26 = 57.32484f;

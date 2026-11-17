@@ -4,7 +4,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-bool gameRecordCopy(u32 id, RecordValue *record);
+bool gameRecordCopy(u32 id, GameSavedItem *record);
 void bitsetSetBit(StatBlock *unit, u32 flag);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 

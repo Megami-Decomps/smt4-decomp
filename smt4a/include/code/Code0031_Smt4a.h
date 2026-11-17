@@ -13,7 +13,7 @@ u16 saveIsRecordValueBounded(u32 index);
 
 s32 binFileGetValue(BinFile *file);
 
-DataEntry * FUN_00314638(u32 index);
+struct Table2dSection4Record *FUN_00314638(u32 index);
 
 void FUN_0031d174(ObjFUN_0031d174 *obj);
 

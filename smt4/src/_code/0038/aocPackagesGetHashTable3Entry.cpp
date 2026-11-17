@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/W4_Match6_DataSet.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -8,32 +8,29 @@ typedef struct DataRecord {
     /* 0x0 */ u8 unk0[0x1C];
 } DataRecord;
 
-extern u32 dataTableFileGetTable(u32 file, u32 arg);
-extern int packageEntryIsLoaded(DataEntry *entry);
-extern DataRow *packageEntryGetDirectory(DataEntry *entry);
-extern u32 packageEntryGetFileCount(DataEntry *entry);
+extern u32 dataTableFileGetTable(void *file, u32 arg);
 extern int dataTableGetCount(u32 table);
 extern DataRecord *dataTableGetEntries(u32 table);
 
 #define DATA_ROW_TABLE '#'
 
 /* Returns the record `index` of the data tables the set's entries list, counting across tables. */
-DataRecord *aocPackagesGetHashTable3Entry(DataSet *set, s32 index)
+DataRecord *aocPackagesGetHashTable3Entry(AocSystem *system, s32 index)
 {
     s32 skipped = 0;
     s32 i;
     u32 j;
 
-    for (i = 0; i < set->entryCount; i++) {
-        DataEntry *entry = &set->entries[i];
+    for (i = 0; i < system->packageCount; i++) {
+        AocPackage *entry = &system->packages[i];
 
         if (packageEntryIsLoaded(entry) != 0) {
-            DataRow *rows = packageEntryGetDirectory(entry);
+            AocPackageDirectoryEntry *rows = packageEntryGetDirectory(entry);
             u32 rowCount = packageEntryGetFileCount(entry);
 
             for (j = 0; j < rowCount; j++) {
-                if (rows[j].type == DATA_ROW_TABLE) {
-                    u32 table = dataTableFileGetTable(entry->files[j].file, 3);
+                if (rows[j].kind == DATA_ROW_TABLE) {
+                    u32 table = dataTableFileGetTable(entry->files[j].data, 3);
                     s32 total = dataTableGetCount(table) + skipped;
 
                     if (total >= index) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses the second cleared record through a base at DAT_005f1cbc+0xb8 and keeps the fourth key table's address in ip (stack-argument stm grouping differs); stores and calls otherwise identical. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"
@@ -156,18 +157,18 @@ void FUN_0029a794(SceneWork *work, s32 savePoint)
     for (i = 0; i < 10; i++) {
         work->unk4a0[i] = 0;
     }
-    mapProbePositionDownward(&g_gameState.point.position);
+    mapProbePositionDownward(&g_gameState.pointPosition);
     if (savePoint != 0) {
-        flags->savePoint.scale = (s16)(s32)g_gameState.point.scale;
-        flags->savePoint.mapId = g_gameState.mode;
-        flags->savePoint.areaId = g_gameState.submode;
+        flags->savePoint.scale = (s16)(s32)g_gameState.overviewHeading;
+        flags->savePoint.mapId = g_gameState.mapId;
+        flags->savePoint.areaId = g_gameState.areaId;
         flags->savePointObject.objectId = g_gameState.currentObjectId;
-        flags->savePoint.x = (s16)(s32)g_gameState.point.position.x;
-        flags->savePoint.y = (s16)(s32)g_gameState.point.position.y;
-        flags->savePoint.z = (s16)(s32)g_gameState.point.position.z;
-        flags->savePoint.heading = (s16)(s32)g_gameState.point.heading;
-        flags->savePoint.tableType = g_gameState.table2F.type;
-        flags->savePoint.tableId = g_gameState.table2F.id;
+        flags->savePoint.x = (s16)(s32)g_gameState.pointPosition.x;
+        flags->savePoint.y = (s16)(s32)g_gameState.pointPosition.y;
+        flags->savePoint.z = (s16)(s32)g_gameState.pointPosition.z;
+        flags->savePoint.heading = (s16)(s32)g_gameState.pointHeading;
+        flags->savePoint.tableType = g_gameState.table2FType;
+        flags->savePoint.tableId = g_gameState.table2FId;
     }
     FUN_00352eec();
     SceneRecordA *first = &DAT_005f1cbc.first;

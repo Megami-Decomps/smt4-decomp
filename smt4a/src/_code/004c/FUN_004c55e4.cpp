@@ -9,8 +9,8 @@
 extern "C" {
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 u32 padGetMappedValue(u32 id);
-s32 FUN_002efc44(Table04Record *skill, u32 value, s32 mode);
-s32 FUN_0034a304(Table04Record *skill, s32 value, s32 mode);
+s32 FUN_002efc44(Table04RecordA *skill, u32 value, s32 mode);
+s32 FUN_0034a304(Table04RecordA *skill, s32 value, s32 mode);
 s32 FUN_004bd098(u32 source, u32 skillId);
 void *devilGetRecord(u16 id);
 
@@ -18,17 +18,17 @@ s32 FUN_004c55e4(u32 unitId, u32 skillId)
 {
     BtlCombatantEntryA *unit = btlMainFindEntryByListedId(btlGetMainState(), unitId);
     if (DAT_005713f0.mappedValue & unit->flags) {
-        Table04Record *skill = dataTable04FindById(skillId);
+        Table04RecordA *skill = dataTable04FindById(skillId);
         if (skill) {
             return FUN_002efc44(skill, padGetMappedValue(skillId), 2);
         }
     } else if (unit->flags & DAT_005713f0.sourceValue) {
-        Table04Record *skill = dataTable04FindById(skillId);
+        Table04RecordA *skill = dataTable04FindById(skillId);
         if (skill) {
             return FUN_0034a304(skill, FUN_004bd098(unit->sourceId, skillId), 2);
         }
     } else if (unit->flags & DAT_005713f0.affinity) {
-        Table04Record *skill = dataTable04FindById(skillId);
+        Table04RecordA *skill = dataTable04FindById(skillId);
         if (skill) {
             // This lookup's response bytes extend beyond the shared unit-record prefixes.
             struct AffinityView { u8 unk00[0xa0]; s8 responses[18]; };

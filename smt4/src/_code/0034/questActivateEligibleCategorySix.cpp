@@ -2,7 +2,7 @@
 #include "shard/GameDataBlocks.h"
 
 extern "C" {
-GameSaveData *gameDataBlocksGetSaveData(void);
+GameSaveBody *gameDataBlocksGetSaveData(void);
 u32 questReadRuntimeFlag(u32 questId, u32 selector);
 const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 questId);
 s32 questRequirementsMet(u32 questId);
@@ -13,8 +13,8 @@ void FUN_0028eeb8(u32 questId);
 /* Activate newly eligible category-six quests and snapshot their progress bookkeeping. */
 u32 questActivateEligibleCategorySix(void)
 {
-    GameSaveData *save = gameDataBlocksGetSaveData();
-    save->questSnapshot.value = save->questCurrentValue;
+    GameSaveBody *save = gameDataBlocksGetSaveData();
+    save->questSnapshot.value = save->playSeconds;
     u32 changed = 0;
     for (s32 index = 0; index < 400; ++index) {
         if (!questReadRuntimeFlag(static_cast<u16>(index), 0)) {

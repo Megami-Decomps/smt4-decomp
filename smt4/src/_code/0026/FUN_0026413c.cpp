@@ -1,6 +1,7 @@
 /* NON_MATCHING: the button state is kept in different registers and the turn start / hold-to-rotate paths are laid out in another order; the camera turn behaviour is the same. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -22,13 +23,6 @@ typedef struct MapCameraTurn {
     /* 0x210 */ f32 unk210;
 } MapCameraTurn;
 
-/* The head of the game state: a busy flag and the active owner. */
-typedef struct GameStateHead {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ u8 busy;
-    /* 0x19 */ u8 unk19[3];
-    /* 0x1C */ void *owner;
-} GameStateHead;
 
 /* The map state's heading mirror and the reset flag. */
 typedef struct MapHeadingState {
@@ -40,7 +34,6 @@ typedef struct MapHeadingState {
 
 extern MapHeadingState *g_lmapMainState;
 extern MapCameraTurn *DAT_004474f4;
-extern GameStateHead g_gameState;
 
 s32 inputIsQuestMenuPressed(void);
 s32 padIsButtonPressed(u32 button);
@@ -71,7 +64,7 @@ void FUN_0026413c(void)
     if (camera->cooldown > 0) {
         camera->cooldown--;
     }
-    if (g_gameState.busy == 0 && g_gameState.owner == NULL) {
+    if (g_gameState.inputBlocked == 0 && g_gameState.owner == NULL) {
         if (camera->turning == 0) {
             if (camera->held != 0 && slotIsActive(8) == 0 && slotIsActive(7) == 0) {
                 DAT_004474f4->held = 0;

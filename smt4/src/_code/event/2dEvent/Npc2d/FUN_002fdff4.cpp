@@ -7,8 +7,8 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "addon/AocSystem.h"
 extern "C" {
-extern AocSystem *g_aocSystem;
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
 s32 FUN_002c1d5c(void);

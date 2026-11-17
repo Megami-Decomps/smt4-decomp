@@ -1,4 +1,5 @@
 #include "map/mapTrap.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_ControllerPose.h"
 
 struct MapTrapControllerLink { u32 unk00; ControllerPose* controller; };
@@ -16,7 +17,6 @@ struct MapTrapDisplayView {
 };
 extern "C" {
 extern MapTrapA* g_mapTrap;
-extern GameStateA g_gameState;
 f32 FUN_001f3f34(f32 first, f32 second, f32 duration, f32 frame);
 void controllerSetDestination(ControllerPose* controller, const MapVector* destination);
 void controllerSetRotationEulerDegrees(ControllerPose* controller, f32 x, f32 y, f32 z);
@@ -36,7 +36,7 @@ void FUN_0024aeb0(void)
         }
         if (owner) {
             ControllerPose* controller = owner->controller;
-            if (g_gameState.controllerFlags.secondary) {
+            if (g_gameState.departLoading) {
                 controller->flags.value |= 3;
                 return;
             }

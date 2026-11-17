@@ -38,7 +38,7 @@ void gridNavigationConfigure(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
 void fillTwoWordsWithByte(void *destination, u32 value);
 void sysPlaySe(s32 sound);
 void buttonHelpSetText(s32 channel, u32 color);
-GameDataBlock *gameDataBlocksGetSaveData(void);
+GameSaveBodyA *gameDataBlocksGetSaveData(void);
 u32 findByteThresholdTier(u8 value);
 u32 thresholdIndexFind(u8 value);
 void __ARM_common_memcpy4_8(void *destination, const void *source);
@@ -69,12 +69,12 @@ void FUN_0037a2e4(void)
     sysPlaySe(0x9b);
     buttonHelpSetText(0, 0xf4f4f4ff);
     if (campIsState85() != 0) {
-        GameDataBlock *save = gameDataBlocksGetSaveData();
-        if (save->unk27E94[0] != 0) {
-            config->settingIndex[0] = categoryGetThresholdIndex(reinterpret_cast<u8 *>(&save->unk27E90)[0]);
-            config->settingIndex[1] = findByteThresholdTier(reinterpret_cast<u8 *>(&save->unk27E90)[1]);
-            config->settingIndex[2] = thresholdIndexFind(reinterpret_cast<u8 *>(&save->unk27E90)[2]);
-            *reinterpret_cast<u64 *>(config->saved) = *reinterpret_cast<u64 *>(&save->unk27E90);
+        GameSaveBodyA *save = gameDataBlocksGetSaveData();
+        if (save->titleConfig.saved != 0) {
+            config->settingIndex[0] = categoryGetThresholdIndex(save->titleConfig.values[0]);
+            config->settingIndex[1] = findByteThresholdTier(save->titleConfig.values[1]);
+            config->settingIndex[2] = thresholdIndexFind(save->titleConfig.values[2]);
+            *reinterpret_cast<u64 *>(config->saved) = *reinterpret_cast<u64 *>(save->titleConfig.values);
             config->saved[4] = g_titleConfigValues.changed;
             return;
         }

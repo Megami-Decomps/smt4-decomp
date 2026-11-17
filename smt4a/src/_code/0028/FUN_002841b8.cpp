@@ -1,17 +1,10 @@
 /* NON_MATCHING: retail saves r0-r2 in the prologue and copies the 20-byte key table with ldm from an offset into one shared data block (here a separate extern copied word by word); the menu logic is the same (202 vs 199 rows). */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "shard/X14_MessageMain.h"
 #include "AsdSDK/asdTextFormatStream.h"
 
 extern "C" {
-
-/* The slice of the game state the Terminal menu uses: the open flag and the selected key. */
-typedef struct GameStateTerminalView {
-    /* 0x000 */ u8 unk000[0x500];
-    /* 0x500 */ u8 menuOpen;
-    /* 0x501 */ u8 unk501[3];
-    /* 0x504 */ u32 menuKey;
-} GameStateTerminalView;
 
 /* The message work area fields written here, by their offsets. */
 typedef struct TerminalMessageWork {
@@ -28,7 +21,6 @@ typedef struct TerminalKeys {
     u8 v[20];
 } TerminalKeys;
 
-extern GameStateTerminalView g_gameState;
 extern const u32 DAT_00530a24[19];
 extern const TerminalKeys DAT_00530a70;
 
@@ -68,8 +60,8 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
         return 99;
     }
     if (start == 0) {
-        g_gameState.menuOpen = 1;
-        g_gameState.menuKey = keys.v[index];
+        g_gameState.overrideMapName = 1;
+        g_gameState.mapNameId = keys.v[index];
         TerminalMessageWork *work = (TerminalMessageWork *)g_messageMain.work;
 
         if (work != NULL) {
@@ -94,8 +86,8 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
     u32 key = useCounterGetCurrentValue();
 
     if (useCounterIsFinished() != 0) {
-        g_gameState.menuOpen = 0;
-        g_gameState.menuKey = 0;
+        g_gameState.overrideMapName = 0;
+        g_gameState.mapNameId = 0;
         touchMenuClose();
         useCounterRelease();
         obj04Finish();
@@ -104,8 +96,8 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
     if (key == 0x69 || keys.v[index] == key) {
         return 0;
     }
-    g_gameState.menuOpen = 0;
-    g_gameState.menuKey = 0;
+    g_gameState.overrideMapName = 0;
+    g_gameState.mapNameId = 0;
     touchMenuClose();
     useCounterRelease();
     obj04Finish();

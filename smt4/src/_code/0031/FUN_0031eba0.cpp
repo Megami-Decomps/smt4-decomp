@@ -2,6 +2,7 @@
 #include "gamedata/DevilRecord.h"
 #include "gamedata/Table00.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/Table00Lookup.h"
 
 struct PortraitClipBounds {
     s32 top;
@@ -15,7 +16,6 @@ struct PortraitImageDimensions {
 };
 extern "C" {
 extern void *g_aocSystem;
-const Table00Record *dataTable00FindById(u16);
 s32 recordPrepareLinkedOwner(void *, u32, s32);
 
 void FUN_002b04e8(s32, u32, s32, s32, s32, u32, const PortraitClipBounds *);
@@ -34,8 +34,8 @@ static inline bool resolveClippedPortrait(s32 unit, s32 lookup, u32 &bank, s32 &
             if (!devil)
                 return false;
             const Table00Record *record = dataTable00FindById(static_cast<u16>(unit));
-            if (record->unk02[1] & 1) {
-                image = record->portrait.id;
+            if (record->levelFlags & 1) {
+                image = record->portraitId;
                 bank = 35;
                 if (image >= 129)
                     return false;

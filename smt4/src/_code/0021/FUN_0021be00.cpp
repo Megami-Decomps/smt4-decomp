@@ -2,10 +2,10 @@
 #include "map/EnemyTableFilter.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern EnemyTableFilterState g_mapEnemy;
-extern GameState g_gameState;
 extern u32 DAT_004a0be4[256];
 EnemyTableLocation *dataTable29Sub0GetEntryWithAoc(s32 index);
 s32 dataTableGetRecordFortyOne(void);
@@ -19,8 +19,8 @@ void FUN_0021be00(void)
         g_mapEnemy.count = 0;
         for (s32 index = 0; index < total; ++index) {
             EnemyTableLocation *location = dataTable29Sub0GetEntryWithAoc(index);
-            if (location->mapId != -1 && location->mapId == g_gameState.unk000 &&
-                location->areaId == *reinterpret_cast<const s32 *>(g_gameState.unk004)) {
+            if (location->mapId != -1 && location->mapId == g_gameState.mapId &&
+                location->areaId == g_gameState.areaId) {
                 DAT_004a0be4[g_mapEnemy.count++] = index;
             }
         }

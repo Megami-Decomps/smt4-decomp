@@ -1,251 +1,109 @@
-/* Party-panel controllers and their embedded animation work. */
+/* The party panel (IV): the camp screen listing the protagonist, the party and the demon stock, with
+ * its cursors, preview copies and fusion selection. Apocalypse's panel is ui/PartyPanelStateA.h. */
 #ifndef UI_PARTYPANELSTATE_H
 #define UI_PARTYPANELSTATE_H
 #include "common.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
 #include "gamedata/SelectedUnitQuery.h"
+#include "gamedata/PlayerInitialization.h"
 #include "ui/GridNavigation.h"
+#include "ui/PartyPanelParts.h"
 #include <stddef.h>
-typedef struct TimerSlot {
-    /* 0x00 */ u8 data[0x8C];
-} TimerSlot;
+
+/* A copy of a battle-unit record kept for previews (0x604 bytes); only the two stat arrays are named. */
+struct PartyPanelUnitPreview {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u16 stats[5];
+    /* 0x00E */ u8 unk00E[4];
+    /* 0x012 */ u16 baseStats[5];
+    /* 0x01C */ u8 unk01C[0x5E8];
+};
 
 typedef struct PartyPanelState {
-    union {
-        /* 0x0000 */ u8 unk0000[0x1C];
-        struct {
-            u32 job;
-            u8 prefix04[8];
-            void *files[2];
-            void *script;
-        } resources;
-        struct {
-            /* 0x0000 */ u8 unk0000prefix[0x18];
-            /* 0x0018 */ u32 phase;
-        } lifecycle;
-    };
+    /* 0x0000 */ u32 job;
+    /* 0x0004 */ u8 unk0004[8];
+    /* 0x000C */ void *files[2];
+    /* 0x0014 */ void *script;
+    /* 0x0018 */ u32 phase;                 /* step within the current scene state */
     /* 0x001C */ s32 sceneState;
-    union {
-        /* 0x0020 */ u8 unk0020[0xC];
-        struct {
-            /* 0x0020 */ u32 unk20;
-            /* 0x0024 */ s32 previousState;
-            /* 0x0028 */ u32 unk28;
-        } history;
-    };
-    /* 0x002C */ u32 unk2C;
-    /* 0x0030 */ u32 capacityTier;
-    /* 0x0034 */ u8 unk34;
-    /* 0x0035 */ u8 unk35;
-    union {
-        /* 0x0036 */ u8 unk0036[0xC];
-        struct {
-            /* 0x0036 */ u8 prefix36[2];
-            /* 0x0038 */ s16 selection;
-            /* 0x003A */ u8 suffix3A[8];
-        } pendingSelection;
-        struct {
-            u8 prefix36[4];
-            s16 previousSelection;
-            u8 suffix3C[6];
-        } helpHistory;
-        u16 previewItem;
-    };
-    /* 0x0042 */ u8 unk42;
-    union {
-        /* 0x0043 */ u8 unk0043[0x13D];
-        struct {
-            u8 prefix43;
-            s8 mode;
-            u8 suffix45[0x13B];
-        } helpSelection;
-    };
-    /* 0x0180 */ u8 timerC[1];
-    /* 0x0181 */ u8 unk0181[0xab];
-    /* 0x022C */ f32 effectSpeed;
-    /* 0x0230 */ u8 unk0230[0x68];
-    /* 0x0298 */ TimerSlot timers[4];
-    /* 0x04C8 */ TimerSlot timerB;
-    /* 0x0554 */ u8 unk0554[0x118];
-    /* 0x066C */ u8 panelState;
-    union {
-        /* 0x066D */ u8 unk066D[0x5B];
-        struct {
-            /* 0x066D */ u8 unk066dPrefix[0xb];
-            /* 0x0678 */ u8 activeSlots[4];
-            /* 0x067C */ u8 unk067c[0x4c];
-        } availability;
-    };
-    union {
-        /* 0x06C8 */ u32 unk6C8[4];
-        PartyPanelWidget *characters[4];
-    };
-    union {
-        /* 0x06D8 */ u32 unk6D8[0x18];
-        PartyPanelWidget *demons[0x18];
-    };
-    /* 0x0738 */ union {
-        u8 sortableEntries[0xC0];
-        SelectedUnitListEntry previewUnits[24];
-        struct {
-            /* 0x0738 */ u32 unk738;
-            /* 0x073C */ PartyPanelEntry entries[0x18];
-        } entryView;
-    };
-    union {
-        /* 0x07FC */ u8 unk7FC[0x95C];
-        struct {
-            /* 0x07FC */ u8 prefix7FC[0xE0];
-            /* 0x08DC */ u8 stateFourPart[0x64];
-            union {
-                /* 0x0940 */ u8 gap940[0xC8];
-                struct {
-                    /* 0x0940 */ u8 primary[0x64];
-                    /* 0x09A4 */ u8 secondary[0x64];
-                } stateSixParts;
-            };
-            /* 0x0A08 */ u8 primaryPart[0x64];
-            /* 0x0A6C */ u8 secondaryPart[0x64];
-            /* 0x0AD0 */ u8 suffixAD0[0x688];
-        } transitionParts;
-        struct {
-            u8 prefix7FC[0x144];
-            GridNavigation base;
-            GridNavigation secondary;
-            GridNavigation expanded;
-            GridNavigation secondaryExpanded;
-        } capacityGrids;
-        struct {
-            u8 prefix7FC[0x340];
-            s32 mode;
-        } detailSelection;
-        struct {
-            u8 prefix7FC[0x338];
-            s32 ids[2]; /* 0xB34 */
-            s32 count; /* 0xB3C */
-        } exclusions;
-    };
+    /* 0x0020 */ s32 pendingState;          /* the state being entered (4: party row, 6: stock grid, 8: full grid) */
+    /* 0x0024 */ s32 previousState;
+    /* 0x0028 */ u32 occupiedCount;         /* party slots in use */
+    /* 0x002C */ u32 page;                  /* 1 shows the second stock page */
+    /* 0x0030 */ s32 pageCount;
+    /* 0x0034 */ u8 unk0034;
+    /* 0x0035 */ u8 unk0035;
+    /* 0x0036 */ u16 previewItem;           /* the item (or skill) whose effect is previewed */
+    /* 0x0038 */ s16 selection;             /* the selected unit (negative: the protagonist) */
+    /* 0x003A */ s16 previousSelection;
+    /* 0x003C */ s16 requestedUnitId;
+    /* 0x003E */ u16 unk003E;
+    /* 0x0040 */ u16 unk0040;
+    /* 0x0042 */ u8 alternate;              /* the alternate layout: cursors move on the alternate grids */
+    /* 0x0043 */ u8 unk0043;
+    /* 0x0044 */ s8 helpMode;
+    /* 0x0045 */ u8 unk0045[0x23];
+    /* 0x0068 */ TimerSlot sprites[11];            /* indexed by PARTY_PANEL_SPRITE_* */
+    /* 0x066C */ u8 panelState;             /* PARTY_MODE_*: what the panel was opened for */
+    /* 0x066D */ u8 unk066D[3];
+    /* 0x0670 */ s32 partySlot;             /* selected party slot (1-3), 0 for none */
+    /* 0x0674 */ s32 listSelection;
+    /* 0x0678 */ u8 activeSlots[4];         /* the protagonist and the three party slots can be chosen */
+    /* 0x067C */ PartyPanelTouchRegions touch;
+    /* 0x06BC */ s16 selectedCount;                 /* units picked so far */
+    /* 0x06BE */ u8 unk06BE[0xA];
+    /* 0x06C8 */ PartyPanelWidget *characters[4];
+    /* 0x06D8 */ PartyPanelWidget *demons[24];
+    /* 0x0738 */ SelectedUnitListEntry entries[24];   /* the demon stock as shown (sortable) */
+    /* 0x07F8 */ u8 unk07F8[0xE4];
+    /* 0x08DC */ GridNavigation partyGrid;            /* state 4: the party row */
+    /* 0x0940 */ GridNavigation stockGrid;            /* state 6: the stock page */
+    /* 0x09A4 */ GridNavigation stockGridAlternate;
+    /* 0x0A08 */ GridNavigation fullGrid;             /* state 8: the party row above the stock page */
+    /* 0x0A6C */ GridNavigation fullGridAlternate;
+    /* 0x0AD0 */ u8 unk0AD0[0x64];
+    /* 0x0B34 */ s32 fusionParentIds[2];
+    /* 0x0B3C */ s32 fusionParentCount;
+    /* 0x0B40 */ u8 unk0B40[8];
+    /* 0x0B48 */ u32 fusionParents;                   /* first parent in bits 0-14, second in 15-29 */
+    /* 0x0B4C */ u32 fusionProduct;                   /* product id in bits 2-16 */
+    /* 0x0B50 */ u8 fusionResult[0x34];               /* the result unit */
+    /* 0x0B84 */ u16 fusionResultSkills[8];
+    /* 0x0B94 */ u8 unk0B94[0x5C0];
+    /* 0x1154 */ u32 value;
     /* 0x1158 */ u32 statusValue;
-    union {
-        /* 0x115C */ u8 unk115C[0x694];
-        /* 0x115C */ void *ownedBuffer;
-    };
-    /* 0x17F0 */ u8 unk17F0;
+    /* 0x115C */ void *unite;                         /* the fusion work (a buffer array) */
+    /* 0x1160 */ PlayerInitialRecordIV previewPlayer;
+    /* 0x11EC */ PartyPanelUnitPreview previewUnit;
+    /* 0x17F0 */ u8 disabled;
 } PartyPanelState;
 
-typedef struct PartyPanelAnimationStateA {
-    /* 0x000 */ u8 unk000[0x8C];
-    /* 0x08C */ u8 speedObject[0x20]; /* the vec2 object whose speed is effectSpeed (vec2GetSpeed reads +0x20) */
-    /* 0x0AC */ f32 effectSpeed;
-    /* 0x0B0 */ u8 unk0B0[0x784];
-    /* 0x834 */ u8 mode;
-    union {
-        /* 0x835 */ u8 unk835[0x4F];
-        struct {
-            u8 prefix835[0xB];
-            /* 0x840 */ u8 protagonistAvailable;
-            /* 0x841 */ u8 partyAvailable[3];
-        } preview;
-    };
-    /* 0x884 */ u16 unk884;
-    /* 0x886 */ u8 unk886[0xA];
-} PartyPanelAnimationStateA;
-
-typedef struct PartyPanelStateA {
-    union {
-        /* 0x000 */ u8 unk000[0x1C];
-        struct {
-            u8 unk000[0x18];
-            /* 0x018 */ u32 phase;
-        } lifecycle;
-    };
-    /* 0x01C */ s32 state;
-    /* 0x020 */ u32 unk20;
-    union {
-        /* 0x024 */ u8 unk24[8];
-        /* 0x024 */ s32 previousState;
-    };
-    /* 0x02C */ u32 toggle;
-    union {
-        /* 0x030 */ u8 unk30[0xC];
-        struct {
-            u8 prefix30[6];
-            /* 0x036 */ u16 item;
-            /* 0x038 */ s16 selection;
-        } preview;
-    };
-    /* 0x03C */ s16 unk3C;
-    union {
-        /* 0x03E */ u8 unk3E[0x142];
-        struct {
-            u8 prefix3E[4];
-            /* 0x042 */ u8 alternate;
-        } activeGrid;
-    };
-    /* 0x180 */ PartyPanelAnimationStateA animation;
-    union {
-        /* 0xA10 */ u32 handlesA[4];
-        /* 0xA10 */ PartyPanelWidget *characters[4];
-    };
-    union {
-        /* 0xA20 */ u32 handlesB[0x18];
-        /* 0xA20 */ PartyPanelWidget *demons[0x18];
-    };
-} PartyPanelStateA;
-
-/* Retail 32-bit layout invariants. */
+typedef char PartyPanelUnitPreviewSizeCheck[sizeof(PartyPanelUnitPreview) == 0x604 ? 1 : -1];
 typedef char PartyPanelStateSizeCheck[sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
-typedef char PartyPanelExclusionOffsetsCheck[offsetof(PartyPanelState, exclusions.ids) == 0xB34 && offsetof(PartyPanelState, exclusions.count) == 0xB3C && sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
-typedef char PartyPanelAnimationStateASizeCheck[sizeof(PartyPanelAnimationStateA) == 0x890 ? 1 : -1];
-typedef char PartyPanelStateASizeCheck[sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
-typedef char PartyPanelStateResourcesOffsetCheck[
-    offsetof(PartyPanelState, resources.job) == 0 &&
-    offsetof(PartyPanelState, resources.files) == 0xC &&
-    offsetof(PartyPanelState, resources.script) == 0x14 &&
-    offsetof(PartyPanelState, ownedBuffer) == 0x115C ? 1 : -1];
-typedef char PartyPanelStateTransitionOffsetsCheck[
-    offsetof(PartyPanelState, pendingSelection.selection) == 0x38 &&
-    offsetof(PartyPanelState, transitionParts.stateFourPart) == 0x8DC &&
-    offsetof(PartyPanelState, transitionParts.primaryPart) == 0xA08 &&
-    offsetof(PartyPanelState, transitionParts.secondaryPart) == 0xA6C ? 1 : -1];
-typedef char PartyPanelPreviewOffsetCheck[
+typedef char PartyPanelStateOffsetCheck[
+    offsetof(PartyPanelState, sceneState) == 0x1C &&
+    offsetof(PartyPanelState, page) == 0x2C &&
     offsetof(PartyPanelState, previewItem) == 0x36 &&
-    offsetof(PartyPanelState, previewUnits) == 0x738 &&
-    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
-typedef char PartyPanelStateSixPartOffsetsCheck[
-    offsetof(PartyPanelState, transitionParts.stateSixParts.primary) == 0x940 &&
-    offsetof(PartyPanelState, transitionParts.stateSixParts.secondary) == 0x9A4 &&
-    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
-typedef char PartyPanelCapacityGridOffsetsCheck[
-    offsetof(PartyPanelState, capacityGrids.base) == 0x940 &&
-    offsetof(PartyPanelState, capacityGrids.expanded) == 0xA08 &&
-    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
-typedef char PartyPanelHelpHistoryOffsetCheck[
-    offsetof(PartyPanelState, helpHistory.previousSelection) == 0x3A &&
-    offsetof(PartyPanelState, helpSelection.mode) == 0x44 &&
-    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
-typedef char PartyPanelDetailSelectionOffsetCheck[
-    offsetof(PartyPanelState, detailSelection.mode) == 0xB3C &&
-    sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
-typedef char PartyPanelStateAPreviewOffsetsCheck[
-    offsetof(PartyPanelStateA, preview.item) == 0x36 &&
-    offsetof(PartyPanelStateA, preview.selection) == 0x38 &&
-    offsetof(PartyPanelStateA, animation.preview.protagonistAvailable) == 0x9C0 &&
-    sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
-typedef char PartyPanelStateATransitionOffsetCheck[
-    offsetof(PartyPanelStateA, lifecycle.phase) == 0x18 &&
-    offsetof(PartyPanelStateA, previousState) == 0x24 &&
-    offsetof(PartyPanelStateA, characters) == 0xA10 &&
-    offsetof(PartyPanelStateA, demons) == 0xA20 &&
-    offsetof(PartyPanelStateA, animation.preview.partyAvailable) == 0x9C1 &&
-    sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
-typedef char PartyPanelStateAActiveGridOffsetCheck[
-    offsetof(PartyPanelStateA, activeGrid.alternate) == 0x42 &&
-    sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
+    offsetof(PartyPanelState, alternate) == 0x42 &&
+    offsetof(PartyPanelState, helpMode) == 0x44 &&
+    offsetof(PartyPanelState, sprites) == 0x68 &&
+    offsetof(PartyPanelState, panelState) == 0x66C &&
+    offsetof(PartyPanelState, touch) == 0x67C &&
+    offsetof(PartyPanelState, characters) == 0x6C8 &&
+    offsetof(PartyPanelState, entries) == 0x738 &&
+    offsetof(PartyPanelState, partyGrid) == 0x8DC &&
+    offsetof(PartyPanelState, fullGridAlternate) == 0xA6C &&
+    offsetof(PartyPanelState, fusionParentCount) == 0xB3C &&
+    offsetof(PartyPanelState, fusionResultSkills) == 0xB84 &&
+    offsetof(PartyPanelState, statusValue) == 0x1158 &&
+    offsetof(PartyPanelState, previewUnit) == 0x11EC &&
+    offsetof(PartyPanelState, disabled) == 0x17F0 ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+extern PartyPanelState *g_partyPanel;
 
 u16 *FUN_0029acb0(void);
 

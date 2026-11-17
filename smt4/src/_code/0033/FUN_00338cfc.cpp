@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (171 vs 165 rows); retail keeps more values in callee-saved registers across the power loops */
 #include "common.h"
 #include "battle/BattleBalanceRow.h"
+#include "gamedata/Table00Lookup.h"
 
 // Battle main state: only the fields the escape roll uses.
 struct BattleMain {
@@ -29,12 +30,6 @@ struct DevilRecordRace {
     u8 race;                // 0x02
 };
 
-struct EnemyRecord {
-    u8 unk00[0x12];
-    u16 power0;             // 0x12
-    u16 power1;             // 0x14
-};
-
 struct PlayerData {
     u8 unk00[0x26];
     s16 power0;             // 0x26
@@ -50,7 +45,6 @@ struct SlotTable {
 
 extern "C" {
 
-EnemyRecord* dataTable00FindById(u32 id);
 DevilRecordRace* devilGetRecord(u32 id);
 s32 randRange(s32 range);
 PartyMember* saveResolvePartySlot(s32 index);
@@ -113,9 +107,9 @@ void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
         for (s32 i = 0; i < 6; i++) {
             u32 id = battle->enemyIds[i];
             if (id != 0) {
-                EnemyRecord* record = dataTable00FindById(id & 0xffff);
+                Table00Record* record = dataTable00FindById(id & 0xffff);
                 if (record != NULL) {
-                    u32 power = record->power1 + record->power0;
+                    u32 power = record->stats[4] + record->stats[3];
                     if ((f32)power > enemyPower) enemyPower = (f32)power;
                 }
             }

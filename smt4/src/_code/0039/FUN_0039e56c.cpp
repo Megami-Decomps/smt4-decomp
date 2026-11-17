@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (207 vs 144 rows); retail duplicates the whole entry loop per layout and per related-kind branch, which source-level structure does not reproduce */
 #include "common.h"
+#include "game/GameState.h"
 
 // Selectable tile of the two-list picker (0x4c bytes each).
 struct PickerEntry {
@@ -30,14 +31,9 @@ struct PickerScreen {
     PickerEntry lists0[1];  // 0xc48
 };
 
-struct GameStateHead {
-    u8 unk00[8];
-    u32 selectedKind;       // 0x08
-};
 
 extern "C" {
 
-extern GameStateHead g_gameState;
 
 u8* gameGetMapBlock(void);
 f32* NaviMain_GetCursorPos(void* navi);
@@ -84,7 +80,7 @@ void FUN_0039e56c(PickerScreen* screen)
             entry->screenY = (s32)(rect[1] - ((f32)dy - 120.0f));
             entry->width = (u32)rect[2];
             entry->height = (u32)rect[3];
-            bool related = kindsRelated(entry->kind, g_gameState.selectedKind);
+            bool related = kindsRelated(entry->kind, g_gameState.currentObjectId);
             bool idle = entry->state == 0 || entry->state == 4;
             if (related) {
                 entry->tint = idle ? 0xb4ff83ff : 0xffffffff;

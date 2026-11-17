@@ -30,7 +30,7 @@ struct PlayerStatusView {
     u16 mask;
 };
 
-inline u16 slotStatusMask(const SlotRecord* record)
+inline u16 slotStatusMask(const SlotRecordA* record)
 {
     return reinterpret_cast<const SlotStatusView*>(record)->mask;
 }
@@ -38,7 +38,7 @@ inline u16 slotStatusMask(const SlotRecord* record)
 
 extern "C" {
 PlayerStatusView* gameGetPlayerData();
-SlotRecord* btlMainGetUnk14();
+SlotRecordA* btlMainGetUnk14();
 void slotPlacementGetPosition(StatusIconWork*, s32* x, s32* y);
 
 void partyStatusIconTick(void* data)
@@ -51,7 +51,7 @@ void partyStatusIconTick(void* data)
         if (work->slot == -1) {
             mask = gameGetPlayerData()->mask;
         } else if (work->slot == -2) {
-            SlotRecord* record = btlMainGetUnk14();
+            SlotRecordA* record = btlMainGetUnk14();
             if (record) {
                 mask = slotStatusMask(record);
             }

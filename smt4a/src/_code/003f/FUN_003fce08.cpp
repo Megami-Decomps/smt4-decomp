@@ -1,6 +1,6 @@
 /* Starts the object once: records the resource's value in its first slot, then runs the start callback. */
 #include "common.h"
-#include "addon/AocSystem.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 

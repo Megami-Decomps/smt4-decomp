@@ -2,10 +2,10 @@
 #include "gamedata/NpcPackage.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 extern const char DAT_003ff7c8[];
-extern AocSystem* g_aocSystem;
 s32 textFormatBuffer(char* buffer, const char* format, ...);
 void* FUN_00387a08(AocSystem* system, s32 id, const char* path);
 void* asdLoadFileSyncDefault(const char* path);

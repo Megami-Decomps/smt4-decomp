@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -6,8 +7,6 @@ void mapPlaceSet(s32 a, s32 b, s32 c);
 void FUN_00376fb8(u32 value);
 u32 scrGetArg(...);
 void asdSequenceRequest(s32 a, s32 b, s32 c);
-
-extern GameStateA g_gameState;
 
 /* Script command: passes the script's first argument to FUN_00376fb8, then runs mapPlaceSet and asdSequenceRequest. */
 s32 FUN_00370198(void)

@@ -1,13 +1,10 @@
 /* Allocates the game data's work blocks, the first time it is called. */
-#include "common.h"
+#include "gamedata/GameSaveBlocks.h"
 #include "AsdSDK/AsdDebug.h"
-#include "gamedata/GameData.h"
 
 extern "C" {
 
 void *asdMemoryAlloc(int heap, int align, int arg2, int size, int arg4);
-
-extern GameDataBlocks g_gameDataBlocks;
 
 void gameDataAllocBlocks(void)
 {

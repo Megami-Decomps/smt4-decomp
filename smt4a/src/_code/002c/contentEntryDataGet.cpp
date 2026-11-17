@@ -1,4 +1,5 @@
 #include "common.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
@@ -6,14 +7,10 @@ typedef struct Entry002c1ce4 {
     /* 0x00 */ u8 data[0x30];
 } Entry002c1ce4;
 
-typedef struct AocSystem002c1ce4 AocSystem002c1ce4;
-
-u8 *entryListFindById(AocSystem002c1ce4 *aoc, u32 id);
+u8 *entryListFindById(AocSystemA *aoc, u32 id);
 void *dataTableGet(s32 table, s32 slot);
 Entry002c1ce4 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
-
-extern AocSystem002c1ce4 *g_aocSystem; /* 0x570280 */
 
 /* Address of entry `id`'s data (add-on content first, else data table 1; `second` selects the part at +0x10). */
 u8 *contentEntryDataGet(u32 id, s32 second)

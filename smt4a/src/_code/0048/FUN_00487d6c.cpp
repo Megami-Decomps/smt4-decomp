@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00487d6c` (_code @ 0x487d6c, 0x3c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/NaviMain_GetCurrentMap.h"
 
@@ -28,7 +29,6 @@ typedef struct {
 
 extern unsigned int DAT_00587f20; /* 0x587f20 */
 extern int g_renderCtx; /* 0x59dbb4 */
-extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161d; /* 0x5f161d */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -50,7 +50,6 @@ extern int gameFlagsClassify(void);
 /* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
-
 void FUN_00487d6c(int param_1)
 
 {
@@ -68,7 +67,7 @@ void FUN_00487d6c(int param_1)
   unsigned int temp_v8;
   
   temp_v0 = gameFlagsGetBlock();
-  if (g_gameState >= 100) {
+  if (g_gameState.mapId >= 100) {
     temp_v1 = lmapMainGetUnkCC();
     if (temp_v1 == 8) {
       return;

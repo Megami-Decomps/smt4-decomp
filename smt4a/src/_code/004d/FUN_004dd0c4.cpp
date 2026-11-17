@@ -5,6 +5,7 @@
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "gamedata/ConsumableRecordA.h"
 
 /* A skill record, as far as the category bits go. */
 struct SkillCategoryView {
@@ -12,12 +13,6 @@ struct SkillCategoryView {
     /* 0x28 */ u32 unknownBits : 5;
     /* 0x28 */ u32 category : 4;
     /* 0x28 */ u32 moreBits : 23;
-};
-
-/* The linked-skill record of a data table 8 entry. */
-struct SkillLinkRecordA {
-    /* 0x00 */ u8 unk00[0x32];
-    /* 0x32 */ u16 linkedSkill;
 };
 
 /* The command's chosen skill: the kind of thing it is and its id. */
@@ -57,7 +52,6 @@ extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 
 SkillCategoryView *dataTable04FindById(u32 id);
-SkillLinkRecordA *dataTable8FindRecord(u32 id);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 void *rt_memclr(void *block, u32 size);
 BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 id);
@@ -99,13 +93,13 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
     s32 value = selection->value;
     s32 kind = selection->kind;
     const SkillCategoryView *skill = dataTable04FindById(value);
-    const SkillLinkRecordA *record = dataTable8FindRecord(value);
+    const ConsumableRecordA *record = dataTable8FindRecord(value);
     if (kind == 2) {
         if (skill != NULL && skillHasSpecialCategory(skill))
             normal = false;
     } else if (kind == 8) {
-        if (record != NULL && record->linkedSkill != 0) {
-            if (dataTable04FindById(record->linkedSkill) == NULL || skillHasSpecialCategory(skill))
+        if (record != NULL && record->skillId != 0) {
+            if (dataTable04FindById(record->skillId) == NULL || skillHasSpecialCategory(skill))
                 normal = false;
         }
     }

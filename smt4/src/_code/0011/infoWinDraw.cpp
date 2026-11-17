@@ -1,6 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
 
 /* The information window's draw view. */
 struct InfoWindowDrawState {

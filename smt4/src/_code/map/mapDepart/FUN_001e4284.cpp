@@ -1,5 +1,6 @@
 /* NON_MATCHING: block layout, float constant scheduling and register naming differ - retail places the immediate branch after the tail and scales the colour bytes in a different register order; stores and calls are the same. */
 #include "map/MapEnvironment.h"
+#include "game/GameState.h"
 
 namespace {
 /* One record of the map's record table (0x124 bytes each; only the first word is set here). */
@@ -28,27 +29,6 @@ struct MapEnvironmentState {
     /* 0x3c */ s32 unk3c;
 };
 
-/* g_gameState's environment block (0x610..0x64c). */
-struct MapEnvironmentGameView {
-    /* 0x000 */ u8 unk000[0x228];
-    /* 0x228 */ u8 darkZone;
-    /* 0x229 */ u8 unk229[0x167];
-    /* 0x390 */ s32 presetIndex;
-    /* 0x394 */ u8 unk394[4];
-    /* 0x398 */ s32 unk398;
-    /* 0x39c */ s32 unk39c;
-    /* 0x3a0 */ s32 unk3a0;
-    /* 0x3a4 */ s32 unk3a4;
-    /* 0x3a8 */ s32 unk3a8;
-    /* 0x3ac */ s32 unk3ac;
-    /* 0x3b0 */ s32 unk3b0;
-    /* 0x3b4 */ u32 unk3b4;
-    /* 0x3b8 */ u32 unk3b8;
-    /* 0x3bc */ u32 unk3bc;
-    /* 0x3c0 */ u32 unk3c0;
-    /* 0x3c4 */ u32 unk3c4;
-    /* 0x3c8 */ u32 unk3c8;
-};
 
 struct MapHeading {
     u32 unk00;
@@ -58,7 +38,6 @@ struct MapHeading {
 
 extern "C" {
 extern MapEnvironmentState g_mapTable;
-extern MapEnvironmentGameView g_gameState;
 extern MapHeading g_fixedCameraPosition;
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void asdTMTexTablePrepareNodeImage(u32 table, u32 node);
@@ -83,15 +62,15 @@ void FUN_001e4284(u32 preset, s32 transition)
         }
     }
     g_mapTable.selectedIndex = preset;
-    if (g_gameState.darkZone != 0) {
+    if (g_gameState.map.darkZone != 0) {
         g_mapTable.selectedIndex = 0;
     }
-    g_gameState.presetIndex = g_mapTable.selectedIndex;
+    g_gameState.environmentPreset = g_mapTable.selectedIndex;
     const MapEnvironmentEntry *entry = &g_mapTable.entries[g_mapTable.selectedIndex];
-    g_gameState.unk398 = entry->id;
-    g_gameState.unk39c = entry->unk02;
-    g_gameState.unk3a0 = entry->unk04;
-    g_gameState.unk3a4 = entry->unk06;
+    g_gameState.environmentId = entry->id;
+    g_gameState.unk39C = entry->unk02;
+    g_gameState.unk3A0 = entry->unk04;
+    g_gameState.unk3A4 = entry->unk06;
     s32 id = entry->id;
     if (frames != 0) {
         g_mapTable.fade = 0.0f;
@@ -125,15 +104,15 @@ void FUN_001e4284(u32 preset, s32 transition)
                  entry->unk18, entry->unk19, entry->unk20, entry->unk21,
                  entry->unk22, entry->unk23, entry->unk24, entry->unk26,
                  (f32)entry->unk1A, entry->unk1C);
-    g_gameState.unk3a8 = entry->unk28[0];
-    g_gameState.unk3ac = (s8)entry->unk28[2];
-    g_gameState.unk3b0 = (g_gameState.unk3ac * 3) / 5;
-    g_gameState.unk3b4 = entry->unk28[3];
-    g_gameState.unk3b8 = entry->unk28[4];
-    g_gameState.unk3bc = entry->unk28[1];
-    g_gameState.unk3c0 = entry->unk28[5];
-    g_gameState.unk3c4 = entry->unk28[6];
-    g_gameState.unk3c8 = entry->unk28[7];
+    g_gameState.overlayKind = entry->unk28[0];
+    g_gameState.overlayX = (s8)entry->unk28[2];
+    g_gameState.overlayY = (g_gameState.overlayX * 3) / 5;
+    g_gameState.overlayTarget = entry->unk28[3];
+    g_gameState.overlayColorB = entry->unk28[4];
+    g_gameState.overlayFlag = entry->unk28[1];
+    g_gameState.overlayColorA = entry->unk28[5];
+    g_gameState.overlayColorR = entry->unk28[6];
+    g_gameState.overlayColorG = entry->unk28[7];
     g_fixedCameraPosition.degrees = (f32)entry->unk1A + 180.0f;
     if (g_fixedCameraPosition.degrees > 360.0f) {
         g_fixedCameraPosition.degrees -= 360.0f;

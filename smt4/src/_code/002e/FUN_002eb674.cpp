@@ -3,6 +3,7 @@
 #include "map/mapMain.h"
 #include "map/lmapMain.h"
 #include <string.h>
+#include "game/GameState.h"
 
 struct MapTransitionAuxiliary {
     u8 unk00[0x18];
@@ -10,7 +11,6 @@ struct MapTransitionAuxiliary {
 };
 
 extern "C" {
-extern GameState g_gameState;
 extern MapMain *g_mapMain;
 extern LmapScene *g_lmapScene;
 extern MapTransitionAuxiliary *DAT_004474f4;
@@ -19,22 +19,22 @@ void mapAdjustPositionToGround(MapVector *position);
 void FUN_002eb674()
 {
     MapMain *map = g_mapMain;
-    if (g_gameState.unk284 != 0) {
-        g_gameState.unk284 = 0;
+    if (g_gameState.map.unk84 != 0) {
+        g_gameState.map.unk84 = 0;
     } else {
         mapAdjustPositionToGround(&g_gameState.position);
-        g_gameState.unk2F8 = 1;
+        g_gameState.map.savedLocationSet = 1;
         g_gameState.savedMapId = map->mapId;
         g_gameState.savedAreaId = map->areaId;
         g_gameState.savedObjectId = g_gameState.currentObjectId;
         memcpy(&g_gameState.savedPosition, g_lmapScene->transform.position, sizeof(MapVector));
-        g_gameState.unk314 = g_lmapScene->transform.headingDegrees;
+        g_gameState.savedHeading = g_lmapScene->transform.headingDegrees;
         g_gameState.unk318 = DAT_004474f4->value;
         g_gameState.targetMapId = map->mapId;
         g_gameState.targetAreaId = map->areaId;
         g_gameState.targetPosition = g_gameState.position;
-        g_gameState.unk330Scalar = g_gameState.unk90Scalar;
-        g_gameState.unk334Scalar = g_gameState.unk90Scalar;
+        g_gameState.targetHeading = g_gameState.overviewHeading;
+        g_gameState.unk334 = g_gameState.overviewHeading;
     }
 }
 }

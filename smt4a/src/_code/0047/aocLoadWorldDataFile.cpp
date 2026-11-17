@@ -1,5 +1,6 @@
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
@@ -19,7 +20,7 @@ static __inline void *loadPackageEntry(AocSystemA *system, s32 kind, s32 id, con
     AocPackageFile *file = packageFindFileByTypeAndId(system, kind, id, packagePath);
     if (file != NULL) {
         return reinterpret_cast<void *>(FUN_001b2ebc(g_aocDisplay, packagePath, destinationPath,
-            &file->texture.result, 1, sizeof(packagePath), file));
+            &file->result, 1, sizeof(packagePath), file));
     }
     return NULL;
 }

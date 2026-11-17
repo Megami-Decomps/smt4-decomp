@@ -1,5 +1,5 @@
 /* NON_MATCHING: the packets and the hoisted per-case timer addresses now match; retail keeps `set` in r4 and the index in r5 (swapped here) and lays out the timerStart tail merges differently (own call for case 0, shared call in case 1). */
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct UiEightTimerSet {
@@ -8,7 +8,6 @@ struct UiEightTimerSet {
 };
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 void drawParameterBlockClear(UiResourceParameters *resources);
 
 void uiSpriteStateInitFromSource(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);

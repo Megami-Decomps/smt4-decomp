@@ -24,14 +24,6 @@ struct Obj4222acMotion {
     /* 0x60 */ u32 handle;
 };
 
-struct EffectGamePauseFlags {
-    /* 0x000 */ u8 unk000[0x18];
-    /* 0x018 */ u8 paused18;
-    /* 0x019 */ u8 unk019[0x32f];
-    /* 0x348 */ u8 paused348;
-};
-
 typedef char Obj4222acMotionSizeCheck[sizeof(Obj4222acMotion) == 0x64 ? 1 : -1];
-typedef char EffectGamePauseFlagsSizeCheck[sizeof(EffectGamePauseFlags) == 0x349 ? 1 : -1];
 
 #endif

@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -8,7 +9,7 @@ void mapOverlaySetOpen(s32 open);
  * retail still reads the mode before the shared tail call. */
 void lmapEnableSceneState(void)
 {
-    if (g_gameState.navigation.unk461 != 0) {
+    if (g_gameState.unk461 != 0) {
         mapOverlaySetOpen(1);
     } else {
         mapOverlaySetOpen(1);

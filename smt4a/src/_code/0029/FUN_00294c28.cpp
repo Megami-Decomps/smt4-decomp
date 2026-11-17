@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -14,8 +15,6 @@ typedef struct Candidate {
     /* 0x000 */ u8 unk000[300];
     /* 0x12C */ u16 id;
 } Candidate;
-
-extern GameStateA g_gameState;
 
 void FUN_00152f44(void);
 void gameFlagsGetBlock(void);

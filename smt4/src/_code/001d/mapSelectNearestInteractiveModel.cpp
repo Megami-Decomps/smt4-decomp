@@ -1,10 +1,10 @@
 #include "map/DeferredModels.h"
 #include "map/ModelSelectionLabel.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern DeferredModelWork *g_deferredMapModels;
-extern GameState g_gameState;
 void FUN_00266fac(s32 mode, s32 id);
 f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
 f32 mathAbsHeadingErrorToPoint(f32, f32, f32, f32, f32, f32, f32);
@@ -20,7 +20,7 @@ void mapSelectNearestInteractiveModel(f32 x, f32 y, f32 z, f32 heading)
         return;
     FUN_00266fac(0, 0);
     g_deferredMapModels->pending = 0;
-    if (g_gameState.unk18)
+    if (g_gameState.inputBlocked)
         return;
     for (s32 i = 0; i < 64; ++i) {
         if (g_deferredMapModels->entries[i].active) {

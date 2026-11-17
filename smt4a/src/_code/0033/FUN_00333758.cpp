@@ -4,7 +4,7 @@
 
 extern "C" {
 
-u32 FUN_00333758(Table04Record *record)
+u32 FUN_00333758(Table04RecordA *record)
 {
     u32 kind = record->itemProperties.category;
 

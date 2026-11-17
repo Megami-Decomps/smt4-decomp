@@ -1,10 +1,10 @@
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem.h"
 
 struct Table02Sub2Entry { u8 data[0x1c]; };
 struct AocSystem;
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *system, u32 index);
 
 // Prefer an add-on record for a valid index, falling back to table2/section2.

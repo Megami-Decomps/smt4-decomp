@@ -5,9 +5,9 @@
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include <stddef.h>
 #include "event/bustupEvent/BustupTex.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
 extern QueuedRequestState *g_aocMain;
 extern const char DAT_00526444[];
 s32 appletIsRegistered406(void);

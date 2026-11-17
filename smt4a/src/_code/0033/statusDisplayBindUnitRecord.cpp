@@ -82,7 +82,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
         if (gameProgressIsAdvanced()) {
             FUN_0034dae0(pane, record->id);
         } else {
-            const Table00Record *base = dataTable00FindById(record->id);
+            const Table00RecordA *base = dataTable00FindById(record->id);
             if (base != NULL) {
                 pane->maxHp = base->maxHp;
                 pane->maxMp = base->maxMp;
@@ -100,7 +100,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
     flags->changed = 0;
     u8 allowOption = 1;
     if (static_cast<s16>(record->id) >= 0) {
-        const Table00Record *base = dataTable00FindById(record->id);
+        const Table00RecordA *base = dataTable00FindById(record->id);
         if (base == NULL) {
             allowOption = 0;
         } else {

@@ -1,10 +1,10 @@
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapIfState *g_mapIf;
-extern GameState g_gameState;
 NodeEnableNode *asdMdlManagerCreateFromSource(u32 source, u32 size, u32 flags);
 void lightOwnerRegister(NodeEnableNode *model, s32 enabled);
 void mapMarkerSynchronizeModelState(MapIfModelMarker *marker);

@@ -3,12 +3,7 @@
 #include "gamedata/PlayerDataBlock.h"
 #include "mapnavi/naviMain.h"
 #include "code/Code003e.h"
-
-/* A skill record's flag word: the low bits hold the skill's recovery kind. */
-struct RegenSkill {
-    /* 0x00 */ u8 unk00[0x44];
-    /* 0x44 */ u32 flags;
-};
+#include "gamedata/Table04Record.h"
 
 /* The turn state (only the phase). */
 struct RegenTurn {
@@ -43,7 +38,6 @@ struct RegenSlotTable {
 extern "C" {
 RegenUnit *gameGetSlotRecord(s32 slot);
 RegenSlotTable *gameGetSlotTable(void);
-RegenSkill *dataTable41FindById(u16 id);
 void playerGetWords(u16 words[10], s32 index);
 void playerClearFlagMask(u32 mask);
 void halves34Copy(RegenUnit *unit, u16 *words);
@@ -73,7 +67,7 @@ static __inline void regenAddSkills(const u16 *words, f32 *hp, f32 *mp)
 {
     for (s32 i = 0; i < 9; i++) {
         if (words[i] != 0) {
-            RegenSkill *skill = dataTable41FindById(words[i]);
+            Table04ExtraRecord *skill = dataTable41FindById(words[i]);
             if (skill != NULL) {
                 switch ((skill->flags & 0x1f) >> 2) {
                 case 1:

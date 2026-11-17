@@ -1,6 +1,7 @@
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -19,7 +20,7 @@ static __inline void *loadPackageEntry(AocSystem *system, s32 kind, s32 id, cons
     AocPackageFile *file = packageFindFileByTypeAndId(system, kind, id, packagePath);
     if (file != NULL) {
         return reinterpret_cast<void *>(fileQueueRequestAndWait(g_aocDisplay, packagePath, destinationPath,
-            &file->texture.result, 1, sizeof(packagePath), file));
+            &file->result, 1, sizeof(packagePath), file));
     }
     return NULL;
 }

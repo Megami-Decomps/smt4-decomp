@@ -35,7 +35,7 @@ void skillHelpUpdateAttributeAndTarget(s32 id)
         textFormatBuffer(text, "\x82\x72\x82\x85\x82\x8c\x82\x86");
         scrSetStringSlot(0x25, reinterpret_cast<const char *>(text));
     } else {
-        Table04Record *record = dataTable04FindById(id);
+        Table04RecordA *record = dataTable04FindById(id);
         char text[0x6C];
         battleAttributeFormatName(text, (record->properties >> 11) & 31u);
         scrSetStringSlot(0x24, reinterpret_cast<const char *>(text));

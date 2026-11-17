@@ -15,7 +15,7 @@ u32 gameDataEntrySetLevel(u32 index, s32 value)
         return 0;
     }
     table = g_gameDataBlocks.saveBlock;
-    entry = &table->items[index];
+    entry = &table->body.items[index];
     if (value > 63) {
         entry->flags |= 0xFC;
     } else {

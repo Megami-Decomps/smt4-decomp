@@ -1,9 +1,8 @@
 /* NON_MATCHING: handle reloads now follow retail; remaining differences are the weak-hook NOPs after the unit-index tests and register assignment. */
-#include "ui/PartyPanelState.h"
+#include "ui/PartyPanelStateA.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
-extern PartyPanelStateA *g_partyPanel;
 void partyStatusIconTick(void *);
 s16 *FUN_002c7e24(void);
 s32 FUN_003f3f08(void *);
@@ -19,27 +18,27 @@ s32 FUN_0021c1e0(void)
     PartyPanelStateA *panel = g_partyPanel;
     s32 result = -1;
     for (s32 i = 0; i < 4; ++i) {
-        partyStatusIconTick(reinterpret_cast<void *>(panel->handlesA[i]));
+        partyStatusIconTick(reinterpret_cast<void *>(panel->characters[i]));
         s16 *current = FUN_002c7e24();
-        if (reinterpret_cast<BoundIcon *>(panel->handlesA[i])->unitIndex < 0) {
-            if (*current < 0 && FUN_003f3f08(reinterpret_cast<void *>(panel->handlesA[i])) != -1)
-                result = FUN_003f3f08(reinterpret_cast<void *>(panel->handlesA[i]));
+        if (reinterpret_cast<BoundIcon *>(panel->characters[i])->unitIndex < 0) {
+            if (*current < 0 && FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i])) != -1)
+                result = FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i]));
         } else {
-            SlotRecord *unit = gameGetSlotRecord(reinterpret_cast<BoundIcon *>(panel->handlesA[i])->unitIndex);
-            if (unit->entryId == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->handlesA[i])) != -1)
-                result = FUN_003f3f08(reinterpret_cast<void *>(panel->handlesA[i]));
+            SlotRecordA *unit = gameGetSlotRecord(reinterpret_cast<BoundIcon *>(panel->characters[i])->unitIndex);
+            if (unit->entryId == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i])) != -1)
+                result = FUN_003f3f08(reinterpret_cast<void *>(panel->characters[i]));
         }
     }
     for (s32 i = 0; i < 24; ++i) {
-        partyStatusIconTick(reinterpret_cast<void *>(panel->handlesB[i]));
+        partyStatusIconTick(reinterpret_cast<void *>(panel->demons[i]));
         s16 *current = FUN_002c7e24();
-        if (reinterpret_cast<BoundIcon *>(panel->handlesB[i])->unitIndex < 0) {
-            if (*current < 0 && FUN_003f3f08(reinterpret_cast<void *>(panel->handlesB[i])) != -1)
-                result = FUN_003f3f08(reinterpret_cast<void *>(panel->handlesB[i]));
+        if (reinterpret_cast<BoundIcon *>(panel->demons[i])->unitIndex < 0) {
+            if (*current < 0 && FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i])) != -1)
+                result = FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i]));
         } else {
-            SlotRecord *unit = gameGetSlotRecord(reinterpret_cast<BoundIcon *>(panel->handlesB[i])->unitIndex);
-            if (unit->entryId == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->handlesB[i])) != -1)
-                result = FUN_003f3f08(reinterpret_cast<void *>(panel->handlesB[i]));
+            SlotRecordA *unit = gameGetSlotRecord(reinterpret_cast<BoundIcon *>(panel->demons[i])->unitIndex);
+            if (unit->entryId == *current && FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i])) != -1)
+                result = FUN_003f3f08(reinterpret_cast<void *>(panel->demons[i]));
         }
     }
     return result;

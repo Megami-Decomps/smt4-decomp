@@ -20,7 +20,7 @@ struct PanelRenderCtx : RenderCtxA {
 extern "C" {
 extern PanelRenderCtx *g_renderCtx;
 
-SlotRecord *gameGetSlotRecord(s32 slotIndex);
+SlotRecordA *gameGetSlotRecord(s32 slotIndex);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 bottomScreen);
 void effectDispatchSelector(s32 icon, s32 x, s32 y, s32 z, f32 scale);
 }
@@ -35,7 +35,7 @@ extern "C" void FUN_004b42b0(CyclingPanel *panel, s32 slot, s32 x, s32 y)
     s16 current = 0;
     s16 next = 0;
     if (slot >= 0) {
-        mask = gameGetSlotRecord(slot)->status.mask;
+        mask = gameGetSlotRecord(slot)->statusMask;
     }
     s32 *cursor = &panel->cursor[slot];
     for (s32 icon = 1; icon <= 13; icon++) {

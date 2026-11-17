@@ -1,18 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338dfc` (_code @ 0x338dfc, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "mapnavi/naviMain.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x4ac];
-    int f005f1aa8; /* 0x4ac */
-    int f005f1aac; /* 0x4b0 */
-    int f005f1ab0; /* 0x4b4 */
-};
-extern GameStateView g_gameState;
-
 
 int textFormatBuffer(...);
 int gameStatePickAvoidingRecent(void);
@@ -42,9 +34,6 @@ extern unsigned short uRam005f0cd5; /* 0x5f0cd5 */
 extern unsigned char uRam005f0cd7; /* 0x5f0cd7 */
 extern int DAT_005f0cf4; /* 0x5f0cf4 */
 
-
-
-
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
@@ -60,7 +49,6 @@ extern int FUN_00272d44(void);
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_003e0024(void);
 extern int FUN_003e0154(void);
-
 
 void FUN_00338dfc(void)
 
@@ -92,8 +80,8 @@ void FUN_00338dfc(void)
   else {
     temp_v0 = playerHasFlagBit(5);
     if ((temp_v0 != 0) || (temp_v0 = playerHasFlagBit(9), temp_v0 != 0)) {
-      if (g_gameState.f005f1aa8 == 0) {
-        g_gameState.f005f1aa8 = 5;
+      if (g_gameState.unk4AC == 0) {
+        g_gameState.unk4AC = 5;
         temp_v0 = playerHasFlagBit(5);
         if (temp_v0 != 0) {
           temp_v0 = randRange(1);
@@ -112,12 +100,12 @@ void FUN_00338dfc(void)
       }
     }
     else {
-      g_gameState.f005f1aa8 = 0;
+      g_gameState.unk4AC = 0;
     }
 LAB_00338f14:
     temp_v8 = 100.0f;
     temp_v10 = 0x42c80000;
-    if (g_gameState.f005f1aac == 0) {
+    if (g_gameState.unk4B0 == 0) {
       temp_v0 = FUN_003e0024();
       temp_v1 = FUN_003e0154();
       temp_v2 = gameSlotTableFindFree();
@@ -142,7 +130,7 @@ LAB_00338f14:
       if ((int)in_s0 >= 0x42960000) {
         temp_v0 = playerHasFlagBit(5);
         if ((temp_v0 == 0) && (temp_v0 = playerHasFlagBit(9), temp_v0 == 0)) {
-          g_gameState.f005f1aac = 5;
+          g_gameState.unk4B0 = 5;
           temp_v0 = randRange(1);
           temp_v0 = temp_v0 + 1;
 LAB_00339020:
@@ -153,7 +141,7 @@ LAB_00339020:
         }
       }
       else if ((int)in_s0 < 0x42200001) {
-        g_gameState.f005f1aac = 5;
+        g_gameState.unk4B0 = 5;
         temp_v0 = randRange(1);
         temp_v0 = temp_v0 + 3;
         goto LAB_00339020;
@@ -170,8 +158,8 @@ LAB_00339020:
       temp_v6 = 1.25f;
     }
     FUN_002c263c();
-    if (((int)in_s0 >= 0x41700000) && (g_gameState.f005f1ab0 == 0)) {
-      g_gameState.f005f1ab0 = 5;
+    if (((int)in_s0 >= 0x41700000) && (g_gameState.unk4B4 == 0)) {
+      g_gameState.unk4B4 = 5;
       FUN_002c263c();
       temp_v0 = randRange(4);
       temp_v0 = (int)(temp_v9[temp_v0] * in_s0 * temp_v6 * temp_v8);
@@ -198,14 +186,14 @@ LAB_00339020:
     textFormatBuffer(0x5f0cc1,&LAB_00339258,temp_v0 + 1);
   }
 LAB_003391f8:
-  if (0 < g_gameState.f005f1aa8) {
-    g_gameState.f005f1aa8 = g_gameState.f005f1aa8 - 1;
+  if (0 < g_gameState.unk4AC) {
+    g_gameState.unk4AC = g_gameState.unk4AC - 1;
   }
-  if (0 < g_gameState.f005f1aac) {
-    g_gameState.f005f1aac = g_gameState.f005f1aac - 1;
+  if (0 < g_gameState.unk4B0) {
+    g_gameState.unk4B0 = g_gameState.unk4B0 - 1;
   }
-  if (0 < g_gameState.f005f1ab0) {
-    g_gameState.f005f1ab0 = g_gameState.f005f1ab0 - 1;
+  if (0 < g_gameState.unk4B4) {
+    g_gameState.unk4B4 = g_gameState.unk4B4 - 1;
   }
   return;
 }

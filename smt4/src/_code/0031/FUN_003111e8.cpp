@@ -1,7 +1,6 @@
 #include "ui/PartyPanelState.h"
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 
 int partyPanelSetState(int a, int b);
 

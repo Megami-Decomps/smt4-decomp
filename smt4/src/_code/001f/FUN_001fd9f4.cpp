@@ -1,18 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fd9f4` (_code @ 0x1fd9f4, 0x48c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x34c];
-    int f0049fc68; /* 0x34c */
-    u8 pad350[0x4];
-    int f0049fc70; /* 0x354 */
-    u8 pad358[0x2c];
-    int f0049fca0; /* 0x384 */
-};
-extern GameStateView g_gameState;
 
 
 int FUN_002005ec(void);
@@ -82,7 +73,7 @@ unsigned int FUN_001fd9f4(void)
   }
   FUN_00396dec(g_lmapMainState + 0xec);
   temp_v3 = g_titleScene;
-  if (g_gameState.f0049fc68 != 0) {
+  if (g_gameState.unk34C != 0) {
     temp_v0 = renderCtxPackPassFlags(5,1);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
@@ -106,7 +97,7 @@ unsigned int FUN_001fd9f4(void)
     }
   }
   temp_v3 = g_titleScene;
-  if (g_gameState.f0049fca0 != 0) {
+  if (g_gameState.unk384 != 0) {
     temp_v0 = renderCtxPackPassFlags(5,0);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
@@ -216,9 +207,9 @@ unsigned int FUN_001fd9f4(void)
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
   }
-  if (g_gameState.f0049fc70 != 1) {
-    if (g_gameState.f0049fc70 != 2) {
-      if (g_gameState.f0049fc70 == 3) {
+  if (g_gameState.unk354 != 1) {
+    if (g_gameState.unk354 != 2) {
+      if (g_gameState.unk354 == 3) {
         FUN_0030f730();
       }
     }

@@ -7,7 +7,7 @@ extern "C" {
 u8 FUN_002a46b8(void)
 {
 
-    GameDataSub *save = &g_gameDataBlocks.saveBlock->save.sub;
+    GameSaveBodyA *save = &g_gameDataBlocks.saveBlock->body;
     return save->unk27E32;
 }
 

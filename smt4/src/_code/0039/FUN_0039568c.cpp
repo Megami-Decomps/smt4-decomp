@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/MathFunctions.h"
 #include "util/Random.h"
+#include "game/GameState.h"
 
 struct AmbientMovementTransform {
     u32 unk00;
@@ -30,7 +31,6 @@ typedef char AmbientMovementOffsets[offsetof(AmbientMovementActor, movement) == 
     offsetof(AmbientMovementWork, duration) == 0x20 ? 1 : -1];
 
 extern "C" {
-extern GameState g_gameState;
 extern LmapScene *g_lmapScene;
 void FUN_0039560c(AmbientMovementWork *work);
 f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
@@ -51,7 +51,7 @@ void FUN_0039568c(AmbientMovementWork *work)
         offsetof(AmbientGlobalsView, paused) == 0x348 ? 1 : -1];
     AmbientMovementTransform *movement = &work->actor->movement;
     AmbientGlobalsView *globals = reinterpret_cast<AmbientGlobalsView *>(&g_gameState);
-    if (globals->paused || g_gameState.unk18) {
+    if (globals->paused || g_gameState.inputBlocked) {
         return;
     }
     if (work->state != 0) {

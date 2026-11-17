@@ -4,10 +4,10 @@
 #include "shard/SaveWork.h"
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include "util/TrigF32.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapCameraGlobals DAT_004474f0;
-extern GameState g_gameState;
 extern LmapScene *g_lmapScene;
 u8 mapCollisionGetStoredVectors(CollisionVector *, CollisionVector *, CollisionVector *, CollisionVector *);
 f32 FUN_001e27f8(const f32 *, const f32 *, const f32 *, f32, f32);
@@ -15,11 +15,11 @@ f32 FUN_001e27f8(const f32 *, const f32 *, const f32 *, f32, f32);
 void FUN_0021b0f0(void)
 {
     DAT_004474f0.work->values[2] = 0.0f;
-    if (g_gameState.unk000 == 25) {
-        if (g_gameState.unk004Value == 3)
+    if (g_gameState.mapId == 25) {
+        if (g_gameState.areaId == 3)
             return;
-    } else if ((g_gameState.unk000 == 26 || g_gameState.unk000 == 27 || g_gameState.unk000 == 28) &&
-               g_gameState.unk004Value == 1) {
+    } else if ((g_gameState.mapId == 26 || g_gameState.mapId == 27 || g_gameState.mapId == 28) &&
+               g_gameState.areaId == 1) {
         return;
     }
     CollisionVector first, second, third, fourth;

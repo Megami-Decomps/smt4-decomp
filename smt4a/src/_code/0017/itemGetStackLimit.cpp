@@ -1,10 +1,10 @@
 #include "shard/ItemStackLimit.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
 
 ItemCategoryEntry *itemCategoryFindByItemId(u32 id);
-ItemRecordA *dataTable8FindRecord(u32 id);
-ItemRecordB *dataTable08Sub2GetRecord(u32 id);
 
 /* Returns how many of the item can be held: 1 for unlimited storage, the record's limit for limited
  * types (999 when the record leaves it 0), 0 for unknown items. */
@@ -24,12 +24,12 @@ s32 itemGetStackLimit(u32 id)
     switch (entry->type) {
     case 1:
     case 12: {
-        ItemRecordA *record = dataTable8FindRecord(id);
+        ConsumableRecordA *record = dataTable8FindRecord(id);
         if (record == NULL) {
             return 0;
         }
-        if (record->limit != 0) {
-            return record->limit;
+        if (record->sortBits.stackLimit != 0) {
+            return record->sortBits.stackLimit;
         }
         break;
     }
@@ -40,12 +40,12 @@ s32 itemGetStackLimit(u32 id)
     case 6:
     case 7:
     case 8: {
-        ItemRecordB *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
         if (record == NULL) {
             return 0;
         }
-        if (record->limit != 0) {
-            return record->limit;
+        if (record->flagBits.stackLimit != 0) {
+            return record->flagBits.stackLimit;
         }
         break;
     }

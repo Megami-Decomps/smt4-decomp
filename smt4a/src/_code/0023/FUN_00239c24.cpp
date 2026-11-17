@@ -1,15 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00239c24` (_code @ 0x239c24, 0x908 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x8];
-    int f005f1604; /* 0x008 */
-};
-extern GameStateView g_gameState;
-
 
 int randRange(...);
 int libm_cosf(void);
@@ -36,7 +30,6 @@ typedef struct {
     unsigned int sp4C; /* 0x4c: local_4c */
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
-
 
 extern unsigned char DAT_0060fec8; /* 0x60fec8 */
 extern int DAT_0060ff88; /* 0x60ff88 */
@@ -71,7 +64,6 @@ extern int FUN_003857c8(int);
 /* Supplied declaration required: FUN_00398004. */
 extern int FUN_003adc40(void);
 /* Supplied declaration required: FUN_003ae3c4. */
-
 
 void FUN_00239c24(void)
 
@@ -191,8 +183,8 @@ void FUN_00239c24(void)
         *(char *)(temp_v3 + 0x3a) = (char)*(short *)(temp_v5 + 0x5814d4);
         *(char *)(temp_v3 + 0x3b) = (char)*(unsigned short *)(temp_v5 + 0x5814d6);
       }
-      g_gameState.f005f1604 = (unsigned int)*(short *)(temp_v5 + 0x5814c8);
-      naviMainSetFlagsAndActivate(g_gameState.f005f1604 & 0xff,0,0,0,0,0);
+      g_gameState.currentObjectId = (unsigned int)*(short *)(temp_v5 + 0x5814c8);
+      naviMainSetFlagsAndActivate(g_gameState.currentObjectId & 0xff,0,0,0,0,0);
     }
     else {
       FUN_002edf08();

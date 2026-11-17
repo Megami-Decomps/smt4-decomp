@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 typedef struct AocMainAObjC { /* 0x00 */ u8 unk[1]; } AocMainAObjC;
 
@@ -56,15 +57,6 @@ void aocEntryPanelCreateText(DirectoryDisplayStateA *state, u32 selection, u32 a
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void aocReleasePackageOwner(AocPackageOwner *owner);
-
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {

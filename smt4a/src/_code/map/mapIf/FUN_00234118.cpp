@@ -1,5 +1,6 @@
-/* NON_MATCHING: body, branches and the allocate-then-construct result now match; retail loads &g_mapIf before the store constants and places g_gameState's pool word before g_mapIf's. */
+/* NON_MATCHING: body, branches and the allocate-then-construct result now match; retail loads &g_mapIf before the store constants and places g_gameState.mapId's pool word before g_mapIf's. */
 #include "map/mapIf.h"
+#include "game/GameStateA.h"
 #include "code/Code0040.h"
 
 namespace {
@@ -7,7 +8,6 @@ struct MapIfSpawnPose { f32 x, y, z, heading; };
 }
 extern "C" {
 extern MapIfStateA *g_mapIf;
-extern s32 g_gameState;
 extern void *g_handleRegistry;
 s32 textFormatBuffer(char *output, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
@@ -31,11 +31,11 @@ void FUN_00234118(MapIfSpawnPose pose)
     state->position[2] = pose.z;
     state->heading = pose.heading;
     char path[128];
-    if (g_gameState == 0x18)
+    if (g_gameState.mapId == 0x18)
         textFormatBuffer(path, "map/all/m099_fast.bam");
     else
-        textFormatBuffer(path, "map/all/m%03d_fast.bam", g_gameState);
-    if (g_gameState == 0x2c || g_gameState == 0x2d || g_gameState == 0x2e || g_gameState == 0x2f)
+        textFormatBuffer(path, "map/all/m%03d_fast.bam", g_gameState.mapId);
+    if (g_gameState.mapId == 0x2c || g_gameState.mapId == 0x2d || g_gameState.mapId == 0x2e || g_gameState.mapId == 0x2f)
         textFormatBuffer(path, "map/all/m%03d_fast.bam", 0x2b);
     void *memory = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 0x16ee);
     MapIfResource *resource = static_cast<MapIfResource *>(memory);

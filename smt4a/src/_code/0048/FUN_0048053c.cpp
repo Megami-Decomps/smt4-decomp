@@ -31,14 +31,13 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
         kind = record->category;
     s16 bonuses[7];
     equipmentGetCappedUpgradeBonuses(item, bonuses);
-    const EquipmentUpgradeBonusRecord* upgrade =
-        reinterpret_cast<const EquipmentUpgradeBonusRecord*>(dataTable08Sub2GetRecord(item));
+    const EquipmentRecordA* upgrade = dataTable08Sub2GetRecord(item);
     EquipmentUpgradeModifiers extras = {};
     s32 hp = 0;
     if (upgrade != NULL) {
-        hp = upgrade->power;
+        hp = upgrade->hpBonus;
         FUN_001a90f0(&extras,
-            reinterpret_cast<const EquipmentUpgradeModifiers*>(upgrade->modifiers));
+            reinterpret_cast<const EquipmentUpgradeModifiers*>(upgrade->statBonus));
     }
     if (kind == 4) {
         u32 index = item - 0x12d;

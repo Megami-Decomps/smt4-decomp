@@ -2,12 +2,12 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
 #include "shard/W6_W6Match3_NameFormState.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 s32 dataTable00CompareRecordIds(const void *left, const void *right);
-extern AocSystem *g_aocSystem;
 
 static inline Table00Record *table00FindRecord(const Table00Record *key,
     const Table00Record *records, u32 count)
@@ -21,9 +21,9 @@ Table00Record *dataTable00FindById(u16 id)
 {
     Table00Record key;
     key.id = id;
-    if (g_aocSystem->table00.records != NULL) {
-        Table00Record *record = table00FindRecord(&key, g_aocSystem->table00.records,
-            g_aocSystem->table00.count);
+    if (g_aocSystem->table00Records != NULL) {
+        Table00Record *record = table00FindRecord(&key, g_aocSystem->table00Records,
+            g_aocSystem->table00Count);
         if (record != NULL) {
             return record;
         }

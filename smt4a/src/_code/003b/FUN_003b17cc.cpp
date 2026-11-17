@@ -1,8 +1,8 @@
 #include "common.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
-void *dataTable00FindById(u16 id);
 void scrSetResult(s32 result);
 }
 

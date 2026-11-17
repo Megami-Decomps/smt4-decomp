@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 struct SequenceFourteenArgument {
     s16 index; // 0x00
@@ -6,7 +7,6 @@ struct SequenceFourteenArgument {
 };
 
 extern "C" {
-extern GameStateA g_gameState;
 void *jyoucyuGetTableEntry(u32 index);
 bool gameStateIsFlagSetAndLarge(void);
 void asdSequenceRequest(s32 state, const void *argument, u32 argumentSize);

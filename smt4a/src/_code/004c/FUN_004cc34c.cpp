@@ -83,7 +83,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         break;
     case 6: {
         saveGetSelectedRecordSlot(work->region);
-        SlotRecord *record = gameGetSlotRecord(work->slot);
+        SlotRecordA *record = gameGetSlotRecord(work->slot);
         switch (work->step) {
         case 0:
             FUN_0022e774();

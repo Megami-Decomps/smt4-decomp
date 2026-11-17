@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -18,12 +19,7 @@ typedef struct CursorPanel {
     /* 0x224 */ Vec2Point pointer;
 } CursorPanel;
 
-typedef struct GameState {
-    /* 0x000 */ u8 unk000[0x251];
-    /* 0x251 */ s8 muted;
-} GameState;
 
-extern GameState g_gameState;
 
 void pointConvertToFloat(void *out, s32 x, s32 y);
 void FUN_00233240(void *animation, s32 mode);
@@ -38,7 +34,7 @@ void FUN_0039cb34(CursorPanel *panel)
 {
     if (panel->state == 0) {
         FUN_00233240(panel->animation, 1);
-        if (g_gameState.muted == 0) {
+        if (g_gameState.map.bgResetPending == 0) {
             buttonHelpSetContext(0x1b);
         }
         panel->flags |= 0x1000000;

@@ -2,10 +2,10 @@
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapIfState *g_mapIf;
-extern GameState g_gameState;
 f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
 
 // Trigger the first nearby waiting map marker and place its appearance effect above the player.
@@ -20,7 +20,7 @@ void FUN_002e8a78(f32 x, f32 y, f32 z)
              record->display.category == 37) && record->state == 6) {
             if (mathDistanceBetweenPoints(x, y, z, record->position.x, record->position.y, record->position.z) < 10.0f) {
                 SoundActorQueuePosition position = { record->position.x, y + 120.0f, record->position.z };
-                if (!g_gameState.unk18) {
+                if (!g_gameState.inputBlocked) {
                     if (record->display.category == 38 || record->display.category == 37) {
                         position.x *= 1.0f / 3.0f;
                         position.y *= 1.0f / 3.0f;

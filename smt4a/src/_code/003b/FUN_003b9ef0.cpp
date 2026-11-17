@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b9ef0` (_code @ 0x3b9ef0, 0x61c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "code/Code0013_Smt4a.h"
 
 extern "C" {
@@ -36,7 +37,6 @@ extern int g_aocMain; /* 0x570260 */
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapMain; /* 0x581274 */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned int DAT_005f1608; /* 0x5f1608 */
@@ -99,7 +99,6 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: table23FindRecordByKey. */
 /* Supplied declaration required: FUN_003b5d20. */
 /* Supplied declaration required: sysPlayVoice. */
-
 
 void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
 
@@ -316,8 +315,8 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
   }
   DAT_005f1650 = 0;
   naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
-  if (g_gameState != 5) {
-    if ((g_gameState != 3) || (DAT_005f1600 != 3)) goto LAB_003ba158;
+  if (g_gameState.mapId != 5) {
+    if ((g_gameState.mapId != 3) || (DAT_005f1600 != 3)) goto LAB_003ba158;
   }
   else if (DAT_005f1600 != 6) goto LAB_003ba158;
   if (DAT_005f16e0 < 99) {

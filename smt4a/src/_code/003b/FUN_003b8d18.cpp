@@ -14,7 +14,7 @@ s32 randRange(u32 maximum);
 
 u32 FUN_003b8d18(void)
 {
-    Table00Record *record = dataTable00FindById((u16)scrGetArg(0));
+    Table00RecordA *record = dataTable00FindById((u16)scrGetArg(0));
     u32 candidates[128];
     sysMemClear(candidates, sizeof(candidates));
     u8 count = 0;

@@ -1,16 +1,10 @@
 #include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "gamedata/Table00Lookup.h"
 extern "C" bool asdTMTexTableNodeIsLoaded(u32 table, s32 index);
-struct BaseTextureRecord {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u16 flags;
-    /* 0x04 */ u8 unk04[0x88];
-    /* 0x8c */ s16 textureIndex;
-};
 
 extern "C" {
 bool gameFlagIsSet(u32 flag);
-const BaseTextureRecord *dataTable00FindById(u32 id);
 
 bool devilIsTextureLoaded(s32 id, s32 resolve)
 {
@@ -25,10 +19,10 @@ bool devilIsTextureLoaded(s32 id, s32 resolve)
             if (!record) {
                 return false;
             }
-            const BaseTextureRecord *base = dataTable00FindById((u16)id);
-            if (base->flags & 0x8000) {
+            const Table00RecordA *base = dataTable00FindById((u16)id);
+            if (base->level & 0x8000) {
                 table = 25;
-                index = base->textureIndex;
+                index = base->battleTextureId;
                 if (index >= 0x9a) {
                     return false;
                 }

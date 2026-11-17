@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027e0d8` (_code @ 0x27e0d8, 0x1cd0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "gfx/CameraAnimationApply.h"
 
@@ -142,7 +143,6 @@ extern unsigned char DAT_00557c60; /* 0x557c60 */
 extern int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int *g_tmnl; /* 0x56fd30 */
 extern char s_________0056fd3d[22]; /* 0x56fd3d */
-extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned char DAT_005f1748; /* 0x5f1748 */
 extern int DAT_005f1a50; /* 0x5f1a50 */
@@ -271,7 +271,6 @@ extern int FUN_0040af60(int);
 /* Supplied declaration required: FUN_0045b538. */
 /* Supplied declaration required: modelSetDrawMode. */
 extern int animationChannelsAllFinished(unsigned int);
-
 
 unsigned int FUN_0027e0d8(void)
 
@@ -543,7 +542,7 @@ unsigned int FUN_0027e0d8(void)
     if (temp_v7 == 0) break;
     controllerTargetNodeStart(puVar3[0xf],0);
     linkedTargetSetFloat(puVar3[0xf]);
-    puVar3[6] = g_gameState;
+    puVar3[6] = g_gameState.mapId;
     puVar3[7] = DAT_005f1600;
     puVar9 = &LAB_0027ece0;
     asdLoadFileSyncDefault();

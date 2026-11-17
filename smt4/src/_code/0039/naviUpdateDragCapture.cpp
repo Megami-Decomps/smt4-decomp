@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the scheduling of the 0.0f constant load and one VFP register choice in the capture block differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "AsdSDK/TexTableEntryRange.h"
+#include "game/GameState.h"
 
 struct CursorPoint {
     f32 x, y;

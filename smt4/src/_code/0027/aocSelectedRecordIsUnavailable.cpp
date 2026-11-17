@@ -1,6 +1,7 @@
 #include "addon/aocMain.h"
 #include "addon/AocLookup.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
@@ -9,7 +10,6 @@ s32 FUN_0038e29c(const void *left, const void *right);
 u8 rosterHasLeader(void);
 s32 objGetFlagBit16(AocMain *main);
 extern AocMain *g_aocMain;
-extern AocSystem *g_aocSystem;
 
 /* Reports a missing or disabled add-on record for the current selection. */
 u32 aocSelectedRecordIsUnavailable(AocSystem *system)
@@ -23,8 +23,8 @@ u32 aocSelectedRecordIsUnavailable(AocSystem *system)
     }
     AocTableSearchRecord key;
     key.id = id;
-    const void *records = system->table.records;
-    u32 count = g_aocSystem->table.count;
+    const void *records = system->table1bRecords;
+    u32 count = g_aocSystem->table1bCount;
     void *record = libc_bsearch(&key, records, count, sizeof(AocTableSearchRecord), FUN_0038e29c);
     if (record == NULL) {
         return 1;

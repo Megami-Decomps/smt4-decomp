@@ -1,5 +1,6 @@
 /* NON_MATCHING: steps the lmap intro camera (hold, ease in, announce the area with its event and voice, ease out) and smooths the camera towards its target; written from the decompilation, the two duplicated announce blocks are merged into a helper and switch layout not compared with retail */
 #include "common.h"
+#include "game/GameStateA.h"
 
 #define LMAP_INTRO_START 0
 #define LMAP_INTRO_FIRST_HOLD 1
@@ -35,14 +36,8 @@ struct LmapIntroScene {
     /* 0x158 */ f32 stepZ;
 };
 
-struct IntroGameState {
-    /* 0x00 */ u8 unk00[0x32];
-    /* 0x32 */ u8 area;
-};
-
 extern "C" {
 extern LmapIntroScene *g_lmapScene;
-extern IntroGameState g_gameState;
 
 void mapEaseSceneHeading(void);
 u32 soundVolumeSettingGet(void);
@@ -68,8 +63,8 @@ static const u32 lmapIntroEventsSecond[LMAP_AREA_COUNT] = {
 static __inline void lmapIntroAnnounce(const u32 *events, u32 voice, u32 volume)
 {
     FUN_0033abd4();
-    if (g_gameState.area < LMAP_AREA_COUNT)
-        soundActorStartOnFreeChannel(events[g_gameState.area]);
+    if (g_gameState.selectedKind < LMAP_AREA_COUNT)
+        soundActorStartOnFreeChannel(events[g_gameState.selectedKind]);
     FUN_00324e38(0xFFFFFFFF);
     libm_sinf();
     libm_cosf();

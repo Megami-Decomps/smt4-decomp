@@ -4,6 +4,7 @@
 #include "code/Code0020.h"
 #include "code/Code0023.h"
 #include "shop/shopMain.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 
@@ -40,13 +41,6 @@ struct SkillShopScreen {
     s16 rowCount;             /* 0x5A8 */
 };
 
-struct SkillRecord {
-    u16 helpId;               /* 0x00 */
-    u8 pad02[0x9E];
-    u16 skillId;              /* 0xA0 */
-    u8 padA2[6];
-};
-
 u32 uiOwnerUpdateAnimationChannels(SkillShopScreen *screen);
 s32 flaggedValueHolderGetTotal(ShopHolder *holder);
 s32 messageTargetSetValue(u32 value, s32 arg);
@@ -76,7 +70,6 @@ int useCounterStart(void);
 int FUN_0029dfc0(...);
 int FUN_0029e0f8(void);
 int FUN_0029dfa8(void);
-SkillRecord *dataTable00FindById(s32 id);
 int FUN_0029defc(...);
 int statusPanelSetOpen(s32 open);
 
@@ -164,10 +157,10 @@ void Obj422448::FUN_003abed8()
         return;
     }
     screen->shownSkillId = skillId;
-    SkillRecord *rec = dataTable00FindById(0);
+    Table00Record *rec = dataTable00FindById(0);
     for (s32 i = 0; i <= 1200; i++, rec++) {
-        if (rec->skillId == screen->shownSkillId) {
-            u16 help = rec->helpId;
+        if (rec->selectionId == screen->shownSkillId) {
+            u16 help = rec->id;
             if (help == 0) {
                 return;
             }

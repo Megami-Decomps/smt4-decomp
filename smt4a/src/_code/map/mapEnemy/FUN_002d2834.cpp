@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d2834` (_code @ 0x2d2834, 0x5444 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -78,7 +79,6 @@ extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned char DAT_00580b94; /* 0x580b94 */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f1623; /* 0x5f1623 */
 extern int DAT_005f1638; /* 0x5f1638 */
 extern signed char DAT_005f17c9; /* 0x5f17c9 */
@@ -158,7 +158,6 @@ extern int textureEntryMeetsUnlockRequirements(unsigned int);
 extern int dataSelectPrioritizedCandidate(int index);
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: __aeabi_idivmod. */
-
 
 void FUN_002d2834(void)
 
@@ -561,9 +560,9 @@ LAB_002d32a0:
         if (*(short *)(temp_v10 + 0x16e) != -1) {
           FUN_00353c20(pcVar15);
         }
-        if (((((g_gameState == 0x29 || g_gameState == 0x2a) ||
-              (g_gameState == 0x2b || g_gameState == 0x2c)) ||
-             ((g_gameState == 0x2d || g_gameState == 0x2e) || g_gameState == 0x2f)) ||
+        if (((((g_gameState.mapId == 0x29 || g_gameState.mapId == 0x2a) ||
+              (g_gameState.mapId == 0x2b || g_gameState.mapId == 0x2c)) ||
+             ((g_gameState.mapId == 0x2d || g_gameState.mapId == 0x2e) || g_gameState.mapId == 0x2f)) ||
             ((temp_v3 = gameFlagIsSet(0x300), temp_v3 == 0 && (temp_v3 = gameFlagIsSet(0x301), temp_v3 == 0)))
             ) && (piVar13 = (int *)(temp_v4 + 0x3d78), *piVar13 < DAT_005f17f4)) {
           if (*(char *)(temp_v10 + 0xb1) != '\0') {
@@ -976,9 +975,9 @@ LAB_002d3c7c:
         *(int *)(temp_v10 + 0xbc) = *(int *)(temp_v10 + 0xbc) + 1;
         temp_v3 = gameFlagIsSet(0x300);
         if ((temp_v3 != 0) || (temp_v3 = gameFlagIsSet(0x301), temp_v3 != 0)) {
-          if ((g_gameState != 0x29 && g_gameState != 0x2a) &&
-             (((g_gameState != 0x2b && g_gameState != 0x2c &&
-               (g_gameState != 0x2d && g_gameState != 0x2e)) && (g_gameState != 0x2f)))) {
+          if ((g_gameState.mapId != 0x29 && g_gameState.mapId != 0x2a) &&
+             (((g_gameState.mapId != 0x2b && g_gameState.mapId != 0x2c &&
+               (g_gameState.mapId != 0x2d && g_gameState.mapId != 0x2e)) && (g_gameState.mapId != 0x2f)))) {
             temp_v19 = 4;
             *(unsigned int *)(temp_v10 + 0xb8) = temp_v19;
             *(unsigned int *)(temp_v10 + 0xbc) = 0;
@@ -1130,9 +1129,9 @@ LAB_002d3c7c:
         }
         temp_v3 = gameFlagIsSet(0x300);
         if ((temp_v3 != 0) || (temp_v3 = gameFlagIsSet(0x301), temp_v3 != 0)) {
-          if ((g_gameState != 0x29 && g_gameState != 0x2a) &&
-             ((g_gameState != 0x2b && g_gameState != 0x2c &&
-              ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)))) {
+          if ((g_gameState.mapId != 0x29 && g_gameState.mapId != 0x2a) &&
+             ((g_gameState.mapId != 0x2b && g_gameState.mapId != 0x2c &&
+              ((g_gameState.mapId != 0x2d && g_gameState.mapId != 0x2e) && g_gameState.mapId != 0x2f)))) {
             *(unsigned int *)(temp_v10 + 0xb8) = 4;
             *(unsigned int *)(temp_v10 + 0xbc) = 0;
           }
@@ -1339,9 +1338,9 @@ LAB_002d4824:
         }
         temp_v3 = gameFlagIsSet(0x300);
         if ((temp_v3 != 0) || (temp_v3 = gameFlagIsSet(0x301), temp_v3 != 0)) {
-          if ((g_gameState != 0x29 && g_gameState != 0x2a) &&
-             ((g_gameState != 0x2b && g_gameState != 0x2c &&
-              ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)))) {
+          if ((g_gameState.mapId != 0x29 && g_gameState.mapId != 0x2a) &&
+             ((g_gameState.mapId != 0x2b && g_gameState.mapId != 0x2c &&
+              ((g_gameState.mapId != 0x2d && g_gameState.mapId != 0x2e) && g_gameState.mapId != 0x2f)))) {
             *(unsigned int *)(temp_v10 + 0xb8) = 4;
             *(unsigned int *)(temp_v10 + 0xbc) = 0;
           }
@@ -1844,9 +1843,9 @@ LAB_002d54c4:
         }
         temp_v3 = gameFlagIsSet(0x300);
         if ((temp_v3 != 0) || (temp_v3 = gameFlagIsSet(0x301), temp_v3 != 0)) {
-          if ((g_gameState != 0x29 && g_gameState != 0x2a) &&
-             ((g_gameState != 0x2b && g_gameState != 0x2c &&
-              ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)))) {
+          if ((g_gameState.mapId != 0x29 && g_gameState.mapId != 0x2a) &&
+             ((g_gameState.mapId != 0x2b && g_gameState.mapId != 0x2c &&
+              ((g_gameState.mapId != 0x2d && g_gameState.mapId != 0x2e) && g_gameState.mapId != 0x2f)))) {
             *(unsigned int *)(temp_v10 + 0xb8) = 4;
             *(unsigned int *)(temp_v10 + 0xbc) = 0;
           }
@@ -2374,9 +2373,9 @@ LAB_002d68ec:
           *(unsigned int *)(temp_v10 + 0xbc) = 0;
           break;
         }
-        if (((g_gameState != 0x29 && g_gameState != 0x2a) &&
-            (g_gameState != 0x2b && g_gameState != 0x2c)) &&
-           ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)) {
+        if (((g_gameState.mapId != 0x29 && g_gameState.mapId != 0x2a) &&
+            (g_gameState.mapId != 0x2b && g_gameState.mapId != 0x2c)) &&
+           ((g_gameState.mapId != 0x2d && g_gameState.mapId != 0x2e) && g_gameState.mapId != 0x2f)) {
           *(unsigned int *)(temp_v10 + 0xb8) = 4;
           *(unsigned int *)(temp_v10 + 0xbc) = 0;
         }
@@ -2387,9 +2386,9 @@ LAB_002d68ec:
         }
         temp_v3 = gameFlagIsSet(0x300);
         if ((temp_v3 != 0) || (temp_v3 = gameFlagIsSet(0x301), temp_v3 != 0)) {
-          if ((g_gameState != 0x29 && g_gameState != 0x2a) &&
-             ((g_gameState != 0x2b && g_gameState != 0x2c &&
-              ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)))) {
+          if ((g_gameState.mapId != 0x29 && g_gameState.mapId != 0x2a) &&
+             ((g_gameState.mapId != 0x2b && g_gameState.mapId != 0x2c &&
+              ((g_gameState.mapId != 0x2d && g_gameState.mapId != 0x2e) && g_gameState.mapId != 0x2f)))) {
             *(unsigned int *)(temp_v10 + 0xb8) = 4;
             *(unsigned int *)(temp_v10 + 0xbc) = 0;
           }

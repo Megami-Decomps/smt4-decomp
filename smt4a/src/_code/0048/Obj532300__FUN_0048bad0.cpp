@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "shard/NaviMain_GetCurrentMap.h"
 #include "map/lmapMain.h"
 
@@ -36,17 +37,7 @@ struct NaviMenu {
     /* 0x1244 */ u8 imageSpriteB[0x8C];
 };
 
-/* The game-state fields the navi menu touches. */
-struct NaviGameFlags {
-    /* 0x000 */ u8 unk000[0x460];
-    /* 0x460 */ s8 forceMapReload;
-    /* 0x461 */ u8 unk461;
-    /* 0x462 */ u8 naviOpen;
-};
-
 extern "C" {
-
-extern NaviGameFlags g_gameState;
 
 s32 uiSpriteAdvanceAnimation(void *sprite, f32 delta);
 s8 uiSpriteGetCompletionState(const void *sprite);
@@ -77,7 +68,7 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
         menu->flags = (menu->flags & ~NAVI_FLAG_ENTERING) | NAVI_FLAG_CLOSING;
         menu->counter = 0;
 
-        if (NaviMain_GetCurrentMap(reinterpret_cast<int>(menu->mapState)) != (s32)naviMainGetRequestedMap(menu->mapState) || g_gameState.forceMapReload != 0) {
+        if (NaviMain_GetCurrentMap(reinterpret_cast<int>(menu->mapState)) != (s32)naviMainGetRequestedMap(menu->mapState) || g_gameState.alternateNaviMap != 0) {
             u32 map = naviMainGetRequestedMap(menu->mapState);
 
             naviMainSetCurrentMap(menu->mapState, map);
@@ -96,7 +87,7 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
         if (uiSpriteAdvanceAnimation(titleSprite, 1.0f) != 0) {
             menu->flags &= ~NAVI_FLAG_SLIDE_DONE;
             FUN_002d22c0(1);
-            g_gameState.naviOpen = 1;
+            g_gameState.naviMapPending = 1;
             menu->step = 2;
         }
         pointConvertToFloat(menu->cursorPoint, vec2GetXInt(titleSprite), vec2GetYInt(titleSprite));

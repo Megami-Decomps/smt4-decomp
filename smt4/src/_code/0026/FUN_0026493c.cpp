@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ typedef struct {
 
 extern int g_lmapMainState; /* 0x447060 */
 extern int g_lmapScene; /* 0x447e88 */
-extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f970; /* 0x49f970 */
 extern unsigned int DAT_0049f978; /* 0x49f978 */
@@ -183,7 +183,7 @@ void FUN_0026493c(int param_1)
 LAB_00264b84:
         temp_v7 = FUN_002c8684(*(unsigned int *)(param_1 + 0x40));
         if (temp_v7 != 0) {
-          FUN_00277b5c(g_gameState,DAT_0049f920);
+          FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
         }
       }
     }
@@ -372,7 +372,7 @@ LAB_00264b84:
       break;
     case 3:
       mapIfResetCounter();
-      FUN_00277b5c(g_gameState,DAT_0049f920);
+      FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
       *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
       *(unsigned int *)(param_1 + 0xd4) = 0;
       return;

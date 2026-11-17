@@ -1,5 +1,6 @@
 /* NON_MATCHING: unsigned count guard restored; path setup, directory preheader scheduling and destination-slot addressing differ. */
-#include "gamedata/GroupedFileTables.h"
+#include "addon/AocSystemA.h"
+#include "gamedata/TableEntryCache.h"
 
 struct AocDisplay;
 extern "C" {
@@ -10,43 +11,31 @@ void *__aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void textFormatBuffer(char *destination, const char *format, ...);
 void *FUN_001b2ebc(AocDisplay *display, const char *path, s32 option,
                    void *size, s32 enabled, s32 alignment, s32 flags);
-s32 packageEntryIsLoaded(FileTableGroup *group);
-FileTableKindRecord *packageEntryGetDirectory(FileTableGroup *group);
-s32 packageEntryGetFileCount(FileTableGroup *group);
 
 // Open matching package files into the caller's slots and mark the owner's request slots.
-void FUN_004701d8(GroupedFileTables *owner, s32 kind, s32 capacity, FileTableSlot *output)
+void FUN_004701d8(AocSystemA *owner, s32 kind, s32 capacity, AocPackageFile *output)
 {
-    struct LoadOwnerView {
-        GroupedFileTables tables;
-        u8 padding[0x130];
-        FileTableSlot *requests;
-    };
-    struct DirectoryGroupView {
-        u8 prefix[0x24];
-        char directory[0x28];
-    };
     char path[0x80];
     sysMemClear(path, sizeof(path));
     s32 outputIndex = 0;
-    for (s32 groupIndex = 0; groupIndex < owner->count; ++groupIndex) {
-        FileTableGroup *group = &owner->groups[groupIndex];
+    for (s32 groupIndex = 0; groupIndex < owner->packageCount; ++groupIndex) {
+        AocPackage *group = &owner->packages[groupIndex];
         if (!packageEntryIsLoaded(group))
             continue;
-        FileTableKindRecord *records = packageEntryGetDirectory(group);
+        AocPackageDirectoryEntry *records = packageEntryGetDirectory(group);
         u32 count = packageEntryGetFileCount(group);
-        const char *directory = reinterpret_cast<const DirectoryGroupView *>(group)->directory;
+        const char *directory = group->mountName;
         for (u32 index = 0; index < count; ++index) {
-            FileTableKindRecord *record = &records[index];
+            AocPackageDirectoryEntry *record = &records[index];
             if (record->kind == kind) {
                 if (outputIndex >= capacity || output == NULL)
                     return;
-                FileTableSlot *slot = &output[outputIndex];
-                __aeabi_memcpy4(slot, &group->slots[index], 0xE);
-                textFormatBuffer(path, DAT_005265ac, directory, reinterpret_cast<const char *>(record->unk01));
-                slot->file = FUN_001b2ebc(g_aocDisplay, path, 0, &slot->unk04[4], 1, 0x80, 0);
-                slot->enabled = 1;
-                reinterpret_cast<LoadOwnerView *>(owner)->requests[outputIndex++].unk0D[0] = 1;
+                AocPackageFile *slot = &output[outputIndex];
+                __aeabi_memcpy4(slot, &group->files[index], 0xE);
+                textFormatBuffer(path, DAT_005265ac, directory, record->name);
+                slot->data = FUN_001b2ebc(g_aocDisplay, path, 0, &slot->result, 1, 0x80, 0);
+                slot->available = 1;
+                owner->states[outputIndex++].requested = 1;
             }
         }
     }

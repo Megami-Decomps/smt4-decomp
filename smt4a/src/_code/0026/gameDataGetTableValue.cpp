@@ -1,23 +1,12 @@
-#include "common.h"
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/Shard0035.h"
 
 extern "C" {
 
-typedef struct Table {
-    /* 0x00000 */ u8 unk[0x5448];
-    /* 0x05448 */ u32 value;
-} Table;
-
-typedef struct GameDataBlocksView {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Table *table;
-} GameDataBlocksView;
-extern GameDataBlocksView g_gameDataBlocks;
-
-/* Returns the word at 0x5448 of the game-data table. */
+/* Returns the word at 0x53C0 of the save body. */
 u32 gameDataGetTableValue(void)
 {
-    return g_gameDataBlocks.table->value;
+    return g_gameDataBlocks.saveBlock->body.unk053C0;
 }
 
 } /* extern "C" */

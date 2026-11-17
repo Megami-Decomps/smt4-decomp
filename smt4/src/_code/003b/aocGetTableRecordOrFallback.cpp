@@ -2,9 +2,9 @@
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match1_Table03Record.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern AocSystem* g_aocSystem;
 Table03Record* aocFindTable03RecordByKey(AocSystem* system, u32 index);
 
 Table03Record* aocGetTableRecordOrFallback(s32 index)

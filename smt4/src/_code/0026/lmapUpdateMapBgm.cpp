@@ -3,19 +3,7 @@
 #include "gamedata/Table1bOr1c.h"
 #include "mikado/mikadoMain.h"
 #include <stddef.h>
-
-/* The fields of g_gameState this music gate uses. */
-struct GameStateBgmView {
-    u8 unk000[0x28];
-    u32 bgmId;          // 0x028
-    u8 unk02C[0x11D - 0x2C];
-    s8 bgmReleased;     // 0x11D
-    u8 unk11E[0x145 - 0x11E];
-    s8 scriptPending;   // 0x145
-};
-typedef char GameStateBgmViewLayoutCheck[
-    offsetof(GameStateBgmView, bgmReleased) == 0x11D &&
-    offsetof(GameStateBgmView, scriptPending) == 0x145 ? 1 : -1];
+#include "game/GameState.h"
 
 /* The music fields beyond the recovered map-main state prefix. */
 struct LmapBgmTailView {
@@ -31,7 +19,6 @@ struct LmapBgmTailView {
 
 extern "C" {
 extern LmapBgmTailView *g_lmapMainState;
-extern GameStateBgmView g_gameState;
 
 s32 bgmGetStateById(u32 id);
 s32 FUN_00287328(u32 id);
@@ -41,12 +28,12 @@ u16 rosterGetLeaderId(void);
  * playing; releases the music while a script is pending, the music is held or the map suppresses it. */
 void lmapUpdateMapBgm(void)
 {
-    GameStateBgmView *game = &g_gameState;
+    GameState *game = &g_gameState;
     LmapBgmTailView *map = g_lmapMainState;
 
-    if (game->scriptPending != 0 || game->bgmReleased == 0 || map->suppressed != 0) {
+    if (game->event.scriptPending != 0 || game->event.bgmReleased == 0 || map->suppressed != 0) {
         bgmReleaseStopped();
-        g_gameState.bgmReleased = 1;
+        g_gameState.event.bgmReleased = 1;
         return;
     }
 

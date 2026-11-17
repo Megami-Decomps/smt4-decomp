@@ -3,21 +3,15 @@
 #include "addon/aocMain.h"
 #include "addon/PackageSelection.h"
 #include "gamedata/DataTableAccess_VariantA.h"
+#include "gamedata/TableEntryCache.h"
+#include "addon/AocSystemA.h"
 
 extern "C" u32 FUN_00471678(AocSystemA *system, u32 id, s32 option)
 {
-    /* These package-file arrays are past the shared AocSystemA prefix. */
-    struct PackageSearchView {
-        u8 unk000[0x448];
-        s32 count;
-        PackageFileRef *files;
-        PackageFileRef *handles;
-    };
-    PackageSearchView *packages = (PackageSearchView *)system;
-    for (s32 i = 0; i < packages->count; ++i) {
-        u32 handle = packages->handles[i].fileId;
-        if (handle != 0 && packages->files[i].fileId != 0) {
-            void *table = dataTableFileGetTable(packages->files[i].fileId, 0);
+    for (s32 i = 0; i < system->itemCount; ++i) {
+        u32 handle = (u32)system->items[i].data;
+        if (handle != 0 && system->states[i].first != 0) {
+            void *table = dataTableFileGetTable(system->states[i].first, 0);
             PackageSelectableRecord *entries = (PackageSelectableRecord *)dataTableGetEntries(table);
             s32 count = dataTableGetCount(table);
             for (s32 j = 0; j < count; ++j) {

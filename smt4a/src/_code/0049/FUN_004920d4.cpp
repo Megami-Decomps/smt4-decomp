@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004920d4` (_code @ 0x4920d4, 0x660 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -39,7 +40,6 @@ extern unsigned char DAT_00532500; /* 0x532500 */
 extern unsigned char DAT_00532548; /* 0x532548 */
 extern unsigned char DAT_00532590; /* 0x532590 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern unsigned int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1604; /* 0x5f1604 */
 extern signed char DAT_005f1622; /* 0x5f1622 */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
@@ -75,7 +75,6 @@ extern int MapNaviTable_GetCategoryRecord(unsigned char *, unsigned int);
 extern int MapNavi_SetDiscoveredCell(int, unsigned int);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 /* Supplied declaration required: __aeabi_memcpy4. */
-
 
 void FUN_004920d4(int param_1)
 
@@ -323,7 +322,7 @@ LAB_004925c8:
       FUN_0048b514(temp_v33);
     }
     if (((*(char *)(temp_v33 + 0x1369) != '\0') && (*(char *)(temp_v33 + 0x1368) == '\0')) ||
-       (temp_v3 = gameFlagsClassify(g_gameState), temp_v3 == 3)) {
+       (temp_v3 = gameFlagsClassify(g_gameState.mapId), temp_v3 == 3)) {
       uiDrawAnimatedMessage(temp_v33);
       return;
     }

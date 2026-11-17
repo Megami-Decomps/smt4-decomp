@@ -6,7 +6,7 @@ extern "C" {
 /* Clears byte 2 of the game data blocks and sets the given bits in their flag word. */
 void gameDataBlocksOrFlagsClearUnk02(u32 bits)
 {
-    g_gameDataBlocks.unk02 = 0;
+    g_gameDataBlocks.noFlags = 0;
     g_gameDataBlocks.flags |= bits;
 }
 

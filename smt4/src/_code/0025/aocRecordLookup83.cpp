@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W5_W5Match7_EntrySort.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -9,14 +10,7 @@ typedef struct Record {
     /* 0x22 */ u8 unk22[0x1A];
 } Record; /* 0x3C */
 
-typedef struct AocSystem {
-    /* 0x000 */ u8 unk000[0x3C4];
-    /* 0x3C4 */ s32 loaded;
-} AocSystem;
-
 typedef s32 (*CompareFn)(const void *a, const void *b);
-
-extern AocSystem *g_aocSystem;
 
 extern void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, CompareFn compare);
 extern void *dataTableGet(u32 table, u32 index);
@@ -36,7 +30,7 @@ void aocRecordLookup83(u16 id)
     u32 count;
 
     key.id = id;
-    if ((g_aocSystem->loaded == 0 || idEntryTableFindById(g_aocSystem, id) == 0) && (table = dataTableGet(8, 3)) != NULL) {
+    if ((g_aocSystem->table08[3].records == NULL || idEntryTableFindById(g_aocSystem, id) == 0) && (table = dataTableGet(8, 3)) != NULL) {
         entries = dataTableGetEntries();
         count = dataTableGetCount(table);
         libc_bsearch(&key, entries, count, sizeof(Record), COMPARE_RECORD_BY_ID);

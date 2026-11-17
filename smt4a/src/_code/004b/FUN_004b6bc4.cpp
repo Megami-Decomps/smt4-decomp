@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail spills the script-table local (not the script) in the entry loop, keeps the s16 x/y in r2/r3 across uiClampScrollOffset (needs multifile uiClampScrollOffset), and the tail pair stores differ (stm vs vstm/strd) */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 /* A row of data table 33 (type 0): which group of list entries a menu type shows. */
 struct ResultMenuType {
@@ -82,7 +83,6 @@ s32 widgetShow(void *list);
 extern char DAT_005328fc[];
 extern s32 DAT_0058800c;
 extern void *g_aocSystem;
-extern GameStateA g_gameState;
 
 /* Fill the result menu's list for menu type `type` (group `group`, or the type's own when -1), then
    scroll it to the starting entry. */

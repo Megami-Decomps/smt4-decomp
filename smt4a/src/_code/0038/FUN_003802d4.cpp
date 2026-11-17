@@ -1,14 +1,14 @@
 /* NON_MATCHING: unrolled predicated structure now matches retail; only the constant/value register pair (r3/r2) is swapped. */
 #include "gamedata/Table00.h"
 #include "script/ScriptArgs.h"
+#include "gamedata/Table00Lookup.h"
 extern "C" {
-Table00Record* dataTable00FindById(u16);
 u32 randRange(u16);
 void scrSetResult(s32);
 
 u32 FUN_003802d4(void)
 {
-    Table00Record* record = dataTable00FindById((u16)scrGetArg(0));
+    Table00RecordA* record = dataTable00FindById((u16)scrGetArg(0));
     u32 candidates[3];
     s32 count = 0;
     for (s32 index = 0; index < 3; ++index) {

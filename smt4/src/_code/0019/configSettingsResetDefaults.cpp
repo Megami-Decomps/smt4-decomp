@@ -1,3 +1,4 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -8,7 +9,7 @@ int cecMessageIdClear(u8 *settings);
 
 void configSettingsResetDefaults(void)
 {
-    u8 *settings = (u8 *)g_gameDataBlocks.saveBlock + 0x80;
+    u8 *settings = g_gameDataBlocks.saveBlock->settings;
 
     cecMessageIdClear(settings);
     settings[0] = 2;

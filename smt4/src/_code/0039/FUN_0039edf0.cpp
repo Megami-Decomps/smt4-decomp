@@ -2,9 +2,9 @@
 #include "ui/TransientSpriteList.h"
 #include "map/mapDepart.h"
 #include "gamedata/FlagBitTests.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern GameState g_gameState;
 s32 saveTestFlagRow(u8 row);
 s32 gameFlagIsSet(s32 flag);
 }
@@ -37,7 +37,7 @@ extern "C" void FUN_0039edf0(TransientSpriteList *list)
     for (s32 index = 0; index < list->count; ++index) {
         TransientSpriteEntry *entry = &list->entries[index];
         if (entry->condition.map != list->selection.map ||
-            (g_gameState.spriteVisibility.forceVisible == 0 && !transientSpriteIsUnlocked(entry, true))) {
+            (g_gameState.forceVisible == 0 && !transientSpriteIsUnlocked(entry, true))) {
             entry->visible = 0;
         } else {
             entry->visible = 1;
@@ -47,7 +47,7 @@ extern "C" void FUN_0039edf0(TransientSpriteList *list)
     for (s32 index = 0; index < secondary->count; ++index) {
         TransientSpriteEntry *entry = &secondary->entries[index];
         if (entry->condition.map != list->selection.map ||
-            (g_gameState.spriteVisibility.forceVisible == 0 && !transientSpriteIsUnlocked(entry, false))) {
+            (g_gameState.forceVisible == 0 && !transientSpriteIsUnlocked(entry, false))) {
             entry->visible = 0;
         } else {
             entry->visible = 1;

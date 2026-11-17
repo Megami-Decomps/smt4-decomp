@@ -6,11 +6,7 @@ struct EquipmentSortPowerPrimary {
     u8 unk00[0x55];
     u8 power;
 };
-struct EquipmentSortPowerSecondary {
-    u8 unk00[0x70];
-    u32 powerFlags;
-};
-typedef char EquipmentSortPowerOffsets[offsetof(EquipmentSortPowerPrimary, power) == 0x55 && offsetof(EquipmentSortPowerSecondary, powerFlags) == 0x70 ? 1 : -1];
+typedef char EquipmentSortPowerOffsets[offsetof(EquipmentSortPowerPrimary, power) == 0x55 ? 1 : -1];
 #ifdef __cplusplus
 extern "C" {
 #endif

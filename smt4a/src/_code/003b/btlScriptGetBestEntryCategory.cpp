@@ -1,13 +1,12 @@
 /* Reports the table-four category of the highest-valued battle-list entry. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "gamedata/Table8Record.h"
+#include "gamedata/ConsumableRecordA.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
 u32 flagValueRead(u32 id);
-Table8Record *dataTable8FindRecord(u32 id);
 void scrSetResult(u32 result);
 
 u32 btlScriptGetBestEntryCategory(void)
@@ -32,8 +31,8 @@ u32 btlScriptGetBestEntryCategory(void)
                 selected = id;
             }
         }
-        Table8Record *entry = dataTable8FindRecord(selected);
-        Table04Record *record = dataTable04FindById(entry->unk32);
+        ConsumableRecordA *entry = dataTable8FindRecord(selected);
+        Table04RecordA *record = dataTable04FindById(entry->skillId);
         if (record != NULL) {
             category = (record->properties & 0xFFFF) >> 11;
         }

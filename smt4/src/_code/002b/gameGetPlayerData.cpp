@@ -1,11 +1,10 @@
-#include "shard/GameDataBlocks.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-u8 *gameGetPlayerData(void)
+PlayerDataIV *gameGetPlayerData(void)
 {
-    return (u8 *)&g_gameDataBlocks.saveBlock->statusChoices.player;
+    return &g_gameDataBlocks.saveBlock->body.slots.player;
 }
 
 } /* extern "C" */

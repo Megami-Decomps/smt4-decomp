@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameDataAccess.h"
 
 extern "C" {
@@ -13,15 +14,7 @@ typedef struct FlagsBlock {
     /* 0xE94 */ s32 timersD[48];
 } FlagsBlock;
 
-typedef struct GameState {
-    /* 0x000 */ u8 unk000[0x254];
-    /* 0x254 */ s32 ticks;
-} GameState;
-
 #define TIMER_PERIOD 0x708
-
-extern GameState g_gameState;
-
 
 /* Counts one frame; every TIMER_PERIOD frames the coarse timers tick down, and the fine ones every frame. */
 void FUN_00139b6c(void)

@@ -1,14 +1,8 @@
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
-typedef struct GameStateRecentPicks {
-    /* 0x000 */ u8 unk000[0x4b8];
-    /* 0x4B8 */ s32 lastPick;   /* -1 when none */
-    /* 0x4BC */ s32 earlierPick; /* -1 when none */
-} GameStateRecentPicks;
-
-extern GameStateRecentPicks g_gameState;
 s32 randRange(u16 max);
 
 /* Picks one of four choices at random, avoiding the last two picked, and records it as the latest pick. */

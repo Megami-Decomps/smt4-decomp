@@ -1,16 +1,11 @@
 #include "shard/W8X15_PackageList.h"
 #include "shard/W6_W6Match2_HelpResources.h"
-
-extern "C" {
-    s32 packageEntryIsLoaded(PackageEntry *entry);
-    char (*packageEntryGetDirectory(PackageEntry *entry))[0x40];
-    u32 packageEntryGetFileCount(PackageEntry *entry);
-}
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
-/* Finds the file reference paired with the record of `kind` named `name` across all loaded packages. */
-PackageFileRef *packageFindFileRefByName(PackageList *list, s32 kind, const char *name)
+/* Finds the file reference paired with the record of `kind` with the key word `key` across all loaded packages. */
+AocPackageFile *packageFindFileRefByName(AocSystemA *system, s32 kind, u32 key)
 {
     s32 i;
     u32 j;
@@ -18,17 +13,17 @@ PackageFileRef *packageFindFileRefByName(PackageList *list, s32 kind, const char
     if (kind == -1) {
         return NULL;
     }
-    for (i = 0; i < list->count; i++) {
-        PackageEntry *entry = &list->entries[i];
+    for (i = 0; i < system->packageCount; i++) {
+        AocPackage *entry = &system->packages[i];
 
         if (packageEntryIsLoaded(entry) != 0) {
-            PackageRecord *records = (PackageRecord *)packageEntryGetDirectory(entry);
+            AocPackageDirectoryEntry *records = packageEntryGetDirectory(entry);
             u32 count = packageEntryGetFileCount(entry);
 
             for (j = 0; j < count; j++) {
-                const PackageRecord *record = &records[j];
+                const AocPackageDirectoryEntry *record = &records[j];
 
-                if (record->kind == kind && record->name == name) {
+                if (record->kind == kind && record->value == key) {
                     return &entry->files[j];
                 }
             }

@@ -5,9 +5,9 @@
 #include "gamedata/Table04Record.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnit.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
-const Table00Record *dataTable00FindById(u32);
 void scrSetResult(u32);
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32);
@@ -19,7 +19,7 @@ u32 FUN_003a8790(void)
     BtlCombatantEntryA *entry = reinterpret_cast<BtlCombatantEntryA *>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->params);
     if (entry->record) {
         for (s32 index = 0; index < 8; ++index) {
-            const Table04Record *skill = dataTable04FindById(entry->record->skills[index]);
+            const Table04RecordA *skill = dataTable04FindById(entry->record->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
@@ -28,7 +28,7 @@ u32 FUN_003a8790(void)
     }
     if (entry->secondaryRecord) {
         for (s32 index = 0; index < 8; ++index) {
-            const Table04Record *skill = dataTable04FindById(entry->secondaryRecord->skills[index]);
+            const Table04RecordA *skill = dataTable04FindById(entry->secondaryRecord->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
@@ -36,9 +36,9 @@ u32 FUN_003a8790(void)
         }
     }
     if (entry->candidate.record) {
-        const Table00Record *demon = dataTable00FindById(entry->id);
+        const Table00RecordA *demon = dataTable00FindById(entry->id);
         for (s32 index = 0; index < 8; ++index) {
-            const Table04Record *skill = dataTable04FindById(demon->skillList.ids[index]);
+            const Table04RecordA *skill = dataTable04FindById(demon->skills[index]);
             if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;

@@ -1,10 +1,11 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/GameDataBlocks.h"
 
 extern "C" {
 
 u8 *gameDataGetFlagBits(void)
 {
-    return (u8 *)g_gameDataBlocks.saveBlock + 0x981e;
+    return g_gameDataBlocks.saveBlock->body.flagBits;
 }
 
 } /* extern "C" */

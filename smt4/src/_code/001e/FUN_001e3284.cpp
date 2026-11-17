@@ -1,5 +1,6 @@
 /* NON_MATCHING: global reset/load ordering now matches; work/global-address registers and subordinate loop-counter registers are exchanged. */
 #include "common.h"
+#include "game/GameState.h"
 
 struct ResetEntry {
     /* 0x00 */ u8 active;
@@ -51,10 +52,6 @@ struct ResetEntryWork {
     /* 0x12A0 */ ResetSubEntry tertiary[3];
 };
 
-struct ResetEntryGameState {
-    /* 0x000 */ u8 unk000[0x214];
-    /* 0x214 */ u32 unk214;
-};
 
 typedef char ResetEntrySizeCheck[sizeof(ResetEntry) == 0x44 ? 1 : -1];
 typedef char ResetSubEntrySizeCheck[sizeof(ResetSubEntry) == 0x2c ? 1 : -1];
@@ -62,7 +59,6 @@ typedef char ResetEntryWorkSizeCheck[sizeof(ResetEntryWork) == 0x1324 ? 1 : -1];
 
 extern "C" {
 extern ResetEntryWork *g_modelGroups;
-extern ResetEntryGameState g_gameState;
 }
 
 static __inline void resetSubEntry(ResetSubEntry *entry)
@@ -85,7 +81,7 @@ static __inline void resetSubEntry(ResetSubEntry *entry)
 // Reset the main entry bank and its two subordinate banks.
 extern "C" void FUN_001e3284()
 {
-    g_gameState.unk214 = 0;
+    g_gameState.map.unk14 = 0;
     ResetEntryWork *work = g_modelGroups;
     work->unk0000 = 0;
     work->unk000c = 0;

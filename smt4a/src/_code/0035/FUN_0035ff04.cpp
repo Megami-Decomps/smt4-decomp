@@ -6,15 +6,15 @@ extern "C" {
 /* Orders two equipment entries by ascending (bonus + capped upgrade value) of upgrade kind 3, then by descending key. */
 s32 FUN_0035ff04(const SortItem *left, const SortItem *right)
 {
-    EntrySortData *leftData = dataTable08Sub2GetRecord(left->id);
-    EntrySortData *rightData = dataTable08Sub2GetRecord(right->id);
+    EquipmentRecordA *leftData = dataTable08Sub2GetRecord(left->id);
+    EquipmentRecordA *rightData = dataTable08Sub2GetRecord(right->id);
     s16 leftBonus[8];
     s16 rightBonus[8];
     equipmentGetCappedUpgradeBonuses(left->id, leftBonus);
     equipmentGetCappedUpgradeBonuses(right->id, rightBonus);
-    s32 order = leftBonus[5] + leftData->bonusesFrom1[2] - (rightBonus[5] + rightData->bonusesFrom1[2]);
+    s32 order = leftBonus[5] + leftData->statBonus[3] - (rightBonus[5] + rightData->statBonus[3]);
     if (order == 0) {
-        order = rightData->key - leftData->key;
+        order = rightData->id - leftData->id;
     }
     return order;
 }

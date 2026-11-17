@@ -3,11 +3,11 @@
 #include "map/MapDepartTarget.h"
 #include "map/SceneSpawn.h"
 #include "gamedata/DataTableAccess_AocTable23.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
 extern LmapScene *g_lmapScene;
-extern GameState g_gameState;
 u32 table23FindRecordByKey(s32 map, u32 destination, u32 flags);
 void mapDepartSetTarget(s32 group, s32 map, s32 target);
 void mapCollisionRelease(void);
@@ -36,7 +36,7 @@ void FUN_002d1b94(u32 destination, u32 flags)
     const MapDepartTargetRecord *target = reinterpret_cast<const MapDepartTargetRecord *>(spawn);
     mapDepartSetTarget(target->group, target->map, target->target);
     state->unk48 = destination;
-    g_gameState.unk004Value = destination;
+    g_gameState.areaId = destination;
     LmapSceneTransform *transform = &g_lmapScene->transform;
     transform->position[0] = static_cast<f32>(spawn->x);
     transform->position[1] = static_cast<f32>(spawn->y);

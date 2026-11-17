@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the slot loop's pointers (cursor, flag bytes, map block) in registers set up once and unpacks the four effect outputs with one ldrd/ldr pair per call; this version reloads them differently, so register allocation and the switch layout differ. The slot logic and calls are the same. */
 #include "common.h"
+#include "game/GameState.h"
 
 namespace {
 /* One entry of the navigation screen's key list: a key and the one it links to. */
@@ -36,7 +37,6 @@ struct NaviKeyList {
 }
 
 extern "C" {
-extern u8 g_gameState;
 NaviMapBlock *gameGetMapBlock(void);
 s32 FUN_002319c0(void);
 s32 asdTMTexTableGetEntryPlacement(u32 group, u32 id, u32 *first, u32 *second, u32 *third, u32 *fourth);
@@ -56,7 +56,7 @@ static inline u8 *workBytes(NaviWork *work)
 u32 FUN_0039b648(NaviWork *work)
 {
     NaviMapBlock *map = gameGetMapBlock();
-    if ((work->flags & 0x2000000) != 0 && (FUN_002319c0() == 0 || *(&g_gameState + 0x18) != 0)) {
+    if ((work->flags & 0x2000000) != 0 && (FUN_002319c0() == 0 || g_gameState.inputBlocked != 0)) {
         work->flags = work->flags & 0xfdffffff;
     }
     NaviKeyPair *pairs = reinterpret_cast<NaviKeyPair *>(workBytes(work) + 0x121e4);
@@ -66,7 +66,7 @@ u32 FUN_0039b648(NaviWork *work)
         u32 third;
         u32 fourth;
         asdTMTexTableGetEntryPlacement(0x1c, slot + 0xfb5, &first, &second, &third, &fourth);
-        if (effectForwardModeOne(first, second, third, fourth) == 0 || *(&g_gameState + 0x18) != 0) {
+        if (effectForwardModeOne(first, second, third, fourth) == 0 || g_gameState.inputBlocked != 0) {
             continue;
         }
         switch (slot) {

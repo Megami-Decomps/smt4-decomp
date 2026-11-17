@@ -1,21 +1,11 @@
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem.h"
 
 struct TableEntry {
     u8 unk00[0x2C];
 };
 
-struct TableEntryList {
-    u32 count;              // 0x00
-    TableEntry *entries;    // 0x04
-};
-
-struct AocSystem {
-    u8 unk000[0x40C];       // 0x000
-    TableEntryList list;    // 0x40C
-};
-
 extern "C" {
-extern AocSystem *g_aocSystem; /* 0x570280 */
 
 /* Looks up entry `index` of data table 0x23/5, continuing into the add-on content entries past its end. */
 TableEntry *FUN_00276264(u32 index)
@@ -28,9 +18,9 @@ TableEntry *FUN_00276264(u32 index)
         return &entries[index];
     }
     AocSystem *aoc = g_aocSystem;
-    TableEntryList list = aoc->list;
+    AocRecordList list = aoc->table23[5];
     if (index < list.count + count) {
-        return &list.entries[index - count];
+        return &((TableEntry *)list.records)[index - count];
     }
     return NULL;
 }

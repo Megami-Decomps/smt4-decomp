@@ -1,12 +1,10 @@
-#include "common.h"
+#include "ui/PartyPanelState.h"
 
 extern "C" {
 
-extern int g_partyPanel;
-
 u8 partyPanelExists(void)
 {
-    return g_partyPanel != 0;
+    return g_partyPanel != NULL;
 }
 
 } /* extern "C" */

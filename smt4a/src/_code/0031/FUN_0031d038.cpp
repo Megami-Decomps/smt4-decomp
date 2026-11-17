@@ -1,3 +1,4 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
@@ -8,8 +9,8 @@ s32 FUN_0031d038(u32 index)
     if (index > 0x500) {
         return 0;
     }
-    GameDataBlock *block = g_gameDataBlocks.saveBlock;
-    GameSavedItemA *item = &block->inventory.items[index];
+    GameSaveDataA *block = g_gameDataBlocks.saveBlock;
+    GameSavedItemA *item = &block->body.items[index];
     if (item == NULL) {
         return 0;
     }

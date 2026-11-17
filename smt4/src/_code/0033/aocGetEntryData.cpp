@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -6,7 +7,6 @@ void dataTableGetCount(u32 value);
 u8 *dataTableGetEntries(void);
 u32 dataTableGet(u32 a, u32 b);
 
-extern AocSystem *g_aocSystem;
 
 /* The data of the table entry with the given id; a fallback block when there is none. */
 u8 *aocGetEntryData(s32 id)

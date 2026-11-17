@@ -2,7 +2,6 @@
 #include "camp/CommonBg/CommonBg.h"
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 
 extern u32 FUN_00295618(void);
 

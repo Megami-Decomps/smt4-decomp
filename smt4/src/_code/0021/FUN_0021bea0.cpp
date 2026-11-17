@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021bea0` (_code @ 0x21bea0, 0x7dc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ typedef struct {
 
 extern int g_mapEnemy; /* 0x447600 */
 extern int g_lmapScene; /* 0x447e88 */
-extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f942; /* 0x49f942 */
 extern unsigned int DAT_0049fadc; /* 0x49fadc */
@@ -124,7 +124,7 @@ void FUN_0021bea0(void)
   temp_v5 = g_mapEnemy;
   temp_v0 = gameGetMapBlock();
   DAT_0049fadc = 0x3c;
-  temp_v1 = dataTable2eSub3FindByKeyPair(g_gameState,DAT_0049f920);
+  temp_v1 = dataTable2eSub3FindByKeyPair(g_gameState.mapId,DAT_0049f920);
   DAT_0049fb7c = 0x1e;
   DAT_0049fb80 = 3500.0f;
   DAT_0049fb84 = 0x44fa0000;

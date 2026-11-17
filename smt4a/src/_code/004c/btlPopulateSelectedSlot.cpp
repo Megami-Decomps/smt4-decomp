@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail pads the register push with ip (frame 1056) where the build extends the frame by 4, and loads the final transition flags after the state store (built hoists it above the compare); all other instructions agree. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "gamedata/Table00Lookup.h"
 
 struct BattleSlotCore { u8 data[0x2ac]; };
 struct BattleSlotScratch {
@@ -38,7 +39,6 @@ struct RecoverableSlot {
 };
 extern "C" {
 extern void *g_btlUiBlock;
-void *dataTable00FindById(u16);
 void FUN_003eb314(BattleSlotState *, BattleSlotCore *, void *);
 PartySlotMap *gameGetSlotTable();
 RecoverableSlot *gameGetSlotRecord(s32);

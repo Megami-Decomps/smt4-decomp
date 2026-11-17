@@ -1,10 +1,10 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table04Record.h"
 #include "shard/W6_W6Match2_HelpResources.h"
+#include "addon/AocSystemA.h"
 
 struct AocSystemA;
 extern "C" {
-extern AocSystemA *g_aocSystem;
 Table04ExtraRecord *FUN_001b2e78(AocSystemA *system, u32 id);
 s32 recordSortEntryCompareByKey(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
@@ -33,9 +33,9 @@ u32 dataTableCountRecordStages(u32 id)
             return (u32)record->flags >> 31;
         }
     } else {
-        Table04Record *record = dataTable04FindById(id);
+        Table04RecordA *record = dataTable04FindById(id);
         if (record != NULL && (record->flags & 0x20000000) == 0) {
-            // The stage slots lie beyond the established Table04Record prefix.
+            // The stage slots lie beyond the established Table04RecordA prefix.
             struct RecordStagesView {
                 u8 unk00[0x62];
                 u8 stages[9][2];

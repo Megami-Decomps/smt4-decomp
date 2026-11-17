@@ -1,21 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003868dc` (_code @ 0x3868dc, 0x738 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    signed char f005f1614; /* 0x018 */
-    u8 pad019[0x8];
-    signed char f005f161d; /* 0x021 */
-    u8 pad022[0x276];
-    float f005f1894; /* 0x298 */
-    float f005f1898; /* 0x29c */
-    int f005f189c; /* 0x2a0 */
-};
-extern GameStateView g_gameState;
-
 
 int libm_cosf(void);
 int libm_sinf(void);
@@ -45,10 +33,6 @@ typedef struct {
 
 extern int g_lmapMainState; /* 0x580238 */
 extern int g_lmapScene; /* 0x581288 */
-
-
-
-
 
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1be4; /* 0x5f1be4 */
@@ -80,7 +64,6 @@ extern int gameDataFlagTestBit(unsigned int);
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 /* Supplied declaration required: __hardfp_atan2f. */
 
-
 void FUN_003868dc(int param_1)
 
 {
@@ -108,7 +91,7 @@ void FUN_003868dc(int param_1)
   temp_v0 = gameFlagsGetBlock();
   temp_v11 = 35.0f;
   temp_v5 = 0;
-  if ((DAT_005f1bc4 != '\0') || (g_gameState.f005f1614 != '\0')) {
+  if ((DAT_005f1bc4 != '\0') || (g_gameState.inputBlocked != '\0')) {
     *(unsigned int *)(temp_v0 + 0xdc8) = 0;
   }
   else {
@@ -142,7 +125,7 @@ void FUN_003868dc(int param_1)
       temp_v5 = 1;
     }
     FUN_0033f9f4();
-    if (g_gameState.f005f161d == '\0') {
+    if (g_gameState.paused == '\0') {
       if (DAT_005f1be4 == 1) {
         if (DAT_005f1c48 != '\0') {
           temp_v2 = padButtonIsPressed(1);
@@ -194,14 +177,14 @@ void FUN_003868dc(int param_1)
         if (DAT_005f1c48 == '\0') {
           FUN_0025ef68(temp_v2 + 0x28,temp_v2 + 0x34,0);
         }
-        g_gameState.f005f1894 = g_gameState.f005f1894 + (float)((unsigned long long)temp_v13 >> 0x20);
-        if ((int)g_gameState.f005f1894 >= 0x44bb8001) {
-          g_gameState.f005f1894 = (float)temp_v13;
+        g_gameState.unk298 = g_gameState.unk298 + (float)((unsigned long long)temp_v13 >> 0x20);
+        if ((int)g_gameState.unk298 >= 0x44bb8001) {
+          g_gameState.unk298 = (float)temp_v13;
         }
-        temp_v8 = g_gameState.f005f1898 + 0.05f;
-        g_gameState.f005f1898 = temp_v11;
+        temp_v8 = g_gameState.unk29C + 0.05f;
+        g_gameState.unk29C = temp_v11;
         if ((int)temp_v8 < 0x420c0001) {
-          g_gameState.f005f1898 = temp_v8;
+          g_gameState.unk29C = temp_v8;
         }
       }
       else {
@@ -220,15 +203,15 @@ void FUN_003868dc(int param_1)
           *(int *)(temp_v0 + 0xdec) = temp_v2 - 0x1d;
           gameCounterAddSaturating(0x1d,1);
         }
-        g_gameState.f005f1894 = g_gameState.f005f1894 + 0.2f;
-        if ((int)g_gameState.f005f1894 >= 0x44bb8001) {
-          g_gameState.f005f1894 = (float)temp_v13;
+        g_gameState.unk298 = g_gameState.unk298 + 0.2f;
+        if ((int)g_gameState.unk298 >= 0x44bb8001) {
+          g_gameState.unk298 = (float)temp_v13;
         }
       }
       temp_v2 = g_lmapScene;
       temp_v11 = (float)temp_v13;
-      if (0 < g_gameState.f005f189c) {
-        g_gameState.f005f189c = g_gameState.f005f189c - 1;
+      if (0 < g_gameState.unk2A0) {
+        g_gameState.unk2A0 = g_gameState.unk2A0 - 1;
       }
       puVar5 = (unsigned int *)(g_lmapScene + 0x40);
       *(float *)(g_lmapScene + 0x1c) =

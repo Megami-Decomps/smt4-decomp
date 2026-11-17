@@ -6,6 +6,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "addon/AocSystem.h"
 
 struct NpcPortraitVariantRecord {
     u16 texture;
@@ -13,7 +14,6 @@ struct NpcPortraitVariantRecord {
 };
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 extern const char DAT_0040357c[];
 extern const s8 DAT_00403570[];
 s32 gameFlagIsSet(u32 flag);

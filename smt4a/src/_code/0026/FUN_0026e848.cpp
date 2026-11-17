@@ -1,28 +1,27 @@
-#include "ui/PartyPanelState.h"
+#include "ui/PartyPanelStateA.h"
 
 extern "C" {
-extern PartyPanelStateA *g_partyPanel;
 
-void uiSpriteSetKeyframe(u8 *member, s32 a, s32 b);
-void slotPlacementAssignSlotPosition(u32 handle, u32 value);
+void uiSpriteSetKeyframe(TimerSlot *sprite, s32 a, s32 b);
+void slotPlacementAssignSlotPosition(PartyPanelWidget *widget, u32 value);
 
-/* Toggles the screen's flag, restarts its member at 0x180 and passes the new flag to each of the 4 + 24 handles. */
+/* Flips the panel's page, plays the page animation (5) and moves each of the 4 + 24 widgets to the new page. */
 void FUN_0026e848(void)
 {
     PartyPanelStateA *screen;
     s32 i;
 
     screen = g_partyPanel;
-    g_partyPanel->toggle = g_partyPanel->toggle ^ 1;
-    uiSpriteSetKeyframe((u8 *)&screen->animation, 5, 0);
+    g_partyPanel->page = g_partyPanel->page ^ 1;
+    uiSpriteSetKeyframe(&screen->sprites[PARTY_PANEL_SPRITE_PAGE], 5, 0);
     i = 0;
     do {
-        slotPlacementAssignSlotPosition(screen->handlesA[i], screen->toggle);
+        slotPlacementAssignSlotPosition(screen->characters[i], screen->page);
         i = i + 1;
     } while (i < 4);
     i = 0;
     do {
-        slotPlacementAssignSlotPosition(screen->handlesB[i], screen->toggle);
+        slotPlacementAssignSlotPosition(screen->demons[i], screen->page);
         i = i + 1;
     } while (i < 0x18);
 }

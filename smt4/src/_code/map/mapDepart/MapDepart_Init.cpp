@@ -5,6 +5,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "map/MapSceneAccess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "game/GameState.h"
 
 // The allocated departure work extends the public prefix.  SaveWork's word at
 // 0x24 lies inside two-byte-aligned padding, so neither shared layout is enlarged.
@@ -33,7 +34,6 @@ typedef char MapDepartureInitLayout[sizeof(MapDepartureInitView) == 0x80 &&
 
 extern "C" {
 extern MapDepart *g_mapDepart;
-extern GameState g_gameState;
 s32 FUN_001e553c(u32 process);
 void mapDepartEnable(u32 process);
 s32 scrCommWaitStateAction(u32 process);
@@ -46,7 +46,7 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 firstDelay, u16 lastDelay,
 /* Past story stage 100 the request also carries the destination's state. */
 static __inline void mapDepartCopyDestination(MapDepartureInitView *work, const MapDepartureRequest *request)
 {
-    if (g_gameState.unk000 >= 100) {
+    if (g_gameState.mapId >= 100) {
         work->destinationState[0] = request->destinationState[0];
         work->destinationState[1] = request->destinationState[1];
         work->destinationState[2] = request->destinationState[2];

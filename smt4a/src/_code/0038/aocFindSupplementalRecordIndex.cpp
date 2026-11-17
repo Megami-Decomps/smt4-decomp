@@ -1,21 +1,12 @@
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
-
-extern "C" AocSystemA *g_aocSystem;
+#include "addon/AocSystemA.h"
 
 struct AocSupplementalRecord {
     s32 id;
     u8 data[0x10];
 };
-/* This table follows the recovered AocSystemA prefix. */
-struct AocSupplementalTable {
-    u8 prefix[0x3FC];
-    s32 count;
-    AocSupplementalRecord *records;
-};
-typedef char TableLayoutCheck[sizeof(AocSupplementalRecord) == 0x14 &&
-    offsetof(AocSupplementalTable, count) == 0x3FC &&
-    offsetof(AocSupplementalTable, records) == 0x400 ? 1 : -1];
+typedef char AocSupplementalRecordSizeCheck[sizeof(AocSupplementalRecord) == 0x14 ? 1 : -1];
 
 static u32 tableSectionCount(s32 table, s32 section)
 {
@@ -29,10 +20,9 @@ static AocSupplementalRecord *supplementalRecordAt(u32 index)
     u32 count = dataTableGetCount(table);
     if (index < count)
         return &entries[index];
-    AocSupplementalTable *extension =
-        reinterpret_cast<AocSupplementalTable *>(g_aocSystem);
-    AocSupplementalRecord *records = extension->records;
-    u32 extensionCount = extension->count;
+    /* the records the packages add to section 3 */
+    AocSupplementalRecord *records = (AocSupplementalRecord *)g_aocSystem->table23[3].records;
+    u32 extensionCount = g_aocSystem->table23[3].count;
     if (index < count + extensionCount)
         return &records[index - count];
     return NULL;
@@ -42,7 +32,7 @@ static AocSupplementalRecord *supplementalRecordAt(u32 index)
 extern "C" u32 aocFindSupplementalRecordIndex(s32 id)
 {
     u32 baseCount = tableSectionCount(35, 3);
-    s32 total = reinterpret_cast<AocSupplementalTable *>(g_aocSystem)->count + baseCount;
+    s32 total = g_aocSystem->table23[3].count + baseCount;
     for (u32 i = 0; (s32)i < total; ++i) {
         AocSupplementalRecord *record = supplementalRecordAt(i);
         if (record->id == -1) {

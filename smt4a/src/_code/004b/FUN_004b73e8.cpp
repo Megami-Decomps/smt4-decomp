@@ -1,4 +1,5 @@
 #include "camp/ScriptPanelResources.h"
+#include "game/GameStateA.h"
 #include "shard/Shard004B.h"
 #include "shard/W5_W5Match7_SceneState.h"
 
@@ -65,14 +66,14 @@ static __inline bool panelHasSelectionChange(u32 flags)
 
 void FUN_004b73e8(CampScriptPanelResources *panel)
 {
-    if (g_gameState.menuRequests.secondary != 0) {
+    if (g_gameState.menuRequestSecondary != 0) {
         panel->transition.state = 13;
         panel->transition.timer = 0;
-        g_gameState.menuRequests.secondary = 0;
-    } else if (g_gameState.menuRequests.primary != 0) {
+        g_gameState.menuRequestSecondary = 0;
+    } else if (g_gameState.menuRequestPrimary != 0) {
         panel->transition.state = 12;
         panel->transition.timer = 0;
-        g_gameState.menuRequests.primary = 0;
+        g_gameState.menuRequestPrimary = 0;
     } else if (aocSelectedRecordIsUnavailable(g_aocSystem)) {
         panel->transition.state = 14;
         panel->transition.timer = 0;

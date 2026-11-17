@@ -17,7 +17,7 @@ AocModelStatus *packageFindFileRefByName(void *owner, s32 category, s32 model);
 // Report whether the portrait mode or requested add-on model is ready.
 u32 FUN_0038971c(void *owner, u32 id)
 {
-    s16 model = reinterpret_cast<DevilModelOverride *>(dataTable00FindById((u16)id))->model;
+    s16 model = dataTable00FindById((u16)id)->portraitId;
     if (btlTalkBustUpGetValue()) {
         if (objGetFlagBit16(g_aocMain))
             return 1;

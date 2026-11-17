@@ -7,6 +7,7 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
 #include "gamedata/DataTableAccess_VariantA.h"
+#include "gamedata/Table00Lookup.h"
 
 namespace {
 /* Resource fields overlap the canonical state's byte-aligned padding. */
@@ -55,7 +56,6 @@ BattleGroupPositionMembersView *btlMainFindEntryByListedId(BtlMainStateA *state,
 EnemyDrawOffsetOwner *stateEntryFindById(BtlMainStateA *state, u32 id);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
 const u8 *FUN_00348f74(const VersionedResourceHeader *resource);
-Table00Record *dataTable00FindById(u16 id);
 
 Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
 {
@@ -95,9 +95,9 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
         const Vec3f *stage = reinterpret_cast<const Vec3f *>(FUN_00348f74(resources->stagePosition));
         position = *stage;
         position.z += 2.0f;
-        const Table00Record *record = dataTable00FindById(btlFindEntryBlockByMemberId(state, index)->id);
+        const Table00RecordA *record = dataTable00FindById(btlFindEntryBlockByMemberId(state, index)->id);
         f32 offset;
-        switch (record->bustUp.value) {
+        switch (record->bustUp) {
         case 0: offset = 15.0f; break;
         case 2: offset = -20.0f; break;
         default: offset = 0.0f; break;

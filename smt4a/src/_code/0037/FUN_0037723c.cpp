@@ -1,4 +1,5 @@
 #include "shard/Shard0033.h"
+#include "game/GameStateA.h"
 #include "code/Code0037.h"
 
 struct AreaTimerRecord {
@@ -18,9 +19,6 @@ struct AreaTimerFlags {
     /* 0x000 */ u8 unk000[0xe94];
     /* 0xE94 */ s32 timers[1];
 };
-struct CurrentAreaState {
-    /* 0x00 */ s32 area;
-};
 extern "C" {
 Flags0C0C *gameFlagsGetBlock();
 s32 dataTable2ECount();
@@ -29,7 +27,6 @@ s32 dataTableGetRecordFortyEight();
 void FUN_003b9720(s32 area, s32 index);
 void gameClearMapGroupFlags(s32 area);
 void FUN_002ba544(s32 area);
-extern CurrentAreaState g_gameState;
 }
 
 /* Related flag variants share the same persistent completion bit. */
@@ -58,7 +55,7 @@ extern "C" void FUN_0037723c(s32 immediate)
         if (area == -1) {
             return;
         }
-        if (area != g_gameState.area || timers->timers[entry->timerIndex] != 0) {
+        if (area != g_gameState.mapId || timers->timers[entry->timerIndex] != 0) {
             continue;
         }
         timers->timers[entry->timerIndex] = entry->duration * 1800;

@@ -1,62 +1,10 @@
 #ifndef SHARD_W8X15_PACKAGELIST_H
 #define SHARD_W8X15_PACKAGELIST_H
 #include "common.h"
-#include "gamedata/DataTableAccess_VariantA.h"
 #include <stddef.h>
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
-
-/* One table file reference in a loaded package. */
-struct PackageFileRef {
-    /* 0x00 */ u32 fileId;
-    union {
-        /* 0x04 */ u8 unk04[0xc];
-        struct {
-            u8 unk04[8];
-            u8 loaded; /* 0x0C */
-            u8 unk0D[3];
-        } state;
-    };
-};
-typedef char PackageFileRefLayoutCheck[sizeof(PackageFileRef) == 0x10 &&
-    offsetof(PackageFileRef, state.loaded) == 0x0C ? 1 : -1];
-
-/* One 0x40-byte record of a package's record table (packageEntryGetDirectory). */
-struct PackageRecord {
-    /* 0x00 */ s8 kind;
-    /* 0x01 */ u8 unk01[0x3b];
-    /* 0x3c */ const char *name;
-};
-typedef char PackageRecordSizeCheck[sizeof(PackageRecord) == 0x40 ? 1 : -1];
-
-/* A loaded package: a list of named files. */
-struct PackageEntry {
-    /* 0x00 */ u8 unk00[0x4c];
-    /* 0x4c */ PackageFileRef *files;
-};
-
-struct PackageList {
-    /* 0x000 */ u8 unk000[0x310];
-    /* 0x310 */ s32 count;
-    /* 0x314 */ u8 unk314[4];
-    /* 0x318 */ PackageEntry *entries;
-};
-
-extern "C" {
-s32 packageEntryIsLoaded(PackageEntry *entry);
-char (*packageEntryGetDirectory(PackageEntry *entry))[0x40];
-u32 packageEntryGetFileCount(PackageEntry *entry);
-}
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-s32 aocCountPackageItemsOfType(AocSystemA *system, s32 type);
-
-#ifdef __cplusplus
-}
-#endif
+#include "addon/AocPackage.h"
 
 #ifdef __cplusplus
 extern "C" {

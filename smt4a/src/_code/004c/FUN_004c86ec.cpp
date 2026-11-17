@@ -6,7 +6,7 @@ extern "C" {
 /* Returns whether any of the record's four effect slots holds -5 or -7. */
 u32 FUN_004c86ec(u32 id)
 {
-    Table04Record *record;
+    Table04RecordA *record;
     s32 i;
 
     if (id != 0) {

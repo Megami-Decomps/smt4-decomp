@@ -10,7 +10,7 @@ s32 FUN_00333694(s32 target, s32 slot, s32 skill, s32 query);
 
 u32 FUN_002684d0(s32 skillId, s32 target)
 {
-    Table04Record *skill = dataTable04FindById(skillId);
+    Table04RecordA *skill = dataTable04FindById(skillId);
     if (skill == NULL) {
         return 0;
     }

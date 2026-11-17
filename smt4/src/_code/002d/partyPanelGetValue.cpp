@@ -1,9 +1,8 @@
-#include "common.h"
+#include "ui/PartyPanelState.h"
 
-namespace { struct State { u8 padding[0x1154]; u32 value; }; }
+namespace {  }
 
 extern "C" {
-extern State *g_partyPanel;
 
 /* Reads the current status value when the owner exists. */
 s32 partyPanelGetValue(void)

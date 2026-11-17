@@ -1,36 +1,25 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
-typedef struct AocEntry {
+typedef struct Table23Section2Record {
     /* 0x00 */ u8 unk00[0x20];
-} AocEntry; /* 0x20 bytes */
-
-typedef struct AocExtra {
-    /* 0x0 */ s32 count;
-    /* 0x4 */ AocEntry *entries;
-} AocExtra;
-
-typedef struct AocSystem {
-    /* 0x000 */ u8 unk000[0x3F4];
-    /* 0x3F4 */ AocExtra extra;     /* entries added by the add-on content */
-} AocSystem;
-
-extern AocSystem *g_aocSystem;
+} Table23Section2Record; /* 0x20 bytes */
 
 /* Returns entry `index` of data table 0x23: the base entries first, then the add-on ones; NULL when out of range. */
-AocEntry *aocDataTable23GetEntry(u32 index)
+Table23Section2Record *aocDataTable23GetEntry(u32 index)
 {
     void *table = dataTableGet(0x23, 2);
-    AocEntry *entries = static_cast<AocEntry *>(dataTableGetEntries(table));
+    Table23Section2Record *entries = static_cast<Table23Section2Record *>(dataTableGetEntries(table));
     u32 count = dataTableGetCount(table);
 
     if (index < count) {
         return &entries[index];
     }
-    s32 extraCount = g_aocSystem->extra.count;
-    AocEntry *extraEntries = g_aocSystem->extra.entries;
+    s32 extraCount = g_aocSystem->table23[2].count;
+    Table23Section2Record *extraEntries = (Table23Section2Record *)g_aocSystem->table23[2].records;
     if (index < extraCount + count) {
         return &extraEntries[index - count];
     }

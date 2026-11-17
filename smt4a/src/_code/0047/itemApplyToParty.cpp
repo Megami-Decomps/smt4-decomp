@@ -1,14 +1,8 @@
 #include "shard/Shard0031.h"
-
-/* The item table record dataTable8FindRecord returns. */
-struct ItemUseRecord {
-    /* 0x00 */ u8 unk00[0x42];
-    /* 0x42 */ u8 flags; /* bit 0: not consumed on use */
-};
+#include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
-ItemUseRecord *dataTable8FindRecord(s32 itemId);
-s32 itemApplyToMember(s32 slot, ItemUseRecord *item, s32 mode, u32 *first, u32 *second);
+s32 itemApplyToMember(s32 slot, ConsumableRecordA *item, s32 mode, u32 *first, u32 *second);
 PartyStatusSlots *gameGetSlotTable(void);
 void flagValueSub(s32 itemId, s32 amount);
 
@@ -17,7 +11,7 @@ void flagValueSub(s32 itemId, s32 amount);
 s32 itemApplyToParty(s32 itemId, s32 mode)
 {
     bool used = false;
-    ItemUseRecord *item = dataTable8FindRecord(itemId);
+    ConsumableRecordA *item = dataTable8FindRecord(itemId);
     if (item != NULL) {
         if (itemApplyToMember(-1, item, mode, NULL, NULL) == 0) {
             used = true;
@@ -30,7 +24,7 @@ s32 itemApplyToParty(s32 itemId, s32 mode)
             }
         }
         if (used) {
-            if (mode == 0 && !(item->flags & 1)) {
+            if (mode == 0 && !(item->useFlags & 1)) {
                 flagValueSub(itemId, 1);
             }
             return 0;

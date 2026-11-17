@@ -1,8 +1,8 @@
 /* NON_MATCHING: compiler retains the game-state base in R5 across formatting instead of reloading it. */
 #include "map/mapMain.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 extern "C" {
-extern GameState g_gameState;
 extern const char DAT_00404498[];
 extern const char DAT_004044b8[];
 s32 textFormatBuffer(char *destination, const char *format, ...);
@@ -12,9 +12,9 @@ void FUN_002a09b4(const char *path, u32 flags);
 void FUN_001fdebc(const MapMain *map)
 {
     char path[128];
-    if (g_gameState.environment.alternate)
+    if (g_gameState.map.darkZone)
         textFormatBuffer(path, DAT_00404498, map->mapId, map->mapId, map->areaId);
-    if (g_gameState.unk26) {
+    if (g_gameState.returning) {
         textFormatBuffer(path, DAT_004044b8, 24, 24, 1);
     } else {
         switch (map->mapId) {

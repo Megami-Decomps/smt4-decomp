@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc keeps g_gameState's address in r8 across the switch; retail reloads it from the pool at every use (r8 saved but unused), which also changes later constant scheduling. */
 #include "ui/NaviCategorySelection.h"
+#include "game/GameStateA.h"
 #include "ui/ButtonHelp.h"
 #include "map/mapDepart.h"
 #include "test/BustupViewer.h"
@@ -13,7 +14,6 @@ static __inline void flagsClearBits(u32 *flags, u32 mask)
 {
     *flags &= mask;
 }
-
 
 struct NaviCategoryTransitionView {
     u8 unk0000[8];
@@ -39,7 +39,6 @@ typedef char NaviCategoryTransitionOffsets[
     offsetof(NaviCategoryTransitionView, upper) == 0x112C ? 1 : -1];
 
 extern "C" {
-extern GameStateA g_gameState;
 void uiSpriteBankApplyPreset(ButtonHelpDisplayUnit *unit, u32 preset);
 void FUN_00168980(u32 sound);
 s32 uiSpriteAdvanceAnimation(ButtonHelpDisplayUnit *unit, f32 step);
@@ -55,9 +54,9 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
     switch (((NaviCategoryTransitionView *)work)->state) {
     case 0:
         uiSpriteBankApplyPreset(&((NaviCategoryTransitionView *)work)->bank, 1);
-        if (!g_gameState.mapFlags.unk295)
+        if (!g_gameState.menuOpen)
             FUN_00168980(27);
-        g_gameState.navigation.unk463 = 1;
+        g_gameState.unk463 = 1;
         flagsSetBits(&((NaviCategoryTransitionView *)work)->flags, 0x01000008);
         ((NaviCategoryTransitionView *)work)->state = 1;
         return;
@@ -73,10 +72,10 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
             work->refresh[1] = 1;
             work->discovered = 1;
             work->unk07B93[0] = 1;
-            g_gameState.controllerFlags.primary = 0;
-            g_gameState.navigation.alternateNaviMap = 0;
-            g_gameState.navigation.unk463 = 0;
-            g_gameState.navigation.naviMapPending = 0;
+            g_gameState.paused = 0;
+            g_gameState.alternateNaviMap = 0;
+            g_gameState.unk463 = 0;
+            g_gameState.naviMapPending = 0;
             ((NaviCategoryTransitionView *)work)->state = 2;
             flagsSetBits(&((NaviCategoryTransitionView *)work)->flags, 2);
             msgWindowReset();
@@ -87,10 +86,10 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
         return;
     }
     case 2:
-        if (g_gameState.navigation.unk461) {
+        if (g_gameState.unk461) {
             flagsClearBits(&((NaviCategoryTransitionView *)work)->flags, ~8u);
             sub68OwnerDestroy();
-            g_gameState.navigation.unk461 = 0;
+            g_gameState.unk461 = 0;
         }
         flagsClearBits(&((NaviCategoryTransitionView *)work)->flags, ~8u);
         return;

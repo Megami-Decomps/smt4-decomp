@@ -3,6 +3,7 @@
 #include "classes/Obj4221a4.h"
 #include "gamedata/DevilRecord.h"
 #include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 
 struct CompendiumListEntryIV {
     u8 summary[24];
@@ -38,7 +39,6 @@ extern "C" {
 void ifTouchRegionClearAll(void *window);
 void FUN_00233818(Obj55ca08 *selection);
 void entryTableClear(void *list);
-const Table00Record *dataTable00FindById(u32 id);
 s32 FUN_0029e9cc(u16 id);
 void FUN_0022e17c(CompendiumListEntryIV *entry, u16 id, s32 useCurrent);
 void recordAppendFloatEntry(CompendiumEntryListIV *list, const CompendiumListEntryIV *entry);

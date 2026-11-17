@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the constant 1 into sl before the entry loop (extra push of sl, loop counter in r4/entry in r5) and converts the two float arguments into s1/s0 rather than s0/s2 */
 #include "gamedata/Table49NaviEntry.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/Table49Trigger.h"
 #include "map/mapDepart.h"
@@ -14,7 +15,6 @@ s32 gameFlagIsSet(s32 flag);
 
 void naviMainSetFlagsAndActivate(u8 first, u8 second, s32 third, s32 fourth, s32 fifth, s32 sixth);
 void navigationSetOrQueueRequest(s32 mapId, s32 areaId, s32 x, f32 y, f32 z);
-extern GameStateA g_gameState;
 
 /* Rebuilds the list of active navigation guide entries from the table-0x49 flags and queues the first one's destination. */
 void FUN_003a249c(void)
@@ -65,7 +65,7 @@ void FUN_003a249c(void)
     }
     if (currentId != firstId) {
         flags->navi.refresh = 1;
-        g_gameState.navigation.naviRefresh = 1;
+        g_gameState.naviRefresh = 1;
         flags->navi.refreshSecond = 1;
     }
     if (firstId != 0) {

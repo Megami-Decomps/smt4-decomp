@@ -4,6 +4,7 @@
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "addon/AocSystem.h"
 
 struct QuestAddonScriptWork {
     u32 state;
@@ -17,7 +18,6 @@ typedef char QuestAddonScriptWorkOffsets[offsetof(QuestAddonScriptWork, commands
     offsetof(QuestAddonScriptWork, script) == 0x14 ? 1 : -1];
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 id);
 s32 aocPackageGrantsItem(AocSystem *system, u16 id, u32 kind);
 void aocQueueType07(AocSystem *system, u32 id, void **output, u32 flags);

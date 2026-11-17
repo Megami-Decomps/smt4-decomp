@@ -1,5 +1,6 @@
 /* NON_MATCHING: conditional flag stores, terminal-state constant lifetime and state-reset epilogues differ. */
 #include "shard/Shard004B.h"
+#include "game/GameStateA.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include "map/mapDepart.h"
 #include "map/MapSelection.h"
@@ -32,7 +33,6 @@ struct MapReturnSaveValuesA {
 };
 typedef char MapReturnSaveValuesSizeCheck[sizeof(MapReturnSaveValuesA) == 24 ? 1 : -1];
 extern "C" {
-extern GameStateA g_gameState;
 void infoWinSetValue(s32);
 s32 FUN_0047e150(AocMainAObjC *);
 void helpResourcesRelease(AocMainAObjC *);
@@ -71,7 +71,7 @@ void FUN_004b8f18(Menu4C *work)
                     work->flags |= 0x100100;
                 state->phase = 0;
                 state->state = 5;
-            } else if (g_gameState.clear.unk5C) {
+            } else if (g_gameState.scriptValue) {
                 MapReturnSaveValuesA values;
                 values.kind = 3;
                 values.first = static_cast<u8>(state->first);

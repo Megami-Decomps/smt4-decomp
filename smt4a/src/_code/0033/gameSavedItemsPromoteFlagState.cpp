@@ -8,7 +8,7 @@ extern "C" void gameSavedItemsPromoteFlagState()
 
     for (index = 0; index < 0x500; ++index) {
         u8 *row = block + index * sizeof(GameSavedItemA);
-        GameSavedItemA *item = (GameSavedItemA *)(row + offsetof(GameSavedItemTableA, items) + sizeof(GameSavedItemA));
+        GameSavedItemA *item = (GameSavedItemA *)(row + offsetof(GameSaveDataA, body.items) + sizeof(GameSavedItemA));
         if (((u8)item->flags >> 6) == 1) {
             item->flags = ((u8)item->flags & ~0xc0u) | 0x80;
         }

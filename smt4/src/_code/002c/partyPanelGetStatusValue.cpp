@@ -1,7 +1,6 @@
 #include "ui/PartyPanelState.h"
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 
 /* Reads the current status value when the owner exists. */
 s32 partyPanelGetStatusValue(void)

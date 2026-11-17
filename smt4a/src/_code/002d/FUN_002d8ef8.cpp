@@ -1,31 +1,11 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gfx/ObjectRegistry.h"
 
 /* A model of the map scene: its controller object is at +4. */
 struct SceneModel {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ RegisteredObject *object;
-};
-
-/* The fields of g_gameState the scene setup reads: the area type and the scene models. */
-struct SceneSetupState {
-    /* 0x000 */ u8 unk000[0x24C];
-    /* 0x24C */ s32 areaTypeA;
-    /* 0x250 */ s32 areaTypeB;
-    /* 0x254 */ u8 unk254[0x2C4];
-    /* 0x518 */ SceneModel *areaModels[4];
-    /* 0x528 */ SceneModel *model528;
-    /* 0x52C */ SceneModel *model52C;
-    /* 0x530 */ SceneModel *model530;
-    /* 0x534 */ u8 unk534[0x1C];
-    /* 0x550 */ SceneModel *model550;
-    /* 0x554 */ u8 unk554[0x10];
-    /* 0x564 */ SceneModel *model564;
-    /* 0x568 */ u8 unk568[8];
-    /* 0x570 */ SceneModel *model570;
-    /* 0x574 */ u8 unk574[0xF8];
-    /* 0x66C */ s32 areaTypeOverrideA;
-    /* 0x670 */ s32 areaTypeOverrideB;
 };
 
 /* The scene's model slots. */
@@ -56,7 +36,6 @@ struct PlayerData {
 };
 
 extern "C" {
-extern SceneSetupState g_gameState;
 extern SceneModels *g_lmapScene;
 extern ObjectRegistry *g_handleRegistry;
 

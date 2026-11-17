@@ -2,11 +2,15 @@
 #ifndef SHARD_SHARD0031_H
 #define SHARD_SHARD0031_H
 
+#include "gamedata/GameSaveBlocks.h"
 #include "common.h"
 #include <stddef.h>
 #include "ui/MessageMain.h"
 #include "status/StatusDown.h"
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
+#include "shard/W6_W6Match6_PartyPanel.h"
+#include "gamedata/SelectedUnitQuery.h"
+#include "ui/GridNavigation.h"
 #include "ui/ButtonHelp.h"
 #include "shard/NaviMain.h"
 #include "shard/W6_W6Match3_ChunkPool.h"
@@ -285,27 +289,7 @@ typedef struct ObjectE0 {
     /* 0x1488 */ u32 unk1488;
 } ObjectE0;
 
-typedef struct GameDataBlock {
-    /* 0x00 */ u8 unk00[0x4];
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u8 unk08[0x2D60];
-    /* 0x2D68 */ u8 unk2D68[4];
-    /* 0x2D6C */ u8 unk2D6C[0x1F0A8];
-    /* 0x21E14 */ u32 unk21E14;
-    /* 0x21E18 */ u8 unk21E18[0x6074];
-    /* 0x27E8C */ u32 unk27E8C;
-    /* 0x27E90 */ u32 unk27E90;
-    /* 0x27E94 */ u8 unk27E94[0x230];
-    /* 0x280C4 */ u16 unk280C4[1];
-    /* 0x280C6 */ u8 unk280C6[0x28A];
-    /* 0x28350 */ u8 unk28350[4];
-} GameDataBlock;
-
-typedef struct GameDataBlocks {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ GameDataBlock *block;
-    /* 0x08 */ GameDataBlock *block2;
-} GameDataBlocks;
+/* The save block is GameSaveDataA in gamedata/GameSaveDataA.h. */
 
 /* Entry with two cached values; the setters do nothing once `inactive` is set and raise the
  * dirty byte next to the value when it changes. */

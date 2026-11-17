@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003254a0` (_code @ 0x3254a0, 0x4cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ typedef struct {
 extern unsigned char LAB_00325978; /* 0x325978 */
 extern int g_mapIf; /* 0x58103c */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern unsigned int DAT_005f1638; /* 0x5f1638 */
@@ -58,7 +58,6 @@ extern int gameFlagIsSetByBlockAt14f8(int);
 extern int linkHolderCallFirst(unsigned int);
 extern int gameDataEntryGetBit6(int, int);
 
-
 void FUN_003254a0(void)
 
 {
@@ -79,14 +78,14 @@ void FUN_003254a0(void)
   if (DAT_005f185e != '\0') {
     temp_v4 = infoWinHasValue();
     if (temp_v4 == 0) {
-      temp_v9 = g_gameState >= 100;
+      temp_v9 = g_gameState.mapId >= 100;
       if (!temp_v9) {
         temp_v4 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if ((temp_v4 == 0) ||
            (temp_v4 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v4 == 1)) {
           temp_v9 = 1;
         }
-        if (((g_gameState < 100) && (g_gameState == DAT_005f1860)) &&
+        if (((g_gameState.mapId < 100) && (g_gameState.mapId == DAT_005f1860)) &&
            (DAT_005f1600 == DAT_005f1864)) {
           temp_v9 = 0;
         }
@@ -100,7 +99,7 @@ void FUN_003254a0(void)
         temp_v4 = gameDataEntryGetBit6(DAT_005f1860,DAT_005f1864);
         if (temp_v4 != 0) {
           temp_v4 = DAT_005f1860;
-          if (g_gameState >= 100) {
+          if (g_gameState.mapId >= 100) {
             temp_v5 = DAT_005f1638;
             if (DAT_005f1638 != 0x41) {
               temp_v5 = (unsigned int)DAT_005f187c;
@@ -131,14 +130,14 @@ LAB_00325644:
             if ((temp_v6 == 0) && (temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v7), temp_v6 == 0)) goto LAB_003256bc;
           }
           infoWinExpandAndSetText(temp_v4);
-          infoWindowShow(g_gameState,DAT_005f1600,1);
+          infoWindowShow(g_gameState.mapId,DAT_005f1600,1);
           infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';
         }
         else {
 LAB_003256bc:
           infoWinExpandAndSetText(&LAB_00325978);
-          infoWindowShow(g_gameState,DAT_005f1600,1);
+          infoWindowShow(g_gameState.mapId,DAT_005f1600,1);
           infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';
         }

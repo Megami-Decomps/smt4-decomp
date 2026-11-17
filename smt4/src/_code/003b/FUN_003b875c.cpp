@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite, control flow and instruction set match retail; remaining diffs: retail keeps r2/r3 across the uiClampScrollOffset calls (needs multifile), converts both centre values before the subtractions (vstmia of corner), sign-extends the page and the owner flag with ldrsb/sxth, and shares one base register for the model block. */
 #include "common.h"
 #include "ui/ScreenObject.h"
+#include "game/GameState.h"
 
 /* The model object the info panel shows (observed prefix). */
 struct PanelModelOwner {
@@ -67,11 +68,6 @@ struct PanelWork {
     /* 0x0E88 */ u32 fileSizes[10];
 };
 
-/* The fields of g_gameState this update reads. */
-struct PanelGameState {
-    /* 0x000 */ u8 unk000[0x164];
-    /* 0x164 */ u16 questMenuBlocked;
-};
 
 #define PANEL_FLAG_LOCKED 0x40000000
 #define PANEL_FLAG_REFRESH 0x1000
@@ -79,7 +75,6 @@ struct PanelGameState {
 
 extern "C" {
 
-extern PanelGameState g_gameState;
 
 PanelSelection *FUN_0022b8c0(void *selection);
 PanelSelection *FUN_0022b238(void *selection);
@@ -158,7 +153,7 @@ void FUN_003b875c(PanelWork *work)
             FUN_002328b4();
         }
     } else if ((work->flags & PANEL_FLAG_LOCKED) == 0) {
-        if (g_gameState.questMenuBlocked != 0) {
+        if (g_gameState.event.eventState != 0) {
             work->state = 8;
             work->phase = 0;
             return;

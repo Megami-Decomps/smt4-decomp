@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the first block differs: retail loads g_gameState's address twice (once for the
  * skip-flag test, once for the clear and the body), armcc loads it once. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "map/mapMain.h"
 #include "map/lmapMain.h"
 #include <string.h>
@@ -11,7 +12,6 @@ struct LmapSnapshotView {
 };
 
 extern "C" {
-extern GameStateA g_gameState;
 extern MapMainA *g_mapMain;
 extern LmapSceneA *g_lmapScene;
 extern LmapSnapshotView *g_lmapView;
@@ -21,8 +21,8 @@ extern LmapSnapshotView *g_lmapView;
 void FUN_0035846c()
 {
     MapMainA *mapMain = g_mapMain;
-    if (g_gameState.mapFlags.snapshot.skipTransitionSnapshot != 0) {
-        g_gameState.mapFlags.snapshot.skipTransitionSnapshot = 0;
+    if (g_gameState.skipTransitionSnapshot != 0) {
+        g_gameState.skipTransitionSnapshot = 0;
         return;
     }
     g_gameState.transitionActive = 1;

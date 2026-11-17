@@ -7,7 +7,7 @@ extern "C" {
 /* Returns the address of the member at 0x27EA8 of the game-data table. */
 u8 *FUN_002840ac(void)
 {
-    return g_gameDataBlocks.saveBlock->save.sub.block27E20;
+    return g_gameDataBlocks.saveBlock->body.block27E20;
 }
 
 } /* extern "C" */

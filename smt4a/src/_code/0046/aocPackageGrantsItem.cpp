@@ -1,37 +1,27 @@
-#include "shard/W4_Match6_DataSet.h"
-#include "addon/AocSystem.h"
-
-/* A content row that grants an item: kinds 7 and 8 name the item id in their last word. */
-struct AocItemRowView {
-    s8 opcode;
-    u8 unk01[0x3B];
-    u32 itemId;
-};
+#include "addon/AocSystemA.h"
 
 extern "C" {
 extern u32 g_aocMain;
 s32 objHasFlagBit16(u32 aoc);
-s32 packageEntryIsLoaded(DataEntry *entry);
-const DataRow *packageEntryGetDirectory(DataEntry *entry);
-u32 packageEntryGetFileCount(DataEntry *entry);
 
 // Report whether a mounted content package grants the item (optionally only while content is available).
-s32 aocPackageGrantsItem(DataSet *system, u32 itemId, s32 checkAvailable)
+s32 aocPackageGrantsItem(AocSystemA *system, u32 itemId, s32 checkAvailable)
 {
     if (checkAvailable && !objHasFlagBit16(g_aocMain)) {
         return 0;
     }
-    for (s32 package = 0; package < system->entryCount; ++package) {
-        DataEntry *entry = &system->entries[package];
+    for (s32 package = 0; package < system->packageCount; ++package) {
+        AocPackage *entry = &system->packages[package];
         if (!packageEntryIsLoaded(entry)) {
             continue;
         }
-        const AocItemRowView *rows = (const AocItemRowView *)packageEntryGetDirectory(entry);
+        const AocPackageDirectoryEntry *rows = packageEntryGetDirectory(entry);
         u32 rowCount = packageEntryGetFileCount(entry);
         for (u32 row = 0; row < rowCount; ++row) {
-            bool grants = rows[row].opcode == 7 || rows[row].opcode == 8;
+            /* kinds 7 and 8 name the item they grant in their value word */
+            bool grants = rows[row].kind == 7 || rows[row].kind == 8;
             if (grants) {
-                grants = rows[row].itemId == itemId;
+                grants = rows[row].value == itemId;
             }
             if (grants) {
                 return 1;

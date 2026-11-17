@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003401a4` (_code @ 0x3401a4, 0x7f4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
@@ -39,7 +40,6 @@ typedef struct {
 
 extern int g_lmapMainState; /* 0x580238 */
 extern int g_lmapScene; /* 0x581288 */
-extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1658; /* 0x5f1658 */
 extern unsigned int DAT_005f1660; /* 0x5f1660 */
@@ -80,7 +80,6 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: partyTryInflictCondition. */
 /* Supplied declaration required: FUN_0049f8a4. */
 extern short __aeabi_idivmod(int, int);
-
 
 void FUN_003401a4(int param_1)
 
@@ -182,11 +181,11 @@ void FUN_003401a4(int param_1)
     }
     if (*(int *)(param_1 + 0x933c) >= 0x1f) {
       if (*(int *)(param_1 + 0x9338) == *(int *)(param_1 + 0x933c) - 0x1e) {
-        FUN_0033e014(g_gameState,DAT_005f1600);
+        FUN_0033e014(g_gameState.mapId,DAT_005f1600);
       }
     }
     else if (*(int *)(param_1 + 0x9338) == 1) {
-      FUN_0033e014(g_gameState,DAT_005f1600);
+      FUN_0033e014(g_gameState.mapId,DAT_005f1600);
     }
     temp_v3 = *(int *)(param_1 + 0x9338) + 1;
     *(int *)(param_1 + 0x9338) = temp_v3;
@@ -378,7 +377,7 @@ void FUN_003401a4(int param_1)
       break;
     case 3:
       mapIfReleaseSlot0AndReset();
-      FUN_0033e014(g_gameState,DAT_005f1600);
+      FUN_0033e014(g_gameState.mapId,DAT_005f1600);
       *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
       *(unsigned int *)(param_1 + 0xd4) = 0;
       return;

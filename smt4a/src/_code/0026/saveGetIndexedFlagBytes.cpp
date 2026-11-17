@@ -6,7 +6,7 @@ extern "C" {
 /* Returns the address of the member at 0x214B0 of the game-data table. */
 u8 *saveGetIndexedFlagBytes(void)
 {
-    return g_gameDataBlocks.saveBlock->save.sub.block21428;
+    return g_gameDataBlocks.saveBlock->body.block21428;
 }
 
 } /* extern "C" */

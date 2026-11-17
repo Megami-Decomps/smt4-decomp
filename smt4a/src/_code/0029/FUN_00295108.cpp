@@ -1,5 +1,6 @@
 /* NON_MATCHING: story popup trigger (milestone flags, then a weighted scan of the popup table); written from the decompilation, flag-chain branch layout not compared with retail */
 #include "gamedata/DataTable.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 
 struct PopupEntry {
@@ -27,7 +28,6 @@ struct PopupState {
 
 extern "C" {
 extern PopupState *g_popupState;
-extern s32 g_gameState;
 extern s32 DAT_005f1994;
 
 s32 gameFlagIsSet(s32 flag);
@@ -82,7 +82,7 @@ void FUN_00295108(s32 immediate)
         if (entry->kind == POPUP_KIND_STORY
             && (entry->requireFlag == 0 || gameFlagIsSet(entry->requireFlag) != 0)
             && (entry->excludeFlag == 0 || gameFlagIsSet(entry->excludeFlag) == 0)
-            && (entry->id != POPUP_ENTRY_SPECIAL || (g_gameState >= 0x1C && g_gameState <= 0x20))) {
+            && (entry->id != POPUP_ENTRY_SPECIAL || (g_gameState.mapId >= 0x1C && g_gameState.mapId <= 0x20))) {
             if (immediate == 0 && !triggered && randRange(99) + 1 <= entry->chance)
                 return;
             if (DAT_005f1994 == 0) {

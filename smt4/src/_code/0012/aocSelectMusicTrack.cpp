@@ -1,9 +1,9 @@
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
 
-extern AocSystem *g_aocSystem;
 
 AocMusicJob *jobGetWork(void);
 u16 *aocContentGetIndexedRecord(void *table, u32 index);

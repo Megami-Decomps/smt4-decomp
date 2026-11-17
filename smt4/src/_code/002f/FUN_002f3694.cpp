@@ -1,6 +1,7 @@
 /* NON_MATCHING: mark bit is captured before the map lookup and candidate counter lifetime matches; bit-address scratch registers and kind-test folding differ. */
 #include "map/mapDepart.h"
 #include "code/Code0025.h"
+#include "game/GameState.h"
 
 /* A record of data table 0x2E (section 2): a timed area event. */
 struct AreaEventRecord {
@@ -42,7 +43,6 @@ typedef char EventMapBlockLayout[offsetof(EventMapBlock, markBits) == 0xC98 && o
 
 extern "C" {
 
-extern GameState g_gameState;
 
 EventMapBlock *gameGetMapBlock(void);
 s32 dataTable2eSub2GetCount(void);
@@ -84,7 +84,7 @@ void FUN_002f3694(void)
             if (areaId == -1) {
                 return;
             }
-            if (g_gameState.unk000 == areaId && block->timers[event->timerSlot] == 0) {
+            if (g_gameState.mapId == areaId && block->timers[event->timerSlot] == 0) {
                 s32 j;
                 s32 group;
 

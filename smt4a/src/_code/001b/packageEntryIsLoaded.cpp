@@ -1,39 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `packageEntryIsLoaded` (_code @ 0x1b315c, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail evaluates the directory test into r0 before branching (moveq r0, #0); the rest matches. */
+#include "addon/AocPackage.h"
 
 extern "C" {
 
-extern int objGetFlagBit0(int);
-extern int objGetFlagBit1(int);
+s32 objGetFlagBit0(void *flags);
+s32 objGetFlagBit1(void *flags);
 
-
-unsigned int packageEntryIsLoaded(int param_1)
-
+/* Whether the package is mounted (state bits 0 and 1 set) and its directory and file slots are loaded. */
+u32 packageEntryIsLoaded(AocPackage *package)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = objGetFlagBit1(param_1 + 8);
-  temp_v1 = 0;
-  if ((temp_v0 != 0) && (temp_v0 = objGetFlagBit0(param_1 + 8), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v2 = *(char *)(param_1 + 0x45) != '\0';
-    temp_v0 = 0;
-    if (temp_v2) {
-      temp_v0 = *(int *)(param_1 + 0x48);
+    if (objGetFlagBit1(&package->id) == 0 || objGetFlagBit0(&package->id) == 0) {
+        return 0;
     }
-    if (!(temp_v2 && temp_v0 != 0)) {
-      temp_v1 = 0;
+    bool hasDirectory = package->directoryLoaded != 0 && package->directoryFile != NULL;
+    if (!hasDirectory) {
+        return 0;
     }
-    else {
-      temp_v1 = 0;
-      if (*(int *)(param_1 + 0x4c) != 0) {
-        temp_v1 = 1;
-      }
-    }
-  }
-  return temp_v1;
+    return package->files != NULL;
 }
 
 } /* extern "C" */

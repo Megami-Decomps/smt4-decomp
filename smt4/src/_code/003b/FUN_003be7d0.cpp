@@ -2,22 +2,8 @@
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
+#include "gamedata/Table00Lookup.h"
 
-struct BattleDrop {
-    u16 item;
-    u16 chance;
-    u16 unk04;
-};
-struct BattleRewardRecord {
-    u16 id;
-    u8 level;
-    u8 unk03[0x55];
-    BattleDrop drops[3];
-    u16 unk6A;
-    u32 experience;
-    u8 unk70[8];
-    u32 money;
-};
 struct BattleRewardTotals {
     u32 items[6];
     u32 counts[6];
@@ -36,14 +22,13 @@ typedef char BattleRewardLayoutCheck[
     offsetof(BattleRewardView, rewards) == 0x174 &&
     offsetof(BattleRewardView, bonusDrops) == 0x44b7 ? 1 : -1];
 extern "C" {
-BattleRewardRecord *dataTable00FindById(u32);
 s32 randRange(u32);
 }
 
 extern "C" void FUN_003be7d0(const BtlEntry *entry)
 {
     BattleRewardTotals *rewards = &reinterpret_cast<BattleRewardView *>(btlGetMainState())->rewards;
-    const BattleRewardRecord *record = dataTable00FindById(entry->id);
+    const Table00Record *record = dataTable00FindById(entry->id);
     if (record != NULL) {
         rewards->experience += record->experience;
         rewards->money += record->money;
@@ -52,12 +37,12 @@ extern "C" void FUN_003be7d0(const BtlEntry *entry)
         if (reinterpret_cast<BattleRewardView *>(btlGetMainState())->bonusDrops)
             bonus = 50;
         for (s32 i = 0; i < 3; ++i) {
-            const BattleDrop *drop = &record->drops[i];
-            if (drop->item != 0 &&
+            const Table00Choice *drop = &record->drops[i];
+            if (drop->value != 0 &&
                 (randRange(99) < drop->chance + bonus || (entry->flags & 0x4000000))) {
                 for (s32 j = 0; j < 6; ++j) {
-                    if (rewards->items[j] == 0 || rewards->items[j] == drop->item) {
-                        rewards->items[j] = drop->item;
+                    if (rewards->items[j] == 0 || rewards->items[j] == drop->value) {
+                        rewards->items[j] = drop->value;
                         ++rewards->counts[j];
                         break;
                     }

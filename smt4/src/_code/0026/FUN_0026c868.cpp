@@ -3,7 +3,6 @@
 #include "ui/PartyPanelState.h"
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 void buttonHelpShowSkillDetails(u16 skill);
 void FUN_0029212c(u16 item);
 void FUN_001b0558();
@@ -29,13 +28,13 @@ void FUN_0026c868()
         FUN_0029212c(panel->previewItem);
         return;
     case 10:
-        if (panel->detailSelection.mode == 0) {
+        if (panel->fusionParentCount == 0) {
             void *table = dataTableGet(0x39, 0);
             const char *entries = static_cast<const char *>(dataTableGetEntries(table));
             if (dataTableGetCount(table) > 3) {
                 text = entries + 0xfd;
             }
-        } else if (panel->detailSelection.mode == 1) {
+        } else if (panel->fusionParentCount == 1) {
             void *table = dataTableGet(0x39, 0);
             const char *entries = static_cast<const char *>(dataTableGetEntries(table));
             if (dataTableGetCount(table) > 4) {

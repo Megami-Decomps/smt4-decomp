@@ -4,10 +4,10 @@
 #include "nn/Result.h"
 #include "shard/JobWork.h"
 #include "sys/ResultReport.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
-extern AocSystem *g_aocSystem;
 s32 FUN_00121e50(AocSystem *system);
 void aocReleasePackageOwner(AocSystem *system);
 void kernelThreadJoinAndClose(u32 *waitHandle);

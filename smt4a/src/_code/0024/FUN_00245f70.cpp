@@ -1,5 +1,6 @@
 /* NON_MATCHING: pool order and the conditional sound call match; only the final reset stores differ (retail sets 7 in r1 and the zero in r0 and stores state first). */
 #include "map/mapIf.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 struct MapIfSoundView {
@@ -11,7 +12,6 @@ struct MapIfSoundView {
 
 extern "C" {
 extern MapIfStateA *g_mapIf;
-extern GameStateA g_gameState;
 s32 soundActorStartOnFreeChannel(u32 sound, MapVector position);
 
 /* Finds the waiting map record of group `id`, plays its sound (unless input is blocked) and advances it to state 7. */

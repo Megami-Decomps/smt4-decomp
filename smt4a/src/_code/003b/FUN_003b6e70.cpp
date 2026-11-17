@@ -1,23 +1,13 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include <string.h>
 
-/* The part of g_gameState holding the pending cutscene request. */
-struct GameStateRequestView {
-    u8 unk000[0x12f];
-    u8 requestPending;   // 0x12f
-    s16 requestId;       // 0x130
-    u8 unk132[2];
-    char requestName[32]; // 0x134
-};
-
 extern "C" {
 
-extern GameStateRequestView g_gameState;
 s16 scrGetArg(u32 index);
 const char *scrGetArgString(u32 index);
 char *libc_strcpy(char *destination, const char *source);
-
 
 // Script command: record the requested cutscene id and name; one specific request also sets a story flag.
 u32 FUN_003b6e70(void)

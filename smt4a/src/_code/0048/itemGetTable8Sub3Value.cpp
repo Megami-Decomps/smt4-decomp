@@ -1,6 +1,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "shard/ItemStackLimit.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
@@ -19,23 +20,15 @@ typedef struct ItemInfo {
     /* 0x08 */ u8 kind;
 } ItemInfo;
 
-/* The add-on content system: only the flag this unit reads is named. */
-typedef struct AocSystem {
-    /* 0x000 */ u8 unk000[0x3C4];
-    /* 0x3C4 */ u32 hasRecords;
-} AocSystem;
-
-extern AocSystem *g_aocSystem;
-
-Table8Sub3Record *idEntryTableFindById(AocSystem *aoc, u32 id);
+Table8Sub3Record *idEntryTableFindById(AocSystemA *aoc, u32 id);
 s32 compareRecordKey(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 
 /* The add-on content's record for `id`, when add-on content provides records. */
-static Table8Sub3Record *aocFindRecord(AocSystem *aoc, u32 id)
+static Table8Sub3Record *aocFindRecord(AocSystemA *aoc, u32 id)
 {
-    if (!aoc->hasRecords) {
+    if (!aoc->table08[3].records) {
         return NULL;
     }
     return idEntryTableFindById(aoc, id);

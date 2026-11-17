@@ -1,13 +1,7 @@
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-
-/* The pending warp id in g_gameState (0 when no warp is pending). */
-struct WarpGlobals {
-    /* 0x000 */ u8 unk000[0x288];
-    /* 0x288 */ s16 warpId;
-};
-extern WarpGlobals g_gameState;
 
 struct WarpVec3 {
     f32 x, y, z;

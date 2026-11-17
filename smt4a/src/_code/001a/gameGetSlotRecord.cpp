@@ -1,16 +1,13 @@
+#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
 
-static __inline GameSlotEntry *slotTableGetSlots(GameSlotTable *table)
+SlotRecordA *gameGetSlotRecord(s32 slotIndex)
 {
-    return table->slots;
-}
-
-SlotRecord *gameGetSlotRecord(s32 slotIndex)
-{
-    GameSlotEntry *slots = slotTableGetSlots(reinterpret_cast<GameSlotTable *>(g_gameDataBlocks.saveBlock));
-    return &slots[slotIndex].record;
+    SaveSlotTable *table = &g_gameDataBlocks.saveBlock->body.slots;
+    return &table->entries[slotIndex];
 }
 
 } /* extern "C" */

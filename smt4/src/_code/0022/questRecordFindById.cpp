@@ -1,6 +1,7 @@
 #include "common.h"
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem.h"
 
 struct QuestRecord {
     u16 id;           /* 0x00 */
@@ -8,7 +9,6 @@ struct QuestRecord {
 };
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 
 // Prefer downloadable quest records, then search the base-game quest table.
 QuestRecord *questRecordFindById(u32 id)

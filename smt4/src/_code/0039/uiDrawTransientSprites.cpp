@@ -1,10 +1,10 @@
 #include "ui/TransientSpriteList.h"
 #include "camp/RenderCtx.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-extern GameState g_gameState;
 void pairCopy(const Point2 *source, Point2 *destination);
 u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
@@ -23,7 +23,7 @@ void uiDrawTransientSprites(TransientSpriteList *list)
     renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, 0));
     for (s32 index = 0; index < list->count; ++index) {
         const TransientSpriteEntry *entry = &list->entries[index];
-        if (entry->visible != 0 || g_gameState.spriteVisibility.forceVisible != 0) {
+        if (entry->visible != 0 || g_gameState.forceVisible != 0) {
             drawSetColorFromRGBA8(entry->color);
             effectSetByteSpeed(entry->color & 0xFF);
             uiDrawTableTextureSized(9, entry->resource, entry->sprite,

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_ForwardEffect.h"
+#include "game/GameState.h"
 extern "C" int FUN_0020ffe8(int, int);
 
 union AnimationFrameEncoding {
@@ -10,28 +11,6 @@ union AnimationFrameEncoding {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    signed char f0049f934; /* 0x018 */
-    u8 pad019[0x9];
-    signed char f0049f93e; /* 0x022 */
-    u8 pad023[0x159];
-    signed char f0049fa98; /* 0x17c */
-    u8 pad17d[0x1c];
-    unsigned char f0049fab5; /* 0x199 */
-    u8 pad19a[0x6];
-    signed char f0049fabc; /* 0x1a0 */
-    u8 pad1a1[0x3];
-    unsigned int f0049fac0; /* 0x1a4 */
-    unsigned int f0049fac4; /* 0x1a8 */
-    u8 pad1ac[0xe4];
-    unsigned int f0049fbac; /* 0x290 */
-    unsigned int f0049fbb0; /* 0x294 */
-    u8 pad298[0xd4];
-    int f0049fc88; /* 0x36c */
-};
-extern GameStateView g_gameState;
 
 
 int lightOwnerRegister(...);
@@ -72,7 +51,7 @@ extern int *g_lmapScene; /* 0x447e88 */
 
 
 /* Supplied declaration required: FUN_0020ffe8. */
-extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
+extern int asdMdlManagerCreateFromSource(void *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 /* Supplied declaration required: vec4Forward. */
 /* Supplied declaration required: FUN_0027f94c. */
@@ -155,7 +134,7 @@ void FUN_00273fc0(void)
   }
   FUN_00297684(g_lmapScene[0x65]);
   temp_v2 = 0;
-  if ((*g_lmapScene == 0x1d || *g_lmapScene == 0x21) || (g_gameState.f0049f93e != '\0')) {
+  if ((*g_lmapScene == 0x1d || *g_lmapScene == 0x21) || (g_gameState.loading != '\0')) {
     temp_v3 = 0;
     piVar7 = (int *)0xc7c34f80;
     temp_v4 = (int *)0xc7c34f80;
@@ -222,7 +201,7 @@ LAB_002741d4:
   if (g_lmapScene[0x59] == 0) {
     return;
   }
-  if (g_gameState.f0049f934 != '\0') {
+  if (g_gameState.inputBlocked != '\0') {
     if ((*puVar2 & 2) == 0) {
       *puVar2 = *puVar2 | 2;
       *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
@@ -287,7 +266,7 @@ LAB_002741d4:
   }
   if ((g_lmapScene[0x5c] == 0) && (puVar2 = (unsigned int *)g_lmapScene[0x59], puVar2 != (unsigned int *)0x0)) {
     temp_v0 = *puVar2;
-    if (g_gameState.f0049fa98 != '\0') {
+    if (g_gameState.event.encounterSourceActive != '\0') {
       if ((temp_v0 & 2) != 0) {
         *puVar2 = temp_v0 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 1;
@@ -314,24 +293,24 @@ LAB_0027461c:
       modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x59] + 8),g_lmapScene[0x5a]);
     }
   }
-  if (g_gameState.f0049fabc != '\0') {
-    temp_v0 = g_gameState.f0049fac0;
-    if (g_gameState.f0049fac0 == 2) {
-      temp_v0 = (unsigned int)g_gameState.f0049fab5;
+  if (g_gameState.event.encounterPending != '\0') {
+    temp_v0 = g_gameState.event.encounterState;
+    if (g_gameState.event.encounterState == 2) {
+      temp_v0 = (unsigned int)g_gameState.event.encounterApproach;
     }
-    if ((g_gameState.f0049fac0 == 2 && temp_v0 == 0) && (g_gameState.f0049fc88 != 0)) {
-      temp_v2 = asdMdlManagerCreateFromSource(g_gameState.f0049fbac,g_gameState.f0049fbb0,7);
+    if ((g_gameState.event.encounterState == 2 && temp_v0 == 0) && (g_gameState.encounterChangeMapId != 0)) {
+      temp_v2 = asdMdlManagerCreateFromSource(g_gameState.map.files[0].handle,g_gameState.map.files[0].buffer,7);
       g_lmapScene[0x5d] = temp_v2;
       lightOwnerRegister(temp_v2,1);
-      nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5d] + 8),0,&g_gameState.f0049fac4);
+      nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5d] + 8),0,&g_gameState.event.encounterMarkerPosition.x);
       modelPartSetRotationDegrees(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
       modelSelectPrimaryMotion(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
       modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
     }
-    g_gameState.f0049fac0 = g_gameState.f0049fac0 + 1;
-    if ((int)g_gameState.f0049fac0 >= 0x33) {
-      g_gameState.f0049fabc = '\0';
-      g_gameState.f0049fac0 = 0;
+    g_gameState.event.encounterState = g_gameState.event.encounterState + 1;
+    if ((int)g_gameState.event.encounterState >= 0x33) {
+      g_gameState.event.encounterPending = '\0';
+      g_gameState.event.encounterState = 0;
     }
   }
   return;

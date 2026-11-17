@@ -2,6 +2,7 @@
 #include "common.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/ConsumableRecordA.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -62,11 +63,6 @@ struct Table04Row {
     /* 0x38 */ u8 flags;
 };
 
-struct Table8Row {
-    /* 0x00 */ u8 unk00[0x32];
-    /* 0x32 */ u16 linkedId;
-};
-
 /* The target query the unit/menu code fills in (only its two read words are used here). */
 struct BtlTargetInfo {
     /* 0x00 */ u8 unk00[4];
@@ -81,7 +77,6 @@ struct BtlTargetInfo {
 extern "C" {
 extern BtlActionTable g_btlAction;
 extern u32 g_btlUiBlock;
-Table8Row *dataTable8FindRecord(s32 id);
 s32 btlFindSelectionIndexByLookupKey(BtlActingState *battle, s32 index);
 void btlEntryBuildSummary(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
 void FUN_004ab80c(u32 ui, u8 *confirmed, u64 *selected, u64 *extra);
@@ -158,11 +153,11 @@ u32 FUN_004de37c(BtlActingTask *task, BtlMenuState *menu)
             isSpecial = 1;
         }
     } else if (command == 8) {
-        Table8Row *linked = dataTable8FindRecord(result->argument);
-        if (linked->linkedId == 0) {
+        ConsumableRecordA *linked = dataTable8FindRecord(result->argument);
+        if (linked->skillId == 0) {
             goto scanTargets;
         }
-        Table04Row *row = (Table04Row *)dataTable04FindById(linked->linkedId);
+        Table04Row *row = (Table04Row *)dataTable04FindById(linked->skillId);
         if (row == NULL) {
             goto scanTargets;
         }
@@ -214,7 +209,7 @@ scanTargets:
                 btlEntryBuildSummary(&info, task->battle, menu->choiceMask);
                 if (info.kind == 3) {
                     if (info.subtype != 24 && info.subtype != 27 && info.subtype != 1) {
-                        Table8Row *row = dataTable8FindRecord(info.record);
+                        ConsumableRecordA *row = dataTable8FindRecord(info.record);
                         if (row != NULL && (((u32 *)row)[26] & 4) != 0) {
                             index = 1;
                             continue;

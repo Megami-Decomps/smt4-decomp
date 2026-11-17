@@ -1,5 +1,6 @@
 /* NON_MATCHING: map transition global addressing and integer-to-float scheduling differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 struct MapTransitionRecord {
     /* 0x00 */ u8 unk00[3];
     /* 0x03 */ u8 kind;
@@ -33,7 +34,7 @@ const MapTransitionRecord *dataTableGetRecord23(u32 index);
 u32 FUN_0039bd24(void)
 {
     g_gameState.transitionActive = 1;
-    g_gameState.unk4cd[2] = 1;
+    g_gameState.unk4CF = 1;
     s32 firstMap = scrGetArg(0);
     u32 firstArea = scrGetArg(1);
     u32 firstObject = scrGetArg(2);

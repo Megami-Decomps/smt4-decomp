@@ -2,10 +2,10 @@
 #include "map/mapObj.h"
 #include "map/mapDepart.h"
 #include "util/TrigF32.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapObjectState *g_mapObj;
-extern GameState g_gameState;
 void FUN_002671f4(s32 slot, MapVector position, f32 heading, f32 a, f32 b, f32 c);
 }
 
@@ -32,7 +32,7 @@ extern "C" void FUN_0027ae90(void)
         MapObjectSlot *object = &g_mapObj->slots[i];
         if (object->active == 0)
             continue;
-        if (g_gameState.unk000 != 4 || g_gameState.unk004Value != 1) {
+        if (g_gameState.mapId != 4 || g_gameState.areaId != 1) {
             if (object->state == 2)
                 spawnOffsetEffect(object, 400.0f, 20.0f, 80.0f, 350.0f, 50.0f);
             if (object->state == 10)

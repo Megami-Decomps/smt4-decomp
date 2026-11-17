@@ -1,23 +1,11 @@
 /* NON_MATCHING: the repeated table-section lookups (get, entries, count) are not merged the way retail's per-case calls are, and the switch layout differs; the help text chosen for each panel kind is the same. */
-#include "common.h"
+#include "ui/PartyPanelStateA.h"
 #include "gamedata/DataTable.h"
 
 /* One line of table 0x39 (0x5C bytes): the help text starts at byte 1. */
 struct HelpLine {
     u8 unk00;
     char text[0x5B];
-};
-
-/* The party panel (only the fields read here). */
-struct PartyPanelView {
-    u8 unk000[0x36];
-    u16 id;
-    u8 unk038[0x97C];
-    u8 kind;
-    u8 unk9b5[0x4CF];
-    s32 mode;
-    u8 unke88[0x1EC];
-    u32 flags;
 };
 
 extern "C" void buttonHelpSetText(const char *text, u32 color);
@@ -34,7 +22,6 @@ static __inline void showHelpLine(u32 line)
 }
 
 extern "C" {
-extern PartyPanelView *g_partyPanel;
 void FUN_0023f900(void);
 void screenShowMessage(u32 id);
 void skillHelpUpdateAttributeAndTarget(u32 id);
@@ -46,7 +33,7 @@ void FUN_0020d934(void)
     if (g_partyPanel == NULL) {
         return;
     }
-    switch (g_partyPanel->kind) {
+    switch (g_partyPanel->panelState) {
     default:
         return;
     case 2:
@@ -65,35 +52,35 @@ void FUN_0020d934(void)
     case 5:
     case 6:
     case 7:
-        skillHelpUpdateAttributeAndTarget(g_partyPanel->id);
+        skillHelpUpdateAttributeAndTarget(g_partyPanel->previewItem);
         return;
     case 8:
     case 9:
-        screenShowMessage(g_partyPanel->id);
+        screenShowMessage(g_partyPanel->previewItem);
         return;
     case 10:
     case 0x12:
-        if (g_partyPanel->mode == 0) {
+        if (g_partyPanel->fusionParentCount == 0) {
             showHelpLine(3);
             return;
-        } else if (g_partyPanel->mode != 1) {
+        } else if (g_partyPanel->fusionParentCount != 1) {
             return;
-        } else if ((g_partyPanel->flags & 8) != 0) {
+        } else if ((g_partyPanel->selectedFusionFlags & 8) != 0) {
             showHelpLine(14);
             return;
-        } else if ((g_partyPanel->flags & 0x40) != 0) {
+        } else if ((g_partyPanel->selectedFusionFlags & 0x40) != 0) {
             showHelpLine(11);
             return;
-        } else if ((g_partyPanel->flags & 2) != 0) {
+        } else if ((g_partyPanel->selectedFusionFlags & 2) != 0) {
             showHelpLine(12);
             return;
-        } else if ((g_partyPanel->flags & 4) != 0) {
+        } else if ((g_partyPanel->selectedFusionFlags & 4) != 0) {
             showHelpLine(13);
             return;
-        } else if ((g_partyPanel->flags & 0x20) != 0) {
+        } else if ((g_partyPanel->selectedFusionFlags & 0x20) != 0) {
             showHelpLine(15);
             return;
-        } else if ((g_partyPanel->flags & 0x80) != 0) {
+        } else if ((g_partyPanel->selectedFusionFlags & 0x80) != 0) {
             showHelpLine(16);
             return;
         } else {

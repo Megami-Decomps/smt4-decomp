@@ -1,4 +1,5 @@
 #include "map/MapJumpTransition.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ void FUN_004731d8(void);
 void FUN_00324c48(s32, s32, s32, f32, f32, f32, f32, f32);
 /* armcc copy helper, called by an opaque name (config alias): the call keeps the dead store retail has */
 void ARM_common_memcpy4_6_call(MapJumpDestination *, const MapJumpDestination *);
-extern GameStateA g_gameState;
 }
 
 /* Dispatch a saved map jump, then return the transition to its waiting state. */

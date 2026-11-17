@@ -1,45 +1,26 @@
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 
-struct AocPackageFile {
-    void *tableFile;
-    u8 unk04[8];
-    u8 enabled;
-    u8 unk0d[3];
-};
-struct AocPackage {
-    u8 unk00[0x45];
-    u8 enabled;
-    u8 unk46[2];
-    void *directoryTable;
-    AocPackageFile *files;
-};
-struct AocDirectoryEntry {
-    u8 type;
-    u8 unk01[0x3f];
-};
 struct AocTableRecord {
     s16 id;
     u8 data[24];
 };
 
 extern "C" {
-s32 packageEntryIsLoaded(AocPackage *package);
-AocDirectoryEntry *packageEntryGetDirectory(AocPackage *package);
-u32 packageEntryGetFileCount(AocPackage *package);
 void *dataTableFileGetTable(void *file, s32 index);
 AocTableRecord *dataTableGetEntries(void *table);
 s32 dataTableGetCount(void *table);
 
 u8 *aocFindPackageTable22Record(AocSystem *system, s32 id)
 {
-    for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
-        AocPackage *package = &system->packages.entries[packageIndex];
+    for (s32 packageIndex = 0; packageIndex < system->packageCount; ++packageIndex) {
+        AocPackage *package = &system->packages[packageIndex];
         if (packageEntryIsLoaded(package)) {
-            AocDirectoryEntry *directory = packageEntryGetDirectory(package);
+            AocPackageDirectoryEntry *directory = packageEntryGetDirectory(package);
             u32 fileCount = packageEntryGetFileCount(package);
             for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
-                if (directory[fileIndex].type == 0x22 && package->files[fileIndex].enabled) {
-                    void *table = dataTableFileGetTable(package->files[fileIndex].tableFile, 0);
+                if (directory[fileIndex].kind == 0x22 && package->files[fileIndex].available) {
+                    void *table = dataTableFileGetTable(package->files[fileIndex].data, 0);
                     AocTableRecord *records = dataTableGetEntries(table);
                     s32 count = dataTableGetCount(table);
                     for (s32 recordIndex = 0; recordIndex < count; ++recordIndex) {

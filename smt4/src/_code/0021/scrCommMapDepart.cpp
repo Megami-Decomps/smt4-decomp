@@ -1,11 +1,11 @@
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "game/GameState.h"
 
 extern "C" {
 void mapDepartSetTarget(s32 area, u32 map, u32 entrance);
 void mapSetDepartureIndex(u32 map);
 s32 scrGetArg(u32 index);
-extern GameState g_gameState;
 
 /* Sets the departure destination and requests the map transition sequence. */
 u32 scrCommMapDepart(void)
@@ -16,11 +16,11 @@ u32 scrCommMapDepart(void)
     if (area == 0x18) {
         mapDepartSetTarget(area, 1, entrance);
         mapSetDepartureIndex(map);
-        g_gameState.unk27 = 1;
+        g_gameState.progressEnabled = 1;
     } else {
         mapDepartSetTarget(area, map, entrance);
     }
-    g_gameState.unk2F8Byte = 0;
+    g_gameState.map.savedLocationSet = 0;
     asdSequenceRequest(6, 0, 0);
     return 1;
 }

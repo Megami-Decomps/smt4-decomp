@@ -3,6 +3,7 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "addon/PackageSelection.h"
+#include "addon/AocSystemA.h"
 
 struct ContentListScroller { u8 data[0x6c]; };
 struct ContentListScreen {
@@ -29,7 +30,6 @@ struct ContentListScreen {
     u32 selected; // 0x664
 };
 extern "C" {
-extern AocSystemA *g_aocSystem;
 s32 FUN_00471960(AocSystemA *);
 s32 textureGetIndexedResource(u32);
 

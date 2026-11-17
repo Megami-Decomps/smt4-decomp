@@ -11,14 +11,14 @@ struct DevilUnlockDefinition {
 }
 
 extern "C" {
-bool gameRecordCopy(u32, RecordValue *);
+bool gameRecordCopy(u32, GameSavedItem *);
 u32 gameFlagIsSet(u32);
 
 /* Whether the registry record `index` exists and is marked eligible. */
 static __inline bool devilRegistryEligible(u32 index)
 {
-    RecordValue saved;
-    return gameRecordCopy(index, &saved) && (saved.eligibility.flags & 0xfc);
+    GameSavedItem saved;
+    return gameRecordCopy(index, &saved) && (saved.flags & 0xfc);
 }
 
 /* Returns whether a demon is available: its unlock flag is set and, when it is linked to a registry record, that record is eligible. */

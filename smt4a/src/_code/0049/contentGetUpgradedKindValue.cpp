@@ -1,18 +1,13 @@
 #include "common.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
+#include "gamedata/EquipmentRecordA.h"
 
-struct ContentUpgradeValueRecord {
-    /* 0x00 */ u8 unk00[0x36];
-    /* 0x36 */ s16 primary;
-    /* 0x38 */ s16 alternate;
-};
 struct ContentUpgradeBonuses {
     /* 0x00 */ s16 values[8];
 };
 
 extern "C" s32 aocEntryGetKind(u32 id);
-extern "C" ContentUpgradeValueRecord *dataTable08Sub2GetRecord(u32 id);
-extern "C" s32 recordGetPercentageScaledBase(const ContentUpgradeValueRecord *record);
+extern "C" s32 recordGetPercentageScaledBase(const EquipmentRecordA *record);
 extern "C" void equipmentGetCappedUpgradeBonuses(u32 id, ContentUpgradeBonuses *bonuses);
 
 /* Include capped equipment upgrades in the primary downloadable-content value. */
@@ -25,17 +20,17 @@ extern "C" s32 contentGetUpgradedKindValue(u32 id)
     case 4:
     case 5:
     case 6: {
-        ContentUpgradeValueRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
         ContentUpgradeBonuses bonuses = {0};
         equipmentGetCappedUpgradeBonuses(id, &bonuses);
-        value = record->primary + bonuses.values[0];
+        value = record->hpBonus + bonuses.values[0];
         break;
     }
     case 7:
-        value = dataTable08Sub2GetRecord(id)->alternate;
+        value = dataTable08Sub2GetRecord(id)->mpBonus;
         break;
     default:
-        ContentUpgradeValueRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
         if (record != NULL)
             value = recordGetPercentageScaledBase(record);
         break;

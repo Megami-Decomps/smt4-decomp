@@ -1,6 +1,7 @@
 /* NON_MATCHING: owner test, the lookup-table base (UiLookupTable at +0x3c), slot value/state pointers and the non-`rev` byte swap now match retail; the swap's masks are materialised differently (retail keeps 0xFF in a register) and the lookup key lives in r1 in retail (here r0, so a redundant move). */
 #include "common.h"
 #include "shard/S3UiLookup.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 

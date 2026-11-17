@@ -1,13 +1,13 @@
 #include "gamedata/ConditionalMessageRecord.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
 s32 gameFlagIsSet(s32 flag);
 }
 
-/* The message extension tail lies beyond the shared AocSystem prefix. */
+/* The message extension tail lies beyond the shared AocSystemA prefix. */
 struct MessageExtension {
     u8 prefix[0x424];
     s32 count;

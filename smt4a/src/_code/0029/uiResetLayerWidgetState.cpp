@@ -1,5 +1,6 @@
 /* NON_MATCHING: global work-pointer address and loop scratch registers use r3/ip opposite retail. */
 #include "common.h"
+#include "game/GameStateA.h"
 
 struct LayerResetEntry {
     /* 0x00 */ u8 active;
@@ -54,17 +55,12 @@ struct LayerResetWork {
     /* 0x1114 */ LayerResetWidget widgets[9];
     /* 0x12A0 */ LayerResetWidget overlays[3];
 };
-struct LayerResetGameState {
-    /* 0x000 */ u8 unk000[0x248];
-    /* 0x248 */ u32 state;
-};
 
 typedef char LayerResetEntrySize[sizeof(LayerResetEntry) == 0x44 ? 1 : -1];
 typedef char LayerResetWidgetSize[sizeof(LayerResetWidget) == 0x2c ? 1 : -1];
 typedef char LayerResetWorkSize[sizeof(LayerResetWork) == 0x1324 ? 1 : -1];
 
 extern "C" LayerResetWork *g_modelGroups;
-extern "C" LayerResetGameState g_gameState;
 
 static inline void resetLayerWidget(LayerResetWidget *widget)
 {
@@ -86,7 +82,7 @@ static inline void resetLayerWidget(LayerResetWidget *widget)
 /* Reset all layer records and widget groups and activate the state block. */
 extern "C" void uiResetLayerWidgetState(void)
 {
-    g_gameState.state = 0;
+    g_gameState.unk248 = 0;
     LayerResetWork *work = g_modelGroups;
     work->state = 0;
     work->first = 0;

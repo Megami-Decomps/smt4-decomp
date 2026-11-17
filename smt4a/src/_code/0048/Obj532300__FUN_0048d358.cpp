@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "test/BustupViewer.h"
 
 extern "C" {
@@ -27,7 +28,7 @@ void _ZN9Obj53230012FUN_0048d358Ev(PresetCursorView *view)
     switch (view->state) {
     case 0:
         uiSpriteBankApplyPreset(view->sprites, 1);
-        if (g_gameState.mapFlags.unk295 == 0) {
+        if (g_gameState.menuOpen == 0) {
             FUN_00168980(0x1b);
         }
         view->flags |= 0x1000000;

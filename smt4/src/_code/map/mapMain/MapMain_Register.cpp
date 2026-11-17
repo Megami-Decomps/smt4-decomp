@@ -5,6 +5,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "game/GameState.h"
 
 namespace {
 /* This initialization view avoids increasing alignment of MapMain's byte padding at 0x0D. */
@@ -31,7 +32,6 @@ typedef char MapMainInitializationOffsets[sizeof(MapMainInitializationView) == s
 
 extern "C" {
 extern MapMain *g_mapMain;
-extern GameState g_gameState;
 SaveWork *gameGetMapBlock(void);
 void FUN_00280ac0(s32 mode);
 void MapEpl_InitState(void);
@@ -92,7 +92,7 @@ void MapMain_Register(void)
     map->counterB4 = 0;
     map->messageFlags[0] = 0;
     map->messageFlags[1] = 0;
-    g_gameState.mapRegistration.pending = 0;
+    g_gameState.map.mapRegistrationPending = 0;
     save->mapRegistration.pending = 0;
     map->scriptState = 0;
     map->freeOnEnd = 0;

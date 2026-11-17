@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020dd98` (_code @ 0x20dd98, 0x970 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -65,7 +66,6 @@ extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int g_mapDepart; /* 0x4475b8 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int g_titleScene; /* 0x44ea00 */
-extern int g_gameState; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -180,7 +180,7 @@ void FUN_0020dd98(void)
   temp_v1 = *(int *)(temp_v5 + 0x40);
   temp_v16 = 160.0f;
   temp_v15 = 20.0f;
-  if (g_gameState >= 100) {
+  if (g_gameState.mapId >= 100) {
     if (temp_v1 == 1) {
       temp_v14 = 150.0f;
     }
@@ -207,7 +207,7 @@ void FUN_0020dd98(void)
   }
   temp_v1 = *(int *)(temp_v5 + 0x44);
   temp_v13 = 1.0f;
-  if (g_gameState >= 100) {
+  if (g_gameState.mapId >= 100) {
     if (temp_v1 < 0x10) {
       temp_v46 = 0x40;
     }
@@ -241,7 +241,7 @@ void FUN_0020dd98(void)
   temp_v19[1] = 0.0f;
   temp_v20[1] = 0.0f;
   temp_v21[1] = 0.0f;
-  if (g_gameState >= 100) {
+  if (g_gameState.mapId >= 100) {
     temp_v13 = *(float *)(temp_v5 + 0x54) * 0.7111111f;
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v13) << 0x1d);
     for (temp_v13 = romwright_fabs_4(temp_v13); (int)temp_v13 >= 0x47800000; temp_v13 = temp_v13 - 65536.0f) {
@@ -324,7 +324,7 @@ void FUN_0020dd98(void)
   temp_v20[2] = temp_v18[0];
   temp_v21[0] = temp_v14;
   temp_v21[2] = temp_v14;
-  if (g_gameState >= 100) {
+  if (g_gameState.mapId >= 100) {
     temp_v17 = 0x40800000;
     temp_v13 = 50.0f;
     temp_v0 = 0;

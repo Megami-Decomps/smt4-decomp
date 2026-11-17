@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite of the enemy-marker draw (field-of-view arrows on the map); the build keeps the float constants and the marker pointer in different registers and orders the colour/frame selects differently from retail. */
 #include "common.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 // One enemy marker of the map enemy table (0x180 bytes); only the fields this draw reads or writes are named.
 struct EnemyMarker {
@@ -39,7 +40,6 @@ union FloatBits {
 
 extern "C" {
 extern MapEnemyView *g_mapEnemy;
-extern GameState g_gameState;
 void mapInterfaceForwardResource(void);
 void FUN_002aa18c(u32 c0, u32 c1, u32 c2, u32 c3, f32 x, f32 y, f32 w, f32 h, f32 u0, f32 v0, f32 u1, f32 v1, f32 angle);
 

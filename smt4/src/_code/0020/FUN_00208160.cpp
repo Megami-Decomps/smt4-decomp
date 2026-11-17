@@ -1,5 +1,6 @@
 /* NON_MATCHING: steps the map depart loader (sky model first, then the map model). The motion selects take their float blend argument (0.0f), the lowered-sky vector is built member-wise (no constant table) and the sky start re-reads g_mapDepartWork like retail; the lowered-sky block layout (retail places it out of line) and register allocation still differ. */
 #include "common.h"
+#include "game/GameState.h"
 
 #define DEPART_STATE_SKY_START 0
 #define DEPART_STATE_SKY_WAIT 1
@@ -46,14 +47,9 @@ struct MapDepartWork {
     /* 0x2C */ u32 skyResourceSize;
 };
 
-struct DepartGameState {
-    /* 0x000 */ u8 unk000[0x360];
-    /* 0x360 */ s32 skyDisabled;
-};
 
 extern "C" {
 extern MapDepartWork *g_mapDepartWork;
-extern DepartGameState g_gameState;
 
 s32 mapTableGetValue(s32 mapId);
 DepartModel *asdMdlManagerCreateFromSource(void *source, u32 size, u32 flags);

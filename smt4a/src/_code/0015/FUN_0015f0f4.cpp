@@ -4,13 +4,13 @@
 #include "nn/Result.h"
 #include "shard/JobWork.h"
 #include "sys/ResultReport.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
-extern AocSystem *g_aocSystem;
-s32 FUN_00176474(AocSystem *system);
+s32 FUN_00176474(AocSystemA *system);
 s32 sysLightEventTryWait(AocObjB *event);
-void aocReleasePackageOwner(AocSystem *system);
+void aocReleasePackageOwner(AocSystemA *system);
 void FUN_001b3428(u32 *waitHandle);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 

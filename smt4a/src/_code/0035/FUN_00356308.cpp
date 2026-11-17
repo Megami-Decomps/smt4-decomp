@@ -1,12 +1,11 @@
 #include "addon/aocMain.h"
 #include "map/EnemySpawnState.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
-extern AocSystemA *g_aocSystem;
 
-u32 groupedFileTablesCountRecordsOfKind(AocSystemA *aoc, s32 id, s32 section);
 EnemySpawnRecord *packageFindIndexedTripleRecord(AocSystemA *aoc, u32 index);
 
 /* Returns entry `index` of data table 0x29, continuing into the add-on content table past its end (NULL when out of range). */

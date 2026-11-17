@@ -2,9 +2,9 @@
 #include "map/MapIfTimer.h"
 #include "map/mapDepart.h"
 #include "shard/SaveWork.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern GameState g_gameState;
 extern const MapHintRecord DAT_00447ab0[9];
 u32 FUN_002bfdd4(void);
 s32 gameFlagIsSet(u32 flag);
@@ -22,7 +22,7 @@ void FUN_001e2be4(void)
     typedef char HintProgressOffsetCheck[offsetof(MapHintProgressView, next) == 0xD5B ? 1 : -1];
     MapHintProgressView *map = (MapHintProgressView *)gameGetMapBlock();
     u32 flags = FUN_002bfdd4() | 4;
-    if (g_gameState.unk18 != 0 || g_mapIfTimer->state != 0 || !gameFlagIsSet(22)) {
+    if (g_gameState.inputBlocked != 0 || g_mapIfTimer->state != 0 || !gameFlagIsSet(22)) {
         return;
     }
     s32 hint = map->next;

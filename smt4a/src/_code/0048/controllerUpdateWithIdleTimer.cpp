@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "code/Code0048_Smt4a.h"
 
 struct TimedController {
@@ -25,7 +26,7 @@ static __inline void advanceControllerTimer(TimedController *controller)
 // Advance and update the controller only while its primary flag allows input.
 void controllerUpdateWithIdleTimer(TimedController *controller)
 {
-    if (g_gameState.controllerFlags.primary == 0 && !(controller->flags & 1)) {
+    if (g_gameState.paused == 0 && !(controller->flags & 1)) {
         advanceControllerTimer(controller);
         controllerPoolUpdate(controller);
     }

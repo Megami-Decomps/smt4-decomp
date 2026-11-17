@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "gamedata/Table00Lookup.h"
 
 /* A selectable entry of the command menu's page list (0x40 bytes). */
 struct CommandPageEntry {
@@ -12,12 +13,6 @@ struct CommandPageEntry {
     /* 0x19 */ u8 unk19[0x1B];
     /* 0x34 */ s32 value;
     /* 0x38 */ u8 unk38[8];
-};
-
-/* A data table record (only the flag word is read). */
-struct CommandDataRecord {
-    /* 0x00 */ u16 unk00;
-    /* 0x02 */ u16 flags;
 };
 
 /* The battle command menu's work past the parts the other menu functions use. */
@@ -69,7 +64,6 @@ s32 widgetSubCallIfVisible(ScrollSelection *list);
 s32 FUN_001643b4(u32 file, u32 index);
 s32 uiSearchPrimary(ScrollSelection *list);
 s32 objectApplyIfUnblocked(ScrollSelection *list);
-CommandDataRecord *dataTable00FindById(u32 id);
 
 /* Registers a touch region for the selection's buttons, centred on the visible count. */
 static __inline void addSelectionRegions(CommandMenuScreen *work)
@@ -161,7 +155,7 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
         for (s32 i = 0; i < work->pageCount; i++) {
             CommandPageEntry *page = &work->pages[i];
             if (page->present != 0) {
-                if ((dataTable00FindById(page->id)->flags & 0x8000) != 0) {
+                if ((dataTable00FindById(page->id)->level & 0x8000) != 0) {
                     if (work->pageFlag != 0) {
                         work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x1A0);
                     } else if (page->value - 0x14A <= 4u || page->value - 0x165 <= 3u) {

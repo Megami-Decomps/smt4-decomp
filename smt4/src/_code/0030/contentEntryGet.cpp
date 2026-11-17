@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -7,16 +8,8 @@ typedef struct ContentEntry00308cd4 {
     /* 0x00 */ u8 data[0x1c];
 } ContentEntry00308cd4;
 
-typedef struct AocSystem00308cd4 {
-    /* 0x000 */ u8 unk000[0x404];
-    /* 0x404 */ s32 extraCount;
-    /* 0x408 */ ContentEntry00308cd4 *extraEntries;
-} AocSystem00308cd4;
-
 void *dataTableGet(s32 table, s32 slot);
 u32 dataTableGetCount(void *table);
-
-extern AocSystem00308cd4 *g_aocSystem; /* 0x433158 */
 
 /* Entry `index` of data table 0x23's section 4, continuing into the add-on content's extra entries (NULL past the end). */
 ContentEntry00308cd4 *contentEntryGet(u32 index)
@@ -27,9 +20,9 @@ ContentEntry00308cd4 *contentEntryGet(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    AocSystem00308cd4 *aoc = g_aocSystem;
-    s32 extra = aoc->extraCount;
-    ContentEntry00308cd4 *extraEntries = aoc->extraEntries;
+    AocSystem *aoc = g_aocSystem;
+    s32 extra = aoc->table23[4].count;
+    ContentEntry00308cd4 *extraEntries = (ContentEntry00308cd4 *)aoc->table23[4].records;
     return index < extra + count ? &extraEntries[index - count] : NULL;
 }
 

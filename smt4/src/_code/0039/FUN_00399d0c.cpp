@@ -1,16 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399d0c` (_code @ 0x399d0c, 0xf58 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x25];
-    signed char f0049f941; /* 0x025 */
-    u8 pad026[0x3ba];
-    int f0049fcfc; /* 0x3e0 */
-};
-extern GameStateView g_gameState;
 
 
 int FUN_00231dec(...);
@@ -162,7 +155,7 @@ void FUN_00399d0c(int param_1)
   temp_v15 = (float)((unsigned long long)temp_v22 >> 0x20);
   temp_v27 = 0x4320000000000000;
   temp_v13 = 160.0f;
-  if (g_gameState.f0049f941 == '\0') {
+  if (g_gameState.unk025 == '\0') {
     temp_v4 = FUN_002b8694();
     temp_v15 = (float)((unsigned long long)temp_v22 >> 0x20);
     temp_v13 = (float)((unsigned long long)temp_v27 >> 0x20);
@@ -350,7 +343,7 @@ LAB_0039a8c0:
                   }
                 }
                 temp_v6 = mapExplorationCellIsMarked(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
-                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.f0049fcfc != 0)) {
+                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.forceVisible != 0)) {
                   temp_v19 = (float)VectorSignedToFloat(temp_v41,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v24 = (float)VectorSignedToFloat(temp_v18 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                   FUN_002b04e8(2,0x1c,8000,(int)(temp_v24 + temp_v35),(int)(temp_v19 + temp_v36),
@@ -690,7 +683,7 @@ LAB_0039a5e0:
                   }
                 }
                 temp_v6 = mapExplorationCellIsMarked(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
-                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.f0049fcfc != 0)) {
+                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.forceVisible != 0)) {
                   temp_v19 = (float)VectorSignedToFloat(temp_v43,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v15 = (float)VectorSignedToFloat(temp_v18 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                   FUN_002b04e8(2,0x1c,7000,(int)(temp_v15 + temp_v35),(int)(temp_v19 + temp_v36),
@@ -852,7 +845,7 @@ LAB_00399f14:
               }
               temp_v6 = mapExplorationCellIsMarked(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
                                    temp_v38 >> 6);
-              if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.f0049fcfc != 0)) {
+              if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.forceVisible != 0)) {
                 temp_v19 = (float)VectorSignedToFloat(temp_v39,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v24 = (float)VectorSignedToFloat(temp_v4 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                 FUN_002b04e8(2,0x1c,6000,(int)(temp_v24 + temp_v35),(int)(temp_v19 + temp_v36),

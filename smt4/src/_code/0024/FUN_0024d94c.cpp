@@ -1,5 +1,6 @@
 /* NON_MATCHING: scheduling only: retail loads the experience, hp-low and hp-high words together before the first store (and hoists the 0x500 memClear size and zero constant earlier); ours interleaves each load with its store. Same instruction multiset, 148 rows each. */
 #include "common.h"
+#include "gamedata/EquipmentRecord.h"
 
 /* Seven halfwords, copied around as a unit. */
 __packed struct HalfwordGroup {
@@ -60,7 +61,6 @@ s32 FUN_0029aafc(void);
 void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 u32 gameGetPlayerName(void);
 void libc_strcpy(void *destination, u32 source);
-void *dataTable08Sub2GetRecord(u16 skill);
 u16 recordGetPercentageScaledBase(void);
 void FUN_00253d60(StatGrades *grades, DemonSaveRecord *record);
 

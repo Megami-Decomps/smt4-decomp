@@ -1,11 +1,11 @@
 /* NON_MATCHING: only the destination search loop differs: retail keeps the record table in r3 and the index in r2, the build swaps them. */
 #include "gamedata/DestinationConnections.h"
+#include "gamedata/EquipmentRecordA.h"
 
 extern "C" {
 extern DestinationConnectionGroups DAT_00588358;
 extern DestinationConnection DAT_005882a4[15];
 void *gameGetPlayerData();
-const DestinationCoordinates *dataTable08Sub2GetRecord(u32 id);
 
 /* Check whether the selected destination accepts the player's current map point. */
 u32 FUN_0040b11c(u32 unused, s32 kind, s32 area, s32 point, u32 current)
@@ -19,7 +19,7 @@ u32 FUN_0040b11c(u32 unused, s32 kind, s32 area, s32 point, u32 current)
         const PlayerLocations *player = static_cast<PlayerLocations *>(gameGetPlayerData());
         current = kind == 1 ? player->first : player->second;
     }
-    const DestinationCoordinates *source = dataTable08Sub2GetRecord(current);
+    const EquipmentRecordA *source = dataTable08Sub2GetRecord(current);
     s32 count = 1;
     const DestinationConnection *connection = NULL;
     const DestinationConnection *records = &DAT_00588358.single;
@@ -37,7 +37,7 @@ u32 FUN_0040b11c(u32 unused, s32 kind, s32 area, s32 point, u32 current)
             break;
         }
     }
-    u16 sourceId = source->point + source->area * 1000;
+    u16 sourceId = source->model + source->modelGroup * 1000;
     if (connection != NULL) {
         for (s32 index = 0; index < connection->count; ++index) {
             if (connection->sources[index] == sourceId) {

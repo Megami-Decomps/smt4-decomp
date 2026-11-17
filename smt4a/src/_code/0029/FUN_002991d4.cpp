@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002991d4` (_code @ 0x2991d4, 0x15bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -91,7 +92,6 @@ extern unsigned char LAB_0029a5dc; /* 0x29a5dc */
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapDepart; /* 0x5806c4 */
 extern int DAT_005806c8; /* 0x5806c8 */
-extern int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f1614; /* 0x5f1614 */
 extern int DAT_005f16d0; /* 0x5f16d0 */
 extern int DAT_005f16d4; /* 0x5f16d4 */
@@ -184,7 +184,6 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: partyAddMoneyClamped. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
-
 
 unsigned int FUN_002991d4(void)
 
@@ -1027,7 +1026,7 @@ LAB_002993c0:
     scrScriptProcessCreate(temp_v11,puVar15);
     *(int *)(temp_v4 + 0x108) = temp_v11;
     *(unsigned int *)(temp_v11 + 0x108) = 3;
-    if (g_gameState < 100) {
+    if (g_gameState.mapId < 100) {
       temp_v12 = 2;
     }
     else {

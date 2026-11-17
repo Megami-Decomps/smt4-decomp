@@ -53,13 +53,13 @@ u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 leve
                 }
                 u32 condition = record->condition;
                 if (condition & 1) {
-                    RecordValue saved;
+                    GameSavedItem saved;
                     if (condition & ~1u) {
-                        if (!gameRecordCopy(condition >> 1, &saved) || !(saved.eligibility.flags & 0xfc)) {
+                        if (!gameRecordCopy(condition >> 1, &saved) || !(saved.flags & 0xfc)) {
                             continue;
                         }
                     } else {
-                        if (!gameRecordCopy(record->identity.id, &saved) || !(saved.eligibility.flags & 0xfc)) {
+                        if (!gameRecordCopy(record->identity.id, &saved) || !(saved.flags & 0xfc)) {
                             continue;
                         }
                     }

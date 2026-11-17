@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
@@ -7,12 +8,10 @@ typedef struct Entry {
 } Entry;
 
 
-extern AocSystemA *g_aocSystem;
 
 extern void *dataTableGet(u32 table, u32 index);
 extern u32 dataTableGetCount(void *table);
 extern Entry *dataTableGetEntries(void);
-extern u32 groupedFileTablesCountRecordsOfKind(AocSystemA *system, s32 kind, s32 index);
 extern Entry *FUN_00470974(AocSystemA *system, u32 index);
 
 /* Returns entry `index` of data table 0x29/3, or of the AOC system's extra entries that follow it; NULL when out of range. */

@@ -7,7 +7,7 @@ extern "C" u32 FUN_00229210(s32 id)
         if ((u32)id > 500) {
             return 0;
         }
-        GameDataSub *sub = &g_gameDataBlocks.saveBlock->save.sub;
+        GameSaveBodyA *sub = &g_gameDataBlocks.saveBlock->body;
         if (sub->entryFlags[id / 8] & (1 << (id % 8)))
             return 1;
         return 0;

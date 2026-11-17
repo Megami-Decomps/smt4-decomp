@@ -1,10 +1,10 @@
 /* NON_MATCHING: compiler saves input floats as paired doubles and hoists fewer proximity constants than retail. */
 #include "battle/btlView.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 extern BattleViewState g_battleViewState;
-extern GameStateA g_gameState;
 f32 distSpatial(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
 void FUN_002d8614(s32 enabled, f32 x, f32 y, f32 z);

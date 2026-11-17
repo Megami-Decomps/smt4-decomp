@@ -2,6 +2,7 @@
 #include "map/mapDepart.h"
 #include "quest_center/QuestStatus.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
+#include "game/GameState.h"
 
 struct QuestAvailabilityRecord {
     struct Metadata {
@@ -29,7 +30,6 @@ struct QuestRuntimeStatus {
 };
 
 extern "C" {
-extern GameState g_gameState;
 u32 questRequirementsMet(u16 questId);
 u32 questIsCompleted(s32 questId);
 s32 gameFlagIsSet(u32 flag);
@@ -52,7 +52,7 @@ bool questIsOfferable(u16 questId)
     }
     if (questId >= 0x15e) {
         const QuestAvailabilityRecord *current = reinterpret_cast<const QuestAvailabilityRecord *>(dataTable1bOr1cGetRecord(questId));
-        if (current != NULL && current->metadata.kind == 9 && g_gameState.unk000 == 0x18) {
+        if (current != NULL && current->metadata.kind == 9 && g_gameState.mapId == 0x18) {
             return false;
         }
     } else {

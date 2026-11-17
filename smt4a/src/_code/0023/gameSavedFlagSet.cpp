@@ -4,7 +4,7 @@
 extern "C" void gameSavedFlagSet(u32 id)
 {
     if (id != 0 && id <= 500) {
-        GameDataSub* sub = &g_gameDataBlocks.saveBlock->save.sub;
+        GameSaveBodyA* sub = &g_gameDataBlocks.saveBlock->body;
         sub->entryFlags[(s32)id / 8] |= 1u << ((s32)id % 8);
     }
 }

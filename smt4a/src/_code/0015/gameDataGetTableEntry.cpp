@@ -7,7 +7,7 @@ extern "C" {
 ItemFlagCacheState *gameDataGetTableEntry(u32 groupId, u32 itemId)
 {
     s32 index = gameDataFindEntryIndex(groupId, itemId);
-    GameDataSub *sub = &g_gameDataBlocks.saveBlock->save.sub;
+    GameSaveBodyA *sub = &g_gameDataBlocks.saveBlock->body;
 
     return reinterpret_cast<ItemFlagCacheState *>(&sub->table[index]);
 }

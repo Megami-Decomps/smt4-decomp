@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W4_W4Match6b_BtlUnitWork.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/ConsumableRecordA.h"
 
 struct BattleUiOwner { BtlMainStateA *battle; };
 struct BattleUiContext {
@@ -21,11 +22,9 @@ struct BattleUiActionMasks {
     u64 primaryB, alternate, primaryC;
 };
 struct BattleUiQueryResult { u32 words[13]; };
-struct BattleUiItem { u8 unk00[0x32]; u16 skill; };
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 extern void *g_btlAux;
-const BattleUiItem *dataTable8FindRecord(s32);
 void btlEntryBuildSummary(BattleUiQueryResult *, BtlMainStateA *, BtlCombatantEntryA *);
 void FUN_004f7724(void *, s32, u32, s32);
 void FUN_004f7ea8(void *, s32, u32, s32);
@@ -55,7 +54,7 @@ void dispatchBattleCommandUiVariant(BattleUiOwner *owner, BattleUiContext *conte
     if (command != 2 && command != 3 && command != 8)
         return;
     if (command == 8) {
-        u16 skill = dataTable8FindRecord(id)->skill;
+        u16 skill = dataTable8FindRecord(id)->skillId;
         if (!skill) {
             FUN_004f7724(g_btlAux, id, !(context->entry->flags & masks->alternate), mode);
             return;

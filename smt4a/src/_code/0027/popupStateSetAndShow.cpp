@@ -1,4 +1,5 @@
 #include "map/lmapMain.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ void FUN_00353b00(s32 arg);
 s32 gameFlagIsSet(u32 id);
 
 extern LmapEventA *g_popupState;
-extern GameStateA g_gameState;
 
 void popupStateSetAndShow(s32 a, s32 b)
 {

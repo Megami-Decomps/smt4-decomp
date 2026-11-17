@@ -1,99 +1,97 @@
+/* Data table 0, section 1: the devil compendium's base records (0xA8 bytes each), found by id with
+ * dataTable00FindById() (gamedata/Table00Lookup.h of each game). IV's layout is Table00Record,
+ * Apocalypse's Table00RecordA. */
 #ifndef GAMEDATA_TABLE00_H
 #define GAMEDATA_TABLE00_H
 
 #include "common.h"
 #include <stddef.h>
 
+/* One drop of a record: an item and its chance. */
 struct Table00Choice {
-    /* 0x00 */ u16 value;
-    /* 0x02 */ u8 unk02[4];
+    /* 0x00 */ u16 value;               /* the item */
+    /* 0x02 */ u16 chance;
+    /* 0x04 */ u16 unk04;
 };
 
+/* IV's record. */
 struct Table00Record {
     /* 0x00 */ u16 id;
-    union {
-        /* 0x02 */ u16 level;           /* bit 15 is a flag */
-        /* 0x02 */ u8 unk02[2];
-    };
+    /* 0x02 */ u8 level;
+    /* 0x03 */ u8 levelFlags;           /* bit 0: preferred by sprite templates; bit 7: priority */
     /* 0x04 */ s32 maxHp;
     /* 0x08 */ s32 maxMp;
-    /* 0x0C */ u8 unk0C[6];
-    /* 0x12 */ u16 levelA;
-    /* 0x14 */ u16 levelB;
+    /* 0x0C */ u16 stats[5];
     /* 0x16 */ u16 flags;
-    union {
-        /* 0x18 */ u8 unk18[0x48];
-        struct {
-            /* 0x18 */ u8 unk18[0x38];
-            /* 0x50 */ u16 ids[8];
-        } skillList;
-        struct {
-            /* 0x18 */ u8 unk18[0x30];
-            /* 0x48 */ u16 ids[8];
-        } copiedIds;
-    };
-    /* 0x60 */ Table00Choice choices[3];
-    /* 0x72 */ u8 unk72[0x0E];
-    /* 0x80 */ u16 relatedIds[3];
-    union {
-        /* 0x86 */ u8 unk86[0x22];
-        struct {
-            u8 prefix[0x18];
-            /* 0x9E */ u8 first;
-            /* 0x9F */ u8 second;
-        } arrangement;
-        struct {
-            /* 0x86 */ u8 unk86BeforeValue[0x1C];
-            /* 0xA2 */ u8 value;
-            /* 0xA3 */ u8 variation;
-        } bustUp;
-        struct {
-            /* 0x86 */ u8 unk86BeforeSelection[0x1A];
-            /* 0xA0 */ u16 selectionId;
-        } selection;
-        struct {
-            /* 0x86 */ u8 unk86[2];
-            /* 0x88 */ s16 id;
-        } portrait;
-        struct {
-            u8 prefix[6];
-            /* 0x8C */ s16 resourceId;
-        } battleTexture;
-        struct {
-            /* 0x86 */ u16 id;
-        } successor;
-        struct {
-            /* 0x86 */ u8 unk86BeforeHeight[0x1C];
-            /* 0xA2 */ u8 value;           /* 0 tall, 1 average, 2 low */
-        } height;
-    };
+    /* 0x18 */ u8 unk18[0xC];
+    /* 0x24 */ u16 resistances[8];
+    /* 0x34 */ u8 unk34[0x14];
+    /* 0x48 */ u16 skills[8];
+    /* 0x58 */ Table00Choice drops[3];
+    /* 0x6A */ u16 unk6A;
+    /* 0x6C */ u32 experience;
+    /* 0x70 */ u32 price;               /* the compendium price */
+    /* 0x74 */ s32 unk74;
+    /* 0x78 */ u32 money;
+    /* 0x7C */ u8 unk7C[6];
+    /* 0x82 */ u16 talkTargetId;
+    /* 0x84 */ u16 unk84;
+    /* 0x86 */ u16 successorId;
+    /* 0x88 */ s16 portraitId;          /* also the battle texture id */
+    /* 0x8A */ u8 unk8A[0x14];
+    /* 0x9E */ u8 arrangementFirst;     /* also the attack type */
+    /* 0x9F */ u8 arrangementSecond;
+    /* 0xA0 */ u16 selectionId;         /* also the help skill id */
+    /* 0xA2 */ u8 bustUp;
+    /* 0xA3 */ u8 unkA3;
+    /* 0xA4 */ u8 variant;
+    /* 0xA5 */ u8 scriptFlags;          /* read bit by bit by the script commands */
+    /* 0xA6 */ u8 unkA6[2];
 };
 
-typedef char Table00RecordFieldsCheck[
+typedef char Table00RecordOffsetCheck[sizeof(Table00Record) == 0xA8 &&
     offsetof(Table00Record, level) == 2 && offsetof(Table00Record, maxHp) == 4 &&
-    offsetof(Table00Record, maxMp) == 8 && offsetof(Table00Record, levelA) == 0x12 &&
-    offsetof(Table00Record, levelB) == 0x14 && offsetof(Table00Record, flags) == 0x16 &&
-    offsetof(Table00Record, successor.id) == 0x86 && offsetof(Table00Record, height.value) == 0xA2 ? 1 : -1];
-typedef char Table00RecordSizeCheck[sizeof(Table00Record) == 0xA8 ? 1 : -1];
-typedef char Table00SkillListOffsetCheck[offsetof(Table00Record, skillList.ids) == 0x50 ? 1 : -1];
-typedef char Table00CopiedIdsOffsetCheck[offsetof(Table00Record, copiedIds.ids) == 0x48 ? 1 : -1];
-typedef char Table00ArrangementOffsetCheck[
-    offsetof(Table00Record, arrangement.first) == 0x9E &&
-    offsetof(Table00Record, arrangement.second) == 0x9F ? 1 : -1];
+    offsetof(Table00Record, stats) == 0xC && offsetof(Table00Record, flags) == 0x16 &&
+    offsetof(Table00Record, resistances) == 0x24 && offsetof(Table00Record, skills) == 0x48 &&
+    offsetof(Table00Record, drops) == 0x58 && offsetof(Table00Record, experience) == 0x6C &&
+    offsetof(Table00Record, money) == 0x78 && offsetof(Table00Record, portraitId) == 0x88 &&
+    offsetof(Table00Record, arrangementFirst) == 0x9E && offsetof(Table00Record, selectionId) == 0xA0 &&
+    offsetof(Table00Record, variant) == 0xA4 ? 1 : -1];
 
-typedef char Table00SelectionOffsetCheck[
-    offsetof(Table00Record, selection.selectionId) == 0xA0 &&
-    offsetof(Table00Record, id) == 0 &&
-    sizeof(Table00Record) == 0xA8 ? 1 : -1];
+/* Apocalypse's record. */
+struct Table00RecordA {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 level;               /* bit 15 is a flag */
+    /* 0x04 */ s32 maxHp;
+    /* 0x08 */ s32 maxMp;
+    /* 0x0C */ u16 stats[5];            /* the thresholds scripts compare the player's stats with */
+    /* 0x16 */ u16 flags;
+    /* 0x18 */ u8 unk18[0x38];
+    /* 0x50 */ u16 skills[8];
+    /* 0x60 */ Table00Choice choices[3];
+    /* 0x72 */ u8 unk72[2];
+    /* 0x74 */ u32 experience;          /* scripts read it divided by 4 */
+    /* 0x78 */ u8 unk78[4];
+    /* 0x7C */ u32 money;
+    /* 0x80 */ u16 relatedIds[3];
+    /* 0x86 */ u16 successorId;
+    /* 0x88 */ s16 portraitId;
+    /* 0x8A */ u16 unk8A;               /* reported by a script command */
+    /* 0x8C */ s16 battleTextureId;
+    /* 0x8E */ u8 unk8E[0x14];
+    /* 0xA2 */ u8 bustUp;               /* the bust-up height: 0 tall, 1 average, 2 low */
+    /* 0xA3 */ u8 bustUpVariation;
+    /* 0xA4 */ u8 unkA4;
+    /* 0xA5 */ u8 scriptFlags;          /* read bit by bit by the script commands */
+    /* 0xA6 */ u8 unkA6[2];
+};
 
-typedef char Table00BustUpValueOffsetCheck[
-    offsetof(Table00Record, bustUp.value) == 0xA2 &&
-    sizeof(Table00Record) == 0xA8 ? 1 : -1];
-typedef char Table00PortraitOffsetCheck[
-    offsetof(Table00Record, portrait.id) == 0x88 ? 1 : -1];
-typedef char Table00BustUpVariationOffsetCheck[
-    offsetof(Table00Record, bustUp.variation) == 0xA3 ? 1 : -1];
-typedef char Table00BattleTextureOffsetCheck[
-    offsetof(Table00Record, battleTexture.resourceId) == 0x8C && sizeof(Table00Record) == 0xA8 ? 1 : -1];
+typedef char Table00RecordAOffsetCheck[sizeof(Table00RecordA) == 0xA8 &&
+    offsetof(Table00RecordA, level) == 2 && offsetof(Table00RecordA, maxHp) == 4 &&
+    offsetof(Table00RecordA, stats) == 0xC && offsetof(Table00RecordA, flags) == 0x16 &&
+    offsetof(Table00RecordA, skills) == 0x50 && offsetof(Table00RecordA, choices) == 0x60 &&
+    offsetof(Table00RecordA, experience) == 0x74 && offsetof(Table00RecordA, relatedIds) == 0x80 &&
+    offsetof(Table00RecordA, portraitId) == 0x88 && offsetof(Table00RecordA, battleTextureId) == 0x8C &&
+    offsetof(Table00RecordA, bustUp) == 0xA2 && offsetof(Table00RecordA, scriptFlags) == 0xA5 ? 1 : -1];
 
 #endif

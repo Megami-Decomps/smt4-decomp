@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "game/GameState.h"
 
 struct Inner0020ffe0;
 /* The follower scene's work (observed fields): two model objects, the first scaled by `scale`. */
@@ -25,18 +26,12 @@ struct LmapScenePos {
     /* 0x4C */ f32 height;
 };
 
-/* The game-state flag that hides the followers (observed field). */
-struct GameStateHide {
-    /* 0x00 */ u8 unk00[0x22];
-    /* 0x22 */ s8 hideFollowers;
-};
 
 #define MDL_OBJECT_HIDDEN 2
 
 extern "C" {
 
 extern LmapScenePos *g_lmapScene;
-extern GameStateHide g_gameState;
 
 void animOwnerSetScale(AsdMdlObject *object, f32 scale);
 void nodeSetTranslation(AsdMdlNode *node, s32 index, f32 *position);
@@ -79,8 +74,8 @@ void mapUpdateFollowerModels(FollowerWork *work)
 {
     s32 motion;
 
-    GameStateHide *state = &g_gameState;
-    if (state->hideFollowers != 0) {
+    GameState *state = &g_gameState;
+    if (state->loading != 0) {
         asdMdlObjectHide(&work->body);
         asdMdlObjectHide(&work->shadow);
         return;

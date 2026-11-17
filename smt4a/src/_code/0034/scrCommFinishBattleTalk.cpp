@@ -1,4 +1,5 @@
 #include "map/MapSelection.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 
@@ -8,8 +9,6 @@ void asdSequenceRequest(s32 a, s32 b, s32 c);
 void btlTalkBustUpDestroy(void);
 
 s32 gameFlagIsSet(u32 id);
-
-extern GameStateA g_gameState;
 
 s32 scrCommFinishBattleTalk(void)
 {

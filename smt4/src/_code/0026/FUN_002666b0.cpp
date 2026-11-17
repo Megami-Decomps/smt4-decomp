@@ -1,5 +1,6 @@
 /* NON_MATCHING: builds the lmap marker list and places every marker from the digits of its node name (area origin, cell size, centring offset); written from the decompilation and the retail disassembly, the guarded identity matrix and the table copy not compared with retail */
 #include "common.h"
+#include "game/GameState.h"
 
 struct LmapNodeData {
     /* 0x00 */ u8 unk00[0xC];
@@ -48,7 +49,6 @@ struct LmapMarkerState {
 
 extern "C" {
 extern LmapMarkerState *g_lmapMainState;
-extern s32 g_gameState;
 extern s32 DAT_0049f920;
 extern char DAT_00447088[];       /* resource paths, 0x50 bytes apart */
 
@@ -76,7 +76,7 @@ void FUN_002666b0(void)
     state->source = 0;
     LmapMarkerState *current = g_lmapMainState;
 
-    if (g_gameState == 0x65 && DAT_0049f920 >= 1 && DAT_0049f920 <= 9) {
+    if (g_gameState.mapId == 0x65 && DAT_0049f920 >= 1 && DAT_0049f920 <= 9) {
         lmapApplyLightVisibilityGrid(DAT_00447088 + 0x50 * (DAT_0049f920 - 1));
     } else {
         for (s32 i = 0; i < current->nodes->count; i++) {

@@ -1,25 +1,23 @@
 #include "common.h"
+#include "addon/AocSystemA.h"
 
-struct DataEntry {
+/* A 0x10-byte record of data table 0x2d section 2. */
+struct Table2dSection2Record {
     u8 data[0x10];
 };
 
-struct AocSystem;
-
 extern "C" {
 
-extern AocSystem *g_aocSystem;
 void *dataTableGet(u32 category, u32 variant);
-DataEntry *dataTableGetEntries(void *table);
+Table2dSection2Record *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
-u32 groupedFileTablesCountRecordsOfKind(AocSystem *aoc, u32 kind, u32 variant);
-DataEntry *contentEntryGetFromFiles4(AocSystem *aoc, u32 index);
+Table2dSection2Record *contentEntryGetFromFiles4(AocSystemA *aoc, u32 index);
 
 // Entry `index` of the base data table, continuing into the add-on content's tables (NULL past the end).
-DataEntry *FUN_003563fc(u32 index)
+Table2dSection2Record *FUN_003563fc(u32 index)
 {
     void *table = dataTableGet(0x2d, 2);
-    DataEntry *entries = dataTableGetEntries(table);
+    Table2dSection2Record *entries = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     if (index < count) {
         return &entries[index];

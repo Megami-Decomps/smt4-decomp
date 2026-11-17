@@ -1,11 +1,10 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "ui/PartyPanelState.h"
+#include "ui/PartyPanelStateA.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-extern PartyPanelStateA *g_partyPanel;
 SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 id);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
@@ -16,7 +15,7 @@ void FUN_002ace4c(s32 index, s32 x, s32 y, u32 color, s32 animated, f32 speed)
     const SpriteInfo *sprite = asdTMTexTableEntryAt(0x11, index + 0x2d);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     if (animated) {
-        efctSetSpeed(vec2GetSpeed(panel->animation.speedObject) * speed);
+        efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
         texDrawTableEntryAtStoredOrigin(2, 0x11, 0x10, sprite->x + x, sprite->y + y, color);
         efctSetSpeed(1.0f);
     } else {

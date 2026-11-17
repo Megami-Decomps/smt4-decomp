@@ -1,14 +1,9 @@
 #include "common.h"
+#include "game/GameState.h"
 
 extern "C" {
 
-/* The head of the game state block. */
-struct GameStateHead {
-    s32 mode;
-    s32 submode;
-};
 
-extern GameStateHead g_gameState; /* 0x49f91c */
 
 /* Maps a script category (0..0x3c) to its menu type. */
 u32 gameStateGetMenuType(u32 category)
@@ -25,16 +20,16 @@ u32 gameStateGetMenuType(u32 category)
     case 5:
         return 9;
     case 6:
-        if (g_gameState.mode != 25 && g_gameState.mode != 26 && g_gameState.mode != 27 && g_gameState.mode != 28 && g_gameState.mode != 29 &&
-            g_gameState.mode != 30 && g_gameState.mode != 31 && g_gameState.mode != 32 && g_gameState.mode != 33 && g_gameState.mode != 34 &&
-            g_gameState.mode != 35) {
-            if (g_gameState.mode != 5 || g_gameState.submode != 6) {
+        if (g_gameState.mapId != 25 && g_gameState.mapId != 26 && g_gameState.mapId != 27 && g_gameState.mapId != 28 && g_gameState.mapId != 29 &&
+            g_gameState.mapId != 30 && g_gameState.mapId != 31 && g_gameState.mapId != 32 && g_gameState.mapId != 33 && g_gameState.mapId != 34 &&
+            g_gameState.mapId != 35) {
+            if (g_gameState.mapId != 5 || g_gameState.areaId != 6) {
                 return 14;
             }
         }
         return 15;
     case 7:
-        if (g_gameState.mode == 26 || (g_gameState.mode == 5 && g_gameState.submode == 6)) {
+        if (g_gameState.mapId == 26 || (g_gameState.mapId == 5 && g_gameState.areaId == 6)) {
             return 17;
         }
         return 16;

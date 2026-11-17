@@ -1,14 +1,6 @@
 #include "gamedata/AocItemRef.h"
-
-struct AocKindOneRecord {
-    /* 0x00 */ u8 unk00[0x7c];
-    /* 0x7c */ s32 price;
-};
-
-struct AocKindTwoRecord {
-    /* 0x00 */ u8 unk00[0xa0];
-    /* 0xa0 */ s32 price;
-};
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
 
 struct AocKindTenRecord {
     /* 0x00 */ u8 unk00[0x2c];
@@ -20,8 +12,6 @@ struct AocKindTenRecord {
 
 extern "C" {
 u32 aocEntryGetKind(u32 id);
-AocKindOneRecord *dataTable08Sub1GetRecord(u32 id);
-AocKindTwoRecord *dataTable08Sub2GetRecord(u32 id);
 AocKindTenRecord *aocRecordLookup84(u32 id);
 
 /* Returns the price of the referenced item from its kind's table, scaled by its percent when flagged. */
@@ -32,8 +22,8 @@ s32 aocItemGetPrice(const AocItemRef *ref)
 
     switch (aocEntryGetKind(id)) {
     case 1: {
-        AocKindOneRecord *record = dataTable08Sub1GetRecord(id);
-        price = record == NULL ? AOC_PRICE_MISSING : record->price;
+        ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+        price = record == NULL ? AOC_PRICE_MISSING : record->sellPrice;
         break;
     }
     case 2:
@@ -43,8 +33,8 @@ s32 aocItemGetPrice(const AocItemRef *ref)
     case 6:
     case 7:
     case 8: {
-        AocKindTwoRecord *record = dataTable08Sub2GetRecord(id);
-        price = record == NULL ? AOC_PRICE_MISSING : record->price;
+        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        price = record == NULL ? AOC_PRICE_MISSING : record->sellPrice;
         break;
     }
     case 10: {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b100` (_code @ 0x33b100, 0x694 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ int SBORROW4(int, int);
 int VectorSignedToFloat(...);
 
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f17ac; /* 0x5f17ac */
 extern float DAT_005f17b0; /* 0x5f17b0 */
 extern short DAT_005f17c2; /* 0x5f17c2 */
@@ -65,7 +65,6 @@ extern int FUN_003d21dc(void);
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: countersAddSaturating. */
 
-
 /* WARNING: Type propagation algorithm not settling */
 
 unsigned int FUN_0033b100(int param_1)
@@ -94,9 +93,9 @@ unsigned int FUN_0033b100(int param_1)
   temp_v4 = gameGetPlayerData();
   temp_v5 = gameFlagIsSet(0x300);
   if ((((temp_v5 != 0) || (temp_v5 = gameFlagIsSet(0x301), temp_v5 != 0)) &&
-      (g_gameState != 0x29 && g_gameState != 0x2a)) &&
-     ((g_gameState != 0x2b && g_gameState != 0x2c &&
-      ((g_gameState != 0x2d && g_gameState != 0x2e) && g_gameState != 0x2f)))) {
+      (g_gameState.mapId != 0x29 && g_gameState.mapId != 0x2a)) &&
+     ((g_gameState.mapId != 0x2b && g_gameState.mapId != 0x2c &&
+      ((g_gameState.mapId != 0x2d && g_gameState.mapId != 0x2e) && g_gameState.mapId != 0x2f)))) {
     return 0;
   }
   puVar7 = &DAT_005f18fc;

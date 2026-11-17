@@ -3,13 +3,13 @@
 #include "map/mapDepart.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "game/GameState.h"
 
 namespace {
 /* The transition-completed flag lies past the shared controller prefix. */
 struct AocJumpExitControlView { u8 unk00[0x19]; u8 complete; };
 }
 extern "C" {
-extern GameState g_gameState;
 const MapJumpRequest *gameJumpRequestGet(void);
 s32 gameStateIsFlagSetAndLarge(void);
 u32 FUN_002080e8(void);
@@ -25,7 +25,7 @@ static __inline void saveJumpTransform(const MapJumpRequest *request)
     g_gameState.savedPosition.x = request->transform[0];
     g_gameState.savedPosition.y = request->transform[1];
     g_gameState.savedPosition.z = request->transform[2];
-    g_gameState.unk314 = request->transform[3];
+    g_gameState.savedHeading = request->transform[3];
     g_gameState.unk318 = request->transform[4];
 }
 
@@ -34,21 +34,21 @@ extern "C" void FUN_00394508(AocObjC *controller)
     const MapJumpRequest *request = gameJumpRequestGet();
     u32 map;
     if (request->kind == 1) {
-        g_gameState.unk2F8Byte = 1;
+        g_gameState.map.savedLocationSet = 1;
         g_gameState.savedMapId = request->map;
         g_gameState.savedAreaId = request->entrance;
         g_gameState.savedObjectId = request->object;
         saveJumpTransform(request);
         asdSequenceRequest(6, NULL, 0);
     } else if (request->kind == 2) {
-        g_gameState.unk2F8Byte = 1;
+        g_gameState.map.savedLocationSet = 1;
         g_gameState.savedMapId = request->map + 100;
         g_gameState.savedAreaId = request->entrance;
         g_gameState.savedObjectId = -1;
         saveJumpTransform(request);
         asdSequenceRequest(8, NULL, 0);
     } else if (request->kind == 3) {
-        g_gameState.unk2F8Byte = 1;
+        g_gameState.map.savedLocationSet = 1;
         g_gameState.savedMapId = request->map;
         g_gameState.savedAreaId = 0;
         map = request->map;

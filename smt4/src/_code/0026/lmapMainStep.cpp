@@ -1,11 +1,8 @@
 #include "common.h"
+#include "game/GameState.h"
 
 extern "C" {
 
-typedef struct GameState00265110 {
-    /* 0x000 */ u8 unk000[0x348];
-    /* 0x348 */ s8 suppressStep;
-} GameState00265110;
 
 typedef struct LmapMain00265110 {
     /* 0x00 */ u8 unk00[0xb];
@@ -20,7 +17,6 @@ void mapUpdateFollowerModels(LmapMain00265110 *main);
 void FUN_00265f50(LmapMain00265110 *main);
 void FUN_002fb7dc(void);
 
-extern GameState00265110 g_gameState; /* 0x49f91c */
 extern LmapMain00265110 *g_lmapMainState; /* 0x447060 */
 
 /* Local map step: runs the external or internal update unless the game state suppresses it, then the common updates; finishes with FUN_00265180 until progress reaches 100. */

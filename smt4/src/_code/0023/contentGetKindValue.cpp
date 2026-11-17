@@ -1,14 +1,8 @@
 #include "common.h"
-
-struct ContentKindValueRecord {
-    /* 0x00 */ u8 unk00[0x66];
-    /* 0x66 */ s16 primary;
-    /* 0x68 */ s16 alternate;
-};
+#include "gamedata/EquipmentRecord.h"
 
 extern "C" s32 aocEntryGetKind(u32 id);
-extern "C" ContentKindValueRecord *dataTable08Sub2GetRecord(u32 id);
-extern "C" s32 recordGetPercentageScaledBase(const ContentKindValueRecord *record);
+extern "C" s32 recordGetPercentageScaledBase(const EquipmentRecord *record);
 
 /* Select the content record's value according to its downloadable-content kind. */
 extern "C" s32 contentGetKindValue(u32 id)
@@ -20,13 +14,13 @@ extern "C" s32 contentGetKindValue(u32 id)
     case 4:
     case 5:
     case 6:
-        value = dataTable08Sub2GetRecord(id)->primary;
+        value = dataTable08Sub2GetRecord(id)->hpBonus;
         break;
     case 7:
-        value = dataTable08Sub2GetRecord(id)->alternate;
+        value = dataTable08Sub2GetRecord(id)->mpBonus;
         break;
     default:
-        ContentKindValueRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
         if (record != NULL)
             value = recordGetPercentageScaledBase(record);
         break;

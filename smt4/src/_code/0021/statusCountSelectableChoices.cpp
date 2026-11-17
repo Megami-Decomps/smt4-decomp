@@ -4,10 +4,10 @@ extern "C" s32 statusGetAvailableChoiceCount(void);
 extern "C" s32 statusCountSelectableChoices(void)
 {
     s32 used = 0;
-    StatusChoiceData* choices = &g_gameDataBlocks.saveBlock->statusChoices;
+    PlayerDataIV *player = &g_gameDataBlocks.saveBlock->body.slots.player;
     s32 count = statusGetAvailableChoiceCount();
     for (s32 index = 0; index < count; ++index) {
-        if (choices->choices[index] != 0) {
+        if (player->skills[index] != 0) {
             ++used;
         }
     }

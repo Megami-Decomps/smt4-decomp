@@ -1,20 +1,19 @@
-#include "ui/PartyPanelNavigation.h"
+#include "ui/PartyPanelState.h"
 
 extern "C" {
-extern PartyPanelNavigationView *g_partyPanel;
-s32 FUN_0029e958(PartyPanelCursorView *cursor);
-s32 listCursorGetRowIfUnblocked(PartyPanelCursorView *cursor);
-s32 FUN_0029ee54(PartyPanelCursorView *cursor);
-s32 objectPartRunUnlessLocked(PartyPanelCursorView *cursor);
+s32 FUN_0029e958(GridNavigation *cursor);
+s32 listCursorGetRowIfUnblocked(GridNavigation *cursor);
+s32 FUN_0029ee54(GridNavigation *cursor);
+s32 objectPartRunUnlessLocked(GridNavigation *cursor);
 s32 FUN_002c1658(u32 direction, u32 repeat);
-void FUN_002932d8(PartyPanelCursorView *cursor);
-void partyPanelToggleRefresh(PartyPanelCursorView *cursor);
+void FUN_002932d8(GridNavigation *cursor);
+void partyPanelToggleRefresh(GridNavigation *cursor);
 void FUN_002937e0(void);
 
 // Change the party-panel page when directional input crosses either cursor edge.
-u32 partyPanelHandleCursorEdgeInput(PartyPanelCursorView *cursor, s32 force)
+u32 partyPanelHandleCursorEdgeInput(GridNavigation *cursor, s32 force)
 {
-    PartyPanelNavigationView *panel = g_partyPanel;
+    PartyPanelState *panel = g_partyPanel;
     u32 changed = 0;
     if (!cursor)
         return 0;
@@ -25,7 +24,7 @@ u32 partyPanelHandleCursorEdgeInput(PartyPanelCursorView *cursor, s32 force)
         if (page == pages - 1)
             lastColumn = cursor->count % FUN_0029e958(cursor) - 1;
     }
-    if (!panel->blocked && panel->count > 1) {
+    if (!panel->alternate && panel->pageCount > 1) {
         if ((force || objectPartRunUnlessLocked(cursor) == 0) && FUN_002c1658(4, 1)) {
             changed = 1;
             FUN_002932d8(cursor);

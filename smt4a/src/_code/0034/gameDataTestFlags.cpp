@@ -5,9 +5,9 @@ extern "C" {
 /* Whether any of the bits in `mask` is set in the game data flag byte. */
 u8 gameDataTestFlags(u8 mask)
 {
-    GameDataSub *sub = &g_gameDataBlocks.saveBlock->save.sub;
+    GameSaveBodyA *sub = &g_gameDataBlocks.saveBlock->body;
 
-    return (mask & sub->flags) != 0;
+    return (mask & sub->record.flags) != 0;
 }
 
 }

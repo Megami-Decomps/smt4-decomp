@@ -1,5 +1,6 @@
 /* NON_MATCHING: switch relocations are now recognized, but the draft still has incorrect scalar/float callee prototypes and unrecovered vector/stack values; retail has 782 disassembly rows versus 566 built. */
 #include "common.h"
+#include "game/GameState.h"
 extern "C" {
 
 int FUN_001f87d4(void);
@@ -43,7 +44,6 @@ typedef struct {
 
 extern int *DAT_004474f4; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f9e0; /* 0x49f9e0 */
 extern int DAT_0049f9e4; /* 0x49f9e4 */
 extern int DAT_0049f9e8; /* 0x49f9e8 */
@@ -558,7 +558,7 @@ void FUN_003079b4(void)
       temp_v30 = 40.0f;
       temp_v35 = temp_v28 + 20.0f;
       temp_v34 = temp_v29 + temp_v24 * 40.0f;
-      if (g_gameState == 0x16) {
+      if (g_gameState.mapId == 0x16) {
         temp_v35 = temp_v35 + 20.0f;
       }
       temp_v24 = *(float *)(g_lmapScene + 0x50) * temp_v25;
@@ -576,7 +576,7 @@ void FUN_003079b4(void)
       temp_v25 = (*(float *)(g_lmapScene + 0x50) - temp_v29) * temp_v25;
       FUN_00282390();
       temp_v39 = temp_v26 + temp_v25 * temp_v28;
-      if (g_gameState == 0x16) {
+      if (g_gameState.mapId == 0x16) {
         temp_v24 = temp_v24 + 80.0f;
       }
       temp_v47 = 8.40779e-44f;
@@ -609,7 +609,7 @@ void FUN_003079b4(void)
         temp_v36 = (float)((unsigned long long)temp_v27 >> 0x20);
         temp_v35 = (float)temp_v27 + 20.0f;
         temp_v34 = temp_v26 + temp_v24 * 40.0f;
-        if (g_gameState == 0x16) {
+        if (g_gameState.mapId == 0x16) {
           temp_v35 = temp_v35 + 20.0f;
         }
         temp_v24 = *(float *)(g_lmapScene + 0x50) * temp_v25;
@@ -627,7 +627,7 @@ void FUN_003079b4(void)
         temp_v25 = (*(float *)(g_lmapScene + 0x50) - temp_v30) * temp_v25;
         FUN_00282390();
         temp_v39 = temp_v28 + temp_v25 * temp_v29;
-        if (g_gameState == 0x16) {
+        if (g_gameState.mapId == 0x16) {
           temp_v24 = temp_v24 + 80.0f;
         }
         temp_v47 = 6.30584e-43f;

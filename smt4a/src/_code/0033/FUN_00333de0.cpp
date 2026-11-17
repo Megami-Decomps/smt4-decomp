@@ -1,10 +1,10 @@
 /* NON_MATCHING: selection-store scheduling allows the saved-zero value to reuse the selection-address register. */
 #include "status/StatusDown.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;
-extern AocSystemA *g_aocSystem;
 s32 FUN_002c7e3c();
 void sysPlaySe(u32 sound);
 s32 fieldStateAllowsAction();

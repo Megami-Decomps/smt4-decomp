@@ -1,9 +1,9 @@
 #include "map/lmapMain.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
 extern LmapMain g_lmapMain;   /* 0x5f1b70 */
-extern GameStateA g_gameState;
 u32 gameDataTableGetFlag(void);
 
 /* 1 when the map main loop is active and the source/destination map value for the current flag is at least 100. */

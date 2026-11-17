@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `mapIfSpawnEffect` (_code @ 0x2524bc, 0xc94 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct {
 
 extern int g_mapIf; /* 0x447a78 */
 extern unsigned int *DAT_00447a7c; /* 0x447a7c */
-extern int g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: mathSinCos. */
 
@@ -517,7 +517,7 @@ LAB_002525f8:
                                   *(unsigned int *)(temp_v1 + 0x240) = *(unsigned int *)(temp_v1 + 0x234);
                                   return temp_v2;
                                 }
-                                if (g_gameState < 100) {
+                                if (g_gameState.mapId < 100) {
                                   temp_v9 = DAT_00447a7c[0x19];
                                   temp_v10 = DAT_00447a7c[6];
                                   *(unsigned int *)(temp_v1 + 0x1e0) = 1;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 /* The map scene as the overview camera drives it. */
 #define DEGREES_TO_RADIANS 0.017453292f
@@ -20,18 +21,6 @@ struct OverviewScene {
     /* 0x6c */ u8 unk6c;
 };
 
-/* The part of the game state that holds the overview's start pose. */
-struct OverviewGameState {
-    /* 0x000 */ u8 unk000[0xb0];
-    /* 0x0b0 */ s32 overviewRecord;
-    /* 0x0b4 */ MapVector overviewPosition;
-    /* 0x0c0 */ f32 overviewHeading;
-    /* 0x0c4 */ u8 unk0c4[0xc];
-    /* 0x0d0 */ f32 overviewDirection;
-    /* 0x0d4 */ u8 unk0d4[0x18a];
-    /* 0x25e */ u8 transitionCompleted;
-};
-
 /* The controller whose pose the overview hands back. */
 struct OverviewController {
     /* 0x00 */ u8 unk00[0x18];
@@ -43,7 +32,6 @@ struct OverviewController {
 extern "C" {
 extern OverviewScene *g_lmapScene;
 extern OverviewController *g_lmapView;
-extern OverviewGameState g_gameState;
 
 void mapEaseSceneHeading(void);
 void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 direction);
@@ -81,8 +69,8 @@ void FUN_00365dcc(void)
         scene->cameraSpeed = 3.0f;
         scene->unk6c = 0;
         scene->target = g_gameState.overviewPosition;
-        g_lmapScene->target.x = g_lmapScene->target.x + libm_sinf(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
-        g_lmapScene->target.z = g_lmapScene->target.z + libm_cosf(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->target.x = g_lmapScene->target.x + libm_sinf(g_gameState.pointHeading * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->target.z = g_lmapScene->target.z + libm_cosf(g_gameState.pointHeading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->targetHeading = g_gameState.overviewHeading;
         FUN_00303460(11);
         g_lmapView->mode = -2;
@@ -91,7 +79,7 @@ void FUN_00365dcc(void)
         MapVector viewPosition = g_gameState.overviewPosition;
         viewPosition.x = viewPosition.x + libm_sinf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         viewPosition.z = viewPosition.z + libm_cosf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        mapIfSpawnCaveAction(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.overviewDirection);
+        mapIfSpawnCaveAction(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.pointHeading);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
         break;

@@ -1,10 +1,10 @@
 #include "map/lmapMain.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
 extern LmapSceneA *g_lmapScene;
-extern GameStateA g_gameState;
 
 /* Changes the scene's main state and clears the state-specific counters and flag-bank work. */
 void mapSetSceneState(s32 state)
@@ -23,7 +23,7 @@ void mapSetSceneState(s32 state)
             scene->time = 5.0f;
         } else {
             if (scene->mainState != 3) {
-                g_gameState.encounter.unk1a0[0x10] = 0;
+                g_gameState.unk1B0 = 0;
             }
             if (scene->mainState == 3) {
                 scene->unk19C = 0;

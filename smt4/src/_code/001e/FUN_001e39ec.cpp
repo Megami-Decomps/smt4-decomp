@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e39ec` (_code @ 0x1e39ec, 0x858 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern unsigned char LAB_001e4248; /* 0x1e4248 */
 extern unsigned char LAB_001e4258; /* 0x1e4258 */
 extern unsigned char LAB_001e4268; /* 0x1e4268 */
 extern int g_deferredMapModels; /* 0x447e58 */
-extern int g_gameState; /* 0x49f91c */
 extern unsigned int *DAT_0049f920; /* 0x49f920 */
 extern short DAT_0049fb40; /* 0x49fb40 */
 extern float DAT_004bdb1c; /* 0x4bdb1c */
@@ -184,7 +184,7 @@ void FUN_001e39ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v20 = (float)VectorSignedToFloat(param_13,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v15 = temp_v15 * temp_v33;
   puVar15 = (unsigned int *)&g_gameState;
-  if (g_gameState == 0x13) {
+  if (g_gameState.mapId == 0x13) {
     puVar15 = DAT_0049f920;
   }
   temp_v20 = temp_v20 * temp_v33;
@@ -193,7 +193,7 @@ void FUN_001e39ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v18 = temp_v36;
   temp_v28 = temp_v39;
   temp_v31 = temp_v29;
-  if ((g_gameState != 0x13 || puVar15 != (unsigned int *)0x1) || (*(int *)(g_deferredMapModels + 8) < 1)) {
+  if ((g_gameState.mapId != 0x13 || puVar15 != (unsigned int *)0x1) || (*(int *)(g_deferredMapModels + 8) < 1)) {
     if (DAT_0049fb40 != -2) {
       if (DAT_0049fb40 != -1) {
         if (DAT_0049fb40 != 1) {

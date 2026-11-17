@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (222 vs 195 rows); the state-3 call arguments and the compare constants (fade > 0.1f) are inferred; retail shares the visibility updates differently */
 #include "common.h"
+#include "game/GameStateA.h"
 
 // Controller node: its hidden bits live in the word at +4.
 struct ControllerNode {
@@ -48,7 +49,6 @@ struct GameFlagsBlock {
 extern "C" {
 
 extern LmapScene* g_lmapScene;
-extern u8 g_gameState[0x24];
 
 GameFlagsBlock* gameFlagsGetBlock(void);
 void controllerSetDestination(ControllerNode* node, const void* destination);
@@ -72,7 +72,7 @@ void FUN_0036aa04(FollowerDisplay* display)
     ControllerNode* mid = display->mid->node;
     ControllerNode* far = display->far->node;
     ControllerNode* near = display->near->node;
-    if (g_gameState[0x23] != 0) {
+    if (g_gameState.departLoading != 0) {
         near->flags |= kHiddenBits;
         mid->flags |= kHiddenBits;
         far->flags |= kHiddenBits;

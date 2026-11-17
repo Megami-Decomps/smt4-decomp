@@ -5,7 +5,7 @@ extern "C" {
 
 u8 *gameDataGetSortPreferences(void)
 {
-    return g_gameDataBlocks.saveBlock->block1EC18;
+    return g_gameDataBlocks.saveBlock->body.sortPreferences;
 }
 
 } /* extern "C" */

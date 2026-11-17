@@ -3,6 +3,7 @@
 #include "battle/btlHelp.h"
 #include "gamedata/DataTable40.h"
 #include "battle/BattleCommandController.h"
+#include "gamedata/ConsumableRecord.h"
 
 namespace {
 /* The battle state block: its flags and the index of the acting unit. */
@@ -32,7 +33,6 @@ void btlUiAdvanceFadeInTransition(u32 block);
 s32 btlUiAcceptSelection(u32 block);
 void btlUiGetAcceptedSelection(u32 block, s16 *kind, s16 *value);
 s32 FUN_0023dcb8(void);
-SkillLinkRecord *dataTable08Sub1GetRecord(s32 id);
 s32 FUN_002cf124(void *record);
 void battleSetActionKind(BattleBlock **block);
 void FUN_00229b10(BattleBlock **block, CommandState *state);
@@ -131,9 +131,9 @@ u32 FUN_003c9f58(BattleBlock **block, CommandState *state)
         }
         return 1;
     case 8: {
-        SkillLinkRecord *record = dataTable08Sub1GetRecord(state->selection->value);
-        if (record->linkedSkill != 0) {
-            if (FUN_002cf124(dataTable40FindById(record->linkedSkill)) != 0) {
+        ConsumableRecord *record = dataTable08Sub1GetRecord(state->selection->value);
+        if (record->skillId != 0) {
+            if (FUN_002cf124(dataTable40FindById(record->skillId)) != 0) {
                 setActorAction(block, 5);
                 return 1;
             }

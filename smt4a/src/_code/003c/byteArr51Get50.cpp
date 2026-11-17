@@ -1,16 +1,11 @@
 #include "shard/Shard003C.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
-typedef struct ByteArr51 {
-    /* 0x00 */ s8 v[0x51];
-} ByteArr51;
-
-extern ByteArr51 DAT_005f19fc;
-
 s32 byteArr51Get50(void)
 {
-    return DAT_005f19fc.v[0x50];
+    return g_gameState.unk450;
 }
 
 } /* extern "C" */

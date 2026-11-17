@@ -64,7 +64,7 @@ void FUN_003d386c(s32 useSelector)
             };
             status = reinterpret_cast<const PlayerStatusView *>(gameGetPlayerData())->mask;
         } else {
-            status = gameGetSlotRecord(slot)->status.mask;
+            status = gameGetSlotRecord(slot)->statusMask;
             for (s32 bit = 1; bit < 14; ++bit) {
                 if (bit != 2 && (status & (1u << bit)) != 0)
                     ++statusCount;

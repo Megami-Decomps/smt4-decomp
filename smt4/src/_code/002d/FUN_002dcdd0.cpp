@@ -1,25 +1,19 @@
 /* NON_MATCHING: affinity-selection loop has different register allocation and loop comparison encoding. */
 #include "common.h"
+#include "gamedata/EquipmentRecord.h"
 
 namespace {
-struct AffinityRecord {
-    /* 0x00 */ u8 unk00[0x74];
-    /* 0x74 */ s16 affinities[8];
-    /* 0x84 */ u8 unk84[0x14];
-    /* 0x98 */ u16 order;
-};
 }
 
 extern "C" {
-AffinityRecord *dataTable08Sub2GetRecord(u32 id);
 s32 FUN_0028886c(s32 left, s32 right);
 extern s32 DAT_00402638[2];
 
 /* Sorts records by their strongest affinity, then their table order. */
 s32 FUN_002dcdd0(const u16 *left, const u16 *right)
 {
-    AffinityRecord *leftRecord = dataTable08Sub2GetRecord(*left);
-    AffinityRecord *rightRecord = dataTable08Sub2GetRecord(*right);
+    EquipmentRecord *leftRecord = dataTable08Sub2GetRecord(*left);
+    EquipmentRecord *rightRecord = dataTable08Sub2GetRecord(*right);
     s32 leftAffinity = 0;
     s32 rightAffinity = 0;
     s32 leftIndex = DAT_00402638[0];

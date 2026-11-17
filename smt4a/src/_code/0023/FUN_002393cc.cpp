@@ -5,14 +5,14 @@ struct GameEntryState {
     s8 entryFlags[10]; // 0x15E4
 };
 
-struct GameDataBlock {
+struct GameSaveDataA {
     u8 unk00[0x3E74];
     GameEntryState entryState; // 0x3E74
 };
 
 struct GameDataBlocks {
     u32 unk00;           // 0x00
-    GameDataBlock* data; // 0x04
+    GameSaveDataA* data; // 0x04
 };
 
 extern "C" {

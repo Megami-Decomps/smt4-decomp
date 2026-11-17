@@ -5,6 +5,7 @@
 #include "util/Random.h"
 #include "gamedata/GameDataAccess_VariantE.h"
 #include "gamedata/GameDataAccess.h"
+#include "addon/AocSystem.h"
 
 namespace {
 struct MapRewardIndex {
@@ -25,7 +26,6 @@ typedef char MapRewardSetSizeCheck[sizeof(MapRewardSet) == 0x20 ? 1 : -1];
 
 extern "C" {
 extern MapStateSlots *g_mapStateSlots;
-extern AocSystem *g_aocSystem;
 MapRewardSet *aocFindDisplayNameOverrideText(AocSystem *system, u32 id);
 s32 flagValueRead(u16 id);
 void FUN_00295a18(u16 id, s32 amount);

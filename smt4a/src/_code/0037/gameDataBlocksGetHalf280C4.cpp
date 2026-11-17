@@ -1,15 +1,14 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/Shard0037.h"
 
 extern "C" {
 
-extern GameDataBlocks g_gameDataBlocks;
-
-/* Address of entry `index` of the halfword table at +0x280C4 of the game data block. */
+/* Address of entry `index` of the halfword table at +0x2803C of the save body. */
 u16 *gameDataBlocksGetHalf280C4(s32 index)
 {
-    u32 block = (u32)g_gameDataBlocks.block;
+    u8 *block = (u8 *)g_gameDataBlocks.saveBlock;
 
-    return (u16 *)(block + index * 2 + 0x280C4);
+    return (u16 *)(block + index * 2 + offsetof(GameSaveDataA, body.halves.halves));
 }
 
 } /* extern "C" */

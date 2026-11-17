@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ typedef struct {
 extern int *DAT_004474f4; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f93e; /* 0x49f93e */
 
 /* Supplied declaration required: FUN_0021e224. */
@@ -149,7 +149,7 @@ LAB_002748b4:
                 }
               }
             }
-            if (g_gameState >= 0x65) {
+            if (g_gameState.mapId >= 0x65) {
               temp_v18[0] = (float)((unsigned long long)temp_v13 >> 0x20);
               temp_v19[0] = -1;
               temp_v18[1] = temp_v18[0];

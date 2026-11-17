@@ -5,8 +5,8 @@ extern "C" {
 
 int FUN_00262f78(void)
 {
-    GameSaveSelection *selection = &g_gameDataBlocks.saveBlock->selection;
-    return selection->unk24;
+    GameSaveSelection *selection = &g_gameDataBlocks.saveBlock->body.config.selection;
+    return selection->selectedUnitId;
 }
 
 } /* extern "C" */

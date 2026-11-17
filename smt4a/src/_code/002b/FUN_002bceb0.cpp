@@ -1,5 +1,6 @@
 /* NON_MATCHING: only game-state base address reuse across formatting calls differs. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 struct ResourceOwner;
 struct MapSceneResourceView {
@@ -10,7 +11,6 @@ struct MapSceneResourceView {
     ResourceOwner *owner;
 };
 extern "C" {
-extern GameStateA g_gameState;
 extern const char DAT_00531b14[], DAT_00531af8[], DAT_00531b50[], DAT_00531b34[];
 s32 textFormatBuffer(char *, const char *, ...);
 void resourceOwnerLoadNamed(ResourceOwner *, const char *);
@@ -22,7 +22,7 @@ void FUN_002bceb0(MapSceneResourceView *scene)
 {
     char environmentPath[128];
     char modelPath[128];
-    if (g_gameState.environment.darkZone) {
+    if (g_gameState.darkZone) {
         textFormatBuffer(environmentPath, DAT_00531b14, scene->mapId, scene->mapId, scene->areaId);
         textFormatBuffer(modelPath, DAT_00531af8, scene->mapId, scene->mapId, scene->areaId);
     }

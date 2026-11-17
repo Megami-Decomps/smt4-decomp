@@ -1,20 +1,15 @@
 #include "common.h"
-
-struct DataTable00Entry {
-    /* 0x00 */ u8 unk00[0x88];
-    /* 0x88 */ u16 value;
-};
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 
-DataTable00Entry *dataTable00FindById(u16 id);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 
 /* Script command: reports the halfword at 0x88 of the data table entry with the given id. */
 u32 FUN_003b1a00(void)
 {
-    scrSetResult(dataTable00FindById(static_cast<u16>(scrGetArg(0)))->value);
+    scrSetResult(static_cast<u16>(dataTable00FindById(static_cast<u16>(scrGetArg(0)))->portraitId)); // read unsigned here
     return 1;
 }
 

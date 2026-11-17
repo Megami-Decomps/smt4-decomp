@@ -1,13 +1,13 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystemA.h"
 
 struct Table02RecordA {
     u8 data[0x78];
 };
 
 extern "C" {
-extern AocSystem* g_aocSystem;
-Table02RecordA* resourceFindType27Record(AocSystem*, u32);
+Table02RecordA* resourceFindType27Record(AocSystemA*, u32);
 
 // Prefer an add-on record; invalid indices retain the table's base record.
 Table02RecordA* dataTableGetRecord02(s32 index)

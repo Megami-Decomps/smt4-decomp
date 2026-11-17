@@ -1,9 +1,9 @@
 #include "camp/ScriptPanelResources.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "camp/Camp.h"
 #include "code/Code004b_Smt4a.h"
 extern "C" {
-extern GameStateA g_gameState;
 void asdMemFree(void *memory);
 void scrScriptProcessDestroy(ScriptProcess *process);
 void asdTMTexTableReleaseNode(s32 table, u32 node);
@@ -39,11 +39,7 @@ void campScriptPanelResourcesRelease(CampScriptPanelResources *work)
     }
     asdTMTexTableReleaseNode(24, work->textureNode);
     campGetState();
-    struct CacheRetentionView {
-        u8 prefix[0x38];
-        u8 retain;
-    };
-    if (work->cacheLoaded && !reinterpret_cast<const CacheRetentionView *>(&g_gameState)->retain) {
+    if (work->cacheLoaded && !g_gameState.retainCampResources) {
         work->cacheLoaded = 0;
         cameraResourcesRelease(work->cacheHandle);
         for (s32 index = 0; index < 10; ++index) {

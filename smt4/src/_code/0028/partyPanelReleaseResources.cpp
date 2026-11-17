@@ -8,7 +8,6 @@ struct PartyPanelSavedFlags {
 };
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *memory);
 void asdMemFreeNonNull(void *memory);
@@ -19,15 +18,15 @@ void jobStop(u32 job, u32 flags);
 void partyPanelReleaseResources(void)
 {
     PartyPanelState *panel = g_partyPanel;
-    reinterpret_cast<PartyPanelSavedFlags *>(gameDataGetSortPreferences())->restore = panel->unk42;
-    if (panel->resources.script) {
-        scrScriptProcessDestroy(panel->resources.script);
+    reinterpret_cast<PartyPanelSavedFlags *>(gameDataGetSortPreferences())->restore = panel->alternate;
+    if (panel->script) {
+        scrScriptProcessDestroy(panel->script);
     }
-    if (panel->resources.files[1]) {
-        asdMemFree(panel->resources.files[1]);
+    if (panel->files[1]) {
+        asdMemFree(panel->files[1]);
     }
-    if (panel->resources.files[0]) {
-        asdMemFree(panel->resources.files[0]);
+    if (panel->files[0]) {
+        asdMemFree(panel->files[0]);
     }
     for (s32 index = 0; index < 4; ++index) {
         if (panel->characters[index]) {
@@ -39,12 +38,12 @@ void partyPanelReleaseResources(void)
             asdMemFreeNonNull(asdDebugHookPass(panel->demons[index]));
         }
     }
-    if (panel->ownedBuffer) {
-        asdMemFreeNonNull(bufferArrayFree(panel->ownedBuffer));
+    if (panel->unite) {
+        asdMemFreeNonNull(bufferArrayFree(panel->unite));
     }
-    panel->ownedBuffer = NULL;
+    panel->unite = NULL;
     gameReleaseDataReference();
-    jobStop(panel->resources.job, 0);
+    jobStop(panel->job, 0);
     asdMemFree(panel);
     g_partyPanel = NULL;
 }

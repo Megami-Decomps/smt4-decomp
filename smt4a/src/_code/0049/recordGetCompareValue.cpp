@@ -1,17 +1,9 @@
 #include "common.h"
 #include "shop/shopMain.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
-
-typedef struct RecordA {
-    /* 0x00 */ u8 unk00[0x43];
-    /* 0x43 */ u8 value;
-} RecordA;
-
-typedef struct RecordB {
-    /* 0x00 */ u8 unk00[0x70];
-    /* 0x70 */ u16 value;
-} RecordB;
 
 typedef struct RecordC {
     /* 0x00 */ u8 unk00[0x26];
@@ -24,8 +16,6 @@ typedef struct RecordD {
 } RecordD;
 
 extern u32 aocEntryGetKind(u32 id);
-extern RecordA *dataTable8FindRecord(u32 id);
-extern RecordB *dataTable08Sub2GetRecord(u32 id);
 extern RecordC *aocRecordLookup83(u32 id);
 extern RecordD *aocRecordLookup84(u32 id);
 
@@ -38,10 +28,10 @@ u16 recordGetCompareValue(const u16 *idPtr)
     switch (aocEntryGetKind(id)) {
     case 1:
     case 12: {
-        RecordA *record = dataTable8FindRecord(id);
+        ConsumableRecordA *record = dataTable8FindRecord(id);
 
         if (record != NULL) {
-            value = record->value;
+            value = record->rank;
         }
         break;
     }
@@ -52,10 +42,10 @@ u16 recordGetCompareValue(const u16 *idPtr)
     case 6:
     case 7:
     case 8: {
-        RecordB *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
 
         if (record != NULL) {
-            value = record->value;
+            value = record->order;
         }
         break;
     }

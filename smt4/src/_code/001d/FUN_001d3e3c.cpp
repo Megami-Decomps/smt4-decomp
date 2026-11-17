@@ -6,6 +6,7 @@
 #include "shard/W6_W6Match3_MapMarkerModels.h"
 #include "map/mapDepart.h"
 #include "code/Code001d_Smt4.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -227,7 +228,6 @@ extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern unsigned char g_fixedCamera; /* 0x49f3f0 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern unsigned int DAT_0049f928; /* 0x49f928 */
@@ -676,7 +676,7 @@ unsigned int FUN_001d3e3c(void)
         FUN_0027d8b4(0);
         DAT_0049fa1a = '\0';
       }
-      g_gameState = DAT_0049fc18;
+      g_gameState.mapId = DAT_0049fc18;
       puVar7[0x10] = DAT_0049fc18;
       DAT_0049f920 = DAT_0049fc1c;
       puVar7[0x12] = DAT_0049fc1c;
@@ -706,7 +706,7 @@ unsigned int FUN_001d3e3c(void)
       DAT_0049fb9c = 0;
       puVar7[0x10] = DAT_0049fd14;
       DAT_0049f920 = DAT_0049fd18;
-      g_gameState = temp_v6;
+      g_gameState.mapId = temp_v6;
       puVar7[0x12] = DAT_0049fd18;
       temp_v6 = g_lmapScene;
       DAT_0049f924 = DAT_0049fd20;
@@ -775,7 +775,7 @@ unsigned int FUN_001d3e3c(void)
     NaviMain_SetCurrentMap(puVar7[0x10]);
     navigationSetArguments(puVar7[0x10],puVar7[0x12],DAT_0049f924);
     if ((DAT_0049f950 != '\0') || (*(char *)(puVar7 + 0x266) != '\0')) {
-      FUN_00277b5c(g_gameState,DAT_0049f920);
+      FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
     }
     temp_v6 = puVar7[3] + 1;
     puVar7[3] = temp_v6;
@@ -910,8 +910,8 @@ unsigned int FUN_001d3e3c(void)
       mapIfClose();
     }
     DAT_0049f950 = '\0';
-    temp_v12 = g_gameState == 0x65;
-    temp_v6 = g_gameState;
+    temp_v12 = g_gameState.mapId == 0x65;
+    temp_v6 = g_gameState.mapId;
     if (temp_v12) {
       temp_v6 = DAT_0049f920;
     }
@@ -1593,7 +1593,7 @@ joined_r0x001d535c:
       if (temp_v6 != 0) {
         helpResourcesRelease(g_aocMain + 0xa8);
         if (DAT_0049fd14 >= 0) {
-          (*(unsigned short *)((unsigned char *)&temp_v15 + 0)) = romwright_piece_1_1((char)g_gameState - 'd',2);
+          (*(unsigned short *)((unsigned char *)&temp_v15 + 0)) = romwright_piece_1_1((char)g_gameState.mapId - 'd',2);
           temp_v15 = (((unsigned int)(temp_v15) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_0049f920,(unsigned short)temp_v15)) & 0xffffffU) << 0));
           temp_v15 = romwright_piece_1_3((char)DAT_0049f924,((unsigned int)temp_v15 & 0xffffffU));
           temp_v16 = *(unsigned int *)(g_lmapScene + 0x1c);
@@ -1607,7 +1607,7 @@ joined_r0x001d535c:
           puVar7[4] = 0;
         }
         else if (DAT_0049f970 != 0) {
-          (*(unsigned short *)((unsigned char *)&temp_v15 + 0)) = romwright_piece_1_1((char)g_gameState - 'd',2);
+          (*(unsigned short *)((unsigned char *)&temp_v15 + 0)) = romwright_piece_1_1((char)g_gameState.mapId - 'd',2);
           temp_v15 = (((unsigned int)(temp_v15) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_0049f920,(unsigned short)temp_v15)) & 0xffffffU) << 0));
           temp_v15 = romwright_piece_1_3((char)DAT_0049f924,((unsigned int)temp_v15 & 0xffffffU));
           temp_v16 = *(unsigned int *)(g_lmapScene + 0x1c);
@@ -2879,7 +2879,7 @@ LAB_001d6bd0:
   case 0x4d:
     textFormatBuffer(temp_v29,&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
-    FUN_00277b5c(g_gameState,DAT_0049f920);
+    FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
     temp_v6 = puVar7[3] + 1;
     temp_v4 = 0;
     puVar7[3] = temp_v6;
@@ -3093,7 +3093,7 @@ LAB_001d884c:
   case 0x57:
     mapStatesReleaseMarks();
     mapCollisionRelease();
-    g_gameState = DAT_0049fd14;
+    g_gameState.mapId = DAT_0049fd14;
     puVar7[0x10] = DAT_0049fd14;
     DAT_0049f920 = DAT_0049fd18;
     puVar7[0x12] = DAT_0049fd18;
@@ -3564,7 +3564,7 @@ LAB_001d4774:
     mapIfSetMode1();
   }
   naviMainApplySetting(1,8);
-  if (g_gameState == 0x65) {
+  if (g_gameState.mapId == 0x65) {
     mapCompleteGroup(0x10101003);
   }
   puVar7[3] = puVar7[3] + 1;

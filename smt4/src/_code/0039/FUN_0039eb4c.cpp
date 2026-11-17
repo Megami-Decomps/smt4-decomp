@@ -1,5 +1,6 @@
 /* NON_MATCHING: navi map marker placement; float scheduling and the hoisted constants (s19/s22 pairs, vpush d8-d11) differ from retail */
 #include "common.h"
+#include "game/GameState.h"
 
 struct NaviVec2 {
     f32 x;
@@ -36,13 +37,8 @@ struct NaviMapWork {
     /* 0x0E88 */ NaviMarker markers[1];
 };
 
-struct GameStateVisibility {
-    u8 unk000[0x3E0];
-    u32 forceVisible;
-};
 
 extern "C" {
-extern GameStateVisibility g_gameState;
 
 void gameGetMapBlock(void);
 s32 NaviMain_GetPosX(void);

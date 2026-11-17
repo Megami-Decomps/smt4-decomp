@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameStateA.h"
 
 struct Vec3 {
     f32 x, y, z;
@@ -13,14 +14,7 @@ struct Object00481744 {
     /* 0x98 */ Vec3 position;
 };
 
-struct GameState00481744 {
-    /* 0x000 */ u8 unk000[0x5c8];
-    /* 0x5c8 */ u8 value;
-};
-
 extern "C" {
-
-extern GameState00481744 g_gameState;
 
 /* Resets the object's position to (0, -500, 0), sets flag 4 and returns the game state's byte at 0x5c8. */
 u8 FUN_00481744(Object00481744 *object)
@@ -30,7 +24,7 @@ u8 FUN_00481744(Object00481744 *object)
     object->position.x = 0.0f;
     object->position.y = -500.0f;
     object->position.z = 0.0f;
-    return g_gameState.value;
+    return g_gameState.unk5C8;
 }
 
 } /* extern "C" */

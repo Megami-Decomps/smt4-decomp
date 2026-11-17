@@ -3,12 +3,12 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/DevilRecordA.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 s32 devilCompareRecordIds(const void *left, const void *right);
-extern AocSystemA *g_aocSystem;
 
 static __inline DevilRecordA *searchDevils(const DevilTableRecordA *key, const void *records, u32 count,
                                            s32 (*compare)(const void *, const void *))
@@ -21,9 +21,9 @@ DevilRecordA *devilGetRecord(u16 id)
 {
     DevilTableRecordA key;
     key.header.id = id;
-    if (g_aocSystem->devils.records != NULL) {
+    if (g_aocSystem->devils != NULL) {
         DevilRecordA *record =
-            searchDevils(&key, g_aocSystem->devils.records, g_aocSystem->devils.count, devilCompareRecordIds);
+            searchDevils(&key, g_aocSystem->devils, g_aocSystem->devilCount, devilCompareRecordIds);
         if (record != NULL) {
             return record;
         }

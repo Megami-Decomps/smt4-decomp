@@ -1,19 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214324` (_code @ 0x214324, 0xa70 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/SavedUnitSelection.h"
 #include "code/Code003c_Smt4a.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x14];
-    int f005f1610; /* 0x014 */
-};
-extern GameStateView g_gameState;
-
 
 int npcRoomDestroy(void);
 int buttonHelpSetSelectedId(...);
@@ -99,7 +93,6 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: eventTexAddHandle. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: titleSetSlotValueState2. */
-
 
 unsigned int FUN_00214324(void)
 
@@ -430,10 +423,10 @@ LAB_00214b50:
     break;
   case 7:
     if (DAT_005f1b70 != '\0') {
-      if (g_gameState.f005f1610 == 1) {
+      if (g_gameState.resumeMode == 1) {
         asdSequenceRequest(6,0);
       }
-      if (g_gameState.f005f1610 == 3) {
+      if (g_gameState.resumeMode == 3) {
         temp_v8 = romwright_piece_2_2((short)DAT_005f1b78,(short)DAT_005f1b74 - 200);
         asdSequenceRequest(0xe,&temp_v8,4);
       }

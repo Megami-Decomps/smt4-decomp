@@ -7,7 +7,7 @@
 extern "C" {
 
 /* The record with `id`: an add-on's own first, else a search of the base table. */
-Table00Record *dataTable00FindById(u16 id);
+Table00RecordA *dataTable00FindById(u16 id);
 
 } /* extern "C" */
 

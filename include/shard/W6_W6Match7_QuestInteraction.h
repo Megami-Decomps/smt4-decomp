@@ -2,7 +2,6 @@
 #define SHARD_W6_W6MATCH7_QUESTINTERACTION_H
 
 #include "common.h"
-#include "gamedata/GroupedFileTables.h"
 
 /* Field prefix only; the selection object also contains script jobs and callback tables. */
 struct QuestInteraction {
@@ -27,7 +26,6 @@ void questCenterBeginConversation(QuestInteraction *object);
 extern "C" {
 #endif
 
-u32 groupedFileTablesCountRecordsOfKind(GroupedFileTables *owner, s32 kind, u32 tableIndex);
 
 #ifdef __cplusplus
 }

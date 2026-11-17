@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/TrigF32.h"
 #include "shard/W6_W6Match3_ForwardEffect.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -35,7 +36,6 @@ extern unsigned char DAT_004045a4; /* 0x4045a4 */
 extern unsigned char DAT_00404644; /* 0x404644 */
 extern unsigned char DAT_004046e4; /* 0x4046e4 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f93d; /* 0x49f93d */
 extern unsigned char DAT_0049f94f; /* 0x49f94f */
@@ -125,7 +125,7 @@ void FUN_002c8ce4(void)
     if (temp_v4 != 1) {
       if (temp_v4 == 2) {
         *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-        if (((g_gameState != 0x24) && (temp_v2 = unitGroupHasFlag(2,5), temp_v2 != 0)) &&
+        if (((g_gameState.mapId != 0x24) && (temp_v2 = unitGroupHasFlag(2,5), temp_v2 != 0)) &&
            (*(float *)(g_lmapScene + 0x160) < temp_v12)) {
           partyApplyNonlethalAilmentDamage(2,5);
           *(unsigned int *)(g_lmapScene + 0x160) = 0x447a0000;
@@ -136,11 +136,11 @@ void FUN_002c8ce4(void)
           *(unsigned int *)(temp_v2 + 400) = 0x14;
         }
         if (temp_v12 > *(float *)(g_lmapScene + 0x15c)) {
-          temp_v2 = g_gameState;
-          if (g_gameState == 5) {
+          temp_v2 = g_gameState.mapId;
+          if (g_gameState.mapId == 5) {
             temp_v2 = DAT_0049f920;
           }
-          if (g_gameState == 5 && temp_v2 == 9) {
+          if (g_gameState.mapId == 5 && temp_v2 == 9) {
             temp_v3 = 0x44bb8000;
           }
           else {
@@ -317,7 +317,7 @@ joined_r0x002c99a8:
           }
         }
         temp_v13 = temp_v9;
-        if ((g_gameState != 0x24) && (temp_v2 = unitGroupHasFlag(2,5), temp_v13 = temp_v9, temp_v2 != 0)) {
+        if ((g_gameState.mapId != 0x24) && (temp_v2 = unitGroupHasFlag(2,5), temp_v13 = temp_v9, temp_v2 != 0)) {
           mathDistanceBetweenPoints();
           *(float *)(g_lmapScene + 0x160) = *(float *)(g_lmapScene + 0x160) - temp_v9;
         }

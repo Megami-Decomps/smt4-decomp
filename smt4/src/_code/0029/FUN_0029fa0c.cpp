@@ -9,7 +9,7 @@
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 gameFlagIsSet(u32 flag);
-bool gameRecordCopy(u32 id, RecordValue *record);
+bool gameRecordCopy(u32 id, GameSavedItem *record);
 s32 gameCountUnits(void);
 GameUnitSortRecord *gameGetUnitRecord(u32 slot);
 s32 itemGetFlagBit1(u16 id);
@@ -30,12 +30,12 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
             continue;
         u16 prerequisite = devil->specialFusion.prerequisite;
         if (prerequisite & 1) {
-            RecordValue record;
+            GameSavedItem record;
             if (prerequisite & ~1) {
-                if (!gameRecordCopy(prerequisite >> 1, &record) || !(record.eligibility.flags & 0xFC))
+                if (!gameRecordCopy(prerequisite >> 1, &record) || !(record.flags & 0xFC))
                     continue;
             } else {
-                if (!gameRecordCopy(devil->header.id, &record) || !(record.eligibility.flags & 0xFC))
+                if (!gameRecordCopy(devil->header.id, &record) || !(record.flags & 0xFC))
                     continue;
             }
         }

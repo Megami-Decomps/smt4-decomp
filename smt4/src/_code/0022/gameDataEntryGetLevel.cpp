@@ -15,7 +15,7 @@ u32 gameDataEntryGetLevel(u32 index)
         return 0;
     }
     table = g_gameDataBlocks.saveBlock;
-    entry = &table->items[index];
+    entry = &table->body.items[index];
     return (entry->flags & 0xFF) >> 2;
 }
 

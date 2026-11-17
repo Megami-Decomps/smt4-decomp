@@ -1,21 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00352568` (_code @ 0x352568, 0x4a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    signed char f005f1614; /* 0x018 */
-    u8 pad019[0x3];
-    unsigned int f005f1618; /* 0x01c */
-    u8 pad020[0x1];
-    signed char f005f161d; /* 0x021 */
-    u8 pad022[0x440];
-    signed char f005f1a5e; /* 0x462 */
-};
-extern GameStateView g_gameState;
-
 
 int gameFlagsGetBlock(void);
 int FUN_0030250c(void);
@@ -29,9 +17,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned int g_lmapView; /* 0x5806a4 */
-
-
-
 
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1bec; /* 0x5f1bec */
@@ -49,7 +34,6 @@ extern unsigned int FUN_0029202c(void);
 extern int sub68OwnerCall1(void);
 /* Supplied declaration required: FUN_0033abb4. */
 extern int inputIsQuestMenuPressed(void);
-
 
 void FUN_00352568(void)
 
@@ -92,12 +76,12 @@ void FUN_00352568(void)
     *(short *)(temp_v0 + 0xb6) = *(short *)(temp_v0 + 0xb6) - 1;
   }
   if (DAT_005f1bec != 1) {
-    if (g_gameState.f005f1614 == '\0') {
-      temp_v3 = g_gameState.f005f1618;
-      if (g_gameState.f005f1618 == 0) {
+    if (g_gameState.inputBlocked == '\0') {
+      temp_v3 = g_gameState.unk01C;
+      if (g_gameState.unk01C == 0) {
         temp_v3 = (unsigned int)*(unsigned char *)(temp_v0 + 0xb4);
       }
-      if (g_gameState.f005f1618 == 0 && temp_v3 == 0) {
+      if (g_gameState.unk01C == 0 && temp_v3 == 0) {
         if (((*(char *)(temp_v0 + 0xb5) != '\0') && (temp_v1 = slotIsActive(8), temp_v1 == 0)) &&
            (temp_v1 = slotIsActive(7), temp_v1 == 0)) {
           *(unsigned char *)(g_lmapView + 0xb5) = 0;
@@ -133,7 +117,7 @@ void FUN_00352568(void)
     temp_v1 = slotIsActive(7);
     temp_v4 = temp_v1 != 0;
   }
-  if (((g_gameState.f005f161d != '\0') && (g_gameState.f005f1a5e != '\0')) && (temp_v1 = sub68OwnerCall1(), temp_v1 != 0)) {
+  if (((g_gameState.paused != '\0') && (g_gameState.naviMapPending != '\0')) && (temp_v1 = sub68OwnerCall1(), temp_v1 != 0)) {
     temp_v4 = 0;
     temp_v5 = temp_v4;
   }

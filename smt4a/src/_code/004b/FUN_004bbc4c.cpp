@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include <string.h>
+#include "addon/AocSystemA.h"
 struct AocSystemA;
 struct Table03Record;
 
@@ -17,7 +18,6 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_004bc2c0; /* 0x4bc2c0 */
-extern AocSystemA *g_aocSystem; /* 0x570280 */
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);

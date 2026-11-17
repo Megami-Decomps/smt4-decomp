@@ -4,6 +4,8 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "addon/AocSystemA.h"
+#include "gamedata/Table00Lookup.h"
 
 // The portrait ID is past the shared DevilRecordA prefix.  Apocalypse's table
 // override flags and model ID also differ from the SMT IV model override layout.
@@ -12,22 +14,13 @@ struct PortraitDevilRecordAView {
     u8 unk40[0x5C];
     u16 portrait;
 };
-struct PortraitOverrideAView {
-    u16 id;
-    u16 flags;
-    u8 unk04[0x88];
-    s16 portrait;
-};
-typedef char PortraitRecordAOffsets[offsetof(PortraitDevilRecordAView, portrait) == 0x9C &&
-    offsetof(PortraitOverrideAView, portrait) == 0x8C ? 1 : -1];
+typedef char PortraitRecordAOffsets[offsetof(PortraitDevilRecordAView, portrait) == 0x9C ? 1 : -1];
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
-extern AocSystem *g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
-PortraitOverrideAView *dataTable00FindById(u16 id);
-s32 aocRunByName(AocSystem *system, s32 table, s32 entry, s32 mode);
-void texTableRequestNamedTextureLoad(AocSystem *system, s32 table, s32 entry, u32 options);
+s32 aocRunByName(AocSystemA *system, s32 table, s32 entry, s32 mode);
+void texTableRequestNamedTextureLoad(AocSystemA *system, s32 table, s32 entry, u32 options);
 
 void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
 {
@@ -40,14 +33,14 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
             PortraitDevilRecordAView *devil = (PortraitDevilRecordAView *)devilGetRecord((u16)id);
             if (devil == NULL)
                 return;
-            PortraitOverrideAView *override = dataTable00FindById((u16)id);
-            if (!(override->flags & 0x8000)) {
+            Table00RecordA *override = dataTable00FindById((u16)id);
+            if (!(override->level & 0x8000)) {
                 id = devil->portrait + 1;
                 if (id >= 631)
                     return;
             } else {
                 s32 overrideTable = 25;
-                id = override->portrait;
+                id = override->battleTextureId;
                 if (id >= 154)
                     return;
                 if (((s8 *)g_statusBustUpResources.workB)[id] <= 0 && !asdTMTexTableNodeIsLoaded(overrideTable, id)) {

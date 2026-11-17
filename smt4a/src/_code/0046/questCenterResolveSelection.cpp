@@ -1,14 +1,9 @@
 #include "map/PickObjectResources.h"
+#include "game/GameStateA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "ui/QuestSelectionState.h"
 
 extern "C" {
-// The quest-selection notification word of g_gameState.
-struct GameStateQuestView {
-    u8 unk000[0x1AC];
-    u16 selectionPending;
-};
-extern GameStateQuestView g_gameState;
 QuestSelectionFlags *gameFlagsGetBlock();
 u8 FUN_002a746c();
 s32 FUN_002f153c();
@@ -72,7 +67,7 @@ void questCenterResolveSelection(PickObjectResources *owner)
     }
     uiQuestClose();
     if (work->panelMode) {
-        g_gameState.selectionPending = 1;
+        g_gameState.menuRequestPrimary = 1;
         work->state = 17;
         work->phase = 0;
         FUN_003a7630(0);

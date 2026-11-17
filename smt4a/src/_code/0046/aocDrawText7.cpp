@@ -1,5 +1,6 @@
 #include "addon/AocDrawText.h"
 #include "shard/Shard0046.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 

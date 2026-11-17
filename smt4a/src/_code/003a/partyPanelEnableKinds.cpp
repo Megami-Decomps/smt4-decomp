@@ -1,8 +1,7 @@
-#include "common.h"
+#include "ui/PartyPanelStateA.h"
 
 extern "C" {
 
-extern void *g_partyPanel;
 void partyPanelChangeState(s32 kind, s32 enabled);
 
 void partyPanelEnableKinds(s32 visible)

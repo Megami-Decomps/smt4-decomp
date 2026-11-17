@@ -1,37 +1,25 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/DataTableAccess_Smt4.h"
+#include "addon/AocSystem.h"
+#include "gamedata/ConsumableRecord.h"
 
 extern "C" {
 
-/* A 128-byte record of data table 8 section 1, keyed by the u16 at 0x60. */
-typedef struct Record {
-    /* 0x00 */ u8 unk00[0x60];
-    /* 0x60 */ u16 id;
-    /* 0x62 */ u8 unk62[0x1E];
-} Record;
-
-typedef struct AocSystem {
-    /* 0x000 */ u8 unk000[0x3AC];
-    /* 0x3AC */ void *overrides;
-} AocSystem;
-
-extern AocSystem *g_aocSystem;
-
-extern Record *dataTable08Sub1FindById(AocSystem *system, u32 id);
+extern ConsumableRecord *dataTable08Sub1FindById(AocSystem *system, u32 id);
 extern void *dataTableGet(s32 table, s32 section);
 extern u32 dataTableGetCount(void *section);
-extern Record *libc_bsearch(Record *key, Record *entries, u32 count, s32 size, u8 *compare);
+extern ConsumableRecord *libc_bsearch(ConsumableRecord *key, ConsumableRecord *entries, u32 count, s32 size, u8 *compare);
 
 /* The record for `id`: the AOC system's own, else a search of the table. */
-Record *dataTable08Sub1GetRecord(u16 id)
+ConsumableRecord *dataTable08Sub1GetRecord(u32 id)
 {
-    Record key;
+    ConsumableRecord key;
     void *section;
-    Record *found;
+    ConsumableRecord *found;
 
     key.id = id;
-    if (g_aocSystem->overrides != NULL) {
+    if (g_aocSystem->table08[1].records != NULL) {
         found = dataTable08Sub1FindById(g_aocSystem, id);
         if (found != NULL) {
             return found;
@@ -39,10 +27,10 @@ Record *dataTable08Sub1GetRecord(u16 id)
     }
     section = dataTableGet(8, 1);
     if (section != NULL) {
-        Record *entries = reinterpret_cast<Record *>(dataTableGetEntries(section));
+        ConsumableRecord *entries = reinterpret_cast<ConsumableRecord *>(dataTableGetEntries(section));
         u32 count = dataTableGetCount(section);
 
-        return libc_bsearch(&key, entries, count, sizeof(Record), (u8 *)0x001385bc); /* comparator in the code */
+        return libc_bsearch(&key, entries, count, sizeof(ConsumableRecord), (u8 *)0x001385bc); /* comparator in the code */
     }
     return NULL;
 }

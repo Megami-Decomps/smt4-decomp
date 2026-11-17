@@ -1,11 +1,11 @@
 /* NON_MATCHING: camera-vector load grouping, saved angle registers, and visibility flag predication differ. */
 #include "map/DestructibleModels.h"
+#include "game/GameStateA.h"
 #include "map/lmapMain.h"
 
 extern "C" {
 extern MapDestructibleModels *g_mapHakai;
 extern LmapExtraA *g_lmapView;
-extern GameStateA g_gameState;
 f32 mathPositionHeadingDegrees(f32, f32, f32, f32, f32, f32);
 f32 mathAngleDeltaDegrees(f32, f32);
 void controllerSetDestination(ControllerPose *, const MapVector *);
@@ -27,7 +27,7 @@ void FUN_0027461c(void)
             MapDestructibleModel *model = entry->direct ? entry->model : work->groups.entries[entry->group].models[entry->index];
             ControllerPose *controller = model->controller;
             ControllerFlagsView *flags = reinterpret_cast<ControllerFlagsView *>(controller);
-            if (g_gameState.controllerFlags.secondary) {
+            if (g_gameState.departLoading) {
                 if (!(flags->flags & 1))
                     flags->flags |= 3;
             } else {

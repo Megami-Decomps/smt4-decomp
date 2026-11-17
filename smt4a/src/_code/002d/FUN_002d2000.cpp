@@ -1,21 +1,10 @@
 /* NON_MATCHING: retail places the request-1 switch table between the two branches and keeps constants 1/0x4d2|1 in callee-saved registers (more saved registers); block layout and the flag-or differ. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "code/Code002b.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
-
-/* The game state fields the scene-advance step touches. */
-struct SceneAdvanceState {
-    u8 unk00[0x27];
-    u8 progressEnabled;     // 0x27
-    u8 unk28[0x7C];
-    u32 nextSceneId;        // 0xA8
-    u8 unkAC[0x3A8];
-    s32 unk454;             // 0x454
-    u8 unk458[0x45];
-    u8 sceneReady;          // 0x49D
-};
 
 /* Selection state of the map scene being entered. */
 struct MapSelection {
@@ -47,7 +36,6 @@ struct FlagsBlock {
 };
 
 extern "C" {
-extern SceneAdvanceState g_gameState;
 extern MapSelection g_mapSelection;
 extern s32 DAT_005f1ca4;
 u32 gameDataTableGetFlag(void);
@@ -115,8 +103,8 @@ void FUN_002d2000(void)
                     }
                     DAT_005f1ca4 = found;
                     g_gameState.unk454 = -1;
-                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->level = g_gameState.nextSceneId + 100;
-                    gameFlagsLoadTable4cEntry(g_gameState.nextSceneId);
+                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->level = g_gameState.unk0A4 + 100;
+                    gameFlagsLoadTable4cEntry(g_gameState.unk0A4);
                     g_gameState.progressEnabled = 1;
                 }
                 if (scene == 8) {
@@ -124,7 +112,7 @@ void FUN_002d2000(void)
                     gameFlagSetValue(0x11D1, 1, 1);
                 }
                 g_gameState.sceneReady = 1;
-                flags->sceneResult = g_gameState.nextSceneId;
+                flags->sceneResult = g_gameState.unk0A4;
             }
         }
     }

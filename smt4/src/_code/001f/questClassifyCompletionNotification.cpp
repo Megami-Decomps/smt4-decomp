@@ -1,8 +1,8 @@
 #include "quest_center/QuestRequirement.h"
 #include "shard/W6_W6Match2_StatusBytes.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern StatusFields g_gameState;
 void *gameGetMapBlock();
 s32 FUN_00287800();
 s32 FUN_00287874(u16 quest);
@@ -18,7 +18,7 @@ extern "C" s32 questClassifyCompletionNotification()
     s32 result = 0;
     QuestRequirementProgress progress;
     gameGetMapBlock();
-    if (g_gameState.active)
+    if (g_gameState.statusActive)
         return 4;
     for (u16 quest = 100; quest < 400; ++quest) {
         if (FUN_00298dc8(quest)) {

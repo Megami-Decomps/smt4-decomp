@@ -1,15 +1,9 @@
 #include "common.h"
+#include "game/GameState.h"
 
-struct GameStateRequest {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ s32 requested;
-    /* 0x54 */ u8 unk54[0x20];
-    /* 0x74 */ s32 argument;
-};
 
 extern "C" {
 
-extern GameStateRequest g_gameState;
 
 s32 scrGetArg(s32 index);
 

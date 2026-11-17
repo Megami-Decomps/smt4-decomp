@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 struct PendingWarpState {
     u8 unk000[0x284];
@@ -14,7 +15,6 @@ struct PendingWarpState {
 };
 
 extern "C" {
-extern GameState g_gameState;
 s32 scrGetArg(s32 index);
 void mapSaveReturnSnapshot(void);
 

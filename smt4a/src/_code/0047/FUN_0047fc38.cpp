@@ -1,10 +1,10 @@
 /* NON_MATCHING: modifier zero-initialization, upgrade bank addressing and return-block placement differ. */
 #include "gamedata/EquipmentUpgradeState.h"
 #include "shard/ItemStackLimit.h"
+#include "gamedata/EquipmentRecordA.h"
 
 extern "C" {
 EquipmentUpgradeState *FUN_00239200(void);
-const EquipmentUpgradeBonusRecord *dataTable08Sub2GetRecord(u32);
 void FUN_001a90f0(EquipmentUpgradeModifiers *, const EquipmentUpgradeModifiers *);
 
 // True when this equipment item cannot accept any further upgrade bonus.
@@ -13,13 +13,13 @@ u32 FUN_0047fc38(u32 itemId)
     const ItemCategoryEntry *categoryInfo = itemCategoryFindByItemId(itemId);
     u8 category = categoryInfo ? categoryInfo->type : 0;
     EquipmentUpgradeState *upgrades = FUN_00239200();
-    const EquipmentUpgradeBonusRecord *bonus = dataTable08Sub2GetRecord(itemId);
+    const EquipmentRecordA *bonus = dataTable08Sub2GetRecord(itemId);
     EquipmentUpgradeModifiers modifiers = {};
     s32 power = 0;
     if (bonus) {
-        power = bonus->power;
+        power = bonus->hpBonus;
         FUN_001a90f0(&modifiers,
-            reinterpret_cast<const EquipmentUpgradeModifiers *>(bonus->modifiers));
+            reinterpret_cast<const EquipmentUpgradeModifiers *>(bonus->statBonus));
     }
     switch (category) {
     case 4: {

@@ -3,12 +3,12 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 extern const s8 DAT_0052f6a8[];
 extern const s8 DAT_0052f698[];
 void sysMemClear(void *memory, u32 size);
-Table00Record *dataTable00FindById(u32 id);
 s32 FUN_00162ea4();
 u32 FUN_00409fe8(s32 id, u32 first, u32 second);
 u32 eventUpdateTextureFadeJob(u32 job);
@@ -29,7 +29,7 @@ u32 eventCreatePositionedBattleTextureJob(u32 id, EventTexturePosition position)
     work->fadeStep = 0.25f;
     work->stopWhenHidden = 0;
     work->unk17 = 0;
-    work->resourceId = dataTable00FindById((u16)id)->battleTexture.resourceId;
+    work->resourceId = dataTable00FindById((u16)id)->battleTextureId;
     work->animate = 1;
     if (FUN_00162ea4()) {
         work->state = 1;

@@ -25,7 +25,7 @@ struct FusionLevelUnit {
 };
 
 extern "C" {
-bool gameRecordCopy(u32, RecordValue *);
+bool gameRecordCopy(u32, GameSavedItem *);
 u32 gameFlagIsSet(u32);
 u8 *gameGetSlotTable();
 
@@ -49,8 +49,8 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
         if (definition->registryLink & 1) {
             u32 registryId = (definition->registryLink & 0xfffe) ?
                 definition->registryLink >> 1 : definition->sort.id;
-            RecordValue saved;
-            if (!gameRecordCopy(registryId, &saved) || !(saved.eligibility.flags & 0xfc)) {
+            GameSavedItem saved;
+            if (!gameRecordCopy(registryId, &saved) || !(saved.flags & 0xfc)) {
                 continue;
             }
         }

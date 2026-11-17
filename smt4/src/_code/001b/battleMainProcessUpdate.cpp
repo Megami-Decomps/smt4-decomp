@@ -1,6 +1,7 @@
 /* NON_MATCHING: shared phase helpers outline differently, state-null checks merge, and round-reset/effect aggregate scheduling differs from retail. */
 #include "battle/BattleUnitSlot.h"
 #include <stddef.h>
+#include "game/GameState.h"
 
 struct BattleTaskActor {
     u8 unk00[0x50];
@@ -116,7 +117,6 @@ struct BattleTaskUnit {
     u8 unk2c[0xeec];
     u32 pending;
 };
-struct BattleTaskGameState { u8 unk00[0x2fc]; s32 area; };
 struct BattleTaskAocMain { u8 unk00[0xa8]; u32 controller; };
 typedef char BattleTaskActorSizeCheck[sizeof(BattleTaskActor) == 0x114 ? 1 : -1];
 typedef char BattleTaskReserveSizeCheck[sizeof(BattleTaskReserve) == 0x288 ? 1 : -1];
@@ -129,7 +129,6 @@ extern BattleTaskGlobals g_btlMainState;
 extern void *g_btlUiBlock, *g_btlActionReflect, *g_btlEvent, *g_btlScriptUnit, *g_btlAiScript;
 extern void *DAT_00435d18, *g_btlMain;
 extern BattleTaskGate *DAT_004398d4;
-extern BattleTaskGameState g_gameState;
 extern BattleTaskAocMain *g_aocMain;
 s32 jobIsValid(u32 job);
 s32 spriteTablesLoadedEnough(void *ui);
@@ -395,7 +394,7 @@ static inline void completeBattleTask(BattleTaskContext *work)
         } else if (sequenceRequestIsDeferred()) {
             sequenceRequestFlushDeferred();
         } else if (gameStateIsFlagSetAndLarge()) {
-            s32 area = g_gameState.area - 200;
+            s32 area = g_gameState.savedMapId - 200;
             asdSequenceRequest(14, &area, sizeof(area));
         } else if (FUN_002080e8()) {
             if (FUN_00287800())

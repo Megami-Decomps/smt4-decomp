@@ -4,11 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "gamedata/Table04Record.h"
-
-struct CandidateIdRecord {
-    /* 0x00 */ u8 unk00[0x32];
-    /* 0x32 */ u16 entry;
-};
+#include "gamedata/ConsumableRecordA.h"
 
 struct CandidateIdEntry {
     /* 0x00 */ u8 unk00[0x28];
@@ -47,7 +43,6 @@ static __inline void candidateIdsErase(CandidateIdList *list, u16 *position)
 
 extern "C" {
 
-CandidateIdRecord *dataTable8FindRecord(u16 id);
 s32 scrGetArg(s32 index);
 
 /* Script command: removes from the battle's listed ids those whose slot matches a candidate in the group given by argument 1. */
@@ -66,7 +61,7 @@ u32 FUN_003b14b8(void)
                     if (group == record->encodedStats.values[slot] >> 10) {
                         u16 *id = state->ids.begin;
                         while (id != state->ids.end) {
-                            CandidateIdEntry *entry = (CandidateIdEntry *)dataTable04FindById(dataTable8FindRecord(*id)->entry);
+                            CandidateIdEntry *entry = (CandidateIdEntry *)dataTable04FindById(dataTable8FindRecord(*id)->skillId);
                             if (entry != NULL && (entry->flags << 16) >> 27 == slot) {
                                 candidateIdsErase(&state->ids, id);
                             } else {

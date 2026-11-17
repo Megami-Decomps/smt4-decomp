@@ -16,8 +16,8 @@ s32 FUN_0020e83c(const s32 *leftSlot, const s32 *rightSlot)
     if (rightIndex < 0) {
         return -1;
     }
-    SlotRecord *leftRecord = gameGetSlotRecord(leftIndex);
-    SlotRecord *rightRecord = gameGetSlotRecord(*rightSlot);
+    SlotRecordA *leftRecord = gameGetSlotRecord(leftIndex);
+    SlotRecordA *rightRecord = gameGetSlotRecord(*rightSlot);
     s32 difference = rightRecord->sortKey - leftRecord->sortKey;
     if (difference != 0) {
         return difference;

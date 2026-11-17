@@ -1,6 +1,6 @@
 #include "common.h"
+#include "game/GameStateA.h"
 extern "C" {
-extern struct { u8 unk00[0x262]; s8 dialogRequested; } g_gameState;
 struct MapWork { u8 unk00[0x1D]; u8 dialogRequested; u8 unk1E[2]; u32 dialog; };
 extern MapWork *g_mapIf;
 void dialogClose(s32 immediate);

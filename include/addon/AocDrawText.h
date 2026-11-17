@@ -3,6 +3,7 @@
 #define ADDON_AOCDRAWTEXT_H
 
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 

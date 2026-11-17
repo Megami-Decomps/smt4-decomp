@@ -4,19 +4,9 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "shop/shopMain.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x14];
-    int f0049f930; /* 0x014 */
-    u8 pad018[0x2e0];
-    signed char f0049fc14; /* 0x2f8 */
-    u8 pad2f9[0x3];
-    unsigned int f0049fc18; /* 0x2fc */
-    unsigned int f0049fc1c; /* 0x300 */
-};
-extern GameStateView g_gameState;
 
 
 int npcRoomDestroy(void);
@@ -393,12 +383,12 @@ LAB_001945e8:
     }
     break;
   case 7:
-    if (g_gameState.f0049fc14 != '\0') {
-      if (g_gameState.f0049f930 == 1) {
+    if (g_gameState.map.savedLocationSet != '\0') {
+      if (g_gameState.resumeMode == 1) {
         asdSequenceRequest(6,0);
       }
-      if (g_gameState.f0049f930 == 3) {
-        temp_v9 = romwright_piece_2_2((short)g_gameState.f0049fc1c,(short)g_gameState.f0049fc18 - 200);
+      if (g_gameState.resumeMode == 3) {
+        temp_v9 = romwright_piece_2_2((short)g_gameState.savedAreaId,(short)g_gameState.savedMapId - 200);
         asdSequenceRequest(0xe,&temp_v9,4);
       }
     }

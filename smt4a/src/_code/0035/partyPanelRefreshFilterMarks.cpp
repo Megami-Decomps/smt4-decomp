@@ -29,7 +29,7 @@ struct PartyFilterState {
 
 extern "C" {
 extern PartyFilterState *g_partyPanel;
-SlotRecord *slotRecordFindById(u16 id);
+SlotRecordA *slotRecordFindById(u16 id);
 void __aeabi_memset4(void *, u32 bytes, s32 value);
 
 // Reset party-panel marks and match active party/storage slots against filter IDs.
@@ -57,7 +57,7 @@ void partyPanelRefreshFilterMarks(void)
         if (id < 0) {
             continue;
         }
-        SlotRecord *record = slotRecordFindById(static_cast<u16>(id));
+        SlotRecordA *record = slotRecordFindById(static_cast<u16>(id));
         if (record == NULL) {
             continue;
         }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail has separate wide-area and normal-area branches that each hold their own step/distance constants in saved VFP registers and copies vectors with ldm/stm pairs; ours selects the step first (151 rows against 157). */
 #include "common.h"
+#include "game/GameStateA.h"
 
 struct Vector3 {
     f32 x;
@@ -29,22 +30,11 @@ struct EnemyPlacement {
     /* 0x2C */ f32 heading;
 };
 
-struct GameStateWide {
-    /* 0x00 */ u8 unk00[0x82];
-    /* 0x82 */ s16 wideArea;
-};
-
 extern "C" {
 
 extern MapEnemyState *g_mapEnemy;
 extern LmapViewState *g_lmapView;
 extern LmapSceneState *g_lmapScene;
-// The wide-area flag lies inside g_gameState.
-struct GameStateWideView {
-    u8 unk000[0x200];
-    GameStateWide wide;
-};
-extern GameStateWideView g_gameState;
 
 u32 randRange(u32 limit);
 f32 libm_sinf(f32 radians);
@@ -71,7 +61,7 @@ u32 FUN_00353200(EnemyPlacement *enemy)
         f32 step;
         f32 radians;
 
-        if (g_gameState.wide.wideArea != 0) {
+        if (g_gameState.wideArea != 0) {
             step = 25.0f;
         } else {
             step = 35.0f;
@@ -85,7 +75,7 @@ u32 FUN_00353200(EnemyPlacement *enemy)
                 angle = angle + offset * step;
             }
         }
-        if (g_gameState.wide.wideArea != 0) {
+        if (g_gameState.wideArea != 0) {
             if (attempt > 12) {
                 distance = (f32)randRange(50) + 500.0f;
             } else {

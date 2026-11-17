@@ -1,7 +1,6 @@
 /* NON_MATCHING: timer-path branch layout and flags reloads have not been matched. */
 #include "classes/Obj55c81c.h"
-struct Obj55c81cGameState { u8 unk00[0x21]; s8 paused; };
-extern "C" Obj55c81cGameState g_gameState;
+#include "game/GameStateA.h"
 
 void Obj55c81c::update()
 {

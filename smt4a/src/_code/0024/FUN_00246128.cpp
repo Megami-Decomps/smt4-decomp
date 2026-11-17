@@ -1,6 +1,7 @@
 /* NON_MATCHING: block layout: retail shares one reset-and-return block placed after the first flag test (beyond the threshold arms), and spills the table handle to the stack instead of fp; the entry bounds check also compares in the other direction */
 /* Starts the party-gift popup when the player's money has reached its level threshold: a table entry of kind 0x12 for the selected slot whose two flags allow it. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
@@ -13,11 +14,6 @@ struct PopupState {
     u32 slotId;
 };
 
-struct GameStatePopupView {
-    u8 unk000[0x394];
-    s32 giftCounter;
-};
-
 struct GiftEntry {
     u32 slotId;
     u32 kind;
@@ -28,7 +24,6 @@ struct GiftEntry {
 
 extern "C" {
 extern PopupState *g_popupState;
-extern GameStatePopupView g_gameState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 s32 FUN_00480c28(void);

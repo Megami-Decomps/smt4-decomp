@@ -2,14 +2,10 @@
 #include "map/mapEnemy.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapEnemy *g_mapEnemy;
-struct EnemyExtraModelGameState {
-    u8 unk000[0x200];
-    EnemyExtraModelLimits limits; // 0x200
-};
-extern EnemyExtraModelGameState g_gameState;
 extern EnemyExtraModelSource DAT_00448ca8[];
 void textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
@@ -29,7 +25,7 @@ s32 FUN_00256550(u32 index)
             ++count;
         }
     }
-    if (count >= g_gameState.limits.capacity) {
+    if (count >= g_gameState.map.enemyModelCapacity) {
         return 0;
     }
     char path[36];

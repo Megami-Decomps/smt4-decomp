@@ -2,9 +2,8 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table48Record.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 extern "C" {
-extern AocSystem *g_aocSystem;
-u32 groupedFileTablesCountRecordsOfKind(AocSystem *system, s32 table, s32 section);
 Table48Record *FUN_00387eb4(AocSystem *system, u32 index);
 
 static u32 tableSectionCount(s32 table, s32 section)

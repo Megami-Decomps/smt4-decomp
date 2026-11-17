@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "addon/AocSystemA.h"
 
 // One roll slot of a drop table entry: the item and its weight.
 struct DropSlot {
@@ -19,12 +20,6 @@ struct DropEntry {
 struct AocDropEntry {
     u32 id;
     DropEntry body;  // 0x04
-};
-
-struct AocDropSource {
-    u8 unk000[0x38c];
-    u32 entryCount;         // 0x38c
-    AocDropEntry *entries;  // 0x390
 };
 
 // The reward an encounter grants.
@@ -58,7 +53,6 @@ struct PlayerLevelView {
 };
 
 extern "C" {
-extern AocDropSource *g_aocSystem;
 
 s32 randRange(u16 maximum);
 u32 gameGetUnlockedCountLimit(void);
@@ -68,7 +62,7 @@ EncounterRecord *dataTable1bOr1cGetRecord(s32 index);
 // The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
 static __inline DropEntry *findDropEntry(u16 id)
 {
-    AocDropEntry *aoc = g_aocSystem->entries;
+    AocDropEntry *aoc = (AocDropEntry *)g_aocSystem->entries;
     if (aoc != NULL) {
         for (u32 i = 0; i < g_aocSystem->entryCount; i++, aoc++) {
             if (aoc->id == id) {

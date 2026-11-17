@@ -11,10 +11,10 @@ void gameDataSetLinkSlot(u32 index, u32 firstWord, u32 secondWord)
 
 
     if (index == 0 || index == 1) {
-        table = g_gameDataBlocks.saveBlock->linkTable;
+        table = g_gameDataBlocks.saveBlock->body.linkTable;
         slotBytes = table + index * sizeof(GameSaveLinkSlot);
-        *(u32 *)(slotBytes + offsetof(GameSaveData, linkSlots[0].unk00) - offsetof(GameSaveData, linkTable)) = firstWord;
-        *(u32 *)(slotBytes + offsetof(GameSaveData, linkSlots[0].unk04) - offsetof(GameSaveData, linkTable)) = secondWord;
+        *(u32 *)(slotBytes + offsetof(GameSaveBody, linkSlots[0].unk00) - offsetof(GameSaveBody, linkTable)) = firstWord;
+        *(u32 *)(slotBytes + offsetof(GameSaveBody, linkSlots[0].unk04) - offsetof(GameSaveBody, linkTable)) = secondWord;
     }
 }
 

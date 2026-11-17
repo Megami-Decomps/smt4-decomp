@@ -1,4 +1,4 @@
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct UiFourTimerSet {
@@ -14,7 +14,6 @@ struct UiTimerSettings {
 };
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 /* The timer set's sprite resource packets, in retail's order (three 0x30-byte packets and a 0x118-byte one). */
 static const u32 sFourTimerPacketA[12] = {
     0x190, 0x0, 0x4, 0xfe70, 0x190, 0x10, 0xffc00040, 0x0,

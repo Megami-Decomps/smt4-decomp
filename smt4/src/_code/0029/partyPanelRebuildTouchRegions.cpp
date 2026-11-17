@@ -2,23 +2,7 @@
 #include "ui/PartyPanelState.h"
 #include "gamedata/SaveSlotTableIV.h"
 
-struct PartyTouchState {
-    u16 characters[4]; // panel 0x67c
-    u16 demons[24]; // panel 0x684
-    u16 previousPage; // panel 0x6b4
-    u16 nextPage; // panel 0x6b6
-    s32 count; // panel 0x6b8
-};
-struct PartyTouchPanel {
-    u8 unk0000[0x2c];
-    u32 page; // 0x2c
-    u8 unk0030[0x12];
-    u8 alternate; // 0x42
-    u8 unk0043[0x639];
-    PartyTouchState touch; // 0x67c
-};
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 void ifTouchRegionRemove();
 void __aeabi_memset4(void *, u32, u32);
 u16 ifTouchRegionAddRequested(s32, s32);
@@ -26,7 +10,7 @@ u16 ifTouchRegionAddRequested(s32, s32);
 // Rebuild the character, demon and paging touch regions for the current party page.
 void partyPanelRebuildTouchRegions()
 {
-    PartyTouchPanel *panel = (PartyTouchPanel *)g_partyPanel;
+    PartyPanelState *panel = g_partyPanel;
     s32 i;
     for (i = 0; i < panel->touch.count; ++i)
         ifTouchRegionRemove();

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/DataTable40.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -18,16 +19,12 @@ typedef struct Record0026a794 {
 
 typedef s32 Compare0026a794(const Entry0026a794 *a, const Entry0026a794 *b);
 
-typedef struct AocSystem0026a794 AocSystem0026a794;
-
-Entry0026a794 *recordTableFindById(AocSystem0026a794 *aoc, u32 id);
+Entry0026a794 *recordTableFindById(AocSystem *aoc, u32 id);
 void *dataTableGet(s32 table, s32 slot);
 u32 dataTableGetCount(void *table);
 Entry0026a794 *libc_bsearch(const Entry0026a794 *key, const Entry0026a794 *base, u32 count, u32 size, Compare0026a794 *compare);
 
 s32 passiveSkillCompareById(const Entry0026a794 *first, const Entry0026a794 *second);
-
-extern AocSystem0026a794 *g_aocSystem; /* 0x433158 */
 
 static inline Entry0026a794 *findContentFlagEntry(u32 id)
 {

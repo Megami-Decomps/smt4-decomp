@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276264` (_code @ 0x276264, 0x6f00 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 struct ScriptHolder;
 
@@ -234,7 +235,6 @@ extern int g_lmapView; /* 0x5806a4 */
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_localCamera; /* 0x5f10cc */
-extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned int DAT_005f1608; /* 0x5f1608 */
@@ -643,7 +643,6 @@ extern unsigned short gameFlagsGetWorkValue(void);
 /* Supplied declaration required: gameDataEntrySetBit7. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
-
 unsigned int FUN_00276264(void)
 
 {
@@ -790,7 +789,7 @@ unsigned int FUN_00276264(void)
         FUN_00376fa4(0);
         DAT_005f172b = '\0';
       }
-      g_gameState = DAT_005f1b74;
+      g_gameState.mapId = DAT_005f1b74;
       if (temp_v0) {
         puVar2[0x10] = DAT_005f1b74;
         DAT_005f1600 = DAT_005f1b78;
@@ -866,7 +865,7 @@ unsigned int FUN_00276264(void)
       DAT_005f18c0 = 0;
       puVar2[0x10] = g_mapSelection;
       DAT_005f1600 = DAT_005f1c9c;
-      g_gameState = temp_v8;
+      g_gameState.mapId = temp_v8;
       puVar2[0x12] = DAT_005f1c9c;
       temp_v8 = g_lmapScene;
       DAT_005f1604 = DAT_005f1ca4;
@@ -941,7 +940,7 @@ unsigned int FUN_00276264(void)
     naviMainSetSelectionResetProgress(puVar2[0x10]);
     navigationSetArguments(puVar2[0x10],puVar2[0x12],DAT_005f1604);
     if ((DAT_005f1634 != '\0') || (*(char *)(puVar2 + 0x278) != '\0')) {
-      FUN_0033e014(g_gameState,DAT_005f1600);
+      FUN_0033e014(g_gameState.mapId,DAT_005f1600);
     }
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
@@ -1195,7 +1194,7 @@ LAB_00276f5c:
             mapIfSetMode1();
           }
           naviMainUpdateSlider(1,8);
-          if (g_gameState == 0x65) {
+          if (g_gameState.mapId == 0x65) {
             applyIfIdValid(0x10101003);
           }
           FUN_00378000();
@@ -1275,7 +1274,7 @@ LAB_00276f5c:
       mapIfClose();
     }
     DAT_005f1634 = '\0';
-    if (g_gameState == 0x65) {
+    if (g_gameState.mapId == 0x65) {
       temp_v23 = DAT_005f1600 == 1 || DAT_005f1600 == 7;
       if (DAT_005f1600 == 1 || DAT_005f1600 == 7) {
         temp_v23 = *(short *)((int)puVar2 + 0x4e) == 0;
@@ -1868,10 +1867,10 @@ LAB_00278b38:
                                     FUN_0020ecd4();
                                     partyTryOpenLevelLimitPopup();
                                     FUN_00294cfc(DAT_005f18e8);
-                                    temp_v8 = flagsBit7Get(g_gameState,DAT_005f1600);
+                                    temp_v8 = flagsBit7Get(g_gameState.mapId,DAT_005f1600);
                                     if (temp_v8 == 0) {
-                                      popupTryStartScrollPrompt(g_gameState,DAT_005f1600);
-                                      gameDataEntrySetBit7(g_gameState,DAT_005f1600,1);
+                                      popupTryStartScrollPrompt(g_gameState.mapId,DAT_005f1600);
+                                      gameDataEntrySetBit7(g_gameState.mapId,DAT_005f1600,1);
                                     }
                                     popupTryStartTimedPrompt();
                                   }
@@ -2440,7 +2439,7 @@ LAB_00279444:
         helpResourcesRelease(g_aocMain + 0xa8);
         if (temp_v8 != 2) {
           if (g_mapSelection >= 0) {
-            (*(unsigned short *)((unsigned char *)&uStack_b0 + 0)) = romwright_piece_1_1((char)g_gameState - 'd',2);
+            (*(unsigned short *)((unsigned char *)&uStack_b0 + 0)) = romwright_piece_1_1((char)g_gameState.mapId - 'd',2);
             uStack_b0 = (((unsigned int)(uStack_b0) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_005f1600,(unsigned short)uStack_b0)) & 0xffffffU) << 0));
             uStack_b0 = romwright_piece_1_3((char)DAT_005f1604,((unsigned int)uStack_b0 & 0xffffffU));
             uStack_ac = *(unsigned int *)(g_lmapScene + 0x1c);
@@ -2454,7 +2453,7 @@ LAB_00279444:
             puVar2[4] = 0;
           }
           else if (DAT_005f1658 != 0) {
-            (*(unsigned short *)((unsigned char *)&uStack_b0 + 0)) = romwright_piece_1_1((char)g_gameState - 'd',2);
+            (*(unsigned short *)((unsigned char *)&uStack_b0 + 0)) = romwright_piece_1_1((char)g_gameState.mapId - 'd',2);
             uStack_b0 = (((unsigned int)(uStack_b0) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_005f1600,(unsigned short)uStack_b0)) & 0xffffffU) << 0));
             uStack_b0 = romwright_piece_1_3((char)DAT_005f1604,((unsigned int)uStack_b0 & 0xffffffU));
             uStack_ac = *(unsigned int *)(g_lmapScene + 0x1c);
@@ -4056,7 +4055,7 @@ LAB_0027a030:
   case 0x5d:
     textFormatBuffer(temp_v27,0x27bf80,puVar2[0x10] - 100);
     asdEnvResetModelBank(temp_v27,0);
-    FUN_0033e014(g_gameState,DAT_005f1600);
+    FUN_0033e014(g_gameState.mapId,DAT_005f1600);
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
     break;
@@ -4273,7 +4272,7 @@ LAB_0027ca0c:
     mapIfUnregisterOwnedResources();
     mapGimicClearEntryChildren();
     FUN_00227a70();
-    g_gameState = g_mapSelection;
+    g_gameState.mapId = g_mapSelection;
     puVar2[0x10] = g_mapSelection;
     DAT_005f1600 = DAT_005f1c9c;
     puVar2[0x12] = DAT_005f1c9c;

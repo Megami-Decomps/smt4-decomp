@@ -1,20 +1,7 @@
 /* NON_MATCHING: readable rebuild of the skill usefulness check; retail evaluates the need/have masks with conditional ORs on the same registers, which armcc here allocates differently. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
-
-/* A skill record as the check reads it. */
-struct SkillRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 amount;          /* nonzero: a different check applies */
-    /* 0x64 */ u16 healHp;
-    /* 0x66 */ u16 healMp;
-    /* 0x68 */ u8 curesHp;
-    /* 0x69 */ u8 curesMp;
-    /* 0x6A */ u8 ailmentKind;      /* low seven bits: the ailment group */
-    /* 0x6B */ u8 usableOutside;
-    /* 0x6C */ u8 unk6C;
-    /* 0x6D */ u8 category;         /* 2 or 3: a healing skill */
-};
+#include "gamedata/ConsumableRecord.h"
 
 struct SlotTable {
     /* 0x0000 */ u8 unk0000[0x910B];
@@ -22,11 +9,10 @@ struct SlotTable {
 };
 
 extern "C" {
-SkillRecord *dataTable08Sub1GetRecord(u32 id);
 SlotTable *gameGetSlotTable(void);
 u32 FUN_0028d320(u32 amount);
 void FUN_0023dc38(u16 *mask, u32 group);
-s32 FUN_0033fe6c(s32 slot, s32 arg, const SkillRecord *skill);
+s32 FUN_0033fe6c(s32 slot, s32 arg, const ConsumableRecord *skill);
 
 /* Whether a healing skill is worth using: 1 invalid id, 2 not a usable healing skill, 0 when a
  * party member (or a stocked slot) would benefit, 3 when nobody would. */
@@ -34,13 +20,13 @@ u32 FUN_0028cfd8(u32 skillId)
 {
     if (skillId == 0)
         return 1;
-    SkillRecord *skill = dataTable08Sub1GetRecord(skillId);
+    ConsumableRecord *skill = dataTable08Sub1GetRecord(skillId);
     if (skill == NULL)
         return 1;
-    if ((skill->category != 2 && skill->category != 3) || skill->usableOutside != 1)
+    if ((skill->type != 2 && skill->type != 3) || skill->kind != 1)
         return 2;
-    if (skill->amount != 0)
-        return FUN_0028d320(skill->amount);
+    if (skill->skillId != 0)
+        return FUN_0028d320(skill->skillId);
     BtlMainState *battle = btlGetMainState();
     if (battle->editorControl.flags & 0x2000000)
         return 0;
@@ -54,7 +40,7 @@ u32 FUN_0028cfd8(u32 skillId)
             need |= 1;
         if (skill->healMp != 0 || skill->curesMp != 0)
             need |= 2;
-        if (skill->ailmentKind & 0x7F)
+        if (skill->target & 0x7F)
             need |= 4;
         if ((need & 1) && !(member->groupMask & 2) && member->hp != member->maxHp)
             have = 1;
@@ -64,14 +50,14 @@ u32 FUN_0028cfd8(u32 skillId)
             have |= 3;
         if (need & 4) {
             u16 mask = 0;
-            FUN_0023dc38(&mask, skill->ailmentKind & 0x7F);
+            FUN_0023dc38(&mask, skill->target & 0x7F);
             if (mask & member->groupMask)
                 have |= 4;
         }
         if (need == have)
             return 0;
     }
-    if ((skill->ailmentKind & 0x7F) == 1) {
+    if ((skill->target & 0x7F) == 1) {
         SlotTable *slots = gameGetSlotTable();
         for (s32 slot = -1; slot < slots->count; slot++) {
             if (FUN_0033fe6c(slot, 0, skill) == 0)

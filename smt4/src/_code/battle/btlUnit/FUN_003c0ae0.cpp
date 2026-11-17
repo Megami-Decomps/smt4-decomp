@@ -1,6 +1,7 @@
 /* NON_MATCHING: battle unit action timing setup; float chain and the shared hit-type branch (retail jumps back into the first case) are written plainly and not compared with retail */
 #include "common.h"
 #include "code/Code0027.h"
+#include "gamedata/Table00Lookup.h"
 
 /* The camera/animation parameters of the action camera, read from the battle main state. */
 struct BtlCameraState {
@@ -43,11 +44,6 @@ struct BtlUnitAction {
     /* 0x90 */ u32 colorG;
 };
 
-struct BtlUnitRecord {
-    /* 0x00 */ u8 unk00[0x9E];
-    /* 0x9E */ u8 attackType;
-};
-
 #define ACTION_FLAG_FIXED_COLOR 0x8000
 #define ACTION_FLAG_SKIP_CAMERA 0x10
 #define ACTION_FLAG_ACTIVE 0x2
@@ -62,7 +58,6 @@ s32 idSetFindSubjectIndex(void *unit, BtlUnitAction *action);
 s32 btlFindNthActiveSpecialEntry(void *unit, s32 arg);
 f32 FUN_002881bc(void);
 s32 asdAnimGetTrackLastFrame(u32 track, s32 index);
-BtlUnitRecord *dataTable00FindById(u32 id);
 u16 randNextInRange(u32 maximum);
 
 /* Starts an action on a battle unit: picks the camera kind and its speed, then the action's
@@ -89,8 +84,8 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
                     if (slot >= 0) {
                         slot = btlFindNthActiveSpecialEntry(unit, 1);
                         u16 recordId = *(u16 *)(*(u8 **)(unit + 0x1FC0) + slot * 0x288 + 0xCE);
-                        BtlUnitRecord *record = dataTable00FindById(recordId);
-                        if (record->attackType == 1 || record->attackType == 3)
+                        Table00Record *record = dataTable00FindById(recordId);
+                        if (record->arrangementFirst == 1 || record->arrangementFirst == 3)
                             near = true;
                     }
                     action->cameraKind = near ? 1 : 0;

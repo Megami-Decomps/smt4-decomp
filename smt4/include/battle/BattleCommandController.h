@@ -72,12 +72,6 @@ struct CommandInfo {
     /* 0x1d */ u8 unk1d[3];
 };
 
-/* The skill record's link to a second skill. */
-struct SkillLinkRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 linkedSkill;
-};
-
 typedef char CommandControllerOffsets[
     offsetof(CommandSelection, kind) == 0x14c &&
     offsetof(CommandState, windowId) == 0x2c &&

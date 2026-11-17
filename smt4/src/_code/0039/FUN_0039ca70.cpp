@@ -2,6 +2,7 @@
  * for the flag write and places the commonBgStopChildAndBeginTransition arm last; armcc here keeps case 2 separate */
 #include "map/mapDepart.h"
 #include "bible/bibleAnalyze.h"
+#include "game/GameState.h"
 
 #define UNK39CA70_FLAG_BUSY 0x1000000
 
@@ -16,7 +17,6 @@ struct Unk39ca70Phase {
 
 extern "C" {
 
-extern GameState g_gameState;
 
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
@@ -29,8 +29,8 @@ void FUN_0039ca70(Unk39ca70Phase *phase)
 {
     switch (phase->step) {
     case 0:
-        if (g_gameState.bgResetPending != 0) {
-            g_gameState.bgResetPending = 0;
+        if (g_gameState.map.bgResetPending != 0) {
+            g_gameState.map.bgResetPending = 0;
             if (gameFlagIsSet(22)) {
                 commonBgReset();
             } else {

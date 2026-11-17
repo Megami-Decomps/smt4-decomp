@@ -1,16 +1,8 @@
 /* NON_MATCHING: register allocation and the cursor-row base address (retail adds 0x55c then ldrsb #17; here a literal-pool offset) differ; structure and call order match. */
 #include "common.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
-
-/* The record of data table 0 used for the row: a name-kind byte and two counters. */
-typedef struct RowRecord {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 kind;
-    /* 0x03 */ u8 unk03;
-    /* 0x04 */ u32 first;
-    /* 0x08 */ u32 second;
-} RowRecord;
 
 /* A layout slot: the position of an element relative to the panel. */
 typedef struct LayoutSlot {
@@ -41,14 +33,13 @@ extern void FUN_0022daac(RowPanel *panel, u32 id, s32 index, s32 selected, s32 a
 extern void FUN_0022db94(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
 extern void demonIconPanelDrawRow(RowPanel *panel, s32 a, u32 id, s32 index, s32 selected, s32 alpha);
 extern void drawTextAtRelativePosition(u8 *layout, s32 a, s32 x, s32 y, s32 b, s32 c, u32 color, s32 alpha, u8 *text);
-extern RowRecord *dataTable00FindById(u16 id);
 extern s32 textFormatBuffer(u8 *destination, const char *format, ...);
 
 /* Draws one row of the panel: its icon layers and the two counters of the record. */
 void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
 {
     LayoutSlot *slot;
-    RowRecord *record;
+    Table00Record *record;
     u8 text[44];
     s32 alpha = panel->alpha;
     s16 baseX;
@@ -76,13 +67,13 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
     record = dataTable00FindById(id);
     kind = 0;
     if (record != NULL) {
-        kind = record->kind;
+        kind = record->level;
     }
     FUN_0022d9c8(panel, kind, index, selected, alpha, -1);
     record = dataTable00FindById(id);
     count = 0;
     if (record != NULL) {
-        count = record->first;
+        count = record->maxHp;
     }
     if (selected != 0) {
         slot = FUN_002bf4f0(panel->layout, 0x49D);
@@ -98,7 +89,7 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
     record = dataTable00FindById(id);
     count = 0;
     if (record != NULL) {
-        count = record->second;
+        count = record->maxMp;
     }
     if (selected != 0) {
         slot = FUN_002bf4f0(panel->layout, 0x4A1);

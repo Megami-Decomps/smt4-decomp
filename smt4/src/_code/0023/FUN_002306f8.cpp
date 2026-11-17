@@ -1,7 +1,8 @@
 /* NON_MATCHING: inlined price-return paths use fewer saved registers and reload constants on demand; common money-settlement block placement differs. */
-#include "gamedata/Table8Record.h"
 #include "gamedata/PartyMoney.h"
 #include "camp/Config/Config.h"
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
 
 struct InventoryTransactionItem {
     u16 id;
@@ -15,33 +16,14 @@ struct InventoryTransactionItem {
     };
 };
 typedef char InventoryTransactionItemSizeCheck[sizeof(InventoryTransactionItem) == 4 ? 1 : -1];
-// Prices lie beyond the shared table-8 record prefix.
-struct ConsumableTransactionPrices {
-    Table8Record prefix;
-    u8 unk6C[0xC];
-    s32 purchase;
-    s32 sale;
-};
-struct EquipmentTransactionPrices {
-    Table8Record prefix;
-    u8 unk6C[0x30];
-    s32 purchase;
-    s32 sale;
-};
+// The add-on record's sale price.
 struct ContentTransactionPrice {
     u8 prefix[0x2C];
     s32 sale;
 };
-typedef char InventoryTransactionPriceOffsets[
-    offsetof(ConsumableTransactionPrices, purchase) == 0x78 &&
-    offsetof(ConsumableTransactionPrices, sale) == 0x7C &&
-    offsetof(EquipmentTransactionPrices, purchase) == 0x9C &&
-    offsetof(EquipmentTransactionPrices, sale) == 0xA0 ? 1 : -1];
 
 extern "C" {
 u32 aocEntryGetKind(u32 id);
-ConsumableTransactionPrices *dataTable08Sub1GetRecord(u32 id);
-EquipmentTransactionPrices *dataTable08Sub2GetRecord(u32 id);
 ContentTransactionPrice *aocRecordLookup84(u32 id);
 void FUN_00250d84(u32 id, s32 quantity);
 void FUN_00295a18(u32 id, u32 quantity);
@@ -52,12 +34,12 @@ static __inline s32 inventoryGetTransactionPrice(u16 id, bool selling)
 {
     switch (aocEntryGetKind(id)) {
     case 1: {
-        const ConsumableTransactionPrices *record = dataTable08Sub1GetRecord(id);
-        return record != NULL ? (selling ? record->sale : record->purchase) : 99999999;
+        const ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+        return record != NULL ? (selling ? record->sellPrice : record->buyPrice) : 99999999;
     }
     case 2: case 3: case 4: case 5: case 6: case 7: case 8: {
-        const EquipmentTransactionPrices *record = dataTable08Sub2GetRecord(id);
-        return record != NULL ? (selling ? record->sale : record->purchase) : 99999999;
+        const EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        return record != NULL ? (selling ? record->sellPrice : record->buyPrice) : 99999999;
     }
     case 10:
         if (selling) {

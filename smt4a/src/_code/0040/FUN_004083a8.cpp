@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include <stddef.h>
 
 struct InteractionVariantFlags { u8 bits[8]; };
@@ -9,7 +10,6 @@ struct InteractionFlagBankView {
 };
 typedef char InteractionFlagBankOffsets[offsetof(InteractionFlagBankView, normal) == 0xCF0 ? 1 : -1];
 extern "C" {
-extern GameStateA g_gameState;
 InteractionFlagBankView *saveGetFlagRowTable();
 s32 gameFlagIsSet(u32);
 
@@ -30,7 +30,7 @@ bool FUN_004083a8(s32 id, u32 variant)
             return true;
     } else if (id == 0x79) {
         if (variant == 3) {
-            if (g_gameState.mode != 0x17 || g_gameState.submode != 6)
+            if (g_gameState.mapId != 0x17 || g_gameState.areaId != 6)
                 return false;
             if (flags->bits[0] & 8)
                 return true;
@@ -38,7 +38,7 @@ bool FUN_004083a8(s32 id, u32 variant)
         }
     } else if (id == 0x7A) {
         if (variant == 2) {
-            if (g_gameState.mode != 0x17 || g_gameState.submode != 1)
+            if (g_gameState.mapId != 0x17 || g_gameState.areaId != 1)
                 return false;
             if (flags->bits[0] & 4)
                 return true;

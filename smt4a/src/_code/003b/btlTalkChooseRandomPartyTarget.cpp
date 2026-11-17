@@ -25,7 +25,7 @@ extern TalkCandidateMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32);
 void scrSetResult(s32);
 u8 bitsAt60Test(BitsAt60 *, u8);
-u32 FUN_004bd0d8(SlotRecord *);
+u32 FUN_004bd0d8(SlotRecordA *);
 u32 randRange(s32);
 
 u32 btlTalkChooseRandomPartyTarget()
@@ -41,7 +41,7 @@ u32 btlTalkChooseRandomPartyTarget()
         do {
             s8 slot = ((TalkCandidateParty *)gameGetSlotTable())->slots[index];
             if (slot >= 0) {
-                SlotRecord *record = gameGetSlotRecord(slot);
+                SlotRecordA *record = gameGetSlotRecord(slot);
                 if (!bitsAt60Test((BitsAt60 *)record, 1) &&
                     !bitsAt60Test((BitsAt60 *)record, 10) && record->entryId != excludedId) {
                     if (!FUN_004bd0d8(record)) {

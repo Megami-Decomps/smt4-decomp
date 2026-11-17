@@ -1,5 +1,6 @@
 /* NON_MATCHING: updates a field NPC marker (appears after leaving the trigger range, rises into view, shows its message, then follows the NPC with a height offset based on the lmap view); written from the decompilation, the goto structure is rebuilt as blocks, distSpatial's arguments are not recovered and float/bit comparisons are written as float compares */
 #include "common.h"
+#include "game/GameStateA.h"
 
 #define NPC_FLAG_PENDING 0x01
 #define NPC_FLAG_RISING 0x02
@@ -62,21 +63,8 @@ struct NpcGameBlock {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x21];
-    s8 f005f161d; /* 0x021 */
-    u8 pad022[0x1];
-    s8 f005f161f; /* 0x023 */
-    u8 pad024[0x27c];
-    s32 f005f189c; /* 0x2a0 */
-};
-extern GameStateView g_gameState;
 
 extern LmapViewHeight *g_lmapView;
-
-
-
 
 NpcGameBlock *gameFlagsGetBlock(void);
 f32 distSpatial(void);
@@ -108,9 +96,9 @@ static __inline bool npcRunPending(FieldNpc *npc)
 void FUN_00481784(FieldNpc *npc)
 {
     NpcGameBlock *block = gameFlagsGetBlock();
-    if (g_gameState.f005f161d != 0)
+    if (g_gameState.paused != 0)
         return;
-    if (npc->mode != 1 && g_gameState.f005f189c > 0)
+    if (npc->mode != 1 && g_gameState.unk2A0 > 0)
         return;
 
     if ((npc->flags & NPC_FLAG_NEAR) != 0) {
@@ -162,9 +150,9 @@ void FUN_00481784(FieldNpc *npc)
     controllerSetPosition((u32)npc->controller->inner);
 
     NpcControllerInner *inner = npc->controller->inner;
-    if (g_gameState.f005f161d != 0) {
+    if (g_gameState.paused != 0) {
         inner->flags |= NPC_VISIBLE_BITS;
-    } else if (g_gameState.f005f161f != 0) {
+    } else if (g_gameState.departLoading != 0) {
         inner->flags |= NPC_VISIBLE_BITS;
         return;
     } else if ((npc->flags & NPC_FLAG_HIDDEN) != 0) {
@@ -172,7 +160,7 @@ void FUN_00481784(FieldNpc *npc)
     } else {
         return;
     }
-    if (g_gameState.f005f161f != 0)
+    if (g_gameState.departLoading != 0)
         inner->flags |= NPC_VISIBLE_BITS;
     else if ((npc->flags & NPC_FLAG_HIDDEN) != 0)
         inner->flags &= ~NPC_VISIBLE_BITS;

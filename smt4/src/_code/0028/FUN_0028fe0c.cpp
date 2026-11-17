@@ -2,9 +2,9 @@
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 void uiBindRecordRewardText(s32 quest, s32 mode, s32 enabled);
 u32 dataSetFindRequestedFileByKey(AocSystem *system, s32 quest);
 void textFormatBuffer(char *output, const char *format, ...);

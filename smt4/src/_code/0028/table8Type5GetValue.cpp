@@ -1,27 +1,19 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table8Type5Record.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
-/* The content system; only the add-on lookup flag is named. */
-typedef struct AocSystemView {
-    /* 0x000 */ u8 unk000[0x3DC];
-    /* 0x3DC */ s32 lookupEnabled;
-} AocSystemView;
-
-Table8Type5Record *aocTable8Type5FindRecord(AocSystemView *system, u32 id);
+Table8Type5Record *aocTable8Type5FindRecord(AocSystem *system, u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 compareLookupKey(const void *left, const void *right);
-
-
-extern AocSystemView *g_aocSystem; /* 0x433158 */
 
 /* The table 8 type 5 record for `id`: the add-on lookup's answer first, else a search of the table. */
 static __inline Table8Type5Record *table8Type5Lookup(u32 id)
 {
     Table8Type5Record key;
     key.id = id;
-    if (g_aocSystem->lookupEnabled != 0) {
+    if (g_aocSystem->table08[5].records != 0) {
         Table8Type5Record *record = aocTable8Type5FindRecord(g_aocSystem, id);
         if (record != NULL) {
             return record;

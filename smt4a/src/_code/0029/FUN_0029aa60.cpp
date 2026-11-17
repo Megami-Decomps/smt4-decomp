@@ -1,19 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029aa60` (_code @ 0x29aa60, 0x2c90 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    signed char f005f1614; /* 0x018 */
-    u8 pad019[0x244];
-    signed char f005f1859; /* 0x25d */
-    unsigned char f005f185a; /* 0x25e */
-    signed char f005f185b; /* 0x25f */
-};
-extern GameStateView g_gameState;
-
 
 int dialogClose(...);
 int randomGetNormalizedFloat(void);
@@ -51,10 +41,6 @@ extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapIf; /* 0x58103c */
 extern int DAT_00581040; /* 0x581040 */
 extern int g_lmapScene; /* 0x581288 */
-
-
-
-
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -95,7 +81,6 @@ extern int FUN_0036d984(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_003a3e60. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern short __aeabi_idivmod(int, int);
-
 
 /* WARNING: Type propagation algorithm not settling */
 
@@ -151,7 +136,7 @@ void FUN_0029aa60(int param_1)
   temp_v30 = 0;
   puVar12 = (unsigned char *)(g_mapIf + 0xcd10);
   piVar9 = (int *)(g_mapIf + 0xcd14);
-  if (g_gameState.f005f1614 != '\0') {
+  if (g_gameState.inputBlocked != '\0') {
     *puVar12 = 1;
     *piVar9 = 2;
   }
@@ -174,8 +159,8 @@ void FUN_0029aa60(int param_1)
   temp_v33 = param_1;
   temp_v8 = gameFlagIsSet(0xc);
   if ((temp_v8 != 0) && (temp_v8 = gameFlagIsSet(0x10), temp_v8 == 0)) {
-    g_gameState.f005f1859 = '\0';
-    g_gameState.f005f185a = 0;
+    g_gameState.unk25D = '\0';
+    g_gameState.transitionCompleted = 0;
     *(unsigned char *)(temp_v5 + 0xcd10) = 1;
   }
   temp_v8 = g_mapIf;
@@ -472,7 +457,7 @@ LAB_0029ad50:
         }
         *(unsigned short *)(temp_v9 + 0x1e8) = 0;
         *(int *)(temp_v9 + 0x20c) = (int)((unsigned long long)temp_v24 >> 0x20);
-        if ((g_gameState.f005f1859 != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
+        if ((g_gameState.unk25D != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
           temp_v10 = 5;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -480,7 +465,7 @@ LAB_0029ad50:
       case 2:
         *(unsigned short *)(temp_v9 + 0x1e8) = 0;
         *(float *)(temp_v9 + 0x20c) = temp_v18;
-        if ((g_gameState.f005f1859 != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
+        if ((g_gameState.unk25D != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
           temp_v10 = 6;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -506,10 +491,10 @@ LAB_0029ad50:
         FUN_00329dd4(pcVar14);
         *(unsigned int *)(temp_v9 + 0x25c) = 0xffffffff;
         *(short *)(temp_v9 + 0x204) = *(short *)(temp_v9 + 0x204) + 1;
-        if (g_gameState.f005f1859 != '\0') {
+        if (g_gameState.unk25D != '\0') {
           temp_v14 = FUN_0029d6f0();
           if (temp_v14 == 0) {
-            if ((g_gameState.f005f1859 == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
+            if ((g_gameState.unk25D == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
               *(unsigned int *)(temp_v9 + 0x1e0) = 1;
               break;
             }
@@ -585,7 +570,7 @@ LAB_0029ad50:
         *(short *)(temp_v9 + 0x206) = temp_v6;
         if (temp_v6 >= 0x11) {
           if (*(int *)(temp_v9 + 0x1f0) == 0x22) {
-            g_gameState.f005f1859 = '\0';
+            g_gameState.unk25D = '\0';
           }
           else {
             dataTable23MarkEntrySeen();
@@ -624,7 +609,7 @@ LAB_0029ad50:
              (*(float *)(temp_v9 + 0x240) - *(float *)(temp_v9 + 0x24c)) * 0.25f;
         FUN_00329dd4(pcVar14);
         *(unsigned int *)(temp_v9 + 0x25c) = 0xffffffff;
-        if (g_gameState.f005f1859 == '\0') {
+        if (g_gameState.unk25D == '\0') {
           *(unsigned int *)(temp_v9 + 0x1e0) = 1;
           break;
         }
@@ -645,7 +630,7 @@ LAB_0029ad50:
           *(unsigned int *)(temp_v9 + 0x1e0) = 3;
           *(unsigned short *)(temp_v9 + 0x204) = 0;
         }
-        else if ((g_gameState.f005f1859 == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
+        else if ((g_gameState.unk25D == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
           *(unsigned int *)(temp_v9 + 0x1e0) = 1;
         }
         break;
@@ -715,7 +700,7 @@ LAB_0029ad50:
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
         if (((temp_v14 != -3 && temp_v14 != -2) && (temp_v14 != -1 && temp_v14 != 1)) &&
-           ((g_gameState.f005f1859 == '\0' || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)))) {
+           ((g_gameState.unk25D == '\0' || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)))) {
           temp_v10 = 2;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -908,7 +893,7 @@ LAB_0029ad50:
           temp_v10 = 0xff;
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
-        if (g_gameState.f005f185b != '\0') {
+        if (g_gameState.unk25F != '\0') {
           temp_v10 = 0x11;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -1355,7 +1340,7 @@ joined_r0x0029d070:
           temp_v10 = 0xff;
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
-        if (g_gameState.f005f185b == '\0') {
+        if (g_gameState.unk25F == '\0') {
           *(unsigned int *)(temp_v9 + 0x1e0) = 6;
         }
         break;
@@ -1432,7 +1417,7 @@ joined_r0x0029d070:
         temp_v6 = *(short *)(temp_v9 + 0x206) + 2;
         *(short *)(temp_v9 + 0x206) = temp_v6;
         if (temp_v6 == 0x19) {
-          g_gameState.f005f1859 = '\0';
+          g_gameState.unk25D = '\0';
         }
         if (*(short *)(temp_v9 + 0x206) >= 0x21) {
           temp_v10 = 6;

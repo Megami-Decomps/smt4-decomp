@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "gamedata/ConsumableRecord.h"
 
 /* DataTableAccess (declarations migrated from callers). */
 struct Record;
@@ -12,8 +13,6 @@ extern "C" {
 u32 * dataTableFindRecordWord(u32 index);
 
 int dataTable17Sub0GetRecord(u32 unused, u32 index);
-
-Record * dataTable08Sub1GetRecord(u16 id);
 
 TableEntry * dataTable29Sub0GetEntryWithAoc(u32 index);
 

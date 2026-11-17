@@ -1,9 +1,9 @@
 /* NON_MATCHING: the 18 resource words are explicit zero stores (retail has no memclr) and rows now match 131/131; retail hoists a callee-saved zero (r5) to function entry and keeps g_eplSlots in r6, ours uses the loop-local zero and r5. */
 #include "shard/W4_Match3_EplSlots.h"
+#include "game/GameStateA.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern s32 g_gameState;
 extern const char DAT_00531a18[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void tripleClear(void *triple);
@@ -47,7 +47,7 @@ void FUN_002b75b0(void)
             slot->loaded = 0;
         }
     }
-    if (g_gameState == 0x26) {
+    if (g_gameState.mapId == 0x26) {
         textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {
@@ -55,7 +55,7 @@ void FUN_002b75b0(void)
             slot->list = FUN_001abbc4(slot->buffer);
         }
     }
-    if (g_gameState == 0x2B || g_gameState == 0x2C || g_gameState == 0x2F) {
+    if (g_gameState.mapId == 0x2B || g_gameState.mapId == 0x2C || g_gameState.mapId == 0x2F) {
         textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {

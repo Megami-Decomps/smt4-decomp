@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f8350` (_code @ 0x1f8350, 0x484 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int mathPositionHeadingDegrees(void);
 
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
@@ -44,10 +44,10 @@ void FUN_001f8350(void)
   *(unsigned int *)(DAT_004474f4 + 0x38) = 0xc2c80000;
   temp_v1 = g_lmapScene;
   temp_v11 = 70.0f;
-  if (g_gameState != 0x19) {
-    if (g_gameState != 0x1a) {
-      if (g_gameState != 0x1b) {
-        if ((g_gameState == 0x1c) && (DAT_0049f920 == 1)) {
+  if (g_gameState.mapId != 0x19) {
+    if (g_gameState.mapId != 0x1a) {
+      if (g_gameState.mapId != 0x1b) {
+        if ((g_gameState.mapId == 0x1c) && (DAT_0049f920 == 1)) {
           *(unsigned int *)(temp_v0 + 0x38) = 0xc42f0000;
           temp_v5 = *(float *)(temp_v1 + 0x20) + 1400.0f;
           temp_v10 = temp_v9;

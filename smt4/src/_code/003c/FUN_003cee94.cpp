@@ -2,6 +2,7 @@
 #include "battle/ActionKindSelection.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/ConsumableRecord.h"
 
 struct BtlMainState;
 struct BattleResourceOwner;
@@ -12,11 +13,9 @@ struct BattleActionDescription {
     u8 unk18[0xA];
 };
 struct BattleResourceLookupView { u8 unk00[0x28]; u32 attributes; };
-struct BattleItemResourceView { u8 unk00[0x62]; u16 resourceId; };
 extern "C" {
 extern BattleResourceOwner *DAT_00435d18;
 BattleActionDescription btlEntryBuildSummary(BtlMainState *, BtlEntry *);
-BattleItemResourceView *dataTable08Sub1GetRecord(u32);
 void aocEntryBlockStore(BattleResourceOwner *, u32, u32, s32, u32);
 void objectSetResultFromLookup(BattleResourceOwner *, u32, u32, u32);
 void FUN_003daf3c(BattleResourceOwner *, s32, u32, s32);
@@ -38,7 +37,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
     if (kind != 2 && kind != 3) {
         if (kind != 8)
             return;
-        u16 itemResource = dataTable08Sub1GetRecord(resourceId)->resourceId;
+        u16 itemResource = dataTable08Sub1GetRecord(resourceId)->skillId;
         if (!itemResource) {
             if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)
                 enabled = 0;

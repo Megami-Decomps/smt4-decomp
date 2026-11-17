@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00292b84` (_code @ 0x292b84, 0x1398 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -39,7 +40,6 @@ typedef struct {
 extern int *g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_localCamera; /* 0x5f10cc */
-extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f199e; /* 0x5f199e */
 extern float DAT_005f1a88; /* 0x5f1a88 */
@@ -88,7 +88,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
 /* Supplied declaration required: __hardfp_atan2f. */
 extern short __aeabi_idivmod(short, int);
-
 
 void FUN_00292b84(void)
 
@@ -392,9 +391,9 @@ void FUN_00292b84(void)
   }
   piVar5[0xf] = (int)((float)piVar5[0xf] + temp_v13 + temp_v9);
   piVar5[0x87] = (int)(temp_v13 + temp_v9);
-  if (g_gameState != 1) {
-    if (g_gameState != 2) {
-      if ((g_gameState == 4) && (DAT_005f1600 == 2)) {
+  if (g_gameState.mapId != 1) {
+    if (g_gameState.mapId != 2) {
+      if ((g_gameState.mapId == 4) && (DAT_005f1600 == 2)) {
         temp_v2 = gameFlagIsSet(0xf4);
         if (temp_v2 != 0) {
           temp_v2 = gameFlagIsSet(0xf6);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (175 vs 136 rows); retail inlines the angle lookups three times with unrolled wrap loops and keeps the angle flags in r3-r5 */
 #include "common.h"
 #include <math.h>
+#include "game/GameState.h"
 
 // Interpolated sine/cosine table entry: value and slope for each, indexed by the whole angle byte.
 struct TrigEntry {
@@ -15,13 +16,6 @@ struct SinCos {
     f32 cosine;
 };
 
-// Camera parameters set by the script command.
-struct FieldCameraSetup {
-    u8 unk000[0xc4];
-    f32 eye[3];             // 0xc4
-    f32 target[3];          // 0xd0
-    f32 fov;                // 0xdc
-};
 
 struct SceneState {
     s32 sceneId;            // 0x00
@@ -32,7 +26,6 @@ struct SceneState {
 extern "C" {
 
 extern TrigEntry g_sinCosTable[];
-extern FieldCameraSetup g_gameState;
 extern SceneState* DAT_004474f4;
 
 u32 scrGetArg(u32 index);
@@ -86,13 +79,13 @@ u32 FUN_002eef98(void)
     matrix[11] = 0.0f;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(direction, matrix, direction);
 
-    g_gameState.eye[0] = x - direction[0] * distance;
-    g_gameState.eye[1] = y - direction[1] * distance;
-    g_gameState.eye[2] = z - direction[2] * distance;
-    g_gameState.target[0] = x;
-    g_gameState.target[1] = y;
-    g_gameState.target[2] = z;
-    g_gameState.fov = fov;
+    g_gameState.cameraEye.x = x - direction[0] * distance;
+    g_gameState.cameraEye.y = y - direction[1] * distance;
+    g_gameState.cameraEye.z = z - direction[2] * distance;
+    g_gameState.cameraTarget.x = x;
+    g_gameState.cameraTarget.y = y;
+    g_gameState.cameraTarget.z = z;
+    g_gameState.cameraFov = fov;
 
     if (DAT_004474f4->sceneId != 3) {
         DAT_004474f4->changed = 1;

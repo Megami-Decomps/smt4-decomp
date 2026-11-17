@@ -1,5 +1,6 @@
 /* NON_MATCHING: -O2 candidate; map-state, registry, object and zero register roles differ although all82 normalized instructions otherwise agree. */
 #include "map/mapIf.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "gfx/ObjectRegistry.h"
 
@@ -14,11 +15,6 @@ struct MapIfController {
     /* 0x1c */ u32 animation;
     /* 0x20 */ MapIfResource* resource;
 };
-struct MapIfResourceState {
-    /* 0x000 */ u8 unk000[0x534];
-    /* 0x534 */ MapIfResource* resources[3];
-};
-
 extern "C" {
 extern MapIfGlobalsA g_mapIf;
 extern ObjectRegistry* g_handleRegistry;
@@ -29,7 +25,7 @@ void mapIfControllerApply(MapIfController* controller);
 namespace {
 inline MapIfResource* controllerResource(u32 index)
 {
-    return reinterpret_cast<const MapIfResourceState*>(&g_gameState)->resources[index];
+    return g_gameState.sceneControllerResources[index];
 }
 
 inline void initializeController(MapIfController* controller, MapIfResource* resource)

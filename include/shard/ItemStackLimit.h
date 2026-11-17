@@ -19,17 +19,4 @@ typedef char ItemCategoryEntrySizeCheck[sizeof(ItemCategoryEntry) == 0xC ? 1 : -
 /* Finds the category entry whose id range contains `id` (NULL when none does). */
 extern "C" ItemCategoryEntry *itemCategoryFindByItemId(u32 id);
 
-struct ItemRecordA {
-    /* 0x00 */ u8 unk00[0x44];
-    /* 0x44 */ u32 unk44Low : 8;
-    /* 0x44 */ u32 limit : 24;
-};
-
-struct ItemRecordB {
-    /* 0x00 */ u8 unk00[0x72];
-    /* 0x72 */ u16 unk72Low : 2;
-    /* 0x72 */ u16 limit : 5;
-    /* 0x72 */ u16 unk72High : 9;
-};
-
 #endif

@@ -3,10 +3,10 @@
 #include "shard/W5_W5Match2_MapCallbacks.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern ModelRequestWork *g_mapModelWork;
-extern GameState g_gameState;
 NodeEnableNode *asdMdlManagerCreateLoaded(const char *path, s32 kind);
 void lightOwnerRegister(NodeEnableNode *model, s32 enabled);
 

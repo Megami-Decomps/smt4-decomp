@@ -1,14 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002005ec` (_code @ 0x2005ec, 0x3d8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x34c];
-    int f0049fc68; /* 0x34c */
-};
-extern GameStateView g_gameState;
 
 
 int rectangleForwardExpandedAlt(...);
@@ -70,8 +65,8 @@ void FUN_002005ec(void)
   if (DAT_00446fec != 0) {
     do {
       temp_v2 = DAT_00447000 + temp_v1 * 0xa8;
-      if (g_gameState.f0049fc68 != 1) {
-        if (g_gameState.f0049fc68 != 2) {
+      if (g_gameState.unk34C != 1) {
+        if (g_gameState.unk34C != 2) {
           temp_v0 = (&DAT_0049e45c)[temp_v1];
         }
         else {
@@ -95,8 +90,8 @@ LAB_002006a4:
   if (temp_v1 < DAT_00446ff0) {
     do {
       temp_v2 = DAT_00447004 + temp_v1 * 0xa8;
-      if (g_gameState.f0049fc68 != 1) {
-        if (g_gameState.f0049fc68 != 2) {
+      if (g_gameState.unk34C != 1) {
+        if (g_gameState.unk34C != 2) {
           temp_v0 = (&DAT_0049e65c)[temp_v1];
         }
         else {
@@ -120,8 +115,8 @@ LAB_00200760:
   if (temp_v1 < DAT_00446ff4) {
     do {
       temp_v2 = DAT_00447008 + temp_v1 * 0xa8;
-      if (g_gameState.f0049fc68 != 1) {
-        if (g_gameState.f0049fc68 != 2) {
+      if (g_gameState.unk34C != 1) {
+        if (g_gameState.unk34C != 2) {
           temp_v0 = (&DAT_0049e7dc)[temp_v1];
         }
         else {
@@ -149,8 +144,8 @@ LAB_00200824:
   if (temp_v1 < DAT_00446ff8) {
     do {
       temp_v2 = DAT_0044700c + temp_v1 * 0xa8;
-      if (g_gameState.f0049fc68 != 1) {
-        if (g_gameState.f0049fc68 != 2) {
+      if (g_gameState.unk34C != 1) {
+        if (g_gameState.unk34C != 2) {
           temp_v0 = (&DAT_0049e87c)[temp_v1];
         }
         else {

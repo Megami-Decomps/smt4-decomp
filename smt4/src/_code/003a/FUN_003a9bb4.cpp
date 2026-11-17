@@ -1,6 +1,8 @@
 /* NON_MATCHING: the table-slot and list-head pointers are now precomputed at entry as in retail; retail also keeps the loop counters and data-table pointers in stack slots (88-byte frame vs 56) and orders the nested-loop exits differently. */
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "game/GameState.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 
@@ -13,14 +15,6 @@ typedef struct OccurrenceEntry {
         /* 0x12 */ u16 unk12[2];
     } more[24];
 } OccurrenceEntry;
-
-/* A table-00 record: bit 0 of the flags at 0x16 allows it without the debug flag; 0x78 is its value. */
-typedef struct Table00Record {
-    /* 0x00 */ u8 unk00[0x16];
-    /* 0x16 */ u16 flags;
-    /* 0x18 */ u8 unk18[0x60];
-    /* 0x78 */ u32 value;
-} Table00Record;
 
 typedef struct Table02Slot {
     u16 id;
@@ -54,17 +48,11 @@ typedef struct EntryListWork {
     /* 0xA5B4 */ u32 table;
 } EntryListWork;
 
-typedef struct GameStateFlag {
-    /* 0x000 */ u8 unk000[0x3E0];
-    /* 0x3E0 */ s32 showAll;
-} GameStateFlag;
 
-extern GameStateFlag g_gameState;
 
 OccurrenceEntry *FUN_003bc0ac(u32 table, s32 first, s32 second);
 Table02Slot *dataTableGetRecord02(u16 key);
 ItemRecord *dataTable02GetEntryByIndex(u32 id);
-Table00Record *dataTable00FindById(u32 id);
 u16 *devilGetRecord(u32 id);
 s32 FUN_0029e9cc(u32 id);
 void FUN_0022e17c(ListEntry *out, u32 id, s32 arg);
@@ -106,7 +94,7 @@ void FUN_003a9bb4(EntryListWork *work)
                         continue;
                     }
                     for (s32 j = 0; j < 6; j++) {
-                        u32 id = item->ids[j];
+                        u16 id = item->ids[j];
 
                         if (id == 0 || dataTable00FindById(id) == NULL) {
                             continue;
@@ -115,14 +103,14 @@ void FUN_003a9bb4(EntryListWork *work)
                         Table00Record *record = dataTable00FindById(id);
 
                         if (named != NULL && record != NULL
-                            && (g_gameState.showAll != 0 || ((record->flags & 1) != 0 && FUN_0029e9cc(*named) != 0))) {
+                            && (g_gameState.forceVisible != 0 || ((record->flags & 1) != 0 && FUN_0029e9cc(*named) != 0))) {
                             ListEntry listEntry;
                             u32 value = 0;
 
                             FUN_0022e17c(&listEntry, *named, 0);
                             Table00Record *found = dataTable00FindById(*named);
                             if (found != NULL) {
-                                value = found->value;
+                                value = found->money;
                             }
                             listEntry.value = value;
                             listEntry.enabled = 1;

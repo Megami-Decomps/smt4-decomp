@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -6,8 +7,6 @@
 
 extern "C" {
 extern MapRandomPopupPrefixA *g_popupState;
-extern GameStateA g_gameState;
-
 
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 range);
@@ -22,10 +21,10 @@ void FUN_002240f0(void)
 
     bool suppressPopup = true;
     s32 flagSet = gameFlagIsSet(0x111b);
-    s32 *countdown = &g_gameState.randomPopup.countdown;
+    s32 *countdown = &g_gameState.randomPopupCountdown;
     if (flagSet == 0) {
         suppressPopup = false;
-        g_gameState.randomPopup.countdown = 0;
+        g_gameState.randomPopupCountdown = 0;
         gameFlagSetValue(0x111b, 1, 1);
     } else {
         // The retail ADD wraps before the signed comparison.
@@ -34,12 +33,12 @@ void FUN_002240f0(void)
         }
     }
 
-    if (g_gameState.randomPopup.countdown > 0) {
-        *countdown = g_gameState.randomPopup.countdown - 1;
+    if (g_gameState.randomPopupCountdown > 0) {
+        *countdown = g_gameState.randomPopupCountdown - 1;
         return;
     }
 
-    g_gameState.randomPopup.countdown = 5;
+    g_gameState.randomPopupCountdown = 5;
     if (!suppressPopup) {
         g_popupState->state = 0x15;
         g_popupState->phase = 0;

@@ -20,7 +20,7 @@ static inline u32 unitHasCategoryThreeSkill(BtlCombatantEntryA *unit)
 {
     if (unit->record != NULL) {
         for (s32 i = 0; i < 8; ++i) {
-            Table04Record *skill = dataTable04FindById(unit->record->skills[i]);
+            Table04RecordA *skill = dataTable04FindById(unit->record->skills[i]);
             if (skill != NULL && skill->sort.category == 3) {
                 return 1;
             }
@@ -28,16 +28,16 @@ static inline u32 unitHasCategoryThreeSkill(BtlCombatantEntryA *unit)
     }
     if (unit->secondaryRecord != NULL) {
         for (s32 i = 0; i < 8; ++i) {
-            Table04Record *skill = dataTable04FindById(unit->secondaryRecord->skills[i]);
+            Table04RecordA *skill = dataTable04FindById(unit->secondaryRecord->skills[i]);
             if (skill != NULL && skill->sort.category == 3) {
                 return 1;
             }
         }
     }
     if (unit->candidate.record != NULL) {
-        Table00Record *record = dataTable00FindById(unit->id);
+        Table00RecordA *record = dataTable00FindById(unit->id);
         for (s32 i = 0; i < 8; ++i) {
-            Table04Record *skill = dataTable04FindById(record->skillList.ids[i]);
+            Table04RecordA *skill = dataTable04FindById(record->skills[i]);
             if (skill != NULL && skill->sort.category == 3) {
                 return 1;
             }

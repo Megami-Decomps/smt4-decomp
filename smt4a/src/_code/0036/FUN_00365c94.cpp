@@ -1,5 +1,6 @@
 /* NON_MATCHING: position snapshot copies use mixed GPR/VFP loads, and scene/navigation base registers differ. */
 #include "map/SceneSpawn.h"
+#include "game/GameStateA.h"
 #include "map/mapMain.h"
 #include "map/lmapMain.h"
 
@@ -7,7 +8,6 @@ extern "C" {
 extern MapMainA *g_mapMain;
 extern LmapSceneA *g_lmapScene;
 extern LmapExtraA *g_lmapView;
-extern GameStateA g_gameState;
 u32 table23FindRecordByKey(s32, s32, u32);
 const SceneSpawnRecord *dataTableGetRecord23(u32);
 void navigationSetArguments(s32, s32, f32);
@@ -34,10 +34,10 @@ void FUN_00365c94(s32 map, s32 area, u32 point)
     transform->headingDegrees = static_cast<f32>(spawn->heading);
     transform->headingCopy = transform->headingDegrees;
     g_lmapView->followPose.heading = static_cast<f32>(spawn->heading);
-    g_gameState.mode = main->transition.mapId = spawn->key.map;
-    g_gameState.submode = main->transition.areaId = spawn->key.area;
+    g_gameState.mapId = main->transition.mapId = spawn->key.map;
+    g_gameState.areaId = main->transition.areaId = spawn->key.area;
     g_gameState.currentObjectId = spawn->key.variant;
-    NavigationRegion *region = reinterpret_cast<NavigationRegion *>(g_gameState.unk00c);
+    NavigationRegion *region = reinterpret_cast<NavigationRegion *>(g_gameState.unk00C);
     region->map = main->transition.mapId;
     region->area = main->transition.areaId;
     navigationSetArguments(region->map, region->area, transform->headingDegrees);
@@ -46,7 +46,7 @@ void FUN_00365c94(s32 map, s32 area, u32 point)
     naviMainApplyRequestValue(region->map);
     naviMainSetPosition(&g_lmapScene->obj);
     naviMainSetRequestValue(1);
-    FUN_0033e014(g_gameState.mode, g_gameState.submode);
+    FUN_0033e014(g_gameState.mapId, g_gameState.areaId);
     main->unk28 = 0x8A;
     main->unk2C = 0;
 }

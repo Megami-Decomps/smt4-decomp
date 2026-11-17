@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e364c` (_code @ 0x2e364c, 0x5e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ extern unsigned int DAT_005ed654; /* 0x5ed654 */
 extern unsigned int DAT_005ed658; /* 0x5ed658 */
 extern unsigned int DAT_005ed65c; /* 0x5ed65c */
 extern unsigned int DAT_005ed660; /* 0x5ed660 */
-extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f1630; /* 0x5f1630 */
 extern unsigned char DAT_005f1632; /* 0x5f1632 */
 extern int DAT_005f1844; /* 0x5f1844 */
@@ -72,7 +72,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: flagRestorationConsumeByKey. */
 /* Supplied declaration required: FUN_00328150. */
 /* Supplied declaration required: gameFlagSetIndexedBit. */
-
 
 unsigned int FUN_002e364c(float *param_1)
 
@@ -290,7 +289,7 @@ unsigned int FUN_002e364c(float *param_1)
               gameFlagSetIndexedBit((int)*(short *)(temp_v3 + 6),1);
               FUN_00319f64((int)*(short *)(temp_v3 + 6));
               temp_v5 = temp_v5 | 4;
-              FUN_00328150(g_gameState,(int)*(short *)(temp_v3 + 6));
+              FUN_00328150(g_gameState.mapId,(int)*(short *)(temp_v3 + 6));
               FUN_00314bbc();
             }
           }

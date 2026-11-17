@@ -4,11 +4,11 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
-Table00Record *dataTable00FindById(u16 id);
 u32 eventResourceCacheAcquire(s32 portraitId, u32 mode);
 s32 FUN_002c1d5c();
 s32 FUN_001dfc64(u32 handle);
@@ -27,7 +27,7 @@ void FUN_00252190(u32 npcId, u32 mode, s32 x)
     work->unk08 = mode;
     work->display.stopWhenHidden = 0;
     work->portrait.animate = 1;
-    work->portrait.portraitId = dataTable00FindById(static_cast<u16>(npcId))->portrait.id;
+    work->portrait.portraitId = dataTable00FindById(static_cast<u16>(npcId))->portraitId;
     if (FUN_002c1d5c() != 0) {
         work->deferred = 1;
     } else {

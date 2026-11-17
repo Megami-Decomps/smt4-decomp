@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "map/mapRndMaze.h"
 #include "code/Code0013.h"
-#include "addon/AocSystem.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
@@ -24,7 +24,6 @@ int FUN_00363c58(...);
 int FUN_003b5064(void);
 int commonBgStopChildAndBeginTransition(void);
 int FUN_003c91e8(void);
-int aocActivateFileGroupFlags(...);
 int gameFlagsSetFlagsFromTaggedGroupEntries(...);
 
 int textFormatBuffer(...);
@@ -70,7 +69,6 @@ typedef struct {
 
 extern unsigned char LAB_0029ff54; /* 0x29ff54 */
 extern unsigned char LAB_002a0964; /* 0x2a0964 */
-extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int *DAT_00589170; /* 0x589170 */
 extern unsigned char DAT_005f1634; /* 0x5f1634 */
 extern unsigned int DAT_005f1bd4; /* 0x5f1bd4 */
@@ -885,7 +883,6 @@ LAB_0029fb00:
         }
         else {
           FUN_00283d74(0);
-          aocActivateFileGroupFlags(g_aocSystem);
           FUN_00363c58(0);
           gameFlagsSetFlagsFromTaggedGroupEntries(g_aocSystem);
           stateModeDispatch(puVar4[0x25]);

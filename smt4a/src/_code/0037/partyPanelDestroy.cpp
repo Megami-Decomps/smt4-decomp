@@ -1,25 +1,7 @@
-#include "common.h"
+#include "ui/PartyPanelStateA.h"
 #include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
-
-/* A script-driven object (0x1080+ bytes); fields are named for how the destructor uses them. */
-typedef struct Obj37dab0 {
-    /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk04[8];
-    /* 0x000C */ void *buffer;
-    /* 0x0010 */ void *buffer2;
-    /* 0x0014 */ void *scriptProcess;
-    /* 0x0018 */ u8 unk18[0x2a];
-    /* 0x0042 */ u8 flag;
-    /* 0x0043 */ u8 unk43[0x9cd];
-    /* 0x0A10 */ void *resourceA[4];
-    /* 0x0A20 */ void *resourceB[24];
-    /* 0x0A80 */ u8 unkA80[0x5fc];
-    /* 0x107C */ void *resourceC;
-} Obj37dab0;
-
-extern Obj37dab0 *g_partyPanel;
 
 __weak void *FUN_0037dab0_hook(void *p);
 void scrScriptProcessDestroy(void);
@@ -29,39 +11,39 @@ void *ptrTable44FreeAll(void *p);
 void gameGlobalsReleaseReference(void);
 void jobStop(u32 job, int arg);
 
-/* Destroys the object: frees its buffers and resources, stops its job and clears the global. */
+/* Destroys the party panel: saves its layout flag, frees its files, script, widgets and fusion work, stops its job and clears the global. */
 void partyPanelDestroy(void)
 {
-    Obj37dab0 *obj = g_partyPanel;
+    PartyPanelStateA *panel = g_partyPanel;
     int i;
 
-    saveGetUserSettingsBlock()[0x44] = obj->flag;
-    if (obj->scriptProcess != NULL) {
+    saveGetUserSettingsBlock()[0x44] = panel->alternate;
+    if (panel->script != NULL) {
         scrScriptProcessDestroy();
     }
-    if (obj->buffer2 != NULL) {
-        asdMemFree(obj->buffer2);
+    if (panel->files[1] != NULL) {
+        asdMemFree(panel->files[1]);
     }
-    if (obj->buffer != NULL) {
-        asdMemFree(obj->buffer);
+    if (panel->files[0] != NULL) {
+        asdMemFree(panel->files[0]);
     }
     for (i = 0; i < 4; i++) {
-        if (obj->resourceA[i] != NULL) {
-            asdOperatorDelete(FUN_0037dab0_hook(obj->resourceA[i]));
+        if (panel->characters[i] != NULL) {
+            asdOperatorDelete(FUN_0037dab0_hook(panel->characters[i]));
         }
     }
     for (i = 0; i < 24; i++) {
-        if (obj->resourceB[i] != NULL) {
-            asdOperatorDelete(FUN_0037dab0_hook(obj->resourceB[i]));
+        if (panel->demons[i] != NULL) {
+            asdOperatorDelete(FUN_0037dab0_hook(panel->demons[i]));
         }
     }
-    if (obj->resourceC != NULL) {
-        asdOperatorDelete(ptrTable44FreeAll(obj->resourceC));
+    if (panel->unite != NULL) {
+        asdOperatorDelete(ptrTable44FreeAll(panel->unite));
     }
-    obj->resourceC = NULL;
+    panel->unite = NULL;
     gameGlobalsReleaseReference();
-    jobStop(obj->job, 0);
-    asdMemFree(obj);
+    jobStop(panel->job, 0);
+    asdMemFree(panel);
     g_partyPanel = NULL;
 }
 

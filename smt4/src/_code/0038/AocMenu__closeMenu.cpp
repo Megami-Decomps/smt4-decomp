@@ -3,10 +3,10 @@
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "addon/AocSystem_VariantA.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
-extern AocSystem *g_aocSystem;
 RequestParameters FUN_003887cc(AocSystem *system);
 void aocMenuSetButtonHelp(AocMenu *menu, s32 request, s32 mode);
 void aocLoadingTaskStart(AocMenu *menu, u32 request);

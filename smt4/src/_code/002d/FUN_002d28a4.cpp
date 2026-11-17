@@ -1,9 +1,9 @@
 /* NON_MATCHING: preset store grouping, repeated map tests, and work-pointer reload timing differ. */
 #include "map/MapCameraWork.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapCameraGlobals DAT_004474f0;
-extern GameState g_gameState;
 void FUN_002df5f8(void);
 
 void FUN_002d28a4(s32 map, s32 area)
@@ -21,21 +21,21 @@ void FUN_002d28a4(s32 map, s32 area)
     f32 height = 250.0f;
     f32 distance = 700.0f;
     f32 angle = 50.0f;
-    switch (g_gameState.unk000) {
+    switch (g_gameState.mapId) {
     case 25:
-        if (g_gameState.unk004Value != 3)
+        if (g_gameState.areaId != 3)
             return;
         break;
     case 26:
-        if (g_gameState.unk004Value != 1)
+        if (g_gameState.areaId != 1)
             return;
         break;
     case 27:
-        if (g_gameState.unk004Value != 1)
+        if (g_gameState.areaId != 1)
             return;
         break;
     case 28:
-        if (g_gameState.unk004Value != 1)
+        if (g_gameState.areaId != 1)
             return;
         height = 350.0f;
         distance = 550.0f;

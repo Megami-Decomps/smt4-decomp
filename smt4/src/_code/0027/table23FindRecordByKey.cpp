@@ -1,8 +1,8 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match2_AocTable23.h"
+#include "addon/AocSystem.h"
 
-extern "C" AocSystem *g_aocSystem;
 
 /* The extension table lies beyond both recovered AocSystem prefixes. */
 struct Table23SystemView {

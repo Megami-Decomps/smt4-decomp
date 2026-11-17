@@ -1,5 +1,6 @@
 /* NON_MATCHING: palette copy (retail copies 8+8 bytes), range compare operand order (vcmpe range,dist; bgt), vertex-argument loads and register allocation differ */
 #include "shard/W6_W6Match6_CollisionQuad.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include <math.h>
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: only difference is the entry->type compare chain using r0 instead of retail's r1 (4 compares in loop 1, 2 in loop 2) */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include "shard/W5_W5Match7_SelectedRecord.h"
 
@@ -48,8 +49,6 @@ s32 FUN_002e707c(u32 key);
 s32 FUN_003bf5a8(s32 id);
 s32 FUN_004083a8(u8 id);
 
-extern GameStateA g_gameState;
-
 /* Refresh the availability of every entry in the current map's destination lists. */
 void FUN_00491c60(LmapList *list)
 {
@@ -79,7 +78,7 @@ void FUN_00491c60(LmapList *list)
                 } else {
                     entry->available = 0;
                 }
-                if (entry->requiredSubmode != 0 && entry->requiredSubmode != g_gameState.submode) {
+                if (entry->requiredSubmode != 0 && entry->requiredSubmode != g_gameState.areaId) {
                     entry->available = 0;
                 }
             } else if (entry->type == 0xfc) {
@@ -104,13 +103,13 @@ void FUN_00491c60(LmapList *list)
                 } else {
                     entry->available = 0;
                 }
-                if (g_gameState.mode == 0x17) {
-                    if (g_gameState.submode == 2 && entry->id == 0x7a && entry->type == 2) {
+                if (g_gameState.mapId == 0x17) {
+                    if (g_gameState.areaId == 2 && entry->id == 0x7a && entry->type == 2) {
                         entry->available = 0;
                     }
                 }
-                if (g_gameState.mode == 0x17) {
-                    if (g_gameState.submode == 3 && entry->id == 0x7e && entry->type == 2) {
+                if (g_gameState.mapId == 0x17) {
+                    if (g_gameState.areaId == 3 && entry->id == 0x7e && entry->type == 2) {
                         entry->available = 0;
                     }
                 }
@@ -146,7 +145,7 @@ void FUN_00491c60(LmapList *list)
                 } else {
                     entry->available = 0;
                 }
-                if (entry->requiredSubmode != 0 && entry->requiredSubmode != g_gameState.submode) {
+                if (entry->requiredSubmode != 0 && entry->requiredSubmode != g_gameState.areaId) {
                     entry->available = 0;
                 }
             } else if (FUN_004083a8(entry->id) == 0) {
@@ -158,13 +157,13 @@ void FUN_00491c60(LmapList *list)
                 } else {
                     entry->available = 1;
                 }
-                if (g_gameState.mode == 0x17) {
-                    if (g_gameState.submode == 2 && entry->id == 0x7a && entry->type == 2) {
+                if (g_gameState.mapId == 0x17) {
+                    if (g_gameState.areaId == 2 && entry->id == 0x7a && entry->type == 2) {
                         entry->available = 0;
                     }
                 }
-                if (g_gameState.mode == 0x17) {
-                    if (g_gameState.submode == 3 && entry->id == 0x7e && entry->type == 2) {
+                if (g_gameState.mapId == 0x17) {
+                    if (g_gameState.areaId == 3 && entry->id == 0x7e && entry->type == 2) {
                         entry->available = 0;
                     }
                 }

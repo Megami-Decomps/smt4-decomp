@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00249dec` (_code @ 0x249dec, 0xf4c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
@@ -82,7 +83,6 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_u1_width_check[(sizeof(((unio
 typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((union romwright_storage_s__a_a_00587f08_9_1 *)0)->s1[0]) == 1) ? 1 : -1];
 #endif
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
-extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
@@ -141,7 +141,6 @@ extern unsigned int FUN_00480c28(void);
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: gamePackedFlagTest. */
 extern int FUN_004d0584(void);
-
 
 unsigned int FUN_00249dec(void)
 
@@ -230,7 +229,7 @@ joined_r0x00249fd4:
             if (temp_v4 == 0) break;
           }
           temp_v11 = 0;
-          if ((g_gameState >= 100) || ((temp_v4 = lmapSceneGetUnk0(), temp_v4 == 1 && (DAT_005f17c4 == 0))))
+          if ((g_gameState.mapId >= 100) || ((temp_v4 = lmapSceneGetUnk0(), temp_v4 == 1 && (DAT_005f17c4 == 0))))
           {
             temp_v11 = 1;
           }
@@ -344,7 +343,7 @@ joined_r0x00249fd4:
                      (temp_v6 = gameFlagIsSet(0xc2), temp_v6 == 0)) {
                     DAT_005f174a = 1;
                     DAT_005f174c = 500;
-                    if (g_gameState >= 0x65) {
+                    if (g_gameState.mapId >= 0x65) {
                       __ARM_common_memcpy4_9(&DAT_005f1750,"e500_01L");
                     }
                     else {
@@ -455,7 +454,7 @@ LAB_0024a684:
                   temp_v40 = *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcf0);
                   temp_v41 = *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcf4);
                   temp_v42 = *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcf8);
-                  if (g_gameState >= 100) {
+                  if (g_gameState.mapId >= 100) {
                     temp_v31 = *(unsigned int *)(g_lmapScene + 0x1c);
                     temp_v32 = *(unsigned int *)(g_lmapScene + 0x20);
                     temp_v33 = *(unsigned int *)(g_lmapScene + 0x24);

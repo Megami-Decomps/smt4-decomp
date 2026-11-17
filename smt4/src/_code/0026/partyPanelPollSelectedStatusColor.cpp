@@ -17,7 +17,6 @@ struct PartyStatusUnit {
 }
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 void FUN_0033c468(PartyPanelWidget* widget);
 u16* FUN_0029acb0();
 s32 FUN_0028dbe0(PartyPanelWidget* widget);

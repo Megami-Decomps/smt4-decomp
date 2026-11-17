@@ -1,26 +1,17 @@
 #include "common.h"
+#include "gamedata/EquipmentRecordA.h"
 
 extern "C" {
-
-typedef struct Record {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u8 low : 4;
-    /*      */ u8 high : 4;
-    /* 0x29 */ u8 unk29[0x47];
-    /* 0x70 */ u16 order;
-} Record;
-
-extern Record *dataTable08Sub2GetRecord(u16 id);
 
 /* qsort-style comparison of two ids by the records' high nibble and low nibble (descending), then order (ascending). */
 s32 itemCompareByNibbles(u16 *a, u16 *b)
 {
-    Record *recordA = dataTable08Sub2GetRecord(*a);
-    Record *recordB = dataTable08Sub2GetRecord(*b);
-    s32 result = recordB->high - recordA->high;
+    EquipmentRecordA *recordA = dataTable08Sub2GetRecord(*a);
+    EquipmentRecordA *recordB = dataTable08Sub2GetRecord(*b);
+    s32 result = recordB->hits.maximum - recordA->hits.maximum;
 
     if (result == 0) {
-        result = recordB->low - recordA->low;
+        result = recordB->hits.minimum - recordA->hits.minimum;
         if (result == 0) {
             recordA = dataTable08Sub2GetRecord(*a);
             recordB = dataTable08Sub2GetRecord(*b);

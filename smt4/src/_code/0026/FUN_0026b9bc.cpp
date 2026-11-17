@@ -12,7 +12,6 @@ struct PartyStockView {
 };
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 PartyStockView *gameGetSlotTable(void);
 s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 listCursorGetRowIfUnblocked(const GridNavigation *grid);
@@ -24,43 +23,43 @@ void partyPanelSortEntries(void);
 void FUN_0026b9bc(void)
 {
     PartyPanelState *panel = g_partyPanel;
-    panel->history.unk28 = 0;
+    panel->occupiedCount = 0;
     for (s32 i = 0; i < 24; ++i) {
         if (gameGetSlotTable()->stock[i] >= 0)
-            panel->history.unk28++;
+            panel->occupiedCount++;
     }
-    panel->capacityTier = gameGetSlotTable()->capacity > 12 ? 2 : 1;
+    panel->pageCount = gameGetSlotTable()->capacity > 12 ? 2 : 1;
 
     PartyStockView *party = gameGetSlotTable();
     for (s32 i = 0; i < 24; ++i)
-        panel->previewUnits[i].packedIndex = party->stock[i];
+        panel->entries[i].packedIndex = party->stock[i];
     partyPanelSortEntries();
 
     u32 rows = party->capacity >> 2;
     if (party->capacity & 3)
         ++rows;
 
-    s32 firstRow = objectPartRunUnlessLocked(&panel->capacityGrids.base);
-    s32 firstColumn = listCursorGetRowIfUnblocked(&panel->capacityGrids.base);
-    s32 secondRow = objectPartRunUnlessLocked(&panel->capacityGrids.expanded);
-    s32 secondColumn = listCursorGetRowIfUnblocked(&panel->capacityGrids.expanded);
+    s32 firstRow = objectPartRunUnlessLocked(&panel->stockGrid);
+    s32 firstColumn = listCursorGetRowIfUnblocked(&panel->stockGrid);
+    s32 secondRow = objectPartRunUnlessLocked(&panel->fullGrid);
+    s32 secondColumn = listCursorGetRowIfUnblocked(&panel->fullGrid);
     if (party->capacity < 12) {
-        gridNavigationConfigure(&panel->capacityGrids.base, party->capacity, rows, 4, 1, 1);
-        gridNavigationConfigure(&panel->capacityGrids.expanded, party->capacity + 4, rows + 1, 4, 1, 1);
-    } else if (!panel->unk2C) {
-        gridNavigationConfigure(&panel->capacityGrids.base, 12, 3, 4, 1, 1);
-        gridNavigationConfigure(&panel->capacityGrids.expanded, 16, 4, 4, 1, 1);
+        gridNavigationConfigure(&panel->stockGrid, party->capacity, rows, 4, 1, 1);
+        gridNavigationConfigure(&panel->fullGrid, party->capacity + 4, rows + 1, 4, 1, 1);
+    } else if (!panel->page) {
+        gridNavigationConfigure(&panel->stockGrid, 12, 3, 4, 1, 1);
+        gridNavigationConfigure(&panel->fullGrid, 16, 4, 4, 1, 1);
     } else {
-        gridNavigationConfigure(&panel->capacityGrids.base, party->capacity - 12, 3, 4, 1, 1);
-        gridNavigationConfigure(&panel->capacityGrids.expanded, party->capacity - 8, 4, 4, 1, 1);
+        gridNavigationConfigure(&panel->stockGrid, party->capacity - 12, 3, 4, 1, 1);
+        gridNavigationConfigure(&panel->fullGrid, party->capacity - 8, 4, 4, 1, 1);
     }
-    scrollOwnerSelectIndex(&panel->capacityGrids.base, firstRow);
-    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.base), firstColumn);
-    scrollOwnerSelectIndex(&panel->capacityGrids.expanded, secondRow);
-    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.expanded), secondColumn);
+    scrollOwnerSelectIndex(&panel->stockGrid, firstRow);
+    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->stockGrid), firstColumn);
+    scrollOwnerSelectIndex(&panel->fullGrid, secondRow);
+    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->fullGrid), secondColumn);
 
-    GridNavigation *base2 = &panel->capacityGrids.secondary;
-    GridNavigation *expanded2 = &panel->capacityGrids.secondaryExpanded;
+    GridNavigation *base2 = &panel->stockGridAlternate;
+    GridNavigation *expanded2 = &panel->fullGridAlternate;
     firstRow = objectPartRunUnlessLocked(base2);
     firstColumn = listCursorGetRowIfUnblocked(base2);
     secondRow = objectPartRunUnlessLocked(expanded2);

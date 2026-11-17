@@ -2,6 +2,8 @@
 #include "shard/W4_Match1b_Node.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
+#include "game/GameState.h"
+#include "addon/AocSystem.h"
 
 struct Inner0020ffe0;
 namespace {
@@ -55,7 +57,6 @@ inline void setModelEnabled(RangeModelBinding* binding, u8 enabled)
 
 extern "C" {
 extern RangeWork* g_mapRangeWork;
-extern GameState g_gameState;
 void modelSetScale(RangeModel*, f32);
 void nodeSetPropertyScale(RangeModel*, f32);
 void nodeSetTranslation(NodeOwner*, u32, const NodeVec3*);
@@ -75,7 +76,7 @@ void mapRangeUpdateModelVisibilityAndTransforms()
         }
         RangeModelBinding* binding = entry->hasOwnBinding
             ? entry->binding : work->slots[entry->slot].binding;
-        if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+        if (g_gameState.loading) {
             modelSetScale(binding->model, 0.0f);
             nodeSetPropertyScale(binding->model, 0.0f);
             if (!(binding->flags & 2)) {

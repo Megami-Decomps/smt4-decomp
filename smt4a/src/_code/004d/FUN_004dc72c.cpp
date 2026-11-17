@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/Table04Record.h"
 #include "code/Code004a_Smt4a.h"
+#include "gamedata/ConsumableRecordA.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -57,16 +58,10 @@ struct BtlActingTask {
     BtlActingState *battle;
 };
 
-struct Table8Row {
-    /* 0x00 */ u8 unk00[0x32];
-    /* 0x32 */ u16 linkedId;
-};
-
 extern "C" {
 extern BtlActionTable g_btlAction;
 extern u32 g_btlUiBlock;
 extern u32 g_btlActionReflect;
-Table8Row *dataTable8FindRecord(s32 id);
 s32 FUN_003e7adc(BtlActingState *battle);
 s32 chainCountIdUnflagged(u32 chain, u32 flag);
 void FUN_004a96b8(u32 ui);
@@ -160,8 +155,8 @@ u32 FUN_004dc72c(BtlActingTask *task, BtlMenuState *menu)
         }
         break;
     case 8: {
-        Table8Row *row = dataTable8FindRecord((s16)menu->result->argument);
-        if (row->linkedId != 0 && FUN_00333758(dataTable04FindById(row->linkedId))) {
+        ConsumableRecordA *row = dataTable8FindRecord((s16)menu->result->argument);
+        if (row->skillId != 0 && FUN_00333758(dataTable04FindById(row->skillId))) {
             action->units[task->battle->unit].phase = 6;
         } else {
             action->units[task->battle->unit].phase = 8;

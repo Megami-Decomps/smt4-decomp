@@ -3,23 +3,9 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x8];
-    unsigned int f0049f924; /* 0x008 */
-    u8 pad00c[0x8];
-    int f0049f930; /* 0x014 */
-    u8 pad018[0x3c];
-    unsigned int f0049f970; /* 0x054 */
-    u8 pad058[0x2a0];
-    signed char f0049fc14; /* 0x2f8 */
-    u8 pad2f9[0x3];
-    unsigned int f0049fc18; /* 0x2fc */
-    unsigned int f0049fc1c; /* 0x300 */
-};
-extern GameStateView g_gameState;
 
 
 int mapConsumePendingJumpRequest(...);
@@ -327,15 +313,15 @@ unsigned int FUN_0019f3dc(void)
       mapConsumePendingJumpRequest(temp_v3 + 0xa8,1);
       return 0;
     }
-    if (g_gameState.f0049fc14 != '\0') {
-      if (g_gameState.f0049f930 == 1) {
+    if (g_gameState.map.savedLocationSet != '\0') {
+      if (g_gameState.resumeMode == 1) {
         asdSequenceRequest(6,0);
       }
-      if (g_gameState.f0049f930 == 2) {
+      if (g_gameState.resumeMode == 2) {
         asdSequenceRequest(8,0);
       }
-      if (g_gameState.f0049f930 == 3) {
-        temp_v6 = romwright_piece_2_2((short)g_gameState.f0049fc1c,(short)g_gameState.f0049fc18 - 200);
+      if (g_gameState.resumeMode == 3) {
+        temp_v6 = romwright_piece_2_2((short)g_gameState.savedAreaId,(short)g_gameState.savedMapId - 200);
         asdSequenceRequest(0xe,&temp_v6,4);
       }
     }
@@ -352,7 +338,7 @@ unsigned int FUN_0019f3dc(void)
       }
       else {
         gameStateSetJumpRequest((unsigned char)pcVar5[1] + 100,pcVar5[2],0xffffffff);
-        g_gameState.f0049f924 = 0xffffffff;
+        g_gameState.currentObjectId = 0xffffffff;
         temp_v1 = 8;
         asdSequenceRequest(temp_v1,0);
       }
@@ -362,8 +348,8 @@ unsigned int FUN_0019f3dc(void)
       temp_v1 = 6;
       asdSequenceRequest(temp_v1,0);
     }
-    g_gameState.f0049fc14 = '\0';
-    g_gameState.f0049f970 = 0;
+    g_gameState.map.savedLocationSet = '\0';
+    g_gameState.entryValue = 0;
     gameJumpRequestClear();
   }
   jobStop(*g_aocJob,0);

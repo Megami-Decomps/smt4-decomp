@@ -1,6 +1,7 @@
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 

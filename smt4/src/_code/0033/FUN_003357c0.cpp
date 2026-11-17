@@ -22,7 +22,7 @@ void btlUiPlaySceneFadeOutWhenReady(BtlUi *);
 u32 FUN_0023f27c(s32, u32, u32, u32, void *, s32, s32, s32, s32);
 void slotSetRequest(s32, u32, u32);
 void asdLoadFileAsyncSimple(const char *, void **, s32);
-GameSaveData *gameDataBlocksGetSaveData();
+GameSaveBody *gameDataBlocksGetSaveData();
 s32 FUN_0023f194(BtlGameOver *);
 
 s32 FUN_003357c0(BtlGameOver *work)
@@ -43,9 +43,9 @@ s32 FUN_003357c0(BtlGameOver *work)
     work->state = 3;
     asdLoadFileAsyncSimple(!(work->unk04 & 1) ? DAT_004009cc : DAT_004009e8, &work->dataA, 0);
     asdLoadFileAsyncSimple(!(work->unk04 & 1) ? DAT_0040098c : DAT_004009ac, &work->dataB, 0);
-    GameSaveData *save = gameDataBlocksGetSaveData();
-    if (save->gameOver.gameOverContinueEnabled < 255)
-        ++save->gameOver.gameOverContinueEnabled;
+    GameSaveBody *save = gameDataBlocksGetSaveData();
+    if (save->gameOverContinueEnabled < 255)
+        ++save->gameOverContinueEnabled;
     work->state = 4;
     return FUN_0023f194(work);
 }

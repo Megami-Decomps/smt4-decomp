@@ -2,6 +2,7 @@
 #include "shard/S1Mover.h"
 #include "addon/aocMain.h"
 #include "shard/JobWork.h"
+#include "addon/AocSystemA.h"
 
 struct BustupOffset {
     f32 x;
@@ -35,7 +36,6 @@ struct BustupPlacementWork {
 
 struct AocSlot;
 extern "C" {
-extern AocSystemA* g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
 void packageFileDisableByKindName(AocSystemA* system, u32 table, s32 node);

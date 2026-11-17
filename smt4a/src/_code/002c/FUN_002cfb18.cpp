@@ -1,16 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cfb18` (_code @ 0x2cfb18, 0x4e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x20];
-    signed char f005f161c; /* 0x020 */
-    signed char f005f161d; /* 0x021 */
-};
-extern GameStateView g_gameState;
-
 
 int FUN_0019e3d0(...);
 int distSpatial(void);
@@ -66,8 +59,6 @@ extern float DAT_005f0c9c; /* 0x5f0c9c */
 extern int DAT_005f0ca8; /* 0x5f0ca8 */
 extern int DAT_005f0d2c; /* 0x5f0d2c */
 
-
-
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
@@ -87,7 +78,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: mapRenderApplySecondary. */
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-
 
 /* WARNING: Removing unreachable block (ram,0x002cfcf0) */
 /* WARNING: Removing unreachable block (ram,0x002cfd00) */
@@ -148,7 +138,7 @@ void FUN_002cfb18(void)
   unsigned int temp_v46;
   
   temp_v1 = gameFlagIsSet(0x4d0);
-  if ((((temp_v1 != 0) && (g_gameState.f005f161c == '\0')) && (g_gameState.f005f161d == '\0')) &&
+  if ((((temp_v1 != 0) && (g_gameState.unk020 == '\0')) && (g_gameState.paused == '\0')) &&
      ((DAT_005f0ca8 == 8 || (DAT_005f0ca8 == 9)))) {
     temp_v20 = DAT_005f0c98 + 220.0f;
     temp_v1 = *(int *)(g_lmapScene + 0x1c);

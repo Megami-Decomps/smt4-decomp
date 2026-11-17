@@ -1,16 +1,8 @@
 /* NON_MATCHING: only the arm layout differs: retail shares the sysPlaySe call of the first 0xD3 arm with the final else arm and places the second 0xD3 arm, the 0x105 arm and the final arm after the main path. */
 #include "common.h"
-
-/* The part of the game state this reads. */
-struct PauseGameState {
-    /* 0x000 */ s32 mode;
-    /* 0x004 */ s32 subMode;
-    /* 0x008 */ u8 unk008[0x28D];
-    /* 0x295 */ s8 menuOpen;
-};
+#include "game/GameStateA.h"
 
 extern "C" {
-extern PauseGameState g_gameState;
 
 void sysPlaySe(u32 id);
 void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
@@ -49,12 +41,12 @@ void FUN_003a2278(s32 open)
     if (sub68OwnerCall2()) {
         sub68OwnerCall3();
     } else {
-        if ((g_gameState.mode == 5 && g_gameState.subMode == 12) || !gameFlagIsSet(0x49A)) {
+        if ((g_gameState.mapId == 5 && g_gameState.areaId == 12) || !gameFlagIsSet(0x49A)) {
             sysPlaySe(0xD3);
         } else if (gameFlagIsSet(12) && !gameFlagIsSet(16)) {
             sysPlaySe(0xD3);
         } else if (FUN_004a0404()) {
-            if (g_gameState.mode != 0x65) {
+            if (g_gameState.mapId != 0x65) {
                 sysPlaySe(0x104);
                 buttonHelpSelectSlot(0, 0x13, 0x59, 1);
                 buttonHelpSelectSlot(1, 0, 0, 1);
@@ -64,7 +56,7 @@ void FUN_003a2278(s32 open)
                 buttonHelpSelectSlot(1, 0, 0, 1);
             }
         } else {
-            sysPlaySe(g_gameState.mode >= 100 ? 0xD2 : 0x41);
+            sysPlaySe(g_gameState.mapId >= 100 ? 0xD2 : 0x41);
         }
     }
     if (gameFlagIsSet(12) && !gameFlagIsSet(16))

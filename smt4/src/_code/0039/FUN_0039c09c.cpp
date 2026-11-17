@@ -3,9 +3,9 @@
 #include "map/mapDepart.h"
 #include "code/Code0039.h"
 #include "shard/NaviMain_GetCurrentMap.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern GameState g_gameState;
 
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
@@ -29,8 +29,8 @@ void FUN_0039c09c(MapNaviDisplay *display)
     NaviDisplayTransitionView *work = reinterpret_cast<NaviDisplayTransitionView *>(display);
     if (work->state == 0) {
         pointConvertToFloat(work->origin, -320, 0);
-        if (g_gameState.bgResetPending != 0) {
-            g_gameState.bgResetPending = 0;
+        if (g_gameState.map.bgResetPending != 0) {
+            g_gameState.map.bgResetPending = 0;
             if (gameFlagIsSet(0x16) == 0) {
                 commonBgStopChildAndBeginTransition();
             } else {

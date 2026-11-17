@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match2_RecordCategory.h"
+#include "game/GameStateA.h"
 
 extern "C" CategoryRecord* dataTable1bOr1cGetRecord(u32 recordId);
 
@@ -12,7 +13,7 @@ extern "C" s32 recordCategoryNineIsActiveInMode24(u32 recordId)
     if (record == NULL) {
         return 0;
     }
-    if (record->category == 9 && g_gameState.mode == 24) {
+    if (record->category == 9 && g_gameState.mapId == 24) {
         return 1;
     }
     return 0;

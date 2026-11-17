@@ -1,7 +1,7 @@
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA* g_aocSystem;
 const u32* aocFindKindRecordById(AocSystemA* system, u32 index);
 u32 dataTableGet(u32 group, u32 table);
 const u32* dataTableGetEntries(u32 table);

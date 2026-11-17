@@ -4,9 +4,9 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/DataTable40.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 Table4SearchRecordIV *recordTableFindById(AocSystem *system, u32 id);
 s32 passiveSkillCompareById(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count,

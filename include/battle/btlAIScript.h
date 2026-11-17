@@ -26,12 +26,6 @@ typedef struct BtlAiScriptActor {
     /* 0x28 */ BtlAiScriptDemon *demon;
 } BtlAiScriptActor;
 
-/* The Apocalypse add-on content system: the demon id whose DLC AI script is in use at 0x460. */
-typedef struct BtlAiScriptAocSystem {
-    /* 0x000 */ u8 unk000[0x460];
-    /* 0x460 */ s32 aiDemonId;
-} BtlAiScriptAocSystem;
-
 /* Work area of the job that owns the script runner (Shin Megami Tensei IV). */
 typedef struct BtlAiScriptOwner {
     /* 0x00 */ u32 id;        /* passed to the runner's job when it is created */
@@ -48,7 +42,6 @@ typedef struct BtlAiScriptOwnerA {
 
 typedef char BtlAiScriptAddedOffsets[offsetof(BtlAiScript, path) == 0x10 &&
     offsetof(BtlAiScriptDemon, id) == 0x02 && offsetof(BtlAiScriptActor, demon) == 0x28 &&
-    offsetof(BtlAiScriptAocSystem, aiDemonId) == 0x460 &&
     offsetof(BtlAiScriptOwnerA, job) == 0x6C ? 1 : -1];
 
 #endif

@@ -2,13 +2,13 @@
 #include "status/StatusBustUp.h"
 #include "gamedata/DevilRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
 extern void *g_aocSystem;
 void packageFileDisableByKindName(void *system, u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-Table00Record *dataTable00FindById(u16 id);
 
 /* Drop the portrait reference, unloading normal or special portraits on the last user. */
 void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)

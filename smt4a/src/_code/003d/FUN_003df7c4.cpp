@@ -1,14 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the player stat recompute; retail unrolls the five stat clamps in a fixed order (0x20, 0x24, 0x26, 0x28, 0x22) and interleaves the growth block copy, which armcc here emits from a loop and a struct copy. */
 #include "shard/W6_W6Match8_StatGrowth.h"
-
-/* The equipment record (only the fields read here). */
-struct EquipmentRecord {
-    /* 0x00 */ u8 unk00[0x31];
-    /* 0x31 */ s8 statBonus[5];
-    /* 0x36 */ u16 hpBonus;
-    /* 0x38 */ u16 mpBonus;
-    /* 0x3A */ u16 special;
-};
+#include "gamedata/EquipmentRecordA.h"
 
 /* The capped upgrade bonuses of one equipment piece. */
 struct UpgradeBonuses {
@@ -42,7 +34,6 @@ struct PlayerStats {
 
 extern "C" {
 PlayerStats *gameGetPlayerData(void);
-EquipmentRecord *dataTable08Sub2GetRecord(u32 id);
 void equipmentGetCappedUpgradeBonuses(u32 id, UpgradeBonuses *out);
 void playerGetGrowthParameters(StatGrowthParameters *out, s32 arg);
 void FUN_004cc6a4(s32 level, u16 *totals, const StatGrowthParameters *parameters);
@@ -65,7 +56,7 @@ void FUN_003df7c4(PlayerStats *stats)
         u32 id = stats->equipment[slot];
         if (id == 0)
             continue;
-        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
         if (record == NULL)
             continue;
         for (s32 i = 0; i < 5; i++)
@@ -101,8 +92,8 @@ void FUN_003df7c4(PlayerStats *stats)
     extra.vector[0] = stats->extraVector[0];
     extra.vector[1] = stats->extraVector[1];
     extra.vector[2] = stats->extraVector[2];
-    EquipmentRecord *last = dataTable08Sub2GetRecord(stats->equipment[6]);
-    extra.special = last != NULL ? last->special : 0;
+    EquipmentRecordA *last = dataTable08Sub2GetRecord(stats->equipment[6]);
+    extra.special = last != NULL ? last->modifierId : 0;
     FUN_0034cb50(stats->total, &extra, 9);
     if ((s16)stats->hp > (s16)stats->total[0])
         stats->hp = stats->total[0];

@@ -1,9 +1,9 @@
 #include "map/MapJumpTransition.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern GameState g_gameState;
 MapJumpRequest *gameJumpRequestGet(void);
 void gameJumpRequestClear(void);
 void gameStateSetJumpRequest(u32 map, u32 entrance, u32 object, f32, f32, f32, f32, f32);
@@ -22,7 +22,7 @@ u32 mapConsumePendingJumpRequest(u32 context, s32 switchSequence)
             request->transform[3], request->transform[4]);
         if (switchSequence != 0) {
             asdSequenceRequest(6, NULL, 0);
-            g_gameState.unk2F8 = 0;
+            g_gameState.map.savedLocationSet = 0;
         }
         break;
     case 2:
@@ -33,7 +33,7 @@ u32 mapConsumePendingJumpRequest(u32 context, s32 switchSequence)
         g_gameState.currentObjectId = (u32)-1;
         if (switchSequence != 0) {
             asdSequenceRequest(8, NULL, 0);
-            g_gameState.unk2F8 = 0;
+            g_gameState.map.savedLocationSet = 0;
         }
         break;
     case 3:
@@ -41,7 +41,7 @@ u32 mapConsumePendingJumpRequest(u32 context, s32 switchSequence)
         if (switchSequence != 0) {
             u32 map = request->map;
             asdSequenceRequest(14, &map, sizeof(map));
-            g_gameState.unk2F8 = 0;
+            g_gameState.map.savedLocationSet = 0;
         } else {
             mapDepartSetTarget(request->map + 200, 0, 0);
         }

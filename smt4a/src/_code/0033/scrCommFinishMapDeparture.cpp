@@ -1,4 +1,5 @@
 #include "map/MapSelection.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 
@@ -10,8 +11,6 @@ void btlTalkBustUpDestroy(void);
 void soundChannelStopAll(s32 arg);
 
 s32 gameFlagIsSet(u32 id);
-
-extern GameStateA g_gameState;
 
 s32 scrCommFinishMapDeparture(void)
 {

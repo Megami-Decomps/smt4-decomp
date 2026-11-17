@@ -14,18 +14,18 @@ extern "C" {
 void FUN_002a17d4(const CountedIdsRecord *record)
 {
     s32 i = 0;
-    GameDataBlock *save = g_gameDataBlocks.saveBlock;
+    GameSaveDataA *save = g_gameDataBlocks.saveBlock;
 
     for (; i < 3; i++) {
         u16 id = record->ids[i];
 
         if (id != 0 && id <= 0x500) {
-            GameSavedItemA *item = &save->inventory.items[id];
+            GameSavedItemA *item = &save->body.items[id];
             item->counter++;
         }
     }
     if (record->extraId <= 0x500) {
-        GameSavedItemA *item = &save->inventory.items[record->extraId];
+        GameSavedItemA *item = &save->body.items[record->extraId];
         item->counter++;
     }
 }

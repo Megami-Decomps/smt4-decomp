@@ -1,5 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/DataTableAccess_Smt4a.h"
+#include "addon/AocSystemA.h"
 
 struct TableRequest {
     u8 unk00[0x26]; // 0x00
@@ -8,11 +9,10 @@ struct TableRequest {
 struct WordTable {
     u32 count;      // 0x00
 };
-struct AocSystem;
+struct AocSystemA;
 
 extern "C" {
-extern AocSystem* g_aocSystem;
-u32* FUN_001a6738(AocSystem* system, TableRequest* request, u32 index);
+u32* FUN_001a6738(AocSystemA* system, TableRequest* request, u32 index);
 
 // Looks up a one-based record in addon data, then falls back to its table-0x19 section.
 u32* dataTable19FindAddonWord(TableRequest* request, u32 index)

@@ -1,27 +1,8 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/FlagBitTests.h"
 #include "code/Code002b.h"
 #include "mikado/mikadoMain.h"
-
-/* The map flags block inside the game state (g_gameState + 0x100). */
-struct MapMusicFlags {
-    /* 0x00 */ u8 unk00[0x4D];
-    /* 0x4D */ s8 musicInitialized;
-    /* 0x4E */ u8 unk4E[0x2C];
-    /* 0x7A */ s8 musicLocked;
-};
-
-/* The game state (only the fields read here). */
-struct GameStateView {
-    /* 0x000 */ u8 unk000[0x2C];
-    /* 0x02C */ u32 bgm;
-    /* 0x030 */ s16 room;
-    /* 0x032 */ s8 roomByte;
-    /* 0x033 */ u8 unk033[0xCD];
-    /* 0x100 */ MapMusicFlags mapFlags;
-    /* 0x17B */ u8 unk17B[0x404 - 0x17B];
-    /* 0x404 */ s8 pending;
-};
 
 /* A row of the music slot table (0x5C bytes). */
 struct MusicSlot {
@@ -46,7 +27,6 @@ struct MapMain {
 };
 
 extern "C" {
-extern GameStateView g_gameState;
 extern MapMain *g_mapMain;
 extern MusicSlot g_textEntryTable[];
 
@@ -64,17 +44,17 @@ s32 lmapGetSpawnIndex(void);
 void mapSelectRoomMusic(void)
 {
     MapMain *map = g_mapMain;
-    if (g_gameState.pending != 0)
-        g_gameState.pending = 0;
+    if (g_gameState.unk404 != 0)
+        g_gameState.unk404 = 0;
     u8 *room = dataTable2eSub3FindByKeyPair(map->area, map->sub);
     if (room != NULL) {
         s8 roomId = (s8)room[2];
-        g_gameState.room = roomId;
-        g_gameState.roomByte = roomId;
+        g_gameState.defaultKind = roomId;
+        g_gameState.selectedKind = roomId;
     }
-    if (g_gameState.mapFlags.musicLocked != 0 || g_gameState.mapFlags.musicInitialized == 0 || map->silent != 0) {
+    if (g_gameState.textActive != 0 || g_gameState.musicInitialized == 0 || map->silent != 0) {
         bgmReleaseStopped();
-        g_gameState.mapFlags.musicInitialized = 1;
+        g_gameState.musicInitialized = 1;
         return;
     }
     if (FUN_002b950c() == 0) {
@@ -87,54 +67,54 @@ void mapSelectRoomMusic(void)
     } else if (gameFlagsValueGet(map->area) == 1) {
         MusicSlot *slot = &g_textEntryTable[slotFindByPair(map->area, map->sub)];
         if (slot->alternateBgm != 0) {
-            g_gameState.bgm = slot->alternateBgm;
+            g_gameState.bgmId = slot->alternateBgm;
             s32 state = bgmGetStateById(slot->alternateBgm);
             if (state == 0 || state == 3)
-                bgmResumeOrRequestTrack(g_gameState.bgm);
+                bgmResumeOrRequestTrack(g_gameState.bgmId);
             return;
         }
     }
     MusicSlot *slot = &g_textEntryTable[slotFindByPair(map->area, map->area != 24 ? map->sub : 1)];
-    g_gameState.bgm = slot->defaultBgm;
+    g_gameState.bgmId = slot->defaultBgm;
     if (slot->flaggedBgm != 0 && (slot->flagA == 0 || gameFlagIsSet(slot->flagA) != 0) &&
         (slot->flagB == 0 || gameFlagIsSet(slot->flagB) == 0))
-        g_gameState.bgm = slot->flaggedBgm;
+        g_gameState.bgmId = slot->flaggedBgm;
     if (map->area == 1) {
         if (map->sub == 11 || map->sub == 12 || map->sub == 13) {
             if (gameFlagIsSet(209) != 0 && gameFlagIsSet(212) == 0)
-                g_gameState.bgm = 0x1000013;
+                g_gameState.bgmId = 0x1000013;
             else if (gameFlagIsSet(212) != 0)
-                g_gameState.bgm = map->sub == 13 ? 0x100008C : 0x100001D;
+                g_gameState.bgmId = map->sub == 13 ? 0x100008C : 0x100001D;
         }
         if (map->sub == 1 && gameFlagIsSet(114) != 0 && gameFlagIsSet(177) == 0)
-            g_gameState.bgm = 0x1000093;
+            g_gameState.bgmId = 0x1000093;
     }
     if (map->area == 37) {
         if (map->sub == 3 || map->sub == 4 || map->sub == 5 || map->sub == 6) {
             if (gameFlagIsSet(212) != 0 && gameFlagIsSet(216) == 0) {
-                g_gameState.bgm = 0x1000028;
+                g_gameState.bgmId = 0x1000028;
             } else if (gameFlagIsSet(216) != 0) {
-                g_gameState.bgm = 0x100005D;
+                g_gameState.bgmId = 0x100005D;
                 if (map->sub == 6)
-                    g_gameState.bgm = 0x100008B;
+                    g_gameState.bgmId = 0x100008B;
             }
         }
         if ((map->sub == 1 || map->sub == 2) && gameFlagIsSet(30) != 0 && gameFlagIsSet(71) == 0)
-            g_gameState.bgm = 0x1000093;
+            g_gameState.bgmId = 0x1000093;
     }
     if (map->area == 38) {
         if (map->sub == 5 && gameFlagIsSet(38) == 0)
-            g_gameState.bgm = 0x1000084;
+            g_gameState.bgmId = 0x1000084;
     }
     if (map->area == 24 && lmapGetSpawnIndex() >= 100) {
-        g_gameState.bgm = 0x1000067;
+        g_gameState.bgmId = 0x1000067;
     }
-    s32 state = bgmGetStateById(g_gameState.bgm);
+    s32 state = bgmGetStateById(g_gameState.bgmId);
     if (state == 0)
         bgmReleaseStopped();
     else if (state != 3)
         return;
-    bgmResumeOrRequestTrack(g_gameState.bgm);
+    bgmResumeOrRequestTrack(g_gameState.bgmId);
 }
 
 } /* extern "C" */

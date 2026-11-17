@@ -1,21 +1,14 @@
-#include "common.h"
+#include "ui/PartyPanelStateA.h"
 
 extern "C" {
 
-typedef struct State {
-    u8 unk00[0x42];
-    u8 flag; /* 0x42 */
-} State;
-
-extern State *g_partyPanel;
-
-/* True when the state exists and its flag is set. */
+/* True when the party panel exists and shows its alternate layout. */
 bool partyPanelIsActive(void)
 {
     if (g_partyPanel == NULL) {
         return false;
     }
-    if (g_partyPanel->flag == 0) {
+    if (g_partyPanel->alternate == 0) {
         return false;
     }
     return true;

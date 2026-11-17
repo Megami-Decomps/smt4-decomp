@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
@@ -12,7 +13,7 @@ u32 FUN_003b9a44(void)
         result = 1;
     if (gameFlagIsSet(0x594) != 0)
         result = 0;
-    if (g_gameState.mode == 0x1a)
+    if (g_gameState.mapId == 0x1a)
         result = 2;
     scrSetResult(result);
     return 1;

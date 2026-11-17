@@ -3,11 +3,11 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DevilRecord.h"
+#include "addon/AocSystem.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
-extern AocSystem *g_aocSystem;
-DevilModelOverride *dataTable00FindById(u16 id);
 void asdTMTexTableLoadEntryAsync(s32 table, s32 entry);
 void texTableRequestNamedTextureLoad(AocSystem *system, s32 table, s32 entry, u32 options);
 
@@ -23,14 +23,14 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
             const DevilRecord *devil = (const DevilRecord *)devilGetRecord((u16)id);
             if (!devil)
                 return;
-            const DevilModelOverride *override = dataTable00FindById((u16)id);
-            if (!(override->flags & 1)) {
+            const Table00Record *override = dataTable00FindById((u16)id);
+            if (!(override->levelFlags & 1)) {
                 id = devil->model + 1;
                 if (id >= 0x266)
                     return;
             } else {
                 s32 overrideTable = 0x23;
-                id = override->model;
+                id = override->portraitId;
                 if (id >= 0x81)
                     return;
                 if (((s8 *)g_statusBustUpResources.workB)[id] <= 0 && !asdTMTexTableNodeIsLoaded(overrideTable, id))

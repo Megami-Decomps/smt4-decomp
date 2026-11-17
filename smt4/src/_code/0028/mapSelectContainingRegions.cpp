@@ -1,5 +1,6 @@
 /* NON_MATCHING: retained region-table base recovered; input/zero VFP grouping and region/edge index registers differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameState.h"
 
 struct RegionEdge {
     MapVector origin;

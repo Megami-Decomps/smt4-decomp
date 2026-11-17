@@ -1,24 +1,15 @@
-#include "gamedata/Table8Record.h"
+#include "gamedata/ConsumableRecordA.h"
 #include "addon/AocEntryKind.h"
 #include "gamedata/DataTableAccess_VariantD_Table8Record.h"
 #include "shop/shopMain.h"
+#include "gamedata/EquipmentRecordA.h"
 
 struct EquipmentSortConsumable {
     u8 unk00[0x25];
     u8 value;
 };
-struct EquipmentSortArmor {
-    u8 unk00[0x7E];
-    u16 value;
-};
-/* Table8Record has halfword alignment; keep this word-aligned field view local. */
-struct EquipmentSortWeapon {
-    u8 unk00[0x44];
-    u32 value;
-};
 extern "C" {
 EquipmentSortConsumable *contentEntryFindById2(u32 id);
-EquipmentSortArmor *dataTable08Sub2GetRecord(u32 id);
 }
 
 static __inline u32 equipmentGetTypeSortValue(u32 id)
@@ -32,14 +23,14 @@ static __inline u32 equipmentGetTypeSortValue(u32 id)
     case 6:
     case 7:
     case 8:
-        value = dataTable08Sub2GetRecord(id)->value;
+        value = dataTable08Sub2GetRecord(id)->priority;
         break;
     case 0:
         value = contentEntryFindById2(id)->value;
         break;
     case 1:
     case 12:
-        value = ((EquipmentSortWeapon *)dataTable8FindRecord(id))->value & 0xFF;
+        value = dataTable8FindRecord(id)->sortFlags & 0xFF;
         break;
     }
     return value;

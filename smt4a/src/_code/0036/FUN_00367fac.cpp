@@ -1,15 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00367fac` (_code @ 0x367fac, 0x3a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x3b8];
-    float f005f19b4; /* 0x3b8 */
-};
-extern GameStateView g_gameState;
-
 
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -59,7 +53,6 @@ extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int g_lmapScene; /* 0x581288 */
 
-
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 #ifndef ROMWRIGHT_FABS_4_DEFINED
 #define ROMWRIGHT_FABS_4_DEFINED
@@ -72,7 +65,6 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-
 
 /* WARNING: Removing unreachable block (ram,0x00368128) */
 /* WARNING: Removing unreachable block (ram,0x00368138) */
@@ -171,11 +163,11 @@ unsigned int FUN_00367fac(void)
     temp_v30 = temp_v16 * temp_v13 * temp_v14 - temp_v15 * temp_v11;
     temp_v26 = temp_v15 * temp_v13 + temp_v16 * temp_v11 * temp_v14;
     temp_v29 = temp_v16 * temp_v11 + temp_v15 * temp_v13 * temp_v14;
-    temp_v7 = g_gameState.f005f19b4 * -0.5f;
+    temp_v7 = g_gameState.unk3B8 * -0.5f;
     temp_v27 = 0;
     temp_v31 = 0;
     temp_v35 = 0;
-    temp_v11 = g_gameState.f005f19b4;
+    temp_v11 = g_gameState.unk3B8;
     temp_v21 = temp_v7;
     temp_v22 = temp_v17;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(afStack_140,&temp_v24,&temp_v21);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the shop main's per-frame phase machine (create the selection scene, wait for its load, tear it down, then request the next sequence); armcc here orders the shop singleton's lazy allocation (inlined twice in retail) and the story-flag screen list differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
+#include "game/GameState.h"
 
 /* The shop main (only the fields read here). */
 struct ShopMain {
@@ -30,12 +31,6 @@ struct ShopSequence {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x2fc];
-    s32 f0049fc18; /* 0x2fc */
-};
-extern GameStateView g_gameState;
 
 extern ShopMain *g_shop;
 extern ShopSequence *DAT_0044df80;
@@ -143,7 +138,7 @@ u32 FUN_001d9634(void)
         } else if (FUN_00287304() != 0) {
             if (gameStateIsFlagSetAndLarge() != 0) {
                 s32 arguments[2];
-                arguments[0] = g_gameState.f0049fc18 - 200;
+                arguments[0] = g_gameState.savedMapId - 200;
                 asdSequenceRequest(14, arguments, 4);
             } else {
                 asdSequenceRequest(6, NULL, 0);

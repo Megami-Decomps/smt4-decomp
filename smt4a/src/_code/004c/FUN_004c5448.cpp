@@ -9,7 +9,7 @@
 struct IdOwner;
 /* Modifier lists lie beyond the common skill-table prefix. */
 union BattleModifierSkillView {
-    Table04Record skill;
+    Table04RecordA skill;
     AttributeModifierLists modifiers;
     struct {
         u8 unk00[0x26];

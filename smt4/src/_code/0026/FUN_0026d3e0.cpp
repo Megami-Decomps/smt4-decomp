@@ -2,7 +2,6 @@
 #include "ui/PartyPanelState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 PartyDamageSlotsIV *gameGetSlotTable();
 s32 listCursorGetRowIfUnblocked(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
@@ -21,11 +20,11 @@ void FUN_0026d3e0(void *selection, s32 stockOnly)
     s32 second = 0;
     s32 index;
     if (stockOnly) {
-        if (panel->unk42) {
+        if (panel->alternate) {
             index = objectPartRunUnlessLocked(selection);
             index += listCursorGetRowIfUnblocked(selection) * 4;
         } else {
-            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->unk2C * 12;
+            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
             index += objectPartRunUnlessLocked(selection);
         }
     } else {
@@ -42,18 +41,18 @@ void FUN_0026d3e0(void *selection, s32 stockOnly)
             FUN_0026cba4(unit, index, 0);
             return;
         }
-        if (panel->unk42) {
+        if (panel->alternate) {
             index = objectPartRunUnlessLocked(selection);
             index += listCursorGetRowIfUnblocked(selection) * 4;
         } else {
-            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->unk2C * 12;
+            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
             index += objectPartRunUnlessLocked(selection);
         }
         index -= 4;
     }
-    btlItemComputeValues(panel->previewUnits[index].packedIndex, panel->previewItem, &first, &second);
+    btlItemComputeValues(panel->entries[index].packedIndex, panel->previewItem, &first, &second);
     pair40Set(panel->demons[index], first, second);
     FUN_00298d28(first, second);
-    FUN_0026cba4(panel->previewUnits[index].packedIndex, index, 1);
+    FUN_0026cba4(panel->entries[index].packedIndex, index, 1);
 }
 }

@@ -2,16 +2,7 @@
 #include "common.h"
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-
-/* A skill record as the panel reads it. */
-struct PanelSkill {
-    /* 0x00 */ u8 unk00[0x24];
-    /* 0x24 */ u32 attributeWord;     /* attribute id in the top twelve bits */
-    /* 0x28 */ u8 levelRange;         /* low nibble: minimum, high nibble: maximum */
-    /* 0x29 */ u8 target;
-    /* 0x2A */ u8 unk2A;
-    /* 0x2B */ u8 effect;             /* the ailment/effect group shown in the last field */
-};
+#include "gamedata/EquipmentRecordA.h"
 
 struct PanelPlayerData {
     /* 0x00 */ u8 unk00[2];
@@ -37,7 +28,6 @@ extern "C" {
 extern PanelButtonHelp g_buttonHelp;
 
 PanelPlayerData *gameGetPlayerData(void);
-PanelSkill *dataTable08Sub2GetRecord(u32 id);
 void FUN_002c0940(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002ad414(s32 a, s32 b, s32 c, char *text);
@@ -50,7 +40,7 @@ void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e,
 void FUN_003aeb18(s32 textId, u32 flags)
 {
     PanelBlock *block = g_buttonHelp.block;
-    PanelSkill *first = dataTable08Sub2GetRecord(*(u16 *)gameGetPlayerData());
+    EquipmentRecordA *first = dataTable08Sub2GetRecord(*(u16 *)gameGetPlayerData());
     if (first == NULL) {
         block->shown = 0;
         return;
@@ -58,39 +48,39 @@ void FUN_003aeb18(s32 textId, u32 flags)
     block->visible = 1;
     block->shown = 1;
     char text[128];
-    u32 range = first->levelRange;
+    u32 range = first->hitRange;
     if ((range & 0xF) == range >> 4) {
         FUN_00359974(0x25, range & 0xF, 0xFFFFFFFF, 0);
     } else {
         char minimum[8], maximum[8];
         FUN_002c0940(minimum, range & 0xF);
-        FUN_002c0940(maximum, first->levelRange >> 4);
+        FUN_002c0940(maximum, first->hitRange >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
         scrSetStringSlot(0x25, text);
     }
-    battleAttributeFormatName(text, first->attributeWord >> 20);
+    battleAttributeFormatName(text, first->traits >> 20);
     scrSetStringSlot(0x26, text);
     skillFormatTargetLabel(text, first->target);
     scrSetStringSlot(0x27, text);
-    if (first->effect == 0)
+    if (first->element == 0)
         textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
-    if (first->effect == 1)
+    if (first->element == 1)
         textFormatBuffer(text, "\x82\x68\x82\x8E\x82\x93\x82\x94\x82\x81\x82\x8E\x82\x94\x81\x40\x82\x6A\x82\x89\x82\x8C\x82\x8C"); /* Ｉｎｓｔａｎｔ　Ｋｉｌｌ */
-    if (first->effect == 5)
+    if (first->element == 5)
         textFormatBuffer(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E"); /* Ｐｏｉｓｏｎ */
-    if (first->effect == 6)
+    if (first->element == 6)
         textFormatBuffer(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83"); /* Ｐａｎｉｃ */
-    if (first->effect == 7)
+    if (first->element == 7)
         textFormatBuffer(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90"); /* Ｓｌｅｅｐ */
-    if (first->effect == 8)
+    if (first->element == 8)
         textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8E\x82\x84"); /* Ｂｉｎｄ */
-    if (first->effect == 9)
+    if (first->element == 9)
         textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B"); /* Ｓｉｃｋ */
-    if (first->effect == 11)
+    if (first->element == 11)
         textFormatBuffer(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8D"); /* Ｃｈａｒｍ */
-    if (first->effect == 12)
+    if (first->element == 12)
         textFormatBuffer(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
-    if (first->effect == 13)
+    if (first->element == 13)
         textFormatBuffer(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
     scrSetStringSlot(0x28, text);
     FUN_002ad414(1, 0, 0, text);

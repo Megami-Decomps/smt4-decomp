@@ -1,20 +1,6 @@
 #include "common.h"
+#include "game/GameState.h"
 
-struct DepartureGameState {
-    /* 0x000 */ u8 unk000[0x17C];
-    /* 0x17C */ u8 active;
-    /* 0x17D */ u8 unk17D[3];
-    /* 0x180 */ f32 position[4];
-    /* 0x190 */ u32 unk190;
-    /* 0x194 */ u16 id;
-    /* 0x196 */ u8 unk196[2];
-    /* 0x198 */ u8 flags[3];
-    /* 0x19B */ u8 unk19B[5];
-    /* 0x1A0 */ u8 pending;
-    /* 0x1A1 */ u8 unk1A1[3];
-    /* 0x1A4 */ u32 state;
-    /* 0x1A8 */ f32 target[4];
-};
 struct DepartingEnemy {
     /* 0x000 */ u8 active;
     /* 0x001 */ u8 unk001[0x7C];
@@ -35,7 +21,6 @@ struct DepartingEnemyTable {
 
 extern "C" {
 
-extern DepartureGameState g_gameState;
 extern DepartingEnemyTable *g_mapEnemy;
 
 /* Clears departure interpolation and cancels eligible active enemy states. */
@@ -44,21 +29,21 @@ void FUN_001d2f48(void)
     s32 index;
     DepartingEnemyTable *table = g_mapEnemy;
     const f32 resetValue = 0.0f;
-    g_gameState.active = 0;
-    g_gameState.position[0] = resetValue;
-    g_gameState.position[1] = resetValue;
-    g_gameState.position[2] = resetValue;
-    g_gameState.position[3] = resetValue;
-    g_gameState.id = 0;
-    g_gameState.flags[0] = 0;
-    g_gameState.flags[1] = 0;
-    g_gameState.flags[2] = 0;
-    g_gameState.pending = 0;
-    g_gameState.state = 0;
-    g_gameState.target[0] = resetValue;
-    g_gameState.target[1] = resetValue;
-    g_gameState.target[2] = resetValue;
-    g_gameState.target[3] = resetValue;
+    g_gameState.event.encounterSourceActive = 0;
+    g_gameState.event.encounterSourcePosition.x = resetValue;
+    g_gameState.event.encounterSourcePosition.y = resetValue;
+    g_gameState.event.encounterSourcePosition.z = resetValue;
+    g_gameState.event.encounterSourceHeading = resetValue;
+    g_gameState.event.encounterDelay = 0;
+    g_gameState.event.encounterForced = 0;
+    g_gameState.event.encounterApproach = 0;
+    g_gameState.event.encounterBackAttack = 0;
+    g_gameState.event.encounterPending = 0;
+    g_gameState.event.encounterState = 0;
+    g_gameState.event.encounterMarkerPosition.x = resetValue;
+    g_gameState.event.encounterMarkerPosition.y = resetValue;
+    g_gameState.event.encounterMarkerPosition.z = resetValue;
+    g_gameState.event.encounterMarkerHeading = resetValue;
 
     for (index = 0; index < 32; ++index) {
         DepartingEnemy &enemy = table->enemies[index];

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "code/Code0028.h"
 #include "code/Code0028_Smt4.h"
+#include "game/GameState.h"
 
 /* One reward line of a quest: the item and how many (0 = not granted). */
 struct QuestRewardEntry {
@@ -27,14 +28,6 @@ struct SpecialRecord {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0xac];
-    s8 f0049f9c8; /* 0x0ac */
-    u8 pad0ad[0x3];
-    s32 f0049f9cc; /* 0x0b0 */
-};
-extern GameStateView g_gameState;
 
 
 
@@ -58,10 +51,10 @@ s32 FUN_001a9104(void)
     s32 result = 0;
     ResultMapBlock *block = gameGetMapBlock();
     u32 firstKindDone = 0;
-    if (g_gameState.f0049f9c8 != 0) {
-        g_gameState.f0049f9cc = dataTable2fSub1GetRecord(block->specialRecord)->value;
-        FUN_00295a18(g_gameState.f0049f9cc, 1);
-        g_gameState.f0049f9c8 = 0;
+    if (g_gameState.statusActive != 0) {
+        g_gameState.unk0B0 = dataTable2fSub1GetRecord(block->specialRecord)->value;
+        FUN_00295a18(g_gameState.unk0B0, 1);
+        g_gameState.statusActive = 0;
         return 4;
     }
     for (u16 quest = 100; quest < 400; quest++) {

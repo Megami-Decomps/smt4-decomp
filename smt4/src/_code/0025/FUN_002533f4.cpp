@@ -4,6 +4,7 @@
 #include "gamedata/Table00.h"
 #include "util/Random.h"
 #include "addon/AocSystem.h"
+#include "gamedata/Table00Lookup.h"
 
 struct EncounterTemplateChoice { u16 templateId; u16 weight; };
 struct EncounterTemplateChoices { EncounterTemplateChoice entries[15]; };
@@ -14,7 +15,6 @@ extern AocSystem* g_aocSystem;
 u16* gameDataGetTableEntry(u32 category, u32 index);
 void weightedTableRollNextValue(u32 category, u32 index, u32 initialize);
 Table02Sub2Entry* aocFindSpriteTemplateByKey(AocSystem*, u32);
-Table00Record* dataTable00FindById(u32 id);
 
 u16 FUN_002533f4(u32 category, u32 index, s32 filterArrangements)
 {
@@ -50,7 +50,7 @@ u16 FUN_002533f4(u32 category, u32 index, s32 filterArrangements)
                     u16 id = units->units[unitIndex];
                     if (id) {
                         Table00Record* record = dataTable00FindById(id);
-                        if (record && (record->arrangement.first || record->arrangement.second)) {
+                        if (record && (record->arrangementFirst || record->arrangementSecond)) {
                             accepted = false;
                             break;
                         }

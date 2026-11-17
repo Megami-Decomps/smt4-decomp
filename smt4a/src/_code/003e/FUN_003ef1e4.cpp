@@ -135,9 +135,9 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
     }
     for (s32 i = 0; i < 6; i++) {
         if (battle->enemies[i] != 0) {
-            Table00Record *record = dataTable00FindById(battle->enemies[i] & 0xffff);
+            Table00RecordA *record = dataTable00FindById(battle->enemies[i] & 0xffff);
             if (record != NULL) {
-                f32 power = (f32)(u32)(record->levelB + record->levelA);
+                f32 power = (f32)(u32)(record->stats[4] + record->stats[3]);
                 if (power > enemyPower) {
                     enemyPower = power;
                 }

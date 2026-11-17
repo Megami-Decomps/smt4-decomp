@@ -1,10 +1,10 @@
 /* NON_MATCHING: angle branches, global-view aliasing and VFP texture-coordinate scheduling differ from retail. */
 #include "battle/btlView.h"
+#include "game/GameStateA.h"
 #include "map/lmapMain.h"
 
 extern "C" {
 extern BattleViewState g_battleViewState;
-extern GameStateA g_gameState;
 extern LmapScene *g_lmapScene;
 s32 gameFlagIsSet(u32 flag);
 void mapRenderApplySecondary();
@@ -16,12 +16,10 @@ void FUN_0019af70(u32 color0, u32 color1, u32 color2, u32 color3,
 void FUN_002cf8e4()
 {
     struct IndicatorView { u8 prefix[0xB0]; s32 frame; f32 angle; u8 disabled; };
-    struct IndicatorInputView { u8 prefix[0x20]; u8 first; u8 second; };
-    if (!gameFlagIsSet(0x4D0))
+        if (!gameFlagIsSet(0x4D0))
         return;
     IndicatorView *indicator = reinterpret_cast<IndicatorView *>(&g_battleViewState);
-    IndicatorInputView *input = reinterpret_cast<IndicatorInputView *>(&g_gameState);
-    if (input->first != 0 || input->second != 0 || indicator->disabled != 0 ||
+    if (g_gameState.unk020 != 0 || g_gameState.paused != 0 || indicator->disabled != 0 ||
         (g_battleViewState.unk2c != 8 && g_battleViewState.unk2c != 9))
         return;
     mapRenderApplySecondary();

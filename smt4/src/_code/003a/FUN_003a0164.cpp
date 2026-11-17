@@ -1,26 +1,23 @@
 #include "gamedata/EquipmentSortPower.h"
-#include "shard/W6_W6Match2_RankedTableRecord.h"
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
 extern "C" {
 u32 contentGetEntryKind(u32 id);
 EquipmentSortPowerPrimary *dataTable08Sub0GetRecord(u32 id);
-EquipmentSortPowerSecondary *dataTable08Sub1GetRecord(u32 id);
 }
 
 static inline u16 equipmentSortPower(u16 id)
 {
-    // The power field is past RankedTableRecord's known extent; do not grow that shared type.
-    struct ExtendedPowerView { u8 prefix[0xA6]; u16 power; };
-    typedef char ExtendedPowerOffset[offsetof(ExtendedPowerView, power) == 0xA6 ? 1 : -1];
     u16 power = 0;
     switch (contentGetEntryKind(id)) {
     case 2: case 3: case 4: case 5: case 6: case 7: case 8:
-        power = ((ExtendedPowerView *)dataTable08Sub2GetRecord(id))->power;
+        power = dataTable08Sub2GetRecord(id)->priority;
         break;
     case 0:
         power = dataTable08Sub0GetRecord(id)->power;
         break;
     case 1:
-        power = dataTable08Sub1GetRecord(id)->powerFlags & 0xFF;
+        power = dataTable08Sub1GetRecord(id)->sortFlags & 0xFF;
         break;
     }
     return power;

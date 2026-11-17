@@ -1,59 +1,33 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-
-/* A file of a loaded archive (0x10 bytes). */
-typedef struct DataArchiveFile {
-    /* 0x00 */ u32 handle;
-    /* 0x04 */ u8 unk04[0xC];
-} DataArchiveFile;
-
-/* A loaded data archive (0x50 bytes). */
-typedef struct DataArchive {
-    /* 0x00 */ u8 unk00[0x4C];
-    /* 0x4C */ DataArchiveFile *files;
-} DataArchive;
-
-/* A file name entry of an archive's directory (0x40 bytes); data tables start with '$'. */
-typedef struct DataArchiveName {
-    char name[0x40];
-} DataArchiveName;
-
-typedef struct DataArchiveSet {
-    /* 0x000 */ u8 unk000[0x310];
-    /* 0x310 */ s32 count;
-    /* 0x314 */ u8 unk314[4];
-    /* 0x318 */ DataArchive *archives;
-} DataArchiveSet;
 
 /* A 12-byte record of the merged tables. */
 typedef struct DataArchiveRecord {
     u8 data[0xC];
 } DataArchiveRecord;
 
-s32 packageEntryIsLoaded(DataArchive *archive);
-DataArchiveName *packageEntryGetDirectory(DataArchive *archive);
-u32 packageEntryGetFileCount(DataArchive *archive);
-void *dataTableFileGetTable(u32 handle, u32 section);
+void *dataTableFileGetTable(void *handle, u32 section);
 
 /* Returns record `index` of the '$' data tables of every loaded archive taken in order (NULL past the end). */
-DataArchiveRecord *dataArchiveGetMergedRecord(DataArchiveSet *set, s32 index)
+DataArchiveRecord *dataArchiveGetMergedRecord(AocSystem *system, s32 index)
 {
     s32 base = 0;
     s32 i;
 
-    for (i = 0; i < set->count; i++) {
-        DataArchive *archive = &set->archives[i];
+    for (i = 0; i < system->packageCount; i++) {
+        AocPackage *package = &system->packages[i];
 
-        if (packageEntryIsLoaded(archive)) {
-            DataArchiveName *names = packageEntryGetDirectory(archive);
-            u32 fileCount = packageEntryGetFileCount(archive);
+        if (packageEntryIsLoaded(package)) {
+            AocPackageDirectoryEntry *names = packageEntryGetDirectory(package);
+            u32 fileCount = packageEntryGetFileCount(package);
             u32 j;
 
             for (j = 0; j < fileCount; j++) {
-                if (names[j].name[0] == '$') {
-                    void *table = dataTableFileGetTable(archive->files[j].handle, 1);
+                if (names[j].kind == '$') {
+                    void *table = dataTableFileGetTable(package->files[j].data, 1);
                     s32 end = dataTableGetCount(table) + base;
 
                     if (end >= index) {

@@ -8,7 +8,7 @@ u8 gameDataSetItemFlag(u16 index, s32 value)
 {
     if (index <= 0x500) {
         GameSaveData *data = g_gameDataBlocks.saveBlock;
-        GameSavedItem *item = &data->items[index];
+        GameSavedItem *item = &data->body.items[index];
 
         item->flags = (item->flags & ~2) | (value << 1);
     }

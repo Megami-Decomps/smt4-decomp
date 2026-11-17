@@ -6,7 +6,7 @@
 extern "C" {
 ItemRankRecord *gameGetPlayerData(void);
 s32 gameDataFlagTestBit(u32 flag);
-s32 FUN_002efc44(const Table04Record *record, s32 rank, s32 kind);
+s32 FUN_002efc44(const Table04RecordA *record, s32 rank, s32 kind);
 }
 
 static inline s32 findEquippedSkillRank(const ItemRankRecord *player, u32 id)
@@ -30,7 +30,7 @@ static inline s32 skillCostBonus(u32 flag)
 // Calculate a skill's cost after equipped-skill rank or unlocked global cost reductions.
 extern "C" s32 FUN_003df57c(u32 id, s32 useSkillRank)
 {
-    const Table04Record *record = dataTable04FindById(id);
+    const Table04RecordA *record = dataTable04FindById(id);
     if (record == NULL) {
         return 0;
     }

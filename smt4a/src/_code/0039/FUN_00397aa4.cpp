@@ -1,5 +1,6 @@
 /* NON_MATCHING: draft split of the romwright decompilation of the merged unit (the state machine and the camera update that follows it): the decompiler's temporaries are not yet named. */
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ extern int g_lmapScene; /* 0x581288 */
 extern float g_localCameraPosition; /* 0x5f15d8 */
 extern float DAT_005f15dc; /* 0x5f15dc */
 extern float DAT_005f15e0; /* 0x5f15e0 */
-extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern float DAT_005f1a04; /* 0x5f1a04 */
 extern float DAT_005f1a0c; /* 0x5f1a0c */
@@ -205,8 +205,8 @@ void FUN_00397aa4(void)
   *(float *)(temp_v9 + 0xbc) = temp_v24;
   *(float *)(temp_v9 + 0xc0) = temp_v23 + temp_v25 * temp_v20;
   temp_v26 = temp_v26 + temp_v30;
-  if (g_gameState != 0x27) {
-    if ((g_gameState == 0x20) && (DAT_005f1600 == 1)) {
+  if (g_gameState.mapId != 0x27) {
+    if ((g_gameState.mapId == 0x20) && (DAT_005f1600 == 1)) {
       temp_v24 = 160.0f;
       temp_v26 = temp_v26 - temp_v24;
     }

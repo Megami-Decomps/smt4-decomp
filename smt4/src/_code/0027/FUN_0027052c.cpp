@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ typedef struct {
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int g_mapStateSlots; /* 0x44cd88 */
-extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern unsigned int DAT_0049f9a0; /* 0x49f9a0 */
 extern unsigned int DAT_0049f9a4; /* 0x49f9a4 */
@@ -147,7 +147,7 @@ joined_r0x002706c8:
             if (temp_v3 == 0) break;
           }
           temp_v17[0] = 0;
-          if (g_gameState < 100) {
+          if (g_gameState.mapId < 100) {
             temp_v2 = lmapSceneGetUnk0();
             temp_v10 = temp_v2 == 1;
             if (temp_v10) {
@@ -237,7 +237,7 @@ LAB_002709b8:
                     DAT_0049fa60 = 1;
                   }
                   temp_v18 = temp_v16;
-                  if (g_gameState >= 100) {
+                  if (g_gameState.mapId >= 100) {
                     temp_v19 = *(unsigned int *)(g_lmapScene + 0x1c);
                     temp_v20 = *(unsigned int *)(g_lmapScene + 0x20);
                     temp_v21 = *(unsigned int *)(g_lmapScene + 0x24);

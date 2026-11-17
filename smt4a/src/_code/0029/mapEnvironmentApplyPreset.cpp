@@ -1,5 +1,6 @@
 /* NON_MATCHING: only block layout and scheduling differ - retail lays the immediate (frames == 0) branch out of line after the tail and keeps the entry's third halfword and the float scale constants in different registers; every store and call is the same. */
 #include "map/MapEnvironment.h"
+#include "game/GameStateA.h"
 #include "event/bustupEvent/BustupTex.h"
 
 namespace {
@@ -29,28 +30,6 @@ struct MapEnvironmentState {
     /* 0x3c */ s32 unk3c;
 };
 
-/* g_gameState's environment block (0x610..0x64c). */
-struct MapEnvironmentGameView {
-    /* 0x000 */ u8 unk000[0x25c];
-    /* 0x25c */ u8 darkZone;
-    /* 0x25d */ u8 unk25d[0x3b3];
-    /* 0x610 */ s32 presetIndex;
-    /* 0x614 */ u8 unk614[4];
-    /* 0x618 */ s32 unk618;
-    /* 0x61c */ s32 unk61c;
-    /* 0x620 */ s32 unk620;
-    /* 0x624 */ s32 unk624;
-    /* 0x628 */ s32 unk628;
-    /* 0x62c */ s32 unk62c;
-    /* 0x630 */ s32 unk630;
-    /* 0x634 */ u32 unk634;
-    /* 0x638 */ u32 unk638;
-    /* 0x63c */ u32 unk63c;
-    /* 0x640 */ u32 unk640;
-    /* 0x644 */ u32 unk644;
-    /* 0x648 */ u32 unk648;
-};
-
 struct MapHeading {
     u32 unk00;
     f32 degrees;
@@ -59,7 +38,6 @@ struct MapHeading {
 
 extern "C" {
 extern MapEnvironmentState g_mapTable;
-extern MapEnvironmentGameView g_gameState;
 extern MapHeading g_localCameraPosition;
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 u32 asdTMTexTableGetHeaderValue(u32 table, u32 node);
@@ -86,10 +64,10 @@ void mapEnvironmentApplyPreset(u32 preset, s32 transition)
     if (g_gameState.darkZone != 0) {
         g_mapTable.selectedIndex = 0;
     }
-    g_gameState.presetIndex = g_mapTable.selectedIndex;
+    g_gameState.environmentPreset = g_mapTable.selectedIndex;
     const MapEnvironmentEntry *entry = &g_mapTable.entries[g_mapTable.selectedIndex];
     g_gameState.unk618 = entry->id;
-    g_gameState.unk61c = entry->unk02;
+    g_gameState.unk61C = entry->unk02;
     g_gameState.unk620 = entry->unk04;
     g_gameState.unk624 = entry->unk06;
     s32 id = entry->id;
@@ -125,15 +103,15 @@ void mapEnvironmentApplyPreset(u32 preset, s32 transition)
                  entry->unk18, entry->unk19, entry->unk20, entry->unk21,
                  entry->unk22, entry->unk23, entry->unk24, entry->unk26,
                  (f32)entry->unk1A, entry->unk1C);
-    g_gameState.unk628 = entry->unk28[0];
-    g_gameState.unk62c = (s8)entry->unk28[2];
-    g_gameState.unk630 = (g_gameState.unk62c * 3) / 5;
-    g_gameState.unk634 = entry->unk28[3];
-    g_gameState.unk638 = entry->unk28[4];
-    g_gameState.unk63c = entry->unk28[1];
-    g_gameState.unk640 = entry->unk28[5];
-    g_gameState.unk644 = entry->unk28[6];
-    g_gameState.unk648 = entry->unk28[7];
+    g_gameState.fade.mode = entry->unk28[0];
+    g_gameState.fade.x = (s8)entry->unk28[2];
+    g_gameState.fade.y = (g_gameState.fade.x * 3) / 5;
+    g_gameState.fade.texture = entry->unk28[3];
+    g_gameState.fade.alpha = entry->unk28[4];
+    g_gameState.fade.additive = entry->unk28[1];
+    g_gameState.fade.red = entry->unk28[5];
+    g_gameState.fade.green = entry->unk28[6];
+    g_gameState.fade.blue = entry->unk28[7];
     g_localCameraPosition.degrees = (f32)entry->unk1A + 180.0f;
     if (g_localCameraPosition.degrees > 360.0f) {
         g_localCameraPosition.degrees -= 360.0f;

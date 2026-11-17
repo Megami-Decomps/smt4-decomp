@@ -4,24 +4,9 @@
 #include "map/MapActionMarker.h"
 #include "util/TrigF32.h"
 #include "shard/S1Mover.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x4c];
-    int f0049f968; /* 0x04c */
-    u8 pad050[0x30];
-    unsigned int f0049f99c; /* 0x080 */
-    unsigned int f0049f9a0; /* 0x084 */
-    unsigned int f0049f9a4; /* 0x088 */
-    unsigned int f0049f9a8; /* 0x08c */
-    unsigned int f0049f9ac; /* 0x090 */
-    u8 pad094[0xc];
-    float f0049f9bc; /* 0x0a0 */
-    u8 pad0a4[0x186];
-    unsigned char f0049fb46; /* 0x22a */
-};
-extern GameStateView g_gameState;
 
 
 int mapDestroySecondaryModel(...);
@@ -134,7 +119,7 @@ void FUN_002e9b60(void)
               if (*(int *)(g_lmapScene + 8) == 2) {
                 mapIfReleaseSlot2();
                 temp_v0 = g_lmapScene;
-                g_gameState.f0049fb46 = 0;
+                g_gameState.map.transitionCompleted = 0;
                 puVar5 = (unsigned int *)(g_lmapScene + 0x1c);
                 *(unsigned int *)(g_lmapScene + 0x4c) = *(unsigned int *)(g_lmapScene + 0x50);
                 temp_v8 = *(unsigned int *)(temp_v0 + 0x2c);
@@ -149,13 +134,13 @@ void FUN_002e9b60(void)
           }
           else {
             *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-            mapIfActivateRecord(1,g_gameState.f0049f99c);
+            mapIfActivateRecord(1,g_gameState.overviewRecord);
             temp_v1 = FUN_0027ee9c();
             temp_v0 = g_lmapScene;
             if (temp_v1 != 0) {
               *(unsigned int *)(g_lmapScene + 4) = 10;
               *(unsigned int *)(temp_v0 + 8) = 0;
-              if (g_gameState.f0049f968 == 0) {
+              if (g_gameState.unk04C == 0) {
                 temp_v8 = 3;
               }
               else {
@@ -189,7 +174,7 @@ void FUN_002e9b60(void)
                 temp_v0 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 0x54) = 0;
                 *(unsigned int *)(temp_v0 + 0x58) = 0x40a00000;
-                mapIfActivateRecord(0,g_gameState.f0049f99c);
+                mapIfActivateRecord(0,g_gameState.overviewRecord);
                 mapIfReleaseSlot2();
                 temp_v0 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -200,7 +185,7 @@ void FUN_002e9b60(void)
         }
         else {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          mapIfActivateRecord(1,g_gameState.f0049f99c);
+          mapIfActivateRecord(1,g_gameState.overviewRecord);
           temp_v0 = g_lmapScene;
           if (*(int *)(g_lmapScene + 8) >= 3) {
             temp_v1 = *(int *)(g_lmapScene + 4);
@@ -215,21 +200,21 @@ void FUN_002e9b60(void)
         *(unsigned int *)(g_lmapScene + 0x54) = 0;
         *(unsigned int *)(temp_v0 + 0x58) = 0x40400000;
         *(unsigned char *)(temp_v0 + 0x6c) = 0;
-        temp_v3 = g_gameState.f0049f9a8;
-        temp_v8 = g_gameState.f0049f9a4;
-        *(unsigned int *)(temp_v0 + 0x28) = g_gameState.f0049f9a0;
+        temp_v3 = g_gameState.overviewPosition.z;
+        temp_v8 = g_gameState.overviewPosition.y;
+        *(unsigned int *)(temp_v0 + 0x28) = g_gameState.overviewPosition.x;
         *(unsigned int *)(temp_v0 + 0x2c) = temp_v8;
         *(unsigned int *)(temp_v0 + 0x30) = temp_v3;
-        *(unsigned int *)(temp_v0 + 0x50) = g_gameState.f0049f9ac;
+        *(unsigned int *)(temp_v0 + 0x50) = g_gameState.overviewHeading;
         FUN_0027fc14(0xc);
         *(unsigned int *)(DAT_004474f4 + 0xac) = 0xfffffffd;
         buttonHelpSetPreset(0xdb);
-        mapIfActivateRecord(1,g_gameState.f0049f99c);
+        mapIfActivateRecord(1,g_gameState.overviewRecord);
         MapMarkerPosition marker;
-        marker.x = *(float *)&g_gameState.f0049f9a0 + mathRemPio2f(*(float *)&g_gameState.f0049f9ac * 0.017453292f) * 150.0f;
-        marker.y = *(float *)&g_gameState.f0049f9a4;
-        marker.z = *(float *)&g_gameState.f0049f9a8 + FUN_00282390(*(float *)&g_gameState.f0049f9ac * 0.017453292f) * 150.0f;
-        marker.w = g_gameState.f0049f9bc;
+        marker.x = g_gameState.overviewPosition.x + mathRemPio2f(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
+        marker.y = g_gameState.overviewPosition.y;
+        marker.z = g_gameState.overviewPosition.z + FUN_00282390(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
+        marker.w = g_gameState.heading;
         FUN_00248114(marker);
         temp_v0 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;

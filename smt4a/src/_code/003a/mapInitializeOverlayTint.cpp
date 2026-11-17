@@ -1,5 +1,6 @@
 /* NON_MATCHING: the per-channel packed-colour sequence (MaterialPackedColor bitfields, red-green-blue then alpha, uninitialised base register) now matches retail's tails; retail shares three tails (0x66/0xaa/0x99 constants, 0xaa preloaded in r3) where the build duplicates the tail per leaf. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gfx/MaterialColorCommand.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W6_W6Match8_MapMain.h"
@@ -35,21 +36,21 @@ void mapInitializeOverlayTint()
     if (map == NULL || map->tintInitialized) {
         return;
     }
-    if (g_gameState.mode == 0x27) {
-        s32 submode = g_gameState.submode;
+    if (g_gameState.mapId == 0x27) {
+        s32 submode = g_gameState.areaId;
         if (submode == 8 || submode == 9 || submode == 10 || submode == 11 || submode == 6) {
             setOverlayOpacity(map, 0xaa);
         } else {
             setOverlayOpacity(map, 0x66);
         }
-    } else if (g_gameState.mode == 0x20) {
-        if (g_gameState.submode == 1) {
+    } else if (g_gameState.mapId == 0x20) {
+        if (g_gameState.areaId == 1) {
             setOverlayOpacity(map, 0xaa);
         } else {
             setOverlayOpacity(map, 0x66);
         }
-    } else if (g_gameState.mode == 0x1c || g_gameState.mode == 0x1d ||
-               g_gameState.mode == 0x1e || g_gameState.mode == 0x1f) {
+    } else if (g_gameState.mapId == 0x1c || g_gameState.mapId == 0x1d ||
+               g_gameState.mapId == 0x1e || g_gameState.mapId == 0x1f) {
         setOverlayOpacity(map, 0x99);
     } else {
         setOverlayOpacity(map, 0x66);

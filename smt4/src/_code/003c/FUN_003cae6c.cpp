@@ -5,6 +5,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
+#include "gamedata/ConsumableRecord.h"
 
 namespace {
 /* A skill info record (only the kind and its flags). */
@@ -22,7 +23,6 @@ extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 s32 FUN_003af084(u32 block);
 void btlUiCopyStatePairs(u32 block, char *valid, u64 *mask, u64 *pair);
-SkillLinkRecord *dataTable08Sub1GetRecord(s32 id);
 s32 btlFindEntrySelectionByKey(BtlMainState *block, s32 index);
 s32 playerPadTestBit(u32 bit);
 void btlEntryBuildSummary(CommandInfo *info, BtlMainState *block, BtlEntry *entry);
@@ -95,9 +95,9 @@ u32 FUN_003cae6c(BtlMainState **block, CommandState *state)
         if (kind == 2 || kind == 3) {
             info = reinterpret_cast<SkillInfo *>(dataTable40FindById(selection->value));
         } else if (kind == 8) {
-            SkillLinkRecord *record = dataTable08Sub1GetRecord(selection->value);
-            if (record->linkedSkill != 0) {
-                info = reinterpret_cast<SkillInfo *>(dataTable40FindById(record->linkedSkill));
+            ConsumableRecord *record = dataTable08Sub1GetRecord(selection->value);
+            if (record->skillId != 0) {
+                info = reinterpret_cast<SkillInfo *>(dataTable40FindById(record->skillId));
             }
         }
         if (info != NULL && info->kind == 7) {

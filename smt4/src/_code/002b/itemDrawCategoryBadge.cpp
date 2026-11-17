@@ -1,9 +1,9 @@
 #include "shard/PadState.h"
 #include "shard/TextureDrawCall.h"
+#include "gamedata/ConsumableRecord.h"
 
 namespace {
 struct ItemCategoryView { u8 prefix[0x53]; u8 category; };
-struct EquipmentCategoryView { u8 prefix[0x6C]; u8 category; };
 struct PlayerEquipmentView {
     u16 weapon;
     u16 gun;
@@ -17,7 +17,6 @@ struct PlayerEquipmentView {
 extern "C" {
 u32 aocEntryGetKind(u32 id);
 const ItemCategoryView *dataTable08Sub0GetRecord(u32 id);
-const EquipmentCategoryView *dataTable08Sub1GetRecord(u32 id);
 u32 categoryIdFromIndex(u32 category);
 PadState *gameGetPlayerData();
 void texTableRecordCallWithParams(s32 layer, s32 group, u32 image, s32 x, s32 y, s32 priority);
@@ -29,7 +28,7 @@ void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped)
     u32 equipped = 0;
     switch (aocEntryGetKind(id)) {
     case 1:
-        icon = categoryIdFromIndex(dataTable08Sub1GetRecord(id)->category);
+        icon = categoryIdFromIndex(dataTable08Sub1GetRecord(id)->iconKind);
         break;
     case 0: {
         const ItemCategoryView *record = dataTable08Sub0GetRecord(id);

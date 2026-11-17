@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP register allocation and the order of the matrix products differ; the effect position, the table-based rotation and the call sequence are the same. */
 #include "map/lmapMain.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "nw/math/MTX34.h"
 
@@ -13,7 +14,6 @@ void mapEplSetSlotPosition(s32 slot, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
 void eplSlotApplyParameters(s32 slot, const MTX34 *matrix);
 extern LmapSceneA *g_lmapScene;
-extern GameStateA g_gameState;
 extern f32 g_sinCosTable[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
 enum {
@@ -76,8 +76,8 @@ void FUN_003136e4(f32 angle, f32 distance)
     MTX34 matrix;
     MTX34 applied;
 
-    if (g_gameState.collision.unk3A3 != 0) {
-        if (g_gameState.mode == 38 && g_gameState.submode == 3) {
+    if (g_gameState.unk3A3 != 0) {
+        if (g_gameState.mapId == 38 && g_gameState.areaId == 3) {
             sinCosFromTable(0.29656f, &sinY, &cosY);
             rotationFromSinCos(&matrix, sinX, cosX, sinY, cosY, sinX, cosX);
             nn_math_ARMv6_MTX34CopyAsm(&applied, &matrix);

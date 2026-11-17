@@ -1,9 +1,9 @@
 /* NON_MATCHING: the deltas are now loaded separately (no VLDM) in retail's y-then-x order; the elapsed conversions and products still land in different VFP registers. */
 #include "map/NavigationInterpolation.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern GameState g_gameState;
 void FUN_0039b648(NavigationInterpolation *state);
 u32 naviUpdateDragCapture(NavigationInterpolation *state);
 void NaviMain_SetCursorPos(void *cursor, const NavigationPoint *position);
@@ -12,13 +12,13 @@ void NaviMain_SetCursorPos(void *cursor, const NavigationPoint *position);
 u32 FUN_0039ad14(NavigationInterpolation *state)
 {
     if ((state->flags & 0x1000) != 0 ||
-        (g_gameState.unk000 == 19 && (g_gameState.unk004Value == 6 ||
-         g_gameState.unk004Value == 7 || g_gameState.unk004Value == 8))) {
+        (g_gameState.mapId == 19 && (g_gameState.areaId == 6 ||
+         g_gameState.areaId == 7 || g_gameState.areaId == 8))) {
         return 0;
     }
     if ((state->flags & 0x10) != 0) {
         ++state->elapsed;
-        if ((FUN_002319c0() != 0 && g_gameState.unk18 == 0) || state->elapsed > 15) {
+        if ((FUN_002319c0() != 0 && g_gameState.inputBlocked == 0) || state->elapsed > 15) {
             state->flags &= ~0x10;
         } else {
             NavigationPoint position;

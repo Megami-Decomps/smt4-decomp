@@ -2,6 +2,7 @@
 #include "addon/AocPackage.h"
 #include "classes/WindowOperation.h"
 #include <string.h>
+#include "addon/AocSystemA.h"
 
 extern "C" {
 s32 libc_strlen(const char *text);
@@ -14,7 +15,7 @@ WindowOperationResult FUN_001d23e0(AocSystemA *system, const char *mountName,
 WindowOperationResult aocResolveMountPath(AocSystemA *system, const char *path)
 {
     s8 mountName[16]; /* the device name ("aocN:"), compared as signed bytes */
-    if (system->packages.count != 0 && system->packages.entries != NULL) {
+    if (system->packageCount != 0 && system->packages != NULL) {
         memset(mountName, 0, sizeof(mountName));
         bool hasDevice = false;
         s32 length = libc_strlen(path);
@@ -29,8 +30,8 @@ WindowOperationResult aocResolveMountPath(AocSystemA *system, const char *path)
             }
         }
         if (hasDevice && mountName[0] == 'a' && mountName[1] == 'o' && mountName[2] == 'c') {
-            for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
-                AocPackage *package = &system->packages.entries[packageIndex];
+            for (s32 packageIndex = 0; packageIndex < system->packageCount; ++packageIndex) {
+                AocPackage *package = &system->packages[packageIndex];
                 if (strcmp(reinterpret_cast<const char *>(mountName), package->mountName) == 0) {
                     return FUN_001d23e0(system, package->mountName, package->archive,
                                         package->flags, contentIndexGetValue(&package->id));

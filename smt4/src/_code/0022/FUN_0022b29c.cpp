@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail inlines the entry check twice (once per source) sharing one stack buffer for the script name and the iteration state (frame 300 vs 340 here) and orders the header-search/state selection blocks differently; the calls and stores are the same. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "game/GameState.h"
 
 namespace {
 /* A selectable entry (0xd0 bytes): the bucket it belongs to, its availability script and the flags gating it. */
@@ -69,7 +70,6 @@ struct MenuWindow {
 extern "C" {
 extern s32 DAT_0044cfb8;                 /* set by the script when it rejects the entry */
 extern s32 g_aocSystem;
-extern u8 g_gameState;
 GroupHeader *dataTable33Sub0GetRecord(TableView *view, u32 index);
 s32 dataTable33Sub0GetCount(TableView *view);
 MenuEntry *dataTable33GroupGetRecord(TableView *view, u32 group, u32 index);
@@ -150,7 +150,7 @@ void FUN_0022b29c(MenuWindow *window, s32 selected, s32 state)
     FUN_003bb9d4(window->list);
     s32 id = -1;
     if (gameStateIsFlagSetAndLarge() != 0) {
-        id = *reinterpret_cast<s32 *>(&g_gameState + 0x300);
+        id = g_gameState.savedAreaId;
     }
     if (window->forcedId != 0) {
         id = window->forcedId;

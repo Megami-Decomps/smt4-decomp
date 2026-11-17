@@ -2,10 +2,10 @@
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "shard/W6_W6Match2_GeometryResources.h"
+#include "game/GameState.h"
 
 
 extern "C" {
-extern GameState g_gameState;
 void nodeSetTranslation(NodeEnableResource *, s32, const f32 *);
 void modelPartSetRotationDegrees(NodeEnableResource *, s32, f32, f32, f32);
 u32 modelGetCurrentMotion(void *model);
@@ -16,7 +16,7 @@ void modelSelectSecondaryMotion(NodeEnableResource *, u32, f32);
 void mapMarkerSynchronizeModelState(MapIfModelMarker *marker)
 {
     if (marker->active) {
-        if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+        if (g_gameState.loading) {
             NodeEnableNode *node = marker->model;
             if (!(node->flags & 2)) {
                 node->flags |= 2;

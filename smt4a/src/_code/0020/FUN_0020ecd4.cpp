@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps shared constants 0 (r8) and 1 (r6) in registers and has one exit for the no-slot and success returns; build rematerialises them (record null select, timer store and epilogue order differ). */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/DataTable.h"
 #include "code/Code0015.h"
 #include "mapnavi/naviMain.h"
@@ -29,13 +30,7 @@ struct SaveSlotView {
     u16 statusId;
 };
 
-struct GameStateView {
-    u8 unk00[0x390];
-    s32 statusTimer;
-};
-
 extern "C" {
-extern GameStateView g_gameState;
 extern StatusPopupState *g_popupState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 max);

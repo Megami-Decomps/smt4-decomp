@@ -1,10 +1,10 @@
 /* NON_MATCHING: map request prefix and slot-relative fields are corrected; ambient-effect register scheduling still differs. */
 #include "map/mapObj.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 extern MapObjectState *g_mapObj;
-extern GameState g_gameState;
 f32 libm_sinf(f32 radians);
 f32 libm_cosf(f32 radians);
 void FUN_00281b94(s32 slot, MapVector position, f32 heading, f32 a, f32 b, f32 c);
@@ -33,7 +33,7 @@ extern "C" void FUN_00353d74(void)
         MapObjectSlot *object = &g_mapObj->slots[i];
         if (object->active == 0)
             continue;
-        if (g_gameState.unk000 != 4 || g_gameState.unk004Value != 1) {
+        if (g_gameState.mapId != 4 || g_gameState.areaId != 1) {
             if (object->state == 2)
                 spawnOffsetEffect(object, 400.0f, 20.0f, 80.0f, 350.0f, 50.0f);
             if (object->state == 10)

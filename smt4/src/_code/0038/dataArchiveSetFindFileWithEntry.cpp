@@ -1,10 +1,7 @@
 #include "shard/W8_X20_DataSet.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-
-s32 packageEntryIsLoaded(DataArchive *archive);
-DataArchiveRecord *packageEntryGetDirectory(DataArchive *archive);
-u32 packageEntryGetFileCount(DataArchive *archive);
 
 /* Entry `index` of a packed file, or NULL when the file has no such entry or it is empty. */
 static __inline void *dataFileEntryData(DataFileHeader *header, s32 index)
@@ -19,17 +16,17 @@ static __inline void *dataFileEntryData(DataFileHeader *header, s32 index)
 }
 
 // Find the first loaded kind-0x13 file of any archive whose entry `index` has data, or NULL.
-DataFileHeader *dataArchiveSetFindFileWithEntry(DataArchiveSet *set, s32 index)
+DataFileHeader *dataArchiveSetFindFileWithEntry(AocSystem *system, s32 index)
 {
-    for (s32 i = 0; i < set->archiveCount; i++) {
-        DataArchive *archive = &set->archives[i];
-        if (packageEntryIsLoaded(archive) != 0) {
-            DataArchiveRecord *records = packageEntryGetDirectory(archive);
-            u32 count = packageEntryGetFileCount(archive);
+    for (s32 i = 0; i < system->packageCount; i++) {
+        AocPackage *package = &system->packages[i];
+        if (packageEntryIsLoaded(package) != 0) {
+            AocPackageDirectoryEntry *records = packageEntryGetDirectory(package);
+            u32 count = packageEntryGetFileCount(package);
             for (u32 j = 0; j < count; j++) {
-                if (records[j].kind == 0x13 && archive->files[j].loaded) {
-                    if (dataFileEntryData(archive->files[j].header, index) != NULL) {
-                        return archive->files[j].header;
+                if (records[j].kind == 0x13 && package->files[j].available) {
+                    if (dataFileEntryData((DataFileHeader *)package->files[j].data, index) != NULL) {
+                        return (DataFileHeader *)package->files[j].data;
                     }
                 }
             }

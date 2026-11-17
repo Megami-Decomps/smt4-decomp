@@ -2,6 +2,7 @@
 #include "ui/ButtonHelp.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "bible/bibleDevil.h"
+#include "gamedata/EquipmentRecord.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
@@ -17,8 +18,8 @@ void asdTextDrawDirectoryEntry(u32 handle, u32 directory, u32 color, s32 mode,
 void FUN_00309bc8(u32 context, u32 depth)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
-    RankedTableRecord *firearm = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.firearm);
-    RankedTableRecord *ammunition = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.ammunition);
+    EquipmentRecord *firearm = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.firearm);
+    EquipmentRecord *ammunition = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.ammunition);
     char text[100];
     if (firearm == NULL || ammunition == NULL) {
         work->unk4CB = 0;
@@ -26,34 +27,34 @@ void FUN_00309bc8(u32 context, u32 depth)
     }
     work->unk55C = 1;
     work->unk4CB = 1;
-    u8 attackCount = firearm->attack.attackCount;
+    u8 attackCount = firearm->hitRange;
     if ((attackCount & 0xF) == attackCount >> 4) {
         FUN_0029ede8(0x25, attackCount & 0xF, 0xFFFFFFFF, 0);
     } else {
         char countLabels[2][8];
         FUN_002907c4(countLabels[0], attackCount & 0xF);
-        FUN_002907c4(countLabels[1], firearm->attack.attackCount >> 4);
+        FUN_002907c4(countLabels[1], firearm->hitRange >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", countLabels[0], countLabels[1]);
         textEncodeFontSlot(0x25, text);
     }
-    btlFormatCategoryLabel(text, rankedTableRecordGetSortFlags(ammunition) >> 20);
+    btlFormatCategoryLabel(text, ammunition->traits >> 20);
     textEncodeFontSlot(0x26, text);
-    skillFormatTargetLabel(text, firearm->category);
+    skillFormatTargetLabel(text, firearm->target);
     textEncodeFontSlot(0x27, text);
     // Full-width English ailment labels in the retail font's Shift-JIS encoding.
-    if (ammunition->ailment == 0) // None
+    if (ammunition->element == 0) // None
         textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85");
-    if (ammunition->ailment == 1) // KO
+    if (ammunition->element == 1) // KO
         textFormatBuffer(text, "\x82\x6A\x82\x6E");
-    if (ammunition->ailment == 5) // Poison
+    if (ammunition->element == 5) // Poison
         textFormatBuffer(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E");
-    if (ammunition->ailment == 6) // Panic
+    if (ammunition->element == 6) // Panic
         textFormatBuffer(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83");
-    if (ammunition->ailment == 7) // Sleep
+    if (ammunition->element == 7) // Sleep
         textFormatBuffer(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90");
-    if (ammunition->ailment == 8) // Bind
+    if (ammunition->element == 8) // Bind
         textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8E\x82\x84");
-    if (ammunition->ailment == 9) // Sick
+    if (ammunition->element == 9) // Sick
         textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B");
     textEncodeFontSlot(0x28, text);
     if (context == 0)

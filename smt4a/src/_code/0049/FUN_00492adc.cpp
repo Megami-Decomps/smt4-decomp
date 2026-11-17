@@ -1,5 +1,6 @@
 /* NON_MATCHING: same 42 rows and the zero Y component now comes from the literal pool like retail; only the schedule differs (retail loads the 0.0f pool constant just before the first vmla and uses s2/s4/s5 for the pool values, ours loads it before the second source load). */
 #include "common.h"
+#include "game/GameStateA.h"
 #include <math.h>
 #include "code/Code0015.h"
 struct DirectionSourceView {
@@ -10,11 +11,6 @@ struct DirectionSourceView {
     f32 unk10; // 0x10
     u8 unk14[0x04];
     f32 unk18; // 0x18
-};
-
-struct GameStateView {
-    u8 unk00[0x460];
-    u8 unk460; // 0x460
 };
 
 struct NaviMainView {
@@ -29,7 +25,6 @@ struct DirectionVector {
 };
 
 extern "C" {
-extern GameStateView g_gameState;
 extern NaviMainView* g_naviMain;
 f32 FUN_001b640c(f32 directionX, f32 directionZ);
 }
@@ -57,7 +52,7 @@ extern "C" f32 FUN_00492adc(void)
     if (angleRepresentation.bits > 0x43B40000)
         angle -= 360.0f;
 
-    if (g_gameState.unk460 != 0)
+    if (g_gameState.alternateNaviMap != 0)
         angle = g_naviMain->unk48;
 
     return angle;

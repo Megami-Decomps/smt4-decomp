@@ -1,51 +1,51 @@
 /* NON_MATCHING: only the stack-pointer adjustment is scheduled before the first load and the null-row register is initialised conditionally instead of unconditionally. */
-#include "shard/W4_Match6_DataSet.h"
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 extern AocDisplay *g_aocDisplay;
 void *dataTableFileGetTable(void *file, u32 index);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void aocQueueFileLoad(AocDisplay *display, const char *path, DataFileRef *file,
-                  u32 mode, u32 size, DataFileRef *context);
+void aocQueueFileLoad(AocDisplay *display, const char *path, AocPackageFile *file,
+                  u32 mode, u32 size, AocPackageFile *context);
 }
 
-static __inline const DataRow *dataEntryRows(const DataEntry *entry)
+static __inline const AocPackageDirectoryEntry *dataEntryRows(const AocPackage *entry)
 {
-    if (!entry->source.hasMetadata) {
+    if (!entry->directoryLoaded) {
         return NULL;
     }
-    if (entry->source.metadataFile == NULL) {
+    if (entry->directoryFile == NULL) {
         return NULL;
     }
-    return static_cast<const DataRow *>(dataTableGetEntries(
-        dataTableFileGetTable(entry->source.metadataFile, 0)));
+    return static_cast<const AocPackageDirectoryEntry *>(dataTableGetEntries(
+        dataTableFileGetTable(entry->directoryFile, 0)));
 }
 
-static __inline u32 dataEntryRowCount(const DataEntry *entry)
+static __inline u32 dataEntryRowCount(const AocPackage *entry)
 {
-    if (!entry->source.hasMetadata) {
+    if (!entry->directoryLoaded) {
         return 0;
     }
-    if (entry->source.metadataFile == NULL) {
+    if (entry->directoryFile == NULL) {
         return 0;
     }
-    return dataTableGetCount(dataTableFileGetTable(entry->source.metadataFile, 0));
+    return dataTableGetCount(dataTableFileGetTable(entry->directoryFile, 0));
 }
 
 // Queue supported data-row files beneath this entry's directory.
-extern "C" void dataEntryQueueSupportedFiles(DataEntry *entry)
+extern "C" void dataEntryQueueSupportedFiles(AocPackage *entry)
 {
-    if (entry->source.metadataFile == NULL || entry->files == NULL) {
+    if (entry->directoryFile == NULL || entry->files == NULL) {
         return;
     }
-    const DataRow *rows = dataEntryRows(entry);
+    const AocPackageDirectoryEntry *rows = dataEntryRows(entry);
     u32 count = dataEntryRowCount(entry);
     {
         for (u32 index = 0; index < count; ++index) {
-            switch (rows[index].opcode) {
+            switch (rows[index].kind) {
             case 0:
             case 1:
             case 2:
@@ -80,10 +80,10 @@ extern "C" void dataEntryQueueSupportedFiles(DataEntry *entry)
             case 0x2f: {
                 char path[0x80];
                 memClear(path, sizeof(path));
-                textFormatBuffer(path, "%s/%s", entry->source.directory, rows[index].name);
-                DataFileRef *file = &entry->files[index];
+                textFormatBuffer(path, "%s/%s", entry->mountName, rows[index].name);
+                AocPackageFile *file = &entry->files[index];
                 aocQueueFileLoad(g_aocDisplay, path, file, 1, sizeof(path), file);
-                entry->files[index].status.requested = 1;
+                entry->files[index].available = 1;
                 break;
             }
             }

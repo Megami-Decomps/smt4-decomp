@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "addon/aocMain.h"
 #include "bible/bibleDevil.h"
+#include "addon/AocSystem.h"
 
 struct RaceLabel {
     char primary[0x10];
@@ -13,7 +14,6 @@ struct AddonRaceLabel {
     char text[1];
 };
 extern "C" {
-extern AocSystem *g_aocSystem;
 AddonRaceLabel *entryListFindById(AocSystem *system, u32 race);
 }
 

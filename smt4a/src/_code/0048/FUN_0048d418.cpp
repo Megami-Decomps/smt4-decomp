@@ -1,5 +1,6 @@
 /* NON_MATCHING: for-loop counter lifetimes match; mode predicate grouping and sort/output scratch registers differ. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 /* The destination list this function fills: entries of {active, id} followed by the entry count. */
 struct SelectableEntry {
@@ -25,8 +26,6 @@ struct TableRecord {
 
 extern "C" {
 
-extern GameStateA g_gameState;
-
 TableRecord *dataTable2BType1GetEntry(u32 *view, s32 index);
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_004083a8(s32 first, s32 second);
@@ -49,10 +48,10 @@ void FUN_0048d418(SelectableList *list, s32 kind)
             continue;
         found = 0;
         if (kind == 0x17) {
-            if ((g_gameState.submode == 1 || g_gameState.submode == 2 || g_gameState.submode == 3 || g_gameState.submode == 6) &&
+            if ((g_gameState.areaId == 1 || g_gameState.areaId == 2 || g_gameState.areaId == 3 || g_gameState.areaId == 6) &&
                 (record->first == 0xB0 || record->first == 0x7F || record->first == 0x80))
                 continue;
-            if ((g_gameState.submode == 4 || g_gameState.submode == 5) &&
+            if ((g_gameState.areaId == 4 || g_gameState.areaId == 5) &&
                 (record->first == 0x79 || record->first == 0x7A || record->first == 0x7D || record->first == 0x7E))
                 continue;
         }

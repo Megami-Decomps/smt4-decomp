@@ -1,8 +1,7 @@
-#include "ui/PartyPanelState.h"
+#include "ui/PartyPanelStateA.h"
 #include "shard/Shard003C.h"
 
 extern "C" {
-extern PartyPanelStateA *g_partyPanel;
 
 void FUN_003c1094(s32 flag)
 {
@@ -10,7 +9,7 @@ void FUN_003c1094(s32 flag)
 
     if (g_partyPanel != NULL) {
         value = (flag != 0) ? 8 : 0x18;
-        g_partyPanel->unk20 = value;
+        g_partyPanel->pendingState = value;
     }
 }
 

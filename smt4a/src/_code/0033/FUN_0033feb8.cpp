@@ -1,5 +1,6 @@
 /* NON_MATCHING: twin of smt4 FUN_002d508c; readable rewrite compiles (175 vs 165 rows); register allocation and stack frame differ */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -34,13 +35,6 @@ struct GameFlagsBlock {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    s8 f005f1614; /* 0x018 */
-};
-extern GameStateView g_gameState;
-
 
 extern LmapScene* g_lmapScene;
 
@@ -61,7 +55,7 @@ void FUN_0033feb8(PlayerController* player)
     GameFlagsBlock* block = reinterpret_cast<GameFlagsBlock *>(gameFlagsGetBlock());
     f32 speedScale = 1.0f;
     s32 blocked = 0;
-    if (DAT_005f1bc4 != 0 || g_gameState.f005f1614 != 0) {
+    if (DAT_005f1bc4 != 0 || g_gameState.inputBlocked != 0) {
         block->moveRequest = 0;
         return;
     }

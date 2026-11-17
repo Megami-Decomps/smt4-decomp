@@ -1,5 +1,6 @@
 /* NON_MATCHING: variant alternation folds to BIC and random-position VFP register allocation differs. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 extern u32 DAT_005806c0;
@@ -9,11 +10,6 @@ void soundActorStartOnFreeChannel(u32, f32, f32, f32);
 /* Alternate a regional map effect and scatter it near the scene position. */
 void FUN_00324e38(s32 variant)
 {
-    struct RegionView {
-        u8 unk000[0x250];
-        s32 region;
-    };
-    typedef char RegionViewOffset[offsetof(RegionView, region) == 0x250 ? 1 : -1];
     DAT_005806c0 = (DAT_005806c0 + 1) & 1;
     MapVector position = g_lmapScene->position;
     position.y += 140.0f;
@@ -25,7 +21,7 @@ void FUN_00324e38(s32 variant)
     } else if (variant == 1) {
         DAT_005806c0 = 1;
     }
-    switch (((const RegionView *)&g_gameState)->region) {
+    switch (g_gameState.areaTypeB) {
     case 0:
         soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A0, position.x, position.y, position.z);
         break;

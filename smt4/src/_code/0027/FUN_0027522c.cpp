@@ -2,10 +2,10 @@
 #include "map/MapObjects.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapObjectWork *g_mapObj;
-extern GameState g_gameState;
 void nodeSetTranslation(NodeEnableResource *, s32, const MapVector *);
 void modelPartSetRotationDegrees(NodeEnableResource *, s32, f32, f32, f32);
 void modelSelectPrimaryMotion(NodeEnableResource *, u32, f32);
@@ -34,7 +34,7 @@ void FUN_0027522c(void)
         ObjectStateView *object = &reinterpret_cast<ObjectView *>(g_mapObj)[i].state;
         if (object->active) {
             NodeEnableNode *node = object->node;
-            if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+            if (g_gameState.loading) {
                 if ((node->flags & 2) == 0) {
                     node->flags |= 2;
                     node->resource->target->enabled = 0;

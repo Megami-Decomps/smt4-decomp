@@ -1,5 +1,6 @@
 /* NON_MATCHING: register swap only: retail keeps id in r4 and the record in r5 (reusing r4 for record+0x100 later); ours swaps them. */
 #include "shard/W5_W5Match7_DataRecord.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
@@ -27,7 +28,7 @@ u32 FUN_003de75c(u32 id)
         return 0;
     }
     if (id >= ITEM_FIRST_LATE_ID && (late = dataTable1bOr1cGetRecord(id)) != NULL
-        && late->ordering.sortGroup == ITEM_GROUP_KEY && g_gameState.mode == GAME_MODE_KEY_ITEMS_LOCKED) {
+        && late->ordering.sortGroup == ITEM_GROUP_KEY && g_gameState.mapId == GAME_MODE_KEY_ITEMS_LOCKED) {
         return 0;
     }
     if (record->lockFlag != 0 && gameFlagIsSet(record->lockFlag)

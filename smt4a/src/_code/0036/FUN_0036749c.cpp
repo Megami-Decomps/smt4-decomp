@@ -1,5 +1,6 @@
 /* NON_MATCHING: per-frame step of the lmap intro/exit scene (eases the camera, then a state machine: set up the camera behind the player, wait, hand to the map, and the exit steps that switch back to scene 1 / 0x10); written from the decompilation, the arguments of distSpatial / mathPositionHeadingDegrees / the trig helpers are not recovered (called with the angle where one is visible) and the u32 copies of the float targets are kept */
 #include "common.h"
+#include "game/GameStateA.h"
 
 #define LMAP_STATE_SETUP 0
 #define LMAP_STATE_SETTLE 1
@@ -49,25 +50,9 @@ struct LmapView {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0xb0];
-    u32 f005f16ac; /* 0x0b0 */
-    u32 f005f16b0; /* 0x0b4 */
-    u32 f005f16b4; /* 0x0b8 */
-    u32 f005f16b8; /* 0x0bc */
-    u8 pad0c0[0x19e];
-    u8 f005f185a; /* 0x25e */
-};
-extern GameStateView g_gameState;
 
 extern LmapView *g_lmapView;
 extern LmapScene *g_lmapScene;
-
-
-
-
-
 
 void FUN_00233e10(s32 active, u32 record);
 void mapSetSceneState(u32 scene);
@@ -88,9 +73,9 @@ s32 padButtonIsPressed(u32 button);
 /* Moves the target to the spawn position, pushed out behind `heading`. */
 static __inline void lmapPlaceBehind(LmapScene *scene, f32 heading)
 {
-    scene->targetX = *reinterpret_cast<f32 *>(&g_gameState.f005f16b0);
-    scene->targetY = *reinterpret_cast<f32 *>(&g_gameState.f005f16b4);
-    scene->targetZ = *reinterpret_cast<f32 *>(&g_gameState.f005f16b8);
+    scene->targetX = g_gameState.overviewPosition.x;
+    scene->targetY = g_gameState.overviewPosition.y;
+    scene->targetZ = g_gameState.overviewPosition.z;
     f32 angle = (heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD;
     scene->targetX += libm_sinf(angle) * LMAP_BEHIND_DISTANCE;
     scene->targetZ += libm_cosf(angle) * LMAP_BEHIND_DISTANCE;
@@ -120,7 +105,7 @@ void FUN_0036749c(void)
         FUN_00303460(10);
         g_lmapView->selection = -1;
         sysPlaySe(LMAP_SOUND_ENTER);
-        FUN_00233e10(1, g_gameState.f005f16ac);
+        FUN_00233e10(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
         scene->state++;
         scene->frame = 0;
@@ -128,7 +113,7 @@ void FUN_0036749c(void)
 
     case LMAP_STATE_SETTLE:
         scene->frame++;
-        FUN_00233e10(1, g_gameState.f005f16ac);
+        FUN_00233e10(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
         if (scene->frame >= LMAP_SETTLE_FRAMES) {
             scene->easeMode = 0x1D;
@@ -140,7 +125,7 @@ void FUN_0036749c(void)
 
     case LMAP_STATE_WAIT:
         scene->frame++;
-        FUN_00233e10(1, g_gameState.f005f16ac);
+        FUN_00233e10(1, g_gameState.overviewRecord);
         if (FUN_004d0584() != 0) {
             g_lmapScene->state = LMAP_STATE_ENTER;
             g_lmapScene->frame = 0;
@@ -150,14 +135,14 @@ void FUN_0036749c(void)
             FUN_00303460(0);
             g_lmapScene->easeMode = 0;
             g_lmapScene->easeValue = 5.0f;
-            FUN_00233e10(0, g_gameState.f005f16ac);
+            FUN_00233e10(0, g_gameState.overviewRecord);
             g_lmapScene->state = LMAP_STATE_EXIT_A;
             g_lmapScene->frame = 0;
         }
         break;
 
     case LMAP_STATE_ENTER:
-        g_gameState.f005f185a = 0;
+        g_gameState.transitionCompleted = 0;
         scene->easeMode = 8;
         scene->easeValue = 5.0f;
         FUN_00324e38(1);

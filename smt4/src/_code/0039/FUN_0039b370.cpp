@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail shares one 16-byte stack block between the stylus sample and the hit-test rectangle and reads the touch/previous-touch pairs with scalar loads; this build merges them into vldmia pairs and keeps the game-state pointer in r7 (about 200 diff lines). */
 #include "map/mapDepart.h"
 #include "map/NavigationInterpolation.h"
+#include "game/GameState.h"
 
 /* The navigation object seen as the touch-drag scroller that FUN_0039b370 drives. */
 struct NavigationDrag {
@@ -29,7 +30,6 @@ struct TouchSample {
 };
 
 extern "C" {
-extern GameState g_gameState;
 extern f32 DAT_0044cdc8; /* velocity damping per frame */
 
 s32 FUN_0039b648(NavigationDrag *drag);
@@ -50,7 +50,7 @@ u32 FUN_0039b370(NavigationDrag *drag)
     u8 *cursor = drag->cursorData;
     TouchSample sample;
     if (drag->flags & 0x20000) {
-        if (FUN_002bffd8(&sample.x, &sample.y) && g_gameState.unk18 == 0) {
+        if (FUN_002bffd8(&sample.x, &sample.y) && g_gameState.inputBlocked == 0) {
             NavigationPoint position;
             position.x = drag->cursorStart.x + ((f32)sample.x - drag->touchStart.x);
             position.y = drag->cursorStart.y + ((f32)sample.y - drag->touchStart.y);
@@ -64,7 +64,7 @@ u32 FUN_0039b370(NavigationDrag *drag)
                 drag->touch.x = (f32)sample.x;
                 drag->touch.y = (f32)sample.y;
             }
-        } else if (FUN_003c2e14(&sample.x, &sample.y) != 0 || g_gameState.unk18 != 0) {
+        } else if (FUN_003c2e14(&sample.x, &sample.y) != 0 || g_gameState.inputBlocked != 0) {
             drag->flags &= ~0x20000;
             if (drag->stillFrames > 2) {
                 drag->velocity.x = 0.0f;
@@ -76,7 +76,7 @@ u32 FUN_0039b370(NavigationDrag *drag)
         }
     } else {
         asdTMTexTableGetEntryPlacement(0x1C, 0xFA4, &sample.y, &sample.x, &sample.extentX, &sample.extentY);
-        if (effectForwardModeOne(sample.y, sample.x, sample.extentX, sample.extentY) && g_gameState.unk18 == 0) {
+        if (effectForwardModeOne(sample.y, sample.x, sample.extentX, sample.extentY) && g_gameState.inputBlocked == 0) {
             s32 x, y;
             FUN_003c2e0c(&x, &y);
             drag->touchStart.x = (f32)sample.x;

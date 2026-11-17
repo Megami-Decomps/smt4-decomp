@@ -1,12 +1,8 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
-
-typedef struct GameState {
-    /* 0x00 */ u8 unk00[0xDC];
-    /* 0xDC */ u8 enabled;
-} GameState;
 
 typedef struct FlagBlock {
     /* 0x00 */ u8 unk00[0x2A];
@@ -20,8 +16,6 @@ typedef struct Entry {
     /* 0x1C */ s32 flagId;
 } Entry;
 
-extern GameState g_gameState;
-
 extern FlagBlock *gameFlagsGetBlock(void);
 extern Entry *dataTable2FType1GetEntry(s32 id);
 
@@ -34,7 +28,7 @@ void gameApplyCurrentFlagTableEntry(void)
     s32 id;
     Entry *entry;
 
-    if (g_gameState.enabled == 0) {
+    if (g_gameState.unk0DC == 0) {
         return;
     }
     id = block->entryId;

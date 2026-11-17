@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303f48` (_code @ 0x303f48, 0xd64 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ extern unsigned char LAB_00304cd0; /* 0x304cd0 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f1623; /* 0x5f1623 */
 extern unsigned int DAT_005f17f0; /* 0x5f17f0 */
@@ -118,7 +118,6 @@ extern int textureEntryMeetsUnlockRequirements(unsigned int);
 extern int dataSelectPrioritizedCandidate(int index);
 extern unsigned int __aeabi_idivmod(void);
 
-
 void FUN_00303f48(void)
 
 {
@@ -154,7 +153,7 @@ void FUN_00303f48(void)
   temp_v6 = g_mapEnemy;
   temp_v0 = gameFlagsGetBlock();
   DAT_005f17f0 = 0x3c;
-  temp_v1 = dataTable2eSub3FindByKeyPair(g_gameState,DAT_005f1600);
+  temp_v1 = dataTable2eSub3FindByKeyPair(g_gameState.mapId,DAT_005f1600);
   DAT_005f18a0 = 0x1e;
   DAT_005f18a4 = 3500.0f;
   DAT_005f18a8 = 0x44fa0000;
@@ -166,7 +165,7 @@ void FUN_00303f48(void)
   DAT_005f18bc = 4;
   DAT_005f18be = 4;
   DAT_005f18bf = 0;
-  if (g_gameState == 0x18) {
+  if (g_gameState.mapId == 0x18) {
     DAT_005f18bf = 3;
   }
   if (temp_v1 != 0) {

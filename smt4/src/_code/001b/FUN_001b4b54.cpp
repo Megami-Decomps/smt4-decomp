@@ -1,9 +1,9 @@
 /* NON_MATCHING: visible-node flag clear uses r1/r0 instead of retail r0/r1. */
 #include "map/SingleModelState.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern MapSingleModelWork *g_mapModelWork;
-extern GameState g_gameState;
 void nodeSetTranslation(NodeEnableResource *, s32, const MapVector *);
 void modelPartSetRotationDegrees(NodeEnableResource *, s32, f32, f32, f32);
 void modelSelectPrimaryMotion(NodeEnableResource *, u32, f32);
@@ -14,7 +14,7 @@ void FUN_001b4b54(void)
     MapSingleModelState *state = &g_mapModelWork->model;
     if (state && state->node) {
         NodeEnableNode *node = state->node;
-        if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+        if (g_gameState.loading) {
             if (!(node->flags & 2)) {
                 node->flags |= 2;
                 node->resource->target->enabled = 0;

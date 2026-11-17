@@ -5,7 +5,7 @@
 struct FlaggedEntry;
 struct ScrollSelectionOwner;
 struct Slot;
-struct Content00470080;
+struct AocSystemA;
 struct Entry00470080;
 extern "C" {
 
@@ -30,6 +30,6 @@ u32 gameCountersGetWord(s32 index);
 
 Slot * saveSlotFindById(u32 id);
 
-Entry00470080 * contentEntryGetFromFilesByKind(Content00470080 *content, s32 slot, s32 index);
+Entry00470080 * contentEntryGetFromFilesByKind(AocSystemA *system, s32 slot, s32 index);
 
 } /* extern "C" */

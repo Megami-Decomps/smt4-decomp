@@ -1,5 +1,6 @@
 /* NON_MATCHING: complete rewrite; only VFP/GPR allocation and scheduling differ (retail keeps x/y in s16/s17 and the hoisted constants in s18-s24, loads the zero for indicatorShown with a fresh mov, and tests `hidden` before loading the distance). */
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -34,19 +35,11 @@ typedef struct EnemyList {
     /* 0x34 */ EnemySlot slots[0x28];
 } EnemyList;
 
-/* The two flags at +0x20 / +0x21 of the global game state. */
-typedef struct GameStateFlags {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s8 blocked;
-    /* 0x21 */ u8 paused;
-} GameStateFlags;
-
 void FUN_0019af70(u32 firstA, u32 firstB, u32 secondA, u32 secondB, f32 x, f32 y, f32 width, f32 height,
                   f32 u0, f32 v0, f32 u1, f32 v1, f32 depth);
 s32 mapRenderApplyPrimary(void);
 
 extern EnemyList *g_mapEnemy;
-extern GameStateFlags g_gameState;
 
 static __inline s32 floatBits(f32 value)
 {
@@ -64,7 +57,7 @@ void FUN_002b6cb0(void)
 {
     EnemyList *list = g_mapEnemy;
     if (list != NULL && list->mode == 8) {
-        if (g_gameState.blocked == 0 && g_gameState.paused == 0) {
+        if (g_gameState.unk020 == 0 && g_gameState.paused == 0) {
             const f32 u1 = 0.328125f;
             const f32 v1 = 0.65625f;
             s32 i;

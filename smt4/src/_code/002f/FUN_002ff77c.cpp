@@ -3,13 +3,9 @@
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
-
-typedef struct ItemRecord {
-    /* 0x00 */ u8 unk00[0x23];
-    /* 0x23 */ u8 kind;
-} ItemRecord;
 
 typedef struct DevilRecord {
     /* 0x00 */ u8 unk00[0x3C];
@@ -20,7 +16,6 @@ typedef struct DevilRecord {
 
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern ItemRecord *dataTable40FindById(u16 id);
 extern DevilRecord *devilGetRecord(u16 id);
 extern u32 btlEntryHasCategoryThreeSkill(const BtlEntry *entry);
 extern u32 scrGetArg(u32 index);
@@ -31,16 +26,16 @@ static __inline u32 entryHasKindThreeItem(const BtlEntry *entry)
 {
     if (entry->equipA != NULL) {
         for (s32 j = 0; j < 8; j++) {
-            const ItemRecord *item = dataTable40FindById(entry->equipA->items[j]);
-            if (item != NULL && item->kind == ITEM_KIND_3) {
+            const Table04Record *item = dataTable40FindById(entry->equipA->items[j]);
+            if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }
         }
     }
     if (entry->equipB != NULL) {
         for (s32 j = 0; j < 8; j++) {
-            const ItemRecord *item = dataTable40FindById(entry->equipB->items[j]);
-            if (item != NULL && item->kind == ITEM_KIND_3) {
+            const Table04Record *item = dataTable40FindById(entry->equipB->items[j]);
+            if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }
         }
@@ -49,8 +44,8 @@ static __inline u32 entryHasKindThreeItem(const BtlEntry *entry)
         DevilRecord *devil = devilGetRecord(entry->id);
 
         for (s32 j = 0; j < 8; j++) {
-            const ItemRecord *item = dataTable40FindById(devil->items[j]);
-            if (item != NULL && item->kind == ITEM_KIND_3) {
+            const Table04Record *item = dataTable40FindById(devil->items[j]);
+            if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }
         }

@@ -28,7 +28,7 @@ void FUN_00185e84(u32 id, s32 x, s32 y, s32 depth, s32 showUpgrade, s32 adjustme
         if (idIsAbove400(id))
             sprite = 0x419;
         else {
-            const Table04Record *record = dataTable04FindById(id);
+            const Table04RecordA *record = dataTable04FindById(id);
             sprite = record == NULL ? 1000 : requestKindToId(record->properties & 0x1F);
         }
     }

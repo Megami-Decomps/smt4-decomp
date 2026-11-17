@@ -1,16 +1,17 @@
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
 extern AocDisplay *g_aocDisplay;
 
-AocPackageFile *packageFindFileByTypeAndId(AocSystem *system, s32 kind, s32 id, char *path);
+AocPackageFile *packageFindFileByTypeAndId(AocSystemA *system, s32 kind, s32 id, char *path);
 void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *destination,
     u32 *output, u32 mode, u32 bytes, void *context);
 
-static __inline void formatAndQueueAocRecord(AocSystem *system, s32 kind, s32 id,
+static __inline void formatAndQueueAocRecord(AocSystemA *system, s32 kind, s32 id,
     void **output, const char *destination)
 {
     char path[128];
@@ -22,7 +23,7 @@ static __inline void formatAndQueueAocRecord(AocSystem *system, s32 kind, s32 id
 }
 
 /* Fills a request of kind 12 for the add-on content and, when it is accepted, hands it to the display. */
-void aocQueueType0c(AocSystem *system, s32 id, void **output, const char *destination)
+void aocQueueType0c(AocSystemA *system, s32 id, void **output, const char *destination)
 {
     formatAndQueueAocRecord(system, 12, id, output, destination);
 }

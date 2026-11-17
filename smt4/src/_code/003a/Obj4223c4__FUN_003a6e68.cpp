@@ -3,7 +3,7 @@
 #include "classes/Obj422594.h"
 #include "shard/MessageIdList.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
 #include <stddef.h>
 #include "status/StatusCamera.h"
 

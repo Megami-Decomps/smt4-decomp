@@ -19,7 +19,6 @@ struct BtlUnitView {
 }
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 extern u32 g_btlScriptUnit;
 PartyDamageSlotsIV *gameGetSlotTable();
 s32 appGetRemainingCapacity(u16 item);
@@ -45,16 +44,16 @@ void FUN_0026d144(void *selection, s32 stockOnly)
         scripted = extra != NULL && extra->kind == 8;
     }
     if (!scripted) {
-        if (panel->pendingSelection.selection < 0) {
+        if (panel->selection < 0) {
             partyWidgetSetCost(panel->characters[0], -FUN_0029a9d4(panel->previewItem, 1));
         } else {
             for (s32 i = 0; i < 3; i++) {
-                if (slots->active[i] == panel->pendingSelection.selection) {
+                if (slots->active[i] == panel->selection) {
                     partyWidgetSetCost(panel->characters[i + 1], -appGetRemainingCapacity(panel->previewItem));
                 }
             }
             for (s32 i = 0; i < 24; i++) {
-                if (panel->previewUnits[i].packedIndex == panel->pendingSelection.selection) {
+                if (panel->entries[i].packedIndex == panel->selection) {
                     partyWidgetSetCost(panel->demons[i], -appGetRemainingCapacity(panel->previewItem));
                 }
             }
@@ -62,11 +61,11 @@ void FUN_0026d144(void *selection, s32 stockOnly)
     }
 
     if (stockOnly) {
-        if (panel->unk42) {
+        if (panel->alternate) {
             index = objectPartRunUnlessLocked(selection);
             index += listCursorGetRowIfUnblocked(selection) * 4;
         } else {
-            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->unk2C * 12;
+            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
             index += objectPartRunUnlessLocked(selection);
         }
     } else {
@@ -78,21 +77,21 @@ void FUN_0026d144(void *selection, s32 stockOnly)
             } else {
                 unit = -1;
             }
-            FUN_002621b4(panel->pendingSelection.selection, unit, panel->previewItem, &value);
+            FUN_002621b4(panel->selection, unit, panel->previewItem, &value);
             partyWidgetSetValue(panel->characters[index], value);
             FUN_00298d28(value, partyWidgetGetCost(panel->characters[index]));
             return;
         }
-        if (panel->unk42) {
+        if (panel->alternate) {
             index = objectPartRunUnlessLocked(selection);
             index += listCursorGetRowIfUnblocked(selection) * 4;
         } else {
-            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->unk2C * 12;
+            index = listCursorGetRowIfUnblocked(selection) * 4 + panel->page * 12;
             index += objectPartRunUnlessLocked(selection);
         }
         index -= 4;
     }
-    FUN_002621b4(panel->pendingSelection.selection, panel->previewUnits[index].packedIndex,
+    FUN_002621b4(panel->selection, panel->entries[index].packedIndex,
                  panel->previewItem, &value);
     partyWidgetSetValue(panel->demons[index], value);
     FUN_00298d28(value, partyWidgetGetCost(panel->demons[index]));

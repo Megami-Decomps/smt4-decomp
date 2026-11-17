@@ -1,28 +1,20 @@
-#include "common.h"
+#include "addon/AocPackage.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-typedef struct Effect {
-    /* 0x00 */ u8 unk00[0x45];
-    /* 0x45 */ u8 active;
-    /* 0x46 */ u8 unk46[2];
-    /* 0x48 */ void *target;
-} Effect;
+void *dataTableFileGetTable(void *file, u32 section);
 
-int dataTableFileGetTable(void *target, int arg);
-int dataTableGetEntries(void);
-
-/* If the effect is active and has a target, releases the target and returns dataTableGetEntries(); otherwise returns 0. */
-int packageEntryGetDirectory(Effect *effect)
+/* The package's directory entries: section 0 of its directory file, or NULL when the directory is not loaded. */
+AocPackageDirectoryEntry *packageEntryGetDirectory(AocPackage *package)
 {
-    if (effect->active == 0) {
-        return 0;
+    if (package->directoryLoaded == 0) {
+        return NULL;
     }
-    if (effect->target == NULL) {
-        return 0;
+    if (package->directoryFile == NULL) {
+        return NULL;
     }
-    dataTableFileGetTable(effect->target, 0);
-    return dataTableGetEntries();
+    return (AocPackageDirectoryEntry *)dataTableGetEntries(dataTableFileGetTable(package->directoryFile, 0));
 }
 
 } /* extern "C" */

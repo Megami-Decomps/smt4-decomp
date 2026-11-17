@@ -10,7 +10,7 @@ s32 FUN_0027d8c8(void)
 {
     s32 result;
 
-    if (g_gameDataBlocks.saveBlock->unk1F4DC != 0) {
+    if (g_gameDataBlocks.saveBlock->body.unk1F454 != 0) {
         return 1;
     }
     result = gameFlagIsSet(0x528);

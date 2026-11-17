@@ -2,6 +2,7 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "addon/AocSystem.h"
 
 struct SpriteMetadata {
     u16 id;
@@ -39,7 +40,6 @@ struct SpriteDescriptor {
 };
 struct Table02Sub2Entry;
 extern "C" {
-extern AocSystem *g_aocSystem;
 SpriteMetadata *aocEntryFind(void *, u32);
 Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *, u32);
 

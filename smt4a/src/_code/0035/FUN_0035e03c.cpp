@@ -1,9 +1,11 @@
 /* NON_MATCHING: block layout and stack frame differ (retail places the effect-12 halving block after the effect-11 scan and keeps the scan's unprotected flag in a stack slot) */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "mapnavi/naviMain.h"
 
 #include "code/Code002e.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/Table04Record.h"
 /* The player's record (only the fields used here). */
 struct EffectPlayer {
     /* 0x00 */ u8 unk00[0x2c];
@@ -42,17 +44,9 @@ struct ItemEffect {
     /* 0x68 */ u32 flags;
 };
 
-/* A skill record's flag word. */
-struct EffectSkill {
-    /* 0x00 */ u8 unk00[0x44];
-    /* 0x44 */ u32 flags;
-};
-
 extern "C" {
-extern s32 g_gameState;
 EffectUnit *gameGetSlotRecord(s32 slot);
 u32 randRange(u32 range);
-EffectSkill *dataTable41FindById(u16 id);
 void playerGetWords(u16 *words, s32 index);
 void playerMaskSetBit(u32 bit);
 void halves34Copy(EffectUnit *unit, u16 *words);
@@ -95,7 +89,7 @@ u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
                 if (hasBit == 0) {
                     bool unprotected = true;
                     for (s32 i = 0; i < 8; i++) {
-                        EffectSkill *skill = dataTable41FindById(words[i]);
+                        Table04ExtraRecord *skill = dataTable41FindById(words[i]);
                         if (skill != NULL && (skill->flags & 0x400000) != 0) {
                             unprotected = false;
                             break;
@@ -149,7 +143,7 @@ u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
     }
 
     if (effect->id == 0x79f) {
-        result = g_gameState == 24 ? 0 : 1;
+        result = g_gameState.mapId == 24 ? 0 : 1;
     }
     if (effect->id == 0x7af) {
         result = 0;

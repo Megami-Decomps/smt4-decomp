@@ -1,5 +1,7 @@
 /* NON_MATCHING: r5/r6 swap between the slot pointer and its id; layout and logic match. */
 #include "common.h"
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
 
 extern "C" {
 
@@ -11,39 +13,27 @@ typedef struct ItemSlot {
     /* 0x2 */ u16 unk2_10 : 6;
 } ItemSlot;
 
-typedef struct ItemRecord {
-    /* 0x00 */ u8 unk00[0x78];
-    /* 0x78 */ s32 price;
-} ItemRecord;
-
-typedef struct EquipRecord {
-    /* 0x00 */ u8 unk00[0x9C];
-    /* 0x9C */ s32 price;
-} EquipRecord;
-
 u32 aocEntryGetKind(u32 id);
-ItemRecord *dataTable08Sub1GetRecord(u32 id);
-EquipRecord *dataTable08Sub2GetRecord(u32 id);
 u8 FUN_002973ec(void);
 
 static s32 itemGetPrice(u32 id)
 {
-    ItemRecord *item = dataTable08Sub1GetRecord(id);
+    ConsumableRecord *item = dataTable08Sub1GetRecord(id);
 
     if (item == NULL) {
         return 99999999;
     }
-    return item->price;
+    return item->buyPrice;
 }
 
 static s32 equipGetPrice(u32 id)
 {
-    EquipRecord *equip = dataTable08Sub2GetRecord(id);
+    EquipmentRecord *equip = dataTable08Sub2GetRecord(id);
 
     if (equip == NULL) {
         return 99999999;
     }
-    return equip->price;
+    return equip->buyPrice;
 }
 
 /* Return the slot's item price, scaled by its discount and tripled in mode 2. */

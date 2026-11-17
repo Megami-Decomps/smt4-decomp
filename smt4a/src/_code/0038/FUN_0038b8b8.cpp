@@ -3,11 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "gamedata/Table04Record.h"
-
-struct TableRecord {
-    /* 0x00 */ u8 unk00[0x32];
-    /* 0x32 */ u16 entry;
-};
+#include "gamedata/ConsumableRecordA.h"
 
 struct TableEntry {
     /* 0x00 */ u8 unk00[0x28];
@@ -24,8 +20,6 @@ typedef char BattleCandidateStateSizeCheck[sizeof(BattleCandidateState) == 0x4e6
 
 extern "C" {
 
-
-TableRecord *dataTable8FindRecord(u16 id);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 
@@ -43,7 +37,7 @@ u32 FUN_0038b8b8(void)
                 for (s32 slot = 0; slot < 21; slot++) {
                     if (group == record->encodedStats.values[slot] >> 10) {
                         for (const u16 *id = state->idsBegin; id != state->idsEnd; id++) {
-                            TableEntry *entry = (TableEntry *)dataTable04FindById(dataTable8FindRecord(*id)->entry);
+                            TableEntry *entry = (TableEntry *)dataTable04FindById(dataTable8FindRecord(*id)->skillId);
                             if (entry != NULL && (entry->flags << 16) >> 27 == slot) {
                                 scrSetResult(1);
                                 return 1;

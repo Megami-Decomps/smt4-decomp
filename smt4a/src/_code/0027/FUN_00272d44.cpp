@@ -1,5 +1,6 @@
 /* NON_MATCHING: getter ldr r0,[r0,#4] (game-state submode) compiled in the same multifile run (r1 live across it); getter not in image. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "gamedata/FlagBitTests.h"
 
 struct AreaEventRecord {
@@ -8,8 +9,6 @@ struct AreaEventRecord {
 };
 
 extern "C" {
-
-extern GameStateA g_gameState;
 
 s32 gameFlagsTestThirdBank(void);
 AreaEventRecord *dataTable02FindConditionalMapRecord(s32 mode, s32 submode);
@@ -20,9 +19,9 @@ s32 randRange(u32 max);
 /* Returns the one-time event flag of the current area in modes 28-31, or 0. */
 static __inline s32 areaEventFlag(void)
 {
-    s32 flag = g_gameState.submode;
+    s32 flag = g_gameState.areaId;
 
-    switch (g_gameState.mode) {
+    switch (g_gameState.mapId) {
     case 28:
         return flag;
     case 29:
@@ -50,10 +49,10 @@ s32 FUN_00272d44(void)
     if (gameFlagsTestThirdBank() != 0) {
         return 0;
     }
-    if (flagsBit7Get(g_gameState.mode, g_gameState.submode) == 0) {
+    if (flagsBit7Get(g_gameState.mapId, g_gameState.areaId) == 0) {
         return 0;
     }
-    record = dataTable02FindConditionalMapRecord(g_gameState.mode, g_gameState.submode);
+    record = dataTable02FindConditionalMapRecord(g_gameState.mapId, g_gameState.areaId);
     if ((s32)partyGetAverageLevel(2) >= record->threshold) {
         return 0;
     }

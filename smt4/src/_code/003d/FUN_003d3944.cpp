@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc merges the three battle-flag tests into one `tst #324` where retail keeps tst/tsteq/tsteq, shares the table-40 lookup between the unit kinds differently, and uses r6 instead of r7 for the zero constant (retail also saves r3 and r8/r9). */
 #include "common.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/ConsumableRecord.h"
 
 #define BTL_FLAG_SKIP_BGM_KIND 0x00000004ull
 #define BTL_FLAG_FIXED_ENCOUNTER 0x00000040ull
@@ -70,12 +71,6 @@ struct Table40Record {
     /* 0x57 */ u8 musicKind;
 };
 
-/* A record of data table 8 sub-table 1 (observed field). */
-struct Table08Record {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 table40Id;
-};
-
 struct BtlMainFlags {
     /* 0x000 */ u8 unk000[0x634];
     /* 0x634 */ u32 flags;
@@ -88,7 +83,6 @@ extern u32 DAT_00435d18;
 
 void FUN_002569ac(BtlMainState **battle, u32 value);
 void btlEntryValuesCopy(BtlMainState **battle, BtlSetupEntry *entry);
-Table08Record *dataTable08Sub1GetRecord(s32 id);
 void entryInvalidateStateTable(BtlMainState *state);
 void entryTableInvalidate(u32 table);
 void FUN_003da890(u32 table);
@@ -147,7 +141,7 @@ void FUN_003d3944(BtlMainState **battle, BtlSetupEntry *entry, u32 unused3, u32 
             if (entry->unit->kind == 2 || entry->unit->kind == 3) {
                 chooseMusicKind(entry, entry->unit->id);
             } else if (entry->unit->kind == 8) {
-                s32 id = dataTable08Sub1GetRecord(entry->unit->id)->table40Id;
+                s32 id = dataTable08Sub1GetRecord(entry->unit->id)->skillId;
 
                 if (id != 0) {
                     chooseMusicKind(entry, id);

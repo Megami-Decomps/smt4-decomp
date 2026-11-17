@@ -1,5 +1,6 @@
 /* NON_MATCHING: now builds the same blocks as retail (170 vs 172 rows): block-base pointers, sprite locals and the completion getter match; only the saved-register numbering of the title/list/scene pointers and the literal-pool tail differ. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
 
@@ -27,8 +28,6 @@ struct MapScreenListBlock {
 };
 
 extern "C" {
-
-extern GameStateA g_gameState;
 
 s32 uiSpriteAdvanceAnimation(void* sprite, f32 step);
 void FUN_00167458(void* sprite, s32 arg);
@@ -76,13 +75,13 @@ void FUN_0048bdec(MapScreen* screen)
         FUN_00492ac8(reinterpret_cast<u32>(SCREEN_PTR(screen, 0x4cc)), 0);
         FUN_0048821c(screen, screen->mapIndex);
         uiSpriteSetImageKeyframe(titleSprite, 2, 0);
-        if (g_gameState.navigation.naviMapPending != 0) {
-            g_gameState.navigation.naviMapPending = 0;
+        if (g_gameState.naviMapPending != 0) {
+            g_gameState.naviMapPending = 0;
             screen->selectedMarker = *reinterpret_cast<u32*>(SCREEN_PTR(screen, 0x20510));
             *dirtyA = 1;
             *dirtyB = 1;
         } else {
-            g_gameState.navigation.naviMapPending = 1;
+            g_gameState.naviMapPending = 1;
             FUN_0048d248(screen, FUN_00492c84(SCREEN_PTR(screen, 0x4cc)));
         }
         FUN_0048a378(screen);
@@ -94,7 +93,7 @@ void FUN_0048bdec(MapScreen* screen)
             dialogClose(1);
             list->active = 0;
             FUN_0048a378(screen);
-            g_gameState.navigation.alternateNaviMap = 0;
+            g_gameState.alternateNaviMap = 0;
         }
         screen->phase = 2;
     } else if (phase == 2) {

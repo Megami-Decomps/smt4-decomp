@@ -1,10 +1,10 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
 void FUN_002c5df4(void);
 
-extern GameStateA g_gameState;
 extern struct {
     u8 unk000[0x394];
     s8 unk394;

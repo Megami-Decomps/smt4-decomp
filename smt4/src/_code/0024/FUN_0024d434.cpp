@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
 #include "code/Code0027.h"
+#include "gamedata/Table00Lookup.h"
 
 /* Find the part occupied by a listed member, or -1 when it is absent. */
 static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
@@ -21,7 +22,6 @@ struct BattleAnchorSource { u16 flags; u16 id; u32 unk04; u32 unk08; u32 parts[5
 BattleAnchorSource *btlFindEntryBlockByMemberId(BtlMainState *state, s32 index);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 member);
 const BattleVector3 *FUN_002d8cc8(void *arrangement);
-Table00Record *dataTable00FindById(u32 id);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
 
 // Calculate the battle effect anchor for an action record.
@@ -52,7 +52,7 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         position = *FUN_002d8cc8(((ArrangementView *)state)->arrangement);
         position.z += 2.0f;
         BattleAnchorSource *source = btlFindEntryBlockByMemberId(state, index);
-        u8 kind = dataTable00FindById(source->id)->arrangement.first;
+        u8 kind = dataTable00FindById(source->id)->arrangementFirst;
         f32 height = 0.0f;
         switch (kind) {
         case 0:

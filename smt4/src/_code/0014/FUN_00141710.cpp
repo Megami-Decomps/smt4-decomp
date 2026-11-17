@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the loaded-resource release; retail jumps from the kind switch into the shared release body (LAB_00141864) and keeps the slot address strength-reduced across the loop, which armcc here builds from a helper predicate and indexed slots. */
 #include "shard/W8X15_PackageList.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 
 /* A chained buffer in a loaded resource's list. */
 struct ResourceNode {

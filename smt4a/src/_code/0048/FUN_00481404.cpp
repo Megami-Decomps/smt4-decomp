@@ -1,18 +1,14 @@
 #include "common.h"
 #include "shard/ItemStackLimit.h"
+#include "gamedata/ConsumableRecordA.h"
 
 struct EntryCategory {
     u32 firstId;
     u32 lastId;
     u8 type; // 0x08
 };
-struct FlaggedTableEntry {
-    u8 unk00[0x68];
-    u32 flags; // 0x68
-};
 
 extern "C" {
-FlaggedTableEntry *dataTable8FindRecord(u16);
 
 // Test the first entry flag only for the two supported entry categories.
 bool FUN_00481404(u16 id)
@@ -24,7 +20,7 @@ bool FUN_00481404(u16 id)
     if (category->type != 1 && category->type != 12) {
         return false;
     }
-    FlaggedTableEntry *entry = dataTable8FindRecord(id);
+    ConsumableRecordA *entry = dataTable8FindRecord(id);
     if (entry == NULL) {
         return false;
     }

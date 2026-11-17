@@ -1,21 +1,13 @@
 /* NON_MATCHING: close: armcc rewrites the 999 clamps as cmp #1000 (retail compares against a register-held 999), the equipment switch has no default in retail, and the parameter-block copy is 16 bytes in retail (built also spills a second block); register assignment differs */
 #include "gamedata/PlayerInitialization.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/EquipmentRecord.h"
 
 /* Hit points, magic points and the five stats as stored back to back. */
 struct StatBlock {
     u16 hp;
     u16 mp;
     s16 stats[5];
-};
-
-/* An equipment record of data table 8, section 2; only the stat bonuses are named. */
-struct EquipRecord {
-    /* 0x00 */ u8 unk00[0x61];
-    /* 0x61 */ s8 statBonus[5];
-    /* 0x66 */ u16 hpBonus;
-    /* 0x68 */ u16 mpBonus;
-    /* 0x6A */ u16 extra;
 };
 
 /* The growth parameters data table 9 supplies. */
@@ -40,7 +32,6 @@ struct StatLimits {
 
 extern "C" {
 
-EquipRecord *dataTable08Sub2GetRecord(u32 id);
 void FUN_003c1e50(GrowthParameters *info);
 void FUN_003c1ab4(s32 level, GrowthValues *output, const GrowthParameters *parameters);
 void FUN_002dada4(StatBlock *stats, const StatLimits *limits, s32 mode);
@@ -84,7 +75,7 @@ void playerRecalcStatsFromEquipment(PlayerInitialRecordIV *player)
     GrowthParameters parameters;
     GrowthParameters parametersCopy;
     StatLimits limits;
-    EquipRecord *record;
+    EquipmentRecord *record;
 
     if (player == NULL) {
         player = reinterpret_cast<PlayerInitialRecordIV *>(gameGetPlayerData());
@@ -119,7 +110,7 @@ void playerRecalcStatsFromEquipment(PlayerInitialRecordIV *player)
     player->maximumHp += hpBonus;
     player->maximumMp += mpBonus;
     record = dataTable08Sub2GetRecord(player->equipment[6]);
-    limits.equipExtra = record != NULL ? record->extra : 0;
+    limits.equipExtra = record != NULL ? record->modifierId : 0;
     FUN_002dada4(current, &limits, 9);
     player->hp = (s16)player->hp <= (s16)current->hp ? player->hp : current->hp;
     player->mp = (s16)player->mp <= (s16)current->mp ? player->mp : current->mp;

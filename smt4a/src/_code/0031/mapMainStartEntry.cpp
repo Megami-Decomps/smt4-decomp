@@ -1,4 +1,5 @@
 #include "map/mapMain.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ void scrScriptProcessStartEntry(u32 job, u32 value);
 u32 tableGroupFindEntryIndex(u32 a, u32 b);
 
 extern MapMainA *g_mapMain;
-extern GameStateA g_gameState;
 
 void mapMainStartEntry(u32 value)
 {

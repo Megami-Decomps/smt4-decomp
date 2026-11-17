@@ -1,22 +1,20 @@
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-
-struct LargeWorkState;
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern LargeWorkState *g_aocSystem;
 void *largeWorkStateInitialize(void *memory);
 
-// Creates the shared 0x450-byte work state once.
+// Creates the add-on content system once.
 void FUN_0010707c(void)
 {
     if (g_aocSystem != NULL) {
         return;
     }
-    void *memory = asdOperatorNew(0x450);
+    void *memory = asdOperatorNew(sizeof(AocSystem));
     if (memory != NULL) {
         memory = largeWorkStateInitialize(memory);
     }
-    g_aocSystem = static_cast<LargeWorkState *>(memory);
+    g_aocSystem = static_cast<AocSystem *>(memory);
 }
 }

@@ -32,7 +32,7 @@ void FUN_00241d58(Obj *obj);
 
 void bufferObjDestroy(Obj *obj);
 
-DataEntry * FUN_0024ad14(u32 index);
+struct Table2dSection2Record *FUN_0024ad14(u32 index);
 
 f32 shiftRandomNextFraction(ShiftRandomState* state);
 

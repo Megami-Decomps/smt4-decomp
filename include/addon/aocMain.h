@@ -55,59 +55,6 @@ typedef struct AocJobWork {
     /* 0x4510 */ u32 waitHandle;
 } AocJobWork;
 
-/* One entry of the content table: an id and 0x50 bytes of data. */
-typedef struct AocEntry {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ u8 data[0x50];
-} AocEntry;
-
-/* The content system's block (Shin Megami Tensei IV layout). */
-typedef struct AocSystem {
-    /* The request waiting on the content system (_ZN9AocSystem17getPendingRequestEv). */
-    RequestParameters getPendingRequest();
-
-    /* 0x000 */ union {
-        /* 0x000 */ u8 unk000[0x38C];
-        struct {
-            /* 0x000 */ u8 unk000[0x310];
-            s32 count; /* 0x310 */
-            /* 0x314 */ u32 unk314;
-            struct AocPackage *entries; /* 0x318 */
-            /* 0x31C */ u8 unk31c[0x70];
-        } packages;
-        struct {
-            /* 0x000 */ u8 unk000[0x35C];
-            /* 0x35C */ u32 count;
-            /* 0x360 */ struct DevilRecord *records;
-            /* 0x364 */ u8 unk364[0x28];
-        } devils;
-        struct {
-            /* 0x000 */ u8 unk000[0x364];
-            /* 0x364 */ u32 count;
-            /* 0x368 */ struct Table00Record *records;
-            /* 0x36C */ u8 unk36C[0x20];
-        } table00;
-        struct {
-            /* 0x000 */ u8 unk000[0x368];
-            /* 0x368 */ u32 enabled;
-            /* 0x36C */ u8 unk36C[8];
-            /* 0x374 */ struct AocLookupRecord *entries;
-            /* 0x378 */ u32 count;
-            /* 0x37C */ u8 unk37C[0x10];
-        } lookup;
-
-        struct {
-            /* 0x000 */ u8 unk000[0x384];
-            /* 0x384 */ u32 count;
-            /* 0x388 */ struct AocTableSearchRecord *records;
-        } table;
-    };
-    /* 0x38C */ u32 entryCount;
-    /* 0x390 */ AocEntry *entries;
-    /* 0x394 */ u32 questCount;
-    /* 0x398 */ struct QuestRecord *quests;
-} AocSystem;
-
 /* A step of the AOC boot, as the step function sees its owner. */
 typedef struct AocStep {
     /* 0x00 */ u8 unk00[0x28];
@@ -122,65 +69,6 @@ typedef struct AocRequest {
     /* 0x0C */ u32 idB;
     /* 0x10 */ s32 enabled;
 } AocRequest;
-
-/* One entry of the content table in Apocalypse: an id and 0x40 bytes of data. */
-typedef struct AocEntryA {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ u8 data[0x40];
-} AocEntryA;
-
-/* The content system's block (Apocalypse layout). */
-typedef struct AocSystemA {
-    /* The request waiting on the content system (_ZN10AocSystemA17getPendingRequestEv). */
-    RequestParameters getPendingRequest();
-
-    union {
-        struct {
-            /* 0x000 */ u8 unk000[0x310];
-            /* 0x310 */ s32 count;
-            /* 0x314 */ u32 unk314;
-            /* 0x318 */ struct AocPackage *entries;
-        } packages;
-        struct {
-            /* 0x000 */ u8 unk000[0x35C];
-            /* 0x35C */ u32 count;
-            /* 0x360 */ struct DevilRecord *records;
-            /* 0x364 */ u8 unk364[0x28];
-        } devils;
-        /* 0x000 */ u8 unk000[0x38C];
-        struct {
-            /* 0x000 */ u8 unk000[0x384];
-            /* 0x384 */ u32 count;
-            /* 0x388 */ struct AocTableSearchRecordA *records;
-        } table;
-        struct {
-            /* 0x000 */ u8 unk000[0x364];
-            /* 0x364 */ u32 count;
-            /* 0x368 */ struct Table00Record *records;
-            /* 0x36C */ u8 unk36C[0x20];
-        } table00;
-        struct {
-            /* 0x000 */ u8 unk000[0x368];
-            /* 0x368 */ u32 enabled;
-            /* 0x36C */ u8 unk36C[8];
-            /* 0x374 */ struct AocLookupRecord *entries;
-            /* 0x378 */ u32 count;
-            /* 0x37C */ u8 unk37C[0x10];
-        } lookup;
-
-    };
-    /* 0x38C */ u32 entryCount;
-    /* 0x390 */ AocEntryA *entries;
-} AocSystemA;
-
-typedef struct AocPackageOwner {
-    /* 0x00000 */ u8 unk00000[0x310];
-    /* 0x00310 */ u32 unk310;
-    /* 0x00314 */ u32 unk314;
-    /* 0x00318 */ void * handle;
-    /* 0x0031C */ u8 unk0031C[0x34];
-    /* 0x00350 */ u32 unk350;
-} AocPackageOwner;
 
 struct AocTrackId {
     /* 0x00 */ u32 group;
@@ -206,10 +94,9 @@ struct AocJobStateA {
     /* 0x04 */ u8 started;
 };
 
-typedef char AocSystemLayoutCheck[sizeof(AocSystem) == 0x39C && sizeof(AocSystemA) == 0x394 && sizeof(AocMain) == 0x758 ? 1 : -1];
+typedef char AocMainLayoutCheck[sizeof(AocMain) == 0x758 ? 1 : -1];
 
-typedef char AocSystemOffsets[offsetof(AocSystem, devils.count) == 0x35C && offsetof(AocSystem, table00.count) == 0x364 && offsetof(AocSystem, lookup.entries) == 0x374 && offsetof(AocSystem, table.count) == 0x384 && offsetof(AocSystemA, table00.records) == 0x368 && offsetof(AocSystemA, table.count) == 0x384 && offsetof(AocMusicJob, current) == 0x3C ? 1 : -1];
-typedef char AocSystemAPackagesOffsets[offsetof(AocSystemA, packages.count) == 0x310 && offsetof(AocSystemA, packages.entries) == 0x318 ? 1 : -1];
+typedef char AocMusicJobOffsets[offsetof(AocMusicJob, current) == 0x3C ? 1 : -1];
 
 extern "C" {
 u32 FUN_00270a70(void);
@@ -236,14 +123,5 @@ s32 packageKindToRecordKind(s32 kind);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-u8 *aocFindPackageTable22Record(AocSystem *system, s32 id);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

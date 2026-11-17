@@ -2,6 +2,8 @@
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/PartyMoney.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/ConsumableRecordA.h"
 
 /* An item stack: its id and flags (bit 1: priced by a percentage in bits 2..9). */
 struct ItemStack {
@@ -19,23 +21,12 @@ struct ItemStack {
 typedef char ItemStackLayoutCheck[
     sizeof(ItemStack) == 4 && offsetof(ItemStack, flags) == 2 ? 1 : -1];
 
-/* The price fields of the two record kinds. */
-struct ItemRecord {
-    /* 0x00 */ u8 unk00[0x4C];
-    /* 0x4C */ s32 buyPrice;
-    /* 0x50 */ s32 sellPrice;
-    /* 0x54 */ u8 unk54[0x20];
-    /* 0x74 */ s32 equipBuyPrice;
-    /* 0x78 */ s32 equipSellPrice;
-};
 struct AocRecord {
     /* 0x00 */ u8 unk00[0x2C];
     /* 0x2C */ s32 sellPrice;
 };
 
 extern "C" {
-ItemRecord *dataTable8FindRecord(u32 id);
-ItemRecord *dataTable08Sub2GetRecord(u32 id);
 AocRecord *aocRecordLookup84(u32 id);
 u32 aocEntryGetKind(u32 id);
 s32 gameDataBlocksGetTableFlag(void);
@@ -70,7 +61,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         switch (aocEntryGetKind(id)) {
         case 1:
         case 12: {
-            ItemRecord *record = dataTable8FindRecord(id);
+            ConsumableRecordA *record = dataTable8FindRecord(id);
             if (record == NULL)
                 price = PRICE_MISSING;
             else
@@ -84,11 +75,11 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         case 6:
         case 7:
         case 8: {
-            ItemRecord *record = dataTable08Sub2GetRecord(id);
+            EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
             if (record == NULL)
                 price = PRICE_MISSING;
             else
-                price = record->equipSellPrice;
+                price = record->sellPrice;
             break;
         }
         case 10: {
@@ -111,7 +102,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         switch (aocEntryGetKind(id)) {
         case 1:
         case 12: {
-            ItemRecord *record = dataTable8FindRecord(id);
+            ConsumableRecordA *record = dataTable8FindRecord(id);
             price = record != NULL ? record->buyPrice : PRICE_MISSING;
             if (id == 0x7B2)
                 price = 1000000;
@@ -124,8 +115,8 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         case 6:
         case 7:
         case 8: {
-            ItemRecord *record = dataTable08Sub2GetRecord(id);
-            price = record == NULL ? PRICE_MISSING : record->equipBuyPrice;
+            EquipmentRecordA *record = dataTable08Sub2GetRecord(id);
+            price = record == NULL ? PRICE_MISSING : record->buyPrice;
             break;
         }
         }

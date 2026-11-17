@@ -1,6 +1,7 @@
 #include "classes/Obj4222ac.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "game/GameState.h"
 
 struct Obj4222acTransition {
     u8 unk00[0x18];
@@ -10,7 +11,6 @@ struct Obj4222acTransition {
 };
 extern "C" {
 extern Obj4222acTransition *DAT_004474f4;
-extern GameState g_gameState;
 void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
 void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
@@ -66,7 +66,7 @@ void Obj4222ac::updateMotion()
         }
         nodeSetScale(modelOf(handle)->resource, 0, scale[0], scale[1], scale[2]);
         NodeEnableNode *node = modelOf(handle);
-        if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+        if (g_gameState.loading) {
             if ((node->flags & 2) == 0) {
                 node->flags |= 2;
                 node->resource->target->enabled = 0;

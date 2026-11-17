@@ -1,5 +1,6 @@
 /* NON_MATCHING: cold initialization out of line and popup stores match; retail predicates the countdown reset (ldrle/movle/strle) before the decrement, ours branches. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 
 struct MapPopupState {
@@ -11,7 +12,6 @@ struct MapPopupState {
 
 extern "C" {
 extern MapPopupState* g_popupState;
-extern GameStateA g_gameState;
 s32 randRange(s32 maximum);
 
 s32 gameFlagIsSet(u32 flag);
@@ -23,18 +23,18 @@ void FUN_00223fac(void)
 {
     if (g_popupState->state == 0 && gameFlagStateIsOne()) {
         if (!gameFlagIsSet(0x111A)) {
-            g_gameState.popup.countdown = 0;
+            g_gameState.popupCountdown = 0;
             gameFlagSetValue(0x111A, 1, 1);
         } else {
             randRange(99);
         }
-        if (g_gameState.popup.countdown <= 0) {
-            g_gameState.popup.countdown = 5;
+        if (g_gameState.popupCountdown <= 0) {
+            g_gameState.popupCountdown = 5;
             g_popupState->timer = 0;
             g_popupState->state = 20;
             g_popupState->process = popupSelectWeightedMessage(21, 187);
         } else {
-            --g_gameState.popup.countdown;
+            --g_gameState.popupCountdown;
         }
     }
 }

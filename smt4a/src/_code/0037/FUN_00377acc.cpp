@@ -112,8 +112,8 @@ void FUN_00377acc(EnemySlotSelectionView *slot, s32 id, u32 kind)
         }
         slot->behavior = record->behavior;
         slot->packedUnit = record->packedUnit;
-        Table00Record *unit = dataTable00FindById((u16)slot->packedUnit);
-        slot->modelId = *reinterpret_cast<const u16 *>(unit->unk02) & 0x7FFF;
+        Table00RecordA *unit = dataTable00FindById((u16)slot->packedUnit);
+        slot->modelId = unit->level & 0x7FFF;
         s32 variant = FUN_004bb870(slot->behavior);
         if (variant != 0)
             slot->variant = variant;

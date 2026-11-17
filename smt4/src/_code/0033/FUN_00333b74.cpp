@@ -4,6 +4,7 @@
 #include "gamedata/DataTable.h"
 #include "util/Random.h"
 #include "gamedata/DataTableAccess.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -50,12 +51,6 @@ typedef struct LootCacheEntry {
     u8 table[0x50];
 } LootCacheEntry;
 
-typedef struct AocSystem {
-    u8 unk000[0x38C];
-    u32 lootCount;
-    LootCacheEntry *loot;
-} AocSystem;
-
 typedef char QuestRewardLayouts[
     sizeof(RewardSlot) == 12 && offsetof(QuestRewardRecord, slots) == 0x154 &&
     sizeof(LootTable) == 0x50 && offsetof(LootTable, pairs) == 0x30 &&
@@ -66,18 +61,15 @@ typedef struct PlayerLevelView {
     u8 level;
 } PlayerLevelView;
 
-extern AocSystem *g_aocSystem;
-
 QuestRewardRecord *dataTable1bOr1cGetRecord(void *quest);
 QuestRuntimeStatus *questGetRuntimeStatus(void *quest);
 PlayerLevelView *gameGetPlayerData(void);
 
-
 static __inline LootTable *questRewardFindLootTable(u16 tableId)
 {
-    if (g_aocSystem->loot != NULL) {
-        LootCacheEntry *entry = g_aocSystem->loot;
-        u32 count = g_aocSystem->lootCount;
+    if (g_aocSystem->entries != NULL) {
+        LootCacheEntry *entry = (LootCacheEntry *)g_aocSystem->entries;
+        u32 count = g_aocSystem->entryCount;
         for (u32 index = 0; index < count; ++index, ++entry) {
             if (entry->key == tableId) {
                 return reinterpret_cast<LootTable *>(entry->table);

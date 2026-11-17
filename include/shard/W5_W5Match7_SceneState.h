@@ -83,7 +83,6 @@ typedef char LmapSceneEntryOffsetsCheck[offsetof(LmapScene, entry.entryMode) == 
 
 extern "C" {
 extern MapEntry g_mapEntries[];
-extern GameStateA g_gameState;
 extern MapGimic *g_mapGimic;
 extern LmapScene *g_lmapScene;
 }

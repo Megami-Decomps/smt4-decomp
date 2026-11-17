@@ -1,9 +1,9 @@
 #include "gamedata/ConditionalMessageRecord.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 s32 gameFlagIsSet(s32 flag);
 }
 

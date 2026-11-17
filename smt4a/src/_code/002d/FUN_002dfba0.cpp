@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dfba0` (_code @ 0x2dfba0, 0x7dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -57,7 +58,6 @@ extern int DAT_00581044; /* 0x581044 */
 extern float DAT_00581048; /* 0x581048 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f1a4e; /* 0x5f1a4e */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -81,7 +81,6 @@ extern int gameFlagsGetBlock(void);
 extern int lmapMainIsAtLeastHalf(void);
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-
 
 /* WARNING: Removing unreachable block (ram,0x002e0104) */
 /* WARNING: Removing unreachable block (ram,0x002dfed0) */
@@ -170,7 +169,7 @@ void FUN_002dfba0(void)
     temp_v18 = 0.017453292f;
     temp_v16 = 100.0f;
     temp_v17 = 0.5f;
-    if (g_gameState >= 100) {
+    if (g_gameState.mapId >= 100) {
       temp_v2 = lmapMainIsAtLeastHalf();
       if (temp_v2 == 0) {
         return;
@@ -233,7 +232,7 @@ void FUN_002dfba0(void)
     temp_v17 = *(float *)(g_lmapView + 0x50) - temp_v13;
     __hardfp_atan2f();
     temp_v19 = 0;
-    if (g_gameState >= 100) {
+    if (g_gameState.mapId >= 100) {
       temp_v17 = temp_v17 * 57.32484f * 0.7111111f;
       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v17) << 0x1d);
       for (temp_v17 = romwright_fabs_4(temp_v17); (int)temp_v17 >= 0x47800000; temp_v17 = temp_v17 - 65536.0f) {

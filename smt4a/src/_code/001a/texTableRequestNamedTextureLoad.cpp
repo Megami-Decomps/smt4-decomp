@@ -1,9 +1,10 @@
 #include "shard/S1AsdTexTable.h"
 #include "addon/AocPackage.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-AocPackageFile *packageFindFileByTypeAndId(AocSystem *system, s32 type, s32 id, char *path);
+AocPackageFile *packageFindFileByTypeAndId(AocSystemA *system, s32 type, s32 id, char *path);
 TexTableNamedEntry *asdTMTexTableGetNode(u32 table, u32 id);
 u32 optionalWorkGetValue();
 void sysMemClear(void *buffer, u32 size);
@@ -16,7 +17,7 @@ void FUN_001b3008(AocDisplay *display, const char *packagePath, const char *text
     AocPackageFile *file);
 extern AocDisplay *g_aocDisplay;
 
-TexTableNamedEntry *texTableRequestNamedTextureLoad(AocSystem *system, u32 table, u32 id, u32 mode)
+TexTableNamedEntry *texTableRequestNamedTextureLoad(AocSystemA *system, u32 table, u32 id, u32 mode)
 {
     char texturePath[128];
     char packagePath[128];
@@ -28,8 +29,8 @@ TexTableNamedEntry *texTableRequestNamedTextureLoad(AocSystem *system, u32 table
     AocPackageFile *file = packageFindFileByTypeAndId(system, type, id, packagePath);
     if (file == NULL)
         return NULL;
-    file->texture.completion = 0;
-    file->texture.result = 0;
+    file->completion = 0;
+    file->result = 0;
     TexTableNamedEntry *entry = asdTMTexTableGetNode(table, id);
     if (entry == NULL)
         return NULL;

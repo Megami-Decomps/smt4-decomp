@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287c34` (_code @ 0x287c34, 0x474 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int asdMdlBanksReset(void);
 int FUN_0026faa4(void);
 int mapClearPendingEntries(void);
 
-extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern unsigned char DAT_0049f934; /* 0x49f934 */
@@ -267,7 +267,7 @@ void FUN_00287c34(int param_1)
   unsigned long long temp_v3;
   
   DAT_0049f924 = 0xffffffff;
-  g_gameState = 0;
+  g_gameState.mapId = 0;
   DAT_0049f920 = 3;
   DAT_0049f934 = 0;
   DAT_0049f938 = 0;

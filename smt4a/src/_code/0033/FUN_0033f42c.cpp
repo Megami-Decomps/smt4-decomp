@@ -1,36 +1,10 @@
 /* NON_MATCHING: the fade request fields are loaded and the packed colour assembled in another order and the level update is scheduled differently from retail (221 vs 226 rows); the fade behaviour is the same. */
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
-/* The screen fade request: the mode, a position, a texture, the base alpha and the colour bytes. */
-typedef struct FadeRequest {
-    s32 mode;                        /* 0: off, 1: fade out, 2: fade in, other: timed */
-    s32 x;
-    s32 y;
-    u32 texture;
-    u32 alpha;
-    s32 additive;
-    s32 red;
-    s32 green;
-    s32 blue;
-} FadeRequest;
-
-/* The game state slice the fade reads: the progress word, the dim state and the fade request. */
-typedef struct FadeGameState {
-    /* 0x000 */ s32 progress;
-    /* 0x004 */ u8 unk004[0x254];
-    /* 0x258 */ s16 dimState;
-    /* 0x25A */ u8 unk25a[2];
-    /* 0x25C */ s8 dimOverride;
-    /* 0x25D */ u8 unk25d[3];
-    /* 0x260 */ s8 blocked;
-    /* 0x261 */ u8 unk261[0x3C7];
-    /* 0x628 */ FadeRequest fade;
-} FadeGameState;
-
 extern s32 DAT_005821fc;
-extern FadeGameState g_gameState;
 
 s32 frameTextureGetState(void);
 void FUN_00348c28(s32 arg);
@@ -59,7 +33,7 @@ static __inline void approachLevel(s32 target)
  * current dim state. */
 void FUN_0033f42c(void)
 {
-    if (g_gameState.blocked != 0) {
+    if (g_gameState.departMapLoading != 0) {
         return;
     }
     s32 busy = frameTextureGetState();
@@ -86,14 +60,14 @@ void FUN_0033f42c(void)
         FUN_00348c3c(0);
         return;
     }
-    s32 state = g_gameState.dimState;
+    s32 state = g_gameState.selection;
     s32 flag = 2;
 
-    if (g_gameState.dimOverride != 0) {
+    if (g_gameState.darkZone != 0) {
         state = -2;
     }
     FUN_00348c28(1);
-    if (g_gameState.progress >= 100) {
+    if (g_gameState.mapId >= 100) {
         FUN_00283c54((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, color | alpha, 1, flag);
         FUN_00348c3c(0);
         return;

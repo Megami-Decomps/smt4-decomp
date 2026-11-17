@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameState.h"
 
 namespace {
 struct MapBlockView {
@@ -10,11 +11,6 @@ struct MapBlockView {
     /* 0x792 */ u8 option;
 };
 
-struct GameStateTableView {
-    /* 0x00 */ u8 unk00[0xa4];
-    /* 0xA4 */ s32 tableKind;
-    /* 0xA8 */ u32 recordId;
-};
 
 struct MapTableRecord0 {
     /* 0x00 */ u8 unk00[0xa];
@@ -44,7 +40,6 @@ struct MapTableRecord2 {
 
 extern "C" {
 
-extern GameStateTableView g_gameState;
 MapBlockView *gameGetMapBlock(void);
 MapTableRecord0 *dataTable2fSub0GetRecord(u32 id);
 MapTableRecord1 *dataTable2fSub1GetRecord(u32 id);

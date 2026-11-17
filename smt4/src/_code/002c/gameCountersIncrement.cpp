@@ -1,23 +1,11 @@
-#include "common.h"
-
-namespace {
-struct GameCounters {
-    /* 0x00 */ u8 unk00[0x66];
-    /* 0x66 */ u16 count;
-};
-struct GameBlocks {
-    /* 0x00 */ void *unk00;
-    /* 0x04 */ GameCounters *counters;
-};
-}
+#include "gamedata/GameSaveBlocks.h"
 
 extern "C" {
-extern GameBlocks g_gameDataBlocks;
 
 /* Increments the saved counter, clamping it to 9998. */
 void gameCountersIncrement(void)
 {
-    GameCounters *counters = g_gameDataBlocks.counters;
+    GameSaveData *counters = g_gameDataBlocks.saveBlock;
     if (counters->count < 9998) {
         counters->count++;
     }

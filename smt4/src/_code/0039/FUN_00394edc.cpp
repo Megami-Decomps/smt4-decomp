@@ -1,14 +1,14 @@
 /* Merges two inherited affinity sets, adding the adjustment of the winning state. */
 #include "gamedata/InheritedAffinities.h"
 #include "shard/W6_W6Match3_MapMarkerModels.h"
+#include "gamedata/EquipmentRecord.h"
 
 extern "C" {
-InheritedAffinityRecord *dataTable08Sub2GetRecord(u32 id);
 s32 affinityShouldReplaceState(u16 current, u32 candidate);
 
 void FUN_00394edc(const AffinitySourcePair *pair, u16 *affinities)
 {
-    InheritedAffinityRecord *sources[2] = { NULL, NULL };
+    EquipmentRecord *sources[2] = { NULL, NULL };
     if (pair->first != 0) {
         sources[0] = dataTable08Sub2GetRecord(pair->first);
     }

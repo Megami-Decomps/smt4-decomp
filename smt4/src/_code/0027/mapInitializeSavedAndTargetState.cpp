@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 struct MapMainView {
     u8 unk00[0x2c]; // 0x00
@@ -8,7 +9,6 @@ struct MapMainView {
 
 extern "C" {
 extern MapMainView *g_mapMain;
-extern GameState g_gameState;
 void mapAdjustPositionToGround(MapVector *position);
 
 // Refresh the current position and initialize both saved and target map-state snapshots.
@@ -17,17 +17,17 @@ void mapInitializeSavedAndTargetState(void)
     MapMainView *map = g_mapMain;
 
     mapAdjustPositionToGround(&g_gameState.position);
-    g_gameState.unk2F8Byte = 1;
+    g_gameState.map.savedLocationSet = 1;
     g_gameState.savedMapId = map->mapId;
     g_gameState.savedAreaId = map->areaId;
     g_gameState.savedObjectId = g_gameState.currentObjectId;
     g_gameState.savedPosition = g_gameState.position;
-    g_gameState.unk314 = g_gameState.unkA0;
-    g_gameState.unk318 = g_gameState.unkA0;
+    g_gameState.savedHeading = g_gameState.heading;
+    g_gameState.unk318 = g_gameState.heading;
     g_gameState.targetMapId = map->mapId;
     g_gameState.targetAreaId = map->areaId;
     g_gameState.targetPosition = g_gameState.position;
-    g_gameState.unk330 = g_gameState.unk90;
-    g_gameState.unk334 = g_gameState.unk90;
+    g_gameState.targetHeading = g_gameState.overviewHeading;
+    g_gameState.unk334 = g_gameState.overviewHeading;
 }
 }

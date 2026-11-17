@@ -1,18 +1,13 @@
 #include "shard/W6_W6Match8_DevilRecordA.h"
-
-struct PrimarySortRecord {
-    u32 unk00;
-    s32 key;
-};
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
-PrimarySortRecord* dataTable00FindById(u16 id);
 
 s32 FUN_004a73b8(const u16* first, const u16* second)
 {
-    const PrimarySortRecord* a = dataTable00FindById(*first);
-    const PrimarySortRecord* b = dataTable00FindById(*second);
-    s32 order = b->key - a->key;
+    const Table00RecordA* a = dataTable00FindById(*first);
+    const Table00RecordA* b = dataTable00FindById(*second);
+    s32 order = b->maxHp - a->maxHp;
     if (order == 0) {
         const DevilRecordA* firstDevil = devilGetRecord(*first);
         const DevilRecordA* secondDevil = devilGetRecord(*second);

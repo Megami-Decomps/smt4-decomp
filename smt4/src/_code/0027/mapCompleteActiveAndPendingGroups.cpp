@@ -1,5 +1,6 @@
 #include "common.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 struct MapBlock {
     u8 unk000[0x7D4];
@@ -7,7 +8,6 @@ struct MapBlock {
 };
 
 extern "C" {
-extern GameState g_gameState;
 s32 dataTable23Type0FindIndexById(s32 groupId);
 MapBlock *gameGetMapBlock(void);
 s32 mapIfClearGroupState(s32 groupId);
@@ -25,24 +25,24 @@ static __inline void mapMarkGroupCleared(s32 index)
 
 void mapCompleteActiveAndPendingGroups(void)
 {
-    if (g_gameState.groupClear.activeGroupId != 0) {
+    if (g_gameState.activeGroupId != 0) {
         const s32 index = dataTable23Type0FindIndexById(
-            g_gameState.groupClear.activeGroupId);
+            g_gameState.activeGroupId);
         if (index != -1) {
             mapMarkGroupCleared(index);
-            mapIfClearGroupState(g_gameState.groupClear.activeGroupId);
+            mapIfClearGroupState(g_gameState.activeGroupId);
         }
     }
 
-    if (g_gameState.groupClear.pendingGroupId != 0) {
+    if (g_gameState.pendingGroupId != 0) {
         const s32 index = dataTable23Type0FindIndexById(
-            g_gameState.groupClear.pendingGroupId);
+            g_gameState.pendingGroupId);
         if (index != -1) {
             mapMarkGroupCleared(index);
-            mapIfClearGroupState(g_gameState.groupClear.pendingGroupId);
+            mapIfClearGroupState(g_gameState.pendingGroupId);
         }
-        g_gameState.groupClear.pendingGroupId = 0;
+        g_gameState.pendingGroupId = 0;
     }
-    g_gameState.groupClearFlags.updateFlag = 0;
+    g_gameState.map.destinationSet = 0;
 }
 }

@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 struct LmapView33a988 {
@@ -15,12 +16,12 @@ extern LmapView33a988 *g_lmapView;
 void mapRecordResumePoint(void)
 {
     FlagWorkBanks *flags = gameFlagsGetBlock();
-    u8 mode = g_gameState.resume.mode;
+    u8 mode = g_gameState.resumeMode;
     flags->resumePoint.mode = mode;
     switch (mode) {
     case 1:
-        flags->resumePoint.mapId = g_gameState.mode;
-        flags->resumePoint.areaId = g_gameState.submode;
+        flags->resumePoint.mapId = g_gameState.mapId;
+        flags->resumePoint.areaId = g_gameState.areaId;
         flags->resumePointObject.objectId = g_gameState.currentObjectId;
         flags->resumePoint.position.x = g_lmapScene->position.x;
         flags->resumePoint.position.y = g_lmapScene->position.y;
@@ -29,16 +30,16 @@ void mapRecordResumePoint(void)
         flags->resumePoint.viewValue = g_lmapView->value;
         break;
     case 2:
-        flags->resumePoint.mapId = g_gameState.mode;
-        flags->resumePoint.areaId = g_gameState.submode;
+        flags->resumePoint.mapId = g_gameState.mapId;
+        flags->resumePoint.areaId = g_gameState.areaId;
         flags->resumePointObject.objectId = g_gameState.currentObjectId;
         flags->resumePoint.position.x = g_lmapScene->position.x;
         flags->resumePoint.position.y = g_lmapScene->position.y;
         flags->resumePoint.position.z = g_lmapScene->position.z;
         break;
     case 3:
-        flags->resumePoint.mapId = g_gameState.mode;
-        flags->resumePoint.areaId = g_gameState.submode;
+        flags->resumePoint.mapId = g_gameState.mapId;
+        flags->resumePoint.areaId = g_gameState.areaId;
         flags->resumePointObject.objectId = -1;
         break;
     }

@@ -2,13 +2,12 @@
 #include "battle/btlUnit.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/ConsumableRecord.h"
 
 namespace {
 struct SkillAilmentView { u8 prefix[0x38]; u32 effect; };
-struct ItemAilmentView { u8 prefix[0x6A]; u8 effect; };
 }
 extern "C" {
-const ItemAilmentView *dataTable08Sub1GetRecord(u32 id);
 BtlUnitData *btlFindEntryBlockByMemberId(BtlMainState *state, s32 index);
 PartyDamageUnitIV *gameGetUnitRecord(s32 index);
 
@@ -16,16 +15,16 @@ PartyDamageUnitIV *gameGetUnitRecord(s32 index);
 u32 btlGetApplicableAilmentMask(u32 skillId, u32 itemId, u32 unused, s32 target)
 {
     const SkillAilmentView *skill = reinterpret_cast<const SkillAilmentView *>(dataTable40FindById(skillId));
-    const ItemAilmentView *item = dataTable08Sub1GetRecord(itemId);
+    const ConsumableRecord *item = dataTable08Sub1GetRecord(itemId);
     if ((skill != NULL || item != NULL) &&
         (skill == NULL || (skill->effect & 0x7F) != 0) &&
-        (item == NULL || (item->effect & 0x7F) != 0)) {
+        (item == NULL || (item->target & 0x7F) != 0)) {
         u32 kind = 0;
         if (skill != NULL) {
             if ((skill->effect & 0x7F) != 0)
                 kind = skill->effect & 0x7F;
         } else if (item != NULL) {
-            kind = item->effect & 0x7F;
+            kind = item->target & 0x7F;
         }
         u32 mask;
         switch (kind) {

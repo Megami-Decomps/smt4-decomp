@@ -19,7 +19,7 @@ void FUN_0034a9c4(u32 id, u32 options)
     FUN_0026fd50(session->block1390, record, 0, options);
     session->unk20B0 = 1;
     if ((s16)id >= 0) {
-        Table00Record *devil = dataTable00FindById(id & 0xffff);
+        Table00RecordA *devil = dataTable00FindById(id & 0xffff);
         if (devil == NULL)
             allowed = false;
         else {

@@ -1,9 +1,7 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include <stddef.h>
 extern "C" {
-struct PartyReadinessStateView { u8 prefix[0xDC]; u8 restricted; };
-typedef char PartyReadinessStateOffset[offsetof(PartyReadinessStateView, restricted) == 0xDC ? 1 : -1];
-extern PartyReadinessStateView g_gameState;
 void gameFlagsGetBlock(void);
 s32 FUN_001ba570(void);
 s32 FUN_001bd118(u16 id);
@@ -17,7 +15,7 @@ s32 FUN_002b9324(void)
 {
     s32 status = 0;
     gameFlagsGetBlock();
-    if (g_gameState.restricted)
+    if (g_gameState.unk0DC)
         return 4;
     for (u16 id = 100; id < 400; ++id) {
         if (partyEntryFlagsBit1(id)) {

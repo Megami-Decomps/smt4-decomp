@@ -16,16 +16,16 @@ u16 FUN_0029e9cc(u16 id)
         return 0;
     }
     GameSaveData *save = g_gameDataBlocks.saveBlock;
-    GameSavedItem *item = &save->items[id];
-    u32 index = item->registration.registrationFlags & 2;
+    GameSavedItem *item = &save->body.items[id];
+    u32 index = item->registrationFlags & 2;
     if (index != 0) {
         return 1;
     }
     for (; index < 3; ++index) {
         u32 linkedId = record->requirements.linkedIds[index];
         if (linkedId != 0) {
-            GameSavedItem *linked = &save->items[linkedId];
-            if (linked->registration.registrationFlags & 2) {
+            GameSavedItem *linked = &save->body.items[linkedId];
+            if (linked->registrationFlags & 2) {
                 return 1;
             }
         }

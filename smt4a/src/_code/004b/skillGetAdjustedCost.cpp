@@ -13,7 +13,7 @@ s32 FUN_0034a304(const AttributeModifierLists *record, s32 rank, s32 kind);
 // Apply unlocked cost reductions and the holder's skill-rank modifiers, clamping to one.
 s32 skillGetAdjustedCost(const ItemRankRecord *holder, u32 skillId)
 {
-    Table04Record *record = dataTable04FindById(skillId);
+    Table04RecordA *record = dataTable04FindById(skillId);
     if (record) {
         s32 baseCost = record->cost.baseCost;
         s32 reduction = 0;

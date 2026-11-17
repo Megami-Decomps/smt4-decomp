@@ -1,10 +1,8 @@
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "gamedata/EquipmentSortPower.h"
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
 
-struct PrimaryEntryOrder {
-    /* 0x00 */ u8 unk00[0x6F];
-    /* 0x6F */ u8 order;
-};
 struct AocEntryOrder83 {
     /* 0x00 */ u8 unk00[0x26];
     /* 0x26 */ u16 order;
@@ -15,7 +13,6 @@ struct AocEntryOrder84 {
 };
 extern "C" {
 u32 aocEntryGetKind(u32 id);
-PrimaryEntryOrder *dataTable08Sub1GetRecord(u16 id);
 AocEntryOrder83 *aocRecordLookup83(u16 id);
 AocEntryOrder84 *aocRecordLookup84(u16 id);
 
@@ -26,12 +23,12 @@ u16 aocEntryGetSortOrder(const u16 *entry)
     u16 id = *entry;
     switch (aocEntryGetKind(id)) {
     case 1: {
-        PrimaryEntryOrder *record = dataTable08Sub1GetRecord(id);
-        if (record != NULL) order = record->order;
+        ConsumableRecord *record = dataTable08Sub1GetRecord(id);
+        if (record != NULL) order = record->rank;
         break;
     }
     case 2: case 3: case 4: case 5: case 6: case 7: case 8: {
-        RankedTableRecord *record = dataTable08Sub2GetRecord(id);
+        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
         if (record != NULL) order = record->order;
         break;
     }

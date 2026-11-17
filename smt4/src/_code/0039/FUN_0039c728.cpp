@@ -2,6 +2,7 @@
 #include <math.h>
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 struct CursorPosition {
     f32 x;
@@ -9,7 +10,6 @@ struct CursorPosition {
 };
 
 extern "C" {
-extern GameState g_gameState;
 extern f32 DAT_0044cdc8;  // scroll friction
 
 s32 FUN_002bffd8(s32 *x, s32 *y);
@@ -26,7 +26,7 @@ void FUN_0039c728(MapNaviDisplay *display)
     if (work->flags & 0x20000) {
         s32 touchY;
         s32 touchX;
-        if (FUN_002bffd8(&touchX, &touchY) != 0 && g_gameState.unk18 == 0) {
+        if (FUN_002bffd8(&touchX, &touchY) != 0 && g_gameState.inputBlocked == 0) {
             CursorPosition position;
             f32 scale = naviMainGetParameter(mapState);
             position.x = ((f32)touchX - work->dragOriginX) / scale + work->cursorStartX;

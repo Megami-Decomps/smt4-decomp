@@ -1,9 +1,9 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 s32 dataTable00CompareRecordIds(const void *left, const void *right);
@@ -20,9 +20,9 @@ Table00Record *portraitFindRecordById(u32 id)
 {
     Table00Record key;
     key.id = static_cast<u16>(id);
-    if (g_aocSystem->table00.records != NULL) {
+    if (g_aocSystem->table00Records != NULL) {
         Table00Record *record = searchTable00(&key,
-            g_aocSystem->table00.records, g_aocSystem->table00.count, dataTable00CompareRecordIds);
+            g_aocSystem->table00Records, g_aocSystem->table00Count, dataTable00CompareRecordIds);
         if (record != NULL && FUN_0038971c(g_aocSystem, id) != 0) {
             return record;
         }

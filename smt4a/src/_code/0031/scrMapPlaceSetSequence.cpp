@@ -1,12 +1,11 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
 void mapPlaceSet(u32 a, u32 b, u32 c);
 u32 scrGetArg(s32 index);
 void asdSequenceRequest(s32 a, s32 b, s32 c);
-
-extern GameStateA g_gameState;
 
 /* Script command: runs mapPlaceSet on the script's first three arguments and clears unk574. */
 s32 scrMapPlaceSetSequence(void)

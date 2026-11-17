@@ -1,5 +1,6 @@
 /* NON_MATCHING: the FUN_002a2e98 arms match retail (per-arm calls) and the scene is read directly; remaining: retail copies the position's x,y words with ldm/stm and z from a register (here one three-word ldm/stm) and orders the global loads differently. */
 #include "map/lmapMain.h"
+#include "game/GameStateA.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 
 struct AreaHandleOwner { u32 unk00; u32 flags; };
@@ -27,16 +28,9 @@ struct AreaSpawn {
     u8 unk03;
     s16 x, y, z;
 };
-struct AreaGameFlags {
-    u32 unk00;
-    u32 area;
-    u8 unk08[0x1b];
-    u8 pending; // 0x23
-};
 extern "C" {
 extern AreaMainState *g_lmapMainState;
 extern AreaScene *g_lmapScene;
-extern AreaGameFlags g_gameState;
 extern void *g_handleRegistry;
 u32 table23FindRecordByKey(s32 category, s32 subtype, u32 variant);
 Table23Record *dataTableGetRecord23(u32 index);
@@ -69,7 +63,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
         dataTableGetRecord23(table23FindRecordByKey(state->map, area, spawnId)));
     mapPlaceSet(spawn->map, spawn->area, spawn->place);
     state->area = area;
-    g_gameState.area = area;
+    g_gameState.areaId = area;
     g_lmapScene->position.x = (f32)spawn->x;
     g_lmapScene->position.y = (f32)spawn->y;
     g_lmapScene->position.z = (f32)spawn->z;
@@ -107,7 +101,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
         if (handle)
             handle->owner->flags &= ~3u;
     }
-    g_gameState.pending = 0;
+    g_gameState.departLoading = 0;
     FUN_0036aa04(state);
     controllerUpdateWithIdleTimer(&state->setter);
     FUN_00297c3c();

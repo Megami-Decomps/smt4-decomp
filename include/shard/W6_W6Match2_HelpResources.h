@@ -20,15 +20,6 @@ void asdMemFree(void* memory);
 void scrScriptProcessDestroy(ScriptProcess* script);
 }
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-PackageFileRef *packageFindFileRefByName(PackageList *list, s32 kind, const char *name);
-
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {

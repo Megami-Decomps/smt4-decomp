@@ -63,7 +63,7 @@ void FUN_004a4848(Screen4A *owner)
         s32 total = 0;
         for (s32 id = 1; id < 0x500; ++id) {
             DevilRecordA *candidate = devilGetRecord((u16)id);
-            Table00Record *record = dataTable00FindById((u16)id);
+            Table00RecordA *record = dataTable00FindById((u16)id);
             if (candidate != NULL && record != NULL && (record->flags & 1) != 0) {
                 ++total;
                 if (itemIsCollectedWithRelated(candidate->id) != 0) {

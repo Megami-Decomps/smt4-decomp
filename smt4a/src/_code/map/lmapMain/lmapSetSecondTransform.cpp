@@ -1,17 +1,16 @@
 #include "common.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
-extern f32 DAT_005f1a18[6];
-
 void lmapSetSecondTransform(f32 x, f32 y, f32 z, f32 a, f32 b, f32 c)
 {
-    DAT_005f1a18[0] = x;
-    DAT_005f1a18[1] = y;
-    DAT_005f1a18[2] = z;
-    DAT_005f1a18[3] = a;
-    DAT_005f1a18[4] = b;
-    DAT_005f1a18[5] = c;
+    g_gameState.followCameraPose.eye.x = x;
+    g_gameState.followCameraPose.eye.y = y;
+    g_gameState.followCameraPose.eye.z = z;
+    g_gameState.followCameraPose.target.x = a;
+    g_gameState.followCameraPose.target.y = b;
+    g_gameState.followCameraPose.target.z = c;
 }
 
 } /* extern "C" */

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002941c8` (_code @ 0x2941c8, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ extern int FUN_003581bc(...); /* 0x3581bc */
 extern unsigned char FUN_0037a070; /* 0x37a070 */
 extern unsigned char FUN_0037a074; /* 0x37a074 */
 extern unsigned int *g_mapDepart; /* 0x5806c4 */
-extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -40,7 +40,6 @@ extern int gameFlagsGetBlock(void);
 extern unsigned int FUN_00480738(unsigned int);
 /* Supplied declaration required: itemGetTable8Sub3Value. */
 extern unsigned int FUN_00480c28(void);
-
 
 void FUN_002941c8(int *param_1)
 
@@ -114,7 +113,7 @@ void FUN_002941c8(int *param_1)
           puVar1[0x2c] = 0;
           puVar1[0x2d] = 0;
           puVar1[0x34] = 0;
-          if (g_gameState >= 100) {
+          if (g_gameState.mapId >= 100) {
             puVar1[0x1f] = param_1[0xf];
             puVar1[0x20] = param_1[0x10];
             puVar1[0x21] = param_1[0x11];
@@ -155,7 +154,7 @@ void FUN_002941c8(int *param_1)
         puVar1[0x31] = param_1[0x1d];
         puVar1[0x32] = param_1[0x1e];
         puVar1[0x33] = param_1[0x1f];
-        if (g_gameState >= 100) {
+        if (g_gameState.mapId >= 100) {
           puVar1[0x1f] = param_1[0xf];
           puVar1[0x20] = param_1[0x10];
           puVar1[0x21] = param_1[0x11];
@@ -180,7 +179,7 @@ void FUN_002941c8(int *param_1)
         puVar1[temp_v0 + 0x2f] = temp_v2;
         temp_v0 = temp_v1;
       } while (temp_v1 < 5);
-      if (g_gameState >= 100) {
+      if (g_gameState.mapId >= 100) {
         puVar1[0x1f] = param_1[0xf];
         puVar1[0x20] = param_1[0x10];
         puVar1[0x21] = param_1[0x11];

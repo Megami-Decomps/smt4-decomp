@@ -1,14 +1,7 @@
 #include "common.h"
-
-/* The game's scene state: the main state and its sub state (observed fields). */
-struct GameSceneState {
-    s32 state;
-    s32 subState;
-};
+#include "game/GameStateA.h"
 
 extern "C" {
-
-extern GameSceneState g_gameState;
 
 /* Maps a menu/screen id to the id of the help or layout set it uses; 0 for unknown ids. */
 u32 uiScreenIdToLayoutSet(u32 id)
@@ -25,16 +18,16 @@ u32 uiScreenIdToLayoutSet(u32 id)
     case 5:
         return 9;
     case 6:
-        if (g_gameState.state == 5) {
-            if (g_gameState.subState == 6) {
+        if (g_gameState.mapId == 5) {
+            if (g_gameState.areaId == 6) {
                 return 15;
             }
-        } else if (g_gameState.state == 3 && g_gameState.subState == 3) {
+        } else if (g_gameState.mapId == 3 && g_gameState.areaId == 3) {
             return 15;
         }
         return 14;
     case 7:
-        if (g_gameState.state == 5 && g_gameState.subState == 6) {
+        if (g_gameState.mapId == 5 && g_gameState.areaId == 6) {
             return 17;
         }
         return 16;
@@ -104,7 +97,7 @@ u32 uiScreenIdToLayoutSet(u32 id)
     case 82:
         return 36;
     case 56:
-        if (g_gameState.state != 28 && g_gameState.state != 29 && g_gameState.state != 30 && g_gameState.state != 31) {
+        if (g_gameState.mapId != 28 && g_gameState.mapId != 29 && g_gameState.mapId != 30 && g_gameState.mapId != 31) {
             return 18;
         }
         return 44;

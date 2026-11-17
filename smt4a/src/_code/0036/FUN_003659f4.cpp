@@ -1,10 +1,10 @@
 /* NON_MATCHING: block layout and effect-vector setup now match retail (scaled arm first, vector computed before the input-blocked test); remaining: callee-saved/VFP register numbering (retail loop index r4/record r5, x/y/z in s18/s16/s17) and the order of the scaling multiplies. */
 #include "map/mapIf.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 extern MapIfStateA *g_mapIf;
-extern GameStateA g_gameState;
 f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 void soundActorStartOnFreeChannel(u32 effect, f32 x, f32 y, f32 z);
 

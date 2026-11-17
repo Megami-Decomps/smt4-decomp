@@ -1,3 +1,4 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/GameDataBlocks.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -5,7 +6,7 @@ extern "C" {
 
 u8 *gameDataGetPlayerName(void)
 {
-    return (u8 *)g_gameDataBlocks.saveBlock + 0x1f8e8;
+    return g_gameDataBlocks.saveBlock->body.playerName.name;
 }
 
 } /* extern "C" */

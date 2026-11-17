@@ -1,10 +1,11 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/GameDataBlocks.h"
 
 extern "C" {
 
 u8 *saveGetFlagRowTable(void)
 {
-    return (u8 *)g_gameDataBlocks.saveBlock + 0x1c62c;
+    return g_gameDataBlocks.saveBlock->body.flagRows;
 }
 
 } /* extern "C" */

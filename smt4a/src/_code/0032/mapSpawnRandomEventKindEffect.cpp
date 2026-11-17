@@ -1,5 +1,6 @@
 /* NON_MATCHING: native sound vector argument matches retail call setup, but initial coordinate loads and float-add operands differ. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
@@ -14,7 +15,7 @@ void mapSpawnRandomEventKindEffect()
     position.x += randBetween(-20, 20);
     position.z += randBetween(-20, 20);
     u32 variant = randBetween(0, 100) & 3;
-    switch (g_gameState.eventKind) {
+    switch (g_gameState.selectedKind) {
     case 0:
         soundActorStartOnFreeChannel(variant + 0x10002ac, position);
         return;

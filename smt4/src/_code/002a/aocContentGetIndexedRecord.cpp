@@ -1,6 +1,7 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "addon/AocSystem_Smt4.h"
+#include "addon/AocSystem.h"
 
 struct ContentRecordKey {
     u8 unk00[0x2a]; // 0x00
@@ -18,7 +19,6 @@ struct ContentRecordList {
 
 
 extern "C" {
-extern AocSystem* g_aocSystem;
 ContentRecord* FUN_0014caa4(AocSystem* system, const ContentRecordKey* key, u32 index);
 
 // Resolve the content record from add-on data, falling back to the indexed base table.

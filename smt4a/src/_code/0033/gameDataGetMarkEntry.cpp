@@ -6,19 +6,19 @@ typedef struct MarkEntry {
     /* 0x00 */ u8 data[100];
 } MarkEntry;
 
-typedef struct GameDataSub {
+typedef struct GameSaveBodyA {
     /* 0x00000 */ u8 unk00000[0x27184];
     /* 0x27184 */ MarkEntry marks[32];
-} GameDataSub;
+} GameSaveBodyA;
 
-typedef struct GameDataBlock {
+typedef struct GameSaveDataA {
     /* 0x00 */ u8 unk00[0x88];
-    /* 0x88 */ GameDataSub sub;
-} GameDataBlock;
+    /* 0x88 */ GameSaveBodyA sub;
+} GameSaveDataA;
 
 typedef struct GameDataBlocks {
     /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ GameDataBlock *block;
+    /* 0x4 */ GameSaveDataA *block;
 } GameDataBlocks;
 
 extern GameDataBlocks g_gameDataBlocks;

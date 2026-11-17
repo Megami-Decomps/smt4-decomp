@@ -1,16 +1,9 @@
 /* NON_MATCHING: allocation publication order recovered; handle-registry load and free-on-end store scheduling still differ. */
 #include "AsdSDK/AsdDebug.h"
+#include "game/GameStateA.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/GameGlobals.h"
 #include "AsdSDK/AsdMemAlloc.h"
-
-/* The part of g_gameState the map start-up clears. */
-struct MapGameState {
-    /* 0x000 */ u8 unk000[0x21];
-    /* 0x021 */ u8 unk21;
-    /* 0x022 */ u8 unk22[0x23D];
-    /* 0x25F */ u8 unk25F;
-};
 
 /* The map mode's block in Apocalypse (0xD4 bytes, only the fields set at start-up are named). */
 struct MapMainBlockA {
@@ -75,7 +68,6 @@ struct MapMainBlockA {
 extern "C" {
 extern MapMainBlockA *g_mapMain;
 extern u32 g_handleRegistry;
-extern MapGameState g_gameState;
 
 u8 *gameFlagsGetBlock(void);
 void FUN_002c23cc(s32 mode);
@@ -157,7 +149,7 @@ void FUN_00246720(void)
     map->flagBE = 0;
     map->flagBF = 0;
     g_gameState.unk25F = 0;
-    g_gameState.unk21 = 0;
+    g_gameState.paused = 0;
     flagsBlock[0x7C4] = 0;
     map->counterCC = 0;
     map->handleRegistry = g_handleRegistry;

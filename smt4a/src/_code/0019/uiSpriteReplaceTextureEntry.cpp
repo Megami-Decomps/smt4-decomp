@@ -1,9 +1,9 @@
 #include "shard/W6_W6Match8_TextureSwap.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
 void asdTMTexTableReleaseNode(u32 node, s32 entry);
 void *asdTMTexLoadMainHeap(u32 node, s32 entry);
 void packageFileDisableByKindName(AocSystemA *system, u32 node, s32 entry);

@@ -1,9 +1,9 @@
 /* NON_MATCHING: saved record/count registers and progress-counter return scheduling differ; retail and built both have 124 rows. */
 #include "addon/PackageSelection.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
 void *dataTableGet(s32 table, s32 section);
 s32 gameFlagIsSet(u32 flag);
 s32 aocCountTableRecords(AocSystemA *system);

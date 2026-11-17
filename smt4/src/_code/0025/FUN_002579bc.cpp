@@ -4,7 +4,6 @@
 
 extern "C" {
 void FUN_002b8454(u32 entry, u32 value, u32 subvalue, u32 enabled);
-extern PartyPanelState *g_partyPanel;
 
 void FUN_002579bc(s32 mode)
 {
@@ -12,8 +11,8 @@ void FUN_002579bc(s32 mode)
     if (panel == 0) {
         return;
     }
-    panel->unk17F0 = mode == 0;
-    if (panel->unk17F0 == 0) {
+    panel->disabled = mode == 0;
+    if (panel->disabled == 0) {
         if (buttonHelpGetEntryValue(3) != 0) {
             return;
         }

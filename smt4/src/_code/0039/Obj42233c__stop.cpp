@@ -2,6 +2,7 @@
 #include "classes/Obj42233c.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "game/GameState.h"
 
 /* The part of the local map scene read here: the camera's position. */
 struct LmapSceneCamera {
@@ -10,7 +11,6 @@ struct LmapSceneCamera {
 };
 
 extern "C" {
-extern GameState g_gameState;
 extern LmapSceneCamera *g_lmapScene;
 f32 sqrtf(f32 value);
 void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
@@ -54,7 +54,7 @@ void Obj42233c::stop()
                 node->flags |= 2;
                 node->resource->target->enabled = 0;
             }
-        } else if (g_gameState.controllerFlags.mapRangeModelsHidden) {
+        } else if (g_gameState.loading) {
             node = (NodeEnableNode *)handle;
             if ((node->flags & 2) == 0) {
                 node->flags |= 2;

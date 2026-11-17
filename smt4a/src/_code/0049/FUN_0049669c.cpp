@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "event/bustupEvent/BustupTex.h"
+#include "gamedata/Table00Lookup.h"
 
 #define SHOP_KIND_WEAPONS 0
 #define SHOP_KIND_ITEMS 1
@@ -28,12 +29,6 @@ struct ShopScene {
     /* 0x16058 */ u32 npcAnim;
 };
 
-/* A record of data table 0 (observed field). */
-struct Table00Record {
-    /* 0x00 */ u8 unk00[0x8C];
-    /* 0x8C */ s16 modelId;
-};
-
 extern "C" {
 
 void campCommonBgAcquire(void);
@@ -45,7 +40,6 @@ u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y);
 void npc2dCreatePortraitJob(u32 id, s32 x, s32 y);
 void FUN_0031bca4(void);
 void resourceReleaseReference(void);
-Table00Record *dataTable00FindById(s32 id);
 u32 FUN_00409fe8(s32 id, s32 flag);
 
 /* Loads the shop scene: the shared layout, then the stock file and backdrop of the shop for its district
@@ -130,7 +124,7 @@ void FUN_0049669c(ShopScene *shop)
             shop->npcModel = 0;
         }
         {
-            u32 model = FUN_00409fe8(dataTable00FindById(npcId)->modelId, 1);
+            u32 model = FUN_00409fe8(dataTable00FindById(npcId)->battleTextureId, 1);
 
             shop->npcState = 0;
             shop->npcModel = model;

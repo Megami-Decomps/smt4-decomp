@@ -41,7 +41,7 @@ void slotNameDisplaySetEntry(SlotNameDisplay *display, s32 entryId)
     }
     u16 selectedId = (u16)entryId;
     display->selectedId = selectedId;
-    SlotRecord *record = (SlotRecord *)table;
+    SlotRecordA *record = (SlotRecordA *)table;
     for (s32 i = 0; i < 24; ++i) {
         s32 index = table->indices[i];
         if (index >= 0) {

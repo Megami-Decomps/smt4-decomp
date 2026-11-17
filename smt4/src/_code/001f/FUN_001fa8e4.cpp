@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -41,7 +42,6 @@ typedef struct {
 
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern int DAT_0049f938; /* 0x49f938 */
@@ -167,7 +167,7 @@ void FUN_001fa8e4(void)
         temp_v7 = inputIsQuestCancelPressed();
         temp_v8 = 0;
         if (temp_v7 != 0) {
-          temp_v8 = g_gameState;
+          temp_v8 = g_gameState.mapId;
         }
         if ((temp_v7 != 0 && temp_v8 != 0x24) && (*(int *)(DAT_004474f4 + 0xac) == 0)) {
           *(unsigned int *)(temp_v2 + 0xd94) = 0;
@@ -365,7 +365,7 @@ void FUN_001fa8e4(void)
       }
     }
     temp_v6 = (unsigned int)((unsigned long long)temp_v22 >> 0x20);
-    if (((g_gameState != 0x24) && (temp_v8 = unitGroupHasFlag(2,5), temp_v8 != 0)) && (!temp_v0)) {
+    if (((g_gameState.mapId != 0x24) && (temp_v8 = unitGroupHasFlag(2,5), temp_v8 != 0)) && (!temp_v0)) {
       temp_v13 = (float)temp_v15;
       mathDistanceBetweenPoints();
       temp_v13 = *(float *)(g_lmapScene + 0x160) - temp_v13;
@@ -424,11 +424,11 @@ void FUN_001fa8e4(void)
         temp_v13 = *(float *)(g_lmapScene + 0x15c) - temp_v13;
         *(float *)(g_lmapScene + 0x15c) = temp_v13;
         if (temp_v13 < temp_v17) {
-          temp_v2 = g_gameState;
-          if (g_gameState == 5) {
+          temp_v2 = g_gameState.mapId;
+          if (g_gameState.mapId == 5) {
             temp_v2 = DAT_0049f920;
           }
-          if (!(g_gameState == 5 && temp_v2 == 9)) {
+          if (!(g_gameState.mapId == 5 && temp_v2 == 9)) {
             *(unsigned int *)(temp_v8 + 0x15c) = 0x43fa0000;
           }
           else {

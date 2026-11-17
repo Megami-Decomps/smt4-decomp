@@ -1,4 +1,4 @@
-#include "gamedata/GameData.h"
+#include "gamedata/GameSaveBlocks.h"
 
 /* The small game data block viewed whole: the counter and the recorded clock time in seconds. */
 struct GameDataSmallBlock {
@@ -14,7 +14,6 @@ struct NnDateTime {
 };
 
 extern "C" {
-extern GameDataBlocks g_gameDataBlocks;
 NnDateTime clockGetTicksAsMicroseconds(void);
 s32 nn_fnd_DateTime_GetDay(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetMonth(const NnDateTime *dateTime);

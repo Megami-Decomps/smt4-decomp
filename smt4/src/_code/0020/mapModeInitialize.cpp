@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match2_MapState.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -13,7 +13,6 @@ struct ModeGlobals {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ ModeWork *work;
 };
-extern GameStateCallbackWork g_gameState;
 extern ModeGlobals DAT_004474f0;
 
 /* Select the map mode and reset progress outside mode one. */

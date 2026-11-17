@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild (same shape as FUN_002277d4 inside a per-mode loop; the unroll-by-two marking loop now matches); retail writes the mode count and first mode with one stm after the flag test and numbers the saved registers differently. */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/EquipmentRecord.h"
 
 /* A candidate target (only the fields read here). */
 typedef struct AiSkillTarget {
@@ -42,7 +43,6 @@ s32 FUN_0029e9cc(u16 recordId);
 s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
 void btlEntryBuildSummary(u16 *summary, BtlMainState *state, u32 *actor);
-void *dataTable08Sub2GetRecord(u32 id);
 
 /* Looks for a use of the actor's skill (the first mode in its list that works) on one candidate
  * target, or on all of them when the skill revives. Marks the chosen target(s) and records the

@@ -1,10 +1,10 @@
 /* NON_MATCHING: The enemy-filter owner address is loaded after the table count instead of before the initial lookup. */
 #include "map/EnemyTableFilter.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 extern EnemyTableFilterState g_mapEnemy;
-extern GameStateA g_gameState;
 extern u32 DAT_005f2c20[256];
 EnemyTableLocation *FUN_00356308(s32 index);
 s32 dataTableGetRecordFortyOne(void);
@@ -19,8 +19,8 @@ void FUN_00303ea0(void)
         g_mapEnemy.count = 0;
         for (s32 index = 0; index < total; ++index) {
             EnemyTableLocation *location = FUN_00356308(index);
-            if (location->mapId != -1 && location->mapId == g_gameState.mode &&
-                location->areaId == *reinterpret_cast<const s32 *>(g_gameState.unk004)) {
+            if (location->mapId != -1 && location->mapId == g_gameState.mapId &&
+                location->areaId == g_gameState.areaId) {
                 DAT_005f2c20[g_mapEnemy.count++] = index;
             }
         }

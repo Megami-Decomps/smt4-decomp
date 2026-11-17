@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 struct DepartureArea {
     u8 unk00[0x20]; // 0x00

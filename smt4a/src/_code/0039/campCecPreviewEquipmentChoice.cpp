@@ -1,11 +1,11 @@
 #include "shard/Shard0032.h"
 #include "camp/CampCec/OutfitPreview.h"
+#include "gamedata/EquipmentRecordA.h"
 
 extern "C" {
 extern StateAtF4 *g_campCecEdit;
 const OutfitPreviewEquipment *gameGetPlayerData(void);
 s32 unitMatchesAlignment(u32 itemId);
-const OutfitPreviewItem *dataTable08Sub2GetRecord(u32 itemId);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 FUN_002e2114(OutfitPreview *preview);
 void outfitPreviewConfigureEquipment(OutfitPreview *preview, const OutfitPreviewEquipment *equipment);
@@ -23,8 +23,8 @@ void campCecPreviewEquipmentChoice(u32 itemId)
     OutfitPreviewEquipment equipment;
     __aeabi_memcpy4(&equipment, gameGetPlayerData(), sizeof(equipment));
     if (unitMatchesAlignment(itemId)) {
-        const OutfitPreviewItem *item = dataTable08Sub2GetRecord(itemId);
-        switch (item->slotKind) {
+        const EquipmentRecordA *item = dataTable08Sub2GetRecord(itemId);
+        switch (item->slot) {
         case 2: equipment.slots[0] = static_cast<u16>(itemId); break;
         case 3: equipment.slots[1] = static_cast<u16>(itemId); break;
         case 4: equipment.slots[3] = static_cast<u16>(itemId); break;

@@ -2,15 +2,9 @@
  * message file is passed from the reloaded field instead of the load result (an extra mov). */
 #include "event/EventScriptScene.h"
 #include "battle/btlEvent.h"
-
-/* The event request block inside g_gameState. */
-struct GameStateEventView {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ EventScriptGlobals event;
-};
+#include "game/GameState.h"
 
 extern "C" {
-extern GameStateEventView g_gameState;
 void FUN_0022b778(EventScriptScene *scene);
 void scrScriptProcessDestroy(ScriptRunState *process);
 void asdMemFree(void *allocation);
@@ -40,8 +34,8 @@ void FUN_003b992c(EventScriptScene *scene)
         }
         return;
     }
-    EventScriptGlobals *event = &g_gameState.event;
-    event->state = 0;
+    GameStateEventBlock *event = &g_gameState.event;
+    event->eventState = 0;
     messageSetConfirmDisplayMode();
     textFormatBuffer(path, "event/e%03d/e%03d.bf", event->eventId, event->eventId);
     scene->scriptData = asdLoadFileSyncDefault(path);
@@ -49,7 +43,7 @@ void FUN_003b992c(EventScriptScene *scene)
     scene->messageData = asdLoadFileSyncDefault(path);
     scene->process = scrScriptProcessCreate(scene->scriptData, scene->messageData);
     scriptProcessSetMode(scene->process, 2);
-    u32 entry = tableGroupFindEntryIndex(scene->scriptData, event->entryName);
+    u32 entry = tableGroupFindEntryIndex(scene->scriptData, event->eventEntryName);
     scrScriptProcessStartEntry(scene->process, entry);
     ++scene->substate;
 }

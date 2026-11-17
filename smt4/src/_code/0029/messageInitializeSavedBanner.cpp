@@ -5,13 +5,13 @@ extern "C" {
 void pairSetFirstResetSecond(void *pair, u32 first);
 void uiSpriteStateInitFromSource(void *widget, u32 mode, s32 value, const void *text, u32 kind, f32 scale);
 void spriteStartAnimationByIndex(void *widget, u32 mode);
-GameSaveData *gameDataBlocksGetSaveData();
+GameSaveBody *gameDataBlocksGetSaveData();
 extern MessageGlobals g_messageMain;
 
 u32 messageInitializeSavedBanner()
 {
     MessagePanel *panel = g_messageMain.banner;
-    GameSaveData *save = gameDataBlocksGetSaveData();
+    GameSaveBody *save = gameDataBlocksGetSaveData();
     if (save->unk1F454 == 0) {
         return 1;
     }

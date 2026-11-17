@@ -1,5 +1,6 @@
 /* NON_MATCHING: ratio VFP division destination, selected table-row/count register allocation and threshold load order differ. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/DataTable.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
@@ -29,7 +30,6 @@ struct RatioMessage {
 extern "C" {
 
 extern PopupState* g_popupState;
-extern s32 g_gameState;
 
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(s32 range);
@@ -51,8 +51,8 @@ void FUN_00234880(void)
 
     bool special = false;
     if (gameFlagIsSet(0x1a2) && randRange(99) + 1 <= 50 &&
-        (g_gameState == 0x1c || g_gameState == 0x1d || g_gameState == 0x1e ||
-         g_gameState == 0x1f || g_gameState == 0x20)) {
+        (g_gameState.mapId == 0x1c || g_gameState.mapId == 0x1d || g_gameState.mapId == 0x1e ||
+         g_gameState.mapId == 0x1f || g_gameState.mapId == 0x20)) {
         special = true;
     }
 

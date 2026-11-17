@@ -1,12 +1,12 @@
 /* NON_MATCHING: Entry-reset loop counters and global-base registers differ. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
 extern EntryPoolCountersA DAT_00580c90;
 extern EntryPoolRecordA DAT_005f32a0[160];
-extern GameStateA g_gameState;
 
 void FUN_00244acc(void)
 {
@@ -38,6 +38,6 @@ void FUN_00244acc(void)
         entry.value174 = 0;
     }
     DAT_00580c90.second = 0;
-    g_gameState.entryPoolReset.value3C = 0xFFFFFFFFU;
+    g_gameState.activeGroupId = 0xFFFFFFFFU;
 }
 }

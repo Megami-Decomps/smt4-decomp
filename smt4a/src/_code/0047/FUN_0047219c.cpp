@@ -3,10 +3,10 @@
 #include "shard/W6_W6Match1_QueuedRequestToken.h"
 #include "util/BitsAndBytes.h"
 #include "sys/RuntimeObjects.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
-extern AocSystemA *g_aocSystem;
 s32 sysLightEventTryWait(AocObjB *event);
 u32 jyoucyuGetTableEntry(s32 index);
 

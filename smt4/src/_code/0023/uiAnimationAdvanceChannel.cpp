@@ -1,4 +1,4 @@
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
 
 struct IndexedTimerGroup {
     u8 unk00[0x20];
@@ -6,7 +6,6 @@ struct IndexedTimerGroup {
 };
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 s32 uiSlidingSpriteAdvance(TimerSlot *timer, s32 reverse);
 s32 uiSpriteAdvanceAnimation(TimerSlot *timer);
 

@@ -1,5 +1,7 @@
 #include "common.h"
 #include "code/Code0049_Smt4a.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/ConsumableRecordA.h"
 
 struct ShopEntry {
     /* 0x00 */ u16 id;
@@ -9,21 +11,9 @@ struct ShopEntry {
     /* 0x02 */ u16 unk02Bits10 : 6;
 };
 
-struct ItemPriceRecord {
-    /* 0x00 */ u8 unk00[0x4C];
-    /* 0x4C */ s32 price;
-};
-
-struct EquipPriceRecord {
-    /* 0x00 */ u8 unk00[0x74];
-    /* 0x74 */ s32 price;
-};
-
 extern "C" {
 
 u32 aocEntryGetKind(u32 id);
-ItemPriceRecord *dataTable8FindRecord(u32 id);
-EquipPriceRecord *dataTable08Sub2GetRecord(u32 id);
 s32 gameDataBlocksGetTableFlag(void);
 
 /* Returns a shop entry's price: the item or equipment base price (99999999 without a record,
@@ -36,8 +26,8 @@ s32 shopGetEntryPrice(const ShopEntry *entry)
     switch (aocEntryGetKind(id)) {
     case 1:
     case 12: {
-        ItemPriceRecord *item = dataTable8FindRecord(id);
-        price = item != NULL ? item->price : 99999999;
+        ConsumableRecordA *item = dataTable8FindRecord(id);
+        price = item != NULL ? item->buyPrice : 99999999;
         if (id == 0x7b2) {
             price = 1000000;
         }
@@ -50,8 +40,8 @@ s32 shopGetEntryPrice(const ShopEntry *entry)
     case 6:
     case 7:
     case 8: {
-        EquipPriceRecord *equip = dataTable08Sub2GetRecord(id);
-        price = equip == NULL ? 99999999 : equip->price;
+        EquipmentRecordA *equip = dataTable08Sub2GetRecord(id);
+        price = equip == NULL ? 99999999 : equip->buyPrice;
         break;
     }
     }

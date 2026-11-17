@@ -18,9 +18,9 @@ void asdMemFree(void *);
 
 u32 scrTalkChooseReplacementDemon()
 {
-    const Table00Record *source = dataTable00FindById((u16)scrGetArg(0));
-    s16 successorId = source->successor.id;
-    const Table00Record *successor = dataTable00FindById(successorId);
+    const Table00RecordA *source = dataTable00FindById((u16)scrGetArg(0));
+    s16 successorId = source->successorId;
+    const Table00RecordA *successor = dataTable00FindById(successorId);
     devilGetRecord(successorId);
     if (!successorId || !successor || !(successor->flags & 0x80) ||
         gameGetPlayerData()->level < (successor->level & 0x7fffU) || gameStockContainsEntry(successorId)) {
@@ -43,7 +43,7 @@ u32 scrTalkChooseReplacementDemon()
                 lower = 1;
             for (u32 id = 1; id <= 1200; ++id) {
                 const TalkReplacementDemon *demon = devilGetRecord((u16)id);
-                const Table00Record *definition = dataTable00FindById((u16)id);
+                const Table00RecordA *definition = dataTable00FindById((u16)id);
                 if (lower <= demon->level && demon->level <= upper && (definition->flags & 0x80) &&
                     !gameStockContainsEntry(demon->id)) {
                     dataTable01GetRecordWithAocOverride(demon->id);

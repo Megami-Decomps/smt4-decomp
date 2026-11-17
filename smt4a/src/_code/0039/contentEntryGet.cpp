@@ -1,4 +1,5 @@
 #include "common.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
@@ -6,17 +7,9 @@ typedef struct ContentEntry003983b8 {
     /* 0x00 */ u8 data[0x1c];
 } ContentEntry003983b8;
 
-typedef struct AocSystem003983b8 {
-    /* 0x000 */ u8 unk000[0x404];
-    /* 0x404 */ s32 extraCount;
-    /* 0x408 */ ContentEntry003983b8 *extraEntries;
-} AocSystem003983b8;
-
 void *dataTableGet(s32 table, s32 slot);
 ContentEntry003983b8 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
-
-extern AocSystem003983b8 *g_aocSystem; /* 0x433158 */
 
 /* Entry `index` of data table 0x23's section 4, continuing into the add-on content's extra entries (NULL past the end). */
 ContentEntry003983b8 *contentEntryGet(u32 index)
@@ -27,9 +20,9 @@ ContentEntry003983b8 *contentEntryGet(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    AocSystem003983b8 *aoc = g_aocSystem;
-    s32 extra = aoc->extraCount;
-    ContentEntry003983b8 *extraEntries = aoc->extraEntries;
+    AocSystemA *aoc = g_aocSystem;
+    s32 extra = aoc->table23[4].count;
+    ContentEntry003983b8 *extraEntries = (ContentEntry003983b8 *)aoc->table23[4].records;
     return index < extra + count ? &extraEntries[index - count] : NULL;
 }
 

@@ -1,7 +1,7 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/SpriteTemplatePreferredDevil.h"
-
-struct AocSystem;
+#include "addon/AocSystem.h"
+#include "gamedata/Table00Lookup.h"
 
 /* Table 2 section 2 record: the six candidate demon ids it offers. */
 struct SpriteTemplateRecord {
@@ -10,16 +10,8 @@ struct SpriteTemplateRecord {
     /* 0x18 */ u8 unk18[4];
 };
 
-struct SpriteTemplateDevil {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 rank;
-    /* 0x03 */ u8 flags; /* bit 0: preferred */
-};
-
 extern "C" {
-extern AocSystem *g_aocSystem;
 SpriteTemplateRecord *aocFindSpriteTemplateByKey(AocSystem *system, u32 index);
-SpriteTemplateDevil *dataTable00FindById(u32 id);
 
 /* Same as dataTable02GetEntryByIndex: the add-on record for a valid index, else the table 2 section 2 record. */
 static SpriteTemplateRecord *spriteTemplateGet(s32 index)
@@ -44,20 +36,20 @@ u32 spriteTemplateGetPreferredDevilId(s32 index)
     if (record == NULL) {
         return 0;
     }
-    u32 best = 0;
+    u16 best = 0;
     for (s32 i = 0; i < 6; i++) {
-        u32 id = record->ids[i];
+        u16 id = record->ids[i];
         if (id == 0) {
             continue;
         }
-        SpriteTemplateDevil *devil = dataTable00FindById(id);
+        Table00Record *devil = dataTable00FindById(id);
         if (devil == NULL) {
             continue;
         }
-        if (devil->flags & 1) {
+        if (devil->levelFlags & 1) {
             return id;
         }
-        if (best == 0 || devil->rank > dataTable00FindById(best)->rank) {
+        if (best == 0 || devil->level > dataTable00FindById(best)->level) {
             best = id;
         }
     }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: decides whether a battle enemy can be recruited (state flags, hp ratio, chance from slot space and level); written from the decompilation, the 64-bit mask tests and branch layout not compared with retail */
 #include "common.h"
 #include "mapnavi/naviMain.h"
+#include "gamedata/Table00Lookup.h"
 
 struct BtlMask {
     u32 low;
@@ -20,13 +21,6 @@ struct BtlRecruitState {
     /* 0x2004 */ u8 unk2004[0x259C];
     /* 0x45A0 */ BtlMask stateA;
     /* 0x45A8 */ BtlMask stateB;
-};
-
-struct DevilRecord {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u16 level;          /* bit 15 is a flag */
-    /* 0x04 */ u8 unk04[0x12];
-    /* 0x16 */ u16 flags;
 };
 
 struct SaveDataView {
@@ -62,7 +56,6 @@ extern BtlMask DAT_00573b40;
 SaveDataView *gameDataBlocksGetSaveData(void);
 s32 gameFlagIsSet(s32 flag);
 s32 lcgRandomRange(u32 maximum);
-DevilRecord *dataTable00FindById(u32 id);
 SlotTableView *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 PlayerLevelView *gameGetPlayerData(void);
@@ -71,7 +64,7 @@ s32 gameDataFlagTestBit(s32 bit);
 #define RECRUIT_BIT_BONUS 0x3E
 
 /* Chance (percent) from the player/devil level gap, limited by `ceiling`. */
-static __inline s32 recruitLevelChance(s32 ceiling, const DevilRecord *record)
+static __inline s32 recruitLevelChance(s32 ceiling, const Table00RecordA *record)
 {
     s32 chance = ((s32)gameGetPlayerData()->level - (s32)(record->level & 0x7FFF)) / 2 + 5;
     if (chance < 0)
@@ -103,7 +96,7 @@ u32 FUN_003edca0(BtlRecruitState *state)
 
         u32 *unitWords = (u32 *)flags;
         u16 devilId = *(u16 *)((u8 *)flags + 0x166);
-        DevilRecord *record = dataTable00FindById(devilId);
+        Table00RecordA *record = dataTable00FindById(devilId);
         if ((record->flags & BTL_DEVIL_FLAG_NO_RECRUIT) != 0)
             return 0;
         if (btlMaskHit(*flags, DAT_005739b0) || btlMaskHit(*flags, DAT_005739c0))

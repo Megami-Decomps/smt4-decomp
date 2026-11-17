@@ -60,13 +60,12 @@ void equipmentGetCappedUpgradeBonuses(u32 id, s16 *values)
         values[5] = storage->categories[2][index].secondary;
         break;
     }
-    const EquipmentUpgradeBonusRecord *base =
-        reinterpret_cast<const EquipmentUpgradeBonusRecord *>(dataTable08Sub2GetRecord(id));
+    const EquipmentRecordA *base = dataTable08Sub2GetRecord(id);
     if (base != NULL) {
-        values[0] = capUpgradeBonus(values[0], 999 - base->power);
-        values[4] = capUpgradeBonus(values[4], 99 - (s8)base->modifiers[2]);
-        values[5] = capUpgradeBonus(values[5], 99 - (s8)base->modifiers[3]);
-        values[6] = capUpgradeBonus(values[6], 99 - (s8)base->modifiers[4]);
+        values[0] = capUpgradeBonus(values[0], 999 - base->hpBonus);
+        values[4] = capUpgradeBonus(values[4], 99 - base->statBonus[2]);
+        values[5] = capUpgradeBonus(values[5], 99 - base->statBonus[3]);
+        values[6] = capUpgradeBonus(values[6], 99 - base->statBonus[4]);
     }
 }
 }

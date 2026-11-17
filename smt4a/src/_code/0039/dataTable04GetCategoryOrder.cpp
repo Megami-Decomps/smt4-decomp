@@ -8,7 +8,7 @@ extern "C" {
 /* Maps the category of table-04 record `id` to its display order (99 when there is no record). */
 u32 dataTable04GetCategoryOrder(u32 id)
 {
-    Table04Record *record;
+    Table04RecordA *record;
 
     if (id == 0) {
         return 99;

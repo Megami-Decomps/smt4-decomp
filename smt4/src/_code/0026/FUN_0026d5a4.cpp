@@ -2,7 +2,6 @@
 #include "bible/bibleMain.h"
 
 extern "C" {
-extern PartyPanelState *g_partyPanel;
 
 int FUN_0026d654(int arg);
 int partyPanelSetState(int a, int b);
@@ -23,10 +22,10 @@ void FUN_0026d5a4(void)
     if ((state != 12 && state != 4) && (state != 15)) {
         i = 0;
         do {
-            timerStart(scene->timers[i].data, 7, 0);
+            timerStart(&scene->sprites[PARTY_PANEL_SPRITE_MEMBERS + i], 7, 0);
             i++;
         } while (i < 4);
-        timerStart(scene->timerB.data, 7, 0);
+        timerStart(&scene->sprites[PARTY_PANEL_SPRITE_LAYOUT], 7, 0);
     }
     FUN_00298d28(0, 0);
     state = scene->panelState;

@@ -3,16 +3,15 @@
 #include "gamedata/GameFlags.h"
 #include "shard/Shard003D.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 void partyRefreshSlotValues();
 
-extern AocSystem *g_aocSystem;
 const GameBlock2830C *gameDataBlocksGetSaveData();
 s32 recordGetScaledMaximum(const BtlEquip *unit);
 s32 gameFlagIsSet(u32 flag);
 BtlEquip *slotRecordFindById(u16 id);
-s32 aocHasType36(AocSystem *system, u32 id);
 s32 bitsAt60Test(const BtlEquip *unit, u32 mask);
 
 // Apply each newly installed stat bonus once, preserving current damage when maximum HP grows.

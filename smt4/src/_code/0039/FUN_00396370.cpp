@@ -3,6 +3,7 @@
 #include <math.h>
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "shard/SaveWork.h"
+#include "game/GameState.h"
 
 /* An interactable of the field map: the talk list owns up to 32 of them. */
 class TalkTarget {
@@ -35,21 +36,6 @@ struct TalkTargetList {
     /* 0x18 */ TalkTarget *targets[32];
 };
 
-/* The parts of the game state and of the map and player blocks this function touches. */
-struct TalkGameState {
-    /* 0x000 */ u8 unk000[0x145];
-    /* 0x145 */ u8 messagePending;
-    /* 0x146 */ u8 unk146[2];
-    /* 0x148 */ s32 messageId;
-    /* 0x14C */ char messageText[0x4C];
-    /* 0x198 */ u8 unk198;
-    /* 0x199 */ u8 talkPrompt;
-    /* 0x19A */ u8 unk19A[0x1E];
-    /* 0x1B8 */ s32 eventValue;
-    /* 0x1BC */ s32 eventArgument;
-    /* 0x1C0 */ u8 unk1C0[0x1AC];
-    /* 0x36C */ s32 mapTalkEnabled;
-};
 struct TalkMapBlock {
     /* 0x000 */ u8 unk000[0x22];
     /* 0x022 */ s16 mapId;
@@ -78,7 +64,6 @@ void FUN_0027d8b4(u16 value);
 void sequenceRequestDefer(s32 id, s32 argument);
 void textFormatBuffer(char *buffer, const char *format, ...);
 extern LmapScene *g_lmapScene;
-extern TalkGameState g_gameState;
 
 /* Picks the nearest interactable within 150 units of the camera, runs its talk or event action and
  * removes it from the list. Returns the id of the last one handled, or -1. */
@@ -97,13 +82,13 @@ s32 FUN_00396370(TalkTargetList *list)
         if (target != NULL && (target->flags & 1) != 0 && (target->flags & 4) == 0) {
             distance = (s32)mapVectorDistance(target->position, *(const MapVector *)g_lmapScene->transform.position);
             if (distance < 150 && distance < nearest) {
-                g_gameState.talkPrompt = 0;
+                g_gameState.event.encounterApproach = 0;
                 nearest = distance;
                 target = list->targets[i];
                 if (target->kind == 0) {
                     result = target->id;
                     if (map->talkEnabled != 0 && target->requiredLevel < player->level) {
-                        g_gameState.talkPrompt = 1;
+                        g_gameState.event.encounterApproach = 1;
                         SoundActorQueuePosition position = {
                             target->position.x * (1.0f / 3.0f),
                             target->position.y * (1.0f / 3.0f),
@@ -112,28 +97,28 @@ s32 FUN_00396370(TalkTargetList *list)
                         soundActorStartOnFreeChannel(0x1000187, position);
                     }
                 } else if (target->kind == 1) {
-                    g_gameState.eventValue = 0;
-                    g_gameState.eventArgument = 0;
+                    g_gameState.event.encounterCount = 0;
+                    g_gameState.event.encounterValue = 0;
                     target = list->targets[i];
                     if (target->hasEvent != 0) {
-                        if (g_gameState.mapTalkEnabled != 0 && target->mapId > 0) {
+                        if (g_gameState.encounterChangeMapId != 0 && target->mapId > 0) {
                             map->mapId = target->mapId;
                         }
                         if (target->sequenceId > 0) {
                             if (target->formatMessage == 0) {
                                 sequenceRequestDefer(target->sequenceId, target->sequenceArgument);
                             } else {
-                                g_gameState.messagePending = 1;
-                                g_gameState.messageId = target->sequenceId;
-                                textFormatBuffer(g_gameState.messageText, "e%03d_%02d", target->sequenceId,
+                                g_gameState.event.scriptPending = 1;
+                                g_gameState.event.scriptId = target->sequenceId;
+                                textFormatBuffer(g_gameState.event.scriptName, "e%03d_%02d", target->sequenceId,
                                                  target->sequenceArgument);
                             }
                         }
                         FUN_0027d8b4(target->id);
                         result = target->id;
                         if (target->eventValue > 0) {
-                            g_gameState.eventValue = target->eventValue;
-                            g_gameState.eventArgument = target->eventArgument;
+                            g_gameState.event.encounterCount = target->eventValue;
+                            g_gameState.event.encounterValue = target->eventArgument;
                         }
                     }
                 }

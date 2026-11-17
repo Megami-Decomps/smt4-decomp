@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00325d08` (_code @ 0x325d08, 0x1440 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -56,7 +57,6 @@ extern unsigned char DAT_00531d58; /* 0x531d58 */
 extern unsigned char DAT_00531df8; /* 0x531df8 */
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f161e; /* 0x5f161e */
 extern unsigned char DAT_005f1633; /* 0x5f1633 */
@@ -115,7 +115,6 @@ extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: __aeabi_memcpy4. */
-
 
 void FUN_00325d08(void)
 
@@ -177,7 +176,7 @@ void FUN_00325d08(void)
     if (temp_v5 != 1) {
       if (temp_v5 != 2) goto LAB_003270b0;
       *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-      if (((g_gameState != 0x24) && (temp_v3 = partyAnyMemberHasFlagBit(2,5), temp_v3 != 0)) &&
+      if (((g_gameState.mapId != 0x24) && (temp_v3 = partyAnyMemberHasFlagBit(2,5), temp_v3 != 0)) &&
          (*(float *)(g_lmapScene + 0x160) < temp_v13)) {
         FUN_004a01c8(2,5);
         *(unsigned int *)(g_lmapScene + 0x160) = 0x447a0000;
@@ -284,11 +283,11 @@ LAB_00326fcc:
         }
       }
       else {
-        temp_v3 = g_gameState;
-        if (g_gameState == 5) {
+        temp_v3 = g_gameState.mapId;
+        if (g_gameState.mapId == 5) {
           temp_v3 = DAT_005f1600;
         }
-        if (g_gameState == 5 && temp_v3 == 9) {
+        if (g_gameState.mapId == 5 && temp_v3 == 9) {
           temp_v4 = 0x44bb8000;
         }
         else {
@@ -376,7 +375,7 @@ LAB_00326fcc:
         }
       }
       temp_v16 = temp_v11;
-      if ((g_gameState != 0x24) && (temp_v3 = partyAnyMemberHasFlagBit(2,5), temp_v16 = temp_v11, temp_v3 != 0)) {
+      if ((g_gameState.mapId != 0x24) && (temp_v3 = partyAnyMemberHasFlagBit(2,5), temp_v16 = temp_v11, temp_v3 != 0)) {
         distSpatial();
         *(float *)(g_lmapScene + 0x160) = *(float *)(g_lmapScene + 0x160) - temp_v11;
       }

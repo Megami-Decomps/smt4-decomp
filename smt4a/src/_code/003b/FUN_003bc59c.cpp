@@ -7,6 +7,7 @@
 #include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 #include "util/SlotRangeSelect.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/ConsumableRecordA.h"
 
 namespace {
 struct BattleActionDescriptor {
@@ -34,15 +35,6 @@ struct BattleActionSkill {
     u32 attribute : 5;
     u32 unkHigh : 16;
 };
-struct BattleActionItem {
-    u8 unk00[0x32];
-    u16 skillId;
-};
-struct EquipmentAttributeView {
-    u8 unk00[0x24];
-    u32 unk24 : 20;
-    u32 attribute : 12;
-};
 /* What btlGetEntryChoiceRange reports about a choice: its first combatant and how many follow. */
 struct BattleChoiceSpan {
     s32 count[3];
@@ -51,7 +43,6 @@ struct BattleChoiceSpan {
 }
 
 extern "C" {
-BattleActionItem *dataTable8FindRecord(s32 id);
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 const BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
@@ -81,7 +72,7 @@ s32 FUN_003bc59c(void)
                     }
                 }
                 if (actions->selected.kind == 8) {
-                    const BattleActionItem *item = dataTable8FindRecord(actions->selected.id);
+                    const ConsumableRecordA *item = dataTable8FindRecord(actions->selected.id);
                     if (item != NULL && item->skillId != 0) {
                         const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(item->skillId);
                         if (skill != NULL && attribute == skill->attribute) {
@@ -98,7 +89,7 @@ s32 FUN_003bc59c(void)
                         }
                     }
                     if (actions->candidates[slot].kind == 8) {
-                        const BattleActionItem *item = dataTable8FindRecord(actions->candidates[slot].id);
+                        const ConsumableRecordA *item = dataTable8FindRecord(actions->candidates[slot].id);
                         if (item != NULL && item->skillId != 0) {
                             const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(item->skillId);
                             if (skill != NULL && attribute == skill->attribute) {
@@ -108,9 +99,9 @@ s32 FUN_003bc59c(void)
                     }
                     if (actions->candidates[slot].kind == 1 && actions->candidates[slot].id == 2 &&
                         actions->equipment != NULL) {
-                        const EntrySortData *entry = dataTable08Sub2GetRecord(actions->equipment->id);
+                        const EquipmentRecordA *entry = dataTable08Sub2GetRecord(actions->equipment->id);
                         if (entry != NULL &&
-                            attribute == reinterpret_cast<const EquipmentAttributeView *>(entry)->attribute) {
+                            attribute == entry->traitBits.attribute) {
                             found++;
                         }
                     }

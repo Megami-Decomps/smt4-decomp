@@ -1,25 +1,10 @@
 /* NON_MATCHING: common sysPlaySe block placement, conditional sound move order, and row-load scheduling differ. */
-#include "common.h"
+#include "ui/PartyPanelStateA.h"
 #include "code/Code002c.h"
 #include "code/Code0037.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
 
-/* The party panel as the cursor-sound code reads it. */
-struct PartyPanelSounds {
-    /* 0x0000 */ u8 unk0000[0x1C];
-    /* 0x001C */ s32 screen;
-    /* 0x0020 */ u8 unk0020[0x22];
-    /* 0x0042 */ u8 secondColumn;
-    /* 0x0043 */ u8 unk0043[0x971];
-    /* 0x09B4 */ u8 page;
-    /* 0x09B5 */ u8 unk09B5[0x85B];
-    /* 0x1210 */ u8 holding;
-    /* 0x1211 */ u8 unk1211[7];
-    /* 0x1218 */ s32 row;
-};
-
 extern "C" {
-extern PartyPanelSounds *g_partyPanel;
 
 void sysPlaySe(u32 sound);
 void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
@@ -33,9 +18,9 @@ s32 gameFlagIsSet(u32 flag);
 /* Plays the sound of the party panel's confirm / cancel / move input and updates the button help. */
 void FUN_0023fc38(void)
 {
-    PartyPanelSounds *panel = g_partyPanel;
+    PartyPanelStateA *panel = g_partyPanel;
     FUN_002c7e24();
-    u8 page = panel->page;
+    u8 page = panel->panelState;
     bool subPage = true;
     if (page == 0 || page == 1 || page == 0xc || page == 0xd || page == 0xe) {
         subPage = false;
@@ -44,16 +29,16 @@ void FUN_0023fc38(void)
     s32 demonId = partyPanelGetSelectedDemonId();
     if (confirmed != 0) {
         if (subPage) {
-            if (panel->page != 0x10) {
-                sysPlaySe(panel->secondColumn == 0 ? 0x1d : 0x1e);
+            if (panel->panelState != 0x10) {
+                sysPlaySe(panel->alternate == 0 ? 0x1d : 0x1e);
             } else {
-                sysPlaySe(panel->secondColumn == 0 ? 0xb9 : 0xba);
+                sysPlaySe(panel->alternate == 0 ? 0xb9 : 0xba);
             }
-        } else if (panel->page == 0xc && gameFlagIsSet(0x401) != 0) {
-            sysPlaySe(panel->secondColumn == 0 ? 0xc0 : 0xc1);
+        } else if (panel->panelState == 0xc && gameFlagIsSet(0x401) != 0) {
+            sysPlaySe(panel->alternate == 0 ? 0xc0 : 0xc1);
         } else {
-            s32 row = panel->row;
-            if (panel->secondColumn != 0) {
+            s32 row = panel->layoutMode;
+            if (panel->alternate != 0) {
                 if (row == 0) {
                     sysPlaySe(0x1c);
                 } else if (row == 1) {
@@ -68,27 +53,27 @@ void FUN_0023fc38(void)
     } else if (demonId < 0) {
         u32 sound;
         if (subPage) {
-            if (panel->page != 0x10) {
-                sound = panel->secondColumn == 0 ? 0x25 : 0x26;
+            if (panel->panelState != 0x10) {
+                sound = panel->alternate == 0 ? 0x25 : 0x26;
             } else {
-                sound = panel->secondColumn == 0 ? 0xbc : 0xbd;
+                sound = panel->alternate == 0 ? 0xbc : 0xbd;
             }
-        } else if (panel->page == 0xc && gameFlagIsSet(0x401) != 0) {
-            sound = panel->secondColumn == 0 ? 0xc4 : 0xc5;
-        } else if (panel->secondColumn != 0) {
+        } else if (panel->panelState == 0xc && gameFlagIsSet(0x401) != 0) {
+            sound = panel->alternate == 0 ? 0xc4 : 0xc5;
+        } else if (panel->alternate != 0) {
             sound = 0x26;
         } else {
             sound = 0x25;
         }
         sysPlaySe(sound);
     } else if (subPage) {
-        if (panel->screen != 0x19 || FUN_002f1964() == 0) {
-            sysPlaySe(panel->secondColumn == 0 ? 0x23 : 0x24);
+        if (panel->sceneState != 0x19 || FUN_002f1964() == 0) {
+            sysPlaySe(panel->alternate == 0 ? 0x23 : 0x24);
         }
     } else {
-        if (panel->page != 0xc) {
-            s32 row = panel->row;
-            if (panel->secondColumn != 0) {
+        if (panel->panelState != 0xc) {
+            s32 row = panel->layoutMode;
+            if (panel->alternate != 0) {
                 if (row == 0) {
                     sysPlaySe(0x22);
                 } else if (row == 1) {
@@ -100,13 +85,13 @@ void FUN_0023fc38(void)
                 sysPlaySe(0x27);
             }
         } else {
-            sysPlaySe(panel->secondColumn == 0 ? 0xc2 : 0xc3);
+            sysPlaySe(panel->alternate == 0 ? 0xc2 : 0xc3);
         }
         if (FUN_0022e714() != 0 && campCecHasObject() != 0) {
-            sysPlaySe(panel->secondColumn == 0 ? 0xe5 : 0xce);
+            sysPlaySe(panel->alternate == 0 ? 0xe5 : 0xce);
         }
     }
-    if (panel->holding != 0) {
+    if (panel->disabled != 0) {
         buttonHelpSelectSlot(3, 0x12, 0, 1);
         return;
     }

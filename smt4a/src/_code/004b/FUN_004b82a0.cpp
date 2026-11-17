@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc keeps the payload address in a spare register (sl) across the request arms, retail rebuilds sp each time and pushes one register fewer; the request selection is the same as smt4 FUN_003b92b4. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {
@@ -32,16 +33,6 @@ typedef struct SceneWork {
     /* 0x1168 */ u8 returnToMap;
 } SceneWork;
 
-/* The slice of the game state read and written here. */
-typedef struct SceneGameState {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u8 endingRequested;
-    /* 0x39 */ u8 unk39[0x23];
-    /* 0x5C */ u32 saveId;
-    /* 0x60 */ u8 unk60[4];
-    /* 0x64 */ char saveName[0x10];
-} SceneGameState;
-
 typedef struct EndingName {
     char text[9];
 } EndingName;
@@ -56,7 +47,6 @@ typedef struct SequencePayload {
     } name;
 } SequencePayload;
 
-extern SceneGameState g_gameState;
 extern s32 g_mapSelection;
 
 s32 menu4CReleaseSlots(void *sprites);
@@ -78,7 +68,6 @@ void obj04Finish(void);
 void FUN_004b82a0(SceneWork *work)
 {
     SequencePayload payload;
-
 
     if (menu4CReleaseSlots(work->sprites) == 0) {
         return;
@@ -109,9 +98,9 @@ void FUN_004b82a0(SceneWork *work)
         asdSequenceRequest(4, &payload, 32);
     } else if ((flags & 0x40000) != 0) {
         gameDataCopySaveToWork();
-        payload.id = g_gameState.saveId;
+        payload.id = g_gameState.scriptValue;
         payload.value = -1;
-        libc_strcpy(payload.name.text, g_gameState.saveName);
+        libc_strcpy(payload.name.text, g_gameState.scriptText);
         asdSequenceRequest(4, &payload, 32);
     } else if ((flags & 0x800000) != 0) {
         payload.id = work->record->id;
@@ -137,7 +126,7 @@ void FUN_004b82a0(SceneWork *work)
     } else if (work->requestEnding != 0) {
         bgmReleaseStopped();
         soundChannelStopAll(15);
-        g_gameState.endingRequested = 1;
+        g_gameState.retainCampResources = 1;
         payload.id = 1;
         payload.value = -1;
         static const EndingName ending = {"e001_000"};

@@ -3,6 +3,7 @@
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/MdlManagerDestroy.h"
+#include "game/GameState.h"
 
 #define MAP_RANGE_ENTRY_COUNT 16
 
@@ -63,7 +64,6 @@ struct MapRangeWork {
 
 extern "C" {
 extern MapRangeWork *g_mapRangeWork;
-extern GameState g_gameState;
 
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathGetShortestAngleDelta(f32 first, f32 second);
@@ -87,16 +87,16 @@ u32 FUN_001a8cf8(void)
             break;
         case MAP_RANGE_WAIT: {
             s32 facing = 0;
-            if (g_gameState.encounterSourceActive && g_gameState.encounterSourceKind != 0) {
-                f32 heading = mathPositionHeadingDegrees(entry->position, g_gameState.encounterSourcePosition);
+            if (g_gameState.event.encounterSourceActive && g_gameState.event.encounterSourceKind != 0) {
+                f32 heading = mathPositionHeadingDegrees(entry->position, g_gameState.event.encounterSourcePosition);
                 f32 delta = mathGetShortestAngleDelta(entry->heading, heading);
                 if (delta > -90.0f && delta < 90.0f)
                     facing = 1;
-                if (mathDistanceBetweenPoints(g_gameState.encounterSourcePosition, entry->position) < 300.0f
-                    && mathAbsHeadingErrorToPoint(g_gameState.encounterSourcePosition.x,
-                                    g_gameState.encounterSourcePosition.y,
-                                    g_gameState.encounterSourcePosition.z,
-                                    g_gameState.encounterSourceHeading, entry->position.x,
+                if (mathDistanceBetweenPoints(g_gameState.event.encounterSourcePosition, entry->position) < 300.0f
+                    && mathAbsHeadingErrorToPoint(g_gameState.event.encounterSourcePosition.x,
+                                    g_gameState.event.encounterSourcePosition.y,
+                                    g_gameState.event.encounterSourcePosition.z,
+                                    g_gameState.event.encounterSourceHeading, entry->position.x,
                                     entry->position.y, entry->position.z) < 70.0f
                     && facing) {
                     entry->triggered = 1;

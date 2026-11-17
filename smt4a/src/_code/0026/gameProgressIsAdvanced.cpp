@@ -1,4 +1,5 @@
 #include "gamedata/GameData.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "gamedata/GameDataAccess.h"
 

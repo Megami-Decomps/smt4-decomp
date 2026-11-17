@@ -2,6 +2,7 @@
 #include "map/MapStateSlots.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "game/GameState.h"
 
 namespace {
 
@@ -14,7 +15,6 @@ struct StateWithExtraSlots {
 
 extern "C" {
 extern MapStateSlots *g_mapStateSlots;
-extern GameState g_gameState;
 void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
 void modelPartSetRotationDegrees(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 void modelSelectPrimaryMotion(AsdMdlNode *node, f32 blend);
@@ -29,7 +29,7 @@ void FUN_00275364(void)
             MapStateSlot *slot = &((StateWithExtraSlots *)g_mapStateSlots)->extraSlots[index];
             if (slot->active != 0) {
                 AsdMdlObject *model = (AsdMdlObject *)slot->resources.model;
-                if (g_gameState.controllerFlags.mapRangeModelsHidden != 0) {
+                if (g_gameState.loading != 0) {
                     if ((model->flags & 2) == 0) {
                         model->flags |= 2;
                         model->node->resource->positionFollowed = 0;
@@ -67,7 +67,7 @@ void FUN_00275364(void)
                 model = (AsdMdlObject *)g_mapStateSlots->references.models[slot->motion.sourceIndex].model;
             }
             u32 flags = model->flags;
-            if (g_gameState.controllerFlags.mapRangeModelsHidden != 0) {
+            if (g_gameState.loading != 0) {
                 if ((flags & 2) == 0) {
                     model->flags = flags | 2;
                     model->node->resource->positionFollowed = 0;

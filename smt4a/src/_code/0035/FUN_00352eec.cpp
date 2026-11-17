@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 /* Data table 0x2F entries of the three types, as this loader reads them. */
@@ -30,7 +31,6 @@ struct Table2FType2Entry {
 
 extern "C" {
 
-extern GameStateA g_gameState;
 s32 lmapGetSpawnIndex(void);
 Table2FType0Entry *dataTable2FType0GetEntry(u32 id);
 Table2FType1Entry *dataTable2FType1GetEntry(u32 id);
@@ -44,9 +44,9 @@ void FUN_00352eec(void)
     if (lmapGetSpawnIndex() < 100) {
         flags->table4c.rate = 0;
     }
-    switch (g_gameState.table2F.type) {
+    switch (g_gameState.table2FType) {
     case 1: {
-        Table2FType0Entry *entry = dataTable2FType0GetEntry(g_gameState.table2F.id);
+        Table2FType0Entry *entry = dataTable2FType0GetEntry(g_gameState.table2FId);
         flags->table4cHead.unk3a = entry->unk0C;
         flags->table4cHead.unk3b = entry->unk0E;
         flags->table4c.level = entry->level;
@@ -55,7 +55,7 @@ void FUN_00352eec(void)
         break;
     }
     case 2: {
-        Table2FType1Entry *entry = dataTable2FType1GetEntry(g_gameState.table2F.id);
+        Table2FType1Entry *entry = dataTable2FType1GetEntry(g_gameState.table2FId);
         flags->table4cHead.unk3a = entry->unk0C;
         flags->table4cHead.unk3b = entry->unk0E;
         flags->table4c.level = entry->level;
@@ -64,7 +64,7 @@ void FUN_00352eec(void)
         break;
     }
     case 3: {
-        Table2FType2Entry *entry = dataTable2FType2GetEntry(g_gameState.table2F.id);
+        Table2FType2Entry *entry = dataTable2FType2GetEntry(g_gameState.table2FId);
         flags->table4cHead.unk3a = entry->unk0C;
         flags->table4cHead.unk3b = entry->unk0E;
         flags->table4c.level = entry->level;

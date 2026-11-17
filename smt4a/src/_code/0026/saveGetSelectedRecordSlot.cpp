@@ -11,7 +11,7 @@ int saveGetSelectedRecordSlot(int index)
 {
   u32 *words = (u32 *)g_gameDataBlocks.saveBlock;
   words += index * (s32)(sizeof(GameSavedPairA) / sizeof(u32));
-  return (s32)words + (s32)offsetof(GameSavedPairTableA, entries);
+  return (s32)words + (s32)offsetof(GameSaveDataA, body.pairs.entries);
 }
 
 } /* extern "C" */

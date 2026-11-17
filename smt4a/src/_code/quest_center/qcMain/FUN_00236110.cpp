@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "result/WhisperEffect.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "classes/SelectionState.h"
@@ -15,23 +16,6 @@ struct QuestEntry {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x3f5];
-    s8 f005f19f1; /* 0x3f5 */
-    u8 pad3f6[0x2];
-    u32 f005f19f4; /* 0x3f8 */
-    u32 f005f19f8; /* 0x3fc */
-    u32 f005f19fc; /* 0x400 */
-    u8 f005f1a00; /* 0x404 */
-    u8 pad405[0x4f];
-    s32 f005f1a50; /* 0x454 */
-    u8 pad458[0x11c];
-    u8 f005f1b70; /* 0x574 */
-    u8 pad575[3];
-    s32 f005f1b74; /* 0x578 */
-};
-extern GameStateView g_gameState;
 
 extern QcGlobalsA g_qcMain;
 
@@ -61,12 +45,12 @@ void scriptPanelRelease(QuestEntry *entry);
 /* Applies the pending place change, if any. */
 static void applyPendingPlace(void)
 {
-    if (g_gameState.f005f19f1 != 0) {
-        g_gameState.f005f19f1 = 0;
-        g_gameState.f005f1b70 = 0;
-        g_gameState.f005f1a00 = 1;
-        mapPlaceSet(g_gameState.f005f19f4, g_gameState.f005f19f8, g_gameState.f005f19fc);
-        g_gameState.f005f1a50 = 2;
+    if (g_gameState.scriptRequestPending != 0) {
+        g_gameState.scriptRequestPending = 0;
+        g_gameState.transitionActive = 0;
+        g_gameState.unk404 = 1;
+        mapPlaceSet(g_gameState.scriptRequestValues[0], g_gameState.scriptRequestValues[1], g_gameState.scriptRequestValues[2]);
+        g_gameState.unk454 = 2;
     }
 }
 
@@ -134,14 +118,14 @@ u32 FUN_00236110(void)
     case 3:
         if ((work->entry == NULL || entryRequestSequence() == 0) && lmapMainGetUnk74() != 0 && g_qcMain.option1 == 0) {
             if (gameStateIsFlagSetAndLarge() != 0) {
-                s32 position = g_gameState.f005f1b74 - 200;
+                s32 position = g_gameState.sourceMap - 200;
                 asdSequenceRequest(0xe, &position, 4);
             } else {
                 applyPendingPlace();
                 asdSequenceRequest(6, NULL, 0);
             }
         }
-        if (g_gameState.f005f19f1 != 0) {
+        if (g_gameState.scriptRequestPending != 0) {
             applyPendingPlace();
             asdSequenceRequest(6, NULL, 0);
         }

@@ -19,7 +19,7 @@ u32 unitHasRankingBonus(u32 unitId)
         return 0;
     s32 rank = 0;
     u16 previous = 0;
-    AvailabilityView *save = reinterpret_cast<AvailabilityView *>(&g_gameDataBlocks.saveBlock->save.sub);
+    AvailabilityView *save = reinterpret_cast<AvailabilityView *>(&g_gameDataBlocks.saveBlock->body);
     if (gameFlagIsSet(0x4F6)) {
         for (s32 i = 0; i < 20; ++i) {
             u16 id = save->ordered[i].id;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: -O2 candidate; active/state guards merge, entry addressing uses pre-indexed LDRB, and global/distance-argument register roles differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
 struct MapBreakableEntry {
@@ -17,11 +18,6 @@ struct MapBreakableWork {
     /* 0x00 */ u8 unk00[0x5c];
     /* 0x5c */ MapBreakableEntry entries[16];
 };
-struct BreakablePlayerPosition {
-    /* 0x000 */ u8 unk000[0x3dc];
-    /* 0x3dc */ MapVector position;
-};
-
 extern "C" {
 extern MapBreakableWork* g_mapHakai;
 f32 mathAngleDeltaDegrees(f32 current, f32 target);
@@ -59,7 +55,7 @@ extern "C" u32 mapHasFacingBreakableInReach(void)
         }
         f32 distance = distanceBetween(g_lmapScene->position, entry.position);
         const MapVector& cachedPosition =
-            reinterpret_cast<const BreakablePlayerPosition*>(&g_gameState)->position;
+            g_gameState.breakableCheckPosition;
         const f32 cachedDistance = distanceBetween(cachedPosition, entry.position);
         if (distance > cachedDistance) {
             distance = cachedDistance;

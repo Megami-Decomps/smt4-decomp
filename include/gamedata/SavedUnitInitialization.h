@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 union SavedUnitInitialization {
-    RecordValue record;
+    GameSavedItem record;
     struct {
         /* 0x00 */ u16 level;
         /* 0x02 */ u16 stats[5];

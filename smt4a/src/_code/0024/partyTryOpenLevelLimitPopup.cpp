@@ -1,5 +1,7 @@
 /* Prepares an idle party popup from the selected slot when its unit meets the level limit. */
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
+#include "gamedata/Table00Lookup.h"
 
 struct PopupState {
     u32 state;
@@ -12,12 +14,10 @@ struct PopupState {
 };
 extern "C" {
 extern PopupState *g_popupState;
-extern GameStateA g_gameState;
 void FUN_00152f44(void);
 void *saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
-void *dataTable00FindById(u16 id);
 void *gameGetPlayerData(void);
 const char *popupSelectWeightedMessage(u32 kind, u16 slot);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
@@ -30,7 +30,6 @@ void partyTryOpenLevelLimitPopup(void)
         u8 record[0x12C];
         u16 id;
     };
-    struct TableLevelView { u16 id; u16 level; };
     FUN_00152f44();
     if (g_popupState->state != 0) {
         return;
@@ -39,10 +38,10 @@ void partyTryOpenLevelLimitPopup(void)
     if (slot == NULL || (gameFlagIsSet(418) && randRange(99) + 1 <= 50)) {
         return;
     }
-    u32 unitId = g_gameState.mapFlags.unk308;
-    s32 tableLevel = ((TableLevelView *)dataTable00FindById((u16)unitId))->level & 0x7FFF;
+    u32 unitId = g_gameState.unk308;
+    s32 tableLevel = dataTable00FindById((u16)unitId)->level & 0x7FFF;
     s32 playerLevel = *(u16 *)((u8 *)gameGetPlayerData() + 0x62);
-    if (g_gameState.mapFlags.unk308 == 0 || (playerLevel > tableLevel && playerLevel > tableLevel + 5)) {
+    if (g_gameState.unk308 == 0 || (playerLevel > tableLevel && playerLevel > tableLevel + 5)) {
         return;
     }
     g_popupState->state = 12;

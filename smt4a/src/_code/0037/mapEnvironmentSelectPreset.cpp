@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "map/mapMain.h"
 
 struct MapEnvironmentTableA {
@@ -8,14 +9,13 @@ struct MapEnvironmentTableA {
 };
 
 extern "C" {
-extern GameStateA g_gameState;
 extern MapEnvironmentTableA *g_mapTable;
 s32 gameFlagIsSet(u32 flag);
 void mapEnvironmentApplyPreset(u32 preset, s32 transition);
 
 void mapEnvironmentSelectPreset(s32 index)
 {
-    if (g_gameState.mode == 0x27) {
+    if (g_gameState.mapId == 0x27) {
         if (gameFlagIsSet(0x9d)) {
             if (index == 1) {
                 mapEnvironmentApplyPreset(g_mapTable->alternate[0].value, 0);
@@ -38,12 +38,12 @@ void mapEnvironmentSelectPreset(s32 index)
                 return;
             }
         }
-    } else if (g_gameState.mode == 0x14) {
+    } else if (g_gameState.mapId == 0x14) {
         if (gameFlagIsSet(0x170)) {
             mapEnvironmentApplyPreset(8, 0);
             return;
         }
-    } else if (g_gameState.mode == 0x1a) {
+    } else if (g_gameState.mapId == 0x1a) {
         if ((gameFlagIsSet(0x4c9) && gameFlagIsSet(0x179) && !gameFlagIsSet(0x19f)) ||
             (!gameFlagIsSet(0x4c9) && gameFlagIsSet(0x179) && !gameFlagIsSet(0x184))) {
             mapEnvironmentApplyPreset(2, 0);

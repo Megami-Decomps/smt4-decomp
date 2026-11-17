@@ -2,9 +2,9 @@
 #include "camp/CampScriptCleanup.h"
 #include "map/mapDepart.h"
 #include "camp/Camp.h"
+#include "game/GameState.h"
 
 extern "C" {
-extern GameState g_gameState;
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *buffer);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
@@ -40,7 +40,7 @@ void FUN_003b8b0c(CampScriptCleanup *work)
     }
     asdTMTexTableReleaseNode(33, work->textureNode);
     campGetState();
-    if (work->ownsList != 0 && g_gameState.campCleanup.retainCampResources == 0) {
+    if (work->ownsList != 0 && g_gameState.retainCampResources == 0) {
         work->ownsList = 0;
         FUN_002a4bac(work->list);
         for (s32 index = 0; index < 10; ++index) {

@@ -1,7 +1,9 @@
 /* NON_MATCHING: recovered selector/scroller arguments; nested-loop counters and table pointers occupy registers instead of retail's88-byte frame. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "ui/ItemListSelection.h"
+#include "gamedata/Table00Lookup.h"
 
 struct Unk4cfeb0Scroller;
 extern "C" {
@@ -15,14 +17,6 @@ typedef struct OccurrenceEntry {
         /* 0x16 */ u16 unk16[2];
     } more[24];
 } OccurrenceEntry;
-
-/* A table-00 record: bit 0 of the flags at 0x16 allows it without the debug flag; 0x7C is its value. */
-typedef struct Table00Record {
-    /* 0x00 */ u8 unk00[0x16];
-    /* 0x16 */ u16 flags;
-    /* 0x18 */ u8 unk18[0x64];
-    /* 0x7C */ u32 value;
-} Table00Record;
 
 typedef struct Table02Slot {
     u16 id;
@@ -56,17 +50,9 @@ typedef struct EntryListWork {
     /* 0xA874 */ u32 table;
 } EntryListWork;
 
-typedef struct GameStateFlag {
-    /* 0x000 */ u8 unk000[0x660];
-    /* 0x660 */ s32 showAll;
-} GameStateFlag;
-
-extern GameStateFlag g_gameState;
-
 OccurrenceEntry *dataTableFindEntryOccurrenceByBytePair(u32 table, s32 first, s32 second);
 Table02Slot *dataTableGetRecord02(u16 key);
 ItemRecord *dataTable02GetRecordWithAocPackage(u32 id);
-Table00Record *dataTable00FindById(u32 id);
 u16 *devilGetRecord(u32 id);
 s32 itemIsCollectedWithRelated(u32 id);
 void campFillUnitComparison(ListEntry *out, u32 id, s32 arg);
@@ -106,23 +92,23 @@ void FUN_004a5b20(EntryListWork *work)
                         continue;
                     }
                     for (s32 j = 0; j < 6; j++) {
-                        u32 id = item->ids[j];
+                        u16 id = item->ids[j];
 
                         if (id == 0 || dataTable00FindById(id) == NULL) {
                             continue;
                         }
                         u16 *named = devilGetRecord(id);
-                        Table00Record *record = dataTable00FindById(id);
+                        Table00RecordA *record = dataTable00FindById(id);
 
                         if (named != NULL && record != NULL
-                            && (g_gameState.showAll != 0 || ((record->flags & 1) != 0 && itemIsCollectedWithRelated(*named) != 0))) {
+                            && (g_gameState.showAllEntries != 0 || ((record->flags & 1) != 0 && itemIsCollectedWithRelated(*named) != 0))) {
                             ListEntry listEntry;
                             u32 value = 0;
 
                             campFillUnitComparison(&listEntry, *named, 0);
-                            Table00Record *found = dataTable00FindById(*named);
+                            Table00RecordA *found = dataTable00FindById(*named);
                             if (found != NULL) {
-                                value = found->value;
+                                value = found->money;
                             }
                             listEntry.value = value;
                             listEntry.enabled = 1;

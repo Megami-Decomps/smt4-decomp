@@ -6,7 +6,7 @@
 extern "C" {
 const FusionRecipe *contentEntryFindById(u32);
 s32 gameSlotTableFindFree(void);
-s32 bitsAt60Test(const SlotRecord *, u32);
+s32 bitsAt60Test(const SlotRecordA *, u32);
 s32 FUN_002a4b28(u16);
 s32 arrayContainsU16(const u16 *, s32, u32);
 
@@ -24,7 +24,7 @@ u32 fusionClassifyRecipeAvailability(u32 unused, u32 recipeId, u16 *statuses)
         if (recipe->ingredients[i] != 0) {
             for (s32 slot = 0; slot < gameSlotTableFindFree(); ++slot) {
                 if (stock->slots[slot] >= 0) {
-                    SlotRecord *record = gameGetSlotRecord(stock->slots[slot]);
+                    SlotRecordA *record = gameGetSlotRecord(stock->slots[slot]);
                     if (!bitsAt60Test(record, 10)) {
                         if (record->entryId == recipe->ingredients[i]) {
                             statuses[i] = 1;

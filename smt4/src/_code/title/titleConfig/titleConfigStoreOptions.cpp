@@ -9,11 +9,11 @@ void titleConfigStoreOptions(void)
 {
     GameSaveData* data = gameDataBlocksGetSaveData();
     if (data != NULL) {
-        data->configOptions[0] = g_titleConfigValues.music;
-        data->configOptions[1] = g_titleConfigValues.sound;
-        data->configOptions[2] = g_titleConfigValues.voice;
-        data->configOptions[3] = g_titleConfigValues.auxiliary;
-        data->hasConfig = 1;
+        data->body.config.configOptions[0] = g_titleConfigValues.music;
+        data->body.config.configOptions[1] = g_titleConfigValues.sound;
+        data->body.config.configOptions[2] = g_titleConfigValues.voice;
+        data->body.config.configOptions[3] = g_titleConfigValues.auxiliary;
+        data->body.config.hasConfig = 1;
     }
 }
 }

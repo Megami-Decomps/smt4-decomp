@@ -1,16 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276a3c` (_code @ 0x276a3c, 0x111c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x370];
-    int f0049fc8c; /* 0x370 */
-    u8 pad374[0x58];
-    signed char f0049fce8; /* 0x3cc */
-};
-extern GameStateView g_gameState;
 
 
 int FUN_001f8350(void);
@@ -395,7 +388,7 @@ void FUN_00276a3c(void)
     if (((char)piVar4[0xae] != '\0') && (piVar4[0x2b] == 0)) {
       FUN_001f8350();
     }
-    if ((((*DAT_004474f4 != 0) || (g_gameState.f0049fce8 != '\0')) || (g_gameState.f0049fc8c == 1)) ||
+    if ((((*DAT_004474f4 != 0) || (g_gameState.unk3CC != '\0')) || (g_gameState.mapMode == 1)) ||
        ((char)DAT_004474f4[0xae] != '\0')) {
       temp_v23 = (float)DAT_004474f4[0xf];
       temp_v21 = (float)DAT_004474f4[0xd];

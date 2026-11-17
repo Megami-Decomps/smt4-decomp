@@ -2,12 +2,12 @@
 #include "battle/WeightedEncounter.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 extern "C" {
 extern void *g_aocSystem;
 s32 randRange(u16 maximum);
 WeightedEncounterTable *resourceFindType27Record(void *system, u32 index);
 WeightedEncounterGroup *dataTable02GetRecordWithAocPackage(u32 id);
-Table00Record *dataTable00FindById(u32 id);
 
 // Select an encounter by weight, excluding special portrait groups from the total when requested.
 u32 FUN_004bc2dc(s32 tableIndex, s32 excludeSpecial)
@@ -28,8 +28,8 @@ u32 FUN_004bc2dc(s32 tableIndex, s32 excludeSpecial)
                 WeightedEncounterGroup *group = dataTable02GetRecordWithAocPackage(entry->id);
                 for (s32 member = 0; member < 6; ++member) {
                     if (group->members[member] != 0) {
-                        Table00Record *record = dataTable00FindById(group->members[member]);
-                        if (record != NULL && (record->bustUp.value || record->unk86[0x1D])) {
+                        Table00RecordA *record = dataTable00FindById(group->members[member]);
+                        if (record != NULL && (record->bustUp || record->bustUpVariation)) {
                             excluded = true;
                             break;
                         }

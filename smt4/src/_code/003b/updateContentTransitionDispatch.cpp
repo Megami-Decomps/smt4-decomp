@@ -1,6 +1,8 @@
 /* NON_MATCHING: only the flag reload after FUN_0022b8c0 differs: retail stores the saved token before reloading the flags, the build hoists the load above the store. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
+#include "game/GameState.h"
+#include "addon/AocSystem.h"
 
 struct ContentTransitionUpdate {
     ContentTransition scene;
@@ -13,18 +15,7 @@ struct ContentTransitionUpdate {
     u8 unke59[3];
     u32 process; // 0xe5c
 };
-struct ContentTransitionRequests {
-    u8 unk00[0x78];
-    u16 state12, state13;
-};
 extern "C" {
-// The transition request flags lie inside g_gameState.
-struct GameStateTransitionView {
-    u8 unk000[0x100];
-    ContentTransitionRequests requests;
-};
-extern GameStateTransitionView g_gameState;
-extern AocSystem *g_aocSystem;
 u32 aocSelectedRecordIsUnavailable(AocSystem *);
 void slotSetRequest(s32, s32, u32);
 void messageMainFinishWindow();
@@ -88,14 +79,14 @@ static __inline bool transitionHasSelectionChange(u32 flags)
  * or runs the idle update, then refreshes the scene's scroll and transform. */
 void updateContentTransitionDispatch(ContentTransitionUpdate *update)
 {
-    if (g_gameState.requests.state13) {
+    if (g_gameState.event.transitionRequest13) {
         update->scene.state = 13;
         update->scene.phase = 0;
-        g_gameState.requests.state13 = 0;
-    } else if (g_gameState.requests.state12) {
+        g_gameState.event.transitionRequest13 = 0;
+    } else if (g_gameState.event.transitionRequest12) {
         update->scene.state = 12;
         update->scene.phase = 0;
-        g_gameState.requests.state12 = 0;
+        g_gameState.event.transitionRequest12 = 0;
     } else if (aocSelectedRecordIsUnavailable(g_aocSystem)) {
         update->scene.state = 14;
         update->scene.phase = 0;

@@ -1,13 +1,13 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "code/Code004b_Smt4a.h"
+#include "addon/AocSystemA.h"
 
 struct Table02Record {
     u8 data[0x28];
 };
 
 extern "C" {
-extern AocSystemA* g_aocSystem;
 Table02Record* aocFindPackageRecord(AocSystemA* system, u32 index);
 
 Table02Record* dataTable02GetRecordWithAocPackage(s32 index)

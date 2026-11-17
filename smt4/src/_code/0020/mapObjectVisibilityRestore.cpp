@@ -1,5 +1,6 @@
 /* NON_MATCHING: group selection uses predicated address calculations and animation-node reloads collapse; -O2 candidate. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "game/GameState.h"
 
 struct VisibilityResource {
     u8 unk000[0x1f6];
@@ -30,13 +31,8 @@ struct VisibilityScene {
     VisibilitySnapshot primary[9]; // 0x1114
     VisibilitySnapshot secondary[3]; // 0x12a0
 };
-struct VisibilityGameFlags {
-    u8 unk00[0x22];
-    u8 hidden; // 0x22
-};
 extern "C" {
 extern VisibilityScene *g_modelGroups;
-extern VisibilityGameFlags g_gameState;
 void FUN_001e2d88();
 void modelSetScale(AsdMdlNode *, f32);
 void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
@@ -55,7 +51,7 @@ void mapObjectVisibilityRestore()
             VisibilitySnapshot *snapshot = group == 0 ? &g_modelGroups->primary[i] : &g_modelGroups->secondary[i];
             if (!snapshot->active)
                 continue;
-            if (g_gameState.hidden) {
+            if (g_gameState.loading) {
                 AsdMdlObject *object = snapshot->object;
                 if (!(object->flags & 2)) {
                     object->flags |= 2;

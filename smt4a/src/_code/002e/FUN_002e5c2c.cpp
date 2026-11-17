@@ -7,7 +7,7 @@ extern "C" {
 /* Returns the word at 0x2DB8 of the game-data table. */
 u32 FUN_002e5c2c(void)
 {
-    return g_gameDataBlocks.saveBlock->save.sub.unk02D30;
+    return g_gameDataBlocks.saveBlock->body.unk02D30;
 }
 
 } /* extern "C" */

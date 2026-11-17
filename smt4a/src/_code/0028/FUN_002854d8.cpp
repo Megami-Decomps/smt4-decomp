@@ -8,7 +8,7 @@ u8 FUN_002854d8(u32 index, char value)
 {
     if (index < 0x501) {
         u8 *row = (u8 *)g_gameDataBlocks.saveBlock + index * sizeof(GameSavedItemA);
-        GameSavedItemA *item = (GameSavedItemA *)(row + offsetof(GameSavedItemTableA, items));
+        GameSavedItemA *item = (GameSavedItemA *)(row + offsetof(GameSaveDataA, body.items));
         item->flags = (item->flags & ~2) | (value << 1);
     }
     return index < 0x501;

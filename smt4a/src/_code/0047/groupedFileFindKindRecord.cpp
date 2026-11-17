@@ -1,4 +1,4 @@
-#include "gamedata/GroupedFileTables.h"
+#include "addon/AocSystemA.h"
 
 struct Kind41Record {
     u16 id;
@@ -6,24 +6,21 @@ struct Kind41Record {
 };
 typedef char Kind41RecordSize[sizeof(Kind41Record) == 0x1c ? 1 : -1];
 extern "C" {
-s32 packageEntryIsLoaded(const FileTableGroup *);
-const FileTableKindRecord *packageEntryGetDirectory(const FileTableGroup *);
-u32 packageEntryGetFileCount(const FileTableGroup *);
 void *dataTableFileGetTable(void *, u32);
 void *dataTableGetEntries(void *);
 u32 dataTableGetCount(void *);
 
 // Search all loaded kind-41 file tables for the requested record id.
-Kind41Record *groupedFileFindKindRecord(GroupedFileTables *tables, u32 id)
+Kind41Record *groupedFileFindKindRecord(AocSystemA *tables, u32 id)
 {
-    for (s32 groupIndex = 0; groupIndex < tables->count; ++groupIndex) {
-        FileTableGroup *group = &tables->groups[groupIndex];
+    for (s32 groupIndex = 0; groupIndex < tables->packageCount; ++groupIndex) {
+        AocPackage *group = &tables->packages[groupIndex];
         if (packageEntryIsLoaded(group)) {
-            const FileTableKindRecord *kinds = packageEntryGetDirectory(group);
+            const AocPackageDirectoryEntry *kinds = packageEntryGetDirectory(group);
             u32 count = packageEntryGetFileCount(group);
             for (u32 slot = 0; slot < count; ++slot) {
                 if (kinds[slot].kind == 41) {
-                    void *table = dataTableFileGetTable(group->slots[slot].file, 0);
+                    void *table = dataTableFileGetTable(group->files[slot].data, 0);
                     Kind41Record *records = static_cast<Kind41Record *>(dataTableGetEntries(table));
                     s32 recordCount = dataTableGetCount(table);
                     for (s32 index = 0; index < recordCount; ++index) {

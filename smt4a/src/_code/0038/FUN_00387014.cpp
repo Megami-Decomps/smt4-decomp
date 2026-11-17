@@ -1,8 +1,8 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "map/lmapMain.h"
 
 extern "C" {
-extern GameStateA g_gameState;
 extern LmapMainStateA *g_lmapMainState;
 void FUN_00386720(void);
 void FUN_003401a4(LmapMainStateA *state);

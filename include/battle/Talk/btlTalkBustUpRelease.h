@@ -4,9 +4,9 @@
 
 #include "battle/Talk/btlTalkBustUp.h"
 #include "addon/aocMain.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
 extern BtlTalkBustUp *g_btlTalkBustUp;
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void packageFileDisableByKindName(AocSystemA *system, s32 table, u32 node);

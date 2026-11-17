@@ -1,9 +1,7 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-
-
-extern GameStateA g_gameState; /* 0x5f15fc */
 
 extern int lmapGetSpawnIndex(void);
 

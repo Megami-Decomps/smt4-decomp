@@ -1,6 +1,7 @@
 /* NON_MATCHING: selection-sort loop arithmetic/branch orientation and local register allocation differ; -O2 candidate. */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
+#include "game/GameState.h"
 
 struct CategoryTable { u32 reserved; };
 struct CategoryRecord {
@@ -15,12 +16,7 @@ struct CategoryList {
     CategoryListEntry entries[32]; // 0x121e4
     s32 count; // 0x12264
 };
-struct CategoryGameFlags {
-    u8 unk000[0x3e0];
-    s32 ignoreRequirements;
-};
 extern "C" {
-extern CategoryGameFlags g_gameState;
 const CategoryRecord *dataTable2bSub1GetRecord(CategoryTable *, s32);
 s32 gameFlagIsSet(u32);
 s32 saveTestFlagRow(u8, u8);
@@ -35,7 +31,7 @@ void categoryListBuildUnique(CategoryList *list, s32 kind)
         if (record->kind != kind)
             continue;
         bool found = false;
-        if (!g_gameState.ignoreRequirements) {
+        if (!g_gameState.forceVisible) {
             if (record->requiredFlag && !gameFlagIsSet(record->requiredFlag))
                 continue;
             if (record->excludedFlag && gameFlagIsSet(record->excludedFlag))

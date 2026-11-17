@@ -1,29 +1,20 @@
-#include "common.h"
+#include "addon/AocPackage.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-/* Object with an enable flag at 0x45 and a sub-object pointer at 0x48. */
-typedef struct {
-    u8 unk00[0x45];
-    u8 enabled;         /* 0x45 */
-    u8 unk46[2];
-    void *sub;          /* 0x48 */
-} Owner;
+void *dataTableFileGetTable(void *file, u32 section);
 
-int dataTableFileGetTable(void *sub, int arg);
-int dataTableGetEntries(void);
-
-/* Runs the sub-object's dataTableFileGetTable and returns dataTableGetEntries's result; 0 when there is nothing to run. */
-int packageEntryGetDirectory(Owner *owner)
+/* The package's directory entries: section 0 of its directory file, or NULL when the directory is not loaded. */
+AocPackageDirectoryEntry *packageEntryGetDirectory(AocPackage *package)
 {
-    if (owner->enabled == 0) {
-        return 0;
+    if (package->directoryLoaded == 0) {
+        return NULL;
     }
-    if (owner->sub == NULL) {
-        return 0;
+    if (package->directoryFile == NULL) {
+        return NULL;
     }
-    dataTableFileGetTable(owner->sub, 0);
-    return dataTableGetEntries();
+    return (AocPackageDirectoryEntry *)dataTableGetEntries(dataTableFileGetTable(package->directoryFile, 0));
 }
 
 } /* extern "C" */

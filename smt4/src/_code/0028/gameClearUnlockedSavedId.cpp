@@ -1,9 +1,5 @@
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/GameDataBlocks.h"
-
-struct SavedIdSlots {
-    u8 unk00[0x78]; // 0x00
-    u16 ids[8];       // 0x78
-};
 
 extern "C" {
 s32 statusGetAvailableChoiceCount(void);
@@ -11,11 +7,11 @@ s32 statusGetAvailableChoiceCount(void);
 // Clears the first matching ID in the currently unlocked save slots.
 void gameClearUnlockedSavedId(u32 id)
 {
-    SavedIdSlots* slots = reinterpret_cast<SavedIdSlots*>((u8 *)g_gameDataBlocks.saveBlock + 0x90);
+    PlayerDataIV *player = &g_gameDataBlocks.saveBlock->body.slots.player;
     s32 count = statusGetAvailableChoiceCount();
     for (s32 index = 0; index < count; ++index) {
-        if (slots->ids[index] == id) {
-            slots->ids[index] = 0;
+        if (player->skills[index] == id) {
+            player->skills[index] = 0;
             return;
         }
     }

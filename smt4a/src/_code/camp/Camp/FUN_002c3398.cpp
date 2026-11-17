@@ -1,16 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c3398` (_code @ 0x2c3398, 0x644 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "game/GameStateA.h"
 #include "romwright_types.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x38];
-    unsigned char f005f1634; /* 0x038 */
-};
-extern GameStateView g_gameState;
-
 
 int FUN_003344b4(...);
 int obj48Arm(...);
@@ -76,7 +70,6 @@ extern int g_partyPanel; /* 0x57f268 */
 extern unsigned char g_campState; /* 0x5e1eb0 */
 extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 
-
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
@@ -124,7 +117,6 @@ extern int flagSetAllCoveredBy(unsigned int);
 /* Supplied declaration required: clearThreeWords. */
 /* Supplied declaration required: paramsClearPacket. */
 
-
 /* WARNING: Removing unreachable block (ram,0x002c3ae0) */
 
 void FUN_002c3398(void)
@@ -164,7 +156,7 @@ void FUN_002c3398(void)
   *(unsigned char *)((int)puVar2 + 0xb9) = 3;
   puVar2[0xcee] = 0;
   DAT_005e1eba = 0;
-  g_gameState.f005f1634 = 0;
+  g_gameState.retainCampResources = 0;
   FUN_002a2cb4();
   FUN_0038b1c4();
   FUN_003a7040();

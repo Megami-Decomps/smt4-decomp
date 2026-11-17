@@ -1,21 +1,9 @@
 /* NON_MATCHING: the early-return merging and the two lookup loops use different registers and branch layout (retail keeps the slot table in r5 and re-tests the previous call result for unused stock slots); the checks are the same. */
 #include "common.h"
 #include "code/Code0018.h"
+#include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
-
-/* A table-8 record: a kind byte at 0x41, a flag byte at 0x3A, a flags word at 0x68 and a short at 0x48. */
-typedef struct Table8Record {
-    /* 0x00 */ u8 unk00[0x3A];
-    /* 0x3A */ u8 flagsA;               /* bit 7: counted over the whole party */
-    /* 0x3B */ u8 unk3b[5];
-    /* 0x40 */ u8 unk40;
-    /* 0x41 */ u8 kind;                 /* 1 or 3: recordable */
-    /* 0x42 */ u8 unk42[6];
-    /* 0x48 */ u16 value;
-    /* 0x4A */ u8 unk4a[0x1E];
-    /* 0x68 */ u32 flags;               /* bit 5: needs a matching party member */
-} Table8Record;
 
 /* A party member: its two keys are the short at 0x64 and the word at 0x30. */
 typedef struct PartyMember {
@@ -31,10 +19,9 @@ typedef struct StockSlots {
     s8 stock[24];
 } StockSlots;
 
-Table8Record *dataTable8FindRecord(s32 id);
 PartyMember *partyGetSlot(u16 index);
 s32 levelGetExpRequirement(u16 key);
-s32 itemApplyToMember(s32 member, Table8Record *record, s32 a, s32 b, s32 c);
+s32 itemApplyToMember(s32 member, ConsumableRecordA *record, s32 a, s32 b, s32 c);
 StockSlots *gameGetSlotTable(void);
 
 /* Whether the record `id` (ids 1-60 and 0x7A0-0x7DF) can still be used: for a member-bound record,
@@ -45,9 +32,9 @@ u32 FUN_0048144c(s32 id)
     if ((u32)(id - 1) > 59 && (u32)(id - 0x79F) > 63) {
         return 0;
     }
-    Table8Record *record = dataTable8FindRecord(id);
+    ConsumableRecordA *record = dataTable8FindRecord(id);
 
-    if (record->kind != 1 && record->kind != 3) {
+    if (record->type != 1 && record->type != 3) {
         return 0;
     }
     if ((record->flags & 0x20) != 0) {
@@ -57,15 +44,15 @@ u32 FUN_0048144c(s32 id)
             if (member == NULL || partySlotIsOccupied(member) == 0) {
                 continue;
             }
-            Table8Record *again = dataTable8FindRecord(id);
+            ConsumableRecordA *again = dataTable8FindRecord(id);
 
-            if (again != NULL && (again->flags & 0x20) != 0 && again->value != 0
+            if (again != NULL && (again->flags & 0x20) != 0 && again->effectValue != 0
                 && levelGetExpRequirement(member->key) != member->expected) {
                 return 1;
             }
         }
-    } else if ((record->flagsA & 0x80) != 0) {
-        Table8Record *item = dataTable8FindRecord(id);
+    } else if ((record->groupFlags & 0x80) != 0) {
+        ConsumableRecordA *item = dataTable8FindRecord(id);
 
         if (item != NULL) {
             s32 missing = itemApplyToMember(-1, item, 1, 0, 0) == 0;
@@ -91,7 +78,7 @@ u32 FUN_0048144c(s32 id)
             if (i >= 0 && slot < 0) {
                 continue;
             }
-            Table8Record *item = dataTable8FindRecord(id);
+            ConsumableRecordA *item = dataTable8FindRecord(id);
 
             if (item == NULL || itemApplyToMember(slot, item, 1, 0, 0) == 0) {
                 return 1;

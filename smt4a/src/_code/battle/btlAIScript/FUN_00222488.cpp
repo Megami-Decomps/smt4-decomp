@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail schedules the g_btlAiScript pool load before `sub sp, sp, #132`; rest identical. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAIScript.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 
@@ -11,10 +12,8 @@ void sysMemClear(void *dst, u32 size);
 void textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00240c34(const char *path);
 char *libc_strcpy(char *dst, const char *src);
-u32 aocContentLookupSucceeds(BtlAiScriptAocSystem *aoc, u16 id);
 
 extern BtlAiScript *g_btlAiScript;
-extern BtlAiScriptAocSystem *g_aocSystem;
 extern const char DAT_00527f94[]; /* "battle/AI/%s.bf" */
 extern const char DAT_00527fa4[]; /* "battle/AI/tmp.bf" */
 

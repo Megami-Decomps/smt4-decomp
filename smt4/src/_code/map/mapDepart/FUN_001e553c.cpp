@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern s32 g_lmapScene;
@@ -54,7 +55,6 @@ extern unsigned char LAB_001e5d54; /* 0x1e5d54 */
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_mapDepart; /* 0x4475b8 */
 extern int DAT_004475bc; /* 0x4475bc */
-extern int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f9c0; /* 0x49f9c0 */
 extern int DAT_0049f9c4; /* 0x49f9c4 */
 extern unsigned int DAT_0049fd38; /* 0x49fd38 */
@@ -309,7 +309,7 @@ unsigned int FUN_001e553c(void)
       SoundActorQueuePosition soundPosition =
           soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x1c));
       soundPosition.y += 30.0f;
-      if (g_gameState < 100) {
+      if (g_gameState.mapId < 100) {
         soundActorStartOnFreeChannel(0x1000200, soundPosition);
       }
       else {
@@ -430,7 +430,7 @@ LAB_001e5a1c:
     scrScriptProcessCreate(temp_v4,temp_v3);
     *(int *)(temp_v2 + 0x60) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x108) = 3;
-    if (g_gameState < 100) {
+    if (g_gameState.mapId < 100) {
       temp_v3 = 2;
     }
     else {

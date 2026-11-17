@@ -6,6 +6,7 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W6_W6Match3_NameFormState.h"
+#include "addon/AocSystem.h"
 
 struct DemonIconRecord {
     DevilSortRecord key;
@@ -38,7 +39,6 @@ struct DemonIconRect {
 };
 
 extern "C" {
-extern AocSystem* g_aocSystem;
 BtlUnitLink* partyMemberFindById(u32 id);
 void drawSetColorFromRGBA8(u32 color);
 void effectSubmitPackageRequest(AocSystem* system, u32 image, s32 x, s32 y, u32 style);

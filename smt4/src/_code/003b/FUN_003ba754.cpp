@@ -3,6 +3,7 @@
 #include "map/mapDepart.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "game/GameState.h"
 
 struct ScriptFile;
 struct ScriptProcessWork;
@@ -34,7 +35,6 @@ struct AocMainView {
 
 extern "C" {
 extern AocMainView *g_aocMain;
-extern GameState g_gameState;
 
 
 void FUN_0022b29c(MapSceneView *scene, s32 mode, u32 flag);
@@ -86,7 +86,7 @@ void FUN_003ba754(MapSceneView *scene)
     if (scene->bgm != bgm) {
         soundChannelRequestIfEnabled(scene->bgm = bgm, 0, 0x3c);
     }
-    if (g_gameState.unk2F8 != 0) {
+    if (g_gameState.map.savedLocationSet != 0) {
         if (restoreFlag) {
             switch (FUN_0027d98c()) {
             case 0:
@@ -119,10 +119,10 @@ void FUN_003ba754(MapSceneView *scene)
             scene->result = 4;
         }
     }
-    g_gameState.campCleanup.retainCampResources = 0;
-    g_gameState.unk000 = mode + 200;
-    g_gameState.resume.mode = 3;
-    g_gameState.unk2F8 = 0;
+    g_gameState.retainCampResources = 0;
+    g_gameState.mapId = mode + 200;
+    g_gameState.resumeMode = 3;
+    g_gameState.map.savedLocationSet = 0;
     mapDepartSetTarget(-1, -1, 0xffffffff);
 }
 }

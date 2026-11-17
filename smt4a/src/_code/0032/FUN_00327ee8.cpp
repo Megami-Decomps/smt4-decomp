@@ -1,9 +1,9 @@
 /* NON_MATCHING: per-plane VFP argument setup and region-table/count literal anchoring differ. */
 #include "map/SelectionRegion.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 extern SelectionRegions DAT_00614d7c;
-extern GameStateA g_gameState;
 void FUN_003250ac(MapVector *direction, MapVector origin, MapVector target);
 f32 mathVec3Dot(MapVector left, MapVector right);
 
@@ -11,18 +11,9 @@ f32 mathVec3Dot(MapVector left, MapVector right);
 void FUN_00327ee8(f32 x, f32 z)
 {
     /* The second signed override is inside the shared opaque range. */
-    struct RegionOverrides {
-        u8 unk00[0x33];
-        s8 primary;
-        u8 unk34;
-        s8 secondary;
-    };
-    typedef char RegionOverrideOffsets[
-        offsetof(RegionOverrides, primary) == 0x33 &&
-        offsetof(RegionOverrides, secondary) == 0x35 ? 1 : -1];
-    RegionOverrides *overrides = (RegionOverrides *)&g_gameState;
-    overrides->primary = -1;
-    overrides->secondary = -1;
+    GameStateA *overrides = &g_gameState;
+    overrides->overrideKinds[0] = -1;
+    overrides->overrideKinds[2] = -1;
     for (s32 i = 0; i < DAT_00614d7c.count; ++i) {
         SelectionRegionQuad *region = &DAT_00614d7c.regions[i];
         bool inside = true;
@@ -55,9 +46,9 @@ void FUN_00327ee8(f32 x, f32 z)
         }
         if (inside) {
             if (region->secondary == 0)
-                overrides->primary = region->kind;
+                overrides->overrideKinds[0] = region->kind;
             else
-                overrides->secondary = region->kind;
+                overrides->overrideKinds[2] = region->kind;
         }
     }
 }

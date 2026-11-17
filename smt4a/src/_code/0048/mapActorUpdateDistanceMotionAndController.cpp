@@ -1,5 +1,6 @@
 /* NON_MATCHING: distance-vector VFP allocation and motion-flag reuse/store scheduling differ; controller synchronization body matches. */
 #include "shard/W5_W5Match7_ControllerPose.h"
+#include "game/GameStateA.h"
 #include <math.h>
 
 struct MapActorControllerLink {
@@ -56,14 +57,14 @@ void mapActorUpdateDistanceMotionAndController(MapActorMotion *actor)
         controllerSetDestination(controller, &destination);
         controllerSetRotationEulerDegrees(controller, actor->orientation.x, actor->orientation.y, actor->orientation.z);
         controllerSetPosition(controller, actor->controllerPosition.x, actor->controllerPosition.y, actor->controllerPosition.z);
-        if (g_gameState.controllerFlags.primary) {
+        if (g_gameState.paused) {
             controller->flags.value |= 3;
         } else {
             controller->flags.value &= ~3;
         }
         if (actor->motionFlags & 4) {
             controller->flags.value |= 3;
-        } else if (g_gameState.controllerFlags.secondary) {
+        } else if (g_gameState.departLoading) {
             controller->flags.value |= 3;
         } else {
             controller->flags.value &= ~3;

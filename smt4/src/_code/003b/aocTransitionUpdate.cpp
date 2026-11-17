@@ -3,6 +3,7 @@
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "battle/btlHelp.h"
+#include "game/GameState.h"
 
 struct JumpDestination { s32 map; u32 area, place; };
 struct NavigationPosition {
@@ -12,7 +13,6 @@ struct NavigationPosition {
 };
 extern "C" {
 extern AocMain *g_aocMain;
-extern GameState g_gameState;
 extern JumpDestination DAT_0049fd14;
 void FUN_0028d664(AocObjC *, u32);
 s32 FUN_0027398c(AocObjC *);
@@ -58,7 +58,7 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
                 scene->flags |= 0x100100;
             scene->phase = 0;
             scene->state = 5;
-        } else if (g_gameState.unk54) {
+        } else if (g_gameState.entryValue) {
             saveSourcePosition(scene);
             gameSynchronizeMapState(scene);
             scene->flags |= 0x40100;

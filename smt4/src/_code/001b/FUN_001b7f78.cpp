@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 #include "map/mapDepart.h"
 #include "code/Code001d_Smt4.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -287,7 +288,6 @@ extern unsigned int *g_mapMain; /* 0x447e28 */
 extern int iRam00447e2c; /* 0x447e2c */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
-extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern int DAT_0049f928; /* 0x49f928 */
@@ -898,11 +898,11 @@ unsigned int FUN_001b7f78(void)
         DAT_0049fa1a = '\0';
       }
       temp_v14 = DAT_0049fc38;
-      g_gameState = DAT_0049fc18;
+      g_gameState.mapId = DAT_0049fc18;
       if (temp_v18) {
         puVar14[0xb] = DAT_0049fc38;
         DAT_0049f920 = DAT_0049fc3c;
-        g_gameState = temp_v14;
+        g_gameState.mapId = temp_v14;
         puVar14[0xc] = DAT_0049fc3c;
         temp_v4 = DAT_0049fc48;
         temp_v3 = DAT_0049fc44;
@@ -968,7 +968,7 @@ LAB_001b848c:
       DAT_0049fb9c = 0;
       puVar14[0xb] = DAT_0049fd14;
       DAT_0049f920 = DAT_0049fd18;
-      g_gameState = temp_v14;
+      g_gameState.mapId = temp_v14;
       puVar14[0xc] = DAT_0049fd18;
       temp_v9 = g_lmapScene;
       DAT_0049f924 = DAT_0049fd20;
@@ -1026,7 +1026,7 @@ LAB_001b848c:
       if ((((*(char *)(puVar14 + 0x12) == '\0') && (puVar14[0x10] != 1)) && (puVar14[0x10] != 2)) &&
          (((DAT_0049fa61 == '\0' && (DAT_0049fa1a == '\0')) &&
           ((temp_v9 = FUN_001e2760(puVar14[0xb]), temp_v9 == 0 &&
-           (temp_v9 = conditionalMessageFind(g_gameState,DAT_0049f920), temp_v9 == 0)))))) {
+           (temp_v9 = conditionalMessageFind(g_gameState.mapId,DAT_0049f920), temp_v9 == 0)))))) {
         *(unsigned char *)(puVar14 + 0x11) = 1;
       }
     }
@@ -1034,7 +1034,7 @@ LAB_001b848c:
       if (DAT_0049f950 != '\0') goto LAB_001b848c;
       DAT_0049fb9c = 0;
       puVar14[0xb] = 0x18;
-      g_gameState = 0x18;
+      g_gameState.mapId = 0x18;
       puVar14[0xc] = DAT_0049fd18;
       DAT_0049f920 = 0xffffffff;
       if ((DAT_0049fa61 == '\0') && (DAT_0049fa38 != '\0')) {
@@ -1054,7 +1054,7 @@ LAB_001b848c:
     puVar14[9] = temp_v9;
     break;
   case 2:
-    if ((((DAT_0049fa1a == '\0') || (g_gameState != 0x24)) && (DAT_0049fcf8 == 0)) &&
+    if ((((DAT_0049fa1a == '\0') || (g_gameState.mapId != 0x24)) && (DAT_0049fcf8 == 0)) &&
        ((g_mapMain != (unsigned int *)0x0 && (*(char *)(g_mapMain + 0xf) == '\0')))) {
       FUN_0010bb84(0x100,0x30000);
       *(unsigned char *)(puVar23 + 0xf) = 1;
@@ -1150,19 +1150,19 @@ LAB_001b848c:
     uStack_1c8 = 0;
     uStack_1c4 = 0;
     naviRegisterTransitionsAndRequest(DAT_0049f924 & 0xff,0,0,0);
-    if (g_gameState == 10) {
+    if (g_gameState.mapId == 10) {
       mapCompleteGroup(0x81001401);
       uStack_1c8 = 0;
       uStack_1c4 = 0;
       naviRegisterTransitionsAndRequest(0x43,1,0);
     }
-    if (g_gameState == 0x12) {
+    if (g_gameState.mapId == 0x12) {
       mapCompleteGroup(0x81801401);
       uStack_1c8 = 0;
       uStack_1c4 = 0;
       naviRegisterTransitionsAndRequest(0x59,1,0);
     }
-    if (g_gameState == 0x24) {
+    if (g_gameState.mapId == 0x24) {
       commonBgStopChildAndBeginTransition();
     }
     if (DAT_0049f942 == '\0') {
@@ -1417,10 +1417,10 @@ LAB_001b8e80:
       temp_v0 = *(char *)(puVar14 + 0x11);
     }
     if (DAT_0049f950 != '\0' || temp_v0 != '\0') {
-      FUN_00277b5c(g_gameState,DAT_0049f920);
+      FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
     }
     FUN_0021be00();
-    FUN_002d28a4(g_gameState,DAT_0049f920);
+    FUN_002d28a4(g_gameState.mapId,DAT_0049f920);
     mapModeInitialize();
     FUN_003079b4();
     FUN_00276a3c();
@@ -1680,7 +1680,7 @@ LAB_001b9210:
       return 0;
     }
     mapPerFrameUpdate();
-    if (g_gameState != 0x24) {
+    if (g_gameState.mapId != 0x24) {
       navigationSetArguments(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
     }
     if ((*(char *)(puVar14 + 0x2e) != '\0') && (DAT_0049fca8 == '\0')) {
@@ -1726,7 +1726,7 @@ LAB_001b9210:
           return 0;
         }
         *(short *)(temp_v9 + 0x2c) = (short)(int)DAT_0049f9ac;
-        *(short *)(temp_v9 + 0x2e) = (short)g_gameState;
+        *(short *)(temp_v9 + 0x2e) = (short)g_gameState.mapId;
         *(short *)(temp_v9 + 0x30) = (short)DAT_0049f920;
         *(unsigned int *)(temp_v9 + 0xddc) = DAT_0049f924;
         *(short *)(temp_v9 + 0x32) = (short)(int)DAT_0049f9b0;
@@ -1761,7 +1761,7 @@ LAB_001b9210:
             return 0;
           }
           *(short *)(temp_v9 + 0x2c) = (short)(int)DAT_0049f9ac;
-          *(short *)(temp_v9 + 0x2e) = (short)g_gameState;
+          *(short *)(temp_v9 + 0x2e) = (short)g_gameState.mapId;
           *(short *)(temp_v9 + 0x30) = (short)DAT_0049f920;
           *(unsigned int *)(temp_v9 + 0xddc) = DAT_0049f924;
           *(short *)(temp_v9 + 0x32) = (short)(int)DAT_0049f9b0;
@@ -1861,16 +1861,16 @@ LAB_001b9210:
             DAT_0049f934 = 1;
             DAT_0049f93c = 1;
             temp_v14 = (unsigned int)((unsigned long long)temp_v20 >> 0x20);
-            if (g_gameState == 5) {
+            if (g_gameState.mapId == 5) {
               temp_v14 = DAT_0049f920;
             }
-            if (g_gameState != 5 || temp_v14 != 6) {
-              temp_v14 = g_gameState - 0x19;
+            if (g_gameState.mapId != 5 || temp_v14 != 6) {
+              temp_v14 = g_gameState.mapId - 0x19;
               temp_v18 = temp_v14 >= 5;
               temp_v19 = temp_v14 == 5;
               if (temp_v14 >= 6) {
-                temp_v18 = g_gameState - 0x1f >= 4;
-                temp_v19 = g_gameState - 0x1f == 4;
+                temp_v18 = g_gameState.mapId - 0x1f >= 4;
+                temp_v19 = g_gameState.mapId - 0x1f == 4;
               }
               if (temp_v18 && !temp_v19) {
                 DAT_0049f9d0 = 99;
@@ -2522,7 +2522,7 @@ LAB_001bab90:
                         }
                         if ((temp_v19 && temp_v14 == 0) && (temp_v10 = FUN_0027ee9c(), temp_v10 != 0)) {
                           *(short *)(temp_v9 + 0x2c) = (short)(int)DAT_0049f9ac;
-                          *(short *)(temp_v9 + 0x2e) = (short)g_gameState;
+                          *(short *)(temp_v9 + 0x2e) = (short)g_gameState.mapId;
                           *(short *)(temp_v9 + 0x30) = (short)DAT_0049f920;
                           *(unsigned int *)(temp_v9 + 0xddc) = DAT_0049f924;
                           *(short *)(temp_v9 + 0x32) = (short)(int)DAT_0049f9b0;
@@ -2882,7 +2882,7 @@ LAB_001bb1d4:
         temp_v11 = lmapSceneGetUnk0();
         temp_v14 = temp_v11;
         if (temp_v11 != 0x1f) {
-          temp_v14 = g_gameState;
+          temp_v14 = g_gameState.mapId;
         }
         if (((temp_v11 != 0x1f && temp_v14 != 0x24) && (*(int *)(DAT_004474f4 + 0xac) == 0)) &&
            (temp_v10 = naviFlag404Active(), temp_v10 != 0)) {
@@ -3138,7 +3138,7 @@ LAB_001bb1d4:
     if (temp_v9 != 0) {
       helpResourcesRelease(g_aocMain + 0xa8);
       if ((int)DAT_0049fd14 >= 0) {
-        (*(unsigned short *)((unsigned char *)&uStack_1c8 + 0)) = romwright_piece_1_1((char)g_gameState,1);
+        (*(unsigned short *)((unsigned char *)&uStack_1c8 + 0)) = romwright_piece_1_1((char)g_gameState.mapId,1);
         uStack_1c8 = (((unsigned int)(uStack_1c8) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_0049f920,(unsigned short)uStack_1c8)) & 0xffffffU) << 0));
         uStack_1c8 = romwright_piece_1_3((char)DAT_0049f924,((unsigned int)uStack_1c8 & 0xffffffU));
         uStack_1c4 = *(unsigned int *)(g_lmapScene + 0x1c);
@@ -3153,7 +3153,7 @@ LAB_001bb1d4:
         puVar14[10] = 0;
       }
       else if (DAT_0049f970 != 0) {
-        (*(unsigned short *)((unsigned char *)&uStack_1c8 + 0)) = romwright_piece_1_1((char)g_gameState,1);
+        (*(unsigned short *)((unsigned char *)&uStack_1c8 + 0)) = romwright_piece_1_1((char)g_gameState.mapId,1);
         uStack_1c8 = (((unsigned int)(uStack_1c8) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_0049f920,(unsigned short)uStack_1c8)) & 0xffffffU) << 0));
         uStack_1c8 = romwright_piece_1_3((char)DAT_0049f924,((unsigned int)uStack_1c8 & 0xffffffU));
         uStack_1c4 = *(unsigned int *)(g_lmapScene + 0x1c);
@@ -3614,10 +3614,10 @@ LAB_001bc008:
     *(unsigned char *)(puVar14 + 5) = 1;
     break;
   case 0x2c:
-    if (g_gameState == 4) {
+    if (g_gameState.mapId == 4) {
       soundPlaySeUnpanned(0x10000b6);
     }
-    if (g_gameState == 0x20) {
+    if (g_gameState.mapId == 0x20) {
       soundPlaySeUnpanned(0x10000be);
     }
     mapDepartSetTarget(0x18,1,0);
@@ -4348,8 +4348,8 @@ LAB_001bd824:
             DAT_0049f93c = 0;
             table23FindRecordByKey(DAT_0049f990,DAT_0049f994,DAT_0049f998);
             pcVar13 = (char *)dataTableGetRecord23();
-            g_gameState = (unsigned int)*pcVar13;
-            puVar14[0xb] = g_gameState;
+            g_gameState.mapId = (unsigned int)*pcVar13;
+            puVar14[0xb] = g_gameState.mapId;
             DAT_0049f920 = (unsigned int)pcVar13[1];
             puVar14[0xc] = DAT_0049f920;
             DAT_0049f924 = (unsigned int)(unsigned char)pcVar13[3];
@@ -4386,8 +4386,8 @@ LAB_001bd824:
           *(unsigned int *)(temp_v9 + 0x50) = temp_v16;
           temp_v16 = VectorSignedToFloat((int)*(short *)(pcVar13 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v16;
-          g_gameState = (unsigned int)*pcVar13;
-          puVar14[0xb] = g_gameState;
+          g_gameState.mapId = (unsigned int)*pcVar13;
+          puVar14[0xb] = g_gameState.mapId;
           DAT_0049f920 = (unsigned int)pcVar13[1];
           puVar14[0xc] = DAT_0049f920;
           DAT_0049f924 = (unsigned int)(unsigned char)pcVar13[3];
@@ -4402,7 +4402,7 @@ LAB_001bd824:
           navigationSetFieldValue(DAT_0049f928);
           naviMainSetPosition(g_lmapScene + 0x1c);
           navigationApplyOptionalValue(1);
-          FUN_00277b5c(g_gameState,DAT_0049f920);
+          FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
           temp_v9 = 0x54;
         }
       }
@@ -4828,7 +4828,7 @@ LAB_001be80c:
     if ((puVar14[0xb] != temp_v9) || (puVar14[0xc] != (int)pcVar13[1])) {
       puVar14[0xb] = temp_v9;
       DAT_0049f920 = (unsigned int)pcVar13[1];
-      g_gameState = temp_v9;
+      g_gameState.mapId = temp_v9;
       puVar14[0xc] = DAT_0049f920;
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
@@ -5115,7 +5115,7 @@ LAB_001bec78:
         else {
           puVar14[0xb] = temp_v14;
           DAT_0049f920 = (unsigned int)pcVar13[1];
-          g_gameState = temp_v14;
+          g_gameState.mapId = temp_v14;
           puVar14[0xc] = DAT_0049f920;
           DAT_0049f924 = (unsigned int)(unsigned char)pcVar13[3];
           DAT_0049f928 = puVar14[0xb];
@@ -5127,7 +5127,7 @@ LAB_001bec78:
           DAT_0049f934 = 1;
           DAT_0049f93c = 1;
           puVar14[9] = 0x54;
-          FUN_00277b5c(g_gameState,DAT_0049f920);
+          FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
         }
         if (puVar14[9] == 0x15) {
           buttonHelpSelectMapPreset();
@@ -5220,7 +5220,7 @@ LAB_001bec78:
     if (temp_v10 == 0) {
       return 0;
     }
-    FUN_002d28a4(g_gameState,DAT_0049f920);
+    FUN_002d28a4(g_gameState.mapId,DAT_0049f920);
     mapModeInitialize();
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf48c:

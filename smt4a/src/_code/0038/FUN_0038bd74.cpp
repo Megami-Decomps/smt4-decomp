@@ -20,7 +20,7 @@ u32 FUN_0038bd74(void)
                 !(g_btlCandidateMasks.excluded & entry->flags) && entry->id == id) {
             if (entry->record) {
                 for (s32 i = 0; i < 8; ++i) {
-                    Table04Record *skill = dataTable04FindById(entry->record->skills[i]);
+                    Table04RecordA *skill = dataTable04FindById(entry->record->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
@@ -29,7 +29,7 @@ u32 FUN_0038bd74(void)
             }
             if (entry->secondaryRecord) {
                 for (s32 i = 0; i < 8; ++i) {
-                    Table04Record *skill = dataTable04FindById(entry->secondaryRecord->skills[i]);
+                    Table04RecordA *skill = dataTable04FindById(entry->secondaryRecord->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;
@@ -37,9 +37,9 @@ u32 FUN_0038bd74(void)
                 }
             }
             if (entry->candidate.record) {
-                Table00Record *record = dataTable00FindById(entry->id);
+                Table00RecordA *record = dataTable00FindById(entry->id);
                 for (s32 i = 0; i < 8; ++i) {
-                    Table04Record *skill = dataTable04FindById(record->skillList.ids[i]);
+                    Table04RecordA *skill = dataTable04FindById(record->skills[i]);
                     if (skill && skill->sort.category == 3) {
                         scrSetResult(1);
                         return 1;

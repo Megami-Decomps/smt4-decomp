@@ -1,10 +1,6 @@
 /* NON_MATCHING: getter ldr r0,[r0,#4] (game-state submode) compiled in the same multifile run (r1 live across it); getter not in image. */
 #include "common.h"
-
-struct GameModeState {
-    s32 mode;     // 0x00
-    s32 submode;  // 0x04
-};
+#include "game/GameStateA.h"
 
 struct LmapBlock {
     u8 unk00[0x20];  // 0x00
@@ -20,7 +16,6 @@ struct LmapView {
 
 extern "C" {
 
-extern GameModeState g_gameState;
 extern LmapView *g_lmapView;
 
 void FUN_003a2904(s32 a, s32 b);
@@ -28,13 +23,13 @@ void FUN_003a2904(s32 a, s32 b);
 /* Callback: in mode 2 / submode 5 or mode 4 / submode 2, starts the map view action when the view is idle. Always returns 0. */
 s32 FUN_002bd170(void)
 {
-    GameModeState *state = &g_gameState;
-    if (state->mode == 2) {
-        if (state->submode != 5) {
+    GameStateA *state = &g_gameState;
+    if (state->mapId == 2) {
+        if (state->areaId != 5) {
             return 0;
         }
-    } else if (state->mode == 4) {
-        if (state->submode != 2) {
+    } else if (state->mapId == 4) {
+        if (state->areaId != 2) {
             return 0;
         }
     } else {

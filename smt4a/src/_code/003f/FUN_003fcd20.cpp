@@ -2,10 +2,10 @@
 #include "gamedata/NpcPackage.h"
 #include "addon/aocMain.h"
 #include "quest_center/qcCtrl.h"
+#include "addon/AocSystemA.h"
 
 extern "C" {
 extern const char DAT_00527250[];
-extern AocSystemA* g_aocSystem;
 s32 textFormatBuffer(char* buffer, const char* format, ...);
 void* FUN_0046e150(AocSystemA* system, s32 id, const char* path);
 void* asdLoadFileSyncDefault(const char* path);

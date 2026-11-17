@@ -1,14 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 #include "gamedata/Table04Record.h"
-
-/* A battle member's record (dataTable8FindRecord). */
-struct MemberRecord {
-    /* 0x00 */ u8 unk00[0x32];
-    /* 0x32 */ u16 linkId;   /* key into the second table */
-    /* 0x34 */ u8 unk34[6];
-    /* 0x3A */ u8 flags;     /* 0x80: set for members of the second group */
-};
+#include "gamedata/ConsumableRecordA.h"
 
 /* The second table's entry (dataTable04FindById). */
 struct MemberLink {
@@ -19,7 +12,6 @@ struct MemberLink {
 };
 
 extern "C" {
-MemberRecord *dataTable8FindRecord(u32 id);
 }
 
 /* Script command: when the first argument is set, removes the battle members that fit the mode in
@@ -32,8 +24,8 @@ extern "C" u32 scrBattleRemoveMembersByKind(void)
     BtlMainStateExtA *battle = btlGetMainStateExt();
     if (enabled != 0) {
         for (std::vector<u16>::iterator member = battle->members.begin(); member != battle->members.end();) {
-            MemberRecord *record = dataTable8FindRecord(*member);
-            MemberLink *link = (MemberLink *)dataTable04FindById(record->linkId);
+            ConsumableRecordA *record = dataTable8FindRecord(*member);
+            MemberLink *link = (MemberLink *)dataTable04FindById(record->skillId);
             bool remove = false;
             if (link != NULL) {
                 if (mode == 0) {
@@ -47,11 +39,11 @@ extern "C" u32 scrBattleRemoveMembersByKind(void)
                 }
             } else {
                 if (mode == 0) {
-                    if ((record->flags & 0x80) == 0) {
+                    if ((record->groupFlags & 0x80) == 0) {
                         remove = true;
                     }
                 } else if (mode == 1) {
-                    if (record->flags & 0x80) {
+                    if (record->groupFlags & 0x80) {
                         remove = true;
                     }
                 }

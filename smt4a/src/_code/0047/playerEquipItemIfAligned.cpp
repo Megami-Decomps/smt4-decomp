@@ -1,13 +1,7 @@
 #include "common.h"
+#include "gamedata/EquipmentRecordA.h"
 
 extern "C" {
-
-typedef struct EquipItemData {
-    /* 0x00 */ u8 unk00[0x22];
-    /* 0x22 */ u8 slot; // equipment slot kind, 2..8
-    /* 0x23 */ u8 unk23[0xD];
-    /* 0x30 */ u8 alignments; // bit 0: class 4, bit 1: class 1, bit 2: class 5
-} EquipItemData;
 
 typedef struct PlayerEquipment {
     /* 0x00 */ u16 slot2;
@@ -20,14 +14,13 @@ typedef struct PlayerEquipment {
 } PlayerEquipment;
 
 s32 playerAlignmentClass(void);
-EquipItemData *dataTable08Sub2GetRecord(u32 id);
 PlayerEquipment *gameGetPlayerData(void);
 
 /* Equips the item in its slot when the player's alignment class allows it. */
 void playerEquipItemIfAligned(u32 id)
 {
     s32 alignment = playerAlignmentClass();
-    EquipItemData *item = dataTable08Sub2GetRecord(id);
+    EquipmentRecordA *item = dataTable08Sub2GetRecord(id);
     PlayerEquipment *equipment;
 
     if (item == NULL) {

@@ -4,6 +4,7 @@
 #include "map/lmapMain.h"
 #include <stddef.h>
 #include "util/TrigF32.h"
+#include "game/GameState.h"
 
 struct EnemyEncounterMarker {
     s8 x, y;
@@ -16,13 +17,9 @@ struct EnemyEncounterMap {
     EnemyEncounterMarker markers[1]; // 0xf2a
 };
 typedef char CheckEnemyEncounterSize[sizeof(MapEnemyEncounterView) == 0x180 ? 1 : -1];
-typedef char CheckEncounterDelayOffset[offsetof(GameState, encounterDelay) == 0x194 ? 1 : -1];
-typedef char CheckEncounterBlockedOffset[offsetof(GameState, encounterBlocked) == 0x364 ? 1 : -1];
-typedef char CheckSceneStateSize[sizeof(GameState) == 0x678 ? 1 : -1];
 
 extern "C" {
 extern MapEnemy *g_mapEnemy;
-extern GameState g_gameState;
 extern LmapScene *g_lmapScene;
 EnemyEncounterMap *gameGetMapBlock();
 void gameCounterAddSaturating(u32 flag, s32 value);
@@ -43,9 +40,9 @@ static __inline void applyEnemyEncounter(MapEnemyEncounterView *enemy, EnemyEnco
     if (g_gameState.encounterChangeMapId)
         map->mapId = static_cast<s16>(enemy->mapId);
     if ((!forced || enemy->message > 0) && enemy->scriptMode) {
-        g_gameState.scriptPending = 1;
-        g_gameState.scriptId = enemy->message;
-        textFormatBuffer(g_gameState.scriptName, "e%03d_%02d", enemy->message, enemy->messageArgument);
+        g_gameState.event.scriptPending = 1;
+        g_gameState.event.scriptId = enemy->message;
+        textFormatBuffer(g_gameState.event.scriptName, "e%03d_%02d", enemy->message, enemy->messageArgument);
     } else if (forced ? enemy->message > 0 : enemy->message != 0) {
         sequenceRequestDefer(enemy->message, enemy->messageArgument);
     } else if (forced) {
@@ -53,13 +50,13 @@ static __inline void applyEnemyEncounter(MapEnemyEncounterView *enemy, EnemyEnco
     }
     FUN_0027d8b4(enemy->result);
     if (enemy->count > 0) {
-        g_gameState.encounterCount = enemy->count;
-        g_gameState.encounterValue = enemy->value;
+        g_gameState.event.encounterCount = enemy->count;
+        g_gameState.event.encounterValue = enemy->value;
     }
     if (enemy->hasMarker && map->markers[enemy->markerIndex].x) {
-        g_gameState.encounterHasMarker = 1;
-        g_gameState.encounterMarkerX = map->markers[enemy->markerIndex].x;
-        g_gameState.encounterMarkerY = map->markers[enemy->markerIndex].y;
+        g_gameState.event.encounterHasMarker = 1;
+        g_gameState.event.encounterMarkerX = map->markers[enemy->markerIndex].x;
+        g_gameState.event.encounterMarkerY = map->markers[enemy->markerIndex].y;
     }
 }
 
@@ -70,14 +67,14 @@ extern "C" u32 FUN_002d2b40()
     EnemyEncounterMap *map = gameGetMapBlock();
     if (g_gameState.encounterBlocked || enemies->controller.state == 0)
         return ~0u;
-    g_gameState.encounterCount = 0;
-    g_gameState.encounterValue = 0;
-    g_gameState.encounterHasMarker = 0;
-    if (g_gameState.encounterDelay > 0) {
-        --g_gameState.encounterDelay;
-        if (g_gameState.encounterDelay == 1) {
-            g_gameState.encounterForced = 1;
-            MapEnemyEncounterView *enemy = reinterpret_cast<MapEnemyEncounterView *>(&enemies->entries[g_gameState.encounterEnemyIndex]);
+    g_gameState.event.encounterCount = 0;
+    g_gameState.event.encounterValue = 0;
+    g_gameState.event.encounterHasMarker = 0;
+    if (g_gameState.event.encounterDelay > 0) {
+        --g_gameState.event.encounterDelay;
+        if (g_gameState.event.encounterDelay == 1) {
+            g_gameState.event.encounterForced = 1;
+            MapEnemyEncounterView *enemy = reinterpret_cast<MapEnemyEncounterView *>(&enemies->entries[g_gameState.event.encounterEnemyIndex]);
             gameCounterAddSaturating(21, 1);
             applyEnemyEncounter(enemy, map, true);
             return enemy->result;
@@ -108,14 +105,14 @@ extern "C" u32 FUN_002d2b40()
             if (mathDistanceBetweenPoints(player.x, player.y, player.z, ahead.x, ahead.y, ahead.z) >= 60.0f)
                 continue;
         }
-        g_gameState.encounterApproach = 0;
+        g_gameState.event.encounterApproach = 0;
         FUN_00253860(enemy, 2);
         player.x = g_lmapScene->transform.position[0];
         player.y = g_lmapScene->transform.position[1];
         player.z = g_lmapScene->transform.position[2];
         f32 direction = mathPositionHeadingDegrees(player.x, player.y, player.z, x, y, z);
         if (FUN_0027eee0(g_lmapScene->transform.headingDegrees, direction) > 120.0f)
-            g_gameState.encounterBackAttack = 1;
+            g_gameState.event.encounterBackAttack = 1;
         applyEnemyEncounter(enemy, map, false);
         return enemy->result;
     }

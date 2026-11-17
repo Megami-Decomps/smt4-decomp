@@ -1,5 +1,6 @@
 /* NON_MATCHING: mode-table addressing and positional-sound VFP registers differ. */
 #include "map/mapIf.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 struct InterfaceSoundPosition {
@@ -10,7 +11,6 @@ struct InterfaceSoundPosition {
 
 extern "C" {
 extern MapIfGlobalsA g_mapIf;
-extern GameStateA g_gameState;
 extern InterfaceSoundPosition *DAT_00581280;
 s32 soundActorStartOnFreeChannel(u32, f32, f32, f32);
 
@@ -47,7 +47,7 @@ void FUN_00234044(s32 mode, s32 id)
     } else {
         block->id = id;
         const f32 *position = DAT_00581280[id].position;
-        if (g_gameState.mode <= 100)
+        if (g_gameState.mapId <= 100)
             soundActorStartOnFreeChannel(0x10002ab, position[0], position[1], position[2]);
         else
             soundActorStartOnFreeChannel(0x10002ab, position[0] * (1.0f / 3.0f),

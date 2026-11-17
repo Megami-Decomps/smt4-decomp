@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00366e24` (_code @ 0x366e24, 0x66c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct {
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f164c; /* 0x5f164c */
 extern unsigned int DAT_005f16ac; /* 0x5f16ac */
 extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
@@ -67,7 +67,6 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
-
 
 void FUN_00366e24(void)
 
@@ -117,7 +116,7 @@ void FUN_00366e24(void)
               temp_v2 = *(int *)(g_lmapScene + 8) + 1;
               *(int *)(g_lmapScene + 8) = temp_v2;
               if (temp_v2 == 1) {
-                if ((g_gameState != 0x26) && (g_gameState != 0x1a)) {
+                if ((g_gameState.mapId != 0x26) && (g_gameState.mapId != 0x1a)) {
                   soundActorStartOnFreeChannel(0x10002bb);
                 }
                 FUN_00324e38(0xffffffff);
@@ -143,7 +142,7 @@ void FUN_00366e24(void)
                 *(unsigned int *)(temp_v2 + 0x20) = temp_v0;
                 *(unsigned int *)(temp_v2 + 0x24) = temp_v8;
                 *(int *)(temp_v2 + 4) = *(int *)(temp_v2 + 4) + 1;
-                if (g_gameState == 0x26 || g_gameState == 0x1a) {
+                if (g_gameState.mapId == 0x26 || g_gameState.mapId == 0x1a) {
                   soundActorStartOnFreeChannel(0x10000f7);
                 }
                 *(unsigned int *)(g_lmapScene + 8) = 0;
@@ -286,7 +285,7 @@ void FUN_00366e24(void)
     *(unsigned int *)(temp_v2 + 0x1c) = *(unsigned int *)(temp_v2 + 0x28);
     *(float *)(temp_v2 + 0x20) = temp_v5;
     *(unsigned int *)(temp_v2 + 0x24) = *(unsigned int *)(temp_v2 + 0x30);
-    if ((g_gameState != 0x26) && (g_gameState != 0x1a)) {
+    if ((g_gameState.mapId != 0x26) && (g_gameState.mapId != 0x1a)) {
       if ((temp_v3 == 1 || temp_v3 == 0xb) || (temp_v3 == 0x1c || temp_v3 == 0x29)) {
         soundActorStartOnFreeChannel((temp_v3 & 3) + 0x10002bb);
         FUN_00324e38(0xffffffff);

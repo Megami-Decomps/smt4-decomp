@@ -3,9 +3,9 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
-extern AocSystem* g_aocSystem;
 s32 gameFlagIsSet(s32 flag);
 u32 FUN_00298dc8(s32 index);
 

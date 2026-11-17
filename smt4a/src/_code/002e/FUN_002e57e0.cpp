@@ -1,12 +1,11 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
 void FUN_00270c58(u32 value);
 void sequenceRequestDefer(u32 a, u32 b);
 u32 scrGetArg(s32 index);
-
-extern GameStateA g_gameState;
 
 /* Script command: runs sequenceRequestDefer on arguments 1 and 2 and FUN_00270c58 on argument 0. */
 s32 FUN_002e57e0(void)
@@ -16,7 +15,7 @@ s32 FUN_002e57e0(void)
     u32 b = scrGetArg(1);
 
     sequenceRequestDefer(b, c);
-    g_gameState.mapFlags.unk454 = -1;
+    g_gameState.unk454 = -1;
     FUN_00270c58(a);
     return 3;
 }

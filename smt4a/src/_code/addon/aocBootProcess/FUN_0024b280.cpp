@@ -3,6 +3,7 @@
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "addon/AocSystemSmt4a.h"
+#include "addon/AocSystemA.h"
 
 #define AOC_BOOT_STATE_CHECK 0
 #define AOC_BOOT_STATE_QUERY 1
@@ -33,7 +34,6 @@ struct AocBootDialogView {
 extern "C" {
 extern AocBootGlobals g_aocBoot;
 extern QueuedRequestState *g_aocMain;
-extern AocSystemA *g_aocSystem;
 
 void aocReleasePackageOwner(AocSystemA *system);
 void jobOwnerFreeSlotAndStop(void *owner);

@@ -1,5 +1,7 @@
 /* NON_MATCHING: table helpers now follow the shared add-on table walk; remaining: retail hoists 0xFFFFFFFF into r8 and keeps the section pointer in a stack slot (push {r3,...}), so the saved registers and the flag-test splitting differ. */
 #include "gamedata/DataTable.h"
+#include "game/GameState.h"
+#include "addon/AocSystem.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -21,26 +23,12 @@ struct EventEntry {
     u16 needSpecial;  /* 0x0A: 1 requires a special enemy kind on the map */
 };
 
-struct AocSystem {
-    u8 pad000[0x41C];
-    s32 extraCount;               /* 0x41C */
-    EventEntry *extraEntries;     /* 0x420 */
-};
-
 struct MapBlock {
     u8 pad000[0xE54];
     u32 lastEvent;                /* 0xE54 */
 };
 
-extern AocSystem *g_aocSystem;    /* 0x433158 */
-struct GameStateBlock {
-    s32 state;                    /* 0x00 */
-    s32 area;                     /* 0x04 */
-    u8 pad08[30];
-    s8 spawnMode;                 /* 0x26: non-zero selects the spawn-point entries */
-};
 
-extern GameStateBlock g_gameState;           /* 0x49f91c */
 
 MapBlock *gameGetMapBlock(void);
 s32 mapEnemyHasAvailableSecondaryState(void);
@@ -58,8 +46,8 @@ static EventEntry *eventTableEntry(u32 index)
         return &entries[index];
     }
     AocSystem *extension = g_aocSystem;
-    EventEntry *extra = extension->extraEntries;
-    u32 extraCount = extension->extraCount;
+    EventEntry *extra = (EventEntry *)extension->table23[7].records;
+    u32 extraCount = extension->table23[7].count;
     if (index < count + extraCount) {
         return &extra[index - count];
     }
@@ -103,10 +91,10 @@ EventEntry *FUN_002765d0(void)
     MapBlock *flags = gameGetMapBlock();
     s32 hasSpecial = mapEnemyHasAvailableSecondaryState();
 
-    if (g_gameState.spawnMode != 0) {
+    if (g_gameState.returning != 0) {
         u32 spawn = mapGetDepartureIndex();
         if (spawn != 0) {
-            for (s32 i = 0; i < (s32)(tableSectionCount(0x23, 7) + g_aocSystem->extraCount); i++) {
+            for (s32 i = 0; i < (s32)(tableSectionCount(0x23, 7) + g_aocSystem->table23[7].count); i++) {
                 EventEntry *entry = eventTableEntry(i);
                 if (entry->kind == 2 && entry->spawn == (s32)spawn && eventEntryAvailable(entry, hasSpecial)) {
                     if (flags->lastEvent == (u32)i) {
@@ -118,9 +106,9 @@ EventEntry *FUN_002765d0(void)
             }
         }
     } else {
-        for (s32 i = 0; i < (s32)(tableSectionCount(0x23, 7) + g_aocSystem->extraCount); i++) {
+        for (s32 i = 0; i < (s32)(tableSectionCount(0x23, 7) + g_aocSystem->table23[7].count); i++) {
             EventEntry *entry = eventTableEntry(i);
-            if (entry->kind == 1 && entry->stateA == g_gameState.state && entry->stateB == g_gameState.area &&
+            if (entry->kind == 1 && entry->stateA == g_gameState.mapId && entry->stateB == g_gameState.areaId &&
                 eventEntryAvailable(entry, hasSpecial)) {
                 if (flags->lastEvent == (u32)i) {
                     return 0;

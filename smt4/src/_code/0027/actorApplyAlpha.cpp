@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -12,12 +13,7 @@ typedef struct ActorInfo {
     /* 0x14 */ s16 alpha;    /* 0 = use the default (0xff) */
 } ActorInfo;
 
-typedef struct Globals {
-    /* 0x00 */ u8 unk00[0xAC];
-    /* 0xAC */ u8 enabled;
-} Globals;
 
-extern Globals g_gameState;
 
 Actor *gameGetMapBlock(void);
 ActorInfo *dataTable2fSub1GetRecord(int id);
@@ -30,7 +26,7 @@ void actorApplyAlpha(void)
     int id;
     ActorInfo *info;
 
-    if (g_gameState.enabled == 0) {
+    if (g_gameState.statusActive == 0) {
         return;
     }
     id = actor->id;

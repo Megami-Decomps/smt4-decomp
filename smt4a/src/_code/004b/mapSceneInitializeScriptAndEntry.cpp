@@ -1,16 +1,6 @@
 #include "common.h"
+#include "game/GameStateA.h"
 #include "script/scrScriptProcess.h"
-
-/* The map/scene state block as this scene start touches it. */
-struct GameStateScene {
-    /* 0x000 */ s32 scene;
-    /* 0x004 */ u8 unk004[0x10];
-    /* 0x014 */ u32 phase;
-    /* 0x018 */ u8 unk018[0x20];
-    /* 0x038 */ u8 busy;
-    /* 0x039 */ u8 unk039[0x53B];
-    /* 0x574 */ u8 resumed;
-};
 
 struct AocMainView {
     /* 0x00 */ u8 unk00[0xC1];
@@ -38,7 +28,6 @@ struct SceneStartWork {
 
 extern "C" {
 
-extern GameStateScene g_gameState;
 extern AocMainView *g_aocMain;
 
 ScriptRunState *scrScriptProcessCreate(void *script, void *data);
@@ -83,7 +72,7 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
     }
     work->entryKind = 0;
     bgmReleaseStopped();
-    if (g_gameState.resumed != 0) {
+    if (g_gameState.transitionActive != 0) {
         if (special) {
             switch (gameDataTableGetFlag()) {
             case 0:
@@ -115,10 +104,10 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
             work->entryKind = 4;
         }
     }
-    g_gameState.busy = 0;
-    g_gameState.scene = mode + 200;
-    g_gameState.phase = 3;
-    g_gameState.resumed = 0;
+    g_gameState.retainCampResources = 0;
+    g_gameState.mapId = mode + 200;
+    g_gameState.resumeMode = 3;
+    g_gameState.transitionActive = 0;
     mapPlaceSet(-1, -1, 0xffffffff);
     if (mode == 3 || mode == 4) {
         bgm = 0x0100004A;

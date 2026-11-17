@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/ConsumableRecord.h"
 
 struct BtlTurnState {
     /* 0x0000 */ u8 unk0000[0xe0];
@@ -21,18 +22,12 @@ struct BtlTurnActor {
     /* 0x594 */ s32 motion;
 };
 
-struct BtlItemRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 skillId;
-};
-
 struct BtlSkillRecord {
     /* 0x00 */ u8 unk00[0x57];
     /* 0x57 */ u8 motion;
 };
 
 extern "C" {
-BtlItemRecord *dataTable08Sub1GetRecord(s32 id);
 
 /* Picks the actor's motion: 1 when forced, 22 under flag 0x4000000, else the commanded skill's motion when above 1. */
 void btlSelectActorCommandMotion(BtlTurnState **state, BtlTurnActor *actor, s32 forced)

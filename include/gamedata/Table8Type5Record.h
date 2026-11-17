@@ -1,5 +1,5 @@
 /* One 0x2c-byte record of data table 8 type 5, searched by its ID at +0x20 (shared by both games).
- * The 0x6c-byte records of the table's main section are gamedata/Table8Record.h. */
+ * The 0x6c-byte records of the table's main section are gamedata/ConsumableRecordA.h. */
 #ifndef GAMEDATA_TABLE8TYPE5RECORD_H
 #define GAMEDATA_TABLE8TYPE5RECORD_H
 

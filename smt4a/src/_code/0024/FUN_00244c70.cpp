@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00244c70` (_code @ 0x244c70, 0x1104 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
 
@@ -14,10 +15,8 @@ typedef struct {
 
 extern int g_mapIf; /* 0x58103c */
 extern unsigned int *DAT_00581040; /* 0x581040 */
-extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: mathSinCos. */
-
 
 int FUN_00244c70(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
 
@@ -815,7 +814,7 @@ LAB_00244db8:
                           *(unsigned int *)(temp_v1 + 0x210) = 0x44960000;
                           *(unsigned int *)(temp_v1 + 0x214) = 0x44960000;
                         }
-                        else if (g_gameState < 100) {
+                        else if (g_gameState.mapId < 100) {
                           temp_v11 = DAT_00581040[0x1e];
                           temp_v10 = DAT_00581040[6];
                           *(unsigned int *)(temp_v1 + 0x1ec) = 1;

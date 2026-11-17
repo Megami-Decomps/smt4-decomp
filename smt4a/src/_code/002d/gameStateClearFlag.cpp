@@ -1,8 +1,7 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-
-extern GameStateA g_gameState;
 
 void gameStateClearFlag(void)
 {

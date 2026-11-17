@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
 
@@ -12,22 +13,13 @@ typedef struct HealTarget {
     /* 0x64 */ u16 id;
 } HealTarget;
 
-/* An item record: only its HP-heal fields are read here. */
-typedef struct HealItem {
-    /* 0x00 */ u8 unk00[0x48];
-    /* 0x48 */ u16 healPercent;
-    /* 0x4A */ u8 unk4A[0x1E];
-    /* 0x68 */ u32 flags;
-} HealItem;
-
-HealItem *dataTable8FindRecord(u32 itemId);
 s32 levelGetExpRequirement(u16 id);
 
 /* Applies item `itemId`'s percentage HP heal to `target` (only checks when `checkOnly`); returns 0
  * when the item would heal, 1 when it has no effect. */
 u32 itemApplyPercentageHpHeal(HealTarget *target, u32 itemId, s32 checkOnly)
 {
-    HealItem *item;
+    ConsumableRecordA *item;
     u32 noEffect;
 
     if (target == NULL) {
@@ -38,10 +30,10 @@ u32 itemApplyPercentageHpHeal(HealTarget *target, u32 itemId, s32 checkOnly)
         return 1;
     }
     noEffect = 1;
-    if (item->healPercent != 0 && levelGetExpRequirement(target->id) != target->hp) {
+    if (item->effectValue != 0 && levelGetExpRequirement(target->id) != target->hp) {
         if (!checkOnly) {
             s32 maximum = levelGetExpRequirement(target->id);
-            s32 healing = item->healPercent * maximum / 100;
+            s32 healing = item->effectValue * maximum / 100;
             target->hp += healing;
             if (levelGetExpRequirement(target->id) < target->hp) {
                 target->hp = levelGetExpRequirement(target->id);

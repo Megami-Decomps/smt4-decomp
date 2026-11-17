@@ -22,6 +22,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import threading
 from pathlib import Path
 
 ROOT = Path(os.path.abspath(__file__)).parent.parent
@@ -143,7 +144,7 @@ def layout(game, path, type_name):
         if path.suffix != ".h" and (ROOT / game / u["source"]).resolve() == path.resolve():
             unit = dict(u); unit.pop("multifile", None); break
     with tempfile.TemporaryDirectory() as scratch:
-        src = path.with_name(f".layout_{os.getpid()}_{path.stem}.cpp") if path.suffix != ".h" else Path(scratch) / "probe.cpp"
+        src = path.with_name(f".layout_{os.getpid()}_{threading.get_ident()}_{path.stem}.cpp") if path.suffix != ".h" else Path(scratch) / "probe.cpp"
         obj = Path(scratch) / "probe.o"
         src.write_text(source_text + probe, encoding="utf-8", newline="\n")
         try:
@@ -203,6 +204,7 @@ def main():
     ap.add_argument("file", nargs="?")
     ap.add_argument("type", nargs="?")
     ap.add_argument("--anchor")
+    ap.add_argument("--jobs", type=int, default=max(1, (os.cpu_count() or 2) // 2), help="views laid out at once")
     args = ap.parse_args()
     if not args.anchor:
         rows, size = layout(args.game, args.file, args.type)
@@ -213,11 +215,21 @@ def main():
     views = anchor_views(args.game, args.anchor)
     by_offset = collections.defaultdict(collections.Counter)
     failures, done = [], 0
-    for f, t in views:
+    build_module(args.game)
+
+    def one(view):
+        f, t = view
         try:
-            rows, _size = layout(args.game, f, t)
+            return f, t, layout(args.game, f, t)[0], None
         except Exception as e:
-            failures.append((f, t, str(e)[:120])); continue
+            return f, t, None, str(e)[:120]
+
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(args.jobs) as pool:
+        results = list(pool.map(one, views))
+    for f, t, rows, error in results:
+        if error is not None:
+            failures.append((f, t, error)); continue
         done += 1
         for off, sz, ty, n in rows:
             if re.fullmatch(r"(unk|pad|field|_?unk)_?(0x)?[0-9a-fA-F]*|padding\w*|reserved\w*|_pad\w*", n):

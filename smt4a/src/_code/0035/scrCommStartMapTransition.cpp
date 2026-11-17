@@ -1,6 +1,6 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
-
 
 extern "C" {
 u32 scrGetArg(s32 index);

@@ -28,10 +28,10 @@ void FUN_003bb50c(s32 id, s32 x, s32 y, s32 z, s32 resolve,
             const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(devilGetRecord(static_cast<u16>(id)));
             if (record == NULL)
                 return;
-            const Table00Record *base = dataTable00FindById(static_cast<u16>(id));
+            const Table00RecordA *base = dataTable00FindById(static_cast<u16>(id));
             // The texture-kind flag is in the table header, distinct from the flags at 0x16.
-            if (*reinterpret_cast<const u16 *>(base->unk02) & 0x8000) {
-                image = base->battleTexture.resourceId;
+            if (base->level & 0x8000) {
+                image = base->battleTextureId;
                 table = 25;
                 if (image >= 154)
                     return;

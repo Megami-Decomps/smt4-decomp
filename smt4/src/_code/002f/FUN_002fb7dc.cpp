@@ -1,10 +1,10 @@
 /* NON_MATCHING: jump table now matches (labels 0..5); the vector copies use ldm/stm where retail uses ldrd/strd and the map ternaries share a zero register differently. */
 #include "map/lmapMain.h"
+#include "game/GameState.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
 extern LmapScene *g_lmapScene;
-extern GameState g_gameState;
 void mapCollisionRelease();
 void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, s32 mode);
 void FUN_002d508c(LmapMainState *state);
@@ -50,7 +50,7 @@ u32 FUN_002fb7dc()
         transition->alpha = 0.0f;
         transition->dirty = 1;
         transition->entry = 99;
-        g_gameState.unk004Value = 99;
+        g_gameState.areaId = 99;
         mapCollisionRelease();
         FUN_0027b2b4(transition->map, transition->entry,
             transition->map == 101 ? 101 : 0, transition->map == 101 ? 10 : 0);
@@ -63,8 +63,8 @@ u32 FUN_002fb7dc()
         g_lmapScene->transform.position[1] = transition->start.y +
             (transition->end.y - transition->start.y) * (f32)transition->frame * 0.033333335f;
         if (transition->frame >= 30) {
-            g_gameState.unk18 = 0;
-            g_gameState.entryTransition.completed = 1;
+            g_gameState.inputBlocked = 0;
+            g_gameState.map.transitionCompleted = 1;
             transition->alpha = 1.0f;
             transition->dirty = 1;
             transition->phase = 2;
@@ -87,8 +87,8 @@ u32 FUN_002fb7dc()
         LmapObj *tracker = reinterpret_cast<LmapObj *>(&transition->trackerFlags);
         objSetBaseAndValue(tracker, transition->map - 100, transition->entry);
         entryListCollectMatches(tracker);
-        g_gameState.unk18 = 0;
-        g_gameState.entryTransition.completed = 1;
+        g_gameState.inputBlocked = 0;
+        g_gameState.map.transitionCompleted = 1;
         break;
     }
     return 0;

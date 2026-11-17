@@ -1,5 +1,6 @@
 /* NON_MATCHING: game-state field loads, inactive-branch placement and interpolation VFP scheduling differ. */
 #include "map/NavigationInterpolation.h"
+#include "game/GameStateA.h"
 #include "map/mapDepart.h"
 /* Scene storage follows the end of the shared interpolation prefix. */
 struct NavigationPollingWork {
@@ -9,7 +10,6 @@ struct NavigationPollingWork {
 };
 typedef char NavigationPollingSceneCheck[offsetof(NavigationPollingWork, scene) == 0x4CC ? 1 : -1];
 extern "C" {
-extern GameStateA g_gameState;
 void FUN_0031879c(void);
 u32 naviMainConditionsHold(NavigationPollingWork *work);
 u32 FUN_00488ce8(NavigationPollingWork *work);
@@ -21,7 +21,7 @@ void FUN_0048981c(NavigationPollingWork *work);
 u32 FUN_00485d1c(NavigationPollingWork *work)
 {
     u32 result = 0;
-    if (g_gameState.navigation.alternateNaviMap)
+    if (g_gameState.alternateNaviMap)
         g_gameState.inputBlocked = 0;
     FUN_0031879c();
     NavigationInterpolation &motion = work->interpolation;
@@ -44,7 +44,7 @@ u32 FUN_00485d1c(NavigationPollingWork *work)
     } else if (naviMainConditionsHold(work)) {
         result = FUN_00488ce8(work);
     }
-    if (g_gameState.navigation.alternateNaviMap)
+    if (g_gameState.alternateNaviMap)
         g_gameState.inputBlocked = 1;
     return result;
 }

@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
@@ -7,8 +8,6 @@ void mapPlaceSet(u32 a, u32 b, u32 c);
 
 s32 gameFlagIsSet(u32 id);
 u32 scrGetArg(s32 index);
-
-extern GameStateA g_gameState;
 
 /* Script command: clears effect 0x11F9 when it is set, then runs mapPlaceSet on the first three arguments. */
 s32 scrCommMapPlace(void)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail converts the three euler angles through VectorFloatToUnsigned/UnsignedToFloat (integer index + fraction) and keeps the matrix in registers; the build's float-only lookup compiles to a different sequence. */
 #include "common.h"
+#include "game/GameStateA.h"
 
 /* Script command: place the field camera at a distance behind a target, looking along a heading. */
 
@@ -12,26 +13,8 @@ struct SinCosEntry {
 };
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0xf4];
-    f32 f005f16f0; /* 0x0f4 */
-    f32 f005f16f4; /* 0x0f8 */
-    f32 f005f16f8; /* 0x0fc */
-    f32 f005f16fc; /* 0x100 */
-    f32 f005f1700; /* 0x104 */
-    f32 f005f1704; /* 0x108 */
-    f32 f005f1708; /* 0x10c */
-};
-extern GameStateView g_gameState;
 
 extern SinCosEntry g_sinCosTable[];
-
-
-
-
-
-
 
 s32 scrGetArg(u32 index);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 (*matrix)[4]);
@@ -81,12 +64,12 @@ extern "C" u32 FUN_003a70b8(void)
     matrix[2][2] = cx * cy;
     matrix[2][3] = 0.0f;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(direction, matrix);
-    g_gameState.f005f16f0 = x - direction[0] * distance;
-    g_gameState.f005f16f4 = y - direction[1] * distance;
-    g_gameState.f005f16f8 = z - direction[2] * distance;
-    g_gameState.f005f16fc = x;
-    g_gameState.f005f1700 = y;
-    g_gameState.f005f1704 = z;
-    g_gameState.f005f1708 = extra;
+    g_gameState.scriptCameraEye.x = x - direction[0] * distance;
+    g_gameState.scriptCameraEye.y = y - direction[1] * distance;
+    g_gameState.scriptCameraEye.z = z - direction[2] * distance;
+    g_gameState.scriptCameraTarget.x = x;
+    g_gameState.scriptCameraTarget.y = y;
+    g_gameState.scriptCameraTarget.z = z;
+    g_gameState.scriptCameraFov = extra;
     return 1;
 }

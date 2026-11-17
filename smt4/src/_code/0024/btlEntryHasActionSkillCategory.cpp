@@ -2,16 +2,11 @@
 #include "gamedata/Table04Record.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "gamedata/DataTable40.h"
-
-struct BattleItemSkillRecordView {
-    u8 unk00[0x62];
-    u16 skill;
-};
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
 
 extern "C" {
-BattleItemSkillRecordView *dataTable08Sub1GetRecord(s32 id);
 }
-
 
 extern "C" u32 btlEntryHasActionSkillCategory(const BtlEntry *entry, u32 category)
 {
@@ -22,9 +17,9 @@ extern "C" u32 btlEntryHasActionSkillCategory(const BtlEntry *entry, u32 categor
                 return 1;
         }
         if (entry->actionList.selected.kind == 8) {
-            const BattleItemSkillRecordView *item = dataTable08Sub1GetRecord(entry->actionList.selected.id);
-            if (item && item->skill) {
-                const Table04Record *skill = dataTable40FindById(item->skill);
+            const ConsumableRecord *item = dataTable08Sub1GetRecord(entry->actionList.selected.id);
+            if (item && item->skillId) {
+                const Table04Record *skill = dataTable40FindById(item->skillId);
                 if (skill && category == skill->skillProperties.category)
                     return 1;
             }
@@ -37,16 +32,16 @@ extern "C" u32 btlEntryHasActionSkillCategory(const BtlEntry *entry, u32 categor
                     return 1;
             }
             if (entry->actionList.available[i].kind == 8) {
-                const BattleItemSkillRecordView *item = dataTable08Sub1GetRecord(entry->actionList.available[i].id);
-                if (item && item->skill) {
-                    const Table04Record *skill = dataTable40FindById(item->skill);
+                const ConsumableRecord *item = dataTable08Sub1GetRecord(entry->actionList.available[i].id);
+                if (item && item->skillId) {
+                    const Table04Record *skill = dataTable40FindById(item->skillId);
                     if (skill && category == skill->skillProperties.category)
                         return 1;
                 }
             }
             if (entry->actionList.available[i].kind == 1 && entry->actionList.available[i].id == 2 && entry->equipA) {
-                const RankedTableRecord *weapon = dataTable08Sub2GetRecord(entry->equipA->weapon.id);
-                if (weapon && category == rankedTableRecordGetSortFlags(weapon) >> 20)
+                const EquipmentRecord *weapon = dataTable08Sub2GetRecord(entry->equipA->weapon.id);
+                if (weapon && category == weapon->traits >> 20)
                     return 1;
             }
         }

@@ -9,7 +9,7 @@ u32 itemGetSortCategory(s32 id)
     if (id == 0) {
         return 99;
     }
-    Table04Record *record = dataTable04FindById(id);
+    Table04RecordA *record = dataTable04FindById(id);
     u32 category = 0;
     switch (record->sort.category) {
     case 0:

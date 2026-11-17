@@ -1,4 +1,6 @@
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem.h"
+#include "gamedata/Table00Lookup.h"
 
 /* A table2/section2 record; its six item ids sit at +0xC. */
 struct Table02Sub2Entry {
@@ -6,18 +8,9 @@ struct Table02Sub2Entry {
     /* 0x0C */ u16 itemIds[6];
     /* 0x18 */ u8 unk18[4];
 };
-struct AocSystem;
-
-/* A table0 record; bit 0 of byte 3 is the flag tested here. */
-struct Table00Entry {
-    /* 0x00 */ u8 unk00[3];
-    /* 0x03 */ u8 flags;
-};
 
 extern "C" {
-extern AocSystem *g_aocSystem;
 Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *system, u32 index);
-Table00Entry *dataTable00FindById(u32 id);
 
 // Prefer an add-on record for a valid index, falling back to table2/section2.
 static Table02Sub2Entry *dataTable02GetEntryByIndex(s32 index)
@@ -42,10 +35,10 @@ u32 dataTable02HasFlaggedItem(s32 index)
 
     if (entry != NULL) {
         for (i = 0; i < 6; i++) {
-            u32 id = entry->itemIds[i];
+            u16 id = entry->itemIds[i];
             if (id != 0) {
-                Table00Entry *item = dataTable00FindById(id);
-                if (item != NULL && (item->flags & 1)) {
+                Table00Record *item = dataTable00FindById(id);
+                if (item != NULL && (item->levelFlags & 1)) {
                     return 1;
                 }
             }

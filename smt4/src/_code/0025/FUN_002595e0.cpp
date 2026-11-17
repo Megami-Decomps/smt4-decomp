@@ -11,37 +11,37 @@ u32 objectFlagSetBit(StatBlock *unit, u32 bit);
 void FUN_002595e0(const UnitSelectionInput *input)
 {
     GameSaveData *save = g_gameDataBlocks.saveBlock;
-    s8 *stock = save->party.stock;
-    s32 previous = save->selection.unk24;
-    save->selection.unk24 = input->unitId;
-    save->selection.unk26[0] = input->mode;
-    save->selection.unk1C = input->value;
-    save->selection.unk20 = input->parameter;
-    if (save->selection.unk24 == 0) {
+    s8 *stock = save->body.slots.stock;
+    s32 previous = save->body.config.selection.selectedUnitId;
+    save->body.config.selection.selectedUnitId = input->unitId;
+    save->body.config.selection.mode = input->mode;
+    save->body.config.selection.value = input->value;
+    save->body.config.selection.money = input->parameter;
+    if (save->body.config.selection.selectedUnitId == 0) {
         for (s32 i = 0; i < 24; ++i) {
             s32 slot = stock[i];
-            if (slot >= 0 && flagWordTestBit(&g_gameDataBlocks.saveBlock->party.units[slot], 2)) {
-                objectFlagsClear(&g_gameDataBlocks.saveBlock->party.units[stock[i]], 4);
+            if (slot >= 0 && flagWordTestBit(&g_gameDataBlocks.saveBlock->body.slots.units[slot], 2)) {
+                objectFlagsClear(&g_gameDataBlocks.saveBlock->body.slots.units[stock[i]], 4);
             }
         }
         return;
     }
     for (s32 i = 0; i < 3; ++i) {
-        s32 slot = save->party.active[i];
-        if (slot >= 0 && save->party.units[slot].id == save->selection.unk24) {
-            save->party.active[i] = -1;
+        s32 slot = save->body.slots.active[i];
+        if (slot >= 0 && save->body.slots.units[slot].id == save->body.config.selection.selectedUnitId) {
+            save->body.slots.active[i] = -1;
             break;
         }
     }
     for (s32 i = 0; i < 24; ++i) {
         s32 slot = stock[i];
         if (slot >= 0) {
-            StatBlock *unit = &g_gameDataBlocks.saveBlock->party.units[slot];
-            if (unit->id == save->selection.unk24) {
+            StatBlock *unit = &g_gameDataBlocks.saveBlock->body.slots.units[slot];
+            if (unit->id == save->body.config.selection.selectedUnitId) {
                 objectFlagSetBit(unit, 2);
             }
-            if (previous != 0 && save->selection.unk24 != previous) {
-                unit = &g_gameDataBlocks.saveBlock->party.units[stock[i]];
+            if (previous != 0 && save->body.config.selection.selectedUnitId != previous) {
+                unit = &g_gameDataBlocks.saveBlock->body.slots.units[stock[i]];
                 if (unit->id == previous) {
                     objectFlagsClear(unit, 4);
                 }

@@ -1,26 +1,24 @@
 #include "common.h"
 #include "code/Code0031_Smt4a.h"
+#include "addon/AocSystemA.h"
 
-struct DataEntry {
+/* A 0x10-byte record of data table 0x2d section 4. */
+struct Table2dSection4Record {
     u8 data[0x10];
 };
 
-struct AocSystem;
-
 extern "C" {
 
-extern AocSystem *g_aocSystem;
 void *dataTableGet(u32 category, u32 variant);
-DataEntry *dataTableGetEntries(void *table);
+Table2dSection4Record *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
-u32 groupedFileTablesCountRecordsOfKind(AocSystem *aoc, u32 kind, u32 variant);
-DataEntry *dataFileSetGetTableEntry(AocSystem *aoc, u32 index);
+Table2dSection4Record *dataFileSetGetTableEntry(AocSystemA *aoc, u32 index);
 
 // Entry `index` of the base data table, continuing into the add-on content's tables (NULL past the end).
-DataEntry *FUN_00314638(u32 index)
+Table2dSection4Record *FUN_00314638(u32 index)
 {
     void *table = dataTableGet(0x2d, 4);
-    DataEntry *entries = dataTableGetEntries(table);
+    Table2dSection4Record *entries = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     if (index < count) {
         return &entries[index];

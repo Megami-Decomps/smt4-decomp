@@ -1,14 +1,9 @@
 #include "common.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/EquipmentRecordA.h"
+#include "gamedata/Table00Lookup.h"
 
 namespace {
-/* Record of the equipment table (dataTable08Sub2). */
-struct EquipRecord {
-    u8 unk00[0x2b];
-    u8 element;     /* 0x2b */
-    u8 unk2c;
-    u8 special;     /* 0x2d: counts as element 12 */
-};
 
 /* Record of the skill table (dataTable04). */
 struct SkillRecord {
@@ -26,12 +21,6 @@ struct DemonRecord {
     u8 element;     /* 0x0e */
     u8 unk0f[2];
     u8 special;     /* 0x11: counts as element 12 */
-};
-
-/* Record of dataTable00: its eight skill ids. */
-struct SkillListRecord {
-    u8 unk00[0x50];
-    u16 skills[8];  /* 0x50 */
 };
 
 /* An equipment slot: up to two equipment ids and eight skill ids. */
@@ -64,8 +53,6 @@ const s32 ELEMENT_ANY = 12;
 
 extern "C" {
 DemonRecord *devilGetRecord(u32 id);
-EquipRecord *dataTable08Sub2GetRecord(u32 id);
-SkillListRecord *dataTable00FindById(u32 id);
 
 /* Whether the unit carries equipment or a skill of element `wanted` (12 also takes the "special" flag);
    with `restricted` set only skill-table entries of kind 2 count and the equipment itself is skipped. */
@@ -76,14 +63,14 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
     }
     if (unit->equipment != NULL) {
         if (restricted == 0) {
-            EquipRecord *record = dataTable08Sub2GetRecord(unit->equipment->first);
+            EquipmentRecordA *record = dataTable08Sub2GetRecord(unit->equipment->first);
             if (record != NULL &&
-                (record->element == wanted || (wanted == ELEMENT_ANY && record->special != 0))) {
+                (record->element == wanted || (wanted == ELEMENT_ANY && record->specialElement != 0))) {
                 return 1;
             }
             record = dataTable08Sub2GetRecord(unit->equipment->second);
             if (record != NULL &&
-                (record->element == wanted || (wanted == ELEMENT_ANY && record->special != 0))) {
+                (record->element == wanted || (wanted == ELEMENT_ANY && record->specialElement != 0))) {
                 return 1;
             }
         }
@@ -138,7 +125,7 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
         }
     }
     if (unit->skillList != NULL) {
-        SkillListRecord *list = dataTable00FindById(unit->demonId);
+        Table00RecordA *list = dataTable00FindById(unit->demonId);
         for (s32 i = 0; i < 8; i++) {
             SkillRecord *skill = (SkillRecord *)dataTable04FindById(list->skills[i]);
             if (skill != NULL) {

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "classes/Obj55ca08.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
-#include "ui/PartyPanelState.h"
+#include "ui/TimerSlot.h"
 #include <stddef.h>
 
 struct ScriptRunState;

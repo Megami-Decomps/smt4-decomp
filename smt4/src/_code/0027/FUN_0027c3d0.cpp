@@ -1,19 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027c3d0` (_code @ 0x27c3d0, 0x878 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameState.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x2d8];
-    unsigned int f0049fbf4; /* 0x2d8 */
-    unsigned int f0049fbf8; /* 0x2dc */
-    unsigned int f0049fbfc; /* 0x2e0 */
-    unsigned int f0049fc00; /* 0x2e4 */
-    unsigned int f0049fc04; /* 0x2e8 */
-    unsigned int f0049fc08; /* 0x2ec */
-};
-extern GameStateView g_gameState;
 
 
 int nodeSetScale(unsigned int, int);
@@ -42,7 +32,7 @@ extern int g_mapStateSlots; /* 0x44cd88 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int dataTableGetRecordFortyNine(void);
 extern int mapSavedFlagIsSet(int);
-extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
+extern unsigned int asdMdlManagerCreateFromSource(void *, unsigned int, unsigned int);
 /* Supplied declaration required: nodeSetScale. */
 /* Supplied declaration required: FUN_0027ee24. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
@@ -194,7 +184,7 @@ unsigned int FUN_0027c3d0(void)
           }
         }
         else {
-          temp_v3 = asdMdlManagerCreateFromSource(g_gameState.f0049fc04,g_gameState.f0049fc08,0x1c0);
+          temp_v3 = asdMdlManagerCreateFromSource(g_gameState.map.files[11].handle,g_gameState.map.files[11].buffer,0x1c0);
           *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
         }
       }
@@ -204,12 +194,12 @@ unsigned int FUN_0027c3d0(void)
       }
     }
     else {
-      temp_v3 = asdMdlManagerCreateFromSource(g_gameState.f0049fbfc,g_gameState.f0049fc00,0x1c0);
+      temp_v3 = asdMdlManagerCreateFromSource(g_gameState.map.files[10].handle,g_gameState.map.files[10].buffer,0x1c0);
       *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
     }
   }
   else {
-    temp_v3 = asdMdlManagerCreateFromSource(g_gameState.f0049fbf4,g_gameState.f0049fbf8,0x1c0);
+    temp_v3 = asdMdlManagerCreateFromSource(g_gameState.map.files[9].handle,g_gameState.map.files[9].buffer,0x1c0);
     *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
   }
   temp_v2 = g_mapStateSlots;

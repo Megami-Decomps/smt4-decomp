@@ -33,7 +33,7 @@ u32 FUN_002685cc(u32 id)
             return (record->flags >> 31) + 1;
         }
     } else {
-        Table04Record *record = dataTable04FindById(id);
+        Table04RecordA *record = dataTable04FindById(id);
         if (record != NULL) {
             return ~(record->flags >> 29) & 1;
         }

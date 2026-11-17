@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "map/MapSpawn.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_mapMain; /* 0x447e28 */
 extern int g_lmapScene; /* 0x447e88 */
-extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern unsigned int DAT_0049f924; /* 0x49f924 */
 extern unsigned int DAT_0049f928; /* 0x49f928 */
@@ -171,12 +171,12 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
   if (DAT_0049f96c != 0) {
     DAT_0049f96c = 0;
     naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17,DAT_0049fa18,DAT_0049fa19);
-    if ((g_gameState - 0x1fU >= 5) && (g_gameState - 0x19U >= 6)) {
-      temp_v1 = g_gameState;
-      if (g_gameState == 5) {
+    if ((g_gameState.mapId - 0x1fU >= 5) && (g_gameState.mapId - 0x19U >= 6)) {
+      temp_v1 = g_gameState.mapId;
+      if (g_gameState.mapId == 5) {
         temp_v1 = DAT_0049f920;
       }
-      if (g_gameState != 5 || temp_v1 != 6) {
+      if (g_gameState.mapId != 5 || temp_v1 != 6) {
         mapSaveReturnSnapshot();
         *(unsigned int *)(temp_v2 + 0x38) = DAT_0049f990;
         *(unsigned char *)(temp_v2 + 0xe) = 1;

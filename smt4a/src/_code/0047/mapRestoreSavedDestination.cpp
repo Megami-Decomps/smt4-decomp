@@ -1,8 +1,8 @@
 #include "map/mapDepart.h"
+#include "game/GameStateA.h"
 #include "map/SavedMapTransition.h"
 
 extern "C" {
-extern GameStateA g_gameState;
 SavedMapTransition *gameBlockGetArea27E98(void);
 void FUN_00324c48(s32 map, s32 area, s32 entrance, f32 x, f32 y, f32 z, f32 heading, f32 cameraHeading);
 void asdSequenceRequest(u32 sequence, const void *arguments, u32 size);

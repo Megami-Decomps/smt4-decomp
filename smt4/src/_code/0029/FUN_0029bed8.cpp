@@ -39,15 +39,15 @@ extern "C" void FUN_0029bed8(u32 id)
 {
     GameSaveData *save = g_gameDataBlocks.saveBlock;
     StatBlock *unit = NULL;
-    for (u16 i = 0; i < save->party.stockCount; ++i) {
-        const s32 index = save->party.stock[i];
-        if (index >= 0 && save->party.units[index].id == id) {
-            unit = &save->party.units[index];
+    for (u16 i = 0; i < save->body.slots.stockCount; ++i) {
+        const s32 index = save->body.slots.stock[i];
+        if (index >= 0 && save->body.slots.units[index].id == id) {
+            unit = &save->body.slots.units[index];
             break;
         }
     }
     if (id < 0x501) {
-        RegisteredUnitSnapshotView *snapshot = reinterpret_cast<RegisteredUnitSnapshotView *>(&save->items[id]);
+        RegisteredUnitSnapshotView *snapshot = reinterpret_cast<RegisteredUnitSnapshotView *>(&save->body.items[id]);
         const UnitSnapshotBonusesView *bonuses = reinterpret_cast<const UnitSnapshotBonusesView *>(unit);
         snapshot->flags = (snapshot->flags & 0xFFC30000) | unit->cur5 |
             (static_cast<u32>(unit->encounter.initialization.initializationKind & 0xF) << 18);

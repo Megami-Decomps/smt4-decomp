@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ typedef struct {
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_mapIf; /* 0x447a78 */
 extern int g_lmapScene; /* 0x447e88 */
-extern unsigned char g_gameState; /* 0x49f91c */
 extern unsigned char DAT_0049fb1c; /* 0x49fb1c */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
@@ -134,7 +134,7 @@ void FUN_001e5e78(int param_1)
   temp_v29 = 0;
   puVar10 = (unsigned char *)(g_mapIf + 0xcce0);
   piVar7 = (int *)(g_mapIf + 0xcce4);
-  if ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) != '\0') {
+  if (g_gameState.inputBlocked != '\0') {
     *puVar10 = 1;
     *piVar7 = 2;
   }
@@ -745,7 +745,7 @@ LAB_001e6120:
           temp_v8 = 0xff;
         }
         *(unsigned int *)(temp_v12 + 0x250) = temp_v8 | *(unsigned int *)(temp_v12 + 0x250);
-        if ((*(signed char *)((unsigned char *)&g_gameState + 0x22b)) != '\0') {
+        if (g_gameState.map.mapRegistrationPending != '\0') {
           temp_v8 = 0x11;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }
@@ -1192,7 +1192,7 @@ joined_r0x001e7e00:
           temp_v8 = 0xff;
         }
         *(unsigned int *)(temp_v12 + 0x250) = temp_v8 | *(unsigned int *)(temp_v12 + 0x250);
-        if ((*(signed char *)((unsigned char *)&g_gameState + 0x22b)) == '\0') {
+        if (g_gameState.map.mapRegistrationPending == '\0') {
           temp_v8 = 6;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }

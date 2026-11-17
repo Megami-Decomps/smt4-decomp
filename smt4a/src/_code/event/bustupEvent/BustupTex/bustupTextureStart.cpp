@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "event/bustupEvent/BustupTex.h"
+#include "addon/AocSystemA.h"
 
 namespace {
 struct BustupTextureDefinition {
@@ -14,7 +15,6 @@ struct BustupTextureDefinition {
 };
 }
 extern "C" {
-extern AocSystemA *g_aocSystem;
 extern const char DAT_0052f77c[];
 extern const char DAT_0052f76c[];
 s32 gameFlagIsSet(u32 flag);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the literal-pool order differs: retail places the 1/3 scale before the g_deferredMapModels word. */
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "game/GameState.h"
 
 struct HudVec3 {
     f32 x, y, z;
@@ -27,7 +28,6 @@ struct DeferredMapModelPosition {
 };
 extern "C" {
 extern MapHudSelection *g_mapIf;
-extern s32 g_gameState;
 extern DeferredMapModelPosition *g_deferredMapModels;
 }
 
@@ -52,7 +52,7 @@ extern "C" void FUN_00266fac(s32 mode, s32 id)
     hud->mode = (s8)mode;
     if (mode != 0) {
         animation->id = id;
-        if (g_gameState > 100) {
+        if (g_gameState.mapId > 100) {
             soundActorStartOnFreeChannel(0x10001FD, soundPositionFromWorld(g_deferredMapModels[id].position));
         }
         animation->position.x = 0.0f;

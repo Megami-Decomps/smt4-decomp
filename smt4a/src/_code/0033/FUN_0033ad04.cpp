@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation: retail spills the slot pointer, spawn index and list pointer around the inlined spawn block (three more stack slots, extra live registers) */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/Table00Lookup.h"
 
 /* A resource the enemy slot owns or only references. */
@@ -69,23 +70,9 @@ struct EnemySpawnList {
     /* 0x4a74 */ s32 spawnCount;
 };
 
-/* The selected area record. */
-struct EnemyAreaSelection {
-    /* 0x00 */ u8 unk00[0x84];
-    /* 0x84 */ s16 unk84;
-    /* 0x86 */ s16 area;
-};
-
-/* g_gameState as this function sees it: the selected area record sits 0x200 in. */
-struct EnemyGameStateView {
-    /* 0x000 */ u8 unk000[0x200];
-    /* 0x200 */ EnemyAreaSelection selection;
-};
-
 extern "C" {
 extern EnemySpawnList *g_mapEnemy;
 extern u32 *g_handleRegistry;
-extern EnemyGameStateView g_gameState;
 void ptrListRemoveClearOwner(u32 *registry, u32 *owner);
 u16 FUN_004bb870(s32 index);
 }
@@ -133,7 +120,7 @@ static __inline void enemySlotSpawn(EnemySpawnSlot *slot, s32 state, s32 *spawnC
     u32 index = *spawnCount & 0xff;
     for (s32 i = 0; i < 16; i++) {
         EnemySpawnGroup *group = &g_mapEnemy->groups[i];
-        if (group->area == g_gameState.selection.area) {
+        if (group->area == g_gameState.selectionArea) {
             enemySlotReleaseResource(slot);
             slot->spawnId = group->ids[index];
             slot->recordId = group->records[index];

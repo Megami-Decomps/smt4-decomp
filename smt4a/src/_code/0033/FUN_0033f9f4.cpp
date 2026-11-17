@@ -1,19 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033f9f4` (_code @ 0x33f9f4, 0x460 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    signed char f005f1614; /* 0x018 */
-    u8 pad019[0x3];
-    int f005f1618; /* 0x01c */
-    u8 pad020[0x1];
-    signed char f005f161d; /* 0x021 */
-};
-extern GameStateView g_gameState;
-
 
 int mathAngleDeltaDegrees(void);
 int mapIfStart(unsigned int);
@@ -27,9 +17,6 @@ typedef struct {
 extern int g_lmapMainState; /* 0x580238 */
 extern int g_lmapView; /* 0x5806a4 */
 
-
-
-
 extern int gameFlagsGetBlock(void);
 extern int slotIsActive(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -37,7 +24,6 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: FUN_0033abb4. */
 extern int inputIsQuestMenuPressed(void);
-
 
 void FUN_0033f9f4(void)
 
@@ -86,11 +72,11 @@ void FUN_0033f9f4(void)
   if (0 < *(short *)(temp_v5 + 0xb6)) {
     *(short *)(temp_v5 + 0xb6) = *(short *)(temp_v5 + 0xb6) - 1;
   }
-  temp_v0 = g_gameState.f005f161d;
-  if (g_gameState.f005f161d == '\0') {
-    temp_v0 = g_gameState.f005f1614;
+  temp_v0 = g_gameState.paused;
+  if (g_gameState.paused == '\0') {
+    temp_v0 = g_gameState.inputBlocked;
   }
-  if ((!(g_gameState.f005f161d != '\0' || temp_v0 != '\0')) && (g_gameState.f005f1618 == 0)) {
+  if ((!(g_gameState.paused != '\0' || temp_v0 != '\0')) && (g_gameState.unk01C == 0)) {
     if (*(char *)(temp_v5 + 0xb4) != '\0') goto LAB_0033fcfc;
     if (((*(char *)(temp_v5 + 0xb5) != '\0') && (temp_v5 = slotIsActive(8), temp_v5 == 0)) &&
        (temp_v5 = slotIsActive(7), temp_v5 == 0)) {
@@ -115,7 +101,7 @@ void FUN_0033f9f4(void)
         temp_v7 = 0;
         temp_v8 = 0;
         temp_v9 = 0;
-        if (g_gameState.f005f161d == '\0') {
+        if (g_gameState.paused == '\0') {
           temp_v2 = 1;
         }
       }

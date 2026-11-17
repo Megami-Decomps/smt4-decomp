@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "map/mapDepart.h"
+#include "game/GameState.h"
 
 struct ContentDepartureWork {
     ContentTransition transition;
@@ -12,7 +13,6 @@ struct ContentDepartureWork {
 };
 
 extern "C" {
-extern GameState g_gameState;
 s32 screenFadeIsBusy();
 void FUN_00249b18(u32 party, s32 force);
 void titleSetSlotValueState2(u32 slot, u32 value);
@@ -54,7 +54,7 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
     if (!flagsAny(flags, 0x200000, 0x40000) && !flagsAny(flags, 0x800000, 0x4000000) &&
         !flagsAny(flags, 0x1000000, 0x2000000) && !flagsAny(flags, 0x8000000, 0x20000000) && (flags & 0x10)) {
         if (flags & 0x80000) {
-            asdSequenceRequest(static_cast<s32>(g_gameState.jump.request.first) < 100 ? 6 : 8, NULL, 0);
+            asdSequenceRequest(static_cast<s32>(g_gameState.jumpRequest.selection.group) < 100 ? 6 : 8, NULL, 0);
             transition->state = 17;
             transition->phase = 0;
             return;

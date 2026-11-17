@@ -1,9 +1,11 @@
 /* NON_MATCHING: retail retains discarded event-ID argument moves and different start-entry tail placement; resource-loading body matches. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "addon/aocMain.h"
 #include "addon/AocDrawText.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W6_W6Match8_MapMain.h"
+#include "addon/AocSystemA.h"
 
 struct MapScriptProcess {
     u8 unk00[0x108];
@@ -12,7 +14,6 @@ struct MapScriptProcess {
 
 extern "C" {
 extern MapMainState *g_mapMain;
-extern AocSystemA *g_aocSystem;
 void messageSetScriptDisplayMode();
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
@@ -54,9 +55,9 @@ u32 mapStartEventScript()
     map->process->mode = 2;
     if (g_gameState.scriptOverride) {
         g_gameState.scriptOverride = 0;
-        scrScriptProcessGetEntry(map->process, g_gameState.scriptEntry.entry);
+        scrScriptProcessGetEntry(map->process, g_gameState.scriptEntry);
         map->scriptState = 0;
-        scrScriptProcessStartEntry(map->process, g_gameState.scriptEntry.entry);
+        scrScriptProcessStartEntry(map->process, g_gameState.scriptEntry);
     } else {
         map->scriptState = 0;
         s32 entry = tableGroupFindEntryIndex(map->script, map->entryName);

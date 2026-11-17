@@ -7,8 +7,8 @@
 #include "util/BitsAndBytes_VariantD.h"
 
 extern "C" {
-void bitsAt60Set(SlotRecord *, u16);
-s32 bitsAt60Test(SlotRecord *, u16);
+void bitsAt60Set(SlotRecordA *, u16);
+s32 bitsAt60Test(SlotRecordA *, u16);
 void FUN_004fcffc(u32, ScriptUnit *, BattleRosterRecordA *, u32);
 void FUN_004fdb18(u32, ScriptUnit *, BattleRosterRecordA *, u32, u32);
 void btlQueueActionMessage(u32, ScriptUnit *, u32, u32, u32, u32, u32);
@@ -27,7 +27,7 @@ u32 FUN_00380b04(void)
         }
         FUN_004fdb18(0, unit, record, 1u << status, 1);
     } else {
-        SlotRecord *record = gameGetSlotRecord(target - 109);
+        SlotRecordA *record = gameGetSlotRecord(target - 109);
         if (!enable) {
             bitsAt60Clear(record, static_cast<u16>(1u << status));
             return 1;

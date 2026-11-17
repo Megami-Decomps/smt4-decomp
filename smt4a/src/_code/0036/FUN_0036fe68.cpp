@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "game/GameStateA.h"
 
 /* The depart sequence's own state. */
 struct DepartSequence {
@@ -45,11 +46,11 @@ s32 naviMainIsActive(void);
 /* Per-frame driver of the map depart sequence. Returns 1 on the frame the sequence ends. */
 u32 FUN_0036fe68(void)
 {
-    if (g_gameState.departFlags.ready != 0 && DAT_005806b4.overlayShown == 0) {
+    if (g_gameState.mapReady != 0 && DAT_005806b4.overlayShown == 0) {
         DAT_005806b4.overlayShown = 1;
         debugOverlaySetShown(1);
     }
-    if (g_gameState.resume.mode == 3) {
+    if (g_gameState.resumeMode == 3) {
         if (DAT_005806b4.started == 0) {
             mikadoSetCameraFlag80();
             DAT_005806b4.started = 1;
@@ -69,7 +70,7 @@ u32 FUN_0036fe68(void)
         DAT_005806b4.finished = 0;
     }
     if (DAT_005806b4.finished != 0) {
-        g_gameState.departFlags.ready = 0;
+        g_gameState.mapReady = 0;
         frameTransitionSetMode(0);
         DAT_005806b4.started = 0;
         DAT_005806b4.finished = 0;
@@ -83,14 +84,14 @@ u32 FUN_0036fe68(void)
         g_lmapScene->targetPosition = g_lmapScene->position;
     } else {
         if (DAT_005806b4.frame == 10) {
-            g_gameState.departLoad.mapLoadActive = 1;
+            g_gameState.departMapLoading = 1;
             FUN_002c2610();
             objectE0ResetFlags1040();
             frameTransitionSetMode(1);
             naviMainEnterState4IfActive();
         }
         if (DAT_005806b4.frame == 0xB) {
-            g_gameState.departFlags.loading = 1;
+            g_gameState.departLoading = 1;
             g_mapDepartWork[10] = 0;
             FUN_002235f4();
             FUN_002c2610();
@@ -107,16 +108,16 @@ u32 FUN_0036fe68(void)
             FUN_002c3398(0, 0);
             FUN_0031416c(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
             DAT_005806b4.frame = 100;
-            g_gameState.departFlags.ready = 1;
+            g_gameState.mapReady = 1;
             FUN_0037a078();
         }
     } else if (campIsState85() == 0) {
-        g_gameState.departLoad.mapLoadActive = 0;
+        g_gameState.departMapLoading = 0;
         FUN_002c23cc(1);
-        g_gameState.departFlags.loading = 0;
+        g_gameState.departLoading = 0;
         sub68OwnerCall3();
         soundActorQueueStartPending();
-        mapEnvironmentSelectPreset(g_gameState.submode);
+        mapEnvironmentSelectPreset(g_gameState.areaId);
         FUN_00297c3c();
         FUN_0023534c();
         FUN_002737a8();

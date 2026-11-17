@@ -1,5 +1,6 @@
 /* NON_MATCHING: Spring of Healing setup/teardown and hard-float arguments are recovered; root/model register allocation and shared epilogues differ. */
 #include "shard/HealingSceneWork.h"
+#include "game/GameStateA.h"
 #include "code/Code0013.h"
 
 struct HealingFreeCamera {
@@ -14,19 +15,11 @@ struct HealingFieldJob {
     /* 0x04 */ u32 job;
 };
 
-struct HealingReturnState {
-    /* 0x000 */ u8 unk000[0x578];
-    /* 0x578 */ u32 first;
-    /* 0x57C */ u32 second;
-    /* 0x580 */ u32 third;
-};
-
 extern "C" {
 extern void *g_handleRegistry;
 extern HealingFreeCamera *g_freeCamera;
 extern HealingFieldJob *DAT_0057f658;
 extern f32 DAT_005f1b80[5];
-extern HealingReturnState g_gameState;
 void messageSetMode(u32 mode);
 void FUN_002c23cc(u32 value);
 void FUN_004cdddc(HealingSceneWork *work);
@@ -144,7 +137,7 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
                 titleSetSlotValueState2(0, 1);
                 titleSetSlotValueState2(1, 1);
             } else {
-                FUN_00324c48(g_gameState.first, g_gameState.second, g_gameState.third,
+                FUN_00324c48(g_gameState.sourceMap, g_gameState.sourceArea, g_gameState.sourceObjectId,
                               DAT_005f1b80[0], DAT_005f1b80[1], DAT_005f1b80[2],
                               DAT_005f1b80[3], DAT_005f1b80[4]);
                 gameStateClearFlag();

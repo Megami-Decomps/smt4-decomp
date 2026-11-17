@@ -1,17 +1,20 @@
 /* Resolves an indexed record across loaded type-40 package tables. */
 #include "addon/PackageSelection.h"
+#include "addon/AocSystem.h"
 
-extern "C" PackageIndexedRecord *packageFindIndexedRecord(PackageList *packages, s32 index)
+extern "C" void *dataTableFileGetTable(void *file, u32 section);
+
+extern "C" PackageIndexedRecord *packageFindIndexedRecord(AocSystem *system, s32 index)
 {
     s32 base = 0;
-    for (s32 i = 0; i < packages->count; ++i) {
-        PackageEntry *package = &packages->entries[i];
+    for (s32 i = 0; i < system->packageCount; ++i) {
+        AocPackage *package = &system->packages[i];
         if (packageEntryIsLoaded(package)) {
-            char (*records)[0x40] = packageEntryGetDirectory(package);
+            AocPackageDirectoryEntry *records = packageEntryGetDirectory(package);
             u32 count = packageEntryGetFileCount(package);
             for (u32 j = 0; j < count; ++j) {
-                if (records[j][0] == 40) {
-                    void *table = dataTableFileGetTable(package->files[j].fileId, 0);
+                if (records[j].kind == 40) {
+                    void *table = dataTableFileGetTable(package->files[j].data, 0);
                     s32 next = dataTableGetCount(table) + base;
                     if (next >= index) {
                         return (PackageIndexedRecord *)dataTableGetEntries(table) + (index - base);

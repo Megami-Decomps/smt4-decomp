@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "font/PlaceWin.h"
+#include "game/GameState.h"
 extern "C" int FUN_0020ffe8(...);
 
 extern "C" {
@@ -120,7 +121,6 @@ extern unsigned char DAT_004207d8; /* 0x4207d8 */
 extern unsigned int *g_tmnl; /* 0x432ce0 */
 extern unsigned short g_tmnlEntries; /* 0x432cf8 */
 extern char s_Mikado_00432cfe[7]; /* 0x432cfe */
-extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -452,7 +452,7 @@ unsigned int FUN_001d99c0(void)
         if (temp_v6 != 0) {
           FUN_002a5704(puVar2[0xc],0);
           FUN_0029bb08(puVar2[0xc]);
-          puVar2[6] = g_gameState;
+          puVar2[6] = g_gameState.mapId;
           puVar2[7] = DAT_0049f920;
           temp_v3 = asdLoadFileSyncDefault(&LAB_001da298);
           puVar2[8] = temp_v3;

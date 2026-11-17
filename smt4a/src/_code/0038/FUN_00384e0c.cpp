@@ -1,5 +1,6 @@
 /* NON_MATCHING: retained flag owner and navigation globals recovered; active-list clear loop, constant-one lifetime and register allocation differ. */
 #include "common.h"
+#include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 
@@ -38,8 +39,6 @@ struct GameFlagsBlock {
 };
 
 extern "C" {
-
-extern GameStateA g_gameState;
 
 GameFlagsBlock* gameFlagsGetBlock(void);
 s32 dataTable49Type1Count(void);
@@ -90,7 +89,7 @@ void FUN_00384e0c(void)
     s32 currentId = current != NULL ? current->currentNavi : 0;
     if (currentId != first) {
         block->changed0 = 1;
-        g_gameState.navigation.naviRefresh = 1;
+        g_gameState.naviRefresh = 1;
         block->changed1 = 1;
     }
     if (first != 0) {
@@ -98,7 +97,7 @@ void FUN_00384e0c(void)
         if (selected != NULL)
             selected->currentNavi = first;
     }
-    g_gameState.navigation.alternateNaviMap = 0;
+    g_gameState.alternateNaviMap = 0;
     if (naviMainIsInactive() != 0) return;
     GameFlagsBlock* active = gameFlagsGetBlock();
     u8* firstSlot = NULL;

@@ -2,9 +2,9 @@
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "shard/W5_W5Match7_DataRecord.h"
 #include "text/TextDraw.h"
+#include "addon/AocSystemA.h"
 struct AocSystemA;
 extern "C" {
-extern AocSystemA *g_aocSystem;
 void FUN_003dea6c(u32 id, s32 enabled, s32 flags);
 void *FUN_0046c0f8(AocSystemA *system, u32 id);
 void textFormatBuffer(char *output, const char *format, ...);

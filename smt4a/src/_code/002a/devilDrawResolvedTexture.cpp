@@ -1,9 +1,9 @@
 #include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "gamedata/Table00Lookup.h"
 extern "C" {
 extern u32 g_aocSystem;
 DevilRecordA *devilGetRecord(u32 id);
-void *dataTable00FindById(u32 id);
 s32 gameFlagIsSet(u32 flag);
 s32 aocRunByName(u32 system, s32 category, s32 id, s32 mode);
 void texDrawCompositeSprite(s32 channel, s32 category, s32 variant, u32 first, u32 second, u32 third);

@@ -1,14 +1,9 @@
 #include "common.h"
+#include "gamedata/ConsumableRecordA.h"
 
 extern "C" {
 
-typedef struct Record {
-    /* 0x00 */ u8 unk00[0x43];
-    /* 0x43 */ u8 rank;
-} Record;
-
 int flagValueRead(u16 id);
-Record *dataTable8FindRecord(u16 id);
 
 /* Comparator on two u16 ids: orders by flagValueRead(id), then by the records' rank (second minus first). */
 int idCompareByKeyThenRank(u16 *a, u16 *b)
@@ -18,8 +13,8 @@ int idCompareByKeyThenRank(u16 *a, u16 *b)
     int result = keyA - keyB;
 
     if (result == 0) {
-        Record *recordA = dataTable8FindRecord(*a);
-        Record *recordB = dataTable8FindRecord(*b);
+        ConsumableRecordA *recordA = dataTable8FindRecord(*a);
+        ConsumableRecordA *recordB = dataTable8FindRecord(*b);
 
         result = recordB->rank - recordA->rank;
     }

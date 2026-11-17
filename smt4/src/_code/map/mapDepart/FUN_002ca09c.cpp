@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "game/GameState.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ typedef struct {
 
 extern int g_mapDepart; /* 0x4475b8 */
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned char g_gameState; /* 0x49f91c */
 extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -105,8 +105,8 @@ unsigned int FUN_002ca09c(void)
             texDrawTableEntryAtStoredOrigin(2,0xe,temp_v9,(int)temp_v11,0,0xb);
             temp_v9 = temp_v9 + 1;
           } while (temp_v9 < 0x10b);
-          temp_v3 = (*(unsigned int *)((unsigned char *)&g_gameState + 0xa8));
-          FUN_0025b670((*(unsigned int *)((unsigned char *)&g_gameState + 0xa8)));
+          temp_v3 = g_gameState.recordId;
+          FUN_0025b670(g_gameState.recordId);
           textFormatBuffer(temp_v13,"%s",temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

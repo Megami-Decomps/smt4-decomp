@@ -1,4 +1,5 @@
 #include "shard/NaviMain.h"
+#include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
@@ -8,7 +9,7 @@ void menuEnterState11(NaviTransitionState* menu, u32 selection);
 // Requests the selected map, or clears the pending request when it is already current.
 void naviRequestSelectedMap(void)
 {
-    u32 alternate = g_gameState.navigation.alternateNaviMap;
+    u32 alternate = g_gameState.alternateNaviMap;
     NaviMainA* navi = g_naviMain;
     u32 map;
     if (alternate != 0) {
@@ -19,7 +20,7 @@ void naviRequestSelectedMap(void)
     if (navi->currentMap != map) {
         menuEnterState11(&navi->transition, map);
     } else {
-        g_gameState.navigation.naviMapPending = 0;
+        g_gameState.naviMapPending = 0;
     }
 }
 }

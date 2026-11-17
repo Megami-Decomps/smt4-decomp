@@ -1,20 +1,11 @@
 /* NON_MATCHING: prologue, per-table lookups (inlined) and stack layout match; retail keeps a separate null/payload check (cmp; nop; beq) per case with one shared +0x20 tail, built merges/predicates them */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem.h"
+#include "gamedata/EquipmentRecord.h"
+#include "gamedata/ConsumableRecord.h"
 
 extern "C" {
-
-/* The tail of the content system: one lookup cache per record table, at the offsets the callers below use. */
-typedef struct AocRecordSystem {
-    /* 0x000 */ u8 unk000[0x3A0];
-    /* 0x3A0 */ s32 cache3A0;
-    /* 0x3A4 */ u8 unk3A4[0x20];
-    /* 0x3C4 */ s32 cache3C4;
-    /* 0x3C8 */ u8 unk3C8[8];
-    /* 0x3D0 */ s32 cache3D0;
-    /* 0x3D4 */ u8 unk3D4[8];
-    /* 0x3DC */ s32 cache3DC;
-} AocRecordSystem;
 
 /* Search keys of the four bsearched record tables: only the id is filled. */
 typedef struct DataRecord58 {
@@ -41,15 +32,11 @@ typedef struct DataRecord2C {
     /* 0x22 */ u8 unk22[0xA];
 } DataRecord2C;
 
-extern AocRecordSystem *g_aocSystem;
-
-void *dataTable08Sub0FindById(AocRecordSystem *system, u32 id);
-void *idEntryTableFindById(AocRecordSystem *system, u32 id);
-void *keyedEntryListFindByKey(AocRecordSystem *system, u32 id);
-void *aocTable8Type5FindRecord(AocRecordSystem *system, u32 id);
+void *dataTable08Sub0FindById(AocSystem *system, u32 id);
+void *idEntryTableFindById(AocSystem *system, u32 id);
+void *keyedEntryListFindByKey(AocSystem *system, u32 id);
+void *aocTable8Type5FindRecord(AocSystem *system, u32 id);
 int itemCategoryFindByItemId(void);
-void *dataTable08Sub1GetRecord(u32 id);
-void *dataTable08Sub2GetRecord(u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, int (*compare)(const void *, const void *));
 
 int dataTable08Sub0CompareKeys(const void *a, const void *b);
@@ -62,7 +49,7 @@ static inline u8 *getTable08Sub0Record(u32 id)
     DataRecord58 key;
     u8 *record;
     key.id = id;
-    if (g_aocSystem->cache3A0 == 0 || (record = (u8 *)dataTable08Sub0FindById(g_aocSystem, id)) == NULL) {
+    if (g_aocSystem->table08[0].records == NULL || (record = (u8 *)dataTable08Sub0FindById(g_aocSystem, id)) == NULL) {
         void *table = dataTableGet(8, 0);
         if (table == 0) {
             return NULL;
@@ -79,7 +66,7 @@ static inline u8 *getTable08Sub3Record(u32 id)
     DataRecord3C key;
     u8 *record;
     key.id = id;
-    if (g_aocSystem->cache3C4 == 0 || (record = (u8 *)idEntryTableFindById(g_aocSystem, id)) == NULL) {
+    if (g_aocSystem->table08[3].records == NULL || (record = (u8 *)idEntryTableFindById(g_aocSystem, id)) == NULL) {
         void *table = dataTableGet(8, 3);
         if (table == 0) {
             return NULL;
@@ -96,7 +83,7 @@ static inline u8 *getTable08Sub4Record(u32 id)
     DataRecord30 key;
     u8 *record;
     key.id = id;
-    if (g_aocSystem->cache3D0 == 0 || (record = (u8 *)keyedEntryListFindByKey(g_aocSystem, id)) == NULL) {
+    if (g_aocSystem->table08[4].records == NULL || (record = (u8 *)keyedEntryListFindByKey(g_aocSystem, id)) == NULL) {
         void *table = dataTableGet(8, 4);
         if (table == 0) {
             return NULL;
@@ -113,7 +100,7 @@ static inline u8 *getTable08Sub5Record(u32 id)
     DataRecord2C key;
     u8 *record;
     key.id = id;
-    if (g_aocSystem->cache3DC == 0 || (record = (u8 *)aocTable8Type5FindRecord(g_aocSystem, id)) == NULL) {
+    if (g_aocSystem->table08[5].records == NULL || (record = (u8 *)aocTable8Type5FindRecord(g_aocSystem, id)) == NULL) {
         void *table = dataTableGet(8, 5);
         if (table == 0) {
             return NULL;

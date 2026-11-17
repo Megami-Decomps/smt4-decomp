@@ -2,6 +2,7 @@
 #include "map/mapDepart.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "game/GameState.h"
 
 /* The model a gimic's object is bound to. */
 struct GimicNode {
@@ -44,7 +45,6 @@ typedef char GimicLayout[sizeof(GimicEntry) == 0x28 && offsetof(GimicList, entri
 extern "C" {
 
 extern GimicList *g_mapGimic;
-extern GameState g_gameState;
 
 void asdMdlManagerMarkDestroy(GimicObject *object);
 s32 FUN_0027cda0(void);
@@ -103,7 +103,7 @@ void FUN_00274fac(void)
         if (entry->active == 0) {
             continue;
         }
-        if (g_gameState.controllerFlags.mapRangeModelsHidden != 0) {
+        if (g_gameState.loading != 0) {
             if ((entry->object->flags & 2) == 0) {
                 entry->object->flags |= 2;
                 entry->object->owner->model[0x1F6] = 0;
