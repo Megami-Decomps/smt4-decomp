@@ -48,3 +48,5 @@ partyWidgetSetTransitionPending = 0xe5c01027; // 0x2933b4 0x2933f0 0x293444 0x29
 aocMenuSetReadyFlag = 0xe5c01b81; // 0x38f860 (aocMenuInitializePanelSprites: mov r1, #0; g_aocMain reloaded into r0; strb r1, [r0, #2945]; smt4a has the same row)
 handleObjectGetHandle = 0xe5900000; // 0x10fcb0 (FUN_0010fc90: add r0, r4, #20, then a lone ldr r0, [r0] before svc 0x23)
 contentIndexGetValue = 0xe1d000b0; // 0x15dd2c (FUN_0015dc2c: add r0, r5, #8, then a lone ldrh r0, [r0] used as an argument)
+
+packScissorCoordinates = 0xe1800801; // inferred removed helper x | (y << 16); FUN_0029a17c +0x64/+0xac; gxSetClippedBottomScreenScissor +0x13c/+0x180 retain r0/r1 argument copies; see docs/scissor-coordinate-packing.md

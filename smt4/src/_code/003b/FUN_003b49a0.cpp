@@ -8,7 +8,7 @@
 extern "C" {
 
 int contentEntryFlagTest(void);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int arrayContainsU16(...);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
@@ -50,7 +50,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: contentEntryFlagTest. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern unsigned int appGetRemainingCapacity(unsigned short);
 extern int FUN_0029aafc(void);
 extern int flagCountUnlockedSlots(int);
@@ -298,7 +298,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       (**(romwright_code **)(temp_v3 + 0x1328))(3);
       *(unsigned char *)(temp_v3 + 0x1324) = 0;
     }
-    FUN_0029a17c((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,
                  (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
     temp_v3 = vec2GetYInt(param_1 + 0x480);
@@ -484,7 +484,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       (**(romwright_code **)(temp_v5 + 0x1328))();
       *(unsigned char *)(temp_v5 + 0x1324) = 0;
     }
-    FUN_0029a17c((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + param_2,
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + param_2,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,
                  (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1],1);
     temp_v5 = vec2GetYInt(param_1 + 0x480);

@@ -31,7 +31,7 @@ s32 resourceRunEmbeddedOperationIfUnblocked(void *list);   /* horizontal: first 
 s32 FUN_0029ee54(void *list);   /* vertical: total entries */
 s32 FUN_0029d644(void *list);   /* vertical: visible entries */
 s32 resourceRunOperationIfUnblocked(void *list);   /* vertical: first visible entry */
-void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Proportional thumb: its length for `visible` of `total` entries in a bar `full` long, and its offset for entry `first`. */
 static __inline s32 scrollThumb(s32 visible, s32 total, s32 full, s32 first, s32 *offset)
@@ -79,7 +79,7 @@ void uiDrawListScrollBar(void *list, s32 x, s32 y, u32 group, u32 frameId, u32 t
         top = y + offset + track->y;
         width = track->range->length;
     }
-    FUN_0029a17c(left, top, width, height, 1);
+    gxSetMirroredClippedScissor(left, top, width, height, 1);
 
     texDrawTableEntryAtStoredOrigin(SCROLL_LAYER, group, thumbPressed != 0 ? trackPressedId : trackId, x, y, layer + SCROLL_LAYER_THUMB_OFFSET);
     renderStackSet(&g_titleScene->scissor, SCROLL_SCISSOR_OFF);

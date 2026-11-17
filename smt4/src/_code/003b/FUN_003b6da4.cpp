@@ -7,7 +7,7 @@
 
 extern "C" {
 
-void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Draws the slot marker of party unit `unit`: with several slots owned it cycles between the
  * current and the next one (sliding out over four frames after a 20-frame hold), with one slot it
@@ -57,7 +57,7 @@ void FUN_003b6da4(u8 *work, s32 unit, s32 x, s32 y)
         }
     }
     renderStackSet(&g_titleScene->scissor, 3);
-    FUN_0029a17c(frame->x + x, frame->y + y, frame->placement->width, frame->placement->height, 1);
+    gxSetMirroredClippedScissor(frame->x + x, frame->y + y, frame->placement->width, frame->placement->height, 1);
     s32 slide = (*counter - 20) * -3;
 
     messageKindForward(shown, frame->x + slide + x, frame->y + y, 0x7E);

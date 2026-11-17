@@ -10,7 +10,7 @@ extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 region);
 s32 FUN_0029ee54(u32 list);
 s32 resourceRunOperationIfUnblocked(u32 list);
-void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);
 
 /* Draws the scroll bar of a camp list: arrows, track and the thumb scaled to the visible share. */
@@ -63,7 +63,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     }
     s32 thumbOffset = __aeabi_idivmod(track->placement->height << 12, FUN_0029ee54(list)) * resourceRunOperationIfUnblocked(list) >> 12;
     renderStackSet(&g_titleScene->scissor, 3);
-    FUN_0029a17c(x + track->x, track->y + y + thumbOffset, track->placement->width, thumbHeight, 1);
+    gxSetMirroredClippedScissor(x + track->x, track->y + y + thumbOffset, track->placement->width, thumbHeight, 1);
     s32 thumbSprite;
     if (wide != 0) {
         thumbSprite = 0x41d;

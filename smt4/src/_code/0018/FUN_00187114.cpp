@@ -11,7 +11,7 @@ int FUN_0029a284(...);
 int nkmEnemyFindById(void);
 int fontMeasureLineAdvance(...);
 
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int appGetRemainingCapacity(...);
 int FUN_0029ab54(int, int);
 int FUN_0029acb0(void);
@@ -50,7 +50,7 @@ extern int g_statusDown; /* 0x44e190 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: FUN_0029a284. */
 /* Supplied declaration required: appGetRemainingCapacity. */
@@ -397,7 +397,7 @@ LAB_001876ec:
                   (**(romwright_code **)(temp_v8 + 0x1328))();
                   *(unsigned char *)(temp_v8 + 0x1324) = 0;
                 }
-                FUN_0029a17c((int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
+                gxSetMirroredClippedScissor((int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                              (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                              (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
                 temp_v8 = vec2GetYInt(temp_v2 + 0x1cc);
@@ -449,7 +449,7 @@ LAB_001876ec:
                     (**(romwright_code **)(temp_v5 + 0x1328))();
                     *(unsigned char *)(temp_v5 + 0x1324) = 0;
                   }
-                  FUN_0029a17c(*(short *)(temp_v9 + 8) + param_1,*(short *)(temp_v9 + 10) + param_2,
+                  gxSetMirroredClippedScissor(*(short *)(temp_v9 + 8) + param_1,*(short *)(temp_v9 + 10) + param_2,
                                **(short **)(temp_v9 + 0xc) + temp_v8,
                                (int)(*(short **)(temp_v9 + 0xc))[1],1);
                 }

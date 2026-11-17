@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0029a17c(int, int, int, int, int);
+int gxSetMirroredClippedScissor(int, int, int, int, int);
 int effectRenderTransformedInstance(int);
 int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
@@ -31,7 +31,7 @@ extern unsigned int DAT_0044dc3c; /* 0x44dc3c */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: effectRenderTransformedInstance. */
@@ -210,7 +210,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
               (**(romwright_code **)(temp_v2 + 0x1328))();
               *(unsigned char *)(temp_v2 + 0x1324) = 0;
             }
-            FUN_0029a17c(*(short *)(temp_v3 + 8) + temp_v5,*(short *)(temp_v3 + 10) + temp_v1,
+            gxSetMirroredClippedScissor(*(short *)(temp_v3 + 8) + temp_v5,*(short *)(temp_v3 + 10) + temp_v1,
                          (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1],1);
             temp_v2 = g_titleScene;
             temp_v9 = packNibblesAndByte(6,1,0);

@@ -21,7 +21,7 @@ struct StatusStrip {
 
 extern "C" {
 
-void FUN_0029a17c(s32 x, s32 y, s32 w, s32 h, s32 arg);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
 {
@@ -65,7 +65,7 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
             }
         }
         setDrawState(3);
-        FUN_0029a17c(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
+        gxSetMirroredClippedScissor(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
         s32 shift = (strip->scroll - 0x14) * -3;
         messageKindForward((s16)current, layout->x + shift + x, layout->y + y, 0x7e);
         messageKindForward((s16)following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);

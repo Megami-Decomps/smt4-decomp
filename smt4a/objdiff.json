@@ -206102,13 +206102,13 @@
       "target_path": "orig/target/_code/0035/FUN_0035ad50.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_0035ae58.o",
+      "base_path": "build/obj/_code/0035/gxSetMirroredClippedScissor.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0035ae58",
+            "name": "gxSetMirroredClippedScissor",
             "size": 232,
             "vram": "0x35ae58"
           }
@@ -206116,10 +206116,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_0035ae58.cpp"
+        "source_path": "src/_code/0035/gxSetMirroredClippedScissor.cpp"
       },
-      "name": "_code/0035/FUN_0035ae58",
-      "target_path": "orig/target/_code/0035/FUN_0035ae58.o"
+      "name": "_code/0035/gxSetMirroredClippedScissor",
+      "target_path": "orig/target/_code/0035/gxSetMirroredClippedScissor.o"
     },
     {
       "base_path": "build/obj/_code/cec/CecProcess/FUN_0035af44.o",

@@ -15,7 +15,7 @@ int uiDrawItemOrStatusIcon(...);
 int statusDownDrawIndicatorPairs(int, int);
 int dataTable0cFindByKey(void);
 int uiDrawListScrollBar(...);
-int FUN_0035ae58(...);
+int gxSetMirroredClippedScissor(...);
 int FUN_0035bd4c(...);
 int VectorSignedToFloat(...);
 
@@ -54,7 +54,7 @@ extern int objectApplyIfUnblocked(int);
 extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0035ae58. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: FUN_0035bd4c. */
 
 
@@ -190,7 +190,7 @@ void FUN_003d3a4c(int param_1,int param_2)
       (**(romwright_code **)(temp_v5 + 0x1334))();
       *(unsigned char *)(temp_v5 + 0x1330) = 0;
     }
-    FUN_0035ae58((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
                  (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v7 + 10) + param_2,
                  (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1],1);
     temp_v5 = vec2GetYInt(temp_v2 + 0x1cc);

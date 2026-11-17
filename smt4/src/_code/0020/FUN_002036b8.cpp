@@ -7,7 +7,7 @@
 extern "C" {
 
 int uiDrawListScrollBar(...);
-int FUN_0029a17c(...);
+int gxSetMirroredClippedScissor(...);
 int resourceRunOperationIfUnblocked(...);
 int textDrawString(...);
 int textFormatBuffer(...);
@@ -35,7 +35,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int FUN_00254058(unsigned short);
 extern int uniteGetWork(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: FUN_0029a17c. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int listCursorGetRowIfUnblocked(int);
@@ -140,7 +140,7 @@ void FUN_002036b8(int param_1,int param_2)
         (**(romwright_code **)(temp_v5 + 0x1328))();
         *(unsigned char *)(temp_v5 + 0x1324) = 0;
       }
-      FUN_0029a17c((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
+      gxSetMirroredClippedScissor((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                    (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                    (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1],1);
       temp_v5 = vec2GetYInt(temp_v1 + 0xb0);

@@ -105328,12 +105328,12 @@
     },
     {
       "address": "0x35ae58",
-      "function": "FUN_0035ae58",
+      "function": "gxSetMirroredClippedScissor",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_0035ae58.o",
+      "object": "build/obj/_code/0035/gxSetMirroredClippedScissor.o",
       "size": 232,
-      "source": "src/_code/0035/FUN_0035ae58.cpp",
-      "target": "orig/target/_code/0035/FUN_0035ae58.o",
+      "source": "src/_code/0035/gxSetMirroredClippedScissor.cpp",
+      "target": "orig/target/_code/0035/gxSetMirroredClippedScissor.o",
       "thumb": false
     },
     {

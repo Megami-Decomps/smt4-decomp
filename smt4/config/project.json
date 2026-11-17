@@ -51017,12 +51017,12 @@
     },
     {
       "address": "0x29a17c",
-      "function": "FUN_0029a17c",
+      "function": "gxSetMirroredClippedScissor",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_0029a17c.o",
+      "object": "build/obj/_code/0029/gxSetMirroredClippedScissor.o",
       "size": 232,
-      "source": "src/_code/0029/FUN_0029a17c.cpp",
-      "target": "orig/target/_code/0029/FUN_0029a17c.o",
+      "source": "src/_code/0029/gxSetMirroredClippedScissor.cpp",
+      "target": "orig/target/_code/0029/gxSetMirroredClippedScissor.o",
       "thumb": false
     },
     {

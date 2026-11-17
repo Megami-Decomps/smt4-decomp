@@ -15,7 +15,7 @@ s32 resourceRunEmbeddedOperationIfUnblocked(void *widget);
 s32 objectApplyIfUnblocked(void *widget);
 s32 uiSearchPrimary(void *widget);
 s32 resourceRunOperationIfUnblocked(void *widget);
-void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 mode);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
 
 /* Draws a frame with a scroll thumb: the three backing pieces, the thumb sized and placed from the widget's
    visible/total counts (vertical when `vertical` is 0, horizontal otherwise) under a clip rectangle, then the
@@ -57,7 +57,7 @@ void uiDrawListScrollBar(void *widget, s32 x, s32 y, u32 group, u32 backId, u32 
             }
         }
         renderStackSet(clipStack, 3);
-        FUN_0035ae58(record->x + x + offset, record->y + y, length, record->placement->height, 1);
+        gxSetMirroredClippedScissor(record->x + x + offset, record->y + y, length, record->placement->height, 1);
     } else {
         s32 total = objectApplyIfUnblocked(widget);
         s32 shown = uiSearchPrimary(widget);
@@ -77,7 +77,7 @@ void uiDrawListScrollBar(void *widget, s32 x, s32 y, u32 group, u32 backId, u32 
             }
         }
         renderStackSet(clipStack, 3);
-        FUN_0035ae58(record->x + x, y + offset + record->y, record->placement->width, length, 1);
+        gxSetMirroredClippedScissor(record->x + x, y + offset + record->y, record->placement->width, length, 1);
     }
     if (modeC != 0) {
         thumbId = coverId;

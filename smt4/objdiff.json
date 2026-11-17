@@ -100856,13 +100856,13 @@
       "target_path": "orig/target/_code/0029/FUN_0029a164.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_0029a17c.o",
+      "base_path": "build/obj/_code/0029/gxSetMirroredClippedScissor.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0029a17c",
+            "name": "gxSetMirroredClippedScissor",
             "size": 232,
             "vram": "0x29a17c"
           }
@@ -100870,10 +100870,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_0029a17c.cpp"
+        "source_path": "src/_code/0029/gxSetMirroredClippedScissor.cpp"
       },
-      "name": "_code/0029/FUN_0029a17c",
-      "target_path": "orig/target/_code/0029/FUN_0029a17c.o"
+      "name": "_code/0029/gxSetMirroredClippedScissor",
+      "target_path": "orig/target/_code/0029/gxSetMirroredClippedScissor.o"
     },
     {
       "base_path": "build/obj/_code/0029/fadeObjectResetIfActive.o",

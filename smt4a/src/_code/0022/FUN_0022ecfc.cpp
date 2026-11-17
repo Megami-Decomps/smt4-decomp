@@ -13,7 +13,7 @@ int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
 int FUN_0023dedc(...);
 int uiDrawListScrollBar(...);
-int FUN_0035ae58(...);
+int gxSetMirroredClippedScissor(...);
 int partyDrawCategorySelectionIcon(...);
 unsigned int questHasSpecialDetailPage(unsigned int);
 int VectorSignedToFloat(...);
@@ -49,7 +49,7 @@ extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
-/* Supplied declaration required: FUN_0035ae58. */
+/* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: partyDrawCategorySelectionIcon. */
 extern int partyEntryGetBit5(unsigned int);
 extern int partyEntryGetBit6(unsigned int);
@@ -215,7 +215,7 @@ void FUN_0022ecfc(void)
       (**(romwright_code **)(temp_v12 + 0x1334))();
       *(unsigned char *)(temp_v12 + 0x1330) = 0;
     }
-    FUN_0035ae58((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+    gxSetMirroredClippedScissor((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
                  (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1],1,temp_v8);
     texDrawTableEntryAtStoredOrigin(2,0x1e,0xae,(int)*(short *)(temp_v10 + 8) + temp_v5 + temp_v1,

@@ -28,7 +28,7 @@ extern "C" {
 UnitStatus* gameGetSlotRecord(s32 index);
 UnitStatus* btlMainGetUnk14(void);
 void effectDispatchSelector(s16 icon, s32 x, s32 y, s32 kind, f32 alpha);
-void FUN_0035ae58(s32 x, s32 y, s32 w, s32 h, s32 arg);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
 {
@@ -75,7 +75,7 @@ void FUN_003f3a90(StatusStrip* strip, s32 x, s32 y)
             }
         }
         setDrawState(3);
-        FUN_0035ae58(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
+        gxSetMirroredClippedScissor(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
         s32 shift = (strip->scroll - 0x14) * -3;
         effectDispatchSelector(current, layout->x + shift + x, layout->y + y, 0x7e, 1.0f);
         effectDispatchSelector(following, layout->x + x + shift + 0xd, layout->y + y, 0x7e, 1.0f);

@@ -24,7 +24,7 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 void effectDispatchSelector(s16 entry, s32 x, s32 y, s32 kind, f32 scale);
-void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Draws the selected entry of list `list`; when several entries are available and the pulse has run
  * past 20 frames, it also draws the next entry, sliding the pair together over a highlighted backdrop. */
@@ -62,7 +62,7 @@ void FUN_004bda84(f32 scale, SelectorOwner *owner, SelectorData *data, s32 list,
             }
         }
         renderStackSet(&g_renderCtx->scissor, 3);
-        FUN_0035ae58(anchor->x, anchor->y, anchor->placement->width, anchor->placement->height, 1);
+        gxSetMirroredClippedScissor(anchor->x, anchor->y, anchor->placement->width, anchor->placement->height, 1);
         shift = (owner->pulse[list] - 20) * -3;
         nextShift = shift + 13;
         effectDispatchSelector(current, anchor->x + (shift + x), anchor->y + y, 0x7E, 1.0f);
