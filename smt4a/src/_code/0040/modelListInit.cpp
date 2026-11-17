@@ -1,7 +1,22 @@
-#include "common.h"
-struct ModelList { const void *vtable; u32 first,second,third,resource,state,scaleX,scaleY; };
+#include "Model/MoriModelContent.h"
+
 extern "C" {
-extern u8 _ZTV9Obj4207c0[];
-/* Initializes the model list and its unit fixed-point scales. */
-ModelList *modelListInit(ModelList *list) { list->first=0;list->second=0;list->vtable=_ZTV9Obj4207c0+40;list->third=0;list->resource=0;list->state=0;list->scaleX=0x10000;list->scaleY=0x10000;return list; }
+extern u8 _ZTV9Obj4207d0[];
+
+/* Constructs a model content in place: no file, resource or body yet, unit request settings. */
+MoriModelContent *modelListInit(void *storage)
+{
+    MoriModelContent *content = static_cast<MoriModelContent *>(storage);
+    content->body = NULL;
+    content->binding = NULL;
+    /* The vtable pointer, written as this C-style constructor stores it. */
+    *reinterpret_cast<u8 **>(content) = _ZTV9Obj4207d0 + 8;
+    content->resource = NULL;
+    content->file = NULL;
+    content->requestMode = 0;
+    content->requestFirst = 0x10000;
+    content->requestSecond = 0x10000;
+    return content;
+}
+
 }

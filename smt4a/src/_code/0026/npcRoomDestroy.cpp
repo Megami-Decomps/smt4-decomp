@@ -1,11 +1,11 @@
 #include "npc_room/NpcRoom.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void asdTMTexTableReleaseNode(s32 arg, u32 value);
-void scrScriptProcessDestroy(void *process);
 void dataTableFree(s32 arg);
 void bgmFadeOut(s32 arg);
 void campCommonBgRelease(void);

@@ -1,6 +1,7 @@
 #include "ui/PartyPanelState.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "status/StatusCamera.h"
+#include "script/scrScriptProcess.h"
 
 struct PartyPanelSavedFlags {
     u8 prefix[0x40];
@@ -8,7 +9,6 @@ struct PartyPanelSavedFlags {
 };
 
 extern "C" {
-void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *memory);
 void asdMemFreeNonNull(void *memory);
 void *bufferArrayFree(void *buffer);

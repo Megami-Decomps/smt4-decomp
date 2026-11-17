@@ -1,13 +1,11 @@
-#include "shard/W5_W5Match7_ControllerPose.h"
-#include "shard/W8X15_ModelStatePlayer.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 
-
-
-void controllerSetDestination(ControllerPose *owner, const MapVector *position)
+/* Moves the body to `position`. */
+void controllerSetDestination(Obj557b18 *body, const MapVector *position)
 {
-    owner->destination = *position;
+    body->position = *position;
 }
 
 } /* extern "C" */

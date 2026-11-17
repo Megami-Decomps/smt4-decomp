@@ -1,7 +1,7 @@
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
@@ -13,7 +13,7 @@ void gameFlagsLoadTable4cEntry(s32 id);
 // flag block's save point.
 u32 scrCommEnterPlaceAndSavePoint(void)
 {
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     FUN_00376fb8(0x65);
     mapPlaceSet(0x18, 1, 0);
     gameFlagsLoadTable4cEntry(1);
@@ -22,7 +22,7 @@ u32 scrCommEnterPlaceAndSavePoint(void)
     flags->savePoint.scale = (s16)g_gameState.overviewHeading;
     flags->savePoint.mapId = g_gameState.mapId;
     flags->savePoint.areaId = g_gameState.areaId;
-    flags->savePointObject.objectId = g_gameState.currentObjectId;
+    flags->savePointObjectId = g_gameState.currentObjectId;
     flags->savePoint.x = (s16)g_lmapScene->pose.position.x;
     flags->savePoint.y = (s16)g_lmapScene->pose.position.y;
     flags->savePoint.z = (s16)g_lmapScene->pose.position.z;

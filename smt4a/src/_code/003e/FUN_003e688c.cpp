@@ -9,7 +9,6 @@ struct BtlMainStateA;
 extern "C" {
 void asdMemFree(void *data);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
-s32 scrRunOpcodesStub(ScriptProcess *process);
 s32 FUN_003efb18(BtlMainStateA *battle);
 
 /* Loads and executes a battle AI script, then releases both its process and file data. */

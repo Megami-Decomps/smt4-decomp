@@ -15,9 +15,9 @@ extern "C" void lmapCreateEnemyMarkerModels(MapMarkerModels* models)
     AsdMdlObject* model = asdMdlManagerCreateLoaded("map/all/lmap_ene.bcres", 0x1c0);
     models->enemy = model;
     model->flags |= 2;
-    ((NodeEnableResource*)model->node)->target->enabled = 0;
+    ((AsdMdlNode*)model->node)->sceneNode->positionFollowed = 0;
     model = asdMdlManagerCreateLoaded("map/all/lmap_boss.bcres", 0x1c0);
     models->boss = model;
     model->flags |= 2;
-    ((NodeEnableResource*)model->node)->target->enabled = 0;
+    ((AsdMdlNode*)model->node)->sceneNode->positionFollowed = 0;
 }

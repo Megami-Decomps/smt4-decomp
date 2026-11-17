@@ -2,16 +2,11 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/BattleHelpers_Smt4a.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 /* The mask the flags are tested against (g_btlSkillResponseMasks + 0xA8). */
-struct AilmentMasks {
-    /* 0x00 */ u8 unk00[0xA8];
-    /* 0xA8 */ u64 preventMask;
-};
 
 extern "C" {
-extern AilmentMasks g_btlSkillResponseMasks;
-
 void textFormatBuffer(char *buffer, const char *text);
 u32 lcgRandomRange(u32 limit);
 
@@ -79,7 +74,7 @@ u32 FUN_004c1114(u32 id, s32 kind)
         return (s32)resistance > 0;
     if (kind == 4)
         return resistanceOf(id, property) == btlGetPropertyMaximum(property);
-    if ((battle->stateFlags64.bits & g_btlSkillResponseMasks.preventMask) != 0)
+    if ((battle->stateFlags64.bits & g_btlSkillResponseMasks.alwaysProc) != 0)
         return (s32)resistance > 3;
     f32 over = 0.0f;
     if ((s32)luck > 100) {

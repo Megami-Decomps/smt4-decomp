@@ -1,24 +1,16 @@
 /* NON_MATCHING: retail loads the matrix rows as 4-float vldmia groups and the vector components singly, then multiplies in a different register order; ours loads the elements separately. */
-#include "gfx/CameraVectorScratch.h"
 #include "shard/W5_W5Match2_PlainData.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 
 /* The camera scratch block, extended to the transform matrix at 0x140. */
-struct CameraScratchTransform {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ Vector4 direction;
-    /* 0x110 */ u8 unk110[0x30];
-    /* 0x140 */ Matrix44 transform;
-};
-
-extern CameraScratchTransform g_vectorScratch;
 
 // Transforms the scratch direction by the scratch matrix (row vector times matrix, w ignored).
 void FUN_0037ee54(void)
 {
-    const f32 (*m)[4] = (const f32 (*)[4])g_vectorScratch.transform.values;
-    Vector4 *v = &g_vectorScratch.direction;
+    const f32 (*m)[4] = (const f32 (*)[4])g_vectorScratch.matrix.matrix.values;
+    Vector4 *v = &g_vectorScratch.first.vector;
     f32 x = v->x;
     f32 y = v->y;
     f32 z = v->z;

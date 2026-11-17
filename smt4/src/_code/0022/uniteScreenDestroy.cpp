@@ -6,6 +6,7 @@
 #include "battle/BtlStageStackRegion.h"
 #include "nn/os/Thread.h"
 #include <stddef.h>
+#include "script/scrScriptProcess.h"
 
 // Fusion (unite) screen object: only the members its teardown touches.
 struct UniteScreen {
@@ -17,7 +18,7 @@ struct UniteScreen {
     u8 unk0420[4];
     u8* scratchA;               // 0x0424
     u8* scratchB;               // 0x0428
-    s32 scriptProcess;          // 0x042c
+    ScriptProcess *scriptProcess;          // 0x042c
     u8 unk0430[0x6660 - 0x430];
     u16 pendingIds[4];          // 0x6660
     u8 unk6668[0x95c8 - 0x6668];
@@ -50,7 +51,6 @@ void statusCameraDestroy(void);
 void asdMdlManagerMarkDestroy(s32 manager);
 void asdMdlManagerDestroy(s32 manager);
 void statusBustUpPortraitRelease(s32 id, s32 arg);
-void scrScriptProcessDestroy(s32 process);
 u8 *bufferArrayFree(u8 *buffer);
 void jobStop(s32 job, s32 arg);
 void fileSlotFree(s32 slot);

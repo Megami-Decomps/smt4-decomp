@@ -1,5 +1,5 @@
 /* NON_MATCHING: code and control flow match retail; only the callee-saved register allocation differs (retail keeps the handle-registry address in r8 and the 0/-1 reset constants in r5/r7; the build uses r5 for the registry and r7/r8 for the constants). */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "gamedata/GamePlayerData.h"
 
@@ -48,7 +48,6 @@ typedef struct TransitionEntry {
 extern TransitionScene *g_lmapScene;
 extern TransitionState g_gameState;
 extern void *g_handleRegistry;
-void *gameFlagsGetBlock(void);
 s32 dataTable2EType1Count(void);
 s32 dataTable2EType0Count(void);
 TransitionEntry *dataTable2EType1GetEntry(s32 index);

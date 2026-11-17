@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/PartyPanelStateA.h"
 
 extern "C" {
 
-void uiSpriteSetKeyframe(TimerSlot *sprite, s32 a, s32 b);
 void slotPlacementAssignSlotPosition(PartyPanelWidget *widget, u32 value);
 
 /* Flips the panel's page, plays the page animation (4) and moves each of the 4 + 24 widgets to the new page. */

@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b7c4` (_code @ 0x33b7c4, 0x634 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 #include "game/GameStateA.h"
 
 extern "C" {
@@ -28,7 +30,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0033bc8c; /* 0x33bc8c */
-extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f1776; /* 0x5f1776 */
 extern unsigned int DAT_005f1778; /* 0x5f1778 */
@@ -50,7 +51,6 @@ extern int DAT_005f1be8; /* 0x5f1be8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: libm_cosf. */
@@ -90,8 +90,8 @@ unsigned int FUN_0033b7c4(void)
   int temp_v13;
   int temp_v14;
   
-  temp_v4 = g_mapEnemy;
-  temp_v1 = gameFlagsGetBlock();
+  temp_v4 = ((int)g_mapEnemy);
+  temp_v1 = (int)gameFlagsGetBlock();
   temp_v2 = gameGetPlayerData();
   if (((DAT_005f1be0 == 0) && (*(int *)(temp_v4 + 4) != 0)) &&
      (((temp_v3 = gameFlagIsSet(0x300), temp_v3 == 0 && (temp_v3 = gameFlagIsSet(0x301), temp_v3 == 0)) ||

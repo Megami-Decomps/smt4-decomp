@@ -22,13 +22,7 @@ void renderEditorSceneDrawOverlay(void)
     }
     FUN_00300100(0, mono);
     renderStackPop(&g_renderCtx->stackA);
-    // This flag lies beyond the shared editor prefix; do not extend that layout.
-    struct EditorOverlayView {
-        EffectEditorMenuState editor;
-        u8 unk6C[0xC];
-        u32 enabled;
-    };
-    if (reinterpret_cast<EditorOverlayView *>(&g_effectEditor)->enabled) {
+    if (g_effectEditor.overlayEnabled) {
         FUN_00280840(30, 0.0f, 0.0f, 0.0f, 17.5f, 0x606060FF, 0x909090FF);
     }
 }

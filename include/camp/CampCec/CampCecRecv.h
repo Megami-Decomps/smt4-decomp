@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* The receive (StreetPass download) screen's work area. */
 typedef struct CampCecRecv {
@@ -17,7 +18,7 @@ typedef struct CampCecRecv {
         struct {
             /* 0x004 */ u8 unk004BeforeBuffers[0x344];
             /* 0x348 */ void *buffers[6];       /* heap blocks freed with the screen */
-            /* 0x360 */ void *scripts[2];       /* script processes destroyed with the screen */
+            /* 0x360 */ ScriptProcess *scripts[2];       /* script processes destroyed with the screen */
             /* 0x368 */ u8 unk368[0x78];
             /* 0x3E0 */ u32 received;           /* only the received data was set up */
         } resources;

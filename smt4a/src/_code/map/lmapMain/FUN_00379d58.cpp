@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00379d58` (_code @ 0x379d58, 0x284 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_00379fe4; /* 0x379fe4 */
-extern int g_lmapMainState; /* 0x580238 */
 extern unsigned int DAT_005c4c28; /* 0x5c4c28 */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern unsigned int DAT_0064c030; /* 0x64c030 */
@@ -104,9 +104,9 @@ void FUN_00379d58(void)
   float temp_v24;
   unsigned int temp_v25;
   
-  temp_v0 = g_lmapMainState;
-  if (g_lmapMainState != 0) {
-    temp_v5 = *(unsigned int *)(g_lmapMainState + 0xadc);
+  temp_v0 = ((int)g_lmapMainState);
+  if (((int)g_lmapMainState) != 0) {
+    temp_v5 = *(unsigned int *)(((int)g_lmapMainState) + 0xadc);
     temp_v1 = 0x20;
     asdMemoryAllocTraced(0x20,&LAB_00379fe4,0x25a0);
     temp_v2 = 0;

@@ -14,7 +14,6 @@ void sysPlaySe(u32);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptProcess *, u32);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
-u32 scrRunOpcodesStub(ScriptProcess *);
 
 u32 FUN_0047e150(ItemEventStartup *work)
 {

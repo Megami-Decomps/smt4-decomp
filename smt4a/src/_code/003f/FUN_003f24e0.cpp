@@ -3,12 +3,12 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern void *g_btlUiBlock;
 
 void FUN_003f2aec(BtlMainStateA *battle);
-void btlUiIdsRefresh(void *block);
+void btlUiIdsRefresh(BtlUiA *block);
 
 /* Queues roster `group`'s combatant into the first free turn-order slot after the acting one, when the group is active. */
 void FUN_003f24e0(BtlMainStateA *battle, s32 group)

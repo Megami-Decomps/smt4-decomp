@@ -10,14 +10,14 @@ void screenStartOrClear(s32 id, u32 arg)
 {
     ButtonHelpWorkA *screen = g_buttonHelp.work;
 
-    screen->helpState = 1;
-    screen->mode = 1;
+    screen->text.useDirectoryText = 1;
+    screen->textVisible = 1;
     if (id != 0) {
-        asdTextDrawDirectoryEntry(screen->unk678, 2, -1, 0, 3, id, arg);
+        asdTextDrawDirectoryEntry(screen->text.directoryText, 2, -1, 0, 3, id, arg);
     } else {
-        screen->mode = 0;
-        screen->helpState = 0;
-        screen->unk678 = 0;
+        screen->textVisible = 0;
+        screen->text.useDirectoryText = 0;
+        screen->text.directoryText = 0;
     }
 }
 

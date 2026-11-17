@@ -1,14 +1,13 @@
-#include "shard/SaveWork.h"
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" {
 
-extern SaveWork *gameGetMapBlock(void);
 
 void mapSetDepartureIndex(u8 value)
 {
-    SaveWork *work = gameGetMapBlock();
+    MapSaveBlock *work = gameGetMapBlock();
 
-    work->unk03 = value;
+    work->departureIndex = value;
 }
 
 } /* extern "C" */

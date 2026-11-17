@@ -1,11 +1,9 @@
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteApi.h"
 #include "camp/PartyPanel/PartyPanel.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 keyframe, s32 alternate);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 alternate);
 void gameStateChange(s32 state);
 
 void FUN_00215bd0(void)

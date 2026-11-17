@@ -1,8 +1,7 @@
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
-s8 frameAnimationGetBusy(const UiSpriteState *sprite);
 
 // Poll the CAMP transition: not complete while its last item is still animating or its frame widget has not finished.
 u32 frameTexPollTransitionComplete(void)

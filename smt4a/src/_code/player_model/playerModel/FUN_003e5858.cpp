@@ -1,20 +1,13 @@
 /* NON_MATCHING: register assignment (object/slot index) and the owned==NULL store is predicated instead of sharing retail's single `unk04 = 0` store */
 #include "classes/Obj557ae8.h"
 #include "Model/MoriModelManager.h"
-
-struct ModelList;
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 
-void modelPlayClip(ControllerModel *model, u32 index, u8 flags, f32 time, f32 blend);
 u32 FUN_00340f80(Obj557ae8 *object);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-ModelList *modelListInit(ModelList *list);
 void FUN_003e573c(Obj557ae8 *object, s32 index, const char *name, u16 kind);
-void controllerSetPositionXyz(ControllerModel *model, f32 x, f32 y, f32 z);
-void moriModelContentLoadBody(Obj557ae8Child *child, ControllerModel *parent);
-void FUN_0040ab7c(Obj557ae8Child *child, s32 mode);
-s32 FUN_0040ab8c(Obj557ae8Child *child);
 
 /* Steps the player model: finishes loading the owned model, then advances each of the three slots
  * through its states (1 loading, 2 releasing, 3 released, 4 retry, 5 queued). */
@@ -25,11 +18,11 @@ void FUN_003e5858(Obj557ae8 *object)
             if (FUN_0040ab8c(object->owned) != 0) {
                 FUN_0040ab7c(object->owned, 2);
                 moriModelContentLoadBody(object->owned, NULL);
-                ControllerModel *model = object->owned->model;
+                Obj557b18 *model = object->owned->body;
                 controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
                 modelPlayClip(model, 0, 2, 0.0f, 0.0f);
                 handleRegistryRegisterObject(g_handleRegistry, model);
-                object->owned->model->flags |= 1;
+                object->owned->body->flags |= 1;
                 object->unk04 = 0;
             }
         } else {
@@ -43,8 +36,8 @@ void FUN_003e5858(Obj557ae8 *object)
         case 1:
             if (FUN_0040ab8c(slot->child) != 0) {
                 FUN_0040ab7c(slot->child, 2);
-                moriModelContentLoadBody(slot->child, object->owned->model);
-                ControllerModel *model = slot->child->model;
+                moriModelContentLoadBody(slot->child, object->owned->body);
+                Obj557b18 *model = slot->child->body;
                 controllerSetPositionXyz(model, 0.0f, 0.0f, 0.0f);
                 handleRegistryRegisterObject(g_handleRegistry, model);
                 finished = true;
@@ -53,7 +46,7 @@ void FUN_003e5858(Obj557ae8 *object)
             break;
         case 2: {
             slot->state = 3;
-            ControllerModel *model = slot->child->model;
+            Obj557b18 *model = slot->child->body;
             model->flags |= 3;
             ptrListRemoveClearOwner(g_handleRegistry, model);
             break;
@@ -66,7 +59,7 @@ void FUN_003e5858(Obj557ae8 *object)
             slot->state = 0;
             if (slot->name[0] != '\0') {
                 void *storage = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\player_model\\playerModel.cpp", 906);
-                slot->child = storage != NULL ? (Obj557ae8Child *)modelListInit((ModelList *)storage) : NULL;
+                slot->child = storage != NULL ? modelListInit(storage) : NULL;
                 FUN_003e573c(object, i, slot->name, slot->kind);
             }
             break;

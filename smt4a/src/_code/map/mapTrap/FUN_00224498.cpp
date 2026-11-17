@@ -1,20 +1,17 @@
 #include "map/mapTrap.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
-#include "Model/ModelList.h"
-#include "classes/Obj4209cc.h"
-#include "code/Code0040.h"
+#include "Model/MoriModelContent.h"
+#include "classes/Obj557b18.h"
 #include "Model/MoriModelManager.h"
 
 extern "C" {
 extern MapTrapA *g_mapTrap;
 void mapTrapClearState();
 void *asdMemoryAllocTraced(u32 size, const char *source, s32 line);
-ModelList *modelListInit(ModelList *model);
-void moriModelContentLoadBody(ModelList *model, s32 index);
 }
 
-static __inline void enableTrapModel(ModelResourceItem *model)
+static __inline void enableTrapModel(Obj557b18 *model)
 {
     model->flags |= 3;
 }
@@ -27,7 +24,7 @@ void FUN_00224498(s32 area, s32 map)
     struct DisplayModels {
         u8 phase;
         u8 padding[0x1B];
-        ModelList *models[3];
+        MoriModelContent *models[3];
     };
     typedef char DisplayModelsOffsetsCheck[offsetof(DisplayModels, models) == 0x1C ? 1 : -1];
     mapTrapClearState();
@@ -35,39 +32,39 @@ void FUN_00224498(s32 area, s32 map)
     if (g_mapTrap->setup.count > 0) {
         DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
         display->phase = 0;
-        ModelList *first = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList),
+        MoriModelContent *first = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x7E));
         if (first != NULL)
             first = modelListInit(first);
         display->models[0] = first;
         resourceOwnerLoadFileSync(first, "map/unit/u006.bam");
         moriModelContentLoadBody(display->models[0], 0);
-        ModelResourceItem *firstBody = reinterpret_cast<ModelResourceItem *>(display->models[0]->content.body);
+        Obj557b18 *firstBody = display->models[0]->body;
         handleRegistryRegisterObject(g_handleRegistry, firstBody);
         enableTrapModel(firstBody);
 
-        ModelList *second = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList),
+        MoriModelContent *second = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x87));
         if (second != NULL)
             second = modelListInit(second);
         display->models[1] = second;
         resourceOwnerLoadFileSync(second, "map/unit/u061.bam");
         moriModelContentLoadBody(display->models[1], 0);
-        ModelResourceItem *secondBody = reinterpret_cast<ModelResourceItem *>(display->models[1]->content.body);
+        Obj557b18 *secondBody = display->models[1]->body;
         handleRegistryRegisterObject(g_handleRegistry, secondBody);
         enableTrapModel(secondBody);
         g_mapTrap->setup.active = 1;
     }
     if (area == 0x1A && (map == 0xB || map == 0xD)) {
         DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
-        ModelList *extra = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList),
+        MoriModelContent *extra = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent),
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x99));
         if (extra != NULL)
             extra = modelListInit(extra);
         display->models[2] = extra;
         resourceOwnerLoadFileSync(extra, "map/unit/u097.bam");
         moriModelContentLoadBody(display->models[2], 0);
-        ModelResourceItem *extraBody = reinterpret_cast<ModelResourceItem *>(display->models[2]->content.body);
+        Obj557b18 *extraBody = display->models[2]->body;
         handleRegistryRegisterObject(g_handleRegistry, extraBody);
         enableTrapModel(extraBody);
     }

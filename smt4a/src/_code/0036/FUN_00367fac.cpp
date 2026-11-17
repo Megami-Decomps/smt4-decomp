@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00367fac` (_code @ 0x367fac, 0x3a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -63,7 +64,6 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 /* WARNING: Removing unreachable block (ram,0x00368128) */
@@ -118,7 +118,7 @@ unsigned int FUN_00367fac(void)
   float temp_v36 [20];
   
   temp_v17 = 0.0f;
-  temp_v3 = gameFlagsGetBlock();
+  temp_v3 = (int)gameFlagsGetBlock();
   temp_v23 = *(float *)(temp_v3 + 0x1528);
   if ((romwright_isnan(*(float *)(g_lmapScene + 0x20) - 200.0f) || (in_s1 != in_s1)) &&
      (in_s1 < *(float *)(g_lmapScene + 0x20) + 200.0f)) {

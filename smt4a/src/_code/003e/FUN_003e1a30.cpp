@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 namespace {
 // The masks at 0x68 extend beyond the shared BtlEncounterGlobalsA prefix.
@@ -21,7 +22,6 @@ typedef char AncientTransitionMasksOffsetsCheck[
 extern "C" {
 extern BtlAuxA *g_btlAux;
 extern AncientTransitionMasks g_btlEncount;
-extern void *g_btlUiBlock;
 extern const char DAT_00528558[];
 void FUN_004f7b84(BtlAuxA *effects, const char *name);
 s32 FUN_004f6d34(BtlAuxA *effects);
@@ -29,7 +29,7 @@ void FUN_003e2840(BtlStep *step, BtlMainStateA *battle, s32 mode);
 void FUN_004f1c5c(BtlCameraA *camera, u32 duration);
 void FUN_003ed6e8(BtlMainStateA *battle);
 void FUN_003f26d4(BtlMainStateA *battle);
-void FUN_004aa2e0(void *ui, s32 value);
+void FUN_004aa2e0(BtlUiA *ui, s32 value);
 void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
 
 void FUN_003e1a30(BtlStep *step, BtlMainStateA *battle)

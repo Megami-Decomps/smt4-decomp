@@ -5,12 +5,12 @@
 #include "battle/btlUI.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "Model/MoriModelManager.h"
+#include "battle/BtlUiGlobal.h"
 
 struct GameOverEyeTimeline;
 extern "C" {
 extern GameOverEyeTimeline g_btlGameOverEyeTimeline;
 extern BtlGameOverGlobalsA g_btlGameOver;
-extern BtlUiA *g_btlUiBlock;
 extern const char DAT_005285fc[]; /* battle/gameover/gameover.bf */
 extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
 void FUN_004fdcd8(u32, u32, u32, u32, u32, u32, u32, u32);

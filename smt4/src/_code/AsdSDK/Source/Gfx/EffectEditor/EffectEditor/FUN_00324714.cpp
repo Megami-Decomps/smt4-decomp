@@ -5,7 +5,6 @@ extern "C" {
 extern EffectSelectionContext DAT_0044f858;
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
 
-
 EffectSelectionItem *linkedFindItemByIndex(void *owner, s32 index);
 EffectSelectionItem *FUN_002f3208(void *owner, EffectSelectionBlock *block);
 EffectSelectionItem *nodeListFindByKey(void *owner, u32 key);
@@ -42,37 +41,37 @@ extern "C" u32 FUN_00324714()
 {
     // Related-item metadata and the name tail extend beyond the shared item prefix.
     struct ItemView { EffectSelectionItem item; u32 related; u32 flags; char name[1]; };
-    s32 position = DAT_0044f858.index + g_effectEditor.selection.index;
-    EffectSelectionItem *source = linkedFindItemByIndex(g_effectEditor.selection.list, position);
-    EffectSelectionItem *copy = FUN_002f3208(g_effectEditor.selection.list, source->block);
-    g_effectEditor.selection.item = copy;
+    s32 position = DAT_0044f858.index + g_effectEditor.index;
+    EffectSelectionItem *source = linkedFindItemByIndex(g_effectEditor.list, position);
+    EffectSelectionItem *copy = FUN_002f3208(g_effectEditor.list, source->block);
+    g_effectEditor.item = copy;
     rt_memcpy_w144(copy, source);
     ItemView *sourceView = reinterpret_cast<ItemView *>(source);
     EffectSelectionItem *previous = source;
     if (sourceView->flags & 2)
-        previous = nodeListFindByKey(g_effectEditor.selection.list, sourceView->related);
-    linkedItemsRedirectToReplacement(g_effectEditor.selection.list, copy, previous);
+        previous = nodeListFindByKey(g_effectEditor.list, sourceView->related);
+    linkedItemsRedirectToReplacement(g_effectEditor.list, copy, previous);
     __aeabi_memcpy4(&g_effectEditorSettings, copy, 0x90);
     __aeabi_memcpy4(&g_effectEditorSavedSnapshot, copy, 0x80);
-    g_effectEditor.selection.block = copy->block;
+    g_effectEditor.block = copy->block;
     EffectSelectionParts *parts = FUN_00246854(copy);
     libc_strcpy(reinterpret_cast<ItemView *>(copy)->name, reinterpret_cast<const char *>(parts->unk00));
     if (parts->type != 0x1B)
-        rt_memcpy(parts->data, resourceResolveHeaderPointer(g_effectEditor.selection.block), parts->size);
+        rt_memcpy(parts->data, resourceResolveHeaderPointer(g_effectEditor.block), parts->size);
     if (parts->data != NULL)
-        effPartsSetData(g_effectEditor.selection.block, parts->data, parts->size, parts->id);
-    void *instance = effBlockCreateFromBlock(g_effectEditor.selection.block);
+        effPartsSetData(g_effectEditor.block, parts->data, parts->size, parts->id);
+    void *instance = effBlockCreateFromBlock(g_effectEditor.block);
     effectEditorApplyHandlerState(instance);
-    g_effectEditor.selection.instance = instance;
-    g_effectEditor.selection.object = findTemplate(copy->block);
-    g_effectEditor.selection.object->context = &DAT_0044f858;
-    u32 count = effEditorNodeListCount(g_effectEditor.selection.list);
+    g_effectEditor.instance = instance;
+    g_effectEditor.object = findTemplate(copy->block);
+    g_effectEditor.object->context = &DAT_0044f858;
+    u32 count = effEditorNodeListCount(g_effectEditor.list);
     if (count > 21) {
-        g_effectEditor.selection.index = count - 21;
+        g_effectEditor.index = count - 21;
         DAT_0044f858.index = 20;
     } else {
         DAT_0044f858.index = count - 1;
-        g_effectEditor.selection.index = 0;
+        g_effectEditor.index = 0;
     }
     g_effectEditor.unk4c = 0;
     g_effectEditor.unk50 = 0;
@@ -81,9 +80,9 @@ extern "C" u32 FUN_00324714()
     g_effectEditor.unk60 = 0;
     g_effectEditor.unk64 = 0;
     g_effectEditor.unk68 = 0;
-    if (g_effectEditor.selection.resource != NULL) {
-        resourceQueueDeferredDestroy(g_effectEditor.selection.resource, 3);
-        g_effectEditor.selection.resource = NULL;
+    if (g_effectEditor.resource != NULL) {
+        resourceQueueDeferredDestroy(g_effectEditor.resource, 3);
+        g_effectEditor.resource = NULL;
     }
     return 0x800000;
 }

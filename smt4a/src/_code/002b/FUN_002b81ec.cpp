@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b81ec` (_code @ 0x2b81ec, 0xffc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -72,7 +73,6 @@ extern int DAT_005f1c64; /* 0x5f1c64 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int gameFlagsGetBlock(void);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 extern int randBetween(unsigned int, unsigned int);
@@ -151,7 +151,7 @@ void FUN_002b81ec(void)
   unsigned int uStack_64;
   unsigned int uStack_60;
   
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   temp_v23 = 20.0f;
   temp_v1 = 0;
   temp_v18 = 0.0f;

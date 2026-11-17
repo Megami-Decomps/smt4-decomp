@@ -1,5 +1,5 @@
 /* NON_MATCHING: the stack slot layout and the compare-branch/store ordering differ (retail keeps the stat pair and its comparison copy in different frame slots, and reloads the work-area bytes through a shared base); the logic is the same. */
-#include "shard/GameGlobals.h"
+#include "game/GameGlobalsRef.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -60,7 +60,7 @@ void FUN_00334e1c(StatListWork *work, s32 entry)
     drawSetColorFromRGBA8(0xFFFFFFFF);
     unitGetStereoScreenPosition(&position.first, &position.second, entry + STAT_ROW_BASE, 0.26f);
     f32 savedSpeed = jobGetScalarValue();
-    efctSetSpeed(((StatDisplayTable *)g_gameGlobals.data)->rows[entry + STAT_ROW_BASE].speed);
+    efctSetSpeed(((StatDisplayTable *)g_gameGlobals.instance)->rows[entry + STAT_ROW_BASE].speed);
     FUN_002f752c(work, &stat.first, &stat.second, entry, work->compareEnabled);
     if (work->compareEnabled != 0) {
         IntPair other = {0, 0};

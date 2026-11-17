@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* The room's main block, kept by a module global. */
 typedef struct OnesRoom {
@@ -19,7 +20,7 @@ typedef struct OnesRoomWork {
         /* 0x00 */ u32 job;
     };
     /* 0x04 */ void *dataA;      /* heap block */
-    /* 0x08 */ void *process;    /* script process object */
+    /* 0x08 */ ScriptProcess *process;    /* script process object */
     /* 0x0C */ void *dataB;      /* heap block */
     /* 0x10 */ u8 active; /* set while the room's own job is running */
     /* 0x11 */ u8 freeOnEnd;

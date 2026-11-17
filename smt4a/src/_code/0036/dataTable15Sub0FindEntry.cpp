@@ -1,16 +1,10 @@
 /* NON_MATCHING: structure, unrolled search and hour/minute blocks match; only the record count lives in r2 where retail keeps it in r3 (and the loop temp swaps with it). */
-#include "gamedata/DataTable.h"
+#include "gamedata/CampComTable.h"
 
-struct StatusDescriptionRecord {
-    u8 id;
-    u8 unk01[3];
-    char text[96];
-};
-
-static StatusDescriptionRecord *findStatusDescriptionRecord(u32 id)
+static CampComRecord *findStatusDescriptionRecord(u32 id)
 {
     void *table = dataTableGet(0x15, 0);
-    StatusDescriptionRecord *records = (StatusDescriptionRecord *)dataTableGetEntries(table);
+    CampComRecord *records = campComRecords(table);
     u32 count = dataTableGetCount(table);
     for (s32 index = 0; index < count; ++index) {
         if (records[index].id == id) {
@@ -28,7 +22,7 @@ void textFormatBuffer(char *output, const char *format, ...);
 /* Finds a status description, appending the rounded-up play time for the duration entry. */
 char *dataTable15Sub0FindEntry(u32 id)
 {
-    StatusDescriptionRecord *match = findStatusDescriptionRecord(id);
+    CampComRecord *match = findStatusDescriptionRecord(id);
     if (match == NULL) {
         return NULL;
     }

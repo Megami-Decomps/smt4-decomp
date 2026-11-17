@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rewrite; the build allocates the registers of the two table scans differently from retail. */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 
 // A location record of the type-50 table (the part this function reads).
 struct LocationRecord {
@@ -31,30 +31,7 @@ struct ContentEntry {
     /* 0x11 */ u8 fourth;
 };
 
-// One of the 16 location markers kept in the map block (0x14 bytes).
-struct MapMarkerSlot {
-    /* 0x00 */ u8 flags;       // bit 0: used, bit 1: shows a content entry
-    /* 0x01 */ s8 first;
-    /* 0x02 */ s8 second;
-    /* 0x03 */ u8 stage;
-    /* 0x04 */ s16 contentIndex;
-    /* 0x06 */ u8 unk06[2];
-    /* 0x08 */ s16 duration;   // content minutes * 0x708
-    /* 0x0a */ u8 third;
-    /* 0x0b */ u8 fourth;
-    /* 0x0c */ s16 v0;
-    /* 0x0e */ s16 v1;
-    /* 0x10 */ s16 v2;
-    /* 0x12 */ s16 v3;
-};
-
-struct MapBlockView {
-    u8 unk0000[0xf20];
-    MapMarkerSlot markers[16];  // 0xf20
-};
-
 extern "C" {
-MapBlockView *gameGetMapBlock(void);
 s32 dataTableGetRecordFifty(void);
 LocationRecord *FUN_00267144(s32 index);
 s32 FUN_0027d968(void);
@@ -65,14 +42,14 @@ void naviSetActiveMapSlot(u32 kind, u32 argument, u32 first, u32 second, u32 thi
 // Fills the map's location markers from the records that belong to the current map.
 void FUN_00273d34(void)
 {
-    MapBlockView *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
     s32 used = 0;
-    MapBlockView *cleared = gameGetMapBlock();
+    MapSaveBlock *cleared = gameGetMapBlock();
     for (s32 i = 0; i < 16; i++) {
         cleared->markers[i].flags = 0;
         cleared->markers[i].contentIndex = 0;
         cleared->markers[i].stage = 0;
-        cleared->markers[i].duration = 0;
+        cleared->markers[i].timer = 0;
     }
     for (s32 i = 0; i < dataTableGetRecordFifty(); i++) {
         LocationRecord *record = FUN_00267144(i);
@@ -94,33 +71,33 @@ void FUN_00273d34(void)
             marker->contentIndex = (s16)found;
             ContentEntry *entry = contentEntryGetE((s16)found);
             marker->stage = 0;
-            marker->duration = entry->minutes * 0x708;
+            marker->timer = entry->minutes * 0x708;
             marker->first = entry->first;
             marker->second = entry->second;
-            marker->v0 = entry->v0;
-            marker->v1 = entry->v1;
-            marker->v2 = entry->v2;
-            marker->v3 = entry->v3;
-            marker->third = entry->third;
-            marker->fourth = entry->fourth;
+            marker->values[0] = entry->v0;
+            marker->values[1] = entry->v1;
+            marker->values[2] = entry->v2;
+            marker->values[3] = entry->v3;
+            marker->x = entry->third;
+            marker->y = entry->fourth;
         } else if (record->kind == 2 || record->kind == 3) {
             marker->flags = (marker->flags & ~6) | 1;
             marker->contentIndex = 0;
             marker->stage = 0;
-            marker->duration = 0;
+            marker->timer = 0;
             marker->first = record->first;
             marker->second = record->second;
-            marker->v0 = record->v0;
-            marker->v1 = record->v1;
-            marker->v2 = record->v2;
-            marker->v3 = record->v3;
-            marker->third = 0;
-            marker->fourth = 0;
+            marker->values[0] = record->v0;
+            marker->values[1] = record->v1;
+            marker->values[2] = record->v2;
+            marker->values[3] = record->v3;
+            marker->x = 0;
+            marker->y = 0;
         } else {
             used++;
             continue;
         }
-        naviSetActiveMapSlot(used, marker->first, marker->second, marker->v0, marker->v1, marker->v2, 0);
+        naviSetActiveMapSlot(used, marker->first, marker->second, marker->values[0], marker->values[1], marker->values[2], 0);
         used++;
     }
 }

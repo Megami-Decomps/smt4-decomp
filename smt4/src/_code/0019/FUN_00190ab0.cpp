@@ -8,7 +8,7 @@ extern "C" {
 /* The skill menu's work block (only the fields used here, by their offsets). */
 typedef struct SkillMenuWork {
     /* 0x0000 */ u8 unk0000[0xE58];
-    /* 0x0E58 */ u8 sprites[6][0x8C];
+    /* 0x0E58 */ UiSpriteState sprites[6];
     /* 0x11A0 */ u8 unk11a0[0x1EBC];
     /* 0x305C */ s32 page;
     /* 0x3060 */ u8 unk3060[0x1B8];
@@ -34,7 +34,7 @@ void buttonHelpSetText(u32 record, u32 color);
 static __inline void resetSprites(SkillMenuWork *work)
 {
     for (s32 i = 0; i < 6; i++) {
-        uiSpriteSetImageKeyframe((UiSpriteState *)work->sprites[i], 0, 0);
+        uiSpriteSetImageKeyframe(&work->sprites[i], 0, 0);
     }
 }
 

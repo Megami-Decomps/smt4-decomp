@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int btlTalkBustUpDestroy(void);
 int bgmFadeOut(int id);
 int soundChannelStopAll(int id);
 int fileSlotFree(int id);
-int scrScriptProcessDestroy(u32 process);
 int asdTMTexTableReleaseNode(int table, int index);
 int asdMemFree(u32 ptr);
 int jobStop(u32 job, int mode);
@@ -26,8 +26,8 @@ typedef struct Scene {
     /* 0xCF8 */ u32 bufferD;
     /* 0xCFC */ u32 bufferE;
     /* 0xD00 */ u32 bufferF;
-    /* 0xD04 */ u32 scriptA;
-    /* 0xD08 */ u32 scriptB;
+    /* 0xD04 */ ScriptProcess *scriptA;
+    /* 0xD08 */ ScriptProcess *scriptB;
     /* 0xD0C */ u8 unkD0C[0x50];
     /* 0xD5C */ u32 shuttingDown;
 } Scene;

@@ -37,7 +37,7 @@ void clearSaveCreate(s32 mode)
     void *messages = asdLoadFileSyncDefault("clear_save/clearSave.mbm");
     work->heapB = messages;
     ScriptProcess *script = scrScriptProcessCreate(work->heapA, messages);
-    work->resource = reinterpret_cast<u32>(script);
+    work->resource = script;
     script->mode = 2;
     asdTMTexTablePrepareNodeImage(0, 0x83);
     if (work->initialization.active != 0) {

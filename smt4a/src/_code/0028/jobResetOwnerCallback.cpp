@@ -1,10 +1,10 @@
-#include "shard/Shard0042.h"
+#include "shard/JobWork.h"
+#include "shard/W6_W6Match5_EffectLineJob.h"
 
-extern "C" JobPendingWork *jobGetWork(void);
-
-/* Reset the callback owner attached to this job. */
-extern "C" s32 jobResetOwnerCallback(void)
+/* Draw task of the effect-line job: draws its effect object. */
+extern "C" s32 jobResetOwnerCallback(u32 job)
 {
-    jobGetWork()->owner->reset();
+    EffectLineJobWork *work = reinterpret_cast<EffectLineJobWork *>(jobGetWork(job));
+    work->object->draw();
     return 0;
 }

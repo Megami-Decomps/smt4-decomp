@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036a434` (_code @ 0x36a434, 0x5b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "title/titleMain.h"
 
@@ -42,7 +43,6 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: residentApplyFallbackValues. */
@@ -82,7 +82,7 @@ void FUN_0036a434(int param_1)
   float temp_v20;
   
   temp_v11 = (float)((unsigned long long)in_d8 >> 0x20);
-  temp_v1 = gameFlagsGetBlock();
+  temp_v1 = (int)gameFlagsGetBlock();
   temp_v5 = *(int *)(param_1 + 0xcc) == 7;
   temp_v10 = 0.017453292f;
   puVar5 = g_lmapScene;

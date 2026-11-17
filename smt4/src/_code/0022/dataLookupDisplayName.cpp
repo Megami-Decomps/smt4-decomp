@@ -1,11 +1,10 @@
 #include "gamedata/DisplayName.h"
+#include "gamedata/MapSystemTable.h"
 #include "bible/bibleAnalyze.h"
 
 extern "C" {
 extern DisplayNameOverride g_displayNameOverrides[999];
 extern NaviNameStateView g_naviMain;
-s32 dataTable2eSub2GetCount(void);
-DisplayNameRecord *dataTable2eSub2GetRecord(s32);
 
 // Look up a display name in the override table or the ordinary name records.
 const char *dataLookupDisplayName(s32 unused, s32 id)
@@ -19,11 +18,11 @@ const char *dataLookupDisplayName(s32 unused, s32 id)
         }
     } else {
         for (s32 index = 0; index < dataTable2eSub2GetCount(); ++index) {
-            DisplayNameRecord *record = dataTable2eSub2GetRecord(index);
-            if (record->id == -1)
+            MapSystemMapRecord *record = dataTable2eSub2GetRecord(index);
+            if (record->mapId == -1)
                 break;
-            if (record->id == id)
-                return record->text;
+            if (record->mapId == id)
+                return record->name;
         }
     }
     return g_naviMain.fallback;

@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 struct ModelOwner;
 struct BattleModelData {
@@ -28,12 +29,11 @@ extern "C" {
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *word);
-void btlUiAddRequest(void *ui, u16 id);
+void btlUiAddRequest(BtlUiA *ui, u16 id);
 void FUN_004cb9d0(BattleEffectSetup *render);
 void FUN_004d854c(s32 *owner);
 bool FUN_004d87e4(void **holder);
 void modelOwnerLoadNamed(ModelOwner *owner, const char *name);
-extern void *g_btlUiBlock;
 extern BattleEffectGlobals g_battleEffectSettings;
 extern const char g_battleUnitSourceFile[]; // battle/btlUnit.cpp diagnostic filename
 extern const char g_battleEnemyModelPathFormat[]; // "battle/model/en%03d.bam"

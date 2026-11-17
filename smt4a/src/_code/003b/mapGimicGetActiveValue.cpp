@@ -1,12 +1,12 @@
-#include "shard/W5_W5Match7_SceneState.h"
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
 
-
+/* The stage actor's g_mapEntries row while it is active, else -1. */
 s32 mapGimicGetActiveValue(void)
 {
-    MapGimicEntry *entry = &g_mapGimic->entry;
-    return entry->active != 0 ? entry->value : -1;
+    MapGimicStageActorA *entry = &g_mapGimic->stageActor;
+    return entry->active != 0 ? entry->index : -1;
 }
 
 } /* extern "C" */

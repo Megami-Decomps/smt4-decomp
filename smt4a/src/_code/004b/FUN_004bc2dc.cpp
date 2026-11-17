@@ -1,34 +1,33 @@
 /* NON_MATCHING: table base/candidate registers and result return storage differ. */
-#include "battle/WeightedEncounter.h"
+#include "gamedata/EncountData.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/NkmEnemyLookup.h"
 extern "C" {
 extern void *g_aocSystem;
 s32 randRange(u16 maximum);
-WeightedEncounterTable *resourceFindType27Record(void *system, u32 index);
-WeightedEncounterGroup *dataTable02GetRecordWithAocPackage(u32 id);
+EncountTableRecordA *resourceFindType27Record(void *system, u32 index);
 
 // Select an encounter by weight, excluding special portrait groups from the total when requested.
 u32 FUN_004bc2dc(s32 tableIndex, s32 excludeSpecial)
 {
     u32 selected = 0;
     void *section = dataTableGet(2, 1);
-    WeightedEncounterTable *table = (WeightedEncounterTable *)dataTableGetEntries(section);
+    EncountTableRecordA *table = encountTableRecordsA(section);
     if (tableIndex >= 0 && (u32)tableIndex < dataTableGetCount(section)) {
-        WeightedEncounterTable *overrideTable = resourceFindType27Record(g_aocSystem, tableIndex);
+        EncountTableRecordA *overrideTable = resourceFindType27Record(g_aocSystem, tableIndex);
         table = overrideTable ? overrideTable : &table[tableIndex];
     }
     s32 total = 0;
     for (s32 index = 0; index < 30; ++index) {
-        WeightedEncounterEntry *entry = &table->entries[index];
-        if (entry->id != 0) {
+        EncountChoice *entry = &table->choices[index];
+        if (entry->groupId != 0) {
             bool excluded = false;
             if (excludeSpecial) {
-                WeightedEncounterGroup *group = dataTable02GetRecordWithAocPackage(entry->id);
+                EncountGroupRecordA *group = dataTable02GetRecordWithAocPackage(entry->groupId);
                 for (s32 member = 0; member < 6; ++member) {
-                    if (group->members[member] != 0) {
-                        NkmEnemyRecordA *record = nkmEnemyFindById(group->members[member]);
+                    if (group->enemyIds[member] != 0) {
+                        NkmEnemyRecordA *record = nkmEnemyFindById(group->enemyIds[member]);
                         if (record != NULL && (record->bustUp || record->bustUpVariation)) {
                             excluded = true;
                             break;
@@ -42,10 +41,10 @@ u32 FUN_004bc2dc(s32 tableIndex, s32 excludeSpecial)
     }
     s32 choice = randRange((u16)(total - 1));
     for (s32 index = 0; index < 30; ++index) {
-        if (table->entries[index].id != 0) {
-            choice -= table->entries[index].weight;
+        if (table->choices[index].groupId != 0) {
+            choice -= table->choices[index].weight;
             if (choice < 0) {
-                selected = table->entries[index].id;
+                selected = table->choices[index].groupId;
                 break;
             }
         }

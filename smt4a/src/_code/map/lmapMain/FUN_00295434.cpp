@@ -4,18 +4,12 @@
 #include "gamedata/GameFlags.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "map/PopupStateA.h"
 
 struct PopupMessage {
     char data[0x40];    // message resource name (the popup's message data)
     const char* text;   // 0x40
-};
-
-
-struct GameFlagsBlock {
-    u8 unk000[0xd8e];
-    u8 mapType;         // 0xd8e
 };
 
 extern "C" {
@@ -46,7 +40,7 @@ void FUN_00295434(void)
         return;
     }
 
-    GameFlagsBlock* block = reinterpret_cast<GameFlagsBlock *>(gameFlagsGetBlock());
+    MapSaveBlockA *block = gameFlagsGetBlock();
     if (!gameFlagIsSet(0x11f6) && g_gameState.modeCounter >= 2) {
         if (gameFlagIsSet(0x4c9)) {
             showPopup(&g_lmapPopupMessages[4], 0xad);
@@ -57,7 +51,7 @@ void FUN_00295434(void)
         return;
     }
     if (!gameFlagIsSet(0x11f4) && g_gameState.modeCounter >= 4) {
-        if (block->mapType == 12) {
+        if (block->layout == 12) {
             if (gameFlagIsSet(0x4c9)) {
                 showPopup(&g_lmapPopupMessages[6], 0xad);
             } else {

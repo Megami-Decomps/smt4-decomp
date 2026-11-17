@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -6,7 +7,7 @@ typedef struct Object002e1614 {
     /* 0x000 */ void *job;
     /* 0x004 */ u8 unk004[0x94];
     /* 0x098 */ void *buffer;
-    /* 0x09c */ void *process;
+    /* 0x09c */ ScriptProcess *process;
     /* 0x0a0 */ u32 slot;
 } Object002e1614;
 
@@ -22,7 +23,6 @@ void textureIdRelease(s16 index);
 void taskWindowRelease(void);
 void eventTexReleaseJobs(void);
 void jobStop(void *job, s32 arg);
-void scrScriptProcessDestroy(void *process);
 
 /* Tears the object down: frees its slot, stops the bustup animation, releases the 64 entries and frees its buffer and script process. */
 void FUN_002e1614(Holder002e1614 *holder)

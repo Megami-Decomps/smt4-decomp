@@ -1,5 +1,5 @@
 /* NON_MATCHING: updates a field NPC marker (appears after leaving the trigger range, rises into view, shows its message, then follows the NPC with a height offset based on the lmap view); written from the decompilation, the goto structure is rebuilt as blocks, distSpatial's arguments are not recovered and float/bit comparisons are written as float compares */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "map/LmapViewGlobals.h"
 #include "game/GameStateA.h"
 
@@ -53,15 +53,8 @@ struct FieldNpc {
     /* 0xA0 */ f32 offsetZ;
 };
 
-struct NpcGameBlock {
-    /* 0x0000 */ u8 unk0000[0x14E8];
-    /* 0x14E8 */ s32 forceAppear;
-};
-
 extern "C" {
 
-
-NpcGameBlock *gameFlagsGetBlock(void);
 f32 distSpatial(void);
 void messageShowForKindVariant(u32 message, s32 variant);
 void controllerSetDestination(u32 controller, f32 *destination);
@@ -90,7 +83,7 @@ static __inline bool npcRunPending(FieldNpc *npc)
 
 void FUN_00481784(FieldNpc *npc)
 {
-    NpcGameBlock *block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     if (g_gameState.paused != 0)
         return;
     if (npc->mode != 1 && g_gameState.unk2A0 > 0)
@@ -100,7 +93,7 @@ void FUN_00481784(FieldNpc *npc)
         if (distSpatial() < NPC_TRIGGER_DISTANCE)
             return;
         npc->counter++;
-        if ((s32)npc->limit < npc->counter || block->forceAppear == 1) {
+        if ((s32)npc->limit < npc->counter || block->resetActive == 1) {
             if (npcKindIsFloating(npc->kind)) {
                 npc->controller->inner->flags &= ~NPC_VISIBLE_BITS;
                 npc->flags |= NPC_FLAG_HIDDEN;

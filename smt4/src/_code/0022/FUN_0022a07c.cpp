@@ -1,13 +1,9 @@
 /* NON_MATCHING: Retail ldr r2, [r0, #1876] differs from recovered ldr r1, [r0, #1876]. */
 #include "common.h"
 #include "addon/aocMain.h"
+#include "script/scrScriptProcess.h"
 
 namespace {
-
-struct AocResultView {
-    u8 unk00[0x108]; // 0x000
-    u32 unk108;      // 0x108
-};
 
 struct AocRequestView {
     u32 status;           // 0x00
@@ -15,14 +11,13 @@ struct AocRequestView {
     void* unk08;          // 0x08
     void* unk0C;          // 0x0C
     void* unk10;          // 0x10
-    AocResultView* result; // 0x14
+    ScriptProcess* result; // 0x14
 };
 
 }
 
 extern "C" {
 void asdMemFree(void* allocation);
-AocResultView* scrScriptProcessCreate(void* storage, void* source);
 
 // Consume completion flags and release failed allocations or record the constructed result.
 u32 FUN_0022a07c(AocRequestView* request)
@@ -48,9 +43,9 @@ u32 FUN_0022a07c(AocRequestView* request)
         return 0;
     }
 
-    AocResultView* result = scrScriptProcessCreate(request->unk10, request->unk0C);
+    ScriptProcess* result = scrScriptProcessCreate(request->unk10, request->unk0C);
     request->result = result;
-    result->unk108 = 2;
+    result->mode = 2;
     request->status = 0;
     return 0;
 }

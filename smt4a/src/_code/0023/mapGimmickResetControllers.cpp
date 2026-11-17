@@ -1,131 +1,84 @@
-#include "map/mapGimic.h"
+#include "map/MapGimicGlobal.h"
 #include <string.h>
 
-struct GimmickResetPrefixA {
-    u32 state;
-    u8 active;
-    u8 unk05;
-    u16 parameters[4];
-    u8 unk0e[2];
-    u32 resource;
-    struct { u8 active; u8 unk01[7]; } channels[4];
-    u32 vector[3];
-    u32 stateWords[10];
-    u8 pending;
-    u8 unk69[3];
-    u32 auxiliary[5];
-    u32 counter;
-    u32 references[3];
-};
-struct GimmickResetTailA {
-    u8 active;
-    u8 unk01;
-    s16 id;
-    f32 values[4];
-    u32 resource;
-    u32 state;
-    u8 pending;
-    u8 unk1d;
-    s16 delay;
-    u8 requested;
-    u8 unk21[3];
-    u32 first;
-    u32 second;
-};
-union GimmickResetEntryA {
-    MapGimicEntry base;
-    struct {
-        u8 unk00[0x10];
-        f32 angle;
-        u8 unk14[0x14];
-        f32 transform[4];
-        u32 state;
-    } reset;
-};
-struct GimmickResetViewA {
-    union { MapGimic base; GimmickResetPrefixA control; };
-    GimmickResetTailA tail;
-};
-
 extern "C" {
-extern MapGimic *g_mapGimic;
 void wordTripleClear(u32 *words);
 
 // Reset all map gimmick controllers, keeping padding and untouched resource storage intact.
 void mapGimmickResetControllers(void)
 {
-    // The extra controller follows the canonical MapGimic prefix; do not grow that shared type.
-    GimmickResetViewA *work = reinterpret_cast<GimmickResetViewA *>(g_mapGimic);
-    u32 *vector = work->control.vector;
-    work->control.state = 0;
-    work->control.active = 0;
-    work->control.parameters[0] = 0;
-    work->control.parameters[1] = 0;
-    work->control.parameters[2] = 0;
-    work->control.parameters[3] = 0;
-    work->control.resource = 0;
-    work->control.channels[0].active = 0;
-    work->control.channels[1].active = 0;
-    work->control.channels[2].active = 0;
-    work->control.channels[3].active = 0;
-    wordTripleClear(vector);
-    work = reinterpret_cast<GimmickResetViewA *>(g_mapGimic);
-    memset(work->control.stateWords, 0, sizeof(work->control.stateWords));
-    work->control.pending = 0;
-    work->control.auxiliary[0] = 0;
-    work->control.auxiliary[1] = 0;
-    work->control.auxiliary[2] = 0;
-    work->control.auxiliary[3] = 0;
-    work->control.auxiliary[4] = 0;
-    work->control.references[0] = 0;
-    work->control.references[1] = 0;
-    work->control.references[2] = 0;
-    work->control.counter = 0;
+    MapGimicA *work = g_mapGimic;
+    /* The ten flag bytes and their padding are cleared as three words. */
+    u32 *flags = reinterpret_cast<u32 *>(work->flags);
+    work->mode = 0;
+    work->busy = 0;
+    work->area = 0;
+    work->subArea = 0;
+    work->step = 0;
+    work->index = 0;
+    work->loaded = 0;
+    work->clones[0].available = 0;
+    work->clones[1].available = 0;
+    work->clones[2].available = 0;
+    work->clones[3].available = 0;
+    wordTripleClear(flags);
+    work = g_mapGimic;
+    memset(work->handles, 0, sizeof(work->handles));
+    work->pending = 0;
+    work->scriptFlags[0] = 0;
+    work->scriptFlags[1] = 0;
+    work->scriptFlags[2] = 0;
+    work->scriptFlags[3] = 0;
+    work->scriptFlags[4] = 0;
+    work->effectStates[0] = 0;
+    work->effectStates[1] = 0;
+    work->effectStates[2] = 0;
+    work->status = 0;
     for (s32 index = 0; index < MAP_GIMIC_ENTRIES; ++index) {
-        GimmickResetEntryA *entry = reinterpret_cast<GimmickResetEntryA *>(&g_mapGimic->entries[index]);
-        entry->base.active = 0;
-        entry->base.requested = 0;
-        entry->base.position[0] = 0.0f;
-        entry->base.position[1] = 0.0f;
-        entry->base.position[2] = 0.0f;
-        entry->reset.angle = 90.0f;
-        entry->base.requestState = 0;
-        entry->base.id = 0;
-        entry->base.obj = NULL;
-        entry->base.gates.entryId = 0;
-        entry->base.gates.required = 0;
-        entry->base.gates.excluded = 0;
-        entry->reset.transform[0] = 0.0f;
-        entry->reset.transform[1] = 0.0f;
-        entry->reset.transform[2] = 0.0f;
-        entry->reset.transform[3] = 0.0f;
-        entry->reset.state = 0;
+        MapGimicEntryA *entry = &g_mapGimic->entries[index];
+        entry->active = 0;
+        entry->requested = 0;
+        entry->position[0] = 0.0f;
+        entry->position[1] = 0.0f;
+        entry->position[2] = 0.0f;
+        entry->heading = 90.0f;
+        entry->motion = 0;
+        entry->kind = 0;
+        entry->obj = NULL;
+        entry->gimicId = 0;
+        entry->requiredFlag = 0;
+        entry->forbiddenFlag = 0;
+        entry->transform[0] = 0.0f;
+        entry->transform[1] = 0.0f;
+        entry->transform[2] = 0.0f;
+        entry->transform[3] = 0.0f;
+        entry->state = 0;
     }
     for (s32 index = 0; index < MAP_GIMIC_SLOTS; ++index) {
-        MapGimic *gimmicks = g_mapGimic;
-        MapGimicSlot *slot = &gimmicks->slots[index];
+        MapGimicA *gimmicks = g_mapGimic;
+        MapGimicSlotA *slot = &gimmicks->slots[index];
         slot->active = 0;
         slot->animationId = 0;
         slot->id = 0;
         slot->obj = NULL;
-        slot->unk0C = 0;
+        slot->animationValue = 0;
         slot->requested = 0;
         slot->delay = 0;
         slot->unk14[0] = 0;
     }
-    GimmickResetTailA *tail = &reinterpret_cast<GimmickResetViewA *>(g_mapGimic)->tail;
-    tail->active = 0;
-    tail->id = 0;
-    tail->values[0] = 0.0f;
-    tail->values[1] = 0.0f;
-    tail->values[2] = 0.0f;
-    tail->values[3] = 0.0f;
-    tail->resource = 0;
-    tail->state = 0;
-    tail->pending = 0;
-    tail->delay = 0;
-    tail->requested = 0;
-    tail->first = 0;
-    tail->second = 0;
+    MapGimicStageActorA *actor = &g_mapGimic->stageActor;
+    actor->active = 0;
+    actor->motion = 0;
+    actor->position.x = 0.0f;
+    actor->position.y = 0.0f;
+    actor->position.z = 0.0f;
+    actor->heading = 0.0f;
+    actor->obj = NULL;
+    actor->state = 0;
+    actor->pending = 0;
+    actor->delay = 0;
+    actor->requested = 0;
+    actor->flag = 0;
+    actor->index = 0;
 }
 }

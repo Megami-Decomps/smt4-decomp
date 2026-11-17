@@ -6,7 +6,7 @@ extern "C" {
 void buttonHelpSetSelectedId(u16 value)
 {
     if (g_buttonHelp.work != NULL) {
-        g_buttonHelp.work->selectedId = value;
+        g_buttonHelp.work->preset = value;
     }
 }
 

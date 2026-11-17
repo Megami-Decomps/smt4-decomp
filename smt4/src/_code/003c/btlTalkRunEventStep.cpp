@@ -2,6 +2,7 @@
 #include "script/scrScriptProcess.h"
 #include "code/Code0024.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BattleStepContext {
     u8 unk0000[0x1fc0];
@@ -34,7 +35,6 @@ struct BattleEventStep {
 extern "C" {
 extern void *DAT_00435d18;
 extern void *g_btlActionReflect;
-extern void *g_btlUiBlock;
 
 
 u32 FUN_00246454(s32 actor, u32 options, BtlEntry *unit);
@@ -46,7 +46,6 @@ void FUN_003c06ac(BattleEventStep *step);
 void FUN_003dbe68(void *state);
 s32 btlEventAreResourcesReady(void *state);
 s32 FUN_003dcc34(void *state);
-s32 scrRunOpcodesStub(ScriptProcess *process);
 s32 nodeListCountActiveById(void *reflect, s32 id);
 
 // Steps the state machine: 0 starts the load, 1 waits for the resources and starts the script, 2 runs it and copies its

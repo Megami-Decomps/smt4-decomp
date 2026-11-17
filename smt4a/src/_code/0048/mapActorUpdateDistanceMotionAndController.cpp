@@ -1,12 +1,13 @@
 /* NON_MATCHING: distance-vector VFP allocation and motion-flag reuse/store scheduling differ; controller synchronization body matches. */
-#include "shard/W5_W5Match7_ControllerPose.h"
+#include "shard/W5_W5Match7_SceneState.h"
+#include "gfx/ControllerModel.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include <math.h>
 
 struct MapActorControllerLink {
     u32 unk00;
-    ControllerPose *controller;
+    Obj557b18 *controller;
 };
 struct MapActorMotion {
     u8 unk00[0xc];
@@ -24,9 +25,6 @@ struct MapActorMotion {
 };
 
 extern "C" {
-void controllerSetDestination(ControllerPose *controller, const MapVector *destination);
-void controllerSetRotationEulerDegrees(ControllerPose *controller, f32 x, f32 y, f32 z);
-void controllerSetPosition(ControllerPose *controller, f32 x, f32 y, f32 z);
 
 void mapActorUpdateDistanceMotionAndController(MapActorMotion *actor)
 {
@@ -54,21 +52,21 @@ void mapActorUpdateDistanceMotionAndController(MapActorMotion *actor)
             actor->position.y + actor->offset.y,
             actor->position.z + actor->offset.z
         };
-        ControllerPose *controller = actor->model->controller;
+        Obj557b18 *controller = actor->model->controller;
         controllerSetDestination(controller, &destination);
         controllerSetRotationEulerDegrees(controller, actor->orientation.x, actor->orientation.y, actor->orientation.z);
         controllerSetPosition(controller, actor->controllerPosition.x, actor->controllerPosition.y, actor->controllerPosition.z);
         if (g_gameState.paused) {
-            controller->flags.value |= 3;
+            controller->flags |= 3;
         } else {
-            controller->flags.value &= ~3;
+            controller->flags &= ~3;
         }
         if (actor->motionFlags & 4) {
-            controller->flags.value |= 3;
+            controller->flags |= 3;
         } else if (g_gameState.loading) {
-            controller->flags.value |= 3;
+            controller->flags |= 3;
         } else {
-            controller->flags.value &= ~3;
+            controller->flags &= ~3;
         }
     }
 }

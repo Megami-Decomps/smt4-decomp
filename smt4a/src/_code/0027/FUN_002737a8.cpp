@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002737a8` (_code @ 0x2737a8, 0xe3c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
+#include "map/MapGimicGlobal.h"
 #include "game/GameStateA.h"
 
 extern "C" {
@@ -33,12 +35,10 @@ typedef struct {
 } void_stack;
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int *g_mapGimic; /* 0x580ca0 */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 extern int querySlotHasHandle(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
@@ -90,14 +90,14 @@ void FUN_002737a8(void)
   unsigned long long temp_v9;
   unsigned long long temp_v10;
   
-  temp_v0 = gameFlagsGetBlock();
-  if ((char)g_mapGimic[1] != '\0') {
-    temp_v0 = *g_mapGimic;
+  temp_v0 = (int)gameFlagsGetBlock();
+  if ((char)((int *)g_mapGimic)[1] != '\0') {
+    temp_v0 = *((int *)g_mapGimic);
     if (temp_v0 == 0) {
       temp_v0 = 0x22;
       do {
         temp_v4 = temp_v0 * 0xf;
-        temp_v1 = g_mapGimic[temp_v0 * 0xf + 0x2a];
+        temp_v1 = ((int *)g_mapGimic)[temp_v0 * 0xf + 0x2a];
         if (temp_v1 != 0) {
           temp_v4 = *(int *)(temp_v1 + 4);
         }
@@ -116,14 +116,14 @@ void FUN_002737a8(void)
         if (temp_v0 != 0) {
           temp_v0 = 0;
           do {
-            if (((char)g_mapGimic[temp_v0 * 0xf + 0x24] != '\0') &&
-               (*(short *)((int)g_mapGimic + temp_v0 * 0x3c + 0xa6) == 0xc)) {
-              FUN_00281b94((int)(short)g_mapGimic[temp_v0 * 0xf + 0x2b]);
+            if (((char)((int *)g_mapGimic)[temp_v0 * 0xf + 0x24] != '\0') &&
+               (*(short *)((int)((int *)g_mapGimic) + temp_v0 * 0x3c + 0xa6) == 0xc)) {
+              FUN_00281b94((int)(short)((int *)g_mapGimic)[temp_v0 * 0xf + 0x2b]);
             }
-            piVar1 = g_mapGimic;
+            piVar1 = ((int *)g_mapGimic);
             temp_v0 = temp_v0 + 1;
           } while (temp_v0 < 0x23);
-          *(unsigned char *)(g_mapGimic + 1) = 0;
+          *(unsigned char *)(((int *)g_mapGimic) + 1) = 0;
           *piVar1 = 0;
           return;
         }
@@ -134,26 +134,26 @@ void FUN_002737a8(void)
     else {
       FUN_00294854();
     }
-    *g_mapGimic = *g_mapGimic + 1;
+    *((int *)g_mapGimic) = *((int *)g_mapGimic) + 1;
   }
   else {
-    if ((char)g_mapGimic[0x26d] != '\0') {
-      temp_v6 = *(unsigned int *)(*(int *)(g_mapGimic[0x272] + 4) + 4);
+    if ((char)((int *)g_mapGimic)[0x26d] != '\0') {
+      temp_v6 = *(unsigned int *)(*(int *)(((int *)g_mapGimic)[0x272] + 4) + 4);
       if (DAT_005f161f != '\0') {
         temp_v6 = temp_v6 | 3;
       }
       else {
         temp_v6 = temp_v6 & 0xfffffffc;
       }
-      *(unsigned int *)(*(int *)(g_mapGimic[0x272] + 4) + 4) = temp_v6;
+      *(unsigned int *)(*(int *)(((int *)g_mapGimic)[0x272] + 4) + 4) = temp_v6;
     }
     temp_v9 = 0x40e0000000000000;
     temp_v10 = 0x3f80000040a00000;
     temp_v4 = 0;
     do {
-      piVar1 = g_mapGimic;
-      if ((char)g_mapGimic[temp_v4 * 0xf + 0x24] != '\0') {
-        temp_v1 = *(int *)(g_mapGimic[temp_v4 * 0xf + 0x2a] + 4);
+      piVar1 = ((int *)g_mapGimic);
+      if ((char)((int *)g_mapGimic)[temp_v4 * 0xf + 0x24] != '\0') {
+        temp_v1 = *(int *)(((int *)g_mapGimic)[temp_v4 * 0xf + 0x2a] + 4);
         if (DAT_005f161f != '\0') {
           *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
         }
@@ -173,13 +173,13 @@ void FUN_002737a8(void)
                 in_s0 = (int)temp_v9;
                 modelPlayClip(temp_v1,0,2);
                 temp_v2 = 2;
-                g_mapGimic[0x1b] = temp_v2;
+                ((int *)g_mapGimic)[0x1b] = temp_v2;
                 break;
               case 2:
                 candidateGetPreferredValue(temp_v1);
-                piVar2 = g_mapGimic;
+                piVar2 = ((int *)g_mapGimic);
                 if (in_s0 >= 0x42700000) {
-                  g_mapGimic[0x1b] = 3;
+                  ((int *)g_mapGimic)[0x1b] = 3;
                   piVar2[0x1c] = 0;
                 }
                 break;
@@ -188,14 +188,14 @@ void FUN_002737a8(void)
                 temp_v8 = -255.0f;
                 floatInterpolateOverDuration();
                 in_s0 = (int)temp_v8;
-                g_mapGimic[0x1c] = g_mapGimic[0x1c] + 1;
+                ((int *)g_mapGimic)[0x1c] = ((int *)g_mapGimic)[0x1c] + 1;
                 mapTableValueSet(in_s0);
                 temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 == 0) break;
                 in_s0 = (int)temp_v9;
                 modelPlayClip(temp_v1,1,2);
                 temp_v2 = 4;
-                g_mapGimic[0x1b] = temp_v2;
+                ((int *)g_mapGimic)[0x1b] = temp_v2;
                 break;
               case 4:
                 temp_v7 = 0;
@@ -213,38 +213,38 @@ void FUN_002737a8(void)
             }
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x27) {
-            switch(g_mapGimic[0x1d]) {
+            switch(((int *)g_mapGimic)[0x1d]) {
             default:
               break;
             case 1:
               in_s0 = (int)temp_v9;
               modelPlayClip(temp_v1,1,2);
               temp_v2 = 2;
-              g_mapGimic[0x1d] = temp_v2;
+              ((int *)g_mapGimic)[0x1d] = temp_v2;
               break;
             case 2:
               temp_v2 = animationChannelsAllFinished(temp_v1);
               if (temp_v2 == 0) break;
               in_s0 = (int)temp_v9;
               modelPlayClip(temp_v1,2);
-              g_mapGimic[0x1d] = 3;
+              ((int *)g_mapGimic)[0x1d] = 3;
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1525) = 1;
               FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
               temp_v2 = 4;
-              g_mapGimic[0x1d] = temp_v2;
+              ((int *)g_mapGimic)[0x1d] = temp_v2;
             }
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x28) {
-            switch(g_mapGimic[0x1e]) {
+            switch(((int *)g_mapGimic)[0x1e]) {
             default:
               break;
             case 1:
               in_s0 = (int)temp_v9;
               modelPlayClip(temp_v1,1,2);
               temp_v2 = 2;
-              g_mapGimic[0x1e] = temp_v2;
+              ((int *)g_mapGimic)[0x1e] = temp_v2;
               break;
             case 2:
               temp_v2 = animationChannelsAllFinished(temp_v1);
@@ -252,24 +252,24 @@ void FUN_002737a8(void)
               in_s0 = (int)temp_v9;
               modelPlayClip(temp_v1,2);
               temp_v2 = 3;
-              g_mapGimic[0x1e] = temp_v2;
+              ((int *)g_mapGimic)[0x1e] = temp_v2;
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1524) = 1;
               FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
-              g_mapGimic[0x1e] = 4;
+              ((int *)g_mapGimic)[0x1e] = 4;
               break;
             }
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x29) {
-            switch(g_mapGimic[0x1f]) {
+            switch(((int *)g_mapGimic)[0x1f]) {
             default:
               break;
             case 1:
               in_s0 = (int)temp_v9;
               modelPlayClip(temp_v1,1,2);
               temp_v2 = 2;
-              g_mapGimic[0x1f] = temp_v2;
+              ((int *)g_mapGimic)[0x1f] = temp_v2;
               break;
             case 2:
               temp_v2 = animationChannelsAllFinished(temp_v1);
@@ -277,12 +277,12 @@ void FUN_002737a8(void)
               in_s0 = (int)temp_v9;
               modelPlayClip(temp_v1,2);
               temp_v2 = 3;
-              g_mapGimic[0x1f] = temp_v2;
+              ((int *)g_mapGimic)[0x1f] = temp_v2;
               break;
             case 3:
               *(unsigned char *)(temp_v0 + 0x1526) = 1;
               FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
-              g_mapGimic[0x1f] = 4;
+              ((int *)g_mapGimic)[0x1f] = 4;
               break;
             }
           }
@@ -424,44 +424,44 @@ LAB_0027412c:
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x50) {
             if (piVar1[temp_v4 * 0xf + 0x32] == 1) {
               temp_v2 = (int)temp_v9;
-              switch(g_mapGimic[0x21]) {
+              switch(((int *)g_mapGimic)[0x21]) {
               default:
                 break;
               case 1:
                 modelPlayClip(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
-                g_mapGimic[0x21] = temp_v3;
+                ((int *)g_mapGimic)[0x21] = temp_v3;
                 break;
               case 2:
                 temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 == 0) break;
-                g_mapGimic[0x21] = 3;
+                ((int *)g_mapGimic)[0x21] = 3;
                 break;
               case 3:
                 modelPlayClip(temp_v1,2);
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
-                g_mapGimic[0x21] = temp_v3;
+                ((int *)g_mapGimic)[0x21] = temp_v3;
               }
               if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) != 0x50) goto LAB_00274348;
             }
             if (piVar1[temp_v4 * 0xf + 0x32] == 2) {
               temp_v2 = (int)temp_v9;
-              switch(g_mapGimic[0x22]) {
+              switch(((int *)g_mapGimic)[0x22]) {
               default:
                 break;
               case 1:
                 modelPlayClip(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
-                g_mapGimic[0x22] = temp_v3;
+                ((int *)g_mapGimic)[0x22] = temp_v3;
                 break;
               case 2:
                 temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 != 0) {
-                  g_mapGimic[0x22] = 3;
+                  ((int *)g_mapGimic)[0x22] = 3;
                 }
                 break;
               case 3:
@@ -469,25 +469,25 @@ LAB_0027412c:
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
-                g_mapGimic[0x22] = temp_v3;
+                ((int *)g_mapGimic)[0x22] = temp_v3;
               }
               if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) != 0x50) goto LAB_00274348;
             }
             if (piVar1[temp_v4 * 0xf + 0x32] == 3) {
               temp_v2 = (int)temp_v9;
-              switch(g_mapGimic[0x23]) {
+              switch(((int *)g_mapGimic)[0x23]) {
               default:
                 break;
               case 1:
                 modelPlayClip(temp_v1,1,2);
                 temp_v3 = 2;
                 in_s0 = temp_v2;
-                g_mapGimic[0x23] = temp_v3;
+                ((int *)g_mapGimic)[0x23] = temp_v3;
                 break;
               case 2:
                 temp_v2 = animationChannelsAllFinished(temp_v1);
                 if (temp_v2 != 0) {
-                  g_mapGimic[0x23] = 3;
+                  ((int *)g_mapGimic)[0x23] = 3;
                 }
                 break;
               case 3:
@@ -495,7 +495,7 @@ LAB_0027412c:
                 FUN_00319f64((int)(short)piVar1[temp_v4 * 0xf + 0x2b]);
                 temp_v3 = 4;
                 in_s0 = temp_v2;
-                g_mapGimic[0x23] = temp_v3;
+                ((int *)g_mapGimic)[0x23] = temp_v3;
               }
             }
           }
@@ -522,10 +522,10 @@ LAB_00274348:
     if (g_gameState.mapId == 0x20 && temp_v0 == 2) {
       temp_v0 = 0;
       do {
-        piVar1 = g_mapGimic;
-        if ((char)g_mapGimic[temp_v0 * 6 + 0x231] != '\0') {
-          if ((char)g_mapGimic[temp_v0 * 6 + 0x235] != '\0') {
-            temp_v7 = *(unsigned int *)(g_mapGimic[temp_v0 * 6 + 0x233] + 4);
+        piVar1 = ((int *)g_mapGimic);
+        if ((char)((int *)g_mapGimic)[temp_v0 * 6 + 0x231] != '\0') {
+          if ((char)((int *)g_mapGimic)[temp_v0 * 6 + 0x235] != '\0') {
+            temp_v7 = *(unsigned int *)(((int *)g_mapGimic)[temp_v0 * 6 + 0x233] + 4);
             temp_v4 = FUN_004ff970(temp_v7);
             if ((temp_v4 == *(short *)((int)piVar1 + temp_v0 * 0x18 + 0x8c6)) &&
                (temp_v4 = animationIsClipComplete(temp_v7), temp_v4 != 0)) {

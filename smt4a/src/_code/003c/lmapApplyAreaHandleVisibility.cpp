@@ -2,6 +2,8 @@
 #include "game/GameStateA.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
 #include "Model/MoriModelManager.h"
+#include "map/LmapMainGlobals.h"
+#include "Model/MoriModelContent.h"
 
 struct LmapHandleTable {
     /* 0x00 */ u8 unk00[0x10];
@@ -28,7 +30,6 @@ struct LmapHandleMain {
 };
 
 extern "C" {
-extern LmapHandleMain *g_lmapMainState;
 extern const u8 DAT_0058024c[], DAT_0058029c[], DAT_005802ec[];
 extern const u8 DAT_0058033c[], DAT_0058038c[], DAT_005803dc[];
 extern const u8 DAT_0058042c[], DAT_0058047c[], DAT_005804cc[];
@@ -39,7 +40,7 @@ void FUN_00399290(u32 index, s32 enabled);
 // Apply the special-area visibility mask, or enable every map handle.
 void lmapApplyAreaHandleVisibility(void)
 {
-    LmapHandleMain *map = g_lmapMainState;
+    LmapMainStateA *map = g_lmapMainState;
     if (g_gameState.mapId == 0x65) {
         s32 submode = g_gameState.areaId;
         if (submode == 1) {
@@ -80,12 +81,12 @@ void lmapApplyAreaHandleVisibility(void)
         }
     }
     LmapHandleTable *table;
-    for (u32 index = 0; table = map->handles->table, index < table->count; ++index) {
+    for (u32 index = 0; table = reinterpret_cast<LmapHandleTable *>(map->areaModel->binding), index < table->count; ++index) {
         RegisteredHandle *handle = ptrVectorAt(table, index);
         handleRegistryRegisterObject(g_handleRegistry, handle);
         if (g_lmapMainState != NULL &&
-            g_lmapMainState->registrations[index].registered == 0) {
-            g_lmapMainState->registrations[index].registered = 1;
+            g_lmapMainState->areaSlots[index].registered == 0) {
+            g_lmapMainState->areaSlots[index].registered = 1;
         }
         FUN_00399290(index, 1);
     }

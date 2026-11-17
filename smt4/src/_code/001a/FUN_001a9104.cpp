@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation and branch layout differ (the two quest kinds share counters in retail) */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "code/Code0028.h"
 #include "code/Code0028_Smt4.h"
 #include "game/GameState.h"
@@ -11,17 +11,6 @@ struct QuestRewardEntry {
     /* 0x06 */ u16 unk06;
 };
 
-/* The map block (only the item-result slots at 0x1060 are touched). */
-struct ResultMapBlock {
-    /* 0x0000 */ u8 unk0000[0x2a];
-    /* 0x002a */ s16 specialRecord;
-    /* 0x002c */ u8 unk002c[0x1034];
-    /* 0x1060 */ s16 firstWanted;     /* the item the first quest kind asked for */
-    /* 0x1062 */ u16 firstOffered;
-    /* 0x1064 */ u16 secondOffered;
-    /* 0x1066 */ u16 secondWanted;
-};
-
 struct SpecialRecord {
     /* 0x00 */ u8 unk00[0x12];
     /* 0x12 */ s16 value;
@@ -29,9 +18,6 @@ struct SpecialRecord {
 
 extern "C" {
 
-
-
-ResultMapBlock *gameGetMapBlock(void);
 SpecialRecord *dataTable2fSub1GetRecord(s32 id);
 void FUN_00295a18(s32 value, s32 mode);
 s32 FUN_00298dc8(u16 quest);
@@ -49,10 +35,10 @@ void FUN_002e8598(s32 message, u32 item);
 s32 FUN_001a9104(void)
 {
     s32 result = 0;
-    ResultMapBlock *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
     u32 firstKindDone = 0;
     if (g_gameState.statusActive != 0) {
-        g_gameState.unk0B0 = dataTable2fSub1GetRecord(block->specialRecord)->value;
+        g_gameState.unk0B0 = dataTable2fSub1GetRecord(block->savePoint.tableId)->value;
         FUN_00295a18(g_gameState.unk0B0, 1);
         g_gameState.statusActive = 0;
         return 4;
@@ -69,8 +55,8 @@ s32 FUN_001a9104(void)
             u32 itemOther = 0;
             if (FUN_00287874(quest) != 0) {
                 s32 total = 0;
-                u16 offered = block->secondOffered;
-                u16 wanted = block->secondWanted;
+                u16 offered = block->secondCompletedItem;
+                u16 wanted = block->secondProgressedItem;
                 for (s32 i = 0; i < 6; i++) {
                     QuestRewardEntry entry;
                     if (FUN_00298e40(quest, i, &entry) != 0) {
@@ -133,8 +119,8 @@ s32 FUN_001a9104(void)
             if (FUN_00287874(quest) != 0) {
                 if (questPassesAvailabilityConditions(quest) != 0) {
                     s32 total = 0;
-                    u16 offered = block->firstOffered;
-                    u32 wanted = (u32)block->firstWanted;
+                    u16 offered = block->completedItem;
+                    u32 wanted = (u32)block->progressedItem;
                     for (s32 i = 0; i < 6; i++) {
                         QuestRewardEntry entry;
                         if (FUN_00298e40(quest, i, &entry) != 0) {
@@ -201,10 +187,10 @@ s32 FUN_001a9104(void)
     if (result == 0 && FUN_00287800() != 0) {
         result = 3;
     }
-    block->secondOffered = 0;
-    block->secondWanted = 0;
-    block->firstOffered = 0;
-    block->firstWanted = 0;
+    block->secondCompletedItem = 0;
+    block->secondProgressedItem = 0;
+    block->completedItem = 0;
+    block->progressedItem = 0;
     return result;
 }
 

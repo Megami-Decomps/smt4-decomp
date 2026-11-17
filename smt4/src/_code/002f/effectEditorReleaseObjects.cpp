@@ -1,14 +1,7 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
-
-typedef struct EffectEditor {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ void *nodeListOwner;
-    /* 0x40 */ void *unk40;
-} EffectEditor;
-
-extern EffectEditor g_effectEditor;
 
 void effectEditorObjectDestroy(void);
 void nodeListOwnerFree(void);
@@ -16,13 +9,13 @@ void nodeListOwnerFree(void);
 /* Frees the editor's two owned objects, if present. */
 void effectEditorReleaseObjects(void)
 {
-    if (g_effectEditor.unk40 != NULL) {
+    if (g_effectEditor.request != NULL) {
         effectEditorObjectDestroy();
-        g_effectEditor.unk40 = NULL;
+        g_effectEditor.request = NULL;
     }
-    if (g_effectEditor.nodeListOwner != NULL) {
+    if (g_effectEditor.nodeList != NULL) {
         nodeListOwnerFree();
-        g_effectEditor.nodeListOwner = NULL;
+        g_effectEditor.nodeList = NULL;
     }
 }
 

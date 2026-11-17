@@ -22,7 +22,6 @@ struct EventRow {
 };
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(EventRowSprite* sprite, f32 speed);
 void FUN_0049d140(EventRow* row, u32 state, u32 entry);
 void FUN_0049d770(EventRow* row);
 void FUN_0049df84(EventRow* row);

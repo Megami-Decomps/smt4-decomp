@@ -42,7 +42,7 @@ u32 FUN_0035ba3c(Point2* coordinates, u32 value, EffectEditorOptions* state)
 {
     u32 result = 0x400001;
     memcpySrcFirst(coordinates, &DAT_0059dc7c, sizeof(Point2));
-    if (!g_effectEditor.dispatch.mode) {
+    if (!g_effectEditor.mode) {
         FUN_00200bcc(state);
     }
     memcpySrcFirst(&DAT_0059dc7c, coordinates, sizeof(Point2));

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002db06c` (_code @ 0x2db06c, 0x2310 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -79,7 +80,6 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: soundVolumeSettingGet. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_001f3f34. */
@@ -146,7 +146,7 @@ void FUN_002db06c(void)
   int iStack_68;
   int temp_v31;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   soundVolumeSettingGet();
   piVar2 = g_lmapScene;
   if (((*g_lmapScene == 0xd || *g_lmapScene == 0x15) && (g_lmapScene[0x60] != 0)) &&

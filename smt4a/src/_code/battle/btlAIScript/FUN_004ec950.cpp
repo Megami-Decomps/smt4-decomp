@@ -1,6 +1,7 @@
 /* NON_MATCHING: 10 diff lines left: the hi-word AND of the last target-mask test uses the other operand order, and the final aiState store loads the slot base after the current slot where retail loads the base first */
 #include "battle/BattleUnitRecordState.h"
 #include "gamedata/GameFlags.h"
+#include "battle/BtlUiGlobal.h"
 
 /* What btlEntryBuildSummary reports about the unit's pending command. */
 struct BtlAiCommandInfo {
@@ -79,12 +80,11 @@ s32 FUN_003f23fc(BtlMainStateA *battle);
 s32 FUN_003e84fc(BtlMainStateA *battle);
 s32 FUN_003f25e8(BtlMainStateA *battle);
 s32 btlStateHasSelectionGateFlag(BtlMainStateA *battle);
-void btlUiQueueMenuAction(u32 uiBlock, s32 action, s32 a);
+void btlUiQueueMenuAction(BtlUiA *uiBlock, s32 action, s32 a);
 void FUN_004eb838(BattleUnitRecordState *units, BtlAiCommand *cmd);
 
 extern u32 g_btlAiScript;
 extern BtlActionAiView g_btlAction;
-extern u32 g_btlUiBlock;
 
 /* Drive one AI command for the active unit; returns 0 when the AI should not act. */
 u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)

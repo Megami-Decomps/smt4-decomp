@@ -35,7 +35,7 @@ typedef struct GameDataBlocksA {
     /* 0x04 */ GameSaveDataA *saveBlock; /* allocation: 0x2A7A4 bytes */
     /* 0x08 */ GameSaveBodyA *workBlock; /* allocation: 0x2A71C bytes: a copy of the save body */
     /* 0x0C */ u16 *smallBlock; /* allocation: 0xC bytes */
-    /* 0x10 */ void *extraBlock; /* allocation: 0x20 bytes */
+    /* 0x10 */ u32 *countdowns; /* allocation: 0x20 bytes; the countdown timers FUN_00138aa4 runs down */
     /* 0x14 */ u32 homeButtonHolds;
     /* 0x18 */ u32 sleepHolds;
     /* 0x1C */ u32 flags;

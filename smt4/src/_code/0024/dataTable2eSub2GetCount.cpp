@@ -1,14 +1,11 @@
-#include "common.h"
+#include "gamedata/MapSystemTable.h"
 
 extern "C" {
 
-int dataTableGetCount(void);
-int dataTableGet(int id, int index);
-
-void dataTable2eSub2GetCount(void)
+/* The number of map rows (MapSystemTable.tbb table 2). */
+s32 dataTable2eSub2GetCount(void)
 {
-    dataTableGet(0x2e, 2);
-    dataTableGetCount();
+    return dataTableGetCount(dataTableGet(0x2e, 2));
 }
 
 } /* extern "C" */

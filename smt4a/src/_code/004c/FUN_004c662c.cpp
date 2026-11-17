@@ -1,17 +1,9 @@
 /* NON_MATCHING: paired mask loads, chance comparison registers and chosen-ID lifetime differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
+#include "battle/BattleSkillResponseMasks.h"
 
-struct ReinforcementMasksView {
-    u8 unk000[0xA0];
-    u64 blocked[3];
-    u8 unk0B8[0x38];
-    u64 forced;
-    u8 unk0F8[8];
-    u64 restart;
-};
 extern "C" {
-extern ReinforcementMasksView g_btlSkillResponseMasks;
 u32 lcgRandomRange(s32 limit);
 u16 FUN_004bc420(u32, u32, s32);
 
@@ -25,8 +17,8 @@ u32 FUN_004c662c()
         return 1;
     }
     u64 flags = battle->stateFlags64.bits;
-    if ((flags & g_btlSkillResponseMasks.blocked[0]) || (flags & g_btlSkillResponseMasks.blocked[1]) ||
-        (flags & g_btlSkillResponseMasks.blocked[2]) ||
+    if ((flags & g_btlSkillResponseMasks.assistActive) || (flags & g_btlSkillResponseMasks.alwaysProc) ||
+        (flags & g_btlSkillResponseMasks.stateBlocked) ||
         (battle->encounterSelection.id >= 0 && battle->encounterGate.disabled >= 3))
         return 0;
     u32 id = battle->reinforcement.id;
@@ -35,10 +27,10 @@ u32 FUN_004c662c()
     u16 chance = battle->reinforcement.chance;
     if (battle->encounterGate.disabled)
         chance = battle->reinforcement.alternateChance;
-    if (!(markers & g_btlSkillResponseMasks.forced) && !chance)
+    if (!(markers & g_btlSkillResponseMasks.reinforceForced) && !chance)
         return 0;
     s32 random = lcgRandomRange(99);
-    if (battle->markerMasks.bits & g_btlSkillResponseMasks.forced)
+    if (battle->markerMasks.bits & g_btlSkillResponseMasks.reinforceForced)
         random = -1;
     if (static_cast<s32>(battle->reinforcementChance.chanceBonus + chance) <= random)
         return 0;

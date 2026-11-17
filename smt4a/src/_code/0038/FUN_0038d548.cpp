@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "gamedata/GameSaveDataA.h"
 #include "gamedata/SupportUnitRecord.h"
+#include "battle/BtlUiGlobal.h"
 
 struct CategoryEntry {
     u8 unk00[0x64];    // 0x00
@@ -12,13 +13,12 @@ struct CategoryEntry {
 extern "C" {
 
 extern u64 g_btlStartFlags;  /* 0x570dd0 */
-extern u32 g_btlUiBlock;     /* 0x57a9c8 */
 
 void battleApplyOptionOverrides(BtlMainStateA *state);
 PartySlotA *gameGetOptions(void);
 SupportUnitRecordA *dataTableGetCategoryEntry(s32 category, u16 entry);
 void statusBustUpPortraitAcquire(s16 value, s32 arg);
-void FUN_004aa1d0(u32 uiBlock);
+void FUN_004aa1d0(BtlUiA *uiBlock);
 
 /* Script command: applies the selected option's category entry value, sets the start flags on the battle state and updates the UI block. */
 u32 FUN_0038d548(void)

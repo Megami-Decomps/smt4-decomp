@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail stores each unpacked component separately and re-reads the product from memory; armcc groups the stores into VSTM and keeps the product in registers, so the VFP schedule and the color-pack register allocation differ. */
 #include "gfx/RenderSubmission.h"
 #include "gfx/EffectColorUnpack.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 void FUN_00338330(RenderSubmissionPacket* packet, const f32* position, const f32* rotation, const f32* scale);
 void FUN_002b3c9c(RenderSubmissionPacket* packet, u32 mode);
 u32 FUN_0038136c(RenderSubmissionOwner* owner, const u32* color);
-extern EffectColorProductState g_vectorScratch;
 
 // Apply the owner's color and draw settings to a current-frame submission (colors inlined).
 void FUN_00391df4(RenderSubmission* submission)
@@ -18,13 +18,13 @@ void FUN_00391df4(RenderSubmission* submission)
         return;
 
     u32 ownerColor = FUN_0038136c(owner, &owner->color);
-    effectColorUnpack(submission->color, &g_vectorScratch.factor);
-    effectColorUnpack(ownerColor, &g_vectorScratch.color);
-    g_vectorScratch.color.red *= g_vectorScratch.factor.red;
-    g_vectorScratch.color.green *= g_vectorScratch.factor.green;
-    g_vectorScratch.color.blue *= g_vectorScratch.factor.blue;
-    g_vectorScratch.color.alpha *= g_vectorScratch.factor.alpha;
-    u32 color = effectColorPack(&g_vectorScratch.color);
+    effectColorUnpack(submission->color, &g_vectorScratch.second.color);
+    effectColorUnpack(ownerColor, &g_vectorScratch.first.color);
+    g_vectorScratch.first.color.red *= g_vectorScratch.second.color.red;
+    g_vectorScratch.first.color.green *= g_vectorScratch.second.color.green;
+    g_vectorScratch.first.color.blue *= g_vectorScratch.second.color.blue;
+    g_vectorScratch.first.color.alpha *= g_vectorScratch.second.color.alpha;
+    u32 color = effectColorPack(&g_vectorScratch.first.color);
     RenderSubmissionColor packed;
     packed.channels.red = __rev(color) >> 24;
     packed.channels.green = __rev(color) >> 16;

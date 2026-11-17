@@ -1,13 +1,9 @@
 #include "common.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
-
-typedef struct ScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ s32 mode;
-} ScriptProcess;
 
 /* Runs one quest script: loads its script and message files, starts an entry and waits for it to finish. */
 typedef struct QuestScriptRun {
@@ -19,10 +15,8 @@ typedef struct QuestScriptRun {
     /* 0x14 */ ScriptProcess *process;
 } QuestScriptRun;
 
-ScriptProcess *scrScriptProcessCreate(void *script, void *messages);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
-s32 scrRunOpcodesStub(ScriptProcess *process);
 void FUN_0029016c(u32 a, s32 b);
 void FUN_002900d0(void);
 void gameJumpRequestClear(void);

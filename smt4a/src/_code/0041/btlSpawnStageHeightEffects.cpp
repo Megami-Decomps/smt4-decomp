@@ -1,11 +1,11 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 struct StageEffectOrigin { u8 unk00[0x18]; f32 height; };
 extern "C" {
-extern void *g_btlUiBlock;
 extern void *g_btlAux;
 extern StageEffectOrigin DAT_00529780[];
-void FUN_004aaa94(void *ui);
+void FUN_004aaa94(BtlUiA *ui);
 s32 btlStageGetModeIndex(u32 stage);
 void FUN_004f5238(void *context, u32 first, u32 second, u32 kind, u32 enabled, u32 mode, u32 flags, u32 active, u32 extra, f32 x, f32 y);
 void btlQueueActionMessage(u32 first, u32 second, u32 id, u32 enabled, u32 flags, u32 mode, u32 extra);

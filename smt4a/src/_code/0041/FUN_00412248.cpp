@@ -3,6 +3,7 @@
 #include "battle/btlCamera.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct BtlIntroTask {
     /* 0x188 */ void *dataEntries;
 } BtlIntroTask;
 
-extern u32 g_btlUiBlock; /* 0x57a9c8 */
 extern u32 g_btlAux; /* 0x573808 */
 extern u32 g_btlActionReflect; /* 0x5712f0 */
 
@@ -31,10 +31,10 @@ extern void FUN_00410628(BtlIntroTask *);
 extern void battleAdvanceEntryStartup(BtlIntroTask *);
 extern void btlPartnerUpdateScript(BtlIntroTask *);
 extern void FUN_00410d44(BtlIntroTask *);
-extern int FUN_004aa768(u32, int);
-extern int btlUiIsIdleB(u32);
-extern int FUN_004ab784(u32);
-extern int FUN_004abb08(u32);
+extern int FUN_004aa768(BtlUiA *ui, int);
+extern int btlUiIsIdleB(BtlUiA *ui);
+extern int FUN_004ab784(BtlUiA *ui);
+extern int FUN_004abb08(BtlUiA *ui);
 extern void btlStageResetAndClearCameraFlag(u32);
 extern void FUN_004f950c(u32, int);
 extern int resourceTestPendingRecordsReady(u32, int);

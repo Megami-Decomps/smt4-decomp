@@ -15,16 +15,16 @@ void screenShowMessage(s32 id)
     s32 value;
 
     if (id == 0) {
-        screen->mode = 0;
+        screen->textVisible = 0;
     } else {
-        screen->helpState = 1;
-        screen->mode = 1;
+        screen->text.useDirectoryText = 1;
+        screen->textVisible = 1;
         value = FUN_0046e458(g_aocSystem, id);
         if (value == 0) {
             value = dataTableValue0f();
         }
         FUN_0028a888(id);
-        asdTextDrawDirectoryEntry(screen->unk678, 2, -1, 0, 3, value, id);
+        asdTextDrawDirectoryEntry(screen->text.directoryText, 2, -1, 0, 3, value, id);
     }
 }
 

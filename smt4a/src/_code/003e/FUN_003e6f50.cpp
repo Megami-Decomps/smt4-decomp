@@ -13,7 +13,6 @@ void FUN_004f7b84(void *aux, const char *name);
 s32 FUN_004f6d34(void *aux);
 void *gameDataBlocksGetSaveData(void);
 void scrScriptProcessStartEntry(void *process, s32 entry);
-s32 scrRunOpcodesStub(void *process);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
 u32 FUN_003e6c14(BtlGameOverA *work);

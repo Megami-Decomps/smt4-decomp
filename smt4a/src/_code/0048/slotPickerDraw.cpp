@@ -12,11 +12,6 @@
 extern "C" {
 
 /* The fade controller inside the picker: its speed is at +0x20. */
-typedef struct SlotFade {
-    u8 unk00[0x20];
-    f32 speed;
-} SlotFade;
-
 /* The slot picker screen (only the fields used here, by their offsets). */
 typedef struct SlotPicker {
     /* 0x000 */ u8 unk000;
@@ -28,7 +23,7 @@ typedef struct SlotPicker {
     /* 0x023 */ u8 unk023[0x8D];
     /* 0x0B0 */ u8 slotText[8][2];      /* two glyph bytes per slot */
     /* 0x0C0 */ u8 unk0c0[0x2EC];
-    /* 0x3AC */ SlotFade fade;
+    /* 0x3AC */ UiSpriteState fade;
 } SlotPicker;
 
 void efctSetSpeed(f32 speed);
@@ -41,7 +36,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
  * slot's cursor (blinking every 30 frames) and the slot's two-glyph label. */
 void slotPickerDraw(SlotPicker *picker)
 {
-    f32 scale = vec2GetSpeed((const UiSpriteState *)&picker->fade);
+    f32 scale = vec2GetSpeed(&picker->fade);
 
     efctSetSpeed(scale);
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);

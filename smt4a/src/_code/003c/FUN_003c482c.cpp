@@ -1,9 +1,9 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern void *g_btlUiBlock;
 s32 scrGetArg(u32 index);
-void FUN_004aba6c(void *block, s16 value);
+void FUN_004aba6c(BtlUiA *block, s16 value);
 }
 
 extern "C" s32 FUN_003c482c(void)

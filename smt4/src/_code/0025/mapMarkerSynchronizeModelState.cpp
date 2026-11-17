@@ -4,40 +4,38 @@
 #include "shard/W6_W6Match2_GeometryResources.h"
 #include "game/GameState.h"
 
-
 extern "C" {
-void nodeSetTranslation(NodeEnableResource *, s32, const f32 *);
-void modelPartSetRotationDegrees(NodeEnableResource *, s32, f32, f32, f32);
+void modelPartSetRotationDegrees(AsdMdlNode *, s32, f32, f32, f32);
 u32 modelGetCurrentMotion(void *model);
-void modelSelectPrimaryMotion(NodeEnableResource *, u32 motionIndex, f32 blend);
-void modelSelectSecondaryMotion(NodeEnableResource *, u32, f32);
+void modelSelectPrimaryMotion(AsdMdlNode *, u32 motionIndex, f32 blend);
+void modelSelectSecondaryMotion(AsdMdlNode *, u32, f32);
 
 /* Keep marker visibility, position, heading and animation synchronized with map state. */
 void mapMarkerSynchronizeModelState(MapIfModelMarker *marker)
 {
     if (marker->active) {
         if (g_gameState.loading) {
-            NodeEnableNode *node = marker->model;
+            AsdMdlObject *node = marker->model;
             if (!(node->flags & 2)) {
                 node->flags |= 2;
-                node->resource->target->enabled = 0;
+                node->node->sceneNode->positionFollowed = 0;
             }
         } else if (marker->flags) {
-            NodeEnableNode *node = marker->model;
+            AsdMdlObject *node = marker->model;
             if (marker->state) {
                 if (node->flags & 2) {
                     node->flags &= ~2u;
-                    node->resource->target->enabled = 1;
+                    node->node->sceneNode->positionFollowed = 1;
                 }
             } else if (!(node->flags & 2)) {
                 node->flags |= 2;
-                node->resource->target->enabled = 0;
+                node->node->sceneNode->positionFollowed = 0;
             }
-            nodeSetTranslation(marker->model->resource, 0, marker->position);
-            modelPartSetRotationDegrees(marker->model->resource, 0, 0.0f, marker->heading, 0.0f);
-            if (modelGetCurrentMotion(marker->model->resource) != marker->motionIndex) {
-                modelSelectPrimaryMotion(marker->model->resource, marker->motionIndex, 0.0f);
-                modelSelectSecondaryMotion(marker->model->resource, marker->motionIndex, 0.0f);
+            nodeSetTranslation(marker->model->node, 0, marker->position);
+            modelPartSetRotationDegrees(marker->model->node, 0, 0.0f, marker->heading, 0.0f);
+            if (modelGetCurrentMotion(marker->model->node) != marker->motionIndex) {
+                modelSelectPrimaryMotion(marker->model->node, marker->motionIndex, 0.0f);
+                modelSelectSecondaryMotion(marker->model->node, marker->motionIndex, 0.0f);
             }
         }
     }

@@ -6,7 +6,7 @@ extern "C" {
 
 void playSceneTimerSubStartReverse(PlayScene *scene)
 {
-    timerStart((UiSpriteState *)scene->timerSub, 3, 1);
+    timerStart(&scene->timerSub, 3, 1);
 }
 
 } /* extern "C" */

@@ -1,18 +1,11 @@
 /* Sets or clears flag `id` in the global flag bit array; alias ids are first mapped to their canonical flag. */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
-typedef struct FlagSet {
-    /* 0x000 */ u8 unk000[0xCCC];
-    /* 0xCCC */ u32 bits[1];
-} FlagSet;
-
-extern FlagSet *gameFlagsGetBlock(void);
-
 void FUN_00377158(s32 id, s32 set)
 {
-    FlagSet *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
 
     if (id == 0x17 || id == 0x18) {
         id = 0xE;
@@ -38,9 +31,9 @@ void FUN_00377158(s32 id, s32 set)
     s32 word = id / 32;
     s32 bit = id % 32;
     if (set != 0) {
-        flags->bits[word] |= 1 << bit;
+        flags->markBits[word] |= 1 << bit;
     } else {
-        flags->bits[word] &= ~(1 << bit);
+        flags->markBits[word] &= ~(1 << bit);
     }
 }
 

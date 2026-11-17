@@ -2,25 +2,17 @@
 #include "shard/Resource.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
+#include "gfx/VectorScratch.h"
 
-struct Vec4 {
-    f32 x, y, z, w;
-};
 
 /* Scratch positions shared by the effect update (accessed at 0x100 and 0x110). */
-extern struct EffectScratch {
-    u8 unk00[0x100];
-    Vec4 position;    // 0x100
-    Vec4 offset;      // 0x110
-} g_vectorScratch;
-
 
 /* An effect node (accessed fields). */
 struct EffectNode {
-    Vec4 offset;          // 0x00
+    Vector4 offset;          // 0x00
     u8 unk10[0x30];
-    Vec4 origin;          // 0x40
-    Vec4 orientation;     // 0x50
+    Vector4 origin;          // 0x40
+    Vector4 orientation;     // 0x50
     f32 scale;                  // 0x60
     u8 unk64[4];
     u32 flags;                  // 0x68
@@ -40,15 +32,15 @@ struct EffectNode {
 
 extern "C" {
 
-s32 FUN_001ad5ec(EffectNode *node, const Vec4 *position, f32 *matrix);
+s32 FUN_001ad5ec(EffectNode *node, const Vector4 *position, f32 *matrix);
 void FUN_001acb48(EffectNode *node, const f32 *matrix);
 
 /* Places the effect node and updates every child that has started, with the title scene's render state
  * duplicated for the duration; the node's "placed" flag is cleared afterwards. */
 void effectNodeUpdatePlacedChildren(EffectNode *node)
 {
-    Vec4 position;
-    Vec4 childOffset;
+    Vector4 position;
+    Vector4 childOffset;
     f32 matrix[9];
     f32 scale;
     s32 lastFrame;
@@ -58,16 +50,16 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
     if (node->frame <= 0) {
         return;
     }
-    g_vectorScratch.position = node->origin;
-    g_vectorScratch.offset = node->offset;
-    g_vectorScratch.position.x += g_vectorScratch.offset.x;
-    g_vectorScratch.position.y += g_vectorScratch.offset.y;
-    g_vectorScratch.position.z += g_vectorScratch.offset.z;
-    g_vectorScratch.position.w += g_vectorScratch.offset.w;
-    position = g_vectorScratch.position;
+    g_vectorScratch.first.vector = node->origin;
+    g_vectorScratch.second.vector = node->offset;
+    g_vectorScratch.first.vector.x += g_vectorScratch.second.vector.x;
+    g_vectorScratch.first.vector.y += g_vectorScratch.second.vector.y;
+    g_vectorScratch.first.vector.z += g_vectorScratch.second.vector.z;
+    g_vectorScratch.first.vector.w += g_vectorScratch.second.vector.w;
+    position = g_vectorScratch.first.vector;
     flags = node->flags;
     if ((flags & 0x60) != 0 && (flags & EFFECT_NODE_PLACED) == 0) {
-        Vec4 orientation = node->orientation;
+        Vector4 orientation = node->orientation;
 
         FUN_001ad5ec(node, &position, matrix);
         FUN_001acb48(node, matrix);
@@ -85,25 +77,26 @@ void effectNodeUpdatePlacedChildren(EffectNode *node)
             if ((child->flags & 0x18) != 0) {
                 ResourceHandler *handler;
 
-                g_vectorScratch.position = position;
+                g_vectorScratch.first.vector = position;
                 if ((child->flags & 4) != 0) {
-                    g_vectorScratch.position.y = 5.0f;
+                    g_vectorScratch.first.vector.y = 5.0f;
                 }
-                g_vectorScratch.offset = childOffset;
+                g_vectorScratch.second.vector = childOffset;
                 if ((child->flags & 0x80) != 0) {
-                    g_vectorScratch.offset.x *= scale;
-                    g_vectorScratch.offset.y *= scale;
-                    g_vectorScratch.offset.z *= scale;
-                    g_vectorScratch.offset.w *= scale;
+                    g_vectorScratch.second.vector.x *= scale;
+                    g_vectorScratch.second.vector.y *= scale;
+                    g_vectorScratch.second.vector.z *= scale;
+                    g_vectorScratch.second.vector.w *= scale;
                 }
-                g_vectorScratch.position.x += g_vectorScratch.offset.x;
-                g_vectorScratch.position.y += g_vectorScratch.offset.y;
-                g_vectorScratch.position.z += g_vectorScratch.offset.z;
-                g_vectorScratch.position.w += g_vectorScratch.offset.w;
-                childOffset = g_vectorScratch.position;
+                g_vectorScratch.first.vector.x += g_vectorScratch.second.vector.x;
+                g_vectorScratch.first.vector.y += g_vectorScratch.second.vector.y;
+                g_vectorScratch.first.vector.z += g_vectorScratch.second.vector.z;
+                g_vectorScratch.first.vector.w += g_vectorScratch.second.vector.w;
+                childOffset = g_vectorScratch.first.vector;
                 handler = &g_handlerTable[child->resource->type];
                 if (handler->setPosition != NULL) {
-                    handler->setPosition(child->resource->data, &childOffset);
+                    // The handler table takes its own (incomplete) Vec4: the value is a Vector4.
+                    handler->setPosition(child->resource->data, reinterpret_cast<const Vec4 *>(&childOffset));
                 }
             }
             if ((child->flags & 0x60) != 0) {

@@ -1,10 +1,10 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "map/PickObjectResources.h"
 #include "game/GameStateA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "ui/QuestSelectionState.h"
 
 extern "C" {
-QuestSelectionFlags *gameFlagsGetBlock();
 u8 FUN_002a746c();
 s32 FUN_002f153c();
 u8 uiQuestGetPanelMode();
@@ -55,8 +55,8 @@ void questCenterResolveSelection(PickObjectResources *owner)
     work->panelMode = uiQuestGetPanelMode();
     uiQuestGetActive();
     if (work->questState) {
-        QuestSelectionFlags *flags = gameFlagsGetBlock();
-        flags->selection = 0;
+        MapSaveBlockA *flags = gameFlagsGetBlock();
+        flags->mapId = 0;
         clearFlags310To31F();
         asdDebugHookVoid();
         if (!action) {

@@ -3,10 +3,7 @@
 #include "ui/UiSpriteApi.h"
 extern "C" {
 extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 animation, s32 frame);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 frame, s32 flags);
 void FUN_00420a2c(SaveLoadTransitionPrefixA *work);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 static void transitionValuesSet(SaveLoadTransitionValues *transition, u32 value0, u32 value1, f32 progress)
 {
     transition->value0 = value0;

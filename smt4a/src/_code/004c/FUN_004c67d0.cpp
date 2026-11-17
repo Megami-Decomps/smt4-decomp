@@ -2,14 +2,9 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 extern "C" {
-extern u64 g_btlSkillResponseMasks;       /* a unit is present */
-extern u64 DAT_00571420;       /* a unit is out of the fight */
-extern u64 DAT_00571498;       /* the battle always lets the party escape */
-extern u64 DAT_005714c8;       /* the second state always lets the party escape */
-extern u64 DAT_005714d0;       /* the second state never lets the party escape */
-
 s32 gameProgressIsAdvanced(void);
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *battle, s32 flag);
 s32 __aeabi_idivmod(s32 a, s32 b);
@@ -17,7 +12,7 @@ s32 __aeabi_idivmod(s32 a, s32 b);
 /* Whether a unit slot is an active fighter. */
 static __inline bool isFighting(const BtlCombatantEntryA *unit)
 {
-    return (unit->flags & g_btlSkillResponseMasks) != 0 && (unit->flags & DAT_00571420) == 0;
+    return (unit->flags & g_btlSkillResponseMasks.present) != 0 && (unit->flags & g_btlSkillResponseMasks.outOfFight) == 0;
 }
 
 /* Returns the chance (0-100) that the party escapes: from the level and agility averages of the
@@ -27,13 +22,13 @@ s32 FUN_004c67d0(void)
     BtlMainStateA *battle = btlGetMainState();
     if (battle->encounter.statusFlags & 0x40000)
         return 0;
-    if (battle->stateFlags64.bits & DAT_00571498)
+    if (battle->stateFlags64.bits & g_btlSkillResponseMasks.alwaysEscape)
         return 100;
     if (gameProgressIsAdvanced() != 0)
         return 0;
-    if (battle->markerMasks.bits & DAT_005714c8)
+    if (battle->markerMasks.bits & g_btlSkillResponseMasks.markerEscape)
         return 100;
-    if (battle->markerMasks.bits & DAT_005714d0)
+    if (battle->markerMasks.bits & g_btlSkillResponseMasks.markerGuarantee)
         return 0;
     u8 escapes = battle->escapes.count;
     BtlCombatantEntryA *units = battle->entries;

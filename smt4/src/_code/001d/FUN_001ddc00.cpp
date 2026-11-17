@@ -1,24 +1,14 @@
 #include "common.h"
-
-struct GameWork {
-    /* 0x000 */ u8 unk000[0x1E64];
-    /* 0x1E64 */ s8 status;
-};
-struct GameGlobals {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ GameWork *data;
-};
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
 
-extern GameGlobals g_gameGlobals;
-
-/* Returns the optional game-work status byte. */
+/* Returns the optional game data's status byte (0x1E64), or 0 without game data. */
 s32 FUN_001ddc00(void)
 {
     s32 result = 0;
     if (g_gameGlobals.data != NULL) {
-        result = g_gameGlobals.data->status;
+        result = g_gameGlobals.data->unk1E64;
     }
     return result;
 }

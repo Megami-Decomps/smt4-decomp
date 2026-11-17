@@ -9,13 +9,13 @@ void FUN_0021dfbc()
     state->unk17 = 0;
     s32 index = 0;
     for (u32 left = 128; left != 0; --left) {
-        if (state->records[index].active && state->records[index].display.category != 0x1d &&
-            state->records[index].display.category != 0x26 && state->records[index].display.category != 0x1e &&
-            state->records[index].display.category != 0x1f && state->records[index].display.category != 0x25) {
+        if (state->records[index].active && state->records[index].category != 0x1d &&
+            state->records[index].category != 0x26 && state->records[index].category != 0x1e &&
+            state->records[index].category != 0x1f && state->records[index].category != 0x25) {
             if (state->records[index].state == 8 || state->records[index].state == 10 ||
                 state->records[index].state == 12 || state->records[index].state == 14 || state->records[index].state == 16) {
                 state->records[index].state = 6;
-                state->records[index].transition.restart = 1;
+                state->records[index].restart = 1;
             }
         }
         index++;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fd9f4` (_code @ 0x1fd9f4, 0x48c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/LmapMainGlobals.h"
 #include "game/GameState.h"
 
 extern "C" {
@@ -27,7 +28,6 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int g_lmapMainState; /* 0x447060 */
 extern int g_titleScene; /* 0x44ea00 */
 
 
@@ -64,14 +64,14 @@ unsigned int FUN_001fd9f4(void)
   float temp_v6;
   unsigned int temp_v7;
   
-  temp_v1 = g_lmapMainState;
-  if (*(int *)(g_lmapMainState + 0xc) < 0xb) {
+  temp_v1 = ((int)g_lmapMainState);
+  if (*(int *)(((int)g_lmapMainState) + 0xc) < 0xb) {
     return 0;
   }
-  if (*(int *)(g_lmapMainState + 0xc) >= 0x60) {
+  if (*(int *)(((int)g_lmapMainState) + 0xc) >= 0x60) {
     return 0;
   }
-  FUN_00396dec(g_lmapMainState + 0xec);
+  FUN_00396dec(((int)g_lmapMainState) + 0xec);
   temp_v3 = g_titleScene;
   if (g_gameState.unk34C != 0) {
     temp_v0 = renderCtxPackPassFlags(5,1);
@@ -120,11 +120,11 @@ unsigned int FUN_001fd9f4(void)
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
   }
-  temp_v3 = g_lmapMainState;
+  temp_v3 = ((int)g_lmapMainState);
   if (*(char *)(temp_v1 + 0xb) != '\0') {
-    temp_v0 = *(int *)(g_lmapMainState + 0x38);
+    temp_v0 = *(int *)(((int)g_lmapMainState) + 0x38);
     temp_v1 = temp_v0 + 1;
-    *(int *)(g_lmapMainState + 0x38) = temp_v1;
+    *(int *)(((int)g_lmapMainState) + 0x38) = temp_v1;
     if (temp_v1 >= 0x1f) {
       temp_v1 = temp_v0 - 0x1d;
       *(int *)(temp_v3 + 0x38) = temp_v1;

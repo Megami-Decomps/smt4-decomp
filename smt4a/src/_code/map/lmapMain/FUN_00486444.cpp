@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00486444` (_code @ 0x486444, 0x8c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "camp/RenderCtxA.h"
 
@@ -53,7 +54,6 @@ extern float DAT_005f1c88; /* 0x5f1c88 */
 extern float DAT_005f1c8c; /* 0x5f1c8c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
@@ -112,7 +112,7 @@ void FUN_00486444(int param_1)
   float temp_v16;
   float temp_v17;
   
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   temp_v3 = param_1 + 0x4cc;
   temp_v1 = 0;
   pfVar5 = (float *)lmapSceneGetObj();

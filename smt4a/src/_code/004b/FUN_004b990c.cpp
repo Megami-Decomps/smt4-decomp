@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b990c` (_code @ 0x4b990c, 0x6c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "event/2dEvent/EventEffect.h"
@@ -73,7 +74,6 @@ extern int gameDataBlocksGetSaveData(void);
 extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 extern int campIsState85(void);
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: asdMemFree. */
@@ -227,7 +227,7 @@ void FUN_004b990c(int param_1)
       else if (pcVar4[3] != '\0') {
         g_gameState.menuRequestSecondary = 1;
       }
-      temp_v6 = gameFlagsGetBlock();
+      temp_v6 = (int)gameFlagsGetBlock();
       *(unsigned short *)(temp_v6 + 0x22) = 0;
       clearFlags310To31F();
       sub68OwnerCall4();
@@ -238,7 +238,7 @@ void FUN_004b990c(int param_1)
         *(unsigned char *)(param_1 + 0x1168) = 1;
       }
       else {
-        temp_v6 = gameFlagsGetBlock();
+        temp_v6 = (int)gameFlagsGetBlock();
         *(unsigned short *)(temp_v6 + 0x1e) = *(unsigned short *)(pcVar4 + 6);
       }
     }

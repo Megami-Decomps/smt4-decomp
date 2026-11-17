@@ -5,8 +5,7 @@
 /* DataTableAccess (declarations migrated from callers). */
 struct Record;
 struct TableEntry;
-struct Entry00246944;
-struct Table0BRecord;
+struct GauntletAppRecord;
 struct DataTable54Record;
 extern "C" {
 
@@ -18,9 +17,7 @@ TableEntry * dataTable29Sub0GetEntryWithAoc(u32 index);
 
 TableEntry * dataTable29GetEntryWithAoc(u32 index);
 
-Entry00246944 * dataTableFindRecordById(s32 id);
-
-Table0BRecord* dataTable0BFindById(u16 id);
+GauntletAppRecord *dataTable0BFindById(u16 id);
 
 DataTable54Record * dataTable54FindById(u32 id);
 

@@ -1,22 +1,12 @@
 #include "common.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
 
-typedef struct State {
-    u8 unk0000[0x2014];
-    s8 mode; /* 0x2014 */
-} State;
-
-typedef struct Globals {
-    u32 unk00;
-    State *state; /* 0x04 */
-} Globals;
-
-extern Globals g_gameGlobals;
-
+/* Returns the game session's mode byte (0x2014), sign-extended. */
 s32 gameGetMode(void)
 {
-    return g_gameGlobals.state->mode;
+    return g_gameGlobals.instance->mode;
 }
 
-} /* extern "C" */
+}

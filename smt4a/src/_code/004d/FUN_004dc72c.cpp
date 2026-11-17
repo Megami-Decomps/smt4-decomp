@@ -3,6 +3,7 @@
 #include "gamedata/SkillDataRecord.h"
 #include "code/Code004a_Smt4a.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "battle/BtlUiGlobal.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -60,15 +61,14 @@ struct BtlActingTask {
 
 extern "C" {
 extern BtlActionTable g_btlAction;
-extern u32 g_btlUiBlock;
 extern u32 g_btlActionReflect;
 s32 FUN_003e7adc(BtlActingState *battle);
 s32 chainCountIdUnflagged(u32 chain, u32 flag);
-void FUN_004a96b8(u32 ui);
-s32 btlUiIsMenuReady(u32 ui);
-void FUN_004aa7c8(u32 ui);
-s32 btlUiPollWidgetResult(u32 ui);
-void FUN_004a9c40(u32 ui, u16 *command, u16 *argument);
+void FUN_004a96b8(BtlUiA *ui);
+s32 btlUiIsMenuReady(BtlUiA *ui);
+void FUN_004aa7c8(BtlUiA *ui);
+s32 btlUiPollWidgetResult(BtlUiA *ui);
+void FUN_004a9c40(BtlUiA *ui, u16 *command, u16 *argument);
 s32 FUN_004ffcd8(void);
 void FUN_004eb838(BtlActingTask *task, BtlMenuState *menu);
 

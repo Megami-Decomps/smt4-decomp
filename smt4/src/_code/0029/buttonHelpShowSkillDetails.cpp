@@ -18,11 +18,11 @@ void buttonHelpShowSkillDetails(s32 skill)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
     if (skill == 0) {
-        work->unk4CB = 0;
+        work->textVisible = 0;
         return;
     }
-    g_buttonHelp.work->unk55C = 1;
-    work->unk4CB = 1;
+    g_buttonHelp.work->text.useDirectoryText = 1;
+    work->textVisible = 1;
     RelativeDirectory *directory = FUN_002b47ec();
     {
         char label[96];
@@ -42,6 +42,6 @@ void buttonHelpShowSkillDetails(s32 skill)
             textEncodeFontSlot(37, (const u8 *)label);
         }
     }
-    asdTextDrawDirectoryEntry((AsdText *)work->unk558, 3, -1, 0, 3, directory, skill);
+    asdTextDrawDirectoryEntry((AsdText *)work->text.directoryText, 3, -1, 0, 3, directory, skill);
 }
 }

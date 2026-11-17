@@ -5,6 +5,7 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 /* The battle state's retreat flag word, beyond the shared prefix. */
 struct CommandRetreatView {
@@ -13,11 +14,10 @@ struct CommandRetreatView {
 };
 
 extern "C" {
-extern void *g_btlUiBlock;
 
 void FUN_002569ac(BtlMainState **turn, s32 bank);
 void btlEntryValuesCopy(BtlMainState **turn, CommandState *work);
-void FUN_00227b14(void *ui, u16 member, s32 mode);
+void FUN_00227b14(BtlUi *ui, u16 member, s32 mode);
 void FUN_0022a5d8(s32 effect, BtlEntry *entry, s32 mode);
 void FUN_0026beb4(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
 void frameRangeExtend(BtlMainState **turn, CommandState *work, s32 id, s32 a, s32 b, s32 c);

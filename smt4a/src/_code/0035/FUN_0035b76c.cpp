@@ -20,20 +20,20 @@ void FUN_0035b76c(void)
     renderCtxPushD(g_renderCtx, 0);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
     renderCtxPushB(g_renderCtx, g_renderCtx->stackB.entries[g_renderCtx->stackB.count]);
-    if (g_effectEditor.dispatch.unk00 == 0) {
+    if (g_effectEditor.toggle == 0) {
         effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(asdCameraGetSavedRenderPairs()));
     } else {
         uiSpriteRefreshMode(g_renderCtx);
     }
     FUN_00300100(2, 1);
-    if (g_effectEditor.selection.resource != NULL) {
-        requestDispatch(g_effectEditor.selection.resource);
+    if (g_effectEditor.resource != NULL) {
+        requestDispatch(g_effectEditor.resource);
     }
-    if (g_effectEditor.dispatch.node != NULL) {
-        effectNodeUpdatePlacedChildren(g_effectEditor.dispatch.node);
+    if (g_effectEditor.node != NULL) {
+        effectNodeUpdatePlacedChildren(g_effectEditor.node);
     }
-    if (g_effectEditor.dispatch.cachedEvent != 0) {
-        requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));
+    if (g_effectEditor.cachedEvent != 0) {
+        requestDispatch(reinterpret_cast<void *>(g_effectEditor.cachedEvent));
     }
     renderCtxResetColorScale(g_renderCtx);
     skinObjectUpdateMatrices(g_renderCtx);

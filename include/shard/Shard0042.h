@@ -59,17 +59,5 @@ typedef struct CallbackState {
 } CallbackState;
 
 
-/* A callback-owning polymorphic object exposed through jobGetWork(). */
-class JobPendingOwner {
-public:
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void reset();
-};
-
-typedef struct JobPendingWork {
-    /* 0x00 */ JobPendingOwner *owner;
-} JobPendingWork;
 
 #endif

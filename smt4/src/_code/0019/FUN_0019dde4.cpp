@@ -7,8 +7,6 @@
 
 extern "C" {
 extern ModelRequestWork *g_mapModelWork;
-NodeEnableNode *asdMdlManagerCreateLoaded(const char *path, s32 kind);
-void lightOwnerRegister(NodeEnableNode *model, s32 enabled);
 
 void FUN_0019dde4(void)
 {
@@ -21,7 +19,7 @@ void FUN_0019dde4(void)
         u32 counter;
         u8 enabled;
         u8 unk19[3];
-        NodeEnableNode *model;
+        AsdMdlObject *model;
     };
     struct ModelPlacementView {
         s32 state;
@@ -56,9 +54,9 @@ void FUN_0019dde4(void)
         Placement *placement = &work->placement;
         placement->model = asdMdlManagerCreateLoaded("map/unit/u006.bam", 7);
         lightOwnerRegister(placement->model, 1);
-        NodeEnableNode *model = placement->model;
+        AsdMdlObject *model = placement->model;
         model->flags |= 2;
-        model->resource->target->enabled = 0;
+        model->node->sceneNode->positionFollowed = 0;
         ((ModelPlacementView *)g_mapModelWork)->state = 1;
     }
 }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b7f78` (_code @ 0x1b7f78, 0x8098 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
@@ -677,7 +678,6 @@ extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int gameDataBlocksGetSaveData(void);
 extern int gameFlagIsSet(unsigned int);
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -803,7 +803,7 @@ unsigned int FUN_001b7f78(void)
   
   puVar14 = g_mapMain;
   puVar19 = &uStack_1c8;
-  temp_v9 = gameGetMapBlock();
+  temp_v9 = (int)gameGetMapBlock();
   temp_v2 = DAT_0049f9ac;
   puVar23 = g_mapMain;
   temp_v10 = puVar14[9];

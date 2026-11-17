@@ -1,24 +1,10 @@
 /* NON_MATCHING: mark bit is captured before the map lookup and candidate counter lifetime matches; bit-address scratch registers and kind-test folding differ. */
+#include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
+#include "gamedata/MapSystemTable.h"
+#include "gamedata/MsSearchTable.h"
 #include "code/Code0025.h"
 #include "game/GameState.h"
-
-/* A record of data table 0x2E (section 2): a timed area event. */
-struct AreaEventRecord {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s16 areaId;          /* -1 ends the table */
-    /* 0x22 */ u8 unk22[4];
-    /* 0x26 */ s16 cooldown;        /* in 0x708-frame units */
-    /* 0x28 */ s16 timerSlot;
-};
-
-/* A record of data table 0x30 (0x48 entries): marks a bit of the map's first flag set for an area. */
-struct AreaMarkRecord {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s32 active;          /* -1 = unused */
-    /* 0x24 */ s16 bit;
-    /* 0x26 */ s8 areaId;
-};
 
 /* A record of data table 0x31: a candidate slot of an area, grouped by `group`. */
 struct AreaSlotRecord {
@@ -28,42 +14,26 @@ struct AreaSlotRecord {
     /* 0x0B */ s8 kind;             /* 0 and 6 can be picked */
 };
 
-/* The map block as this function sees it: two flag bit sets and the cooldown timers. */
-struct EventMapBlock {
-    /* 0x000 */ u8 unk000[0x794];
-    /* 0x794 */ u32 slotBits[1];
-    /* 0x798 */ u8 unk798[0x4FC];
-    /* 0xC94 */ u8 unkC94[4];
-    /* 0xC98 */ u32 markBits[1];
-    /* 0xC9C */ u8 unkC9C[0x1C4];
-    /* 0xE60 */ s32 timers[48];
-};
-typedef char EventMapBlockLayout[offsetof(EventMapBlock, markBits) == 0xC98 && offsetof(EventMapBlock, timers) == 0xE60 &&
-    offsetof(EventMapBlock, slotBits) == 0x794 ? 1 : -1];
-
 extern "C" {
 
-
-EventMapBlock *gameGetMapBlock(void);
 s32 dataTable2eSub2GetCount(void);
-AreaEventRecord *dataTable2eSub2GetRecord(s32 index);
 s32 dataTableGetRecordFortyEight(void);
 s32 dataTableGetRecordFortyNine(void);
 AreaSlotRecord *FUN_0027ee24(s32 index);
 s32 randNextInRange(u32 maximum);
 void FUN_001fc314(s32 areaId);
 
-static __inline void markBitSet(EventMapBlock *block, s32 index)
+static __inline void markBitSet(MapSaveBlock *block, s32 index)
 {
     block->markBits[index / 32] |= 1 << (index % 32);
 }
 
-static __inline void slotBitSet(EventMapBlock *block, s32 index)
+static __inline void slotBitSet(MapSaveBlock *block, s32 index)
 {
     block->slotBits[index / 32] |= 1 << (index % 32);
 }
 
-static __inline void slotBitClear(EventMapBlock *block, s32 index)
+static __inline void slotBitClear(MapSaveBlock *block, s32 index)
 {
     block->slotBits[index / 32] &= ~(1 << (index % 32));
 }
@@ -72,14 +42,14 @@ static __inline void slotBitClear(EventMapBlock *block, s32 index)
  * picks one random candidate slot per group (0..15). */
 void FUN_002f3694(void)
 {
-    EventMapBlock *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
     s32 i;
 
     i = 0;
     if (dataTable2eSub2GetCount() > 0) {
         do {
-            AreaEventRecord *event = dataTable2eSub2GetRecord(i);
-            s32 areaId = event->areaId;
+            MapSystemMapRecord *event = dataTable2eSub2GetRecord(i);
+            s32 areaId = event->mapId;
 
             if (areaId == -1) {
                 return;
@@ -90,15 +60,15 @@ void FUN_002f3694(void)
 
                 block->timers[event->timerSlot] = event->cooldown * 0x708;
                 for (j = 0; j < dataTableGetRecordFortyEight(); j++) {
-                    AreaMarkRecord *mark = reinterpret_cast<AreaMarkRecord *>(FUN_0025b670(j));
+                    MsSearchRecord *mark = FUN_0025b670(j);
 
-                    if (mark->active != -1 && mark->areaId == areaId) {
-                        s32 bit = mark->bit;
+                    if (mark->id != -1 && mark->areaId == areaId) {
+                        s32 bit = mark->markBit;
                         markBitSet(gameGetMapBlock(), bit);
                     }
                 }
                 for (group = 0; group < 16; group++) {
-                    EventMapBlock *current = gameGetMapBlock();
+                    MapSaveBlock *current = gameGetMapBlock();
                     s32 candidates = 0;
 
                     for (j = 0; j < dataTableGetRecordFortyNine(); j++) {

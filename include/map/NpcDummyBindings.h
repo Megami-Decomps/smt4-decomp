@@ -1,6 +1,6 @@
 #ifndef MAP_NPCDUMMYBINDINGS_H
 #define MAP_NPCDUMMYBINDINGS_H
-#include "shard/W5_W5Match7_ControllerPose.h"
+#include "classes/Obj557b18.h"
 #include <stddef.h>
 
 struct NpcDummyModel {
@@ -17,7 +17,7 @@ struct NpcDummyModelHolder {
 };
 struct NpcDummyControllerLink {
     u32 unk00;
-    ControllerPose *controller;
+    Obj557b18 *controller;
 };
 struct NpcDummyBindings {
     /* 0x000 */ u8 unk000[0x1A];

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276264` (_code @ 0x276264, 0x6f00 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
@@ -397,7 +398,6 @@ extern int gameDataBlocksGetSaveData(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int campIsState85(void);
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: jobStop. */
 extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_001654f0. */
@@ -700,7 +700,7 @@ unsigned int FUN_00276264(void)
   
   puVar2 = g_lmapMainState;
   puVar17 = &uStack_138;
-  temp_v5 = gameFlagsGetBlock();
+  temp_v5 = (int)gameFlagsGetBlock();
   temp_v8 = DAT_005f16a4;
   puVar19 = g_lmapMainState;
   temp_v6 = puVar2[3];

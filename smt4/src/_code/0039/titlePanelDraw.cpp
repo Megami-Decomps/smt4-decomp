@@ -4,11 +4,6 @@
 #include "ui/UiSpriteApi.h"
 
 // The panel's effect state (observed fields).
-struct TitlePanelEffect {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ f32 speed;
-};
-
 // A title-scene panel (observed fields).
 struct TitlePanel {
     /* 0x000 */ u8 unk000[0x20];
@@ -21,7 +16,7 @@ struct TitlePanel {
     /* 0x0A8 */ u8 unk0a8[4];
     /* 0x0AC */ s32 frameX;
     /* 0x0B0 */ u8 unk0b0[0x6e4];
-    /* 0x794 */ TitlePanelEffect effect;
+    /* 0x794 */ UiSpriteState effect;
 };
 
 extern "C" {
@@ -43,7 +38,7 @@ void titlePanelDraw(TitlePanel *panel)
     gxResetColorQuadToWhite();
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     renderCtxSelectTexture(g_titleScene, 0);
-    f32 speed = vec2GetSpeed((const UiSpriteState *)&panel->effect);
+    f32 speed = vec2GetSpeed(&panel->effect);
     efctSetSpeed(speed);
     texDrawCompositeSprite(2, 0x2e, 0, panel->frameX, 0, 0xb);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));

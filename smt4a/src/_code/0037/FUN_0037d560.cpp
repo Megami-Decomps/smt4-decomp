@@ -1,15 +1,15 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/Shard0037.h"
 
 extern "C" {
 
-extern Flags0C0C *gameFlagsGetBlock(void);
 extern s32 FUN_003857c8(s32 value);
 extern void scrSetResult(s32 value);
 
 /* Script command: result is FUN_003857c8 of the game block's float at +0x15C4. */
 u32 FUN_0037d560(void)
 {
-    Flags0C0C *obj = gameFlagsGetBlock();
+    MapSaveBlockA *obj = gameFlagsGetBlock();
 
     scrSetResult(FUN_003857c8((s32)obj->unk15C4));
     return 1;

@@ -1,7 +1,7 @@
 #include "map/mapDepart.h"
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
@@ -13,20 +13,20 @@ f32 FUN_0016242c(f32 from, f32 to, f32 duration, f32 time);
 void FUN_00274a88(void)
 {
     MapIfStateA *state = g_mapIf.state;
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
 
     switch (state->fadeMode) {
     case 0:
         state->unkCD20 = -40.0f;
         state->unkCD24 = 195.0f;
-        if (g_gameState.inputBlocked == 0 && flags->mapFade.active != 0) {
+        if (g_gameState.inputBlocked == 0 && flags->fadeActive != 0) {
             state->fadeMode = 1;
             state->fadeStep = 0;
             state->fadeTimer = 0;
         }
         break;
     case 1:
-        state->fadeProgress = 1.0f - flags->mapFade.elapsed / flags->mapFade.duration;
+        state->fadeProgress = 1.0f - flags->fadeElapsed / flags->fadeDuration;
         state->unkCD20 = FUN_001f3f34(-40.0f, 10.0f, 6.0f, (f32)state->fadeStep);
         if (++state->fadeStep > 6) {
             state->fadeMode = 2;
@@ -35,8 +35,8 @@ void FUN_00274a88(void)
         }
         break;
     case 2:
-        state->fadeProgress = 1.0f - flags->mapFade.elapsed / flags->mapFade.duration;
-        if (flags->mapFade.active == 0) {
+        state->fadeProgress = 1.0f - flags->fadeElapsed / flags->fadeDuration;
+        if (flags->fadeActive == 0) {
             state->fadeMode = 3;
             state->fadeStep = 0;
         }
@@ -60,7 +60,7 @@ void FUN_00274a88(void)
         }
         break;
     case 5:
-        state->fadeProgress = 1.0f - flags->mapFade.elapsed / flags->mapFade.duration;
+        state->fadeProgress = 1.0f - flags->fadeElapsed / flags->fadeDuration;
         if (g_gameState.inputBlocked == 0) {
             state->fadeMode = 1;
             state->fadeStep = 0;

@@ -41,12 +41,6 @@ struct EffectColorOverride {
     /* 0x6C */ u8 enabled;
 };
 
-struct EffectColorProductState {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ EffectColor color;
-    /* 0x110 */ EffectColor factor;
-};
-
 struct EffectColorQuadState {
     /* 0x00 */ u8 unk00[0x2c];
     /* 0x2C */ EffectColor colors[4];

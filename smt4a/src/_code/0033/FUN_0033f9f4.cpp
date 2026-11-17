@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033f9f4` (_code @ 0x33f9f4, 0x460 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
+#include "map/LmapMainGlobals.h"
 #include "game/GameStateA.h"
 
 extern "C" {
@@ -14,10 +16,8 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int g_lmapMainState; /* 0x580238 */
 extern int g_lmapView; /* 0x5806a4 */
 
-extern int gameFlagsGetBlock(void);
 extern int slotIsActive(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: mathAngleDeltaDegrees. */
@@ -47,7 +47,7 @@ void FUN_0033f9f4(void)
   unsigned int temp_v13;
   unsigned int temp_v14;
   
-  temp_v3 = g_lmapMainState;
+  temp_v3 = ((int)g_lmapMainState);
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v2 = 0;
@@ -55,7 +55,7 @@ void FUN_0033f9f4(void)
   temp_v9 = 0;
   temp_v12 = 3.0f;
   temp_v14 = 0x43340000;
-  temp_v4 = gameFlagsGetBlock();
+  temp_v4 = (int)gameFlagsGetBlock();
   temp_v5 = g_lmapView;
   temp_v13 = 0x3f800000;
   temp_v11 = 0.0f;

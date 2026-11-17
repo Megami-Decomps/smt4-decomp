@@ -1,51 +1,38 @@
-#include "common.h"
-#include "shard/SaveWork.h"
+#include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
 
 extern "C" {
-
-typedef struct MapBlock {
-    /* 0x000 */ u8 unk000[0xBD8];
-    /* 0xBD8 */ u8 cooldownA[64];    /* 0xFF means no expiry */
-    /* 0xC18 */ u8 cooldownB[128];
-    /* 0xC98 */ u8 unkC98[0xC4];
-    /* 0xD5C */ s16 cooldownC[16];
-    /* 0xD7C */ u8 unkD7C[0xE4];
-    /* 0xE60 */ s32 cooldownD[48];
-} MapBlock;
-
-
 
 extern int FUN_0010b580(void);
 
 /* Per-frame tick of the map block's countdowns; every 0x709 frames the slower tables count down as well. */
 void FUN_00105394(void)
 {
-    MapBlock *block = reinterpret_cast<MapBlock *>(gameGetMapBlock());
+    MapSaveBlock *block = gameGetMapBlock();
     int i;
 
     g_gameState.map.tick = g_gameState.map.tick + 1;
     if (g_gameState.map.tick > 0x708) {
         g_gameState.map.tick = 0;
         for (i = 0; i < 64; i++) {
-            if (block->cooldownA[i] != 0 && block->cooldownA[i] != 0xFF) {
-                block->cooldownA[i]--;
+            if (block->timedFlags[i] != 0 && block->timedFlags[i] != 0xFF) {
+                block->timedFlags[i]--;
             }
         }
         for (i = 0; i < 128; i++) {
-            if (block->cooldownB[i] != 0) {
-                block->cooldownB[i]--;
+            if (block->timedCounters[i] != 0) {
+                block->timedCounters[i]--;
             }
         }
         for (i = 0; i < 16; i++) {
-            if (block->cooldownC[i] > 0) {
-                block->cooldownC[i]--;
+            if (block->timedValues[i] > 0) {
+                block->timedValues[i]--;
             }
         }
     }
     for (i = 0; i < 48; i++) {
-        if (block->cooldownD[i] > 0) {
-            block->cooldownD[i]--;
+        if (block->timers[i] > 0) {
+            block->timers[i]--;
         }
     }
     FUN_0010b580();

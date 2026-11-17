@@ -1,26 +1,14 @@
 /* NON_MATCHING: identical instruction sequence to retail except for register numbering (retail keeps the result in r6, the reward record in r7 and the loop counter in r1; the build uses r8/r6/r2 and reorders the parameter moves). */
-#include "gamedata/DataTable.h"
+#include "gamedata/SubQuestLootTable.h"
 #include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "addon/AocSystemA.h"
 #include "gamedata/GamePlayerData.h"
 
-// One roll slot of a drop table entry: the item and its weight.
-struct DropSlot {
-    u16 item;
-    u16 weight;
-};
-
-// A drop table entry (0x40 bytes); only the roll slots are known.
-struct DropEntry {
-    u8 unk00[0x20];
-    DropSlot slots[8];  // 0x20
-};
-
 // An entry that comes from the add-on content: its id followed by the body.
 struct AocDropEntry {
     u32 id;
-    DropEntry body;  // 0x04
+    SubQuestLootRecordA body;  // 0x04
 };
 
 // What a reward roll produced.
@@ -39,18 +27,18 @@ u32 gameGetUnlockedCountLimit(void);
 u32 levelGetExpRequirement(u32 level);
 
 // The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
-static __inline DropEntry *findDropEntry(u16 id)
+static __inline SubQuestLootRecordA *findDropEntry(u16 id)
 {
     AocDropEntry *aoc = (AocDropEntry *)g_aocSystem->entries;
     if (aoc != NULL) {
         for (u32 i = 0; i < g_aocSystem->entryCount; i++, aoc++) {
             if (aoc->id == id) {
-                return reinterpret_cast<DropEntry *>(&aoc->id + 1);
+                return reinterpret_cast<SubQuestLootRecordA *>(&aoc->id + 1);
             }
         }
     }
     void *table = dataTableGet(0x1c, 1);
-    DropEntry *entries = static_cast<DropEntry *>(dataTableGetEntries(table));
+    SubQuestLootRecordA *entries = subQuestLootRecordsA(table);
     dataTableGetCount(table);
     return &entries[id];
 }
@@ -70,7 +58,7 @@ void FUN_003df168(RewardResult *result, s32 index)
     } else if (record->kind == 3) {
         result->money = record->count;
     } else if (record->kind == 4) {
-        DropEntry *entry = findDropEntry(record->id);
+        SubQuestLootRecordA *entry = findDropEntry(record->id);
 
         s32 total = 0;
         for (s32 j = 0; j < 8; j++) {

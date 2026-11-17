@@ -1,21 +1,12 @@
-#include "common.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
 
-struct HelpState {
-    /* 0x000 */ u8 unk000[0x5e8];
-    /* 0x5e8 */ u16 value;
-};
-struct HelpOwner {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ HelpState *state;
-};
-extern HelpOwner g_buttonHelp;
-
+/* The button help's previous preset, or 0 without a button help. */
 u32 buttonHelpGetValue(void)
 {
-    HelpState *state = g_buttonHelp.state;
-    return state != NULL ? state->value : 0;
+    ButtonHelpWorkA *work = g_buttonHelp.work;
+    return work != NULL ? work->previousPreset : 0;
 }
 
 } /* extern "C" */

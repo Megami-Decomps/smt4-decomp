@@ -4,11 +4,13 @@
 
 #include "common.h"
 
+struct BtlUi;
+
 extern "C" {
 
 /* Fades the battle UI scene out once it has faded in and its timer is ready; the argument (the UI
  * block its caller holds) is not used, the global UI is read instead. */
-void btlUiPlaySceneFadeOutWhenReady(u32 ui);
+void btlUiPlaySceneFadeOutWhenReady(struct BtlUi *ui);
 
 } /* extern "C" */
 

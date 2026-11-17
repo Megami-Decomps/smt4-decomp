@@ -1,6 +1,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/AsdDebugHooks.h"
+#include "script/scrScriptProcess.h"
 
 /* An object kept in the handle registry; slot 1 of its vtable is the deleting destructor. */
 class RegisteredObject {
@@ -23,7 +24,7 @@ struct PanelHelper {
 struct ScriptGroup {
     /* 0x0 */ void *scriptFile;
     /* 0x4 */ void *messageFile;
-    /* 0x8 */ void *process;
+    /* 0x8 */ ScriptProcess *process;
 };
 
 struct ScriptPanel {
@@ -58,7 +59,6 @@ extern void cameraResourcesRelease(PanelHelper *helper);
 extern void asdOperatorDelete(void *object);
 extern void resourceOwnerReleaseAndReset(u32 *registry);
 extern void ptrListRemoveClearOwner(u32 *registry, u32 handle);
-extern void scrScriptProcessDestroy(void *process);
 extern void asdMemFree(void *memory);
 extern void messageSetScriptDisplayMode(void);
 extern void messageSetMode(s32 mode);

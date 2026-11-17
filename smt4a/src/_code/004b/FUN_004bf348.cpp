@@ -1,24 +1,9 @@
 /* NON_MATCHING: retail reads some 64-bit kind masks as two word loads and others with ldrd, and repeats the queued-action check in each branch without merging the tails; ours uses ldrd throughout and shares the check (164 rows against 203). Logic and constants agree with retail. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 /* The action-kind masks the AI chance logic tests a unit's input word against (observed fields). */
-struct BtlAiKinds {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u64 kindA;
-    /* 0x10 */ u8 unk10[8];
-    /* 0x18 */ u64 kindB;
-    /* 0x20 */ u64 kindC;
-    /* 0x28 */ u64 kindD;
-    /* 0x30 */ u8 unk30[0x40];
-    /* 0x70 */ u64 boostKind;      /* raises the base chance to 100 */
-    /* 0x78 */ u8 unk78[8];
-    /* 0x80 */ u64 allyKind;       /* acts on a queued ally action */
-    /* 0x88 */ u8 unk88[0x20];
-    /* 0xA8 */ u64 forceKind;      /* the chance is all or nothing */
-    /* 0xB0 */ u8 unkB0[0x48];
-    /* 0xF8 */ u64 blockKind;      /* never acts */
-};
 
 /* The unit the chance is for (observed fields). */
 struct BtlAiUnit {
@@ -48,9 +33,6 @@ struct BtlAiScales {
 };
 
 extern "C" {
-
-extern BtlAiKinds g_btlSkillResponseMasks;
-
 s32 gameFlagIsSet(u32 flag);
 BtlAiUnit *btlMainFindEntryByListedId(BtlAiState *state, void *actor);
 BtlAiScales *FUN_0028cb6c(void);
@@ -85,7 +67,7 @@ u32 FUN_004bf348(void *actor, s32 mode, s32 flag)
     if (unit != NULL) {
         u64 input = unit->input;
 
-        if ((input & g_btlSkillResponseMasks.kindA) != 0 || (input & g_btlSkillResponseMasks.kindB) != 0) {
+        if ((input & g_btlSkillResponseMasks.mappedKind) != 0 || (input & g_btlSkillResponseMasks.sourceKind) != 0) {
             chance = 30;
             if (flag == 1) {
                 chance = 85;
@@ -104,7 +86,7 @@ u32 FUN_004bf348(void *actor, s32 mode, s32 flag)
                     return 1;
                 }
             }
-        } else if ((input & g_btlSkillResponseMasks.kindC) != 0) {
+        } else if ((input & g_btlSkillResponseMasks.demonKind) != 0) {
             if ((unit->category >> 10) == 1) {
                 return 0;
             }
@@ -121,18 +103,18 @@ u32 FUN_004bf348(void *actor, s32 mode, s32 flag)
             }
         }
         input = unit->input;
-        if ((input & g_btlSkillResponseMasks.kindC) != 0 && unit->hp * 100 / unit->maxHp <= 40 && chance < 80) {
+        if ((input & g_btlSkillResponseMasks.demonKind) != 0 && unit->hp * 100 / unit->maxHp <= 40 && chance < 80) {
             chance = 80;
         }
-        if ((input & g_btlSkillResponseMasks.kindA) != 0 || (input & g_btlSkillResponseMasks.kindB) != 0) {
+        if ((input & g_btlSkillResponseMasks.mappedKind) != 0 || (input & g_btlSkillResponseMasks.sourceKind) != 0) {
             chance = (s32)(FUN_0028cb6c()->scaleA * (f32)chance);
         }
-        if ((unit->input & g_btlSkillResponseMasks.kindC) != 0) {
+        if ((unit->input & g_btlSkillResponseMasks.demonKind) != 0) {
             chance = (s32)(FUN_0028cb6c()->scaleC * (f32)chance);
         }
     }
     roll = lcgRandomRange(99);
-    if ((state->forced & g_btlSkillResponseMasks.forceKind) != 0) {
+    if ((state->forced & g_btlSkillResponseMasks.alwaysProc) != 0) {
         chance = state->forcedResult != 0 ? 100 : 0;
     }
     return roll < chance;

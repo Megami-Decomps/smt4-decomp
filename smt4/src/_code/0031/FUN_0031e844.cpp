@@ -15,13 +15,13 @@ LinkedItem* effPartCloneAfter(LinkedItems* list, LinkedItem* after);
 u32 FUN_0031e844(void)
 {
     LinkedItem* selected = linkedFindItemByIndex(
-        static_cast<LinkedItems*>(g_effectEditor.selection.list),
-        g_effectEditor.selection.index + DAT_0044f864);
+        static_cast<LinkedItems*>(g_effectEditor.list),
+        g_effectEditor.index + DAT_0044f864);
     LinkedItem* copy = effPartCloneAfter(
-        static_cast<LinkedItems*>(g_effectEditor.selection.list), selected);
+        static_cast<LinkedItems*>(g_effectEditor.list), selected);
     DAT_0044f54c = 0;
     rt_memcpy_w144(&copy->data, &selected->data);
-    g_effectEditor.selection.object = &DAT_0044f858;
+    g_effectEditor.object = &DAT_0044f858;
     return 0;
 }
 }

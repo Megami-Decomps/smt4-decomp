@@ -5,7 +5,7 @@ extern "C" {
 
 u8 FUN_0037b564(void)
 {
-    return g_buttonHelp.work->unk5E4;
+    return g_buttonHelp.work->mode;
 }
 
 } /* extern "C" */

@@ -8,8 +8,9 @@ typedef struct FlagObj {
     /* 0x004 */ u8 unk004[4];
     /* 0x008 */ u32 state;
     /* 0x00C */ u8 unk00C[0x434];
-    /* 0x440 */ u8 block440[0x118];
-    /* 0x558 */ u8 block558[4];
+    /* 0x440 */ UiSpriteState block440;
+    /* 0x4CC */ u8 unk4CC[0x8C];
+    /* 0x558 */ UiSpriteState block558;
 } FlagObj;
 
 
@@ -21,8 +22,8 @@ void flagObjAdvance(FlagObj *obj)
     if ((flags & 0x10) != 0 && (flags & 0x20) != 0) {
         obj->state = 3;
         obj->flags = flags & ~0x20u;
-        uiSpriteSetImageKeyframe((UiSpriteState *)obj->block440, 2, 0);
-        uiSpriteSetImageKeyframe((UiSpriteState *)obj->block558, 2, 0);
+        uiSpriteSetImageKeyframe(&obj->block440, 2, 0);
+        uiSpriteSetImageKeyframe(&obj->block558, 2, 0);
     }
 }
 

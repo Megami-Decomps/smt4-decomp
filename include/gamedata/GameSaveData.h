@@ -9,6 +9,7 @@
 #include "gamedata/GameData.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/PlayerRecordParts.h"
+#include "gamedata/MapSaveBlock.h"
 #include <stddef.h>
 
 /* ---- IV ---- */
@@ -118,7 +119,7 @@ typedef struct GameSaveBody {
     /* 0x097E4 */ s32 pointsTotal;     /* every point gained */
     /* 0x097E8 */ u32 points;          /* spendable, capped at 9999 */
     /* 0x097EC */ u8 unlockFlags[0x104C];
-    /* 0x0A838 */ u8 mapBlock[0x10E4];
+    /* 0x0A838 */ MapSaveBlock mapBlock;
     /* 0x0B91C */ u8 flagBlock[0x854];
     /* 0x0C170 */ GameSavedItem items[0x501];
     /* 0x1C5A4 */ u8 flagRows[0x2380];

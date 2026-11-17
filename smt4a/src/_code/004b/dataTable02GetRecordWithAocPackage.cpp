@@ -1,23 +1,19 @@
 #include "addon/aocMain.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/EncountData.h"
 #include "code/Code004b_Smt4a.h"
 #include "addon/AocSystemA.h"
 
-struct Table02Record {
-    u8 data[0x28];
-};
-
 extern "C" {
-Table02Record* aocFindPackageRecord(AocSystemA* system, u32 index);
+EncountGroupRecordA *aocFindPackageRecord(AocSystemA* system, u32 index);
 
-Table02Record* dataTable02GetRecordWithAocPackage(s32 index)
+EncountGroupRecordA *dataTable02GetRecordWithAocPackage(s32 index)
 {
     void* section = dataTableGet(2, 2);
-    Table02Record* records = static_cast<Table02Record*>(dataTableGetEntries(section));
+    EncountGroupRecordA *records = encountGroupRecordsA(section);
     if (index < 0 || static_cast<u32>(index) >= dataTableGetCount(section)) {
         return records;
     }
-    Table02Record* record = aocFindPackageRecord(g_aocSystem, index);
+    EncountGroupRecordA *record = aocFindPackageRecord(g_aocSystem, index);
     if (record == NULL) {
         record = &records[index];
     }

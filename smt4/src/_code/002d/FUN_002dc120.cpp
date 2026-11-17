@@ -12,15 +12,10 @@ struct FixedPosition {
     /* 0x10 */ s32 y;
 };
 
-struct IconFade {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ f32 speed;
-};
-
 struct IconScroller {
     /* 0x0000 */ u8 unk0000[0x598];
-    /* 0x0598 */ IconFade fade;
-    /* 0x05BC */ u8 unk05BC[0xCFC];
+    /* 0x0598 */ UiSpriteState fade;
+    /* 0x05BC */ u8 unk05BC[0xC94];
     /* 0x12B8 */ FixedPosition position;
     /* 0x12CC */ u8 unk12CC[0x1D90];
     /* 0x305C */ s32 icon;
@@ -62,7 +57,7 @@ void FUN_002dc120(IconScroller *scroller, s32 amount)
     s32 y = vec2GetYInt((const UiSpriteState *)&scroller->position);
     x = x + scroller->offsetX;
     y = y + scroller->offsetY;
-    efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&scroller->fade));
+    efctSetSpeed(vec2GetSpeed(&scroller->fade));
     TextureTableEntryIV *entry = asdTMTexTableEntryAt(0x15, scroller->icon + 0x52);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));

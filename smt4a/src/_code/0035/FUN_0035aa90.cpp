@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the saved registers of the index argument and the bit constant are swapped (retail index fp, constant sl). */
-#include "gamedata/DataTable.h"
+#include "gamedata/CampCecTable.h"
 #include "shard/Shard003D.h"
 #include "shard/ProgressUnlock.h"
 #include "Model/MoriModelManager.h"
@@ -15,18 +15,16 @@ static __inline bool unlockIsEarned(s32 id)
     return (*earnedByte & (1u << bit)) != 0;
 }
 
-/* Returns the name of the index-th earned entry of data table 0x4a (0x2c-byte records), or "" when
- * fewer are earned. */
+/* Returns the title of the index-th earned title (CampCecTable.tbb), or "" when fewer are earned. */
 const char *FUN_0035aa90(s32 index)
 {
-    s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
+    s32 count = campCecCount();
     s32 found = 0;
     for (s32 i = 0; i < count; i++) {
-        ProgressUnlockCondition *entries = static_cast<ProgressUnlockCondition *>(dataTableGetEntries(dataTableGet(0x4a, 0)));
-        ProgressUnlockCondition *record = &entries[i];
+        CampCecRecord *record = &campCecRecords()[i];
         if (record != NULL && unlockIsEarned(i)) {
             if (found == index) {
-                return reinterpret_cast<const char *>(record);
+                return record->title;
             }
             found++;
         }

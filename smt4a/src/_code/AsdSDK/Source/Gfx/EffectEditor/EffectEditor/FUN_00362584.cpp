@@ -47,10 +47,10 @@ u32 FUN_00362584(void)
     }
     if (input.state == 2) {
         result = 0x400000;
-    } else if (input.state == 1 && g_effectEditor.selection.list != NULL) {
+    } else if (input.state == 1 && g_effectEditor.list != NULL) {
         libc_strcpy(g_effectEditorResourceName, input.name);
         textFormatBuffer(path, "%s%s", "effect_editor/", input.fullName);
-        FUN_00362584_hook(g_effectEditor.selection.list, path);
+        FUN_00362584_hook(g_effectEditor.list, path);
         result = 0x400002;
     }
     return result;

@@ -1,61 +1,43 @@
 /* NON_MATCHING: the vtable word now names _ZTV9Obj4207d0 (retail); retail loads the vtable address before the push, keeps `this` in r0 until the handle load and holds the handle in r1 (the build copies this to r4 first). */
-#include "common.h"
+#include "classes/Obj557b18.h"
+#include "classes/Obj557b58.h"
+#include "classes/Obj557d00.h"
+#include "Model/MoriModelContent.h"
 #include "Model/MoriModelManager.h"
 
 extern "C" {
 
-typedef struct HandleObject HandleObject;
-
-typedef struct HandleObjectVtbl {
-    /* 0x00 */ void (*unk00)(HandleObject *object);
-    /* 0x04 */ void (*release)(HandleObject *object);
-} HandleObjectVtbl;
-
-struct HandleObject {
-    /* 0x00 */ HandleObjectVtbl *vtbl;
-    /* 0x04 */ u32 flags;
-};
-
-typedef struct HandleOwner {
-    /* 0x00 */ u32 id;
-    /* 0x04 */ HandleObject *handle;
-    /* 0x08 */ HandleObject *extra;
-    /* 0x0c */ HandleObject *aux;
-    /* 0x10 */ u32 unk10;
-} HandleOwner;
-
 void asdOperatorDelete(void *p);
-void FUN_003fd790(HandleObject *object);
 
-extern const u8 _ZTV9Obj4207d0[];
+extern u8 _ZTV9Obj4207d0[];
 
-/* Unregisters an owner's handle, releases its three objects and frees the owner. */
-void FUN_0040ac3c(HandleOwner *owner)
+/* The content's deleting destructor: unregisters the body, deletes the binding, the body and the
+ * resource, and frees the content. */
+void FUN_0040ac3c(MoriModelContent *content)
 {
-    HandleObject *handle;
-
-    owner->id = (u32)(_ZTV9Obj4207d0 + 8);
-    handle = owner->handle;
-    owner->unk10 = 0;
-    if (handle != NULL) {
-        if (handle->flags & 4) {
-            FUN_003fd790(handle);
+    /* The vtable pointer, written as this C-style destructor stores it. */
+    *reinterpret_cast<u8 **>(content) = _ZTV9Obj4207d0 + 8;
+    Obj557b18 *body = content->body;
+    content->file = NULL;
+    if (body != NULL) {
+        if (body->flags & 4) {
+            FUN_003fd790(body);
         }
-        ptrListRemoveClearOwner(g_handleRegistry, owner->handle);
+        ptrListRemoveClearOwner(g_handleRegistry, content->body);
     }
-    if (owner->extra != NULL) {
-        owner->extra->vtbl->release(owner->extra);
-        owner->extra = NULL;
+    if (content->binding != NULL) {
+        delete content->binding;
+        content->binding = NULL;
     }
-    if (owner->handle != NULL) {
-        owner->handle->vtbl->release(owner->handle);
-        owner->handle = NULL;
+    if (content->body != NULL) {
+        delete content->body;
+        content->body = NULL;
     }
-    if (owner->aux != NULL) {
-        owner->aux->vtbl->release(owner->aux);
-        owner->aux = NULL;
+    if (content->resource != NULL) {
+        delete content->resource;
+        content->resource = NULL;
     }
-    asdOperatorDelete(owner);
+    asdOperatorDelete(content);
 }
 
 } /* extern "C" */

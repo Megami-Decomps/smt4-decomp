@@ -1,33 +1,28 @@
 /* NON_MATCHING: member form with class fields; retail keeps one shared `str r0,[r4,#8]` tail inside case 1 reached from the other cases via `mov r0,r5`/`mov r0,#N; b`, ours stores the hoisted 5 (r5) in place and puts the shared tail at the end (116 rows vs 117). */
 #include "classes/Obj536044.h"
 #include "code/Code0035_Smt4a.h"
+#include "script/scrScriptProcess.h"
 
-struct CharonScript {
-    u8 unk00[0x108];
-    u32 state; // 0x108
-};
 // The fields past the documented class prefix.
 struct CharonView {
     u8 unk00[0x184];
     void *table; // 0x184
     u32 unk188;
-    CharonScript *exitScript; // 0x18c
+    ScriptProcess *exitScript; // 0x18c
     u8 unk190[0x204];
     void *resultTable; // 0x394
     void *resultMessages; // 0x398
-    CharonScript *resultScript; // 0x39c
+    ScriptProcess *resultScript; // 0x39c
 };
 extern "C" {
 s32 messageMainIsIdle();
 u32 tableGroupFindEntryIndex(void *, const char *);
-void scrScriptProcessStartEntry(CharonScript *, u32);
+void scrScriptProcessStartEntry(ScriptProcess *, u32);
 void sysPlaySe(u32);
-s32 scrRunOpcodesStub(CharonScript *);
 u32 gameDataBlocksGetWord();
 u32 FUN_004d05b4();
 void asdLoadFileAsyncSimple(const char *, void **, u32);
-CharonScript *scrScriptProcessCreate(void *, void *);
-void scriptProcessSetMode(CharonScript *, s32);
+void scriptProcessSetMode(ScriptProcess *, s32);
 void slotSetRequest(u32, u32, u32);
 s32 screenFadeIsBusy();
 void messageDismissNumericBanner(u32);
@@ -74,7 +69,7 @@ void Obj536044::shopUpdateCharonRequestTransition()
         break;
     case 3:
         if (view->resultTable && view->resultMessages) {
-            CharonScript *script = scrScriptProcessCreate(view->resultTable, view->resultMessages);
+            ScriptProcess *script = scrScriptProcessCreate(view->resultTable, view->resultMessages);
             view->resultScript = script;
             scriptProcessSetMode(script, 2);
             u32 entry = tableGroupFindEntryIndex(view->resultTable, "ProcCharonRequestSecond");

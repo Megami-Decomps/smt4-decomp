@@ -1,5 +1,6 @@
 #include "battle/btlGameOver.h"
 #include "shard/GameDataBlocks.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BtlUi;
 struct GameOverTimingView {
@@ -15,7 +16,6 @@ struct GameOverTimingView {
 };
 extern "C" {
 extern GameOverTimingView DAT_00439a70;
-extern BtlUi *g_btlUiBlock;
 extern const char DAT_004009cc[], DAT_004009e8[], DAT_0040098c[], DAT_004009ac[];
 void FUN_00282820(s32, s32, s32, s32, s32, s32, s32, s32);
 void btlUiPlaySceneFadeOutWhenReady(BtlUi *);

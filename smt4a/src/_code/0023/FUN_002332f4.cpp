@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002332f4` (_code @ 0x2332f4, 0xa20 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 /* The decompiler copies some game state fields as raw words of another type: those uses cast. */
@@ -20,7 +21,6 @@ int FUN_00319f64(int);
 int entryTableFlagTargetsOfId203(unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
-int gameFlagsGetBlock(void);
 int distSpatial(void);
 int mathAngleDeltaDegrees(void);
 int FUN_002b63d0(void);
@@ -198,7 +198,7 @@ unsigned int FUN_002332f4(void)
         temp_v12 = 600.0f;
         temp_v10 = 210.0f;
         temp_v16 = 0;
-        temp_v17 = gameFlagsGetBlock();
+        temp_v17 = (int)gameFlagsGetBlock();
         temp_v1 = *(short *)(temp_v5 + 0xac);
         if (temp_v1 == 2) {
           temp_v10 = (float)temp_v13;

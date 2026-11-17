@@ -1,6 +1,8 @@
 /* Matches with -O2 (requested): built at a lower optimisation level than the game code. */
 #include "common.h"
 #include "shard/JobWork.h"
+#include "script/scrScriptProcess.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -13,16 +15,14 @@ typedef struct BtlTalk {
     u8 unk00[8];
     void *buffer0;  /* 0x08 */
     void *buffer1;  /* 0x0c */
-    void *script;   /* 0x10 */
+    ScriptProcess *script;   /* 0x10 */
     void *buffer2;  /* 0x14 */
 } BtlTalk;
 
 extern BtlTalk *g_btlTalk;
-extern u32 g_btlUiBlock;
 
-extern void FUN_004ab734(u32 arg);
+extern void FUN_004ab734(BtlUiA *arg);
 extern void asdMemFree(void *block);
-extern void scrScriptProcessDestroy(void *script);
 extern void jobStop(u32 job, int arg);
 
 /* Frees the talk window's buffers and script, then stops the job. */

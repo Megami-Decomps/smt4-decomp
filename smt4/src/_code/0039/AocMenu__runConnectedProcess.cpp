@@ -35,7 +35,6 @@ extern unsigned char messageWindowDrawJob; /* 0x3910b8 */
 extern unsigned char LAB_003928a4; /* 0x3928a4 */
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: aocMenuSetButtonHelp. */
 /* Supplied declaration required: jobStopAndClearFlags. */
@@ -188,7 +187,7 @@ void AocMenu::runConnectedProcess()
         }
       }
       else {
-        temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
+        temp_v1 = scrRunOpcodesStub((ScriptProcess *)param_1[0xd6]);
         if (temp_v1 == 2) {
           temp_v1 = messageMainGetChoiceResult();
           if (temp_v1 != 0) {

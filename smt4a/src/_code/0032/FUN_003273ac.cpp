@@ -1,5 +1,5 @@
 /* NON_MATCHING: cached cell/marker-metadata pointers and saved-register allocation differ. */
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "gamedata/DataTableAccess_VariantF.h"
 
 struct GridMapDefinition {
@@ -23,51 +23,50 @@ typedef char GridPresetOffsets[sizeof(GridPreset) == 0x10 &&
 
 extern "C" {
 extern const GridPreset DAT_005813a4[];
-FlagWorkBanks *gameFlagsGetBlock();
 void FUN_002296b0(s32 enabled);
 
 void FUN_003273ac(u32 id)
 {
-    FlagWorkBanks *work = gameFlagsGetBlock();
+    MapSaveBlockA *work = gameFlagsGetBlock();
     const GridMapDefinition *definition = reinterpret_cast<const GridMapDefinition *>(dataTable4CGetEntry(id));
     const GridPreset *preset = &DAT_005813a4[definition->preset];
     const u8 *cells = preset->cells;
-    work->gridSize.width = preset->width;
-    work->gridSize.height = preset->height;
+    work->maze.width = preset->width;
+    work->maze.height = preset->height;
     FUN_002296b0(1);
-    if (work->table4c.level != -1) {
-        work->table4c.level = -1;
+    if (work->layer != -1) {
+        work->layer = -1;
     }
-    for (s32 y = 0; y < work->gridSize.height; ++y) {
-        for (s32 x = 0; x < work->gridSize.width; ++x) {
-            MapCell &cell = work->mapCells.grid.cells[y][x];
+    for (s32 y = 0; y < work->maze.height; ++y) {
+        for (s32 x = 0; x < work->maze.width; ++x) {
+            MapCell &cell = work->grid.cells[y][x];
             cell.state = cells[y * 15 + x] == 1 ? 1 : 2;
             u8 kind = cells[y * 15 + x];
             if (kind == 2) {
                 cell.specialKind = 1;
-                ++work->gridSetup.specialCount;
+                ++work->maze.specialCount;
             } else if (kind == 3) {
                 cell.specialKind = 2;
-                ++work->gridSetup.specialCount;
+                ++work->maze.specialCount;
             } else {
                 cell.specialKind = 0;
             }
         }
     }
     s32 firstX = preset->firstX;
-    work->gridSetup.firstX = preset->firstX;
+    work->maze.spawnX = preset->firstX;
     s32 firstY = preset->firstY;
-    work->gridSetup.firstY = preset->firstY;
-    work->gridSetup.secondX = preset->secondX;
-    work->gridSetup.secondY = preset->secondY;
+    work->maze.spawnZ = preset->firstY;
+    work->maze.secondX = preset->secondX;
+    work->maze.secondZ = preset->secondY;
     if (firstX > 0 && firstY > 0) {
-        work->mapCells.grid.cells[firstY][firstX].markers.first = 1;
+        work->grid.cells[firstY][firstX].markers.first = 1;
     }
-    work->mapCells.grid.cells[work->gridSetup.secondY][work->gridSetup.secondX].markers.second = 1;
-    work->table4cHead.unk3a = definition->map;
-    work->table4cHead.unk3b = definition->area;
-    work->gridSetup.ready = 1;
-    work->gridSetup.displayX = preset->displayX;
-    work->gridSetup.displayY = preset->displayY;
+    work->grid.cells[work->maze.secondZ][work->maze.secondX].markers.second = 1;
+    work->sizeX = definition->map;
+    work->sizeY = definition->area;
+    work->maze.ready = 1;
+    work->maze.displayX = preset->displayX;
+    work->maze.displayY = preset->displayY;
 }
 }

@@ -1,13 +1,12 @@
+#include "gamedata/MapSaveBlock.h"
 #include "gamedata/MapUnlockRecord.h"
 #include "gamedata/GameFlags.h"
-#include "shard/SaveWork.h"
 
 extern "C" {
 s32 dataTable2eSub2GetCount(void);
 const MapUnlockRecord *dataTable2eSub2GetRecord(s32);
 s32 gameFlagIsSet(s32);
 
-SaveWork *gameGetMapBlock(void);
 void gameDataSetEntryEnabled(s32, u32, s32);
 
 // Mark a map visited and update the regional progress flags associated with it.
@@ -23,7 +22,7 @@ void mapMarkVisitedAndUpdateRegionFlags(s32 map, u32 entry)
             break;
         }
     }
-    switch (gameGetMapBlock()->unk03) {
+    switch (gameGetMapBlock()->departureIndex) {
     case 6:
     case 7:
         gameFlagSetValue(0x223, 1, 1);

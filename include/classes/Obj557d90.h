@@ -2,7 +2,7 @@
 #define CLASSES_OBJ557D90_H
 
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-#include "shard/W5_W5Match7_ControllerPose.h"
+#include "classes/Obj557b18.h"
 #include <stddef.h>
 
 extern "C" void asdOperatorDelete(void *block);

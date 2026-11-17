@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035d1e0` (_code @ 0x35d1e0, 0x554 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -20,7 +21,6 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: mapCellMarkNeighborsState2. */
 
 
@@ -42,7 +42,7 @@ void FUN_0035d1e0(float in_s0, float in_s1, float in_s2)
   int temp_v10;
   int temp_v11 [9];
   
-  temp_v1 = gameFlagsGetBlock();
+  temp_v1 = (int)gameFlagsGetBlock();
   temp_v5 = 0;
   if ('\0' < *(char *)(temp_v1 + 0xe05)) {
     do {

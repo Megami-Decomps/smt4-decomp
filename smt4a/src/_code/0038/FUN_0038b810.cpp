@@ -1,31 +1,21 @@
 /* NON_MATCHING: same operations; retail loads y, z and x separately (x last) and stores z, w before x/y, where this loads x..z with one vldmia and stores all four at once. */
 #include "common.h"
+#include "gfx/VectorScratch.h"
 
 namespace {
-struct Vec4 {
-    f32 x, y, z, w;
-};
 
 // Shared effect state: a working point and the matrix that transforms it.
-struct EffectTransformState {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ Vec4 point;
-    /* 0x110 */ u8 unk110[0x30];
-    /* 0x140 */ Vec4 matrix[4];
-};
 }
 
 extern "C" {
 
-extern EffectTransformState g_vectorScratch;
-
 // point = (point.x, point.y, point.z, 1) * matrix
-static inline void transformPoint(Vec4 *point, const Vec4 *matrix)
+static inline void transformPoint(Vector4 *point, const Vector4 *matrix)
 {
     f32 x = point->x;
     f32 y = point->y;
     f32 z = point->z;
-    Vec4 result;
+    Vector4 result;
 
     result.x = x * matrix[0].x + y * matrix[1].x + z * matrix[2].x + matrix[3].x;
     result.y = x * matrix[0].y + y * matrix[1].y + z * matrix[2].y + matrix[3].y;
@@ -37,6 +27,6 @@ static inline void transformPoint(Vec4 *point, const Vec4 *matrix)
 /* Transform the working point by the shared matrix. */
 void FUN_0038b810(void)
 {
-    transformPoint(&g_vectorScratch.point, g_vectorScratch.matrix);
+    transformPoint(&g_vectorScratch.first.vector, g_vectorScratch.matrix.vectors);
 }
 } /* extern "C" */

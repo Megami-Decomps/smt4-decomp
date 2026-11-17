@@ -7,11 +7,11 @@
 #include "gamedata/SupportUnitRecord.h"
 #include "code/Code002b.h"
 #include "addon/AocSystem.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 extern const char DAT_00400444[]; /* battle/AI/%s.bf */
 extern const char DAT_00400454[]; /* battle/AI/tmp.bf */
-void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
 SupportUnitRecord *supportUnitGetEntry(s32, s32);
 void memClear(void *, u32);

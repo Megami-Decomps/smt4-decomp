@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_SceneSlots.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
 
@@ -7,7 +7,7 @@ u32 FUN_003646d4(u32 kind)
 {
     s32 state = 31;
     s32 i;
-    SceneSlotList *list = g_mapEnemy;
+    MapEnemyA *list = g_mapEnemy;
 
     switch (kind) {
     case 0:
@@ -19,8 +19,8 @@ u32 FUN_003646d4(u32 kind)
         state = 16;
         break;
     }
-    for (i = 0; i < 40; i++) {
-        SceneSlot *slot = &list->slots[i];
+    for (i = 0; i < MAP_ENEMY_COUNT_A; i++) {
+        MapEnemyEntryA *slot = &list->entries[i];
         if (slot->active && slot->state == state) {
             return 1;
         }

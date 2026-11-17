@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc62c` (_code @ 0x2bc62c, 0x494 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/LmapMainGlobals.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
@@ -26,7 +27,6 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int g_lmapMainState; /* 0x580238 */
 extern int g_renderCtx; /* 0x59dbb4 */
 extern int DAT_005f1bc8; /* 0x5f1bc8 */
 extern int DAT_005f1bd0; /* 0x5f1bd0 */
@@ -62,14 +62,14 @@ unsigned int FUN_002bc62c(void)
   float temp_v6;
   unsigned int temp_v7;
   
-  temp_v1 = g_lmapMainState;
-  if (*(int *)(g_lmapMainState + 0xc) < 0xd) {
+  temp_v1 = ((int)g_lmapMainState);
+  if (*(int *)(((int)g_lmapMainState) + 0xc) < 0xd) {
     return 0;
   }
-  if (*(int *)(g_lmapMainState + 0xc) >= 0x70) {
+  if (*(int *)(((int)g_lmapMainState) + 0xc) >= 0x70) {
     return 0;
   }
-  objectPoolUpdate(g_lmapMainState + 0xf4);
+  objectPoolUpdate(((int)g_lmapMainState) + 0xf4);
   temp_v3 = g_renderCtx;
   if (DAT_005f1bc8 != 0) {
     temp_v0 = renderCtxPackPassFlags(5,1);
@@ -118,11 +118,11 @@ unsigned int FUN_002bc62c(void)
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
   }
-  temp_v3 = g_lmapMainState;
+  temp_v3 = ((int)g_lmapMainState);
   if (*(char *)(temp_v1 + 0xb) != '\0') {
-    temp_v0 = *(int *)(g_lmapMainState + 0x38);
+    temp_v0 = *(int *)(((int)g_lmapMainState) + 0x38);
     temp_v1 = temp_v0 + 1;
-    *(int *)(g_lmapMainState + 0x38) = temp_v1;
+    *(int *)(((int)g_lmapMainState) + 0x38) = temp_v1;
     if (temp_v1 >= 0x1f) {
       temp_v1 = temp_v0 - 0x1d;
       *(int *)(temp_v3 + 0x38) = temp_v1;

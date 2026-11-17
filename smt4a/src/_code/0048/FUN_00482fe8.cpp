@@ -1,4 +1,5 @@
 /* NON_MATCHING: logic, stack layout and inlined FUN_00482b08 body match; armcc allocates the pool/slot/index registers one higher (pool r5, slot r4) than retail (pool r4, slot fp), same inversion as FUN_00482b08 */
+#include "gamedata/MapSaveBlockA.h"
 #include "classes/Obj55c840.h"
 #include "map/LmapGlobals.h"
 #include "map/ControllerPool.h"
@@ -31,7 +32,6 @@ struct ControllerParams95 {
 
 extern "C" {
 s32 dataTableGetRecordFifty(void);
-void gameFlagsGetBlock(void);
 const ControllerPlacement *FUN_00379958(u32 index);
 s32 FUN_003ded68(u16 id);
 s32 gameFlagIsSetByBlockAt156c(s32 flag);

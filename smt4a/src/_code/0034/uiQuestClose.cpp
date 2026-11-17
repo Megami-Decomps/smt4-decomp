@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
 #include "ui/UiControl.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int jobStop(unsigned int, int);
 void asdMemFree(void *allocation);
 int asdTMTexTableReleaseNode(int, int);
 struct ScriptProcess;
-void scrScriptProcessDestroy(ScriptProcess *resource);
 int uiFadeSetVisible(int);
 
 typedef struct TouchRegions {

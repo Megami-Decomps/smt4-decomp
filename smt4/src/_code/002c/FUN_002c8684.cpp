@@ -1,8 +1,7 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" {
 
-extern int gameGetMapBlock(void);
 extern int gameFlagIsSet(u32 flag);
 
 /* Whether `id` is usable: the two groups of ids (and 0x66, 0x67) each need their unlock flag set. */

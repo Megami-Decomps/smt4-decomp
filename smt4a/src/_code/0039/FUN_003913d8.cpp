@@ -1,6 +1,7 @@
 /* NON_MATCHING: rewritten from the raw draft (semantics follow the retail asm: three ring rows built in the effect color state, direction (cos, 0, sin, 1)); armcc keeps more values in core registers (push r4-r9, sl) and schedules the per-row copies differently from retail's VFP block copies and 8-byte spill. */
 #include "gfx/EffectPrimitiveWork.h"
 #include <math.h>
+#include "gfx/VectorScratch.h"
 
 /* Ring of expanding polygons: its emitter carries the radius growth parameters after the common
  * primitive-emitter prefix (0x38: segment count, 0x40/0x50: base radii, 0x54/0x58: extra ring offsets,
@@ -47,7 +48,6 @@ struct RingVertexOwner {
 extern "C" {
 extern EffectColor g_polyDefaultColor;
 extern EffectColor g_effectRingScratchColor;
-extern EffectColorProductState g_vectorScratch;
 f32 FUN_001a1ee0(f32 angle);
 f32 FUN_001b63b0(f32 angle);
 
@@ -85,8 +85,8 @@ void FUN_003913d8(EffectPrimitiveWork *work)
         f32 middleRadius = emitter->middleOffset + innerRadius;
         f32 outerRadius = emitter->outerOffset + middleRadius;
 
-        EffectColor *color = &g_vectorScratch.color;
-        EffectColor *direction = &g_vectorScratch.factor;
+        EffectColor *color = &g_vectorScratch.first.color;
+        EffectColor *direction = &g_vectorScratch.second.color;
         effectColorCopy(&g_polyDefaultColor, color);
         effectColorCopy(&g_polyDefaultColor, direction);
         color->red *= innerRadius;

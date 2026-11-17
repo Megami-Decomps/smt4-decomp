@@ -4,7 +4,7 @@
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
 #include "gamedata/GameDataAccess.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 // Player controller: only the members this movement update uses.
 struct PlayerController {
@@ -14,11 +14,6 @@ struct PlayerController {
     f32 cameraYaw;          // 0x50
     u8 unk54[0xc0 - 0x54];
     s32 moving;             // 0xc0
-};
-
-struct GameFlagsBlock {
-    u8 unk000[0xdc8];
-    s32 moveRequest;        // 0xdc8
 };
 
 extern "C" {
@@ -37,7 +32,7 @@ s32 FUN_0036d5e0(MapVector* candidate, MapVector* previous);
 // turns to the stick direction and advances in one or two collision-checked steps.
 void FUN_0033feb8(PlayerController* player)
 {
-    GameFlagsBlock* block = reinterpret_cast<GameFlagsBlock *>(gameFlagsGetBlock());
+    MapSaveBlockA *block = gameFlagsGetBlock();
     f32 speedScale = 1.0f;
     s32 blocked = 0;
     if (DAT_005f1bc4 != 0 || g_gameState.inputBlocked != 0) {

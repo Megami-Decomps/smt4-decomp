@@ -1,6 +1,7 @@
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 union UnitStatusRequestState {
     ObjB data;
@@ -23,7 +24,6 @@ union UnitStatusRequestState {
 
 extern "C" {
 
-extern ObjBRef g_gameGlobals;
 void FUN_0026fd50(void* work, const UnitCategoryRecord* unit, u16 id, const void* extra);
 
 void statusRequestUnitDetails(const UnitCategoryRecord* unit, u8 option, const void* extra)

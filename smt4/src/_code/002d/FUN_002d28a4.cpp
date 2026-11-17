@@ -1,22 +1,21 @@
 /* NON_MATCHING: preset store grouping, repeated map tests, and work-pointer reload timing differ. */
-#include "map/MapCameraWork.h"
 #include "game/GameState.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
-extern MapCameraGlobals DAT_004474f0;
 void FUN_002df5f8(void);
 
 void FUN_002d28a4(s32 map, s32 area)
 {
-    DAT_004474f0.work->preset.enabled = 0;
+    DAT_004474f0.view->presetEnabled = 0;
     FUN_002df5f8();
     if (map == 10 && area == 8) {
-        MapCameraWork *work = DAT_004474f0.work;
-        work->tracks[0].controls.values[1] = 100.0f;
-        work->tracks[1].controls.values[1] = 200.0f;
-        work->tracks[2].controls.values[1] = 0.0f;
-        work->tracks[3].controls.values[1] = 380.0f;
-        work->tracks[4].controls.values[1] = 42.0f;
+        LmapView *work = DAT_004474f0.view;
+        work->targetHeight[3] = 100.0f;
+        work->eyeHeight[3] = 200.0f;
+        work->lateralDistance[3] = 0.0f;
+        work->rearDistance[3] = 380.0f;
+        work->fieldOfView[3] = 42.0f;
     }
     f32 height = 250.0f;
     f32 distance = 700.0f;
@@ -44,14 +43,14 @@ void FUN_002d28a4(s32 map, s32 area)
     default:
         return;
     }
-    MapCameraWork *work = DAT_004474f0.work;
-    work->preset.enabled = 1;
+    LmapView *work = DAT_004474f0.view;
+    work->presetEnabled = 1;
     for (s32 i = 0; i < 3; ++i) {
-        work->tracks[0].controls.values[i] = height;
-        work->tracks[1].controls.values[i] = 170.0f;
-        work->tracks[2].controls.values[i] = 0.0f;
-        work->tracks[3].controls.values[i] = distance;
-        work->tracks[4].controls.values[i] = angle;
+        work->targetHeight[i + 2] = height;
+        work->eyeHeight[i + 2] = 170.0f;
+        work->lateralDistance[i + 2] = 0.0f;
+        work->rearDistance[i + 2] = distance;
+        work->fieldOfView[i + 2] = angle;
     }
 }
 }

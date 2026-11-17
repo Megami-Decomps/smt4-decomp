@@ -1,5 +1,5 @@
 /* NON_MATCHING: the free-slot search and the 99/11 state store compile differently (retail keeps the scan counter in r0 with a trailing sxth and conditional strh/beq exits; here it is split over compare/move pairs), the loop bound is re-read in the opposite operand order and the caller-saved scheduling of the record/work pointers differs. */
-#include "Model/ModelList.h"
+#include "Model/MoriModelContent.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
 #include "code/Code001c.h"
 #include "Model/MoriModelManager.h"
@@ -32,7 +32,7 @@ struct MapObjSlot {
     /* 0x1C */ f32 scale;
     /* 0x20 */ u8 unk20[4];
     /* 0x24 */ s32 kind;
-    /* 0x28 */ ModelList *model;
+    /* 0x28 */ MoriModelContent *model;
     /* 0x2C */ char name[0x18];
     /* 0x44 */ s32 index;
 };
@@ -57,9 +57,6 @@ s32 dataTableGetRecordFortyFive(void);
 MapObjRecord *mapObjGetCombinedEntry(s32 index);
 void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
-ModelList *modelListInit(ModelList *);
-u8 FUN_0040ab8c(ModelList *model);
-void moriModelContentLoadBody(ModelList *model, u32 mode);
 char *libc_strcpy(char *, const char *);
 
 /* Loads the placed map objects one record per call; returns 1 when done. */
@@ -102,7 +99,7 @@ u32 FUN_00313138(void)
         slot->name[0] = 0;
         char resourceName[0x80];
         textFormatBuffer(resourceName, "map/obj/obj_%02d.bam", record->kind);
-        ModelList *model = static_cast<ModelList *>(
+        MoriModelContent *model = static_cast<MoriModelContent *>(
             asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapObj.cpp", 0x16f));
         if (model != NULL) {
             model = modelListInit(model);
@@ -119,7 +116,7 @@ u32 FUN_00313138(void)
             return 0;
         }
         moriModelContentLoadBody(slot->model, 0);
-        handleRegistryRegisterObject(g_handleRegistry, *(void **)((u8 *)slot->model + 4));
+        handleRegistryRegisterObject(g_handleRegistry, slot->model->body);
         slot->x = (f32)record->x;
         slot->y = (f32)record->y;
         slot->z = (f32)record->z;

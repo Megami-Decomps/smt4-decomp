@@ -23,7 +23,7 @@ struct ItemBadge {
     u8 unk3c[0x20];
     f32 textAlpha;          // 0x05c
     u8 unk60[0x154 - 0x60];
-    u8 anchor[0x8c];        // 0x154: position vector of the badge
+    UiSpriteState anchor;        // 0x154: position vector of the badge
     u8 unk1e0[0x204 - 0x1e0];
     f32 scale;              // 0x204
     u8 unk208[0x26c - 0x208];
@@ -56,10 +56,10 @@ void FUN_00165778(ItemBadge* badge, TextureTableEntryIV* frame)
     skinObjectUpdateMatrices(g_renderCtx);
 
     TextureTableEntryIV* rect = asdTMTexTableEntryAt(8, 427);
-    texDrawTableEntryAtStoredOrigin(2, 8, 424, rect->x + vec2GetXInt((UiSpriteState *)badge->anchor), rect->y, 101);
+    texDrawTableEntryAtStoredOrigin(2, 8, 424, rect->x + vec2GetXInt(&badge->anchor), rect->y, 101);
     TextureTableEntryIV* countRect = asdTMTexTableEntryAt(8, 426);
     if (badge->mode != 3) {
-        FUN_00180310(6, rect->x + countRect->x + vec2GetXInt((UiSpriteState *)badge->anchor), rect->y + countRect->y, 1, 2, 121, "%d", badge->count);
+        FUN_00180310(6, rect->x + countRect->x + vec2GetXInt(&badge->anchor), rect->y + countRect->y, 1, 2, 121, "%d", badge->count);
         return;
     }
 

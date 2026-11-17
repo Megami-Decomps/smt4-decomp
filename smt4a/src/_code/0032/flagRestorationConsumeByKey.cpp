@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
@@ -8,13 +8,13 @@ extern "C" {
 /* Consumes active restoration entries with the requested key and raises their completion flags. */
 void flagRestorationConsumeByKey(s32 key)
 {
-    FlagWorkBanks *work = gameFlagsGetBlock();
-    for (s32 i = 0; i < work->restoration.count; ++i) {
-        if (work->restoration.active[i] != 0 && work->restoration.keys[i] == key) {
-            g_gameState.selectionArea = work->restoration.values[i];
-            work->restoration.active[i] = 0;
-            if (work->restoration.completionFlags[i] != 0) {
-                gameFlagSetValue(work->restoration.completionFlags[i], 1, 1);
+    MapSaveBlockA *work = gameFlagsGetBlock();
+    for (s32 i = 0; i < work->slotCount; ++i) {
+        if (work->slotActive[i] != 0 && work->slotKey[i] == key) {
+            g_gameState.selectionArea = work->slotValues[i];
+            work->slotActive[i] = 0;
+            if (work->slotFlag[i] != 0) {
+                gameFlagSetValue(work->slotFlag[i], 1, 1);
             }
         }
     }

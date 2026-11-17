@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00292b84` (_code @ 0x292b84, 0x1398 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -15,7 +16,6 @@ int mathPositionHeadingDegrees(void);
 int uiSetFloatPair(unsigned char *);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
-int gameFlagsGetBlock(void);
 int randomGetNormalizedFloat(void);
 int residentApplyFallbackValues(void);
 int FUN_003033d4(void);

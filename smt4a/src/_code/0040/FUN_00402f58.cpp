@@ -4,8 +4,6 @@
 extern "C" {
 s32 padQueryLogicalKey(u32 button, s32 repeat);
 void eventQueueAddUniqueIfValid(u32 event);
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 frame, s32 initial);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 frame, s32 initial);
 void FUN_004029f4(void *work, s32 state, s32 next);
 void contentListUpdateNavigation();
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -8,7 +9,7 @@ struct ScriptTransition {
     /* 0x08 */ u8 unk08[8];
     /* 0x10 */ void *buffer10;
     /* 0x14 */ void *buffer14;
-    /* 0x18 */ void *process;
+    /* 0x18 */ ScriptProcess *process;
     /* 0x1C */ u8 ownsTable; // set when data table 79 was loaded for the transition
 };
 extern ScriptTransition *DAT_0058812c;
@@ -19,7 +20,6 @@ void FUN_0035b404(s32 arg);
 void campButtonHelpRelease(void);
 void FUN_003c607c(s32 arg);
 void gameGlobalsReleaseReference(void);
-void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *block);
 void dataTableFree(s32 table);
 void jobStop(u32 job, s32 arg);

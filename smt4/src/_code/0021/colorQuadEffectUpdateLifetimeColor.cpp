@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail forms &color (r0) before the first product multiply and packs through `vldmia r0, {s1-s4}`; the build adds the address after the product stores and orders the float-to-byte conversions and REV moves differently (helpers, VFP copy, multiply and frame selection match). */
 #include "shard/W6_W6Match8_ColorQuadEffect.h"
 #include "gfx/EffectColorMath.h"
+#include "gfx/VectorScratch.h"
 
 static void effectColorScale(const EffectColor *factor, EffectColor *color)
 {
@@ -26,7 +27,6 @@ static __inline void colorQuadSetRect(ColorQuadEffectOutput *output,
 }
 
 extern "C" {
-extern EffectColorProductState g_vectorScratch;
 void renderCtxSetPackedColor(u32 color);
 u32 FUN_00269694(const u8 *curve, const ScreenEffectWeightTrack *weight,
                  s32 frame, s32 duration);
@@ -53,10 +53,10 @@ void colorQuadEffectUpdateLifetimeColor(ColorQuadEffectJob *job)
     u32 sampledColor = FUN_00269694(resource->colorCurve, &resource->weight,
                                    frame, duration);
     renderCtxSetPackedColor(job->color);
-    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
+    effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     renderCtxSetPackedColor(sampledColor);
-    effectColorScale(&g_vectorScratch.factor, &g_vectorScratch.color);
-    u32 packed = effectColorPackFrom(g_vectorScratch.color);
+    effectColorScale(&g_vectorScratch.second.color, &g_vectorScratch.first.color);
+    u32 packed = effectColorPackFrom(g_vectorScratch.first.color);
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

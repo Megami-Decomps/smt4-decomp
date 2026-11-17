@@ -1,7 +1,7 @@
 /* NON_MATCHING: map block pointer/capacity register assignment (r5/r6) swapped and the timer init uses stm instead of retail's writeback stores. */
+#include "gamedata/MapSaveBlock.h"
 #include "map/MapIfTimer.h"
 #include "map/mapDepart.h"
-#include "shard/SaveWork.h"
 #include "game/GameState.h"
 
 extern "C" {
@@ -18,14 +18,12 @@ void FUN_002bfc24(u32 layer, u32 message, u32 argument, u32 flags, f32 first, f3
 // Select the next idle hint, skipping time/party-inapplicable hints, and queue its message.
 void FUN_001e2be4(void)
 {
-    struct MapHintProgressView { u8 unk000[0xD5B]; s8 next; };
-    typedef char HintProgressOffsetCheck[offsetof(MapHintProgressView, next) == 0xD5B ? 1 : -1];
-    MapHintProgressView *map = (MapHintProgressView *)gameGetMapBlock();
+    MapSaveBlock *map = gameGetMapBlock();
     u32 flags = FUN_002bfdd4() | 4;
     if (g_gameState.inputBlocked != 0 || g_mapIfTimer->state != 0 || !gameFlagIsSet(22)) {
         return;
     }
-    s32 hint = map->next;
+    s32 hint = map->hintProgress;
     if (hint == 1) {
         if (gameCountUnits() < 1) {
             hint = 2;
@@ -71,6 +69,6 @@ void FUN_001e2be4(void)
     if (hint >= 9) {
         hint = 0;
     }
-    map->next = hint;
+    map->hintProgress = hint;
 }
 }

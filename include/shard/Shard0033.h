@@ -60,7 +60,7 @@ typedef struct ObjB {
     union {
         /* 0x137C */ u8 unk137C[2];
         struct {
-            u8 unk137C;
+            /* 0x137C */ s8 state;   /* gameGlobalsGetState */
             /* 0x137D */ u8 pending;
         } sessionSelection;
     };
@@ -68,7 +68,8 @@ typedef struct ObjB {
     /* 0x137F */ s8 unk137F;
     /* 0x1380 */ u8 unk1380[0x1];
     /* 0x1381 */ s8 unk1381;
-    /* 0x1382 */ u8 unk1382[0x2];
+    /* 0x1382 */ u8 unk1382;
+    /* 0x1383 */ u8 selectionWasEight; /* FUN_002c85b0 stored 8 as 3 */
     /* 0x1384 */ u8 unk1384;
     /* 0x1385 */ u8 unk1385[0x7];
     /* 0x138C */ s16 unk138C;
@@ -97,7 +98,7 @@ typedef struct ObjB {
     /* 0x2011 */ s8 unk2011;
     /* 0x2012 */ s8 unk2012;
     /* 0x2013 */ u8 unk2013;
-    /* 0x2014 */ u8 unk2014;
+    /* 0x2014 */ s8 mode;             /* gameGetMode */
     /* 0x2015 */ s8 unk2015;
     /* 0x2016 */ u8 unk2016;
     /* 0x2017 */ u8 unk2017;
@@ -200,31 +201,6 @@ typedef struct Entry8 {
 typedef struct Entry18 {
     /* 0x00 */ u8 data[0x18];
 } Entry18;
-
-typedef struct Flags0C0C {
-    /* 0x00 */ u8 unk00[0x3];
-    /* 0x03 */ u8 unk03;
-    /* 0x04 */ u8 unk04[0x14];
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u8 unk1C;
-    /* 0x1D */ u8 unk1D[0x3];
-    /* 0x20 */ s16 unk20;
-    /* 0x22 */ u8 unk22[0xBEA];
-    /* 0xC0C */ u8 flags[0x40];
-    /* 0xC4C */ u8 flags2[0x40];
-    /* 0xC8C */ u8 unkC8C[0x40];
-    /* 0xCCC */ u32 bits[8];
-    /* 0xCEC */ u8 unkCEC[0x20];
-    /* 0xD0C */ u32 bits2[8];
-    /* 0xD2C */ u8 unkD2C[0x64];
-    /* 0xD90 */ s16 halves[0x20];
-    /* 0xDD0 */ u8 unkDD0[0xA1];
-    /* 0xE71 */ u8 unkE71;
-    /* 0xE72 */ u8 unkE72[0x71E];
-    /* 0x1590 */ u32 words1590[8];
-    /* 0x15B0 */ u8 unk15B0[0x14];
-    /* 0x15C4 */ f32 unk15C4;
-} Flags0C0C;
 
 typedef struct Node40 {
     /* 0x00 */ u8 unk00[0x40];

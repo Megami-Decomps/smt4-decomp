@@ -3,6 +3,7 @@
 #define SMT4A_BATTLE_BTLUIOBJCQUERY_H
 
 #include "battle/btlUI.h"
+struct BtlUiA;
 
 extern "C" {
 
@@ -10,7 +11,7 @@ extern "C" {
 u32 FUN_002f934c(BtlUiObjCA *obj);
 
 /* The same query on the global battle UI's objC; the argument is ignored. */
-u32 FUN_004aa750(u32 block);
+u32 FUN_004aa750(struct BtlUiA *ui);
 
 } /* extern "C" */
 

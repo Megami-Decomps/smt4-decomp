@@ -1,6 +1,8 @@
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "code/Code003a_Smt4.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -10,11 +12,9 @@ int uiFadeRelease(void);
 int gameReleaseDataReference(void);
 int gameGlobalsSetSelected(int a);
 int messageStatesSetFirst(int a);
-int scrScriptProcessDestroy(void);
 int placeWinRelease(void);
 int asdTMTexTableReleaseNode(int table, int index);
 int messageSetConfirmDisplayMode(void);
-int asdMemFree(void);
 int jobStop(u32 job, int mode);
 extern int jobIsValid(u32 job);
 
@@ -32,14 +32,14 @@ typedef struct Scene {
     /* 0x00000 */ u8 unk00000[0x10];
     /* 0x00010 */ int mode;
     /* 0x00014 */ u8 unk00014[0x14C];
-    /* 0x00160 */ int bufferA;
-    /* 0x00164 */ int bufferB;
-    /* 0x00168 */ int scriptA;
-    /* 0x0016C */ int scriptB;
+    /* 0x00160 */ void *bufferA;
+    /* 0x00164 */ void *bufferB;
+    /* 0x00168 */ ScriptProcess *scriptA;
+    /* 0x0016C */ ScriptProcess *scriptB;
     /* 0x00170 */ u8 unk00170[0x200];
-    /* 0x00370 */ int bufferC;
-    /* 0x00374 */ int bufferD;
-    /* 0x00378 */ int scriptC;
+    /* 0x00370 */ void *bufferC;
+    /* 0x00374 */ void *bufferD;
+    /* 0x00378 */ ScriptProcess *scriptC;
     /* 0x0037C */ u8 unk0037C[0x4E0];
     /* 0x0085C */ Object *object;
     /* 0x00860 */ u8 unk00860[0x154C4];
@@ -58,15 +58,15 @@ void FUN_003a3914(Scene *scene)
         scene->object = NULL;
     }
     if (scene->scriptC != 0) {
-        scrScriptProcessDestroy();
+        scrScriptProcessDestroy(scene->scriptC);
         scene->scriptC = 0;
     }
     if (scene->bufferC != 0) {
-        asdMemFree();
+        asdMemFree(scene->bufferC);
         scene->bufferC = 0;
     }
     if (scene->bufferD != 0) {
-        asdMemFree();
+        asdMemFree(scene->bufferD);
         scene->bufferD = 0;
     }
     placeWinRelease();
@@ -79,19 +79,19 @@ void FUN_003a3914(Scene *scene)
     asdTMTexTableReleaseNode(0x2b, 0);
     asdTMTexTableFreeEntry(0x2b);
     if (scene->scriptA != 0) {
-        scrScriptProcessDestroy();
+        scrScriptProcessDestroy(scene->scriptA);
         scene->scriptA = 0;
     }
     if (scene->scriptB != 0) {
-        scrScriptProcessDestroy();
+        scrScriptProcessDestroy(scene->scriptB);
         scene->scriptB = 0;
     }
     if (scene->bufferA != 0) {
-        asdMemFree();
+        asdMemFree(scene->bufferA);
         scene->bufferA = 0;
     }
     if (scene->bufferB != 0) {
-        asdMemFree();
+        asdMemFree(scene->bufferB);
         scene->bufferB = 0;
     }
     if (scene->unk15D24 != 0) {

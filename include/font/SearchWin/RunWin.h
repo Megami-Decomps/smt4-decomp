@@ -3,6 +3,8 @@
 #define FONT_SEARCHWIN_RUNWIN_H
 
 #include "common.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "ui/UiSpriteState.h"
 
 /* The run (escape) window's work area. */
 typedef struct RunWinWork {
@@ -13,8 +15,8 @@ typedef struct RunWinWork {
     /* 0x10 */ s32 counter;
     /* 0x14 */ u8 active;
     /* 0x15 */ u8 unk15[0x3];
-    /* 0x18 */ u8 sound[0x20];             /* sound player object (constructed in place) */
-    /* 0x38 */ u8 ui[0x8c];                /* UI object set up by uiSpriteStateInitFromSource */
+    /* 0x18 */ UiResourceParameters parameters; /* the window sprite's animation resource */
+    /* 0x38 */ UiSpriteState window;
     /* 0xC4 */ u8 text[0x20];
 } RunWinWork;
 
@@ -24,8 +26,8 @@ struct MessageWindowDrawState {
     /* 0x0004 */ u8 unk0004[0x17A0];
     /* 0x17A4 */ s32 mode;
     /* 0x17A8 */ u8 unk17a8[0x28];
-    /* 0x17D0 */ u8 firstWindow[0x8C];
-    /* 0x185C */ u8 secondWindow[0x8C];
+    /* 0x17D0 */ UiSpriteState firstWindow;
+    /* 0x185C */ UiSpriteState secondWindow;
 };
 typedef char MessageWindowDrawStateSizeCheck[sizeof(MessageWindowDrawState) == 0x18E8 ? 1 : -1];
 

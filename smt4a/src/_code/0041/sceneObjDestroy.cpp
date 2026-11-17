@@ -1,15 +1,16 @@
 #include "shard/Shard0041.h"
 #include "code/Code0041_Smt4a.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 typedef struct SceneObj {
     /* 0x00 */ u8 unk00[0x18];
     /* 0x18 */ u32 buf18;
-    /* 0x1C */ u32 proc1C;
+    /* 0x1C */ ScriptProcess *proc1C;
     /* 0x20 */ u32 buf20;
     /* 0x24 */ u32 buf24;
-    /* 0x28 */ u32 proc28;
+    /* 0x28 */ ScriptProcess *proc28;
     /* 0x2C */ u32 buf2C;
     /* 0x30 */ u8 unk30[0x12];
     /* 0x42 */ u16 unk42;
@@ -26,7 +27,6 @@ extern void gameGlobalsReleaseReference(void);
 extern void buttonHelpSetPanelState(u8 value);
 extern void sysPlaySe(u32 id);
 extern void campButtonHelpRelease(void);
-extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(u32 ptr);
 extern u32 dataTableFree(u32 id);
 

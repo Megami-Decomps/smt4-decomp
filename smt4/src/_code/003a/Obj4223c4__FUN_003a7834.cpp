@@ -5,11 +5,6 @@
 
 extern "C" {
 
-typedef struct Cursor {
-    /* 0x00 */ u8 unk00[0x8A];
-    /* 0x8A */ s8 enabled;
-} Cursor;
-
 typedef struct Pair {
     s32 first;
     s32 second;
@@ -20,7 +15,7 @@ typedef struct Menu {
     /* 0x14 */ Pair state;
     /* 0x1C */ u8 unk1C[0xAC];
     /* 0xC8 */ u8 layout[0x34];
-    /* 0xFC */ Cursor cursor;
+    /* 0xFC */ UiSpriteState cursor;
 } Menu;
 
 int buttonHelpIsNotActive(void);
@@ -33,15 +28,15 @@ int FUN_0029d960(Menu *menu);
 void Obj4223c4::FUN_003a7834()
 {
     Menu * menu = reinterpret_cast<Menu *>(this);
-    Cursor *cursor = &menu->cursor;
+    UiSpriteState *cursor = &menu->cursor;
     u32 width;
     u32 height;
 
-    uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
-    width = vec2GetYInt((const UiSpriteState *)cursor);
-    height = vec2GetXInt((const UiSpriteState *)cursor);
+    uiSlidingSpriteAdvance(cursor, 0);
+    width = vec2GetYInt(cursor);
+    height = vec2GetXInt(cursor);
     pointConvertToFloat(menu->layout, height, width);
-    if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) != 0 && buttonHelpIsNotActive() != 0) {
+    if (uiSpriteGetCompletionState(cursor) != 0 && buttonHelpIsNotActive() != 0) {
         FUN_002a0cc8(0);
         menu->state.first = 2;
         menu->state.second = 0;

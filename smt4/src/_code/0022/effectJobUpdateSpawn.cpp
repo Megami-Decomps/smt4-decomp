@@ -1,18 +1,7 @@
-#include "common.h"
-
-struct EffectJobState {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ s32 phase;
-    /* 0x08 */ const void *pending;
-    /* 0x0c */ void *current;
-    /* 0x10 */ u8 started;
-    /* 0x11 */ u8 unk11[7];
-    /* 0x18 */ u32 resource;
-    /* 0x1c */ f32 translation[4];
-};
+#include "event/EventEplEffect.h"
+#include "shard/JobWork.h"
 
 extern "C" {
-EffectJobState *jobGetWork();
 void effectNodeUpdateTransform(void *current);
 s32 effectTimelineNodesFitDuration(void *current);
 void *FUN_002a4e98(const void *definition);
@@ -20,9 +9,11 @@ void FUN_002a3ab0(void *current, const f32 *translation);
 void FUN_002a36fc(void *current, f32 value);
 u32 FUN_0021a468(void *current);
 
-u32 effectJobUpdateSpawn()
+/* Process of the EPL event effect job: spawns the effect once its definition has loaded, then runs it
+ * until its timeline ends. */
+s32 effectJobUpdateSpawn(u32 job)
 {
-    EffectJobState *work = jobGetWork();
+    EventEplEffectWork *work = (EventEplEffectWork *)jobGetWork(job);
     switch (work->phase) {
     case 0:
         if (work->pending) {
@@ -37,7 +28,7 @@ u32 effectJobUpdateSpawn()
     case 1:
         effectNodeUpdateTransform(work->current);
         if (effectTimelineNodesFitDuration(work->current)) {
-            return 0xffffffff;
+            return -1;
         }
         break;
     }

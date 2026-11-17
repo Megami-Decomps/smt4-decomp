@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+struct BtlUi;
 
 /* The departure block, kept by a module global. */
 typedef struct MapDepart {
@@ -12,7 +13,7 @@ typedef struct MapDepart {
     /* 0x08 */ u8 freeOnEnd;     /* 0 = keep the block after the job ends */
 } MapDepart;
 
-struct NodeEnableNode;
+struct AsdMdlObject;
 
 /* Resources kept while departing (Shin Megami Tensei IV), one block behind a module global. */
 typedef struct MapDepartWork {
@@ -26,11 +27,11 @@ typedef struct MapDepartWork {
     };
     union {
         /* 0x0C */ u32 handleA;
-        /* 0x0C */ NodeEnableNode *nodeA;
+        /* 0x0C */ AsdMdlObject *nodeA;
     };
     union {
         /* 0x10 */ u32 handleB;
-        /* 0x10 */ NodeEnableNode *nodeB;
+        /* 0x10 */ AsdMdlObject *nodeB;
     };
     /* 0x14 */ s16 state;
     /* 0x16 */ u8 unk16[10];
@@ -92,14 +93,9 @@ typedef __packed struct GameStateRecord {
     /* 0x32 */ u32 unk32;
 } GameStateRecord;
 
-
-
-
-
 extern "C" {
-void FUN_0025c2d0(u32 unused, u8 value);
+void FUN_0025c2d0(struct BtlUi *ui, u8 value);
 }
-
 
 #ifdef __cplusplus
 extern "C" {

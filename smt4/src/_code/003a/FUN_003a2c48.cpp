@@ -2,7 +2,7 @@
 #include "common.h"
 #include "classes/Obj55ca08.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
-#include "ui/TimerSlot.h"
+#include "ui/UiSpriteState.h"
 #include <stddef.h>
 
 struct ScriptProcess;
@@ -35,7 +35,7 @@ struct AppraiseScene {
     /* 0x00380 */ f32 point[2];
     /* 0x00388 */ u8 unk00388[0x20];
     /* 0x003A8 */ u8 animations[0x20];
-    /* 0x003C8 */ TimerSlot slide;
+    /* 0x003C8 */ UiSpriteState slide;
     /* 0x00454 */ u8 unk00454[0x3D4];
     /* 0x00828 */ Obj55ca08 selection;
     /* 0x00864 */ u8 unk00864[0x9444];
@@ -122,11 +122,11 @@ void FUN_003a2c48(AppraiseScene *scene)
         break;
     case 3:
         {
-        TimerSlot *slide = &scene->slide;
-        uiSlidingSpriteAdvance((UiSpriteState *)slide, 0);
-        pointConvertToFloat(scene->point, vec2GetXInt((UiSpriteState *)slide), vec2GetYInt((UiSpriteState *)slide));
+        UiSpriteState *slide = &scene->slide;
+        uiSlidingSpriteAdvance(slide, 0);
+        pointConvertToFloat(scene->point, vec2GetXInt(slide), vec2GetYInt(slide));
         scrRunOpcodesStub(scene->script);
-        if (uiSpriteGetCompletionState((UiSpriteState *)slide)) {
+        if (uiSpriteGetCompletionState(slide)) {
             messageTargetSetValue(scene->total, 0);
             scene->state = 4;
         }

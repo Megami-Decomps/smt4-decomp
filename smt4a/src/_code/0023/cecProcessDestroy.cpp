@@ -1,34 +1,18 @@
-#include "common.h"
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
-
 void asdMemFree(void *memory);
 
-typedef struct Object Object;
-typedef struct ObjectVtbl {
-    /* 0x00 */ void *unk00;
-    /* 0x04 */ void (*destroy)(Object *object);
-} ObjectVtbl;
-struct Object {
-    /* 0x00 */ const ObjectVtbl *vtbl;
-};
-
-typedef struct CecProcess {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Object *object;
-} CecProcess;
-extern CecProcess *g_cecProcess;
-
-/* Destroys the CEC process: its object (if any), then the process itself. */
+/* Destroys the CEC process: its message box (if any), then the process itself. */
 void cecProcessDestroy(void)
 {
-    CecProcess *process;
+    CecProcessA *process;
 
     process = g_cecProcess;
-    if (g_cecProcess->object != NULL) {
-        g_cecProcess->object->vtbl->destroy(g_cecProcess->object);
+    if (g_cecProcess->messageBox != NULL) {
+        delete g_cecProcess->messageBox;
     }
-    process->object = NULL;
+    process->messageBox = NULL;
     asdMemFree(process);
     g_cecProcess = NULL;
 }

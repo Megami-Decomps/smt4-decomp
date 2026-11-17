@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_QuestUI_RunListLoop` (_code @ 0x201afc, 0x6b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -55,7 +56,6 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: bannerShow. */
 extern int sys43e188GetStateB(void);
@@ -194,7 +194,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       }
       else {
         if (*(char *)(temp_v4 + 6) == '\0') {
-          temp_v3 = gameGetMapBlock();
+          temp_v3 = (int)gameGetMapBlock();
           QuestCenter_GetActiveEntry();
           temp_v2 = FUN_00383674();
           FUN_0028784c(temp_v2,0);

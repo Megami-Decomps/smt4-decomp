@@ -1,8 +1,7 @@
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 void FUN_003720e4(u8 value)
 {

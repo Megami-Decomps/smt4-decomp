@@ -1,14 +1,13 @@
 /* NON_MATCHING: requirement/progress bases are folded differently, and the incomplete-test lifetime changes saved registers and saturation block layout. */
+#include "gamedata/MapSaveBlock.h"
 #include "quest_center/QuestRuntime.h"
 #include "quest_center/QuestRecord.h"
 #include "quest_center/QuestRequirement.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
-#include "shard/SaveWork.h"
 #include "gamedata/GameDataAccess_VariantA.h"
 
 extern "C" {
 s32 table1bOr1cGetRecordValue(u32 quest);
-SaveWork *gameGetMapBlock(void);
 
 void FUN_00348c10(u16 itemId, s32 change)
 {
@@ -19,11 +18,6 @@ void FUN_00348c10(u16 itemId, s32 change)
         AcceptedQuest accepted[4];
         QuestRequirementSavedProgress progress;
     };
-    struct QuestNotificationView {
-        u8 prefix[0x1064];
-        u16 completedItem;
-        u16 progressingItem;
-    };
     // Both progress tails lie beyond the canonical flag/map block prefixes.
     QuestProgressView *flags = reinterpret_cast<QuestProgressView *>(gameGetFlagBlock());
     u16 selected = reinterpret_cast<QuestProgressView *>(gameGetFlagBlock())->selected;
@@ -31,7 +25,7 @@ void FUN_00348c10(u16 itemId, s32 change)
         if (table1bOr1cGetRecordValue(selected) != 1)
             return;
         const QuestRecord *quest = questDataGetRecord(selected);
-        QuestNotificationView *notification = reinterpret_cast<QuestNotificationView *>(gameGetMapBlock());
+        MapSaveBlock *notification = gameGetMapBlock();
         for (s32 index = 0; index < 6; ++index) {
             const QuestRequirement &requirement = quest->requirements[index];
             if (static_cast<u16>(requirement.kind) == 2 && requirement.id == itemId) {
@@ -43,9 +37,9 @@ void FUN_00348c10(u16 itemId, s32 change)
                     if (!incomplete)
                         return;
                     if (static_cast<u16>(updated) >= static_cast<u32>(requirement.count))
-                        notification->completedItem = itemId;
+                        notification->secondCompletedItem = itemId;
                     else
-                        notification->progressingItem = itemId;
+                        notification->secondProgressedItem = itemId;
                 } else {
                     flags->progress.counts[index] = 0xffff;
                     if (!incomplete)
@@ -64,7 +58,7 @@ void FUN_00348c10(u16 itemId, s32 change)
         const QuestRecord *quest = questDataGetRecord(questId);
         if (quest->kind != 1)
             continue;
-        QuestNotificationView *notification = reinterpret_cast<QuestNotificationView *>(gameGetMapBlock());
+        MapSaveBlock *notification = gameGetMapBlock();
         for (s32 index = 0; index < 6; ++index) {
             const QuestRequirement &requirement = quest->requirements[index];
             if (static_cast<u16>(requirement.kind) == 2 && requirement.id == itemId) {
@@ -76,9 +70,9 @@ void FUN_00348c10(u16 itemId, s32 change)
                     if (!incomplete)
                         break;
                     if (static_cast<u16>(updated) >= static_cast<u32>(requirement.count))
-                        notification->completedItem = itemId;
+                        notification->secondCompletedItem = itemId;
                     else
-                        notification->progressingItem = itemId;
+                        notification->secondProgressedItem = itemId;
                 } else {
                     flags->progress.counts[index] = 0xffff;
                     if (!incomplete)

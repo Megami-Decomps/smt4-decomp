@@ -6,10 +6,5 @@
 struct IntegrationVector4 {
     f32 x, y, z, w;
 };
-struct ComponentIntegrationState {
-    u8 unk000[0x100];
-    IntegrationVector4 values; // 0x100
-    IntegrationVector4 delta; // 0x110
-};
 
 #endif

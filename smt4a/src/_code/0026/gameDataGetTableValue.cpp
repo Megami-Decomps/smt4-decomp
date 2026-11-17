@@ -3,10 +3,10 @@
 
 extern "C" {
 
-/* Returns the word at 0x53C0 of the save body. */
+/* Returns the word at 0x15D4 of the map block. */
 u32 gameDataGetTableValue(void)
 {
-    return g_gameDataBlocks.saveBlock->body.unk053C0;
+    return g_gameDataBlocks.saveBlock->body.mapBlock.tableValue;
 }
 
 } /* extern "C" */

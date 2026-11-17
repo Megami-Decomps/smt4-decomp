@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d9b50` (_code @ 0x2d9b50, 0x12e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
@@ -86,7 +87,6 @@ extern unsigned int soundVolumeSettingGet(void);
 extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_001628c0. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: sysPlaySe. */
 extern int randBetween(unsigned int, unsigned int);
@@ -158,7 +158,7 @@ void FUN_002d9b50(void)
   float temp_v10;
   unsigned int temp_v11;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   temp_v1 = soundVolumeSettingGet();
   temp_v6 = g_lmapScene;
   temp_v10 = 0.0f;

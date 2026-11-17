@@ -2,7 +2,7 @@
 #include "quest_center/QuestRuntime.h"
 #include "quest_center/QuestRecordA.h"
 #include "shard/Shard0041.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
 extern "C" {
@@ -19,13 +19,7 @@ static __inline void questMarkChanged(u16 quest)
 
 void FUN_0041849c(u32 id, u32 amount)
 {
-    /* The quest notification ids, as signed ids. */
-    struct QuestNoticeView {
-        u8 unk0000[0x1094];
-        s16 progressingId;
-        s16 completedId;
-    };
-    QuestNoticeView *notice = (QuestNoticeView *)gameFlagsGetBlock();
+        MapSaveBlockA *notice = gameFlagsGetBlock();
     for (s32 i = 0; i < 400; ++i) {
         u32 isActive = (questGetFlags(i)->flags & 2) >> 1;
         if (isActive) {
@@ -37,9 +31,9 @@ void FUN_0041849c(u32 id, u32 amount)
                         if (record->requirements[j].count > current) {
                             questMarkChanged(i);
                             if (record->requirements[j].count <= amount + current) {
-                                notice->completedId = (s16)id;
+                                notice->completedItem = (s16)id;
                             } else {
-                                notice->progressingId = (s16)id;
+                                notice->progressedItem = (s16)id;
                             }
                         }
                     }

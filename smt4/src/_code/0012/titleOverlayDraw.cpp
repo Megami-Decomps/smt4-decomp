@@ -12,7 +12,7 @@ void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
-void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);
+void effectRenderTransformedInstance(UiSpriteState *element, f32 value);
 s32 renderCtxPopState(RenderCtx *context, s32 stack);
 }
 

@@ -1,18 +1,16 @@
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: the packets and the hoisted per-case timer addresses now match; retail keeps `set` in r4 and the index in r5 (swapped here) and lays out the timerStart tail merges differently (own call for case 0, shared call in case 1). */
-#include "ui/TimerSlot.h"
+#include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct UiEightTimerSet {
     UiResourceParameters resources;
-    TimerSlot timers[8];
+    UiSpriteState timers[8];
 };
 
 extern "C" {
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void uiSpriteStateInitFromSource(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
-void timerStart(TimerSlot *timer, s32 animation, s32 flags);
-void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);
 /* The timer set's sprite resource packets, in retail's order (0x54, 0x18 and 0x70 bytes). */
 static const u32 sEightTimerPacketA[21] = {
     0x140, 0x0, 0x8, 0x0, 0xfec0, 0x4, 0x172, 0x0,

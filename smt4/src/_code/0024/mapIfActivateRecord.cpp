@@ -5,6 +5,7 @@
 #include "shard/S1Mover.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
+#include "map/LmapViewGlobals.h"
 
 static __inline SoundActorQueuePosition soundPosition(const Vec3f &value)
 {
@@ -22,14 +23,8 @@ struct MapActivationRecord {
     u8 unk68[0x124];
     u32 linked; // 0x18c
 };
-struct MapActivationContext {
-    s32 mode;
-    u8 unk04[0xa8];
-    s32 destination;
-};
 
 extern "C" {
-extern MapActivationContext *g_mapCamera;
 Vec3f FUN_003e0e60(const Vec3f *value, f32 scale);
 
 u32 mapIfActivateRecord(u8 enabled, s32 index)
@@ -38,7 +33,7 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
     state->unk17 = enabled;
     MapIfRecord *record = index == -1 ? NULL : &g_mapIf.state->records[index];
     MapActivationRecord *details = reinterpret_cast<MapActivationRecord *>(record);
-    if (index != -1 && record->active && g_mapCamera->destination != details->destination)
+    if (index != -1 && record->active && g_mapCamera->contextMode != details->destination)
         state->unk17 = 0;
     if (state->unk17 == 0) {
         MapIfRecord *records = state->records;
@@ -46,7 +41,7 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
             MapIfRecord *entry = &records[slot];
             if (!entry->active)
                 continue;
-            s32 category = entry->display.category;
+            s32 category = entry->category;
             if (category != 0x1d && category != 0x26 &&
                 category != 0x1e && category != 0x1f && category != 0x25 &&
                 (entry->state == 8 || entry->state == 10 || entry->state == 12 ||
@@ -59,7 +54,7 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
         return 0;
     if (!record->active || record->state != 6)
         return 1;
-    if (record->display.category >= 0x22) {
+    if (record->category >= 0x22) {
         record->state = 7;
         if (g_gameState.inputBlocked == 0)
             soundActorStartOnFreeChannel(0x10001ff, soundPosition(FUN_003e0e60(&details->position, 1.0f / 3.0f)));

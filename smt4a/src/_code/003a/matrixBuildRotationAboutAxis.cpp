@@ -1,10 +1,10 @@
 /* NON_MATCHING: normalized axis snapshot and matrix initialization/store grouping differ. */
 #include "gfx/AxisAngleRotation.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 f32 FUN_001b63b0(f32);
 f32 FUN_001a1ee0(f32);
-extern CameraVectorScratch g_vectorScratch;
 
 void matrixBuildRotationAboutAxis(const Vector4 *axis, Matrix44 *matrix, f32 angle)
 {

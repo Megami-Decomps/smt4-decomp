@@ -3,12 +3,12 @@
 #include "shard/JobWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "kernel/jyoucyuGetTableEntry.h"
+#include "script/scrScriptProcess.h"
 
 struct EventJobRequestPrefix { u32 id; s32 entry; char path[1]; };
 extern "C" {
 extern AocJobStateA *g_aocJob;
 extern EventJobRequestPrefix DAT_005e1f70;
-void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *memory);
 void rt_aeabi_memclr(void *memory, u32 size);
 char *libc_strcpy(char *destination, const char *source);
@@ -31,7 +31,9 @@ void FUN_00291728(const RequestParameters *parameters)
         u32 parameters[6];
         u8 flags[4], status, unk25[3];
         u32 state;
-        void *resource, *script, *auxiliary;
+        void *resource;
+        ScriptProcess *script;
+        void *auxiliary;
         u8 complete, unk39[3];
         char path[64];
         u8 pathReady;

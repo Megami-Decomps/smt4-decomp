@@ -5,6 +5,7 @@
 #include <stddef.h>
 #include "nw/math/MTX34.h"
 #include "Model/ModelUnitBuffers.h"
+#include "map/MapVector.h"
 
 extern "C" void asdOperatorDelete(void *block);
 
@@ -40,14 +41,24 @@ public:
     Obj557b18Matrix() { nn_math_ARMv6_MTX34CopyAsm(this, &nw::math::MTX34::Identity()); }
 };
 
-/* A scale vector, one in every axis. */
-struct Obj557b18Scale {
-    Obj557b18Scale() : x(1.0f), y(1.0f), z(1.0f) {}
-    f32 x, y, z;
+/* The body's translation: starts at the origin; controllerSetDestination copies a whole vector in. */
+struct Obj557b18Position : MapVector {
+    Obj557b18Position() { x = 0.0f; y = 0.0f; z = 0.0f; }
+    Obj557b18Position &operator=(const MapVector &value)
+    {
+        MapVector::operator=(value);
+        return *this;
+    }
 };
 
-/* The object whose vtable is at 0x557b18 (named after it until its real name is known): a camera
- * controller with a two-element table, a world matrix and a block of state. */
+/* A scale vector, one in every axis. */
+struct Obj557b18Scale : MapVector {
+    Obj557b18Scale() { x = 1.0f; y = 1.0f; z = 1.0f; }
+};
+
+/* The object whose vtable is at 0x557b18 (named after it until its real name is known): a model
+ * body (MoriModelUnit, 0x26C bytes), created by its content (Model/MoriModelContent.h) from the
+ * content's resource; the controller functions move it, the model manager lists it. */
 class Obj557b18 {
 public:
     Obj557b18();
@@ -61,7 +72,7 @@ public:
     void attachContent(UnitModelContent *content, u32 partIndex);
 
     /* 0x00: vtable pointer */
-    /* 0x04 */ u32 unk04;
+    /* 0x04 */ u32 flags;        /* bit 0 shown, bits 0-1 set to hide (see ControllerModel), bit 2 pending selection */
     /* 0x08 */ u32 unk08;
     /* 0x0C */ u32 unk0c;
     /* 0x10 */ u8 unk10[0x14];
@@ -97,17 +108,15 @@ public:
     /* 0x118 */ u32 unk118;
     /* 0x11C */ u8 unk11c;
     /* 0x11D */ u8 unk11d[0x93];
-    /* 0x1B0 */ u32 unk1b0;
-    /* 0x1B4 */ f32 unk1b4;
-    /* 0x1B8 */ f32 unk1b8;
-    /* 0x1BC */ f32 unk1bc;
-    /* 0x1C0 */ Obj557b18Matrix matrix;
-    /* 0x1F0 */ Obj557b18Scale scale;
-    /* 0x1FC */ f32 unk1fc;
+    /* 0x1B0 */ Obj557b18 *parent;  /* the body this one is attached to, or NULL */
+    /* 0x1B4 */ Obj557b18Position position;
+    /* 0x1C0 */ Obj557b18Matrix matrix;  /* rotation (controllerSetRotationEulerDegrees) */
+    /* 0x1F0 */ Obj557b18Scale scale;    /* set by controllerSetPosition */
+    /* 0x1FC */ f32 speed;        /* starts at 1; the trap sets 6 before moving the body */
     /* 0x200 */ u8 unk200;
     /* 0x201 */ u8 unk201[3];
-    /* 0x204 */ u32 unk204;
-    /* 0x208 */ u16 unk208;
+    /* 0x204 */ u32 pendingValue;   /* cleared with the pending flag (flags bit 2) */
+    /* 0x208 */ s16 selection;      /* -1 when none */
     /* 0x20A */ u8 unk20a[2];
     /* 0x20C */ u32 unk20c;
     /* 0x210 */ u32 unk210;
@@ -120,9 +129,15 @@ public:
     /* 0x268 */ u32 unk268;
 };
 
+/* Releases the storage the body owns (its destructor's body). */
+extern "C" void moriModelBodyReleaseOwnedStorage(Obj557b18 *body);
+/* Clears the pending flag (flags bit 2) and the selection. */
+extern "C" void FUN_003fd790(Obj557b18 *body);
+
 typedef char Obj557b18LayoutCheck[sizeof(Obj557b18Element) == 0x30 &&
-    offsetof(Obj557b18, elements) == 0x24 && offsetof(Obj557b18, matrix) == 0x1C0 &&
-    offsetof(Obj557b18, unk1fc) == 0x1FC && offsetof(Obj557b18, unk214) == 0x214 &&
+    offsetof(Obj557b18, elements) == 0x24 && offsetof(Obj557b18, position) == 0x1B4 && offsetof(Obj557b18, matrix) == 0x1C0 &&
+    offsetof(Obj557b18, scale) == 0x1F0 && offsetof(Obj557b18, selection) == 0x208 &&
+    offsetof(Obj557b18, speed) == 0x1FC && offsetof(Obj557b18, unk214) == 0x214 &&
     sizeof(Obj557b18) == 0x26C ? 1 : -1];
 
 #endif

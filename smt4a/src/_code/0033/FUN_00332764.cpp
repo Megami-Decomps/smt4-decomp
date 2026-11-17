@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00332764` (_code @ 0x332764, 0x85c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -18,7 +19,6 @@ extern int DAT_0060ffa0; /* 0x60ffa0 */
 extern int DAT_006105e4; /* 0x6105e4 */
 
 extern int randRange(unsigned int);
-extern int gameFlagsGetBlock(void);
 extern int FUN_003683b8(int);
 extern int lmapGetSpawnIndex(void);
 
@@ -50,7 +50,7 @@ void FUN_00332764(void)
   unsigned int temp_v14;
   unsigned int temp_v15;
   
-  temp_v3 = gameFlagsGetBlock();
+  temp_v3 = (int)gameFlagsGetBlock();
   *(unsigned char *)(temp_v3 + 0xe09) = 0;
   *(unsigned char *)(temp_v3 + 0xe0a) = 0;
   *(unsigned char *)(temp_v3 + 0xe0b) = 0;

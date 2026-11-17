@@ -1,11 +1,8 @@
 /* NON_MATCHING: only the tail merge of the state stores differs: retail shares case 1's store with case 2's (state 3), this build shares case 0's with case 1's. */
 #include "common.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "script/scrScriptProcess.h"
 
-struct QuestScriptProcess {
-    u8 unk00[0x108];
-    u32 mode;                    /* 0x108 */
-};
 struct QuestLoadStep {
     u32 state;                   /* 0x00 */
     u32 entry;                   /* 0x04 */
@@ -13,7 +10,7 @@ struct QuestLoadStep {
     u8 unk09[3];
     void *script;                /* 0x0c */
     void *messages;              /* 0x10 */
-    QuestScriptProcess *process; /* 0x14 */
+    ScriptProcess *process; /* 0x14 */
 };
 
 extern "C" {
@@ -21,14 +18,12 @@ extern const char g_questScriptPath[];
 extern const char g_questMessagesPath[];
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 flags);
 void buttonHelpSetPreset(s32 preset);
-QuestScriptProcess *scrScriptProcessCreate(void *script, void *messages);
-void scrScriptProcessStartEntry(QuestScriptProcess *process, u32 entry);
-s32 scrRunOpcodesStub(QuestScriptProcess *process);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 FUN_00298dc8();
 void FUN_0029016c(u32 selection, s32 flags);
 void FUN_002900d0();
 s32 gameJumpRequestIsPending();
-void scriptProcessSetMode(QuestScriptProcess *process, u32 mode);
+void scriptProcessSetMode(ScriptProcess *process, u32 mode);
 
 // Load quest script resources, run the requested entry, and finish any jump entry.
 u32 questSysLoadStep(QuestLoadStep *step)

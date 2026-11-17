@@ -1,10 +1,4 @@
-#include "common.h"
-#include "shard/SaveWork.h"
-
-struct MapCompletedGroupState {
-    /* 0x000 */ u8 unk000[0x7d4];
-    /* 0x7D4 */ u32 completedGroups[1];
-};
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" s32 dataTable23Type0FindIndexById(u32 id);
 extern "C" void mapIfClearGroupState(u32 id);
@@ -12,11 +6,11 @@ extern "C" void mapIfClearGroupState(u32 id);
 /* Sets a group's bit in the map block's completed-group mask. */
 static __inline void mapMarkGroupCompleted(s32 index)
 {
-    MapCompletedGroupState *map = reinterpret_cast<MapCompletedGroupState *>(gameGetMapBlock());
+    MapSaveBlock *map = gameGetMapBlock();
     if (index >= 0) {
         s32 word = index / 32;
         s32 bit = index % 32;
-        map->completedGroups[word] |= 1u << bit;
+        map->clearedGroups[word] |= 1u << bit;
     }
 }
 

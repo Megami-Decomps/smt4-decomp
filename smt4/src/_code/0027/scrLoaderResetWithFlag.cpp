@@ -1,5 +1,6 @@
 /* Resets the object to state 11 with the given flag, freeing its three buffers. */
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -10,11 +11,10 @@ typedef struct Object {
     /* 0x09 */ u8 unk09[3];
     /* 0x0C */ void *bufferA;
     /* 0x10 */ void *bufferB;
-    /* 0x14 */ void *bufferC;
+    /* 0x14 */ ScriptProcess *bufferC;
 } Object;
 
 extern void asdMemFree(void *buffer);
-extern void scrScriptProcessDestroy(void *buffer);
 extern void buttonHelpCreate(u8 flag);
 
 void scrLoaderResetWithFlag(Object *obj, u8 flag)

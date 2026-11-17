@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 struct ExperienceReward {
     s32 member;
@@ -14,7 +15,6 @@ struct BattleResultOwner {
     s32 rewardCount; // 0x3f0
 };
 extern "C" {
-extern void *g_btlUiBlock;
 u32 taskCreateDraw(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), void *owner, u32 parent);
 void callbackNormalizeNegativeResult();
 void jobStopChild();
@@ -22,8 +22,8 @@ void resultCreateDefault();
 void FUN_00214568(void *display);
 void FUN_00223360(void *display);
 void resultAddExperienceReward(const ExperienceReward *reward);
-void btlUiPlaySceneFadeOutWhenReady(void *battleUi);
-void btlUiResetWidgetForStateSixteen(void *battleUi);
+void btlUiPlaySceneFadeOutWhenReady(BtlUi *battleUi);
+void btlUiResetWidgetForStateSixteen(BtlUi *battleUi);
 
 // Start result display, transfer the pending experience rewards and transition battle UI to results.
 void FUN_001f8290(BattleResultOwner *owner)

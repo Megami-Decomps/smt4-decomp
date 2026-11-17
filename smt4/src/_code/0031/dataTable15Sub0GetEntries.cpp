@@ -1,18 +1,11 @@
-#include "common.h"
+#include "gamedata/CampComTable.h"
 
 extern "C" {
 
-int dataTableGet(int id, int index);
-extern int dataTableGetEntries(void);
-
-/* Address of record `index` (100-byte records) of data table 0x15/0 (no range check). */
-int dataTable15Sub0GetEntries(int index)
+/* Camp command row `index` (CampComTable.tbb, no range check). */
+CampComRecord *dataTable15Sub0GetEntries(u32 index)
 {
-    int entries;
-
-    dataTableGet(0x15, 0);
-    entries = dataTableGetEntries();
-    return entries + index * 100;
+    return campComRecords(dataTableGet(0x15, 0)) + index;
 }
 
 } /* extern "C" */

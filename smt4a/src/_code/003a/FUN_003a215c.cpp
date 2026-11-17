@@ -1,9 +1,8 @@
 /* NON_MATCHING: axis products and diagonal expressions use different VFP registers and store scheduling. */
 /* Builds the global axis-angle rotation matrix from the configured axis and an angle in radians. */
-#include "shard/W8Match1_MatrixRotation.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
-extern MatrixRotationWork g_vectorScratch;
 f32 FUN_001b63b0(f32 phase);
 f32 FUN_001a1ee0(f32 phase);
 
@@ -13,10 +12,10 @@ void FUN_003a215c(f32 angle)
     f32 cosine = FUN_001b63b0(phase);
     f32 sine = FUN_001a1ee0(phase);
     f32 complement = 1.0f - cosine;
-    f32 x = g_vectorScratch.axisInput.values[0];
-    f32 y = g_vectorScratch.axisInput.values[1];
-    f32 z = g_vectorScratch.axisInput.values[2];
-    f32 *matrix = g_vectorScratch.rotation.values;
+    f32 x = g_vectorScratch.first.vector.x;
+    f32 y = g_vectorScratch.first.vector.y;
+    f32 z = g_vectorScratch.first.vector.z;
+    f32 *matrix = g_vectorScratch.matrix.matrix.values;
     matrix[0] = x * x + (1.0f - x * x) * cosine;
     matrix[1] = z * sine + x * y * complement;
     matrix[2] = x * z * complement - y * sine;

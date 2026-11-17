@@ -1,7 +1,7 @@
 #include "map/MapIfGlobals.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-void asdMdlManagerMarkDestroy(NodeEnableNode *model);
 static void mapSlotDestroy(MapIfModelMarker *marker)
 {
     asdMdlManagerMarkDestroy(marker->model);

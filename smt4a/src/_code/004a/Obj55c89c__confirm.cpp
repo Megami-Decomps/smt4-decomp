@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "code/Code002a_Smt4a.h"
+#include "script/scrScriptProcess.h"
 
 /* A compendium list entry: 0x20 bytes with the item id halfword at +4. */
 struct BibleItemEntry {
@@ -30,9 +31,9 @@ public:
     /* 0x96 */ u8 successArg;
     /* 0x97 */ u8 unk97[0xDC - 0x97];
     /* 0xDC */ u8 spriteArea[0x854 - 0xDC];   /* a SpritePresetBank */
-    /* 0x854 */ u32 resourceA;
-    /* 0x858 */ u32 resourceB;
-    /* 0x85C */ u8 *entry;
+    /* 0x854 */ void *resourceA;
+    /* 0x858 */ void *resourceB;
+    /* 0x85C */ ScriptProcess *entry;
     /* 0x860 */ u8 owned;
     /* 0x861 */ u8 confirmed;
     /* 0x862 */ u8 unk862[2];
@@ -47,8 +48,7 @@ extern struct { u32 unk0; s32 selected; } g_animatedPageSelection;
 void sysPlaySe(s32 id);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 u32 slotRecordFindById(u16 id);
-u8 *scrScriptProcessCreate(u32 a, u32 b);
-void scriptProcessSetMode(u8 *script, s32 mode);
+void scriptProcessSetMode(ScriptProcess *script, s32 mode);
 void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void FUN_0035ad50(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);

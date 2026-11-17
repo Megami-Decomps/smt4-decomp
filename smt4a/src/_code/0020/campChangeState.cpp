@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "camp/CampStateA.h"
 
 extern "C" {
 
-void uiSpriteSetImageKeyframe(UiSpriteState *member, s32 a, s32 b);
 void frameTransitionSetMode(s32 mode);
 s32 lmapRefreshScene28Selection(void);
 s32 aocDataBlockHasEntries(void);

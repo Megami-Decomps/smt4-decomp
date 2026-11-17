@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the schedule of the category extent loads in the centers computation and two load registers of the origin sum differ; everything else is identical. */
 #include "gamedata/MapNaviCategories.h"
+#include "gamedata/MapSystemTable.h"
 #include "event/bustupEvent/BustupTex.h"
 
 /* One 8-byte position pair of the navigation display. */
@@ -21,16 +22,7 @@ struct NaviLayoutWork {
 };
 
 /* A data table 0x2E entry; only its map id and texture offset are used here. */
-struct NaviMapEntry {
-    u8 unk00[0x20];
-    s16 mapId;                  // 0x20
-    u8 unk22[8];
-    s16 textureOffset;          // 0x2A
-};
-
 extern "C" {
-s32 dataTable2ECount(void);
-NaviMapEntry *dataTable2EGetEntry(s32 index);
 s32 asdTMTexTableReleaseNode(s32 table, s32 node);
 u8 *asdTMTexTableGetHeaderValue(s32 table, s32 index);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *table);
@@ -49,12 +41,12 @@ void FUN_0048cee0(NaviLayoutWork *work, s32 map)
         work->textureIndex = 0;
     }
     for (i = 0; i < dataTable2ECount(); i++) {
-        NaviMapEntry *entry = dataTable2EGetEntry(i);
+        MapSystemMapRecord *entry = dataTable2EGetEntry(i);
         if (entry->mapId == -1) {
             break;
         }
         if (entry->mapId == map) {
-            work->textureIndex = entry->textureOffset + 1;
+            work->textureIndex = entry->textureIndex + 1;
             break;
         }
     }

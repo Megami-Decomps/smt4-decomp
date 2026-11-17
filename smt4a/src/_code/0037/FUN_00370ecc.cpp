@@ -1,17 +1,13 @@
-#include "gamedata/DataTable.h"
+#include "gamedata/GuestParamTable.h"
+#include "code/Code0037.h"
 
 extern "C" {
 
-typedef struct Table10Entry {
-    u16 id;       /* 0x00 */
-    u8 unk02[6];
-} Table10Entry;
-
-/* Returns the entry of data table 10 (section 0) with the given id, or NULL. */
-Table10Entry *FUN_00370ecc(u16 id)
+/* Returns guest `id`'s row of GuestParamData.tbb, or NULL. */
+GuestParamRecord *FUN_00370ecc(u16 id)
 {
     void *resource = dataTableGet(10, 0);
-    Table10Entry *entries = (Table10Entry *)dataTableGetEntries(resource);
+    GuestParamRecord *entries = guestParamRecords(resource);
     u32 count = dataTableGetCount(resource);
     s32 i;
 

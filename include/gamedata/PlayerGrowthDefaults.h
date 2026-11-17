@@ -1,33 +1,24 @@
-/* Data table 9, section 0: the hero's starting stats and growth rates. */
+/* The hero's growth parameters from data table 9 (gamedata/PlayerGrowTable.h). */
 #ifndef GAMEDATA_PLAYERGROWTHDEFAULTS_H
 #define GAMEDATA_PLAYERGROWTHDEFAULTS_H
 
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/PlayerGrowTable.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
 
-/* The table's first (only) record. */
-struct PlayerGrowthDefaults {
-    /* 0x00 */ s8 initialStats[5];
-    /* 0x05 */ u8 growth[5];
-    /* 0x0A */ u8 baseHp;
-    /* 0x0B */ u8 baseMp;
-    /* 0x0C */ u8 hpGrowth;
-    /* 0x0D */ u8 mpGrowth;
-};
-
-/* The hero's record of data table 9. */
-static __inline const PlayerGrowthDefaults *playerGrowthDefaults()
+/* The hero's growth record (retail also reads the section's count, unused). */
+static __inline const PlayerGrowRecord *playerGrowthDefaults()
 {
     void *table = dataTableGet(9, 0);
     dataTableGetCount(table);
-    return (const PlayerGrowthDefaults *)dataTableGetEntries(table);
+    return (const PlayerGrowRecord *)dataTableGetEntries(table);
 }
 
 /* The hero's growth parameters (kind 1) built from data table 9. */
 static __inline StatGrowthParameters playerGrowthParameters()
 {
-    const PlayerGrowthDefaults *defaults = playerGrowthDefaults();
+    const PlayerGrowRecord *defaults = playerGrowthDefaults();
     StatGrowthParameters parameters = {};
     parameters.baseHp = defaults->baseHp;
     parameters.baseMp = defaults->baseMp;

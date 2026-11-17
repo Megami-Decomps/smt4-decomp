@@ -1,4 +1,5 @@
 #include "gfx/RenderSubmission.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 void FUN_00246afc(RenderSubmissionPacket *packet, const f32 *position, const f32 *rotation, const f32 *scale);
@@ -7,7 +8,6 @@ void asdSetNormalizedColorRgba(u32 color);
 void FUN_00256a50(RenderSubmissionPacket *packet, u32 mode);
 u32 FUN_00269694(RenderSubmissionOwner *owner, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00246c28();
-extern EffectColorProductState g_vectorScratch;
 
 // Apply the owner's interpolated color and draw settings while the submission is alive.
 void FUN_00315288(RenderSubmission *submission)
@@ -19,7 +19,7 @@ void FUN_00315288(RenderSubmission *submission)
 
     u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
     asdSetNormalizedColorRgba(submission->color);
-    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
+    effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     asdSetNormalizedColorRgba(ownerColor);
     FUN_00246bd4();
     u32 color = FUN_00246c28();

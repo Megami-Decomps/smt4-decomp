@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* A model that can be bound to another; 0x108 is cleared when it is bound. */
 typedef struct PairedModel {
@@ -14,7 +15,7 @@ typedef struct PairedModel {
 typedef struct ModelPairOwner {
     /* 0x0000 */ u8 unk0000[0x3564];
     /* 0x3564 */ PairedModel *model;
-    /* 0x3568 */ PairedModel *bound;    /* model once bound to target */
+    /* 0x3568 */ ScriptProcess *bound;   /* script process created from model and target */
     /* 0x356C */ void *target;
     /* 0x3570 */ void *resource;
 } ModelPairOwner;

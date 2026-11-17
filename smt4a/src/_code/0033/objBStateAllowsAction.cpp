@@ -1,9 +1,9 @@
 #include "shard/Shard0033.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
 
-extern ObjBRef g_gameGlobals;
 extern s32 fourPtrsAllNull(u32 value);
 
 /* True when the object's state is 5, 6, 7 or 9 and fourPtrsAllNull accepts its +0x2034 value. */

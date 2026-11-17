@@ -25,22 +25,22 @@ EffectTextRequest *effMenuCreate(u32 kind, u32 context);
 
 void FUN_0037cdcc(u32 unused, u32 context, TextRequestResultView *result)
 {
-    if (g_effectEditor.textRequest.owner != 0) {
-        FUN_00381874(g_effectEditor.textRequest.request);
-        result->state = g_effectEditor.textRequest.request->state;
-        result->labelValue = formattedTextCopyLabel(g_effectEditor.textRequest.request, result);
-        result->linkedValue = linkedObjGetValue(g_effectEditor.textRequest.request);
-        FUN_003c4984(g_effectEditor.textRequest.request, result->selection);
+    if (g_effectEditor.nodeList != 0) {
+        FUN_00381874(g_effectEditor.request);
+        result->state = g_effectEditor.request->state;
+        result->labelValue = formattedTextCopyLabel(g_effectEditor.request, result);
+        result->linkedValue = linkedObjGetValue(g_effectEditor.request);
+        FUN_003c4984(g_effectEditor.request, result->selection);
         if (result->state == 1) {
-            handleHolderFree(g_effectEditor.textRequest.request);
-            g_effectEditor.textRequest.request = 0;
-            nodeListFree(g_effectEditor.textRequest.owner);
-            g_effectEditor.textRequest.owner = 0;
+            handleHolderFree(g_effectEditor.request);
+            g_effectEditor.request = 0;
+            nodeListFree(g_effectEditor.nodeList);
+            g_effectEditor.nodeList = 0;
         }
         return;
     }
     EffectTextRequest *request = effMenuCreate(0, context);
-    g_effectEditor.textRequest.request = request;
+    g_effectEditor.request = request;
     request->type = 0xba;
     request->size = 0x1c;
     result->state = 0;

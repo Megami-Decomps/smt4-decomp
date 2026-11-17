@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00208e4c` (_code @ 0x208e4c, 0x4198 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 #include "game/GameState.h"
 
 extern "C" {
@@ -59,7 +61,6 @@ typedef struct {
     unsigned int spCC; /* 0xcc: local_cc */
 } void_stack;
 
-extern int g_mapEnemy; /* 0x447600 */
 extern int g_lmapScene; /* 0x447e88 */
 extern signed char DAT_0049f942; /* 0x49f942 */
 extern int DAT_0049f954; /* 0x49f954 */
@@ -115,7 +116,6 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: nkmEnemyFindById. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002df948. */
 /* Supplied declaration required: FUN_002dfb48. */
 
@@ -182,9 +182,9 @@ void FUN_00208e4c(void)
   int temp_v45;
   int temp_v46;
   
-  temp_v5 = g_mapEnemy;
-  temp_v46 = gameGetMapBlock();
-  temp_v2 = gameGetMapBlock();
+  temp_v5 = ((int)g_mapEnemy);
+  temp_v46 = (int)gameGetMapBlock();
+  temp_v2 = (int)gameGetMapBlock();
   temp_v3 = 0;
   temp_v6 = 0;
   do {
@@ -278,7 +278,7 @@ void FUN_00208e4c(void)
             if ((temp_v14) && (0 < *(int *)(temp_v5 + 0x303c))) {
               temp_v6 = 0;
               do {
-                temp_v8 = g_mapEnemy + temp_v6 * 0x180;
+                temp_v8 = ((int)g_mapEnemy) + temp_v6 * 0x180;
                 if (*(char *)(temp_v8 + 0x34) != '\0') {
                   switch(*(unsigned int *)(temp_v8 + 0xb8)) {
                   case 7:
@@ -329,7 +329,7 @@ LAB_002091f4:
               if (temp_v17) {
                 temp_v6 = 0;
                 do {
-                  temp_v8 = g_mapEnemy + temp_v6 * 0x180;
+                  temp_v8 = ((int)g_mapEnemy) + temp_v6 * 0x180;
                   if (*(char *)(temp_v8 + 0x34) != '\0') {
                     switch(*(unsigned int *)(temp_v8 + 0xb8)) {
                     case 7:
@@ -439,7 +439,7 @@ LAB_002095d4:
             }
             temp_v6 = 0;
             do {
-              temp_v8 = g_mapEnemy + temp_v6 * 0x180;
+              temp_v8 = ((int)g_mapEnemy) + temp_v6 * 0x180;
               pcVar9 = (char *)(temp_v8 + 0x34);
               temp_v16 = *pcVar9 != '\0';
               temp_v7 = '\0';
@@ -1317,7 +1317,7 @@ LAB_0020abfc:
                 *(unsigned int *)(temp_v3 + 0xbc) = 0;
                 break;
               }
-              temp_v6 = g_mapEnemy;
+              temp_v6 = ((int)g_mapEnemy);
               *puVar10 = *puVar10 | 2;
               *(unsigned char *)(*(int *)(puVar10[2] + 0x2c) + 0x1f6) = 0;
               *(unsigned char *)(temp_v3 + 0x1b0) = 0;
@@ -1366,7 +1366,7 @@ joined_r0x0020ae6c:
               *(unsigned char *)(temp_v3 + 0x1b0) = 0;
             }
             else {
-              temp_v6 = g_mapEnemy;
+              temp_v6 = ((int)g_mapEnemy);
               *puVar10 = *puVar10 | 2;
               *(unsigned char *)(*(int *)(puVar10[2] + 0x2c) + 0x1f6) = 0;
               *(unsigned char *)(temp_v3 + 0x1b0) = 0;
@@ -1380,7 +1380,7 @@ joined_r0x0020ae6c:
       case 0xc:
         temp_v8 = *(int *)(temp_v3 + 0xbc) + 1;
         *(int *)(temp_v3 + 0xbc) = temp_v8;
-        temp_v6 = g_mapEnemy;
+        temp_v6 = ((int)g_mapEnemy);
         if (temp_v8 >= 3) {
           if (*(int *)(temp_v3 + 0x1ac) != 0) {
             if (*(char *)(temp_v3 + 0x1b1) != '\0') {
@@ -1405,7 +1405,7 @@ joined_r0x0020ae6c:
             temp_v7 = *(char *)(temp_v3 + 0xb1);
           }
           *pcVar17 = '\x01';
-          temp_v6 = g_mapEnemy;
+          temp_v6 = ((int)g_mapEnemy);
           if (!(temp_v16 && temp_v7 == '\0')) {
             *(unsigned int *)(temp_v3 + 0x3c) = *(unsigned int *)(temp_v3 + 0x48);
             *(unsigned int *)(temp_v3 + 0x40) = *(unsigned int *)(temp_v3 + 0x4c);
@@ -1456,7 +1456,7 @@ joined_r0x0020ae6c:
             temp_v6 = 0xf0;
           }
           else {
-            temp_v8 = gameGetMapBlock();
+            temp_v8 = (int)gameGetMapBlock();
             if (DAT_0049f942 != '\0') {
               temp_v29 = (int)*(char *)(temp_v8 + 0x3a);
               temp_v6 = (int)*(char *)(temp_v8 + 0x3b);

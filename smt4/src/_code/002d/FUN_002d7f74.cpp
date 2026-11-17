@@ -6,7 +6,6 @@
 
 extern "C" {
 
-
 void effMenuCallHandler(s32 handler, s32 flag);
 void requestDispatch(void *request);
 void effectNodeUpdatePlacedChildren(EffectNode *node);
@@ -22,20 +21,20 @@ void FUN_002d7f74(void)
     renderCtxPushD(g_titleScene, 0);
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     renderCtxPushB(g_titleScene, g_titleScene->stackB.entries[g_titleScene->stackB.count]);
-    if (g_effectEditor.dispatch.unk00 == 0) {
+    if (g_effectEditor.toggle == 0) {
         effectRestoreSavedRenderPairs(g_titleScene, asdCameraGetSavedRenderPairs());
     } else {
         layoutApplyForState(g_titleScene);
     }
     effMenuCallHandler(1, 1);
-    if (g_effectEditor.selection.resource != NULL) {
-        requestDispatch(g_effectEditor.selection.resource);
+    if (g_effectEditor.resource != NULL) {
+        requestDispatch(g_effectEditor.resource);
     }
-    if (g_effectEditor.dispatch.node != NULL) {
-        effectNodeUpdatePlacedChildren(g_effectEditor.dispatch.node);
+    if (g_effectEditor.node != NULL) {
+        effectNodeUpdatePlacedChildren(g_effectEditor.node);
     }
-    if (g_effectEditor.dispatch.cachedEvent != 0) {
-        requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));
+    if (g_effectEditor.cachedEvent != 0) {
+        requestDispatch(reinterpret_cast<void *>(g_effectEditor.cachedEvent));
     }
     renderCtxResetColorScale(g_titleScene);
     renderCtxApplyTransforms(g_titleScene);

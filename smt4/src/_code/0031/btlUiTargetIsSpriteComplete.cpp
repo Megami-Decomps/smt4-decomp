@@ -6,7 +6,6 @@ struct TargetState {
     /* 0x1c4 */ UiSpriteState sprite;
 };
 extern "C" {
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 /* Reports whether the target's sprite has a completion state set. */
 s32 btlUiTargetIsSpriteComplete(const TargetState *target)

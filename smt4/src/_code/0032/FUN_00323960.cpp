@@ -20,13 +20,13 @@ void linkedItemsRemoveAndRelease(LinkedItems *items, LinkedItem *item);
 /* Selects the current editor item and resets the two editing blocks. */
 void FUN_00323960(void)
 {
-    s32 index = DAT_0044f858.index + g_effectEditor.selection.index;
-    linkedItemsRemoveAndRelease(static_cast<LinkedItems *>(g_effectEditor.selection.list),
-                 linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.selection.list), index));
+    s32 index = DAT_0044f858.index + g_effectEditor.index;
+    linkedItemsRemoveAndRelease(static_cast<LinkedItems *>(g_effectEditor.list),
+                 linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.list), index));
     DAT_0044f578[3] = 0;
-    g_effectEditor.selection.index = 0;
+    g_effectEditor.index = 0;
     DAT_0044f858.index = 0;
-    g_effectEditor.selection.object = (EffectSelectionTemplate *)&DAT_0044f858;
+    g_effectEditor.object = (EffectSelectionTemplate *)&DAT_0044f858;
 }
 
 } /* extern "C" */

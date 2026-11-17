@@ -1,6 +1,5 @@
-#include "common.h"
+#include "map/MapEnemyGlobal.h"
 extern "C" {
-extern void *g_mapEnemy;
 void asdMemFree(void *memory);
 /* Releases the module's allocation and clears its pointer. */
 void mapEnemyRelease(u32 job) {

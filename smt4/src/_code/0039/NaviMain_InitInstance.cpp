@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps -1 in one register for the byte at +0xc and the halfword at +0x121c0, merges nothing in the 0xb7c..0xb84 stores (here two are fused into an stm), and refers to its key tables through DAT_00404a9c rather than .constdata; the same stores and calls in the same order. */
+#include "gamedata/MapSaveBlock.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
-#include "shard/SaveWork.h"
 
 /* A 0x8C-byte UI sprite. */
 struct NaviSprite {
@@ -16,12 +16,6 @@ struct NaviPair {
 struct NaviHalves {
     u16 first;
     u16 second;
-};
-
-/* The map block returned by gameGetMapBlock (only the byte this initializer defaults). */
-struct NaviMapBlock {
-    /* 0x000 */ u8 unk000[0xd5a];
-    /* 0xd5a */ u8 naviIcon;
 };
 
 /* The navigation screen's work area as this initializer lays it out; only written offsets are named. */
@@ -116,7 +110,7 @@ void uiSpriteInitializeState(NaviSprite *sprite, u32 group, s32 image, s32 kind,
    the five header sprites and the two animated sprites. */
 void NaviMain_InitInstance(NaviMainWork *work)
 {
-    NaviMapBlock *mapBlock = reinterpret_cast<NaviMapBlock *>(gameGetMapBlock());
+    MapSaveBlock *mapBlock = gameGetMapBlock();
     NaviMain_InitCallbacks(work);
     asdTMTexTableLoadTmx(0x33, 0);
     work->unk0c = -1;
@@ -141,8 +135,8 @@ void NaviMain_InitInstance(NaviMainWork *work)
     work->unkB84 = 0x78;
     work->unkB80 = 0xa0;
     work->unkB7C = 0;
-    if (mapBlock->naviIcon == 0) {
-        mapBlock->naviIcon = 0xc;
+    if (mapBlock->layout == 0) {
+        mapBlock->layout = 0xc;
     }
     work->unk5A88 = 0;
     work->unk61B0 = 0;

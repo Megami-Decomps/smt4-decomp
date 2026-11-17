@@ -1,5 +1,5 @@
 /* Marks active item-count quest goals and records whether this gain reaches their target. */
-#include "shard/SaveWork.h"
+#include "gamedata/MapSaveBlock.h"
 #include "quest_center/QuestRecord.h"
 #include "gamedata/GameDataAccess_VariantA.h"
 
@@ -23,17 +23,10 @@ static __inline void questMarkChanged(u16 quest)
     reinterpret_cast<QuestItemFlagBanks *>(gameGetFlagBlock())->quests[quest].changed |= 2;
 }
 u32 flagValueRead(u32 item);
-SaveWork *gameGetMapBlock(void);
 
 void FUN_00348e88(u32 item, u32 amount)
 {
-    /* Quest notification ids lie beyond the shared map-save prefix. */
-    struct QuestNoticeView {
-        u8 unk0000[0x1060];
-        s16 progressingItem;
-        s16 completedItem;
-    };
-    QuestNoticeView *notice = (QuestNoticeView *)gameGetMapBlock();
+        MapSaveBlock *notice = gameGetMapBlock();
     for (s32 i = 0; i < 400; ++i) {
         u32 isActive = (questGetFlags(i)->active & 2) >> 1;
         if (isActive) {
@@ -47,7 +40,7 @@ void FUN_00348e88(u32 item, u32 amount)
                             if (record->requirements[j].count <= amount + current) {
                                 notice->completedItem = (s16)item;
                             } else {
-                                notice->progressingItem = (s16)item;
+                                notice->progressedItem = (s16)item;
                             }
                         }
                     }

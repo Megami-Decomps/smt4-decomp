@@ -7,21 +7,21 @@ void nn_os_CriticalSection_Leave(void *lock);
 s32 asdCecInboxGetMessageCount();
 void asdCecReadInboxMessages(u32 box, s32 count, AsdCecInboxBatch *batch, u32 flags);
 
-void FUN_0028196c(AsdCecProcessWork *work)
+void FUN_0028196c(CecProcessA *work)
 {
-    void *lock = work->inbox.lock;
+    void *lock = work->lock;
     for (;;) {
         nn_os_CriticalSection_Enter(lock);
-        if (work->inbox.producedBatches - work->inbox.consumedBatches < 32) {
-            AsdCecInboxBatch *batch = &work->inbox.batches[work->inbox.producedBatches & 31];
+        if (work->producedBatches - work->consumedBatches < 32) {
+            AsdCecInboxBatch *batch = &work->batches[work->producedBatches & 31];
             s32 count = asdCecInboxGetMessageCount();
             if (count > 32) {
                 count = 32;
             }
             asdCecReadInboxMessages(0, count, batch, 0);
-            ++work->inbox.producedBatches;
-            work->inbox.receivedCount += count;
-            if (work->inbox.receivedCount >= work->inbox.requestedCount) {
+            ++work->producedBatches;
+            work->receivedCount += count;
+            if (work->receivedCount >= work->requestedCount) {
                 nn_os_CriticalSection_Leave(lock);
                 return;
             }

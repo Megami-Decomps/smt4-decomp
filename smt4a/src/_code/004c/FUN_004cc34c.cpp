@@ -36,7 +36,6 @@ void btlTalkBustUpSetUnk2F4(u32 value);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 btlTalkBustupMatchesEntry(u16 entry);
 s32 bgmGetStateById(u32 id);
-s32 scrRunOpcodesStub(ScriptProcess *process);
 void FUN_002c85b0(u32 value);
 void FUN_002c39dc(u32 first, u32 second, u32 third);
 void FUN_00284ee4(u32 value);

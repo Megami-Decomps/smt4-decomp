@@ -8,7 +8,7 @@ u8 screenGetSlotFlag(u32 index)
     ButtonHelpWorkA *screen = g_buttonHelp.work;
 
     if (screen != NULL && index < 6) {
-        return screen->kinds[index].kind;
+        return screen->slots[index].kind;
     }
     return 0;
 }

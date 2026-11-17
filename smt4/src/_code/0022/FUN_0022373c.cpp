@@ -1,15 +1,15 @@
 /* NON_MATCHING: merged heading epilogue, VFP register lifetimes and neighbor-field addressing differ. */
+#include "gamedata/MapSaveBlock.h"
 #include "map/MapSpawn.h"
 #include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 extern "C" {
-extern MapHeadingState *g_mapCamera;
 extern MapSpawnPoint DAT_00447f40[];
-MapSpawnGrid *gameGetMapBlock(void);
 
 // Restore an explicit spawn point or place the actor at the map's starting cell.
 void FUN_0022373c(void)
 {
-    MapSpawnGrid *grid = gameGetMapBlock();
+    MapSaveBlock *grid = gameGetMapBlock();
     s32 spawn = mapGetDepartureIndex();
     f32 heading = 0.0f;
     LmapScene *scene = g_lmapScene;
@@ -35,9 +35,9 @@ void FUN_0022373c(void)
             u8 unk81[0x6F];
             u8 south;
         };
-        const NeighborView *neighbors = (const NeighborView *)((u8 *)grid + grid->z * 0x78 + grid->x * 8 - 0x3C);
-        f32 x = (f32)grid->x * 500.0f + 250.0f;
-        f32 z = (f32)grid->z * 500.0f + 250.0f;
+        const NeighborView *neighbors = (const NeighborView *)((u8 *)grid + grid->maze.spawnZ * 0x78 + grid->maze.spawnX * 8 - 0x3C);
+        f32 x = (f32)grid->maze.spawnX * 500.0f + 250.0f;
+        f32 z = (f32)grid->maze.spawnZ * 500.0f + 250.0f;
         scene->pose.position.x = x;
         scene->pose.position.y = 0.0f;
         scene->pose.position.z = z;

@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* Work area, Shin Megami Tensei IV. */
 typedef struct ClearSaveWork {
@@ -16,7 +17,7 @@ typedef struct ClearSaveWork {
     /* 0x0C */ s32 state;                  /* update state machine step */
     /* 0x10 */ u8 unk10[0x78];
     /* 0x88 */ void *heapA;               /* heap block, freed on close */
-    /* 0x8C */ u32 resource;               /* released on close */
+    /* 0x8C */ ScriptProcess *resource;               /* released on close */
     /* 0x90 */ void *heapB;               /* heap block, freed on close */
 } ClearSaveWork;
 
@@ -31,7 +32,7 @@ typedef struct ClearSaveWorkA {
         } initialization;
     };
     /* 0x8C */ void *heapA;               /* heap block, freed on close */
-    /* 0x90 */ u32 resource;               /* released on close */
+    /* 0x90 */ ScriptProcess *resource;               /* released on close */
     /* 0x94 */ void *heapB;               /* heap block, freed on close */
 } ClearSaveWorkA;
 typedef char ClearSaveWorkLayoutCheck[

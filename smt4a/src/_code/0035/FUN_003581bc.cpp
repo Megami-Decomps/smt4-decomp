@@ -12,8 +12,8 @@ struct MapDepartView {
     /* 0x000 */ u8 unk000[0x48];
     /* 0x048 */ s32 state;              /* 11: the counter panel is shown */
     /* 0x04c */ u8 unk04c[0xfc];
-    /* 0x148 */ u8 position[8];         /* the panel's screen position */
-    /* 0x150 */ u8 unk150[0x344];
+    /* 0x148 */ UiSpriteState position;         /* the panel's screen position */
+    /* 0x150 */ u8 unk150[0x2C0];
     /* 0x494 */ s32 counter;            /* 20.12 fixed point */
 };
 
@@ -38,8 +38,8 @@ u32 FUN_003581bc(void)
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();
         if (depart->state == 11) {
-            s32 x = vec2GetXInt((const UiSpriteState *)depart->position);
-            s32 y = vec2GetYInt((const UiSpriteState *)depart->position);
+            s32 x = vec2GetXInt(&depart->position);
+            s32 y = vec2GetYInt(&depart->position);
             depart = g_mapDepart;
             TextureTableEntryIV *panel = asdTMTexTableEntryAt(29, 202);
             texDrawTableEntryAtStoredOrigin(2, 29, 194, panel->x + x, panel->y + y, 101);

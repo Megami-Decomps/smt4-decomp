@@ -1,8 +1,8 @@
 #include "shard/Shard0033.h"
 #include "gfx/CameraVector3.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 void FUN_00240170(void);
 void statusCameraSetEye(f32 x, f32 y, f32 z);
 void statusCameraApply(void);

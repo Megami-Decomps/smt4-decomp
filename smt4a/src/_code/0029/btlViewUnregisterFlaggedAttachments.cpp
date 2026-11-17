@@ -7,10 +7,10 @@ extern BattleViewState g_battleViewState;
 s32 gameFlagIsSet(u32 flag);
 }
 
-static inline void unregisterAttachment(BattleViewOwner *owner)
+static inline void unregisterAttachment(MoriModelContent *owner)
 {
-    if (owner != 0 && owner->object != 0) {
-        ptrListRemoveClearOwner(g_handleRegistry, owner->object);
+    if (owner != 0 && owner->body != NULL) {
+        ptrListRemoveClearOwner(g_handleRegistry, owner->body);
     }
 }
 

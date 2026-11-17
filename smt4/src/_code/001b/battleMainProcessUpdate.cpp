@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include "game/GameState.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "script/scrScriptProcess.h"
 
 struct BattleTaskActor {
     u8 unk00[0x50];
@@ -41,7 +42,6 @@ struct BattleTaskParameters {
     f32 scaleX, scaleY;
     u8 unk38[0x3c];
 };
-struct BattleTaskScript { u8 unk00[0x108]; u32 active; };
 struct BattleTaskContext {
     /* 0x0000 */ u32 mainJob, endJob, unk0008, jobs[4];
     /* 0x001C */ u8 unk001c[0x10];
@@ -77,7 +77,7 @@ struct BattleTaskContext {
     /* 0x2230 */ u8 unk2230[0x1c];
     /* 0x224C */ void *openingData;
     /* 0x2250 */ void *ready;
-    /* 0x2254 */ BattleTaskScript *openingScript;
+    /* 0x2254 */ ScriptProcess *openingScript;
     /* 0x2258 */ u8 unk2258[0xc0];
     /* 0x2318 */ BattleTaskAction actions[109];
     /* 0x2F04 */ u8 unk2f04[0x159c];
@@ -88,7 +88,7 @@ struct BattleTaskContext {
     /* 0x49FC */ u16 initFlags;
     /* 0x49FE */ u8 unk49fe[0x46];
     /* 0x4A44 */ void *exitScriptData;
-    /* 0x4A48 */ BattleTaskScript *exitScript;
+    /* 0x4A48 */ ScriptProcess *exitScript;
     /* 0x4A4C */ u32 exitStage;
 };
 struct BattleTaskGlobals {
@@ -141,9 +141,8 @@ BattleTaskOpening *dataTableGetEntries(void *table);
 s32 dataTableGetCount(void *table);
 s32 nodeListCountActiveById(void *list, u32 id);
 void FUN_0027e5e4(BattleTaskActor *actor);
-void scrScriptProcessStartEntry(BattleTaskScript *script, u32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 void buttonHelpSetPreset(u32 preset);
-s32 scrRunOpcodesStub(BattleTaskScript *script);
 s32 btlEventSelectTrigger(void *event, u32 kind, u32 value, u32 flags);
 s32 gameFlagIsSet(u32 id);
 s32 flagBitIsSet(u32 id);
@@ -179,7 +178,6 @@ void FUN_0027dbc8(u32 kind, u32 enabled);
 void jobStopIfValidC(BattleTaskContext *work);
 s32 sys43e188GetState();
 s32 FUN_002d1ce0();
-BattleTaskScript *scrScriptProcessCreate(void *data, u32 flags);
 s32 screenFadesAllReady();
 void frameTexResetFlags();
 void soundChannelStopAll(u32 channels);
@@ -321,7 +319,7 @@ static inline bool battleTaskCompletionReady(BattleTaskContext *work)
             case 1:
                 if (work->exitScriptData) {
                     work->exitScript = scrScriptProcessCreate(work->exitScriptData, 0);
-                    work->exitScript->active = 1;
+                    work->exitScript->mode = 1;
                     scrScriptProcessStartEntry(work->exitScript, 0);
                     ++work->exitStage;
                 }

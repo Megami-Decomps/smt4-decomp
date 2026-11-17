@@ -3,7 +3,7 @@
 
 #include "common.h"
 #include <stdarg.h>
-#include "gamedata/X14_Table21.h"
+#include "gamedata/CampComTable.h"
 
 // A zero capacity permits allocation and growth, initially to 64 bytes.
 extern "C" char* asdStringFormatGrow(char* buffer, s32 capacity, const char* format, va_list arguments);
@@ -12,7 +12,6 @@ extern "C" char* asdStringFormatGrow(char* buffer, s32 capacity, const char* for
 extern "C" {
 #endif
 
-Table21Entry *FUN_002e26c4(u32 id);
 
 #ifdef __cplusplus
 }

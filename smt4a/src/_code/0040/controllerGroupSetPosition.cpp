@@ -1,8 +1,9 @@
-#include "shard/W5_W5Match7_ControllerPose.h"
+#include "shard/W5_W5Match7_SceneState.h"
+#include "gfx/ControllerModel.h"
 
 struct PositionTarget {
     u32 unk00;
-    ControllerPose *controller; // 0x04
+    Obj557b18 *controller; // 0x04
 };
 struct PositionTargetGroup {
     u8 unk00[0x1c];
@@ -10,7 +11,6 @@ struct PositionTargetGroup {
 };
 
 extern "C" {
-void controllerSetPosition(ControllerPose *controller, f32 x, f32 y, f32 z);
 
 // Propagate the same position to every present target controller.
 void controllerGroupSetPosition(PositionTargetGroup *group, f32 x, f32 y, f32 z)

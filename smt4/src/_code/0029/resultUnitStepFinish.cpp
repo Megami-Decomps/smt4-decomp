@@ -1,10 +1,11 @@
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "script/scrScriptProcess.h"
 
 /* The part of the result screen that its exit step uses. */
 struct ResultScreenExit {
     /* 0x0000 */ u8 unk0000[0x3574];
-    /* 0x3574 */ void *script;
+    /* 0x3574 */ ScriptProcess *script;
     /* 0x3578 */ void *buffer;
     /* 0x357C */ u8 unk357C[0xCF74 - 0x357C];
     /* 0xCF74 */ s32 slotCount;
@@ -19,7 +20,6 @@ void btlTalkBustUpDestroy(void);
 void resultSetMenuState(ResultScreenExit *result, s32 state);
 void FUN_0029e788(void);
 void gameSetIconDisplayEnabled(s32 value);
-void scrScriptProcessDestroy(void *script);
 
 // Ends the current unit's result step: moves on to the next unit or to the closing menu state.
 u32 resultUnitStepFinish(ResultScreenExit *result)

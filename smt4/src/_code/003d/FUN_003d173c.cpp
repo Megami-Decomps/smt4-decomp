@@ -6,6 +6,7 @@
 #include "AsdSDK/AsdDebugHooks.h"
 #include "battle/BtlGlobals.h"
 #include "util/MathFunctions.h"
+#include "battle/BtlUiGlobal.h"
 
 /* Fields of the battle state the cutscene reads beyond the shared prefix. */
 struct ReflectCutsceneView {
@@ -29,7 +30,6 @@ typedef char ReflectCutsceneOffsets[
 extern "C" {
 extern void *DAT_00435d18;
 extern void *DAT_004398d4;
-extern u32 g_btlUiBlock;
 
 void FUN_00338358(BtlMainState *state);
 void armySummonResetRootTransform(BtlMainState *state);
@@ -43,7 +43,7 @@ u32 soundSlotStopById(u32 id);
 void armySummonSetCommandTransform(BtlMainState *state);
 void modelClearPendingAnimation(BtlMainState *state);
 void modelSlotDetachChild(BtlCamera *main);
-void btlUiPlaySceneFadeOutWhenReady(u32 uiBlock);
+void btlUiPlaySceneFadeOutWhenReady(BtlUi *uiBlock);
 void slotResetIdle(BtlMainState *state, s32 slot, u32 value);
 void FUN_003ddb50(u32 actor, void *options, u32 value, f32 red, f32 green, f32 blue);
 void nodeGroupSetScale(void *group, NodeVec3 scale);
@@ -61,7 +61,7 @@ void FUN_00339dc0(BtlMainState *state);
 void FUN_00338fb0(BtlMainState *state);
 void objectScriptDestroy(BtlMainState *state);
 void objResourceRelease(BtlMainState *state);
-void btlUiPanelFadeInWhenReady(u32 uiBlock);
+void btlUiPanelFadeInWhenReady(BtlUi *uiBlock);
 u8 buttonHelpGetMode(void);
 void buttonHelpSetPreset(u32 preset);
 void battleSetActionKind(BtlMainState **block);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite (322 vs 321 rows, every call, constant and branch matches); retail keeps the position in s17/s18/s16 and adds the constant offset through s0-s2 before moving it back, builds the kind 0/2 and 1/3 chains as `cmp; moveq r2; beq` blocks (the build fuses them into cmpne pairs), and orders the 64-bit mask loads differently. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlUiGlobal.h"
 
 struct Vec3 {
     f32 x;
@@ -50,7 +51,6 @@ struct EffectStep {
 };
 
 extern "C" {
-extern u32 g_btlUiBlock;
 extern u8 g_btlActionReflect[];
 extern s16 DAT_0057a664[];
 extern const Vec3 DAT_005e1c2c;
@@ -58,9 +58,9 @@ extern const Vec3 DAT_005e1c2c;
 BtlSide *btlMainFindEntryByListedId(void *main, s32 index);
 Vec3 FUN_003e7fa4(void *main, s32 index, s32 arg);
 s32 randBetween(s32 minimum, s32 maximum);
-u32 FUN_004a94a8(u32 block, s32 bank);
-u32 FUN_004a9588(u32 block, u32 value, u8 first, u8 second, s32 enabled, u8 mode, f32 x, f32 y, f32 z);
-u32 FUN_004a9f00(u32 block, s32 category, u32 text, u32 color, u32 style, u32 value, s32 x, s32 y);
+u32 FUN_004a94a8(BtlUiA *block, s32 bank);
+u32 FUN_004a9588(BtlUiA *block, u32 value, u8 first, u8 second, s32 enabled, u8 mode, f32 x, f32 y, f32 z);
+u32 FUN_004a9f00(BtlUiA *block, s32 category, u32 text, u32 color, u32 style, u32 value, s32 x, s32 y);
 
 #define MASK64(offset) (*reinterpret_cast<u64 *>(g_btlActionReflect + (offset)))
 

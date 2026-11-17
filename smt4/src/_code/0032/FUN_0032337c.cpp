@@ -1,10 +1,10 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern u32 g_btlUiBlock;
 
-void btlUiPanelFadeInWhenReady(u32 block);
+void btlUiPanelFadeInWhenReady(BtlUi *block);
 
 /* Script command: fades in the battle UI panel once it is ready. */
 u32 FUN_0032337c(void)

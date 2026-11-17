@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048981c` (_code @ 0x48981c, 0x99c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -46,7 +47,6 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern unsigned int *gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
 extern int FUN_00325064(void);

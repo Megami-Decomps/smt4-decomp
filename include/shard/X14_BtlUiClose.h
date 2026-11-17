@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+struct BtlUiA;
 
 /* A heap block that owns a helper job. */
 typedef struct BtlUiHelper {
@@ -70,7 +71,7 @@ typedef char BtlUiCloseMaskOffsets[offsetof(BtlUiCloseState, talkAll) == 0x98 &&
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void FUN_004aa780(u32 unused, u8 value);
+void FUN_004aa780(struct BtlUiA *ui, u8 value);
 #ifdef __cplusplus
 }
 #endif

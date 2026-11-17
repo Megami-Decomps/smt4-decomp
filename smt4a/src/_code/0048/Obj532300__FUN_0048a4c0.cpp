@@ -16,8 +16,6 @@ typedef char NavigationIntroWorkOffsets[
 
 extern "C" {
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 keyframe, s32 frame);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 frame);
 void FUN_0048bdec(NavigationIntroWork *work);
 NavigationPoint *sub68OwnerGetBlock60(void *scene);
 u8 *lmapSceneGetObj(void *scene);

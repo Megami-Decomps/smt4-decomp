@@ -7,7 +7,7 @@ extern "C" {
 /* Returns the address of the member at 0x1EF5C of the game-data table. */
 u8 *saveGetFlagRowTable(void)
 {
-    return g_gameDataBlocks.saveBlock->body.block1EED4;
+    return g_gameDataBlocks.saveBlock->body.flagRows;
 }
 
 } /* extern "C" */

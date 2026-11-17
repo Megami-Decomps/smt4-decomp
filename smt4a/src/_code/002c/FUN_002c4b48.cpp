@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c4b48` (_code @ 0x2c4b48, 0x6cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -34,7 +35,6 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: messageSetScriptDisplayMode. */
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -192,7 +192,7 @@ unsigned int FUN_002c4b48(void)
           }
           else {
             if (*(char *)(temp_v4 + 6) == '\0') {
-              temp_v3 = gameFlagsGetBlock();
+              temp_v3 = (int)gameFlagsGetBlock();
               QuestCenter_GetActiveEntry();
               temp_v2 = idOwnerGetRecordHalf();
               gameFlagSlotSetEnableBit(temp_v2,0);

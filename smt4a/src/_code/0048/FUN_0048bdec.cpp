@@ -19,7 +19,7 @@ struct MapScreen {
     s8 cursorLocked;            // 0x58e
     u8 unk58f;
     u8 menuSprite[0xc40 - 0x590];       // 0x590
-    u8 listSprites[6][0x8c];    // 0xc40
+    UiSpriteState listSprites[6];    // 0xc40
 };
 
 /* The block at 0x20600 holds the list-active flag at +0x44. */
@@ -53,7 +53,7 @@ void FUN_0048bdec(MapScreen* screen)
     MapScreenListBlock* list = reinterpret_cast<MapScreenListBlock*>(reinterpret_cast<u8*>(screen) + 0x20600);
     if (phase == 0) {
         if (list->active != 0) {
-            for (s32 i = 0; i < 6; i++) uiSpriteAdvanceAnimation((UiSpriteState *)screen->listSprites[i], 1.0f);
+            for (s32 i = 0; i < 6; i++) uiSpriteAdvanceAnimation(&screen->listSprites[i], 1.0f);
             uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x112c)), 1.0f);
             uiSpriteAdvanceAnimation((UiSpriteState *)(SCREEN_PTR(screen, 0x10a0)), 1.0f);
         }

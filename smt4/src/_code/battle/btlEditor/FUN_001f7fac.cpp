@@ -8,6 +8,7 @@
 #include "battle/btlEditor.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 struct BtlUi;
 /* The allocated session extends beyond the shared EnemyEditorWork prefix. */
 struct EditorSessionState {
@@ -26,7 +27,6 @@ struct EditorSessionState {
 };
 typedef char EditorSessionStateLayoutCheck[(sizeof(EditorSessionState) == 0x18 && offsetof(EditorSessionState, initial.leftSelection) == 0x12) ? 1 : -1];
 extern "C" {
-extern BtlUi *g_btlUiBlock;
 extern void *DAT_00435ce8;
 u32 jobDispatchOptionalOwner(u32 job);
 u32 battleEditorRunForJob(u32 job);
@@ -56,6 +56,6 @@ void FUN_001f7fac(BtlMainState *battle)
     battle->editorMask |= 0x80000;
     BtlUi *ui = g_btlUiBlock;
     if (ui)
-        FUN_0025c2d0(reinterpret_cast<u32>(ui), 1);
+        FUN_0025c2d0(ui, 1);
 }
 }

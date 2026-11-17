@@ -1,19 +1,15 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 struct ScriptTable;
-struct ScriptProcess {
-    u8 unk000[0x108]; // 0x000
-    u32 mode;         // 0x108
-};
 struct LazyScriptState {
     ScriptTable* table;      // 0x00
-    u32 parameter;           // 0x04
+    void* parameter;         // 0x04
     ScriptProcess* process;  // 0x08
 };
 
 extern "C" {
 extern LazyScriptState g_lazyScriptState;
-ScriptProcess* scrScriptProcessCreate(ScriptTable* table, u32 parameter);
 u32 tableGroupFindEntryIndex(ScriptTable* table, u32 id);
 void scrScriptProcessStartEntry(ScriptProcess* process, u32 index);
 

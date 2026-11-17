@@ -20,7 +20,7 @@ struct ResultPanelFlags {
 /* The battle result panel: six effect elements and the flags that enable its two draw passes. */
 struct ResultPanel {
     /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ TitleDrawElement elements[6];
+    /* 0x020 */ UiSpriteState elements[6];
     /* 0x368 */ u8 unk368[0x98];
     /* 0x400 */ ResultPanelFlags flags;
 };
@@ -30,7 +30,7 @@ typedef char ResultPanelOffsets[offsetof(ResultPanel, flags.drawGlow) == 0x400 &
 extern "C" {
 extern u64 DAT_0057a9b0; /* battle state flags that hide the panel's frame */
 
-void effectRenderTransformedInstance(TitleDrawElement *element, f32 offset);
+void effectRenderTransformedInstance(UiSpriteState *element, f32 offset);
 void efctSetSpeed(f32 speed);
 void FUN_003b21a4(ResultPanel *panel);
 
@@ -53,11 +53,11 @@ void FUN_003217d0(ResultPanel *panel)
     frame = (s32)renderCtxCalculateStereoParallax(g_renderCtx, RESULT_PANEL_STEREO_SCALE);
     if (flags->drawGlow != 0) {
         const f32 minimumScale = 0.0f;
-        f32 first = vec2GetSpeed((const UiSpriteState *)&panel->elements[0]);
+        f32 first = vec2GetSpeed(&panel->elements[0]);
         if (first > minimumScale) {
             efctSetSpeed(first);
             texDrawTableEntryAtStoredOrigin(2, 12, 1000, frame, 0, 0x1F);
-            f32 third = vec2GetSpeed((const UiSpriteState *)&panel->elements[2]);
+            f32 third = vec2GetSpeed(&panel->elements[2]);
             if (third > minimumScale) {
                 efctSetSpeed(third);
                 renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));

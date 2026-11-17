@@ -2,6 +2,7 @@
 #include "map/mapDepart.h"
 #include "map/LmapGlobals.h"
 #include "game/GameState.h"
+#include "map/LmapViewGlobals.h"
 
 struct MapMainView {
     u8 unk00[0x2c]; // 0x00
@@ -9,14 +10,8 @@ struct MapMainView {
     u32 areaId;     // 0x30
 };
 
-struct MapSnapshotSource {
-    u8 unk00[0x18]; // 0x00
-    f32 value;      // 0x18
-};
-
 extern "C" {
 extern MapMainView *g_mapMain;
-extern MapSnapshotSource *g_mapCamera;
 
 // Unless a skip is pending, record the current map and scene position as both saved and target snapshots.
 void mapSaveReturnSnapshot(void)
@@ -32,12 +27,12 @@ void mapSaveReturnSnapshot(void)
         g_gameState.savedObjectId = g_gameState.currentObjectId;
         g_gameState.savedPosition = g_lmapScene->pose.position;
         g_gameState.savedHeading = g_lmapScene->pose.heading;
-        g_gameState.savedHeadingCopy = g_mapCamera->value;
+        g_gameState.savedHeadingCopy = g_mapCamera->heading;
         g_gameState.targetMapId = map->mapId;
         g_gameState.targetAreaId = map->areaId;
         g_gameState.targetPosition = g_lmapScene->pose.position;
         g_gameState.targetHeading = g_lmapScene->pose.heading;
-        g_gameState.targetHeadingCopy = g_mapCamera->value;
+        g_gameState.targetHeadingCopy = g_mapCamera->heading;
     }
 }
 }

@@ -10,7 +10,7 @@ extern "C" void mapIfClearGroupRecordStates(s32 id)
     }
     for (s32 i = 0; i < 0x80; ++i) {
         MapIfRecord* record = &holder->records[i];
-        if (record->active != 0 && record->groupView.id == id) {
+        if (record->active != 0 && record->id == id) {
             record->state = 0;
         }
     }

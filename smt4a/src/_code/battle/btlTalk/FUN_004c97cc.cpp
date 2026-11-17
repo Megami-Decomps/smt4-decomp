@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "bible/bibleAnalyze.h"
+#include "battle/BtlUiGlobal.h"
 
 // Talk-window tuning data shared by the battle talk code: three 64-bit side masks.
 struct BtlTalkData {
@@ -58,7 +59,6 @@ extern BtlTalkData g_btlTalk;
 extern const char* g_btlTalkToneNames[116];
 extern s32 g_btlCamera;
 extern u32 g_btlActionReflect;
-extern u32 g_btlUiBlock;
 
 SideRecord* btlFindEntryBlockByMemberId(BattleMain* battle, u32 id);
 void textFormatBuffer(char* out, const char* format, ...);

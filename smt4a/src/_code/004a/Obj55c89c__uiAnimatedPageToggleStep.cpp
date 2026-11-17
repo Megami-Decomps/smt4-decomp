@@ -4,9 +4,6 @@
 #include "code/Code002a.h"
 #include "ui/UiSpriteApi.h"
 
-struct PageAnimationTrack {
-    u8 point[0x8c];
-};
 struct AnimatedPage {
     u8 unk0000[0x14];
     u32 state;             /* 0x0014 */
@@ -15,7 +12,7 @@ struct AnimatedPage {
     u8 selector[0xa8];     /* 0x0020 */
     u8 position[0x14];     /* 0x00c8 */
     u8 animation[0x20];    /* 0x00dc */
-    PageAnimationTrack tracks[10]; /* 0x00fc */
+    UiSpriteState tracks[10]; /* 0x00fc */
     u8 unk0674[0xa200];
     s16 track;             /* 0xa874 */
     s8 alternate;          /* 0xa876 */
@@ -47,9 +44,9 @@ void Obj55c89c::uiAnimatedPageToggleStep()
 {
     AnimatedPage * page = reinterpret_cast<AnimatedPage *>(this);
     entryDispatchUpdate(page->animation, page->track);
-    const void *point = page->tracks[page->track].point;
-    s32 y = vec2GetYInt((const UiSpriteState *)point);
-    s32 x = vec2GetXInt((const UiSpriteState *)point);
+    const UiSpriteState *point = &page->tracks[page->track];
+    s32 y = vec2GetYInt(point);
+    s32 x = vec2GetXInt(point);
     pointConvertToFloat(page->position, x, y);
     if (page->phase == 0) {
         pageSelectTrack(page, 9);

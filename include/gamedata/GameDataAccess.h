@@ -2,7 +2,6 @@
 #include "common.h"
 
 /* Game-data, flag and record accessors. */
-struct FlagWorkBanks;
 extern "C" {
 
 u32 countersGetB(s32 index);

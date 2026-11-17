@@ -1,14 +1,12 @@
 #include "common.h"
-
-namespace { struct State { u8 padding[0x12e4]; s32 state; }; struct Owner { u32 job; State *state; }; }
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-/* Reads or updates the requested state. */
-extern Owner g_gameGlobals;
+/* Whether the game data's state word (0x12E4) is set; 0 without game data. */
 s32 FUN_0029e02c(void)
 {
-    if (g_gameGlobals.state != NULL) {
-        return g_gameGlobals.state->state != 0;
+    if (g_gameGlobals.data != NULL) {
+        return g_gameGlobals.data->unk12E4 != 0;
     }
     return 0;
 }

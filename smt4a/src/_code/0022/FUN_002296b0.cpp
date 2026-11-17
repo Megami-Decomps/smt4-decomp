@@ -1,5 +1,5 @@
 /* NON_MATCHING: armcc folds the (height - 2) row offset into the store displacement and addresses the start cell fields through a separate base; retail keeps `sub 2` before the row multiply and reads startX/startY directly. */
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 namespace {
 /* The random-maze generator's state (module global). */
@@ -27,33 +27,33 @@ u32 randRange(u16 max);
    with walls, then places four randomized border-adjacent wall segments. */
 void FUN_002296b0(s32 keepSize)
 {
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     if (keepSize == 0) {
-        flags->gridSize.width = 11;
-        flags->gridSize.height = 11;
+        flags->maze.width = 11;
+        flags->maze.height = 11;
     }
-    flags->gridSetup.startX = 5;
-    flags->gridSetup.startY = 5;
+    flags->maze.startX = 5;
+    flags->maze.startY = 5;
     g_mapRndMaze.unk38c = 0;
     g_mapRndMaze.unk390 = 0;
     g_mapRndMaze.unk398 = 0;
     g_mapRndMaze.unk394 = 0;
-    flags->gridSetup.specialCount = 0;
-    flags->gridSetup.ready = 0;
-    flags->gridSetup.displayX = 0;
-    flags->gridSetup.displayY = 0;
+    flags->maze.specialCount = 0;
+    flags->maze.ready = 0;
+    flags->maze.displayX = 0;
+    flags->maze.displayY = 0;
     g_mapRndMaze.unk9dc = 0;
-    g_mapRndMaze.startX = flags->gridSetup.startX;
-    g_mapRndMaze.startY = flags->gridSetup.startY;
+    g_mapRndMaze.startX = flags->maze.startX;
+    g_mapRndMaze.startY = flags->maze.startY;
     g_mapRndMaze.active = 1;
-    for (s32 y = 0; y < flags->gridSize.height; y++) {
-        for (s32 x = 0; x < flags->gridSize.width; x++) {
+    for (s32 y = 0; y < flags->maze.height; y++) {
+        for (s32 x = 0; x < flags->maze.width; x++) {
             u8 wall = 0;
-            if (y == 0 || y == flags->gridSize.height - 1 || x == 0 || x == flags->gridSize.width - 1 ||
+            if (y == 0 || y == flags->maze.height - 1 || x == 0 || x == flags->maze.width - 1 ||
                 ((y | x) & 1) == 0) {
                 wall = 1;
             }
-            MapCell *cell = &flags->mapCells.grid.cells[y][x];
+            MapCell *cell = &flags->grid.cells[y][x];
             cell->state = wall;
             cell->unk01[0] = 0;
             cell->markers.first = 0;
@@ -62,15 +62,15 @@ void FUN_002296b0(s32 keepSize)
         }
     }
     if (randRange(100) < 50) {
-        flags->mapCells.grid.cells[1][(randRange(flags->gridSize.width - 4) + 2) & 0xfffefffe].state = 1;
-        flags->mapCells.grid.cells[flags->gridSize.height - 2][(randRange(flags->gridSize.width - 4) + 2) & 0xfffefffe].state = 1;
-        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 8) + 4) & 0xfffefffe][1].state = 1;
-        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 8) + 4) & 0xfffefffe][flags->gridSize.width - 2].state = 1;
+        flags->grid.cells[1][(randRange(flags->maze.width - 4) + 2) & 0xfffefffe].state = 1;
+        flags->grid.cells[flags->maze.height - 2][(randRange(flags->maze.width - 4) + 2) & 0xfffefffe].state = 1;
+        flags->grid.cells[(randRange(flags->maze.height - 8) + 4) & 0xfffefffe][1].state = 1;
+        flags->grid.cells[(randRange(flags->maze.height - 8) + 4) & 0xfffefffe][flags->maze.width - 2].state = 1;
     } else {
-        flags->mapCells.grid.cells[1][(randRange(flags->gridSize.width - 8) + 4) & 0xfffefffe].state = 1;
-        flags->mapCells.grid.cells[flags->gridSize.height - 2][(randRange(flags->gridSize.width - 8) + 4) & 0xfffefffe].state = 1;
-        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 4) + 2) & 0xfffefffe][1].state = 1;
-        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 4) + 2) & 0xfffefffe][flags->gridSize.width - 2].state = 1;
+        flags->grid.cells[1][(randRange(flags->maze.width - 8) + 4) & 0xfffefffe].state = 1;
+        flags->grid.cells[flags->maze.height - 2][(randRange(flags->maze.width - 8) + 4) & 0xfffefffe].state = 1;
+        flags->grid.cells[(randRange(flags->maze.height - 4) + 2) & 0xfffefffe][1].state = 1;
+        flags->grid.cells[(randRange(flags->maze.height - 4) + 2) & 0xfffefffe][flags->maze.width - 2].state = 1;
     }
 }
 

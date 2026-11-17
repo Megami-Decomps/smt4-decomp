@@ -12,12 +12,6 @@ struct EffectRenderSource {
     u8 unk60[0x14];
     f32 scale;
 };
-struct EffectRenderGlobals {
-    EffectEditorGlobalState base;
-    u8 unkf0[0x10];
-    EffMenuPosition current; // 0x100
-    union { EffectEditorWords words; EffMenuPosition vector; };
-};
 struct EffectHandlerRequest { u32 unk00; u16 index, unk06; u32 argument; };
 
 struct EffectPositionControl {
@@ -39,7 +33,7 @@ typedef char EffectParameterBlockSizeCheck[sizeof(EffectParameterBlock) == 0x18 
 
 static __inline const EffectRenderSource *effectRenderSource()
 {
-    return (const EffectRenderSource *)g_effectEditor.selection.list;
+    return (const EffectRenderSource *)g_effectEditor.list;
 }
 
 #endif

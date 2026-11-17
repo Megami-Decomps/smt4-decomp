@@ -1,4 +1,5 @@
 #include "shard/Shard0038.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
 
@@ -8,8 +9,6 @@ typedef struct ObjBRecord {
     /* 0x08 */ u32 c;
     /* 0x0C */ u16 d;
 } ObjBRecord;
-
-extern ObjBRef g_gameGlobals;
 
 /* Copies a 14-byte record (three words and a halfword) into the object. */
 void objBSetRecord2000(ObjBRecord *src)

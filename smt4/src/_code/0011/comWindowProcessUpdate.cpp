@@ -1,41 +1,28 @@
 #include "ui/UiSpriteApi.h"
-#include "common.h"
-
-struct CommonWindowProcess {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 state;
-    /* 0x0C */ u32 timer;
-    /* 0x10 */ u8 unk10[0x2c];
-    /* 0x3C */ u8 firstWindow[0x8c];
-    /* 0xC8 */ u8 secondWindow[1];
-};
-
-extern "C" {
-extern CommonWindowProcess *g_comWin;
-}
+#include "ui/CommandWindow.h"
 
 // Update the active common window and advance its state timer.
 extern "C" s32 comWindowProcessUpdate(void *context)
 {
-    CommonWindowProcess *work = g_comWin;
-    switch (work->state) {
+    CommandWindow *work = g_comWin;
+    switch (work->phase) {
     case 0: // Idle.
     case 3: // Waiting for the next request.
         break;
     case 1:
-        if (uiSpriteAdvanceAnimation((UiSpriteState *)work->firstWindow)) {
-            work->state = 2;
-            work->timer = 0;
+        if (uiSpriteAdvanceAnimation(&work->sprites[0])) {
+            work->phase = 2;
+            work->phaseTimer = 0;
         }
         break;
     case 2:
-        uiSpriteAdvanceAnimation((UiSpriteState *)work->secondWindow);
+        uiSpriteAdvanceAnimation(&work->sprites[1]);
         break;
     case 4:
-        if (uiSpriteAdvanceAnimation((UiSpriteState *)work->firstWindow))
-            work->state = 0;
+        if (uiSpriteAdvanceAnimation(&work->sprites[0]))
+            work->phase = 0;
         break;
     }
-    ++work->timer;
+    ++work->phaseTimer;
     return 0;
 }

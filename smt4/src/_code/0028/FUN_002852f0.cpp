@@ -1,33 +1,5 @@
 /* NON_MATCHING: register allocation only (retail keeps the wall flag in r3, the constant 1 in r7 and the row pointer in r6; here ip/r6/r7). */
-#include "common.h"
-#include "shard/SaveWork.h"
-
-/* One grid cell of the generated maze layout. */
-struct MazeCell {
-    /* 0x00 */ u8 wall;
-    /* 0x01 */ u8 unk01;
-    /* 0x02 */ u8 unk02;
-    /* 0x03 */ u8 unk03;
-    /* 0x04 */ u8 marked;
-    /* 0x05 */ u8 unk05;
-    /* 0x06 */ u8 pad06[2];
-};
-
-struct MazeRow {
-    MazeCell cells[15];
-};
-
-/* The map block's maze section: cell grid at 0x3C and the grid size at 0xDD0. */
-struct MazeBlock {
-    /* 0x000 */ u8 unk000[0x3C];
-    /* 0x03C */ MazeRow rows[15];
-    /* 0x744 */ u8 unk744[0x68C];
-    /* 0xDD0 */ s8 width;
-    /* 0xDD1 */ s8 height;
-    /* 0xDD2 */ u8 startX;
-    /* 0xDD3 */ u8 startY;
-    /* 0xDD4 */ u8 unkDD4[4];
-};
+#include "gamedata/MapSaveBlock.h"
 
 struct MazeGenState {
     /* 0x000 */ u8 startX;
@@ -46,49 +18,49 @@ u16 randNextInRange(u16 range);
 /* Lays out the maze grid: walls on the border and on even rows/columns, then picks the four exit cells. */
 void FUN_002852f0(s32 keepSize)
 {
-    MazeBlock *maze = reinterpret_cast<MazeBlock *>(gameGetMapBlock());
+    MapSaveBlock *block = gameGetMapBlock();
 
     if (keepSize == 0) {
-        maze->width = 11;
-        maze->height = 11;
+        block->maze.width = 11;
+        block->maze.height = 11;
     }
-    maze->startX = 5;
-    maze->startY = 5;
+    block->maze.startX = 5;
+    block->maze.startY = 5;
     DAT_004bce8c.floor = 0;
     DAT_004bce8c.mode = 0;
-    maze->unkDD4[0] = 0;
-    maze->unkDD4[1] = 0;
-    maze->unkDD4[2] = 0;
-    maze->unkDD4[3] = 0;
+    block->maze.specialCount = 0;
+    block->maze.ready = 0;
+    block->maze.displayX = 0;
+    block->maze.displayY = 0;
     DAT_004bce8c.startX = 5;
     DAT_004bce8c.startY = 5;
     DAT_004bce8c.active = 1;
 
-    for (s32 y = 0; y < maze->height; y++) {
-        for (s32 x = 0; x < maze->width; x++) {
+    for (s32 y = 0; y < block->maze.height; y++) {
+        for (s32 x = 0; x < block->maze.width; x++) {
             u8 wall = 0;
-            if (y == 0 || y == maze->height - 1 || x == 0 || x == maze->width - 1 || ((y | x) & 1) == 0) {
+            if (y == 0 || y == block->maze.height - 1 || x == 0 || x == block->maze.width - 1 || ((y | x) & 1) == 0) {
                 wall = 1;
             }
-            MazeCell *cell = &maze->rows[y].cells[x];
-            cell->wall = wall;
-            cell->unk01 = 0;
-            cell->unk02 = 0;
-            cell->unk03 = 0;
-            cell->unk05 = 0;
+            MapCell *cell = &block->grid.cells[y][x];
+            cell->state = wall;
+            cell->unk01[0] = 0;
+            cell->markers.first = 0;
+            cell->markers.second = 0;
+            cell->autoTile.neighbors = 0;
         }
     }
 
     if (randNextInRange(100) < 50) {
-        maze->rows[1].cells[(randNextInRange(maze->width - 4) + 2) & ~1].wall = 1;
-        maze->rows[maze->height - 2].cells[(randNextInRange(maze->width - 4) + 2) & ~1].wall = 1;
-        maze->rows[(randNextInRange(maze->height - 8) + 4) & ~1].cells[1].wall = 1;
-        maze->rows[(randNextInRange(maze->height - 8) + 4) & ~1].cells[maze->width - 2].wall = 1;
+        block->grid.cells[1][(randNextInRange(block->maze.width - 4) + 2) & ~1].state = 1;
+        block->grid.cells[block->maze.height - 2][(randNextInRange(block->maze.width - 4) + 2) & ~1].state = 1;
+        block->grid.cells[(randNextInRange(block->maze.height - 8) + 4) & ~1][1].state = 1;
+        block->grid.cells[(randNextInRange(block->maze.height - 8) + 4) & ~1][block->maze.width - 2].state = 1;
     } else {
-        maze->rows[1].cells[(randNextInRange(maze->width - 8) + 4) & ~1].wall = 1;
-        maze->rows[maze->height - 2].cells[(randNextInRange(maze->width - 8) + 4) & ~1].wall = 1;
-        maze->rows[(randNextInRange(maze->height - 4) + 2) & ~1].cells[1].wall = 1;
-        maze->rows[(randNextInRange(maze->height - 4) + 2) & ~1].cells[maze->width - 2].wall = 1;
+        block->grid.cells[1][(randNextInRange(block->maze.width - 8) + 4) & ~1].state = 1;
+        block->grid.cells[block->maze.height - 2][(randNextInRange(block->maze.width - 8) + 4) & ~1].state = 1;
+        block->grid.cells[(randNextInRange(block->maze.height - 4) + 2) & ~1][1].state = 1;
+        block->grid.cells[(randNextInRange(block->maze.height - 4) + 2) & ~1][block->maze.width - 2].state = 1;
     }
 }
 

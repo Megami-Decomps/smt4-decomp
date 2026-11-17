@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "camp/UIFade/UIFade.h"
+#include "script/scrScriptProcess.h"
 
 // The touch-region count lies beyond the shared quest-menu prefix.
 struct QuestCleanupWorkView {
@@ -9,10 +10,10 @@ struct QuestCleanupWorkView {
     u8 unk004[0x5a8];
     void *bufferB;
     void *bufferA;
-    void *script;
+    ScriptProcess *script;
     void *detailBuffer;
     void *detailAuxiliary;
-    void *detailScript;
+    ScriptProcess *detailScript;
     u8 unk5c4[0x434];
     u16 touchCount;
 };
@@ -23,7 +24,6 @@ typedef char QuestCleanupWorkOffsetsCheck[offsetof(QuestCleanupWorkView, bufferB
 
 extern "C" {
 void ifTouchRegionRemove();
-void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *allocation);
 void asdTMTexTableReleaseNode(u32 index, u32 kind);
 void jobStop(u32 job, u32 flags);

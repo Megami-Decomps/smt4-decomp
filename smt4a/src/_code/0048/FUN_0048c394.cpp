@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048c394` (_code @ 0x48c394, 0x930 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -72,7 +73,6 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int gameFlagsGetBlock(void);
 extern int padButtonIsPressed(unsigned int);
 extern int FUN_00167c0c(unsigned int *, unsigned int *);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -132,7 +132,7 @@ void FUN_0048c394(int param_1)
   int temp_v18;
   float temp_v19 [3];
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   ppppppuVar14 = (unsigned int ******)0x0;
   temp_v11 = param_1 + 0x4cc;
   puVar6 = (unsigned char *)(param_1 + 0x7b91);

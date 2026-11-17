@@ -5,7 +5,7 @@ extern "C" {
 
 void buttonHelpSetMode(u8 value)
 {
-    g_buttonHelp.work->mode = value;
+    g_buttonHelp.work->textVisible = value;
 }
 
 } /* extern "C" */

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -9,11 +10,10 @@ struct ScriptHelpOwner {
     /* 0x09 */ u8 unk09[3];
     /* 0x0c */ void *textBuffer;
     /* 0x10 */ void *iconBuffer;
-    /* 0x14 */ void *script;
+    /* 0x14 */ ScriptProcess *script;
 };
 
 void asdMemFree(void *block);
-void scrScriptProcessDestroy(void *process);
 void mapPlaceSet(s32 group, s32 map, s32 target);
 void campButtonHelpAcquire(void);
 

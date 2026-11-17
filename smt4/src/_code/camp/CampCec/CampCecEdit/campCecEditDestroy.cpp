@@ -2,10 +2,10 @@
  * work area. */
 #include "common.h"
 #include "camp/CampCec/CampCecEdit.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
-int scrScriptProcessDestroy(u32 resource);
 int asdMemFreeSlot(u32 handle);
 int asdMemFree(void *ptr);               /* heap free */
 int jobStop(u32 task, int flags);     /* kill a task */

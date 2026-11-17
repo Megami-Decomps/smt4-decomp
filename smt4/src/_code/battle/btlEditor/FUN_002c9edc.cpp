@@ -4,11 +4,11 @@
 #include "battle/btlMain.h"
 #include "map/mapDepart.h"
 #include "shard/JobWork.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BtlUi;
 extern "C" {
 extern void* DAT_00435ce8;
-extern BtlUi* g_btlUiBlock;
 void asdMemFree(void* memory);
 void jobStop(u32 job, u32 flags);
 
@@ -17,7 +17,7 @@ void FUN_002c9edc(u32 job)
 {
     BtlMainState *battle = (BtlMainState *)jobGetWork(job);
     if (g_btlUiBlock != NULL) {
-        FUN_0025c2d0(reinterpret_cast<u32>(g_btlUiBlock), 0);
+        FUN_0025c2d0(g_btlUiBlock, 0);
     }
     if (DAT_00435ce8 != NULL) {
         if (battle != NULL && battle->actions != NULL) {

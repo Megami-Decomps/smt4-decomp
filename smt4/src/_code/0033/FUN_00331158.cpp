@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: 211 rows versus retail 209: successful selection shares its argument-setup tail with the final SELECT event instead of the common event-call tail. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -28,7 +29,6 @@ s32 resourceRunOperationIfUnblocked(GridNavigation *list);
 s32 FUN_0029efd8(GridNavigation *list, s32 flag);
 s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, s16 *rowRegions, s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 a, s32 b);
 void eventQueueAddUniqueIfValid(u32 event);
-void timerStart(UiSpriteState *timer, s32 kind, s32 arg);
 s32 FUN_002c1658(s32 button, s32 mode);
 u32 objectPartRunUnlessLocked(GridNavigation *part);
 u8 buttonHelpGetStatus(void);

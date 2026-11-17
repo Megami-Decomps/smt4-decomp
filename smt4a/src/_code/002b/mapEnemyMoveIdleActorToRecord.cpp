@@ -1,30 +1,29 @@
 /* Starts the first idle (state 2) unlocked map actor on a record's integer position, switching it to state 24. */
-#include "shard/W5_W5Match7_SceneSlots.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
-const void *FUN_003a30e8(const void *record);
-void FUN_00377acc(SceneSlot *slot, const void *record, s32 mode);
+const void *FUN_003a30e8(u32 index);
 
-void mapEnemyMoveIdleActorToRecord(const void *record)
+void mapEnemyMoveIdleActorToRecord(s32 id)
 {
     struct PositionRecordView {
         u8 unk00[0x18];
         s16 position[4];
         u8 unk20[0x98];
     };
-    SceneSlotList *owner = g_mapEnemy;
-    const PositionRecordView *source = (const PositionRecordView *)FUN_003a30e8(record);
-    for (s32 i = 0; i < 40; ++i) {
-        SceneSlot *slot = &owner->slots[i];
+    MapEnemyA *owner = g_mapEnemy;
+    const PositionRecordView *source = (const PositionRecordView *)FUN_003a30e8(id);
+    for (s32 i = 0; i < MAP_ENEMY_COUNT_A; ++i) {
+        MapEnemyEntryA *slot = &owner->entries[i];
         if (slot->active && slot->kind != 0 && slot->kind < 11 && slot->locked == 0 && slot->state == 2) {
-            slot->position.x = (f32)source->position[0];
-            slot->position.y = (f32)source->position[1];
-            slot->position.z = (f32)source->position[2];
-            slot->value = (f32)source->position[3];
-            slot->previousPosition = slot->position;
+            slot->basePosition.x = (f32)source->position[0];
+            slot->basePosition.y = (f32)source->position[1];
+            slot->basePosition.z = (f32)source->position[2];
+            slot->heading = (f32)source->position[3];
+            slot->position = slot->basePosition;
             slot->state = 24;
-            slot->stateTime = 0;
-            FUN_00377acc(slot, record, 2);
+            slot->elapsed = 0;
+            FUN_00377acc(slot, id, 2);
             return;
         }
     }

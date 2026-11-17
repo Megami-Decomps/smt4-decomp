@@ -1,9 +1,8 @@
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "map/LmapGlobals.h"
 
 extern "C" {
 
-int gameFlagsGetBlock(void);
 int FUN_00162ea4(void);
 int moriModelUnitStartMaterialAnimation(u32 id, int a, int b, f32 scale);
 

@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern int scrScriptProcessStartEntry(u32 a, u32 b);
+extern int scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 
 u8 buttonHelpStartScript(u32 value)
 {
-    return scrScriptProcessStartEntry(g_buttonHelp.work->unk560, value) != 0;
+    return scrScriptProcessStartEntry(g_buttonHelp.work->scriptProcess, value) != 0;
 }
 
 } /* extern "C" */

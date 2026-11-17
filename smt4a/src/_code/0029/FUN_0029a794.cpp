@@ -2,7 +2,7 @@
 #include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "game/GameStateA.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"
 #include "map/mapDepart.h"
@@ -97,12 +97,11 @@ extern "C" {
 extern SceneRecords DAT_005f1cbc;
 void FUN_00352eec(void);
 
-
 /* Clear the scene's work areas; when `savePoint` is set, record the current map point into the flags block first. */
 void FUN_0029a794(SceneWork *work, s32 savePoint)
 {
     s32 i;
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     work->unk048 = 0;
     work->unk04c = 0;
     work->unk050 = 0;
@@ -157,7 +156,7 @@ void FUN_0029a794(SceneWork *work, s32 savePoint)
         flags->savePoint.scale = (s16)(s32)g_gameState.overviewHeading;
         flags->savePoint.mapId = g_gameState.mapId;
         flags->savePoint.areaId = g_gameState.areaId;
-        flags->savePointObject.objectId = g_gameState.currentObjectId;
+        flags->savePointObjectId = g_gameState.currentObjectId;
         flags->savePoint.x = (s16)(s32)g_gameState.pointPosition.x;
         flags->savePoint.y = (s16)(s32)g_gameState.pointPosition.y;
         flags->savePoint.z = (s16)(s32)g_gameState.pointPosition.z;

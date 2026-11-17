@@ -1,10 +1,9 @@
 #include "shard/Shard0033.h"
 #include "code/Code0033.h"
 #include "shard/Shard004A.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 void gameGlobalsSetMenuOpenFlag(u8 value)
 {

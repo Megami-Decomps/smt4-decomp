@@ -1,22 +1,18 @@
 #include "addon/aocMain.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/EncountData.h"
 #include "addon/AocSystem.h"
-
-struct Table02Record {
-    u8 data[0x3c]; // 0x00
-};
 
 extern "C" {
 
-// Resolve a valid table index from add-on data, falling back to the base entry or base pointer.
-Table02Record* dataTableGetRecord02(s32 index)
+// Resolve encounter table `index` from add-on data, falling back to the base entry or base pointer.
+EncountTableRecord *dataTableGetRecord02(s32 index)
 {
     void* section = dataTableGet(2, 1);
-    Table02Record* entries = (Table02Record*)dataTableGetEntries(section);
+    EncountTableRecord *entries = encountTableRecords(section);
     if (index < 0 || (u32)index >= dataTableGetCount(section)) {
         return entries;
     }
-    Table02Record* entry = (Table02Record*)aocFindQuestPayloadById(g_aocSystem, index);
+    EncountTableRecord *entry = static_cast<EncountTableRecord *>(aocFindQuestPayloadById(g_aocSystem, index));
     if (entry == NULL) {
         entry = &entries[index];
     }

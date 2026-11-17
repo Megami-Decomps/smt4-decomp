@@ -12,12 +12,12 @@ void FUN_00385384(f32 x, f32 y, f32 z)
     MapIfStateA *state = g_mapIf.state;
     for (s32 index = 0; index < 128; ++index) {
         MapIfRecord *record = &state->records[index];
-        if (record->active != 0 && record->display.category == 34) {
+        if (record->active != 0 && record->category == 34) {
             if (distSpatial(x, y, z, record->position.x, record->position.y, record->position.z) < 10.0f) {
                 BattleVector3 position = {record->position.x, y + 80.0f, record->position.z};
                 soundActorStartOnFreeChannel(0x10002a9, position);
                 record->state = 7;
-                record->update.counter = 0;
+                record->counter = 0;
                 return;
             }
         }

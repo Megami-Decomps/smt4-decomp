@@ -1,10 +1,9 @@
 #include "map/LmapGlobals.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
 void moriModelUnitStartMaterialAnimation(u32 handle, u32 mode, u32 flags, f32 value);
-
 
 /* Puts the map scene into state 12 and plays the default motion on both of its actors. */
 u32 FUN_00331110(void)

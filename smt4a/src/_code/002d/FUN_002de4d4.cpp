@@ -1,5 +1,5 @@
 /* NON_MATCHING: queues a 500x500 collision quad at (x, y, z): corners rotated by the table-derived matrix (applied twice) then offset, the plane normal computed and the quad queued; the matrix terms follow the decompilation (the table lookups at angle 0 fold to constants) and mapCollisionQueueQuad's float arguments (normal and plane values in s0-s2 and the stack) are not recovered, so only the id is passed */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 
 struct QuadVec3 {
@@ -17,7 +17,6 @@ struct QuadMtx34 {
 
 extern "C" {
 
-void gameFlagsGetBlock(void);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(QuadVec3 *destination, const QuadMtx34 *matrix, const QuadVec3 *source);
 void mapCollisionQueueQuad(s32 kind, s32 flags, s32 id);
 

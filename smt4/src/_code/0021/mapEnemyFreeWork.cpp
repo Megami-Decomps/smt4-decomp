@@ -1,8 +1,7 @@
-#include "shard/W5_W5Match2_MapCallbacks.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
 
-extern MapEnemyRequestWork *g_mapEnemy;
 s32 asdMemFree(void *block);
 
 /* Free the map enemy work and clear its owner pointer. */

@@ -1,28 +1,9 @@
 /* NON_MATCHING: VFP constant allocation only: retail keeps 0.0f in the first saved register s16 and uses six saved VFP registers (d8-d10) where the build lands the zero in s21 and needs seven; the string, jump-table labels and vector initialisers now match. */
 #include "common.h"
 #include "util/MathFunctions.h"
-#include "Model/ModelList.h"
+#include "gamedata/DataTable4CValue.h"
 #include "gamedata/GameDataAccess.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
-
-/* The flags block (accessed fields). */
-struct MapGridState {
-    s8 targetX;             // 0xE00
-    s8 targetY;             // 0xE01
-    u8 unk02[7];
-    u8 effectActive;        // 0xE09
-    s8 gridX;               // 0xE0A
-    s8 gridY;               // 0xE0B
-};
-
-struct MapFlagsBlock {
-    u8 unk0000[0xE00];
-    MapGridState grid;      // 0xE00
-    u8 unkE0C[0x860];
-    s8 forcedHeading;       // 0x166C
-    u8 unk166D[0x7];
-    f32 unk1674;
-};
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 s32 FUN_002393cc(s32 scene);
@@ -36,31 +17,31 @@ void sceneRegisterBoxEffect(s32 a, s32 b, const char *name, s32 c, s32 d, s32 e,
 /* Place the fountain box effect in front of the map target, facing along the rounded cardinal heading. */
 void FUN_00332fd8(void)
 {
-    MapFlagsBlock *block = reinterpret_cast<MapFlagsBlock *>(gameFlagsGetBlock());
-    MapGridState *grid = &block->grid;
-    if (grid->effectActive == 0)
+    MapSaveBlockA *block = gameFlagsGetBlock();
+    MapMazeState *grid = &block->maze;
+    if (grid->ready == 0)
         return;
-    s32 gridX = grid->gridX;
-    s32 gridY = grid->gridY;
-    s32 scene = FUN_003857c8(static_cast<s32>(*reinterpret_cast<f32 *>(reinterpret_cast<u8 *>(block) + 0x15C4)));
+    s32 gridX = grid->displayX;
+    s32 gridY = grid->displayY;
+    s32 scene = FUN_003857c8(static_cast<s32>(block->unk15C4));
     MapVector from;
     from.x = static_cast<f32>(gridX);
     from.y = 0.0f;
     from.z = static_cast<f32>(gridY);
     MapVector to;
-    to.x = static_cast<f32>(grid->targetX);
+    to.x = static_cast<f32>(grid->spawnX);
     to.y = 0.0f;
-    to.z = static_cast<f32>(grid->targetY);
+    to.z = static_cast<f32>(grid->spawnZ);
     f32 heading = calcHeadingRoundedToCardinalDirection(mathPositionHeadingDegrees(from, to));
-    s8 forced = block->forcedHeading;
+    s8 forced = block->entranceHeading;
     if (forced != 0) {
         if (forced == 64 || forced == 66)
             heading = 90.0f;
         else if (forced == 65 || forced == 67)
             heading = 0.0f;
     }
-    f32 x = static_cast<f32>(grid->gridX * 700 + 350);
-    f32 z = static_cast<f32>(grid->gridY * 700 + 350);
+    f32 x = static_cast<f32>(grid->displayX * 700 + 350);
+    f32 z = static_cast<f32>(grid->displayY * 700 + 350);
     f32 radians = heading * 0.017453292f;
     x -= libm_sinf(radians) * 250.0f;
     z -= libm_cosf(radians) * 250.0f;

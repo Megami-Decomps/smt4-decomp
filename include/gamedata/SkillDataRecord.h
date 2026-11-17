@@ -2,6 +2,7 @@
 #define GAMEDATA_SKILLDATARECORD_H
 #include "common.h"
 #include <stddef.h>
+struct BtlUiA;
 
 /* One rank bonus of a skill: a kind and its amount. */
 struct SkillRankBonus {
@@ -240,7 +241,7 @@ u32 FUN_00333758(SkillDataRecordA *record);
 }
 
 extern "C" {
-bool FUN_004aba9c(u32 arg0);
+bool FUN_004aba9c(struct BtlUiA *ui);
 }
 
 /* skillDataFindById, declared per game (its record type differs). */

@@ -1,5 +1,6 @@
 #include "map/LmapMainGlobals.h"
 #include "gamedata/GameFlags.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 s32 FUN_002c2a04(u32 channel);
@@ -9,10 +10,8 @@ s32 FUN_002897c0();
 void FUN_002897b0(s32 enabled);
 s32 FUN_002c1d5c();
 void titleSetSlotValueState2(u32 channel, u32 duration);
-s32 scrRunOpcodesStub(void *script);
 
 void messageSlotSet(u32 slot);
-void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *allocation);
 s32 screenFadesAllReady();
 
@@ -23,7 +22,7 @@ u32 lmapMainUpdateScriptTransition()
         u8 unk0000[0x9e4];
         void *firstBuffer;
         void *secondBuffer;
-        void *script;
+        ScriptProcess *script;
         u32 completionFlag;
         u8 unk09f4[0x450c];
         s32 state;

@@ -39,7 +39,7 @@ struct AocMenuProcess {
     /* 0x240 */ u8 holder[0x110];
     /* 0x350 */ void *table;
     /* 0x354 */ u8 unk354[4];
-    /* 0x358 */ void *script;
+    /* 0x358 */ ScriptProcess *script;
 };
 
 extern "C" {
@@ -49,7 +49,6 @@ void aocMenuSetButtonHelp(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(void *script, s32 entry);
-void scrRunOpcodesStub(void *script);
 s32 strIsEmpty(u32 *record);
 u8 byteIsAtLeast100(u32 *record);
 void jobStopAndClearFlags(AocMenuProcess *process);

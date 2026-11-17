@@ -9,7 +9,6 @@ u32 byteTableAGetValue3(void);
 void byteTableASetValue3(u32 value);
 s32 FUN_00162ea4(void);
 void titleSetSlotValueState2(s32 display, s32 mode);
-u32 scrRunOpcodesStub(ScriptProcess *state);
 
 void messageSlotSet(s32 slot);
 void asdMemFree(void *memory);

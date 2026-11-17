@@ -3,15 +3,14 @@
 #include "event/2dEvent/Npc2d.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
-u32 scrScriptProcessCreate(u32 resource, u32 screen);
-void scrScriptProcessStartEntry(u32 process, s32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void cecProcessStart(void);
 void FUN_0025461c(void);
 void cecProcessDestroy(void);
-s32 scrRunOpcodesStub(u32 process);
 s32 flagWordTestBit(const void *record, u32 flag);
 void objectFlagsClear(void *record, u32 flag);
 void FUN_0026b9bc(void);
@@ -23,7 +22,8 @@ u32 FUN_002ece60(CampCecMenu *work)
     switch (work->scriptFlow.phase) {
     case 0:
         if (work->scriptResource != 0 && work->unkCF8 != 0) {
-            u32 process = scrScriptProcessCreate(work->scriptResource, work->unkCF8);
+            /* unkCF8 is the owner word the script's message commands use. */
+            ScriptProcess *process = scrScriptProcessCreate(work->scriptResource, (void *)work->unkCF8);
             s32 entry = work->scriptFlow.kind == 1 ? 0x1C : 0x1D;
             work->script.process = process;
             scrScriptProcessStartEntry(process, entry);

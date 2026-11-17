@@ -5,6 +5,8 @@
 #include "sys/Task.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_UiResourceParameters.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 extern PlaceWindow *g_placeWin;
@@ -22,10 +24,6 @@ static const u32 sPlaceWinPacketC[28] = {
 s32 placeWinUpdate(u32);
 void placeWindowDrawLabel(void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
-void drawParameterBlockClear(void *);
-
-void uiSpriteStateInitFromSource(void *, u32, u32, void *, u32, f32);
-void spriteStartAnimationByIndex(void *, u32);
 
 /* Create the place-name window's update process, stereo draw tasks and animation data. */
 void placeWinCreate()
@@ -40,10 +38,10 @@ void placeWinCreate()
     taskCreateDraw("PlaceWin DrawUpLeft", 0x81, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
     taskCreateDraw("PlaceWin DrawUpRight", 0xdf, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
     window = g_placeWin;
-    drawParameterBlockClear(window->parameters.packet);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet), sPlaceWinPacketA, sizeof(sPlaceWinPacketA),
+    drawParameterBlockClear(&window->parameters);
+    paramsInit(&window->parameters, sPlaceWinPacketA, sizeof(sPlaceWinPacketA),
                sPlaceWinPacketB, sizeof(sPlaceWinPacketB), NULL, 0, NULL, 0, sPlaceWinPacketC, sizeof(sPlaceWinPacketC));
-    uiSpriteStateInitFromSource(window->animation, 0xe, 0x87, window->parameters.packet, 1, 1.0f);
-    spriteStartAnimationByIndex(window->animation, 0);
+    uiSpriteStateInitFromSource(&window->animation, 0xe, 0x87, &window->parameters, 1, 1.0f);
+    spriteStartAnimationByIndex(&window->animation, 0);
 }
 }

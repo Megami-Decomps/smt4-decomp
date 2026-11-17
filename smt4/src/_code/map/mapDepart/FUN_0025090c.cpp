@@ -1,22 +1,6 @@
 /* NON_MATCHING: retail addresses the label table from a second anchor (the area names at DAT_00447580, the fixed labels at -0x30 from it): the original defined these tables in the same file, so this build loads one base and the string/array addressing differs */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
-
-/* The map block (only the fields the label formatter reads). */
-struct LabelMapBlock {
-    /* 0x000 */ u8 unk000[3];
-    /* 0x003 */ u8 area;
-    /* 0x004 */ u8 unk004[0xe10];
-    /* 0xe14 */ u8 visited[0x29];     /* by place kind, 3 = fully visited */
-    /* 0xe3d */ u8 unk0e3d;
-    /* 0xe3e */ u8 unk0e3e[0x2b4];
-    /* 0x0f2 */ s8 unk0f2;
-};
-
-struct LabelMapBlockTail {
-    /* 0x000 */ u8 unk000[0x792];
-    /* 0x792 */ s8 secondArea;
-};
 
 extern "C" {
 /* Place-name strings: fixed labels, then the area names. */
@@ -26,7 +10,6 @@ struct PlaceLabels {
 };
 extern PlaceLabels DAT_00447550;
 s32 gameFlagIsSet(u32 flag);
-LabelMapBlock *gameGetMapBlock(void);
 const char *dataTableFindRecordById(s32 kind);
 char *libc_strcpy(char *destination, const char *source);
 void textFormatBuffer(char *output, const char *format, ...);
@@ -60,33 +43,33 @@ void FUN_0025090c(s32 kind, s32 id, s32 mode, char *output)
             return;
         }
     } else {
-        LabelMapBlock *block = gameGetMapBlock();
+        MapSaveBlock *block = gameGetMapBlock();
         if ((((u32)(kind - 25) <= 5 || kind == 102) && !gameFlagIsSet(0x144)) ||
             (((u32)(kind - 31) <= 4 || kind == 103) && !gameFlagIsSet(0x15a))) {
             textFormatBuffer(output, "\x81\x48\x81\x48\x81\x48");
             return;
         }
         s32 place = 0;
-        if (gameGetMapBlock()->area != 1) {
+        if (gameGetMapBlock()->departureIndex != 1) {
             if (kind == 24) {
                 place = 2;
             } else if (kind < 64) {
-                if (block->visited[kind] != 3) {
+                if (block->placeStates[kind] != 3) {
                     place = 1;
                 }
             }
-        } else if (block->unk0e3d != 3) {
+        } else if (block->placeStates[0x29] != 3) {
             place = 1;
         }
         if (mode == 0) {
-            u8 area = gameGetMapBlock()->area;
+            u8 area = gameGetMapBlock()->departureIndex;
             if (area != 0) {
                 textFormatBuffer(output, labels->special[area]);
                 return;
             }
         }
         if (place == 2) {
-            s8 second = reinterpret_cast<LabelMapBlockTail *>(gameGetMapBlock())->secondArea;
+            s8 second = gameGetMapBlock()->option;
             if (second == 0) {
                 textFormatBuffer(output, "\x82\x63\x82\x8f\x82\x8d\x82\x81\x82\x89\x82\x8e");
                 return;

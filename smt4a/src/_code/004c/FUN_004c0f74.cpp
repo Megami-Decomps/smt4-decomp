@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 struct CombatantAffinityPreview {
     u16 kind;
@@ -37,7 +38,6 @@ CombatantAffinityPreview btlEntryBuildSummary(BtlMainStateA *battle, BtlCombatan
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 s32 FUN_004bd098(u32 source, s32 skill);
 void kindIdStore(u32 kind, u32 *value);
-extern u32 g_btlSkillResponseMasks[8];
 
 u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
 {
@@ -67,7 +67,7 @@ u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)
         }
     }
     if (action.enabled && (entry->data.statusFlags & 16) &&
-        (!(entry->flags & (((u64)g_btlSkillResponseMasks[7] << 32) | g_btlSkillResponseMasks[6])) ||
+        (!(entry->flags & g_btlSkillResponseMasks.sourceKind) ||
             FUN_004bd098(entry->data.sourceId, action.skill) >= 0)) {
         kindIdStore(action.targetKind, skills);
         if (skills[0] == element)

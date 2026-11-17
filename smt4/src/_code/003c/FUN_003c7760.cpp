@@ -2,6 +2,7 @@
 #include "code/Code0024.h"
 #include "battle/btlEditor.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct BtlTask {
 #define BTL_FLAG_ACTIVE 0x100000
 #define BTL_FLAG_UI     0x20000000
 
-extern void *g_btlUiBlock;
 extern u32 DAT_00435d18;
 
 extern s32 scrRunOpcodesStub(u32 job);

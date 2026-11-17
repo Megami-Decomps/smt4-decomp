@@ -1,9 +1,8 @@
-#include "shard/Shard0035.h"
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
 
-extern CecProcess *g_cecProcess;
-extern void FUN_0035af44(CecProcess *process);
+extern void FUN_0035af44(CecProcessA *process);
 
 void cecProcessCall3(void)
 {

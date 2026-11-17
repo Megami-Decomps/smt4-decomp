@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d56dc` (_code @ 0x3d56dc, 0x34dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "map/mapRndMaze.h"
@@ -162,7 +163,6 @@ extern unsigned char DAT_005e1eba; /* 0x5e1eba */
 
 /* Supplied declaration required: FUN_0014afa8. */
 /* Supplied declaration required: padQueryLogicalKey. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: jobStop. */
 extern int querySlotHasHandle(void);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -1531,7 +1531,7 @@ LAB_003d6870:
       temp_v8 = uiQuestGetMode();
       uiQuestClose();
       if (DAT_005e1eb4 != '\0') {
-        temp_v9 = gameFlagsGetBlock();
+        temp_v9 = (int)gameFlagsGetBlock();
         *(unsigned short *)(temp_v9 + 0x22) = 0;
         clearFlags310To31F();
         sub68OwnerCall4();
@@ -1564,7 +1564,7 @@ LAB_003d6870:
         }
       }
       if (g_campState == '\0') {
-        temp_v4 = gameFlagsGetBlock();
+        temp_v4 = (int)gameFlagsGetBlock();
         *(unsigned short *)(temp_v4 + 0x1e) = DAT_005e1eb6;
       }
     }

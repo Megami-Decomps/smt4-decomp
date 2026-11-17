@@ -1,16 +1,12 @@
-#include "shard/Shard0032.h"
+#include "gamedata/MapSystemTable.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern Entry2C *dataTableGetEntries(void *table);
-extern u32 dataTableGetCount(void *table);
-
-/* Entry `index` of data table 0x2E (type 2), or NULL when out of range. */
-Entry2C *dataTable2EGetEntry(u32 index)
+/* Map row `index` (MapSystemTable.tbb table 2), or NULL when out of range. */
+MapSystemMapRecord *dataTable2EGetEntry(u32 index)
 {
     void *table = dataTableGet(0x2E, 2);
-    Entry2C *entries = dataTableGetEntries(table);
+    MapSystemMapRecord *entries = mapSystemMapRecords(table);
     u32 count = dataTableGetCount(table);
 
     if (index >= count) {

@@ -1,9 +1,8 @@
 #include "shard/Shard0035.h"
 #include "ui/UiSpriteApi.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 void objBInitBlocks274300(void)
 {

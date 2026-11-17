@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003868dc` (_code @ 0x3868dc, 0x738 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -40,7 +41,6 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int gameFlagsGetBlock(void);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: libm_cosf. */
@@ -88,7 +88,7 @@ void FUN_003868dc(int param_1)
   float temp_v15;
   unsigned int temp_v16 [12];
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   temp_v11 = 35.0f;
   temp_v5 = 0;
   if ((DAT_005f1bc4 != '\0') || (g_gameState.inputBlocked != '\0')) {

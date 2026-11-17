@@ -46,7 +46,6 @@ extern unsigned char LAB_0039095c; /* 0x39095c */
 extern unsigned char LAB_0039096c; /* 0x39096c */
 extern unsigned int *g_aocMain; /* 0x432fc8 */
 
-extern int scrRunOpcodesStub(unsigned int);
 extern int stateCounterBelowLimit(unsigned int *, unsigned int);
 extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: FUN_00233404. */
@@ -324,7 +323,7 @@ LAB_003906d4:
     textFormatBuffer(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
     textEncodeFontSlot(0,&temp_v7);
     buttonHelpSetEnabled(1);
-    temp_v2 = scrRunOpcodesStub(param_1[0xd6]);
+    temp_v2 = scrRunOpcodesStub((ScriptProcess *)param_1[0xd6]);
     if (temp_v2 == 2) {
       temp_v2 = messageMainGetChoiceResult();
       if (temp_v2 != 0) {

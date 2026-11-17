@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00202254` (_code @ 0x202254, 0x6ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
 
@@ -37,7 +38,6 @@ extern int iRam004bd614; /* 0x4bd614 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
-extern int gameGetMapBlock(void);
 
 
 void FUN_00202254(void)
@@ -67,7 +67,7 @@ void FUN_00202254(void)
   int temp_v18;
   int temp_v19 [19];
   
-  temp_v18 = gameGetMapBlock();
+  temp_v18 = (int)gameGetMapBlock();
   temp_v6 = 0;
   if (g_gameState.loading != '\0') {
     temp_v6 = 0;

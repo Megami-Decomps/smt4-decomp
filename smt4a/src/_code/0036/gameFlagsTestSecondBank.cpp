@@ -1,16 +1,14 @@
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
-
-
 s32 gameFlagsTestSecondBank(s32 index)
 {
-    FlagWorkBanks *work = gameFlagsGetBlock();
+    MapSaveBlockA *work = gameFlagsGetBlock();
     s32 word = index / 32;
     s32 shift = index % 32;
 
-    return (work->second[word] & (1u << shift)) != 0;
+    return (work->savedFlagBits[word] & (1u << shift)) != 0;
 }
 
 } /* extern "C" */

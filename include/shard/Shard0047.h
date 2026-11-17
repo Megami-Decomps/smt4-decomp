@@ -5,6 +5,7 @@
 #include "common.h"
 
 #include "shard/Shard0046.h"
+#include "script/ScriptVm.h"
 
 typedef struct ByteAtD {
     /* 0x00 */ u8 unk00[0xD];
@@ -25,7 +26,7 @@ typedef struct ScriptHolder {
     /* 0x0C */ void *buf0C;
     /* 0x10 */ void *buf10;
     union {
-        /* 0x14 */ u32 proc14;
+        /* 0x14 */ ScriptProcess *proc14;
         /* 0x14 */ ScriptProcess *process;
     };
 } ScriptHolder;

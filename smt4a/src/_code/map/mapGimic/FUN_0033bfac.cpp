@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033bfac` (_code @ 0x33bfac, 0xa14 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
 
@@ -20,11 +22,9 @@ int handleRegistryRegisterObject(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned int g_mapGimic; /* 0x580ca0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: modelLoadFileAsyncByName. */
@@ -60,30 +60,30 @@ unsigned int FUN_0033bfac(void)
   unsigned int temp_v8;
   unsigned char temp_v9 [140];
   
-  temp_v1 = gameFlagsGetBlock();
-  temp_v0 = *(short *)(g_mapGimic + 10);
+  temp_v1 = (int)gameFlagsGetBlock();
+  temp_v0 = *(short *)(((unsigned int)g_mapGimic) + 10);
   if (temp_v0 == 0) {
-    pcVar8 = (char *)(int)*(short *)(g_mapGimic + 0xc);
+    pcVar8 = (char *)(int)*(short *)(((unsigned int)g_mapGimic) + 0xc);
     temp_v1 = FUN_003a3238();
     if ((int)pcVar8 < temp_v1) {
       do {
         pcVar3 = pcVar8;
         FUN_003563fc();
-        temp_v5 = g_mapGimic;
+        temp_v5 = ((unsigned int)g_mapGimic);
         if ((((-1 < *pcVar3) && (*(short *)(pcVar3 + 2) != 0x4e)) &&
-            ((int)*pcVar3 == (int)*(short *)(g_mapGimic + 6))) &&
-           ((int)pcVar3[1] == (int)*(short *)(g_mapGimic + 8))) {
+            ((int)*pcVar3 == (int)*(short *)(((unsigned int)g_mapGimic) + 6))) &&
+           ((int)pcVar3[1] == (int)*(short *)(((unsigned int)g_mapGimic) + 8))) {
           if (*(short *)(pcVar3 + 2) == 0x4d) {
             temp_v1 = 0;
-            *(short *)(g_mapGimic + 0xc) = (short)(int)pcVar8;
+            *(short *)(((unsigned int)g_mapGimic) + 0xc) = (short)(int)pcVar8;
             goto LAB_0033c0d0;
           }
           temp_v0 = *(short *)(pcVar3 + 0xe);
           if (((*(short *)(pcVar3 + 0xc) == 0) || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) &&
              ((temp_v0 == 0 || (temp_v1 = gameFlagIsSet((int)temp_v0), temp_v1 == 0)))) {
-            temp_v5 = g_mapGimic;
+            temp_v5 = ((unsigned int)g_mapGimic);
             temp_v1 = 0;
-            *(short *)(g_mapGimic + 0xc) = (short)(int)pcVar8;
+            *(short *)(((unsigned int)g_mapGimic) + 0xc) = (short)(int)pcVar8;
             goto LAB_0033c128;
           }
         }
@@ -91,7 +91,7 @@ unsigned int FUN_0033bfac(void)
         temp_v1 = FUN_003a3238();
       } while ((int)pcVar8 < temp_v1);
     }
-    *(unsigned short *)(g_mapGimic + 10) = 99;
+    *(unsigned short *)(((unsigned int)g_mapGimic) + 10) = 99;
     return 1;
   }
   if (temp_v0 != 1) {
@@ -101,16 +101,16 @@ unsigned int FUN_0033bfac(void)
       }
       return 1;
     }
-    temp_v2 = (int)*(short *)(g_mapGimic + 0xc);
+    temp_v2 = (int)*(short *)(((unsigned int)g_mapGimic) + 0xc);
     FUN_003563fc();
-    temp_v3 = g_mapGimic + *(short *)(g_mapGimic + 0xe) * 0x3c;
+    temp_v3 = ((unsigned int)g_mapGimic) + *(short *)(((unsigned int)g_mapGimic) + 0xe) * 0x3c;
     if ((*(char *)(temp_v3 + 0xb4) == '\0') &&
        (temp_v4 = FUN_0040ab8c(*(unsigned int *)(temp_v3 + 0xa8)), temp_v4 == 0)) {
       return 0;
     }
-    temp_v5 = g_mapGimic;
+    temp_v5 = ((unsigned int)g_mapGimic);
     if (*(short *)(temp_v3 + 0xa6) == 0xe) {
-      *(unsigned char *)(g_mapGimic + 0x14) = 1;
+      *(unsigned char *)(((unsigned int)g_mapGimic) + 0x14) = 1;
       *(int *)(temp_v5 + 0x18) = (int)*(short *)(temp_v5 + 0xe);
     }
     if (*(int *)(*(int *)(temp_v3 + 0xa8) + 4) == 0) {
@@ -121,7 +121,7 @@ unsigned int FUN_0033bfac(void)
     modelPlayClip(temp_v6,0,2);
     handleRegistryRegisterObject(g_handleRegistry,temp_v6);
     if (*(short *)(temp_v3 + 0xa6) == 0x26) {
-      *(unsigned char *)(g_mapGimic + 0x68) = 0;
+      *(unsigned char *)(((unsigned int)g_mapGimic) + 0x68) = 0;
       temp_v4 = *(int *)(*(int *)(temp_v3 + 0xa8) + 4);
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) | 3;
     }
@@ -144,8 +144,8 @@ unsigned int FUN_0033bfac(void)
     temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(temp_v3 + 0xa0) = temp_v6;
     *(unsigned short *)(temp_v3 + 0xa4) = 0;
-    temp_v5 = g_mapGimic;
-    *(int *)(temp_v3 + 0xac) = *(short *)(g_mapGimic + 0xc) + 0x2000;
+    temp_v5 = ((unsigned int)g_mapGimic);
+    *(int *)(temp_v3 + 0xac) = *(short *)(((unsigned int)g_mapGimic) + 0xc) + 0x2000;
     *(unsigned short *)(temp_v3 + 0xb0) = *(unsigned short *)(temp_v2 + 0xc);
     *(unsigned short *)(temp_v3 + 0xb2) = *(unsigned short *)(temp_v2 + 0xe);
     *(int *)(temp_v5 + 0x10) = *(int *)(temp_v5 + 0x10) + 1;
@@ -202,8 +202,8 @@ unsigned int FUN_0033bfac(void)
           moriModelUnitStartMaterialAnimation(*(unsigned int *)(*(int *)(temp_v3 + 0xa8) + 4),2);
         }
         if (*(short *)(temp_v3 + 0xa6) != 0x50) {
-          temp_v5 = g_mapGimic;
-          *(short *)(g_mapGimic + 0xc) = *(short *)(g_mapGimic + 0xc) + 1;
+          temp_v5 = ((unsigned int)g_mapGimic);
+          *(short *)(((unsigned int)g_mapGimic) + 0xc) = *(short *)(((unsigned int)g_mapGimic) + 0xc) + 1;
           *(unsigned short *)(temp_v5 + 10) = 0;
           return 0;
         }
@@ -215,8 +215,8 @@ unsigned int FUN_0033bfac(void)
           moriModelUnitStartMaterialAnimation(*(unsigned int *)(*(int *)(temp_v3 + 0xa8) + 4),2);
         }
         if (*(short *)(temp_v3 + 0xa6) != 0x50) {
-          temp_v5 = g_mapGimic;
-          *(short *)(g_mapGimic + 0xc) = *(short *)(g_mapGimic + 0xc) + 1;
+          temp_v5 = ((unsigned int)g_mapGimic);
+          *(short *)(((unsigned int)g_mapGimic) + 0xc) = *(short *)(((unsigned int)g_mapGimic) + 0xc) + 1;
           *(unsigned short *)(temp_v5 + 10) = 0;
           return 0;
         }
@@ -227,14 +227,14 @@ unsigned int FUN_0033bfac(void)
         moriModelUnitStartMaterialAnimation(*(unsigned int *)(*(int *)(temp_v3 + 0xa8) + 4),2);
       }
     }
-    temp_v5 = g_mapGimic;
-    *(short *)(g_mapGimic + 0xc) = *(short *)(g_mapGimic + 0xc) + 1;
+    temp_v5 = ((unsigned int)g_mapGimic);
+    *(short *)(((unsigned int)g_mapGimic) + 0xc) = *(short *)(((unsigned int)g_mapGimic) + 0xc) + 1;
     *(unsigned short *)(temp_v5 + 10) = 0;
     return 0;
   }
-  temp_v1 = (int)*(short *)(g_mapGimic + 0xc);
+  temp_v1 = (int)*(short *)(((unsigned int)g_mapGimic) + 0xc);
   FUN_003563fc();
-  temp_v2 = g_mapGimic + *(short *)(g_mapGimic + 0xe) * 0x3c;
+  temp_v2 = ((unsigned int)g_mapGimic) + *(short *)(((unsigned int)g_mapGimic) + 0xe) * 0x3c;
   *(unsigned short *)(temp_v2 + 0xa6) = *(unsigned short *)(temp_v1 + 2);
   textFormatBuffer(temp_v9,"map/unit/u%03d.bam");
   temp_v1 = (int)*(short *)(temp_v2 + 0xa6);
@@ -245,7 +245,7 @@ unsigned int FUN_0033bfac(void)
           if (temp_v1 != 0x50) {
             if (((temp_v1 == 0x34 || temp_v1 == 0x35) || (temp_v1 == 0x37 || temp_v1 == 0x38)) ||
                ((temp_v1 == 0x39 || temp_v1 == 0x3a) || temp_v1 == 0x3b)) {
-              if (*(char *)(g_mapGimic + temp_v1) != '\0') {
+              if (*(char *)(((unsigned int)g_mapGimic) + temp_v1) != '\0') {
                 temp_v1 = 0x20;
                 asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x214);
                 temp_v6 = 0;
@@ -255,7 +255,7 @@ unsigned int FUN_0033bfac(void)
                 *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
                 moriModelContentCopyBody();
                 *(unsigned char *)(temp_v2 + 0xb4) = 1;
-                temp_v5 = g_mapGimic;
+                temp_v5 = ((unsigned int)g_mapGimic);
                 *(short *)(temp_v5 + 10) = *(short *)(temp_v5 + 10) + 1;
                 return 0;
               }
@@ -267,12 +267,12 @@ unsigned int FUN_0033bfac(void)
               }
               *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
               modelLoadFileAsyncByName();
-              temp_v5 = g_mapGimic;
-              *(int *)((g_mapGimic + *(short *)(temp_v2 + 0xa6) * 4) - 0x90) =
-                   (int)*(short *)(g_mapGimic + 0xe);
+              temp_v5 = ((unsigned int)g_mapGimic);
+              *(int *)((((unsigned int)g_mapGimic) + *(short *)(temp_v2 + 0xa6) * 4) - 0x90) =
+                   (int)*(short *)(((unsigned int)g_mapGimic) + 0xe);
               *(unsigned char *)(temp_v5 + (int)*(short *)(temp_v2 + 0xa6)) = 1;
               *(unsigned char *)(temp_v2 + 0xb4) = 0;
-              temp_v5 = g_mapGimic;
+              temp_v5 = ((unsigned int)g_mapGimic);
               *(short *)(temp_v5 + 10) = *(short *)(temp_v5 + 10) + 1;
               return 0;
             }
@@ -280,8 +280,8 @@ unsigned int FUN_0033bfac(void)
             asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x21d);
           }
           else {
-            temp_v1 = *(int *)(g_mapGimic + 0x80) + 1;
-            *(int *)(g_mapGimic + 0x80) = temp_v1;
+            temp_v1 = *(int *)(((unsigned int)g_mapGimic) + 0x80) + 1;
+            *(int *)(((unsigned int)g_mapGimic) + 0x80) = temp_v1;
             *(int *)(temp_v2 + 200) = temp_v1;
             temp_v1 = 0x20;
             asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1fc);
@@ -307,7 +307,7 @@ unsigned int FUN_0033bfac(void)
         }
       }
       else {
-        if (*(char *)(g_mapGimic + 0x2c) != '\0') {
+        if (*(char *)(((unsigned int)g_mapGimic) + 0x2c) != '\0') {
           temp_v1 = 0x20;
           asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1e5);
           temp_v6 = 0;
@@ -318,10 +318,10 @@ unsigned int FUN_0033bfac(void)
           FUN_0040a908();
           FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
           moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
-                       *(unsigned int *)(g_mapGimic + *(int *)(g_mapGimic + 0x30) * 0x3c + 0xa8),0
+                       *(unsigned int *)(((unsigned int)g_mapGimic) + *(int *)(((unsigned int)g_mapGimic) + 0x30) * 0x3c + 0xa8),0
                       );
           *(unsigned char *)(temp_v2 + 0xb4) = 1;
-          temp_v5 = g_mapGimic;
+          temp_v5 = ((unsigned int)g_mapGimic);
           *(short *)(temp_v5 + 10) = *(short *)(temp_v5 + 10) + 1;
           return 0;
         }
@@ -335,13 +335,13 @@ unsigned int FUN_0033bfac(void)
         FUN_0040a908();
         FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
         modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
-        temp_v5 = g_mapGimic;
-        *(int *)(g_mapGimic + 0x30) = (int)*(short *)(g_mapGimic + 0xe);
+        temp_v5 = ((unsigned int)g_mapGimic);
+        *(int *)(((unsigned int)g_mapGimic) + 0x30) = (int)*(short *)(((unsigned int)g_mapGimic) + 0xe);
         *(unsigned char *)(temp_v5 + 0x2c) = 1;
       }
     }
     else {
-      if (*(char *)(g_mapGimic + 0x24) != '\0') {
+      if (*(char *)(((unsigned int)g_mapGimic) + 0x24) != '\0') {
         temp_v1 = 0x20;
         asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1cc);
         temp_v6 = 0;
@@ -352,9 +352,9 @@ unsigned int FUN_0033bfac(void)
         FUN_0040a908();
         FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
         moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
-                     *(unsigned int *)(g_mapGimic + *(int *)(g_mapGimic + 0x28) * 0x3c + 0xa8),0);
+                     *(unsigned int *)(((unsigned int)g_mapGimic) + *(int *)(((unsigned int)g_mapGimic) + 0x28) * 0x3c + 0xa8),0);
         *(unsigned char *)(temp_v2 + 0xb4) = 1;
-        temp_v5 = g_mapGimic;
+        temp_v5 = ((unsigned int)g_mapGimic);
         *(short *)(temp_v5 + 10) = *(short *)(temp_v5 + 10) + 1;
         return 0;
       }
@@ -368,13 +368,13 @@ unsigned int FUN_0033bfac(void)
       FUN_0040a908();
       FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
       modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
-      temp_v5 = g_mapGimic;
-      *(int *)(g_mapGimic + 0x28) = (int)*(short *)(g_mapGimic + 0xe);
+      temp_v5 = ((unsigned int)g_mapGimic);
+      *(int *)(((unsigned int)g_mapGimic) + 0x28) = (int)*(short *)(((unsigned int)g_mapGimic) + 0xe);
       *(unsigned char *)(temp_v5 + 0x24) = 1;
     }
   }
   else {
-    if (*(char *)(g_mapGimic + 0x1c) != '\0') {
+    if (*(char *)(((unsigned int)g_mapGimic) + 0x1c) != '\0') {
       temp_v1 = 0x20;
       asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1b3);
       temp_v6 = 0;
@@ -385,9 +385,9 @@ unsigned int FUN_0033bfac(void)
       FUN_0040a908();
       FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
       moriModelContentCopyBody(*(unsigned int *)(temp_v2 + 0xa8),
-                   *(unsigned int *)(g_mapGimic + *(int *)(g_mapGimic + 0x20) * 0x3c + 0xa8),0);
+                   *(unsigned int *)(((unsigned int)g_mapGimic) + *(int *)(((unsigned int)g_mapGimic) + 0x20) * 0x3c + 0xa8),0);
       *(unsigned char *)(temp_v2 + 0xb4) = 1;
-      temp_v5 = g_mapGimic;
+      temp_v5 = ((unsigned int)g_mapGimic);
       *(short *)(temp_v5 + 10) = *(short *)(temp_v5 + 10) + 1;
       return 0;
     }
@@ -401,12 +401,12 @@ unsigned int FUN_0033bfac(void)
     FUN_0040a908();
     FUN_0040a918(*(unsigned int *)(temp_v2 + 0xa8),0x30000);
     modelLoadFileAsyncByName(*(unsigned int *)(temp_v2 + 0xa8),temp_v9);
-    temp_v5 = g_mapGimic;
-    *(int *)(g_mapGimic + 0x20) = (int)*(short *)(g_mapGimic + 0xe);
+    temp_v5 = ((unsigned int)g_mapGimic);
+    *(int *)(((unsigned int)g_mapGimic) + 0x20) = (int)*(short *)(((unsigned int)g_mapGimic) + 0xe);
     *(unsigned char *)(temp_v5 + 0x1c) = 1;
   }
   *(unsigned char *)(temp_v2 + 0xb4) = 0;
-  temp_v5 = g_mapGimic;
+  temp_v5 = ((unsigned int)g_mapGimic);
   *(short *)(temp_v5 + 10) = *(short *)(temp_v5 + 10) + 1;
   return 0;
   while (temp_v1 = temp_v1 + 1, temp_v2 = -1, temp_v1 < 0x23) {

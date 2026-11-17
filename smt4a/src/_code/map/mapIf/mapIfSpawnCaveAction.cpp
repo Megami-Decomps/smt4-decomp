@@ -1,18 +1,12 @@
 #include "AsdSDK/AsdDebug.h"
 #include "map/MapIfGlobals.h"
+#include "Model/MoriModelContent.h"
+#include "Model/MoriModelManager.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 
-extern u32 g_handleRegistry;
-
 void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
-MapIfResource *modelListInit(void *mem);                 /* content constructor */
-void resourceOwnerLoadFileSync(MapIfResource *content, const char *name);
-void moriModelContentLoadBody(MapIfResource *content, u32 arg);
-void handleRegistryRegisterObject(u32 registry, u32 object);
-void controllerSetDestination(u32 object, const f32 *position);
-void controllerSetRotationEulerDegrees(u32 object, f32 x, f32 y, f32 z);
-void modelPlayClip(u32 object, s32 first, s32 second, f32 x, f32 y);
 
 // Spawns the cave action model at the given position and starts it moving there.
 void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 w)
@@ -29,12 +23,13 @@ void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 w)
     if (mem != NULL) {
         mem = modelListInit(mem);
     }
-    block->resource = (MapIfResource *)mem;
+    block->resource = static_cast<MoriModelContent *>(mem);
     resourceOwnerLoadFileSync(block->resource, "map/all/action_cave.bam");
     moriModelContentLoadBody(block->resource, 0);
-    u32 object = block->resource->handle;
+    Obj557b18 *object = block->resource->body;
     handleRegistryRegisterObject(g_handleRegistry, object);
-    controllerSetDestination(object, &block->position.x);
+    /* The marker position's x, y, z. */
+    controllerSetDestination(object, reinterpret_cast<const MapVector *>(&block->position));
     controllerSetRotationEulerDegrees(object, 0.0f, block->position.w, 0.0f);
     modelPlayClip(object, 0, 2, 0.0f, 0.0f);
 }

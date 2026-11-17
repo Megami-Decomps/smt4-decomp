@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00296530` (_code @ 0x296530, 0xad4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -72,7 +73,6 @@ extern signed char DAT_005f1ad4; /* 0x5f1ad4 */
 extern int DAT_005f1b10; /* 0x5f1b10 */
 extern int DAT_005f1be8; /* 0x5f1be8 */
 
-extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: vec4Forward. */
@@ -132,7 +132,7 @@ void FUN_00296530(void)
   float temp_v16;
   int temp_v17;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   if ((0 < g_lmapScene[0x69]) && (g_lmapScene[0x68] != -1)) {
     vec4Forward();
     g_lmapScene[0x69] = g_lmapScene[0x69] - 1;

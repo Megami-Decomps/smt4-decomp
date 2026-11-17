@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -43,9 +44,8 @@ typedef struct BtlModelOwner {
     /* 0x400 */ u8 *model;
 } BtlModelOwner;
 
-extern u32 g_btlUiBlock;
 
-void FUN_004a9308(u32 block, u16 entry, s32 flag);
+void FUN_004a9308(BtlUiA *block, u16 entry, s32 flag);
 void FUN_004fd508(s32 delay, BtlCommand *command, s32 mode, BtlSkill *skill, s32 flag);
 void FUN_004fbeac(s32 delay, BtlCommand *command, s32 mode, s32 kind, s32 flag);
 void FUN_004c9160(s32 effect, BtlInputUnit *unit, s32 a, s32 b);

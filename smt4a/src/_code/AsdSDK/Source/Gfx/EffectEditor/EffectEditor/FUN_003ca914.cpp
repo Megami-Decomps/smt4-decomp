@@ -7,30 +7,29 @@ void asdEffectQueueRelease(u32, s32);
 void objectRegistryInsert(void*, s32);
 extern EffectEditorDefaultSlot DAT_0059e9a8;
 
-
 // Recreates the editor's part and clears its current/default selections.
 u32 FUN_003ca914(void)
 {
-    if (g_effectEditor.selection.resource != NULL) {
-        asdEffectQueueRelease(g_effectEditor.selection.unk10, 3);
-        g_effectEditor.selection.unk10 = 0;
-        if (g_effectEditor.selection.resource != NULL) {
-            objectRegistryInsert(g_effectEditor.selection.resource, 3);
-            g_effectEditor.selection.resource = NULL;
+    if (g_effectEditor.resource != NULL) {
+        asdEffectQueueRelease((u32)g_effectEditor.node, 3);
+        g_effectEditor.node = 0;
+        if (g_effectEditor.resource != NULL) {
+            objectRegistryInsert(g_effectEditor.resource, 3);
+            g_effectEditor.resource = NULL;
         }
     }
-    if (g_effectEditor.selection.list != NULL) {
-        asdEffectQueueRelease((u32)g_effectEditor.selection.list, 3);
+    if (g_effectEditor.list != NULL) {
+        asdEffectQueueRelease((u32)g_effectEditor.list, 3);
     }
-    g_effectEditor.selection.list = effPartCreate();
+    g_effectEditor.list = effPartCreate();
     // The retail symbol names the second element of the paired defaults.
     EffectEditorDefaultPair* defaults = (EffectEditorDefaultPair*)
         ((u8*)&DAT_0059e9a8 - offsetof(EffectEditorDefaultPair, second));
     defaults->first.object.indices.extraOffset = 0;
-    g_effectEditor.selection.index = 0;
+    g_effectEditor.index = 0;
     defaults->second.object.indices.extraOffset = 0;
     g_effectEditorResourceName[0] = 0;
-    g_effectEditor.selection.object = &defaults->second.object;
+    g_effectEditor.object = &defaults->second.object;
     return 0;
 }
 }

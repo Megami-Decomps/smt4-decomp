@@ -14,7 +14,7 @@ void FUN_00378964(Vec3f position)
         if (entry->active == 0) {
             continue;
         }
-        s32 category = entry->display.category;
+        s32 category = entry->category;
         if (category == 0x1D || category == 0x31 || category == 0x1E ||
             category == 0x1F || category == 0x30 || category == 0x22 || category == 0x23) {
             union {

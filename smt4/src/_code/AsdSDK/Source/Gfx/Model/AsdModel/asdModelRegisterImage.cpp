@@ -5,10 +5,10 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Util/AsdList.h"
 #include "shard/S1GfxModel.h"
+#include "gfx/GfxSettings.h"
 
 extern "C" {
 extern AsdList DAT_004dae3c;
-extern GfxModelState g_gfxSettings;
 extern const char DAT_00409428[];
 extern const char DAT_00409438[];
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
@@ -78,7 +78,7 @@ AsdModelEntry *asdModelRegisterImage(u8 *file, u32 parameter)
         model->parameter = parameter;
     }
     asdListAdd(&DAT_004dae3c, model, 0);
-    ++g_gfxSettings.loadedModels.count;
+    ++g_gfxSettings.loadedModelCount;
     return reinterpret_cast<AsdModelEntry *>(model);
 }
 }

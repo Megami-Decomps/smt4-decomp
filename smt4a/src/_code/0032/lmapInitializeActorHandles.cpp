@@ -1,12 +1,7 @@
 #include "shard/W4_Match1b_RegisteredHandle.h"
-
-struct LmapActorHandles {
-    /* 0x000 */ u8 unk000[0xa54];
-    /* 0xa54 */ RegisteredHandle *actors[32];
-};
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
-extern LmapActorHandles *g_lmapMainState;
 extern void *g_handleRegistry;
 void moriModelContentLoadBody(RegisteredHandle *object, u32 flags);
 void handleRegistryRegisterObject(void *registry, u32 handle);
@@ -15,7 +10,7 @@ void moriModelUnitStartMaterialAnimation(u32 handle, u32 mode, u32 flags, f32 va
 
 void lmapInitializeActorHandles()
 {
-    LmapActorHandles *work = g_lmapMainState;
+    LmapMainStateA *work = g_lmapMainState;
     if (!work) {
         return;
     }

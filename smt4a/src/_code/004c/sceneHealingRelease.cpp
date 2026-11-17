@@ -18,18 +18,18 @@ void sceneHealingRelease(HealingSceneWork *work)
     frameTexturesRelease();
     asdCameraInitAreas();
     mapReleaseTableTexture();
-    ptrListRemoveClearOwner(g_handleRegistry, work->primary->object);
+    ptrListRemoveClearOwner(g_handleRegistry, work->primary->body);
     if (work->primary != NULL) {
         delete work->primary;
         work->primary = NULL;
     }
-    ptrListRemoveClearOwner(g_handleRegistry, work->secondary->object);
+    ptrListRemoveClearOwner(g_handleRegistry, work->secondary->body);
     if (work->secondary != NULL) {
         delete work->secondary;
         work->secondary = NULL;
     }
     for (s32 i = 0; i < 3; ++i) {
-        ptrListRemoveClearOwner(g_handleRegistry, work->models[i]->object);
+        ptrListRemoveClearOwner(g_handleRegistry, work->models[i]->body);
         if (work->models[i] != NULL) {
             delete work->models[i];
             work->models[i] = NULL;

@@ -28,27 +28,27 @@ u32 FUN_00242080(u32 flags)
     } result;
     result.state = 0;
     char generalLabel[104];
-    if (g_effectEditor.textRequest.owner != NULL) {
-        FUN_002f82ac(g_effectEditor.textRequest.request);
-        result.state = g_effectEditor.textRequest.request->state;
-        result.kind = formattedTextCopyLabel(g_effectEditor.textRequest.request, result.label);
-        result.index = FUN_00318cac(g_effectEditor.textRequest.request);
+    if (g_effectEditor.nodeList != NULL) {
+        FUN_002f82ac(g_effectEditor.request);
+        result.state = g_effectEditor.request->state;
+        result.kind = formattedTextCopyLabel(g_effectEditor.request, result.label);
+        result.index = FUN_00318cac(g_effectEditor.request);
         if (result.state == 1) {
-            effectEditorObjectDestroy(g_effectEditor.textRequest.request);
-            g_effectEditor.textRequest.request = NULL;
-            nodeListOwnerFree(g_effectEditor.textRequest.owner);
-            g_effectEditor.textRequest.owner = NULL;
+            effectEditorObjectDestroy(g_effectEditor.request);
+            g_effectEditor.request = NULL;
+            nodeListOwnerFree(g_effectEditor.nodeList);
+            g_effectEditor.nodeList = NULL;
         }
     } else {
-        g_effectEditor.textRequest.owner = NULL;
+        g_effectEditor.nodeList = NULL;
         if (flags & 8) {
             for (u32 index = 0; index < 22; ++index) {
                 textFormatBuffer(generalLabel, "GENERAL %d", index);
-                effMenuAddEntry(g_effectEditor.textRequest.owner, generalLabel, 8, index, 0);
+                effMenuAddEntry(g_effectEditor.nodeList, generalLabel, 8, index, 0);
             }
         }
-        EffectTextRequest *request = effMenuCreate(g_effectEditor.textRequest.owner);
-        g_effectEditor.textRequest.request = request;
+        EffectTextRequest *request = effMenuCreate(g_effectEditor.nodeList);
+        g_effectEditor.request = request;
         request->type = 186;
         request->size = 28;
     }
@@ -57,17 +57,17 @@ u32 FUN_00242080(u32 flags)
     if (result.state == 1) {
         if (result.kind != 8) {
             LinkedItem *replacement = linkedFindItemByIndex(
-                static_cast<LinkedItems *>(g_effectEditor.selection.list), -result.index);
-            if (reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item) != replacement) {
-                effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.selection.list),
-                             reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item));
-                linkedItemsRedirectToReplacement(static_cast<LinkedItems *>(g_effectEditor.selection.list),
-                             reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item), replacement);
+                static_cast<LinkedItems *>(g_effectEditor.list), -result.index);
+            if (reinterpret_cast<LinkedItem *>(g_effectEditor.item) != replacement) {
+                effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.list),
+                             reinterpret_cast<LinkedItem *>(g_effectEditor.item));
+                linkedItemsRedirectToReplacement(static_cast<LinkedItems *>(g_effectEditor.list),
+                             reinterpret_cast<LinkedItem *>(g_effectEditor.item), replacement);
             }
         } else {
-            effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.selection.list),
-                         reinterpret_cast<LinkedItem *>(g_effectEditor.selection.item));
-            effBlockSetBlobB(reinterpret_cast<EffBlock *>(g_effectEditor.selection.block), &result.index, 4, 4);
+            effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.list),
+                         reinterpret_cast<LinkedItem *>(g_effectEditor.item));
+            effBlockSetBlobB(reinterpret_cast<EffBlock *>(g_effectEditor.block), &result.index, 4, 4);
         }
         return reinterpret_cast<u32>(&DAT_00400002);
     }

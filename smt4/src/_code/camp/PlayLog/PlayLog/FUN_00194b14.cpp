@@ -11,14 +11,10 @@ struct PlayLogEntry {
     /* 0x3F */ u8 kind;               /* 1: play time in seconds */
 };
 
-struct PlayLogRow {
-    /* 0x00 */ u8 data[0x8C];
-};
-
 /* The list widget sits at 0x2DC of the play log; its scroll state follows. */
 struct PlayLogView {
     /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ PlayLogRow rows[5];
+    /* 0x020 */ UiSpriteState rows[5];
     /* 0x2DC */ u8 list[0x6C];
     /* 0x348 */ s16 barA;
     /* 0x34A */ s16 barB;
@@ -52,7 +48,7 @@ void FUN_00194b14(void)
 {
     PlayLogView *log = g_playLog;
     for (s32 row = 0; row < (s32)FUN_0029d644(log->list); row++) {
-        s32 x = vec2GetXInt((const UiSpriteState *)&log->rows[row]);
+        s32 x = vec2GetXInt(&log->rows[row]);
         if (row == 0)
             texDrawCompositeSprite(2, PLAYLOG_FONT_TABLE, 0, x, 0, 0xB);
         if ((s32)FUN_0029d644(log->list) - 1 == row) {

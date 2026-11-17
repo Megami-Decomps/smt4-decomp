@@ -2,6 +2,7 @@
 #define CAMP_CEC_MENU_H
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 struct CampCecMenu {
     /* 0x000 */ u8 unk000[0x48];
@@ -15,13 +16,13 @@ struct CampCecMenu {
     };
     /* 0x0A0 */ u8 block0A0[1];
     /* 0x0A1 */ u8 unk0A1[0xC53];
-    /* 0xCF4 */ u32 scriptResource;
+    /* 0xCF4 */ void *scriptResource;
     /* 0xCF8 */ u32 unkCF8;
     union {
         /* 0xCFC */ u8 unkCFC[0x30];
         struct {
             /* 0xCFC */ u8 unkCFC[8];
-            /* 0xD04 */ u32 process;
+            /* 0xD04 */ ScriptProcess *process;
         } script;
     };
     /* 0xD2C */ s32 state;

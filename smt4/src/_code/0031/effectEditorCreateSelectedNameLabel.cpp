@@ -12,17 +12,17 @@ void effEditorSetTextValue(EffMenuNode *node, const char *text);
 
 void effectEditorCreateSelectedNameLabel()
 {
-    if (g_effectEditor.text.name != NULL) {
-        asdMemoryFreeLocked(g_effectEditor.text.name);
+    if (g_effectEditor.name != NULL) {
+        asdMemoryFreeLocked(g_effectEditor.name);
     }
     EffMenuNode *node = effMenuNodeCreate("");
-    g_effectEditor.text.name = node;
+    g_effectEditor.name = node;
     // The first pair of node words holds this label's screen origin.
     node->unk04 = 200;
     node->initialKind = 194;
-    g_effectEditor.text.name->unk14 = 9;
-    s32 position = DAT_0044f858.indices.extraOffset + g_effectEditor.selection.index;
-    effEditorSetTextValue(g_effectEditor.text.name, linkedFindItemByIndex(
-        (LinkedItems *)g_effectEditor.selection.list, position)->label.text);
+    g_effectEditor.name->unk14 = 9;
+    s32 position = DAT_0044f858.indices.extraOffset + g_effectEditor.index;
+    effEditorSetTextValue(g_effectEditor.name, linkedFindItemByIndex(
+        (LinkedItems *)g_effectEditor.list, position)->label.text);
 }
 }

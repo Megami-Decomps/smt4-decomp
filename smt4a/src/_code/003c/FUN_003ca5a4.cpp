@@ -2,6 +2,7 @@
 #include "common.h"
 #include "classes/Obj4209cc.h"
 #include "Model/MoriModelManager.h"
+#include "map/LmapMainGlobals.h"
 
 // One record of the 2D data table's sub-table 5: which slot is shown, and the flags that hide or show it.
 struct VisibilityEntry {
@@ -13,7 +14,7 @@ struct VisibilityEntry {
     /* 0x06 */ s16 skipFlag;  // when set, the entry is skipped if this flag is set
 };
 
-// The list the map slots are registered from; its object sits at +8 and its length at +0x10.
+// The map model content as this unit reads it: its node list (binding) at +8, the length at +0x10.
 struct SlotSourceList {
     u8 unk00[8];
     struct {
@@ -22,22 +23,7 @@ struct SlotSourceList {
     } *source;
 };
 
-struct LmapSlotA {
-    u8 unk00[0x84];
-    s8 registered;  // 0x84
-    u8 unk85[3];
-};
-
-// The Apocalypse map state block, reduced to the fields this function touches.
-struct LmapStateAView {
-    u8 unk0000[0x4ef8];
-    SlotSourceList *sources;  // 0x4ef8
-    u8 unk4efc[4];
-    LmapSlotA slots[128];     // 0x4f00
-};
-
 extern "C" {
-extern LmapStateAView *g_lmapMainState;
 extern u8 DAT_005f0c54[0x28];       // slot visibility as last applied
 extern const u8 DAT_00531270[0xa0]; // default table (copied to a local that is not used afterwards)
 
@@ -76,22 +62,23 @@ void FUN_003ca5a4(void)
     __aeabi_memcpy4(localTable, DAT_00531270, sizeof(localTable));
     rt_memcpy(DAT_005f0c54, visible, sizeof(visible));
 
-    LmapStateAView *state = g_lmapMainState;
-    for (u32 i = 0; i < state->sources->source->count; i++) {
-        void *source = state->sources->source;
+    LmapMainStateA *state = g_lmapMainState;
+    SlotSourceList *sources = reinterpret_cast<SlotSourceList *>(state->model);
+    for (u32 i = 0; i < sources->source->count; i++) {
+        void *source = sources->source;
         if (DAT_005f0c54[i] != 1) {
-            if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered != 0) {
+            if (g_lmapMainState != NULL && g_lmapMainState->modelSlots[i].registered != 0) {
                 ptrListRemoveClearOwner(g_handleRegistry, ptrVectorAt(source, i));
-                if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered != 0) {
-                    g_lmapMainState->slots[i].registered = 0;
+                if (g_lmapMainState != NULL && g_lmapMainState->modelSlots[i].registered != 0) {
+                    g_lmapMainState->modelSlots[i].registered = 0;
                 }
             }
             FUN_003b5c54(i, 0);
         } else {
-            if (g_lmapMainState == NULL || g_lmapMainState->slots[i].registered == 0) {
+            if (g_lmapMainState == NULL || g_lmapMainState->modelSlots[i].registered == 0) {
                 handleRegistryRegisterObject(g_handleRegistry, ptrVectorAt(source, i));
-                if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered == 0) {
-                    g_lmapMainState->slots[i].registered = 1;
+                if (g_lmapMainState != NULL && g_lmapMainState->modelSlots[i].registered == 0) {
+                    g_lmapMainState->modelSlots[i].registered = 1;
                 }
             }
             FUN_003b5c54(i, 1);

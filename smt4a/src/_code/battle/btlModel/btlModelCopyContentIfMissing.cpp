@@ -6,8 +6,6 @@ struct BattleModelHolder {
 
 extern "C" {
 void *asdMemoryAllocTraced(u32, const char *, s32);
-MoriModelContent *modelListInit(void *);
-void moriModelContentCopyBody(MoriModelContent *, MoriModelContent *, u32);
 
 // Lazily create a model content holder and copy the source's body into it.
 void btlModelCopyContentIfMissing(BattleModelHolder *destination, const BattleModelHolder *source)

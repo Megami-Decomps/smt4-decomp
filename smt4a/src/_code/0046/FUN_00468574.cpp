@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail loads the second resource pair with two ldr (here an add + ldm) and lowers the mode test to one cmp/cmpne with predicated moves feeding the later branch; the linker-inlined scriptProcessSetMode stores now match. */
 #include "map/PickObjectResources.h"
 #include "code/Code0013.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
-PickObjectResource *scrScriptProcessCreate(void *, void *);
 s32 gameFlagIsSet(u32);
 void FUN_003c1060(void);
 void messageSetMode(s32);
@@ -11,7 +11,7 @@ void FUN_003c3e14(void);
 void sysPlaySe(s32);
 void pickObjStart(PickObjectResources *, const char *);
 void titleSetSlotValueState2(s32, s32);
-void scriptProcessSetMode(PickObjectResource *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 
 /* Wait for both resource pairs, instantiate them, then select the initial state. */
 void FUN_00468574(PickObjectResources *work)

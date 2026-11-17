@@ -1,20 +1,15 @@
 /* NON_MATCHING: retail evaluates the handler call's vector argument (add r1, sp, #16) before the null test and then conditionally executes the call (ldrne/blxne), copies the 4th vector component back from the scratch memory, and keeps the globals in r8/r9; ours branches around the call and uses r6/r7. */
 #include "common.h"
 #include "shard/Resource.h"
+#include "gfx/VectorScratch.h"
 
-struct Vec4 {
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 w;
-};
 
 /* One particle of an emitter set (a linked list through `next`). */
 struct Particle {
     /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ Vec4 color;
+    /* 0x20 */ Vector4 color;
     /* 0x30 */ u8 unk30[0x10];
-    /* 0x40 */ Vec4 velocity;
+    /* 0x40 */ Vector4 velocity;
     /* 0x50 */ u8 unk50[0x10];
     /* 0x60 */ f32 intensity;
     /* 0x64 */ u8 unk64[4];
@@ -34,9 +29,9 @@ struct Particle {
 
 /* The set of particles one effect owns. */
 struct EmitterSet {
-    /* 0x00 */ Vec4 origin;
+    /* 0x00 */ Vector4 origin;
     /* 0x10 */ u8 unk10[0x30];
-    /* 0x40 */ Vec4 offset;
+    /* 0x40 */ Vector4 offset;
     /* 0x50 */ u8 unk50[0x10];
     /* 0x60 */ f32 time;
     /* 0x64 */ u8 unk64[0x10];
@@ -47,18 +42,11 @@ struct EmitterSet {
 
 /* Per-emitter-type callbacks (0x44 bytes each). */
 /* Scratch vectors shared by the update functions (starting at 0x4EA81C). */
-struct EmitterScratch {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ Vec4 first;
-    /* 0x110 */ Vec4 second;
-};
 
 extern "C" {
 
-extern EmitterScratch g_vectorScratch;
-
 /* Multiplies each component of the vector by `factor`. */
-static inline void scale(Vec4 &vector, f32 factor)
+static inline void scale(Vector4 &vector, f32 factor)
 {
     vector.x = vector.x * factor;
     vector.y = vector.y * factor;
@@ -67,7 +55,7 @@ static inline void scale(Vec4 &vector, f32 factor)
 }
 
 /* Adds `other` to the vector component-wise. */
-static inline void add(Vec4 &vector, const Vec4 &other)
+static inline void add(Vector4 &vector, const Vector4 &other)
 {
     vector.x = vector.x + other.x;
     vector.y = vector.y + other.y;
@@ -94,35 +82,37 @@ void FUN_002a36fc(EmitterSet *set, f32 deltaTime)
                 g_handlerTable[particle->emitter->type].setIntensity(particle->emitter->data, factor);
             }
         } else {
-            Vec4 color;
+            Vector4 color;
             f32 factor;
 
-            g_vectorScratch.first = particle->color;
+            g_vectorScratch.first.vector = particle->color;
             factor = particle->intensity;
             if ((particle->flags2 & PARTICLE_TIME_SCALED) != 0) {
                 factor = factor * scaledTime;
             }
-            scale(g_vectorScratch.first, factor);
-            color = g_vectorScratch.first;
+            scale(g_vectorScratch.first.vector, factor);
+            color = g_vectorScratch.first.vector;
             if (g_handlerTable[particle->emitter->type].setColor != NULL) {
-                g_handlerTable[particle->emitter->type].setColor(particle->emitter->data, &color);
+                // The handler table takes its own (incomplete) Vec4: the value is a Vector4.
+                g_handlerTable[particle->emitter->type].setColor(particle->emitter->data, reinterpret_cast<const Vec4 *>(&color));
             }
         }
         if ((particle->flags & PARTICLE_HAS_OFFSET) != 0) {
-            Vec4 position;
+            Vector4 position;
 
-            g_vectorScratch.first = set->offset;
-            g_vectorScratch.second = set->origin;
-            add(g_vectorScratch.first, g_vectorScratch.second);
+            g_vectorScratch.first.vector = set->offset;
+            g_vectorScratch.second.vector = set->origin;
+            add(g_vectorScratch.first.vector, g_vectorScratch.second.vector);
             if ((particle->flags & PARTICLE_FIXED_HEIGHT) != 0) {
-                g_vectorScratch.first.y = 5.0f;
+                g_vectorScratch.first.vector.y = 5.0f;
             }
-            g_vectorScratch.second = particle->velocity;
-            scale(g_vectorScratch.second, scaledTime);
-            add(g_vectorScratch.first, g_vectorScratch.second);
-            position = g_vectorScratch.first;
+            g_vectorScratch.second.vector = particle->velocity;
+            scale(g_vectorScratch.second.vector, scaledTime);
+            add(g_vectorScratch.first.vector, g_vectorScratch.second.vector);
+            position = g_vectorScratch.first.vector;
             if (g_handlerTable[particle->emitter->type].setPosition != NULL) {
-                g_handlerTable[particle->emitter->type].setPosition(particle->emitter->data, &position);
+                // The handler table takes its own (incomplete) Vec4: the value is a Vector4.
+                g_handlerTable[particle->emitter->type].setPosition(particle->emitter->data, reinterpret_cast<const Vec4 *>(&position));
             }
         }
     }

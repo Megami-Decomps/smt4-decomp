@@ -1,7 +1,6 @@
 #include "battle/Talk/btlTalkBustUp.h"
 
 extern "C" {
-extern BtlTalkBustUp *g_btlTalkBustUp;
 extern void *g_aocSystem;
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void packageFileDisableByKindName(void *system, s32 table, u32 node);
@@ -9,10 +8,10 @@ void jobStop(u32 job, s32 mode);
 void asdMemFree(void *allocation);
 
 /* Sets the portrait's flag byte at 0x2F4 when there is a portrait. */
-static __inline void btlTalkBustUpSetUnk2F4(BtlTalkBustUp *portrait, u8 value)
+static __inline void btlTalkBustUpSetUnk2F4(BtlTalkBustUp *portrait, s8 value)
 {
     if (portrait != NULL) {
-        portrait->unk2F4 = value;
+        portrait->textureReady = value;
     }
 }
 
@@ -28,7 +27,7 @@ static __inline void btlTalkBustUpReleaseTextureInline(void)
             packageFileDisableByKindName(g_aocSystem, 24, portrait->textureNode);
             portrait->textureNode = -1;
         }
-        portrait->unk2EC = 0;
+        portrait->stateCounter = 0;
         portrait->state = 3;
     }
 }

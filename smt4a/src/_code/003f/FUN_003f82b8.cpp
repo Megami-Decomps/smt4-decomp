@@ -18,9 +18,11 @@ struct CampStatusScreen {
     /* 0x054 */ u8 unk054[0xD4];
     /* 0x128 */ s32 scrollBase;
     /* 0x12C */ u8 unk12C[0x40];
-    /* 0x16C */ u8 spriteA[0x118];
+    /* 0x16C */ UiSpriteState spriteA;
+    /* 0x1F8 */ u8 unk1F8[0x8C];
     /* 0x284 */ u8 unk284[0x2BC];
-    /* 0x540 */ u8 spriteB[0x98];
+    /* 0x540 */ UiSpriteState spriteB;
+    /* 0x5CC */ u8 unk5CC[0xC];
     /* 0x5D8 */ void *panel;
 };
 
@@ -35,18 +37,18 @@ void FUN_00164168(void *panel, s32 x, s32 y, u32 color, u32 layer, s32 value, f3
 // Draw the camp status screen for its current mode at the main sprite's position, then reset the draw speed.
 void FUN_003f82b8(CampStatusScreen *screen)
 {
-    s32 x = vec2GetXInt((const UiSpriteState *)screen->spriteA);
-    s32 y = vec2GetYInt((const UiSpriteState *)screen->spriteA);
-    f32 speed = vec2GetSpeed((const UiSpriteState *)screen->spriteA);
+    s32 x = vec2GetXInt(&screen->spriteA);
+    s32 y = vec2GetYInt(&screen->spriteA);
+    f32 speed = vec2GetSpeed(&screen->spriteA);
 
     switch (screen->mode) {
     case 0:
     case 1:
     case 2:
     case 3: {
-        s32 secondX = vec2GetXInt((const UiSpriteState *)screen->spriteB);
-        s32 secondY = vec2GetYInt((const UiSpriteState *)screen->spriteB);
-        f32 secondSpeed = vec2GetSpeed((const UiSpriteState *)screen->spriteB);
+        s32 secondX = vec2GetXInt(&screen->spriteB);
+        s32 secondY = vec2GetYInt(&screen->spriteB);
+        f32 secondSpeed = vec2GetSpeed(&screen->spriteB);
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         s32 drawX = x + parallax;
         efctSetSpeed(speed);

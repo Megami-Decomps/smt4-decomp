@@ -47,9 +47,9 @@ typedef struct SaveLoadUI {
     /* 0x30D */ u8 unk30d[0xCB];
     /* 0x3D8 */ u8 list[0x7C];
     /* 0x454 */ u8 params[0x20];
-    /* 0x474 */ u8 sprite0[0x8C];
-    /* 0x500 */ u8 sprite1[0x8C];
-    /* 0x58C */ u8 sprite2[0x8C];
+    /* 0x474 */ UiSpriteState sprite0;
+    /* 0x500 */ UiSpriteState sprite1;
+    /* 0x58C */ UiSpriteState sprite2;
     /* 0x618 */ u32 unk618;
     /* 0x61C */ f32 unk61c;
     /* 0x620 */ u8 unk620[0x10C];
@@ -135,9 +135,9 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     ui->buffer = asdMemoryAlloc(0x100, 0x100, 0, 100, 1);
     paramsClearPacket(ui->params);
     paramsInit(reinterpret_cast<UiResourceParameters *>(ui->params), DAT_00533d50, 0x78, DAT_00533dc8, 0x18, NULL, 0, 0, 0, DAT_00533de0, 0xE0);
-    uiSpriteStateInitFromSource((UiSpriteState *)ui->sprite0, 0x2B, 1, (UiResourceParameters *)(ui->params), 0xC9, 1.0f);
-    uiSpriteInitializeState((UiSpriteState *)ui->sprite1, 0x2B, 0x51, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);
-    uiSpriteInitializeState((UiSpriteState *)ui->sprite2, 0x2B, 0x52, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);
+    uiSpriteStateInitFromSource(&ui->sprite0, 0x2B, 1, (UiResourceParameters *)(ui->params), 0xC9, 1.0f);
+    uiSpriteInitializeState(&ui->sprite1, 0x2B, 0x51, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);
+    uiSpriteInitializeState(&ui->sprite2, 0x2B, 0x52, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);
     ui->unk618 = 0;
     ui->unk61c = 0.0f;
     ui->unk30c = 0;

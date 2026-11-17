@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dfba0` (_code @ 0x2dfba0, 0x7dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -73,7 +74,6 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: libm_cosf. */
@@ -142,7 +142,7 @@ void FUN_002dfba0(void)
   unsigned int temp_v45;
   
   temp_v1 = g_mapIf;
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   DAT_00581044 = DAT_00581044 + 1;
   temp_v5 = 0xffffffff;
   DAT_00581048 = DAT_00581048 + 0.2f;

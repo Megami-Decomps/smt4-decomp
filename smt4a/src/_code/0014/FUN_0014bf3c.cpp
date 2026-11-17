@@ -1,11 +1,7 @@
 #include "common.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/NkmSortIndex.h"
 #include "gamedata/NkmBaseRecordA.h"
 
-struct RaceLabelA {
-    char primary[0x10];
-    char alternate[0x20];
-};
 struct AddonRaceLabelA {
     u16 id;
     char text[1];
@@ -25,12 +21,12 @@ static __inline const char *findRaceLabel(u32 race, s32 alternate)
         return addon->text;
     }
     void *table = dataTableGet(1, 0);
-    RaceLabelA *labels = (RaceLabelA *)dataTableGetEntries(table);
+    NkmRaceNameRecordA *labels = nkmRaceNameRecordsA(table);
     u32 count = dataTableGetCount(table);
     if (count > race) {
-        return alternate ? labels[race].alternate : labels[race].primary;
+        return alternate ? labels[race].alternateName : labels[race].name;
     }
-    return labels->primary;
+    return labels->name;
 }
 
 /* Selects the demon's race label, preferring add-on text over the built-in table. */

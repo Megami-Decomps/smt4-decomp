@@ -1,30 +1,18 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "gamedata/GameFlags.h"
 
-/* The part of the map block that holds the pending flag slots (8 slots). */
-struct MapBlockFlagView {
-    /* 0xDE3 */ u8 unk000[0xDE3];
-    /* 0xDE3 */ s8 count;
-    /* 0xDE4 */ u8 active[16];
-    /* 0xDF4 */ s16 flag[8];
-    /* 0xE04 */ s16 key[8];
-};
-
 extern "C" {
-
-
-MapBlockFlagView *gameGetMapBlock(void);
 
 /* Retires the pending flag slots keyed `key`: deactivates each and raises its game flag. */
 void mapFlagSlotsRetireByKey(s32 key)
 {
-    MapBlockFlagView *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
 
-    for (s32 i = 0; i < block->count; i++) {
-        if (block->active[i] != 0 && block->key[i] == key) {
-            block->active[i] = 0;
-            if (block->flag[i] != 0) {
-                gameFlagSetValue(block->flag[i], 1, 1);
+    for (s32 i = 0; i < block->slotCount; i++) {
+        if (block->slotActive[i] != 0 && block->slotKey[i] == key) {
+            block->slotActive[i] = 0;
+            if (block->slotFlag[i] != 0) {
+                gameFlagSetValue(block->slotFlag[i], 1, 1);
             }
         }
     }

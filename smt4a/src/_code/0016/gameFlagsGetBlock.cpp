@@ -1,24 +1,12 @@
-#include "common.h"
-#include "gamedata/GameDataAccess.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
+#include "gamedata/GameSaveBlocks.h"
 
 extern "C" {
 
-typedef struct Table {
-    /* 0x0000 */ u8 unk0000[0x3E74];
-    /* 0x3E74 */ u8 member3E74[1];
-} Table;
-
-typedef struct GameDataBlocksView {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Table *table;
-} GameDataBlocksView;
-extern GameDataBlocksView g_gameDataBlocks;
-
-/* Returns the address of the member at 0x3E74 of the game-data table. */
-FlagWorkBanks *gameFlagsGetBlock(void)
+/* Returns the map block of the save body (IV's gameGetMapBlock). */
+MapSaveBlockA *gameFlagsGetBlock(void)
 {
-    return reinterpret_cast<FlagWorkBanks *>(g_gameDataBlocks.table->member3E74);
+    return &g_gameDataBlocks.saveBlock->body.mapBlock;
 }
 
 } /* extern "C" */

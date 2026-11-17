@@ -1,15 +1,14 @@
-#include "shard/SaveWork.h"
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" {
 
-extern SaveWork *gameGetMapBlock(void);
 
 void gameSetActorAlpha(int index, u8 value)
 {
-    SaveWork *work = gameGetMapBlock();
+    MapSaveBlock *work = gameGetMapBlock();
 
     if (index < 0x40) {
-        work->unkBD8[index] = value;
+        work->timedFlags[index] = value;
     }
 }
 

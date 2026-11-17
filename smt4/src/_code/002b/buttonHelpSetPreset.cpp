@@ -13,13 +13,13 @@ void FUN_002ae5e0();
 void buttonHelpSetPreset(u32 preset)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
-    if (work->unk4C9 == preset) {
+    if (work->preset == preset) {
         return;
     }
     if (g_buttonHelp.pending < 0) {
-        const ButtonHelpSelectionViewIV *selection = reinterpret_cast<const ButtonHelpSelectionViewIV *>(g_buttonHelp.work);
+        const ButtonHelpWork *current = g_buttonHelp.work;
         for (s32 index = 0; index < 6; ++index) {
-            if (selection->active[index] != 0) {
+            if (current->touchPressed[index] != 0) {
                 g_buttonHelp.pending = preset;
                 return;
             }
@@ -27,13 +27,13 @@ void buttonHelpSetPreset(u32 preset)
     }
     g_buttonHelp.pending = -1;
     buttonHelpSetContext(preset);
-    const ButtonHelpPresetRecord *previous = dataTableGetEntry0e(work->unk4C9);
+    const ButtonHelpPresetRecord *previous = dataTableGetEntry0e(work->preset);
     const ButtonHelpPresetRecord *next = dataTableGetEntry0e(preset);
     if (previous == NULL || next == NULL) {
         return;
     }
-    work->unk04CA[0] = work->unk4C9;
-    work->unk4C9 = preset;
+    work->previousPreset = work->preset;
+    work->preset = preset;
     u8 buttonOrder[8] = { 5, 6, 4, 3, 2, 1, 0, 0 };
     for (s32 index = 0; index < 6; ++index) {
         u16 value = next->buttons[index];
@@ -43,14 +43,14 @@ void buttonHelpSetPreset(u32 preset)
     }
     if (previous->shown != 0) {
         if (next->shown != 0) {
-            g_buttonHelp.work->unk4C5 = 0;
+            g_buttonHelp.work->panelState = 0;
             FUN_001385f8();
         } else {
-            g_buttonHelp.work->unk4C5 = 1;
+            g_buttonHelp.work->panelState = 1;
             FUN_002ae5e0();
         }
     } else {
-        g_buttonHelp.work->unk4C5 = 1;
+        g_buttonHelp.work->panelState = 1;
         FUN_001385f8();
     }
 }

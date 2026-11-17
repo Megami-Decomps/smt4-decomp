@@ -1,14 +1,11 @@
-#include "common.h"
+#include "gamedata/GameSaveBlocks.h"
 #include "code/Code002c_Smt4a.h"
 extern "C" {
-struct DataStatus { u8 unk00[0x27FB8]; u8 flags[1]; };
-struct DataTable { u8 unk00[0x88]; DataStatus status; };
-extern struct { u32 unk00; DataTable *table; } g_gameDataBlocks;
 /* Reads an indexed game-data flag. */
 s32 gameDataStatusFlagGet(u32 index)
 {
-    DataStatus *status = &g_gameDataBlocks.table->status;
+    GameSaveBodyA *status = &g_gameDataBlocks.saveBlock->body;
 
-    return status->flags[index];
+    return status->status.flags[index];
 }
 }

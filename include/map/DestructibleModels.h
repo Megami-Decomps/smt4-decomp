@@ -2,8 +2,9 @@
 #define MAP_DESTRUCTIBLE_MODELS_H
 #include "map/mapDepart.h"
 #include <stddef.h>
-struct ControllerPose;
-struct MapDestructibleModel { u32 unk00; ControllerPose *controller; };
+class Obj557b18;
+/* A destructible's model content (Model/MoriModelContent.h); `controller` is its body. */
+struct MapDestructibleModel { u32 unk00; Obj557b18 *controller; };
 struct MapDestructibleGroup { MapDestructibleModel *models[8]; };
 struct MapDestructibleEntry {
     u8 active;

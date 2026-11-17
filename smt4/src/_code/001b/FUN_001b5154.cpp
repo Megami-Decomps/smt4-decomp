@@ -1,6 +1,7 @@
 /* NON_MATCHING: near (205 rows against 206): retail shares the `if (dialogIsActive()) infoWinStartTimer(1)` tail and the clear-and-return-0 stub between its early exits, and runs the bit-clear through r1/r2; ours repeats the tails inline and clears through r0. Conditions, order of checks and constants follow retail. */
 #include "battle/BattleUnitSlot.h"
 #include "shard/JobWork.h"
+#include "battle/BtlUiGlobal.h"
 
 #define PICK_ACTIVE_FLAGS 0x140
 #define PICK_FLAG_ARMED_A 0x40
@@ -37,7 +38,6 @@ extern "C" {
 
 extern s32 g_btlScriptUnit;
 extern u32 g_btlActionReflect;
-extern s32 g_btlUiBlock;
 
 s32 dialogIsActive(void);
 void infoWinStartTimer(s32 value);

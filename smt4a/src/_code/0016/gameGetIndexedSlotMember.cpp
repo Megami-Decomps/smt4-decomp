@@ -1,24 +1,18 @@
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
-
-typedef struct Table {
-    /* 0x0000 */ u8 unk0000[0x1590];
-    /* 0x1590 */ u32 ids[8];
-} Table;
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ u8 member08[1];
 } Entry;
 
-Table *gameFlagsGetBlock(void);
 Entry *dataTableGetEntry49(u8 id);
 
 /* Returns the address of the member at 8 of the entry for slot `index` (0..7) of the table, or NULL when the table or the entry is missing. */
 u8 *gameGetIndexedSlotMember(s32 index)
 {
-    Table *table;
+    MapSaveBlockA *table;
     u8 *id;
     Entry *entry;
 
@@ -26,7 +20,7 @@ u8 *gameGetIndexedSlotMember(s32 index)
     if (table != NULL) {
         table = gameFlagsGetBlock();
         if (table != NULL && index < 8) {
-            id = (u8 *)&table->ids[index];
+            id = &table->naviSlots[index].id;
         } else {
             id = NULL;
         }

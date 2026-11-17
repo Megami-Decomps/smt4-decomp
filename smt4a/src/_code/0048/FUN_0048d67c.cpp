@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rebuild of the map marker screen-position update; the VFP conversion order (the draft's per-marker int/float round trips) and the half-scale constant 0.5f are scheduled differently by armcc, and the two float x/y sources of the first branch (0x850C/0x8510 for placed markers) are kept as the draft read them. */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 
 /* One map marker (0x30 bytes at +0x84F8 of the map view). */
 struct MapMarker {
@@ -34,16 +34,15 @@ struct MapView {
 
 extern "C" {
 extern s8 DAT_005f1c60;
-u8 *gameFlagsGetBlock(void);
 f32 *sub68OwnerGetBlock60(void *owner);
 
 /* Converts every marker's map position to screen position and size around the camera. */
 void FUN_0048d67c(MapView *view)
 {
-    u8 *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     f32 *camera = sub68OwnerGetBlock60(view->cameraOwner);
     s32 count = view->markerCount;
-    if (flags[0xD8E] != 0xC) {
+    if (flags->layout != 0xC) {
         s32 dx = (s32)((f32)(view->viewWidth / 2) - camera[0]);
         s32 dy = (s32)((f32)(view->viewHeight / 2) - camera[1]);
         for (s32 i = 0; i < count; i++) {

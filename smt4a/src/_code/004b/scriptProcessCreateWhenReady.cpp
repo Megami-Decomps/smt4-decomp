@@ -1,23 +1,18 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "script/ScriptArgs_Smt4a.h"
-
-struct ScriptProcess004b {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 state;
-};
+#include "script/scrScriptProcess.h"
 
 struct ScriptProcessOwner004b {
     /* 0x0000 */ u8 unk0000[0x439c];
     /* 0x439C */ void *heapA;
-    /* 0x43A0 */ ScriptProcess004b *process;
+    /* 0x43A0 */ ScriptProcess *process;
     /* 0x43A4 */ void *heapB;
     /* 0x43A8 */ void *resource;
 };
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-ScriptProcess004b *scrScriptProcessCreate(void *heapA, void *heapB);
 
 /* Once the heaps, load slots 0x14 and 0x25 and the three textures of table 0x1d are ready, creates
  * the script process (first time only) and returns 1; returns 0 while still loading. */
@@ -41,7 +36,7 @@ u32 scriptProcessCreateWhenReady(ScriptProcessOwner004b *owner)
     }
     if (owner->process == NULL) {
         owner->process = scrScriptProcessCreate(owner->heapA, owner->heapB);
-        owner->process->state = 0;
+        owner->process->mode = 0;
     }
     return 1;
 }

@@ -1,20 +1,11 @@
 /* NON_MATCHING: retail keeps shared constants 0 (r8) and 1 (r6) in registers and has one exit for the no-slot and success returns; build rematerialises them (record null select, timer store and epilogue order differ). */
 #include "common.h"
 #include "game/GameStateA.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/PartnerInfoTable.h"
 #include "code/Code0015.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/SaveSlotTable.h"
 #include "map/PopupStateA.h"
-
-struct StatusEventRecord {
-    u32 id;
-    u32 type;
-    s16 requiredFlag;
-    s16 forbiddenFlag;
-    s16 chance;
-    u8 unk0E[0x12];
-};
 
 struct SaveSlotView {
     u8 unk00[0x12C];
@@ -47,20 +38,16 @@ u32 FUN_0020ecd4(void)
         if ((gameFlagIsSet(0x1A2) == 0 || randRange(99) + 1 > 50) &&
             (playerHasFlagBit(5) != 0 || playerHasFlagBit(9) != 0) && g_gameState.statusTimer == 0) {
             g_gameState.statusTimer = 1;
-            void *table = dataTableGet(0x43, 0);
-            dataTableGetEntries(table);
-            s32 count = dataTableGetCount(table);
+            s32 count = partnerInfoCount();
             for (u32 i = 0; (s32)i < count; i++) {
-                void *recordTable = dataTableGet(0x43, 0);
-                StatusEventRecord *records = static_cast<StatusEventRecord *>(dataTableGetEntries(recordTable));
-                StatusEventRecord *record = i < dataTableGetCount(recordTable) ? records + i : 0;
-                if (record->type != 4 || record->id != slot->statusId)
+                PartnerInfoRecord *record = partnerInfoRecordAt(i);
+                if (record->kind != 4 || record->partnerId != slot->statusId)
                     continue;
                 if (record->requiredFlag != 0 && gameFlagIsSet(record->requiredFlag) == 0)
                     continue;
-                if (record->forbiddenFlag != 0 && gameFlagIsSet(record->forbiddenFlag) != 0)
+                if (record->excludedFlag != 0 && gameFlagIsSet(record->excludedFlag) != 0)
                     continue;
-                if (randRange(99) + 1 > record->chance)
+                if (randRange(99) + 1 > record->argument)
                     continue;
                 g_popupState->state = 6;
                 g_popupState->timer = 0;

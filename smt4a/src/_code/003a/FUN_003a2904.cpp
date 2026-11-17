@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a2904` (_code @ 0x3a2904, 0x58c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ extern unsigned int g_sinCosTable; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int g_mapGimic; /* 0x580ca0 */
 extern int DAT_00580ca4; /* 0x580ca4 */
 extern int g_lmapScene; /* 0x581288 */
 
@@ -113,7 +113,7 @@ void FUN_003a2904(void)
   temp_v19 = 0.7111111f;
   temp_v24 = 0x43340000;
   do {
-    temp_v0 = g_mapGimic + temp_v3 * 0x3c;
+    temp_v0 = ((int)g_mapGimic) + temp_v3 * 0x3c;
     if (*(char *)(temp_v0 + 0x90) != '\0') {
       if (*(short *)(temp_v0 + 0xa6) != 0x2a) {
         if (*(short *)(temp_v0 + 0xa6) != 0x2c) {

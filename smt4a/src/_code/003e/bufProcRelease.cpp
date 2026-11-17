@@ -1,15 +1,15 @@
 #include "shard/Shard003E.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 typedef struct BufProc {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ void *buffer;
-    /* 0x08 */ u32 scriptProcess;
+    /* 0x08 */ ScriptProcess *scriptProcess;
 } BufProc;
 
 extern void asdMemFree(void *ptr);
-extern void scrScriptProcessDestroy(u32 process);
 
 /* Releases the buffer (+4) and the script process (+8) and returns the object. */
 BufProc *bufProcRelease(BufProc *obj)

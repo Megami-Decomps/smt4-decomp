@@ -6,7 +6,6 @@ extern "C" {
 void sysPlaySe(u32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **buffer, s32 flags);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
-u32 scrRunOpcodesStub(ScriptProcess *process);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 partyEntryFlagsBit1();
 void optionsClearFlag1();

@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/scrScriptProcess.h"
 struct ScriptProcess;
 
 /* The event block, kept by a module global (Shin Megami Tensei IV layout). */
@@ -13,7 +14,7 @@ typedef struct BtlEvent {
     /* 0x08 */ void *dataA;     /* heap blocks */
     /* 0x0C */ void *dataB;
     /* 0x10 */ union { void *dataC; ScriptProcess *runner; };
-    /* 0x14 */ void *process;   /* script process object */
+    /* 0x14 */ ScriptProcess *process;   /* script process object */
 } BtlEvent;
 typedef char BtlEventRunnerLayoutCheck[(sizeof(BtlEvent) == 0x18 && offsetof(BtlEvent, flags) == 4 && offsetof(BtlEvent, runner) == 0x10) ? 1 : -1];
 
@@ -28,14 +29,5 @@ typedef struct BtlEventOwnerA {
     /* 0x00 */ u8 unk00[0x74];
     /* 0x74 */ u32 job;         /* job stopped when the block is destroyed */
 } BtlEventOwnerA;
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-/* Canonical declaration (matches the definition). */
-u32 scrRunOpcodesStub(void *state);
-#ifdef __cplusplus
-}
-#endif
 
 #endif

@@ -1,25 +1,22 @@
 /* NON_MATCHING: heading-offset arithmetic, radius branch layout, vector stack placement and VFP registers differ. */
-#include "map/mapEnemy.h"
+#include "map/MapEnemyGlobal.h"
 #include "game/GameState.h"
 #include "map/LmapGlobals.h"
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include "util/TrigF32.h"
+#include "map/LmapViewGlobals.h"
 
-/* The map view: its heading at 0x18. */
-struct SpawnViewHeading { u8 prefix[0x18]; f32 heading; };
 extern "C" {
-extern MapEnemy *g_mapEnemy;
-extern SpawnViewHeading *g_mapCamera;
 u32 randNextInRange(u32 maximum);
 s32 FUN_0025b4b0(const MapVector *start, const MapVector *end, MapVector *hit);
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 
-u32 FUN_002dfb48(MapEnemyEncounterView *entry)
+u32 FUN_002dfb48(MapEnemyEntry *entry)
 {
     MapEnemy *enemies = g_mapEnemy;
     for (s32 attempt = 0; attempt < 4; ++attempt) {
         MapVector candidate = g_lmapScene->pose.position;
-        s32 sequence = enemies->unk3044;
+        s32 sequence = enemies->spawnAttempts;
         f32 heading = g_mapCamera->heading;
         f32 radius;
         if (g_gameState.map.unk44 != 0) {
@@ -44,7 +41,7 @@ u32 FUN_002dfb48(MapEnemyEncounterView *entry)
         heading *= 0.017453292f;
         candidate.x += mathRemPio2f(heading) * radius;
         candidate.z += FUN_00282390(heading) * radius;
-        ++enemies->unk3044;
+        ++enemies->spawnAttempts;
         MapVector start = g_lmapScene->pose.position;
         start.y += 35.0f;
         MapVector end = candidate;

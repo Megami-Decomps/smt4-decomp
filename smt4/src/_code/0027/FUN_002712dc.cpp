@@ -1,5 +1,5 @@
 /* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail, but the draft merges several scene functions (built 8440 rows vs retail 2035; retail has 9 sin/cos pairs, the draft 61), so the body must be re-split against retail. */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "map/MapActionMarker.h"
 #include "util/TrigF32.h"
@@ -271,7 +271,6 @@ extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: soundPlaySeUnpanned. */
 extern int padIsButtonPressed(unsigned int);
 extern int gameFlagIsSet(unsigned int);
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002c29d8. */
 /* Supplied declaration required: FUN_002c5be8. */
 extern unsigned int asdModelGetStatic38(void);
@@ -426,7 +425,7 @@ void FUN_002712dc(void)
   switch(*g_lmapScene) {
   case 1:
     fStack_28 = temp_v36;
-    temp_v31 = gameGetMapBlock();
+    temp_v31 = (int)gameGetMapBlock();
     temp_v35 = 20.0f;
     temp_v15 = 0;
     temp_v36 = 0.0f;

@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f9334` (_code @ 0x1f9334, 0x9ac bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
 
@@ -22,7 +24,6 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int g_mapEnemy; /* 0x447600 */
 extern int g_lmapScene; /* 0x447e88 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
@@ -45,7 +46,6 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: gameFlagIsSet. */
 extern int randNextInRange(unsigned int);
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002f3c28. */
 
 
@@ -79,11 +79,11 @@ unsigned int FUN_001f9334(int param_1)
   int temp_v19;
   unsigned long long temp_v20;
   
-  temp_v3 = g_mapEnemy;
+  temp_v3 = ((int)g_mapEnemy);
   temp_v11 = 0;
-  temp_v5 = gameGetMapBlock();
+  temp_v5 = (int)gameGetMapBlock();
   *(unsigned char *)(temp_v3 + 0x3048) = 0;
-  temp_v6 = gameGetMapBlock();
+  temp_v6 = (int)gameGetMapBlock();
   temp_v10 = 0;
   pcVar13 = (char *)0x0;
   temp_v7 = dataTableGetRecordFifty();

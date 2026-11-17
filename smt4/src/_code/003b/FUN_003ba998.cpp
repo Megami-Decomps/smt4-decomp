@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ba998` (_code @ 0x3ba998, 0x6e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "font/PlaceWin.h"
@@ -130,7 +131,6 @@ extern int gameDataBlocksGetSaveData(void);
 extern int gameFlagIsSet(void);
 extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
-extern int gameGetMapBlock(void);
 extern unsigned int fileLoadSync(unsigned char *, int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: commonBgStopChildAndReset. */
@@ -238,7 +238,7 @@ void FUN_003ba998(int param_1)
       else if (pcVar4[3] != '\0') {
         DAT_0049fa96 = 1;
       }
-      temp_v6 = gameGetMapBlock();
+      temp_v6 = (int)gameGetMapBlock();
       *(unsigned short *)(temp_v6 + 0x22) = 0;
       FUN_00273f5c();
       naviClearObjectBlock();
@@ -250,7 +250,7 @@ void FUN_003ba998(int param_1)
         *(unsigned char *)(param_1 + 0xdac) = 1;
       }
       else {
-        temp_v6 = gameGetMapBlock();
+        temp_v6 = (int)gameGetMapBlock();
         *(unsigned short *)(temp_v6 + 0x1e) = *(unsigned short *)(pcVar4 + 6);
         FUN_00273d34();
         FUN_00273c54();

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -17,12 +18,11 @@ typedef struct Scene {
     /* 0x000 */ u8 unk000[0x394];
     /* 0x394 */ void *bufferA;
     /* 0x398 */ void *bufferB;
-    /* 0x39C */ void *process;
+    /* 0x39C */ ScriptProcess *process;
     /* 0x3A0 */ u8 unk3A0[0x79C];
     /* 0xB3C */ Widget *widget;
 } Scene;
 
-extern void scrScriptProcessDestroy(void *process);
 extern void asdMemFree(void *block);
 extern void placeWinRelease(void);
 extern void sceneReleaseJobsAndResources(Scene *scene);

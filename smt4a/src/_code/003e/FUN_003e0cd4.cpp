@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 // Per-combatant record of the battle sides list (0x408 bytes each).
 struct BattleSideEntry {
@@ -46,7 +47,6 @@ struct BtlEncount {
     /* 0x38 */ u64 panelSides;
 };
 extern BtlEncount g_btlEncount;
-extern u32 g_btlUiBlock;
 
 s32 chainCountIdUnflagged(u32 chain, u32* action);
 s32 recordAreAllCountsNonpositive(u32 record);

@@ -46,12 +46,6 @@ struct CameraResourceState {
     /* 0x04 */ void *work;
 };
 
-struct MapEnemyState {
-    /* 0x00 */ u32 job;
-    /* 0x04 */ u32 state;
-    /* 0x08 */ u32 timer;
-};
-
 
 struct Point2 {
     /* 0x00 */ f32 x;
@@ -130,11 +124,6 @@ struct LightCountState {
     /* 0x18 */ s32 secondaryCount;
 };
 
-struct LightEnableState {
-    /* 0x00 */ u8 enabled;
-    /* 0x01 */ u8 unk01[0x83];
-    /* 0x84 */ u32 flags[2];
-};
 
 struct MapWorkEntry {
     /* 0x00 */ u8 active;
@@ -280,11 +269,6 @@ struct ArchiveOwner {
     /* 0x04 */ void *archive;
 };
 
-struct GraphicsReadyState {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ u8 enabled;
-    /* 0x02 */ u8 ready;
-};
 
 struct GraphicsPairState {
     /* 0x00 */ u8 enabled;

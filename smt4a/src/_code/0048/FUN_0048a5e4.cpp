@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048a5e4` (_code @ 0x48a5e4, 0xaf8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -57,7 +58,6 @@ extern int DAT_00587f20; /* 0x587f20 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
 extern unsigned int vec2GetYInt(int);
@@ -117,7 +117,7 @@ void FUN_0048a5e4(int param_1)
   unsigned char *temp_v20;
   int temp_v21;
   
-  temp_v1 = gameFlagsGetBlock();
+  temp_v1 = (int)gameFlagsGetBlock();
   temp_v2 = renderCtxPackPassFlags(5,1);
   renderStackPushIndexed(g_renderCtx,3,temp_v2);
   temp_v19 = (unsigned char *)(param_1 + 0x4cc);

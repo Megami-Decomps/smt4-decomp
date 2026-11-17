@@ -8,6 +8,7 @@
 
 #include "common.h"
 #include "result/ResultInput.h"
+#include "script/ScriptVm.h"
 #include <stddef.h>
 
 /* One party slot's result record (0x620 bytes). */
@@ -34,7 +35,7 @@ struct ResultWork : ResultInputWork {
     /* 0x3560 */ u8 kind;                     /* resultCreate's argument */
     /* 0x3561 */ u8 unk3561[3];
     /* 0x3564 */ u32 buffer3564;              /* heap block, freed on destroy */
-    /* 0x3568 */ u32 process;                 /* the result script's process */
+    /* 0x3568 */ ScriptProcess *process;                 /* the result script's process */
     /* 0x356C */ u32 buffer356C;              /* heap block, freed on destroy */
     /* 0x3570 */ u32 buffer3570;              /* heap block, freed on destroy */
     /* 0x3574 */ u8 unk3574[0x40];

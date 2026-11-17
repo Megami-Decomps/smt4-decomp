@@ -1,14 +1,8 @@
 #include "ui/PartyPanelStateA.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/PartyPanelHelp.h"
 
 #define HELP_TEXT_TABLE 0x39
 #define HELP_TEXT_COLOR 0xF4F4F4FF
-
-/* A row of the help-text table. */
-struct PartyHelpRecord {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ u8 text[0x5B];
-};
 
 /* A unit record (observed field). */
 struct HelpUnitRecord {
@@ -18,19 +12,20 @@ struct HelpUnitRecord {
 
 extern "C" {
 
-void buttonHelpSetText(u8 *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 s32 FUN_002cad18(void);
 u32 partyPanelGetSelectedDemonId(void);
+u32 btlMainGetUnk14(void);
 void FUN_003aeb18(s32 value, s32 other);
 HelpUnitRecord *slotRecordFindById(u16 id);
 void unitRecordBuild(u16 id, u8 *record);
 void FUN_0032d0c8(s32 mode, s32 visible, u16 id, HelpUnitRecord *record);
 
 /* The help-text table's entry `index`, or NULL when the table has no such entry. */
-static __inline u8 *partyHelpText(u32 index)
+static __inline char *partyHelpText(u32 index)
 {
     void *table = dataTableGet(HELP_TEXT_TABLE, 0);
-    PartyHelpRecord *records = static_cast<PartyHelpRecord *>(dataTableGetEntries(table));
+    PartyPanelHelpRecordA *records = partyPanelHelpRecordsA(table);
 
     if (dataTableGetCount(table) > index) {
         return records[index].text;

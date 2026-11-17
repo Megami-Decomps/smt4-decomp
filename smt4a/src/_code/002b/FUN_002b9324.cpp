@@ -1,8 +1,7 @@
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include <stddef.h>
 extern "C" {
-void gameFlagsGetBlock(void);
 s32 FUN_001ba570(void);
 s32 FUN_001bd118(u16 id);
 s32 recordIsAvailable(u16 id);

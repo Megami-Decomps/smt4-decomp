@@ -1,15 +1,13 @@
 /* NON_MATCHING: words[] clear becomes __aeabi_memclr4 instead of retail's pair-unrolled loop; scene vector copies group differently, the optional three-word clear uses separate stores and task callback declarations still lack native handle types. */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "AsdSDK/AsdDebug.h"
 #include "map/LmapMainGlobals.h"
-#include "shard/SaveWork.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "game/GameState.h"
 
 extern "C" {
 
-SaveWork *gameGetMapBlock(void);
 void FUN_00280ac0(s32 value);
 void controllerPoolReset(LmapObj *obj);
 void mapCameraResetControls(void);
@@ -25,7 +23,7 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, s32 (*update)()
 void FUN_001d2c14(void)
 {
     LmapMainState *state;
-    SaveWork *save;
+    MapSaveBlock *save;
     LmapScene *scene;
     s32 i;
 
@@ -85,15 +83,15 @@ void FUN_001d2c14(void)
     state->unk9E4[2] = 0;
     state->unk9E4[3] = 0;
     state->unkA0C = 0;
-    state->unkA94[0] = 0;
-    state->unkA94[1] = 0;
-    state->unkA94[2] = 0;
+    state->unkA94 = 0;
+    state->markerSource = 0;
+    state->markerModels = NULL;
     state->unkA90 = 0;
     for (i = 0; i < 32; i++) {
         state->words[i] = 0;
     }
     for (i = 0; i < 128; i++) {
-        state->slots[i].stateA = 0;
+        state->slots[i].shown = 0;
         state->slots[i].stateB = 0;
     }
     state->unk990 = 0;
@@ -103,7 +101,7 @@ void FUN_001d2c14(void)
     state->unkE4 = 0x38;
     state->unkE8 = 40.0f;
     mapCameraResetControls();
-    save->mapRegistration.pending = 0;
+    save->registrationPending = 0;
     g_gameState.map.mapRegistrationPending = 0;
     state->freeOnEnd = 0;
     state->job = (u32)reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("LMAP C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001d3e3c), reinterpret_cast<AsdProcFunc>(lmapMainRequest), 0));

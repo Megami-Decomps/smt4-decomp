@@ -12,7 +12,6 @@ extern "C" {
 extern CommandPanelMasks DAT_00573b88;
 s32 ifTouchGetButtonHelpValue();
 void sysPlaySe(u32 sound);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
 void buttonHelpSetText(s32 layer, u32 color);
 void FUN_0020acd8(BtlUiObjCA *panel, u32 selection, u32 mode);
 void btlCommandMenuEnterMode(BtlUiObjCA *panel, s32 state, s32 enabled);

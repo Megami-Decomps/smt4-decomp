@@ -10,7 +10,7 @@ void FUN_002b8454(u32 slot, s32 kind, s32 value, s32 defer)
 {
     if (slot >= 6)
         return;
-    ButtonHelpSelectionViewIV *work = (ButtonHelpSelectionViewIV *)g_buttonHelp.work;
+    ButtonHelpWork *work = g_buttonHelp.work;
     if (!work)
         return;
     if (defer) {
@@ -18,7 +18,7 @@ void FUN_002b8454(u32 slot, s32 kind, s32 value, s32 defer)
         s32 queuedKind = DAT_0043da50.kinds[slot];
         if (queuedKind < 0) {
             for (s32 index = 0; index < 6; ++index) {
-                if (work->active[index]) {
+                if (work->touchPressed[index]) {
                     DAT_0043da50.kinds[slot] = kind;
                     queuedValues[slot] = value;
                     return;
@@ -30,21 +30,21 @@ void FUN_002b8454(u32 slot, s32 kind, s32 value, s32 defer)
             queuedValues[slot] = -1;
         }
     }
-    work->kinds[slot].kind = kind;
-    work->kinds[slot].value = value;
+    work->slots[slot].kind = kind;
+    work->slots[slot].value = value;
     if (kind == 7 || kind == 9 || kind == 10 || kind == 11 || kind == 12 ||
         kind == 13 || kind == 14 || kind == 15 || kind == 16 || kind == 17) {
-        work->units[slot].secondaryImage = 1;
-        work->units[slot].textureTable = 18;
-        work->units[slot].image = -1;
+        work->slotSprites[slot].secondaryImage = 1;
+        work->slotSprites[slot].textureTable = 18;
+        work->slotSprites[slot].image = -1;
     } else if (kind == 8) {
-        work->units[slot].secondaryImage = 4;
-        work->units[slot].textureTable = 18;
-        work->units[slot].image = -1;
+        work->slotSprites[slot].secondaryImage = 4;
+        work->slotSprites[slot].textureTable = 18;
+        work->slotSprites[slot].image = -1;
     } else {
-        work->units[slot].textureTable = 18;
-        work->units[slot].image = 3;
-        work->units[slot].secondaryImage = -1;
+        work->slotSprites[slot].textureTable = 18;
+        work->slotSprites[slot].image = 3;
+        work->slotSprites[slot].secondaryImage = -1;
     }
 }
 }

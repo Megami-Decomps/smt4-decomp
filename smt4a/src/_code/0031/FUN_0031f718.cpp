@@ -7,9 +7,9 @@
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 void FUN_002cb55c(UnitPresentationInfo *, void *, u32);
 void unitInitializeFromTemplate(u32, UnitRecord *);
 void unitRecordBuild(s32, UnitRecord *);

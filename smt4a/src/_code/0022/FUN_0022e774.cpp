@@ -3,6 +3,7 @@
 #include "status/StatusCamera.h"
 #include "code/Code0038.h"
 #include "ui/UiSpriteApi.h"
+#include "game/GameGlobalsRef.h"
 
 class StatusScreenModel {
 public:
@@ -19,7 +20,6 @@ struct HandleRegistry {
 };
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 extern HandleRegistry *g_handleRegistry;
 
 s32 lmapSceneGetScript(void);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: retained flag owner and navigation globals recovered; active-list clear loop, constant-one lifetime and register allocation differ. */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
@@ -23,24 +23,8 @@ struct NaviEntry {
     u8 extra[2];        // 0x4a
 };
 
-struct NaviSlot {
-    u8 entry;
-    u8 pad[3];
-};
-
-struct GameFlagsBlock {
-    u8 unk0000[0x158c];
-    s32 currentNavi;        // 0x158c
-    NaviSlot active[8];     // 0x1590
-    s32 activeCount;        // 0x15b0
-    u8 unk15b4[4];
-    s32 changed0;           // 0x15b8
-    s32 changed1;           // 0x15bc
-};
-
 extern "C" {
 
-GameFlagsBlock* gameFlagsGetBlock(void);
 s32 dataTable49Type1Count(void);
 NaviEntry* dataTable49GetEntry(s32 index);
 NaviEntry* dataTableGetEntry49(s32 index);
@@ -57,7 +41,7 @@ void FUN_00384e0c(void)
 {
     s32 entryCount = FUN_003bf87c();
     s32 first = 0;
-    GameFlagsBlock* block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     s32 count = dataTable49Type1Count();
     for (s32 i = 0; i < count; i++) {
         NaviEntry* entry = dataTable49GetEntry(i);
@@ -65,18 +49,18 @@ void FUN_00384e0c(void)
             gameFlagSetValue(entry->unlockedFlag, 1, 1);
         }
     }
-    GameFlagsBlock *cleared = gameFlagsGetBlock();
-    for (s32 i = 0; i < 8; i++) cleared->active[i].entry = 0;
-    cleared->activeCount = 0;
+    MapSaveBlockA *cleared = gameFlagsGetBlock();
+    for (s32 i = 0; i < 8; i++) cleared->naviSlots[i].id = 0;
+    cleared->naviSlotCount = 0;
     for (s32 i = 0; i < entryCount; i++) {
         NaviEntry* entry = dataTableGetEntry49(i);
         if (entry->id != 0 && (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag)) &&
             (entry->forbiddenFlag == 0 || !gameFlagIsSet(entry->forbiddenFlag))) {
             if (first == 0) first = entry->id;
-            GameFlagsBlock* flags = gameFlagsGetBlock();
-            if (flags != NULL && flags->activeCount < 8) {
-                flags->active[flags->activeCount].entry = i;
-                flags->activeCount++;
+            MapSaveBlockA *flags = gameFlagsGetBlock();
+            if (flags != NULL && flags->naviSlotCount < 8) {
+                flags->naviSlots[flags->naviSlotCount].id = i;
+                flags->naviSlotCount++;
             }
             entry = dataTableGetEntry49(i);
             naviMainSetFlagsAndActivate(entry->flags[0], entry->flags[1], entry->flags[2], entry->flags[3],
@@ -85,23 +69,23 @@ void FUN_00384e0c(void)
             navigationSetOrQueueRequest(entry->x, entry->y, entry->z, (f32)entry->pitch, (f32)entry->yaw);
         }
     }
-    GameFlagsBlock* current = gameFlagsGetBlock();
+    MapSaveBlockA *current = gameFlagsGetBlock();
     s32 currentId = current != NULL ? current->currentNavi : 0;
     if (currentId != first) {
-        block->changed0 = 1;
+        block->naviRefresh = 1;
         g_gameState.naviRefresh = 1;
-        block->changed1 = 1;
+        block->naviRefreshSecond = 1;
     }
     if (first != 0) {
-        GameFlagsBlock *selected = gameFlagsGetBlock();
+        MapSaveBlockA *selected = gameFlagsGetBlock();
         if (selected != NULL)
             selected->currentNavi = first;
     }
     g_gameState.alternateNaviMap = 0;
     if (naviMainIsInactive() != 0) return;
-    GameFlagsBlock* active = gameFlagsGetBlock();
+    MapSaveBlockA *active = gameFlagsGetBlock();
     u8* firstSlot = NULL;
-    if (active != NULL) firstSlot = &active->active[0].entry;
+    if (active != NULL) firstSlot = &active->naviSlots[0].id;
     naviMainSetSelectionResetProgress(dataTableGetEntry49(*firstSlot)->x);
 }
 

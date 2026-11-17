@@ -10,7 +10,7 @@ extern "C" void FUN_002d8a48(void)
     for (; index < 128; ++index) {
         MapIfRecord *record = &state->records[index];
         if (record->active != 0 &&
-            (record->display.category == 37 || record->display.category == 40)) {
+            (record->category == 37 || record->category == 40)) {
             record->state = 6;
         }
     }

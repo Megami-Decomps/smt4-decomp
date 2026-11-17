@@ -3,6 +3,7 @@
 #include "map/LmapGlobals.h"
 #include "util/TrigF32.h"
 #include "game/GameState.h"
+#include "map/LmapViewGlobals.h"
 
 #define LMAP_STATE_SETUP 0
 #define LMAP_STATE_SETTLE 1
@@ -24,21 +25,7 @@
 #define LMAP_BUTTON_ACCEPT 5
 #define LMAP_BUTTON_HELP_PRESET 0xDB
 
-struct LmapView {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ f32 heading;
-    /* 0x1C */ u8 unk1C[0x90];
-    /* 0xAC */ s32 selection;
-};
-
 extern "C" {
-
-extern LmapView *g_mapCamera;
-
-
-
-
-
 
 void mapIfActivateRecord(s32 active, u32 record);
 void lmapSetSceneId(u32 scene);
@@ -87,7 +74,7 @@ void FUN_002ea140(void)
             lmapPlaceBehind(scene, scene->pose.targetHeading);
         }
         FUN_0027fc14(10);
-        g_mapCamera->selection = -1;
+        g_mapCamera->contextMode = -1;
         buttonHelpSetPreset(LMAP_BUTTON_HELP_PRESET);
         mapIfActivateRecord(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
@@ -115,7 +102,7 @@ void FUN_002ea140(void)
             g_lmapScene->stateTime = 0;
         } else if (padIsButtonPressed(LMAP_BUTTON_ACCEPT) != 0 || inputIsQuestMenuPressed() != 0) {
             g_mapCamera->heading = g_lmapScene->pose.targetHeading;
-            g_mapCamera->selection = 0;
+            g_mapCamera->contextMode = 0;
             FUN_0027fc14(0);
             g_lmapScene->moveMode = 0;
             g_lmapScene->moveSpeed = 5.0f;

@@ -21,8 +21,8 @@ void FUN_00245f70(s32 id)
     for (; index < 128; ++index) {
         MapIfRecord *record = &mapIf->records[index];
         if (record->active &&
-            (record->display.category == 0x25 || record->display.category == 0x28) &&
-            record->state == 6 && record->groupView.id == id) {
+            (record->category == 0x25 || record->category == 0x28) &&
+            record->state == 6 && record->id == id) {
             MapIfSoundView *details = (MapIfSoundView *)record;
             GameStateA *state = &g_gameState;
             MapVector position = details->position;

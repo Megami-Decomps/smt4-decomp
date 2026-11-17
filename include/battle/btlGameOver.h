@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* Shin Megami Tensei IV layout. */
 typedef struct BtlGameOver {
@@ -11,7 +12,7 @@ typedef struct BtlGameOver {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 frameCounter;
     /* 0x0C */ void *dataA;     /* heap block */
-    /* 0x10 */ void *process;   /* script process object */
+    /* 0x10 */ ScriptProcess *process;   /* script process object */
     /* 0x14 */ void *dataB;     /* heap block */
 } BtlGameOver;
 
@@ -30,7 +31,7 @@ typedef struct BtlGameOverA {
         } step;
     };
     /* 0x10 */ void *dataA;
-    /* 0x14 */ void *process;
+    /* 0x14 */ ScriptProcess *process;
     /* 0x18 */ void *dataB;
 } BtlGameOverA;
 

@@ -6,22 +6,6 @@
 #include "AsdSDK/AsdMemUtil.h"
 struct Mover;
 
-struct QuestModelState {
-    /* 0x000 */ u8 unk000[0x1F6];
-    /* 0x1F6 */ u8 visible;
-};
-
-struct QuestModelBody {
-    /* 0x00 */ u8 unk00[0x2C];
-    /* 0x2C */ QuestModelState *state;
-};
-
-struct QuestModel {
-    /* 0x00 */ u32 flags;
-    /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ QuestModelBody *body;
-};
-
 struct QuestTalkWork {
     /* 0x000 */ u8 unk000[0x4CC];
     /* 0x4CC */ FloatState state;
@@ -41,14 +25,14 @@ struct QuestCounterScene {
     /* 0x5AC */ u32 messageFile;
     /* 0x5B0 */ u32 messageTable;
     /* 0x5B4 */ u8 unk5B4[0x75C];
-    /* 0xD10 */ QuestModel *npcModels[6];
-    /* 0xD28 */ QuestModel *npcModelsAdd[6];
+    /* 0xD10 */ AsdMdlObject *npcModels[6];
+    /* 0xD28 */ AsdMdlObject *npcModelsAdd[6];
     /* 0xD40 */ u8 unkD40[4];
     /* 0xD44 */ f32 unkD44;
     /* 0xD48 */ u8 unkD48[0x264];
     /* 0xFAC */ QuestTalkWork *talk;
     /* 0xFB0 */ u8 unkFB0[8];
-    /* 0xFB8 */ QuestModel *background;
+    /* 0xFB8 */ AsdMdlObject *background;
 };
 
 #define QUEST_AREA_K2 0
@@ -61,12 +45,10 @@ struct QuestCounterScene {
 extern "C" {
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
 void textFormatBuffer(char *out, const char *format, ...);
-QuestModel *asdMdlManagerCreateLoaded(const char *path, s32 flags);
-void lightOwnerRegister(QuestModel *model, s32 flag);
 void FUN_002a09b4(const char *path, s32 flag);
-void modelSetAnimationChannels(QuestModel *model, s32 channels);
-void animOwnerSetScale(QuestModel *model, f32 scale);
-void FUN_002e1230(QuestModel *model, s32 flag);
+void modelSetAnimationChannels(AsdMdlObject *model, s32 channels);
+void animOwnerSetScale(AsdMdlObject *model, f32 scale);
+void FUN_002e1230(AsdMdlObject *model, s32 flag);
 void FUN_00235250(Mover *mover);
 void FUN_00234f5c(QuestTalkWork *talk, const char *name, s32 flag);
 void asdLoadFileAsyncSimple(const char *path, u32 *handle, s32 flags);
@@ -76,7 +58,6 @@ void sysResetTimestampState(void);
 s32 storyModeCanProceed(u8 area);
 void FUN_00287528(s32 flag);
 void FUN_00282bfc(s32 slot, s32 value);
-void gameCounterAddSaturating(s32 counter, s32 amount);
 
 void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
 {
@@ -123,9 +104,9 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         modelSetAnimationChannels(scene->npcModelsAdd[i], 0);
         animOwnerSetScale(scene->npcModelsAdd[i], 1.0f);
         FUN_002e1230(scene->npcModels[i], 1);
-        QuestModel *model = scene->npcModelsAdd[i];
+        AsdMdlObject *model = scene->npcModelsAdd[i];
         model->flags |= 2;
-        model->body->state->visible = 0;
+        model->node->sceneNode->positionFollowed = 0;
     }
     scene->unkD44 = 30.0f;
 

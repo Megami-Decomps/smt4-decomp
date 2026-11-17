@@ -1,15 +1,8 @@
 /* NON_MATCHING: retail tail-merges the twelve countersGetB calls (each case only sets r0, one shared bl) and keeps the minimum compare after the switch; armcc here emits one call per case. The save-byte pointer and bit index now match. */
-#include "gamedata/DataTable.h"
+#include "gamedata/CampCecTable.h"
 #include "shard/Shard003D.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
-
-struct ProgressUnlockCondition {
-    u8 unk00[0x22];
-    u16 counter;
-    u32 minimum;
-    u32 requiredFlag;
-};
 
 extern "C" {
 void countersRecordPlayerMaxima();
@@ -21,7 +14,7 @@ s32 FUN_003dfd44();
 void progressConditionsUpdateUnlocks()
 {
     countersRecordPlayerMaxima();
-    s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
+    s32 count = campCecCount();
     for (s32 index = 0; index < count; ++index) {
         s32 byte = index / 8;
         s32 bit = index % 8;
@@ -30,9 +23,7 @@ void progressConditionsUpdateUnlocks()
         u32 bits = *earned;
         if (bits & (1u << bit))
             continue;
-        ProgressUnlockCondition *entries = static_cast<ProgressUnlockCondition *>(
-            dataTableGetEntries(dataTableGet(0x4a, 0)));
-        ProgressUnlockCondition *entry = &entries[index];
+        CampCecRecord *entry = &campCecRecords()[index];
         if (entry == NULL)
             continue;
         bool allowed = true;

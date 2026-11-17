@@ -1,5 +1,6 @@
 #include "map/MapIfGlobals.h"
 #include "Model/MoriModelManager.h"
+#include "Model/MoriModelContent.h"
 
 extern "C" {
 
@@ -7,8 +8,8 @@ extern "C" {
 void mapInterfaceUnregisterHandle(void)
 {
     MapIfModelSlotA *slot = &g_mapIf.state->slots[0];
-    MapIfResource *resource = slot->resource;
-    ptrListRemoveClearOwner(g_handleRegistry, (void *)resource->handle);
+    MoriModelContent *resource = slot->resource;
+    ptrListRemoveClearOwner(g_handleRegistry, resource->body);
 }
 
 }

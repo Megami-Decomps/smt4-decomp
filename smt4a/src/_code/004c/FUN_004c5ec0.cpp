@@ -3,18 +3,14 @@
 #include "battle/BtlEntryLookup.h"
 #include "battle/btlMain.h"
 #include "gamedata/SkillDataRecord.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 struct ChanceBattleFlags {
     u8 unk0000[0x45a0];
     u64 flags; /* 0x45a0 */
 };
-struct ChanceSkillMasks {
-    u8 unk00[0xa8];
-    u64 alwaysProc; /* 0xa8 */
-};
 
 extern "C" {
-extern ChanceSkillMasks g_btlSkillResponseMasks;
 void source4CCopyHalves(BtlCombatantEntryA *unit, u16 *skills);
 s32 lcgRandomRange(u32 range);
 

@@ -5,115 +5,56 @@
 #include "common.h"
 #include <stddef.h>
 #include "map/MapActionMarker.h"
+#include "map/MapVector.h"
 
+/* One interface record (0x194 bytes): a map marker, transition point or HUD element. */
 typedef struct MapIfRecord {
-    /* 0x00 */ u8 active;
-    /* 0x01 */ u8 unk01[0x3];
-    /* 0x04 */ union {
-        s32 type;
-        s32 state;
-    };
-    /* 0x08 */ union {
-        u8 unk08[0x1C];
-        struct {
-            u8 unk08[0x0C];
-            s32 category; // 0x14
-        } display;
-        struct {
-            u8 unk08[0x10];
-            s32 id; // 0x18
-        } groupView;
-        struct {
-            s32 restart; // 0x08
-        } transition;
-        struct {
-            u8 unk08[4];
-            u16 frame; // 0x0c
-            u8 unk0e[2];
-            u32 first; // 0x10
-            u8 unk14[8];
-            u32 second; // 0x1c
-        } initialization;
-        struct {
-            u8 unk08[0x18];
-            s32 destination; // 0x20 map or special code (-1, -2, -3) the entry leads to
-        } navigation;
-    };
-    /* 0x24 */ u32 handle;
-    /* 0x28 */ union {
-        u8 unk28[0x16C];
-        struct {
-            u8 unk28[0x19];
-            u8 pending; // 0x41
-        } request;
-        struct {
-            u8 unk28[0x28];
-            f32 x; // 0x50
-            f32 y; // 0x54
-            f32 z; // 0x58
-        } position;
-        struct {
-            u16 counter; // 0x28
-            u8 unk2a[0x1a];
-            s32 timer; // 0x44
-        } update;
-        struct {
-            u8 unk28[4];
-            u16 timer; // 0x2c
-        } proximity;
-        struct {
-            u16 counters[3]; // 0x28
-            u8 unk2e[2];
-            f32 progress; // 0x30
-            f32 limits[3]; // 0x34
-            u8 flags[3]; // 0x40
-            u8 unk43;
-            u32 timer; // 0x44
-            f32 heading; // 0x48
-            u8 hidden; // 0x4c
-            u8 unk4d[0xf];
-            f32 start[3]; // 0x5c
-            f32 current[3]; // 0x68
-            f32 angle; // 0x74
-            f32 size[2]; // 0x78
-            s32 target; // 0x80
-            u8 unk84[8];
-            f32 offset; // 0x8c
-            f32 transform[12]; // 0x90
-            u8 unkc0[0xc4];
-            u32 values[3]; // 0x184
-            u32 handle; // 0x190
-        } reset;
-    };
+    /* 0x000 */ u8 active;
+    /* 0x001 */ u8 unk001[3];
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 restart;
+    /* 0x00C */ u16 frame;
+    /* 0x00E */ u8 unk00E[2];
+    /* 0x010 */ u32 first;
+    /* 0x014 */ s32 category;
+    /* 0x018 */ s32 id;                 /* group id */
+    /* 0x01C */ u32 second;
+    /* 0x020 */ s32 destination;        /* map or special code (-1, -2, -3) the entry leads to */
+    /* 0x024 */ u32 handle;
+    /* 0x028 */ u16 counter;
+    /* 0x02A */ u16 counter2A;
+    /* 0x02C */ u16 proximityTimer;
+    /* 0x02E */ u8 unk02E[2];
+    /* 0x030 */ f32 progress;
+    /* 0x034 */ f32 limits[3];
+    /* 0x040 */ u8 flag40;
+    /* 0x041 */ u8 pending;             /* a request is queued */
+    /* 0x042 */ u8 flag42;
+    /* 0x043 */ u8 unk043;
+    /* 0x044 */ s32 timer;
+    /* 0x048 */ f32 heading;
+    /* 0x04C */ u8 hidden;
+    /* 0x04D */ u8 unk04D[3];
+    /* 0x050 */ MapVector position;
+    /* 0x05C */ f32 start[3];
+    /* 0x068 */ f32 current[3];
+    /* 0x074 */ f32 angle;
+    /* 0x078 */ f32 size[2];
+    /* 0x080 */ s32 target;
+    /* 0x084 */ u8 unk084[8];
+    /* 0x08C */ f32 offset;
+    /* 0x090 */ f32 transform[12];
+    /* 0x0C0 */ u8 unk0C0[0xC4];
+    /* 0x184 */ u32 values[3];
+    /* 0x190 */ u32 unk190;
 } MapIfRecord;
 
-typedef char MapIfRecordPositionCheck[sizeof(MapIfRecord) == 0x194 &&
-    offsetof(MapIfRecord, position.x) == 0x50 ? 1 : -1];
-typedef char MapIfRecordUpdateCheck[sizeof(MapIfRecord) == 0x194 &&
-    offsetof(MapIfRecord, update.counter) == 0x28 &&
-    offsetof(MapIfRecord, update.timer) == 0x44 ? 1 : -1];
-typedef char MapIfRecordProximityCheck[sizeof(MapIfRecord) == 0x194 &&
-    offsetof(MapIfRecord, proximity.timer) == 0x2c ? 1 : -1];
-typedef char MapIfRecordInitializationOffsets[
-    offsetof(MapIfRecord, initialization.frame) == 0xc &&
-    offsetof(MapIfRecord, initialization.first) == 0x10 &&
-    offsetof(MapIfRecord, initialization.second) == 0x1c &&
-    offsetof(MapIfRecord, reset.counters) == 0x28 &&
-    offsetof(MapIfRecord, reset.progress) == 0x30 &&
-    offsetof(MapIfRecord, reset.limits) == 0x34 &&
-    offsetof(MapIfRecord, reset.flags) == 0x40 &&
-    offsetof(MapIfRecord, reset.timer) == 0x44 &&
-    offsetof(MapIfRecord, reset.heading) == 0x48 &&
-    offsetof(MapIfRecord, reset.hidden) == 0x4c &&
-    offsetof(MapIfRecord, reset.start) == 0x5c &&
-    offsetof(MapIfRecord, reset.current) == 0x68 &&
-    offsetof(MapIfRecord, reset.angle) == 0x74 &&
-    offsetof(MapIfRecord, reset.size) == 0x78 &&
-    offsetof(MapIfRecord, reset.target) == 0x80 &&
-    offsetof(MapIfRecord, reset.offset) == 0x8c &&
-    offsetof(MapIfRecord, reset.transform) == 0x90 &&
-    offsetof(MapIfRecord, reset.values) == 0x184 &&
-    offsetof(MapIfRecord, reset.handle) == 0x190 &&
+typedef char MapIfRecordOffsetCheck[offsetof(MapIfRecord, frame) == 0xC &&
+    offsetof(MapIfRecord, category) == 0x14 && offsetof(MapIfRecord, destination) == 0x20 &&
+    offsetof(MapIfRecord, handle) == 0x24 && offsetof(MapIfRecord, proximityTimer) == 0x2C &&
+    offsetof(MapIfRecord, pending) == 0x41 && offsetof(MapIfRecord, timer) == 0x44 &&
+    offsetof(MapIfRecord, position) == 0x50 && offsetof(MapIfRecord, target) == 0x80 &&
+    offsetof(MapIfRecord, transform) == 0x90 && offsetof(MapIfRecord, values) == 0x184 &&
     sizeof(MapIfRecord) == 0x194 ? 1 : -1];
 
 #define MAP_IF_WIDGETS 0x23
@@ -131,8 +72,7 @@ typedef struct MapIfWidgets {
 } MapIfWidgets;
 
 struct AsdMdlObject;
-struct NodeEnableNode;
-struct MapIfResource;
+class MoriModelContent;
 
 /* One of the interface's five marker model slots (0x20 bytes): slot 0 is the fast-travel marker
  * (map/all/lmap_fast.bam), the others the action markers (action_cave, action_up, ...). */
@@ -152,7 +92,7 @@ typedef struct MapIfModelSlotA {
     /* 0x04 */ u32 state;
     /* 0x08 */ u32 timer;
     /* 0x0C */ MapMarkerPosition position; /* xyz and heading (w) */
-    /* 0x1C */ MapIfResource *resource;
+    /* 0x1C */ MoriModelContent *resource;
 } MapIfModelSlotA;
 
 /* A model marker the interface keeps in sync with the player state (0x24 bytes). */
@@ -169,7 +109,7 @@ struct MapIfModelMarker {
         u32 elapsed;
         u32 motionIndex;
     };
-    /* 0x20 */ NodeEnableNode *model;
+    /* 0x20 */ AsdMdlObject *model;
 };
 typedef char MapIfModelMarkerMotionOffset[
     offsetof(MapIfModelMarker, motionIndex) == 0x1c && sizeof(MapIfModelMarker) == 0x24 ? 1 : -1];
@@ -185,7 +125,7 @@ typedef struct MapIfModelMarkerA {
     /* 0x0C */ f32 position[3];
     /* 0x18 */ f32 heading;
     /* 0x1C */ u32 elapsed;   /* the clip to play */
-    /* 0x20 */ MapIfResource *resource;
+    /* 0x20 */ MoriModelContent *resource;
 } MapIfModelMarkerA;
 
 /* A queued area notice: slides in, holds and slides out (state 0 = idle, 1 = queued). */
@@ -258,18 +198,6 @@ typedef struct MapIfGlobals {
     /* 0x04 */ MapIfWidgets *widgets;
 } MapIfGlobals;
 
-/* A model-list resource's vtable: slot 1 releases it. */
-typedef struct MapIfResourceVtable {
-    /* 0x00 */ void (*unk00)(struct MapIfResource *self);
-    /* 0x04 */ void (*release)(struct MapIfResource *self);
-} MapIfResourceVtable;
-
-/* A model-list resource (modelListInit) whose controller handle sits at +4. */
-typedef struct MapIfResource {
-    /* 0x00 */ MapIfResourceVtable *vtable;
-    /* 0x04 */ u32 handle;
-} MapIfResource;
-
 /* The interface's state block (Apocalypse layout, 0xCD30 bytes). */
 typedef struct MapIfStateA {
     /* 0x0000 */ u32 job;          /* the calc task */
@@ -332,7 +260,6 @@ typedef struct MapIfGlobalsA {
     /* 0x00 */ MapIfStateA *state;
     /* 0x04 */ MapIfWidgetsA *widgets;
 } MapIfGlobalsA;
-
 
 /* Retail 32-bit layout invariants. */
 typedef char MapIfRecordSizeCheck[sizeof(MapIfRecord) == 0x194 ? 1 : -1];

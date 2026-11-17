@@ -1,16 +1,8 @@
 /* NON_MATCHING: retail spills the reset flag with `push {r0, ...}` and evaluates the first data-table lookup, then the kind test, before the second lookup in a different block order; ours keeps the flag in sl and merges the count tests (147 rows against 145). */
 #include "common.h"
+#include "gamedata/SearchTable.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "code/Code002a_VariantA.h"
-
-/* Record of data table 0x24 (0x94 bytes). */
-struct UniteTableRecord {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ u8 kind;
-    /* 0x02 */ u8 unk02[2];
-    /* 0x04 */ u16 flagId;
-    /* 0x06 */ u8 unk06[0x8E];
-};
 
 struct UniteDraftState {
     /* 0x00 */ u8 unk00[0x10];
@@ -37,9 +29,6 @@ extern UniteMenu *g_unite;
 
 s32 resourceRunOperationIfUnblocked(void *list);
 void __aeabi_memset4(void *memory, u32 size, s32 value);
-u32 dataTableGet(u32 table, u32 index);
-UniteTableRecord *dataTableGetEntries(u32 table);
-u32 dataTableGetCount(u32 table);
 s32 gamePackedFlagTest(u32 flagId);
 void gridNavigationConfigure(void *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
 void scrollListSetSelectionTracked(void *list, s32 value);
@@ -47,7 +36,7 @@ void ifTouchRegionRemove(void);
 s32 objectApplyIfUnblocked(void *list);
 s16 FUN_001643b4(s32 category, s32 index);
 
-/* Rebuilds the unite menu's entry list from data table 0x24 (listing every record up to the first
+/* Rebuilds the unite menu's entry list from SearchTable.tbb (listing every record up to the first
  * one the player has not unlocked) and, when asked, re-registers the touch regions. */
 void FUN_0028a2e8(s32 resetTouch)
 {
@@ -62,8 +51,8 @@ void FUN_0028a2e8(s32 resetTouch)
 
     __aeabi_memset4(menu->entryIndices, 0x40, -1);
     for (i = 0; i < 16; i++) {
-        u32 table = dataTableGet(0x24, 0);
-        UniteTableRecord *entries = dataTableGetEntries(table);
+        void *table = dataTableGet(0x24, 0);
+        SearchTableRecordA *entries = searchTableRecordsA(table);
 
         if ((u32)i < dataTableGetCount(table) && entries[i].kind == 2) {
             menu->entryIndices[count++] = i;
@@ -74,7 +63,7 @@ void FUN_0028a2e8(s32 resetTouch)
             continue;
         }
         table = dataTableGet(0x24, 0);
-        entries = dataTableGetEntries(table);
+        entries = searchTableRecordsA(table);
         if ((u32)i >= dataTableGetCount(table) || entries[i].flagId == 0 ||
             gamePackedFlagTest(entries[i].flagId) != 0) {
             menu->entryIndices[count++] = i;

@@ -2,19 +2,15 @@
 
 extern "C" {
 
-/* Byte at +0x494 of the 4-byte slot `index` (0-5) of the object, or 0. */
+/* Kind of slot `index` (0-5), or 0. */
 u8 buttonHelpGetSlotByte(u32 index)
 {
-    u8 value;
-    u32 *slot;
+    ButtonHelpWork *work = g_buttonHelp.work;
 
-    if ((g_buttonHelp.work != NULL) && (index < 6)) {
-        slot = (u32 *)g_buttonHelp.work + index;
-        value = ((u8 *)slot)[0x494];
-    } else {
-        value = 0;
+    if (work != NULL && index < 6) {
+        return work->slots[index].kind;
     }
-    return value;
+    return 0;
 }
 
 } /* extern "C" */

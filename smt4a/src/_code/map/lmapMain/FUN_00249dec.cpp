@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00249dec` (_code @ 0x249dec, 0xf4c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
@@ -104,7 +105,6 @@ extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1be4; /* 0x5f1be4 */
 
 /* Supplied declaration required: __ARM_common_memcpy4_9. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
@@ -194,7 +194,7 @@ unsigned int FUN_00249dec(void)
   int temp_v44;
   
   temp_v10 = 0;
-  temp_v44 = gameFlagsGetBlock();
+  temp_v44 = (int)gameFlagsGetBlock();
   FUN_002ba170();
   temp_v9 = 0;
   temp_v7 = 0;

@@ -1,13 +1,13 @@
 /* NON_MATCHING: with the copy in a helper the shared destination block is placed after mode 2 as in retail; armcc still branches `bne end; b mode2` where retail has `beq mode2; b end`, and stores the work global from r4 instead of r0. */
+#include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
-#include "shard/SaveWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "map/MapSceneAccess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "game/GameState.h"
 
-// The allocated departure work extends the public prefix.  SaveWork's word at
+// The allocated departure work extends the public prefix.  MapSaveBlock's word at
 // 0x24 lies inside two-byte-aligned padding, so neither shared layout is enlarged.
 struct MapDepartureInitView {
     MapDepart prefix;
@@ -24,10 +24,6 @@ struct MapDepartureRequest {
     s32 entry;
     u32 unk0C;
     u32 destinationState[4];
-};
-struct MapDepartureLocationView {
-    u8 prefix[0x24];
-    s32 map;
 };
 typedef char MapDepartureInitLayout[sizeof(MapDepartureInitView) == 0x80 &&
     offsetof(MapDepartureInitView, mode) == 0xC && offsetof(MapDepartureInitView, destinationState) == 0x48 ? 1 : -1];
@@ -59,14 +55,14 @@ void MapDepart_Init(const MapDepartureRequest *request)
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapDepart.cpp", 173);
     MapDepartureInitView *work = (MapDepartureInitView *)asdMemAlloc(0x100, 0x100, 0, sizeof(MapDepartureInitView), 1);
     g_mapDepart = &work->prefix;
-    MapDepartureLocationView *location = (MapDepartureLocationView *)gameGetMapBlock();
+    MapSaveBlock *location = gameGetMapBlock();
     if (request != NULL) {
         switch (request->mode) {
         case 0:
             MapDepart_InitState(&work->prefix, 1);
             work->mode = 0;
             work->map = request->map;
-            location->map = request->map;
+            location->departureMapId = request->map;
             mapDepartCopyDestination(work, request);
             break;
         case 1:

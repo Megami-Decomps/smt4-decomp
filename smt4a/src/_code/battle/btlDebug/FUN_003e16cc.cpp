@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (212 vs 209 rows); register allocation differs (retail keeps the state in r9) */
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 // Battle unit entry (0x1d0 bytes each): only the fields read here.
 struct BattleUnitEntry {
@@ -37,7 +38,6 @@ extern "C" {
 
 extern s32 g_btlCamera;
 extern u8* g_btlAux;
-extern u32 g_btlUiBlock;
 extern s16 DAT_0057a634;
 extern s16 DAT_0057a638;
 extern s16 DAT_0057a63c;
@@ -62,7 +62,7 @@ void btlQueueActionMessage(s32 offset, StateObject* object, s32 id, s32 a, s32 b
 void FUN_004f1c5c(s32 camera, s32 arg);
 void FUN_003ed6e8(BattleState* state);
 void FUN_003f26d4(BattleState* state);
-void FUN_004aa2e0(u32 ui, s32 arg);
+void FUN_004aa2e0(BtlUiA *ui, s32 arg);
 void FUN_003e0cd4(StateObject* object, BattleState* state);
 
 // Shows the "refresh" announcement for every unit whose pair state changed, then continues the state machine.

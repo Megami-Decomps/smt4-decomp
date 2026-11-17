@@ -1,6 +1,7 @@
 /* NON_MATCHING: normalized color unpack/pack scheduling, scratch pointers and callback registers differ from retail. */
 #include "AsdSDK/Source/Gfx/Effect/EffectTimeline.h"
 #include "gfx/EffectColorMath.h"
+#include "gfx/VectorScratch.h"
 
 static void effectColorAssign(EffectColor *destination, const EffectColor *source)
 {
@@ -22,19 +23,18 @@ static u32 effectColorPackFrom(EffectColor color)
 }
 
 extern "C" {
-extern EffectColorProductState g_vectorScratch;
 
 // Apply the parent's tint to each child's local color and dispatch the combined resource color.
 void FUN_001b4c1c(EffectTimelinePart *owner, u32 packed)
 {
     owner->tint.color = packed;
     EffectColor base = effectColorUnpack(packed);
-    g_vectorScratch.color = base;
+    g_vectorScratch.first.color = base;
     for (EffectTimelinePart *child = owner->children; child != NULL; child = child->next) {
-        g_vectorScratch.color = effectColorUnpack(child->tint.color);
-        g_vectorScratch.factor = base;
-        effectColorScale(&g_vectorScratch.factor, &g_vectorScratch.color);
-        u32 color = effectColorPackFrom(g_vectorScratch.color);
+        g_vectorScratch.first.color = effectColorUnpack(child->tint.color);
+        g_vectorScratch.second.color = base;
+        effectColorScale(&g_vectorScratch.second.color, &g_vectorScratch.first.color);
+        u32 color = effectColorPackFrom(g_vectorScratch.first.color);
         Resource *resource = child->block;
         void (*apply)(void *, u32) = g_handlerTable[resource->type].setPackedColor;
         if (apply != NULL) {

@@ -3,6 +3,7 @@
 #define CAMP_CAMPCEC_CAMPCECRANKING_H
 
 #include "common.h"
+#include "script/ScriptVm.h"
 
 #define RANK_PLAYERS 20
 #define RANK_CATEGORIES 7
@@ -23,7 +24,7 @@ typedef struct CampCecRanking {
     /* 0x98 */ u8 sound[0x20];             /* sound player object (constructed in place) */
     /* 0xB8 */ void *heapA;               /* heap block, freed on close */
     /* 0xBC */ void *heapB;               /* heap block, freed on close */
-    /* 0xC0 */ u32 handle;                 /* released on close */
+    /* 0xC0 */ ScriptProcess *handle;                 /* released on close */
     /* 0xC4 */ CampCecRankEntry players[RANK_PLAYERS];
     /* 0x1B4 */ CampCecRankEntry categories[RANK_CATEGORIES];
     /* 0x208 */ u32 playerText[RANK_PLAYERS]; /* text objects, one per player */

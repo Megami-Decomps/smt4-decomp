@@ -10,7 +10,6 @@ void asdMemoryFreeLockedAlt(void);
 void textureCacheReleaseAll(void);
 void jobStop(u32 job, s32 arg);
 
-extern EventCommandGlobals g_eventCommand;
 
 /* Ends the event command: runs the two clean-ups when eventCommandGetPendingCleanup asks for them, then stops the
  * extra job if it is running. */

@@ -1,4 +1,5 @@
 #include "AsdSDK/AsdDebug.h"
+#include "gfx/GfxSettings.h"
 
 extern "C" {
 
@@ -22,12 +23,6 @@ typedef struct AsdModel {
     /* 0x91 */ u8 unk91[0x17];
 } AsdModel;
 
-typedef struct GfxSettings {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ s32 modelCount;
-} GfxSettings;
-
-extern GfxSettings g_gfxSettings;
 extern u8 DAT_00636ec8[]; /* model list */
 
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);

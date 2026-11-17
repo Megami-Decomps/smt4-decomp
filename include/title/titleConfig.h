@@ -4,6 +4,8 @@
 
 #include "common.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "ui/UiSpriteState.h"
+#include "script/ScriptVm.h"
 
 /* The menu's block, kept by a module global (Shin Megami Tensei IV layout). */
 typedef struct TitleConfig {
@@ -16,7 +18,7 @@ typedef struct TitleConfig {
     /* 0x026 */ u8 unk26[0x126];
     /* 0x14C */ void *dataA;      /* heap blocks */
     /* 0x150 */ void *dataB;
-    /* 0x154 */ void *process;    /* script process object */
+    /* 0x154 */ ScriptProcess *process;    /* script process object */
 } TitleConfig;
 
 /* The same block in Apocalypse: the trailing pointers sit eight bytes further on. */
@@ -36,13 +38,13 @@ typedef struct TitleConfigA {
     /* 0x028 */ u32 settingIndex[3]; /* list positions of the music, sound and voice settings */
     /* 0x034 */ u8 saved[8];         /* the settings the menu opened with */
     /* 0x03C */ UiResourceParameters params;
-    /* 0x05C */ u8 window[0x8C];     /* sprite of the menu window */
+    /* 0x05C */ UiSpriteState window;  /* sprite of the menu window */
     /* 0x0E8 */ f32 cursorScale;
     /* 0x0EC */ s32 cursorFrames;
     /* 0x0F0 */ u8 cursor[0x64];
     /* 0x154 */ void *dataA;
     /* 0x158 */ void *dataB;
-    /* 0x15C */ void *process;
+    /* 0x15C */ ScriptProcess *process;
 } TitleConfigA;
 typedef char TitleConfigATouchRegionsOffsetCheck[
     __INTADDR__(&((TitleConfigA *)0)->touchRegions) == 0x1C &&
@@ -64,11 +66,11 @@ struct TitleConfigCallbackView {
     /* 0x026 */ u8 unk026[2];
     /* 0x028 */ s32 settings[3];
     /* 0x034 */ u8 saved[0x28];
-    /* 0x05C */ u8 window[0x8C];
+    /* 0x05C */ UiSpriteState window;
     /* 0x0E8 */ u8 cursor[0x64];
     /* 0x14C */ void *dataA;
     /* 0x150 */ void *dataB;
-    /* 0x154 */ void *process;
+    /* 0x154 */ ScriptProcess *process;
 };
 struct TitleConfigValues {
     /* 0x00 */ u8 music;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276a3c` (_code @ 0x276a3c, 0x111c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
 
@@ -20,7 +21,6 @@ int cameraExportParameters(float [3], int);
 int FUN_002c159c(unsigned char *);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
-int gameGetMapBlock(void);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -279,7 +279,7 @@ void FUN_00276a3c(void)
     return;
   }
   if (!(temp_v3 == 6 || temp_v3 == 0xf)) {
-    temp_v2 = gameGetMapBlock();
+    temp_v2 = (int)gameGetMapBlock();
     temp_v3 = g_lmapScene;
     piVar4 = g_mapCamera;
     temp_v4 = g_mapCamera[0x82];

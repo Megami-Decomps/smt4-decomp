@@ -1,14 +1,13 @@
-#include "shard/Shard0031.h"
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
 
-extern CecProcess *g_cecProcess;
-extern void FUN_00358f70(u32 handle);
+extern void FUN_00358f70(Obj557ec0 *messageBox);
 
 void cecProcessCall1(void)
 {
     if (g_cecProcess != NULL) {
-        FUN_00358f70(g_cecProcess->handle);
+        FUN_00358f70(g_cecProcess->messageBox);
     }
 }
 

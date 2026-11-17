@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3018` (_code @ 0x1d3018, 0x490 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 #include "game/GameState.h"
 
 extern "C" {
@@ -24,7 +25,6 @@ typedef struct {
 } void_stack;
 
 extern int *g_mapCamera; /* 0x4474f4 */
-extern int g_mapEnemy; /* 0x447600 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int DAT_0049f920; /* 0x49f920 */
@@ -99,7 +99,7 @@ void FUN_001d3018(void)
   unsigned int uStack_54;
   unsigned int uStack_50;
   
-  temp_v2 = g_mapEnemy;
+  temp_v2 = ((int)g_mapEnemy);
   if (DAT_0049fc80 != 0) {
     return;
   }
@@ -167,7 +167,7 @@ void FUN_001d3018(void)
     }
     FUN_00208e4c();
   }
-  temp_v3 = g_mapEnemy;
+  temp_v3 = ((int)g_mapEnemy);
   temp_v21 = romwright_piece_4_4(0x3f800000,temp_v20);
   temp_v18 = (float)g_mapCamera[0x18] - (float)g_mapCamera[0x15];
   temp_v10 = 40.0f;

@@ -1,12 +1,12 @@
 #include "map/NpcDummyBindings.h"
 #include "code/Code0015.h"
 #include "title/titleMain.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 void uiSetFloatPair(void *owner, f32 first, f32 second);
 void textFormatBuffer(char *destination, const char *format, ...);
 u8 lookupNameEntry(NpcDummyModel *model, const char *name, MapVector *position);
-void controllerSetDestination(ControllerPose *owner, const MapVector *position);
 
 static __inline void npcModelClearFlag(NpcDummyModel *model, u32 mask)
 {

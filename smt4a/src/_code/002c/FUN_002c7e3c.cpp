@@ -1,9 +1,8 @@
 #include "shard/Shard0033.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 /* Returns the byte at 0x2017 of the game record. */
 u8 FUN_002c7e3c(void)

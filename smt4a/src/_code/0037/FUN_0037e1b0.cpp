@@ -1,8 +1,7 @@
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 /* Stores the value; a negative value also clears the companion byte at +0x1384, else sets it to `flag`. */
 void FUN_0037e1b0(s32 value, u8 flag)

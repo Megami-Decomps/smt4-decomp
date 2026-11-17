@@ -1,12 +1,10 @@
-#include "common.h"
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
 
-extern s8 g_buttonHelp;
-
 u8 campButtonHelpIsActive(void)
 {
-    return '\0' < g_buttonHelp;
+    return '\0' < g_buttonHelp.references;
 }
 
 } /* extern "C" */

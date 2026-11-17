@@ -1,22 +1,22 @@
 #ifndef GFX_AXISANGLEROTATION_H
 #define GFX_AXISANGLEROTATION_H
-#include "gfx/CameraVectorScratch.h"
+#include "gfx/VectorScratch.h"
 #include "shard/W5_W5Match2_PlainData.h"
 #include <math.h>
 
 static inline void buildAxisAngleRotation(const Vector4 *input, Matrix44 *matrix,
-                                         CameraVectorScratch *scratch, f32 cosine, f32 sine)
+                                         VectorScratch *scratch, f32 cosine, f32 sine)
 {
-    scratch->direction = *input;
-    f32 length = sqrtf(scratch->direction.x * scratch->direction.x +
-                       scratch->direction.y * scratch->direction.y +
-                       scratch->direction.z * scratch->direction.z);
+    scratch->first.vector = *input;
+    f32 length = sqrtf(scratch->first.vector.x * scratch->first.vector.x +
+                       scratch->first.vector.y * scratch->first.vector.y +
+                       scratch->first.vector.z * scratch->first.vector.z);
     if (length > 0.0f) {
-        scratch->direction.x /= length;
-        scratch->direction.y /= length;
-        scratch->direction.z /= length;
+        scratch->first.vector.x /= length;
+        scratch->first.vector.y /= length;
+        scratch->first.vector.z /= length;
     }
-    Vector4 axis = scratch->direction;
+    Vector4 axis = scratch->first.vector;
     f32 complement = 1.0f - cosine;
     f32 xx = axis.x * axis.x;
     f32 yy = axis.y * axis.y;

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "quest_center/QuestRecord.h"
 #include <stddef.h>
-#include "gamedata/DataTable.h"
+#include "gamedata/SubQuestLootTable.h"
 #include "util/Random.h"
 #include "gamedata/DataTableAccess.h"
 #include "addon/AocSystem.h"
@@ -13,15 +13,6 @@ extern "C" {
 typedef struct QuestRuntimeStatus {
     u8 flags;                  /* bit 3: use the second reward slot set */
 } QuestRuntimeStatus;
-
-/* A loot table (0x50 bytes): eight (id, weight) pairs after its 0x30-byte header. */
-typedef struct LootTable {
-    /* 0x00 */ u8 unk00[0x30];
-    struct {
-        /* 0x30 */ u16 id;
-        /* 0x32 */ u16 weight;
-    } pairs[8];
-} LootTable;
 
 /* The reward list being filled (only the fields written here). */
 typedef struct RewardList {
@@ -39,24 +30,23 @@ typedef struct LootCacheEntry {
 } LootCacheEntry;
 
 typedef char QuestRewardLayouts[
-    sizeof(LootTable) == 0x50 && offsetof(LootTable, pairs) == 0x30 &&
     sizeof(LootCacheEntry) == 0x54 && offsetof(LootCacheEntry, table) == 4 ? 1 : -1];
 
 QuestRuntimeStatus *questGetRuntimeStatus(void *quest);
 
-static __inline LootTable *questRewardFindLootTable(u16 tableId)
+static __inline SubQuestLootRecord *questRewardFindLootTable(u16 tableId)
 {
     if (g_aocSystem->entries != NULL) {
         LootCacheEntry *entry = (LootCacheEntry *)g_aocSystem->entries;
         u32 count = g_aocSystem->entryCount;
         for (u32 index = 0; index < count; ++index, ++entry) {
             if (entry->key == tableId) {
-                return reinterpret_cast<LootTable *>(entry->table);
+                return reinterpret_cast<SubQuestLootRecord *>(entry->table);
             }
         }
     }
     void *section = dataTableGet(0x1C, 1);
-    LootTable *tables = static_cast<LootTable *>(dataTableGetEntries(section));
+    SubQuestLootRecord *tables = subQuestLootRecords(section);
     dataTableGetCount(section);
     return &tables[tableId];
 }
@@ -82,11 +72,11 @@ void FUN_00333b74(RewardList *list, void *quest)
     } else if (slot->kind == 3) {
         list->value = slot->amount;
     } else if (slot->kind == 4) {
-        LootTable *table = questRewardFindLootTable(slot->arg);
+        SubQuestLootRecord *table = questRewardFindLootTable(slot->arg);
         s32 total = 0;
         for (s32 i = 0; i < 8; i++) {
-            if (table->pairs[i].weight != 0) {
-                total += table->pairs[i].weight;
+            if (table->slots[i].weight != 0) {
+                total += table->slots[i].weight;
             }
         }
         s32 rolls = randNextInRange(5) + 3;
@@ -96,13 +86,13 @@ void FUN_00333b74(RewardList *list, void *quest)
             s32 pick = randNextInRange((u16)(total - 1));
 
             for (s32 i = 0; i < 8; i++) {
-                if (table->pairs[i].weight == 0) {
+                if (table->slots[i].weight == 0) {
                     continue;
                 }
-                pick -= table->pairs[i].weight;
+                pick -= table->slots[i].weight;
                 if (pick < 0) {
-                    if (added < 6 && table->pairs[i].id != 0) {
-                        list->items[added] = table->pairs[i].id;
+                    if (added < 6 && table->slots[i].item != 0) {
+                        list->items[added] = table->slots[i].item;
                         list->counts[added] = 1;
                         added++;
                     }

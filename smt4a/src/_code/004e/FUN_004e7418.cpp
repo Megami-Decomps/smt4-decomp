@@ -2,6 +2,7 @@
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -41,10 +42,9 @@ typedef struct BtlCameraBlock {
 } BtlCameraBlock;
 
 extern u32 g_btlEvent;                /* 0x573898 */
-extern u32 g_btlUiBlock;              /* 0x57a9c8 */
 
 extern int isEntryUsable(u32 event);
-extern int FUN_004ab734(u32 block);
+extern int FUN_004ab734(BtlUiA *block);
 extern int btlReflectCreateKind2e(int a, BtlCommand *cmd, u32 target, int b);
 extern int FUN_004fde5c(int a, BtlCommand *cmd, BtlSkill *skill, int b, int c, int d);
 

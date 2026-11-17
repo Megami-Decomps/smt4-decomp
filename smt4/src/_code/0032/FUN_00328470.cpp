@@ -1,22 +1,9 @@
-#include "common.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
-struct Selection {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ void *object;
-};
-
-struct EffectEditorView {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ Selection *selection;
-    /* 0x38 */ void *object;
-};
-
-extern "C" EffectEditorView g_effectEditor;
-
+/* Makes the selection's template object current when it has one. */
 extern "C" s32 FUN_00328470(void)
 {
-    void *object = g_effectEditor.selection->object;
-
+    EffectSelectionTemplate *object = g_effectEditor.selection->object;
     if (object != NULL) {
         g_effectEditor.object = object;
     }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00313974` (_code @ 0x313974, 0x7f4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -49,7 +50,6 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: sceneRegisterBoxEffect. */
@@ -73,7 +73,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
   unsigned int in_fpscr;
   unsigned int temp_v8;
   
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   temp_v3 = lmapGetSpawnIndex();
   psVar5 = (short *)dataTable4CGetEntry(param_1);
   if (temp_v3 < 100) {

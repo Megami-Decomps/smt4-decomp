@@ -1,5 +1,5 @@
 /* Opens the run window: allocates and clears its work area, creates its task and draw task and
- * sets up its sound player and UI. */
+ * sets up its sprite resource and window sprite. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
@@ -7,6 +7,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "ui/ParamsClearPacket.h"
 
 extern "C" {
 
@@ -15,12 +16,11 @@ typedef void (*VoidFunc)(void);
 
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
-void paramsClearPacket(void *player);
 void FUN_00208650(void);
 void FUN_00208984(void);
 
 extern RunWinWork *g_runWin;
-/* Sound player resource packets handed to paramsInit (read-only data defined in this file). */
+/* Sprite resource packets handed to paramsInit (read-only data defined in this file). */
 static const u8 runWinResource0[0x24] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x4a, 0x01, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xb6, 0xfe, 0x00, 0x00,
@@ -55,10 +55,10 @@ void runWinOpen(void)
     sysMemClear(run, 0xe4);
     run->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("RunWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00208984), 0, 0);
     taskCreateDraw("RunWin DrawDown", 0xed, 0, 0, FUN_00208650, 0, 0, run->task);
-    paramsClearPacket(run->sound);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(run->sound), runWinResource0, 0x24, runWinResource1, 0x24, 0, 0, 0, 0, runWinResource2, 0x70);
-    uiSpriteStateInitFromSource((UiSpriteState *)run->ui, 8, 0x87, (UiResourceParameters *)(run->sound), 1, 1.0f);
-    uiSpriteSelectAnim((UiSpriteState *)run->ui, 0);
+    paramsClearPacket(&run->parameters);
+    paramsInit(&run->parameters, runWinResource0, 0x24, runWinResource1, 0x24, 0, 0, 0, 0, runWinResource2, 0x70);
+    uiSpriteStateInitFromSource(&run->window, 8, 0x87, &run->parameters, 1, 1.0f);
+    uiSpriteSelectAnim(&run->window, 0);
 }
 
 } /* extern "C" */

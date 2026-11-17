@@ -1,23 +1,19 @@
 #include "addon/aocMain.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/EncountData.h"
 #include "addon/AocSystemA.h"
 
-struct Table02RecordA {
-    u8 data[0x78];
-};
-
 extern "C" {
-Table02RecordA* resourceFindType27Record(AocSystemA*, u32);
+EncountTableRecordA *resourceFindType27Record(AocSystemA *system, u32 index);
 
 // Prefer an add-on record; invalid indices retain the table's base record.
-Table02RecordA* dataTableGetRecord02(s32 index)
+EncountTableRecordA *dataTableGetRecord02(s32 index)
 {
     void* section = dataTableGet(2, 1);
-    Table02RecordA* entries = (Table02RecordA*)dataTableGetEntries(section);
+    EncountTableRecordA *entries = encountTableRecordsA(section);
     if (index < 0 || (u32)index >= dataTableGetCount(section)) {
         return entries;
     }
-    Table02RecordA* entry = resourceFindType27Record(g_aocSystem, index);
+    EncountTableRecordA *entry = resourceFindType27Record(g_aocSystem, index);
     if (entry == NULL) {
         entry = &entries[index];
     }

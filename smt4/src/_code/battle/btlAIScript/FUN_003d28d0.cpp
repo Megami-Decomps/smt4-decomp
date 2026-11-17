@@ -6,6 +6,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 /* Battle state words the dispatcher reads beyond the shared prefix. */
 struct CommandPhaseView {
@@ -31,7 +32,6 @@ extern u32 g_btlAiScript;
 extern u32 g_btlActionReflect;
 extern void *DAT_00435d18;
 extern void *g_btlEvent;
-extern u32 g_btlUiBlock;
 
 u32 FUN_003d317c(BtlMainState **block, CommandState *work);
 u32 FUN_003c9f58(BtlMainState **block, CommandState *work);
@@ -51,12 +51,12 @@ void FUN_00229b10(BtlMainState **block, CommandState *work);
 void FUN_00229754(BtlMainState **block, CommandState *work);
 u8 btlAiScriptIsFinished(u32 script);
 u32 jobIsValid(u32 handle);
-s32 btlSceneIsReady(u32 ui);
+s32 btlSceneIsReady(BtlUi *ui);
 void btlUnitSetParam(BtlMainState **block, u32 param, u32 value);
 s32 nodeListCountActiveById(u32 id, void *arg);
-void btlUiClearRowStatuses(u32 ui);
+void btlUiClearRowStatuses(BtlUi *ui);
 void battleSetActionKind(BtlMainState **block);
-void FUN_003aeaf4(u32 ui);
+void FUN_003aeaf4(BtlUi *ui);
 u32 FUN_0027e3b8(void *event);
 s32 FUN_003dcbf4(void *object);
 u32 eftLoadFileRegisterAndParseHeader(void *object);

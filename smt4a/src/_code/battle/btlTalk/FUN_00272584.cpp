@@ -3,6 +3,7 @@
 #include "battle/btlTalk.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 u32 jobIsValid(u32 handle);
@@ -11,9 +12,8 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdP
 s32 btlTalkUpdateIfPresent(u32 process);
 void btlTalkJobRelease(u32 process);
 void __aeabi_memset4(void *destination, u32 bytes, s32 value);
-void btlUiPanelStart(void *ui);
+void btlUiPanelStart(BtlUiA *ui);
 extern BtlTalkA *g_btlTalk;
-extern void *g_btlUiBlock;
 
 void FUN_00272584(void *object, void *actor, s32 first, s32 second)
 {

@@ -2,7 +2,6 @@
 
 extern "C" {
 
-extern EventCommandGlobals g_eventCommand;
 
 u32 effectProcessCreate(u32 kind);
 u32 shakeEffectAlloc(void);

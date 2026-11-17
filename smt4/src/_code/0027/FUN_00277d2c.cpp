@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00277d2c` (_code @ 0x277d2c, 0x2f9c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -106,7 +107,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: dataTable2cSub0GetCount. */
 extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
-extern int gameGetMapBlock(void);
 extern unsigned int *mapBlockBitIsSet(int);
 extern char *dataTable2cSub0GetRecord(int);
 extern char *dataTable2cSub3GetRecord(int);
@@ -219,7 +219,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
   int temp_v63;
   int temp_v64;
   
-  temp_v1 = gameGetMapBlock();
+  temp_v1 = (int)gameGetMapBlock();
   DAT_004bf898 = (unsigned int *)0x0;
   temp_v61 = (int *)&DAT_004c149c;
   DAT_004c149c = 0;

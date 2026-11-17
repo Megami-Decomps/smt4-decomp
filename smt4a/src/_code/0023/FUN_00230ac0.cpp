@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: frame arguments are narrowed at the call (s16 prototypes) like retail; retail keeps two separate chains (member frame, then image frame) and duplicated tail branches, built merges them and saves extra registers. */
 #include "ui/PartyPanelStateA.h"
 
 extern "C" {
-void uiSpriteSetImageKeyframe(void *sprite, s16 frame, u32 flags);
-void uiSpriteSetKeyframe(void *sprite, s16 frame, u32 flags);
 
 // Map party-panel modes to sprite frames and apply them to all four member displays.
 void FUN_00230ac0(s32 mode, s32 imageFrame, u32 flags, s32 resetAuxiliary)

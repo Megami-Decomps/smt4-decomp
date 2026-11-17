@@ -2,7 +2,6 @@
 
 extern "C" {
 
-extern BtlTalkBustUp *g_btlTalkBustUp;
 
 bool btlTalkBustUpIsUnk2F8(s32 value)
 {

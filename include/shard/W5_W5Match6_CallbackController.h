@@ -4,12 +4,8 @@
 #include "common.h"
 #include "ui/GridNavigation.h"
 #include <stddef.h>
+struct HowToRecord;
 
-struct CallbackCatalogRecord {
-    u16 id;
-    u16 unlockFlag;
-    u8 unk04[0x40];
-};
 
 /* The work area g_callbackController.work points at. */
 typedef struct CallbackControllerWork {
@@ -20,7 +16,7 @@ typedef struct CallbackControllerWork {
     union {
         /* 0x010 */ u8 unk010[0x78];
         struct {
-            /* 0x010 */ CallbackCatalogRecord *entries;
+            /* 0x010 */ HowToRecord *entries;
             /* 0x014 */ u32 count;
             /* 0x018 */ u16 indices[52];
             /* 0x080 */ s32 availableCount;
@@ -45,7 +41,6 @@ typedef struct CallbackControllerWork {
 
 typedef char CallbackControllerWorkOffsets[offsetof(CallbackControllerWork, slots) == 0x88 &&
     offsetof(CallbackControllerWork, touchRegionCount) == 0x218 ? 1 : -1];
-typedef char CallbackCatalogRecordSizeCheck[sizeof(CallbackCatalogRecord) == 0x44 ? 1 : -1];
 typedef char CallbackControllerCatalogOffsetsCheck[
     offsetof(CallbackControllerWork, catalog.entries) == 0x10 &&
     offsetof(CallbackControllerWork, catalog.indices) == 0x18 &&

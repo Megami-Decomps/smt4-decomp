@@ -21,11 +21,11 @@ void FUN_00309bc8(u32 context, u32 depth)
     EquipmentRecord *ammunition = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.bullets);
     char text[100];
     if (firearm == NULL || ammunition == NULL) {
-        work->unk4CB = 0;
+        work->textVisible = 0;
         return;
     }
-    work->unk55C = 1;
-    work->unk4CB = 1;
+    work->text.useDirectoryText = 1;
+    work->textVisible = 1;
     u8 attackCount = firearm->hitRange;
     if ((attackCount & 0xF) == attackCount >> 4) {
         FUN_0029ede8(0x25, attackCount & 0xF, 0xFFFFFFFF, 0);
@@ -57,7 +57,7 @@ void FUN_00309bc8(u32 context, u32 depth)
         textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B");
     textEncodeFontSlot(0x28, text);
     if (context == 0)
-        context = g_buttonHelp.mbm;
-    asdTextDrawDirectoryEntry(work->unk558, 3, 0xFFFFFFFF, 0, 3, context, depth);
+        context = reinterpret_cast<u32>(g_buttonHelp.mbm); /* this function passes the directory as an integer */
+    asdTextDrawDirectoryEntry(work->text.directoryText, 3, 0xFFFFFFFF, 0, 3, context, depth);
 }
 }

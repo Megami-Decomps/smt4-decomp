@@ -1,23 +1,12 @@
-#include "common.h"
+#include "gamedata/GameSaveBlocks.h"
 #include "shard/W6_W6Match8_LightUniforms.h"
 
 extern "C" {
 
-typedef struct Table {
-    /* 0x00000 */ u8 unk00000[0x21E1C];
-    /* 0x21E1C */ u8 member21E1C[1];
-} Table;
-
-typedef struct GameDataBlocksView {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Table *table;
-} GameDataBlocksView;
-extern GameDataBlocksView g_gameDataBlocks;
-
-/* Returns the address of the member at 0x21E1C of the game-data table. */
+/* Returns the counters of the save body. */
 u8 *gameGetCounters(void)
 {
-    return g_gameDataBlocks.table->member21E1C;
+    return g_gameDataBlocks.saveBlock->body.runtime.counters;
 }
 
 } /* extern "C" */

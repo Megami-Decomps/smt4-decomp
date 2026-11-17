@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 typedef struct CampCecEdit {
     /* 0x00 */ u32 task;                   /* the screen's task handle */
@@ -29,7 +30,7 @@ typedef struct CampCecEdit {
     /* 0x70 */ u32 unk70;
     /* 0x74 */ u8 unk74;
     /* 0x75 */ u8 unk75[0x2B];
-    /* 0xA0 */ u32 resource;               /* released on close */
+    /* 0xA0 */ ScriptProcess *resource;               /* released on close */
     /* 0xA4 */ void *heapA;               /* heap block, freed on close */
     /* 0xA8 */ void *heapB;               /* heap block, freed on close */
     /* 0xAC */ void *heapC;               /* heap block, freed on close */

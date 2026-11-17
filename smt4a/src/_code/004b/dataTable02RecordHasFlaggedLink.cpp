@@ -1,22 +1,16 @@
 #include "common.h"
+#include "gamedata/EncountData.h"
 #include "gamedata/NkmEnemyLookup.h"
 
-struct Table02Record;
-struct Table02LinkedIds {
-    u8 unk00[0x14];
-    u16 ids[6];
-    u8 unk20[8];
-};
 
 extern "C" {
-Table02Record *dataTable02GetRecordWithAocPackage(s32 index);
 
 u32 dataTable02RecordHasFlaggedLink(s32 index)
 {
-    const Table02LinkedIds *record = (const Table02LinkedIds *)dataTable02GetRecordWithAocPackage(index);
+    const EncountGroupRecordA *record = dataTable02GetRecordWithAocPackage(index);
     if (record != NULL) {
         for (s32 slot = 0; slot < 6; ++slot) {
-            u16 id = record->ids[slot];
+            u16 id = record->enemyIds[slot];
             if (id != 0) {
                 const NkmEnemyRecordA *entry = nkmEnemyFindById(id);
                 if (entry != NULL && (entry->level & 0x8000) != 0) {

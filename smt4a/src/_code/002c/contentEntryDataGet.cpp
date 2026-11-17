@@ -1,35 +1,29 @@
 #include "common.h"
+#include "gamedata/NkmSortIndex.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
 
-typedef struct Entry002c1ce4 {
-    /* 0x00 */ u8 data[0x30];
-} Entry002c1ce4;
-
 u8 *entryListFindById(AocSystemA *aoc, u32 id);
-void *dataTableGet(s32 table, s32 slot);
-Entry002c1ce4 *dataTableGetEntries(void *table);
-u32 dataTableGetCount(void *table);
 
-/* Address of entry `id`'s data (add-on content first, else data table 1; `second` selects the part at +0x10). */
+/* Race `id`'s name (add-on content first, else NKMSortIndex.tbb; `second` selects the alternate name). */
 u8 *contentEntryDataGet(u32 id, s32 second)
 {
     u8 *result = entryListFindById(g_aocSystem, id);
     void *table;
-    Entry002c1ce4 *entries;
+    NkmRaceNameRecordA *entries;
     u32 count;
 
     if (result != NULL) {
         return result + 2;
     }
     table = dataTableGet(1, 0);
-    entries = dataTableGetEntries(table);
+    entries = nkmRaceNameRecordsA(table);
     count = dataTableGetCount(table);
     if (count > id) {
-        result = (u8 *)&entries[id];
+        result = (u8 *)entries[id].name;
         if (second != 0) {
-            result += 0x10;
+            result = (u8 *)entries[id].alternateName;
         }
     } else {
         result = (u8 *)entries;

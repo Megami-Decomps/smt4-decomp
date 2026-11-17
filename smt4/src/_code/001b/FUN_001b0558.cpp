@@ -1,19 +1,12 @@
 #include "ui/PartyPanelState.h"
+#include "gamedata/PartyPanelHelp.h"
 #include "gamedata/UnitStats.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
-
-struct PartyHelpRecord {
-    u8 kind;
-    char text[0x53];
-};
 
 extern "C" {
 s32 FUN_00282e70(void);
 s32 FUN_00282ccc(void);
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index);
-void* dataTableGet(u32 id, u8 section);
-PartyHelpRecord* dataTableGetEntries(void* table);
-u32 dataTableGetCount(void* table);
 void buttonHelpSetText(const char* text, u32 color);
 StatBlock* partyMemberFindById(u32 id);
 void FUN_0029dc74(u32 id, StatBlock* block);
@@ -23,7 +16,7 @@ void FUN_0029da34(u32 mode, u32 visible, u32 id, StatBlock* block);
 static __inline const char* partyHelpText(u32 index)
 {
     void* table = dataTableGet(0x39, 0);
-    PartyHelpRecord* records = dataTableGetEntries(table);
+    PartyPanelHelpRecord *records = partyPanelHelpRecords(table);
     if (dataTableGetCount(table) > index)
         return records[index].text;
     return NULL;

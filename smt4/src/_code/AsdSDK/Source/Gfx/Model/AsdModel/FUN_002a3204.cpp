@@ -1,5 +1,6 @@
 /* NON_MATCHING: register assignment and the order of the combiner stage field updates differ from retail (178 vs 182 rows); the material setup is otherwise the same. */
 #include "common.h"
+#include "gfx/GfxSettings.h"
 
 extern "C" {
 
@@ -57,13 +58,7 @@ typedef struct OwnerCommand {
     u32 *words;
 } OwnerCommand;
 
-typedef struct GfxSettings {
-    u8 unk0[5];
-    s8 flat;
-} GfxSettings;
-
 extern u32 DAT_00464b70;
-extern GfxSettings g_gfxSettings;
 
 u32 nw_ut_FloatColor_ToPicaU32(f32 *color);
 void runtimeDispatchObjectRelease(u8 **block);

@@ -1,18 +1,18 @@
-#include "common.h"
+#include "font/PlaceWin.h"
 
 extern "C" {
 
 void asdMemFree(void *memory);
 s32 jobStop(u32 job, s32 flag);
-extern u32 *g_placeWin;
+extern PlaceWindow *g_placeWin;
 
-/* Stops the job whose id g_placeWin points at, frees that record and clears the pointer. */
+/* Stops the job of the place window, frees that record and clears the pointer. */
 void placeWinRelease(void)
 {
-    u32 *job;
+    PlaceWindow *job;
 
     job = g_placeWin;
-    jobStop(*g_placeWin, 0);
+    jobStop(g_placeWin->job, 0);
     asdMemFree(job);
     g_placeWin = NULL;
 }

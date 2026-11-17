@@ -17,7 +17,7 @@ void campButtonHelpRelease(void);
 /* Stop the unite job: settle its BGM or exit sound by exit mode, then release the camp background and button help. */
 void uniteReleaseExit(void)
 {
-    EngineUnits *unite = g_engineCleanupOwner.instance;
+    ResultWorkA *unite = g_engineCleanupOwner.instance;
 
     if (unite == NULL || !jobIsValid(unite->job)) {
         return;

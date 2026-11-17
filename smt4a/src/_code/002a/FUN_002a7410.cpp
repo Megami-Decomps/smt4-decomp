@@ -1,9 +1,8 @@
 #include "shard/Shard0033.h"
 #include "code/Code002a.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 /* Returns whether the game state exists and has its 0x1374 flag set. */
 u32 FUN_002a7410(void)

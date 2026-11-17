@@ -2,6 +2,7 @@
 #include "battle/btlAction.h"
 #include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 struct AlternateActionBattle {
     u8 unk0000[0x84];
@@ -36,7 +37,6 @@ struct AlternateActorState {
     u8 unk0a[0xf12];
 };
 extern "C" {
-extern void *g_btlUiBlock;
 s32 randRange(u32);
 void btlEntryGetPassiveSkillIds(AlternateActionActor *, u16 *);
 void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
@@ -45,7 +45,7 @@ s32 halfwordKeyDescendingCompare(const void *, const void *);
 u32 FUN_0022a5d8(s32, AlternateActionActor *, s32);
 void btlUnitSetParam(AlternateActionContext *, s32, s32);
 void FUN_00229b10(AlternateActionContext *, AlternateActionChoice *);
-void FUN_00227b14(void *, u16, s32, s32);
+void FUN_00227b14(BtlUi *ui, u16, s32, s32);
 
 u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, AlternateActionChoice *choice)
 {

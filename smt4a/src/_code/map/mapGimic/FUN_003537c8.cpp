@@ -1,20 +1,17 @@
 /* NON_MATCHING: global pointer loads are scheduled differently around the prologue. */
-#include "map/mapGimic.h"
+#include "map/MapGimicGlobal.h"
+#include "Model/MoriModelContent.h"
 #include "code/Code001c.h"
 
 extern "C" {
-extern MapGimic *g_mapGimic;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-MapGimicObj *modelListInit(MapGimicObj *storage);
-void FUN_0040a908(MapGimicObj *model, u32 flags);
-void FUN_0040a918(MapGimicObj *model, u32 flags);
 
 // Reserve a free gimmick slot and load the requested map-unit model into it.
 void FUN_003537c8(s32 unitId)
 {
     s32 index = 0;
-    MapGimicSlot *slot;
+    MapGimicSlotA *slot;
     for (;;) {
         slot = &g_mapGimic->slots[index];
         if (slot->active == 0) {
@@ -28,7 +25,7 @@ void FUN_003537c8(s32 unitId)
     textFormatBuffer(path, "map/unit/u%03d.bam", unitId);
     slot->active = 1;
     slot->id = (s16)unitId;
-    MapGimicObj *storage = (MapGimicObj *)asdMemoryAllocTraced(
+    void *storage = asdMemoryAllocTraced(
         32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp", 0x9C6);
     slot->obj = storage != NULL ? modelListInit(storage) : NULL;
     modelLoadFileAsyncByName(slot->obj, path);

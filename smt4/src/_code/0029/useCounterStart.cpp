@@ -5,7 +5,6 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
-void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
 s32 FUN_0028d594(void);
 s32 buttonHelpGetSecondaryState(void);
 const char *buttonHelpGetLayoutEntry(u32);

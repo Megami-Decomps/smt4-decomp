@@ -16,7 +16,7 @@ struct PositionedTransition {
     /* 0x164 */ FloatPoint position;
     /* 0x16C */ u8 unk16C[0xC];
     /* 0x178 */ u8 transition[0x20];
-    /* 0x198 */ u8 motion[0x14];
+    /* 0x198 */ UiSpriteState motion;
 };
 extern "C" {
 void FUN_00233240(void *transition, s32 value);
@@ -31,12 +31,12 @@ void FUN_002311a4(PositionedTransition *work)
         work->animating = 1;
         work->state = 1;
     } else if (work->state == 1) {
-        u8 *motion = work->motion;
-        if (uiSpriteAdvanceAnimation((UiSpriteState *)motion) != 0) {
+        UiSpriteState *motion = &work->motion;
+        if (uiSpriteAdvanceAnimation(motion) != 0) {
             work->state = 2;
         }
-        s32 y = vec2GetYInt((const UiSpriteState *)motion);
-        pointConvertToFloat(&work->position, vec2GetXInt((const UiSpriteState *)motion), y);
+        s32 y = vec2GetYInt(motion);
+        pointConvertToFloat(&work->position, vec2GetXInt(motion), y);
     } else if (work->state == 2) {
         work->animating = 0;
     }

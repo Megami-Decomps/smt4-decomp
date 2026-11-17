@@ -5,6 +5,7 @@
 #include "code/Code0019.h"
 #include "gamedata/SkillDataRecord.h"
 #include "battle/BattleUnit.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -38,9 +39,8 @@ typedef struct BtlScriptUnitView {
 } BtlScriptUnitView;
 
 extern u32 g_btlScriptUnit;
-extern u32 g_btlUiBlock;
 
-s32 FUN_004aba3c(u32 block);
+s32 FUN_004aba3c(BtlUiA *block);
 
 /* Whether the script unit's character is of the given kind. */
 static __inline bool scriptUnitIsKind(s32 kind)

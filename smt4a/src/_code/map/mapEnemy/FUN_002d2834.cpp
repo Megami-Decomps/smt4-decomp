@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d2834` (_code @ 0x2d2834, 0x5444 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 #include "game/GameStateA.h"
 
 extern "C" {
@@ -76,7 +78,6 @@ typedef struct {
 extern unsigned char LAB_002d38dc; /* 0x2d38dc */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapView; /* 0x5806a4 */
-extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned char DAT_00580b94; /* 0x580b94 */
 extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f1623; /* 0x5f1623 */
@@ -113,7 +114,6 @@ static float romwright_fabs_4(float value)
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: randRange. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
@@ -231,8 +231,8 @@ void FUN_002d2834(void)
   int *temp_v51;
   int temp_v52;
   
-  temp_v4 = g_mapEnemy;
-  temp_v50 = gameFlagsGetBlock();
+  temp_v4 = ((int)g_mapEnemy);
+  temp_v50 = (int)gameFlagsGetBlock();
   temp_v52 = gameGetPlayerData();
   temp_v51 = (int *)(temp_v4 + 0x3d80);
   if (0 < *temp_v51) {
@@ -305,7 +305,7 @@ void FUN_002d2834(void)
           if (((temp_v16 && temp_v7 == '\0') && (*temp_v51 == 0)) && (0 < *(int *)(temp_v4 + 0x3d7c))) {
             temp_v3 = 0;
             do {
-              temp_v12 = g_mapEnemy + temp_v3 * 0x188;
+              temp_v12 = ((int)g_mapEnemy) + temp_v3 * 0x188;
               if (*(char *)(temp_v12 + 0x34) != '\0') {
                 switch(*(unsigned int *)(temp_v12 + 0xb8)) {
                 case 7:
@@ -419,7 +419,7 @@ LAB_002d2ba8:
                 if (temp_v15) {
                   temp_v3 = 0;
                   do {
-                    temp_v12 = g_mapEnemy + temp_v3 * 0x188;
+                    temp_v12 = ((int)g_mapEnemy) + temp_v3 * 0x188;
                     if (*(char *)(temp_v12 + 0x34) != '\0') {
                       switch(*(unsigned int *)(temp_v12 + 0xb8)) {
                       case 7:
@@ -574,7 +574,7 @@ LAB_002d3354:
             }
             temp_v3 = 0;
             do {
-              temp_v12 = g_mapEnemy + temp_v3 * 0x188;
+              temp_v12 = ((int)g_mapEnemy) + temp_v3 * 0x188;
               pcVar8 = (char *)(temp_v12 + 0x34);
               temp_v15 = *pcVar8 != '\0';
               temp_v7 = '\0';
@@ -601,7 +601,7 @@ LAB_002d3484:
                 temp_v27 = *(float *)(g_lmapScene + 0x1c);
                 temp_v28 = *(float *)(g_lmapScene + 0x20);
                 temp_v29 = *(float *)(g_lmapScene + 0x24);
-                puVar12 = (unsigned int *)(g_mapEnemy + 0x3d84);
+                puVar12 = (unsigned int *)(((int)g_mapEnemy) + 0x3d84);
                 temp_v2 = *puVar12;
                 temp_v8 = *(float *)(g_lmapView + 0x18);
                 if ((0 < (int)temp_v2) && ((temp_v2 & 1) != 0)) {
@@ -1593,7 +1593,7 @@ LAB_002d5218:
               }
               else {
 LAB_002d54c4:
-                temp_v12 = g_mapEnemy;
+                temp_v12 = ((int)g_mapEnemy);
                 *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) = *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) | 3;
                 *(unsigned char *)(temp_v10 + 0x1b8) = 0;
                 *(unsigned char *)(temp_v12 + *(int *)(temp_v10 + 0x1b0) * 8 + 0x3d91) = 0;
@@ -1627,7 +1627,7 @@ LAB_002d54c4:
               *(unsigned char *)(temp_v10 + 0x1b8) = 0;
             }
             else {
-              temp_v12 = g_mapEnemy;
+              temp_v12 = ((int)g_mapEnemy);
               *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) = *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) | 3;
               *(unsigned char *)(temp_v10 + 0x1b8) = 0;
               *(unsigned char *)(temp_v12 + *(int *)(temp_v10 + 0x1b0) * 8 + 0x3d91) = 0;
@@ -1640,7 +1640,7 @@ LAB_002d54c4:
       case 0xc:
         temp_v12 = *(int *)(temp_v10 + 0xbc) + 1;
         *(int *)(temp_v10 + 0xbc) = temp_v12;
-        temp_v3 = g_mapEnemy;
+        temp_v3 = ((int)g_mapEnemy);
         if (temp_v12 >= 3) {
           if (*(int **)(temp_v10 + 0x1b4) != (int *)0x0) {
             if (*(char *)(temp_v10 + 0x1b9) != '\0') {
@@ -1671,7 +1671,7 @@ LAB_002d54c4:
           }
           if (!(temp_v15 && temp_v7 == '\0')) {
             *pcVar15 = '\x01';
-            temp_v3 = gameFlagsGetBlock();
+            temp_v3 = (int)gameFlagsGetBlock();
             *(unsigned int *)(temp_v10 + 0x3c) = *(unsigned int *)(temp_v10 + 0x48);
             *(unsigned int *)(temp_v10 + 0x40) = *(unsigned int *)(temp_v10 + 0x4c);
             *(unsigned int *)(temp_v10 + 0x44) = *(unsigned int *)(temp_v10 + 0x50);
@@ -1732,8 +1732,8 @@ LAB_002d54c4:
           }
           else {
             *pcVar15 = '\x01';
-            temp_v3 = g_mapEnemy;
-            temp_v12 = gameFlagsGetBlock();
+            temp_v3 = ((int)g_mapEnemy);
+            temp_v12 = (int)gameFlagsGetBlock();
             unsigned int groupId;
             if (DAT_005f1623 != '\0') {
               groupId = (int)*(char *)(temp_v12 + 0x3a);
@@ -1777,7 +1777,7 @@ LAB_002d54c4:
               }
               temp_v3 = FUN_002d7c88(*(unsigned int *)(temp_v10 + 0x1b0));
             } while (temp_v3 == 0);
-            temp_v3 = gameFlagsGetBlock();
+            temp_v3 = (int)gameFlagsGetBlock();
             *(unsigned int *)(temp_v10 + 0x3c) = *(unsigned int *)(temp_v10 + 0x48);
             *(unsigned int *)(temp_v10 + 0x40) = *(unsigned int *)(temp_v10 + 0x4c);
             *(unsigned int *)(temp_v10 + 0x44) = *(unsigned int *)(temp_v10 + 0x50);

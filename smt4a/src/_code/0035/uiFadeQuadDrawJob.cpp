@@ -2,7 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
-#include "shard/W6_W6Match8_FadeQuad.h"
+#include "event/eventCommand.h"
 #include "shard/JobWork.h"
 
 extern "C" {
@@ -15,7 +15,7 @@ void gxSubmitDrawZeroExtraParams(u32 topLeft, u32 topRight, u32 bottomLeft, u32 
 // Draw a full-target fade quad with its stored alpha scaled by the job's fade amount.
 u32 uiFadeQuadDrawJob(u32 job)
 {
-    FadeQuadWork *work = (FadeQuadWork *)jobGetWork(job);
+    EventCommand *work = (EventCommand *)jobGetWork(job);
     if (work->alpha != 0.0f) {
         u32 color = work->color;
         RenderCtxA *context = g_renderCtx;

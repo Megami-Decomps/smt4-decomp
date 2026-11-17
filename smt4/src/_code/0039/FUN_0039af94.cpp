@@ -1,4 +1,5 @@
 /* NON_MATCHING: draws the title map's location markers (16 entries, scaled into the view around the cursor, only the active ones); written from the decompilation, conversions of the s16 intermediates and the efctSetSpeed argument are not compared with retail */
+#include "gamedata/MapSaveBlock.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 
@@ -32,11 +33,6 @@ struct MapMarkerScreen {
     /* 0xB88 */ MapMarkerView slots[8];
 };
 
-struct MapBlockLayout {
-    /* 0x000 */ u8 unk000[0xD5A];
-    /* 0xD5A */ s8 layout;
-};
-
 #define MARKER_COUNT 0x10
 #define MARKER_LAYOUT_FULL 0xC
 #define MARKER_SPRITE_FULL 0x1B65
@@ -45,7 +41,6 @@ struct MapBlockLayout {
 
 extern "C" {
 
-MapBlockLayout *gameGetMapBlock(void);
 f32 *NaviMain_GetCursorPos(void);
 void NaviMain_GetPosY(void *navi);
 s32 NaviMain_GetCurrentMap(void *navi);
@@ -57,7 +52,7 @@ void uiDrawTableTextureSized(u32 layer, u32 table, u32 sprite, s32 x, s32 y, s32
 
 void FUN_0039af94(MapMarkerScreen *screen)
 {
-    MapBlockLayout *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
     void *navi = &screen->navi;
     f32 *cursor = NaviMain_GetCursorPos();
     f32 cursorX = cursor[0];

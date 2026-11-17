@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00325d08` (_code @ 0x325d08, 0x1440 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -83,7 +84,6 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 /* Supplied declaration required: soundVolumeSettingSet. */
 /* Supplied declaration required: soundVolumeSettingGet. */
 /* Supplied declaration required: FUN_0014af98. */
-extern int gameFlagsGetBlock(void);
 extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: libm_cosf. */
@@ -158,7 +158,7 @@ void FUN_00325d08(void)
   unsigned int temp_v23 [15];
   
   temp_v21 = 0;
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   soundVolumeSettingGet();
   __aeabi_memcpy4(aiStack_2e8,&DAT_00531c18,0xa0);
   __aeabi_memcpy4(aiStack_248,&DAT_00531cb8,0xa0);

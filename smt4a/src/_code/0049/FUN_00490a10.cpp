@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00490a10` (_code @ 0x490a10, 0x640 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtxA.h"
@@ -30,7 +31,6 @@ typedef struct {
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
@@ -68,7 +68,7 @@ void FUN_00490a10(int param_1)
   int temp_v17;
   int temp_v18 [15];
   
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   words2Copy(param_1 + 0x4d0,&temp_v15);
   temp_v12 = 0.0f;
   temp_v18[0] = 0;

@@ -1,8 +1,7 @@
 #include "shard/Shard0034.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 void objBSetWordByIndex(s32 which, u32 value)
 {

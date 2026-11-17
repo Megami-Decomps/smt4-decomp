@@ -1,6 +1,5 @@
 /* NON_MATCHING: lookup-key narrowing repeats; saved flag pointer and lookup temporaries use different registers. */
-#include "quest_center/QuestUnlockDefinition.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/GauntletAppTable.h"
 #include "gamedata/GamePlayerData.h"
 extern "C" {
 u8 *gameDataGetFlagBits(void);
@@ -8,9 +7,9 @@ s32 gameFlagIsSet(u32 flag);
 s32 unsignedKeyRecordCompare(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
     s32 (*compare)(const void *, const void *));
-void FUN_00295cec(const QuestUnlockDefinition *record);
+void FUN_00295cec(const GauntletAppRecord *record);
 
-static inline const QuestUnlockDefinition *questFindUnlockDefinition(u16 id, QuestUnlockDefinition &key)
+static inline const GauntletAppRecord *questFindUnlockDefinition(u16 id, GauntletAppRecord &key)
 {
     void *table = dataTableGet(11, 0);
     if (!table)
@@ -18,12 +17,12 @@ static inline const QuestUnlockDefinition *questFindUnlockDefinition(u16 id, Que
     const void *entries = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     key.id = id;
-    return (const QuestUnlockDefinition *)libc_bsearch(&key, entries, count, sizeof(key), unsignedKeyRecordCompare);
+    return (const GauntletAppRecord *)libc_bsearch(&key, entries, count, sizeof(key), unsignedKeyRecordCompare);
 }
 
-static inline bool questMeetsUnlockRequirements(u16 id, QuestUnlockDefinition &key)
+static inline bool questMeetsUnlockRequirements(u16 id, GauntletAppRecord &key)
 {
-    const QuestUnlockDefinition *record = questFindUnlockDefinition(id, key);
+    const GauntletAppRecord *record = questFindUnlockDefinition(id, key);
     if (!record || record->minimumLevel > gameGetPlayerData()->level)
         return false;
     for (s32 i = 0; i < 3; ++i) {
@@ -31,7 +30,7 @@ static inline bool questMeetsUnlockRequirements(u16 id, QuestUnlockDefinition &k
             return false;
     }
     for (s32 i = 0; i < 3; ++i) {
-        u16 quest = record->requiredQuests[i];
+        u16 quest = record->requiredApps[i];
         if (quest && !(gameDataGetFlagBits()[quest >> 3] & (1 << (quest & 7))))
             return false;
     }
@@ -41,10 +40,10 @@ static inline bool questMeetsUnlockRequirements(u16 id, QuestUnlockDefinition &k
 void FUN_00334e18(void)
 {
     u8 *flags = gameDataGetFlagBits();
-    QuestUnlockDefinition key;
+    GauntletAppRecord key;
     for (u32 id = 1; id < 141; ++id) {
-        const QuestUnlockDefinition *record = questFindUnlockDefinition((u16)id, key);
-        if (record && record->category == 0 && questMeetsUnlockRequirements((u16)id, key)) {
+        const GauntletAppRecord *record = questFindUnlockDefinition((u16)id, key);
+        if (record && record->cost == 0 && questMeetsUnlockRequirements((u16)id, key)) {
             FUN_00295cec(questFindUnlockDefinition((u16)id, key));
             s32 index = (s32)id;
             u8 *byte = flags + index / 8;

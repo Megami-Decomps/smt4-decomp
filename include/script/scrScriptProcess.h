@@ -53,6 +53,9 @@ ScriptProcess *scrScriptProcessCreate(void *script, void *owner);
 /* Frees a process, its variables and its command allocation, and unlinks it. */
 void scrScriptProcessDestroy(ScriptProcess *process);
 
+/* Runs the process's opcodes (forwards to scrRunOpcodes); 2 means the script has finished. */
+u32 scrRunOpcodesStub(ScriptProcess *process);
+
 void FUN_00298d50(u32 value);
 
 /* Canonical declaration (matches the definition). */

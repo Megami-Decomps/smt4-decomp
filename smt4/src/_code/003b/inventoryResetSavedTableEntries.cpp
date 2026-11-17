@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/EncountData.h"
 
 extern "C" {
 
@@ -13,22 +13,14 @@ typedef struct SaveData {
     /* 0x1EC56 */ ItemState items[1];
 } SaveData;
 
-typedef struct ItemPair {
-    /* 0 */ u8 type;
-    /* 1 */ u8 id;
-} ItemPair;
-
-extern void *dataTableGet(s32 table, s32 section);
-extern ItemPair *dataTableGetEntries(void *section);
-extern s32 dataTableGetCount(void *section);
 extern SaveData *gameDataBlocksGetSaveData(void);
 extern void weightedTableRollNextValue(u32 type, u32 id, s32 arg);
 
-/* Resets the saved state of every table entry (keeping only its seen bit) and re-applies the entry. */
+/* Resets the saved encounter roll state of every (map, area) (keeping only its seen bit) and rolls it again. */
 void inventoryResetSavedTableEntries(void)
 {
     void *section = dataTableGet(2, 3);
-    ItemPair *entries = dataTableGetEntries(section);
+    EncountAreaKey *entries = encountAreaKeys(section);
     s32 count = dataTableGetCount(section);
     SaveData *save = gameDataBlocksGetSaveData();
     s32 i;
@@ -36,7 +28,7 @@ void inventoryResetSavedTableEntries(void)
     for (i = 0; i < count; i++) {
         save->items[i].count = 0;
         save->items[i].flags &= ~0x7F;
-        weightedTableRollNextValue(entries[i].type, entries[i].id, 1);
+        weightedTableRollNextValue(entries[i].map, entries[i].area, 1);
     }
 }
 

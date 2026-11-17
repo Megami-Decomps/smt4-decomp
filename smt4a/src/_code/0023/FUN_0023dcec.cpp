@@ -1,4 +1,5 @@
 #include "camp/Unite/UniteWork.h"
+#include "gamedata/SearchTable.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
@@ -6,8 +7,6 @@
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
-u32 dataTableGetEntry24Byte0(u32 id);
-const char *dataTableGetEntry24Member(u32 id);
 s32 saveOptionIsEnabled(u32 option);
 void efctSetSpeed(f32 value);
 void texDrawCompositeSprite(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);

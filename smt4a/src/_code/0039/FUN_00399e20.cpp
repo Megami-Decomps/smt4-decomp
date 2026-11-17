@@ -1,26 +1,11 @@
 /* NON_MATCHING: recovered 128-byte text/8-byte scoped range buffers and formatter contract; initial button-help global load is scheduled after argument saves. */
-#include "common.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "gamedata/EquipmentRecordA.h"
 #include "gamedata/GamePlayerData.h"
 
-/* The button help block (g_buttonHelp) the panel is drawn through. */
-struct PanelBlock {
-    /* 0x000 */ u8 unk000[0x5EA];
-    /* 0x5EA */ u8 shown;
-    /* 0x5EB */ u8 unk5EB[0x8D];
-    /* 0x678 */ u32 directory;
-    /* 0x67C */ u8 visible;
-};
-struct PanelButtonHelp {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ PanelBlock *block;
-    /* 0x08 */ s32 defaultText;
-};
-
 extern "C" {
-extern PanelButtonHelp g_buttonHelp;
 void FUN_002c0940(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void battleAttributeFormatName(char *buffer, u32 attribute);
@@ -31,15 +16,15 @@ void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e,
  * and the effect label, then draws it. */
 void FUN_00399e20(s32 textId, u32 flags)
 {
-    PanelBlock *block = g_buttonHelp.block;
+    ButtonHelpWorkA *work = g_buttonHelp.work;
     EquipmentRecordA *first = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.gun);
     EquipmentRecordA *second = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.bullets);
     if (first == NULL || second == NULL) {
-        block->shown = 0;
+        work->textVisible = 0;
         return;
     }
-    block->visible = 1;
-    block->shown = 1;
+    work->text.useDirectoryText = 1;
+    work->textVisible = 1;
     char text[128];
     u32 range = first->hitRange;
     if ((range & 0xF) == range >> 4) {
@@ -77,8 +62,8 @@ void FUN_00399e20(s32 textId, u32 flags)
         textFormatBuffer(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
     scrSetStringSlot(0x28, text);
     if (textId == 0)
-        textId = g_buttonHelp.defaultText;
-    asdTextDrawDirectoryEntry(block->directory, 2, -1, 0, 3, textId, flags);
+        textId = reinterpret_cast<s32>(g_buttonHelp.mbm); /* this function passes the directory as an integer */
+    asdTextDrawDirectoryEntry(work->text.directoryText, 2, -1, 0, 3, textId, flags);
 }
 
 } /* extern "C" */

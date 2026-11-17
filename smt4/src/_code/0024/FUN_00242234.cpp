@@ -23,7 +23,7 @@ u32 FUN_00242234(u32 source, u32 index)
     if (request.state == 2) {
         result = 0x400000;
     } else if (request.state == 1) {
-        effResourcePromoteReferences(g_effectEditor.selection.list, g_effectEditor.selection.item);
+        effResourcePromoteReferences(g_effectEditor.list, g_effectEditor.item);
         if (request.kind != 8) {
             u32 type;
             switch (request.kind) {
@@ -38,9 +38,9 @@ u32 FUN_00242234(u32 source, u32 index)
             case 256: type = 9; break;
             default: type = 0; break;
             }
-            taskRunWithObject(g_effectEditor.selection.block, request.payload, type);
+            taskRunWithObject(g_effectEditor.block, request.payload, type);
         } else {
-            effBlockSetBlobB(g_effectEditor.selection.block, &request.blob, 4, 4);
+            effBlockSetBlobB(g_effectEditor.block, &request.blob, 4, 4);
         }
         result = (u32)&DAT_00400002;
     }

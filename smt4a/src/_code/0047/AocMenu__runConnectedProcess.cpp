@@ -43,7 +43,6 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int byteIsAtLeast100(unsigned int *);
-extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
 extern int messageGetChoiceResult(void);
@@ -188,7 +187,7 @@ void AocMenu::runConnectedProcess()
         }
       }
       else {
-        temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
+        temp_v1 = scrRunOpcodesStub((ScriptProcess *)param_1[0xd6]);
         if (temp_v1 == 2) {
           temp_v1 = messageGetChoiceResult();
           if (temp_v1 != 0) {

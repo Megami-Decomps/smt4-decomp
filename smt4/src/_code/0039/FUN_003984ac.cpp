@@ -1,6 +1,8 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 204 rows); retail copies the 12-entry handler table with unrolled ldrd/ldm pairs and reads the string/table addresses through literal-pool constants */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "script/scrScriptProcess.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 // A player/partner name buffer: 16 bytes plus a terminator halfword, starts on a halfword.
 __packed struct NameBuffer {
@@ -51,9 +53,9 @@ struct NameForm {
     /* 0x648 */ u8 unk648;
     /* 0x649 */ u8 mode;
     /* 0x64a */ u8 unk64a[2];
-    /* 0x64c */ u32 layoutFile;
-    /* 0x650 */ u32 scriptFile;
-    /* 0x654 */ u32 resource;
+    /* 0x64c */ void *layoutFile;
+    /* 0x650 */ void *scriptFile;
+    /* 0x654 */ ScriptProcess *resource;
     /* 0x658 */ u32 unk658;
     /* 0x65c */ u8 params[0x20];
     /* 0x67c */ u8 cursorSprite[0x8c];
@@ -78,8 +80,6 @@ NameBuffer* gameDataGetSecondName(void);
 void asdTMTexTableLoadSprites(s32 id);
 void asdTMTexTablePrepareNodeImage(s32 id, s32 arg);
 void gridNavigationConfigure(void* grid, s32 a, s32 b, s32 c, s32 d, s32 e);
-u32 asdLoadFileSyncDefault(const char* path);
-u32 scrScriptProcessCreate(u32 scriptFile, u32 layoutFile);
 void drawParameterBlockClear(void);
 void uiSpriteStateInitFromSource(void* sprite, s32 sheet, s32 index, void* params, f32 scale, s32 flag);
 void spriteStartAnimationByIndex(void* sprite, s32 index);

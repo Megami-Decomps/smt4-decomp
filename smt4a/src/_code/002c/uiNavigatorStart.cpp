@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 
 extern "C" {
 
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 a, s32 b);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 a, s32 b);
 
 
 /* Starts the navigator in state 1: restarts its members and sets the timer to 30, the mode to 2, and stores the given values. */

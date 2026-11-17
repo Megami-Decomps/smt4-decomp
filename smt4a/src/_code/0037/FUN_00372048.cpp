@@ -1,7 +1,7 @@
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 u32 FUN_00334044();
 void FUN_0021af2c(void);
 
@@ -14,6 +14,6 @@ void FUN_00372048(s32 index)
     else
         session->unk1374 = FUN_00334044() - 1;
     FUN_0021af2c();
-    session->unk2014 = 0;
+    session->mode = 0;
 }
 }

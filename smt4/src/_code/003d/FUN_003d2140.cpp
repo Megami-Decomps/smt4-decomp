@@ -6,6 +6,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 /* The party member record a battle entry is linked to: its id at 0x46. */
 struct PartyMemberRecord {
@@ -30,13 +31,12 @@ struct BattlePhaseView {
 };
 
 extern "C" {
-extern u32 g_btlUiBlock;
 extern void *g_btlEvent;
 extern void *DAT_00435d18;
 
 u32 btlAiScriptCall(CommandState *work);
-void FUN_00227b14(u32 ui, u32 windowId, s32 kind, s32 mode);
-u32 FUN_00229c5c(u32 ui, u32 windowId, s32 mode);
+void FUN_00227b14(BtlUi *ui, u32 windowId, s32 kind, s32 mode);
+u32 FUN_00229c5c(BtlUi *ui, u32 windowId, s32 mode);
 s32 FUN_00229098(BtlMainState **block);
 u8 buttonHelpGetStatus(void);
 s32 FUN_00293230(BtlMainState *state);
@@ -47,7 +47,7 @@ void btlEntryValuesCopy(BtlMainState **block, CommandState *work);
 u32 FUN_0027e3b8(void *event);
 u32 FUN_0027e38c(void *event);
 u32 FUN_003ca6c4(BtlMainState **block, CommandState *work);
-void btlUiRouteSelectedAction(u32 ui);
+void btlUiRouteSelectedAction(BtlUi *ui);
 PartyMemberRecord *saveResolvePartySlot(s32 slot);
 s32 gameSlotFindByCategory(void);
 void FUN_00246454(s32 a, CommandState *work, BtlEntry *entry);
@@ -67,7 +67,7 @@ u32 battleResolveEscapeAttempt(BtlMainState **block, CommandState *work);
 s32 btlEventSelectTrigger(void *event, s32 trigger, s32 unit, s32 a);
 u32 FUN_003dbb40(void *object);
 u32 FUN_003ca32c(BtlMainState **block, CommandState *work);
-void btlUiRecountParty(u32 ui);
+void btlUiRecountParty(BtlUi *ui);
 void objDestroyChild(void *object);
 void FUN_002276f8(void *object);
 void battleResetCounterAndFlag(void);

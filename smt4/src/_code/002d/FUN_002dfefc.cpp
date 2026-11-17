@@ -1,17 +1,10 @@
 /* NON_MATCHING: byte-index division is retained in a shifted register instead of retail's deferred ASR; zero/bitmask registers differ. */
+#include "gamedata/MapSaveBlock.h"
 #include "map/MapIfTimer.h"
 #include <stddef.h>
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GameDataAccess_VariantE.h"
-#include "shard/SaveWork.h"
 #include "game/GameState.h"
-
-struct MapAppDiscoveryState {
-    u8 unk000[0xD9C];
-    u8 discovered[18]; // app IDs 1..140
-};
-typedef char MapAppDiscoveryStateOffsetCheck[
-    offsetof(MapAppDiscoveryState, discovered) == 0xD9C ? 1 : -1];
 
 extern "C" {
 extern char DAT_004b7608[];
@@ -28,14 +21,14 @@ void FUN_002dfefc(s32 suppressNotification)
     u32 displayFlags = FUN_002bfdd4() | 4;
     bool discovered = false;
     for (u32 app = 1; app < 141; ++app) {
-        MapAppDiscoveryState *map = reinterpret_cast<MapAppDiscoveryState *>(gameGetMapBlock());
+        MapSaveBlock *map = gameGetMapBlock();
         s32 byteIndex = (s32)app / 8;
         u32 mask = 1 << ((s32)app % 8);
-        if ((map->discovered[byteIndex] & mask) == 0) {
+        if ((map->discoveredApps[byteIndex] & mask) == 0) {
             if (flagBitIsSet(app) != 0) {
-                reinterpret_cast<MapAppDiscoveryState *>(gameGetMapBlock())->discovered[byteIndex] |= (u8)mask;
+                gameGetMapBlock()->discoveredApps[byteIndex] |= (u8)mask;
             } else if (appCheckPurchaseRequirements(app) != 2) {
-                reinterpret_cast<MapAppDiscoveryState *>(gameGetMapBlock())->discovered[byteIndex] |= (u8)mask;
+                gameGetMapBlock()->discoveredApps[byteIndex] |= (u8)mask;
                 discovered = true;
             }
         }

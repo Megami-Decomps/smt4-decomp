@@ -4,9 +4,11 @@
 /* Functions in the 0x00370000 code block whose subsystem is not known yet; each declaration matches its definition. */
 extern "C" {
 
-void *FUN_00370ecc(u16 id);
+struct GuestParamRecord;
+GuestParamRecord *FUN_00370ecc(u16 id);
 
-void *FUN_003799d0(u32 index);
+struct MsSearchRecord;
+MsSearchRecord *FUN_003799d0(u32 index);
 
 void FUN_0037d6e4(u8 value);
 

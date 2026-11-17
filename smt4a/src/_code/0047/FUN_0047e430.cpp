@@ -2,6 +2,7 @@
 #include "common.h"
 #include "code/Code0013.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -12,10 +13,9 @@ typedef struct Object {
     /* 0x09 */ u8 unk09[3];
     /* 0x0C */ void *bufferA;
     /* 0x10 */ void *bufferB;
-    /* 0x14 */ void *bufferC;
+    /* 0x14 */ ScriptProcess *bufferC;
 } Object;
 
-extern void scrScriptProcessDestroy(void *buffer);
 extern void campButtonHelpAcquire(u8 flag);
 extern void titleSetSlotValueState2(s32 slot, s32 mode);
 

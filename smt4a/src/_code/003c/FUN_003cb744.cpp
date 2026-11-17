@@ -1,9 +1,8 @@
 /* NON_MATCHING: trigonometric zero initialization uses a saved GPR rather than retail VFP zero, changing live-register allocation. */
 /* Registers the active YHVH actor's forward-offset collision box. */
-#include "map/mapGimic.h"
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
-extern MapGimic *g_mapGimic;
 void mathSinCos(f32 *sine, f32 *cosine, f32 phase);
 s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
     u32 effect, s32 variant, u32 option0, u32 option1, u32 option2,
@@ -13,23 +12,12 @@ s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
 
 void FUN_003cb744(void)
 {
-    /* The special actor follows the shared map-gimmick prefix. */
-    struct SpecialActor {
-        u8 active;
-        u8 unk01[3];
-        f32 position[3];
-        f32 heading;
-    };
-    struct SpecialActorView {
-        MapGimic base;
-        SpecialActor actor;
-    };
     f32 phase[2] = {0.0f, 0.0f};
-    SpecialActor *actor = &((SpecialActorView *)g_mapGimic)->actor;
+    MapGimicStageActorA *actor = &g_mapGimic->stageActor;
     if (actor->active) {
-        f32 x = actor->position[0];
-        f32 y = actor->position[1];
-        f32 z = actor->position[2];
+        f32 x = actor->position.x;
+        f32 y = actor->position.y;
+        f32 z = actor->position.z;
         mathSinCos(&phase[0], &phase[1], actor->heading * (256.0f / 360.0f));
         sceneRegisterBoxEffect(520, 0, "YHVH", 87, 12, -1,
             0, 0, 0, 0, 0, 0, 0, -1, 1, 1, 1, -1, 0,

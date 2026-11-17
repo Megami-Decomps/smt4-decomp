@@ -2,6 +2,7 @@
 #define GFX_SECONDARY_RESOURCE_WORK_H
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 struct SecondaryResourceWork {
     /* 0x000 */ u32 job;
@@ -11,7 +12,7 @@ struct SecondaryResourceWork {
     /* 0x028 */ void *resourceData;
     /* 0x02C */ void *scriptData;
     /* 0x030 */ void *textureData;
-    /* 0x034 */ void *scriptProcess;
+    /* 0x034 */ ScriptProcess *scriptProcess;
     /* 0x038 */ u8 unk038[0x110];
     /* 0x148 */ u16 touchRegionCount;
     /* 0x14A */ u8 unk14A[0x48E];

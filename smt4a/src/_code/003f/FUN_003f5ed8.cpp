@@ -22,8 +22,9 @@ typedef struct DialogWork {
     /* 0x12C */ u8 panel[0x20];
     /* 0x14C */ u8 unk14c[0x1AC];
     /* 0x2F8 */ u8 unk2f8[0x18];
-    /* 0x310 */ u8 pulseA[0x8C];
-    /* 0x39C */ u8 pulseB[0x118];
+    /* 0x310 */ UiSpriteState pulseA;
+    /* 0x39C */ UiSpriteState pulseB;
+    /* 0x428 */ u8 unk428[0x8C];
     /* 0x4B4 */ u8 pulseC[0x118];
     /* 0x5CC */ s32 blinkTimer;
     /* 0x5D0 */ f32 blink;
@@ -53,8 +54,8 @@ void dialogEnterState(DialogWork *work, s32 state, s32 arg);
  * of ids around the cursor, and reacts to confirm (accept the entry) or cancel. */
 void FUN_003f5ed8(DialogWork *work)
 {
-    uiSpriteAdvanceAnimation((UiSpriteState *)work->pulseA, 1.0f);
-    uiSpriteAdvanceAnimation((UiSpriteState *)work->pulseB, 1.0f);
+    uiSpriteAdvanceAnimation(&work->pulseA, 1.0f);
+    uiSpriteAdvanceAnimation(&work->pulseB, 1.0f);
     uiSpriteAdvanceAnimation((UiSpriteState *)work->pulseC, 1.0f);
     work->blinkTimer--;
     if (work->blinkTimer <= 0) {

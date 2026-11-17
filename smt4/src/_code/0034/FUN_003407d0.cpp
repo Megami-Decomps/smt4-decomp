@@ -1,6 +1,6 @@
 /* NON_MATCHING: logic agrees; register numbering/operand load order of the owner->frame and owner->metrics chains differs, and the table-search loop is rotated differently. */
 #include "common.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/DeadEffectOffset.h"
 
 extern "C" {
 
@@ -50,14 +50,6 @@ typedef struct LayoutSource {
     /* 0x96 */ s16 positionY;
 } LayoutSource;
 
-/* A table row: id and the two wanted positions. */
-typedef struct PositionRow {
-    u16 id;
-    s16 positionX;
-    s16 positionY;
-    u16 unk06;
-} PositionRow;
-
 
 /* Offset that centres a span of `outer` around `position`, measured from the origin. */
 static __inline f32 centreOffset(s32 outer, u16 inner, s32 position, s16 origin)
@@ -101,7 +93,7 @@ void FUN_003407d0(CenteredLayout *layout, LayoutSource *source)
     } else {
         u16 key = layout->owner->key;
         void *table = dataTableGet(0x3B, 0);
-        PositionRow *row = static_cast<PositionRow *>(dataTableGetEntries(table));
+        DeadEffectOffsetRecord *row = deadEffectOffsetRecords(table);
         s32 count = dataTableGetCount(table);
         s32 i = 0;
 

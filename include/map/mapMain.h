@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* The map mode's block (Shin Megami Tensei IV layout), kept by a module global. */
 typedef struct MapMain {
@@ -18,7 +19,7 @@ typedef struct MapMain {
     /* 0x3D */ u8 unk3D[0x4f];
     /* 0x8C */ void *scriptData;
     /* 0x90 */ void *messageData;
-    /* 0x94 */ void *scriptProcess;
+    /* 0x94 */ ScriptProcess *scriptProcess;
     /* 0x98 */ s32 completionFlag;
     /* 0x9C */ u8 unk9C[0x28];
     /* 0xC4 */ s32 scriptState;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: register choice of the colour copies and the compare/store scheduling differ (rgb block copy and subtraction pattern now match). */
 #include "gfx/ParticleTransform.h"
+#include "gfx/VectorScratch.h"
 extern "C" {
-extern EffectColorProductState g_vectorScratch;
 void FUN_002cf548(void);
 f32 FUN_001b640c(f32 y, f32 x);
 f32 FUN_0034f8b4(const void *curve, s32 frame, s32 duration);
@@ -23,17 +23,17 @@ void FUN_00321d7c(ParticleTransformSample *sample, ParticleTransformCurves *curv
     if (curves->angleMode != 2) {
         sample->angle = FUN_0034f8b4(curves->angleCurve, frame, curves->duration);
     } else {
-        g_vectorScratch.color = sample->position;
+        g_vectorScratch.first.color = sample->position;
         FUN_002cf548();
-        g_vectorScratch.factor.alpha = g_vectorScratch.color.alpha;
-        *reinterpret_cast<EffectRgb *>(&g_vectorScratch.factor) = *reinterpret_cast<const EffectRgb *>(&g_vectorScratch.color);
-        g_vectorScratch.color = *previous;
+        g_vectorScratch.second.color.alpha = g_vectorScratch.first.color.alpha;
+        *reinterpret_cast<EffectRgb *>(&g_vectorScratch.second.color) = *reinterpret_cast<const EffectRgb *>(&g_vectorScratch.first.color);
+        g_vectorScratch.first.color = *previous;
         FUN_002cf548();
-        effectColorSubtract(&g_vectorScratch.color, &g_vectorScratch.factor);
-        if (g_vectorScratch.color.red == 0.0f && g_vectorScratch.color.green == 0.0f) {
+        effectColorSubtract(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
+        if (g_vectorScratch.first.color.red == 0.0f && g_vectorScratch.first.color.green == 0.0f) {
             sample->angle = 0.0f;
         } else {
-            sample->angle = FUN_001b640c(g_vectorScratch.color.green, g_vectorScratch.color.red) * 0.024543693f;
+            sample->angle = FUN_001b640c(g_vectorScratch.first.color.green, g_vectorScratch.first.color.red) * 0.024543693f;
         }
     }
 }

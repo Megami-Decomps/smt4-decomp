@@ -1,22 +1,10 @@
-#include "common.h"
-
-namespace {
-struct State {
-    u8 padding[0x4c9];
-    u8 value;
-};
-struct Owner {
-    u32 job;
-    State *state;
-};
-}
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern Owner g_buttonHelp;
 
-/* Reads the current status byte. */
+/* Reads the current preset, or 0 when there is no button help. */
 s32 buttonHelpGetStatus(void)
 {
-    return g_buttonHelp.state != NULL ? g_buttonHelp.state->value : 0;
+    return g_buttonHelp.work != NULL ? g_buttonHelp.work->preset : 0;
 }
 }

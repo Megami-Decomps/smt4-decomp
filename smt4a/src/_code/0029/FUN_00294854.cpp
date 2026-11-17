@@ -1,57 +1,33 @@
 /* NON_MATCHING: active-byte clear-loop counters and global/zero registers differ; grouped special-state view now reproduces retail tail-base writeback. */
 /* Releases all map-gimmick scene objects and their registered controller handles. */
-#include "map/mapGimic.h"
+#include "map/MapGimicGlobal.h"
+#include "Model/MoriModelContent.h"
 #include "Model/MoriModelManager.h"
 
 extern "C" {
-extern MapGimic *g_mapGimic;
 
 void FUN_00294854(void)
 {
-    struct Releasable;
-    struct ReleaseMethods {
-        void *unk00;
-        void (*release)(Releasable *object);
-    };
-    struct Releasable {
-        ReleaseMethods *methods;
-    };
-    struct MapGimicSpecialState {
-        s8 active;
-        u8 unk01;
-        u16 request;
-        u8 unk04[0x10];
-        MapGimicObj *object;
-    };
-    struct MapGimicCleanupView {
-        MapGimic base;
-        MapGimicSpecialState special;
-    };
-    typedef char MapGimicCleanupLayoutCheck[
-        offsetof(MapGimicCleanupView, special.active) == 0x9B4 &&
-        offsetof(MapGimicCleanupView, special.request) == 0x9B6 &&
-        offsetof(MapGimicCleanupView, special.object) == 0x9C8 &&
-        sizeof(MapGimicCleanupView) == 0x9CC ? 1 : -1];
     for (s32 i = MAP_GIMIC_ENTRIES - 1; i >= 0; --i) {
-        Releasable *object = (Releasable *)g_mapGimic->entries[i].obj;
+        MoriModelContent *object = g_mapGimic->entries[i].obj;
         if (object != NULL) {
-            object->methods->release(object);
+            delete object;
             g_mapGimic->entries[i].obj = NULL;
         }
     }
     for (s32 i = 0; i < MAP_GIMIC_ENTRIES; ++i) {
         g_mapGimic->entries[i].active = 0;
     }
-    MapGimicSpecialState *special = &((MapGimicCleanupView *)g_mapGimic)->special;
+    MapGimicStageActorA *special = &g_mapGimic->stageActor;
     if (special->active) {
-        ptrListRemoveClearOwner(g_handleRegistry, special->object->controller);
-        Releasable *object = (Releasable *)special->object;
+        ptrListRemoveClearOwner(g_handleRegistry, special->obj->body);
+        MoriModelContent *object = special->obj;
         if (object != NULL) {
-            object->methods->release(object);
+            delete object;
         }
-        special->object = NULL;
+        special->obj = NULL;
         special->active = 0;
     }
-    special->request = 0;
+    special->motion = 0;
 }
 }

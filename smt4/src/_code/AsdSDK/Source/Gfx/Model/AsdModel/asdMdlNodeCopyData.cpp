@@ -3,6 +3,7 @@
 #include "gfx/ModelBoneLookup.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/asdMemoryGetAllocatorA.h"
+#include "gfx/GfxSettings.h"
 
 /* How a model is built: the default is a two-flag description with four- and eight-byte units. */
 struct AsdMdlBuildDesc {
@@ -20,11 +21,6 @@ struct AsdMdlBuildDesc {
 };
 
 extern "C" {
-struct AsdGfxSettings {
-    /* 0x00 */ u8 unk00[0x40];
-    /* 0x40 */ s32 sharedModels;
-};
-extern AsdGfxSettings g_gfxSettings;
 
 AsdMdlSceneNode *FUN_002b3acc(AsdMdlBuildDesc *desc, s32 mode, ModelBoneResource *resource, void *allocator);
 void FUN_002fb604(AsdMdlSceneNode *sceneNode);

@@ -1,13 +1,11 @@
 /* NON_MATCHING: retail reads the 0x5E2 flag through a second base (work+0x500) and keeps the first loop's call/else layout out of line; also needs uiSpriteGetCompletionState (ldrsb r0,[r0,#138]) in smt4a config/inlined.txt. */
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
 
 extern ButtonHelpQueuedSelections g_buttonHelpQueuedKinds;
 
-void uiSpriteAdvanceAnimation(ButtonHelpUnit *unit, f32 speed);
-s8 uiSpriteGetCompletionState(const ButtonHelpUnit *unit);
-void FUN_00167458(ButtonHelpUnit *unit, s32 flag);
 void FUN_0031879c(void);
 void FUN_001a90e0(u8 *help);
 void sysPlaySe(u32 id);
@@ -23,45 +21,45 @@ u32 FUN_0025ccc0(void)
     if (work->state != 0) {
         if (work->state == 1) {
             for (s32 i = 0; i < 4; i++) {
-                ButtonHelpUnit *unit = &work->selected[i];
-                if (work->unk5E4 != 1) {
+                UiSpriteState *unit = &work->panelSprites[i];
+                if (work->mode != 1) {
                     uiSpriteAdvanceAnimation(unit, 1.0f);
-                } else if (work->unk5E2[0] != 0) {
+                } else if (work->panelSliding != 0) {
                     FUN_00167458(unit, 0);
                 }
             }
             for (s32 i = 0; i < 6; i++) {
-                if (work->kinds[i].kind != 0) {
-                    if (i < work->unk0C) {
-                        uiSpriteAdvanceAnimation(&work->units[i], 1.0f);
+                if (work->slots[i].kind != 0) {
+                    if (i < work->phase) {
+                        uiSpriteAdvanceAnimation(&work->slotSprites[i], 1.0f);
                     }
                     last = i;
                 }
             }
-            if (work->unk0C > last && uiSpriteGetCompletionState(&work->units[last]) != 0) {
+            if (work->phase > last && uiSpriteGetCompletionState(&work->slotSprites[last]) != 0) {
                 g_buttonHelp.work->state = 2;
-                g_buttonHelp.work->unk0C = 0;
+                g_buttonHelp.work->phase = 0;
             }
         } else if (work->state != 2) {
             if (work->state == 3) {
                 for (s32 i = 0; i < 4; i++) {
-                    uiSpriteAdvanceAnimation(&work->selected[i], 1.0f);
+                    uiSpriteAdvanceAnimation(&work->panelSprites[i], 1.0f);
                 }
                 for (s32 i = 0; i < 6; i++) {
-                    if (work->kinds[i].kind != 0) {
-                        if (i < work->unk0C) {
-                            uiSpriteAdvanceAnimation(&work->units[i], 1.0f);
+                    if (work->slots[i].kind != 0) {
+                        if (i < work->phase) {
+                            uiSpriteAdvanceAnimation(&work->slotSprites[i], 1.0f);
                         }
                         last = i;
                     }
                 }
-                if (work->unk0C > last && uiSpriteGetCompletionState(&work->units[last]) != 0) {
+                if (work->phase > last && uiSpriteGetCompletionState(&work->slotSprites[last]) != 0) {
                     for (s32 i = 0; i < 6; i++) {
-                        work->clear.active[i] = 0;
+                        work->touchPressed[i] = 0;
                     }
-                    FUN_001a90e0(work->clear.unk5DA);
+                    FUN_001a90e0(work->touchSelected);
                     g_buttonHelp.work->state = 0;
-                    g_buttonHelp.work->unk0C = 0;
+                    g_buttonHelp.work->phase = 0;
                 }
             }
         } else {
@@ -78,7 +76,7 @@ u32 FUN_0025ccc0(void)
             }
         }
     }
-    work->unk0C++;
+    work->phase++;
     return 0;
 }
 

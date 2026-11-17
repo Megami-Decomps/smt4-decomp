@@ -1,12 +1,12 @@
 /* NON_MATCHING: completion work is factored instead of duplicated across retail branches; mask-load scheduling differs. */
 #include "battle/btlMain.h"
 #include "battle/btlEncount.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BtlEventStateA;
 extern "C" {
 extern BtlEventStateA *g_btlEvent;
 extern BtlEncounterGlobalsA g_btlEncount;
-extern void *g_btlUiBlock;
 u32 isEntryUsable(const BtlEventStateA *event);
 u32 FUN_004d7a70(BtlEventStateA *event, u32 kind, s32 index, s32 flags);
 void FUN_004d7fe4(BtlEventStateA *event);
@@ -17,7 +17,7 @@ void FUN_003ed6e8(BtlMainStateA *state);
 void FUN_003f26d4(BtlMainStateA *state);
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *state, s32 flags);
 void FUN_0047f444(s32 kind);
-void FUN_004aa2e0(void *ui, s32 mode);
+void FUN_004aa2e0(BtlUiA *ui, s32 mode);
 u32 FUN_003e0cd4(BtlStep *step, BtlMainStateA *state);
 
 u32 FUN_003e2504(BtlStep *step, BtlMainStateA *state)

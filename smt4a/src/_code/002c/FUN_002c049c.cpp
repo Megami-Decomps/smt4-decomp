@@ -10,7 +10,6 @@ extern "C" {
 
 extern CampCecSetting *g_campCecSetting;
 
-s32 scrRunOpcodesStub(ScriptProcess *script);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void scriptProcessSetMode(ScriptProcess *script, s32 mode);
 s32 messageGetChoiceResult(void);

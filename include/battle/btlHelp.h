@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+struct BtlUi;
 
 /* The last request word is either an integer route/index or a floating value. */
 union BtlHelpValue {
@@ -120,7 +121,7 @@ void FUN_00229a3c(s32 actorId, u32 options, u32 value, u32 parameter, u32 checkD
 extern "C" {
 #endif
 
-void FUN_00229c5c(u32 unused, u32 first, u32 second);
+void FUN_00229c5c(struct BtlUi *ui, u32 first, u32 second);
 
 #ifdef __cplusplus
 }

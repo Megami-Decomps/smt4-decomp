@@ -2,7 +2,7 @@
 #include "common.h"
 
 /* Functions in the 0x00290000 code block whose subsystem is not known yet; each declaration matches its definition. */
-struct Table21Entry;
+struct CampComRecord;
 struct Obj;
 struct BattleCommandMenu;
 struct MessageOwner;
@@ -12,7 +12,7 @@ struct ScriptFile;
 struct ScriptProcessWork;
 extern "C" {
 
-Table21Entry * FUN_00292844(u32 id);
+CampComRecord *FUN_00292844(u32 id);
 
 void pair40Set(Obj *obj, u32 a, u32 b);
 

@@ -1,6 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "battle/BtlUiGlobal.h"
 
 // The unit the marker follows (observed fields).
 struct MarkerUnit {
@@ -24,13 +25,12 @@ struct MarkerRequest {
 };
 
 extern "C" {
-extern u32 g_btlUiBlock;
 extern BattleVector3 DAT_00493560;
 
 BattleVector3 FUN_0023cd08(void *state, s32 id, s32 flag);
-s32 FUN_00289fa8(u32 block, s32 kind, s32 flag, BattleVector3 position);
-s32 FUN_0023c9e8(u32 block, s32 style, s32 kind, s32 x, s32 y);
-s32 FUN_003ae638(u32 block, s32 handle);
+s32 FUN_00289fa8(BtlUi *block, s32 kind, s32 flag, BattleVector3 position);
+s32 FUN_0023c9e8(BtlUi *block, s32 style, s32 kind, s32 x, s32 y);
+s32 FUN_003ae638(BtlUi *block, s32 handle);
 
 static inline BattleVector3 vectorAdd(BattleVector3 left, BattleVector3 right)
 {

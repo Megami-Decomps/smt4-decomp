@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00231dec` (_code @ 0x231dec, 0x768 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -57,7 +58,6 @@ extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
-extern int gameGetMapBlock(void);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002e039c(int);
@@ -93,7 +93,7 @@ void FUN_00231dec(int param_1)
   float temp_v17;
   int temp_v18;
   
-  temp_v2 = gameGetMapBlock();
+  temp_v2 = (int)gameGetMapBlock();
   temp_v3 = renderCtxPackPassFlags(5,1);
   renderStackPushIndexed(g_titleScene,3,temp_v3);
   temp_v18 = param_1 + 0x162;

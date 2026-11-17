@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/S1GfxModel.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+#include "gfx/GfxSettings.h"
 
 struct Allocator;
 struct AllocatorVTable {
@@ -36,7 +37,6 @@ struct SharedFile {
 
 extern "C" {
 
-extern GfxModelState g_gfxSettings;
 extern u8 DAT_00636ebc;
 extern u8 DAT_00636ec8;
 
@@ -95,7 +95,7 @@ void asdMdlManagerReleaseResources(u32* model, s32 request, u32 unused, s32 unus
 
     SharedFile* shared = reinterpret_cast<SharedFile*>(model[1]);
     s32 remaining = --shared->refCount;
-    if ((model[0] & 2) != 0) g_gfxSettings.unk40--;
+    if ((model[0] & 2) != 0) g_gfxSettings.sharedModels--;
     if (remaining <= 0) {
         s32 resource = reinterpret_cast<SharedFile*>(model[1])->resource;
         if (resource != 0) nw_gfx_res_ResGraphicsFile_Cleanup(&resource);
@@ -109,7 +109,7 @@ void asdMdlManagerReleaseResources(u32* model, s32 request, u32 unused, s32 unus
             indexedListErase(&DAT_00636ebc, node);
         }
         asdMemFree(reinterpret_cast<u32>(file));
-        g_gfxSettings.loadedModels.count--;
+        g_gfxSettings.loadedModelCount--;
         if (request != 0) asdFileRequestRelease(reinterpret_cast<void *>(request));
     }
     asdMemFree(model[9]);
@@ -117,7 +117,7 @@ void asdMdlManagerReleaseResources(u32* model, s32 request, u32 unused, s32 unus
     s32 node = lookupListFindByKey(&DAT_00636ec8, model);
     if (node != 0) indexedListErase(&DAT_00636ec8, node);
     asdMemFree(reinterpret_cast<u32>(model));
-    g_gfxSettings.loadedModels.instanceCount--;
+    g_gfxSettings.modelCount--;
 }
 
 } /* extern "C" */

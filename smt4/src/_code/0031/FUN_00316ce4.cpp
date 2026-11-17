@@ -1,14 +1,13 @@
-#include "shard/SaveWork.h"
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" {
 
-extern SaveWork *gameGetMapBlock(void);
 
 u8 FUN_00316ce4(void)
 {
-    SaveWork *work = gameGetMapBlock();
+    MapSaveBlock *work = gameGetMapBlock();
 
-    return work->unk1C == 1;
+    return work->unk01C == 1;
 }
 
 } /* extern "C" */

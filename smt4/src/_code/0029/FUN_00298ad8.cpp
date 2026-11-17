@@ -3,8 +3,6 @@
 #include "camp/CampState.h"
 
 extern "C" {
-CampMenuEntry *FUN_00292844(u32 id);
-CampMenuEntry *dataTable15Sub0GetEntries(u32 index);
 u32 dataTable15Sub0GetCount(void);
 u8 flagBitIsSet(u32 bit);
 void gridNavigationConfigure(void *list, s32 a, s32 b, s32 c, s32 d, s32 e);
@@ -17,7 +15,7 @@ void FUN_00298ad8(void)
     u8 anyHidden = 0;
 
     for (s32 id = 0; id < 53; id++) {
-        CampMenuEntry *entry = FUN_00292844(id & 0xff);
+        CampComRecord *entry = FUN_00292844(id & 0xff);
         if (entry != NULL && campMenuEntryHidden(entry)) {
             anyHidden = 1;
         }
@@ -26,7 +24,7 @@ void FUN_00298ad8(void)
     s32 visible = 0;
     u32 count = dataTable15Sub0GetCount();
     for (u32 i = 0; i < count; i++) {
-        CampMenuEntry *entry = dataTable15Sub0GetEntries(i);
+        CampComRecord *entry = dataTable15Sub0GetEntries(i);
         if (entry != NULL && entry->group == camp->menuGroup &&
             (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
             (entry->requiredDataBit == 0 || flagBitIsSet(entry->requiredDataBit) != 0)) {

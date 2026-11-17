@@ -1,16 +1,16 @@
 #include "common.h"
+#include "Model/MoriModelContent.h"
+#include "code/Code001c.h"
 
 extern "C" {
 
-struct Scene { u8 unk000[0x190]; void *object; };
+struct Scene { u8 unk000[0x190]; MoriModelContent *object; };
 extern Scene *g_lmapScene;
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-void *modelListInit(void *memory);
-void modelLoadFileAsyncByName(void *object, const char *name);
 
 void lmapCreateJadeKnife(void)
 {
-    void *object = asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapPlayer.cpp", 0x31a1);
+    MoriModelContent *object = static_cast<MoriModelContent *>(asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapPlayer.cpp", 0x31a1));
     if (object != NULL) {
         object = modelListInit(object);
     }

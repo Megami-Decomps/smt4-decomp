@@ -1,27 +1,20 @@
 #include "common.h"
 #include "addon/AocSystem.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 typedef struct BtlAiScriptLoader {
     /* 0x00 */ void *file;
-    /* 0x04 */ void *process;
+    /* 0x04 */ ScriptProcess *process;
     /* 0x08 */ u8 unk08[4];
     /* 0x0C */ s32 step;
     /* 0x10 */ u8 request[1];
 } BtlAiScriptLoader;
 
-typedef struct ScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ s32 running;
-} ScriptProcess;
-
 void aocQueueType1d(AocSystem *system, s32 script, BtlAiScriptLoader *loader, u8 *request);
 void asdLoadFileAsyncSimple(u8 *request, BtlAiScriptLoader *loader, s32 flags);
-ScriptProcess *scrScriptProcessCreate(void *file, s32 arg);
 void scrScriptProcessStartEntry(void *process, s32 index);
-s32 scrRunOpcodesStub(void *process);
-void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *block);
 
 /* Steps the battle AI script: load the file (or the queued add-on script), start it, run it, free it. */
@@ -44,7 +37,7 @@ s32 btlAiScriptLoadStep(BtlAiScriptLoader *loader)
             ScriptProcess *process = scrScriptProcessCreate(loader->file, 0);
 
             loader->process = process;
-            process->running = 1;
+            process->mode = 1;
             scrScriptProcessStartEntry(loader->process, 0);
             loader->step = 3;
         }

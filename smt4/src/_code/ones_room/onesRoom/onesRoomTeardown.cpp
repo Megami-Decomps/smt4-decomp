@@ -1,12 +1,11 @@
 #include "ones_room/onesRoom.h"
 #include "shard/JobWork.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
-void scrScriptProcessDestroy(void *process);
-s32 scrRunOpcodesStub(void *process);
 void uiFadeRelease(s32 arg);
 void buttonHelpRelease(void);
 void screenFadeSlotReset(s32 arg);

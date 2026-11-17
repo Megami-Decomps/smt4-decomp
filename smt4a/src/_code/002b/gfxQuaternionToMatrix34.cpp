@@ -1,21 +1,10 @@
 /* NON_MATCHING: retail copies the second and third matrix rows as a 2-word ldm/stm plus a separate third word (reading the last word first); armcc here copies each row with one 3-word ldm/stm. */
 #include "common.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "gfx/VectorScratch.h"
 
 struct Vec3 {
     f32 x, y, z;
-};
-
-/* The camera scratch block, extended to the workspace rotation at 0x100 and its matrix at 0x140. */
-struct CameraScratchRotation {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ Vector4 rotation;
-    /* 0x110 */ u8 unk110[0x30];
-    /* 0x140 */ Vec3 row0;
-    /* 0x14C */ f32 pad0;
-    /* 0x150 */ Vec3 row1;
-    /* 0x15C */ f32 pad1;
-    /* 0x160 */ Vec3 row2;
 };
 
 /* A 3x4 matrix: three rows and a translation. */
@@ -31,7 +20,6 @@ struct Matrix34 {
 
 extern "C" {
 
-extern CameraScratchRotation g_vectorScratch;
 void matrix44SetIdentity(void);
 void FUN_00514598(void);
 void FUN_001bc460(void);
@@ -40,12 +28,13 @@ void FUN_001bc460(void);
 void gfxQuaternionToMatrix34(Matrix34 *output, const Vector4 *quaternion)
 {
     matrix44SetIdentity();
-    g_vectorScratch.rotation = *quaternion;
+    g_vectorScratch.first.vector = *quaternion;
     FUN_00514598();
     FUN_001bc460();
-    output->row0 = g_vectorScratch.row0;
-    output->row1 = g_vectorScratch.row1;
-    output->row2 = g_vectorScratch.row2;
+    // Copy the first three floats of each of the workspace matrix's rows.
+    output->row0 = *reinterpret_cast<const Vec3 *>(g_vectorScratch.matrix.rows[0]);
+    output->row1 = *reinterpret_cast<const Vec3 *>(g_vectorScratch.matrix.rows[1]);
+    output->row2 = *reinterpret_cast<const Vec3 *>(g_vectorScratch.matrix.rows[2]);
     output->translation.x = 0.0f;
     output->translation.y = 0.0f;
     output->translation.z = 0.0f;

@@ -130,7 +130,6 @@ extern u32 effResourceListHasActiveData(LinkedItems* resources);
 /* Supplied declaration required: asdEffectQueueRelease. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
-
 unsigned int FUN_00388aac(void)
 
 {
@@ -601,7 +600,7 @@ LAB_00389604:
     }
   }
   swapSlotExchange(temp_v11);
-  if (g_effectEditor.unk00[0] != '\0') {
+  if (g_effectEditor.toggle != '\0') {
     asdDebugLog(0xaa,0,6,&LAB_00389790);
   }
   if (DAT_0059dbf0 != 0) {

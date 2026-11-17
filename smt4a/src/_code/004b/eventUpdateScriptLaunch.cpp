@@ -20,7 +20,6 @@ typedef char EventScriptLaunchWorkOffsets[offsetof(EventScriptLaunchWorkView, by
 extern "C" {
 extern EventScriptLaunchGlobalsView DAT_005f16fc;
 void FUN_004b75d0(TransformInterpolation *);
-s32 scrRunOpcodesStub(ScriptProcess *);
 void asdMemFree(void *);
 void messageSetScriptDisplayMode();
 void textFormatBuffer(char *, const char *, ...);

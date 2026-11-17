@@ -1,6 +1,7 @@
 #include "common.h"
 #include "code/Code002c.h"
 #include "util/MemoryHelpers_VariantB.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -12,12 +13,11 @@ typedef struct {
     u8 unk09[3];
     void *bufferA;      /* 0x0c */
     void *bufferB;      /* 0x10 */
-    void *resource;     /* 0x14 */
+    ScriptProcess *resource;     /* 0x14 */
 } Task;
 
 int buttonHelpCreate(void);
 int titleSetSlotValueState2(int index, int value);
-int scrScriptProcessDestroy(void *resource);
 
 /* Resets the task: frees its buffers and resource, then sets phase 12 and updates indices 0/1 whose state is 3. */
 void FUN_00289608(Task *task, u8 flag)

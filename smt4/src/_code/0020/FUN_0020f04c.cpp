@@ -2,6 +2,7 @@
 #include "common.h"
 #include "nn/svc.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "battle/BtlUiGlobal.h"
 
 // Battle main state, indexed by 32-bit word; only the members released here are named.
 enum BattleWord {
@@ -23,7 +24,6 @@ extern "C" {
 extern BattleMainState* g_btlMainState;
 extern s32 DAT_00435d94;
 extern s32 DAT_00435d98;
-extern s32 g_btlUiBlock;
 
 void btlActionFreeData(void);
 void FUN_0026a958(u8 value);

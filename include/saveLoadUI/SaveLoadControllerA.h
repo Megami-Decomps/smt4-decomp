@@ -38,16 +38,11 @@ struct SaveLoadControllerA {
     /* 0x44D */ u8 confirmed;
     /* 0x44E */ u8 canceled;
 };
-struct SaveLoadColorRecordA {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ u8 color[0x40];
-};
 typedef char SaveLoadControllerAOffsetsCheck[
     offsetof(SaveLoadControllerA, resource) == 0x58 &&
     offsetof(SaveLoadControllerA, slotFlags) == 0x2EC &&
     offsetof(SaveLoadControllerA, selectedSlot) == 0x2F8 &&
-    offsetof(SaveLoadControllerA, pending) == 0x44C &&
-    sizeof(SaveLoadColorRecordA) == 0x54 ? 1 : -1];
+    offsetof(SaveLoadControllerA, pending) == 0x44C ? 1 : -1];
 typedef char SaveLoadControllerATouchOffsetsCheck[
     offsetof(SaveLoadControllerA, touch.handles) == 0x43C &&
     offsetof(SaveLoadControllerA, touch.count) == 0x448 &&

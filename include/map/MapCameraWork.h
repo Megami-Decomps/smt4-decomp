@@ -4,113 +4,79 @@
 #include "map/mapDepart.h"
 #include <stddef.h>
 
-struct MapCameraScalarTrack {
-    u32 state;
-    f32 value;
-    union {
-        u8 unk08[0x38];
-        struct {
-            u8 prefix08[4];
-            f32 values[3];
-            u8 suffix18[0x28];
-        } controls;
-    };
-};
-
-/* Recovered prefix of the local-map camera work area. */
-struct MapCameraWork {
-    /* 0x000 */ u32 states[3];
-    /* 0x00C */ u8 unk00C[8];
+/* The field map's camera view (IV; Apocalypse's twin is LmapViewA, whose layout is 4 bytes longer
+ * from 0x1C on), kept by g_mapCamera and LmapViewHolder::view. It holds the look-at camera (eye,
+ * target, up), the follow camera's heading and per-preset distances, the shoulder-button half turn
+ * and the camera move. */
+typedef struct LmapView {
+    /* 0x000 */ s32 mode;           /* camera mode: 3 overview, 0xC scripted */
+    /* 0x004 */ s32 phase;          /* frames in the mode */
+    /* 0x008 */ s32 unk008;
+    /* 0x00C */ s32 unk00C;
+    /* 0x010 */ u8 unk010[4];
     /* 0x014 */ u32 active;
-    union {
-        /* 0x018 */ u8 unk018[4];
-        /* 0x018 */ f32 heading;
-    };
+    /* 0x018 */ f32 heading;        /* the follow camera's heading, degrees */
     /* 0x01C */ MapVector up;
-    /* 0x028 */ u8 unk028[0xC];
+    /* 0x028 */ MapVector upCopy;
     /* 0x034 */ MapVector eye;
-    /* 0x040 */ MapVector targetPosition;
-    /* 0x04C */ MapVector eyeSnapshot;
-    /* 0x058 */ MapVector targetSnapshot;
-    /* 0x064 */ f32 parameters[7];
+    /* 0x040 */ MapVector target;
+    /* 0x04C */ MapVector savedEye;    /* the applied eye */
+    /* 0x058 */ MapVector savedTarget; /* the applied target */
+    /* 0x064 */ MapVector lookFrom;
+    /* 0x070 */ MapVector lookTo;
+    /* 0x07C */ f32 unk07C;
     /* 0x080 */ u8 unk080[0x18];
     /* 0x098 */ f32 scale;
     /* 0x09C */ f32 clipDistance;
     /* 0x0A0 */ f32 timer;
-    /* 0x0A4 */ u8 configured;
+    /* 0x0A4 */ u8 enabled;
     /* 0x0A5 */ u8 unk0A5[3];
-    /* 0x0A8 */ u32 counter;
-    /* 0x0AC */ u32 updateFlags;
-    /* 0x0B0 */ u8 enabled;
-    /* 0x0B1 */ u8 pending;
-    /* 0x0B2 */ u16 duration;
-    /* 0x0B4 */ u16 elapsed;
+    /* 0x0A8 */ u32 state;
+    /* 0x0AC */ s32 contextMode;    /* compared with a map-interface record's destination */
+    /* 0x0B0 */ u8 turning;         /* a half turn is in progress */
+    /* 0x0B1 */ u8 turnHeld;        /* both shoulder buttons are still held after a turn */
+    /* 0x0B2 */ s16 cooldown;
+    /* 0x0B4 */ s16 elapsed;
     /* 0x0B6 */ u8 unk0B6[2];
-    /* 0x0B8 */ f32 transition[3];
-    union {
-        /* 0x0C4 */ MapCameraScalarTrack tracks[5];
-        struct {
-            u32 base;
-            f32 targetHeight[16];
-            f32 eyeHeight[16];
-            f32 lateralDistance[16];
-            f32 rearDistance[16];
-            u8 suffix1C8[0x3C];
-        } followPresets;
-    };
-    /* 0x204 */ u32 unk204;
-    /* 0x208 */ s32 target;
+    /* 0x0B8 */ f32 turnStart;      /* the half turn's start heading, ... */
+    /* 0x0BC */ f32 turnTarget;     /* ... end heading ... */
+    /* 0x0C0 */ f32 turnDirection;  /* ... and direction */
+    /* 0x0C4 */ s32 preset;         /* the follow-camera preset (a column of the tables below) */
+    /* 0x0C8 */ f32 targetHeight[16];
+    /* 0x108 */ f32 eyeHeight[16];
+    /* 0x148 */ f32 lateralDistance[16];
+    /* 0x188 */ f32 rearDistance[16];
+    /* 0x1C8 */ f32 fieldOfView[16]; /* degrees */
+    /* 0x208 */ s32 contextOverride;
     /* 0x20C */ f32 values[4];
     /* 0x21C */ u8 tracking;
     /* 0x21D */ u8 unk21D[0x77];
-    /* 0x294 */ f32 offset[3];
+    /* 0x294 */ MapVector targetOffset;
     /* 0x2A0 */ u32 counters[2];
     /* 0x2A8 */ u16 range[4];
     /* 0x2B0 */ u8 moving;
-    union {
-        /* 0x2B1 */ u8 unk2B1[0xB];
-        struct {
-            u8 prefix2B1[7];
-            u8 enabled;
-            u8 suffix2B9[3];
-        } preset;
-    };
+    /* 0x2B1 */ u8 unk2B1[7];
+    /* 0x2B8 */ u8 presetEnabled;
+    /* 0x2B9 */ u8 unk2B9[3];
     /* 0x2BC */ f32 weight;
-};
+} LmapView;
 
-struct MapCameraGlobals {
-    u32 job;
-    MapCameraWork *work;
-};
+/* The camera module's globals at 0x4474f0 (Apocalypse's LmapViewHolderA); the word after is
+ * g_mapCamera. */
+typedef struct LmapViewHolder {
+    /* 0x00 */ u32 job;
+    /* 0x04 */ LmapView *view;
+} LmapViewHolder;
 
-typedef char MapCameraWorkLayoutCheck[sizeof(MapCameraScalarTrack) == 0x40 &&
-    offsetof(MapCameraScalarTrack, value) == 4 && sizeof(MapCameraWork) == 0x2C0 &&
-    offsetof(MapCameraScalarTrack, state) == 0 &&
-    offsetof(MapCameraWork, states) == 0 && offsetof(MapCameraWork, active) == 0x14 &&
-    offsetof(MapCameraWork, parameters) == 0x64 && offsetof(MapCameraWork, scale) == 0x98 &&
-    offsetof(MapCameraWork, updateFlags) == 0xAC && offsetof(MapCameraWork, enabled) == 0xB0 &&
-    offsetof(MapCameraWork, pending) == 0xB1 && offsetof(MapCameraWork, duration) == 0xB2 &&
-    offsetof(MapCameraWork, elapsed) == 0xB4 && offsetof(MapCameraWork, transition) == 0xB8 &&
-    offsetof(MapCameraWork, up) == 0x1C && offsetof(MapCameraWork, eye) == 0x34 &&
-    offsetof(MapCameraWork, targetPosition) == 0x40 &&
-    offsetof(MapCameraWork, eyeSnapshot) == 0x4C &&
-    offsetof(MapCameraWork, targetSnapshot) == 0x58 &&
-    offsetof(MapCameraWork, clipDistance) == 0x9C &&
-    offsetof(MapCameraWork, timer) == 0xA0 && offsetof(MapCameraWork, configured) == 0xA4 &&
-    offsetof(MapCameraWork, counter) == 0xA8 && offsetof(MapCameraWork, tracks) == 0xC4 &&
-    offsetof(MapCameraWork, target) == 0x208 && offsetof(MapCameraWork, values) == 0x20C &&
-    offsetof(MapCameraWork, tracking) == 0x21C && offsetof(MapCameraWork, offset) == 0x294 &&
-    offsetof(MapCameraWork, counters) == 0x2A0 && offsetof(MapCameraWork, range) == 0x2A8 &&
-    offsetof(MapCameraWork, moving) == 0x2B0 && offsetof(MapCameraWork, weight) == 0x2BC &&
-    sizeof(MapCameraGlobals) == 8 && offsetof(MapCameraGlobals, work) == 4 ? 1 : -1];
-typedef char MapCameraPresetOffsetCheck[
-    offsetof(MapCameraScalarTrack, controls.values) == 0xC &&
-    offsetof(MapCameraWork, preset.enabled) == 0x2B8 &&
-    sizeof(MapCameraScalarTrack) == 0x40 && sizeof(MapCameraWork) == 0x2C0 ? 1 : -1];
-typedef char MapCameraFollowPresetOffsetCheck[
-    offsetof(MapCameraWork, heading) == 0x18 &&
-    offsetof(MapCameraWork, followPresets.base) == 0xC4 &&
-    offsetof(MapCameraWork, followPresets.rearDistance) == 0x188 &&
-    sizeof(MapCameraWork) == 0x2C0 ? 1 : -1];
+typedef char LmapViewOffsets[offsetof(LmapView, heading) == 0x18 && offsetof(LmapView, up) == 0x1C &&
+    offsetof(LmapView, eye) == 0x34 && offsetof(LmapView, savedEye) == 0x4C &&
+    offsetof(LmapView, lookTo) == 0x70 && offsetof(LmapView, scale) == 0x98 &&
+    offsetof(LmapView, state) == 0xA8 && offsetof(LmapView, contextMode) == 0xAC &&
+    offsetof(LmapView, turning) == 0xB0 && offsetof(LmapView, turnStart) == 0xB8 &&
+    offsetof(LmapView, preset) == 0xC4 && offsetof(LmapView, rearDistance) == 0x188 &&
+    offsetof(LmapView, fieldOfView) == 0x1C8 && offsetof(LmapView, contextOverride) == 0x208 &&
+    offsetof(LmapView, tracking) == 0x21C && offsetof(LmapView, targetOffset) == 0x294 &&
+    offsetof(LmapView, moving) == 0x2B0 && offsetof(LmapView, presetEnabled) == 0x2B8 &&
+    sizeof(LmapView) == 0x2C0 && offsetof(LmapViewHolder, view) == 4 ? 1 : -1];
 
 #endif

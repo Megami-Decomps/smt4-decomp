@@ -1,15 +1,14 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/Shard0033.h"
 
 extern "C" {
 
-extern Flags0C0C *gameFlagsGetBlock(void);
-
 void gameFlagsSet(s32 index, s32 value)
 {
-    Flags0C0C *obj = gameFlagsGetBlock();
+    MapSaveBlockA *obj = gameFlagsGetBlock();
 
     if (index < 0x40) {
-        obj->flags[index] = value;
+        obj->timedFlags[index] = value;
     }
 }
 

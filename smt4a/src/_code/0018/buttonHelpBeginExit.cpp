@@ -1,42 +1,40 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-void uiSpriteSelectAnim(void *sprite, s32 animation);
-void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 initial);
-void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 initial);
 void ifTouchDecrementTimer();
-void rangeSelectionSelectEndpoint(void *sprite, s32 enabled, s32 initial);
+void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 enabled, s32 initial);
 
 // Release help touch registrations and start the four panel exit animations.
 void buttonHelpBeginExit(s32 clearKinds)
 {
     ButtonHelpWorkA *work = g_buttonHelp.work;
     for (s32 index = 0; index < 6; ++index) {
-        uiSpriteSelectAnim(&work->units[index], 1);
-        if (work->kinds[index].kind != 0) {
+        uiSpriteSelectAnim(&work->slotSprites[index], 1);
+        if (work->slots[index].kind != 0) {
             if (clearKinds != 0)
-                work->kinds[index].kind = 0;
+                work->slots[index].kind = 0;
             ifTouchDecrementTimer();
-            --work->count;
+            --work->touchCount;
         }
     }
-    if (work->count > 0) {
-        for (s32 index = 0; index < work->count; ++index)
+    if (work->touchCount > 0) {
+        for (s32 index = 0; index < work->touchCount; ++index)
             ifTouchDecrementTimer();
-        work->count = 0;
+        work->touchCount = 0;
     }
     for (s32 index = 0; index < 4; ++index) {
-        if (work->unk5E4 == 1) {
-            uiSpriteSetKeyframe(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 3, 0);
-        } else if (work->unk5E4 == 2) {
-            uiSpriteSetImageKeyframe(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 1, 0);
-            rangeSelectionSelectEndpoint(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 1, 0);
+        if (work->mode == 1) {
+            uiSpriteSetKeyframe(&work->panelSprites[index], 3, 0);
+        } else if (work->mode == 2) {
+            uiSpriteSetImageKeyframe(&work->panelSprites[index], 1, 0);
+            rangeSelectionSelectEndpoint(&work->panelSprites[index], 1, 0);
         } else {
-            rangeSelectionSelectEndpoint(&reinterpret_cast<ButtonHelpUnit *>(work->unk37C)[index], 0, 1);
+            rangeSelectionSelectEndpoint(&work->panelSprites[index], 0, 1);
         }
     }
     work = g_buttonHelp.work;
-    work->unk0C = 0;
+    work->phase = 0;
     work->state = 3;
 }
 }

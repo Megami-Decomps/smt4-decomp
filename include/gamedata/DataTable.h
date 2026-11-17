@@ -60,14 +60,4 @@ void FUN_0029dfc0(int value);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-u32 btlMainGetUnk14(void);
-
-#ifdef __cplusplus
-}
-#endif
-
 #endif

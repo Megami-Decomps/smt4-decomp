@@ -1,20 +1,11 @@
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
+#include "gamedata/MapSystemTable.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
 
-/* A data table 2E entry: the id it answers to and the game flag it sets. */
-typedef struct Table2EEntry {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s16 id;               /* -1 ends the table */
-    /* 0x22 */ s16 gameFlag;         /* 0: none */
-} Table2EEntry;
-
-s32 dataTable2ECount(void);
-Table2EEntry *dataTable2EGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
 
-void gameFlagsGetBlock(void);
 void gameDataSetEntryEnabled(s32 id, u32 arg1, bool enabled);
 
 /* Sets the game flag data table 2E ties to `id` (if it is not set yet), then forwards to
@@ -25,12 +16,12 @@ void FUN_004bc95c(s32 id, u32 arg1)
 
     if (dataTable2ECount() > 0) {
         for (;;) {
-            Table2EEntry *entry = dataTable2EGetEntry(index);
+            MapSystemMapRecord *entry = dataTable2EGetEntry(index);
 
-            if (entry->id == -1) {
+            if (entry->mapId == -1) {
                 break;
             }
-            if (entry->id == id) {
+            if (entry->mapId == id) {
                 if (entry->gameFlag != 0 && gameFlagIsSet(entry->gameFlag) == 0) {
                     gameFlagSetValue(entry->gameFlag, 1, 1);
                 }

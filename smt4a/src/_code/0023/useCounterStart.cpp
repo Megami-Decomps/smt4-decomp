@@ -4,7 +4,6 @@
 #include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
-void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
 void scrollListSetSelectionTracked(void *);
 s32 buttonHelpGetPanelMode(void);
 s32 buttonHelpGetPanelState(void);

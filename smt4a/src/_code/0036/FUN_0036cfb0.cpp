@@ -5,7 +5,6 @@
 
 extern "C" {
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
-s32 scrRunOpcodesStub(ScriptProcess *script);
 void sysPlaySe(s32 sound);
 void cecProcessStart(void);
 void cecProcessCall4(void);

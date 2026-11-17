@@ -1,15 +1,15 @@
 #include "battle/btlTalk.h"
 #include "shard/JobWork.h"
+#include "script/scrScriptProcess.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-void btlUiPanelFadeInWhenReady(u32 arg);
-void scrScriptProcessDestroy(void *process);
+void btlUiPanelFadeInWhenReady(BtlUi *arg);
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
 
 extern BtlTalk *g_btlTalk;
-extern u32 g_btlUiBlock;
 
 /* Destroy callback of the talk screen: frees its blocks and stops the owner job. */
 void btlTalkDestroy(u32 job)

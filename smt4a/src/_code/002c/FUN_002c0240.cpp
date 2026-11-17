@@ -3,11 +3,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "gamedata/GameDataAccess.h"
-
-struct RankingScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 state;
-};
+#include "script/scrScriptProcess.h"
 
 struct RankingTransitionWork {
     /* 0x00 */ u32 task;
@@ -18,7 +14,7 @@ struct RankingTransitionWork {
     /* 0x98 */ u8 sound[0x20];
     /* 0xB8 */ void *heapA;
     /* 0xBC */ void *heapB;
-    /* 0xC0 */ RankingScriptProcess *process;
+    /* 0xC0 */ ScriptProcess *process;
 };
 
 struct RankingSavedState {
@@ -28,12 +24,10 @@ struct RankingSavedState {
 
 extern "C" {
 extern RankingTransitionWork *g_campCecRanking;
-RankingScriptProcess *scrScriptProcessCreate(void *heapA, void *heapB);
 void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 option);
 void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 option);
 void sysPlaySe(u32 sound);
-void scrScriptProcessStartEntry(RankingScriptProcess *process, u32 entry);
-s32 scrRunOpcodesStub(RankingScriptProcess *process);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 uiSpriteAdvanceAnimation(void *sprite, f32 speed);
 s32 padQueryLogicalKey(u32 input, u32 mode);
 s32 padButtonIsPressed(u32 button);
@@ -51,7 +45,7 @@ extern "C" s32 FUN_002c0240()
         if (!asdTMTexTableNodeIsLoaded(46, 1) || work->heapA == NULL || work->heapB == NULL)
             return 0;
         work->process = scrScriptProcessCreate(work->heapA, work->heapB);
-        work->process->state = 2;
+        work->process->mode = 2;
         uiSpriteSetKeyframe(work->sprite, 13, 0);
         uiSpriteSetImageKeyframe(work->sprite, 21, 0);
         if ((reinterpret_cast<RankingSavedState *>(gameDataBlocksGetSaveData())->flags & 0x3ff) == 0) {

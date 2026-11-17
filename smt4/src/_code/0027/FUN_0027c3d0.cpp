@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027c3d0` (_code @ 0x27c3d0, 0x878 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
 
@@ -40,7 +41,6 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: lightOwnerRegister. */
 extern int modelHasLoadedAttachment(unsigned int);
 extern int gameFlagIsSet(void);
-extern int gameGetMapBlock(void);
 
 
 unsigned int FUN_0027c3d0(void)
@@ -63,7 +63,7 @@ unsigned int FUN_0027c3d0(void)
   unsigned int in_fpscr;
   int temp_v10;
   
-  temp_v0 = gameGetMapBlock();
+  temp_v0 = (int)gameGetMapBlock();
   temp_v5 = *(short *)(g_mapStateSlots + 8);
   if (temp_v5 != 0) {
     if (temp_v5 != 1) {

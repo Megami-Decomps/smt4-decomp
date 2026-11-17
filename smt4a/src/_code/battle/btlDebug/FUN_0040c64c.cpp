@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BtlUiObjCQuery.h"
+#include "battle/BtlUiGlobal.h"
 
 // A battle unit record (the fields this step touches).
 struct UnitRecordView {
@@ -69,7 +70,6 @@ extern "C" {
 extern BlockedStateMasks g_btlActionReflect;
 extern BattleAuxView *g_btlAux;
 extern UiMarkerLayout DAT_0057a634;
-extern u32 g_btlUiBlock;
 
 void FUN_003e7ef0(BattleStateView *state);
 void FUN_003ed238(BattleStateView *state, u32 flags);

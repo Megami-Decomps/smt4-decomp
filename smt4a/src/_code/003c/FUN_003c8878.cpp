@@ -35,27 +35,27 @@ u32 FUN_003c8878(u32 flags)
 
     input.state = 0;
 
-    if (g_effectEditor.textRequest.owner != NULL) {
-        FUN_00381874(g_effectEditor.textRequest.request);
-        input.state = g_effectEditor.textRequest.request->state;
-        input.kind = formattedTextCopyLabel(g_effectEditor.textRequest.request, input.label);
-        input.value = linkedObjGetValue(g_effectEditor.textRequest.request);
+    if (g_effectEditor.nodeList != NULL) {
+        FUN_00381874(g_effectEditor.request);
+        input.state = g_effectEditor.request->state;
+        input.kind = formattedTextCopyLabel(g_effectEditor.request, input.label);
+        input.value = linkedObjGetValue(g_effectEditor.request);
         if (input.state == 1) {
-            handleHolderFree(g_effectEditor.textRequest.request);
-            g_effectEditor.textRequest.request = NULL;
-            nodeListFree(g_effectEditor.textRequest.owner);
-            g_effectEditor.textRequest.owner = NULL;
+            handleHolderFree(g_effectEditor.request);
+            g_effectEditor.request = NULL;
+            nodeListFree(g_effectEditor.nodeList);
+            g_effectEditor.nodeList = NULL;
         }
     } else {
-        g_effectEditor.textRequest.owner = NULL;
+        g_effectEditor.nodeList = NULL;
         if (flags & 8) {
             for (u32 i = 0; i < 22; i++) {
                 textFormatBuffer(name, "GENERAL %d", i);
-                effMenuAppendNamedEntry(g_effectEditor.textRequest.owner, name, 8, i, 0);
+                effMenuAppendNamedEntry(g_effectEditor.nodeList, name, 8, i, 0);
             }
         }
-        EffectTextRequest *request = effMenuCreate(g_effectEditor.textRequest.owner);
-        g_effectEditor.textRequest.request = request;
+        EffectTextRequest *request = effMenuCreate(g_effectEditor.nodeList);
+        g_effectEditor.request = request;
         request->type = 186;
         request->size = 28;
     }
@@ -63,14 +63,14 @@ u32 FUN_003c8878(u32 flags)
         result = (u32)&DAT_00400000;
     } else if (input.state == 1) {
         if (input.kind != 8) {
-            EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.selection.list, -input.value);
-            if (g_effectEditor.selection.item != item) {
-                FUN_003ca0ec(g_effectEditor.selection.list, g_effectEditor.selection.item);
-                linkedItemsRedirectToReplacement(g_effectEditor.selection.list, g_effectEditor.selection.item, item);
+            EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.list, -input.value);
+            if (g_effectEditor.item != item) {
+                FUN_003ca0ec(g_effectEditor.list, g_effectEditor.item);
+                linkedItemsRedirectToReplacement(g_effectEditor.list, g_effectEditor.item, item);
             }
         } else {
-            FUN_003ca0ec(g_effectEditor.selection.list, g_effectEditor.selection.item);
-            effBlockCopyDataB(g_effectEditor.selection.block, &input.value, 4);
+            FUN_003ca0ec(g_effectEditor.list, g_effectEditor.item);
+            effBlockCopyDataB(g_effectEditor.block, &input.value, 4);
         }
         result = (u32)&DAT_00400002;
     }

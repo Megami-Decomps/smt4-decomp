@@ -1,11 +1,11 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern u32 g_btlUiBlock; /* 0x57a9c8 */
 
-void btlUiClearSelectionSlots(u32 block);
+void btlUiClearSelectionSlots(BtlUiA *block);
 void FUN_003f26d4(BtlMainStateA *battle);
 void FUN_003ebc08(BtlMainStateA *battle, s32 flag);
 

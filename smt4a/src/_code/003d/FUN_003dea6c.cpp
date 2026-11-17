@@ -1,22 +1,17 @@
 /* NON_MATCHING: argument/count address sharing, saved frame, title cold-branch and switch tail layout differ. */
 #include "common.h"
+#include "gamedata/PlayLogTable.h"
 #include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "code/Code0035.h"
 
-struct DefinitionMessageDescriptor {
-    s16 id;
-    char name[53];
-    char suffix[1];
-};
 extern "C" {
 const char* dataFindKindRecordWithAocOverrides(u16 id, s32 converted);
 const char* dataTable01GetRecordWithAocOverride(u16 id);
 const char* dataTable0cFindByKey(u16 id);
 char* libc_strcpy(char* destination, const char* source);
 s32 FUN_002ebda8(void);
-DefinitionMessageDescriptor* dataTableGetEntry37(s32 index);
 
 void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
 {
@@ -64,9 +59,9 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
                 case 8: {
                     s32 count = FUN_002ebda8();
                     for (s32 descriptorIndex = 0; descriptorIndex < count; ++descriptorIndex) {
-                        DefinitionMessageDescriptor* descriptor = dataTableGetEntry37(descriptorIndex);
+                        PlayLogRecord *descriptor = dataTableGetEntry37(descriptorIndex);
                         // The retail lookup compares the key before checking the returned pointer.
-                        if (descriptor->id == static_cast<s16>(argument->id)) {
+                        if (descriptor->counter == static_cast<s16>(argument->id)) {
                             if (descriptor) {
                                 scrSetStringSlot(index + 41, descriptor->name);
                                 FUN_00359974(index + 42, argument->count, -1, 0);

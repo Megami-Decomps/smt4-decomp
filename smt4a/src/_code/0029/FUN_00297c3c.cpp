@@ -14,7 +14,7 @@ void FUN_00297c3c(void)
         for (s32 i = 0; i < 3; i++) {
             EngineEffectRecord *record = &g_engineRecordList->nearest[i];
             if (record->active != 0) {
-                ControllerModel *model = record->ownModels->model;
+                Obj557b18 *model = record->ownModels->body;
                 if (g_gameState.loading != 0) {
                     if ((model->flags & 1) == 0) {
                         model->flags |= 3;
@@ -24,7 +24,8 @@ void FUN_00297c3c(void)
                         model->flags &= ~3;
                     }
                     if (record->visible != 0) {
-                        controllerSetDestination(model, record->position);
+                        /* The record position's x, y, z. */
+                        controllerSetDestination(model, reinterpret_cast<const MapVector *>(record->position));
                         controllerSetRotationEulerDegrees(model, 0.0f, record->spatial.fourth, 0.0f);
                         if (slots4FGetActiveValue(model) != record->variant) {
                             modelPlayClip(model, record->variant, 2, 0.0f, 0.0f);
@@ -38,11 +39,11 @@ void FUN_00297c3c(void)
     for (s32 i = 0; i < 32; i++) {
         EngineEffectRecord *record = &g_engineRecordList->records[i];
         if (record->active != 0 && record->state != 8 && record->control.unmanaged == 0) {
-            ControllerModel *model;
+            Obj557b18 *model;
             if (record->flag2C != 0) {
-                model = record->ownModels->model;
+                model = record->ownModels->body;
             } else {
-                model = g_engineRecordList->models[record->modelSlot].models->model;
+                model = g_engineRecordList->models[record->modelSlot].models->body;
             }
             if (g_gameState.loading != 0) {
                 if ((model->flags & 1) == 0) {
@@ -68,7 +69,8 @@ void FUN_00297c3c(void)
                     }
                 }
                 if (record->visible != 0) {
-                    controllerSetDestination(model, record->position);
+                    /* The record position's x, y, z. */
+                    controllerSetDestination(model, reinterpret_cast<const MapVector *>(record->position));
                     controllerSetRotationEulerDegrees(model, 0.0f, record->spatial.fourth, 0.0f);
                     if (slots4FGetActiveValue(model) != record->variant) {
                         modelPlayClip(model, record->variant, 2, 0.0f, 0.0f);

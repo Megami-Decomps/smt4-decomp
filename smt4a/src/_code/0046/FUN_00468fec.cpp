@@ -1,6 +1,7 @@
 /* NON_MATCHING: typed rewrite; everything matches except register allocation of the four-slot copy (retail temporaries r2/r3/ip and a shared r0+256 base for the last record, build uses r3 and per-record bases). */
 #include "common.h"
 #include "gfx/ControllerModel.h"
+#include "Model/MoriModelContent.h"
 #include "code/Code003a.h"
 #include "code/Code0034.h"
 #include "code/Code0037.h"
@@ -8,18 +9,6 @@
 #include "ui/UiControl.h"
 #include "code/Code0021_Smt4a.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
-
-/* A model whose blend weight lives at 0x1FC. */
-struct QuestControllerModel : ControllerModel {
-    u8 unk08[0x1F4];
-    f32 weight; // 0x1FC
-};
-
-/* A holder whose second word points at its model. */
-struct QuestModelHolder {
-    u8 unk00[4];
-    QuestControllerModel *model;
-};
 
 /* One of the four candidate quests the chooser lists. */
 struct QuestMatchRecord {
@@ -51,9 +40,9 @@ struct QuestChoiceWork {
     /* 0x019 */ u8 entryToken[0x29B];
     /* 0x2B4 */ u32 *script;
     /* 0x2B8 */ u8 unk2B8[0x770];
-    /* 0xA28 */ QuestModelHolder *pointerHolder;
+    /* 0xA28 */ MoriModelContent *pointerHolder;
     /* 0xA2C */ u8 unkA2C[0x20];
-    /* 0xA4C */ QuestModelHolder *cursorHolder;
+    /* 0xA4C */ MoriModelContent *cursorHolder;
     /* 0xA50 */ u8 unkA50[0x290];
     /* 0xCE0 */ u32 cursorMode;
     /* 0xCE4 */ u8 unkCE4[8];
@@ -82,7 +71,7 @@ s32 messageGetChoiceResult(void);
 void messageBannerRestartOrClear(void);
 
 /* Makes the cursor model visible when it is hidden. */
-static __inline void showModel(ControllerModel *model)
+static __inline void showModel(Obj557b18 *model)
 {
     if ((model->flags & 1) == 0) {
         model->flags |= 1;
@@ -126,14 +115,14 @@ void FUN_00468fec(QuestChoiceWork *work)
             if (value != 3) {
                 if (work->cursorMode != 0) {
                     work->cursorMode = 0;
-                    showModel(work->cursorHolder->model);
+                    showModel(work->cursorHolder->body);
                 }
-                showModel(work->cursorHolder->model);
+                showModel(work->cursorHolder->body);
             } else {
                 if (work->cursorMode != 7) {
                     work->cursorMode = 7;
                 }
-                ControllerModel *model = work->cursorHolder->model;
+                Obj557b18 *model = work->cursorHolder->body;
                 if ((model->flags & 1) != 0) {
                     model->flags &= ~1u;
                 }
@@ -205,10 +194,10 @@ void FUN_00468fec(QuestChoiceWork *work)
         FUN_00214da4();
         work->state = 10;
         work->counter = 0;
-        QuestControllerModel *model = work->pointerHolder->model;
+        Obj557b18 *model = work->pointerHolder->body;
         modelPlayClip(model, 0, 0, 0.0f, 0.0f);
-        model->weight = 1.0f;
-        showModel(work->cursorHolder->model);
+        model->speed = 1.0f;
+        showModel(work->cursorHolder->body);
         break;
     }
     }

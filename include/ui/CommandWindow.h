@@ -8,18 +8,15 @@ typedef struct CommandWindow {
         /* 0x000 */ u8 unk000[8];
         /* 0x000 */ u32 process;
     };
-    /* 0x008 */ u32 unk08;
-    /* 0x00C */ u8 unk00C[4];
+    /* 0x008 */ u32 phase;          /* 0 idle, 1 opening, 2 shown, 3 waiting, 4 closing */
+    /* 0x00C */ u32 phaseTimer;     /* frames since the phase began */
     /* 0x010 */ u8 textEnabled;
     /* 0x011 */ u8 unk11;
     /* 0x012 */ u8 unk12[2];
     /* 0x014 */ u32 state;
     /* 0x018 */ u16 value;
     /* 0x01A */ u8 unk01A[0x22];
-    union {
-        /* 0x03C */ u8 unk3C[0x118];
-        /* 0x03C */ UiSpriteState sprites[2];
-    };
+    /* 0x03C */ UiSpriteState sprites[2]; /* the upper-left and upper-right windows */
     /* 0x154 */ char text[0x31];
 } CommandWindow;
 extern "C" CommandWindow *g_comWin;
@@ -28,7 +25,9 @@ extern "C" CommandWindow *g_comWin;
 typedef char CommandWindowSizeCheck[sizeof(CommandWindow) == 0x188 ? 1 : -1];
 typedef char CommandWindowSpriteOffsets[
     __INTADDR__(&((CommandWindow *)0)->process) == 0 &&
+    __INTADDR__(&((CommandWindow *)0)->phase) == 8 &&
     __INTADDR__(&((CommandWindow *)0)->sprites) == 0x3C &&
+    __INTADDR__(&((CommandWindow *)0)->text) == 0x154 &&
     sizeof(CommandWindow) == 0x188 ? 1 : -1];
 
 #endif

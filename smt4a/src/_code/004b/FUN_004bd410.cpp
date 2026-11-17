@@ -1,6 +1,8 @@
 /* NON_MATCHING: readable rewrite with slot helpers compiles; inlined slot-search loops are shaped differently from retail (168 vs 194 rows) */
 #include "common.h"
 #include "gamedata/SkillDataRecord.h"
+#include "gamedata/GuestParamTable.h"
+#include "code/Code0037.h"
 
 // Party/demon slot (0x134 bytes): only the fields used here.
 struct PartySlot {
@@ -25,16 +27,10 @@ struct DevilGrowth {
     u16 skillType;      // 0x26
 };
 
-struct ParentLink {
-    u8 unk00[4];
-    u16 parentId;       // 0x04
-};
-
 extern "C" {
 
 PartySlotTable* gameGetSlotTable(void);
 void battleRecordInitializeFromDefinition(PartySlot* slot, s32 mode);
-ParentLink* FUN_00370ecc(u32 id);
 void FUN_003e4b2c(u32 id);
 u32 dataTable0aSub0GetValueById(u32 id);
 s32 FUN_0035e458(u32 skill);
@@ -87,7 +83,7 @@ void FUN_004bd410(u32 id)
         battleRecordInitializeFromDefinition(slot, 0);
     }
 
-    ParentLink* link = FUN_00370ecc(id);
+    GuestParamRecord *link = FUN_00370ecc(id);
     if (link == NULL || id == link->parentId) return;
     u32 parentId = link->parentId;
 

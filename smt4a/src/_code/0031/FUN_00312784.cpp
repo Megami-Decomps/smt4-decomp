@@ -1,18 +1,12 @@
-#include "common.h"
-
-struct MapGimicFlag {
-    /* 0x00 */ u8 unk00[0x7c];
-    /* 0x7c */ s32 flag;
-};
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
 
-extern MapGimicFlag *g_mapGimic;
 
-/* Script command: raises the map gimic flag at 0x7c. */
+/* Script command: raises the map gimic script flag 4. */
 u32 FUN_00312784(void)
 {
-    g_mapGimic->flag = 1;
+    g_mapGimic->scriptFlags[4] = 1;
     return 1;
 }
 

@@ -1,8 +1,8 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern void *g_btlUiBlock;
-void btlUiPlaySceneFadeOutWhenReady(void *block);
+void btlUiPlaySceneFadeOutWhenReady(BtlUi *block);
 }
 
 extern "C" s32 FUN_00324120(void)

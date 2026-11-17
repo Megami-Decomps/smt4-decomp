@@ -1,24 +1,14 @@
 /* NON_MATCHING: SDK quaternion/vector copies use different integer/VFP registers, matrix-dot scheduling, and final-call tail sharing. */
 #include "AsdSDK/Source/Gfx/Effect/EffectTimeline.h"
 #include <string.h>
+#include "gfx/VectorScratch.h"
 
 namespace {
-// The composition factor and matrix extend beyond the shared quaternion workspace prefix.
-struct EffectRotationWorkspace {
-    QuaternionWorkspace base;
-    RotationQuaternion factor;
-    u8 unk120[0x20];
-    f32 matrix[4][4];
-};
-typedef char EffectRotationWorkspaceMatrixOffsetCheck[
-    offsetof(EffectRotationWorkspace, factor) == 0x110 &&
-    offsetof(EffectRotationWorkspace, matrix) == 0x140 ? 1 : -1];
 /* The orientation handler, called here with the composed rotation quaternion. */
 typedef void (*ApplyEffectRotation)(void *data, const RotationQuaternion *rotation);
 }
 
 extern "C" {
-extern EffectRotationWorkspace g_vectorScratch;
 void gfxQuaternionWorkspaceBuildMatrix(void);
 void FUN_002a2c00(void);
 void FUN_002a3ab0(EffectTimelinePart *part, const f32 *origin);
@@ -26,28 +16,28 @@ void FUN_002a3ab0(EffectTimelinePart *part, const f32 *origin);
 // Rotate the part's local position and propagate the composed rotation to its children.
 void FUN_002a3958(EffectTimelinePart *part, const RotationQuaternion *rotation)
 {
-    EffectRotationWorkspace *workspace = &g_vectorScratch;
-    workspace->base.rotation = *rotation;
-    part->transform.rotation = workspace->base.rotation;
-    RotationQuaternion parentRotation = workspace->base.rotation;
+    VectorScratch *workspace = &g_vectorScratch;
+    workspace->first.rotation = *rotation;
+    part->transform.rotation = workspace->first.rotation;
+    RotationQuaternion parentRotation = workspace->first.rotation;
     gfxQuaternionWorkspaceBuildMatrix();
-    memcpy(&workspace->base.rotation, part->transform.localPosition, sizeof(RotationQuaternion));
-    f32 x = workspace->base.rotation.x;
-    f32 y = workspace->base.rotation.y;
-    f32 z = workspace->base.rotation.z;
+    memcpy(&workspace->first.rotation, part->transform.localPosition, sizeof(RotationQuaternion));
+    f32 x = workspace->first.rotation.x;
+    f32 y = workspace->first.rotation.y;
+    f32 z = workspace->first.rotation.z;
     RotationQuaternion rotatedPosition = {
-        x * workspace->matrix[0][0] + y * workspace->matrix[1][0] + z * workspace->matrix[2][0],
-        x * workspace->matrix[0][1] + y * workspace->matrix[1][1] + z * workspace->matrix[2][1],
-        x * workspace->matrix[0][2] + y * workspace->matrix[1][2] + z * workspace->matrix[2][2],
-        x * workspace->matrix[0][3] + y * workspace->matrix[1][3] + z * workspace->matrix[2][3]
+        x * workspace->matrix.rows[0][0] + y * workspace->matrix.rows[1][0] + z * workspace->matrix.rows[2][0],
+        x * workspace->matrix.rows[0][1] + y * workspace->matrix.rows[1][1] + z * workspace->matrix.rows[2][1],
+        x * workspace->matrix.rows[0][2] + y * workspace->matrix.rows[1][2] + z * workspace->matrix.rows[2][2],
+        x * workspace->matrix.rows[0][3] + y * workspace->matrix.rows[1][3] + z * workspace->matrix.rows[2][3]
     };
-    workspace->base.rotation = rotatedPosition;
-    memcpy(part->transform.position, &workspace->base.rotation, sizeof(RotationQuaternion));
+    workspace->first.rotation = rotatedPosition;
+    memcpy(part->transform.position, &workspace->first.rotation, sizeof(RotationQuaternion));
     for (EffectTimelinePart *child = part->children; child != NULL; child = child->next) {
-        workspace->base.rotation = child->transform.rotation;
-        workspace->factor = parentRotation;
+        workspace->first.rotation = child->transform.rotation;
+        workspace->second.rotation = parentRotation;
         FUN_002a2c00();
-        RotationQuaternion composed = workspace->base.rotation;
+        RotationQuaternion composed = workspace->first.rotation;
         ApplyEffectRotation apply = reinterpret_cast<ApplyEffectRotation>(
             g_handlerTable[child->block->type].setOrientation);
         if (apply != NULL)

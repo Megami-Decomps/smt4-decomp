@@ -1,22 +1,18 @@
-#include "common.h"
+#include "gamedata/MapSystemTable.h"
 
 extern "C" {
 
-extern u32 dataTableGetCount(u32 table);
-extern int dataTableGetEntries(void);
-extern u32 dataTableGet(u32 id, u32 index);
-
-/* Address of record `index` (0x2c-byte records) of data table 0x2e/2, or 0 when out of range. */
-int dataTable2eSub2GetRecord(u32 index)
+/* Map row `index` (MapSystemTable.tbb table 2), or NULL when out of range. */
+MapSystemMapRecord *dataTable2eSub2GetRecord(u32 index)
 {
-    u32 table = dataTableGet(0x2e, 2);
-    int entries = dataTableGetEntries();
+    void *table = dataTableGet(0x2e, 2);
+    MapSystemMapRecord *entries = mapSystemMapRecords(table);
     u32 count = dataTableGetCount(table);
 
     if (index >= count) {
-        entries = 0;
+        entries = NULL;
     } else {
-        entries = entries + index * 0x2c;
+        entries = entries + index;
     }
     return entries;
 }

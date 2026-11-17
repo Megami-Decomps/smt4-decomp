@@ -4,6 +4,7 @@
 #include "shard/S1GfxModel.h"
 #include "classes/AsdAllocatorObject.h"
 #include "AsdSDK/AsdDebug.h"
+#include "gfx/GfxSettings.h"
 
 struct ModelInstanceDescription {
     u8 first, second;
@@ -25,7 +26,6 @@ struct ModelInstanceDescription {
     }
 };
 extern "C" {
-extern GfxModelState g_gfxSettings;
 AsdAllocatorObject *asdMemoryGetAllocatorA();
 EmitterCloneModelBody *FUN_001b6d08(const ModelInstanceDescription *description, s32 mode,
     void *resource, AsdAllocatorObject *allocator);
@@ -65,7 +65,7 @@ void asdMdlNodeCopyData(AsdMdlNode *destination, AsdMdlNode *source, s32 mode)
     if ((source->flags & 2) != 0) {
         FUN_00386548(result->instance);
         destination->flags |= 2;
-        ++g_gfxSettings.unk40;
+        ++g_gfxSettings.sharedModels;
     }
     destination->file = source->file;
     ++destination->file->refCount;

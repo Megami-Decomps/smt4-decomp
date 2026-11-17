@@ -4,10 +4,10 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "code/Code0015.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BattleUi;
 extern "C" {
-extern BattleUi *g_btlUiBlock;
 s32 FUN_004ab718(void);
 s32 renderCtxPackPassFlags(s32 enabled, s32 option);
 void efctSetSpeed(f32 alpha);

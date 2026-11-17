@@ -6,11 +6,10 @@
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "game/GameState.h"
 
-/* NodeEnableResource is this code's partial view of the model (AsdMdlNode). */
 extern "C" {
 f32 sqrtf(f32 value);
-void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
-void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
+void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 }
 
 /* Starts sinking once the player is more than 300 units away, raises the model back by 50 a frame
@@ -39,27 +38,27 @@ void Obj42233c::stop()
             basePosition[1] + offset[1],
             basePosition[2] + offset[2]
         };
-        NodeEnableNode *node = (NodeEnableNode *)handle;
-        nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(node->resource), 0, translated);
-        modelPartSetRotationDegrees(((NodeEnableNode *)handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
-        nodeSetScale(((NodeEnableNode *)handle)->resource, 0, scale[0], scale[1], scale[2]);
+        AsdMdlObject *node = (AsdMdlObject *)handle;
+        nodeSetTranslation(node->node, 0, translated);
+        modelPartSetRotationDegrees(((AsdMdlObject *)handle)->node, 0, rotation[0], rotation[1], rotation[2]);
+        nodeSetScale(((AsdMdlObject *)handle)->node, 0, scale[0], scale[1], scale[2]);
         if ((flags & 4) != 0) {
-            node = (NodeEnableNode *)handle;
+            node = (AsdMdlObject *)handle;
             if ((node->flags & 2) == 0) {
                 node->flags |= 2;
-                node->resource->target->enabled = 0;
+                node->node->sceneNode->positionFollowed = 0;
             }
         } else if (g_gameState.loading) {
-            node = (NodeEnableNode *)handle;
+            node = (AsdMdlObject *)handle;
             if ((node->flags & 2) == 0) {
                 node->flags |= 2;
-                node->resource->target->enabled = 0;
+                node->node->sceneNode->positionFollowed = 0;
             }
         } else {
-            node = (NodeEnableNode *)handle;
+            node = (AsdMdlObject *)handle;
             if ((node->flags & 2) != 0) {
                 node->flags &= ~2;
-                node->resource->target->enabled = 1;
+                node->node->sceneNode->positionFollowed = 1;
             }
         }
     }

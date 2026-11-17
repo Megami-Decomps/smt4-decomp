@@ -8,6 +8,7 @@
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
@@ -18,7 +19,6 @@ void asdListBoxAddItems(AsdListBox *list, const AsdListBoxEntry *entries, s32 co
 void asdListBoxSetByteValue(u32 list, s32 enabled);
 void jobSetText(u32 job, const char *text);
 void FUN_003c5150(BattleDebugWork *work, BtlMainState *state);
-extern void *g_btlUiBlock;
 extern const AsdListBoxEntry btlDebugMenuEntries[11];
 extern const char btlDebugMenuTitle[]; // "btl Debug Menu"
 
@@ -48,7 +48,7 @@ void btlDebugOpen(BtlMainState *state, s32 menuMode)
         FUN_003c5150(work, state);
     }
     if (g_btlUiBlock != NULL) {
-        FUN_0025c2d0(reinterpret_cast<u32>(g_btlUiBlock), 1);
+        FUN_0025c2d0(g_btlUiBlock, 1);
     }
 }
 }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fa8e4` (_code @ 0x1fa8e4, 0x9d8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
@@ -77,7 +78,6 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int padIsButtonRepeat(unsigned int);
 extern int padIsButtonPressed(unsigned int);
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: mapEnemyAdvancePursuit. */
 /* Supplied declaration required: FUN_003a66c4. */
 /* Supplied declaration required: FUN_003a6988. */
@@ -119,7 +119,7 @@ void FUN_001fa8e4(void)
   unsigned int uStack_5c;
   unsigned int uStack_58;
   
-  temp_v2 = gameGetMapBlock();
+  temp_v2 = (int)gameGetMapBlock();
   temp_v21 = 20.0f;
   temp_v0 = 0;
   temp_v17 = 0.0f;

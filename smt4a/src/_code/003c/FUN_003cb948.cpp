@@ -2,31 +2,27 @@
 #include "common.h"
 #include "classes/Obj4209cc.h"
 #include "Model/MoriModelManager.h"
+#include "map/LmapMainGlobals.h"
+#include "Model/MoriModelContent.h"
 
 struct AreaHandleList {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ u32 count;
 };
 
-struct AreaHandleScene {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ AreaHandleList *handles;
-};
+/* The slot's registration byte, read unsigned as retail does here. */
+static __inline u8 &areaSlotRegistered(LmapMainStateA *state, u32 index)
+{
+    return reinterpret_cast<u8 &>(state->areaSlots[index].registered);
+}
 
-struct AreaHandleRegistration {
-    /* 0x00 */ u8 registered;
-    /* 0x01 */ u8 unk01[0x87];
-};
-
-struct AreaHandleVisibilityState {
-    /* 0x000 */ u8 unk000[0xae4];
-    /* 0xAE4 */ AreaHandleScene *scene;
-    /* 0xAE8 */ u8 unkae8[0x90];
-    /* 0xB78 */ AreaHandleRegistration entries[1];
-};
+/* The area model's node list (its binding), as this unit reads it. */
+static __inline AreaHandleList *areaHandles(LmapMainStateA *state)
+{
+    return reinterpret_cast<AreaHandleList *>(state->areaModel->binding);
+}
 
 extern "C" {
-extern AreaHandleVisibilityState *g_lmapMainState;
 extern s8 DAT_005f0c04[];
 void FUN_00399290(u32 index, s32 visible);
 }
@@ -35,26 +31,26 @@ void FUN_00399290(u32 index, s32 visible);
 extern "C" void FUN_003cb948(const s8 grid[10][8])
 {
     u32 count = 0;
-    AreaHandleVisibilityState *state = g_lmapMainState;
+    LmapMainStateA *state = g_lmapMainState;
     for (s32 column = 0; column < 8; ++column) {
         for (s32 row = 0; row < 10; ++row) {
             if (grid[row][column] != 9)
                 DAT_005f0c04[count++] = grid[row][column];
         }
     }
-    for (u32 index = 0; index < state->scene->handles->count; ++index) {
+    for (u32 index = 0; index < areaHandles(state)->count; ++index) {
         if (DAT_005f0c04[index] == 1) {
-            if (g_lmapMainState == NULL || !g_lmapMainState->entries[index].registered) {
-                handleRegistryRegisterObject(g_handleRegistry, ptrVectorAt(state->scene->handles, index));
-                if (g_lmapMainState != NULL && !g_lmapMainState->entries[index].registered)
-                    g_lmapMainState->entries[index].registered = 1;
+            if (g_lmapMainState == NULL || !areaSlotRegistered(g_lmapMainState, index)) {
+                handleRegistryRegisterObject(g_handleRegistry, ptrVectorAt(areaHandles(state), index));
+                if (g_lmapMainState != NULL && !areaSlotRegistered(g_lmapMainState, index))
+                    areaSlotRegistered(g_lmapMainState, index) = 1;
             }
             FUN_00399290(index, 1);
         } else {
-            if (g_lmapMainState != NULL && g_lmapMainState->entries[index].registered) {
-                ptrListRemoveClearOwner(g_handleRegistry, ptrVectorAt(state->scene->handles, index));
-                if (g_lmapMainState != NULL && g_lmapMainState->entries[index].registered)
-                    g_lmapMainState->entries[index].registered = 0;
+            if (g_lmapMainState != NULL && areaSlotRegistered(g_lmapMainState, index)) {
+                ptrListRemoveClearOwner(g_handleRegistry, ptrVectorAt(areaHandles(state), index));
+                if (g_lmapMainState != NULL && areaSlotRegistered(g_lmapMainState, index))
+                    areaSlotRegistered(g_lmapMainState, index) = 0;
             }
             FUN_00399290(index, 0);
         }

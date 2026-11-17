@@ -3,10 +3,10 @@
 #include "battle/BtlFlagWord.h"
 #include "code/Code0024.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern void *g_btlUiBlock;
 
 /* Enables the battle feature and records its active flag. */
 s32 scrCommBattleEnableFeature(void)

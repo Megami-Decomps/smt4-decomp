@@ -1,5 +1,5 @@
 /* NON_MATCHING: switch range/table placement and shared text-record header-byte adjustment differ. */
-#include "gamedata/DataTable.h"
+#include "gamedata/PartyPanelHelp.h"
 #include "ui/PartyPanelState.h"
 
 extern "C" {
@@ -30,23 +30,23 @@ void FUN_0026c868()
     case 10:
         if (panel->fusionParentCount == 0) {
             void *table = dataTableGet(0x39, 0);
-            const char *entries = static_cast<const char *>(dataTableGetEntries(table));
+            PartyPanelHelpRecord *entries = partyPanelHelpRecords(table);
             if (dataTableGetCount(table) > 3) {
-                text = entries + 0xfd;
+                text = entries[3].text;
             }
         } else if (panel->fusionParentCount == 1) {
             void *table = dataTableGet(0x39, 0);
-            const char *entries = static_cast<const char *>(dataTableGetEntries(table));
+            PartyPanelHelpRecord *entries = partyPanelHelpRecords(table);
             if (dataTableGetCount(table) > 4) {
-                text = entries + 0x151;
+                text = entries[4].text;
             }
         }
         break;
     case 11: {
         void *table = dataTableGet(0x39, 0);
-        const char *entries = static_cast<const char *>(dataTableGetEntries(table));
+        PartyPanelHelpRecord *entries = partyPanelHelpRecords(table);
         if (dataTableGetCount(table) > 5) {
-            text = entries + 0x1a5;
+            text = entries[5].text;
         }
         break;
     }

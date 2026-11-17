@@ -2,9 +2,9 @@
 #include "map/SceneSpawn.h"
 #include "map/LmapGlobals.h"
 #include "gamedata/DataTableAccess_AocTable23.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
-extern SceneViewHeading *g_mapCamera;
 u32 table23FindRecordByKey(void);
 
 /* Restores the spawn position, both position snapshots, and the scene and view headings. */

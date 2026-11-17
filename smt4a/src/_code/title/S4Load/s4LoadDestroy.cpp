@@ -1,10 +1,10 @@
 #include "title/S4Load.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
-void scrScriptProcessDestroy(void *process);
 void asdMemFreeSlot(u32 arg);
 
 extern S4Load *g_s4Load;

@@ -1,4 +1,5 @@
 #include "gfx/RenderSubmission.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 void FUN_00338330(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 *);
@@ -7,7 +8,6 @@ void asdGxSetEffectColorFromRGBA8(u32);
 void FUN_002b3c9c(RenderSubmissionPacket *, u32);
 u32 FUN_0038136c(RenderSubmissionOwner *, const u32 *, u32, u32);
 u32 FUN_00221cb0(void);
-extern EffectColorProductState g_vectorScratch;
 
 void FUN_003b3fac(RenderSubmission *submission)
 {
@@ -17,7 +17,7 @@ void FUN_003b3fac(RenderSubmission *submission)
         return;
     u32 ownerColor = FUN_0038136c(owner, &owner->color, submission->frame, owner->frame);
     asdGxSetEffectColorFromRGBA8(submission->color);
-    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
+    effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     asdGxSetEffectColorFromRGBA8(ownerColor);
     FUN_002f8a54();
     u32 color = FUN_00221cb0();

@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "ui/ParamsClearPacket.h"
 
 /* The place window's image, scale, and animation parameter packets. */
 static const u32 sPlaceWinPacketA[6] = {
@@ -27,7 +28,6 @@ u32 placeWindowUpdateAnimation(u32 job);
 u32 placeWinDraw(u32 job);
 u32 taskCreateDraw(const char *name, u32 group, u32, u32,
                    u32 (*draw)(u32), u32, u32, u32 parent);
-void paramsClearPacket(void *packet);
 
 
 /* Allocate the place caption window, create its update/draw jobs and initialize its animation. */
@@ -44,11 +44,11 @@ void placeWinCreate(void)
     taskCreateDraw("PlaceWin DrawUpLeft", 0x86, 0, 0, placeWinDraw, 0, 0, job);
     taskCreateDraw("PlaceWin DrawUpRight", 0xE2, 0, 0, placeWinDraw, 0, 0, window->job);
     window = g_placeWin;
-    paramsClearPacket(window->parameters.packet);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet),
+    paramsClearPacket(&window->parameters);
+    paramsInit(&window->parameters,
                sPlaceWinPacketA, sizeof(sPlaceWinPacketA), sPlaceWinPacketB, sizeof(sPlaceWinPacketB),
                NULL, 0, NULL, 0, sPlaceWinPacketC, sizeof(sPlaceWinPacketC));
-    uiSpriteStateInitFromSource((UiSpriteState *)window->animation, 8, 0x87, (UiResourceParameters *)(window->parameters.packet), 1, 1.0f);
-    uiSpriteSelectAnim((UiSpriteState *)window->animation, 0);
+    uiSpriteStateInitFromSource(&window->animation, 8, 0x87, &window->parameters, 1, 1.0f);
+    uiSpriteSelectAnim(&window->animation, 0);
 }
 }

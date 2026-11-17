@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 #include "battle/btlUnit.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 /* One battle unit (0x114 bytes); only the fields this state reads. */
 struct ReflectUnit {
@@ -59,12 +60,11 @@ struct ReflectMainState {
 extern "C" {
 extern ReflectMainState *DAT_00435d18;
 extern ReflectLayouts DAT_00439a20;
-extern u32 g_btlUiBlock;
 void FUN_0024082c(BtlCamera *btl, s32 frames);
 void FUN_00254f58(ReflectBattle *battle);
 s32 btlFindNthActiveSpecialEntry(ReflectBattle *battle, s32 mode);
 void btlSetSelectedListedValue(s32 value);
-void FUN_003ae720(u32 block, s32 mode);
+void FUN_003ae720(BtlUi *block, s32 mode);
 void FUN_00240678(ReflectTask *task, ReflectBattle *battle);
 void FUN_002b7bca(ReflectUnit **list, s32 count, s32 stride, void *compare);
 void FUN_0019d7d4(void);

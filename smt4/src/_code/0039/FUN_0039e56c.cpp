@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (207 vs 144 rows); retail duplicates the whole entry loop per layout and per related-kind branch, which source-level structure does not reproduce */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
 
 // Selectable tile of the two-list picker (0x4c bytes each).
@@ -31,11 +31,8 @@ struct PickerScreen {
     PickerEntry lists0[1];  // 0xc48
 };
 
-
 extern "C" {
 
-
-u8* gameGetMapBlock(void);
 f32* NaviMain_GetCursorPos(void* navi);
 
 #define PICKER_WORD(screen, offset) (*reinterpret_cast<s32*>(reinterpret_cast<u8*>(screen) + (offset)))
@@ -55,13 +52,13 @@ static inline bool kindsRelated(u32 a, u32 b)
 // tints the entries matching the current selection.
 void FUN_0039e56c(PickerScreen* screen)
 {
-    u8* mapBlock = gameGetMapBlock();
+    MapSaveBlock *mapBlock = gameGetMapBlock();
     f32* cursor = NaviMain_GetCursorPos(reinterpret_cast<u8*>(screen) + 0x162);
     f32 cursorX = cursor[0];
     f32 cursorY = cursor[1];
     for (s32 list = 0; list < 2; list++) {
         s32 count = PICKER_WORD(screen, list == 0 ? 0x5a88 : 0x61b0);
-        bool alt = mapBlock[0xd5a] == 12;
+        bool alt = mapBlock->layout == 12;
         s32 dx;
         s32 dy;
         if (!alt) {

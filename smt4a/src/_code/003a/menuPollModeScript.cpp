@@ -8,7 +8,7 @@ struct MenuScriptState {
     /* 0x350 */ void *script;
     /* 0x354 */ void *scriptData;
     /* 0x358 */ u8 unk358[8];
-    /* 0x360 */ void *process;
+    /* 0x360 */ ScriptProcess *process;
     /* 0x364 */ u8 unk364[0x4c];
     /* 0x3b0 */ s32 state;
     /* 0x3b4 */ u8 unk3b4[8];
@@ -31,7 +31,7 @@ u32 menuPollModeScript(MenuScriptState *menu)
     switch (menu->scriptState) {
     case 0:
         if (menu->script && menu->scriptData) {
-            void *process = scrScriptProcessCreate(menu->script, menu->scriptData);
+            ScriptProcess *process = scrScriptProcessCreate(menu->script, menu->scriptData);
             menu->process = process;
             if (menu->mode == 1)
                 scrScriptProcessStartEntry(process, 0x19);

@@ -1,9 +1,8 @@
 #include "shard/Shard0033.h"
 #include "event/bustupEvent/BustupTex.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 void asdTMTexTableLoadSprites(s32 table);
 

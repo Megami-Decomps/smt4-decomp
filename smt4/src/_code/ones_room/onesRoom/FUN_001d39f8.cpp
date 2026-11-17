@@ -3,11 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-
-struct RoomScriptProcess {
-    u8 unk000[0x108];
-    u32 state;
-};
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
@@ -16,8 +12,7 @@ void buttonHelpCreate(void);
 void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32);
 void *asdLoadFileSyncDefault(const char *);
-RoomScriptProcess *scrScriptProcessCreate(void *, void *);
-void scrScriptProcessStartEntry(RoomScriptProcess *, s32);
+void scrScriptProcessStartEntry(ScriptProcess *, s32);
 void FUN_00282bfc(s32, s32);
 s32 onesRoomTeardown(u32);
 void onesRoomSetEnabled(void);
@@ -31,7 +26,7 @@ void FUN_001d39f8(s32 inactive)
     struct RoomCreateView {
         u32 job;
         void *dataA;
-        RoomScriptProcess *process;
+        ScriptProcess *process;
         void *dataB;
         union {
             u32 word;
@@ -63,7 +58,7 @@ void FUN_001d39f8(s32 inactive)
     room->dataA = asdLoadFileSyncDefault("ones_room/onesRoom.bf");
     room->dataB = asdLoadFileSyncDefault("ones_room/onesRoom.mbm");
     room->process = scrScriptProcessCreate(room->dataA, room->dataB);
-    room->process->state = 2;
+    room->process->mode = 2;
     scrScriptProcessStartEntry(room->process, 0);
     room->flags.bytes.freeOnEnd = 0;
     if (room->flags.bytes.active) {

@@ -1,16 +1,7 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
 
 namespace {
-struct MapBlockView {
-    /* 0x000 */ u8 unk000[0x3a];
-    /* 0x03A */ u8 sizeX;
-    /* 0x03B */ u8 sizeY;
-    /* 0x03C */ u8 unk03c[0x755];
-    /* 0x791 */ s8 layer;
-    /* 0x792 */ u8 option;
-};
-
 
 struct MapTableRecord0 {
     /* 0x00 */ u8 unk00[0xa];
@@ -40,7 +31,6 @@ struct MapTableRecord2 {
 
 extern "C" {
 
-MapBlockView *gameGetMapBlock(void);
 MapTableRecord0 *dataTable2fSub0GetRecord(u32 id);
 MapTableRecord1 *dataTable2fSub1GetRecord(u32 id);
 MapTableRecord2 *dataTable2fSub2GetRecord(u32 id);
@@ -48,7 +38,7 @@ MapTableRecord2 *dataTable2fSub2GetRecord(u32 id);
 /* Copy the current map's size, layer and option from its table record, then clamp the layer (0 becomes -1, at most 15). */
 void mapBlockLoadTableRecord(void)
 {
-    MapBlockView *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
 
     block->option = 0;
     switch (g_gameState.tableKind) {

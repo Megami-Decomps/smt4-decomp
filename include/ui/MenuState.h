@@ -25,14 +25,9 @@ typedef struct MenuState {
             /* 0x01C */ UiResourceParameters parameters;
         } resources;
     };
-    union {
-        /* 0x03C */ u8 panelA[0x118];
-        /* 0x03C */ UiSpriteState primarySprites[2];
-    };
-    union {
-        /* 0x154 */ u8 panelB[0x168];
-        /* 0x154 */ UiSpriteState secondarySprites[2];
-    };
+    /* 0x03C */ UiSpriteState primarySprites[2];
+    /* 0x154 */ UiSpriteState secondarySprites[2];
+    /* 0x26C */ u8 unk26c[0x50];
     /* 0x2BC */ u32 unk2bc;
     /* 0x2C0 */ u32 unk2c0;
     /* 0x2C4 */ u32 unk2c4;
