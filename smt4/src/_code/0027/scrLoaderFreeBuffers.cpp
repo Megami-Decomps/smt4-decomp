@@ -1,30 +1,22 @@
-#include "common.h"
+#include "util/MemoryHelpers_VariantB.h"
+#include "addon/QuestScriptLoader.h"
 #include "script/scrScriptProcess.h"
 
 extern "C" {
 
-int asdMemFree(u32 ptr);
-
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u32 bufferA;
-    /* 0x10 */ u32 bufferB;
-    /* 0x14 */ ScriptProcess *script;
-} Obj;
-
-void scrLoaderFreeBuffers(Obj *obj)
+void scrLoaderFreeBuffers(AocScriptHolder *obj)
 {
-    if (obj->bufferA != 0) {
-        asdMemFree(obj->bufferA);
-        obj->bufferA = 0;
-    }
-    if (obj->bufferB != 0) {
-        asdMemFree(obj->bufferB);
-        obj->bufferB = 0;
-    }
     if (obj->script != 0) {
-        scrScriptProcessDestroy(obj->script);
+        asdMemFree(obj->script);
         obj->script = 0;
+    }
+    if (obj->messages != 0) {
+        asdMemFree(obj->messages);
+        obj->messages = 0;
+    }
+    if (obj->process != 0) {
+        scrScriptProcessDestroy(obj->process);
+        obj->process = 0;
     }
 }
 

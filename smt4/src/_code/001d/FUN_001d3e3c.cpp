@@ -1,3 +1,4 @@
+#include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3e3c` (_code @ 0x1d3e3c, 0x5448 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -63,18 +64,12 @@ int objDestroyModels(...);
 int FUN_0026413c(void);
 void FUN_00264444(LmapObj *);
 int FUN_002644a8(void);
-int scrLoaderResetWithFlag(...);
-int scrLoaderRelease(...);
-int scrLoaderReset(...);
-int scrLoaderFreeBuffers(...);
 int mapInterfaceSetStateTwo(void);
 int FUN_00273840(...);
 int mapIfSetMode1(void);
 int mapDepartSetTarget(...);
 int lmapSetSceneId(...);
 int mapConsumePendingJumpRequest(...);
-int FUN_002895a8(...);
-int FUN_00289608(...);
 int FUN_002897f0(...);
 int FUN_0028d664(...);
 int tableGroupFindEntryIndex(...);
@@ -395,8 +390,6 @@ extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: FUN_0027052c. */
 /* Supplied declaration required: scrLoaderResetWithFlag. */
 /* Supplied declaration required: scrLoaderRelease. */
-extern int questSysUpdateLoad(int);
-extern int questSysLoadStep(int);
 /* Supplied declaration required: scrLoaderReset. */
 /* Supplied declaration required: scrLoaderFreeBuffers. */
 extern int FUN_002736e8(int);
@@ -1670,7 +1663,7 @@ LAB_001d61bc:
   case 0x12:
     lmapMainStep();
     if (puVar7[4] == 0) {
-      scrLoaderReset(g_aocMain + 0xa8);
+      scrLoaderReset(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
       lmapSetSceneId(2);
       buttonHelpSetPresetDefault();
       messageSetConfirmDisplayMode();
@@ -1682,7 +1675,7 @@ LAB_001d61bc:
     if (temp_v6 == 0) {
       return 0;
     }
-    scrLoaderFreeBuffers(g_aocMain + 0xa8);
+    scrLoaderFreeBuffers(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     puVar17 = g_lmapMainState;
     FUN_00281784();
     mapInitializeStoryMarkerEffects(puVar17[0x10]);
@@ -1700,16 +1693,16 @@ LAB_001d61bc:
   case 0x14:
     lmapMainStep();
     if (puVar7[4] == 0) {
-      scrLoaderResetWithFlag(g_aocMain + 0xa8,1);
+      scrLoaderResetWithFlag(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8),1);
       temp_v4 = puVar7[4] + 1;
       puVar7[4] = temp_v4;
       break;
     }
-    temp_v6 = questSysLoadStep(g_aocMain + 0xa8);
+    temp_v6 = questSysLoadStep(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     if (temp_v6 == 0) {
       return 0;
     }
-    scrLoaderRelease(g_aocMain + 0xa8);
+    scrLoaderRelease(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     buttonHelpSelectMapPreset();
     temp_v6 = gameJumpRequestIsPending();
 joined_r0x001d6448:
@@ -1732,17 +1725,17 @@ joined_r0x001d6448:
       return 0;
     }
     if (puVar7[4] != 0) {
-      temp_v6 = questSysUpdateLoad(g_aocMain + 0xa8);
+      temp_v6 = questSysUpdateLoad(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
       if (temp_v6 == 0) {
         return 0;
       }
-      FUN_002895a8(g_aocMain + 0xa8);
+      FUN_002895a8(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
       buttonHelpSelectMapPreset();
       temp_v6 = gameJumpRequestIsPending();
       goto joined_r0x001d6448;
     }
     *(unsigned int *)(g_aocMain + 0x754) = temp_v8 & 0xffffff8f;
-    FUN_00289608(temp_v6 + 0xa8,1);
+    FUN_00289608(reinterpret_cast<AocScriptHolder *>(temp_v6 + 0xa8),1);
     temp_v4 = puVar7[4] + 1;
     puVar7[4] = temp_v4;
     break;

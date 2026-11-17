@@ -1,3 +1,4 @@
+#include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f3dc` (_code @ 0x19f3dc, 0x6a4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -12,11 +13,9 @@ extern "C" {
 int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
 int gameStateSetJumpRequest(...);
-int FUN_002895a8(...);
 int jobStop(...);
 int asdSequenceRequest(...);
 
-int FUN_00289608(int, int);
 int msgWindowReset(void);
 int FUN_002897b0(int);
 int FUN_002897d0(...);
@@ -65,7 +64,6 @@ extern unsigned char DAT_004937cc; /* 0x4937cc */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern int scrRunOpcodesStub(unsigned int);
-extern int questSysUpdateLoad(int);
 /* Supplied declaration required: mapConsumePendingJumpRequest. */
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: gameStateSetJumpRequest. */
@@ -143,7 +141,7 @@ unsigned int FUN_0019f3dc(void)
       return 0;
     }
     *(unsigned int *)(g_aocMain + 0x754) = temp_v4 & 0xffffff8f;
-    FUN_00289608(temp_v3 + 0xa8,0);
+    FUN_00289608(reinterpret_cast<AocScriptHolder *>(temp_v3 + 0xa8),0);
     puVar2[2] = 0x60;
     return 0;
   }
@@ -275,11 +273,11 @@ unsigned int FUN_0019f3dc(void)
     return 0;
   }
   if (temp_v3 == 0x60) {
-    temp_v3 = questSysUpdateLoad(g_aocMain + 0xa8);
+    temp_v3 = questSysUpdateLoad(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     if (temp_v3 == 0) {
       return 0;
     }
-    FUN_002895a8(g_aocMain + 0xa8);
+    FUN_002895a8(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     temp_v3 = gameJumpRequestIsPending();
     if (temp_v3 == 0) {
       temp_v1 = 0x62;

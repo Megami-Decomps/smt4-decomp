@@ -1,13 +1,11 @@
+#include "addon/QuestScriptLoader.h"
 #include "addon/aocMain.h"
 
 extern "C" {
 
 void FUN_0022af9c(s32 arg);
 void buttonHelpSelectByProgress(AocStep *step);
-void scrLoaderResetWithFlag(AocScriptHolder *obj, s32 arg);
-void scrLoaderRelease(AocScriptHolder *obj);
 void gameJumpRequestClear(void);
-s32 questSysLoadStep(AocScriptHolder *obj);
 s32 gameJumpRequestIsPending(void);
 
 void aocBootStep(AocStep *step)

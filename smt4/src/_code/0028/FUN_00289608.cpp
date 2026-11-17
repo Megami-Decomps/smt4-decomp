@@ -1,46 +1,36 @@
-#include "common.h"
+#include "addon/QuestScriptLoader.h"
 #include "code/Code002c.h"
 #include "util/MemoryHelpers_VariantB.h"
 #include "script/scrScriptProcess.h"
 
 extern "C" {
 
-/* Task state: state word, phase, a flag byte and three owned resources. */
-typedef struct {
-    u32 unk00;          /* 0x00 */
-    u32 phase;          /* 0x04 */
-    u8 flag;            /* 0x08 */
-    u8 unk09[3];
-    void *bufferA;      /* 0x0c */
-    void *bufferB;      /* 0x10 */
-    ScriptProcess *resource;     /* 0x14 */
-} Task;
 
 int buttonHelpCreate(void);
 int titleSetSlotValueState2(int index, int value);
 
-/* Resets the task: frees its buffers and resource, then sets phase 12 and updates indices 0/1 whose state is 3. */
-void FUN_00289608(Task *task, u8 flag)
+/* Resets the loader for entry 12 and updates slots 0/1 whose state is 3. */
+void FUN_00289608(AocScriptHolder *task, u8 flag)
 {
-    task->flag = flag;
-    task->phase = 11;
-    task->unk00 = 0;
-    if (task->bufferA != NULL) {
-        asdMemFree(task->bufferA);
-        task->bufferA = NULL;
+    task->showButtonHelp = flag;
+    task->entry = 11;
+    task->state = 0;
+    if (task->script != NULL) {
+        asdMemFree(task->script);
+        task->script = NULL;
     }
-    if (task->bufferB != NULL) {
-        asdMemFree(task->bufferB);
-        task->bufferB = NULL;
+    if (task->messages != NULL) {
+        asdMemFree(task->messages);
+        task->messages = NULL;
     }
-    if (task->resource != NULL) {
-        scrScriptProcessDestroy(task->resource);
-        task->resource = NULL;
+    if (task->process != NULL) {
+        scrScriptProcessDestroy(task->process);
+        task->process = NULL;
     }
-    if (task->flag != 0) {
+    if (task->showButtonHelp != 0) {
         buttonHelpCreate();
     }
-    task->phase = 12;
+    task->entry = 12;
     s32 firstState = FUN_002c2a04(0);
     if (firstState == 3) {
         titleSetSlotValueState2(0, 5);

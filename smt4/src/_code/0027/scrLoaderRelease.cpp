@@ -1,35 +1,26 @@
-#include "common.h"
+#include "util/MemoryHelpers_VariantB.h"
+#include "addon/QuestScriptLoader.h"
 #include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int buttonHelpRelease(void);
-int asdMemFree(u32 ptr);
 
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u8 unk08;
-    /* 0x09 */ u8 unk09[3];
-    /* 0x0C */ u32 bufferA;
-    /* 0x10 */ u32 bufferB;
-    /* 0x14 */ ScriptProcess *script;
-} Obj;
-
-void scrLoaderRelease(Obj *obj)
+void scrLoaderRelease(AocScriptHolder *obj)
 {
-    if (obj->bufferA != 0) {
-        asdMemFree(obj->bufferA);
-        obj->bufferA = 0;
-    }
-    if (obj->bufferB != 0) {
-        asdMemFree(obj->bufferB);
-        obj->bufferB = 0;
-    }
     if (obj->script != 0) {
-        scrScriptProcessDestroy(obj->script);
+        asdMemFree(obj->script);
         obj->script = 0;
     }
-    if (obj->unk08 != 0) {
+    if (obj->messages != 0) {
+        asdMemFree(obj->messages);
+        obj->messages = 0;
+    }
+    if (obj->process != 0) {
+        scrScriptProcessDestroy(obj->process);
+        obj->process = 0;
+    }
+    if (obj->showButtonHelp != 0) {
         buttonHelpRelease();
         return;
     }

@@ -20,7 +20,7 @@ void commonBgStopChildAndBeginTransition(void);
 
 void FUN_0028cf30(PlayScene *scene, int value, int flag);
 
-void FUN_002895a8(Obj *obj);
+
 
 void FUN_0028d664(ScriptHelpOwner *owner, u8 mode);
 

@@ -1,17 +1,7 @@
 /* NON_MATCHING: only the tail merge of the state stores differs: retail shares case 1's store with case 2's (state 3), this build shares case 0's with case 1's. */
-#include "common.h"
+#include "addon/QuestScriptLoader.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "script/scrScriptProcess.h"
-
-struct QuestLoadStep {
-    u32 state;                   /* 0x00 */
-    u32 entry;                   /* 0x04 */
-    u8 showButtonHelp;           /* 0x08 */
-    u8 unk09[3];
-    void *script;                /* 0x0c */
-    void *messages;              /* 0x10 */
-    ScriptProcess *process; /* 0x14 */
-};
 
 extern "C" {
 extern const char g_questScriptPath[];
@@ -26,7 +16,7 @@ s32 gameJumpRequestIsPending();
 void scriptProcessSetMode(ScriptProcess *process, u32 mode);
 
 // Load quest script resources, run the requested entry, and finish any jump entry.
-u32 questSysLoadStep(QuestLoadStep *step)
+u32 questSysLoadStep(AocScriptHolder *step)
 {
     switch (step->state) {
     case 0:

@@ -1,41 +1,31 @@
-/* Resets the object to state 11 with the given flag, freeing its three buffers. */
-#include "common.h"
+#include "util/MemoryHelpers_VariantB.h"
+/* Resets the quest loader to entry 11, releasing its owned script resources. */
+#include "addon/QuestScriptLoader.h"
 #include "script/scrScriptProcess.h"
 
 extern "C" {
 
-typedef struct Object {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 state;
-    /* 0x08 */ u8 flag;
-    /* 0x09 */ u8 unk09[3];
-    /* 0x0C */ void *bufferA;
-    /* 0x10 */ void *bufferB;
-    /* 0x14 */ ScriptProcess *bufferC;
-} Object;
-
-extern void asdMemFree(void *buffer);
 extern void buttonHelpCreate(u8 flag);
 
-void scrLoaderResetWithFlag(Object *obj, u8 flag)
+void scrLoaderResetWithFlag(AocScriptHolder *obj, u8 flag)
 {
-    obj->flag = flag;
-    obj->state = 11;
-    obj->unk00 = 0;
-    if (obj->bufferA != NULL) {
-        asdMemFree(obj->bufferA);
-        obj->bufferA = NULL;
+    obj->showButtonHelp = flag;
+    obj->entry = 11;
+    obj->state = 0;
+    if (obj->script != NULL) {
+        asdMemFree(obj->script);
+        obj->script = NULL;
     }
-    if (obj->bufferB != NULL) {
-        asdMemFree(obj->bufferB);
-        obj->bufferB = NULL;
+    if (obj->messages != NULL) {
+        asdMemFree(obj->messages);
+        obj->messages = NULL;
     }
-    if (obj->bufferC != NULL) {
-        scrScriptProcessDestroy(obj->bufferC);
-        obj->bufferC = NULL;
+    if (obj->process != NULL) {
+        scrScriptProcessDestroy(obj->process);
+        obj->process = NULL;
     }
-    if (obj->flag != 0) {
-        buttonHelpCreate(obj->flag);
+    if (obj->showButtonHelp != 0) {
+        buttonHelpCreate(obj->showButtonHelp);
     }
 }
 

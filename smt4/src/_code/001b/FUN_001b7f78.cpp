@@ -1,3 +1,4 @@
+#include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b7f78` (_code @ 0x1b7f78, 0x8098 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -97,10 +98,6 @@ int naviRefreshMainBlock(void);
 int FUN_0031d54c(void);
 int naviMainSetPosition(...);
 
-int scrLoaderResetWithFlag(...);
-int scrLoaderRelease(...);
-int scrLoaderReset(...);
-int scrLoaderFreeBuffers(...);
 int mapInterfaceSetStateTwo(void);
 int FUN_00273840(...);
 int saveSetNavigationPosition(...);
@@ -108,8 +105,6 @@ int FUN_0027fc14(...);
 int FUN_0027fca0(...);
 int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
-int FUN_002895a8(...);
-int FUN_00289608(...);
 int FUN_0028d664(...);
 int FUN_00290d5c(...);
 int helpResourcesRelease(...);
@@ -516,8 +511,6 @@ extern int FUN_00270e34(void);
 /* Supplied declaration required: frameTexStartFade. */
 /* Supplied declaration required: scrLoaderResetWithFlag. */
 /* Supplied declaration required: scrLoaderRelease. */
-extern int questSysUpdateLoad(int);
-extern int questSysLoadStep(int);
 /* Supplied declaration required: scrLoaderReset. */
 /* Supplied declaration required: scrLoaderFreeBuffers. */
 extern int FUN_002736e8(int);
@@ -3221,7 +3214,7 @@ LAB_001bbd00:
   case 0x1e:
     mapPerFrameUpdate();
     if (puVar14[10] == 0) {
-      scrLoaderReset(g_aocMain + 0xa8);
+      scrLoaderReset(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
       lmapSetSceneId(2);
       buttonHelpSetPresetDefault();
       *(unsigned char *)((int)puVar14 + 0x47) = 0;
@@ -3233,7 +3226,7 @@ LAB_001bbd00:
     if (temp_v9 == 0) {
       return 0;
     }
-    scrLoaderFreeBuffers(g_aocMain + 0xa8);
+    scrLoaderFreeBuffers(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     buttonHelpSelectMapPreset();
     mapMainEnterScene();
     *(unsigned char *)(g_mapCamera + 0xa4) = 1;
@@ -3253,17 +3246,17 @@ LAB_001bbd00:
   case 0x20:
     mapPerFrameUpdate();
     if (puVar14[10] == 0) {
-      scrLoaderResetWithFlag(g_aocMain + 0xa8,1);
+      scrLoaderResetWithFlag(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8),1);
       FUN_00273840(1);
       temp_v10 = puVar14[10] + 1;
       puVar14[10] = temp_v10;
       break;
     }
-    temp_v9 = questSysLoadStep(g_aocMain + 0xa8);
+    temp_v9 = questSysLoadStep(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     if (temp_v9 == 0) {
       return 0;
     }
-    scrLoaderRelease(g_aocMain + 0xa8);
+    scrLoaderRelease(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     buttonHelpSelectMapPreset();
     temp_v9 = gameJumpRequestIsPending();
     if (temp_v9 != 0) {
@@ -3291,16 +3284,16 @@ LAB_001bc008:
     }
     if (puVar14[10] == 0) {
       *(unsigned int *)(g_aocMain + 0x754) = temp_v14 & 0xffffff8f;
-      FUN_00289608(temp_v9 + 0xa8,1);
+      FUN_00289608(reinterpret_cast<AocScriptHolder *>(temp_v9 + 0xa8),1);
       temp_v10 = puVar14[10] + 1;
       puVar14[10] = temp_v10;
       break;
     }
-    temp_v9 = questSysUpdateLoad(g_aocMain + 0xa8);
+    temp_v9 = questSysUpdateLoad(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     if (temp_v9 == 0) {
       return 0;
     }
-    FUN_002895a8(g_aocMain + 0xa8);
+    FUN_002895a8(reinterpret_cast<AocScriptHolder *>(g_aocMain + 0xa8));
     buttonHelpSelectMapPreset();
     temp_v9 = gameJumpRequestIsPending();
     if (temp_v9 == 0) goto LAB_001bc008;

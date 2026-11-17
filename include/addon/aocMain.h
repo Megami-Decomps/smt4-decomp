@@ -3,6 +3,7 @@
 #define ADDON_AOCMAIN_H
 
 #include "common.h"
+#include "addon/AocScriptHolder.h"
 #include <stddef.h>
 
 #include "shard/W6_W6Match5_QueuedRequest.h"
@@ -28,10 +29,6 @@ typedef struct AocWorkerThread {
     /* 0x0C */ AocThreadStack *stack;
 } AocWorkerThread;
 
-/* The quest-script loader the AOC main runs its scripts through (the script holder's 0x18 bytes). */
-typedef struct AocScriptHolder {
-    /* 0x00 */ u8 unk00[0x18];
-} AocScriptHolder;
 
 /* The AOC system's main block, g_aocMain (0xD68 bytes, the same layout in both games): the content
  * archive and the online service, the worker thread and its completion event, the quest-script

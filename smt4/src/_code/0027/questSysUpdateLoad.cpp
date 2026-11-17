@@ -1,13 +1,6 @@
-/* Tail call into the function that follows. */
-#include "common.h"
-
-extern "C" {
-
-void questSysLoadStep(void);
-
-void questSysUpdateLoad(void)
+/* Tail call into the function that follows; the linker removes the branch. */
+#include "addon/QuestScriptLoader.h"
+extern "C" u32 questSysUpdateLoad(AocScriptHolder *holder)
 {
-    questSysLoadStep();
-}
-
+    return questSysLoadStep(holder);
 }
