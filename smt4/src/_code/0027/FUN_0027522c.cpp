@@ -6,10 +6,9 @@
 
 extern "C" {
 extern MapObjectWork *g_mapObj;
-void nodeSetTranslation(NodeEnableResource *, s32, const MapVector *);
-void modelPartSetRotationDegrees(NodeEnableResource *, s32, f32, f32, f32);
-void modelSelectPrimaryMotion(NodeEnableResource *, u32, f32);
-void modelSetScale(NodeEnableResource *, f32);
+void modelPartSetRotationDegrees(AsdMdlNode *, s32, f32, f32, f32);
+void modelSelectPrimaryMotion(AsdMdlNode *, u32, f32);
+void modelSetScale(AsdMdlNode *, f32);
 
 // Synchronize visible map-object models with their pending position and motion changes.
 void FUN_0027522c(void)
@@ -25,7 +24,7 @@ void FUN_0027522c(void)
         f32 heading;
         u32 motion;
         u8 unk24[4];
-        NodeEnableNode *node;
+        AsdMdlObject *node;
         u8 unk2C[8];
     };
     struct ObjectView { u8 prefix[0x14]; ObjectStateView state; };
@@ -33,25 +32,25 @@ void FUN_0027522c(void)
     for (s32 i = 0; i < 24; ++i) {
         ObjectStateView *object = &reinterpret_cast<ObjectView *>(g_mapObj)[i].state;
         if (object->active) {
-            NodeEnableNode *node = object->node;
+            AsdMdlObject *node = object->node;
             if (g_gameState.loading) {
                 if ((node->flags & 2) == 0) {
                     node->flags |= 2;
-                    node->resource->target->enabled = 0;
+                    node->node->sceneNode->positionFollowed = 0;
                 }
             } else {
                 if (node->flags & 2) {
                     node->flags &= ~2;
-                    node->resource->target->enabled = 1;
+                    node->node->sceneNode->positionFollowed = 1;
                 }
                 if (object->changed) {
                     if (object->positionChanged) {
-                        nodeSetTranslation(object->node->resource, 0, &object->position);
-                        modelPartSetRotationDegrees(object->node->resource, 0, 0.0f, object->heading, 0.0f);
+                        nodeSetTranslation(object->node->node, 0, &object->position.x);
+                        modelPartSetRotationDegrees(object->node->node, 0, 0.0f, object->heading, 0.0f);
                     }
-                    if (reinterpret_cast<MotionView *>(object->node->resource)->motion != object->motion) {
-                        modelSelectPrimaryMotion(object->node->resource, object->motion, 0.0f);
-                        modelSetScale(object->node->resource, 1.0f);
+                    if (reinterpret_cast<MotionView *>(object->node->node)->motion != object->motion) {
+                        modelSelectPrimaryMotion(object->node->node, object->motion, 0.0f);
+                        modelSetScale(object->node->node, 1.0f);
                     }
                     object->changed = 0;
                 }

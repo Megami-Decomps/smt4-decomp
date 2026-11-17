@@ -13,7 +13,7 @@ s32 runWindowUpdate(void *)
     case 0:
         break;
     case 1:
-        if (uiSlidingSpriteAdvance((UiSpriteState *)work->ui, 0) != 0) {
+        if (uiSlidingSpriteAdvance(&work->window, 0) != 0) {
             work->state = 2;
             work->counter = 0;
         }
@@ -24,7 +24,7 @@ s32 runWindowUpdate(void *)
         }
         break;
     case 3:
-        if (uiSpriteAdvanceAnimation((UiSpriteState *)work->ui) != 0) {
+        if (uiSpriteAdvanceAnimation(&work->window) != 0) {
             work->active = 0;
             work->state = 4;
         }

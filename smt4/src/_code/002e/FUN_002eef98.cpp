@@ -2,6 +2,7 @@
 #include "common.h"
 #include <math.h>
 #include "game/GameState.h"
+#include "map/LmapViewGlobals.h"
 
 // Interpolated sine/cosine table entry: value and slope for each, indexed by the whole angle byte.
 struct TrigEntry {
@@ -16,17 +17,9 @@ struct SinCos {
     f32 cosine;
 };
 
-
-struct SceneState {
-    s32 sceneId;            // 0x00
-    u8 unk04[0xa4 - 4];
-    u8 changed;             // 0xa4
-};
-
 extern "C" {
 
 extern TrigEntry g_sinCosTable[];
-extern SceneState* g_mapCamera;
 
 u32 scrGetArg(u32 index);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32* dst, f32* matrix, f32* src);
@@ -87,8 +80,8 @@ u32 FUN_002eef98(void)
     g_gameState.cameraTarget.z = z;
     g_gameState.cameraFov = fov;
 
-    if (g_mapCamera->sceneId != 3) {
-        g_mapCamera->changed = 1;
+    if (g_mapCamera->mode != 3) {
+        g_mapCamera->enabled = 1;
         FUN_0027fc14(3);
         lmapSetSceneId(0x1d);
     }

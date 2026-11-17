@@ -13,7 +13,7 @@ void FUN_00206270(PlayScene *scene)
 {
     u32 value;
 
-    timerStart((UiSpriteState *)scene->timer, 0, 0);
+    timerStart(&scene->timer, 0, 0);
     beginStatusPanelClose();
     scene->unk5918 = 4;
     FUN_002a0cc8(0);

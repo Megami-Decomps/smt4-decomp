@@ -2,41 +2,17 @@
 /* Starts the party-gift popup when the player's money has reached its level threshold: a table entry of kind 0x12 for the selected slot whose two flags allow it. */
 #include "common.h"
 #include "game/GameStateA.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/PartnerInfoTable.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
 #include "map/PopupStateA.h"
 
-
-struct GiftEntry {
-    u32 slotId;
-    u32 kind;
-    s16 requiredFlag;
-    s16 forbiddenFlag;
-    u8 unk0C[0x14];
-};
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 s32 FUN_00480c28(void);
 const char *popupSelectWeightedMessage(u32 kind);
-
-/* Number of entries in the gift table. */
-static __inline u32 giftTableCount(void)
-{
-    void *table = dataTableGet(0x43, 0);
-    dataTableGetEntries(table);
-    return dataTableGetCount(table);
-}
-
-/* The index-th gift table entry, or NULL when out of range. */
-static __inline GiftEntry *giftTableEntry(u32 index)
-{
-    void *table = dataTableGet(0x43, 0);
-    GiftEntry *entries = static_cast<GiftEntry *>(dataTableGetEntries(table));
-    return index < dataTableGetCount(table) ? &entries[index] : NULL;
-}
 
 void FUN_00246128(void)
 {
@@ -76,12 +52,12 @@ void FUN_00246128(void)
     SlotView *slot = (SlotView *)reinterpret_cast<void *>(saveSlotFindSelected());
     if (slot != NULL && (gameFlagIsSet(0x8D) == 0 || gameFlagIsSet(0xC2) != 0 || slot->id != 0xB1) &&
         (gameFlagIsSet(0x1A2) == 0 || randRange(99) + 1 > 50)) {
-        s32 count = giftTableCount();
+        s32 count = partnerInfoCount();
         for (s32 i = 0; i < count; i++) {
-            GiftEntry *entry = giftTableEntry(i);
-            if (entry->kind == 0x12 && entry->slotId == slot->id &&
+            PartnerInfoRecord *entry = partnerInfoRecordAt(i);
+            if (entry->kind == 0x12 && entry->partnerId == slot->id &&
                 (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
-                (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0) &&
+                (entry->excludedFlag == 0 || gameFlagIsSet(entry->excludedFlag) == 0) &&
                 g_gameState.giftCounter == 0) {
                 g_gameState.giftCounter = 1;
                 g_popupState->speakerId = slot->id;

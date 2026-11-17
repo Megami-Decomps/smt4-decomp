@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail shares a global-state base; source uses independent literals and different scene-removal branch scheduling. */
 #include "shard/S1GfxModel.h"
 #include "nw/gfx/SceneNode.h"
-#include "shard/Sys464af0.h"
 #include "shard/S1Light.h"
 #include "camp/RenderCtxTitle.h"
+#include "gfx/GfxSettings.h"
 
 using nw::gfx::SceneNode;
 
@@ -35,8 +35,8 @@ void FUN_002c3a14(RenderCtx *scene);
 /* Render the first model pass, temporarily excluding the light-only scene root when required. */
 void FUN_00117604()
 {
-    if (g_gfxSettings.unk00[0] == 0 ||
-        ((s32)g_asdLightCount.count <= 0 && (g_gfxSettings.slotFlags & 1) == 0)) {
+    if (g_gfxSettings.lightingEnabled == 0 ||
+        ((s32)g_asdLightCount.count <= 0 && (g_gfxSettings.slotFlags[0] & 1) == 0)) {
         return;
     }
     void *context = g_asdModelSlotArray3[0]->slot;

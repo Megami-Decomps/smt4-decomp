@@ -4,7 +4,6 @@
 
 #include "common.h"
 #include <stddef.h>
-struct ModelList;
 
 /* The trap block; only the fields read so far are named. */
 typedef struct MapTrapA {

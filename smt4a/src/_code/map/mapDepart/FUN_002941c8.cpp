@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002941c8` (_code @ 0x2941c8, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -34,7 +35,6 @@ extern unsigned int *g_mapDepart; /* 0x5806c4 */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_0029a794. */
 extern unsigned int FUN_00480738(unsigned int);
@@ -54,7 +54,7 @@ void FUN_002941c8(int *param_1)
   puVar1 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x4cc,1);
   g_mapDepart = puVar1;
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   if (param_1 != (int *)0x0) {
     temp_v1 = *param_1;
     if (temp_v1 != 0) {

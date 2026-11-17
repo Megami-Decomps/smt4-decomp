@@ -1,31 +1,23 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
 
-typedef struct Resources {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ int effect;
-    /* 0x14 */ u8 unk14[0xC];
-    /* 0x20 */ int sound;
-} Resources;
+void objectRegistryInsert(void *resource, s32 mode);
+void asdEffectQueueRelease(void *entry, s32 mode);
 
-extern Resources g_effectEditor;
-
-int objectRegistryInsert(int handle, int arg);
-int asdEffectQueueRelease(int handle, int arg);
-
-/* Frees the global effect and sound handles (clearing them), then frees `handle`. */
-void effEditorReleaseEffectAndSound(int handle)
+/* Frees the editor's effect node and its resource (clearing them), then frees `resource`. */
+void effEditorReleaseEffectAndSound(void *resource)
 {
-    if (g_effectEditor.effect != 0) {
-        asdEffectQueueRelease(g_effectEditor.effect, 3);
-        g_effectEditor.effect = 0;
+    if (g_effectEditor.node != NULL) {
+        asdEffectQueueRelease(g_effectEditor.node, 3);
+        g_effectEditor.node = NULL;
     }
-    if (g_effectEditor.sound != 0) {
-        objectRegistryInsert(g_effectEditor.sound, 3);
-        g_effectEditor.sound = 0;
+    if (g_effectEditor.resource != NULL) {
+        objectRegistryInsert(g_effectEditor.resource, 3);
+        g_effectEditor.resource = NULL;
     }
-    objectRegistryInsert(handle, 3);
+    objectRegistryInsert(resource, 3);
 }
 
 } /* extern "C" */

@@ -1,6 +1,7 @@
 #include "battle/btlUI.h"
 /* Script command: applies its argument to the object partyFindFirstUnusedEntry returns, and returns that object as the result. */
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ void FUN_002d8b34(u32 arg);
 void dispatchIfFound(u32 result, u32 arg, s32 flag);
 u32 partyFindFirstUnusedEntry(void);
 
-extern BtlUiA *g_btlUiBlock;
 __weak void FUN_0039cd08_hook(BtlUiA *value);
 
 u32 FUN_0039cd08(void)

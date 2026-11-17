@@ -1,7 +1,7 @@
 #include "shard/Shard0033.h"
 #include "gfx/CameraVector3.h"
+#include "game/GameGlobalsRef.h"
 extern "C" {
-extern ObjBRef g_gameGlobals;
 void statusCameraSetEye(f32, f32, f32);
 
 // Raises the status camera according to the selected model's size category.

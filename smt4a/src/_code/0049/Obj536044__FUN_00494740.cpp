@@ -5,6 +5,8 @@
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "ui/UiSpriteApi.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "Model/MoriModelManager.h"
+#include "gfx/ControllerModel.h"
 
 /* The scene past the class prefix: the sprite animation, current page and loaded resource. */
 struct ShopMenuView : public Obj536044 {
@@ -16,7 +18,7 @@ struct ShopMenuView : public Obj536044 {
     /* 0x0B08 */ u8 unk0B08[0x38];
     /* 0x0B40 */ s32 page;
     /* 0x0B44 */ u8 unk0B44[0x154E4];
-    /* 0x16028 */ EquipmentMenuResource *resource;
+    /* 0x16028 */ MoriModelContent *resource;
     void finishPageTransition();
 };
 typedef char ShopMenuViewOffsetCheck[
@@ -24,17 +26,12 @@ typedef char ShopMenuViewOffsetCheck[
     offsetof(ShopMenuView, resource) == 0x16028 ? 1 : -1];
 
 extern "C" {
-extern u32 g_handleRegistry;
 void FUN_0038b010(u8 value);
 void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
 void pointConvertToFloat(AsdTextureRegion *, s32, s32);
 u32 tableGroupFindEntryIndex(u32, const char *);
 void scrScriptProcessStartEntry(void *, u32);
 void scrRunOpcodesStub(void *);
-s32 FUN_0040ab8c();
-void moriModelContentLoadBody(EquipmentMenuResource *, s32);
-void handleRegistryRegisterObject(u32, u32);
-void controllerSetPositionXyz(u32, f32, f32, f32);
 }
 
 // Moves on from the page's open animation: the item pages wait for the fade, the buy and sell pages
@@ -75,15 +72,15 @@ void Obj536044::FUN_00494740()
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);
         pointConvertToFloat(&scene->region, x, y);
-        if (uiSpriteGetCompletionState((const UiSpriteState *)sprite)) {
+        if (uiSpriteGetCompletionState(sprite)) {
             scene->finishPageTransition();
         }
         break;
     }
     }
-    if (scene->resource && FUN_0040ab8c() && scene->resource->handle == 0) {
+    if (scene->resource && FUN_0040ab8c(scene->resource) && scene->resource->body == NULL) {
         moriModelContentLoadBody(scene->resource, 0);
-        u32 handle = scene->resource->handle;
+        Obj557b18 *handle = scene->resource->body;
         handleRegistryRegisterObject(g_handleRegistry, handle);
         controllerSetPositionXyz(handle, 0.0f, -32000.0f, 0.0f);
     }

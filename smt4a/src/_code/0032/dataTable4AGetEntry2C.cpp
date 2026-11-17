@@ -1,16 +1,13 @@
-#include "shard/Shard0032.h"
+#include "gamedata/CampCecTable.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern Entry2C *dataTableGetEntries(void *table);
-
-/* Entry `index` of data table 0x4A (type 0). */
-Entry2C *dataTable4AGetEntry2C(s32 index)
+/* Title row `index` of data table 0x4A (CampCecTable.tbb table 0). */
+CampCecRecord *dataTable4AGetEntry2C(s32 index)
 {
     void *table = dataTableGet(0x4A, 0);
 
-    return dataTableGetEntries(table) + index;
+    return static_cast<CampCecRecord *>(dataTableGetEntries(table)) + index;
 }
 
 } /* extern "C" */

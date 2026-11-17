@@ -6,11 +6,7 @@
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W6_W6Match8_MapMain.h"
 #include "addon/AocSystemA.h"
-
-struct MapScriptProcess {
-    u8 unk00[0x108];
-    u32 mode;
-};
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 extern MapMainState *g_mapMain;
@@ -19,10 +15,9 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
-MapScriptProcess *scrScriptProcessCreate(void *script, void *messages);
-s32 scrScriptProcessGetEntry(MapScriptProcess *process, s32 entry);
+s32 scrScriptProcessGetEntry(ScriptProcess *process, s32 entry);
 s32 tableGroupFindEntryIndex(void *script, const char *name);
-u32 scrScriptProcessStartEntry(MapScriptProcess *process, s32 entry);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 
 // Load map-event script/message resources and start the requested override or named entry.
 u32 mapStartEventScript()

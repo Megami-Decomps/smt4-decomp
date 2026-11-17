@@ -1,10 +1,11 @@
-#include "shard/W5_W5Match7_ControllerPose.h"
+#include "shard/W5_W5Match7_SceneState.h"
+#include "gfx/ControllerModel.h"
 #include "code/Code003e_Smt4a.h"
 
 /* A link to a controller; the controller handle is at +4. */
 struct ControllerLink {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ ControllerPose *controller;
+    /* 0x04 */ Obj557b18 *controller;
 };
 
 /* One of the three 0x5c-byte slots of the work block; only its link pointer is named. */
@@ -21,8 +22,6 @@ struct ControllerGroup {
 };
 
 extern "C" {
-
-void controllerSetPosition(ControllerPose *controller, f32 x, f32 y, f32 z);
 
 /* Moves the group's main controller and the controllers of its three slots to the given position. */
 void FUN_003e5558(ControllerGroup *group, f32 x, f32 y, f32 z)

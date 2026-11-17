@@ -4,6 +4,7 @@
 #include "gamedata/SkillDataLookup.h"
 #include "battle/BattleCommandController.h"
 #include "gamedata/ConsumableRecord.h"
+#include "battle/BtlUiGlobal.h"
 
 namespace {
 /* The battle state block: its flags and the index of the acting unit. */
@@ -25,13 +26,12 @@ struct BattleUnit {
 extern "C" {
 extern BattleUnit *g_btlScriptUnit;
 extern u32 g_btlActionReflect;
-extern u32 g_btlUiBlock;
 s32 nodeListCountActiveById(u32 id, u32 arg);
-void FUN_003adc20(u32 block);
-s32 battleUiIsFadeAndFieldReady(u32 block);
-void btlUiAdvanceFadeInTransition(u32 block);
-s32 btlUiAcceptSelection(u32 block);
-void btlUiGetAcceptedSelection(u32 block, s16 *kind, s16 *value);
+void FUN_003adc20(BtlUi *block);
+s32 battleUiIsFadeAndFieldReady(BtlUi *block);
+void btlUiAdvanceFadeInTransition(BtlUi *block);
+s32 btlUiAcceptSelection(BtlUi *block);
+void btlUiGetAcceptedSelection(BtlUi *block, s16 *kind, s16 *value);
 s32 FUN_0023dcb8(void);
 s32 FUN_002cf124(void *record);
 void battleSetActionKind(BattleBlock **block);

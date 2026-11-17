@@ -21,16 +21,16 @@ s32 messageWindowDrawJob(void *)
     MessageWindowDrawState *work = jobGetWork();
     AocMain *main = g_aocMain;
     if ((work->flags & 0x1000) != 0) {
-        void *window;
+        UiSpriteState *window;
         if (work->mode == 0 || work->mode == 1) {
-            window = work->firstWindow;
+            window = &work->firstWindow;
         } else if (work->mode == 2) {
-            window = work->secondWindow;
+            window = &work->secondWindow;
         } else {
             return 0;
         }
-        s32 x = vec2GetXInt((const UiSpriteState *)window);
-        s32 y = vec2GetYInt((const UiSpriteState *)window);
+        s32 x = vec2GetXInt(window);
+        s32 y = vec2GetYInt(window);
         renderCtxSelectStereoLayout(g_titleScene);
         RenderCtx *context = g_titleScene;
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));

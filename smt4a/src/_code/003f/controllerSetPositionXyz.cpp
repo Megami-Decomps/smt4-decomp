@@ -1,7 +1,9 @@
-#include "common.h"
-struct Vector3 { f32 x,y,z; };
-struct PositionOwner { u8 unk000[0x1B4]; Vector3 position; };
-/* Updates the object's position. */
-extern "C" void controllerSetPositionXyz(PositionOwner *owner, f32 x, f32 y, f32 z) {
-    owner->position.x = x; owner->position.y = y; owner->position.z = z;
+#include "gfx/ControllerModel.h"
+
+/* Moves the body to (x, y, z). */
+extern "C" void controllerSetPositionXyz(Obj557b18 *body, f32 x, f32 y, f32 z)
+{
+    body->position.x = x;
+    body->position.y = y;
+    body->position.z = z;
 }

@@ -2,13 +2,13 @@
 #include "common.h"
 #include "clear_save/clearSave.h"
 #include "shard/JobWork.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int campButtonHelpRelease(void);
 int campCommonBgRelease(void);
 int dataTableFree(int id);
-int scrScriptProcessDestroy(u32 resource);
 int asdTMTexTableReleaseNode(int type, int index);
 int asdMemFree(void *ptr);               /* heap free */
 

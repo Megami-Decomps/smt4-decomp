@@ -20,7 +20,6 @@ struct EffectEditorPageCursor {
 extern "C" {
 extern EffectSelectionContext DAT_0044f858;
 
-
 extern EffectEditorPageCursor DAT_0044f708;
 extern EffectEditorPageItem DAT_0044f5e8[3];
 extern EffectEditorPageItem DAT_0044f630[9];
@@ -30,8 +29,8 @@ void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
  * kind (flag 2: the three-line page, else the nine-line page), keeping the cursor in range. */
 void *FUN_00326e94(void *arg)
 {
-    void *item = linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.selection.list),
-                                       DAT_0044f858.index + g_effectEditor.selection.index);
+    void *item = linkedFindItemByIndex(static_cast<LinkedItems *>(g_effectEditor.list),
+                                       DAT_0044f858.index + g_effectEditor.index);
     __aeabi_memcpy4(&g_effectEditorSettings, item, sizeof(g_effectEditorSettings));
     __aeabi_memcpy4(&g_effectEditorSettings, &g_effectEditorSavedSnapshot, sizeof(g_effectEditorSavedSnapshot));
     if (g_effectEditorSettings.record.flags & 2) {

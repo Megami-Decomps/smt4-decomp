@@ -19,7 +19,7 @@ typedef struct GameData {
     /* 0x07ED */ u8 unk07ED[0xAEF];
     /* 0x12DC */ s32 activeState;
     /* 0x12E0 */ u32 unk12E0;
-    /* 0x12E4 */ u32 unk12E4;
+    /* 0x12E4 */ s32 unk12E4;
     /* 0x12E8 */ u32 restoreTabPending;
     /* 0x12EC */ s8 unk12EC;
     /* 0x12ED */ u8 unk12ED;
@@ -27,7 +27,8 @@ typedef struct GameData {
     /* 0x12EF */ s8 unk12EF;
     /* 0x12F0 */ u8 unk12F0;
     /* 0x12F1 */ s8 unk12F1;
-    /* 0x12F2 */ u8 unk12F2[0x2];
+    /* 0x12F2 */ u8 unk12F2;
+    /* 0x12F3 */ u8 selectionWasSeven; /* gameGlobalsSetSelected stored 7 as 3 */
     /* 0x12F4 */ u8 unk12F4;
     /* 0x12F5 */ u8 unk12F5[0x7];
     /* 0x12FC */ s16 unk12FC;
@@ -44,10 +45,10 @@ typedef struct GameData {
     /* 0x18BE */ u16 unk18BE;
     /* 0x18C0 */ u8 unk18C0[0x5A0];
     /* 0x1E60 */ s8 unk1E60;
-    /* 0x1E61 */ u8 unk1E61;
+    /* 0x1E61 */ s8 unk1E61;          /* gameGetPendingNavigationState */
     /* 0x1E62 */ s8 unk1E62;
-    /* 0x1E63 */ u8 unk1E63;
-    /* 0x1E64 */ u8 unk1E64;
+    /* 0x1E63 */ s8 unk1E63;          /* gameGetNavigationState */
+    /* 0x1E64 */ s8 unk1E64;
     /* 0x1E65 */ u8 unk1E65;
     /* 0x1E66 */ u8 unk1E66;
     /* 0x1E67 */ u8 unk1E67;

@@ -8,7 +8,7 @@ extern "C" {
 u32 FUN_00345718(s32 enabled)
 {
     MessageWindowA *panel = g_messageMain.banner;
-    UiSpriteState *sprite = (UiSpriteState *)&panel->sprites[17] + 1;
+    UiSpriteState *sprite = &panel->sprites[17] + 1;
     if (enabled) {
         panel->transition = 1;
         uiSpriteStateInitFromSource(sprite, 8, 0, &panel->parameters, 11, 1.0f);

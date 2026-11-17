@@ -1,23 +1,19 @@
-#include "common.h"
+#include "gamedata/EncountData.h"
 
 extern "C" {
 
-u32 dataTableGet(u32 table, u32 index);
-u32 dataTableGetCount(u32 table);
-u8 *dataTableGetEntries(void);
 int weightedTableRollNextValue(int a, int b, int c);
 
-/* Runs weightedTableRollNextValue on every byte pair of data table 2/3. */
+/* Runs weightedTableRollNextValue on every (map, area) with an encounter roll state (EncountData.tbb table 3). */
 void dataTable02Sub3GetRecord(void)
 {
-    u32 table = dataTableGet(2, 3);
-    u8 *entries = dataTableGetEntries();
+    void *table = dataTableGet(2, 3);
+    EncountAreaKey *entries = encountAreaKeys(table);
     s32 count = dataTableGetCount(table);
     s32 i;
 
     for (i = 0; i < count; i++) {
-        u8 *pair = entries + i * 2;
-        weightedTableRollNextValue(pair[0], pair[1], 0);
+        weightedTableRollNextValue(entries[i].map, entries[i].area, 0);
     }
 }
 

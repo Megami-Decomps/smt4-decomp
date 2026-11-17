@@ -1,10 +1,9 @@
-#include "common.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "gamedata/SkillDataRecord.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern ButtonHelpGlobalsPrefixA g_buttonHelp;
 u32 FUN_0016a0e8(void);
 s32 idIsAbove400(s32 id);
 s32 battleAttributeFormatName(void *output, u32 attribute);
@@ -15,14 +14,14 @@ s32 asdTextDrawDirectoryEntry(u32 directory, s32 entry, u32 color,
 
 void skillHelpUpdateAttributeAndTarget(s32 id)
 {
-    ButtonHelpStatePrefixA *state = g_buttonHelp.state;
+    ButtonHelpWorkA *work = g_buttonHelp.work;
     if (id == 0) {
-        state->selectionActive = 0;
+        work->textVisible = 0;
         return;
     }
 
-    state->refreshRequested = 1;
-    state->selectionActive = 1;
+    work->text.useDirectoryText = 1;
+    work->textVisible = 1;
     const u32 context = FUN_0016a0e8();
 
     if (idIsAbove400(id) != 0) {
@@ -43,7 +42,7 @@ void skillHelpUpdateAttributeAndTarget(s32 id)
         scrSetStringSlot(0x25, reinterpret_cast<const char *>(text));
     }
 
-    asdTextDrawDirectoryEntry(state->directory, 2, 0xffffffffu, 0,
+    asdTextDrawDirectoryEntry(work->text.directoryText, 2, 0xffffffffu, 0,
                               3, context, id);
 }
 }

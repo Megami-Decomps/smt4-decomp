@@ -1,5 +1,6 @@
 #include "shard/Shard0032.h"
 #include "gamedata/GamePlayerData.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ extern StateAtF4 *g_campCecEdit;
 extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 extern void asdMemFree(void *ptr);
 extern void asdMemFreeSlot(u32 handle);
-extern void scrScriptProcessDestroy(u32 process);
 extern void resSetFree(u32 *p);
 extern void jobStop(u32 job, u16 arg);
 

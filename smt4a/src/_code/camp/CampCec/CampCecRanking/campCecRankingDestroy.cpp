@@ -2,13 +2,13 @@
  * task and frees the work area. */
 #include "common.h"
 #include "camp/CampCec/CampCecRanking.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int jobStop(u32 task, int flags);     /* kill a task */
 int asdMemFree(void *ptr);               /* heap free */
 int asdTMTexTableReleaseNode(int type, int index);
-int scrScriptProcessDestroy(u32 handle);
 int asdMemFreeSlot(u32 text);
 
 extern CampCecRanking *g_campCecRanking;

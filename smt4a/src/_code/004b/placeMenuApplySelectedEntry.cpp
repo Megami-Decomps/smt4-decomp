@@ -1,5 +1,6 @@
 #include "common.h"
 #include "event/2dEvent/EventEffect.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -22,14 +23,12 @@ typedef struct Menu {
     /* 0x1140 */ u8 unk1140[0x1C];
     /* 0x115C */ void *resourceA;
     /* 0x1160 */ void *resourceB;
-    /* 0x1164 */ void *handle;
+    /* 0x1164 */ ScriptProcess *handle;
 } Menu;
 
 int asdMemFree(void *resource);
-int scrScriptProcessDestroy(void *handle);
 int dialogOpen(int arg0, int arg1);
 int placeWinStartText(u8 *name);
-int scrRunOpcodesStub(void *handle);
 int placeWinSetValue(int arg);
 
 /* When the menu's handle is in state 2, releases its handle and resources, switches to state 5 and applies the selected entry. */

@@ -1,13 +1,8 @@
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
-
-typedef struct FlagBlock {
-    /* 0x00 */ u8 unk00[0x2A];
-    /* 0x2A */ s16 entryId;
-} FlagBlock;
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x14];
@@ -16,7 +11,6 @@ typedef struct Entry {
     /* 0x1C */ s32 flagId;
 } Entry;
 
-extern FlagBlock *gameFlagsGetBlock(void);
 extern Entry *dataTable2FType1GetEntry(s32 id);
 
 extern void gameFlagsSet(s32 index, s32 value);
@@ -24,14 +18,14 @@ extern void gameFlagsSet(s32 index, s32 value);
 /* When enabled, apply the current table-0x2f entry's flag and value (0xff when absent). */
 void gameApplyCurrentFlagTableEntry(void)
 {
-    FlagBlock *block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     s32 id;
     Entry *entry;
 
     if (g_gameState.unk0DC == 0) {
         return;
     }
-    id = block->entryId;
+    id = block->savePoint.tableId;
     entry = dataTable2FType1GetEntry(id);
     if (entry->flagId != 0) {
         gameFlagSetValue(entry->flagId, 1, 1);

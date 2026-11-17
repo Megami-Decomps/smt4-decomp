@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BattleSlotCore { u8 data[0x2ac]; };
 struct BattleSlotScratch {
@@ -38,7 +39,6 @@ struct RecoverableSlot {
     u16 hp; // 0x2a
 };
 extern "C" {
-extern void *g_btlUiBlock;
 void FUN_003eb314(BattleSlotState *, BattleSlotCore *, void *);
 PartySlotMap *gameGetSlotTable();
 RecoverableSlot *gameGetSlotRecord(s32);
@@ -48,7 +48,7 @@ void bitsAt60Clear(RecoverableSlot *, u32);
 void FUN_003e9cec(BattleSlotState *, BattleSlotCore *, RecoverableSlot *, u32);
 BattleSlotVisual *FUN_003e83b4(BattleSlotState *, s32, u32);
 void btlQueueActionMessage(s32, s32, u32, s32, s32, s32, s32);
-void FUN_004a9c24(void *, s32, s32, s32);
+void FUN_004a9c24(BtlUiA *ui, s32, s32, s32);
 void FUN_004ca63c(BattleSlotState *, BattleSlotCore *, s32, s32, s32);
 
 // Populate a battle slot from a table definition or a selected saved party member.

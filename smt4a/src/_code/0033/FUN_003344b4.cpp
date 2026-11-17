@@ -1,9 +1,8 @@
 #include "shard/Shard0033.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 void FUN_003344b4(u32 a, u32 b)
 {

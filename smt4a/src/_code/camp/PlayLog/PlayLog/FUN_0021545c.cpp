@@ -1,7 +1,7 @@
 /* NON_MATCHING: the build hoists the constants 1 and 3 (state, direction, animation) into registers where retail reloads them per use, narrows the animation constants differently (retail sign-extends each to s16 once before its loop) and lays the scroll-key loop out of line. */
 #include "common.h"
 #include <stddef.h>
-#include "gamedata/DataTable.h"
+#include "gamedata/PlayLogTable.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
@@ -16,11 +16,6 @@ struct PlayLogPageView {
     u32 details[25];
 };
 
-/* A row of the play log data table. */
-struct PlayLogRow {
-    u16 kind;
-    u8 unk02[0x3E];
-};
 
 /* The play log screen's work as its per-frame update reads it. */
 struct PlayLogScreen {
@@ -84,9 +79,9 @@ void FUN_0021545c(void)
     case 1: {
         for (s32 i = 0; i < objectApplyIfUnblocked(&work->list); i++) {
             u32 index = work->ids[i];
-            DataTableView<PlayLogRow> rows(0x37, 0);
-            PlayLogRow *row = rows.at(index);
-            if (row != NULL && row->kind == 0x2E) {
+            DataTableView<PlayLogRecord> rows(0x37, 0);
+            PlayLogRecord *row = rows.at(index);
+            if (row != NULL && row->counter == 0x2E) {
                 u32 value = FUN_002e50d4();
                 work->pages[0].values[i] = value - countersGetB(0x2E);
                 work->pages[1].values[i] = value;

@@ -1,13 +1,13 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/Shard0037.h"
 #include "map/MapSceneAccess.h"
 
 extern "C" {
 
-extern Flags0C0C *gameFlagsGetBlock(void);
 
 u8 lmapGetSpawnIndex(void)
 {
-    return gameFlagsGetBlock()->unk03;
+    return gameFlagsGetBlock()->departureIndex;
 }
 
 } /* extern "C" */

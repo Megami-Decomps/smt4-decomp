@@ -1,5 +1,6 @@
 /* NON_MATCHING: the final step transition (btlStepEnter) and the word-wise stores of both mask ORs now match; retail loads the state mask of the initial test with ldrd (built: two ldr) and the state mask of the second OR with ldm (built: two ldr). */
 #include "battle/btlMain.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
@@ -7,9 +8,8 @@ void FUN_003ed6e8(BtlMainStateA *battle);
 s32 btlFindSelectionIndexByOrdinal(BtlMainStateA *battle, s32 mode);
 void FUN_003f26d4(BtlMainStateA *battle);
 void FUN_0047f444(s32 mode);
-void FUN_004aa2e0(void *ui, s32 mode);
+void FUN_004aa2e0(BtlUiA *ui, s32 mode);
 void FUN_004f1c5c(void *camera, s32 duration);
-extern void *g_btlUiBlock;
 
 // Initialize encounter flags and advance the step, restoring UI or reporting a failed transition.
 void FUN_003e26f0(BtlStep *step, BtlMainStateA *battle)

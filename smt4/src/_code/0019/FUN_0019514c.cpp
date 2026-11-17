@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 200 rows); retail hoists the 0x424 literal and keeps the per-row loops as separate counters */
 #include "common.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/PlayLogTable.h"
 #include "code/Code0029_VariantA.h"
 #include "code/Code0029_VariantB.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -8,12 +8,6 @@
 // One animated row widget (0x8c bytes each).
 struct RowWidget {
     u8 unk00[0x8c];
-};
-
-// Data table 0x37 record: only the leading id halfword (negative = unlocked flavour).
-struct TableRecord {
-    s16 id;                 // 0x00
-    u8 unk02[0x3e];
 };
 
 extern "C" {
@@ -59,8 +53,8 @@ void FUN_0019514c(u8** screenRef)
         for (s32 i = 0; i < count; i = i + 1, count = (s32)FUN_0029ee54(list)) {
             u32 id = reinterpret_cast<s16*>(screen + 0x424)[i];
             void *table = dataTableGet(0x37, 0);
-            TableRecord* entries = static_cast<TableRecord*>(dataTableGetEntries(table));
-            if (id < dataTableGetCount(table) && &entries[id] != NULL && entries[id].id < 0) {
+            PlayLogRecord *entries = static_cast<PlayLogRecord *>(dataTableGetEntries(table));
+            if (id < dataTableGetCount(table) && &entries[id] != NULL && entries[id].counter < 0) {
                 reinterpret_cast<u32*>(screen + 0x35c)[i] = saveBlockGetPlaySeconds();
             }
         }

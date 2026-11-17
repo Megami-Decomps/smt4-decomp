@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/PartyPanelStateA.h"
 
 extern "C" {
 
-s32 uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 frame);
 s32 FUN_0026fa30(void);
 s32 scrollOwnerSelectIndex(void *cursor, s32 column);
 s32 scrollListSetSelectionTracked(void *cursor, s32 row);

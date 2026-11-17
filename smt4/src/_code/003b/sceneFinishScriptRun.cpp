@@ -1,13 +1,12 @@
 #include "font/PlaceWin.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int FUN_002305e8(int a);
 int dialogOpen(int a, int b);
 int infoWinSetMessage(u32 a, int b);
-int scrScriptProcessDestroy(u32 process);
 int asdMemFree(u32 ptr);
-extern int scrRunOpcodesStub(u32 value);
 
 typedef struct Inner {
     /* 0x00 */ u8 unk00[2];
@@ -28,7 +27,7 @@ typedef struct Scene {
     /* 0x0D84 */ u8 unkD84[0x1C];
     /* 0x0DA0 */ u32 bufferA;
     /* 0x0DA4 */ u32 bufferB;
-    /* 0x0DA8 */ u32 script;
+    /* 0x0DA8 */ ScriptProcess *script;
 } Scene;
 
 void sceneFinishScriptRun(Scene *scene)

@@ -1,10 +1,10 @@
-#include "shard/Sys464af0.h"
+#include "gfx/GfxSettings.h"
 
 extern "C" {
 
 u8 FUN_00104e0c(void)
 {
-    return g_gfxSettings.unk04 == 2;
+    return g_gfxSettings.fadeMode == 2;
 }
 
 } /* extern "C" */

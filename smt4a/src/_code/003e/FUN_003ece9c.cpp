@@ -4,9 +4,9 @@
 #include "code/Code0019.h"
 #include "battle/BattleHelpers.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern void *g_btlUiBlock;
 s32 hasFlag80Or1000(u32 id, const ScriptCategoryUnit *unit);
 UnitCategoryState *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 void FUN_0047f780(s32 category, s32 first, s32 second);

@@ -3,23 +3,16 @@
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "game/GameState.h"
+#include "map/LmapViewGlobals.h"
 
-struct Obj4222acTransition {
-    u8 unk00[0x18];
-    f32 heading;
-    u8 unk1c[0x2A0];
-    f32 progress;
-};
-/* NodeEnableResource is this code's partial view of the model (AsdMdlNode). */
 extern "C" {
-extern Obj4222acTransition *g_mapCamera;
-void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
-void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
+void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
+void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 }
 
-static __inline NodeEnableNode *modelOf(AsdMdlObject *handle)
+static __inline AsdMdlObject *modelOf(AsdMdlObject *handle)
 {
-    return (NodeEnableNode *)handle;
+    return (AsdMdlObject *)handle;
 }
 
 static __inline void flagsClear(u32 *flags, u32 mask)
@@ -51,30 +44,30 @@ void Obj4222ac::updateMotion()
             basePosition[1] + position[1],
             basePosition[2] + position[2]
         };
-        if (g_mapCamera->progress > 0.9f) {
-            f32 amount = (g_mapCamera->progress - 0.9f) * 10.0f;
+        if (g_mapCamera->weight > 0.9f) {
+            f32 amount = (g_mapCamera->weight - 0.9f) * 10.0f;
             if (amount < 0) {
                 amount = 0;
             } else if (amount > 1) {
                 amount = 1;
             }
             translated[1] += amount * 100.0f;
-            nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->resource), 0, translated);
-            modelPartSetRotationDegrees(modelOf(handle)->resource, 0, amount * -60.0f, g_mapCamera->heading + 180.0f, 0);
+            nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->node), 0, translated);
+            modelPartSetRotationDegrees(modelOf(handle)->node, 0, amount * -60.0f, g_mapCamera->heading + 180.0f, 0);
         } else {
-            nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->resource), 0, translated);
-            modelPartSetRotationDegrees(modelOf(handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
+            nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->node), 0, translated);
+            modelPartSetRotationDegrees(modelOf(handle)->node, 0, rotation[0], rotation[1], rotation[2]);
         }
-        nodeSetScale(modelOf(handle)->resource, 0, scale[0], scale[1], scale[2]);
-        NodeEnableNode *node = modelOf(handle);
+        nodeSetScale(modelOf(handle)->node, 0, scale[0], scale[1], scale[2]);
+        AsdMdlObject *node = modelOf(handle);
         if (g_gameState.loading) {
             if ((node->flags & 2) == 0) {
                 node->flags |= 2;
-                node->resource->target->enabled = 0;
+                node->node->sceneNode->positionFollowed = 0;
             }
         } else if ((node->flags & 2) != 0) {
             node->flags &= ~2;
-            node->resource->target->enabled = 1;
+            node->node->sceneNode->positionFollowed = 1;
         }
     }
 }

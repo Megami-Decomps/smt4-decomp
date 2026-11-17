@@ -1,5 +1,5 @@
 /* NON_MATCHING: refreshes the visibility, screen position and tint of the two map marker lists (full-size or half-size layout); written from the decompilation, the duplicated half/full loops are merged and scheduling not compared with retail */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 
 struct MapMarker {
@@ -55,11 +55,6 @@ struct MapMarkerScreen {
 
 extern "C" {
 
-struct MapBlock0xD8E {
-    u8 unk[0xD8E];
-    s8 layout;
-};
-MapBlock0xD8E *gameFlagsGetBlock(void);
 f32 *sub68OwnerGetBlock60(void *scene);
 s32 FUN_004083a8(u8 kind, u8 type);
 s32 FUN_002e707c(void);
@@ -107,7 +102,7 @@ static __inline void markerListRefresh(MapMarker *list, s32 count, MapMarkerScre
 
 void FUN_004900e0(MapMarkerScreen *screen)
 {
-    MapBlock0xD8E *block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     f32 *origin = sub68OwnerGetBlock60(screen->scene);
     f32 originX = origin[0];
     f32 originY = origin[1];

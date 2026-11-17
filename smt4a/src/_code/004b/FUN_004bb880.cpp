@@ -1,5 +1,5 @@
 #include "common.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/EncountData.h"
 #include <stddef.h>
 #include "gamedata/GameDataAccess.h"
 
@@ -22,11 +22,11 @@ typedef struct SaveData {
 
 extern s32 weightedTableRollNextValue(u32 a, u32 b, s32 c);
 
-/* Clears the first byte and both nibbles of the second byte of every save entry of the table and applies each (a, b) pair. */
+/* Clears the saved encounter roll state of every (map, area) (EncountData.tbb table 3) and rolls it again. */
 void FUN_004bb880(void)
 {
     void *table = dataTableGet(2, 3);
-    u8 *pairs = static_cast<u8 *>(dataTableGetEntries(table));
+    EncountAreaKey *pairs = encountAreaKeys(table);
     s32 count = dataTableGetCount(table);
     SaveData *save = reinterpret_cast<SaveData *>(gameDataBlocksGetSaveData());
     s32 i;
@@ -35,7 +35,7 @@ void FUN_004bb880(void)
         save->entries[i].first = 0;
         save->entries[i].secondLow = 0;
         save->entries[i].secondHigh = 0;
-        weightedTableRollNextValue(pairs[i * 2], pairs[i * 2 + 1], 1);
+        weightedTableRollNextValue(pairs[i].map, pairs[i].area, 1);
     }
 }
 

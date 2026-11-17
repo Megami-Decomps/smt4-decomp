@@ -2,6 +2,7 @@
 #include "common.h"
 #include "code/Code0027.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -28,9 +29,8 @@ typedef struct BtlAction {
 #define BTL_MAIN_FLAG_ACTION_PENDING 0x02000000
 
 extern u32 g_btlEvent; /* 0x435d48 */
-extern u32 g_btlUiBlock; /* 0x439ca8 */
 
-extern int btlUiPanelFadeInWhenReady(u32);
+extern int btlUiPanelFadeInWhenReady(BtlUi *ui);
 extern int btlReflectCreateKind24(int, BtlAction *, u32, int);
 extern int FUN_003ddee0(int, BtlAction *, BtlTarget *, int, int, int);
 extern int frameRangeExtend(BtlWork **, BtlAction *, int, int, int, int);

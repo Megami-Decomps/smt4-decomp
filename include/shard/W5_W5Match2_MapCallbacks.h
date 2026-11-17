@@ -20,14 +20,6 @@ struct ModelRequestWork {
     /* 0x2C */ u32 model;
 };
 
-struct MapEnemyRequestWork {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 state;
-    /* 0x08 */ u32 counter;
-    /* 0x0C */ u32 first;
-    /* 0x10 */ u32 second;
-};
-
 struct ResourceCallbackWork {
     /* 0x00 */ u8 unk00[0x1C];
     /* 0x1C */ void *resource;

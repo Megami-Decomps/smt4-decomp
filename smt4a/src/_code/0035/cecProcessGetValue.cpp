@@ -1,18 +1,15 @@
-#include "common.h"
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
 
-struct CecProcess { u32 unk00; void *object; };
-extern CecProcess *g_cecProcess;
-s32 cecCardMessageBoxInit(void *object);
+s32 cecCardMessageBoxInit(Obj557ec0 *messageBox);
 
 s32 cecProcessGetValue(void)
 {
-    CecProcess *process = g_cecProcess;
+    CecProcessA *process = g_cecProcess;
     s32 value = 0;
-
     if (process != NULL) {
-        value = cecCardMessageBoxInit(process->object);
+        value = cecCardMessageBoxInit(process->messageBox);
     }
     return value;
 }

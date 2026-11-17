@@ -10,6 +10,7 @@
 #include "status/StatusDownParts.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "script/ScriptVm.h"
 struct AsdText;
 struct PlayerDataA;
 
@@ -35,7 +36,7 @@ typedef struct StatusDownSkillMenuA {
     /* 0xBC */ u32 phase;
     /* 0xC0 */ void *dataA;             /* camp messages */
     /* 0xC4 */ void *dataB;             /* camp script */
-    /* 0xC8 */ void *process;
+    /* 0xC8 */ ScriptProcess *process;
     /* 0xCC */ u8 confirming;
     /* 0xCD */ u8 unkCD[3];
     /* 0xD0 */ s32 selectedCard;

@@ -1,9 +1,9 @@
 /* NON_MATCHING: the record-flag test now lowers to TST/MOVNE as in retail; remaining: retail shares one register for the constant 1 and `allowed`, keeps the zero constant in r6 and uses a 300-byte frame, so session/option registers differ. */
 #include "shard/Shard0033.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 void FUN_0035ad50(u32 id, void *record);
 void FUN_0026fd50(void *display, const void *record, u32 mode, u32 options);
 

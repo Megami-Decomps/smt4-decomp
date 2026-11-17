@@ -1,6 +1,6 @@
 /* NON_MATCHING: the three sentinel stores (previousId, previousNode, table) are scheduled in a different order and constants. */
 #include "event/bustupEvent/BustupTextureWork.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/BgData.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "addon/aocMain.h"
@@ -30,8 +30,8 @@ void FUN_002f5a10(s32 bustupId)
     work->id = 0;
     work->x = 150.0f;
     work->y = 150.0f;
-    void *table = dataTableGet(26, 1);
-    const s16 *entries = (const s16 *)dataTableGetEntries(table);
+    void *table = dataTableGet(0x1A, 1);
+    const s16 *entries = bgDataTextureNodes(table);
     dataTableGetCount(table);
     s32 index = bustupId - 1;
     work->node = entries[index];

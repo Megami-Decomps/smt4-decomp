@@ -38,11 +38,11 @@ extern "C" u32 FUN_003cd7c4(u32 request, u32 argument)
     if (packet.state == 2) {
         result = 0x400000;
     } else if (packet.state == 1) {
-        FUN_003ca0ec(g_effectEditor.selection.list, g_effectEditor.selection.item);
+        FUN_003ca0ec(g_effectEditor.list, g_effectEditor.item);
         if (packet.type != 8) {
-            taskRunWithObject(g_effectEditor.selection.block, &packet, effectPacketMode(packet.type));
+            taskRunWithObject(g_effectEditor.block, &packet, effectPacketMode(packet.type));
         } else {
-            effBlockCopyDataB(g_effectEditor.selection.block, &packet.value, 4, 4);
+            effBlockCopyDataB(g_effectEditor.block, &packet.value, 4, 4);
         }
         result = 0x400002;
     }

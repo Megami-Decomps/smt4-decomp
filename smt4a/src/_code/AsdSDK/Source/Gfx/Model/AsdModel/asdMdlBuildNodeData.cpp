@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Util/AsdList.h"
 #include "shard/GlobalBlocks.h"
+#include "gfx/GfxSettings.h"
 
 struct ModelNodeData {
     u32 references;
@@ -26,10 +27,6 @@ struct ModelContainerHeader {
 struct ModelSignatureHeader {
     u8 magic[8];
     u32 flags;
-};
-struct ModelDataCounterView {
-    u8 unk00[0x38];
-    u32 count;
 };
 extern "C" {
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
@@ -89,6 +86,6 @@ extern "C" void *asdMdlBuildNodeData(void *source, void *argument)
         node->argument = argument;
     }
     asdListAdd(&DAT_00636ebc, node, 0);
-    ++((ModelDataCounterView *)&g_gfxSettings)->count;
+    ++g_gfxSettings.loadedModelCount;
     return node;
 }

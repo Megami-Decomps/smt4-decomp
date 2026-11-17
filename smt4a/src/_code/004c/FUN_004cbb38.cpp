@@ -1,6 +1,7 @@
 /* NON_MATCHING: slot search/early-exit layout differs (retail keeps the not-found result in one register shared with the failure state store); register allocation of this/pair also differs. */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
+#include "script/scrScriptProcess.h"
 
 struct SlotRecordId {
     /* 0x00 */ u8 unk00[0x62];
@@ -22,7 +23,7 @@ struct TalkScene {
     /* 0x08 */ u32 timer;
     /* 0x0C */ u8 unk0C[4];
     /* 0x10 */ void *sceneData;
-    /* 0x14 */ u8 *scene;           /* created lazily */
+    /* 0x14 */ ScriptProcess *scene;           /* created lazily */
     /* 0x18 */ void *modelData;
     /* 0x1C */ void *portraitData;
     /* 0x20 */ void *portrait;
@@ -37,7 +38,6 @@ SavedPair *saveGetSelectedRecordSlot(s32 index);
 SlotRecordId *gameGetSlotRecord(s32 slot);
 s32 recordContainsPairedId(const void *record, u32 id);
 s32 loadSlotIsLoaded(u32 index);
-u8 *scrScriptProcessCreate(void *first, void *second);
 s32 FUN_003316b4(s8 variant);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
@@ -88,7 +88,7 @@ void FUN_004cbb38(TalkScene *scene)
     }
     if (scene->scene == NULL) {
         scene->scene = scrScriptProcessCreate(scene->sceneData, scene->modelData);
-        *(u32 *)(scene->scene + 0x108) = 0;
+        scene->scene->mode = 0;
     }
     SavedPair *pair = saveGetSelectedRecordSlot(scene->pairIndex);
     SlotRecordId *record = gameGetSlotRecord(scene->slot);

@@ -19,7 +19,7 @@ void FUN_002512c4(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
     s32 blend = packNibblesAndByte(6, 1, 0);
     renderStackSet(&context->stackB, blend);
     if (selected != 0) {
-        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]));
+        efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]));
         texDrawTableEntryAtStoredOrigin(2, 0x19, 0x10, position->x + x, position->y + y, flags);
         efctSetSpeed(1.0f);
     } else {

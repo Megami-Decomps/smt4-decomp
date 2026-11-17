@@ -22,7 +22,7 @@ extern "C" void playerResetToStartingStats(void)
     player->experience = 0;
     player->ailments = 0;
 
-    const PlayerGrowthDefaults *defaults = playerGrowthDefaults();
+    const PlayerGrowRecord *defaults = playerGrowthDefaults();
     player->baseStats.stats[0] = defaults->initialStats[0];
     player->baseStats.stats[1] = defaults->initialStats[1];
     player->baseStats.stats[2] = defaults->initialStats[2];

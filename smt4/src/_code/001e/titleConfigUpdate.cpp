@@ -40,7 +40,6 @@ void FUN_002bfc24(u32 player, u32 sound, u32 bank, u32 priority);
 s32 FUN_0029efd8(void *cursor, u32 enabled);
 void scrScriptProcessStartEntry(void *process, u32 entry);
 void __ARM_common_memcpy4_8(TitleConfigValues *values, const void *saved);
-s32 scrRunOpcodesStub(void *process);
 s32 messageMainGetChoiceResult(void);
 
 /* Update the title configuration controls, previews, confirmation, and cancellation. */
@@ -49,7 +48,7 @@ u32 titleConfigUpdate(void)
     TitleConfigCallbackView *work = g_titleConfig;
     switch (work->state) {
     case 0: {
-        if (!asdTMTexTableNodeIsLoaded(0x2F, 0) || !uiSpriteAdvanceAnimation((UiSpriteState *)work->window) ||
+        if (!asdTMTexTableNodeIsLoaded(0x2F, 0) || !uiSpriteAdvanceAnimation(&work->window) ||
             work->dataA == NULL || work->dataB == NULL) {
             return 0;
         }
@@ -161,7 +160,7 @@ u32 titleConfigUpdate(void)
             work->state = 2;
         } else if (FUN_002c1658(1, 1)) {
             eventQueueAddUniqueIfValid(0x100016E);
-            timerStart((UiSpriteState *)work->window, 1, 0);
+            timerStart(&work->window, 1, 0);
             __ARM_common_memcpy4_8(&g_titleConfigValues, work->saved);
             titleConfigApplyAudio();
             audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
@@ -179,7 +178,7 @@ u32 titleConfigUpdate(void)
             work->state = 1;
             return 0;
         case 0:
-            timerStart((UiSpriteState *)work->window, 1, 0);
+            timerStart(&work->window, 1, 0);
             work->state = 3;
             g_titleConfigValues.changed = 1;
             return 0;
@@ -187,7 +186,7 @@ u32 titleConfigUpdate(void)
             return 0;
         }
     case 3:
-        if (uiSpriteAdvanceAnimation((UiSpriteState *)work->window)) {
+        if (uiSpriteAdvanceAnimation(&work->window)) {
             work->state = 4;
         }
         return 0;

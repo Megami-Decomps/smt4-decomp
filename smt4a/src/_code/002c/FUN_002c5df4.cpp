@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c5df4` (_code @ 0x2c5df4, 0x918 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "map/LmapViewGlobals.h"
 
@@ -37,7 +38,6 @@ extern int DAT_006105dc; /* 0x6105dc */
 extern int DAT_006105e0; /* 0x6105e0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 extern int FUN_00297008(int);
 extern int FUN_00355418(int);
 extern int lmapGetSpawnIndex(void);
@@ -75,7 +75,7 @@ void FUN_002c5df4(void)
   int temp_v22;
   int temp_v23 [15];
   
-  temp_v22 = gameFlagsGetBlock();
+  temp_v22 = (int)gameFlagsGetBlock();
   temp_v9 = 0;
   temp_v5 = 0;
   if (DAT_005f161f != '\0') {

@@ -1,17 +1,10 @@
-#include "common.h"
 #include "shard/JobWork.h"
+#include "shard/W6_W6Match5_EffectLineJob.h"
 
-struct EffectLine {
-    void (**vtable)(EffectLine *); // 0x00
-};
-struct EffectLineWork {
-    EffectLine *effect; // 0x00
-};
-
-// Advance the effect-line object owned by this job.
+// Draw task of the effect-line job: draws its effect object.
 extern "C" s32 effectLineUpdateCallback(u32 job)
 {
-    EffectLine *effect = ((EffectLineWork *)jobGetWork(job))->effect;
-    effect->vtable[3](effect);
+    EffectLineJobWork *work = reinterpret_cast<EffectLineJobWork *>(jobGetWork(job));
+    work->object->draw();
     return 0;
 }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273060` (_code @ 0x273060, 0x708 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 #include "game/GameStateA.h"
 
 extern "C" {
@@ -26,7 +27,6 @@ typedef struct {
 } void_stack;
 
 extern int *g_lmapView; /* 0x5806a4 */
-extern int g_mapEnemy; /* 0x5806d4 */
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 
@@ -93,7 +93,7 @@ void FUN_00273060(void)
   unsigned int uStack_4c;
   unsigned int uStack_48;
   
-  temp_v1 = g_mapEnemy;
+  temp_v1 = ((int)g_mapEnemy);
   if (DAT_005f1be0 == 0) {
     if (g_gameState.loading == '\0') {
       if ((*g_lmapView == 3) || (*(char *)(DAT_00581280 + 0xf40) != '\0')) {
@@ -166,7 +166,7 @@ void FUN_00273060(void)
         }
         FUN_002d2834();
       }
-      temp_v2 = g_mapEnemy;
+      temp_v2 = ((int)g_mapEnemy);
       temp_v17 = romwright_piece_4_4(0x3f800000,temp_v16);
       temp_v11 = (float)g_lmapView[0x17] - (float)g_lmapView[0x14];
       temp_v14 = (float)g_lmapView[0x18] - (float)g_lmapView[0x15];

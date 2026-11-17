@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 165 rows); register allocation and the stack frame (20 vs 24 bytes) differ */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "map/LmapGlobals.h"
 #include "util/TrigF32.h"
 #include "code/Code0025.h"
@@ -14,18 +14,12 @@ struct PlayerController {
     s32 moving;             // 0xc0
 };
 
-struct MapBlock {
-    u8 unk000[0xd94];
-    s32 moveRequest;        // 0xd94
-};
-
 extern "C" {
 
 extern s8 DAT_0049f934;
 extern s8 DAT_0049fc64;
 extern s8 DAT_0049fce8;
 
-MapBlock* gameGetMapBlock(void);
 void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
 void FUN_0026413c(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
@@ -35,7 +29,7 @@ s32 FUN_002ed094(MapVector* candidate, MapVector* previous);
 // turns to the stick direction and advances in one or two collision-checked steps.
 void FUN_002d508c(PlayerController* player)
 {
-    MapBlock* block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
     f32 speedScale = 1.0f;
     s32 blocked = 0;
     if (DAT_0049fc64 != 0 || DAT_0049f934 != 0) {

@@ -15,12 +15,12 @@ void menuStateStartSelect(u8 selection)
     menu->unk2bc = 0;
     if (menu->type != 6) {
         menu->mode = 1;
-        uiSpriteSelectAnim((UiSpriteState *)menu->panelA, 0);
+        uiSpriteSelectAnim(&menu->primarySprites[0], 0);
         return;
     }
     menu->mode = 5;
-    uiSpriteSelectAnim((UiSpriteState *)menu->panelA, 0);
-    uiSpriteSelectAnim((UiSpriteState *)menu->panelB, 3);
+    uiSpriteSelectAnim(&menu->primarySprites[0], 0);
+    uiSpriteSelectAnim(&menu->secondarySprites[0], 3);
     menu->unk2c8 = menu->unk2c0;
 }
 

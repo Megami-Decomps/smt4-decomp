@@ -1,16 +1,12 @@
 /* NON_MATCHING: register-only: retail keeps the record-list global in r7 and the constant 1 in r8 (built swapped), and its find-free-record loop and record address use r2 where built uses r3. */
+#include "gamedata/MapSaveBlockA.h"
 #include "gfx/EngineRecordList.h"
-#include "code/Code0040.h"
+#include "Model/MoriModelContent.h"
+#include "Model/MoriModelManager.h"
 
-struct HandleRegistry;
 extern "C" {
 extern EngineRecordList *g_engineRecordList;
-extern HandleRegistry *g_handleRegistry;
-void *gameFlagsGetBlock(void);
-EngineRecordModelList *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
-EngineRecordModelList *modelListInit(EngineRecordModelList *models);
-void moriModelContentLoadBody(EngineRecordModelList *models, s32 index);
-void handleRegistryRegisterObject(HandleRegistry *registry, u32 handle);
+void *asdMemoryAllocTraced(u32 bytes, const char *file, s32 line);
 
 static __inline s32 findFreeRecord(EngineRecordList *list)
 {
@@ -32,8 +28,8 @@ void FUN_003276f0(s32 delay, s32 alternate, f32 x, f32 y, f32 z, f32 w)
     list->counter18 = 0;
     list->counterCE0 = 0;
     list->modelSlot = 1;
-    EngineRecordModelList *models = asdMemoryAllocTraced(32,
-        "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp", 971);
+    MoriModelContent *models = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent),
+        "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp", 971));
     models = models != NULL ? modelListInit(models) : NULL;
     g_engineRecordList->models[g_engineRecordList->modelSlot].models = models;
     resourceOwnerLoadFileSync(models, "map/unit/u007.bam");
@@ -68,6 +64,6 @@ void FUN_003276f0(s32 delay, s32 alternate, f32 x, f32 y, f32 z, f32 w)
     s32 modelSlot = list->modelSlot;
     record->modelSlot = modelSlot;
     handleRegistryRegisterObject(g_handleRegistry,
-        list->models[modelSlot].models->registryHandle);
+        list->models[modelSlot].models->body);
 }
 }

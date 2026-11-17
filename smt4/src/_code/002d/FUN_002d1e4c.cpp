@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d1e4c` (_code @ 0x2d1e4c, 0xa58 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -47,7 +48,6 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 extern int padIsButtonPressed(unsigned int);
 extern int slotIsActive(unsigned int);
-extern int gameGetMapBlock(void);
 
 
 void FUN_002d1e4c(void)
@@ -90,7 +90,7 @@ void FUN_002d1e4c(void)
   temp_v9 = 0;
   temp_v11 = 0;
   temp_v0 = 0;
-  temp_v1 = gameGetMapBlock();
+  temp_v1 = (int)gameGetMapBlock();
   temp_v2 = g_mapCamera;
   temp_v20 = 0.0f;
   temp_v18 = 1.0f;

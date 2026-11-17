@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00356674` (_code @ 0x356674, 0x1168 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -37,7 +38,6 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(void);
 extern int gameFlagBitsTest(void);
@@ -74,7 +74,7 @@ unsigned int FUN_00356674(void)
   unsigned int in_fpscr;
   int temp_v10;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   temp_v3 = *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 8);
   if (temp_v3 != 0) {
     if (temp_v3 != 1) {

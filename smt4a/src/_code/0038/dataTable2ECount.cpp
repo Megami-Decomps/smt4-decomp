@@ -1,13 +1,11 @@
-#include "shard/Shard0038.h"
+#include "gamedata/MapSystemTable.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern u32 dataTableGetCount(void *table);
-
-void dataTable2ECount(void)
+/* The number of map rows (MapSystemTable.tbb table 2). */
+s32 dataTable2ECount(void)
 {
-    dataTableGetCount(dataTableGet(0x2E, 2));
+    return dataTableGetCount(dataTableGet(0x2E, 2));
 }
 
 } /* extern "C" */

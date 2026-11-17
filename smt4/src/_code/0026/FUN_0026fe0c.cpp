@@ -1,5 +1,5 @@
 /* NON_MATCHING: default destination lookup constant lifetimes and common return blocks differ; restored target headers store separately. */
-#include "shard/SaveWork.h"
+#include "gamedata/MapSaveBlock.h"
 #include "map/MapDepartTarget.h"
 #include "map/SceneSpawn.h"
 #include "map/mapDepart.h"
@@ -7,7 +7,6 @@
 #include "game/GameState.h"
 
 extern "C" {
-SaveWork *gameGetMapBlock(void);
 s32 dataTable23Type1CountWithAoc(void);
 static __inline s32 findSpawnDestination(s32 map, s32 area, u32 entrance)
 {
@@ -21,24 +20,15 @@ static __inline s32 findSpawnDestination(s32 map, s32 area, u32 entrance)
 
 void FUN_0026fe0c(void)
 {
-    // Both the saved destination and the target's coordinates extend beyond the shared prefixes.
-    struct SavedMapView {
-        u8 kind, map, area, unk03;
-        MapVector position;
-        f32 heading;
-        f32 parameter;
-        u8 unk18[0xDC0];
-        s32 destination;
-    };
-    struct TargetView {
+        struct TargetView {
         MapDepartTarget selection;
         MapVector position;
         f32 heading;
         f32 parameter;
     };
-    SavedMapView *saved = reinterpret_cast<SavedMapView *>(gameGetMapBlock());
+    MapSaveBlock *saved = gameGetMapBlock();
     TargetView *target = reinterpret_cast<TargetView *>(&g_gameState.jumpRequest);
-    switch (saved->kind) {
+    switch (saved->resumeMode) {
     case 0: {
         target->selection.group = 1;
         target->selection.map = 2;
@@ -47,28 +37,28 @@ void FUN_0026fe0c(void)
         break;
     }
     case 1:
-        target->selection.group = saved->map;
-        target->selection.map = saved->area;
+        target->selection.group = saved->resumeMapId;
+        target->selection.map = saved->resumeAreaId;
         target->selection.target = ~0u;
-        target->selection.destination = saved->destination;
-        target->position.x = saved->position.x;
-        target->position.y = saved->position.y;
-        target->position.z = saved->position.z;
-        target->heading = saved->heading;
-        target->parameter = saved->parameter;
+        target->selection.destination = saved->resumeObjectId;
+        target->position.x = saved->resumePosition.x;
+        target->position.y = saved->resumePosition.y;
+        target->position.z = saved->resumePosition.z;
+        target->heading = saved->resumeHeading;
+        target->parameter = saved->resumeViewHeading;
         break;
     case 2:
-        target->selection.group = saved->map;
-        target->selection.map = saved->area;
+        target->selection.group = saved->resumeMapId;
+        target->selection.map = saved->resumeAreaId;
         target->selection.target = ~0u;
-        target->selection.destination = saved->destination;
-        target->position.x = saved->position.x;
-        target->position.y = saved->position.y;
-        target->position.z = saved->position.z;
+        target->selection.destination = saved->resumeObjectId;
+        target->position.x = saved->resumePosition.x;
+        target->position.y = saved->resumePosition.y;
+        target->position.z = saved->resumePosition.z;
         break;
     case 3:
-        target->selection.group = saved->map;
-        target->selection.map = saved->area;
+        target->selection.group = saved->resumeMapId;
+        target->selection.map = saved->resumeAreaId;
         target->selection.destination = -1;
         break;
     }

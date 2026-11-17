@@ -5,6 +5,7 @@
 #include "nn/os/Thread.h"
 #include <stddef.h>
 #include "sys/ResultReport.h"
+#include "script/scrScriptProcess.h"
 
 /* The memory mapped for the loader's stack: its destructor unmaps it, and the block goes back
  * through the engine's operator delete. */
@@ -13,19 +14,13 @@ struct StackRegion : AddressSpaceRegion {
     static void operator delete(void *block);
 };
 
-/* The script process of the state machine, of which only the run state is known. */
-struct ScriptProcess {
-    u8 unk000[0x108];
-    u32 state;  // 0x108
-};
-
 /* The state machine that loads a script on a loader thread and starts it. */
 struct ScriptLoadState {
     /* 0x000 */ u8 unk000[0xa0];
     /* 0x0a0 */ u32 phase;
     /* 0x0a4 */ u8 unk0a4[0x2ac];
     /* 0x350 */ void *scriptData;
-    /* 0x354 */ u32 scriptSize;
+    /* 0x354 */ void *messages;  /* the owner word the script commands use */
     /* 0x358 */ u8 unk358[8];
     /* 0x360 */ ScriptProcess *process;
     /* 0x364 */ u8 unk364[0x4c];
@@ -54,7 +49,6 @@ void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
 void gameDataBlocksReleaseHold(u32 mask);
 void gameDataFlagsClearBits(u32 mask);
-ScriptProcess *scrScriptProcessCreate(void *data, u32 size);
 void rt_aeabi_memclr(void *memory, u32 size);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void gameDataAddHomeButtonHold(u32 mask);
@@ -93,9 +87,9 @@ extern "C" u32 FUN_0035a840(ScriptLoadState *state)
         state->threadStack = NULL;
         gameDataBlocksReleaseHold(2);
         gameDataFlagsClearBits(2);
-        ScriptProcess *process = scrScriptProcessCreate(state->scriptData, state->scriptSize);
+        ScriptProcess *process = scrScriptProcessCreate(state->scriptData, state->messages);
         state->process = process;
-        process->state = 2;
+        process->mode = 2;
         state->running = 1;
         if (state->startImmediately == 1) {
             state->phase = 0;

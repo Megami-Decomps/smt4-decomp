@@ -23,7 +23,7 @@ void FUN_003a7b2c(void);
 u32 gameDataBlocksGetWord(void);
 s32 aocDataBlockHasEntries(void);
 
-void FUN_0020b490(EngineUnits *result, s32 mode)
+void FUN_0020b490(ResultWorkA *result, s32 mode)
 {
     struct ResultModeView {
         u8 unk0000[0x4364];

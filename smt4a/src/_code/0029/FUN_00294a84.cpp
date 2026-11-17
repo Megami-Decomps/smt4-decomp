@@ -1,5 +1,5 @@
 /* NON_MATCHING: Popup-event selection is reconstructed; state guard lowering and table traversal preserve a different register set. */
-#include "gamedata/DataTable.h"
+#include "gamedata/PartnerInfoTable.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
 #include "map/PopupStateA.h"
@@ -7,14 +7,6 @@
 struct PopupSaveSlot {
     /* 0x000 */ u8 unk000[0x12c];
     /* 0x12C */ u16 selection;
-};
-struct PopupEventRecord {
-    /* 0x00 */ u32 selection;
-    /* 0x04 */ u32 type;
-    /* 0x08 */ s16 requiredFlag;
-    /* 0x0A */ s16 excludedFlag;
-    /* 0x0C */ s16 probability;
-    /* 0x0E */ u8 unk0e[0x12];
 };
 
 extern "C" {
@@ -45,11 +37,11 @@ extern "C" void FUN_00294a84(s32 immediate)
         g_popupState->state = 4;
         return;
     }
-    DataTableView<PopupEventRecord> table(0x43, 0);
+    DataTableView<PartnerInfoRecord> table(0x43, 0);
     for (s32 i = 0; i < static_cast<s32>(table.count); ++i) {
-        DataTableView<PopupEventRecord> currentTable(0x43, 0);
-        const PopupEventRecord *entry = currentTable.at(i);
-        if (entry->type != 5 || entry->selection != slot->selection) {
+        DataTableView<PartnerInfoRecord> currentTable(0x43, 0);
+        const PartnerInfoRecord *entry = currentTable.at(i);
+        if (entry->kind != 5 || entry->partnerId != slot->selection) {
             continue;
         }
         if (entry->requiredFlag != 0 && !gameFlagIsSet(entry->requiredFlag)) {
@@ -58,7 +50,7 @@ extern "C" void FUN_00294a84(s32 immediate)
         if (entry->excludedFlag != 0 && gameFlagIsSet(entry->excludedFlag)) {
             continue;
         }
-        if (entry->probability < randRange(99) + 1) {
+        if (entry->argument < randRange(99) + 1) {
             continue;
         }
         g_popupState->speakerId = slot->selection;

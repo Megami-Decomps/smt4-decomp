@@ -1,8 +1,8 @@
 #include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern BtlUiA *g_btlUiBlock; /* 0x57a9c8 */
 
 extern int FUN_004aaa4c(BtlUiA *ui);
 extern int FUN_004abac8(BtlUiA *ui);

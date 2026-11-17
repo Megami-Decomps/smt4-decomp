@@ -3,11 +3,11 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "battle/BtlUiFade.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 extern BtlTalk *g_btlTalk;
-extern u32 g_btlUiBlock;
 
 s32 jobIsValid(u32 job);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, s32 (*update)(u32), void (*end)(u32), void *work, u32 parent);

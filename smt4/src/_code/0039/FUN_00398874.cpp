@@ -19,7 +19,7 @@ typedef struct CursorMenu {
     /* 0x2C */ u8 unk2C[0x78];
     /* 0xA4 */ s32 timerValue;
     /* 0xA8 */ u8 unkA8[0x660];
-    /* 0x708 */ u8 timer[1];
+    /* 0x708 */ UiSpriteState timer;
 } CursorMenu;
 
 void FUN_00232848(void);
@@ -29,7 +29,7 @@ void messageOwnerSetState(CursorMenu *menu, s32 state);
  * and samples the transition timer. */
 void FUN_00398874(CursorMenu *menu)
 {
-    if (uiSpriteAdvanceAnimation((UiSpriteState *)menu->timer) != 0) {
+    if (uiSpriteAdvanceAnimation(&menu->timer) != 0) {
         if (menu->zoomed) {
             menu->page = menu->savedPage;
             menu->zoomed = 0;
@@ -46,9 +46,9 @@ void FUN_00398874(CursorMenu *menu)
             buttonHelpSetPreset(151);
         }
         messageOwnerSetState(menu, 11);
-        timerStart((UiSpriteState *)menu->timer, 0, 0);
+        timerStart(&menu->timer, 0, 0);
     }
-    menu->timerValue = vec2GetXInt((UiSpriteState *)menu->timer);
+    menu->timerValue = vec2GetXInt(&menu->timer);
 }
 
 } /* extern "C" */

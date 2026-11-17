@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Quest_UpdateObjective` (_code @ 0x213c20, 0x88c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "ui/MessageMain.h"
 #include "code/Code0028_Smt4.h"
@@ -98,7 +99,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_002cdf2c. */
 /* Supplied declaration required: bustupCutAnimSetFlag. */
@@ -159,7 +159,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       if (*(char *)(temp_v3 + 6) != '\0') {
         return 0;
       }
-      temp_v1 = gameGetMapBlock();
+      temp_v1 = (int)gameGetMapBlock();
       FUN_0028784c(temp_v0,0);
       *(unsigned short *)(temp_v1 + 0x1062) = 0;
       *(unsigned short *)(temp_v1 + 0x1060) = 0;

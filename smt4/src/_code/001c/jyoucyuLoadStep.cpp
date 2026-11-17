@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "code/Code002c_AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "battle/BtlUiGlobal.h"
 
 /* The loading task's work: its state word is at +8. */
 struct LoadTask {
@@ -12,7 +13,6 @@ struct LoadTask {
 
 extern "C" {
 extern LoadTask *g_jyoucyu;
-extern u32 g_btlUiBlock;
 extern u8 DAT_00446db4;
 void FUN_00192884(void);
 void configSettingsResetDefaults(void);
@@ -36,7 +36,7 @@ void FUN_00317e78(void);
 void FUN_00324a20(void);
 void fileSlotsPreloadShuffled(void);
 void FUN_0033f784(void);
-void spriteTables14And15Load(u32 block);
+void spriteTables14And15Load(BtlUi *block);
 
 /* Run one step of the boot-time resource loading sequence. Returns -1 once it is finished. */
 s32 jyoucyuLoadStep(u32 handle)

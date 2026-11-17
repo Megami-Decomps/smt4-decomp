@@ -11,8 +11,8 @@ void FUN_002f3b14(f32 x, f32 y, f32 z)
     for (s32 i = 0; i < 128; ++i) {
         MapIfRecord *record = &map->records[i];
         if (record->active &&
-            (record->display.category == 29 || record->display.category == 38 ||
-             record->display.category == 30 || record->display.category == 31 || record->display.category == 37)) {
+            (record->category == 29 || record->category == 38 ||
+             record->category == 30 || record->category == 31 || record->category == 37)) {
             if (mathDistanceBetweenPoints(x, y, z, record->position.x, record->position.y, record->position.z) < 10.0f) {
                 record->state = 18;
                 return;

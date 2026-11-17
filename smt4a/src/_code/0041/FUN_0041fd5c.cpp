@@ -4,10 +4,7 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 keyframe, s32 argument);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 argument);
 void FUN_00420a2c(SaveLoadTransitionPrefixA *state);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
 
 static void transitionValuesSet(SaveLoadTransitionValues *transition, u32 value0, u32 value1, f32 progress)

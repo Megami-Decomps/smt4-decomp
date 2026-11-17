@@ -1,5 +1,5 @@
 /* NON_MATCHING: camera-parameter aggregate register loads, allocation scratch and stripped-call NOPs differ. */
-#include "Model/ModelList.h"
+#include "Model/MoriModelContent.h"
 #include "gfx/CameraMatrixCache.h"
 #include "gfx/CameraParameters.h"
 #include "status/StatusCamera.h"
@@ -13,9 +13,9 @@ struct FountainInitializationView {
     void *effectFile;
     void *messageFile;
     u8 unk018[8];
-    ModelList *environment;
-    ModelList *character;
-    ModelList *objects[3];
+    MoriModelContent *environment;
+    MoriModelContent *character;
+    MoriModelContent *objects[3];
     u32 mode;
     CameraMatrixCache camera;
     /* The float-pair setter writes one float beyond the canonical camera prefix. */
@@ -36,7 +36,6 @@ typedef char FountainInitializationOffsets[
 extern "C" {
 extern LockedObj *g_handleRegistry;
 void *asdMemoryAllocTraced(u32 bytes, const char *file, u32 line);
-ModelList *modelListInit(ModelList *list);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void resourceOwnerLoadNamed(LockedObj *owner, const char *name);
 u8 FUN_0040af60(LockedObj *owner);
@@ -57,12 +56,12 @@ void placeWinCreate();
 void FUN_004cdddc(FountainInitializationView *work)
 {
     const char *file = "c:\\SMT4F\\SMT4F\\sdds4\\program\\fountain\\fountain.cpp";
-    ModelList *list = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList), file, 0x18D));
+    MoriModelContent *list = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), file, 0x18D));
     if (list != NULL)
         list = modelListInit(list);
     work->environment = list;
     modelLoadFileAsyncByName(list, "fountain/fountain.bam");
-    list = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList), file, 0x191));
+    list = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), file, 0x191));
     if (list != NULL)
         list = modelListInit(list);
     work->character = list;
@@ -70,7 +69,7 @@ void FUN_004cdddc(FountainInitializationView *work)
     char name[128];
     for (s32 index = 0; index < 3; ++index) {
         textFormatBuffer(name, "fountain/obj%03d.bam", index + 1);
-        list = static_cast<ModelList *>(asdMemoryAllocTraced(sizeof(ModelList), file, 0x198));
+        list = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), file, 0x198));
         if (list != NULL)
             list = modelListInit(list);
         work->objects[index] = list;

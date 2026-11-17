@@ -7,6 +7,7 @@
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/UnitStats.h"
+#include "battle/BtlUiGlobal.h"
 struct BtlUi;
 struct BtlEntry;
 /* Queued IDs and entry slots are outside the short shared prefixes. */
@@ -21,7 +22,6 @@ struct BattleSummaryBuffer {
     BattleSummaryData view;
 };
 extern "C" {
-extern BtlUi *g_btlUiBlock;
 void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const NkmEnemyRecord *definition);
 s32 flagWordTestBit(const void *owner, u32 bit);
 void objectFlagsClear(void *owner, u32 flags);

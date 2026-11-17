@@ -1,14 +1,13 @@
-#include "shard/Shard0035.h"
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
 
-extern CecProcess *g_cecProcess;
-extern u32 cecCardMessageBoxOpenIfAllowed(u32 handle);
+extern u32 cecCardMessageBoxOpenIfAllowed(Obj557ec0 *messageBox);
 
 void cecProcessCall4(void)
 {
     if (g_cecProcess != NULL) {
-        cecCardMessageBoxOpenIfAllowed(g_cecProcess->handle);
+        cecCardMessageBoxOpenIfAllowed(g_cecProcess->messageBox);
     }
 }
 

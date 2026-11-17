@@ -1,5 +1,7 @@
 #include "common.h"
 #include "Model/MoriModelContent.h"
+#include "classes/Obj557b18.h"
+#include "Model/MoriModelManager.h"
 
 /* The enemy controller (the part its setup fills). */
 struct LmapEnemyCtrl {
@@ -8,21 +10,9 @@ struct LmapEnemyCtrl {
     /* 0x9C */ MoriModelContent *bossModel;
 };
 
-/* A registered model object; its flags word is at +4. */
-struct RegisteredModel {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 flags;
-};
-
 extern "C" {
 
-extern u32 g_handleRegistry;
-
 void *asdMemoryAllocTraced(u32 size, const char *file, int line);   /* allocate with source location */
-MoriModelContent *modelListInit(void *mem);                 /* content constructor */
-void resourceOwnerLoadFileSync(MoriModelContent *content, const char *name);
-void moriModelContentLoadBody(MoriModelContent *content, u32 arg);
-void handleRegistryRegisterObject(u32 registry, u32 object);
 
 // Loads the field enemy and boss models and registers them.
 void lmapEnemyCtrlLoadModels(LmapEnemyCtrl *ctrl)
@@ -31,22 +21,22 @@ void lmapEnemyCtrlLoadModels(LmapEnemyCtrl *ctrl)
     if (mem != NULL) {
         mem = modelListInit(mem);
     }
-    ctrl->enemyModel = (MoriModelContent *)mem;
+    ctrl->enemyModel = static_cast<MoriModelContent *>(mem);
     resourceOwnerLoadFileSync(ctrl->enemyModel, "map/all/lmap_ene.bam");
     moriModelContentLoadBody(ctrl->enemyModel, 0);
-    RegisteredModel *enemy = (RegisteredModel *)ctrl->enemyModel->body;
-    handleRegistryRegisterObject(g_handleRegistry, (u32)enemy);
+    Obj557b18 *enemy = ctrl->enemyModel->body;
+    handleRegistryRegisterObject(g_handleRegistry, enemy);
     enemy->flags |= 3;
 
     mem = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapEnemyCtrl.cpp", 0xec);
     if (mem != NULL) {
         mem = modelListInit(mem);
     }
-    ctrl->bossModel = (MoriModelContent *)mem;
+    ctrl->bossModel = static_cast<MoriModelContent *>(mem);
     resourceOwnerLoadFileSync(ctrl->bossModel, "map/all/lmap_boss.bam");
     moriModelContentLoadBody(ctrl->bossModel, 0);
-    RegisteredModel *boss = (RegisteredModel *)ctrl->bossModel->body;
-    handleRegistryRegisterObject(g_handleRegistry, (u32)boss);
+    Obj557b18 *boss = ctrl->bossModel->body;
+    handleRegistryRegisterObject(g_handleRegistry, boss);
     boss->flags |= 3;
 }
 

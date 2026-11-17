@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ce4e4` (_code @ 0x2ce4e4, 0x868 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -16,7 +17,6 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00262a8c. */
 /* Supplied declaration required: mapCollisionQueueQuad. */
-extern int gameGetMapBlock(void);
 
 
 void FUN_002ce4e4(void)
@@ -31,7 +31,7 @@ void FUN_002ce4e4(void)
   int temp_v5;
   unsigned int in_fpscr;
   
-  temp_v2 = gameGetMapBlock();
+  temp_v2 = (int)gameGetMapBlock();
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xdd0),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xdd1),(unsigned char)(in_fpscr >> 0x16) & 3);
   mapCollisionQueueQuad(0,0);

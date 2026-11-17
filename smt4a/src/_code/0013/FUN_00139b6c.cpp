@@ -1,50 +1,40 @@
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameDataAccess.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
-
-typedef struct FlagsBlock {
-    /* 0x000 */ u8 unk000[0xC0C];
-    /* 0xC0C */ u8 timersA[64];     /* 0 and 255 stay as they are */
-    /* 0xC4C */ u8 timersB[128];
-    /* 0xCCC */ u8 unkCCC[0xC4];
-    /* 0xD90 */ s16 timersC[16];
-    /* 0xDB0 */ u8 unkDB0[0xE4];
-    /* 0xE94 */ s32 timersD[48];
-} FlagsBlock;
 
 #define TIMER_PERIOD 0x708
 
 /* Counts one frame; every TIMER_PERIOD frames the coarse timers tick down, and the fine ones every frame. */
 void FUN_00139b6c(void)
 {
-    FlagsBlock *flags = reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock());
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     s32 i;
 
     g_gameState.tick = g_gameState.tick + 1;
     if (g_gameState.tick > TIMER_PERIOD) {
         g_gameState.tick = 0;
         for (i = 0; i < 64; i++) {
-            if (flags->timersA[i] != 0 && flags->timersA[i] != 255) {
-                flags->timersA[i]--;
+            if (flags->timedFlags[i] != 0 && flags->timedFlags[i] != 255) {
+                flags->timedFlags[i]--;
             }
         }
         for (i = 0; i < 128; i++) {
-            if (flags->timersB[i] != 0) {
-                flags->timersB[i]--;
+            if (flags->timedCounters[i] != 0) {
+                flags->timedCounters[i]--;
             }
         }
         for (i = 0; i < 16; i++) {
-            if (flags->timersC[i] > 0) {
-                flags->timersC[i]--;
+            if (flags->timedValues[i] > 0) {
+                flags->timedValues[i]--;
             }
         }
     }
     for (i = 0; i < 48; i++) {
-        if (flags->timersD[i] > 0) {
-            flags->timersD[i]--;
+        if (flags->timers[i] > 0) {
+            flags->timers[i]--;
         }
     }
 }

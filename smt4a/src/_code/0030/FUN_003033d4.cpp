@@ -1,13 +1,13 @@
 /* NON_MATCHING: code, switch table and block order match retail; only the flags pointer and the override value swap r2/r3. */
 #include "map/LmapViewGlobals.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
 /* Resolves the explicit map-context value or derives it from the current context mode. */
 s32 FUN_003033d4(void)
 {
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     LmapViewA *context = g_lmapViewHolder.view;
     s32 override = context->contextOverride;
     s32 value = context->contextValue;
@@ -22,7 +22,7 @@ s32 FUN_003033d4(void)
         case -2:
             return 9;
         case 0:
-            return value + flags->context.unk001D;
+            return value + flags->cameraPresetOffset;
         case 1:
             return 6;
         case 2:

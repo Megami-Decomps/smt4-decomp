@@ -1,22 +1,18 @@
 #include "common.h"
-
-struct SpriteOperation;
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
 
-struct GameWork { u8 unk0000[0x12dc]; u8 operation[1]; };
-struct GameGlobals { u32 unk00; GameWork *work; };
-extern GameGlobals g_gameGlobals;
-
 s32 uiSpriteGetOperationMode(void *operation);
 
+/* Whether the game session's sprite operation (0x12DC) is in mode 15; 0 without a session. */
 s32 FUN_00372014(void)
 {
-    GameWork *work = g_gameGlobals.work;
-    if (work == NULL) {
+    ObjB *session = g_gameGlobals.instance;
+    if (session == NULL) {
         return 0;
     }
-    return uiSpriteGetOperationMode(work->operation) == 15;
+    return uiSpriteGetOperationMode(session->block12DC) == 15;
 }
 
 } /* extern "C" */

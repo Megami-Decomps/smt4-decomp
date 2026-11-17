@@ -1,24 +1,18 @@
 #include "map/MapIfGlobals.h"
+#include "Model/MoriModelContent.h"
+#include "Model/MoriModelManager.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 
-extern void *g_handleRegistry;
-
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
-void *modelListInit(void *memory);
-void resourceOwnerLoadFileSync(MapIfResource *model, const char *path);
-void moriModelContentLoadBody(MapIfResource *model, s32 arg);
-void handleRegistryRegisterObject(void *registry, u32 handle);
-void controllerSetDestination(u32 controller, const MapMarkerPosition *destination);
-void controllerSetRotationEulerDegrees(u32 controller, f32 x, f32 y, f32 z);
-void modelPlayClip(u32 controller, s32 arg, s32 mode, f32 a, f32 b);
 
 /* Shows the action marker model (map/all/action_up.bam) at the given placement. */
 void mapIfShowActionMarker(MapMarkerPosition placement)
 {
     MapIfModelSlotA *marker = &g_mapIf.state->slots[4];
     void *object;
-    u32 controller;
+    Obj557b18 *controller;
 
     marker->active = 1;
     marker->state = 0;
@@ -28,12 +22,13 @@ void mapIfShowActionMarker(MapMarkerPosition placement)
     if (object != NULL) {
         object = modelListInit(object);
     }
-    marker->resource = (MapIfResource *)object;
+    marker->resource = static_cast<MoriModelContent *>(object);
     resourceOwnerLoadFileSync(marker->resource, "map/all/action_up.bam");
     moriModelContentLoadBody(marker->resource, 0);
-    controller = marker->resource->handle;
+    controller = marker->resource->body;
     handleRegistryRegisterObject(g_handleRegistry, controller);
-    controllerSetDestination(controller, &marker->position);
+    /* The marker position's x, y, z. */
+    controllerSetDestination(controller, reinterpret_cast<const MapVector *>(&marker->position));
     controllerSetRotationEulerDegrees(controller, 0.0f, marker->position.w, 0.0f);
     modelPlayClip(controller, 0, 2, 0.0f, 0.0f);
 }

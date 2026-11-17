@@ -76,17 +76,6 @@ typedef struct Block5c0aa0 {
 } Block5c0aa0;
 extern Block5c0aa0 g_nngxState;
 
-/* Global at 0x5B3BF4. */
-typedef struct Block5b3bf4 {
-    /* 0x00 */ u8 unk00[3];
-    /* 0x03 */ u8 unk03;
-    /* 0x04 */ u8 unk04[0x40];
-    /* 0x44 */ u32 unk44;
-    /* 0x48 */ u8 unk48[0x34];
-    /* 0x7C */ u32 unk7C;
-} Block5b3bf4;
-extern Block5b3bf4 g_gfxSettings;
-
 /* Global at 0x5B4464. */
 typedef struct Block5b4464 {
     /* 0x00 */ u8 unk00[8];

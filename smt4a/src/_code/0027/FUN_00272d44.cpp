@@ -1,17 +1,12 @@
 /* NON_MATCHING: getter ldr r0,[r0,#4] (game-state submode) compiled in the same multifile run (r1 live across it); getter not in image. */
 #include "map/mapDepart.h"
+#include "gamedata/EncountData.h"
 #include "game/GameStateA.h"
 #include "gamedata/FlagBitTests.h"
-
-struct AreaEventRecord {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u16 threshold;
-};
 
 extern "C" {
 
 s32 gameFlagsTestThirdBank(void);
-AreaEventRecord *dataTable02FindConditionalMapRecord(s32 mode, s32 submode);
 f32 partyGetAverageLevel(s32 kind);
 void gameFlagsWriteBit(s32 flag, s32 value);
 s32 randRange(u32 max);
@@ -40,7 +35,7 @@ s32 FUN_00272d44(void)
 {
     s32 id = areaEventFlag();
     s16 flag;
-    AreaEventRecord *record;
+    EncountRecordA *record;
 
     if (id == 0) {
         return 0;
@@ -53,7 +48,7 @@ s32 FUN_00272d44(void)
         return 0;
     }
     record = dataTable02FindConditionalMapRecord(g_gameState.mapId, g_gameState.areaId);
-    if ((s32)partyGetAverageLevel(2) >= record->threshold) {
+    if ((s32)partyGetAverageLevel(2) >= record->levelThreshold) {
         return 0;
     }
     gameFlagsWriteBit(flag, 1);

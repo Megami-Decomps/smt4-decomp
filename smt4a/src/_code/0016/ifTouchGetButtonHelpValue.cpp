@@ -1,23 +1,13 @@
-#include "common.h"
-
-struct ButtonHelpState {
-    u8 unk00[0x5E6];
-    u16 value; // 0x5E6
-};
-
-struct ButtonHelp {
-    u32 unk00; // 0x00
-    ButtonHelpState* state; // 0x04
-};
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelp g_buttonHelp;
 
+/* The button help's current preset, or 0 without a button help. */
 u16 ifTouchGetButtonHelpValue(void)
 {
-    ButtonHelpState* state = g_buttonHelp.state;
-    if (state != 0) {
-        return state->value;
+    ButtonHelpWorkA *work = g_buttonHelp.work;
+    if (work != NULL) {
+        return work->preset;
     }
     return 0;
 }

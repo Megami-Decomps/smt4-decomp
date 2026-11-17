@@ -1,4 +1,5 @@
 /* NON_MATCHING: allocation publication order recovered; handle-registry load and free-on-end store scheduling still differ. */
+#include "gamedata/MapSaveBlockA.h"
 #include "AsdSDK/AsdDebug.h"
 #include "game/GameStateA.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -69,7 +70,6 @@ extern "C" {
 extern MapMainBlockA *g_mapMain;
 extern u32 g_handleRegistry;
 
-u8 *gameFlagsGetBlock(void);
 void FUN_002c23cc(s32 mode);
 void mapEplAlloc(void);
 void mapEplSlotsInit(void);
@@ -96,7 +96,7 @@ void FUN_00246720(void)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapMain.cpp", 543);
     g_mapMain = (MapMainBlockA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapMainBlockA), 1);
     MapMainBlockA *map = g_mapMain;
-    u8 *flagsBlock = gameFlagsGetBlock();
+    MapSaveBlockA *flagsBlock = gameFlagsGetBlock();
     FUN_002c23cc(1);
     map->flag0D = 0;
     map->flag0E = 0;
@@ -150,7 +150,7 @@ void FUN_00246720(void)
     map->flagBF = 0;
     g_gameState.mapRegistrationPending = 0;
     g_gameState.paused = 0;
-    flagsBlock[0x7C4] = 0;
+    flagsBlock->registrationPending = 0;
     map->counterCC = 0;
     map->handleRegistry = g_handleRegistry;
     map->freeOnEnd = 0;

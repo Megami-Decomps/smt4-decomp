@@ -4,9 +4,6 @@
 #include <stddef.h>
 
 extern "C" {
-void uiSpriteSetKeyframe(UiSpriteState *, s32 animation, s32 frame);
-void uiSpriteSetImageKeyframe(UiSpriteState *, s32 animation, s32 frame);
-void spriteSetLayer(UiSpriteState *, u16 layer);
 void sysPlaySe(u32 sound);
 void sysPlayVoice(u32 voice);
 

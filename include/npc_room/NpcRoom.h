@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 #define NPC_ROOM_JOBS 8
 #define NPC_ROOM_STATE_DONE 7  /* NpcRoom.state: the room has finished */
@@ -17,8 +18,8 @@ typedef struct NpcRoom {
     /* 0x28 */ u32 jobUsed[NPC_ROOM_JOBS];    /* nonzero when jobs[i] was started */
     /* 0x48 */ void *dataA;                   /* heap blocks */
     /* 0x4C */ void *dataB;
-    /* 0x50 */ void *processA;                /* script process objects */
-    /* 0x54 */ void *processB;
+    /* 0x50 */ ScriptProcess *processA;                /* script process objects */
+    /* 0x54 */ ScriptProcess *processB;
     /* 0x58 */ u8 unk58[0xC];
     /* 0x64 */ s16 displayModels[NPC_ROOM_JOBS][NPC_ROOM_JOBS]; /* model index per display row and column, < 0 when empty */
     /* 0xE4 */ s32 displayCount;

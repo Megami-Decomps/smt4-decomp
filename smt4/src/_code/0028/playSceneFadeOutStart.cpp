@@ -9,7 +9,7 @@ void playSceneFadeOutStart(PlayScene *scene)
     if (scene->unk2180 == 1) {
         scene->unk217C = 0;
         scene->unk2180 = 6;
-        timerStart((UiSpriteState *)scene->timerFade, 0, 1);
+        timerStart(&scene->timerFade, 0, 1);
     }
 }
 

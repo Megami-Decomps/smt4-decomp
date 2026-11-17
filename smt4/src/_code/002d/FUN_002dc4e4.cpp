@@ -14,7 +14,7 @@ void FUN_002dc4e4(PlayScene *scene, int flag)
     }
     scene->unk307F = 0;
     scene->unk305C = 4;
-    spriteStartAnimationByIndex((UiSpriteState *)scene->blockE, 9);
+    spriteStartAnimationByIndex(&scene->blockE, 9);
     if (scene->state == 0x17) {
         scene->unk3054 = 0x1f;
         playSceneSetState(scene, 0x18, 1);

@@ -5,7 +5,7 @@
 #include "code/Code002b.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 /* Selection state of the map scene being entered. */
 struct MapSelection {
@@ -21,19 +21,6 @@ struct MapSceneRecord {
     s8 option;
     u8 variant;
     u8 value;
-};
-
-struct FlagsBlock {
-    u8 unk00[3];
-    s8 level;               // 0x03
-    u8 unk04[0x18];
-    u8 unk1C;               // 0x1C
-    u8 unk1D[0x7A7];
-    s8 stepRequest;         // 0x7C4
-    u8 unk7C5[0xDFF];
-    f32 sceneValue;         // 0x15C4
-    u8 unk15C8[4];
-    s32 sceneResult;        // 0x15CC
 };
 
 extern "C" {
@@ -54,10 +41,10 @@ s32 dataTable23Type1CountWithAoc(void);
 /* Advance the scene step requested in the flags block: finish it, or start the next scene. */
 void FUN_002d2000(void)
 {
-    FlagsBlock *flags = reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock());
-    s32 request = flags->stepRequest;
+    MapSaveBlockA *flags = gameFlagsGetBlock();
+    s32 request = flags->registrationPending;
     if (request != 0) {
-        flags->stepRequest = 0;
+        flags->registrationPending = 0;
         if (request == 1) {
             switch (gameDataTableGetFlag()) {
             case 0:
@@ -65,13 +52,13 @@ void FUN_002d2000(void)
             case 3:
             case 5:
                 if (FUN_001ba570() == 0) {
-                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->level = 0;
-                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->unk1C = 0;
+                    gameFlagsGetBlock()->departureIndex = 0;
+                    gameFlagsGetBlock()->unk001C = 0;
                 }
             }
         } else {
             if (gameDataTableGetFlag() <= 0) {
-                s32 scene = FUN_003857c8((s32)flags->sceneValue);
+                s32 scene = FUN_003857c8((s32)flags->unk15C4);
                 gameValueBlockSet(scene, 1);
                 if (scene == 9) {
                     u32 flag = 0x4D2;
@@ -104,7 +91,7 @@ void FUN_002d2000(void)
                     }
                     DAT_005f1ca4 = found;
                     g_gameState.unk454 = -1;
-                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->level = g_gameState.unk0A4 + 100;
+                    gameFlagsGetBlock()->departureIndex = (s8)(g_gameState.unk0A4 + 100); /* armcc narrows it as a signed byte here */
                     gameFlagsLoadTable4cEntry(g_gameState.unk0A4);
                     g_gameState.progressEnabled = 1;
                 }

@@ -1,5 +1,6 @@
 #include "shard/Shard0048.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -7,7 +8,7 @@ typedef struct ScreenClose {
     /* 0x000 */ u8 unk000[0x264];
     /* 0x264 */ u32 buf264;
     /* 0x268 */ u32 buf268;
-    /* 0x26C */ u32 proc26C;
+    /* 0x26C */ ScriptProcess *proc26C;
     /* 0x270 */ u8 unk270[0x1C8];
     /* 0x438 */ u8 block438[0x124];
     /* 0x55C */ s16 count;
@@ -19,7 +20,6 @@ extern void campButtonHelpRelease(void);
 extern void ifTouchRegionRemove(void);
 extern void __aeabi_memset4(u8 *block, u32 size, u32 value);
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
-extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(u32 ptr);
 extern void messageSetScriptDisplayMode(void);
 

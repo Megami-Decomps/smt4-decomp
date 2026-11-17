@@ -6,7 +6,7 @@ void FUN_00420fc0(ModelStatePlayer *player)
 {
     player->state = 4;
     FUN_00421858(player);
-    void *model = modelStateOwnerGetModel(player->owner, 1);
+    Obj557b18 *model = modelStateOwnerGetModel(player->owner, 1);
     if (model != NULL) {
         u32 name = FUN_003fdadc();
         u32 motion = ownerSlotSetText(model, name);

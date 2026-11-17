@@ -1,18 +1,13 @@
 /* NON_MATCHING: native unrolls nine neighbor writes and retains a redundant initial visible=4 store that this compiler removes. */
-#include "gamedata/DataTable.h"
+#include "gamedata/PartnerTopicTable.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
-struct UnlockLogEntry {
-    u16 id;
-    u8 unk02[0x30];
-    u16 unlockFlag;
-};
 struct UnlockLogWork {
     u8 unk00[0x20];
-    UnlockLogEntry *entries;
+    PartnerTopicRecord *entries;
     u32 unk24;
     void *resource;
     void *screen;
@@ -32,7 +27,7 @@ struct UnlockLogWork {
     u16 buttons[3];
     s16 regionCount;
     u8 unk14a[0x496];
-    UnlockLogEntry *current;
+    PartnerTopicRecord *current;
     u16 unk5e4;
     u16 filtered[100];
     u16 unk6ae;
@@ -56,7 +51,7 @@ void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
             return;
     }
     void *table = dataTableGet(0x44, 0);
-    work->entries = static_cast<UnlockLogEntry *>(dataTableGetEntries(table));
+    work->entries = partnerTopicRecords(table);
     work->entryCount = dataTableGetCount(table);
     work->script = scrScriptProcessCreate(work->flow, work->screen);
     work->script->mode = 2;

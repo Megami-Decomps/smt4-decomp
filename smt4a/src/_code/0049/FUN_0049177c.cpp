@@ -1,4 +1,5 @@
 /* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "common.h"
 #include "game/GameStateA.h"

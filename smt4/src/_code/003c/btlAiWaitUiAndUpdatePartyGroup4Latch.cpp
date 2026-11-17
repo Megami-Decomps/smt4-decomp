@@ -7,6 +7,7 @@
 #include "battle/btlReflect.h"
 #include "battle/ActionStateChannels.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 namespace {
 union PartyPhaseState {
     BtlMainState main;
@@ -27,10 +28,9 @@ struct ScriptActorRecord {
 }
 
 extern "C" {
-extern void* g_btlUiBlock;
 s32 nodeListCountActiveById(ReflectContext*, s32);
-s32 FUN_003ae838(void*, s32);
-s32 btlUiAreEntriesIdle(void*);
+s32 FUN_003ae838(BtlUi *ui, s32);
+s32 btlUiAreEntriesIdle(BtlUi *ui);
 s32 btlNodeListAnyReady();
 void FUN_00229754(void*, BtlUnit*);
 

@@ -1,20 +1,7 @@
 /* NON_MATCHING: indexed neighbor accesses recover retail cell offsets; spawn-path load scheduling and VFP/register allocation still differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapViewGlobals.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
-
-struct LmapCell {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ u8 unk01[7];
-};
-
-struct LmapFlagData {
-    /* 0x000 */ u8 unk000[0x3c];
-    /* 0x03c */ LmapCell cells[440];
-    /* 0xdfc */ u8 unkdfc[4];
-    /* 0xe00 */ s8 x;
-    /* 0xe01 */ s8 z;
-};
+#include "gamedata/MapSaveBlockA.h"
 
 struct LmapSpawn {
     /* 0x00 */ u8 unk00[8];
@@ -24,7 +11,6 @@ struct LmapSpawn {
     /* 0x0c */ u8 unk0c[0x38];
 };
 
-
 extern "C" {
 extern LmapSpawn g_lmapSpawns[];
 s32 lmapGetSpawnIndex(void);
@@ -32,7 +18,7 @@ s32 lmapGetSpawnIndex(void);
 // Place the map camera at its saved cell or at an explicit entry point.
 void lmapSceneRestoreEntryPosition(void)
 {
-    LmapFlagData *flags = reinterpret_cast<LmapFlagData *>(gameFlagsGetBlock());
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     f32 heading = 0.0f;
     s32 spawnIndex = lmapGetSpawnIndex();
     if (spawnIndex != 0 && spawnIndex < 100) {
@@ -52,9 +38,9 @@ void lmapSceneRestoreEntryPosition(void)
         g_lmapView->heading = spawnHeading;
         return;
     }
-    s32 cellIndex = flags->z * 15 + flags->x;
-    f32 x = flags->x * 700.0f + 350.0f;
-    f32 z = flags->z * 700.0f + 350.0f;
+    s32 cellIndex = flags->maze.spawnZ * 15 + flags->maze.spawnX;
+    f32 x = flags->maze.spawnX * 700.0f + 350.0f;
+    f32 z = flags->maze.spawnZ * 700.0f + 350.0f;
     LmapSceneA *scene = g_lmapScene;
     scene->pose.position.x = x;
     scene->pose.position.y = 0.0f;
@@ -62,13 +48,13 @@ void lmapSceneRestoreEntryPosition(void)
     scene->pose.targetPosition.x = x;
     scene->pose.targetPosition.y = 0.0f;
     scene->pose.targetPosition.z = z;
-    if (flags->cells[cellIndex - 15].kind == 2)
+    if (flags->grid.cells[0][cellIndex - 15].state == 2)
         heading = 180.0f;
-    if (flags->cells[cellIndex + 15].kind == 2)
+    if (flags->grid.cells[0][cellIndex + 15].state == 2)
         heading = 0.0f;
-    if (flags->cells[cellIndex - 1].kind == 2)
+    if (flags->grid.cells[0][cellIndex - 1].state == 2)
         heading = 270.0f;
-    if (flags->cells[cellIndex + 1].kind == 2)
+    if (flags->grid.cells[0][cellIndex + 1].state == 2)
         heading = 90.0f;
     scene->pose.heading = heading;
     scene->pose.targetHeading = heading;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: one instruction - the out-of-range record NULL is `movcs r6, r9` (shared zero register) in retail, `movcs r6, #0` here */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "gamedata/PlayLogTable.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/PlayLog/PlayLog.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -11,12 +12,6 @@ extern "C" {
 typedef struct PlayLogSprite {
     /* 0x00 */ u8 unk00[0x8C];
 } PlayLogSprite;
-
-/* A play log record in data table 0x37; a negative first halfword marks a computed entry. */
-typedef struct PlayLogRecord {
-    /* 0x00 */ s16 counter;
-    /* 0x02 */ u8 unk02[0x3E];
-} PlayLogRecord;
 
 /* Local view of the play log work (0x488 bytes). */
 typedef struct PlayLogScreen {
@@ -39,27 +34,9 @@ extern void fileSlotLoad(s32 id);
 extern void drawParameterBlockClear(void *params);
 extern void uiSpriteStateInitFromSource(PlayLogSprite *sprite, s32 group, s32 id, void *owner, s32 flags, f32 scale);
 extern void timerStart(PlayLogSprite *sprite, s32 animation, s32 flags);
-extern u32 dataTableGet(u32 group, u32 index);
-extern void *dataTableGetEntries(u32 table);
-extern u32 dataTableGetCount(u32 table);
 extern s32 gameCountersGetWord(u32 counter);
 extern void gridNavigationConfigure(u8 *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
 
-/* Looks a record up in data table 0x37, or NULL when out of range. */
-static __inline u32 playLogGetTable(PlayLogRecord **records)
-{
-    u32 table = dataTableGet(0x37, 0);
-
-    *records = (PlayLogRecord *)dataTableGetEntries(table);
-    return dataTableGetCount(table);
-}
-
-static __inline PlayLogRecord *playLogGetRecord(u32 index)
-{
-    PlayLogRecord *records;
-
-    return index < playLogGetTable(&records) ? &records[index] : NULL;
-}
 /* Opens the play log screen: allocates its work, loads resources and builds the list of entries to show. */
 void FUN_00194ec8(void)
 {
@@ -86,8 +63,8 @@ void FUN_00194ec8(void)
         timerStart(&log->sprites[i], 0, 0);
     }
     shown = 0;
-    for (i = 0; (u32)i < playLogGetTable(&records); i++) {
-        record = playLogGetRecord(i);
+    for (i = 0; (u32)i < playLogRecords(&records); i++) {
+        record = playLogRecordAt(i);
         if (record != NULL && record->counter < 0) {
             log->values[i] = saveBlockGetPlaySeconds();
         } else {

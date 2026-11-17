@@ -5,9 +5,9 @@
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "code/Code0027.h"
 #include "battle/BtlEntryLookup.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern void *g_btlUiBlock;
 extern BattleVersionResources *DAT_00435d18;
 s32 idSetFindSubjectIndex(BtlMainState *state, const BtlActionRecord *action);
 s32 entryContainsIdentifier(BtlMainState *state, u32 id);
@@ -18,7 +18,7 @@ s32 nkdwHeaderParse(u32 handle);
 void aocHandleButtons(u32 handle, u32 mode);
 s32 FUN_00294fe0(u32 handle);
 void modelAnimationEnsureData(u32 handle);
-void btlUiAddListedId(void *ui, u32 id);
+void btlUiAddListedId(BtlUi *ui, u32 id);
 void effectSlotStart(BattleVersionResources *resources, BtlActionRecord *action, u32 id);
 u32 FUN_003db0c0(BattleVersionResources *resources, BtlActionRecord *action);
 void FUN_003c0ae0(BtlMainState *state, BtlActionRecord *action);

@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* A UI sprite instance of the menu (0x8C bytes); `mode` is the playback mode at 0x3A. */
 typedef struct GauntletSprite {
@@ -41,7 +42,7 @@ typedef struct GauntletAppMenuWork {
     };
     /* 0x528 */ void *heapA;     /* heap block, freed on close */
     /* 0x52C */ void *heapB;     /* heap block, freed on close */
-    /* 0x530 */ u32 handle;      /* released on close before the heap blocks */
+    /* 0x530 */ ScriptProcess *handle;      /* released on close before the heap blocks */
 } GauntletAppMenuWork;
 typedef char GauntletAppMenuListLayoutCheck[
     offsetof(GauntletAppMenuWork, list.controller) == 0x10 &&

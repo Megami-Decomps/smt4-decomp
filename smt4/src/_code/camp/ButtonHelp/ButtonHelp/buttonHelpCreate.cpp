@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "ui/ButtonHelpGlobal.h"
+#include "script/scrScriptProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
@@ -40,7 +41,6 @@ void uiStoreTextureEntryCenter(UiSpriteState *unit, s32 kind, s32 count);
 u32 asdTextCreate(s32 arg);
 void asdTextSetBaseColor(u32 text, u32 color);
 void positionStateSet(u32 text, s32 arg, u32 color, f32 value);
-u32 scrScriptProcessCreate(s32 bf, s32 mbm);
 void buttonHelpNotifyNoop(u32 handle);
 s32 FUN_001c0c38(u32 handle);
 s32 FUN_002109cc(u32 handle);
@@ -58,40 +58,40 @@ void buttonHelpCreate(void)
         }
         ButtonHelpWork *work = globals->work;
         memClear(work, sizeof(ButtonHelpWork));
-        work->jobs.process = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0, FUN_001c0c38, buttonHelpNotifyNoop, 0);
-        work->jobs.drawTask = taskCreateDraw((const s8 *)"ButtonHelp DRAW", 0xE6, 0, 0, FUN_002109cc,
-                                             NULL, 0, work->jobs.process);
+        work->calcProcess = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0, FUN_001c0c38, buttonHelpNotifyNoop, 0);
+        work->drawTask = taskCreateDraw((const s8 *)"ButtonHelp DRAW", 0xE6, 0, 0, FUN_002109cc,
+                                             NULL, 0, work->calcProcess);
 
         ButtonHelpWork *help = globals->work;
-        drawParameterBlockClear(&help->ui.parameters);
-        paramsInit(&help->ui.parameters, sButtonHelpPresets.packetA, 0x30, &sButtonHelpPacketB, 0xC,
+        drawParameterBlockClear(&help->resources);
+        paramsInit(&help->resources, sButtonHelpPresets.packetA, 0x30, &sButtonHelpPacketB, 0xC,
                    &sButtonHelpPacketC, 0xC, NULL, 0, sButtonHelpPacketE, 0xA8);
         for (s32 i = 0; i < 6; i++) {
-            uiSpriteStateInitFromSource(&help->ui.selection[i], 0x12, 3, &help->ui.parameters, 0x10, 1.0f);
-            FUN_00262210(&help->ui.selection[i], 0x12, i + 0x11, 3);
+            uiSpriteStateInitFromSource(&help->slotSprites[i], 0x12, 3, &help->resources, 0x10, 1.0f);
+            FUN_00262210(&help->slotSprites[i], 0x12, i + 0x11, 3);
         }
-        uiSpriteStateInitFromSource(&help->units[0], 0x12, 0, &help->ui.parameters, 0x10, 1.0f);
-        uiSpriteStateInitFromSource(&help->units[1], 0x12, 1, &help->ui.parameters, 0x10, 1.0f);
+        uiSpriteStateInitFromSource(&help->panelSprites[0], 0x12, 0, &help->resources, 0x10, 1.0f);
+        uiSpriteStateInitFromSource(&help->panelSprites[1], 0x12, 1, &help->resources, 0x10, 1.0f);
 
         ButtonHelpWork *units = globals->work;
         units->mode = 0;
         for (s32 i = 0; i < 2; i++) {
-            units->units[i].layer = 2;
-            uiStoreTextureEntryCenter(&units->units[i], 0x12, 0);
-            units->units[i].active = 1;
-            units->units[i].x = 0;
-            units->units[i].y = 0;
-            units->units[i].z = 0;
+            units->panelSprites[i].layer = 2;
+            uiStoreTextureEntryCenter(&units->panelSprites[i], 0x12, 0);
+            units->panelSprites[i].active = 1;
+            units->panelSprites[i].x = 0;
+            units->panelSprites[i].y = 0;
+            units->panelSprites[i].z = 0;
         }
-        help->unk4C5 = 0;
-        help->unk04C6[0] = 1;
-        help->unk4C4 = 1;
-        help->unk04C6[1] = 0;
+        help->panelState = 0;
+        help->panelSliding = 1;
+        help->drawEnabled = 1;
+        help->touchSuspended = 0;
 
-        work->unk558 = asdTextCreate(0);
-        asdTextSetBaseColor(work->unk558, 0x323232FF);
-        positionStateSet(work->unk558, 0, 0x646464FF, 0.0f);
-        work->unk560 = scrScriptProcessCreate(globals->bf, globals->mbm);
+        work->text.directoryText = asdTextCreate(0);
+        asdTextSetBaseColor(work->text.directoryText, 0x323232FF);
+        positionStateSet(work->text.directoryText, 0, 0x646464FF, 0.0f);
+        work->scriptProcess = scrScriptProcessCreate(globals->bf, globals->mbm);
     }
     globals->references++;
 }

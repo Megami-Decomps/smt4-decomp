@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 
 extern "C" {
 
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 a, s32 b);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 a, s32 b);
 
 
 /* If the scene is running, moves it to state 5 with a 30-frame timer and restarts its members (the second one too in mode 2).

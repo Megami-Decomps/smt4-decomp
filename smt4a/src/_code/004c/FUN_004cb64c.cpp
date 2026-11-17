@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail rewrites the untouched high word of the 64-bit entry flags (ldr/str of +0x5C) around every flag update and keeps the battle state in r5/the id table in r7; ours updates only the low word (146 rows against 147). */
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 #define ENTRY_PENDING_SPAWN 0x01
 #define ENTRY_ACTIVE 0x02
@@ -44,7 +45,6 @@ struct BtlIdTable {
 
 extern "C" {
 
-extern void *g_btlUiBlock;
 extern void *g_btlAux;
 
 s32 idSetFindSubjectIndex(BtlSlotBattle *battle, BtlSpawnEntry *entry);
@@ -58,7 +58,7 @@ s32 nkdwLoaderParse(u32 state);
 void aocHandleButtons(u32 state, s32 mode);
 s32 FUN_003fce08(u32 state, s32 flag);
 void btlEnsureEnemyDrawResources(u32 state, s32 flag);
-void btlUiAddRequest(void *block, u32 request);
+void btlUiAddRequest(BtlUiA *block, u32 request);
 void FUN_004f7fe8(void *aux, BtlSpawnEntry *entry, u32 id);
 void FUN_004f7924(void *aux, BtlSpawnEntry *entry);
 void battleEffectInitializeVariant(BtlSlotBattle *battle, BtlSpawnEntry *entry);

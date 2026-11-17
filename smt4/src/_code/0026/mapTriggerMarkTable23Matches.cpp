@@ -1,5 +1,5 @@
+#include "gamedata/MapSaveBlock.h"
 #include "shard/W6_W6Match2_AocTable23.h"
-#include "shard/SaveWork.h"
 
 extern "C" {
 s32 dataTable23Type0CountWithAoc(void);
@@ -8,11 +8,11 @@ const Table23TriggerRecord *dataTable23Sub0GetEntry(u32 index);
 /* Sets a trigger's bit in the map block's flag mask. */
 static void mapTriggerSetFlag(s32 index)
 {
-    MapTriggerFlagView *map = reinterpret_cast<MapTriggerFlagView *>(gameGetMapBlock());
+    MapSaveBlock *map = gameGetMapBlock();
     if (index >= 0) {
         s32 word = index / 32;
         s32 bit = index % 32;
-        map->flags[word] |= 1U << bit;
+        map->clearedGroups[word] |= 1U << bit;
     }
 }
 

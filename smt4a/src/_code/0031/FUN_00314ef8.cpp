@@ -2,6 +2,7 @@
  * and clears the low word with mvn+and; the build uses two ldr and bic for each word. */
 #include "shard/X14_BtlUiClose.h"
 #include "shard/JobWork.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void FUN_003592dc(u32 job);
 
-extern void *g_btlUiBlock;
 extern BtlUiCloseState DAT_005715f8;
 
 /* Closes the battle UI: releases the UI block and the helper job, stops the UI's job and clears
@@ -21,7 +21,7 @@ void FUN_00314ef8(u32 job)
     BtlUiHelper *helper;
 
     if (g_btlUiBlock != NULL) {
-        FUN_004aa780(reinterpret_cast<u32>(g_btlUiBlock), 0);
+        FUN_004aa780(g_btlUiBlock, 0);
     }
     helper = DAT_005715f8.helper;
     if (helper != NULL) {

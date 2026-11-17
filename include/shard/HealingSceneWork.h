@@ -3,17 +3,7 @@
 
 #include "common.h"
 #include "script/scrScriptProcess.h"
-
-/* A model of the Spring of Healing scene: a polymorphic object (slot 1 is the deleting
- * destructor) registered in g_handleRegistry through `object`. */
-class HealingModel {
-public:
-    virtual ~HealingModel();
-
-    /* 0x00: vtable pointer */
-    /* 0x04 */ void *object;
-};
-
+#include "Model/MoriModelContent.h"
 
 struct HealingSceneWork {
     /* 0x000 */ u8 unk000[8];
@@ -24,9 +14,9 @@ struct HealingSceneWork {
     /* 0x014 */ void *heapB;
     /* 0x018 */ ScriptProcess *script;
     /* 0x01C */ u32 unk01c;
-    /* 0x020 */ HealingModel *primary;
-    /* 0x024 */ HealingModel *secondary;
-    /* 0x028 */ HealingModel *models[3];
+    /* 0x020 */ MoriModelContent *primary;
+    /* 0x024 */ MoriModelContent *secondary;
+    /* 0x028 */ MoriModelContent *models[3];
     /* 0x034 */ u32 unk034;
     /* 0x038 */ f32 cameraTarget[4];
     /* 0x048 */ u8 unk048[0x4FC];

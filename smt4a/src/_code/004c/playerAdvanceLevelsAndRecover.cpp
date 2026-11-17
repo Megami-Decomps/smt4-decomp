@@ -20,7 +20,7 @@ void playerAdvanceLevelsAndRecover(PlayerDataA *player, s32 levels, s32 growStat
     }
     void *table = dataTableGet(9, 0);
     dataTableGetCount(table);
-    const PlayerGrowthEntry *entry = static_cast<const PlayerGrowthEntry *>(dataTableGetEntries(table));
+    const PlayerGrowRecord *entry = static_cast<const PlayerGrowRecord *>(dataTableGetEntries(table));
     PlayerGrowthRecipe recipe = playerGrowthRecipeFromEntry(entry);
     s32 previousHp = FUN_003e0154();
     s32 previousMp = FUN_003e0164();

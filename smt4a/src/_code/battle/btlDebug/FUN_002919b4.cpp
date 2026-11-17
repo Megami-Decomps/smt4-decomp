@@ -8,6 +8,7 @@
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "sys/RuntimeObjects.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "battle/BtlUiGlobal.h"
 
 /* The debug mask lies beyond the shared three-word global prefix. */
 struct BattleDebugInitializationGlobalsView {
@@ -20,7 +21,6 @@ extern "C" {
 extern BattleDebugInitializationGlobalsView DAT_005715f8;
 extern const AsdListBoxEntry DAT_00571980[];
 extern const char DAT_00528078[];
-extern BtlUiA *g_btlUiBlock;
 s32 FUN_002761c8(u32 process);
 void FUN_00314ef8(u32 process);
 s32 FUN_002ba870(u32 process);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cd414` (_code @ 0x2cd414, 0x4cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/Talk/btlTalkBustUp.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -15,7 +16,6 @@ int FUN_003d44ac(...);
 int VectorSignedToFloat(int, int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
-extern int g_btlTalkBustUp; /* 0x5710dc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int randRange(unsigned int);
@@ -41,11 +41,11 @@ unsigned int FUN_002cd414(void)
   float temp_v5;
   float temp_v6;
   
-  temp_v0 = g_btlTalkBustUp;
-  if (g_btlTalkBustUp == 0) {
+  temp_v0 = ((int)g_btlTalkBustUp);
+  if (((int)g_btlTalkBustUp) == 0) {
     return 0;
   }
-  temp_v1 = *(int *)(g_btlTalkBustUp + 0x2e8);
+  temp_v1 = *(int *)(((int)g_btlTalkBustUp) + 0x2e8);
   if (temp_v1 == 0) {
     *(int *)(temp_v0 + 0x2ec) = *(int *)(temp_v0 + 0x2ec) + 1;
     return 0;
@@ -55,11 +55,11 @@ unsigned int FUN_002cd414(void)
       *(int *)(temp_v0 + 0x2ec) = *(int *)(temp_v0 + 0x2ec) + 1;
       return 0;
     }
-    if (*(char *)(g_btlTalkBustUp + 0x2f5) != '\0') {
-      switch(*(unsigned int *)(g_btlTalkBustUp + 0x2f0)) {
+    if (*(char *)(((int)g_btlTalkBustUp) + 0x2f5) != '\0') {
+      switch(*(unsigned int *)(((int)g_btlTalkBustUp) + 0x2f0)) {
       case 0:
       case 1:
-        temp_v1 = g_btlTalkBustUp + 0x20;
+        temp_v1 = ((int)g_btlTalkBustUp) + 0x20;
         uiSpriteAdvanceAnimation(temp_v1);
         break;
       case 2:
@@ -74,12 +74,12 @@ unsigned int FUN_002cd414(void)
       case 0x11:
       case 0x12:
       case 0x13:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(((int)g_btlTalkBustUp) + 0x20);
         temp_v1 = temp_v0 + 0xac;
         uiSpriteAdvanceAnimation(temp_v1);
         break;
       case 3:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(((int)g_btlTalkBustUp) + 0x20);
         uiSpriteAdvanceAnimation(temp_v0 + 0xac);
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
@@ -124,7 +124,7 @@ unsigned int FUN_002cd414(void)
         objectSetPosition(temp_v0 + 0xac);
         break;
       case 4:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(((int)g_btlTalkBustUp) + 0x20);
         temp_v1 = 0;
         do {
           temp_v4 = temp_v0 + temp_v1;
@@ -148,7 +148,7 @@ unsigned int FUN_002cd414(void)
         uiSpriteAdvanceAnimation(temp_v1);
         break;
       case 8:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(((int)g_btlTalkBustUp) + 0x20);
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
         temp_v1 = temp_v3 + ((temp_v1 >> 7) - (temp_v1 >> 0x1f)) * -0xf0;
@@ -191,25 +191,25 @@ unsigned int FUN_002cd414(void)
         break;
       case 0xc:
       case 0x10:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation(((int)g_btlTalkBustUp) + 0x20);
         uiSpriteAdvanceAnimation(temp_v0 + 0xac);
         temp_v1 = temp_v0 + 0x138;
         uiSpriteAdvanceAnimation(temp_v1);
       }
     }
     else {
-      uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
-      temp_v1 = g_btlTalkBustUp;
+      uiSpriteAdvanceAnimation(((int)g_btlTalkBustUp) + 0x20);
+      temp_v1 = ((int)g_btlTalkBustUp);
       if (*(char *)(temp_v0 + 0xaa) != '\0') {
         if (*(short *)(temp_v0 + 0x7c) != 10) {
           uiSpriteScreenSetupForMode(temp_v0);
           *(unsigned char *)(temp_v0 + 0x2f5) = 1;
         }
-        else if (g_btlTalkBustUp != 0) {
-          if (-1 < *(int *)(g_btlTalkBustUp + 0x2f8)) {
+        else if (((int)g_btlTalkBustUp) != 0) {
+          if (-1 < *(int *)(((int)g_btlTalkBustUp) + 0x2f8)) {
             asdTMTexTableReleaseNode(0x10);
-            if (g_btlTalkBustUp != 0) {
-              *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
+            if (((int)g_btlTalkBustUp) != 0) {
+              *(unsigned char *)(((int)g_btlTalkBustUp) + 0x2f4) = 0;
             }
             packageFileDisableByKindName(g_aocSystem,0x10,*(unsigned int *)(temp_v1 + 0x2f8));
             *(unsigned int *)(temp_v1 + 0x2f8) = 0xffffffff;
@@ -221,7 +221,7 @@ unsigned int FUN_002cd414(void)
     }
   }
   else {
-    temp_v1 = asdTMTexTableNodeIsLoaded(0x10,*(unsigned int *)(g_btlTalkBustUp + 0x2f8));
+    temp_v1 = asdTMTexTableNodeIsLoaded(0x10,*(unsigned int *)(((int)g_btlTalkBustUp) + 0x2f8));
     if (temp_v1 != 0) {
       FUN_003d44ac(temp_v0);
       *(unsigned int *)(temp_v0 + 0x2e8) = 2;

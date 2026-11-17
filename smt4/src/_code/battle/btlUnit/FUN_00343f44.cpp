@@ -7,6 +7,7 @@
 #include "shard/W6_W6Match3_ColorFade.h"
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlUiGlobal.h"
 
 namespace {
 struct BattleQueuedActionStep {
@@ -49,7 +50,6 @@ struct BtlUi;
 extern "C" {
 extern BattleVersionResources *DAT_00435d18;
 extern const BattleQueuedActionDrawDefaults DAT_00439a20;
-extern BtlUi *g_btlUiBlock;
 void FUN_003c1248(s32 mode, s32 queue, s32 actor, s32 target);
 void FUN_0023f79c(BtlMainState *state, u32 flags);
 s32 FUN_003c0ab4(BtlActionRecord *action);

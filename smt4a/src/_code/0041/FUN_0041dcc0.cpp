@@ -5,7 +5,6 @@
 extern "C" {
 extern SaveLoadUIBaseA g_saveLoadUIBase;
 s32 saveLoadThreadHasResult(void);
-s32 scrRunOpcodesStub(ScriptProcess *script);
 s32 byteArr5Get3(void);
 s32 byteTripleGetV0(void);
 void gameDataAddHomeButtonHold(u32 bits);

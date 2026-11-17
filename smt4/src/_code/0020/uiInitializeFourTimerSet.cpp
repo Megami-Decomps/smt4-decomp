@@ -1,9 +1,10 @@
-#include "ui/TimerSlot.h"
+#include "ui/UiSpriteApi.h"
+#include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct UiFourTimerSet {
     UiResourceParameters resources;
-    TimerSlot timers[4];
+    UiSpriteState timers[4];
     u32 unk250;
     u32 unk254;
 };
@@ -40,14 +41,9 @@ static const u32 sFourTimerPacketD[70] = {
 };
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void uiSpriteStateInitFromSource(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
-void uiSpriteInitializeState(TimerSlot *timer, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
-void uiStoreTextureEntryCenter(TimerSlot *timer, s32 kind, s32 count);
-void pairSetHalves(TimerSlot *timer, s32 x, s32 y);
-void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);
-void timerStart(TimerSlot *timer, s32 animation, s32 flags);
-void spriteSetLayer(TimerSlot *sprite, u16 layer);
-void spriteSetVisible(TimerSlot *sprite, u8 visible);
+void uiStoreTextureEntryCenter(UiSpriteState *timer, s32 kind, s32 count);
+void pairSetHalves(UiSpriteState *timer, s32 x, s32 y);
+void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 }
 
 /* Builds the four-timer sprite set: its resource packets, then the four timers' layers, positions and start animations. */

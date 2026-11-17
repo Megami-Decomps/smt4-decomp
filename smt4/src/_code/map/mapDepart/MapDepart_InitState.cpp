@@ -1,3 +1,4 @@
+#include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
 #include "game/GameState.h"
 
@@ -23,34 +24,15 @@ struct MapDepartState {
     /* 0x44 */ u32 unk44;
 };
 
-/* Where the map block keeps the departure point (Shin Megami Tensei IV). */
-struct MapDepartSavePoint {
-    /* 0x000 */ u8 unk000[0x28];
-    /* 0x028 */ s16 unk28;
-    /* 0x02A */ s16 unk2A;
-    /* 0x02C */ s16 scale;
-    /* 0x02E */ s16 mapId;
-    /* 0x030 */ s16 areaId;
-    /* 0x032 */ s16 x;
-    /* 0x034 */ s16 y;
-    /* 0x036 */ s16 z;
-    /* 0x038 */ s16 unk38;
-    /* 0x03A */ u8 unk03A[0xDA2];
-    /* 0xDDC */ u32 objectId;
-};
-
-
 extern "C" {
 
-
-MapDepartSavePoint *gameGetMapBlock(void);
 void mapAdjustPositionToGround(MapVector *position);
 void mapBlockLoadTableRecord(void);
 
 // Reset the departure state; when `save` is set, record the current position in the map block.
 void MapDepart_InitState(MapDepartState *state, s32 save)
 {
-    MapDepartSavePoint *point = gameGetMapBlock();
+    MapSaveBlock *point = gameGetMapBlock();
     state->unk18 = 0;
     state->unk1C = 0;
     state->unk20 = 0;
@@ -66,16 +48,16 @@ void MapDepart_InitState(MapDepartState *state, s32 save)
     state->unk44 = 0;
     mapAdjustPositionToGround(&g_gameState.position);
     if (save) {
-        point->scale = (s16)g_gameState.overviewHeading;
-        point->mapId = g_gameState.mapId;
-        point->areaId = g_gameState.areaId;
-        point->objectId = g_gameState.currentObjectId;
-        point->x = (s16)g_gameState.position.x;
-        point->y = (s16)g_gameState.position.y;
-        point->z = (s16)g_gameState.position.z;
-        point->unk38 = (s16)g_gameState.heading;
-        point->unk28 = g_gameState.tableKind;
-        point->unk2A = g_gameState.recordId;
+        point->savePoint.scale = (s16)g_gameState.overviewHeading;
+        point->savePoint.mapId = g_gameState.mapId;
+        point->savePoint.areaId = g_gameState.areaId;
+        point->savePointObjectId = g_gameState.currentObjectId;
+        point->savePoint.x = (s16)g_gameState.position.x;
+        point->savePoint.y = (s16)g_gameState.position.y;
+        point->savePoint.z = (s16)g_gameState.position.z;
+        point->savePoint.heading = (s16)g_gameState.heading;
+        point->savePoint.tableType = g_gameState.tableKind;
+        point->savePoint.tableId = g_gameState.recordId;
     }
     mapBlockLoadTableRecord();
     GameStateDepartBlock *block = &g_gameState.depart;

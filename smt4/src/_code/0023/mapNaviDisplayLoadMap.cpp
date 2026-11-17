@@ -1,5 +1,6 @@
 /* NON_MATCHING: clear-loop counter reuse adds one row, and category-center load scheduling/GPR allocation differ; alternate optimization may explain these differences. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/MapSystemTable.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/TexTableLoaded.h"
 #include "shard/MapNaviTable_GetCategoryCount.h"
@@ -18,13 +19,6 @@ struct MapNaviDisplay {
     MapNaviPoint gridOrigins[32];
     u8 unke88[0x4c05];
     u8 ready;
-};
-
-struct MapNaviTextureRecord {
-    u8 unk00[0x20];
-    s16 map;
-    u8 unk22[8];
-    s16 textureIndex;
 };
 
 struct MapNaviCategoryRecord {
@@ -46,8 +40,6 @@ struct MapNaviCategoryRecord {
 struct MapNaviTable {};
 
 extern "C" {
-s32 dataTable2eSub2GetCount(void);
-const MapNaviTextureRecord* dataTable2eSub2GetRecord(s32 index);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 TexNode* asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 const MapNaviCategoryRecord* MapNaviTable_GetCategoryRecord(const MapNaviTable* table, s32 index);
@@ -61,11 +53,11 @@ void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
     }
 
     for (s32 i = 0; i < dataTable2eSub2GetCount(); ++i) {
-        const MapNaviTextureRecord* record = dataTable2eSub2GetRecord(i);
-        if (record->map == -1) {
+        const MapSystemMapRecord* record = dataTable2eSub2GetRecord(i);
+        if (record->mapId == -1) {
             break;
         }
-        if (record->map == map) {
+        if (record->mapId == map) {
             display->textureIndex = record->textureIndex + 1;
             break;
         }

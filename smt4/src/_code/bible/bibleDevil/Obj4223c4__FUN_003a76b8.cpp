@@ -5,11 +5,10 @@
 #include "gamedata/UnitStats.h"
 #include "shard/Shard004A.h"
 #include "code/Code0029_Smt4.h"
+#include "script/scrScriptProcess.h"
 
-struct CompendiumPreviewHandle { u8 prefix[0x108]; s32 mode; };
 extern "C" {
 s32 utilityReturnSuccess(const void *input);
-CompendiumPreviewHandle *scrScriptProcessCreate(u32 first, u32 second);
 void buttonHelpSetPreset(u32 preset);
 void *partyMemberFindById(u16 id);
 void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);
@@ -36,8 +35,8 @@ void Obj4223c4::FUN_003a76b8()
         u8 unk95;
         u8 input[0x46];
         u8 timers[0x4bc];
-        u32 handleA, handleB;
-        CompendiumPreviewHandle *preview;
+        void *handleA, *handleB;
+        ScriptProcess *preview;
         u8 fromParty, source;
         u8 unk5A6[2];
         DetailEntry entries[1];
@@ -46,7 +45,7 @@ void Obj4223c4::FUN_003a76b8()
         __INTADDR__(&((DetailView *)0)->entries) == 0x5a8 ? 1 : -1];
     DetailView *state = reinterpret_cast<DetailView *>(view);
     if (view->isScreenReady() != 0 && utilityReturnSuccess(state->input) == 0) {
-        CompendiumPreviewHandle *preview = scrScriptProcessCreate(state->handleA, state->handleB);
+        ScriptProcess *preview = scrScriptProcessCreate(state->handleA, state->handleB);
         state->preview = preview;
         preview->mode = 2;
         state->phase = 1;

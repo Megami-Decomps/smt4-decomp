@@ -4,6 +4,7 @@
 
 #include "ui/UiSpriteApi.h"
 #include "common.h"
+#include "gamedata/PlayerGrowTable.h"
 #include "shard/FloatSortRecord.h"
 
 #include "shard/Shard0031.h"
@@ -176,14 +177,6 @@ typedef struct PlayerData {
     /* 0x62 */ u16 unk62;
 } PlayerData;
 
-struct PlayerGrowthEntry {
-    /* 0x00 */ u8 unk00[5];
-    /* 0x05 */ u8 attributes[5];
-    /* 0x0A */ u8 hp;
-    /* 0x0B */ u8 mp;
-    /* 0x0C */ u8 extraLow;
-    /* 0x0D */ u8 extraHigh;
-};
 struct PlayerGrowthRecipe {
     /* 0x00 */ u8 attributes[5];
     /* 0x05 */ u8 reserved05;
@@ -193,17 +186,16 @@ struct PlayerGrowthRecipe {
     /* 0x0C */ u32 reserved0c;
     /* 0x10 */ u16 enabled;
 };
-typedef char PlayerGrowthEntrySizeCheck[sizeof(PlayerGrowthEntry) == 0x0E ? 1 : -1];
 typedef char PlayerGrowthRecipeSizeCheck[sizeof(PlayerGrowthRecipe) == 0x14 ? 1 : -1];
-static __inline PlayerGrowthRecipe playerGrowthRecipeFromEntry(const PlayerGrowthEntry *entry)
+static __inline PlayerGrowthRecipe playerGrowthRecipeFromEntry(const PlayerGrowRecord *entry)
 {
     PlayerGrowthRecipe recipe = {};
     for (u32 index = 0; index < 5; ++index) {
-        recipe.attributes[index] = entry->attributes[index];
+        recipe.attributes[index] = entry->growth[index];
     }
-    recipe.hp = entry->hp;
-    recipe.mp = entry->mp;
-    recipe.extra = entry->extraLow + (entry->extraHigh << 8);
+    recipe.hp = entry->baseHp;
+    recipe.mp = entry->baseMp;
+    recipe.extra = entry->hpGrowth + (entry->mpGrowth << 8);
     recipe.enabled = 1;
     return recipe;
 }
@@ -245,10 +237,6 @@ typedef struct Holder48 {
 typedef struct Holder48Ref {
     /* 0x00 */ Holder48 *holder;
 } Holder48Ref;
-
-typedef struct JobWork0 {
-    /* 0x00 */ s32 *first;
-} JobWork0;
 
 typedef struct JobWork34 {
     /* 0x00 */ u8 unk00[0x34];

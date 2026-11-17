@@ -5,7 +5,7 @@ extern "C" {
 
 void buttonHelpSetHelpState(u8 value)
 {
-    g_buttonHelp.work->helpState = value;
+    g_buttonHelp.work->text.useDirectoryText = value;
 }
 
 } /* extern "C" */

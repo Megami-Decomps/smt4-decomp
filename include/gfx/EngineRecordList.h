@@ -3,17 +3,11 @@
 #include "common.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "gfx/ControllerModel.h"
+#include "Model/MoriModelContent.h"
 #include <stddef.h>
 
-struct EngineRecordModelList {
-    u32 unk00;
-    union {
-        u32 registryHandle;
-        ControllerModel *model;
-    };
-};
 struct EngineRecordModelSlot {
-    EngineRecordModelList *models;
+    MoriModelContent *models;
     u32 unk04;
 };
 struct EngineEffectRecord {
@@ -34,7 +28,7 @@ struct EngineEffectRecord {
     u8 flag2C, unk2D[3];
     union {
         u32 counter30;
-        EngineRecordModelList *ownModels;
+        MoriModelContent *ownModels;
     };
     u8 flag34, unk35[3];
     s32 modelSlot;

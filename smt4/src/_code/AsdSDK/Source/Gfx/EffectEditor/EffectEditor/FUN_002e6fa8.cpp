@@ -50,10 +50,10 @@ u32 FUN_002e6fa8(void)
     }
     if (input.state == 2) {
         result = 0x400000;
-    } else if (input.state == 1 && g_effectEditor.selection.list != NULL) {
+    } else if (input.state == 1 && g_effectEditor.list != NULL) {
         libc_strcpy(reinterpret_cast<unsigned int *>(g_effectEditorResourceName), reinterpret_cast<unsigned int *>(input.name));
         textFormatBuffer(path, "%s%s", "effect_editor/", input.fullName);
-        FUN_002e6fa8_hook(g_effectEditor.selection.list, path);
+        FUN_002e6fa8_hook(g_effectEditor.list, path);
         result = (u32)&DAT_00400002;
     }
     return result;

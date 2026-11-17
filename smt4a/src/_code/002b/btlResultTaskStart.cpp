@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct BtlResultOwner {
     /* 0x42C */ s32 itemCount;
 } BtlResultOwner;
 
-extern void *g_btlUiBlock;
 
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(u32), void (*draw)(u32), void *owner, u32 id);
 void cleanupCompletionCallback(u32 job);
@@ -25,8 +25,8 @@ void FUN_002c52d8(void);
 void FUN_002ed428(void *panel);
 void FUN_0031e6f4(void *list);
 void FUN_00331c60(ResultItem *item);
-void btlUiPanelStart(void *block);
-void FUN_004ac044(void *block);
+void btlUiPanelStart(BtlUiA *block);
+void FUN_004ac044(BtlUiA *block);
 
 /* Starts the battle result job, resets its panel, list and items, and starts the battle UI panel. */
 void btlResultTaskStart(BtlResultOwner *owner)

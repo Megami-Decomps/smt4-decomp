@@ -6,15 +6,10 @@
 #include "util/BitsAndBytes.h"
 
 /* A status icon panel's position vector (0x24 bytes); the scale sits at 0x20. */
-struct IconPanelPosition {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ f32 scale;
-};
-
 struct IconPanel {
     /* 0x0000 */ u8 unk0000[0xAC];
-    /* 0x00AC */ IconPanelPosition position;
-    /* 0x00D0 */ u8 unk00D0[0x37AC];
+    /* 0x00AC */ UiSpriteState position;
+    /* 0x00D0 */ u8 unk00D0[0x3744];
     /* 0x387C */ s32 styled;
 };
 
@@ -33,8 +28,8 @@ void FUN_002fa1b0(IconPanel *panel, u32 kind, s32 x, s32 y, f32 speed, s32 alter
         s32 offsetX = 0;
         s32 offsetY = 0;
         if (panel->styled == 1) {
-            offsetX = vec2GetXInt((UiSpriteState *)(&panel->position));
-            offsetY = vec2GetYInt((UiSpriteState *)(&panel->position));
+            offsetX = vec2GetXInt((&panel->position));
+            offsetY = vec2GetYInt((&panel->position));
         }
         offsetX += x;
         offsetY += y;
@@ -42,7 +37,7 @@ void FUN_002fa1b0(IconPanel *panel, u32 kind, s32 x, s32 y, f32 speed, s32 alter
         texDrawTableEntryAtStoredOrigin(2, 13, 171, offsetX, offsetY, 52);
         texDrawTableEntryAtStoredOrigin(2, 13, 222, offsetX, offsetY, 53);
         if (panel->styled == 1) {
-            efctSetSpeed(panel->position.scale * speed);
+            efctSetSpeed(panel->position.alpha * speed);
             RenderCtxA *render = g_renderCtx;
             u32 blend = packNibblesAndByte(6, 1, 0);
             renderCtxSetB(render, blend);

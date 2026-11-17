@@ -9,15 +9,15 @@ void FUN_0026f188(int mode, u32 arg)
 {
     ButtonHelpWork *obj = g_buttonHelp.work;
 
-    g_buttonHelp.work->unk55C = 1;
-    obj->unk4CB = 1;
+    g_buttonHelp.work->text.useDirectoryText = 1;
+    obj->textVisible = 1;
     if (mode != 0) {
-        asdTextDrawDirectoryEntry(obj->unk558, 3, 0xffffffff, 0, 3, mode, arg);
+        asdTextDrawDirectoryEntry(obj->text.directoryText, 3, 0xffffffff, 0, 3, mode, arg);
         return;
     }
-    obj->unk4CB = 0;
-    obj->unk55C = 0;
-    obj->unk558 = 0;
+    obj->textVisible = 0;
+    obj->text.useDirectoryText = 0;
+    obj->text.directoryText = 0;
 }
 
 } /* extern "C" */

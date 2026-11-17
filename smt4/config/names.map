@@ -5256,3 +5256,4 @@
 0029a17c gxSetMirroredClippedScissor
 001eea88 uniteResultInitialize
 0028c040 statusAcquireSharedResources
+0031c344 itemApplyPermanentStatBoost

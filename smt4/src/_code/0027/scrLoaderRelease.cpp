@@ -1,9 +1,9 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int buttonHelpRelease(void);
-int scrScriptProcessDestroy(u32 process);
 int asdMemFree(u32 ptr);
 
 typedef struct Obj {
@@ -12,7 +12,7 @@ typedef struct Obj {
     /* 0x09 */ u8 unk09[3];
     /* 0x0C */ u32 bufferA;
     /* 0x10 */ u32 bufferB;
-    /* 0x14 */ u32 script;
+    /* 0x14 */ ScriptProcess *script;
 } Obj;
 
 void scrLoaderRelease(Obj *obj)

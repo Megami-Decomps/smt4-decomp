@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 
 namespace {
 struct MapRegion {
@@ -17,33 +17,28 @@ struct MapRegionTable {
     /* 0x1900 */ s32 count;
 };
 
-struct GameFlagBlockRegion {
-    /* 0x000 */ u8 unk000[0xd8c];
-    /* 0xD8C */ s16 regionIndex;
-};
 }
 
 extern "C" {
 
 extern MapRegionTable DAT_00611874;
-GameFlagBlockRegion *gameFlagsGetBlock(void);
 
 /* Find the region of an area (0 and 99 match any) that contains (x, y), remember it and return its value;
  * when none does, return the value of the last remembered region. */
 u32 mapRegionLookupValue(s32 area, f32 x, f32 y)
 {
-    GameFlagBlockRegion *block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     MapRegionTable *table = &DAT_00611874;
 
     for (s32 i = 0; i < table->count; ++i) {
         MapRegion *region = &table->regions[i];
         if ((region->area == area || area == 0 || area == 99) &&
             region->minX <= x && y >= region->minY && region->maxX >= x && y <= region->maxY) {
-            block->regionIndex = i;
+            block->currentZone = i;
             return region->value;
         }
     }
-    return table->regions[block->regionIndex].value;
+    return table->regions[block->currentZone].value;
 }
 
 } /* extern "C" */

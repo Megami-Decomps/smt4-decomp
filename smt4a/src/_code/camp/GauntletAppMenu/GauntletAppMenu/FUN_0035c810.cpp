@@ -7,6 +7,7 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers_Smt4a.h"
+#include "script/scrScriptProcess.h"
 
 typedef void (*GauntletTaskFunc)(void);
 
@@ -32,7 +33,6 @@ void uiSpriteSetKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
 void uiSpriteSetImageKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
 void uiSpriteSelectAnim(GauntletSprite *sprite, s32 anim);
 void *asdLoadFileSyncDefault(const char *path);
-u32 scrScriptProcessCreate(void *first, void *second);
 void FUN_003ce598(void);
 void gauntletAppMenuExit(void);
 void gauntletAppMenuDestroy(void);

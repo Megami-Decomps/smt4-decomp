@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00486d0c` (_code @ 0x486d0c, 0x3d8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -38,7 +39,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: texDrawTableEntrySized. */
@@ -87,7 +87,7 @@ void FUN_00486d0c(int param_1)
   int *temp_v28;
   int temp_v29;
   
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   temp_v26 = param_1 + 0x4cc;
   puVar4 = (unsigned long long *)sub68OwnerGetBlock60();
   temp_v29 = temp_v2 + 0xd00;

@@ -1,10 +1,10 @@
 #include "common.h"
 #include "classes/Obj422448.h"
 #include "shard/W4_Match6_BibleScreen.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
-extern BibleScript *scrScriptProcessCreate(BibleFiles files);
 extern int messageTargetSetValue(int, int);
 extern int messageBannerInitSelection(int, int);
 extern int buttonHelpSetPreset(int);
@@ -19,11 +19,11 @@ void Obj422448::bibleScreenStartScript()
 {
     BibleScreen * screen = reinterpret_cast<BibleScreen *>(this);
     if (spriteTable22AllLoaded() != 0) {
-        BibleScript *script = scrScriptProcessCreate(screen->files);
+        ScriptProcess *script = scrScriptProcessCreate(screen->files.bibleBf, screen->files.bibleMbm);
         s32 scroll;
 
         screen->script = script;
-        script->started = 1;
+        script->mode = 1;
         FUN_003aacd0();
         buttonHelpSetPreset(0x3E);
         scroll = screen->page[flaggedValueHolderGetTotal(screen->cursor)].scroll;

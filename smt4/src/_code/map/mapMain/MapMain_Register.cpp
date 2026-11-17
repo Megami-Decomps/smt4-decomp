@@ -1,7 +1,7 @@
 /* NON_MATCHING: map registration initialization and process-argument scheduling differ. */
+#include "gamedata/MapSaveBlock.h"
 #include "map/mapMain.h"
 #include "map/mapDepart.h"
-#include "shard/SaveWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -32,7 +32,6 @@ typedef char MapMainInitializationOffsets[sizeof(MapMainInitializationView) == s
 
 extern "C" {
 extern MapMain *g_mapMain;
-SaveWork *gameGetMapBlock(void);
 void FUN_00280ac0(s32 mode);
 void MapEpl_InitState(void);
 void FUN_001b4764(void);
@@ -53,7 +52,7 @@ void MapMain_Register(void)
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapMain.cpp", 392);
     g_mapMain = static_cast<MapMain *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapMain), 1));
     MapMainInitializationView *map = reinterpret_cast<MapMainInitializationView *>(g_mapMain);
-    SaveWork *save = gameGetMapBlock();
+    MapSaveBlock *save = gameGetMapBlock();
     FUN_00280ac0(1);
     map->startupFlags[0] = 0;
     map->startupFlags[1] = 0;
@@ -93,7 +92,7 @@ void MapMain_Register(void)
     map->messageFlags[0] = 0;
     map->messageFlags[1] = 0;
     g_gameState.map.mapRegistrationPending = 0;
-    save->mapRegistration.pending = 0;
+    save->registrationPending = 0;
     map->scriptState = 0;
     map->freeOnEnd = 0;
     u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MAP C"), 2, 0, 0, FUN_001b7f78, mapMainRequest, 0);

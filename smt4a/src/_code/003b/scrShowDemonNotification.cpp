@@ -1,10 +1,10 @@
 /* NON_MATCHING: initial registration branch layout and zero/one constant registers differ; -O2 candidate. */
+#include "gamedata/GuestParamTable.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "code/Code0037.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
 
-struct BannerDemon { u8 unk00[4]; u16 id; };
 extern "C" {
 u32 scrGetArg(u32);
 s32 scrGetCommandFrame();
@@ -35,8 +35,8 @@ u32 scrShowDemonNotification()
             FUN_004bd410((u16)id);
             FUN_003e48dc((u16)id);
         }
-        const BannerDemon *record = reinterpret_cast<const BannerDemon *>(FUN_00370ecc((u16)id));
-        if (record && record->id != id) {
+        const GuestParamRecord *record = FUN_00370ecc((u16)id);
+        if (record && record->parentId != id) {
             FUN_004bd410((u16)id);
             FUN_003e48dc((u16)id);
         }

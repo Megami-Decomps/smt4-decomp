@@ -1,8 +1,7 @@
 /* NON_MATCHING: The cosine/sine stack stores combine into VSTMIA, changing adjacent address-calculation scheduling. */
-#include "shard/W5_W5Match2_MatrixDestination.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
-extern MatrixDestination g_vectorScratch;
 f32 FUN_001b63b0(f32 phase);
 f32 FUN_001a1ee0(f32 phase);
 void matrix44SetIdentity(Matrix44 *matrix);
@@ -19,6 +18,6 @@ void FUN_005147dc(f32 angle)
     matrix.values[6] = sine;
     matrix.values[9] = -sine;
     matrix.values[10] = cosine;
-    g_vectorScratch.matrix = matrix;
+    g_vectorScratch.matrix.matrix = matrix;
 }
 }

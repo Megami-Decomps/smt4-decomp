@@ -1,14 +1,10 @@
 /* Selects the demon's race label, preferring add-on text over the built-in table. */
-#include "gamedata/DataTable.h"
+#include "gamedata/NkmSortIndex.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "addon/aocMain.h"
 #include "bible/bibleDevil.h"
 #include "addon/AocSystem.h"
 
-struct RaceLabel {
-    char primary[0x10];
-    char alternate[0x18];
-};
 struct AddonRaceLabel {
     u16 id;
     char text[1];
@@ -24,12 +20,12 @@ static inline const char *findRaceLabel(u32 race, s32 alternate)
         return addon->text;
     }
     void *table = dataTableGet(1, 0);
-    RaceLabel *labels = (RaceLabel *)dataTableGetEntries(table);
+    NkmRaceNameRecord *labels = nkmRaceNameRecords(table);
     u32 count = dataTableGetCount(table);
     if (count > race) {
-        return alternate ? labels[race].alternate : labels[race].primary;
+        return alternate ? labels[race].alternateName : labels[race].name;
     }
-    return labels->primary;
+    return labels->name;
 }
 
 extern "C" const char *demonGetRaceLabel(u16 id, s32 alternate)

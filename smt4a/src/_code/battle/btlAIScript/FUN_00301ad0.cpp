@@ -1,6 +1,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "battle/btlAIScript.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ void *asdMemoryAllocTracked(s32 heap, s32 alignmentClass, s32 flags, u32 size, s
 void asdMemFree(void *block);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
-void scrScriptProcessDestroy(void *process);
 void btlAiScriptUpdate(u32 job);
 void btlAiScriptDestroy(u32 job);
 

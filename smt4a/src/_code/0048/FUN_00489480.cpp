@@ -1,4 +1,5 @@
 /* NON_MATCHING: typed rewrite of the navigation map button handler; same blocks and calls as retail (232 vs 230 rows): the two stack arguments of rectRecRead are stored separately instead of one strd, early exits share the return and the saved registers are numbered differently (retail game state r7, navigation block r6, zero r8). */
+#include "gamedata/MapSaveBlockA.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/NavigationInterpolation.h"
@@ -34,12 +35,6 @@ struct ScreenRect {
     s32 x, y, width, height;
 };
 
-/* The game flag block's counter at +0x15BC. */
-struct GameFlagBlock {
-    u8 unk0000[0x15BC];
-    s32 pendingCount;
-};
-
 /* The game state's block at +0x400 holds the navigation flags. */
 struct GameStateNavBlock {
     u8 unk00[0x60];
@@ -51,7 +46,6 @@ struct GameStateNavBlock {
 extern "C" {
 void rectRecRead(u32 group, u32 id, s32 *x, s32 *y, s32 *width, s32 *height);
 
-GameFlagBlock *gameFlagsGetBlock(void);
 s32 gameFlagIsSet(u32 id);
 s32 setFullScreenRect(void);
 s32 gameFlagsClassify(void);
@@ -76,7 +70,7 @@ extern GameStateNavBlock DAT_005f19fc;
 // Handles the navigation map button: starts the map change or the input feedback and reports whether it did.
 u32 FUN_00489480(NaviInputPanel *panel)
 {
-    GameFlagBlock *settings = gameFlagsGetBlock();
+    MapSaveBlockA *settings = gameFlagsGetBlock();
     u32 handled = 0;
     if ((panel->flags & 0x2000000) && (setFullScreenRect() == 0 || g_gameState.inputBlocked != 0))
         panel->flags &= ~0x2000000;
@@ -104,8 +98,8 @@ u32 FUN_00489480(NaviInputPanel *panel)
                 for (s32 i = 0; i < 6; ++i)
                     uiSpriteSetKeyframe(panel->sprites[i], 4, 0);
                 panel->infoPending = 1;
-                if (settings->pendingCount != 0)
-                    settings->pendingCount = 0;
+                if (settings->naviRefreshSecond != 0)
+                    settings->naviRefreshSecond = 0;
                 handled = 1;
             }
         } else if (DAT_005f19fc.naviMapPending != 0 &&

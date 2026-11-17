@@ -14,12 +14,12 @@ void menuStateStartConfirm(void)
     menu->unk2bc = 0;
     if (menu->type != 6) {
         menu->mode = 4;
-        uiSpriteSelectAnim((UiSpriteState *)menu->panelA, 1);
+        uiSpriteSelectAnim(&menu->primarySprites[0], 1);
         return;
     }
     menu->mode = 6;
-    uiSpriteSelectAnim((UiSpriteState *)menu->panelA, 1);
-    uiSpriteSelectAnim((UiSpriteState *)menu->panelB, 4);
+    uiSpriteSelectAnim(&menu->primarySprites[0], 1);
+    uiSpriteSelectAnim(&menu->secondarySprites[0], 4);
 }
 
 } /* extern "C" */

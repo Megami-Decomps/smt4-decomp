@@ -6,8 +6,6 @@
 #include "shard/W6_W6Match3_OnlineValueCompletion.h"
 #include "sys/ResultReport.h"
 
-struct CecProcess;
-
 extern "C" {
 extern const char DAT_0052f4b0[];
 void nn_os_CriticalSection_Initialize(void* section);
@@ -21,7 +19,7 @@ s32 FUN_002fb0d4(ThreadHandleState *thread, const ThreadArgumentDescriptor *desc
     ThreadEntryPoint entry, const void *argument, u32 stackTop, u32 priority, s32 cpu, bool owned);
 
 // Initialize inbox accounting, allocate its worker stack, and start the CEC thread.
-void FUN_0035af44(CecProcess* process)
+void FUN_0035af44(CecProcessA* process)
 {
     // The stack-memory object overlaps the older partial thread view; do not reshape it.
     struct StackMemoryView {
@@ -39,19 +37,19 @@ void FUN_0035af44(CecProcess* process)
         offsetof(ThreadView, stack) == 0xD3C &&
         offsetof(ThreadView, stack.base) == 0xD44 &&
         offsetof(ThreadView, stack.size) == 0xD48 ? 1 : -1];
-    AsdCecProcessWork* work = reinterpret_cast<AsdCecProcessWork*>(process);
+    CecProcessA* work = process;
     ThreadView* worker = reinterpret_cast<ThreadView*>(process);
-    nn_os_CriticalSection_Initialize(work->inbox.lock);
-    work->inbox.receivedCount = 0;
-    work->inbox.requestedCount = asdCecInboxGetMessageCount();
-    work->inbox.producedBatches = 0;
-    work->inbox.consumedBatches = 0;
+    nn_os_CriticalSection_Initialize(work->lock);
+    work->receivedCount = 0;
+    work->requestedCount = asdCecInboxGetMessageCount();
+    work->producedBatches = 0;
+    work->consumedBatches = 0;
     asdDebugTrace(DAT_0052f4b0, 215);
     work->buffer = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
     resultReportIfFailed(&worker->stack, work->buffer, 0x1000);
-    CecProcess* argument = process;
+    CecProcessA* argument = process;
     ThreadArgumentDescriptor descriptor;
-    descriptor.argumentSize = sizeof(CecProcess*);
+    descriptor.argumentSize = sizeof(CecProcessA*);
     descriptor.callbacks[0] = FUN_00514a44;
     descriptor.callbacks[1] = FUN_00514b7c;
     descriptor.callbacks[2] = FUN_00514afc;

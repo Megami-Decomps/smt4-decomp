@@ -1,28 +1,11 @@
 /* NON_MATCHING: logic and call sequence match; retail hoists the zero into a callee-saved register (shared by the null table entry and the popup phase store, stored with STM) and spills one more register, so the frame is 84 bytes and the popup stores are grouped differently. */
-#include "gamedata/DataTable.h"
+#include "gamedata/PartnerInfoTable.h"
 #include "map/PopupStateA.h"
 
-struct PopupContextRecord {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ s32 kind;
-    /* 0x08 */ s16 requiredFlag;
-    /* 0x0A */ s16 blockingFlag;
-    /* 0x0C */ s16 context;
-    /* 0x0E */ s16 unk0e;
-    /* 0x10 */ s16 message;
-    /* 0x12 */ u8 unk12[0xe];
-};
-
-struct PopupMessageResource {
-    u32 unk00;
-    u8 header[0x20];
-    char text[1];
-};
 
 
 extern "C" {
 s32 gameFlagIsSet(s32 flag);
-PopupMessageResource *FUN_00365bc4(s32 message);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void textFormatFullWidthTwoDigits(s32 value, u8 *output);
 const char *dataFindKindRecordWithAocOverrides(s32 value, s32 option);
@@ -32,21 +15,18 @@ s32 textFormatBuffer(char *destination, const char *format, ...);
 // Show the context popup for `context`, filling the message's placeholders from `count` and `value`.
 void FUN_00246450(s32 context, s32 value, s32 count)
 {
-    DataTableView<PopupContextRecord> table(0x43, 0);
+    DataTableView<PartnerInfoRecord> table(0x43, 0);
     s32 total = (s32)table.count;
     if (context == 0 || context == 2) {
         return;
     }
     for (s32 i = 0; i < total; i++) {
-        void *section = dataTableGet(0x43, 0);
-        PopupContextRecord *entries = (PopupContextRecord *)dataTableGetEntries(section);
-        u32 size = dataTableGetCount(section);
-        PopupContextRecord *record = (u32)i >= size ? NULL : &entries[i];
+        PartnerInfoRecord *record = partnerInfoRecordAt(i);
         if (record->kind == 1 &&
             (record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag) != 0) &&
-            (record->blockingFlag == 0 || gameFlagIsSet(record->blockingFlag) == 0) &&
-            record->context == context) {
-            PopupMessageResource *message = FUN_00365bc4(record->message);
+            (record->excludedFlag == 0 || gameFlagIsSet(record->excludedFlag) == 0) &&
+            record->argument == context) {
+            PartnerInfoMessage *message = FUN_00365bc4(record->choices[0].message);
             PopupStateA *popup = g_popupState;
             popup->message = message->text;
             popup->state = 14;

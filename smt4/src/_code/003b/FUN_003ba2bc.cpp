@@ -1,14 +1,9 @@
 /* NON_MATCHING: retail loads the second resource pair with two ldr and stores step/stepTimer (2, 0) with one strd; armcc here uses ldm (after two adds) and an add + stm. The linker-inlined scriptProcessSetMode now matches the mode stores. */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
+#include "script/scrScriptProcess.h"
 
 #define UNK3BA2BC_FLAG_PENDING 0x10
-
-/* An object scrScriptProcessCreate builds from a resource pair. */
-struct Unk3ba2bcPart {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ s32 mode;
-};
 
 struct Unk3ba2bcOwner {
     /* 0x000 */ u8 unk000[0x20];
@@ -23,20 +18,19 @@ struct Unk3ba2bcOwner {
     /* 0xD58 */ u8 loader[0x24];
     /* 0xD7C */ void *firstResourceA;
     /* 0xD80 */ void *firstResourceB;
-    /* 0xD84 */ Unk3ba2bcPart *firstPart;
+    /* 0xD84 */ ScriptProcess *firstPart;
     /* 0xD88 */ void *secondResourceA;
     /* 0xD8C */ void *secondResourceB;
-    /* 0xD90 */ Unk3ba2bcPart *secondPart;
+    /* 0xD90 */ ScriptProcess *secondPart;
 };
 
 extern "C" {
 
 s32 stageAssetsLoaded(void);
 s32 spriteTable2aIsLoaded(void *sprites);
-Unk3ba2bcPart *scrScriptProcessCreate(void *resourceA, void *resourceB);
 void __ARM_common_memcpy4_6(void *a, void *b);
 void mikadoLoadSceneResources(Unk3ba2bcOwner *owner);
-void scriptProcessSetMode(Unk3ba2bcPart *part, s32 mode);
+void scriptProcessSetMode(ScriptProcess *part, s32 mode);
 void buttonHelpSelectByProgress(Unk3ba2bcOwner *owner);
 
 /* Once everything is loaded, builds both parts and, if a start is pending, starts the owner. */

@@ -16,50 +16,49 @@ void buttonHelpSetPreset(u32 preset);
 u32 FUN_001c0c38(void)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
-    ButtonHelpSelectionViewIV *selection = reinterpret_cast<ButtonHelpSelectionViewIV *>(work);
     s32 last = 0;
 
     if (work->state != 0) {
         if (work->state == 1) {
             for (s32 i = 0; i < 2; i++) {
                 if (work->mode != 1) {
-                    uiSpriteAdvanceAnimation(&work->units[i]);
-                } else if (work->unk04C6[0] != 0) {
-                    uiSlidingSpriteAdvance(&work->units[i], 0);
+                    uiSpriteAdvanceAnimation(&work->panelSprites[i]);
+                } else if (work->panelSliding != 0) {
+                    uiSlidingSpriteAdvance(&work->panelSprites[i], 0);
                 }
             }
             for (s32 i = 0; i < 6; i++) {
-                if (selection->kinds[i].kind != 0) {
-                    if (i < work->transition.phase) {
-                        uiSpriteAdvanceAnimation(&selection->units[i]);
+                if (work->slots[i].kind != 0) {
+                    if (i < work->phase) {
+                        uiSpriteAdvanceAnimation(&work->slotSprites[i]);
                     }
                     last = i;
                 }
             }
-            if (work->transition.phase > last && uiSpriteGetCompletionState(&selection->units[last]) != 0) {
+            if (work->phase > last && uiSpriteGetCompletionState(&work->slotSprites[last]) != 0) {
                 g_buttonHelp.work->state = 2;
-                g_buttonHelp.work->transition.phase = 0;
+                g_buttonHelp.work->phase = 0;
             }
         } else if (work->state != 2) {
             if (work->state == 3) {
                 for (s32 i = 0; i < 2; i++) {
-                    uiSpriteAdvanceAnimation(&work->units[i]);
+                    uiSpriteAdvanceAnimation(&work->panelSprites[i]);
                 }
                 for (s32 i = 0; i < 6; i++) {
-                    if (selection->kinds[i].kind != 0) {
-                        if (i < work->transition.phase) {
-                            uiSpriteAdvanceAnimation(&selection->units[i]);
+                    if (work->slots[i].kind != 0) {
+                        if (i < work->phase) {
+                            uiSpriteAdvanceAnimation(&work->slotSprites[i]);
                         }
                         last = i;
                     }
                 }
-                if (work->transition.phase > last && uiSpriteGetCompletionState(&selection->units[last]) != 0) {
+                if (work->phase > last && uiSpriteGetCompletionState(&work->slotSprites[last]) != 0) {
                     for (s32 i = 0; i < 6; i++) {
-                        selection->active[i] = 0;
+                        work->touchPressed[i] = 0;
                     }
-                    FUN_002ae028(selection->unk4BE);
+                    FUN_002ae028(work->touchSelected);
                     g_buttonHelp.work->state = 0;
-                    g_buttonHelp.work->transition.phase = 0;
+                    g_buttonHelp.work->phase = 0;
                 }
             }
         } else {
@@ -76,7 +75,7 @@ u32 FUN_001c0c38(void)
             }
         }
     }
-    work->transition.phase++;
+    work->phase++;
     return 0;
 }
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287c34` (_code @ 0x287c34, 0x474 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
 
@@ -254,7 +255,6 @@ extern unsigned int DAT_0049fd20; /* 0x49fd20 */
 /* Supplied declaration required: FUN_0026faa4. */
 extern unsigned long long FUN_00270384(int);
 /* Supplied declaration required: mapClearPendingEntries. */
-extern int gameGetMapBlock(void);
 
 
 void FUN_00287c34(int param_1)
@@ -494,7 +494,7 @@ void FUN_00287c34(int param_1)
     mapClearPendingEntries();
     FUN_0026faa4();
   }
-  temp_v0 = gameGetMapBlock();
+  temp_v0 = (int)gameGetMapBlock();
   temp_v2 = 0;
   do {
     temp_v3 = FUN_00270384(temp_v2);

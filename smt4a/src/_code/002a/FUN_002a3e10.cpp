@@ -2,14 +2,7 @@
 #include "event/eventCommand.h"
 #include "gamedata/GameFlags.h"
 
-namespace {
-struct MovieEventGlobals {
-    /* 0x00 */ EventCommandGlobals command;
-    /* 0x08 */ u32 movieJob;
-};
-}
 extern "C" {
-extern MovieEventGlobals g_eventCommand;
 s32 scrGetArg(u32 index);
 s32 querySlotHasHandle(void);
 void commonBgStopAndResetFade(void);

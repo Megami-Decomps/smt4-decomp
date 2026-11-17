@@ -1,15 +1,13 @@
-#include "shard/W5_W5Match7_ControllerPose.h"
-#include "shard/W8X15_ModelStatePlayer.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 
-
-
-void controllerSetPosition(ControllerPose *owner, f32 x, f32 y, f32 z)
+/* Sets the body's scale. */
+void controllerSetPosition(Obj557b18 *body, f32 x, f32 y, f32 z)
 {
-    owner->position.x = x;
-    owner->position.y = y;
-    owner->position.z = z;
+    body->scale.x = x;
+    body->scale.y = y;
+    body->scale.z = z;
 }
 
 } /* extern "C" */

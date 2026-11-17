@@ -8,7 +8,7 @@ u16 screenGetSlotValue(u32 index)
     ButtonHelpWorkA *screen = g_buttonHelp.work;
 
     if (screen != NULL && index < 6) {
-        return screen->kinds[index].value;
+        return screen->slots[index].value;
     }
     return 0;
 }

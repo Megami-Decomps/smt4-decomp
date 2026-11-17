@@ -1,8 +1,7 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/PartyPanelState.h"
 
 extern "C" {
-s32 uiSpriteGetOperationMode(const TimerSlot *timer);
-s8 uiSpriteGetCompletionState(const TimerSlot *timer);
 
 // Check whether the party panel accepts an action in its current scene and timer state.
 u32 FUN_001ed80c()

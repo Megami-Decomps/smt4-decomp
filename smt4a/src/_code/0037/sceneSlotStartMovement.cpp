@@ -1,5 +1,5 @@
 /* NON_MATCHING: the slot search now returns from inside the loop (no re-check of the slot, like retail); remaining: retail stores the nine parameter floats with one `vstmia {s0-s8}` and reloads destination[2]/origin[2] from memory; the build splits the stores */
-#include "shard/W5_W5Match7_SceneSlots.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
 
@@ -7,32 +7,32 @@ extern "C" {
 
 void sceneSlotStartMovement(f32 x, f32 y, f32 z, f32 value, f32 targetX, f32 targetY, f32 targetZ, f32 targetValue, f32 duration, f32 progress)
 {
-    for (s32 i = 0; i < 40; i++) {
-        SceneSlot *slot = &g_mapEnemy->slots[i];
+    for (s32 i = 0; i < MAP_ENEMY_COUNT_A; i++) {
+        MapEnemyEntryA *slot = &g_mapEnemy->entries[i];
         if (slot->active && slot->kind != 0 && slot->kind < 11 && slot->state == 2) {
-            slot->origin[0] = x;
-            slot->origin[1] = y;
-            slot->origin[2] = z;
-            slot->origin[3] = value;
-            slot->destination[0] = targetX;
-            slot->destination[1] = targetY;
-            slot->destination[2] = targetZ;
-            slot->destination[3] = targetValue;
+            slot->start.x = x;
+            slot->start.y = y;
+            slot->start.z = z;
+            slot->startHeading = value;
+            slot->end.x = targetX;
+            slot->end.y = targetY;
+            slot->end.z = targetZ;
+            slot->endHeading = targetValue;
             slot->duration = duration;
             slot->velocity.x = targetX - x;
             slot->velocity.y = targetY - y;
-            slot->velocity.z = slot->destination[2] - slot->origin[2];
+            slot->velocity.z = slot->end.z - slot->start.z;
             f32 inverseDuration = 1.0f / duration;
             slot->velocity.x *= inverseDuration;
             slot->velocity.y *= inverseDuration;
             slot->velocity.z *= inverseDuration;
-            slot->progress = progress;
-            MapVector origin = {slot->origin[0], slot->origin[1], slot->origin[2]};
+            slot->wait = progress;
+            MapVector origin = {slot->start.x, slot->start.y, slot->start.z};
+            slot->basePosition = origin;
             slot->position = origin;
-            slot->previousPosition = origin;
-            slot->value = slot->origin[3];
+            slot->heading = slot->startHeading;
             slot->state = 26;
-            slot->stateTime = 0;
+            slot->elapsed = 0;
             return;
         }
     }

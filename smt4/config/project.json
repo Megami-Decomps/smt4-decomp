@@ -75889,12 +75889,12 @@
     },
     {
       "address": "0x31c344",
-      "function": "FUN_0031c344",
+      "function": "itemApplyPermanentStatBoost",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_0031c344.o",
+      "object": "build/obj/_code/0031/itemApplyPermanentStatBoost.o",
       "size": 852,
-      "source": "src/_code/0031/FUN_0031c344.cpp",
-      "target": "orig/target/_code/0031/FUN_0031c344.o",
+      "source": "src/_code/0031/itemApplyPermanentStatBoost.cpp",
+      "target": "orig/target/_code/0031/itemApplyPermanentStatBoost.o",
       "thumb": false
     },
     {

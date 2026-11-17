@@ -3,11 +3,6 @@
 
 extern "C" {
 
-typedef struct PopupCursor {
-    /* 0x00 */ u8 unk00[0x8A];
-    /* 0x8A */ s8 confirmed;
-} PopupCursor;
-
 typedef struct PopupTask {
     /* 0x000 */ u8 unk000[4];
     /* 0x004 */ s32 state;
@@ -15,8 +10,8 @@ typedef struct PopupTask {
     /* 0x00C */ u8 unk00C[0x374];
     /* 0x380 */ u8 panel[0x28];
     /* 0x3A8 */ u8 intro[0x20];
-    /* 0x3C8 */ PopupCursor cursor;
-    /* 0x453 */ u8 unk453[0x860 - 0x3C8 - 0x8B];
+    /* 0x3C8 */ UiSpriteState cursor;
+    /* 0x454 */ u8 unk454[0x860 - 0x3C8 - 0x8C];
     /* 0x860 */ u32 choice;
 } PopupTask;
 
@@ -27,7 +22,7 @@ extern int FUN_0029e0f8(void);
 /* Per-frame update: step 0 starts the intro, step 1 follows the cursor and, once confirmed, picks the next state from the choice. */
 void FUN_003a0b78(PopupTask *task)
 {
-    PopupCursor *cursor;
+    UiSpriteState *cursor;
     u32 y;
     u32 x;
 
@@ -38,11 +33,11 @@ void FUN_003a0b78(PopupTask *task)
     }
     if (task->step == 1) {
         cursor = &task->cursor;
-        uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
-        y = vec2GetYInt((const UiSpriteState *)cursor);
-        x = vec2GetXInt((const UiSpriteState *)cursor);
+        uiSlidingSpriteAdvance(cursor, 0);
+        y = vec2GetYInt(cursor);
+        x = vec2GetXInt(cursor);
         pointConvertToFloat(task->panel, x, y);
-        if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) != 0) {
+        if (uiSpriteGetCompletionState(cursor) != 0) {
             switch (task->choice) {
             case 0:
             case 1:

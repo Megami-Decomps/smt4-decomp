@@ -1,23 +1,16 @@
-/* Returns the signed byte at +0x10 of the global state, or 0 when its field at +8 is clear. */
-#include "common.h"
+/* Returns the visible flag of the place window (a signed byte), or 0 when its state is idle. */
+#include "font/PlaceWin.h"
 
 extern "C" {
 
-typedef struct State {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s32 active;
-    /* 0x0C */ u8 unk0C[4];
-    /* 0x10 */ s8 value;
-} State;
-
-extern State *g_placeWin;
+extern PlaceWindow *g_placeWin;
 
 s32 placeWinGetValue(void)
 {
     s32 value;
 
-    if (g_placeWin->active != 0) {
-        value = g_placeWin->value;
+    if (g_placeWin->state != 0) {
+        value = g_placeWin->visible;
     } else {
         value = 0;
     }

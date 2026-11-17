@@ -1,10 +1,10 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int buttonHelpRelease(void);
-int scrScriptProcessDestroy(u32 process);
 int asdTMTexTableReleaseNode(int table, int index);
 int ifTouchRegionRemove(void);
 int messageSetConfirmDisplayMode(void);
@@ -15,7 +15,7 @@ typedef struct Obj {
     /* 0x000 */ u8 unk000[0x64C];
     /* 0x64C */ u32 bufferB;
     /* 0x650 */ u32 bufferA;
-    /* 0x654 */ u32 script;
+    /* 0x654 */ ScriptProcess *script;
     /* 0x658 */ u8 unk658[0x1C8];
     /* 0x820 */ u8 table[0x11E];
     /* 0x93E */ s16 count;

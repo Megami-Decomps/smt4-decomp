@@ -7,6 +7,7 @@
 #include "battle/ActionStateChannels.h"
 #include "gamedata/ConsumableRecord.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 namespace {
 /* A skill info record (only the kind and its flags). */
@@ -20,14 +21,13 @@ struct SkillInfo {
 }
 
 extern "C" {
-extern u32 g_btlUiBlock;
-s32 FUN_003af084(u32 block);
-void btlUiCopyStatePairs(u32 block, char *valid, u64 *mask, u64 *pair);
+s32 FUN_003af084(BtlUi *block);
+void btlUiCopyStatePairs(BtlUi *block, char *valid, u64 *mask, u64 *pair);
 s32 btlFindEntrySelectionByKey(BtlMainState *block, s32 index);
 s32 playerPadTestBit(u32 bit);
 void btlEntryBuildSummary(CommandInfo *info, BtlMainState *block, BtlEntry *entry);
 void FUN_003d0d1c(BtlMainState **block, CommandState *state);
-void FUN_00229a24(u32 block);
+void FUN_00229a24(BtlUi *block);
 void FUN_00229b10(BtlMainState **block, CommandState *state);
 
 /* Sets the acting unit's action kind. */

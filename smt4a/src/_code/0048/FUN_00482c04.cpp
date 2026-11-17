@@ -1,3 +1,4 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 /* NON_MATCHING: readable rebuild of the nearest-talk-target selection; retail keeps the best distance and id in s/r registers across the dispatch with the sphere test inlined as vsqrt and merges the three pickup branches' common stores, which armcc here schedules differently. */
 #include "shard/W5_W5Match7_SceneState.h"
@@ -41,7 +42,6 @@ struct TalkTargetSet {
 
 extern "C" {
 
-u8 *gameFlagsGetBlock(void);
 u8 *gameGetPlayerData(void);
 void textFormatBuffer(char *buffer, const char *format, u32 a, u32 b);
 void FUN_00376fa4(u32 id);
@@ -54,7 +54,7 @@ s32 gameDataFlagTestBit(u32 flag);
 u32 FUN_00482c04(TalkTargetSet *set)
 {
     u32 chosen = 0xFFFFFFFF;
-    u8 *flagsBlock = gameFlagsGetBlock();
+    MapSaveBlockA *flagsBlock = gameFlagsGetBlock();
     u8 *player = gameGetPlayerData();
     s32 bestDistance = 999999;
     for (s32 i = 0; i < 32; i++) {
@@ -76,7 +76,7 @@ u32 FUN_00482c04(TalkTargetSet *set)
             if (target->hasScript) {
                 s32 flagId = g_gameState.talkFlagsEnabled != 0 ? target->flagId : 0;
                 if (g_gameState.talkFlagsEnabled != 0 && flagId != 0 && flagId >= 0)
-                    *(s16 *)(flagsBlock + 0x22) = (s16)flagId;
+                    flagsBlock->mapId = (s16)flagId;
                 if (target->sequence > 0) {
                     if (target->deferred != 0) {
                         g_gameState.scriptPending = 1;
@@ -96,7 +96,7 @@ u32 FUN_00482c04(TalkTargetSet *set)
         } else if (target->kind == 0) {
             chosen = target->id;
             bool affordable = true;
-            if (*(s32 *)(flagsBlock + 0xDF4) != 0) {
+            if (flagsBlock->eventEnabled != 0) {
                 s32 limit = *(u16 *)(player + 0x62) + (gameDataFlagTestBit(0x8B) ? 9 : 0);
                 affordable = target->cost >= limit;
             }

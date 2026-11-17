@@ -1,5 +1,5 @@
 /* NON_MATCHING: Native storage destructors recover subobject bases; pre-destructor values cleanup and loop index address register still differ. */
-#include "Model/MoriModelContent.h"
+#include "classes/Obj557b18.h"
 #include "shard/W6_W6Match2_AnimationPlayback.h"
 
 class MoriModelOwnedObject {
@@ -61,7 +61,7 @@ __inline MoriRootStorage::~MoriRootStorage()
     }
 }
 
-extern "C" void moriModelBodyReleaseOwnedStorage(MoriModelBody *body)
+extern "C" void moriModelBodyReleaseOwnedStorage(Obj557b18 *body)
 {
     MoriModelCleanupView *object = (MoriModelCleanupView *)body;
     if (object->effect != NULL) {

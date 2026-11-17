@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler preserves data+0x2000 and uses a literal 0x1374 offset; retail preserves the raw data base, computes data+0x1000 early, and shares a differently placed return tail. */
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 struct ModeResetView {
     u8 unk0000[0x1374]; // 0x0000
@@ -11,7 +12,6 @@ struct ModeResetView {
 };
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 void FUN_0021af2c(void);
 
 // Resets mode-specific state when leaving mode eight or nine.

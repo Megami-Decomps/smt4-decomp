@@ -3,5 +3,4 @@
 #include "common.h"
 struct TextureStateEntry { void *texture; u8 unk04[20]; };
 struct TextureStateTable { TextureStateEntry *entries; };
-struct CecProcessView { u32 unk00; void *process; };
 #endif

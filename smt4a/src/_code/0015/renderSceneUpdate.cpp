@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "camp/RenderCtxA.h"
+#include "gfx/GfxSettings.h"
 
 struct RenderSceneOwner {
     /* 0x00 */ u32 unk00;
@@ -10,24 +11,6 @@ struct RenderSceneOwner {
 struct RenderSceneBuilder {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ u8 state[1];
-};
-struct RenderSceneSettings {
-    /* 0x00 */ u8 enabled;
-    /* 0x01 */ u8 unk01[0x17];
-    /* 0x18 */ u32 pending;
-    /* 0x1C */ u8 unk1c[0x10];
-    /* 0x2C */ u32 mask;
-    /* 0x30 */ u8 unk30[0x58];
-    /* 0x88 */ u32 flags;
-    /* 0x8C */ u32 unk8c;
-    /* 0x90 */ void *traverser;
-    /* 0x94 */ u32 unk94;
-    /* 0x98 */ RenderSceneBuilder *builder;
-    /* 0x9C */ u32 unk9c;
-    /* 0xA0 */ void *tree;
-    /* 0xA4 */ u8 unka4[0x20];
-    /* 0xC4 */ u32 ownerCount;
-    /* 0xC8 */ RenderSceneOwner *owner;
 };
 struct RenderSceneLightState {
     /* 0x00 */ u8 unk00[0x18];
@@ -39,13 +22,12 @@ struct RenderSceneLightState {
 };
 
 extern "C" {
-extern RenderSceneSettings g_gfxSettings;
 extern RenderSceneLightState g_asdLightCount;
-void FUN_0017712c(RenderSceneOwner *owner, void *traverser, u32 mask, s32 enabled);
-void FUN_00197eb0(void *builderState, void *tree);
-void FUN_00176800(RenderSceneOwner *owner, void *traverser, s32 enabled);
-void FUN_0018e9d8(void *builder, void *tree);
-void FUN_00176e84(RenderSceneOwner *owner, u32 mask, s32 mode, s32 flags);
+void FUN_0017712c(ModelOwner *owner, void *traverser, u32 mask, s32 enabled);
+void FUN_00197eb0(void *builderState, u32 tree);
+void FUN_00176800(ModelOwner *owner, void *traverser, s32 enabled);
+void FUN_0018e9d8(void *builder, u32 tree);
+void FUN_00176e84(ModelOwner *owner, u32 mask, s32 mode, s32 flags);
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
 void renderCtxResetFrameState(RenderCtxA *context);
 }
@@ -53,21 +35,22 @@ void renderCtxResetFrameState(RenderCtxA *context);
 /* Traverse the active model scene and reset the render context after submission. */
 extern "C" void renderSceneUpdate(void)
 {
-    if (!g_gfxSettings.enabled || (g_asdLightCount.count <= 0 && !(g_gfxSettings.flags & 1)))
+    if (!g_gfxSettings.lightingEnabled || (g_asdLightCount.count <= 0 && !(g_gfxSettings.slotFlags[1] & 1)))
         return;
-    void *context = g_gfxSettings.owner->context;
-    FUN_0017712c(g_gfxSettings.owner, g_gfxSettings.traverser, g_gfxSettings.mask, 1);
+    // The scene owner keeps its render context at +4.
+    void *context = reinterpret_cast<RenderSceneOwner *>(g_gfxSettings.owner[1])->context;
+    FUN_0017712c(g_gfxSettings.owner[1], g_gfxSettings.attachInfo[1], g_gfxSettings.node1, 1);
     if (g_asdLightCount.visit && !g_asdLightCount.skipVisit) {
-        FUN_00197eb0(g_gfxSettings.builder->state, g_gfxSettings.tree);
-        sceneTraverserVisit(g_gfxSettings.traverser, g_gfxSettings.builder);
+        FUN_00197eb0(static_cast<RenderSceneBuilder *>(g_gfxSettings.transformBuilder[1])->state, g_gfxSettings.sceneGroupRoot[1]);
+        sceneTraverserVisit(g_gfxSettings.attachInfo[1], g_gfxSettings.transformBuilder[1]);
     }
     if (!g_asdLightCount.skipOwner)
-        FUN_00176800(g_gfxSettings.owner, g_gfxSettings.traverser, 1);
+        FUN_00176800(g_gfxSettings.owner[1], g_gfxSettings.attachInfo[1], 1);
     if (g_asdLightCount.visit && !g_asdLightCount.skipVisit) {
-        FUN_0018e9d8(g_gfxSettings.builder, g_gfxSettings.tree);
-        sceneTraverserVisit(g_gfxSettings.traverser, g_gfxSettings.builder);
+        FUN_0018e9d8(g_gfxSettings.transformBuilder[1], g_gfxSettings.sceneGroupRoot[1]);
+        sceneTraverserVisit(g_gfxSettings.attachInfo[1], g_gfxSettings.transformBuilder[1]);
     }
-    FUN_00176e84(g_gfxSettings.owner, g_gfxSettings.mask, 2, 0);
+    FUN_00176e84(g_gfxSettings.owner[1], g_gfxSettings.node1, 2, 0);
     nw_gfx_RenderContext_ResetState_2B7478(context);
     renderCtxResetFrameState(g_renderCtx);
     g_gfxSettings.pending = 0;

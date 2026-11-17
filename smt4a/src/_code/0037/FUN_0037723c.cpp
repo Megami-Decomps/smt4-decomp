@@ -1,28 +1,12 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/Shard0033.h"
+#include "gamedata/MapSystemTable.h"
+#include "gamedata/MsSearchTable.h"
 #include "game/GameStateA.h"
 #include "code/Code0037.h"
 
-struct AreaTimerRecord {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s16 area;
-    /* 0x22 */ u8 unk22[4];
-    /* 0x26 */ s16 duration;
-    /* 0x28 */ s16 timerIndex;
-};
-struct AreaFlagRecord {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s32 id;
-    /* 0x24 */ s16 flag;
-    /* 0x26 */ s8 area;
-};
-struct AreaTimerFlags {
-    /* 0x000 */ u8 unk000[0xe94];
-    /* 0xE94 */ s32 timers[1];
-};
 extern "C" {
-Flags0C0C *gameFlagsGetBlock();
 s32 dataTable2ECount();
-AreaTimerRecord *dataTable2EGetEntry(s32 index);
 s32 dataTableGetRecordFortyEight();
 void FUN_003b9720(s32 area, s32 index);
 void gameClearMapGroupFlags(s32 area);
@@ -48,28 +32,28 @@ static inline s32 canonicalAreaFlag(u32 flag)
 /* Start unused timers for the current area, mark its records, and reset its slots. */
 extern "C" void FUN_0037723c(s32 immediate)
 {
-    AreaTimerFlags *timers = reinterpret_cast<AreaTimerFlags *>(gameFlagsGetBlock());
+    MapSaveBlockA *timers = gameFlagsGetBlock();
     for (s32 i = 0; i < dataTable2ECount(); ++i) {
-        const AreaTimerRecord *entry = dataTable2EGetEntry(i);
-        s32 area = entry->area;
+        const MapSystemMapRecord *entry = dataTable2EGetEntry(i);
+        s32 area = entry->mapId;
         if (area == -1) {
             return;
         }
-        if (area != g_gameState.mapId || timers->timers[entry->timerIndex] != 0) {
+        if (area != g_gameState.mapId || timers->timers[entry->timerSlot] != 0) {
             continue;
         }
-        timers->timers[entry->timerIndex] = entry->duration * 1800;
+        timers->timers[entry->timerSlot] = entry->cooldown * 1800;
         for (s32 j = 0; j < dataTableGetRecordFortyEight(); ++j) {
-            const AreaFlagRecord *record = reinterpret_cast<AreaFlagRecord *>(FUN_003799d0(j));
-            if (record->id != -1 && record->area == area) {
-                s32 flag = record->flag;
-                Flags0C0C *flags = gameFlagsGetBlock();
+            const MsSearchRecord *record = FUN_003799d0(j);
+            if (record->id != -1 && record->areaId == area) {
+                s32 flag = record->markBit;
+                MapSaveBlockA *flags = gameFlagsGetBlock();
                 flag = canonicalAreaFlag(flag);
                 s32 word = flag / 32;
                 s32 bit = flag % 32;
-                u32 bits = flags->bits[word];
+                u32 bits = flags->markBits[word];
                 bits |= 1u << bit;
-                flags->bits[word] = bits;
+                flags->markBits[word] = bits;
             }
         }
         for (s32 j = 0; j < 21; ++j) {

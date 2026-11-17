@@ -4,15 +4,15 @@
 #include "game/GameState.h"
 
 extern "C" {
-NodeEnableNode *asdMdlManagerCreateFromSource(u32 source, u32 size, u32 flags);
-void lightOwnerRegister(NodeEnableNode *model, s32 enabled);
 void mapMarkerSynchronizeModelState(MapIfModelMarker *marker);
 
 // A local view avoids raising alignment inside GameState's byte padding.
 struct MarkerSources {
     u8 prefix[0x2C8];
-    u32 firstSource, firstSize;
-    u32 secondSource, secondSize;
+    void *firstSource;
+    u32 firstSize;
+    void *secondSource;
+    u32 secondSize;
 };
 
 static inline const MarkerSources *markerSources()
@@ -27,9 +27,9 @@ void FUN_0020d6b0()
     MapIfModelMarker *first = &interfaceState->modelMarkers[0];
     first->model = asdMdlManagerCreateFromSource(markerSources()->firstSource, markerSources()->firstSize, 7);
     lightOwnerRegister(first->model, 1);
-    NodeEnableNode *firstModel = first->model;
+    AsdMdlObject *firstModel = first->model;
     firstModel->flags |= 2;
-    firstModel->resource->target->enabled = 0;
+    firstModel->node->sceneNode->positionFollowed = 0;
     first->active = 1;
     first->state = 0;
     first->flags = 0;
@@ -44,9 +44,9 @@ void FUN_0020d6b0()
     MapIfModelMarker *second = &interfaceState->modelMarkers[1];
     second->model = asdMdlManagerCreateFromSource(markerSources()->secondSource, markerSources()->secondSize, 7);
     lightOwnerRegister(second->model, 1);
-    NodeEnableNode *secondModel = second->model;
+    AsdMdlObject *secondModel = second->model;
     secondModel->flags |= 2;
-    secondModel->resource->target->enabled = 0;
+    secondModel->node->sceneNode->positionFollowed = 0;
     second->active = 1;
     second->state = 0;
     second->flags = 0;

@@ -1,12 +1,12 @@
 /* Closes the Config screen: releases what it set up, frees its heap blocks and the work area. */
 #include "common.h"
 #include "camp/Config/Config.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int messageMainFinishWindow(void);
 int fileSlotFree(int id);
-int scrScriptProcessDestroy(u32 resource);
 int asdTMTexTableReleaseNode(int type, int index);
 int ifTouchRegionRemove(void);
 int asdMemFree(void *ptr);               /* heap free */

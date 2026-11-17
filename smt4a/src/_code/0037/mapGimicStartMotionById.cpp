@@ -1,37 +1,17 @@
-#include "common.h"
-
-struct GimicObject {
-    u8 unk00[4];
-    u32 handle; // 0x04
-};
-
-struct GimicSlot {
-    u8 active;          // 0x00
-    u8 unk01;
-    u8 unk02[2];
-    s16 id;             // 0x04
-    u8 unk06[2];
-    GimicObject *obj;   // 0x08
-    u8 unk0c[0xc];
-};
-
-struct GimicTable {
-    u8 unk000[0x8c4];
-    GimicSlot slots[10]; // 0x8c4
-};
+#include "map/MapGimicGlobal.h"
+#include "Model/MoriModelContent.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
-extern GimicTable *g_mapGimic;
-void modelPlayClip(u32 controller, u32 motion, s32 mode, f32 blendIn, f32 blendOut);
 
 // Start motion on every active map gimmick with the requested id.
 void mapGimicStartMotionById(s32 id, u32 motion)
 {
-    for (s32 index = 0; index < 10; ++index) {
-        GimicTable *table = g_mapGimic;
-        GimicSlot *slot = &table->slots[index];
+    for (s32 index = 0; index < MAP_GIMIC_SLOTS; ++index) {
+        MapGimicA *table = g_mapGimic;
+        MapGimicSlotA *slot = &table->slots[index];
         if (slot->active != 0 && slot->id == id) {
-            modelPlayClip(slot->obj->handle, motion, 2, 0.0f, 0.0f);
+            modelPlayClip(slot->obj->body, motion, 2, 0.0f, 0.0f);
         }
     }
 }

@@ -4,7 +4,7 @@
 extern "C" {
 
 
-void FUN_004aa780(u32 unused, u8 value)
+void FUN_004aa780(BtlUiA *unused, u8 value)
 {
     g_btlUi.ui->unk6174 = value;
 }

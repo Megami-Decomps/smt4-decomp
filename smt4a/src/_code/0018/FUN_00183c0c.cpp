@@ -11,18 +11,18 @@ void FUN_001a90e0(void *pair);
 
 static __inline void registerHelpTouch(ButtonHelpWorkA *work, s32 *count, s32 index, s32 sprite)
 {
-    work->icons[index] = FUN_0019d890(10, sprite);
-    *count = work->count + 1;
+    work->touchRegions[index] = FUN_0019d890(10, sprite);
+    *count = work->touchCount + 1;
 }
 
 // Reset help animations and install touch regions appropriate to each of the six button kinds.
 extern "C" void FUN_00183c0c(void)
 {
     ButtonHelpWorkA *work = g_buttonHelp.work;
-    s32 *count = &work->count;
+    s32 *count = &work->touchCount;
     for (s32 index = 0; index < 6; ++index) {
-        uiSpriteSelectAnim((UiSpriteState *)(&work->units[index]), 0);
-        u8 kind = work->kinds[index].kind;
+        uiSpriteSelectAnim((UiSpriteState *)(&work->slotSprites[index]), 0);
+        u8 kind = work->slots[index].kind;
         if (kind != 0) {
             if (kind == 7 || kind == 19) {
                 registerHelpTouch(work, count, index, 0x73);
@@ -31,19 +31,19 @@ extern "C" void FUN_00183c0c(void)
             } else if (kind == 9) {
                 registerHelpTouch(work, count, index, 0x85);
             } else if (kind == 21 || kind == 20) {
-                work->icons[index] = FUN_0019d890(10, index + 0x1f);
-                *count = work->count + 1;
-                work->icons[index + 1] = FUN_0019d890(10, index + 0x20);
+                work->touchRegions[index] = FUN_0019d890(10, index + 0x1f);
+                *count = work->touchCount + 1;
+                work->touchRegions[index + 1] = FUN_0019d890(10, index + 0x20);
                 *count = *count + 1;
             } else {
                 registerHelpTouch(work, count, index, index + 0x1f);
             }
         }
     }
-    memset(work->clear.active, 0, sizeof(work->clear.active));
-    FUN_001a90e0(work->clear.unk5DA);
-    work->unk5E2[0] = 0;
+    memset(work->touchPressed, 0, sizeof(work->touchPressed));
+    FUN_001a90e0(work->touchSelected);
+    work->panelSliding = 0;
     ButtonHelpWorkA *current = g_buttonHelp.work;
-    current->unk0C = 0;
+    current->phase = 0;
     current->state = 1;
 }

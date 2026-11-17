@@ -3,6 +3,7 @@
 #define TITLE_S4LOAD_H
 
 #include "common.h"
+#include "script/ScriptVm.h"
 
 /* The loading screen's block, kept by a module global. */
 typedef struct S4Load {
@@ -13,7 +14,7 @@ typedef struct S4Load {
     /* 0x018 */ u8 unk18[0x290];
     /* 0x2A8 */ void *dataA;      /* heap blocks */
     /* 0x2AC */ void *dataB;
-    /* 0x2B0 */ void *process;    /* script process object */
+    /* 0x2B0 */ ScriptProcess *process;    /* script process object */
     /* 0x2B4 */ u8 unk2B4[4];
     /* 0x2B8 */ u32 unk2B8;
 } S4Load;

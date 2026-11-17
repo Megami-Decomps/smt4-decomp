@@ -14,60 +14,64 @@ struct EffectTextRequest {
     s32 state;  // 0x08: 1 once finished
 };
 
-struct EffectEditorMenuState {
-    struct Text {
-        u8 unk00[0x44];
-        EffMenuNode *name; // 0x44
-    };
-    union {
-        u8 unk00[0x48]; // 0x00
-        Text text;
-        struct {
-            u8 unk00[0xc];
-            s32 index; // 0x0c
-            u32 unk10;
-            void *list; // 0x14
-            void *instance; // 0x18
-            EffectSelectionBlock *block; // 0x1c
-            void *resource; // 0x20
-            EffectSelectionItem *item; // 0x24
-            u8 unk28[0x10];
-            EffectSelectionTemplate *object; // 0x38
-        } selection;
-        struct {
-            u8 unk00;
-            u8 inhibited; // 0x01
-            u8 unk02[7];
-            u8 mode; // 0x09
-            u8 unk0a[6];
-            EffectNode *node; // 0x10: effect rendered by the editor
-            u8 unk14[0x18];
-            u32 cachedEvent; // 0x2c
-        } dispatch;
-        struct {
-            u8 unk00[0x10];
-            u32 flags; // 0x10: per-menu input status, not the editor's node pointer
-        } inputStatus;
-        struct {
-            u8 unk00[0x3c];
-            void *owner; // 0x3c: node list owner of the request
-            EffectTextRequest *request; // 0x40: pending text request
-        } textRequest;
-    };
-    EffMenuNode* label; // 0x48
-    u32 unk4c;
-    u32 unk50;
-    u32 active; // 0x54
-    u32 unk58;
-    u32 unk5c;
-    u32 unk60;
-    u32 unk64;
-    u32 unk68;
+/* The record the editor's selection points to: its template object at 0x34. */
+struct EffectEditorSelection {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ EffectSelectionTemplate *object;
 };
-typedef char EffectEditorMenuStateLayoutCheck[
-    __INTADDR__(&((EffectEditorMenuState *)0)->dispatch.node) == 0x10 &&
-    __INTADDR__(&((EffectEditorMenuState *)0)->inputStatus.flags) == 0x10 &&
-    sizeof(EffectEditorMenuState) == 0x6c ? 1 : -1];
+
+/* The effect editor's state (smt4 0x44ea80, smt4a 0x59dbe0; the same layout in both games): its mode
+ * bytes, the selected record (list, index, block, item, object), the effect node it renders, the text
+ * request and the name and label menu nodes. The block runs on to 0x15650 bytes (two editor blocks
+ * at 0xAE8); only the head is described. */
+struct EffectEditor {
+    /* 0x00 */ u8 toggle;
+    /* 0x01 */ u8 inhibited;
+    /* 0x02 */ u8 settingsMode;   /* copied from g_effectEditorSettings */
+    /* 0x03 */ u8 settingsFlagA;
+    /* 0x04 */ u8 settingsFlagB;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u8 unk06;
+    /* 0x07 */ u8 dirty;
+    /* 0x08 */ u8 unk08;
+    /* 0x09 */ u8 mode;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ s32 index;         /* the selected record's index in the list */
+    /* 0x10 */ EffectNode *node;  /* the effect the editor renders */
+    /* 0x14 */ void *list;        /* the record list */
+    /* 0x18 */ void *instance;
+    /* 0x1C */ EffectSelectionBlock *block;
+    /* 0x20 */ void *resource;
+    /* 0x24 */ EffectSelectionItem *item;
+    /* 0x28 */ s32 pending;
+    /* 0x2C */ u32 cachedEvent;
+    /* 0x30 */ void *texture;
+    /* 0x34 */ EffectEditorSelection *selection;
+    /* 0x38 */ EffectSelectionTemplate *object;
+    /* 0x3C */ void *nodeList;    /* owner of the text request */
+    /* 0x40 */ EffectTextRequest *request; /* the pending text request */
+    /* 0x44 */ EffMenuNode *name;
+    /* 0x48 */ EffMenuNode *label;
+    /* 0x4C */ u32 unk4c;
+    /* 0x50 */ u32 unk50;
+    /* 0x54 */ u32 active;
+    /* 0x58 */ u32 unk58;
+    /* 0x5C */ u32 unk5c;
+    /* 0x60 */ u32 unk60;
+    /* 0x64 */ u32 unk64;
+    /* 0x68 */ u32 unk68;
+    /* 0x6C */ u8 unk6C[0xC];
+    /* 0x78 */ u32 overlayEnabled; /* renderEditorSceneDrawOverlay draws the overlay */
+};
+typedef char EffectEditorLayoutCheck[
+    __INTADDR__(&((EffectEditor *)0)->index) == 0x0C &&
+    __INTADDR__(&((EffectEditor *)0)->node) == 0x10 &&
+    __INTADDR__(&((EffectEditor *)0)->cachedEvent) == 0x2C &&
+    __INTADDR__(&((EffectEditor *)0)->object) == 0x38 &&
+    __INTADDR__(&((EffectEditor *)0)->name) == 0x44 &&
+    __INTADDR__(&((EffectEditor *)0)->active) == 0x54 &&
+    __INTADDR__(&((EffectEditor *)0)->overlayEnabled) == 0x78 &&
+    sizeof(EffectEditor) == 0x7c ? 1 : -1];
 
 /* The independently addressed editor record and its three mode bytes. */
 struct EffectEditorSettings {
@@ -93,7 +97,7 @@ typedef char EffectEditorSettingsLayoutCheck[
     sizeof(EffectEditorSettings) == 0x90 ? 1 : -1];
 
 extern "C" {
-extern EffectEditorMenuState g_effectEditor;
+extern EffectEditor g_effectEditor;
 EffMenuNode* effMenuNodeCreate(const char* name);
 }
 

@@ -11,7 +11,7 @@ void FUN_00274a30(void)
     for (; index < 128; ++index) {
         MapIfRecord *record = &state->records[index];
         if (record->active != 0 &&
-            (record->display.category == 37 || record->display.category == 40) &&
+            (record->category == 37 || record->category == 40) &&
             record->state == 8) {
             record->state = 6;
         }

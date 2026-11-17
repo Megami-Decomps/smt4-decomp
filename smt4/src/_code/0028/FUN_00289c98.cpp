@@ -13,24 +13,23 @@ void FUN_002a9fdc(UiSpriteState *part, s32 arg1, s32 arg2);
 void FUN_00289c98(s32 clearTouches)
 {
     ButtonHelpWork *panel = g_buttonHelp.work;
-    ButtonHelpSelectionViewIV *selection = reinterpret_cast<ButtonHelpSelectionViewIV *>(panel);
     for (s32 i = 0; i < 6; ++i) {
-        spriteStartAnimationByIndex(&selection->units[i], 1);
-        if (selection->kinds[i].kind) {
+        spriteStartAnimationByIndex(&panel->slotSprites[i], 1);
+        if (panel->slots[i].kind) {
             if (clearTouches) {
-                selection->kinds[i].kind = 0;
+                panel->slots[i].kind = 0;
             }
             ifTouchDecrementTimer();
         }
     }
     for (s32 i = 0; i < 2; ++i) {
         if (panel->mode == 1) {
-            timerStart(&panel->units[i], 3, 0);
+            timerStart(&panel->panelSprites[i], 3, 0);
         } else {
-            FUN_002a9fdc(&panel->units[i], 0, 1);
+            FUN_002a9fdc(&panel->panelSprites[i], 0, 1);
         }
     }
-    g_buttonHelp.work->transition.phase = 0;
+    g_buttonHelp.work->phase = 0;
     g_buttonHelp.work->state = 3;
 }
 

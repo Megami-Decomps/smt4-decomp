@@ -1,7 +1,7 @@
 #include "shard/W5_W5Match7_SelectedRecord.h"
+#include "script/scrScriptProcess.h"
 extern "C" {
 u32 loadSlotIsLoaded(u32);
-CallbackLoadedObject* scrScriptProcessCreate(void*, void*);
 
 u32 FUN_002c0854(void)
 {
@@ -11,9 +11,9 @@ u32 FUN_002c0854(void)
     }
     if (work->unk10 != NULL && work->unk18 != NULL && work->unk1C != NULL &&
         loadSlotIsLoaded(0x14) != 0 && loadSlotIsLoaded(0x25) != 0 && loadSlotIsLoaded(0x3E) != 0) {
-        if (work->createdObject == NULL) {
-            work->createdObject = scrScriptProcessCreate(work->unk10, work->unk18);
-            work->createdObject->unk108 = 0;
+        if (work->process == NULL) {
+            work->process = scrScriptProcessCreate(work->unk10, work->unk18);
+            work->process->mode = 0;
         }
         return 1;
     }

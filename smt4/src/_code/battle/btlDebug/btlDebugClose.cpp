@@ -1,11 +1,11 @@
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "map/mapDepart.h"
 #include "shard/JobWork.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 
-extern void *g_btlUiBlock;
 
 extern s32 jobIsValid(u32 job);
 extern void jobStop(u32 job, s32 arg);
@@ -18,7 +18,7 @@ void btlDebugClose(u32 handle)
     BattleDebugOwnerView *owner = (BattleDebugOwnerView *)jobGetWork(handle);
 
     if (g_btlUiBlock != NULL) {
-        FUN_0025c2d0(reinterpret_cast<u32>(g_btlUiBlock), 0);
+        FUN_0025c2d0(g_btlUiBlock, 0);
     }
     if (g_btlDebugState.work != NULL) {
         BattleDebugWork *popup = g_btlDebugState.work;

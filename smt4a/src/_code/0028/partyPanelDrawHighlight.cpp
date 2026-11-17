@@ -15,7 +15,7 @@ void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted
     PartyPanelStateA *panel = g_partyPanel;
     TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x11, index + 0x57);
     if (highlighted) {
-        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
+        efctSetSpeed(vec2GetSpeed(&panel->sprites[PARTY_PANEL_SPRITE_HIGHLIGHT]) * speed);
         RenderCtxA *context = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackSet(&context->stackB, state);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: near miss: float/int conversion sequence and register allocation differ (retail keeps the view offsets and 160/120 constants in VFP registers across the loop). */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 
 /* A navigator icon (0x30 bytes, accessed fields). */
 struct NaviIcon {
@@ -32,7 +32,6 @@ struct NaviWork {
 
 extern "C" {
 extern u8 DAT_0049fc1c[];
-u8 *gameGetMapBlock(void);
 f32 *NaviMain_GetCursorPos(void *cursor);
 }
 
@@ -42,10 +41,10 @@ f32 *NaviMain_GetCursorPos(void *cursor);
 /* Convert the icons' map positions to screen positions around the cursor. */
 extern "C" void FUN_0039cddc(NaviWork *work)
 {
-    u8 *mapBlock = gameGetMapBlock();
+    MapSaveBlock *mapBlock = gameGetMapBlock();
     f32 *cursor = NaviMain_GetCursorPos(&work->cursor);
     s32 count = NAVI_ICON_COUNT(work);
-    if (mapBlock[0xD5A] != 12) {
+    if (mapBlock->layout != 12) {
         s32 offsetX = static_cast<s32>(static_cast<f32>(work->viewWidth / 2) - cursor[0]);
         s32 offsetY = static_cast<s32>(static_cast<f32>(work->viewHeight / 2) - cursor[1]);
         for (s32 i = 0; i < count; i++) {

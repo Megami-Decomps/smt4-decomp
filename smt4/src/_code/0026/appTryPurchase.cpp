@@ -1,20 +1,8 @@
 /* NON_MATCHING: -O2 candidate; signed indexing folds into ADD, bitset stores reschedule, and lookup/default-value registers and branches differ. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/GameFlags.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/GauntletAppTable.h"
 
-struct UnlockRecord {
-    /* 0x00 */ UnsignedRecordKey32 identity;
-    /* 0x22 */ u8 kind;
-    /* 0x23 */ u8 unk23[3];
-    /* 0x26 */ u16 cost;
-    /* 0x28 */ u8 unk28[2];
-    /* 0x2a */ u8 category;
-    /* 0x2b */ u8 minLevel;
-    /* 0x2c */ u16 requiredFlags[3];
-    /* 0x32 */ u16 requiredUnlocks[3];
-    /* 0x38 */ u8 unk38[8];
-};
 struct UnlockProgress {
     /* 0x00 */ u8 unlocked[0x12];
     /* 0x12 */ u8 newlyUnlocked[0x12];
@@ -26,9 +14,7 @@ extern "C" {
 u8* gameDataGetFlagBits(void);
 u8 appCheckPurchaseRequirements(u32 id);
 void FUN_00334ff8(void);
-void* dataTableGet(s32 tableId, s32 slot);
-u32 dataTableGetCount(void* table);
-const UnlockRecord* libc_bsearch(const UnlockRecord* key, const UnlockRecord* entries,
+const GauntletAppRecord* libc_bsearch(const GauntletAppRecord* key, const GauntletAppRecord* entries,
                                 u32 count, u32 stride, UnlockKeyComparator* compare);
 s32 unsignedKeyRecordCompare(const UnsignedRecordKey32* left, const UnsignedRecordKey32* right);
 void saveSubtractCounterSaturating(u32 amount);
@@ -36,17 +22,17 @@ void saveSubtractCounterSaturating(u32 amount);
 }
 
 namespace {
-inline const UnlockRecord* findUnlockRecord(u16 id)
+inline const GauntletAppRecord* findGauntletAppRecord(u16 id)
 {
     void* table = dataTableGet(11, 0);
     if (table == NULL) {
         return NULL;
     }
-    const UnlockRecord* entries = reinterpret_cast<const UnlockRecord*>(dataTableGetEntries(table));
+    const GauntletAppRecord* entries = gauntletAppRecords(table);
     const u32 count = dataTableGetCount(table);
-    UnlockRecord key;
-    key.identity.key = id;
-    return libc_bsearch(&key, entries, count, sizeof(UnlockRecord), unsignedKeyRecordCompare);
+    GauntletAppRecord key;
+    key.id = id;
+    return libc_bsearch(&key, entries, count, sizeof(GauntletAppRecord), unsignedKeyRecordCompare);
 }
 } // namespace
 
@@ -66,9 +52,9 @@ extern "C" u32 appTryPurchase(u32 id, s32 ignoreRequirements, s32 checkOnly)
         FUN_00334ff8();
 
         const u16 recordId = static_cast<u16>(id);
-        const UnlockRecord* record = findUnlockRecord(recordId);
+        const GauntletAppRecord* record = findGauntletAppRecord(recordId);
         saveSubtractCounterSaturating(record != NULL ? record->cost : 0);
-        record = findUnlockRecord(recordId);
+        record = findGauntletAppRecord(recordId);
         if (record->kind == 0) {
             ++progress->categoryCounts[record->category];
         }

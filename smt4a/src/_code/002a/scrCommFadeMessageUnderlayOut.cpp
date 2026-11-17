@@ -5,7 +5,6 @@
 extern "C" {
 
 void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha);
-extern EventCommandGlobals g_eventCommand;
 
 u8 scrCommFadeMessageUnderlayOut(void)
 {

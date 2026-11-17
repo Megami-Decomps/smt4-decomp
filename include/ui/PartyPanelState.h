@@ -9,6 +9,7 @@
 #include "ui/GridNavigation.h"
 #include "ui/PartyPanelParts.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* A copy of a battle-unit record kept for previews (0x604 bytes); only the two stat arrays are named. */
 struct PartyPanelUnitPreview {
@@ -23,7 +24,7 @@ typedef struct PartyPanelState {
     /* 0x0000 */ u32 job;
     /* 0x0004 */ u8 unk0004[8];
     /* 0x000C */ void *files[2];
-    /* 0x0014 */ void *script;
+    /* 0x0014 */ ScriptProcess *script;
     /* 0x0018 */ u32 phase;                 /* step within the current scene state */
     /* 0x001C */ s32 sceneState;
     /* 0x0020 */ s32 pendingState;          /* the state being entered (4: party row, 6: stock grid, 8: full grid) */
@@ -43,7 +44,7 @@ typedef struct PartyPanelState {
     /* 0x0043 */ u8 unk0043;
     /* 0x0044 */ s8 helpMode;
     /* 0x0045 */ u8 unk0045[0x23];
-    /* 0x0068 */ TimerSlot sprites[11];            /* indexed by PARTY_PANEL_SPRITE_* */
+    /* 0x0068 */ UiSpriteState sprites[11];            /* indexed by PARTY_PANEL_SPRITE_* */
     /* 0x066C */ u8 panelState;             /* PARTY_MODE_*: what the panel was opened for */
     /* 0x066D */ u8 unk066D[3];
     /* 0x0670 */ s32 partySlot;             /* selected party slot (1-3), 0 for none */

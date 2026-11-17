@@ -1,4 +1,5 @@
 #include "shard/Shard0047.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -9,11 +10,10 @@ typedef struct ScriptHolderB {
     /* 0x09 */ u8 unk09[3];
     /* 0x0C */ u32 buf0C;
     /* 0x10 */ u32 buf10;
-    /* 0x14 */ u32 proc14;
+    /* 0x14 */ ScriptProcess *proc14;
 } ScriptHolderB;
 
 extern void asdMemFree(u32 ptr);
-extern void scrScriptProcessDestroy(u32 process);
 extern void campButtonHelpAcquire(void);
 
 /* Resets the holder to state 0xC with the given flag, freeing its buffers and script process. */

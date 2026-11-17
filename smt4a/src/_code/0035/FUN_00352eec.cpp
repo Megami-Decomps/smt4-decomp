@@ -1,6 +1,6 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 /* Data table 0x2F entries of the three types, as this loader reads them. */
 struct Table2FType0Entry {
@@ -40,42 +40,42 @@ Table2FType2Entry *dataTable2FType2GetEntry(u32 id);
 // and is capped at 15.
 void FUN_00352eec(void)
 {
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     if (lmapGetSpawnIndex() < 100) {
-        flags->table4c.rate = 0;
+        flags->option = 0;
     }
     switch (g_gameState.table2FType) {
     case 1: {
         Table2FType0Entry *entry = dataTable2FType0GetEntry(g_gameState.table2FId);
-        flags->table4cHead.unk3a = entry->unk0C;
-        flags->table4cHead.unk3b = entry->unk0E;
-        flags->table4c.level = entry->level;
-        flags->table4c.rate = entry->rate;
-        flags->table4c.unk1520 = 0;
+        flags->sizeX = entry->unk0C;
+        flags->sizeY = entry->unk0E;
+        flags->layer = entry->level;
+        flags->option = entry->rate;
+        flags->unk1520 = 0;
         break;
     }
     case 2: {
         Table2FType1Entry *entry = dataTable2FType1GetEntry(g_gameState.table2FId);
-        flags->table4cHead.unk3a = entry->unk0C;
-        flags->table4cHead.unk3b = entry->unk0E;
-        flags->table4c.level = entry->level;
-        flags->table4c.rate = entry->rate;
-        flags->table4c.unk1520 = entry->unk18;
+        flags->sizeX = entry->unk0C;
+        flags->sizeY = entry->unk0E;
+        flags->layer = entry->level;
+        flags->option = entry->rate;
+        flags->unk1520 = entry->unk18;
         break;
     }
     case 3: {
         Table2FType2Entry *entry = dataTable2FType2GetEntry(g_gameState.table2FId);
-        flags->table4cHead.unk3a = entry->unk0C;
-        flags->table4cHead.unk3b = entry->unk0E;
-        flags->table4c.level = entry->level;
-        flags->table4c.unk1520 = 0;
+        flags->sizeX = entry->unk0C;
+        flags->sizeY = entry->unk0E;
+        flags->layer = entry->level;
+        flags->unk1520 = 0;
         break;
     }
     }
-    if (flags->table4c.level == 0) {
-        flags->table4c.level = -1;
-    } else if (flags->table4c.level > 15) {
-        flags->table4c.level = 15;
+    if (flags->layer == 0) {
+        flags->layer = -1;
+    } else if (flags->layer > 15) {
+        flags->layer = 15;
     }
 }
 

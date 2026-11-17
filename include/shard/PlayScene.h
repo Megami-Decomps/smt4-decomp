@@ -19,16 +19,14 @@ typedef struct PlayScene {
             /* 0x00AC */ UiSpriteState animation;
         } intro;
     };
-    /* 0x01C4 */ u8 timerSub[1];
-    /* 0x01C5 */ u8 unk01C5[0x7A7];
-    /* 0x096C */ u8 timerC[1];
-    /* 0x096D */ u8 unk096D[0x94B];
-    /* 0x12B8 */ u8 timer[1];
-    /* 0x12B9 */ u8 unk12B9[0x8B];
-    /* 0x1344 */ u8 blockE[1];
-    /* 0x1345 */ u8 unk1345[0xDAB];
-    /* 0x20F0 */ u8 timerFade[1];
-    /* 0x20F1 */ u8 unk20F1[0x8B];
+    /* 0x01C4 */ UiSpriteState timerSub;
+    /* 0x0250 */ u8 unk0250[0x71C];
+    /* 0x096C */ UiSpriteState timerC;
+    /* 0x09F8 */ u8 unk09F8[0x8C0];
+    /* 0x12B8 */ UiSpriteState timer;
+    /* 0x1344 */ UiSpriteState blockE;
+    /* 0x13D0 */ u8 unk13D0[0xD20];
+    /* 0x20F0 */ UiSpriteState timerFade;
     /* 0x217C */ u32 unk217C;
     /* 0x2180 */ s32 unk2180;
     /* 0x2184 */ u8 unk2184[0xEC0];
@@ -72,6 +70,10 @@ typedef char PlaySceneTargetingOffsets[
     offsetof(PlayScene, targeting.targets) == 0x3460 &&
     offsetof(PlayScene, targeting.fallback) == 0x3504 &&
     sizeof(PlayScene) == 0x591C ? 1 : -1];
+typedef char PlaySceneSpriteOffsets[
+    offsetof(PlayScene, timerSub) == 0x1C4 && offsetof(PlayScene, timerC) == 0x96C &&
+    offsetof(PlayScene, timer) == 0x12B8 && offsetof(PlayScene, blockE) == 0x1344 &&
+    offsetof(PlayScene, timerFade) == 0x20F0 && offsetof(PlayScene, unk217C) == 0x217C ? 1 : -1];
 typedef char PlaySceneIntroAnimationOffsets[
     offsetof(PlayScene, intro.animation) == 0xAC &&
     offsetof(PlayScene, intro.animation.alpha) == 0xCC &&

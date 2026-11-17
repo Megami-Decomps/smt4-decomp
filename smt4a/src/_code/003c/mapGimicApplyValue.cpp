@@ -1,14 +1,14 @@
-#include "shard/W5_W5Match7_SceneState.h"
+#include "map/MapGimicGlobal.h"
+#include "Model/MoriModelContent.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 
-void modelPlayClip(void *object, s32 value, s32 mode, f32 x, f32 y);
-
 void mapGimicApplyValue(s32 value)
 {
-    MapGimicEntry *entry = &g_mapGimic->entry;
+    MapGimicStageActorA *entry = &g_mapGimic->stageActor;
     if (entry->active != 0) {
-        modelPlayClip(entry->resource->object, value, 2, 0.0f, 0.0f);
+        modelPlayClip(entry->obj->body, value, 2, 0.0f, 0.0f);
     }
 }
 

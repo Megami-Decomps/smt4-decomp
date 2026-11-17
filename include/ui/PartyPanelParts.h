@@ -2,7 +2,7 @@
 #ifndef UI_PARTYPANELPARTS_H
 #define UI_PARTYPANELPARTS_H
 #include "common.h"
-#include "ui/TimerSlot.h"
+#include "ui/UiSpriteState.h"
 
 /* The panel's animated sprites (PartyPanelState::sprites, PartyPanelStateA::sprites). */
 enum {

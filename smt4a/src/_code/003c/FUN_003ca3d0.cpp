@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "script/scrScriptProcess.h"
 
 struct SaintGermainScriptWork {
     SaintGermainScriptWork() : messages(NULL), scriptData(NULL), process(NULL) {}
@@ -13,7 +14,7 @@ struct SaintGermainScriptWork {
     s32 previousState;
     void *messages;
     void *scriptData;
-    void *process;
+    ScriptProcess *process;
     u8 ownsSlot;
     u8 unk1D[3];
     u32 argument;
@@ -33,7 +34,6 @@ void loadSlotRequestAsync(u32, u32);
 void campButtonHelpAcquire();
 void campButtonHelpRelease();
 void buttonHelpSetText(s32, u32);
-void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
 void dataTableFree(u32);
 void jobStop(u32, s32);

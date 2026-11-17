@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -15,13 +16,12 @@ typedef struct Label {
     /* 0x5A */ s16 number;
 } Label;
 
-extern u32 g_btlUiBlock;
 
 GameOptions *gameGetSupportUnitData(void);
 void btlApplyOptionAndSnapshotReserve(BtlMainState *state);
 Label *supportUnitGetEntry(s32 a, u16 b);
 s32 statusBustUpPortraitAcquire(s32 number, s32 arg);
-s32 FUN_003ae620(u32 block);
+s32 FUN_003ae620(BtlUi *block);
 
 /* Script command: refreshes the battle UI label from the options' selection and flags the battle UI for redraw. */
 u32 scrComm_BattleUI_RefreshLabel(void)

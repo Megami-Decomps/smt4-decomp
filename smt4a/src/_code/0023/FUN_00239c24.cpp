@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00239c24` (_code @ 0x239c24, 0x908 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -38,7 +39,6 @@ extern unsigned char DAT_0060ff9c; /* 0x60ff9c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: randRange. */
-extern int gameFlagsGetBlock(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
@@ -92,7 +92,7 @@ void FUN_00239c24(void)
   unsigned long long temp_v18;
   float temp_v19;
   
-  temp_v3 = gameFlagsGetBlock();
+  temp_v3 = (int)gameFlagsGetBlock();
   randRange(4);
   temp_v4 = lmapGetSpawnIndex();
   temp_v5 = FUN_003adc40();
@@ -197,7 +197,7 @@ void FUN_00239c24(void)
   FUN_002c670c(0);
   temp_v17 = 0.0f;
   if (temp_v4 < 100) {
-    temp_v3 = gameFlagsGetBlock();
+    temp_v3 = (int)gameFlagsGetBlock();
     if ((*(char *)(temp_v3 + 0xe09) != '\0') &&
        (temp_v4 = gameFlagIsSet(*(unsigned int *)(temp_v3 + 0x1520)), temp_v4 == 0)) {
       temp_v4 = (short)*(char *)(temp_v3 + 0xe0b) * 700;
@@ -215,7 +215,7 @@ void FUN_00239c24(void)
       }
     }
     else {
-      temp_v3 = gameFlagsGetBlock();
+      temp_v3 = (int)gameFlagsGetBlock();
       temp_v4 = temp_v3 + *(char *)(temp_v3 + 0xe0b) * 0x78 + *(char *)(temp_v3 + 0xe0a) * 8;
       temp_v9 = (unsigned int)(*(char *)(temp_v4 + 0x34) == '\x01');
       if (*(char *)(temp_v4 + 0x44) == '\x01') {
@@ -268,14 +268,14 @@ void FUN_00239c24(void)
       }
       FUN_00281b94((int)(short)(int)temp_v17);
     }
-    temp_v3 = gameFlagsGetBlock();
+    temp_v3 = (int)gameFlagsGetBlock();
     if (*(char *)(temp_v3 + 0x1664) != '\0') {
       temp_v4 = (short)*(char *)(temp_v3 + 0x1665) * 700 + 0x15e;
       temp_v3 = (short)*(char *)(temp_v3 + 0x1666) * 700 + 0x15e;
       FUN_003ae3c4((float)temp_v4, 0.0f, (float)temp_v3);
     }
   }
-  temp_v3 = gameFlagsGetBlock();
+  temp_v3 = (int)gameFlagsGetBlock();
   temp_v4 = lmapGetSpawnIndex();
   temp_v18 = 0x442f000043af0000;
   if (temp_v4 != 8) {
@@ -383,7 +383,7 @@ LAB_0023a490:
   }
 LAB_0023a4d8:
   DAT_0060ff9c = 1;
-  temp_v3 = gameFlagsGetBlock();
+  temp_v3 = (int)gameFlagsGetBlock();
   temp_v4 = 0;
   if (temp_v4 < *(char *)(temp_v3 + 0xe05)) {
     do {

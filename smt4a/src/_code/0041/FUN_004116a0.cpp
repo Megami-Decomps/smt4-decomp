@@ -5,6 +5,8 @@
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "event/2dEvent/EventEffect.h"
 #include "code/Code0018.h"
+#include "script/scrScriptProcess.h"
+#include "battle/BtlUiGlobal.h"
 
 /* A party slot as the picker reads it. */
 struct PartySlot {
@@ -17,17 +19,15 @@ struct PartySlot {
 struct ScriptOwner {
     /* 0x00 */ u8 unk00[0x24];
     /* 0x24 */ void *messages;
-    /* 0x28 */ u32 scriptProcess;
+    /* 0x28 */ ScriptProcess *scriptProcess;
 };
 
 extern "C" {
 extern u32 g_btlAux;
-extern u32 g_btlUiBlock;
 
-void scrScriptProcessDestroy(u32 process);
 void asdMemFree(void *block);
 void FUN_004f85c8(u32 aux, s32 value);
-void FUN_004abe2c(u32 ui, s32 a, s32 b, s32 c, s32 d, s32 e);
+void FUN_004abe2c(BtlUiA *ui, s32 a, s32 b, s32 c, s32 d, s32 e);
 PartySlot *partyGetSlot(u32 index);
 PartySlot *saveSlotFindSelected(void);
 s32 lcgRandomRange(s32 limit);

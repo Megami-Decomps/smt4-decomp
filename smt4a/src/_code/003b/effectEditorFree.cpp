@@ -1,14 +1,7 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
-
-typedef struct EffectEditor {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ void *nodeList;
-    /* 0x40 */ void *handleHolder;
-} EffectEditor;
-
-extern EffectEditor g_effectEditor;
 
 extern int nodeListFree(void);
 extern int handleHolderFree(void);
@@ -16,9 +9,9 @@ extern int handleHolderFree(void);
 /* Frees the effect editor's handle holder and node list. */
 void effectEditorFree(void)
 {
-    if (g_effectEditor.handleHolder != NULL) {
+    if (g_effectEditor.request != NULL) {
         handleHolderFree();
-        g_effectEditor.handleHolder = NULL;
+        g_effectEditor.request = NULL;
     }
     if (g_effectEditor.nodeList != NULL) {
         nodeListFree();

@@ -7,6 +7,7 @@
 #include "shard/W9_W9Match7_ModifierLists.h"
 #include "code/Code0019_Smt4a.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BattleSkillResponseMasks.h"
 struct IdOwner;
 /* Modifier lists lie beyond the common skill-table prefix. */
 union BattleModifierSkillView {
@@ -17,15 +18,7 @@ union BattleModifierSkillView {
         u16 category;
     } classification;
 };
-struct BattleModifierCategoryMasks {
-    u8 unk00[8];
-    u64 pad;
-    u8 unk10[8];
-    u64 equipment;
-    u64 innate;
-};
 extern "C" {
-extern BattleModifierCategoryMasks g_btlSkillResponseMasks;
 s32 FUN_002efc44(const AttributeModifierLists *record, s32 count, s32 kind);
 s32 FUN_0034a304(const AttributeModifierLists *record, s32 count, s32 kind);
 s32 FUN_004bd098(IdOwner *owner, u32 id);
@@ -50,18 +43,18 @@ extern "C" s32 FUN_004c5448(u32 entryId, u32 skillId)
 {
     BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), entryId);
     u64 flags = entry->flags;
-    if (flags & g_btlSkillResponseMasks.pad) {
+    if (flags & g_btlSkillResponseMasks.mappedKind) {
         const BattleModifierSkillView *skill = (const BattleModifierSkillView *)skillDataFindById(skillId);
         if (skill)
             return FUN_002efc44(&skill->modifiers, padGetMappedValue(skillId), 1);
-    } else if (flags & g_btlSkillResponseMasks.equipment) {
+    } else if (flags & g_btlSkillResponseMasks.sourceKind) {
         const BattleModifierSkillView *skill = (const BattleModifierSkillView *)skillDataFindById(skillId);
         if (skill) {
             s32 first = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->data.secondaryRecord), skillId), 1);
             s32 second = FUN_0034a304(&skill->modifiers, FUN_004bd098(reinterpret_cast<IdOwner *>(entry->data.secondaryRecord), skillId), 5);
             return first + second;
         }
-    } else if (flags & g_btlSkillResponseMasks.innate) {
+    } else if (flags & g_btlSkillResponseMasks.demonKind) {
         const BattleModifierSkillView *skill = (const BattleModifierSkillView *)skillDataFindById(skillId);
         if (skill) {
             s32 first = FUN_0034a304(&skill->modifiers, nativeCategoryModifier(entry, skill), 1);

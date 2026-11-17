@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 struct GameFlagBitsView {
     u8 unk0000[0x14f8];
@@ -9,7 +9,7 @@ extern "C" {
 // Set or clear a positive-indexed game flag in the save block's bit bank.
 void gameFlagsSetIndexedBit(s32 flag, s32 enabled)
 {
-    FlagWorkBanks *block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     if (flag > 0) {
         GameFlagBitsView *flags = (GameFlagBitsView *)block;
         s32 word = flag / 32;

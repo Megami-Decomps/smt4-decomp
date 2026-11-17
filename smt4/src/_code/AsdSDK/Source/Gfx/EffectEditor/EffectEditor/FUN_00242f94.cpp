@@ -38,7 +38,7 @@ u32 FUN_00242f94(f32 *selection, u32 value, EffectEditorOptions *options)
 {
     u32 result = reinterpret_cast<u32>(&DAT_00400001);
     memCopy(selection, DAT_0044eb1c, 2 * sizeof(f32));
-    if (!g_effectEditor.dispatch.mode) {
+    if (!g_effectEditor.mode) {
         FUN_0024dd90(options);
     }
     memCopy(DAT_0044eb1c, selection, 2 * sizeof(f32));

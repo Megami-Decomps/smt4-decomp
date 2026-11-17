@@ -1,9 +1,8 @@
 #include "shard/Shard0033.h"
 #include "code/Code0023.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 /* Stores the flag; when it is cleared outside mode 10 and the game state is 5, 6 or 7, also clears the word at 0x136C. */
 void FUN_0023b45c(s32 flag)

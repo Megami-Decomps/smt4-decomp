@@ -4,6 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 struct PartyAssistSlotMap {
     u8 unk0000[0x1c88];
@@ -20,17 +21,9 @@ struct BattleAssistView {
     u8 unk0f4[0xa0];
     u32 participants[1];
 };
-struct BattleAssistMasks {
-    u8 unk00[0xa0];
-    u64 activate;
-    u8 unka8[0x28];
-    u64 guarantee;
-};
 extern "C" {
 s32 bitsAt60Test(SlotRecordA *record, u32 bit);
 s32 lcgRandomRange(u32 maximum);
-
-extern BattleAssistMasks g_btlSkillResponseMasks;
 
 u32 btlSelectFirstPartyAssistParticipant()
 {
@@ -65,7 +58,7 @@ u32 btlSelectFirstPartyAssistParticipant()
             break;
         }
         const BtlMainStateA *state = btlGetMainState();
-        if (state->markerMasks.bits & g_btlSkillResponseMasks.guarantee) {
+        if (state->markerMasks.bits & g_btlSkillResponseMasks.markerGuarantee) {
             chance = 100;
         }
         if (lcgRandomRange(99) < chance && selected < 1) {
@@ -75,7 +68,7 @@ u32 btlSelectFirstPartyAssistParticipant()
     }
     if (selected > 0) {
         gameFlagSetValue(0x11d6, 1, 1);
-        btlGetMainState()->stateFlags64.bits |= g_btlSkillResponseMasks.activate;
+        btlGetMainState()->stateFlags64.bits |= g_btlSkillResponseMasks.assistActive;
         return 1;
     }
     return 0;

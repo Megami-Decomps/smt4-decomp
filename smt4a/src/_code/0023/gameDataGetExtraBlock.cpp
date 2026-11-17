@@ -6,7 +6,7 @@ extern "C" {
 /* Returns the word at 0x10 of the game-data block table. */
 u32 gameDataGetExtraBlock(void)
 {
-    return (u32)g_gameDataBlocks.extraBlock;
+    return (u32)g_gameDataBlocks.countdowns;
 }
 
 } /* extern "C" */

@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation only: argument setup order before FUN_0041f020 and the previous-state temp (r2 vs r0) in the state change */
 #include "common.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/SaveLoadUITable.h"
 #include "event/2dEvent/SmokeFade.h"
 
 #include "code/Code0028.h"
@@ -25,11 +25,6 @@ typedef struct {
     u8 unk44e;         /* 0x44e */
 } ModeScreen;
 
-typedef struct {
-    u8 unk00[0x14];
-    u8 colorTarget[0x54 - 0x14]; /* 0x14 */
-} ModeScreenEntry; /* size 0x54 */
-
 s32 byteTripleGetV0(void);
 void FUN_0041e58c(ModeScreen *screen);
 void FUN_0041f020(ModeScreen *screen, s32 arg);
@@ -47,7 +42,7 @@ static void modeScreenSetState(ModeScreen *screen, u8 state, u8 subState)
     screen->subState = subState;
 }
 
-/* Resets the screen into state 13 when the game is ready, fading the current entry's target. */
+/* Resets the screen into state 13 when the game is ready, showing the current mode's button help. */
 void FUN_0041f4c0(ModeScreen *screen)
 {
     s32 index;
@@ -66,8 +61,8 @@ void FUN_0041f4c0(ModeScreen *screen)
         screen->unk68 = 0;
     }
     index = screen->entryIndex;
-    ModeScreenEntry *entries = static_cast<ModeScreenEntry *>(dataTableGetEntries(dataTableGet(0x3d, 0)));
-    buttonHelpSetText(entries[index].colorTarget, 0xf4f4f4ff);
+    SaveLoadUIRecord *texts = saveLoadUIRecords();
+    buttonHelpSetText(texts[index].help, 0xf4f4f4ff);
     modeScreenSetState(screen, 13, 4);
 }
 

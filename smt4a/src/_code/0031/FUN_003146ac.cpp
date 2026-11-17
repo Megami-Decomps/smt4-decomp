@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003146ac` (_code @ 0x3146ac, 0x4c4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -32,7 +33,6 @@ extern unsigned int DAT_005f176c; /* 0x5f176c */
 
 extern int gameDataBlocksGetSaveData(void);
 extern int randRange(unsigned int);
-extern int gameFlagsGetBlock(void);
 extern int itemGetStackLimit(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(void);
@@ -126,7 +126,7 @@ unsigned int FUN_003146ac(unsigned int param_1,int param_2)
         else {
           *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcfc) = *(unsigned int *)(temp_v3 + 8);
           if ((int)param_1 < 0x200) {
-            temp_v3 = gameFlagsGetBlock();
+            temp_v3 = (int)gameFlagsGetBlock();
             *(unsigned char *)(temp_v3 + param_1 * 2 + 0x10a8) = 0xff;
           }
           else {
@@ -148,7 +148,7 @@ unsigned int FUN_003146ac(unsigned int param_1,int param_2)
           temp_v10[temp_v9] = (unsigned int)*puVar6;
           temp_v8 = (int)(char)puVar6[3];
           if ((int)param_1 < 0x200) {
-            temp_v5 = gameFlagsGetBlock();
+            temp_v5 = (int)gameFlagsGetBlock();
             if (temp_v9 >= 3) goto LAB_00314960;
             temp_v1 = *(char *)(temp_v5 + param_1 * 2 + temp_v9 + 0x10a8);
 LAB_00314950:
@@ -191,7 +191,7 @@ LAB_00314960:
                 if (-1 < temp_v6) {
                   temp_v0 = (unsigned char)temp_v6;
                   if ((int)param_1 < 0x200) {
-                    temp_v8 = gameFlagsGetBlock();
+                    temp_v8 = (int)gameFlagsGetBlock();
                     if (temp_v9 < 3) {
                       *(unsigned char *)(temp_v8 + param_1 * 2 + temp_v9 + 0x10a8) = temp_v0;
                     }
@@ -216,7 +216,7 @@ LAB_00314960:
                 }
                 flagValueAdd(temp_v10[temp_v9],temp_v8);
                 if ((int)param_1 < 0x200) {
-                  temp_v8 = gameFlagsGetBlock();
+                  temp_v8 = (int)gameFlagsGetBlock();
                   if (temp_v9 < 3) {
                     *(unsigned char *)(temp_v8 + param_1 * 2 + temp_v9 + 0x10a8) = 0xff;
                   }

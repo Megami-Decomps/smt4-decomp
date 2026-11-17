@@ -1,17 +1,17 @@
-#include "map/mapGimic.h"
+#include "map/MapGimicGlobal.h"
+#include "Model/MoriModelContent.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
-extern MapGimic *g_mapGimic;
-void moriModelUnitStartMaterialAnimation(u32 handle, u32 animation, u32 mode, f32 time);
 
 void FUN_003ae110(s32 id, u32 animation, u32 value, s32 delay)
 {
     for (s32 index = 0; index < MAP_GIMIC_SLOTS; ++index) {
-        MapGimic *gimic = g_mapGimic;
-        MapGimicSlot *slot = &gimic->slots[index];
+        MapGimicA *gimic = g_mapGimic;
+        MapGimicSlotA *slot = &gimic->slots[index];
         if (slot->active && slot->id == id) {
-            moriModelUnitStartMaterialAnimation(slot->obj->handle, animation, 2, 0.0f);
-            slot->unk0C = value;
+            moriModelUnitStartMaterialAnimation(slot->obj->body, animation, 2, 0.0f);
+            slot->animationValue = value;
             slot->animationId = (s16)animation;
             slot->requested = 1;
             slot->delay = (s16)delay;

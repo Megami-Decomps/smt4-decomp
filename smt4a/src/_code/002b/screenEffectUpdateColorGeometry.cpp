@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match8_ScreenEffect.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "gfx/EffectColorMath.h"
+#include "gfx/VectorScratch.h"
 
 static void effectColorAssign(EffectColor *destination, const EffectColor *source)
 {
@@ -28,9 +29,7 @@ static __inline void screenEffectSetPoint(Point2 *point, f32 x, f32 y)
     point->y = y;
 }
 
-
 extern "C" {
-extern EffectColorProductState g_vectorScratch;
 void renderCtxSetPackedColor(u32 color);
 f32 FUN_0034f8b4(const u8 *curve, s32 frame, s32 duration);
 u32 FUN_0038136c(const u8 *curve, const ScreenEffectWeightTrack *weight,
@@ -63,11 +62,11 @@ void screenEffectUpdateColorGeometry(ScreenEffectJob *job)
     u32 curveColor = FUN_0038136c(resource->colorCurve, &resource->weight,
                                  frame, duration);
     renderCtxSetPackedColor(job->color);
-    effectColorAssign(&g_vectorScratch.factor, &g_vectorScratch.color);
+    effectColorAssign(&g_vectorScratch.second.color, &g_vectorScratch.first.color);
     renderCtxSetPackedColor(curveColor);
-    effectColorScale(&g_vectorScratch.factor, &g_vectorScratch.color);
+    effectColorScale(&g_vectorScratch.second.color, &g_vectorScratch.first.color);
 
-    u32 packed = effectColorPackFrom(g_vectorScratch.color);
+    u32 packed = effectColorPackFrom(g_vectorScratch.first.color);
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

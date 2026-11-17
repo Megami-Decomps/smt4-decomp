@@ -1,4 +1,5 @@
 /* NON_MATCHING: the queued-request block (offsets 0x1688..0x169c of the game flag block) is addressed through per-field pool constants in retail, so it keeps only r4-r9; the build CSEs the six field addresses into extra registers (sl/fp) and merges the 0x28/0x2c stores into an stm. naviMainDrawFade is a callback at 0x2ba728 that has no unit/symbol yet. */
+#include "gamedata/MapSaveBlockA.h"
 #include "AsdSDK/AsdDebug.h"
 #include "mapnavi/NaviMainGlobals.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -9,7 +10,6 @@ extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
                    AsdProcFunc onEnd, u32 work, void *owner);
-u8 *gameFlagsGetBlock(void);
 s32 gameFlagIsSet(u32 flag);
 void campCommonBgAcquire(void);
 void campButtonHelpAcquire(void);
@@ -24,24 +24,13 @@ void naviRequestClose(u32 handle);
 s32 naviMainPollResourcesAndUpdatePanel(u32 handle);
 s32 naviMainDrawFade(u32 handle);
 
-// A navigation request saved while the navigation screen was closed (see navigationSetOrQueueRequest).
-struct DeferredNavigationRequest {
-    u8 unk0000[0x1688];
-    s32 pending;
-    u32 first;
-    u32 third;
-    s32 x;
-    s32 y;
-    u32 second;
-};
-
 // Creates the navigation screen: allocates its state, starts its update and draw tasks and applies a queued request.
 void FUN_003de188(u32 unused, u32 argument)
 {
     asdDebugTrace("c:\\SMT4F\\SMTF4\\sdds4\\program\\map\\navi\\naviMain.cpp", 227);
     NaviMainA *navigation = (NaviMainA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(NaviMainA) + 0xc, 1);
     g_naviMain = navigation;
-    DeferredNavigationRequest *queued = (DeferredNavigationRequest *)gameFlagsGetBlock();
+    MapNaviRequestA *queued = &gameFlagsGetBlock()->naviRequest;
 
     navigation->active = 0;
     navigation->positionSet = 0;

@@ -5,19 +5,13 @@
 #include "shard/PassiveSkill.h"
 #include "gamedata/SkillDataRecord.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 /* Battle state flag masks: the mask whose bits make passive rolls always succeed at 0xA8. */
-struct BtlPassiveFlagMasks {
-    /* 0x00 */ u8 unk00[0xA8];
-    /* 0xA8 */ u64 passiveAlways;
-};
 
 struct BtlCombatantEntryA;
 
 extern "C" {
-
-extern BtlPassiveFlagMasks g_btlSkillResponseMasks;
-
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skillIds);
 s32 lcgRandomRange(s32 max);
 
@@ -39,7 +33,7 @@ u16 FUN_004c14c8(u32 listedId)
             s32 chance;
             if (record != NULL && (chance = record->stats.holdChance) != 0) {
                 s32 roll = lcgRandomRange(99);
-                if (state->stateFlags64.bits & g_btlSkillResponseMasks.passiveAlways) {
+                if (state->stateFlags64.bits & g_btlSkillResponseMasks.alwaysProc) {
                     roll = 0;
                 }
                 if (chance > roll) {

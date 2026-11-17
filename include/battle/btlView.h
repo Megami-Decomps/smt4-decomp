@@ -6,19 +6,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "map/MapVector.h"
-
-struct BattleViewObject {
-    /* 0x00 */ void *vtable;
-    /* 0x04 */ u32 flags;
-};
-
-/* A model list the battle view owns; it is deleted through its virtual destructor. */
-class BattleViewOwner {
-public:
-    /* 0x00: vtable pointer */
-    virtual ~BattleViewOwner();
-    /* 0x04 */ BattleViewObject *object;
-};
+#include "Model/MoriModelContent.h"
 
 /* A battle-view position: the shared 3-float vector. */
 typedef MapVector BattleViewVec3;
@@ -29,7 +17,7 @@ struct BattleViewState {
         struct {
             /* 0x00 */ u8 unk00[8];
             /* 0x08 */ s32 state;
-            /* 0x0c */ BattleViewOwner *primary[3];
+            /* 0x0c */ MoriModelContent *primary[3];
         } attachments;
         struct {
             /* 0x00 */ u8 unk00[0x18];
@@ -100,7 +88,7 @@ struct BattleViewState {
             f32 unkC4;
         } tailSettings;
     };
-    /* 0xc8 */ BattleViewOwner *children[3];
+    /* 0xc8 */ MoriModelContent *children[3];
 };
 
 typedef char BattleViewStateLayoutCheck[offsetof(BattleViewState, camera.position) == 0x18 &&
@@ -116,6 +104,5 @@ typedef char BattleViewResetFieldsLayoutCheck[
     offsetof(BattleViewState, limits) == 0x98 &&
     offsetof(BattleViewState, resetTail.unkA4) == 0xa4 &&
     offsetof(BattleViewState, tailSettings.unkBC) == 0xbc ? 1 : -1];
-
 
 #endif

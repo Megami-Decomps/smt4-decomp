@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/SkillDataRecord.h"
 #include "util/Random.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -74,10 +75,9 @@ s32 uiCompareHalfwordValuesDescending(const u16 *left, const u16 *right);
 s32 FUN_004c9160(s32, BtlTargetSet *, s32, s32);
 s32 btlUnitSetParam(BtlUnitHandle *unit, s32 param, s32 value, s32 flag);
 s32 FUN_004eb838(BtlUnitHandle *unit, BtlAiAction *action);
-s32 FUN_004a9308(void *block, u32 index, s32 flag, s32 arg);
+s32 FUN_004a9308(BtlUiA *block, u32 index, s32 flag, s32 arg);
 
 extern BtlActionMasks g_btlAction;
-extern void *g_btlUiBlock;
 
 /* AI step: with the interrupt flags clear and a coin flip, picks a usable skill from the
  * target's list at random; otherwise the unit just waits. */

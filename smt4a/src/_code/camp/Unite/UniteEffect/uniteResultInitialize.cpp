@@ -2,7 +2,7 @@
 #include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match1_Table25Record.h"
 #include "classes/Obj557af8.h"
-#include "Model/ModelList.h"
+#include "Model/MoriModelContent.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 /* A 0x8C-byte UI sprite. */
@@ -30,7 +30,7 @@ struct UniteScreenWork {
     /* 0x028 */ u32 devilTextures[4];
     /* 0x038 */ UniteRenderTarget renderTarget;
     /* 0x08c */ u32 resultTexture;
-    /* 0x090 */ ModelList *model;
+    /* 0x090 */ MoriModelContent *model;
     /* 0x094 */ u32 unk094;
     /* 0x098 */ Obj557af8 *camera;
     /* 0x09c */ u8 unk09c[0x298];
@@ -67,10 +67,6 @@ static inline const NkmBaseRecordA *getDevilRecord(u16 id)
 extern "C" {
 extern UniteScreenWork *DAT_0057f2c4;
 u32 FUN_00409fe8(u16, u32, u32);
-ModelList *modelListInit(ModelList *);
-void resourceOwnerLoadFileSync(void *, const char *);
-void FUN_0040ab7c(ModelList *, s32);
-void moriModelContentLoadBody(ModelList *, s32);
 void *asdLoadFileWithSize(const char *, u32 *, s32);
 Table25Record *FUN_003316b4(s32);
 
@@ -127,7 +123,7 @@ void uniteResultInitialize(void)
     FUN_003fb5d4(work->resultTexture, 7, 1);
     if (work->materialCount == 2) {
         if (work->sacrifice) {
-            ModelList *model = (ModelList *)asdMemoryAllocTraced(sizeof(ModelList), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1770);
+            MoriModelContent *model = (MoriModelContent *)asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1770);
             if (model) model = modelListInit(model);
             work->model = model;
             resourceOwnerLoadFileSync(model, "camp/jakyou_union2_ac.bam");
@@ -138,7 +134,7 @@ void uniteResultInitialize(void)
             void *cameraStorage = asdMemoryAllocTraced(sizeof(Obj557af8), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1775);
             work->camera = cameraStorage ? new(cameraStorage) Obj557af8(resource) : 0;
         } else {
-            ModelList *model = (ModelList *)asdMemoryAllocTraced(sizeof(ModelList), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1778);
+            MoriModelContent *model = (MoriModelContent *)asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1778);
             if (model) model = modelListInit(model);
             work->model = model;
             resourceOwnerLoadFileSync(model, "camp/jakyou_union2.bam");
@@ -153,7 +149,7 @@ void uniteResultInitialize(void)
         FUN_001fc348(&work->renderTarget);
     }
     if (work->materialCount == 3) {
-        ModelList *model = (ModelList *)asdMemoryAllocTraced(sizeof(ModelList), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1804);
+        MoriModelContent *model = (MoriModelContent *)asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1804);
             if (model) model = modelListInit(model);
             work->model = model;
             resourceOwnerLoadFileSync(model, "camp/jakyou_union3.bam");
@@ -167,7 +163,7 @@ void uniteResultInitialize(void)
         FUN_001fc348(&work->renderTarget);
     }
     if (work->materialCount == 4) {
-        ModelList *model = (ModelList *)asdMemoryAllocTraced(sizeof(ModelList), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1827);
+        MoriModelContent *model = (MoriModelContent *)asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp", 1827);
             if (model) model = modelListInit(model);
             work->model = model;
             resourceOwnerLoadFileSync(model, "camp/jakyou_union4.bam");

@@ -2,6 +2,7 @@
 #include "ui/UiSpriteApi.h"
 #include "shard/Shard0033.h"
 #include "font/ComWin/ComWin.h"
+#include "game/GameGlobalsRef.h"
 
 // IV's three initial headers and menu controls differ from the Apocalypse session view.
 struct MenuSessionResetViewIV {
@@ -35,11 +36,10 @@ typedef char MenuSessionResetOffsetsCheck[offsetof(MenuSessionResetViewIV, first
     offsetof(MenuSessionResetViewIV, kind) == 0x1e67 ? 1 : -1];
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 
 void FUN_0029e788()
 {
-    MenuSessionResetViewIV *session = (MenuSessionResetViewIV *)g_gameGlobals.instance;
+    MenuSessionResetViewIV *session = (MenuSessionResetViewIV *)g_gameGlobals.data;
     spriteStartAnimationByIndex(&session->headers[0], 0);
     spriteStartAnimationByIndex(&session->headers[1], 1);
     spriteStartAnimationByIndex(&session->headers[2], 2);
@@ -47,7 +47,7 @@ void FUN_0029e788()
         timerStart(&session->primary[index], 4, 0);
         timerStart(&session->secondary[index], 1, 0);
     }
-    MenuSessionResetViewIV *current = (MenuSessionResetViewIV *)g_gameGlobals.instance;
+    MenuSessionResetViewIV *current = (MenuSessionResetViewIV *)g_gameGlobals.data;
     current->flag1e60 = 0;
     if (current->kind != 9 &&
         (current->mode == 4 || current->mode == 5 || current->mode == 6)) {

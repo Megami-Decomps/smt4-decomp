@@ -5,7 +5,6 @@
 #include "classes/Obj55ca08.h"
 
 extern "C" {
-s32 scrRunOpcodesStub(ScriptProcess *);
 void buttonHelpSetText(u32, u32);
 void messageTargetSetValue(u32, u32);
 void messageMainSetEnabled(s32);

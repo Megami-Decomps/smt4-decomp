@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027052c` (_code @ 0x27052c, 0x78c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "game/GameState.h"
@@ -73,7 +74,6 @@ extern int FUN_0027ef00(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: mapFlagsWriteBit. */
 /* Supplied declaration required: FUN_002e8a78. */
 /* Supplied declaration required: FUN_002f3b14. */
@@ -112,7 +112,7 @@ unsigned int FUN_0027052c(void)
   unsigned int *temp_v23;
   
   temp_v8 = 0;
-  temp_v1 = gameGetMapBlock();
+  temp_v1 = (int)gameGetMapBlock();
   FUN_001fc0a8();
   temp_v9 = 0;
   temp_v12 = 0x3c8efa3500000000;

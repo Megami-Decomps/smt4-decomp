@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
 
@@ -12,13 +13,7 @@ typedef struct EditorEntry {
     /* 0x09C */ char path[1];
 } EditorEntry;
 
-typedef struct EffectEditor {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ void *current;
-} EffectEditor;
-
 /* Result codes: the values 0x400000-0x400002. */
-extern EffectEditor g_effectEditor;
 
 extern s32 FUN_0037cdcc(const char *path, s32 flags, FileInfo *info);
 extern EditorEntry *FUN_0037667c(void *current, FileInfo *info);
@@ -36,8 +31,8 @@ u8 *FUN_003c3654(void)
     if (info.type == 2) {
         result = (u8 *)0x400000;
     } else if (info.type == 1) {
-        if (g_effectEditor.current != NULL) {
-            EditorEntry *entry = FUN_0037667c(g_effectEditor.current, &info);
+        if (g_effectEditor.list != NULL) {
+            EditorEntry *entry = FUN_0037667c(g_effectEditor.list, &info);
 
             libc_strcpy(entry->path, *FUN_002b30e4());
         }

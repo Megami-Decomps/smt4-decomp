@@ -1,23 +1,12 @@
 #include "gamedata/PlayerInitialization.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/PlayerGrowthDefaults.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/PlayerInitialization.h"
 
 extern "C" {
 void playerRecalcStatsFromEquipment(s32 mode);
 
-/* Table 9 record: byte data, so the id bytes sit unaligned at offset 5. */
-typedef struct Table09Record {
-    u8 unk00[5];
-    u8 id[4];    /* 0x05 */
-    u8 valueA;   /* 0x09 */
-    u8 valueB;   /* 0x0A */
-    u8 valueC;   /* 0x0B */
-    u8 valueD;   /* 0x0C */
-    u8 valueE;   /* 0x0D */
-} Table09Record;
-
-/* The record's packed copy; its bytes 0x0A..0x0D are the growth parameters FUN_003c1ab4 reads. */
+/* The growth record's packed copy; its bytes 0x0A..0x0D are the growth parameters FUN_003c1ab4 reads. */
 typedef struct Table09Info {
     u8 id[4];    /* 0x00 */
     u8 valueA;   /* 0x04 */
@@ -44,22 +33,22 @@ struct GrowthValues {
     u16 second; // 0x02
 };
 
-/* Copies the first record of data table 9 into info. */
+/* Copies the hero's growth record (PlayerGrow.tbb) into info. */
 void FUN_003c1e50(Table09Info *info)
 {
     void *resource = dataTableGet(9, 0);
     dataTableGetCount(resource);
-    Table09Record *record = (Table09Record *)dataTableGetEntries(resource);
+    const PlayerGrowRecord *record = (const PlayerGrowRecord *)dataTableGetEntries(resource);
     Table09Info result = {0};
-    result.id[0] = record->id[0];
-    result.id[1] = record->id[1];
-    result.id[2] = record->id[2];
-    result.id[3] = record->id[3];
-    result.valueA = record->valueA;
-    result.valueB = record->valueB;
-    result.valueC = record->valueC;
-    result.valueD = record->valueD;
-    result.valueE = record->valueE;
+    result.id[0] = record->growth[0];
+    result.id[1] = record->growth[1];
+    result.id[2] = record->growth[2];
+    result.id[3] = record->growth[3];
+    result.valueA = record->growth[4];
+    result.valueB = record->baseHp;
+    result.valueC = record->baseMp;
+    result.valueD = record->hpGrowth;
+    result.valueE = record->mpGrowth;
     *info = result;
 }
 
@@ -86,11 +75,9 @@ void FUN_003c1ef4(void)
     player->level = 1;
     ((PlayerExperienceView *)player)->experience = 0;
     player->ailments = 0;
-    void *table = dataTableGet(9, 0);
-    dataTableGetCount(table);
-    const PlayerInitialGrowthIV *initial = (const PlayerInitialGrowthIV *)dataTableGetEntries(table);
+    const PlayerGrowRecord *initial = playerGrowthDefaults();
     for (s32 index = 0; index < 5; ++index) {
-        player->baseStats.stats[index] = initial->stats[index];
+        player->baseStats.stats[index] = initial->initialStats[index];
     }
     Table09Info info;
     FUN_003c1e50(&info);

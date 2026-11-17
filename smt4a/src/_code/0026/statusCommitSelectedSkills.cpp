@@ -1,4 +1,5 @@
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 /* ObjB splits this selected-id field into byte arrays; a local view avoids altering their alignment. */
 struct StatusSkillSelectionView {
@@ -17,7 +18,6 @@ struct StatusSkillComparison {
 };
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 u32 countUnlockedSlots();
 StatusSkillSlotView *slotRecordFindById(u32);
 u32 getUnlockedSlotCount();

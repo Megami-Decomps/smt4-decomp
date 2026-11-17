@@ -13,7 +13,7 @@ static __inline void helpSelect(ButtonHelpWorkA *work, u32 index, s32 kind, s32 
         s32 queuedKind = g_buttonHelpQueuedKinds[index];
         if (queuedKind < 0) {
             for (s32 unit = 0; unit < 6; ++unit) {
-                if (work->clear.active[unit]) {
+                if (work->touchPressed[unit]) {
                     g_buttonHelpQueuedKinds[index] = kind;
                     g_buttonHelpQueuedValues[index] = value;
                     return;
@@ -25,12 +25,12 @@ static __inline void helpSelect(ButtonHelpWorkA *work, u32 index, s32 kind, s32 
             g_buttonHelpQueuedValues[index] = -1;
         }
     }
-    work->kinds[index].kind = static_cast<u8>(kind);
-    work->kinds[index].value = static_cast<u16>(value);
+    work->slots[index].kind = static_cast<u8>(kind);
+    work->slots[index].value = static_cast<u16>(value);
     if (kind != 7 && kind != 9 && kind != 10 && kind != 11 &&
         kind != 12 && kind != 13 && kind != 14 && kind != 15 &&
         kind != 16 && kind != 17 && kind != 19) {
-        UiSpriteState *unit = reinterpret_cast<UiSpriteState *>(&work->units[index]);
+        UiSpriteState *unit = reinterpret_cast<UiSpriteState *>(&work->slotSprites[index]);
         if (kind == 8) {
             unit->secondaryImage = 4;
             unit->textureTable = 10;
@@ -42,7 +42,7 @@ static __inline void helpSelect(ButtonHelpWorkA *work, u32 index, s32 kind, s32 
         }
         return;
     }
-    UiSpriteState *unit = reinterpret_cast<UiSpriteState *>(&work->units[index]);
+    UiSpriteState *unit = reinterpret_cast<UiSpriteState *>(&work->slotSprites[index]);
     unit->secondaryImage = 1;
     unit->textureTable = 10;
     unit->image = -1;

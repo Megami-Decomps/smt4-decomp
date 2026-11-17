@@ -4,36 +4,13 @@
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "util/BitsAndBytes.h"
-
-/* The overlay's scene (only the fields the draw reads). */
-struct OverlayScene {
-    /* 0x0000 */ u8 unk0000[0x20];
-    /* 0x0020 */ f32 position[2];
-    /* 0x0028 */ u8 unk0028[0x82C];
-    /* 0x0854 */ u8 banner[0x8B]; /* a sprite: its completion state is the signed byte at +0x8A */
-    /* 0x08DF */ u8 unk08DF[0x3A85];
-    /* 0x4364 */ s32 state;
-    /* 0x4368 */ u8 unk4368[4];
-    /* 0x436C */ s32 step;
-    /* 0x4370 */ u8 unk4370[0xC];
-    /* 0x437C */ s32 timer;
-};
-
-/* The engine cleanup owner global: the overlay's scene and its banner alpha. */
-struct OverlayOwner {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ OverlayScene *scene;
-    /* 0x08 */ u8 unk08[0x18];
-    /* 0x20 */ f32 alpha;
-};
+#include "shard/X14_EngineUnits.h"
 
 extern "C" {
-extern OverlayOwner g_engineCleanupOwner;
-
-s32 scriptProcessCreateWhenReady(OverlayScene *scene);
+s32 scriptProcessCreateWhenReady(ResultWorkA *scene);
 u32 renderCtxPackPassFlags(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
-void FUN_004b0164(OverlayScene *scene, u32 x, u32 y);
+void FUN_004b0164(ResultWorkA *scene, u32 x, u32 y);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);
 
@@ -41,7 +18,7 @@ void renderCtxResetColorScale(RenderCtxA *ctx);
  * step, then the scene's own parts. Always returns 0. */
 u32 FUN_00229324(void)
 {
-    OverlayScene *scene = g_engineCleanupOwner.scene;
+    ResultWorkA *scene = g_engineCleanupOwner.instance;
     if (scene == NULL || scriptProcessCreateWhenReady(scene) == 0)
         return 0;
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
@@ -49,7 +26,7 @@ u32 FUN_00229324(void)
     u32 firstState = renderCtxPackPassFlags(1, 0);
     renderStackPushCounted(&ctx->stackA, firstState);
     ctx = g_renderCtx;
-    if (scene->state == 13 && scene->step == 5 && uiSpriteGetCompletionState((UiSpriteState *)scene->banner) == 0) {
+    if (scene->state == 13 && scene->step == 5 && uiSpriteGetCompletionState(&scene->banner) == 0) {
         if (scene->timer < 16) {
             s32 offset = scene->timer * -30;
             if (offset < -240)
@@ -72,7 +49,7 @@ u32 FUN_00229324(void)
         if (scene->state != 0) {
             u32 secondState = renderCtxPackPassFlags(1, 0);
             renderStackPushCounted(&ctx->stackA, secondState);
-            FUN_004b0164(scene, vec2GetXInt((UiSpriteState *)scene->position), vec2GetYInt((UiSpriteState *)scene->position));
+            FUN_004b0164(scene, vec2GetXInt(&scene->originSprite), vec2GetYInt(&scene->originSprite));
             renderStackPop(&g_renderCtx->stackA);
         }
         renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));

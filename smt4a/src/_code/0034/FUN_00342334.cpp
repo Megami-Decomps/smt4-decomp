@@ -6,7 +6,7 @@ extern "C" {
 
 void FUN_00342334(u8 value)
 {
-    g_buttonHelp.work->unk5E0 = value;
+    g_buttonHelp.work->drawEnabled = value;
 }
 
 } /* extern "C" */

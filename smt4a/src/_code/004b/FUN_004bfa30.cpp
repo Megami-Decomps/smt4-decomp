@@ -7,9 +7,9 @@
 #include "gamedata/ConsumableRecordA.h"
 #include "battle/BtlGlobals.h"
 #include "gamedata/SaveSlotRecord.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 extern "C" {
-extern const u8 g_btlSkillResponseMasks[];
 void btlEntryBuildSummary(void *snapshot, BtlMainStateA *battle, BtlCombatantEntryA *subject);
 s32 FUN_004bd098(u32 source, u32 item);
 
@@ -35,9 +35,7 @@ u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
     if (snapshot.restricted) {
         if (!(subject->data.statusFlags & 0x10))
             return 0;
-        struct GateMasks { u8 prefix[0x18]; u64 blocked; };
-        const GateMasks *gates = reinterpret_cast<const GateMasks *>(g_btlSkillResponseMasks);
-        if ((subject->flags & gates->blocked) && FUN_004bd098(subject->data.sourceId, itemId) < 0)
+        if ((subject->flags & g_btlSkillResponseMasks.sourceKind) && FUN_004bd098(subject->data.sourceId, itemId) < 0)
             return 0;
     }
     u32 category = 0;

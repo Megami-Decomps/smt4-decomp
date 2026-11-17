@@ -16,7 +16,7 @@ u32 uiSelectedRecordGetFirst(void);
 u32 FUN_003c4da8(void)
 {
     s32 arg = scrGetArg(0);
-    EngineUnits *table = g_engineCleanupOwner.instance;
+    ResultWorkA *table = g_engineCleanupOwner.instance;
     u32 result;
 
     if (table != NULL) {

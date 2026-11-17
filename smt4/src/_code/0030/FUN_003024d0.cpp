@@ -3,9 +3,9 @@
 #include "gfx/QuaternionWorkspace.h"
 #include <math.h>
 #include "code/Code0024_Smt4.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
-extern QuaternionWorkspace g_vectorScratch;
 
 void FUN_003024d0(EffObjectParticle *emitter, EffObjectParticleState *particle)
 {
@@ -17,16 +17,16 @@ void FUN_003024d0(EffObjectParticle *emitter, EffObjectParticleState *particle)
     } else {
         direction = emitter->initialMotion.direction;
     }
-    g_vectorScratch.direction = direction;
-    g_vectorScratch.rotation.w = 0.0f;
+    g_vectorScratch.first.direction = direction;
+    g_vectorScratch.first.rotation.w = 0.0f;
     f32 length = sqrtf(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
     if (length != 0.0f) {
         if (length > 0.0f) {
-            g_vectorScratch.direction.x /= length;
-            g_vectorScratch.direction.y /= length;
-            g_vectorScratch.direction.z /= length;
+            g_vectorScratch.first.direction.x /= length;
+            g_vectorScratch.first.direction.y /= length;
+            g_vectorScratch.first.direction.z /= length;
         }
-        particle->motion.direction = g_vectorScratch.direction;
+        particle->motion.direction = g_vectorScratch.first.direction;
     } else {
         particle->motion.direction.x = 0.0f;
         particle->motion.direction.y = 1.0f;

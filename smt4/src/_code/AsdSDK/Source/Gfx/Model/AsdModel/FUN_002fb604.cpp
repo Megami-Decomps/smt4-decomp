@@ -1,18 +1,10 @@
 /* NON_MATCHING: logic recovered (runtime-type cast, "shadow" material lookup through the relative-offset dictionary, per-mesh strength call); retail keeps the dictionary-null/name tests, the relative-pointer loads and the global reloads unfused, builds the shadow record through the stack, and uses a 0x24 frame; twin of smt4a FUN_00386548. */
 #include "common.h"
 #include "nw/ut/RuntimeTypeInfo.h"
+#include "gfx/GfxSettings.h"
 
 /* The part of g_gfxSettings this reads: the model feature switch, the two shadow strengths and
  * the loaded graphics file. */
-struct GfxShadowSettings {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ u8 enabled;
-    /* 0x02 */ u8 unk02[0x5E];
-    /* 0x60 */ f32 shadowOff;
-    /* 0x64 */ f32 shadowOn;
-    /* 0x68 */ u8 unk68[0x18];
-    /* 0x80 */ void *modelData;
-};
 
 /* A scene object that reports its runtime type through vtable slot 2. */
 class GfxSceneObject {
@@ -65,7 +57,6 @@ public:
 };
 
 extern "C" {
-extern GfxShadowSettings g_gfxSettings;
 extern nw::ut::RuntimeTypeInfo DAT_00472180;
 extern nw::ut::RuntimeTypeInfo DAT_00472288;
 
@@ -90,7 +81,7 @@ static inline GfxMaterialValue *findMaterialValue(GfxMesh *mesh, const char *nam
 /* Switches every mesh of the model between its shadow strengths, per the "shadow" material value. */
 s32 FUN_002fb604(GfxSceneObject *object)
 {
-    if (!g_gfxSettings.enabled) {
+    if (!g_gfxSettings.initialized) {
         return 0;
     }
     if (g_gfxSettings.modelData == NULL) {
@@ -105,14 +96,14 @@ s32 FUN_002fb604(GfxSceneObject *object)
                 value = NULL;
             }
             if (value->mode > 0) {
-                if (value->mode == 2 && g_gfxSettings.enabled) {
+                if (value->mode == 2 && g_gfxSettings.initialized) {
                     FUN_002a3204(mesh, 1, g_gfxSettings.shadowOn);
                 }
                 GfxModel *shadowed = nw::ut::DynamicCast<GfxModel>(object, &DAT_00472288);
                 GfxShadowState state;
                 state.active = 1;
                 shadowed->shadow = state;
-            } else if (g_gfxSettings.enabled) {
+            } else if (g_gfxSettings.initialized) {
                 FUN_002a3204(mesh, 1, g_gfxSettings.shadowOff);
             }
         }

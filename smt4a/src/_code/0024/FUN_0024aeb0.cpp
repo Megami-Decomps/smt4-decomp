@@ -1,8 +1,9 @@
 #include "map/mapTrap.h"
 #include "game/GameStateA.h"
-#include "shard/W5_W5Match7_ControllerPose.h"
+#include "shard/W5_W5Match7_SceneState.h"
+#include "gfx/ControllerModel.h"
 
-struct MapTrapControllerLink { u32 unk00; ControllerPose* controller; };
+struct MapTrapControllerLink { u32 unk00; Obj557b18* controller; };
 // The shared trap's padding union starts at an unaligned byte offset; do not enlarge its alignment.
 struct MapTrapDisplayView {
     u8 enabled;
@@ -18,10 +19,6 @@ struct MapTrapDisplayView {
 extern "C" {
 extern MapTrapA* g_mapTrap;
 f32 FUN_001f3f34(f32 first, f32 second, f32 duration, f32 frame);
-void controllerSetDestination(ControllerPose* controller, const MapVector* destination);
-void controllerSetRotationEulerDegrees(ControllerPose* controller, f32 x, f32 y, f32 z);
-void controllerSetPosition(ControllerPose* controller, f32 x, f32 y, f32 z);
-void modelPlayClip(ControllerPose* controller, u32 kind, s32 option, f32 first, f32 second);
 
 /* Per-frame update of the trap's display model: visibility, the swinging motion and pending placement. */
 void FUN_0024aeb0(void)
@@ -35,15 +32,15 @@ void FUN_0024aeb0(void)
             owner = display->secondary;
         }
         if (owner) {
-            ControllerPose* controller = owner->controller;
+            Obj557b18* controller = owner->controller;
             if (g_gameState.loading) {
-                controller->flags.value |= 3;
+                controller->flags |= 3;
                 return;
             }
             if (display->enabled) {
-                controller->flags.value &= ~3u;
+                controller->flags &= ~3u;
             } else {
-                controller->flags.value |= 3;
+                controller->flags |= 3;
             }
             if (g_mapTrap->motion.active && display->mode == 1) {
                 s32 frame = g_mapTrap->motion.alternating ? g_mapTrap->motion.count : g_mapTrap->motion.reverseCount;

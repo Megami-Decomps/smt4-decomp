@@ -3,6 +3,8 @@
 #define SHARD_SHARD0032_H
 
 #include "common.h"
+#include "ui/UiSpriteState.h"
+#include "script/ScriptVm.h"
 struct ScriptProcess;
 #include "gamedata/GameSaveDataA.h"
 #include <stddef.h>
@@ -15,13 +17,12 @@ struct ScriptProcess;
 /* A menu object; only the fields the helpers touch are named. */
 typedef struct Menu32 {
     /* 0x00 */ u8 unk00[0x368];
-    /* 0x368 */ u8 block368[4];
-    /* 0x36C */ u8 unk36C[0x88];
+    /* 0x368 */ UiSpriteState block368;
     /* 0x3F4 */ u32 unk3F4;
     /* 0x3F8 */ u32 unk3F8;
     /* 0x3FC */ u8 unk3FC[0x570];
-    /* 0x96C */ u8 block96C[4];
-    /* 0x970 */ u8 unk970[0x1ACC];
+    /* 0x96C */ UiSpriteState block96C;
+    /* 0x9F8 */ u8 unk9F8[0x1A44];
     /* 0x243C */ s32 mode;
     /* 0x2440 */ u8 unk2440[0x1434];
     /* 0x3874 */ u32 unk3874;
@@ -54,14 +55,6 @@ typedef struct Menu32 {
     /* 0x4B24 */ u32 unk4B24;
     /* 0x4B28 */ u32 unk4B28;
 } Menu32;
-
-/* Global settings block (g_gfxSettings). */
-typedef struct Settings5B {
-    /* 0x00 */ u8 unk00[0x2];
-    /* 0x02 */ s8 value;
-    /* 0x03 */ u8 unk03[0x5];
-    /* 0x08 */ u32 flags;
-} Settings5B;
 
 /* Work area of a job that keeps a pool of sub-jobs; `current` selects one. */
 typedef struct JobPool {
@@ -146,7 +139,7 @@ typedef struct StateAtF4 {
     /* 0x10 */ u8 unk10[0x14];
     /* 0x24 */ u8 image[1];
     /* 0x25 */ u8 unk25[0x27];
-    /* 0x4C */ u32 scriptProcess;
+    /* 0x4C */ ScriptProcess *scriptProcess;
     /* 0x50 */ void *buf50;
     /* 0x54 */ void *buf54;
     /* 0x58 */ void *unk58;

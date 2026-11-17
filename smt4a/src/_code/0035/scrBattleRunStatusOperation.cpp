@@ -1,7 +1,7 @@
 #include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiA *g_btlUiBlock;
 u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
 s32 scrWorkGetValue(u32 index);

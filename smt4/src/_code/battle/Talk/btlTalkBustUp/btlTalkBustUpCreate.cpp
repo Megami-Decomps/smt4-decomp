@@ -7,21 +7,7 @@
 #include <stddef.h>
 #include "AsdSDK/AsdMemAlloc.h"
 
-namespace {
-// The allocation has additional presentation fields after the shared 0x2fc-byte prefix.
-struct TalkBustUpWork {
-    BtlTalkBustUp state;
-    f32 scaleX;
-    f32 scaleY;
-    f32 progress;
-    u32 flags;
-};
-typedef char TalkBustUpWorkLayoutCheck[sizeof(TalkBustUpWork) == 0x30C &&
-    offsetof(TalkBustUpWork, scaleX) == 0x2FC && offsetof(TalkBustUpWork, flags) == 0x308 ? 1 : -1];
-}
-
 extern "C" {
-extern TalkBustUpWork *g_btlTalkBustUp;
 /* The bust-up window's sprite resource packets, in retail's order (0x60, 0x144, 0x90 and 0x9bc bytes). */
 static const u32 sBustUpPacketA[24] = {
     0, 0x40000, 0x10, 0x40000, 0, 0x18, 0, 0xfff60012,
@@ -142,24 +128,24 @@ void btlTalkBustUpCreate(void)
 {
     if (g_btlTalkBustUp == NULL) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\Talk\\btlTalkBustUp.cpp", 0x3D5);
-        g_btlTalkBustUp = static_cast<TalkBustUpWork *>(asdMemAlloc(
-            ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(TalkBustUpWork), 1));
-        TalkBustUpWork *work = g_btlTalkBustUp;
-        memClear(work, sizeof(TalkBustUpWork));
-        work->state.textureNode = -1;
-        work->flags = 0;
+        g_btlTalkBustUp = static_cast<BtlTalkBustUp *>(asdMemAlloc(
+            ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(BtlTalkBustUp), 1));
+        BtlTalkBustUp *work = g_btlTalkBustUp;
+        memClear(work, sizeof(BtlTalkBustUp));
+        work->textureNode = -1;
+        work->devilId = 0;
         work->scaleX = 1.0f;
         work->scaleY = 1.0f;
         work->progress = 0.0f;
-        work->state.state = 0;
-        work->state.unk2EC = 0;
-        work->state.job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMD CALC"),
+        work->state = 0;
+        work->stateCounter = 0;
+        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMD CALC"),
             2, 0, 0, FUN_00206528, NULL, 0);
         taskCreateDraw(reinterpret_cast<const s8 *>("TalkBustUp DrawLeft"), 0x7D, 0, 0,
-            FUN_0022535c, NULL, 0, reinterpret_cast<void *>(work->state.job));
+            FUN_0022535c, NULL, 0, reinterpret_cast<void *>(work->job));
         taskCreateDraw(reinterpret_cast<const s8 *>("TalkBustUp DrawRight"), 0xDB, 0, 0,
-            FUN_0022535c, NULL, 0, reinterpret_cast<void *>(work->state.job));
-        UiResourceParameters *parameters = reinterpret_cast<UiResourceParameters *>(&work->state);
+            FUN_0022535c, NULL, 0, reinterpret_cast<void *>(work->job));
+        UiResourceParameters *parameters = &work->resources;
         drawParameterBlockClear(parameters);
         paramsInit(parameters, sBustUpPacketA, sizeof(sBustUpPacketA), sBustUpPacketB, sizeof(sBustUpPacketB),
                    sBustUpPacketC, sizeof(sBustUpPacketC), NULL, 0, sBustUpPacketD, sizeof(sBustUpPacketD));

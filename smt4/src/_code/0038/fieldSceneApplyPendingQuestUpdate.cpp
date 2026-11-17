@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "gamedata/GameFlags.h"
 
 /* The pending quest/event update the scene works from (0xD00..0xD56 of the controller). */
@@ -26,14 +26,6 @@ struct FieldSceneWork {
     /* 0xD00 */ FieldScenePending pending;
 };
 
-/* The current map block (observed fields). */
-struct MapBlock {
-    /* 0x00 */ u8 unk00[0x1E];
-    /* 0x1E */ u16 placeId;
-    /* 0x20 */ u8 unk20[2];
-    /* 0x22 */ u16 pendingEntry;
-};
-
 /* A word of the quest state block. */
 struct QuestStateWord {
     /* 0x00 */ u8 unk00[0x78];
@@ -52,7 +44,6 @@ s32 questGetPrimaryState(void);
 u8 questGetSecondaryState(void);
 s32 FUN_002cf738(void);
 
-MapBlock *gameGetMapBlock(void);
 void FUN_00273f5c(void);
 void mapClearPendingEntries(void);
 void FUN_00273d34(void);
@@ -104,13 +95,13 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
         }
     }
     if (pending->mapChanged != 0) {
-        MapBlock *map = gameGetMapBlock();
+        MapSaveBlock *map = gameGetMapBlock();
 
-        map->pendingEntry = 0;
+        map->mapId = 0;
         FUN_00273f5c();
         mapClearPendingEntries();
         if (primaryState == 0) {
-            map->placeId = pending->placeId;
+            map->quest = pending->placeId;
             FUN_00273d34();
             FUN_00273c54();
         }

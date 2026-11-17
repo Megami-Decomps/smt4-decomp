@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail quaternion assignment copies through the stack; this uses direct VFP stores. */
 #include "gfx/QuaternionWorkspace.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 f32 FUN_001b63b0(f32);
 f32 FUN_001a1ee0(f32);
-extern QuaternionWorkspace g_vectorScratch;
 }
 
 /* Convert Euler angles in radians to the workspace's rotation quaternion. */
@@ -24,5 +24,5 @@ extern "C" void FUN_001bc2f0(f32 x, f32 y, f32 z)
     rotation.y = cosZ * sinY * cosX - sinZ * cosY * sinX;
     rotation.z = sinZ * cosY * cosX + cosZ * sinY * sinX;
     rotation.w = cosZ * cosY * cosX - sinZ * sinY * sinX;
-    g_vectorScratch.rotation = rotation;
+    g_vectorScratch.first.rotation = rotation;
 }

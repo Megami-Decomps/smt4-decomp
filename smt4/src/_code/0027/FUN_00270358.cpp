@@ -1,13 +1,12 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" {
 
 extern u64 FUN_00270384(int obj, u32 value);
-extern u32 gameGetMapBlock(void);
 
 void FUN_00270358(int obj, u8 value)
 {
-    u32 arg = gameGetMapBlock();
+    u32 arg = (u32)gameGetMapBlock(); /* FUN_00270384 receives the block as a word */
     u64 result = FUN_00270384(obj, arg);
 
     if ((int)result != 0) {

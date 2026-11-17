@@ -1,11 +1,11 @@
 /* Frees the Gauntlet app menu's resources and work area. */
 #include "common.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int fileSlotFree(int id);
-int scrScriptProcessDestroy(u32 handle);
 int asdMemFree(void *ptr);               /* heap free */
 
 extern GauntletAppMenuWork *g_gauntletAppMenu;

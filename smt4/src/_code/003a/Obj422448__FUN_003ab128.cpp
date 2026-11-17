@@ -7,7 +7,7 @@
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
-struct StatusCursor;
+struct UiSpriteState;
 s32 pointConvertToFloat(void *target, u32 x, u32 y);
 void FUN_00233240(void *window, s32 enable);
 s32 flaggedValueHolderGetTotal(void *holder);
@@ -28,10 +28,6 @@ struct StatusListEntry {
 };
 
 // Selection cursor (0x8c bytes); its done flag is a signed byte at +0x8a read through uiSpriteGetCompletionState.
-struct StatusCursor {
-    /* 0x00 */ u8 body[0x8c];
-};
-
 // Skill-learning flow of the status screen.
 struct StatusFlow {
     /* 0x000 */ u8 unk000[0x14];
@@ -41,8 +37,8 @@ struct StatusFlow {
     /* 0x020 */ u8 entryHolder[0xa8];
     /* 0x0c8 */ u8 pointer[0x14];
     /* 0x0dc */ u8 window[0x20];
-    /* 0x0fc */ StatusCursor cursorA;
-    /* 0x188 */ StatusCursor cursorB;
+    /* 0x0fc */ UiSpriteState cursorA;
+    /* 0x188 */ UiSpriteState cursorB;
     /* 0x214 */ u8 unk214[0x394];
     /* 0x5a8 */ StatusListEntry entries[1];
 };
@@ -75,10 +71,10 @@ void Obj422448::FUN_003ab128()
         statusOpenSkillSelection(skill, 1);
         break;
     case 2: {
-        StatusCursor *cursor = &flow->cursorB;
-        uiSpriteAdvanceAnimation((UiSpriteState *)cursor);
-        pointConvertToFloat(flow->pointer, vec2GetXInt((const UiSpriteState *)cursor), vec2GetYInt((const UiSpriteState *)cursor));
-        if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) != 0) {
+        UiSpriteState *cursor = &flow->cursorB;
+        uiSpriteAdvanceAnimation(cursor);
+        pointConvertToFloat(flow->pointer, vec2GetXInt(cursor), vec2GetYInt(cursor));
+        if (uiSpriteGetCompletionState(cursor) != 0) {
             flow->state++;
         }
         return;
@@ -99,10 +95,10 @@ void Obj422448::FUN_003ab128()
         break;
     }
     case 4: {
-        StatusCursor *cursor = &flow->cursorA;
-        uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
-        pointConvertToFloat(flow->pointer, vec2GetXInt((const UiSpriteState *)cursor), vec2GetYInt((const UiSpriteState *)cursor));
-        if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) == 0) {
+        UiSpriteState *cursor = &flow->cursorA;
+        uiSlidingSpriteAdvance(cursor, 0);
+        pointConvertToFloat(flow->pointer, vec2GetXInt(cursor), vec2GetYInt(cursor));
+        if (uiSpriteGetCompletionState(cursor) == 0) {
             return;
         }
         if (buttonHelpIsNotActive() == 0) {

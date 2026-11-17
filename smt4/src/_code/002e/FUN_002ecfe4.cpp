@@ -2,20 +2,10 @@
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 #include "sys/ResultReport.h"
-
-/* The CEC worker process (the part its shutdown touches). */
-struct CecProcess {
-    /* 0x000 */ u8 unk000[0x428];
-    /* 0x428 */ s32 state;
-    /* 0x42c */ NnOsThread thread;
-    /* 0x434 */ u8 queue[0x14];
-    /* 0x448 */ u8 unk448[4];
-    /* 0x44c */ void *buffer;
-};
+#include "cec/CecProcessGlobal.h"
 
 extern "C" {
 
-extern CecProcess *g_cecProcess;
 
 s32 FUN_002c40f8(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002c3f5c(void *queue);

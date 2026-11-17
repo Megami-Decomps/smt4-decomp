@@ -1,10 +1,10 @@
 /* Run window: moves it to its closing state (3) and notifies its UI. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "font/SearchWin/RunWin.h"
 
 extern "C" {
 
-int spriteStartAnimationByIndex(void *ui, int arg);
 int soundPlaySeUnpanned(int id);
 
 extern RunWinWork *g_runWin;
@@ -18,7 +18,7 @@ void runWinClose(void)
     } else {
         run->nextState = 3;
     }
-    spriteStartAnimationByIndex(run->ui, 1);
+    spriteStartAnimationByIndex(&run->window, 1);
     soundPlaySeUnpanned(0x10001fe);
 }
 

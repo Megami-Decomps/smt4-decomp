@@ -1,5 +1,5 @@
 /* NON_MATCHING: global matrix addresses fold into large offsets, changing base registers and VFP load scheduling; 107 vs 106 instructions, no stack matrix copy. */
-#include "shard/W8Match1_MatrixRotation.h"
+#include "gfx/VectorScratch.h"
 namespace {
 inline void premultiply(Matrix44 &right, const Matrix44 &left)
 {
@@ -25,15 +25,10 @@ inline void premultiply(Matrix44 &right, const Matrix44 &left)
 }
 }
 extern "C" {
-extern MatrixRotationWork g_vectorScratch;
 
 // Premultiply the current matrix by the next matrix in the global transform work.
 void FUN_002482d4()
 {
-    // The second matrix follows the documented 0x180-byte rotation-work prefix.
-    struct MatrixCompositionView { MatrixRotationWork work; Matrix44 transform; };
-    typedef char MatrixCompositionOffset[offsetof(MatrixCompositionView, transform) == 0x180 ? 1 : -1];
-    MatrixCompositionView *view = reinterpret_cast<MatrixCompositionView *>(&g_vectorScratch);
-    premultiply(view->work.rotation, view->transform);
+    premultiply(g_vectorScratch.matrix.matrix, g_vectorScratch.stored.matrix);
 }
 }

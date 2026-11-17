@@ -2,11 +2,12 @@
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/scrScriptProcess.h"
 
 /* A loaded script and the two data files it ran from. */
 struct ScriptResources {
     /* 0x0 */ void *files[2];
-    /* 0x8 */ void *script;
+    /* 0x8 */ ScriptProcess *script;
 };
 
 /* A menu scene's work block as its teardown sees it. */
@@ -38,7 +39,6 @@ void asdMemFreeNonNull(void *memory);
 void asdMdlManagerMarkDestroy(void *model);
 void asdMdlManagerDestroy(void *model);
 void asdModelSlotRelease(s32 slot);
-void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *memory);
 void messageSetConfirmDisplayMode(void);
 void messageStatesSetFirst(u8 value);
@@ -52,7 +52,7 @@ static inline void freeAndClear(void **memory)
     }
 }
 
-static inline void destroyScript(void **script)
+static inline void destroyScript(ScriptProcess **script)
 {
     if (*script != NULL) {
         scrScriptProcessDestroy(*script);

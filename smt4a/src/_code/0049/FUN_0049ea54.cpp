@@ -1,28 +1,20 @@
 /* NON_MATCHING: scheduling only: retail stores the entry count (r0) before loading screen->index; built stores the copy (r1) after the load */
 /* Opens the entry screen: validates the resources, loads the selected entry of table 0x46 and starts the intro sequence. */
-#include "gamedata/DataTable.h"
+#include "gamedata/HowToTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shop/shopMain.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 
-typedef struct TableEntry {
-    /* 0x00 */ u8 unk00[0x36];
-    /* 0x36 */ u16 resourceA;
-    /* 0x38 */ u8 unk38[8];
-    /* 0x40 */ u16 resourceB;
-    /* 0x42 */ u8 unk42[2];
-} TableEntry; /* 0x44 */
-
 typedef struct Screen {
     /* 0x000 */ u8 unk000[8];
     /* 0x008 */ s32 active;
     /* 0x00C */ s32 ready;
-    /* 0x010 */ TableEntry *entries;
+    /* 0x010 */ HowToRecord *entries;
     /* 0x014 */ u32 entryCount;
     /* 0x018 */ u8 unk018[0x6C];
-    /* 0x084 */ TableEntry *current;
+    /* 0x084 */ HowToRecord *current;
     /* 0x088 */ u8 unk088[0x0C];
     /* 0x094 */ u32 unk094;
     /* 0x098 */ u8 unk098[0x8C];
@@ -54,18 +46,18 @@ void FUN_0049ea54(Screen *screen)
         return;
     }
     table = dataTableGet(0x46, 0);
-    screen->entries = static_cast<TableEntry *>(dataTableGetEntries(table));
+    screen->entries = howToRecords(table);
     screen->entryCount = dataTableGetCount(table);
     if ((s32)screen->index <= 0 && screen->index >= screen->entryCount) {
         FUN_0049d140(reinterpret_cast<int>(screen), 0, 0);
         return;
     }
     screen->current = &screen->entries[screen->index];
-    resource = screen->current->resourceA;
+    resource = screen->current->imageA;
     if (resource > 0 && asdTMTexTableNodeIsLoaded(0x33, resource) == 0) {
         asdTMTexLoadMainHeap(0x33, resource);
     }
-    resource = screen->current->resourceB;
+    resource = screen->current->imageB;
     if (resource > 0 && asdTMTexTableNodeIsLoaded(0x33, resource) == 0) {
         asdTMTexLoadMainHeap(0x33, resource);
     }

@@ -1,23 +1,12 @@
 #include "common.h"
+#include "shard/X14_EngineUnits.h"
 
 extern "C" {
 
-typedef struct Holder {
-    /* 0x0000 */ u8 unk0000[0x7538];
-    /* 0x7538 */ u32 value;
-} Holder;
-
-typedef struct HolderGlobal {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ Holder *holder;
-} HolderGlobal;
-
-extern HolderGlobal g_engineCleanupOwner;
-
-/* Returns the holder's value, or 0 when there is no holder. */
+/* Returns the result work's word at 0x7538, or 0 without a result screen. */
 u32 FUN_0031e6d4(void)
 {
-    return g_engineCleanupOwner.holder != NULL ? g_engineCleanupOwner.holder->value : 0;
+    return g_engineCleanupOwner.instance != NULL ? g_engineCleanupOwner.instance->unk7538 : 0;
 }
 
 } /* extern "C" */

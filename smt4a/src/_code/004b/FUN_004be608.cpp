@@ -4,6 +4,7 @@
 #include "shard/Shard0031.h"
 #include "code/Code002a_VariantA.h"
 #include "gamedata/SaveSlotTable.h"
+#include "script/scrScriptProcess.h"
 
 /* The partner select menu (only the fields the state machine reads). */
 struct PartnerMenuFull {
@@ -21,7 +22,7 @@ struct PartnerMenuFull {
     /* 0x2F8 */ u8 unk2F8[0x1C];
     /* 0x314 */ u8 unk314[8];
     /* 0x31C */ u32 scriptTable;
-    /* 0x320 */ u32 script;
+    /* 0x320 */ ScriptProcess *script;
     /* 0x324 */ u8 unk324[4];
     /* 0x328 */ s32 shownDevil;
     /* 0x32C */ s32 cursor;
@@ -36,7 +37,6 @@ s32 FUN_004be1c8(PartnerMenuFull *menu);
 s32 FUN_004bea0c(PartnerMenuFull *menu);
 s32 FUN_004bf174(PartnerMenuFull *menu);
 void gameGlobalsSetMenuOpenFlag(s32 owner);
-s32 scrRunOpcodesStub(u32 script);
 void messageBannerRestartOrClear(void);
 s32 messageMainGetValue(void);
 void sysPlaySe(s32 id);
@@ -47,8 +47,7 @@ s32 padQueryLogicalKey(s32 a, s32 b);
 void dialogClose(s32 flag);
 void eventQueueAddUniqueIfValid(s32 event);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
-void scrScriptProcessStartEntry(u32 script, s32 entry);
-void scrScriptProcessDestroy(u32 script);
+void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void FUN_002c8538(s32 flag);
 void FUN_0022e774(void);
 

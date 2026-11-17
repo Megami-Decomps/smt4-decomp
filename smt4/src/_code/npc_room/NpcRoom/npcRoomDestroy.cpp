@@ -1,4 +1,5 @@
 #include "npc_room/NpcRoom.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ void buttonHelpRelease(void);
 void uiFadeRelease(void);
 void soundChannelStopAll(s32 arg);
 void fileSlotFree(s32 arg);
-void scrScriptProcessDestroy(void *process);
 void asdTMTexTableReleaseNode(s32 arg, u32 value);
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);

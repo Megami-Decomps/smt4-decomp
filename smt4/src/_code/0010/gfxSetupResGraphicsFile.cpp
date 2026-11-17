@@ -1,4 +1,4 @@
-#include "shard/Sys464af0.h"
+#include "gfx/GfxSettings.h"
 
 extern "C" {
 
@@ -7,8 +7,8 @@ s32 nw_gfx_res_ResGraphicsFile_Setup(u32 *file, u32 allocator, u32 data);
 
 void gfxSetupResGraphicsFile(u32 data)
 {
-    g_gfxSettings.unk7C = data;
-    nw_gfx_res_ResGraphicsFile_Setup(&g_gfxSettings.unk7C, asdMemoryGetDefaultAllocator(), g_gfxSettings.unk7C);
+    g_gfxSettings.resGraphicsFile = data;
+    nw_gfx_res_ResGraphicsFile_Setup(&g_gfxSettings.resGraphicsFile, asdMemoryGetDefaultAllocator(), g_gfxSettings.resGraphicsFile);
 }
 
 } /* extern "C" */

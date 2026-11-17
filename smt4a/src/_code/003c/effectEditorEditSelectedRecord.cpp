@@ -11,8 +11,8 @@ extern IndexedRecordSelection DAT_0059e9a8;
 u32 effectEditorEditSelectedRecord(void)
 {
     IndexedRecordBuffer *record = linkedFindItemByIndex(
-        static_cast<IndexedRecordList *>(g_effectEditor.selection.list),
-        DAT_0059e9a8.index + g_effectEditor.selection.index);
+        static_cast<IndexedRecordList *>(g_effectEditor.list),
+        DAT_0059e9a8.index + g_effectEditor.index);
     __aeabi_memcpy4(&g_effectEditorSettings, record, sizeof(IndexedRecordBuffer));
     u32 result = effectEditorEditPositionVector(&g_effectEditorSettings.snapshot, 1);
     __aeabi_memcpy4(record, &g_effectEditorSettings, sizeof(IndexedRecordBuffer));

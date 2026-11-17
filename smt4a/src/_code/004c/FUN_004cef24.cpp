@@ -4,11 +4,7 @@
 #include "event/eventCommand.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
-
-struct GameOverScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 enabled;
-};
+#include "script/scrScriptProcess.h"
 
 struct GameOverTransition {
     /* 0x00 */ u8 unk00[8];
@@ -18,7 +14,7 @@ struct GameOverTransition {
     /* 0x10 */ u32 state;
     /* 0x14 */ u8 unk14[4];
     /* 0x18 */ void* scriptData;
-    /* 0x1C */ GameOverScriptProcess* process;
+    /* 0x1C */ ScriptProcess* process;
     /* 0x20 */ void* messageData;
 };
 
@@ -26,11 +22,8 @@ extern "C" {
 void asdTMTexTableLoadTmx(u32 table, u32 flags);
 void asdTMTexTableReleaseNode(u32 table, u32 index);
 s32 campButtonHelpIsActive(void);
-GameOverScriptProcess* scrScriptProcessCreate(void* script, void* messages);
-void scrScriptProcessStartEntry(GameOverScriptProcess* process, u32 entry);
-s32 scrRunOpcodesStub(GameOverScriptProcess* process);
+void scrScriptProcessStartEntry(ScriptProcess* process, u32 entry);
 s32 fountainCrazingSumahoUpdate(GameOverTransition* transition);
-void scrScriptProcessDestroy(GameOverScriptProcess* process);
 void asdMemFree(void* data);
 extern const char DAT_00530edc[];
 extern const char DAT_00530ebc[];
@@ -60,7 +53,7 @@ extern "C" u32 FUN_004cef24(GameOverTransition* transition)
                 }
             }
             transition->process = scrScriptProcessCreate(transition->scriptData, transition->messageData);
-            transition->process->enabled = 1;
+            transition->process->mode = 1;
             scrScriptProcessStartEntry(transition->process, 0);
             if (transition->mode != 2) {
                 transition->state = 4;

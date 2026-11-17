@@ -2,11 +2,7 @@
 #define MAP_PICK_OBJECT_RESOURCES_H
 #include "common.h"
 #include <stddef.h>
-
-struct PickObjectResource {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 state;
-};
+#include "script/ScriptVm.h"
 
 /* Resource-loading prefix of the pick-object controller. */
 struct PickObjectResources {
@@ -18,14 +14,14 @@ struct PickObjectResources {
     /* 0x01B */ u8 unk01B[0x269];
     /* 0x284 */ void *primaryData;
     /* 0x288 */ void *primaryInfo;
-    /* 0x28C */ PickObjectResource *primary;
+    /* 0x28C */ ScriptProcess *primary;
     /* 0x290 */ void *secondaryData;
     /* 0x294 */ void *secondaryInfo;
-    /* 0x298 */ PickObjectResource *secondary;
+    /* 0x298 */ ScriptProcess *secondary;
 };
 typedef char PickObjectResourceOffsets[
-    offsetof(PickObjectResource, state) == 0x108 &&
-    sizeof(PickObjectResource) == 0x10C ? 1 : -1];
+    offsetof(PickObjectResources, primary) == 0x28C &&
+    offsetof(PickObjectResources, secondary) == 0x298 ? 1 : -1];
 typedef char PickObjectResourcesOffsets[
     offsetof(PickObjectResources, state) == 4 &&
     offsetof(PickObjectResources, phase) == 8 &&

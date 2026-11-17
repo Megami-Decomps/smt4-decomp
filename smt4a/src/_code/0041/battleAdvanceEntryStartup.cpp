@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
 #include <stddef.h>
+#include "battle/BtlUiGlobal.h"
 
 namespace {
 struct EntryStartupStep {
@@ -16,7 +17,6 @@ typedef char EntryStartupStepOffsets[offsetof(EntryStartupStep, state) == 8 &&
 }
 extern "C" {
 extern BtlAuxA *g_btlAux;
-extern BtlUiA *g_btlUiBlock;
 extern StageHeightRecord DAT_00529780[];
 s32 pairedAvailabilityGetState(u32 slot);
 s32 FUN_00163e84(u32 slot);

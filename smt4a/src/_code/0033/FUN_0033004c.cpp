@@ -1,16 +1,7 @@
 /* NON_MATCHING: control flow and the materialised timeout bool match; retail keeps the drained flag in r5 and the wait result in r6 (build swaps them), predicates the zero timeout (movne r2/r3) above the thread test and runs the drain loop unrotated with produced loaded once (build: ldrd and a rotated loop). */
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
-
-/* The CEC worker process (the part this poll touches). */
-struct CecProcess {
-    /* 0x000 */ u8 unk000[0x90];
-    /* 0x090 */ s32 produced;
-    /* 0x094 */ s32 consumed;
-    /* 0x098 */ u8 unk098[0xc90];
-    /* 0xd28 */ u8 lock[0xc];
-    /* 0xd34 */ u32 thread;
-};
+#include "cec/CecProcessGlobal.h"
 
 /* True when the result is anything but a timeout (description 0x3fe). */
 static __inline bool notTimeout(s32 result)
@@ -23,7 +14,6 @@ static __inline bool notTimeout(s32 result)
 
 extern "C" {
 
-extern CecProcess *g_cecProcess;
 
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 bool nn_os_CriticalSection_TryEnter(void *section);
@@ -35,11 +25,11 @@ void nn_os_CriticalSection_Leave(void *section);
 u32 FUN_0033004c(void)
 {
     u32 drained = 0;
-    CecProcess *process = g_cecProcess;
+    CecProcessA *process = g_cecProcess;
     if (process != NULL) {
         bool timedOut = false;
-        if (process->thread != 0) {
-            s32 result = svcWaitSynchronization1(process->thread, 0);
+        if (process->thread.handle != 0) {
+            s32 result = svcWaitSynchronization1(process->thread.handle, 0);
             bool failed = nnResultIsFailure(result);
             if (failed) {
                 resultHandleFailure(result, failed);
@@ -48,15 +38,15 @@ u32 FUN_0033004c(void)
         }
         if (timedOut) {
             if (nn_os_CriticalSection_TryEnter(process->lock)) {
-                if (process->produced != process->consumed) {
-                    process->consumed++;
+                if (process->producedBatches != process->consumedBatches) {
+                    process->consumedBatches++;
                 }
                 nn_os_CriticalSection_Leave(process->lock);
             }
         } else {
             drained = 1;
-            while (process->consumed != process->produced) {
-                process->consumed++;
+            while (process->consumedBatches != process->producedBatches) {
+                process->consumedBatches++;
             }
         }
     }

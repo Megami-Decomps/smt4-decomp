@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of a battle action's reflect-skill step machine (draft: the returned value of FUN_004f6d34 and the two effect names restored from the code pool); armcc here shares the property comparison and the state-store tail differently. */
 #include "common.h"
 #include "battle/btlAction.h"
+#include "battle/BtlUiGlobal.h"
 
 /* A script unit slot (0x1254 bytes each); byte +9 is its phase. */
 struct ScriptUnit {
@@ -33,7 +34,6 @@ extern "C" {
 extern ScriptUnit g_btlScriptUnit[];
 extern u64 DAT_00571168;
 extern s32 g_btlAux;
-extern u32 g_btlUiBlock;
 extern u32 g_btlActionReflect;
 
 s32 btlScriptUnitHasFlags(ActionOwner *owner);
@@ -42,7 +42,7 @@ s32 btlGetPropertyMaximum(u32 property);
 s32 FUN_004f6d34(s32 aux);
 s32 chainCountIdUnflagged(u32 chain, ReflectAction *action);
 void FUN_004fdcd8(s32 a, ReflectAction *action, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
-void FUN_004aa3d4(u32 block, s32 a, s32 b, u32 effect, u32 skill, s32 c);
+void FUN_004aa3d4(BtlUiA *block, s32 a, s32 b, u32 effect, u32 skill, s32 c);
 void btlReflectQueueValueAction(s32 a, ReflectAction *action, s32 b, u8 *attacker, s32 c);
 void FUN_004fbeac(s32 a, ReflectAction *action, s32 b, s32 c, s32 d);
 void FUN_004f7b84(s32 aux, const char *name);

@@ -1,6 +1,6 @@
 /* NON_MATCHING: r4/r5/r6 assignments for owner, row and record are permuted; qsort count/stride moves are also swapped. */
 #include "shard/W5_W5Match6_CallbackController.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/HowToTable.h"
 #include <stdlib.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
@@ -21,11 +21,11 @@ void FUN_0049d770(CallbackControllerWork *work)
         textureGetIndexedResource(51) == NULL || !asdTMTexTableNodeIsLoaded(51, 0))
         return;
     void *table = dataTableGet(70, 0);
-    work->catalog.entries = static_cast<CallbackCatalogRecord *>(dataTableGetEntries(table));
+    work->catalog.entries = howToRecords(table);
     work->catalog.count = dataTableGetCount(table);
     s32 available = 0;
     for (u32 index = 0; index < work->catalog.count; ++index) {
-        CallbackCatalogRecord *record = &work->catalog.entries[index];
+        HowToRecord *record = &work->catalog.entries[index];
         if (record != NULL && record->id != 0) {
             if (!flagsAtGetBit0(record->id)) {
                 if (!gameFlagIsSet(record->unlockFlag))

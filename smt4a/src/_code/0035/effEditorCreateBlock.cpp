@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
 
@@ -10,15 +11,8 @@ typedef struct PartsData {
     /* 0x10 */ u32 param;
 } PartsData;
 
-typedef struct EffectEditor {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ u32 block;
-} EffectEditor;
-
-extern EffectEditor g_effectEditor;
-
-int effPartSetData(u32 block, void *parts, u32 param, s32 count);
-u32 effBlockCreateFromBlock(u32 block);
+int effPartSetData(EffectSelectionBlock *block, void *parts, u32 param, s32 count);
+u32 effBlockCreateFromBlock(EffectSelectionBlock *block);
 int effectEditorApplyHandlerState(void);
 
 /* Applies the parts data to the editor's block, then creates the effect block from it and returns that call's result. */

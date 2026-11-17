@@ -6,16 +6,12 @@
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-struct GaugePosition {
-    u8 unk00[0x20];
-    f32 speed;
-};
 struct GaugePanelView {
     u8 unk0000[0x598];
-    GaugePosition firstPosition;
-    u8 unk05BC[0x12B8 - 0x5BC];
-    GaugePosition position;
-    u8 unk12DC[0x3890 - 0x12DC];
+    UiSpriteState firstPosition;
+    u8 unk0624[0x12B8 - 0x624];
+    UiSpriteState position;
+    u8 unk1344[0x3890 - 0x1344];
     s32 slot;
     u8 unk3894[0x25];
     s8 hidden;
@@ -46,13 +42,13 @@ extern "C" void FUN_0034e784(u8 *panel, s32 rows)
         shrink = 40;
     if (view->slot > 3)
         return;
-    s32 x = vec2GetXInt((UiSpriteState *)(&view->position));
-    s32 y = vec2GetYInt((UiSpriteState *)(&view->position));
-    f32 scale = vec2GetSpeed((UiSpriteState *)(&view->position));
+    s32 x = vec2GetXInt((&view->position));
+    s32 y = vec2GetYInt((&view->position));
+    f32 scale = vec2GetSpeed((&view->position));
     GaugePanelView::Offset offset = view->offset;
     x += offset.x;
     y += offset.y;
-    efctSetSpeed(vec2GetSpeed((UiSpriteState *)(&view->firstPosition)) * scale);
+    efctSetSpeed(vec2GetSpeed((&view->firstPosition)) * scale);
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(13, view->slot + 0x52);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);

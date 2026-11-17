@@ -1,13 +1,13 @@
-#include "gamedata/X14_Table21.h"
+#include "gamedata/CampComTable.h"
 #include "code/Code0029_Smt4.h"
 
 extern "C" {
 
-/* Returns the table 21 record with the given id, or NULL. */
-Table21Entry *FUN_00292844(u32 id)
+/* Returns the camp command row (CampComTable.tbb) with the given id, or NULL. */
+CampComRecord *FUN_00292844(u32 id)
 {
     void *section = dataTableGet(0x15, 0);
-    Table21Entry *entries = (Table21Entry *)dataTableGetEntries(section);
+    CampComRecord *entries = campComRecords(section);
     u32 count = dataTableGetCount(section);
     s32 i;
 

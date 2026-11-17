@@ -1,18 +1,14 @@
 /* NON_MATCHING: register assignment and block layout now match retail; the constant 2 is kept in r6 instead of reloaded, the second script's pointer/size are loaded with ldm, and the step/frame strd is scheduled after the flag clear. */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
-typedef struct SceneScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ s32 mode;
-} SceneScriptProcess;
-
 typedef struct SceneScriptFile {
     /* 0x00 */ void *data;
-    /* 0x04 */ u32 size;
-    /* 0x08 */ SceneScriptProcess *process;
+    /* 0x04 */ void *messages;
+    /* 0x08 */ ScriptProcess *process;
 } SceneScriptFile;
 
 typedef struct SceneSetupBlock {
@@ -35,7 +31,6 @@ typedef struct SceneSetupWork {
 
 s32 sceneTexturesAreLoaded(void);
 s32 isFlag1F0Set(void *flags);
-SceneScriptProcess *scrScriptProcessCreate(void *data, u32 size);
 void __ARM_common_memcpy4_6(void *position, void *rotation);
 void mikadoLoadSceneResources(SceneSetupWork *work);
 void FUN_004b7d88(SceneSetupWork *work);
@@ -56,15 +51,15 @@ void FUN_004b91fc(SceneSetupWork *work)
         return;
     }
     SceneSetupBlock *block = &work->block;
-    if (block->scripts[0].data == NULL || block->scripts[0].size == 0) {
+    if (block->scripts[0].data == NULL || block->scripts[0].messages == NULL) {
         return;
     }
-    if (block->scripts[1].data == NULL || block->scripts[1].size == 0) {
+    if (block->scripts[1].data == NULL || block->scripts[1].messages == NULL) {
         return;
     }
-    block->scripts[0].process = scrScriptProcessCreate(block->scripts[0].data, block->scripts[0].size);
+    block->scripts[0].process = scrScriptProcessCreate(block->scripts[0].data, block->scripts[0].messages);
     block->scripts[0].process->mode = 2;
-    block->scripts[1].process = scrScriptProcessCreate(block->scripts[1].data, block->scripts[1].size);
+    block->scripts[1].process = scrScriptProcessCreate(block->scripts[1].data, block->scripts[1].messages);
     block->scripts[1].process->mode = 2;
     if (work->flags & 0x10) {
         sceneSetupPlace(work);

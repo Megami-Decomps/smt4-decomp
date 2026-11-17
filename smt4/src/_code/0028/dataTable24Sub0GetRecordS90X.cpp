@@ -1,22 +1,18 @@
-#include "common.h"
+#include "gamedata/SearchTable.h"
 
 extern "C" {
 
-extern u32 dataTableGetCount(u32 table);
-extern int dataTableGetEntries(void);
-extern u32 dataTableGet(u32 id, u32 index);
-
-/* First byte of record `index` (0x90-byte records) of data table 0x24/0, or 0xFFFFFFFF when out of range. */
+/* The option of unite menu entry `index` (SearchTable.tbb), or 0xFFFFFFFF when out of range. */
 u32 dataTable24Sub0GetRecordS90X(u32 index)
 {
-    u32 table = dataTableGet(0x24, 0);
-    int entries = dataTableGetEntries();
+    void *table = dataTableGet(0x24, 0);
+    SearchTableRecord *entries = searchTableRecords(table);
     u32 count = dataTableGetCount(table);
 
     if (index >= count) {
         count = 0xffffffff;
     } else {
-        count = *(u8 *)(entries + index * 0x90);
+        count = entries[index].option;
     }
     return count;
 }

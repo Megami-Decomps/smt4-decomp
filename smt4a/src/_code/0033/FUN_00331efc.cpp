@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331efc` (_code @ 0x331efc, 0x868 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -14,7 +15,6 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002c0b98. */
 /* Supplied declaration required: mapCollisionQueueQuad. */
 
@@ -31,7 +31,7 @@ void FUN_00331efc(void)
   int temp_v5;
   unsigned int in_fpscr;
   
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe04),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe05),(unsigned char)(in_fpscr >> 0x16) & 3);
   mapCollisionQueueQuad(0,0);

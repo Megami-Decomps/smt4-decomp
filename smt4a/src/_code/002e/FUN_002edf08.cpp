@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002edf08` (_code @ 0x2edf08, 0x55c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -30,7 +31,6 @@ extern unsigned char DAT_0060ff93; /* 0x60ff93 */
 extern int DAT_0060ff94; /* 0x60ff94 */
 
 /* Supplied declaration required: randRange. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002296b0. */
 /* Supplied declaration required: FUN_00332764. */
 
@@ -54,7 +54,7 @@ void FUN_002edf08(void)
   unsigned char temp_v12;
   unsigned char temp_v13;
   
-  temp_v4 = gameFlagsGetBlock();
+  temp_v4 = (int)gameFlagsGetBlock();
   temp_v3 = randRange(4);
   temp_v11 = 0;
   temp_v2 = 0;
@@ -83,7 +83,7 @@ LAB_002edf80:
       temp_v8 = (int)*(char *)(temp_v4 + 0xe06);
       temp_v0 = (&DAT_0060ff90)[temp_v7];
       temp_v9 = (int)*(char *)(temp_v4 + 0xe07);
-      temp_v5 = gameFlagsGetBlock();
+      temp_v5 = (int)gameFlagsGetBlock();
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x02') {
           if (temp_v0 != '\x03') {
@@ -147,7 +147,7 @@ LAB_002edf80:
       temp_v10 = (int)*(char *)(temp_v4 + 0xe06);
       temp_v0 = (&DAT_0060ff90)[temp_v5];
       temp_v8 = (int)*(char *)(temp_v4 + 0xe07);
-      temp_v7 = gameFlagsGetBlock();
+      temp_v7 = (int)gameFlagsGetBlock();
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x02') {
           if (temp_v0 != '\x03') {
@@ -191,7 +191,7 @@ LAB_002ee194:
           temp_v1 = *(char *)(temp_v4 + 0xe07);
           temp_v8 = (int)temp_v1;
           temp_v3 = (&DAT_0060ff90)[temp_v5];
-          temp_v7 = gameFlagsGetBlock();
+          temp_v7 = (int)gameFlagsGetBlock();
           (&g_mapRndMaze)[DAT_0060ff8c * 2] = temp_v0;
           (&DAT_0060fc09)[DAT_0060ff8c * 2] = temp_v1;
           DAT_0060ff8c = DAT_0060ff8c + 1;
@@ -280,7 +280,7 @@ LAB_002ee194:
         FUN_00332764();
         return;
       }
-      temp_v5 = gameFlagsGetBlock();
+      temp_v5 = (int)gameFlagsGetBlock();
       temp_v7 = randRange((DAT_0060ff8c - 1U) & 0xffff);
       temp_v8 = 0;
       temp_v9 = DAT_0060ff8c - 1;

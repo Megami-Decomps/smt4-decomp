@@ -1,21 +1,17 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BtlGlobals.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
-
-typedef struct ScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 unk108;
-} ScriptProcess;
 
 typedef struct TalkEvent {
     /* 0x00 */ u32 state;
     /* 0x04 */ u8 unk04[8];
     /* 0x0C */ s32 running;
-    /* 0x10 */ u32 owner;
+    /* 0x10 */ void *owner;
     /* 0x14 */ ScriptProcess *process;
-    /* 0x18 */ u32 script;
+    /* 0x18 */ void *script;
 } TalkEvent;
 
 extern void scriptProcessSetMode(ScriptProcess *process, s32 mode);
@@ -27,7 +23,6 @@ extern void holderStopJob2(u32 state);
 extern void objectJobStop(u32 state);
 extern void FUN_00290ba4(u32 state);
 extern void eventCommandClearPending(void);
-extern ScriptProcess *scrScriptProcessCreate(u32 owner, u32 script);
 extern void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 
 /* Starts the talk event's script process once both pairedAvailabilityGetState checks report 3, after shutting

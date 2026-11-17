@@ -24,23 +24,23 @@ void FUN_003241c4(EffectTextRequest *request, void *body);
  * releasing it once it reports state 1. */
 void FUN_002430c8(u32 unused, u32 size, EffectTextResult *result)
 {
-    if (g_effectEditor.textRequest.owner != NULL) {
-        FUN_002f82ac(g_effectEditor.textRequest.request);
-        result->state = g_effectEditor.textRequest.request->state;
-        result->label = formattedTextCopyLabel(g_effectEditor.textRequest.request, result);
-        result->extra = FUN_00318cac(g_effectEditor.textRequest.request);
-        FUN_003241c4(g_effectEditor.textRequest.request, result->body);
+    if (g_effectEditor.nodeList != NULL) {
+        FUN_002f82ac(g_effectEditor.request);
+        result->state = g_effectEditor.request->state;
+        result->label = formattedTextCopyLabel(g_effectEditor.request, result);
+        result->extra = FUN_00318cac(g_effectEditor.request);
+        FUN_003241c4(g_effectEditor.request, result->body);
         if (result->state == 1) {
-            effectEditorObjectDestroy(g_effectEditor.textRequest.request);
-            g_effectEditor.textRequest.request = NULL;
-            nodeListOwnerFree(g_effectEditor.textRequest.owner);
-            g_effectEditor.textRequest.owner = NULL;
+            effectEditorObjectDestroy(g_effectEditor.request);
+            g_effectEditor.request = NULL;
+            nodeListOwnerFree(g_effectEditor.nodeList);
+            g_effectEditor.nodeList = NULL;
         }
         return;
     }
-    g_effectEditor.textRequest.owner = NULL;
+    g_effectEditor.nodeList = NULL;
     EffectTextRequest *request = effMenuCreate(NULL, size);
-    g_effectEditor.textRequest.request = request;
+    g_effectEditor.request = request;
     request->type = 0xba;
     request->size = 0x1c;
     result->state = 0;

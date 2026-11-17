@@ -1,7 +1,7 @@
 /* NON_MATCHING: ratio VFP division destination, selected table-row/count register allocation and threshold load order differ. */
 #include "common.h"
 #include "game/GameStateA.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/PartnerInfoTable.h"
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
 #include "map/PopupStateA.h"
@@ -12,15 +12,6 @@ struct SaveSlot {
     u16 id;         // 0x12c
 };
 
-// Row of data table 0x43: a message shown when the party's HP/MP ratio crosses `threshold`.
-struct RatioMessage {
-    u32 id;             // 0x00: slot id the row applies to
-    u32 kind;           // 0x04: 8 = at most, 9 = at least
-    s16 requiredFlag;   // 0x08
-    s16 forbiddenFlag;  // 0x0a
-    s16 threshold;      // 0x0c: percent
-    u8 unk0e[0x12];
-};
 
 extern "C" {
 
@@ -67,15 +58,16 @@ void FUN_00234880(void)
     dataTableGetEntries(table);
     s32 count = dataTableGetCount(table);
     for (u32 i = 0; (s32)i < count; i++) {
+        /* the loop reuses the count's table handle; partnerInfoRecordAt allocates registers differently */
         table = dataTableGet(0x43, 0);
-        RatioMessage* row = static_cast<RatioMessage*>(dataTableGetEntries(table));
+        PartnerInfoRecord *row = static_cast<PartnerInfoRecord *>(dataTableGetEntries(table));
         u32 rowCount = dataTableGetCount(table);
         if (i >= rowCount) row = NULL; else row += i;
         if (row->kind != 8 && row->kind != 9) continue;
-        if (row->id != slot->id) continue;
+        if (row->partnerId != slot->id) continue;
         if (row->requiredFlag != 0 && !gameFlagIsSet(row->requiredFlag)) continue;
-        if (row->forbiddenFlag != 0 && gameFlagIsSet(row->forbiddenFlag)) continue;
-        f32 threshold = (f32)row->threshold;
+        if (row->excludedFlag != 0 && gameFlagIsSet(row->excludedFlag)) continue;
+        f32 threshold = (f32)row->argument;
         if (row->kind == 8) {
             if (threshold <= percent) {
                 g_popupState->state = 5;

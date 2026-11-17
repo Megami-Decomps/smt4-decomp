@@ -1,12 +1,11 @@
-#include "map/mapGimic.h"
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
 
-extern MapGimic *g_mapGimic;
 
 void FUN_0031279c(void)
 {
-    g_mapGimic->unk74 = 1;
+    g_mapGimic->scriptFlags[2] = 1;
 }
 
 } /* extern "C" */

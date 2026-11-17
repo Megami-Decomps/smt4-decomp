@@ -1,10 +1,10 @@
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 // Normalize related map identifiers before changing their shared persistent flag.
 void mapFlagSetNormalizedId(s32 id, s32 enabled)
 {
-    FlagWorkBanks *work = gameFlagsGetBlock();
+    MapSaveBlockA *work = gameFlagsGetBlock();
     if (id == 0x10 || id == 0x11) id = 8;
     else if (id == 0x12 || id == 0x13) id = 12;
     else if (id == 0x2f || id == 0x33) id = 0x2b;
@@ -18,11 +18,11 @@ void mapFlagSetNormalizedId(s32 id, s32 enabled)
     s32 word = id / 32;
     s32 bit = id % 32;
     if (enabled != 0) {
-        if ((work->mappedFlags.words[word] & (1u << bit)) == 0) {
-            work->mappedFlags.words[word] |= 1u << bit;
+        if ((work->testBits[word] & (1u << bit)) == 0) {
+            work->testBits[word] |= 1u << bit;
         }
     } else {
-        work->mappedFlags.words[word] &= ~(1u << bit);
+        work->testBits[word] &= ~(1u << bit);
     }
 }
 }

@@ -21,11 +21,11 @@ void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 cont
     ButtonHelpWork *work = g_buttonHelp.work;
     const NkmBaseRecord *devil = nkmBaseGetRecord(devilId);
     if (devil == NULL) {
-        work->unk4CB = 0;
+        work->textVisible = 0;
         return;
     }
-    work->unk55C = 1;
-    work->unk4CB = 1;
+    work->text.useDirectoryText = 1;
+    work->textVisible = 1;
     char buffer[128];
     u32 minimumHits = (devil->attackProperties >> 5) & 7;
     if (minimumHits == ((devil->attackProperties >> 8) & 7)) {
@@ -61,7 +61,7 @@ void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 cont
     textEncodeFontSlot(0x29, reinterpret_cast<const u8 *>(buffer));
     if (directory == NULL)
         directory = reinterpret_cast<RelativeDirectory *>(g_buttonHelp.mbm);
-    asdTextDrawDirectoryEntry(reinterpret_cast<AsdText *>(work->unk558), 3, -1, 0,
+    asdTextDrawDirectoryEntry(reinterpret_cast<AsdText *>(work->text.directoryText), 3, -1, 0,
         3, directory, entry);
 }
 }

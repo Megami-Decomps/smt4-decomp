@@ -3,11 +3,11 @@
 #include "gamedata/NkmEnemyLookup.h"
 #include "battle/btlAIScript.h"
 #include "addon/AocSystemA.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 void asdMemFree(void *block);
-void scrScriptProcessDestroy(void *process);
 void sysMemClear(void *dst, u32 size);
 void textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00240c34(const char *path);

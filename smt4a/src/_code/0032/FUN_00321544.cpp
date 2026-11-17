@@ -3,7 +3,6 @@
 #include "battle/Talk/btlTalkBustUp.h"
 
 extern "C" {
-extern BtlTalkBustUp *g_btlTalkBustUp;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(s32 enabled, s32 mode);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
@@ -22,7 +21,7 @@ u32 FUN_00321544()
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    if (portrait->unk2F4 != 0 && portrait->state == 2) {
+    if (portrait->textureReady != 0 && portrait->state == 2) {
         s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         if (aocJobIsValid() != 0 || btlMainIsSecondJobValid() != 0) {
             parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));

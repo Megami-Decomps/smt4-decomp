@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelContent.h"
 
 extern "C" {
 
@@ -9,7 +10,7 @@ typedef struct Scene {
     /* 0x16004 */ u32 active;
     /* 0x16008 */ u32 unk16008;
     /* 0x1600C */ u8 unk1600c[0x1C];
-    /* 0x16028 */ void *secondList;
+    /* 0x16028 */ MoriModelContent *secondList;
 } Scene;
 
 s32 statusAcquireSharedResources(void);
@@ -22,15 +23,13 @@ s32 FUN_00372100(u32 data, s32 arg);
 s32 FUN_00345718(void);
 s32 placeWinSetValue(s32 arg);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
-void *modelListInit(void *memory);
-void resourceOwnerLoadFileSync(void *list, const char *name);
 
 /* Resets the scene's player state and creates its second model list on first use. */
 void FUN_00499d14(Scene *scene)
 {
     u32 value;
     u32 player;
-    void *list;
+    MoriModelContent *list;
 
     statusAcquireSharedResources();
     if (scene->mode == 1) {
@@ -48,7 +47,7 @@ void FUN_00499d14(Scene *scene)
     FUN_00345718();
     placeWinSetValue(0);
     if (scene->secondList == NULL) {
-        list = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\shop\\shopCtrl.cpp", 1997);
+        list = static_cast<MoriModelContent *>(asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\shop\\shopCtrl.cpp", 1997));
         if (list != NULL) {
             list = modelListInit(list);
         }

@@ -1,8 +1,7 @@
 #include "addon/aocMain.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/EncountData.h"
 #include "addon/AocSystem.h"
 
-struct Table02Sub2Entry;
 struct AocSpriteTemplateKeyView {
     u8 unk00[6];
     u16 key;
@@ -11,7 +10,7 @@ struct AocSpriteTemplateKeyView {
 extern "C" {
 void *dataTableFileGetTable(void *file, u32 section);
 
-Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *system, u32 key)
+EncountGroupRecord *aocFindSpriteTemplateByKey(AocSystem *system, u32 key)
 {
     for (s32 package = 0; package < system->packageCount; ++package) {
         AocPackage *entry = &system->packages[package];
@@ -28,7 +27,7 @@ Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *system, u32 key)
                 s32 count = (s32)dataTableGetCount(section);
                 for (s32 index = 0; index < count; ++index) {
                     if (records[index].key == key) {
-                        return (Table02Sub2Entry *)&records[index];
+                        return (EncountGroupRecord *)&records[index];
                     }
                 }
             }

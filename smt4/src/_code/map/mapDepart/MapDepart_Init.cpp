@@ -1,12 +1,12 @@
+#include "gamedata/MapSaveBlock.h"
 #include "map/mapDepart.h"
-#include "shard/SaveWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "map/MapSceneAccess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "game/GameState.h"
 
-// The allocated departure work extends the public prefix.  SaveWork's word at
+// The allocated departure work extends the public prefix.  MapSaveBlock's word at
 // 0x24 lies inside two-byte-aligned padding, so neither shared layout is enlarged.
 struct MapDepartureInitView {
     MapDepart prefix;
@@ -16,11 +16,6 @@ struct MapDepartureInitView {
     u8 unk18[0x30];
     u32 destinationState[4];
     u8 unk58[0x28];
-};
-
-struct MapDepartureLocationView {
-    u8 prefix[0x24];
-    s32 map;
 };
 typedef char MapDepartureInitLayout[sizeof(MapDepartureInitView) == 0x80 &&
     offsetof(MapDepartureInitView, mode) == 0xC && offsetof(MapDepartureInitView, destinationState) == 0x48 ? 1 : -1];
@@ -52,13 +47,13 @@ void MapDepart_Init(const MapDepartureRequest *request, u32 requestSize)
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapDepart.cpp", 173);
     g_mapDepart = static_cast<MapDepart *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapDepartureInitView), 1));
     MapDepartureInitView *work = reinterpret_cast<MapDepartureInitView *>(g_mapDepart);
-    MapDepartureLocationView *location = (MapDepartureLocationView *)gameGetMapBlock();
+    MapSaveBlock *location = gameGetMapBlock();
     if (request != NULL) {
         if (request->mode == 0) {
             MapDepart_InitState(&work->prefix, 1);
             work->mode = 0;
             work->map = request->map;
-            location->map = request->map;
+            location->departureMapId = request->map;
             mapDepartCopyDestination(work, request);
         } else if (request->mode == 1) {
             MapDepart_InitState(&work->prefix, 0);

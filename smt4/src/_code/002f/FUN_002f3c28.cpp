@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3c28` (_code @ 0x2f3c28, 0x3dc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
 
@@ -15,11 +17,9 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int g_mapEnemy; /* 0x447600 */
 
 /* Supplied declaration required: naviSetActiveMapSlot. */
 /* Supplied declaration required: contentEntryGetE. */
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: naviSetMapSlotDefault. */
 
 
@@ -39,8 +39,8 @@ void FUN_002f3c28(void)
   int temp_v9;
   unsigned char temp_v10;
   
-  temp_v1 = g_mapEnemy;
-  temp_v2 = gameGetMapBlock();
+  temp_v1 = ((int)g_mapEnemy);
+  temp_v2 = (int)gameGetMapBlock();
   temp_v7 = 0;
   do {
     temp_v8 = temp_v2 + temp_v7 * 0x14;

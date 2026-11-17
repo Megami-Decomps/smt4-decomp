@@ -3,6 +3,7 @@
 #include "script/scrScriptProcess.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -19,22 +20,20 @@ typedef struct BtlFlagWord {
 
 extern BtlFlagWord DAT_005715d0[5];
 extern const char DAT_0052801c[];
-extern u32 g_btlUiBlock;
 extern u32 g_btlAux;
 
 s32 dialogIsActive(void);
 void dialogClose(s32 arg);
-void btlUiPanelStart(u32 block);
+void btlUiPanelStart(BtlUiA *block);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void sysPlaySe(u32 id);
-s32 scrRunOpcodesStub(ScriptProcess *script);
 s32 gameFlagIsSet(u32 flag);
-void btlUiClearSelectionSlots(u32 block);
+void btlUiClearSelectionSlots(BtlUiA *block);
 void FUN_003ebc08(BtlMainStateA *state, s32 arg);
 
 void FUN_003756c8(s32 arg);
 void btlStageResetAndClearCameraFlag(u32 aux);
-void FUN_004ab734(u32 block);
+void FUN_004ab734(BtlUiA *block);
 
 /* Drives the continue prompt: loads and starts its script, waits for it to finish, then restores the battle flags. */
 u32 FUN_003e69ac(ContinueState *continueState)

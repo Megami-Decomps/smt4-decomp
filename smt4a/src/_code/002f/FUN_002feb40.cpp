@@ -47,9 +47,9 @@ u32 FUN_002feb40()
     g_effectEditor.label = NULL;
     if (text.result == 2)
         return 0x400000;
-    if (text.result == 1 && g_effectEditor.selection.block != NULL) {
+    if (text.result == 1 && g_effectEditor.block != NULL) {
         textFormatBuffer(text.message, "%s%s", directory, text.fullName);
-        effectEditorPublishDebugText(g_effectEditor.selection.block, text.message);
+        effectEditorPublishDebugText(g_effectEditor.block, text.message);
         status = 0x400002;
     }
     return status;

@@ -48,7 +48,7 @@ void FUN_0046868c(NpcDummyBindings *owner, u32, s32)
             if (actor >= 0 && actor < owner->count) {
                 NpcDummyControllerLink *link = owner->second[actor];
                 if (link != NULL) {
-                    MapVector world = link->controller->destination;
+                    MapVector world = link->controller->position;
                     world.x += (f32)marker.offsetX;
                     world.y += (f32)marker.offsetY;
                     f32 screen[3];

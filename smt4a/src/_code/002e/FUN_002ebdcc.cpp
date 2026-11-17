@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ebdcc` (_code @ 0x2ebdcc, 0x8a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 
@@ -63,7 +64,6 @@ typedef struct {
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int engineCleanupIsDone(void);
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: messageSetScriptDisplayMode. */
 extern int dataTableValueOrZero(unsigned int);
@@ -166,7 +166,7 @@ unsigned int FUN_002ebdcc(void)
         scrWorkSetValue(1,0);
         scrWorkSetValue(2,0);
         if (*(char *)(temp_v4 + 6) == '\0') {
-          temp_v2 = gameFlagsGetBlock();
+          temp_v2 = (int)gameFlagsGetBlock();
           gameFlagSlotSetEnableBit(temp_v1,0);
           *(unsigned short *)(temp_v2 + 0x1096) = 0;
           *(unsigned short *)(temp_v2 + 0x1094) = 0;

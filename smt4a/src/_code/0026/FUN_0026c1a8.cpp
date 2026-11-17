@@ -3,9 +3,9 @@
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(s32 kind, s32 value);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 sprite, f32 scale);

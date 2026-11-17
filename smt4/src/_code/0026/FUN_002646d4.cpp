@@ -15,7 +15,7 @@ void FUN_002646d4(s32 updateScene)
     for (index = 0; index < 128; ++index) {
         MapIfRecord &record = state->records[index];
         if (record.active != 0) {
-            record.transition.restart = 1;
+            record.restart = 1;
         }
     }
 
@@ -32,8 +32,8 @@ void FUN_002646d4(s32 updateScene)
 
     for (index = 0; index < 128; ++index) {
         MapIfRecord &record = state->records[index];
-        if (record.active != 0 && record.update.timer > 0) {
-            record.update.timer = 16;
+        if (record.active != 0 && record.timer > 0) {
+            record.timer = 16;
         }
     }
 }

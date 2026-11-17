@@ -3,14 +3,10 @@
 #include <stddef.h>
 #include "network/DataStore/DataStoreMain.h"
 #include "Model/MoriModelManager.h"
+#include "Model/MoriModelContent.h"
+#include "gfx/ControllerModel.h"
 
 #define SHOP_TAB_NONE 7
-
-/* The model object the shop screen keeps for its cursor. */
-struct ShopCursorObject {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ void *model;
-};
 
 /* The shop screen's work area (Apocalypse); only the fields this update reads. */
 struct ShopScreen {
@@ -27,7 +23,7 @@ struct ShopScreen {
     /* 0x003cc */ u8 sprites[0x774];
     /* 0x00b40 */ u32 tab;
     /* 0x00b44 */ u8 unk00b44[0x154e4];
-    /* 0x16028 */ ShopCursorObject *cursor;
+    /* 0x16028 */ MoriModelContent *cursor;
     /* 0x1602c */ s16 prevRecord;
     /* 0x1602e */ s16 nextRecord;
 };
@@ -52,9 +48,6 @@ extern "C" {
 s32 gameFlagIsSet(u32 id);
 s32 recordGetModeForId(s32 id);
 void gameSetStatusCameraHeightMode(s32 mode);
-s32 FUN_0040ab8c(ShopCursorObject *object);
-void moriModelContentLoadBody(ShopCursorObject *object, s32 mode);
-void controllerSetPositionXyz(void *model, f32 x, f32 y, f32 z);
 void FUN_004954e8(ShopScreen *shop);
 void messageChoiceShowCurrent(ShopScreen *shop);
 s32 inputIsQuestRepeatRight(void);
@@ -101,11 +94,11 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
             if (FUN_0040ab8c(shop->cursor) == 0) {
                 return;
             }
-            if (shop->cursor->model == NULL) {
-                void *model;
+            if (shop->cursor->body == NULL) {
+                Obj557b18 *model;
 
                 moriModelContentLoadBody(shop->cursor, 0);
-                model = shop->cursor->model;
+                model = shop->cursor->body;
                 handleRegistryRegisterObject(g_handleRegistry, model);
                 controllerSetPositionXyz(model, 0.0f, -32000.0f, 0.0f);
             }

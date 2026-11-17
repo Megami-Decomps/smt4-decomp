@@ -2,6 +2,8 @@
 #include "gamedata/NkmBaseRecord.h"
 #include "shard/W6_W6Match1_Table25Record.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "script/scrScriptProcess.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 /* A 0x8C-byte UI sprite. */
 struct UniteSprite {
@@ -32,9 +34,9 @@ struct UniteScreenWork {
     /* 0x088 */ u32 unk088;
     /* 0x08c */ u32 camera;
     /* 0x090 */ u8 unk090[0x20c];
-    /* 0x29c */ u32 scriptFile;
-    /* 0x2a0 */ u32 script;
-    /* 0x2a4 */ u32 messageFile;
+    /* 0x29c */ void *scriptFile;
+    /* 0x2a0 */ ScriptProcess *script;
+    /* 0x2a4 */ void *messageFile;
     /* 0x2a8 */ UiResourceParameters resources;
     /* 0x2c8 */ UniteSprite sprites[10];
     /* 0x840 */ UniteSprite panel;
@@ -88,9 +90,7 @@ void FUN_00258170(UniteRenderTarget *target);
 u32 asdMdlManagerCreateLoaded(const char *path, s32 heap);
 u32 asdCameraLoadFromFile(const char *path);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
-u32 asdLoadFileSyncDefault(const char *path);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-u32 scrScriptProcessCreate(u32 script, u32 messages);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
 void uiSpriteStateInitFromSource(UniteSprite *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);

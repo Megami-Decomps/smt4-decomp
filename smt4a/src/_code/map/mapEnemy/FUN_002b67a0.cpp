@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b67a0` (_code @ 0x2b67a0, 0x4d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
 
-int gameFlagsGetBlock(void);
 int asdMemoryAllocTraced(int, unsigned char *, int);
 int distSpatial(void);
 int FUN_002d7c88(unsigned int);
@@ -26,7 +27,6 @@ typedef struct {
 
 extern unsigned char LAB_002b6c7c; /* 0x2b6c7c */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -70,7 +70,7 @@ unsigned int FUN_002b67a0(int param_1)
   unsigned int temp_v9;
   short temp_v10;
   
-  temp_v0 = g_mapEnemy;
+  temp_v0 = ((int)g_mapEnemy);
   gameFlagsGetBlock();
   pcVar7 = (char *)0x0;
   *(unsigned char *)(temp_v0 + 0x3d88) = 0;

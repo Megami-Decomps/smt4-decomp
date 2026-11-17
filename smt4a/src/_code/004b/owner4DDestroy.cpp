@@ -1,5 +1,6 @@
 #include "shard/Shard004B.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -11,14 +12,13 @@ typedef struct Owner4D {
     /* 0x1118 */ u8 unk1118[0x20];
     /* 0x1138 */ u32 buf1138;
     /* 0x113C */ u32 buf113C;
-    /* 0x1140 */ u32 proc1140;
+    /* 0x1140 */ ScriptProcess *proc1140;
     /* 0x1144 */ u32 buf1144;
     /* 0x1148 */ u32 buf1148;
-    /* 0x114C */ u32 proc114C;
+    /* 0x114C */ ScriptProcess *proc114C;
 } Owner4D;
 
 extern void asdMemFree(u32 ptr);
-extern void scrScriptProcessDestroy(u32 process);
 extern void freeTexEntry1F(u8 *block);
 extern void dataTable33Unload(u8 *block);
 extern void texSetRelease(void);

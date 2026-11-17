@@ -3,6 +3,7 @@
 #include "mapnavi/naviMain.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "battle/BtlUiGlobal.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -76,11 +77,10 @@ struct BtlTargetInfo {
 
 extern "C" {
 extern BtlActionTable g_btlAction;
-extern u32 g_btlUiBlock;
 s32 btlFindSelectionIndexByLookupKey(BtlActingState *battle, s32 index);
 void btlEntryBuildSummary(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
-void FUN_004ab80c(u32 ui, u8 *confirmed, u64 *selected, u64 *extra);
-void btlUIClearWorkTables(u32 ui);
+void FUN_004ab80c(BtlUiA *ui, u8 *confirmed, u64 *selected, u64 *extra);
+void btlUIClearWorkTables(BtlUiA *ui);
 void FUN_004e980c(BtlActingTask *task, BtlMenuState *menu);
 void FUN_004eb838(BtlActingTask *task, BtlMenuState *menu);
 

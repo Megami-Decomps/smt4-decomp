@@ -1,13 +1,12 @@
-#include "shard/Shard0040.h"
-#include "code/Code0040_Shard0040.h"
+#include "Model/MoriModelContent.h"
 
 extern "C" {
 
-/* Stores `value` unless the object is locked (+4 non-zero). */
-void FUN_0040a908(LockedObj *obj, u32 value)
+/* Sets the content's request first setting unless the body already exists. */
+void FUN_0040a908(MoriModelContent *content, u32 value)
 {
-    if (obj->locked == 0) {
-        obj->unk18 = value;
+    if (content->body == NULL) {
+        content->requestFirst = value;
     }
 }
 

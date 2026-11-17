@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 
 #define MAP_ZONE_MAX 144
 #define MAP_ZONE_KIND_ANY_A 0
@@ -17,23 +17,15 @@ typedef struct MapZoneTable {
     /* 0x1200 */ s32 count;
 } MapZoneTable;
 
-/* The map work block as the zone lookup sees it: the last zone found at 0xD58. */
-typedef struct MapZoneWork {
-    /* 0x000 */ u8 unk000[0xD58];
-    /* 0xD58 */ s16 currentZone;
-} MapZoneWork;
-
 extern "C" {
 
 extern MapZoneTable DAT_004be698;
-
-MapZoneWork *gameGetMapBlock(void);
 
 /* Returns the value of the first zone of the given kind (0 or 99: any kind) whose box contains
  * (x, z) on the ground plane and remembers it; falls back to the last zone found. */
 u32 FUN_002e039c(s32 kind, f32 x, f32 z)
 {
-    MapZoneWork *work = gameGetMapBlock();
+    MapSaveBlock *work = gameGetMapBlock();
     MapZoneTable *table = &DAT_004be698;
     s32 i;
 

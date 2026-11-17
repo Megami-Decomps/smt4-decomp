@@ -1,12 +1,12 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern u32 g_btlUiBlock; /* 0x439ca8 */
 extern int FUN_00254f58(BtlMainState *state);
 extern int FUN_00338060(BtlMainState *state, int arg);
-extern int btlUiInvalidateIndexedEntries(u32 block);
+extern int btlUiInvalidateIndexedEntries(BtlUi *block);
 
 /* Copies the target cursor position to the current one and refreshes the battle UI. */
 u32 scrComm_BattleUI_SyncCursorPosition(void)

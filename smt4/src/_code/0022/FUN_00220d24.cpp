@@ -5,7 +5,7 @@ extern "C" {
 
 void FUN_00220d24(u8 value)
 {
-    g_buttonHelp.work->unk55C = value;
+    g_buttonHelp.work->text.useDirectoryText = value;
 }
 
 } /* extern "C" */

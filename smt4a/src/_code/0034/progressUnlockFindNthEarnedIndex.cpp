@@ -1,4 +1,4 @@
-#include "gamedata/DataTable.h"
+#include "gamedata/CampCecTable.h"
 #include "shard/Shard003D.h"
 #include "shard/ProgressUnlock.h"
 #include "Model/MoriModelManager.h"
@@ -17,14 +17,12 @@ static __inline bool unlockBitIsEarned(s32 index)
 /* Returns the table index of the nth earned progress unlock, or the table count if fewer are earned. */
 s32 progressUnlockFindNthEarnedIndex(s32 nth)
 {
-    s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
+    s32 count = campCecCount();
     s32 index = 0;
     s32 earned = 0;
 
     for (; index < count; index++) {
-        ProgressUnlockCondition *entries =
-            static_cast<ProgressUnlockCondition *>(dataTableGetEntries(dataTableGet(0x4a, 0)));
-        if (&entries[index] == NULL) {
+        if (&campCecRecords()[index] == NULL) {
             continue;
         }
         if (!unlockBitIsEarned(index)) {

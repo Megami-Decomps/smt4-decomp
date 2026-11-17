@@ -18,7 +18,7 @@ void FUN_00168980(u32 id)
     Entry *current;
     Entry *other;
 
-    current = dataTableGetEntry0e(g_buttonHelp.work->selectedId);
+    current = dataTableGetEntry0e(g_buttonHelp.work->preset);
     other = dataTableGetEntry0e(id);
     if (current == NULL || other == NULL) {
         return;

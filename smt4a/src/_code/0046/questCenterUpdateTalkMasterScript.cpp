@@ -28,7 +28,6 @@ void sysPlaySe(s32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **output, s32 flags);
 u32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
-s32 scrRunOpcodesStub(ScriptProcess *script);
 f32 candidateGetPreferredValue(QuestTalkActor *actor);
 void modelPlayClip(QuestTalkActor *actor, u32 animation, u32 mode, f32 frame, f32 blend);
 

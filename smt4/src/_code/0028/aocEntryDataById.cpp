@@ -1,13 +1,7 @@
 #include "common.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/NkmSortIndex.h"
 
 extern "C" {
-
-/* One 0x28-byte table entry: two 16-byte halves, selected by the caller. */
-typedef struct TableEntry {
-    /* 0x00 */ u8 half[2][0x10];
-    /* 0x20 */ u8 unk20[8];
-} TableEntry;
 
 typedef struct FoundEntry {
     /* 0x00 */ u8 unk00[2];
@@ -17,29 +11,27 @@ typedef struct FoundEntry {
 extern void *g_aocSystem;
 
 extern FoundEntry *entryListFindById(void *system, u32 id);
-extern void *dataTableGet(s32 table, s32 section);
-extern u32 dataTableGetCount(void *section);
 
-/* The data of the entry for `id`: the AOC system's own, else the table's entry (second half if
- * `second`; the table's first entry when `id` is out of range). */
+/* Race `id`'s name: the AOC system's own, else NKMSortIndex.tbb's (the alternate name if `second`;
+ * the table's first row when `id` is out of range). */
 void *aocEntryDataById(u32 id, s32 second)
 {
     FoundEntry *found = entryListFindById(g_aocSystem, id);
     void *section;
-    TableEntry *entries;
+    NkmRaceNameRecord *entries;
 
     if (found != NULL) {
         return found->data;
     }
     section = dataTableGet(1, 0);
-    entries = reinterpret_cast<TableEntry *>(dataTableGetEntries(section));
+    entries = nkmRaceNameRecords(section);
     if (dataTableGetCount(section) <= id) {
         return entries;
     }
     if (second != 0) {
-        return entries[id].half[1];
+        return entries[id].alternateName;
     }
-    return entries[id].half[0];
+    return entries[id].name;
 }
 
 } /* extern "C" */

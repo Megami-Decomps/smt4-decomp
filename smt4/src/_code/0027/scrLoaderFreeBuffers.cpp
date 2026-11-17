@@ -1,15 +1,15 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
-int scrScriptProcessDestroy(u32 process);
 int asdMemFree(u32 ptr);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0xC];
     /* 0x0C */ u32 bufferA;
     /* 0x10 */ u32 bufferB;
-    /* 0x14 */ u32 script;
+    /* 0x14 */ ScriptProcess *script;
 } Obj;
 
 void scrLoaderFreeBuffers(Obj *obj)

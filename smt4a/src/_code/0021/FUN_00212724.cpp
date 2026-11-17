@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "camp/CampStateA.h"
 
 extern "C" {
 
-void uiSpriteSetImageKeyframe(UiSpriteState *member, s32 a, s32 b);
 
 
 /* Unless the state is already 3 or 4, runs uiSpriteSetImageKeyframe(member, 0x18, 0) and sets the state to 3. */

@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "camp/CampStateA.h"
 
 extern "C" {
 
-void uiSpriteSetImageKeyframe(UiSpriteState *member, s32 a, s32 b);
 void messageDismissNumericBanner(s32 value);
 
 

@@ -22,7 +22,7 @@ struct GameStateCameraPoseA {
 };
 
 struct SceneModel;
-struct MapIfResource;
+class MoriModelContent;
 
 /* Only the fields read so far are named; unkXXX fields are accessed but not yet understood. */
 struct GameStateA {
@@ -295,7 +295,7 @@ struct GameStateA {
     /* 0x528 */ SceneModel *model528;
     /* 0x52C */ SceneModel *model52C;
     /* 0x530 */ SceneModel *model530;
-    /* 0x534 */ MapIfResource *sceneControllerResources[3];
+    /* 0x534 */ MoriModelContent *sceneControllerResources[3];
     /* 0x540 */ u8 unk540[0x10];
     /* 0x550 */ SceneModel *model550;
     /* 0x554 */ u8 unk554[0x10];

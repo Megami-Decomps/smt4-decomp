@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00235438` (_code @ 0x235438, 0x6cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "code/Code001b.h"
@@ -37,7 +38,6 @@ typedef struct {
     unsigned int sp2D0; /* 0x2d0: local_2d0 */
 } void_stack;
 
-extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: questDataGetRecord. */
@@ -99,7 +99,7 @@ int FUN_00235438(void)
   unsigned int temp_v24;
   
   temp_v17 = 0;
-  temp_v2 = gameFlagsGetBlock();
+  temp_v2 = (int)gameFlagsGetBlock();
   temp_v21 = 0;
   rt_aeabi_memclr(temp_v15,600);
   temp_v16 = 0;

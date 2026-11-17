@@ -1,8 +1,8 @@
 /* NON_MATCHING: close: retail loads the target position as x then a y/z vldmia pair and moves r0/-1 after the prologue vpush; built groups the VFP loads differently and uses r0 rather than r1 for the list counters */
+#include "gamedata/MapSaveBlock.h"
 #include "map/LmapGlobals.h"
 #include <math.h>
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
-#include "shard/SaveWork.h"
 #include "game/GameState.h"
 #include "gamedata/GamePlayerData.h"
 
@@ -37,13 +37,6 @@ struct TalkTargetList {
     /* 0x18 */ TalkTarget *targets[32];
 };
 
-struct TalkMapBlock {
-    /* 0x000 */ u8 unk000[0x22];
-    /* 0x022 */ s16 mapId;
-    /* 0x024 */ u8 unk024[0xD9C];
-    /* 0xDC0 */ s32 talkEnabled;
-};
-
 /* Straight-line distance between two map positions. */
 static __inline f32 mapVectorDistance(const MapVector &a, const MapVector &b)
 {
@@ -64,7 +57,7 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 s32 FUN_00396370(TalkTargetList *list)
 {
     s32 result = -1;
-    TalkMapBlock *map = reinterpret_cast<TalkMapBlock *>(gameGetMapBlock());
+    MapSaveBlock *map = gameGetMapBlock();
     PlayerDataIV *player = gameGetPlayerData();
     s32 nearest = 999999;
     s32 i;
@@ -81,7 +74,7 @@ s32 FUN_00396370(TalkTargetList *list)
                 target = list->targets[i];
                 if (target->kind == 0) {
                     result = target->id;
-                    if (map->talkEnabled != 0 && target->requiredLevel < player->level) {
+                    if (map->eventEnabled != 0 && target->requiredLevel < player->level) {
                         g_gameState.event.encounterApproach = 1;
                         SoundActorQueuePosition position = {
                             target->position.x * (1.0f / 3.0f),

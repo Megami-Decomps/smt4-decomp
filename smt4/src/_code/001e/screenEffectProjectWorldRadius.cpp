@@ -3,6 +3,7 @@
 #include "shard/S1Mover.h"
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "gfx/VectorScratch.h"
 
 namespace {
 struct ProjectionScratch {
@@ -17,7 +18,6 @@ union ProjectedPoint {
 }
 
 extern "C" {
-extern EffectColorProductState g_vectorScratch;
 extern ProjectionScratch g_effectProjectionScratch;
 u32 asdCameraGetSavedRenderPairs(void);
 void FUN_002630e0(Vec3f*, s32, u32, const Vec3f*);
@@ -26,9 +26,9 @@ void renderGetCameraViewMatrix(Matrix44*);
 /* Project the working point and scale a world-space radius by camera distance. */
 f32 screenEffectProjectWorldRadius(f32 radius)
 {
-    const EffectColor original = g_vectorScratch.color;
+    const EffectColor original = g_vectorScratch.first.color;
     const u32 camera = asdCameraGetSavedRenderPairs();
-    g_effectProjectionScratch.point = g_vectorScratch.color;
+    g_effectProjectionScratch.point = g_vectorScratch.first.color;
     const Vec3f input = {
         g_effectProjectionScratch.point.red, g_effectProjectionScratch.point.green, g_effectProjectionScratch.point.blue
     };
@@ -36,26 +36,26 @@ f32 screenEffectProjectWorldRadius(f32 radius)
     FUN_002630e0(&projected.coordinates, 0, camera, &input);
     projected.value.alpha = 0.0f;
     const EffectColor screenPoint = projected.value;
-    g_vectorScratch.color = screenPoint;
+    g_vectorScratch.first.color = screenPoint;
 
     Matrix44 matrix;
     renderGetCameraViewMatrix(&matrix);
-    g_vectorScratch.color = original;
+    g_vectorScratch.first.color = original;
     g_effectProjectionScratch.point.red = matrix.values[3];
     g_effectProjectionScratch.point.green = matrix.values[7];
     g_effectProjectionScratch.point.blue = matrix.values[11];
-    g_vectorScratch.factor = g_effectProjectionScratch.point;
+    g_vectorScratch.second.color = g_effectProjectionScratch.point;
 
     // The shared working register is reused for the camera-relative difference.
-    g_vectorScratch.color.red -= g_vectorScratch.factor.red;
-    g_vectorScratch.color.green -= g_vectorScratch.factor.green;
-    g_vectorScratch.color.blue -= g_vectorScratch.factor.blue;
-    g_vectorScratch.color.alpha -= g_vectorScratch.factor.alpha;
+    g_vectorScratch.first.color.red -= g_vectorScratch.second.color.red;
+    g_vectorScratch.first.color.green -= g_vectorScratch.second.color.green;
+    g_vectorScratch.first.color.blue -= g_vectorScratch.second.color.blue;
+    g_vectorScratch.first.color.alpha -= g_vectorScratch.second.color.alpha;
     const f32 distance = sqrtf(
-        g_vectorScratch.color.red * g_vectorScratch.color.red +
-        g_vectorScratch.color.green * g_vectorScratch.color.green +
-        g_vectorScratch.color.blue * g_vectorScratch.color.blue);
-    g_vectorScratch.color = screenPoint;
+        g_vectorScratch.first.color.red * g_vectorScratch.first.color.red +
+        g_vectorScratch.first.color.green * g_vectorScratch.first.color.green +
+        g_vectorScratch.first.color.blue * g_vectorScratch.first.color.blue);
+    g_vectorScratch.first.color = screenPoint;
     const f32 scaledRadius = radius * 650.0f / distance;
     return scaledRadius > 1500.0f ? 1500.0f : scaledRadius;
 }

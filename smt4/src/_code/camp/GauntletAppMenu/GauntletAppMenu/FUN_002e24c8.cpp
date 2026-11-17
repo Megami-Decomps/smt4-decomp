@@ -7,6 +7,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "bible/bibleAnalyze.h"
 #include "gamedata/DataTable.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ void uiSpriteStateInitFromSource(GauntletSprite *sprite, s32 group, s32 id, u8 *
 void timerStart(GauntletSprite *sprite, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(GauntletSprite *sprite, s32 mode);
 void spriteSetLayer(GauntletSprite *sprite, u16 mode);
-u32 scrScriptProcessCreate(u32 data, u32 archive);
 u32 FUN_003291dc();
 void gauntletAppMenuDestroy(void);
 void gauntletAppMenuExit(void);
@@ -94,7 +94,7 @@ u32 FUN_002e24c8(void)
     spriteStartAnimationByIndex(&menu->list.sprites[3], 1);
     menu->heapA = (void *)asdLoadFileSyncDefault("camp/gauntletApp.mbm");
     menu->heapB = (void *)asdLoadFileSyncDefault("camp/gauntletApp.bf");
-    menu->handle = scrScriptProcessCreate((u32)menu->heapB, (u32)menu->heapA);
+    menu->handle = scrScriptProcessCreate(menu->heapB, menu->heapA);
     return menu->task;
 }
 

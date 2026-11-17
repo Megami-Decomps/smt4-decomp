@@ -1,9 +1,8 @@
-#include "shard/W8Match1_MatrixRotation.h"
+#include "gfx/VectorScratch.h"
 extern "C" {
 f32 FUN_001b63b0(f32);
 f32 FUN_001a1ee0(f32);
 void matrix44SetIdentity(Matrix44*);
-extern MatrixRotationWork g_vectorScratch;
 
 // Replaces the shared transform's rotation matrix with a rotation about the Y axis.
 void FUN_00514878(f32 angle)
@@ -17,6 +16,6 @@ void FUN_00514878(f32 angle)
     matrix.values[2] = -sine;
     matrix.values[8] = sine;
     matrix.values[10] = cosine;
-    g_vectorScratch.rotation = matrix;
+    g_vectorScratch.matrix.matrix = matrix;
 }
 }

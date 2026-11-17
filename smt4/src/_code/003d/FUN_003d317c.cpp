@@ -5,6 +5,7 @@
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 /* Battle state fields this step clears, beyond the shared prefix. */
 struct CommandStartView {
@@ -43,15 +44,14 @@ typedef char CommandStartViewOffsets[
     offsetof(CommandStartTalk, unitIndex) == 0x760 ? 1 : -1];
 
 extern "C" {
-extern u32 g_btlUiBlock;
 extern void *DAT_00435d18;
 
 void FUN_00250720(BtlMainState *state);
 u16 FUN_00245cc0(s32 kind);
 void memClearTwo200(void *object);
 s32 FUN_00293230(BtlMainState *state);
-s32 btlUiIsSceneTransitionReady(u32 ui);
-s32 btlSceneIsReady(u32 ui);
+s32 btlUiIsSceneTransitionReady(BtlUi *ui);
+s32 btlSceneIsReady(BtlUi *ui);
 void FUN_0026beb4(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
 void FUN_00229a24(void);
 s32 FUN_00256940(void *main, BtlMainState *state, u32 flag);

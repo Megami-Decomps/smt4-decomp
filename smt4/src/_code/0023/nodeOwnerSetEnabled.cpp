@@ -5,14 +5,14 @@ extern "C" {
 void nodeOwnerSetEnabled(NodeEnableOwner* owner, s32 enabled)
 {
     if (owner->ready != 0) {
-        NodeEnableNode* node = owner->node;
+        AsdMdlObject* node = owner->node;
         if (enabled == 0) {
             node->flags |= 2;
-            node->resource->target->enabled = 0;
+            node->node->sceneNode->positionFollowed = 0;
             return;
         }
         node->flags &= ~2u;
-        node->resource->target->enabled = 1;
+        node->node->sceneNode->positionFollowed = 1;
     }
 }
 

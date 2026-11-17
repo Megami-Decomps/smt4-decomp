@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 extern ClearSaveWork *g_clearSave;
@@ -12,7 +13,6 @@ void commonBgAcquire();
 void buttonHelpCreate();
 void commonBgStopChildAndBeginTransition();
 void *asdLoadFileSyncDefault(const char *path);
-BibleScript *scrScriptProcessCreate(void *scriptFile, void *messageFile);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 entry);
 void FUN_00282bfc(s32 screen, s32 alpha);
 u32 FUN_001b10e4();
@@ -37,9 +37,9 @@ void clearSaveCreate(s32 mode)
     work->heapA = asdLoadFileSyncDefault("clear_save/clearSave.bf");
     void *messages = asdLoadFileSyncDefault("clear_save/clearSave.mbm");
     work->heapB = messages;
-    BibleScript *script = scrScriptProcessCreate(work->heapA, messages);
-    work->resource = reinterpret_cast<u32>(script);
-    script->started = 2;
+    ScriptProcess *script = scrScriptProcessCreate(work->heapA, messages);
+    work->resource = script;
+    script->mode = 2;
     asdTMTexTablePrepareNodeImage(2, 0x83);
     if (work->active != 0) {
         FUN_00282bfc(0, 0xFF);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail keeps the slot loop's pointers (cursor, flag bytes, map block) in registers set up once and unpacks the four effect outputs with one ldrd/ldr pair per call; this version reloads them differently, so register allocation and the switch layout differ. The slot logic and calls are the same. */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
 
 namespace {
@@ -7,12 +7,6 @@ namespace {
 struct NaviKeyPair {
     u16 key;
     s16 next;
-};
-
-/* The map block (only the navigation icon byte at +0xd5a is touched). */
-struct NaviMapBlock {
-    u8 unk000[0xd5a];
-    u8 naviIcon;
 };
 
 /* The navigation screen's work area (offsets as NaviMain_InitInstance lays it out). */
@@ -37,7 +31,6 @@ struct NaviKeyList {
 }
 
 extern "C" {
-NaviMapBlock *gameGetMapBlock(void);
 s32 FUN_002319c0(void);
 s32 asdTMTexTableGetEntryPlacement(u32 group, u32 id, u32 *first, u32 *second, u32 *third, u32 *fourth);
 s32 effectForwardModeOne(u32 first, u32 second, u32 third, u32 fourth);
@@ -55,7 +48,7 @@ static inline u8 *workBytes(NaviWork *work)
    key selection or the cursor accordingly. Returns 1 when a slot consumed the input, 0 when none did. */
 u32 FUN_0039b648(NaviWork *work)
 {
-    NaviMapBlock *map = gameGetMapBlock();
+    MapSaveBlock *map = gameGetMapBlock();
     if ((work->flags & 0x2000000) != 0 && (FUN_002319c0() == 0 || g_gameState.inputBlocked != 0)) {
         work->flags = work->flags & 0xfdffffff;
     }
@@ -100,7 +93,7 @@ u32 FUN_0039b648(NaviWork *work)
             return 1;
         }
         case 1:
-            if (map->naviIcon == 6) {
+            if (map->layout == 6) {
                 work->flags = (work->flags & 0xfffcffff) | 0x2000000;
                 work->cursorMoved = 1;
                 work->cursorMoved2 = 1;
@@ -109,7 +102,7 @@ u32 FUN_0039b648(NaviWork *work)
                 scaled[0] = cursor[0] * 2.0f;
                 scaled[1] = cursor[1] * 2.0f;
                 NaviMain_SetCursorPos(work->cursor, scaled);
-                map->naviIcon = 0xc;
+                map->layout = 0xc;
                 work->stepTimers[1] = 5;
                 work->stepTimers[3] = 0;
                 return 1;
@@ -132,7 +125,7 @@ u32 FUN_0039b648(NaviWork *work)
             return 1;
         }
         case 3:
-            if (map->naviIcon != 6) {
+            if (map->layout != 6) {
                 work->flags = (work->flags & 0xfffcffff) | 0x2000000;
                 work->cursorMoved = 1;
                 work->cursorMoved2 = 1;
@@ -141,7 +134,7 @@ u32 FUN_0039b648(NaviWork *work)
                 scaled[0] = cursor[0] * 0.5f;
                 scaled[1] = cursor[1] * 0.5f;
                 NaviMain_SetCursorPos(work->cursor, scaled);
-                map->naviIcon = 6;
+                map->layout = 6;
                 work->stepTimers[3] = 5;
                 work->stepTimers[1] = 0;
                 return 1;

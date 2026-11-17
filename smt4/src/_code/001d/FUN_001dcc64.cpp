@@ -1,33 +1,8 @@
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 // The effect editor's state (Shin Megami Tensei IV layout); only the fields this update touches.
-struct EffectEditorIV {
-    /* 0x00 */ s8 toggle;
-    /* 0x01 */ u8 unk01[5];
-    /* 0x06 */ u8 unk06;
-    /* 0x07 */ u8 unk07;
-    /* 0x08 */ u8 active;
-    /* 0x09 */ u8 unk09[3];
-    /* 0x0c */ u32 unk0c;
-    /* 0x10 */ void *unk10;
-    /* 0x14 */ void *unk14;
-    /* 0x18 */ u8 unk18[8];
-    /* 0x20 */ void *unk20;
-    /* 0x24 */ u8 unk24[4];
-    /* 0x28 */ s32 pending;
-    /* 0x2c */ u32 unk2c;
-    /* 0x30 */ void *texture;
-    /* 0x34 */ u8 unk34[0x18];
-    /* 0x4c */ u32 unk4c;
-    /* 0x50 */ u32 unk50;
-    /* 0x54 */ u32 unk54;
-    /* 0x58 */ u32 unk58;
-    /* 0x5c */ u32 unk5c;
-    /* 0x60 */ u32 unk60;
-    /* 0x64 */ u32 unk64;
-    /* 0x68 */ u32 unk68;
-};
 
 // A shared block whose word at 0xc is cleared with the editor.
 struct EditorSharedIV {
@@ -36,7 +11,6 @@ struct EditorSharedIV {
 };
 
 extern "C" {
-extern EffectEditorIV g_effectEditor;
 extern EditorSharedIV DAT_0044f858;
 
 s32 slotIsActive(s32 id);
@@ -56,30 +30,30 @@ void FUN_002fcd98(s32 value);
 // active editor, otherwise feeds the analog stick to the menu and handles the toggle button.
 u32 FUN_001dcc64(void)
 {
-    if (g_effectEditor.pending != 0 && g_effectEditor.active != 0) {
+    if (g_effectEditor.pending != 0 && g_effectEditor.unk08 != 0) {
         g_effectEditor.unk06 = 0;
-        g_effectEditor.unk0c = 0;
+        g_effectEditor.index = 0;
         DAT_0044f858.unk0c = 0;
-        if (g_effectEditor.unk14 != NULL) {
-            registrationEntryInsert(g_effectEditor.unk14, 3);
-            g_effectEditor.unk14 = NULL;
+        if (g_effectEditor.list != NULL) {
+            registrationEntryInsert(g_effectEditor.list, 3);
+            g_effectEditor.list = NULL;
         }
-        if (g_effectEditor.unk10 != NULL) {
-            registrationEntryInsert(g_effectEditor.unk10, 3);
-            g_effectEditor.unk10 = NULL;
+        if (g_effectEditor.node != NULL) {
+            registrationEntryInsert(g_effectEditor.node, 3);
+            g_effectEditor.node = NULL;
         }
-        if (g_effectEditor.unk20 != NULL) {
-            resourceQueueDeferredDestroy(g_effectEditor.unk20, 3);
-            g_effectEditor.unk20 = NULL;
+        if (g_effectEditor.resource != NULL) {
+            resourceQueueDeferredDestroy(g_effectEditor.resource, 3);
+            g_effectEditor.resource = NULL;
         }
         g_effectEditor.unk4c = 0;
         g_effectEditor.unk50 = 0;
-        g_effectEditor.unk54 = 1;
+        g_effectEditor.active = 1;
         g_effectEditor.unk58 = 0;
         g_effectEditor.unk60 = 0;
         g_effectEditor.unk64 = 0;
         g_effectEditor.unk68 = 0;
-        g_effectEditor.active = 0;
+        g_effectEditor.unk08 = 0;
         if (g_effectEditor.texture != NULL) {
             asdTextureRelease(g_effectEditor.texture);
             g_effectEditor.texture = NULL;
@@ -99,7 +73,7 @@ u32 FUN_001dcc64(void)
     effMenuAddDeltaA(x * 0.1f);
     effMenuAddDeltaB(y * -0.1f);
     FUN_00219908();
-    g_effectEditor.unk2c = 0;
+    g_effectEditor.cachedEvent = 0;
     effMenuListsClear();
     FUN_002fcd98(0);
     asdDebugHookVoid();

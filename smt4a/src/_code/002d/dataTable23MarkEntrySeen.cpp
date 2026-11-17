@@ -1,26 +1,19 @@
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
-
-typedef struct FlagBlock {
-    /* 0x000 */ u8 unk000[0x808];
-    /* 0x808 */ u32 words[1]; /* one bit per flag */
-} FlagBlock;
 
 typedef struct Table23Entry {
     /* 0x00 */ u8 unk00[0x1F];
     /* 0x1F */ s8 category; /* 100 and up: entries that also raise a game flag */
 } Table23Entry;
 
-FlagBlock *gameFlagsGetBlock(void);
 Table23Entry *dataTable23Sub0GetEntry(s32 index);
-
 
 /* Marks data table 0x23 entry `index` as seen and raises the game flag its category stands for. */
 void dataTable23MarkEntrySeen(s32 index)
 {
-    FlagBlock *block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     Table23Entry *entry = dataTable23Sub0GetEntry(index);
 
     if (entry != NULL && entry->category >= 100) {
@@ -99,7 +92,7 @@ void dataTable23MarkEntrySeen(s32 index)
     if (index >= 0) {
         s32 word = index / 32;
         s32 bit = index % 32;
-        block->words[word] |= 1 << bit;
+        block->clearedGroups[word] |= 1 << bit;
     }
 }
 

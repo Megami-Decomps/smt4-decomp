@@ -2,6 +2,7 @@
 #define CAMP_CAMP_SCRIPT_CLEANUP_H
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 struct CampScriptCleanup {
     /* 0x000 */ u8 unk000[0x90];
@@ -9,11 +10,11 @@ struct CampScriptCleanup {
     /* 0x094 */ u8 unk094[0xCD8];
     /* 0xD6C */ void *firstMessages;
     /* 0xD70 */ void *firstScript;
-    /* 0xD74 */ void *firstProcess;
+    /* 0xD74 */ ScriptProcess *firstProcess;
     /* 0xD78 */ u8 unkD78[0x1C];
     /* 0xD94 */ void *secondMessages;
     /* 0xD98 */ void *secondScript;
-    /* 0xD9C */ void *secondProcess;
+    /* 0xD9C */ ScriptProcess *secondProcess;
     /* 0xDA0 */ u8 unkDA0[0xC];
     /* 0xDAC */ u8 keepShared;
     /* 0xDAD */ u8 unkDAD[0xAB];

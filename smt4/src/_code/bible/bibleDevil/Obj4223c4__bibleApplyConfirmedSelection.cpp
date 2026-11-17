@@ -2,10 +2,10 @@
 #include "classes/Obj4223c4.h"
 #include "bible/bibleMain.h"
 #include "status/StatusCamera.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 extern BibleGlobals DAT_0043d9c8;
-s32 scrRunOpcodesStub(BibleScript *script);
 s32 messageMainGetChoiceResult();
 s32 flaggedValueHolderGetTotal(void *cursor);
 void FUN_003a7fec(BibleScreen *screen, u32 id);

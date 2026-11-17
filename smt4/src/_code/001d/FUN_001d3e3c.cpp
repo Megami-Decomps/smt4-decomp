@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3e3c` (_code @ 0x1d3e3c, 0x5448 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "map/lmapMain.h"
@@ -518,7 +519,6 @@ extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -599,7 +599,7 @@ unsigned int FUN_001d3e3c(void)
   
   puVar7 = g_lmapMainState;
   puVar14 = &temp_v15;
-  temp_v4 = gameGetMapBlock();
+  temp_v4 = (int)gameGetMapBlock();
   temp_v6 = DAT_0049f994;
   puVar17 = g_lmapMainState;
   temp_v5 = puVar7[3];

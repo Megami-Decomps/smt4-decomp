@@ -1,9 +1,9 @@
 #include "battle/btlEvent.h"
 #include "shard/JobWork.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
-void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
 s32 jobIsValid(u32 job);

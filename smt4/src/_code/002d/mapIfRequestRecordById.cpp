@@ -9,8 +9,8 @@ void mapIfRequestRecordById(s32 id)
     MapIfState *state = g_mapIf.state;
 
     for (index = 0; index < 0x80; ++index) {
-        if (state->records[index].active != 0 && state->records[index].groupView.id == id) {
-            state->records[index].request.pending = 1;
+        if (state->records[index].active != 0 && state->records[index].id == id) {
+            state->records[index].pending = 1;
             return;
         }
     }

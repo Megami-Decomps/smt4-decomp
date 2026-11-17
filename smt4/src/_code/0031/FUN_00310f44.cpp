@@ -1,19 +1,8 @@
 #include "common.h"
 #include "game/GameState.h"
-
-struct PlayerTrack {
-    /* 0x00 */ u8 unk00[100];
-    /* 0x64 */ f32 fromX;
-    /* 0x68 */ u8 unk68[4];
-    /* 0x6C */ f32 fromZ;
-    /* 0x70 */ f32 toX;
-    /* 0x74 */ u8 unk74[4];
-    /* 0x78 */ f32 toZ;
-};
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
-
-extern PlayerTrack *g_mapCamera;
 
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
@@ -33,10 +22,10 @@ u32 FUN_00310f44(void)
         scrSetResult((s32)g_gameState.cameraTarget.z);
         break;
     case 3: {
-        PlayerTrack *track = g_mapCamera;
+        LmapView *track = g_mapCamera;
 
-        f32 dx = track->toX - track->fromX;
-        f32 dz = track->toZ - track->fromZ;
+        f32 dx = track->lookTo.x - track->lookFrom.x;
+        f32 dz = track->lookTo.z - track->lookFrom.z;
 
         scrSetResult((s32)(__hardfp_atan2f(dx, dz) * (180.0f / 3.14f)));
         break;

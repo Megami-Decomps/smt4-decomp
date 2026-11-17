@@ -1,5 +1,5 @@
 /* NON_MATCHING: the multiplier operand order and the experience clamp compare (retail `cmp limit, value; movle`, here `cmp value, limit; movgt`) differ; the money clamp matches. */
-#include "shard/GameGlobals.h"
+#include "game/GameGlobalsRef.h"
 #include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/NkmEnemyLookup.h"
 
@@ -29,7 +29,7 @@ void FUN_0034dae0(void *unitData, u32 id)
         s32 money;
     };
     UnitRewardView *unit = static_cast<UnitRewardView *>(unitData);
-    GameRewardView *rewards = reinterpret_cast<GameRewardView *>(g_gameGlobals.data);
+    GameRewardView *rewards = reinterpret_cast<GameRewardView *>(g_gameGlobals.instance);
     f32 progression = static_cast<f32>(gameDataGetTableValue());
     if (progression < 0.0f) {
         progression = 0.0f;

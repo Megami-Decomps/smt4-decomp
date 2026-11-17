@@ -1,17 +1,17 @@
 /* NON_MATCHING: flag reload, camera-duration branch layout and the final step transition (btlStepEnter) now match, as in FUN_003e1a30; retail tests the flag with ands (not tst), and loads the 64-bit masks of the initial test (ldrd into r0:r1) and the transition|finished OR (state word-wise, finished with ldrd) in other registers. */
 #include "battle/btlMain.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
 void FUN_003e2840(BtlStep *step, BtlMainStateA *battle, s32 mode);
 void FUN_003ed6e8(BtlMainStateA *battle);
 void FUN_003f26d4(BtlMainStateA *battle);
-void FUN_004aa2e0(void *ui, s32 mode);
+void FUN_004aa2e0(BtlUiA *ui, s32 mode);
 void FUN_004f1c5c(void *camera, s32 duration);
 s32 FUN_004f6d34(BtlAuxA *effects);
 u32 FUN_004f7b84(void *effects, const char *name);
 extern BtlAuxA *g_btlAux;
-extern void *g_btlUiBlock;
 extern const char DAT_00528548[];
 
 // Wait for the Ancient effect, initialize the battle state masks, and advance the step.

@@ -1,8 +1,8 @@
 /* NON_MATCHING: unk1381 is an s8 (retail splits its offset as +4864/[129]); the constant-return tails (mov r0,#3 shared by three branches) are laid out differently. */
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 
 // Classify the current session's interaction and display state.
 u32 FUN_00334044()

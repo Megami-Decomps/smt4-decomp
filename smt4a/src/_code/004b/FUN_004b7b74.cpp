@@ -38,7 +38,6 @@ typedef char MapMenuCompletionOffsets[
     offsetof(MapMenuCompletionWork, choice) == 0x116c ? 1 : -1];
 extern "C" {
 s32 FUN_004ba698(FlaggedValueHolder *);
-s32 scrRunOpcodesStub(ScriptProcess *);
 void FUN_004b7d88(MapMenuCompletionWork *);
 u16 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 void sysPlaySe(u32);

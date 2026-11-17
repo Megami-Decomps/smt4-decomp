@@ -5,7 +5,6 @@
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-extern EventCommandGlobals g_eventCommand;
 s32 FUN_002e2250(u32 handle);
 s32 uiFadeQuadDrawJob(u32 handle);
 void eventCommandFreeWorkCallback(u32 handle);
@@ -19,7 +18,7 @@ void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha)
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\event\\eventCommand.cpp", 0x1cd);
         EventCommand *command = static_cast<EventCommand *>(asdMemAlloc(0x100, 0x100, 0, sizeof(EventCommand), 1));
         g_eventCommand.command = command;
-        command->fade.alpha = 0.0f;
+        command->alpha = 0.0f;
         command->duration = 0;
         command->elapsed = 0;
         command->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EventMessUnderFade_Proc"), 2, 0, 0, FUN_002e2250, eventCommandFreeWorkCallback, reinterpret_cast<u32>(command));
@@ -32,26 +31,26 @@ void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha)
     command->duration = duration;
     command->elapsed = 0;
     if (fadeIn) {
-        command->fade.color = color;
+        command->color = color;
         if (duration == 0) {
-            command->fade.alpha = alpha;
-            command->fade.delta = 0.0f;
+            command->alpha = alpha;
+            command->delta = 0.0f;
         } else {
-            command->fade.alpha = 0.0f;
-            command->fade.delta = alpha / duration;
+            command->alpha = 0.0f;
+            command->delta = alpha / duration;
         }
         return;
     }
     if (duration == 0) {
-        command->fade.color = color;
-        command->fade.alpha = 0.0f;
-        command->fade.delta = 0.0f;
+        command->color = color;
+        command->alpha = 0.0f;
+        command->delta = 0.0f;
         return;
     }
-    if (command->fade.alpha == 0.0f) {
-        command->fade.color = color;
+    if (command->alpha == 0.0f) {
+        command->color = color;
     }
-    command->fade.alpha = alpha;
-    command->fade.delta = -(alpha / duration);
+    command->alpha = alpha;
+    command->delta = -(alpha / duration);
 }
 }

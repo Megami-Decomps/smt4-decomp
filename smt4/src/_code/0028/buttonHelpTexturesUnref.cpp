@@ -1,17 +1,7 @@
-#include "common.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-
-typedef struct ButtonHelpTextures {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ s8 refCount;       /* users of the shared texture resources */
-    /* 0x02 */ u8 unk02[6];
-    /* 0x08 */ void *textureA;
-    /* 0x0C */ void *textureB;
-} ButtonHelpTextures;
-
-extern ButtonHelpTextures g_buttonHelp;
 
 int asdTMTexTableReleaseNode(int id, int arg);
 int asdMemFree(void *block);
@@ -20,14 +10,14 @@ int buttonHelpFreeTextureSlot(void);
 /* Drops a reference on the shared button help textures and frees them when the last one goes. */
 void buttonHelpTexturesUnref(void)
 {
-    g_buttonHelp.refCount--;
-    if (g_buttonHelp.refCount <= 0) {
+    g_buttonHelp.loadCount--;
+    if (g_buttonHelp.loadCount <= 0) {
         buttonHelpFreeTextureSlot();
-        asdMemFree(g_buttonHelp.textureA);
-        asdMemFree(g_buttonHelp.textureB);
+        asdMemFree(g_buttonHelp.mbm);
+        asdMemFree(g_buttonHelp.bf);
         asdTMTexTableReleaseNode(0x12, 0);
         asdTMTexTableFreeEntry(0x12);
-        g_buttonHelp.refCount = 0;
+        g_buttonHelp.loadCount = 0;
     }
 }
 

@@ -14,7 +14,7 @@
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/AsdMemCopy.h"
-
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 static EffectEditorSettings g_effectEditorSettings;
@@ -29,7 +29,6 @@ __align(16) static EffectEditorVector g_effectEditorVector;
 static EffectEditorVector g_effectEditorRotation;
 extern EffectEditorDefaultSlot DAT_0044f858;
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
-extern EffectRenderGlobals g_vectorScratch;
 void __aeabi_memcpy4(void *, const void *, u32);
 void randomStateSeed(u32, u32);
 EffectSelectionItem *linkedFindItemByIndex(void *, s32);
@@ -61,7 +60,6 @@ void FUN_002c1e30(void *, u32, f32, f32, f32, f32);
 void FUN_00298d50(void *);
 void floatPairStore(f32, f32);
 }
-
 
 static __inline EffectSelectionTemplate *findEditorTemplate(
     EffectSelectionCatalogEntry **catalog, u16 type, u16 id, u16 groupCount)
@@ -99,7 +97,6 @@ extern "C" void effectEditorResetRotation(void)
     g_effectEditorRotation.setIdentity();
 }
 
-
 extern "C" u32 effectPollResourceFileDialog(void)
 {
     u32 state = (u32)&DAT_00400001;
@@ -108,15 +105,15 @@ extern "C" u32 effectPollResourceFileDialog(void)
     if (dialog.status == 2) {
         state = 0x400000;
     } else if (dialog.status == 1) {
-        if (g_effectEditor.selection.list != NULL) {
-            registrationEntryInsert((u32)g_effectEditor.selection.list, 3);
+        if (g_effectEditor.list != NULL) {
+            registrationEntryInsert((u32)g_effectEditor.list, 3);
         }
         libc_strcpy(reinterpret_cast<unsigned int *>(g_effectEditorResourceName), reinterpret_cast<unsigned int *>(dialog.name));
         void* data = FUN_001e1a70(dialog.path);
-        g_effectEditor.selection.list = data;
+        g_effectEditor.list = data;
         __aeabi_memcpy4(&g_effectEditorWorkingSnapshot, data, 0x80);
         state = (u32)&DAT_00400002;
-        g_effectEditor.selection.index = 0;
+        g_effectEditor.index = 0;
         DAT_0044f858.object.indices.extraOffset = 0;
     }
     return state;
@@ -160,12 +157,12 @@ extern "C" void FUN_001dce30()
         offsetof(StorageView, resource) == 0xda0 ? 1 : -1];
     StartupView *startup = reinterpret_cast<StartupView *>(&g_effectEditor);
     startup->resource = reinterpret_cast<StorageView *>(&g_effectEditor)->resource;
-    g_effectEditor.selection.index = 0;
+    g_effectEditor.index = 0;
     g_effectEditorResourceName[0] = 0;
     startup->second = 0;
     startup->first = 0;
-    g_effectEditor.dispatch.mode = 0;
-    g_effectEditor.dispatch.inhibited = 0;
+    g_effectEditor.mode = 0;
+    g_effectEditor.inhibited = 0;
     g_effectEditorInitialVector.setIdentity();
     floatPairStore(0.0f, 0.0f);
 }
@@ -173,37 +170,37 @@ extern "C" void FUN_001dce30()
 /* NON_MATCHING: aggregate transfer classes and temporary/register allocation differ. */
 extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
 {
-    EffectRenderGlobals *globals = &g_vectorScratch;
+    VectorScratch *globals = &g_vectorScratch;
     EffectEditorSnapshot *controls = &g_effectEditorSavedSnapshot;
     FUN_002496cc(reinterpret_cast<const EffectPositionControl *>(controls));
-    EffMenuPosition initial = globals->current;
+    EffMenuPosition initial = globals->first.position;
     requestHandlerDispatch(request, &initial);
     if (controls->parameters.flags & 0x60) {
-        globals->current = g_effectEditorInitialVector.value;
-        globals->vector = effectRenderSource()->origin;
+        globals->first.position = g_effectEditorInitialVector.value;
+        globals->second.position = effectRenderSource()->origin;
         FUN_00249678();
-        EffMenuPosition transformed = globals->current;
+        EffMenuPosition transformed = globals->first.position;
         EffectEditorWords words;
         FUN_0025c8f0(controls, &transformed, &words);
-        globals->current = effectRenderSource()->position;
-        globals->words = words;
+        globals->first.position = effectRenderSource()->position;
+        globals->second.words = words;
         FUN_002a2c00();
     } else {
-        globals->current = effectRenderSource()->position;
-        globals->words = controls->parameters.fallback;
+        globals->first.position = effectRenderSource()->position;
+        globals->second.words = controls->parameters.fallback;
         FUN_002a2c00();
     }
-    EffMenuPosition position = globals->current;
+    EffMenuPosition position = globals->first.position;
     handlerTableCallWithValueB(request, &position);
     handlerTableCall(request, controls->parameters.scale * effectRenderSource()->scale);
     if (controls->parameters.flags & 0x100) {
-        globals->current = controls->parameters.tint;
+        globals->first.position = controls->parameters.tint;
         f32 scale = controls->parameters.scale * effectRenderSource()->scale;
-        globals->current.x *= scale;
-        globals->current.y *= scale;
-        globals->current.z *= scale;
-        globals->current.w *= scale;
-        EffMenuPosition tint = globals->current;
+        globals->first.position.x *= scale;
+        globals->first.position.y *= scale;
+        globals->first.position.z *= scale;
+        globals->first.position.w *= scale;
+        EffMenuPosition tint = globals->first.position;
         FUN_0021a4dc(request, &tint);
     }
     handlerTableCallWithValue(request, controls->parameters.value);
@@ -212,25 +209,25 @@ extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
 /* NON_MATCHING: catalog search register allocation and final reset-store grouping differ. */
 extern "C" u32 effectEditorActivateSelection()
 {
-    s32 index = g_effectEditor.selection.index + DAT_0044f858.object.indices.extraOffset;
-    EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.selection.list, index);
-    g_effectEditor.selection.item = item;
+    s32 index = g_effectEditor.index + DAT_0044f858.object.indices.extraOffset;
+    EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.list, index);
+    g_effectEditor.item = item;
     __aeabi_memcpy4(&g_effectEditorSettings, item, 0x90);
     __aeabi_memcpy4(&g_effectEditorSavedSnapshot, item, 0x80);
-    g_effectEditor.selection.block = item->block;
+    g_effectEditor.block = item->block;
     EffectSelectionParts *parts = FUN_00246854(item);
     if (parts->type != 0x1b) {
-        void *data = resourceResolveHeaderPointer(g_effectEditor.selection.block);
+        void *data = resourceResolveHeaderPointer(g_effectEditor.block);
         rt_memcpy(parts->data, data, parts->size);
     }
     if (parts->data != NULL) {
-        effPartsSetData(g_effectEditor.selection.block, parts->data, parts->size, parts->id);
+        effPartsSetData(g_effectEditor.block, parts->data, parts->size, parts->id);
     }
-    void *instance = effBlockCreateFromBlock(g_effectEditor.selection.block);
+    void *instance = effBlockCreateFromBlock(g_effectEditor.block);
     effectEditorApplyHandlerState(static_cast<EffectHandlerRequest *>(instance));
-    g_effectEditor.selection.instance = instance;
-    g_effectEditor.selection.object = findEditorTemplate(DAT_0044f4d4, item->block->type, item->block->id, 13);
-    g_effectEditor.selection.object->context = reinterpret_cast<EffectSelectionContext *>(&DAT_0044f858.object);
+    g_effectEditor.instance = instance;
+    g_effectEditor.object = findEditorTemplate(DAT_0044f4d4, item->block->type, item->block->id, 13);
+    g_effectEditor.object->context = reinterpret_cast<EffectSelectionContext *>(&DAT_0044f858.object);
     g_effectEditor.unk4c = 0;
     g_effectEditor.unk50 = 0;
     g_effectEditor.active = 1;
@@ -238,9 +235,9 @@ extern "C" u32 effectEditorActivateSelection()
     g_effectEditor.unk60 = 0;
     g_effectEditor.unk64 = 0;
     g_effectEditor.unk68 = 0;
-    if (g_effectEditor.selection.resource != NULL) {
-        resourceQueueDeferredDestroy(g_effectEditor.selection.resource, 3);
-        g_effectEditor.selection.resource = NULL;
+    if (g_effectEditor.resource != NULL) {
+        resourceQueueDeferredDestroy(g_effectEditor.resource, 3);
+        g_effectEditor.resource = NULL;
     }
     return 0x800000;
 }
@@ -269,7 +266,7 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
     }
 
     g_effectEditorVector.bits = record->payload.saved;
-    if (!g_effectEditor.dispatch.mode)
+    if (!g_effectEditor.mode)
         FUN_0024dd90(&DAT_0044f900);
     asdDebugHookVoid();
     effEditorNodeChainApply(&DAT_0044f900);
@@ -278,14 +275,14 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
     if (DAT_0044f900.flags & 8)
         result |= 2;
 
-    EffectRenderGlobals *globals = &g_vectorScratch;
+    VectorScratch *globals = &g_vectorScratch;
     if ((result & 2) && (record->parameters.flags & 0x18)) {
-        globals->current = g_effectEditorInitialVector.value;
+        globals->first.position = g_effectEditorInitialVector.value;
         if (relative) {
-            globals->vector = g_effectEditorWorkingSnapshot.initialPosition;
+            globals->second.position = g_effectEditorWorkingSnapshot.initialPosition;
             FUN_00249678();
         }
-        EffMenuPosition transformed = globals->current;
+        EffMenuPosition transformed = globals->first.position;
         EffMenuPosition position; // The release build omits the optional transform hook.
         effectEditorTransformPosition(reinterpret_cast<const EffectPositionControl *>(record),
             &transformed, &position);
@@ -294,26 +291,26 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
 
     if (relative) {
         FUN_002496cc(reinterpret_cast<const EffectPositionControl *>(record));
-        globals->vector = g_effectEditorWorkingSnapshot.initialPosition;
-        globals->current.x -= globals->vector.x;
-        globals->current.y -= globals->vector.y;
-        globals->current.z -= globals->vector.z;
-        globals->current.w -= globals->vector.w;
+        globals->second.position = g_effectEditorWorkingSnapshot.initialPosition;
+        globals->first.position.x -= globals->second.position.x;
+        globals->first.position.y -= globals->second.position.y;
+        globals->first.position.z -= globals->second.position.z;
+        globals->first.position.w -= globals->second.position.w;
     } else {
-        globals->current = record->parameters.position;
+        globals->first.position = record->parameters.position;
     }
 
-    EffMenuPosition offset = globals->current;
-    globals->current.y = 0.0f;
-    f32 radius = sqrtf(globals->current.x * globals->current.x +
-        globals->current.y * globals->current.y + globals->current.z * globals->current.z);
-    globals->current = g_effectEditorInitialVector.value;
+    EffMenuPosition offset = globals->first.position;
+    globals->first.position.y = 0.0f;
+    f32 radius = sqrtf(globals->first.position.x * globals->first.position.x +
+        globals->first.position.y * globals->first.position.y + globals->first.position.z * globals->first.position.z);
+    globals->first.position = g_effectEditorInitialVector.value;
     if (relative) {
-        globals->vector = g_effectEditorWorkingSnapshot.initialPosition;
+        globals->second.position = g_effectEditorWorkingSnapshot.initialPosition;
         FUN_00249678();
     }
 
-    EffMenuPosition origin = globals->current;
+    EffMenuPosition origin = globals->first.position;
     EffMenuPosition elevated = origin;
     elevated.y += offset.y;
     if (elevated.y == 0.0f)
@@ -328,10 +325,10 @@ u32 effectEditorEditPositionVector(EffectEditorSnapshot *record, s32 relative)
         FUN_00243224(&ground, &elevated, 0xff00c0c0, 0);
     }
 
-    globals->current = offset;
-    globals->vector = origin;
+    globals->first.position = offset;
+    globals->second.position = origin;
     FUN_00249678();
-    EffMenuPosition endpoint = globals->current;
+    EffMenuPosition endpoint = globals->first.position;
     FUN_00243224(&elevated, &endpoint, 0xff00c0c0, 0);
     FUN_00243224(&ground, &endpoint, 0xff00c0c0, 0);
 

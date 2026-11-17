@@ -1,8 +1,7 @@
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
-
-extern ObjBRef g_gameGlobals;
 
 void FUN_0021af2c(void);
 
@@ -14,7 +13,7 @@ void FUN_00285800(void)
     game = g_gameGlobals.instance;
     g_gameGlobals.instance->unk1374 = 0;
     FUN_0021af2c();
-    game->unk2014 = 0;
+    game->mode = 0;
 }
 
 } /* extern "C" */

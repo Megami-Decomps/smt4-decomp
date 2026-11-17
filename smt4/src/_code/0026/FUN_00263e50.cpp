@@ -4,6 +4,7 @@
 #include "shard/S1GfxModel.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "gfx/GfxSettings.h"
 
 /* An object with a virtual destructor in slot 0 that is handed back to the allocator it came from. */
 struct OwnedObject {
@@ -31,7 +32,6 @@ struct LightResourceSet {
 };
 
 extern "C" {
-extern GfxModelState g_gfxSettings;
 
 void nw_gfx_res_ResGraphicsFile_Cleanup(s32 *file);
 
@@ -90,7 +90,7 @@ void FUN_00263e50(LightResourceSet *set)
     asdMemFreeNonNull(set->resource);
     asdMemFree(set->extra);
     asdMemFree(set);
-    sceneTraverserVisit(reinterpret_cast<void *>(g_gfxSettings.attachInfo[0]), reinterpret_cast<void *>(g_gfxSettings.transformBuilder[0]));
+    sceneTraverserVisit(g_gfxSettings.attachInfo[0], g_gfxSettings.transformBuilder[0]);
 }
 
 } /* extern "C" */

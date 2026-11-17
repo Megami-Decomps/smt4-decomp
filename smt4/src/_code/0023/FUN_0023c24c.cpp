@@ -5,20 +5,19 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 
-static inline void setModelHidden(NodeEnableNode *model, bool hidden)
+static inline void setModelHidden(AsdMdlObject *model, bool hidden)
 {
     if (hidden) {
         model->flags &= ~2;
     } else {
         model->flags |= 2;
     }
-    model->resource->target->enabled = hidden;
+    model->node->sceneNode->positionFollowed = hidden;
 }
 
-
 extern "C" {
-void modelSetAnimationChannels(NodeEnableNode *model, s32 channels, f32 frame);
-void animOwnerSetScale(NodeEnableNode *model, f32 speed);
+void modelSetAnimationChannels(AsdMdlObject *model, s32 channels, f32 frame);
+void animOwnerSetScale(AsdMdlObject *model, f32 speed);
 
 // Start matching keyed models and reconcile their visibility with the associated action.
 void FUN_0023c24c(KeyedValueTable *table, s32 firstKey, s32 secondKey)

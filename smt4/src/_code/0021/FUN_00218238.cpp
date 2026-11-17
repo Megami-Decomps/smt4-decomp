@@ -13,8 +13,8 @@ s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 // The panel being drawn: an offset vector at 0xac and a mode word at 0x3048.
 struct SpritePanel {
     u8 unk0000[0xac];
-    u8 offset[0x34];   // 0x0ac vec2 object
-    u8 unk00e0[0x2f68];
+    UiSpriteState offset;   // 0x0ac vec2 object
+    u8 unk00e0[0x2F10];
     s32 mode;          // 0x3048
 };
 
@@ -40,12 +40,12 @@ extern "C" void FUN_00218238(SpritePanel *panel, u32 id, s32 x, s32 y, s32 shado
         s32 offsetX = 0;
         s32 offsetY = 0;
         if (panel->mode == 1) {
-            offsetX = vec2GetXInt((const UiSpriteState *)panel->offset);
-            offsetY = vec2GetYInt((const UiSpriteState *)panel->offset);
+            offsetX = vec2GetXInt(&panel->offset);
+            offsetY = vec2GetYInt(&panel->offset);
         }
         texDrawTableEntryAtStoredOrigin(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x35);
         if (panel->mode == 1) {
-            efctSetSpeed(vec2GetSpeed((const UiSpriteState *)panel->offset));
+            efctSetSpeed(vec2GetSpeed(&panel->offset));
             setTitleRenderState(g_titleScene, packNibblesAndByte(6, 1, 0));
             texDrawTableEntryAtStoredOrigin(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x36);
             setTitleRenderState(g_titleScene, packNibblesAndByte(6, 7, 0));

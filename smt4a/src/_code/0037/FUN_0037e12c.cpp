@@ -1,5 +1,6 @@
 /* Copies the packed 2D vector from the state block into the slot and, when `copy` is set, also latches it as the previous vector. */
 #include "shard/Shard0033.h"
+#include "game/GameGlobalsRef.h"
 
 extern "C" {
 
@@ -21,8 +22,6 @@ typedef struct StateHolder {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ ObjB *state;
 } StateHolder;
-
-extern ObjBRef g_gameGlobals;
 
 extern s32 partySlotIsOccupied(Item *item);
 extern void FUN_0026fd50(void *slot, Item *item, u32 count, u32 arg);

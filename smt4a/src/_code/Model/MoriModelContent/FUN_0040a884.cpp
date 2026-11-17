@@ -2,7 +2,8 @@
 #include "common.h"
 #include <new>
 #include "classes/Obj557b58.h"
-#include "Model/MoriModelContentLoad.h"
+#include "classes/Obj557d00.h"
+#include "Model/MoriModelContent.h"
 
 struct ModelResourceRequest {
     u32 id; // 0x00
@@ -20,23 +21,23 @@ struct ModelResourceRequest {
 
 extern "C" {
 
-u32 FUN_001581dc(const ModelResourceRequest *request);
+Obj557d00 *FUN_001581dc(const ModelResourceRequest *request);
 
 extern char g_moriModelContentSourcePath[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
 
 /* Content constructor: loads the model resource with the content's request options, then creates its binding object (MoriModelContent.cpp line 251). */
-void FUN_0040a884(MoriModelContentLoad *content, u32 id)
+void FUN_0040a884(MoriModelContent *content, u32 id)
 {
     ModelResourceRequest request;
     request.id = id;
-    request.first = content->unk18;
-    request.second = content->unk1C;
-    request.mode = content->unk14;
-    u32 resource = FUN_001581dc(&request);
-    content->unk0C = resource;
+    request.first = content->requestFirst;
+    request.second = content->requestSecond;
+    request.mode = content->requestMode;
+    Obj557d00 *resource = FUN_001581dc(&request);
+    content->resource = resource;
 
-    Obj557b58 *binding = new (g_moriModelContentSourcePath, 0xfb) Obj557b58(resource);
-    content->binding = reinterpret_cast<MoriModelBinding *>(binding);
+    /* The binding's constructor takes the resource as a word (its mangled name keeps `unsigned int`). */
+    content->binding = new (g_moriModelContentSourcePath, 0xfb) Obj557b58(reinterpret_cast<u32>(resource));
 }
 
 } /* extern "C" */

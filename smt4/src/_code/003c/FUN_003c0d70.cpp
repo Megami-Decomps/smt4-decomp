@@ -3,6 +3,7 @@
 #include "battle/btlAction.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlUiGlobal.h"
 
 /* The action record's words the removal clears. */
 struct ActionClearView {
@@ -57,7 +58,6 @@ struct LinkedObject {
 };
 
 extern "C" {
-extern u32 g_btlUiBlock;
 void FUN_00337a34(BtlMainState *state);
 void FUN_003390dc(BtlMainState *state, BtlActionRecord *action, s32 id);
 void objectTotalAdd(BtlMainState *state);
@@ -65,7 +65,7 @@ void keyedAccumulatorAdd(BtlMainState *state, u32 key, s32 count);
 void recordClampCurrentCount(void *record);
 void objectFlagsClear(void *object, u32 flags);
 s32 flagWordTestBit(void *object, u32 bit);
-void FUN_003ae2d0(u32 ui, s32 index, s32 value, s32 flag);
+void FUN_003ae2d0(BtlUi *ui, s32 index, s32 value, s32 flag);
 void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
 void FUN_00394b0c(void);
 void __aeabi_memset4(void *block, u32 size, s32 value);

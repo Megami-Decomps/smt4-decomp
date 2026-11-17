@@ -1,20 +1,16 @@
-#include "common.h"
+#include "font/PlaceWin.h"
 #include "code/Code0028_Smt4a.h"
 #include "ui/UiSpriteApi.h"
 
 extern "C" {
 
-typedef struct Object {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ u8 member34[1];
-} Object;
-extern Object *g_placeWin;
+extern PlaceWindow *g_placeWin;
 
-/* Calls vec2GetYInt on the member at 0x34 of the object at 0x57F578, if there is one. */
+/* Calls vec2GetYInt on the place window's animation sprite, if there is one. */
 void FUN_00284f70(void)
 {
     if (g_placeWin != NULL) {
-        vec2GetYInt((const UiSpriteState *)g_placeWin->member34);
+        vec2GetYInt(&g_placeWin->animation);
         return;
     }
 }

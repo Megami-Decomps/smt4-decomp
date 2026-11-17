@@ -1,6 +1,6 @@
 /* NON_MATCHING: the three sentinel stores (previousId, previousNode, table) are scheduled in a different order and constants. */
 #include "event/bustupEvent/BustupTextureWork.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/BgData.h"
 #include "addon/aocMain.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
@@ -37,8 +37,8 @@ void FUN_0037b280(s32 portrait)
     work->texture.id = 0;
     work->texture.x = 150.0f;
     work->texture.y = 150.0f;
-    void* table = dataTableGet(26, 1);
-    const s16* portraits = static_cast<const s16*>(dataTableGetEntries(table));
+    void* table = dataTableGet(0x1A, 1);
+    const s16 *portraits = bgDataTextureNodes(table);
     dataTableGetCount(table);
     s32 index = portrait - 1;
     work->texture.node = portraits[index];

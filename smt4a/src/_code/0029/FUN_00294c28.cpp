@@ -1,3 +1,4 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/PopupStateA.h"
@@ -6,7 +7,6 @@
 extern "C" {
 
 void FUN_00152f44(void);
-void gameFlagsGetBlock(void);
 s32 randRange(u32 id);
 s32 gameFlagIsSet(u32 flag);
 const char *popupSelectWeightedMessage(u32 kind, u16 id);

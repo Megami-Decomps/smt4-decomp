@@ -15,7 +15,7 @@ void FUN_003659f4(f32 x, f32 y, f32 z)
         MapIfRecord *record = &map->records[i];
         if (!record->active)
             continue;
-        s32 category = record->display.category;
+        s32 category = record->category;
         if (
             (category == 0x1d || category == 0x31 || category == 0x1e || category == 0x1f ||
              category == 0x30 || category == 0x22 || category == 0x23) && record->state == 6) {
@@ -26,7 +26,7 @@ void FUN_003659f4(f32 x, f32 y, f32 z)
                 f32 effectY = y + 120.0f;
                 f32 effectZ = record->position.z;
                 if (!g_gameState.inputBlocked) {
-                    if (record->display.category == 0x31 || record->display.category == 0x30) {
+                    if (record->category == 0x31 || record->category == 0x30) {
                         soundActorStartOnFreeChannel(0x10002ab, effectX * 0.33333334f,
                                      effectY * 0.33333334f, effectZ * 0.33333334f);
                     } else {
@@ -34,7 +34,7 @@ void FUN_003659f4(f32 x, f32 y, f32 z)
                     }
                 }
                 record->state = 7;
-                record->proximity.timer = 0;
+                record->proximityTimer = 0;
                 return;
             }
         }

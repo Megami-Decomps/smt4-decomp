@@ -1,13 +1,7 @@
 /* NON_MATCHING: retail hoists zero/85.0f and uses a saved register for motion4; divide scratch selection and constant scheduling differ by one row. */
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 
-struct MapMotionFlags {
-    u8 unk0000[0x109c];
-    u32 enabled;
-    u8 unk10a0[0x488];
-    f32 distance;
-};
 struct MapMotionActor {
     u8 unk000[0x1fc];
     f32 playbackScale;
@@ -47,11 +41,11 @@ void FUN_003fd924(MapMotionActor *, u32, u8, f32, f32);
 
 void lmapSceneStartMovement(s8 mode)
 {
-    const MapMotionFlags *flags = (const MapMotionFlags *)gameFlagsGetBlock();
-    if (!flags->enabled) {
+    const MapSaveBlockA *flags = (const MapSaveBlockA *)gameFlagsGetBlock();
+    if (!flags->fadeActive) {
         return;
     }
-    f32 distance = flags->distance;
+    f32 distance = flags->moveDistance;
     MapMotionScene *scene = (MapMotionScene *)g_lmapScene;
     scene->counter = 0;
     scene->targetStep = (f32)(s32)(distance / scene->stepSize);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: initial exclusion-mask AND/OR operands use different scratch registers; the paired flags load matches. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/SkillDataRecord.h"
+#include "battle/BattleSkillResponseMasks.h"
 
 struct Source4C;
 extern "C" {
@@ -11,14 +12,9 @@ s32 lcgRandomRange(u32 maximum);
 // Choose the first passive-triggered skill whose activation chance succeeds.
 s32 FUN_004c5da4(u32 unit, s32 rollChance)
 {
-    struct TriggerMaskView {
-        u8 unk00[0xa0];
-        u64 blockedStates; // 0xa0
-    };
-    extern TriggerMaskView g_btlSkillResponseMasks;
     BtlMainStateA *battle = btlGetMainState();
     u64 flags = battle->stateFlags64.bits;
-    if ((flags & g_btlSkillResponseMasks.blockedStates) != 0)
+    if ((flags & g_btlSkillResponseMasks.assistActive) != 0)
         return 0;
     Source4C *source = btlMainFindEntryByListedId(battle, unit);
     switch (battle->activity.currentAction) {

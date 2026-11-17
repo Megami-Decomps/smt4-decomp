@@ -3,6 +3,7 @@
 #include "battle/btlAction.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 // currentTurn lies immediately beyond the shared BtlMainState's recovered order array.
 struct CurrentTurnIndexViewIV {
@@ -12,8 +13,7 @@ struct CurrentTurnIndexViewIV {
 typedef char CurrentTurnIndexOffsetCheck[offsetof(CurrentTurnIndexViewIV, currentTurn) == 0x2F1E ? 1 : -1];
 
 extern "C" {
-extern void *g_btlUiBlock;
-void btlUiRefreshSlotRanks(void *ui);
+void btlUiRefreshSlotRanks(BtlUi *ui);
 
 // Append an eligible unit to the unprocessed turn slots and sort that suffix by speed and stable unit index.
 void FUN_0033b1ac(BtlMainState *battle, s32 listedId)

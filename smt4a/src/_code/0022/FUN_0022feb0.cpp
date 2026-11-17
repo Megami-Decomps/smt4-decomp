@@ -1,12 +1,8 @@
 /* NON_MATCHING: Counter values and nonzero-index lists are reconstructed; list append/count updates and persistent pointers allocate different registers/frame slots. */
-#include "gamedata/DataTable.h"
+#include "gamedata/PlayLogTable.h"
 #include "camp/Config/Config.h"
 #include "gamedata/GameDataAccess.h"
 
-struct CounterListDefinition {
-    /* 0x00 */ s16 counter;
-    /* 0x02 */ u8 unk02[0x3e];
-};
 struct CounterSelectionList {
     /* 0x000 */ u32 count;
     /* 0x004 */ u32 values[50];
@@ -29,11 +25,11 @@ extern "C" void FUN_0022feb0(CounterSelectionWork *work)
     if (work == NULL) {
         return;
     }
-    DataTableView<CounterListDefinition> definitions(0x37, 0);
+    DataTableView<PlayLogRecord> definitions(0x37, 0);
     sysMemClear(&work->first, sizeof(work->first) + sizeof(work->second));
     for (s32 i = 0; i < static_cast<s32>(definitions.count); ++i) {
-        DataTableView<CounterListDefinition> current(0x37, 0);
-        const CounterListDefinition *definition = current.at(i);
+        DataTableView<PlayLogRecord> current(0x37, 0);
+        const PlayLogRecord *definition = current.at(i);
         if (definition == NULL || definition->counter < 0) {
             continue;
         }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c670c` (_code @ 0x2c670c, 0x8c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -32,7 +33,6 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_002b7a78. */
 /* Supplied declaration required: recordSetValueAndName. */
@@ -55,7 +55,7 @@ void FUN_002c670c(int param_1)
   int temp_v5;
   unsigned int in_fpscr;
   
-  temp_v1 = gameFlagsGetBlock();
+  temp_v1 = (int)gameFlagsGetBlock();
   temp_v2 = lmapGetSpawnIndex();
   if (temp_v2 >= 100) {
     FUN_00313974((int)*(float *)(temp_v1 + 0x15c4));

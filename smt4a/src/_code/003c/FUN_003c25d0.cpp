@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "code/Code004a.h"
+#include "battle/BtlUiGlobal.h"
 
 struct BtlCombatantEntryA {
     u32 flags[2]; // 0x00
@@ -14,7 +15,6 @@ struct BattleClearPreset {
 
 extern "C" {
 extern BattleClearPreset g_battleMaskPresets;
-extern void* g_btlUiBlock;
 
 // Clear the configured combatant flags and reset the battle UI mode.
 u32 FUN_003c25d0()

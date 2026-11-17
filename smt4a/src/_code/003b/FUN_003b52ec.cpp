@@ -1,3 +1,4 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include "addon/AocSystemA.h"
 /* NON_MATCHING: near (199 rows against 203): same table walk, flag tests and constants; retail keeps the table id in a stack slot (push {r3,...}), hoists 0xFFFFFFFF into r8 and the match-test constant in fp, evaluates dataTableGet(0x23,7) args in the other order inside the size test and splits the flagB test differently */
@@ -22,13 +23,6 @@ struct EventEntry {
     u16 needSpecial;  /* 0x0A: 1 requires a special enemy kind on the map */
 };
 
-struct GameFlagsBlock {
-    u8 pad000[0xE88];
-    u32 lastEvent;                /* 0xE88 */
-};
-
-
-GameFlagsBlock *gameFlagsGetBlock(void);
 s32 mapEnemyHasSpecialKind(void);
 u32 lmapGetSpawnIndex(void);
 u32 dataTableGet(s32 table, s32 sub);
@@ -86,7 +80,7 @@ static s32 eventEntryAvailable(const EventEntry *entry, s32 hasSpecial)
  * one picked last time). */
 EventEntry *FUN_003b52ec(void)
 {
-    GameFlagsBlock *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     s32 hasSpecial = mapEnemyHasSpecialKind();
 
     if (g_gameState.progressEnabled != 0) {

@@ -1,38 +1,25 @@
 /* NON_MATCHING: encounter-state address formation and the inlined forced/normal dispatch blocks have different register allocation and branch placement from retail. */
-#include "map/mapEnemy.h"
+#include "gamedata/MapSaveBlock.h"
+#include "map/MapEnemyGlobal.h"
 #include "map/mapDepart.h"
 #include "map/LmapGlobals.h"
 #include <stddef.h>
 #include "util/TrigF32.h"
 #include "game/GameState.h"
 
-struct EnemyEncounterMarker {
-    s8 x, y;
-    u8 unk02[18];
-};
-struct EnemyEncounterMap {
-    u8 unk0000[0x22];
-    s16 mapId; // 0x22
-    u8 unk0024[0xf06];
-    EnemyEncounterMarker markers[1]; // 0xf2a
-};
-typedef char CheckEnemyEncounterSize[sizeof(MapEnemyEncounterView) == 0x180 ? 1 : -1];
-
 extern "C" {
-extern MapEnemy *g_mapEnemy;
-EnemyEncounterMap *gameGetMapBlock();
 void gameCounterAddSaturating(u32 flag, s32 value);
 void textFormatBuffer(char *output, const char *format, ...);
 void sequenceRequestDefer(s32 message, u32 argument);
 void sequenceRequestClearDeferred();
 void FUN_0027d8b4(u32 result);
 f32 mathDistanceBetweenPoints(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
-void FUN_00253860(MapEnemyEncounterView *enemy, s32 state);
+void FUN_00253860(MapEnemyEntry *enemy, s32 state);
 f32 mathPositionHeadingDegrees(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 f32 FUN_0027eee0(f32 first, f32 second);
 }
 
-static __inline void applyEnemyEncounter(MapEnemyEncounterView *enemy, EnemyEncounterMap *map, bool forced)
+static __inline void applyEnemyEncounter(MapEnemyEntry *enemy, MapSaveBlock *map, bool forced)
 {
     if (!enemy->eventEnabled)
         return;
@@ -63,8 +50,8 @@ static __inline void applyEnemyEncounter(MapEnemyEncounterView *enemy, EnemyEnco
 extern "C" u32 FUN_002d2b40()
 {
     MapEnemy *enemies = g_mapEnemy;
-    EnemyEncounterMap *map = gameGetMapBlock();
-    if (g_gameState.encounterBlocked || enemies->controller.state == 0)
+    MapSaveBlock *map = gameGetMapBlock();
+    if (g_gameState.encounterBlocked || enemies->state == 0)
         return ~0u;
     g_gameState.event.encounterCount = 0;
     g_gameState.event.encounterValue = 0;
@@ -73,7 +60,7 @@ extern "C" u32 FUN_002d2b40()
         --g_gameState.event.encounterDelay;
         if (g_gameState.event.encounterDelay == 1) {
             g_gameState.event.encounterForced = 1;
-            MapEnemyEncounterView *enemy = reinterpret_cast<MapEnemyEncounterView *>(&enemies->entries[g_gameState.event.encounterEnemyIndex]);
+            MapEnemyEntry *enemy = &enemies->entries[g_gameState.event.encounterEnemyIndex];
             gameCounterAddSaturating(21, 1);
             applyEnemyEncounter(enemy, map, true);
             return enemy->result;
@@ -81,7 +68,7 @@ extern "C" u32 FUN_002d2b40()
         return ~0u;
     }
     for (s32 i = 0; i < MAP_ENEMY_COUNT; ++i) {
-        MapEnemyEncounterView *enemy = reinterpret_cast<MapEnemyEncounterView *>(&enemies->entries[i]);
+        MapEnemyEntry *enemy = &enemies->entries[i];
         if (!enemy->active || !enemy->registered || enemy->state == 19 ||
             (enemy->state == 3 && enemy->elapsed < 20) || enemy->behavior == 6)
             continue;

@@ -2,7 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/BgData.h"
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -34,8 +34,8 @@ u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y)
     for (s32 i = 0; i < 6; ++i) {
         work->unk70[i] = 0;
     }
-    void *section = dataTableGet(26, 0);
-    const s16 *nodes = (const s16 *)dataTableGetEntries(section);
+    void *section = dataTableGet(0x1A, 0);
+    const s16 *nodes = bgDataTextureNodes(section);
     dataTableGetCount(section);
     work->node = nodes[id - 1];
     work->x = x - 56;

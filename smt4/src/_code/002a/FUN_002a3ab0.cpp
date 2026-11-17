@@ -1,19 +1,16 @@
 /* NON_MATCHING: retail holds the matrix and base quaternion in VFP registers s17-s31 across the loop and passes the two result halves through a stack pair; the order of the VFP loads/multiply-accumulates differs. */
 #include "common.h"
 #include "shard/Resource.h"
-
-struct Vec4 {
-    f32 x, y, z, w;
-};
+#include "gfx/VectorScratch.h"
 
 namespace {
 
 /* A joint of the pose chain. */
 struct SkelNode {
-    /* 0x00 */ Vec4 base;
+    /* 0x00 */ Vector4 base;
     /* 0x10 */ u8 unk10[0x30];
-    /* 0x40 */ Vec4 local;
-    /* 0x50 */ Vec4 rotation;
+    /* 0x40 */ Vector4 local;
+    /* 0x50 */ Vector4 rotation;
     /* 0x60 */ f32 scaleA;
     /* 0x64 */ u8 unk64[4];
     /* 0x68 */ u32 flags;                /* 4: pin the y component, 0x80: scale the local vector */
@@ -27,72 +24,64 @@ struct SkelNode {
 };
 
 /* The scratch workspace of the quaternion routines. */
-struct SkelWorkspace {
-    /* 0x000 */ u8 unk000[0x100];
-    /* 0x100 */ Vec4 quaternion;
-    /* 0x110 */ Vec4 offset;
-    /* 0x120 */ u8 unk120[0x20];
-    /* 0x140 */ f32 matrix[16];          /* built from the quaternion */
-};
 
 }
 
 extern "C" {
-extern SkelWorkspace g_vectorScratch;
 void gfxQuaternionWorkspaceBuildMatrix(void);
 
 /* Poses the joint chain below `root`: the workspace quaternion is root's rotation plus the given offset, and
    every child's local vector is rotated by the resulting matrix and accumulated into it before the child's
    type handler gets the result. */
-void FUN_002a3ab0(SkelNode *root, Vec4 *offsetIn)
+void FUN_002a3ab0(SkelNode *root, Vector4 *offsetIn)
 {
-    SkelWorkspace *workspace = &g_vectorScratch;
-    workspace->quaternion = *offsetIn;
+    VectorScratch *workspace = &g_vectorScratch;
+    workspace->first.vector = *offsetIn;
     root->local = *offsetIn;
-    workspace->offset = root->base;
-    workspace->quaternion.x = workspace->quaternion.x + workspace->offset.x;
-    workspace->quaternion.y = workspace->quaternion.y + workspace->offset.y;
-    workspace->quaternion.z = workspace->quaternion.z + workspace->offset.z;
-    workspace->quaternion.w = workspace->quaternion.w + workspace->offset.w;
-    Vec4 sum = workspace->quaternion;
-    workspace->quaternion = root->rotation;
+    workspace->second.vector = root->base;
+    workspace->first.vector.x = workspace->first.vector.x + workspace->second.vector.x;
+    workspace->first.vector.y = workspace->first.vector.y + workspace->second.vector.y;
+    workspace->first.vector.z = workspace->first.vector.z + workspace->second.vector.z;
+    workspace->first.vector.w = workspace->first.vector.w + workspace->second.vector.w;
+    Vector4 sum = workspace->first.vector;
+    workspace->first.vector = root->rotation;
     gfxQuaternionWorkspaceBuildMatrix();
     f32 scale = root->scaleA * root->scaleB;
     f32 matrix[16];
     for (s32 i = 0; i < 16; i++) {
-        matrix[i] = workspace->matrix[i];
+        matrix[i] = workspace->matrix.matrix.values[i];
     }
     for (SkelNode *node = root->firstChild; node != NULL; node = node->next) {
-        workspace->quaternion = sum;
+        workspace->first.vector = sum;
         if ((node->flags & 4) != 0) {
-            workspace->quaternion.y = 5.0f;
+            workspace->first.vector.y = 5.0f;
         }
-        workspace->offset = node->local;
+        workspace->second.vector = node->local;
         if ((node->flags & 0x80) != 0) {
-            workspace->offset.x = workspace->offset.x * scale;
-            workspace->offset.y = workspace->offset.y * scale;
-            workspace->offset.z = workspace->offset.z * scale;
-            workspace->offset.w = workspace->offset.w * scale;
+            workspace->second.vector.x = workspace->second.vector.x * scale;
+            workspace->second.vector.y = workspace->second.vector.y * scale;
+            workspace->second.vector.z = workspace->second.vector.z * scale;
+            workspace->second.vector.w = workspace->second.vector.w * scale;
         }
         for (s32 i = 0; i < 16; i++) {
-            workspace->matrix[i] = matrix[i];
+            workspace->matrix.matrix.values[i] = matrix[i];
         }
-        f32 x = workspace->offset.x;
-        f32 y = workspace->offset.y;
-        f32 z = workspace->offset.z;
-        workspace->offset.x = x * matrix[0] + y * matrix[4] + z * matrix[8];
-        workspace->offset.y = x * matrix[1] + y * matrix[5] + z * matrix[9];
-        workspace->offset.z = x * matrix[2] + y * matrix[6] + z * matrix[10];
-        workspace->offset.w = x * matrix[3] + y * matrix[7] + z * matrix[11];
-        workspace->quaternion.x = workspace->quaternion.x + workspace->offset.x;
-        workspace->quaternion.y = workspace->quaternion.y + workspace->offset.y;
-        workspace->quaternion.z = workspace->quaternion.z + workspace->offset.z;
-        workspace->quaternion.w = workspace->quaternion.w + workspace->offset.w;
+        f32 x = workspace->second.vector.x;
+        f32 y = workspace->second.vector.y;
+        f32 z = workspace->second.vector.z;
+        workspace->second.vector.x = x * matrix[0] + y * matrix[4] + z * matrix[8];
+        workspace->second.vector.y = x * matrix[1] + y * matrix[5] + z * matrix[9];
+        workspace->second.vector.z = x * matrix[2] + y * matrix[6] + z * matrix[10];
+        workspace->second.vector.w = x * matrix[3] + y * matrix[7] + z * matrix[11];
+        workspace->first.vector.x = workspace->first.vector.x + workspace->second.vector.x;
+        workspace->first.vector.y = workspace->first.vector.y + workspace->second.vector.y;
+        workspace->first.vector.z = workspace->first.vector.z + workspace->second.vector.z;
+        workspace->first.vector.w = workspace->first.vector.w + workspace->second.vector.w;
         Resource *resource = node->resource;
         /* The position handler; retail passes the vector by value here. */
-        void (*apply)(void *, Vec4) = reinterpret_cast<void (*)(void *, Vec4)>(g_handlerTable[resource->type].setPosition);
+        void (*apply)(void *, Vector4) = reinterpret_cast<void (*)(void *, Vector4)>(g_handlerTable[resource->type].setPosition);
         if (apply != NULL) {
-            apply(resource->data, workspace->quaternion);
+            apply(resource->data, workspace->first.vector);
         }
     }
 }

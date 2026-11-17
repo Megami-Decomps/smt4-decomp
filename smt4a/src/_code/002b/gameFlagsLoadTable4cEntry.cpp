@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "code/Code002b.h"
 
 extern "C" {
@@ -17,21 +17,21 @@ u32 randRange(s32 max);
 /* Loads table 0x4C entry `id` into the flag block, with a level of -1 when it has none and at most 15. */
 void gameFlagsLoadTable4cEntry(s32 id)
 {
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     Table4cEntry *entry = dataTable4CGetEntry(id);
-    flags->table4c.rate = 1;
-    flags->table4cHead.unk3a = entry->unk04;
-    flags->table4cHead.unk3b = entry->unk06;
-    flags->table4c.level = entry->level;
-    flags->table4c.rate = 100;
-    flags->table4c.unk1520 = 0;
-    flags->table4c.id = id;
-    flags->table4c.random4 = randRange(4);
-    flags->table4c.random100 = randRange(100);
-    if (flags->table4c.level == 0) {
-        flags->table4c.level = -1;
-    } else if (flags->table4c.level > 15) {
-        flags->table4c.level = 15;
+    flags->option = 1;
+    flags->sizeX = entry->unk04;
+    flags->sizeY = entry->unk06;
+    flags->layer = entry->level;
+    flags->option = 100;
+    flags->unk1520 = 0;
+    flags->unk15C4 = id;
+    flags->random4 = randRange(4);
+    flags->random100 = randRange(100);
+    if (flags->layer == 0) {
+        flags->layer = -1;
+    } else if (flags->layer > 15) {
+        flags->layer = 15;
     }
 }
 

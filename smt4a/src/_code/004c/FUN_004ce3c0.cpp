@@ -4,6 +4,7 @@
 #include "game/GameStateA.h"
 #include "code/Code0013.h"
 #include "Model/MoriModelManager.h"
+#include "gfx/ControllerModel.h"
 
 struct HealingFreeCamera {
     /* 0x00 */ u8 unk00[8];
@@ -27,9 +28,6 @@ void FUN_004cdddc(HealingSceneWork *work);
 s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, u32 channel, u32 duration);
 void FUN_0035d03c(u32 value);
-s32 FUN_0040ab8c(HealingModel *model);
-void moriModelContentLoadBody(HealingModel *model, u32 value);
-void modelPlayClip(void *object, u32 animation, u32 mode, f32 speed, f32 blend);
 void *dataTableFileGetTable(void *file, u32 index);
 void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
@@ -51,10 +49,10 @@ void gameStateClearFlag();
 void asdSequenceRequest(u32 sequence, u32 first, u32 second);
 }
 
-static __inline void registerHealingModel(HealingModel *model)
+static __inline void registerHealingModel(MoriModelContent *model)
 {
     moriModelContentLoadBody(model, 0);
-    void *object = model->object;
+    Obj557b18 *object = model->body;
     modelPlayClip(object, 0, 2, 1, 1);
     handleRegistryRegisterObject(g_handleRegistry, object);
 }

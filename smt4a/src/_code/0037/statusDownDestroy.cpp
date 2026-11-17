@@ -1,4 +1,5 @@
 #include "status/StatusDownA.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -6,7 +7,6 @@ void jobStop(u32 job, s32 arg);
 void ifTouchRegionRemove(void);
 void asdMemFree(void *block);
 void asdMemFreeSlot(void *slot);
-void scrScriptProcessDestroy(void *process);
 void __aeabi_memset4(void *dst, u32 size, s32 value);
 
 /* Tears down the status-down screen: touch regions, its slot and script, then the work area. */

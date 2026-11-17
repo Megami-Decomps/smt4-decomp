@@ -1,5 +1,6 @@
 /* NON_MATCHING: not matched (153 rows against 152): retail spills the object argument to a 56-byte frame (its address is taken), the mesh loop and the inlined type-chain walks are laid out differently. The null `node` dereference after the flag test mirrors retail. */
 #include "common.h"
+#include "gfx/GfxSettings.h"
 
 /* Runtime type information as the engine's dynamic casts see it: a chain of base types. */
 struct TypeInfo {
@@ -51,18 +52,9 @@ struct ShadowModel {
 };
 
 /* g_gfxSettings fields used here. */
-struct GfxSettingsView {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ u8 enabled;
-    /* 0x02 */ u8 unk02[0x5E];
-    /* 0x60 */ f32 shadowDepth;
-    /* 0x64 */ u8 unk64[0x1C];
-    /* 0x80 */ void *modelData;     /* the loaded graphics file */
-};
 
 extern "C" {
 
-extern GfxSettingsView g_gfxSettings;
 extern TypeInfo DAT_005c0f18;
 extern TypeInfo DAT_005c0f34;
 
@@ -94,7 +86,7 @@ u32 FUN_001acca0(TypedObject *object)
     ShadowModel *model;
     s32 i;
 
-    if (g_gfxSettings.enabled == 0 || g_gfxSettings.modelData == NULL) {
+    if (g_gfxSettings.initialized == 0 || g_gfxSettings.modelData == NULL) {
         return 0;
     }
     model = (ShadowModel *)castTo(object, &DAT_005c0f18);
@@ -128,15 +120,15 @@ u32 FUN_001acca0(TypedObject *object)
                 }
                 if (node->shadowMode >= 1) {
                     if (node->shadowMode == 2) {
-                        if (g_gfxSettings.enabled != 0) {
-                            FUN_001b5314(mesh, 0, g_gfxSettings.shadowDepth);
+                        if (g_gfxSettings.initialized != 0) {
+                            FUN_001b5314(mesh, 0, g_gfxSettings.shadowOff);
                         }
                         applied = 1;
                     }
                     ((ShadowModel *)castTo(object, &DAT_005c0f34))->shadowCaster = 1;
                 } else {
-                    if (g_gfxSettings.enabled != 0) {
-                        FUN_001b5314(mesh, 0, g_gfxSettings.shadowDepth);
+                    if (g_gfxSettings.initialized != 0) {
+                        FUN_001b5314(mesh, 0, g_gfxSettings.shadowOff);
                     }
                     applied = 1;
                 }

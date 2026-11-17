@@ -1,23 +1,17 @@
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 
+#include "gamedata/MsSearchTable.h"
+
 extern "C" {
 
-typedef struct Entry {
-    /* 0x00 */ u8 unk00[0x28];
-} Entry;
+MsSearchRecord *FUN_0046ea50(AocSystemA *system, u32 index);
 
-
-void *dataTableGet(u32 table, u32 section);
-Entry *dataTableGetEntries(void *table);
-u32 dataTableGetCount(void *table);
-Entry *FUN_0046ea50(AocSystemA *system, u32 index);
-
-/* Returns entry `index` of data table 48: from the base table, then from the add-on content's entries (which follow it); NULL past both. */
-Entry *FUN_003799d0(u32 index)
+/* Returns search mark `index` (ms_search_Table.tbb): from the base table, then from the add-on content's entries (which follow it); NULL past both. */
+MsSearchRecord *FUN_003799d0(u32 index)
 {
     void *table = dataTableGet(48, 0);
-    Entry *entries = dataTableGetEntries(table);
+    MsSearchRecord *entries = msSearchRecords(table);
     u32 count = dataTableGetCount(table);
 
     if (index < count) {

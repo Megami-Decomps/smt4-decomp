@@ -9,8 +9,8 @@ void FUN_0017fbc4(void)
 {
     CommandWindow *obj = g_comWin;
 
-    g_comWin->unk08 = 4;
-    spriteStartAnimationByIndex((UiSpriteState *)obj->unk3C, 1);
+    g_comWin->phase = 4;
+    spriteStartAnimationByIndex(&obj->sprites[0], 1);
 }
 
 } /* extern "C" */

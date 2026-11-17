@@ -127,7 +127,6 @@ extern int slotIsActive(unsigned int);
 extern u32 effResourceListHasActiveData(LinkedItems* resources);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
-
 unsigned int FUN_002fcd98(void)
 
 {
@@ -583,7 +582,7 @@ LAB_002fd78c:
     DAT_0044ea86 = '\0';
   }
 LAB_002fd8ac:
-  if (g_effectEditor.unk00[0] != '\0') {
+  if (g_effectEditor.toggle != '\0') {
     asdDebugLog(0xaa,0,6,&LAB_002fd9d4);
   }
   if (DAT_0044ea90 != 0) {

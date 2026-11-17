@@ -1,15 +1,15 @@
-#include "common.h"
+#include "event/eventCommand.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-void *jobGetWork(void *job);
 void asdMemFree(void *block);
-extern void *g_eventCommand;
 
-void eventCommandFreeWork(void *job)
+/* Destroy callback of the "EventMessUnderFade" job: frees its work. */
+void eventCommandFreeWork(u32 job)
 {
     asdMemFree(jobGetWork(job));
-    g_eventCommand = NULL;
+    g_eventCommand.command = NULL;
 }
 
 } /* extern "C" */

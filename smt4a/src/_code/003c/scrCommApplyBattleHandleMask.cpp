@@ -1,10 +1,10 @@
 #include "battle/BtlMainAccess.h"
 #include "bible/bibleAnalyze.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 extern u64 DAT_00570dd8;
-extern u32 g_btlUiBlock;
 
 s32 scrCommApplyBattleHandleMask(void)
 {

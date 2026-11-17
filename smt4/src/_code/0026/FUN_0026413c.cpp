@@ -2,29 +2,11 @@
 #include "map/LmapMainGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "game/GameState.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 
 /* The map camera (only the fields touched here). */
-typedef struct MapCameraTurn {
-    /* 0x000 */ u8 unk000[0x18];
-    /* 0x018 */ f32 angle;              /* heading in degrees */
-    /* 0x01C */ u8 unk01c[0x94];
-    /* 0x0B0 */ u8 turning;             /* a half-turn is in progress */
-    /* 0x0B1 */ u8 held;                /* both shoulder buttons are still held after a turn */
-    /* 0x0B2 */ s16 cooldown;
-    /* 0x0B4 */ s16 unk0b4;
-    /* 0x0B6 */ u8 unk0b6[2];
-    /* 0x0B8 */ f32 turnStart;
-    /* 0x0BC */ f32 turnTarget;
-    /* 0x0C0 */ f32 turnDirection;
-    /* 0x0C4 */ u8 unk0c4[0x148];
-    /* 0x20C */ f32 unk20c;
-    /* 0x210 */ f32 unk210;
-} MapCameraTurn;
-
-
-extern MapCameraTurn *g_mapCamera;
 
 s32 inputIsQuestMenuPressed(void);
 s32 padIsButtonPressed(u32 button);
@@ -36,18 +18,18 @@ f32 mathGetShortestAngleDelta(f32 angle, f32 target);
 void FUN_0026413c(void)
 {
     LmapMainState *state = g_lmapMainState;
-    MapCameraTurn *camera = g_mapCamera;
+    LmapView *camera = g_mapCamera;
     s32 left = 0;
     s32 right = 0;
     s32 start = 0;
     f32 step = 3.0f;
 
-    camera->angle = state->angle;
+    camera->heading = state->angle;
     if (state->angleReset != 0) {
         camera->turning = 0;
-        camera->held = 0;
+        camera->turnHeld = 0;
         camera->cooldown = 10;
-        camera->unk0b4 = 0;
+        camera->elapsed = 0;
         camera->turnStart = 0.0f;
         camera->turnTarget = 0.0f;
         camera->turnDirection = 1.0f;
@@ -57,8 +39,8 @@ void FUN_0026413c(void)
     }
     if (g_gameState.inputBlocked == 0 && g_gameState.owner == NULL) {
         if (camera->turning == 0) {
-            if (camera->held != 0 && slotIsActive(8) == 0 && slotIsActive(7) == 0) {
-                g_mapCamera->held = 0;
+            if (camera->turnHeld != 0 && slotIsActive(8) == 0 && slotIsActive(7) == 0) {
+                g_mapCamera->turnHeld = 0;
             }
             if (g_mapCamera->cooldown <= 6) {
                 if (slotIsActive(8) != 0) {
@@ -70,7 +52,7 @@ void FUN_0026413c(void)
                 if (g_mapCamera->cooldown == 0
                     && (inputIsQuestMenuPressed() != 0
                         || (slotIsActive(8) != 0 && slotIsActive(7) != 0 && padIsButtonPressed(8) == 0
-                            && padIsButtonPressed(7) == 0 && g_mapCamera->held == 0))) {
+                            && padIsButtonPressed(7) == 0 && g_mapCamera->turnHeld == 0))) {
                     left = 0;
                     right = 0;
                     start = 1;
@@ -82,47 +64,47 @@ void FUN_0026413c(void)
     if (camera->turning == 0) {
         if (start != 0) {
             camera->turning = 1;
-            camera->unk20c = 0.0f;
-            camera->unk210 = 0.0f;
-            camera->turnStart = camera->angle;
+            camera->values[0] = 0.0f;
+            camera->values[1] = 0.0f;
+            camera->turnStart = camera->heading;
             camera->turnTarget = 180.0f;
-            g_mapCamera->unk0b4 = 0;
-            g_mapCamera->turnDirection = mathGetShortestAngleDelta(camera->angle, 180.0f) < 0.0f ? -1.0f : 1.0f;
+            g_mapCamera->elapsed = 0;
+            g_mapCamera->turnDirection = mathGetShortestAngleDelta(camera->heading, 180.0f) < 0.0f ? -1.0f : 1.0f;
         }
     }
     if (g_mapCamera->turning == 0) {
         if (left != 0) {
-            g_mapCamera->angle = g_mapCamera->angle + step;
+            g_mapCamera->heading = g_mapCamera->heading + step;
         } else if (right != 0) {
-            g_mapCamera->angle = g_mapCamera->angle - step;
+            g_mapCamera->heading = g_mapCamera->heading - step;
         }
     } else {
-        f32 remaining = FUN_0027eee0(g_mapCamera->angle, g_mapCamera->turnTarget);
+        f32 remaining = FUN_0027eee0(g_mapCamera->heading, g_mapCamera->turnTarget);
 
         camera = g_mapCamera;
         if (remaining <= 15.5f) {
-            camera->angle = camera->turnTarget;
+            camera->heading = camera->turnTarget;
             camera->turning = 0;
             camera->cooldown = 10;
-            camera->held = 1;
+            camera->turnHeld = 1;
         } else if (camera->turnDirection >= 0.0f) {
-            camera->angle = camera->angle + 15.0f;
+            camera->heading = camera->heading + 15.0f;
         } else {
-            camera->angle = camera->angle - 15.0f;
+            camera->heading = camera->heading - 15.0f;
         }
         if (g_mapCamera->turning != 0) {
-            state->angle = g_mapCamera->angle;
+            state->angle = g_mapCamera->heading;
             return;
         }
     }
     camera = g_mapCamera;
-    if (camera->angle < 0.0f) {
-        camera->angle = camera->angle + 360.0f;
+    if (camera->heading < 0.0f) {
+        camera->heading = camera->heading + 360.0f;
     }
-    if (camera->angle >= 360.0f) {
-        camera->angle = camera->angle - 360.0f;
+    if (camera->heading >= 360.0f) {
+        camera->heading = camera->heading - 360.0f;
     }
-    state->angle = g_mapCamera->angle;
+    state->angle = g_mapCamera->heading;
 }
 
 }

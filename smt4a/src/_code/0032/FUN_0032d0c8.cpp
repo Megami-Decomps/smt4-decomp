@@ -1,19 +1,12 @@
 /* NON_MATCHING: only the prologue schedule differs: retail loads the g_buttonHelp address before moving the arguments and reads the work pointer right after the frame setup; the build loads the address after them. */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
-#include "ui/ButtonHelp.h"
+#include "ui/ButtonHelpGlobal.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
-/* g_buttonHelp followed by the default help text directory. */
-struct ButtonHelpTextGlobals {
-    ButtonHelpGlobalsA prefix;
-    /* 0x08 */ RelativeDirectory *defaultDirectory;
-};
-
 extern "C" {
-extern ButtonHelpTextGlobals g_buttonHelp;
 void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
 void FUN_002c0940(char *output, s32 value);
 s32 textFormatBuffer(char *destination, const char *format, ...);
@@ -25,17 +18,17 @@ void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, 
 // Fill the help text variables for a demon's normal attack (hit range, attribute, target, ailment) and draw its help entry.
 void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 devilId, u32 extra)
 {
-    ButtonHelpWorkA *work = g_buttonHelp.prefix.work;
+    ButtonHelpWorkA *work = g_buttonHelp.work;
     NkmBaseRecordA *devil = nkmBaseGetRecord(devilId);
 
     char text[128];
 
     if (devil == NULL) {
-        work->mode = 0;
+        work->textVisible = 0;
         return;
     }
-    work->helpState = 1;
-    work->mode = 1;
+    work->text.useDirectoryText = 1;
+    work->textVisible = 1;
     if (devil->attack.minHits == devil->attack.maxHits) {
         FUN_00359974(37, devil->attack.minHits, 0xFFFFFFFF, 0);
     } else {
@@ -84,9 +77,9 @@ void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 devilId, u32 extr
     FUN_002ad414(0, extra, devilId, text);
     scrSetStringSlot(41, text);
     if (directory == NULL) {
-        directory = g_buttonHelp.defaultDirectory;
+        directory = static_cast<RelativeDirectory *>(g_buttonHelp.mbm);
     }
-    asdTextDrawDirectoryEntry((AsdText *)work->unk678, 2, -1, 0, 3, directory, index);
+    asdTextDrawDirectoryEntry((AsdText *)work->text.directoryText, 2, -1, 0, 3, directory, index);
 }
 
 }

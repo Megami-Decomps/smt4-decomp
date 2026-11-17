@@ -5,39 +5,9 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
 
-/* The button help block (g_buttonHelp + 4). */
-struct ButtonHelp {
-    /* 0x000 */ u8 unk000[0x10];
-    /* 0x010 */ u32 mode;
-    /* 0x014 */ u8 unk014[0x368];
-    /* 0x37C */ u8 anchor[0x2C];
-    /* 0x3A8 */ f32 fade;
-    /* 0x3AC */ u8 unk3AC[0x5C];
-    /* 0x408 */ u8 fadeObject[0xBC];
-    /* 0x4C4 */ u8 enabled;
-    /* 0x4C5 */ u8 visible;
-    /* 0x4C6 */ u8 unk4C6[2];
-    /* 0x4C8 */ u8 kind;
-    /* 0x4C9 */ u8 unk4C9[2];
-    /* 0x4CB */ u8 showIcons;
-    /* 0x4CC */ u32 icon;
-    /* 0x4D0 */ u8 firstIcon[0x40];
-    /* 0x510 */ u8 secondIcon[0x40];
-    /* 0x550 */ u8 unk550[4];
-    /* 0x554 */ u8 iconMode;
-    /* 0x555 */ u8 unk555[3];
-    /* 0x558 */ u32 iconSprite;
-    /* 0x55C */ u8 spriteIcons;
-};
-
-struct ButtonHelpRef {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ ButtonHelp *block;
-};
+#include "ui/ButtonHelpGlobal.h"
 
 extern "C" {
-extern ButtonHelpRef g_buttonHelp;
-
 void FUN_00190e48(void);
 void FUN_001f40fc(void *icon, s32 x, s32 y);
 void fadeObjectResetIfActive(void *object);
@@ -49,37 +19,37 @@ s32 renderCtxPackPassFlags(s32 a, s32 b);
 /* Draws the title screen's button help: its fade or icon sprites and the two button icons. */
 u8 FUN_002109cc(void)
 {
-    ButtonHelp *help = g_buttonHelp.block;
-    if (help->enabled) {
+    ButtonHelpWork *help = g_buttonHelp.work;
+    if (help->drawEnabled) {
         renderCtxSelectStereoLayout(g_titleScene);
         renderStackPush(&g_titleScene->stackA, renderCtxPackPassFlags(1, 0));
-        if (help->mode <= 3 && (help->mode < 2 || help->mode == 2 || help->mode == 3)) {
+        if (help->state <= 3 && (help->state < 2 || help->state == 2 || help->state == 3)) {
             FUN_00190e48();
-            if (help->visible) {
-                if (help->kind != 1) {
+            if (help->panelState) {
+                if (help->mode != 1) {
                     fadeObjectResetIfActive(NULL);
-                    fadeObjectResetIfActive(help->fadeObject);
+                    fadeObjectResetIfActive(&help->panelSprites[1]);
                 } else {
-                    u32 x = vec2GetXInt((UiSpriteState *)help->anchor);
-                    u32 y = vec2GetYInt((UiSpriteState *)help->anchor);
+                    u32 x = vec2GetXInt(&help->panelSprites[0]);
+                    u32 y = vec2GetYInt(&help->panelSprites[0]);
                     texDrawTableEntryAtStoredOrigin(2, 0x12, 0, x, y, 0x10);
                     texDrawTableEntryAtStoredOrigin(2, 0x12, 1, x, y, 0x10);
                 }
-                if (help->visible && help->showIcons && help->fade >= 1.0f) {
+                if (help->panelState && help->textVisible && help->panelSprites[0].alpha >= 1.0f) {
                     TextureTableEntryIV *first = asdTMTexTableEntryAt(0x12, 0x1D);
-                    if (help->spriteIcons)
-                        FUN_002b75ec(help->iconSprite, first->x, first->y, 0x15, 6, 0);
-                    else if (help->iconMode)
-                        textDrawString(3, help->icon, help->firstIcon, (f32)first->x, (f32)first->y);
+                    if (help->text.useDirectoryText)
+                        FUN_002b75ec(help->text.directoryText, first->x, first->y, 0x15, 6, 0);
+                    else if (help->text.highlightLine)
+                        textDrawString(3, help->text.style, help->text.lines[0].text, (f32)first->x, (f32)first->y);
                     else
-                        FUN_001f40fc(help->firstIcon, first->x, first->y);
+                        FUN_001f40fc(help->text.lines[0].text, first->x, first->y);
                     TextureTableEntryIV *second = asdTMTexTableEntryAt(0x12, 0x1E);
-                    if (help->spriteIcons)
-                        FUN_002b75ec(help->iconSprite, second->x, second->y, 0x15, 6, 1);
-                    else if (help->iconMode != 1)
-                        textDrawString(3, help->icon, help->secondIcon, (f32)second->x, (f32)second->y);
+                    if (help->text.useDirectoryText)
+                        FUN_002b75ec(help->text.directoryText, second->x, second->y, 0x15, 6, 1);
+                    else if (help->text.highlightLine != 1)
+                        textDrawString(3, help->text.style, help->text.lines[1].text, (f32)second->x, (f32)second->y);
                     else
-                        FUN_001f40fc(help->secondIcon, second->x, second->y);
+                        FUN_001f40fc(help->text.lines[1].text, second->x, second->y);
                 }
             }
         }

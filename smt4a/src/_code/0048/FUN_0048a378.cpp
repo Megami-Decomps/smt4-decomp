@@ -3,7 +3,7 @@
 #include "game/GameStateA.h"
 #include "gamedata/GameDataAccess_VariantG.h"
 #include "gamedata/GameDataAccess.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 struct NavigationFeedbackRequest {
     u8 unk00[0xC];
@@ -14,10 +14,6 @@ struct NavigationFeedbackFlags {
     u8 blocked;
     u8 unk61;
     u8 ready;
-};
-struct NavigationFeedbackMode {
-    u8 unk0000[0x1514];
-    s32 mode;
 };
 extern "C" {
 void commonBgReset(void);
@@ -30,7 +26,7 @@ extern NavigationFeedbackFlags DAT_005f19fc;
 /* Refreshes map background state and chooses navigation feedback after tearing down button help. */
 void FUN_0048a378(NavigationFeedbackRequest *request)
 {
-    NavigationFeedbackMode *settings = reinterpret_cast<NavigationFeedbackMode *>(gameFlagsGetBlock());
+    MapSaveBlockA *settings = gameFlagsGetBlock();
     if ((&g_gameState)->menuOpen != 0) {
         (&g_gameState)->menuOpen = 0;
         if (gameFlagIsSet(0x49A) == 0) {
@@ -57,7 +53,7 @@ void FUN_0048a378(NavigationFeedbackRequest *request)
             return;
         }
         FUN_00183e58();
-        s32 mode = settings->mode;
+        s32 mode = settings->naviFeedbackMode;
         if (mode == 0) {
             FUN_00183e58();
             sysPlaySe(0x10A);

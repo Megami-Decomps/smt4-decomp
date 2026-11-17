@@ -1,33 +1,28 @@
 /* NON_MATCHING: nullable-owner guards merge (retail keeps five separate guards) and transform constants are scheduled differently; FUN_003fd924 takes two floats. */
 #include "battle/btlView.h"
 #include "Model/MoriModelManager.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
-void moriModelContentLoadBody(BattleViewOwner *owner, BattleViewObject *parent);
-void FUN_003fd924(BattleViewObject *object, u32 index, u32 kind, f32 x, f32 y);
-void moriModelUnitStartMaterialAnimation(BattleViewObject *object, u32 index, u32 kind, f32 value);
-void controllerSetPosition(BattleViewObject *object, f32 x, f32 y, f32 z);
-void controllerSetPositionXyz(BattleViewObject *object, f32 x, f32 y, f32 z);
-void controllerSetRotationEulerDegrees(BattleViewObject *object, f32 x, f32 y, f32 z);
 
-void FUN_004d854c(BattleViewOwner **slot)
+void FUN_004d854c(MoriModelContent **slot)
 {
     moriModelContentLoadBody(*slot, 0);
-    BattleViewObject *registered = (*slot)->object;
+    Obj557b18 *registered = (*slot)->body;
     if (*slot != 0) {
-        FUN_003fd924((*slot)->object, 0, 1, 1.0f, 1.0f);
+        FUN_003fd924((*slot)->body, 0, 1, 1.0f, 1.0f);
     }
     if (*slot != 0) {
-        moriModelUnitStartMaterialAnimation((*slot)->object, 0, 2, 1.0f);
+        moriModelUnitStartMaterialAnimation((*slot)->body, 0, 2, 1.0f);
     }
     if (*slot != 0) {
-        controllerSetPosition((*slot)->object, 0.0f, 0.0f, 0.0f);
+        controllerSetPosition((*slot)->body, 0.0f, 0.0f, 0.0f);
     }
     if (*slot != 0) {
-        controllerSetPositionXyz((*slot)->object, 1.0f, 1.0f, 1.0f);
+        controllerSetPositionXyz((*slot)->body, 1.0f, 1.0f, 1.0f);
     }
     if (*slot != 0) {
-        controllerSetRotationEulerDegrees((*slot)->object, 1.0f, 1.0f, 1.0f);
+        controllerSetRotationEulerDegrees((*slot)->body, 1.0f, 1.0f, 1.0f);
     }
     handleRegistryRegisterObject(g_handleRegistry, registered);
 }

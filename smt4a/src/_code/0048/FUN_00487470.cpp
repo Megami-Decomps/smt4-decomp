@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00487470` (_code @ 0x487470, 0x8e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int CONCAT44(double, double);
-int gameFlagsGetBlock(void);
 int FUN_001849bc(...);
 int areaDiscoveryMarkCell(...);
 int FUN_00487d6c(...);
@@ -341,7 +341,7 @@ LAB_00487744:
             }
             temp_v3 = (int)(temp_v14 + ((unsigned int)(temp_v14 >> 0x1f) >> 0x1a)) >> 6;
             temp_v7 = temp_v5;
-            temp_v4 = gameFlagsGetBlock();
+            temp_v4 = (int)gameFlagsGetBlock();
             if (((temp_v3 >= 0) && (9 >= temp_v3)) && ((temp_v7 >= 0 && (0xd >= temp_v7)))) {
               temp_v3 = temp_v3 + temp_v5 * 10;
               temp_v13 = 1;

@@ -17,7 +17,7 @@ void gameDataAllocBlocks(void)
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\GameData.cpp", 79);
         g_gameDataBlocks.smallBlock = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 0xc, 1);
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\GameData.cpp", 81);
-        g_gameDataBlocks.extraBlock = asdMemoryAlloc(0x100, 0x100, 0, 0x20, 1);
+        g_gameDataBlocks.countdowns = static_cast<u32 *>(asdMemoryAlloc(0x100, 0x100, 0, 0x20, 1));
     }
 }
 

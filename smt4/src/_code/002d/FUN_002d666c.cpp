@@ -8,7 +8,7 @@ void uiStoreTextureEntryCenter(UiSpriteState *unit, s32 value, s32 option);
 // Address of one of the two display units.
 static __inline UiSpriteState *buttonHelpUnitAt(ButtonHelpWork *work, s32 index)
 {
-    return &work->units[index];
+    return &work->panelSprites[index];
 }
 
 /* Resets the two display units for the default help mode, or hides them. */

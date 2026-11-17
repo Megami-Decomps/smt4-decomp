@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001abb98` (_code @ 0x1abb98, 0x1228 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -13,7 +14,6 @@ int asdMdlManagerCreateLoaded(unsigned char *, int);
 int lightOwnerRegister(unsigned int, int);
 int textFormatBuffer(unsigned char [64], unsigned char *, int);
 int randNextInRange(...);
-int gameGetMapBlock(void);
 int FUN_002ce4e4(void);
 int FUN_002e0274(...);
 void FUN_002e29c0(float x, float z, float heading);
@@ -227,7 +227,7 @@ void FUN_001abb98(void)
           temp_v8 = (int)*(char *)((int)puVar8 + 0xdd2);
           temp_v1 = (&DAT_004bd0d4)[temp_v7];
           temp_v13 = (int)*(char *)((int)puVar8 + 0xdd3);
-          temp_v6 = gameGetMapBlock();
+          temp_v6 = (int)gameGetMapBlock();
           if (temp_v1 != '\x01') {
             if (temp_v1 != '\x02') {
               if (temp_v1 != '\x03') {
@@ -291,7 +291,7 @@ void FUN_001abb98(void)
           temp_v8 = (int)*(char *)((int)puVar8 + 0xdd2);
           temp_v1 = (&DAT_004bd0d4)[temp_v6];
           temp_v13 = (int)*(char *)((int)puVar8 + 0xdd3);
-          temp_v15 = gameGetMapBlock();
+          temp_v15 = (int)gameGetMapBlock();
           if (temp_v1 != '\x01') {
             if (temp_v1 != '\x02') {
               if (temp_v1 != '\x03') {
@@ -335,7 +335,7 @@ LAB_001abfec:
               temp_v3 = *(char *)((int)puVar8 + 0xdd3);
               temp_v8 = (int)temp_v3;
               temp_v1 = (&DAT_004bd0d4)[temp_v6];
-              temp_v7 = gameGetMapBlock();
+              temp_v7 = (int)gameGetMapBlock();
               (&DAT_004bce8c)[DAT_004bd0d0 * 2] = temp_v4;
               (&DAT_004bce8d)[DAT_004bd0d0 * 2] = temp_v3;
               DAT_004bd0d0 = DAT_004bd0d0 + 1;
@@ -402,7 +402,7 @@ LAB_001abfec:
             temp_v23[3] = 0;
           }
           if (DAT_004bd0d0 == 0) break;
-          temp_v6 = gameGetMapBlock();
+          temp_v6 = (int)gameGetMapBlock();
           temp_v7 = randNextInRange((DAT_004bd0d0 - 1U) & 0xffff);
           temp_v8 = 0;
           temp_v13 = DAT_004bd0d0 - 1;
@@ -444,7 +444,7 @@ LAB_001ac248:;
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < *(char *)((int)puVar8 + 0xdd1));
       }
-      temp_v15 = gameGetMapBlock();
+      temp_v15 = (int)gameGetMapBlock();
       *(unsigned char *)(temp_v15 + 0xdd5) = 0;
       *(unsigned char *)(temp_v15 + 0xdd6) = 0;
       *(unsigned char *)(temp_v15 + 0xdd7) = 0;
@@ -572,7 +572,7 @@ LAB_001ac248:;
         }
       }
     }
-    temp_v6 = gameGetMapBlock();
+    temp_v6 = (int)gameGetMapBlock();
     temp_v7 = 1;
     if (1 < *(char *)(temp_v6 + 0xdd1) - 1) {
       do {
@@ -605,7 +605,7 @@ LAB_001ac248:;
     }
     FUN_0028527c(1);
   }
-  temp_v6 = gameGetMapBlock();
+  temp_v6 = (int)gameGetMapBlock();
   temp_v25 = temp_v6 + 0xd00;
   temp_v10 = 0;
   do {
@@ -759,7 +759,7 @@ LAB_001aca98:
     if (5 < temp_v6) {
       FUN_002ce4e4();
       FUN_002849a4(0);
-      temp_v6 = gameGetMapBlock();
+      temp_v6 = (int)gameGetMapBlock();
       if (*(char *)(temp_v6 + 0xdd5) != '\0') {
         temp_v15 = *(char *)(temp_v6 + 0xdd7) * 500 + 0xfa;
         temp_v7 = *(char *)(temp_v6 + 0xdd6) * 500 + 0xfa;
@@ -768,7 +768,7 @@ LAB_001aca98:
         FUN_002e0274((int)*(short *)(temp_v6 + 0xdb0),temp_v7,temp_v15);
         mapSpawnActiveSlotEffects();
       }
-      temp_v6 = gameGetMapBlock();
+      temp_v6 = (int)gameGetMapBlock();
       temp_v7 = mapGetDepartureIndex();
       if (temp_v7 != 8) {
         DAT_004bd0cc = 0;

@@ -5,13 +5,14 @@
 #include "gamedata/GameSaveBlocks.h"
 #include "common.h"
 #include <stddef.h>
-#include "ui/TimerSlot.h"
+#include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
 #include "gamedata/SelectedUnitQuery.h"
 #include "ui/GridNavigation.h"
 #include "ui/ButtonHelp.h"
 #include "shard/NaviMain.h"
 #include "shard/W6_W6Match3_ChunkPool.h"
+#include "script/ScriptVm.h"
 
 /* Doubly linked list node; the list keeps a sentinel node whose `prev` is the last element. */
 typedef struct ListNode {
@@ -203,17 +204,6 @@ typedef struct TaggedOwner {
 
 
 
-typedef struct CecEntry {
-    /* 0x00 */ u8 data[100];
-} CecEntry;
-
-typedef struct CecProcess {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 handle;
-    /* 0x08 */ u8 unk08[0x90];
-    /* 0x98 */ CecEntry entries[0x20];
-} CecProcess;
-
 /* Four lists of up to 16 handles, released by different callees. */
 typedef struct HandleSet {
     /* 0x00 */ u32 *flag;       /* cleared on reset */
@@ -350,7 +340,7 @@ struct OverlayObj {
     /* 0xE4 */ void *buffer0;
     /* 0xE8 */ void *buffer1;
     /* 0xEC */ u8 unkEC[0x8];
-    /* 0xF4 */ u32 scriptProcess;
+    /* 0xF4 */ ScriptProcess *scriptProcess;
     /* 0x0F8 */ u8 unk0F8[0x44];
     /* 0x13C */ s32 previousState;
     /* 0x140 */ s32 state;

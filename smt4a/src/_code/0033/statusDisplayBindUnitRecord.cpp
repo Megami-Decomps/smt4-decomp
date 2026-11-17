@@ -1,6 +1,7 @@
 /* NON_MATCHING: argument/pane live ranges change register allocation, permission handling folds into BIC/early stores, and the final option-byte address is folded; candidate -O2. */
 #include "shard/Shard0033.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "game/GameGlobalsRef.h"
 
 struct StatusUnitRecord {
     u8 unk00[0x34];
@@ -40,7 +41,6 @@ struct StatusDisplayFlagsView {
 };
 
 extern "C" {
-extern ObjBRef g_gameGlobals;
 s32 gameProgressIsAdvanced();
 s32 btlMainIsRunning();
 s32 btlIsDefeatSuppressed();

@@ -1,4 +1,5 @@
 /* NON_MATCHING: table helpers now follow the shared add-on table walk; remaining: retail hoists 0xFFFFFFFF into r8 and keeps the section pointer in a stack slot (push {r3,...}), so the saved registers and the flag-test splitting differ. */
+#include "gamedata/MapSaveBlock.h"
 #include "gamedata/DataTable.h"
 #include "game/GameState.h"
 #include "addon/AocSystem.h"
@@ -23,14 +24,6 @@ struct EventEntry {
     u16 needSpecial;  /* 0x0A: 1 requires a special enemy kind on the map */
 };
 
-struct MapBlock {
-    u8 pad000[0xE54];
-    u32 lastEvent;                /* 0xE54 */
-};
-
-
-
-MapBlock *gameGetMapBlock(void);
 s32 mapEnemyHasAvailableSecondaryState(void);
 u32 mapGetDepartureIndex(void);
 s32 gameFlagIsSet(s32 flag);
@@ -88,7 +81,7 @@ static s32 eventEntryAvailable(const EventEntry *entry, s32 hasSpecial)
  * one picked last time). */
 EventEntry *FUN_002765d0(void)
 {
-    MapBlock *flags = gameGetMapBlock();
+    MapSaveBlock *flags = gameGetMapBlock();
     s32 hasSpecial = mapEnemyHasAvailableSecondaryState();
 
     if (g_gameState.returning != 0) {

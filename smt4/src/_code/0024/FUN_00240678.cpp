@@ -6,6 +6,7 @@
 #include "battle/btlReflect.h"
 #include "battle/btlUI.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 namespace {
 struct CompletionState {
@@ -18,7 +19,6 @@ struct CompletionState {
 extern "C" {
 extern ReflectContext *g_btlActionReflect;
 extern CountPairTable *DAT_00435d18;
-extern BtlUi *g_btlUiBlock;
 s32 nodeListCountActiveById(ReflectContext *queue, const CompletionState *id);
 s32 recordAreAllCountsNonpositive(const CountPairTable *counts);
 u32 stateBlockCall(BtlUi *ui);

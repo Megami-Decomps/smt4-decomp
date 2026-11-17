@@ -13,7 +13,7 @@ struct MapSingleModelState {
     u32 motion;
     u8 changed;
     u8 unk19[3];
-    NodeEnableNode *node;
+    AsdMdlObject *node;
 };
 struct MapSingleModelWork {
     u8 prefix[0x10];

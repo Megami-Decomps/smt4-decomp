@@ -1,7 +1,7 @@
 /* Applies a navigation request now, or saves it until the navigation screen opens. */
 #include "shard/NaviMain.h"
 #include "mapnavi/NaviMainGlobals.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
@@ -9,12 +9,12 @@ void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
 void navigationSetOrQueueRequest(u32 first, u32 second, u32 third, f32 x, f32 y)
 {
     NaviMainA *navigation = g_naviMain;
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     if (navigation != NULL) {
         FUN_00490484(navigation->panel, first, third, second, x, y);
         return;
     }
-    /* Deferred navigation storage is beyond the shared FlagWorkBanks prefix. */
+    /* Deferred navigation storage is beyond the shared MapSaveBlockA prefix. */
     struct DeferredNavigationView {
         u8 unk0000[0x1688];
         u32 pending;

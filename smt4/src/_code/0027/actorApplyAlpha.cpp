@@ -1,35 +1,27 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
 
 extern "C" {
-
-typedef struct Actor {
-    /* 0x00 */ u8 unk00[0x2A];
-    /* 0x2A */ s16 id;
-} Actor;
 
 typedef struct ActorInfo {
     /* 0x00 */ u8 unk00[0x14];
     /* 0x14 */ s16 alpha;    /* 0 = use the default (0xff) */
 } ActorInfo;
 
-
-
-Actor *gameGetMapBlock(void);
 ActorInfo *dataTable2fSub1GetRecord(int id);
 void gameSetActorAlpha(int id, int alpha);
 
 /* When enabled, applies the current actor's alpha (default 0xff if its info has none). */
 void actorApplyAlpha(void)
 {
-    Actor *actor = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
     int id;
     ActorInfo *info;
 
     if (g_gameState.statusActive == 0) {
         return;
     }
-    id = actor->id;
+    id = block->savePoint.tableId;
     info = dataTable2fSub1GetRecord(id);
     if (info->alpha != 0) {
         gameSetActorAlpha(id, info->alpha);

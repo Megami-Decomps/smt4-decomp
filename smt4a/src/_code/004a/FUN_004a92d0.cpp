@@ -6,7 +6,7 @@ extern "C" {
 void FUN_00231cdc(BtlUiObjCA *obj, u32 a, s32 b, u32 c);
 
 
-void FUN_004a92d0(u32 unused, u32 first, u32 second)
+void FUN_004a92d0(BtlUiA *unused, u32 first, u32 second)
 {
     BtlUiA *ui = g_btlUi.ui;
 

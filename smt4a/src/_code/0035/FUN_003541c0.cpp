@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003541c0` (_code @ 0x3541c0, 0x1240 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -61,7 +62,6 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: libm_sinf. */
 /* Supplied declaration required: FUN_001f3f34. */
@@ -118,7 +118,7 @@ void FUN_003541c0(void)
   
   piVar5 = &temp_v15;
   piVar6 = &temp_v15;
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   piVar4 = g_lmapScene;
   if (((*g_lmapScene == 0xd || *g_lmapScene == 0x15) && (g_lmapScene[99] != 0)) &&
      (g_lmapScene[1] == 0xb)) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b6f30` (_code @ 0x2b6f30, 0x518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
 
@@ -51,7 +52,6 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int g_lmapView; /* 0x5806a4 */
-extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161c; /* 0x5f161c */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
@@ -142,8 +142,8 @@ void FUN_002b6f30(void)
   float temp_v53;
   unsigned int temp_v54;
   
-  temp_v0 = g_mapEnemy;
-  if (*(int *)(g_mapEnemy + 4) == 8) {
+  temp_v0 = ((int)g_mapEnemy);
+  if (*(int *)(((int)g_mapEnemy) + 4) == 8) {
     puVar2 = &g_gameState;
     if (DAT_005f161c == '\0') {
       puVar2 = (unsigned int *)(unsigned int)DAT_005f161d;

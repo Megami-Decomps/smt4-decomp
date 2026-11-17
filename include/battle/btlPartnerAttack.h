@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 struct ScriptProcess;
 struct ScriptProcess;
 
@@ -19,7 +20,7 @@ struct BtlPartnerAttackA {
     /* 0x20 */ s32 selected;
     /* 0x24 */ void *scriptData;
     /* 0x28 */ union {
-        void *scriptProcess;
+        ScriptProcess *scriptProcess;
         ScriptProcess *runState;
         ScriptProcess *scriptResource;
     };

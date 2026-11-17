@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00311880` (_code @ 0x311880, 0x2e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -30,7 +31,6 @@ extern unsigned char LAB_00311b68; /* 0x311b68 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int randRange(unsigned int);
-extern int gameFlagsGetBlock(void);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0035363c. */
 /* Supplied declaration required: FUN_003a30e8. */
@@ -50,7 +50,7 @@ void FUN_00311880(int param_1,int param_2,int param_3)
   unsigned short temp_v4;
   unsigned int in_fpscr;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   if (param_3 != 0) {
     temp_v2 = 0;
     if ('\0' < *(char *)(temp_v0 + 0xe17)) {

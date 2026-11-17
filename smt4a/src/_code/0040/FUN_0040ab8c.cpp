@@ -1,11 +1,11 @@
-#include "shard/Shard0040.h"
-#include "code/Code0040_Shard0040.h"
+#include "Model/MoriModelContent.h"
 
 extern "C" {
 
-u8 FUN_0040ab8c(LockedObj *obj)
+/* Whether the content's file is loaded. */
+u8 FUN_0040ab8c(MoriModelContent *content)
 {
-    return obj->unk10 != 0;
+    return content->file != NULL;
 }
 
 } /* extern "C" */

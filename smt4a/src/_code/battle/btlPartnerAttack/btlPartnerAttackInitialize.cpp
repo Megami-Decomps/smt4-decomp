@@ -1,6 +1,7 @@
 #include "battle/btlPartnerAttack.h"
 #include "AsdSDK/AsdDebug.h"
 #include "battle/PartnerAttackEntries.h"
+#include "script/scrScriptProcess.h"
 
 struct PartnerAttackOwner {
     u32 parent;                   /* 0x00 */
@@ -18,7 +19,6 @@ void btlPartnerAttackJobCallback(void *);
 void scriptObjDestroy(void *);
 void btlPartnerAttackApplyState(void *);
 void renderObjAttach(void *);
-void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
 
 // Allocate the partner attack state and attach its update and draw jobs.

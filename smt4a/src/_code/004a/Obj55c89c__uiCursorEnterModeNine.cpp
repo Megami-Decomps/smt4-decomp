@@ -6,12 +6,6 @@
 extern "C" {
 
 /* The cursor sprite embedded at 0x5E8 of the owner. */
-typedef struct CursorSprite {
-    /* 0x00 */ u8 unk00[0x8A];
-    /* 0x8A */ s8 visible;
-    /* 0x8B */ u8 unk8B;
-} CursorSprite;
-
 typedef struct CursorOwner {
     /* 0x0000 */ u8 unk0000[0x14];
     /* 0x0014 */ u32 nextState;
@@ -19,7 +13,7 @@ typedef struct CursorOwner {
     /* 0x001C */ u8 unk001C[0x7A];
     /* 0x0096 */ u8 unk0096[0x32];
     /* 0x00C8 */ u8 position[0x520];
-    /* 0x05E8 */ CursorSprite cursor;
+    /* 0x05E8 */ UiSpriteState cursor;
     /* 0x0674 */ u8 unk0674[0xA200];
     /* 0xA874 */ u16 mode;
 } CursorOwner;
@@ -35,14 +29,14 @@ void FUN_0033449c(s32 value);
 
 extern "C" void _ZN9Obj55c89c21uiCursorEnterModeNineEv(CursorOwner *owner)
 {
-    CursorSprite *cursor = &owner->cursor;
+    UiSpriteState *cursor = &owner->cursor;
     owner->mode = 9;
-    uiSpriteAdvanceAnimation((UiSpriteState *)cursor, 1.0f);
-    pointConvertToFloat(owner->position, vec2GetXInt((const UiSpriteState *)cursor), vec2GetYInt((const UiSpriteState *)cursor));
+    uiSpriteAdvanceAnimation(cursor, 1.0f);
+    pointConvertToFloat(owner->position, vec2GetXInt(cursor), vec2GetYInt(cursor));
     if (FUN_0026c3a0() == 0) {
         return;
     }
-    if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) == 0) {
+    if (uiSpriteGetCompletionState(cursor) == 0) {
         return;
     }
     if (buttonHelpStateIsNot3() == 0) {

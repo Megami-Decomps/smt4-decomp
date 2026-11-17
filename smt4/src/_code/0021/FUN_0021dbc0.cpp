@@ -1,5 +1,5 @@
 /* NON_MATCHING: register assignment (retail keeps map/area in r7/r9 and the -1 spawn mode in sl; built uses r8/sl/r7) and the stack-argument store order (187 vs 186 rows); the placement logic is the same. */
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" {
 
@@ -18,17 +18,6 @@ typedef struct MapEffectEntry {
     /* 0x13 */ s8 chance;
 } MapEffectEntry;
 
-/* The map block's effect list (only the fields used here). */
-typedef struct MapEffectBlock {
-    /* 0x000 */ u8 unk000[0xDE3];
-    /* 0xDE3 */ s8 count;
-    /* 0xDE4 */ u8 kind[8];
-    /* 0xDEC */ s8 entry[8];
-    /* 0xDF4 */ u16 flag[8];
-    /* 0xE04 */ u16 token[8];
-} MapEffectBlock;
-
-MapEffectBlock *gameGetMapBlock(void);
 s32 FUN_00323538(void);
 MapEffectEntry *dataTable29GetEntryWithAoc(s32 index);
 s32 gameFlagIsSet(s32 flag);
@@ -48,12 +37,12 @@ static __inline void spawnEntryEffect(MapEffectEntry *entry, s32 index)
  * every placement of the current map/area, spawning those that succeed and registering them. */
 void FUN_0021dbc0(s32 map, s32 area, s32 replay)
 {
-    MapEffectBlock *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
 
     if (replay != 0) {
-        for (s32 i = 0; i < block->count; i++) {
-            if (block->kind[i] == 2) {
-                s32 index = block->entry[i];
+        for (s32 i = 0; i < block->slotCount; i++) {
+            if (block->slotActive[i] == 2) {
+                s32 index = block->slotEntry[i];
 
                 spawnEntryEffect(dataTable29GetEntryWithAoc(index), index);
             }
@@ -82,11 +71,11 @@ void FUN_0021dbc0(s32 map, s32 area, s32 replay)
             continue;
         }
         spawnEntryEffect(entry, i);
-        block->kind[block->count] = 2;
-        block->entry[block->count] = i;
-        block->flag[block->count] = flag;
-        block->token[block->count] = i + 0x1300;
-        block->count++;
+        block->slotActive[block->slotCount] = 2;
+        block->slotEntry[block->slotCount] = i;
+        block->slotFlag[block->slotCount] = flag;
+        block->slotKey[block->slotCount] = i + 0x1300;
+        block->slotCount++;
     }
 }
 

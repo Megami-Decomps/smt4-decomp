@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00485e74` (_code @ 0x485e74, 0x490 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "classes/Obj532300.h"
@@ -40,7 +41,6 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
-extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_001a90e0. */
@@ -61,7 +61,7 @@ void FUN_00485e74(unsigned char *param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v1 = gameFlagsGetBlock();
+  temp_v1 = (int)gameFlagsGetBlock();
   reinterpret_cast<Obj532300 *>(param_1)->resetHandlers();
   asdTMTexTableLoadTmx(0x28,0);
   param_1[0xc] = 0xff;

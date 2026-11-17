@@ -1118,31 +1118,6 @@ typedef char TextDrawDefaultsPrefixALayoutCheck[
     offsetof(TextDrawDefaultsPrefixA, colorBits) == 0xC &&
     sizeof(TextDrawDefaultsPrefixA) == 0x10 ? 1 : -1];
 
-// Observed button-help state prefix in Apocalypse, not an allocation boundary.
-struct ButtonHelpStatePrefixA {
-    /* 0x000 */ u8 unk000[0x5ea];
-    /* 0x5EA */ u8 selectionActive;
-    /* 0x5EB */ u8 unk5EB[0x8d];
-    /* 0x678 */ u32 directory;
-    /* 0x67C */ u8 refreshRequested;
-};
-
-typedef char ButtonHelpStatePrefixALayoutCheck[
-    offsetof(ButtonHelpStatePrefixA, selectionActive) == 0x5ea &&
-    offsetof(ButtonHelpStatePrefixA, directory) == 0x678 &&
-    offsetof(ButtonHelpStatePrefixA, refreshRequested) == 0x67c &&
-    sizeof(ButtonHelpStatePrefixA) == 0x680 ? 1 : -1];
-
-// Only the global's observed prefix is represented.
-struct ButtonHelpGlobalsPrefixA {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ ButtonHelpStatePrefixA *state;
-};
-
-typedef char ButtonHelpGlobalsPrefixALayoutCheck[
-    offsetof(ButtonHelpGlobalsPrefixA, state) == 4 &&
-    sizeof(ButtonHelpGlobalsPrefixA) == 8 ? 1 : -1];
-
 /* Identifier and packed attributes (kind in bits 0-7, variation 8-15, media 16-23) of a descriptor record. */
 struct ResourceDescriptorKeyA {
     u32 identifier;
@@ -1206,25 +1181,6 @@ typedef char RecordSlotQueryPrefixIVLayoutCheck[
     offsetof(RecordSlotQueryPrefixIV, slots) == 0x58 &&
     sizeof(RecordSlotQueryPrefixIV) == 0x68 ? 1 : -1];
 
-/* Observed prefix of g_btlTalkBustUp's IV object, not its allocation size.
- * No identified canonical type describes this object. */
-struct BattleTalkBustUpPrefixIV {
-    /* 0x000 */ u8 unk000[0x2E8];
-    /* 0x2E8 */ u32 state;
-    /* 0x2EC */ u32 stateCounter;
-    /* 0x2F0 */ u32 recordValue;
-    /* 0x2F4 */ u8 unk2F4[4];
-    /* 0x2F8 */ u32 textureEntry;
-    /* 0x2FC */ u8 unk2FC[0xC];
-    /* 0x308 */ s32 devilId;
-};
-typedef char BattleTalkBustUpPrefixIVLayoutCheck[
-    offsetof(BattleTalkBustUpPrefixIV, state) == 0x2E8 &&
-    offsetof(BattleTalkBustUpPrefixIV, stateCounter) == 0x2EC &&
-    offsetof(BattleTalkBustUpPrefixIV, recordValue) == 0x2F0 &&
-    offsetof(BattleTalkBustUpPrefixIV, textureEntry) == 0x2F8 &&
-    offsetof(BattleTalkBustUpPrefixIV, devilId) == 0x308 &&
-    sizeof(BattleTalkBustUpPrefixIV) == 0x30C ? 1 : -1];
 
 /* Accessed prefix of the Apocalypse pick-object controller.
  * The native allocation boundary is not recovered. The script pointer

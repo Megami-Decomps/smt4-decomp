@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
@@ -10,19 +10,19 @@ static const u8 mapAutoTileVariants[16] = {0x00, 0x01, 0x02, 0x01, 0x03, 0x03, 0
 // Rebuild interior wall tiles from the four adjacent walkable cells.
 void FUN_002c5468(void)
 {
-    FlagWorkBanks *work = gameFlagsGetBlock();
-    for (s32 row = 1; row < work->gridSize.height - 1; ++row) {
-        for (s32 column = 1; column < work->gridSize.width - 1; ++column) {
-            if (work->mapCells.grid.cells[row][column].state == 2) {
+    MapSaveBlockA *work = gameFlagsGetBlock();
+    for (s32 row = 1; row < work->maze.height - 1; ++row) {
+        for (s32 column = 1; column < work->maze.width - 1; ++column) {
+            if (work->grid.cells[row][column].state == 2) {
                 u32 mask = 0;
-                if (work->mapCells.grid.cells[row][column - 1].state == 1) mask |= 1;
-                if (work->mapCells.grid.cells[row][column + 1].state == 1) mask |= 2;
-                if (work->mapCells.grid.cells[row - 1][column].state == 1) mask |= 4;
-                if (work->mapCells.grid.cells[row + 1][column].state == 1) mask |= 8;
-                work->mapCells.grid.cells[row][column].autoTile.neighbors = mapAutoTileNeighbors[mask];
-                work->mapCells.grid.cells[row][column].autoTile.variant = mapAutoTileVariants[mask];
+                if (work->grid.cells[row][column - 1].state == 1) mask |= 1;
+                if (work->grid.cells[row][column + 1].state == 1) mask |= 2;
+                if (work->grid.cells[row - 1][column].state == 1) mask |= 4;
+                if (work->grid.cells[row + 1][column].state == 1) mask |= 8;
+                work->grid.cells[row][column].autoTile.neighbors = mapAutoTileNeighbors[mask];
+                work->grid.cells[row][column].autoTile.variant = mapAutoTileVariants[mask];
             } else {
-                work->mapCells.grid.cells[row][column].autoTile.neighbors = 0;
+                work->grid.cells[row][column].autoTile.neighbors = 0;
             }
         }
     }

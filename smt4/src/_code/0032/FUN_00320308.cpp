@@ -1,4 +1,5 @@
 #include "gfx/RenderSubmission.h"
+#include "gfx/VectorScratch.h"
 
 extern "C" {
 void FUN_00246afc(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 *);
@@ -7,7 +8,6 @@ void asdSetNormalizedColorRgba(u32 color);
 void FUN_00256a50(RenderSubmissionPacket *, u32 mode);
 u32 FUN_00269694(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00246c28();
-extern EffectColorProductState g_vectorScratch;
 
 // Apply the current owner color, transform and depth mode to an effect submission.
 void FUN_00320308(RenderSubmission *submission)
@@ -18,7 +18,7 @@ void FUN_00320308(RenderSubmission *submission)
         return;
     u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
     asdSetNormalizedColorRgba(submission->color);
-    effectColorCopy(&g_vectorScratch.color, &g_vectorScratch.factor);
+    effectColorCopy(&g_vectorScratch.first.color, &g_vectorScratch.second.color);
     asdSetNormalizedColorRgba(ownerColor);
     FUN_00246bd4();
     u32 color = FUN_00246c28();

@@ -39,7 +39,6 @@ typedef char CampResultStateOffsets[
 
 extern "C" {
 s32 listUpdateRevealTransition(FlaggedValueHolder *value);
-s32 scrRunOpcodesStub(ScriptProcess *process);
 void buttonHelpSelectByProgress(CampResultStateView *work);
 u16 flaggedValueHolderGetTotal(const FlaggedValueHolder *value);
 s32 tableGroupFindEntryIndex(const void *script, const char *entry);

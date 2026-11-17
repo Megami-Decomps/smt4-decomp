@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (213 vs 217 rows); retail keeps the shared marker call tail and the float offset adds in a different register order */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlUiGlobal.h"
 
 struct Vec3 {
     f32 x;
@@ -36,15 +37,14 @@ struct MarkerStep {
 
 extern "C" {
 
-extern u8* g_btlUiBlock;
 extern u8 g_btlActionReflect[];
 extern const Vec3 DAT_005e1c2c;
 
 BtlSide* btlMainFindEntryByListedId(void* main, s32 index);
 Vec3 FUN_003e7fa4(void* main, s32 index, s32 arg);
-s16 FUN_004aa0b0(u8* ui, s32 a, s32 b, f32 x, f32 y, f32 z);
-s16 FUN_004aace8(u8* ui, s32 id, s32 a, s32 x, s32 y);
-s32 FUN_004aa1e8(u8* ui, s32 handle);
+s16 FUN_004aa0b0(BtlUiA *ui, s32 a, s32 b, f32 x, f32 y, f32 z);
+s16 FUN_004aace8(BtlUiA *ui, s32 id, s32 a, s32 x, s32 y);
+s32 FUN_004aa1e8(BtlUiA *ui, s32 handle);
 
 #define MASK64(offset) (*reinterpret_cast<u64*>(g_btlActionReflect + (offset)))
 

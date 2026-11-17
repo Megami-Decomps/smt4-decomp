@@ -11,12 +11,6 @@
 #define NAVI_SLOT_COUNT 6
 
 /* The title frame sprite: a sprite whose hidden flag lives at +0x8A. */
-struct NaviFrameSprite {
-    /* 0x00 */ u8 unk00[0x8A];
-    /* 0x8A */ s8 hidden;
-    /* 0x8B */ u8 unk8B[1];
-};
-
 /* The navi menu (observed fields). Sprites and sub-objects are at the offsets noted. */
 struct NaviMenu {
     /* 0x000 */ u8 unk000[4];
@@ -32,9 +26,9 @@ struct NaviMenu {
     /* 0x504 */ u8 titleSprite[0x73C];
     /* 0xC40 */ u8 slotSprites[NAVI_SLOT_COUNT][0x8C];
     /* 0xF88 */ u8 unkF88[0x118];
-    /* 0x10A0 */ NaviFrameSprite frameSprite;
-    /* 0x112C */ u8 backSprite[0x8C];
-    /* 0x11B8 */ u8 imageSpriteA[0x8C];
+    /* 0x10A0 */ UiSpriteState frameSprite;
+    /* 0x112C */ UiSpriteState backSprite;
+    /* 0x11B8 */ UiSpriteState imageSpriteA;
     /* 0x1244 */ u8 imageSpriteB[0x8C];
 };
 
@@ -71,7 +65,7 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
             FUN_0048821c(menu, map);
         }
         FUN_0048d248(menu, FUN_00492c84(menu->mapState));
-        uiSpriteSetImageKeyframe((UiSpriteState *)menu->imageSpriteA, 3, 0);
+        uiSpriteSetImageKeyframe(&menu->imageSpriteA, 3, 0);
         uiSpriteSetImageKeyframe((UiSpriteState *)menu->imageSpriteB, 5, 0);
         FUN_0048a378(menu);
         for (i = 0; i < NAVI_SLOT_COUNT; i++) {
@@ -89,11 +83,11 @@ void _ZN9Obj53230012FUN_0048bad0Ev(NaviMenu *menu)
         for (i = 0; i < NAVI_SLOT_COUNT; i++) {
             uiSpriteAdvanceAnimation((UiSpriteState *)menu->slotSprites[i], 1.0f);
         }
-        uiSpriteAdvanceAnimation((UiSpriteState *)menu->backSprite, 1.0f);
-        uiSpriteAdvanceAnimation((UiSpriteState *)&menu->frameSprite, 1.0f);
+        uiSpriteAdvanceAnimation(&menu->backSprite, 1.0f);
+        uiSpriteAdvanceAnimation(&menu->frameSprite, 1.0f);
     } else if (menu->step == 2) {
-        if (uiSpriteGetCompletionState((const UiSpriteState *)&menu->frameSprite) == 0) {
-            uiSpriteAdvanceAnimation((UiSpriteState *)&menu->frameSprite, 1.0f);
+        if (uiSpriteGetCompletionState(&menu->frameSprite) == 0) {
+            uiSpriteAdvanceAnimation(&menu->frameSprite, 1.0f);
         }
         menu->mode = 2;
         menu->step = 0;

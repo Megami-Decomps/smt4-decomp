@@ -6,6 +6,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SkillDataLookup.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
 
 /* The battle state words this step reads beyond the shared prefix. */
 struct CommandTargetView {
@@ -31,26 +32,25 @@ struct CommandUnit {
 };
 
 extern "C" {
-extern u32 g_btlUiBlock;
 extern u32 DAT_00439cf8;
 
 void FUN_00229098(BtlMainState **block);
 s32 FUN_00229118(BtlMainState **block, s32 a, s32 target, CommandState *work);
-void FUN_002296dc(u32 ui);
+void FUN_002296dc(BtlUi *ui);
 void btlMarkLowestHpUnit(BtlMainState **block);
-void FUN_00229a24(u32 ui);
+void FUN_00229a24(BtlUi *ui);
 void FUN_00229b10(BtlMainState **block, CommandState *work);
 void bgmSwitchCurrent(BtlMainState *state, u32 value);
 void btlEntryBuildSummary(CommandInfo *info, BtlMainState *state, BtlEntry *entry);
 void gameCounterAddSaturating(s32 counter, s32 amount);
-s32 battleUiIsFadeAndFieldReady(u32 ui);
+s32 battleUiIsFadeAndFieldReady(BtlUi *ui);
 s32 FUN_0028d1f4(s32 skill);
 s32 FUN_0029e02c(void);
 void FUN_002bf80c(u32 sound);
 s32 padIsButtonPressed(u32 button);
-s32 FUN_003ae608(u32 ui, s32 button);
-u32 FUN_003af054(u32 ui);
-void FUN_003af06c(u32 ui, u64 mask);
+s32 FUN_003ae608(BtlUi *ui, s32 button);
+u32 FUN_003af054(BtlUi *ui);
+void FUN_003af06c(BtlUi *ui, u64 mask);
 s32 FUN_003d06e4(BtlMainState **block, CommandState *work);
 void FUN_003d0fcc(BtlMainState **block, s32 mode);
 void FUN_003d1e2c(BtlMainState **block, CommandState *work);

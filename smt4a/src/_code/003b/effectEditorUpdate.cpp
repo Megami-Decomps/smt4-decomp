@@ -12,16 +12,16 @@ s32 effMenuNodeGetState(EffMenuNode *node);
 
 u32 effectEditorUpdate()
 {
-    FUN_00375ec8(g_effectEditor.text.name);
-    s32 position = DAT_0059e9a8.indices.extraOffset + g_effectEditor.selection.index;
+    FUN_00375ec8(g_effectEditor.name);
+    s32 position = DAT_0059e9a8.indices.extraOffset + g_effectEditor.index;
     LinkedItem *item = linkedFindItemByIndex(
-        (LinkedItems *)g_effectEditor.selection.list, position);
+        (LinkedItems *)g_effectEditor.list, position);
     const char *text = item->label.text;
-    namedObjectFormatName(g_effectEditor.text.name, text);
-    s32 state = effMenuNodeGetState(g_effectEditor.text.name);
+    namedObjectFormatName(g_effectEditor.name, text);
+    s32 state = effMenuNodeGetState(g_effectEditor.name);
     if (state == 2 || state == 1) {
-        engineFreeCallback(g_effectEditor.text.name);
-        g_effectEditor.text.name = NULL;
+        engineFreeCallback(g_effectEditor.name);
+        g_effectEditor.name = NULL;
         return 0;
     }
     return 0x200001;

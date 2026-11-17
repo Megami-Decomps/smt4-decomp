@@ -1,34 +1,25 @@
-#include "common.h"
+#include "result/Result.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int fileSlotFree(int id);
-int scrScriptProcessDestroy(u32 process);
 int asdTMTexTableReleaseNode(int table, int index);
 int messageSetConfirmDisplayMode(void);
 int asdMemFree(u32 ptr);
 
-typedef struct ScriptWork {
-    /* 0x0000 */ u8 unk0000[0x3564];
-    /* 0x3564 */ u32 unk3564;
-    /* 0x3568 */ u32 process;
-    /* 0x356C */ u32 unk356C;
-    /* 0x3570 */ u32 unk3570;
-} ScriptWork;
-
-extern ScriptWork *g_result;
-
+/* Frees the result screen: its script process, buffers and textures, then the work. */
 void scrResultDestroy(void)
 {
-    ScriptWork *work = g_result;
+    ResultWork *work = g_result;
     s32 i;
 
     if (g_result != NULL) {
         scrScriptProcessDestroy(g_result->process);
-        asdMemFree(work->unk3564);
-        asdMemFree(work->unk356C);
+        asdMemFree(work->buffer3564);
+        asdMemFree(work->buffer356C);
         messageSetConfirmDisplayMode();
-        asdMemFree(work->unk3570);
+        asdMemFree(work->buffer3570);
         fileSlotFree(0x14);
         fileSlotFree(0x25);
         i = 0;

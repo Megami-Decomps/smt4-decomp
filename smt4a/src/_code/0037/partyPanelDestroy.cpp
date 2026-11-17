@@ -1,10 +1,10 @@
 #include "ui/PartyPanelStateA.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 __weak void *FUN_0037dab0_hook(void *p);
-void scrScriptProcessDestroy(void);
 void asdMemFree(void *p);
 void asdOperatorDelete(void *p);
 void *ptrTable44FreeAll(void *p);
@@ -19,7 +19,7 @@ void partyPanelDestroy(void)
 
     saveGetUserSettingsBlock()[0x44] = panel->alternate;
     if (panel->script != NULL) {
-        scrScriptProcessDestroy();
+        scrScriptProcessDestroy(panel->script);
     }
     if (panel->files[1] != NULL) {
         asdMemFree(panel->files[1]);

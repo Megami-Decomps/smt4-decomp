@@ -9,7 +9,7 @@
 namespace {
 struct MaskedSpriteWidget {
     u8 unk00[0x44];
-    u8 position[0x20];
+    UiSpriteState position;
 };
 typedef char MaskedSpriteWidgetPositionCheck[
     offsetof(MaskedSpriteWidget, position) == 0x44 ? 1 : -1];
@@ -32,8 +32,8 @@ void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
     }
     FUN_00168e00(frame->x + x, frame->y + y, frame->placement->width, frame->placement->height);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
-    s32 targetY = vec2GetYInt((UiSpriteState *)widget->position) + y;
-    s32 targetX = vec2GetXInt((UiSpriteState *)widget->position) + x;
+    s32 targetY = vec2GetYInt(&widget->position) + y;
+    s32 targetX = vec2GetXInt(&widget->position) + x;
     texDrawTableEntryAtStoredOrigin(2, 0x12, foreground, targetX, targetY, 0xDD);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     if (scissored) {

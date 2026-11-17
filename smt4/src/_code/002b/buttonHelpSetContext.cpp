@@ -14,49 +14,59 @@ void ifTouchDecrementTimer(void);
 void FUN_002a9fdc(UiSpriteState *unit, s32 state, s32 mode);
 }
 
-static __inline void buttonHelpReleaseSelections(ButtonHelpSelectionViewIV *work)
+/* Closes the slots: hides their sprites and drops their touch regions (combined slots hold two or three). */
+static __inline void buttonHelpCloseSlots(void)
 {
+    ButtonHelpWork *work = g_buttonHelp.work;
     for (s32 index = 0; index < 6; ++index) {
-        spriteStartAnimationByIndex(&work->units[index], 1);
-        if (work->kinds[index].kind != 0) {
-            if (work->kinds[index].kind == 7 || work->kinds[index].kind == 9)
+        spriteStartAnimationByIndex(&work->slotSprites[index], 1);
+        if (work->slots[index].kind != 0) {
+            if (work->slots[index].kind == 7 || work->slots[index].kind == 9)
                 ifTouchDecrementTimer();
-            if (work->kinds[index].kind == 8) {
+            if (work->slots[index].kind == 8) {
                 ifTouchDecrementTimer();
                 ifTouchDecrementTimer();
             }
             ifTouchDecrementTimer();
         }
     }
+    g_buttonHelp.work->phase = 0;
+    g_buttonHelp.work->state = 3;
 }
 
+/* Closes the whole panel (FUN_00289c98): the slots, optionally emptying them, and the panel sprites. */
+static __inline void buttonHelpClosePanel(s32 clearTouches)
+{
+    ButtonHelpWork *work = g_buttonHelp.work;
+    for (s32 index = 0; index < 6; ++index) {
+        spriteStartAnimationByIndex(&work->slotSprites[index], 1);
+        if (work->slots[index].kind != 0) {
+            if (clearTouches)
+                work->slots[index].kind = 0;
+            ifTouchDecrementTimer();
+        }
+    }
+    for (s32 index = 0; index < 2; ++index) {
+        if (work->mode != 1)
+            FUN_002a9fdc(&work->panelSprites[index], 0, 1);
+        else
+            timerStart(&work->panelSprites[index], 3, 0);
+    }
+    g_buttonHelp.work->phase = 0;
+    g_buttonHelp.work->state = 3;
+}
+
+/* Switches the help context: closes the slots, or the whole panel when only the new context shows it. */
 extern "C" void buttonHelpSetContext(u32 context)
 {
-    const ButtonHelpContextRecord *current = dataTableGetEntry0e(g_buttonHelp.work->unk4C9);
+    const ButtonHelpContextRecord *current = dataTableGetEntry0e(g_buttonHelp.work->preset);
     const ButtonHelpContextRecord *next = dataTableGetEntry0e(context);
     if (current != NULL && next != NULL) {
-        ButtonHelpWork *work = g_buttonHelp.work;
-        ButtonHelpSelectionViewIV *selection = (ButtonHelpSelectionViewIV *)work;
-        if (current->panelMode) {
-            buttonHelpReleaseSelections(selection);
-        } else if (next->panelMode) {
-            for (s32 index = 0; index < 6; ++index) {
-                spriteStartAnimationByIndex(&selection->units[index], 1);
-                if (selection->kinds[index].kind != 0) {
-                    selection->kinds[index].kind = 0;
-                    ifTouchDecrementTimer();
-                }
-            }
-            for (s32 index = 0; index < 2; ++index) {
-                if (work->mode != 1)
-                    FUN_002a9fdc(&work->units[index], 0, 1);
-                else
-                    timerStart(&work->units[index], 3, 0);
-            }
-        } else {
-            buttonHelpReleaseSelections(selection);
-        }
-        g_buttonHelp.work->transition.phase = 0;
-        g_buttonHelp.work->state = 3;
+        if (current->panelMode)
+            buttonHelpCloseSlots();
+        else if (next->panelMode)
+            buttonHelpClosePanel(1);
+        else
+            buttonHelpCloseSlots();
     }
 }

@@ -1,205 +1,152 @@
-/* Button-help screen records, resources and indexed choices. */
+/* camp/ButtonHelp/ButtonHelp: the button-help bar (the touch-screen button prompts with a help line).
+ *
+ * buttonHelpCreate (Apocalypse campButtonHelpAcquire) allocates the work on the first reference and
+ * creates its "ButtonHelp CALC" process and "ButtonHelp DRAW" task; g_buttonHelp holds the reference
+ * counts, the work and the camp.mbm / camp.bf resources. A preset (data table 0x0E) fills the six slots;
+ * each slot shows a button sprite whose touch region the touch update tests. IV's work is
+ * ButtonHelpWork (0x564 bytes), Apocalypse's ButtonHelpWorkA (0x684 bytes: four panel sprites, a slot
+ * count and a 16-bit preset). g_buttonHelp is declared per game in ui/ButtonHelpGlobal.h. */
 #ifndef UI_BUTTONHELP_H
 #define UI_BUTTONHELP_H
 #include "common.h"
 #include "ui/UiSpriteState.h"
+#include "script/ScriptVm.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
-typedef struct ButtonHelpValueEntry {
-    /* 0x00 */ u16 value;
-    /* 0x02 */ u16 unk02;
-} ButtonHelpValueEntry;
-typedef struct ButtonHelpWork {
-    union {
-        /* 0x0000 */ u8 unk0000[0x10];
-        struct {
-            u8 unk0000[0xC];
-            /* 0x000C */ s32 phase;
-        } transition;
-        struct {
-            /* 0x0000 */ u32 process;
-            /* 0x0004 */ u32 unk04;
-            /* 0x0008 */ u32 drawTask;
-        } jobs;
-    };
-    /* 0x0010 */ s32 state;
-    union {
-        /* 0x0014 */ u8 unk0014[0x368];
-        struct {
-            /* 0x0014 */ UiResourceParameters parameters;
-            /* 0x0034 */ UiSpriteState selection[6];
-        } ui;
-    };
-    /* 0x037C */ UiSpriteState units[2];
-    /* 0x0494 */ u8 unk0494[2];
-    /* 0x0496 */ ButtonHelpValueEntry entries[6];
-    /* 0x04AE */ u8 unk04AE[0x16];
-    /* 0x04C4 */ u8 unk4C4;
-    /* 0x04C5 */ u8 unk4C5;
-    /* 0x04C6 */ u8 unk04C6[2];
-    /* 0x04C8 */ u8 mode;
-    /* 0x04C9 */ u8 unk4C9;
-    /* 0x04CA */ u8 unk04CA[0x1];
-    /* 0x04CB */ s8 unk4CB;
-    union {
-        /* 0x04CC */ u8 unk04CC[0x84];
-        struct {
-            /* 0x04CC */ u32 style;
-            /* 0x04D0 */ char lines[2][64];
-        } text;
-    };
-    /* 0x0550 */ u32 unk550;
-    /* 0x0554 */ u8 unk554;
-    /* 0x0555 */ u8 unk555;
-    /* 0x0556 */ u8 unk556;
-    /* 0x0557 */ u8 unk0557[0x1];
-    /* 0x0558 */ u32 unk558;
-    /* 0x055C */ u8 unk55C;
-    /* 0x055D */ u8 unk055D[0x3];
-    /* 0x0560 */ u32 unk560;
-} ButtonHelpWork;
 
-typedef struct ButtonHelpUnit {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ s32 x;
-    /* 0x10 */ s32 y;
-    /* 0x14 */ s32 z;
-    /* 0x18 */ u8 unk18[0x72];
-    /* 0x8A */ s8 flags;
-    /* 0x8B */ u8 unk8B;
-} ButtonHelpUnit;
-typedef struct ButtonHelpKind {
+/* One of the six slots: the action kind it prompts (0: empty; 8 and 9 are combined slots that also
+ * stand for kinds 4 and 3) and its value. */
+typedef struct ButtonHelpSlot {
     /* 0x00 */ u8 kind;
     /* 0x01 */ u8 unk01;
     /* 0x02 */ u16 value;
-} ButtonHelpKind;
-typedef struct ButtonHelpScreenEntry {
-    /* 0x00 */ u8 data[0x40];
-} ButtonHelpScreenEntry;
+} ButtonHelpSlot;
+
+/* One line of the help text. */
+typedef struct ButtonHelpTextLine {
+    /* 0x00 */ char text[0x40];
+} ButtonHelpTextLine;
+
+/* The help text: two lines in `style`, `highlightLength` characters of line `highlightLine` from
+ * `highlightStart` in `highlightStyle` (line 0xFF: none); `useDirectoryText` draws `directoryText`
+ * instead. Same layout in both games. */
+typedef struct ButtonHelpText {
+    /* 0x00 */ u32 style;
+    /* 0x04 */ ButtonHelpTextLine lines[2];
+    /* 0x84 */ u32 highlightStyle;
+    /* 0x88 */ u8 highlightLine;
+    /* 0x89 */ u8 highlightStart;
+    /* 0x8A */ u8 highlightLength;
+    /* 0x8B */ u8 unk8B;
+    /* 0x8C */ u32 directoryText;       /* AsdText handle (asdTextCreate) for directory entries */
+    /* 0x90 */ s8 useDirectoryText;
+    /* 0x91 */ u8 unk91[3];
+} ButtonHelpText;
+
+typedef struct ButtonHelpWork {
+    /* 0x000 */ u32 calcProcess;         /* "ButtonHelp CALC" */
+    /* 0x004 */ u8 unk004[4];
+    /* 0x008 */ u32 drawTask;            /* "ButtonHelp DRAW" */
+    /* 0x00C */ s32 phase;               /* frames into the open/close transition */
+    /* 0x010 */ s32 state;               /* 0 closed, 1 opening, 2 shown, 3 closing */
+    /* 0x014 */ UiResourceParameters resources;
+    /* 0x034 */ UiSpriteState slotSprites[6];
+    /* 0x37C */ UiSpriteState panelSprites[2];
+    /* 0x494 */ ButtonHelpSlot slots[6];
+    /* 0x4AC */ s16 touchRegions[6];     /* each slot's touch region id */
+    /* 0x4B8 */ u8 touchPressed[6];      /* the slot's region is selected in touch selection modes 1 and 2 */
+    /* 0x4BE */ u8 touchSelected[6];     /* the slot's region is selected in the other modes */
+    /* 0x4C4 */ u8 drawEnabled;
+    /* 0x4C5 */ s8 panelState;
+    /* 0x4C6 */ u8 panelSliding;         /* mode 1 slides the panel sprites in */
+    /* 0x4C7 */ u8 touchSuspended;       /* nonzero: the touch update leaves the slot flags alone */
+    /* 0x4C8 */ u8 mode;
+    /* 0x4C9 */ u8 preset;               /* data table 0x0E entry shown */
+    /* 0x4CA */ u8 previousPreset;
+    /* 0x4CB */ s8 textVisible;
+    /* 0x4CC */ ButtonHelpText text;
+    /* 0x560 */ ScriptProcess *scriptProcess;       /* runs camp.bf's help scripts */
+} ButtonHelpWork;
+
 typedef struct ButtonHelpWorkA {
-    union {
-        /* 0x000 */ u8 unk000[0xC];
-        /* 0x000 */ u32 job;
-        struct {
-            u32 job;
-            u32 unk04;
-            /* 0x008 */ u32 drawTask;
-        } jobs;
-    };
-    /* 0x00C */ s32 unk0C;
-    /* 0x010 */ s32 state;
-    union {
-        /* 0x014 */ u8 unk014[0x20];
-        /* 0x014 */ UiResourceParameters packet;
-    };
-    /* 0x034 */ ButtonHelpUnit units[6];
-    union {
-        /* 0x37C */ u8 unk37C[0x230];
-        /* 0x37C */ ButtonHelpUnit selected[4];
-    };
-    /* 0x5AC */ ButtonHelpKind kinds[6];
-    union {
-        /* 0x5C4 */ u8 unk5C4[0xC];
-        /* 0x5C4 */ u16 icons[6];      /* icon id of each slot's kind */
-    };
-    /* 0x5D0 */ s32 count;
-    union {
-        /* 0x5D4 */ u8 unk5D4[0xC];
-        struct {
-            /* 0x5D4 */ u8 active[6];
-            /* 0x5DA */ u8 unk5DA[6];
-        } clear;
-        struct {
-            /* 0x5D4 */ u32 low;
-            /* 0x5D8 */ u16 high;
-        } cleared;
-    };
-    /* 0x5E0 */ u8 unk5E0;
+    /* 0x000 */ u32 calcProcess;         /* "ButtonHelp CALC" */
+    /* 0x004 */ u8 unk004[4];
+    /* 0x008 */ u32 drawTask;            /* "ButtonHelp DRAW" */
+    /* 0x00C */ s32 phase;               /* frames into the open/close transition */
+    /* 0x010 */ s32 state;               /* 0 closed, 1 opening, 2 shown, 3 closing */
+    /* 0x014 */ UiResourceParameters resources;
+    /* 0x034 */ UiSpriteState slotSprites[6];
+    /* 0x37C */ UiSpriteState panelSprites[4];
+    /* 0x5AC */ ButtonHelpSlot slots[6];
+    /* 0x5C4 */ s16 touchRegions[6];     /* each slot's touch region id (icon lookup) */
+    /* 0x5D0 */ s32 touchCount;          /* touch regions registered for the shown slots */
+    /* 0x5D4 */ u8 touchPressed[6];
+    /* 0x5DA */ u8 touchSelected[6];
+    /* 0x5E0 */ u8 drawEnabled;
     /* 0x5E1 */ s8 panelState;
-    /* 0x5E2 */ u8 unk5E2[2];
-    /* 0x5E4 */ u8 unk5E4;
+    /* 0x5E2 */ u8 panelSliding;
+    /* 0x5E3 */ u8 touchSuspended;
+    /* 0x5E4 */ u8 mode;
     /* 0x5E5 */ u8 unk5E5;
-    /* 0x5E6 */ u16 selectedId;
-    /* 0x5E8 */ u8 unk5E8[2];
-    /* 0x5EA */ s8 mode;
-    /* 0x5EB */ u8 unk5EB[5];
-    /* 0x5F0 */ ButtonHelpScreenEntry entries[2];
-    /* 0x670 */ u32 unk670;
-    /* 0x674 */ u8 unk674;
-    /* 0x675 */ u8 unk675;
-    /* 0x676 */ u8 unk676;
-    /* 0x677 */ u8 unk677;
-    /* 0x678 */ u32 unk678;
-    /* 0x67C */ s8 helpState;
-    /* 0x67D */ u8 unk67D[3];
-    /* 0x680 */ u32 process;
+    /* 0x5E6 */ u16 preset;              /* data table 0x0E entry shown */
+    /* 0x5E8 */ u16 previousPreset;
+    /* 0x5EA */ s8 textVisible;
+    /* 0x5EB */ u8 unk5EB;
+    /* 0x5EC */ ButtonHelpText text;
+    /* 0x680 */ ScriptProcess *scriptProcess;
 } ButtonHelpWorkA;
 
 typedef struct ButtonHelpGlobals {
     /* 0x00 */ s8 references;
-    /* 0x01 */ s8 loadCount;
+    /* 0x01 */ s8 loadCount;      /* references to the camp.mbm / camp.bf resources */
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ ButtonHelpWork *work;
-    /* 0x08 */ s32 mbm;
-    /* 0x0C */ s32 bf;
-    /* 0x10 */ s32 pending;      /* the preset waiting for the active animations to finish (-1: none) */
+    /* 0x08 */ void *mbm;         /* camp/camp.mbm: the help text directory */
+    /* 0x0C */ void *bf;          /* camp/camp.bf: the help scripts */
+    /* 0x10 */ s32 pending;       /* the preset waiting for the active animations to finish (-1: none) */
 } ButtonHelpGlobals;
 typedef struct ButtonHelpGlobalsA {
-    union {
-        /* 0x00 */ u32 unk00;
-        /* 0x00 */ s8 references;
-    };
+    /* 0x00 */ s8 references;
+    /* 0x01 */ s8 loadCount;
+    /* 0x02 */ u8 unk02[2];
     /* 0x04 */ ButtonHelpWorkA *work;
-    /* 0x08 */ u8 unk08[8];
-    /* 0x10 */ s32 pending;      /* the preset waiting for the active animations to finish (-1: none) */
+    /* 0x08 */ void *mbm;
+    /* 0x0C */ void *bf;
+    /* 0x10 */ s32 pending;
 } ButtonHelpGlobalsA;
 
-
-typedef struct ButtonHelpCompatibilityKind {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ u8 unk01[3];
-} ButtonHelpCompatibilityKind;
-typedef struct ButtonHelpCompatibility {
-    /* 0x000 */ u8 unk000[0x5AC];
-    /* 0x5AC */ ButtonHelpCompatibilityKind entries[6];
-    /* 0x5C4 */ u8 unk5c4[0x10];
-    /* 0x5D4 */ u8 active[7];
-} ButtonHelpCompatibility;
-
-/* IV's six indexed selection animations occupy the otherwise opaque work prefix. */
-struct ButtonHelpSelectionViewIV {
-    /* 0x000 */ u8 unk000[0x34];
-    /* 0x034 */ UiSpriteState units[6];
-    /* 0x37C */ u8 unk37C[0x118];
-    /* 0x494 */ ButtonHelpKind kinds[6];
-    /* 0x4AC */ u8 unk4AC[0xC];
-    /* 0x4B8 */ u8 active[6];
-    /* 0x4BE */ u8 unk4BE[6];
-};
+/* Slot selections deferred while the slot animations run (-1: none). */
 struct ButtonHelpQueuedSelections {
     s32 kinds[6];
     s32 values[6];
 };
-typedef char ButtonHelpSelectionViewIVOffsetCheck[
-    __INTADDR__(&((ButtonHelpSelectionViewIV *)0)->units) == 0x34 &&
-    __INTADDR__(&((ButtonHelpSelectionViewIV *)0)->kinds) == 0x494 &&
-    __INTADDR__(&((ButtonHelpSelectionViewIV *)0)->active) == 0x4B8 ? 1 : -1];
 
 /* Retail 32-bit layout invariants. */
-typedef char UiSpriteStateSizeCheck[sizeof(UiSpriteState) == 0x8C ? 1 : -1];
+typedef char ButtonHelpTextSizeCheck[sizeof(ButtonHelpText) == 0x94 ? 1 : -1];
 typedef char ButtonHelpWorkSizeCheck[sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
 typedef char ButtonHelpWorkASizeCheck[sizeof(ButtonHelpWorkA) == 0x684 ? 1 : -1];
 typedef char ButtonHelpGlobalsSizeCheck[sizeof(ButtonHelpGlobals) == 0x14 ? 1 : -1];
 typedef char ButtonHelpGlobalsASizeCheck[sizeof(ButtonHelpGlobalsA) == 0x14 ? 1 : -1];
-typedef char ButtonHelpJobOffsetCheck[__INTADDR__(&((ButtonHelpWorkA *)0)->job) == 0 ? 1 : -1];
-typedef char ButtonHelpReferencesOffsetCheck[__INTADDR__(&((ButtonHelpGlobalsA *)0)->references) == 0 ? 1 : -1];
-typedef char ButtonHelpTextOffsetsCheck[
-    __INTADDR__(&((ButtonHelpWork *)0)->text.style) == 0x4CC &&
-    __INTADDR__(&((ButtonHelpWork *)0)->text.lines) == 0x4D0 &&
-    sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
-
-typedef char ButtonHelpTransitionPhaseOffsetCheck[
-    __INTADDR__(&((ButtonHelpWork *)0)->transition.phase) == 0xC &&
-    sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
+typedef char ButtonHelpWorkOffsetsCheck[
+    __INTADDR__(&((ButtonHelpWork *)0)->slotSprites) == 0x34 &&
+    __INTADDR__(&((ButtonHelpWork *)0)->panelSprites) == 0x37C &&
+    __INTADDR__(&((ButtonHelpWork *)0)->slots) == 0x494 &&
+    __INTADDR__(&((ButtonHelpWork *)0)->touchPressed) == 0x4B8 &&
+    __INTADDR__(&((ButtonHelpWork *)0)->drawEnabled) == 0x4C4 &&
+    __INTADDR__(&((ButtonHelpWork *)0)->preset) == 0x4C9 &&
+    __INTADDR__(&((ButtonHelpWork *)0)->text) == 0x4CC &&
+    __INTADDR__(&((ButtonHelpWork *)0)->text.directoryText) == 0x558 &&
+    __INTADDR__(&((ButtonHelpWork *)0)->scriptProcess) == 0x560 ? 1 : -1];
+typedef char ButtonHelpWorkAOffsetsCheck[
+    __INTADDR__(&((ButtonHelpWorkA *)0)->panelSprites) == 0x37C &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->slots) == 0x5AC &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->touchCount) == 0x5D0 &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->touchPressed) == 0x5D4 &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->drawEnabled) == 0x5E0 &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->preset) == 0x5E6 &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->textVisible) == 0x5EA &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->text) == 0x5EC &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->text.directoryText) == 0x678 &&
+    __INTADDR__(&((ButtonHelpWorkA *)0)->scriptProcess) == 0x680 ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {

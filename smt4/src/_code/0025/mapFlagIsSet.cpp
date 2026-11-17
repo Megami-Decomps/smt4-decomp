@@ -1,22 +1,15 @@
-#include "common.h"
+#include "gamedata/MapSaveBlock.h"
 
 extern "C" {
-
-typedef struct MapBlock {
-    /* 0x000 */ u8 unk000[0x7D4];
-    /* 0x7D4 */ u32 words[1];       /* one bit per flag */
-} MapBlock;
-
-MapBlock *gameGetMapBlock(void);
 
 /* Returns whether bit `flag` of the map block's flag bitmap is set. */
 bool mapFlagIsSet(s32 flag)
 {
-    MapBlock *block = gameGetMapBlock();
+    MapSaveBlock *block = gameGetMapBlock();
     s32 index = flag / 32;
     s32 bit = flag % 32;
 
-    return (block->words[index] & (1 << bit)) != 0;
+    return (block->clearedGroups[index] & (1 << bit)) != 0;
 }
 
 } /* extern "C" */

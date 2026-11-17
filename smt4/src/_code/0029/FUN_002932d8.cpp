@@ -1,9 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/PartyPanelState.h"
 
 extern "C" {
 
 int slotPlacementAssignSlotAndPosition(PartyPanelWidget *widget, u32 slot);
-int timerStart(void *timer, int a, int b);
 
 void FUN_002932d8(void)
 {

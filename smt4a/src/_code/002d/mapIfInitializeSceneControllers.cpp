@@ -2,7 +2,8 @@
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
-#include "gfx/ObjectRegistry.h"
+#include "classes/Obj557b18.h"
+#include "Model/MoriModelContent.h"
 #include "Model/MoriModelManager.h"
 
 extern "C" {
@@ -10,15 +11,15 @@ void mapIfControllerApply(MapIfModelMarkerA* controller);
 }
 
 namespace {
-inline MapIfResource* controllerResource(u32 index)
+inline MoriModelContent* controllerResource(u32 index)
 {
     return g_gameState.sceneControllerResources[index];
 }
 
-inline void initializeController(MapIfModelMarkerA* controller, MapIfResource* resource)
+inline void initializeController(MapIfModelMarkerA* controller, MoriModelContent* resource)
 {
     controller->resource = resource;
-    RegisteredObject* object = reinterpret_cast<RegisteredObject*>(resource->handle);
+    Obj557b18* object = resource->body;
     handleRegistryRegisterObject(g_handleRegistry, object);
     object->flags |= 3;
     controller->active = 1;

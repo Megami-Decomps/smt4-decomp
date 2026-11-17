@@ -8,6 +8,7 @@
 #include "gamedata/DataTableSections.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "sys/ResultReport.h"
+#include "script/scrScriptProcess.h"
 
 /* The memory mapped for the loader thread's stack: its destructor unmaps it, and the block goes
  * back through the engine's operator delete. */
@@ -45,7 +46,7 @@ struct UniteShutdownState {
     /* 0x0420 */ u8 unk0420[4];
     /* 0x0424 */ void *scriptMemory;
     /* 0x0428 */ void *workMemory;
-    /* 0x042c */ s32 scriptProcess;
+    /* 0x042c */ ScriptProcess *scriptProcess;
     /* 0x0430 */ u8 unk0430[0x5c58];
     /* 0x6088 */ u8 unk6088[0x600];
     /* 0x6688 */ u16 loadedPortraits[4];
@@ -80,7 +81,6 @@ void resourceOwnerReleaseAndReset(u32 registry);
 void uniteCameraDestroy(void);
 void ptrListRemoveClearOwner(u32 registry, u32 owner);
 void statusBustUpPortraitRelease(s32 id, s32 flag);
-void scrScriptProcessDestroy(s32 process);
 void *ptrTable44FreeAll(void *table);
 void jobStop(u32 job, s32 arg);
 void mapSettings5BSetValueIfActive(s32 value);

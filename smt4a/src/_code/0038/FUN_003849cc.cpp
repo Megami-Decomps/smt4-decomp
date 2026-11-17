@@ -1,8 +1,7 @@
 /* NON_MATCHING: flag-block/name-table saved registers and incoming level/selector load scheduling differ; branch layout matches. */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
-u8 *gameFlagsGetBlock(void);
 void FUN_0032725c(u32 index, char *output, s32 level);
 const char *nameTableFind(s32 kind, s32 index);
 const char *dataTableEntryNameById(s32 id, s32 kind);
@@ -13,7 +12,7 @@ s32 textFormatBuffer(char *destination, const char *format, ...);
  * (Shift-JIS, full width); indexes of 100 and up are looked up through FUN_0032725c. */
 void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
 {
-    u8 *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     const char *places[12] = {
         "\202c\202\217\202\215\202\201\202\211\202\216", /* Domain */
         "\202m\202\201\202\222\202\201\202\213\202\225\201\100\202c\202\217\202\215\202\201\202\211\202\216", /* Naraku Domain */
@@ -75,17 +74,17 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
             return;
         }
     } else {
-        u8 *first = gameFlagsGetBlock();
+        MapSaveBlockA *first = gameFlagsGetBlock();
         s32 selector = 0;
-        if (gameFlagsGetBlock()[3] != 1) {
+        if (gameFlagsGetBlock()->departureIndex != 1) {
             if (kind == 0x18) {
                 selector = 2;
             }
-        } else if (first[0xE71] != 3) {
+        } else if (first->placeStates[0x29] != 3) {
             selector = 1;
         }
         if (mode == 0) {
-            s32 current = gameFlagsGetBlock()[3];
+            s32 current = gameFlagsGetBlock()->departureIndex;
             if (current >= 100) {
                 FUN_0032725c(index - 100, buffer, -1);
                 return;
@@ -96,7 +95,7 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
             }
         }
         if (selector == 2) {
-            s8 site = (s8)flags[0x7C6];
+            s8 site = (s8)flags->option;
             if (site != 0) {
                 if (index >= 100) {
                     FUN_0032725c(index - 100, buffer, -1);

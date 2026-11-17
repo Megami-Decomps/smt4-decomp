@@ -7,10 +7,6 @@
 #include "ui/UiSpriteApi.h"
 
 /* This analysis screen extends beyond the shared BibleScreen work area. */
-struct BibleAnalyzeCursorView {
-    u8 unk00[0x8a];
-    s8 confirmed; /* 0x8a */
-};
 struct BibleAnalyzeEntryView {
     u32 unk00;
     u16 demonId; /* 0x04 */
@@ -23,8 +19,8 @@ struct BibleAnalyzeWorkView {
     u8 unk01c[0x4];
     u8 selection[0xa8];
     u8 position[0x34];
-    BibleAnalyzeCursorView cursor; /* 0x0fc */
-    u8 unk187[0x41d];
+    UiSpriteState cursor; /* 0x0fc */
+    u8 unk188[0x41c];
     u8 customName; /* 0x5a4 */
     u8 unk5a5[3];
     BibleAnalyzeEntryView entries[1280]; /* 0x5a8 */
@@ -58,12 +54,12 @@ void Obj4223f8::followCursorAndDescribe()
     BibleAnalyzeWorkView *work = reinterpret_cast<BibleAnalyzeWorkView *>(this);
     char text[64];
     u8 nameBuffer[8];
-    BibleAnalyzeCursorView *cursor = &work->cursor;
-    uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
-    s32 y = vec2GetYInt((const UiSpriteState *)cursor);
-    s32 x = vec2GetXInt((const UiSpriteState *)cursor);
+    UiSpriteState *cursor = &work->cursor;
+    uiSlidingSpriteAdvance(cursor, 0);
+    s32 y = vec2GetYInt(cursor);
+    s32 x = vec2GetXInt(cursor);
     pointConvertToFloat(work->position, x, y);
-    if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) && buttonHelpIsNotActive()) {
+    if (uiSpriteGetCompletionState(cursor) && buttonHelpIsNotActive()) {
         FUN_002a0cc8(0);
         work->state = 2;
         work->stateArg = 0;

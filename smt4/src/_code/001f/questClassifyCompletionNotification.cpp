@@ -1,9 +1,9 @@
+#include "gamedata/MapSaveBlock.h"
 #include "quest_center/QuestRequirement.h"
 #include "shard/W6_W6Match2_StatusBytes.h"
 #include "game/GameState.h"
 
 extern "C" {
-void *gameGetMapBlock();
 s32 FUN_00287800();
 s32 FUN_00287874(u16 quest);
 s32 table1bOr1cGetRecordValue(u16 quest);

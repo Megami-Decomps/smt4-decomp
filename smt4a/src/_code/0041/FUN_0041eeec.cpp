@@ -1,6 +1,6 @@
 /* NON_MATCHING: suspended transition matches; idle transition's frame/state/previousState stores remain reordered. */
 #include "saveLoadUI/SaveLoadControllerA.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/SaveLoadUITable.h"
 #include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
@@ -41,9 +41,8 @@ void FUN_0041eeec(SaveLoadControllerA* controller)
         saveLoadTransition(controller, 16, 12);
     } else if (!controller->busy) {
         s32 colorIndex = controller->colorIndex;
-        void* section = dataTableGet(0x3D, 0);
-        SaveLoadColorRecordA* colors = static_cast<SaveLoadColorRecordA*>(dataTableGetEntries(section));
-        buttonHelpSetText(colors[colorIndex].color, 0xF4F4F4FF);
+        SaveLoadUIRecord *texts = saveLoadUIRecords();
+        buttonHelpSetText(texts[colorIndex].help, 0xF4F4F4FF);
         saveLoadTransition(controller, 4, 0);
         controller->pending = 0;
         controller->confirmed = 0;

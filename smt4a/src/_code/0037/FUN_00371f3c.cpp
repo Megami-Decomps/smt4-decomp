@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail 54 vs built 54 rows; eligibility comparisons and row-pointer register allocation differ. */
-#include "shard/GameGlobals.h"
+#include "game/GameGlobalsRef.h"
 #include "gamedata/DataTable.h"
 
 struct MapConditionRecord {
@@ -27,9 +27,9 @@ s32 FUN_00371f3c(void)
         u8 unk0000[0x20cc];
         void *file;
     };
-    if (g_gameGlobals.data == NULL)
+    if (g_gameGlobals.instance == NULL)
         return -1;
-    MapConditionOwnerView *owner = reinterpret_cast<MapConditionOwnerView *>(g_gameGlobals.data);
+    MapConditionOwnerView *owner = reinterpret_cast<MapConditionOwnerView *>(g_gameGlobals.instance);
     void *table = dataTableFileGetTable(owner->file, 0);
     MapConditionRecord *records = static_cast<MapConditionRecord *>(dataTableGetEntries(table));
     s32 count = dataTableGetCount(table);

@@ -4,8 +4,8 @@
 #include "common.h"
 #include "shard/W6_W6Match1_Table03Record.h"
 #include "battle/btlUI.h"
-#include "gamedata/Table02Record.h"
 #include "shard/W5_W5Match2_PairedIds.h"
+struct BtlUiA;
 
 struct BtlMainState;
 struct BattleDebugOwnerView {
@@ -63,7 +63,6 @@ s32 FUN_003bbaa8(void *arg0);
 extern "C" {
 #endif
 
-Table02Record* FUN_003bc0ac(u32 keyA, u32 keyB, s32 occurrence);
 
 #ifdef __cplusplus
 }
@@ -113,7 +112,7 @@ s32 recordContainsPairedId(const PairedIdList *list,u32 id);
 extern "C" {
 #endif
 
-u8 btlUiIsPanelHolderReady(u32 arg0);
+u8 btlUiIsPanelHolderReady(struct BtlUiA *ui);
 
 #ifdef __cplusplus
 }

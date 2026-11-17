@@ -52,7 +52,6 @@ extern unsigned int *g_aocMain; /* 0x570260 */
 extern int ifTouchIsInitialSelection(int);
 extern int legacyResourceIdRemap(unsigned int *);
 extern int bgmGetStateById(unsigned int);
-extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
@@ -324,7 +323,7 @@ LAB_00479870:
     textFormatBuffer(&temp_v7,&LAB_00479b08,temp_v3 + temp_v2 * 0x9c8);
     scrSetStringSlot(0,&temp_v7);
     buttonHelpSetEnabled(1);
-    temp_v2 = scrRunOpcodesStub(param_1[0xd6]);
+    temp_v2 = scrRunOpcodesStub((ScriptProcess *)param_1[0xd6]);
     if (temp_v2 == 2) {
       temp_v2 = messageGetChoiceResult();
       if (temp_v2 != 0) {

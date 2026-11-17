@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00487d6c` (_code @ 0x487d6c, 0x3c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "shard/TextureDrawCall.h"
@@ -32,7 +33,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
 extern unsigned int vec2GetXInt(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -66,7 +66,7 @@ void FUN_00487d6c(int param_1)
   float temp_v7;
   unsigned int temp_v8;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   if (g_gameState.mapId >= 100) {
     temp_v1 = lmapMainGetUnkCC();
     if (temp_v1 == 8) {

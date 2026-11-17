@@ -16,8 +16,8 @@ s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_0025f300(PlayScene* work)
 {
     if (!work->unk3084 && static_cast<s32>(work->unk305C) <= 3) {
-        s32 x = vec2GetXInt(reinterpret_cast<UiSpriteState*>(work->timer));
-        s32 y = vec2GetYInt(reinterpret_cast<UiSpriteState*>(work->timer));
+        s32 x = vec2GetXInt(&work->timer);
+        s32 y = vec2GetYInt(&work->timer);
         efctSetSpeed(vec2GetSpeed(&work->intro.animation));
         SceneSpriteCoordinates* sprite = reinterpret_cast<SceneSpriteCoordinates*>(
             asdTMTexTableEntryAt(0x15, static_cast<s32>(work->unk305C) + 0x52));

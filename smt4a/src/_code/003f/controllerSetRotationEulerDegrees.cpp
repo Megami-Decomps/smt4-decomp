@@ -1,15 +1,14 @@
 /* NON_MATCHING: shared phase samplers remain serial instead of retail's batched interpolation; VFP/GPR scheduling and allocation differ, possibly with optimization flags. */
 #include "shard/W6_W6Match6_PhaseTrig.h"
-#include "shard/W5_W5Match7_ControllerPose.h"
+#include "gfx/ControllerModel.h"
 
 extern "C" {
 extern const PhaseTrigEntry g_sinCosTable[];
 
-// Build the controller's 3x4 rotation matrix from Euler angles in degrees.
-void controllerSetRotationEulerDegrees(u32 controllerAddress, f32 x, f32 y, f32 z)
+// Build the body's 3x4 rotation matrix from Euler angles in degrees.
+void controllerSetRotationEulerDegrees(Obj557b18 *body, f32 x, f32 y, f32 z)
 {
-    ControllerPose *controller = reinterpret_cast<ControllerPose *>(controllerAddress);
-    f32 *matrix = reinterpret_cast<f32 *>(controller->unk1c0);
+    f32 *matrix = &body->matrix.m[0][0];
     const f32 degreesToPhase = 256.0f / 360.0f;
     x *= degreesToPhase;
     y *= degreesToPhase;

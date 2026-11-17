@@ -3,22 +3,9 @@
 #include "map/LmapViewGlobals.h"
 #include "game/GameStateA.h"
 #include "util/MathFunctions.h"
-
-struct MapEnemyState {
-    /* 0x0000 */ u8 unk0000[0x3D84];
-    /* 0x3D84 */ s32 attempts;       /* spawn attempts made so far; later ones are tried further out and wider */
-};
-
-/* The enemy being placed (observed fields). */
-struct EnemyPlacement {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ MapVector position;
-    /* 0x2C */ f32 heading;
-};
+#include "map/MapEnemyGlobal.h"
 
 extern "C" {
-
-extern MapEnemyState *g_mapEnemy;
 
 u32 randRange(u32 limit);
 f32 libm_sinf(f32 radians);
@@ -29,7 +16,7 @@ s32 FUN_0025ef68(MapVector *position, MapVector *ground, s32 flags);
 /* Tries up to four spots around the player (alternating left/right of the view heading, further out and
  * with a tighter spread after twelve attempts) and places the enemy on the first one the probe reaches
  * and that has ground. */
-u32 FUN_00353200(EnemyPlacement *enemy)
+u32 FUN_00353200(MapEnemyEntryA *enemy)
 {
     s32 i;
 
@@ -39,7 +26,7 @@ u32 FUN_00353200(EnemyPlacement *enemy)
         MapVector ground;
         MapVector start;
         f32 angle = g_lmapView->heading;
-        s32 attempt = g_mapEnemy->attempts;
+        s32 attempt = g_mapEnemy->spawnAttempts;
         f32 distance;
         f32 step;
         f32 radians;
@@ -72,7 +59,7 @@ u32 FUN_00353200(EnemyPlacement *enemy)
         radians = angle * 0.017453292f;
         origin.x = origin.x + libm_sinf(radians) * distance;
         origin.z = origin.z + libm_cosf(radians) * distance;
-        g_mapEnemy->attempts++;
+        g_mapEnemy->spawnAttempts++;
         end = origin;
         ground = origin;
         start = g_lmapScene->pose.position;

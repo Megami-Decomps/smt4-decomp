@@ -7,6 +7,9 @@
 #include <stddef.h>
 #include "map/mapDepart.h"
 #include "map/MapVector.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
+
+class MoriModelContent;   /* Model/MoriModelContent.h */
 
 struct AsdMdlObject;
 class Obj557af8;
@@ -23,13 +26,20 @@ typedef struct LmapObj {
     /* 0x00 */ u8 unk00[1];
 } LmapObj;
 
-/* One 0x88-byte slot of the state block's sprite table; only its two state bytes are named. */
+/* One 0x88-byte slot of the state block's marker and model tables: the marker's pose and its
+ * registration and visibility bytes (FUN_00272970 clears 0x84-0x86 of every slot). */
 typedef struct LmapMainSlot {
-    /* 0x00 */ u8 unk00[0x85];
-    /* 0x85 */ u8 stateA;
+    /* 0x00 */ MapVector position;
+    /* 0x0C */ f32 rotation[9];
+    /* 0x30 */ f32 scale[3];
+    /* 0x3C */ u8 unk3C[0x48];
+    /* 0x84 */ s8 registered;     /* its model node is registered with the model manager */
+    /* 0x85 */ s8 shown;
     /* 0x86 */ u8 stateB;
     /* 0x87 */ u8 unk87;
 } LmapMainSlot;
+typedef char LmapMainSlotOffsetCheck[sizeof(LmapMainSlot) == 0x88 && offsetof(LmapMainSlot, scale) == 0x30 &&
+    offsetof(LmapMainSlot, registered) == 0x84 && offsetof(LmapMainSlot, shown) == 0x85 ? 1 : -1];
 
 /* The field map's state block (Shin Megami Tensei IV layout), kept by a module global. */
 typedef struct LmapMainState {
@@ -85,7 +95,9 @@ typedef struct LmapMainState {
     /* 0xA10 */ u32 words[32];
     /* 0xA90 */ u8 unkA90;
     /* 0xA91 */ u8 unkA91[3];
-    /* 0xA94 */ u32 unkA94[3];
+    /* 0xA94 */ u32 unkA94;
+    /* 0xA98 */ u32 markerSource;
+    /* 0xA9C */ void *markerModels;    /* the marker model's node list */
     /* 0xAA0 */ u8 unkAA0[0xC];
     /* 0xAAC */ LmapMainSlot slots[128];
     /* 0x4EAC */ u32 unk4EAC;
@@ -181,33 +193,76 @@ typedef char LmapSceneOffsetsCheck[offsetof(LmapScene, pose) == 0x1C && offsetof
     offsetof(LmapScene, playerModel) == 0x194 && offsetof(LmapScene, channelValues) == 0x19C &&
     offsetof(LmapScene, unk1B8) == 0x1B8 ? 1 : -1];
 
-/* The map state block in Apocalypse. */
+/* The map state block in Apocalypse (0x9370 bytes, allocated by FUN_00272970). */
 typedef struct LmapMainStateA {
-    /* 0x00 */ u32 job;
-    /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ u8 freeOnEnd;
-    /* 0x09 */ u8 unk09[2];
-    /* 0x0B */ s8 external;
-    /* 0x0C */ u8 unk0C[0x34];
-    /* 0x40 */ u32 mapId;
-    /* 0x44 */ u32 unk44;
-    /* 0x48 */ u32 areaId;
-    /* 0x4C */ u8 unk4C[0x7C];
-    /* 0xC8 */ s32 unkC8;         /* float bits */
-    /* 0xCC */ u32 state;         /* lmapMainStateSet */
-    /* 0xD0 */ u32 stateStep;     /* cleared when the state changes */
-    /* 0xD4 */ u32 stateTime;     /* cleared when the state changes */
-    /* 0xD8 */ u8 unkD8[0x1C];
-    /* 0xF4 */ LmapObj obj;
-    /* 0xF5 */ u8 unk0F5[0x8EC];
-    /* 0x9E1 */ s8 bgmBlocked;    /* nonzero: lmapUpdateMapBgm leaves the BGM alone */
-    /* 0x9E2 */ u8 unk9E2[0x4A];
-    /* 0xA2C */ void *scriptCode;        /* the map script's code, strings and process (FUN_002dfa18) */
-    /* 0xA30 */ void *scriptStrings;
-    /* 0xA34 */ struct ScriptProcess *script;
-    /* 0xA38 */ u32 scriptCompletionFlag; /* game flag set when the script finishes, or 0 */
-    /* 0xA3C */ u8 unkA3C[0x8918];
+    /* 0x0000 */ u32 job;
+    /* 0x0004 */ u32 drawTask;
+    /* 0x0008 */ u8 freeOnEnd;
+    /* 0x0009 */ u8 unk009[2];
+    /* 0x000B */ s8 external;
+    /* 0x000C */ u32 unk00C;
+    /* 0x0010 */ u32 unk010;
+    /* 0x0014 */ u8 unk014[0x2C];
+    /* 0x0040 */ u32 mapId;
+    /* 0x0044 */ u32 unk044;
+    /* 0x0048 */ u32 areaId;
+    /* 0x004C */ u16 unk04C;
+    /* 0x004E */ u16 unk04E;
+    /* 0x0050 */ u8 unk050[0x74];
+    /* 0x00C4 */ f32 scaleA;
+    /* 0x00C8 */ s32 unkC8;         /* float bits (1.0 at creation) */
+    /* 0x00CC */ u32 state;         /* lmapMainStateSet */
+    /* 0x00D0 */ u32 stateStep;     /* cleared when the state changes */
+    /* 0x00D4 */ u32 stateTime;     /* cleared when the state changes */
+    /* 0x00D8 */ u8 unk0D8[4];
+    /* 0x00DC */ f32 unk0DC;
+    /* 0x00E0 */ u8 unk0E0;
+    /* 0x00E1 */ u8 unk0E1;
+    /* 0x00E2 */ u8 unk0E2[2];
+    /* 0x00E4 */ s32 unk0E4;
+    /* 0x00E8 */ f32 unk0E8;
+    /* 0x00EC */ u32 unk0EC;
+    /* 0x00F0 */ u32 unk0F0;
+    /* 0x00F4 */ LmapObj obj;
+    /* 0x00F5 */ u8 unk0F5[0x8E3];
+    /* 0x09D8 */ u8 unk9D8;
+    /* 0x09D9 */ u8 unk9D9[3];
+    /* 0x09DC */ u32 unk9DC;
+    /* 0x09E0 */ u8 unk9E0;
+    /* 0x09E1 */ s8 bgmBlocked;    /* nonzero: lmapUpdateMapBgm leaves the BGM alone */
+    /* 0x09E2 */ u8 unk9E2[6];
+    /* 0x09E8 */ u8 unk9E8;
+    /* 0x09E9 */ u8 unk9E9[3];
+    /* 0x09EC */ u32 unk9EC[6];
+    /* 0x0A04 */ u8 unkA04[0x28];
+    /* 0x0A2C */ void *scriptCode;        /* the map script's code, strings and process (FUN_002dfa18) */
+    /* 0x0A30 */ void *scriptStrings;
+    /* 0x0A34 */ struct ScriptProcess *script;
+    /* 0x0A38 */ u32 scriptCompletionFlag; /* game flag set when the script finishes, or 0 */
+    /* 0x0A3C */ u8 unkA3C[0xC];
+    /* 0x0A48 */ f32 unkA48[3];
+    /* 0x0A54 */ RegisteredHandle *actors[32]; /* the map's actor models */
+    /* 0x0AD4 */ u8 unkAD4;
+    /* 0x0AD5 */ u8 unkAD5[3];
+    /* 0x0AD8 */ u32 unkAD8;
+    /* 0x0ADC */ u32 unkADC;
+    /* 0x0AE0 */ u32 unkAE0;
+    /* 0x0AE4 */ MoriModelContent *areaModel; /* the area markers' model; its nodes are the markers */
+    /* 0x0AE8 */ u8 unkAE8[0xC];
+    /* 0x0AF4 */ LmapMainSlot areaSlots[128];
+    /* 0x4EF4 */ u32 modelRequest;       /* handed to a rebuilt model content, then cleared */
+    /* 0x4EF8 */ MoriModelContent *model;
+    /* 0x4EFC */ MoriModelContent *baseModel; /* the content a rebuilt one is linked to */
+    /* 0x4F00 */ LmapMainSlot modelSlots[128];
+    /* 0x9300 */ u32 unk9300;
+    /* 0x9304 */ f32 unk9304[3];
+    /* 0x9310 */ u8 unk9310[0x44];
     /* 0x9354 */ s32 scriptState;
+    /* 0x9358 */ u32 unk9358;
+    /* 0x935C */ u32 unk935C;
+    /* 0x9360 */ u8 flags9360[11];
+    /* 0x936B */ u8 unk936B;
+    /* 0x936C */ Obj557c48 *modelManager; /* g_handleRegistry at creation */
 } LmapMainStateA;
 
 /* The field map's camera view (Apocalypse), kept by g_lmapView (and, in the camera module's own
@@ -420,7 +475,10 @@ typedef char LmapSceneAOffsetsCheck[offsetof(LmapSceneA, pose) == 0x1C && offset
 /* Retail 32-bit layout invariants. */
 typedef char LmapMainStateAOffsetsCheck[offsetof(LmapMainStateA, state) == 0xCC &&
     offsetof(LmapMainStateA, obj) == 0xF4 && offsetof(LmapMainStateA, bgmBlocked) == 0x9E1 &&
-    offsetof(LmapMainStateA, scriptCode) == 0xA2C && offsetof(LmapMainStateA, scriptState) == 0x9354 ? 1 : -1];
+    offsetof(LmapMainStateA, scriptCode) == 0xA2C && offsetof(LmapMainStateA, actors) == 0xA54 &&
+    offsetof(LmapMainStateA, areaModel) == 0xAE4 && offsetof(LmapMainStateA, areaSlots) == 0xAF4 &&
+    offsetof(LmapMainStateA, model) == 0x4EF8 && offsetof(LmapMainStateA, modelSlots) == 0x4F00 &&
+    offsetof(LmapMainStateA, scriptState) == 0x9354 && sizeof(LmapMainStateA) == 0x9370 ? 1 : -1];
 
 extern "C" {
 u32 gameDataCopySaveEntry(u32 index, void *dest);

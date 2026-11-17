@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptVm.h"
 
 /* Work area, Shin Megami Tensei IV. */
 typedef struct ConfigWork {
@@ -19,7 +20,7 @@ typedef struct ConfigWork {
     /* 0xA9 */ u8 unkA9[0x3];
     /* 0xAC */ void *heapA;               /* heap block, freed on close */
     /* 0xB0 */ void *heapB;               /* heap block, freed on close */
-    /* 0xB4 */ u32 resource;               /* released on close */
+    /* 0xB4 */ ScriptProcess *resource;               /* released on close */
     /* 0xB8 */ u32 unkB8;
 } ConfigWork;
 
@@ -40,7 +41,7 @@ typedef struct ConfigWorkA {
     /* 0x7A */ u16 unk7A;
     /* 0x7C */ void *heapA;               /* heap block, freed on close */
     /* 0x80 */ void *heapB;               /* heap block, freed on close */
-    /* 0x84 */ u32 resource;               /* released on close */
+    /* 0x84 */ ScriptProcess *resource;               /* released on close */
     /* 0x88 */ u8 unk88[0x34];
     /* 0xBC */ u32 unkBC;
     /* 0xC0 */ u8 param;

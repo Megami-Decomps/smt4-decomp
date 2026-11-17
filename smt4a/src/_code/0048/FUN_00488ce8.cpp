@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00488ce8` (_code @ 0x488ce8, 0x788 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -73,7 +74,6 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int gameFlagsGetBlock(void);
 extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
@@ -135,7 +135,7 @@ unsigned int FUN_00488ce8(int param_1)
   int temp_v16;
   unsigned int temp_v17;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   FUN_00489480(param_1);
   temp_v1 = param_1;
   FUN_0048981c();

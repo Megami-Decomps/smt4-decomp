@@ -2,17 +2,9 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlGlobals.h"
-
-struct OpposingCandidateMasks {
-    u64 required;
-    u8 unk08[0x28];
-    u64 excluded;
-};
-typedef char OpposingCandidateMasksOffsetCheck[offsetof(OpposingCandidateMasks, excluded) == 0x30 ? 1 : -1];
+#include "battle/BattleSkillResponseMasks.h"
 
 extern "C" {
-extern OpposingCandidateMasks g_btlSkillResponseMasks;
-
 s32 FUN_004c600c(s32 selection)
 {
     // The value lies in the shared entry's byte-aligned union, so keep this local.
@@ -30,7 +22,7 @@ s32 FUN_004c600c(s32 selection)
     BtlMainStateA *state = btlGetMainState();
     for (s32 index = first; first + count > index; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
-        if ((g_btlSkillResponseMasks.required & entry->flags) != 0 && (entry->flags & g_btlSkillResponseMasks.excluded) == 0) {
+        if ((g_btlSkillResponseMasks.present & entry->flags) != 0 && (entry->flags & g_btlSkillResponseMasks.outOfFight) == 0) {
             s16 candidateSelection = entry->selectionIndex;
             BtlCombatantEntryA *candidate = btlMainFindEntryByListedId(btlGetMainState(), candidateSelection);
             if (candidate != NULL && ((CandidateValueView *)candidate)->value > 0) {

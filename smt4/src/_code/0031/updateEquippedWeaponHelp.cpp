@@ -21,11 +21,11 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
     ButtonHelpWork *help = g_buttonHelp.work;
     EquipmentRecord *entry = itemTableGetEquipmentRecord(gameGetPlayerData()->equipped.weapon);
     if (!entry) {
-        help->unk4CB = 0;
+        help->textVisible = 0;
         return;
     }
-    help->unk55C = 1;
-    help->unk4CB = 1;
+    help->text.useDirectoryText = 1;
+    help->textVisible = 1;
     char text[128];
     u8 hits = entry->hitRange;
     if ((hits & 0xf) == (hits >> 4)) {
@@ -61,6 +61,6 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
     textEncodeFontSlot(0x29, text);
     if (!directory)
         directory = reinterpret_cast<RelativeDirectory *>(g_buttonHelp.mbm);
-    asdTextDrawDirectoryEntry((AsdText *)help->unk558, 3, -1, 0, 3, directory, index);
+    asdTextDrawDirectoryEntry((AsdText *)help->text.directoryText, 3, -1, 0, 3, directory, index);
 }
 }

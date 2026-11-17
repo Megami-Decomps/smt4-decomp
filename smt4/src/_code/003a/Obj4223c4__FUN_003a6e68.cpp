@@ -3,7 +3,7 @@
 #include "classes/Obj422594.h"
 #include "shard/MessageIdList.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
-#include "ui/TimerSlot.h"
+#include "ui/UiSpriteState.h"
 #include <stddef.h>
 #include "status/StatusCamera.h"
 #include "ui/UiSpriteApi.h"
@@ -21,7 +21,7 @@ void Obj4223c4::FUN_003a6e68()
     /* The selected-channel state extends past the shared class's declared end. */
     struct AnimationTimerGroup {
         u8 prefix[0x20];
-        TimerSlot timers[8];
+        UiSpriteState timers[8];
     };
     struct CursorParameters {
         u8 prefix[8];
@@ -57,9 +57,9 @@ void Obj4223c4::FUN_003a6e68()
         offsetof(OpeningScreenView, selectedChannel) == 0xA5B4 ? 1 : -1];
     OpeningScreenView *view = reinterpret_cast<OpeningScreenView *>(screen);
     s32 completed = uiAnimationAdvanceChannel(&view->animation, view->selectedChannel);
-    TimerSlot *timer = &view->animation.timers[view->selectedChannel];
-    s32 y = vec2GetYInt((const UiSpriteState *)timer);
-    s32 x = vec2GetXInt((const UiSpriteState *)timer);
+    UiSpriteState *timer = &view->animation.timers[view->selectedChannel];
+    s32 y = vec2GetYInt(timer);
+    s32 x = vec2GetXInt(timer);
     pointConvertToFloat(&view->position, x, y);
     if (completed == 0)
         return;

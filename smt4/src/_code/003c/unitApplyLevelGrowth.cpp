@@ -1,15 +1,7 @@
 /* NON_MATCHING: growth-parameter initialization uses byte/halfword stores instead of retail's packed register construction. */
 #include "common.h"
-#include "gamedata/DataTable.h"
+#include "gamedata/PlayerGrowthDefaults.h"
 
-struct LevelGrowthTableEntry {
-    /* 0x00 */ u8 unk00[5];
-    /* 0x05 */ u8 weights[5];
-    /* 0x0A */ u8 baseHp;
-    /* 0x0B */ u8 baseMp;
-    /* 0x0C */ u8 hpGrowth;
-    /* 0x0D */ u8 mpGrowth;
-};
 struct LevelGrowthParameters {
     /* 0x00 */ u8 weights[5];
     /* 0x05 */ u8 reserved;
@@ -46,11 +38,9 @@ extern "C" void unitApplyLevelGrowth(LevelGrowthUnit *unit, s32 levels, bool gro
 {
     if (levels <= 0)
         return;
-    void *table = dataTableGet(9, 0);
-    dataTableGetCount(table);
-    LevelGrowthTableEntry *entry = static_cast<LevelGrowthTableEntry *>(dataTableGetEntries(table));
+    const PlayerGrowRecord *entry = playerGrowthDefaults();
     LevelGrowthParameters parameters = {
-        {entry->weights[0], entry->weights[1], entry->weights[2], entry->weights[3], entry->weights[4]},
+        {entry->growth[0], entry->growth[1], entry->growth[2], entry->growth[3], entry->growth[4]},
         0, entry->baseHp, entry->baseMp, entry->hpGrowth, entry->mpGrowth, 0, 0
     };
     for (s32 level = 0; level < levels; ++level) {

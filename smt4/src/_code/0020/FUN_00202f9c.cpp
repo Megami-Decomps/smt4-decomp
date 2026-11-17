@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "gamedata/GameDataAccess_Smt4.h"
+#include "script/scrScriptProcess.h"
 
 struct ScriptProcess;
 
@@ -40,7 +41,6 @@ int msgWindowReset(void);
 int messageMainSetEnabled(int arg);
 int gameGlobalsSetSelected(int arg);
 int buttonHelpSetText(int arg0, int color);
-void scrScriptProcessDestroy(ScriptProcess *resource);
 int ifTouchRegionRemove(void);
 int jobStop(void *context, int arg);
 

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "util/Random.h"
+#include "battle/BtlUiGlobal.h"
 
 #define BTL_UNIT_COUNT_ALL 0x6D
 #define BTL_UNIT_STRIDE 0x1D0
@@ -73,7 +74,6 @@ extern u32 DAT_00571168;
 extern u32 DAT_0057116c;
 extern u32 DAT_00571170;
 extern u32 DAT_00571174;
-extern u32 g_btlUiBlock;
 
 void FUN_004e8454(BtlActorView *actor);
 s32 FUN_004e933c(BtlActorView *actor, BtlCommandView *command);
@@ -85,7 +85,7 @@ void FUN_004eb838(BtlActorView *actor, BtlCommandView *command);
 void FUN_004c9220(s32 id, BtlSideMask *target);
 void FUN_004c9160(s32 id, BtlSideMask *target, s32 a, s32 b);
 void FUN_004fd508(s32 id, BtlCommandView *command, s32 a, BtlSkillView *skill, s32 b);
-void FUN_004a9308(u32 block, s16 id, s32 arg);
+void FUN_004a9308(BtlUiA *block, s16 id, s32 arg);
 
 #define BTL_AI_ROLL_MAX 99
 #define BTL_AI_ROLL_BAND_A 10

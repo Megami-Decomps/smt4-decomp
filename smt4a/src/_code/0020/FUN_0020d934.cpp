@@ -1,20 +1,14 @@
 /* NON_MATCHING: the repeated table-section lookups (get, entries, count) are not merged the way retail's per-case calls are, and the switch layout differs; the help text chosen for each panel kind is the same. */
 #include "ui/PartyPanelStateA.h"
-#include "gamedata/DataTable.h"
-
-/* One line of table 0x39 (0x5C bytes): the help text starts at byte 1. */
-struct HelpLine {
-    u8 unk00;
-    char text[0x5B];
-};
+#include "gamedata/PartyPanelHelp.h"
 
 extern "C" void buttonHelpSetText(const char *text, u32 color);
 
-/* Shows line `line` of table 0x39 when the table has it. */
+/* Shows line `line` of PartyPanelHelp.tbb when the table has it. */
 static __inline void showHelpLine(u32 line)
 {
-    DataTableView<HelpLine> help(0x39, 0);
-    HelpLine *entry = help.at(line);
+    DataTableView<PartyPanelHelpRecordA> help(0x39, 0);
+    PartyPanelHelpRecordA *entry = help.at(line);
 
     if (entry != NULL) {
         buttonHelpSetText(entry->text, 0xF4F4F4FF);

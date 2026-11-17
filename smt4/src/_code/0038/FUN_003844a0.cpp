@@ -6,17 +6,13 @@
 
 extern "C" {
 
-struct TitleFadeAnimation {
-    u8 prefix[0x20];
-    f32 speed;
-};
 /* A title-scene overlay object: flags at 0 (0x80: fade overlay), a state at 4 (drawn from 3 on) and
  * its fade amount at 0x208. */
 typedef struct TitleOverlay {
     /* 0x000 */ u32 flags;
     /* 0x004 */ s32 state;
     /* 0x008 */ u8 unk008[0x1E0];
-    /* 0x1E8 */ TitleFadeAnimation fadeAnimation;
+    /* 0x1E8 */ UiSpriteState fadeAnimation;
 } TitleOverlay;
 
 
@@ -41,7 +37,7 @@ void FUN_003844a0(TitleOverlay *overlay)
     efctSetSpeed(1.0f);
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
     if ((overlay->flags & 0x80) != 0) {
-        u8 alpha = (u8)(u32)(vec2GetSpeed((const UiSpriteState *)&overlay->fadeAnimation) * 192.0f);
+        u8 alpha = (u8)(u32)(vec2GetSpeed(&overlay->fadeAnimation) * 192.0f);
 
         renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_titleScene, 0);

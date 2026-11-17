@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -8,11 +9,10 @@ typedef struct ScriptHolderReset {
     /* 0x08 */ u8 unk08[4];
     /* 0x0C */ void *buf0C;
     /* 0x10 */ void *buf10;
-    /* 0x14 */ u32 proc14;
+    /* 0x14 */ ScriptProcess *proc14;
 } ScriptHolderReset;
 
 extern void asdMemFree(void *ptr);
-extern void scrScriptProcessDestroy(u32 process);
 
 /* Resets the holder to state 0x10, freeing its two buffers and its script process. */
 void scriptHolderReset(ScriptHolderReset *holder)

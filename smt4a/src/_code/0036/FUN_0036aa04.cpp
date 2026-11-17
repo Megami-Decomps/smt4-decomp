@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rewrite compiles (222 vs 195 rows); the state-3 call arguments and the compare constants (fade > 0.1f) are inferred; retail shares the visibility updates differently */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 
@@ -31,17 +31,8 @@ struct FollowerDisplay {
     u8 flag93ca;                // 0x93ca
 };
 
-struct GameFlagsBlock {
-    u8 unk0000[0xdf4];
-    s32 pending;                // 0xdf4
-    u8 unkdf8[0x15b4 - 0xdf8];
-    s32 followState;            // 0x15b4
-};
-
 extern "C" {
 
-
-GameFlagsBlock* gameFlagsGetBlock(void);
 void controllerSetDestination(ControllerNode* node, const void* destination);
 void controllerSetPosition(ControllerNode* node);
 s32 slots4FGetActiveValue(ControllerNode* node);
@@ -86,9 +77,9 @@ void FUN_0036aa04(FollowerDisplay* display)
     controllerSetPosition(near);
     if (slots4FGetActiveValue(near) != 0) modelPlayClip(near, 0, 2);
 
-    GameFlagsBlock* block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     if (display->far == NULL) return;
-    if (block->pending == 0 && block->followState != 3 && block->followState != 4) {
+    if (block->eventEnabled == 0 && block->followState != 3 && block->followState != 4) {
         block->followState = 0;
         far->flags |= kHiddenBits;
         return;

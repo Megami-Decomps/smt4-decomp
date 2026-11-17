@@ -9,10 +9,10 @@ namespace {
 // The speed belongs beyond the canonical draw-owner prefix, whose size remains 0x440.
 struct ParameterOverlayWorkView {
     DrawParameterOwner owner;
-    u8 animation[0x24]; // 0x440, speed at animation + 0x20
+    UiSpriteState animation; // 0x440, speed at animation + 0x20
 };
 typedef char ParameterOverlayWorkSpeedOffsetCheck[
-    offsetof(ParameterOverlayWorkView, animation) == 0x440 && sizeof(ParameterOverlayWorkView) == 0x464 ? 1 : -1];
+    offsetof(ParameterOverlayWorkView, animation) == 0x440 && sizeof(ParameterOverlayWorkView) == 0x4CC ? 1 : -1];
 }
 
 extern "C" {
@@ -33,7 +33,7 @@ u32 aocBoardDrawParameterOverlay(u32 job)
         return enabled;
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    efctSetSpeed(vec2GetSpeed((UiSpriteState *)work->animation));
+    efctSetSpeed(vec2GetSpeed(&work->animation));
     texDrawTableEntryAtStoredOrigin(2, 8, 0x14F, 0, 0, 6);
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);

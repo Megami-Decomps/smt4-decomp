@@ -1,13 +1,12 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "shard/Shard0037.h"
 
 extern "C" {
 
-extern Flags0C0C *gameFlagsGetBlock(void);
-
 /* Tests the owned-bit of `id` after folding variant ids onto their base id. */
 u8 gameOwnedBitTest(s32 id)
 {
-    Flags0C0C *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     s32 word;
     s32 bit;
 
@@ -34,7 +33,7 @@ u8 gameOwnedBitTest(s32 id)
     }
     word = id / 32;
     bit = id % 32;
-    return (flags->bits[word] & (1 << bit)) != 0;
+    return (flags->markBits[word] & (1 << bit)) != 0;
 }
 
 } /* extern "C" */

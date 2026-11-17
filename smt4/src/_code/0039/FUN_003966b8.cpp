@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003966b8` (_code @ 0x3966b8, 0x3d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -53,7 +54,6 @@ extern int dataTableGetRecordFifty(void);
 /* Supplied declaration required: FUN_00273f5c. */
 extern int FUN_0027d968(void);
 /* Supplied declaration required: gameFlagIsSet. */
-extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_00396034. */
 /* Supplied declaration required: FUN_00396044. */
 /* Supplied declaration required: FUN_0039607c. */
@@ -86,7 +86,7 @@ void FUN_003966b8(int param_1)
   
   temp_v0 = dataTableGetRecordFifty();
   temp_v2 = 0;
-  temp_v10 = gameGetMapBlock();
+  temp_v10 = (int)gameGetMapBlock();
   pcVar4 = (char *)0x0;
   if (0 < temp_v0) {
     temp_v6 = 0x42480000;

@@ -1,10 +1,10 @@
 #include "shard/X14_ModelPair.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 s32 resourceFindActiveIndex(s32 kind);
-PairedModel *scrScriptProcessCreate(PairedModel *model, void *target);
 
 /* Binds the owner's model to its target once everything and both table 40 textures are loaded;
  * returns 1 when ready. */
@@ -30,7 +30,7 @@ u32 modelPairTryBind(ModelPairOwner *owner)
     }
     if (owner->bound == NULL) {
         owner->bound = scrScriptProcessCreate(owner->model, owner->target);
-        owner->bound->unk108 = 0;
+        owner->bound->mode = 0;
     }
     return 1;
 }

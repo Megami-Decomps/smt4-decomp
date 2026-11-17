@@ -1,11 +1,8 @@
 #include "common.h"
 #include "AsdSDK/EffectEditorSelectionTransfer.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 /* The effect editor state as seen by this callback: the word at 0x30. */
-struct EffectEditorStateView {
-    u8 unk00[0x30];
-    u32 unk30;
-};
 
 struct Obj323dd8Parent {
     u8 unk00[0xf0];
@@ -18,7 +15,6 @@ struct Obj323dd8 {
 };
 
 extern "C" {
-extern EffectEditorStateView g_effectEditor;
 extern EffectEditorOptions DAT_0059ee30;
 
 u32 FUN_0035ba3c(f32 *selection, u32 value, EffectEditorOptions *options);
@@ -27,6 +23,6 @@ u32 FUN_0035ba3c(f32 *selection, u32 value, EffectEditorOptions *options);
 void FUN_003c3b5c(Obj323dd8 *obj)
 {
     EffectEditorOptions *options = &DAT_0059ee30;
-    FUN_0035ba3c(obj->parent->selection, g_effectEditor.unk30, options);
+    FUN_0035ba3c(obj->parent->selection, (u32)g_effectEditor.texture, options);
 }
 }

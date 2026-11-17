@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/PartyPanelState.h"
 #include "bible/bibleMain.h"
 
@@ -7,7 +8,6 @@ int FUN_0026d654(int arg);
 int partyPanelSetState(int a, int b);
 int FUN_00298d28(int a, int b);
 int beginStatusPanelClose(void);
-int timerStart(void *timer, int a, int b);
 
 void FUN_0026d5a4(void)
 {

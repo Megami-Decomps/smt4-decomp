@@ -1,5 +1,5 @@
 /* NON_MATCHING: bit-set addressing now recomputes block+0x7C8 per access like retail; retail still spills the random pick to the stack (push {r3,...}), keeps the constant 1 in fp with a separate `lsl` before the bic, and tests the first loop's kind as cmp 0/beq, cmp 6, cmpne 14. */
-#include "common.h"
+#include "gamedata/MapSaveBlockA.h"
 
 /* A spawn record of table 49 (only the fields the refresh reads). */
 struct SpawnRecord {
@@ -12,29 +12,21 @@ struct SpawnRecord {
     /* 0x2A */ u16 forceFlag;       /* nonzero: spawns regardless of the pick */
 };
 
-/* The game flag block: the spawn bits and the game flags. */
-struct GameFlagBlock {
-    /* 0x000 */ u8 unk000[0x7C8];
-    /* 0x7C8 */ u32 spawned[0x84];
-    /* 0xD4C */ u32 flags[1];
-};
-
-static inline void setSpawnBit(GameFlagBlock *block, s32 index)
+static inline void setSpawnBit(MapSaveBlockA *block, s32 index)
 {
     s32 word = index / 32;
     s32 bit = index % 32;
-    block->spawned[word] |= 1 << bit;
+    block->slotBits[word] |= 1 << bit;
 }
-static inline void clearSpawnBit(GameFlagBlock *block, s32 index)
+static inline void clearSpawnBit(MapSaveBlockA *block, s32 index)
 {
     s32 word = index / 32;
     s32 bit = index % 32;
-    block->spawned[word] &= ~(1 << bit);
+    block->slotBits[word] &= ~(1 << bit);
 }
 static inline bool testBit(const u32 *bits, s32 index) { return (bits[index / 32] & (1 << (index % 32))) != 0; }
 
 extern "C" {
-GameFlagBlock *gameFlagsGetBlock(void);
 s32 dataTableGetRecordFortyNine(void);
 SpawnRecord *FUN_003689d0(s32 index);
 s32 randRange(u32 limit);
@@ -50,7 +42,7 @@ static inline bool takesPartInPick(const SpawnRecord *record)
  * flags or their force flag allow. */
 void FUN_003b9720(s32 area, s32 sub)
 {
-    GameFlagBlock *block = gameFlagsGetBlock();
+    MapSaveBlockA *block = gameFlagsGetBlock();
     s32 candidates = 0;
     for (s32 i = 0; i < dataTableGetRecordFortyNine(); i++) {
         SpawnRecord *record = FUN_003689d0(i);
@@ -69,7 +61,7 @@ void FUN_003b9720(s32 area, s32 sub)
         if (record->area == -1 || record->area != area || record->sub != sub || !takesPartInPick(record))
             continue;
         if (record->gateFlag != 0) {
-            if (!testBit(gameFlagsGetBlock()->flags, (s16)record->gateFlag))
+            if (!testBit(gameFlagsGetBlock()->blockBits, (s16)record->gateFlag))
                 setSpawnBit(block, i);
         } else if (seen == pick) {
             setSpawnBit(block, i);

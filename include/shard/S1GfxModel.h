@@ -45,42 +45,6 @@ typedef struct ModelSelector {
     /* 0x56C */ ModelSlot *slots[2];
 } ModelSelector;
 
-/* The model-related part of g_gfxSettings (0x464AF0): per-scene-slot (0/1) node state. */
-typedef struct GfxModelState {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ u8 unk01;
-    /* 0x02 */ u8 unk02;
-    /* 0x03 */ u8 unk03[0x1D];
-    /* 0x20 */ u32 node0;          /* node attached for slot 0 */
-    /* 0x24 */ u8 unk24[8];
-    /* 0x2C */ u32 node1;          /* node attached for slot 1 */
-    /* 0x30 */ u32 pendingNode[2]; /* node waiting to be attached */
-    union {
-        /* 0x38 */ u8 unk38[8];
-        struct {
-            /* 0x38 */ u32 count;
-            /* 0x3C */ s32 instanceCount;
-        } loadedModels;
-    };
-    /* 0x40 */ s32 unk40;
-    /* 0x44 */ u8 unk44[0x3C];
-    /* 0x80 */ void *modelData;
-    /* 0x84 */ u8 unk84[8];
-    /* 0x8C */ u32 attachInfo[2];
-    /* 0x94 */ u32 transformBuilder[2];
-    /* 0x9C */ u8 unk9C[0x10];
-    /* 0xAC */ u32 sceneNode[2];   /* g_asdModelSlotArray0 */
-    /* 0xB4 */ u8 unkB4[0x10];
-    /* 0xC4 */ struct ModelOwner *owner[2];
-    /* 0xCC */ u32 unkCC[2];       /* cleared when a slot is attached */
-} GfxModelState;
-
-typedef char GfxModelStateSizeCheck[sizeof(GfxModelState) == 0xD4 ? 1 : -1];
-typedef char GfxModelStateLoadedCountOffsetCheck[
-    offsetof(GfxModelState, loadedModels.count) == 0x38 ? 1 : -1];
-typedef char GfxModelStateInstanceCountOffsetCheck[
-    offsetof(GfxModelState, loadedModels.instanceCount) == 0x3C ? 1 : -1];
-
 typedef struct ModelOwner {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ ModelSlot *slot;

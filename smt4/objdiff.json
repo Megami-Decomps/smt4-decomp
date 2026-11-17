@@ -149716,13 +149716,13 @@
       "target_path": "orig/target/_code/0031/scrComm_QuestUI_OpenWithArg.o"
     },
     {
-      "base_path": "build/obj/_code/0031/FUN_0031c344.o",
+      "base_path": "build/obj/_code/0031/itemApplyPermanentStatBoost.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0031c344",
+            "name": "itemApplyPermanentStatBoost",
             "size": 852,
             "vram": "0x31c344"
           }
@@ -149730,10 +149730,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0031/FUN_0031c344.cpp"
+        "source_path": "src/_code/0031/itemApplyPermanentStatBoost.cpp"
       },
-      "name": "_code/0031/FUN_0031c344",
-      "target_path": "orig/target/_code/0031/FUN_0031c344.o"
+      "name": "_code/0031/itemApplyPermanentStatBoost",
+      "target_path": "orig/target/_code/0031/itemApplyPermanentStatBoost.o"
     },
     {
       "base_path": "build/obj/_code/0031/FUN_0031c69c.o",

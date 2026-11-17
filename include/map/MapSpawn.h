@@ -9,13 +9,8 @@ struct MapSpawnPoint {
     s16 heading;
     u8 unk0C[0x38];
 };
-struct MapSpawnGrid {
-    u8 unk000[0xDCC];
-    s8 x;
-    s8 z;
-};
 struct MapHeadingState { u8 prefix[0x18]; f32 heading; };
-typedef char MapSpawnOffsets[sizeof(MapSpawnPoint) == 0x44 && offsetof(MapSpawnPoint, x) == 8 && offsetof(MapSpawnGrid, x) == 0xDCC && offsetof(MapHeadingState, heading) == 0x18 ? 1 : -1];
+typedef char MapSpawnOffsets[sizeof(MapSpawnPoint) == 0x44 && offsetof(MapSpawnPoint, x) == 8 && offsetof(MapHeadingState, heading) == 0x18 ? 1 : -1];
 extern "C" {
 u8 mapGetDepartureIndex(void);
 }

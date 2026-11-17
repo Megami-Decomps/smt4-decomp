@@ -1,11 +1,10 @@
 /* NON_MATCHING: the g_gameState+0x200 limit access now matches retail; retail addresses the extra-model slot as (map + index*8 + 0x3000) with the fields at +76/+80/+81 instead of forming the slot pointer. */
-#include "map/mapEnemy.h"
+#include "map/MapEnemyGlobal.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
 #include "game/GameState.h"
 
 extern "C" {
-extern MapEnemy *g_mapEnemy;
 extern EnemyExtraModelSource DAT_00448ca8[];
 void textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
@@ -20,7 +19,7 @@ s32 FUN_00256550(u32 index)
         return 1;
     }
     s32 count = 0;
-    for (s32 slot = 0; slot < 21; ++slot) {
+    for (s32 slot = 0; slot < MAP_ENEMY_EXTRA_MODEL_COUNT; ++slot) {
         if (g_mapEnemy->extraModels[slot].model) {
             ++count;
         }

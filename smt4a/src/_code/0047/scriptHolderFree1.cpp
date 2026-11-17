@@ -1,9 +1,9 @@
 #include "shard/Shard0047.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 extern void asdMemFree(void *ptr);
-extern void scrScriptProcessDestroy(u32 process);
 extern void campButtonHelpRelease(void);
 
 /* Frees the two buffers and the script process held by the object. */

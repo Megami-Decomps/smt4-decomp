@@ -1,8 +1,7 @@
 #include "shard/Shard0032.h"
+#include "gfx/GfxSettings.h"
 
 extern "C" {
-
-extern Settings5B g_gfxSettings;
 
 void settings5BAddFlags(u32 flags)
 {

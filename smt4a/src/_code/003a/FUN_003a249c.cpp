@@ -4,7 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "gamedata/Table49Trigger.h"
 #include "map/mapDepart.h"
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
 
@@ -21,7 +21,7 @@ void FUN_003a249c(void)
 {
     s32 entryCount = FUN_003bf87c();
     s32 firstId = 0;
-    FlagWorkBanks *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     s32 triggerCount = dataTable49Type1Count();
     s32 i;
 
@@ -32,11 +32,11 @@ void FUN_003a249c(void)
         }
     }
 
-    FlagWorkBanks *banks = gameFlagsGetBlock();
+    MapSaveBlockA *banks = gameFlagsGetBlock();
     for (i = 0; i < 8; i++) {
-        banks->navi.slots[i].id = 0;
+        banks->naviSlots[i].id = 0;
     }
-    banks->navi.slotCount = 0;
+    banks->naviSlotCount = 0;
 
     for (i = 0; i < entryCount; i++) {
         Table49NaviEntry *entry = dataTableGetEntry49(i);
@@ -45,10 +45,10 @@ void FUN_003a249c(void)
             if (firstId == 0) {
                 firstId = entry->id;
             }
-            FlagWorkBanks *active = gameFlagsGetBlock();
-            if (active != NULL && active->navi.slotCount < 8) {
-                active->navi.slots[active->navi.slotCount].id = i;
-                active->navi.slotCount++;
+            MapSaveBlockA *active = gameFlagsGetBlock();
+            if (active != NULL && active->naviSlotCount < 8) {
+                active->naviSlots[active->naviSlotCount].id = i;
+                active->naviSlotCount++;
             }
             entry = dataTableGetEntry49(i);
             naviMainSetFlagsAndActivate(entry->naviFlags[0], entry->naviFlags[1], entry->naviFlags[2],
@@ -58,20 +58,20 @@ void FUN_003a249c(void)
         }
     }
 
-    FlagWorkBanks *current = gameFlagsGetBlock();
+    MapSaveBlockA *current = gameFlagsGetBlock();
     s32 currentId = 0;
     if (current != NULL) {
-        currentId = current->navi.currentId;
+        currentId = current->currentNavi;
     }
     if (currentId != firstId) {
-        flags->navi.refresh = 1;
+        flags->naviRefresh = 1;
         g_gameState.naviRefresh = 1;
-        flags->navi.refreshSecond = 1;
+        flags->naviRefreshSecond = 1;
     }
     if (firstId != 0) {
-        FlagWorkBanks *target = gameFlagsGetBlock();
+        MapSaveBlockA *target = gameFlagsGetBlock();
         if (target != NULL) {
-            target->navi.currentId = firstId;
+            target->currentNavi = firstId;
         }
     }
 }

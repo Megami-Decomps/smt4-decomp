@@ -1,12 +1,11 @@
-#include "map/mapGimic.h"
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
 
-extern MapGimic *g_mapGimic;
 
 bool mapGimicIsIdle(void)
 {
-    if (g_mapGimic->unk04 != 0) {
+    if (g_mapGimic->busy != 0) {
         return false;
     }
     return true;

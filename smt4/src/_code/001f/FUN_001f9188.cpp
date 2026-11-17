@@ -1,6 +1,5 @@
 /* NON_MATCHING: scalar vector subtraction/scaling does not reproduce retail's inlined vector-helper loads and saved-register allocation. */
-#include "map/mapEnemy.h"
-#include "status/StatusCamera.h"
+#include "map/MapEnemyGlobal.h"
 
 namespace {
 struct EnemyMotionRecord {
@@ -13,36 +12,9 @@ struct EnemyMotionSelection {
     u8 unk00[0x46];
     s16 contentId;
 };
-// Position at 0x08 lies inside the shared slot's unaligned byte padding; keep this view local.
-struct ScriptedEnemyMotionView {
-    u8 active;
-    u8 unk01[7];
-    Vec3 previousPosition;
-    u8 unk14[0xC];
-    Vec3 position;
-    f32 heading;
-    u8 unk30[0x54];
-    s32 state;
-    s32 timer;
-    u8 unk8C[0x78];
-    Vec3 start;
-    f32 startHeading;
-    Vec3 end;
-    f32 endHeading;
-    f32 duration;
-    Vec3 velocity;
-    f32 wait;
-    u8 unk138[0x3C];
-    s32 kind;
-    u8 unk178[8];
-};
-typedef char ScriptedEnemyMotionLayoutCheck[sizeof(ScriptedEnemyMotionView) == sizeof(MapEnemyEntry) &&
-    offsetof(ScriptedEnemyMotionView, start) == 0x104 &&
-    offsetof(ScriptedEnemyMotionView, velocity) == 0x128 ? 1 : -1];
 }
 
 extern "C" {
-extern MapEnemy *g_mapEnemy;
 extern EnemyMotionSelection DAT_0049fb1c;
 
 void FUN_001f9188(void)
@@ -50,7 +22,7 @@ void FUN_001f9188(void)
     MapEnemy *map = g_mapEnemy;
     EnemyMotionRecord *motion = reinterpret_cast<EnemyMotionRecord *>(contentEntryGetD(DAT_0049fb1c.contentId));
     for (s32 i = 0; i < MAP_ENEMY_COUNT; ++i) {
-        ScriptedEnemyMotionView *enemy = reinterpret_cast<ScriptedEnemyMotionView *>(&map->entries[i]);
+        MapEnemyEntry *enemy = &map->entries[i];
         if (enemy->active != 0 && enemy->kind != 0 && enemy->kind < 11 && enemy->state == 2) {
             enemy->start.x = motion->startX;
             enemy->start.y = motion->startY;
@@ -69,11 +41,11 @@ void FUN_001f9188(void)
             enemy->velocity.y *= inverseDuration;
             enemy->velocity.z *= inverseDuration;
             enemy->wait = motion->wait;
-            enemy->previousPosition = enemy->start;
+            enemy->basePosition = enemy->start;
             enemy->position = enemy->start;
             enemy->heading = enemy->startHeading;
             enemy->state = 25;
-            enemy->timer = 0;
+            enemy->elapsed = 0;
             return;
         }
     }

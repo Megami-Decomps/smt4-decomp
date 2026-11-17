@@ -4,11 +4,11 @@
 #include "shard/W5_W5Match7_ResourceHandles.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 void ifTouchRegionRemove(void);
 void asdTMTexTableReleaseNode(s32, s32);
-void scrScriptProcessDestroy(void *);
 void jobStop(u32, s32);
 void asdOperatorDelete(void *);
 

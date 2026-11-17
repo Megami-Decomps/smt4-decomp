@@ -6,11 +6,11 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "gamedata/DataTableSections.h"
 #include "ui/UiControl.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int asdTMTexTableReleaseNode(int type, u32 node);
-int scrScriptProcessDestroy(u32 resource);
 int obj04Finish(void);
 
 extern ConfigWorkA *g_config;

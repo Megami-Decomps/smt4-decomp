@@ -1,3 +1,4 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "battle/btlView.h"
 #include "gamedata/GameFlags.h"
 #include "map/MapSelection.h"
@@ -7,17 +8,12 @@ extern BattleViewState g_battleViewState;
 
 s32 gameFlagIsSet(u32 flag);
 
-struct GameFlagBlock {
-    /* 0x0000 */ u8 unk0000[0x16A0];
-    /* 0x16A0 */ s32 unk16A0;
-};
-GameFlagBlock *gameFlagsGetBlock(void);
 }
 
 extern "C" {
 void btlViewReleaseModelLists(void)
 {
-    GameFlagBlock *flags = gameFlagsGetBlock();
+    MapSaveBlockA *flags = gameFlagsGetBlock();
     if (g_mapSelection.id == 0x20 && g_mapSelection.kind == 2) {
         if (gameFlagIsSet(0x4C9) != 0) {
             return;
@@ -26,7 +22,7 @@ void btlViewReleaseModelLists(void)
         return;
     }
     BattleViewState *view = &g_battleViewState;
-    if (flags->unk16A0 != 0) {
+    if (flags->pending != 0) {
         gameFlagSetValue(0x4D0, 0, 1);
     }
     if (view->attachments.primary[0] != NULL) {

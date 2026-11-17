@@ -4,12 +4,12 @@
 #include "common.h"
 #include <stddef.h>
 
-struct NodeEnableNode;
+struct AsdMdlObject;
 
 struct KeyedValueSlot {
     union {
         u32 value;       // 0x00
-        NodeEnableNode *model;
+        AsdMdlObject *model;
     };
     s32 firstKey;    // 0x04
     s32 secondKey;   // 0x08

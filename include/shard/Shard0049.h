@@ -8,6 +8,7 @@
 #include "shard/Shard0048.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "Model/MoriModelContent.h"
 
 typedef struct Entry8C {
     /* 0x00 */ u8 data[0x8C];
@@ -35,12 +36,6 @@ struct EquipmentMenuItem {
 struct EquipmentMenuPage {
     EquipmentMenuItem items[1024];
     u16 unk1000;
-};
-class EquipmentMenuResource {
-public:
-    virtual void unk00();
-    virtual void destroy();
-    /* 0x04 */ u32 handle;
 };
 struct EquipmentMenuState {
     union {
@@ -83,7 +78,7 @@ struct EquipmentMenuState {
     /* 0x09F86 */ u8 unk09f86[0xC07E];
     /* 0x16004 */ u32 state;
     /* 0x16008 */ u8 unk16008[0x20];
-    /* 0x16028 */ EquipmentMenuResource *resource;
+    /* 0x16028 */ MoriModelContent *resource;
 };
 struct EquipmentMenuReadyState {
     /* 0x00 */ u8 unk00[0x10];

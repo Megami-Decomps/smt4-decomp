@@ -26,7 +26,6 @@ void buttonHelpSetPreset(u32 preset);
 void textFormatBuffer(char *output, const char *format, ...);
 u32 tableGroupFindEntryIndex(void *commands, const char *entry);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
-s32 scrRunOpcodesStub(ScriptProcess *script);
 
 u32 FUN_0027398c(QuestAddonScriptWork *work)
 {

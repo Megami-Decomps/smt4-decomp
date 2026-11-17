@@ -29,7 +29,8 @@ void searchWinInitialize(void)
     struct DrawingView {
         u8 prefix[0x18];
         UiResourceParameters parameters;
-        u8 animation[0xAC];
+        UiSpriteState animation;
+        u8 animationRest[0x20];
     };
     if (DAT_0043e170 == NULL) {
         asdDebugTrace(DAT_00403c38, 133);
@@ -43,7 +44,7 @@ void searchWinInitialize(void)
     DrawingView *draw = reinterpret_cast<DrawingView *>(work);
     drawParameterBlockClear(&draw->parameters);
     paramsInit(&draw->parameters, DAT_00403b80, sizeof(DAT_00403b80), DAT_00403ba4, sizeof(DAT_00403ba4), 0, 0, 0, 0, DAT_00403bc8, sizeof(DAT_00403bc8));
-    uiSpriteStateInitFromSource((UiSpriteState *)draw->animation, 14, 135, &draw->parameters, 1, 1.0f);
-    spriteStartAnimationByIndex((UiSpriteState *)draw->animation, 0);
+    uiSpriteStateInitFromSource(&draw->animation, 14, 135, &draw->parameters, 1, 1.0f);
+    spriteStartAnimationByIndex(&draw->animation, 0);
 }
 }

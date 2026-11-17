@@ -3,12 +3,12 @@
 
 extern "C" {
 
-/* Entry `index` of the screen object's entry table. */
-ButtonHelpScreenEntry *screenGetEntry(s32 index)
+/* Help text line `index`. */
+ButtonHelpTextLine *screenGetEntry(s32 index)
 {
     ButtonHelpWorkA *screen = g_buttonHelp.work;
 
-    return screen->entries + index;
+    return screen->text.lines + index;
 }
 
 } /* extern "C" */

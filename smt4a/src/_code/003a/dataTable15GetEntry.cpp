@@ -1,20 +1,13 @@
-#include "shard/Shard003A.h"
+#include "gamedata/CampComTable.h"
 
 extern "C" {
 
-typedef struct Entry64 {
-    /* 0x00 */ u8 data[100];
-} Entry64;
-
-extern void *dataTableGet(u32 index, u32 type);
-extern Entry64 *dataTableGetEntries(void *table);
-
-/* Entry `index` of data table 0x15 (type 0). */
-Entry64 *dataTable15GetEntry(s32 index)
+/* Camp command row `index` (CampComTable.tbb, no range check). */
+CampComRecord *dataTable15GetEntry(u32 index)
 {
     void *table = dataTableGet(0x15, 0);
 
-    return dataTableGetEntries(table) + index;
+    return campComRecords(table) + index;
 }
 
 } /* extern "C" */

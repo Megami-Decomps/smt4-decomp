@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include "map/LmapGlobals.h"
 #include "code/Code002b.h"
@@ -10,16 +10,16 @@ void FUN_00376fb8(u32 handle);
 // Register the current map's save point and capture its position and heading.
 u32 mapSavePointRegisterCurrent(void)
 {
-    FlagWorkBanks* flags = gameFlagsGetBlock();
-    FUN_00376fb8(flags->savePointMap.handle + 100);
+    MapSaveBlockA* flags = gameFlagsGetBlock();
+    FUN_00376fb8(flags->sceneResult + 100);
     mapPlaceSet(24, 1, 0);
-    gameFlagsLoadTable4cEntry(flags->savePointMap.handle);
+    gameFlagsLoadTable4cEntry(flags->sceneResult);
     g_gameState.progressEnabled = 1;
     g_gameState.savedLocationSet = 0;
     flags->savePoint.scale = (s16)(s32)g_gameState.overviewHeading;
     flags->savePoint.mapId = g_gameState.mapId;
     flags->savePoint.areaId = g_gameState.areaId;
-    flags->savePointObject.objectId = g_gameState.currentObjectId;
+    flags->savePointObjectId = g_gameState.currentObjectId;
     flags->savePoint.x = (s16)(s32)g_lmapScene->pose.position.x;
     flags->savePoint.y = (s16)(s32)g_lmapScene->pose.position.y;
     flags->savePoint.z = (s16)(s32)g_lmapScene->pose.position.z;

@@ -1,13 +1,12 @@
-#include "ui/TimerSlot.h"
+#include "ui/UiSpriteApi.h"
+#include "ui/UiSpriteState.h"
 
 struct IndexedTimerGroup {
     u8 unk00[0x20];
-    TimerSlot timers[8]; // 0x20
+    UiSpriteState timers[8]; // 0x20
 };
 
 extern "C" {
-s32 uiSlidingSpriteAdvance(TimerSlot *timer, s32 reverse);
-s32 uiSpriteAdvanceAnimation(TimerSlot *timer);
 
 // Use the directional entrance animation for the edge slots, otherwise update normally.
 s32 uiAnimationAdvanceChannel(IndexedTimerGroup *group, s32 index)

@@ -1,37 +1,35 @@
-#include "map/MapGimicTableIV.h"
+#include "map/MapGimicGlobal.h"
 
 extern "C" {
 
-extern MapGimicState *g_mapGimic; /* 0x447a48 */
-
-/* Clears the gimmick table: the header, then every slot (radius reset to 90). */
+/* Clears the gimmick table: the header, then every entry (heading reset to 90). */
 void mapGimicClearAll(void)
 {
-    MapGimicState *state = g_mapGimic;
+    MapGimic *state = g_mapGimic;
 
-    state->unk00 = 0;
-    state->unk04 = 0;
-    state->unk06 = 0;
-    state->unk08 = 0;
-    state->unk0A = 0;
-    state->unk0C = 0;
-    state->unk10 = 0;
-    state->unk14 = 0;
-    for (s32 i = 0; i < 24; i++) {
-        MapGimicTableSlot *slot = &state->slots[i];
+    state->mode = 0;
+    state->busy = 0;
+    state->area = 0;
+    state->subArea = 0;
+    state->step = 0;
+    state->index = 0;
+    state->loaded = 0;
+    state->cloneAvailable = 0;
+    for (s32 i = 0; i < MAP_GIMIC_COUNT; i++) {
+        MapGimicEntry *slot = &state->entries[i];
 
         slot->active = 0;
-        slot->flag = 0;
+        slot->dirty = 0;
         slot->position[0] = 0.0f;
         slot->position[1] = 0.0f;
         slot->position[2] = 0.0f;
-        slot->radius = 90.0f;
-        slot->unk14 = 0;
-        slot->id = 0;
-        slot->unk18 = 0;
-        slot->unk1C = 0;
-        slot->unk20 = 0;
-        slot->unk22 = 0;
+        slot->position[3] = 90.0f;
+        slot->motion = 0;
+        slot->kind = 0;
+        slot->model = NULL;
+        slot->gimicId = 0;
+        slot->requiredFlag = 0;
+        slot->forbiddenFlag = 0;
     }
 }
 

@@ -4,10 +4,10 @@ extern "C" {
 
 #include "shard/Shard0031.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/scrScriptProcess.h"
 extern OverlayRef g_campCec;
 extern void messageSetMode(u8 value);
 extern void asdMemFree(void *ptr);
-extern void scrScriptProcessDestroy(u32 process);
 extern void jobStop(u32 job, u16 arg);
 extern u8 gameDataTestFlags(u8 value);
 extern s32 gameDataGetRecordValue(void);

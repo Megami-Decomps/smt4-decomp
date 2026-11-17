@@ -24,7 +24,7 @@ struct AocConfirmMenu {
     /* 0x2E8 */ u8 touchRegions[0x68];
     /* 0x350 */ u32 resource;
     /* 0x354 */ u8 unk354[4];
-    /* 0x358 */ u32 script;
+    /* 0x358 */ ScriptProcess *script;
 };
 
 struct AocConfirmDisplay {
@@ -39,9 +39,8 @@ void buttonHelpSetEnabled(u32 value);
 void releaseEntriesB(void *regions);
 void releaseEntriesA(void *notice);
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
-void scrScriptProcessStartEntry(u32 process, u32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void aocMenuSetButtonHelp(AocConfirmMenu *menu, u32 state, s32 enabled);
-s32 scrRunOpcodesStub(u32 script);
 s32 messageGetChoiceResult(void);
 void FUN_0016ccb4(void *owner);
 void FUN_0021c118(u32 handle, s32 frames);

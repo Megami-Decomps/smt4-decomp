@@ -1,17 +1,11 @@
-#include "common.h"
+#include "gamedata/GameSaveBlocks.h"
 
 extern "C" {
 
-typedef struct GameDataBlocksView {
-    /* 0x00 */ u8 unk00[0x8];
-    /* 0x08 */ u32 value;
-} GameDataBlocksView;
-extern GameDataBlocksView g_gameDataBlocks;
-
-/* Returns the word at 0x8 of the game-data block table. */
+/* Returns the work block (the save body's copy). */
 u32 gameDataBlocksValueGet(void)
 {
-    return g_gameDataBlocks.value;
+    return (u32)g_gameDataBlocks.workBlock; /* callers take the work block as a word */
 }
 
 } /* extern "C" */

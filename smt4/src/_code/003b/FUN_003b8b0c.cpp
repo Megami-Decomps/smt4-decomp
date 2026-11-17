@@ -3,9 +3,9 @@
 #include "map/mapDepart.h"
 #include "camp/Camp.h"
 #include "game/GameState.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
-void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *buffer);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void FUN_002a4bac(u32 list);

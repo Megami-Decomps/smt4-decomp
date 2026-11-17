@@ -1,8 +1,8 @@
+#include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int gameFlagsGetBlock(void);
 
 /* Supplied declaration required: gameFlagsGetBlock. */
 extern int dataTableGetEntry49(unsigned char);
@@ -15,7 +15,7 @@ unsigned char FUN_00325064(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = gameFlagsGetBlock();
+  temp_v0 = (int)gameFlagsGetBlock();
   if (temp_v0 != 0) {
     puVar2 = (unsigned char *)gameFlagsGetBlock();
     if (puVar2 != (unsigned char *)0x0) {

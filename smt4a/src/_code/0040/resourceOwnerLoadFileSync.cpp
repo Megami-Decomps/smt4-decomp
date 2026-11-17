@@ -1,8 +1,10 @@
-#include "common.h"
-#include "code/Code0040.h"
-struct ResourceOwner { u8 unk00[16]; void *resource; };
+#include "Model/MoriModelContent.h"
 extern "C" {
-void *asdLoadFileSyncNoContext(const char *name,u32 flags,u32 mode,u32 alignment);
-/* Loads the named resource into its owner. */
-void resourceOwnerLoadFileSync(void *handle,const char *name) { static_cast<ResourceOwner *>(handle)->resource=asdLoadFileSyncNoContext(name,0,1,128); }
+void *asdLoadFileSyncNoContext(const char *name, u32 flags, u32 mode, u32 alignment);
+
+/* Loads the content's model file by name (128-byte aligned). */
+void resourceOwnerLoadFileSync(MoriModelContent *content, const char *name)
+{
+    content->file = asdLoadFileSyncNoContext(name, 0, 1, 128);
+}
 }

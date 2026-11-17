@@ -1,9 +1,9 @@
 /* NON_MATCHING: the compiler peels/unrolls the slot search and uses different model-store and position-copy registers; candidate -O2. */
+#include "gamedata/MapSaveBlock.h"
 #include "map/MapStateSlots.h"
 
 extern "C" {
 extern MapStateSlots *g_mapStateSlots;
-void *gameGetMapBlock();
 void *asdMdlManagerCreateLoaded(const char *path, u32 flags);
 void lightOwnerRegister(void *model, s32 enabled);
 

@@ -3,6 +3,7 @@
 #define BATTLE_BTLTALK_H
 
 #include "common.h"
+#include "script/ScriptVm.h"
 
 struct BtlTalkOwner;
 
@@ -23,7 +24,7 @@ typedef struct BtlTalk {
     /* 0x04 */ BtlTalkUnit *unit;
     /* 0x08 */ void *dataA;     /* heap blocks freed on teardown */
     /* 0x0C */ void *dataB;
-    /* 0x10 */ void *process;   /* script process object */
+    /* 0x10 */ ScriptProcess *process;   /* script process object */
     /* 0x14 */ void *dataC;
     /* 0x18 */ u32 unk18;
     /* 0x1C */ u32 argA;
