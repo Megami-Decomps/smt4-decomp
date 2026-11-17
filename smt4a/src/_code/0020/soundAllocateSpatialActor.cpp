@@ -1,7 +1,6 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
 
 extern "C" {
-void asd3dSoundActorSetPosition(s32, const Vector4 *);
 void FUN_00359768(u32, s32, u32);
 void asd3dSoundActorStart(u32, s32);
 s32 asd3dSoundActorIsPlaying(s32);
@@ -12,7 +11,7 @@ void *jyoucyuGetTableEntry(u32);
 void *asd3dSoundActorGetSlotValue(s32);
 
 // Choose a free spatial sound actor or replace the highest-priority fallback candidate.
-s32 soundAllocateSpatialActor(u32 sound, Vector4 position)
+s32 soundAllocateSpatialActor(u32 sound, AsdSnd3dPosition position)
 {
     s32 selected = -1;
     bool allocated = false;

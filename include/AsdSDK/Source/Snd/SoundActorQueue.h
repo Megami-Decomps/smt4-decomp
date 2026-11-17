@@ -2,13 +2,10 @@
 #define ASDSDK_SOURCE_SND_SOUNDACTORQUEUE_H
 
 #include "common.h"
+#include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
 #include <stddef.h>
 
-struct SoundActorQueuePosition {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-    /* 0x08 */ f32 z;
-};
+
 
 struct SoundActorQueueEntry {
     /* 0x00 */ u8 active;

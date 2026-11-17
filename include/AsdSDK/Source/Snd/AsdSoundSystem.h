@@ -8,6 +8,7 @@
 #define ASDSDK_SOURCE_SND_ASDSOUNDSYSTEM_H
 
 #include "common.h"
+#include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
 #include <stddef.h>
 #include "shard/S3SoundArchiveLoader.h"
 
@@ -258,13 +259,6 @@ typedef struct AsdSndOptions {
     /* 0x92 */ s8 option2;
     /* 0x93 */ s8 option3;
 } AsdSndOptions;
-
-/* The listener position, created on first use. */
-typedef struct AsdSndListener {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-    /* 0x08 */ f32 z;
-} AsdSndListener;
 
 extern "C" {
 u32 dspComponentUnload(void);

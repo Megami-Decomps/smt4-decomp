@@ -4,6 +4,7 @@
 #define ASDSDK_SOURCE_SND_ASDSND3DMANAGERSCALARS_H
 
 #include "common.h"
+#include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
 #include <stddef.h>
 
 /* An nw::snd::Sound3DActor (0x84 bytes). */
@@ -11,12 +12,6 @@ struct AsdSnd3dActor {
     /* 0x00 */ u8 unk00[0x84];
 };
 
-/* A 3D sound actor's position. */
-struct AsdSnd3dPosition {
-    /* 0x0 */ f32 x;
-    /* 0x4 */ f32 y;
-    /* 0x8 */ f32 z;
-};
 
 /* The 3D sound manager (0x784 in the sound system block). */
 struct AsdSnd3dManagerScalars {

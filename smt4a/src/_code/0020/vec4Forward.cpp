@@ -1,14 +1,7 @@
-#include "common.h"
-#include "gfx/Vec4.h"
+#include "AsdSDK/Source/Snd/AsdSnd3dPosition.h"
 
-extern "C" {
-
-extern void asd3dSoundActorSetPosition(u32 handle, Vec4 *value);
-
-/* Forwards the handle with its by-value vector argument passed by address. */
-void vec4Forward(u32 handle, Vec4 value)
+/* Forward the three-coordinate sound position by address. */
+extern "C" void vec4Forward(u32 handle, AsdSnd3dPosition position)
 {
-    asd3dSoundActorSetPosition(handle, &value);
+    asd3dSoundActorSetPosition(handle, &position);
 }
-
-} /* extern "C" */
