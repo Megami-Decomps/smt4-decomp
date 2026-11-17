@@ -1,18 +1,7 @@
-/* Tail call into the function that follows. */
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h"
 
-extern "C" {
-
-void FUN_002b2b64(void *arg);
-
-struct ObjFUN_002b2b5c {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ void *field8;
-};
-
-void sndObjectForwardField8(ObjFUN_002b2b5c *o)
+/* Forward the model's motion value without discarding the floating-point result. */
+extern "C" f32 sndObjectForwardField8(const AsdMdlObject *object)
 {
-    FUN_002b2b64(o->field8);
-}
-
+    return FUN_002b2b64(object->node);
 }

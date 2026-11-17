@@ -1,22 +1,15 @@
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h"
 
-extern "C" {
-
-int FUN_002b2b64(u32 value);
-
-typedef struct Inner {
-    /* 0x0 */ u8 unk0[8];
-    /* 0x8 */ u32 unk8;
-} Inner;
-
-typedef struct Obj {
-    /* 0x0 */ u8 unk0[8];
-    /* 0x8 */ Inner *inner;
-} Obj;
-
-void FUN_0027f94c(Obj *obj)
-{
-    FUN_002b2b64(obj->inner->unk8);
+namespace {
+/* The observed prefix of the model holder, not a complete object definition. */
+struct ModelHolderView {
+    u8 prefix[8];
+    AsdMdlObject *model;
+};
 }
 
-} /* extern "C" */
+extern "C" f32 FUN_0027f94c(const void *holder)
+{
+    const ModelHolderView *view = static_cast<const ModelHolderView *>(holder);
+    return FUN_002b2b64(view->model->node);
+}

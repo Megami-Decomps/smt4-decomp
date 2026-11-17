@@ -1,8 +1,8 @@
 #include "camp/Unite/UniteGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h"
 
 extern "C" {
-f32 sndObjectForwardField8(void *sound);
 void modelSetScale(AsdMdlNode *node, f32 frame);
 void FUN_00210194(AsdMdlObject *model, f32 value);
 
@@ -10,7 +10,7 @@ void FUN_00210194(AsdMdlObject *model, f32 value);
 void uniteLoadPreviewRoomModel(void)
 {
     UniteWork *work = g_unite;
-    f32 value = sndObjectForwardField8(work->preview.previewSound);
+    f32 value = sndObjectForwardField8(static_cast<const AsdMdlObject *>(work->preview.previewSound));
     AsdMdlObject **slot = &work->preview.previewModel;
     if (*slot == NULL) {
         *slot = asdMdlManagerCreateLoaded("camp/jakyou_all_mido.bam", 7);
