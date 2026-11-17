@@ -510,13 +510,25 @@ def link_aliases(obj):
         Path(obj).write_bytes(data)
 
 
+def run_compiler(cmd):
+    """Run armcc. Under wibo, armcc crashes on a few units (wibo 1.0.3 to 1.2.0 segfault in armcc's heap
+    teardown, e.g. smt4 FUN_002aa790): when it dies on a signal and Wine is installed, that unit is
+    compiled again under Wine."""
+    done = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT)
+    crashed = done.returncode < 0 or done.returncode >= 128
+    if crashed and cmd and "wibo" in Path(cmd[0]).name and shutil.which("wine"):
+        done = subprocess.run(["wine"] + cmd[1:], capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT,
+                              env=dict(os.environ, WINEDEBUG="-all"))
+    return done
+
+
 def finish_object(compiler, unit, source, obj):
     """What happens to a freshly compiled unit object: a destructor's or a file's extra functions and
     vtable are cut away (recompiling with --split_sections), then armlink's NOPs are applied."""
     if not name_static_initialiser(obj, unit) and needs_carving(obj, unit):
         split_command = command(compiler, unit, source, obj)
         split_command.insert(split_command.index("-o"), "--split_sections")
-        done = subprocess.run(split_command, capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT)
+        done = run_compiler(split_command)
         if done.returncode == 0:
             carve(obj, unit)
     link_aliases(obj)
@@ -529,7 +541,7 @@ def compile_unit(compiler, unit, newest_header, force):
     if not force and obj.exists() and obj.stat().st_mtime >= max(source.stat().st_mtime, newest_header):
         return unit, "cached", ""
     obj.parent.mkdir(parents=True, exist_ok=True)
-    done = subprocess.run(command(compiler, unit, source, obj), capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT)
+    done = run_compiler(command(compiler, unit, source, obj))
     if done.returncode == 0:
         finish_object(compiler, unit, source, obj)
         return unit, "ok", ""
