@@ -313,9 +313,9 @@ shared object, does not cast the object to a local view, and does not redeclare 
 - **A sub-object with its own users** (a work area, a table inside the state) is its own struct,
   embedded at its offset, not a union of every unit's guess.
 - Converting a unit to the shared struct must keep it IDENTICAL (or, for a near miss, no worse).
-- `python -B tools/declcheck.py` (run by CI) fails when a unit redeclares a function, global or struct
-  that a shared header declares. Older cases are listed in `tools/declcheck_baseline.txt`; after
-  removing some, `--update` locks the shorter list in.
+- `python -B tools/declcheck.py [BASE]` (run by CI on every change) fails when the lines a change adds
+  to a unit redeclare a function, global or struct that a shared header declares. Moving a declaration
+  into a shared header never fails it; `--all` counts the older local copies still to remove.
 
 ### Contracts
 

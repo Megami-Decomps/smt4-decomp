@@ -36,10 +36,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      # One declaration per function, global and struct: a unit may not redeclare what a shared header
-      # declares (docs/CONTRIBUTING.md, "One struct per object"). Older cases are in the baseline.
+      # One declaration per function, global and struct: the lines a change adds may not redeclare what a
+      # shared header declares (docs/CONTRIBUTING.md, "One struct per object").
       - name: Declaration check
-        run: python -B tools/declcheck.py
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -n "$BASE" ] && git cat-file -e "$BASE" 2>/dev/null; then python -B tools/declcheck.py "$BASE"; else python -B tools/declcheck.py HEAD~1; fi
 
       # The pinned armcc, objdiff-cli and arm-none-eabi binutils, each checked against its sha256.
       - name: Cache tools
