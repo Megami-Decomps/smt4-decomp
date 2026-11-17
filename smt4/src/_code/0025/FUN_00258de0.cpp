@@ -1,26 +1,8 @@
 /* NON_MATCHING: register allocation differs (retail keeps the source and effect arguments in their stack home slots across the calls) */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-
-/* The player's pad-side record (only the fields used here). */
-struct RestorePlayer {
-    /* 0x00 */ u8 unk00[0x1c];
-    /* 0x1c */ s16 maximum;
-    /* 0x1e */ u8 unk1e[0xc];
-    /* 0x2a */ s16 current;
-    /* 0x2c */ u8 unk2c[0x46];
-    /* 0x72 */ u16 ailments;
-};
-
-/* A party unit's record (only the fields used here). */
-struct RestoreUnit {
-    /* 0x00 */ u8 unk00[0xe];
-    /* 0x0e */ s16 maximum;
-    /* 0x10 */ u8 unk10[0x1a];
-    /* 0x2a */ s16 current;
-    /* 0x2c */ u8 unk2c[0x18];
-    /* 0x44 */ u16 ailments;
-};
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
 /* The effect being applied (only the type byte). */
 struct RestoreEffect {
@@ -29,12 +11,10 @@ struct RestoreEffect {
 };
 
 extern "C" {
-RestorePlayer *gameGetPlayerData(void);
-RestoreUnit *gameGetUnitRecord(s32 unit);
-s32 btlSourceGetMaxHp(RestorePlayer *player);
-s32 btlLinkGetMaxHp(RestoreUnit *unit);
-s32 flagWordTestBit(RestoreUnit *unit, u32 bit);
-void objectFlagsClear(RestoreUnit *unit, u32 bits);
+s32 btlSourceGetMaxHp(PlayerDataIV *player);
+s32 btlLinkGetMaxHp(StatBlock *unit);
+s32 flagWordTestBit(StatBlock *unit, u32 bit);
+void objectFlagsClear(StatBlock *unit, u32 bits);
 s32 playerPadTestBit(u32 bit);
 void padClearBits(u32 bits);
 s32 FUN_001ad4c0(RestoreEffect *effect);
@@ -46,8 +26,8 @@ u32 effectFilterChannelsByCategory(RestoreEffect *effect, u16 ailments);
    effect did something, 1 when the target is not affected. */
 u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32 *amountOut)
 {
-    RestorePlayer *player = NULL;
-    RestoreUnit *unit = NULL;
+    PlayerDataIV *player = NULL;
+    StatBlock *unit = NULL;
     if (target < 0) {
         player = gameGetPlayerData();
     } else {
@@ -61,14 +41,14 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
     s32 unitMaximum = 0;
     if (player != NULL) {
         if (reinterpret_cast<s32>(btlGetMainState()) == 0) {
-            playerMaximum = player->maximum;
+            playerMaximum = player->maxHp;
         } else {
             playerMaximum = btlSourceGetMaxHp(player);
         }
     }
     if (unit != NULL) {
         if (reinterpret_cast<s32>(btlGetMainState()) == 0) {
-            unitMaximum = unit->maximum;
+            unitMaximum = unit->maxHp;
         } else {
             unitMaximum = btlLinkGetMaxHp(unit);
         }
@@ -83,13 +63,13 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
                 padClearBits(2);
                 s16 value;
                 if (playerPadTestBit(3)) {
-                    value = player->current + 1;
+                    value = player->hp + 1;
                 } else {
-                    value = FUN_00262260(effect, (s16)playerMaximum, source) + player->current;
+                    value = FUN_00262260(effect, (s16)playerMaximum, source) + player->hp;
                 }
-                player->current = value;
+                player->hp = value;
                 if (value <= 0) {
-                    player->current = 1;
+                    player->hp = 1;
                 }
                 return 0;
             }
@@ -110,13 +90,13 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
             objectFlagsClear(unit, 2);
             s16 value;
             if (flagWordTestBit(unit, 3)) {
-                value = unit->current + 1;
+                value = unit->hp + 1;
             } else {
-                value = FUN_00262260(effect, (s16)unitMaximum, source) + unit->current;
+                value = FUN_00262260(effect, (s16)unitMaximum, source) + unit->hp;
             }
-            unit->current = value;
+            unit->hp = value;
             if (value <= 0) {
-                unit->current = 1;
+                unit->hp = 1;
             }
             return 0;
         }
@@ -147,7 +127,7 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
             if (flagWordTestBit(unit, 3)) {
                 amount = 1;
             }
-            s32 current = unit->current;
+            s32 current = unit->hp;
             if (current < unitMaximum) {
                 if (preview != 0) {
                     if (amountOut == NULL) {
@@ -161,21 +141,21 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
                     return 0;
                 }
                 result = 0;
-                unit->current = current + amount;
-                if (unit->current <= unitMaximum) {
-                    unitMaximum = unit->current;
+                unit->hp = current + amount;
+                if (unit->hp <= unitMaximum) {
+                    unitMaximum = unit->hp;
                 }
-                unit->current = unitMaximum;
+                unit->hp = unitMaximum;
                 return result;
             }
         }
         if (preview != 0) {
             return result;
         }
-        if (unit->current <= unitMaximum) {
-            unitMaximum = unit->current;
+        if (unit->hp <= unitMaximum) {
+            unitMaximum = unit->hp;
         }
-        unit->current = unitMaximum;
+        unit->hp = unitMaximum;
         return result;
     }
 
@@ -194,7 +174,7 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
         if (playerPadTestBit(3)) {
             amount = 1;
         }
-        s32 current = player->current;
+        s32 current = player->hp;
         if (current < playerMaximum) {
             if (preview != 0) {
                 if (amountOut == NULL) {
@@ -207,22 +187,22 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
                 *amountOut = amount;
                 return 0;
             }
-            player->current = current + amount;
+            player->hp = current + amount;
             result = 0;
-            if (player->current <= playerMaximum) {
-                playerMaximum = player->current;
+            if (player->hp <= playerMaximum) {
+                playerMaximum = player->hp;
             }
-            player->current = playerMaximum;
+            player->hp = playerMaximum;
             return result;
         }
     }
     if (preview != 0) {
         return result;
     }
-    if (player->current <= playerMaximum) {
-        playerMaximum = player->current;
+    if (player->hp <= playerMaximum) {
+        playerMaximum = player->hp;
     }
-    player->current = playerMaximum;
+    player->hp = playerMaximum;
     return result;
 }
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: classification registers, paired dimension loads and format-case placement differ. */
 #include "gfx/RenderTargetState.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/AsdDebug.h"
 #include "gfx/VertexStreams.h"
 
@@ -18,7 +19,7 @@ void *asdMemoryAllocAligned(u32, u32, u32, u32, u32, u32);
 extern const char DAT_0053d704[];
 
 /* Describe both framebuffer surfaces and optionally allocate their backing storage. */
-void FUN_00153084(RenderTargetFramebuffer *framebuffer, const AsdGxSurfaceDescription *description, s32 allocate)
+void FUN_00153084(AsdGxFramebuffer *framebuffer, const AsdGxSurfaceDescription *description, s32 allocate)
 {
     /* Expose the existing opaque color/depth buffers without changing the shared framebuffer. */
     struct Surface {
@@ -35,7 +36,7 @@ void FUN_00153084(RenderTargetFramebuffer *framebuffer, const AsdGxSurfaceDescri
         u32 flags;
     };
     typedef char FramebufferStorageOffsets[
-        sizeof(Surface) == 0x18 && sizeof(FramebufferStorageView) == sizeof(RenderTargetFramebuffer) &&
+        sizeof(Surface) == 0x18 && sizeof(FramebufferStorageView) == sizeof(AsdGxFramebuffer) &&
         offsetof(FramebufferStorageView, width) == 0x30 &&
         offsetof(FramebufferStorageView, flags) == 0x38 ? 1 : -1];
     FramebufferStorageView *storage = (FramebufferStorageView *)framebuffer;

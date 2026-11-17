@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail has a constant-false guard (mov #0 / cmp / nop / bne) before the kind-9 test and re-tests the kind in the kind-3 chain (dead compare/branch pairs ours omits), loads the held-button word with ldrd/ldm differently and lays the kind-5/3 tails out of line (190 rows against 203). Counting logic follows retail. */
 #include "battle/BtlMainAccess.h"
+#include "gamedata/DevilRecordA.h"
 #include "common.h"
 #include "battle/BtlDebugMenuEntry.h"
 
@@ -25,11 +26,6 @@ struct BtlDebugUnitRecord {
 };
 
 /* A demon's data (observed field). */
-struct BtlDebugDemon {
-    /* 0x00 */ u8 unk00[0xB3];
-    /* 0xB3 */ u8 flags;
-};
-
 extern "C" {
 
 extern BtlDebugBlockMask DAT_00573b88;
@@ -42,7 +38,6 @@ s32 btlIsDefeatSuppressed(void);
 s8 *gameGetSlotTable(void);
 BtlDebugUnitRecord *gameGetSlotRecord(s32 slot);
 s32 idListHasFlaggedRecord(BtlDebugUnitRecord *record);
-BtlDebugDemon *devilGetRecord(u16 id);
 void gridNavigationConfigure(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
 
 /* Sets up the debug menu's lists: the number of visible entries of the shared page, and for each of
@@ -108,13 +103,13 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
                             continue;
                         }
                     } else if (entry->kind == 3 && idListHasFlaggedRecord(record) == 0) {
-                        BtlDebugDemon *demon;
+                        DevilRecordA *demon;
 
                         if ((entry->flags & 1) != 0 || btlIsDefeatSuppressed() == 0 || btlIsDefeatSuppressed() == 0) {
                             continue;
                         }
                         demon = devilGetRecord(record->demonId);
-                        if (demon == NULL || (demon->flags & 4) == 0) {
+                        if (demon == NULL || (demon->extraFlags & 4) == 0) {
                             continue;
                         }
                     }

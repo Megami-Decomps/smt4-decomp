@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_002efc44(...);
 int dataTable41FindById(void);
 int FUN_0034a304(...);
 int btlEntryBuildSummary(...);
-int btlMainFindEntryByListedId(...);
 int FUN_003f21ec(void);
 int FUN_004bd098(...);
 int FUN_004c0f74(...);
@@ -133,7 +133,6 @@ extern unsigned int FUN_004bf9a0(unsigned int);
 /* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
-extern int btlUnitGet(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -220,10 +219,10 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
     temp_v1 = temp_v2;
   }
   puVar4 = temp_v45;
-  btlMainFindEntryByListedId(temp_v45,temp_v53);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v45), temp_v53);
   puVar5 = temp_v45;
   temp_v43 = puVar4;
-  btlMainFindEntryByListedId(temp_v45,temp_v54);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v45), temp_v54);
   temp_v47 = puVar5 + 0x59;
   temp_v49 = temp_v43 + 0x59;
   temp_v50 = puVar5;
@@ -246,7 +245,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   }
   temp_v3 = VectorUnsignedToFloat((unsigned int)temp_v41,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v23 = (unsigned long long)temp_v3 << 0x20;
-  temp_v4 = btlUnitGet(g_btlScriptUnit);
+  temp_v4 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
   temp_v51 = 0;
   if ((*(short *)(*(int *)(temp_v4 + 0x28) + 0x1be) == 2) &&
      (*(short *)(*(int *)(temp_v4 + 0x28) + 0x1c0) == 0x189)) {
@@ -272,7 +271,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   }
   temp_v3 = temp_v53;
   temp_v5 = reinterpret_cast<int>(btlGetMainState());
-  btlMainFindEntryByListedId(temp_v5,temp_v3);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v5), temp_v3);
   temp_v6 = reinterpret_cast<int>(btlGetMainState());
   btlEntryBuildSummary(&temp_v31,temp_v6,temp_v5);
   temp_v46 = (unsigned int *)(int)temp_v32;
@@ -447,7 +446,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
       if (((temp_v10 | temp_v8) & 0x170000) == 0) {
         temp_v34 = temp_v54;
         temp_v7 = reinterpret_cast<int>(btlGetMainState());
-        btlMainFindEntryByListedId(temp_v7,temp_v34);
+        btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v7), temp_v34);
         if ((temp_v7 != 0) && (*(int *)(temp_v7 + 0xd8) != 0)) {
           temp_v10 = 0;
           switch(temp_v12) {
@@ -636,7 +635,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
                                     (temp_v44[temp_v19 + 0xe] & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v22 = CONCAT44(temp_v16 * temp_v17,temp_v18 + temp_v14 + temp_v15);
           puVar11 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-          btlMainFindEntryByListedId(puVar11,temp_v10);
+          btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar11), temp_v10);
           temp_v10 = *puVar11;
           temp_v8 = puVar11[1];
           if (!((DAT_005713f8 & temp_v10) == 0 && (DAT_005713fc & temp_v8) == 0)) {
@@ -731,7 +730,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v10 = temp_v44[temp_v19] & 0xffff;
           temp_v22 = CONCAT44(temp_v6,temp_v18 + temp_v16 * temp_v17 * temp_v18);
           temp_v20 = reinterpret_cast<int>(btlGetMainState());
-          btlMainFindEntryByListedId(temp_v20,temp_v2);
+          btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v20), temp_v2);
           if (temp_v20 == 0) {
             temp_v18 = (float)((unsigned long long)temp_v21 >> 0x20);
           }

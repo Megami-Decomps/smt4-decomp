@@ -1,5 +1,6 @@
 /* NON_MATCHING: stage override selection matches retail; saved game-state/scene-global bases r6/r7 are exchanged. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "game/GameState.h"
 
@@ -26,7 +27,7 @@ AsdMdlObject *asdMdlManagerCreateFromSource(void *source, u32 argument, u32 para
 u32 FUN_002d400c(void)
 {
     PlayerData *player = gameGetPlayerData();
-    switch (g_lmapScene->modelSwap.modelState) {
+    switch (g_lmapScene->modelSwapStep) {
     case 0:
         for (s32 i = 0; i < dataTable2eSub1GetCount(); i++) {
             StageRecord *record = dataTable2eSub1GetRecord(i);
@@ -44,44 +45,44 @@ u32 FUN_002d400c(void)
                     return 1;
                 }
                 g_gameState.map.stage = stage;
-                g_lmapScene->modelSwap.modelState++;
+                g_lmapScene->modelSwapStep++;
                 return 0;
             }
         }
         return 1;
     case 1:
-        asdMdlManagerMarkDestroy(g_lmapScene->modelSwap.model);
-        g_lmapScene->modelSwap.modelState++;
+        asdMdlManagerMarkDestroy(g_lmapScene->stageModel);
+        g_lmapScene->modelSwapStep++;
         break;
     case 2:
-        asdMdlManagerDestroy(g_lmapScene->modelSwap.model);
-        g_lmapScene->modelSwap.model = NULL;
-        g_lmapScene->modelSwap.modelState++;
+        asdMdlManagerDestroy(g_lmapScene->stageModel);
+        g_lmapScene->stageModel = NULL;
+        g_lmapScene->modelSwapStep++;
         break;
     case 3:
         switch (g_gameState.map.stage) {
         case 0:
-            g_lmapScene->modelSwap.model = asdMdlManagerCreateFromSource(g_gameState.map.files[1].handle, g_gameState.map.files[1].buffer, 0x1c0);
+            g_lmapScene->stageModel = asdMdlManagerCreateFromSource(g_gameState.map.files[1].handle, g_gameState.map.files[1].buffer, 0x1c0);
             break;
         case 1:
-            g_lmapScene->modelSwap.model = asdMdlManagerCreateFromSource(g_gameState.map.files[2].handle, g_gameState.map.files[2].buffer, 0x1c0);
+            g_lmapScene->stageModel = asdMdlManagerCreateFromSource(g_gameState.map.files[2].handle, g_gameState.map.files[2].buffer, 0x1c0);
             break;
         case 2:
-            g_lmapScene->modelSwap.model = asdMdlManagerCreateFromSource(g_gameState.map.files[3].handle, g_gameState.map.files[3].buffer, 0x1c0);
+            g_lmapScene->stageModel = asdMdlManagerCreateFromSource(g_gameState.map.files[3].handle, g_gameState.map.files[3].buffer, 0x1c0);
             break;
         case 3:
-            g_lmapScene->modelSwap.model = asdMdlManagerCreateFromSource(g_gameState.map.files[4].handle, g_gameState.map.files[4].buffer, 0x1c0);
+            g_lmapScene->stageModel = asdMdlManagerCreateFromSource(g_gameState.map.files[4].handle, g_gameState.map.files[4].buffer, 0x1c0);
             break;
         }
-        lightOwnerRegister(g_lmapScene->modelSwap.model, 1);
+        lightOwnerRegister(g_lmapScene->stageModel, 1);
         {
-            AsdMdlObject *model = g_lmapScene->modelSwap.model;
+            AsdMdlObject *model = g_lmapScene->stageModel;
             model->flags |= 2;
             model->node->resource->positionFollowed = 0;
         }
-        g_lmapScene->modelSwap.unk168 = 0;
-        g_lmapScene->modelSwap.unk16c = -1;
-        g_lmapScene->modelSwap.modelState = 0;
+        g_lmapScene->unk168 = 0;
+        g_lmapScene->unk16C = -1;
+        g_lmapScene->modelSwapStep = 0;
         return 1;
     }
     return 0;

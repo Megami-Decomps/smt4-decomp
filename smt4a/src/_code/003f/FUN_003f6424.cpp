@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the zero constant into fp and keeps `10 == category` as `mov r1,#10; cmp r1, r0 lsr #8`; the value-box float conversions are scheduled differently and the sprite is re-extended (uxth) before the draw call. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "code/Code0019.h"
@@ -18,16 +19,10 @@ struct PanelRecord {
     u8 unk04[4];
 };
 
-struct IconInfo {
-    u8 unk00[0x9c];
-    u16 spriteId;       // 0x9c
-};
-
 extern "C" {
 
 void efctSetSpeed(f32 speed);
 LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
-IconInfo* devilGetRecord(u32 code);
 void FUN_00169a1c(s32 sprite, s32 x, s32 y, s32 z);
 const char* FUN_003f74a8(u32 id, PanelRecord* record);
 void textFormatBuffer(char* out, const char* format, ...);
@@ -53,11 +48,11 @@ static __inline u16 panelIconSprite(u32 category)
     case 9: slot = 0xbb; break;
     default: slot = -1; break;
     }
-    IconInfo* icon = devilGetRecord(slot < 0 ? 0 : category == 9 ? 0x29d : dataTable10FindValue((u16)slot));
+    DevilRecordA *icon = devilGetRecord(slot < 0 ? 0 : category == 9 ? 0x29d : dataTable10FindValue((u16)slot));
     if (icon == NULL) {
         return 0;
     }
-    return icon->spriteId;
+    return icon->model;
 }
 // Draws the panel row for one record at (x, y, z): frame, category icon, name and value.
 void FUN_003f6424(f32 scale, u32 id, PanelRecord* record, u32 flags, s32 x, s32 y, s32 z)

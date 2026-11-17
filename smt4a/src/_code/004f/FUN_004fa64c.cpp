@@ -6,6 +6,7 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/Shard0042.h"
 #include "code/Code0042_VariantA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleTransitionAssetA { u8 data[0x34]; };
 struct BattleTransitionPlacementA {
@@ -28,7 +29,6 @@ struct BattlePlacementTransitionViewA {
 struct BattleTransitionCommandA { u32 unk00; s16 kind; };
 struct BattleTransitionStatusViewA { u8 prefix[0x164]; BattleCombatantStatusKey status; };
 extern "C" {
-BtlCombatantEntryA* btlMainFindEntryByListedId(BtlMainStateA* battle, s32 group);
 s32 state2CIsNot1(State2C* controller);
 void FUN_00421514(State2C* controller, BattleTransitionAssetA* asset, f32 scale);
 void attachmentsSetOffset(State2C* controller, const f32* position);

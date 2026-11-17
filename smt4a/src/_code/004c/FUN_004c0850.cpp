@@ -3,10 +3,10 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-int btlMainFindEntryByListedId(...);
 int FUN_003f21ec(void);
 int FUN_003f24e0(unsigned int *, int);
 int FUN_003f2aac(unsigned int *, int, int);
@@ -38,7 +38,6 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_003f2aac. */
 /* Supplied declaration required: countersAddSaturating. */
 extern unsigned int FUN_004c53fc(unsigned int);
-extern int btlUnitGet(unsigned int);
 
 
 void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
@@ -56,7 +55,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   
   puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   puVar3 = puVar2;
-  btlMainFindEntryByListedId(puVar2,param_1);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar2), param_1);
   if (puVar3 == (unsigned int *)0x0) {
     if ((-1 < param_1 - 0x6d) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
       if (param_2 == 0) {
@@ -127,7 +126,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
        (((param_3 & 0x80) != 0 || (param_3 & 0x40) != 0) || (param_3 & 0x100) != 0)) {
       *(unsigned short *)(puVar3 + 0x9d) = (unsigned short)puVar3[0x9d] & 0xefff;
     }
-    temp_v1 = btlUnitGet(g_btlScriptUnit);
+    temp_v1 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if ((((temp_v1 != 0) && (-1 < *(short *)((int)puVar3 + 0x6e))) &&
         (*(short *)((int)puVar3 + 0x6e) < 4)) &&
        ((((puVar3[1] & DAT_00571414) == 0 && (DAT_00571410 & *puVar3) == 0 && (puVar3[0xff] != 0))
@@ -179,7 +178,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x80) != 0) {
     temp_v3 = FUN_004c53fc(0x1b);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe0) = temp_v3;
     }
@@ -187,7 +186,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x40) != 0) {
     temp_v3 = FUN_004c53fc(0x1c);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe4) = temp_v3;
     }
@@ -195,7 +194,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x100) != 0) {
     temp_v3 = FUN_004c53fc(0x1d);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe8) = temp_v3;
     }
@@ -203,7 +202,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 8) != 0) {
     temp_v3 = FUN_004c53fc(0x1e);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xec) = temp_v3;
     }
@@ -211,7 +210,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x800) != 0) {
     temp_v3 = FUN_004c53fc(0x1f);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf0) = temp_v3;
     }
@@ -219,7 +218,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x1000) != 0) {
     temp_v3 = FUN_004c53fc(0x20);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf4) = temp_v3;
     }
@@ -227,7 +226,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x2000) != 0) {
     temp_v3 = FUN_004c53fc(0x21);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf8) = temp_v3;
     }
@@ -235,7 +234,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   if ((param_3 & 0x10) != 0) {
     temp_v3 = FUN_004c53fc(0x22);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v1,param_1);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xfc) = temp_v3;
     }

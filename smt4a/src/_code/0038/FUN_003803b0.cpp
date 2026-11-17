@@ -10,7 +10,6 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 
 s32 scrGetArg(u32 index);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
 void FUN_004fb798(s32 a, u32 unit, s32 b, BattleRosterRecordA *target, s32 c, s32 damage, s32 d, s32 e,
                   s32 effect, s32 f, s32 g, s32 kind, s32 h, s32 i, s32 j);
 void btlQueueActionMessage(s32 a, u32 unit, u32 message, s32 b, s32 c, s32 d, s32 e);

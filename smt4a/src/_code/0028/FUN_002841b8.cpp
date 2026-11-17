@@ -1,21 +1,10 @@
 /* NON_MATCHING: retail saves r0-r2 in the prologue and copies the 20-byte key table with ldm from an offset into one shared data block (here a separate extern copied word by word); the menu logic is the same (202 vs 199 rows). */
 #include "common.h"
 #include "game/GameStateA.h"
-#include "shard/X14_MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "AsdSDK/asdTextFormatStream.h"
 
 extern "C" {
-
-/* The message work area fields written here, by their offsets. */
-typedef struct TerminalMessageWork {
-    /* 0x0000 */ u8 unk0000[4];
-    /* 0x0004 */ u32 handle;
-    /* 0x0008 */ u8 unk0008[4];
-    /* 0x000C */ u32 flags;             /* 0x20: menu shown */
-    /* 0x0010 */ u8 unk0010[0x19B4];
-    /* 0x19C4 */ u8 busy;
-    /* 0x19C5 */ u8 mode;
-} TerminalMessageWork;
 
 typedef struct TerminalKeys {
     u8 v[20];
@@ -62,19 +51,19 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
     if (start == 0) {
         g_gameState.overrideMapName = 1;
         g_gameState.mapNameId = keys.v[index];
-        TerminalMessageWork *work = (TerminalMessageWork *)g_messageMain.work;
+        MessageWindowA *window = g_messageMain.window;
 
-        if (work != NULL) {
-            work->mode = 0x15;
+        if (window != NULL) {
+            window->displayMode = 0x15;
         }
         messageWindowShowOrPoll(context, 0, 0, 6, 0, 0);
-        asdTextFormatStream(work->handle, 4, -1, 0, 3, "%s",
+        asdTextFormatStream(window->box, 4, -1, 0, 3, "%s",
                      "\201\162\201\100\202\166\202\210\202\205\202\222\202\205\201\100\202\227\202\217\202\225\202\214\202\204\201\100"
                      "\202\231\202\217\202\225\201\100\202\214\202\211\202\213\202\205\201\100\202\224\202\217\201\100\202\207\202\217"
                      "\201\110");
-        msgBoxFlagsSetBit7(work->handle);
-        work->busy = 0;
-        work->flags |= 0x20;
+        msgBoxFlagsSetBit7(window->box);
+        window->displayEnabled = 0;
+        window->flags |= 0x20;
         sortMenuAcquire(-1, 3);
         for (s32 i = 0; i < 19; i++) {
             if (gameFlagIsSet(unlockFlags[i]) != 0) {

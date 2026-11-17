@@ -1,5 +1,5 @@
 /* NON_MATCHING: the heap pointer now comes from base + 0x1000 as in retail; only the zero constant and the result copy are in swapped registers (retail r6/r8, built r8/r6). */
-#include "shard/S2SoundLoader.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 namespace {
 /* nw::snd::SoundArchive::SoundInfo */
@@ -14,23 +14,10 @@ struct PlayerInfo {
     /* 0x00 */ u32 playableSoundMax;
     /* 0x04 */ u32 playerHeapSize;
 };
-
-struct AsdSoundSystemHeapView {
-    /* 0x000 */ u8 unk000[0x318];
-    /* 0x318 */ void *loadHeap;
-};
-
-struct AsdSoundSystemLoadView {
-    /* 0x0000 */ u8 archive[0x2b8];
-    /* 0x02B8 */ SoundLoader loader;
-    /* 0x02C0 */ u8 unk2c0[0xd40];
-    /* 0x1000 */ AsdSoundSystemHeapView heaps;
-};
 }
 
 extern "C" {
 
-extern AsdSoundSystemLoadView g_asdSoundSystem;
 s32 soundArchiveReadSoundInfoWithExtension(void *archive, u32 soundId, SoundInfo *info);
 s32 FUN_00178458(void *archive, u32 playerId, PlayerInfo *info);
 s32 soundArchiveLoaderIsItemLoaded(SoundLoader *loader, u32 id, u32 flags);
@@ -39,8 +26,8 @@ s32 FUN_001753d4(SoundLoader *loader, u32 id, void *heap, u32 flags, u32 blockSi
 /* Make sure a sound's data is loaded: sounds whose player has its own heap need nothing, others load into the shared heap. */
 s32 FUN_00151340(u32 soundId)
 {
-    AsdSoundSystemLoadView *system = &g_asdSoundSystem;
-    void *heap = g_asdSoundSystem.heaps.loadHeap;
+    AsdSoundSystemA *system = &g_asdSoundSystem;
+    void *heap = g_asdSoundSystem.currentSlotB; /* the current slot starts with its heap */
     s32 result = 0;
     SoundInfo sound;
     PlayerInfo player = {0, 0};
@@ -51,10 +38,10 @@ s32 FUN_00151340(u32 soundId)
         return 1;
     }
     if (heap != NULL) {
-        if (soundArchiveLoaderIsItemLoaded(&system->loader, soundId, 0xffffffff)) {
+        if (soundArchiveLoaderIsItemLoaded(&system->loaderState.loader, soundId, 0xffffffff)) {
             return 1;
         }
-        result = FUN_001753d4(&system->loader, soundId, heap, 0xffffffff, 0);
+        result = FUN_001753d4(&system->loaderState.loader, soundId, heap, 0xffffffff, 0);
     }
     return result;
 }

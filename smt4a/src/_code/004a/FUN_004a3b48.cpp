@@ -1,5 +1,6 @@
 /* NON_MATCHING: structure matches retail (panel state block at +0x800 held in a register, entry table pointer taken after the early return, shown-id base at +0xA800); retail saves one more register (sl) and numbers the base registers r6/r7/r4/r5 differently, with a 304-byte frame vs 300. */
 #include "shard/Shard0032.h"
+#include "gamedata/DevilRecordA.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "code/Code002a_Smt4a.h"
 
@@ -53,7 +54,6 @@ void FUN_0033449c(s32 value);
 void FUN_002f0420(s32 value);
 StatusSlotTable *gameGetSlotTable(void);
 s32 FUN_00372014(void);
-void devilGetRecord(u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 void unitRecomputeDerivedStats(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);

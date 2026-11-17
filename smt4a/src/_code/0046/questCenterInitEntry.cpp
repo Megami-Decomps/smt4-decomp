@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match7_QuestInteraction.h"
+#include "quest_center/QuestRecordA.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 namespace {
@@ -33,10 +34,6 @@ struct QuestInitializationWork {
     u8 statecf6[0x150];
     u8 statee46[0x28];
 };
-struct QuestDefinitionPrefix {
-    u8 unk00[6];
-    u8 state;
-};
 }
 
 extern "C" {
@@ -51,7 +48,6 @@ void dataTable28Load(u8* state);
 void placeWinCreate();
 void messageSetMode(s32 mode);
 void qcMainSetMode(s32 mode);
-QuestDefinitionPrefix* dataTable1bOr1cGetRecord(u16 id);
 s32 gameFlagEntryGetBit(u32 id, u32 bit);
 void FUN_00417e08(u32 id);
 void rt_memclr(void* data, u32 size);
@@ -84,8 +80,8 @@ void questCenterInitEntry(void* context)
     qcMainSetMode(0);
     u16 id = 0x15e;
     do {
-        const QuestDefinitionPrefix* record = dataTable1bOr1cGetRecord(id);
-        if (record && !record->state && !gameFlagEntryGetBit(id, 1)) {
+        const QuestRecordA* record = dataTable1bOr1cGetRecord(id);
+        if (record && !record->kind && !gameFlagEntryGetBit(id, 1)) {
             FUN_00417e08(id);
         }
     } while (++id < 400);

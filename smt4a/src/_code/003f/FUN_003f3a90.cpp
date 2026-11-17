@@ -1,6 +1,7 @@
 /* NON_MATCHING: twin of smt4 FUN_0033c1bc; everything up to the setDrawState inlines matches retail, which keeps the ring pointer through a temporary (ldr r1,[g_renderCtx]; add r4,r1,...) and loads the dirty flag / flush callback into r2/r1 instead of r0. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/GamePlayerData.h"
 
 // Draw-state stack embedded in the title scene.
 struct DrawRing {
@@ -30,15 +31,9 @@ struct StatusStrip {
     s32 member;             // 0x34: unit index, negative for the player
 };
 
-
 struct UnitStatus {
     u8 unk00[0x60];
     u16 ailments;           // 0x60
-};
-
-struct PlayerStatus {
-    u8 unk00[0x5e];
-    u16 ailments;           // 0x5e
 };
 
 extern "C" {
@@ -47,7 +42,6 @@ extern RenderCtx* g_renderCtx;
 
 UnitStatus* gameGetSlotRecord(s32 index);
 UnitStatus* btlMainGetUnk14(void);
-PlayerStatus* gameGetPlayerData(void);
 void effectDispatchSelector(s16 icon, s32 x, s32 y, s32 kind, f32 alpha);
 void FUN_0035ae58(s32 x, s32 y, s32 w, s32 h, s32 arg);
 

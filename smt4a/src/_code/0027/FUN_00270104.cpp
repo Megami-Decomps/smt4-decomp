@@ -1,14 +1,9 @@
 /* NON_MATCHING: the repeated page query, the 64-bit battle mask tests and the nested help-selection branches are laid out differently from retail (220 vs 227 rows); the help shown per page is the same. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-typedef struct HelpPlayerView {
-    u8 unk00[2];
-    u16 flag;
-    u16 value;
-} HelpPlayerView;
 
 typedef struct HelpRecordView {
     u8 unk00[0x62];
@@ -54,7 +49,6 @@ void skillHelpUpdateAttributeAndTarget(u32 id);
 void FUN_003aeb18(u32 panel, s32 arg);
 void FUN_00399e20(u32 panel, s32 arg);
 s32 gameFlagIsSet(u32 flag);
-HelpPlayerView *gameGetPlayerData(void);
 
 /* Shows the help for the skill menu's current entry, by page. */
 void FUN_00270104(SkillMenuWork *work)
@@ -123,9 +117,9 @@ void FUN_00270104(SkillMenuWork *work)
                 return;
             }
             if (index == 1 && gameFlagIsSet(0x410) != 0) {
-                HelpPlayerView *player = gameGetPlayerData();
+                PlayerDataA *player = gameGetPlayerData();
 
-                if (player->flag != 0 && player->value != 0) {
+                if (player->equipped.gun != 0 && player->equipped.bullets != 0) {
                     FUN_00399e20(*panel, 1);
                     return;
                 }
@@ -133,9 +127,9 @@ void FUN_00270104(SkillMenuWork *work)
             s32 adjust = -2;
 
             if (gameFlagIsSet(0x410) != 0) {
-                HelpPlayerView *player = gameGetPlayerData();
+                PlayerDataA *player = gameGetPlayerData();
 
-                if (player->flag == 0 || player->value == 0) {
+                if (player->equipped.gun == 0 || player->equipped.bullets == 0) {
                     adjust = -1;
                 }
             } else {

@@ -84,7 +84,7 @@ struct Table00RecordA {
     /* 0xA2 */ u8 bustUp;               /* the bust-up height: 0 tall, 1 average, 2 low */
     /* 0xA3 */ u8 bustUpVariation;
     /* 0xA4 */ u8 variant;              /* the texture variant drawn for the demon */
-    /* 0xA5 */ u8 scriptFlags;          /* read bit by bit by the script commands */
+    /* 0xA5 */ u8 scriptFlags;          /* read bit by bit by the script commands; bits 2-7: the talk bust-up category */
     /* 0xA6 */ u8 unkA6[2];
 };
 

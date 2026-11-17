@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 #include <string.h>
+#include "battle/BtlGlobals.h"
 
 /* An entry of the battle effect name table (0x24 bytes): the effect's file name and up to two sub-effects. */
 struct BtlEffectEntry {
@@ -15,18 +16,11 @@ struct BtlEffectEntry {
     /* 0x20 */ u32 value;
 };
 
-/* The battle main state (observed fields). */
-struct BtlMainPosition {
-    /* 0x000 */ u8 unk000[0x574];
-    /* 0x574 */ f32 centerX;
-};
-
 #define BTL_EFFECT_ENTRIES 0x191
 
 extern "C" {
 
 extern BtlEffectEntry s_ef_e_atk01_00436028[];
-extern BtlMainPosition *g_btlMain;
 
 void textFormatBuffer(char *destination, const char *format, ...);
 void btlQueueKeyedScalarReflectAction(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 c);

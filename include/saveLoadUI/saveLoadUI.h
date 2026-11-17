@@ -47,7 +47,7 @@ typedef struct SaveLoadUIWork {
             SavePreviewSlot slots[2];
             u8 available[2];
             u8 unk34e[2];
-            PlayerInitialRecordIV *player;
+            PlayerDataIV *player;
             u8 unk354;
             u8 pending;
         } preview;
@@ -80,13 +80,8 @@ struct SaveSlotDisplayRecord {
     /* 0x38 */ u16 secondaryPortrait;
     /* 0x3A */ u8 unk3a[2];
 };
-struct SaveSlotPortraitResource {
-    /* 0x00 */ u8 unk00[0x9C];
-    /* 0x9C */ u16 image;
-};
 typedef char SaveSlotTextObjectsSizeCheck[sizeof(SaveSlotTextObjects) == 0x0C ? 1 : -1];
 typedef char SaveSlotDisplayRecordSizeCheck[sizeof(SaveSlotDisplayRecord) == 0x3C ? 1 : -1];
-typedef char SaveSlotPortraitResourceSizeCheck[sizeof(SaveSlotPortraitResource) == 0x9E ? 1 : -1];
 
 /* Return 10 for a leading blank; work in pairs of decimal places to keep divisions constant. */
 static __inline u32 saveSlotDecimalDigit(u32 value, u8 place)

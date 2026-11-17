@@ -7,7 +7,6 @@ struct Unk49381c {
 
 extern "C" {
 
-extern MessageGlobals g_messageMain;
 extern Unk49381c DAT_0049381c;
 
 s32 FUN_002c1658(s32 id, s32 mode);
@@ -16,13 +15,13 @@ s32 FUN_002c1658(s32 id, s32 mode);
  * message window belongs to it and is still waiting. */
 s32 FUN_0010f084(u32 owner)
 {
-    MessageWork *window;
+    MessageWindow *window;
 
     if (FUN_002c1658(0, 1) != 0 || FUN_002c1658(9, 2) != 0 || FUN_002c1658(6, 2) != 0 ||
         FUN_002c1658(10, 2) != 0 || DAT_0049381c.busy != 0) {
         return 1;
     }
-    window = g_messageMain.state;
+    window = g_messageMain.window;
     if (window->box == owner && window->unkA34 == 1 && FUN_002c1658(1, 1) != 0) {
         return 1;
     }

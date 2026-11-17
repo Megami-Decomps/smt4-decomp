@@ -1,10 +1,9 @@
 /* Saves the active map's location and, for a local map, its scene and camera state. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "shard/SaveWork.h"
 
 extern "C" {
 extern u8 g_gameState;
-extern LmapScene *g_lmapScene;
 extern void *DAT_004474f4;
 
 void FUN_002758d8(void)
@@ -41,19 +40,19 @@ void FUN_002758d8(void)
         save->mode = (u8)context->mode;
         save->area = (u8)context->area;
         save->mapId = context->mapId;
-        save->position[0] = g_lmapScene->transform.position[0];
-        save->position[1] = g_lmapScene->transform.position[1];
-        save->position[2] = g_lmapScene->transform.position[2];
-        save->sceneHeading = g_lmapScene->transform.headingCopy;
+        save->position[0] = g_lmapScene->pose.position.x;
+        save->position[1] = g_lmapScene->pose.position.y;
+        save->position[2] = g_lmapScene->pose.position.z;
+        save->sceneHeading = g_lmapScene->pose.targetHeading;
         save->cameraValue = ((CameraSnapshotSource *)DAT_004474f4)->value;
         return;
     case 2:
         save->mode = (u8)context->mode;
         save->area = (u8)context->area;
         save->mapId = context->mapId;
-        save->position[0] = g_lmapScene->transform.position[0];
-        save->position[1] = g_lmapScene->transform.position[1];
-        save->position[2] = g_lmapScene->transform.position[2];
+        save->position[0] = g_lmapScene->pose.position.x;
+        save->position[1] = g_lmapScene->pose.position.y;
+        save->position[2] = g_lmapScene->pose.position.z;
         return;
     case 3:
         save->mode = (u8)context->mode;

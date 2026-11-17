@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 
@@ -16,7 +17,6 @@ struct CenteredSpriteWork {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 image);
 

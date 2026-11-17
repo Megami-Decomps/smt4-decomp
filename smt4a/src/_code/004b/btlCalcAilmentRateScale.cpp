@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/BtlStatusAilments.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleRateAnalysis {
     u32 unk00[12];
@@ -9,7 +10,6 @@ struct BattleRateAnalysis {
     u16 unk32;
 };
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 void btlEntryBuildSummary(BattleRateAnalysis *analysis, BtlMainStateA *battle, BtlCombatantEntryA *source);
 
 // Use the source's analyzed percentage for affected target statuses, otherwise return full rate.

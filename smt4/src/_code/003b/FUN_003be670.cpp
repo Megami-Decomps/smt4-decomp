@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry* btlMainFindEntryByListedId(BtlMainState* battle, u32 id);
 void btlEntryGetPassiveSkillIds(const BtlEntry* entry, u16* skills);
 
 // Apply the unit's passive percentage total when the target has the corresponding flag.

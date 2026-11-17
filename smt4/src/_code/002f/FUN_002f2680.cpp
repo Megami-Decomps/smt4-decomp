@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct SkillSortItem {
     /* 0x00 */ s32 skillId;
@@ -16,16 +17,11 @@ struct SkillSortRecord {
     /* 0x24 */ u16 sortKey;
 };
 
-struct UnitSortRecord {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 sortKey;
-};
 
 extern "C" {
 
 s32 idIsAbove400(s32 id);
 PassiveSkillSortRecord *passiveSkillLookupRecord(s32 id);
-UnitSortRecord *gameGetUnitRecord(s32 id);
 s32 itemSortCompareByCategoryAndId(SkillSortItem *a, SkillSortItem *b);
 
 /* Returns the sort key of an item's skill, read from the passive table for ids above 400. */
@@ -47,12 +43,12 @@ static __inline s32 compareUnitSortKeys(SkillSortItem *a, SkillSortItem *b)
     if (a->unitId < 0) {
         keyA = 0;
     } else {
-        keyA = gameGetUnitRecord(a->unitId)->sortKey;
+        keyA = gameGetUnitRecord(a->unitId)->id;
     }
     if (b->unitId < 0) {
         keyB = 0;
     } else {
-        keyB = gameGetUnitRecord(b->unitId)->sortKey;
+        keyB = gameGetUnitRecord(b->unitId)->id;
     }
     diff = keyB - keyA;
     if (diff != 0) {

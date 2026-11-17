@@ -1,15 +1,9 @@
 /* NON_MATCHING: readable rebuild of the NPC shop select script driver (step 0 lists up to three entries and starts the script entry for the count, steps 1-3 wait on the script); the stack frame matches retail (84 bytes) but armcc keeps the constants 0/1 in different registers (sl instead of r9) and orders the branch tests differently; the entry index passed in the unknown-selection case is assumed to be the found index. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 /* Record of one shop entry candidate (an id's table record). */
-struct ShopEntryRecord {
-    /* 0x00 */ u16 saveEntryId;
-    /* 0x02 */ u8 unk02[0x3A];
-    /* 0x3C */ u16 saveFlags;
-    /* 0x3E */ u16 requiredFlag;
-};
-
 struct ShopSlot {
     /* 0x00 */ u8 unk00[0x22];
     /* 0x22 */ u16 id;
@@ -41,7 +35,6 @@ void sysPlaySe(s32 se);
 void FUN_003c3e14(void);
 void FUN_003c1060(void);
 void fillThreeWordsWithByte(s32 *words, u32 value);
-ShopEntryRecord *devilGetRecord(u32 id);
 u32 dataTable01GetRecordWithAocOverride(u32 id);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataCopySaveEntry(u16 id, u8 *out);
@@ -56,18 +49,18 @@ void FUN_003e32b0(NpcShopSelect *scene)
         fillThreeWordsWithByte(scene->choices, 0xFFFFFFFF);
         ShopSlot *slots = (ShopSlot *)scene;
         for (s32 i = 0; i < 3; i++) {
-            ShopEntryRecord *record = devilGetRecord(slots[i].id);
+            DevilRecordA *record = devilGetRecord(slots[i].id);
             if (record == NULL)
                 continue;
-            if (record->requiredFlag != 0 && gameFlagIsSet(record->requiredFlag) == 0)
+            if (record->unlockFlag != 0 && gameFlagIsSet(record->unlockFlag) == 0)
                 continue;
-            if ((record->saveFlags & 1) != 0) {
+            if ((record->saveRequirement & 1) != 0) {
                 u8 save[0x54];
                 s32 found;
-                if ((record->saveFlags & 0xFFFE) != 0)
-                    found = gameDataCopySaveEntry(record->saveFlags >> 1, save);
+                if ((record->saveRequirement & 0xFFFE) != 0)
+                    found = gameDataCopySaveEntry(record->saveRequirement >> 1, save);
                 else
-                    found = gameDataCopySaveEntry(record->saveEntryId, save);
+                    found = gameDataCopySaveEntry(record->id, save);
                 if (found == 0 || (*(u16 *)(save + 0x36) & 0xFC) == 0)
                     continue;
             }

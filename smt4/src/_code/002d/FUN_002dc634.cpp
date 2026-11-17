@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/Table8Type5Lookup.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct PassiveSkillRecord {
     /* 0x00 */ u8 unk00[0x22];
@@ -13,10 +14,6 @@ struct SkillRecord {
     /* 0x24 */ u16 sortKey;
 };
 
-struct UnitRecord {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 sortKey;
-};
 
 /* A skill and the unit slot it belongs to (negative: none). */
 struct SkillSortKey {
@@ -27,7 +24,6 @@ struct SkillSortKey {
 extern "C" {
 s32 idIsAbove400(u32 id);
 PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
-UnitRecord *gameGetUnitRecord(s32 unit);
 s32 itemSortCompareRankThenKey(SkillSortKey *first, SkillSortKey *second);
 
 /* Orders skills by ascending sort key, then by their unit's key, then by the final tie-break. */
@@ -54,12 +50,12 @@ static __inline s32 skillSortCompare(SkillSortKey &a, SkillSortKey &b)
     if (a.unit < 0) {
         unitA = 0;
     } else {
-        unitA = gameGetUnitRecord(a.unit)->sortKey;
+        unitA = gameGetUnitRecord(a.unit)->id;
     }
     if (b.unit < 0) {
         unitB = 0;
     } else {
-        unitB = gameGetUnitRecord(b.unit)->sortKey;
+        unitB = gameGetUnitRecord(b.unit)->id;
     }
     difference = unitA - unitB;
     if (difference != 0) {

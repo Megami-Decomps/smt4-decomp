@@ -1,23 +1,19 @@
 /* NON_MATCHING: retail rebases vectors and copies them with integer registers; this typed reconstruction reuses a common state base and VFP vector loads/stores. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <stddef.h>
+#include "battle/btlCamera.h"
 
 typedef char CheckTransitionSize[sizeof(BattleVectorTransition) == 0x818 ? 1 : -1];
 typedef char CheckTransitionPosition[offsetof(BattleVectorTransition, positionData.position) == 0x68 ? 1 : -1];
 typedef char CheckTransitionElapsed[offsetof(BattleVectorTransition, elapsedData.alternateElapsed) == 0x5f0 ? 1 : -1];
 typedef char CheckTransitionOrigin[offsetof(BattleVectorTransition, originData.originOffset) == 0x764 ? 1 : -1];
 
-struct VectorRoutingGlobals {
-    BattleVectorTransition *state;
-    u8 unk04[0x24];
-    s32 routingMode; // 0x28
-};
 struct VectorRouteState {
     BattleVector3 current; // 0x00
     BattleVector3 previous; // 0x0c
     BattleVector3 target; // 0x18
 };
-extern "C" VectorRoutingGlobals g_btlMain;
+extern "C" BtlCameraStatics g_btlMain;
 extern "C" VectorRouteState DAT_00493530;
 extern "C" BattleVector3 DAT_00493548;
 

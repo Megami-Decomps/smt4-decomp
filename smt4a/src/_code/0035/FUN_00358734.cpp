@@ -1,7 +1,7 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlagsWithAlpha(u32 kind, f32 value);
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void eplUpdateActiveNodes(void);

@@ -1,9 +1,9 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 u32 renderCtxPackPassFlags(u32 mode, u32 option);
 

@@ -2,18 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BattleBalanceRow.h"
-
-// Combatant record: only the fields the damage formula reads.
-struct BattleCombatant {
-    u8 flags;           // 0x00, bit 2: boosted/charged side
-    u8 unk01[0xef];
-    s16 strength;       // 0xf0
-    s16 magic;          // 0xf2
-    u8 unkF4[0x57];
-    u8 affinityIndex;   // 0x14b
-};
-
-struct BattleListEntry;
+#include "battle/BtlGlobals.h"
 
 // Per-affinity rates (percent) of an attacker, by value as retail copies it.
 struct AffinityRates {
@@ -27,11 +16,9 @@ struct AffinityRates {
 
 extern "C" {
 
-BattleCombatant* btlFindEntryBlockByMemberId(BtlMainState* main, s32 id);
-BattleListEntry* btlMainFindEntryByListedId(BtlMainState* main, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 defender);
-AffinityRates btlEntryBuildSummary(BtlMainState* main, BattleListEntry* entry);
+AffinityRates btlEntryBuildSummary(BtlMainState* main, BtlEntry* entry);
 void selectionCopySupportedValue(u32 id, u32* out);
 u32* dataTable40FindById(s32 id);
 s32 playerGetSkillRank(s32 id);
@@ -45,8 +32,8 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     f32 adjust = 0.0f;
     f32 scale = 1.0f;
     BtlMainState* main = btlGetMainState();
-    BattleCombatant* attacker = btlFindEntryBlockByMemberId(main, attackerId);
-    BattleCombatant* defender = btlFindEntryBlockByMemberId(main, defenderId);
+    BtlUnitData* attacker = btlFindEntryBlockByMemberId(main, attackerId);
+    BtlUnitData* defender = btlFindEntryBlockByMemberId(main, defenderId);
     if (attacker->flags & 4) scale = 0.8f;
 
     f32 magic = (f32)attacker->magic;
@@ -60,7 +47,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     selectionCopySupportedValue(rates.skillId, &supported);
 
     s32 rankBonus = 0;
-    if ((*(u32*)btlMainFindEntryByListedId(btlGetMainState(), attackerId) & 2) != 0) {
+    if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
         u32* record = dataTable40FindById(partyId);
         if (record != NULL) rankBonus = FUN_00283ebc(record, playerGetSkillRank(partyId), 1);
     }

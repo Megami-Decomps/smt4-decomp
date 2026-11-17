@@ -31,7 +31,7 @@ u32 FUN_002e5fdc(void)
         break;
     }
 
-    g_gameState.transitionActive = 0;
+    g_gameState.savedLocationSet = 0;
     asdSequenceRequest(6, 0, 0);
     return 1;
 }

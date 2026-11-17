@@ -1,7 +1,8 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 201 rows); retail also inlines a percent-bonus step on the gold whose percentage is constant 0 (folded away), and orders registers differently */
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
 // Battle reward summary handed to the result screen (only the fields used here).
 struct RewardInput {
@@ -27,23 +28,10 @@ struct ResultData {
     u8 unkd642;                     // 0xd642
 };
 
-struct UnitRecord {
-    u8 unk00[0x34];
-    u16 skills[8];          // 0x34
-    u8 unk44[4];
-    u8 growthType;          // 0x48
-    u8 unk49;
-    u8 resultSlot;          // 0x4a
-};
 
 struct PassiveRecord {
     u8 unk00[0x2f];
     u8 expBonus;            // 0x2f: percent bonus (0 = none)
-};
-
-struct PlayerData {
-    u8 unk00[0x76];
-    u8 growthType;          // 0x76
 };
 
 struct SlotTable {
@@ -59,7 +47,6 @@ extern ResultData* g_result;
 SlotTable* gameGetSlotTable(void);
 u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 s32 playerPadTestBit(s32 bit);
-UnitRecord* gameGetUnitRecord(s32 slot);
 PassiveRecord* passiveSkillLookupRecord(u32 skill);
 
 // Adds a battle's rewards to the result screen: gold, dropped items (merged by id), the
@@ -69,7 +56,7 @@ void FUN_00214568(RewardInput* reward)
 {
     ResultData* result = g_result;
     SlotTable* slotTable = gameGetSlotTable();
-    PlayerData* player = reinterpret_cast<PlayerData *>(gameGetPlayerData());
+    PlayerDataIV* player = gameGetPlayerData();
     result->unkd641 = reward->unk3c;
     result->unkd642 = reward->unk3d;
     result->gold += reward->gold;
@@ -92,7 +79,7 @@ void FUN_00214568(RewardInput* reward)
 
     s32 share = reward->experience / 4;
     if (share < 1 && reward->experience != 0) share = 1;
-    s32 playerShare = (share * (s32)dataTable09Sub3GetRecord(player->growthType, reward->level)) / 100;
+    s32 playerShare = (share * (s32)dataTable09Sub3GetRecord(player->level, reward->level)) / 100;
     if (playerShare < 1 && share != 0) playerShare = 1;
     if (playerPadTestBit(1) == 0 && playerPadTestBit(10) == 0) {
         result->totalExperience += playerShare;
@@ -100,14 +87,14 @@ void FUN_00214568(RewardInput* reward)
 
     for (s32 i = 0; i < 24; i++) {
         if (slotTable->slots[i] < 0) continue;
-        UnitRecord* member = gameGetUnitRecord(slotTable->slots[i]);
+        StatBlock* member = gameGetUnitRecord(slotTable->slots[i]);
         if (flagWordTestBit(member, 1) != 0 || flagWordTestBit(member, 10) != 0 || flagWordTestBit(member, 2) != 0) continue;
         s8 slot = slotTable->slots[i];
         bool active = slotTable->activeParty[0] == slot || slotTable->activeParty[1] == slot || slotTable->activeParty[2] == slot;
-        UnitRecord* unit = gameGetUnitRecord(slot);
+        StatBlock* unit = gameGetUnitRecord(slot);
         f32 bonus = 1.0f;
         for (s32 k = 0; k < 8; k++) {
-            u32 skill = unit->skills[k];
+            u32 skill = unit->skills.ids[k];
             if (skill == 0) continue;
             PassiveRecord* passive = passiveSkillLookupRecord(skill);
             if (passive != NULL && passive->expBonus != 0) {
@@ -115,11 +102,11 @@ void FUN_00214568(RewardInput* reward)
             }
         }
         u32 scaled = (u32)(share * (s32)(bonus * 100.0f)) / 100;
-        u32 amount = (scaled * dataTable09Sub3GetRecord(unit->growthType, reward->level)) / 100;
+        u32 amount = (scaled * dataTable09Sub3GetRecord(unit->level, reward->level)) / 100;
         if (amount == 0 && scaled != 0) amount = 1;
         if (!active) amount = (u32)((f32)amount * 0.3f);
         if ((s32)amount < 1 && share != 0) amount = 1;
-        result->unitExperience[member->resultSlot] += amount;
+        result->unitExperience[member->growth.slot] += amount;
     }
 }
 

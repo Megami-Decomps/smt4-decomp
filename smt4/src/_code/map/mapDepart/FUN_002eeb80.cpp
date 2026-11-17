@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include "game/GameState.h"
 
 /* The depart sequence's own state. */
@@ -82,7 +83,7 @@ u32 FUN_002eeb80(void)
         return 1;
     }
     if (DAT_00447518.frame == 0) {
-        g_lmapScene->targetPosition = g_lmapScene->position;
+        g_lmapScene->pose.targetPosition = g_lmapScene->pose.position;
     } else {
         if (DAT_00447518.frame == 10) {
             g_gameState.map.mapLoadActive = 1;

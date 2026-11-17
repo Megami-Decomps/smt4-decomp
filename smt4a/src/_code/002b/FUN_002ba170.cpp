@@ -1,10 +1,9 @@
 /* NON_MATCHING: nearest-index/constant register allocation and selected-record base addressing differ. */
 #include "gfx/EngineRecordList.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 extern EngineRecordList* g_engineRecordList;
-extern LmapScene* g_lmapScene;
 f32 distSpatial(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 
 void FUN_002ba170(void)
@@ -15,8 +14,8 @@ void FUN_002ba170(void)
     for (s32 index = 0; index < 32; ++index) {
         EngineEffectRecord* record = &g_engineRecordList->records[index];
         if (record->active && record->proximity.eligible) {
-            record->proximity.distance = distSpatial(g_lmapScene->transform.position[0],
-                g_lmapScene->transform.position[1], g_lmapScene->transform.position[2],
+            record->proximity.distance = distSpatial(g_lmapScene->pose.position.x,
+                g_lmapScene->pose.position.y, g_lmapScene->pose.position.z,
                 record->position[0], record->position[1], record->position[2]);
             record->proximity.selectedOrder = 999;
         }

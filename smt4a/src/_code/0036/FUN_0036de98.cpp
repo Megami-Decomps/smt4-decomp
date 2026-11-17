@@ -1,12 +1,10 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 extern "C" {
 void* scrGetCommandOwner(s32);
 s32 scrGetArg(u32);
 s32 scrGetCommandFrame(void);
 s32 messageWindowShowOrPoll(void*, s32, s32, s32, s32, s32);
 void msgBoxFlagsSetBit7(u32);
-
-extern MessageGlobalsA g_messageMain;
 
 s32 scrMessageKindGetValue(void);
 
@@ -21,7 +19,7 @@ static __inline s32 requestKind(s32 kind)
 
 s32 FUN_0036de98(void)
 {
-    MessageWorkA* work = g_messageMain.state;
+    MessageWindowA* work = g_messageMain.window;
     s32 kind = requestKind(scrMessageKindGetValue());
     void* context = scrGetCommandOwner(kind);
     s32 argument = scrGetArg(0);
@@ -29,7 +27,7 @@ s32 FUN_0036de98(void)
     s32 result = messageWindowShowOrPoll(context, argument, frame, kind, 0, 0);
     if (scrGetCommandFrame() == 0) {
         msgBoxFlagsSetBit7(work->box);
-        work->unk19C4 = 0;
+        work->displayEnabled = 0;
         work->flags |= 0x20;
     }
     return result;

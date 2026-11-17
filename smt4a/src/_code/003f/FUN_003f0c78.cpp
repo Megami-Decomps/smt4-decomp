@@ -3,8 +3,7 @@
 #include "battle/BattleRosterCache.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-
-extern "C" BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
+#include "battle/BtlGlobals.h"
 
 // Restore the cached horizontal position of each matching active roster entry.
 extern "C" void FUN_003f0c78(BtlMainStateA *state)

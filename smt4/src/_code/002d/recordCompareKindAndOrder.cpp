@@ -1,14 +1,7 @@
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" {
-
-typedef struct Record {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u16 order;
-    /* 0x6 */ u8 kind;
-} Record;
-
-Record *dataTable1bOr1cGetRecord(u32 id);
 
 /* Orders record kinds: 6, 0, 4, 5, 2, 3, 7, 8, 9 rank 1 to 9; any other kind ranks 0. */
 static s32 kindRank(u8 kind)
@@ -53,8 +46,8 @@ static s32 kindRank(u8 kind)
 /* Compares two record ids by kind rank (higher first), then by order (higher first). */
 s32 recordCompareKindAndOrder(u16 *a, u16 *b)
 {
-    Record *recordA = dataTable1bOr1cGetRecord(*a);
-    Record *recordB = dataTable1bOr1cGetRecord(*b);
+    QuestRecord *recordA = dataTable1bOr1cGetRecord(*a);
+    QuestRecord *recordB = dataTable1bOr1cGetRecord(*b);
     if (recordA == NULL)
         return 0;
     if (recordB == NULL)

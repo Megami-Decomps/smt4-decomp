@@ -3,6 +3,7 @@
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct ReflectTargetA {
@@ -11,8 +12,6 @@ struct ReflectTargetA {
 };
 }
 extern "C" {
-
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 listedId);
 
 /* Queues a target action and an optional follow-up for its corresponding battle unit. */
 u32 FUN_004fb5dc(u32 actorId, u32 options, u32 value, ReflectTargetA *target, u64 followup)

@@ -1,11 +1,10 @@
 #include "code/Code0014.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
 #include "code/Code0015.h"
 
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 
 extern s32 gxIsStereoscopic3dEnabled(void);
 extern s32 asdProcessSetCommandListRecording(s32 arg);

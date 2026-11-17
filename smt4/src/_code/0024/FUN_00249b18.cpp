@@ -4,8 +4,8 @@
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTableIV.h"
 #include "gamedata/GameDataAccess_Smt4.h"
+#include "gamedata/UnitRecordAccess.h"
 extern "C" {
-PartyDamageUnitIV *gameGetUnitRecord(u32 slot);
 
 /* Restore eligible party members and clear their ailments. */
 void FUN_00249b18(u32 group, s32 revive)
@@ -50,12 +50,12 @@ void FUN_00249b18(u32 group, s32 revive)
     }
     for (s32 index = 0; index < count; ++index) {
         if (slots[index] >= 0) {
-            PartyDamageUnitIV *unit = gameGetUnitRecord(slots[index]);
+            StatBlock *unit = gameGetUnitRecord(slots[index]);
             if ((revive || (unit->ailments & 2) == 0) &&
                 (unit->ailments & 0x400) == 0 && (unit->ailments & 4) == 0 && unit != NULL) {
                 unit->ailments = 0;
-                unit->currentHp = unit->maximumHp;
-                unit->currentMp = unit->maximumMp;
+                unit->hp = unit->maxHp;
+                unit->mp = unit->maxMp;
             }
         }
     }

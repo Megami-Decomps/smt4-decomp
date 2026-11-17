@@ -1,6 +1,7 @@
 /* NON_MATCHING: growth-recipe aggregate construction/copy and HP/MP update register allocation differ from retail. */
 #include "shard/Shard0034.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 s32 FUN_003e0154(void);
@@ -12,7 +13,7 @@ void FUN_003df7c4(u32 mode);
 s32 gameDataFlagTestBit(u32 bit);
 
 /* Advance player levels, then restore current HP/MP according to the recovery flags. */
-void playerAdvanceLevelsAndRecover(PlayerData *player, s32 levels, s32 growStats)
+void playerAdvanceLevelsAndRecover(PlayerDataA *player, s32 levels, s32 growStats)
 {
     if (levels < 1) {
         return;
@@ -24,35 +25,35 @@ void playerAdvanceLevelsAndRecover(PlayerData *player, s32 levels, s32 growStats
     s32 previousHp = FUN_003e0154();
     s32 previousMp = FUN_003e0164();
     for (s32 level = 0; level < levels; ++level) {
-        if (gameGetUnlockedCountLimit() <= player->unk62) {
+        if (gameGetUnlockedCountLimit() <= player->level) {
             break;
         }
         if (growStats != 0) {
             for (s32 growth = 0; growth < 5; ++growth) {
-                FUN_004cd340(player->unk0E, &recipe, 0);
+                FUN_004cd340(&player->baseStats, &recipe, 0);
             }
         }
-        ++player->unk62;
-        if (player->unk62 < 100) {
+        ++player->level;
+        if (player->level < 100) {
             gameDataAddCappedPoints(10);
         }
     }
     FUN_003df7c4(0);
     if (growStats != 0) {
-        player->unk2A = player->unk1C;
-        player->unk5E = 0;
-        player->unk2C = player->unk1E;
+        player->hp = player->maxHp;
+        player->ailments = 0;
+        player->mp = player->maxMp;
         return;
     }
-    player->unk5E = 0;
-    player->unk2A += player->unk1C - previousHp;
-    player->unk2C += player->unk1E - previousMp;
+    player->ailments = 0;
+    player->hp += player->maxHp - previousHp;
+    player->mp += player->maxMp - previousMp;
     if (gameDataFlagTestBit(0x83)) {
-        player->unk2A = player->unk1C;
-        player->unk2C = player->unk1E;
+        player->hp = player->maxHp;
+        player->mp = player->maxMp;
     } else if (gameDataFlagTestBit(0x82)) {
-        player->unk2A += (player->unk1C - player->unk2A) / 2;
-        player->unk2C += (player->unk1E - player->unk2C) / 2;
+        player->hp += (player->maxHp - player->hp) / 2;
+        player->mp += (player->maxMp - player->mp) / 2;
     }
 }
 }

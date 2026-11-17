@@ -1,36 +1,24 @@
-#include "common.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
-
-typedef struct Block {
-    /* 0x000 */ u8 unk000[0x754];
-    /* 0x754 */ u8 effect[4];
-} Block;
-
-typedef struct Globals {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ Block *block;
-} Globals;
 
 typedef struct Context {
     /* 0x00000 */ u8 unk00000[0x1F454];
     /* 0x1F454 */ int active;
 } Context;
 
-extern Globals g_messageMain;
-
 Context *gameDataBlocksGetSaveData(void);
 int spriteStartAnimationByIndex(void *target, int arg);
 
-/* Script command: if the context is active, runs spriteStartAnimationByIndex on the effect of the global block. */
+/* Script command: if the context is active, runs spriteStartAnimationByIndex on the banner's frame sprite. */
 u32 scrEffectRunIfActive(void)
 {
-    Block *block = g_messageMain.block;
+    MessageWindow *banner = g_messageMain.banner;
 
     if (gameDataBlocksGetSaveData()->active == 0) {
         return 1;
     }
-    spriteStartAnimationByIndex(block->effect, 7);
+    spriteStartAnimationByIndex(&banner->sprites[12], 7);
     return 1;
 }
 

@@ -15,20 +15,20 @@ void FUN_0036ad7c(void)
         g_gameState.skipTransitionSnapshot = 0;
     } else {
         mapProbePositionDownward(&g_gameState.pointPosition);
-        g_gameState.transitionActive = 1;
-        g_gameState.sourceMap = flags->savePoint.mapId;
-        g_gameState.sourceArea = flags->savePoint.areaId;
-        g_gameState.sourceObjectId = flags->savePointObject.objectId;
-        g_gameState.sourcePosition.x = static_cast<f32>(flags->savePoint.x);
-        g_gameState.sourcePosition.y = static_cast<f32>(flags->savePoint.y);
-        g_gameState.sourcePosition.z = static_cast<f32>(flags->savePoint.z);
-        g_gameState.sourceHeading = static_cast<f32>(flags->savePoint.heading);
-        g_gameState.sourceHeadingCopy = static_cast<f32>(flags->savePoint.heading);
-        g_gameState.destinationMap = map->transition.mapId;
-        g_gameState.destinationArea = map->transition.areaId;
-        g_gameState.destinationPosition = g_gameState.pointPosition;
-        g_gameState.destinationHeading = g_gameState.overviewHeading;
-        g_gameState.destinationHeadingCopy = g_gameState.overviewHeading;
+        g_gameState.savedLocationSet = 1;
+        g_gameState.savedMapId = flags->savePoint.mapId;
+        g_gameState.savedAreaId = flags->savePoint.areaId;
+        g_gameState.savedObjectId = flags->savePointObject.objectId;
+        g_gameState.savedPosition.x = static_cast<f32>(flags->savePoint.x);
+        g_gameState.savedPosition.y = static_cast<f32>(flags->savePoint.y);
+        g_gameState.savedPosition.z = static_cast<f32>(flags->savePoint.z);
+        g_gameState.savedHeading = static_cast<f32>(flags->savePoint.heading);
+        g_gameState.savedHeadingCopy = static_cast<f32>(flags->savePoint.heading);
+        g_gameState.targetMapId = map->transition.mapId;
+        g_gameState.targetAreaId = map->transition.areaId;
+        g_gameState.targetPosition = g_gameState.pointPosition;
+        g_gameState.targetHeading = g_gameState.overviewHeading;
+        g_gameState.targetHeadingCopy = g_gameState.overviewHeading;
     }
 }
 }

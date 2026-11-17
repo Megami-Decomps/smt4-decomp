@@ -1,6 +1,6 @@
 /* NON_MATCHING: the barrier (mcr c7, c10, 5) now matches via nn/svc.h; retail keeps the sound-system address in r7 from entry and the status pointer in r5/r6 (ldrb [r5,#25]) where armcc folds it into the duck base here. */
 #include "common.h"
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "nn/svc.h"
 
 /* The sound thread object the engine reaches through _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv: its two request words. */
@@ -10,21 +10,8 @@ struct SoundThreadView {
     u32 requestHigh;
 };
 
-/* Apocalypse's allocation pointer lies past the shared IV sound-system definition. */
-struct SoundSystemMemoryView {
-    u8 unk000[0x4cc];
-    void *buffer;
-};
-
-/* The duck state and the sound layer's status block, which follows it. */
-struct SoundControl {
-    AsdSndDuck duck;
-    AsdSndStatusApoc status;
-};
-
 extern "C" {
-extern SoundSystemMemoryView g_asdSoundSystem;
-extern SoundControl g_asdSoundDuck;
+extern AsdSndControlA g_asdSoundDuck;
 
 void FUN_00150784(void);
 void FUN_00141b24(void);
@@ -83,10 +70,10 @@ extern "C" void FUN_00139518(void)
             FUN_00152bf8(asdSoundObjectAt(i));
         }
         g_asdSoundDuck.status.ready = 0;
-        g_asdSoundDuck.status.unk14 = -1;
+        g_asdSoundDuck.status.section.unk08 = -1;
     }
-    if (g_asdSoundSystem.buffer != NULL) {
-        asdMemFree(g_asdSoundSystem.buffer);
+    if (g_asdSoundSystem.workBuffer != NULL) {
+        asdMemFree(g_asdSoundSystem.workBuffer);
     }
     sndSystemFinalize();
     sndSystemShutdown();

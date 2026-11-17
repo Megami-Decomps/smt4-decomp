@@ -13,14 +13,7 @@ struct QuestRuntimeFlagBlock {
     u8 flagBytes[0x200];
     QuestRuntimeStatus quests[400];
 };
-struct QuestRuntimeDefinition {
-    u8 prefix[6];
-    u8 kind;
-    u8 flags;
-};
 typedef char QuestRuntimeStatusLayoutCheck[
     sizeof(QuestRuntimeStatus) == 4 &&
-    offsetof(QuestRuntimeFlagBlock, quests) == 0x200 &&
-    offsetof(QuestRuntimeDefinition, kind) == 6 &&
-    offsetof(QuestRuntimeDefinition, flags) == 7 ? 1 : -1];
+    offsetof(QuestRuntimeFlagBlock, quests) == 0x200 ? 1 : -1];
 #endif

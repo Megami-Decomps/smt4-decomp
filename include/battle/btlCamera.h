@@ -7,35 +7,59 @@
 
 #define BTL_FLAG_NO_ENCOUNT 0x80000 /* BtlCamera.flags: random encounters are suppressed */
 
-/* The battle camera's work block (Shin Megami Tensei IV; g_btlMain at 0x4342c8 points at it). */
+struct BtlCameraVector3 {
+    f32 x, y, z;
+};
+
+/* The battle camera's work block (Shin Megami Tensei IV; g_btlMain at 0x4342c8 points at it, 0x848 bytes). */
 typedef struct BtlCamera {
-    union {
-        /* 0x000 */ u8 unk000[0x634];
-        /* 0x000 */ f32 cameraPosition[3];
-        struct {
-            u8 unk000[0xC];
-            /* 0x00C */ f32 vectors[2][3];
-            /* 0x024 */ s32 value;
-        } cameraEditor;
-        struct {
-            u8 prefix[0x2C];
-            f32 scalar;
-            f32 delta;
-        } cameraTransition;
-    };
+    /* 0x000 */ f32 cameraPosition[3];
+    /* 0x00C */ f32 vectors[2][3];   /* the two editor poses (btlCameraEditorInitializeList) */
+    /* 0x024 */ s32 editorValue;     /* nonzero: the editor's pose applies (FUN_0024082c) */
+    /* 0x028 */ u8 unk028[0x538];
+    /* 0x560 */ f32 debugScalar;     /* the attack camera debug menu's value */
+    /* 0x564 */ u8 unk564[4];
+    /* 0x568 */ BtlCameraVector3 offset; /* z: the camera distance */
+    /* 0x574 */ f32 centerX;
+    /* 0x578 */ u8 unk578[8];
+    /* 0x580 */ BtlCameraVector3 direction;
+    /* 0x58C */ u8 unk58C[0xC];
+    /* 0x598 */ f32 distance;        /* along direction; the depth the layer widths scale by */
+    /* 0x59C */ u8 unk59C[4];
+    /* 0x5A0 */ f32 yaw;
+    /* 0x5A4 */ u8 unk5A4[4];
+    /* 0x5A8 */ f32 fov;             /* degrees */
+    /* 0x5AC */ u8 unk5AC[0x88];
     /* 0x634 */ u32 flags;
     /* 0x638 */ u8 unk638[0x128];
     /* 0x760 */ s32 unk760;
 } BtlCamera;
-typedef char BtlCameraCameraPositionLayoutCheck[
-    offsetof(BtlCamera, cameraPosition) == 0 && offsetof(BtlCamera, flags) == 0x634 &&
+typedef char BtlCameraLayoutCheck[
+    offsetof(BtlCamera, vectors) == 0xC && offsetof(BtlCamera, editorValue) == 0x24 &&
+    offsetof(BtlCamera, debugScalar) == 0x560 && offsetof(BtlCamera, offset) == 0x568 &&
+    offsetof(BtlCamera, centerX) == 0x574 && offsetof(BtlCamera, direction) == 0x580 &&
+    offsetof(BtlCamera, distance) == 0x598 && offsetof(BtlCamera, yaw) == 0x5A0 &&
+    offsetof(BtlCamera, fov) == 0x5A8 && offsetof(BtlCamera, flags) == 0x634 &&
     offsetof(BtlCamera, unk760) == 0x760 ? 1 : -1];
-typedef char BtlCameraCameraEditorOffsetsCheck[
-    offsetof(BtlCamera, cameraEditor.vectors) == 0xC &&
-    offsetof(BtlCamera, cameraEditor.value) == 0x24 ? 1 : -1];
-typedef char BtlCameraCameraTransitionOffsetsCheck[
-    offsetof(BtlCamera, cameraTransition.scalar) == 0x2C &&
-    offsetof(BtlCamera, cameraTransition.delta) == 0x30 ? 1 : -1];
+
+struct BtlCameraA;
+
+/* The camera module's statics that follow its camera pointer (Shin Megami Tensei IV: g_btlMain at 0x4342c8;
+ * Apocalypse: g_btlCamera at 0x571508). Retail reaches them through the pointer's symbol, so the units that
+ * touch them declare that symbol with this type instead of including battle/BtlGlobals.h: the pointer users
+ * need the plain pointer declaration to keep their code. */
+typedef struct BtlCameraStatics {
+    /* 0x00 */ void *camera;              /* BtlCamera / BtlCameraA */
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ f32 transitionTarget;      /* the global transition's target (btlStartGlobalTransition) */
+    /* 0x18 */ u8 unk18[0x10];
+    /* 0x28 */ s32 routingMode;           /* 1, 2: vector transitions route through the camera origin */
+    /* 0x2C */ f32 scalar;
+    /* 0x30 */ f32 scalarDelta;
+} BtlCameraStatics;
+typedef char BtlCameraStaticsLayoutCheck[
+    offsetof(BtlCameraStatics, transitionTarget) == 0x14 && offsetof(BtlCameraStatics, routingMode) == 0x28 &&
+    offsetof(BtlCameraStatics, scalar) == 0x2C && offsetof(BtlCameraStatics, scalarDelta) == 0x30 ? 1 : -1];
 
 class CameraBackend {
 public:
@@ -52,10 +76,6 @@ struct BtlCameraJobA {
     /* 0x00 */ u32 ownerHandle;
     /* 0x04 */ u8 unk04[0x64];
     /* 0x68 */ u32 drawJob;
-};
-
-struct BtlCameraVector3 {
-    f32 x, y, z;
 };
 
 struct BtlCameraOrientationTransition {

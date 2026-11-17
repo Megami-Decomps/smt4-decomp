@@ -278,14 +278,14 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
                 EditorCameraState *camera = reinterpret_cast<EditorCameraState *>(state);
                 EditorVectorWords *saved = mode == 0 ? &camera->positionA : &camera->positionB;
                 EditorVectorWords *current = reinterpret_cast<EditorVectorWords *>(
-                    mode == 0 ? g_btlMain->cameraEditor.vectors[0] : g_btlMain->cameraEditor.vectors[1]);
+                    mode == 0 ? g_btlMain->vectors[0] : g_btlMain->vectors[1]);
                 current->x = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 0));
                 current->y = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 1));
                 current->z = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 2));
                 *saved = *current;
                 *reinterpret_cast<EditorVectorWords *>(g_btlMain->cameraPosition) = *current;
             } else if (mode == 2) {
-                g_btlMain->cameraEditor.value = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(list), 0);
+                g_btlMain->editorValue = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(list), 0);
             }
             return 0;
         }

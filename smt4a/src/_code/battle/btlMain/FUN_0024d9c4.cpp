@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "code/Code0018_Smt4a.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -19,8 +20,6 @@ int FUN_003f0f58(unsigned int *);
 typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
-
-extern unsigned char g_btlMain; /* 0x573920 */
 
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: jobIsValid. */
@@ -310,7 +309,7 @@ LAB_0024dd20:
           param_1[0x1353] = 0;
           *(unsigned char *)(param_1 + 0x1154) = 0;
           param_1[0x1155] = 0xffffffff;
-          param_1[0x1339] = (*(unsigned int *)((unsigned char *)&g_btlMain + 0x20));
+          param_1[0x1339] = (*(unsigned int *)((unsigned char *)reinterpret_cast<unsigned char *>(&g_btlMain) + 0x20));
           param_1[0x133d] = 0xffffffff;
           param_1[0x133b] = 0;
           param_1[0x133c] = 0;

@@ -2,14 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int CONCAT44(...);
 int randomGetNormalizedFloat(void);
-int btlFindEntryBlockByMemberId(...);
 int __hardfp_atan2f(void);
-int btlMainFindEntryByListedId(unsigned char *, int);
 int asdAnimGetTrackLastFrame(unsigned int, int);
 int mathSinFixedAngle(void);
 int FUN_003c14e8(...);
@@ -23,8 +22,6 @@ int __aeabi_idivmod(int, double);
 typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
-
-extern int g_btlMain; /* 0x4342c8 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -117,12 +114,12 @@ unsigned int FUN_001b7a0c(void)
         temp_v1 = 0;
       }
       pbVar4 = pbVar1;
-      btlFindEntryBlockByMemberId(pbVar1,(int)*(short *)(temp_v10 + 0x62));
+      btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(pbVar1), (int)*(short *)(temp_v10 + 0x62));
       if ((pbVar4 != (unsigned char *)0x0) && ((*(unsigned short *)(pbVar4 + 0xfa) & 0x10) != 0)) {
         temp_v2 = *(int *)(temp_v10 + 0x98) + 1;
         *(unsigned int *)(temp_v10 + 0x98) = temp_v2;
         if (((*pbVar4 & 3) != 0) && (*(unsigned int *)(temp_v10 + 0x9c) <= temp_v2)) {
-          btlMainFindEntryByListedId(pbVar1,(int)*(short *)(temp_v10 + 0x62));
+          btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(pbVar1), (int)*(short *)(temp_v10 + 0x62));
           temp_v3 = randBetween(2,6);
           *(int *)(temp_v10 + 0x9c) = temp_v3 * 0x1e;
           *(unsigned int *)(temp_v10 + 0x98) = 0;
@@ -152,7 +149,7 @@ unsigned int FUN_001b7a0c(void)
           *(unsigned int *)(temp_v10 + 0x110) = 0;
           *(unsigned int *)(temp_v10 + 0x4c) = 0;
           temp_v1 = reinterpret_cast<int>(btlGetMainState());
-          btlFindEntryBlockByMemberId(temp_v1,(int)*(short *)(temp_v10 + 0x62));
+          btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v1), (int)*(short *)(temp_v10 + 0x62));
           if (temp_v1 != 0) {
             if ((*(unsigned short *)(temp_v1 + 0xfa) & 0x180) != 0) {
               reinterpret_cast<int>(btlGetMainState());

@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 struct DrawTarget;
 struct DrawTargetVtbl {
@@ -14,9 +15,7 @@ struct DrawHolder {
 };
 
 extern "C" {
-
 extern DrawHolder *DAT_00588e2c;
-extern RenderCtxA *g_renderCtx;
 
 u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void efctSetSpeed(f32 speed);

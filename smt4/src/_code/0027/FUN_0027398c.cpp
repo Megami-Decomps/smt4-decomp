@@ -1,5 +1,6 @@
 /* NON_MATCHING: the unused event/e%03d/e%03d.bf/.mbm path buffers are restored; only the state-4 store sharing, saved-register numbering (r5/r6) and frame setup order differ. */
 #include "addon/AocMain.h"
+#include "quest_center/QuestRecord.h"
 #include "quest_center/QuestRuntime.h"
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
@@ -18,7 +19,6 @@ typedef char QuestAddonScriptWorkOffsets[offsetof(QuestAddonScriptWork, commands
     offsetof(QuestAddonScriptWork, script) == 0x14 ? 1 : -1];
 
 extern "C" {
-const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 id);
 s32 aocPackageGrantsItem(AocSystem *system, u16 id, u32 kind);
 void aocQueueType07(AocSystem *system, u32 id, void **output, u32 flags);
 void aocQueueType08(AocSystem *system, u32 id, void **output, u32 flags);
@@ -31,29 +31,20 @@ s32 scrRunOpcodesStub(ScriptRunState *script);
 
 u32 FUN_0027398c(QuestAddonScriptWork *work)
 {
-    // Script package and entry fields extend beyond the shared quest definition prefix.
-    struct ScriptDefinitionView {
-        u8 unk000[0x148];
-        u16 package;
-        u16 entry;
-    };
-    typedef char ScriptDefinitionOffsets[offsetof(ScriptDefinitionView, package) == 0x148 &&
-        offsetof(ScriptDefinitionView, entry) == 0x14a ? 1 : -1];
     switch (work->state) {
     case 0: {
-        const ScriptDefinitionView *definition = reinterpret_cast<const ScriptDefinitionView *>(
-            dataTable1bOr1cGetRecord(rosterGetLeaderId()));
-        if (!definition || !definition->package) {
+        const QuestRecord *definition = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+        if (!definition || !definition->event.package) {
             work->state = 3;
             return 0;
         }
         // The resource paths were formatted for a debug trace and never used.
         char commandPath[128];
         char messagePath[128];
-        u16 package = definition->package;
+        u16 package = definition->event.package;
         textFormatBuffer(commandPath, "event/e%03d/e%03d.bf", package, package);
         textFormatBuffer(messagePath, "event/e%03d/e%03d.mbm", package, package);
-        if (aocPackageGrantsItem(g_aocSystem, definition->package, 1)) {
+        if (aocPackageGrantsItem(g_aocSystem, definition->event.package, 1)) {
             aocQueueType07(g_aocSystem, package, &work->commands, 0);
             aocQueueType08(g_aocSystem, package, &work->messages, 0);
             work->state = 1;
@@ -66,8 +57,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
         if (!work->commands || !work->messages) {
             return 0;
         }
-        const ScriptDefinitionView *definition = reinterpret_cast<const ScriptDefinitionView *>(
-            dataTable1bOr1cGetRecord(rosterGetLeaderId()));
+        const QuestRecord *definition = dataTable1bOr1cGetRecord(rosterGetLeaderId());
         if (!definition) {
             work->state = 3;
         }
@@ -75,7 +65,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
         work->script = scrScriptProcessCreate(work->commands, work->messages);
         work->script->mode = 2;
         char entryName[128];
-        textFormatBuffer(entryName, "e%03d_%02d", definition->package, definition->entry);
+        textFormatBuffer(entryName, "e%03d_%02d", definition->event.package, definition->event.entry);
         u32 entry = tableGroupFindEntryIndex(work->commands, entryName);
         scrScriptProcessStartEntry(work->script, entry);
         work->state = 2;

@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int randRange(int);
 int FUN_00246134(...);
 int FUN_002463e8(...);
 int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);
-int btlMainFindEntryByListedId(unsigned int *, unsigned int);
 int dataTable40FindById(void);
 int VectorSignedToFloat(...);
 
@@ -146,9 +146,9 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
         return;
       }
       puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-      btlMainFindEntryByListedId(puVar6,temp_v20);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar6), temp_v20);
       puVar7 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-      btlMainFindEntryByListedId(puVar7,param_5);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar7), param_5);
       temp_v5 = reinterpret_cast<int>(btlGetMainState());
       btlEntryBuildSummary(temp_v14,temp_v5,puVar6);
       temp_v1 = temp_v15;

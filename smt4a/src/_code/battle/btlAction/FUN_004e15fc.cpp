@@ -1,15 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e15fc` (_code @ 0x4e15fc, 0x938 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-int btlFindEntryBlockByMemberId(...);
 
 int dataTable04FindById(int);
 int sysMemClear(int *, int);
 int btlEntryBuildSummary(unsigned char [28], int, unsigned int);
-int btlMainFindEntryByListedId(int, int);
 int FUN_0047fa50(...);
 int btlUIClearWorkTables(...);
 int FUN_004aba84(unsigned int, unsigned int *, unsigned int, unsigned int);
@@ -224,7 +223,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
         temp_v11 = *param_1;
         puVar10 = (unsigned int *)(*(int *)(temp_v11 + 0x1ed4) + temp_v3 * 0x1d0);
         if (((puVar10[0x14] & 8) != 0) &&
-           (btlMainFindEntryByListedId(temp_v11,(int)*(short *)((int)puVar10 + 0x6a)), puVar10 = temp_v7,
+           (reinterpret_cast<int>(btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v11), (int)*(short *)((int)puVar10 + 0x6a))), puVar10 = temp_v7,
            temp_v11 != 0)) {
           temp_v6 = 0x85;
           puVar13 = param_2 + 0x51;
@@ -371,7 +370,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
         *(unsigned int *)(temp_v11 + temp_v15) = *(unsigned int *)(temp_v11 + temp_v16);
         if (temp_v13 == 0) {
           temp_v11 = *param_1;
-          btlFindEntryBlockByMemberId(temp_v11,(int)*(short *)(*(int *)(temp_v11 + 0x1ed4) + temp_v3 * 0x1d0 + 0x6a));
+          btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(temp_v11), (int)*(short *)(*(int *)(temp_v11 + 0x1ed4) + temp_v3 * 0x1d0 + 0x6a));
           if ((temp_v11 != 0) && ((*(unsigned short *)(temp_v11 + 0x110) & 0x10) == 0)) {
             *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v15) = 0x4c4c4cff;
             temp_v3 = temp_v3 + 1;

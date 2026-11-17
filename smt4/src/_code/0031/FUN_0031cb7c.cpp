@@ -9,7 +9,7 @@ extern s32 scrGetArg(s32 index);
 
 u32 FUN_0031cb7c(void)
 {
-    scrSetResult((dataTable00FindById(scrGetArg(0))->flags >> 8) & 1);
+    scrSetResult((dataTable00FindById((u16)scrGetArg(0))->flags >> 8) & 1);
     return 1;
 }
 

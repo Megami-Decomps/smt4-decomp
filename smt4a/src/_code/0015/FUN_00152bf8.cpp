@@ -1,15 +1,8 @@
 /* NON_MATCHING: list-walk outlining (retail puts the advance steps and the head-removal arm out of line) and neighbor-pointer reloads differ; base addressing and the scoped lock now match. */
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 
-/* Apocalypse's status suffix lies past the shared IV sound-system definition. */
-struct ApocalypseSoundStatusView {
-    u8 prefix[0x12FC];
-    AsdSndStatusApoc status;
-};
-
 extern "C" {
-extern ApocalypseSoundStatusView g_asdSoundSystem;
 void nn_snd_CTR_FreeVoice(u32 voice);
 void asdMemFree(void *memory);
 }
@@ -51,8 +44,8 @@ extern "C" void FUN_00152bf8(AsdSndObject *object)
         return;
     }
     /* Apocalypse's critical section begins at status + 0x0c. */
-    AsdSndStatusApoc *status = &g_asdSoundSystem.status;
-    ScopedCriticalLock lock(static_cast<void *>(&status->unk08[4]));
+    AsdSndStatusApoc *status = &g_asdSoundSystem.control.status;
+    ScopedCriticalLock lock(static_cast<void *>(&status->section));
     if (asdContainsSoundObject(status, object)) {
         asdUnlinkSoundObject(status, object);
     }

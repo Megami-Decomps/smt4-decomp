@@ -1,11 +1,7 @@
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 extern "C" {
-typedef struct UnitRecord {
-    u8 unk00[0x46];
-    u16 tableId;
-} UnitRecord;
 extern int dataTableGetEntry0102Value(u16 id);
-extern UnitRecord *gameGetUnitRecord(s32 unit);
 
 /* Compares the second handle against the first: valid after invalid, then by table value. */
 s32 FUN_001a81a8(s32 *b, s32 *a)
@@ -20,10 +16,10 @@ s32 FUN_001a81a8(s32 *b, s32 *a)
         if (*a < 0) {
             result = -1;
         } else {
-            UnitRecord *unitB = gameGetUnitRecord(*b);
-            UnitRecord *unitA = gameGetUnitRecord(*a);
-            s32 valueB = dataTableGetEntry0102Value(unitB->tableId);
-            s32 valueA = dataTableGetEntry0102Value(unitA->tableId);
+            StatBlock *unitB = gameGetUnitRecord(*b);
+            StatBlock *unitA = gameGetUnitRecord(*a);
+            s32 valueB = dataTableGetEntry0102Value(unitB->id);
+            s32 valueA = dataTableGetEntry0102Value(unitA->id);
             result = valueB - valueA;
         }
     }

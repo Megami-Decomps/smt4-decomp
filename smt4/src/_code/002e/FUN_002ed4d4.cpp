@@ -1,20 +1,6 @@
-#include "common.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
-
-typedef struct MessageBox {
-    /* 0x000 */ u8 unk000[4];
-    /* 0x004 */ u32 message;
-    /* 0x008 */ u8 unk008[4];
-    /* 0x00C */ u32 flags;
-    /* 0x010 */ u8 unk010[0xA00];
-    /* 0xA10 */ u8 unkA10;
-} MessageBox;
-
-typedef struct ScriptOwner {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ MessageBox *box;
-} ScriptOwner;
 
 extern u32 scrGetCommandOwner(void);
 extern s32 btlTalkGetPortraitCode(void);
@@ -23,10 +9,9 @@ extern s32 scrGetCommandFrame(void);
 extern u32 scrGetArg(s32 index);
 extern void msgBoxFlagsSetBit7(u32 message);
 
-extern ScriptOwner g_messageMain;
 u32 FUN_002ed4d4(void)
 {
-    MessageBox *box = g_messageMain.box;
+    MessageWindow *window = g_messageMain.window;
     s32 raw = btlTalkGetPortraitCode();
     s32 style = raw == 0x14 ? 5 : raw;
     u32 first;
@@ -39,9 +24,9 @@ u32 FUN_002ed4d4(void)
     third = scrGetCommandFrame();
     result = messageWindowShowOrPoll(first, second, third, style, 0, 0);
     if (scrGetCommandFrame() == 0) {
-        msgBoxFlagsSetBit7(box->message);
-        box->unkA10 = 0;
-        box->flags |= 0x20;
+        msgBoxFlagsSetBit7(window->box);
+        window->displayEnabled = 0;
+        window->flags |= 0x20;
     }
     return result;
 }

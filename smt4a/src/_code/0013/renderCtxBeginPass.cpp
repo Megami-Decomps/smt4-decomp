@@ -1,17 +1,16 @@
 /* If the pending-draw check reports 1 and the flag at g_titleFlags+1 is set, starts a draw pass
  * on the draw context. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
-
 int FUN_0017dd80(void);
 int renderTargetClear(int a, int b);
 int FUN_00144ab4(int arg);
 int renderCtxResetFrameState(RenderCtxA *ctx);
 
 extern s8 g_titleFlags[];
-extern RenderCtxA *g_renderCtx;
 
 extern int gxIsStereoscopic3dEnabled(void);
 

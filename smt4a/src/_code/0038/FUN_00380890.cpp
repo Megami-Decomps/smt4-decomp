@@ -1,8 +1,8 @@
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-void *gameGetPlayerData(void);
-s32 FUN_002b4e7c(void *player);
+s32 FUN_002b4e7c(PlayerDataA *player);
 void scrSetResult(s32 result);
 }
 

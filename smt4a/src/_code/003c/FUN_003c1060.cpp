@@ -1,14 +1,13 @@
+#include "ui/MessageMainA.h"
 #include "shard/Shard003C.h"
 #include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
-extern MessageGlobalsA g_messageMain;
-
 void FUN_003c1060(void)
 {
-    if (g_messageMain.panel != NULL) {
-        g_messageMain.panel->unk30 = 1;
+    if (g_messageMain.banner != NULL) {
+        g_messageMain.banner->unk0030 = 1;
     }
 }
 

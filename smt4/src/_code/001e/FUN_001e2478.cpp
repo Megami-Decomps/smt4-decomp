@@ -1,11 +1,10 @@
 /* NON_MATCHING: direction intermediate stores are folded, and scene-position snapshots use integer copies. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 #include "gamedata/DataTableAccess_AocTable23.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
-extern LmapScene *g_lmapScene;
 u32 table23FindRecordByKey(s32 map, s32 group, u32 point);
 f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
 
@@ -37,7 +36,7 @@ void FUN_001e2478(s32 startGroup, u32 startPoint, s32 targetGroup, u32 targetPoi
         work->start.y = point->y;
         work->start.z = point->z;
     } else {
-        work->start = *reinterpret_cast<const MapVector *>(g_lmapScene->transform.position);
+        work->start = g_lmapScene->pose.position;
     }
     const WaypointView *target = reinterpret_cast<const WaypointView *>(
         reinterpret_cast<const Table23Record *>(dataTableGetRecord23(table23FindRecordByKey(work->map, targetGroup, targetPoint))));
@@ -57,12 +56,12 @@ void FUN_001e2478(s32 startGroup, u32 startPoint, s32 targetGroup, u32 targetPoi
     work->duration = static_cast<s32>(distance / work->speed);
     LmapScene *scene = g_lmapScene;
     MapVector start = work->start;
-    scene->transform.position[0] = start.x;
-    scene->transform.position[1] = start.y;
-    scene->transform.position[2] = start.z;
-    scene->transform.positionSnapshotA[0] = start.x;
-    scene->transform.positionSnapshotA[1] = start.y;
-    scene->transform.positionSnapshotA[2] = start.z;
+    scene->pose.position.x = start.x;
+    scene->pose.position.y = start.y;
+    scene->pose.position.z = start.z;
+    scene->pose.targetPosition.x = start.x;
+    scene->pose.targetPosition.y = start.y;
+    scene->pose.targetPosition.z = start.z;
     MovementView *current = reinterpret_cast<MovementView *>(g_lmapMainState);
     if (current->mode != 5) {
         current->frame = 0;

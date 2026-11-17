@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail re-queries the widget's counts at each use (the total is fetched twice, the shown count twice) and keeps the clip stack address in r7/fp differently; the draw sequence, ratios and clip-stack settings are the same. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -7,7 +8,6 @@ namespace {
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 recordGetModeForId(s32 id);
 s32 widgetSubCallIfVisible(void *widget);
 s32 uiSearchSecondary(void *widget);

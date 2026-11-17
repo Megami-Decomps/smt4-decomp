@@ -1,5 +1,4 @@
-#include "ui/MessageMain.h"
-extern "C" MessageGlobalsA g_messageMain;
+#include "ui/MessageMainA.h"
 
 struct MessageCounterTransition {
     u8 unk000[0x170];
@@ -17,7 +16,7 @@ s32 FUN_00480c28(void);
 // Animate the banner counter toward the current total or by a supplied delta.
 u32 messageCounterBeginTransition(u32 value, s32 useTotal)
 {
-    MessageCounterTransition *transition = (MessageCounterTransition *)g_messageMain.panel;
+    MessageCounterTransition *transition = (MessageCounterTransition *)g_messageMain.banner;
     if (useTotal == 0) {
         transition->duration = 20;
         transition->state = 3;

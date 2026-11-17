@@ -1,10 +1,10 @@
 #include "shard/Shard0032.h"
+#include "gamedata/Table00Lookup.h"
 #include "gamedata/Table00.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include <string.h>
 
 extern "C" {
-Table00RecordA *dataTable00FindById(u32 id);
 void sysMemClear(void *data, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 

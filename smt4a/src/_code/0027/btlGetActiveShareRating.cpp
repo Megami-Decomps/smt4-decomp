@@ -2,9 +2,9 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-void *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 group);
 
 /* Rates the share of live, flagged roster records against the battle's total: 5 when there is no
  * battle or group or the share is at least 70%, 4 from 40%, else 3. */
@@ -13,7 +13,7 @@ u32 btlGetActiveShareRating(void)
     if (btlGetMainState() != NULL) {
         s16 group = btlGetMainState()->motionGroup.group;
 
-        if (btlFindEntryBlockByMemberId(btlGetMainState(), group) != NULL) {
+        if (reinterpret_cast<void *>(btlFindEntryBlockByMemberId(btlGetMainState(), group)) != NULL) {
             s32 percent = 0;
             s16 total = btlGetMainState()->unk1EC0;
             s32 count = 0;

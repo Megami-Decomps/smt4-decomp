@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the row-independent math into s16..s23 differently and shares the row draw call across the three layout cases (this version merges the two column-count cases into one); the same calls and floats. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
@@ -49,7 +50,6 @@ struct FixedRect {
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void FUN_00164034(PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomLeft, PanelColor *bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_001692d4(void);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the list sub-object comes from the one-instruction accessor questUiGetList (inlined by armlink, config/inlined.txt) and is passed to resourceRunOperationIfUnblocked; the remaining differences are armcc keeping the list in r7 and the offset in r6 (retail the reverse) plus a nop armcc emits before that call (151 rows against 150). */
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 #include "game/GameStateA.h"
 #include "shard/Shard0031.h"
 #include "code/Code002a_VariantA.h"
@@ -34,19 +35,12 @@ struct QuestUiFlags {
     /* 0x44 */ u8 altRow;
 };
 
-/* A party/model record (observed field). */
-struct EntryKindRecord {
-    /* 0x0 */ u8 unk0[6];
-    /* 0x6 */ u8 kind;
-};
-
 extern "C" {
 
 extern QuestUi *g_uiQuest;
 
 void sysPlaySe(u32 id);
 void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
-EntryKindRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 resourceRunOperationIfUnblocked(void *list);
 void *questUiGetList(QuestUiLower *lower);
 s32 partyEntryFlagsBit3(u32 id);
@@ -61,7 +55,7 @@ void FUN_0023ff10(void)
     u32 id;
     s32 pageOffset;
     s32 row;
-    EntryKindRecord *record;
+    QuestRecordA *record;
 
     if (ui->detailView != 0) {
         if (g_gameState.alternateNaviMap != 0) {

@@ -1,10 +1,10 @@
 #include "ui/SpriteIndicator.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 sprite);
 void efctSetSpeed(f32 speed);
 

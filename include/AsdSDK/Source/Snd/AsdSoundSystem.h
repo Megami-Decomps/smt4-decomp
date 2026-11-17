@@ -56,7 +56,9 @@ typedef struct AsdSndSlotC {
 typedef struct AsdSndAuxSlot {
     /* 0x00 */ u8 heap[0x10];         /* nw::snd::SoundHeap */
     /* 0x10 */ void *heapBase;        /* the heap's buffer, NULL until it is created */
-    /* 0x14 */ u8 unk14[0x14];
+    /* 0x14 */ u8 unk14[0xC];
+    /* 0x20 */ s32 handle;            /* nw::snd::SoundHandle, 0 when free */
+    /* 0x24 */ u8 unk24[4];
     /* 0x28 */ void *heapBuffer;      /* what the heap manages */
     /* 0x2c */ s32 savedState;        /* SoundHeap::SaveState result */
     /* 0x30 */ u8 unk30[4];
@@ -187,15 +189,22 @@ typedef struct AsdSndStatus {
     /* 0x17 */ s8 hasStream;     /* a sound stream is loaded */
 } AsdSndStatus;
 
+/* An nn::os::CriticalSection as the sound layer constructs and tears it down (0xc bytes). */
+typedef struct AsdSndCriticalSection {
+    /* 0x0 */ u32 unk00;
+    /* 0x4 */ u32 unk04;
+    /* 0x8 */ s32 unk08;         /* -1 while not initialized */
+} AsdSndCriticalSection;
+
 /* Apocalypse: the sound layer's status block, which follows the duck state (0x1c bytes in). */
 typedef struct AsdSndStatusApoc {
     /* 0x00 */ struct AsdSndObject *objects; /* head of the list of live sound objects */
     /* 0x04 */ s32 objectCount;
-    /* 0x08 */ u8 unk08[0xc];
-    /* 0x14 */ s32 unk14;        /* reset to -1 when the sound layer is shut down */
+    /* 0x08 */ s32 voiceCount;   /* voices of the live objects, recounted by the update */
+    /* 0x0c */ AsdSndCriticalSection section; /* guards the object list */
     /* 0x18 */ u8 unk18;
     /* 0x19 */ s8 ready;         /* the sound layer is up */
-    /* 0x1a */ u8 unk1a;
+    /* 0x1a */ u8 stepPending;   /* the update advances the fades this frame */
     /* 0x1b */ u8 hasStream;     /* a sound stream is loaded */
 } AsdSndStatusApoc;
 

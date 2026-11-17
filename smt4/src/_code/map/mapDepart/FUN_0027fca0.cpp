@@ -1,12 +1,11 @@
 /* NON_MATCHING: pool order and loads now match; only the callee-saved VFP registers of the three coordinates differ (retail x/y/z in s18/s17/s16) with the jitter adds commuted. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
 
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
 extern s32 DAT_00447538;
-extern LmapScene *g_lmapScene;
 
 // Alternate one of three pairs of player effects at randomized positions above the actor.
 void FUN_0027fca0(s32 variant)
@@ -14,7 +13,7 @@ void FUN_0027fca0(s32 variant)
     ++DAT_00447538;
     DAT_00447538 &= 1;
     SoundActorQueuePosition position;
-    position = *reinterpret_cast<const SoundActorQueuePosition *>(g_lmapScene->transform.position);
+    position = *reinterpret_cast<const SoundActorQueuePosition *>(&g_lmapScene->pose.position);
     position.y += 140.0f;
     position.y += randBetween(-10, 10);
     position.x += randBetween(-15, 15);

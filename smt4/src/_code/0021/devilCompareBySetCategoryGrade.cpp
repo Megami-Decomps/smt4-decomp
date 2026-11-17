@@ -1,15 +1,8 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
 
-/* The sort keys of a demon record. */
-typedef struct DevilSortKeys {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u8 category;
-    /* 0x03 */ u8 grade;
-} DevilSortKeys;
-
-DevilSortKeys *devilGetRecord(u32 id);
 u32 itemGetFlagBit1(u16 id);
 
 /* qsort comparator over demon IDs: by the sets itemGetFlagBit1 returns (a superset sorts first), then category, grade (descending) and ID. */
@@ -25,11 +18,11 @@ int devilCompareBySetCategoryGrade(const u16 *left, const u16 *right)
     if ((leftSet & ~rightSet) != 0) {
         return 1;
     }
-    DevilSortKeys *a = devilGetRecord(*left);
-    DevilSortKeys *b = devilGetRecord(*right);
-    result = a->category - b->category;
+    DevilRecord *a = devilGetRecord(*left);
+    DevilRecord *b = devilGetRecord(*right);
+    result = a->race - b->race;
     if (result == 0) {
-        result = b->grade - a->grade;
+        result = b->level - a->level;
         if (result == 0) {
             result = a->id - b->id;
         }

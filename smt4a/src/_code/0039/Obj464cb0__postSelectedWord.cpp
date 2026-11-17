@@ -1,11 +1,11 @@
 /* NON_MATCHING: control flow and the command pair writes match retail; retail forms the render-state address as (ctx + 0xA0) + 0x11F8 (count) + 4096 + 512 (entry) through a pooled 0x11F8 offset, which the typed stackG path does not reproduce. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 void FUN_003c8538(s32 arg);
-extern RenderCtxA *g_renderCtx;
 extern u32 *g_modelCommandBuffer; /* model command buffer */
 extern s32 g_modelCommandWordCount;  /* words used in the buffer */
 }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail evaluates the two target kinds (player, slot unit) with the combination logic inlined twice in a different order and keeps the status mask in a packed local; the result is the same. */
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -26,17 +27,6 @@ typedef struct SlotUnit {
     /* 0x60 */ u16 flags;               /* 0x400/0x402: cannot be healed */
 } SlotUnit;
 
-typedef struct PlayerUnit {
-    /* 0x00 */ u8 unk00[0x1E];
-    /* 0x1E */ s16 maxMp;
-    /* 0x20 */ u8 unk20[0xA];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ s16 mp;
-    /* 0x2E */ u8 unk2e[0x30];
-    /* 0x5E */ u16 flags;
-} PlayerUnit;
-
-PlayerUnit *gameGetPlayerData(void);
 SlotUnit *gameGetSlotRecord(s32 index);
 SlotUnit *gameGetSaveSlotData(void);
 SlotUnit *btlMainGetUnk14(void);
@@ -108,12 +98,12 @@ u32 FUN_00400284(s32 unit, s32 fromSave, UseItem *item, u32 statusMask)
             can |= 4;
         }
     } else {
-        PlayerUnit *player = gameGetPlayerData();
+        PlayerDataA *player = gameGetPlayerData();
 
-        if ((gives & 1) != 0 && (player->flags & 2) == 0 && (u32)FUN_002b4e7c() != (u16)player->hp) {
+        if ((gives & 1) != 0 && (player->ailments & 2) == 0 && (u32)FUN_002b4e7c() != (u16)player->hp) {
             can = 1;
         }
-        if ((gives & 2) != 0 && (player->flags & 2) == 0 && player->mp != player->maxMp) {
+        if ((gives & 2) != 0 && (player->ailments & 2) == 0 && player->mp != player->maxMp) {
             can |= 2;
         }
         if ((gives & 3) == 3 && (can & 3) != 0) {
@@ -122,7 +112,7 @@ u32 FUN_00400284(s32 unit, s32 fromSave, UseItem *item, u32 statusMask)
         if ((gives & 4) != 0) {
             mask &= 0xFFFF0000;
             FUN_003ff524(&mask, (item->flags & 4) != 0 ? 0x25 : (item->statusKind & 0x7F));
-            mask = (u16)mask & player->flags;
+            mask = (u16)mask & player->ailments;
             if ((u16)mask != 0) {
                 can |= 4;
             }

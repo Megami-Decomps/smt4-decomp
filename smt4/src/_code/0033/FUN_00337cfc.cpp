@@ -1,5 +1,6 @@
 /* NON_MATCHING: same instruction stream except the zero constant and the 0xfc00 mask swap r8/r9 and the last skillsB upper-six-bits update keeps its result in r2 (extra mov) in retail */
 #include "gamedata/PackedSkillSlot.h"
+#include "gamedata/DevilRecord.h"
 #include "code/Code002b.h"
 
 /* The persistent unit record the battle unit is built from. */
@@ -62,7 +63,6 @@ struct SupportEntry {
     u32 packed;
 };
 const SupportEntry *supportUnitGetEntry(s32 kind, u32 index);
-u8 *devilGetRecord(u32 id);
 
 /* Fills an ally battle unit from the persistent unit record: vitals, random or support-unit skills and cleared work fields. */
 void FUN_00337cfc(u32 unused, BattleUnit *unit, SourceUnit *source)
@@ -106,9 +106,9 @@ void FUN_00337cfc(u32 unused, BattleUnit *unit, SourceUnit *source)
             unit->skillsB[i].unk00 = randomGetUpperSixBits(source, i & 0xFF);
             i++;
         } while (i < 18);
-        const u8 *record = devilGetRecord(unit->id);
-        unit->unk14A = record[0x33];
-        u8 kind = record[5];
+        const DevilRecord *record = devilGetRecord(unit->id);
+        unit->unk14A = record->battleRace;
+        u8 kind = record->category;
         if (kind == 1) {
             unit->unk14B = 1;
         } else if (kind == 4) {

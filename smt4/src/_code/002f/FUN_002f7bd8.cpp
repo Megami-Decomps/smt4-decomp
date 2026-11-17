@@ -1,10 +1,9 @@
 #include "common.h"
 #include "script/ScriptArgs.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-void *gameGetPlayerData(void);
-s32 btlSourceGetMaxHp(void *data);
+s32 btlSourceGetMaxHp(PlayerDataIV *player);
 
 /* Script command: reports the player's maximum HP. */
 u32 FUN_002f7bd8(void)

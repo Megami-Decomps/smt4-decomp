@@ -1,16 +1,15 @@
-#include "sound/SoundSystemVolume.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
-extern SoundSystemVolumeView g_asdSoundSystem;
-void asdSnd3dObjectSetOutputVolume(SoundParameter* parameter, f32 level);
+void asdSnd3dObjectSetOutputVolume(u8 *listener, f32 level);
 
-/* Stores the level and applies it to the sound parameter while the sound layer is enabled. */
+/* Stores the output volume and forwards it to the listener while 3D sound is up. */
 void asdSnd3dSetOutputVolume(f32 level)
 {
-    SoundVolumeBlock *block = &g_asdSoundSystem.block;
-    if (block->enabled != 0) {
-        block->level = level;
-        asdSnd3dObjectSetOutputVolume(&block->parameter, level);
+    AsdSnd3dStateA *sound3d = &g_asdSoundSystem.sound3d;
+    if (sound3d->enabled != 0) {
+        sound3d->outputVolume = level;
+        asdSnd3dObjectSetOutputVolume(sound3d->listener, level);
     }
 }
 }

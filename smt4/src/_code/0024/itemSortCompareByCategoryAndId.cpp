@@ -1,13 +1,10 @@
 #include "common.h"
 #include "gamedata/ItemSortRecord.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-typedef struct SlotRecord {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 sortKey;
-} SlotRecord;
 
 typedef struct SortItem {
     /* 0x00 */ int id;
@@ -17,7 +14,6 @@ typedef struct SortItem {
 extern int idIsAbove400(int id);
 extern int itemSortCategoryFromKindRecord(int id);
 extern int recordKindRank(int id);
-extern SlotRecord *gameGetUnitRecord(int slot);
 
 /* Compare function for sorting items: by two ranks, the data row's order, the id, then the slot's sort key. */
 int itemSortCompareByCategoryAndId(SortItem *a, SortItem *b)
@@ -58,8 +54,8 @@ int itemSortCompareByCategoryAndId(SortItem *a, SortItem *b)
             if (diff == 0) {
                 diff = b->id - a->id;
                 if (diff == 0) {
-                    slotKeyA = (a->slot < 0) ? 0 : gameGetUnitRecord(a->slot)->sortKey;
-                    slotKeyB = (b->slot < 0) ? 0 : gameGetUnitRecord(b->slot)->sortKey;
+                    slotKeyA = (a->slot < 0) ? 0 : gameGetUnitRecord(a->slot)->id;
+                    slotKeyB = (b->slot < 0) ? 0 : gameGetUnitRecord(b->slot)->id;
                     diff = slotKeyB - slotKeyA;
                 }
             }

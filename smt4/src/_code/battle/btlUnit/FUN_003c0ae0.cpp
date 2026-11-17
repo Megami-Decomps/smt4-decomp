@@ -2,19 +2,7 @@
 #include "common.h"
 #include "code/Code0027.h"
 #include "gamedata/Table00Lookup.h"
-
-/* The camera/animation parameters of the action camera, read from the battle main state. */
-struct BtlCameraState {
-    /* 0x000 */ u8 unk000[0x570];
-    /* 0x570 */ f32 frameBase;
-    /* 0x574 */ u8 unk574[0x34];
-    /* 0x5A8 */ f32 fovDegrees;
-};
-
-struct BtlCameraStateB {
-    /* 0x000 */ u8 unk000[0x598];
-    /* 0x598 */ f32 distance;
-};
+#include "battle/BtlGlobals.h"
 
 /* One unit action's camera/timing record. */
 struct BtlUnitAction {
@@ -49,11 +37,9 @@ struct BtlUnitAction {
 #define ACTION_FLAG_ACTIVE 0x2
 
 extern "C" {
-extern BtlCameraState *g_btlMain;
 extern s32 DAT_00439ce8;     /* debug override of the camera kind, negative: none */
 extern u32 DAT_00439cf8;     /* action tint colour */
 
-void btlFindEntryBlockByMemberId(void *unit, s32 animation);
 s32 idSetFindSubjectIndex(void *unit, BtlUnitAction *action);
 s32 btlFindNthActiveSpecialEntry(void *unit, s32 arg);
 f32 FUN_002881bc(void);
@@ -101,21 +87,21 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
             action->unk10 = 0;
             action->unk14 = 0;
 
-            BtlCameraState *camera = g_btlMain;
-            frames = camera->frameBase;
+            BtlCamera *camera = g_btlMain;
+            frames = camera->offset.z;
             s8 kind = action->cameraKind;
-            f32 fov = camera->fovDegrees * 0.5f * 0.0055555557f * 3.1415927f;
+            f32 fov = camera->fov * 0.5f * 0.0055555557f * 3.1415927f;
             FUN_002881bc();
             frames = frames / (120.0f / fov);
             f32 speed = frames;
             if (kind != 0) {
                 if (kind == 1) {
-                    f32 distance = ((BtlCameraStateB *)camera)->distance;
+                    f32 distance = camera->distance;
                     speed = frames / distance * (distance - 15.0f);
                 } else {
                     speed = 0.1f;
                     if (kind == 2) {
-                        f32 distance = ((BtlCameraStateB *)camera)->distance;
+                        f32 distance = camera->distance;
                         speed = frames / distance * (distance - -20.0f);
                     }
                 }
@@ -127,7 +113,7 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
         s32 track = idSetFindSubjectIndex(unit, action);
         if (track < 0)
             track = 0;
-        btlFindEntryBlockByMemberId(unit, action->animation);
+        btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(unit), action->animation);
         u32 trackId = (u32)idSlotsFindEntryById(unit, *(u32 *)(unit + track * 4 + 0xC));
         asdAnimGetTrackLastFrame(trackId, 0);
         action->delay = randNextInRange(((s32)frames - 1U) & 0xFFFF);

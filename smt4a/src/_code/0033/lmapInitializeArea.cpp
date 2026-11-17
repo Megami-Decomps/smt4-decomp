@@ -101,7 +101,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
         if (handle)
             handle->owner->flags &= ~3u;
     }
-    g_gameState.departLoading = 0;
+    g_gameState.loading = 0;
     FUN_0036aa04(state);
     controllerUpdateWithIdleTimer(&state->setter);
     FUN_00297c3c();

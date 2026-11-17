@@ -1,9 +1,8 @@
 /* NON_MATCHING: Position snapshots reload their first two components through integer registers instead of retaining the retail mixed integer/VFP pair. */
 #include "map/SceneSpawn.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-extern LmapSceneA *g_lmapScene;
 extern SceneViewHeading *g_lmapView;
 u32 table23FindRecordByKey(void);
 SceneSpawnRecord *dataTableGetRecord23(u32 index);
@@ -13,17 +12,17 @@ void FUN_0033f188(void)
 {
     SceneSpawnRecord *record = dataTableGetRecord23(table23FindRecordByKey());
     LmapSceneA *scene = g_lmapScene;
-    scene->transform.position[0] = static_cast<f32>(record->x);
-    scene->transform.position[1] = static_cast<f32>(record->y);
-    scene->transform.position[2] = static_cast<f32>(record->z);
-    scene->transform.positionSnapshotA[0] = scene->transform.position[0];
-    scene->transform.positionSnapshotA[1] = scene->transform.position[1];
-    scene->transform.positionSnapshotA[2] = scene->transform.position[2];
-    scene->transform.positionSnapshotB[0] = scene->transform.position[0];
-    scene->transform.positionSnapshotB[1] = scene->transform.position[1];
-    scene->transform.positionSnapshotB[2] = scene->transform.position[2];
-    scene->transform.headingDegrees = static_cast<f32>(record->heading);
-    scene->transform.headingCopy = scene->transform.headingDegrees;
+    scene->pose.position.x = static_cast<f32>(record->x);
+    scene->pose.position.y = static_cast<f32>(record->y);
+    scene->pose.position.z = static_cast<f32>(record->z);
+    scene->pose.targetPosition.x = scene->pose.position.x;
+    scene->pose.targetPosition.y = scene->pose.position.y;
+    scene->pose.targetPosition.z = scene->pose.position.z;
+    scene->pose.previousPosition.x = scene->pose.position.x;
+    scene->pose.previousPosition.y = scene->pose.position.y;
+    scene->pose.previousPosition.z = scene->pose.position.z;
+    scene->pose.heading = static_cast<f32>(record->heading);
+    scene->pose.targetHeading = scene->pose.heading;
     g_lmapView->heading = static_cast<f32>(record->heading);
 }
 }

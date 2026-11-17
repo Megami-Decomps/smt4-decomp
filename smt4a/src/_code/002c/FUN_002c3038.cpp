@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 122 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "text/TextDraw.h"
 
 /* The movie-test job's work block: playback mode, fade, and the file list that mode 1 shows. */
@@ -15,7 +16,6 @@ struct MovieTestWork {
 typedef char MovieTestWorkOffsets[offsetof(MovieTestWork, fade) == 0x6C ? 1 : -1];
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 u32 jobGetWork(u32 handle);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

@@ -1,16 +1,15 @@
 /* NON_MATCHING: the unsigned target now loads and passes like retail (ldrh, no uxth); callee-saved register assignment for source/target/record (retail r6/r4/r5) and one native alignment NOP differ. */
 #include "shard/W6_W6Match5_DevilSort.h"
-#include "shard/PadState.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "gamedata/Table00Lookup.h"
+#include "gamedata/GamePlayerData.h"
 
 struct Table01Record;
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-PadState *gameGetPlayerData();
 u32 partyHasStoredDemon(u32 id);
 Table01Record *dataTable01FindByIdWithAoc(u16 id);
 s32 randBetween(s32 low, s32 high);
@@ -24,17 +23,17 @@ u32 btlTalkCommand_SelectTalkTarget()
     Table00Record *record = dataTable00FindById(target);
     devilGetRecord(target);
     if (target && record && (record->flags & 0x400) &&
-        gameGetPlayerData()->unk76 >= record->level && !partyHasStoredDemon(target)) {
+        gameGetPlayerData()->level >= record->level && !partyHasStoredDemon(target)) {
         scrSetResult(target);
     } else {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\Talk\\btlTalkCommand.cpp", 0x387);
         s16 *candidates = (s16 *)asdMemAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT,
                                             0, 0x962, 1);
         u16 count = 0;
-        u32 playerLevel = gameGetPlayerData()->unk76;
+        u32 playerLevel = gameGetPlayerData()->level;
         s32 high = source->level;
         if (playerLevel <= (u32)high) {
-            high = gameGetPlayerData()->unk76;
+            high = gameGetPlayerData()->level;
         }
         s32 span = high / 2;
         if (span < 10) {

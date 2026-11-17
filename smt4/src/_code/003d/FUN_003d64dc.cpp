@@ -1,6 +1,7 @@
 /* NON_MATCHING: snapshot address anchoring, copy coalescing, and saved-register lifetimes differ; local view preserves shared prefix size. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "shard/W5_W5Match8_CameraTransition.h"
+#include "battle/btlCamera.h"
 
 /* Local view: the secondary transition extends beyond BattleVectorTransition's recovered end. */
 struct SecondaryVectorTransitionView {
@@ -22,21 +23,21 @@ typedef char SecondaryVectorTransitionOffsetsCheck[
     offsetof(SecondaryVectorTransitionView, mode) == 0x844 ? 1 : -1];
 
 extern "C" {
-extern CameraTransitionGlobals g_btlMain;
+extern BtlCameraStatics g_btlMain;
 extern SecondaryVectorSnapshots DAT_00493530;
 
 // Set the alternate destination, retaining transition snapshots according to battle camera mode.
 void FUN_003d64dc(SecondaryVectorTransitionView *transition, s32 duration, s32 mode,
                  f32 x, f32 y, f32 z)
 {
-    if (g_btlMain.mode == 2) {
+    if (g_btlMain.routingMode == 2) {
         DAT_00493530.position = transition->base.positionData.position;
         DAT_00493530.current = transition->progress;
         transition->base.alternateDestination.x = x;
         transition->base.alternateDestination.y = y;
         transition->base.alternateDestination.z = z;
         transition->base.elapsedData.alternateElapsed = transition->base.secondaryElapsed;
-    } else if (g_btlMain.mode == 1) {
+    } else if (g_btlMain.routingMode == 1) {
         DAT_00493530.current = transition->progress;
         transition->base.alternateDestination.x = x;
         transition->base.alternateDestination.y = y;

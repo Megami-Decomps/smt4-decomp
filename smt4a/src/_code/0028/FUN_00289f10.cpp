@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the job's sprite with a grey level and alpha (special sprite ids draw twice, the second pass additive); written from the decompilation, render-stack push scheduling and the float to byte conversions not compared with retail */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/JobWork.h"
 
@@ -24,8 +25,6 @@ struct SpriteJobWork {
 #define SPRITE_ID_FADE_C 0xFFF2
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 void FUN_00230038(SpriteJobWork *work);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 s32 renderCtxPackPassFlagsWithAlpha(u32 mode);

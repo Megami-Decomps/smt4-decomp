@@ -15,8 +15,8 @@ s32 FUN_001b18f0(const s32 *left, const s32 *right)
     } else if (*right < 0) {
         result = -1;
     } else {
-        GameUnitSortRecord *leftUnit = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*left));
-        GameUnitSortRecord *rightUnit = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*right));
+        StatBlock *leftUnit = gameGetUnitRecord(*left);
+        StatBlock *rightUnit = gameGetUnitRecord(*right);
         DevilRecord *leftDevil = devilGetRecord(leftUnit->id);
         DevilRecord *rightDevil = devilGetRecord(rightUnit->id);
         result = leftDevil->race - rightDevil->race;

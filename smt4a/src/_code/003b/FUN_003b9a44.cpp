@@ -9,7 +9,7 @@ void scrSetResult(s32 result);
 u32 FUN_003b9a44(void)
 {
     u8 result = 0;
-    if (g_gameState.sourceMap - 200u < 100u)
+    if (g_gameState.savedMapId - 200u < 100u)
         result = 1;
     if (gameFlagIsSet(0x594) != 0)
         result = 0;

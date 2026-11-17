@@ -1,23 +1,19 @@
-/* The global game state (Shin Megami Tensei IV: Apocalypse), g_gameState at 0x5F15FC. */
+/* The global game state (Shin Megami Tensei IV: Apocalypse), g_gameState at 0x5F15FC.
+ *
+ * Flat, unlike IV's GameState: no Apocalypse unit needs a nested block (fields straddle IV's block
+ * starts: the script camera at 0x100, scriptRequestValues at 0x400, and the base+0x100/0x200/0x400
+ * pool words are armcc's own folding for s8/s16/f32 fields). IV's event block (0x100) is found here
+ * at 0x134 and its map block (0x200) at 0x234, so the shared fields keep IV's names 0x34 bytes later
+ * (bgmReleased, scriptPending/scriptId/scriptName, tick, darkZone, transitionCompleted,
+ * mapRegistrationPending, mapLoadActive, destinationSet, stage/stageGroup); IV's 0x2F8-0x338 saved and
+ * target location sits at 0x574-0x5B4 and its environment and overlay block (0x390-0x3F0) at
+ * 0x610-0x670. Types follow retail's loads: menuOpen (0x295) is s8 (FUN_0048a378's `add r6, r0, #0`). */
 #ifndef GAME_GAMESTATEA_H
 #define GAME_GAMESTATEA_H
 
 #include "common.h"
 #include "map/MapVector.h"
 #include <stddef.h>
-
-/* A screen fade the game state requests (0x628). */
-struct GameStateFadeRequestA {
-    /* 0x00 */ s32 mode;
-    /* 0x04 */ s32 x;
-    /* 0x08 */ s32 y;
-    /* 0x0C */ u32 texture;
-    /* 0x10 */ u32 alpha;
-    /* 0x14 */ s32 additive;
-    /* 0x18 */ s32 red;
-    /* 0x1C */ s32 green;
-    /* 0x20 */ s32 blue;
-};
 
 /* A camera's eye and look-at target. */
 struct GameStateCameraPoseA {
@@ -40,8 +36,8 @@ struct GameStateA {
     /* 0x01C */ u32 unk01C;
     /* 0x020 */ s8 unk020;
     /* 0x021 */ u8 paused;               /* nonzero: map actors and controllers do not update */
-    /* 0x022 */ u8 loading;
-    /* 0x023 */ s8 departLoading;        /* set while the departure loads the destination map */
+    /* 0x022 */ u8 unk022;
+    /* 0x023 */ s8 loading;              /* set while a departure loads the map */
     /* 0x024 */ u8 mapReady;             /* the destination map is ready (shows the debug overlay) */
     /* 0x025 */ u8 unk025[2];
     /* 0x027 */ s8 progressEnabled;
@@ -61,9 +57,9 @@ struct GameStateA {
     /* 0x050 */ s32 unk050;
     /* 0x054 */ s32 unk054;
     /* 0x058 */ s32 unk058;
-    /* 0x05C */ u32 scriptValue;
+    /* 0x05C */ u32 entryValue;          /* the script entry's id (the save id) */
     /* 0x060 */ u32 unk060;
-    /* 0x064 */ char scriptText[0x30];
+    /* 0x064 */ char entryText[0x30];     /* the script entry's text (the save name) */
     /* 0x094 */ MapVector position;
     /* 0x0A0 */ u8 unk0A0[4];
     /* 0x0A4 */ u32 unk0A4;
@@ -106,16 +102,16 @@ struct GameStateA {
     /* 0x132 */ s16 scriptEntry;
     /* 0x134 */ char requestName[0x10];
     /* 0x144 */ u8 unk144;
-    /* 0x145 */ u8 scriptPending;
+    /* 0x145 */ u8 unk145;
     /* 0x146 */ u8 unk146[2];
-    /* 0x148 */ u32 scriptId;
+    /* 0x148 */ u32 unk148;
     /* 0x14C */ u8 unk14C;
-    /* 0x14D */ s8 musicInitialized;
+    /* 0x14D */ s8 bgmReleased;           /* set once the map has released the stopped music */
     /* 0x14E */ u8 unk14E[0x2C];
-    /* 0x17A */ s8 textActive;           /* also keeps the map BGM from changing */
+    /* 0x17A */ s8 scriptPending;         /* a script is queued (scriptId, scriptName); also keeps the map BGM from changing */
     /* 0x17B */ u8 unk17B;
-    /* 0x17C */ u32 textId;
-    /* 0x180 */ char text[0x14];
+    /* 0x17C */ u32 scriptId;
+    /* 0x180 */ char scriptName[0x14];
     /* 0x194 */ u8 unk194[4];
     /* 0x198 */ u16 eventResult;
     /* 0x19A */ s16 eventId;             /* event/eNNN/eNNN.bf */
@@ -151,28 +147,22 @@ struct GameStateA {
     /* 0x204 */ u8 unk204[0xC];
     /* 0x210 */ s32 trapCount;
     /* 0x214 */ u8 unk214[4];
-    /* 0x218 */ s32 stage;               /* scene model set currently shown */
-    /* 0x21C */ s32 stageGroup;
+    /* 0x218 */ u8 unk218[4];
+    /* 0x21C */ u8 unk21C[4];
     /* 0x220 */ u8 unk220[8];
-    /* 0x228 */ u8 alternateEnvironment;
-    /* 0x229 */ u8 unk229;
-    /* 0x22A */ u8 entryTransitionCompleted;
-    /* 0x22B */ u8 mapRegistrationPending;
-    /* 0x22C */ u8 mapLoadActive;        /* set while a departure loads the destination map */
-    /* 0x22D */ u8 groupUpdate;
-    /* 0x22E */ u8 unk22E[0x1A];
+    /* 0x228 */ u8 unk228[0x20];
     /* 0x248 */ u32 unk248;
-    /* 0x24C */ s32 areaTypeA;
-    /* 0x250 */ s32 areaTypeB;
-    /* 0x254 */ s32 ticks;
+    /* 0x24C */ s32 stage;               /* scene model set currently shown (areaModels[stage]) */
+    /* 0x250 */ s32 stageGroup;
+    /* 0x254 */ s32 tick;
     /* 0x258 */ s16 selection;
     /* 0x25A */ s16 previousSelection;
     /* 0x25C */ u8 darkZone;
     /* 0x25D */ s8 unk25D;
     /* 0x25E */ u8 transitionCompleted;
-    /* 0x25F */ s8 unk25F;
-    /* 0x260 */ u8 departMapLoading;     /* set from the departure's tenth frame until the map is loaded */
-    /* 0x261 */ u8 unk261;
+    /* 0x25F */ s8 mapRegistrationPending;
+    /* 0x260 */ u8 mapLoadActive;        /* set from the departure's tenth frame until the map is loaded */
+    /* 0x261 */ u8 destinationSet;       /* also: the group update flag */
     /* 0x262 */ s8 dialogRequested;
     /* 0x263 */ u8 unk263;
     /* 0x264 */ u32 unk264;
@@ -231,8 +221,12 @@ struct GameStateA {
     /* 0x3D9 */ u8 unk3D9[3];
     /* 0x3DC */ MapVector breakableCheckPosition; /* compared with the player's distance to a breakable */
     /* 0x3E8 */ s32 unk3E8;
-    /* 0x3EC */ s32 stageOverride;       /* -1: derive the stage from the data table */
-    /* 0x3F0 */ s32 groupOverride;       /* -1: derive the group from the data table */
+    /* 0x3EC */ s16 unk3EC;
+    /* 0x3EE */ u8 unk3EE;
+    /* 0x3EF */ u8 unk3EF;
+    /* 0x3F0 */ u8 unk3F0[2];
+    /* 0x3F2 */ u8 unk3F2;
+    /* 0x3F3 */ u8 unk3F3;
     /* 0x3F4 */ u8 unk3F4;
     /* 0x3F5 */ s8 scriptRequestPending; /* a three-value script request (quest center) is queued */
     /* 0x3F6 */ u8 unk3F6[2];
@@ -259,9 +253,10 @@ struct GameStateA {
     /* 0x484 */ s32 unk484;
     /* 0x488 */ u8 unk488[0xC];
     /* 0x494 */ f32 unk494;
-    /* 0x498 */ u8 unk498;
-    /* 0x499 */ u8 sceneReady;
-    /* 0x49A */ u8 unk49A[5];
+    /* 0x498 */ f32 unk498;
+    /* 0x49C */ u8 unk49C;
+    /* 0x49D */ u8 sceneReady;
+    /* 0x49E */ u8 unk49E;
     /* 0x49F */ u8 unk49F;
     /* 0x4A0 */ u8 unk4A0[4];
     /* 0x4A4 */ f32 unk4A4;
@@ -304,19 +299,19 @@ struct GameStateA {
     /* 0x564 */ SceneModel *model564;
     /* 0x568 */ u8 unk568[8];
     /* 0x570 */ SceneModel *model570;
-    /* 0x574 */ u8 transitionActive;
+    /* 0x574 */ u8 savedLocationSet;
     /* 0x575 */ u8 unk575[3];
-    /* 0x578 */ u32 sourceMap;
-    /* 0x57C */ u32 sourceArea;
-    /* 0x580 */ u32 sourceObjectId;
-    /* 0x584 */ MapVector sourcePosition;
-    /* 0x590 */ f32 sourceHeading;
-    /* 0x594 */ f32 sourceHeadingCopy;
-    /* 0x598 */ u32 destinationMap;
-    /* 0x59C */ u32 destinationArea;
-    /* 0x5A0 */ MapVector destinationPosition;
-    /* 0x5AC */ f32 destinationHeading;
-    /* 0x5B0 */ f32 destinationHeadingCopy;
+    /* 0x578 */ u32 savedMapId;
+    /* 0x57C */ u32 savedAreaId;
+    /* 0x580 */ u32 savedObjectId;
+    /* 0x584 */ MapVector savedPosition;
+    /* 0x590 */ f32 savedHeading;
+    /* 0x594 */ f32 savedHeadingCopy;
+    /* 0x598 */ u32 targetMapId;
+    /* 0x59C */ u32 targetAreaId;
+    /* 0x5A0 */ MapVector targetPosition;
+    /* 0x5AC */ f32 targetHeading;
+    /* 0x5B0 */ f32 targetHeadingCopy;
     /* 0x5B4 */ u8 unk5B4[0x14];
     /* 0x5C8 */ u8 unk5C8;
     /* 0x5C9 */ u8 unk5C9[3];
@@ -326,16 +321,24 @@ struct GameStateA {
     /* 0x5F4 */ u8 unk5F4[0x1C];
     /* 0x610 */ s32 environmentPreset;
     /* 0x614 */ u8 unk614[4];
-    /* 0x618 */ s32 unk618;
+    /* 0x618 */ s32 environmentId;
     /* 0x61C */ s32 unk61C;
     /* 0x620 */ s32 unk620;
     /* 0x624 */ s32 unk624;
-    /* 0x628 */ GameStateFadeRequestA fade;
+    /* 0x628 */ s32 overlayKind;          /* 0 none, 1 and 2 plain overlays, else blink overlay */
+    /* 0x62C */ s32 overlayX;
+    /* 0x630 */ s32 overlayY;
+    /* 0x634 */ u32 overlayTexture;
+    /* 0x638 */ u32 overlayAlpha;
+    /* 0x63C */ s32 overlayAdditive;
+    /* 0x640 */ s32 overlayRed;
+    /* 0x644 */ s32 overlayGreen;
+    /* 0x648 */ s32 overlayBlue;
     /* 0x64C */ u8 unk64C[0x14];
-    /* 0x660 */ s32 showAllEntries;      /* nonzero: every map-list entry is available */
+    /* 0x660 */ s32 showAllEntries;      /* nonzero: every entry is visible, requirements ignored */
     /* 0x664 */ u8 unk664[8];
-    /* 0x66C */ s32 areaTypeOverrideA;
-    /* 0x670 */ s32 areaTypeOverrideB;
+    /* 0x66C */ s32 stageOverride;       /* -1: derive the stage from the data table */
+    /* 0x670 */ s32 groupOverride;       /* -1: derive the group from the data table */
     /* 0x674 */ u8 unk674[2];
     /* 0x676 */ u8 scriptOverride;
     /* 0x677 */ u8 unk677[0x1E];
@@ -347,8 +350,8 @@ typedef char GameStateAOffsetsCheck[
     offsetof(GameStateA, inputBlocked) == 0x18 && offsetof(GameStateA, bgmId) == 0x2C &&
     offsetof(GameStateA, overrideKinds) == 0x33 && offsetof(GameStateA, position) == 0x94 &&
     offsetof(GameStateA, pointPosition) == 0xC4 && offsetof(GameStateA, scriptCameraEye) == 0xF4 &&
-    offsetof(GameStateA, rayStart) == 0x110 && offsetof(GameStateA, scriptId) == 0x148 &&
-    offsetof(GameStateA, text) == 0x180 && offsetof(GameStateA, eventId) == 0x19A &&
+    offsetof(GameStateA, rayStart) == 0x110 && offsetof(GameStateA, scriptId) == 0x17C &&
+    offsetof(GameStateA, scriptName) == 0x180 && offsetof(GameStateA, eventId) == 0x19A &&
     offsetof(GameStateA, unk1B4) == 0x1B4 && offsetof(GameStateA, result) == 0x1F8 &&
     offsetof(GameStateA, trapCount) == 0x210 && offsetof(GameStateA, darkZone) == 0x25C &&
     offsetof(GameStateA, requestState) == 0x28C && offsetof(GameStateA, skipTransitionSnapshot) == 0x2C8 &&
@@ -357,8 +360,8 @@ typedef char GameStateAOffsetsCheck[
     offsetof(GameStateA, alternateNaviMap) == 0x460 &&
     offsetof(GameStateA, positionRequestParameters) == 0x474 && offsetof(GameStateA, popupCountdown) == 0x4C8 &&
     offsetof(GameStateA, modeCounter) == 0x4FC && offsetof(GameStateA, areaModels) == 0x518 &&
-    offsetof(GameStateA, sourceMap) == 0x578 && offsetof(GameStateA, destinationHeadingCopy) == 0x5B0 &&
-    offsetof(GameStateA, collisionDebugMode) == 0x5CC && offsetof(GameStateA, fade) == 0x628 &&
+    offsetof(GameStateA, savedMapId) == 0x578 && offsetof(GameStateA, targetHeadingCopy) == 0x5B0 &&
+    offsetof(GameStateA, collisionDebugMode) == 0x5CC && offsetof(GameStateA, overlayKind) == 0x628 && offsetof(GameStateA, overlayBlue) == 0x648 &&
     offsetof(GameStateA, showAllEntries) == 0x660 && offsetof(GameStateA, transitionPending) == 0x695 &&
     sizeof(GameStateA) == 0x698 ? 1 : -1];
 

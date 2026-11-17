@@ -1,24 +1,23 @@
 #include "ui/MessageMain.h"
-extern "C" MessageGlobals g_messageMain;
 
 extern "C" {
 void msgBoxFlagsClearBit7(u32 box);
-void titleOverlaySetModeAnimation(MessageObject *object, u32 mode);
+void titleOverlaySetModeAnimation(MessageWindow *window, u32 mode);
 
 // Finish a banner immediately when marked, otherwise start its closing transition.
 void messageBannerBeginClose(void)
 {
-    MessageObject *banner = reinterpret_cast<MessageObject *>(g_messageMain.banner);
-    if (banner->close.state != 0) {
-        if (banner->unk5f != 0) {
-            banner->close.state = 0;
-            msgBoxFlagsClearBit7(messageObjectGetBox(banner));
+    MessageWindow *banner = g_messageMain.banner;
+    if (banner->state != 0) {
+        if (banner->closeLocked != 0) {
+            banner->state = 0;
+            msgBoxFlagsClearBit7(banner->box);
             return;
         }
         if (banner != NULL) {
-            titleOverlaySetModeAnimation(banner, banner->close.mode);
-            banner->close.state = 3;
-            banner->close.pending = 0;
+            titleOverlaySetModeAnimation(banner, banner->mode);
+            banner->state = 3;
+            banner->closeRequested = 0;
         }
     }
 }

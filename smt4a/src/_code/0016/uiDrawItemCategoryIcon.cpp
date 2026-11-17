@@ -1,27 +1,18 @@
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "gamedata/GamePlayerData.h"
 
 struct Entry00192690;
 struct ContentIconEntry {
     u8 unk00[0x23];
     u8 kind;
 };
-struct IconEquipment {
-    u16 melee;
-    u16 ranged;
-    u16 ammunition;
-    u16 head;
-    u16 body;
-    u16 legs;
-    u16 accessory;
-};
 
 extern "C" {
 u32 aocEntryGetKind(u32 id);
 Entry00192690 *contentEntryFindById2(u32 id);
 u32 requestKindToId(u32 kind);
-u8 *gameGetPlayerData();
 void texTableRecordCallWithParams(u32, u32, s32, u32, u32, u32);
 
 void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
@@ -44,43 +35,43 @@ void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
     }
     case 2:
         frame = 0x3f7;
-        if (showEquipped && ((IconEquipment *)gameGetPlayerData())->melee == id) {
+        if (showEquipped && (gameGetPlayerData())->equipped.weapon == id) {
             equipped = true;
         }
         break;
     case 3:
         frame = 0x3f8;
-        if (showEquipped && ((IconEquipment *)gameGetPlayerData())->ranged == id) {
+        if (showEquipped && (gameGetPlayerData())->equipped.gun == id) {
             equipped = true;
         }
         break;
     case 4:
         frame = 0x3fa;
-        if (showEquipped && ((IconEquipment *)gameGetPlayerData())->head == id) {
+        if (showEquipped && (gameGetPlayerData())->equipped.head == id) {
             equipped = true;
         }
         break;
     case 5:
         frame = 0x3fb;
-        if (showEquipped && ((IconEquipment *)gameGetPlayerData())->body == id) {
+        if (showEquipped && (gameGetPlayerData())->equipped.body == id) {
             equipped = true;
         }
         break;
     case 6:
         frame = 0x3fc;
-        if (showEquipped && ((IconEquipment *)gameGetPlayerData())->legs == id) {
+        if (showEquipped && (gameGetPlayerData())->equipped.legs == id) {
             equipped = true;
         }
         break;
     case 7:
         frame = 0x3fd;
-        if (showEquipped && ((IconEquipment *)gameGetPlayerData())->accessory == id) {
+        if (showEquipped && (gameGetPlayerData())->equipped.accessory == id) {
             equipped = true;
         }
         break;
     case 8:
         frame = 0x3f9;
-        if (showEquipped && ((IconEquipment *)gameGetPlayerData())->ammunition == id) {
+        if (showEquipped && (gameGetPlayerData())->equipped.bullets == id) {
             equipped = true;
         }
         break;

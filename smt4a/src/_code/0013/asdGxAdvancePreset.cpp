@@ -1,13 +1,10 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-
-extern GxPresetState g_asdGxPresets;
-
-/* Advances the graphics preset index. */
+/* Counts a vertical blank since the last submitted frame. */
 void asdGxAdvancePreset(void)
 {
-    ++g_asdGxPresets.nextPreset;
+    ++g_asdGxPresets.elapsedFrames;
 }
 
 } /* extern "C" */

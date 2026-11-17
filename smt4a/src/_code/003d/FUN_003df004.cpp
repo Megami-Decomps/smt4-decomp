@@ -1,20 +1,13 @@
 /* NON_MATCHING: the supported-kind result is set at the top of each case and returned from one exit like retail; retail duplicates the remaining-count clamp (store, compare, store) into every case arm and keeps ip/fp in the push list. */
 #include "quest_center/QuestRequirement.h"
+#include "quest_center/QuestRecordA.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
 
-/* Apocalypse objectives begin at 0x100 rather than the shared IV definition's 0x16C. */
-struct QuestObjectiveDefinitionA {
-    u8 unk000[6];
-    u8 kind;
-    u8 unk007[0xF9];
-    QuestRequirement objectives[1];
-};
 struct QuestObjectiveCountsA {
     u8 unk00[4];
     u16 counts[1];
 };
 extern "C" {
-QuestObjectiveDefinitionA *dataTable1bOr1cGetRecord(u32 quest);
 s32 flagValueRead(u16 item);
 void *gameFindRosterEntry(u32 quest);
 s32 partyFindSlotById(u16 id);
@@ -24,11 +17,11 @@ s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress)
 {
     s32 result = 0;
     progress->unk07 = 0;
-    QuestObjectiveDefinitionA *definition = dataTable1bOr1cGetRecord(quest);
+    QuestRecordA *definition = dataTable1bOr1cGetRecord(quest);
     if (definition == NULL) {
         return result;
     }
-    QuestRequirement *objective = &definition->objectives[index];
+    QuestRequirement *objective = &definition->requirements[index];
     switch ((u16)objective->kind) {
     case 1:
         result = 1;

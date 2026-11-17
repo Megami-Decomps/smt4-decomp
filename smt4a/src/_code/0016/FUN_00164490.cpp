@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00164490` (_code @ 0x164490, 0x598 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -24,7 +25,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned char g_messageMain; /* 0x57f588 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -41,7 +41,6 @@ extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int __aeabi_idivmod(int, unsigned int);
-
 
 void FUN_00164490(int param_1)
 
@@ -66,12 +65,12 @@ void FUN_00164490(int param_1)
   
   temp_v2 = gameFlagIsSet(0x402);
   if (temp_v2 != 0) {
-    temp_v2 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
-    temp_v3 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
-    if ('\0' < *(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x94)) {
-      temp_v4 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb8c);
+    temp_v2 = vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
+    temp_v3 = vec2GetYInt(((int)g_messageMain.banner) + 0xb00);
+    if ('\0' < *(char *)(((int)g_messageMain.banner) + 0x94)) {
+      temp_v4 = vec2GetXInt(((int)g_messageMain.banner) + 0xb8c);
       temp_v2 = temp_v2 + temp_v4;
-      temp_v4 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb8c);
+      temp_v4 = vec2GetYInt(((int)g_messageMain.banner) + 0xb8c);
       temp_v3 = temp_v3 + temp_v4;
     }
     temp_v5 = renderCtxPackPassFlags(1,0);
@@ -88,9 +87,9 @@ void FUN_00164490(int param_1)
       temp_v4 = (int)asdTMTexTableEntryAt(8,0xc0);
     }
     texDrawCompositeSprite(2,8,0,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0xb);
-    FUN_00169e38(*(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x7c),*(short *)(temp_v4 + 8) + temp_v2,
+    FUN_00169e38(*(unsigned int *)(((int)g_messageMain.banner) + 0x7c),*(short *)(temp_v4 + 8) + temp_v2,
                  *(short *)(temp_v4 + 10) + temp_v3,0);
-    if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x92) != '\0') {
+    if (*(char *)(((int)g_messageMain.banner) + 0x92) != '\0') {
       if (param_1 != 0) {
         temp_v4 = (int)asdTMTexTableEntryAt(8,0x100);
       }
@@ -98,10 +97,10 @@ void FUN_00164490(int param_1)
         temp_v4 = (int)asdTMTexTableEntryAt(8,0x11f);
       }
       texDrawCompositeSprite(2,8,0xc,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0xb);
-      if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8c) != '\0') {
+      if (*(char *)(((int)g_messageMain.banner) + 0x8c) != '\0') {
         temp_v0 = *(short *)(temp_v4 + 8);
         temp_v1 = *(short *)(temp_v4 + 10);
-        if (*(int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x84) < 0) {
+        if (*(int *)(((int)g_messageMain.banner) + 0x84) < 0) {
           temp_v5 = 0xdc0f14ff;
         }
         else {
@@ -118,15 +117,15 @@ void FUN_00164490(int param_1)
         gxResetColorQuadToWhite();
       }
       else {
-        FUN_00169e38(*(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x84),*(short *)(temp_v4 + 8) + temp_v2,
+        FUN_00169e38(*(unsigned int *)(((int)g_messageMain.banner) + 0x84),*(short *)(temp_v4 + 8) + temp_v2,
                      *(short *)(temp_v4 + 10) + temp_v3,1);
       }
     }
-    temp_v2 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
+    temp_v2 = ((int)g_messageMain.banner);
     temp_v12 = 0.25f;
-    if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x16d) != '\0') {
+    if (*(char *)(((int)g_messageMain.banner) + 0x16d) != '\0') {
       temp_v14 = temp_v12;
-      temp_v5 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
+      temp_v5 = vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
       temp_v3 = vec2GetYInt(temp_v2 + 0xb00);
       temp_v12 = temp_v14;
       renderCtxCalculateStereoParallax(g_renderCtx);
@@ -137,9 +136,9 @@ void FUN_00164490(int param_1)
       FUN_00169e38(-*(int *)(temp_v2 + 0x168),(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
                    *(short *)(temp_v4 + 10) + temp_v3,1);
     }
-    temp_v2 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-    if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x17d) != '\0') {
-      temp_v5 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
+    temp_v2 = ((int)g_messageMain.banner);
+    if (*(char *)(((int)g_messageMain.banner) + 0x17d) != '\0') {
+      temp_v5 = vec2GetXInt(((int)g_messageMain.banner) + 0xb00);
       temp_v3 = vec2GetYInt(temp_v2 + 0xb00);
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v14 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

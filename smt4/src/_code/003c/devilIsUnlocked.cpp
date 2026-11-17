@@ -16,12 +16,12 @@ static __inline bool devilRegistryEligible(u32 index)
 u32 devilIsUnlocked(u32 unused, u16 id)
 {
     DevilRecord *definition = devilGetRecord(id);
-    if (definition != NULL && (definition->specialFusion.requiredFlag == 0 || gameFlagIsSet(definition->specialFusion.requiredFlag))) {
-        if (!(definition->specialFusion.prerequisite & 1)) {
+    if (definition != NULL && (definition->requiredFlag == 0 || gameFlagIsSet(definition->requiredFlag))) {
+        if (!(definition->prerequisite & 1)) {
             return 1;
         }
-        if (definition->specialFusion.prerequisite & ~1) {
-            if (devilRegistryEligible(definition->specialFusion.prerequisite >> 1)) {
+        if (definition->prerequisite & ~1) {
+            if (devilRegistryEligible(definition->prerequisite >> 1)) {
                 return 1;
             }
         } else if (devilRegistryEligible(definition->id)) {

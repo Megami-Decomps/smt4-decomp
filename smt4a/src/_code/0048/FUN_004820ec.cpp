@@ -1,5 +1,6 @@
 /* NON_MATCHING: native VFP interpolation, matrix construction, and transform argument scheduling differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include <math.h>
 struct AngleSample { f32 sine, cosine, sineStep, cosineStep; };
 struct AnglePair { f32 sine, cosine; };
@@ -59,9 +60,9 @@ extern "C" void FUN_004820ec(MapAngleOwner *owner, f32 angle)
     position.x *= 1000.0f;
     position.y *= 1000.0f;
     position.z *= 1000.0f;
-    position.x += g_lmapScene->position.x;
-    position.y += g_lmapScene->position.y;
-    position.z += g_lmapScene->position.z;
+    position.x += g_lmapScene->pose.position.x;
+    position.y += g_lmapScene->pose.position.y;
+    position.z += g_lmapScene->pose.position.z;
     owner->target->position = position;
     FUN_00481dd8(owner);
 }

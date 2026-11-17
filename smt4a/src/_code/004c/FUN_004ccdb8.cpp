@@ -1,13 +1,7 @@
 /* NON_MATCHING: the polynomial now matches (level * 0x6DB * 2 + level * 2); retail outlines the table-lookup arm after the return and numbers the saved registers differently. */
 #include "gamedata/DataTable.h"
+#include "gamedata/DevilRecordA.h"
 #include "gamedata/GameDataAccess.h"
-
-struct UnitGrowthCostRecord {
-    u8 prefix[6];
-    u16 level;
-};
-
-extern "C" const UnitGrowthCostRecord *devilGetRecord(u32 unit);
 
 static inline u32 unitBaseGrowthCost(s32 level)
 {

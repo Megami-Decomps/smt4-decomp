@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d3ba8` (_code @ 0x3d3ba8, 0x1ae8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ int FUN_00255180(...);
 int FUN_00256898(...);
 int btlReflectQueueKind34(...);
 int FUN_00282820(...);
-int btlMainFindEntryByListedId(...);
 int messageDismissNumericBanner(int);
 int dataTable40FindById(void);
 int jyoucyuRowApply(...);
@@ -88,8 +88,6 @@ typedef struct {
     unsigned int sp4EC; /* 0x4ec: local_4ec */
     unsigned int sp4F0; /* 0x4f0: local_4f0 */
 } param_2_stack;
-
-extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_004342d4; /* 0x4342d4 */
 extern unsigned int DAT_004342d8; /* 0x4342d8 */
 extern int DAT_004342e0; /* 0x4342e0 */
@@ -269,7 +267,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
     if (*psVar12 < 0) break;
     temp_v20 = temp_v32;
     temp_v18 = *param_1;
-    btlMainFindEntryByListedId();
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v18), *psVar12);
     temp_v34[0] = '\0';
     temp_v19 = temp_v27;
     FUN_00228220(temp_v27,(int)temp_v25,(int)*(short *)(param_2[10] + 0x14c),
@@ -337,7 +335,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
     case 7:
       temp_v5 = (int)*psVar12;
       puVar7 = (unsigned int *)*param_1;
-      btlMainFindEntryByListedId(puVar7,temp_v5);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar7), temp_v5);
       temp_v4 = FUN_002281a4(DAT_00435d18);
       if ((*puVar7 & 8) != 0) {
         if ((*puVar7 & 1) != 0) {
@@ -360,12 +358,12 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       *param_2 = *param_2 | 0x2000;
       FUN_00256898(1,param_2);
       btlReflectQueueKind34(0,param_2);
-      *(unsigned int *)(g_btlMain + 0x760) = 0xffffffff;
+      g_btlMain->unk760 = -1;
       break;
     case 0xb:
       temp_v9 = *psVar12;
       temp_v12 = *param_1;
-      btlMainFindEntryByListedId(temp_v12,(int)temp_v9);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v12), (int)temp_v9);
       FUN_00246454(temp_v3 + 0x28,param_2,temp_v12);
       frameRangeExtend(param_1,param_2,(int)temp_v9,temp_v3,0x1e,0x1e);
       break;
@@ -443,7 +441,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v4 = FUN_00227630(DAT_00435d18);
       temp_v12 = temp_v27;
       temp_v15 = *param_1;
-      btlMainFindEntryByListedId(temp_v15,(int)temp_v9);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v15), (int)temp_v9);
       dataTable40FindById();
       temp_v10 = '\0';
       if ((temp_v12 != 0) && (temp_v0 = *(char *)(temp_v12 + 0x45), temp_v0 == '\x01' || temp_v0 == '\x02')) {
@@ -469,7 +467,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
             case 0xc:
               if ((temp_v9 == 0xc) && (-1 < *psVar12)) {
                 puVar7 = (unsigned int *)*param_1;
-                btlMainFindEntryByListedId();
+                btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar7), *psVar12);
                 if ((puVar7 != (unsigned int *)0x0) && ((*puVar7 & 2) == 0)) break;
               }
               temp_v6 = temp_v13 + temp_v4 * 0x16;
@@ -718,7 +716,7 @@ LAB_003d444c:
     temp_v14 = temp_v14 + 1;
   } while (temp_v4 != 0);
   temp_v15 = 0;
-  if ((*(unsigned int *)(g_btlMain + 0x634) & 0x100) == 0) {
+  if ((g_btlMain->flags & 0x100) == 0) {
     temp_v14 = 0;
     do {
       if (*(int *)(DAT_00435d18 + 0x1cfc) != 0) {
@@ -746,7 +744,7 @@ LAB_003d444c:
             else if ((*param_2 & 0x1080) == 0) {
               temp_v15 = (unsigned int)*(unsigned char *)(temp_v4 + 0x161);
               FUN_003de978(temp_v15,param_2,*(unsigned char *)(temp_v4 + 0x162));
-              *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x1000000;
+              g_btlMain->flags = g_btlMain->flags | 0x1000000;
             }
           }
           else if ((*param_2 & 0x1080) == 0) {

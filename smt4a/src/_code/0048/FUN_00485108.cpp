@@ -1,10 +1,10 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match3_NameFormStateA.h"
 #include "ui/UiSpriteState.h"
 #include "util/BitsAndBytes.h"
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 

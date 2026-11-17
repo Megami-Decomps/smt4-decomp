@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the 8-byte offset pair through VFP registers (vldmia/vstmia) and keeps it at different stack slots; this build uses ldrd/strd, and the register assignment follows */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 #include "code/Code002a_VariantA.h"
@@ -35,7 +36,6 @@ struct SlotScreen {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 getUnlockedSlotCount(u32 argument);
 IconPosition *asdTMTexTableEntryAt(u32 table, u32 index);
 void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scale, s32 iconX, s32 iconY,

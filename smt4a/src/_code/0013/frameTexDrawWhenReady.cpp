@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/JobWork.h"
 
 struct RenderReadinessFlags {
@@ -16,7 +17,6 @@ extern "C" {
 s32 stateValuesGetBySelector(u32);
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 void FUN_0014a960(u32);
-extern RenderCtxA *g_renderCtx;
 
 // Submit the render context once this job's two readiness flags permit it.
 u8 frameTexDrawWhenReady(u32 job)

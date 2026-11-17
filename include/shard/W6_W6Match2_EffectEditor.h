@@ -5,7 +5,6 @@
 #include "shard/W6_W6Match8_EffectSelection.h"
 #include "shard/W6_W6Match4_EffectEditorSnapshot.h"
 #include "shard/PlayScene.h"
-#include "ui/MessageMain.h"
 
 struct EffectNode;
 
@@ -108,15 +107,6 @@ unsigned int sysGetTableWord(int param_1);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-u32 itemGetSortCategory(void *id);
-
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {

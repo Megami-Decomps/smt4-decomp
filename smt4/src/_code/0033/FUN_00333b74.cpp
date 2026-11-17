@@ -1,27 +1,14 @@
 /* NON_MATCHING: reward-list/section registers are exchanged, pipelined loot-weight temporaries differ, and gold multiply operands are reversed. */
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 #include <stddef.h>
 #include "gamedata/DataTable.h"
 #include "util/Random.h"
 #include "gamedata/DataTableAccess.h"
 #include "addon/AocSystem.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-/* One reward slot of a quest record (12 bytes). */
-typedef struct RewardSlot {
-    /* 0x00 */ u16 kind;       /* 1: fixed item, 3: set value, 4: loot table */
-    /* 0x02 */ u16 arg;        /* item id, or the loot table id */
-    /* 0x04 */ u16 amount;     /* item count, or the value for kind 3 */
-    /* 0x06 */ u16 percent;    /* nonzero: the gold is this percent of the level's base */
-    /* 0x08 */ u32 gold;
-} RewardSlot;
-
-/* The quest record: three reward slots at 0x154. */
-typedef struct QuestRewardRecord {
-    /* 0x000 */ u8 unk000[0x154];
-    /* 0x154 */ RewardSlot slots[3];
-} QuestRewardRecord;
 
 typedef struct QuestRuntimeStatus {
     u8 flags;                  /* bit 3: use the second reward slot set */
@@ -52,18 +39,10 @@ typedef struct LootCacheEntry {
 } LootCacheEntry;
 
 typedef char QuestRewardLayouts[
-    sizeof(RewardSlot) == 12 && offsetof(QuestRewardRecord, slots) == 0x154 &&
     sizeof(LootTable) == 0x50 && offsetof(LootTable, pairs) == 0x30 &&
     sizeof(LootCacheEntry) == 0x54 && offsetof(LootCacheEntry, table) == 4 ? 1 : -1];
 
-typedef struct PlayerLevelView {
-    u8 unk00[0x76];
-    u8 level;
-} PlayerLevelView;
-
-QuestRewardRecord *dataTable1bOr1cGetRecord(void *quest);
 QuestRuntimeStatus *questGetRuntimeStatus(void *quest);
-PlayerLevelView *gameGetPlayerData(void);
 
 static __inline LootTable *questRewardFindLootTable(u16 tableId)
 {
@@ -86,16 +65,16 @@ static __inline LootTable *questRewardFindLootTable(u16 tableId)
  * its gold (a fixed amount, or a percent of the player's level base). */
 void FUN_00333b74(RewardList *list, void *quest)
 {
-    QuestRewardRecord *record = dataTable1bOr1cGetRecord(quest);
+    QuestRecord *record = dataTable1bOr1cGetRecord(reinterpret_cast<u32>(quest));
 
     if (record == NULL) {
         return;
     }
     u8 flags = questGetRuntimeStatus(quest)->flags;
-    RewardSlot *slot = &record->slots[(flags >> 3) & 1];
+    QuestReward *slot = &record->rewards[(flags >> 3) & 1];
 
     if ((flags & 8) != 0 && slot->kind == 0) {
-        slot = &record->slots[0];
+        slot = &record->rewards[0];
     }
     if (slot->kind == 1) {
         list->items[0] = slot->arg;

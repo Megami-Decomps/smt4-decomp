@@ -1,11 +1,10 @@
 /* NON_MATCHING: two spots differ: the stack context is loaded into another register for the first push and first pop (retail builds the stack address in place in r4), and the third push (the stack's own top state as its argument) addresses its count through a literal offset where retail adds 0x10C0 and uses an immediate; layout, calls and offsets agree */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "code/Code0014.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "code/Code0015.h"
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 
 void FUN_00300100(s32 handler, s32 flag);
 void requestDispatch(void *request);

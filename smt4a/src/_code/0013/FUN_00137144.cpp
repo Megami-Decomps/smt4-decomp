@@ -1,34 +1,15 @@
 /* NON_MATCHING: identical except the register pair (r2/r3) armcc picks for the unrolled layer-13 loop over the line windows. */
+#include "ui/MessageMainA.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "text/TextDraw.h"
 #include "event/bustupEvent/BustupTex.h"
 #include "code/Code0015_Smt4a.h"
 
-/* One message window's work area. */
-struct MessageWindowWork {
-    /* 0x0000 */ u32 head;
-    /* 0x0004 */ u32 handle;      /* the window's draw object */
-    /* 0x0008 */ u8 unk0008;
-    /* 0x0009 */ u8 layer;
-    /* 0x000A */ u8 unk000A[0x19BA];
-    /* 0x19C4 */ u8 hidden;
-};
-
-/* The message system: the main window and two more, plus a table of twelve line windows. */
-struct MessageSystem {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ MessageWindowWork *main;
-    /* 0x08 */ MessageWindowWork *second;
-    /* 0x0C */ MessageWindowWork *third;
-};
-
 extern "C" {
-extern MessageSystem g_messageMain;
-extern MessageWindowWork *g_messageWindows[12];
+extern MessageWindowA *g_messageWindows[12];
 
 void asdTMTexTableLoadTmx(s32 table, s32 arg);
 void asdTMTexTableLoadSprites(s32 table);
-MessageWindowWork *FUN_00145280(void);
 void infoWindowInitialize(void);
 void comWinInitialize(void);
 void FUN_001409e4(void);
@@ -49,32 +30,32 @@ void FUN_00137144(void)
     asdTMTexTableLoadSprites(8);
     for (s32 i = 0; i < 3; i++)
         asdTMTexTablePrepareNodeImage(8, i);
-    g_messageMain.main = FUN_00145280();
-    g_messageMain.second = FUN_00145280();
-    g_messageMain.third = FUN_00145280();
+    g_messageMain.window = FUN_00145280();
+    g_messageMain.banner = FUN_00145280();
+    g_messageMain.aux = FUN_00145280();
     for (s32 i = 0; i < 12; i++)
         g_messageWindows[i] = FUN_00145280();
-    g_messageMain.main->layer = 1;
-    g_messageMain.second->layer = 6;
-    g_messageMain.third->layer = 12;
-    uiObjectSetColorRgb(g_messageMain.third->handle, 0xFF);
+    g_messageMain.window->mode = 1;
+    g_messageMain.banner->mode = 6;
+    g_messageMain.aux->mode = 12;
+    uiObjectSetColorRgb(g_messageMain.aux->box, 0xFF);
     for (s32 i = 0; i < 12; i++)
-        g_messageWindows[i]->layer = 13;
+        g_messageWindows[i]->mode = 13;
     infoWindowInitialize();
     comWinInitialize();
     FUN_001409e4();
-    taskCreateDraw((const s8 *)"MESS_D", 239, 0, 0, FUN_0013f7c4, NULL, (u32)g_messageMain.main, (void *)g_messageMain.main->head);
-    MessageWindowWork *main = g_messageMain.main;
-    main->hidden = 1;
-    g_messageMain.second->hidden = 0;
-    g_messageMain.third->hidden = 0;
+    taskCreateDraw((const s8 *)"MESS_D", 239, 0, 0, FUN_0013f7c4, NULL, (u32)g_messageMain.window, (void *)g_messageMain.window->job);
+    MessageWindowA *window = g_messageMain.window;
+    window->displayEnabled = 1;
+    g_messageMain.banner->displayEnabled = 0;
+    g_messageMain.aux->displayEnabled = 0;
     for (s32 i = 0; i < 12; i++)
-        g_messageWindows[i]->hidden = 0;
-    objFlagsSetBits(main->handle, 0x100);
-    objFlagsSetBits(g_messageMain.second->handle, 0x200);
-    objFlagsSetBits(g_messageMain.third->handle, 0x100);
+        g_messageWindows[i]->displayEnabled = 0;
+    objFlagsSetBits(window->box, 0x100);
+    objFlagsSetBits(g_messageMain.banner->box, 0x200);
+    objFlagsSetBits(g_messageMain.aux->box, 0x100);
     for (s32 i = 0; i < 12; i++)
-        objFlagsSetBits(g_messageWindows[i]->handle, 0x100);
+        objFlagsSetBits(g_messageWindows[i]->box, 0x100);
     FUN_00144efc(FUN_001456fc);
     FUN_001445a0(FUN_00145534);
     asdTextSetDefaultValue(msgIsSkipInputActive);

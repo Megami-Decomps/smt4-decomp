@@ -1,14 +1,13 @@
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "ui/UiControl.h"
 #include "map/MapSceneAccess.h"
 
 extern "C" {
 
-extern LmapSceneA *g_lmapScene;
 
 u32 lmapSceneGetUnk0(void)
 {
-    return g_lmapScene->mainState;
+    return g_lmapScene->mode;
 }
 
 } /* extern "C" */

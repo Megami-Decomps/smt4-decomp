@@ -1,4 +1,4 @@
-#include "shard/W6_W6Match5_SecondarySort.h"
+#include "quest_center/QuestRecord.h"
 
 static inline s32 entryCategoryPriority(u8 kind)
 {
@@ -17,13 +17,13 @@ static inline s32 entryCategoryPriority(u8 kind)
 }
 extern "C" s32 FUN_001f62ec(const u16 *leftId, const u16 *rightId)
 {
-    const SecondarySortRecord *left = dataTable1bOr1cGetRecord(*leftId);
-    const SecondarySortRecord *right = dataTable1bOr1cGetRecord(*rightId);
+    const QuestRecord *left = dataTable1bOr1cGetRecord(*leftId);
+    const QuestRecord *right = dataTable1bOr1cGetRecord(*rightId);
     if (!left)
         return 0;
     if (!right)
         return 0;
-    s32 result = entryCategoryPriority(left->classification.kind) - entryCategoryPriority(right->classification.kind);
+    s32 result = entryCategoryPriority(left->kind) - entryCategoryPriority(right->kind);
     if (result != 0)
         return result;
     left = dataTable1bOr1cGetRecord(*leftId);
@@ -32,5 +32,5 @@ extern "C" s32 FUN_001f62ec(const u16 *leftId, const u16 *rightId)
         return 0;
     if (!right)
         return 0;
-    return left->classification.order - right->classification.order;
+    return left->order - right->order;
 }

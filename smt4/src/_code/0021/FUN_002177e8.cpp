@@ -4,9 +4,10 @@
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "battle/BtlMainAccess.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
 void FUN_00250720(BtlMainState *battle);
 void FUN_002551ac(s32 channel, ScriptUnit *unit, BtlActionRecord *record, s32 kind,
                   s32 maximum, s32 source, s32 target, s32 current, s32 previousMaximum,
@@ -14,7 +15,6 @@ void FUN_002551ac(s32 channel, ScriptUnit *unit, BtlActionRecord *record, s32 ki
                   s32 a17, s32 a18, s32 a19, s32 a20, s32 a21, s32 a22,
                   s32 a23, s32 a24, s32 a25);
 void FUN_00250680(s32 action, ScriptUnit *unit, BtlActionRecord *record, s32 flags);
-BtlEquip *gameGetUnitRecord(s32 index);
 void objectFlagSetBit(BtlEquip *record, u32 bit);
 void FUN_003ddc70(s32 channel, ScriptUnit *unit, s32 action, f32 duration);
 void btlQueueKeyedScalarReflectAction(s32 channel, ScriptUnit *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
@@ -33,7 +33,7 @@ u32 FUN_002177e8(void)
                       entry->maxHp, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
         FUN_00250680(0x19, unit, record, 0);
     } else {
-        BtlEquip *record = gameGetUnitRecord(id - BTL_ENTRY_COUNT);
+        BtlEquip *record = reinterpret_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));  /* battle code views unit records as BtlEquip */
         record->hp = 0;
         objectFlagSetBit(record, 1);
         FUN_003ddc70(0, unit, 15, 8.0f);

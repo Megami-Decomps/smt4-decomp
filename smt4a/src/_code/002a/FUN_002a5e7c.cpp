@@ -1,5 +1,6 @@
 /* NON_MATCHING: store order of the record update and the loop's scheduling differ from retail (150 rows against 147); the compendium percentage uses __aeabi_idivmod as retail does. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
+#include "gamedata/DevilRecordA.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 
 /* A party demon record (300 bytes each) as the compendium registration reads it. */
@@ -47,13 +48,6 @@ typedef char CompendiumRecordSizeCheck[sizeof(CompendiumRecord) == 0x50 ? 1 : -1
 #define COMPENDIUM_LISTED 1
 #define COMPENDIUM_SEEN 2
 
-/* The demon model table's entry. */
-struct DemonModelInfo {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u8 unk02[8];
-    /* 0x0A */ u16 flags;
-};
-
 /* The party block inside the save data: the order list and the 300-byte demon records. */
 struct PartyBlock {
     /* 0x0000 */ u8 unk0000[0x8C];
@@ -63,7 +57,6 @@ struct PartyBlock {
 
 extern "C" {
 
-DemonModelInfo *devilGetRecord(u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Registers the demon with the given id in the compendium from the party member that currently
@@ -119,7 +112,7 @@ void FUN_002a5e7c(u32 id)
         listed = 0;
         seen = 0;
         for (index = 0; index < 0x4FF; index++) {
-            DemonModelInfo *info = devilGetRecord((u16)(index + 1));
+            DevilRecordA *info = devilGetRecord((u16)(index + 1));
 
             if (info != NULL && (info->flags & COMPENDIUM_LISTED) != 0) {
                 listed++;

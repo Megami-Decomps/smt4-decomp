@@ -1,4 +1,5 @@
 #include "gfx/StereoSpriteSelection.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
@@ -6,8 +7,6 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern RenderCtxA* g_renderCtx;
-
 void efctSetSpeed(f32 speed);
 
 static __inline s32 stereoSpriteGroupIsReady(s32 group)

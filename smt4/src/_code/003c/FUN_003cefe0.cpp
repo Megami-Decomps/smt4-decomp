@@ -2,6 +2,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 struct PartyRescueEntryView {
     u16 timer;
@@ -14,7 +15,6 @@ u32 FUN_00246134(s32, u32, s32, s32);
 u32 btlGetPassiveAffinityOverride(u32, u32);
 s32 randRange(u16);
 void FUN_00246e24(u32, u32, BtlActionRecord *, u32, s32);
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 void FUN_0022a5d8(u32, BtlEntry *, s32);
 
 void FUN_003cefe0(BtlMainState **owner, u32 action, u32 parameter)

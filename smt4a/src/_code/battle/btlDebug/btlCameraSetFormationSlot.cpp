@@ -1,5 +1,6 @@
 /* NON_MATCHING: the offset copies now use VFP transfers (pointer copy) as in retail; camera/mask base and flag-mask load allocation still differ. */
 #include "shard/W6_W6Match6_BattleCamera.h"
+#include "gamedata/DevilRecordA.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -13,15 +14,10 @@ struct BattleFormationMasks {
     u8 unk48[0x10];
     u64 wideFormation;
 };
-struct BattleFormationDemon {
-    u8 unk00[0x34];
-    struct { u32 lower : 25; u32 height : 4; u32 upper : 3; } appearance;
-};
 extern "C" {
 extern BattleActionCamera *g_btlCamera;
 extern BattleVector3 DAT_005e1554;
 s32 FUN_004f2708(BattleActionCamera *, BtlMainStateA *, s32);
-const BattleFormationDemon *devilGetRecord(u32);
 
 void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle, s32 slot)
 {
@@ -62,8 +58,8 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle
     if (entry->flags & masks->zeroHeight) {
         camera->formation.position.y = 0.0f;
     } else if (entry->flags & masks->demonHeight) {
-        const BattleFormationDemon *demon = devilGetRecord(entry->id);
-        switch (demon->appearance.height) {
+        const DevilRecordA *demon = devilGetRecord(entry->id);
+        switch (demon->packed.formationHeight) {
         case 0: camera->formation.position.y = 0.0f; break;
         case 1: camera->formation.position.y = -3.5f; break;
         case 2: camera->formation.position.y = 3.0f; break;

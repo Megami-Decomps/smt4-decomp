@@ -1,5 +1,5 @@
 /* NON_MATCHING: Work-table indexing, scene-position argument loads, and the final request stores use different scratch registers. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "map/mapDepart.h"
 
 namespace {
@@ -20,7 +20,6 @@ struct NearestGimicWork {
 }
 extern "C" {
 extern NearestGimicWork *g_mapGimic;
-extern LmapScene *g_lmapScene;
 f32 mathDistanceBetweenPoints(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1);
 
 /* Requests the nearest active gimmick of the selected interaction kind. */
@@ -32,7 +31,7 @@ void FUN_0021df18(void)
         NearestGimicEntry *entry = &g_mapGimic->entries[i];
         if (entry->active != 0 && entry->kind == 0xF) {
             s32 distance = static_cast<s32>(mathDistanceBetweenPoints(
-                g_lmapScene->transform.position[0], g_lmapScene->transform.position[1], g_lmapScene->transform.position[2],
+                g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z,
                 entry->position.x, entry->position.y, entry->position.z));
             if (distance < bestDistance) {
                 bestDistance = distance;

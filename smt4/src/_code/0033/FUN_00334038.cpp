@@ -1,14 +1,12 @@
-#include "shard/PadState.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-extern PadState *gameGetPlayerData(void);
-
 int FUN_00334038(void)
 {
-    PadState *pad = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
 
-    return pad->unk1C;
+    return player->maxHp;
 }
 
 } /* extern "C" */

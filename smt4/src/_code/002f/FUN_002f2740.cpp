@@ -9,11 +9,6 @@ typedef struct {
     s32 handle;     /* 0x04 */
 } HandleHolder;
 
-/* Record looked up for a handle; only the group id is used here. */
-typedef struct {
-    u8 unk00[0x46];
-    u16 group;      /* 0x46 */
-} HandleRecord;
 
 int itemSortCompareByCategoryAndId(HandleHolder *first, HandleHolder *second);
 
@@ -26,12 +21,12 @@ void FUN_002f2740(HandleHolder *first, HandleHolder *second)
     if (first->handle < 0) {
         firstGroup = 0;
     } else {
-        firstGroup = static_cast<HandleRecord *>(gameGetUnitRecord(first->handle))->group;
+        firstGroup = gameGetUnitRecord(first->handle)->id;
     }
     if (second->handle < 0) {
         secondGroup = 0;
     } else {
-        secondGroup = static_cast<HandleRecord *>(gameGetUnitRecord(second->handle))->group;
+        secondGroup = gameGetUnitRecord(second->handle)->id;
     }
     s32 difference = secondGroup - firstGroup;
     if (difference != 0) {

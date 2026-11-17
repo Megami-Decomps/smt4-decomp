@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dd1a4` (_code @ 0x3dd1a4, 0x4c4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -30,8 +31,6 @@ typedef struct {
     unsigned int sp124; /* 0x124: local_124 */
     unsigned int sp128; /* 0x128: local_128 */
 } param_4_stack;
-
-extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: effectColorInitDefault. */
@@ -87,7 +86,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
   if (temp_v7 && temp_v1 != 0) {
     if ((g_btlMain != 0) &&
        (temp_v0 = *(char *)(param_1 + 0x3038), (temp_v0 == '\x02' || temp_v0 == '\b') || temp_v0 == '\t')) {
-      *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000000;
+      g_btlMain->flags = g_btlMain->flags | 0x4000000;
     }
     (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 8))();
     temp_v2 = (**(romwright_code **)(**(int **)(param_1 + 0x3034) + 0x14))();

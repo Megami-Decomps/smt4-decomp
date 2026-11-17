@@ -2,6 +2,7 @@
 #include "common.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/Table00Lookup.h"
+#include "gamedata/GamePlayerData.h"
 
 struct BtlMask {
     u32 low;
@@ -33,11 +34,6 @@ struct SlotTableView {
     /* 0x1CA3 */ u8 capacity;
 };
 
-struct PlayerLevelView {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 level;
-};
-
 #define BTL_UNIT_STRIDE 0x408
 #define BTL_FIRST_ENEMY 4
 #define BTL_UNIT_END 0x36
@@ -58,7 +54,6 @@ s32 gameFlagIsSet(s32 flag);
 s32 lcgRandomRange(u32 maximum);
 SlotTableView *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
-PlayerLevelView *gameGetPlayerData(void);
 s32 gameDataFlagTestBit(s32 bit);
 
 #define RECRUIT_BIT_BONUS 0x3E

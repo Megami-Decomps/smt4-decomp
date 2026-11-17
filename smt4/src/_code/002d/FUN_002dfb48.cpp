@@ -1,23 +1,25 @@
 /* NON_MATCHING: heading-offset arithmetic, radius branch layout, vector stack placement and VFP registers differ. */
 #include "map/mapEnemy.h"
+#include "map/LmapGlobals.h"
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include "util/TrigF32.h"
 
-struct SpawnScenePose { u8 prefix[0x18]; f32 heading; CollisionVector position; };
+/* The map view: its heading at 0x18. */
+struct SpawnViewHeading { u8 prefix[0x18]; f32 heading; };
 struct SpawnModePrefix { u8 prefix[0x44]; u16 mode; };
 extern "C" {
 extern MapEnemy *g_mapEnemy;
-extern SpawnScenePose *g_lmapScene, *DAT_004474f4;
+extern SpawnViewHeading *DAT_004474f4;
 extern SpawnModePrefix DAT_0049fb1c;
 u32 randNextInRange(u32 maximum);
-s32 FUN_0025b4b0(const CollisionVector *start, const CollisionVector *end, CollisionVector *hit);
+s32 FUN_0025b4b0(const MapVector *start, const MapVector *end, MapVector *hit);
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 
 u32 FUN_002dfb48(MapEnemyEncounterView *entry)
 {
     MapEnemy *enemies = g_mapEnemy;
     for (s32 attempt = 0; attempt < 4; ++attempt) {
-        CollisionVector candidate = g_lmapScene->position;
+        MapVector candidate = g_lmapScene->pose.position;
         s32 sequence = enemies->unk3044;
         f32 heading = DAT_004474f4->heading;
         f32 radius;
@@ -44,9 +46,9 @@ u32 FUN_002dfb48(MapEnemyEncounterView *entry)
         candidate.x += mathRemPio2f(heading) * radius;
         candidate.z += FUN_00282390(heading) * radius;
         ++enemies->unk3044;
-        CollisionVector start = g_lmapScene->position;
+        MapVector start = g_lmapScene->pose.position;
         start.y += 35.0f;
-        CollisionVector end = candidate;
+        MapVector end = candidate;
         end.y += 35.0f;
         if (FUN_0025b4b0(&start, &end, NULL) == -1) {
             entry->position.x = candidate.x;

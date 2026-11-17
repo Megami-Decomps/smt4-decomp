@@ -1,15 +1,14 @@
 /* NON_MATCHING: only the unit-loop affinity call's argument setup differs: retail loads unit (r1), 11 (r2), then the output address (r0). */
 #include "shard/Shard0031.h"
 #include "shard/Shard004B.h"
+#include "gamedata/GamePlayerData.h"
 
-struct PlayerStatusViewA { u8 prefix[0x5E]; u16 status; };
 extern "C" {
-PlayerStatusViewA* gameGetPlayerData(void);
 ScaledRecordValues* gameGetSlotRecord(s32 slot);
 PartyStatusSlots* gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 s32 randRange(u32 maximum);
-void demonBuildAffinitySlots(u16* affinities, const PlayerStatusViewA* player);
+void demonBuildAffinitySlots(u16* affinities, const PlayerDataA* player);
 void affinityResolveUnitSlot(u16* output, ScaledRecordValues* unit, s32 affinity);
 
 static inline s32 statusAffinityAllows(u16 affinity)
@@ -34,16 +33,16 @@ void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
     u32 mask = 1u << statusBit;
     u16 affinities[21];
     if ((group == 0 || group == 2 || group == 3) &&
-        !(gameGetPlayerData()->status & 2) && !(gameGetPlayerData()->status & 0x400) &&
-        !(gameGetPlayerData()->status & mask) && static_cast<f32>(randRange(99)) < chance) {
+        !(gameGetPlayerData()->ailments & 2) && !(gameGetPlayerData()->ailments & 0x400) &&
+        !(gameGetPlayerData()->ailments & mask) && static_cast<f32>(randRange(99)) < chance) {
         s32 canApply = 1;
         if (statusBit == 5) {
             demonBuildAffinitySlots(affinities, gameGetPlayerData());
             canApply = statusAffinityAllows(affinities[11]);
         }
         if (canApply) {
-            PlayerStatusViewA* player = gameGetPlayerData();
-            player->status |= mask;
+            PlayerDataA* player = gameGetPlayerData();
+            player->ailments |= mask;
         }
     }
     s32 count;

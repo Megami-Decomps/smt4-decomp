@@ -3,9 +3,9 @@
 
 #include "battle/BattleEntrySummary.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, u32 id);
 void btlEntryBuildSummary(BattleEntrySummary* result, BtlMainState* state, const BtlEntry* entry);
 
 // Converts the listed entry's summary percentage to a normalized scalar.

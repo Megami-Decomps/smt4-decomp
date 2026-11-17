@@ -1,5 +1,6 @@
 /* NON_MATCHING: the remaining differences are branch layout and register allocation of the state selection (the two `mov r0, #0` stub calls use FUN_00284dbc as the nearest equivalent stub). */
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 #include "code/Code002a_VariantA.h"
 
 extern "C" {
@@ -20,12 +21,6 @@ typedef struct QuestScreenView {
     u16 questIds[1];
 } QuestScreenView;
 
-/* A quest record: its kind byte at 6. */
-typedef struct QuestRecord {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u8 kind;
-} QuestRecord;
-
 extern QuestScreen *g_uiQuest;
 
 s32 resourceRunOperationIfUnblocked(void *list);
@@ -34,7 +29,6 @@ s32 partyEntryFlagsBit3(u32 id);
 s32 partyEntryBitsBit4(u32 id);
 u32 questHasSpecialDetailPage(u32 id);
 u32 rosterGetLeaderId(void);
-QuestRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 FUN_003de75c(u32 id);
 s32 FUN_00284dbc(u32 id); /* a `mov r0, #0` stub armlink inlines */
 void *dataTableGet(u32 table, u32 section);
@@ -67,7 +61,7 @@ void FUN_003d474c(void)
             state = partyEntryFlagsBit3(id) != 0 ? 3 : 6;
         }
     } else {
-        QuestRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecordA *record = dataTable1bOr1cGetRecord(id);
 
         if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
             if (FUN_003de75c(id) == 0 && FUN_00284dbc(id) == 0) {

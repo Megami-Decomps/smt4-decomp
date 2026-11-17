@@ -1,4 +1,5 @@
 #include "Terminal/LocaltmnlMain.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes.h"
 
@@ -11,7 +12,6 @@ struct LocalTerminalDrawState {
 };
 extern "C" {
 extern LocalTerminalDrawState *g_localTmnl;
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlagsWithAlpha(u32, f32);
 s32 renderCtxPackPassFlags(u32, u32);
 void effectNodeUpdatePlacedChildren(u32);

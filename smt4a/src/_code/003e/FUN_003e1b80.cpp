@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e1b80` (_code @ 0x3e1b80, 0x488 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern int g_btlCamera; /* 0x571508 */
 extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
@@ -109,7 +109,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         if (temp_v0 == 0) {
           return;
         }
-        if ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x200) != 0) {
+        if ((g_btlCamera->flags & 0x200) != 0) {
           return;
         }
         temp_v0 = pairedAvailabilityGetState(0);
@@ -159,7 +159,7 @@ LAB_003e1f28:
           *(unsigned int *)(param_2 + 0x45a4) = DAT_0057388c | *(unsigned int *)(param_2 + 0x45a4);
           *puVar10 = temp_v5;
         }
-        FUN_004f41b0(g_btlCamera,0,(int)(short)piVar3[2]);
+        FUN_004f41b0(reinterpret_cast<int>(g_btlCamera),0,(int)(short)piVar3[2]);
         FUN_004fdcd8((int)*(short *)((int)piVar3 + 10),param_1,0,0,7,0,6,0);
         btlQueueDuplicateSuppressedAction((int)(short)piVar3[4],param_1,(int)*(short *)((int)piVar3 + 0x12));
       }
@@ -180,7 +180,7 @@ LAB_003e1f28:
         if (temp_v6 < temp_v1) {
           do {
             if (param_3 == *(int *)(temp_v7 + temp_v6 * 0x14)) {
-              cameraBeginScalarTransition(g_btlCamera,1,0);
+              cameraBeginScalarTransition(reinterpret_cast<int>(g_btlCamera),1,0);
               param_1[4] = param_1[4] + 1;
               return;
             }
@@ -190,7 +190,7 @@ LAB_003e1f28:
         dataTableFileGetTable(temp_v0,0);
         dataTableGetEntries();
       }
-      cameraBeginScalarTransition(g_btlCamera,1,0);
+      cameraBeginScalarTransition(reinterpret_cast<int>(g_btlCamera),1,0);
     }
   }
   else {
@@ -209,7 +209,7 @@ LAB_003e1f28:
       else {
         FUN_004f7b84(g_btlAux,"ef_gboss001");
       }
-      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
+      g_btlCamera->flags = g_btlCamera->flags | 0x4000;
       param_1[3] = param_1[3] | 2;
       btlLoadBossAppearData(param_2);
       param_1[3] = param_1[3] | 0x10;

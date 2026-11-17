@@ -1,21 +1,8 @@
 /* NON_MATCHING: only register allocation differs (retail keeps the base percentage and a zero constant in extra callee-saved registers, and the first side-unit clamp stores the limit register). */
 #include "common.h"
 #include "gamedata/GameDataAccess.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTableIV.h"
-
-struct StepPlayerData {
-    /* 0x00 */ u8 unk00[0x0C];
-    /* 0x0C */ u16 id;
-    /* 0x0E */ u8 unk0E[0x0E];
-    /* 0x1C */ s16 maxHp;
-    /* 0x1E */ s16 maxMp;
-    /* 0x20 */ u8 unk20[0x0A];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ s16 mp;
-    /* 0x2E */ u8 unk2E[0x44];
-    /* 0x72 */ u16 flags;
-};
+#include "gamedata/GamePlayerData.h"
 
 struct StepUnitRecord {
     /* 0x00 */ u8 unk00[0x0E];
@@ -28,7 +15,6 @@ struct StepUnitRecord {
     /* 0x34 */ u16 skills[8];
     /* 0x44 */ u16 flags;
 };
-
 
 extern "C" {
 StepUnitRecord *gameGetUnitRecord(s32 slot);
@@ -104,21 +90,21 @@ static void healRegenSkillUnits(s32 percent, s32 count)
 void FUN_003a66c4(void)
 {
     s32 percent = 0;
-    if (!(reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->flags & 2)) {
+    if (!(gameGetPlayerData()->ailments & 2)) {
         if (flagBitIsSet(0x6B) || flagBitIsSet(0x69))
             percent = 5;
         else if (flagBitIsSet(0x68))
             percent = 2;
         s32 total = percent;
-        if (reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->id == 0x2A6)
+        if (gameGetPlayerData()->equipped.accessory == 0x2A6)
             total += 2;
         if (total > 0) {
-            s32 max = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->maxHp;
-            s32 hp = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->hp + percentOfMax(max, total);
+            s32 max = gameGetPlayerData()->maxHp;
+            s32 hp = gameGetPlayerData()->hp + percentOfMax(max, total);
             if (hp > max)
                 hp = max;
             s16 value = hp;
-            StepPlayerData *player = reinterpret_cast<StepPlayerData *>(gameGetPlayerData());
+            PlayerDataIV *player = gameGetPlayerData();
             s32 limit = player->maxHp;
             if (value > limit)
                 value = limit;

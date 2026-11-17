@@ -3,6 +3,7 @@
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/btlMain.h"
+#include "gamedata/UnitRecordAccess.h"
 
 // The count lies beyond the existing party-slot prefix view.
 struct ReservePartyView {
@@ -13,7 +14,6 @@ struct ReservePartyView {
 };
 extern "C" {
 extern u32 g_btlScriptUnit;
-BtlUnitLink* gameGetUnitRecord(s32 slot);
 ReservePartyView* gameGetSlotTable(void);
 
 // Check whether the selected combatant can be replaced by a different reserve unit.
@@ -37,7 +37,7 @@ u32 btlHasReserveReplacement(const BtlEntry* entry)
             ReservePartyView* party = gameGetSlotTable();
             for (s32 index = 0; index < party->count; ++index) {
                 if (party->stock[index] >= 0) {
-                    BtlUnitLink* unit = gameGetUnitRecord(party->stock[index]);
+                    StatBlock *unit = gameGetUnitRecord(party->stock[index]);
                     if (unit != NULL && unit->id != currentId && party->stock[index] >= 0)
                         return 1;
                 }

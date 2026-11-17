@@ -21,7 +21,7 @@ static inline s32 fusionCompareRaceLevelIdIV(u16 firstId, u16 secondId)
 
 static inline s32 fusionComparePriorityIV(s16 firstId, u16 secondId)
 {
-    const DevilRecord *first = devilGetRecord(firstId);
+    const DevilRecord *first = devilGetRecord((u16)firstId);
     const DevilRecord *second = devilGetRecord(secondId);
     s32 result = dataTableGetEntry0102Value(first->id) - dataTableGetEntry0102Value(second->id);
     if (result == 0)

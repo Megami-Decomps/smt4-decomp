@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 
@@ -20,7 +21,6 @@ struct BlinkFadeImage {
 extern "C" {
 extern BlinkFadeDrawState *g_eventEffect;
 extern BlinkFadeImage DAT_0057f3d0[2];
-extern RenderCtxA *g_renderCtx;
 void gxResetColorQuadToWhite();
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 s32 renderCtxPackPassFlags(u32, u32);

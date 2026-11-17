@@ -1,4 +1,5 @@
 #include "saveLoadUI/saveLoadUI.h"
+#include "gamedata/GamePlayerData.h"
 #include "shard/Sys44de28.h"
 #include <stddef.h>
 #include <string.h>
@@ -10,10 +11,9 @@ void FUN_002996d8(u32);
 void __aeabi_memcpy4(void *, const void *, u32);
 char *libc_strcpy(char *, const char *);
 void *gameDataBlocksGetSaveData(void);
-void FUN_0029a0e8(PlayerInitialRecordIV *);
+void FUN_0029a0e8(PlayerDataIV *);
 void FUN_0026b5a8(bool);
 void FUN_0029c4c8(u32);
-PlayerInitialRecordIV *gameGetPlayerData(void);
 void FUN_0029963c(u32, u16);
 
 void saveUiRefreshSelectedSlotPreview(void)
@@ -24,17 +24,11 @@ void saveUiRefreshSelectedSlotPreview(void)
         SaveLoadUIWork *work;
         s32 selected;
     };
-    // A word in PlayerInitialRecordIV's halfword-aligned padding cannot grow that union's alignment.
-    struct PlayerExperienceView {
-        u8 unk00[0x30];
-        u32 experience;
-    };
     struct SaveProfileNameView {
         u8 unk00[0x54];
         char name[0x12];
     };
     typedef char SavePreviewLocalOffsets[offsetof(SaveUiGlobalsView, selected) == 8 &&
-        offsetof(PlayerExperienceView, experience) == 0x30 &&
         offsetof(SaveProfileNameView, name) == 0x54 ? 1 : -1];
     SaveUiGlobalsView *globals = reinterpret_cast<SaveUiGlobalsView *>(&g_saveLoadUIFlags);
     SaveLoadUIWork *work = globals->work;
@@ -53,16 +47,16 @@ void saveUiRefreshSelectedSlotPreview(void)
     FUN_0029dfc0(1);
     gameSetIconDisplayEnabled(1);
     FUN_002996d8(0);
-    PlayerInitialRecordIV *player = work->preview.player;
+    PlayerDataIV *player = work->preview.player;
     const SavePreviewSlot *slot = &work->preview.slots[globals->selected];
     memcpy(player->equipment, slot->equipment, sizeof(player->equipment));
     memcpy(&player->baseStats, slot->baseStats, sizeof(player->baseStats));
-    __aeabi_memcpy4(&player->maximumHp, slot->maximums, sizeof(slot->maximums));
+    __aeabi_memcpy4(&player->maxHp, slot->maximums, sizeof(slot->maximums));
     player->hp = slot->hp;
     player->mp = slot->mp;
-    reinterpret_cast<PlayerExperienceView *>(player)->experience = slot->experience;
+    player->experience = slot->experience;
     libc_strcpy(player->name, slot->name);
-    player->enabled = slot->enabled;
+    player->level = slot->enabled;
     libc_strcpy(static_cast<SaveProfileNameView *>(gameDataBlocksGetSaveData())->name, slot->name);
     FUN_0029a0e8(work->preview.player);
     slot = &work->preview.slots[globals->selected];

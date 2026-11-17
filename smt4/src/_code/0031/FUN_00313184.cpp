@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 #include "gamedata/Table8Type5Lookup.h"
 #include "gamedata/ItemSortRecord.h"
 #include "gamedata/DataTable40.h"
@@ -11,7 +12,6 @@ struct ItemSortKey {
 
 extern "C" {
 s32 idIsAbove400(u32 id);
-s32 itemGetSortCategory(u32 id);
 s32 itemSortCompareByCategoryAndId(const ItemSortKey *left, const ItemSortKey *right);
 }
 

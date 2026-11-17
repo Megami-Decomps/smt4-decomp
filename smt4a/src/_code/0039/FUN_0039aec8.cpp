@@ -1,8 +1,7 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 void *renderCtxResetFrameState(void *context);
 void FUN_0035b76c(void *context);
 

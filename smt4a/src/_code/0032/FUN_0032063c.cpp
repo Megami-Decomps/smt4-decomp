@@ -1,8 +1,8 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 #include "shard/JobWork.h"
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 u32 renderCtxPackPassFlagsWithAlpha(u32 compare, f32 reference);
 u32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void effectNodeUpdatePlacedChildren(u32 object);

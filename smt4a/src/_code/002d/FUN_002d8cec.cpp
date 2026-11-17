@@ -59,7 +59,7 @@ extern "C" void FUN_002d8cec(void)
             ModelGroupSlot *storage = group == 0 ? &g_modelGroups->primary[i] : &g_modelGroups->secondary[i];
             ModelGroupResumeSlot *slot = reinterpret_cast<ModelGroupResumeSlot *>(storage);
             if (slot->active) {
-                if (g_gameState.departLoading) {
+                if (g_gameState.loading) {
                     suspendModelGroupSlot(slot);
                     slot->dirty = 1;
                 } else if (slot->dirty) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the battle command menu's result selection; retail shares its skip/candidate tails by jumps (the draft's six gotos) and computes the work-block offsets from three base registers, which armcc here emits from the structured conditions. */
 #include "battle/BtlMainAccess.h"
+#include "gamedata/DevilRecordA.h"
 #include "common.h"
 #include "ui/PartyPanelCapacity.h"
 #include "code/Code002a.h"
@@ -19,11 +20,6 @@ struct CommandEntry {
 struct MemberRecord {
     /* 0x00 */ u8 unk00[0x62];
     /* 0x62 */ u16 equipment;
-};
-
-struct EquipmentInfo {
-    /* 0x00 */ u8 unk00[0xB3];
-    /* 0xB3 */ u8 flags;           /* bit 2: allows the command */
 };
 
 /* The battle command work (only the fields read here). */
@@ -62,7 +58,6 @@ s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
 s32 idListHasFlaggedRecord(MemberRecord *member);
 s32 btlIsDefeatSuppressed(void);
-EquipmentInfo *devilGetRecord(u32 equipment);
 s32 FUN_002b24fc(void);
 
 /* Whether a target command is usable by the member: allowed by the member's equipment when no
@@ -71,8 +66,8 @@ static bool targetCommandAllowed(CommandEntry *entry, MemberRecord *member)
 {
     if ((entry->attributes & 1) || btlIsDefeatSuppressed() == 0 || btlIsDefeatSuppressed() == 0)
         return false;
-    EquipmentInfo *info = devilGetRecord(member->equipment);
-    return info != NULL && (info->flags & 4) != 0;
+    DevilRecordA *info = devilGetRecord(member->equipment);
+    return info != NULL && (info->extraFlags & 4) != 0;
 }
 
 /* Picks which command the menu returns for the current selection: walks the ten command slots,

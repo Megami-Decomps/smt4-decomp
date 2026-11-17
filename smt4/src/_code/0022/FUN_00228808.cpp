@@ -2,9 +2,9 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BattleBalanceRow.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 s32 randRange(u32);
 
 /* Roll a unit-dependent chance, increasing it for enemies below forty percent HP. */

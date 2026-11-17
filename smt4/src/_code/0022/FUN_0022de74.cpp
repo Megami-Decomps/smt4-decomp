@@ -117,11 +117,11 @@ void FUN_0022de74(DevilPreviewWork *work)
                 unit.reset.clearedWords[i] = 0;
             }
             memClear(unit.reset.growth, 0x500);
-            bitsetSetBit(&unit.state, devil->initialization.innateFlag);
+            bitsetSetBit(&unit.state, devil->innateFlag);
             unitRecalculateEffectiveStats(&unit.state);
-            unit.state.copy0 = unit.state.unk0E;
-            unit.state.copy1 = unit.state.unk10;
-            *(u16 *)unit.state.unk44 = 0;
+            unit.state.hp = unit.state.maxHp;
+            unit.state.mp = unit.state.maxMp;
+            unit.state.ailments = 0;
             FUN_0029c4e4(&unit.state, 0);
             FUN_0029c4c8(1);
             if (work->previewShown == 0) {

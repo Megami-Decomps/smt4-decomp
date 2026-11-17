@@ -1,9 +1,9 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "code/Code0014.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern EffMiscKind g_effMiscKinds[];
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void uiSpriteRefreshMode(RenderCtxA *context);

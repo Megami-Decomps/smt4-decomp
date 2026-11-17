@@ -1,5 +1,6 @@
 /* NON_MATCHING: copies a captured frame surface into the half-size work surface and draws it scaled; the capture/copy arms are now duplicated per surface and the wide (480) horizontal extent condition restored as in retail (245 vs 248 rows); remaining: global/work pointer load order (retail reads g_frameTex twice and the work pointer through the 0x1490 literal) and register numbering. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
@@ -28,7 +29,6 @@ struct FrameCopyTex {
 
 extern "C" {
 extern FrameCopyTex *g_frameTex;
-extern RenderCtxA *g_renderCtx;
 
 void surfaceCopy(AsdTexture *source, AsdTexture *destination);
 f32 FUN_001a9698(f32 base, f32 exponent);

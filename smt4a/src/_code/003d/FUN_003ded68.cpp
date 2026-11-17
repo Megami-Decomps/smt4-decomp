@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 extern "C" {
 ItemEligibilityStateA* gameGetPlayerData(void);
 s32 goalConditionsSatisfied(s32);
@@ -16,10 +17,10 @@ u32 FUN_003ded68(s32 id)
         return 0;
     }
     if (gameUnlockRecordRequirementsMet(id) != 0) {
-        ItemDataRecord* record = dataTable1bOr1cGetRecord(id);
+        QuestRecordA* record = dataTable1bOr1cGetRecord(id);
         if (record != NULL) {
             u32 value = gameGetPlayerData()->value;
-            if (record->eligibilityThreshold != 0 && record->eligibilityThreshold <= (s32)value) {
+            if (record->requiredLevel != 0 && record->requiredLevel <= (s32)value) {
                 return 1;
             }
         }

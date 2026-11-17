@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 namespace {
 inline void pushRasterState(RenderCtxA *context, s32 state)
@@ -11,7 +12,6 @@ inline void pushDepthState(RenderCtxA *context, s32 state)
 }
 }
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlagsWithAlpha(u32 mode, f32 parameter);
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void eplUpdateActiveNodes();

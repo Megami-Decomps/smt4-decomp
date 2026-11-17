@@ -1,3 +1,5 @@
+#include "game/GameState.h"
+/* The decompiler copies some game state fields as raw words of another type: those uses cast. */
 /* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail; the body is still the raw decompiler control-flow draft, so branch layout and register allocation differ. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
@@ -5,20 +7,6 @@
 #include "shard/S1Mover.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x80];
-    unsigned int f0049f99c; /* 0x080 */
-    unsigned int f0049f9a0; /* 0x084 */
-    unsigned int f0049f9a4; /* 0x088 */
-    unsigned int f0049f9a8; /* 0x08c */
-    unsigned int f0049f9ac; /* 0x090 */
-    u8 pad094[0xc];
-    float f0049f9bc; /* 0x0a0 */
-    u8 pad0a4[0x186];
-    unsigned char f0049fb46; /* 0x22a */
-};
-extern GameStateView g_gameState;
 
 
 int FUN_0019db68(void);
@@ -130,7 +118,7 @@ void FUN_002d4874(void)
                 soundActorStartOnFreeChannel(0x1000240, position);
               }
               if (*(int *)(g_lmapScene + 8) == 2) {
-                g_gameState.f0049fb46 = 0;
+                g_gameState.map.transitionCompleted = 0;
                 mapIfReleaseSlot3();
                 temp_v0 = g_lmapScene;
                 puVar5 = (unsigned int *)(g_lmapScene + 0x1c);
@@ -147,7 +135,7 @@ void FUN_002d4874(void)
           }
           else {
             *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-            mapIfActivateRecord(1,g_gameState.f0049f99c);
+            mapIfActivateRecord(1,g_gameState.overviewRecord);
             temp_v1 = FUN_0027ee9c();
             temp_v0 = g_lmapScene;
             if (temp_v1 != 0) {
@@ -182,7 +170,7 @@ void FUN_002d4874(void)
                 temp_v0 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 0x54) = 0;
                 *(unsigned int *)(temp_v0 + 0x58) = 0x40a00000;
-                mapIfActivateRecord(0,g_gameState.f0049f99c);
+                mapIfActivateRecord(0,g_gameState.overviewRecord);
                 mapIfReleaseSlot3();
                 temp_v0 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -193,7 +181,7 @@ void FUN_002d4874(void)
         }
         else {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          mapIfActivateRecord(1,g_gameState.f0049f99c);
+          mapIfActivateRecord(1,g_gameState.overviewRecord);
           temp_v0 = g_lmapScene;
           if (*(int *)(g_lmapScene + 8) >= 3) {
             temp_v1 = *(int *)(g_lmapScene + 4);
@@ -208,19 +196,19 @@ void FUN_002d4874(void)
         *(unsigned int *)(g_lmapScene + 0x54) = 0;
         *(unsigned int *)(temp_v0 + 0x58) = 0x40400000;
         *(unsigned char *)(temp_v0 + 0x6c) = 0;
-        temp_v3 = g_gameState.f0049f9a8;
-        temp_v6 = g_gameState.f0049f9a4;
-        *(unsigned int *)(temp_v0 + 0x28) = g_gameState.f0049f9a0;
+        temp_v3 = (*(unsigned int *)&g_gameState.overviewPosition.z);
+        temp_v6 = (*(unsigned int *)&g_gameState.overviewPosition.y);
+        *(unsigned int *)(temp_v0 + 0x28) = (*(unsigned int *)&g_gameState.overviewPosition.x);
         *(unsigned int *)(temp_v0 + 0x2c) = temp_v6;
         *(unsigned int *)(temp_v0 + 0x30) = temp_v3;
-        *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
-        *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(g_gameState.f0049f9bc * 0.017453292f) * 25.0f;
+        *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(g_gameState.heading * 0.017453292f) * 25.0f;
+        *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(g_gameState.heading * 0.017453292f) * 25.0f;
         temp_v0 = g_lmapScene;
-        *(unsigned int *)(temp_v0 + 0x50) = g_gameState.f0049f9ac;
+        *(unsigned int *)(temp_v0 + 0x50) = (*(unsigned int *)&g_gameState.overviewHeading);
         FUN_0027fc14(0xd);
         *(unsigned int *)(DAT_004474f4 + 0xac) = 1;
         buttonHelpSetPreset(0xda);
-        mapIfActivateRecord(1,g_gameState.f0049f99c);
+        mapIfActivateRecord(1,g_gameState.overviewRecord);
         FUN_0019db68();
         temp_v0 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;

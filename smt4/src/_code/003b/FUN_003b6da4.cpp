@@ -2,6 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "ui/UiControl.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct SlotCycleFrame {
 extern u8 *g_titleScene;
 
 SlotCycleFrame *asdTMTexTableEntryAt(s32 a, s32 b);
-u16 *gameGetUnitRecord(s32 index);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Draws the slot marker of party unit `unit`: with several slots owned it cycles between the
@@ -33,7 +33,7 @@ void FUN_003b6da4(u8 *work, s32 unit, s32 x, s32 y)
     s32 *counter;
 
     if (unit >= 0) {
-        mask = gameGetUnitRecord(unit)[0x44 / 2];
+        mask = gameGetUnitRecord(unit)->ailments;
     }
     for (s32 slot = 1; slot <= 10; slot++) {
         if ((mask & (1 << slot)) != 0) {

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 #include "gamedata/Table1bOr1c.h"
 
 extern "C" {
@@ -9,17 +10,11 @@ typedef struct QuestClearScene {
     /* 0x0C */ s32 frame;
 } QuestClearScene;
 
-typedef struct QuestRecord1b {
-    /* 0x000 */ u8 unk000[0x148];
-    /* 0x148 */ u16 rewardId;
-} QuestRecord1b;
-
 void eventQueueAddUnique(u32 event);
 void FUN_00275dec(void);
 void frameTexApplyMode(s32 arg);
 u32 rosterGetLeaderId(void);
 void qcMainSetMode(s32 mode);
-QuestRecord1b *dataTable1bOr1cGetRecord(u32 id);
 void FUN_0026f960(u16 rewardId);
 void buttonHelpRelease(void);
 
@@ -52,7 +47,7 @@ void FUN_0038358c(QuestClearScene *scene)
 
         if (quest != 0 && table1bOr1cGetRecordValue(quest) == 6) {
             qcMainSetMode(1);
-            FUN_0026f960(dataTable1bOr1cGetRecord(quest)->rewardId);
+            FUN_0026f960(dataTable1bOr1cGetRecord(quest)->event.package);
             buttonHelpRelease();
         }
         break;

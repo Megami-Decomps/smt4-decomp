@@ -1,4 +1,6 @@
 #include "gamedata/FlagBitTests.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 /* NON_MATCHING: reward/passive loops retain different registers and stack spills; first unit record now supplies the final member index and the money guard encloses its linker-inlined bonus query. */
 typedef unsigned char u8;
 typedef signed char s8;
@@ -32,24 +34,11 @@ struct ResultTotals {
     s32 totalMoney;                 /* 0x3650 */
 };
 
-struct PlayerData {
-    u8 pad00[0x76];
-    u8 expTable;                    /* 0x76 */
-};
-
 struct SlotTable {
     u8 pad0000[0x90F0];
     s8 member[PARTY_SLOTS];         /* 0x90F0 */
 };
 
-struct UnitRecord {
-    u8 pad00[0x34];
-    u16 passive[8];                 /* 0x34 */
-    u8 pad44[4];
-    u8 expTable;                    /* 0x48 */
-    u8 pad49[1];
-    u8 memberIndex;                 /* 0x4A */
-};
 
 struct PassiveSkill {
     u8 pad00[0x2F];
@@ -61,9 +50,7 @@ extern ResultTotals *g_result;      /* 0x44dc20 */
 u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 PassiveSkill *passiveSkillLookupRecord(u32 skill);
 s32 playerPadTestBit(u32 bit);
-UnitRecord *gameGetUnitRecord(s32 member);
 SlotTable *gameGetSlotTable(void);
-PlayerData *gameGetPlayerData(void);
 s32 questQueryFalse(void);
 
 /* Adds one battle reward (money, items, experience) into the result screen totals and splits the
@@ -72,7 +59,7 @@ void FUN_00223360(BattleReward *reward)
 {
     ResultTotals *totals = g_result;
     SlotTable *slots = gameGetSlotTable();
-    PlayerData *player = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
 
     u32 money = reward->money;
     if (money != 0) {
@@ -110,7 +97,7 @@ void FUN_00223360(BattleReward *reward)
 
     s32 level = reward->level;
     s32 exp = reward->exp;
-    s32 partyExp = exp * dataTable09Sub3GetRecord(player->expTable, level) / 100;
+    s32 partyExp = exp * dataTable09Sub3GetRecord(player->level, level) / 100;
     if (partyExp <= 0 && exp != 0) {
         partyExp = 1;
     }
@@ -122,7 +109,7 @@ void FUN_00223360(BattleReward *reward)
         if (slots->member[i] < 0) {
             continue;
         }
-        UnitRecord *firstUnit = gameGetUnitRecord(slots->member[i]);
+        StatBlock *firstUnit = gameGetUnitRecord(slots->member[i]);
         if (flagWordTestBit(firstUnit, 1) != 0 || flagWordTestBit(firstUnit, 10) != 0 || flagWordTestBit(firstUnit, 2) != 0) {
             continue;
         }
@@ -131,18 +118,18 @@ void FUN_00223360(BattleReward *reward)
         if (slots->member[8] == member || slots->member[9] == member || slots->member[10] == member) {
             active = 1;
         }
-        UnitRecord *unit = gameGetUnitRecord(member);
+        StatBlock *unit = gameGetUnitRecord(member);
         f32 scale = 1.0f;
         for (s32 k = 0; k < 8; k++) {
-            if (unit->passive[k] != 0) {
-                PassiveSkill *skill = passiveSkillLookupRecord(unit->passive[k]);
+            if (unit->skills.ids[k] != 0) {
+                PassiveSkill *skill = passiveSkillLookupRecord(unit->skills.ids[k]);
                 if (skill != 0 && skill->expBonusPercent != 0) {
                     scale = (f32)skill->expBonusPercent * 0.01f * scale;
                 }
             }
         }
         u32 share = (u32)exp * (s32)(scale * 100.0f) / 100;
-        u32 value = share * dataTable09Sub3GetRecord(unit->expTable, level) / 100;
+        u32 value = share * dataTable09Sub3GetRecord(unit->level, level) / 100;
         if (value == 0 && share != 0) {
             value = 1;
         }
@@ -152,7 +139,7 @@ void FUN_00223360(BattleReward *reward)
         if ((s32)value <= 0 && exp != 0) {
             value = 1;
         }
-        totals->expByMember[firstUnit->memberIndex] += value;
+        totals->expByMember[firstUnit->growth.slot] += value;
     }
 }
 

@@ -1,20 +1,9 @@
 /* NON_MATCHING: float register allocation/scheduling differs (retail keeps the percent damage in s23, the group count in r5 and a shared zero in sl); logic and calls are identical. */
 #include "common.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
-/* The player's save record (only the fields the damage touches). */
-struct PlayerRecord {
-    /* 0x00 */ u8 unk00[0x1c];
-    /* 0x1c */ s16 maxHp;
-    /* 0x1e */ u16 maxMp;
-    /* 0x20 */ u8 unk20[10];
-    /* 0x2a */ s16 hp;
-    /* 0x2c */ u16 mp;
-    /* 0x2e */ u8 unk2e[0x30];
-    /* 0x5e */ u16 status;
-};
 
 /* A demon slot's record. */
 struct SlotRecord {
@@ -76,10 +65,10 @@ extern "C" void FUN_0049fe58(u32 mode, f32 percent)
     if (!(percent > 0.0f)) {
         return;
     }
-    if ((mode == 0 || mode == 2 || mode == 3) && (reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->status & STATUS_PROTECTED) == 0 &&
-        (reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->status & STATUS_NEVER) == 0) {
-        f32 maxHp = (f32)reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->maxHp;
-        f32 hp = (f32)reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->hp;
+    if ((mode == 0 || mode == 2 || mode == 3) && (gameGetPlayerData()->ailments & STATUS_PROTECTED) == 0 &&
+        (gameGetPlayerData()->ailments & STATUS_NEVER) == 0) {
+        f32 maxHp = (f32)gameGetPlayerData()->maxHp;
+        f32 hp = (f32)gameGetPlayerData()->hp;
         f32 damage = maxHp * percent * 0.01f;
         if (!(damage > 0.0f)) {
             damage = 1.0f;
@@ -89,7 +78,7 @@ extern "C" void FUN_0049fe58(u32 mode, f32 percent)
             remaining = 1.0f;
         }
         s16 newHp = (s16)(s32)remaining;
-        PlayerRecord *player = reinterpret_cast<PlayerRecord *>(gameGetPlayerData());
+        PlayerDataA *player = gameGetPlayerData();
         player->hp = limitHp(newHp, player->maxHp);
         if (hp - remaining > 0.0f) {
             gameCounterAddSaturating(0x17, (s32)hp - (s32)remaining);

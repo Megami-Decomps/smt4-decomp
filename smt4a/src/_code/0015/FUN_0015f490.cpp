@@ -1,5 +1,6 @@
 /* NON_MATCHING: plays a demon's voice/motion line: picks the name slot of the 0x7c-byte record for the requested kind (with the random variants), copies the 10-character name, patches its trailing digits / suffix letter from the kind-specific override table, and starts it; written from the decompilation, the argument of devilGetRecord, the field read from its result and the base offset of the name slots inside the record are recovered from lost arguments, and the float scale arrives in s0 (VFP argument) */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "gamedata/DataTable.h"
 #include "code/Code0014.h"
 #include "util/Random.h"
@@ -12,7 +13,6 @@
 #define LINE_OVERRIDE_STRIDE 8
 #define LINE_KIND_SLOT_A 5
 #define LINE_KIND_SLOT_B 6
-#define LINE_OWNER_KEY_OFFSET 0x9E
 #define LINE_SUFFIX_NONE 0
 #define LINE_SUFFIX_A 1
 #define LINE_SUFFIX_B 2
@@ -37,7 +37,6 @@ struct LineOverride {
 };
 
 extern "C" {
-u8 *devilGetRecord(u32 id);
 void rt_memcpy(void *destination, const void *source, s32 size);
 void rt_aeabi_memclr(void *block, s32 size);
 void FUN_001628c0(const char *name, u32 value, s32 mode, u32 argument);
@@ -87,12 +86,12 @@ void FUN_0015f490(u32 id, s32 kind, u32 argument, u32 variant, f32 scale)
         return;
     section = dataTableGet(LINE_TABLE, 0);
     s32 recordCount = dataTableGetCount(section);
-    u8 *source = devilGetRecord(id & 0xFFFF);
+    const DevilRecordA *source = devilGetRecord(id & 0xFFFF);
     if (source == NULL)
         return;
     u32 key;
     if (recordCount > 0)
-        key = source[LINE_OWNER_KEY_OFFSET];
+        key = source->lineKey;
 
     s32 found = 0;
     for (s32 i = 0; i < recordCount; i++) {

@@ -1,12 +1,11 @@
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
-extern LmapSceneA *g_lmapScene;
 
 u32 FUN_00367f98(void)
 {
-    return g_lmapScene->unk1D0;
+    return g_lmapScene->movementState;
 }
 
 } /* extern "C" */

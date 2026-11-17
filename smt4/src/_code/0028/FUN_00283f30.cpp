@@ -1,10 +1,8 @@
-#include "shard/PadState.h"
 #include "code/Code0028_Smt4.h"
 #include "gamedata/EquipmentRecord.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-extern PadState *gameGetPlayerData(void);
 
 typedef struct Dest {
     /* 0x00 */ u32 unk00;
@@ -16,15 +14,15 @@ typedef struct Dest {
 
 void FUN_00283f30(Dest *dest, int withSource)
 {
-    PadState *pad = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
     EquipmentRecord *source;
 
-    dest->unk00 = pad->unk34;
-    dest->unk04 = pad->unk38;
-    dest->unk08 = pad->unk3C;
-    dest->unk0C = pad->unk40;
+    dest->unk00 = player->skillWords[0];
+    dest->unk04 = player->skillWords[1];
+    dest->unk08 = player->skillWords[2];
+    dest->unk0C = player->skillWords[3];
     if (withSource != 0) {
-        source = dataTable08Sub2GetRecord(pad->unk0C);
+        source = dataTable08Sub2GetRecord(player->equipped.accessory);
         if (source != NULL) {
             dest->unk10 = source->modifierId;
         }

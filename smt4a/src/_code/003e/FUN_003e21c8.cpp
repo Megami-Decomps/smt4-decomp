@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation and load scheduling only (query/flags pointer in r8/r9 swapped; the encounter mask halves load with one ldm here, retail loads them with two ldr around the flags ldm) */
 #include "common.h"
 #include "battle/BattleEncounter.h"
+#include "battle/BtlGlobals.h"
 
 /* The arrangement file: a four digit decimal version in the first bytes, then the record block. */
 struct ArrangementFileA {
@@ -60,7 +61,6 @@ struct BtlEncountMasks {
 extern "C" {
 
 extern BtlEncountMasks g_btlEncount; /* 0x573828 */
-extern void *g_btlCamera;            /* 0x571508 */
 
 void __aeabi_memcpy4(void *dest, const void *src, u32 bytes);
 void FUN_003f0c78(EncounterContextA *context);
@@ -68,7 +68,6 @@ void battleRestoreCameraVectors(EncounterContextA *context);
 void words10CopyHighToLow(void *camera);
 s32 FUN_003e0f94(BattleEncounterQuery *query, EncounterContextA *context);
 void FUN_003e0bb8(BattleEncounterQuery *query, EncounterContextA *context);
-u16 *btlFindEntryBlockByMemberId(EncounterContextA *context, s32 entry);
 s32 pairedEntryTableContains(EncounterContextA *context, u16 id);
 void btlQueueActionMessage(s32, s32, s32, s32, s32, s32, s32);
 void frameTexRequestFade(s32 mode);
@@ -115,7 +114,7 @@ void FUN_003e21c8(BattleEncounterQuery *query, EncounterContextA *context)
     }
     FUN_003f0c78(context);
     battleRestoreCameraVectors(context);
-    words10CopyHighToLow(g_btlCamera);
+    words10CopyHighToLow(reinterpret_cast<void *>(g_btlCamera));
     result = FUN_003e0f94(query, context);
     if (result == 1 || result == 2 || result == 5) {
         for (i = 4; i < BATTLE_ENCOUNTER_RECORD_COUNT; i++) {
@@ -124,7 +123,7 @@ void FUN_003e21c8(BattleEncounterQuery *query, EncounterContextA *context)
             if ((record->flags & 1) && (record->flags & 2) && (record->stateFlags & 8)) {
                 record->stateFlags &= ~8;
                 if (!(record->loadFlags & 0x800)) {
-                    u16 *entry = btlFindEntryBlockByMemberId(context, record->entryId);
+                    u16 *entry = reinterpret_cast<u16 *>(btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(context), record->entryId));
 
                     if (!pairedEntryTableContains(context, entry[1])) {
                         record->loadFlags |= 0x800;

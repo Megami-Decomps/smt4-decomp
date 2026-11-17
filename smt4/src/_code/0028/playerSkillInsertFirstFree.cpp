@@ -10,8 +10,8 @@ void playerSkillInsertFirstFree(u32 skill)
     PlayerDataIV *player = &g_gameDataBlocks.saveBlock->body.slots.player;
     s32 capacity = statusGetAvailableChoiceCount();
     for (s32 index = 0; index < capacity; ++index) {
-        if (player->skills[index] == 0) {
-            player->skills[index] = skill;
+        if (player->skillChoices[index] == 0) {
+            player->skillChoices[index] = skill;
             return;
         }
     }

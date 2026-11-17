@@ -1,5 +1,6 @@
 /* NON_MATCHING: color channel conversion folds to REV, while cached draw-state push/pop and offset arithmetic are scheduled differently. */
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 
 static __inline u32 rectangleColorToNative(u32 color)
 {
@@ -8,7 +9,6 @@ static __inline u32 rectangleColorToNative(u32 color)
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern f32 g_uiDrawOffset[2];
 u32 renderCtxPackPassFlags(u32 mode, u32 enabled);
 void gxSubmitDrawZeroExtraParams(u32 colorA, u32 colorB, u32 colorC, u32 colorD,

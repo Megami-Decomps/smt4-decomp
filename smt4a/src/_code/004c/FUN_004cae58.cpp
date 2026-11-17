@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cae58` (_code @ 0x4cae58, 0x44c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int FUN_003ec668(...);
-int btlMainFindEntryByListedId(...);
 int FUN_003f2638(...);
 int callOnHandleField4A(...);
 int FUN_004d8668(...);
@@ -47,7 +47,6 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern int g_btlCamera; /* 0x571508 */
 
 extern int querySlotHasHandle(void);
 extern int gameFlagIsSet(unsigned int);
@@ -63,7 +62,6 @@ extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: targetStartIndexWithFlag2. */
 extern int handleOwnerIsActive(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
-extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: obj4FStartSwitch. */
 /* Supplied declaration required: FUN_004fd2cc. */
 /* Supplied declaration required: FUN_004fecd4. */
@@ -90,7 +88,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
   unsigned long long temp_v11;
   
   pfVar3 = param_1;
-  btlMainFindEntryByListedId(param_1,(int)*(short *)(param_2 + 0x6a));
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(param_1), (int)*(short *)(param_2 + 0x6a));
   temp_v4 = (unsigned int)*(unsigned short *)&pfVar3->field_0x166;
   if (temp_v4 == 0x35b) {
     temp_v2 = gameFlagIsSet(0x592);
@@ -156,18 +154,18 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
   }
   temp_v2 = FUN_003ec668(param_1);
   if (temp_v2 != 0) {
-    if ((((*(unsigned char *)(temp_v2 + 0x39) & 1) != 0) && (*(int *)(g_btlCamera + 0x38) != 3)) &&
+    if ((((*(unsigned char *)(temp_v2 + 0x39) & 1) != 0) && (*(int *)(reinterpret_cast<int>(g_btlCamera) + 0x38) != 3)) &&
        ((*(unsigned int *)(param_2 + 0x50) & 0x400000) == 0)) {
-      obj4FStartSwitch(g_btlCamera,(int)*(short *)(temp_v2 + 0x3a));
+      obj4FStartSwitch(reinterpret_cast<int>(g_btlCamera),(int)*(short *)(temp_v2 + 0x3a));
       *(unsigned int *)(param_2 + 0x50) = *(unsigned int *)(param_2 + 0x50) | 0x400000;
       if ((*(unsigned char *)(temp_v2 + 0x39) & 2) == 0) {
-        *(unsigned char *)(g_btlCamera + 0x6a8) = 0;
+        *(unsigned char *)(reinterpret_cast<int>(g_btlCamera) + 0x6a8) = 0;
       }
       else {
-        *(unsigned char *)(g_btlCamera + 0x6a8) = 1;
+        *(unsigned char *)(reinterpret_cast<int>(g_btlCamera) + 0x6a8) = 1;
         param_1[0x25].field_0x34 = 1;
       }
-      temp_v6 = btlUnitGet(g_btlScriptUnit);
+      temp_v6 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
       temp_v3 = 0;
       if (temp_v6 != 0) {
         temp_v3 = temp_v6;

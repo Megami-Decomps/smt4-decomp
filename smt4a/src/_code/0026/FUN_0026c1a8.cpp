@@ -1,10 +1,10 @@
 #include "shard/Shard0033.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(s32 kind, s32 value);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 sprite, f32 scale);

@@ -1,8 +1,8 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 image);
 void uiDrawItemOrStatusIcon(u32 value, s32 x, s32 y, s32 priority, s32 flags);

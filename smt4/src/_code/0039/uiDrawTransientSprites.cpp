@@ -23,7 +23,7 @@ void uiDrawTransientSprites(TransientSpriteList *list)
     renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, 0));
     for (s32 index = 0; index < list->count; ++index) {
         const TransientSpriteEntry *entry = &list->entries[index];
-        if (entry->visible != 0 || g_gameState.forceVisible != 0) {
+        if (entry->visible != 0 || g_gameState.showAllEntries != 0) {
             drawSetColorFromRGBA8(entry->color);
             effectSetByteSpeed(entry->color & 0xFF);
             uiDrawTableTextureSized(9, entry->resource, entry->sprite,

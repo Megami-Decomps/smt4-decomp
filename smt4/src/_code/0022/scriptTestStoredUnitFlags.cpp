@@ -1,10 +1,10 @@
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/UnitRecordAccess.h"
 extern "C" {
 u32 scrGetArg(u32);
 void scrSetResult(s32);
 s32 partyHasStoredDemon(u16);
 s32 partyFindActiveSlotById(u16);
-GameUnitSortRecord* gameGetUnitRecord(s32);
 u32 flagWordTestBit(const void*, u32);
 
 // Reports absent stored demons separately from the active slot's flagged state.

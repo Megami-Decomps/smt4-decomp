@@ -1,5 +1,6 @@
 /* NON_MATCHING: the party-slot loop and the inlined slotPlacementSet* setters match retail; in the reserve loop armcc folds the first slot-pointer load into a write-back (`ldr r0,[r6,#1752]!`) where retail forms the base and the slot pointer separately, which swaps r6/r7 there. */
 #include "ui/PartyPanelState.h"
+#include "gamedata/UnitRecordAccess.h"
 
 namespace {
 struct SlotTable {
@@ -7,10 +8,6 @@ struct SlotTable {
     s8 unitId[3];           // 0x9108
 };
 
-struct UnitRecord {
-    u8 unk00[0x44];
-    u16 flags;              // 0x44
-};
 }
 
 extern "C" {
@@ -18,7 +15,6 @@ SlotTable *gameGetSlotTable(void);
 void slotPlacementSetSlot(PartyPanelWidget *placement, s32 slot);
 void slotPlacementStartTransition(PartyPanelWidget *placement, s32 immediate);
 void slotPlacementAssignSlotAndPosition(PartyPanelWidget *placement, u32 arg);
-UnitRecord *gameGetUnitRecord(s32 id);
 s32 slotUnitIsInActiveParty(void);
 void FUN_0026c9c0(void);
 void slotPlacementSetEmpty(PartyPanelWidget *placement, u8 value);
@@ -69,17 +65,17 @@ void FUN_001d13b0(void)
         } else {
             slotPlacementSetEmpty(panel->demons[i], 0);
             slotPlacementSetUnitId(*placement, static_cast<s32>(panel->entries[i].packedIndex));
-            UnitRecord *unit = gameGetUnitRecord(static_cast<s32>(panel->entries[i].packedIndex));
+            StatBlock *unit = gameGetUnitRecord(static_cast<s32>(panel->entries[i].packedIndex));
             slotPlacementSetFlagA(panel->demons[i], slotUnitIsInActiveParty() != 0);
             s32 flagB;
-            if (unit->flags & 0x400) {
+            if (unit->ailments & 0x400) {
                 flagB = 1;
             } else {
                 flagB = 0;
             }
             slotPlacementSetFlagB(panel->demons[i], flagB);
             s32 flagC;
-            if (unit->flags & 4) {
+            if (unit->ailments & 4) {
                 flagC = 1;
             } else {
                 flagC = 0;

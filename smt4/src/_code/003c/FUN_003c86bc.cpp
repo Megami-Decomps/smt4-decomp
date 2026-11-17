@@ -2,10 +2,10 @@
 #include "shard/GameOptions.h"
 #include "gamedata/SupportUnitRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 GameOptions *gameGetSupportUnitData(void);
-void *gameGetPlayerData(void);
 s32 randNextInRange(u16);
 u32 tableEntryIndexByKey(s32, u8);
 SupportUnitRecord *supportUnitGetEntry(s32, u32);
@@ -13,8 +13,7 @@ SupportUnitRecord *supportUnitGetEntry(s32, u32);
 void FUN_003c86bc(void)
 {
     struct Candidates { u8 prefix[0x60A]; u16 ids[3]; };
-    struct PlayerVariant { u8 prefix[0x76]; u8 key; };
-    // These stat copies overlay the legacy settings prefix; keep the context-specific interpretation local.
+        // These stat copies overlay the legacy settings prefix; keep the context-specific interpretation local.
     struct StatCopies {
         u16 base[7];
         u16 current[7];
@@ -44,8 +43,8 @@ void FUN_003c86bc(void)
     u32 variant = ~0u;
     for (s32 j = 0; j < 3; ++j) {
         if (reinterpret_cast<Candidates *>(unit)->ids[j] == id) {
-            PlayerVariant *player = static_cast<PlayerVariant *>(gameGetPlayerData());
-            variant = tableEntryIndexByKey(id, player->key);
+            PlayerDataIV *player = gameGetPlayerData();
+            variant = tableEntryIndexByKey(id, player->level);
             break;
         }
     }

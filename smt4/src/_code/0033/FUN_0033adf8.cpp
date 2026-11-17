@@ -23,10 +23,6 @@ struct ScenarioRow {
     struct { u16 id; u16 count; } stock[5];   // 0x60
 };
 
-struct UnitRecord {
-    u8 unk00[0x46];
-    u16 id;                 // 0x46
-};
 
 struct PlayerData {
     u8 unk00[0x12];
@@ -67,7 +63,7 @@ void rt_memclr(void* block, u32 size);
 void __aeabi_memset4(void* block, u32 size, s32 value);
 void playerUnitRecordInit(s32 kind, char* name, u16* look);
 void FUN_00334058(u32 id);
-u8 gameSlotFindByCategory(UnitRecord* record);
+u8 gameSlotFindByCategory(StatBlock* record);
 SlotTable* gameGetSlotTable(void);
 void *dataTableFileGetTable(void *file, s32 arg);
 PlayerData* gameGetPlayerData(void);
@@ -119,8 +115,8 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     for (s32 i = 0; i < 3; i++) {
         if (scenario->partyIds[i] == 0) continue;
         for (s32 slot = 0; slot < slots->slotLimit; slot++) {
-            if (static_cast<UnitRecord *>(gameGetUnitRecord(slot))->id == scenario->partyIds[i]) {
-                slots->party[partyCount] = gameSlotFindByCategory(static_cast<UnitRecord *>(gameGetUnitRecord(slot)));
+            if (gameGetUnitRecord(slot)->id == scenario->partyIds[i]) {
+                slots->party[partyCount] = gameSlotFindByCategory(gameGetUnitRecord(slot));
                 partyCount++;
                 break;
             }

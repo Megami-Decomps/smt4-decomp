@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail keeps the white color unfolded (1.0f * 255.0f converted four times per entry, constants hoisted into s16/s17); armcc folds the all-white pack to a constant here, so the loop body differs. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
-
 /* One drawn entry: the three words handed to the draw call and a placement record. */
 typedef struct DrawEntry {
     /* 0x00 */ u32 model;
@@ -33,7 +33,6 @@ typedef struct DrawEntrySource {
     /* 0x4D78 */ DrawEntry entries[12];
 } DrawEntrySource;
 
-extern RenderCtxA *g_renderCtx;
 
 s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 s32 renderCtxPackPassFlagsWithAlpha(u32 kind);

@@ -1,20 +1,14 @@
 /* Sets the given bit in the object's 16-bit mask. */
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-typedef struct {
-    u8 unk00[0x5e];  /* 0x00 */
-    u16 mask;        /* 0x5e */
-} MaskOwner;
-
-MaskOwner *gameGetPlayerData(void);
-
 void playerMaskSetBit(u32 bit)
 {
-    MaskOwner *owner = gameGetPlayerData();
+    PlayerDataA *owner = gameGetPlayerData();
 
-    owner->mask |= 1 << bit;
+    owner->ailments |= 1 << bit;
 }
 
 } /* extern "C" */

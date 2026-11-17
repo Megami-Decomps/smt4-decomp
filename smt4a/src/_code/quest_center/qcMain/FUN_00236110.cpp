@@ -47,7 +47,7 @@ static void applyPendingPlace(void)
 {
     if (g_gameState.scriptRequestPending != 0) {
         g_gameState.scriptRequestPending = 0;
-        g_gameState.transitionActive = 0;
+        g_gameState.savedLocationSet = 0;
         g_gameState.unk404 = 1;
         mapPlaceSet(g_gameState.scriptRequestValues[0], g_gameState.scriptRequestValues[1], g_gameState.scriptRequestValues[2]);
         g_gameState.unk454 = 2;
@@ -118,7 +118,7 @@ u32 FUN_00236110(void)
     case 3:
         if ((work->entry == NULL || entryRequestSequence() == 0) && lmapMainGetUnk74() != 0 && g_qcMain.option1 == 0) {
             if (gameStateIsFlagSetAndLarge() != 0) {
-                s32 position = g_gameState.sourceMap - 200;
+                s32 position = g_gameState.savedMapId - 200;
                 asdSequenceRequest(0xe, &position, 4);
             } else {
                 applyPendingPlace();

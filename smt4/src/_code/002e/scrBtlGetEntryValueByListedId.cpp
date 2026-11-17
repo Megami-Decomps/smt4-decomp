@@ -2,10 +2,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-extern BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(s32 value);
 

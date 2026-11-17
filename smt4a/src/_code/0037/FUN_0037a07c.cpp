@@ -1,9 +1,8 @@
 #include "map/mapMain.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 extern MapMainA *g_mapMain;
-extern LmapSceneA *g_lmapScene;
 __weak u32 FUN_0037a07c_hook(u32 value);
 void mapEplUpdateEntries(void);
 u32 uiSelectionRefresh(void);
@@ -44,8 +43,8 @@ void FUN_0037a07c(void)
     FUN_002332f4();
     FUN_002242a0();
     FUN_002237a0();
-    FUN_00274e4c(g_lmapScene->transform.positionSnapshotA[0], g_lmapScene->transform.positionSnapshotA[1],
-        g_lmapScene->transform.positionSnapshotA[2], g_lmapScene->transform.headingCopy);
+    FUN_00274e4c(g_lmapScene->pose.targetPosition.x, g_lmapScene->pose.targetPosition.y,
+        g_lmapScene->pose.targetPosition.z, g_lmapScene->pose.targetHeading);
     FUN_00234b30();
     FUN_0023534c();
     FUN_002737a8();

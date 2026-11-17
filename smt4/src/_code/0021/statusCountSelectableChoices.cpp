@@ -7,7 +7,7 @@ extern "C" s32 statusCountSelectableChoices(void)
     PlayerDataIV *player = &g_gameDataBlocks.saveBlock->body.slots.player;
     s32 count = statusGetAvailableChoiceCount();
     for (s32 index = 0; index < count; ++index) {
-        if (player->skills[index] != 0) {
+        if (player->skillChoices[index] != 0) {
             ++used;
         }
     }

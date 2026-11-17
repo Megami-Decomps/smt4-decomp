@@ -1,39 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002332f4` (_code @ 0x2332f4, 0xa20 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
+/* The decompiler copies some game state fields as raw words of another type: those uses cast. */
 #include "gamedata/GameFlags.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x18];
-    unsigned char f005f1614; /* 0x018 */
-    u8 pad019[0x7];
-    signed char f005f161c; /* 0x020 */
-    u8 pad021[0x1b];
-    int f005f1638; /* 0x03c */
-    u8 pad040[0x64];
-    int f005f16a0; /* 0x0a4 */
-    u8 pad0a8[0x108];
-    signed char f005f17ac; /* 0x1b0 */
-    u8 pad1b1[0x3];
-    int f005f17b0; /* 0x1b4 */
-    u8 pad1b8[0xe];
-    short f005f17c2; /* 0x1c6 */
-    u8 pad1c8[0x38];
-    unsigned int f005f17fc; /* 0x200 */
-    u8 pad204[0x1d4];
-    signed char f005f19d4; /* 0x3d8 */
-    u8 pad3d9[0x3];
-    float f005f19d8; /* 0x3dc */
-    u8 pad3e0[0xc];
-    short f005f19e8; /* 0x3ec */
-    u8 pad3ee[0x1];
-    unsigned char f005f19eb; /* 0x3ef */
-    u8 pad3f0[0x10];
-    unsigned int f005f19fc; /* 0x400 */
-};
-extern GameStateView g_gameState;
 
 
 int ptrListRemoveClearOwner(...);
@@ -170,11 +142,11 @@ unsigned int FUN_002332f4(void)
   temp_v7 = 0;
   temp_v6 = 0;
   temp_v26 = 0;
-  temp_v25 = &g_gameState.f005f19fc;
+  temp_v25 = &g_gameState.scriptRequestValues[2];
   temp_v15 = 800.0f;
   temp_v13 = 0x43a0000043480000;
   temp_v14 = 0x42700000;
-  temp_v24 = &g_gameState.f005f17fc;
+  temp_v24 = &g_gameState.unk200;
   do {
     temp_v5 = g_mapHakai + temp_v6 * 0x54;
     if (*(char *)(temp_v5 + 0x5c) != '\0') {
@@ -191,10 +163,10 @@ unsigned int FUN_002332f4(void)
         temp_v16 = 0;
         gameFlagsGetBlock();
         temp_v1 = 0;
-        if (g_gameState.f005f17ac != '\0') {
-          temp_v1 = g_gameState.f005f17c2;
+        if (g_gameState.unk1B0 != '\0') {
+          temp_v1 = g_gameState.unk1C6;
         }
-        if (((g_gameState.f005f17ac != '\0' && temp_v1 != 0) &&
+        if (((g_gameState.unk1B0 != '\0' && temp_v1 != 0) &&
             (temp_v1 = *(short *)(temp_v5 + 0xac), temp_v1 != 1 && temp_v1 != 2)) &&
            (temp_v1 != 3 && temp_v1 != 6)) {
           mathPositionHeadingDegrees();
@@ -203,9 +175,9 @@ unsigned int FUN_002332f4(void)
           if ((temp_v3 < 0xc2b40000) && ((int)temp_v3 < 0x42b40000)) {
             temp_v16 = 1;
           }
-          temp_v4 = g_gameState.f005f17b0;
+          temp_v4 = (*(int *)&g_gameState.unk1B4);
           distSpatial();
-          if (((temp_v4 < 0x43960000) && (temp_v4 = g_gameState.f005f17b0, mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
+          if (((temp_v4 < 0x43960000) && (temp_v4 = (*(int *)&g_gameState.unk1B4), mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
              && (temp_v16 != 0)) {
             *(unsigned int *)(temp_v5 + 0x78) = 1;
             soundActorStartOnFreeChannel(0x10002a6);
@@ -231,8 +203,8 @@ unsigned int FUN_002332f4(void)
         if (temp_v1 == 2) {
           temp_v10 = (float)temp_v13;
         }
-        if (((g_gameState.f005f161c == '\0') && (g_gameState.f005f19d4 != '\0')) &&
-           ((g_gameState.f005f19e8 != 0 && ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)))) {
+        if (((g_gameState.unk020 == '\0') && (g_gameState.unk3D8 != '\0')) &&
+           ((g_gameState.unk3EC != 0 && ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)))) {
           mathPositionHeadingDegrees();
           temp_v3 = *(unsigned int *)(temp_v5 + 0x74);
           mathAngleDeltaDegrees();
@@ -241,7 +213,7 @@ unsigned int FUN_002332f4(void)
              ((temp_v3 < 0xc2b40000 && ((int)temp_v3 < 0x42b40000)))) {
             temp_v16 = 1;
           }
-          temp_v9 = g_gameState.f005f19d8;
+          temp_v9 = g_gameState.breakableCheckPosition.x;
           distSpatial();
           temp_v11 = *(float *)(temp_v17 + 0x1528);
           temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 < temp_v9) << 0x1f) |
@@ -249,7 +221,7 @@ unsigned int FUN_002332f4(void)
           in_fpscr = temp_v3 | ((unsigned int)((temp_v11 != temp_v11) || (temp_v9 != temp_v9)) << 0x1c);
           temp_v0 = (unsigned char)(temp_v3 >> 0x18);
           if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-            temp_v11 = g_gameState.f005f19d8;
+            temp_v11 = g_gameState.breakableCheckPosition.x;
             mathAbsHeadingErrorToPoint();
             temp_v4 = FUN_00367f98();
             if (temp_v4 != 3) {
@@ -276,14 +248,14 @@ unsigned int FUN_002332f4(void)
                 }
               }
             }
-            temp_v12 = g_gameState.f005f19d8;
+            temp_v12 = g_gameState.breakableCheckPosition.x;
             mathAbsHeadingErrorToPoint();
             if (*(int *)(g_lmapScene + 0x1d0) == 10) {
               temp_v4 = mapHasFacingBreakableInReach();
               if (temp_v4 != 0) {
                 temp_v9 = *(float *)(g_lmapScene + 0x1c);
                 distSpatial();
-                temp_v10 = g_gameState.f005f19d8;
+                temp_v10 = g_gameState.breakableCheckPosition.x;
                 distSpatial();
                 temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v10) << 0x1f) |
                         ((unsigned int)(temp_v9 == temp_v10) << 0x1e);
@@ -308,7 +280,7 @@ unsigned int FUN_002332f4(void)
               if (temp_v4 != 10) {
                 FUN_00368374(5);
                 if ((*(short *)(temp_v5 + 0xac) == 2) &&
-                   (g_gameState.f005f1614 = 1, *(char *)(temp_v25 + 0x36) == '\0')) {
+                   (g_gameState.inputBlocked = 1, *(char *)(temp_v25 + 0x36) == '\0')) {
                   mapSetSceneState(2);
                 }
                 *(unsigned int *)(temp_v5 + 0x60) = 6;
@@ -324,9 +296,9 @@ unsigned int FUN_002332f4(void)
         if (*(short *)(temp_v5 + 0xac) == 3) {
           if (*(char *)((int)temp_v25 + 0x53) != '\0') {
             mathPositionHeadingDegrees();
-            temp_v4 = g_gameState.f005f17b0;
+            temp_v4 = (*(int *)&g_gameState.unk1B4);
             distSpatial();
-            if ((temp_v4 < 0x43960000) && (temp_v4 = g_gameState.f005f17b0, mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
+            if ((temp_v4 < 0x43960000) && (temp_v4 = (*(int *)&g_gameState.unk1B4), mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
             {
               *(unsigned int *)(temp_v5 + 0x78) = 1;
               soundActorStartOnFreeChannel(0x10002a6);
@@ -348,13 +320,13 @@ unsigned int FUN_002332f4(void)
           }
           else {
 LAB_00233a04:
-            if (g_gameState.f005f1638 == 0x35 || g_gameState.f005f1638 == 0x4d) {
-              if (*(int *)(g_mapHakai + 0x18) != g_gameState.f005f16a0) {
+            if (g_gameState.activeGroupId == 0x35 || g_gameState.activeGroupId == 0x4d) {
+              if (*(int *)(g_mapHakai + 0x18) != g_gameState.unk0A4) {
                 FUN_002d8a48();
-                *(int *)(g_mapHakai + 0x18) = g_gameState.f005f16a0;
+                *(int *)(g_mapHakai + 0x18) = g_gameState.unk0A4;
               }
               else {
-                FUN_00245f70(g_gameState.f005f16a0);
+                FUN_00245f70(g_gameState.unk0A4);
               }
               temp_v7 = temp_v7 + 1;
             }
@@ -411,8 +383,8 @@ LAB_00233a04:
       case 6:
         if (*(short *)(temp_v5 + 0xac) == 2) {
           *(unsigned char *)(g_lmapScene + 0x6c) = 0;
-          g_gameState.f005f1614 = 1;
-          g_gameState.f005f19eb = 1;
+          g_gameState.inputBlocked = 1;
+          g_gameState.unk3EF = 1;
         }
         temp_v1 = *(short *)(temp_v5 + 0xae) + 1;
         temp_v3 = (unsigned int)temp_v1;
@@ -422,7 +394,7 @@ LAB_00233a04:
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v5 + 0xac);
         }
         if (temp_v8 && temp_v3 == 2) {
-          g_gameState.f005f19eb = 1;
+          g_gameState.unk3EF = 1;
           FUN_00303460(0x1f);
         }
         if (*(short *)(temp_v5 + 0xae) >= 0x28) {
@@ -461,8 +433,8 @@ LAB_00233a04:
             if (temp_v4 == 0) {
               temp_v23 = 1;
             }
-            g_gameState.f005f1614 = 1;
-            g_gameState.f005f19eb = 1;
+            g_gameState.inputBlocked = 1;
+            g_gameState.unk3EF = 1;
             FUN_002941c8(&temp_v16,0x84);
           }
           *(unsigned short *)(temp_v5 + 0xae) = 0;

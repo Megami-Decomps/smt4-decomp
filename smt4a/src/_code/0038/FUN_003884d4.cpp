@@ -1,9 +1,9 @@
 /* NON_MATCHING: choice-table copies, prompt literals, and message/menu register scheduling differ. */
+#include "ui/MessageMainA.h"
 #include "ui/ScriptChoiceMenu.h"
 extern "C" {
 extern const FiveChoiceTable DAT_00530a10;
 extern const ChoiceLabelTable DAT_0052fe4c;
-extern MessageGlobalsA g_messageMain;
 extern const u8 LAB_0038870c;
 s32 scrGetCommandFrame(void);
 s32 scrGetArg(u32 index);
@@ -37,7 +37,7 @@ u32 FUN_003884d4(void)
     s32 available = 0;
     for (s32 i = 0; i < 5; ++i)
         if (i != excluded && gameFlagIsSet(choices.flags[i])) ++available;
-    MessageWorkA *work = g_messageMain.state;
+    MessageWindowA *work = g_messageMain.window;
     if (!available) {
         scrSetResult(99);
         return 1;
@@ -45,14 +45,14 @@ u32 FUN_003884d4(void)
     if (frame == 0) {
         bustupCutAnimRequestStopSlots();
         eventTexRequestStopAll();
-        if (g_messageMain.state) g_messageMain.state->displayMode = 0x15;
+        if (g_messageMain.window) g_messageMain.window->displayMode = 0x15;
         u32 message = scrGetCommandOwner();
         u32 argument = scrGetArg(0);
         u32 commandFrame = scrGetCommandFrame();
         messageWindowShowOrPoll(message, argument, commandFrame, 6, 0, 0);
         asdTextFormatStream(work->box, 4, 0xffffffff, 0, 3, "%s", &LAB_0038870c);
         msgBoxFlagsSetBit7(work->box);
-        work->unk19C4 = 0;
+        work->displayEnabled = 0;
         work->flags |= 0x20;
         sortMenuAcquire(0xffffffff, 3);
         for (s32 i = 0; i < 5; ++i)

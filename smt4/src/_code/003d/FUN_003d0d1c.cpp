@@ -1,5 +1,7 @@
 /* NON_MATCHING: the selection masks now use int shifts sign-extended into the 64-bit mask (no __aeabi_llsl); retail keeps the present-flag loop rolled with a signed counter and tests bits 2|0x20 apart from 0x10, and unrolls the selection loop. */
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "gamedata/DevilRecord.h"
 
 // Candidate party member for the battle formation: slot index, rank and race.
 struct FormationCandidate {
@@ -9,11 +11,6 @@ struct FormationCandidate {
     u8 pad;
 };
 
-struct PartyUnit {
-    u8 unk00[0x46];
-    u16 id;         // 0x46
-    u8 rank;        // 0x48
-};
 
 struct SlotTable {
     u8 unk0000[0x90f0];
@@ -34,19 +31,12 @@ struct BattleSetup {
     u8 present[4];          // 0x38
 };
 
-struct DevilRaceRecord {
-    u8 unk00[2];
-    u8 race;                // 0x02
-};
-
 extern "C" {
 
 void __aeabi_memset4(void* block, u32 size, s32 value);
 SlotTable* gameGetSlotTable(void);
 u8* asdOperatorNewC(u32 size);
-PartyUnit* gameGetUnitRecord(s32 slot);
-s32 flagWordTestBit(PartyUnit* unit, u32 bit);
-DevilRaceRecord* devilGetRecord(u32 id);
+s32 flagWordTestBit(StatBlock* unit, u32 bit);
 void FUN_002b7bca(void* base, u32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 sortCompareRankThenOrder(const void* a, const void* b);
 void asdMemFreeIfNotNull(void* block);
@@ -75,11 +65,11 @@ void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
     for (u32 i = 0; i < slotLimit; i++) {
         s8 slotId = gameGetSlotTable()->party[i];
         if (slotId < 0) continue;
-        PartyUnit* unit = gameGetUnitRecord(gameGetSlotTable()->party[i]);
+        StatBlock* unit = gameGetUnitRecord(gameGetSlotTable()->party[i]);
         if (unit != NULL && flagWordTestBit(unit, 1) == 0 && flagWordTestBit(unit, 10) == 0 &&
             flagWordTestBit(unit, 2) == 0) {
             candidates[count].slot = i;
-            candidates[count].rank = unit->rank;
+            candidates[count].rank = unit->level;
             candidates[count].race = devilGetRecord(unit->id)->race;
             count++;
         }

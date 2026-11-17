@@ -1,3 +1,5 @@
+/* The definition takes a u16 id; callers see the u32 prototype from gamedata/Table00Lookup.h (see the comment there). */
+#define TABLE00_OWN_PROTOTYPE
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"

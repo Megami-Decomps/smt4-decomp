@@ -22,14 +22,14 @@ u32 FUN_00256898(u32 first, u32 second);
 // Start loading the talk tone, message and script files for a unit's devil.
 static __inline void battleTalkLoadFiles(BattleTalkWork *work, const DevilRecord *record)
 {
-    u32 tone = record->talk.alternate;
+    u32 tone = record->talkAlternate;
     if (tone == 99) {
-        tone = record->talk.tone;
+        tone = record->talkTone;
     }
     char path[128];
     textFormatBuffer(path, DAT_004017dc, DAT_00439b70[tone]);
     asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&work->toneFile), 0);
-    tone = record->talk.tone;
+    tone = record->talkTone;
     work->toneId = tone;
     textFormatBuffer(path, DAT_004017c0, DAT_00439b70[tone]);
     asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&work->messageFile), 0);

@@ -1,6 +1,6 @@
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 
-struct QuestRecord;
 struct QuestFlagEntry {
     u8 flags;     // 0x00
     u8 unk01[3];  // 0x01
@@ -17,7 +17,6 @@ struct QuestFlagState {
 };
 
 extern "C" {
-QuestRecord* dataTable1bOr1cGetRecord(u16 id);
 QuestFlagState* gameGetFlagBlock(void);
 
 // Counts existing subquests 100-399 whose saved flag bit 3 is set.

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -11,8 +12,6 @@ int selectionCopySupportedValue(...);
 int FUN_0023cd08(...);
 int FUN_00246134(...);
 int btlEntryBuildSummary(...);
-int btlFindEntryBlockByMemberId(int, int);
-int btlMainFindEntryByListedId(...);
 int targetSelectChangeDisplayMode(...);
 int btlTargetSelectSetEntry(...);
 int btlTargetSelectSetInfoPanel(...);
@@ -35,7 +34,6 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_4_stack;
 
-extern unsigned int g_btlAction; /* 0x434278 */
 
 /* Supplied declaration required: btlGetListedSummaryValues. */
 /* Supplied declaration required: btlEntryHasSkillCategory. */
@@ -89,14 +87,14 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     return;
   }
   if (param_3 != 0xffffffff) {
-    if (g_btlAction == param_3) {
+    if (g_btlAction.unk00 == param_3) {
       return;
     }
     temp_v3 = *(int *)(*param_1 + 0x1e98);
-    g_btlAction = param_3;
+    g_btlAction.unk00 = param_3;
     FUN_0023cd08(*param_1,param_3,0);
     temp_v0 = *param_1;
-    btlFindEntryBlockByMemberId(temp_v0,(int)*(short *)(temp_v3 + param_3 * 0x114 + 0x62));
+    btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v0), (int)*(short *)(temp_v3 + param_3 * 0x114 + 0x62));
     temp_v3 = __aeabi_idivmod(*(short *)(temp_v0 + 0xe8) * 100,(int)*(short *)(temp_v0 + 0xea));
     temp_v13[0] = (unsigned int)(temp_v3 < 0x14);
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
@@ -113,7 +111,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     default:
       temp_v4 = 0;
       temp_v3 = reinterpret_cast<int>(btlGetMainState());
-      btlMainFindEntryByListedId(temp_v3,param_3);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v3), param_3);
       if (temp_v3 != 0) {
         temp_v9 = 0;
         temp_v10 = 0;
@@ -227,7 +225,7 @@ LAB_002292ac:
       default:
         temp_v7 = 0;
         temp_v3 = reinterpret_cast<int>(btlGetMainState());
-        btlMainFindEntryByListedId(temp_v3,temp_v8);
+        btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v3), temp_v8);
         if (temp_v3 != 0) {
           temp_v10 = 0;
           temp_v11 = 0;

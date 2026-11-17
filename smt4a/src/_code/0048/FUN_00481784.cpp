@@ -152,7 +152,7 @@ void FUN_00481784(FieldNpc *npc)
     NpcControllerInner *inner = npc->controller->inner;
     if (g_gameState.paused != 0) {
         inner->flags |= NPC_VISIBLE_BITS;
-    } else if (g_gameState.departLoading != 0) {
+    } else if (g_gameState.loading != 0) {
         inner->flags |= NPC_VISIBLE_BITS;
         return;
     } else if ((npc->flags & NPC_FLAG_HIDDEN) != 0) {
@@ -160,7 +160,7 @@ void FUN_00481784(FieldNpc *npc)
     } else {
         return;
     }
-    if (g_gameState.departLoading != 0)
+    if (g_gameState.loading != 0)
         inner->flags |= NPC_VISIBLE_BITS;
     else if ((npc->flags & NPC_FLAG_HIDDEN) != 0)
         inner->flags &= ~NPC_VISIBLE_BITS;

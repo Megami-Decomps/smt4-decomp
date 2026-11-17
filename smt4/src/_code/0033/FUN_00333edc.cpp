@@ -1,15 +1,14 @@
-#include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-extern u16 *gameGetPlayerData(void);
-
+/* Restores the player's HP and MP to their maximums. */
 void FUN_00333edc(void)
 {
-    u16 *pad = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
 
-    pad[0x15] = pad[0xe];
-    pad[0x16] = pad[0xf];
+    player->hp = player->maxHp;
+    player->mp = player->maxMp;
 }
 
 } /* extern "C" */

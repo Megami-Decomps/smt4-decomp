@@ -1,4 +1,5 @@
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
@@ -6,12 +7,6 @@ extern "C" {
 u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
 s32 dataTableValueOrZero(s32 index);
-struct TalkRecord {
-    /* 0x00 */ u8 unk00[0xE0];
-    /* 0xE0 */ u16 setFlags[3];
-    /* 0xE6 */ u16 clearFlags[3];
-};
-TalkRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 goalConditionsSatisfied(u32 id);
 u32 scrWorkGetValue(s32 index);
 void scrWorkSetValue(s32 index, u32 value);
@@ -33,7 +28,6 @@ s32 rosterHasLeader(void);
 u32 rosterGetLeaderId(void);
 void optionsClearFlag1(void);
 
-
 /* Script command: shows the talk bust-up of a talk record. Its first frame applies the record's flags; later
  * frames run a two-phase sequence (phase 0 prepares the message window state, phase 1 shows the bust-up). */
 u32 scrCommTalkBustUpShow(void)
@@ -41,7 +35,7 @@ u32 scrCommTalkBustUpShow(void)
     u16 id = scrGetArg(0);
 
     if (scrGetCommandFrame() == 0) {
-        TalkRecord *record;
+        QuestRecordA *record;
         s32 i;
 
         scrWorkSetValue(0, 0);

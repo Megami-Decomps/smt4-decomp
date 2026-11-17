@@ -1,5 +1,6 @@
 /* NON_MATCHING: marker-ring draw split from FUN_0041c108 (+0xcc); identical code except the VFP register allocation of the slot position conversion (retail converts x with s0, the build with s1 and reloads). */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0016.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -15,7 +16,6 @@ struct MarkerRing {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void gxResetColorQuadToWhite(void);
 

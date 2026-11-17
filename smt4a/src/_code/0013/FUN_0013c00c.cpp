@@ -1,10 +1,10 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 29 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match3_SlotState.h"
 
 extern "C" {
 extern W6Match3SlotState DAT_006357d8[2];
-extern RenderCtxA *g_renderCtx;
 u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);

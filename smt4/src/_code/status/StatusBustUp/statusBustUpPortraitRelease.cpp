@@ -13,12 +13,6 @@ void asdTMTexTableReleaseNode(u32 table, u32 node);
 /* Drop the portrait reference, unloading normal or special portraits on the last user. */
 void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)
 {
-    struct SpecialPortraitRecord {
-        u8 unk00[3];
-        u8 flags;
-        u8 unk04[0x84];
-        s16 portrait;
-    };
     s32 table = 0x17;
 
     if (isDevil) {
@@ -29,16 +23,15 @@ void statusBustUpPortraitRelease(s32 portrait, s32 isDevil)
             if (devil == NULL) {
                 return;
             }
-            SpecialPortraitRecord *record =
-                reinterpret_cast<SpecialPortraitRecord *>(dataTable00FindById((u16)portrait));
-            if (!(record->flags & 1)) {
+            Table00Record *record = dataTable00FindById((u16)portrait);
+            if (!(record->levelFlags & 1)) {
                 portrait = devil->model + 1;
                 if (portrait >= 614) {
                     return;
                 }
             } else {
                 s32 specialTable = 0x23;
-                portrait = record->portrait;
+                portrait = record->portraitId;
                 if (portrait >= 129) {
                     return;
                 }

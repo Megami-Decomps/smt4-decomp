@@ -12,8 +12,8 @@ extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
 u32 FUN_00246d38(s32 actor, u32 unit, BtlActionRecord *target, u32 mask);
 u32 FUN_00246e24(s32 actor, u32 unit, BtlActionRecord *target, u32 mask, s32 clearStatus);
-void objectFlagsClear(GameUnitSortRecord *unit, u16 mask);
-void objectFlagSetBit(GameUnitSortRecord *unit, u16 bit);
+void objectFlagsClear(StatBlock *unit, u16 mask);
+void objectFlagSetBit(StatBlock *unit, u16 bit);
 void btlQueueKeyedScalarReflectAction(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
 
 // Set or clear a status bit on a battle target or stored unit, playing the status effect when set.
@@ -30,7 +30,7 @@ u32 FUN_002f7e10(void)
         else
             FUN_00246d38(0, actor, record, 1 << bit);
     } else {
-        GameUnitSortRecord *unit = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(target - 109));
+        StatBlock *unit = gameGetUnitRecord(target - 109);
         if (enabled != 0) {
             objectFlagSetBit(unit, bit);
             if (bit != 4 && flagWordTestBit(unit, 4))

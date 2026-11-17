@@ -1,4 +1,5 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <stddef.h>
 #include <string.h>
@@ -16,7 +17,6 @@ struct DebugBoundsPalette { u32 colors[12]; };
 typedef char DebugSpatialBoundsOffsets[sizeof(DebugSpatialBounds) == 0x20 &&
     offsetof(DebugSpatialBoundsQueue, count) == 0x1900 ? 1 : -1];
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern DebugSpatialBoundsQueue DAT_00611874;
 extern const DebugBoundsPalette DAT_00532240;
 u32 renderCtxPackPassFlags(u32, u32);

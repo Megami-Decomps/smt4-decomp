@@ -1,7 +1,7 @@
 /* NON_MATCHING: slot/cache register roles and early 0x3800 base hoisting differ; signed 0x38CC flag now matches folded byte access. */
-#include "shard/PadState.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/GameDataAccess.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
 struct PartyStatusCache {
@@ -34,7 +34,6 @@ struct PartyUnitRecord {
 }
 
 extern "C" {
-u8* gameGetPlayerData();
 u8* gameGetSlotTable();
 const PartyUnitRecord* gameGetUnitRecord(u32);
 
@@ -49,12 +48,12 @@ void partyStatusRefreshSlot(void* work, s32 slot, s32 refreshIndex)
         cache->unitIndex[slot] = -1;
     }
     if (slot == 0) {
-        const PadState* player = reinterpret_cast<const PadState*>(gameGetPlayerData());
-        cache->hp[0] = player->unk2A;
-        cache->mp[0] = player->unk2C;
-        cache->level[0] = player->unk76;
+        const PlayerDataIV* player = gameGetPlayerData();
+        cache->hp[0] = player->hp;
+        cache->mp[0] = player->mp;
+        cache->level[0] = player->level;
         cache->unitIndex[0] = -1;
-        if (player->unk72 & 2) {
+        if (player->ailments & 2) {
             cache->unavailable[0] = 1;
         } else {
             cache->unavailable[0] = 0;

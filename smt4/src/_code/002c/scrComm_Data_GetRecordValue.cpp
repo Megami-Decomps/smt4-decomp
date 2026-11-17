@@ -1,15 +1,10 @@
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
-typedef struct ValueTable {
-    /* 0x000 */ u8 unk000[0x148];
-    /* 0x148 */ u16 values[1];
-} ValueTable;
-
 int scrGetArg(int index);
-ValueTable *dataTable1bOr1cGetRecord(u16 id);
 
 /* Script command: looks up entry (script argument 1) in the value table of record (argument 0) and passes it to scrSetResult. */
 u32 scrComm_Data_GetRecordValue(void)

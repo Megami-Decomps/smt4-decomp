@@ -1,14 +1,13 @@
 /* NON_MATCHING: vector load/register allocation and clamp branch scheduling differ from retail. */
 #include "map/MapCameraWork.h"
 #include "map/MapEnvironment.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include <math.h>
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 
 extern "C" {
 extern MapEnvironmentEntry DAT_0049fb1c;
 extern MapCameraWork *DAT_004474f4;
-extern LmapScene *g_lmapScene;
 void mapEnvironmentApplySelectedEntry();
 u32 FUN_0025bb34(u32 group, const char *name, u32 flags);
 
@@ -41,7 +40,7 @@ void FUN_002d5374()
     }
     camera = DAT_004474f4;
     x = camera->targetSnapshot.x + directionX * length;
-    y = g_lmapScene->transform.position[1] + 130.0f;
+    y = g_lmapScene->pose.position.y + 130.0f;
     z = camera->targetSnapshot.z + directionZ * length;
     slot = FUN_0025bb34(1, "Light_Player3", 0);
     asdModelSlotSetTranslation(slot, 0, x, y, z);

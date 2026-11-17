@@ -1,18 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002227e8` (_code @ 0x2227e8, 0xdfc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "shard/W6_W6Match1_EnemyPosition.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x21];
-    signed char f005f161d; /* 0x021 */
-    u8 pad022[0x472];
-    float f005f1a90; /* 0x494 */
-    float f005f1a94; /* 0x498 */
-};
-extern GameStateView g_gameState;
 
 
 void FUN_00297f00(int value, int count);
@@ -240,7 +232,7 @@ LAB_00222b78:
       }
       temp_v5 = *(float *)(g_lmapScene + 0x1c);
       distSpatial();
-      if (g_gameState.f005f1a94 >= temp_v5) {
+      if (g_gameState.unk498 >= temp_v5) {
         temp_v1 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if (temp_v1 != 2) {
           return;
@@ -352,7 +344,7 @@ LAB_00222b78:
       DAT_005f0c9c = DAT_005f0c9c + temp_v6 * (temp_v5 - DAT_005f0cbc);
       DAT_005f0cbc = (float)temp_v12;
       distSpatial();
-      if (g_gameState.f005f1a90 <= temp_v8) {
+      if (g_gameState.unk494 <= temp_v8) {
         return;
       }
       temp_v1 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
@@ -569,7 +561,7 @@ LAB_00222b88:
       DAT_005f0ca4 = 0;
       DAT_005f0d28 = 0xf;
     }
-    if (g_gameState.f005f161d == '\0') {
+    if (g_gameState.paused == '\0') {
       DAT_005f0ca8 = DAT_005f0d38;
       DAT_005f0d28 = 0xf;
       DAT_005f0ce8 = 0;

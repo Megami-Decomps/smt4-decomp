@@ -1,8 +1,9 @@
 /* NON_MATCHING: snapshot copies use different global grouping and registers; retail repeats mode-one tail stores. */
 #include "shard/W5_W5Match8_CameraTransition.h"
+#include "battle/btlCamera.h"
 
 extern "C" {
-extern CameraTransitionGlobals g_btlCamera;
+extern BtlCameraStatics g_btlCamera;
 extern W5Match8Vec3 g_cameraAlternateProgressStart;
 extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
 extern W5Match8Vec3 g_cameraUnoffsetStartPosition;
@@ -21,14 +22,14 @@ void FUN_004f1b2c(W5Match8CameraTransition *camera, u32 duration, u32 mode,
         u32 mode;
     };
     PositionTail *transition = reinterpret_cast<PositionTail *>(camera);
-    if (g_btlCamera.mode == 2) {
+    if (g_btlCamera.routingMode == 2) {
         g_cameraUnoffsetStartPosition = reinterpret_cast<CameraPositionTransitionView *>(camera)->position;
         g_cameraAlternateProgressStart = transition->progress;
         camera->alternateTarget.x = x;
         camera->alternateTarget.y = y;
         camera->alternateTarget.z = z;
         camera->targetStart = camera->positionProgress;
-    } else if (g_btlCamera.mode == 1) {
+    } else if (g_btlCamera.routingMode == 1) {
         g_cameraAlternateProgressStart = transition->progress;
         camera->alternateTarget.x = x;
         camera->alternateTarget.y = y;

@@ -1,11 +1,10 @@
 #include "map/mapIf.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 extern MapIfGlobals g_mapIf;
 void FUN_001e5e78(s32);
 void FUN_00280ccc(f32, f32, f32, f32, f32, f32, f32);
-extern LmapScene *g_lmapScene;
 
 /* Marks the active interface records for restart, runs three map update passes (refreshing the
  * scene's camera when asked), then restarts the timers of the active records still counting. */
@@ -25,10 +24,10 @@ void FUN_002646d4(s32 updateScene)
         FUN_001e5e78(1);
         if (updateScene != 0) {
             LmapScene *scene = g_lmapScene;
-            FUN_00280ccc(scene->transform.positionSnapshotA[0], scene->transform.positionSnapshotA[1],
-                         scene->transform.positionSnapshotA[2], scene->transform.headingDegrees,
-                         scene->transform.positionSnapshotB[0], scene->transform.positionSnapshotB[1],
-                         scene->transform.positionSnapshotB[2]);
+            FUN_00280ccc(scene->pose.targetPosition.x, scene->pose.targetPosition.y,
+                         scene->pose.targetPosition.z, scene->pose.heading,
+                         scene->pose.previousPosition.x, scene->pose.previousPosition.y,
+                         scene->pose.previousPosition.z);
         }
     }
 

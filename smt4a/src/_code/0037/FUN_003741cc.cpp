@@ -1,4 +1,5 @@
 #include "util/MathFunctions.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -16,7 +17,6 @@ static __inline UiSpriteState *slotTimer(SaveSlotTransitionPrefixA *work)
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 vec2GetYInt(const UiSpriteState *);
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);

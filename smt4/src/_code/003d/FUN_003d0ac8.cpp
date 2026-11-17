@@ -2,10 +2,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 u32 FUN_00229914(BtlMainState **, void *, s32);
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
 s32 valueRangeSameSide(s32, s32);
 u16 btlEntryRollPassiveSkill(u32);
 void FUN_0023c154(BtlMainState *, s32, s32, s32, u32);

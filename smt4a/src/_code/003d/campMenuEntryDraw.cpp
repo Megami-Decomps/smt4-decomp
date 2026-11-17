@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 
@@ -12,7 +13,6 @@ struct MenuEntryDraw {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern const s8 DAT_0057f220[];
 void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 f32 floatInterpolateOverDuration(f32 start, f32 end, f32 duration, f32 time);

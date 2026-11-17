@@ -2,15 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BattleBalanceRow.h"
-
-// A combatant entry of the battle state (the part this formula reads).
-struct BattleEntryView {
-    /* 0x000 */ u8 flags;            // bit 2: second-side combatant
-    /* 0x001 */ u8 unk001[0xf3];
-    /* 0x0f4 */ s16 level;
-    /* 0x0f6 */ u8 unk0f6[0x55];
-    /* 0x14b */ u8 resistanceSlot;   // index into the attack info's resistance bytes
-};
+#include "battle/BtlGlobals.h"
 
 // What btlEntryBuildSummary collects about an attack (0x24 bytes).
 struct AttackInfo {
@@ -23,11 +15,9 @@ struct AttackInfo {
 };
 
 extern "C" {
-BattleEntryView *btlFindEntryBlockByMemberId(BtlMainState *state, s32 id);
-void *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 target);
-AttackInfo btlEntryBuildSummary(BtlMainState *state, void *entry);
+AttackInfo btlEntryBuildSummary(BtlMainState *state, BtlEntry *entry);
 void selectionCopySupportedValue(u16 value, u32 *output);
 void *dataTable40FindById(void *player);
 u32 playerGetSkillRank(void *player);
@@ -40,8 +30,8 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
     f32 zero = 0.0f;
     f32 sideFactor = 1.0f;
     BtlMainState *state = btlGetMainState();
-    BattleEntryView *attacker = btlFindEntryBlockByMemberId(state, attackerId);
-    BattleEntryView *target = btlFindEntryBlockByMemberId(state, targetId);
+    BtlUnitData *attacker = btlFindEntryBlockByMemberId(state, attackerId);
+    BtlUnitData *target = btlFindEntryBlockByMemberId(state, targetId);
     f32 level = (f32)attacker->level;
     if (attacker->flags & 4) {
         sideFactor = 0.8f;
@@ -55,7 +45,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
     selectionCopySupportedValue(info.supportedValue, &supported);
 
     s32 skillBonus = 0;
-    if ((*(u32 *)btlMainFindEntryByListedId(btlGetMainState(), attackerId) & 2) != 0) {
+    if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
         void *record = dataTable40FindById(player);
         if (record != NULL) {
             skillBonus = FUN_00283ebc(record, playerGetSkillRank(player), 1);
@@ -78,7 +68,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
             damage = FUN_0023ea94()->scale2 * damage;
         }
     }
-    u32 resistance = info.resistance[target->resistanceSlot];
+    u32 resistance = info.resistance[target->affinityIndex];
     if (resistance != 0) {
         damage = damage * ((f32)resistance * 0.01f);
     }

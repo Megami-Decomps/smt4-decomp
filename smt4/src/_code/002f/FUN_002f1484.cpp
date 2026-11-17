@@ -1,9 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include "gamedata/UnitStats.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-int btlMainFindEntryByListedId(u8 *btl, int index);
 int FUN_002954bc(u32 entity);
 int scrGetArg(int index);
 void FUN_003bc8f8(StatBlock *entity, u32 value);
@@ -21,7 +21,7 @@ u32 FUN_002f1484(void)
     if (id < 0x6d) {
         reinterpret_cast<u8 *>(btlGetMainState());
         btl = reinterpret_cast<u8 *>(btlGetMainState());
-        unit = (u8 *)btlMainFindEntryByListedId(btl, id);
+        unit = (u8 *)reinterpret_cast<int>(btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(btl), id));
         entity = *(u32 *)(unit + 0x27c);
     } else {
         entity = gameGetUnitRecord(id - 0x6d);

@@ -5,6 +5,7 @@
 #include "code/Code0015.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <math.h>
+#include "battle/BtlGlobals.h"
 
 namespace {
 /* The camera's eye position (the opaque ManagedCamera storage is byte-aligned). */
@@ -15,7 +16,6 @@ struct CameraEyeView {
 }
 extern "C" {
 void idSetFindSubjectIndex(BtlMainStateA *, BattleRosterRecordA *);
-void *btlFindEntryBlockByMemberId(BtlMainStateA *, s32);
 BattleVector3 FUN_003ecab8(BtlMainStateA *, s32, s32);
 
 static __inline f32 vectorLength(f32 x, f32 y, f32 z)

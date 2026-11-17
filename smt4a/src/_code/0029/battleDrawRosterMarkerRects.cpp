@@ -1,5 +1,6 @@
 /* NON_MATCHING: the marker mask uses LDM rather than LDRD, and VFP registers/coordinate scheduling and literal order differ; candidate -O2. */
 #include "battle/btlMain.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -13,7 +14,6 @@ struct BattleMarkerLookup {
 
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
-extern RenderCtxA *g_renderCtx;
 BattleMarkerLookup *btlFindEntryBlockByMemberId(BtlMainStateA *state, s16 group);
 BattleFrameSprite *stateEntryFindById(BtlMainStateA *state, s32 id);
 void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,

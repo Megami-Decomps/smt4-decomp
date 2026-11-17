@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 struct CombatantAffinityPreview {
     u16 kind;
@@ -36,7 +37,6 @@ CombatantAffinityPreview btlEntryBuildSummary(BtlMainStateA *battle, BtlCombatan
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 s32 FUN_004bd098(u32 source, s32 skill);
 void kindIdStore(u32 kind, u32 *value);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
 extern u32 DAT_005713f0[8];
 
 u32 FUN_004c0f74(BtlCombatantEntryA *entry, u32 element)

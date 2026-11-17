@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleCameraMenuOwner {
     u8 prefix[0x10];
@@ -12,18 +13,11 @@ struct BattleCameraMenuContext {
     u8 unk60[0x4448];
     u32 flags;
 };
-struct BattleCameraMenuState {
-    u8 prefix[0x560];
-    f32 value;
-    u8 unk564[0xD0];
-    u32 flags;
-};
 typedef char BattleCameraMenuOffsets[
     offsetof(BattleCameraMenuContext, flags) == 0x44A8 &&
-    offsetof(BattleCameraMenuState, flags) == 0x634 ? 1 : -1];
+    offsetof(BtlCamera, flags) == 0x634 ? 1 : -1];
 
 extern "C" {
-extern BattleCameraMenuState *g_btlMain;
 extern const AsdListBoxEntry DAT_00435808[];
 extern f32 DAT_00493554[3];
 extern f32 DAT_00434310, DAT_00434314, DAT_00434318, DAT_00434320, DAT_0043432c;
@@ -46,7 +40,7 @@ void btlDebugCreateAttackCameraMenu(BattleCameraMenuOwner *owner, BattleCameraMe
     asdListBoxSetByteValue(owner->menu, 1);
     jobSetText(owner->menu, "Attack Camera Menu");
     asdListBoxSetItemMode2(owner->menu, 0, (g_btlMain->flags & 0x100) >> 8);
-    asdListBoxSetFloatItem(owner->menu, 1, g_btlMain->value, -10, 10);
+    asdListBoxSetFloatItem(owner->menu, 1, g_btlMain->debugScalar, -10, 10);
     asdListBoxSetItemMode2(owner->menu, 2, (context->flags & 0x40000000) >> 30);
     asdListBoxSetFloatItem(owner->menu, 3, DAT_00493554[0], -100, 100);
     asdListBoxSetFloatItem(owner->menu, 4, DAT_00493554[2], -100, 100);

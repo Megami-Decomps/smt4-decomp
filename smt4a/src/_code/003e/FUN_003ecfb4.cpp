@@ -1,5 +1,6 @@
 /* NON_MATCHING: saved-register assignment differs (retail keeps the zero in r9 and &initial in r8; ours the reverse) and the 0x1BE clear's address temp is scheduled after the 0x110 stores; otherwise the same instructions. */
 #include "battle/BattleUnitInit.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ u32 randomGetUpperSixBits(UnitSourceRecord *record, u32 index);
 void clearTwoWords(void *words);
 void rt_memclr(void *memory, u32 size);
 void sysMemClear(void *memory, u32 size);
-DemonModelInfo *devilGetRecord(u32 id);
 
 /* Initializes a battle unit's state block from a demon record (or the selected save slot's record
  * when `useSaveSlot` is set). */
@@ -18,7 +18,7 @@ void FUN_003ecfb4(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s
 {
     UnitSourceRecord *source;
     s32 i;
-    DemonModelInfo *model;
+    DevilRecordA *model;
 
     unit->kind = 8;
     unit->unk008 = -1;
@@ -64,12 +64,12 @@ void FUN_003ecfb4(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s
         unit->learnableCategory[i] = unit->learnable[i].category;
     }
     model = devilGetRecord(unit->sourceId);
-    unit->unk1BB = model->unk3B;
-    if (model->kind == 1) {
+    unit->unk1BB = model->battleRace;
+    if (model->category == 1) {
         unit->unk1BC = 1;
-    } else if (model->kind == 4) {
+    } else if (model->category == 4) {
         unit->unk1BC = 0;
-    } else if (model->kind == 5) {
+    } else if (model->category == 5) {
         unit->unk1BC = 2;
     }
     unit->affinities = record->affinities;

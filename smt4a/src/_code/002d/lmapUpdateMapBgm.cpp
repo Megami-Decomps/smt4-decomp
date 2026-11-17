@@ -15,7 +15,7 @@ void lmapUpdateMapBgm()
 {
     MapBgmGate *gate = g_lmapMainState;
     GameStateA *game = &g_gameState;
-    if (!game->textActive && game->musicInitialized && !gate->blocked) {
+    if (!game->scriptPending && game->bgmReleased && !gate->blocked) {
         g_gameState.bgmId = 0x100003e;
         if (gameFlagIsSet(0x137) && !gameFlagIsSet(0x189)) {
             g_gameState.bgmId = 0x1000074;
@@ -31,7 +31,7 @@ void lmapUpdateMapBgm()
         bgmResumeOrRequestTrack(g_gameState.bgmId);
     } else {
         bgmReleaseStopped();
-        g_gameState.musicInitialized = 1;
+        g_gameState.bgmReleased = 1;
     }
 }
 }

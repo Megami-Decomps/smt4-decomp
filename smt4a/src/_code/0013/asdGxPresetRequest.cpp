@@ -1,14 +1,11 @@
-#include "shard/W6_W6Match3_GxPresetResumeState.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-
-extern GxPresetResumeState g_asdGxPresets;
-
-/* Requests preset `value` unless it is already the current one. */
+/* Requests stereo mode `value` unless it is already the current one. */
 void asdGxPresetRequest(s32 value)
 {
-    if (g_asdGxPresets.current != value) {
-        g_asdGxPresets.pending = value;
+    if (g_asdGxPresets.stereoMode != value) {
+        g_asdGxPresets.pendingStereoMode = value;
     }
 }
 

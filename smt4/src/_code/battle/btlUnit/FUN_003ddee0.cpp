@@ -2,15 +2,14 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/btlReflect.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int btlReflectQueueMemberAction(...);
 int FUN_002267b8(...);
 
-int btlFindEntryBlockByMemberId(...);
 int FUN_0027e3e8(...);
-int btlMainFindEntryByListedId(...);
 int btlGetMainState(...);
 int btlQueueUnitReflectAction25(...);
 
@@ -38,8 +37,6 @@ typedef struct {
     unsigned int sp54; /* 0x54: local_54 */
     unsigned int sp58; /* 0x58: local_58 */
 } param_6_stack;
-
-extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
 
@@ -88,7 +85,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
       }
       temp_v3 = param_4 * 0xc;
       puVar5 = puVar2;
-      btlMainFindEntryByListedId(puVar2,(int)param_3->field_0x62);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar2), (int)param_3->field_0x62);
       temp_v9 = DAT_00435d18;
       if (temp_v1 != 0 && puVar5 != (unsigned int *)0x0) {
         temp_v11 = (*puVar5 & 0x10) != 0;
@@ -107,7 +104,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
           *(unsigned int *)(temp_v9 + 0x28) = 2;
           *(unsigned int *)(temp_v9 + 0x4c) = 0xc0;
           *(unsigned short *)(temp_v9 + 0x26) = 1;
-          *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x2000000;
+          g_btlMain->flags = g_btlMain->flags | 0x2000000;
           FUN_0027e3e8(g_btlEvent,param_3,0);
         }
       }
@@ -215,7 +212,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
                       temp_v8 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v9 + 0x5c) + temp_v0)
                                    ,0,param_2);
                       temp_v5 = btlGetMainState();
-                      btlFindEntryBlockByMemberId(temp_v5,(int)*(short *)(temp_v9 + 0x62));
+                      btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v5), (int)*(short *)(temp_v9 + 0x62));
                       temp_v6 = btlGetMainState();
                       temp_v7 = idSetFindSubjectIndex(temp_v6,temp_v9);
                       if (temp_v7 < 0) {

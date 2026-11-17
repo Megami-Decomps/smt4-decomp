@@ -1,12 +1,11 @@
+#include "ui/MessageMainA.h"
 #include "shard/Shard003A.h"
 
 extern "C" {
 
-extern u8 g_messageMain;
-
 void messageMainSetFlag(u8 value)
 {
-    g_messageMain = value;
+    g_messageMain.enabled = value;
 }
 
 } /* extern "C" */

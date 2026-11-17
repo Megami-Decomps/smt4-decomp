@@ -1,5 +1,5 @@
 /* NON_MATCHING: the transition helper and the per-map call now match; remaining: retail addresses the spawn position stores from the scene base (r1+28..) and places g_lmapScene before the 180.0 literal, where the build uses the transform pointer. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "map/MapDepartTarget.h"
 #include "map/SceneSpawn.h"
 #include "gamedata/DataTableAccess_AocTable23.h"
@@ -7,7 +7,6 @@
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
-extern LmapScene *g_lmapScene;
 u32 table23FindRecordByKey(s32 map, u32 destination, u32 flags);
 void mapDepartSetTarget(s32 group, s32 map, s32 target);
 void mapCollisionRelease(void);
@@ -37,15 +36,15 @@ void FUN_002d1b94(u32 destination, u32 flags)
     mapDepartSetTarget(target->group, target->map, target->target);
     state->unk48 = destination;
     g_gameState.areaId = destination;
-    LmapSceneTransform *transform = &g_lmapScene->transform;
-    transform->position[0] = static_cast<f32>(spawn->x);
-    transform->position[1] = static_cast<f32>(spawn->y);
-    transform->position[2] = static_cast<f32>(spawn->z);
-    MapVector position = *reinterpret_cast<MapVector *>(transform->position);
-    *reinterpret_cast<MapVector *>(transform->positionSnapshotA) = position;
-    transform->headingDegrees = 180.0f;
-    transform->headingCopy = 180.0f;
-    *reinterpret_cast<MapVector *>(transform->positionSnapshotB) = position;
+    LmapScenePose *pose = &g_lmapScene->pose;
+    pose->position.x = static_cast<f32>(spawn->x);
+    pose->position.y = static_cast<f32>(spawn->y);
+    pose->position.z = static_cast<f32>(spawn->z);
+    MapVector position = pose->position;
+    pose->targetPosition = position;
+    pose->heading = 180.0f;
+    pose->targetHeading = 180.0f;
+    pose->previousPosition = position;
     mapCollisionRelease();
     if (state->unk40 == 101) {
         FUN_0027b2b4(state->unk40, state->unk48, 101, 10);

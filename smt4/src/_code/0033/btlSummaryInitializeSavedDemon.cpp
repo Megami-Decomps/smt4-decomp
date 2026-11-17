@@ -1,5 +1,6 @@
 /* NON_MATCHING: source-kind setup and first packed category update scheduling differ; -O2 candidate. */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 
 struct SummaryDemonSource {
     u8 unk00[0xe];
@@ -49,17 +50,10 @@ struct DemonBattleSummary {
     u32 counters[14]; // 0x14c
     u32 flags; // 0x184
 };
-struct SummaryDemonDefinition {
-    u8 unk00[5];
-    u8 type; // 0x05
-    u8 unk06[0x2d];
-    u8 race; // 0x33
-};
 extern "C" {
 u16 gameSlotFindByCategory(SummaryDemonSource *);
 u32 randomGetLowerTenBits(SummaryDemonSource *, u32);
 u32 randomGetUpperSixBits(SummaryDemonSource *, u32);
-SummaryDemonDefinition *devilGetRecord(u16);
 
 // Copy a saved demon's stats and packed resistances into its battle summary.
 void btlSummaryInitializeSavedDemon(u32 unused, DemonBattleSummary *summary, SummaryDemonSource *source)
@@ -93,9 +87,9 @@ void btlSummaryInitializeSavedDemon(u32 unused, DemonBattleSummary *summary, Sum
         summary->baseResistances[i].value = randomGetLowerTenBits(source, (u8)i);
         summary->baseResistances[i].kind = randomGetUpperSixBits(source, (u8)i);
     }
-    SummaryDemonDefinition *definition = devilGetRecord(summary->id);
-    summary->race = definition->race;
-    u8 type = definition->type;
+    DevilRecord *definition = devilGetRecord(summary->id);
+    summary->race = definition->battleRace;
+    u8 type = definition->category;
     if (type == 1)
         summary->type = type;
     else if (type == 4)

@@ -1,8 +1,7 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-extern MessageGlobalsA g_messageMain;
 
 void messageWindowShowOrPoll(u32 a, u32 b, u32 frame, u8 state, int wait, int flags);
 
@@ -19,11 +18,11 @@ void FUN_0039a6a4(u8 state)
 {
     scrCommMessageSetMode(0);
     if (scrGetCommandFrame() == 0) {
-        MessagePanelA *target = g_messageMain.panel;
+        MessageWindowA *target = g_messageMain.banner;
         if (target != NULL) {
-            target->unk30 = 1;
+            target->unk0030 = 1;
         }
-        target->unk31 = 1;
+        target->unk0031 = 1;
     }
     showMessage(state, 1);
 }

@@ -1,16 +1,17 @@
 /* NON_MATCHING: scalarized vector differences, fused interpolation and snapshot global-address grouping differ. */
 #include "shard/W5_W5Match8_CameraTransition.h"
+#include "battle/btlCamera.h"
 
 extern "C" {
 f32 FUN_003d4dd4(u32, u32, u32);
-extern CameraTransitionGlobals g_btlCamera;
+extern BtlCameraStatics g_btlCamera;
 extern W5Match8Vec3 g_cameraAlternateProgressStart;
 extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
 extern W5Match8Vec3 g_cameraUnoffsetStartPosition;
 
 void FUN_004f2548(W5Match8CameraTransition *camera)
 {
-    if (g_btlCamera.mode == 1) {
+    if (g_btlCamera.routingMode == 1) {
         camera->alternateProgress = g_cameraAlternateProgressPrevious;
         f32 progress = FUN_003d4dd4(camera->targetMode, camera->targetDuration, camera->targetFrame);
         camera->alternateProgress.z = (camera->alternateTarget.z -
@@ -24,7 +25,7 @@ void FUN_004f2548(W5Match8CameraTransition *camera)
         camera->targetProgress.x = g_cameraAlternateProgressPrevious.x + camera->targetStart.x;
         camera->targetProgress.y = g_cameraAlternateProgressPrevious.y + camera->targetStart.y;
         camera->targetProgress.z = g_cameraAlternateProgressPrevious.z + camera->targetStart.z;
-    } else if (g_btlCamera.mode == 2) {
+    } else if (g_btlCamera.routingMode == 2) {
         W5Match8Vec3 delta;
         delta.x = camera->alternateTarget.x - g_cameraUnoffsetStartPosition.x;
         delta.y = camera->alternateTarget.y - g_cameraUnoffsetStartPosition.y;

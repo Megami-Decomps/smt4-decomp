@@ -2,14 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/btlReflect.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int btlGetMainState(...);
-int btlFindEntryBlockByMemberId(...);
 int FUN_003f0254(...);
 int FUN_003f06b4(...);
-int btlMainFindEntryByListedId(...);
 int FUN_004d7a60(...);
 int FUN_004fd3f0(...);
 int btlReflectQueueMemberAction(...);
@@ -38,8 +37,6 @@ typedef struct {
     unsigned int sp54; /* 0x54: local_54 */
     unsigned int sp58; /* 0x58: local_58 */
 } param_6_stack;
-
-extern int g_btlCamera; /* 0x571508 */
 extern int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_00573c18; /* 0x573c18 */
@@ -87,7 +84,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   temp_v1 = FUN_004d7a60(g_btlEvent,param_3,1);
   if ((temp_v1 != 0) && (puVar4 = puVar2, FUN_003f06b4(puVar2,param_3), puVar4 != (unsigned int *)0x0)) {
     puVar4 = puVar2;
-    btlMainFindEntryByListedId(puVar2,(int)param_3->field_0x6a);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar2), (int)param_3->field_0x6a);
     temp_v9 = *puVar4 | DAT_00573c38;
     puVar4[1] = DAT_00573c3c | puVar4[1];
     *puVar4 = temp_v9;
@@ -112,7 +109,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   }
   temp_v2 = param_4 * 0xc;
   puVar4 = puVar2;
-  btlMainFindEntryByListedId(puVar2,(int)param_3->field_0x6a);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar2), (int)param_3->field_0x6a);
   temp_v7 = g_btlAux;
   if (temp_v1 != 0 && puVar4 != (unsigned int *)0x0) {
     temp_v11 = (*puVar4 & DAT_00573c18) != 0 || (puVar4[1] & DAT_00573c1c) != 0;
@@ -129,7 +126,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
       *(unsigned int *)(temp_v7 + 0x28) = 2;
       *(unsigned int *)(temp_v7 + 0x4c) = 0xc0;
       *(unsigned short *)(temp_v7 + 0x26) = 1;
-      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x2000000;
+      g_btlCamera->flags = g_btlCamera->flags | 0x2000000;
       FUN_004d7a60(g_btlEvent,param_3,0);
     }
   }
@@ -236,7 +233,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
                 if (temp_v6 == 0) {
                   temp_v6 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v7 + 100) + temp_v0),0,param_2));
                   temp_v3 = btlGetMainState();
-                  btlFindEntryBlockByMemberId(temp_v3,(int)*(short *)(temp_v7 + 0x6a));
+                  btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(temp_v3), (int)*(short *)(temp_v7 + 0x6a));
                   temp_v4 = btlGetMainState();
                   temp_v5 = idSetFindSubjectIndex(temp_v4,temp_v7);
                   if (temp_v5 < 0) {

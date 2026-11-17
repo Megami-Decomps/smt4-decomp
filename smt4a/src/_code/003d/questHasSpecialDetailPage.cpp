@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 
 extern "C" {
 u32 partyEntryBitsBit3(s32 index);

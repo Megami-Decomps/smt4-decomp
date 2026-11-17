@@ -1,5 +1,6 @@
 /* NON_MATCHING: recovered selector/scroller arguments; nested-loop counters and table pointers occupy registers instead of retail's88-byte frame. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "game/GameStateA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "ui/ItemListSelection.h"
@@ -53,7 +54,6 @@ typedef struct EntryListWork {
 OccurrenceEntry *dataTableFindEntryOccurrenceByBytePair(u32 table, s32 first, s32 second);
 Table02Slot *dataTableGetRecord02(u16 key);
 ItemRecord *dataTable02GetRecordWithAocPackage(u32 id);
-u16 *devilGetRecord(u32 id);
 s32 itemIsCollectedWithRelated(u32 id);
 void campFillUnitComparison(ListEntry *out, u32 id, s32 arg);
 void FUN_004a833c(void *list, ListEntry *entry);
@@ -97,16 +97,16 @@ void FUN_004a5b20(EntryListWork *work)
                         if (id == 0 || dataTable00FindById(id) == NULL) {
                             continue;
                         }
-                        u16 *named = devilGetRecord(id);
+                        DevilRecordA *devil = devilGetRecord(id);
                         Table00RecordA *record = dataTable00FindById(id);
 
-                        if (named != NULL && record != NULL
-                            && (g_gameState.showAllEntries != 0 || ((record->flags & 1) != 0 && itemIsCollectedWithRelated(*named) != 0))) {
+                        if (devil != NULL && record != NULL
+                            && (g_gameState.showAllEntries != 0 || ((record->flags & 1) != 0 && itemIsCollectedWithRelated(devil->id) != 0))) {
                             ListEntry listEntry;
                             u32 value = 0;
 
-                            campFillUnitComparison(&listEntry, *named, 0);
-                            Table00RecordA *found = dataTable00FindById(*named);
+                            campFillUnitComparison(&listEntry, devil->id, 0);
+                            Table00RecordA *found = dataTable00FindById(devil->id);
                             if (found != NULL) {
                                 value = found->money;
                             }

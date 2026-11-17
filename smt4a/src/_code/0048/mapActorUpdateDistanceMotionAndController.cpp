@@ -1,5 +1,6 @@
 /* NON_MATCHING: distance-vector VFP allocation and motion-flag reuse/store scheduling differ; controller synchronization body matches. */
 #include "shard/W5_W5Match7_ControllerPose.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include <math.h>
 
@@ -31,9 +32,9 @@ void mapActorUpdateDistanceMotionAndController(MapActorMotion *actor)
 {
     if (actor->motionFlags & 4) {
         MapVector delta = {
-            actor->position.x - g_lmapScene->position.x,
-            actor->position.y - g_lmapScene->position.y,
-            actor->position.z - g_lmapScene->position.z
+            actor->position.x - g_lmapScene->pose.position.x,
+            actor->position.y - g_lmapScene->pose.position.y,
+            actor->position.z - g_lmapScene->pose.position.z
         };
         if (sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z) > 300.0f) {
             actor->motionFlags = (actor->motionFlags & ~4) | 1;
@@ -64,7 +65,7 @@ void mapActorUpdateDistanceMotionAndController(MapActorMotion *actor)
         }
         if (actor->motionFlags & 4) {
             controller->flags.value |= 3;
-        } else if (g_gameState.departLoading) {
+        } else if (g_gameState.loading) {
             controller->flags.value |= 3;
         } else {
             controller->flags.value &= ~3;

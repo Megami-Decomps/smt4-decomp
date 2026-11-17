@@ -2,6 +2,8 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -21,18 +23,6 @@ typedef struct SkillMenuView {
     u16 ids[1];                      /* 0x3480: the plain list of ids */
 } SkillMenuView;
 
-
-typedef struct PlayerView {
-    u8 unk00[2];
-    u16 flag;
-    u16 value;
-} PlayerView;
-
-typedef struct UnitView {
-    u8 unk00[0x46];
-    u16 id;
-} UnitView;
-
 s32 resourceRunOperationIfUnblocked(u32 list);
 s32 listCursorGetRowIfUnblocked(u32 list);
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
@@ -43,12 +33,10 @@ void buttonHelpShowSkillDetails(u32 id);
 s32 flagBitIsSet(s32 flag);
 u32 dataTable16Sub2GetRecord(u32 index);
 void buttonHelpSetText(u32 record, u32 color);
-UnitView *gameGetUnitRecord(s32 index);
 u32 partyMemberFindById(u16 id);
 void FUN_0029da34(u32 a, s32 b, s32 id, u32 member);
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 arg);
 s32 gameFlagIsSet(u32 flag);
-PlayerView *gameGetPlayerData(void);
 void FUN_00309bc8(u32 a, s32 b);
 
 /* Shows the help for the skill menu's current entry, by page: the unit panel, the skill detail
@@ -100,7 +88,7 @@ void FUN_00292f4c(SkillMenuWork *work)
     }
     if (work->page != 0) {
         if (index == 0) {
-            UnitView *unit = gameGetUnitRecord(*(s16 *)((u8 *)work + work->page * 2 + 0x38F4));
+            StatBlock *unit = gameGetUnitRecord(*(s16 *)((u8 *)work + work->page * 2 + 0x38F4));
 
             FUN_0029da34(*panel, 2, unit->id, partyMemberFindById(unit->id));
             return;
@@ -116,9 +104,9 @@ void FUN_00292f4c(SkillMenuWork *work)
             return;
         }
         if (index == 1 && gameFlagIsSet(0x410) != 0) {
-            PlayerView *player = gameGetPlayerData();
+            PlayerDataIV *player = gameGetPlayerData();
 
-            if (player->flag != 0 && player->value != 0) {
+            if (player->equipped.gun != 0 && player->equipped.bullets != 0) {
                 FUN_00309bc8(*panel, 1);
                 return;
             }
@@ -126,9 +114,9 @@ void FUN_00292f4c(SkillMenuWork *work)
         s32 adjust = -2;
 
         if (gameFlagIsSet(0x410) != 0) {
-            PlayerView *player = gameGetPlayerData();
+            PlayerDataIV *player = gameGetPlayerData();
 
-            if (player->flag == 0 || player->value == 0) {
+            if (player->equipped.gun == 0 || player->equipped.bullets == 0) {
                 adjust = -1;
             }
         } else {

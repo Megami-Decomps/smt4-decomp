@@ -23,7 +23,6 @@ struct UiTextFontGlobals {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern UiTextFontGlobals g_uiTextFontSettings;
 void words2Copy(const UiFloatPosition *source, UiFloatPosition *destination);
 u32 renderCtxPackPassFlags(s32 mode, s32 flags);

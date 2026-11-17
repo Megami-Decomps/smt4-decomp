@@ -1,10 +1,5 @@
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
-
-struct VectorTransitionGlobals {
-    BattleVectorTransition *state; // 0x00
-    u8 unk04[0x24];
-    s32 routingMode; // 0x28
-};
+#include "battle/btlCamera.h"
 
 static __inline void battleVectorClear(BattleVector3 *vector)
 {
@@ -12,13 +7,13 @@ static __inline void battleVectorClear(BattleVector3 *vector)
 }
 
 extern "C" {
-extern VectorTransitionGlobals g_btlMain;
+extern BtlCameraStatics g_btlMain;
 void battleRouteVectorTransition(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z);
 
 void btlSetVectorTransitionTarget(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z)
 {
     if (g_btlMain.routingMode >= 1) {
-        battleRouteVectorTransition(g_btlMain.state, target, mode, x, y, z);
+        battleRouteVectorTransition(static_cast<BattleVectorTransition *>(g_btlMain.camera), target, mode, x, y, z);
         return;
     }
     state->alternateDestination.x = x;

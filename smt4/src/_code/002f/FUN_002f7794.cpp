@@ -5,13 +5,13 @@
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleActionView {
     u8 prefix[0x1E98];
     BtlActionRecord *actions;
 };
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 void FUN_0027df30(s32, u32, BtlActionRecord *, s32, s32, s32, s32, u32,
                  s32, s32, s32, s32, s32);
 void btlQueueKeyedScalarReflectAction(s32, u32, u32, s32, s32, s32, s32);

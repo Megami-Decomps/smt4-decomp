@@ -3,9 +3,9 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SourceMetadata.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(const BtlCombatantEntryA *entry, u16 *values);
 
 /* Tests the first nine copied source IDs for the metadata flag. */

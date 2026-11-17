@@ -1,8 +1,7 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 void renderEditorSceneDrawOverlay(void);
 
 s32 FUN_00388a40(void)

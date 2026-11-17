@@ -1,11 +1,11 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 void gameSavedFlagSet(s16 skill);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 s32 nkmGrowthLearnRandomSkill(u32 record);
 void scrSetResult(s32 result);
 s32 scrGetArg(s32 index);

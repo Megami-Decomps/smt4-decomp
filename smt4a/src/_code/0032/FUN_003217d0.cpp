@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtx.h"
@@ -26,8 +27,6 @@ typedef char ResultPanelOffsets[offsetof(ResultPanel, flags.drawGlow) == 0x400 &
     offsetof(ResultPanel, flags.skip) == 0x403 ? 1 : -1];
 
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 extern u64 DAT_0057a9b0; /* battle state flags that hide the panel's frame */
 
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 offset);

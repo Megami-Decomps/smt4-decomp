@@ -1,10 +1,9 @@
 /* NON_MATCHING: jump table now matches (labels 0..5); the vector copies use ldm/stm where retail uses ldrd/strd and the map ternaries share a zero register differently. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "game/GameState.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
-extern LmapScene *g_lmapScene;
 void mapCollisionRelease();
 void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, s32 mode);
 void FUN_002d508c(LmapMainState *state);
@@ -44,7 +43,7 @@ u32 FUN_002fb7dc()
     EntryTransitionView *transition = reinterpret_cast<EntryTransitionView *>(g_lmapMainState);
     switch (transition->phase) {
     case 0:
-        transition->start = *reinterpret_cast<const MapVector *>(g_lmapScene->transform.position);
+        transition->start = g_lmapScene->pose.position;
         transition->end = transition->start;
         transition->end.y = 800.0f;
         transition->alpha = 0.0f;
@@ -60,7 +59,7 @@ u32 FUN_002fb7dc()
     case 1:
         FUN_002d508c(g_lmapMainState);
         ++transition->frame;
-        g_lmapScene->transform.position[1] = transition->start.y +
+        g_lmapScene->pose.position.y = transition->start.y +
             (transition->end.y - transition->start.y) * (f32)transition->frame * 0.033333335f;
         if (transition->frame >= 30) {
             g_gameState.inputBlocked = 0;

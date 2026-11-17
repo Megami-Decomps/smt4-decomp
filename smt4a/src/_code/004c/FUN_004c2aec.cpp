@@ -4,14 +4,13 @@
 #include "battle/BattleSkillResponseMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/Shard004B.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 s32 FUN_004c55e4(s32 unit, u32 skill);
 f32 FUN_004c28b4(s32 unit, s32 kind);
-
 
 s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amount)
 {

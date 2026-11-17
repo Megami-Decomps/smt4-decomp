@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
@@ -17,14 +18,14 @@ u32 scrCommEnterPlaceAndSavePoint(void)
     mapPlaceSet(0x18, 1, 0);
     gameFlagsLoadTable4cEntry(1);
     g_gameState.progressEnabled = 1;
-    g_gameState.transitionActive = 0;
+    g_gameState.savedLocationSet = 0;
     flags->savePoint.scale = (s16)g_gameState.overviewHeading;
     flags->savePoint.mapId = g_gameState.mapId;
     flags->savePoint.areaId = g_gameState.areaId;
     flags->savePointObject.objectId = g_gameState.currentObjectId;
-    flags->savePoint.x = (s16)g_lmapScene->position.x;
-    flags->savePoint.y = (s16)g_lmapScene->position.y;
-    flags->savePoint.z = (s16)g_lmapScene->position.z;
+    flags->savePoint.x = (s16)g_lmapScene->pose.position.x;
+    flags->savePoint.y = (s16)g_lmapScene->pose.position.y;
+    flags->savePoint.z = (s16)g_lmapScene->pose.position.z;
     flags->savePoint.heading = (s16)g_gameState.pointHeading;
     return 1;
 }

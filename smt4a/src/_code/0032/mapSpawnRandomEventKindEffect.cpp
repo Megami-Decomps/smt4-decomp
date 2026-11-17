@@ -1,5 +1,6 @@
 /* NON_MATCHING: native sound vector argument matches retail call setup, but initial coordinate loads and float-add operands differ. */
 #include "common.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
@@ -11,7 +12,7 @@ s32 soundActorStartOnFreeChannel(u32 sound, BattleVector3 position);
 // Scatter one of four event-kind sounds around the current map position.
 void mapSpawnRandomEventKindEffect()
 {
-    BattleVector3 position = { g_lmapScene->position.x, g_lmapScene->position.y, g_lmapScene->position.z };
+    BattleVector3 position = { g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z };
     position.x += randBetween(-20, 20);
     position.z += randBetween(-20, 20);
     u32 variant = randBetween(0, 100) & 3;

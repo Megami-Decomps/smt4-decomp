@@ -4,6 +4,7 @@
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "battle/btlHelp.h"
 #include "util/Random.h"
+#include "gamedata/UnitRecordAccess.h"
 
 /* The per-race level lists: the table of level bounds at 0x104 and the race index at 0x33. */
 struct LevelLists {
@@ -22,11 +23,6 @@ extern "C" {
 u32 uniteChooseAvailableDevilAtLevel(u32 first, u32 second, u32 result, u32 level);
 u32 demonFindClosestEligibleLevel(LevelLists *lists, s32 race, u32 level, s32 arg);
 s32 itemGetFlagBit1(u16 id);
-struct UnitRecordView {
-    u8 unk00[0x46];
-    u16 id;
-};
-UnitRecordView *gameGetUnitRecord(s32 index);
 PartySlotsView *gameGetSlotTable(void);
 s32 partyMemberFindById(u32 id);
 s32 dataTableChooseWeightedId(void);

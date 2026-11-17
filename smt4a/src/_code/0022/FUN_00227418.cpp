@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the camp menu's item/skill details area for the current menu id (item description, selection bar, mode hints); written from the decompilation, the id grouping is rebuilt from the goto chain and branch layout not compared with retail */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "code/Code002a.h"
 
 struct CampDetail {
@@ -28,7 +29,6 @@ struct CampDetail {
 
 extern "C" {
 extern CampDetail *g_camp;
-extern RenderCtxA *g_renderCtx;
 
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 a, u32 b);

@@ -1,19 +1,13 @@
 #include "shard/W6_W6Match8_CampInventory.h"
-#include "shard/PadState.h"
 #include "AsdSDK/AsdMemUtil.h"
-
-struct CampUnitCategoryRecord {
-    u8 unk00[0x44];
-    u16 categories;
-};
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 extern CampInventoryLists *g_camp;
 s32 FUN_0029ee54(CampInventoryController *controller);
 s32 listCursorGetRowIfUnblocked(CampInventoryController *controller);
 s32 resourceRunOperationIfUnblocked(CampInventoryController *controller);
-PadState *gameGetPlayerData();
-CampUnitCategoryRecord *gameGetUnitRecord(s32 unit);
 u32 categoryGetColor(s16 category);
 void FUN_0026dafc(u32 color);
 
@@ -34,9 +28,9 @@ void campUpdateCategoryHighlightColors()
         processed[unit + 1] = 1;
         u16 categories;
         if (unit < 0) {
-            categories = gameGetPlayerData()->unk72;
+            categories = gameGetPlayerData()->ailments;
         } else {
-            categories = gameGetUnitRecord(unit)->categories;
+            categories = gameGetUnitRecord(unit)->ailments;
         }
         s32 ordinal = 0;
         if (categories == 0) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the placeholder cell is derived from its icon id like the record cells (retail's four separate mov/str now match); only register assignment differs (x in r9 vs sl, placeholder id loaded predicated after the flag test in retail). */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 #include "gamedata/Table00Lookup.h"
@@ -12,12 +13,6 @@ struct IconRect {
     s32 bottom;
 };
 
-struct IconRecord {
-    /* 0x00 */ u8 unk00[0x9C];
-    /* 0x9C */ u16 icon;
-};
-
-
 struct SlotRecord {
     /* 0x00 */ u8 unk00[0x60];
     /* 0x60 */ u16 flags;
@@ -28,7 +23,6 @@ extern u32 g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 void texDrawTableEntryAtStoredOrigin(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 void FUN_001849bc(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority, const IconRect *rect);
-IconRecord *devilGetRecord(u16 id);
 SlotRecord *slotRecordFindById(u16 id);
 u32 markerKindGetColor(s32 kind);
 void drawSetColorFromRGBA8(u32 color);
@@ -56,7 +50,7 @@ void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint)
         FUN_001849bc(2, 27, 3000, x, y, z, &rect);
         return;
     }
-    IconRecord *record = devilGetRecord((u16)id);
+    DevilRecordA *record = devilGetRecord((u16)id);
     if ((dataTable00FindById((u16)id)->level & 0x8000) != 0) {
         texDrawTableEntryAtStoredOrigin(2, 27, 2000, x, y, z);
         return;
@@ -67,10 +61,10 @@ void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint)
             drawSetColorFromRGBA8(markerKindGetColor(1));
         }
     }
-    if (FUN_00191f18(g_aocSystem, record->icon) != 0) {
-        FUN_00191ea8(g_aocSystem, record->icon, x, y, z);
-    } else if (record->icon < 0x200) {
-        s32 icon = record->icon;
+    if (FUN_00191f18(g_aocSystem, record->model) != 0) {
+        FUN_00191ea8(g_aocSystem, record->model, x, y, z);
+    } else if (record->model < 0x200) {
+        s32 icon = record->model;
         IconRect rect;
         rect.left = icon / 16 * 16;
         rect.right = rect.left + 16;
@@ -78,7 +72,7 @@ void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint)
         rect.bottom = rect.top + 32;
         FUN_001849bc(2, 27, 0, x, y, z, &rect);
     } else {
-        s32 icon = record->icon - 0x200;
+        s32 icon = record->model - 0x200;
         IconRect rect;
         rect.left = icon / 16 * 16;
         rect.right = rect.left + 16;

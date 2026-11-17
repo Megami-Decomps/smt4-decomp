@@ -1,5 +1,6 @@
 /* NON_MATCHING: typed branch payloads restore frame and literal name copy; zero-pair stores and saved constant registers differ. */
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 #include "gamedata/Table1bOr1c.h"
 #include <string.h>
 #include "game/GameState.h"
@@ -34,7 +35,6 @@ typedef struct SceneWork {
     /* 0xDAC */ u8 returnToMap;
 } SceneWork;
 
-
 struct SceneSequenceOptions {
     u32 id;
     u32 first;
@@ -58,7 +58,6 @@ void soundChannelStopAll(s32 channel);
 void *rosterGetLeaderId(void);
 SceneRecord *FUN_0022b8c0(void *sprites);
 void gameSynchronizeMapState(SceneWork *work);
-u8 *dataTable1bOr1cGetRecord(void *entry);
 void FUN_0026f960(u32 id);
 void messageMainFinishWindow(void);
 
@@ -118,7 +117,7 @@ void FUN_003b92b4(SceneWork *work)
         if (entry != NULL && table1bOr1cGetRecordValue(reinterpret_cast<u32>(entry)) == 6) {
             work->record = FUN_0022b8c0(work->sprites);
             gameSynchronizeMapState(work);
-            FUN_0026f960(*(u16 *)(dataTable1bOr1cGetRecord(entry) + 0x148));
+            FUN_0026f960(dataTable1bOr1cGetRecord(reinterpret_cast<u32>(entry))->event.package);
         }
     } else if (work->requestEnding != 0) {
         bgmReleaseStopped();

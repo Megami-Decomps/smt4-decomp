@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 struct FloatPair {
     f32 first;
@@ -16,8 +17,6 @@ struct JobSlotsWork {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 JobSlotsWork *jobGetWork(void);
 s32 jobIsValid(u32 job);
 f32 jobGetScalarFrame(u32 job);

@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelStateA.h"
 #include "util/BitsAndBytes.h"
@@ -10,7 +11,6 @@ struct PanelSpriteOrigin {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 PanelSpriteOrigin *asdTMTexTableEntryAt(u32 table, s32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);

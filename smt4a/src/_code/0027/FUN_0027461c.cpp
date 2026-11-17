@@ -27,7 +27,7 @@ void FUN_0027461c(void)
             MapDestructibleModel *model = entry->direct ? entry->model : work->groups.entries[entry->group].models[entry->index];
             ControllerPose *controller = model->controller;
             ControllerFlagsView *flags = reinterpret_cast<ControllerFlagsView *>(controller);
-            if (g_gameState.departLoading) {
+            if (g_gameState.loading) {
                 if (!(flags->flags & 1))
                     flags->flags |= 3;
             } else {

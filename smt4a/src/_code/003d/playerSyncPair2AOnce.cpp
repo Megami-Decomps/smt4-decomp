@@ -1,15 +1,14 @@
 #include "shard/Shard003D.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-extern PlayerData *gameGetPlayerData(void);
-
 void playerSyncPair2AOnce(void)
 {
-    PlayerData *player = gameGetPlayerData();
+    PlayerDataA *player = gameGetPlayerData();
 
-    player->unk2A = player->unk1C;
-    player->unk2C = player->unk1E;
+    player->hp = player->maxHp;
+    player->mp = player->maxMp;
 }
 
 } /* extern "C" */

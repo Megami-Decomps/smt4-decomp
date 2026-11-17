@@ -2,10 +2,10 @@
 #include "shard/PassiveSkill.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 struct BtlMainState;
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
 void btlEntryGetPassiveSkillIds(BtlEntry *, u16 *);
 s32 btlQueryMatchingFlagColumn(BtlMainState *, BtlEntry *, s32);
 

@@ -26,7 +26,7 @@ static __inline void saveJumpTransform(const MapJumpRequest *request)
     g_gameState.savedPosition.y = request->transform[1];
     g_gameState.savedPosition.z = request->transform[2];
     g_gameState.savedHeading = request->transform[3];
-    g_gameState.unk318 = request->transform[4];
+    g_gameState.savedHeadingCopy = request->transform[4];
 }
 
 extern "C" void FUN_00394508(AocObjC *controller)

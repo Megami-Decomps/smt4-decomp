@@ -38,7 +38,7 @@ u32 FUN_0035e9fc()
     u64 flags = btlGetMainState()->stateFlags64.bits;
     const CandidateCommandMasksView *masks = (const CandidateCommandMasksView *)&g_btlCandidateMasks;
     if ((flags & masks->required) != 0 && (flags & masks->excluded) == 0 &&
-        data->id == 0x1b6 && (data->unk110 & 0x10) != 0 &&
+        data->id == 0x1b6 && (data->statusFlags & 0x10) != 0 &&
         ((PendingCommandDataView *)data)->argument == 0x9b) {
         gameFlagSetValue(0x596, 1, 1);
     }

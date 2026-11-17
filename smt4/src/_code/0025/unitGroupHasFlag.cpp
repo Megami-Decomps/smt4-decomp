@@ -1,14 +1,7 @@
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
-struct UnitFlagsRecord {
-    /* 0x00 */ u8 unk00[0x44];
-    /* 0x44 */ u16 flags;
-};
-
-struct PlayerFlagsData {
-    /* 0x00 */ u8 unk00[0x72];
-    /* 0x72 */ u16 flags;
-};
 
 /* The save's slot table: party slots at 0x90F0, the three side slots at 0x9108 (-1 = empty). */
 struct UnitSlotTable {
@@ -18,17 +11,14 @@ struct UnitSlotTable {
 };
 
 extern "C" {
-
-PlayerFlagsData *gameGetPlayerData(void);
 s32 gameCountUnits(void);
 UnitSlotTable *gameGetSlotTable(void);
-UnitFlagsRecord *gameGetUnitRecord(s32 slot);
 
 /* Whether flag bit is set on the player (groups 0, 2, 3) or on any unit of the group's slots. */
 u32 unitGroupHasFlag(s32 group, u32 bit)
 {
     u32 mask = 1 << bit;
-    if ((group == 0 || group == 2 || group == 3) && (gameGetPlayerData()->flags & mask)) {
+    if ((group == 0 || group == 2 || group == 3) && (gameGetPlayerData()->ailments & mask)) {
         return 1;
     }
     s32 count;
@@ -48,7 +38,7 @@ u32 unitGroupHasFlag(s32 group, u32 bit)
         return 0;
     }
     for (s32 i = 0; i < count; ++i) {
-        if (slots[i] >= 0 && (gameGetUnitRecord(slots[i])->flags & mask)) {
+        if (slots[i] >= 0 && (gameGetUnitRecord(slots[i])->ailments & mask)) {
             return 1;
         }
     }

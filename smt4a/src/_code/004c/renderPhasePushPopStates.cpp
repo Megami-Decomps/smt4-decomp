@@ -1,11 +1,11 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 struct RenderPhase {
     u8 unk00[0xc];
     u32 phase;
 };
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlagsWithAlpha(u32, f32);
 s32 renderCtxPackPassFlags(u32, u32);
 

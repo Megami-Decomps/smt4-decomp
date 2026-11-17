@@ -1,9 +1,8 @@
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite();
 s32 renderCtxPackPassFlags(u32 mode, u32 option);

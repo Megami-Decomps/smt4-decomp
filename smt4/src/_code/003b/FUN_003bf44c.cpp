@@ -2,21 +2,17 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BattleBalanceRow.h"
+#include "gamedata/GamePlayerData.h"
 
 // The timer override is beyond the shared IV battle-state prefix.
 struct BattleAmountWork {
     u8 unk0000[0x2f2c];
     s32 elapsedMinutes; // 0x2f2c, -1 uses the system clock
 };
-struct BattleAmountPlayer {
-    u8 unk00[0x76];
-    u8 level; // 0x76
-};
 extern "C" {
 void *gameGetSlotTable();
 u32 clockGetSecondsSinceStart();
 u32 saveBlockGetPlaySeconds();
-BattleAmountPlayer *gameGetPlayerData();
 f32 FUN_002b99b8(f32 base, f32 exponent);
 
 // Scale a level-derived battle amount by elapsed minutes and the active multiplier.

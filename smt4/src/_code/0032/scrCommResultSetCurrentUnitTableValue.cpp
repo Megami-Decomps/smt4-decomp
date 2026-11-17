@@ -26,10 +26,10 @@ u32 scrCommResultSetCurrentUnitTableValue(void)
 
     if (party != NULL) {
         PartyEntry *entry = &party->entries[party->current];
-        u8 *table = (u8 *)static_cast<u16 *>(gameGetUnitRecord(entry->id));
+        StatBlock *unit = gameGetUnitRecord(entry->id);
         int index = FUN_00295408();
 
-        scrSetResult(*(u16 *)(table + index * 2 + 0x34));
+        scrSetResult(unit->skills.ids[index]);
     }
     return 1;
 }

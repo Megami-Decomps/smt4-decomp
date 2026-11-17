@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: world-vector copy formation, projected-coordinate VFP scheduling and stack slots differ. */
 #include "map/NpcDummyBindings.h"
 #include "shard/TextureDrawCall.h"
@@ -24,7 +25,6 @@ typedef char ProjectedNpcMarkerLayoutCheck[sizeof(ProjectedNpcMarker) == 10 &&
 
 struct RenderCtxA;
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);
 f32 messageGetActiveValue(u32 channel);
 void efctSetSpeed(f32 opacity);

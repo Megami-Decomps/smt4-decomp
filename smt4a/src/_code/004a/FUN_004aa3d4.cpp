@@ -1,5 +1,6 @@
 /* NON_MATCHING: global UI ownership is corrected; attack-label resource accessors and shared case exits still differ. */
 #include "battle/btlUI.h"
+#include "gamedata/DevilRecordA.h"
 #include "gamedata/GameDataAccess.h"
 #include "mapnavi/naviMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -29,11 +30,6 @@ struct UnitState {
     u8 *action;                  /* 0x28 */
 };
 
-struct DataRecord {
-    u8 pad00[0x0C];
-    u8 kind;                     /* 0x0C */
-};
-
 extern BtlUiGlobalsA g_btlUi;
 extern u32 g_btlScriptUnit;        /* 0x57113c */
 
@@ -43,7 +39,6 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 playerPrimaryGetKindValue(void);
 s32 playerSecondaryGetKindValue(void);
 s32 menuStateSetMode4(s32 mode);
-DataRecord *devilGetRecord(u32 id);
 s32 dataRecordGetKindValue(u32 id);
 UnitState *btlUnitGet(u32 unit);
 s32 FUN_002e4308(s32 value, s32 mode, s32 flag);
@@ -94,7 +89,7 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
             textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
             kindValue = FUN_0022fcb8();
         } else {
-            DataRecord *record = devilGetRecord(recordId);
+            DevilRecordA *record = devilGetRecord(recordId);
             textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b", record->kind);
             kindValue = dataRecordGetKindValue(recordId);
         }

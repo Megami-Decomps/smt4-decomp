@@ -23,11 +23,11 @@ void mapInitializeSavedAndTargetState(void)
     g_gameState.savedObjectId = g_gameState.currentObjectId;
     g_gameState.savedPosition = g_gameState.position;
     g_gameState.savedHeading = g_gameState.heading;
-    g_gameState.unk318 = g_gameState.heading;
+    g_gameState.savedHeadingCopy = g_gameState.heading;
     g_gameState.targetMapId = map->mapId;
     g_gameState.targetAreaId = map->areaId;
     g_gameState.targetPosition = g_gameState.position;
     g_gameState.targetHeading = g_gameState.overviewHeading;
-    g_gameState.unk334 = g_gameState.overviewHeading;
+    g_gameState.targetHeadingCopy = g_gameState.overviewHeading;
 }
 }

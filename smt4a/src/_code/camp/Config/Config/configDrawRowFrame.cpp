@@ -1,13 +1,12 @@
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/Config/Config.h"
 #include "shard/S1ListPanel.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-
 extern ConfigWorkA *g_config;
-extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *position);

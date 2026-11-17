@@ -6,12 +6,12 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "battle/btlHelp.h"
 #include "gamedata/DataTableAccess_Smt4.h"
+#include "gamedata/UnitRecordAccess.h"
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 gameFlagIsSet(u32 flag);
 bool gameRecordCopy(u32 id, GameSavedItem *record);
 s32 gameCountUnits(void);
-GameUnitSortRecord *gameGetUnitRecord(u32 slot);
 s32 itemGetFlagBit1(u16 id);
 
 u16 FUN_0029fa0c(u32 context, u16 *output)
@@ -26,9 +26,9 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
         if (!entry)
             continue;
         const DevilRecord *devil = (const DevilRecord *)devilGetRecord(entry->result);
-        if (devil->specialFusion.requiredFlag && !gameFlagIsSet(devil->specialFusion.requiredFlag))
+        if (devil->requiredFlag && !gameFlagIsSet(devil->requiredFlag))
             continue;
-        u16 prerequisite = devil->specialFusion.prerequisite;
+        u16 prerequisite = devil->prerequisite;
         if (prerequisite & 1) {
             GameSavedItem record;
             if (prerequisite & ~1) {

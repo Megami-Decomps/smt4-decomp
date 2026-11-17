@@ -33,7 +33,7 @@ typedef struct SlotPicker {
     /* 0x794 */ SlotFade fade;
 } SlotPicker;
 
-extern RenderCtx *g_renderCtx;
+extern RenderCtx *g_titleScene;
 
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
@@ -52,19 +52,19 @@ void slotPickerDraw(SlotPicker *picker)
     f32 scale = vec2GetSpeed(&picker->fade);
 
     efctSetSpeed(scale);
-    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
 
-    renderCtxSelectStereoLayout(g_renderCtx);
+    renderCtxSelectStereoLayout(g_titleScene);
     gxResetColorQuadToWhite();
-    RenderCtx *context = g_renderCtx;
+    RenderCtx *context = g_titleScene;
     s32 state = renderCtxPackPassFlags(1, 0);
     renderStackPushCountedDirect(&context->stackA, state);
-    renderCtxSelectTexture(g_renderCtx, 0);
+    renderCtxSelectTexture(g_titleScene, 0);
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 0, parallax, 0, 0xB);
-    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 1, parallax, 0, 0xB);
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 2, parallax, 0, 0xB);
-    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
+    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     char label[3] = {0, 0, 0};
 
     for (s32 i = 0; i < 8; i++) {
@@ -94,9 +94,9 @@ void slotPickerDraw(SlotPicker *picker)
                      scale);
     }
     efctSetSpeed(1.0f);
-    renderStackPop(&g_renderCtx->stackA);
-    renderCtxApplyTransforms(g_renderCtx);
-    renderCtxResetColorScale(g_renderCtx);
+    renderStackPop(&g_titleScene->stackA);
+    renderCtxApplyTransforms(g_titleScene);
+    renderCtxResetColorScale(g_titleScene);
 }
 
 }

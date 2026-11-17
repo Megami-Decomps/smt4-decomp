@@ -1,6 +1,7 @@
 /* NON_MATCHING: code and control flow match retail; only the callee-saved register allocation differs (retail keeps the handle-registry address in r8 and the 0/-1 reset constants in r5/r7; the build uses r5 for the registry and r7/r8 for the constants). */
 #include "common.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -44,17 +45,9 @@ typedef struct TransitionEntry {
     s16 mode;
 } TransitionEntry;
 
-typedef struct TransitionPlayer {
-    u16 idA;
-    u8 unk02[6];
-    u16 idB;
-} TransitionPlayer;
-
 extern TransitionScene *g_lmapScene;
 extern TransitionState g_gameState;
 extern void *g_handleRegistry;
-
-TransitionPlayer *gameGetPlayerData(void);
 void *gameFlagsGetBlock(void);
 s32 dataTable2EType1Count(void);
 s32 dataTable2EType0Count(void);
@@ -66,7 +59,7 @@ void handleRegistryRegisterObject(void *registry, TransitionPart *part);
  * (steps 2-3) registers the object for the chosen mode. Returns 1 once the transition is finished. */
 u32 FUN_0033e348(void)
 {
-    TransitionPlayer *player = gameGetPlayerData();
+    PlayerDataA *player = gameGetPlayerData();
 
     gameFlagsGetBlock();
     TransitionScene *scene = g_lmapScene;
@@ -76,7 +69,7 @@ u32 FUN_0033e348(void)
         for (s32 i = 0; i < dataTable2EType1Count(); i++) {
             TransitionEntry *entry = dataTable2EType1GetEntry(i);
 
-            if (entry->id == player->idB) {
+            if (entry->id == player->equipped.body) {
                 s32 override = g_gameState.overrideB;
 
                 if (override == -1) {
@@ -90,7 +83,7 @@ u32 FUN_0033e348(void)
         for (s32 i = 0; i < dataTable2EType0Count(); i++) {
             TransitionEntry *entry = dataTable2EType0GetEntry(i);
 
-            if (entry->id == player->idA) {
+            if (entry->id == player->equipped.weapon) {
                 s32 mode = g_gameState.overrideA;
 
                 if (mode == -1) {

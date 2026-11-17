@@ -1,6 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct CombatantSummary {
     u16 unk00;
@@ -10,7 +11,6 @@ struct CombatantSummary {
 };
 
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 index);
 void btlEntryBuildSummary(CombatantSummary *summary, BtlMainStateA *battle, BtlCombatantEntryA *entry);
 
 // Extract the unsigned value and signed modifier from a combatant's summary.

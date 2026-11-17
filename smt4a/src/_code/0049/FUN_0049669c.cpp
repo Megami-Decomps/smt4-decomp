@@ -124,7 +124,7 @@ void FUN_0049669c(ShopScene *shop)
             shop->npcModel = 0;
         }
         {
-            u32 model = FUN_00409fe8(dataTable00FindById(npcId)->battleTextureId, 1);
+            u32 model = FUN_00409fe8(dataTable00FindById((u16)npcId)->battleTextureId, 1);
 
             shop->npcState = 0;
             shop->npcModel = model;

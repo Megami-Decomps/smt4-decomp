@@ -1,15 +1,9 @@
 /* NON_MATCHING: only the prologue differs (retail copies r0 into r8 before `sub sp, sp, #72`, the build reserves the stack first), as in the smt4 twin FUN_002945a4. */
 #include "common.h"
 #include "gamedata/EquipmentRecordA.h"
+#include "gamedata/GamePlayerData.h"
 
-struct OutfitEquipment {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u16 head;
-    /* 0x08 */ u16 body;
-    /* 0x0A */ u16 legs;
-};
 extern "C" {
-OutfitEquipment *gameGetPlayerData(void);
 u32 FUN_0040b11c(void *owner, u32 part, u32 group, u32 model, u32 flags);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_003e573c(void *owner, u32 part, const char *path, u32 flags);
@@ -64,8 +58,8 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
     }
     FUN_003e573c(owner, part, path, flags);
     if (part == 0) {
-        OutfitEquipment *player = gameGetPlayerData();
-        record = dataTable08Sub2GetRecord(player->body);
+        PlayerDataA *player = gameGetPlayerData();
+        record = dataTable08Sub2GetRecord(player->equipped.body);
         u32 variant = FUN_0040b11c(owner, 1, record->modelGroup, record->model, equipment);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dbd%d.bam", record->modelGroup, record->model, variant);
@@ -75,8 +69,8 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
         }
         FUN_003e573c(owner, 1, path, flags);
     } else if (part == 1) {
-        OutfitEquipment *player = gameGetPlayerData();
-        record = dataTable08Sub2GetRecord(player->head);
+        PlayerDataA *player = gameGetPlayerData();
+        record = dataTable08Sub2GetRecord(player->equipped.head);
         u32 variant = FUN_0040b11c(owner, 0, record->modelGroup, record->model, equipment);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", record->modelGroup, record->model, variant);
@@ -85,7 +79,7 @@ void FUN_0040b27c(void *owner, u32 part, u16 equipment, u32 flags)
             textFormatBuffer(path, "player/pl%02d_%03dhd%d.bam", 8, 0, variant);
         }
         FUN_003e573c(owner, 0, path, flags);
-        record = dataTable08Sub2GetRecord(player->legs);
+        record = dataTable08Sub2GetRecord(player->equipped.legs);
         variant = FUN_0040b11c(owner, 2, record->modelGroup, record->model, equipment);
         if (FUN_004085a8(record->modelGroup, record->model)) {
             textFormatBuffer(path, "player/pl%02d_%03dlg%d.bam", record->modelGroup, record->model, variant);

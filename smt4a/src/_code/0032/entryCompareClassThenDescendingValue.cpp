@@ -1,9 +1,9 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
 s32 idIsAbove400(s32 id);
-s32 itemGetSortCategory(s32 id);
 s32 itemSortCompareRankThenKey(s32 *left, s32 *right);
 
 // Compare classification and record fields before delegating tied entries.

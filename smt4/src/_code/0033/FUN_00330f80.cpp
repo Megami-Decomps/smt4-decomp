@@ -5,6 +5,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct ContextCommandDefinition {
     u8 kind, enabled;
@@ -15,7 +16,6 @@ struct ContextCommandDefinition {
 extern "C" {
 const ContextCommandDefinition *FUN_00292960(u8 index, bool protagonist);
 void *gameGetSlotTable(void);
-void *gameGetUnitRecord(s32 index);
 s32 idOwnerHasActiveObject(void *unit);
 u32 FUN_00293988(void *battle);
 s32 FUN_0023dcb8(void);

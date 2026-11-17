@@ -1,19 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d56dc` (_code @ 0x3d56dc, 0x34dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "map/mapRndMaze.h"
 #include "gamedata/FlagValueIsPositive.h"
 #include "camp/CampCec/CampCecView.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x38];
-    unsigned char f005f1634; /* 0x038 */
-    u8 pad039[0x3ba];
-    unsigned char f005f19ef; /* 0x3f3 */
-};
-extern GameStateView g_gameState;
 
 
 int jobStop(...);
@@ -1691,7 +1684,7 @@ joined_r0x003d7c38:
       temp_v4 = saveLoadUIHasResult();
       if (temp_v4 != 0) {
         DAT_005e1eba = 1;
-        g_gameState.f005f1634 = 1;
+        g_gameState.retainCampResources = 1;
         temp_v4 = 0x55;
         campChangeState(temp_v4);
         break;
@@ -2098,7 +2091,7 @@ LAB_003d801c:
     slotSetRequest(0,10,0xff);
     slotSetRequest(1,10,0xff);
     campChangeState(0x4f);
-    g_gameState.f005f19ef = 1;
+    g_gameState.unk3F3 = 1;
     break;
   case 0x4f:
     temp_v4 = pairedAvailabilityBothReady();

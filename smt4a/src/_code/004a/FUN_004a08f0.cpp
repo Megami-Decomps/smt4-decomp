@@ -1,21 +1,8 @@
 /* NON_MATCHING: retail unrolls the 8-element skill copy, keeps the zero constant in sl and the base percentage/skill pointer in extra callee-saved registers; build keeps the copy loop rolled. */
 #include "common.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
-
-struct StepPlayerData {
-    /* 0x00 */ u8 unk00[0x0C];
-    /* 0x0C */ u16 id;
-    /* 0x0E */ u8 unk0E[0x0E];
-    /* 0x1C */ s16 maxHp;
-    /* 0x1E */ s16 maxMp;
-    /* 0x20 */ u8 unk20[0x0A];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ s16 mp;
-    /* 0x2E */ u8 unk2E[0x30];
-    /* 0x5E */ u16 flags;
-};
+#include "gamedata/GamePlayerData.h"
 
 struct StepUnitRecord {
     /* 0x00 */ u8 unk00[0x0E];
@@ -104,21 +91,21 @@ static __inline void healRegenSkillUnitsMp(s32 percent, s32 count)
 void FUN_004a08f0(void)
 {
     s32 percent = 0;
-    if (!(reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->flags & 2)) {
+    if (!(gameGetPlayerData()->ailments & 2)) {
         if ((s32)gameDataFlagTestBit(0x67) || (s32)gameDataFlagTestBit(0x65))
             percent = 5;
         else if ((s32)gameDataFlagTestBit(0x64))
             percent = 2;
         s32 total = percent;
-        if (reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->id == 0x2AB)
+        if (gameGetPlayerData()->equipped.accessory == 0x2AB)
             total += 2;
         if (total > 0) {
-            s32 max = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->maxMp;
-            s32 mp = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->mp + percentOfMax(max, total);
+            s32 max = gameGetPlayerData()->maxMp;
+            s32 mp = gameGetPlayerData()->mp + percentOfMax(max, total);
             if (mp > max)
                 mp = max;
             s16 value = mp;
-            StepPlayerData *player = reinterpret_cast<StepPlayerData *>(gameGetPlayerData());
+            PlayerDataA *player = gameGetPlayerData();
             s32 limit = player->maxMp;
             if (value > limit)
                 value = limit;

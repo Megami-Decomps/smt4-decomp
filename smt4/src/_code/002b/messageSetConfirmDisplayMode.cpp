@@ -1,12 +1,11 @@
 #include "ui/MessageMain.h"
 
 extern "C" {
-extern MessageGlobals g_messageMain;
 
 void messageSetConfirmDisplayMode(void)
 {
-    if (g_messageMain.state != NULL) {
-        g_messageMain.state->displayMode = 0x14;
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->displayMode = 0x14;
     }
 }
 

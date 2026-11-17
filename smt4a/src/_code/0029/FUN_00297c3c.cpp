@@ -15,7 +15,7 @@ void FUN_00297c3c(void)
             EngineEffectRecord *record = &g_engineRecordList->nearest[i];
             if (record->active != 0) {
                 ControllerModel *model = record->ownModels->model;
-                if (g_gameState.departLoading != 0) {
+                if (g_gameState.loading != 0) {
                     if ((model->flags & 1) == 0) {
                         model->flags |= 3;
                     }
@@ -44,7 +44,7 @@ void FUN_00297c3c(void)
             } else {
                 model = g_engineRecordList->models[record->modelSlot].models->model;
             }
-            if (g_gameState.departLoading != 0) {
+            if (g_gameState.loading != 0) {
                 if ((model->flags & 1) == 0) {
                     model->flags |= 3;
                 }
@@ -54,7 +54,7 @@ void FUN_00297c3c(void)
                 }
                 if (record->control.follow != 0) {
                     if (record->control.followHold != 0) {
-                        if (g_gameState.departLoading != 0) {
+                        if (g_gameState.loading != 0) {
                             if ((model->flags & 1) == 0) {
                                 model->flags &= ~3;
                             }

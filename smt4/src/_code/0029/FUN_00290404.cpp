@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail's constant-false path is omitted; label lookup and panel-address scheduling differ. */
 #include "shard/W4_W4Match2_UiQuest.h"
-#include "shard/W6_W6Match5_SecondarySort.h"
+#include "quest_center/QuestRecord.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 
@@ -50,7 +50,7 @@ void FUN_00290404()
             }
             status = 3;
         }
-    } else if (dataTable1bOr1cGetRecord(quest)->classification.kind) {
+    } else if (dataTable1bOr1cGetRecord(quest)->kind) {
         if (questIsOfferable(quest)) {
             if (rosterGetLeaderId() == quest) {
                 status = 0;

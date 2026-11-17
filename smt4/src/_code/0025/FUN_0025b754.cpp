@@ -46,24 +46,24 @@ void FUN_0025b754(void)
     }
     if (g_gameState.overlayKind == 1) {
         FUN_0024ac68(1);
-        FUN_001dd1e0(g_gameState.overlayTarget,
-                     g_gameState.overlayColorB | (g_gameState.overlayColorA << 24) | (g_gameState.overlayColorR << 16) | (g_gameState.overlayColorG << 8),
-                     g_gameState.overlayFlag != 0, 1, (f32)g_gameState.overlayX, (f32)g_gameState.overlayY);
+        FUN_001dd1e0(g_gameState.overlayTexture,
+                     g_gameState.overlayAlpha | (g_gameState.overlayRed << 24) | (g_gameState.overlayGreen << 16) | (g_gameState.overlayBlue << 8),
+                     g_gameState.overlayAdditive != 0, 1, (f32)g_gameState.overlayX, (f32)g_gameState.overlayY);
         FUN_0024ac7c(0);
         return;
     }
     if (g_gameState.overlayKind == 2) {
         FUN_0024ac7c(1);
-        FUN_001dd140(g_gameState.overlayTarget,
-                     g_gameState.overlayColorB | (g_gameState.overlayColorA << 24) | (g_gameState.overlayColorR << 16) | (g_gameState.overlayColorG << 8),
-                     g_gameState.overlayFlag != 0, 1, (f32)g_gameState.overlayX, (f32)g_gameState.overlayY);
+        FUN_001dd140(g_gameState.overlayTexture,
+                     g_gameState.overlayAlpha | (g_gameState.overlayRed << 24) | (g_gameState.overlayGreen << 16) | (g_gameState.overlayBlue << 8),
+                     g_gameState.overlayAdditive != 0, 1, (f32)g_gameState.overlayX, (f32)g_gameState.overlayY);
         FUN_0024ac68(0);
         return;
     }
 
     s32 selector = g_gameState.map.blinkSelector;
     s32 mode = 2;
-    u32 color = g_gameState.overlayColorB;
+    u32 color = g_gameState.overlayAlpha;
     if (g_gameState.map.darkZone != 0) {
         selector = -2;
     }
@@ -102,8 +102,8 @@ void FUN_0025b754(void)
             color = 0xFF;
         }
     }
-    FUN_001dd140(g_gameState.overlayTarget,
-                 (g_gameState.overlayColorA << 24) | (g_gameState.overlayColorR << 16) | (g_gameState.overlayColorG << 8) | color,
+    FUN_001dd140(g_gameState.overlayTexture,
+                 (g_gameState.overlayRed << 24) | (g_gameState.overlayGreen << 16) | (g_gameState.overlayBlue << 8) | color,
                  1, mode, (f32)g_gameState.overlayX + 2.0f, (f32)g_gameState.overlayY + 2.0f);
     FUN_0024ac68(0);
 }

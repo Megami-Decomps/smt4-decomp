@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32, u32);
 void gxSubmitDrawZeroExtraParams(u32, u32, u32, u32, f32, f32, f32, f32, f32);
 

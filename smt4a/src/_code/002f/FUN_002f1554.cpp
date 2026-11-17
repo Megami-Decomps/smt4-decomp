@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail ldr r7, [pc, #136] differs from recovered ldr r7, [pc, #132]. */
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 
 struct QuestStateView {
     u8 unk00[4];       // 0x000
@@ -18,11 +19,6 @@ struct QuestStateView {
     s16 unkCCA;        // 0xcca
 };
 
-struct QuestEntryView {
-    u8 unk00[7];       // 0x00
-    u8 unk07;          // 0x07
-};
-
 extern "C" {
 extern QuestStateView* g_uiQuest;
 u8 dataTable1bOr1cRecordHasFlag1(void);
@@ -30,7 +26,6 @@ void uiQuestSpritesCreate(void);
 void FUN_003d498c(s32 questId, s32 mode);
 void uiSpriteSetKeyframe(void* sprite, s32 keyframe, s32 option);
 void uiSpriteSetImageKeyframe(void* sprite, s32 keyframe, s32 option);
-QuestEntryView* dataTable1bOr1cGetRecord(s32 questId);
 
 // Initialize the quest UI and select its mode from the quest entry's flag.
 void FUN_002f1554(s32 questId)
@@ -51,8 +46,8 @@ void FUN_002f1554(s32 questId)
     currentState->unk10 = 0;
     questState->unk0C = 29;
 
-    QuestEntryView* questEntry = dataTable1bOr1cGetRecord(questId);
-    if (questEntry->unk07 & 0x20) {
+    QuestRecordA* questEntry = dataTable1bOr1cGetRecord(questId);
+    if (questEntry->flags & 0x20) {
         questState->unk910 = 2;
     } else {
         questState->unk910 = 1;

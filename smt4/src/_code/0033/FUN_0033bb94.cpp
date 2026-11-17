@@ -7,17 +7,6 @@ struct SlotTable {
     s8 party[3];        // 0x9108
 };
 
-// Unit record (0x604 bytes): only the parts merged here.
-struct UnitRecord {
-    u8 unk00[0x34];
-    u16 skills[8];      // 0x34
-    u8 unk44[6];
-    u8 id;              // 0x4a
-    u8 unk4b;
-    u8 learned[0x40];   // 0x4c
-    u8 counters[0x500]; // 0x8c: saturating byte counters
-    u8 unk58c[0x604 - 0x58c];
-};
 
 extern "C" {
 
@@ -25,46 +14,46 @@ void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
 void FUN_0029bbc8(u8 id);
 void FUN_0029c1c8(u32 id, u32 a, u32 b);
-void FUN_0029bde4(UnitRecord* record);
-s32 recordContainsPairedId(UnitRecord* record, u32 skill);
+void FUN_0029bde4(StatBlock* record);
+s32 recordContainsPairedId(StatBlock* record, u32 skill);
 void FUN_002b7bca(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 dataTable06Sub1CompareBySortKeys(const void* a, const void* b);
-u32 flagCountUnlockedSlots(UnitRecord* record);
-void unitRecalculateEffectiveStats(UnitRecord* record);
+u32 flagCountUnlockedSlots(StatBlock* record);
+void unitRecalculateEffectiveStats(StatBlock* record);
 
 // Merges the unit image `source` into its unit record, collecting the skills
 // that cannot be merged into `outSkills`; returns 1 when some do not fit.
-u32 FUN_0033bb94(UnitRecord* source, u32 arg, u16* outSkills)
+u32 FUN_0033bb94(StatBlock* source, u32 arg, u16* outSkills)
 {
-    UnitRecord copy;
+    StatBlock copy;
     __aeabi_memcpy4(&copy, source, 0x604);
     SlotTable* table = gameGetSlotTable();
-    u32 id = copy.id;
+    u32 id = copy.growth.slot;
     s32 partyIndex = -1;
     if (table->party[0] == id) partyIndex = 0;
     else if (table->party[1] == id) partyIndex = 1;
     else if (table->party[2] == id) partyIndex = 2;
-    FUN_0029bbc8(source->id);
+    FUN_0029bbc8(source->growth.slot);
     FUN_0029c1c8(id, arg, 0);
-    UnitRecord* record = static_cast<UnitRecord *>(gameGetUnitRecord(id));
-    if (partyIndex >= 0) table->party[partyIndex] = record->id;
+    StatBlock* record = gameGetUnitRecord(id);
+    if (partyIndex >= 0) table->party[partyIndex] = record->growth.slot;
     for (s32 i = 0; i < 0x40; i++) {
-        record->learned[i] |= copy.learned[i];
+        record->growth.progress[i] |= copy.growth.progress[i];
     }
     for (s32 i = 0; i < 0x500; i++) {
-        s32 sum = copy.counters[i] + record->counters[i];
+        s32 sum = copy.growth.counters[i] + record->growth.counters[i];
         if (sum > 0xff) sum = 0xff;
-        record->counters[i] = sum;
+        record->growth.counters[i] = sum;
     }
     FUN_0029bde4(record);
 
     s32 duplicates = 0;
     s32 added = 0;
     for (s32 i = 0; i < 8; i++) {
-        if (copy.skills[i] != 0) {
-            if (!recordContainsPairedId(record, copy.skills[i])) {
-                outSkills[added++] = copy.skills[i];
-            } else if (copy.skills[i] != 0) {
+        if (copy.skills.ids[i] != 0) {
+            if (!recordContainsPairedId(record, copy.skills.ids[i])) {
+                outSkills[added++] = copy.skills.ids[i];
+            } else if (copy.skills.ids[i] != 0) {
                 duplicates++;
             }
         }
@@ -75,7 +64,7 @@ u32 FUN_0033bb94(UnitRecord* source, u32 arg, u16* outSkills)
 
     s32 unplaced = added;
     for (s32 i = 0; i < unlocked; i++) {
-        if (record->skills[i] == 0) unplaced--;
+        if (record->skills.ids[i] == 0) unplaced--;
     }
     if (unplaced > 0) {
         unitRecalculateEffectiveStats(record);
@@ -85,8 +74,8 @@ u32 FUN_0033bb94(UnitRecord* source, u32 arg, u16* outSkills)
         u16 skill = outSkills[i];
         if (skill != 0) {
             for (s32 j = duplicates; j < 8; j++) {
-                if (record->skills[j] == 0) {
-                    record->skills[j] = skill;
+                if (record->skills.ids[j] == 0) {
+                    record->skills.ids[j] = skill;
                     break;
                 }
             }

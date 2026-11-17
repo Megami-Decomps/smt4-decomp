@@ -1,12 +1,9 @@
 #include "common.h"
 #include "script/ScriptArgs.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-struct ResultUnitRecord {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 demonId;
-};
 
 struct ResultEntry {
     /* 0x000 */ s8 unit;
@@ -25,7 +22,6 @@ struct ResultState {
 extern ResultState *g_result;
 
 s32 scrGetArg(s32 index);
-ResultUnitRecord *gameGetUnitRecord(s32 unit);
 
 /* Script command: the demon id of the current result entry, from its override id when the argument is non-zero, else from its unit's record. */
 u32 scrCommResultGetDemonId(void)
@@ -36,7 +32,7 @@ u32 scrCommResultGetDemonId(void)
         ResultEntry *entry = &g_result->entries[g_result->current];
 
         if (useOverride == 0) {
-            scrSetResult(gameGetUnitRecord(entry->unit)->demonId);
+            scrSetResult(gameGetUnitRecord(entry->unit)->id);
         } else {
             scrSetResult(entry->overrideId);
         }

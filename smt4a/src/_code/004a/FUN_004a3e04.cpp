@@ -1,11 +1,7 @@
 /* NON_MATCHING: register allocation and scheduling differ (menu/loop index swap, mode byte base hoisted into a register in retail, flag materialised as mov #1/moveq #0); logic matches retail. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "code/Code002a.h"
-
-struct StatRecord {
-    u8 unk00[6];
-    u16 value;
-};
 
 struct SpriteOffset {
     u8 unk00[8];
@@ -15,7 +11,6 @@ struct SpriteOffset {
 
 extern "C" {
 s32 rangeGetMinimumLimit(void *list);
-StatRecord *devilGetRecord(u32 id);
 SpriteOffset *layoutFindTableEntry(void *sprites, s32 index);
 u32 FUN_004a8750(u32 id, u32 kind, bool flag, bool high, u32 extra);
 int textFormatBuffer(char *buffer, const char *format, u32 value);
@@ -53,9 +48,9 @@ static u32 statGetValue(const StatEntry *entry, bool compare, u32 kind)
     u32 value = 0;
     if (!compare) {
         if (kind == 0) {
-            StatRecord *record = devilGetRecord((u16)entry->id);
+            DevilRecordA *record = devilGetRecord((u16)entry->id);
             if (record != 0)
-                value = record->value;
+                value = record->level;
         } else if (kind == 1) {
             value = entry->current;
         } else if (kind == 2) {

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 
 struct MapEntry {
     u8 active;                 // 0x00
@@ -14,21 +15,8 @@ struct MapInterface {
     MapEntry entries[128]; // 0x1DC, stride 0x194
 };
 
-struct LocalMapScene {
-    u8 reserved00[0x28];
-    f32 firstX;                // 0x28
-    f32 firstY;                // 0x2C
-    f32 firstZ;                // 0x30
-    f32 secondX;               // 0x34
-    f32 secondY;               // 0x38
-    f32 secondZ;               // 0x3C
-    u8 reserved40[0x0C];
-    f32 scalar;                // 0x4C
-};
-
 extern "C" {
 extern MapInterface* g_mapIf;
-extern LocalMapScene* g_lmapScene;
 
 void FUN_0029aa60(s32 mode);
 void FUN_00311b74(f32 firstX, f32 firstY, f32 firstZ, f32 scalar,
@@ -51,10 +39,10 @@ void FUN_00245d78(s32 updateScene)
     for (s32 pass = 0; pass < 3; ++pass) {
         FUN_0029aa60(1);
         if (updateScene != 0) {
-            LocalMapScene* scene = g_lmapScene;
-            FUN_00311b74(scene->firstX, scene->firstY, scene->firstZ,
-                         scene->scalar,
-                         scene->secondX, scene->secondY, scene->secondZ);
+            LmapSceneA* scene = g_lmapScene;
+            FUN_00311b74(scene->pose.targetPosition.x, scene->pose.targetPosition.y, scene->pose.targetPosition.z,
+                         scene->pose.heading,
+                         scene->pose.previousPosition.x, scene->pose.previousPosition.y, scene->pose.previousPosition.z);
         }
     }
 

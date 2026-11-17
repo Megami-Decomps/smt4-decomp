@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 
 /* The terminal screen: its page and four slots (0xC bytes each). */
@@ -19,7 +20,6 @@ typedef char LocalTermScreenSlotsOffsetCheck[offsetof(LocalTermScreen, slots) ==
 
 extern "C" {
 extern LocalTermScreen *g_localTmnl;
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlagsWithAlpha(u32 mode, f32 alpha);
 s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
 void effectNodeUpdatePlacedChildren(u32 handle);

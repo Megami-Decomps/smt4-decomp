@@ -1,15 +1,5 @@
-#include "common.h"
+#include "ui/MessageMain.h"
 
-struct MessageWindow {
-    /* 0x000 */ u32 unk00;
-    /* 0x004 */ s32 owner;
-    /* 0x008 */ u8 unk08[0xA2C];
-    /* 0xA34 */ u8 state;
-};
-struct MessageMainState {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ MessageWindow *window;
-};
 struct Unk49381c {
     /* 0x00 */ u8 unk00[0x0D];
     /* 0x0D */ u8 busy;
@@ -17,7 +7,6 @@ struct Unk49381c {
 
 extern "C" {
 
-extern MessageMainState g_messageMain;
 extern Unk49381c DAT_0049381c;
 
 s32 FUN_002c1658(s32 id, s32 mode);
@@ -25,7 +14,7 @@ s32 slotIsActive(s32 id);
 
 /* Reports whether the given owner is still busy: any of the checked activities runs, or the first
  * message window belongs to it and is still waiting. */
-s32 FUN_0010efd8(s32 owner)
+s32 FUN_0010efd8(u32 owner)
 {
     MessageWindow *window;
 
@@ -34,7 +23,7 @@ s32 FUN_0010efd8(s32 owner)
         return 1;
     }
     window = g_messageMain.window;
-    if (window->owner == owner && window->state == 1 && FUN_002c1658(1, 1) != 0) {
+    if (window->box == owner && window->unkA34 == 1 && FUN_002c1658(1, 1) != 0) {
         return 1;
     }
     return 0;

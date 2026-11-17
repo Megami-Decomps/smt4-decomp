@@ -1,9 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
 
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 
 s32 asdProcessSetCommandListRecording(s32 arg);
 s32 holderClearPair(RenderCtxA *scene);

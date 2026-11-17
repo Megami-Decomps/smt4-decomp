@@ -1,16 +1,7 @@
-#include "shard/W5_W5Match7_SceneState.h"
-
-struct LmapTransitionState {
-    u32 unk00;       // 0x00
-    u32 state;       // 0x04
-    u32 substate;    // 0x08
-    u8 unk0c[0x48]; // 0x0c
-    u32 transition;  // 0x54
-    f32 timer;       // 0x58
-};
+#include "map/LmapGlobals.h"
 
 extern "C" {
-void mapSetSceneState(u32 event);
+void mapSetSceneState(s32 state);
 void titleSetSlotValueState2(u32 index, s32 frames);
 void FUN_00303460(u32 state);
 
@@ -18,14 +9,14 @@ void FUN_00303460(u32 state);
 void lmapBeginTimedTransition()
 {
     mapSetSceneState(31);
-    LmapTransitionState* scene = (LmapTransitionState*)g_lmapScene;
+    LmapSceneA *scene = g_lmapScene;
     scene->state = 8;
-    scene->substate = 0;
+    scene->stateTime = 0;
     titleSetSlotValueState2(0, 10);
     titleSetSlotValueState2(1, 10);
-    scene = (LmapTransitionState*)g_lmapScene;
-    scene->transition = 35;
-    scene->timer = 0.0f;
+    scene = g_lmapScene;
+    scene->moveMode = 35;
+    scene->moveSpeed = 0.0f;
     FUN_00303460(22);
 }
 }

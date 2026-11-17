@@ -4,6 +4,7 @@
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 /* Battle state flag masks: the mask whose bits make passive rolls always succeed at 0xA8. */
 struct BtlPassiveFlagMasks {
@@ -17,7 +18,6 @@ extern "C" {
 
 extern BtlPassiveFlagMasks DAT_005713f0;
 
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skillIds);
 s32 lcgRandomRange(s32 max);
 

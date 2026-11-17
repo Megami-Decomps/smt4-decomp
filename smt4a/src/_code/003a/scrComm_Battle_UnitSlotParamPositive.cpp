@@ -1,10 +1,10 @@
 #include "battle/btlUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 void scrSetResult(s32 result);
 s32 scrGetArg(u32 index);
-BtlUnitA *btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit;
 
@@ -23,7 +23,7 @@ s32 scrComm_Battle_UnitSlotParamPositive(void)
     } else if (slot == 3) {
         index = 0xB;
     }
-    BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
+    BtlUnitA *unit = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
     /* the entry's word at 0x74 + index * 4, addressed as retail does: the word pointer moved by index first */
     s32 *slotParams = reinterpret_cast<s32 *>(unit->entry) + index;
 

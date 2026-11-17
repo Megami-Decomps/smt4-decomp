@@ -1,21 +1,14 @@
 /* NON_MATCHING: percentage/constant VFP allocation and shared player/party skill-loop grouping differ; compiler-version changes are not a remedy. */
 #include "common.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "mapnavi/naviMain.h"
 #include "code/Code003e.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/GamePlayerData.h"
 
 /* The turn state (only the phase). */
 struct RegenTurn {
     /* 0x00 */ u8 unk00[0xa8];
     /* 0xa8 */ s32 phase;
-};
-
-/* The player's record (only the current values). */
-struct RegenPlayer {
-    /* 0x00 */ u8 unk00[0x2a];
-    /* 0x2a */ u16 currentHp;
-    /* 0x2c */ u16 currentMp;
 };
 
 /* A party unit's record (only the fields used here). */
@@ -108,13 +101,13 @@ void FUN_003ee734(RegenTurn *turn)
             s32 value = (s16)((s32)((f32)(s32)FUN_003e0154() * hp * 0.01f) + current);
             playerSetClampedStat(value);
             if (value == 0) {
-                reinterpret_cast<RegenPlayer *>(gameGetPlayerData())->currentHp = 0;
+                gameGetPlayerData()->hp = 0;
             }
             current = FUN_003e0034();
             value = (s16)((s32)((f32)(s32)FUN_003e0164() * mp * 0.01f) + current);
             playerSetClampedValue(value);
             if (value == 0) {
-                reinterpret_cast<RegenPlayer *>(gameGetPlayerData())->currentMp = 0;
+                gameGetPlayerData()->mp = 0;
             }
         }
         u8 count = gameGetSlotTable()->count;

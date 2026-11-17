@@ -30,7 +30,7 @@ void eplUpdateActiveNodes(void)
 {
     s32 i;
 
-    if (g_eplSlots != NULL && g_gameState.departLoading == 0) {
+    if (g_eplSlots != NULL && g_gameState.loading == 0) {
         for (i = 0; i < 16; i++) {
             EplWork *work = &g_eplSlots->work[i];
             if (eplWorkIsActive(work)) {

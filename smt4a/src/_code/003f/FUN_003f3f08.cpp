@@ -1,8 +1,8 @@
 #include "shard/Shard0034.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-PlayerData *gameGetPlayerData(void);
 PlayerData *gameGetSlotRecord(s32 slot);
 PlayerData *btlMainGetUnk14(void);
 u32 markerKindGetColor(u32 kind);
@@ -27,7 +27,7 @@ u32 FUN_003f3f08(const PartyPanelWidget *widget)
     }
     s32 selector = entry->sourceSelector;
     if (selector == -1) {
-        markerMask = gameGetPlayerData()->unk5E;
+        markerMask = gameGetPlayerData()->ailments;
     } else if (selector == -2) {
         const PlayerData *subject = btlMainGetUnk14();
         if (subject != NULL) {

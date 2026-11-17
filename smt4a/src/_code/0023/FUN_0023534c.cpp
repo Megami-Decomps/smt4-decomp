@@ -62,7 +62,7 @@ void FUN_0023534c(void)
         }
         model = slot->handle->model;
         if (model != NULL) {
-            if (g_gameState.departLoading == 0) {
+            if (g_gameState.loading == 0) {
                 model->flags &= ~3;
             } else {
                 model->flags |= 3;

@@ -1,6 +1,7 @@
 #include "camp/CecMenu.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "event/2dEvent/Npc2d.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 u32 scrScriptProcessCreate(u32 resource, u32 screen);
@@ -11,7 +12,6 @@ void FUN_0025461c(void);
 void cecProcessDestroy(void);
 s32 scrRunOpcodesStub(u32 process);
 PartyDamageSlotsIV *gameGetSlotTable(void);
-void *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(const void *record, u32 flag);
 void objectFlagsClear(void *record, u32 flag);
 void FUN_0026b9bc(void);

@@ -1,7 +1,7 @@
 /* NON_MATCHING: stack indices fold into direct base offsets, command constants coalesce and the depth-access predicate short-circuits; 125 vs 114 instructions. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern u32 *g_modelCommandBuffer;
 extern u32 g_modelCommandWordCount;
 void cursorResetFromParam();

@@ -1,22 +1,12 @@
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-typedef struct PlayerLevelData {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 level;
-} PlayerLevelData;
-
-typedef struct UnlockRecord {
-    /* 0x000 */ u8 unk000[0x120];
-    /* 0x120 */ s16 requiredLevel; // 0: never unlocked by level
-} UnlockRecord;
-
-PlayerLevelData *gameGetPlayerData(void);
 s32 gameFlagEntryGetBit(u16 id, u32 bit);
 s32 gameUnlockRecordRequirementsMet(u16 id);
-UnlockRecord *dataTable1bOr1cGetRecord(u16 id);
 u32 itemDataGetValue(u16 id);
 
 void FUN_00417b70(u16 id);
@@ -29,7 +19,7 @@ s32 gameUnlockEntriesByLevel(void)
 
     for (id = 100; id < 400; id++) {
         if (gameFlagEntryGetBit(id, 0) == 0 && gameUnlockRecordRequirementsMet(id) != 0) {
-            UnlockRecord *record = dataTable1bOr1cGetRecord(id);
+            QuestRecordA *record = dataTable1bOr1cGetRecord((u16)id);
             if (record != NULL && record->requiredLevel != 0 && record->requiredLevel <= level) {
                 u32 flag = itemDataGetValue(id);
                 if (flag != 0) {

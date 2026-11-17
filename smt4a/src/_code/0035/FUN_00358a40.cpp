@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 /* The terminal screen: its page and four slots (0xC bytes each). */
 struct TermScreenASlot {
@@ -17,7 +18,6 @@ typedef char TermScreenASlotsOffsetCheck[offsetof(TermScreenA, slots) == 0x57C ?
 
 extern "C" {
 extern TermScreenA *g_tmnl;
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlagsWithAlpha(u32 mode, f32 alpha);
 s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
 void effectNodeUpdatePlacedChildren(u32 handle);

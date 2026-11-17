@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int FUN_0023cc00(...);
 int FUN_0023cd08(unsigned int *, int, int);
-int btlMainFindEntryByListedId(unsigned int *, int);
 int FUN_0028a0d0(...);
 int randBetween(int, int);
 int FUN_003adb34(void);
@@ -89,7 +89,7 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
   
   puVar3 = (unsigned int *)reinterpret_cast<unsigned int *>(btlGetMainState());
   puVar4 = puVar3;
-  btlMainFindEntryByListedId(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x62));
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar3), (int)*(short *)((int)param_2->field_0x14 + 0x62));
   if (puVar4 == (unsigned int *)0x0) {
     param_2->field_0x2 = 0;
     return;

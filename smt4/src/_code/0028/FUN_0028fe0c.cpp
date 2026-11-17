@@ -1,6 +1,6 @@
 /* NON_MATCHING: global-pointer load and stack reservation exchange order in the prologue. */
 #include "shard/W4_W4Match2_UiQuest.h"
-#include "shard/W6_W6Match5_SecondarySort.h"
+#include "quest_center/QuestRecord.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystem.h"
 
@@ -40,8 +40,8 @@ void FUN_0028fe0c(u16 quest, u32 state)
         uiBindRecordRewardText(quest, 1, 0);
         s32 reward = FUN_003336dc(quest, state);
         if (reward < 0) {
-            SecondarySortRecord *record = dataTable1bOr1cGetRecord(quest);
-            const u8 *text = textConvertToGlyphPairs(record->description.encoded, NULL);
+            QuestRecord *record = dataTable1bOr1cGetRecord(quest);
+            const u8 *text = textConvertToGlyphPairs(record->detail, NULL);
             asdTextDrawFormatted(menu->panel.texts[1], 3, -1, 0, 3, "%s", text);
         } else {
             asdTextDrawDirectoryEntry(menu->panel.texts[1], 3, -1, 0, 3, menu->panel.sysImages, reward);

@@ -19,10 +19,9 @@ typedef char CounterPanelLayoutCheck[
     offsetof(CounterPanel, state) == 0x8C &&
     offsetof(CounterPanel, count) == 0x90 &&
     offsetof(CounterPanel, sprite) == 0x984 &&
-    sizeof(CounterPanel) <= sizeof(MessagePanel) ? 1 : -1];
+    sizeof(CounterPanel) <= sizeof(MessageWindow) ? 1 : -1];
 
 extern "C" {
-extern MessageGlobals g_messageMain;
 
 u16 gameDataBlocksGetCounter(void);
 void uiSpriteStateInitFromSource(SpritePlaybackView *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);

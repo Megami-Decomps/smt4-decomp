@@ -1,24 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033e590` (_code @ 0x33e590, 0x57c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
+/* The decompiler copies some game state fields as raw words of another type: those uses cast. */
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x32];
-    unsigned char f005f162e; /* 0x032 */
-    u8 pad033[0x7d];
-    unsigned int f005f16ac; /* 0x0b0 */
-    unsigned int f005f16b0; /* 0x0b4 */
-    unsigned int f005f16b4; /* 0x0b8 */
-    unsigned int f005f16b8; /* 0x0bc */
-    unsigned int f005f16bc; /* 0x0c0 */
-    u8 pad0c4[0xc];
-    float f005f16cc; /* 0x0d0 */
-    u8 pad0d4[0x18a];
-    unsigned char f005f185a; /* 0x25e */
-};
-extern GameStateView g_gameState;
 
 
 int slotSetRequest(...);
@@ -125,7 +111,7 @@ void FUN_0033e590(void)
             if (temp_v2 != 1) {
               if (temp_v2 == 2) {
                 *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-                FUN_00233e10(1,g_gameState.f005f16ac);
+                FUN_00233e10(1,g_gameState.overviewRecord);
                 temp_v2 = FUN_004d0584();
                 temp_v1 = g_lmapScene;
                 if (temp_v2 != 0) {
@@ -142,7 +128,7 @@ void FUN_0033e590(void)
                     temp_v1 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 0x54) = 0;
                     *(unsigned int *)(temp_v1 + 0x58) = temp_v5;
-                    FUN_00233e10(0,g_gameState.f005f16ac);
+                    FUN_00233e10(0,g_gameState.overviewRecord);
                     mapIfReleaseSlot4();
                     temp_v1 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -153,7 +139,7 @@ void FUN_0033e590(void)
             }
             else {
               *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-              FUN_00233e10(1,g_gameState.f005f16ac);
+              FUN_00233e10(1,g_gameState.overviewRecord);
               temp_v1 = g_lmapScene;
               if (*(int *)(g_lmapScene + 8) >= 3) {
                 temp_v2 = *(int *)(g_lmapScene + 4);
@@ -170,24 +156,24 @@ void FUN_0033e590(void)
           *(unsigned int *)(g_lmapScene + 0x54) = 0;
           *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
           *(unsigned char *)(temp_v1 + 0x6c) = 0;
-          temp_v5 = g_gameState.f005f16b8;
-          temp_v0 = g_gameState.f005f16b4;
-          *(unsigned int *)(temp_v1 + 0x28) = g_gameState.f005f16b0;
+          temp_v5 = (*(unsigned int *)&g_gameState.overviewPosition.z);
+          temp_v0 = (*(unsigned int *)&g_gameState.overviewPosition.y);
+          *(unsigned int *)(temp_v1 + 0x28) = (*(unsigned int *)&g_gameState.overviewPosition.x);
           *(unsigned int *)(temp_v1 + 0x2c) = temp_v0;
           *(unsigned int *)(temp_v1 + 0x30) = temp_v5;
-          temp_v3 = g_gameState.f005f16cc * 0.017453292f;
+          temp_v3 = g_gameState.pointHeading * 0.017453292f;
           libm_sinf();
           temp_v6 = 25.0f;
           *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * 25.0f;
-          temp_v4 = g_gameState.f005f16cc * temp_v4;
+          temp_v4 = g_gameState.pointHeading * temp_v4;
           libm_cosf();
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v6;
-          *(unsigned int *)(temp_v1 + 0x50) = g_gameState.f005f16bc;
+          *(unsigned int *)(temp_v1 + 0x50) = (*(unsigned int *)&g_gameState.overviewHeading);
           FUN_00303460(0xd);
           *(unsigned int *)(g_lmapView + 0xb0) = 1;
           sysPlaySe(0xdc);
-          FUN_00233e10(1,g_gameState.f005f16ac);
+          FUN_00233e10(1,g_gameState.overviewRecord);
           mapIfShowActionMarker();
           temp_v1 = g_lmapScene;
           temp_v2 = *(int *)(temp_v1 + 4);
@@ -220,7 +206,7 @@ void FUN_0033e590(void)
             return;
           }
           FUN_0033abd4();
-          switch(g_gameState.f005f162e) {
+          switch(g_gameState.selectedKind) {
           case 0:
             temp_v5 = 0x10002c4;
             soundActorStartOnFreeChannel(temp_v5);
@@ -261,7 +247,7 @@ LAB_0033e908:
         }
       }
       else {
-        g_gameState.f005f185a = 0;
+        g_gameState.transitionCompleted = 0;
         *(unsigned int *)(g_lmapView + 0xc) = 1;
         *(unsigned int *)(temp_v1 + 0x54) = 0x15;
         *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
@@ -311,7 +297,7 @@ LAB_0033e908:
         temp_v1 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x54) = 0;
         *(unsigned int *)(temp_v1 + 0x58) = temp_v5;
-        FUN_00233e10(0,g_gameState.f005f16ac);
+        FUN_00233e10(0,g_gameState.overviewRecord);
         mapIfReleaseSlot4();
         temp_v2 = *(int *)(g_lmapScene + 4);
         temp_v1 = g_lmapScene;

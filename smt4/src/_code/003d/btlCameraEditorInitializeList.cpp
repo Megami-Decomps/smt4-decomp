@@ -41,15 +41,15 @@ void btlCameraEditorInitializeList(BattleCameraEditorWork *work, u32 unused, voi
         asdListBoxAddItem(list, DAT_004005e8);
         asdListBoxAddItem(list, DAT_004005dc);
         asdListBoxAddItem(list, DAT_004005d0);
-        const f32 *position = mode == 0 ? g_btlMain->cameraEditor.vectors[0] : g_btlMain->cameraEditor.vectors[1];
+        const f32 *position = mode == 0 ? g_btlMain->vectors[0] : g_btlMain->vectors[1];
         asdListBoxSetFloatItem(list, 0, position[0], -1000, 1000);
         asdListBoxSetFloatItem(list, 1, position[1], -1000, 1000);
         asdListBoxSetFloatItem(list, 2, position[2], -1000, 1000);
     } else if (mode == 2) {
-        g_btlMain->cameraEditor.value = 0;
+        g_btlMain->editorValue = 0;
         jobSetText(list, DAT_004005f4);
         asdListBoxAddItem(list, DAT_00400588);
-        asdListBoxSetItemMode3(list, 0, g_btlMain->cameraEditor.value, 0, 1000, 0);
+        asdListBoxSetItemMode3(list, 0, g_btlMain->editorValue, 0, 1000, 0);
     }
     asdListBoxSetByteValue(list, 1);
 }

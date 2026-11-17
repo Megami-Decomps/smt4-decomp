@@ -1,10 +1,9 @@
 /* NON_MATCHING: block layout and the state switch match retail; the mode dispatch branch polarity (bne b4 / b 84 vs beq 84 / b b4) and the final clearing stores' pointer/value registers differ. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 
 extern "C" {
-extern LmapSceneA *g_lmapScene;
 s32 gameFlagIsSet(u32 flag);
 void lmapClearExtraFlag();
 void FUN_003d2158(u32 handle, s32 enabled);

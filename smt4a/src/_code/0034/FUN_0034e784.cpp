@@ -1,5 +1,6 @@
 /* NON_MATCHING: recovered signed panel flag, speed accessors and offset pair; clip-rectangle argument scheduling and cached-state scratch registers still differ. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/MathFunctions.h"
 #include "util/BitsAndBytes.h"
@@ -42,7 +43,6 @@ static __inline RenderStateStack *renderCtxStackE(RenderCtxA *context)
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
 s32 vec2GetYInt(void *vector);

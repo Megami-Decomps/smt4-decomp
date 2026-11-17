@@ -1,5 +1,6 @@
 /* NON_MATCHING: only state-1 fixed-point arithmetic destinations and coordinate store grouping differ; status selection/cycling/transient paths match. Alternate optimization candidate. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
 struct StatusIconPoint {
@@ -25,10 +26,6 @@ struct SlotStatusView {
     u8 unk00[0x60];
     u16 mask;
 };
-struct PlayerStatusView {
-    u8 unk00[0x5e];
-    u16 mask;
-};
 
 inline u16 slotStatusMask(const SlotRecordA* record)
 {
@@ -37,7 +34,6 @@ inline u16 slotStatusMask(const SlotRecordA* record)
 }
 
 extern "C" {
-PlayerStatusView* gameGetPlayerData();
 SlotRecordA* btlMainGetUnk14();
 void slotPlacementGetPosition(StatusIconWork*, s32* x, s32* y);
 
@@ -49,7 +45,7 @@ void partyStatusIconTick(void* data)
         u32 mask = 0;
         s32 count = 0;
         if (work->slot == -1) {
-            mask = gameGetPlayerData()->mask;
+            mask = gameGetPlayerData()->ailments;
         } else if (work->slot == -2) {
             SlotRecordA* record = btlMainGetUnk14();
             if (record) {

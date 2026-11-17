@@ -1,9 +1,8 @@
 #include "common.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
-extern LmapSceneA *g_lmapScene;
 extern u32 g_handleRegistry;
 
 s32 FUN_0040ab8c(LmapActorA *actor);
@@ -27,7 +26,7 @@ bool lmapActorRestoreTransform(void)
     moriModelUnitStartMaterialAnimation(controller, 0, 2, 0.0f);
     handleRegistryRegisterObject(g_handleRegistry, controller);
     g_lmapScene->unk250 = 0;
-    controllerSetDestination(controller, g_lmapScene->actorDestination);
+    controllerSetDestination(controller, &g_lmapScene->actorDestination.x);
     controllerSetRotationEulerDegrees(controller, 0.0f, g_lmapScene->actorYaw, 0.0f);
     return true;
 }

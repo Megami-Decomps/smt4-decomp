@@ -6,8 +6,12 @@
 
 extern "C" {
 
-/* The record with `id`: an add-on's own first, else a search of the base table. */
-Table00Record *dataTable00FindById(u16 id);
+/* The record with `id`: an add-on's own first, else a search of the base table. Retail's definition
+   takes a u16 (it only stores the halfword), but its callers pass ids unextended, so they see a u32;
+   the definition file (dataTable00FindById.cpp) defines TABLE00_OWN_PROTOTYPE and declares the u16 one. */
+#ifndef TABLE00_OWN_PROTOTYPE
+Table00Record *dataTable00FindById(u32 id);
+#endif
 
 } /* extern "C" */
 

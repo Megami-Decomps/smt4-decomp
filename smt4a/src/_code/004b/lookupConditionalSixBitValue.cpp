@@ -1,4 +1,6 @@
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
+#include "quest_center/QuestRecordA.h"
 
 struct PackedValueEntry {
     union {
@@ -8,16 +10,12 @@ struct PackedValueEntry {
     u8 unk04[8];
     u16 ownerId, alternate;
 };
-struct PackedValueOwner { u8 unk000[0x120]; s16 requiredValue; };
-struct PackedValuePlayer { u8 unk00[0x62]; u16 value; };
 extern "C" {
 const PackedValueEntry *dataTable02GetRecordWithAocPackage(u32);
 s32 partyEntryFlagsBit3(u16);
 s32 goalConditionsSatisfied(u16);
 s32 flagValueRead(u32);
 s32 gameUnlockRecordRequirementsMet(u16);
-const PackedValueOwner *dataTable1bOr1cGetRecord(u16);
-const PackedValuePlayer *gameGetPlayerData();
 
 u32 lookupConditionalSixBitValue(u32 id)
 {
@@ -43,10 +41,10 @@ u32 lookupConditionalSixBitValue(u32 id)
             }
         }
         if (gameUnlockRecordRequirementsMet(entry->ownerId)) {
-            const PackedValueOwner *owner = dataTable1bOr1cGetRecord(entry->ownerId);
+            const QuestRecordA *owner = dataTable1bOr1cGetRecord(entry->ownerId);
             if (owner) {
-                u16 playerValue = gameGetPlayerData()->value;
-                if (owner->requiredValue && owner->requiredValue <= playerValue)
+                u16 playerValue = gameGetPlayerData()->level;
+                if (owner->requiredLevel && owner->requiredLevel <= playerValue)
                     return entry->alternate;
             }
         }

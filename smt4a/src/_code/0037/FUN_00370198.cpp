@@ -16,7 +16,7 @@ s32 FUN_00370198(void)
     scrGetArg(1);
     FUN_00376fb8(value);
     mapPlaceSet(0x18, 1, 0);
-    g_gameState.transitionActive = 0;
+    g_gameState.savedLocationSet = 0;
     asdSequenceRequest(6, 0, 0);
     return 1;
 }

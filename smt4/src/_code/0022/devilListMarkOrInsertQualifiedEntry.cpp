@@ -1,11 +1,7 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 
 namespace {
-
-struct DevilRecordView {
-    u8 unk00[0x90]; // 0x00
-    u16 unk90;     // 0x90
-};
 
 struct DevilListView {
     s16 devilIds[16]; // 0x00
@@ -14,13 +10,11 @@ struct DevilListView {
 
 }
 
-extern "C" DevilRecordView* devilGetRecord(s32 devilId);
-
 // Mark an existing devil entry, or insert it into the first free slot, if its record qualifies.
 extern "C" void devilListMarkOrInsertQualifiedEntry(DevilListView* list, s32 devilId)
 {
-    DevilRecordView* record = devilGetRecord(devilId);
-    if (record == 0 || record->unk90 >= 0x160) {
+    DevilRecord *record = devilGetRecord(devilId);
+    if (record == 0 || record->model >= 0x160) {
         return;
     }
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite with packed ten/six-bit slots compiles (171 vs 173 rows); register allocation of the loop-carried pointers differs */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "Model/MoriModelResource.h"
 
 // A ten-bit value with a six-bit companion packed into one halfword.
@@ -61,13 +62,6 @@ struct CategoryEntry {
     u32 value;              // 0x0c
 };
 
-struct DevilInfo {
-    u8 unk00[9];
-    s8 type;                // 0x09
-    u8 unk0a[0x31];
-    u8 rate;                // 0x3b
-};
-
 extern "C" {
 
 u32 FUN_004da024(u32 index);
@@ -75,7 +69,6 @@ u32 FUN_004da0b4(u32 index);
 u32 randomGetLowerTenBits(MemberSource* member, u32 index);
 u32 randomGetUpperSixBits(MemberSource* member, u32 index);
 CategoryEntry* dataTableGetCategoryEntry(s32 category, u16 variant);
-DevilInfo* devilGetRecord(u16 id);
 void clearTwoWords(void* words);
 void rt_memclr(void* block, u32 size);
 
@@ -128,13 +121,13 @@ void FUN_003eb760(void* unused, BattleEntry* entry, MemberSource* member)
             entry->slotsB[i].high = six;
             entry->slotsC[i] = six & 0x3f;
         }
-        DevilInfo* info = devilGetRecord(entry->id);
-        entry->unk1bb_[0] = info->rate;
-        if (info->type == 1) {
+        DevilRecordA *info = devilGetRecord(entry->id);
+        entry->unk1bb_[0] = info->battleRace;
+        if (info->category == 1) {
             entry->unk1bc_[0] = 1;
-        } else if (info->type == 4) {
+        } else if (info->category == 4) {
             entry->unk1bc_[0] = 0;
-        } else if (info->type == 5) {
+        } else if (info->category == 5) {
             entry->unk1bc_[0] = 2;
         }
     }

@@ -2,52 +2,33 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-extern AsdGxPresets g_asdGxPresets;
-void FUN_0017ce88(u32 handle, u32 first, u32 second, u32 format, u32 value,
-                  u32 commandFirst, u32 commandSecond, u32 state, u32 mode, u32 flags, u32 size);
+void FUN_0017ce88(u32 colorBuffer, s32 width, s32 height, u32 format, u32 displayAddress,
+                  u32 displayWidth, u32 displayHeight, u32 parameter, u32 mode, u32 flags, u32 size);
 }
 
-/* Emit a draw command using the preset selected by its target and alternate-pass flag. */
-extern "C" void FUN_00154ca4(const AsdGxDrawCommand *command, s32 alternate)
+/* Binds the framebuffer of `display`'s screen target (the alternate pass picks framebuffer 1) to its display buffer. */
+extern "C" void FUN_00154ca4(const AsdGxDisplayBuffers *display, s32 alternate)
 {
-    /* The draw-state suffix extends beyond the shared fixed preset-table prefix. */
-    struct RenderPassView {
-        u32 format;
-        u32 unk04;
-        u32 handle;
-        u8 unk0C[0x24];
-        u32 first;
-        u32 second;
-        u32 mode;
-    };
-    struct DrawPresetStateView {
-        u8 unk000[0x84];
-        s32 usePrimary;
-        RenderPassView passes[3];
-        u8 unk13C[0xC0];
-        u32 state;
-        u8 enabled[2];
-    };
-    DrawPresetStateView *presets = reinterpret_cast<DrawPresetStateView *>(&g_asdGxPresets);
-    const RenderPassView *pass = NULL;
+    AsdGxPresets *presets = &g_asdGxPresets;
+    const AsdGxFramebuffer *pass = NULL;
     s32 bank = 0;
-    switch (command->target) {
+    switch (display->mode) {
     case 0x400:
-        pass = &presets->passes[0];
+        pass = &presets->framebuffers[0];
         break;
     case 0x401:
         bank = 1;
-        pass = presets->usePrimary ? &presets->passes[0] : &presets->passes[2];
+        pass = presets->sharePrimaryFramebuffer ? &presets->framebuffers[0] : &presets->framebuffers[2];
         break;
     case 0x410:
-        pass = alternate ? &presets->passes[1] : &presets->passes[0];
+        pass = alternate ? &presets->framebuffers[1] : &presets->framebuffers[0];
         break;
     }
     u32 mode = pass->mode;
-    if (!presets->enabled[bank]) {
+    if (!presets->fullResolution[bank]) {
         mode = 0x500;
     }
-    FUN_0017ce88(pass->handle, pass->first, pass->second, pass->format,
-                 command->values[command->index], command->first, command->second,
-                 presets->state, mode, 0, 8);
+    FUN_0017ce88(pass->color.buffer, pass->width, pass->height, pass->color.format,
+                 display->addresses[display->index], display->width, display->height,
+                 presets->parameter, mode, 0, 8);
 }

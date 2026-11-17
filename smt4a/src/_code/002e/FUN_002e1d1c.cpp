@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the sprite y word through a VFP register (s16) and keeps edit+0x100 in r8, the build uses integer registers and a different saved set; draw sequence and arguments are the same. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 /* The camp CEC edit screen work (accessed fields). */
 struct CampCecEdit {
@@ -16,7 +17,6 @@ struct CampCecEdit {
 
 extern "C" {
 extern CampCecEdit *g_campCecEdit;
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);

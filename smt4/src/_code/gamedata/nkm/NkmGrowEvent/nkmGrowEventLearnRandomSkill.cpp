@@ -22,7 +22,7 @@ u16 nkmGrowEventLearnRandomSkill(StatBlock *unit)
     const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(unit->id));
     s32 tier = 0;
     for (s32 index = 0; index < 8; ++index) {
-        u16 skill = record->skillList.ids[index];
+        u16 skill = record->skills[index];
         if (skill != 0) {
             const SkillFlagsRecord *information = dataTable06Sub1GetRecord(skill);
             if (tier < (information->flags & 0x1F))
@@ -34,7 +34,7 @@ u16 nkmGrowEventLearnRandomSkill(StatBlock *unit)
     u16 known[16];
     memcpy(known, unit->skills.ids, sizeof(unit->skills));
     for (s32 index = 0; index < 8; ++index)
-        known[8 + index] = record->learnedSkills.entries[index].id;
+        known[8 + index] = record->learnedSkills[index].id;
     FUN_002b7bca(known, 16, sizeof(u16), dataCompareUnsignedHalfwordKeysDescending);
 
     s32 count = 0;

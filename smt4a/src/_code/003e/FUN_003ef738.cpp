@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic and instruction mix agree; armcc places the shared `return 0` block after the kind tests in retail but after the last handler here (one extra branch). */
 #include "battle/BtlGlobals.h"
+#include "gamedata/DevilRecordA.h"
 #include "common.h"
 #include "code/Code0019.h"
 #include "gamedata/Table04Record.h"
@@ -39,7 +40,6 @@ typedef struct BtlScriptUnitView {
 extern u32 g_btlScriptUnit;
 extern u32 g_btlUiBlock;
 
-s32 devilGetRecord(u32 id);
 s32 FUN_004aba3c(u32 block);
 
 /* Whether the script unit's character is of the given kind. */
@@ -76,15 +76,15 @@ s32 FUN_003ef738(void)
     }
     if (scriptUnitIsKind(1)) {
         if (record->words[0] != 0) {
-            return devilGetRecord(record->words[0]) != 0 ? (s16)record->words[0] : 0;
+            return devilGetRecord(record->words[0]) != NULL ? (s16)record->words[0] : 0;
         }
     } else if (scriptUnitIsKind(4)) {
         if (record->words[1] != 0) {
-            return devilGetRecord(record->words[1]) != 0 ? (s16)record->words[1] : 0;
+            return devilGetRecord(record->words[1]) != NULL ? (s16)record->words[1] : 0;
         }
     } else if (scriptUnitIsKind(3)) {
         if (record->words[2] != 0) {
-            return devilGetRecord(record->words[2]) != 0 ? (s16)record->words[2] : 0;
+            return devilGetRecord(record->words[2]) != NULL ? (s16)record->words[2] : 0;
         }
     }
     return 0;

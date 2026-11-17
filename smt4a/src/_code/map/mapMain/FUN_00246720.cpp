@@ -148,7 +148,7 @@ void FUN_00246720(void)
     map->flagBD = 0;
     map->flagBE = 0;
     map->flagBF = 0;
-    g_gameState.unk25F = 0;
+    g_gameState.mapRegistrationPending = 0;
     g_gameState.paused = 0;
     flagsBlock[0x7C4] = 0;
     map->counterCC = 0;

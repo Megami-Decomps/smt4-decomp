@@ -1,4 +1,4 @@
-#include "AsdSDK/Source/Sys/Gx/AsdGxFrameState.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
 void asdGxCommandListFlip(void);
@@ -13,7 +13,6 @@ void asdModelResetCommandBuffer(void);
 void nngxRunCmdlist(void);
 u32 FUN_00188c94(void);
 u32 FUN_00188ca4(void);
-extern AsdGxFrameState g_asdGxPresets;
 }
 
 /* Flush recorded GPU data, submit this frame, and flip the command-list buffers. */

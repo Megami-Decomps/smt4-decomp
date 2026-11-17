@@ -1,9 +1,8 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern MessageGlobalsA g_messageMain;
 s32 messageWindowShowOrPoll(u32 owner, u32 text, u32 frame, s32 mode, s32 wait, s32 flags);
 
 /* Shows the script command's first argument as a message with message state `mode`. */
@@ -21,8 +20,8 @@ static void showMessage(s32 mode, s32 wait)
 void FUN_002a33f0(void)
 {
     scrCommMessageSetMode(0);
-    if (g_messageMain.state != NULL) {
-        g_messageMain.state->displayMode = 0x15;
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->displayMode = 0x15;
     }
     showMessage(6, 1);
 }

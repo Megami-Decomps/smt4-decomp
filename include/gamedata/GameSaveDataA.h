@@ -6,8 +6,45 @@
 
 #include "common.h"
 #include "gamedata/GameData.h"
+#include "gamedata/PlayerRecordParts.h"
 #include "shard/W6_W6Match1_PartySlot.h"
 #include <stddef.h>
+
+/* Apocalypse: the player's record (save block + 0x90, 0x64 bytes), returned by gameGetPlayerData(). Its layout
+ * is the prefix of a unit record's (SlotRecordA); IV's record is PlayerDataIV (gamedata/GameSaveData.h). */
+typedef struct PlayerDataA {
+    union {
+        /* 0x00 */ u16 equipment[7];
+        /* 0x00 */ PlayerEquipment equipped;
+    };
+    struct {
+        /* 0x0E */ u16 hp;
+        /* 0x10 */ u16 mp;
+        /* 0x12 */ s16 stats[5];
+    } baseStats;                   /* without equipment */
+    /* 0x1C */ s16 maxHp;
+    /* 0x1E */ s16 maxMp;
+    /* 0x20 */ s16 stats[5];       /* with equipment */
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
+    /* 0x2E */ u8 unk2E[2];
+    /* 0x30 */ u32 experience;
+    union {
+        /* 0x34 */ u16 skills[8];
+        /* 0x34 */ u32 skillWords[4];  /* the same ids, copied as words */
+    };
+    /* 0x44 */ s8 skillRanks[8];
+    /* 0x4C */ u16 name[9];
+    /* 0x5E */ u16 ailments;       /* bit 1: down (0 HP), bit 10: cannot lose HP */
+    /* 0x60 */ s16 alignment;
+    /* 0x62 */ u16 level;
+} PlayerDataA;
+
+typedef char PlayerDataAOffsetCheck[offsetof(PlayerDataA, baseStats.stats) == 0x12 && offsetof(PlayerDataA, maxHp) == 0x1C &&
+    offsetof(PlayerDataA, stats) == 0x20 && offsetof(PlayerDataA, hp) == 0x2A && offsetof(PlayerDataA, experience) == 0x30 &&
+    offsetof(PlayerDataA, skills) == 0x34 && offsetof(PlayerDataA, skillRanks) == 0x44 && offsetof(PlayerDataA, name) == 0x4C &&
+    offsetof(PlayerDataA, ailments) == 0x5E && offsetof(PlayerDataA, alignment) == 0x60 &&
+    offsetof(PlayerDataA, level) == 0x62 && sizeof(PlayerDataA) == 0x64 ? 1 : -1];
 
 /* Apocalypse: a party unit record of the slot table, returned by gameGetSlotRecord() (0x12C bytes). */
 typedef struct SlotRecordA {
@@ -22,7 +59,7 @@ typedef struct SlotRecordA {
  * money, the unit records of the 24 slots, the party/reserve slot maps and the player and stock slots. */
 typedef struct SaveSlotTable {
     /* 0x0000 */ s32 money;
-    /* 0x0004 */ u8 unk0004[0x64];
+    /* 0x0004 */ PlayerDataA hero;              /* the player's record, returned by gameGetPlayerData() */
     /* 0x0068 */ SlotRecordA entries[24];
     /* 0x1C88 */ s8 party[24];            /* entry index of each party position, -1 = empty */
     /* 0x1CA0 */ s8 reserve[3];           /* entry index of each reserve position, -1 = empty */
@@ -36,7 +73,7 @@ typedef struct SaveSlotTable {
 typedef char SlotRecordAOffsetCheck[offsetof(SlotRecordA, statusMask) == 0x60 && offsetof(SlotRecordA, sortKey) == 0x64 &&
     sizeof(SlotRecordA) == 0x12C ? 1 : -1];
 typedef char SaveSlotTableOffsetCheck[offsetof(SaveSlotTable, entries) == 0x68 && offsetof(SaveSlotTable, party) == 0x1C88 &&
-    offsetof(SaveSlotTable, reserve) == 0x1CA0 && offsetof(SaveSlotTable, count) == 0x1CA3 &&
+    offsetof(SaveSlotTable, hero) == 0x4 && offsetof(SaveSlotTable, reserve) == 0x1CA0 && offsetof(SaveSlotTable, count) == 0x1CA3 &&
     offsetof(SaveSlotTable, player) == 0x1CA4 && offsetof(SaveSlotTable, slots) == 0x1DDC &&
     offsetof(SaveSlotTable, preferredId) == 0x2C4C && sizeof(SaveSlotTable) == 0x2C50 ? 1 : -1];
 

@@ -1,9 +1,9 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-extern void *devilGetRecord(u32 id);
 extern void devilCreateRaceEffect(u32 id, s32 arg);
 
 /* Script command: when the battle is not flagged 2 and its devil has a record, calls devilCreateRaceEffect for it with 3; returns 1. */

@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "code/Code002a_VariantA.h"
+#include "gamedata/GamePlayerData.h"
 
 struct BtlMenuCursor {
     /* 0x00 */ u8 unk00[4];
@@ -35,19 +36,11 @@ struct BtlStateFlags {
     /* 0x45A8 */ BtlBits bitsB;
 };
 
-struct PlayerCommandState {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ s16 available;
-    /* 0x04 */ u16 count;
-};
-
 #define BTL_MENU_ACTION_BLOCKED 7
 #define BTL_MENU_ARG_BLOCKED 4
 
 extern "C" {
 extern u32 DAT_00573b88[];   /* blocked-command masks; the entries used are at 8 and 18 */
-
-PlayerCommandState *gameGetPlayerData(void);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 bit);
 s32 resourceRunOperationIfUnblocked(BtlMenuCursor *cursor);
@@ -81,9 +74,9 @@ void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
         } else if (index == 0) {
             chosen = 1;
         } else if (index == 1 && gameFlagIsSet(0x410) != 0) {
-            PlayerCommandState *player = gameGetPlayerData();
-            bool hasCommand = player->available != 0;
-            chosen = (hasCommand && player->count != 0) ? 1 : 2;
+            PlayerDataA *player = gameGetPlayerData();
+            bool hasCommand = player->equipped.gun != 0;
+            chosen = (hasCommand && player->equipped.bullets != 0) ? 1 : 2;
         } else {
             chosen = 2;
         }

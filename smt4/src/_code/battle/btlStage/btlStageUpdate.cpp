@@ -1,16 +1,11 @@
 /* NON_MATCHING: readiness and guarded color helpers recover retail except bank-zero setup is unconditional rather than movge. */
 #include "battle/btlStage.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
+#include "battle/BtlGlobals.h"
 
-
-struct StageBattleState {
-    u8 unk000[0x5a0];
-    f32 yaw;
-};
 
 extern "C" {
 extern BtlStageGlobals g_btlStage;
-extern StageBattleState *g_btlMain;
 extern const char DAT_004017a0[]; // "Light_EFT"
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 void asdModelSlotSetColor(u32 slot, u32 bank, f32 red, f32 green, f32 blue);

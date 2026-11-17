@@ -2,27 +2,26 @@
 #include "gfx/AsdGxPresetRing.h"
 
 extern "C" {
-extern AsdGxPresetRing g_asdGxPresets[3];
 void asdGfxSetMode(s32 mode);
 void FUN_002c2620(u32 value);
 void FUN_002bc1e4(void);
-void FUN_002bc120(AsdGxPresetRing* ring, s32 enabled);
+void FUN_002bc120(AsdGxDisplayBuffers* ring, s32 enabled);
 void FUN_001235b8(s32 mode);
 
 // Submit the previous presets, optionally refresh them, then advance each ring.
 void FUN_0010ec90(s32 refresh, s32 secondaryEnabled)
 {
-    AsdGxPresetRing* primary = &g_asdGxPresets[0];
-    AsdGxPresetRing* secondaryPreset = &g_asdGxPresets[1];
-    AsdGxPresetRing* output = &g_asdGxPresets[2];
-    u32 value = primary->values[asdGxPresetPrevious(primary)];
+    AsdGxDisplayBuffers* primary = &g_asdGxPresets.displays[0];
+    AsdGxDisplayBuffers* secondaryPreset = &g_asdGxPresets.displays[1];
+    AsdGxDisplayBuffers* output = &g_asdGxPresets.displays[2];
+    u32 value = primary->buffers[asdGxPresetPrevious(primary)];
     asdGfxSetMode(0x400);
     FUN_002c2620(value);
     u32 previous = asdGxPresetPrevious(secondaryPreset);
-    value = secondaryEnabled ? secondaryPreset->values[previous] : primary->values[previous];
+    value = secondaryEnabled ? secondaryPreset->buffers[previous] : primary->buffers[previous];
     asdGfxSetMode(0x410);
     FUN_002c2620(value);
-    value = output->values[asdGxPresetPrevious(output)];
+    value = output->buffers[asdGxPresetPrevious(output)];
     asdGfxSetMode(0x401);
     FUN_002c2620(value);
     if (refresh) {

@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1534` (_code @ 0x3f1534, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int CONCAT44(...);
 int qsort(int *, unsigned int, int, unsigned char *);
-int btlFindEntryBlockByMemberId(int, int);
 int sysMemClear(int *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -33,7 +33,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: sysMemClear. */
 extern int stateEntryFindById(int, unsigned int);
-extern int btlUnitGet(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -99,7 +98,7 @@ LAB_003f15c0:
   }
   temp_v3 = param_1;
   temp_v17 = temp_v16;
-  btlFindEntryBlockByMemberId(param_1,(int)*(short *)((int)param_2 + 0x6a));
+  btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(param_1), (int)*(short *)((int)param_2 + 0x6a));
   temp_v3 = stateEntryFindById(param_1,*(unsigned int *)(temp_v3 + 0xc));
   if (temp_v3 == 0) {
     return 0;
@@ -140,7 +139,7 @@ LAB_003f15c0:
         if (temp_v7 == temp_v2) {
           temp_v5 = aiStack_104[temp_v7];
           temp_v3 = param_1;
-          btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v5 + 0x6a));
+          btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(param_1), (int)*(short *)(temp_v5 + 0x6a));
           temp_v1 = 0;
           do {
             temp_v4 = *(int *)(param_1 + temp_v1 * 4 + 0x216c);
@@ -172,7 +171,7 @@ LAB_003f1784:
         else {
           temp_v5 = aiStack_104[temp_v7 + 1];
           temp_v3 = param_1;
-          btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v5 + 0x6a));
+          btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(param_1), (int)*(short *)(temp_v5 + 0x6a));
           temp_v1 = 0;
           do {
             temp_v4 = *(int *)(param_1 + temp_v1 * 4 + 0x216c);
@@ -213,13 +212,13 @@ LAB_003f1864:
     }
   }
   else {
-    temp_v3 = btlUnitGet(g_btlScriptUnit);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     temp_v3 = *(int *)(temp_v3 + 0x24);
     if (temp_v3 == 0) {
       return 0;
     }
     temp_v1 = param_1;
-    btlFindEntryBlockByMemberId(param_1,(int)*(short *)(temp_v3 + 0x6a));
+    btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(param_1), (int)*(short *)(temp_v3 + 0x6a));
     temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v1 + 0xc));
     if (temp_v1 == 0) {
       return 0;

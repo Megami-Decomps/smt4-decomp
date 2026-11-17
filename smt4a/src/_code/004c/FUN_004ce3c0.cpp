@@ -137,7 +137,7 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
                 titleSetSlotValueState2(0, 1);
                 titleSetSlotValueState2(1, 1);
             } else {
-                FUN_00324c48(g_gameState.sourceMap, g_gameState.sourceArea, g_gameState.sourceObjectId,
+                FUN_00324c48(g_gameState.savedMapId, g_gameState.savedAreaId, g_gameState.savedObjectId,
                               DAT_005f1b80[0], DAT_005f1b80[1], DAT_005f1b80[2],
                               DAT_005f1b80[3], DAT_005f1b80[4]);
                 gameStateClearFlag();

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(...);
 int btlEntryBuildSummary(unsigned char [2], unsigned int, unsigned int *);
-int btlMainFindEntryByListedId(...);
 int FUN_004bf6e0(...);
 int FUN_004bf9a0(...);
 int FUN_004c0f74(unsigned int *, unsigned int);
@@ -74,7 +74,6 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int flagsCountSelectedBits(short);
-extern unsigned int btlUnitGet(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -138,9 +137,9 @@ FUN_004c4604(int param_1,unsigned int param_2,int param_3,unsigned int param_4,u
   temp_v38 = param_4;
   puVar3 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   puVar4 = puVar3;
-  btlMainFindEntryByListedId(puVar3,temp_v38);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar3), temp_v38);
   puVar5 = puVar3;
-  btlMainFindEntryByListedId(puVar3,param_5);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar3), param_5);
   *param_8 = '\0';
   switch(temp_v37) {
   case 0xb:
@@ -400,7 +399,7 @@ LAB_004c4810:
               temp_v9 = temp_v23[temp_v8];
               if (((temp_v2 | temp_v6) & 0x170000) == 0) {
                 temp_v5 = reinterpret_cast<int>(btlGetMainState());
-                btlMainFindEntryByListedId(temp_v5,param_5);
+                btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v5), param_5);
                 if ((temp_v5 != 0) && (*(int *)(temp_v5 + 0xd8) != 0)) {
                   temp_v2 = 0;
                   switch(temp_v9) {
@@ -453,11 +452,11 @@ LAB_004c4810:
               return 0;
             }
           }
-          puVar3 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
+          puVar3 = (unsigned int *)reinterpret_cast<unsigned int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
           temp_v2 = temp_v38;
           if ((*puVar3 & 0x200) == 0) {
             temp_v4 = reinterpret_cast<int>(btlGetMainState());
-            btlMainFindEntryByListedId(temp_v4,temp_v2);
+            btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v4), temp_v2);
             if ((temp_v4 != 0) && (0 < *(int *)(temp_v4 + 0xc0))) {
               if (!temp_v1) {
                 return 0;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: variant alternation folds to BIC and random-position VFP register allocation differs. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 
 extern "C" {
@@ -11,7 +12,7 @@ void soundActorStartOnFreeChannel(u32, f32, f32, f32);
 void FUN_00324e38(s32 variant)
 {
     DAT_005806c0 = (DAT_005806c0 + 1) & 1;
-    MapVector position = g_lmapScene->position;
+    MapVector position = g_lmapScene->pose.position;
     position.y += 140.0f;
     position.y += (f32)randBetween(-10, 10);
     position.x += (f32)randBetween(-15, 15);
@@ -21,7 +22,7 @@ void FUN_00324e38(s32 variant)
     } else if (variant == 1) {
         DAT_005806c0 = 1;
     }
-    switch (g_gameState.areaTypeB) {
+    switch (g_gameState.stageGroup) {
     case 0:
         soundActorStartOnFreeChannel(DAT_005806c0 + 0x10002A0, position.x, position.y, position.z);
         break;

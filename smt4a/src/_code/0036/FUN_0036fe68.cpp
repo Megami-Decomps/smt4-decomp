@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 
 /* The depart sequence's own state. */
@@ -81,17 +82,17 @@ u32 FUN_0036fe68(void)
         return 1;
     }
     if (DAT_005806b4.frame == 0) {
-        g_lmapScene->targetPosition = g_lmapScene->position;
+        g_lmapScene->pose.targetPosition = g_lmapScene->pose.position;
     } else {
         if (DAT_005806b4.frame == 10) {
-            g_gameState.departMapLoading = 1;
+            g_gameState.mapLoadActive = 1;
             FUN_002c2610();
             objectE0ResetFlags1040();
             frameTransitionSetMode(1);
             naviMainEnterState4IfActive();
         }
         if (DAT_005806b4.frame == 0xB) {
-            g_gameState.departLoading = 1;
+            g_gameState.loading = 1;
             g_mapDepartWork[10] = 0;
             FUN_002235f4();
             FUN_002c2610();
@@ -112,9 +113,9 @@ u32 FUN_0036fe68(void)
             FUN_0037a078();
         }
     } else if (campIsState85() == 0) {
-        g_gameState.departMapLoading = 0;
+        g_gameState.mapLoadActive = 0;
         FUN_002c23cc(1);
-        g_gameState.departLoading = 0;
+        g_gameState.loading = 0;
         sub68OwnerCall3();
         soundActorQueueStartPending();
         mapEnvironmentSelectPreset(g_gameState.areaId);

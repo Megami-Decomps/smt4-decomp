@@ -5,11 +5,10 @@
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "bible/bibleDevil.h"
 #include "gamedata/EquipmentRecord.h"
+#include "gamedata/GamePlayerData.h"
 
-struct EquipmentHelpPlayer { u16 equippedId; };
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
-const EquipmentHelpPlayer *gameGetPlayerData();
 void FUN_002907c4(char *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
 void textEncodeFontSlot(u32, const char *);
@@ -21,7 +20,7 @@ void asdTextDrawDirectoryEntry(AsdText *, u32, s32, s32, s32, RelativeDirectory 
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
 {
     ButtonHelpWork *help = g_buttonHelp.work;
-    EquipmentRecord *entry = dataTable08Sub2GetRecord(gameGetPlayerData()->equippedId);
+    EquipmentRecord *entry = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.weapon);
     if (!entry) {
         help->unk4CB = 0;
         return;

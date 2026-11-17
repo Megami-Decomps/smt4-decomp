@@ -29,7 +29,7 @@ static __inline u32 entryHasSkillCategory(const BtlEntry *entry, u32 category)
     if (entry->devil != NULL) {
         DevilRecord *demon = reinterpret_cast<DevilRecord *>(devilGetRecord(entry->id));
         for (s32 index = 0; index < 8; ++index) {
-            const Table04Record *skill = dataTable40FindById(demon->skillList.ids[index]);
+            const Table04Record *skill = dataTable40FindById(demon->skills[index]);
             if (skill != NULL && skill->skillProperties.category == category) {
                 return 1;
             }

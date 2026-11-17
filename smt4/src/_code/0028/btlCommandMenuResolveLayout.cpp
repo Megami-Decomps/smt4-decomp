@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "code/Code0029_VariantB.h"
+#include "gamedata/GamePlayerData.h"
 
 struct MenuList;
 
@@ -18,20 +19,12 @@ struct CommandMenu {
     s16 targetIds[1];       // 0x3480
 };
 
-struct PlayerData {
-    u8 unk00[2];
-    s16 enabled;            // 0x02
-    u16 value;              // 0x04
-};
-
-
 extern "C" {
 
 u32 FUN_00297ca4(CommandMenu* menu, u32 arg);
 s32 resourceRunOperationIfUnblocked(void* list);
 s32 flagBitIsSet(s32 bit);
 s32 gameFlagIsSet(u32 flag);
-PlayerData* gameGetPlayerData(void);
 
 // Maps the active command menu page to the screen layout `*layout` and the cursor index `*cursor`.
 void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
@@ -60,8 +53,8 @@ void btlCommandMenuResolveLayout(CommandMenu* menu, u16* layout, s16* cursor)
         } else {
             page = 2;
             if (index == 1 && gameFlagIsSet(0x410)) {
-                PlayerData* player = gameGetPlayerData();
-                if (player->enabled != 0 && player->value != 0) page = 1;
+                PlayerDataIV* player = gameGetPlayerData();
+                if (player->equipped.gun != 0 && player->equipped.bullets != 0) page = 1;
             }
         }
         *layout = page;

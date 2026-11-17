@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/FlagValueIsPositive.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -19,13 +20,7 @@ typedef struct CampSelectors {
     /* 0x307C */ u16 lists6[120];
 } CampSelectors;
 
-typedef struct PlayerSelections {
-    /* 0x0 */ u16 current[7];
-} PlayerSelections;
-
 extern CampSelectors *g_camp; /* 0x57f108 */
-
-extern PlayerSelections *gameGetPlayerData(void);
 extern void gridNavigationConfigure(u8 *widget, s32 count, s32 columns, s32 a, s32 b, s32 c);
 extern void scrollListSetSelectionTracked(u8 *widget, s32 index);
 extern void FUN_003d0bc0(s32 id);
@@ -53,7 +48,7 @@ void campSelectorRebuildList(s32 id)
         last = 0xB4;
         list = g_camp->lists0;
         widget = g_camp->widgets[0];
-        selected = gameGetPlayerData()->current[0];
+        selected = gameGetPlayerData()->equipment[0];
         break;
     case 0x14:
     case 0x49:
@@ -61,7 +56,7 @@ void campSelectorRebuildList(s32 id)
         last = 0x12C;
         list = g_camp->lists1;
         widget = g_camp->widgets[1];
-        selected = gameGetPlayerData()->current[1];
+        selected = gameGetPlayerData()->equipment[1];
         break;
     case 0x15:
     case 0x4A:
@@ -69,7 +64,7 @@ void campSelectorRebuildList(s32 id)
         last = 0x33E;
         list = g_camp->lists2;
         widget = g_camp->widgets[2];
-        selected = gameGetPlayerData()->current[2];
+        selected = gameGetPlayerData()->equipment[2];
         break;
     case 0x16:
     case 0x4B:
@@ -77,7 +72,7 @@ void campSelectorRebuildList(s32 id)
         last = 0x1A4;
         list = g_camp->lists3;
         widget = g_camp->widgets[3];
-        selected = gameGetPlayerData()->current[3];
+        selected = gameGetPlayerData()->equipment[3];
         break;
     case 0x17:
     case 0x4C:
@@ -85,7 +80,7 @@ void campSelectorRebuildList(s32 id)
         last = 0x21C;
         list = g_camp->lists4;
         widget = g_camp->widgets[4];
-        selected = gameGetPlayerData()->current[4];
+        selected = gameGetPlayerData()->equipment[4];
         break;
     case 0x18:
     case 0x4D:
@@ -93,7 +88,7 @@ void campSelectorRebuildList(s32 id)
         last = 0x294;
         list = g_camp->lists5;
         widget = g_camp->widgets[5];
-        selected = gameGetPlayerData()->current[5];
+        selected = gameGetPlayerData()->equipment[5];
         break;
     case 0x19:
     case 0x4E:
@@ -101,7 +96,7 @@ void campSelectorRebuildList(s32 id)
         last = 0x30C;
         list = g_camp->lists6;
         widget = g_camp->widgets[6];
-        selected = gameGetPlayerData()->current[6];
+        selected = gameGetPlayerData()->equipment[6];
         break;
     default:
         return;

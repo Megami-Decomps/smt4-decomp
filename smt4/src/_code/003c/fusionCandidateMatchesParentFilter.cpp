@@ -1,11 +1,11 @@
 #include "gamedata/FusionCandidateFilter.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 u32 FUN_0029dde0();
 s32 itemGetFlagBit1(u16);
 s32 partyMemberFindById(u16);
-GameUnitSortRecord *gameGetUnitRecord(s32);
 
 /* Test result eligibility and the requested parent-slot restrictions. */
 u16 fusionCandidateMatchesParentFilter(const FusionCandidateFilter *filter, u16 firstParent, u16 secondParent, u16 resultId)

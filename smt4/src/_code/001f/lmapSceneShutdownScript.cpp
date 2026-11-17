@@ -1,35 +1,34 @@
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
 void mdlPartsRelease(void *model);
-void asdMdlManagerDestroy(u32 handle);
 
-extern LmapScene *g_lmapScene;
 
 /* Shuts the scene's script down and releases its handles. */
 void lmapSceneShutdownScript(void)
 {
-    mdlPartsRelease(g_lmapScene->script);
-    if (g_lmapScene->script != NULL) {
-        g_lmapScene->script->vtable[1](g_lmapScene->script);
+    mdlPartsRelease(g_lmapScene->playerModel);
+    if (g_lmapScene->playerModel != NULL) {
+        g_lmapScene->playerModel->vtable[1](g_lmapScene->playerModel);
     }
-    g_lmapScene->script = NULL;
-    if (g_lmapScene->handleA != 0) {
-        asdMdlManagerDestroy(g_lmapScene->handleA);
-        g_lmapScene->handleA = 0;
+    g_lmapScene->playerModel = NULL;
+    if (g_lmapScene->stageModel != NULL) {
+        asdMdlManagerDestroy(g_lmapScene->stageModel);
+        g_lmapScene->stageModel = NULL;
     }
-    if (g_lmapScene->handleB != 0) {
-        asdMdlManagerDestroy(g_lmapScene->handleB);
-        g_lmapScene->handleB = 0;
+    if (g_lmapScene->models[0] != NULL) {
+        asdMdlManagerDestroy(g_lmapScene->models[0]);
+        g_lmapScene->models[0] = NULL;
     }
-    if (g_lmapScene->handleC != 0) {
-        asdMdlManagerDestroy(g_lmapScene->handleC);
-        g_lmapScene->handleC = 0;
+    if (g_lmapScene->models[1] != NULL) {
+        asdMdlManagerDestroy(g_lmapScene->models[1]);
+        g_lmapScene->models[1] = NULL;
     }
-    if (g_lmapScene->handleD != 0) {
-        asdMdlManagerDestroy(g_lmapScene->handleD);
-        g_lmapScene->handleD = 0;
+    if (g_lmapScene->models[2] != NULL) {
+        asdMdlManagerDestroy(g_lmapScene->models[2]);
+        g_lmapScene->models[2] = NULL;
     }
 }
 

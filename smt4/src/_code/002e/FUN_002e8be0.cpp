@@ -1,27 +1,10 @@
 /* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
 #include "map/mapDepart.h"
+#include "map/LmapGlobals.h"
 #include "util/TrigF32.h"
 #include "game/GameState.h"
 
-/* The map scene as the overview camera drives it. */
 #define DEGREES_TO_RADIANS 0.017453292f
-
-struct OverviewScene {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ s32 state;
-    /* 0x08 */ s32 stateTime;
-    /* 0x0c */ u8 unk0c[0x10];
-    /* 0x1c */ MapVector position;
-    /* 0x28 */ MapVector target;
-    /* 0x34 */ u8 unk34[0x18];
-    /* 0x4c */ f32 unk4c;
-    /* 0x50 */ f32 targetHeading;
-    /* 0x54 */ s32 cameraMode;
-    /* 0x58 */ f32 cameraSpeed;
-    /* 0x5c */ u8 unk5c[0x10];
-    /* 0x6c */ u8 unk6c;
-};
-
 
 /* The controller whose pose the overview hands back. */
 struct OverviewController {
@@ -32,7 +15,6 @@ struct OverviewController {
 };
 
 extern "C" {
-extern OverviewScene *g_lmapScene;
 extern OverviewController *DAT_004474f4;
 
 void mapEaseSceneHeading(void);
@@ -58,20 +40,20 @@ s32 padIsButtonPressed(u32 button);
 void FUN_002e8be0(void)
 {
     mapEaseSceneHeading();
-    OverviewScene *scene = g_lmapScene;
-    scene->position.x = scene->position.x + (scene->target.x - scene->position.x) * 0.33333334f;
-    scene->position.y = scene->position.y + (scene->target.y - scene->position.y) * 0.16666667f;
-    scene->position.z = scene->position.z + (scene->target.z - scene->position.z) * 0.33333334f;
+    LmapScene *scene = g_lmapScene;
+    scene->pose.position.x = scene->pose.position.x + (scene->pose.targetPosition.x - scene->pose.position.x) * 0.33333334f;
+    scene->pose.position.y = scene->pose.position.y + (scene->pose.targetPosition.y - scene->pose.position.y) * 0.16666667f;
+    scene->pose.position.z = scene->pose.position.z + (scene->pose.targetPosition.z - scene->pose.position.z) * 0.33333334f;
 
     switch (scene->state) {
     case 0:
-        scene->cameraMode = 0;
-        scene->cameraSpeed = 3.0f;
-        scene->unk6c = 0;
-        scene->target = g_gameState.overviewPosition;
-        g_lmapScene->target.x = g_lmapScene->target.x + mathRemPio2f(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
-        g_lmapScene->target.z = g_lmapScene->target.z + FUN_00282390(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
-        g_lmapScene->targetHeading = g_gameState.overviewHeading;
+        scene->moveMode = 0;
+        scene->moveSpeed = 3.0f;
+        scene->unk06C = 0;
+        scene->pose.targetPosition = g_gameState.overviewPosition;
+        g_lmapScene->pose.targetPosition.x = g_lmapScene->pose.targetPosition.x + mathRemPio2f(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->pose.targetPosition.z = g_lmapScene->pose.targetPosition.z + FUN_00282390(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
         FUN_0027fc14(11);
         DAT_004474f4->mode = -2;
         buttonHelpSetPreset(0xdb);
@@ -91,8 +73,8 @@ void FUN_002e8be0(void)
         mapIfActivateRecord(1, g_gameState.overviewRecord);
         scene = g_lmapScene;
         if (scene->stateTime > 2) {
-            scene->cameraMode = 29;
-            scene->cameraSpeed = 2.0f;
+            scene->moveMode = 29;
+            scene->moveSpeed = 2.0f;
             scene->state = scene->state + 1;
             scene->stateTime = 0;
         }
@@ -104,11 +86,11 @@ void FUN_002e8be0(void)
             g_lmapScene->state = 10;
             g_lmapScene->stateTime = 0;
         } else if (padIsButtonPressed(5) || inputIsQuestMenuPressed()) {
-            DAT_004474f4->heading = g_lmapScene->targetHeading;
+            DAT_004474f4->heading = g_lmapScene->pose.targetHeading;
             DAT_004474f4->mode = 0;
             FUN_0027fc14(0);
-            g_lmapScene->cameraMode = 0;
-            g_lmapScene->cameraSpeed = 5.0f;
+            g_lmapScene->moveMode = 0;
+            g_lmapScene->moveSpeed = 5.0f;
             mapIfActivateRecord(0, g_gameState.overviewRecord);
             mapIfReleaseSlot1();
             g_lmapScene->state = 90;
@@ -117,8 +99,8 @@ void FUN_002e8be0(void)
         break;
     case 10:
         g_gameState.map.transitionCompleted = 0;
-        scene->cameraMode = 8;
-        scene->cameraSpeed = 5.0f;
+        scene->moveMode = 8;
+        scene->moveSpeed = 5.0f;
         FUN_0027fca0(1);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
@@ -134,7 +116,7 @@ void FUN_002e8be0(void)
     case 12:
         if (!mapIfHasSelection()) {
             mapIfReleaseSlot1();
-            DAT_004474f4->heading = g_lmapScene->targetHeading;
+            DAT_004474f4->heading = g_lmapScene->pose.targetHeading;
             DAT_004474f4->mode = 0;
             FUN_0027fc14(0);
             g_lmapScene->state = g_lmapScene->state + 1;
@@ -165,8 +147,8 @@ void FUN_002e8be0(void)
         }
         break;
     }
-    FUN_002804ec(&g_lmapScene->target);
-    mapSelectContainingRegions(g_lmapScene->position.x, g_lmapScene->position.z);
+    FUN_002804ec(&g_lmapScene->pose.targetPosition);
+    mapSelectContainingRegions(g_lmapScene->pose.position.x, g_lmapScene->pose.position.z);
 }
 
 } /* extern "C" */

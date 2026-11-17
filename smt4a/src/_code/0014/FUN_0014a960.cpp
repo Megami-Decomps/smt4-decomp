@@ -1,5 +1,6 @@
 /* NON_MATCHING: viewport constants, target selection and UV-ratio VFP save grouping differ from retail. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 // This draw view reaches beyond the shared frame-texture work prefix.
@@ -15,7 +16,6 @@ struct FrameDrawWork {
 };
 extern "C" {
 extern FrameDrawWork *g_frameTex;
-extern RenderCtxA *g_renderCtx;
 
 void FUN_0019e3d0(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,

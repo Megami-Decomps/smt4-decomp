@@ -1,17 +1,7 @@
 /* NON_MATCHING: the request body now matches; the registry walk keeps the id in r3 and the index in r0 (retail: id in r0, index in r2) and places the advance after the body. */
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
-namespace {
-struct SoundPauseRegistryView {
-    u8 prefix[0x75C];
-    struct Registered {
-        AsdSndHandleNode *first;
-        s32 count;
-    } registered;
-};
-}
 extern "C" {
-extern SoundPauseRegistryView g_asdSoundSystem;
 void FUN_0015e76c(s32 handle, s32 paused, u32 frames);
 s32 FUN_00160050(s32 handle);
 s32 modeIsOneOrTwo(s32 handle);
@@ -28,8 +18,8 @@ static __inline void soundSetPause(s32 handle, s32 paused, u32 frames)
 u32 FUN_001414d4(s32 id, s32 resume, u32 frames)
 {
     u32 completed = 0;
-    SoundPauseRegistryView::Registered *list = &g_asdSoundSystem.registered;
-    AsdSndHandleNode *node = list->first;
+    AsdSndHandleList *list = &g_asdSoundSystem.registered;
+    AsdSndHandleNode *node = list->handles;
     for (s32 index = 0; index < list->count; ++index) {
         if (node == NULL)
             break;

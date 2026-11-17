@@ -1,4 +1,5 @@
 #include "title/titleMain.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
@@ -12,7 +13,6 @@ struct TitleRenderState {
 };
 extern "C" {
 extern TitleMainGlobals g_titleMain;
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32, u32);
 void FUN_0036b21c();
 

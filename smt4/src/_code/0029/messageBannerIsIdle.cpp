@@ -2,7 +2,6 @@
 #include "shop/shopMain.h"
 
 extern "C" {
-extern MessageGlobals g_messageMain;
 
 u8 messageBannerIsIdle(void)
 {

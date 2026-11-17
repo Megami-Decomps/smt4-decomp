@@ -1,5 +1,6 @@
 /* NON_MATCHING: The angle is retained across trig calls, render-state push address scheduling and saved float registers differ. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 struct RadialGradientWork {
     u8 unk00[0xC];
@@ -12,7 +13,6 @@ struct RadialGradientWork {
     f32 lastX, lastY;
 };
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_00186940(void);
 f32 FUN_001b63b0(f32 angle);

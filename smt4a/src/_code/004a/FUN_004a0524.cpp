@@ -1,6 +1,7 @@
 /* NON_MATCHING: per-step recovery of the party's HP while walking (a percentage from the active flags, +2 more for one player id, applied to the player and, for the strongest flag, to the party slots; then a 2% bonus for slots that know skill 0x1c6); written from the decompilation, the slot-record getter's argument was lost and is assumed to be the slot id byte, and the skill scan covers the 8 stored skills (the ninth word the decompiler reads is zero) */
 #include "common.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
+#include "gamedata/GamePlayerData.h"
 
 #define WALK_HEAL_SKIP_FLAG 2
 #define WALK_FLAG_STRONG_A 0x6B
@@ -18,17 +19,6 @@
 #define WALK_RECORD_BLOCKED_MASK 0x402
 #define WALK_HP_BOOST_SCALE 1.25f
 
-struct WalkPlayerData {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ s16 id;
-    /* 0x0E */ u8 unk0E[0xE];
-    /* 0x1C */ s16 maxHp;
-    /* 0x1E */ u8 unk1E[0xC];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ u8 unk2C[0x32];
-    /* 0x5E */ u16 flags;
-};
-
 struct WalkSlotRecord {
     /* 0x00 */ u8 unk00[0xE];
     /* 0x0E */ s16 baseMaxHp;
@@ -42,7 +32,6 @@ struct WalkSlotRecord {
 };
 
 extern "C" {
-WalkPlayerData *gameGetPlayerData(void);
 s32 unitHasRankingBonus(u16 id);
 WalkSlotRecord *gameGetSlotRecord(s32 slot);
 s8 *gameGetSlotTable(void);
@@ -91,7 +80,7 @@ static __inline bool walkSlotIsHealable(s8 *table, s32 slot, WalkSlotRecord **re
 void FUN_004a0524(void)
 {
     s32 percent = 0;
-    if ((gameGetPlayerData()->flags & WALK_HEAL_SKIP_FLAG) != 0)
+    if ((gameGetPlayerData()->ailments & WALK_HEAL_SKIP_FLAG) != 0)
         return;
 
     if ((s32)gameDataFlagTestBit(WALK_FLAG_STRONG_A) != 0 || (s32)gameDataFlagTestBit(WALK_FLAG_STRONG_B) != 0)
@@ -100,14 +89,14 @@ void FUN_004a0524(void)
         percent = WALK_PERCENT_WEAK;
 
     s32 playerPercent = percent;
-    if (gameGetPlayerData()->id == WALK_PLAYER_BONUS_ID)
+    if (gameGetPlayerData()->equipped.accessory == WALK_PLAYER_BONUS_ID)
         playerPercent += WALK_PLAYER_BONUS_PERCENT;
     if (playerPercent != 0) {
         s32 maxHp = gameGetPlayerData()->maxHp;
         s32 amount = maxHp * playerPercent / 100;
         if (amount < 0)
             amount = 0;
-        WalkPlayerData *player = gameGetPlayerData();
+        PlayerDataA *player = gameGetPlayerData();
         s32 healed = amount + player->hp;
         if (maxHp < healed)
             healed = maxHp;

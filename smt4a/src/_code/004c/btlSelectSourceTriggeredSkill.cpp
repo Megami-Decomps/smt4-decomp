@@ -3,9 +3,9 @@
 #include "gamedata/SourceMetadata.h"
 #include "bible/bibleAnalyze.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
 s32 btlStateIsDefeatSuppressed(BtlMainStateA *);
 s32 lcgRandomRange(u32);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: typed rewrite of the status-flag editor item handler, the smt4a variant of FUN_003c33c8 (426 vs 418 rows); retail tests the two filters with ldrbeq/cmpeq, hoists &battle->actions into r8 and reads the 64-bit group mask with ldrd/ldr in another order. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 /* The status-flag editor screen: its list box, the filters and the flag mask being edited. */
 struct StatusFlagEditor {
@@ -40,7 +41,6 @@ u32 asdListBoxGetSelectedItemId(u32 listBox);
 u32 *asdListBoxGetIntValuePtr(u32 listBox, u32 item);
 s32 slotIsActive(s32 a, u32 b);
 StatusFlagEntry *FUN_003e83b4(StatusFlagBattle *battle, s32 index, u32 mode);
-void *btlUnitGet(u32 reference);
 void FUN_004fdb18(s32 a, void *unit, StatusFlagAction *action, u32 mask, s32 b);
 void FUN_004fcffc(s32 a, void *unit, StatusFlagAction *action, u32 mask);
 u8 *gameGetSlotTable(void);
@@ -55,7 +55,7 @@ static void addEntryFlags(StatusFlagBattle *battle, StatusFlagEntry *entry, u32 
     for (s32 slot = 0; slot < 50; ++slot) {
         s32 action = entry->actions[slot];
         if (action >= 0)
-            FUN_004fdb18(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask, 1);
+            FUN_004fdb18(0, reinterpret_cast<void *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))), &battle->actions[action], mask, 1);
     }
 }
 
@@ -65,7 +65,7 @@ static void removeEntryFlags(StatusFlagBattle *battle, StatusFlagEntry *entry, u
     for (s32 slot = 0; slot < 50; ++slot) {
         s32 action = entry->actions[slot];
         if (action >= 0)
-            FUN_004fcffc(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask);
+            FUN_004fcffc(0, reinterpret_cast<void *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))), &battle->actions[action], mask);
     }
 }
 

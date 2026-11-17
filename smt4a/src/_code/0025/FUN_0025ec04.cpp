@@ -1,9 +1,9 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "camp/CampState.h"
 
 extern "C" {
 extern CampStateA *g_camp;
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 enabled, u32 mode);
 u32 listCursorGetRowOfChildIfUnblocked(const void *selection);

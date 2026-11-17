@@ -1,9 +1,9 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "code/Code0030.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32 kind, u32 flags);
 s32 getFloatPairValue(void);
 s32 displayIsStereoActive(void);

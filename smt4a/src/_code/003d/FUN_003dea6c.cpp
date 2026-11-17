@@ -1,22 +1,16 @@
 /* NON_MATCHING: argument/count address sharing, saved frame, title cold-branch and switch tail layout differ. */
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "code/Code0035.h"
 
-struct DefinitionMessageArgument { u16 kind; u16 id; u32 count; };
-struct DefinitionMessageRecord {
-    u8 prefix[8];
-    char title[0xF8];
-    DefinitionMessageArgument arguments[4];
-};
 struct DefinitionMessageDescriptor {
     s16 id;
     char name[53];
     char suffix[1];
 };
 extern "C" {
-DefinitionMessageRecord* dataTable1bOr1cGetRecord(u16 id);
 const char* dataFindKindRecordWithAocOverrides(u16 id, s32 converted);
 const char* dataTable01GetRecordWithAocOverride(u16 id);
 const char* dataTable0cFindByKey(u16 id);
@@ -30,13 +24,13 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
     char converted[128];
     const char* title = NULL;
     if (!convertTitle) {
-        DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
+        QuestRecordA* definition = dataTable1bOr1cGetRecord(definitionId);
         if (definition) {
             title = definition->title;
         }
         scrSetStringSlot(40, title);
     } else {
-        DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
+        QuestRecordA* definition = dataTable1bOr1cGetRecord(definitionId);
         if (definition) {
             title = definition->title;
         }
@@ -45,10 +39,10 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
         scrSetStringSlot(40, converted);
     }
     if (includeArguments) {
-        DefinitionMessageRecord* definition = dataTable1bOr1cGetRecord(definitionId);
+        QuestRecordA* definition = dataTable1bOr1cGetRecord(definitionId);
         if (definition) {
             for (s32 index = 0; index < 4; ++index) {
-                DefinitionMessageArgument* argument = &definition->arguments[index];
+                QuestRequirement *argument = &definition->requirements[index];
                 switch (argument->kind) {
                 case 1:
                 case 7:

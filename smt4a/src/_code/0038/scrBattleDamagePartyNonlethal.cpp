@@ -2,6 +2,7 @@
 #include "code/Code003e.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct ResourceUnit { u8 unk00[0x1d0]; };
 struct ResourceFlagMasks {
@@ -14,7 +15,6 @@ extern "C" {
 extern ResourceFlagMasks g_btlMessageFlagMasks;
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32);
-void *btlUnitGet(u32);
 void btlQueueActionMessage(s32, void *, u32, s32, s32, s32, s32);
 void FUN_004fc094(s32, void *, s32, ResourceUnit *, s32, s32, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
@@ -24,7 +24,7 @@ u32 scrBattleDamagePartyNonlethal()
 {
     s32 amount = scrGetArg(0);
     s32 mode = scrGetArg(1);
-    void *source = btlUnitGet(g_btlScriptUnit);
+    void *source = reinterpret_cast<void *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     for (s32 slot = 0; slot < 4; ++slot) {
         BtlMainStateA *battle = btlGetMainState();
         BtlCombatantEntryA *target = &battle->entries[slot];

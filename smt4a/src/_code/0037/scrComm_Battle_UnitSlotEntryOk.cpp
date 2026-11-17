@@ -1,10 +1,10 @@
 #include "battle/btlUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 void scrSetResult(s32 result);
 s32 scrGetArg(u32 index);
-BtlUnitA *btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit;
 
@@ -12,7 +12,7 @@ extern u32 g_btlScriptUnit;
 s32 scrComm_Battle_UnitSlotEntryOk(void)
 {
     s32 slot = scrGetArg(0);
-    BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
+    BtlUnitA *unit = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
     BtlUnitDataA *data = unit->data;
     u16 entry = ((u16 *)data + slot)[BTL_UNIT_SLOT_TABLE];
 

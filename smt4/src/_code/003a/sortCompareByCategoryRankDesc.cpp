@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct SortRecord {
 
 extern SortRecord *table8Type5FindById(u16 id);
 extern int recordKindRank(u16 category);
-extern int itemGetSortCategory(u16 category);
 
 /* Compare function for sorting ids: by two category ranks (descending), then by id (descending). */
 int sortCompareByCategoryRankDesc(const u16 *a, const u16 *b)

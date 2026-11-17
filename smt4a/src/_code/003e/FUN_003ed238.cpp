@@ -2,13 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-int btlFindEntryBlockByMemberId(int, int);
 void battleRosterAssignGroupXOrder(BtlMainStateA*, unsigned int);
 int FUN_003e7cc8(int, unsigned int);
-int btlMainFindEntryByListedId(int, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -19,8 +18,6 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
     unsigned int sp80; /* 0x80: local_80 */
 } param_2_stack;
-
-extern int g_btlCamera; /* 0x571508 */
 extern float DAT_00573974; /* 0x573974 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -94,7 +91,7 @@ void FUN_003ed238(int param_1,unsigned int param_2)
           if ((((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) && ((temp_v1 & 0x10) == 0)) &&
              ((temp_v1 & 0x200000) != 0)) {
             temp_v9 = temp_v27;
-            btlMainFindEntryByListedId(temp_v27,(int)*(short *)(*piVar14 + temp_v10 * 0x1d0 + 0x6a));
+            btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v27), (int)*(short *)(*piVar14 + temp_v10 * 0x1d0 + 0x6a));
             temp_v0 = *(unsigned short *)(temp_v9 + 0x166);
             psVar5 = (short *)0x0;
             if (*(int *)(param_1 + 0x2294) != 0) {
@@ -124,9 +121,9 @@ LAB_003ed39c:
             *puVar9 = temp_v2;
             puVar9[1] = temp_v12;
             puVar9[2] = temp_v15;
-            temp_v9 = g_btlCamera;
+            temp_v9 = reinterpret_cast<int>(g_btlCamera);
             temp_v2 = *(unsigned int *)(psVar5 + 0x16);
-            *(unsigned int *)(g_btlCamera + 0xc) = temp_v2;
+            *(unsigned int *)(reinterpret_cast<int>(g_btlCamera) + 0xc) = temp_v2;
             temp_v17 = *(float *)(psVar5 + 0x18) * (float)temp_v25;
             *(float *)(temp_v9 + 0x10) = temp_v17;
             *(unsigned int *)(temp_v9 + 0x14) = temp_v2;
@@ -155,7 +152,7 @@ LAB_003ed39c:
             ((temp_v1 & 0x10) == 0 && (temp_v1 & 0x200000) == 0)) &&
            (*(char *)(temp_v6 + temp_v3 * 0x1d0 + 0x3c) == temp_v9)) {
           temp_v4 = temp_v27;
-          btlFindEntryBlockByMemberId(temp_v27,(int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
+          btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(temp_v27), (int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
           temp_v6 = 0;
           do {
             temp_v7 = *(int *)(temp_v5 + temp_v6 * 4 + 0x216c);
@@ -200,7 +197,7 @@ LAB_003ed4bc:
         if ((((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) && ((temp_v1 & 0x10) == 0)) &&
            (*(char *)(temp_v6 + temp_v3 * 0x1d0 + 0x3c) == temp_v9 && (temp_v1 & 0x200000) == 0)) {
           temp_v4 = temp_v27;
-          btlFindEntryBlockByMemberId(temp_v27,(int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
+          btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(temp_v27), (int)*(short *)(temp_v6 + temp_v3 * 0x1d0 + 0x6a));
           temp_v6 = 0;
           do {
             temp_v7 = *(int *)(temp_v5 + temp_v6 * 4 + 0x216c);

@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -10,7 +11,6 @@ struct ChoiceCaptionWork {
     char second[24];
 };
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 alpha);
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(s32 first, s32 second);

@@ -1,21 +1,7 @@
 /* Slot scan: a goal whose first condition is kind 5 needs one filled slot whose record has every listed bit. */
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-
-// One requirement of a goal: a kind and its argument/threshold.
-struct GoalCondition {
-    u16 kind;       // 0x00
-    u16 arg;        // 0x02
-    u32 value;      // 0x04
-};
-
-// Goal (achievement-like) definition: only the fields read here.
-struct GoalDefinition {
-    u8 unk00[6];
-    u8 category;                // 0x06
-    u8 unk07[0xf9];
-    GoalCondition conditions[4];    // 0x100
-};
 
 struct SlotTable {
     u32 firstWord;              // 0x00
@@ -30,7 +16,6 @@ struct RosterEntry {
 
 extern "C" {
 
-GoalDefinition* dataTable1bOr1cGetRecord(s32 id);
 s32 gameOptionsClassifyMode(void);
 s32 FUN_001ba570(void);
 s32 gameDataTableGetFlag(void);
@@ -46,21 +31,21 @@ RosterEntry* gameFindRosterEntry(s32 id);
 // Returns whether every condition of goal `id` is currently satisfied.
 s32 goalConditionsSatisfied(s32 id)
 {
-    GoalDefinition* goal = dataTable1bOr1cGetRecord(id);
+    QuestRecordA* goal = dataTable1bOr1cGetRecord(id);
     s32 result = 1;
     if (goal == NULL) return 0;
 
-    if (goal->category == 4 || goal->category == 5) {
+    if (goal->kind == 4 || goal->kind == 5) {
         if (gameOptionsClassifyMode() == 0) {
             result = 0;
         } else if (FUN_001ba570() != 0) {
             result = 0;
         }
-    } else if (goal->category == 6) {
+    } else if (goal->kind == 6) {
         if (gameDataTableGetFlag() == 4) result = 0;
     } else if (gameOptionsClassifyMode() == 2 && FUN_001ba570() != 0) {
         result = 0;
-    } else if (goal->conditions[0].kind == 5) {
+    } else if (goal->requirements[0].kind == 5) {
         // Needs one filled slot whose record satisfies every listed bit.
         s32 slotCount = gameSlotTableFindFree();
         s8* slotIds = gameGetSlotTable()->slotIds;
@@ -70,12 +55,12 @@ s32 goalConditionsSatisfied(s32 id)
             u8* record = gameGetSlotRecord(slotIds[slot]);
             s32 satisfied = 1;
             for (s32 i = 0; i < 4; i++) {
-                GoalCondition* condition = &goal->conditions[i];
+                QuestRequirement *condition = &goal->requirements[i];
                 switch (condition->kind) {
                 case 0:
                     break;
                 case 5:
-                    if (!bitSetTest(record, condition->arg)) satisfied = 0;
+                    if (!bitSetTest(record, condition->id)) satisfied = 0;
                     break;
                 default:
                     break;
@@ -89,22 +74,22 @@ s32 goalConditionsSatisfied(s32 id)
         }
     } else {
         for (s32 i = 0; i < 4; i++) {
-            switch (goal->conditions[i].kind) {
+            switch (goal->requirements[i].kind) {
             case 1: {
-                u32 progress = flagValueRead(goal->conditions[i].arg);
-                if (goal->conditions[i].value > progress) result = 0;
+                u32 progress = flagValueRead(goal->requirements[i].id);
+                if (goal->requirements[i].count > progress) result = 0;
                 break;
             }
             case 2:
-                if (goal->category == 1) {
+                if (goal->kind == 1) {
                     RosterEntry* roster = gameFindRosterEntry(id);
-                    if (roster == NULL || goal->conditions[i].value > roster->counts[i]) result = 0;
+                    if (roster == NULL || goal->requirements[i].count > roster->counts[i]) result = 0;
                 } else {
-                    if (partyFindSlotById(goal->conditions[i].arg) < 0) result = 0;
+                    if (partyFindSlotById(goal->requirements[i].id) < 0) result = 0;
                 }
                 break;
             case 3:
-                if (gameGetSlotTable()->firstWord < goal->conditions[i].value) result = 0;
+                if (gameGetSlotTable()->firstWord < goal->requirements[i].count) result = 0;
                 break;
             case 6: {
                 s32 slotCount = gameSlotTableFindFree();
@@ -114,7 +99,7 @@ s32 goalConditionsSatisfied(s32 id)
                     if (slotIds[slot] >= 0) {
                         u8* record = gameGetSlotRecord(slotIds[slot]);
                         u32 count = bitArrayCountSet1to500(record + 0x68);
-                        if (goal->conditions[i].value <= count) {
+                        if (goal->requirements[i].count <= count) {
                             found = 1;
                             break;
                         }
@@ -127,7 +112,7 @@ s32 goalConditionsSatisfied(s32 id)
                 result = 0;
                 break;
             case 8:
-                if (gameCountersGetWord(goal->conditions[i].arg & 0xff) < goal->conditions[i].value) result = 0;
+                if (gameCountersGetWord(goal->requirements[i].id & 0xff) < goal->requirements[i].count) result = 0;
                 break;
             default:
                 break;

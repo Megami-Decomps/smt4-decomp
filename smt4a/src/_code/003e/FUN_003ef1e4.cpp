@@ -1,7 +1,9 @@
 /* NON_MATCHING: mask test and branch layout differ (retail loads each u64 mask pair with ldm/ldrd from the g_btlMain base and tests the halves separately) */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "shard/BattleFlagMasks.h"
 #include "gamedata/Table00Lookup.h"
+#include "gamedata/GamePlayerData.h"
 
 /* The battle state (only the fields this decision reads and writes). */
 struct EscapeBattle {
@@ -17,15 +19,6 @@ struct EscapeBattle {
     /* 0x45a8 */ u64 blockMask;
 };
 
-/* The player's record (only the levels). */
-struct EscapePlayer {
-    /* 0x00 */ u8 unk00[0x26];
-    /* 0x26 */ s16 levelA;
-    /* 0x28 */ s16 levelB;
-    /* 0x2a */ u8 unk2a[0x34];
-    /* 0x5e */ u16 flags;
-};
-
 /* A party member's save record (only the levels and flags). */
 struct EscapeSaveSlot {
     /* 0x00 */ u8 unk00[0x18];
@@ -35,13 +28,6 @@ struct EscapeSaveSlot {
     /* 0x60 */ u16 flags;
 };
 
-
-/* A demon model record (only the kind). */
-struct EscapeModel {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ s8 kind;
-};
-
 struct EscapeSlotTable {
     /* 0x0000 */ u8 unk0000[0x1ca0];
     /* 0x1ca0 */ s8 party[3];
@@ -49,8 +35,6 @@ struct EscapeSlotTable {
 
 extern "C" {
 s32 lcgRandomRange(s32 range);
-EscapePlayer *gameGetPlayerData(void);
-EscapeModel *devilGetRecord(u32 id);
 EscapeSlotTable *gameGetSlotTable(void);
 s32 gameDataBlocksGetTableFlag(void);
 EscapeSaveSlot *gameGetSaveSlotData(s32 slot);
@@ -105,8 +89,8 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
         for (s32 i = 0;; i++) {
             u32 id = battle->enemies[i];
             if (id != 0) {
-                EscapeModel *model = devilGetRecord(id & 0xffff);
-                if (model != NULL && model->kind == 39) {
+                DevilRecordA *model = devilGetRecord(id & 0xffff);
+                if (model != NULL && model->race == 39) {
                     break;
                 }
             }
@@ -119,8 +103,8 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
 
     f32 partyPower = 0.0f;
     f32 enemyPower = 0.0f;
-    if ((gameGetPlayerData()->flags & 2) == 0) {
-        partyPower = (f32)(s32)(gameGetPlayerData()->levelB + gameGetPlayerData()->levelA);
+    if ((gameGetPlayerData()->ailments & 2) == 0) {
+        partyPower = (f32)(s32)(gameGetPlayerData()->stats[4] + gameGetPlayerData()->stats[3]);
     }
     for (s32 i = 0; i < 3; i++) {
         if (gameGetSlotTable()->party[i] >= 0) {

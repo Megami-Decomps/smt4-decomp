@@ -3,8 +3,8 @@
 #include "battle/ActionEvaluation.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 actor);
 void btlEntryBuildSummary(BattleActionEvaluation *result, BtlMainStateA *state, BtlCombatantEntryA *actor);
 u32 FUN_004c8340(u32 actor, u32 target, u32 skill, s32 kind, s32 flags);
 void kindIdStore(u32 skill, u32 *kind);

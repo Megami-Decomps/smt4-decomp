@@ -33,30 +33,30 @@ static __inline void approachLevel(s32 target)
  * current dim state. */
 void FUN_0033f42c(void)
 {
-    if (g_gameState.departMapLoading != 0) {
+    if (g_gameState.mapLoadActive != 0) {
         return;
     }
     s32 busy = frameTextureGetState();
-    u32 alpha = g_gameState.fade.alpha;
+    u32 alpha = g_gameState.overlayAlpha;
 
-    if (busy != 0 || g_gameState.fade.mode == 0) {
+    if (busy != 0 || g_gameState.overlayKind == 0) {
         FUN_00348c28(0);
         FUN_00348c3c(0);
         return;
     }
-    u32 color = (g_gameState.fade.red << 24) | (g_gameState.fade.green << 16) | (g_gameState.fade.blue << 8);
+    u32 color = (g_gameState.overlayRed << 24) | (g_gameState.overlayGreen << 16) | (g_gameState.overlayBlue << 8);
 
-    if (g_gameState.fade.mode == 1) {
+    if (g_gameState.overlayKind == 1) {
         FUN_00348c3c(1);
-        FUN_00283cf4((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, alpha | color,
-                     g_gameState.fade.additive != 0, 1);
+        FUN_00283cf4((f32)g_gameState.overlayX, (f32)g_gameState.overlayY, g_gameState.overlayTexture, alpha | color,
+                     g_gameState.overlayAdditive != 0, 1);
         FUN_00348c28(0);
         return;
     }
-    if (g_gameState.fade.mode == 2) {
+    if (g_gameState.overlayKind == 2) {
         FUN_00348c28(1);
-        FUN_00283c54((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, alpha | color,
-                     g_gameState.fade.additive != 0, 1);
+        FUN_00283c54((f32)g_gameState.overlayX, (f32)g_gameState.overlayY, g_gameState.overlayTexture, alpha | color,
+                     g_gameState.overlayAdditive != 0, 1);
         FUN_00348c3c(0);
         return;
     }
@@ -68,7 +68,7 @@ void FUN_0033f42c(void)
     }
     FUN_00348c28(1);
     if (g_gameState.mapId >= 100) {
-        FUN_00283c54((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, color | alpha, 1, flag);
+        FUN_00283c54((f32)g_gameState.overlayX, (f32)g_gameState.overlayY, g_gameState.overlayTexture, color | alpha, 1, flag);
         FUN_00348c3c(0);
         return;
     }
@@ -102,7 +102,7 @@ void FUN_0033f42c(void)
     } else if ((s32)alpha >= 0x100) {
         alpha = 0xFF;
     }
-    FUN_00283c54((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, color | alpha, 1, flag);
+    FUN_00283c54((f32)g_gameState.overlayX, (f32)g_gameState.overlayY, g_gameState.overlayTexture, color | alpha, 1, flag);
     FUN_00348c3c(0);
 }
 

@@ -1,16 +1,11 @@
 #include "shard/PassiveSkill.h"
 #include "gamedata/DataTable40.h"
+#include "gamedata/UnitRecordAccess.h"
 
-/* The unit record field the skill list sorts by. */
-struct SkillSortUnitRecord {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 sortKey;
-};
 
 extern "C" {
 
 bool idIsAbove400(u32 id);
-const SkillSortUnitRecord *gameGetUnitRecord(s32 unit);
 s32 itemSortCompareRankThenKey(const SkillListEntry *a, const SkillListEntry *b);
 
 /* The skill's sort key: passive skills (ids above 400) and active skills keep it in their records. */
@@ -32,12 +27,12 @@ static __inline s32 compareUnitSortKeys(const SkillListEntry *a, const SkillList
     if (a->unit < 0) {
         keyA = 0;
     } else {
-        keyA = gameGetUnitRecord(a->unit)->sortKey;
+        keyA = gameGetUnitRecord(a->unit)->id;
     }
     if (b->unit < 0) {
         keyB = 0;
     } else {
-        keyB = gameGetUnitRecord(b->unit)->sortKey;
+        keyB = gameGetUnitRecord(b->unit)->id;
     }
     diff = keyA - keyB;
     if (diff != 0) {

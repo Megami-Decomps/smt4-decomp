@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (210 vs 228 rows); retail's load-stage fallthrough and mask tests are laid out differently */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "bible/bibleAnalyze.h"
 
 // Talk-window tuning data shared by the battle talk code: three 64-bit side masks.
@@ -50,11 +51,6 @@ struct SideRecord {
     u16 id;                 // 0x02
 };
 
-struct DevilInfo {
-    u8 unk00[0x38];
-    u8 tone;                // 0x38
-};
-
 extern "C" {
 
 extern u8* g_btlAux;
@@ -65,7 +61,6 @@ extern u32 g_btlActionReflect;
 extern u32 g_btlUiBlock;
 
 SideRecord* btlFindEntryBlockByMemberId(BattleMain* battle, u32 id);
-DevilInfo* devilGetRecord(u32 id);
 void textFormatBuffer(char* out, const char* format, ...);
 void asdLoadFileAsyncSimple(const char* path, u32* out, s32 flag);
 void FUN_004f741c(u8* aux);
@@ -91,11 +86,11 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
     switch (window->state) {
     case 0: {
         SideRecord* side = btlFindEntryBlockByMemberId(window->battle, window->sideId);
-        DevilInfo* info = devilGetRecord(side->id);
-        textFormatBuffer(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->tone]);
+        DevilRecordA *info = devilGetRecord(side->id);
+        textFormatBuffer(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->talkTone]);
         asdLoadFileAsyncSimple(path, &window->toneFile, 1);
-        window->modeA = info->tone;
-        textFormatBuffer(path, "battle/talk/TalkTone%s.mbm", g_btlTalkToneNames[info->tone]);
+        window->modeA = info->talkTone;
+        textFormatBuffer(path, "battle/talk/TalkTone%s.mbm", g_btlTalkToneNames[info->talkTone]);
         asdLoadFileAsyncSimple(path, &window->toneModel, 1);
         asdLoadFileAsyncSimple("battle/talk/talk.bf", &window->talkFile, 1);
         FUN_004f741c(g_btlAux);

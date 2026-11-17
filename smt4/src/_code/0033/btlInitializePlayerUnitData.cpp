@@ -7,7 +7,7 @@ u16 playerDataValueAt(u32 index);
 s16 FUN_00257e40(u32 index);
 s32 padGetStickHorizontalDirection();
 
-void btlInitializePlayerUnitData(u32, BtlUnitData *data, const PlayerInitialRecordIV *player)
+void btlInitializePlayerUnitData(u32, BtlUnitData *data, const PlayerDataIV *player)
 {
     BtlUnitInitializationIV *unit = reinterpret_cast<BtlUnitInitializationIV *>(data);
     unit->active = 1;
@@ -17,16 +17,16 @@ void btlInitializePlayerUnitData(u32, BtlUnitData *data, const PlayerInitialReco
     unit->selection[1] = -1;
     unit->statMode = 0;
     unit->current.hp = player->hp;
-    unit->current.maximumHp = player->maximumHp;
+    unit->current.maximumHp = player->maxHp;
     unit->current.mp = player->mp;
-    unit->current.maximumMp = player->maximumMp;
+    unit->current.maximumMp = player->maxMp;
     for (s32 index = 0; index < 5; ++index)
         unit->current.stats[index] = player->stats[index];
     unit->initial = unit->current;
-    unit->points = player->advancement.points;
+    unit->points = player->ailments;
     unit->pending[0] = 0;
     unit->pending[1] = 0;
-    unit->enabled = player->enabled;
+    unit->enabled = player->level;
     unit->counter = 0;
     for (s32 index = 0; index < 14; ++index)
         unit->effects[index] = 0;

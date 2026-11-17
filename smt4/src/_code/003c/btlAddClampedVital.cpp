@@ -3,18 +3,9 @@
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/UnitRecordAccess.h"
-
-struct BattleLiveVitals {
-    /* 0x00 */ u8 unk00[0xe8];
-    /* 0xe8 */ s16 hp;
-    /* 0xea */ s16 maxHp;
-    /* 0xec */ s16 mp;
-    /* 0xee */ s16 maxMp;
-};
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BattleLiveVitals *btlFindEntryBlockByMemberId(BtlMainState *, s32 id);
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32 id);
 
 static __inline void addClampedVital(s16 *value, s16 maximum, s32 amount)
 {
@@ -31,7 +22,7 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
 {
     BtlMainState *state = btlGetMainState();
     if (id < BTL_ENTRY_COUNT) {
-        BattleLiveVitals *live = btlFindEntryBlockByMemberId(state, id);
+        BtlUnitData *live = btlFindEntryBlockByMemberId(state, id);
         if (live == NULL)
             return;
         if (kind == 0)
@@ -51,7 +42,8 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
         }
         return;
     }
-    BtlEquip *unit = static_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));
+    /* battle entries view the unit record through BtlEquip (shard/W4_Match6_BtlEntry.h) */
+    BtlEquip *unit = reinterpret_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));
     if (kind == 0)
         addClampedVital(&unit->hp, unit->maxHp, amount);
     else if (kind == 1)

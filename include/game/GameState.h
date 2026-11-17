@@ -1,6 +1,13 @@
 /* The global game state block of Shin Megami Tensei IV (`g_gameState`, 0x49f91c, 0x678 bytes).
  * Apocalypse's block has its own layout: game/GameStateA.h. Only the fields read so far are named;
- * unknown bytes are padding named by offset. */
+ * unknown bytes are padding named by offset.
+ *
+ * The event (0x100) and map (0x200) blocks are nested because retail treats their starts as objects:
+ * FUN_002080e8 reaches map.savedLocationSet through `add r1, gs, #0x200; ldrb [r1, #0xF8]`, a
+ * byte a flat struct would load straight from the base, and FUN_003b992c / FUN_002080e8 keep the
+ * block address in its own register. (A `g_gameState+0x100/0x200/0x400` pool word alone is not
+ * evidence: armcc folds those itself for ldrsb/ldrh/vldr fields out of range.) Apocalypse's state
+ * (GameStateA) has the same fields 0x34 bytes later and stays flat: no unit there needs a block. */
 #ifndef GAME_GAMESTATE_H
 #define GAME_GAMESTATE_H
 
@@ -170,7 +177,10 @@ typedef struct GameState {
     /* 0x0B0 */ s32 unk0B0;
     /* 0x0B4 */ s32 unk0B4;
     /* 0x0B8 */ s8 unk0B8;
-    /* 0x0B9 */ u8 unk0B9[4];
+    /* 0x0B9 */ u8 unk0B9;
+    /* 0x0BA */ u8 unk0BA;
+    /* 0x0BB */ u8 unk0BB;
+    /* 0x0BC */ u8 unk0BC;
     /* 0x0BD */ u8 unk0BD;
     /* 0x0BE */ u16 unk0BE;
     /* 0x0C0 */ u16 unk0C0;
@@ -179,7 +189,12 @@ typedef struct GameState {
     /* 0x0D0 */ MapVector cameraTarget;
     /* 0x0DC */ f32 cameraFov;
     /* 0x0E0 */ u8 unk0E0[0x18];
-    /* 0x0F8 */ u8 unk0F8[6];
+    /* 0x0F8 */ u8 unk0F8;
+    /* 0x0F9 */ u8 unk0F9;
+    /* 0x0FA */ u8 unk0FA;
+    /* 0x0FB */ u8 unk0FB;
+    /* 0x0FC */ u8 unk0FC;
+    /* 0x0FD */ u8 unk0FD;
     /* 0x0FE */ u8 activeEntrySet;
     /* 0x0FF */ u8 unk0FF;
     /* 0x100 */ GameStateEventBlock event;
@@ -189,12 +204,12 @@ typedef struct GameState {
     /* 0x304 */ u32 savedObjectId;
     /* 0x308 */ MapVector savedPosition;
     /* 0x314 */ f32 savedHeading;
-    /* 0x318 */ f32 unk318;
+    /* 0x318 */ f32 savedHeadingCopy;
     /* 0x31C */ s32 targetMapId;
     /* 0x320 */ s32 targetAreaId;
     /* 0x324 */ MapVector targetPosition;
     /* 0x330 */ f32 targetHeading;
-    /* 0x334 */ f32 unk334;
+    /* 0x334 */ f32 targetHeadingCopy;
     /* 0x338 */ u8 unk338[0x10];
     /* 0x348 */ s8 suppressStep;        /* also pauses the effect motions */
     /* 0x349 */ u8 unk349[3];
@@ -219,18 +234,18 @@ typedef struct GameState {
     /* 0x3A8 */ s32 overlayKind;        /* 0 none, 1 and 2 plain overlays, else blink overlay */
     /* 0x3AC */ s32 overlayX;
     /* 0x3B0 */ s32 overlayY;
-    /* 0x3B4 */ u32 overlayTarget;
-    /* 0x3B8 */ u32 overlayColorB;
-    /* 0x3BC */ s32 overlayFlag;
-    /* 0x3C0 */ u32 overlayColorA;
-    /* 0x3C4 */ u32 overlayColorR;
-    /* 0x3C8 */ u32 overlayColorG;
+    /* 0x3B4 */ u32 overlayTexture;
+    /* 0x3B8 */ u32 overlayAlpha;
+    /* 0x3BC */ s32 overlayAdditive;
+    /* 0x3C0 */ u32 overlayRed;
+    /* 0x3C4 */ u32 overlayGreen;
+    /* 0x3C8 */ u32 overlayBlue;
     /* 0x3CC */ s8 unk3CC;
     /* 0x3CD */ u8 unk3CD[3];
     /* 0x3D0 */ s32 unk3D0;
     /* 0x3D4 */ s32 unk3D4;
     /* 0x3D8 */ u8 unk3D8[8];
-    /* 0x3E0 */ s32 forceVisible;       /* nonzero: every entry is visible, requirements ignored */
+    /* 0x3E0 */ s32 showAllEntries;     /* nonzero: every entry is visible, requirements ignored */
     /* 0x3E4 */ u8 unk3E4[8];
     /* 0x3EC */ s32 stageOverride;      /* -1: derive the stage from the data table */
     /* 0x3F0 */ s32 groupOverride;      /* -1: derive the group from the data table */
@@ -258,7 +273,7 @@ typedef char GameStateLocationOffsets[offsetof(GameState, savedMapId) == 0x2FC &
     offsetof(GameState, targetMapId) == 0x31C && offsetof(GameState, targetPosition) == 0x324 &&
     offsetof(GameState, suppressStep) == 0x348 && offsetof(GameState, encounterBlocked) == 0x364 ? 1 : -1];
 typedef char GameStateTailOffsets[offsetof(GameState, mapMode) == 0x370 && offsetof(GameState, environmentPreset) == 0x390 &&
-    offsetof(GameState, overlayKind) == 0x3A8 && offsetof(GameState, forceVisible) == 0x3E0 &&
+    offsetof(GameState, overlayKind) == 0x3A8 && offsetof(GameState, showAllEntries) == 0x3E0 &&
     offsetof(GameState, jumpRequest) == 0x3F8 && offsetof(GameState, depart) == 0x41C &&
     offsetof(GameState, depart.counterB) == 0x4C2 && sizeof(GameStateJumpRequest) == 0x24 ? 1 : -1];
 

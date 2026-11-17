@@ -1,8 +1,8 @@
 /* NON_MATCHING: root/loop register roles and shared-counter initialization differ; lower optimization may change allocation. */
 #include "shard/Shard0034.h"
 #include "code/Code0033.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
 union SkillIds {
@@ -22,7 +22,7 @@ struct StagedSkill {
 struct SkillCommitWork {
     StagedSkill staged[8];
     u8 unk40[0x10];
-    PlayerData* demon;
+    PlayerDataA* demon;
     u8 unk54[0x64];
     u32 state;
     u32 timer;
@@ -38,7 +38,7 @@ struct SkillCommitMenu {
     SkillCommitWork work;
 };
 
-inline void copySkills(PlayerData* target, const StagedSkill* staged)
+inline void copySkills(PlayerDataA* target, const StagedSkill* staged)
 {
     SkillDataView* data = reinterpret_cast<SkillDataView*>(target);
     for (s32 word = 0; word < 4; ++word) {
@@ -74,12 +74,12 @@ void statusSkillsCommitOnDialogResult(void* object)
         return;
     }
     if (menu->selectedDemon < 0) {
-        PlayerData* player = reinterpret_cast<PlayerData*>(gameGetPlayerData());
+        PlayerDataA* player = gameGetPlayerData();
         copySkills(player, work->staged);
         SkillDataView* data = reinterpret_cast<SkillDataView*>(player);
         statusReplaceSkills(data->skills.ids, static_cast<u8>(countUnlockedSlots()));
     } else {
-        PlayerData* demon = work->demon;
+        PlayerDataA* demon = work->demon;
         copySkills(demon, work->staged);
         SkillDataView* data = reinterpret_cast<SkillDataView*>(demon);
         statusReplaceSkills(data->skills.ids, static_cast<u8>(getUnlockedSlotCount(demon)));

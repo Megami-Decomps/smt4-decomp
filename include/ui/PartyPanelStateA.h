@@ -5,6 +5,7 @@
 #include "common.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
 #include "gamedata/SelectedUnitQuery.h"
+#include "gamedata/GameSaveDataA.h"
 #include "ui/GridNavigation.h"
 #include "ui/PartyPanelParts.h"
 #include <stddef.h>
@@ -71,7 +72,7 @@ typedef struct PartyPanelStateA {
     /* 0x1074 */ u32 selectedFusionFlags;
     /* 0x1078 */ u8 unk1078[4];
     /* 0x107C */ UniteWork *unite;                    /* the fusion work */
-    /* 0x1080 */ u8 previewPlayer[0x64];              /* a copy of the player data */
+    /* 0x1080 */ PlayerDataA previewPlayer;                  /* a copy of the player data */
     /* 0x10E4 */ u8 previewUnit[0x12C];               /* a copy of a slot record */
     /* 0x1210 */ u8 disabled;
     /* 0x1211 */ u8 unk1211[7];

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 
 namespace {
 struct PurchaseEntry {
@@ -24,7 +25,6 @@ extern "C" {
 
 s32 FUN_0029ce60(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
 s32 flaggedValueHolderGetTotal(void *holder);
-void *devilGetRecord(u16 id);
 u32 gameSlotTableGetHeader(void);
 s32 partyHasStoredDemon(u16 id);
 s32 partyFindFreeStockSlot(void);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: -O2 candidate; active/state guards merge, entry addressing uses pre-indexed LDRB, and global/distance-argument register roles differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
@@ -43,7 +44,7 @@ extern "C" u32 mapHasFacingBreakableInReach(void)
             continue;
         }
         const f32 difference = mathAngleDeltaDegrees(
-            entry.heading, mathPositionHeadingDegrees(entry.position, g_lmapScene->position));
+            entry.heading, mathPositionHeadingDegrees(entry.position, g_lmapScene->pose.position));
         if (entry.kind != 1 && entry.kind != 6) {
             continue;
         }
@@ -53,7 +54,7 @@ extern "C" u32 mapHasFacingBreakableInReach(void)
         } else {
             frontFacing = 0;
         }
-        f32 distance = distanceBetween(g_lmapScene->position, entry.position);
+        f32 distance = distanceBetween(g_lmapScene->pose.position, entry.position);
         const MapVector& cachedPosition =
             g_gameState.breakableCheckPosition;
         const f32 cachedDistance = distanceBetween(cachedPosition, entry.position);
@@ -61,7 +62,7 @@ extern "C" u32 mapHasFacingBreakableInReach(void)
             distance = cachedDistance;
         }
         if (distance < 300.0f &&
-            mathAbsHeadingErrorToPoint(g_lmapScene->position, g_lmapScene->heading, entry.position) < 70.0f) {
+            mathAbsHeadingErrorToPoint(g_lmapScene->pose.position, g_lmapScene->pose.heading, entry.position) < 70.0f) {
             if (frontFacing != 0) {
                 return 1;
             }

@@ -2,9 +2,9 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-s32 btlFindEntryBlockByMemberId(BtlMainState *state, s32 id);
 
 /* Rates the share of active units (flags 0, 1 and 4 set, status flag 1 clear) among the unit
  * total: 5 at 70% or more (or when the check fails), 4 from 40%, else 3. */
@@ -12,7 +12,7 @@ u32 btlGetActiveShareRating(void)
 {
     if (btlGetMainState() != NULL) {
         s32 id = btlGetMainState()->playerCheck.checkId;
-        if (btlFindEntryBlockByMemberId(btlGetMainState(), id) != 0) {
+        if (reinterpret_cast<s32>(btlFindEntryBlockByMemberId(btlGetMainState(), id)) != 0) {
             s32 percent = 0;
             s32 total = btlGetMainState()->unitTotal;
             s32 active = 0;

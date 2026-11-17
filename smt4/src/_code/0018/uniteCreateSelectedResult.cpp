@@ -1,5 +1,6 @@
 /* NON_MATCHING: packed-selection loads and three member snapshots use different registers and stack placement. */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <stddef.h>
 #include "gamedata/SkillFlags.h"
@@ -29,7 +30,6 @@ struct PartyMemberView {
     u8 unknown58c[0x78];      // 0x58c
 };
 
-
 struct UniteStateView {
     void* context;                     // 0x0000
     u8 unknown0004[0x138c];   // 0x0004
@@ -49,13 +49,6 @@ struct UniteStateView {
     u32 resultStatus;        // 0x945c
 };
 
-struct DevilRecordView {
-    u8 unknown00[2];         // 0x00
-    u8 category;             // 0x02
-    u8 unknown03[0x39];       // 0x03
-    u16 skills[8];           // 0x3c
-};
-
 extern UniteStateView* g_unite;
 
 extern "C" {
@@ -72,7 +65,6 @@ int itemGetFlagBit1(u32 id);
 void FUN_0029c1c8(void* object, u32 id, int mode);
 void uniteMergeInheritedSkillsAndStats(void* context, PartyMemberView* first,
                  PartyMemberView* second, int mode, PartyMemberView* result);
-DevilRecordView* devilGetRecord(u32 id);
 int arrayContainsU16(const u16* values, int count, u32 value);
 int dataTable06ComparePriority(const void* left, const void* right);
 void FUN_002b7bca(void* base, int count, int elementSize,
@@ -85,7 +77,6 @@ void FUN_0029bed8(u32 id);
 void gameCounterAddSaturating(int flag, int value);
 void FUN_0029bde4(PartyMemberView* member);
 }
-
 
 extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
 {
@@ -148,7 +139,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         for (int i = 0; i < 24; ++i)
             candidates[i] = state->inheritedSkills[i];
 
-        DevilRecordView* original = devilGetRecord(originalResultId);
+        DevilRecord *original = devilGetRecord(originalResultId);
         for (int i = 0; i < 8; ++i) {
             const u16 skill = original->skills[i];
             if (skill != 0 &&
@@ -158,7 +149,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
             }
         }
 
-        if (devilGetRecord(selection->resultId)->category == 51) {
+        if (devilGetRecord(selection->resultId)->race == 51) {
             FUN_002b7bca(candidates, 32, 2, dataTable06ComparePriority);
             const int unlocked = flagCountUnlockedSlots(member);
             for (int i = 0; i < 32; ++i) {

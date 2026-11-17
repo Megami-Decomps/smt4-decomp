@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -13,8 +14,6 @@ int btlEntryGetPassiveSkillIds(...);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_002463e8(...);
 int btlEntryBuildSummary(...);
-int btlFindEntryBlockByMemberId(unsigned int *, unsigned int);
-int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
@@ -164,18 +163,18 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
     }
   }
   puVar5 = temp_v27;
-  btlFindEntryBlockByMemberId(temp_v27,temp_v31);
+  btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v27), temp_v31);
   puVar6 = temp_v27;
   temp_v29 = puVar5;
-  btlFindEntryBlockByMemberId(temp_v27,param_5);
+  btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v27), param_5);
   puVar5 = temp_v27;
-  btlMainFindEntryByListedId(temp_v27,temp_v31);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v27), temp_v31);
   puVar7 = temp_v27;
   temp_v26 = puVar5;
-  btlMainFindEntryByListedId(temp_v27,param_5);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v27), param_5);
   temp_v5 = temp_v31;
   temp_v4 = reinterpret_cast<int>(btlGetMainState());
-  btlMainFindEntryByListedId(temp_v4,temp_v5);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v4), temp_v5);
   temp_v5 = reinterpret_cast<int>(btlGetMainState());
   btlEntryBuildSummary(&temp_v16,temp_v5,temp_v4);
   temp_v9 = temp_v16 >> 0x10;
@@ -308,7 +307,7 @@ LAB_00228c48:
   }
 LAB_00228de4:
   puVar5 = temp_v27;
-  btlMainFindEntryByListedId(temp_v27,temp_v31);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v27), temp_v31);
   if ((*puVar5 & 0x1000) == 0) {
     if ((temp_v27[0x38] & 0x20000000) != 0) {
       if (((temp_v6 & 0x400000) != 0) && (param_6 == 0)) {
@@ -335,7 +334,7 @@ LAB_00228de4:
         }
         temp_v15 = 0x3f800000;
         temp_v8 = reinterpret_cast<int>(btlGetMainState());
-        btlMainFindEntryByListedId(temp_v8,temp_v5);
+        btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v8), temp_v5);
         temp_v14 = (float)temp_v15;
         if (temp_v8 != 0) {
           temp_v17 = 0;
@@ -409,7 +408,7 @@ LAB_00228de4:
         }
         temp_v3 = FUN_00245cc0(0x1a);
         temp_v10 = reinterpret_cast<int>(btlGetMainState());
-        btlMainFindEntryByListedId(temp_v10,temp_v5);
+        btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v10), temp_v5);
         if (temp_v10 != 0) {
           *(unsigned short *)(temp_v10 + 0xa6) = temp_v3;
         }

@@ -1,6 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct BattleMarkMasks {
@@ -14,7 +15,6 @@ extern "C" {
 
 extern BattleMarkMasks g_btlMessageFlagMasks;
 s32 scrGetArg(s32 index);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 void btlSlotSetStoreValue(u32 id, s32 slot, s32 value);
 
 /* Script command: give an entry mark 1 or 2 and record it in its slot store. */

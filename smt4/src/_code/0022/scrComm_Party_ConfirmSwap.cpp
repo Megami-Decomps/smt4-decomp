@@ -1,4 +1,4 @@
-#include "shard/W6_W6Match5_SecondarySort.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" {
 u32 scrGetArg(u32);
@@ -32,11 +32,11 @@ u32 scrComm_Party_ConfirmSwap(void)
         if (result == 1) {
             scrWorkSetValue(1, 0);
             if (rosterHasLeader()) {
-                const SecondarySortRecord *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
-                const SecondarySortRecord *selected = dataTable1bOr1cGetRecord(id);
+                const QuestRecord *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+                const QuestRecord *selected = dataTable1bOr1cGetRecord(id);
                 if (previous != NULL && selected != NULL &&
-                    ((previous->classification.kind != 5 && previous->classification.kind != 4 &&
-                      previous->classification.kind != 1) || selected->classification.kind != 0)) {
+                    ((previous->kind != 5 && previous->kind != 4 &&
+                      previous->kind != 1) || selected->kind != 0)) {
                     gameOptionsEnableAndReset();
                 }
             }

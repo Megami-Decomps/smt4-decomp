@@ -33,7 +33,7 @@ void FUN_004816bc(StateOwner *self)
             state->bits &= ~3;
         }
         if (!(self->flags & 4)) {
-            if (g_gameState.departLoading != 0) {
+            if (g_gameState.loading != 0) {
                 state->bits |= 3;
             } else if (self->flags & 8) {
                 state->bits &= ~3;

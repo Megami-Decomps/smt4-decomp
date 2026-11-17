@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -24,11 +25,6 @@ struct DemonBaseRecord {
     /* 0x30 */ u32 experience;
 };
 typedef char DemonBaseRecordSizeCheck[sizeof(DemonBaseRecord) == 0x34 ? 1 : -1];
-
-struct DevilBitSource {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u16 bit;
-};
 
 /* A unit built from a demon's base record; only the fields the comparison reads are named. */
 struct FreshUnit {
@@ -71,7 +67,6 @@ typedef char SavedUnitOffsets[offsetof(SavedUnit, statBonus) == 0x590 ? 1 : -1];
 
 extern "C" {
 bool gameRecordCopy(u32 id, void *destination);
-DevilBitSource *devilGetRecord(u16 id);
 void bitsetSetBit(void *owner, u32 bit);
 void unitRecalculateEffectiveStats(FreshUnit *unit);
 s32 flagCountUnlockedSlots(SavedUnit *unit);
@@ -79,7 +74,7 @@ s32 flagCountUnlockedSlots(SavedUnit *unit);
 /* Builds the unit a demon id starts as (the same sequence as unitInitializeFromSavedRecord). */
 static void initializeFreshUnit(u16 id, FreshUnit *unit)
 {
-    DevilBitSource *devil = devilGetRecord(id);
+    DevilRecord *devil = devilGetRecord(id);
     DemonBaseRecord base;
     gameRecordCopy(id, &base);
     memClear(unit, 0x604);
@@ -104,7 +99,7 @@ static void initializeFreshUnit(u16 id, FreshUnit *unit)
     }
     unit->experience = base.experience;
     unit->growthType = (base.flags >> 2) & 0xF;
-    bitsetSetBit(unit, devil->bit);
+    bitsetSetBit(unit, devil->innateFlag);
     unitRecalculateEffectiveStats(unit);
     unit->copy[0] = unit->unk00E;
     unit->copy[1] = unit->unk010;

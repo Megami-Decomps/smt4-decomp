@@ -1,4 +1,5 @@
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 
 extern "C" {
 
@@ -8,18 +9,12 @@ typedef struct StepWork {
     /* 0x0C */ s32 counter;
 } StepWork;
 
-typedef struct QuestRecord {
-    /* 0x00 */ u8 unk00[0xd4];
-    /* 0xD4 */ u16 id;
-} QuestRecord;
-
 void eventQueueAddUnique(u32 event);
 void frameTexInitActive(void);
 void frameTexRequestFade(s32 a);
 void *rosterGetLeaderId(void);
 s32 FUN_001bd118(void);
 void qcMainSetMode(s32 mode);
-QuestRecord *dataTable1bOr1cGetRecord(void *source);
 void FUN_00270c58(u16 id);
 void campButtonHelpRelease(void);
 
@@ -53,7 +48,7 @@ void FUN_00469d38(StepWork *work)
         source = rosterGetLeaderId();
         if (source != NULL && FUN_001bd118() == 6) {
             qcMainSetMode(1);
-            FUN_00270c58(dataTable1bOr1cGetRecord(source)->id);
+            FUN_00270c58(dataTable1bOr1cGetRecord(reinterpret_cast<u32>(source))->event.package);
             campButtonHelpRelease();
         }
         break;

@@ -1,11 +1,11 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: digit/coordinate saved registers and formatted-text stack argument scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern RenderCtxA* g_renderCtx;
 void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(u32 font, s32 x, s32 y, u32 flags, u32 kind, u32 parameter,

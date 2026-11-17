@@ -1,14 +1,5 @@
-#include "shard/W6_W6Match5_SecondarySort.h"
+#include "quest_center/QuestRecord.h"
 
-/* The availability conditions extend beyond the shared sort-record prefix. */
-struct QuestAvailabilityConditionsView {
-    SecondarySortRecord prefix;
-    u8 unk154[0x56];
-    u16 excludedQuests[2];
-    u16 route;
-    u16 hideStartFlag;
-    u16 hideEndFlag;
-};
 extern "C" {
 u32 questRequirementsMet(u16);
 u32 questIsCompleted(s32);
@@ -16,7 +7,7 @@ s32 gameFlagIsSet(u32);
 
 u32 questPassesAvailabilityConditions(u16 questId)
 {
-    const QuestAvailabilityConditionsView *record = reinterpret_cast<const QuestAvailabilityConditionsView *>(dataTable1bOr1cGetRecord(questId));
+    const QuestRecord *record = dataTable1bOr1cGetRecord(questId);
     if (!record)
         return 0;
     if (!questRequirementsMet(questId))

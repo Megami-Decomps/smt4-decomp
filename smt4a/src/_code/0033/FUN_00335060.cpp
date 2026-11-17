@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the save list (selected slot first, then the other slots, then the optional extra rows and the footer); written from the decompilation, render-stack push scheduling not compared with retail */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "code/Code0018.h"
 
 struct SaveRowSprite {
@@ -31,8 +32,6 @@ struct SaveRowImage {
 #define SAVE_ROW_NO_SELECTION 0xFFFFFFFFu
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 SaveSlotEntry *saveSlotFindSelected(void);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 void gxResetColorQuadToWhite(void);

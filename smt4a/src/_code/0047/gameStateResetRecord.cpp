@@ -13,7 +13,7 @@ void gameStateResetRecord(GameStateRecord *record)
     record->unk2A = 0;
     record->unk2E = 0;
     record->unk32 = 0;
-    g_gameState.scriptValue = 0;
+    g_gameState.entryValue = 0;
 }
 
 } /* extern "C" */

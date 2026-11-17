@@ -1,5 +1,6 @@
 /* NON_MATCHING: maximum update now uses an atLeast helper (retail order/condition reproduced); remaining: battle address computed after the entry value address, flag read-modify-writes use r1 where retail uses r2, `movs` null test on the found unit, enemy-count loop registers. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BtlGlobals.h"
 
 struct CommandEventBattle {
     u8 unk0000[0x84];
@@ -26,7 +27,6 @@ struct CommandEventChoice {
     CommandEventData *command;
 };
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(CommandEventBattle *, s32);
 void FUN_00246454(u32, CommandEventChoice *, BtlEntry *);
 void FUN_0026beb4(u32, CommandEventChoice *, u32, u32, u32);
 void FUN_002569ac(CommandEventContext *, u32);
@@ -39,7 +39,7 @@ static __inline s32 atLeastS32(s32 value, s32 minimum)
 
 void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *choice)
 {
-    BtlEntry *target = btlMainFindEntryByListedId(context->battle, context->battle->target);
+    BtlEntry *target = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(context->battle), context->battle->target);
     if (target && !(context->battle->flags & 0x200)) {
         CommandEventBattle *battle = context->battle;
         battle->maximum = atLeastS32(battle->maximum, ((CommandEventUnit *)target)->value);
@@ -69,7 +69,7 @@ void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *ch
         }
         CommandEventBattle *battle = context->battle;
         if (battle->targetMode == 2) {
-            BtlEntry *unit = btlMainFindEntryByListedId(battle, battle->target);
+            BtlEntry *unit = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(battle), battle->target);
             if (unit)
                 FUN_00246454(0, choice, unit);
         }

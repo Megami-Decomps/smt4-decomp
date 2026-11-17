@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -24,8 +25,6 @@ typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
-
-extern int g_btlMain; /* 0x4342c8 */
 extern float fRam004342dc; /* 0x4342dc */
 extern float DAT_00434310; /* 0x434310 */
 extern unsigned int DAT_00493530; /* 0x493530 */
@@ -79,39 +78,39 @@ void FUN_003445f8(unsigned int param_1,int param_2)
   float temp_v12;
   
   temp_v2 = *(short *)(param_2 + 0x4a);
-  temp_v6 = *(float *)(g_btlMain + 0x568);
-  temp_v7 = *(float *)(g_btlMain + 0x56c);
-  temp_v8 = *(float *)(g_btlMain + 0x570);
+  temp_v6 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x568);
+  temp_v7 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x56c);
+  temp_v8 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x570);
   if ((temp_v2 == 1 || temp_v2 == 5) || temp_v2 == 6) {
-    if (*(unsigned int *)(g_btlMain + 0x760) < 4) {
+    if (*(unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x760) < 4) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      temp_v5 = FUN_00256940(g_btlMain,temp_v4,1);
-      if ((temp_v5 != 0) && ((*(unsigned int *)(g_btlMain + 0x634) & 0x1000000) == 0)) {
+      temp_v5 = FUN_00256940(reinterpret_cast<int>(g_btlMain),temp_v4,1);
+      if ((temp_v5 != 0) && ((g_btlMain->flags & 0x1000000) == 0)) {
         btlReflectQueueKind34(0,*(unsigned int *)(param_2 + 8));
       }
     }
     FUN_00256898(1,*(unsigned int *)(param_2 + 8));
   }
-  temp_v5 = g_btlMain;
+  temp_v5 = reinterpret_cast<int>(g_btlMain);
   switch(*(unsigned int *)(param_2 + 0x4c)) {
   case 9:
     if ((*(int *)(param_2 + 0x14) != 0) &&
        ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0)) {
       VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-      transitionConfigureAndReset(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+      transitionConfigureAndReset(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
       return;
     }
     break;
   case 10:
     VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0023cb70(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),0);
+    FUN_0023cb70(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),0);
     return;
   case 0xb:
     if ((*(int *)(param_2 + 0x14) != 0) &&
        ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0)) {
       temp_v6 = 1.0f;
-      if ((*(unsigned int *)(g_btlMain + 0x634) & 0x22000) != 0) {
-        temp_v7 = *(float *)(g_btlMain + 0x5c4);
+      if ((g_btlMain->flags & 0x22000) != 0) {
+        temp_v7 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x5c4);
         temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v7 == 0.0f) << 0x1e);
         in_fpscr = temp_v1 | ((unsigned int)(temp_v7 != temp_v7) << 0x1c);
@@ -124,7 +123,7 @@ void FUN_003445f8(unsigned int param_1,int param_2)
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
       temp_v7 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x24),
                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(g_btlMain + 0x5e8) = *(float *)(g_btlMain + 0x6c8) * temp_v7 * temp_v6;
+      *(float *)(reinterpret_cast<int>(g_btlMain) + 0x5e8) = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x6c8) * temp_v7 * temp_v6;
       *(unsigned int *)(temp_v5 + 0x6bc) = temp_v4;
       *(int *)(temp_v5 + 0x6c4) = (int)temp_v2;
       *(unsigned int *)(temp_v5 + 0x6b8) = 0;
@@ -144,13 +143,13 @@ void FUN_003445f8(unsigned int param_1,int param_2)
     }
     else {
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
-      in_s0 = temp_v6 + *(float *)(g_btlMain + 0x580);
+      in_s0 = temp_v6 + *(float *)(reinterpret_cast<int>(g_btlMain) + 0x580);
       temp_v2 = *(short *)(param_2 + 0x48);
-      in_s1 = temp_v7 + *(float *)(g_btlMain + 0x584);
-      in_s2 = temp_v8 + *(float *)(g_btlMain + 0x588);
+      in_s1 = temp_v7 + *(float *)(reinterpret_cast<int>(g_btlMain) + 0x584);
+      in_s2 = temp_v8 + *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
     }
-    temp_v5 = g_btlMain;
-    *(float *)(g_btlMain + 0x5ac) = in_s0;
+    temp_v5 = reinterpret_cast<int>(g_btlMain);
+    *(float *)(reinterpret_cast<int>(g_btlMain) + 0x5ac) = in_s0;
     *(float *)(temp_v5 + 0x5b0) = in_s1;
     *(float *)(temp_v5 + 0x5b4) = in_s2;
     *(unsigned int *)(temp_v5 + 0x6d8) = temp_v4;
@@ -169,22 +168,22 @@ void FUN_003445f8(unsigned int param_1,int param_2)
     temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
     FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
     if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
-      in_s0 = *(float *)(g_btlMain + 0x580);
-      in_s2 = *(float *)(g_btlMain + 0x588);
+      in_s0 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x580);
+      in_s2 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
       if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0) goto LAB_00344904;
     }
     else {
 LAB_00344904:
       if (*(char *)(*(int *)(param_2 + 0x14) + 0x3c) == '\x01') {
-        in_s2 = *(float *)(g_btlMain + 0x588);
+        in_s2 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
       }
     }
-    btlSetVectorTransitionTarget(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+    btlSetVectorTransitionTarget(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
     temp_v4 = asdCameraGetSavedRenderPairs();
     FUN_002630e0(temp_v11,0,temp_v4);
-    temp_v5 = g_btlMain;
+    temp_v5 = reinterpret_cast<int>(g_btlMain);
     temp_v6 = (temp_v11[0] - 200.0f) * 0.006666667f;
     if (temp_v6 < 0.0f) {
       temp_v6 = -temp_v6;
@@ -192,7 +191,7 @@ LAB_00344904:
     if ((int)temp_v6 >= 0x3f800001) {
       temp_v6 = 1.0f;
     }
-    *(float *)(g_btlMain + 0x6c8) = temp_v6;
+    *(float *)(reinterpret_cast<int>(g_btlMain) + 0x6c8) = temp_v6;
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v2 = *(short *)(param_2 + 0x48);
       *(unsigned int *)(temp_v5 + 0x750) = *(unsigned int *)(param_2 + 0x28);
@@ -214,11 +213,11 @@ LAB_00344904:
     temp_v4 = *(unsigned int *)(param_2 + 0x28);
     temp_v9 = *(unsigned int *)(temp_v0 + 0x4398ec);
     temp_v10 = *(unsigned int *)(temp_v0 + 0x4398f0);
-    DAT_00493530 = *(unsigned int *)(g_btlMain + 0x6e4);
-    DAT_00493534 = *(unsigned int *)(g_btlMain + 0x6e8);
-    DAT_00493538 = *(unsigned int *)(g_btlMain + 0x6ec);
-    puVar7 = (unsigned int *)(g_btlMain + 0x6f0);
-    *(unsigned int *)(g_btlMain + 0x5c4) = *(unsigned int *)(temp_v0 + 0x4398e8);
+    DAT_00493530 = *(unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x6e4);
+    DAT_00493534 = *(unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x6e8);
+    DAT_00493538 = *(unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x6ec);
+    puVar7 = (unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x6f0);
+    *(unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x5c4) = *(unsigned int *)(temp_v0 + 0x4398e8);
     *(unsigned int *)(temp_v5 + 0x5c8) = temp_v9;
     *(unsigned int *)(temp_v5 + 0x5cc) = temp_v10;
     *(int *)(temp_v5 + 0x6f8) = (int)temp_v2;
@@ -227,24 +226,24 @@ LAB_00344904:
     *(unsigned int *)(temp_v5 + 0x634) = *(unsigned int *)(temp_v5 + 0x634) | 0x8000;
     return;
   case 0x11:
-    FUN_003d710c(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),
+    FUN_003d710c(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),
                  (int)*(short *)(param_2 + 0x26));
     return;
   case 0x12:
     VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_003d6b7c(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+    FUN_003d6b7c(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
     return;
   case 0x15:
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v2 = *(short *)(param_2 + 0x48);
-      temp_v6 = romwright_fabs_4(*(float *)(*(int *)(param_2 + 0x14) + 0x14) - *(float *)(g_btlMain + 0x570));
+      temp_v6 = romwright_fabs_4(*(float *)(*(int *)(param_2 + 0x14) + 0x14) - *(float *)(reinterpret_cast<int>(g_btlMain) + 0x570));
       temp_v7 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x24),
                                          (unsigned char)(in_fpscr >> 0x16) & 3);
       fRam004342dc = temp_v7 * -0.01f;
       if (temp_v6 - DAT_00434310 < -(temp_v7 * -0.01f)) {
         fRam004342dc = DAT_00434310 - temp_v6;
       }
-      *(unsigned int *)(g_btlMain + 0x7a0) = *(unsigned int *)(param_2 + 0x28);
+      *(unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x7a0) = *(unsigned int *)(param_2 + 0x28);
       *(int *)(temp_v5 + 0x7a8) = (int)temp_v2;
       *(unsigned int *)(temp_v5 + 0x794) = 0;
       *(unsigned int *)(temp_v5 + 0x7a4) = 0;
@@ -257,7 +256,7 @@ LAB_00344904:
     temp_v4 = *(unsigned int *)(param_2 + 0x28);
     temp_v6 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3)
     ;
-    *(float *)(g_btlMain + 0x5ec) = temp_v6 * 0.01f;
+    *(float *)(reinterpret_cast<int>(g_btlMain) + 0x5ec) = temp_v6 * 0.01f;
     *(unsigned int *)(temp_v5 + 0x7ac) = 0;
     *(int *)(temp_v5 + 0x7c0) = (int)temp_v2;
     *(unsigned int *)(temp_v5 + 0x7b8) = temp_v4;
@@ -268,8 +267,8 @@ LAB_00344904:
     if ((*(int *)(param_2 + 0x14) != 0) &&
        ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0)) {
       temp_v6 = 1.0f;
-      if ((*(unsigned int *)(g_btlMain + 0x634) & 0x22000) != 0) {
-        temp_v7 = *(float *)(g_btlMain + 0x5c4);
+      if ((g_btlMain->flags & 0x22000) != 0) {
+        temp_v7 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x5c4);
         temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < 0.0f) << 0x1f) |
                 ((unsigned int)(temp_v7 == 0.0f) << 0x1e);
         in_fpscr = temp_v1 | ((unsigned int)(temp_v7 != temp_v7) << 0x1c);
@@ -282,7 +281,7 @@ LAB_00344904:
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
       temp_v7 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x24),
                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(g_btlMain + 0x5e8) = *(float *)(g_btlMain + 0x6c8) * temp_v7 * 0.01f * temp_v6;
+      *(float *)(reinterpret_cast<int>(g_btlMain) + 0x5e8) = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x6c8) * temp_v7 * 0.01f * temp_v6;
       *(unsigned int *)(temp_v5 + 2000) = 0;
       *(unsigned int *)(temp_v5 + 0x62c) = *(unsigned int *)(temp_v5 + 0x5a4);
       *(int *)(temp_v5 + 0x7e4) = (int)temp_v2;
@@ -301,14 +300,14 @@ LAB_00344904:
     }
     else {
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
-      in_s0 = temp_v6 + *(float *)(g_btlMain + 0x580);
+      in_s0 = temp_v6 + *(float *)(reinterpret_cast<int>(g_btlMain) + 0x580);
       temp_v2 = *(short *)(param_2 + 0x48);
-      in_s1 = temp_v7 + *(float *)(g_btlMain + 0x584);
-      in_s2 = temp_v8 + *(float *)(g_btlMain + 0x588);
+      in_s1 = temp_v7 + *(float *)(reinterpret_cast<int>(g_btlMain) + 0x584);
+      in_s2 = temp_v8 + *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
     }
-    temp_v5 = g_btlMain;
-    puVar7 = (unsigned int *)(g_btlMain + 0x7e8);
-    *(unsigned int *)(g_btlMain + 0x7f0) = 0;
+    temp_v5 = reinterpret_cast<int>(g_btlMain);
+    puVar7 = (unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x7e8);
+    *(unsigned int *)(reinterpret_cast<int>(g_btlMain) + 0x7f0) = 0;
     *(unsigned int *)(temp_v5 + 0x7ec) = 0;
     *puVar7 = 0;
     *(float *)(temp_v5 + 0x5ac) = in_s0;
@@ -324,10 +323,10 @@ LAB_00344904:
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
       if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
-        in_s0 = *(float *)(g_btlMain + 0x580);
-        in_s2 = *(float *)(g_btlMain + 0x588);
+        in_s0 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x580);
+        in_s2 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
       }
-      FUN_003d64dc(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+      FUN_003d64dc(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
       temp_v11[0] = in_s0;
       temp_v12 = in_s2;
       temp_v4 = asdCameraGetSavedRenderPairs();
@@ -339,7 +338,7 @@ LAB_00344904:
       if ((int)temp_v6 >= 0x3f800001) {
         temp_v6 = 1.0f;
       }
-      *(float *)(g_btlMain + 0x6c8) = temp_v6;
+      *(float *)(reinterpret_cast<int>(g_btlMain) + 0x6c8) = temp_v6;
     }
   }
   return;

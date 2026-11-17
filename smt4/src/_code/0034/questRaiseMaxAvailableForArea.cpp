@@ -1,13 +1,7 @@
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" {
-
-typedef struct QuestRecord {
-    /* 0x000 */ u8 unk000[7];
-    /* 0x007 */ u8 flags;
-    /* 0x008 */ u8 unk008[0x194];
-    /* 0x19C */ u16 areaId;
-} QuestRecord;
 
 typedef struct QuestCenterBlock {
     /* 0x000 */ u8 unk000[0x25C];
@@ -15,7 +9,6 @@ typedef struct QuestCenterBlock {
 } QuestCenterBlock;
 
 QuestCenterBlock *gameGetQuestCenterBlock(void);
-QuestRecord *dataTable1bOr1cGetRecord(u16 id);
 s32 questRequirementsMet(u16 id);
 
 /* Raises the area's recorded maximum to the number of quests in it that are available now. */
@@ -25,9 +18,9 @@ void questRaiseMaxAvailableForArea(u32 area)
     s32 count = 0;
 
     for (s32 id = 0; id < 400; id++) {
-        QuestRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecord *record = dataTable1bOr1cGetRecord(static_cast<u16>(id));
 
-        if (record != NULL && (record->flags & 1) == 0 && record->areaId == area && questRequirementsMet(id) != 0) {
+        if (record != NULL && (record->flags & 1) == 0 && record->area == area && questRequirementsMet(id) != 0) {
             count++;
         }
     }

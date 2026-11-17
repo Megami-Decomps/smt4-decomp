@@ -1,8 +1,8 @@
 /* NON_MATCHING: percentage damage, group selection and minimum-one-HP clamps are recovered; helper inlining, flag predicates and register allocation differ. */
 #include "shard/Shard0034.h"
 #include "shard/Shard004B.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 s32 gameSlotTableFindFree();
@@ -40,25 +40,25 @@ extern "C" void FUN_004a01c8(u32 group, u8 conditionBit, s32 percentage)
         return;
     u32 mask = 1u << conditionBit;
     if ((group == 0 || group == 2 || group == 3) &&
-        !(reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk5E & 2) &&
-        !(reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk5E & 0x400) &&
-        (reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk5E & mask)) {
-        s16 maximum = reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk1C;
-        PlayerData *current = reinterpret_cast<PlayerData *>(gameGetPlayerData());
+        !(gameGetPlayerData()->ailments & 2) &&
+        !(gameGetPlayerData()->ailments & 0x400) &&
+        (gameGetPlayerData()->ailments & mask)) {
+        s16 maximum = gameGetPlayerData()->maxHp;
+        PlayerDataA *current = gameGetPlayerData();
         s32 loss = maximum * percentage / 100;
         if (loss <= 0)
             loss = 1;
-        s32 remaining = current->unk2A - loss;
+        s32 remaining = current->hp - loss;
         if (remaining <= 0)
             remaining = 1;
         s16 value = remaining;
-        PlayerData *player = reinterpret_cast<PlayerData *>(gameGetPlayerData());
-        if (value <= (player->unk1C)) {
-            (player->unk1C) = value;
+        PlayerDataA *player = gameGetPlayerData();
+        if (value <= (player->maxHp)) {
+            (player->maxHp) = value;
             if (value <= 0)
-                (player->unk1C) = 1;
+                (player->maxHp) = 1;
         }
-        player->unk2A = (player->unk1C);
+        player->hp = (player->maxHp);
     }
     s32 count;
     const s8 *slots;

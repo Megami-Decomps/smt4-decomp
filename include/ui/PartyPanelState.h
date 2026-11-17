@@ -73,7 +73,7 @@ typedef struct PartyPanelState {
     /* 0x1154 */ u32 value;
     /* 0x1158 */ u32 statusValue;
     /* 0x115C */ void *unite;                         /* the fusion work (a buffer array) */
-    /* 0x1160 */ PlayerInitialRecordIV previewPlayer;
+    /* 0x1160 */ PlayerDataIV previewPlayer;
     /* 0x11EC */ PartyPanelUnitPreview previewUnit;
     /* 0x17F0 */ u8 disabled;
 } PartyPanelState;

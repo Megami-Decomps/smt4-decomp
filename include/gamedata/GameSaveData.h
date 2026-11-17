@@ -8,42 +8,51 @@
 #include "common.h"
 #include "gamedata/GameData.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/PlayerRecordParts.h"
 #include <stddef.h>
 
 /* ---- IV ---- */
 
-/* IV: the player's record (save block + 0x90), returned by gameGetPlayerData(). */
+/* IV: the player's record (save block + 0x90), returned by gameGetPlayerData(). The first 0x4C bytes have
+ * the layout of a unit record's (StatBlock); Apocalypse's record is PlayerDataA (gamedata/GameSaveDataA.h). */
 typedef struct PlayerDataIV {
-    /* 0x00 */ u16 equipment[7];
+    union {
+        /* 0x00 */ u16 equipment[7];
+        /* 0x00 */ PlayerEquipment equipped;
+    };
     struct {
         /* 0x0E */ u16 hp;
         /* 0x10 */ u16 mp;
         /* 0x12 */ s16 stats[5];
-    } baseStats;
-    /* 0x1C */ u16 maxHp;
-    /* 0x1E */ u16 maxMp;
-    /* 0x20 */ u16 stats[5];
-    /* 0x2A */ u16 hp;
-    /* 0x2C */ u16 mp;
+    } baseStats;                   /* without equipment */
+    /* 0x1C */ s16 maxHp;
+    /* 0x1E */ s16 maxMp;
+    /* 0x20 */ s16 stats[5];       /* with equipment */
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
     /* 0x2E */ u8 unk2E[2];
     /* 0x30 */ u32 experience;
-    /* 0x34 */ u16 items[8];        /* carried items; 4 to 8 slots are usable */
-    /* 0x44 */ u8 itemCounts[8];
+    union {
+        /* 0x34 */ u16 skills[8];      /* 4 to 8 slots are usable (flags 0x77-0x7A) */
+        /* 0x34 */ u32 skillWords[4];  /* the same ids, copied as words */
+    };
+    /* 0x44 */ u8 skillRanks[8];
     /* 0x4C */ char name[0x12];
     /* 0x5E */ u8 unk5E[0x14];
-    /* 0x72 */ u16 flags;          /* bit set tested by playerPadTestBit / set by playerPadSetBit */
+    /* 0x72 */ u16 ailments;       /* bit 1: down (0 HP), bit 10: cannot lose HP */
     /* 0x74 */ s16 alignment;      /* clamped to -999..999 */
     /* 0x76 */ u8 level;
     /* 0x77 */ u8 unk77;
-    /* 0x78 */ u16 skills[8];      /* statusGetAvailableChoiceCount() slots are usable */
+    /* 0x78 */ u16 skillChoices[8]; /* ids 0x79F-0x802 picked on the status screen; statusGetAvailableChoiceCount() slots */
     /* 0x88 */ u8 unk88[4];
 } PlayerDataIV;
 
 typedef char PlayerDataOffsetCheck[offsetof(PlayerDataIV, baseStats.stats) == 0x12 &&
-    offsetof(PlayerDataIV, maxHp) == 0x1C && offsetof(PlayerDataIV, hp) == 0x2A &&
-    offsetof(PlayerDataIV, experience) == 0x30 && offsetof(PlayerDataIV, itemCounts) == 0x44 &&
-    offsetof(PlayerDataIV, name) == 0x4C && offsetof(PlayerDataIV, flags) == 0x72 &&
-    offsetof(PlayerDataIV, level) == 0x76 && offsetof(PlayerDataIV, skills) == 0x78 &&
+    offsetof(PlayerDataIV, maxHp) == 0x1C && offsetof(PlayerDataIV, stats) == 0x20 && offsetof(PlayerDataIV, hp) == 0x2A &&
+    offsetof(PlayerDataIV, experience) == 0x30 && offsetof(PlayerDataIV, skills) == 0x34 &&
+    offsetof(PlayerDataIV, skillRanks) == 0x44 && offsetof(PlayerDataIV, name) == 0x4C &&
+    offsetof(PlayerDataIV, ailments) == 0x72 && offsetof(PlayerDataIV, alignment) == 0x74 &&
+    offsetof(PlayerDataIV, level) == 0x76 && offsetof(PlayerDataIV, skillChoices) == 0x78 &&
     sizeof(PlayerDataIV) == 0x8C ? 1 : -1];
 
 /* IV: the slot table inside the save body (save block + 0x8C), returned by gameGetSlotTable(): the

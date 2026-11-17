@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail lays the per-kind availability checks out as a goto web (kind 5 locked check first, kind 3 jumping into the shared FUN_0023dcb8 tail) and keeps menu+0x3000 in r5; the equivalent nested ifs compile to a different block order and register assignment. */
 #include "battle/BattleCommandMenu.h"
 #include "code/Code0029_Smt4.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 BattleCommandEntry *FUN_00292960(u8 index, int primary);
@@ -8,7 +9,6 @@ u32 FUN_00293988(void *scene);
 s32 FUN_0023dcb8(void);
 s32 idOwnerHasActiveObject(void *unit);
 s8 *gameGetSlotTable(void);
-void *gameGetUnitRecord(s32 id);
 s32 objectPartRunUnlessLocked(CommandCounter *counter);
 
 /* Find the command the cursor selects among the available ones and return its menu action code. */

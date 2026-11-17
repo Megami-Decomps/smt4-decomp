@@ -1,4 +1,5 @@
 #include "map/mapTrap.h"
+#include "map/LmapGlobals.h"
 #include "shard/W5_W5Match7_ControllerPose.h"
 
 struct TrapMovementController {
@@ -26,7 +27,7 @@ void mapTrapBeginMoveToScene(void)
 {
     TrapMovementView *trap = (TrapMovementView *)g_mapTrap;
     TrapMovementController *controller = trap->actor->controller;
-    controllerSetDestination(&controller->pose, &g_lmapScene->position);
+    controllerSetDestination(&controller->pose, &g_lmapScene->pose.position);
     modelPlayClip(&controller->pose, 0, 2, 0.0f, 0.0f);
     controller->speed = 6.0f;
     ((TrapMovementView *)g_mapTrap)->state = 1;

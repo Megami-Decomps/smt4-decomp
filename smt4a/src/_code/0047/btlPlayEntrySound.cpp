@@ -1,9 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 void FUN_0015f490(u32 id, u32 sound, s32 enabled, s32 flags, f32 volume);
 
 extern u64 DAT_00573cc0; /* 0x573cc0 */

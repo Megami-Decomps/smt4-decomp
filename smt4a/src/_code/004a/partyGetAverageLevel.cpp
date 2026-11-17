@@ -1,5 +1,6 @@
 #include "shard/Shard0031.h"
 #include "shard/Shard0034.h"
+#include "gamedata/GamePlayerData.h"
 
 /* A party slot's demon record, as far as its level. */
 struct SlotDemonLevel {
@@ -8,7 +9,6 @@ struct SlotDemonLevel {
 };
 
 extern "C" {
-PlayerData *gameGetPlayerData(void);
 PartyStatusSlots *gameGetSlotTable(void);
 SlotDemonLevel *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
@@ -23,7 +23,7 @@ f32 partyGetAverageLevel(s32 group)
     s8 *slots;
 
     if (group == 0 || group == 2 || group == 3) {
-        total = gameGetPlayerData()->unk62;
+        total = gameGetPlayerData()->level;
         count = 1.0f;
     }
     switch (group) {

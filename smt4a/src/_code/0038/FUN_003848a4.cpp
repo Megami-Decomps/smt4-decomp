@@ -10,22 +10,22 @@ void asdSequenceRequest(s32 sequence, const void* argument, u32 size);
 void FUN_003848a4(void)
 {
     s32 sequenceArgument;
-    if (g_gameState.transitionActive != 0) {
-        if ((s32)g_gameState.destinationMap >= 200) {
-            sequenceArgument = g_gameState.destinationMap - 200;
-            g_gameState.sourceArea = 0;
+    if (g_gameState.savedLocationSet != 0) {
+        if ((s32)g_gameState.targetMapId >= 200) {
+            sequenceArgument = g_gameState.targetMapId - 200;
+            g_gameState.savedAreaId = 0;
             asdSequenceRequest(14, &sequenceArgument, sizeof(sequenceArgument));
             return;
         }
-        if ((s32)g_gameState.destinationMap < 100) {
+        if ((s32)g_gameState.targetMapId < 100) {
             asdSequenceRequest(6, NULL, 0);
             return;
         }
-        if ((s32)g_gameState.sourceMap < 100) {
-            g_gameState.sourceMap = g_gameState.destinationMap;
-            g_gameState.sourceArea = g_gameState.destinationArea;
-            g_gameState.sourcePosition = g_gameState.destinationPosition;
-            g_gameState.sourceHeading = g_gameState.destinationHeading;
+        if ((s32)g_gameState.savedMapId < 100) {
+            g_gameState.savedMapId = g_gameState.targetMapId;
+            g_gameState.savedAreaId = g_gameState.targetAreaId;
+            g_gameState.savedPosition = g_gameState.targetPosition;
+            g_gameState.savedHeading = g_gameState.targetHeading;
         }
     } else {
         if (g_mapSelection == -1) {

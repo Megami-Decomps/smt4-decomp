@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 #include "gamedata/DataTable40.h"
 
 struct EntryRecordView {
@@ -8,7 +9,6 @@ struct EntryRecordView {
 
 extern "C" {
 s32 idIsAbove400(s32 id);
-s32 itemGetSortCategory(s32 id);
 s32 itemSortCompareRankThenKey(s32 *left, s32 *right);
 
 // Compare classification and descending record fields, delegating ties.

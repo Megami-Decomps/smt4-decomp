@@ -33,7 +33,7 @@ const MapTransitionRecord *dataTableGetRecord23(u32 index);
 /* Stores the two script-selected map transition records. */
 u32 FUN_0039bd24(void)
 {
-    g_gameState.transitionActive = 1;
+    g_gameState.savedLocationSet = 1;
     g_gameState.unk4CF = 1;
     s32 firstMap = scrGetArg(0);
     u32 firstArea = scrGetArg(1);

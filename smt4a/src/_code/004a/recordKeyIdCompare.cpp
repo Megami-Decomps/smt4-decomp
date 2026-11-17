@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct Record {
 } Record;
 
 Record *dataTableFindType5Record(u32 id);
-s32 itemGetSortCategory(u16 key);
 
 /* Compares two record ids by their records' keys (via itemGetSortCategory), then by id. */
 s32 recordKeyIdCompare(u16 *a, u16 *b)

@@ -4,6 +4,7 @@
 #include "status/StatusCamera.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitRecordAccess.h"
 
 /* The filter menu's per-category id lists, each indexed by entry (entry 0 is "don't specify"). */
 struct FilterMenu {
@@ -33,13 +34,8 @@ struct FilterSettings {
     /* 0x1c */ FilterSelection selection;
 };
 
-struct StockUnit {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 id;
-};
 
 extern "C" {
-StockUnit *gameGetUnitRecord(s32 slot);
 void uiFormatIndexedDisplayName(FilterMenu *menu, s32 kind, s32 index, char *label);
 
 /* Formats the label of entry `entry` of filter kind `kind` into `label` and tells whether it is
@@ -54,7 +50,7 @@ u8 FUN_001b079c(FilterMenu *menu, s32 kind, char *label, s32 entry)
             s32 count = 0;
             for (s32 i = 0; i < 24; i++) {
                 if (gameGetSlotTable()->stock[i] >= 0) {
-                    StockUnit *unit = gameGetUnitRecord(gameGetSlotTable()->stock[i]);
+                    StatBlock *unit = gameGetUnitRecord(gameGetSlotTable()->stock[i]);
                     if (!flagWordTestBit(unit, 10) && !flagWordTestBit(unit, 2)) {
                         if (count == entry - 1) {
                             uiFormatIndexedDisplayName(menu, kind, unit->id, label);
@@ -77,7 +73,7 @@ u8 FUN_001b079c(FilterMenu *menu, s32 kind, char *label, s32 entry)
             s32 count = 0;
             for (s32 i = 0; i < 24; i++) {
                 if (gameGetSlotTable()->stock[i] >= 0) {
-                    StockUnit *unit = gameGetUnitRecord(gameGetSlotTable()->stock[i]);
+                    StatBlock *unit = gameGetUnitRecord(gameGetSlotTable()->stock[i]);
                     if (!flagWordTestBit(unit, 10) && !flagWordTestBit(unit, 2)) {
                         if (count == entry - 1) {
                             uiFormatIndexedDisplayName(menu, kind, unit->id, label);

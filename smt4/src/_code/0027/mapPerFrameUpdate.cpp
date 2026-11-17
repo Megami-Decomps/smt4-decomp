@@ -1,27 +1,14 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-
-typedef struct Vec3 {
-    f32 x;
-    f32 y;
-    f32 z;
-} Vec3;
 
 typedef struct MapMain {
     /* 0x00 */ u8 unk00[0xB8];
     /* 0xB8 */ u8 status;
 } MapMain;
 
-typedef struct LmapScene {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ Vec3 position;
-    /* 0x34 */ u8 unk34[0x1C];
-    /* 0x50 */ f32 unk50;
-} LmapScene;
-
 extern MapMain *g_mapMain;
-extern LmapScene *g_lmapScene;
 
 void mapEplUpdateEntries(void);
 void FUN_002d5374(void);
@@ -33,7 +20,7 @@ u8 FUN_0027052c(void);
 void FUN_001a8cf8(void);
 void FUN_0019dd38(void);
 void mapIfTimerStep(void);
-void mapSelectNearestInteractiveModel(Vec3 position, f32 value);
+void mapSelectNearestInteractiveModel(MapVector position, f32 heading);
 void FUN_00274798(void);
 void FUN_0027522c(void);
 void FUN_00274fac(void);
@@ -63,7 +50,7 @@ void mapPerFrameUpdate(void)
     FUN_001a8cf8();
     FUN_0019dd38();
     mapIfTimerStep();
-    mapSelectNearestInteractiveModel(g_lmapScene->position, g_lmapScene->unk50);
+    mapSelectNearestInteractiveModel(g_lmapScene->pose.targetPosition, g_lmapScene->pose.targetHeading);
     FUN_00274798();
     FUN_0027522c();
     FUN_00274fac();

@@ -1,31 +1,25 @@
 /* NON_MATCHING: the placement and show/hide tail match; in the camera-distance test retail reloads `flags` after the square root (the build keeps it in r1) and allocates the deltas to s1/s2/s0, and the rise step's float registers differ. */
 #include "classes/Obj42233c.h"
+#include "map/LmapGlobals.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "game/GameState.h"
 
-/* The part of the local map scene read here: the camera's position. */
-struct LmapSceneCamera {
-    /* 0x00 */ u8 unk00[0x1c];
-    /* 0x1C */ MapVector position;
-};
-
 extern "C" {
-extern LmapSceneCamera *g_lmapScene;
 f32 sqrtf(f32 value);
 void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
 void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 }
 
-/* Starts sinking once the camera is more than 300 units away, raises the model back by 50 a frame
+/* Starts sinking once the player is more than 300 units away, raises the model back by 50 a frame
  * until it is level again, then places the model and shows or hides it with the map range. */
 void Obj42233c::stop()
 {
     if ((flags & 4) != 0) {
-        f32 dx = basePosition[0] - g_lmapScene->position.x;
-        f32 dy = basePosition[1] - g_lmapScene->position.y;
-        f32 dz = basePosition[2] - g_lmapScene->position.z;
+        f32 dx = basePosition[0] - g_lmapScene->pose.position.x;
+        f32 dy = basePosition[1] - g_lmapScene->pose.position.y;
+        f32 dz = basePosition[2] - g_lmapScene->pose.position.z;
         if (sqrtf(dx * dx + dy * dy + dz * dz) > 300.0f) {
             flags = (flags & ~4) | 1;
         }

@@ -1,6 +1,7 @@
 #include "gamedata/PlayerInitialization.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/PlayerInitialization.h"
 
 extern "C" {
 void playerRecalcStatsFromEquipment(s32 mode);
@@ -81,10 +82,10 @@ void FUN_003c1ef4(void)
         /* 0x30 */ u32 experience;
     };
     typedef char PlayerExperienceOffsetCheck[offsetof(PlayerExperienceView, experience) == 0x30 ? 1 : -1];
-    PlayerInitialRecordIV *player = reinterpret_cast<PlayerInitialRecordIV *>(gameGetPlayerData());
-    player->enabled = 1;
+    PlayerDataIV *player = gameGetPlayerData();
+    player->level = 1;
     ((PlayerExperienceView *)player)->experience = 0;
-    player->advancement.points = 0;
+    player->ailments = 0;
     void *table = dataTableGet(9, 0);
     dataTableGetCount(table);
     const PlayerInitialGrowthIV *initial = (const PlayerInitialGrowthIV *)dataTableGetEntries(table);
@@ -94,10 +95,10 @@ void FUN_003c1ef4(void)
     Table09Info info;
     FUN_003c1e50(&info);
     // The base HP and MP words (0x0E, 0x10) are the growth output pair.
-    FUN_003c1ab4(player->enabled, reinterpret_cast<GrowthValues *>(&player->baseStats),
+    FUN_003c1ab4(player->level, reinterpret_cast<GrowthValues *>(&player->baseStats),
                  reinterpret_cast<const GrowthParameters *>(&info));
     playerRecalcStatsFromEquipment(0);
-    player->hp = player->maximumHp;
-    player->mp = player->maximumMp;
+    player->hp = player->maxHp;
+    player->mp = player->maxMp;
 }
 }

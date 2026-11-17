@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "quest_center/QuestRecord.h"
 #include "quest_center/QuestRuntime.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -55,7 +56,6 @@ u32 asdTextCreate(u32 options);
 void placeWinCreate(void);
 void messageStatesSetFirst(s32 state);
 void qcMainSetMode(s32 mode);
-const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 id);
 s32 questReadRuntimeFlag(u32 id, u32 flag);
 void FUN_0028eeb8(u32 id);
 
@@ -101,7 +101,7 @@ void FUN_00381b8c(QuestCenterScreenStateIV *work)
     messageStatesSetFirst(0);
     qcMainSetMode(0);
     for (u16 id = 350; id < 400; ++id) {
-        const QuestRuntimeDefinition *record = dataTable1bOr1cGetRecord(id);
+        const QuestRecord *record = dataTable1bOr1cGetRecord(id);
         if (record != NULL && record->kind == 0 && !questReadRuntimeFlag(id, 1))
             FUN_0028eeb8(id);
     }

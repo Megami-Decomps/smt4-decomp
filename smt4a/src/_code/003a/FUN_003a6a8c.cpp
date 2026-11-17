@@ -1,49 +1,27 @@
+#include "ui/MessageMainA.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
-
-struct CounterPanel {
-    u8 unk000[0x150];             // 0x000
-    u32 mode;                     // 0x150
-    u8 active;                    // 0x154
-    u8 unk155[3];                 // 0x155
-    u32 state;                    // 0x158
-    u16 count;                    // 0x15C
-    u16 displayCount;             // 0x15E
-    f32 countValue;               // 0x160
-    u8 unk164[0x30];              // 0x164
-    u8 spriteSource[0xB9C];       // 0x194
-    SpritePlaybackView sprite;    // 0xD30
-};
-
-/* The message system's windows; the counter panel is the second window. */
-struct MessageMainView {
-    u32 unk00;                    // 0x00
-    void *main;                   // 0x04
-    CounterPanel *panel;          // 0x08
-};
 
 extern "C" {
 
-extern MessageMainView g_messageMain;
 u16 gameDataBlocksGetCounter(void);
-void uiSpriteStateInitFromSource(SpritePlaybackView *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
-void pairSetFirstResetSecond(SpritePlaybackView *sprite, s32 value);
-void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 group);
+void uiSpriteStateInitFromSource(void *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
+void pairSetFirstResetSecond(void *sprite, s32 value);
 
 /* Script command: opens the counter panel in mode 10 with the current counter value and starts its sprite animation. */
 u32 FUN_003a6a8c(void)
 {
-    CounterPanel *panel = g_messageMain.panel;
+    MessageWindowA *banner = g_messageMain.banner;
 
-    panel->mode = 10;
-    panel->state = 1;
+    banner->panelMode = 10;
+    banner->panelStep = 1;
     u16 counter = gameDataBlocksGetCounter();
-    panel->count = counter;
-    panel->displayCount = counter;
-    panel->countValue = (f32)counter;
-    panel->active = 1;
-    uiSpriteStateInitFromSource(&panel->sprite, 8, 0xFFFFFFFF, panel->spriteSource, 11, 1.0f);
-    pairSetFirstResetSecond(&panel->sprite, 0x11);
-    uiSpriteSelectAnim(&panel->sprite, 6);
+    banner->panelCount = counter;
+    banner->panelDisplayCount = counter;
+    banner->panelCountValue = (f32)counter;
+    banner->panelState = 1;
+    uiSpriteStateInitFromSource(&banner->sprites[21], 8, 0xFFFFFFFF, &banner->parameters, 11, 1.0f);
+    pairSetFirstResetSecond(&banner->sprites[21], 0x11);
+    uiSpriteSelectAnim(&banner->sprites[21], 6);
     return 1;
 }
 

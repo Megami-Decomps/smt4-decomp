@@ -52,9 +52,9 @@ void mapSelectRoomMusic(void)
         g_gameState.defaultKind = roomId;
         g_gameState.selectedKind = roomId;
     }
-    if (g_gameState.textActive != 0 || g_gameState.musicInitialized == 0 || map->silent != 0) {
+    if (g_gameState.scriptPending != 0 || g_gameState.bgmReleased == 0 || map->silent != 0) {
         bgmReleaseStopped();
-        g_gameState.musicInitialized = 1;
+        g_gameState.bgmReleased = 1;
         return;
     }
     if (FUN_002b950c() == 0) {

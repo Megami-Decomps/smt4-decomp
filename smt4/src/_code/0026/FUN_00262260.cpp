@@ -1,13 +1,12 @@
 /* NON_MATCHING: retail zero-initialises rankAdjustment/extra/skills straight from r8 (mov r8,#0) and orders the cost-pool load after vmov; build uses a temp zero register; 107 vs 108 instructions. */
 #include "shard/PassiveSkill.h"
-#include "shard/PadState.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/GamePlayerData.h"
 namespace {
 struct CostSkills { union { UnitSummarySkills main; u16 ids[9]; }; };
 }
 extern "C" {
 extern const f32 DAT_00446d30[];
-PadState *gameGetPlayerData();
 StatBlock *gameGetUnitRecord(s32 unit);
 void FUN_00283f30(CostSkills *skills, s32 includeSource);
 u32 playerGetSkillRank(u16 skill);
@@ -22,7 +21,6 @@ u32 FUN_00262260(const ActiveSkillRecord *skill, u32 baseValue, s32 unitIndex)
     struct SkillCostView { u8 prefix[0x36]; u16 fixed; u8 unk38[0xb]; u8 percent; };
     // These halfwords lie in byte padding in the persistent record views.
     struct UnitParameterView { u8 prefix[0x16]; s16 value; };
-    struct PlayerParameterView { u8 prefix[0x24]; s16 value; };
     typedef char SkillCostOffsets[offsetof(SkillCostView, fixed) == 0x36 && offsetof(SkillCostView, percent) == 0x43 ? 1 : -1];
     const SkillCostView *cost = reinterpret_cast<const SkillCostView *>(skill);
     if (!(cost->fixed & 0xfff) && !cost->percent)
@@ -33,7 +31,7 @@ u32 FUN_00262260(const ActiveSkillRecord *skill, u32 baseValue, s32 unitIndex)
     s32 passiveBonuses = 0;
     s32 unitParameter;
     if (unitIndex < 0) {
-        unitParameter = reinterpret_cast<PlayerParameterView *>(gameGetPlayerData())->value;
+        unitParameter = gameGetPlayerData()->stats[2];
         FUN_00283f30(&skills, 1);
         rankAdjustment = FUN_00283ebc(skill, playerGetSkillRank(skill->cost.costParameter), 2);
     } else {

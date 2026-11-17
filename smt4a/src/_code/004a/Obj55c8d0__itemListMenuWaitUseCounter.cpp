@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "classes/Obj55c8d0.h"
 #include "ui/ItemListSelection.h"
 
@@ -21,15 +22,9 @@ typedef struct ItemListMenu {
     /* 0x864 */ ItemListEntry entries[1];
 } ItemListMenu;
 
-typedef struct ItemRecord {
-    /* 0x00 */ u8 unk00[0xB3];
-    /* 0xB3 */ u8 flags;
-} ItemRecord;
-
 s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 flaggedValueHolderGetTotal(void *cursor);
-ItemRecord *devilGetRecord(u16 itemId);
 void sysPlaySe(s32 se);
 void gameGlobalsSetMenuOpenFlag(s32 value);
 s32 useCounterGetCurrentValue(void);
@@ -46,9 +41,9 @@ void Obj55c8d0::itemListMenuWaitUseCounter()
             sysPlaySe(0x48);
         } else if (menu->mode == 0) {
             ItemListEntry *entries = menu->entries;
-            ItemRecord *item = devilGetRecord(entries[flaggedValueHolderGetTotal(menu->cursor)].itemId);
+            DevilRecordA *item = devilGetRecord(entries[flaggedValueHolderGetTotal(menu->cursor)].itemId);
 
-            sysPlaySe((item->flags & 2) ? 0x121 : 0x30);
+            sysPlaySe((item->extraFlags & 2) ? 0x121 : 0x30);
         } else {
             sysPlaySe(0x48);
         }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail duplicates the modulo/index/draw tail in both pulse arms and divides by a loaded 5.0 (vdiv); ours merges the arms and folds the division to a multiply by 0.2 (133 rows against 151). */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 /* A battle UI icon strip (observed fields). */
 struct BtlIconStrip {
@@ -19,9 +20,7 @@ struct Vector2 {
 };
 
 extern "C" {
-
 extern void *g_btlUiBlock;
-extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);

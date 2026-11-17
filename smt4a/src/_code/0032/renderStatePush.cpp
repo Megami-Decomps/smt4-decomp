@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 /* The context's seven render-state stacks as one array (D, E, F, A, C, G, B; see renderStackPushIndexed). */
 struct RenderStateBankA {
@@ -14,8 +15,6 @@ static __inline void renderCtxPushIndexed(RenderStateBankA *context, s32 index, 
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 /* Pushes a render state on the draw context's last stack (B); when it changes (or the stack is dirty) the new state is applied. */
 void renderStatePush(s32 state)
 {

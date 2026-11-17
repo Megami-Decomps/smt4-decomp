@@ -1,5 +1,6 @@
 /* NON_MATCHING: packed-color swaps become REV rather than retail shifts, and zero-depth/VFP scheduling differs; CPU5TE/O2 candidates. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 namespace {
 struct DrawOffset {
@@ -15,7 +16,6 @@ inline u32 swapColorBytes(u32 color)
 }
 
 extern "C" {
-extern RenderCtxA* g_renderCtx;
 extern DrawOffset g_uiDrawOffset;
 u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void gxSubmitDrawZeroExtraParams(u32 first, u32 second, u32 third, u32 fourth,

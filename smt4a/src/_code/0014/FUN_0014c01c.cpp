@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014c01c` (_code @ 0x14c01c, 0x2168 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "ui/MessageMainA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -50,7 +51,6 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern signed char g_messageMain; /* 0x57f588 */
 extern int DAT_0057f58c; /* 0x57f58c */
 extern int DAT_0057f590; /* 0x57f590 */
 extern int DAT_005e2040; /* 0x5e2040 */
@@ -109,7 +109,6 @@ extern int msgBoxIsState2(unsigned int);
 extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
 /* Supplied declaration required: __aeabi_idivmod. */
-
 
 unsigned int FUN_0014c01c(void)
 
@@ -1348,7 +1347,7 @@ LAB_0014dec8:
     }
     else {
       temp_v8 = ifTouchGetButtonHelpValue();
-      if ((temp_v8 != 0x53) && (g_messageMain != '\0')) {
+      if ((temp_v8 != 0x53) && (g_messageMain.enabled != 0)) {
         temp_v8 = 7;
         padQueryLogicalKey(7,2);
         if (temp_v8 != 0) {

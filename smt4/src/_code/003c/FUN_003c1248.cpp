@@ -4,6 +4,7 @@
 #include "battle/btlAction.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/Table00Lookup.h"
+#include "gamedata/UnitRecordAccess.h"
 struct BtlUi;
 struct BtlEntry;
 /* Queued IDs and entry slots are outside the short shared prefixes. */
@@ -21,10 +22,9 @@ extern "C" {
 extern BtlUi *g_btlUiBlock;
 void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const Table00Record *definition);
 PartyDamageSlotsIV *gameGetSlotTable(void);
-PartyDamageUnitIV *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(const void *owner, u32 bit);
 void objectFlagsClear(void *owner, u32 flags);
-void btlSummaryInitializeSavedDemon(BtlMainState *battle, BtlUnitData *data, PartyDamageUnitIV *unit, s32 slot);
+void btlSummaryInitializeSavedDemon(BtlMainState *battle, BtlUnitData *data, StatBlock *unit, s32 slot);
 BtlEntry *FUN_002561d8(BtlMainState *battle, s32 index, u32 mode);
 void btlQueueKeyedScalarReflectAction(s32 first, s32 second, u32 event, s32 fourth, s32 fifth, s32 sixth, s32 seventh);
 void FUN_003ae2d0(BtlUi *ui, s32 slot, s32 partySlot, s32 immediate);
@@ -36,9 +36,9 @@ void FUN_003c1248(s32 kind, s32 source, s32 target, s32 animate)
     BattleSummaryBuffer summary;
     if (!kind) {
         PartyDamageSlotsIV *party = gameGetSlotTable();
-        PartyDamageUnitIV *unit = gameGetUnitRecord(party->stock[source]);
+        StatBlock *unit = gameGetUnitRecord(party->stock[source]);
         if (flagWordTestBit(unit, 1)) {
-            unit->currentHp = unit->maximumHp;
+            unit->hp = unit->maxHp;
             objectFlagsClear(unit, 2);
         }
         btlSummaryInitializeSavedDemon(battle, &summary.view.data, unit, static_cast<s16>(source));

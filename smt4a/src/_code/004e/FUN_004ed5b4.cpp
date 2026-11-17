@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ed5b4` (_code @ 0x4ed5b4, 0xfb4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -93,7 +94,6 @@ extern unsigned int DAT_00571298; /* 0x571298 */
 extern unsigned int DAT_0057129c; /* 0x57129c */
 extern unsigned int DAT_005712b8; /* 0x5712b8 */
 extern unsigned int DAT_005712bc; /* 0x5712bc */
-extern int g_btlCamera; /* 0x571508 */
 extern unsigned int g_btlAux; /* 0x573808 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
@@ -304,7 +304,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
   else {
     switch(param_2[0xc]) {
     default:
-      temp_v19 = FUN_004f2708(g_btlCamera,temp_v19,1);
+      temp_v19 = FUN_004f2708(reinterpret_cast<int>(g_btlCamera),temp_v19,1);
       if (temp_v19 != 0) {
         temp_v15 = 0xffffffff;
         temp_v12 = *(short *)(*param_1 + 0x2004);
@@ -320,11 +320,11 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         else if (temp_v12 == 3) {
           temp_v15 = 4;
         }
-        *(unsigned int *)(g_btlCamera + 0x7cc) = temp_v15;
+        *(unsigned int *)(reinterpret_cast<int>(g_btlCamera) + 0x7cc) = temp_v15;
       }
-      if (((*(int *)(g_btlCamera + 0x7cc) != (int)*(short *)(*param_1 + 0x2004)) &&
-          (-1 < *(int *)(g_btlCamera + 0x7cc))) &&
-         (temp_v19 = FUN_004f2708(g_btlCamera,*param_1,1), temp_v19 != 0)) {
+      if (((*(int *)(reinterpret_cast<int>(g_btlCamera) + 0x7cc) != (int)*(short *)(*param_1 + 0x2004)) &&
+          (-1 < *(int *)(reinterpret_cast<int>(g_btlCamera) + 0x7cc))) &&
+         (temp_v19 = FUN_004f2708(reinterpret_cast<int>(g_btlCamera),*param_1,1), temp_v19 != 0)) {
         btlQueueDuplicateSuppressedAction(0,param_2);
       }
       temp_v27[0] = 1;

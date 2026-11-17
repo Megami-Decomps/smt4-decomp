@@ -3,6 +3,7 @@
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
 /* A list box widget: only used through its address. */
@@ -35,13 +36,6 @@ struct PartyMenu {
     /* 0x3480 */ u16 usable[60];          /* the usable ids */
 };
 
-/* The player record: two ids at +2 and +4. */
-struct PlayerData {
-    u8 unk00[2];
-    u16 first;
-    u16 second;
-};
-
 /* A unit record of the slot table. */
 struct UnitRecord;
 }
@@ -57,7 +51,6 @@ u32 FUN_003bf1e4(void);
 void FUN_0028e9ec(PartyMenu *menu);
 void partyCaptureEligibleSkills(PartyMenu *menu);
 s32 gameFlagIsSet(u32 flag);
-PlayerData *gameGetPlayerData(void);
 void gridNavigationConfigure(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d);
 void scrollListSetSelectionMarkChanged(ListBox *box, s32 value);
 s32 flagValueIsPositive(u32 id);
@@ -74,8 +67,8 @@ s32 FUN_0023dcb8(void);
 static s32 captureEntryAvailable(void)
 {
     if (gameFlagIsSet(0x410) != 0) {
-        PlayerData *player = gameGetPlayerData();
-        return player->first != 0 && player->second != 0;
+        PlayerDataIV *player = gameGetPlayerData();
+        return player->equipped.gun != 0 && player->equipped.bullets != 0;
     }
     return 0;
 }

@@ -4,6 +4,7 @@
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <math.h>
 #include "code/Code002c.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct BattleDistanceReference {
@@ -13,7 +14,6 @@ struct BattleDistanceReference {
 }
 extern "C" {
 void idSetFindSubjectIndex(BtlMainState *, BtlActionRecord *);
-void btlFindEntryBlockByMemberId(BtlMainState *, s32 index);
 BattleVector3 FUN_0024d434(BtlMainState *, s32 index, s32 mode);
 
 static __inline f32 vectorLength(f32 x, f32 y, f32 z)

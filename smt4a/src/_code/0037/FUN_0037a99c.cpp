@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail parks the tint in d8-d9 and the extra value in s20 from entry, and reloads g_renderCtx around the slot store; armcc keeps them in argument registers. */
-#include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 
 /* An RGBA color; a new one starts out opaque white. */
@@ -9,16 +10,8 @@ struct RenderColor {
     RenderColor() : r(1.0f), g(1.0f), b(1.0f), a(1.0f) {}
 };
 
-/* The graphics presets block, as far as its active-preset pointer. */
-struct GxPresetCurrent {
-    /* 0x000 */ u8 unk000[0x16C];
-    /* 0x16C */ const void *current;
-};
-
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-extern GxPresetCurrent g_asdGxPresets;
-extern u8 g_asdGxSecondaryPreset;
+extern AsdGxDisplayBuffers g_asdGxSecondaryPreset; /* g_asdGxPresets.displays[1] */
 
 void renderCtxResetFrameState(RenderCtxA *context);
 void FUN_004097b4(RenderCtxA *context, RenderColor *color, u32 arg0, u32 arg1, f32 value);
@@ -31,9 +24,9 @@ void FUN_0037a99c(u32 arg0, u32 arg1, RenderColor tint, f32 value)
     s32 slot;
 
     color = tint;
-    if (g_asdGxPresets.current == &g_asdGxPresets) {
+    if (g_asdGxPresets.selectedDisplay == &g_asdGxPresets.displays[0]) {
         slot = 0;
-    } else if (g_asdGxPresets.current == &g_asdGxSecondaryPreset) {
+    } else if (g_asdGxPresets.selectedDisplay == &g_asdGxSecondaryPreset) {
         slot = 1;
     } else {
         slot = 2;

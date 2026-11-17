@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/S1Mover.h"
+#include "battle/BtlGlobals.h"
 struct BtlMainStateA;
 
 extern "C" {
@@ -11,7 +12,6 @@ int FUN_001aff14(float *, int);
 int FUN_003e7fa4(...);
 int btlScriptUnitHasFlags(void);
 Vec3f FUN_003ecab8(BtlMainStateA *, s32 index, s32 forceAttachment);
-int btlMainFindEntryByListedId(unsigned int *, unsigned int);
 int FUN_0043ba3c(...);
 
 /* stack frame of param_4: 30 slot(s), 120 byte(s) */
@@ -47,8 +47,6 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
     unsigned int spBC; /* 0xbc: local_bc */
 } param_4_stack;
-
-extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573810; /* 0x573810 */
 extern unsigned int DAT_00573814; /* 0x573814 */
 extern unsigned int DAT_00573818; /* 0x573818 */
@@ -118,7 +116,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 2:
     puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(puVar2,param_3);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar2), param_3);
     if (puVar2 == (unsigned int *)0x0) {
       return;
     }
@@ -139,7 +137,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 5:
     puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(puVar2,param_4);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar2), param_4);
     if (puVar2 == (unsigned int *)0x0) {
       return;
     }
@@ -163,10 +161,10 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 6:
-    temp_v4 = *(float *)(g_btlCamera + 0x598);
-    temp_v5 = *(float *)(g_btlCamera + 0x59c);
-    temp_v2 = *(float *)(g_btlCamera + 0x5a0);
-    if (*(int *)(g_btlCamera + 0x10) != 0x3727c5ac) {
+    temp_v4 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x598);
+    temp_v5 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x59c);
+    temp_v2 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x5a0);
+    if (*(int *)(reinterpret_cast<int>(g_btlCamera) + 0x10) != 0x3727c5ac) {
       FUN_001aff14(&temp_v9,1);
       temp_v8 = temp_v15 * temp_v4 + temp_v16 * temp_v5 + temp_v17 * temp_v2;
       temp_v6 = temp_v9 * temp_v4 + temp_v10 * temp_v5 + temp_v11 * temp_v2;
@@ -175,10 +173,10 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 8:
-    temp_v4 = *(float *)(g_btlCamera + 0x598);
-    temp_v5 = *(float *)(g_btlCamera + 0x59c);
-    temp_v2 = *(float *)(g_btlCamera + 0x5a0);
-    if (*(int *)(g_btlCamera + 0x10) != 0x3727c5ac) {
+    temp_v4 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x598);
+    temp_v5 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x59c);
+    temp_v2 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x5a0);
+    if (*(int *)(reinterpret_cast<int>(g_btlCamera) + 0x10) != 0x3727c5ac) {
       FUN_001aff14(&temp_v18,1);
       temp_v6 = temp_v18 * temp_v4 + temp_v19 * temp_v5 + temp_v20 * temp_v2;
       temp_v7 = temp_v21 * temp_v4 + temp_v22 * temp_v5 + temp_v23 * temp_v2;
@@ -187,10 +185,10 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 9:
-    temp_v4 = *(float *)(g_btlCamera + 0x598);
-    temp_v5 = *(float *)(g_btlCamera + 0x59c);
-    temp_v2 = *(float *)(g_btlCamera + 0x5a0);
-    if (*(int *)(g_btlCamera + 0x10) != 0x3727c5ac) {
+    temp_v4 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x598);
+    temp_v5 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x59c);
+    temp_v2 = *(float *)(reinterpret_cast<int>(g_btlCamera) + 0x5a0);
+    if (*(int *)(reinterpret_cast<int>(g_btlCamera) + 0x10) != 0x3727c5ac) {
       FUN_001aff14(&temp_v27,1);
       temp_v6 = temp_v27 * temp_v4 + temp_v28 * temp_v5 + temp_v29 * temp_v2;
       temp_v7 = temp_v30 * temp_v4 + temp_v31 * temp_v5 + temp_v32 * temp_v2;

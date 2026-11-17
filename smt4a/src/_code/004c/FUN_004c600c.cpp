@@ -1,6 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct OpposingCandidateMasks {
     u64 required;
@@ -11,7 +12,6 @@ typedef char OpposingCandidateMasksOffsetCheck[offsetof(OpposingCandidateMasks, 
 
 extern "C" {
 extern OpposingCandidateMasks DAT_005713f0;
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 selection);
 
 s32 FUN_004c600c(s32 selection)
 {

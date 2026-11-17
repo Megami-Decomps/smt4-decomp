@@ -1,17 +1,7 @@
 #include "common.h"
-
-struct PlayerStats {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s16 stat0;
-    /* 0x22 */ s16 stat1;
-    /* 0x24 */ s16 stat2;
-    /* 0x26 */ s16 stat3;
-    /* 0x28 */ s16 stat4;
-};
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-PlayerStats *gameGetPlayerData(void);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 
@@ -20,19 +10,19 @@ u32 FUN_003808c0(void)
 {
     switch (scrGetArg(0)) {
     case 0:
-        scrSetResult(gameGetPlayerData()->stat0);
+        scrSetResult(gameGetPlayerData()->stats[0]);
         break;
     case 1:
-        scrSetResult(gameGetPlayerData()->stat1);
+        scrSetResult(gameGetPlayerData()->stats[1]);
         break;
     case 2:
-        scrSetResult(gameGetPlayerData()->stat2);
+        scrSetResult(gameGetPlayerData()->stats[2]);
         break;
     case 3:
-        scrSetResult(gameGetPlayerData()->stat3);
+        scrSetResult(gameGetPlayerData()->stats[3]);
         break;
     case 4:
-        scrSetResult(gameGetPlayerData()->stat4);
+        scrSetResult(gameGetPlayerData()->stats[4]);
         break;
     }
     return 1;

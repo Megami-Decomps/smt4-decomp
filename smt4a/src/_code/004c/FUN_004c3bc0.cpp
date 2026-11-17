@@ -1,13 +1,13 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleValueShareMasks {
     u8 unk00[0x38];
     u64 enabled;
 };
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
 void dataTable41FindById(u32);
 extern BattleValueShareMasks DAT_005713f0;

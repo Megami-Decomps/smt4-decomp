@@ -1,16 +1,8 @@
 /* NON_MATCHING: growth parameters initialize with byte/halfword stores rather than retail's packed-register construction and spill layout. */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "gamedata/GameDataAccess.h"
 
-struct DemonGrowthRecord {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u8 race, level;
-    /* 0x04 */ u8 unk04[0x10];
-    /* 0x14 */ u16 baseHp, baseMp;
-    /* 0x18 */ u8 hpGrowth, mpGrowth;
-    /* 0x1A */ u8 unk1a[0xa];
-    /* 0x24 */ u8 weights[5];
-};
 struct LevelGrowthParameters {
     /* 0x00 */ u8 weights[5];
     /* 0x05 */ u8 reserved;
@@ -34,7 +26,6 @@ typedef char LevelGrowthParametersSizeCheck[sizeof(LevelGrowthParameters) == 0x1
 typedef char DemonLevelWorkSizeCheck[sizeof(DemonLevelWork) == 0x4a ? 1 : -1];
 
 extern "C" {
-DemonGrowthRecord *devilGetRecord(u16 id);
 u32 FUN_003c219c(DemonLevelWork *work, LevelGrowthParameters *parameters, u32 flags);
 s32 FUN_00245768(u32 id);
 void FUN_0024571c(u32 id, s32 value);
@@ -54,9 +45,9 @@ extern "C" void demonApplyLevelGrowth(DemonLevelWork *work, s32 levels)
     if (levels <= 0)
         return;
 
-    DemonGrowthRecord *record = devilGetRecord(work->id);
+    DevilRecord *record = devilGetRecord(work->id);
     LevelGrowthParameters parameters = {
-        {record->weights[0], record->weights[1], record->weights[2], record->weights[3], record->weights[4]},
+        {record->statGrowth[0], record->statGrowth[1], record->statGrowth[2], record->statGrowth[3], record->statGrowth[4]},
         0, record->baseHp, record->baseMp, record->hpGrowth, record->mpGrowth, 0, 0
     };
     s32 hp = record->baseHp + record->level * record->hpGrowth;

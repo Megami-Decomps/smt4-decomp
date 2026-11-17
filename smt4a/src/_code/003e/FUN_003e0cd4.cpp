@@ -1,6 +1,7 @@
 /* NON_MATCHING: 176 rows against 176; the side masks are read once into locals and the loops count 50 entries from slot 4 (retail's `add r9, r0, #50` bound); remaining: retail spills the masks into a 60-byte frame (one more u64 value is live across the loops) and loads the side flags with ldm rather than ldrd. */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
+#include "battle/BtlGlobals.h"
 
 // Per-combatant record of the battle sides list (0x408 bytes each).
 struct BattleSideEntry {
@@ -31,7 +32,6 @@ struct BattleState {
 extern "C" {
 
 extern u32 g_btlActionReflect;
-extern s32 g_btlCamera;
 extern u32 g_btlAux;
 
 /* The encounter block at g_btlEncount (0x573828): the side masks sit at fixed offsets in it. */
@@ -83,22 +83,22 @@ u32 FUN_003e0cd4(u32* action, BattleState* state)
             }
         }
         action[3] |= 4;
-        if (FUN_004f2708(g_btlCamera, state, 1) != 0) {
+        if (FUN_004f2708(reinterpret_cast<s32>(g_btlCamera), state, 1) != 0) {
             u32 mode = 0xffffffff;
             if (state->phase == 0) mode = 1;
             else if (state->phase == 1) mode = 2;
             else if (state->phase == 2) mode = 3;
             else if (state->phase == 3) mode = 4;
-            *reinterpret_cast<u32*>(g_btlCamera + 0x7cc) = mode;
+            *reinterpret_cast<u32*>(reinterpret_cast<s32>(g_btlCamera) + 0x7cc) = mode;
         }
         action[4] = 0;
         action[0] = 0x1a;
         action[3] = 0;
         if (chainCountIdUnflagged(g_btlActionReflect, action) <= 0 && recordAreAllCountsNonpositive(g_btlAux) != 0 &&
-            eventCommandRangeCheck(g_btlCamera) != 0 &&
-            (*reinterpret_cast<u32*>(g_btlCamera + 0x64c) & 0x80000) == 0) {
+            eventCommandRangeCheck(reinterpret_cast<s32>(g_btlCamera)) != 0 &&
+            (*reinterpret_cast<u32*>(reinterpret_cast<s32>(g_btlCamera) + 0x64c) & 0x80000) == 0) {
             stateFinishIfPresent(state);
-            *reinterpret_cast<u32*>(g_btlCamera + 0x64c) &= 0xffffbfff;
+            *reinterpret_cast<u32*>(reinterpret_cast<s32>(g_btlCamera) + 0x64c) &= 0xffffbfff;
             eventCommandClearPending();
             return 0xffffffff;
         }

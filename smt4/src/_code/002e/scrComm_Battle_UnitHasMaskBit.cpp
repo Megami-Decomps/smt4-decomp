@@ -14,7 +14,7 @@ s32 scrComm_Battle_UnitHasMaskBit(void)
     u32 bit = scrGetArg(0);
     BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlUnitData *data = unit->data;
-    scrSetResult((data->unk0FA & (1 << bit)) != 0);
+    scrSetResult((data->statusFlags & (1 << bit)) != 0);
     return 1;
 }
 

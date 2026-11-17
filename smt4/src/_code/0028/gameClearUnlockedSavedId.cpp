@@ -10,8 +10,8 @@ void gameClearUnlockedSavedId(u32 id)
     PlayerDataIV *player = &g_gameDataBlocks.saveBlock->body.slots.player;
     s32 count = statusGetAvailableChoiceCount();
     for (s32 index = 0; index < count; ++index) {
-        if (player->skills[index] == id) {
-            player->skills[index] = 0;
+        if (player->skillChoices[index] == id) {
+            player->skillChoices[index] = 0;
             return;
         }
     }

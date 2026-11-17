@@ -1,9 +1,10 @@
 /* NON_MATCHING: close: retail loads the target position as x then a y/z vldmia pair and moves r0/-1 after the prologue vpush; built groups the VFP loads differently and uses r0 rather than r1 for the list counters */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include <math.h>
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "shard/SaveWork.h"
 #include "game/GameState.h"
+#include "gamedata/GamePlayerData.h"
 
 /* An interactable of the field map: the talk list owns up to 32 of them. */
 class TalkTarget {
@@ -42,10 +43,6 @@ struct TalkMapBlock {
     /* 0x024 */ u8 unk024[0xD9C];
     /* 0xDC0 */ s32 talkEnabled;
 };
-struct TalkPlayerData {
-    /* 0x00 */ u8 unk00[0x76];
-    /* 0x76 */ u8 level;
-};
 
 /* Straight-line distance between two map positions. */
 static __inline f32 mapVectorDistance(const MapVector &a, const MapVector &b)
@@ -58,12 +55,9 @@ static __inline f32 mapVectorDistance(const MapVector &a, const MapVector &b)
 }
 
 extern "C" {
-
-TalkPlayerData *gameGetPlayerData(void);
 void FUN_0027d8b4(u16 value);
 void sequenceRequestDefer(s32 id, s32 argument);
 void textFormatBuffer(char *buffer, const char *format, ...);
-extern LmapScene *g_lmapScene;
 
 /* Picks the nearest interactable within 150 units of the camera, runs its talk or event action and
  * removes it from the list. Returns the id of the last one handled, or -1. */
@@ -71,7 +65,7 @@ s32 FUN_00396370(TalkTargetList *list)
 {
     s32 result = -1;
     TalkMapBlock *map = reinterpret_cast<TalkMapBlock *>(gameGetMapBlock());
-    TalkPlayerData *player = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
     s32 nearest = 999999;
     s32 i;
 
@@ -80,7 +74,7 @@ s32 FUN_00396370(TalkTargetList *list)
         s32 distance;
 
         if (target != NULL && (target->flags & 1) != 0 && (target->flags & 4) == 0) {
-            distance = (s32)mapVectorDistance(target->position, *(const MapVector *)g_lmapScene->transform.position);
+            distance = (s32)mapVectorDistance(target->position, g_lmapScene->pose.position);
             if (distance < 150 && distance < nearest) {
                 g_gameState.event.encounterApproach = 0;
                 nearest = distance;

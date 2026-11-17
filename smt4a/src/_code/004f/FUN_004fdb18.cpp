@@ -4,11 +4,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-
-extern "C" {
-
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, s32);
-}
+#include "battle/BtlGlobals.h"
 
 extern "C" u32 FUN_004fdb18(s32 actor, u32 options, BattleRosterRecordA *target,
                              u32 parameter, s32 checkStatus)

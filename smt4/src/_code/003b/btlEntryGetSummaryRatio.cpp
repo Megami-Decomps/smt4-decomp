@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "battle/BattleEntrySummary.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, u32 listedId);
 void btlEntryBuildSummary(BattleEntrySummary* summary, BtlMainState* state, const BtlEntry* entry);
 
 // Return the selected entry's summary percentage as a unit-scale float.

@@ -1,13 +1,10 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-
-extern GxPresetDepth g_asdGxPresets;
-
-/* Returns the current graphics depth preset. */
+/* Returns the frame time in microseconds. */
 f32 asdGxPresetsGetDepth(void)
 {
-    return g_asdGxPresets.depth;
+    return g_asdGxPresets.frameTime;
 }
 
 } /* extern "C" */

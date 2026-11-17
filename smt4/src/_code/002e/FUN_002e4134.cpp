@@ -8,6 +8,6 @@ void scrSetResult(s32 result);
 
 extern "C" s32 FUN_002e4134(void)
 {
-    scrSetResult(dataTable00FindById(scrGetArg(0))->level);
+    scrSetResult(dataTable00FindById((u16)scrGetArg(0))->level);
     return 1;
 }

@@ -1,9 +1,8 @@
 /* NON_MATCHING: ailment-count accumulator registers and equivalent count/blink threshold comparisons differ. */
 #include "ui/SlotPlacement.h"
-#include "shard/PadState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/GamePlayerData.h"
 
 /* The cycle fields occupy unaligned-union padding, and the blink fields extend the shared prefix. */
 struct AnimatedSlotPlacementView {
@@ -30,9 +29,9 @@ void FUN_0033c468(AnimatedSlotPlacementView *placement)
     case 0: {
         u16 ailments;
         if (placement->unitIndex < 0)
-            ailments = reinterpret_cast<PadState *>(gameGetPlayerData())->unk72;
+            ailments = gameGetPlayerData()->ailments;
         else
-            ailments = static_cast<PartyDamageUnitIV *>(gameGetUnitRecord(placement->unitIndex))->ailments;
+            ailments = gameGetUnitRecord(placement->unitIndex)->ailments;
         s32 count = 0;
         for (s32 bit = 1; bit <= 10; ++bit)
             if (ailments & (1 << bit))

@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W5_W5Match7_UiQuest.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_0022ecfc(void);
 

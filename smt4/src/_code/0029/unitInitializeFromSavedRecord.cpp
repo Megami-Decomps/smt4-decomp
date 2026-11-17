@@ -35,10 +35,10 @@ void unitInitializeFromSavedRecord(u16 id, StatBlock *unit)
         unit->skills.ids[index] = saved.values.skills[index];
     }
     unit->experience = saved.values.experience;
-    unit->encounter.initialization.initializationKind = (saved.values.flags >> 2) & 0xF;
-    bitsetSetBit(unit, devil->initialization.innateFlag);
+    unit->growth.initializationKind = (saved.values.flags >> 2) & 0xF;
+    bitsetSetBit(unit, devil->innateFlag);
     unitRecalculateEffectiveStats(unit);
-    unit->copy0 = unit->unk0E;
-    unit->copy1 = unit->unk10;
+    unit->hp = unit->maxHp;
+    unit->mp = unit->maxMp;
 }
 }

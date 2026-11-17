@@ -12,7 +12,7 @@ void asdTextDrawFormatted(u32 box, u32 font, s32 color, s32 x, s32 y, const char
 s32 FUN_00309ba0(void);
 
 /* Opens the message window on a directory message (or plain text for the `%s` variant) and picks its first state. */
-void FUN_0028e6d0(MessageWork *win, const void *message, u32 index, s32 kind, u32 flags, s32 variant, u32 initial)
+void FUN_0028e6d0(MessageWindow *win, const void *message, u32 index, s32 kind, u32 flags, s32 variant, u32 initial)
 {
     u32 box = win->box;
     u32 task = win->taskValue;
@@ -26,7 +26,7 @@ void FUN_0028e6d0(MessageWork *win, const void *message, u32 index, s32 kind, u3
         win->empty = 1;
     } else {
         win->empty = 0;
-        if (win->unk02D != 0) {
+        if (win->plainText != 0) {
             asdTextDrawFormatted(box, 3, -1, 0, 3, "%s", message);
         } else if (kind == 12) {
             asdTextDrawDirectoryEntry(box, 3, -1, 0, 3, message, index);
@@ -57,7 +57,7 @@ void FUN_0028e6d0(MessageWork *win, const void *message, u32 index, s32 kind, u3
             variant = 0;
         }
     }
-    win->unk00A = variant;
+    win->variant = variant;
     if (variant == 0) {
         win->state = 1;
     } else if (variant == 1 || variant == 2) {

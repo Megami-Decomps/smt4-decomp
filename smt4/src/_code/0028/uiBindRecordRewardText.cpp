@@ -1,21 +1,9 @@
 /* NON_MATCHING: title branch placement, reward switch layout, and register allocation differ from retail. */
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 #include "bible/bibleDevil.h"
 
-struct RewardSlot {
-    u16 type;
-    u16 id;
-    u32 count;
-};
-struct RewardRecord {
-    u8 unk00[8];
-    char name[0x30];       /* 0x008 */
-    char description[0x134]; /* 0x038 */
-    RewardSlot rewards[6]; /* 0x16c */
-};
-
 extern "C" {
-RewardRecord *dataTable1bOr1cGetRecord(u32 id);
 const char *dataTable0cLookupById(u32 id);
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
 const char *dataTable01FindByIdWithAoc(u32 id);
@@ -30,7 +18,7 @@ void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)
     char formatted[128];
     const char *title = NULL;
     if (description) {
-        RewardRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecord *record = dataTable1bOr1cGetRecord(id);
         if (record != NULL) {
             title = record->description;
         }
@@ -38,33 +26,33 @@ void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)
         FUN_002bd158(text, formatted);
         textEncodeFontSlot(0x28, formatted);
     } else {
-        RewardRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecord *record = dataTable1bOr1cGetRecord(id);
         if (record != NULL) {
-            title = record->name;
+            title = record->title;
         }
         textEncodeFontSlot(0x28, title);
     }
     if (showRewards) {
-        RewardRecord *record = dataTable1bOr1cGetRecord(id);
+        QuestRecord *record = dataTable1bOr1cGetRecord(id);
         if (record != NULL) {
             for (s32 index = 0; index < 6; ++index) {
-                switch (record->rewards[index].type) {
+                switch (record->requirements[index].kind) {
                 case 1:
                 case 7:
-                    libc_strcpy(text, dataFindKindRecordWithAocOverrides(record->rewards[index].id, description));
+                    libc_strcpy(text, dataFindKindRecordWithAocOverrides(record->requirements[index].id, description));
                     textEncodeFontSlot(index, text);
-                    FUN_0029ede8(index + 0x18, record->rewards[index].count, -1, 0);
+                    FUN_0029ede8(index + 0x18, record->requirements[index].count, -1, 0);
                     break;
                 case 2:
-                    libc_strcpy(text, dataTable01FindByIdWithAoc(record->rewards[index].id));
+                    libc_strcpy(text, dataTable01FindByIdWithAoc(record->requirements[index].id));
                     textEncodeFontSlot(index + 8, text);
-                    FUN_0029ede8(index + 0x18, record->rewards[index].count, -1, 0);
+                    FUN_0029ede8(index + 0x18, record->requirements[index].count, -1, 0);
                     break;
                 case 5:
-                    textEncodeFontSlot(index + 0x29, dataTable0cLookupById(record->rewards[index].id));
+                    textEncodeFontSlot(index + 0x29, dataTable0cLookupById(record->requirements[index].id));
                     break;
                 case 6:
-                    FUN_0029ede8(index + 0x18, record->rewards[index].count, -1, 0);
+                    FUN_0029ede8(index + 0x18, record->requirements[index].count, -1, 0);
                     break;
                 }
             }

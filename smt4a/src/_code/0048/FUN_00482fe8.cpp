@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic, stack layout and inlined FUN_00482b08 body match; armcc allocates the pool/slot/index registers one higher (pool r5, slot r4) than retail (pool r4, slot fp), same inversion as FUN_00482b08 */
 #include "classes/Obj55c840.h"
+#include "map/LmapGlobals.h"
 #include "map/ControllerPool.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include <math.h>
@@ -102,7 +103,7 @@ void FUN_00482fe8(ControllerPool *pool)
         position.x = static_cast<f32>(placement->x);
         position.y = static_cast<f32>(placement->y);
         position.z = static_cast<f32>(placement->z);
-        const MapVector *player = &g_lmapScene->position;
+        const MapVector *player = &g_lmapScene->pose.position;
         f32 dx = position.x - player->x;
         f32 dy = position.y - player->y;
         f32 dz = position.z - player->z;

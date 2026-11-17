@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: retail hoists the marker ids 0x27/0x2f/0x28/0x30 into registers/stack (44-byte frame) and tests the u16 icon groups with a signed ble where this build emits beq; register allocation and the stm/strd argument packing differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -42,8 +43,6 @@ struct IconCursor {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 
 void efctSetSpeed(f32 speed);
 

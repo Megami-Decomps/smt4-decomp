@@ -3,10 +3,9 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match2_ScrollList.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-
-extern void *g_btlMain; /* 0x4342c8 */
 
 void memClear(void *output, u32 bytes);
 const char *btlPosArrangeGetFilePath(BtlMainState *context);
@@ -22,7 +21,6 @@ void FUN_0033a144(BtlMainState *context);
 void FUN_00338424(BtlMainState *context);
 void battleSaveCameraVectors(BtlMainState *context);
 void vec3CopyFromOffsetC(void *main);
-void *btlFindEntryBlockByMemberId(BtlMainState *context, s32 id);
 s32 pairedEntryTableContains(BtlMainState *context, u16 id);
 void btlQueueKeyedScalarReflectAction(s32, s32, s32, s32, s32, s32, s32);
 void FUN_00254f58(BtlMainState *context);
@@ -76,7 +74,7 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
                 if ((record->status & 1) && (record->status & 2) && (record->flags & 8)) {
                     record->flags &= ~8;
                     if (!(record->presentationFlags & 0x800)) {
-                        u16 *entry = (u16 *)btlFindEntryBlockByMemberId(context, record->memberId);
+                        u16 *entry = (u16 *)reinterpret_cast<void *>(btlFindEntryBlockByMemberId(context, record->memberId));
 
                         if (!pairedEntryTableContains(context, entry[1])) {
                             record->presentationFlags |= 0x800;

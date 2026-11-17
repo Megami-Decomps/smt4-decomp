@@ -2,6 +2,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -70,7 +71,6 @@ int FUN_0023c700(...);
 int FUN_00244fb0(...);
 int slotResetIdle(...);
 int FUN_0027dbc8(...);
-int btlMainFindEntryByListedId(...);
 int btlGetMainState(...);
 int FUN_002b6b00(...);
 int asdMemFree(...);
@@ -100,7 +100,6 @@ typedef struct {
 } param_1_stack;
 
 extern int g_btlScriptUnit; /* 0x43427c */
-extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern int DAT_004398d4; /* 0x4398d4 */
 extern int g_btlUiBlock; /* 0x439ca8 */
@@ -279,13 +278,13 @@ LAB_00344fc0:
     temp_v5 = *(int *)(psVar2 + 0x20);
     if ((temp_v5 != 0) && (*(int *)(temp_v5 + 4) < *(int *)(temp_v5 + 8))) {
       if ((char)psVar2[0x10] != '\0') {
-        *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x8000000;
+        g_btlMain->flags = g_btlMain->flags | 0x8000000;
       }
       temp_v1 = 1;
       psVar2[1] = temp_v1;
       break;
     }
-    *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xf7ffffff;
+    g_btlMain->flags = g_btlMain->flags & 0xf7ffffff;
     temp_v1 = 0;
     psVar2[1] = temp_v1;
     break;
@@ -294,7 +293,7 @@ LAB_00344fc0:
     break;
   case '\x02':
     puVar9 = (unsigned int *)btlGetMainState();
-    btlMainFindEntryByListedId(puVar9,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
     if ((puVar9 != (unsigned int *)0x0) && ((*puVar9 & 0x10) == 0)) {
       temp_v9 = (int)*(short *)((int)puVar9 + 0x6e);
       temp_v5 = *(int *)(psVar2 + 0x14);
@@ -367,7 +366,7 @@ LAB_00344fc0:
     break;
   case '\b':
     puVar9 = (unsigned int *)btlGetMainState();
-    btlMainFindEntryByListedId(puVar9,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
     if (((puVar9 == (unsigned int *)0x0) || (temp_v7 = *puVar9, (temp_v7 & 0x10) != 0)) ||
        ((temp_v7 & 10) == 0)) break;
     temp_v5 = (int)*(short *)((int)puVar9 + 0x6e);
@@ -630,7 +629,7 @@ LAB_00345938:
   case '\x13':
     puVar5 = (unsigned int *)btlGetMainState();
     puVar9 = puVar5;
-    btlMainFindEntryByListedId(puVar5,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar5), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
     if (puVar9 == (unsigned int *)0x0) break;
     if ((char)psVar2[2] == '\x12') {
       if ((*puVar9 & 0x10) != 0) {
@@ -649,7 +648,7 @@ LAB_00345938:
         }
         btlUiInitializeDisplayChannel(g_btlUiBlock,temp_v5);
         if (psVar2[0x12] != 0) {
-          FUN_003d6df0(g_btlMain);
+          FUN_003d6df0(reinterpret_cast<int>(g_btlMain));
         }
       }
       break;
@@ -659,7 +658,7 @@ LAB_00345938:
     break;
   case '\x14':
     unaff_r5 = (unsigned int *)btlGetMainState();
-    btlMainFindEntryByListedId(unaff_r5,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(unaff_r5), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
     if (unaff_r5 == (unsigned int *)0x0) break;
     if ((*unaff_r5 & 0x110) != 0) {
       temp_v5 = btlGetMainState();
@@ -685,10 +684,10 @@ LAB_00345938:
     if (psVar2[0x13] != 0) {
       unaff_r5 = (unsigned int *)0x1;
     }
-    if (((-1 < *(int *)(g_btlMain + 0x760)) &&
-        (temp_v9 = FUN_00256940(g_btlMain,temp_v5,0), temp_v9 != 0)) &&
+    if (((-1 < g_btlMain->unk760) &&
+        (temp_v9 = FUN_00256940(reinterpret_cast<int>(g_btlMain),temp_v5,0), temp_v9 != 0)) &&
        (((*(unsigned int *)(temp_v5 + 0x44a0) & 0x1000) == 0 ||
-        (temp_v9 = cameraTestDefaultPose(g_btlMain), temp_v9 == 0)))) {
+        (temp_v9 = cameraTestDefaultPose(reinterpret_cast<int>(g_btlMain)), temp_v9 == 0)))) {
       btlReflectQueueKind34(0,*(unsigned int *)(psVar2 + 4));
     }
     if ((*puVar9 & 0x200) != 0) {
@@ -711,19 +710,19 @@ LAB_00345938:
     }
     break;
   case '\x17':
-    FUN_003d6420(g_btlMain,*(unsigned int *)(psVar2 + 0x14));
+    FUN_003d6420(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(psVar2 + 0x14));
     break;
   case '\x18':
     temp_v4 = btlGetMainState();
     if (-1 < psVar2[0x12]) {
-      FUN_003d6644(g_btlMain,temp_v4);
+      FUN_003d6644(reinterpret_cast<int>(g_btlMain),temp_v4);
     }
     if (psVar2[0x13] != 0) {
-      FUN_003d86a0(g_btlMain,0);
+      FUN_003d86a0(reinterpret_cast<int>(g_btlMain),0);
     }
     break;
   case '\x19':
-    transitionClearAxisVectors(g_btlMain);
+    transitionClearAxisVectors(reinterpret_cast<int>(g_btlMain));
     break;
   case '\x1a':
     temp_v5 = param_1[2];
@@ -777,7 +776,7 @@ LAB_00345938:
     }
     if (temp_v11 && temp_v7 != 0) {
       puVar9 = (unsigned int *)*param_1;
-      btlMainFindEntryByListedId(puVar9,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
       if ((*puVar9 & 10) != 0) {
         temp_v5 = FUN_00293230(unaff_r5);
         if (temp_v5 == 0) {
@@ -995,7 +994,7 @@ LAB_00346258:
     temp_v4 = btlGetMainState();
     FUN_0023c154(temp_v4,5,(int)temp_v1,0,unaff_r5);
     puVar9 = (unsigned int *)btlGetMainState();
-    btlMainFindEntryByListedId(puVar9,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
     if (puVar9 != (unsigned int *)0x0) {
       *puVar9 = *puVar9 & 0xf7ffffff;
     }
@@ -1162,7 +1161,7 @@ LAB_003453f8:
     temp_v7 = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50);
     if ((temp_v7 & 1) != 0 && (temp_v7 & 0x80) != 0) {
       puVar9 = (unsigned int *)*param_1;
-      btlMainFindEntryByListedId(puVar9,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
       if ((*puVar9 & 1) != 0 && (*puVar9 & 0x20) != 0) {
         btlScriptQueueRequestIfIdle(*param_1);
       }

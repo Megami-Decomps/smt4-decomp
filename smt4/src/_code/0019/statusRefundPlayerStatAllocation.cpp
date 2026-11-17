@@ -1,4 +1,4 @@
-#include "gamedata/PlayerInitialization.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
 struct StatAllocationRecord {
@@ -19,7 +19,6 @@ typedef char StatAllocationWorkOffsetsCheck[sizeof(StatAllocationRecord) == 0x62
     offsetof(StatAllocationWork, remainingPoints) == 0xCFCC ? 1 : -1];
 }
 
-extern "C" PlayerInitialRecordIV *gameGetPlayerData(void);
 
 // Restore all five player statistics from the selected snapshot and refund their allocated points.
 extern "C" void statusRefundPlayerStatAllocation(StatAllocationWork *work)

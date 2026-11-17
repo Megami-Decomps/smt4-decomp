@@ -1,7 +1,6 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "event/bustupEvent/BustupSlotControl.h"
 #include "script/ScriptArgs.h"
-extern "C" MessageGlobalsA g_messageMain;
 
 extern "C" {
 
@@ -26,8 +25,8 @@ void FUN_002a3518(s32 command, s32 target)
 {
     bustupCutAnimRequestStopSlots(command);
     eventTexRequestStopAll();
-    if (g_messageMain.state != NULL) {
-        g_messageMain.state->displayMode = 21;
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->displayMode = 21;
     }
     showMessage(6);
 }

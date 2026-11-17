@@ -1,5 +1,6 @@
 /* NON_MATCHING: sprite member base, result zero, predicated animation stores and the effect-state stores now match; remaining: the frame counters are loaded through a temp (retail increments in r5 directly) and the reloaded trap pointer uses r2 where retail uses r0. */
 #include "map/mapTrap.h"
+#include "map/LmapGlobals.h"
 
 struct FloatTable;
 struct TrapEffectFlags { u32 unk00; u32 flags; };
@@ -27,11 +28,8 @@ struct TrapUpdateView {
     s32 effectFrame;
     u8 alternate;
 };
-struct TrapSceneView { u8 unk00[0x1a8]; void *script; };
-
 extern "C" {
 extern MapTrapA *g_mapTrap;
-extern TrapSceneView *g_lmapScene;
 void linkHolderSetFlag(void *script);
 f32 FUN_004ffb30(FloatTable *table);
 
@@ -85,7 +83,7 @@ u32 FUN_002242a0(void)
         union { f32 value; s32 bits; } scalar;
         scalar.value = FUN_004ffb30(trap->sprite.effect->scalar);
         if (scalar.bits >= 0x43070000)
-            linkHolderSetFlag(g_lmapScene->script);
+            linkHolderSetFlag(g_lmapScene->playerModel);
         break;
     }
     case 3:

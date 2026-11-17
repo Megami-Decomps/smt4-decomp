@@ -8,6 +8,6 @@ void scrSetResult(s32 result);
 
 extern "C" s32 FUN_0031889c(void)
 {
-    scrSetResult(dataTable00FindById(scrGetArg(0))->unk74);
+    scrSetResult(dataTable00FindById((u16)scrGetArg(0))->unk74);
     return 1;
 }

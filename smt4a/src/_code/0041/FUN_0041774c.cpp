@@ -3,14 +3,9 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "addon/LookupRecord.h"
 #include "code/Code0033.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
-// A record of the player's party: skill ids at 0x34, a validity byte per skill at 0x44.
-struct PlayerParty {
-    u8 unk00[0x34];
-    u16 skills[8];         // 0x34
-    u8 filled[8];          // 0x44
-};
 
 // A saved slot: its demon id at 0x62.
 struct SaveSlot {
@@ -39,7 +34,6 @@ struct SkillLearnTask {
 extern "C" {
 s32 padQueryLogicalKey(s32 a, s32 b);
 void eventQueueAddUniqueIfValid(u32 event);
-PlayerParty *gameGetPlayerData(void);
 SaveSlot *saveSlotFindById(u32 id);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
@@ -66,9 +60,9 @@ u32 FUN_0041774c(SkillLearnTask *task)
             obj04Finish();
             if (task->placeInParty != 0) {
                 if (task->partyIndex >= 0 && FUN_003df4a4(task->skillId) == 0) {
-                    PlayerParty *party = gameGetPlayerData();
+                    PlayerDataA *party = gameGetPlayerData();
                     party->skills[task->partyIndex] = task->skillId;
-                    party->filled[task->partyIndex] = 1;
+                    party->skillRanks[task->partyIndex] = 1;
                 }
                 task->step = 5;
             } else {

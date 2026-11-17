@@ -1,12 +1,6 @@
 /* NON_MATCHING: menu-owned slot copies and parent-relative selector setup match; final state/phase reset uses two stores instead of retail's paired stm. */
 #include "status/StatusDown.h"
-#include "gamedata/PlayerDataBlock.h"
-
-struct StatusSkillSource {
-    u8 unk00[0x34];
-    u16 skills[8];
-    s8 levels[8];
-};
+#include "gamedata/GamePlayerData.h"
 
 struct StatusSkillEntry {
     union {
@@ -22,7 +16,7 @@ struct StatusSkillMenu {
     u8 changed;
     u8 unk45[3];
     s32 selection[2];
-    StatusSkillSource *source;
+    PlayerDataA *source;
     u8 controller[0x64];
     u32 state;
     u32 phase;
@@ -38,17 +32,17 @@ struct StatusSkillScreen {
 };
 
 static inline void copyStatusSkillSlots(StatusSkillMenu *menu,
-                                        const StatusSkillSource *source, s32 count)
+                                        const PlayerDataA *source, s32 count)
 {
     for (s32 index = 0; index < count; ++index) {
         menu->entries[index].skill.id = source->skills[index];
-        menu->entries[index].level = source->levels[index];
+        menu->entries[index].level = source->skillRanks[index];
     }
 }
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;
-StatusSkillSource *slotRecordFindById(u16 id);
+PlayerDataA *slotRecordFindById(u16 id);
 s32 countUnlockedSlots();
 s32 getUnlockedSlotCount();
 void fillTwoWordsWithByte(u32 *destination, u32 value);
@@ -84,12 +78,12 @@ void statusDownInitializeSkillList()
     menu->source = NULL;
     FUN_002c7e3c();
     if (screen->selectedUnit <= 0) {
-        const StatusSkillSource *source = reinterpret_cast<StatusSkillSource *>(gameGetPlayerData());
+        const PlayerDataA *source = gameGetPlayerData();
         s32 count = countUnlockedSlots();
         menu->count = count;
         copyStatusSkillSlots(menu, source, count);
     } else {
-        StatusSkillSource *source = slotRecordFindById((u16)screen->selectedUnit);
+        PlayerDataA *source = slotRecordFindById((u16)screen->selectedUnit);
         menu->source = source;
         s32 count = getUnlockedSlotCount();
         menu->count = count;

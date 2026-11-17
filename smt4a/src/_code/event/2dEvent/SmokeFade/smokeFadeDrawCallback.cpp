@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 
@@ -19,7 +20,6 @@ struct SmokeFadeImage {
 extern "C" {
 extern SmokeFadeDrawState *g_smokeFadeState;
 extern SmokeFadeImage g_smokeFadeImages[2];
-extern RenderCtxA *g_renderCtx;
 void gxResetColorQuadToWhite();
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *);
 s32 renderCtxPackPassFlags(u32, u32);

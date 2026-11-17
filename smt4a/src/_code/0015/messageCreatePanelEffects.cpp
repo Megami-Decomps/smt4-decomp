@@ -1,9 +1,8 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 
 extern "C" {
-extern MessageGlobalsA g_messageMain;
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 }
@@ -11,13 +10,13 @@ f32 vec2GetSpeed(const void *object);
 /* Create four message effects using the panel's base and accent speed multipliers. */
 extern "C" void messageCreatePanelEffects(u32 first, u32 second, u32 accent, u32 last)
 {
-    MessagePanelA *panel = g_messageMain.panel;
+    MessageWindowA *panel = g_messageMain.banner;
     f32 normalSpeed = 1.0f;
-    f32 speed = normalSpeed * vec2GetSpeed(panel->spritesCA4[20]);
+    f32 speed = normalSpeed * vec2GetSpeed(&panel->sprites[40]);
     efctSetSpeed(speed);
     texDrawTableEntryAtStoredOrigin(2, 4, first, 0, 0, 241);
     texDrawTableEntryAtStoredOrigin(2, 4, second, 0, 0, 241);
-    f32 accentSpeed = normalSpeed * vec2GetSpeed(panel->spritesCA4[16]);
+    f32 accentSpeed = normalSpeed * vec2GetSpeed(&panel->sprites[36]);
     efctSetSpeed(accentSpeed * speed);
     texDrawTableEntryAtStoredOrigin(2, 4, accent, 0, 0, 241);
     efctSetSpeed(speed);

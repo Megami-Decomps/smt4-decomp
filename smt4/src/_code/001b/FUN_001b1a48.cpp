@@ -1,9 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include <string.h>
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 void FUN_00282820(s32 position, u32 first, u32 second, s32 listedId, s32 layer, u32 mode, u32 kind, const char *text);
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32 id);
 s32 FUN_0028299c(u32 context);
 u32 libc_strlen(const char *text);
 extern const char DAT_00400440[];

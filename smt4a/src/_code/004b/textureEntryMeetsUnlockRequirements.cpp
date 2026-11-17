@@ -1,9 +1,10 @@
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 #include "shard/Shard0034.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
 struct UnlockSpriteEntryView { u8 unk00[0xC]; u16 id; };
-struct UnlockLevelRequirementView { u8 unk00[0x120]; s16 level; };
 }
 extern "C" {
 UnlockSpriteEntryView *dataTable02GetRecordWithAocPackage(s32 index);
@@ -11,8 +12,6 @@ s32 partyEntryFlagsBit3(u16 id);
 s32 goalConditionsSatisfied(u16 id);
 s32 flagValueRead(u32 index);
 s32 gameUnlockRecordRequirementsMet(u16 id);
-UnlockLevelRequirementView *dataTable1bOr1cGetRecord(u16 id);
-PlayerData *gameGetPlayerData(void);
 
 s32 textureEntryMeetsUnlockRequirements(u32 index)
 {
@@ -42,12 +41,12 @@ s32 textureEntryMeetsUnlockRequirements(u32 index)
     }
     if (gameUnlockRecordRequirementsMet(entry->id) == 0)
         return 0;
-    UnlockLevelRequirementView *requirement = dataTable1bOr1cGetRecord(entry->id);
+    QuestRecordA *requirement = dataTable1bOr1cGetRecord(entry->id);
     if (requirement == NULL)
         return 0;
-    u16 playerLevel = gameGetPlayerData()->unk62;
-    if (requirement->level == 0)
+    u16 playerLevel = gameGetPlayerData()->level;
+    if (requirement->requiredLevel == 0)
         return 0;
-    return requirement->level <= playerLevel;
+    return requirement->requiredLevel <= playerLevel;
 }
 }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: candidate/request registers differ, and the alternate-search return adds a branch-to-next NOP. */
 #include "common.h"
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "code/Code003e.h"
 #include "code/Code0018.h"
 

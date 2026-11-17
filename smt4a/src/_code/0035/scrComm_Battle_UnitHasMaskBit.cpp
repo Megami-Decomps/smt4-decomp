@@ -1,10 +1,10 @@
 #include "battle/btlUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 void scrSetResult(s32 result);
 u32 scrGetArg(u32 index);
-BtlUnitA *btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit;
 
@@ -12,10 +12,10 @@ extern u32 g_btlScriptUnit;
 s32 scrComm_Battle_UnitHasMaskBit(void)
 {
     u32 bit = scrGetArg(0);
-    BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
+    BtlUnitA *unit = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
     BtlUnitDataA *data = unit->data;
 
-    scrSetResult((data->unk110 & (1 << (bit & 0xFF))) != 0);
+    scrSetResult((data->statusFlags & (1 << (bit & 0xFF))) != 0);
     return 1;
 }
 

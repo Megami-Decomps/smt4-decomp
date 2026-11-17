@@ -1,7 +1,7 @@
 /* NON_MATCHING: armcc keeps the payload address in a spare register (sl) across the request arms, retail rebuilds sp each time and pushes one register fewer; the request selection is the same as smt4 FUN_003b92b4. */
 #include "common.h"
 #include "game/GameStateA.h"
-#include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 
 extern "C" {
 
@@ -98,9 +98,9 @@ void FUN_004b82a0(SceneWork *work)
         asdSequenceRequest(4, &payload, 32);
     } else if ((flags & 0x40000) != 0) {
         gameDataCopySaveToWork();
-        payload.id = g_gameState.scriptValue;
+        payload.id = g_gameState.entryValue;
         payload.value = -1;
-        libc_strcpy(payload.name.text, g_gameState.scriptText);
+        libc_strcpy(payload.name.text, g_gameState.entryText);
         asdSequenceRequest(4, &payload, 32);
     } else if ((flags & 0x800000) != 0) {
         payload.id = work->record->id;

@@ -1,10 +1,9 @@
 /* NON_MATCHING: lookup-key narrowing repeats; saved flag pointer and lookup temporaries use different registers. */
 #include "quest_center/QuestUnlockDefinition.h"
-#include "shard/PadState.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/GamePlayerData.h"
 extern "C" {
 u8 *gameDataGetFlagBits(void);
-PadState *gameGetPlayerData(void);
 s32 gameFlagIsSet(u32 flag);
 s32 unsignedKeyRecordCompare(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
@@ -25,7 +24,7 @@ static inline const QuestUnlockDefinition *questFindUnlockDefinition(u16 id, Que
 static inline bool questMeetsUnlockRequirements(u16 id, QuestUnlockDefinition &key)
 {
     const QuestUnlockDefinition *record = questFindUnlockDefinition(id, key);
-    if (!record || record->minimumLevel > gameGetPlayerData()->unk76)
+    if (!record || record->minimumLevel > gameGetPlayerData()->level)
         return false;
     for (s32 i = 0; i < 3; ++i) {
         if (record->requiredFlags[i] && !gameFlagIsSet(record->requiredFlags[i]))

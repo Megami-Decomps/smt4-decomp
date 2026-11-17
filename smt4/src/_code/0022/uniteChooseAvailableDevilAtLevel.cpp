@@ -9,10 +9,6 @@ struct FusionLevelParty {
     u8 unk0000[0x90f0];
     s8 slots[24];
 };
-struct FusionLevelUnit {
-    u8 unk00[0x46];
-    u16 id;
-};
 
 extern "C" {
 bool gameRecordCopy(u32, GameSavedItem *);
@@ -33,12 +29,12 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
         }
         DevilRecord *definition = devilGetRecord(candidate->id);
         if ((definition->fusionRestrictions & 0x1c00000) ||
-            (definition->specialFusion.requiredFlag != 0 && !gameFlagIsSet(definition->specialFusion.requiredFlag))) {
+            (definition->requiredFlag != 0 && !gameFlagIsSet(definition->requiredFlag))) {
             continue;
         }
-        if (definition->specialFusion.prerequisite & 1) {
-            u32 registryId = (definition->specialFusion.prerequisite & 0xfffe) ?
-                definition->specialFusion.prerequisite >> 1 : definition->id;
+        if (definition->prerequisite & 1) {
+            u32 registryId = (definition->prerequisite & 0xfffe) ?
+                definition->prerequisite >> 1 : definition->id;
             GameSavedItem saved;
             if (!gameRecordCopy(registryId, &saved) || !(saved.flags & 0xfc)) {
                 continue;
@@ -52,7 +48,7 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
         for (slot = 0; slot < 24; ++slot) {
             if ((u32)party->slots[slot] < 24) {
                 FusionLevelParty *currentParty = (FusionLevelParty *)gameGetSlotTable();
-                FusionLevelUnit *unit = static_cast<FusionLevelUnit *>(gameGetUnitRecord(currentParty->slots[slot]));
+                StatBlock *unit = gameGetUnitRecord(currentParty->slots[slot]);
                 if (unit->id == candidate->id) {
                     break;
                 }

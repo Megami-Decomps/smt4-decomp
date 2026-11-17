@@ -1,24 +1,18 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
-
-int devilGetRecord(u32 id);
 
 typedef struct Source {
     /* 0x00 */ u8 unk00[0x46];
     /* 0x46 */ u16 id;
 } Source;
 
-typedef struct Record {
-    /* 0x00 */ u8 unk00[0x2A];
-    /* 0x2A */ u16 unk2A;
-} Record;
-
 u16 FUN_0033c0c0(Source *source)
 {
-    Record *record = (Record *)devilGetRecord(source->id);
+    DevilRecord *record = devilGetRecord(source->id);
 
-    return record->unk2A;
+    return record->evolutionTarget;
 }
 
 } /* extern "C" */

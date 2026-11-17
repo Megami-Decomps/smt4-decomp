@@ -1,19 +1,18 @@
 /* NON_MATCHING: player coordinate loads group into VLDM and floating coordinate register/add operand order differs. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
 
 extern "C" {
-extern LmapScene *g_lmapScene;
 s32 randBetween(s32 minimum, s32 maximum);
 
 /* Spawn a category-specific ambient effect at a randomized player-relative position. */
 void FUN_0025bc80(void)
 {
     SoundActorQueuePosition position = {
-        g_lmapScene->transform.position[0],
-        g_lmapScene->transform.position[1],
-        g_lmapScene->transform.position[2]
+        g_lmapScene->pose.position.x,
+        g_lmapScene->pose.position.y,
+        g_lmapScene->pose.position.z
     };
     position.x += (f32)randBetween(-20, 20);
     position.z += (f32)randBetween(-20, 20);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles; retail keeps the working counters in stack slots/callee-saved registers and spills r0-r2; key bitfield writes differ */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 // Fusion key handed to the skill list builders (same layout as the fusion result descriptor).
 struct FusionKey {
@@ -26,12 +27,6 @@ struct SkillMetadata {
 };
 
 // Demon info record: only the id and its own skill list.
-struct DevilInfo {
-    u16 id;                 // 0x00
-    u8 unk02[0x3e];
-    u16 ownSkills[8];       // 0x40
-};
-
 // Inherited-skill working lists of the fusion screen.
 struct UniteLists {
     u8 unk0000[0x8b70];
@@ -46,7 +41,6 @@ extern "C" {
 
 extern UniteLists* g_unite;
 
-DevilInfo* devilGetRecord(u32 product);
 SkillMetadata* findSkillMetadataById(u32 skill);
 s32 arrayContainsU16(const u16* array, s32 count, u32 value);
 void gridNavigationConfigure(void* listBox, s32 count, s32 a, s32 b, s32 c, s32 d);
@@ -55,19 +49,19 @@ void unitRecordBuild(u32 id, u8* record);
 s32 getUnlockedSlotCount(u8* record);
 
 // Adds one parent's skills to the primary (flag 0x20) or secondary list, skipping duplicates and the product's own.
-static inline void collectSkills(UniteLists* lists, DevilInfo* info, PartyUnit* parent, s32& primaryCount, s32& secondaryCount)
+static inline void collectSkills(UniteLists* lists, DevilRecordA *info, PartyUnit* parent, s32& primaryCount, s32& secondaryCount)
 {
     for (s32 i = 0; i < 8; i++) {
         u32 skill = parent->skills[i];
         if (skill == 0) continue;
         SkillMetadata* meta = findSkillMetadataById(skill);
         if ((meta->flags & 0x20) != 0) {
-            if (arrayContainsU16(lists->primary, 0x18, skill) == 0 && arrayContainsU16(info->ownSkills, 8, skill) == 0) {
+            if (arrayContainsU16(lists->primary, 0x18, skill) == 0 && arrayContainsU16(info->skills.ids, 8, skill) == 0) {
                 lists->primary[primaryCount++] = skill;
             }
         }
         if ((meta->flags & 0x20) == 0) {
-            if (arrayContainsU16(lists->secondary, 0x18, skill) == 0 && arrayContainsU16(info->ownSkills, 8, skill) == 0) {
+            if (arrayContainsU16(lists->secondary, 0x18, skill) == 0 && arrayContainsU16(info->skills.ids, 8, skill) == 0) {
                 lists->secondary[secondaryCount++] = skill;
             }
         }
@@ -78,7 +72,7 @@ static inline void collectSkills(UniteLists* lists, DevilInfo* info, PartyUnit* 
 // (skipping duplicates and the product's own skills) and primes the list box.
 void FUN_0028a538(u32 unused, PartyUnit* first, PartyUnit* second, u32 product)
 {
-    DevilInfo* info = devilGetRecord(product);
+    DevilRecordA *info = devilGetRecord(product);
     UniteLists* lists = g_unite;
     for (s32 i = 0; i < 0x18; i++) {
         lists->primary[i] = 0;

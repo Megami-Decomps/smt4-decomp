@@ -5,7 +5,7 @@
 
 extern "C" {
 /* NOTE: declared by value here, unlike battle/BtlGlobals.h's pointer (retail check pending). */
-extern BtlCamera g_btlMain;
+extern BtlCameraStatics g_btlMain;
 extern BattleVector3 DAT_00493518[4];
 
 void FUN_003d86a0(CameraPoseBlendView *camera, u32 unused, u32 duration)
@@ -78,14 +78,14 @@ void FUN_003d86a0(CameraPoseBlendView *camera, u32 unused, u32 duration)
         state->position.frame = 0;
         state->target.frame = 0;
         camera->start.up.x = state->upSnapshot;
-        g_btlMain.cameraTransition.scalar = state->scalarSnapshot;
+        g_btlMain.scalar = state->scalarSnapshot;
         camera->start.scalar = state->angleSnapshot;
         state->scalars.startScalar = state->scalars.referenceScalar;
         camera->start.position = state->positionSnapshot;
         DAT_00493518[0] = state->firstSnapshot;
         DAT_00493518[2] = state->secondSnapshot;
         camera->end.up.x = 0.0f;
-        g_btlMain.cameraTransition.delta = 0.0f;
+        g_btlMain.scalarDelta = 0.0f;
         camera->end.scalar = 0.0f;
         state->scalars.endScalar = 0.0f;
         camera->end.position = zero;

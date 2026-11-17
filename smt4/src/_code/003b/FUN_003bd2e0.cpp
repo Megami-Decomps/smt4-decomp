@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -12,8 +13,6 @@ int selectionCopySupportedValue(...);
 int btlEntryGetPassiveSkillIds(void);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int btlEntryBuildSummary(...);
-int btlFindEntryBlockByMemberId(unsigned int *, unsigned int);
-int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int FUN_00283ebc(...);
 int dataTable40FindById(void);
@@ -157,9 +156,9 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
     temp_v37 = temp_v1;
   }
   puVar3 = temp_v32;
-  btlMainFindEntryByListedId(temp_v32,temp_v40);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v32), temp_v40);
   puVar7 = temp_v32;
-  btlMainFindEntryByListedId(temp_v32,param_5);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v32), param_5);
   temp_v34 = puVar7;
   btlEntryBuildSummary(temp_v23,temp_v32,puVar3);
   temp_v3 = temp_v40;
@@ -179,7 +178,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   }
   temp_v14 = (float)VectorUnsignedToFloat((unsigned int)temp_v26,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = reinterpret_cast<int>(btlGetMainState());
-  btlMainFindEntryByListedId(temp_v2,temp_v3);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v2), temp_v3);
   temp_v3 = reinterpret_cast<int>(btlGetMainState());
   btlEntryBuildSummary(temp_v20,temp_v3,temp_v2);
   reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v28), 0x48));
@@ -286,9 +285,9 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
       }
       if (temp_v37 == 0 || temp_v0 == '\0') {
         puVar7 = temp_v32;
-        btlFindEntryBlockByMemberId(temp_v32,temp_v40);
+        btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v32), temp_v40);
         puVar6 = temp_v32;
-        btlFindEntryBlockByMemberId(temp_v32,param_5);
+        btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v32), param_5);
         temp_v11 = (float)VectorSignedToFloat((int)*(short *)((int)puVar7 + 0xf6) -
                                             (int)*(short *)((int)puVar6 + 0xf6),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -311,7 +310,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             temp_v3 = temp_v40;
             temp_v8 = temp_v39;
             puVar7 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
-            btlMainFindEntryByListedId(puVar7,temp_v3);
+            btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar7), temp_v3);
             if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, dataTable40FindById(), temp_v6 != 0)) {
               temp_v3 = playerGetSkillRank(temp_v8);
               FUN_00283ebc(temp_v6,temp_v3,3);
@@ -329,7 +328,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             temp_v8 = temp_v27[temp_v13] & 0xffff;
             temp_v16 = CONCAT44(temp_v2,temp_v14 + temp_v11 * (float)temp_v18 * temp_v14);
             temp_v9 = reinterpret_cast<int>(btlGetMainState());
-            btlMainFindEntryByListedId(temp_v9,param_5);
+            btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(temp_v9), param_5);
             if (temp_v9 == 0) {
               temp_v14 = (float)temp_v15;
             }

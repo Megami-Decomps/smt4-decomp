@@ -1,5 +1,6 @@
 /* NON_MATCHING: prologue, early return, stack-address order and both label arms (via the drawDebugLabel inline) match retail; the build hoists the width move (vmov s3,s16) above the branch where retail repeats it inside each arm and copies the height from it last. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "text/TextDraw.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 
@@ -12,7 +13,6 @@ struct TitleDebugBackground {
 
 extern "C" {
 extern TitleDebugBackground *g_titleDbgBg;
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);

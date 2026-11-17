@@ -1,22 +1,15 @@
-#include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
+extern AsdGxDisplayBuffers g_asdGxSecondaryPreset; /* displays[1] */
 
-typedef struct GxPresets {
-    /* 0x000 */ u8 unk000[0x16C];
-    /* 0x16C */ void *current;  /* the preset in use */
-} GxPresets;
-
-extern GxPresets g_asdGxPresets;
-extern u8 g_asdGxSecondaryPreset;
-
-/* Returns which preset is current: 0 for the default one, 1 for the one at 0x4E3A0C, 2 otherwise. */
+/* Returns the selected display buffer ring: 0 (top left), 1 (top right) or 2 (bottom). */
 u32 asdGxGetPresetIndex(void)
 {
-    if (g_asdGxPresets.current == &g_asdGxPresets) {
+    if (g_asdGxPresets.selectedDisplay == &g_asdGxPresets.displays[0]) {
         return 0;
     }
-    if (g_asdGxPresets.current == &g_asdGxSecondaryPreset) {
+    if (g_asdGxPresets.selectedDisplay == &g_asdGxSecondaryPreset) {
         return 1;
     }
     return 2;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: two instruction-order swaps remain in stack/global setup and fallback-name arguments. */
 #include "shard/W5_W5Match7_UiQuest.h"
-#include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 #include "text/TextDraw.h"
 #include "addon/AocSystemA.h"
 struct AocSystemA;
@@ -41,7 +41,7 @@ void FUN_003d498c(u32 id, u32 mode)
     FUN_003dea6c(id, 1, 0);
     s32 detail = FUN_003de464(id, mode);
     if (detail < 0) {
-        const char *name = textExpandGlyphsToBuffer(dataTable1bOr1cGetRecord(id)->name.encoded, 0, 0);
+        const char *name = textExpandGlyphsToBuffer(dataTable1bOr1cGetRecord(id)->description, 0, 0);
         asdTextFormatStream(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, "%s", name);
     } else {
         asdTextDrawDirectoryEntry(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, reinterpret_cast<const void *>(work->messages), detail);

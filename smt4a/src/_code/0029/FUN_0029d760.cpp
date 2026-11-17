@@ -13,7 +13,7 @@ extern MapIfGlobalsA g_mapIf;
 
 s32 FUN_0029d760(u32 handle)
 {
-    if (g_gameState.departLoading != 0) {
+    if (g_gameState.loading != 0) {
         return 0;
     }
     MapIfGlobalsA *globals = &g_mapIf;

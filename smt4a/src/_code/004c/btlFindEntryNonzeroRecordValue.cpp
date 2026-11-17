@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/btlMain.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct IdRecord {
     /* 0x3C */ s16 value;
 } IdRecord;
 
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *output);
 
 /* Collects the entry's ids and returns the value of the first one whose record has a nonzero value, else 0. */

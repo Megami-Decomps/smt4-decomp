@@ -1,35 +1,11 @@
 /* NON_MATCHING: sound initialization stack setup and reset-state address scheduling differ. */
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match7_SoundInit.h"
 #include "nn/Result.h"
 
-namespace {
-struct SoundStartupVolumeSlotA { u32 volume; u8 unk04[0x6C]; };
-struct SoundStartupAuxSlotA { u32 state; u8 active, volume, unk06[0x36]; };
-/* Apocalypse's startup fields do not share IV's sound-system offsets. */
-struct SoundStartupStateA {
-    union {
-        u8 data[0x1348];
-        struct { u8 unk000[0x4CC]; u8 *buffer; } memory;
-        struct { u8 unk000[0x58C]; SoundStartupVolumeSlotA slots[4]; } secondary;
-        struct { u8 unk000[0x718]; SoundStartupAuxSlotA slots[2]; } auxiliary;
-        struct { u8 unk000[0x75C]; AsdSndHandleNode *head; u32 count; } handles;
-        struct { u8 unk000[0x764]; AsdSndSlotA slots[4]; } primary;
-        struct { u8 unk000[0x12DC]; u8 active, volume; } spatial;
-        struct { u8 unk000[0x1344]; u8 archiveLoaded; } status;
-    };
-};
-struct SoundStartupControlA { AsdSndDuck duck; AsdSndStatusApoc status; };
-typedef char SoundStartupOffsets[sizeof(SoundStartupVolumeSlotA) == 0x70 &&
-    sizeof(SoundStartupAuxSlotA) == 0x3C &&
-    offsetof(SoundStartupStateA, memory.buffer) == 0x4CC &&
-    offsetof(SoundStartupStateA, primary.slots) == 0x764 &&
-    offsetof(SoundStartupStateA, status.archiveLoaded) == 0x1344 ? 1 : -1];
-}
 extern "C" {
-extern SoundStartupStateA g_asdSoundSystem;
-extern SoundStartupControlA g_asdSoundDuck;
+extern AsdSndControlA g_asdSoundDuck;
 s32 FUN_00158f64(void);
 s32 FUN_00159030(void);
 s32 dspsndInitializeManagers(void);
@@ -68,24 +44,24 @@ void FUN_00142b84(s32 auxiliaryMode)
     u32 bytes = FUN_0015e0c8(&parameters);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 617);
     u8 *buffer = static_cast<u8 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
-    g_asdSoundSystem.memory.buffer = buffer;
+    g_asdSoundSystem.workBuffer = buffer;
     FUN_0015de34(&parameters, buffer, bytes);
     for (s32 slot = 0; slot < 4; ++slot)
-        g_asdSoundSystem.secondary.slots[slot].volume = ASD_SND_VOLUME_DEFAULT;
+        g_asdSoundSystem.slotsB[slot].volume = ASD_SND_VOLUME_DEFAULT;
     for (s32 slot = 0; slot < 2; ++slot) {
-        g_asdSoundSystem.auxiliary.slots[slot].state = 0;
-        g_asdSoundSystem.auxiliary.slots[slot].active = 0;
-        g_asdSoundSystem.auxiliary.slots[slot].volume = ASD_SND_VOLUME_DEFAULT;
+        g_asdSoundSystem.auxSlots[slot].unk34 = 0;
+        g_asdSoundSystem.auxSlots[slot].unk38 = 0;
+        g_asdSoundSystem.auxSlots[slot].volume = ASD_SND_VOLUME_DEFAULT;
     }
-    g_asdSoundSystem.handles.count = 0;
-    g_asdSoundSystem.handles.head = NULL;
+    g_asdSoundSystem.registered.count = 0;
+    g_asdSoundSystem.registered.handles = NULL;
     for (s32 slot = 0; slot < 4; ++slot) {
-        g_asdSoundSystem.primary.slots[slot].volume = ASD_SND_VOLUME_DEFAULT;
-        g_asdSoundSystem.primary.slots[slot].active = 0;
-        g_asdSoundSystem.primary.slots[slot].hasHeap = 0;
+        g_asdSoundSystem.slotsA[slot].volume = ASD_SND_VOLUME_DEFAULT;
+        g_asdSoundSystem.slotsA[slot].active = 0;
+        g_asdSoundSystem.slotsA[slot].hasHeap = 0;
     }
-    g_asdSoundSystem.spatial.active = 0;
-    g_asdSoundSystem.spatial.volume = ASD_SND_VOLUME_DEFAULT;
+    g_asdSoundSystem.sound3d.enabled = 0;
+    g_asdSoundSystem.sound3d.volume = ASD_SND_VOLUME_DEFAULT;
     g_asdSoundDuck.duck.holdFrames = 0;
     g_asdSoundDuck.duck.level = 0.0f;
     g_asdSoundDuck.duck.fadeInFrames = 0;
@@ -99,6 +75,6 @@ void FUN_00142b84(s32 auxiliaryMode)
     g_asdSoundDuck.status.hasStream = 0;
     g_asdSoundDuck.status.objects = NULL;
     g_asdSoundDuck.status.objectCount = 0;
-    g_asdSoundSystem.status.archiveLoaded = 0;
+    g_asdSoundSystem.archiveLoaded = 0;
 }
 }

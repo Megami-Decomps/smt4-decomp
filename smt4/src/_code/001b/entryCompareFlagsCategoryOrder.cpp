@@ -1,14 +1,13 @@
 /* Orders entries by completion, category six last, then their table sort order. */
-#include "gamedata/EntrySortRecord.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" {
 u32 questIsCompleted(u16 id);
-EntrySortRecord *dataTable1bOr1cGetRecord(u16 id);
 
 static inline s32 compareEntryOrder(const u16 *left, const u16 *right)
 {
-    EntrySortRecord *first = dataTable1bOr1cGetRecord(*left);
-    EntrySortRecord *second = dataTable1bOr1cGetRecord(*right);
+    QuestRecord *first = dataTable1bOr1cGetRecord(*left);
+    QuestRecord *second = dataTable1bOr1cGetRecord(*right);
     s32 order = 0;
     if (first != NULL && second != NULL) {
         order = first->order - second->order;
@@ -27,19 +26,19 @@ s32 entryCompareFlagsCategoryOrder(const u16 *left, const u16 *right)
     if ((firstFlags & ~secondFlags) != 0) {
         order = 1;
     } else if (order == 0) {
-        EntrySortRecord *first = dataTable1bOr1cGetRecord(*left);
-        EntrySortRecord *second = dataTable1bOr1cGetRecord(*right);
+        QuestRecord *first = dataTable1bOr1cGetRecord(*left);
+        QuestRecord *second = dataTable1bOr1cGetRecord(*right);
         if (first == NULL) {
             return 0;
         }
         if (second == NULL) {
             return 0;
         }
-        if (first->category != 6) {
-            if (second->category == 6) {
+        if (first->kind != 6) {
+            if (second->kind == 6) {
                 order = -1;
             }
-        } else if (second->category != 6) {
+        } else if (second->kind != 6) {
             order = 1;
         }
         if (order == 0) {

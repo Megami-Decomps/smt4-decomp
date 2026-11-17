@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the temporary for the first selector word differs (retail: r2, build: r1); base and cursor registers now match. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -11,7 +12,6 @@ s32 FUN_0019a270(u32 *destination, const void *source, u32 command);
 s32 asdModelCommitCommandRange(u32 *begin, u32 *end);
 s32 FUN_0017cdcc(u32 resource, u32 count);
 s32 renderCtxResetFrameState(RenderCtxA *context);
-extern RenderCtxA *g_renderCtx;
 
 u32 FUN_00157e98(ModelCommandPrefixA *model, const u8 *commandData)
 {

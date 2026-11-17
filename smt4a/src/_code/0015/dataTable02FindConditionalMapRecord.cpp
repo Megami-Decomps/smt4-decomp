@@ -1,5 +1,5 @@
 #include "gamedata/DataTable.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
 
 struct ConditionalMapRecordA {
     /* 0x00 */ u8 map;
@@ -10,12 +10,7 @@ struct ConditionalMapRecordA {
     /* 0x0E */ u16 requiredFlag;  /* 0 = none; otherwise this game flag must be set */
     /* 0x10 */ u16 blockedFlag;   /* 0 = none; otherwise this game flag must be clear */
     /* 0x12 */ u8 unk12[0x92];
-}; /* 0xA4 */
-struct PlayerLevelView {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 level;
 };
-
 extern "C" {
 extern void *g_aocSystem;
 ConditionalMapRecordA *FUN_00176124(void *, u32, u32);
@@ -41,7 +36,7 @@ ConditionalMapRecordA *dataTable02FindConditionalMapRecord(u32 map, u32 area)
         if (records[i].map == map && records[i].area == area
             && (records[i].requiredFlag == 0 || gameFlagIsSet(records[i].requiredFlag) != 0)
             && (records[i].blockedFlag == 0 || gameFlagIsSet(records[i].blockedFlag) == 0)) {
-            u16 level = reinterpret_cast<PlayerLevelView *>(gameGetPlayerData())->level;
+            u16 level = gameGetPlayerData()->level;
             if (records[i].minimumLevel == 0 || records[i].minimumLevel <= level) {
                 return &records[i];
             }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: frame texture quad draw; retail reaches the flag/blend fields through a second base register (tex + 0xF00), keeps the filter flag in one compare and divides in a different register order */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
@@ -29,7 +30,6 @@ struct FrameTex {
 
 extern "C" {
 extern FrameTex *g_frameTex;
-extern RenderCtxA *g_renderCtx;
 
 s32 stateValuesGetBySelector(u32 selector);
 s32 renderCtxPackPassFlags(u32 a, u32 b);

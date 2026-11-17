@@ -46,7 +46,7 @@ void *eventCreateBattleTexture(u32 id, f32 x, f32 y)
     work->opacityStep = 0.25f;
     work->stopWhenTransparent = 0;
     work->unk17 = 0;
-    work->textureId = dataTable00FindById(id)->portraitId;
+    work->textureId = dataTable00FindById((u16)id)->portraitId;
     work->animated = 1;
     if (FUN_002c1d5c()) {
         work->state = 1;

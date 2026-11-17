@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-stack push temporaries, cached render-context address and draw-loop register allocation differ from retail. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -21,7 +22,6 @@ typedef char BattleLabelEntryLayoutA[
     offsetof(BattleLabelEntryViewA, position.x) == 0x2C ? 1 : -1];
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);

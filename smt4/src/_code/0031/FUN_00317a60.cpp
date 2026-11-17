@@ -1,29 +1,16 @@
-#include "common.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
 
-typedef struct Panel {
-    /* 0x000 */ u8 unk000[0x88];
-    /* 0x088 */ u8 state;
-    /* 0x089 */ u8 unk089[0x8FB];
-    /* 0x984 */ u8 list[1];
-} Panel;
-
-typedef struct PanelTask {
-    /* 0x0 */ u8 unk0[8];
-    /* 0x8 */ Panel *panel;
-} PanelTask;
-
 void spriteStartAnimationByIndex(void *list, s32 mode);
 
-/* Task step: sets the panel's list to mode 7 and its state to 4; always finishes. */
-extern PanelTask g_messageMain;
+/* Task step: starts the banner's counter-panel list animation 7 and sets the panel state to 4; always finishes. */
 u32 FUN_00317a60(void)
 {
-    Panel *panel = g_messageMain.panel;
+    MessageWindow *banner = g_messageMain.banner;
 
-    spriteStartAnimationByIndex(panel->list, 7);
-    panel->state = 4;
+    spriteStartAnimationByIndex(&banner->sprites[16], 7);
+    banner->panelState = 4;
     return 1;
 }
 

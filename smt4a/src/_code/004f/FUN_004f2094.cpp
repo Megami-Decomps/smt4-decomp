@@ -1,5 +1,6 @@
 /* NON_MATCHING: vector load/store grouping, separate history-global literals, saved registers and final multiply/add contraction differ. */
 #include "shard/W5_W5Match8_CameraTransition.h"
+#include "battle/btlCamera.h"
 
 static inline W5Match8Vec3 operator-(const W5Match8Vec3& first, const W5Match8Vec3& second)
 {
@@ -18,7 +19,7 @@ static inline W5Match8Vec3 operator*(const W5Match8Vec3& vector, f32 scale)
 }
 
 extern "C" {
-extern CameraTransitionGlobals g_btlCamera;
+extern BtlCameraStatics g_btlCamera;
 extern W5Match8Vec3 g_cameraAlternateProgressStart;
 extern W5Match8Vec3 g_cameraAlternateProgressPrevious;
 extern W5Match8Vec3 g_cameraUnoffsetStartPosition;
@@ -36,11 +37,11 @@ void FUN_004f2094(W5Match8CameraTransition* camera)
         u32 mode;
     };
     AlternateTransitionView* state = reinterpret_cast<AlternateTransitionView*>(camera);
-    if (g_btlCamera.mode == 2) {
+    if (g_btlCamera.routingMode == 2) {
         W5Match8Vec3 delta = camera->alternateTarget - g_cameraUnoffsetStartPosition;
         f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
         camera->positionProgress = camera->targetStart + delta * factor;
-    } else if (g_btlCamera.mode == 1) {
+    } else if (g_btlCamera.routingMode == 1) {
         state->progress = g_cameraAlternateProgressPrevious;
         f32 factor = FUN_003d4dd4(state->mode, state->duration, state->frame);
         state->progress = (camera->alternateTarget - (camera->reference.position - state->progress)) * factor;

@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 /* A skill record: its rate at +0x40 and packed class/grade bits at +0x44. */
 struct SkillRateRecord {
@@ -22,7 +23,6 @@ struct SkillInfo {
 
 extern "C" {
 extern u64 DAT_00571408;
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 void btlEntryBuildSummary(SkillInfo *info, BtlMainStateA *battle, BtlCombatantEntryA *entry);
 s32 FUN_004bd098(u32 owner, s32 skillId);

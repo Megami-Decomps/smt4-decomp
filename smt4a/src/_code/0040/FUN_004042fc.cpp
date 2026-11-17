@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: named stereo parallax restores retail coordinate lifetimes; extended render-state stack addressing and conditional restore scheduling still differ. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
@@ -12,8 +13,6 @@ struct ScrollBarStateStackView {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 void efctSetSpeed(f32 speed);
 s32 objectApplyIfUnblocked(void *view);
 s32 uiSearchPrimary(void *view);

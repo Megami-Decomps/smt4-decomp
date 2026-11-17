@@ -3,18 +3,9 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
-// The panel's display-enable byte is inside its existing opaque widget storage.
-struct MessageDisplayEnableView {
-    u8 unk000[0xA10];
-    u8 enabled;
-};
-typedef char MessageDisplayEnableOffset[offsetof(MessageDisplayEnableView, enabled) == 0xA10 ? 1 : -1];
-
 extern "C" {
-extern MessageGlobals g_messageMain;
 void asdTMTexTableLoadTmx(u32 table, u32 variant);
 void asdTMTexTablePrepareNodeImage(u32 table, s32 index);
-void *FUN_002c4a34(void);
 void infoWindowCreate(void);
 void FUN_0010a7bc(void);
 void FUN_0010b3c0(void);
@@ -36,23 +27,23 @@ void messageInitializeDisplay(void)
     asdTMTexTablePrepareNodeImage(5, 0);
     for (s32 index = 0; index < 3; ++index)
         asdTMTexTablePrepareNodeImage(14, index);
-    g_messageMain.state = (MessageWork *)FUN_002c4a34();
-    g_messageMain.banner = (MessagePanel *)FUN_002c4a34();
-    g_messageMain.unk0C = (MessagePanel *)FUN_002c4a34();
-    g_messageMain.state->mode = 1;
+    g_messageMain.window = FUN_002c4a34();
+    g_messageMain.banner = FUN_002c4a34();
+    g_messageMain.aux = FUN_002c4a34();
+    g_messageMain.window->mode = 1;
     g_messageMain.banner->mode = 6;
-    g_messageMain.unk0C->mode = 12;
+    g_messageMain.aux->mode = 12;
     infoWindowCreate();
     FUN_0010a7bc();
     FUN_0010b3c0();
-    taskCreateDraw("MESS_D", 234, 0, 0, FUN_0010a9c8, 0, g_messageMain.state, *(u32 *)g_messageMain.state->unk000);
-    MessageWork *state = g_messageMain.state;
-    state->unkA10 = 1;
-    ((MessageDisplayEnableView *)g_messageMain.banner)->enabled = 0;
-    ((MessageDisplayEnableView *)g_messageMain.unk0C)->enabled = 0;
+    taskCreateDraw("MESS_D", 234, 0, 0, FUN_0010a9c8, 0, g_messageMain.window, g_messageMain.window->job);
+    MessageWindow *state = g_messageMain.window;
+    state->displayEnabled = 1;
+    g_messageMain.banner->displayEnabled = 0;
+    g_messageMain.aux->displayEnabled = 0;
     objFlagsSetBits(state->box, 0x100);
     objFlagsSetBits(g_messageMain.banner->box, 0x200);
-    objFlagsSetBits(g_messageMain.unk0C->box, 0x100);
+    objFlagsSetBits(g_messageMain.aux->box, 0x100);
     FUN_0010ec70(FUN_0010efd8);
     FUN_0010e5e0(FUN_0010edf8);
     asdTextSetDefaultStyle((u32)FUN_0010f084);

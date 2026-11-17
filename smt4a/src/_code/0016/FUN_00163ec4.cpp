@@ -1,11 +1,11 @@
 /* NON_MATCHING: Adjusted-text fraction registers and return predication differ. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern TextDrawDefaultsPrefixA g_asdTextDefaults;
 
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 fraction);

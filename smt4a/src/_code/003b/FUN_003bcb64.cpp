@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/GameDataAccess.h"
+#include "battle/BtlGlobals.h"
 struct RecruitmentMasks {
     u8 prefix[8];
     u64 required;
@@ -12,7 +13,6 @@ struct RecruitmentMasks {
 };
 extern "C" {
 extern RecruitmentMasks g_btlMessageFlagMasks;
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
 u32 randRange(u32 maximum);
 void sysMemClear(void *memory, u32 bytes);
 void scrSetResult(s32 result);

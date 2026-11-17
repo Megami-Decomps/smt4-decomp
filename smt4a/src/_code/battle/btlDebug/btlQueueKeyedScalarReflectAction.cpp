@@ -4,9 +4,9 @@
 #include "battle/btlAction.h"
 #include "battle/btlReflect.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *, s32);
 void *FUN_003f0254(BtlMainStateA *, BtlActionRecord *);
 void *FUN_003f06b4(BtlMainStateA *, BtlActionRecord *);
 

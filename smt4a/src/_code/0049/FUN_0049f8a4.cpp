@@ -1,16 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the percent HP loss; retail tests the member's down/immune bits with `tst #2; tsteq #1024` (armcc here merges them into one bic/bics pair), spills new HP and max HP to the stack around the unitHasRankingBonus call and keeps 1.25f in s16. */
 #include "common.h"
 #include "gamedata/SaveSlotTable.h"
-
-/* The hero record (only the fields read here). */
-struct HeroRecord {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ s16 maxHp;
-    /* 0x1E */ u8 unk1E[0xC];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ u8 unk2C[0x32];
-    /* 0x5E */ u16 flags;       /* 2: down, 0x400: cannot lose HP */
-};
+#include "gamedata/GamePlayerData.h"
 
 /* A party member record (also the options character's). */
 struct MemberRecord {
@@ -24,7 +15,6 @@ struct MemberRecord {
 };
 
 extern "C" {
-HeroRecord *gameGetPlayerData(void);
 MemberRecord *gameGetSlotRecord(s32 id);
 s32 gameSlotTableFindFree(void);
 MemberRecord *gameGetOptions(void);
@@ -66,13 +56,13 @@ void FUN_0049f8a4(u32 target, s32 percent)
 {
     if (percent <= 0)
         return;
-    if ((target == 0 || target == 2 || target == 3) && canLoseHp(gameGetPlayerData()->flags)) {
+    if ((target == 0 || target == 2 || target == 3) && canLoseHp(gameGetPlayerData()->ailments)) {
         s32 max = gameGetPlayerData()->maxHp;
         s32 hp = gameGetPlayerData()->hp;
         s32 newHp = hp - percentOf(max, percent);
         if (newHp <= 0)
             newHp = 1;
-        HeroRecord *hero = gameGetPlayerData();
+        PlayerDataA *hero = gameGetPlayerData();
         s16 clamped = (s16)newHp;
         hero->hp = clamped > hero->maxHp ? hero->maxHp : (clamped < 1 ? 1 : clamped);
         if (hp - newHp > 0)

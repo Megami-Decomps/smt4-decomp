@@ -1,20 +1,8 @@
 /* NON_MATCHING: retail counts the used slots with a two-iteration loop over interleaved halfword pairs and lays the per-count returns out differently; the id selection is the same. */
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" {
-
-/* A quest record (only the fields read here): a kind byte at 6, a flags byte at 7 and four 8-byte
- * slots starting at 0x16C whose first halfword says whether the slot is used. */
-typedef struct QuestKindRecord {
-    /* 0x000 */ u8 unk000[6];
-    /* 0x006 */ u8 kind;
-    /* 0x007 */ u8 flags;           /* 0x10: unavailable, 0x20: needs the mask */
-    /* 0x008 */ u8 unk008[0x164];
-    struct {
-        /* 0x16C */ u16 id;
-        /* 0x16E */ u8 unk16e[6];
-    } slots[4];
-} QuestKindRecord;
 
 typedef struct QuestFlagEntry {
     u8 unk00[2];
@@ -22,14 +10,13 @@ typedef struct QuestFlagEntry {
 } QuestFlagEntry;
 
 QuestFlagEntry *questGetRuntimeStatus(void);
-QuestKindRecord *dataTable1bOr1cGetRecord(u32 id);
 
 /* The message id describing quest record `id`: by its kind, the id of its first slot and how many
  * of its four slots are used. Returns -1 when there is none. */
 s32 FUN_003336dc(u32 id, u8 mask)
 {
     QuestFlagEntry *entry = questGetRuntimeStatus();
-    QuestKindRecord *record = dataTable1bOr1cGetRecord(id);
+    QuestRecord *record = dataTable1bOr1cGetRecord(id);
 
     if (record == NULL) {
         return -1;
@@ -40,11 +27,11 @@ s32 FUN_003336dc(u32 id, u8 mask)
     if ((record->flags & 0x10) != 0) {
         return -1;
     }
-    u16 first = record->slots[0].id;
+    u16 first = record->requirements[0].id;
     s32 used = first != 0;
 
     for (s32 i = 1; i < 4; i++) {
-        if (record->slots[i].id != 0) {
+        if (record->requirements[i].id != 0) {
             used++;
         }
     }

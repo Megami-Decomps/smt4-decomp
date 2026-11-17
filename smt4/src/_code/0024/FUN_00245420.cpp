@@ -3,11 +3,10 @@
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 struct BtlEntry;
 extern "C" {
-
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 
 u32 FUN_00245420(s32 actorId, u32 secondaryId, BtlActionRecord *target, u32 value,
                  u32 parameter, s32 lookupId, s32 extraTarget)

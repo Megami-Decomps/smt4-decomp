@@ -14,8 +14,8 @@ s32 FUN_0026a9cc(u16 id, u32 level, const u16 *known, s16 *out, s32 skip)
     s32 count = 0;
     const DevilRecord *devil = reinterpret_cast<const DevilRecord *>(devilGetRecord(id));
     for (s32 i = 0; i < 8; i++) {
-        u16 skill = devil->learnedSkills.entries[i].id;
-        if (skill != 0 && devil->learnedSkills.entries[i].unk00 > level) {
+        u16 skill = devil->learnedSkills[i].id;
+        if (skill != 0 && devil->learnedSkills[i].level > level) {
             s32 j;
             for (j = 0; j < 8; j++) {
                 if (known[j] == skill) {

@@ -1,10 +1,10 @@
 /* NON_MATCHING: slot-label helper recovers saved loop constants; shared 1.0f constant remains hoisted across the draw branches. */
 #include "title/S4Load.h"
+#include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
 extern S4Load* g_s4Load;
-extern RenderCtxA* g_renderCtx;
 void efctSetSpeed(f32 alpha);
 void gxResetColorQuadToWhite(void);
 void rt_aeabi_memclr(void* memory, u32 size);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the order of the two vector loads before distSpatial: retail loads the enemy vector, then the scene pointer and vector; the build loads the scene pointer first. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
@@ -21,7 +21,6 @@ typedef struct MapEnemyEntry {
 typedef char MapEnemyEntrySizeCheck[sizeof(MapEnemyEntry) == 0x188 ? 1 : -1];
 
 extern MapEnemyEntry *g_mapEnemy; /* 0x5806d4 */
-extern LmapSceneA *g_lmapScene; /* 0x581288 */
 
 f32 distSpatial(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 
@@ -35,8 +34,8 @@ u32 FUN_003ae088(void)
     for (i = 0; i < 40; i++) {
         MapEnemyBody *enemy = &enemies[i].body;
         if (enemy->active != 0 && enemy->mode != 2) {
-            f32 distance = distSpatial(g_lmapScene->transform.position[0], g_lmapScene->transform.position[1],
-                                       g_lmapScene->transform.position[2], enemy->position.x, enemy->position.y,
+            f32 distance = distSpatial(g_lmapScene->pose.position.x, g_lmapScene->pose.position.y,
+                                       g_lmapScene->pose.position.z, enemy->position.x, enemy->position.y,
                                        enemy->position.z);
             if (distance <= 200.0f) {
                 near++;

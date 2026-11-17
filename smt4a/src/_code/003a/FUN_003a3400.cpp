@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include <string.h>
 
 struct DebugBoundsRecord { f32 minimum[3], maximum[3]; u32 id; };
@@ -7,7 +8,6 @@ struct DebugBoundsPalette { u8 prefix[0x90]; u32 colors[12]; };
 extern "C" {
 extern DebugBoundsRegistry DAT_006160e0;
 extern const DebugBoundsPalette DAT_00532240;
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 mode, s32 enabled);
 void FUN_00280a08(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
     f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,

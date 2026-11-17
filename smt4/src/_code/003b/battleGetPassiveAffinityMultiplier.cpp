@@ -1,15 +1,15 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/PassiveSkill.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-void *btlMainFindEntryByListedId(void *, u32);
 void btlEntryGetPassiveSkillIds(void *, u16 *);
 
 // Multiply the passive-skill bonuses that apply to the requested affinity.
 f32 battleGetPassiveAffinityMultiplier(u32 listedId, u32 affinity)
 {
     f32 multiplier = 1.0f;
-    void *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), listedId);
+    void *entry = reinterpret_cast<void *>(btlMainFindEntryByListedId(btlGetMainState(), listedId));
     u16 skills[10] = {0};
     btlEntryGetPassiveSkillIds(entry, skills);
     for (s32 index = 0; index < 9; ++index) {

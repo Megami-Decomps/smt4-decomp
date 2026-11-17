@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
 #include "game/GameState.h"
 
@@ -18,20 +19,11 @@ struct FollowerWork {
     /* 0xE0 */ u8 shadowMotionPending;
 };
 
-/* The map scene's position block (observed fields). */
-struct LmapScenePos {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ f32 position[3];
-    /* 0x28 */ u8 unk28[0x24];
-    /* 0x4C */ f32 height;
-};
-
 
 #define MDL_OBJECT_HIDDEN 2
 
 extern "C" {
 
-extern LmapScenePos *g_lmapScene;
 
 void animOwnerSetScale(AsdMdlObject *object, f32 scale);
 void nodeSetTranslation(AsdMdlNode *node, s32 index, f32 *position);
@@ -95,7 +87,7 @@ void mapUpdateFollowerModels(FollowerWork *work)
         asdMdlObjectHide(&work->body);
         asdMdlObjectShow(&work->shadow);
     }
-    nodeSetTranslation(work->body->node, 0, g_lmapScene->position);
+    nodeSetTranslation(work->body->node, 0, &g_lmapScene->pose.position.x);
     nodeSetScale(work->body->node, 0, work->scale * 50.0f, work->scale * 50.0f, work->scale * 50.0f);
     modelSetScale(work->body->node, work->tilt);
     motion = 0;
@@ -107,8 +99,8 @@ void mapUpdateFollowerModels(FollowerWork *work)
     if ((s32)modelGetCurrentMotion(reinterpret_cast<Inner0020ffe0 *>(work->body->node)) != motion) {
         modelSelectPrimaryMotion((AsdMotionModel *)work->body->node, motion, 0.0f);
     }
-    nodeSetTranslation(work->shadow->node, 0, g_lmapScene->position);
-    modelPartSetRotationDegrees(work->shadow->node, 0, 0.0f, g_lmapScene->height, 0.0f);
+    nodeSetTranslation(work->shadow->node, 0, &g_lmapScene->pose.position.x);
+    modelPartSetRotationDegrees(work->shadow->node, 0, 0.0f, g_lmapScene->pose.heading, 0.0f);
     nodeSetScale(work->shadow->node, 0, 50.0f, 50.0f, 50.0f);
     if (work->shadowMotionPending != 0) {
         modelSelectPrimaryMotion((AsdMotionModel *)work->shadow->node, (s32)work->shadowMotion, 0.0f);

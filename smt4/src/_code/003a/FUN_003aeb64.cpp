@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/btlHelp.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 /* A party slot record: its id at +0x46. */
@@ -33,7 +34,6 @@ struct OrderPair {
 }
 
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 s32 btlFindNthActiveSpecialEntry(BtlMainState *state, s32 arg);
 s32 recordCompareFloatKey(const void *a, const void *b);
 void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));

@@ -1,5 +1,7 @@
 /* NON_MATCHING: close: retail pairs the state/zero stores into strd and allocates record/index to r7/r6 (built r5/r7); all fields and control flow match */
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "gamedata/Table00Lookup.h"
 
 /* A unit record as stored in the party tables (0x18C bytes; only the fields this code reads are named). */
 struct UnitRecordIn {
@@ -65,9 +67,7 @@ UnitSlot *FUN_0033a5a0(void);
 void __aeabi_memcpy4(void *dest, const void *src, s32 size);
 void rt_memclr(void *dest, s32 size);
 void *gameGetPlayerData(void);
-void *gameGetUnitRecord(s32 index);
 u8 *gameGetSlotTable(void);
-void *dataTable00FindById(u32 id);
 s32 FUN_003be758(UnitSlot *slot);
 void btlAdjustPropertyClamped(s32 index, s32 mode, s32 arg, s32 zero);
 

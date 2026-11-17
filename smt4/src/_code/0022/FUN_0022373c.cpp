@@ -1,8 +1,7 @@
 /* NON_MATCHING: merged heading epilogue, VFP register lifetimes and neighbor-field addressing differ. */
 #include "map/MapSpawn.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 extern "C" {
-extern LmapScene *g_lmapScene;
 extern MapHeadingState *DAT_004474f4;
 extern MapSpawnPoint DAT_00447f40[];
 MapSpawnGrid *gameGetMapBlock(void);
@@ -19,12 +18,12 @@ void FUN_0022373c(void)
         f32 x = (f32)point->x * 500.0f + 250.0f;
         f32 z = (f32)point->z * 500.0f + 250.0f;
         heading = (f32)point->heading;
-        scene->transform.position[0] = x;
-        scene->transform.position[1] = 0.0f;
-        scene->transform.positionSnapshotA[1] = 0.0f;
-        scene->transform.position[2] = z;
-        scene->transform.positionSnapshotA[0] = x;
-        scene->transform.positionSnapshotA[2] = z;
+        scene->pose.position.x = x;
+        scene->pose.position.y = 0.0f;
+        scene->pose.targetPosition.y = 0.0f;
+        scene->pose.position.z = z;
+        scene->pose.targetPosition.x = x;
+        scene->pose.targetPosition.z = z;
     } else {
         // Adjacency bytes straddle the current cell in the map's packed grid.
         struct NeighborView {
@@ -39,12 +38,12 @@ void FUN_0022373c(void)
         const NeighborView *neighbors = (const NeighborView *)((u8 *)grid + grid->z * 0x78 + grid->x * 8 - 0x3C);
         f32 x = (f32)grid->x * 500.0f + 250.0f;
         f32 z = (f32)grid->z * 500.0f + 250.0f;
-        scene->transform.position[0] = x;
-        scene->transform.position[1] = 0.0f;
-        scene->transform.position[2] = z;
-        scene->transform.positionSnapshotA[0] = x;
-        scene->transform.positionSnapshotA[1] = 0.0f;
-        scene->transform.positionSnapshotA[2] = z;
+        scene->pose.position.x = x;
+        scene->pose.position.y = 0.0f;
+        scene->pose.position.z = z;
+        scene->pose.targetPosition.x = x;
+        scene->pose.targetPosition.y = 0.0f;
+        scene->pose.targetPosition.z = z;
         if (neighbors->north == 2)
             heading = 180.0f;
         if (neighbors->south == 2)
@@ -54,8 +53,8 @@ void FUN_0022373c(void)
         if (neighbors->east == 2)
             heading = 90.0f;
     }
-    scene->transform.headingDegrees = heading;
-    scene->transform.headingCopy = heading;
+    scene->pose.heading = heading;
+    scene->pose.targetHeading = heading;
     DAT_004474f4->heading = heading;
 }
 }

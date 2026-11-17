@@ -2,13 +2,12 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "gamedata/DevilRecord.h"
-#include "shard/PadState.h"
 #include "shard/W6_W6Match3_NameFormState.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 s32 playerPadTestBit(u32);
 s32 gameFlagIsSet(u32);
-PadState *gameGetPlayerData();
 s32 randRange(u32);
 
 /* Mark the first eligible low-HP enemy for its rare emergency action. */
@@ -36,8 +35,8 @@ u32 FUN_00338584(BtlMainState *state)
             if (!(state->editorControl.flags & 0x200000)) {
                 if (entry->hp * 100 / entry->maxHp >= 20)
                     return 0;
-                PadState *player = gameGetPlayerData();
-                s32 chance = ((u32(player->unk76) + u32(metadata->level)) >> 1) + 5;
+                PlayerDataIV *player = gameGetPlayerData();
+                s32 chance = ((u32(player->level) + u32(metadata->level)) >> 1) + 5;
                 if (chance > 10)
                     chance = 10;
                 if (randRange(99) > chance)

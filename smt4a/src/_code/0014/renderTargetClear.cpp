@@ -1,13 +1,12 @@
-#include "gfx/RenderTargetState.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
-extern "C" RenderTargetSystemView g_asdGxPresets;
-extern "C" void gxCommandClearColorDepth(void *colorBuffer, void *depthBuffer, u32 mask, u32 components,
+extern "C" void gxCommandClearColorDepth(AsdGxRenderBuffer *colorBuffer, AsdGxRenderBuffer *depthBuffer, u32 stencil, u32 components,
     u32 flags, f32 red, f32 green, f32 blue, f32 alpha, f32 depth);
 
 // Clear the chosen render target with its configured color and depth values.
 extern "C" void renderTargetClear(s32 target, u32 flags, u32 unused, s32 preset)
 {
-    RenderTargetFramebuffer *framebuffer = NULL;
+    AsdGxFramebuffer *framebuffer = NULL;
     if (target == 0) {
         preset = 0;
         framebuffer = &g_asdGxPresets.framebuffers[0];
@@ -20,9 +19,9 @@ extern "C" void renderTargetClear(s32 target, u32 flags, u32 unused, s32 preset)
         preset = 1;
         framebuffer = &g_asdGxPresets.framebuffers[2];
     }
-    gxCommandClearColorDepth(framebuffer->colorBuffer, framebuffer->depthBuffer,
-        g_asdGxPresets.clear.mask[preset], 7, flags,
-        g_asdGxPresets.clear.color[preset][0], g_asdGxPresets.clear.color[preset][1],
-        g_asdGxPresets.clear.color[preset][2], g_asdGxPresets.clear.color[preset][3],
-        g_asdGxPresets.clear.depth[preset]);
+    gxCommandClearColorDepth(&framebuffer->color, &framebuffer->depth,
+        g_asdGxPresets.clearStencils[preset], 7, flags,
+        g_asdGxPresets.clearColors[preset].rgb.red, g_asdGxPresets.clearColors[preset].rgb.green,
+        g_asdGxPresets.clearColors[preset].rgb.blue, g_asdGxPresets.clearColors[preset].alpha,
+        g_asdGxPresets.clearDepths[preset]);
 }

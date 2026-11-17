@@ -13,8 +13,8 @@ u32 scrComm_SetGameStateText(void)
     u32 value = scrGetArg(0);
     const char *text = scrGetArgString(1);
 
-    g_gameState.scriptValue = value;
-    libc_strcpy(g_gameState.scriptText, text);
+    g_gameState.entryValue = value;
+    libc_strcpy(g_gameState.entryText, text);
     return 1;
 }
 

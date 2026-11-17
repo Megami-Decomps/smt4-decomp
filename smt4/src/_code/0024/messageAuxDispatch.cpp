@@ -1,8 +1,5 @@
-#include "common.h"
+#include "ui/MessageMain.h"
 extern "C" {
-struct MessageAuxWork { u8 unk00[0x24]; u32 value; };
-struct MessageAuxGlobals { u8 unk00[0xC]; MessageAuxWork *work; };
-extern MessageAuxGlobals g_messageMain;
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
@@ -11,7 +8,7 @@ u32 messageWindowShowOrPoll(u32 message, u32 argument, u32 frame, s32 mode, s32 
 u32 messageAuxDispatch(u32 message, u32 value)
 {
     if (message == 0) message = scrGetCommandOwner();
-    g_messageMain.work->value = value;
+    g_messageMain.aux->argument = value;
     u32 argument = scrGetArg(0);
     u32 frame = scrGetCommandFrame();
     return messageWindowShowOrPoll(message, argument, frame, 12, 0, 0);

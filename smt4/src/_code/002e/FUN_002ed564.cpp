@@ -2,13 +2,11 @@
 
 extern "C" {
 
-extern MessageGlobals g_messageMain;
-
 int titleOverlaySetModeAnimation(void *state, int arg);
 
 u32 FUN_002ed564(void)
 {
-    MessageWork *state = g_messageMain.state;
+    MessageWindow *state = g_messageMain.window;
 
     if (state->closeRequested != 0) {
         titleOverlaySetModeAnimation(state, state->mode);

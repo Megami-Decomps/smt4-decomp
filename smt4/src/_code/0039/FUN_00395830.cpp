@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail converts the euler angles through integer/float conversions (index + fraction) and keeps the sqrt in the VFP, the build's float-only lookup compiles to a shorter sequence; logic equivalent. */
 #include "common.h"
+#include "map/LmapGlobals.h"
 #include <math.h>
 
 /* The interpolated sine/cosine table: value and slope per entry. */
@@ -20,12 +21,6 @@ struct PositionedObject {
     MapPosition position;   // 0x28
 };
 
-/* A scene with a focus position (accessed field). */
-struct MapScene {
-    u8 unk00[0x1C];
-    MapPosition focus;      // 0x1C
-};
-
 /* A drifting effect: its owner and the velocity set here. */
 struct DriftEffect {
     u8 unk00[0xC];
@@ -35,7 +30,6 @@ struct DriftEffect {
 
 extern "C" {
 extern SinCosEntry g_sinCosTable[];
-extern MapScene *g_lmapScene;
 u32 randNextInRange(u32 maximum);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 (*matrix)[4]);
 }
@@ -57,9 +51,9 @@ extern "C" void FUN_00395830(DriftEffect *effect)
     f32 speed = 40.0f;
     u32 roll = randNextInRange(99);
     if (roll % 10 == 0) {
-        f32 dx = g_lmapScene->focus.x - owner->position.x;
-        f32 dy = g_lmapScene->focus.y - owner->position.y;
-        f32 dz = g_lmapScene->focus.z - owner->position.z;
+        f32 dx = g_lmapScene->pose.position.x - owner->position.x;
+        f32 dy = g_lmapScene->pose.position.y - owner->position.y;
+        f32 dz = g_lmapScene->pose.position.z - owner->position.z;
         f32 inverseLength = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
         effect->velocity.x = dx * inverseLength * speed;
         effect->velocity.y = dy * inverseLength * speed;

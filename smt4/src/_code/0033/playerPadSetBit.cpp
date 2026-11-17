@@ -1,16 +1,14 @@
-#include "shard/PadState.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-extern PadState *gameGetPlayerData(void);
-
-/* Sets bit `bit` of the pad's halfword at +0x72. */
+/* Sets ailment bit `bit` of the player. */
 void playerPadSetBit(u32 bit)
 {
-    PadState *pad = gameGetPlayerData();
-    u16 value = pad->unk72;
+    PlayerDataIV *player = gameGetPlayerData();
+    u16 value = player->ailments;
 
-    pad->unk72 = value | (u16)(1 << (bit & 0xff));
+    player->ailments = value | (u16)(1 << (bit & 0xff));
 }
 
 } /* extern "C" */

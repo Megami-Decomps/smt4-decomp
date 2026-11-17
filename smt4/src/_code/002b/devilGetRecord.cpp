@@ -1,3 +1,5 @@
+/* The definition takes a u16 id; callers see the u32 prototype from gamedata/DevilRecord.h (see the comment there). */
+#define DEVIL_RECORD_OWN_PROTOTYPE
 #include "gamedata/DevilRecord.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"

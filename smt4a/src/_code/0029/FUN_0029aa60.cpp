@@ -893,7 +893,7 @@ LAB_0029ad50:
           temp_v10 = 0xff;
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
-        if (g_gameState.unk25F != '\0') {
+        if (g_gameState.mapRegistrationPending != '\0') {
           temp_v10 = 0x11;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -1340,7 +1340,7 @@ joined_r0x0029d070:
           temp_v10 = 0xff;
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
-        if (g_gameState.unk25F == '\0') {
+        if (g_gameState.mapRegistrationPending == '\0') {
           *(unsigned int *)(temp_v9 + 0x1e0) = 6;
         }
         break;

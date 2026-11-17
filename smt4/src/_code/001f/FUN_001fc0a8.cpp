@@ -1,10 +1,9 @@
 /* NON_MATCHING: selected-slot base is retained separately from its parent, changing registers and one address add; distance arguments schedule differently. */
 #include "map/MapStateSlots.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 extern MapStateSlots *g_mapStateSlots;
-extern LmapScene *g_lmapScene;
 f32 mathDistanceBetweenPoints(f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ);
 
 // Rank the three nearest active eligible map slots and publish their scene positions.
@@ -17,7 +16,7 @@ void FUN_001fc0a8(void)
         MapStateSlot *slot = &g_mapStateSlots->slots[i];
         if (slot->active != 0 && slot->ranking.eligible != 0) {
             slot->ranking.distance = mathDistanceBetweenPoints(
-                g_lmapScene->transform.position[0], g_lmapScene->transform.position[1], g_lmapScene->transform.position[2],
+                g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z,
                 slot->motion.position[0], slot->motion.position[1], slot->motion.position[2]);
             slot->ranking.pendingRank = 999;
         }

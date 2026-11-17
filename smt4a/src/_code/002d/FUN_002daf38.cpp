@@ -1,21 +1,11 @@
 /* NON_MATCHING: scene actor teardown register allocation has not matched retail. */
 #include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 namespace {
-/* The full cleanup state extends past the shared LmapSceneA prefix. */
-struct SceneCleanupView {
-    u8 unk000[0x170];
-    LmapActorA *actors[8];
-    u8 unk190[0x18];
-    LmapScript *script;
-    u8 unk1AC[0xDC];
-    s32 mode;
-    u32 extraController;
-};
 }
 extern "C" {
-extern SceneCleanupView *g_lmapScene;
 extern void *g_handleRegistry;
 void FUN_003e55f4(LmapScript *script);
 void lmapClearExtraFlag(void);
@@ -28,21 +18,21 @@ static __inline void releaseSceneController(LmapActorA *actor)
         ptrListRemoveClearOwner(g_handleRegistry, reinterpret_cast<void *>(actor->controller));
 }
 
-/* Release the script's controllers and the scene's registered actor controllers. */
+/* Release the script's controllers and the scene's registered model controllers; stop the idle voice. */
 extern "C" void FUN_002daf38(void)
 {
-    FUN_003e55f4(g_lmapScene->script);
-    if (g_lmapScene->mode == 3) {
+    FUN_003e55f4(g_lmapScene->playerModel);
+    if (g_lmapScene->idleVoicePhase == 3) {
         lmapClearExtraFlag();
-        if (g_lmapScene->extraController != 0)
-            FUN_003d2158(g_lmapScene->extraController, 0);
+        if (g_lmapScene->idleVoice != 0)
+            FUN_003d2158(g_lmapScene->idleVoice, 0);
     }
-    releaseSceneController(g_lmapScene->actors[1]);
-    releaseSceneController(g_lmapScene->actors[2]);
-    releaseSceneController(g_lmapScene->actors[6]);
-    releaseSceneController(g_lmapScene->actors[3]);
-    releaseSceneController(g_lmapScene->actors[0]);
-    releaseSceneController(g_lmapScene->actors[4]);
-    releaseSceneController(g_lmapScene->actors[5]);
-    releaseSceneController(g_lmapScene->actors[7]);
+    releaseSceneController(g_lmapScene->models[1]);
+    releaseSceneController(g_lmapScene->models[2]);
+    releaseSceneController(g_lmapScene->models[6]);
+    releaseSceneController(g_lmapScene->models[3]);
+    releaseSceneController(g_lmapScene->models[0]);
+    releaseSceneController(g_lmapScene->models[4]);
+    releaseSceneController(g_lmapScene->models[5]);
+    releaseSceneController(g_lmapScene->models[7]);
 }

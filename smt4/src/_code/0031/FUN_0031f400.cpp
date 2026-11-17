@@ -2,12 +2,12 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "script/ScriptArgs.h"
 #include "code/Code0024_Smt4.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 #define ENTITY_COUNT 109
 
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, int index);
 int randNextInRange(u32 range);
 
 /* Collects the eligible other-group entities no stronger than the player's and reports the id of a random one (-1 if none). */

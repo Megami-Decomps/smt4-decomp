@@ -1,4 +1,5 @@
 #include "code/Code002a_VariantA.h"
+#include "quest_center/QuestRecordA.h"
 /* NON_MATCHING: cursor/definition pointer lifetimes differ, and the final state update uses strd rather than separate writeback stores; 80 instructions each. */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "quest_center/QuestRequirement.h"
@@ -13,14 +14,12 @@ void optionsSetFlag1();
 void uiQuestRefreshDetailPages(u32 questId);
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_003dea6c(u32 questId, s32 state, s32 enabled);
-QuestRequirementDefinition *dataTable1bOr1cGetRecord(u32 questId);
 s32 scrScriptProcessStartEntry(u32 script, u32 entry);
 const char *dataFindKindRecordWithAocOverrides(u32 textId, s32 mode);
 char *libc_strcpy(char *destination, const char *source);
 void FUN_00359974(s32 type, u32 message, s32 argument, s32 flags);
 void sysPlaySe(s32 sound);
 void FUN_003d474c();
-
 
 static __inline void uiQuestEnterMenuState(UiQuestApoc *quest, u32 next)
 {
@@ -50,7 +49,7 @@ void FUN_0021a4b0()
     uiQuestRefreshDetailPages(questId);
     uiSpriteSelectAnim(quest->acceptance.sprite, 2);
     FUN_003dea6c(questId, 0, 1);
-    QuestRequirementDefinition *definition = dataTable1bOr1cGetRecord(questId);
+    QuestRecordA *definition = dataTable1bOr1cGetRecord(questId);
     if (definition && definition->kind == 11) {
         const SpecialQuestMetadata *metadata = reinterpret_cast<const SpecialQuestMetadata *>(definition);
         char text[132];

@@ -1,5 +1,6 @@
 /* NON_MATCHING: menu-state base hoist precedes the slot clear; kind-3 test uses BEQ/B rather than retail BNE/B. */
 #include "battle/BattleCommandMenu.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 BattleCommandEntry *FUN_00292960(u8 index, int primary);
@@ -7,7 +8,6 @@ u32 FUN_00293988(void *scene);
 s32 FUN_0023dcb8(void);
 s32 idOwnerHasActiveObject(void *unit);
 s8 *gameGetSlotTable(void);
-void *gameGetUnitRecord(s32 id);
 void gridNavigationConfigure(CommandCounter *counter, s32 value, s32 a, s32 b, s32 c, s32 d);
 
 /* Count the commands available in the battle command menu for the party and for each party member. */

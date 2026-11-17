@@ -379,7 +379,7 @@ unsigned int FUN_00225ddc(void)
       asdSequenceRequest(temp_v2,0);
     }
     DAT_005f1b70 = '\0';
-    g_gameState.scriptValue = 0;
+    g_gameState.entryValue = 0;
     FUN_004731d8();
   }
   jobStop(*g_aocJob,0);

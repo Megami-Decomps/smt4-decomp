@@ -3,9 +3,9 @@
 #include "battle/btlAction.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *battle, u32 id);
 void FUN_00250720(BtlMainState *battle);
 void FUN_002551ac(s32 side, ScriptUnit *source, BtlActionRecord *action, s32 kind,
                  s32 amount, s32 first, s32 second, s32 hp, s32 maxHp,

@@ -1,10 +1,10 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0037.h"
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 FUN_003e4978(void);
 void efctSetSpeed(f32 speed);
 const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);

@@ -1,4 +1,5 @@
 #include "battle/BtlMainAccess.h"
+#include "camp/RenderCtxA.h"
 #include "util/MathFunctions.h"
 /* NON_MATCHING: dispatch guard peeling, sprite visibility getter, and mask/register loads differ. */
 #include "battle/btlUI.h"
@@ -9,7 +10,6 @@
 
 extern "C" {
 extern const u32 DAT_00573c70[2];
-extern RenderCtxA* g_renderCtx;
 f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void effectRenderTransformedInstance(UiSpriteState* sprite, f32 horizontalOffset);
 

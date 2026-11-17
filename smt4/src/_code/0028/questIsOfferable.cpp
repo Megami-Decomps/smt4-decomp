@@ -1,26 +1,8 @@
 /* NON_MATCHING: questId/record saved registers are swapped (retail r5/r6) and retail predicates `mov r0, questId` before the id >= 0x15e branch. */
 #include "map/mapDepart.h"
+#include "quest_center/QuestRecord.h"
 #include "quest_center/QuestStatus.h"
-#include "shard/W6_W6Match5_SecondarySort.h"
 #include "game/GameState.h"
-
-struct QuestAvailabilityRecord {
-    struct Metadata {
-        u16 id;
-        u8 unk02[4];
-        u8 kind;
-        u8 flags;
-    };
-    union {
-        SecondarySortRecord prefix;
-        Metadata metadata;
-    };
-    /* 0x154 */ u8 unk154[0x56];
-    /* 0x1aa */ u16 excludedQuests[2];
-    /* 0x1ae */ u16 route;
-    /* 0x1b0 */ u16 hideStartFlag;
-    /* 0x1b2 */ u16 hideEndFlag;
-};
 
 struct QuestRuntimeStatus {
     u8 flags;
@@ -39,7 +21,7 @@ bool questIsOfferable(u16 questId)
     if (questRequirementsMet(questId) == 0) {
         return false;
     }
-    const QuestAvailabilityRecord *record = reinterpret_cast<const QuestAvailabilityRecord *>(dataTable1bOr1cGetRecord(questId));
+    const QuestRecord *record = dataTable1bOr1cGetRecord(questId);
     if (record->excludedQuests[0] != 0 && questIsCompleted(record->excludedQuests[0]) != 0) {
         return false;
     }
@@ -47,12 +29,12 @@ bool questIsOfferable(u16 questId)
         return false;
     }
     u32 completed = reinterpret_cast<const QuestRuntimeStatus *>(questGetRuntimeStatus(questId))->completed();
-    if (completed != 0 && (record->metadata.flags & 2) == 0) {
+    if (completed != 0 && (record->flags & 2) == 0) {
         return false;
     }
     if (questId >= 0x15e) {
-        const QuestAvailabilityRecord *current = reinterpret_cast<const QuestAvailabilityRecord *>(dataTable1bOr1cGetRecord(questId));
-        if (current != NULL && current->metadata.kind == 9 && g_gameState.mapId == 0x18) {
+        const QuestRecord *current = dataTable1bOr1cGetRecord(questId);
+        if (current != NULL && current->kind == 9 && g_gameState.mapId == 0x18) {
             return false;
         }
     } else {

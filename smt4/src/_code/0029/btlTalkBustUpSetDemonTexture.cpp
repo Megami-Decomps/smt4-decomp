@@ -1,21 +1,14 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "code/Code002a.h"
-#include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 #include "shard/W6_W6Match2_HelpResources.h"
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "addon/AocSystem.h"
 
-/* The demon record, read for its model entry only. */
-struct DevilModelView {
-    /* 0x00 */ u8 unk00[0x90];
-    /* 0x90 */ u16 model;
-};
-
 extern "C" {
 bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);
-Table00Record *dataTable00FindById(s32 id);
-DevilModelView *devilGetRecord(u32 id);
 s32 texTableRequestNamedTextureLoad(AocSystem *system, s32 table, u32 entry, s32 flags);
 s32 asdTMTexTablePrepareNodeImage(s32 table, u32 entry);
 s32 FUN_0032c3fc(BattleTalkBustUpPrefixIV *bustUp);

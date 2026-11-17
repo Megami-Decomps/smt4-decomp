@@ -2,11 +2,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 extern void *g_btlUiBlock;
 
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 void FUN_003f2aec(BtlMainStateA *battle);
 void btlUiIdsRefresh(void *block);
 

@@ -1,5 +1,5 @@
 /* NON_MATCHING: VFP register allocation and the order of the matrix products differ; the effect position, the table-based rotation and the call sequence are the same. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "nw/math/MTX34.h"
@@ -13,7 +13,6 @@ void eplSlotStartRequest(s32 slot);
 void mapEplSetSlotPosition(s32 slot, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
 void eplSlotApplyParameters(s32 slot, const MTX34 *matrix);
-extern LmapSceneA *g_lmapScene;
 extern f32 g_sinCosTable[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
 enum {
@@ -62,10 +61,10 @@ static void rotationFromSinCos(MTX34 *matrix, f32 sinX, f32 cosX, f32 sinY, f32 
  * orientation: a plain heading normally, tilted on the Y axis in the one scripted scene. */
 void FUN_003136e4(f32 angle, f32 distance)
 {
-    f32 x = g_lmapScene->transform.position[0];
-    f32 y = g_lmapScene->transform.position[1];
-    f32 z = g_lmapScene->transform.position[2];
-    f32 radians = (g_lmapScene->transform.headingDegrees + angle) * 0.017453292f;
+    f32 x = g_lmapScene->pose.position.x;
+    f32 y = g_lmapScene->pose.position.y;
+    f32 z = g_lmapScene->pose.position.z;
+    f32 radians = (g_lmapScene->pose.heading + angle) * 0.017453292f;
     x += libm_sinf(radians) * distance;
     z += libm_cosf(radians) * distance;
     y += 5.0f;

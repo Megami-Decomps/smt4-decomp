@@ -16,12 +16,12 @@ struct DepartureSource {
 // Seed both ends of a map transition from the selected departure source.
 extern "C" void FUN_004b7a08(const DepartureSource* source)
 {
-    g_gameState.transitionActive = 1;
+    g_gameState.savedLocationSet = 1;
     s32 map = source->map + 200;
-    g_gameState.sourceMap = map;
-    g_gameState.destinationMap = map;
+    g_gameState.savedMapId = map;
+    g_gameState.targetMapId = map;
     if (source->area != NULL) {
-        g_gameState.sourceArea = source->area->area;
-        g_gameState.destinationArea = source->area->area;
+        g_gameState.savedAreaId = source->area->area;
+        g_gameState.targetAreaId = source->area->area;
     }
 }

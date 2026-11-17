@@ -1,15 +1,7 @@
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-typedef struct PlayerData {
-    /* 0x00 */ u8 unk00[0x1E];
-    /* 0x1E */ s16 limit;
-    /* 0x20 */ u8 unk20[0xC];
-    /* 0x2C */ s16 value;
-} PlayerData;
-
-extern PlayerData *gameGetPlayerData(void);
 
 static inline s32 playerClampPositive(s32 value)
 {
@@ -21,10 +13,10 @@ static inline s32 playerClampPositive(s32 value)
 /* Sets the player value to `value` clamped to at least 1, but never above the player's limit. */
 void FUN_00333fec(s32 value)
 {
-    PlayerData *player = gameGetPlayerData();
-    s32 limit = player->limit;
+    PlayerDataIV *player = gameGetPlayerData();
+    s32 limit = player->maxMp;
 
-    player->value = value <= limit ? playerClampPositive(value) : limit;
+    player->mp = value <= limit ? playerClampPositive(value) : limit;
 }
 
 } /* extern "C" */

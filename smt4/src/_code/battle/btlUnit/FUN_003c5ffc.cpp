@@ -1,17 +1,11 @@
 /* NON_MATCHING: battle debug list box item-changed handler (copies the edited item into the matching debug setting); the list box is read per case and case 1 calls workSetScalarParameter as retail does; retail loads the destination address before the item value in the direct-store cases and orders the arm blocks without the shared store tail. */
 #include "common.h"
 #include "battle/btlHelp.h"
+#include "battle/BtlGlobals.h"
 
 struct BtlDebugMenu {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ u32 listBox;
-};
-
-struct BtlMainDebug {
-    /* 0x000 */ u8 unk000[0x560];
-    /* 0x560 */ u32 debugTarget;
-    /* 0x564 */ u8 unk564[0xD0];
-    /* 0x634 */ u32 flags;
 };
 
 struct BtlUnitDebugFlags {
@@ -23,7 +17,6 @@ struct BtlUnitDebugFlags {
 #define BTL_UNIT_FLAG_DEBUG_OWNER 0x40000000
 
 extern "C" {
-extern BtlMainDebug *g_btlMain;
 extern u32 DAT_004342d4;
 extern u32 DAT_004342d8;
 extern u32 DAT_004342e0;
@@ -54,7 +47,7 @@ extern u32 DAT_00493554;
 extern u32 DAT_0049355c;
 
 u32 *asdListBoxGetItemText(u32 box);
-void workSetScalarParameter(BtlMainDebug *work, f32 value);
+void workSetScalarParameter(BtlCamera *work, f32 value);
 s32 listBoxItemHasOwner(u32 box);
 
 static __inline void flagsSetBits(u32 *flags, u32 mask)

@@ -5,20 +5,19 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W5_W5Match8_CameraTransition.h"
 #include <stddef.h>
+#include "battle/BtlEntryLookup.h"
+#include "battle/btlCamera.h"
 
 typedef char CheckRosterMotionHandle[offsetof(BattleRosterMotionA, handle) == 0x1BC ? 1 : -1];
 typedef char CheckRosterMotionSelection[offsetof(BattleRosterMotionA, selection) == 0x128 ? 1 : -1];
-typedef char CheckMotionSubjectStatus[offsetof(BattleMotionSubject, status) == 0x110 ? 1 : -1];
 typedef char CheckCombatantEntrySize[sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
 
 extern "C" {
-extern CameraTransitionGlobals g_btlCamera;
+extern BtlCameraStatics g_btlCamera;
 extern BattleEffectGlobals g_battleEffectSettings;
 extern u64 g_battleMotionCombatantClearMask;
 BtlMainStateA *jobGetWork(u32 job);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
-BattleMotionSubject *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 group);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 u32 randBetween(u32 minimum, u32 maximum);
 void *stateEntryFindById(BtlMainStateA *battle, s32 id);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
@@ -29,7 +28,7 @@ void FUN_003f2638(BtlMainStateA *battle, u32 action, BattleRosterRecordA *record
 void FUN_004cae58(BtlMainStateA *battle, BattleRosterRecordA *record);
 f32 randomGetNormalizedFloat(void);
 f32 FUN_001a1ee0(f32 angle);
-void halfRecClear(BtlMainStateA *battle, BattleMotionSubject *subject);
+void halfRecClear(BtlMainStateA *battle, BtlUnitDataA *subject);
 void flagSelectionRebuild(void *selection, u32 flags);
 void FUN_004cb64c(BtlMainStateA *battle, BattleRosterRecordA *record);
 void battleUnitUpdateModelLoad(BtlMainStateA *battle, BattleRosterRecordA *record);
@@ -56,10 +55,10 @@ u32 battleRosterMotionUpdate(u32 job)
         if (variant < 0) {
             variant = 0;
         }
-        BattleMotionSubject *subject = btlFindEntryBlockByMemberId(battle, motion.group);
-        if (subject != NULL && (subject->status & 0x10) != 0) {
+        BtlUnitDataA *subject = btlFindEntryBlockByMemberId(battle, motion.group);
+        if (subject != NULL && (subject->statusFlags & 0x10) != 0) {
             ++motion.pulseFrame;
-            if ((subject->appearance.flags & 3) != 0 && motion.pulseFrame >= motion.pulseDuration) {
+            if ((subject->flags & 3) != 0 && motion.pulseFrame >= motion.pulseDuration) {
                 btlMainFindEntryByListedId(battle, motion.group);
                 motion.pulseDuration = randBetween(2, 6) * 30;
                 motion.pulseFrame = 0;
@@ -72,7 +71,7 @@ u32 battleRosterMotionUpdate(u32 job)
             } else if ((motion.flags & 2) != 0) {
                 motion.motionDuration = 0;
                 motion.amount = 0.0f;
-                void *animation = stateEntryFindById(battle, subject->appearance.ids[variant]);
+                void *animation = stateEntryFindById(battle, subject->parts[variant]);
                 motion.frame += 2;
                 s32 lastFrame = (s32)asdAnimGetTrackLastFrame(animation, 0);
                 motion.frame %= lastFrame;
@@ -136,7 +135,7 @@ u32 battleRosterMotionUpdate(u32 job)
                     }
                     subject = btlFindEntryBlockByMemberId(btlGetMainState(), motion.group);
                     if (subject != NULL) {
-                        if ((subject->status & 0x180) != 0) {
+                        if ((subject->statusFlags & 0x180) != 0) {
                             btlGetMainState();
                             motion.state = 3;
                             motion.stateFrame = 0;
@@ -150,13 +149,13 @@ u32 battleRosterMotionUpdate(u32 job)
                                 current->entries[motion.unitIndex].flags &= ~g_battleMotionCombatantClearMask;
                             }
                         }
-                        if ((subject->status & 0x3DC2) != 0) {
+                        if ((subject->statusFlags & 0x3DC2) != 0) {
                             halfRecClear(btlGetMainState(), subject);
                         }
                         if (motion.unitIndex >= 0) {
                             BtlMainStateA *current = btlGetMainState();
                             if (&current->entries[motion.unitIndex] != NULL) {
-                                flagSelectionRebuild(motion.selection, subject->status);
+                                flagSelectionRebuild(motion.selection, subject->statusFlags);
                             }
                         }
                     }

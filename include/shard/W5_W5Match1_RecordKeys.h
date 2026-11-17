@@ -25,11 +25,6 @@ struct AsyncRequestResult {
     /* 0x08 */ u32 detail;
 };
 
-struct GxPresetState {
-    /* 0x000 */ u8 padding[0x1BC];
-    /* 0x1BC */ u32 nextPreset;
-};
-
 struct UnsignedRecordKey32 {
     /* 0x00 */ u8 padding[0x20];
     /* 0x20 */ u16 key;
@@ -199,11 +194,6 @@ struct MapTimerBanks {
     /* 0x2844 */ MapTimerSlot slots[32];
 };
 
-struct GxPresetDepth {
-    /* 0x000 */ u8 unk000[0x1C4];
-    /* 0x1C4 */ f32 depth;
-};
-
 struct CallbackBinding {
     /* 0x00 */ void (*callback)(void *);
     /* 0x04 */ void *context;
@@ -241,11 +231,6 @@ struct FixedRecordTable {
 
 struct Vector4 {
     f32 x, y, z, w;
-};
-
-struct GxPresetVectors {
-    /* 0x000 */ u8 unk000[0x174];
-    /* 0x174 */ Vector4 vectors[4];
 };
 
 struct GfxCallbackPrefix {
@@ -348,13 +333,6 @@ struct VectorDefaultsState {
     /* 0x10 */ Vector4 second;
 };
 
-struct PresetEnableWords {
-    /* 0x000 */ u8 unk000[0xC0];
-    /* 0x0C0 */ u32 first;
-    /* 0x0C4 */ u8 unk0C4[0x74];
-    /* 0x138 */ u32 second;
-};
-
 struct CampWorker {
     /* 0x00 */ u8 unk00[0x18];
     /* 0x18 */ u32 state;
@@ -369,12 +347,6 @@ struct ScriptScalarWork {
     /* 0x00 */ u8 unk00[0x0C];
     /* 0x0C */ f32 value;
     /* 0x10 */ f32 speed;
-};
-
-struct GxRatePresets {
-    /* 0x000 */ u8 unk000[0x1C0];
-    /* 0x1C0 */ s32 interval;
-    /* 0x1C4 */ f32 depth;
 };
 
 struct HalfwordTarget {

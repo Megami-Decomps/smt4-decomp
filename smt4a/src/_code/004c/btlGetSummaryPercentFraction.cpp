@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 struct BattlePercentSummary {
     /* 0x00 */ u32 unk00[7];
@@ -10,7 +11,6 @@ struct BattlePercentSummary {
 };
 
 extern "C" {
-BtlCombatantEntryA* btlMainFindEntryByListedId(BtlMainStateA* state, s32 index);
 void btlEntryBuildSummary(BattlePercentSummary* summary, BtlMainStateA* state,
                   const BtlCombatantEntryA* entry);
 

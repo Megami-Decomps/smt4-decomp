@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e553c` (_code @ 0x1e553c, 0x910 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/LmapGlobals.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
 
 extern "C" {
-extern s32 g_lmapScene;
 
 int mapDepartSetTarget(...);
 int fileSlotFree(...);
@@ -307,7 +307,7 @@ unsigned int FUN_001e553c(void)
     if (*(int *)(temp_v2 + 0x1c) == 6) {
       *(unsigned char *)(temp_v2 + 0x3c) = 1;
       SoundActorQueuePosition soundPosition =
-          soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x1c));
+          soundActorPositionFromArray(&g_lmapScene->pose.position.x);
       soundPosition.y += 30.0f;
       if (g_gameState.mapId < 100) {
         soundActorStartOnFreeChannel(0x1000200, soundPosition);

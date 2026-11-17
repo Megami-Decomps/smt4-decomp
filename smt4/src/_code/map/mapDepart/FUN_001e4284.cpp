@@ -107,12 +107,12 @@ void FUN_001e4284(u32 preset, s32 transition)
     g_gameState.overlayKind = entry->unk28[0];
     g_gameState.overlayX = (s8)entry->unk28[2];
     g_gameState.overlayY = (g_gameState.overlayX * 3) / 5;
-    g_gameState.overlayTarget = entry->unk28[3];
-    g_gameState.overlayColorB = entry->unk28[4];
-    g_gameState.overlayFlag = entry->unk28[1];
-    g_gameState.overlayColorA = entry->unk28[5];
-    g_gameState.overlayColorR = entry->unk28[6];
-    g_gameState.overlayColorG = entry->unk28[7];
+    g_gameState.overlayTexture = entry->unk28[3];
+    g_gameState.overlayAlpha = entry->unk28[4];
+    g_gameState.overlayAdditive = entry->unk28[1];
+    g_gameState.overlayRed = entry->unk28[5];
+    g_gameState.overlayGreen = entry->unk28[6];
+    g_gameState.overlayBlue = entry->unk28[7];
     g_fixedCameraPosition.degrees = (f32)entry->unk1A + 180.0f;
     if (g_fixedCameraPosition.degrees > 360.0f) {
         g_fixedCameraPosition.degrees -= 360.0f;

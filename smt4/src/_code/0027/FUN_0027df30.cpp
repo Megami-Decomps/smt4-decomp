@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "common.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 /* A skill record: its id at +0x62 (ids below 0x6d are the "reflect" skills). */
@@ -9,22 +10,14 @@ struct SkillRecord {
     /* 0x00 */ u8 unk00[0x62];
     /* 0x62 */ s16 id;
 };
-
-/* The battle unit entry found for a skill: its status flags are at +0xfa. */
-struct BattleEntry {
-    /* 0x00 */ u8 unk00[0xfa];
-    /* 0xfa */ u16 statusFlags;
-};
 }
 
 extern "C" {
 void btlAdjustPropertyClamped(s32 id, s32 a, s32 b, s32 c);
-void *btlMainFindEntryByListedId(void *state, s32 id);
 
 void FUN_002268d0(s32 frame, s32 delay, u32 actor, SkillRecord *skill, s32 first, s32 second, s32 mode, s32 arg, f32 speed);
 u32 FUN_00293230(void *state);
 void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 sound, s32 c, s32 d, s32 e, s32 f);
-BattleEntry *btlFindEntryBlockByMemberId(void *state, s32 id);
 
 /* Queues the reflect actions of a skill use: the optional pre-effect, the one or two damage amounts (with their
    effect and, when a status flag changes, the effect sound), and the follow-up status actions. Always returns 1. */
@@ -44,7 +37,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
     }
     s16 preFrame = (s16)preDelay + (s16)frame;
     if (preDelay >= 0) {
-        void *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), skill->id);
+        BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), skill->id);
         if (isReflect && entry != NULL && preSide >= 0) {
             ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, preFrame, 0, actor);
             action->kind = 6;
@@ -103,7 +96,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
         u32 flags = 0;
         isReflect = skill->id < 0x6d;
         if (isReflect) {
-            BattleEntry *entry = btlFindEntryBlockByMemberId(static_cast<void *>(btlGetMainState()), skill->id);
+            BtlUnitData *entry = btlFindEntryBlockByMemberId(btlGetMainState(), skill->id);
             if (entry != NULL) {
                 flags = entry->statusFlags;
             }

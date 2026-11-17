@@ -1,14 +1,11 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-
-extern GxPresetVectors g_asdGxPresets;
-
-/* Stores a four-component graphics preset. */
+/* Sets clear color `index`. */
 void asdGxPresetVectorSet(u32 index, f32 x, f32 y, f32 z, f32 w)
 {
-    Vector4 value = {x, y, z, w};
-    g_asdGxPresets.vectors[index] = value;
+    AsdGxClearColor value = {{x, y, z}, w};
+    g_asdGxPresets.clearColors[index] = value;
 }
 
 } /* extern "C" */

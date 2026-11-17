@@ -1,11 +1,10 @@
 /* NON_MATCHING: angle branches, global-view aliasing and VFP texture-coordinate scheduling differ from retail. */
 #include "battle/btlView.h"
 #include "game/GameStateA.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 extern BattleViewState g_battleViewState;
-extern LmapScene *g_lmapScene;
 s32 gameFlagIsSet(u32 flag);
 void mapRenderApplySecondary();
 f32 distSpatial(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1);
@@ -23,9 +22,9 @@ void FUN_002cf8e4()
         (g_battleViewState.unk2c != 8 && g_battleViewState.unk2c != 9))
         return;
     mapRenderApplySecondary();
-    const f32 *position = g_lmapScene->transform.position;
+    const MapVector *position = &g_lmapScene->pose.position;
     const BattleViewVec3 *target = &g_battleViewState.camera.position;
-    f32 distance = distSpatial(position[0], position[1], position[2], target->x, target->y, target->z);
+    f32 distance = distSpatial(position->x, position->y, position->z, target->x, target->y, target->z);
     f32 angle = indicator->angle;
     f32 x;
     f32 y = 198.0f;

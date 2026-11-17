@@ -1,5 +1,6 @@
 /* NON_MATCHING: bible devil stat rows; the stat lookup is one inline helper here while retail expands separate branch trees per use, and the row arrays are addressed through one struct instead of six literal bases */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 
 #define BIBLE_STAT_ROWS 10
 #define BIBLE_COLOR_NONE 0xFFFFFFFF
@@ -12,11 +13,6 @@ struct BibleDevilEntry {
     /* 0x08 */ u8 statA;
     /* 0x09 */ u8 statB;
     /* 0x0A */ u8 unk0A[0x16];
-};
-
-struct DevilRecordStat {
-    /* 0x00 */ u8 unk00[3];
-    /* 0x03 */ u8 level;
 };
 
 struct BibleDevilWork {
@@ -53,7 +49,6 @@ extern BibleDevilRows g_bibleDevilRows;
 
 s32 FUN_0029e924(void *list);
 s32 rangeLimitMin(void *list);
-DevilRecordStat *devilGetRecord(u32 id);
 void textFormatBuffer(char *buffer, const char *format, u32 value);
 u32 FUN_0029ce60(u32 devilId, s32 column, s32 flag);
 BibleLayoutPoint *FUN_002bf4f0(void *layout, s32 id);
@@ -73,7 +68,7 @@ static __inline u32 bibleStatOf(const BibleDevilEntry *entry, bool perDevil, s32
         else if (column == 2)
             stat = entry->statB;
     } else {
-        DevilRecordStat *record = devilGetRecord(entry->devilId);
+        DevilRecord *record = devilGetRecord(entry->devilId);
         if (entry->devilId != 0)
             stat = record->level;
     }
@@ -103,7 +98,7 @@ void FUN_0022d1a8(BibleDevilWork *work)
             if (!perDevil) {
                 compare = entry->statA;
             } else {
-                DevilRecordStat *record = devilGetRecord(entry->devilId);
+                DevilRecord *record = devilGetRecord(entry->devilId);
                 if (entry->devilId != 0)
                     compare = record->level;
             }

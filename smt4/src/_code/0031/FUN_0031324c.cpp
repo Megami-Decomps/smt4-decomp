@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ struct Entry0031324c {
 };
 
 Record0031324c *table8Type5FindById(u32 id);
-s32 itemGetSortCategory(u32 key);
 
 /* Comparator: orders entries by itemGetSortCategory of their records' key, then by the key itself. */
 s32 FUN_0031324c(Entry0031324c *a, Entry0031324c *b)

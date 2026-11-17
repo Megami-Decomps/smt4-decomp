@@ -3,7 +3,6 @@
 #include <stddef.h>
 
 namespace {
-struct CameraResetGlobals { u8 unk00[0x2C]; f32 current, delta; };
 struct CameraResetVectors {
     BtlCameraVector3 primaryStart, primaryDelta;
     BtlCameraVector3 alternateStart, alternateDelta;
@@ -16,7 +15,7 @@ static inline void clearCameraVector(BtlCameraVector3 &value)
 }
 }
 extern "C" {
-extern CameraResetGlobals g_btlCamera;
+extern BtlCameraStatics g_btlCamera;
 extern CameraResetVectors DAT_005e1518;
 
 // Restart scalar/vector interpolation from current camera values unless transitions are locked.
@@ -95,14 +94,14 @@ void FUN_004f41b0(BtlCameraA *camera, u32 unused, u32 duration)
         work->position.frame = 0;
         work->alternatePosition.frame = 0;
         work->savedDistance = work->currentDistance;
-        g_btlCamera.current = work->currentScalar;
+        g_btlCamera.scalar = work->currentScalar;
         work->savedMode = work->currentMode;
         work->savedSource = work->source;
         work->targetStart = work->targetProgress;
         DAT_005e1518.primaryStart = work->currentTarget;
         DAT_005e1518.alternateStart = work->alternateProgress;
         work->scalarDelta = 0.0f;
-        g_btlCamera.delta = 0.0f;
+        g_btlCamera.scalarDelta = 0.0f;
         work->angleDelta = 0.0f;
         work->distanceDelta = 0.0f;
         clearCameraVector(work->targetDelta);

@@ -1,16 +1,11 @@
 /* NON_MATCHING: option argument reload/scratch allocation and two-float projection copies differ; -O2 candidate. */
 #include "battle/btlTargetSelect.h"
+#include "gamedata/Table00Lookup.h"
 #include "code/Code0027.h"
 #include "addon/LookupRecord.h"
 
 struct TargetInfoPosition { f32 x, y, z; };
 struct TargetInfoProjection { f32 x, y; };
-struct TargetInfoDefinition {
-    u8 unk00[2];
-    u8 category;
-    u8 unk03[0x21];
-    u16 resistances[8];
-};
 struct TargetInfoPanel {
     BtlUiObject base;
     char name[32];
@@ -39,7 +34,6 @@ static __inline TargetInfoPanel *targetInfoPanel(BtlTargetSelect *selection)
 }
 extern "C" {
 extern BtlTargetSelect *g_btlTargetSelect;
-const TargetInfoDefinition *dataTable00FindById(u32);
 const char *demonGetRaceLabel(u32, u32);
 u8 FUN_0029e9cc(u32);
 void textFormatBuffer(char *, const char *, ...);
@@ -49,13 +43,13 @@ void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32
                  u8 option2, u8 option3, u8 option4, u8 option5)
 {
     BtlTargetSelect *selection = g_btlTargetSelect;
-    const TargetInfoDefinition *definition = dataTable00FindById(id);
+    const Table00Record *definition = dataTable00FindById(id);
     const char *name = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(id));
     textFormatBuffer(targetInfoPanel(selection)->name, "%s", name);
     const char *category = demonGetRaceLabel(id, 0);
     textFormatBuffer(targetInfoPanel(selection)->categoryName, "%s", category);
     targetInfoPanel(selection)->level = FUN_0029e9cc(id);
-    targetInfoPanel(selection)->category = definition->category;
+    targetInfoPanel(selection)->category = definition->level;
     for (u32 i = 0; i < 8; ++i)
         targetInfoPanel(selection)->resistances[i] = definition->resistances[i] >> 10;
     targetInfoPanel(selection)->options[0] = option0;

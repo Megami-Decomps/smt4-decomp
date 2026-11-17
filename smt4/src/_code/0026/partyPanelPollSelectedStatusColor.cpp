@@ -9,11 +9,6 @@ struct PartyStatusWidget {
     u8 unk28[0xc];
     s32 source;
 };
-struct PartyStatusUnit {
-    BtlEquip equip;
-    u16 flags;
-    u16 id;
-};
 }
 
 extern "C" {
@@ -37,7 +32,7 @@ inline void pollStatusColor(PartyPanelWidget* const& widget, u32& color)
         if (*selectedId < 0 && FUN_0028dbe0(widget) != -1) {
             color = FUN_0028dbe0(widget);
         }
-    } else if (static_cast<PartyStatusUnit *>(gameGetUnitRecord(widgetSource(widget)))->id == *selectedId
+    } else if (gameGetUnitRecord(widgetSource(widget))->id == *selectedId
                && FUN_0028dbe0(widget) != -1) {
         color = FUN_0028dbe0(widget);
     }

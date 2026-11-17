@@ -1,24 +1,9 @@
 /* NON_MATCHING: readable rewrite; the per-goal loop body matches retail, but retail shares ONE goal-changed mark between the store paths and the second check (the build duplicates it), keeps a 0x34 frame and its register order for the amount/base differs. */
 #include "gamedata/RosterView.h"
+#include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
-
-/* One requirement of a goal: a kind (2 = a counted target) with its target id and threshold. */
-struct GoalRequirement {
-    /* 0x00 */ u16 kind;
-    /* 0x02 */ u16 target;
-    /* 0x04 */ u32 threshold;
-};
-
-/* Goal definition returned by dataTable1bOr1cGetRecord: only the fields read here. */
-struct GoalRecord {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u8 unk02[4];
-    /* 0x06 */ u8 category;
-    /* 0x07 */ u8 unk07[0xf9];
-    /* 0x100 */ GoalRequirement requirements[4];
-};
 
 /* A roster slot seen as a goal slot: the goal id and one progress counter per requirement. */
 struct GoalSlot {
@@ -35,7 +20,6 @@ struct GoalProgressBank {
 };
 
 extern "C" {
-GoalRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 goalConditionsSatisfied(u32 id);
 
 /* The flag bytes of a goal in the game-flag block. */
@@ -58,16 +42,16 @@ static __inline void goalAddProgress(GoalSlot *counters, u16 goalId, u16 target,
     if (goalId == 0) {
         return;
     }
-    GoalRecord *goal = dataTable1bOr1cGetRecord(goalId);
-    if (goal->category != 1) {
+    QuestRecordA *goal = dataTable1bOr1cGetRecord(goalId);
+    if (goal->kind != 1) {
         return;
     }
     s32 incomplete = 0;
     GoalProgressBank *bank = reinterpret_cast<GoalProgressBank *>(gameFlagsGetBlock());
     for (s32 i = 0; i < 4; i++) {
-        if (goal->requirements[i].kind == 2 && goal->requirements[i].target == target) {
+        if (goal->requirements[i].kind == 2 && goal->requirements[i].id == target) {
             u32 before = counters->counts[i];
-            u32 threshold = goal->requirements[i].threshold;
+            u32 threshold = goal->requirements[i].count;
             if (before < threshold) {
                 incomplete = 1;
             }
@@ -75,7 +59,7 @@ static __inline void goalAddProgress(GoalSlot *counters, u16 goalId, u16 target,
             if ((s32)after < 0xffff) {
                 counters->counts[i] = (u16)after;
                 if (incomplete) {
-                    if ((u16)after >= goal->requirements[i].threshold) {
+                    if ((u16)after >= goal->requirements[i].count) {
                         bank->reached = target;
                     } else {
                         bank->advanced = target;
@@ -93,10 +77,10 @@ static __inline void goalAddProgress(GoalSlot *counters, u16 goalId, u16 target,
             break;
         }
     }
-    if (goal->category == 1 && goal->requirements[0].kind == 2 && goal->requirements[0].target != 0 &&
+    if (goal->kind == 1 && goal->requirements[0].kind == 2 && goal->requirements[0].id != 0 &&
         ((*goalFlagEntry(goal->id) & 8) >> 3) == 0 &&
         goalConditionsSatisfied(goal->id) != 0) {
-        bank->reached = goal->requirements[0].target;
+        bank->reached = goal->requirements[0].id;
         goalMarkChanged(goalId);
     }
 }

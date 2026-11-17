@@ -168,7 +168,7 @@ void FUN_004b6bc4(ResultMenu *menu, s32 type, s32 group)
 
     kind = -1;
     if (gameStateIsFlagSetAndLarge() != 0) {
-        kind = g_gameState.sourceArea;
+        kind = g_gameState.savedAreaId;
     }
     if (menu->startKind != 0) {
         kind = menu->startKind;

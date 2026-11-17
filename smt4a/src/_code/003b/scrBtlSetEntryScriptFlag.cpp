@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 /* The battle message flag masks at 0x5710E0; only the script flag is named. */
 struct BtlMessageMasks {
@@ -11,7 +12,6 @@ extern "C" {
 
 extern BtlMessageMasks g_btlMessageFlagMasks; /* 0x5710e0 */
 s32 scrGetArg(s32 index);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 id);
 
 /* Script command: sets (argument 2 positive) or clears the script flag on the battle entry with the given id. */
 u32 scrBtlSetEntryScriptFlag(void)

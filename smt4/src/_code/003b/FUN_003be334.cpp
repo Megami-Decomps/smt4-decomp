@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "gamedata/DataTable40.h"
 #include "gamedata/ConsumableRecord.h"
+#include "gamedata/UnitRecordAccess.h"
 
 /* The skill record (only the fields read here). */
 struct SkillRecord {
@@ -36,17 +37,12 @@ struct UnitStats {
     /* 0xEE */ u16 stat;
 };
 
-struct UnitRecord {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ u16 stat;
-};
 
 extern "C" {
 BattleEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
 void btlEntryBuildSummary(ActionInfo *info, BtlMainState *battle, BattleEntry *entry);
 s32 FUN_003be918(s32 skill, s32 attacker, s32 target, s32 column, s32 row, f32 power, f32 multiplier);
 UnitStats *btlFindEntryBlockByMemberId(BtlMainState *battle, s32 id);
-UnitRecord *gameGetUnitRecord(s32 index);
 s32 flagWordTestBit(void *record, u32 bit);
 s32 randRange(u32 limit);
 
@@ -102,7 +98,7 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
     if (record->healMp != 0)
         value = record->healMp;
     if (record->curesMp != 0) {
-        s32 base = target < 109 ? btlFindEntryBlockByMemberId(battle, target)->stat : gameGetUnitRecord(target - 109)->stat;
+        s32 base = target < 109 ? btlFindEntryBlockByMemberId(battle, target)->stat : gameGetUnitRecord(target - 109)->maxMp;
         value = (s32)((f32)(s16)(base * record->curesMp) * 0.01f);
     }
     if (wantDamage != 0)

@@ -1,10 +1,10 @@
 /* NON_MATCHING: close: armcc rewrites the 999 clamps as cmp #1000 (retail compares against a register-held 999), the equipment switch has no default in retail, and the parameter-block copy is 16 bytes in retail (built also spills a second block); register assignment differs */
 #include "gamedata/PlayerInitialization.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
 #include "gamedata/EquipmentRecord.h"
 
 /* Hit points, magic points and the five stats as stored back to back. */
-struct StatBlock {
+struct StatValues {
     u16 hp;
     u16 mp;
     s16 stats[5];
@@ -34,10 +34,10 @@ extern "C" {
 
 void FUN_003c1e50(GrowthParameters *info);
 void FUN_003c1ab4(s32 level, GrowthValues *output, const GrowthParameters *parameters);
-void FUN_002dada4(StatBlock *stats, const StatLimits *limits, s32 mode);
+void FUN_002dada4(StatValues *stats, const StatLimits *limits, s32 mode);
 
 /* The equipped item of one slot. */
-static __inline u16 equipmentGet(const PlayerInitialRecordIV *player, s32 slot)
+static __inline u16 equipmentGet(const PlayerDataIV *player, s32 slot)
 {
     switch (slot) {
     case 0:
@@ -66,9 +66,9 @@ static __inline s16 statClamp(s16 value)
 
 /* Recomputes a player's current stats from his base stats plus equipment bonuses, clamps them and re-derives the
  * maximum hit points and magic points. */
-void playerRecalcStatsFromEquipment(PlayerInitialRecordIV *player)
+void playerRecalcStatsFromEquipment(PlayerDataIV *player)
 {
-    StatBlock *current;
+    StatValues *current;
     s16 hpBonus = 0;
     s16 mpBonus = 0;
     s32 slot;
@@ -78,10 +78,10 @@ void playerRecalcStatsFromEquipment(PlayerInitialRecordIV *player)
     EquipmentRecord *record;
 
     if (player == NULL) {
-        player = reinterpret_cast<PlayerInitialRecordIV *>(gameGetPlayerData());
+        player = gameGetPlayerData();
     }
-    current = (StatBlock *)&player->maximumHp;
-    *current = *(const StatBlock *)&player->baseStats;
+    current = (StatValues *)&player->maxHp;
+    *current = *(const StatValues *)&player->baseStats;
     for (slot = 0; slot < 7; slot++) {
         u16 id = equipmentGet(player, slot);
 
@@ -105,10 +105,10 @@ void playerRecalcStatsFromEquipment(PlayerInitialRecordIV *player)
     player->stats[1] = statClamp(player->stats[1]);
     FUN_003c1e50(&parameters);
     parametersCopy = parameters;
-    FUN_003c1ab4(player->enabled, (GrowthValues *)current, &parametersCopy);
-    limits.base = *(const LimitWords *)&player->unk2E[6];
-    player->maximumHp += hpBonus;
-    player->maximumMp += mpBonus;
+    FUN_003c1ab4(player->level, (GrowthValues *)current, &parametersCopy);
+    limits.base = *(const LimitWords *)player->skills;
+    player->maxHp += hpBonus;
+    player->maxMp += mpBonus;
     record = dataTable08Sub2GetRecord(player->equipment[6]);
     limits.equipExtra = record != NULL ? record->modifierId : 0;
     FUN_002dada4(current, &limits, 9);

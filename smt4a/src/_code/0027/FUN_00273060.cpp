@@ -95,7 +95,7 @@ void FUN_00273060(void)
   
   temp_v1 = g_mapEnemy;
   if (DAT_005f1be0 == 0) {
-    if (g_gameState.departLoading == '\0') {
+    if (g_gameState.loading == '\0') {
       if ((*g_lmapView == 3) || (*(char *)(DAT_00581280 + 0xf40) != '\0')) {
         temp_v2 = 0;
         do {

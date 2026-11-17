@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 /* The camp state fields the draw step reads. */
 struct CampDrawView {
@@ -11,7 +12,6 @@ struct CampDrawView {
 
 extern "C" {
 extern CampDrawView *g_camp;
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 listCursorGetRowOfChildIfUnblocked(void *list);

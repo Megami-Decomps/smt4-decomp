@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 232 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 #include "gamedata/FlagsB.h"
@@ -27,7 +28,6 @@ struct ListMenu {
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 void FUN_003f7164(ListMenu *menu, ListEntry *entry, s32 index, u32 kind, s32 x, s32 y, u32 slot, f32 speed);
 void FUN_003f6424(ListMenu *menu, ListEntry *entry, u32 kind, s32 x, s32 y, u32 slot);

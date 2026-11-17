@@ -2,16 +2,15 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int CONCAT44(...);
-int btlFindEntryBlockByMemberId(...);
 int dataTable04FindById(void);
 int FUN_00243d30(...);
 int FUN_0028cb6c(void);
 int btlEntryBuildSummary(...);
-int btlMainFindEntryByListedId(...);
 int FUN_004bf6e0(int);
 int btlCalcAilmentRateScale(...);
 int FUN_004c3bc0(int, unsigned int);
@@ -139,9 +138,9 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
   temp_v9 = 1.0f;
   pbVar2 = (unsigned char *)reinterpret_cast<int>(btlGetMainState());
   pbVar3 = pbVar2;
-  btlFindEntryBlockByMemberId(pbVar2,param_3);
+  btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(pbVar2), param_3);
   pbVar4 = pbVar2;
-  btlFindEntryBlockByMemberId(pbVar2,param_4);
+  btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(pbVar2), param_4);
   temp_v30 = pbVar4 + 0x100;
   temp_v5 = (float)VectorUnsignedToFloat
                             ((unsigned int)*(unsigned short *)(pbVar3 + 0x116),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -182,10 +181,10 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
   temp_v24 = CONCAT44(temp_v9,temp_v6);
   temp_v1 = reinterpret_cast<int>(btlGetMainState());
   temp_v4 = temp_v1;
-  btlMainFindEntryByListedId(temp_v1,param_3);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_3);
   if (temp_v4 != 0) {
     temp_v2 = temp_v1;
-    btlMainFindEntryByListedId(temp_v1,param_4);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v1), param_4);
     temp_v0 = '\0';
     if (temp_v2 != 0) {
       temp_v0 = *(char *)(temp_v2 + 0x239);
@@ -202,7 +201,7 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
   btlCalcAilmentRateScale(param_3,param_4);
   temp_v6 = (float)temp_v23 * (float)((unsigned long long)temp_v23 >> 0x20) * (float)temp_v24 * temp_v9 * temp_v6;
   pbVar7 = pbVar2;
-  btlMainFindEntryByListedId(pbVar2,param_3);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(pbVar2), param_3);
   temp_v25 = (float)((unsigned long long)temp_v24 >> 0x20);
   btlEntryBuildSummary(temp_v27,pbVar2,pbVar7);
   uStack_c0 = uStack_8c;
@@ -286,7 +285,7 @@ int FUN_004c58e0(fn_004c58e0_arg0 *param_1,int param_2,int param_3,unsigned int 
     }
     temp_v10 = temp_v7 * temp_v10;
   }
-  btlMainFindEntryByListedId(pbVar2,param_4);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(pbVar2), param_4);
   if (*(int *)(pbVar2 + 0x160) != 0) {
     temp_v7 = (float)VectorUnsignedToFloat
                               (*(int *)(pbVar2 + 0x160) + 100,(unsigned char)(in_fpscr >> 0x16) & 3);

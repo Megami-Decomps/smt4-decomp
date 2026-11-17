@@ -37,10 +37,10 @@ u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 leve
                 if (record->fusionRestrictions & 0x1c00000) {
                     continue;
                 }
-                if (record->specialFusion.requiredFlag && !gameFlagIsSet(record->specialFusion.requiredFlag)) {
+                if (record->requiredFlag && !gameFlagIsSet(record->requiredFlag)) {
                     continue;
                 }
-                u32 condition = record->specialFusion.prerequisite;
+                u32 condition = record->prerequisite;
                 if (condition & 1) {
                     GameSavedItem saved;
                     if (condition & ~1u) {

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match2_ScrollList.h"
 #include "code/Code002c_Smt4.h"
+#include "battle/BtlGlobals.h"
 
 // Saved battle block: a header with a four-digit ASCII version and the payload.
 struct BattleSaveBlock {
@@ -46,20 +47,12 @@ struct BattleMain {
     u8 skipRefresh;         // 0x44b7
 };
 
-struct SideRecord {
-    u8 unk00[2];
-    u16 id;                 // 0x02
-};
-
 extern "C" {
-
-extern u32 g_btlMain;
 
 void FUN_0023fbdc(BattleLoadState* state, BattleMain* battle);
 s32 pairedEntryTableContains(BattleMain* battle, u16 id);
 void btlQueueKeyedScalarReflectAction(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 void frameTexApplyMode(s32 mode);
-SideRecord* btlFindEntryBlockByMemberId(BattleMain* battle, s32 id);
 s32 FUN_002c2a04(s32 a);
 void FUN_00339e38(BattleMain* battle);
 void FUN_0033a01c(BattleMain* battle);
@@ -87,14 +80,14 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
     }
     FUN_0033a01c(battle);
     FUN_00339e38(battle);
-    vec3CopyFromOffsetC(g_btlMain);
+    vec3CopyFromOffsetC(reinterpret_cast<u32>(g_btlMain));
     if (battle->skipRefresh == 0 && ((battle->rules & 0x2000000) != 0 || (battle->flags & 2) != 0)) {
         for (s32 i = 4; i < 0x36; i++) {
             BattleSideEntry* side = reinterpret_cast<BattleSideEntry*>(battle->sides + i * 0x114);
             if ((side->flags & 1) != 0 && (side->flags & 2) != 0 && (side->flags2 & 8) != 0) {
                 side->flags2 &= 0xfffffff7;
                 if ((side->status & 0x800) == 0) {
-                    SideRecord* record = btlFindEntryBlockByMemberId(battle, side->listedId);
+                    BtlUnitData* record = btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState*>(battle), side->listedId);
                     if (pairedEntryTableContains(battle, record->id) == 0) side->status |= 0x800;
                 }
             }

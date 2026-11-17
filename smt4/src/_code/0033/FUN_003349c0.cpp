@@ -1,5 +1,6 @@
 /* NON_MATCHING: encounter-state dispatcher branch tails and state-field stores differ from retail. */
 #include "common.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleEncounterQuery {
     u32 step; // 0x00
@@ -23,15 +24,10 @@ struct BattleEncounterContext {
     u8 unk1e9e[0x2602];
     u32 flags; // 0x44a0
 };
-struct BattleEncounterMain {
-    u8 unk0000[0x634];
-    u32 flags; // 0x634
-};
 extern "C" {
 extern void *g_btlEvent;
 extern void *g_btlActionReflect;
 extern void *DAT_00435d18;
-extern BattleEncounterMain *g_btlMain;
 s32 FUN_0027e3b8(void *event);
 s32 btlEventSelectTrigger(void *event, u32 kind, s32 index, u32 flags);
 void frameTexApplyMode(u32 mode);
@@ -57,9 +53,9 @@ u32 FUN_0023fbdc(BattleEncounterQuery *query, BattleEncounterContext *context);
 u32 FUN_00240678(BattleEncounterQuery *query, BattleEncounterContext *context);
 s32 nodeListCountActiveById(void *list, u32 id);
 s32 recordAreAllCountsNonpositive(void *table);
-s32 FUN_0022724c(BattleEncounterMain *main);
+s32 FUN_0022724c(BtlCamera *main);
 void FUN_0023f4e4(BattleEncounterContext *context);
-void eventCommandDispatchPendingCleanup(BattleEncounterMain *main);
+void eventCommandDispatchPendingCleanup(BtlCamera *main);
 }
 
 // Advance only this dispatcher's bounded state machine; larger per-state handlers remain separate units.

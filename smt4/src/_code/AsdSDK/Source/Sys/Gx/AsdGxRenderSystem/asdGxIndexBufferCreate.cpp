@@ -5,26 +5,25 @@
 
 extern "C" {
 extern const char DAT_00409a68[];
-extern AsdGxPresets g_asdGxPresets;
 
 AsdGxTexture *asdTextureCreate(s32 unk);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 osVirtToPhysAddress(void);
 
-/* Creates a 512x512 index buffer of the given preset kind (0/1: small, 2: large) in heap
- * ASD_HEAP_EXTRA; the element type comes from the preset. */
+/* Creates a 512x512 index buffer for screen target `kind` (0/1: framebuffer 0, 2: framebuffer 2) in
+ * heap ASD_HEAP_EXTRA; format and element type come from that framebuffer's color buffer. */
 AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
 {
-    AsdGxPreset *preset = NULL;
+    AsdGxRenderBuffer *preset = NULL;
     AsdGxTexture *tex = asdTextureCreate(0);
 
     if (kind == 0 || kind == 1) {
         tex->width = 0x200;
-        preset = &g_asdGxPresets.small;
+        preset = &g_asdGxPresets.framebuffers[0].color;
         tex->height = 0x200;
     } else if (kind == 2) {
         tex->width = 0x200;
-        preset = &g_asdGxPresets.large;
+        preset = &g_asdGxPresets.framebuffers[2].color;
         tex->height = 0x200;
     }
     tex->unk10 = 0;

@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 struct PanelFrameDrawWork {
@@ -9,7 +10,6 @@ struct PanelFrameDrawWork {
 };
 typedef char PanelFrameDrawWorkIconCheck[offsetof(PanelFrameDrawWork, showIcon) == 0x474 ? 1 : -1];
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_0049d594(PanelFrameDrawWork *work);

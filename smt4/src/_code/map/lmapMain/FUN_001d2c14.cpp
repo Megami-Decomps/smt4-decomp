@@ -1,7 +1,7 @@
 /* NON_MATCHING: words[] clear becomes __aeabi_memclr4 instead of retail's pair-unrolled loop; scene vector copies group differently, the optional three-word clear uses separate stores and task callback declarations still lack native handle types. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "shard/SaveWork.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -21,7 +21,6 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, s32 (*update)()
                    void *work, u32 owner);
 
 extern LmapMainState *g_lmapMainState; /* 0x447060 */
-extern LmapScene *g_lmapScene;         /* 0x447e88 */
 
 /* Allocates and initialises the field map's state block, resets the scene camera and starts the map's job and draw task. */
 void FUN_001d2c14(void)
@@ -52,19 +51,19 @@ void FUN_001d2c14(void)
     state->unk4E = 0;
     state->unk48 = 1;
     scene = g_lmapScene;
-    scene->transform.position[0] = -554.0f;
-    scene->transform.position[1] = 0.01f;
-    scene->transform.position[2] = -4780.0f;
-    scene->transform.positionSnapshotA[0] = -554.0f;
-    scene->transform.positionSnapshotA[1] = 0.01f;
-    scene->transform.positionSnapshotA[2] = -4780.0f;
-    scene->transform.positionSnapshotB[0] = -554.0f;
-    scene->transform.positionSnapshotB[1] = 0.01f;
-    scene->transform.positionSnapshotB[2] = -4780.0f;
-    scene->transform.headingDegrees = 180.0f;
-    scene->transform.headingCopy = 180.0f;
-    scene->unk15C = 1000.0f;
-    scene->unk160 = 3000.0f;
+    scene->pose.position.x = -554.0f;
+    scene->pose.position.y = 0.01f;
+    scene->pose.position.z = -4780.0f;
+    scene->pose.targetPosition.x = -554.0f;
+    scene->pose.targetPosition.y = 0.01f;
+    scene->pose.targetPosition.z = -4780.0f;
+    scene->pose.previousPosition.x = -554.0f;
+    scene->pose.previousPosition.y = 0.01f;
+    scene->pose.previousPosition.z = -4780.0f;
+    scene->pose.heading = 180.0f;
+    scene->pose.targetHeading = 180.0f;
+    scene->nearClip = 1000.0f;
+    scene->farClip = 3000.0f;
     state->unk994 = 0;
     controllerPoolReset(&state->obj);
     state->unkDC = 0.0f;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: only two moves before the equipment loop are swapped (retail sets the index register before the equipment base). */
-#include "gamedata/PlayerInitialization.h"
+#include "gamedata/GamePlayerData.h"
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -19,7 +19,6 @@ union InitialEquipment {
 extern "C" {
 void FUN_001a1110(void);
 InitialPlayerSlotsView *gameGetSlotTable(void);
-PlayerInitialRecordIV *gameGetPlayerData(void);
 void FUN_00295a18(u32 item, u32 count);
 void FUN_003c1ef4(u32 mode);
 void playerRecalcStatsFromEquipment(u32 slot);
@@ -49,10 +48,10 @@ void FUN_0026f824(s32 mode)
                 FUN_00295a18(id[index], 1);
         }
         const DefaultPlayerTexts *texts = &DAT_00404360;
-        PlayerInitialRecordIV *player = gameGetPlayerData();
+        PlayerDataIV *player = gameGetPlayerData();
         memClear(player, sizeof(*player));
-        player->enabled = 1;
-        player->counter = 0;
+        player->level = 1;
+        player->alignment = 0;
         strncpy(player->name, texts->name, sizeof(player->name));
         player->name[sizeof(player->name) - 1] = 0;
         FUN_003c1ef4(0);
@@ -64,8 +63,8 @@ void FUN_0026f824(s32 mode)
         player->equipment[5] = equipment.ids[5];
         player->equipment[6] = equipment.ids[6];
         playerRecalcStatsFromEquipment(0);
-        player->hp = player->maximumHp;
-        player->mp = player->maximumMp;
+        player->hp = player->maxHp;
+        player->mp = player->maxMp;
         FUN_001dd930();
         textFormatBuffer(gameDataGetPlayerName(), texts->nameFormat);
         FUN_00295a18(0x370, 1);

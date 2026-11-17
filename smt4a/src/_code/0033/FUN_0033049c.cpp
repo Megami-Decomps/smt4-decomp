@@ -1,15 +1,8 @@
-#include "common.h"
+#include "ui/MessageMainA.h"
 
 extern "C" {
 
-/* A message window; only the field the script command writes is named. */
-typedef struct MessageWindow {
-    /* 0x0000 */ u8 unk0000[0x19EC];
-    /* 0x19EC */ u32 scriptValue;
-} MessageWindow;
-
-extern MessageWindow *g_messageMain[4]; /* 0x57f588 */
-extern MessageWindow *g_messageWindows[12]; /* 0x5e2010 */
+extern MessageWindowA *g_messageWindows[12]; /* 0x5e2010 */
 
 extern u32 scrGetArg(s32 index);
 
@@ -18,11 +11,11 @@ u32 FUN_0033049c(void)
 {
     u32 value = scrGetArg(0);
 
-    g_messageMain[1]->scriptValue = value;
-    g_messageMain[2]->scriptValue = value;
-    g_messageMain[3]->scriptValue = value;
+    g_messageMain.window->taskValue = value;
+    g_messageMain.banner->taskValue = value;
+    g_messageMain.aux->taskValue = value;
     for (s32 i = 0; i < 12; i++) {
-        g_messageWindows[i]->scriptValue = value;
+        g_messageWindows[i]->taskValue = value;
     }
     return 1;
 }

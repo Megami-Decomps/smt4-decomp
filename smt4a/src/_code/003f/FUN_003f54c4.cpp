@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail also hoists the 0xc9 argument into fp for the loop (one more saved register, 12-byte frame); otherwise the same. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 
@@ -13,7 +14,6 @@ struct DigitRowOwner {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 alpha);
 void FUN_00164168(u32 sprite, s32 x, s32 y, s32 texture, s32 layer, s32 frame, f32 alpha);

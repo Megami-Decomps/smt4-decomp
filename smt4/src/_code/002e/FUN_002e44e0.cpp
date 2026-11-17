@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 #include "gamedata/Table8Type5Lookup.h"
 #include "gamedata/DataTable40.h"
 
@@ -16,7 +17,6 @@ typedef struct SortKey {
 } SortKey;
 
 s32 idIsAbove400(u32 id);
-s32 itemGetSortCategory(u32 id);
 s32 itemSortCompareRankThenKey(SortKey *a, SortKey *b);
 }
 

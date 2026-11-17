@@ -4,6 +4,7 @@
 #include "battle/btlUI.h"
 #include "battle/btlGameOver.h"
 #include "code/Code0013.h"
+#include "battle/BtlGlobals.h"
 
 struct GameOverEyeTimeline {
     s32 panelFrame, fade0Frame;
@@ -18,7 +19,6 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern GameOverEyeTimeline g_btlGameOverEyeTimeline;
 extern BtlUiA *g_btlUiBlock;
-extern void *g_btlCamera;
 extern const char DAT_00530eb0[]; // "Dead_eyes"
 void FUN_004f7b84(BtlAuxA *, const char *);
 u32 FUN_004f6d34(BtlAuxA *);
@@ -69,8 +69,8 @@ u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
         holderStopJob2(battle);
         objectJobStop(battle);
         FUN_00290ba4(battle);
-        if (g_btlCamera)
-            eventCommandClearPending(g_btlCamera);
+        if (reinterpret_cast<void *>(g_btlCamera))
+            eventCommandClearPending(reinterpret_cast<void *>(g_btlCamera));
         sequence->state = sequence->mode == 2 ? 1 : 3;
         sequence->phase = 0;
     }

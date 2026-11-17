@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/Shard004B.h"
 #include "gamedata/SaveSlotTable.h"
+#include "battle/BtlGlobals.h"
 
 static inline s32 clampVital(s32 value, s32 maximum)
 {
@@ -17,8 +18,6 @@ static inline s32 clampVital(s32 value, s32 maximum)
 }
 
 extern "C" {
-BattleCombatantStatusKey *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 id);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 
@@ -26,15 +25,7 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
 {
     BtlMainStateA *state = btlGetMainState();
     if (id < 109) {
-        // Vital values extend beyond the shared embedded identity-key prefix.
-        struct VitalsView {
-            u8 unk000[0xf4];
-            s32 hp, maxHp, mp, maxMp;
-        };
-        typedef char VitalsOffsets[offsetof(VitalsView, hp) == 0xf4 &&
-            offsetof(VitalsView, maxHp) == 0xf8 && offsetof(VitalsView, mp) == 0xfc &&
-            offsetof(VitalsView, maxMp) == 0x100 ? 1 : -1];
-        VitalsView *vitals = reinterpret_cast<VitalsView *>(btlFindEntryBlockByMemberId(state, id));
+        BtlUnitDataA *vitals = btlFindEntryBlockByMemberId(state, id);
         if (!vitals) {
             return;
         }

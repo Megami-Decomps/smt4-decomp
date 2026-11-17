@@ -1,7 +1,7 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32 index, s32 enabled);
 int FUN_00300100(int mode, int enabled);
 

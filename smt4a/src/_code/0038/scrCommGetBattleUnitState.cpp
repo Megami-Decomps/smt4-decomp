@@ -1,9 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 id);
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
 

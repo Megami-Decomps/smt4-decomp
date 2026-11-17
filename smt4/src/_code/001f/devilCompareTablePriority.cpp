@@ -1,36 +1,26 @@
 #include "common.h"
-
-namespace {
-
-struct DevilRecordView {
-    u16 unk00; // 0x00
-    u8 unk02;  // 0x02
-    u8 unk03;  // 0x03
-};
-
-}
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
-DevilRecordView* devilGetRecord(u16 recordId);
 s32 dataTableGetEntry0102Value(u16 entryId);
 
 // Compare table values, then record bytes in opposing orders, then record IDs.
 s32 devilCompareTablePriority(const u16* leftId, const u16* rightId)
 {
-    const DevilRecordView* leftRecord = devilGetRecord(*leftId);
-    const DevilRecordView* rightRecord = devilGetRecord(*rightId);
+    const DevilRecord *leftRecord = devilGetRecord(*leftId);
+    const DevilRecord *rightRecord = devilGetRecord(*rightId);
 
-    s32 leftValue = dataTableGetEntry0102Value(leftRecord->unk00);
-    s32 rightValue = dataTableGetEntry0102Value(rightRecord->unk00);
+    s32 leftValue = dataTableGetEntry0102Value(leftRecord->id);
+    s32 rightValue = dataTableGetEntry0102Value(rightRecord->id);
     s32 difference = leftValue - rightValue;
     if (difference == 0) {
         leftRecord = devilGetRecord(*leftId);
         rightRecord = devilGetRecord(*rightId);
-        difference = (s32)leftRecord->unk02 - (s32)rightRecord->unk02;
+        difference = (s32)leftRecord->race - (s32)rightRecord->race;
         if (difference == 0) {
-            difference = (s32)rightRecord->unk03 - (s32)leftRecord->unk03;
+            difference = (s32)rightRecord->level - (s32)leftRecord->level;
             if (difference == 0)
-                difference = (s32)leftRecord->unk00 - (s32)rightRecord->unk00;
+                difference = (s32)leftRecord->id - (s32)rightRecord->id;
         }
     }
     return difference;

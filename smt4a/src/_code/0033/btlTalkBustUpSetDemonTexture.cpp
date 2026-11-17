@@ -1,10 +1,10 @@
 #include "common.h"
+#include "gamedata/Table00Lookup.h"
 #include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
-const void *dataTable00FindById(u32 id);
 s32 texTableRequestNamedTextureLoad(u32 system, s32 group, u32 node, s32 flags);
 s32 asdTMTexLoadMainHeap(s32 group, u32 node);
 void uiSpriteScreenSetupForMode(void *portrait);
@@ -27,12 +27,9 @@ void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred)
         u8 unk2fc[0xc];
         u32 demonId;
     };
-    // The category byte belongs to a packed union in the table record.
-    struct CategoryView { u8 unk000[0xa5]; u8 flags; };
     PortraitView *portrait = static_cast<PortraitView *>(g_btlTalkBustUp);
     if (portrait != NULL) {
-        const CategoryView *base = static_cast<const CategoryView *>(dataTable00FindById(demonId));
-        portrait->category = base->flags >> 2;
+        portrait->category = dataTable00FindById(demonId)->scriptFlags >> 2;
         const DevilRecordA *record = reinterpret_cast<const DevilRecordA *>(devilGetRecord(demonId));
         portrait->textureNode = record->model;
         portrait->demonId = demonId;

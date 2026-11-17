@@ -32,12 +32,6 @@ typedef struct PartySlots {
     s8 leaders[3];                   /* 0x9108: the active front-line members */
 } PartySlots;
 
-typedef struct SpoilsUnit {
-    u8 unk00[0x34];
-    u16 skills[8];
-    u8 unk44[6];
-    u8 level;                        /* 0x4A: selects the share slot */
-} SpoilsUnit;
 
 typedef struct PassiveRecord {
     u8 unk00[0x2F];
@@ -61,7 +55,7 @@ void bgmRequestSelectedChannelFade(u32 frames);
 void soundChannelRequestIfEnabled(u32 id, s32 arg);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 playerPadTestBit(u32 bit);
-s32 flagWordTestBit(SpoilsUnit *unit, u32 bit);
+s32 flagWordTestBit(StatBlock *unit, u32 bit);
 PassiveRecord *passiveSkillLookupRecord(u32 skill);
 
 /* Applies a finished battle's spoils to the result screen: stops the battle music, adds gold and
@@ -122,7 +116,7 @@ void FUN_002cdf2c(BattleSpoils *spoils)
         if (slots->unitIndex[i] < 0) {
             continue;
         }
-        SpoilsUnit *unit = static_cast<SpoilsUnit *>(gameGetUnitRecord(slots->unitIndex[i]));
+        StatBlock *unit = gameGetUnitRecord(slots->unitIndex[i]);
 
         if (flagWordTestBit(unit, 1) != 0 || flagWordTestBit(unit, 10) != 0 || flagWordTestBit(unit, 2) != 0) {
             continue;
@@ -144,7 +138,7 @@ void FUN_002cdf2c(BattleSpoils *spoils)
         f32 multiplier = 1.0f;
 
         for (s32 k = 0; k < 8; k++) {
-            u32 skill = unit->skills[k];
+            u32 skill = unit->skills.ids[k];
 
             if (skill != 0) {
                 PassiveRecord *record = passiveSkillLookupRecord(skill);
@@ -154,7 +148,7 @@ void FUN_002cdf2c(BattleSpoils *spoils)
                 }
             }
         }
-        result->shareBySlot[unit->level] += (share * (s32)(multiplier * 100.0f)) / 100;
+        result->shareBySlot[unit->growth.slot] += (share * (s32)(multiplier * 100.0f)) / 100;
     }
 }
 

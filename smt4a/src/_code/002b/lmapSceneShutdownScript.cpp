@@ -1,19 +1,18 @@
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
 void resourceOwnerReleaseAll(LmapScript *script);
 
-extern LmapSceneA *g_lmapScene;
 
 /* Shuts the scene's script down. */
 void lmapSceneShutdownScript(void)
 {
-    resourceOwnerReleaseAll(g_lmapScene->script);
-    if (g_lmapScene->script != NULL) {
-        g_lmapScene->script->vtable[1](g_lmapScene->script);
+    resourceOwnerReleaseAll(g_lmapScene->playerModel);
+    if (g_lmapScene->playerModel != NULL) {
+        g_lmapScene->playerModel->vtable[1](g_lmapScene->playerModel);
     }
-    g_lmapScene->script = NULL;
+    g_lmapScene->playerModel = NULL;
 }
 
 } /* extern "C" */

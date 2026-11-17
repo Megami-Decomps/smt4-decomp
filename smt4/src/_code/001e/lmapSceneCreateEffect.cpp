@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
@@ -6,13 +7,7 @@ typedef struct EffectObj {
     /* 0x0 */ const void *vtable;
 } EffectObj;
 
-typedef struct LmapScene {
-    /* 0x000 */ u8 unk000[0x194];
-    /* 0x194 */ EffectObj *effect;
-} LmapScene;
-
 extern const u8 _ZTV9Obj4207c0[];
-extern LmapScene *g_lmapScene;
 
 extern void *asdOperatorNew(u32 size);
 extern EffectObj *_ZN9Obj4206e8C1Ev(void *memory);
@@ -26,7 +21,7 @@ void lmapSceneCreateEffect(void)
         effect = _ZN9Obj4206e8C1Ev(effect);
         effect->vtable = _ZTV9Obj4207c0 + 0x18;
     }
-    g_lmapScene->effect = effect;
+    g_lmapScene->playerModel = reinterpret_cast<LmapScript *>(effect);
 }
 
 } /* extern "C" */

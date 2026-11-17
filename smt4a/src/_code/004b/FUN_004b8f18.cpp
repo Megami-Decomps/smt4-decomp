@@ -71,7 +71,7 @@ void FUN_004b8f18(Menu4C *work)
                     work->flags |= 0x100100;
                 state->phase = 0;
                 state->state = 5;
-            } else if (g_gameState.scriptValue) {
+            } else if (g_gameState.entryValue) {
                 MapReturnSaveValuesA values;
                 values.kind = 3;
                 values.first = static_cast<u8>(state->first);

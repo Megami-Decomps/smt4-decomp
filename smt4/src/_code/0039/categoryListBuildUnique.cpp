@@ -31,7 +31,7 @@ void categoryListBuildUnique(CategoryList *list, s32 kind)
         if (record->kind != kind)
             continue;
         bool found = false;
-        if (!g_gameState.forceVisible) {
+        if (!g_gameState.showAllEntries) {
             if (record->requiredFlag && !gameFlagIsSet(record->requiredFlag))
                 continue;
             if (record->excludedFlag && gameFlagIsSet(record->excludedFlag))

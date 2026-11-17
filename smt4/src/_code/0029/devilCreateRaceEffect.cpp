@@ -1,5 +1,6 @@
-/* NON_MATCHING: the group argument and the section count exchange saved registers (r6/r5), and the hoisted devil->race load lands in r2 instead of overwriting the record pointer in r1. */
+/* NON_MATCHING: the group argument and the section count exchange saved registers (r6/r5), and the hoisted devil->effectGroup load lands in r2 instead of overwriting the record pointer in r1. */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "gamedata/DataTable.h"
 #include "util/Random.h"
 
@@ -12,15 +13,9 @@ struct DevilEffectRecord {
     /* 0x58 */ s32 fourth[3];
 };
 
-struct DevilRaceRecord {
-    /* 0x00 */ u8 unk00[0x92];
-    /* 0x92 */ u8 race;
-};
-
 extern "C" {
 extern u32 g_devilRaceEffectCounts[4];
 
-DevilRaceRecord *devilGetRecord(u16 id);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 group, s32 effect, u32 context, s32 mode, f32 xScale, f32 yScale);
@@ -34,10 +29,10 @@ void devilCreateRaceEffect(u32 devilId, s32 group)
         void *countTable = dataTableGet(0x3f, 0);
         s32 count = dataTableGetCount(countTable);
         s32 selected = 0;
-        DevilRaceRecord *devil = devilGetRecord(static_cast<u16>(devilId));
+        DevilRecord *devil = devilGetRecord(static_cast<u16>(devilId));
         if (devil != NULL) {
             for (s32 i = 0; i < count; ++i) {
-                if (records[i].race == devil->race) {
+                if (records[i].race == devil->effectGroup) {
                     selected = i;
                     break;
                 }

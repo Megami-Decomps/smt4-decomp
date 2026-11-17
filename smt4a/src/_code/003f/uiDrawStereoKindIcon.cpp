@@ -1,9 +1,9 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 image);
 void efctSetSpeed(f32 speed);
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: the 16-byte equipment copy (ldm/stm) now matches; retail still pushes r0-r2 as spilled arguments, keeps a zero u16 in r6 for the unused flags argument and the result pointer in r8, so the register allocation differs. */
 #include "common.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/GamePlayerData.h"
 
 // A skill or card record (the fields this function reads).
 struct SkillRecord {
@@ -18,12 +19,6 @@ struct EquipmentEntry {
     u32 info;
 };
 
-// The player's record (only the level is read).
-struct PlayerView {
-    u8 unk00[0x24];
-    s16 level;  // 0x24
-};
-
 // The eight equipped-piece ids of a slot, copied as one block.
 struct EquipWords {
     u32 words[4];
@@ -39,8 +34,6 @@ struct SlotView {
 
 extern "C" {
 extern const f32 DAT_0057ffa8[];  // multiplier per equipped bonus count
-
-PlayerView *gameGetPlayerData(void);
 SlotView *gameGetSlotRecord(s32 slot);
 void playerGetWords(u16 *words, s32 count);
 u32 padGetMappedValue(u16 button);
@@ -59,7 +52,7 @@ s32 FUN_0023e6d8(SkillRecord *skill, s32 value, s32 slot)
     void *source = NULL;
     s32 level;
     if (slot < 0) {
-        level = gameGetPlayerData()->level;
+        level = gameGetPlayerData()->stats[2];
         playerGetWords(words, 1);
         source = FUN_002efc44(skill, padGetMappedValue(skill->padButton), 2);
     } else {

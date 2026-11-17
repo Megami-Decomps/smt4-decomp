@@ -1,9 +1,9 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/JobWork.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 u32 renderCtxPackPassFlagsWithAlpha(u32, f32);
 u32 renderCtxPackPassFlags(u32, u32);
 void taskRunPhase(s32);

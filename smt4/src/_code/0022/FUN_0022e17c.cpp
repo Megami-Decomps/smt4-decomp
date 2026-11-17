@@ -1,4 +1,5 @@
-/* NON_MATCHING: shared base-summary initialization, stock-count addressing and matching-slot pointer reuse differ. */
+/* NON_MATCHING: shared base-summary initialization, stock-count addressing and matching-slot pointer reuse differ.
+ * The named member at StatBlock+0x4A (growth.slot) changes how armcc lays out the local StatBlock: 111 diff lines, 90 with that byte unnamed. */
 #include "gamedata/DevilRecord.h"
 #include "gamedata/UnitStats.h"
 
@@ -51,13 +52,13 @@ void FUN_0022e17c(DevilComparisonSummaryView *output, u16 id, s32 useCurrent)
     StatBlock temporary;
     unitInitializeFromSavedRecord(id, &temporary);
     output->baseLevel = temporary.level;
-    output->baseHp = temporary.unk0E;
-    output->baseMp = temporary.unk10;
+    output->baseHp = temporary.maxHp;
+    output->baseMp = temporary.maxMp;
     if (!useCurrent) {
         unitInitializeFromSavedRecord(id, &temporary);
         output->currentLevel = temporary.level;
-        output->currentHp = temporary.unk0E;
-        output->currentMp = temporary.unk10;
+        output->currentHp = temporary.maxHp;
+        output->currentMp = temporary.maxMp;
         return;
     }
     PartyComparisonSlotsView *slots = gameGetSlotTable();
@@ -70,8 +71,8 @@ void FUN_0022e17c(DevilComparisonSummaryView *output, u16 id, s32 useCurrent)
         }
     }
     output->currentLevel = current->level;
-    output->currentHp = current->unk0E;
-    output->currentMp = current->unk10;
+    output->currentHp = current->maxHp;
+    output->currentMp = current->maxMp;
     const UnitComparisonGrowthView *growth = reinterpret_cast<const UnitComparisonGrowthView *>(current);
     for (s32 i = 0; i < 0x500; ++i)
         output->addedPoints += growth->growth.points[i];

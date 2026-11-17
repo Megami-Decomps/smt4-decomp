@@ -4,12 +4,12 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int qsort(...);
 int btlFindSelectionIndexByOrdinal(int, int);
-int btlMainFindEntryByListedId(unsigned int *, int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -74,7 +74,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
     piVar10 = (int *)(btlGetMainState()->roster + temp_v6);
     if (piVar10 != (int *)0x0) {
       puVar4 = (unsigned int *)btlGetMainState();
-      btlMainFindEntryByListedId(puVar4,(int)*(short *)((int)piVar10 + 0x6a));
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar4), (int)*(short *)((int)piVar10 + 0x6a));
       if (((puVar4 != (unsigned int *)0x0) &&
           ((puVar4[1] & DAT_0057a9ec) != 0 || (*puVar4 & DAT_0057a9e8) != 0)) && (piVar10[0x41] < 0)
          ) {
@@ -125,7 +125,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
     temp_v7 = (int)(btlGetMainState()->roster + temp_v6);
     if (temp_v7 != 0) {
       puVar4 = (unsigned int *)btlGetMainState();
-      btlMainFindEntryByListedId(puVar4,(int)*(short *)(temp_v7 + 0x6a));
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar4), (int)*(short *)(temp_v7 + 0x6a));
       if (puVar4 != (unsigned int *)0x0) {
         temp_v4 = *puVar4;
         temp_v5 = puVar4[1];

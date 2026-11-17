@@ -1,23 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b990c` (_code @ 0x4b990c, 0x6c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 #include "event/2dEvent/EventEffect.h"
 #include "code/Code003c_Smt4a.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x38];
-    signed char f005f1634; /* 0x038 */
-    u8 pad039[0x15f];
-    unsigned short f005f1794; /* 0x198 */
-    unsigned short f005f1796; /* 0x19a */
-    unsigned char f005f1798; /* 0x19c */
-    u8 pad19d[0xf];
-    unsigned short f005f17a8; /* 0x1ac */
-    unsigned short f005f17aa; /* 0x1ae */
-};
-extern GameStateView g_gameState;
 
 
 int textFormatBuffer(...);
@@ -211,7 +199,7 @@ void FUN_004b990c(int param_1)
   case 3:
     temp_v6 = campIsState51();
     if ((temp_v6 != 0) || (temp_v6 = campIsState85(), temp_v6 == 0)) {
-      if (g_gameState.f005f1634 == '\0') {
+      if (g_gameState.retainCampResources == '\0') {
         slotSetRequest(1,10,0xff);
       }
       temp_v6 = *(int *)(param_1 + 0x2c) + 1;
@@ -232,19 +220,19 @@ void FUN_004b990c(int param_1)
       if (pcVar4[1] != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
         dataTable1bOr1cGetRecord();
-        g_gameState.f005f1796 = *(unsigned short *)(temp_v3 + 2);
-        libc_strcpy(&g_gameState.f005f1798,temp_v3 + 0xc4);
-        g_gameState.f005f1794 = 1;
+        g_gameState.eventId = *(unsigned short *)(temp_v3 + 2);
+        libc_strcpy((unsigned char *)g_gameState.eventEntryName,temp_v3 + 0xc4);
+        g_gameState.eventResult = 1;
       }
       else if (pcVar4[3] != '\0') {
-        g_gameState.f005f17aa = 1;
+        g_gameState.menuRequestSecondary = 1;
       }
       temp_v6 = gameFlagsGetBlock();
       *(unsigned short *)(temp_v6 + 0x22) = 0;
       clearFlags310To31F();
       sub68OwnerCall4();
       if (pcVar4[2] != '\0') {
-        g_gameState.f005f17a8 = 1;
+        g_gameState.menuRequestPrimary = 1;
       }
       if (*pcVar4 != '\0') {
         *(unsigned char *)(param_1 + 0x1168) = 1;
@@ -254,7 +242,7 @@ void FUN_004b990c(int param_1)
         *(unsigned short *)(temp_v6 + 0x1e) = *(unsigned short *)(pcVar4 + 6);
       }
     }
-    if (g_gameState.f005f1634 == '\0') {
+    if (g_gameState.retainCampResources == '\0') {
       temp_v6 = *(int *)(param_1 + 0x2c) + 1;
       *(int *)(param_1 + 0x2c) = temp_v6;
       break;

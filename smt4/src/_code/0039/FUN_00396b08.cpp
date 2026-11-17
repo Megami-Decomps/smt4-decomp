@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail lays the three 12-byte vectors out in a 48-byte block below the two candidate lists and keeps the player position in different registers; the control flow and the range tests (900 < d < 2976 or 300 < d < 4000) follow the retail code (about 175 diff lines). */
 #include "classes/Obj422318.h"
+#include "map/LmapGlobals.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "gamedata/SpriteTemplatePreferredDevil.h"
 
@@ -38,7 +39,6 @@ struct SpawnedObject {
 
 extern "C" {
 double sqrt(double);
-extern LmapScene *g_lmapScene;
 
 SpawnPoint *dataTable29Sub0GetEntryWithAoc(u32 id);
 u32 randNextInRange(s32 limit);
@@ -80,9 +80,9 @@ void FUN_00396b08(SpawnerPool *spawner, s32 mode)
         spawnPoint = unused[randNextInRange((u16)(unusedCount - 1))];
     } else if (mode == 1 || mode == 2) {
         u16 inRangeCount = 0;
-        f32 playerX = g_lmapScene->position.x;
-        f32 playerY = g_lmapScene->position.y;
-        f32 playerZ = g_lmapScene->position.z;
+        f32 playerX = g_lmapScene->pose.position.x;
+        f32 playerY = g_lmapScene->pose.position.y;
+        f32 playerZ = g_lmapScene->pose.position.z;
         for (s32 i = 0; i < unusedCount; i++) {
             SpawnPoint *point = dataTable29Sub0GetEntryWithAoc(unused[i]);
             f32 dx = playerX - (f32)point->x;

@@ -1,16 +1,11 @@
 /* NON_MATCHING: cached adjacent links become LDRD instead of retail's separate loads; list-search and unlink cold blocks have different placement. -O2 candidate. */
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 
-struct SoundSystemStatusViewA {
-    u8 unk0000[0x12fc];
-    AsdSndStatusApoc status;
-};
 extern "C" {
-extern SoundSystemStatusViewA g_asdSoundSystem;
 extern const char DAT_0053d414[];
 void nn_snd_CTR_FreeVoice(u32 voice);
 void sysMemClear(void *memory, u32 size);
@@ -46,8 +41,8 @@ static inline void removeSoundObject(AsdSndStatusApoc *status, AsdSndObject *sou
 
 extern "C" AsdSndObject *asdSoundObjectCreate(u32 data, u32 option, u32 kind, f32 gain0, f32 gain1)
 {
-    AsdSndStatusApoc *status = &g_asdSoundSystem.status;
-    CriticalSection *section = (CriticalSection *)&status->unk08[4];
+    AsdSndStatusApoc *status = &g_asdSoundSystem.control.status;
+    CriticalSection *section = (CriticalSection *)&status->section;
     ScopedCriticalLock lock(*section);
     asdDebugTrace(DAT_0053d414, 0x1ec0);
     AsdSndObject *sound = (AsdSndObject *)asdMemoryAllocTracked(

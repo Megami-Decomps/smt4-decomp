@@ -1,7 +1,7 @@
 /* NON_MATCHING: encounter-state address formation and the inlined forced/normal dispatch blocks have different register allocation and branch placement from retail. */
 #include "map/mapEnemy.h"
 #include "map/mapDepart.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include <stddef.h>
 #include "util/TrigF32.h"
 #include "game/GameState.h"
@@ -20,7 +20,6 @@ typedef char CheckEnemyEncounterSize[sizeof(MapEnemyEncounterView) == 0x180 ? 1 
 
 extern "C" {
 extern MapEnemy *g_mapEnemy;
-extern LmapScene *g_lmapScene;
 EnemyEncounterMap *gameGetMapBlock();
 void gameCounterAddSaturating(u32 flag, s32 value);
 void textFormatBuffer(char *output, const char *format, ...);
@@ -89,7 +88,7 @@ extern "C" u32 FUN_002d2b40()
         f32 x = enemy->position.x;
         f32 y = enemy->position.y;
         f32 z = enemy->position.z;
-        MapVector player = {g_lmapScene->transform.position[0], g_lmapScene->transform.position[1], g_lmapScene->transform.position[2]};
+        MapVector player = {g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z};
         if (mathDistanceBetweenPoints(player.x, player.y, player.z, x, y, z) >= 60.0f) {
             if ((enemy->kind != 6 && enemy->kind != 16) || enemy->behavior != 4)
                 continue;
@@ -99,19 +98,19 @@ extern "C" u32 FUN_002d2b40()
             ahead.z = enemy->position.z;
             ahead.x += mathRemPio2f(enemy->heading * 0.017453292f) * 100.0f;
             ahead.z += FUN_00282390(enemy->heading * 0.017453292f) * 100.0f;
-            player.x = g_lmapScene->transform.position[0];
-            player.y = g_lmapScene->transform.position[1];
-            player.z = g_lmapScene->transform.position[2];
+            player.x = g_lmapScene->pose.position.x;
+            player.y = g_lmapScene->pose.position.y;
+            player.z = g_lmapScene->pose.position.z;
             if (mathDistanceBetweenPoints(player.x, player.y, player.z, ahead.x, ahead.y, ahead.z) >= 60.0f)
                 continue;
         }
         g_gameState.event.encounterApproach = 0;
         FUN_00253860(enemy, 2);
-        player.x = g_lmapScene->transform.position[0];
-        player.y = g_lmapScene->transform.position[1];
-        player.z = g_lmapScene->transform.position[2];
+        player.x = g_lmapScene->pose.position.x;
+        player.y = g_lmapScene->pose.position.y;
+        player.z = g_lmapScene->pose.position.z;
         f32 direction = mathPositionHeadingDegrees(player.x, player.y, player.z, x, y, z);
-        if (FUN_0027eee0(g_lmapScene->transform.headingDegrees, direction) > 120.0f)
+        if (FUN_0027eee0(g_lmapScene->pose.heading, direction) > 120.0f)
             g_gameState.event.encounterBackAttack = 1;
         applyEnemyEncounter(enemy, map, false);
         return enemy->result;

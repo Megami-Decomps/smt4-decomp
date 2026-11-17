@@ -1,16 +1,15 @@
 /* NON_MATCHING: stock-slot loads are reused and width-loop registers differ; natural u64 casts recover the retail __aeabi_ul2f ABI. */
 #include "status/ExperienceBars.h"
 #include "battle/UnitInitialization.h"
-#include "gamedata/PlayerInitialization.h"
+#include "gamedata/GamePlayerData.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/S1ListPanel.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct SavedUnitRecord;
 
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable();
-const PlayerInitialRecordIV *gameGetPlayerData();
-SavedUnitRecord *gameGetUnitRecord(s32 index);
 SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 index);
 u32 dataTable9EntryOrZero(s32 rank);
 u32 devilCalculateRankCost(u32 id, s32 rank, s32 level);
@@ -43,8 +42,8 @@ extern "C" void FUN_00296474(ExperienceBarStateIV *work)
 {
     PartyDamageSlotsIV *slots = gameGetSlotTable();
     SpriteInfo *sprite = asdTMTexTableEntryAt(0x28, 0x14);
-    const PlayerInitialRecordIV *player = gameGetPlayerData();
-    u32 required = dataTable9EntryOrZero(player->enabled + work->playerRankDelta);
+    const PlayerDataIV *player = gameGetPlayerData();
+    u32 required = dataTable9EntryOrZero(player->level + work->playerRankDelta);
     if (work->playerFull != 0) {
         work->playerWidth = (u16)*sprite->size;
     } else {

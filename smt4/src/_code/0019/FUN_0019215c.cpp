@@ -1,8 +1,8 @@
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-GameUnitSortRecord *gameGetUnitRecord(s32 index);
 s32 comparePartyUnitsByRankRaceAndId(const s32 *left, const s32 *right);
 
 /* Put invalid units last; sort valid units by descending sort key, then by rank, race and ID. */
@@ -17,9 +17,9 @@ s32 FUN_0019215c(const s32 *left, const s32 *right)
     } else if (*right < 0) {
         difference = -1;
     } else {
-        GameUnitSortRecord *first = gameGetUnitRecord(*left);
-        GameUnitSortRecord *second = gameGetUnitRecord(*right);
-        difference = second->sortKey - first->sortKey;
+        StatBlock *first = gameGetUnitRecord(*left);
+        StatBlock *second = gameGetUnitRecord(*right);
+        difference = second->maxMp - first->maxMp;
         if (difference == 0) {
             return comparePartyUnitsByRankRaceAndId(left, right);
         }

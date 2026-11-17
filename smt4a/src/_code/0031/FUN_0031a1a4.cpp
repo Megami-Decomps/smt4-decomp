@@ -1,10 +1,9 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
 extern s32 messageWindowShowOrPoll(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
-extern MessageGlobalsA g_messageMain;
 
 static void showMessage(s32 mode)
 {
@@ -18,8 +17,8 @@ static void showMessage(s32 mode)
 /* Script command: puts the message state in display mode 0x15 and shows the first argument with mode 8. */
 void FUN_0031a1a4(void)
 {
-    if (g_messageMain.state != NULL) {
-        g_messageMain.state->displayMode = 0x15;
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->displayMode = 0x15;
     }
     showMessage(8);
 }

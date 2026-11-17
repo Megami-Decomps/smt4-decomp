@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 
 extern "C" {
 s32 idIsAtLeast350(u32 id);
@@ -15,10 +15,10 @@ u32 itemCategoryHasUsableEntry(const void *work)
     u32 found = 0;
     const ItemFilterView *filter = static_cast<const ItemFilterView *>(work);
     for (u16 id = 0; id < 400; ++id) {
-        ItemDataRecord *record = dataTable1bOr1cGetRecord(id);
-        if (record == NULL || record->ordering.sortGroup != 0 || gameFlagEntryGetBit(id, 1) == 0)
+        QuestRecordA *record = dataTable1bOr1cGetRecord(id);
+        if (record == NULL || record->kind != 0 || gameFlagEntryGetBit(id, 1) == 0)
             continue;
-        u16 kind = record->filter.kind;
+        u16 kind = record->filterKind;
         if (idIsAtLeast350(id) == 0 && kind != 0) {
             switch (kind) {
             case 1:

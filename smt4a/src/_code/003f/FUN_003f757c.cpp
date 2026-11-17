@@ -1,11 +1,11 @@
 /* NON_MATCHING: text placement uses different saved registers and a tail-called speed reset. */
 #include "text/TextDraw.h"
+#include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct RenderCtxA;
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32);
 s32 fontMeasureLineAdvance(const char *, u32);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);

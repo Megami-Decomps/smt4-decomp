@@ -1,40 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003541c0` (_code @ 0x3541c0, 0x1240 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "game/GameStateA.h"
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x20];
-    signed char f005f161c; /* 0x020 */
-    signed char f005f161d; /* 0x021 */
-    u8 pad022[0x18e];
-    unsigned char f005f17ac; /* 0x1b0 */
-    u8 pad1b1[0x15];
-    unsigned short f005f17c2; /* 0x1c6 */
-    u8 pad1c8[0x1dc];
-    int f005f19a0; /* 0x3a4 */
-    signed char f005f19a4; /* 0x3a8 */
-    u8 pad3a9[0x3];
-    float f005f19a8; /* 0x3ac */
-    float f005f19ac; /* 0x3b0 */
-    u8 pad3b4[0x8];
-    float f005f19b8; /* 0x3bc */
-    float f005f19bc; /* 0x3c0 */
-    u8 pad3c4[0x14];
-    unsigned char f005f19d4; /* 0x3d8 */
-    u8 pad3d9[0x3];
-    float f005f19d8; /* 0x3dc */
-    float f005f19dc; /* 0x3e0 */
-    float f005f19e0; /* 0x3e4 */
-    int f005f19e4; /* 0x3e8 */
-    short f005f19e8; /* 0x3ec */
-    u8 pad3ee[0xb6];
-    float f005f1aa0; /* 0x4a4 */
-    u8 pad4a8[0x38];
-    signed char f005f1adc; /* 0x4e0 */
-};
-extern GameStateView g_gameState;
 
 
 int FUN_004ffaf0(...);
@@ -162,15 +131,15 @@ void FUN_003541c0(void)
   temp_v10 = 0.0f;
   if (*(int *)(temp_v0 + 0x109c) != 0) {
     temp_v1 = 0;
-    if (g_gameState.f005f1adc != '\0') {
+    if (g_gameState.unk4E0 != '\0') {
       temp_v1 = piVar4[0x74];
     }
-    if ((g_gameState.f005f1adc != '\0' && temp_v1 != 0x11) && temp_v1 != 0x12) {
+    if ((g_gameState.unk4E0 != '\0' && temp_v1 != 0x11) && temp_v1 != 0x12) {
       piVar4[0x74] = 0x11;
-      g_gameState.f005f19e8 = 0;
+      g_gameState.unk3EC = 0;
       *(unsigned int *)(temp_v0 + 0x109c) = 0;
-      g_gameState.f005f17ac = 0;
-      g_gameState.f005f17c2 = 0;
+      g_gameState.unk1B0 = 0;
+      g_gameState.unk1C6 = 0;
       piVar4[0x75] = 0;
       *(unsigned char *)(piVar4 + 0x8f) = 1;
       moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar4[99] + 4),3,2);
@@ -195,13 +164,13 @@ void FUN_003541c0(void)
       temp_v9 = ((float)g_lmapScene[0x13] + temp_v9) * temp_v11;
       libm_cosf();
       temp_v7 = temp_v7 + temp_v9 * temp_v14;
-      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
       libm_sinf();
-      temp_v8 = temp_v8 + temp_v9 * g_gameState.f005f19b8;
-      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+      temp_v8 = temp_v8 + temp_v9 * g_gameState.unk3BC;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
       libm_cosf();
-      temp_v7 = temp_v7 + temp_v9 * g_gameState.f005f19b8;
-      temp_v6 = temp_v13 + g_gameState.f005f1aa0 + temp_v12;
+      temp_v7 = temp_v7 + temp_v9 * g_gameState.unk3BC;
+      temp_v6 = temp_v13 + g_gameState.unk4A4 + temp_v12;
       temp_v9 = DAT_0058128c;
       libm_sinf();
       piVar4 = g_lmapScene;
@@ -215,7 +184,7 @@ void FUN_003541c0(void)
       break;
     case 2:
       g_lmapScene[0x91] = (int)temp_v10;
-      if (g_gameState.f005f161c != '\0') {
+      if (g_gameState.unk020 != '\0') {
         controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
@@ -240,13 +209,13 @@ void FUN_003541c0(void)
         temp_v9 = ((float)g_lmapScene[0x13] + temp_v13) * temp_v11;
         libm_cosf();
         temp_v6 = temp_v6 + temp_v9 * temp_v14;
-        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
         libm_sinf();
-        temp_v7 = temp_v7 + temp_v9 * g_gameState.f005f19b8;
-        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+        temp_v7 = temp_v7 + temp_v9 * g_gameState.unk3BC;
+        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
         libm_cosf();
-        temp_v6 = temp_v6 + temp_v9 * g_gameState.f005f19b8;
-        temp_v8 = temp_v8 + g_gameState.f005f1aa0 + temp_v12;
+        temp_v6 = temp_v6 + temp_v9 * g_gameState.unk3BC;
+        temp_v8 = temp_v8 + g_gameState.unk4A4 + temp_v12;
         temp_v9 = temp_v10;
         libm_sinf();
         piVar4 = g_lmapScene;
@@ -273,15 +242,15 @@ void FUN_003541c0(void)
         piVar4 = g_lmapScene;
         g_lmapScene[0x86] = (int)temp_v7;
         piVar4[0x87] = piVar4[0x13];
-        piVar4[0x79] = g_gameState.f005f19a0;
+        piVar4[0x79] = g_gameState.resumeMovementState;
         controllerSetRotationEulerDegrees(*(unsigned int *)(piVar4[99] + 4));
         DAT_0058128c = temp_v10;
         g_lmapScene[0x74] = 3;
       }
-      if (g_gameState.f005f161d == '\0') break;
+      if (g_gameState.paused == '\0') break;
       goto LAB_00354dac;
     case 3:
-      if (g_gameState.f005f161c != '\0') {
+      if (g_gameState.unk020 != '\0') {
         controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
@@ -295,8 +264,8 @@ void FUN_003541c0(void)
       temp_v16 = (float)g_lmapScene[0x7c];
       temp_v17 = g_lmapScene[0x7d];
       iStack_7c = g_lmapScene[0x7e];
-      if (g_gameState.f005f19a4 != '\x01') {
-        if (g_gameState.f005f19a4 == '\x02') {
+      if (g_gameState.unk3A8 != '\x01') {
+        if (g_gameState.unk3A8 == '\x02') {
           temp_v7 = (float)g_lmapScene[0x76];
           temp_v3 = temp_v7 < temp_v10;
           temp_v4 = temp_v7 == temp_v10;
@@ -308,12 +277,12 @@ void FUN_003541c0(void)
             temp_v5 = (temp_v8 != temp_v8) || (temp_v10 != temp_v10);
           }
           if (!(temp_v4 || temp_v3 != temp_v5)) {
-            temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+            temp_v7 = DAT_0058128c / g_gameState.unk3B0;
             libm_sinf();
-            g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] - temp_v7 * g_gameState.f005f19a8);
-            temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+            g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] - temp_v7 * g_gameState.unk3AC);
+            temp_v7 = DAT_0058128c / g_gameState.unk3B0;
             libm_sinf();
-            g_lmapScene[0x7e] = (int)((float)g_lmapScene[0x7e] + temp_v7 * g_gameState.f005f19a8);
+            g_lmapScene[0x7e] = (int)((float)g_lmapScene[0x7e] + temp_v7 * g_gameState.unk3AC);
           }
           else {
             temp_v3 = temp_v10 <= temp_v7;
@@ -321,38 +290,38 @@ void FUN_003541c0(void)
               temp_v3 = temp_v10 <= (float)g_lmapScene[0x78];
             }
             if (!temp_v3) {
-              temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+              temp_v7 = DAT_0058128c / g_gameState.unk3B0;
               libm_sinf();
-              g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] + temp_v7 * g_gameState.f005f19a8);
-              temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+              g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] + temp_v7 * g_gameState.unk3AC);
+              temp_v7 = DAT_0058128c / g_gameState.unk3B0;
               libm_sinf();
-              g_lmapScene[0x7e] = (int)((float)g_lmapScene[0x7e] - temp_v7 * g_gameState.f005f19a8);
+              g_lmapScene[0x7e] = (int)((float)g_lmapScene[0x7e] - temp_v7 * g_gameState.unk3AC);
             }
             else if ((temp_v10 > temp_v7) && ((float)g_lmapScene[0x78] > temp_v10)) {
-              temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+              temp_v7 = DAT_0058128c / g_gameState.unk3B0;
               libm_sinf();
-              g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] - temp_v7 * g_gameState.f005f19a8);
-              temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+              g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] - temp_v7 * g_gameState.unk3AC);
+              temp_v7 = DAT_0058128c / g_gameState.unk3B0;
               libm_sinf();
-              temp_v7 = (float)g_lmapScene[0x7e] - temp_v7 * g_gameState.f005f19a8;
+              temp_v7 = (float)g_lmapScene[0x7e] - temp_v7 * g_gameState.unk3AC;
               g_lmapScene[0x7e] = (int)temp_v7;
             }
             else if ((temp_v7 > temp_v10) && (temp_v10 > (float)g_lmapScene[0x78])) {
-              temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+              temp_v7 = DAT_0058128c / g_gameState.unk3B0;
               libm_sinf();
-              g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] + temp_v7 * g_gameState.f005f19a8);
-              temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+              g_lmapScene[0x7c] = (int)((float)g_lmapScene[0x7c] + temp_v7 * g_gameState.unk3AC);
+              temp_v7 = DAT_0058128c / g_gameState.unk3B0;
               libm_sinf();
-              temp_v7 = (float)g_lmapScene[0x7e] + temp_v7 * g_gameState.f005f19a8;
+              temp_v7 = (float)g_lmapScene[0x7e] + temp_v7 * g_gameState.unk3AC;
               g_lmapScene[0x7e] = (int)temp_v7;
             }
           }
         }
       }
       else {
-        temp_v7 = DAT_0058128c / g_gameState.f005f19ac;
+        temp_v7 = DAT_0058128c / g_gameState.unk3B0;
         libm_sinf();
-        g_lmapScene[0x7d] = (int)((float)g_lmapScene[0x7d] + temp_v7 * g_gameState.f005f19a8);
+        g_lmapScene[0x7d] = (int)((float)g_lmapScene[0x7d] + temp_v7 * g_gameState.unk3AC);
       }
       piVar4 = g_lmapScene;
       pfVar1 = (float *)(g_lmapScene + 0x77);
@@ -375,8 +344,8 @@ LAB_00354acc:
         FUN_002d1f40(4,8,0);
         piVar4 = g_lmapScene;
         g_lmapScene[0x74] = 8;
-        g_gameState.f005f17ac = 0;
-        g_gameState.f005f17c2 = 0;
+        g_gameState.unk1B0 = 0;
+        g_gameState.unk1C6 = 0;
         piVar4[0x75] = 0;
         piVar4[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar4 + 0x8f) = 1;
@@ -384,16 +353,16 @@ LAB_00354acc:
       }
       piVar4 = g_lmapScene;
       g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
-      g_gameState.f005f19d4 = 1;
-      g_gameState.f005f19d8 = (float)piVar4[0x7c];
-      g_gameState.f005f19dc = (float)piVar4[0x7d];
-      g_gameState.f005f19e0 = (float)piVar4[0x7e];
-      g_gameState.f005f19e4 = piVar4[0x86];
-      g_gameState.f005f19e8 = 1;
+      g_gameState.unk3D8 = 1;
+      g_gameState.breakableCheckPosition.x = (float)piVar4[0x7c];
+      g_gameState.breakableCheckPosition.y = (float)piVar4[0x7d];
+      g_gameState.breakableCheckPosition.z = (float)piVar4[0x7e];
+      g_gameState.unk3E8 = piVar4[0x86];
+      g_gameState.unk3EC = 1;
       if (*(float *)(temp_v0 + 0x1528) <= temp_v9) {
         piVar4[0x74] = 8;
-        g_gameState.f005f17ac = 0;
-        g_gameState.f005f17c2 = 0;
+        g_gameState.unk1B0 = 0;
+        g_gameState.unk1C6 = 0;
         piVar4[0x75] = 0;
         piVar4[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar4 + 0x8f) = 1;
@@ -401,7 +370,7 @@ LAB_00354acc:
       }
       goto joined_r0x00354f08;
     case 4:
-      if (g_gameState.f005f161c != '\0') {
+      if (g_gameState.unk020 != '\0') {
         controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
@@ -415,10 +384,10 @@ LAB_00354acc:
       temp_v20 = g_lmapScene[0x7e];
       temp_v18 = g_lmapScene[0x7c];
       temp_v19 = (float)g_lmapScene[0x7d];
-      temp_v6 = DAT_0058128c / g_gameState.f005f19ac;
+      temp_v6 = DAT_0058128c / g_gameState.unk3B0;
       libm_sinf();
       piVar4 = g_lmapScene;
-      g_lmapScene[0x7d] = (int)((float)g_lmapScene[0x7d] + temp_v6 * g_gameState.f005f19a8);
+      g_lmapScene[0x7d] = (int)((float)g_lmapScene[0x7d] + temp_v6 * g_gameState.unk3AC);
       temp_v6 = (float)piVar4[0x86] * temp_v11;
       libm_sinf();
       piVar4 = g_lmapScene;
@@ -437,40 +406,40 @@ LAB_00354acc:
         FUN_002d1f40(4,8,0);
         piVar4 = g_lmapScene;
         g_lmapScene[0x74] = 8;
-        g_gameState.f005f17ac = 0;
-        g_gameState.f005f17c2 = 0;
+        g_gameState.unk1B0 = 0;
+        g_gameState.unk1C6 = 0;
         piVar4[0x75] = 0;
         piVar4[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar4 + 0x8f) = 1;
         moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar4[99] + 4),3,2);
       }
       piVar4 = g_lmapScene;
-      g_gameState.f005f19d4 = 1;
-      g_gameState.f005f19d8 = (float)g_lmapScene[0x7c];
-      g_gameState.f005f19dc = (float)g_lmapScene[0x7d];
-      g_gameState.f005f19e0 = (float)g_lmapScene[0x7e];
-      g_gameState.f005f19e4 = g_lmapScene[0x86];
-      g_gameState.f005f19e8 = 1;
+      g_gameState.unk3D8 = 1;
+      g_gameState.breakableCheckPosition.x = (float)g_lmapScene[0x7c];
+      g_gameState.breakableCheckPosition.y = (float)g_lmapScene[0x7d];
+      g_gameState.breakableCheckPosition.z = (float)g_lmapScene[0x7e];
+      g_gameState.unk3E8 = g_lmapScene[0x86];
+      g_gameState.unk3EC = 1;
       if (*(float *)(temp_v0 + 0x1528) <= temp_v9) {
         g_lmapScene[0x74] = 8;
-        g_gameState.f005f17ac = 0;
-        g_gameState.f005f17c2 = 0;
+        g_gameState.unk1B0 = 0;
+        g_gameState.unk1C6 = 0;
         piVar4[0x75] = 0;
         piVar4[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar4 + 0x8f) = 1;
         moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar4[99] + 4),3,2);
       }
 joined_r0x00354f08:
-      if (g_gameState.f005f161d != '\0') {
+      if (g_gameState.paused != '\0') {
 LAB_00354dac:
         piVar4 = g_lmapScene;
         g_lmapScene[0x74] = 8;
-        g_gameState.f005f17ac = 0;
-        g_gameState.f005f17c2 = 0;
+        g_gameState.unk1B0 = 0;
+        g_gameState.unk1C6 = 0;
         piVar4[0x75] = 0;
         piVar4[0x90] = (int)temp_v10;
         *(unsigned char *)(piVar4 + 0x8f) = 1;
-        g_gameState.f005f19e8 = 0;
+        g_gameState.unk3EC = 0;
         moriModelUnitStartMaterialAnimation(*(unsigned int *)(piVar4[99] + 4),3,2);
       }
       break;
@@ -484,18 +453,18 @@ LAB_00354dac:
       controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
       return;
     case 6:
-      if (g_gameState.f005f161c == '\0') {
+      if (g_gameState.unk020 == '\0') {
         g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
-        g_gameState.f005f19d4 = 1;
-        g_gameState.f005f19d8 = (float)piVar4[0x7c];
-        g_gameState.f005f19dc = (float)piVar4[0x7d];
-        g_gameState.f005f19e0 = (float)piVar4[0x7e];
-        g_gameState.f005f19e4 = piVar4[0x13];
-        g_gameState.f005f19e8 = 1;
+        g_gameState.unk3D8 = 1;
+        g_gameState.breakableCheckPosition.x = (float)piVar4[0x7c];
+        g_gameState.breakableCheckPosition.y = (float)piVar4[0x7d];
+        g_gameState.breakableCheckPosition.z = (float)piVar4[0x7e];
+        g_gameState.unk3E8 = piVar4[0x13];
+        g_gameState.unk3EC = 1;
         if (piVar4[0x75] >= 2) {
           piVar4[0x74] = 8;
-          g_gameState.f005f17ac = 0;
-          g_gameState.f005f17c2 = 0;
+          g_gameState.unk1B0 = 0;
+          g_gameState.unk1C6 = 0;
           piVar4[0x75] = 0;
           *(unsigned char *)(piVar4 + 0x8f) = 1;
           temp_v2 = *(unsigned int *)(piVar4[99] + 4);
@@ -506,8 +475,8 @@ LAB_00354dac:
         goto joined_r0x00354f08;
       }
       g_lmapScene[0x74] = 8;
-      g_gameState.f005f17ac = 0;
-      g_gameState.f005f17c2 = 0;
+      g_gameState.unk1B0 = 0;
+      g_gameState.unk1C6 = 0;
       piVar4[0x75] = 0;
       piVar4[0x90] = (int)temp_v10;
       *(unsigned char *)(piVar4 + 0x8f) = 1;
@@ -518,15 +487,15 @@ LAB_00354dac:
       FUN_001f3f34();
       piVar4 = g_lmapScene;
       g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
-      g_gameState.f005f19e8 = 0;
+      g_gameState.unk3EC = 0;
       temp_v2 = *(unsigned int *)(piVar4[99] + 4);
       if (piVar4[0x8e] != 0xc) {
         if (piVar4[0x75] >= 11) {
-          g_gameState.f005f19d4 = 0;
-          g_gameState.f005f19d8 = (float)piVar4[0x7c];
-          g_gameState.f005f19dc = (float)piVar4[0x7d];
-          g_gameState.f005f19e0 = (float)piVar4[0x7e];
-          g_gameState.f005f19e4 = piVar4[0x13];
+          g_gameState.unk3D8 = 0;
+          g_gameState.breakableCheckPosition.x = (float)piVar4[0x7c];
+          g_gameState.breakableCheckPosition.y = (float)piVar4[0x7d];
+          g_gameState.breakableCheckPosition.z = (float)piVar4[0x7e];
+          g_gameState.unk3E8 = piVar4[0x13];
           piVar4[0x74] = 9;
           piVar4[0x90] = (int)temp_v10;
           piVar4[0x75] = 0;
@@ -543,12 +512,12 @@ LAB_00354dac:
         }
         temp_v0 = itemListGetCurrentIdOrInvalid(temp_v2);
         if ((temp_v0 == 0xc) && (temp_v0 = FUN_004ffa14(temp_v2), piVar4 = g_lmapScene, temp_v0 != 0)) {
-          g_gameState.f005f19d4 = 0;
-          g_gameState.f005f19d8 = (float)g_lmapScene[0x7c];
-          g_gameState.f005f19dc = (float)g_lmapScene[0x7d];
-          g_gameState.f005f19e0 = (float)g_lmapScene[0x7e];
-          g_gameState.f005f19e4 = g_lmapScene[0x13];
-          g_gameState.f005f19e8 = 0;
+          g_gameState.unk3D8 = 0;
+          g_gameState.breakableCheckPosition.x = (float)g_lmapScene[0x7c];
+          g_gameState.breakableCheckPosition.y = (float)g_lmapScene[0x7d];
+          g_gameState.breakableCheckPosition.z = (float)g_lmapScene[0x7e];
+          g_gameState.unk3E8 = g_lmapScene[0x13];
+          g_gameState.unk3EC = 0;
           g_lmapScene[0x74] = 9;
           piVar4[0x90] = (int)temp_v10;
           piVar4[0x75] = 0;
@@ -566,7 +535,7 @@ LAB_00354dac:
       temp_v14 = 180.0f;
       DAT_0058128c = DAT_0058128c + 0.2f;
       g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
-      g_gameState.f005f19e8 = 0;
+      g_gameState.unk3EC = 0;
       temp_v6 = (float)piVar4[7];
       temp_v8 = (float)piVar4[8];
       temp_v7 = (float)piVar4[9];
@@ -577,13 +546,13 @@ LAB_00354dac:
       temp_v9 = ((float)g_lmapScene[0x13] + temp_v14) * temp_v11;
       libm_cosf();
       temp_v7 = temp_v7 + temp_v9 * temp_v13;
-      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
       libm_sinf();
-      temp_v6 = temp_v6 + temp_v9 * g_gameState.f005f19b8;
-      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+      temp_v6 = temp_v6 + temp_v9 * g_gameState.unk3BC;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
       libm_cosf();
-      temp_v7 = temp_v7 + temp_v9 * g_gameState.f005f19b8;
-      temp_v8 = temp_v8 + g_gameState.f005f1aa0 + temp_v12;
+      temp_v7 = temp_v7 + temp_v9 * g_gameState.unk3BC;
+      temp_v8 = temp_v8 + g_gameState.unk4A4 + temp_v12;
       temp_v9 = DAT_0058128c;
       libm_sinf();
       temp_v8 = temp_v8 + temp_v9 * 8.0f;
@@ -593,9 +562,9 @@ LAB_00354dac:
       g_lmapScene[0x7c] = (int)temp_v6;
       piVar4[0x7d] = (int)temp_v8;
       piVar4[0x7e] = (int)temp_v7;
-      g_gameState.f005f19d8 = temp_v6;
-      g_gameState.f005f19dc = temp_v8;
-      g_gameState.f005f19e0 = temp_v7;
+      g_gameState.breakableCheckPosition.x = temp_v6;
+      g_gameState.breakableCheckPosition.y = temp_v8;
+      g_gameState.breakableCheckPosition.z = temp_v7;
       temp_v0 = FUN_004ff970(temp_v2);
       if ((temp_v0 == 5) && (temp_v0 = animationIsClipComplete(temp_v2), piVar4 = g_lmapScene, temp_v0 != 0)) {
         g_lmapScene[0x92] = 0;
@@ -612,7 +581,7 @@ LAB_00354dac:
     case 10:
       g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
       piVar4[0x91] = (int)temp_v10;
-      if (g_gameState.f005f19e8 == 0) {
+      if (g_gameState.unk3EC == 0) {
         temp_v14 = 180.0f;
         temp_v7 = (float)piVar4[7];
         temp_v6 = (float)piVar4[8];
@@ -624,24 +593,24 @@ LAB_00354dac:
         temp_v9 = ((float)g_lmapScene[0x13] + temp_v14) * temp_v11;
         libm_cosf();
         temp_v8 = temp_v8 + temp_v9 * temp_v13;
-        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
         libm_sinf();
-        temp_v7 = temp_v7 + temp_v9 * g_gameState.f005f19b8;
-        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+        temp_v7 = temp_v7 + temp_v9 * g_gameState.unk3BC;
+        temp_v9 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
         libm_cosf();
         piVar4 = g_lmapScene;
-        temp_v6 = temp_v6 + g_gameState.f005f1aa0;
-        temp_v9 = temp_v9 * g_gameState.f005f19b8;
+        temp_v6 = temp_v6 + g_gameState.unk4A4;
+        temp_v9 = temp_v9 * g_gameState.unk3BC;
         g_lmapScene[0x7c] = (int)temp_v7;
         piVar4[0x7d] = (int)(temp_v6 + temp_v12);
         piVar4[0x7e] = (int)(temp_v8 + temp_v9);
         piVar4[0x86] = piVar4[0x13];
-        g_gameState.f005f19d4 = 1;
-        g_gameState.f005f19d8 = (float)piVar4[0x7c];
-        g_gameState.f005f19dc = (float)piVar4[0x7d];
-        g_gameState.f005f19e0 = (float)piVar4[0x7e];
-        g_gameState.f005f19e4 = piVar4[0x86];
-        g_gameState.f005f19e8 = 1;
+        g_gameState.unk3D8 = 1;
+        g_gameState.breakableCheckPosition.x = (float)piVar4[0x7c];
+        g_gameState.breakableCheckPosition.y = (float)piVar4[0x7d];
+        g_gameState.breakableCheckPosition.z = (float)piVar4[0x7e];
+        g_gameState.unk3E8 = piVar4[0x86];
+        g_gameState.unk3EC = 1;
       }
       if (g_lmapScene[0x75] == 5) {
         soundActorStartOnFreeChannel(0x1000237);
@@ -655,7 +624,7 @@ LAB_00354dac:
       temp_v2 = *(unsigned int *)(g_lmapScene[99] + 4);
       temp_v0 = itemListGetCurrentIdOrInvalid(temp_v2);
       if ((temp_v0 == 0xd) && (temp_v0 = FUN_004ffa14(temp_v2), piVar4 = g_lmapScene, temp_v0 != 0)) {
-        g_gameState.f005f19e8 = 0;
+        g_gameState.unk3EC = 0;
         piVar5 = g_lmapScene + 0x74;
         DAT_0058128c = temp_v10;
         g_lmapScene[0x8c] = 0;
@@ -681,14 +650,14 @@ LAB_00354dac:
     piVar4[0x74] = 0x12;
 LAB_0035521c:
     *(unsigned int *)(*(int *)(piVar4[99] + 4) + 4) = *(unsigned int *)(*(int *)(piVar4[99] + 4) + 4) | 3;
-    if (g_gameState.f005f1adc == '\0') {
+    if (g_gameState.unk4E0 == '\0') {
       *(unsigned int *)(temp_v21 + 0x9c) = 1;
-      g_gameState.f005f19d4 = 0;
-      g_gameState.f005f19d8 = (float)piVar4[0x7c];
-      g_gameState.f005f19dc = (float)piVar4[0x7d];
-      g_gameState.f005f19e0 = (float)piVar4[0x7e];
-      g_gameState.f005f19e4 = piVar4[0x13];
-      g_gameState.f005f19e8 = 0;
+      g_gameState.unk3D8 = 0;
+      g_gameState.breakableCheckPosition.x = (float)piVar4[0x7c];
+      g_gameState.breakableCheckPosition.y = (float)piVar4[0x7d];
+      g_gameState.breakableCheckPosition.z = (float)piVar4[0x7e];
+      g_gameState.unk3E8 = piVar4[0x13];
+      g_gameState.unk3EC = 0;
       piVar4[0x74] = 9;
       piVar4[0x90] = (int)temp_v10;
       piVar4[0x75] = 0;
@@ -702,19 +671,19 @@ LAB_0035521c:
   piVar4 = g_lmapScene;
   if (g_lmapScene[0x74] == 0xb) {
     g_lmapScene[0x75] = g_lmapScene[0x75] + 1;
-    g_gameState.f005f19e8 = 0;
+    g_gameState.unk3EC = 0;
     temp_v7 = (float)piVar4[7];
     temp_v9 = (float)piVar4[8];
     temp_v2 = *(unsigned int *)(piVar4[99] + 4);
     temp_v8 = (float)piVar4[9];
-    temp_v6 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+    temp_v6 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
     libm_sinf();
-    temp_v7 = temp_v7 + temp_v6 * g_gameState.f005f19b8;
-    temp_v11 = (*(float *)(g_lmapView + 0x18) + g_gameState.f005f19bc) * temp_v11;
+    temp_v7 = temp_v7 + temp_v6 * g_gameState.unk3BC;
+    temp_v11 = (*(float *)(g_lmapView + 0x18) + g_gameState.unk3C0) * temp_v11;
     libm_cosf();
     piVar4 = g_lmapScene;
-    temp_v9 = temp_v9 + g_gameState.f005f1aa0;
-    temp_v11 = temp_v11 * g_gameState.f005f19b8;
+    temp_v9 = temp_v9 + g_gameState.unk4A4;
+    temp_v11 = temp_v11 * g_gameState.unk3BC;
     g_lmapScene[0x7c] = (int)temp_v7;
     temp_v9 = temp_v9 + temp_v12;
     piVar4[0x7d] = (int)temp_v9;
@@ -726,12 +695,12 @@ LAB_0035521c:
     }
     temp_v0 = FUN_004ff970(temp_v2);
     if ((temp_v0 == 3) && (FUN_004ffaf0(temp_v2), piVar4 = g_lmapScene, (int)temp_v9 < 0x41200001)) {
-      g_gameState.f005f19e8 = 0;
-      g_gameState.f005f19d4 = 0;
-      g_gameState.f005f19d8 = (float)g_lmapScene[0x7c];
-      g_gameState.f005f19dc = (float)g_lmapScene[0x7d];
-      g_gameState.f005f19e0 = (float)g_lmapScene[0x7e];
-      g_gameState.f005f19e4 = g_lmapScene[0x13];
+      g_gameState.unk3EC = 0;
+      g_gameState.unk3D8 = 0;
+      g_gameState.breakableCheckPosition.x = (float)g_lmapScene[0x7c];
+      g_gameState.breakableCheckPosition.y = (float)g_lmapScene[0x7d];
+      g_gameState.breakableCheckPosition.z = (float)g_lmapScene[0x7e];
+      g_gameState.unk3E8 = g_lmapScene[0x13];
       g_lmapScene[0x74] = 0;
       temp_v0 = *(int *)(piVar4[99] + 4);
       *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;

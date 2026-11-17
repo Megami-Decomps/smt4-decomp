@@ -1,19 +1,18 @@
 #include "shard/Shard0035.h"
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 
 extern "C" {
 
 extern u16 scrGetArg(s32 index);
-extern MessageGlobalsA g_messageMain;
 
-/* Script command: arms the work area with argument 0. */
+/* Script command: arms the banner's counter panel (mode 10, state 3) with argument 0. */
 u32 scrCommArmWork150(void)
 {
-    Work150 *work = reinterpret_cast<Work150 *>(g_messageMain.panel);
+    MessageWindowA *banner = g_messageMain.banner;
 
-    work->unk164 = scrGetArg(0);
-    work->unk150 = 10;
-    work->unk154 = 3;
+    banner->panelArgument = scrGetArg(0);
+    banner->panelMode = 10;
+    banner->panelState = 3;
     return 1;
 }
 

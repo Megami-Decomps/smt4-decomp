@@ -5,7 +5,7 @@ extern "C" {
 
 void gameStateClearFlag(void)
 {
-    g_gameState.transitionActive = 0;
+    g_gameState.savedLocationSet = 0;
 }
 
 } /* extern "C" */

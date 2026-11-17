@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail reaches the world and demon-range pointers through one base symbol (+4/+0xc), does not unroll the 24-slot init loop and keeps its world pointer in r4/r5 around the demon-table rebuild; this version unrolls the loop and keeps the world in r5, so the instruction count differs. The stores, calls and loop bounds are the same. */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 namespace {
@@ -142,7 +143,6 @@ struct GameDataBlocks {
 };
 extern GameDataBlocks g_gameDataBlocks;
 void rt_memclr(void *data, u32 size);
-const u16 *devilGetRecord(u32 id);   /* a demon record, read as halfwords */
 void FUN_0033f81c(void);
 void FUN_002c4924(void);
 void inventoryResetSavedTableEntries(void);
@@ -172,25 +172,25 @@ void FUN_001a1110(void)
     g_gameDataBlocks.demonRange->last = 0;
     DemonRow *row = reinterpret_cast<DemonRow *>(reinterpret_cast<u8 *>(world) + 0xc22c);
     for (s32 i = 0; i < 0x500; i++) {
-        const u16 *record = devilGetRecord((u16)(i + 1));
+        const DevilRecord *record = devilGetRecord((u16)(i + 1));
         if (record != NULL) {
-            if ((record[3] & 1) != 0) {
+            if ((record->flags & 1) != 0) {
                 if (g_gameDataBlocks.demonRange->first == 0) {
-                    g_gameDataBlocks.demonRange->first = record[0];
+                    g_gameDataBlocks.demonRange->first = record->id;
                 }
-                g_gameDataBlocks.demonRange->last = record[0];
+                g_gameDataBlocks.demonRange->last = record->id;
             }
-            row->v[0] = reinterpret_cast<const u8 *>(record)[3];
+            row->v[0] = record->level;
             for (s32 k = 0; k < 5; k++) {
-                row->v[1 + k] = record[0xd + k];
+                row->v[1 + k] = record->stats[k];
             }
             for (s32 k = 0; k < 5; k++) {
-                row->v[6 + k] = record[0xd + k];
+                row->v[6 + k] = record->stats[k];
             }
-            row->v[0xc] = record[10];
-            row->v[0xd] = record[11];
+            row->v[0xc] = record->baseHp;
+            row->v[0xd] = record->baseMp;
             for (s32 k = 0; k < 8; k++) {
-                row->v[0xe + k] = record[0x1e + k];
+                row->v[0xe + k] = record->skills[k];
             }
             row->v[0x16] = 0;
             row->v[0x17] = row->v[0x17] & 0xff00;

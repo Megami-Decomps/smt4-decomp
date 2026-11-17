@@ -1,20 +1,9 @@
 /* NON_MATCHING: register allocation and scheduling only - retail spills the restored HP of the first inlined copy to the stack, hoists the 1.25f constant before the group dispatch and keeps the stock loop limit in r7; control flow and calls are identical. */
 #include "common.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/GamePlayerData.h"
 
 namespace {
-/* The player's save record (only the fields the restore touches). */
-struct PlayerRecord {
-    /* 0x00 */ u8 unk00[0x1c];
-    /* 0x1c */ u16 maxHp;
-    /* 0x1e */ u16 maxMp;
-    /* 0x20 */ u8 unk20[10];
-    /* 0x2a */ u16 hp;
-    /* 0x2c */ u16 mp;
-    /* 0x2e */ u8 unk2e[0x30];
-    /* 0x5e */ u16 status;
-};
 
 /* A demon slot's record. */
 struct SlotRecord {
@@ -57,11 +46,11 @@ static __inline void slotRestore(SlotRecord *record)
 extern "C" void FUN_004a0bac(u32 mode, s32 force)
 {
     if ((mode == 0 || mode == 2 || mode == 3) &&
-        (force != 0 || (reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->status & STATUS_SKIP) == 0) &&
-        (reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->status & STATUS_NEVER) == 0) {
-        PlayerRecord *player = reinterpret_cast<PlayerRecord *>(gameGetPlayerData());
-        player->status = 0;
-        PlayerRecord *again = reinterpret_cast<PlayerRecord *>(gameGetPlayerData());
+        (force != 0 || (gameGetPlayerData()->ailments & STATUS_SKIP) == 0) &&
+        (gameGetPlayerData()->ailments & STATUS_NEVER) == 0) {
+        PlayerDataA *player = gameGetPlayerData();
+        player->ailments = 0;
+        PlayerDataA *again = gameGetPlayerData();
         again->hp = again->maxHp;
         again->mp = again->maxMp;
         player->hp = player->maxHp;

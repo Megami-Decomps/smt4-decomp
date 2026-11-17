@@ -1,7 +1,7 @@
 /* NON_MATCHING: switch return blocks merge differently, process-mode constant is saved, and argument loads are rescheduled. */
 #include "addon/ItemEventStartup.h"
 #include "addon/aocMain.h"
-#include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
@@ -22,7 +22,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
     char messagesPath[128];
     switch (work->state) {
     case 0: {
-        ItemDataRecord *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+        QuestRecordA *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
         if (!item || item->event.package == 0) {
             work->state = 3;
             return 0;
@@ -42,7 +42,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
     case 1: {
         if (!work->script || !work->messages)
             return 0;
-        ItemDataRecord *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+        QuestRecordA *item = dataTable1bOr1cGetRecord(rosterGetLeaderId());
         if (!item)
             work->state = 3;
         sysPlaySe(0x92);

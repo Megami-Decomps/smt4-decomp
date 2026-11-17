@@ -1,9 +1,8 @@
 /* NON_MATCHING: panel initialization constants and register allocation differ. */
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-extern MessageGlobalsA g_messageMain;
 u32 scrGetArg(u32);
 void uiSpriteStateInitFromSource(void *, s32, s32, void *, s32, f32);
 void pairSetFirstResetSecond(void *, s32);
@@ -13,25 +12,25 @@ void uiSpriteSelectAnim(void *, s32);
 u32 FUN_003a69c0(void)
 {
     u32 value = scrGetArg(0);
-    MessagePanelA *panel = g_messageMain.panel;
-    panel->unk8E = 1;
-    panel->state = 1;
+    MessageWindowA *panel = g_messageMain.banner;
+    panel->wideValue = 1;
+    panel->counterState = 1;
     u32 slot = gameGetSlotTable()->money;
-    panel->unk7C = slot;
-    panel->unk88 = slot;
-    panel->unk91 = 0;
-    panel->unk92 = 0;
-    panel->unk17D = 0;
-    panel->unk16D = 0;
-    uiSpriteStateInitFromSource(panel->blockB00, 8, -1, panel->block194, 11, 1.0f);
-    pairSetFirstResetSecond(panel->blockB00, 0);
-    uiSpriteSelectAnim(panel->blockB00, 6);
-    panel = g_messageMain.panel;
-    panel->unk93 = 0;
-    panel->unk80 = value;
-    panel->unk84 = value;
-    panel->unk92 = 1;
-    panel->unk8C = 0;
+    panel->counterValue = slot;
+    panel->counterBase = slot;
+    panel->alternateAnimation = 0;
+    panel->unk0092 = 0;
+    panel->popupShown = 0;
+    panel->unk016D = 0;
+    uiSpriteStateInitFromSource(&panel->sprites[17], 8, -1, &panel->parameters, 11, 1.0f);
+    pairSetFirstResetSecond(&panel->sprites[17], 0);
+    uiSpriteSelectAnim(&panel->sprites[17], 6);
+    panel = g_messageMain.banner;
+    panel->unk0093 = 0;
+    panel->counterDelta = value;
+    panel->counterElapsed = value;
+    panel->unk0092 = 1;
+    panel->stepActive = 0;
     return 1;
 }
 }

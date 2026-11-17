@@ -1,7 +1,8 @@
 /* NON_MATCHING: 170 vs 171 rows: same control flow as retail; the shared zero temporary lands in r0 (retail r1, with the member loaded into r0) and the tail's flush-callback registers differ. */
 #include "common.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "ui/UiControl.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
 // Draw-state stack embedded in the title scene.
 struct DrawRing {
@@ -38,22 +39,11 @@ struct LayoutEntry {
     s16* size;              // 0x0c
 };
 
-struct UnitStatus {
-    u8 unk00[0x44];
-    u16 ailments;           // 0x44
-};
-
-struct PlayerStatus {
-    u8 unk00[0x72];
-    u16 ailments;           // 0x72
-};
-
 extern "C" {
 
 extern TitleScene* g_titleScene;
 
 LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
-UnitStatus* gameGetUnitRecord(s32 unit);
 void FUN_0029a17c(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
@@ -78,7 +68,7 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
     count = n = current = following = 0;
     u32 ailments;
     if (strip->member < 0) {
-        ailments = reinterpret_cast<PlayerStatus*>(gameGetPlayerData())->ailments;
+        ailments = gameGetPlayerData()->ailments;
     } else {
         ailments = gameGetUnitRecord(strip->member)->ailments;
     }

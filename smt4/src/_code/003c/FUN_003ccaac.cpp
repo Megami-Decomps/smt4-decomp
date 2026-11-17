@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ int FUN_00246080(...);
 int btlEntryBuildSummary(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
-int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int dataTable40FindById(void);
 int FUN_003bcda0(int);
@@ -148,7 +148,6 @@ extern int FUN_00229914(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_0023c154. */
 /* Supplied declaration required: FUN_0023c638. */
 extern int FUN_0023c684(unsigned int);
-extern int questCurrentIsFlagged(void);
 extern int FUN_0023dcfc(void);
 /* Supplied declaration required: btlReflectInitKind9. */
 extern int FUN_00245cc0(void);
@@ -370,7 +369,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   }
   else {
     puVar11 = (unsigned int *)*param_1;
-    btlMainFindEntryByListedId(puVar11,param_8);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar11), param_8);
     if ((*puVar11 & 0x80000000) != 0) {
       temp_v57 = 1;
     }
@@ -743,7 +742,7 @@ LAB_003cd944:
       if ((puVar11[0x112a] & 4) != 0 && temp_v18 != 0) {
         temp_v18 = 0;
       }
-      btlMainFindEntryByListedId(puVar11,param_8);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar11), param_8);
       if (puVar11 == (unsigned int *)0x0) {
         temp_v68 = 0;
       }
@@ -763,7 +762,7 @@ LAB_003cd944:
       }
       temp_v25 = 1;
       puVar11 = (unsigned int *)*param_1;
-      btlMainFindEntryByListedId(puVar11,param_7);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar11), param_7);
       if ((*puVar11 & 0x20) != 0) {
         temp_v25 = 0;
       }
@@ -1073,7 +1072,7 @@ LAB_003ce46c:
                      *(int *)(*param_1 + 0x1e98) + param_8 * 0x114,temp_v5,temp_v26);
         frameRangeExtend(param_1,param_2,param_8,temp_v30,10,0xf);
         puVar11 = (unsigned int *)*param_1;
-        btlMainFindEntryByListedId(puVar11,param_8);
+        btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar11), param_8);
         temp_v16 = temp_v53;
         if (*(char *)(temp_v53 + 0x23) != '\x04') {
           temp_v17 = 1;
@@ -1204,7 +1203,7 @@ LAB_003ce96c:
     temp_v5 = FUN_00229914(param_1,param_2,param_7);
     if (temp_v5 == 0) {
       puVar11 = (unsigned int *)*param_1;
-      btlMainFindEntryByListedId(puVar11,param_8);
+      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar11), param_8);
       if ((((*(unsigned short *)((int)puVar11 + 0x1c6) & 0x1c0) == 0) &&
           (((*puVar11 & 2) == 0 || (temp_v5 = questCurrentIsFlagged(), temp_v5 == 0)))) &&
          (temp_v5 = param_8, btlRollPassiveSkill(), temp_v5 != 0)) {

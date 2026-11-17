@@ -1,23 +1,10 @@
 /* NON_MATCHING: O3 drops the selector's active recheck, splits duck timing stores and reloads flags; pointer/register scheduling differs. */
 #include "AsdSDK/AsdDebug.h"
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-struct SoundSlotSystemApoc {
-    u8 unk000[0x764];
-    AsdSndSlotA slotsA[ASD_SND_SLOT_A_COUNT];
-    u8 unk854[0xad0];
-    AsdSndSlotA *currentSlotA;
-};
-
-struct SoundDuckBlockApoc {
-    AsdSndDuck duck;
-    AsdSndStatusApoc status;
-};
-
 extern "C" {
-extern SoundSlotSystemApoc g_asdSoundSystem;
-extern AsdSndDuck g_asdSoundDuck;
+extern AsdSndControlA g_asdSoundDuck;
 void *asdMemoryAlloc(s32 heap, u32 alignment, u32 flags, s32 size, u32 fromFront);
 u32 nw_snd_SoundHeap_Create(void *heap, void *buffer, u32 size);
 u32 nw_snd_SoundHeap_SaveState(void *heap);
@@ -68,7 +55,7 @@ extern "C" u32 asdSoundSlotAActivate(u32 index, s32 heapSize)
     slot->active = 1;
     slot->index = index;
     slot->volume = ASD_SND_VOLUME_DEFAULT;
-    SoundDuckBlockApoc &duckState = *reinterpret_cast<SoundDuckBlockApoc *>(&g_asdSoundDuck);
+    AsdSndControlA &duckState = g_asdSoundDuck;
     duckState.duck.level = 0.5f;
     duckState.duck.flags |= 1;
     duckState.duck.holdFrames = 30;

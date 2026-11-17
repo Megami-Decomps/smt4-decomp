@@ -11,9 +11,9 @@ s32 scrCommSetGameStateText(void)
 {
     u32 id = scrGetArg(0);
     const char *text = scrGetArgString(1);
-    g_gameState.textActive = 1;
-    g_gameState.textId = id;
-    libc_strcpy(g_gameState.text, text);
+    g_gameState.scriptPending = 1;
+    g_gameState.scriptId = id;
+    libc_strcpy(g_gameState.scriptName, text);
     return 1;
 }
 

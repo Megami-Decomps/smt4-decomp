@@ -1,15 +1,9 @@
 /* NON_MATCHING: only the first entry store differs: retail computes the entry address in r1 and the id in r2 (built swaps them). */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdMemUtil.h"
 
-struct FlaggedDemonDefinition {
-    u16 id;
-    u8 unk02[4];
-    u16 flags;
-    u8 unk08[0x30];
-    u16 flag;
-};
 struct FlaggedDemonEntry { u16 id, flag; };
 struct FlaggedDemonList {
     u8 unk000[0x410];
@@ -23,7 +17,6 @@ struct FlaggedDemonSortFlags { u8 mode : 7; u8 reverse : 1; };
 struct FlaggedDemonSortOptions { u8 unk00[0x15]; FlaggedDemonSortFlags sort; };
 extern "C" {
 extern FlaggedDemonList *g_statusDown;
-const FlaggedDemonDefinition *devilGetRecord(u32);
 void gridNavigationConfigure(void *, s32, s32, s32, s32, s32);
 void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 devilIdCompareRankOrderId(const void *, const void *);
@@ -40,12 +33,12 @@ void statusBuildFlaggedDemonList(const u8 *flags)
     list->total = 0;
     memClear(list->entries, sizeof(list->entries));
     for (u16 id = 0; id < 0x500; ++id) {
-        const FlaggedDemonDefinition *record = devilGetRecord(id);
-        if (record && (record->flags & 1) && record->flag) {
-            u16 flag = record->flag;
+        const DevilRecord *record = devilGetRecord(id);
+        if (record && (record->flags & 1) && record->innateFlag) {
+            u16 flag = record->innateFlag;
             if (flags[flag >> 3] & (1 << (flag & 7))) {
                 list->entries[list->count].id = record->id;
-                list->entries[list->count].flag = record->flag;
+                list->entries[list->count].flag = record->innateFlag;
                 ++list->count;
             }
             ++list->total;

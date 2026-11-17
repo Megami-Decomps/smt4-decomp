@@ -1,9 +1,9 @@
 #include "gamedata/ItemSortRecord.h"
+#include "gamedata/ItemSortCategory.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
 s32 itemSortCompareByCategoryAndId(const s32 *left, const s32 *right);
-s32 itemGetSortCategory(s32 id);
 s32 idIsAbove400(s32 id);
 
 // Compare by descending category rank, ascending record key, then the existing tie break.

@@ -30,7 +30,7 @@ u32 FUN_003bef90(void)
                 StatBlock *unit = gameGetUnitRecord(slot);
                 if (flagWordTestBit(unit, 10)) {
                     s32 chance;
-                    switch (unit->encounter.probabilityTier) {
+                    switch (unit->growth.probabilityTier) {
                     case 0:
                     case 1: chance = 25; break;
                     case 2: chance = 75; break;

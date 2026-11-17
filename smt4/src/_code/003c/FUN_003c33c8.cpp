@@ -3,6 +3,7 @@
 #include "battle/BattleUnitSlot.h"
 #include "battle/btlAction.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/UnitRecordAccess.h"
 
 /* The status-flag editor screen: its list box, the filters and the flag mask being edited. */
 struct StatusFlagEditor {
@@ -27,7 +28,6 @@ s32 slotIsActive(s32 mode);
 void FUN_00246e24(s32 a, BtlUnit *unit, BtlActionRecord *action, u32 mask, s32 b);
 void FUN_00246d38(s32 a, BtlUnit *unit, BtlActionRecord *action, u32 mask);
 SaveSlotTable *gameGetSlotTable(void);
-void *gameGetUnitRecord(s32 slot);
 s32 slotUnitIsInActiveParty(void *record);
 void objectFlagSetBit(void *record, s32 bit);
 void objectFlagsClear(void *record, u32 flags);

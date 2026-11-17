@@ -1,9 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 
-
-extern RenderCtxA *g_renderCtx;
 
 extern void FUN_00144ab4(s32 target);
 extern void FUN_0017dd80(void);

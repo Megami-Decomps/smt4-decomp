@@ -79,8 +79,8 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
 {
     u32 *phase = &battle->phase;
     if (battle->locked == 0 && ((battle->flags & 0x2000000) != 0 || (*phase & 2) != 0)) {
-        if (g_btlMain->cameraEditor.value != 0) {
-            FUN_0024082c(g_btlMain, g_btlMain->cameraEditor.value);
+        if (g_btlMain->editorValue != 0) {
+            FUN_0024082c(g_btlMain, g_btlMain->editorValue);
         } else {
             FUN_0024082c(g_btlMain, 120);
         }
@@ -140,8 +140,8 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
                 }
             }
         }
-        if (g_btlMain->cameraEditor.value != 0) {
-            FUN_0024082c(g_btlMain, g_btlMain->cameraEditor.value);
+        if (g_btlMain->editorValue != 0) {
+            FUN_0024082c(g_btlMain, g_btlMain->editorValue);
         } else {
             FUN_0024082c(g_btlMain, 120);
         }

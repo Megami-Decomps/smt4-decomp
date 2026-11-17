@@ -80,7 +80,7 @@ void FUN_0039eb4c(NaviMapWork *work)
 
     for (s32 i = 0; i < markerCount; i++) {
         NaviMarker *marker = &work->markers[i];
-        if (g_gameState.forceVisible == 0
+        if (g_gameState.showAllEntries == 0
             && (saveTestFlagRow(marker->flagRow, marker->flagColumn) == 0
                 || (marker->showFlag != 0 && gameFlagIsSet(marker->showFlag) == 0)
                 || (marker->hideFlag != 0 && gameFlagIsSet(marker->hideFlag) != 0))) {

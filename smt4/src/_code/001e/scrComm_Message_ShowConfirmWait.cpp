@@ -1,18 +1,6 @@
-#include "common.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
-
-typedef struct MessageState {
-    /* 0x000 */ u8 unk000[0xA11];
-    /* 0xA11 */ u8 mode;
-} MessageState;
-
-typedef struct MessageMainView {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ MessageState *state;
-} MessageMainView;
-
-extern MessageMainView g_messageMain;
 
 s32 scrCommMessageSetMode(s32 arg);
 u32 scrGetCommandOwner(void);
@@ -33,8 +21,8 @@ static void showMessage(s32 mode, s32 wait)
 void scrComm_Message_ShowConfirmWait(void)
 {
     scrCommMessageSetMode(0);
-    if (g_messageMain.state != NULL) {
-        g_messageMain.state->mode = 0x14;
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->displayMode = 0x14;
     }
     showMessage(6, 1);
 }

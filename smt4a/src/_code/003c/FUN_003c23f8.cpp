@@ -3,12 +3,12 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 struct BtlUnitA;
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
-BtlUnitA *btlUnitGet(u32 index);
 u32 FUN_004fc094(s32 mode, BtlUnitA *actor, s32 option, BattleRosterRecordA *target,
                  s32 value5, s32 damage, s32 value7, u32 value8,
                  u32 hp, u32 maxHp, s32 value11, u32 value12,
@@ -22,7 +22,7 @@ u32 FUN_003c23f8(void)
 {
     s32 amount = scrGetArg(0);
     s32 mode = scrGetArg(1);
-    BtlUnitA *actor = btlUnitGet(g_btlScriptUnit);
+    BtlUnitA *actor = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
     for (s32 slot = 0; slot < 4; ++slot) {
         BtlMainStateA *battle = btlGetMainState();
         BtlCombatantEntryA *entry = &battle->entries[slot];

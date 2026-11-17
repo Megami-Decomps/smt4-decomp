@@ -1,9 +1,9 @@
 #include "common.h"
 #include "gamedata/GameDataAccess.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-extern u8 *gameGetUnitRecord(int index);
 extern s8 *gameGetSlotTable(void);
 extern int gameCountUnits(void);
 

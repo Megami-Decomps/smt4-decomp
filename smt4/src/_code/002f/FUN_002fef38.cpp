@@ -38,7 +38,7 @@ u32 FUN_002fef38()
             if (entry->devil != NULL) {
                 const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(entry->id));
                 for (s32 slot = 0; slot < 8; ++slot) {
-                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(record->skillList.ids[slot]));
+                    const ActiveSkillRecord *skill = reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(record->skills[slot]));
                     if (skill != NULL && skill->classification.category == 3) {
                         scrSetResult(1);
                         return 1;

@@ -50,7 +50,7 @@ extern "C" void FUN_0029bed8(u32 id)
         RegisteredUnitSnapshotView *snapshot = reinterpret_cast<RegisteredUnitSnapshotView *>(&save->body.items[id]);
         const UnitSnapshotBonusesView *bonuses = reinterpret_cast<const UnitSnapshotBonusesView *>(unit);
         snapshot->flags = (snapshot->flags & 0xFFC30000) | unit->cur5 |
-            (static_cast<u32>(unit->encounter.initialization.initializationKind & 0xF) << 18);
+            (static_cast<u32>(unit->growth.initializationKind & 0xF) << 18);
         snapshot->packedStats[0] = packSnapshotPair(unit->level, unit->summary.stats[0] + bonuses->stats[0]);
         snapshot->packedStats[1] = packSnapshotPair(unit->summary.stats[1] + bonuses->stats[1],
             unit->summary.stats[2] + bonuses->stats[2]);

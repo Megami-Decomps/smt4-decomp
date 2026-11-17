@@ -16,7 +16,7 @@ s32 scrCommFinishBattleTalk(void)
         btlTalkBustUpDestroy();
         gameFlagSetValue(0x593, 0, 1);
     }
-    if (g_gameState.transitionActive != 0 || g_mapSelection.id != -1) {
+    if (g_gameState.savedLocationSet != 0 || g_mapSelection.id != -1) {
         asdSequenceRequest(8, 0, 0);
     }
     return 1;

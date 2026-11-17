@@ -1,4 +1,5 @@
 #include "util/MathFunctions.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes.h"
@@ -29,12 +30,10 @@ typedef char SelectionPanelWorkOffsetsCheck[
     offsetof(SelectionPanelWork, slotShown) == 0x3C84 ? 1 : -1];
 
 extern "C" {
-
 void efctSetSpeed(float speed);
 f32 vec2GetSpeed(const void *position);
 s32 vec2GetYInt(const void *object);
 
-extern RenderCtxA *g_renderCtx;
 
 /* Draws the selection panel's frame, then either every shown slot's marker or only the chosen slot's. */
 void selectionPanelDrawMarkers(SelectionPanelWork *work, int drawAll)

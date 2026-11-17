@@ -1,10 +1,11 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
 
 /* Maps an entry's kind to a category index (99 when there is no entry). */
-u32 itemGetSortCategory(s32 id)
+u32 itemGetSortCategory(u32 id)
 {
     if (id == 0) {
         return 99;

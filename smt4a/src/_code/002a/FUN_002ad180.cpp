@@ -1,5 +1,6 @@
 /* NON_MATCHING: callback handle and shared draw coordinates recovered; push expression order and job-loop address sharing differ. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "code/Code0038.h"
 #include "shard/JobWork.h"
 #include "util/BitsAndBytes.h"
@@ -22,7 +23,6 @@ struct EventTex {
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern EventTex *g_eventTex;
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);

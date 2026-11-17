@@ -66,7 +66,7 @@ void mapEnvironmentApplyPreset(u32 preset, s32 transition)
     }
     g_gameState.environmentPreset = g_mapTable.selectedIndex;
     const MapEnvironmentEntry *entry = &g_mapTable.entries[g_mapTable.selectedIndex];
-    g_gameState.unk618 = entry->id;
+    g_gameState.environmentId = entry->id;
     g_gameState.unk61C = entry->unk02;
     g_gameState.unk620 = entry->unk04;
     g_gameState.unk624 = entry->unk06;
@@ -103,15 +103,15 @@ void mapEnvironmentApplyPreset(u32 preset, s32 transition)
                  entry->unk18, entry->unk19, entry->unk20, entry->unk21,
                  entry->unk22, entry->unk23, entry->unk24, entry->unk26,
                  (f32)entry->unk1A, entry->unk1C);
-    g_gameState.fade.mode = entry->unk28[0];
-    g_gameState.fade.x = (s8)entry->unk28[2];
-    g_gameState.fade.y = (g_gameState.fade.x * 3) / 5;
-    g_gameState.fade.texture = entry->unk28[3];
-    g_gameState.fade.alpha = entry->unk28[4];
-    g_gameState.fade.additive = entry->unk28[1];
-    g_gameState.fade.red = entry->unk28[5];
-    g_gameState.fade.green = entry->unk28[6];
-    g_gameState.fade.blue = entry->unk28[7];
+    g_gameState.overlayKind = entry->unk28[0];
+    g_gameState.overlayX = (s8)entry->unk28[2];
+    g_gameState.overlayY = (g_gameState.overlayX * 3) / 5;
+    g_gameState.overlayTexture = entry->unk28[3];
+    g_gameState.overlayAlpha = entry->unk28[4];
+    g_gameState.overlayAdditive = entry->unk28[1];
+    g_gameState.overlayRed = entry->unk28[5];
+    g_gameState.overlayGreen = entry->unk28[6];
+    g_gameState.overlayBlue = entry->unk28[7];
     g_localCameraPosition.degrees = (f32)entry->unk1A + 180.0f;
     if (g_localCameraPosition.degrees > 360.0f) {
         g_localCameraPosition.degrees -= 360.0f;

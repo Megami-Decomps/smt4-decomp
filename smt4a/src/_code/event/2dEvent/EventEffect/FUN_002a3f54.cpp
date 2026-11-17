@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "event/2dEvent/EventFilter.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -6,7 +7,6 @@
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f3e8[6];
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);

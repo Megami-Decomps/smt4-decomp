@@ -1,10 +1,9 @@
 /* NON_MATCHING: direction normalization elides retail's intermediate reloads, and vector copies/saved registers differ. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 extern "C" {
 extern LmapMainStateA *g_lmapMainState;
-extern LmapSceneA *g_lmapScene;
 u32 table23FindRecordByKey(s32 category, s32 subtype, u32 variant);
 Table23Record *dataTableGetRecord23(u32 index);
 f32 distSpatial(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
@@ -34,7 +33,7 @@ void FUN_00291e50(s32 startId, u32 startVariant, s32 endId, u32 endVariant)
         path->start.y = (f32)point->y;
         path->start.z = (f32)point->z;
     } else {
-        path->start = *(const MapVector *)g_lmapScene->transform.position;
+        path->start = g_lmapScene->pose.position;
     }
     const WaypointView *point = (const WaypointView *)dataTableGetRecord23(table23FindRecordByKey(path->map, endId, endVariant));
     path->end.x = (f32)point->x;
@@ -51,8 +50,8 @@ void FUN_00291e50(s32 startId, u32 startVariant, s32 endId, u32 endVariant)
     path->speed = 30.0f;
     path->frame = 0;
     path->duration = (s32)(distance / path->speed);
-    *(MapVector *)g_lmapScene->transform.position = path->start;
-    *(MapVector *)g_lmapScene->transform.positionSnapshotA = path->start;
+    g_lmapScene->pose.position = path->start;
+    g_lmapScene->pose.targetPosition = path->start;
     g_gameState.mapId = 101;
     g_gameState.areaId = endId;
     PhaseView *state = (PhaseView *)g_lmapMainState;

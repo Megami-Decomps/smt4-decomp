@@ -8,10 +8,6 @@ struct ResultSlot {
     u8 unk001[0x61F]; // 0x001
 };
 
-struct UnitRecordView {
-    u8 unk00[0x34];   // 0x00
-    u16 values[1];    // 0x34
-};
 
 struct ResultScreen {
     u8 unk0000[0x3654];       // 0x0000
@@ -37,7 +33,7 @@ s32 FUN_003245b8(void)
         u32 value;
         if (which == 0) {
             ResultSlot *slot = &g_result->slots[g_result->selected];
-            value = static_cast<UnitRecordView *>(gameGetUnitRecord(slot->unitId))->values[g_result->valueIndex];
+            value = gameGetUnitRecord(slot->unitId)->skills.ids[g_result->valueIndex];
         } else {
             value = g_result->pendingValue;
         }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: first scene-update saved registers and animation/model argument evaluation order differ; the recovered reference argument, stereo setter and pending-list snapshot now match retail. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "code/Code0014.h"
 #include "code/Code0015.h"
 
@@ -63,7 +64,6 @@ extern "C" {
 extern HandleRegistry *g_handleRegistry;
 extern ModelOverride *DAT_0056fcb8;
 extern FrameModel *DAT_0056fcbc;
-extern RenderCtxA *g_renderCtx;
 
 void FUN_0017d158(ModelSlot *model);
 bool FUN_00158124(HandleRegistry *manager);

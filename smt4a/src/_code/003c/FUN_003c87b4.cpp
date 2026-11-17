@@ -1,22 +1,19 @@
 /* NON_MATCHING: the final unk19FA read builds the address with two adds instead of reusing the 0x19FA pool literal. */
 #include "common.h"
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "script/ScriptArgs.h"
 #include "ui/UiControl.h"
 
 extern "C" {
 
-
-extern MessageGlobalsA g_messageMain;
-
 /* Switches the panel's sprites to their closing animations and picks the next state. */
 static __inline void messagePanelStartClose(void)
 {
-    MessagePanelA *panel = g_messageMain.panel;
+    MessageWindowA *panel = g_messageMain.banner;
 
-    uiSpriteSelectAnim(panel->spritesCA4[17], 15);
-    uiSpriteSelectAnim(panel->spritesCA4[18], 16);
-    uiSpriteSelectAnim(panel->spritesCA4[20], 18);
+    uiSpriteSelectAnim(&panel->sprites[37], 15);
+    uiSpriteSelectAnim(&panel->sprites[38], 16);
+    uiSpriteSelectAnim(&panel->sprites[40], 18);
     panel->unk19FA = 1;
     panel->unk19F9 = panel->unk19FC == 0 ? 6 : 4;
 }
@@ -25,7 +22,7 @@ static __inline void messagePanelStartClose(void)
  * returns whether the panel is still open. */
 bool FUN_003c87b4(void)
 {
-    MessagePanelA *panel = g_messageMain.panel;
+    MessageWindowA *panel = g_messageMain.banner;
 
     if (scrGetCommandFrame() == 0 && panel->unk19FB != 0) {
         messagePanelStartClose();

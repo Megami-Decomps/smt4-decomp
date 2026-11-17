@@ -1,5 +1,6 @@
 /* NON_MATCHING: indexed neighbor accesses recover retail cell offsets; spawn-path load scheduling and VFP/register allocation still differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 struct LmapCell {
@@ -44,28 +45,28 @@ void lmapSceneRestoreEntryPosition(void)
         f32 x = spawn->x * 700.0f + 350.0f;
         f32 z = spawn->z * 700.0f + 350.0f;
         f32 spawnHeading = spawn->heading;
-        LmapScene *scene = g_lmapScene;
-        scene->position.x = x;
-        scene->position.y = 0.0f;
-        scene->position.z = z;
-        scene->targetPosition.x = x;
-        scene->targetPosition.y = 0.0f;
-        scene->targetPosition.z = z;
-        scene->heading = spawnHeading;
-        scene->targetHeading = spawnHeading;
+        LmapSceneA *scene = g_lmapScene;
+        scene->pose.position.x = x;
+        scene->pose.position.y = 0.0f;
+        scene->pose.position.z = z;
+        scene->pose.targetPosition.x = x;
+        scene->pose.targetPosition.y = 0.0f;
+        scene->pose.targetPosition.z = z;
+        scene->pose.heading = spawnHeading;
+        scene->pose.targetHeading = spawnHeading;
         g_lmapView->heading = spawnHeading;
         return;
     }
     s32 cellIndex = flags->z * 15 + flags->x;
     f32 x = flags->x * 700.0f + 350.0f;
     f32 z = flags->z * 700.0f + 350.0f;
-    LmapScene *scene = g_lmapScene;
-    scene->position.x = x;
-    scene->position.y = 0.0f;
-    scene->position.z = z;
-    scene->targetPosition.x = x;
-    scene->targetPosition.y = 0.0f;
-    scene->targetPosition.z = z;
+    LmapSceneA *scene = g_lmapScene;
+    scene->pose.position.x = x;
+    scene->pose.position.y = 0.0f;
+    scene->pose.position.z = z;
+    scene->pose.targetPosition.x = x;
+    scene->pose.targetPosition.y = 0.0f;
+    scene->pose.targetPosition.z = z;
     if (flags->cells[cellIndex - 15].kind == 2)
         heading = 180.0f;
     if (flags->cells[cellIndex + 15].kind == 2)
@@ -74,8 +75,8 @@ void lmapSceneRestoreEntryPosition(void)
         heading = 270.0f;
     if (flags->cells[cellIndex + 1].kind == 2)
         heading = 90.0f;
-    scene->heading = heading;
-    scene->targetHeading = heading;
+    scene->pose.heading = heading;
+    scene->pose.targetHeading = heading;
     g_lmapView->heading = heading;
 }
 }

@@ -2,44 +2,26 @@
 /* Starts map movement toward a position and turns both scene actors toward it. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-extern LmapSceneA *g_lmapScene;
 void FUN_003250ac(void *movement, MapVector current, MapVector destination);
 f32 mathPositionHeadingDegrees(MapVector current, MapVector destination);
 void controllerSetRotationEulerDegrees(u32 controller, f32 x, f32 y, f32 z);
 
 void FUN_0032714c(MapVector destination)
 {
-    /* Pointer fields in unk135 would change that byte-aligned shared region's alignment. */
-    struct SceneMovementView {
-        u8 unk000[0x180];
-        LmapActorA *firstActor;
-        u8 unk184[8];
-        LmapActorA *secondActor;
-        u8 unk190[0x40];
-        u32 state;
-        u8 unk1D4[4];
-        u8 movement[0xC];
-        u32 resumeState;
-        u8 unk1E8[8];
-        MapVector current;
-        MapVector destination;
-        u8 unk208[0x10];
-        f32 heading;
-    };
-    SceneMovementView *scene = (SceneMovementView *)g_lmapScene;
-    scene->destination = destination;
-    FUN_003250ac(scene->movement, scene->current, destination);
-    scene = (SceneMovementView *)g_lmapScene;
-    f32 heading = mathPositionHeadingDegrees(scene->current, scene->destination);
-    scene = (SceneMovementView *)g_lmapScene;
-    scene->heading = heading;
-    scene->state = 4;
+    LmapSceneA *scene = g_lmapScene;
+    scene->movementDestination = destination;
+    FUN_003250ac(&scene->movement, scene->movementCurrent, destination);
+    scene = g_lmapScene;
+    f32 heading = mathPositionHeadingDegrees(scene->movementCurrent, scene->movementDestination);
+    scene = g_lmapScene;
+    scene->movementHeading = heading;
+    scene->movementState = 4;
     scene->resumeState = g_gameState.resumeMovementState;
-    controllerSetRotationEulerDegrees(scene->firstActor->controller, 0.0f, heading, 0.0f);
-    scene = (SceneMovementView *)g_lmapScene;
-    controllerSetRotationEulerDegrees(scene->secondActor->controller, 0.0f, scene->heading, 0.0f);
+    controllerSetRotationEulerDegrees(scene->models[4]->controller, 0.0f, heading, 0.0f);
+    scene = g_lmapScene;
+    controllerSetRotationEulerDegrees(scene->models[7]->controller, 0.0f, scene->movementHeading, 0.0f);
 }
 }

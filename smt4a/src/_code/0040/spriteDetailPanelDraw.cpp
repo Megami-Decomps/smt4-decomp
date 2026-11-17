@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "util/MathFunctions.h"
 /* NON_MATCHING: instructions, constants and frame match; only the callee-saved register assignment differs (retail keeps the panel in r5 and the title x in r6, so the later x/y/detail values rotate with it; this build puts the panel in r6 and the title x in r5). */
 #include "shard/S1ListPanel.h"
@@ -6,7 +7,6 @@
 #include "shard/SpriteDetailPanel.h"
 
 extern "C" {
-extern RenderCtxA* g_renderCtx;
 s32 vec2GetYInt(const void* position);
 f32 vec2GetSpeed(const void* position);
 void efctSetSpeed(f32 speed);

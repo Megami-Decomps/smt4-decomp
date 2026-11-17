@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 static inline BattleRosterRecordA *findFirstMarkedOpponent(BtlMainStateA *state)
 {
@@ -17,7 +18,6 @@ static inline BattleRosterRecordA *findFirstMarkedOpponent(BtlMainStateA *state)
 extern "C" {
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void modelOwnerLoadNamed(u32 *owner, const char *name);
 

@@ -1,9 +1,9 @@
 #include "map/mapMain.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
 extern MapMainA *g_mapMain;
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 preset, s32 index);
 void FUN_002b6f30(void);
 void FUN_002cfb18(void);

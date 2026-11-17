@@ -1,5 +1,5 @@
 /* NON_MATCHING: register swap only: retail keeps id in r4 and the record in r5 (reusing r4 for record+0x100 later); ours swaps them. */
-#include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "gamedata/GameDataAccess_VariantG.h"
@@ -17,18 +17,18 @@ s32 gameUnlockRecordRequirementsMet(void);
 /* Returns whether item `id` is currently usable. */
 u32 FUN_003de75c(u32 id)
 {
-    ItemDataRecord *record;
-    ItemDataRecord *late;
+    QuestRecordA *record;
+    QuestRecordA *late;
 
     if (!gameUnlockRecordRequirementsMet()) {
         return 0;
     }
     record = dataTable1bOr1cGetRecord(id);
-    if (gameFlagEntryGetBit(id, 3) && record->ordering.sortGroup != ITEM_GROUP_KEY) {
+    if (gameFlagEntryGetBit(id, 3) && record->kind != ITEM_GROUP_KEY) {
         return 0;
     }
     if (id >= ITEM_FIRST_LATE_ID && (late = dataTable1bOr1cGetRecord(id)) != NULL
-        && late->ordering.sortGroup == ITEM_GROUP_KEY && g_gameState.mapId == GAME_MODE_KEY_ITEMS_LOCKED) {
+        && late->kind == ITEM_GROUP_KEY && g_gameState.mapId == GAME_MODE_KEY_ITEMS_LOCKED) {
         return 0;
     }
     if (record->lockFlag != 0 && gameFlagIsSet(record->lockFlag)

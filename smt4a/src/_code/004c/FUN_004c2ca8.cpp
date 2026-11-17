@@ -1,18 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c2ca8` (_code @ 0x4c2ca8, 0x838 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int btlGetMainState(...);
-int btlFindEntryBlockByMemberId(...);
 int recordGetScaledMaximum(void);
 int dataTable8FindRecord(void);
 int dataTable08Sub2GetRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
 int btlEntryBuildSummary(...);
-int btlMainFindEntryByListedId(...);
 int FUN_004bd098(...);
 int FUN_004c4178(unsigned int, unsigned int, int, int, int);
 int FUN_004c58e0(...);
@@ -122,9 +121,9 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
   dataTable04FindById();
   dataTable8FindRecord();
   puVar5 = puVar4;
-  btlMainFindEntryByListedId(puVar4,param_5);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar4), param_5);
   puVar6 = puVar4;
-  btlMainFindEntryByListedId(puVar4,param_6);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(puVar4), param_6);
   btlEntryBuildSummary(temp_v14,puVar4,puVar5);
   temp_v7 = 0xffffffff;
   temp_v8 = 0xffffffff;
@@ -139,8 +138,8 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
     VectorUnsignedToFloat((unsigned int)*(unsigned short *)(temp_v6 + 0x2c),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v3 = btlGetMainState((unsigned int)*(unsigned short *)(temp_v6 + 0x2c));
     temp_v4 = temp_v3;
-    btlMainFindEntryByListedId(temp_v3,param_5);
-    if ((((temp_v3 != 0) && (temp_v13 = temp_v4, btlMainFindEntryByListedId(temp_v4,param_6), temp_v4 != 0)) &&
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v3), param_5);
+    if ((((temp_v3 != 0) && (temp_v13 = temp_v4, reinterpret_cast<int>(btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v4), param_6)), temp_v4 != 0)) &&
         (btlEntryBuildSummary(temp_v23,temp_v13,temp_v3), temp_v24 != 0)) &&
        ((temp_v4 = flagsCountSelectedBits(*(unsigned short *)(temp_v4 + 0x274)), temp_v4 != 0 &&
         (temp_v0 = (unsigned int)temp_v24 * temp_v4, temp_v0 != 0)))) {
@@ -273,7 +272,7 @@ LAB_004c3334:
       temp_v12 = 0.01f;
       if (param_6 < 0x6d) {
         puVar5 = puVar4;
-        btlFindEntryBlockByMemberId(puVar4,param_6);
+        btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(puVar4), param_6);
         temp_v11 = (float)VectorSignedToFloat(puVar5[0x3e] * (unsigned int)*(unsigned char *)(param_4 + 0x38),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v11 = temp_v11 * temp_v12;
@@ -309,7 +308,7 @@ LAB_004c3334:
     if ((*(unsigned int *)(param_4 + 0x68) & 4) == 0) goto LAB_004c2f70;
     if (param_6 < 0x6d) {
       puVar5 = puVar4;
-      btlFindEntryBlockByMemberId(puVar4,param_6);
+      btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(puVar4), param_6);
       temp_v8 = puVar5[0x3e];
     }
     else {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: vector temporaries/registers and history-base materialization differ; -O2 candidate. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "battle/btlCamera.h"
 
 struct BattleTargetCamera : BattleVectorTransition {
     BattleVector3 offset; // 0x818
@@ -13,10 +14,6 @@ struct BattleTargetCameraInputs {
     BattleVector3 origin;
     u8 unk598[0x58];
     BattleVector3 base; // 0x5f0
-};
-struct BattleTargetCameraGlobals {
-    u8 unk00[0x28];
-    s32 mode;
 };
 struct BattleCameraHistory {
     BattleVector3 original;
@@ -41,20 +38,20 @@ static BattleVector3 operator*(const BattleVector3 &value, f32 factor)
 }
 
 extern "C" {
-extern BattleTargetCameraGlobals g_btlMain;
+extern BtlCameraStatics g_btlMain;
 extern BattleCameraHistory DAT_00493530;
 f32 FUN_00227280(s32 mode, s32 duration, s32 frame);
 
 void battleCameraBlendTargetOffset(BattleTargetCamera *camera)
 {
     BattleTargetCameraInputs *input = reinterpret_cast<BattleTargetCameraInputs *>(camera);
-    if (g_btlMain.mode == 2) {
+    if (g_btlMain.routingMode == 2) {
         BattleVector3 delta = camera->alternateDestination - DAT_00493530.alternate;
         f32 factor = FUN_00227280(camera->mode, camera->duration, camera->frame);
         camera->secondaryElapsed = input->base + delta * factor;
         return;
     }
-    if (g_btlMain.mode != 1) {
+    if (g_btlMain.routingMode != 1) {
         BattleVector3 delta = camera->alternateDestination - (input->origin - camera->offset);
         f32 factor = FUN_00227280(camera->mode, camera->duration, camera->frame);
         camera->offset = delta * factor;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: Surface-selector load register, one clamp move and the three render-state push register schedules differ. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 /* Scissor stacks follow the shared rendering-context prefix. */
 struct ScissorContextView {
@@ -13,7 +14,6 @@ typedef char ScissorOffsetsCheck[offsetof(ScissorContextView, lower) == 0x1338 &
 
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 u32 FUN_00169d8c(u32 selector);
 u32 FUN_00169db4(u32 selector);
 s32 asdGxPresetsGetEnable(u32 selector);

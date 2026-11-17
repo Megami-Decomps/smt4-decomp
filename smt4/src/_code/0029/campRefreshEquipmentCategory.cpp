@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 struct CampEquipmentGrid { u8 data[0x64]; };
 struct CampEquipmentLists {
@@ -10,10 +11,8 @@ struct CampEquipmentLists {
     u16 slot0[120], slot1[120], slot2[50]; // 0x1e7c, 0x1f6c, 0x205c
     u16 slot3[120], slot4[120], slot5[120], slot6[120];
 };
-struct CampPlayerEquipment { u16 equipment[7]; };
 extern "C" {
 extern CampEquipmentLists *g_camp;
-const CampPlayerEquipment *gameGetPlayerData();
 s32 flagValueIsPositive(u32);
 void gridNavigationConfigure(CampEquipmentGrid *, s32, s32, s32, s32, s32);
 void FUN_00282f80(u32);

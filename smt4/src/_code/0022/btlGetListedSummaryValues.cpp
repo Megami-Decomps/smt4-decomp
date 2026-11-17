@@ -3,9 +3,9 @@
 
 #include "battle/BattleEntrySummary.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, u32 id);
 void btlEntryBuildSummary(BattleEntrySummary* summary, BtlMainState* state, const BtlEntry* entry);
 
 // Read the unsigned value and signed stat from a listed combatant's summary.

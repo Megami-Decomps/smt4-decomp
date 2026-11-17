@@ -1,15 +1,13 @@
-#include "shard/PadState.h"
 #include "script/ScriptArgs.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-extern PadState *gameGetPlayerData(void);
-
 u32 FUN_002f7bf0(void)
 {
-    PadState *pad = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
 
-    scrSetResult((int)pad->unk1E);
+    scrSetResult((int)player->maxMp);
     return 1;
 }
 

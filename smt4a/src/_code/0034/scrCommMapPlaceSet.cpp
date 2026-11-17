@@ -14,7 +14,7 @@ s32 scrCommMapPlaceSet(void)
     u32 c = scrGetArg(2);
 
     mapPlaceSet(a, b, c);
-    g_gameState.transitionActive = 0;
+    g_gameState.savedLocationSet = 0;
     return 1;
 }
 

@@ -1,21 +1,10 @@
 /* NON_MATCHING: the loop index, skill id and known-list pointer rotate through r3/r1/r2 where retail uses r1/r2/r3. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
-typedef struct EquipmentSkill {
-    /* 0x00 */ u16 level;
-    /* 0x02 */ u16 skill;
-} EquipmentSkill;
-
-typedef struct EquipmentData {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ EquipmentSkill skills[8];
-} EquipmentData;
-
-EquipmentData *devilGetRecord(u16 id);
-
-/* Collects into `out` the skills of equipment `id` unlocked above `level` that are not already in
+/* Collects into `out` the skills demon `id` learns above `level` that are not already in
  * `known` (8 entries); returns how many were added, none when `skip` is set. */
 s32 FUN_004bcaa8(u16 id, u32 level, const u16 *known, s16 *out, s32 skip)
 {
@@ -23,10 +12,10 @@ s32 FUN_004bcaa8(u16 id, u32 level, const u16 *known, s16 *out, s32 skip)
         return 0;
     }
     s32 count = 0;
-    EquipmentData *equipment = devilGetRecord(id);
+    DevilRecordA *devil = devilGetRecord(id);
     for (s32 i = 0; i < 8; i++) {
-        u16 skill = equipment->skills[i].skill;
-        if (skill != 0 && equipment->skills[i].level > level) {
+        u16 skill = devil->learnedSkills[i].id;
+        if (skill != 0 && devil->learnedSkills[i].level > level) {
             s32 j;
             for (j = 0; j < 8; j++) {
                 if (known[j] == skill) {

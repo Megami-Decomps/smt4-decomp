@@ -4,9 +4,9 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlUnitA *btlUnitGet(u32 id);
 extern u32 g_btlScriptUnit;
 
 void btlSelectCandidateEntries(s32 limit)
@@ -16,7 +16,7 @@ void btlSelectCandidateEntries(s32 limit)
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.required) == 0 &&
             (g_btlCandidateMasks.excluded & entry->flags) == 0) {
-            BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
+            BtlUnitA *unit = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
             ++count;
             unit->targets[index] = index;
             if (count >= limit) {

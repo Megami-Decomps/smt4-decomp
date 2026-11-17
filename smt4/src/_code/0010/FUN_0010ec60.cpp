@@ -1,16 +1,10 @@
-#include "common.h"
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-
-extern struct {
-    u8 unk000[0x1C0];
-    u32 unk1C0;
-} g_asdGxPresets;
-
+/* Returns the frame interval (vertical blanks per frame, minus one). */
 u32 FUN_0010ec60(void)
 {
-    return g_asdGxPresets.unk1C0;
+    return g_asdGxPresets.interval;
 }
 
 } /* extern "C" */

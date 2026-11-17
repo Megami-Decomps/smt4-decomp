@@ -1,5 +1,6 @@
 /* NON_MATCHING: layout only: retail places one shared FUN_004a5d5c tail call right after the mode dispatch and the arms branch back to it; built emits an inline tail call in each arm */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "classes/Obj55c8d0.h"
 #include "shard/Shard004A.h"
 #include "bible/bibleAnalyze.h"
@@ -24,12 +25,6 @@ struct SelectMenuVtable {
     s32 (*canConfirm)(SelectMenu *menu); /* +0x24 */
 };
 
-
-struct ItemRecord {
-    /* 0x00 */ u8 unk00[0xB3];
-    /* 0xB3 */ u8 flags; /* bit 1: plays the special confirm sound */
-};
-
 /* The selection menu, reduced to what the confirm handler touches. */
 struct SelectMenu {
     /* 0x000 */ const SelectMenuVtable *vtable;
@@ -47,7 +42,6 @@ extern "C" {
 s32 utilityReturnSuccess(void *flags);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void FUN_00202400(void);
-ItemRecord *devilGetRecord(u32 itemId);
 void sysPlaySe(u32 id);
 void FUN_004a5d5c(SelectMenu *menu);
 
@@ -72,8 +66,8 @@ void Obj55c8d0::FUN_004a4c74()
         if (menu->state.mode == 0) {
             SelectEntry *entries = menu->state.entries;
             s32 total = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->totalHolder));
-            ItemRecord *item = devilGetRecord(entries[total].itemId);
-            sysPlaySe((item->flags & 2) != 0 ? 0x121 : 0x30);
+            DevilRecordA *item = devilGetRecord(entries[total].itemId);
+            sysPlaySe((item->extraFlags & 2) != 0 ? 0x121 : 0x30);
             FUN_004a5d5c(menu);
             return;
         }

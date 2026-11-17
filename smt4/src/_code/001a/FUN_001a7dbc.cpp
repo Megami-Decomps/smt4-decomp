@@ -1,5 +1,6 @@
 /* NON_MATCHING: mode 1's learned-bit set now matches (`(1 << n) | byte`); the mode 0/3 set still gets the and/ldrb registers swapped (retail and r2 / ldrb r0). Slot is s8 (fixes the slot-store scheduling). */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/GameDataBlocks.h"
 
@@ -32,18 +33,6 @@ struct UnitRecord {
     u8 unk602[2];
 };
 
-/* The fixed devil data record (accessed fields). */
-struct DevilRecord {
-    u8 unk00[3];
-    u8 level;               // 0x03
-    u8 unk04[0x10];
-    u16 stat[8];            // 0x14..0x22
-    u8 unk24[0x14];
-    u16 learnIndex;         // 0x38
-    u8 unk3A[2];
-    u16 resist[8];          // 0x3C
-};
-
 /* The copy of a unit's saved devil data. */
 struct DevilCopy {
     u16 level;              // 0x00
@@ -62,7 +51,6 @@ struct DevilCopy {
 extern "C" {
 s8 *gameGetSlotTable(void);
 void gameDataSlotSetFlag(u16 id, s32 value);
-DevilRecord *devilGetRecord(u16 id);
 void gameRecordCopy(u16 id, DevilCopy *copy);
 void unitRecalculateEffectiveStats(UnitRecord *unit);
 void FUN_0029bde4(UnitRecord *unit);
@@ -84,28 +72,28 @@ void FUN_001a7dbc(UnitRecord *unit, s8 slot, u32 id, s32 mode)
         gameDataSetItemFlag(id, 1);
         gameDataSlotSetFlag(id, 1);
     }
-    DevilRecord *record = devilGetRecord(id);
+    DevilRecord *record = devilGetRecord((u16)id);
     switch (mode) {
     case 0:
     case 3: {
         unit->level = record->level;
-        unit->stat[0] = record->stat[0];
-        unit->stat[1] = record->stat[1];
-        unit->stat[2] = record->stat[3];
-        unit->stat[4] = record->stat[5];
-        unit->stat[5] = record->stat[6];
-        unit->stat[6] = record->stat[7];
-        unit->stat[3] = record->stat[4];
+        unit->stat[0] = record->baseHp;
+        unit->stat[1] = record->baseMp;
+        unit->stat[2] = record->stats[0];
+        unit->stat[4] = record->stats[2];
+        unit->stat[5] = record->stats[3];
+        unit->stat[6] = record->stats[4];
+        unit->stat[3] = record->stats[1];
         unit->base1C = 0;
         unit->base1E = 0;
-        unit->base20 = record->stat[3];
-        unit->base24 = record->stat[5];
-        unit->base26 = record->stat[6];
-        unit->base28 = record->stat[7];
-        unit->base22 = record->stat[4];
+        unit->base20 = record->stats[0];
+        unit->base24 = record->stats[2];
+        unit->base26 = record->stats[3];
+        unit->base28 = record->stats[4];
+        unit->base22 = record->stats[1];
         for (s32 i = 0; i < 8; i++)
-            unit->resist[i] = record->resist[i];
-        unit->learnedBits[record->learnIndex >> 3] |= 1 << (record->learnIndex & 7);
+            unit->resist[i] = record->skills[i];
+        unit->learnedBits[record->innateFlag >> 3] |= 1 << (record->innateFlag & 7);
         break;
     }
     case 1: {
@@ -130,7 +118,7 @@ void FUN_001a7dbc(UnitRecord *unit, s8 slot, u32 id, s32 mode)
             unit->resist[i] = copy.resist[i];
         unit->extra30 = copy.extra30;
         unit->unk601 = (static_cast<u32>(copy.flags) << 26) >> 28;
-        unit->learnedBits[record->learnIndex >> 3] = (1 << (record->learnIndex & 7)) | unit->learnedBits[record->learnIndex >> 3];
+        unit->learnedBits[record->innateFlag >> 3] = (1 << (record->innateFlag & 7)) | unit->learnedBits[record->innateFlag >> 3];
         break;
     }
     }

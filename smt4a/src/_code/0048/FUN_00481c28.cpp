@@ -1,10 +1,9 @@
 /* NON_MATCHING: the actor is addressed through its two sub-blocks and the hidden/visible placement (per-category compare, show arm first, shared hide tail) now matches retail; remaining: retail forms &block->position in r1 before the first vldmia and loads position.z before the offset in the move path. */
 #include "map/DistanceVisibilityWork.h"
 #include "game/GameStateA.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-extern LmapSceneA *g_lmapScene;
 void FUN_00481ba8(DistanceVisibilityWork *);
 f32 distSpatial(MapVector, MapVector);
 
@@ -19,7 +18,7 @@ void FUN_00481c28(DistanceVisibilityWork *work)
     DistanceVisibilityBlock *block = &actor->block;
     DistanceVisibilityTail *tail = &actor->tail;
     if (g_gameState.unk5C8 || g_gameState.inputBlocked ||
-        g_gameState.paused || g_gameState.departLoading)
+        g_gameState.paused || g_gameState.loading)
         return;
     if (work->mode != 0) {
         if (work->mode != 1)
@@ -36,7 +35,7 @@ void FUN_00481c28(DistanceVisibilityWork *work)
     // Positive distances use the engine's ordered IEEE-754 integer representation.
     if (tail->category == 1) {
         distance.value = distSpatial(block->position,
-            *reinterpret_cast<MapVector *>(g_lmapScene->transform.position));
+            g_lmapScene->pose.position);
         if (distance.bits < 0x44960000) { // 1200.0f
             block->flags |= 8;
             work->actor->block.graphics->model->flags &= ~3u;
@@ -46,7 +45,7 @@ void FUN_00481c28(DistanceVisibilityWork *work)
         }
     } else if (tail->category == 2) {
         distance.value = distSpatial(block->position,
-            *reinterpret_cast<MapVector *>(g_lmapScene->transform.position));
+            g_lmapScene->pose.position);
         if (distance.bits < 0x44160000) { // 600.0f
             block->flags |= 8;
             work->actor->block.graphics->model->flags &= ~3u;

@@ -2,12 +2,12 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 #define BTL_FLAG_PASSIVE_ALWAYS 0x40000 /* BtlMainState.battleFlags: passive rolls always succeed */
 
 extern "C" {
 
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
 void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skillIds);
 s32 randRange(s32 max);
 

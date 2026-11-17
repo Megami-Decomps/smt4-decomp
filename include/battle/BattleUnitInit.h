@@ -88,15 +88,6 @@ struct BattleUnitState {
     /* 0x228 */ u32 unk228;
 };
 
-struct DemonModelInfo {
-    /* 0x00 */ u8 unk00[9];
-    /* 0x09 */ u8 kind;
-    /* 0x0A */ u8 unk0A[0x31];
-    /* 0x3B */ u8 unk3B;
-    /* 0x3C */ u8 unk3C[0x77];
-    /* 0xB3 */ u8 flagsB3;
-};
-
 typedef char BattleUnitStateLayoutCheck[offsetof(BattleUnitState, current) == 0xD8 && offsetof(BattleUnitState, unk00C) == 0xC &&
     offsetof(BattleUnitState, clearedD4) == 0xD4 &&
     offsetof(BattleUnitState, initial) == 0xF4 && offsetof(BattleUnitState, skills) == 0x128 &&
@@ -104,6 +95,5 @@ typedef char BattleUnitStateLayoutCheck[offsetof(BattleUnitState, current) == 0x
     offsetof(BattleUnitState, clear1BE) == 0x1BE && offsetof(BattleUnitState, unk228) == 0x228 ? 1 : -1];
 typedef char UnitSourceRecordLayoutCheck[offsetof(UnitSourceRecord, hp) == 0x2A &&
     offsetof(UnitSourceRecord, affinities) == 0x34 && offsetof(UnitSourceRecord, id) == 0x62 ? 1 : -1];
-typedef char DemonModelInfoLayoutCheck[offsetof(DemonModelInfo, flagsB3) == 0xB3 ? 1 : -1];
 
 #endif

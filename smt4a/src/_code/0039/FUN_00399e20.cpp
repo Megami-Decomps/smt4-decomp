@@ -3,12 +3,7 @@
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "gamedata/EquipmentRecordA.h"
-
-struct PanelPlayerData {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u16 firstSkill;
-    /* 0x04 */ u16 secondSkill;
-};
+#include "gamedata/GamePlayerData.h"
 
 /* The button help block (g_buttonHelp) the panel is drawn through. */
 struct PanelBlock {
@@ -26,8 +21,6 @@ struct PanelButtonHelp {
 
 extern "C" {
 extern PanelButtonHelp g_buttonHelp;
-
-PanelPlayerData *gameGetPlayerData(void);
 void FUN_002c0940(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void battleAttributeFormatName(char *buffer, u32 attribute);
@@ -39,8 +32,8 @@ void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e,
 void FUN_00399e20(s32 textId, u32 flags)
 {
     PanelBlock *block = g_buttonHelp.block;
-    EquipmentRecordA *first = dataTable08Sub2GetRecord(gameGetPlayerData()->firstSkill);
-    EquipmentRecordA *second = dataTable08Sub2GetRecord(gameGetPlayerData()->secondSkill);
+    EquipmentRecordA *first = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.gun);
+    EquipmentRecordA *second = dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.bullets);
     if (first == NULL || second == NULL) {
         block->shown = 0;
         return;

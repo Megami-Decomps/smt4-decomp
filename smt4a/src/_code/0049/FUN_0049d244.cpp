@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: native text-scale calculation folds to a constant; saved-register and outgoing argument scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
@@ -13,7 +14,6 @@ struct MenuCaptionView {
 };
 typedef char MenuCaptionOffset[offsetof(MenuCaptionView, caption) == 0x84 ? 1 : -1];
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 
 void FUN_0049d244(MenuCaptionView *view, s32 x, s32 y, f32 alpha)

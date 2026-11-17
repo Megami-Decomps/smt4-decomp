@@ -5,7 +5,6 @@
 
 extern "C" {
 void messageWindowShowOrPoll(u32 context, u32 message, s32 frame, s32 mode, bool wait, u32 flags);
-extern MessageGlobals g_messageMain;
 
 static void showMessage(s32 mode, bool wait)
 {
@@ -20,11 +19,11 @@ void scrComm_Message_ShowWaitLockConfirm()
 {
     scrCommMessageSetMode(0);
     if (scrGetCommandFrame() == 0) {
-        MessagePanel *panel = g_messageMain.banner;
+        MessageWindow *panel = g_messageMain.banner;
         if (panel != 0) {
-            panel->unk30 = 1;
+            panel->unk030 = 1;
         }
-        panel->unk31 = 1;
+        panel->unk031 = 1;
     }
     s32 mode = btlTalkGetPortraitCode();
     if (mode == 20) {

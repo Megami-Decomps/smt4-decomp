@@ -1,9 +1,9 @@
 #include "quest_center/QuestRuntime.h"
+#include "quest_center/QuestRecord.h"
 #include "code/Code0029.h"
 
 extern "C" {
 QuestRuntimeFlagBlock *gameGetFlagBlock();
-QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 id);
 s32 table1bOr1cGetRecordValue(u32 id);
 void FUN_0028eeb8(u32 id);
 void FUN_0023ddbc(u32 flag, s32 value);

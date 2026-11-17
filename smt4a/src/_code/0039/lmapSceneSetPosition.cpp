@@ -1,14 +1,14 @@
-#include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
 
 void lmapSceneSetPosition(f32 x, f32 y, f32 z, f32 w)
 {
-    g_lmapScene->effectPosition[0] = x;
-    g_lmapScene->effectPosition[1] = y;
-    g_lmapScene->effectPosition[2] = z;
-    g_lmapScene->effectPosition[3] = w;
+    g_lmapScene->actorDestination.x = x;
+    g_lmapScene->actorDestination.y = y;
+    g_lmapScene->actorDestination.z = z;
+    g_lmapScene->actorYaw = w;
 }
 
 } /* extern "C" */

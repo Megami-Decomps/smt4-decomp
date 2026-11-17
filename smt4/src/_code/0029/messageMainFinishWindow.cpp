@@ -1,17 +1,16 @@
 #include "ui/MessageMain.h"
 
 extern "C" {
-extern MessageGlobals g_messageMain;
 
-int titleOverlaySetModeAnimation(MessageWork *state, int arg);
+int titleOverlaySetModeAnimation(MessageWindow *state, int arg);
 
 void messageMainFinishWindow(void)
 {
-    MessageWork *state = g_messageMain.state;
+    MessageWindow *state = g_messageMain.window;
 
     if (state != NULL && state->state != 0) {
         state->closeRequested = 1;
-        state->unkA10 = 1;
+        state->displayEnabled = 1;
         titleOverlaySetModeAnimation(state, state->mode);
         state->state = 3;
         state->unk034 = 0;

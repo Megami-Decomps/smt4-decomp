@@ -1,5 +1,6 @@
 /* NON_MATCHING: format-classification registers, paired width/height loads, size stores and shared format-case placement differ. */
 #include "gfx/RenderTargetState.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
@@ -16,7 +17,7 @@ void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void *asdMemoryAllocAligned(u32, u32, u32, u32, u32, u32);
 extern const char DAT_00409a68[];
 
-void FUN_002bc38c(RenderTargetFramebuffer *framebuffer,
+void FUN_002bc38c(AsdGxFramebuffer *framebuffer,
     const AsdGxSurfaceDescription *description, s32 allocate)
 {
     struct Surface {
@@ -33,7 +34,7 @@ void FUN_002bc38c(RenderTargetFramebuffer *framebuffer,
         u32 flags;
     };
     typedef char FramebufferStorageOffsets[
-        sizeof(Surface) == 0x18 && sizeof(FramebufferStorageView) == sizeof(RenderTargetFramebuffer) &&
+        sizeof(Surface) == 0x18 && sizeof(FramebufferStorageView) == sizeof(AsdGxFramebuffer) &&
         offsetof(FramebufferStorageView, width) == 0x30 &&
         offsetof(FramebufferStorageView, flags) == 0x38 ? 1 : -1];
     FramebufferStorageView *storage = reinterpret_cast<FramebufferStorageView *>(framebuffer);

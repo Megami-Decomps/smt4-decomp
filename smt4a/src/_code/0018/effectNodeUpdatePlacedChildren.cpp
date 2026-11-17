@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (206 rows against 207): retail copies the origin/offset vectors with mixed ldr/ldm and keeps the saved orientation in s16-s19, the node flags in r8 and the callback table in r7, with a 9-register push; ours uses plain ldm/stm vector copies and different VFP/saved-register assignments. Control flow, constants and the render-state push/pop agree. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 struct EffectVec4 {
     f32 x, y, z, w;
@@ -55,8 +56,6 @@ struct EffectNode {
 #define EFFECT_NODE_PLACED 0x80000000
 
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 
 s32 FUN_001ad5ec(EffectNode *node, const EffectVec4 *position, f32 *matrix);
 void FUN_001acb48(EffectNode *node, const f32 *matrix);

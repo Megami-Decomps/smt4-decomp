@@ -1091,14 +1091,6 @@ typedef char FlagGatePrefixALayoutCheck[
 
 /* Observed prefix of the record returned by dataTable1bOr1cGetRecord in Apocalypse.
  * This describes the accessed prefix, not the complete allocation extent. */
-struct EntryAttributePrefixA {
-    /* 0x00 */ u8 unk00[7];
-    /* 0x07 */ u8 attributeFlags;
-};
-typedef char EntryAttributePrefixALayoutCheck[
-    offsetof(EntryAttributePrefixA, attributeFlags) == 7 &&
-    sizeof(EntryAttributePrefixA) == 8 ? 1 : -1];
-
 struct TextLayoutContextA;
 
 /* Accessed owner prefix only; not a complete object or an embedding boundary. */

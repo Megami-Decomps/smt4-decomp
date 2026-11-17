@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneSlots.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
@@ -7,7 +8,7 @@ f32 distSpatial(MapVector a, MapVector b);
 /* Distance from the field position to a slot; slots in state 2 count 300 units farther. */
 static __inline f32 sceneSlotDistance(const SceneSlot *slot)
 {
-    f32 distance = distSpatial(g_lmapScene->position, slot->position);
+    f32 distance = distSpatial(g_lmapScene->pose.position, slot->position);
     if (slot->state == 2) {
         distance += 300.0f;
     }
@@ -25,7 +26,7 @@ s32 mapEnemyIsNearestLocked(const SceneSlot *slot)
     if (!slot->locked) {
         return 0;
     }
-    distance = distSpatial(g_lmapScene->position, slot->previousPosition);
+    distance = distSpatial(g_lmapScene->pose.position, slot->previousPosition);
     if (slot->state == 2) {
         distance += 300.0f;
     }

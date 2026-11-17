@@ -1,18 +1,6 @@
-#include "common.h"
+#include "ui/MessageMainA.h"
 
 extern "C" {
-
-typedef struct MessageState {
-    /* 0x000 */ u8 unk000[0x19C5];
-    /* 0x19C5 */ u8 mode;
-} MessageState;
-
-typedef struct MessageMain {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ MessageState *state;
-} MessageMain;
-
-extern MessageMain g_messageMain;
 
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
@@ -31,8 +19,8 @@ static void showMessage(s32 mode)
 /* Script command: puts the message state in mode 0x15 and starts messageWindowShowOrPoll with the first argument. */
 void scrShowMessageWithMode(void)
 {
-    if (g_messageMain.state != NULL) {
-        g_messageMain.state->mode = 0x15;
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->displayMode = 0x15;
     }
     showMessage(9);
 }

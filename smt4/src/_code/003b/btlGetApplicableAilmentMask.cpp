@@ -3,14 +3,13 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/DataTable40.h"
 #include "gamedata/ConsumableRecord.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct SkillAilmentView { u8 prefix[0x38]; u32 effect; };
 }
 extern "C" {
-BtlUnitData *btlFindEntryBlockByMemberId(BtlMainState *state, s32 index);
-PartyDamageUnitIV *gameGetUnitRecord(s32 index);
-
 // Return the complete affected ailment group when the target has at least one matching ailment.
 u32 btlGetApplicableAilmentMask(u32 skillId, u32 itemId, u32 unused, s32 target)
 {
@@ -37,10 +36,10 @@ u32 btlGetApplicableAilmentMask(u32 skillId, u32 itemId, u32 unused, s32 target)
         }
         if (target < 0x6D) {
             const BtlUnitData *unit = btlFindEntryBlockByMemberId(btlGetMainState(), target);
-            if ((unit->unk0FA & mask) != 0)
+            if ((unit->statusFlags & mask) != 0)
                 return mask;
         } else {
-            const PartyDamageUnitIV *unit = gameGetUnitRecord(target - 0x6D);
+            const StatBlock *unit = gameGetUnitRecord(target - 0x6D);
             if ((unit->ailments & mask) != 0)
                 return mask;
         }

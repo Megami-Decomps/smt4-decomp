@@ -1,14 +1,6 @@
 /* NON_MATCHING: free-slot search now unrolled as retail; retail keeps &g_asdSoundSystem in saved registers (r7/sl) for both the slot-pointer load and the archive calls, ours reloads the pool word, and the final -1 exit differs. */
 #include "sound/AuxiliaryPlayback.h"
-#include "sound/SoundHandlePlayback.h"
-
-// This slot pointer lies beyond the IV sound-system prefix and beyond the auxiliary-pool view.
-struct SecondaryPlaybackSystemViewA {
-    u8 unk0000[0x1324];
-    AsdSndSlotA *slots;
-};
-typedef char SecondaryPlaybackSystemSlotOffset[
-    offsetof(SecondaryPlaybackSystemViewA, slots) == 0x1324 ? 1 : -1];
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 static inline s32 secondaryFindFreeSoundSlot(AsdSndSlotA *slots)
 {
@@ -25,7 +17,6 @@ static inline s32 secondaryFindFreeSoundSlot(AsdSndSlotA *slots)
 }
 
 extern "C" {
-extern AsdSoundSystem g_asdSoundSystem;
 s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 u32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 id);
 u32 asdSoundEnsureArchiveItemLoaded(u32 id);
@@ -34,7 +25,7 @@ u32 FUN_0015e2bc(void *player, AuxiliarySoundHandle *handle, u32 id, u32 flags);
 // Play a wave sound or an allowed streamed sound in the first free slot, with a bounded volume fade.
 s32 asdSndPlaySlotA(u32 id, u32 level, u32 frames)
 {
-    AsdSndSlotA *slots = ((SecondaryPlaybackSystemViewA *)&g_asdSoundSystem)->slots;
+    AsdSndSlotA *slots = g_asdSoundSystem.currentSlotA;
     if (!slots)
         return -1;
     s32 index = secondaryFindFreeSoundSlot(slots);
@@ -55,7 +46,7 @@ s32 asdSndPlaySlotA(u32 id, u32 level, u32 frames)
         return index;
     }
     AuxiliarySoundHandle *handle = (AuxiliarySoundHandle *)&slots->handles[index];
-    bool started = (u8)FUN_0015e2bc(((SoundHandlePlaybackStateA *)&g_asdSoundSystem)->archivePlayer, handle, id, 0) == 0;
+    bool started = (u8)FUN_0015e2bc(g_asdSoundSystem.player, handle, id, 0) == 0;
     if (level > 127)
         level = 127;
     f32 volume = 0.0f;

@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-int btlMainFindEntryByListedId(int, int);
 int FUN_004a9308(...);
 int btlAdjustPropertyClamped(...);
 int FUN_004c9160(...);
@@ -63,7 +63,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
   do {
     param_2[temp_v9 * 4 + 0x279] = 0;
     temp_v2 = *param_1;
-    btlMainFindEntryByListedId(temp_v2,temp_v9);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v2), temp_v9);
     if (temp_v2 != 0) {
       param_2[temp_v9 * 4 + 0x279] = *(unsigned int *)(temp_v2 + 600);
       param_2[temp_v9 * 4 + 0x27a] = *(unsigned int *)(temp_v2 + 0x25c);

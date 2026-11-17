@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite of the model draw job (push a render state, draw the prebuilt shape or the posed batch, pop); the matrix copy matches retail, but the build merges the pop tails and interleaves the vmov/vcvt of the four colour bytes and the stack-entry address computation differently. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 // A 4x4 camera matrix, row-major.
@@ -19,8 +20,6 @@ struct ModelDrawJob {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void FUN_002b358c(u32 shape);
 void camSetMatrixB(RenderCtxA *context, CameraMatrix *matrix);

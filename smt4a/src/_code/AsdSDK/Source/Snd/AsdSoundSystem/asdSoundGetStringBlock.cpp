@@ -1,16 +1,7 @@
-#include "common.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-
-/* The sound system's archive state: the archive reader, its file header and the string block loaded from it. */
-typedef struct AsdSoundArchive {
-    u8 reader[0x13c];       /* 0x000 */
-    u8 fileHeader[0x4a4 - 0x13c + 0x3c]; /* 0x13c */
-    void *stringBlock;      /* 0x4e0 */
-} AsdSoundArchive;
-
-extern AsdSoundArchive g_asdSoundSystem;
 
 extern s32 nw_snd_SoundArchive_IsAvailable(void *reader);
 extern u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(void *fileHeader);
@@ -20,16 +11,16 @@ extern void soundArchiveLoadStringBlock(void *reader, void *stringBlock, u32 siz
 /* Returns the archive's string block, loading it into the main heap on first use. */
 void *asdSoundGetStringBlock(void)
 {
-    AsdSoundArchive *archive = &g_asdSoundSystem;
-    s32 available = nw_snd_SoundArchive_IsAvailable(archive->reader);
+    AsdSoundSystemA *archive = &g_asdSoundSystem;
+    s32 available = nw_snd_SoundArchive_IsAvailable(archive->archive);
     void **stringBlock = &archive->stringBlock;
     if (!available)
         return archive->stringBlock;
-    u32 size = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(archive->fileHeader);
+    u32 size = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(archive->archiveFile);
 
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 1103);
     archive->stringBlock = asdMemoryAlloc(0x10000, 0x100, 0, size, 1);
-    soundArchiveLoadStringBlock(archive->reader, archive->stringBlock, size);
+    soundArchiveLoadStringBlock(archive->archive, archive->stringBlock, size);
     return *stringBlock;
 }
 

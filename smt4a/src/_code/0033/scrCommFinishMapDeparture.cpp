@@ -23,7 +23,7 @@ s32 scrCommFinishMapDeparture(void)
         mapSelectRoomMusicIfActive();
         gameFlagSetValue(0x11F9, 0, 1);
     }
-    if (g_gameState.transitionActive != 0 || g_mapSelection.id != -1) {
+    if (g_gameState.savedLocationSet != 0 || g_mapSelection.id != -1) {
         asdSequenceRequest(6, 0, 0);
     }
     return 1;

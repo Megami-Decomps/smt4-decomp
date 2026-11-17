@@ -57,7 +57,7 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
     if (index < 0) {
         player = gameGetPlayerData();
     } else {
-        unit = static_cast<EffectUnit *>(gameGetUnitRecord(index));
+        unit = reinterpret_cast<EffectUnit *>(gameGetUnitRecord(index)); /* the view is shared with the player record */
         if (unit == NULL) {
             return 1;
         }

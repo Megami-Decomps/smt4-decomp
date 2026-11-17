@@ -4,17 +4,8 @@
 #include "mapnavi/naviMain.h"
 
 #include "code/Code002e.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "gamedata/Table04Record.h"
-/* The player's record (only the fields used here). */
-struct EffectPlayer {
-    /* 0x00 */ u8 unk00[0x2c];
-    /* 0x2c */ s16 value;
-    /* 0x2e */ u8 unk2e[2];
-    /* 0x30 */ u32 experience;
-    /* 0x34 */ u8 unk34[0x2e];
-    /* 0x62 */ u16 level;
-};
+#include "gamedata/GamePlayerData.h"
 
 /* A party unit's record (only the fields used here). */
 struct EffectUnit {
@@ -63,10 +54,10 @@ void FUN_004bd17c(EffectUnit *unit);
    `preview` set nothing is written. Returns 0 when the effect did something. */
 u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
 {
-    EffectPlayer *player = NULL;
+    PlayerDataA *player = NULL;
     EffectUnit *unit = NULL;
     if (target < 0) {
-        player = reinterpret_cast<EffectPlayer *>(gameGetPlayerData());
+        player = gameGetPlayerData();
     } else {
         unit = gameGetSlotRecord(target);
         if (unit == NULL) {
@@ -108,7 +99,7 @@ u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
         } else if (effect->id == 12 && check == 0) {
             if (randRange(99) < 25) {
                 if (player != NULL) {
-                    player->value = player->value / 2;
+                    player->mp = player->mp / 2;
                 } else {
                     unit->value = unit->value / 2;
                 }

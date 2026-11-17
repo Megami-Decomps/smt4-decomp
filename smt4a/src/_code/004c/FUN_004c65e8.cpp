@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 /* The combatant flags that block the action (at DAT_005713f0 + 0x10). */
 struct MaskOwner {
@@ -9,7 +10,6 @@ struct MaskOwner {
 
 extern "C" {
 extern MaskOwner DAT_005713f0;
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 id);
 
 /* Returns status 0x105 when the combatant has any of the blocking flags set, otherwise 0. */
 u32 FUN_004c65e8(u32 id)

@@ -2,14 +2,14 @@
 #include "shard/Shard0031.h"
 #include "shard/Shard0034.h"
 #include "shard/Shard004B.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-PlayerData *gameGetPlayerData(void);
 PartyStatusSlots *gameGetSlotTable(void);
 BitsAt60 *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
 s32 randRange(s32 maximum);
-void demonBuildAffinitySlots(u16 *affinities, const PlayerData *player);
+void demonBuildAffinitySlots(u16 *affinities, const PlayerDataA *player);
 void affinityResolveUnitSlot(u16 *affinity, const BitsAt60 *unit, u32 element);
 
 static inline s32 statusAffinityAllows(u16 affinity)
@@ -35,9 +35,9 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
     u32 mask = 1u << condition;
     u16 affinities[21];
     if ((group == 0 || group == 2 || group == 3) &&
-        (gameGetPlayerData()->unk5E & 2) == 0 &&
-        (gameGetPlayerData()->unk5E & 0x400) == 0 &&
-        (gameGetPlayerData()->unk5E & mask) == 0 &&
+        (gameGetPlayerData()->ailments & 2) == 0 &&
+        (gameGetPlayerData()->ailments & 0x400) == 0 &&
+        (gameGetPlayerData()->ailments & mask) == 0 &&
         randRange(99) < chance) {
         s32 canApply = 1;
         if (condition == 5) {
@@ -45,7 +45,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
             canApply = statusAffinityAllows(affinities[11]);
         }
         if (canApply) {
-            gameGetPlayerData()->unk5E |= mask;
+            gameGetPlayerData()->ailments |= mask;
         }
     }
     s32 count;

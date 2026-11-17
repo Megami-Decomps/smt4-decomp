@@ -1,15 +1,14 @@
 #include "common.h"
 #include "gamedata/EquipmentRecordA.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-struct PlayerData { u16 primary; u16 unk02; u16 secondary; };
-PlayerData *gameGetPlayerData(void);
 s32 gameOptionResourceId(u32 kind);
 
 s32 playerSecondaryGetKindValue(void)
 {
-    return gameOptionResourceId(dataTable08Sub2GetRecord(gameGetPlayerData()->secondary)->traits >> 20);
+    return gameOptionResourceId(dataTable08Sub2GetRecord(gameGetPlayerData()->equipped.bullets)->traits >> 20);
 }
 
 } /* extern "C" */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: endpoint load hoisting and floating-point register scheduling differ from retail. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include <math.h>
 #include "camp/RenderCtx.h"
 
@@ -14,7 +15,6 @@ struct SegmentStyle {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void FUN_0034111c(u32 colorA, u32 colorB, f32 x0, f32 y0, f32 x1, f32 y1, f32 alpha, f32 scale);
 
 // Draw two joined segments with the elbow offset toward the facing side.

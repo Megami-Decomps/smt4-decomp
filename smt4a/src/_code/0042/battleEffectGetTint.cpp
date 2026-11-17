@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleTintOwner {
     u32 unk00;
@@ -11,7 +12,6 @@ struct BattleTintOwner {
 
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
 s32 FUN_001f3e80(s32 first, s32 second, s32 period, s32 time, s32 invert);
 
 u32 battleEffectGetTint(BattleTintOwner *owner, s32 index)

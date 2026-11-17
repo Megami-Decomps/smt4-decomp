@@ -1,20 +1,14 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "gamedata/LevelTable.h"
 
 extern "C" {
-
-typedef struct DevilRecord003c1c44 {
-    /* 0x00 */ u8 unk00[3];
-    /* 0x03 */ u8 baseLevel;
-} DevilRecord003c1c44;
-
-DevilRecord003c1c44 *devilGetRecord(u32 devilId);
 
 /* Spends experience from *exp on level-ups of a devil, from its current level towards 99, and returns the levels gained. Each level costs the table's requirement scaled by a percentage that depends on how far the level is above the devil's base level. */
 s32 devilLevelUpsAffordable(u32 devilId, s32 level, u32 *exp)
 {
     s32 cur = level;
-    s32 step = cur - devilGetRecord(devilId)->baseLevel + 1;
+    s32 step = cur - devilGetRecord(devilId)->level + 1;
     u32 percent;
 
     if (step <= 0) {

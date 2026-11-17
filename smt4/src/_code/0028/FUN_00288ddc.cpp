@@ -1,16 +1,11 @@
 #include "common.h"
 #include "code/Code0028.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
 extern void *gameGetUnitRecord(void);
 extern u8 *gameGetSlotTable(void);
-extern void *gameGetPlayerData(void);
-
-typedef struct Pad {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ s16 unk1C;
-} Pad;
 
 typedef struct Unit {
     /* 0x00 */ u8 unk00[0xE];
@@ -26,14 +21,14 @@ typedef struct Party {
 
 int FUN_00288ddc(int limit, u32 id)
 {
-    Pad *pad;
+    PlayerDataIV *pad;
     Party *party;
     Unit *unit;
     int i;
 
     if ((int)id < 0) {
-        pad = (Pad *)gameGetPlayerData();
-        if (pad->unk1C < limit) {
+        pad = gameGetPlayerData();
+        if (pad->maxHp < limit) {
             return 1;
         }
     } else {

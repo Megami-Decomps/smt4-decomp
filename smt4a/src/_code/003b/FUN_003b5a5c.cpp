@@ -1,4 +1,4 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "ui/UiSpriteState.h"
 #include <string.h>
 
@@ -9,7 +9,6 @@ struct MessageRemovalModeViewA {
 struct MessageIconUnit;
 
 extern "C" {
-extern MessageGlobalsA g_messageMain;
 u32 scrGetArg(u32);
 MessageIconUnit *saveSlotFindById(u32);
 u32 partySlotIsOccupied(const MessageIconUnit *);
@@ -20,37 +19,37 @@ void sysPlayVoice(u32);
 
 u32 FUN_003b5a5c()
 {
-    MessagePanelA *panel = g_messageMain.panel;
+    MessageWindowA *panel = g_messageMain.banner;
     u32 id = scrGetArg(0);
     const MessageIconUnit *unit = saveSlotFindById(static_cast<u16>(id));
     if (partySlotIsOccupied(unit)) {
         s32 frame = scrGetCommandFrame();
         if (frame == 0) {
-            if (!panel->unk90) {
-                MessagePanelA *current = g_messageMain.panel;
-                current->unk90 = 1;
-                current->state = 1;
-                uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(current->blockB00), 20, 0xBB9, current->block194, 11, 1.0f);
-                uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(current->blockB00), 0);
-                memset(current->removal.states, 0, sizeof(current->removal.states) + sizeof(current->removal.ids));
-                panel->removal.lastIndex = 0;
+            if (!panel->shown) {
+                MessageWindowA *current = g_messageMain.banner;
+                current->shown = 1;
+                current->counterState = 1;
+                uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&current->sprites[17]), 20, 0xBB9, &current->parameters, 11, 1.0f);
+                uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(&current->sprites[17]), 0);
+                memset(current->queueStates, 0, sizeof(current->queueStates) + sizeof(current->queueIds));
+                panel->queueIndex = 0;
             } else {
-                ++panel->removal.lastIndex;
+                ++panel->queueIndex;
                 reinterpret_cast<MessageRemovalModeViewA *>(panel)->mode = 20;
             }
-            panel->removal.states[panel->removal.lastIndex] = 2;
-            panel->removal.ids[panel->removal.lastIndex] = 0;
-            panel->removal.special[panel->removal.lastIndex] = 0;
+            panel->queueStates[panel->queueIndex] = 2;
+            panel->queueIds[panel->queueIndex] = 0;
+            panel->queueSpecial[panel->queueIndex] = 0;
         }
         if (reinterpret_cast<MessageRemovalModeViewA *>(panel)->mode == 20) {
-            panel->removal.ids[panel->removal.lastIndex] = id;
-            uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(panel->removalSprites.rows[panel->removal.lastIndex]),
-                         20, 0xC12, panel->block194, 11, 1.0f);
-            uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(panel->removalSprites.rows[panel->removal.lastIndex]), 11, 0);
-            panel->removal.states[panel->removal.lastIndex] = 4;
+            panel->queueIds[panel->queueIndex] = id;
+            uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(&panel->sprites[22 + panel->queueIndex]),
+                         20, 0xC12, &panel->parameters, 11, 1.0f);
+            uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(&panel->sprites[22 + panel->queueIndex]), 11, 0);
+            panel->queueStates[panel->queueIndex] = 4;
             sysPlayVoice(0x100016F);
         }
-        if (!panel->unk90 || panel->state != 2 || panel->removal.states[panel->removal.lastIndex] != 0)
+        if (!panel->shown || panel->counterState != 2 || panel->queueStates[panel->queueIndex] != 0)
             return 0;
     }
     return 1;

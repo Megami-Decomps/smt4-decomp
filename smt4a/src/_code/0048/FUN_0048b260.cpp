@@ -1,4 +1,5 @@
 #include "ui/AnimatedMessage.h"
+#include "camp/RenderCtxA.h"
 
 extern "C" {
 extern const char DAT_00532728[55];

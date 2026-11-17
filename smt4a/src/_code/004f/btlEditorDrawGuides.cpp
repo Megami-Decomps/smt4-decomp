@@ -1,9 +1,9 @@
 /* NON_MATCHING: guide positions and modes reconstructed; constant hoisting and VFP allocation differ. */
 #include "gfx/DebugGuides.h"
+#include "camp/RenderCtxA.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 padButtonIsPressed(u32 button);
 void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 z);

@@ -1,10 +1,10 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-u32 btlUnitGet(u32 unitId);
 extern u32 g_btlScriptUnit;
 void btlQueueActionMessage(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
 void FUN_004fcffc(s32 kind, u32 unit, BattleRosterRecordA *record, u32 mask);
@@ -16,7 +16,7 @@ u32 FUN_0039dda4(void)
     s32 rosterIndex = scrGetArg(0);
     s32 effectIndex = scrGetArg(1);
     s32 enabled = scrGetArg(2);
-    u32 unit = btlUnitGet(g_btlScriptUnit);
+    u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if (enabled == 0) {
         FUN_004fcffc(0, unit, &btlGetMainState()->roster[rosterIndex], 1 << effectIndex);
     } else {

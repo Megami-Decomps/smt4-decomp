@@ -1,21 +1,17 @@
 /* NON_MATCHING: selected-list address scheduling and cold model-request branch placement differ; -O2 candidate. */
 #include "shard/S2Scene3a.h"
 #include "code/Code0029_Smt4.h"
+#include "gamedata/GamePlayerData.h"
 
-struct PlayerEquipmentPreview {
-    u16 equipment[7];
-    u8 remaining[0x7e];
-};
 extern "C" {
 s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *);
 u32 FUN_003c2d54(Scene3aSlotInfo *);
 void FUN_002996d8(u32);
 s32 contentGetEntryKind(u32);
 void FUN_0029963c(u32, u16);
-const PlayerEquipmentPreview *gameGetPlayerData();
 void *__aeabi_memcpy4(void *, const void *, u32);
-void playerRecalcStatsFromEquipment(PlayerEquipmentPreview *);
-void FUN_0029a0cc(PlayerEquipmentPreview *);
+void playerRecalcStatsFromEquipment(PlayerDataIV *);
+void FUN_0029a0cc(PlayerDataIV *);
 
 void equipmentPreviewUpdateSelection(Scene3a *scene)
 {
@@ -44,7 +40,7 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
     }
     if (scene->state && scene->equipmentPreview.item != item) {
         scene->equipmentPreview.item = item;
-        PlayerEquipmentPreview player;
+        PlayerDataIV player;
         __aeabi_memcpy4(&player, gameGetPlayerData(), sizeof(player));
         if (item) {
             switch (contentGetEntryKind(item)) {

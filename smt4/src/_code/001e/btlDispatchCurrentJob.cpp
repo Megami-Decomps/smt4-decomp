@@ -1,8 +1,7 @@
 #include "common.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-
-extern void *g_btlMain;
 
 int FUN_003d7404(void *obj, u32 arg);
 u32 jobGetWork(void);

@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int btlSlotManagerResetStates(void);
-int btlMainFindEntryByListedId(int, int);
 int bitsAt60Set(...);
 int btlQueueActionMessage(...);
 int btlQueueKeyedScalarReflectAction(...);
@@ -44,7 +44,6 @@ extern int scrGetArg(unsigned int);
 /* Supplied declaration required: btlSlotManagerResetStates. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: bitsAt60Set. */
-extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: btlQueueActionMessage. */
 /* Supplied declaration required: btlQueueKeyedScalarReflectAction. */
 /* Supplied declaration required: btlReflectCreateKind10. */
@@ -62,12 +61,12 @@ unsigned int FUN_002f8edc(void)
   int temp_v3;
   
   temp_v0 = scrGetArg(0);
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
+  temp_v1 = reinterpret_cast<unsigned int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
   if (temp_v0 < 0x6d) {
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = *(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0;
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v2,temp_v0);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v2), temp_v0);
     reinterpret_cast<int>(btlGetMainState());
     btlSlotManagerResetStates();
     FUN_004fc094(0,temp_v1,0,temp_v3,0,*(unsigned int *)(temp_v2 + 0x25c),0xffffffff,0xffffffff,

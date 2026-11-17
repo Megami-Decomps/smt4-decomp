@@ -1,22 +1,17 @@
 /* NON_MATCHING: map-block and player pointers occupy opposite callee-saved registers; trigger owner and marker stores now match. */
 #include "map/mapDepart.h"
+#include "map/LmapGlobals.h"
 #include "map/mapEnemy.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/TrigF32.h"
 #include "shard/SaveWork.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "game/GameState.h"
+#include "gamedata/GamePlayerData.h"
 
 /* The map block's flag at +0xDC0 gates the approach-marker check. */
 struct MapBlockView {
     u8 unk0000[0xDC0];
     s32 unkDC0;
-};
-
-/* The player record: the level at +0x76. */
-struct PlayerLevelView {
-    u8 unk00[0x76];
-    u8 level;
 };
 
 /* The encounter trigger state kept beside the game state block (0x49FA1C). */
@@ -31,14 +26,7 @@ struct EncounterTriggerState {
     u8 approach;
 };
 
-/* The map scene: the player position at +0x1C. */
-struct MapSceneView {
-    u8 unk00[0x1C];
-    MapVector position;
-};
-
 extern "C" {
-extern MapSceneView *g_lmapScene;
 extern EncounterTriggerState DAT_0049fa1c;
 f32 mathDistanceBetweenPoints(MapVector from, MapVector to);
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
@@ -55,7 +43,7 @@ static __inline bool isSourceApproaching(const MapVector &position)
 u32 FUN_00253968(MapEnemyEncounterView *enemy)
 {
     MapBlockView *mapBlock = reinterpret_cast<MapBlockView *>(gameGetMapBlock());
-    PlayerLevelView *player = reinterpret_cast<PlayerLevelView *>(gameGetPlayerData());
+    PlayerDataIV *player = gameGetPlayerData();
     EncounterTriggerState *trigger = &DAT_0049fa1c;
     if (trigger->sourceActive != 0 && trigger->sourceKind != 0) {
         bool approaching = isSourceApproaching(enemy->position);
@@ -75,7 +63,7 @@ u32 FUN_00253968(MapEnemyEncounterView *enemy)
             g_gameState.event.encounterMarkerPosition.z = enemy->position.z;
             g_gameState.event.encounterMarkerHeading = heading;
             g_gameState.event.encounterApproach = 0;
-            enemy->heading = mathPositionHeadingDegrees(enemy->position, g_lmapScene->position);
+            enemy->heading = mathPositionHeadingDegrees(enemy->position, g_lmapScene->pose.position);
             if (enemy->eventEnabled == 0 && mapBlock->unkDC0 != 0) {
                 if (enemy->kind != 0 && enemy->kind < 11 && enemy->level < player->level)
                     g_gameState.event.encounterApproach = 1;

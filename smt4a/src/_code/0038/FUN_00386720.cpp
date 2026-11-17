@@ -1,5 +1,5 @@
 /* NON_MATCHING: explicit idle phases restore the six-entry jump table; floating-zero preload, idle/default return placement and selected-map argument/global load scheduling differ. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 struct MapElevationView {
     u8 prefix[0xB];
@@ -25,7 +25,6 @@ typedef char MapElevationOffsets[offsetof(MapElevationView, phase) == 0x18 &&
     offsetof(MapElevationView, opacity) == 0xDC && offsetof(MapElevationView, flags) == 0xF4 ? 1 : -1];
 extern "C" {
 extern LmapMainStateA *g_lmapMainState;
-extern LmapSceneA *g_lmapScene;
 void FUN_00227a70(void);
 void FUN_002a2e98(s32 map, u32 variant, u32 specialMap, u32 mode);
 void FUN_0033feb8(LmapMainStateA *state);
@@ -43,7 +42,7 @@ u32 FUN_00386720(void)
     MapElevationView *state = (MapElevationView *)g_lmapMainState;
     switch (state->phase) {
     case 0:
-        state->start = *(const MapVector *)g_lmapScene->transform.position;
+        state->start = g_lmapScene->pose.position;
         state->target = state->start;
         state->target.y = 800.0f;
         state->opacity = 0.0f;
@@ -58,7 +57,7 @@ u32 FUN_00386720(void)
     case 1:
         FUN_0033feb8((LmapMainStateA *)state);
         ++state->frame;
-        g_lmapScene->transform.position[1] = state->start.y +
+        g_lmapScene->pose.position.y = state->start.y +
             (state->target.y - state->start.y) * (f32)state->frame * (1.0f / 30.0f);
         if (state->frame >= 30) {
             g_gameState.inputBlocked = 0;

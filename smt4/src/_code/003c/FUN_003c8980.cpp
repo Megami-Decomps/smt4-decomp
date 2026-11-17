@@ -52,7 +52,7 @@ void FUN_003c8980(u32 mode, const FusionParentSources *parents, GameOptions *out
         }
     }
     const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(parents->recipe.id));
-    bitsetSetBit(output, record->initialization.innateFlag);
+    bitsetSetBit(output, record->innateFlag);
     unitRecalculateEffectiveStats(output);
 }
 }

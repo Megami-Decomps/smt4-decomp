@@ -3,8 +3,7 @@
 #include "battle/BattleRosterCache.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-
-extern "C" BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 group);
+#include "battle/BtlGlobals.h"
 
 /* Refresh matching cached positions for live non-party roster records. */
 extern "C" void FUN_003f0d50(BtlMainStateA *battle)

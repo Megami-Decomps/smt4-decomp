@@ -1,9 +1,8 @@
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "code/Code0038.h"
 
 extern "C" {
 
-extern LmapSceneA *g_lmapScene;
 
 void FUN_003857b4(u8 value)
 {

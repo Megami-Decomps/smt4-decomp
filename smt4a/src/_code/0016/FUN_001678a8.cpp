@@ -1,14 +1,15 @@
 /* NON_MATCHING: initial message-state load register and final state-pop tail-call lowering differ. */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "ui/UiSpriteState.h"
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "util/BitsAndBytes.h"
 
 struct MessageBoxCategoryViewA {
     u8 unk00[0x48];
     u16 category;
 };
-/* A typed sprite view avoids aligning MessageWorkA's odd-sized opaque region. */
+/* A typed sprite view avoids aligning MessageWindowA's odd-sized opaque region. */
 struct MessageSpriteDrawViewA {
     u32 unk00;
     const MessageBoxCategoryViewA *config;
@@ -33,7 +34,6 @@ typedef char MessageSpriteDrawOffsetsA[
     offsetof(MessageSpriteDrawViewA, special) == 0x4FC &&
     offsetof(MessageSpriteDrawViewA, modeExtra) == 0x18AC ? 1 : -1];
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32, u32);
 void renderStackPushIndexed(RenderCtxA *, s32, s32);
 s32 renderCtxPopState(RenderCtxA *, s32);
@@ -43,7 +43,7 @@ f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 void effectRenderTransformedInstance(UiSpriteState *, f32);
 void pairSetSecondResetFirst(UiSpriteState *, u32);
 
-void FUN_001678a8(MessageWorkA *message)
+void FUN_001678a8(MessageWindowA *message)
 {
     MessageSpriteDrawViewA *work = reinterpret_cast<MessageSpriteDrawViewA *>(message);
     if (!message->state)

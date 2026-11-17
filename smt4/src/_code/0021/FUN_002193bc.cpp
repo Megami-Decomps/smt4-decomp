@@ -1,14 +1,14 @@
-#include "shard/W6_W6Match5_SecondarySort.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" u32 questIsCompleted(u16 id);
 
 static __inline s32 compareQuestOrder(const u16* left, const u16* right)
 {
-    SecondarySortRecord* a = dataTable1bOr1cGetRecord(*left);
-    SecondarySortRecord* b = dataTable1bOr1cGetRecord(*right);
+    QuestRecord* a = dataTable1bOr1cGetRecord(*left);
+    QuestRecord* b = dataTable1bOr1cGetRecord(*right);
     s32 result = 0;
     if (a != NULL && b != NULL) {
-        result = b->classification.order - a->classification.order;
+        result = b->order - a->order;
     }
     return result;
 }
@@ -25,17 +25,17 @@ extern "C" s32 FUN_002193bc(const u16* left, const u16* right)
     if ((completedLeft & ~completedRight) != 0) {
         result = -1;
     } else if (result == 0) {
-        SecondarySortRecord* a = dataTable1bOr1cGetRecord(*left);
-        SecondarySortRecord* b = dataTable1bOr1cGetRecord(*right);
+        QuestRecord* a = dataTable1bOr1cGetRecord(*left);
+        QuestRecord* b = dataTable1bOr1cGetRecord(*right);
         if (a == NULL) {
             return 0;
         }
         if (b == NULL) {
             return 0;
         }
-        if (a->classification.kind != 6 && b->classification.kind == 6) {
+        if (a->kind != 6 && b->kind == 6) {
             result = 1;
-        } else if (a->classification.kind == 6 && b->classification.kind != 6) {
+        } else if (a->kind == 6 && b->kind != 6) {
             result = -1;
         } else {
             result = compareQuestOrder(left, right);

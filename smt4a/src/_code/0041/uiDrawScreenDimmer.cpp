@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "gfx/EffectColorUnpack.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void gxSetUniformQuadColors(const EffectColor *color);

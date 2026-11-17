@@ -1,9 +1,9 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(s32 preset, s32 index);
 void gxResetColorQuadToWhite(void);

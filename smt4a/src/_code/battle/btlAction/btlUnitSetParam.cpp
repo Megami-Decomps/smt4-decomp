@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `btlUnitSetParam` (_code @ 0x4de8b8, 0x172c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 struct BtlMainStateA;
 
 extern "C" {
@@ -17,7 +18,6 @@ void btlSelectMinimumPriorityTarget(BtlMainStateA *const *);
 int btlActionClassifyTargetSide(int *, unsigned int, int, unsigned int [2], int *);
 int btlAiFilterCandidatesByExclusionChance(...);
 int btlUnitMarkTargetCandidates(int *, unsigned int);
-int btlUnitGet(...);
 int SBORROW4(...);
 
 /* stack frame of param_4: 9 slot(s), 34 byte(s) */
@@ -97,7 +97,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
   temp_v17 = param_2;
   uStack_2c = param_3;
   temp_v18 = param_4;
-  temp_v2 = btlUnitGet(g_btlScriptUnit);
+  temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
   if (temp_v18 != 0) {
     *(unsigned int *)(temp_v2 + 0x5a0) = 0;
     *(unsigned int *)(temp_v2 + 0x5a4) = 0;
@@ -222,7 +222,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
     temp_v3 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v3,1);
 joined_r0x004deccc:
     if (temp_v3 != 0) {
-      temp_v5 = btlUnitGet(param_1);
+      temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
       temp_v8 = temp_v13[temp_v3];
       *(unsigned char *)(temp_v8 + temp_v5 + 0x38) = 1;
     }
@@ -252,7 +252,7 @@ joined_r0x004deccc:
     } while (temp_v5 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v14,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(temp_v14);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(temp_v14)));
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 9:
@@ -275,7 +275,7 @@ joined_r0x004deccc:
     } while (temp_v5 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v14,puVar7,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(temp_v14);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(temp_v14)));
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 10:
@@ -297,7 +297,7 @@ joined_r0x004deccc:
     } while (temp_v5 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v14,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(temp_v14);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(temp_v14)));
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 0xb:
@@ -317,7 +317,7 @@ joined_r0x004deccc:
     } while (temp_v3 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v16,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(temp_v16);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(temp_v16)));
     temp_v8 = temp_v13[temp_v3 + 1];
     *(unsigned char *)(temp_v8 + temp_v5 + 0x38) = 1;
     break;
@@ -338,7 +338,7 @@ joined_r0x004deccc:
     } while (temp_v3 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(temp_v16,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(temp_v16);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(temp_v16)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0xd:
@@ -360,7 +360,7 @@ joined_r0x004deccc:
     } while (temp_v5 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 0xe:
@@ -386,13 +386,13 @@ joined_r0x004deccc:
     } while (temp_v5 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 0xf:
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v3 + 0x2c);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v8 + temp_v3 + 0x38) = 1;
     break;
   case 0x10:
@@ -402,7 +402,7 @@ joined_r0x004deccc:
       puVar7 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v3 * 0x408);
       temp_v4 = temp_v3;
       if ((g_btlTargetableMask & *puVar7) != 0 || (puVar7[1] & DAT_00571194) != 0) {
-        temp_v7 = btlUnitGet(param_1);
+        temp_v7 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
         temp_v8 = (unsigned int)*(short *)(*(int *)(*param_1 + 0x1ffc) + temp_v3 * 0x408 + 0x6e);
         if (*(unsigned short *)(temp_v7 + 0x2c) != temp_v8) {
           temp_v13[temp_v5] = temp_v8;
@@ -413,7 +413,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 0x11:
@@ -431,7 +431,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x12:
@@ -449,7 +449,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x13:
@@ -467,7 +467,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x14:
@@ -485,7 +485,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x15:
@@ -503,7 +503,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x16:
@@ -521,7 +521,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x17:
@@ -539,7 +539,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x18:
@@ -557,7 +557,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x19:
@@ -580,7 +580,7 @@ joined_r0x004deccc:
     } while (temp_v5 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,puVar7,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 0x1a:
@@ -603,7 +603,7 @@ joined_r0x004deccc:
     } while (temp_v5 != 0);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,puVar7,temp_v3,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 0x1b:
@@ -629,7 +629,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x1c:
@@ -648,7 +648,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x1d:
@@ -668,7 +668,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v15,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x1e:
@@ -686,7 +686,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x1f:
@@ -706,7 +706,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,puVar7,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
   case 0x20:
@@ -724,7 +724,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x21:
@@ -742,7 +742,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x22:
@@ -760,7 +760,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x23:
@@ -778,7 +778,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v5,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x24:
@@ -798,7 +798,7 @@ joined_r0x004deccc:
     } while (temp_v3 < 0x6d);
     temp_v1 = btlAiFilterCandidatesByExclusionChance(param_1,temp_v13 + 1,temp_v15,1);
     temp_v3 = lcgRandomRange(temp_v1 - 1);
-    temp_v5 = btlUnitGet(param_1);
+    temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(param_1)));
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x25:

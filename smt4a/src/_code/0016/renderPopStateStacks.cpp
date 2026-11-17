@@ -1,7 +1,7 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
-extern "C" RenderCtxA *g_renderCtx;
 
 extern "C" u32 renderPopStateStacks(void)
 {

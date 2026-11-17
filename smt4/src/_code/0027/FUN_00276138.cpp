@@ -42,12 +42,12 @@ void FUN_00276138()
         state->savedPosition.y = origin->y;
         state->savedPosition.z = origin->z;
         state->savedHeading = origin->heading;
-        state->unk318 = origin->heading;
+        state->savedHeadingCopy = origin->heading;
         state->targetMapId = map->mapId;
         state->targetAreaId = map->areaId;
         state->targetPosition = state->position;
         state->targetHeading = state->overviewHeading;
-        state->unk334 = state->overviewHeading;
+        state->targetHeadingCopy = state->overviewHeading;
     }
 }
 }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
@@ -7,16 +8,10 @@
 
 extern "C" {
 
-typedef struct DevilRecord {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ u16 items[8];
-} DevilRecord;
-
 #define ITEM_KIND_3 3
 
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern DevilRecord *devilGetRecord(u16 id);
 extern u32 btlEntryHasCategoryThreeSkill(const BtlEntry *entry);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(s32 value);
@@ -44,7 +39,7 @@ static __inline u32 entryHasKindThreeItem(const BtlEntry *entry)
         DevilRecord *devil = devilGetRecord(entry->id);
 
         for (s32 j = 0; j < 8; j++) {
-            const Table04Record *item = dataTable40FindById(devil->items[j]);
+            const Table04Record *item = dataTable40FindById(devil->skills[j]);
             if (item != NULL && item->sort.category == ITEM_KIND_3) {
                 return 1;
             }

@@ -5,7 +5,6 @@
 #include "gamedata/GameSaveBlocks.h"
 #include "common.h"
 #include <stddef.h>
-#include "ui/MessageMain.h"
 #include "status/StatusDown.h"
 #include "ui/TimerSlot.h"
 #include "shard/W6_W6Match6_PartyPanel.h"

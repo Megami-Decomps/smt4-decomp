@@ -1,6 +1,7 @@
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "code/Code0028_Smt4.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -13,17 +14,7 @@ typedef struct Selector {
     /* 0x34 */ s32 source;
 } Selector;
 
-typedef struct UnitRecord {
-    /* 0x00 */ u8 unk00[0x44];
-    /* 0x44 */ u16 mask;
-} UnitRecord;
 
-typedef struct PlayerData {
-    /* 0x00 */ u8 unk00[0x72];
-    /* 0x72 */ u16 mask;
-} PlayerData;
-
-extern PlayerData *gameGetPlayerData(void);
 extern u32 categoryGetColor(s16 value);
 
 /* Returns categoryGetColor for the selector's index-th set bit (1..10) of the player's or unit's mask; -1 when it is disabled or there is none. */
@@ -37,9 +28,9 @@ s32 FUN_0028dbe0(Selector *selector)
         s32 count;
 
         if (selector->source < 0) {
-            mask = gameGetPlayerData()->mask;
+            mask = gameGetPlayerData()->ailments;
         } else {
-            mask = static_cast<UnitRecord *>(gameGetUnitRecord(selector->source))->mask;
+            mask = gameGetUnitRecord(selector->source)->ailments;
         }
         count = 0;
         for (bit = 1; bit < 11; bit++) {

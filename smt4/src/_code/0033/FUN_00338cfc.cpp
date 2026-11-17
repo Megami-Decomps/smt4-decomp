@@ -1,7 +1,9 @@
 /* NON_MATCHING: readable rewrite compiles (171 vs 165 rows); retail keeps more values in callee-saved registers across the power loops */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "battle/BattleBalanceRow.h"
 #include "gamedata/Table00Lookup.h"
+#include "gamedata/GamePlayerData.h"
 
 // Battle main state: only the fields the escape roll uses.
 struct BattleMain {
@@ -25,19 +27,6 @@ struct PartyMember {
     u16 status;             // 0x44
 };
 
-struct DevilRecordRace {
-    u8 unk00[2];
-    u8 race;                // 0x02
-};
-
-struct PlayerData {
-    u8 unk00[0x26];
-    s16 power0;             // 0x26
-    s16 power1;             // 0x28
-    u8 unk2a[0x72 - 0x2a];
-    u16 flags;              // 0x72
-};
-
 struct SlotTable {
     u8 unk0000[0x9108];
     s8 partyActive[3];      // 0x9108
@@ -45,12 +34,10 @@ struct SlotTable {
 
 extern "C" {
 
-DevilRecordRace* devilGetRecord(u32 id);
 s32 randRange(s32 range);
 PartyMember* saveResolvePartySlot(s32 index);
 s32 FUN_002973ec(void);
 SlotTable* gameGetSlotTable(void);
-PlayerData* gameGetPlayerData(void);
 
 // Rolls the escape attempt: sets bits 1-2 of the battle flags when the escape fails.
 void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
@@ -92,8 +79,8 @@ void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
 
         f32 allyPower = 0.0f;
         f32 enemyPower = 0.0f;
-        if ((gameGetPlayerData()->flags & 2) == 0) {
-            allyPower = (f32)(gameGetPlayerData()->power1 + gameGetPlayerData()->power0);
+        if ((gameGetPlayerData()->ailments & 2) == 0) {
+            allyPower = (f32)(gameGetPlayerData()->stats[4] + gameGetPlayerData()->stats[3]);
         }
         for (s32 i = 0; i < 3; i++) {
             if (gameGetSlotTable()->partyActive[i] >= 0) {

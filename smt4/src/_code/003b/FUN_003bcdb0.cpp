@@ -1,6 +1,7 @@
 /* NON_MATCHING: the ailment test is now retail's tst/tsteq chain (statusHasAilment) and the block layout (unit-record branch first) matches; remaining: retail keeps status in r5 and the entry/record pointer in r4 and widens status with uxth before each OR into a record (an unreduced halfword), 197 rows against 206. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 
 #define STATUS_BIT_ALT 0x10
 #define STATUS_BIT_SLEEP 0x2
@@ -14,11 +15,6 @@
 #define ENTRY_FLAG_WOKEN 0x1
 #define ENTRY_FLAG_ASLEEP_LOCKED 0x10
 
-/* A status word kept in a linked record. */
-struct BtlStatusRecord {
-    u8 unk00[0x44];
-    u16 status;
-};
 
 struct BtlStatusRecordB {
     u8 unk00[0x72];
@@ -38,8 +34,8 @@ struct BtlStatusEntry {
     /* 0x100 */ BtlEntryLower lower;
     /* 0x1C8 */ u8 unk1C8[0xB0];
     /* 0x278 */ BtlStatusRecordB *linkedA;
-    /* 0x27C */ BtlStatusRecord *linkedB;
-    /* 0x280 */ BtlStatusRecord *linkedC;
+    /* 0x27C */ StatBlock *linkedB;
+    /* 0x280 */ StatBlock *linkedC;
 };
 
 /* Per-entry records and counters of the battle state (observed fields). */
@@ -79,7 +75,6 @@ extern "C" {
 
 void btlTargetSetFlag10(BtlStateRecords *state, s32 id, s32 value);
 BtlStatusEntry *btlMainFindEntryByListedId(BtlStateRecords *state, s32 id);
-BtlStatusRecord *gameGetUnitRecord(s32 index);
 u16 FUN_00245cc0(s32 kind);
 void FUN_0033b1ac(BtlStateRecords *state, s32 value);
 
@@ -92,16 +87,16 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
 
     if (entry == NULL) {
         if (id - 0x6D >= 0) {
-            BtlStatusRecord *record = gameGetUnitRecord(id - 0x6D);
+            StatBlock *record = gameGetUnitRecord(id - 0x6D);
 
             if (record != NULL) {
                 if (set == 0) {
-                    record->status = record->status & ~status;
+                    record->ailments = record->ailments & ~status;
                 } else {
                     if (statusHasAilment(status)) {
-                        record->status = record->status & ~STATUS_BIT_ALT;
+                        record->ailments = record->ailments & ~STATUS_BIT_ALT;
                     }
-                    record->status = record->status | status;
+                    record->ailments = record->ailments | status;
                 }
             }
         }
@@ -119,10 +114,10 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     entry->linkedA->status = value & ~STATUS_CLEAR_ON_ENTRY;
                 }
                 if (entry->linkedB != NULL) {
-                    entry->linkedB->status = entry->linkedB->status | status;
+                    entry->linkedB->ailments = entry->linkedB->ailments | status;
                 }
                 if (entry->linkedC != NULL) {
-                    entry->linkedC->status = entry->linkedC->status | status;
+                    entry->linkedC->ailments = entry->linkedC->ailments | status;
                 }
                 if ((entry->flags & ENTRY_FLAG_SLEEPING) != 0) {
                     entry->lower.status = entry->lower.status & ~STATUS_CLEAR_ON_ENTRY;
@@ -137,10 +132,10 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     entry->linkedA->status = entry->linkedA->status & ~status;
                 }
                 if (entry->linkedB != NULL) {
-                    entry->linkedB->status = entry->linkedB->status & ~status;
+                    entry->linkedB->ailments = entry->linkedB->ailments & ~status;
                 }
                 if (entry->linkedC != NULL) {
-                    entry->linkedC->status = entry->linkedC->status & ~status;
+                    entry->linkedC->ailments = entry->linkedC->ailments & ~status;
                 }
                 if ((status & STATUS_BIT_B) != 0) {
                     u16 value = FUN_00245cc0(22);

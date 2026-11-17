@@ -1,13 +1,7 @@
 #include "map/mapDepart.h"
+#include "map/LmapGlobals.h"
 
 namespace {
-
-struct LmapSceneView {
-    u8 unk00[0x1c]; // 0x00
-    f32 positionX;  // 0x1c
-    u8 unk20[4];    // 0x20
-    f32 positionZ;  // 0x24
-};
 
 struct CameraTargetView {
     u8 unk00[0x50]; // 0x00
@@ -27,7 +21,6 @@ struct CameraTargetStateView {
 
 extern "C" {
 extern CameraTargetStateView DAT_005806a0;
-extern LmapSceneView* g_lmapScene;
 extern u8 g_localCamera;
 
 f32 distSpatial(f32 firstX, f32 firstY, f32 firstZ,
@@ -42,12 +35,12 @@ void lmapUpdateCameraDistancePair(void)
         s32 bits;
     } distance;
 
-    LmapSceneView *scene = g_lmapScene;
+    LmapSceneA *scene = g_lmapScene;
     CameraTargetView *target = DAT_005806a0.target;
     MapVector scenePosition;
-    scenePosition.x = scene->positionX;
+    scenePosition.x = scene->pose.position.x;
     scenePosition.y = 0.0f;
-    scenePosition.z = scene->positionZ;
+    scenePosition.z = scene->pose.position.z;
     MapVector targetPosition;
     targetPosition.x = target->positionX;
     targetPosition.y = 0.0f;

@@ -1,4 +1,5 @@
 #include "gfx/DrawParameterOwner.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
@@ -14,7 +15,6 @@ typedef char ParameterOverlayWorkSpeedOffsetCheck[
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 renderCtxPackPassFlags(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *animation);

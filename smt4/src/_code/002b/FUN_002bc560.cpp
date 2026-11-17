@@ -1,5 +1,5 @@
 /* NON_MATCHING: store scheduling and literal-pool order differ (retail keeps one more callee-saved register and groups the stores with stm). */
-#include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 /* One framebuffer attachment: its size, kind, format and antialiasing mode. */
 struct GxAttachmentDesc {
@@ -11,7 +11,7 @@ struct GxAttachmentDesc {
 };
 
 struct GxFramebufferDesc {
-    /* 0x00 */ f32 scale;
+    /* 0x00 */ u32 colorFormat;
     /* 0x04 */ GxAttachmentDesc color;
     /* 0x18 */ u32 depthFormat;
     /* 0x1C */ s32 depthWidth;
@@ -21,15 +21,7 @@ struct GxFramebufferDesc {
     /* 0x2C */ u32 depthAntialias;
 };
 
-struct GxPresets {
-    /* 0x000 */ u8 unk000[0x1F8];
-    /* 0x1F8 */ f32 scale;
-};
-
 extern "C" {
-
-extern GxPresets g_asdGxPresets;
-
 /* Size of a screen buffer: the upper screen (1) is twice as wide, and the antialias modes 0x501
  * (2x1) and 0x502 (2x2) scale it further. */
 static __inline void gxScreenBufferSize(s32 screen, u32 antialias, s32 *width, s32 *height)
@@ -61,7 +53,7 @@ void FUN_002bc560(GxFramebufferDesc *desc, s32 screen, u32 antialias)
 
     gxScreenBufferSize(screen, antialias, &colorWidth, &colorHeight);
     gxScreenBufferSize(screen, antialias, &depthWidth, &depthHeight);
-    desc->scale = g_asdGxPresets.scale;
+    desc->colorFormat = g_asdGxPresets.colorFormat;
     desc->color.width = colorWidth;
     desc->color.antialias = antialias;
     desc->depthFormat = 0x88F0; /* GL_DEPTH24_STENCIL8 */

@@ -1,17 +1,14 @@
-#include "common.h"
-
-namespace { struct Presets { u8 padding[0x18]; u32 first; u8 gap[0x54]; u32 second; }; }
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-extern Presets g_asdGxPresets;
-/* Gets the preset for the requested render kind. */
+/* Returns the display buffer width of screen target `kind` (0/1: top, 2: bottom). */
 u32 asdGxPresetsGetByKind(u32 kind)
 {
     if (kind == 0 || kind == 1) {
-        return g_asdGxPresets.first;
+        return g_asdGxPresets.displays[0].width;
     }
     if (kind == 2) {
-        return g_asdGxPresets.second;
+        return g_asdGxPresets.displays[2].width;
     }
     return 0;
 }

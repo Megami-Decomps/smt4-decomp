@@ -5,6 +5,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct ActionBinding {
@@ -38,7 +39,6 @@ struct BattleBindingIdentity {
 
 extern "C" {
 u8 objIsStateNotOne(void* animation);
-BtlEntry* btlMainFindEntryByListedId(BtlMainState*, s32 id);
 void FUN_0034d430(void* animation, const BattleSpritePlacement*, f32 scale);
 void FUN_0034c7a8(void* animation, const BattleVector3* translation);
 void FUN_0034d504(void* animation);

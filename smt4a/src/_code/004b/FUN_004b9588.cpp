@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 
 struct SkinDrawObject {
     u8 prefix[0x28];
@@ -11,7 +12,6 @@ typedef char SkinDrawObjectOffsetsCheck[
     offsetof(SkinDrawObject, skinState) == 0x9C ? 1 : -1];
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(s32 first, s32 second);

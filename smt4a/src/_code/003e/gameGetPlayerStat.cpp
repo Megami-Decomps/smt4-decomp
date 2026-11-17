@@ -1,18 +1,12 @@
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-typedef struct PlayerData {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ s16 stats[5];
-} PlayerData;
-
-extern PlayerData *gameGetPlayerData(void);
 
 /* Returns the player's stat `index` (0-4), or 0 for any other index. */
 int gameGetPlayerStat(u32 index)
 {
-    PlayerData *player = gameGetPlayerData();
+    PlayerDataA *player = gameGetPlayerData();
 
     switch (index) {
     case 0:

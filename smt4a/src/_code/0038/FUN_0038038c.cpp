@@ -8,7 +8,7 @@ s32 scrSetResult(s32 value);
 /* Script command: returns the voice category of the demon whose id is argument zero. */
 s32 FUN_0038038c(void)
 {
-    scrSetResult(devilGetRecord((u16)scrGetArg(0))->voiceCategory);
+    scrSetResult(devilGetRecord((u16)scrGetArg(0))->talkTone);
     return 1;
 }
 

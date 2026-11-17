@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleUnitStateWork {
     u8 unk00[0x48];
@@ -18,7 +19,6 @@ typedef char BattleUnitStateWorkOffsets[offsetof(BattleUnitStateWork, state) == 
     offsetof(BattleUnitStateWork, actor) == 0x60 && offsetof(BattleUnitStateWork, step) == 0xA0 ? 1 : -1];
 
 extern "C" {
-BtlUnitData* btlFindEntryBlockByMemberId(BtlMainState* battle, s32 index);
 
 // Refresh the unit state machine and mirror its status mask onto the actor entry.
 void FUN_0027e5e4(BattleUnitStateWork* work)
@@ -27,7 +27,7 @@ void FUN_0027e5e4(BattleUnitStateWork* work)
     if (data == NULL) {
         return;
     }
-    if (data->unk0FA & 0x180) {
+    if (data->statusFlags & 0x180) {
         work->state = 3;
         work->timer = 0;
         work->step = 0;
@@ -42,7 +42,7 @@ void FUN_0027e5e4(BattleUnitStateWork* work)
     if (work->actor >= 0) {
         BtlEntry* entry = &btlGetMainState()->entries[work->actor];
         if (entry != NULL) {
-            if (data->unk0FA & 0x3E8) {
+            if (data->statusFlags & 0x3E8) {
                 entry->flagMask |= 0x80000;
             } else {
                 entry->flagMask &= ~0x80000ULL;

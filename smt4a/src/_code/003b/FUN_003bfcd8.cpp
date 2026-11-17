@@ -1,46 +1,43 @@
 /* NON_MATCHING: scheduling only: retail loads the 1.0f scale before the panel stores and keeps the panel in r0 before `return 1`. */
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
-extern MessageGlobalsA g_messageMain;
-
 u32 scrGetArg(u32 index);
-void uiSpriteStateInitFromSource(u8 *sprite, s32 anim, s32 frame, u8 *source, f32 scale, s32 layer);
-void pairSetFirstResetSecond(u8 *pair, s32 first);
-void uiSpriteSelectAnim(u8 *sprite, s32 anim);
+void uiSpriteStateInitFromSource(void *sprite, s32 anim, s32 frame, void *source, f32 scale, s32 layer);
+void pairSetFirstResetSecond(void *pair, s32 first);
 
 /* Opens the message panel and starts its sprite; `mode` selects the panel variant. */
 static __inline void messagePanelOpen(u8 mode)
 {
-    MessagePanelA *panel = g_messageMain.panel;
+    MessageWindowA *panel = g_messageMain.banner;
     u32 slot;
 
-    panel->unk8E = 1;
-    panel->state = 1;
+    panel->wideValue = 1;
+    panel->counterState = 1;
     slot = gameGetSlotTable()->money;
-    panel->unk7C = slot;
-    panel->unk88 = slot;
-    panel->unk91 = mode;
-    panel->unk92 = 0;
-    panel->unk17D = 0;
-    panel->unk16D = 0;
-    uiSpriteStateInitFromSource(panel->blockB00, 8, -1, panel->block194, 1.0f, 11);
-    pairSetFirstResetSecond(panel->blockB00, 0);
-    uiSpriteSelectAnim(panel->blockB00, 6);
+    panel->counterValue = slot;
+    panel->counterBase = slot;
+    panel->alternateAnimation = mode;
+    panel->unk0092 = 0;
+    panel->popupShown = 0;
+    panel->unk016D = 0;
+    uiSpriteStateInitFromSource(&panel->sprites[17], 8, -1, &panel->parameters, 1.0f, 11);
+    pairSetFirstResetSecond(&panel->sprites[17], 0);
+    uiSpriteSelectAnim(&panel->sprites[17], 6);
 }
 
 /* Sets the panel's current and target value and marks it ready. */
 static __inline void messagePanelSetValue(u32 value)
 {
-    MessagePanelA *panel = g_messageMain.panel;
+    MessageWindowA *panel = g_messageMain.banner;
 
-    panel->unk93 = 0;
-    panel->unk80 = value;
-    panel->unk84 = value;
-    panel->unk92 = 1;
-    panel->unk8C = 0;
+    panel->unk0093 = 0;
+    panel->counterDelta = value;
+    panel->counterElapsed = value;
+    panel->unk0092 = 1;
+    panel->stepActive = 0;
 }
 
 /* Script command: opens the message panel in its argument-driven mode. */

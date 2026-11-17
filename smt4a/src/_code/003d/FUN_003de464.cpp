@@ -1,19 +1,7 @@
 #include "common.h"
+#include "quest_center/QuestRecordA.h"
 
 extern "C" {
-
-/* A record (only the fields read here): a kind byte at 6, a flags byte at 7 and four 8-byte
- * slots starting at 0x100 whose first halfword says whether the slot is used. */
-typedef struct KindRecord {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u8 kind;
-    /* 0x07 */ u8 flags;           /* 8: unavailable, 0x10: needs the mask */
-    /* 0x08 */ u8 unk08[0xF8];
-    struct {
-        /* 0x100 */ u16 id;
-        /* 0x102 */ u8 unk102[6];
-    } slots[4];
-} KindRecord;
 
 typedef struct FlagEntry {
     u8 unk00[2];
@@ -21,14 +9,13 @@ typedef struct FlagEntry {
 } FlagEntry;
 
 FlagEntry *gameFlagBlockGetEntry(void);
-KindRecord *dataTable1bOr1cGetRecord(u32 id);
 
 /* The message id describing record `id`: by its kind, the id of its first slot and how many of
  * its four slots are used. Returns -1 when there is none. */
 s32 FUN_003de464(u32 id, u8 mask)
 {
     FlagEntry *entry = gameFlagBlockGetEntry();
-    KindRecord *record = dataTable1bOr1cGetRecord(id);
+    QuestRecordA *record = dataTable1bOr1cGetRecord(id);
 
     if (record == NULL) {
         return -1;
@@ -39,17 +26,17 @@ s32 FUN_003de464(u32 id, u8 mask)
     if ((record->flags & 8) != 0) {
         return -1;
     }
-    u16 first = record->slots[0].id;
+    u16 first = record->requirements[0].id;
     u8 kind = record->kind;
     u8 used = first != 0;
 
-    if (record->slots[1].id != 0) {
+    if (record->requirements[1].id != 0) {
         used++;
     }
-    if (record->slots[2].id != 0) {
+    if (record->requirements[2].id != 0) {
         used++;
     }
-    if (record->slots[3].id != 0) {
+    if (record->requirements[3].id != 0) {
         used++;
     }
     if (kind != 3) {

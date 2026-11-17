@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ee5b4` (_code @ 0x4ee5b4, 0x46c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 struct BattleUiOwner;
 struct BattleUiContext;
 
@@ -13,7 +14,6 @@ int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
 int btlResetEntryCounters(int);
 int btlFindSelectionIndexByOrdinal(int, int);
-int btlMainFindEntryByListedId(int, int);
 int FUN_003f2498(...);
 int FUN_0047f08c(...);
 int FUN_0047f584(void);
@@ -36,7 +36,6 @@ typedef struct {
 
 extern unsigned int DAT_00571160; /* 0x571160 */
 extern unsigned int DAT_00571164; /* 0x571164 */
-extern int g_btlCamera; /* 0x571508 */
 extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
@@ -116,7 +115,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   do {
     param_2[temp_v3 * 4 + 0x279] = 0;
     temp_v5 = *param_1;
-    btlMainFindEntryByListedId(temp_v5,temp_v3);
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v5), temp_v3);
     if (temp_v5 != 0) {
       param_2[temp_v3 * 4 + 0x279] = *(unsigned int *)(temp_v5 + 600);
       param_2[temp_v3 * 4 + 0x27a] = *(unsigned int *)(temp_v5 + 0x25c);
@@ -143,7 +142,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   }
   FUN_004e1f58(param_1,param_2,0);
   obj4FSlots28Reset(g_btlAux);
-  *(unsigned int *)(g_btlCamera + 0x64c) = (*(unsigned int *)(g_btlCamera + 0x64c) & 0xfeffffff) | 0x4000;
+  g_btlCamera->flags = (g_btlCamera->flags & 0xfeffffff) | 0x4000;
   switch(*(unsigned short *)(param_2[10] + 0x1be)) {
   case 1:
   case 2:

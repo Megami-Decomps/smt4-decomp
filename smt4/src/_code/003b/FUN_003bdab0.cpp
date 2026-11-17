@@ -2,12 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int btlEntryBuildSummary(unsigned char [2], unsigned int *, unsigned int *);
-int btlFindEntryBlockByMemberId(...);
-int btlMainFindEntryByListedId(...);
 int FUN_00283ebc(unsigned int, unsigned int, int);
 int gameGetUnitRecord(...);
 int dataTable40FindById(void);
@@ -105,9 +104,9 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
   dataTable40FindById();
   dataTable08Sub1GetRecord();
   puVar6 = puVar3;
-  btlMainFindEntryByListedId(puVar3,param_5);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar3), param_5);
   puVar5 = puVar3;
-  btlMainFindEntryByListedId(puVar3,param_6);
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar3), param_6);
   btlEntryBuildSummary(temp_v14,puVar3,puVar6);
   temp_v1 = temp_v22;
   temp_v6 = 0xffffffff;
@@ -300,7 +299,7 @@ LAB_003be190:
         temp_v3 = VectorUnsignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v13 = romwright_piece_4_4(0x3f800000,temp_v3);
         puVar6 = (unsigned int *)reinterpret_cast<unsigned int *>(btlGetMainState());
-        btlMainFindEntryByListedId(puVar6,param_5);
+        btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar6), param_5);
         if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, dataTable40FindById(), temp_v7 != 0)) {
           temp_v3 = playerGetSkillRank(temp_v1);
           FUN_00283ebc(temp_v7,temp_v3,2);
@@ -358,7 +357,7 @@ LAB_003be1d4:
       temp_v12 = 0.01f;
       if (param_6 < 0x6d) {
         puVar6 = puVar3;
-        btlFindEntryBlockByMemberId(puVar3,param_6);
+        btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(puVar3), param_6);
         temp_v11 = (float)VectorSignedToFloat((int)*(short *)((int)puVar6 + 0xea) *
                                             (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x68),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);

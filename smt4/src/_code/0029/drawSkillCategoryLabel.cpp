@@ -1,12 +1,5 @@
 /* NON_MATCHING: shared 41A/41B selection uses one extra branch and different block placement; O2 may restore retail's shared backward branch. */
-#include "shard/W6_W6Match5_SecondarySort.h"
-
-namespace {
-struct SkillCategoryView {
-    u8 unk00[6];
-    u8 category;
-};
-}
+#include "quest_center/QuestRecord.h"
 
 extern "C" {
 u32 questIsCompleted(s32 skill);
@@ -26,9 +19,8 @@ void drawSkillCategoryLabel(u16 skill, s32 x, s32 y, u32 style)
     } else if (idIsAtLeast350(skill) != 0) {
         label = highlighted ? 0x41B : 0x41A;
     } else {
-        const SkillCategoryView* record =
-            reinterpret_cast<const SkillCategoryView*>(dataTable1bOr1cGetRecord(skill));
-        switch (record->category) {
+        const QuestRecord *record = dataTable1bOr1cGetRecord(skill);
+        switch (record->kind) {
         case 0:
             label = highlighted ? 0x40A : 0x403;
             break;

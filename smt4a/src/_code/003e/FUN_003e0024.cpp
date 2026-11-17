@@ -1,13 +1,12 @@
 #include "shard/Shard003E.h"
 #include "code/Code003e.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-extern PlayerData *gameGetPlayerData(void);
-
 s32 FUN_003e0024(void)
 {
-    return gameGetPlayerData()->unk2A;
+    return gameGetPlayerData()->hp;
 }
 
 } /* extern "C" */

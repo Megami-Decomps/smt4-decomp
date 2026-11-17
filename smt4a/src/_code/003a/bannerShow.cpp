@@ -1,24 +1,8 @@
+#include "ui/MessageMainA.h"
 #include "common.h"
 #include "ui/UiControl.h"
 
 extern "C" {
-
-typedef struct Banner {
-    /* 0x000 */ u8 unk000[0x190];
-    /* 0x190 */ u8 flagA;
-    /* 0x191 */ u8 flagB;
-    /* 0x192 */ u8 flagC;
-    /* 0x193 */ u8 unk193;
-    /* 0x194 */ u8 text[0x168C];
-    /* 0x1820 */ u8 window[4];
-} Banner;
-
-typedef struct Globals {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ Banner *banner;
-} Globals;
-
-extern Globals g_messageMain;
 
 int pairSetFirstResetSecond(void *window, int arg);
 int uiSpriteStateInitFromSource(void *window, int arg1, u32 arg2, void *text, float scale, int arg5);
@@ -26,14 +10,14 @@ int uiSpriteStateInitFromSource(void *window, int arg1, u32 arg2, void *text, fl
 /* Script command: turns on the banner's flags, sets up its window with the text and starts it. */
 u32 bannerShow(void)
 {
-    Banner *banner = g_messageMain.banner;
+    MessageWindowA *banner = g_messageMain.banner;
 
-    banner->flagA = 1;
-    banner->flagB = 1;
-    banner->flagC = 1;
-    uiSpriteStateInitFromSource(banner->window, 19, 0xffffffff, banner->text, 1.0f, 11);
-    pairSetFirstResetSecond(banner->window, 38);
-    uiSpriteSelectAnim(banner->window, 28);
+    banner->introMode = 1;
+    banner->introStep = 1;
+    banner->introFlag = 1;
+    uiSpriteStateInitFromSource(&banner->sprites[41], 19, 0xffffffff, &banner->parameters, 1.0f, 11);
+    pairSetFirstResetSecond(&banner->sprites[41], 38);
+    uiSpriteSelectAnim(&banner->sprites[41], 28);
     return 1;
 }
 

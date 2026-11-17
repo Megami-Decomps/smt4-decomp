@@ -1,15 +1,15 @@
 /* NON_MATCHING: early guards, the unit/player arm placement and the isUnit|variant test now match retail; remaining: isUnit/variant saved registers are swapped (r6/r5) and retail places the item-flag-clear tail (FUN_0029c4c8(0)) at the end of the function. */
 #include "ui/PartyPanelState.h"
+#include "gamedata/GamePlayerData.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gamedata/ConsumableRecord.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
-void *gameGetUnitRecord(s32 id);
-void *gameGetPlayerData(void);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void FUN_0029c4e4(PartyPanelUnitPreview *unit, s32 arg);
-void FUN_0029a0cc(PlayerInitialRecordIV *player);
+void FUN_0029a0cc(PlayerDataIV *player);
 
 /* Shows an item's stat boost preview: copies the player's (or a unit's) record into the panel, adds 3 to the stat
  * the item raises (in both its base and its current value) and refreshes the panel. */

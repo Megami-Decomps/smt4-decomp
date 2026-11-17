@@ -343,7 +343,7 @@ LAB_0039a8c0:
                   }
                 }
                 temp_v6 = mapExplorationCellIsMarked(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
-                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.forceVisible != 0)) {
+                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.showAllEntries != 0)) {
                   temp_v19 = (float)VectorSignedToFloat(temp_v41,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v24 = (float)VectorSignedToFloat(temp_v18 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                   FUN_002b04e8(2,0x1c,8000,(int)(temp_v24 + temp_v35),(int)(temp_v19 + temp_v36),
@@ -683,7 +683,7 @@ LAB_0039a5e0:
                   }
                 }
                 temp_v6 = mapExplorationCellIsMarked(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
-                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.forceVisible != 0)) {
+                if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.showAllEntries != 0)) {
                   temp_v19 = (float)VectorSignedToFloat(temp_v43,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v15 = (float)VectorSignedToFloat(temp_v18 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                   FUN_002b04e8(2,0x1c,7000,(int)(temp_v15 + temp_v35),(int)(temp_v19 + temp_v36),
@@ -845,7 +845,7 @@ LAB_00399f14:
               }
               temp_v6 = mapExplorationCellIsMarked(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
                                    temp_v38 >> 6);
-              if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.forceVisible != 0)) {
+              if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.showAllEntries != 0)) {
                 temp_v19 = (float)VectorSignedToFloat(temp_v39,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v24 = (float)VectorSignedToFloat(temp_v4 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                 FUN_002b04e8(2,0x1c,6000,(int)(temp_v24 + temp_v35),(int)(temp_v19 + temp_v36),

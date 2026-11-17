@@ -4,6 +4,7 @@
 #include "battle/btlReflect.h"
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -13,8 +14,6 @@ int FUN_002268d0(...);
 
 int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
-int btlFindEntryBlockByMemberId(int, int);
-int btlMainFindEntryByListedId(unsigned int *, int);
 int gameCounterAddSaturating(...);
 int FUN_002b7bca(int [2], int, int, unsigned char *);
 int FUN_003ddee0(int, unsigned int, int, int);
@@ -118,7 +117,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   temp_v20 = param_1 + param_16;
   temp_v23 = &DAT_00439960 + param_13 * 0xc;
   temp_v19 = puVar5;
-  btlMainFindEntryByListedId(puVar5,(int)*(short *)(param_3 + 0x62));
+  btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar5), (int)*(short *)(param_3 + 0x62));
   temp_v22 = 1;
   temp_v0 = *(short *)(param_3 + 0x62) < 0x6d;
   temp_v2 = (short)param_1;
@@ -277,7 +276,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                                                (short)temp_v20),0,param_2);
                       temp_v14[0] = temp_v6;
                       temp_v6 = reinterpret_cast<int>(btlGetMainState());
-                      btlFindEntryBlockByMemberId(temp_v6,(int)*(short *)(temp_v4 + 0x62));
+                      btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(temp_v6), (int)*(short *)(temp_v4 + 0x62));
                       temp_v17 = temp_v6;
                       temp_v5 = reinterpret_cast<int>(btlGetMainState());
                       temp_v6 = idSetFindSubjectIndex(temp_v5,temp_v4);

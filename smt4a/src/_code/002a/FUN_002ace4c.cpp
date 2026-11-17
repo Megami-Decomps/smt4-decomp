@@ -1,10 +1,10 @@
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelStateA.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 id);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);

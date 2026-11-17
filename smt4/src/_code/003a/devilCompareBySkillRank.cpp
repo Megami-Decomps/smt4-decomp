@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 #include "gamedata/DataTable40.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ typedef struct DevilRecord {
 } DevilRecord;
 
 extern DevilRecord *table8Type5FindById(u16 id);
-extern s32 itemGetSortCategory(u16 skillId);
 
 /* qsort-style comparison of two devil ids by the skill's rank (itemGetSortCategory), then its sort key, then id (descending). */
 s32 devilCompareBySkillRank(u16 *a, u16 *b)

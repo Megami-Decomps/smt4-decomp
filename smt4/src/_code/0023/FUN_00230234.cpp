@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -17,10 +18,9 @@ extern const char DAT_00407648[];  /* "player/pl_dammy.bam" */
 s32 FUN_0028c040(void);
 s32 gameGlobalsSetSelected(u32 arg);
 s32 statusDownSwitchTab(s32 arg);
-u32 gameGetPlayerData(void);
 s32 FUN_0029c4c8(s32 arg);
-s32 FUN_0029a0e8(u32 arg);
-s32 FUN_0029a0cc(u32 arg);
+s32 FUN_0029a0e8(PlayerDataIV *player);
+s32 FUN_0029a0cc(PlayerDataIV *player);
 s32 messageWindowStartTimer(s32 arg);
 s32 FUN_002305e8(s32 arg);
 void *asdMdlManagerCreateSecondList(const char *name, u32 arg);
@@ -29,6 +29,7 @@ void *asdMdlManagerCreateSecondList(const char *name, u32 arg);
 void FUN_00230234(Scene *scene)
 {
     u32 value;
+    PlayerDataIV *player;
 
     FUN_0028c040();
     if (scene->mode == 1) {
@@ -38,10 +39,10 @@ void FUN_00230234(Scene *scene)
     }
     gameGlobalsSetSelected(value);
     statusDownSwitchTab(0);
-    value = gameGetPlayerData();
+    player = gameGetPlayerData();
     FUN_0029c4c8(1);
-    FUN_0029a0e8(value);
-    FUN_0029a0cc(value);
+    FUN_0029a0e8(player);
+    FUN_0029a0cc(player);
     scene->active = 1;
     messageWindowStartTimer(1);
     FUN_002305e8(0);

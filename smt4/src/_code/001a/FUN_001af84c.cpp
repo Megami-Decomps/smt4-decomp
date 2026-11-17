@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the status icon of a quest list row (new, in progress, done, locked, selected) and returns the row text colour; written from the decompilation, the dataTable1bOr1cGetRecord argument is inferred and branch layout not compared with retail */
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 
@@ -22,11 +23,6 @@
 
 #define QUEST_STEP_COUNT 6
 
-struct QuestRecord {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u8 oneShot;       /* set for quests that are offered rather than tracked */
-};
-
 struct QuestUi {
     /* 0x000 */ u8 unk000[0x5C4];
     /* 0x5C4 */ u8 detailOpen;
@@ -35,7 +31,6 @@ struct QuestUi {
 extern "C" {
 extern QuestUi *g_uiQuest;
 
-QuestRecord *dataTable1bOr1cGetRecord(s32 quest);
 s32 questPassesAvailabilityConditions(s32 quest);
 s32 questIsOfferable(u16 quest);
 s32 questIsCompleted(s32 quest);
@@ -65,7 +60,7 @@ u32 FUN_001af84c(s32 quest, u32 x, u32 y, u32 flags, s32 full)
         if (record == NULL)
             return normal;
 
-        if (record->oneShot == 0) {
+        if (record->kind == 0) {
             bool allDone = true;
             for (s32 step = 0; step < QUEST_STEP_COUNT; step++) {
                 s32 progress[3];

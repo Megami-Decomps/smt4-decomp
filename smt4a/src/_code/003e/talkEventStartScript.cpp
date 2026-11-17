@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct TalkEvent {
 } TalkEvent;
 
 extern void scriptProcessSetMode(ScriptProcess *process, s32 mode);
-extern s32 g_btlCamera;
 
 extern s32 pairedAvailabilityGetState(s32 arg);
 extern void FUN_003f14a0(void);

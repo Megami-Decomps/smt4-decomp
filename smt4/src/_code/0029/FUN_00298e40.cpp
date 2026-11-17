@@ -1,7 +1,7 @@
 /* NON_MATCHING: requirement base addressing, handled result and per-case clamp now match; only register numbering (r6/r7), the block order of the clamp tail and strge/strlt order differ. */
 #include "quest_center/QuestRequirement.h"
+#include "quest_center/QuestRecord.h"
 extern "C" {
-QuestRequirementDefinition *dataTable1bOr1cGetRecord(s32 quest);
 s32 unlockFlagTest(u16 id);
 s32 flagValueRead(u16 id);
 s32 partyFindActiveSlotById(u16 id);
@@ -20,7 +20,7 @@ static __inline void setRemaining(QuestRequirementProgress *progress, s32 value)
 u32 FUN_00298e40(s32 quest, s32 index, QuestRequirementProgress *progress)
 {
     u32 handled = 0;
-    QuestRequirementDefinition *definition = dataTable1bOr1cGetRecord(quest);
+    QuestRecord *definition = dataTable1bOr1cGetRecord(quest);
     if (definition == NULL)
         return 0;
     switch (definition->requirements[index].kind) {

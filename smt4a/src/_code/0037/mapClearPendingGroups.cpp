@@ -27,7 +27,7 @@ void mapClearPendingGroups(void)
         }
         g_gameState.groupB = 0;
     }
-    g_gameState.unk261 = 0;
+    g_gameState.destinationSet = 0;
     g_gameState.dialogRequested = 0;
     g_gameState.unk263 = 0;
     g_gameState.unk264 = 0;

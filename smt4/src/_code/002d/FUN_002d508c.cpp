@@ -1,22 +1,8 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 165 rows); register allocation and the stack frame (20 vs 24 bytes) differ */
 #include "common.h"
+#include "map/LmapGlobals.h"
 #include "util/TrigF32.h"
 #include "code/Code0025.h"
-
-struct Vec3f {
-    f32 x, y, z;
-};
-
-// Field scene: the player's position and facing, current and previous frame.
-struct LmapScene {
-    u8 unk00[0x1c];
-    Vec3f position;         // 0x1c
-    Vec3f candidate;        // 0x28: position being tried this step
-    Vec3f previous;         // 0x34: position at the start of the frame
-    Vec3f lastPosition;     // 0x40
-    f32 lastYaw;            // 0x4c
-    f32 yaw;                // 0x50: facing in degrees
-};
 
 // Player controller: only the members this movement update uses.
 struct PlayerController {
@@ -35,7 +21,6 @@ struct MapBlock {
 
 extern "C" {
 
-extern LmapScene* g_lmapScene;
 extern s8 DAT_0049f934;
 extern s8 DAT_0049fc64;
 extern s8 DAT_0049fce8;
@@ -44,7 +29,7 @@ MapBlock* gameGetMapBlock(void);
 void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
 void FUN_0026413c(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
-s32 FUN_002ed094(Vec3f* candidate, Vec3f* previous);
+s32 FUN_002ed094(MapVector* candidate, MapVector* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,
 // turns to the stick direction and advances in one or two collision-checked steps.
@@ -59,8 +44,8 @@ void FUN_002d508c(PlayerController* player)
     }
 
     LmapScene* scene = g_lmapScene;
-    Vec3f start = scene->position;
-    scene->candidate = start;
+    MapVector start = scene->pose.position;
+    scene->pose.targetPosition = start;
 
     f32 boost = (f32)FUN_00256540() * 0.01f;
     if (boost > 2.0f) boost = 2.0f;
@@ -83,7 +68,7 @@ void FUN_002d508c(PlayerController* player)
         f32 heading = -(__hardfp_atan2f(stickX, stickY) * 57.29578f - player->cameraYaw);
         if (!(heading >= 0.0f)) heading += 360.0f;
         if (heading > 360.0f) heading -= 360.0f;
-        g_lmapScene->yaw = heading;
+        g_lmapScene->pose.targetHeading = heading;
         player->moving = 1;
     }
 
@@ -91,23 +76,23 @@ void FUN_002d508c(PlayerController* player)
     if (player->speed > 35.0f) steps = 2;
     for (s32 i = 0; i < steps; i++) {
         scene = g_lmapScene;
-        Vec3f before = scene->position;
-        scene->candidate = scene->position;
+        MapVector before = scene->pose.position;
+        scene->pose.targetPosition = scene->pose.position;
         f32 stride = (player->speed / (f32)steps) * speedScale;
-        scene->candidate.x += mathRemPio2f(scene->yaw * 0.017453292f) * stride;
+        scene->pose.targetPosition.x += mathRemPio2f(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
-        scene->candidate.z += FUN_00282390(scene->yaw * 0.017453292f) * stride;
+        scene->pose.targetPosition.z += FUN_00282390(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
-        if (DAT_0049fce8 == 0) blocked = FUN_002ed094(&scene->candidate, &before);
+        if (DAT_0049fce8 == 0) blocked = FUN_002ed094(&scene->pose.targetPosition, &before);
         scene = g_lmapScene;
-        scene->position.x = (scene->candidate.x - scene->position.x) + scene->position.x;
-        scene->position.z = (scene->candidate.z - scene->position.z) + scene->position.z;
+        scene->pose.position.x = (scene->pose.targetPosition.x - scene->pose.position.x) + scene->pose.position.x;
+        scene->pose.position.z = (scene->pose.targetPosition.z - scene->pose.position.z) + scene->pose.position.z;
         if (blocked != 0) break;
     }
     scene = g_lmapScene;
-    scene->lastYaw = scene->yaw;
-    scene->lastPosition = scene->position;
-    scene->previous = start;
+    scene->pose.heading = scene->pose.targetHeading;
+    scene->pose.lastPosition = scene->pose.position;
+    scene->pose.previousPosition = start;
 }
 
 } /* extern "C" */

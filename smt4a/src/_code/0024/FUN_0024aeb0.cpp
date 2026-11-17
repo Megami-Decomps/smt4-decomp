@@ -36,7 +36,7 @@ void FUN_0024aeb0(void)
         }
         if (owner) {
             ControllerPose* controller = owner->controller;
-            if (g_gameState.departLoading) {
+            if (g_gameState.loading) {
                 controller->flags.value |= 3;
                 return;
             }

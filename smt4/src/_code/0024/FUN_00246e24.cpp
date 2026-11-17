@@ -5,10 +5,9 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 
 u32 FUN_00246e24(s32 actor, u32 options, BtlActionRecord *target, u32 value, s32 clearStatus)
 {

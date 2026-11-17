@@ -1,11 +1,11 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 void btlReflectCreateKind37(s32 mode, u32 unit, u8 *entry, s32 flag);
 s32 scrGetArg(u32 index);
-u32 btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit; /* 0x57113c */
 
@@ -13,7 +13,7 @@ extern u32 g_btlScriptUnit; /* 0x57113c */
 u32 scrCommBattleEntryApply(void)
 {
     s32 index = scrGetArg(0);
-    u32 unit = btlUnitGet(g_btlScriptUnit);
+    u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
 
     btlReflectCreateKind37(0, unit, (u8 *)btlGetMainState()->unk1ED4 + index * 0x1d0, 0);
     return 1;

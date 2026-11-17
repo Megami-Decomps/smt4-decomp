@@ -1,6 +1,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "battle/BtlGlobals.h"
 
 // Private view of the fields used by this routine.
 struct BattleCameraOwnerView {
@@ -10,7 +11,6 @@ struct BattleCameraOwnerView {
 };
 
 extern "C" {
-extern void* g_btlMain;
 
 void btlDispatchCurrentJob();
 void scrDestroyActive();
@@ -28,7 +28,7 @@ void btlCameraCreateDrawTaskAndInitializeStorage(BattleCameraOwnerView* owner)
 
     if (g_btlMain == 0) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlCamera.cpp", 0x939);
-        g_btlMain = asdMemAlloc(0x100, 0x100, 0, 0x848, 1);
+        g_btlMain = static_cast<BtlCamera *>(asdMemAlloc(0x100, 0x100, 0, 0x848, 1));
     }
 
     eventCameraInitialize(g_btlMain, owner);

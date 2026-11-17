@@ -1,6 +1,7 @@
 /* NON_MATCHING: addressing now matches retail (s8 `maxed`, entries indexed directly from the 0x7800 base); remaining: retail loads the leader's u64 with `ldrd` (members use two `ldr`), places the `lsr` temp in r2, and schedules the `maxed` byte load after the move of `needed`. */
 #include "common.h"
 #include "sys/RuntimeObjects.h"
+#include "gamedata/GamePlayerData.h"
 
 /* The 16-bit gauge width an icon frame carries. */
 struct GaugeIcon {
@@ -44,7 +45,6 @@ struct PartyMemberRecord {
 extern "C" {
 PartySlotTable *gameGetSlotTable(void);
 GaugeIcon *asdTMTexTableEntryAt(u32 table, u32 sprite);
-PartyMemberRecord *gameGetPlayerData(void);
 PartyMemberRecord *gameGetSlotRecord(s32 slot);
 PartyMemberRecord *partyGetSlotPreferredFirst(u16 index);
 s32 partySlotMatchesSelected(PartyMemberRecord *record);
@@ -57,7 +57,7 @@ extern "C" void FUN_00240674(ExpResultWork *work)
 {
     PartySlotTable *table = gameGetSlotTable();
     GaugeIcon *icon = asdTMTexTableEntryAt(0x1d, 0x14);
-    u64 needed = levelGetExpRequirement(gameGetPlayerData()->expCurve + work->leader.levelOffset);
+    u64 needed = levelGetExpRequirement(gameGetPlayerData()->level + work->leader.levelOffset);
     if (work->leader.maxed) {
         work->leader.gauge = *icon->width;
     } else {

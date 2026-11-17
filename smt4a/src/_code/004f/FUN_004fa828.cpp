@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fa828` (_code @ 0x4fa828, 0x524 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_btlCamera; /* 0x571508 */
 extern unsigned int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: textFormatBuffer. */
@@ -91,7 +91,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
   if (temp_v8 && temp_v1 != 0) {
     if ((g_btlCamera != 0) &&
        (temp_v0 = *(char *)(param_1 + 0x33ac), (temp_v0 == '\x02' || temp_v0 == '\b') || temp_v0 == '\t')) {
-      *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000000;
+      g_btlCamera->flags = g_btlCamera->flags | 0x4000000;
     }
     (**(romwright_code **)(**(int **)(param_1 + 0x33a8) + 8))();
     temp_v4 = (**(romwright_code **)(**(int **)(param_1 + 0x33a8) + 0x14))();

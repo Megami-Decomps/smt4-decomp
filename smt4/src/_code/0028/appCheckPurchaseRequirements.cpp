@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation only: retail keeps `need` in r8 and the narrowed id in r7 (here swapped), and the entry in r5 / flag in r6 (here swapped); the final need > FUN_00295cec() comparison now matches. Declaration order does not affect it. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/DataTable.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -16,11 +16,6 @@ typedef struct Entry002829d4 {
     /* 0x32 */ u16 flagsBit[3]; /* flag-block bits that must be set */
     /* 0x38 */ u8 unk38[8];
 } Entry002829d4;
-
-typedef struct PlayerData002829d4 {
-    /* 0x00 */ u8 unk00[0x76];
-    /* 0x76 */ u8 level;
-} PlayerData002829d4;
 
 typedef s32 Compare002829d4(const UnsignedRecordKey32 *a, const UnsignedRecordKey32 *b);
 
@@ -54,7 +49,7 @@ u8 appCheckPurchaseRequirements(u32 id)
     if (entry == NULL) {
         return 2;
     }
-    if (entry->minLevel > reinterpret_cast<PlayerData002829d4 *>(gameGetPlayerData())->level) {
+    if (entry->minLevel > gameGetPlayerData()->level) {
         return 2;
     }
     for (i = 0; i < 3; i++) {

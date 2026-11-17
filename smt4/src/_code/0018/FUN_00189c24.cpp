@@ -1,16 +1,7 @@
 /* NON_MATCHING: same control flow, calls, frame and switch table; armcc keeps the constant 350 in fp for the two id checks and spills the quest+0x500 base, where retail reloads 350 from the pool each time and keeps the base in fp, so the callee-saved registers differ. */
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "quest_center/QuestRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
-
-/* The quest record fields read here (data table 0x1b/0x1c). */
-struct QuestListRecord {
-    /* 0x000 */ u8 unk000[6];
-    /* 0x006 */ u8 hidden;          /* not listed among the open quests */
-    /* 0x007 */ u8 unk007[0x195];
-    /* 0x19C */ u16 category;
-    /* 0x19E */ u8 unk19E[0x10];
-    /* 0x1AE */ u16 subCategory;
-};
 
 /* One objective's progress as FUN_00298e40 reports it; only the first word is read here. */
 struct QuestObjectiveProgress {
@@ -27,7 +18,6 @@ struct SavedListCursor {
 extern "C" {
 void rt_memclr(void *destination, u32 size);
 s32 questReadRuntimeFlag(u32 id, u32 flag);
-QuestListRecord *dataTable1bOr1cGetRecord(u16 id);
 s32 gameFlagIsSet(u32 id);
 u32 FUN_00298f88(u32 id);
 s32 FUN_00298e40(u32 id, s32 index, QuestObjectiveProgress *progress);
@@ -87,36 +77,36 @@ void FUN_00189c24(void)
         }
         bool listed = true;
         if (quest->panel.confirming != 0) {
-            QuestListRecord *record = dataTable1bOr1cGetRecord(id);
-            if (record == NULL || record->hidden != 0)
+            QuestRecord *record = dataTable1bOr1cGetRecord(id);
+            if (record == NULL || record->kind != 0)
                 continue;
             if (questHasOpenObjective(id))
                 continue;
             if (idIsAtLeast350(id) == 0) {
-                if (record->category == 0)
+                if (record->area == 0)
                     continue;
                 switch ((s8)quest->panel.choice) {
                 case 0:
                     continue;
                 case 1:
-                    if (record->category != 1)
+                    if (record->area != 1)
                         continue;
                     break;
                 case 9:
-                    if (record->subCategory != 1)
+                    if (record->route != 1)
                         continue;
                     break;
                 case 10:
                 case 11:
                 case 12:
                 case 13:
-                    if (record->subCategory != 2)
+                    if (record->route != 2)
                         continue;
                     break;
                 default:
-                    if (record->category == 1)
+                    if (record->area == 1)
                         listed = false;
-                    if (record->subCategory != 0)
+                    if (record->route != 0)
                         continue;
                     break;
                 }
@@ -139,8 +129,8 @@ void FUN_00189c24(void)
     }
     for (s32 i = 0; i < openCount; i++) {
         if (FUN_00298dc8(quest->list[i]) != 0) {
-            QuestListRecord *record = dataTable1bOr1cGetRecord(quest->list[i]);
-            if (record != NULL && record->hidden != 0) {
+            QuestRecord *record = dataTable1bOr1cGetRecord(quest->list[i]);
+            if (record != NULL && record->kind != 0) {
                 scrollListSetSelectionMarkChanged(quest->cursor.data, i);
                 break;
             }

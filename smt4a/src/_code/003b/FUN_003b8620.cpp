@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlGlobals.h"
 
 struct CombatantFlagFilter {
     u8 unk00[0x30];
@@ -9,7 +10,6 @@ struct CombatantFlagFilter {
 };
 
 extern "C" {
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, u32 id);
 extern CombatantFlagFilter g_btlMessageFlagMasks;
 
 // Return whether the requested combatant has any flags selected by the current filter.

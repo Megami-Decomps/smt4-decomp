@@ -1,35 +1,18 @@
-/* Starts the intro animation: resets the object's state bytes and queues animation 0x13 on its player, playing at normal speed; returns 1. */
-#include "common.h"
+/* Starts the intro animation: resets the banner's intro bytes and queues animation 0x13 on its intro sprite, playing at normal speed; returns 1. */
+#include "ui/MessageMainA.h"
 
 extern "C" {
-
-typedef struct Scene {
-    /* 0x000 */ u8 unk000[400];
-    /* 0x190 */ u8 mode;
-    /* 0x191 */ u8 step;
-    /* 0x192 */ u8 flag;
-    /* 0x193 */ u8 unk193;
-    /* 0x194 */ u8 animData[0x168C];
-    /* 0x1820 */ u8 player[1];
-} Scene;
-
-typedef struct SceneHolder {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ Scene *scene;
-} SceneHolder;
-
-extern SceneHolder g_messageMain;
 
 extern void uiSpriteStateInitFromSource(void *player, s32 animId, s32 loops, void *data, s32 count, f32 speed);
 
 u32 messageStartIntroAnimation(void)
 {
-    Scene *scene = g_messageMain.scene;
+    MessageWindowA *banner = g_messageMain.banner;
 
-    scene->mode = 2;
-    scene->step = 0;
-    scene->flag = 0;
-    uiSpriteStateInitFromSource(scene->player, 0x13, -1, scene->animData, 11, 1.0f);
+    banner->introMode = 2;
+    banner->introStep = 0;
+    banner->introFlag = 0;
+    uiSpriteStateInitFromSource(&banner->sprites[41], 0x13, -1, &banner->parameters, 11, 1.0f);
     return 1;
 }
 

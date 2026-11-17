@@ -1,11 +1,10 @@
 /* NON_MATCHING: early-return frame placement, candidate-reference address setup, and distance VFP registers differ. */
 #include "map/EnemySpawnState.h"
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include <math.h>
 #include "gamedata/DataTable.h"
 
 extern "C" {
-extern LmapSceneA *g_lmapScene;
 const EnemySpawnRecord *FUN_00356308(u32 index);
 const EnemySpawnCondition *dataTable29GetEntry(u16 id);
 s32 gameFlagIsSet(u32 flag);
@@ -62,9 +61,9 @@ extern "C" void enemySpawnChooseCandidates(EnemySpawnOwner *owner, s32 mode)
     case 1:
     case 2: {
         MapVector position;
-        position.x = g_lmapScene->transform.position[0];
-        position.y = g_lmapScene->transform.position[1];
-        position.z = g_lmapScene->transform.position[2];
+        position.x = g_lmapScene->pose.position.x;
+        position.y = g_lmapScene->pose.position.y;
+        position.z = g_lmapScene->pose.position.z;
         u16 filtered[512];
         u16 filteredCount = 0;
         for (s32 index = 0; index < availableCount; ++index) {

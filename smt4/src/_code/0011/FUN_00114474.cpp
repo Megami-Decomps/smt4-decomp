@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00114474` (_code @ 0x114474, 0x1800 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern signed char g_messageMain; /* 0x43e188 */
 extern int DAT_0043e18c; /* 0x43e18c */
 extern int DAT_0043e190; /* 0x43e190 */
 extern int DAT_0049381c; /* 0x49381c */
@@ -92,7 +92,6 @@ extern int slotIsActive(unsigned int);
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int mapMainIsBusy(void);
 extern int questCenterPollShutdown(void);
-
 
 unsigned int FUN_00114474(void)
 
@@ -984,7 +983,7 @@ LAB_001159f0:
     }
     else {
       temp_v6 = buttonHelpGetStatus();
-      if ((temp_v6 != 0x51) && (g_messageMain != '\0')) {
+      if ((temp_v6 != 0x51) && (g_messageMain.enabled != 0)) {
         temp_v6 = 7;
         FUN_002c1658(7,2);
         if (temp_v6 != 0) {

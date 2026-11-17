@@ -1,6 +1,7 @@
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gfx/ObjectRegistry.h"
+#include "gamedata/GamePlayerData.h"
 
 /* A model of the map scene: its controller object is at +4. */
 struct SceneModel {
@@ -29,17 +30,9 @@ struct DataTableEntry {
     /* 0x02 */ s16 value;
 };
 
-struct PlayerData {
-    /* 0x00 */ u16 areaKeyA;
-    /* 0x02 */ u8 unk02[6];
-    /* 0x08 */ u16 areaKeyB;
-};
-
 extern "C" {
 extern SceneModels *g_lmapScene;
 extern ObjectRegistry *g_handleRegistry;
-
-PlayerData *gameGetPlayerData(void);
 s32 dataTable2EType0Count(void);
 s32 dataTable2EType1Count(void);
 DataTableEntry *dataTable2EType0GetEntry(s32 index);
@@ -66,17 +59,17 @@ static __inline void resetSceneAreaSelection(SceneModels *scene)
 /* Sets up the map scene's models for the player's current area. */
 extern "C" void FUN_002d8ef8(void)
 {
-    PlayerData *player = gameGetPlayerData();
+    PlayerDataA *player = gameGetPlayerData();
     for (s32 i = 0; i < dataTable2EType0Count(); i++) {
         DataTableEntry *entry = dataTable2EType0GetEntry(i);
-        if (entry->key == player->areaKeyA) {
-            g_gameState.areaTypeA = g_gameState.areaTypeOverrideA == -1 ? entry->value : g_gameState.areaTypeOverrideA;
+        if (entry->key == player->equipped.weapon) {
+            g_gameState.stage = g_gameState.stageOverride == -1 ? entry->value : g_gameState.stageOverride;
             break;
         }
     }
-    s32 areaType = g_gameState.areaTypeOverrideA;
+    s32 areaType = g_gameState.stageOverride;
     if (areaType == -1) {
-        areaType = g_gameState.areaTypeA;
+        areaType = g_gameState.stage;
     }
     switch (areaType) {
     case 0:
@@ -108,12 +101,12 @@ extern "C" void FUN_002d8ef8(void)
     controllerSetPosition(registerModel(g_lmapScene->model18C), 1.0f, 1.0f, 1.0f);
     for (s32 i = 0; i < dataTable2EType1Count(); i++) {
         DataTableEntry *entry = dataTable2EType1GetEntry(i);
-        if (entry->key == player->areaKeyB) {
-            s32 areaTypeOverride = g_gameState.areaTypeOverrideB;
+        if (entry->key == player->equipped.body) {
+            s32 areaTypeOverride = g_gameState.groupOverride;
             if (areaTypeOverride == -1) {
-                g_gameState.areaTypeB = entry->value;
+                g_gameState.stageGroup = entry->value;
             } else {
-                g_gameState.areaTypeB = areaTypeOverride;
+                g_gameState.stageGroup = areaTypeOverride;
             }
             break;
         }

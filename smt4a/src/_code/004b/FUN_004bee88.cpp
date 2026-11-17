@@ -1,11 +1,11 @@
 /* NON_MATCHING: register assignment differs (retail keeps y in r6 and the unit in r5; built swaps them) and the notice text buffer frame is 8 bytes larger (200 vs 185 rows); the partner screen drawing is the same. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 
 extern "C" {
-
 /* A party unit record (only the flags are read here). */
 typedef struct PartnerUnitView {
     /* 0x000 */ u8 unk000[0x130];
@@ -27,7 +27,6 @@ typedef struct PartnerLayout {
     /* 0x0C */ s16 *size;               /* width, height */
 } PartnerLayout;
 
-extern RenderCtxA *g_renderCtx;
 
 s32 renderCtxPackPassFlags(s32 a, s32 b);
 PartnerUnitView *partyGetSlot(u16 index);

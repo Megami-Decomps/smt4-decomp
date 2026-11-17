@@ -1,9 +1,9 @@
 /* NON_MATCHING: caption VFP/load scheduling and cached-state push/pop register allocation differ. */
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 #include "text/TextDraw.h"
 
 extern "C" {
-extern RenderCtxA* g_renderCtx;
 extern const void* g_tmnlEntries;
 extern const u8 DAT_0056df38[][60];
 u32 renderCtxPackPassFlags(u32 mode, u32 options);

@@ -1,11 +1,11 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 37 diff lines remain, scheduling/register allocation only. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_FadeQuad.h"
 #include "shard/JobWork.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 u32 renderCtxPackPassFlags(u32 state, u32 flags);
 u32 asdGxPresetsGetByKind(u32 target);
 u32 asdGxPresetsGetHeightByKind(u32 target);

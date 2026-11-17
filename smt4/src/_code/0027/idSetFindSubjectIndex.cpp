@@ -1,6 +1,7 @@
 /* NON_MATCHING: IDENTICAL with unit cflags `--fpu=softvfp` (default flags otherwise); under the default VFP build only the entry pointer and the reloaded member id swap r1/r2 (retail: entry r2, id r1). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 struct ListedMember {
     u8 unk00[0x62]; // 0x00
@@ -8,7 +9,6 @@ struct ListedMember {
 };
 
 extern "C" {
-BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, s32 id);
 
 // Returns a listed member's position within its combatant entry, or -1 when absent.
 s32 idSetFindSubjectIndex(BtlMainState* state, const ListedMember* member)

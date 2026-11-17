@@ -4,11 +4,10 @@
 #include "romwright_types.h"
 #include "battle/btlReflect.h"
 #include "battle/BattleHelpers_VariantB.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-int btlFindEntryBlockByMemberId(...);
-int btlMainFindEntryByListedId(int, int);
 
 int btlAdjustPropertyClamped(int, int, int, int);
 int btlQueueActionMessage(...);
@@ -58,7 +57,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
   temp_v1 = (short)param_1 + (short)param_10;
   if (-1 < param_10) {
     temp_v2 = reinterpret_cast<int>(btlGetMainState());
-    btlMainFindEntryByListedId(temp_v2,(int)*(short *)(param_4 + 0x6a));
+    btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(temp_v2), (int)*(short *)(param_4 + 0x6a));
     if (((temp_v0) && (temp_v2 != 0)) && (-1 < param_12)) {
       temp_v4 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,(int)temp_v1,0,param_2));
       *(unsigned char *)(temp_v4 + 4) = 7;
@@ -134,7 +133,7 @@ LAB_004fbabc:
     temp_v0 = *(short *)(param_4 + 0x6a) < 0x6d;
     if (temp_v0) {
       temp_v2 = reinterpret_cast<int>(btlGetMainState());
-      btlFindEntryBlockByMemberId(temp_v2,(int)*(short *)(param_4 + 0x6a));
+      btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainStateA *>(temp_v2), (int)*(short *)(param_4 + 0x6a));
       if (temp_v2 != 0) {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x110);
       }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: record and requiredBits trade r5/r6 (register allocation only). */
 #include "common.h"
 #include "gamedata/DataTableAccess.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
@@ -13,12 +14,6 @@ typedef struct ShopRecord {
     /* 0x32 */ u16 requiredBits[3]; // bits in the area data block
 } ShopRecord;
 
-typedef struct PlayerLevelData {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 level;
-} PlayerLevelData;
-
-PlayerLevelData *gameGetPlayerData(void);
 s32 gameFlagIsSet(u16 flag);
 u8 *gameDataBlockGetArea2D68(void);
 u32 FUN_002e5c2c(void);

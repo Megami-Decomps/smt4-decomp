@@ -1,13 +1,12 @@
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
-extern LmapSceneA *g_lmapScene;
 f32 mathAngleDeltaDegrees(f32 current, f32 target);
 
 // Ease the scene heading toward its saved target, with a minimum five-degree step.
 void mapEaseSceneHeading()
 {
-    f32 delta = mathAngleDeltaDegrees(g_lmapScene->transform.headingDegrees, g_lmapScene->transform.headingCopy);
+    f32 delta = mathAngleDeltaDegrees(g_lmapScene->pose.heading, g_lmapScene->pose.targetHeading);
     f32 distance = delta;
     if (distance < 0.0f)
         distance = -distance;
@@ -17,15 +16,15 @@ void mapEaseSceneHeading()
         step = 5.0f;
     f32 heading;
     if (distance <= step)
-        heading = g_lmapScene->transform.headingCopy;
+        heading = g_lmapScene->pose.targetHeading;
     else if (delta < 0.0f)
-        heading = g_lmapScene->transform.headingDegrees - step;
+        heading = g_lmapScene->pose.heading - step;
     else
-        heading = g_lmapScene->transform.headingDegrees + step;
+        heading = g_lmapScene->pose.heading + step;
     if (heading < 0.0f)
         heading += 360.0f;
     if (heading > 360.0f)
         heading -= 360.0f;
-    g_lmapScene->transform.headingDegrees = heading;
+    g_lmapScene->pose.heading = heading;
 }
 }

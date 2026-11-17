@@ -3,12 +3,7 @@
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "gamedata/EquipmentRecordA.h"
-
-struct PanelPlayerData {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u16 firstSkill;
-    /* 0x04 */ u16 secondSkill;
-};
+#include "gamedata/GamePlayerData.h"
 
 /* The button help block (g_buttonHelp) the panel is drawn through. */
 struct PanelBlock {
@@ -26,8 +21,6 @@ struct PanelButtonHelp {
 
 extern "C" {
 extern PanelButtonHelp g_buttonHelp;
-
-PanelPlayerData *gameGetPlayerData(void);
 void FUN_002c0940(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002ad414(s32 a, s32 b, s32 c, char *text);

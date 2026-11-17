@@ -1,12 +1,12 @@
-#include "shard/W6_W6Match5_SecondarySort.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" s32 recordCompareKindAndOrder(const u16 *, const u16 *);
 
 // Compare descending secondary-table keys, then use the fallback ID ordering.
 extern "C" s32 FUN_002f2798(const u16 *firstId, const u16 *secondId)
 {
-    SecondarySortRecord *first = dataTable1bOr1cGetRecord(*firstId);
-    SecondarySortRecord *second = dataTable1bOr1cGetRecord(*secondId);
+    QuestRecord *first = dataTable1bOr1cGetRecord(*firstId);
+    QuestRecord *second = dataTable1bOr1cGetRecord(*secondId);
     if (first == NULL)
         return 0;
     if (second == NULL)

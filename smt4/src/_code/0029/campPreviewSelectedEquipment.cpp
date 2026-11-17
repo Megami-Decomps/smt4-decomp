@@ -1,13 +1,12 @@
-#include "gamedata/PlayerInitialization.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 extern void *g_camp;
-PlayerInitialRecordIV *gameGetPlayerData();
 u32 resourceRunOperationIfUnblocked(const void *selector);
 u32 listCursorGetRowIfUnblocked(const void *selector);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void playerRecalcStatsFromEquipment(PlayerInitialRecordIV *player);
-void FUN_0029a0cc(PlayerInitialRecordIV *player);
+void playerRecalcStatsFromEquipment(PlayerDataIV *player);
+void FUN_0029a0cc(PlayerDataIV *player);
 void FUN_0029c4ac(s32 mode);
 
 void campPreviewSelectedEquipment(s32 category)
@@ -26,7 +25,7 @@ void campPreviewSelectedEquipment(s32 category)
         u16 accessories[120];
     };
     EquipmentMenuView *camp = static_cast<EquipmentMenuView *>(g_camp);
-    PlayerInitialRecordIV *player = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
     const void *selector = NULL;
     const u16 *choices = NULL;
     if (category == 17) { selector = camp->selectors[0]; choices = camp->melee; }
@@ -38,7 +37,7 @@ void campPreviewSelectedEquipment(s32 category)
     else if (category == 23) { selector = camp->selectors[6]; choices = camp->accessories; }
     u32 selected = resourceRunOperationIfUnblocked(selector);
     selected += listCursorGetRowIfUnblocked(selector);
-    PlayerInitialRecordIV preview;
+    PlayerDataIV preview;
     __aeabi_memcpy4(&preview, player, sizeof(preview));
     if (category == 17) preview.equipment[0] = choices[selected];
     else if (category == 18) preview.equipment[1] = choices[selected];

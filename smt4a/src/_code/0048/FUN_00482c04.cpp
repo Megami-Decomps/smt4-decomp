@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the nearest-talk-target selection; retail keeps the best distance and id in s/r registers across the dispatch with the sphere test inlined as vsqrt and merges the three pickup branches' common stores, which armcc here schedules differently. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "map/LmapGlobals.h"
 #include <math.h>
 
 /* A talk/pickup target of the map scene (only the fields this reads). */
@@ -68,10 +69,10 @@ u32 FUN_00482c04(TalkTargetSet *set)
         TalkTarget *target = set->targets[i];
         if (target == NULL || !(target->flags & 1) || (target->flags & 4) || !(target->flags & 0x10))
             continue;
-        f32 dx = target->x - g_lmapScene->position.x;
-        f32 dy = target->y - g_lmapScene->position.y;
-        f32 dz = target->z - g_lmapScene->position.z;
-        if (g_lmapScene->position.y > target->y + 5.0f)
+        f32 dx = target->x - g_lmapScene->pose.position.x;
+        f32 dy = target->y - g_lmapScene->pose.position.y;
+        f32 dz = target->z - g_lmapScene->pose.position.z;
+        if (g_lmapScene->pose.position.y > target->y + 5.0f)
             continue;
         s32 distance = (s32)sqrtf(dx * dx + dy * dy + dz * dz);
         if (distance >= 150 || distance >= bestDistance)

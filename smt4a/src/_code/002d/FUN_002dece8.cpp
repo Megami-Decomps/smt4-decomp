@@ -1,5 +1,6 @@
 /* NON_MATCHING: same logic as the other render-state push/pop users; the inlined renderStackPush/Pop helpers schedule their index arithmetic differently and the effect null checks branch differently */
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/JobWork.h"
 #include "code/Code0038.h"
 
@@ -26,7 +27,6 @@ struct BtlEffectGlobals {
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
-extern RenderCtxA *g_renderCtx;
 
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

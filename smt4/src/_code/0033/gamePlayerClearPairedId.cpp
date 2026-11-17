@@ -1,15 +1,14 @@
-#include "shard/W6_W6Match5_PairedIdFlags.h"
 
-extern "C" PairedIdList *gameGetPlayerData(void);
 
-// Clear the first matching player-data ID and its per-entry flag.
+// Removes skill `id` (and its rank) from the player.
+#include "gamedata/GamePlayerData.h"
 extern "C" void gamePlayerClearPairedId(u32 id)
 {
-    PairedIdFlagsView *player = reinterpret_cast<PairedIdFlagsView *>(gameGetPlayerData());
+    PlayerDataIV *player = gameGetPlayerData();
     for (s32 i = 0; i < 8; ++i) {
-        if (player->paired.ids[i] == id) {
-            player->paired.ids[i] = 0;
-            player->flags[i] = 0;
+        if (player->skills[i] == id) {
+            player->skills[i] = 0;
+            player->skillRanks[i] = 0;
             return;
         }
     }

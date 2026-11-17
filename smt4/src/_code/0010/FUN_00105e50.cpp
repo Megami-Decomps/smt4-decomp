@@ -1,13 +1,10 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-
-extern GxRatePresets g_asdGxPresets;
-
-/* Converts the frame interval to the graphics timing preset. */
+/* Sets the frame interval and the frame time it gives (59.831 Hz refresh). */
 void FUN_00105e50(s32 interval)
 {
-    g_asdGxPresets.depth = 1000000.0f / (59.83100128173828f / (interval + 1));
+    g_asdGxPresets.frameTime = 1000000.0f / (59.83100128173828f / (interval + 1));
     g_asdGxPresets.interval = interval;
 }
 

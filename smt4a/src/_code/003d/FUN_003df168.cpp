@@ -1,8 +1,9 @@
 /* NON_MATCHING: identical instruction sequence to retail except for register numbering (retail keeps the result in r6, the reward record in r7 and the loop counter in r1; the build uses r8/r6/r2 and reorders the parameter moves). */
 #include "gamedata/DataTable.h"
+#include "quest_center/QuestRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
-#include "gamedata/PlayerDataBlock.h"
 #include "addon/AocSystemA.h"
+#include "gamedata/GamePlayerData.h"
 
 // One roll slot of a drop table entry: the item and its weight.
 struct DropSlot {
@@ -22,22 +23,6 @@ struct AocDropEntry {
     DropEntry body;  // 0x04
 };
 
-// The reward an encounter grants.
-struct RewardRecord {
-    u16 kind;      // 1: one item, 3: money, 4: rolls on a drop table
-    u16 id;        // item id, or the drop table entry
-    u32 count;     // amount, or number of rolls
-    u8 unk08[2];
-    u16 percent;   // share of the level-scaled value, 0: use `base`
-    u32 base;
-};
-
-// An encounter record; its reward starts at 0xf0.
-struct EncounterRecord {
-    u8 unk00[0xf0];
-    RewardRecord reward;
-};
-
 // What a reward roll produced.
 struct RewardResult {
     u32 items[6];   // 0x00
@@ -47,17 +32,11 @@ struct RewardResult {
     s16 source;     // 0x38 the encounter index the reward came from
 };
 
-struct PlayerLevelView {
-    u8 unk00[0x62];
-    u16 level;
-};
-
 extern "C" {
 
 s32 randRange(u16 maximum);
 u32 gameGetUnlockedCountLimit(void);
 u32 levelGetExpRequirement(u32 level);
-EncounterRecord *dataTable1bOr1cGetRecord(s32 index);
 
 // The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
 static __inline DropEntry *findDropEntry(u16 id)
@@ -79,12 +58,12 @@ static __inline DropEntry *findDropEntry(u16 id)
 // Rolls the reward of encounter `index` into `result`.
 void FUN_003df168(RewardResult *result, s32 index)
 {
-    EncounterRecord *encounter = dataTable1bOr1cGetRecord(index);
+    QuestRecordA *encounter = dataTable1bOr1cGetRecord(index);
     if (encounter == NULL) {
         return;
     }
     gameFlagBlockGetEntry(index);
-    RewardRecord *record = &encounter->reward;
+    QuestRewardA *record = &encounter->reward;
     if (record->kind == 1) {
         result->items[0] = record->id;
         result->counts[0] = record->count;
@@ -120,7 +99,7 @@ void FUN_003df168(RewardResult *result, s32 index)
     if (record->percent == 0) {
         result->value = record->base;
     } else {
-        PlayerLevelView *player = reinterpret_cast<PlayerLevelView *>(gameGetPlayerData());
+        PlayerDataA *player = gameGetPlayerData();
         u32 scaled;
         if (gameGetUnlockedCountLimit() > player->level) {
             scaled = levelGetExpRequirement(player->level);

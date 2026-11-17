@@ -2,8 +2,8 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "script/ScriptArgs.h"
+#include "gamedata/UnitRecordAccess.h"
 extern "C" {
-GameUnitSortRecord* gameGetUnitRecord(s32);
 PartyDamageSlotsIV* gameGetSlotTable(void);
 
 // Publishes the demon ID of the selected party slot or selected list entry.
@@ -11,7 +11,7 @@ u32 FUN_00311154(void)
 {
     PartyPanelState *owner = g_partyPanel;
     if (owner != NULL) {
-        GameUnitSortRecord* record;
+        StatBlock* record;
         if (owner->partySlot > 0) {
             if (gameGetSlotTable()->active[owner->partySlot - 1] < 0) {
                 return 1;

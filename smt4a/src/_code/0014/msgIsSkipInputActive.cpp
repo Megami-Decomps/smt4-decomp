@@ -1,4 +1,4 @@
-#include "ui/MessageMain.h"
+#include "ui/MessageMainA.h"
 
 struct InputBlockState {
     /* 0x00 */ u8 unk00[0xd];
@@ -6,7 +6,6 @@ struct InputBlockState {
 };
 
 extern "C" {
-extern MessageGlobalsA g_messageMain;
 extern InputBlockState DAT_005e2040;
 s32 padQueryLogicalKey(u32 input, u32 mode);
 
@@ -18,7 +17,7 @@ u32 msgIsSkipInputActive(u32 box)
         padQueryLogicalKey(10, 2) != 0 || DAT_005e2040.blocked) {
         return 1;
     }
-    if (g_messageMain.state->box == box && g_messageMain.state->unk19E8 == 1 &&
+    if (g_messageMain.window->box == box && g_messageMain.window->unk19E8 == 1 &&
         padQueryLogicalKey(1, 1) != 0) {
         return 1;
     }

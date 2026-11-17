@@ -2,10 +2,10 @@
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
 void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skills);
 s32 randRange(u32 range);
 

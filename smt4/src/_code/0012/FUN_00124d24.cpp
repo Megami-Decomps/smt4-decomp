@@ -10,7 +10,6 @@ struct TitlePartInfo {
 };
 
 extern "C" {
-extern MessageGlobals g_messageMain;
 extern RenderCtx *g_titleScene;
 s32 gameFlagIsSet(u32 flag);
 s32 vec2GetXInt(void *vec);
@@ -30,12 +29,12 @@ s32 renderCtxPopState(RenderCtx *context, s32 stack);
 void FUN_00124d24(s32 wide)
 {
     if (gameFlagIsSet(0x402)) {
-        s32 x = vec2GetXInt(g_messageMain.banner->widget754);
-        s32 y = vec2GetYInt(g_messageMain.banner->widget754);
-        f32 speed = vec2GetSpeed(g_messageMain.banner->widget754);
-        if (g_messageMain.banner->unk82 > 0) {
-            x += vec2GetXInt(g_messageMain.banner->widget7E0);
-            y += vec2GetYInt(g_messageMain.banner->widget7E0);
+        s32 x = vec2GetXInt(&g_messageMain.banner->sprites[12]);
+        s32 y = vec2GetYInt(&g_messageMain.banner->sprites[12]);
+        f32 speed = vec2GetSpeed(&g_messageMain.banner->sprites[12]);
+        if (g_messageMain.banner->transition > 0) {
+            x += vec2GetXInt(&g_messageMain.banner->sprites[13]);
+            y += vec2GetYInt(&g_messageMain.banner->sprites[13]);
         }
         renderStackPushIndexed(g_titleScene, 3, renderCtxPackPassFlags(1, 0));
         efctSetSpeed(speed);
@@ -49,25 +48,25 @@ void FUN_00124d24(s32 wide)
             part = asdTMTexTableEntryAt(14, 192);
         }
         texDrawCompositeSprite(2, 14, 0, part->x + x, part->y + y, 11);
-        FUN_002bdce0(g_messageMain.banner->unk6C, part->x + x, part->y + y, 0);
+        FUN_002bdce0(g_messageMain.banner->counterValue, part->x + x, part->y + y, 0);
 
-        if (g_messageMain.banner->unk80) {
+        if (g_messageMain.banner->unk080) {
             if (wide)
                 part = asdTMTexTableEntryAt(14, 256);
             else
                 part = asdTMTexTableEntryAt(14, 287);
             texDrawCompositeSprite(2, 14, 12, part->x + x, part->y + y, 11);
-            FUN_002bdce0(g_messageMain.banner->unk74, part->x + x, part->y + y, 1);
+            FUN_002bdce0(g_messageMain.banner->counterElapsed, part->x + x, part->y + y, 1);
         }
 
-        MessagePanel *banner = g_messageMain.banner;
-        if (banner->unkA1) {
-            s32 bx = vec2GetXInt(banner->widget754);
-            s32 by = vec2GetYInt(banner->widget754);
+        MessageWindow *banner = g_messageMain.banner;
+        if (banner->unk0A1) {
+            s32 bx = vec2GetXInt(&banner->sprites[12]);
+            s32 by = vec2GetYInt(&banner->sprites[12]);
             s32 px = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f) + bx);
             part = asdTMTexTableEntryAt(14, 256);
             texDrawCompositeSprite(2, 14, 22, part->x + px, part->y + by, 11);
-            FUN_002bdce0(-banner->unk9C, part->x + px, part->y + by, 1);
+            FUN_002bdce0(-banner->unk09C, part->x + px, part->y + by, 1);
         }
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();

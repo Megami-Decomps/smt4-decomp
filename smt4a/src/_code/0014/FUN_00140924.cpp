@@ -1,8 +1,7 @@
 /* NON_MATCHING: recovered incoming fade frames and canonical sound owner; search-match and stop-flag branch block placement still differs. */
-#include "sound/SoundHandlePlayback.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
-extern SoundHandlePlaybackStateA g_asdSoundSystem;
 void asdSoundObjectStop(s32 handle, s32 frames);
 s32 FUN_0016003c(s32 handle);
 
@@ -10,9 +9,9 @@ s32 FUN_0016003c(s32 handle);
 u32 FUN_00140924(s32 id, s32 frames)
 {
     u32 retired = 0;
-    SoundHandlePlaybackStateA *system = &g_asdSoundSystem;
-    AsdSndHandleNode *node = system->handles;
-    for (s32 i = 0; i < system->count; ++i) {
+    AsdSoundSystemA *system = &g_asdSoundSystem;
+    AsdSndHandleNode *node = system->registered.handles;
+    for (s32 i = 0; i < system->registered.count; ++i) {
         if (node == NULL) {
             break;
         }

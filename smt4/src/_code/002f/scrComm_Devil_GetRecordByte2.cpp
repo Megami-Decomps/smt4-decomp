@@ -1,20 +1,15 @@
 #include "common.h"
-
-struct DevilRecordBytes {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 value;
-};
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
 
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-DevilRecordBytes *devilGetRecord(u16 id);
 
-/* Script command: returns the byte at offset 2 of the devil record with the given id. */
+/* Script command: returns the race of the devil record with the given id. */
 u32 scrComm_Devil_GetRecordByte2(void)
 {
-    scrSetResult(devilGetRecord(scrGetArg(0))->value);
+    scrSetResult(devilGetRecord((u16)scrGetArg(0))->race);
     return 1;
 }
 

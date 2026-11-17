@@ -22,9 +22,9 @@ void FUN_00139b6c(void)
     FlagsBlock *flags = reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock());
     s32 i;
 
-    g_gameState.ticks = g_gameState.ticks + 1;
-    if (g_gameState.ticks > TIMER_PERIOD) {
-        g_gameState.ticks = 0;
+    g_gameState.tick = g_gameState.tick + 1;
+    if (g_gameState.tick > TIMER_PERIOD) {
+        g_gameState.tick = 0;
         for (i = 0; i < 64; i++) {
             if (flags->timersA[i] != 0 && flags->timersA[i] != 255) {
                 flags->timersA[i]--;

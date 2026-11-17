@@ -75,14 +75,14 @@ u32 FUN_0033be90(const SkillSet *current, s32 slot, u16 devilId)
     u16 known[16];
     *(SkillSet *)known = *current;
     const DevilRecord *devil = (const DevilRecord *)devilGetRecord(devilId);
-    known[8] = devil->learnedSkills.entries[0].id;
-    known[9] = devil->learnedSkills.entries[1].id;
-    known[10] = devil->learnedSkills.entries[2].id;
-    known[11] = devil->learnedSkills.entries[3].id;
-    known[12] = devil->learnedSkills.entries[4].id;
-    known[13] = devil->learnedSkills.entries[5].id;
-    known[14] = devil->learnedSkills.entries[6].id;
-    known[15] = devil->learnedSkills.entries[7].id;
+    known[8] = devil->learnedSkills[0].id;
+    known[9] = devil->learnedSkills[1].id;
+    known[10] = devil->learnedSkills[2].id;
+    known[11] = devil->learnedSkills[3].id;
+    known[12] = devil->learnedSkills[4].id;
+    known[13] = devil->learnedSkills[5].id;
+    known[14] = devil->learnedSkills[6].id;
+    known[15] = devil->learnedSkills[7].id;
 
     s32 candidates = 0;
     for (u16 id = 1; id <= 500; id++) {

@@ -1,9 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
 
 extern "C" {
-
-extern RenderCtxA *g_renderCtx;
 extern QuadVectorState DAT_006306f8;
 void gfxDrawQuadFourColors(const QuadVector *first, const QuadVector *second, const QuadVector *third,
                   const QuadVector *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);

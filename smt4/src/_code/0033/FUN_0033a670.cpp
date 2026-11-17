@@ -1,12 +1,12 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/Shard0031.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 void unitStateClearEventBits(u16 *flags);
 SlotTable *gameGetSlotTable();
-BtlEquip *gameGetUnitRecord(s32 index);
 
 // Clear transient event state, retaining KO state and its zero-HP consequence.
 void FUN_0033a670(BtlMainState *battle)
@@ -39,9 +39,9 @@ void FUN_0033a670(BtlMainState *battle)
     PartyCountView *party = reinterpret_cast<PartyCountView *>(gameGetSlotTable());
     for (s32 index = -1; index < party->count; ++index) {
         if (index < 0) {
-            unitStateClearEventBits(&reinterpret_cast<PlayerEventView *>(gameGetPlayerData())->flags);
+            unitStateClearEventBits(&gameGetPlayerData()->ailments);
         } else {
-            BtlEquip *unit = gameGetUnitRecord(index);
+            BtlEquip *unit = reinterpret_cast<BtlEquip *>(gameGetUnitRecord(index));  /* battle code views unit records as BtlEquip */
             if (unit != NULL)
                 unitStateClearEventBits(&reinterpret_cast<DemonEventView *>(unit)->flags);
         }

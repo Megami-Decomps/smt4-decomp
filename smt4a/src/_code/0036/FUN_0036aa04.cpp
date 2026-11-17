@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (222 vs 195 rows); the state-3 call arguments and the compare constants (fade > 0.1f) are inferred; retail shares the visibility updates differently */
 #include "common.h"
+#include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 
 // Controller node: its hidden bits live in the word at +4.
@@ -11,10 +12,6 @@ struct ControllerNode {
 struct ControllerHandle {
     u32 unk00;
     ControllerNode* node;   // 0x04
-};
-
-struct Vec3f {
-    f32 x, y, z;
 };
 
 // Party follower display: three controller handles and the follow state machine.
@@ -34,11 +31,6 @@ struct FollowerDisplay {
     u8 flag93ca;                // 0x93ca
 };
 
-struct LmapScene {
-    u8 unk00[0x1c];
-    Vec3f position;             // 0x1c
-};
-
 struct GameFlagsBlock {
     u8 unk0000[0xdf4];
     s32 pending;                // 0xdf4
@@ -48,7 +40,6 @@ struct GameFlagsBlock {
 
 extern "C" {
 
-extern LmapScene* g_lmapScene;
 
 GameFlagsBlock* gameFlagsGetBlock(void);
 void controllerSetDestination(ControllerNode* node, const void* destination);
@@ -72,7 +63,7 @@ void FUN_0036aa04(FollowerDisplay* display)
     ControllerNode* mid = display->mid->node;
     ControllerNode* far = display->far->node;
     ControllerNode* near = display->near->node;
-    if (g_gameState.departLoading != 0) {
+    if (g_gameState.loading != 0) {
         near->flags |= kHiddenBits;
         mid->flags |= kHiddenBits;
         far->flags |= kHiddenBits;
@@ -91,7 +82,7 @@ void FUN_0036aa04(FollowerDisplay* display)
         mid->flags |= kHiddenBits;
         setFadeVisibility(far, display->fade);
     }
-    controllerSetDestination(near, &g_lmapScene->position);
+    controllerSetDestination(near, &g_lmapScene->pose.position);
     controllerSetPosition(near);
     if (slots4FGetActiveValue(near) != 0) modelPlayClip(near, 0, 2);
 
@@ -103,8 +94,8 @@ void FUN_0036aa04(FollowerDisplay* display)
         return;
     }
     setFadeVisibility(far, display->fade);
-    Vec3f target = g_lmapScene->position;
-    target.y = g_lmapScene->position.y + 20.0f;
+    MapVector target = g_lmapScene->pose.position;
+    target.y = g_lmapScene->pose.position.y + 20.0f;
     controllerSetDestination(far, &target);
     controllerSetPosition(far);
     s32 state = block->followState;

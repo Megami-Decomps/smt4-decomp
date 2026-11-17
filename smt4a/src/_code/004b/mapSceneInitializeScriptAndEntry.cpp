@@ -72,7 +72,7 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
     }
     work->entryKind = 0;
     bgmReleaseStopped();
-    if (g_gameState.transitionActive != 0) {
+    if (g_gameState.savedLocationSet != 0) {
         if (special) {
             switch (gameDataTableGetFlag()) {
             case 0:
@@ -107,7 +107,7 @@ void mapSceneInitializeScriptAndEntry(SceneStartWork *work)
     g_gameState.retainCampResources = 0;
     g_gameState.mapId = mode + 200;
     g_gameState.resumeMode = 3;
-    g_gameState.transitionActive = 0;
+    g_gameState.savedLocationSet = 0;
     mapPlaceSet(-1, -1, 0xffffffff);
     if (mode == 3 || mode == 4) {
         bgm = 0x0100004A;

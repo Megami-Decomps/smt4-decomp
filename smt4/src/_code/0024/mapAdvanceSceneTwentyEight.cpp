@@ -1,8 +1,7 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 extern "C" {
-struct LocalMapScene { u32 unk00; u32 state; };
 extern void *g_mapMain;
-extern LocalMapScene *g_lmapScene;
 u32 lmapSceneGetUnk0(void);
 void FUN_002d5374(u32 value);
 void FUN_002712dc(void);

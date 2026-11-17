@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleUnitSlot.h"
 #include <string.h>
+#include "battle/BtlGlobals.h"
 
 // Effect request handed to the battle effect queue (32 bytes). It first carries the
 // effect set's name, then is reused for one request per matching effect slot.
@@ -54,7 +55,6 @@ void FUN_00245420(s32 slot, u32 unit, void* entry, u32 effect);
 void FUN_002454c4(BattleEffectState* state, EffectRequest* request, s32 a, s32 b);
 s32 FUN_0024550c(void);
 void FUN_00282820(s32 value, u32 user, s32 target, s32 targetCopy);
-u32* btlMainFindEntryByListedId(BattleMain* main, s32 id);
 s32 scrGetArg(s32 index);
 s32 libc_strlen(const char* s);
 s32 FUN_0027e3b8(u32 event);
@@ -101,7 +101,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
             switch (type) {
             case 0: case 1: case 2: case 3: case 4: case 5: case 0xc: {
                 u32* found = NULL;
-                if (type == 0xc && request.target >= 0) found = btlMainFindEntryByListedId(current, request.target);
+                if (type == 0xc && request.target >= 0) found = reinterpret_cast<u32 *>(btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(current), request.target));
                 if (type != 0xc || request.target < 0 || found == NULL || (*found & 2) != 0) {
                     request.name = effect->name;
                     request.mode = 6;

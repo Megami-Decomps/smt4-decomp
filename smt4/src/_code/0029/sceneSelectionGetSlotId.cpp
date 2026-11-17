@@ -1,5 +1,6 @@
 #include "common.h"
 #include "status/StatusCamera.h"
+#include "gamedata/UnitRecordAccess.h"
 
 namespace {
 struct SceneSelection {
@@ -19,15 +20,10 @@ struct SceneContext {
     /* 0x1C */ SceneSelection selection;
 };
 
-struct UnitRecordView {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 id;
-};
 }
 
 extern "C" {
 
-UnitRecordView *gameGetUnitRecord(s32 unit);
 
 /* The id selected in a scene slot, or -1 when that slot is empty; slots 0 and 13 hold units. */
 s32 sceneSelectionGetSlotId(u32 slot)

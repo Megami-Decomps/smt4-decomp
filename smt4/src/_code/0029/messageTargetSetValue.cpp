@@ -1,16 +1,15 @@
 #include "ui/MessageMain.h"
 
 extern "C" {
-extern MessageGlobals g_messageMain;
 
 u32 messageTargetSetValue(u32 value, u8 flag)
 {
-    MessagePanel *target = g_messageMain.banner;
+    MessageWindow *target = g_messageMain.banner;
 
-    target->unk81 = flag;
-    target->unk70 = value;
-    target->unk74 = value;
-    target->unk80 = 1;
+    target->unk081 = flag;
+    target->counterDelta = value;
+    target->counterElapsed = value;
+    target->unk080 = 1;
     return 1;
 }
 

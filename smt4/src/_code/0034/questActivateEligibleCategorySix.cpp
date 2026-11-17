@@ -1,10 +1,10 @@
 #include "quest_center/QuestRuntime.h"
+#include "quest_center/QuestRecord.h"
 #include "shard/GameDataBlocks.h"
 
 extern "C" {
 GameSaveBody *gameDataBlocksGetSaveData(void);
 u32 questReadRuntimeFlag(u32 questId, u32 selector);
-const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 questId);
 s32 questRequirementsMet(u32 questId);
 QuestRuntimeFlagBlock *gameGetFlagBlock(void);
 s32 table1bOr1cGetRecordValue(u32 questId);
@@ -18,7 +18,7 @@ u32 questActivateEligibleCategorySix(void)
     u32 changed = 0;
     for (s32 index = 0; index < 400; ++index) {
         if (!questReadRuntimeFlag(static_cast<u16>(index), 0)) {
-            const QuestRuntimeDefinition *definition = dataTable1bOr1cGetRecord(static_cast<u16>(index));
+            const QuestRecord *definition = dataTable1bOr1cGetRecord(static_cast<u16>(index));
             if (definition && definition->kind == 6 && !(definition->flags & 1) &&
                 questRequirementsMet(static_cast<u16>(index))) {
                 u16 questId = static_cast<u16>(index);

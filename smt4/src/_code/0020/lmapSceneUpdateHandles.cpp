@@ -1,26 +1,26 @@
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
-void asdMdlManagerMarkDestroy(u32 handle);
+void asdMdlManagerMarkDestroy(AsdMdlObject *model);
 void FUN_00335144(LmapScript *script);
 
-extern LmapScene *g_lmapScene;
 
 void lmapSceneUpdateHandles(void)
 {
-    FUN_00335144(g_lmapScene->script);
-    if (g_lmapScene->handleA != 0) {
-        asdMdlManagerMarkDestroy(g_lmapScene->handleA);
+    FUN_00335144(g_lmapScene->playerModel);
+    if (g_lmapScene->stageModel != NULL) {
+        asdMdlManagerMarkDestroy(g_lmapScene->stageModel);
     }
-    if (g_lmapScene->handleB != 0) {
-        asdMdlManagerMarkDestroy(g_lmapScene->handleB);
+    if (g_lmapScene->models[0] != NULL) {
+        asdMdlManagerMarkDestroy(g_lmapScene->models[0]);
     }
-    if (g_lmapScene->handleC != 0) {
-        asdMdlManagerMarkDestroy(g_lmapScene->handleC);
+    if (g_lmapScene->models[1] != NULL) {
+        asdMdlManagerMarkDestroy(g_lmapScene->models[1]);
     }
-    if (g_lmapScene->handleD != 0) {
-        asdMdlManagerMarkDestroy(g_lmapScene->handleD);
+    if (g_lmapScene->models[2] != NULL) {
+        asdMdlManagerMarkDestroy(g_lmapScene->models[2]);
     }
 }
 

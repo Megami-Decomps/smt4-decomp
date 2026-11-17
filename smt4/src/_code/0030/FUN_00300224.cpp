@@ -1,8 +1,8 @@
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 void FUN_00255180(u32 id, s32 kind, s32 value);
 
 /* Selects one of the actor's two special battle modes and queues its corresponding update. */

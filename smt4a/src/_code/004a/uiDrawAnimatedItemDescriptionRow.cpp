@@ -1,5 +1,6 @@
 /* NON_MATCHING: row-position base rebasing and VFP allocation differ from retail. */
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtxA.h"
 #include <stddef.h>
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -23,7 +24,6 @@ struct ItemRowContext {
 typedef char CheckItemRowSize[sizeof(ItemRowAnimation) == 0x8c ? 1 : -1];
 typedef char CheckItemRowOffset[offsetof(ItemRowContext, rows) == 0x128ac ? 1 : -1];
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern const char DAT_0052b4b4[];
 extern const char DAT_0052b4c4[];
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);

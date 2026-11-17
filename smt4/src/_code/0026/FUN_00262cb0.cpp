@@ -7,7 +7,7 @@ extern "C" u32 FUN_00262cb0(u32 value)
     PlayerDataIV *player = &g_gameDataBlocks.saveBlock->body.slots.player;
     s32 count = statusGetAvailableChoiceCount();
     for (s32 index = 0; index < count; ++index) {
-        if (player->skills[index] == value) {
+        if (player->skillChoices[index] == value) {
             return 1;
         }
     }

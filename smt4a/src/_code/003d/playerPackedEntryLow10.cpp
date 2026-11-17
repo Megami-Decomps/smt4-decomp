@@ -1,9 +1,8 @@
 #include "shard/Shard003D.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-extern PlayerData *gameGetPlayerData(void);
-extern void demonBuildAffinitySlots(u16 *table, PlayerData *player);
+extern void demonBuildAffinitySlots(u16 *table, PlayerDataA *player);
 
 /* Low 10 bits of entry `index` of the player's packed table. */
 u16 playerPackedEntryLow10(s32 index)

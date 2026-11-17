@@ -1,19 +1,14 @@
 #include "common.h"
+#include "quest_center/QuestRecord.h"
 
 extern "C" {
 
-typedef struct Record001e1794 {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 order;
-} Record001e1794;
-
-Record001e1794 *dataTable1bOr1cGetRecord(u32 id);
 u32 FUN_00298e00(u16 id);
 
 static inline s32 compareDevilRecordOrder(const u16 *first, const u16 *second)
 {
-    Record001e1794 *recA = dataTable1bOr1cGetRecord(*first);
-    Record001e1794 *recB = dataTable1bOr1cGetRecord(*second);
+    QuestRecord *recA = dataTable1bOr1cGetRecord(*first);
+    QuestRecord *recB = dataTable1bOr1cGetRecord(*second);
     s32 result = 0;
     if (recA != NULL && recB != NULL)
         result = recA->order - recB->order;

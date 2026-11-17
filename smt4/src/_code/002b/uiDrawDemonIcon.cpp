@@ -1,5 +1,6 @@
 /* NON_MATCHING: atlas-region address hoisting, top-field reload elimination and coordinate-store scheduling differ by three rows; -O2 may preserve the retail shape. */
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/Table00Lookup.h"
 #include "ui/UiControl.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -19,11 +20,6 @@ struct DemonIconRecord {
     u16 unk92;
 };
 
-struct DemonIconDefinition {
-    u16 id;
-    u8 unk02;
-    u8 flags;
-};
 
 struct DemonIconPartyUnit {
     union {
@@ -58,8 +54,8 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
     }
 
     const DemonIconRecord* record = (const DemonIconRecord*)devilGetRecord((u16)demon);
-    const DemonIconDefinition* definition = reinterpret_cast<const DemonIconDefinition*>(dataTable00FindById((u16)demon));
-    if ((definition->flags & 1) != 0) {
+    const Table00Record *definition = dataTable00FindById((u16)demon);
+    if ((definition->levelFlags & 1) != 0) {
         texDrawTableEntryAtStoredOrigin(2, 0x25, 2000, x, y, style);
         return;
     }

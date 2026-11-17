@@ -1,18 +1,13 @@
 /* NON_MATCHING: availability-loop addressing and floating-point accumulator scheduling differ. */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "gamedata/Table00Lookup.h"
 
 struct CompendiumUnit {
     u8 prefix[0x46];
     u16 id;
 };
-struct CompendiumAvailabilityRecord {
-    u8 prefix[6];
-    u16 flags;
-    u8 suffix[0x8C];
-};
 extern "C" {
-CompendiumAvailabilityRecord *devilGetRecord(u32);
 s32 bitsetTestBit(const CompendiumUnit *, s32);
 s32 flagBitIsSet(u32);
 }
@@ -22,7 +17,7 @@ extern "C" u32 FUN_0029c0c0(u32, const CompendiumUnit *unit)
     const Table00Record *price = dataTable00FindById(unit->id);
     f32 available = 0.0f;
     f32 registered = 0.0f;
-    const CompendiumAvailabilityRecord *records = devilGetRecord(0);
+    const DevilRecord *records = devilGetRecord(0);
     for (s32 i = 0; i < 0x500; ++i) {
         if (records[i].flags & 1) {
             available += 1.0f;

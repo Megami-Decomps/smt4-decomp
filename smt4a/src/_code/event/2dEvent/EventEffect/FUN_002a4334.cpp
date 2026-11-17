@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "event/2dEvent/EventEffect.h"
@@ -17,7 +18,6 @@ struct EventOverlayTexture {
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventOverlayTexture DAT_0057f430;
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);

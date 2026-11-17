@@ -21,7 +21,7 @@ u32 mapRestoreSavedDestination(u32 request, s32 changeSequence)
                      saved->position[0], saved->position[1], saved->position[2], saved->heading, saved->cameraHeading);
         if (changeSequence) {
             asdSequenceRequest(6, NULL, 0);
-            g_gameState.transitionActive = 0;
+            g_gameState.savedLocationSet = 0;
         }
         break;
     case 2:
@@ -31,7 +31,7 @@ u32 mapRestoreSavedDestination(u32 request, s32 changeSequence)
         g_gameState.currentObjectId = -1;
         if (changeSequence) {
             asdSequenceRequest(8, NULL, 0);
-            g_gameState.transitionActive = 0;
+            g_gameState.savedLocationSet = 0;
         }
         break;
     case 3:
@@ -39,7 +39,7 @@ u32 mapRestoreSavedDestination(u32 request, s32 changeSequence)
         if (changeSequence) {
             u32 map = saved->map;
             asdSequenceRequest(14, &map, sizeof(map));
-            g_gameState.transitionActive = 0;
+            g_gameState.savedLocationSet = 0;
         } else {
             mapPlaceSet(saved->map + 200, 0, 0);
         }

@@ -1,14 +1,7 @@
 /* NON_MATCHING: cost and incoming level occupy exchanged saved registers; conditional default percentage now matches. */
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "gamedata/DataTable.h"
-
-struct DevilLevelRecord {
-    /* 0x00 */ u8 unk00[3];
-    /* 0x03 */ u8 level;
-};
-
-
-extern "C" DevilLevelRecord *devilGetRecord(u32 id);
 
 /* Scale the rank-table cost by the capped level-difference percentage. */
 extern "C" u32 devilCalculateRankCost(u32 id, s32 rank, s32 level)

@@ -240,7 +240,7 @@ void FUN_00272970(void)
     FUN_002442ac();
     gameBlock->unk7C4 = 0;
     gameBlock->unk15D0 = 0;
-    g_gameState.unk25F = 0;
+    g_gameState.mapRegistrationPending = 0;
     g_gameState.paused = 0;
     state->unk9360 = 0;
     state->unk9361 = 0;

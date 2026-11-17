@@ -2,11 +2,11 @@
 #include "common.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
-void *btlUnitGet(u32 index);
 void FUN_004fb798(s32, void *, s32, u32, s32, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
 void btlQueueActionMessage(s32, void *, u32, s32, s32, s32, s32);
 
@@ -16,7 +16,7 @@ u32 btlScriptRecoverHpMpPercent()
     s32 hpPercent = scrGetArg(0);
     s32 mpPercent = scrGetArg(1);
     s32 showEffect = scrGetArg(2);
-    void *unit = btlUnitGet(g_btlScriptUnit);
+    void *unit = reinterpret_cast<void *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     u32 effectFlags = 0;
     if (showEffect > 0) {
         effectFlags = 0x3be0;

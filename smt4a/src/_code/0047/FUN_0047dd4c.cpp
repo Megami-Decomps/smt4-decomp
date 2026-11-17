@@ -31,40 +31,40 @@ void FUN_0047dd4c(void *work)
     const MapSavedReturnPacket *packet = gameBlockGetArea27E98();
     switch (packet->kind) {
     case 1:
-        g_gameState.transitionActive = 1;
-        g_gameState.sourceMap = packet->map;
-        g_gameState.sourceArea = packet->area;
-        g_gameState.sourceObjectId = packet->object;
-        g_gameState.sourcePosition.x = packet->position.x;
-        g_gameState.sourcePosition.y = packet->position.y;
-        g_gameState.sourcePosition.z = packet->position.z;
-        g_gameState.sourceHeading = packet->heading;
-        g_gameState.sourceHeadingCopy = packet->headingCopy;
+        g_gameState.savedLocationSet = 1;
+        g_gameState.savedMapId = packet->map;
+        g_gameState.savedAreaId = packet->area;
+        g_gameState.savedObjectId = packet->object;
+        g_gameState.savedPosition.x = packet->position.x;
+        g_gameState.savedPosition.y = packet->position.y;
+        g_gameState.savedPosition.z = packet->position.z;
+        g_gameState.savedHeading = packet->heading;
+        g_gameState.savedHeadingCopy = packet->headingCopy;
         asdSequenceRequest(6, NULL, 0);
         break;
     case 2:
-        g_gameState.transitionActive = 1;
-        g_gameState.sourceMap = packet->map + 100;
-        g_gameState.sourceArea = packet->area;
-        g_gameState.sourceObjectId = -1;
-        g_gameState.sourcePosition.x = packet->position.x;
-        g_gameState.sourcePosition.y = packet->position.y;
-        g_gameState.sourcePosition.z = packet->position.z;
-        g_gameState.sourceHeading = packet->heading;
-        g_gameState.sourceHeadingCopy = packet->headingCopy;
+        g_gameState.savedLocationSet = 1;
+        g_gameState.savedMapId = packet->map + 100;
+        g_gameState.savedAreaId = packet->area;
+        g_gameState.savedObjectId = -1;
+        g_gameState.savedPosition.x = packet->position.x;
+        g_gameState.savedPosition.y = packet->position.y;
+        g_gameState.savedPosition.z = packet->position.z;
+        g_gameState.savedHeading = packet->heading;
+        g_gameState.savedHeadingCopy = packet->headingCopy;
         asdSequenceRequest(8, NULL, 0);
         break;
     case 3: {
-        g_gameState.transitionActive = 1;
-        g_gameState.sourceMap = packet->map;
-        g_gameState.sourceArea = 0;
+        g_gameState.savedLocationSet = 1;
+        g_gameState.savedMapId = packet->map;
+        g_gameState.savedAreaId = 0;
         u32 destination = packet->map;
         asdSequenceRequest(14, &destination, sizeof(destination));
         break;
     }
     default:
         if (gameStateIsFlagSetAndLarge()) {
-            u32 destination = g_gameState.sourceMap - 200;
+            u32 destination = g_gameState.savedMapId - 200;
             asdSequenceRequest(14, &destination, sizeof(destination));
         } else if (FUN_002cf854()) {
             asdSequenceRequest(8, NULL, 0);

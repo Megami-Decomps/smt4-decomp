@@ -15,7 +15,7 @@ u32 scrCommStartMapTransition(void)
     mapPlaceSet(0x18, 1, 0);
     gameFlagsLoadTable4cEntry(id);
     g_gameState.progressEnabled = 1;
-    g_gameState.transitionActive = 0;
+    g_gameState.savedLocationSet = 0;
     g_gameState.transitionPending = 1;
     asdSequenceRequest(6, NULL, 0);
     return 1;

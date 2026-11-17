@@ -1,13 +1,10 @@
 /* NON_MATCHING: party/reserve status loops and random-mask lifetimes use different saved registers and branch layout. */
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct StatusPlayer {
     u8 unk00[0x72];
     u16 flags; // 0x72
-};
-struct StatusUnit {
-    u8 unk00[0x44];
-    u16 flags; // 0x44
 };
 struct StatusSlotTable {
     u8 unk0000[0x90f0];
@@ -30,11 +27,10 @@ union StatusResult {
 extern "C" {
 StatusPlayer *gameGetPlayerData();
 StatusSlotTable *gameGetSlotTable();
-StatusUnit *gameGetUnitRecord(s32 slot);
 s32 gameCountUnits();
 s32 randNextInRange(s32 maximum);
 void FUN_00253d60(PlayerStatusResult *output, StatusPlayer *player);
-void affinityResolveUnitSlot(UnitStatusResult *output, StatusUnit *unit, s32 selector);
+void affinityResolveUnitSlot(UnitStatusResult *output, StatBlock *unit, s32 selector);
 }
 
 // Apply the selected status to eligible party or reserve members at the supplied probability.
@@ -74,8 +70,8 @@ extern "C" void partyApplyStatusMask(s32 group, s32 bit, s32 probability)
         s32 slot = slots[i];
         if (slot < 0)
             continue;
-        StatusUnit *unit = gameGetUnitRecord(slot);
-        u16 flags = unit->flags;
+        StatBlock *unit = gameGetUnitRecord(slot);
+        u16 flags = unit->ailments;
         if ((flags & 2) || (flags & 0x400) || (flags & 4) || (mask & flags))
             continue;
         if (randNextInRange(99) >= probability)
@@ -86,6 +82,6 @@ extern "C" void partyApplyStatusMask(s32 group, s32 bit, s32 probability)
             if (category == 1 || category == 3 || category == 4)
                 continue;
         }
-        unit->flags |= mask;
+        unit->ailments |= mask;
     }
 }

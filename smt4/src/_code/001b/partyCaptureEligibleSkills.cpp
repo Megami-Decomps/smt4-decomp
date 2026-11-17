@@ -1,11 +1,9 @@
 #include "common.h"
 #include <string.h>
 #include "gamedata/DataTable40.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/UnitRecordAccess.h"
 
-struct PartySkillRecord {
-    u8 unk00[0x34];
-    u16 skills[8];
-};
 struct PartySkillSlots {
     u8 unk0000[0x9108];
     s8 slots[3];
@@ -23,9 +21,7 @@ struct PartySkillSnapshot {
 };
 
 extern "C" {
-PartySkillRecord *gameGetPlayerData();
 PartySkillSlots *gameGetSlotTable();
-PartySkillRecord *gameGetUnitRecord(s32 slot);
 s32 idIsAbove400(u32 id);
 
 // Snapshot the player's and three party members' eligible skill IDs in packed lists.
@@ -42,11 +38,11 @@ void partyCaptureEligibleSkills(PartySkillSnapshot *screen)
     }
     for (s32 member = 0; member < 3; ++member) {
         if (gameGetSlotTable()->slots[member] >= 0) {
-            PartySkillRecord *record = gameGetUnitRecord(gameGetSlotTable()->slots[member]);
+            StatBlock *record = gameGetUnitRecord(gameGetSlotTable()->slots[member]);
             if (record != NULL) {
                 count = 0;
                 for (s32 index = 0; index < 8; ++index) {
-                    u32 id = record->skills[index];
+                    u32 id = record->skills.ids[index];
                     SkillSnapshotInfo *info = reinterpret_cast<SkillSnapshotInfo *>(dataTable40FindById(id));
                     if (info != NULL && info->excluded == 0 && !idIsAbove400(id)) {
                         screen->snapshot.skills[member + 1][count++] = id;

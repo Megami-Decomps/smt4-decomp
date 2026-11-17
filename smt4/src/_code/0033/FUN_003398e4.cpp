@@ -1,5 +1,6 @@
 /* NON_MATCHING: memset lowers to __aeabi_memset instead of retail __aeabi_memset4 (same as touchLayoutRebuildRegions); the demon-id switch also keeps case 1-3 stores addressed from the world base in retail while built folds them into predicated stores off r7 */
 #include "common.h"
+#include "gamedata/Table00Lookup.h"
 #include <stddef.h>
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -21,10 +22,6 @@ struct PartyRecord {
     /* 0x48 */ u16 demonId;
 };
 
-struct DemonRecord {
-    /* 0x00 */ u8 unk00[0x88];
-    /* 0x88 */ s16 slot;
-};
 
 struct PartyWorld {
     /* 0x0000 */ u8 unk0000[0x1FE4];
@@ -81,7 +78,7 @@ void FUN_003398e4(PartyWorld *world)
             } else if (i == 3) {
                 world->defaults[3] = 0x83;
             }
-            ids[i] = reinterpret_cast<DemonRecord *>(dataTable00FindById((u16)world->defaults[i]))->slot;
+            ids[i] = dataTable00FindById((u16)world->defaults[i])->portraitId;
         }
         world->selectedCount = selected;
     } else {
@@ -92,7 +89,7 @@ void FUN_003398e4(PartyWorld *world)
 
             if (record->demonId != 0) {
                 world->defaults[selected] = record->demonId;
-                ids[selected] = reinterpret_cast<DemonRecord *>(dataTable00FindById(record->demonId))->slot;
+                ids[selected] = dataTable00FindById(record->demonId)->portraitId;
                 selected++;
             }
         } while (selected < 4 && ++j < 12);

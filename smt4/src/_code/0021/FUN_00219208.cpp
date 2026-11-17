@@ -8,10 +8,6 @@ typedef struct Entry {
     /* 0x04 */ s32 handle;
 } Entry;
 
-typedef struct Record {
-    /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 slot;
-} Record;
 
 extern int itemSortCompareRankThenKey(Entry *a, Entry *b);
 
@@ -25,12 +21,12 @@ void FUN_00219208(Entry *a, Entry *b)
     if (a->handle < 0) {
         slotA = 0;
     } else {
-        slotA = static_cast<Record *>(gameGetUnitRecord(a->handle))->slot;
+        slotA = gameGetUnitRecord(a->handle)->id;
     }
     if (b->handle < 0) {
         slotB = 0;
     } else {
-        slotB = static_cast<Record *>(gameGetUnitRecord(b->handle))->slot;
+        slotB = gameGetUnitRecord(b->handle)->id;
     }
     diff = slotA - slotB;
     if (diff == 0) {

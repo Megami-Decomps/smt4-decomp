@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028dcf4` (_code @ 0x28dcf4, 0x9bc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
 
@@ -28,8 +29,6 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern unsigned char g_messageMain; /* 0x43e188 */
-
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: FUN_00262210. */
@@ -42,7 +41,6 @@ extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: randNextInRange. */
-
 
 void FUN_0028dcf4(int param_1,int param_2)
 
@@ -306,7 +304,7 @@ LAB_0028e528:
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 5);
     *(unsigned char *)(param_1 + 0x46) = 0;
-    *(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0xc)) + 0x28) = 0;
+    g_messageMain.aux->unk028 = 0;
     break;
   case 0x13:
     uiSpriteStateInitFromSource(param_1 + 0xc4,0x3a,0xffffffff,param_1 + 0xa4,0xb);

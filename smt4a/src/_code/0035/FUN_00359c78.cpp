@@ -1,11 +1,11 @@
 /* NON_MATCHING: canonical context push matches; pop still allocates previous/current values in exchanged registers and omits retail's callback-argument move. */
 #include "ui/SpriteIndicator.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void gxResetColorQuadToWhite(void);
 void texDrawCompositeSprite(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 void efctSetSpeed(f32 speed);

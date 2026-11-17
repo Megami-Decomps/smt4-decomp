@@ -11,6 +11,8 @@ struct UnitSummarySkills {
     };
 };
 
+/* IV: a saved unit record (0x604 bytes): the 24 records of the save block's slot table
+ * (SaveSlotTableIV.units), returned by gameGetUnitRecord() (gamedata/UnitRecordAccess.h). */
 struct StatBlock {
     union {
         /* 0x00 */ u16 base[7];
@@ -19,9 +21,13 @@ struct StatBlock {
             /* 0x02 */ u16 kind;
             /* 0x04 */ u16 stats[5];
         } summary;
+        struct {
+            u8 unk00[4];
+            /* 0x04 */ u16 id;
+        } weapon;
     };
-    /* 0x0E */ u16 unk0E;
-    /* 0x10 */ u16 unk10;
+    /* 0x0E */ s16 maxHp;
+    /* 0x10 */ s16 maxMp;
     /* 0x12 */ u8 unk12[0xA];
     /* 0x1C */ u16 cur[2];
     /* 0x20 */ u16 cur2;
@@ -29,8 +35,8 @@ struct StatBlock {
     /* 0x24 */ u16 cur3;
     /* 0x26 */ u16 cur4;
     /* 0x28 */ u16 cur5;
-    /* 0x2A */ u16 copy0;
-    /* 0x2C */ u16 copy1;
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
     /* 0x2E */ u8 unk2E[2];
     union {
         /* 0x30 */ u32 bits;
@@ -40,37 +46,40 @@ struct StatBlock {
         /* 0x34 */ u16 resist[8];
         /* 0x34 */ UnitSummarySkills skills;
     };
-    /* 0x44 */ u8 unk44[2];
-    /* 0x46 */ u16 id;
+    /* 0x44 */ u16 ailments;   /* ailment and state bits (bit 1: dead) */
+    /* 0x46 */ u16 id;         /* the devil's id */
     /* 0x48 */ u8 level;
     union {
-        /* 0x49 */ u8 unk49[0x5BB];
+        /* 0x49 */ u8 unk49Bytes[0x5BB];
+        /* the record's growth and progress state (kept inside the union: retail's stack layout of a
+         * local StatBlock matches only with it) */
         struct {
-            u8 unk49[0x5B7];
-            /* 0x600 */ u8 probabilityTier;
-            union {
-                u8 unk601[3];
-                struct {
-                    /* 0x601 */ u8 initializationKind;
-                    u8 unk602[2];
-                } initialization;
-            };
-        } encounter;
+                /* 0x49 */ u8 unk49;
+                /* 0x4A */ u8 slot;        /* the record's own index in the slot table */
+                /* 0x4B */ u8 unk4B;
+                /* 0x4C */ u8 progress[0x40];   /* per-unit progress bytes (learned skills, completed goals) */
+                /* 0x8C */ u8 counters[0x500];  /* saturating byte counters */
+                /* 0x58C */ u8 unk58C[0x74];
+                /* 0x600 */ u8 probabilityTier;
+                /* 0x601 */ u8 initializationKind;
+                /* 0x602 */ u8 unk602[2];
+        } growth;
     };
 };
 
 typedef char StatBlockSizeCheck[sizeof(StatBlock) == 0x604 ? 1 : -1];
-typedef char StatBlockProbabilityTierOffsetCheck[
-    offsetof(StatBlock, encounter.probabilityTier) == 0x600 ? 1 : -1];
-typedef char StatBlockInitializationKindOffsetCheck[
-    offsetof(StatBlock, encounter.initialization.initializationKind) == 0x601 &&
-    sizeof(StatBlock) == 0x604 ? 1 : -1];
 typedef char StatBlockSummaryOffsets[
     offsetof(StatBlock, summary.id) == 0 &&
     offsetof(StatBlock, summary.kind) == 2 &&
     offsetof(StatBlock, summary.stats) == 4 &&
     offsetof(StatBlock, experience) == 0x30 &&
     offsetof(StatBlock, skills) == 0x34 ? 1 : -1];
+typedef char StatBlockUnitOffsets[offsetof(StatBlock, maxHp) == 0x0E && offsetof(StatBlock, maxMp) == 0x10 &&
+    offsetof(StatBlock, hp) == 0x2A && offsetof(StatBlock, mp) == 0x2C && offsetof(StatBlock, ailments) == 0x44 &&
+    offsetof(StatBlock, id) == 0x46 && offsetof(StatBlock, level) == 0x48 &&
+    offsetof(StatBlock, growth.slot) == 0x4A &&
+    offsetof(StatBlock, growth.progress) == 0x4C && offsetof(StatBlock, growth.counters) == 0x8C &&
+    offsetof(StatBlock, growth.probabilityTier) == 0x600 && offsetof(StatBlock, growth.initializationKind) == 0x601 ? 1 : -1];
 
 extern "C" {
 s32 FUN_001ab9dc(void);

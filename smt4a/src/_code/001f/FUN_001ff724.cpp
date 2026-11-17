@@ -2,7 +2,7 @@
 #include "common.h"
 #include "gamedata/GameDataAccess.h"
 #include "quest_center/QuestRequirement.h"
-#include "shard/W5_W5Match7_DataRecord.h"
+#include "quest_center/QuestRecordA.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
 /* The quest menu past UiQuestApoc's modelled prefix (only the fields used here). */
@@ -78,18 +78,18 @@ void FUN_001ff724(void)
             } else {
                 bool include = true;
                 if (menu->filtered != 0) {
-                    ItemDataRecord *quest = dataTable1bOr1cGetRecord(id);
-                    if (quest == NULL || quest->ordering.sortGroup != 0)
+                    QuestRecordA *quest = dataTable1bOr1cGetRecord(id);
+                    if (quest == NULL || quest->kind != 0)
                         continue;
                     if (questRequirementBlocks(id))
                         continue;
-                    if (idIsAtLeast350(id) == 0 && quest->filter.kind != 0) {
+                    if (idIsAtLeast350(id) == 0 && quest->filterKind != 0) {
                         switch (menu->mode) {
                         case 0:
                             include = false;
                             break;
                         case 1:
-                            if (quest->filter.kind != 1)
+                            if (quest->filterKind != 1)
                                 include = false;
                             break;
                         case 9:
@@ -99,7 +99,7 @@ void FUN_001ff724(void)
                         case 13:
                             break;
                         default:
-                            if (quest->filter.kind == 1)
+                            if (quest->filterKind == 1)
                                 include = false;
                             break;
                         }
@@ -124,8 +124,8 @@ void FUN_001ff724(void)
     }
     for (s32 i = 0; i < alternateCount; i++) {
         if (partyEntryFlagsBit1(menu->alternateList[i]) != 0) {
-            ItemDataRecord *quest = dataTable1bOr1cGetRecord(menu->alternateList[i]);
-            if (quest != NULL && quest->ordering.sortGroup != 0 && quest->ordering.sortGroup != 10) {
+            QuestRecordA *quest = dataTable1bOr1cGetRecord(menu->alternateList[i]);
+            if (quest != NULL && quest->kind != 0 && quest->kind != 10) {
                 scrollListSetSelectionTracked(&menu->alternateCursor, i);
                 break;
             }

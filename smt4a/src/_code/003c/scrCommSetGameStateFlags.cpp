@@ -12,9 +12,9 @@ s32 scrCommSetGameStateFlags(void)
         g_gameState.unk14C = 1;
     }
     if (scrGetArg(1) == 0) {
-        g_gameState.musicInitialized = 0;
+        g_gameState.bgmReleased = 0;
     } else {
-        g_gameState.musicInitialized = 1;
+        g_gameState.bgmReleased = 1;
     }
     return 1;
 }

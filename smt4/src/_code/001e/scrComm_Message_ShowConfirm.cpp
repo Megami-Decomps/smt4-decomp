@@ -1,18 +1,6 @@
-#include "common.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
-
-typedef struct MessageBox {
-    /* 0x000 */ u8 unk000[0xa11];
-    /* 0xa11 */ u8 mode;
-} MessageBox;
-
-typedef struct MessageMain {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ MessageBox *box;
-} MessageMain;
-
-extern MessageMain g_messageMain;
 
 void eventTexRequestStopAll(void);
 void bustupCutAnimRequestStopSlots(void);
@@ -21,12 +9,12 @@ u32 scrGetCommandOwner(void);
 u32 scrGetCommandFrame(void);
 u32 scrGetArg(u32 index);
 
-/* Sets the message box's mode (when there is one) and shows a message of the given kind for the
+/* Sets the message window's display mode (when there is one) and shows a message of the given kind for the
  * unit scrGetCommandOwner names, using script argument 0 and the command frame. */
 static void showMessage(s32 kind)
 {
-    if (g_messageMain.box != NULL) {
-        g_messageMain.box->mode = 0x14;
+    if (g_messageMain.window != NULL) {
+        g_messageMain.window->displayMode = 0x14;
     }
     u32 unit = scrGetCommandOwner();
     u32 arg = scrGetArg(0);

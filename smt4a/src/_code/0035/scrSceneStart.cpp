@@ -13,8 +13,8 @@ u32 scrSceneStart(void)
     u32 value = scrGetArg(0);
     u32 transition = scrGetArgString(1);
 
-    g_gameState.scriptValue = value;
-    libc_strcpy(g_gameState.scriptText, transition);
+    g_gameState.entryValue = value;
+    libc_strcpy(g_gameState.entryText, transition);
     return 1;
 }
 

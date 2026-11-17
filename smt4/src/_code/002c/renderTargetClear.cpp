@@ -1,59 +1,30 @@
-#include "common.h"
-#include "shard/W6_W6Match1_CriticalSection.h"
-
-struct Vec3f {
-    f32 x, y, z;
-};
-
-struct GxPreset {
-    u8 data[0x3C];
-};
-
-struct GxPresetParams {
-    Vec3f position;  // 0x00
-    f32 weight;      // 0x0C
-};
-
-struct GxPresets {
-    u8 unk000[0x84];           // 0x000
-    s32 busy;                  // 0x084
-    GxPreset presets[3];       // 0x088
-    u8 unk13C[0x38];           // 0x13C
-    GxPresetParams params[2];  // 0x174
-    u8 unk194[0x10];           // 0x194
-    f32 extra[2];              // 0x1A4
-    u8 unk1AC[4];              // 0x1AC
-    u32 ids[2];                // 0x1B0
-};
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
+void FUN_00119750(AsdGxRenderBuffer *colorBuffer, AsdGxRenderBuffer *depthBuffer, u32 stencil, u32 components,
+    u32 flags, AsdGxColor3 color, f32 alpha, f32 depth);
 
-extern GxPresets g_asdGxPresets;
-
-void FUN_00119750(GxPreset *preset, void *data, u32 id, s32 mode, u32 arg, Vec3f position, f32 weight, f32 extra);
-
-/* Starts preset 0, 1 or 2 (2 only when the system is not busy); presets 0 and 1 use parameter set 0, preset 2 set 1. */
-void renderTargetClear(s32 preset, u32 arg, u32 unused, s32 index)
+/* Clears screen target 0, 1 or 2 (2 only when it has its own framebuffer) with its configured color,
+ * depth and stencil values; targets 0 and 1 use clear set 0, target 2 set 1. */
+void renderTargetClear(s32 target, u32 flags, u32 unused, s32 preset)
 {
-    GxPresets *presets = &g_asdGxPresets;
-    GxPreset *selected = NULL;
-
-    if (preset == 0) {
-        index = 0;
-        selected = &presets->presets[0];
-    } else if (preset == 1) {
-        index = 0;
-        selected = &presets->presets[1];
-    } else if (preset == 2) {
-        if (presets->busy == 1) {
+    AsdGxPresets *presets = &g_asdGxPresets;
+    AsdGxFramebuffer *framebuffer = NULL;
+    if (target == 0) {
+        preset = 0;
+        framebuffer = &presets->framebuffers[0];
+    } else if (target == 1) {
+        preset = 0;
+        framebuffer = &presets->framebuffers[1];
+    } else if (target == 2) {
+        if (presets->sharePrimaryFramebuffer == 1) {
             return;
         }
-        index = 1;
-        selected = &presets->presets[2];
+        preset = 1;
+        framebuffer = &presets->framebuffers[2];
     }
-    FUN_00119750(selected, selected->data + 0x18, presets->ids[index], 7, arg,
-                 presets->params[index].position, presets->params[index].weight,
-                 presets->extra[index]);
+    FUN_00119750(&framebuffer->color, &framebuffer->depth, presets->clearStencils[preset], 7, flags,
+                 presets->clearColors[preset].rgb, presets->clearColors[preset].alpha,
+                 presets->clearDepths[preset]);
 }
-
 } /* extern "C" */

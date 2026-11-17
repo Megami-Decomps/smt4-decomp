@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: scroll-bar draw; retail keeps the list view pointer in r7 (built spills it) and reaches the render-state stack through base+0x1000+0x120 address arithmetic with a conditional restore; calls, float math and tail call efctSetSpeed match */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
@@ -12,8 +13,6 @@ struct ScrollBarStateStackView {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-
 void efctSetSpeed(f32 speed);
 s32 objectApplyIfUnblocked(void *view);
 s32 uiSearchPrimary(void *view);

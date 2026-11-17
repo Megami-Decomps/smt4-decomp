@@ -2,10 +2,10 @@
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, s32 id);
 
 // Reports whether the listed battle entry has flag 0x10000.
 u32 scrCommBattleEntryHasFlag(void)

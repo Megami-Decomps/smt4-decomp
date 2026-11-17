@@ -1,5 +1,5 @@
 /* NON_MATCHING: global/component base loads, signed modulus and movement VFP multiplication scheduling differ. */
-#include "map/lmapMain.h"
+#include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/MathFunctions.h"
 #include "util/Random.h"
@@ -31,7 +31,6 @@ typedef char AmbientMovementOffsets[offsetof(AmbientMovementActor, movement) == 
     offsetof(AmbientMovementWork, duration) == 0x20 ? 1 : -1];
 
 extern "C" {
-extern LmapScene *g_lmapScene;
 void FUN_0039560c(AmbientMovementWork *work);
 f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
@@ -62,9 +61,9 @@ void FUN_0039568c(AmbientMovementWork *work)
             movement->position.z += work->velocity.z;
         }
     } else if (!globals->blocked && movement->frame % 15 == 0 && randNextInRange(100) < 30) {
-        const f32 *center = g_lmapScene->transform.position;
+        const MapVector *center = &g_lmapScene->pose.position;
         f32 distance = mathDistanceBetweenPoints(movement->position.x, movement->position.y, movement->position.z,
-                                                  center[0], center[1], center[2]);
+                                                  center->x, center->y, center->z);
         if (globals->radius > distance) {
             work->duration = globals->duration;
             if (movement->frame <= 60) {

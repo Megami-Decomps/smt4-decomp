@@ -3,7 +3,6 @@
 #include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-extern MessageGlobals g_messageMain;
 u32 scrGetArg(u32 index);
 int pairSetFirstResetSecond(void *pair, s32 value);
 int uiSpriteStateInitFromSource(void *widget, s32 kind, u32 selection, void *text, s32 capacity, f32 scale);
@@ -13,23 +12,23 @@ int spriteStartAnimationByIndex(void *widget, s32 mode);
 u32 FUN_00321b9c(void)
 {
     u32 messageId = scrGetArg(0);
-    MessagePanel *panel = g_messageMain.banner;
-    g_messageMain.banner->unk7D = 1;
-    panel->unk7C = 1;
+    MessageWindow *panel = g_messageMain.banner;
+    g_messageMain.banner->wideValue = 1;
+    panel->counterState = 1;
     u32 slot = gameGetSlotTable()->money;
-    panel->unk6C = slot;
-    panel->unk78 = slot;
-    panel->unk7F = 0;
-    panel->unk80 = 0;
-    panel->unkA1 = 0;
-    uiSpriteStateInitFromSource(panel->widget754, 14, (u32)-1, panel->textBuffer, 11, 1.0f);
-    pairSetFirstResetSecond(panel->widget754, 0);
-    spriteStartAnimationByIndex(panel->widget754, 6);
+    panel->counterValue = slot;
+    panel->counterBase = slot;
+    panel->alternateAnimation = 0;
+    panel->unk080 = 0;
+    panel->unk0A1 = 0;
+    uiSpriteStateInitFromSource(&panel->sprites[12], 14, (u32)-1, &panel->parameters, 11, 1.0f);
+    pairSetFirstResetSecond(&panel->sprites[12], 0);
+    spriteStartAnimationByIndex(&panel->sprites[12], 6);
     panel = g_messageMain.banner;
-    g_messageMain.banner->unk81 = 0;
-    panel->unk70 = messageId;
-    panel->unk74 = messageId;
-    panel->unk80 = 1;
+    g_messageMain.banner->unk081 = 0;
+    panel->counterDelta = messageId;
+    panel->counterElapsed = messageId;
+    panel->unk080 = 1;
     return 1;
 }
 }

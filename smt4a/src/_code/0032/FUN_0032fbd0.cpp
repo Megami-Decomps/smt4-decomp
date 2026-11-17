@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail unrolls the live-skill search and keeps the rebuilt record base in r7 (156 vs 180 rows); the save-entry comparison is the same. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
 
@@ -80,7 +81,6 @@ typedef struct LiveUnit {
     /* 0x0AC */ u16 bonus[5];
 } LiveUnit;
 
-void devilGetRecord(u32 id);
 void sysMemClear(void *block, u32 size);
 void unitRecomputeDerivedStats(RebuiltRecord *record);
 u16 recordGetScaledMaximum(RebuiltRecord *record);

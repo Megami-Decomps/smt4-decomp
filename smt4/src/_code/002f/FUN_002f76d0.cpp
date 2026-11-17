@@ -10,7 +10,7 @@ void scrSetResult(s32 value);
 /* Script command: picks one of the record's three values at random (-1 when none is set) and returns it. */
 s32 FUN_002f76d0(void)
 {
-    Table00Record *record = dataTable00FindById(scrGetArg(0));
+    Table00Record *record = dataTable00FindById((u16)scrGetArg(0));
     s32 values[3];
     s32 count = 0;
 

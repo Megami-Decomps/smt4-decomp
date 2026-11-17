@@ -1,10 +1,10 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
+#include "battle/BtlGlobals.h"
 
 struct BtlEntry;
 extern "C" {
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
 void btlEntryGetPassiveSkillIds(const BtlEntry *, u16 *);
 
 /* Accumulate the special affinity override supplied by learned passive skills. */

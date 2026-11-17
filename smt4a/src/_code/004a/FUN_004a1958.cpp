@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the header and list address computations above releaseEntriesA; built differs in frame size (28 vs 52 bytes); the party branch is now written first like retail's layout. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "event/2dEvent/2dEventTex.h"
 
@@ -15,12 +16,6 @@ public:
 };
 
 /* A compendium entry record (only the fields read here). */
-typedef struct EntryRecord {
-    u16 id;
-    u8 unk02[8];
-    u16 flags;                       /* 0x0A: bit 0 set when the entry is listed */
-} EntryRecord;
-
 /* A party slot record (0x12C bytes; only the fields read here). */
 typedef struct PartySlot {
     u8 unk00[0x68];
@@ -70,8 +65,7 @@ void releaseEntriesB(void *panel);
 void releaseEntriesA(void);
 void slotPoolResetTrackedState(void);
 SlotTable *gameGetSlotTable(void);
-EntryRecord *devilGetRecord(u16 index);
-EntryRecord *dataTable0ProbeEntryById(u16 index);
+DevilRecordA *dataTable0ProbeEntryById(u16 index);
 s32 FUN_0032fbd0(void *slot);
 s32 FUN_002a4b28(u16 id);
 void campFillUnitComparison(u8 *out, u16 id, s32 flag);
@@ -103,7 +97,7 @@ void FUN_004a1958(EntryScreen *screen)
                 PartySlot *slot = (PartySlot *)((u8 *)table + member * 300);
 
                 if (FUN_0032fbd0((u8 *)slot + 0x68) == 0) {
-                    EntryRecord *record = devilGetRecord(slot->entryId);
+                    DevilRecordA *record = devilGetRecord(slot->entryId);
                     u8 entry[8];
 
                     campFillUnitComparison(entry, record->id, 1);
@@ -120,7 +114,7 @@ void FUN_004a1958(EntryScreen *screen)
         s32 owned = 0;
 
         for (s32 index = 0; index < 0x4FF; index++) {
-            EntryRecord *record = dataTable0ProbeEntryById((u16)(index + 1));
+            DevilRecordA *record = dataTable0ProbeEntryById((u16)(index + 1));
 
             if (record != NULL && (record->flags & 1) != 0) {
                 total++;
@@ -137,7 +131,7 @@ void FUN_004a1958(EntryScreen *screen)
         s32 index = 0;
 
         do {
-            EntryRecord *record = devilGetRecord((u16)(index + 1));
+            DevilRecordA *record = devilGetRecord((u16)(index + 1));
 
             if (record != NULL && (record->flags & 1) != 0) {
                 if (index == 9 && gameFlagIsSet(0x441) == 0) {

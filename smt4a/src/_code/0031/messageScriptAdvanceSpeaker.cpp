@@ -1,9 +1,5 @@
 #include "common.h"
-
-struct MessageSpeaker {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u8 kind;
-};
+#include "quest_center/QuestRecordA.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
@@ -17,7 +13,6 @@ void messageSetScriptDisplayMode(void);
 s32 messageForwardDefaultMode(s32 message, s32 mode, s32 frame, s32 flags, s32 unused);
 s32 rosterHasLeader(void);
 u32 rosterGetLeaderId(void);
-MessageSpeaker *dataTable1bOr1cGetRecord(u32 id);
 void optionsSetFlag1(void);
 
 // Advance the speaker's message and update the option state on completion.
@@ -38,8 +33,8 @@ u32 messageScriptAdvanceSpeaker(void)
         if (result == 1) {
             scrWorkSetValue(1, 0);
             if (rosterHasLeader()) {
-                MessageSpeaker *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
-                MessageSpeaker *current = dataTable1bOr1cGetRecord(speakerId);
+                QuestRecordA *previous = dataTable1bOr1cGetRecord(rosterGetLeaderId());
+                QuestRecordA *current = dataTable1bOr1cGetRecord(speakerId);
                 if (previous && current &&
                     ((previous->kind != 5 && previous->kind != 4 && previous->kind != 1) ||
                      (current->kind != 0 && current->kind != 10)))

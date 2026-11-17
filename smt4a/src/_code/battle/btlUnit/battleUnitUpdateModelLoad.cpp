@@ -3,6 +3,7 @@
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
+#include "battle/BtlGlobals.h"
 
 struct ModelOwner;
 struct BattleModelData {
@@ -27,8 +28,6 @@ extern "C" {
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *word);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *state, s32 group);
-BtlUnitDataA *btlFindEntryBlockByMemberId(BtlMainStateA *state, s32 group);
 void btlUiAddRequest(void *ui, u16 id);
 void FUN_004cb9d0(BattleEffectSetup *render);
 void FUN_004d854c(s32 *owner);

@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 
@@ -18,7 +19,6 @@ struct KeyboardPanelState {
 typedef char KeyboardPanelOffsets[offsetof(KeyboardPanelState, sideOffset) == 0xa4 && offsetof(KeyboardPanelState, backgroundOffset) == 0xac && offsetof(KeyboardPanelState, animation) == 0x3ac ? 1 : -1];
 }
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite();
 s32 renderCtxPackPassFlags(u32 first, u32 second);

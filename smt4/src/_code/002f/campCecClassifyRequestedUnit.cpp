@@ -12,11 +12,6 @@ struct RequestedUnitWork {
     u8 unk114[0xc];
     s16 requestedId;
 };
-struct RequestedUnitRecord {
-    BtlEquip equip;
-    u16 flags; // 0x44
-    u16 id; // 0x46
-};
 struct RequestedUnitSlots {
     u8 unk0000[0x90f0];
     s8 reserve[24];
@@ -39,9 +34,9 @@ s32 campCecClassifyRequestedUnit(void* context)
         RequestedUnitSlots* slots = reinterpret_cast<RequestedUnitSlots*>(gameGetSlotTable());
         for (s32 i = 0; i < 3; ++i) {
             if (slots->active[i] >= 0
-                && static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->active[i]))->id == work->requestedId
-                && !flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->active[i])), 10)
-                && !flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->active[i])), 1)) {
+                && gameGetUnitRecord(slots->active[i])->id == work->requestedId
+                && !flagWordTestBit(gameGetUnitRecord(slots->active[i]), 10)
+                && !flagWordTestBit(gameGetUnitRecord(slots->active[i]), 1)) {
                 work->status = 5;
                 break;
             }
@@ -49,9 +44,9 @@ s32 campCecClassifyRequestedUnit(void* context)
         if (work->status == -1) {
             for (s32 i = 0; i < 24; ++i) {
                 if (slots->reserve[i] >= 0
-                    && static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->reserve[i]))->id == work->requestedId
-                    && (flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->reserve[i])), 10)
-                        || flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->reserve[i])), 1))) {
+                    && gameGetUnitRecord(slots->reserve[i])->id == work->requestedId
+                    && (flagWordTestBit(gameGetUnitRecord(slots->reserve[i]), 10)
+                        || flagWordTestBit(gameGetUnitRecord(slots->reserve[i]), 1))) {
                     work->status = 2;
                     break;
                 }

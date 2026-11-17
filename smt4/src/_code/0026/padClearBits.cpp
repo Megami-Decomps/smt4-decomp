@@ -1,15 +1,13 @@
-#include "shard/PadState.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
 
-extern PadState *gameGetPlayerData(void);
-
-/* Clears the given bits of the pad's halfword at +0x72. */
+/* Clears the given ailment bits of the player. */
 void padClearBits(u16 mask)
 {
-    PadState *pad = gameGetPlayerData();
+    PlayerDataIV *player = gameGetPlayerData();
 
-    pad->unk72 = pad->unk72 & ~mask;
+    player->ailments = player->ailments & ~mask;
 }
 
 } /* extern "C" */

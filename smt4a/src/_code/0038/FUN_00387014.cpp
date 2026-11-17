@@ -30,7 +30,7 @@ void FUN_00387014(void)
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
-    if (g_lmapMainState->unk40 != 100) {
+    if (g_lmapMainState->mapId != 100) {
         FUN_003699e4();
     }
 }

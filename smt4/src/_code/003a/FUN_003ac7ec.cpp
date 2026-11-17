@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ItemSortCategory.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct Record {
 } Record;
 
 extern Record *table8Type5FindById(u32 id);
-extern s32 itemGetSortCategory(u32 key);
 
 /* Comparison of two ids: by itemGetSortCategory of their record's key, then by id. */
 s32 FUN_003ac7ec(const u16 *a, const u16 *b)

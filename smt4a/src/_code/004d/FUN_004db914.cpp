@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (212 vs ~206 rows); goto-based early exits and register allocation differ from retail's single result slot */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "gamedata/DataTableSections.h"
 #include "code/Code002a_Smt4a.h"
 
@@ -14,13 +15,6 @@ struct FusionResult {
 };
 
 // Demon info record: id, race (byte 2) and level (halfword 6).
-struct DevilInfo {
-    u16 id;                 // 0x00
-    u8 race;                // 0x02
-    u8 unk03[3];
-    u16 level;              // 0x06
-};
-
 struct SlotRecord {
     u8 unk00[0x62];
     u16 id;                 // 0x62
@@ -45,7 +39,6 @@ struct DataTable5 {
 extern "C" {
 
 s32 FUN_004dc3b4(UniteContext* ctx, u16* first, u16* second, FusionResult* result);
-DevilInfo* devilGetRecord(u32 id);
 u32 randRange(u32 range);
 s32 slotRecordFindById(u32 id);
 u32 FUN_0023e32c(u16* first, u16* second, u32 id, u32 level);
@@ -62,7 +55,7 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
     DataTable5* levels = (DataTable5 *)dataTable5GetEntries();
     if (FUN_004dc3b4(ctx, first, second, result) == 0) return 0;
 
-    DevilInfo* info = devilGetRecord(result->product);
+    DevilRecordA * info = devilGetRecord(result->product);
     u16 level = dataTableChooseWeightedByteId() + info->level;
     if (randRange(99) < 5) {
         if (slotRecordFindById(0x218) == 0) {
@@ -105,7 +98,7 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
             do {
                 u32 candidateId = uniteFindClosestEligibleCandidate(ctx, race & 0xff, wanted, 1);
                 found = candidateId;
-                DevilInfo* candidate = devilGetRecord(candidateId);
+                DevilRecordA * candidate = devilGetRecord(candidateId);
                 if (info->id != candidate->id && candidate->id != *first && candidate->id != *second && candidate->level <= wanted) {
                     s32 slot;
                     for (slot = 0; slot < 24; slot++) {

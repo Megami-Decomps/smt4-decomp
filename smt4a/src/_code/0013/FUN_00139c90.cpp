@@ -1,22 +1,9 @@
 /* NON_MATCHING: initialises the GX graphics presets from a configuration (command buffers, the three render target blocks, display environment, default lighting/scale constants); written from the decompilation, the unrolled per-block target loops are merged into one helper and the many DAT_ globals keep their retail names, and the callback/label arguments of FUN_00149ae0, asdGfxSetTargetParameter and FUN_0014a82c (code and data labels in retail) are passed as NULL */
-#include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 #define GX_TARGET_BLOCK_TOP 0
 #define GX_TARGET_BLOCK_WIDE 1
 #define GX_TARGET_BLOCK_BOTTOM 2
-
-/* One render target preset: the mode, the targets created for it and their results. */
-struct GxTargetBlock {
-    /* 0x00 */ u32 mode;
-    /* 0x04 */ u32 count;
-    /* 0x08 */ u32 handles[3];
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 width;
-    /* 0x1C */ u32 height;
-    /* 0x20 */ u32 results[3];
-};
-
-typedef char GxTargetBlockSize[sizeof(GxTargetBlock) == 0x2C ? 1 : -1];
 
 /* The configuration passed in (or the defaults below). */
 struct GxConfig {
@@ -44,7 +31,6 @@ struct GxConfig {
 #define GX_RESULT_QUERY 0x600
 
 extern "C" {
-extern GxTargetBlock g_asdGxPresets[3];
 extern GxConfig DAT_0063ff5c;
 extern u8 DAT_0063fec4;
 extern u8 DAT_0063fedc;
@@ -72,21 +58,21 @@ void asdGfxSetTargetParameter(u32 id, const void *data);
 void FUN_0014a82c(u32 id, u32 flag, const void *data);
 void FUN_0013f048(void);
 
-/* Creates the targets of one preset block. */
-static __inline void gxTargetBlockInit(GxTargetBlock *block, u32 mode, u32 count, u32 height, u32 format)
+/* Creates the display buffers of one screen ring and records their addresses. */
+static __inline void gxTargetBlockInit(AsdGxDisplayBuffers *block, u32 mode, u32 count, u32 height, u32 format)
 {
     block->mode = mode;
     block->count = count;
     block->width = GX_SCREEN_WIDTH;
     block->height = height;
     asdGfxSetMode(mode);
-    FUN_00149950(block->count, block->handles);
+    FUN_00149950(block->count, block->buffers);
     for (u32 i = 0; i < block->count; i++) {
-        FUN_00161074(block->handles[i]);
+        FUN_00161074(block->buffers[i]);
         FUN_00149864(format, GX_SCREEN_WIDTH, height, GX_TARGET_FORMAT);
         u32 result = 0;
         FUN_00149a88(GX_RESULT_QUERY, &result);
-        block->results[i] = result;
+        block->addresses[i] = result;
     }
     FUN_00149840(0);
 }
@@ -108,9 +94,9 @@ void FUN_00139c90(GxConfig *config)
     u32 format = DAT_0063ff5c.format;
     u32 count = config->stereo == 1 ? 2 : 3;
 
-    gxTargetBlockInit(&g_asdGxPresets[GX_TARGET_BLOCK_TOP], GX_MODE_TOP, count, GX_TOP_HEIGHT, format);
-    gxTargetBlockInit(&g_asdGxPresets[GX_TARGET_BLOCK_BOTTOM], GX_MODE_BOTTOM, count, GX_BOTTOM_HEIGHT, format);
-    gxTargetBlockInit(&g_asdGxPresets[GX_TARGET_BLOCK_WIDE], GX_MODE_WIDE, count, GX_TOP_HEIGHT, format);
+    gxTargetBlockInit(&g_asdGxPresets.displays[GX_TARGET_BLOCK_TOP], GX_MODE_TOP, count, GX_TOP_HEIGHT, format);
+    gxTargetBlockInit(&g_asdGxPresets.displays[GX_TARGET_BLOCK_BOTTOM], GX_MODE_BOTTOM, count, GX_BOTTOM_HEIGHT, format);
+    gxTargetBlockInit(&g_asdGxPresets.displays[GX_TARGET_BLOCK_WIDE], GX_MODE_WIDE, count, GX_TOP_HEIGHT, format);
 
     FUN_00144c9c(0, config->displayA, config->displayB);
     gxCmdListSetCreate(&DAT_0063fedc, 2, config->listA[0], config->listA[1]);

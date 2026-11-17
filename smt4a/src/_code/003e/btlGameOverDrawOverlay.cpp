@@ -1,4 +1,5 @@
 #include "gfx/StereoParallax.h"
+#include "camp/RenderCtxA.h"
 /* NON_MATCHING: same instruction mix and registers; only the scheduling of the cached draw-state push/pop address arithmetic differs (retail computes values[index + 1] after the previous-value load). */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
@@ -15,7 +16,6 @@ struct OverlayTask {
 }
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 u32 renderCtxPackPassFlags(u32 mode, u32 enabled);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);

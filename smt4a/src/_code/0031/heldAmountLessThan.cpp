@@ -1,8 +1,7 @@
 #include "shard/Shard0031.h"
+#include "gamedata/GamePlayerData.h"
 
 extern "C" {
-
-extern Player1C *gameGetPlayerData(void);
 extern SlotTable *gameGetSlotTable(void);
 extern Lookup62 *gameGetSlotRecord(s8 slot);
 extern s32 recordGetScaledMaximum(Lookup62 *entry);
@@ -18,7 +17,7 @@ u32 heldAmountLessThan(s32 amount, u32 id)
     u32 j;
 
     if ((s32)id < 0) {
-        if (gameGetPlayerData()->value < amount) {
+        if (gameGetPlayerData()->maxHp < amount) {
             return 1;
         }
     } else {

@@ -5,13 +5,12 @@
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "gamedata/Table04Record.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 extern const u8 DAT_005713f0[];
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, u32 subject);
 void btlEntryBuildSummary(void *snapshot, BtlMainStateA *battle, BtlCombatantEntryA *subject);
 s32 FUN_004bd098(u32 source, u32 item);
-BtlUnitDataA *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 index);
 PartySlotA *gameGetSlotRecord(s32 index);
 
 u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
@@ -63,7 +62,7 @@ u32 FUN_004bfa30(u32 itemId, u32 skillId, u32 subjectId, s32 target)
     else mask = 1u << category;
     u16 categories;
     if (target < 109)
-        categories = btlFindEntryBlockByMemberId(battle, target)->unk110;
+        categories = btlFindEntryBlockByMemberId(battle, target)->statusFlags;
     else
         categories = gameGetSlotRecord(target - 109)->unk60;
     return (categories & mask) ? mask : 0;

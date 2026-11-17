@@ -6,6 +6,7 @@
 #include "gamedata/Table00.h"
 #include "code/Code0027.h"
 #include "gamedata/Table00Lookup.h"
+#include "battle/BtlGlobals.h"
 
 /* Find the part occupied by a listed member, or -1 when it is absent. */
 static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
@@ -18,9 +19,6 @@ static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
 }
 
 extern "C" {
-struct BattleAnchorSource { u16 flags; u16 id; u32 unk04; u32 unk08; u32 parts[50]; };
-BattleAnchorSource *btlFindEntryBlockByMemberId(BtlMainState *state, s32 index);
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 member);
 const BattleVector3 *FUN_002d8cc8(void *arrangement);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
 
@@ -40,7 +38,7 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         s32 part = entry != NULL ? findBattleMemberPart(entry, action->memberId) : -1;
         if (part < 0)
             part = 0;
-        BattleAnchorSource *source = btlFindEntryBlockByMemberId(state, index);
+        BtlUnitData *source = btlFindEntryBlockByMemberId(state, index);
         const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(idSlotsFindEntryById(state, source->parts[part]));
         ActionAnchorView *anchor = (ActionAnchorView *)action;
         btlEnemyDrawCalcVerticalOffset(owner, &position, anchor->scale);
@@ -51,7 +49,7 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         struct ArrangementView { u8 prefix[0x1E88]; void *arrangement; };
         position = *FUN_002d8cc8(((ArrangementView *)state)->arrangement);
         position.z += 2.0f;
-        BattleAnchorSource *source = btlFindEntryBlockByMemberId(state, index);
+        BtlUnitData *source = btlFindEntryBlockByMemberId(state, index);
         u8 kind = dataTable00FindById(source->id)->arrangementFirst;
         f32 height = 0.0f;
         switch (kind) {

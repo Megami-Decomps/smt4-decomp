@@ -1,5 +1,6 @@
 /* NON_MATCHING: the g_frameTex clear now matches; retail returns through a shared `mov r0, #0` (the cleared path branches to it, the `!shown` test straight to the pop), built gives the cleared path its own return. */
 #include "common.h"
+#include "camp/RenderCtxA.h"
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
 
@@ -26,7 +27,6 @@ struct FrameTexFade {
 
 extern "C" {
 extern FrameTexFade *g_frameTex;
-extern RenderCtxA *g_renderCtx;
 
 void FUN_0014b01c(s32 value);
 

@@ -29,19 +29,6 @@ typedef struct Rec148 {
     /* 0x05 */ u8 unk05[0x143];
 } Rec148;
 
-typedef struct Work150 {
-    /* 0x00 */ u8 unk00[0x150];
-    /* 0x150 */ u32 unk150;
-    /* 0x154 */ u8 unk154;
-    /* 0x155 */ u8 unk155[0xF];
-    /* 0x164 */ u16 unk164;
-} Work150;
-
-typedef struct Work150Owner {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ Work150 *work;
-} Work150Owner;
-
 typedef struct Work2C {
     /* 0x00 */ u8 unk00[0x2C];
     /* 0x2C */ s32 unk2C;

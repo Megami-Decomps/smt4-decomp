@@ -1,6 +1,5 @@
 #ifndef UI_SCRIPTCHOICEMENU_H
 #define UI_SCRIPTCHOICEMENU_H
-#include "ui/MessageMain.h"
 struct SevenChoiceTable {
     /* 0x00 */ u8 unk00[0x38];
     /* 0x38 */ u32 flags[7];

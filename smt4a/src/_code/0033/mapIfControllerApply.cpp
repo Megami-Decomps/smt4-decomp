@@ -23,7 +23,7 @@ void mapIfControllerApply(MapIfModelMarker *marker)
 {
     if (marker->active != 0) {
         ControllerPose *controller = reinterpret_cast<MapMarkerModelView *>(marker->model)->controller;
-        if (g_gameState.departLoading != 0) {
+        if (g_gameState.loading != 0) {
             if ((controller->flags.value & 1) == 0)
                 controller->flags.value |= 3;
         } else if (marker->flags != 0) {

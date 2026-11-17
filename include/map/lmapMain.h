@@ -6,6 +6,9 @@
 #include "map/VectorPairTransition.h"
 #include <stddef.h>
 #include "map/mapDepart.h"
+#include "map/MapVector.h"
+
+struct AsdMdlObject;
 
 /* The field map's global state (Apocalypse). Only the fields the readable code touches are named. */
 typedef struct LmapMain {
@@ -92,43 +95,84 @@ typedef struct LmapScript {
     /* 0x00 */ void (**vtable)(struct LmapScript *self);
 } LmapScript;
 
-/* World-space scene transform embedded at the scene object's start. */
-typedef struct LmapSceneTransform {
-    /* 0x00 */ f32 position[3];
-    /* 0x0C */ f32 positionSnapshotA[3];
-    /* 0x18 */ f32 positionSnapshotB[3];
-    /* 0x24 */ u8 unk24[0xC];
-    /* 0x30 */ f32 headingDegrees;
-    /* 0x34 */ f32 headingCopy;
-} LmapSceneTransform;
+/* The field player's pose, embedded in the map scene at 0x1C (lmapSceneGetObj returns it). */
+typedef struct LmapScenePose {
+    /* 0x00 */ MapVector position;         /* where the player stands */
+    /* 0x0C */ MapVector targetPosition;   /* where this step moves it (eased to, or collision-checked) */
+    /* 0x18 */ MapVector previousPosition; /* position at the start of the frame */
+    /* 0x24 */ MapVector lastPosition;     /* position after the last move */
+    /* 0x30 */ f32 heading;                /* facing in degrees */
+    /* 0x34 */ f32 targetHeading;          /* facing being eased to, degrees */
+} LmapScenePose;
+typedef char LmapScenePoseSizeCheck[sizeof(LmapScenePose) == 0x38 ? 1 : -1];
 
-/* The map scene's block (Shin Megami Tensei IV layout), kept by a module global. */
+/* A straight-line move of the scene position (lmapSceneBeginPositionTransition). */
+typedef struct LmapScenePositionTransition {
+    /* 0x00 */ MapVector start;
+    /* 0x0C */ MapVector end;
+    /* 0x18 */ MapVector step; /* per-frame increment */
+} LmapScenePositionTransition;
+
+/* The map scene's block (Shin Megami Tensei IV layout), kept by g_lmapScene. The first 0x164 bytes
+ * are laid out as in Apocalypse's LmapSceneA. */
 typedef struct LmapScene {
-    /* 0x000 */ u32 unk000;
-    /* 0x004 */ u8 unk004[0x18];
-    /* 0x01C */ union {
-        LmapObj obj;
-        LmapSceneTransform transform;
-    };
-    /* 0x054 */ u8 unk054[0xE0];
+    /* 0x000 */ s32 mode;      /* scene mode (lmapSetSceneId); 28 is the overview */
+    /* 0x004 */ s32 state;     /* step within the mode */
+    /* 0x008 */ s32 stateTime; /* frames in the step */
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ u8 unk010;
+    /* 0x011 */ u8 unk011[3];
+    /* 0x014 */ f32 unk014;
+    /* 0x018 */ u8 unk018[4];
+    /* 0x01C */ LmapScenePose pose;
+    /* 0x054 */ s32 moveMode;  /* how the position eases toward its target */
+    /* 0x058 */ f32 moveSpeed;
+    /* 0x05C */ u8 moveActive;
+    /* 0x05D */ u8 unk05D[3];
+    /* 0x060 */ u32 unk060;
+    /* 0x064 */ u8 unk064[4];
+    /* 0x068 */ f32 unk068;
+    /* 0x06C */ u8 unk06C;
+    /* 0x06D */ u8 unk06D[3];
+    /* 0x070 */ u32 unk070;
+    /* 0x074 */ f32 unk074[4];
+    /* 0x084 */ u32 unk084;
+    /* 0x088 */ u8 unk088;
+    /* 0x089 */ u8 unk089[7];
+    /* 0x090 */ u32 unk090;
+    /* 0x094 */ f32 unk094;
+    /* 0x098 */ u8 unk098[0x9C];
     /* 0x134 */ u8 unk134;
-    /* 0x135 */ u8 unk135[0x27];
-    /* 0x15C */ f32 unk15C;
-    /* 0x160 */ f32 unk160;
-    /* 0x164 */ u32 handleA;
-    /* 0x168 */ u8 unk168[0x0C];
-    /* 0x174 */ u32 handleB;
-    /* 0x178 */ u32 handleC;
-    /* 0x17C */ u32 handleD;
-    /* 0x180 */ u8 unk180[0x14];
-    /* 0x194 */ LmapScript *script;
+    /* 0x135 */ u8 unk135[3];
+    /* 0x138 */ LmapScenePositionTransition transition;
+    /* 0x15C */ f32 nearClip;  /* 100 */
+    /* 0x160 */ f32 farClip;   /* 1000 */
+    /* 0x164 */ struct AsdMdlObject *stageModel; /* the stage's model, swapped with the stage */
+    /* 0x168 */ s32 unk168;
+    /* 0x16C */ s32 unk16C;
+    /* 0x170 */ s32 modelSwapStep;
+    /* 0x174 */ struct AsdMdlObject *models[3];  /* [1], [2]: from map files 5 and 6 */
+    /* 0x180 */ u8 unk180[5];
+    /* 0x185 */ u8 unk185[3];
+    /* 0x188 */ u32 unk188;
+    /* 0x18C */ s32 unk18C;
+    /* 0x190 */ u32 unk190;
+    /* 0x194 */ LmapScript *playerModel; /* the player-model holder (an Obj4207d0) */
     /* 0x198 */ u8 restoreChannelValues;
     /* 0x199 */ u8 unk199[3];
-    /* 0x19C */ u32 channelValues[3];
+    /* 0x19C */ u32 channelValues[3];    /* the player model's three part channels */
+    /* 0x1A8 */ u32 unk1A8;
+    /* 0x1AC */ u32 unk1AC;
+    /* 0x1B0 */ u32 unk1B0;
+    /* 0x1B4 */ u16 unk1B4;
+    /* 0x1B6 */ u16 unk1B6;
+    /* 0x1B8 */ u16 unk1B8;
+    /* 0x1BA */ u8 unk1BA[2];
 } LmapScene;
-typedef char LmapSceneSizeCheck[sizeof(LmapScene) == 0x1A8 ? 1 : -1];
-typedef char LmapSceneChannelModeOffsetCheck[offsetof(LmapScene, restoreChannelValues) == 0x198 ? 1 : -1];
-typedef char LmapSceneChannelValuesOffsetCheck[offsetof(LmapScene, channelValues) == 0x19C ? 1 : -1];
+typedef char LmapSceneOffsetsCheck[offsetof(LmapScene, pose) == 0x1C && offsetof(LmapScene, moveMode) == 0x54 &&
+    offsetof(LmapScene, transition) == 0x138 && offsetof(LmapScene, stageModel) == 0x164 &&
+    offsetof(LmapScene, playerModel) == 0x194 && offsetof(LmapScene, channelValues) == 0x19C &&
+    offsetof(LmapScene, unk1B8) == 0x1B8 ? 1 : -1];
 
 /* The map state block in Apocalypse. */
 typedef struct LmapMainStateA {
@@ -138,8 +182,10 @@ typedef struct LmapMainStateA {
     /* 0x09 */ u8 unk09[2];
     /* 0x0B */ s8 unk0B;
     /* 0x0C */ u8 unk0C[0x34];
-    /* 0x40 */ s32 unk40;
-    /* 0x44 */ u8 unk44[0x84];
+    /* 0x40 */ u32 mapId;
+    /* 0x44 */ u32 unk44;
+    /* 0x48 */ u32 areaId;
+    /* 0x4C */ u8 unk4C[0x7C];
     /* 0xC8 */ s32 unkC8;         /* float bits */
     /* 0xCC */ u32 unkCC;
     /* 0xD0 */ u8 unkD0[0x24];
@@ -243,64 +289,121 @@ typedef struct LmapActorA {
     /* 0x04 */ u32 controller;
 } LmapActorA;
 
-/* The map scene's block in Apocalypse (only the fields read so far are named). */
+/* The map scene's block in Apocalypse, kept by g_lmapScene. Up to 0x164 it is laid out as IV's
+ * LmapScene; Apocalypse keeps eight scene models where IV keeps four, and adds the fields past 0x1BC. */
 typedef struct LmapSceneA {
-    /* 0x000 */ s32 mainState;
-    /* 0x004 */ u32 unk04;
-    /* 0x008 */ u32 unk08;
-    /* 0x00C */ u8 unk00C[0x10];
-    /* 0x01C */ union {
-        LmapObj obj;
-        LmapSceneTransform transform;
-    };
-    /* 0x054 */ u32 state;
-    /* 0x058 */ f32 time;
-    /* 0x05C */ u8 unk05C[0xD8];
+    /* 0x000 */ s32 mode;      /* scene mode (mapSetSceneState); 28 is the overview */
+    /* 0x004 */ s32 state;     /* step within the mode */
+    /* 0x008 */ s32 stateTime; /* frames in the step */
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ u8 unk010;
+    /* 0x011 */ u8 unk011[3];
+    /* 0x014 */ f32 unk014;
+    /* 0x018 */ u8 unk018[4];
+    /* 0x01C */ LmapScenePose pose;
+    /* 0x054 */ s32 moveMode;  /* how the position eases toward its target */
+    /* 0x058 */ f32 moveSpeed;
+    /* 0x05C */ u8 moveActive;
+    /* 0x05D */ u8 unk05D[3];
+    /* 0x060 */ u32 unk060;
+    /* 0x064 */ u8 unk064[4];
+    /* 0x068 */ f32 unk068;
+    /* 0x06C */ u8 unk06C;
+    /* 0x06D */ u8 unk06D[3];
+    /* 0x070 */ u32 unk070;
+    /* 0x074 */ f32 unk074[4];
+    /* 0x084 */ u32 unk084;
+    /* 0x088 */ u8 unk088;
+    /* 0x089 */ u8 unk089[7];
+    /* 0x090 */ u32 unk090;
+    /* 0x094 */ f32 unk094;
+    /* 0x098 */ u8 unk098[0x9C];
     /* 0x134 */ u8 unk134;
-    /* 0x135 */ u8 unk135[0x4B];
-    /* 0x180 */ LmapActorA *actor180;
-    /* 0x184 */ u8 unk184[8];
-    /* 0x18C */ LmapActorA *actor18C;
+    /* 0x135 */ u8 unk135[3];
+    /* 0x138 */ LmapScenePositionTransition transition;
+    /* 0x15C */ f32 nearClip;  /* 100 */
+    /* 0x160 */ f32 farClip;   /* 1000 */
+    /* 0x164 */ s32 unk164;
+    /* 0x168 */ s32 unk168;
+    /* 0x16C */ s32 modelSwapStep;
+    /* 0x170 */ LmapActorA *models[8]; /* [0] is the stage's model, swapped with the stage */
     /* 0x190 */ LmapActorA *actor;
-    /* 0x194 */ u8 unk194[0x8];
+    /* 0x194 */ u8 unk194[5];
+    /* 0x199 */ u8 unk199;
+    /* 0x19A */ u16 unk19A;
     /* 0x19C */ u16 unk19C;
-    /* 0x19E */ u8 unk19E[0xA];
-    /* 0x1A8 */ LmapScript *script;
+    /* 0x19E */ u8 unk19E[2];
+    /* 0x1A0 */ s32 unk1A0;
+    /* 0x1A4 */ u32 unk1A4;
+    /* 0x1A8 */ LmapScript *playerModel; /* the player-model holder (an Obj557c58) */
     /* 0x1AC */ u8 restoreChannelValues;
     /* 0x1AD */ u8 unk1AD[3];
-    /* 0x1B0 */ u32 channelValues[3];
-    /* 0x1BC */ u8 unk1BC[0x14];
-    /* 0x1D0 */ u32 unk1D0;
+    /* 0x1B0 */ u32 channelValues[3];    /* the player model's three part channels */
+    /* 0x1BC */ u32 unk1BC;
+    /* 0x1C0 */ u32 unk1C0;
+    /* 0x1C4 */ u32 unk1C4;
+    /* 0x1C8 */ u16 unk1C8;
+    /* 0x1CA */ u16 unk1CA;
+    /* 0x1CC */ u16 unk1CC;
+    /* 0x1CE */ u8 unk1CE[2];
+    /* 0x1D0 */ s32 movementState;     /* the scripted movement's state (4: moving to the destination) */
     /* 0x1D4 */ u32 unk1D4;
-    /* 0x1D8 */ u8 unk1D8[0x50];
-    /* 0x228 */ u32 unk228;
+    /* 0x1D8 */ MapVector movement;      /* the path follower FUN_003250ac steps */
+    /* 0x1E4 */ u32 resumeState;
+    /* 0x1E8 */ f32 unk1E8;
+    /* 0x1EC */ f32 unk1EC;
+    /* 0x1F0 */ MapVector movementCurrent;
+    /* 0x1FC */ MapVector movementDestination;
+    /* 0x208 */ MapVector unk208;
+    /* 0x214 */ u8 unk214;
+    /* 0x215 */ u8 unk215[3];
+    /* 0x218 */ f32 movementHeading;
+    /* 0x21C */ f32 unk21C;
+    /* 0x220 */ u8 unk220[4];
+    /* 0x224 */ u8 unk224;
+    /* 0x225 */ u8 unk225[3];
+    /* 0x228 */ s32 unk228;
     /* 0x22C */ u8 unk22C;
-    /* 0x22D */ u8 unk22D[0x0B];
-    /* 0x238 */ u32 unk238;
+    /* 0x22D */ u8 unk22D[3];
+    /* 0x230 */ u32 unk230;
+    /* 0x234 */ u8 unk234[4];
+    /* 0x238 */ s32 unk238;
     /* 0x23C */ u8 unk23C;
     /* 0x23D */ u8 flag23D;
     /* 0x23E */ u8 unk23E[2];
     /* 0x240 */ f32 unk240;
-    /* 0x244 */ u8 unk244[4];
+    /* 0x244 */ f32 unk244;
     /* 0x248 */ u32 unk248;
     /* 0x24C */ u32 unk24C;
-    /* 0x250 */ u32 unk250;
-    /* 0x254 */ f32 actorDestination[3];
+    /* 0x250 */ s32 unk250;
+    /* 0x254 */ MapVector actorDestination;
     /* 0x260 */ f32 actorYaw;     /* degrees */
-    /* 0x264 */ u8 unk264[0x10];
+    /* 0x264 */ u32 unk264;
+    /* 0x268 */ u32 unk268;
+    /* 0x26C */ u32 unk26C;
+    /* 0x270 */ u32 unk270;
     /* 0x274 */ u32 unk274;
     /* 0x278 */ u32 unk278;
+    /* 0x27C */ u32 unk27C;
+    /* 0x280 */ s32 idleVoiceDuration;
+    /* 0x284 */ s32 idleVoiceFrame;
+    /* 0x288 */ u32 idleVoicePhase;  /* 3: idleVoice is playing */
+    /* 0x28C */ u32 idleVoice;
+    /* 0x290 */ u8 unk290;
+    /* 0x291 */ u8 unk291;
+    /* 0x292 */ u8 unk292[2];
 } LmapSceneA;
-typedef char LmapSceneAChannelModeOffsetCheck[offsetof(LmapSceneA, restoreChannelValues) == 0x1AC ? 1 : -1];
-typedef char LmapSceneAActorOffsetCheck[offsetof(LmapSceneA, actor) == 0x190 ? 1 : -1];
-typedef char LmapSceneAActorYawOffsetCheck[offsetof(LmapSceneA, actorYaw) == 0x260 ? 1 : -1];
-typedef char LmapSceneAChannelValuesOffsetCheck[offsetof(LmapSceneA, channelValues) == 0x1B0 ? 1 : -1];
+typedef char LmapSceneAOffsetsCheck[offsetof(LmapSceneA, pose) == 0x1C && offsetof(LmapSceneA, transition) == 0x138 &&
+    offsetof(LmapSceneA, models) == 0x170 && offsetof(LmapSceneA, actor) == 0x190 &&
+    offsetof(LmapSceneA, playerModel) == 0x1A8 && offsetof(LmapSceneA, channelValues) == 0x1B0 &&
+    offsetof(LmapSceneA, movementState) == 0x1D0 && offsetof(LmapSceneA, movementCurrent) == 0x1F0 &&
+    offsetof(LmapSceneA, movementHeading) == 0x218 &&
+    offsetof(LmapSceneA, actorYaw) == 0x260 && offsetof(LmapSceneA, idleVoice) == 0x28C &&
+    sizeof(LmapSceneA) == 0x294 ? 1 : -1];
 
 
 /* Retail 32-bit layout invariants. */
 typedef char LmapMainStateASizeCheck[sizeof(LmapMainStateA) == 0xF8 ? 1 : -1];
-typedef char LmapSceneTransformSizeCheck[sizeof(LmapSceneTransform) == 0x38 ? 1 : -1];
-typedef char LmapSceneASizeCheck[sizeof(LmapSceneA) == 0x27C ? 1 : -1];
 typedef char LmapExtraASizeCheck[sizeof(LmapExtraA) == 0x308 ? 1 : -1];
 
 typedef char LmapExtraACameraOffsetsCheck[

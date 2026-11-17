@@ -1,21 +1,16 @@
 #include "common.h"
+#include "map/LmapGlobals.h"
 
 extern "C" {
 
-struct SceneObject;
-struct LocalMapSceneWork {
-    /* 0x000 */ u8 unk000[0x194];
-    /* 0x194 */ SceneObject *object;
-};
-extern LocalMapSceneWork *g_lmapScene;
-void FUN_00297684(SceneObject *object);
-void objSlotsAllEmpty(SceneObject *object);
+void FUN_00297684(LmapScript *object);
+void objSlotsAllEmpty(LmapScript *object);
 
-/* Perform both cleanup stages on the local map scene's object. */
+/* Perform both cleanup stages on the map scene's player-model holder. */
 void lmapSceneCleanupObject(void)
 {
-    FUN_00297684(g_lmapScene->object);
-    objSlotsAllEmpty(g_lmapScene->object);
+    FUN_00297684(g_lmapScene->playerModel);
+    objSlotsAllEmpty(g_lmapScene->playerModel);
 }
 
 }
