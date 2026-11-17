@@ -1,6 +1,6 @@
 /* NON_MATCHING: the zero used to initialize ingredient ownership and counters is in r0 instead of retail's r1. */
 #include "gamedata/FusionRecipe.h"
-#include "gamedata/DevilRecord.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match2_RecordValue.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -35,11 +35,11 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
                 if (!gameRecordCopy(prerequisite >> 1, &record) || !(record.flags & 0xFC))
                     continue;
             } else {
-                if (!gameRecordCopy(devil->header.id, &record) || !(record.flags & 0xFC))
+                if (!gameRecordCopy(devil->id, &record) || !(record.flags & 0xFC))
                     continue;
             }
         }
-        if (!(devil->fusion.flags & 1))
+        if (!(devil->flags & 1))
             continue;
         u16 owned[12] = {0};
         u16 ingredientCount = 0;

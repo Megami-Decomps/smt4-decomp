@@ -1,10 +1,10 @@
 /* NON_MATCHING: the masks pointer and flag words take r3/r2 where retail uses r2/r3, and retail indexes the stat values through a pooled 0x2b6 offset. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-extern BtlMainGlobalsA g_btlMain;
 
 /* Decodes the first combatant's 21 stat values into levels (value >> 10) when it is an eligible
  * combatant; returns the levels, or NULL. */

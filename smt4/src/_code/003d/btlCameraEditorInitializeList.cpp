@@ -1,5 +1,6 @@
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleCameraEditorWork {
     u8 unk00[0xc];
@@ -9,7 +10,6 @@ struct BattleCameraEditorWork {
 };
 
 extern "C" {
-extern BtlMain *g_btlMain;
 extern const char DAT_004005f4[];
 extern const char DAT_004005e8[];
 extern const char DAT_004005dc[];

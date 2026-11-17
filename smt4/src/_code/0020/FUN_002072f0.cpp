@@ -19,8 +19,8 @@ static inline s32 compareRaceThenRank(const s32 *left, const s32 *right)
     } else {
         GameUnitSortRecord *first = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*left));
         GameUnitSortRecord *second = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*right));
-        DevilSortRecord *firstDemon = devilGetRecord(first->id);
-        DevilSortRecord *secondDemon = devilGetRecord(second->id);
+        DevilRecord *firstDemon = devilGetRecord(first->id);
+        DevilRecord *secondDemon = devilGetRecord(second->id);
         result = secondDemon->race - firstDemon->race;
         if (result == 0) {
             return devilSortCompareUnitRankRaceId(left, right);
@@ -41,7 +41,11 @@ s32 FUN_002072f0(const s32 *left, const s32 *right)
     } else {
         /* The secondary priority byte is past the shared demon sort prefix. */
         struct DevilPriorityView {
-            DevilSortRecord header;
+            struct {
+                u16 id;
+                u8 race;
+                u8 level;
+            } header;
             u8 unk04;
             u8 priority;
         };

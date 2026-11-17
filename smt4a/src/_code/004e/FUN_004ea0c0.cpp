@@ -2,6 +2,7 @@
 #include "battle/btlEvent.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleEventCandidate {
     u32 flags;
@@ -24,7 +25,6 @@ s32 FUN_004d7a70(BtlEvent *, s32, s32, s32);
 s32 btlStateHasSelectionGateFlag(BattleEventOwnerView *);
 s32 isEntryUsable(BtlEvent *);
 extern BtlEvent *g_btlEvent;
-extern BtlActionGlobals g_btlAction;
 
 // Match an eligible candidate against event types four and ten.
 u32 FUN_004ea0c0(BattleEventOwnerRef *owner, const BattleEventCandidate *candidate)

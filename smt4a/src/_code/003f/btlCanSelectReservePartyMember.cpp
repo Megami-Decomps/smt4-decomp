@@ -2,7 +2,7 @@
 #include "battle/btlUnit.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 struct PartyReserveMasks {
     u8 unk00[8];
@@ -29,7 +29,7 @@ u32 btlCanSelectReservePartyMember(const BtlCombatantEntryA *entry)
     }
     if (entry != NULL) {
         if (DAT_00573c90.primary & entry->flags) {
-            BtlCombatantEntryA *active = reinterpret_cast<BtlCombatantEntryA *>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->params);
+            BtlCombatantEntryA *active = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->entry;
             if (active != NULL && (active->flags & DAT_00573c90.primary) != 0) {
                 PartyReserveSlots *party = gameGetSlotTable();
                 for (s32 index = 0; index < party->count; ++index) {

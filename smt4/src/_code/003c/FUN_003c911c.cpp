@@ -29,8 +29,8 @@ u32 demonFindClosestEligibleLevel(FusionRaceSelectionIV *selection, u32 race, u3
 u32 FUN_003c911c(FusionRaceSelectionIV *selection, u16 firstId, u16 secondId, FusionRaceResult *output)
 {
     u32 result = 0;
-    DevilSortRecord *first = devilGetRecord(firstId);
-    DevilSortRecord *second = devilGetRecord(secondId);
+    DevilRecord *first = devilGetRecord(firstId);
+    DevilRecord *second = devilGetRecord(secondId);
     const FusionRaceRule *rule = dataTable5Sub3Lookup(first->race, second->id);
     const FusionRaceRule *reverseRule = dataTable5Sub3Lookup(second->race, first->id);
     if (first->id == second->id)

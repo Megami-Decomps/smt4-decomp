@@ -39,7 +39,6 @@ struct DemonRecord {
     /* 0x67 */ u8 unk67[0x12c - 0x67];
 };
 
-
 // Saved demon entry (0x80 bytes): same fields in save order.
 struct SaveEntry {
     u16 level;              // 0x00
@@ -110,28 +109,28 @@ void demonRecordInitialize(DemonRecord* record, u32 slot, u32 id, s32 kind)
         gameItemSetFlag((u16)id, 1);
         FUN_002854d8((u16)id, 1);
     }
-    const DevilTableRecordA* info = reinterpret_cast<const DevilTableRecordA *>(devilGetRecord((u16)id));
+    const DevilRecordA* info = reinterpret_cast<const DevilRecordA *>(devilGetRecord((u16)id));
     s16 hp = 0;
     switch (kind) {
     case 0:
     case 3:
-        record->levelBase = info->header.level;
-        record->stat0 = info->header.initialization.stats[0];
-        record->stat1 = info->header.initialization.stats[1];
-        record->stat2 = info->header.initialization.stats[3];
-        record->stat4 = info->header.initialization.stats[5];
-        record->stat5 = info->header.initialization.stats[6];
-        record->stat6 = info->header.initialization.stats[7];
-        record->stat3 = info->header.initialization.stats[4];
+        record->levelBase = info->level;
+        record->stat0 = info->baseHp;
+        record->stat1 = info->baseMp;
+        record->stat2 = info->stats[0];
+        record->stat4 = info->stats[2];
+        record->stat5 = info->stats[3];
+        record->stat6 = info->stats[4];
+        record->stat3 = info->stats[1];
         record->unk1c = 0;
         record->unk1e = 0;
-        record->curStat2 = info->header.initialization.stats[3];
-        record->curStat4 = info->header.initialization.stats[5];
-        record->curStat5 = info->header.initialization.stats[6];
-        record->curStat6 = info->header.initialization.stats[7];
-        record->curStat3 = info->header.initialization.stats[4];
-        for (s32 i = 0; i < 8; i++) record->skills[i] = info->initializationSkills[i];
-        __aeabi_memcpy4(record->growth, info->categoryModifiers.values, 18);
+        record->curStat2 = info->stats[0];
+        record->curStat4 = info->stats[2];
+        record->curStat5 = info->stats[3];
+        record->curStat6 = info->stats[4];
+        record->curStat3 = info->stats[1];
+        for (s32 i = 0; i < 8; i++) record->skills[i] = info->skills.ids[i];
+        __aeabi_memcpy4(record->growth, info->categoryModifiers, 18);
         demonApplySkillAffinities(record);
         FUN_0031f190((u16)id, 0);
         break;

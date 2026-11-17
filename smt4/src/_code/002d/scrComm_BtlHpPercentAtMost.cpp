@@ -2,17 +2,6 @@
 
 extern "C" {
 
-typedef struct UnitStats {
-    /* 0x00 */ u8 unk00[0xE8];
-    /* 0xE8 */ s16 hp;
-    /* 0xEA */ s16 maxHp;
-} UnitStats;
-
-typedef struct BtlUnit {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ UnitStats *stats;
-} BtlUnit;
-
 extern u32 g_btlScriptUnit;
 
 static __inline s32 percentOf(s32 value, s32 total)
@@ -27,7 +16,7 @@ extern s32 scrGetArg(u32 index);
 u32 scrComm_BtlHpPercentAtMost(void)
 {
     s32 percent = scrGetArg(0);
-    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->stats;
+    BtlUnitData *stats = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))->data;
 
     scrSetResult(percentOf(stats->hp, stats->maxHp) <= percent);
     return 1;

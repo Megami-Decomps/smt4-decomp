@@ -3,7 +3,7 @@
 #include "battle/btlUnit.h"
 #include "battle/btlScript.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 extern const u64 g_battleMaskPresets[];

@@ -4,9 +4,9 @@
 #include "battle/ActionKindSelection.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include <stddef.h>
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 
 // Commit the selected action and retain it in the command's five-entry history ring.
 u32 FUN_003cb244(ActionStateChannels *channels, ActionKindSelection *selection)
@@ -36,7 +36,7 @@ u32 FUN_003cb244(ActionStateChannels *channels, ActionKindSelection *selection)
     // Command history and selection index extend beyond their canonical prefixes.
     SelectionView *work = reinterpret_cast<SelectionView *>(selection);
     btlPruneInvalidQueuedEntries(reinterpret_cast<BtlMainState *>(channels->entries[0].owner));
-    ActionStateChannels *active = static_cast<ActionStateChannels *>(g_btlAction.data);
+    ActionStateChannels *active = reinterpret_cast<ActionStateChannels *>(g_btlAction.slots);
     active->entries[channels->entries[0].owner->current].pending = 29;
     SelectionOwner *owner = reinterpret_cast<SelectionOwner *>(channels);
     if (work->command == NULL) {

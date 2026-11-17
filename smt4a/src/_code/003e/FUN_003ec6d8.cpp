@@ -1,9 +1,9 @@
 /* NON_MATCHING: invariant masks are hoisted and the canonical entry access removes retail's null-address check. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 bool FUN_003ec6d8(const BtlMainStateA *state, u32 id)
 {

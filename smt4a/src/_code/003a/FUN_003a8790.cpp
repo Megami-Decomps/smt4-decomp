@@ -6,6 +6,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnit.h"
 #include "gamedata/Table00Lookup.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 void scrSetResult(u32);
@@ -16,7 +17,7 @@ u32 scrGetArg(u32);
 u32 FUN_003a8790(void)
 {
     u32 category = scrGetArg(0);
-    BtlCombatantEntryA *entry = reinterpret_cast<BtlCombatantEntryA *>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->params);
+    BtlCombatantEntryA *entry = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->entry;
     if (entry->record) {
         for (s32 index = 0; index < 8; ++index) {
             const Table04RecordA *skill = dataTable04FindById(entry->record->skills[index]);

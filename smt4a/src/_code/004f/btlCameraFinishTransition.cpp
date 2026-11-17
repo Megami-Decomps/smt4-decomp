@@ -1,4 +1,5 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleCameraTransition {
     u8 unk0000[0x339c];
@@ -10,7 +11,6 @@ struct BattleCameraTransition {
 
 extern "C" {
 void objDestroyIfSet(void *object);
-extern BtlMainA *g_btlCamera;
 
 static __inline void flagsClearBits(u32 *flags, u32 bits)
 {
@@ -26,7 +26,7 @@ void btlCameraFinishTransition(BattleCameraTransition *transition)
     }
     transition->state = 12;
     transition->flags &= ~2u;
-    BtlMainA *camera = g_btlCamera;
+    BtlCameraA *camera = g_btlCamera;
     if (camera != NULL) {
         flagsClearBits(&camera->flags, 0x04000000u);
     }

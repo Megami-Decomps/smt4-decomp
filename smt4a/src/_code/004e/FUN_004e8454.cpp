@@ -2,8 +2,8 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
-extern "C" BtlActionGlobals g_btlAction;
 
 // Remove the action module's transient flag mask from every combatant.
 extern "C" void FUN_004e8454(BtlMainStateA **battle)

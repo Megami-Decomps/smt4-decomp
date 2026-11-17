@@ -1,5 +1,6 @@
 #include "battle/btlCamera.h"
 #include "shard/JobWork.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct HandleRegistry {
     /* 0x0C */ u32 cameraHandle;
 } HandleRegistry;
 
-extern BtlCameraA *g_btlCamera;
 extern HandleRegistry *g_handleRegistry;
 
 extern void jobStop(u32 job, s32 arg);

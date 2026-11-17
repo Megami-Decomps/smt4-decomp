@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 #include "battle/btlUnit.h"
+#include "battle/BtlGlobals.h"
 
 /* One battle unit (0x114 bytes); only the fields this state reads. */
 struct ReflectUnit {
@@ -56,11 +57,10 @@ struct ReflectMainState {
 };
 
 extern "C" {
-extern BtlMain *g_btlMain;
 extern ReflectMainState *DAT_00435d18;
 extern ReflectLayouts DAT_00439a20;
 extern u32 g_btlUiBlock;
-void FUN_0024082c(BtlMain *btl, s32 frames);
+void FUN_0024082c(BtlCamera *btl, s32 frames);
 void FUN_00254f58(ReflectBattle *battle);
 s32 btlFindNthActiveSpecialEntry(ReflectBattle *battle, s32 mode);
 void btlSetSelectedListedValue(s32 value);
@@ -68,7 +68,6 @@ void FUN_003ae720(u32 block, s32 mode);
 void FUN_00240678(ReflectTask *task, ReflectBattle *battle);
 void FUN_002b7bca(ReflectUnit **list, s32 count, s32 stride, void *compare);
 void FUN_0019d7d4(void);
-const u16 *btlFindEntryBlockByMemberId(ReflectBattle *battle, s32 slot);
 s32 pairedEntryTableContains(ReflectBattle *battle, u16 id);
 void FUN_0024057c(ReflectBattle *battle, ReflectUnit *unit, s32 a, s32 b, s32 style);
 void btlReflectInitKind9(s32 x, ReflectTask *task, ReflectUnit *unit, s32 kind, s32 count);
@@ -123,7 +122,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
             if ((unit->flags & 1) != 0 && (unit->flags & 2) != 0 && (unit->pending & 8) != 0) {
                 unit->pending &= ~8;
                 if ((unit->effectFlags & 0x800) == 0 &&
-                    pairedEntryTableContains(battle, btlFindEntryBlockByMemberId(battle, unit->skillSlot)[1]) == 0) {
+                    pairedEntryTableContains(battle, btlFindEntryBlockByMemberId(reinterpret_cast<BtlMainState *>(battle), unit->skillSlot)->id) == 0) {
                     unit->effectFlags |= 0x800;
                     const ReflectLayout *layout = (unit->flags & 0x10) != 0 ? &DAT_00439a20.special : &DAT_00439a20.normal;
                     s16 spacing = (s16)layout->spacing;

@@ -6,6 +6,7 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "gamedata/ConsumableRecord.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 /* A skill info record (only the kind and its flags). */
@@ -19,7 +20,6 @@ struct SkillInfo {
 }
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 s32 FUN_003af084(u32 block);
 void btlUiCopyStatePairs(u32 block, char *valid, u64 *mask, u64 *pair);
@@ -33,7 +33,7 @@ void FUN_00229b10(BtlMainState **block, CommandState *state);
 /* Sets the acting unit's action kind. */
 static __inline void setActorAction(BtlMainState **block, u8 kind)
 {
-    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = kind;
+    reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index].pending = kind;
 }
 
 /* Marks every target the menu reported as chosen. */

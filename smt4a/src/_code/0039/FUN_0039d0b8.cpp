@@ -1,3 +1,4 @@
+#include "gamedata/DevilRecordA.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -5,13 +6,7 @@
 
 extern "C" {
 
-typedef struct DevilKindData {
-    /* 0x00 */ u8 unk00[9];
-    /* 0x09 */ u8 kind;
-} DevilKindData;
-
 void scrSetResult(s32 result);
-DevilKindData *devilGetRecord(u16 devilId);
 
 // Report whether any eligible battle entry is a devil of kind 1.
 u32 FUN_0039d0b8(void)
@@ -21,7 +16,7 @@ u32 FUN_0039d0b8(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            devilGetRecord(entry->id)->kind == 1) {
+            devilGetRecord(entry->id)->category == 1) {
             scrSetResult(1);
             return 1;
         }

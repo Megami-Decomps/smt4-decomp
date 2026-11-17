@@ -2,22 +2,21 @@
 #include "common.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 extern UniteWork *g_unite;
-UniteSortRecordPrefixA *devilGetRecord(u32 id);
 }
 
 static inline s32 compareFusionRecords(u32 leftId, u32 rightId)
 {
-    const UniteSortRecordPrefixA *left = devilGetRecord(leftId);
-    const UniteSortRecordPrefixA *right = devilGetRecord(rightId);
-    s32 result = s32(right->categoryKey) - s32(left->categoryKey);
+    const DevilRecordA *left = devilGetRecord(leftId);
+    const DevilRecordA *right = devilGetRecord(rightId);
+    s32 result = s32(right->race) - s32(left->race);
     if (result == 0) {
-        result = s32(left->ascendingKey) - s32(right->ascendingKey);
+        result = s32(left->level) - s32(right->level);
         if (result == 0)
-            result = s32(right->descendingKey) - s32(left->descendingKey);
+            result = s32(right->id) - s32(left->id);
     }
     return result;
 }

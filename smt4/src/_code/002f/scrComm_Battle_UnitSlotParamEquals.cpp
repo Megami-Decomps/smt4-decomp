@@ -1,5 +1,6 @@
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
+#include "shard/W4_Match6_BtlEntry.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
@@ -15,7 +16,7 @@ s32 scrComm_Battle_UnitSlotParamEquals(void)
     s32 index = 0;
     s32 value;
     BtlUnit *unit;
-    s16 *slotParams;
+    s16 *stat;
 
     if (slot == 0) {
         index = 7;
@@ -25,9 +26,10 @@ s32 scrComm_Battle_UnitSlotParamEquals(void)
         index = 0xB;
     }
     value = scrGetArg(1);
-    unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-    slotParams = unit->params + index;
-    scrSetResult(slotParams[0x39] == value);
+    unit = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
+    /* entry->stat[index], addressed as retail does: the halfword pointer moved by index first. */
+    stat = reinterpret_cast<s16 *>(unit->entry) + index;
+    scrSetResult(stat[offsetof(BtlEntry, stat) / sizeof(s16)] == value);
     return 1;
 }
 

@@ -1,11 +1,10 @@
 /* NON_MATCHING: mask-load scheduling, saved registers, and shared zero-return placement differ. */
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/DevilRecordA.h"
 extern "C" {
-extern BtlMain g_btlMain;
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
-DevilRecordA *devilGetRecord(u32 id);
 s32 gameFlagIsSet(u32 flag);
 u32 lcgRandomRange(s32 limit);
 
@@ -46,11 +45,11 @@ u32 FUN_003ed6e8(BtlMainStateA *state)
         const BattleSlotSourceRecordA *source = (const BattleSlotSourceRecordA *)entry->specialMaximum.record;
         if (!source)
             return 0;
-        const DevilTableRecordA *devil = (const DevilTableRecordA *)devilGetRecord(source->id);
-        if (!devil || !devil->extraAction.chance)
+        const DevilRecordA *devil = devilGetRecord(source->id);
+        if (!devil || !devil->extraActionChance)
             return 0;
         if (!(state->stateFlags64.bits & masks->forced)) {
-            if (devil->extraAction.chance >= lcgRandomRange(99)) {
+            if (devil->extraActionChance >= lcgRandomRange(99)) {
                 s32 random = lcgRandomRange(99);
                 u32 count;
                 if (random < 40)

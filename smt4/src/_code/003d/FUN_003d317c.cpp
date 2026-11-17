@@ -4,6 +4,7 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlGlobals.h"
 
 /* Battle state fields this step clears, beyond the shared prefix. */
 struct CommandStartView {
@@ -42,8 +43,6 @@ typedef char CommandStartViewOffsets[
     offsetof(CommandStartTalk, unitIndex) == 0x760 ? 1 : -1];
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
-extern void *g_btlMain;
 extern u32 g_btlUiBlock;
 extern void *DAT_00435d18;
 
@@ -72,7 +71,7 @@ void FUN_00229b10(BtlMainState **block, CommandState *work);
 /* Sets the acting combatant's pending action. */
 static __inline void setPendingAction(BtlMainState **block, u8 pending)
 {
-    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = pending;
+    reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index].pending = pending;
 }
 
 u32 FUN_003d317c(BtlMainState **block, CommandState *work)

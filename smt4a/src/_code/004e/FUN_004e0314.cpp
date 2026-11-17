@@ -39,24 +39,9 @@ struct BattleMenuOwner {
 };
 
 /* One script unit slot (0x1254 bytes); the byte at 9 holds its current command. */
-struct ScriptUnitSlot {
-    /* 0x0000 */ u8 unk0000[9];
-    /* 0x0009 */ u8 command;
-    /* 0x000A */ u8 unk000A[0x124A];
-};
 
 /* g_btlAction: the script unit table pointer follows its first word, the selection masks sit further on. */
-struct BattleActionGlobals {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ ScriptUnitSlot *scriptUnit;
-    /* 0x08 */ u8 unk08[8];
-    /* 0x10 */ u64 requiredAny;
-    /* 0x18 */ u8 unk18[0x28];
-    /* 0x40 */ u64 excluded;
-};
-
 extern "C" {
-extern BattleActionGlobals g_btlAction;
 extern void *g_btlActionReflect;
 
 s32 chainCountIdUnflagged(void *owner);
@@ -98,7 +83,7 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
         btlQueueActionMessage(0, menu, 0x1000296, 0, 1, 0, 0);
         for (s32 i = 0; i < 109; i++) {
             BtlCombatantEntryA *entry = &owner->state->entries[i];
-            if ((g_btlAction.requiredAny & entry->flags) != 0 && (entry->flags & g_btlAction.excluded) == 0 &&
+            if ((g_btlAction.targetableMask & entry->flags) != 0 && (entry->flags & g_btlAction.interaction.excludedMask) == 0 &&
                 (entry->statusFlags & 0x400) != 0) {
                 FUN_004c9d04(entry->indexView.selectionIndex, 0, 0);
             }
@@ -128,7 +113,7 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
         FUN_0047f7ac(0, sound);
         btlReflectCreateKind44(row + 15, menu, view->unit->unitId, effect);
     }
-    g_btlAction.scriptUnit[owner->state->unitRecord.currentSlot].command = 0x20;
+    g_btlAction.slots[owner->state->unitRecord.currentSlot].unit.command = 0x20;
     return 1;
 }
 }

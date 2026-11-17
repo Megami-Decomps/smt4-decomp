@@ -1,7 +1,7 @@
 /* NON_MATCHING: the target loops and the scope switch are laid out differently from retail (built 236 rows vs 228); the usability checks are the same. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/Table04Record.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {

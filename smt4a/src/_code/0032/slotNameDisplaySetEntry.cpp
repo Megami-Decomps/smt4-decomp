@@ -1,15 +1,10 @@
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/DevilRecordA.h"
 
-// These fields extend beyond the shared table and sort-info prefixes; keep their views local.
+// These fields extend beyond the shared table prefix; keep its view local.
 struct DisplaySlotTable {
     u8 unk0000[0x1c88];
     s8 indices[24]; // 0x1c88
-};
-struct DisplaySlotInfo {
-    u8 unk00[6];
-    u16 sortKey; // 0x06
-    u8 unk08[0x38];
-    u16 name[8]; // 0x40
 };
 struct DisplaySlotRecord {
     u8 unk00[0x34];
@@ -34,8 +29,8 @@ void slotNameDisplaySetEntry(SlotNameDisplay *display, s32 entryId)
     if (entryId == 0) {
         display->selectedId = 0;
         display->entryId = 536;
-        DisplaySlotInfo *info = (DisplaySlotInfo *)devilGetRecord(536);
-        display->sortKey = info->sortKey;
+        DevilRecordA *info = devilGetRecord(536);
+        display->sortKey = info->level;
         memcpySrcFirst(info->name, display->name, 16);
         return;
     }

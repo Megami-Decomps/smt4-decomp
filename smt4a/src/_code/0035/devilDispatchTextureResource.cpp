@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include <stddef.h>
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
@@ -6,7 +6,6 @@
 #include "gamedata/Table00Lookup.h"
 
 extern "C" {
-const void *devilGetRecord(u32);
 s32 gameFlagIsSet(u32);
 s32 recordPrepareLinkedOwner(AocSystemA *, u32, s32);
 void texTableRecordCallWithParams(s32, u32, s32, u32, u32, u32);
@@ -15,40 +14,25 @@ void texBindBindTableNode(AocSystemA *, u32, s32, u32, s32, u32, u32, u32);
 /* Resolve the demon's texture resource and dispatch or request its operation. */
 void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s32 resolveDemon)
 {
-    /* Both accessed fields lie beyond the shared DevilRecordA prefix; keep
-       these bounded views local instead of growing that shared record. */
-    struct SavedTextureView {
-        u8 unk00[0x9C];
-        u16 texture;
-    };
-    struct TextureOverrideView {
-        u16 id;
-        u16 flags;
-        u8 unk04[0x88];
-        s16 texture;
-    };
-    typedef char TextureViewOffsets[
-        offsetof(SavedTextureView, texture) == 0x9C &&
-        offsetof(TextureOverrideView, texture) == 0x8C ? 1 : -1];
     u32 category = 15;
     s32 resource = id;
     if (resolveDemon) {
         if ((s32)id < 0) {
             resource = gameFlagIsSet(0x11) ? 0 : 0x25E;
         } else {
-            const SavedTextureView *saved = (const SavedTextureView *)devilGetRecord((u16)id);
+            const DevilRecordA *saved = devilGetRecord((u16)id);
             if (saved == NULL) {
                 return;
             }
-            const TextureOverrideView *definition = (const TextureOverrideView *)dataTable00FindById((u16)id);
-            if (definition->flags & 0x8000) {
-                resource = definition->texture;
+            const Table00RecordA *definition = dataTable00FindById((u16)id);
+            if (definition->level & 0x8000) {
+                resource = definition->battleTextureId;
                 category = 25;
                 if (resource >= 0x9A) {
                     return;
                 }
             } else {
-                resource = saved->texture + 1;
+                resource = saved->model + 1;
                 if (resource >= 0x277) {
                     return;
                 }

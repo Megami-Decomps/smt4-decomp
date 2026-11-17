@@ -1,7 +1,7 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 void asdMemFree(void *);
 void btlStageFreeContext(void);
 void engineFreeOptionalWork(void);

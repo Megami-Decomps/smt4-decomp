@@ -15,7 +15,6 @@ extern "C" {
 
 extern u32 g_aocSystem; /* 0x570280 */
 
-extern DevilRecordA *devilGetRecord(u32 id);
 extern AddonRaceLabelA *entryListFindById(u32 system, u32 id);
 
 /* The add-on text for `race` when the add-on system has some, else the built-in table's label (`alternate` selects its second half). */

@@ -1,6 +1,7 @@
 /* NON_MATCHING: final fallback actor-command addressing differs; actor setter/accessor variants do not reproduce retail scheduling. */
 #include "battle/btlAction.h"
 #include "gamedata/DataTable40.h"
+#include "battle/BtlGlobals.h"
 
 struct AlternateActionBattle {
     u8 unk0000[0x84];
@@ -35,7 +36,6 @@ struct AlternateActorState {
     u8 unk0a[0xf12];
 };
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern void *g_btlUiBlock;
 s32 randRange(u32);
 void btlEntryGetPassiveSkillIds(AlternateActionActor *, u16 *);
@@ -84,7 +84,7 @@ u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, Alternate
     if (!(choice->actor->flags & 0x30))
         FUN_00227b14(g_btlUiBlock, choice->target, 0, 0);
     choice->command->type = 15;
-    AlternateActorState *actor = &((AlternateActorState *)g_btlAction.data)[context->battle->actor];
+    AlternateActorState *actor = &(reinterpret_cast<AlternateActorState *>(g_btlAction.slots))[context->battle->actor];
     actor->command = 19;
     return 1;
 }

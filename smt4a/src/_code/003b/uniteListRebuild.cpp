@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
@@ -15,21 +15,20 @@ typedef struct Unite {
 
 extern Unite *g_unite;
 
-u16 *devilGetRecord(void *source);
 int unitRecordBuild(u32 id, u8 *record);
 u32 getUnlockedSlotCount(u8 *record);
 void __aeabi_memset4(void *block, u32 size, u32 value);
 int gridNavigationConfigure(void *list, u32 count, s32 columns, s32 a, s32 b, s32 c);
 
-/* Rebuilds the unite list for the unit record of `source`: sizes it to the unlocked slot count and clears the slots. */
-void uniteListRebuild(void *source)
+/* Rebuilds the unite list for the unit record of demon `id`: sizes it to the unlocked slot count and clears the slots. */
+void uniteListRebuild(u32 id)
 {
     Unite *unite = g_unite;
     u8 record[304];
 
     u32 slotCount;
 
-    unitRecordBuild(*devilGetRecord(source), record);
+    unitRecordBuild(devilGetRecord(id)->id, record);
     slotCount = getUnlockedSlotCount(record);
     unite->selection = 0;
     gridNavigationConfigure(unite->list, slotCount, 8, 1, 1, 1);

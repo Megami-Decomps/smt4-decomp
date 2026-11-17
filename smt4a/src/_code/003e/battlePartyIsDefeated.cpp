@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail expands four survivor tests; default compiler retains a loop and changes flag-mask addressing/saved registers (107/70). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 typedef char BattleSurvivalSuppressOffsetCheck[
     offsetof(BtlMainGlobalsA, suppressDefeat) == 0x1C8 ? 1 : -1];
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 u8 gameDataBlocksGetTableFlag();
 u8 gameDataFlagTestBit(u32 flag);
 }

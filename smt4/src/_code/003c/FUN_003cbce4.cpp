@@ -1,6 +1,7 @@
 /* NON_MATCHING: only register allocation of the action-slot address computation differs (retail loads the unit, the slot stride, then the table pointer into r0/r2/r3). */
 #include "battle/btlAction.h"
 #include "battle/ActionKindSelection.h"
+#include "battle/BtlGlobals.h"
 
 /* The combatant being driven; only the fields this state machine reads. */
 struct ReflectUnit {
@@ -31,7 +32,6 @@ struct ReflectTarget {
 
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlActionReflect;
 extern void *DAT_00435d18;
 extern void *g_btlEvent;
@@ -52,7 +52,7 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
         if (nodeListCountActiveById(g_btlActionReflect, target) != 0) {
             return 0;
         }
-        ActionKindThread *slot = &static_cast<ActionKindThread *>(g_btlAction.data)[actor->unit->slotIndex];
+        ActionKindThread *slot = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[actor->unit->slotIndex];
         slot->kind = 1;
         battleResetCounterAndFlag(DAT_00435d18);
         return 1;
@@ -71,7 +71,7 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
             return 0;
         }
         if (ready != NULL) {
-            ActionKindThread *slot = &static_cast<ActionKindThread *>(g_btlAction.data)[actor->unit->slotIndex];
+            ActionKindThread *slot = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[actor->unit->slotIndex];
             target->delay = 0;
             slot->kind = 0x1b;
             return 1;
@@ -87,7 +87,7 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
         if (nodeListCountActiveById(g_btlActionReflect, target) <= 0 && ready != NULL) {
             target->delay = 0x1e;
             frameRangeExtend(actor, target, target->source->id, 0, 0x11, 0x11);
-            ActionKindThread *slot = &static_cast<ActionKindThread *>(g_btlAction.data)[actor->unit->slotIndex];
+            ActionKindThread *slot = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[actor->unit->slotIndex];
             slot->kind = 0x1b;
             return 1;
         }

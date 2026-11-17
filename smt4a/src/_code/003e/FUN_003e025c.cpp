@@ -2,6 +2,7 @@
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct BattleCameraDefinition {
@@ -33,9 +34,7 @@ typedef char BattleCameraViewOffsetsCheck[
 
 extern "C" {
 extern BtlAuxA *g_btlAux;
-extern BtlCameraA *g_btlCamera;
 extern const char DAT_00528568[];
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 parameterIndex);
 BattleCameraDefinition *FUN_003eca48(BtlMainStateA *battle, u16 id);
 void textFormatBuffer(char *output, const char *format, ...);
 void FUN_004f2abc(BtlCameraA *camera, const char *path);

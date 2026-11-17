@@ -21,8 +21,8 @@ u32 btlHasReserveReplacement(const BtlEntry* entry)
 {
     if (entry != NULL) {
         if (entry->flags & 2) {
-            BtlUnit* actor = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-            if (actor->params != NULL && (*(u32*)actor->params & 2)) {
+            BtlUnit* actor = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
+            if (actor->entry != NULL && (actor->entry->flags & 2)) {
                 ReservePartyView* party = gameGetSlotTable();
                 for (s32 index = 0; index < party->count; ++index) {
                     if (party->stock[index] >= 0 && gameGetUnitRecord(party->stock[index]) != NULL &&

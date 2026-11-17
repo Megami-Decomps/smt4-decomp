@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 extern u64 g_btlTargetableMask;
@@ -37,7 +37,7 @@ void FUN_004e6880(BtlMainStateA **context, u32 status)
     }
     u16 eligibleCount = btlAiFilterCandidatesByExclusionChance(context, candidates, count, 1);
     u32 chosen = lcgRandomRange((u16)(eligibleCount - 1));
-    BattleActionUnit *unit = reinterpret_cast<BattleActionUnit *>(btlUnitGet(context));
-    unit->selectedUnits[candidates[chosen]] = 1;
+    BtlUnitA *unit = reinterpret_cast<BtlUnitA *>(btlUnitGet(context));
+    unit->targets[candidates[chosen]] = 1;
 }
 }

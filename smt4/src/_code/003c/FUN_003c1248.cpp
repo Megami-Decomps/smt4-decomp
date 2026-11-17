@@ -3,7 +3,7 @@
 #include "battle/btlUnit.h"
 #include "battle/btlAction.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/Table00Lookup.h"
 struct BtlUi;
 struct BtlEntry;
 /* Queued IDs and entry slots are outside the short shared prefixes. */
@@ -19,8 +19,7 @@ struct BattleSummaryBuffer {
 };
 extern "C" {
 extern BtlUi *g_btlUiBlock;
-DevilRecord *dataTable00FindById(u16 id);
-void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const DevilRecord *definition);
+void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const Table00Record *definition);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 PartyDamageUnitIV *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(const void *owner, u32 bit);
@@ -56,7 +55,7 @@ void FUN_003c1248(s32 kind, s32 source, s32 target, s32 animate)
         }
     } else {
         const QueuedBattleUnitsView *queue = reinterpret_cast<const QueuedBattleUnitsView *>(battle);
-        const DevilRecord *definition = dataTable00FindById(static_cast<u16>(queue->entries[source]));
+        const Table00Record *definition = dataTable00FindById(static_cast<u16>(queue->entries[source]));
         if (!definition)
             return;
         FUN_0023ebc8(battle, &summary.view.data, definition);

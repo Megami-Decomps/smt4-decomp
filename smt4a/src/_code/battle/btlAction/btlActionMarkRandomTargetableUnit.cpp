@@ -26,7 +26,7 @@ void btlActionMarkRandomTargetableUnit(BtlActionContext *context)
     }
     u16 remaining = btlAiFilterCandidatesByExclusionChance(&context->battle, candidates, count, 0);
     s32 pick = lcgRandomRange((u16)(remaining - 1));
-    btlUnitGet(&context->battle)->selection.targeted[candidates[pick]] = 1;
+    btlUnitGet(&context->battle)->targets[candidates[pick]] = 1;
 }
 
 } /* extern "C" */

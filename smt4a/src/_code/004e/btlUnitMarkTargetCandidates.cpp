@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnit.h"
 #include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleTargetWork {
     /* 0x00 */ u8 unk00[0x38];
@@ -10,7 +11,6 @@ struct BattleTargetWork {
 };
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 
 // Mark the battle slots permitted by the requested target-selection mode.
 void btlUnitMarkTargetCandidates(BtlMainStateA **reference, s32 group, s32 mode)

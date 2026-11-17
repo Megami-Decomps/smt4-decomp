@@ -1,8 +1,8 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-extern BtlMainGlobalsA g_btlMain;
 
 void btlMainClearUnk24(void)
 {

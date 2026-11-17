@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
@@ -7,21 +7,11 @@ typedef struct Item {
     /* 0x2 */ u16 group;
 } Item;
 
-typedef struct Record {
-    /* 0x0 */ u16 id;
-    /* 0x2 */ u8 rank;
-    /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 unk4[2];
-    /* 0x6 */ u16 order;
-} Record;
-
-extern Record *devilGetRecord(u32 id);
-
 /* Sort comparison of two items: ungrouped ones last, then by group (higher first), rank (higher first), order ascending and id (higher first). */
 s32 FUN_0035fdb0(Item *a, Item *b)
 {
-    Record *recordA;
-    Record *recordB;
+    DevilRecordA *recordA;
+    DevilRecordA *recordB;
     s32 diff;
 
     if (a->group == 0) {
@@ -34,9 +24,9 @@ s32 FUN_0035fdb0(Item *a, Item *b)
     if (diff == 0) {
         recordA = devilGetRecord(a->id);
         recordB = devilGetRecord(b->id);
-        diff = recordB->rank - recordA->rank;
+        diff = recordB->race - recordA->race;
         if (diff == 0) {
-            diff = recordA->order - recordB->order;
+            diff = recordA->level - recordB->level;
             if (diff == 0) {
                 diff = recordB->id - recordA->id;
             }

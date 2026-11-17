@@ -6,6 +6,7 @@
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 void screenFadeResetAndRelease(MaterialMergeOwner *);
@@ -17,11 +18,10 @@ void textureCacheReleaseAll(void);
 void FUN_00241d58(BattleSpritePlacement *);
 void asdMdlManagerMarkDestroy(AsdMdlObject *);
 void asdMemFree(void *);
-extern BtlMain *g_btlMain;
 }
 
 /* Clears the given battle flag bits. */
-static __inline void btlMainClearFlags(BtlMain *main, u32 mask)
+static __inline void btlMainClearFlags(BtlCamera *main, u32 mask)
 {
     main->flags &= ~mask;
 }

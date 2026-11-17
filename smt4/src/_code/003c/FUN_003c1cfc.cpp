@@ -4,7 +4,11 @@
 
 // A word-wide attribute view would change the shared record's byte-union alignment.
 struct DevilBattleRecordView {
-    DevilSortRecord header;
+    struct {
+        u16 id;
+        u8 race;
+        u8 level;
+    } header;
     u8 unk04[0x10];
     u16 baseHp;
     u16 baseMp;

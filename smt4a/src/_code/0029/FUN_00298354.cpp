@@ -3,9 +3,9 @@
 #include "battle/BattleUnitRecordState.h"
 #include "shard/Shard0032.h"
 #include "shard/JobWork.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 s32 jobIsValid(u32 job);
 void FUN_004eb928(BattleUnitRecordState *work, s32 state);
 s32 FUN_004ec120(BattleUnitRecordState *work, s32 state);
@@ -32,7 +32,7 @@ static inline SlotProgressView *slotProgress(BattleUnitSlotState *slot)
 extern "C" s32 FUN_00298354(u32 handle)
 {
     JobPool *job = (JobPool *)jobGetWork(handle);
-    BattleUnitRecordState *work = (BattleUnitRecordState *)g_btlAction.data;
+    BattleUnitRecordState *work = reinterpret_cast<BattleUnitRecordState *>(g_btlAction.slots);
     SlotProgressView *slot = slotProgress(&work->slots[job->current]);
     bool canAdvance = true;
     JobPool *jobs = (JobPool *)work->battle;
@@ -55,7 +55,7 @@ extern "C" s32 FUN_00298354(u32 handle)
             if (slot->state == 38) {
                 return -1;
             }
-            BattleUnitRecordState *currentWork = (BattleUnitRecordState *)g_btlAction.data;
+            BattleUnitRecordState *currentWork = reinterpret_cast<BattleUnitRecordState *>(g_btlAction.slots);
             SlotProgressView *current = slotProgress(&currentWork->slots[((JobPool *)currentWork->battle)->current]);
             s32 nextState = slot->pendingState;
             current->state = nextState;
@@ -66,7 +66,7 @@ extern "C" s32 FUN_00298354(u32 handle)
             slot->flags &= ~2u;
             return 0;
         }
-        if (FUN_004ec120((BattleUnitRecordState *)g_btlAction.data, slot->state)) {
+        if (FUN_004ec120(reinterpret_cast<BattleUnitRecordState *>(g_btlAction.slots), slot->state)) {
             slot->flags |= 2;
         }
         if (slot->ticks < 0xFFFF) {

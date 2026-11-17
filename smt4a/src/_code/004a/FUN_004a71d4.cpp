@@ -1,24 +1,15 @@
-#include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/DevilRecordA.h"
 
-struct SlotSortKeysView {
-    SlotSortInfo base;
-    u8 unk03[3];
-    u16 secondary; // 0x06
-    u8 unk08[0x12];
-    u16 primary; // 0x1a; preserve the shared three-byte prefix.
-};
-
+/* Sort demon ids by the second base stat, then by level (descending), then by id. */
 extern "C" s32 FUN_004a71d4(const u16 *left, const u16 *right)
 {
-    const SlotSortKeysView *leftRecord =
-        reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*left));
-    const SlotSortKeysView *rightRecord =
-        reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*right));
-    s32 comparison = leftRecord->primary - rightRecord->primary;
+    const DevilRecordA *leftRecord = devilGetRecord(*left);
+    const DevilRecordA *rightRecord = devilGetRecord(*right);
+    s32 comparison = leftRecord->baseMp - rightRecord->baseMp;
     if (comparison == 0) {
-        leftRecord = reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*left));
-        rightRecord = reinterpret_cast<const SlotSortKeysView *>(devilGetRecord(*right));
-        comparison = rightRecord->secondary - leftRecord->secondary;
+        leftRecord = devilGetRecord(*left);
+        rightRecord = devilGetRecord(*right);
+        comparison = rightRecord->level - leftRecord->level;
         if (comparison == 0)
             comparison = *left - *right;
     }

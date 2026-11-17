@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation/scheduling only: retail loads the actor's 64-bit flags with one ldm and orders the script-record address computation differently */
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -41,7 +42,6 @@ struct BtlScriptRecord {
     /* 0x09 */ u8 state;
 };
 
-extern BtlActionGlobals g_btlAction; /* 0x571138 */
 extern u32 g_btlAux;   /* 0x573808 */
 extern u32 g_btlEvent; /* 0x573898 */
 extern u32 g_btlActionReflect; /* 0x5712f0 */
@@ -56,7 +56,7 @@ void FUN_004fe764(s32, BtlCommand *, u32, s32, s32);
 
 static __inline BtlScriptRecord *btlScriptRecordGet(BtlActorRef *ref)
 {
-    return (BtlScriptRecord *)((u32 *)g_btlAction.data + ref->actor->slot * 0x495);
+    return (BtlScriptRecord *)(reinterpret_cast<u32 *>(g_btlAction.slots) + ref->actor->slot * 0x495);
 }
 
 /* Steps the actor's skill start: runs the pre/post handlers and marks the actor's script record state. */

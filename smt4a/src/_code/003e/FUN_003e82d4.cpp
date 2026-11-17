@@ -1,5 +1,6 @@
 /* NON_MATCHING: paired flag loads use LDRD/LDM differently and mask/register scheduling differs from retail. */
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 /* This global's mask suffix extends beyond the shared BtlMainGlobalsA prefix. */
 struct SelectionMasksView {
@@ -14,7 +15,6 @@ struct SelectionMasksView {
 };
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 void FUN_003e892c(BtlMainStateA *battle);
 
 s32 FUN_003e82d4(BtlMainStateA *battle)

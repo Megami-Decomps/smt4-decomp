@@ -2,21 +2,16 @@
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "battle/BattleHelpers_Smt4.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-/* A 0x288-byte slot record: a list of 50 ids (negative ends the list) at 8. */
-
-struct SlotManager {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ BtlEntry *records;
-};
+/* Battle entries are 0x288 bytes; each lists up to 50 member ids at 8 (negative ends the list). */
 
 /* Finds the slot whose id list contains `id`. */
-BtlEntry *btlMainFindEntryByListedId(SlotManager *manager, s32 id)
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id)
 {
-    BtlEntry *records = manager->records;
+    BtlEntry *records = state->entries;
 
     for (s32 i = 0; i < 109; i++) {
         BtlEntry *record = &records[i];

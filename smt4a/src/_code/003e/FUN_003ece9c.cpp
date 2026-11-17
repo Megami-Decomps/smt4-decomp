@@ -3,9 +3,9 @@
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "code/Code0019.h"
 #include "battle/BattleHelpers.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 extern void *g_btlUiBlock;
 s32 hasFlag80Or1000(u32 id, const ScriptCategoryUnit *unit);
 UnitCategoryState *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
@@ -30,15 +30,15 @@ void FUN_003ece9c(BtlMainStateA *state)
     UnitCategoryState *entry = btlFindFirstEntryMatchingCategoryAndRequiredMask(state);
     s32 category = FUN_0019acdc(entry->record->id, 1);
     BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))))->data;
-    switch ((s16)data->unk1BE) {
+    switch (data->actionKind) {
     case 1:
         FUN_0047f780(category, -1, 0);
         break;
     case 2:
-        FUN_0047f780(category, *reinterpret_cast<s16 *>(data->unk1C0), 0);
+        FUN_0047f780(category, data->actionArg, 0);
         break;
     case 8:
-        FUN_0047f780(category, 0, *reinterpret_cast<s16 *>(data->unk1C0));
+        FUN_0047f780(category, 0, data->actionArg);
         break;
     }
 }

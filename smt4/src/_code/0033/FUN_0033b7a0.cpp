@@ -1,4 +1,4 @@
-#include "gamedata/DevilRecord.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 extern "C" {
 s32 saveIsRecordValueBounded(u16);
 s32 flagBitIsSet(u32);

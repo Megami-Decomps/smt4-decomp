@@ -5,11 +5,11 @@
 #include "battle/btlAction.h"
 #include "battle/ActionKindSelection.h"
 #include "battle/ActionStateChannels.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleActionOwnerView { BtlMainState *battle; };
 struct BattleEventController;
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern BattleEventController *g_btlEvent;
 s32 FUN_0027e3b8(BattleEventController *);
 u32 btlEventSelectTrigger(BattleEventController *, u32, s32, u32);
@@ -20,7 +20,7 @@ void FUN_0023c154(BtlMainState *, s32, s32, s32, ActionKindSelection *);
 
 static void setPendingAction(BtlMainState *battle, u8 kind)
 {
-    static_cast<ActionStateChannel *>(g_btlAction.data)[battle->actionState.index].pending = kind;
+    reinterpret_cast<ActionStateChannel *>(g_btlAction.slots)[battle->actionState.index].pending = kind;
 }
 
 /* Prefer a pending battle event; otherwise queue an emergency action and advance the channel. */

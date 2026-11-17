@@ -1,6 +1,7 @@
 /* NON_MATCHING: phase test, reload, the outlined 120-frame camera fallback and the final step transition (btlStepEnter) now match; retail ands the phase word (ands, not tst), and loads the 64-bit masks of the initial test (ldrd into r0:r1) and the completed|queued OR (state word-wise, queued with ldrd) in other registers. */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 // The masks at 0x68 extend beyond the shared BtlEncounterGlobalsA prefix.
@@ -18,7 +19,6 @@ typedef char AncientTransitionMasksOffsetsCheck[
 }
 
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern BtlAuxA *g_btlAux;
 extern AncientTransitionMasks g_btlEncount;
 extern void *g_btlUiBlock;

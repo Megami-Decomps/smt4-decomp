@@ -3,11 +3,11 @@
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match1_BattleStageModelA.h"
 #include "shard/W5_W5Match2_CameraRegistry.h"
+#include "battle/BtlGlobals.h"
 
 struct FrameColorUpdateWork;
 extern "C" {
 extern BtlStageGlobals g_btlStage;
-extern BtlCameraA *g_btlCamera;
 extern CameraRegistry *g_handleRegistry;
 extern const char DAT_0052a9b8[]; // Light_EFT
 void FUN_002c23cc(u32 value);

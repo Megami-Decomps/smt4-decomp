@@ -28,12 +28,6 @@ struct AnalyzeEntryListView {
     u8 unk000[0x864];
     BibleAnalyzeListEntry entries[1280];
 };
-/* The property lies beyond DevilRecordA's shared prefix. */
-struct AnalyzeDemonFlagsView {
-    DevilRecordA record;
-    u8 unk40[0x73];
-    u8 flags;
-};
 struct AnalyzeSuffixGlobals {
     void *active;
     u32 unk04;
@@ -42,7 +36,6 @@ struct AnalyzeSuffixGlobals {
 typedef char AnalyzeConfirmationOffsets[
     sizeof(AnalyzePositionedButton) == 0x8C &&
     offsetof(AnalyzeEntryListView, entries) == 0x864 &&
-    offsetof(AnalyzeDemonFlagsView, flags) == 0xB3 &&
     offsetof(AnalyzeCallback, flags) == 4 ? 1 : -1];
 }
 extern "C" {
@@ -77,8 +70,8 @@ void Obj55c8d0::FUN_004a4658()
     BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeEntryListView *>(screen)->entries;
     if (screen->unk0860 == 0) {
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
-        const AnalyzeDemonFlagsView *record = reinterpret_cast<const AnalyzeDemonFlagsView *>(devilGetRecord(entries[index].id));
-        sysPlaySe((record->flags & 2) ? 0x121 : 0x30);
+        const DevilRecordA *record = devilGetRecord(entries[index].id);
+        sysPlaySe((record->extraFlags & 2) ? 0x121 : 0x30);
     } else {
         sysPlaySe(0x48);
     }

@@ -18,8 +18,8 @@ s32 FUN_002d0544(const PackedIdentifiers *packedLeft, const PackedIdentifiers *p
     typedef char FusionOrderViewSize[sizeof(FusionOrderView) == sizeof(PackedIdentifiers) ? 1 : -1];
     const FusionOrderView *left = (const FusionOrderView *)packedLeft;
     const FusionOrderView *right = (const FusionOrderView *)packedRight;
-    DevilSortRecord *leftRecord = devilGetRecord(left->resultIdentifier);
-    DevilSortRecord *rightRecord = devilGetRecord(right->resultIdentifier);
+    DevilRecord *leftRecord = devilGetRecord(left->resultIdentifier);
+    DevilRecord *rightRecord = devilGetRecord(right->resultIdentifier);
     s32 difference = leftRecord->race - rightRecord->race;
     if (difference == 0) {
         difference = rightRecord->level - leftRecord->level;

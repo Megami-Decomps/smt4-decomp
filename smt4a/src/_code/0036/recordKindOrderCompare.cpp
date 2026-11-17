@@ -1,26 +1,16 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
-
-typedef struct Record {
-    /* 0x0 */ u16 id;
-    /* 0x2 */ u8 kind;
-    /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 unk4[2];
-    /* 0x6 */ u16 order;
-} Record;
-
-Record *devilGetRecord(u32 id);
 
 /* Compares two record ids by kind (higher first), then by order (lower first), then by id (higher first). */
 s32 recordKindOrderCompare(u16 *a, u16 *b)
 {
-    Record *recordA = devilGetRecord(*a);
-    Record *recordB = devilGetRecord(*b);
-    s32 diff = recordB->kind - recordA->kind;
+    DevilRecordA *recordA = devilGetRecord(*a);
+    DevilRecordA *recordB = devilGetRecord(*b);
+    s32 diff = recordB->race - recordA->race;
 
     if (diff == 0) {
-        diff = recordA->order - recordB->order;
+        diff = recordA->level - recordB->level;
         if (diff == 0) {
             diff = recordB->id - recordA->id;
         }

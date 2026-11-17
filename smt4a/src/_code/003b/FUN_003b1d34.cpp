@@ -1,6 +1,6 @@
 #include "battle/btlCamera.h"
+#include "battle/BtlGlobals.h"
 extern "C" {
-extern BtlCameraA* g_btlCamera;
 s32 scrGetArg(u32);
 void mathVectorClear(f32*);
 void FUN_004f1c5c(BtlCameraA*, s32);

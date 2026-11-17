@@ -17,8 +17,8 @@ extern "C" s32 devilSortCompareUnitRankRaceId(const s32 *left, const s32 *right)
         const GameUnitSortRecord *second = gameGetUnitRecord(*right);
         difference = first->rank - second->rank;
         if (difference == 0) {
-            const DevilSortRecord *firstDevil = devilGetRecord(first->id);
-            const DevilSortRecord *secondDevil = devilGetRecord(second->id);
+            const DevilRecord *firstDevil = devilGetRecord(first->id);
+            const DevilRecord *secondDevil = devilGetRecord(second->id);
             difference = secondDevil->race - firstDevil->race;
             if (difference == 0) {
                 return second->id - first->id;

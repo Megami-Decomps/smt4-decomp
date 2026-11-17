@@ -7,6 +7,7 @@
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "sys/RuntimeObjects.h"
+#include "battle/BtlGlobals.h"
 
 /* The editor job: its state, the list box it shows and the selection the sub-editors keep.
  * The first 0x14 bytes are shared with BtlActionSelection (member/category/variant at 0x10..0x13). */
@@ -52,7 +53,6 @@ struct PosArrangeFile {
 
 extern "C" {
 void asdListBoxSetByteValue(u32 list, u8 value);
-extern BtlMain *g_btlMain;
 extern const char DAT_00400660[];
 extern const char DAT_00400658[];
 extern const char DAT_00400650[];
@@ -77,7 +77,6 @@ const char *btlPosArrangeGetFilePath(BtlMainState *state);
 char *libc_strcpy(char *destination, const char *source);
 s32 asdLoadFileGetUseRawPaths(void);
 void asdLoadFileSetUseRawPaths(s32 enabled);
-EditorUnitPosition *btlFindEntryBlockByMemberId(BtlMainState *state, s32 unit);
 EditorUnitPosition *FUN_0033a5ec(BtlMainState *state, s32 unit);
 void FUN_003d8a18(BattleDebugEditorJob *job, BtlMainState *state);
 void FUN_003d8b34(BattleDebugEditorJob *job, BtlMainState *state, u32 parent);

@@ -33,12 +33,13 @@ struct Table00Record {
     /* 0x70 */ u32 price;               /* the compendium price */
     /* 0x74 */ s32 unk74;
     /* 0x78 */ u32 money;
-    /* 0x7C */ u8 unk7C[6];
+    /* 0x7C */ u16 linkedIds[3];        /* demons whose registration also counts */
     /* 0x82 */ u16 talkTargetId;
     /* 0x84 */ u16 unk84;
     /* 0x86 */ u16 successorId;
     /* 0x88 */ s16 portraitId;          /* also the battle texture id */
-    /* 0x8A */ u8 unk8A[0x14];
+    /* 0x8A */ char aiScriptName[6];     /* battle/AI/<name>.bf */
+    /* 0x90 */ u8 unk90[0xE];
     /* 0x9E */ u8 arrangementFirst;     /* also the attack type */
     /* 0x9F */ u8 arrangementSecond;
     /* 0xA0 */ u16 selectionId;         /* also the help skill id */
@@ -54,7 +55,8 @@ typedef char Table00RecordOffsetCheck[sizeof(Table00Record) == 0xA8 &&
     offsetof(Table00Record, stats) == 0xC && offsetof(Table00Record, flags) == 0x16 &&
     offsetof(Table00Record, resistances) == 0x24 && offsetof(Table00Record, skills) == 0x48 &&
     offsetof(Table00Record, drops) == 0x58 && offsetof(Table00Record, experience) == 0x6C &&
-    offsetof(Table00Record, money) == 0x78 && offsetof(Table00Record, portraitId) == 0x88 &&
+    offsetof(Table00Record, money) == 0x78 && offsetof(Table00Record, linkedIds) == 0x7C &&
+    offsetof(Table00Record, portraitId) == 0x88 && offsetof(Table00Record, aiScriptName) == 0x8A &&
     offsetof(Table00Record, arrangementFirst) == 0x9E && offsetof(Table00Record, selectionId) == 0xA0 &&
     offsetof(Table00Record, variant) == 0xA4 ? 1 : -1];
 
@@ -81,7 +83,7 @@ struct Table00RecordA {
     /* 0x8E */ u8 unk8E[0x14];
     /* 0xA2 */ u8 bustUp;               /* the bust-up height: 0 tall, 1 average, 2 low */
     /* 0xA3 */ u8 bustUpVariation;
-    /* 0xA4 */ u8 unkA4;
+    /* 0xA4 */ u8 variant;              /* the texture variant drawn for the demon */
     /* 0xA5 */ u8 scriptFlags;          /* read bit by bit by the script commands */
     /* 0xA6 */ u8 unkA6[2];
 };
@@ -92,6 +94,6 @@ typedef char Table00RecordAOffsetCheck[sizeof(Table00RecordA) == 0xA8 &&
     offsetof(Table00RecordA, skills) == 0x50 && offsetof(Table00RecordA, choices) == 0x60 &&
     offsetof(Table00RecordA, experience) == 0x74 && offsetof(Table00RecordA, relatedIds) == 0x80 &&
     offsetof(Table00RecordA, portraitId) == 0x88 && offsetof(Table00RecordA, battleTextureId) == 0x8C &&
-    offsetof(Table00RecordA, bustUp) == 0xA2 && offsetof(Table00RecordA, scriptFlags) == 0xA5 ? 1 : -1];
+    offsetof(Table00RecordA, bustUp) == 0xA2 && offsetof(Table00RecordA, variant) == 0xA4 && offsetof(Table00RecordA, scriptFlags) == 0xA5 ? 1 : -1];
 
 #endif

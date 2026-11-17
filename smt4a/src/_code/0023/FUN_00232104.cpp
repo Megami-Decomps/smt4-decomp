@@ -1,5 +1,6 @@
 /* NON_MATCHING: invalid-slot tests and category/priority register allocation differ. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 s32 FUN_0020e83c(const s32 *, const s32 *);
@@ -28,9 +29,9 @@ s32 FUN_00232104(const s32 *left, const s32 *right)
             return -1;
         leftSlot = gameGetSlotRecord(*left);
         rightSlot = gameGetSlotRecord(*right);
-        SlotSortInfo *leftPriority = devilGetRecord(leftSlot->entryId);
-        SlotSortInfo *rightPriority = devilGetRecord(rightSlot->entryId);
-        difference = leftPriority->priority - rightPriority->priority;
+        DevilRecordA *leftPriority = devilGetRecord(leftSlot->entryId);
+        DevilRecordA *rightPriority = devilGetRecord(rightSlot->entryId);
+        difference = leftPriority->race - rightPriority->race;
         if (difference == 0)
             difference = FUN_0020e83c(left, right);
     }

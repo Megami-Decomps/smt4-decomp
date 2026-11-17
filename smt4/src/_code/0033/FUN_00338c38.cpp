@@ -14,7 +14,7 @@ extern u32 FUN_00245a7c(u32 arg, u32 pending);
 /* Starts the pending request (state 0) when the script is idle, the scripted unit is free and the script flags allow it. */
 void FUN_00338c38(BtlMainState *script)
 {
-    BattleActionUnit *unit;
+    BtlUnit *unit;
 
     if (script->encounterControl.busyA == 0 && script->encounterControl.blocked == 0) {
         unit = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));

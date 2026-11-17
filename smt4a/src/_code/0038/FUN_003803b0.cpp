@@ -3,7 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 

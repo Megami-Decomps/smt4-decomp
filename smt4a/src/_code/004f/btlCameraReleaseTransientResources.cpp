@@ -1,5 +1,6 @@
 #include "battle/btlCamera.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlGlobals.h"
 
 // Clears the given camera flag bits.
 static __inline void btlCameraClearFlags(BtlCameraA *camera, u32 mask)
@@ -17,7 +18,6 @@ void FUN_004f6e68(void *controller);
 void obj4FSlots28Reset(void *controller);
 void panelReset(void *controller);
 void FUN_004f8fa0(void *controller);
-extern BtlCameraA *g_btlCamera;
 
 // Release transient camera panels and resources and clear the active transition state.
 void btlCameraReleaseTransientResources(void *controller)

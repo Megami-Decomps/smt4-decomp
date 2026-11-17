@@ -1,9 +1,9 @@
 #include "battle/DebugPanel.h"
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern const AsdListBoxEntry DAT_005736e0[8];
 extern const char DAT_00528088[];
 extern f32 DAT_0057150c;

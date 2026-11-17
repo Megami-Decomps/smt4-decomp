@@ -16,7 +16,11 @@ struct LearnedSkill {
     u16 id;
 };
 struct DevilLearningRecord {
-    DevilSortRecord common;
+    struct {
+        u16 id;
+        u8 race;
+        u8 level;
+    } common;
     u8 unk04[0x48];
     LearnedSkill learned[8]; // 0x4c
     u8 unk6c[0x28];

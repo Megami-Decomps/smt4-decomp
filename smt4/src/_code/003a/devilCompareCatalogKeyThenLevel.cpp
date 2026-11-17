@@ -10,8 +10,8 @@ s32 devilCompareCatalogKeyThenLevel(const u16 *left, const u16 *right)
     const Table00Record *rightKey = dataTable00FindById(*right);
     s32 comparison = leftKey->maxHp - rightKey->maxHp;
     if (comparison == 0) {
-        const DevilSortRecord *leftDevil = devilGetRecord(*left);
-        const DevilSortRecord *rightDevil = devilGetRecord(*right);
+        const DevilRecord *leftDevil = devilGetRecord(*left);
+        const DevilRecord *rightDevil = devilGetRecord(*right);
         comparison = rightDevil->level - leftDevil->level;
         if (comparison == 0) {
             comparison = *left - *right;

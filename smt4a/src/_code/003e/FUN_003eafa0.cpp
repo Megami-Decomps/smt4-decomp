@@ -2,11 +2,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 void rt_memclr(void *buffer, u32 size);
 void clearTwoWords(void *value);
-extern BtlMainGlobalsA g_btlMain;
 
 /* Clears queued commands for the requested roster category, excluding inactive combatants. */
 void FUN_003eafa0(BtlMainStateA *battle, s32 category)

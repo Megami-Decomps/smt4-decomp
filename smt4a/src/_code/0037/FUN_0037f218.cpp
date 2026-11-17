@@ -1,19 +1,15 @@
+#include "gamedata/DevilRecordA.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 namespace {
-struct DemonRecordFamily {
-    /* 0x00 */ u8 unk00[9];
-    /* 0x09 */ u8 family;
-};
 }
 
 extern "C" {
 
 void scrSetResult(s32 result);
-DemonRecordFamily *devilGetRecord(u32 id);
 
 /* Script command: whether any eligible battle entry is a demon of family 5. */
 u32 FUN_0037f218(void)
@@ -23,7 +19,7 @@ u32 FUN_0037f218(void)
         if ((g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            devilGetRecord(entry->id)->family == 5) {
+            devilGetRecord(entry->id)->category == 5) {
             scrSetResult(1);
             return 1;
         }

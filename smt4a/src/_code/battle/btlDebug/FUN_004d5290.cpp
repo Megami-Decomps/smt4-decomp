@@ -3,9 +3,9 @@
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern const AsdListBoxEntry DAT_00573220[];
 extern const char DAT_0052809c[];
 s32 jobIsValid(u32 job);

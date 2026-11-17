@@ -20,8 +20,8 @@ s32 FUN_002dc9d4(const DevilSkillEntry *left, const DevilSkillEntry *right)
     s32 rightCategory = FUN_00257444(static_cast<s16>(rightSkill->sortKey));
     s32 difference = rightCategory - FUN_00257444(static_cast<s16>(leftSkill->sortKey));
     if (difference == 0) {
-        const DevilSortRecord *leftDevil = devilGetRecord(left->devilId);
-        const DevilSortRecord *rightDevil = devilGetRecord(right->devilId);
+        const DevilRecord *leftDevil = devilGetRecord(left->devilId);
+        const DevilRecord *rightDevil = devilGetRecord(right->devilId);
         difference = rightDevil->race - leftDevil->race;
         if (difference == 0) {
             difference = rightDevil->level - leftDevil->level;

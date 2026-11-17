@@ -4,6 +4,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
+#include "battle/BtlGlobals.h"
 
 /* The battle state's retreat flag word, beyond the shared prefix. */
 struct CommandRetreatView {
@@ -12,7 +13,6 @@ struct CommandRetreatView {
 };
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern void *g_btlUiBlock;
 
 void FUN_002569ac(BtlMainState **turn, s32 bank);
@@ -61,7 +61,7 @@ u32 FUN_003d2ea0(BtlMainState **turn, CommandState *work)
         FUN_0022a5d8(effect, work->entry, 1);
         FUN_0026beb4(chance, work, 0, work->record, 1);
         frameRangeExtend(turn, work, work->record->memberId, 0, 0x1e, 0x1e);
-        static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*turn)->actionState.index].pending = 0x1b;
+        reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*turn)->actionState.index].pending = 0x1b;
     } else {
         if ((pending & 0x40) == 0) {
             return 1;
@@ -70,12 +70,12 @@ u32 FUN_003d2ea0(BtlMainState **turn, CommandState *work)
         if (((*turn)->battleFlags & 0x40000) == 0 && roll < 0x32) {
             FUN_003c0484(work->entry, 0, 1);
             if (work->entry->flags & 0x30) {
-                static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*turn)->actionState.index].pending = reinterpret_cast<CommandRetreatView *>(*turn)->retreating == 0 ? 2 : 3;
+                reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*turn)->actionState.index].pending = reinterpret_cast<CommandRetreatView *>(*turn)->retreating == 0 ? 2 : 3;
             } else {
-                static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*turn)->actionState.index].pending = 1;
+                reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*turn)->actionState.index].pending = 1;
             }
         } else {
-            static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*turn)->actionState.index].pending = 0x11;
+            reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*turn)->actionState.index].pending = 0x11;
         }
     }
     if (work->entry->flags & 0x60000) {

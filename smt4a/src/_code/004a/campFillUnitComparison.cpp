@@ -11,7 +11,6 @@ struct PartyComparisonTable : PartyStatusSlots {
 };
 typedef char PartyComparisonCountOffset[offsetof(PartyComparisonTable, count) == 0x1CA3 ? 1 : -1];
 
-
 static inline UnitRecord *findComparisonPartyUnit(u32 id)
 {
     PartyComparisonTable *party = (PartyComparisonTable *)gameGetSlotTable();
@@ -36,8 +35,8 @@ void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
     DevilRecordA *metadata = devilGetRecord(id);
     row->id = metadata->id;
     row->race = metadata->race;
-    row->category = metadata->unk08[0];
-    row->kind = metadata->categoryView.category;
+    row->category = metadata->unk08;
+    row->kind = metadata->category;
     row->description = dataTable01GetRecordWithAocOverride(metadata->id);
     row->flags = 0;
     UnitRecord saved;

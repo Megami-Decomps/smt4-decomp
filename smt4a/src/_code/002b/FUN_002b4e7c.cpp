@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc hoists the exclusion and category masks out of the loop (extra saved registers); retail hoists only the required mask and reloads the others each pass. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct BtlUnitRecordA {
     /* 0x00 */ u8 unk00[0x1C];
@@ -8,7 +9,6 @@ struct BtlUnitRecordA {
 };
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 /* The unit's maximum HP: its battle combatant's while a battle (not in phase 29) holds it, else the record's own. */
 s32 FUN_002b4e7c(BtlUnitRecordA *record)

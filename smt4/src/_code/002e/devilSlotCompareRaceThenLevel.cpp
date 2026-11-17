@@ -19,8 +19,8 @@ s32 devilSlotCompareRaceThenLevel(const DevilSlot *first, const DevilSlot *secon
     if (second->present == 0) {
         return -1;
     }
-    const DevilSortRecord *a = devilGetRecord(first->id);
-    const DevilSortRecord *b = devilGetRecord(second->id);
+    const DevilRecord *a = devilGetRecord(first->id);
+    const DevilRecord *b = devilGetRecord(second->id);
     s32 result = b->race - a->race;
 
     if (result == 0) {

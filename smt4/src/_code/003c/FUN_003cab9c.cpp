@@ -3,6 +3,7 @@
 #include "battle/btlUnit.h"
 #include "gamedata/DataTable40.h"
 #include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 /* The record of a combatant's chosen action: its id is at 0x62. */
 struct TurnRecord {
@@ -58,7 +59,6 @@ struct DataTable40Record {
 };
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern void *DAT_00435d18;
 
 s32 objSlotStateIsActiveRange(TurnState *state, s32 slot);
@@ -70,7 +70,7 @@ void btlTargetSetFlag10(TurnState *state, s32 targetId, s32 primary);
 
 static __inline void turnSetCommand(TurnOwner *owner, u8 command)
 {
-    TurnScriptSlot *slot = &static_cast<TurnScriptSlot *>(g_btlAction.data)[owner->state->actorIndex];
+    TurnScriptSlot *slot = &reinterpret_cast<TurnScriptSlot *>(g_btlAction.slots)[owner->state->actorIndex];
     slot->command = command;
 }
 

@@ -1,20 +1,11 @@
 /* NON_MATCHING: only r7/r8 are swapped: retail keeps g_statusBustUpResources in r7 and &g_aocSystem in r8 (same pool order). The smt4 twin FUN_002942c4 matches with this shape. */
 #include "status/StatusBustUp.h"
-#include "shard/W6_W6Match8_DevilRecordA.h"
+#include "gamedata/DevilRecordA.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "addon/AocSystemA.h"
 #include "gamedata/Table00Lookup.h"
-
-// The portrait ID is past the shared DevilRecordA prefix.  Apocalypse's table
-// override flags and model ID also differ from the SMT IV model override layout.
-struct PortraitDevilRecordAView {
-    DevilRecordA prefix;
-    u8 unk40[0x5C];
-    u16 portrait;
-};
-typedef char PortraitRecordAOffsets[offsetof(PortraitDevilRecordAView, portrait) == 0x9C ? 1 : -1];
 
 extern "C" {
 extern StatusBustUpResources g_statusBustUpResources;
@@ -30,12 +21,12 @@ void statusBustUpPortraitAcquire(s32 id, s32 byDevilId)
         if (id < 0) {
             id = gameFlagIsSet(17) ? 0 : 606;
         } else {
-            PortraitDevilRecordAView *devil = (PortraitDevilRecordAView *)devilGetRecord((u16)id);
+            DevilRecordA *devil = devilGetRecord((u16)id);
             if (devil == NULL)
                 return;
             Table00RecordA *override = dataTable00FindById((u16)id);
             if (!(override->level & 0x8000)) {
-                id = devil->portrait + 1;
+                id = devil->model + 1;
                 if (id >= 631)
                     return;
             } else {

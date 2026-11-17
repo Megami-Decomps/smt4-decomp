@@ -1,5 +1,6 @@
 #include "battle/btlMain.h"
 #include "code/Code003e.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ extern "C" {
 
 /* Global game state: party block pointer at 0xc and a checked object at 0x14. */
 
-extern BtlMainGlobalsA g_btlMain;
 
 int bitsAt60Test(void *object, int arg);
 

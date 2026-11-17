@@ -1,8 +1,8 @@
 /* NON_MATCHING: compiler hoists mask loads and allocates more registers; decoder address scheduling differs. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 // Decode the selected active combatant's 21 packed stat levels.
 u8 *FUN_00272310(u32 id)

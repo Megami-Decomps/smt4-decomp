@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
 #include "code/Code002c.h"
+#include "battle/BtlGlobals.h"
 struct BattleActionHistoryState;
 
 extern "C" {
@@ -17,7 +18,6 @@ typedef struct BtlEndTask {
     u32 job;        /* 0x18 */
 } BtlEndTask;
 
-extern BtlMain *g_btlMain;
 
 void FUN_0033a780(BattleActionHistoryState *state);
 void btlTalkBustUpDestroy(void);

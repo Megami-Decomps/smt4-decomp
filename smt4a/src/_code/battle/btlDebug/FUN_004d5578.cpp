@@ -5,9 +5,9 @@
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "shard/X14_BtlUiClose.h"
 #include "battle/btlDebug.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern BtlUiCloseState DAT_005715f8;
 extern const AsdListBoxEntry DAT_00573300[31];
 extern f32 DAT_005e1554[3];

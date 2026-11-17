@@ -5,8 +5,8 @@
 /* Tie-break two demons by descending race, then level, then descending demon id. */
 static __inline s32 compareFusionDevilDetails(u16 leftId, u16 rightId)
 {
-    const DevilSortRecord *left = devilGetRecord(leftId);
-    const DevilSortRecord *right = devilGetRecord(rightId);
+    const DevilRecord *left = devilGetRecord(leftId);
+    const DevilRecord *right = devilGetRecord(rightId);
     s32 difference = right->race - left->race;
     if (difference == 0) {
         difference = left->level - right->level;
@@ -19,8 +19,8 @@ static __inline s32 compareFusionDevilDetails(u16 leftId, u16 rightId)
 /* Order two demons by descending level, then by their details. */
 static __inline s32 compareFusionDevils(u16 leftId, u16 rightId)
 {
-    const DevilSortRecord *left = devilGetRecord(leftId);
-    const DevilSortRecord *right = devilGetRecord(rightId);
+    const DevilRecord *left = devilGetRecord(leftId);
+    const DevilRecord *right = devilGetRecord(rightId);
     s32 difference = right->level - left->level;
     if (difference == 0)
         difference = compareFusionDevilDetails(leftId, rightId);

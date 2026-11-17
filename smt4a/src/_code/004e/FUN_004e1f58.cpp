@@ -8,9 +8,9 @@ BattleMotionSubject *btlFindEntryBlockByMemberId(BtlMainStateA *battle, s32 para
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 
 // Retain one identity/pose snapshot per eligible roster model, without duplicating existing entries.
-void FUN_004e1f58(BtlMainGlobalsA *globals, const BattleActionUnit *action, s32 alternate)
+void FUN_004e1f58(BtlMainGlobalsA *globals, const BtlUnitA *action, s32 alternate)
 {
-    const u8 *selectedUnits = action->selectedUnits;
+    const s8 *selectedUnits = action->targets;
     for (s32 rosterIndex = 0; rosterIndex < 133; ++rosterIndex) {
         BtlMainStateA *battle = globals->state;
         BattleRosterRecordA *record = &battle->roster[rosterIndex];

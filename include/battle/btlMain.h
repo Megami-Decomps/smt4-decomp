@@ -6,37 +6,9 @@
 #include "common.h"
 #include "battle/BattleRosterCache.h"
 #include "shard/W6_W6Match1_BattleCountSlot.h"
+#include "battle/btlCamera.h"
 #include <stddef.h>
 
-#define BTL_FLAG_NO_ENCOUNT 0x80000 /* BtlMain.flags: random encounters are suppressed */
-
-typedef struct BtlMain {
-    union {
-        /* 0x000 */ u8 unk000[0x634];
-        /* 0x000 */ f32 cameraPosition[3];
-        struct {
-            u8 unk000[0xC];
-            /* 0x00C */ f32 vectors[2][3];
-            /* 0x024 */ s32 value;
-        } cameraEditor;
-        struct {
-            u8 prefix[0x2C];
-            f32 scalar;
-            f32 delta;
-        } cameraTransition;
-    };
-    /* 0x634 */ u32 flags;
-} BtlMain;
-typedef char BtlMainCameraPositionLayoutCheck[
-    offsetof(BtlMain, cameraPosition) == 0 && offsetof(BtlMain, flags) == 0x634 &&
-    sizeof(BtlMain) == 0x638 ? 1 : -1];
-typedef char BtlMainCameraEditorOffsetsCheck[
-    offsetof(BtlMain, cameraEditor.vectors) == 0xC &&
-    offsetof(BtlMain, cameraEditor.value) == 0x24 && sizeof(BtlMain) == 0x638 ? 1 : -1];
-typedef char BtlMainCameraTransitionOffsetsCheck[
-    offsetof(BtlMain, cameraTransition.scalar) == 0x2C &&
-    offsetof(BtlMain, cameraTransition.delta) == 0x30 &&
-    sizeof(BtlMain) == 0x638 ? 1 : -1];
 
 struct BtlActionRecord;
 struct BtlEntry;
@@ -795,18 +767,6 @@ typedef char BtlMainVoiceStateOffsetsCheck[
 typedef char BtlMainTargetCapacityOffsetCheck[
     offsetof(BtlMainStateA, targetCapacity.counts) == 0x4C70 &&
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
-
-/* The same state in Apocalypse: active combatant mask and encounter flags. */
-typedef struct BtlMainA {
-    union {
-        /* 0x000 */ u8 unk000[0x64C];
-        struct {
-            /* 0x000 */ u8 unk000BeforeMask[0x130];
-            /* 0x130 */ u32 words[2];
-        } activeMask;
-    };
-    /* 0x64C */ u32 flags;
-} BtlMainA;
 
 /* A step block the battle updates, as FUN_004d7fe4 sees it (Apocalypse). */
 typedef struct BtlStep {

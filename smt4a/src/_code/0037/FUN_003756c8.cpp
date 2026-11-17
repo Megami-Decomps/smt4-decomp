@@ -1,9 +1,9 @@
 /* NON_MATCHING: all sound-selection branches agree; initial battle flags/masks load ordering and flag-id register differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 void sysPlaySe(u32 id);
 s32 gameFlagIsSet(u32 id);
 

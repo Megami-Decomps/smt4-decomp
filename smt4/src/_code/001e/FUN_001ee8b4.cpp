@@ -19,9 +19,9 @@ void FUN_001ee8b4(const u8 *quantities)
     memClear(status->inventory.entries, sizeof(status->inventory.entries));
     for (u16 index = 0; index < 0x500; ++index) {
         const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(index));
-        if (record && (record->fusion.flags & 1) && quantities[record->header.id]) {
-            status->inventory.entries[status->inventory.count][0] = record->header.id;
-            u8 quantity = quantities[record->header.id];
+        if (record && (record->flags & 1) && quantities[record->id]) {
+            status->inventory.entries[status->inventory.count][0] = record->id;
+            u8 quantity = quantities[record->id];
             status->inventory.entries[status->inventory.count][1] = quantity;
             s16 count = status->inventory.count;
             if (quantity)

@@ -2,8 +2,8 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "shard/JobWork.h"
+#include "battle/BtlGlobals.h"
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 s32 jobIsValid(u32 job);
 void FUN_003d2140(ActionStateChannels *channels);
 s32 FUN_003d28d0(ActionStateChannels *channels, s32 state);
@@ -12,7 +12,7 @@ s32 FUN_003d28d0(ActionStateChannels *channels, s32 state);
 u32 FUN_001e48d0(u32 job)
 {
     s32 index = ((ActionStateChannelOwner *)jobGetWork(job))->current;
-    ActionStateChannels *channels = static_cast<ActionStateChannels *>(g_btlAction.data);
+    ActionStateChannels *channels = reinterpret_cast<ActionStateChannels *>(g_btlAction.slots);
     ActionStateTransition *channel = reinterpret_cast<ActionStateTransition *>(&channels->entries[index].flags);
     s32 previous = channels->entries[0].owner->current - 1;
     if (previous < 0)
@@ -31,7 +31,7 @@ u32 FUN_001e48d0(u32 job)
         if (flags & 2) {
             if (channel->state == 35)
                 return ~0u;
-            ActionStateChannels *current = static_cast<ActionStateChannels *>(g_btlAction.data);
+            ActionStateChannels *current = reinterpret_cast<ActionStateChannels *>(g_btlAction.slots);
             ActionStateChannel *active = &current->entries[current->entries[0].owner->current];
             active->state = channel->pending;
             active->frames = 0;
@@ -41,7 +41,7 @@ u32 FUN_001e48d0(u32 job)
             channel->flags &= ~2u;
             return 0;
         }
-        if (FUN_003d28d0(static_cast<ActionStateChannels *>(g_btlAction.data), channel->state))
+        if (FUN_003d28d0(reinterpret_cast<ActionStateChannels *>(g_btlAction.slots), channel->state))
             channel->flags |= 2;
         if (channel->frames < 0xFFFF)
             ++channel->frames;

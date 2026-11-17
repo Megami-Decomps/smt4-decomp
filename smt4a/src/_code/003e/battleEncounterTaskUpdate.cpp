@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "code/Code0013.h"
+#include "battle/BtlGlobals.h"
 
 struct EncounterTask {
     /* 0x00 */ u32 state;
@@ -27,7 +28,6 @@ struct EncounterTaskGlobals {
 extern "C" {
 extern BtlStep *g_btlEvent;
 extern EncounterTaskGlobals g_btlEncount;
-extern BtlMainA *g_btlCamera;
 extern void *g_btlActionReflect;
 extern void *g_btlAux;
 s32 isEntryUsable(BtlStep *event);
@@ -51,8 +51,8 @@ s32 FUN_003e3188(EncounterTask *task, EncounterTaskContext *context);
 s32 btlRosterGroupAllInactive(EncounterTaskContext *context, u32 enabled);
 void FUN_003ed238(EncounterTaskContext *context, u32 flags);
 s32 FUN_003e025c(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_004f2294(BtlMainA *camera);
-void btlCameraObjectCreate(BtlMainA *camera);
+s32 FUN_004f2294(BtlCameraA *camera);
+void btlCameraObjectCreate(BtlCameraA *camera);
 s32 FUN_003e1068(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003ece50(EncounterTaskContext *context);
 void FUN_003eaa9c(EncounterTaskContext *context);
@@ -70,9 +70,9 @@ s32 FUN_003e0cd4(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003e0bb8(EncounterTask *task, EncounterTaskContext *context);
 s32 chainCountIdUnflagged(void *reflect, EncounterTask *task);
 s32 recordAreAllCountsNonpositive(void *auxiliary);
-s32 eventCommandRangeCheck(BtlMainA *camera);
+s32 eventCommandRangeCheck(BtlCameraA *camera);
 void stateFinishIfPresent(EncounterTaskContext *context);
-void eventCommandClearPending(BtlMainA *camera);
+void eventCommandClearPending(BtlCameraA *camera);
 }
 
 /* Dispatch encounter phases and finish only after all action and command work drains. */

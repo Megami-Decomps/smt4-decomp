@@ -1,25 +1,16 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
-typedef struct Record {
-    /* 0x0 */ u16 id;
-    /* 0x2 */ u8 rank;
-    /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 unk4[2];
-    /* 0x6 */ u16 order;
-} Record;
-
 extern u32 FUN_002a4b28(u16 id);
-extern Record *devilGetRecord(u32 id);
 
 /* Sort comparison of two ids: by their FUN_002a4b28 bit sets (a set containing bits the other lacks sorts first), then by rank ascending, order descending and id ascending. */
 s32 FUN_002fe074(u16 *idA, u16 *idB)
 {
     u32 setA = FUN_002a4b28(*idA);
     u32 setB = FUN_002a4b28(*idB);
-    Record *recordA;
-    Record *recordB;
+    DevilRecordA *recordA;
+    DevilRecordA *recordB;
     s32 diff;
 
     if ((setB & ~setA) != 0) {
@@ -30,9 +21,9 @@ s32 FUN_002fe074(u16 *idA, u16 *idB)
     }
     recordA = devilGetRecord(*idA);
     recordB = devilGetRecord(*idB);
-    diff = recordA->rank - recordB->rank;
+    diff = recordA->race - recordB->race;
     if (diff == 0) {
-        diff = recordB->order - recordA->order;
+        diff = recordB->level - recordA->level;
         if (diff == 0) {
             diff = recordA->id - recordB->id;
         }

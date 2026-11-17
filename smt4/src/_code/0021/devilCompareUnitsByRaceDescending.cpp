@@ -18,8 +18,8 @@ s32 devilCompareUnitsByRaceDescending(const s32 *left, const s32 *right)
     } else {
         GameUnitSortRecord *leftUnit = gameGetUnitRecord(*left);
         GameUnitSortRecord *rightUnit = gameGetUnitRecord(*right);
-        DevilSortRecord *leftDevil = devilGetRecord(leftUnit->id);
-        DevilSortRecord *rightDevil = devilGetRecord(rightUnit->id);
+        DevilRecord *leftDevil = devilGetRecord(leftUnit->id);
+        DevilRecord *rightDevil = devilGetRecord(rightUnit->id);
         result = rightDevil->race - leftDevil->race;
         if (result == 0)
             return devilSortCompareUnitRankRaceId(left, right);

@@ -2,9 +2,9 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMain* g_btlMain;
 extern AsdListBoxEntry DAT_00435be8[];
 extern const char DAT_004004f8[];
 extern f32 DAT_004342cc;

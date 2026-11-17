@@ -1,6 +1,7 @@
 /* NON_MATCHING: base-position copy registers differ; fast floating-point mode folds the two degree-conversion multiplies into vnmls, unlike retail. */
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct CameraDebugMenu {
@@ -9,7 +10,6 @@ struct CameraDebugMenu {
 };
 }
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 s32 listBoxItemHasOwner(AsdListBox *list);
 f32 *asdListBoxGetFloatValuePtr(AsdListBox *list, u32 index);
 

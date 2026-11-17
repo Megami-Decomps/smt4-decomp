@@ -1,18 +1,18 @@
 /* NON_MATCHING: the zero-float argument of the second FUN_0023cb70 call is loaded before the integer arguments (retail loads it last). */
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMain *g_btlMain;
-void transitionConfigureAndReset(BtlMain *main, u32 duration, s32 enabled, f32 value);
-void FUN_0023cb70(BtlMain *main, u32 duration, s32 enabled, s32 mode, f32 value);
-void FUN_003d86a0(BtlMain *main, s32 first, s32 second);
+void transitionConfigureAndReset(BtlCamera *main, u32 duration, s32 enabled, f32 value);
+void FUN_0023cb70(BtlCamera *main, u32 duration, s32 enabled, s32 mode, f32 value);
+void FUN_003d86a0(BtlCamera *main, s32 first, s32 second);
 
-static __inline void btlMainSetFlags(BtlMain *main, u32 mask)
+static __inline void btlMainSetFlags(BtlCamera *main, u32 mask)
 {
     main->flags |= mask;
 }
 
-static __inline void cameraTransitionStart(BtlMain *main, u32 duration, f32 first, s32 mode, f32 second)
+static __inline void cameraTransitionStart(BtlCamera *main, u32 duration, f32 first, s32 mode, f32 second)
 {
     transitionConfigureAndReset(main, duration, 1, first);
     FUN_0023cb70(g_btlMain, duration, 1, mode, second);
@@ -21,13 +21,13 @@ static __inline void cameraTransitionStart(BtlMain *main, u32 duration, f32 firs
 u32 FUN_003d0220(u32, void *owner, s32 alternate)
 {
     struct ProgressView { u8 unk000[0x56c]; u32 frame; };
-    // The transition's camera value lies beyond the shared BtlMain prefix.
+    // The transition's camera value lies beyond the shared BtlCamera prefix.
     struct CameraView { u8 unk000[0x698]; f32 value; };
     typedef char TransitionViews[offsetof(ProgressView, frame) == 0x56c &&
         offsetof(CameraView, value) == 0x698 ? 1 : -1];
     ProgressView *progress = static_cast<ProgressView *>(owner);
     u32 frame = progress->frame;
-    BtlMain *main = g_btlMain;
+    BtlCamera *main = g_btlMain;
     if (alternate) {
         if (frame == 15) {
             btlMainSetFlags(main, 0x100000);

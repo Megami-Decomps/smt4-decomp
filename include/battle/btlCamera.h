@@ -1,9 +1,41 @@
-/* battle/btlCamera.cpp: known fields of Apocalypse's camera work block. */
+/* battle/btlCamera.cpp: the battle camera's work block (BtlCamera; Apocalypse: BtlCameraA). */
 #ifndef BATTLE_BTLCAMERA_H
 #define BATTLE_BTLCAMERA_H
 
 #include "common.h"
 #include <stddef.h>
+
+#define BTL_FLAG_NO_ENCOUNT 0x80000 /* BtlCamera.flags: random encounters are suppressed */
+
+/* The battle camera's work block (Shin Megami Tensei IV; g_btlMain at 0x4342c8 points at it). */
+typedef struct BtlCamera {
+    union {
+        /* 0x000 */ u8 unk000[0x634];
+        /* 0x000 */ f32 cameraPosition[3];
+        struct {
+            u8 unk000[0xC];
+            /* 0x00C */ f32 vectors[2][3];
+            /* 0x024 */ s32 value;
+        } cameraEditor;
+        struct {
+            u8 prefix[0x2C];
+            f32 scalar;
+            f32 delta;
+        } cameraTransition;
+    };
+    /* 0x634 */ u32 flags;
+    /* 0x638 */ u8 unk638[0x128];
+    /* 0x760 */ s32 unk760;
+} BtlCamera;
+typedef char BtlCameraCameraPositionLayoutCheck[
+    offsetof(BtlCamera, cameraPosition) == 0 && offsetof(BtlCamera, flags) == 0x634 &&
+    offsetof(BtlCamera, unk760) == 0x760 ? 1 : -1];
+typedef char BtlCameraCameraEditorOffsetsCheck[
+    offsetof(BtlCamera, cameraEditor.vectors) == 0xC &&
+    offsetof(BtlCamera, cameraEditor.value) == 0x24 ? 1 : -1];
+typedef char BtlCameraCameraTransitionOffsetsCheck[
+    offsetof(BtlCamera, cameraTransition.scalar) == 0x2C &&
+    offsetof(BtlCamera, cameraTransition.delta) == 0x30 ? 1 : -1];
 
 class CameraBackend {
 public:

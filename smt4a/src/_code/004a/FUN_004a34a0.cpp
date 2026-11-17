@@ -1,6 +1,6 @@
 /* NON_MATCHING: validation result-code merging, predicate formation and register lifetimes differ. */
 #include "shard/Shard004A.h"
-#include "code/Code0018_VariantA_DevilRecordA.h"
+#include "gamedata/DevilRecordA.h"
 #include "code/Code002a_Smt4a.h"
 
 extern "C" {

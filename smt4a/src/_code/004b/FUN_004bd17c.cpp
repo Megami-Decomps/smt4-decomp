@@ -1,8 +1,7 @@
 #include "common.h"
 #include "shard/Shard004B.h"
 #include "gamedata/Table04Record.h"
-
-extern "C" s32 devilGetRecord(u16 id);
+#include "gamedata/DevilRecordA.h"
 
 // Apply each item's category modifier, clamping its signed rank to -9..9.
 extern "C" void FUN_004bd17c(ItemRankRecord *record)

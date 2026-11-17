@@ -13,7 +13,7 @@ s32 scrComm_Battle_SetUnitStateB(void)
     BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlUnitData *data = unit->data;
 
-    data->unk14C = 0xB;
+    data->actionKind = 0xB;
     btlUnitSetParam(g_btlScriptUnit, 0xF, 0);
     return 1;
 }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: -O3 hoists all category-mask tests and the history base, spilling inputs and caching the player tag in VFP; -O2 may retain retail's per-entry loads. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleHistoryEntry {
     u32 category;
@@ -12,7 +13,6 @@ struct BattleHistoryEntry {
 };
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 void battleRecordCombatantHistoryEvent(BtlMainStateA *battle, const BtlCombatantEntryA *unit, s32 event)
 {

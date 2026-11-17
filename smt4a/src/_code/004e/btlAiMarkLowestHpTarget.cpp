@@ -2,6 +2,7 @@
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 
@@ -13,7 +14,6 @@ struct BattleAiContext {
 
 extern "C" {
 
-extern BtlActionGlobals g_btlAction;
 s32 btlAiFilterCandidatesByExclusionChance(BtlMainStateA **owner, s32 *candidates, s32 count, s32 force);
 
 /* Mark as targeted one of the targetable entries with the lowest HP seen so far in entry order. */
@@ -31,7 +31,7 @@ void btlAiMarkLowestHpTarget(BattleAiContext *context)
         }
     }
     s32 pick = btlAiFilterCandidatesByExclusionChance(&context->state, candidates, count, 1);
-    btlUnitGet(&context->state)->selection.targeted[candidates[pick - 1]] = 1;
+    btlUnitGet(&context->state)->targets[candidates[pick - 1]] = 1;
 }
 
 } /* extern "C" */

@@ -1,24 +1,18 @@
 #include "common.h"
 #include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-
-typedef struct BtlMain {
-    /* 0x000 */ f32 vector[3];
-    /* 0x00C */ u8 unk00C[0x628];
-    /* 0x634 */ u32 flags;
-} BtlMain;
 
 typedef struct OptionScreen {
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ u32 listBox;
 } OptionScreen;
 
-extern BtlMain *g_btlMain;   /* 0x4342c8 */
 extern f32 DAT_004342cc;     /* 0x4342cc */
 extern f32 DAT_004342d0;     /* 0x4342d0 */
 
-extern void transitionResetPosition(BtlMain *state);
+extern void transitionResetPosition(BtlCamera *state);
 
 /* The option list's value slot for `item`, holding a float setting. */
 static __inline f32 *optionFloatValue(u32 listBox, u32 item)
@@ -60,13 +54,13 @@ void btlCameraDebugApplyMenuItem(OptionScreen *screen, u32 unused, u32 item)
         DAT_004342d0 = *optionFloatValue(screen->listBox, item);
         break;
     case 5:
-        g_btlMain->vector[0] = *optionFloatValue(screen->listBox, item);
+        g_btlMain->cameraPosition[0] = *optionFloatValue(screen->listBox, item);
         return;
     case 6:
-        g_btlMain->vector[1] = *optionFloatValue(screen->listBox, item);
+        g_btlMain->cameraPosition[1] = *optionFloatValue(screen->listBox, item);
         return;
     case 7:
-        g_btlMain->vector[2] = *optionFloatValue(screen->listBox, item);
+        g_btlMain->cameraPosition[2] = *optionFloatValue(screen->listBox, item);
         return;
     default:
         return;

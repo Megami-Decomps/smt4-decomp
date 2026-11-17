@@ -33,8 +33,8 @@ void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred)
     if (portrait != NULL) {
         const CategoryView *base = static_cast<const CategoryView *>(dataTable00FindById(demonId));
         portrait->category = base->flags >> 2;
-        const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(devilGetRecord(demonId));
-        portrait->textureNode = record->unk9C;
+        const DevilRecordA *record = reinterpret_cast<const DevilRecordA *>(devilGetRecord(demonId));
+        portrait->textureNode = record->model;
         portrait->demonId = demonId;
         if (deferred != 0) {
             if (aocRunByName(g_aocSystem, 0x10, portrait->textureNode, 1) != 0) {

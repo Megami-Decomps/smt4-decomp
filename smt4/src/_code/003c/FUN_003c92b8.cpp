@@ -44,7 +44,7 @@ u32 FUN_003c92b8(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *ent
     if (FUN_003c9b94(lists, first, second, entry) == 0) {
         return 0;
     }
-    DevilSortRecord *baseRecord = devilGetRecord((u16)entry->resultId);
+    DevilRecord *baseRecord = devilGetRecord((u16)entry->resultId);
     u32 level = dataTableChooseWeightedId() + baseRecord->level;
 
     if (randNextInRange(99) < 5) {
@@ -73,7 +73,7 @@ u32 FUN_003c92b8(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *ent
 
         do {
             chosenId = demonFindClosestEligibleLevel(lists, 0x33, searchLevel, 1);
-            DevilSortRecord *candidate = devilGetRecord((u16)chosenId);
+            DevilRecord *candidate = devilGetRecord((u16)chosenId);
 
             if (candidate->id != baseRecord->id && candidate->id != first && candidate->id != second
                 && candidate->level <= searchLevel) {

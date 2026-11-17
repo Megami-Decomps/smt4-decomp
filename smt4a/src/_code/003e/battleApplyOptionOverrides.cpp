@@ -1,6 +1,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SaveSlotTable.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 s32 gameOptionsClassifyMode(void);
@@ -12,7 +13,6 @@ void optionsResetIfFlagSet(void);
 void optionsResetIfNoFlag(void);
 void FUN_004da144(void);
 void optionsSetFlag1(void);
-extern BtlMainGlobalsA g_btlMain;
 
 /* Applies battle-specific option overrides and rebuilds the player's temporary combatant. */
 void battleApplyOptionOverrides(BtlMainStateA *battle)

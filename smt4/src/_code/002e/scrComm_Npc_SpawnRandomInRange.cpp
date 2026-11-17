@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecord.h"
 #include "shard/JobWork.h"
 #include "bible/bibleDevil.h"
 #include "gamedata/GameDataAccess_VariantF.h"
@@ -7,13 +7,6 @@
 
 namespace {
 /* A demon record: only the fields the filter reads. */
-struct DevilRecord {
-    /* 0x00 */ u8 unk00[3];
-    /* 0x03 */ u8 level;
-    /* 0x04 */ u8 unk04[2];
-    /* 0x06 */ u16 flags;                /* bit 0: can be summoned by this command */
-};
-
 /* The spawned NPC's job work block (only the fields touched here). */
 struct NpcJobWork {
     /* 0x00 */ u8 unk00[0xc];
@@ -32,7 +25,6 @@ s32 scrGetArg(u32 index);
 u32 scrWorkGetValue(u32 slot);
 void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
-DevilRecord *devilGetRecord(u32 id);
 u32 partyFindFreeStockSlot(void);
 u32 FUN_00252190(u32 id, s32 a, s32 b);
 void eventTexSetJobParam(u32 job);

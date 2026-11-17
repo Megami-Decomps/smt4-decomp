@@ -1,6 +1,7 @@
 /* NON_MATCHING: instruction scheduling of the final record address only (retail loads the g_btlAction record base before the camera flag update, the build loads the constant 0x495 and the stored 0x1D earlier). */
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -39,8 +40,6 @@ typedef struct BtlCameraBlock {
     /* 0x64C */ u32 flags;
 } BtlCameraBlock;
 
-extern BtlActionGlobals g_btlAction;  /* 0x571138 */
-extern BtlCameraBlock *g_btlCamera;   /* 0x571508 */
 extern u32 g_btlEvent;                /* 0x573898 */
 extern u32 g_btlUiBlock;              /* 0x57a9c8 */
 
@@ -73,7 +72,7 @@ u32 FUN_004e7418(BtlActorRef *ref, BtlCommand *cmd)
     btlReflectCreateKind2e(0x1E, cmd, cmd->target, 1);
     btlCommandExtendAnimationWindow(ref, cmd, cmd->skill->animation, 0, 0x1E, 0x1E);
     g_btlCamera->flags &= ~0x2000000;
-    u32 *records = static_cast<u32 *>(g_btlAction.data);
+    u32 *records = reinterpret_cast<u32 *>(g_btlAction.slots);
     s32 slot = ref->actor->slot;
     record = reinterpret_cast<BtlActorScriptState *>(records + slot * 0x495);
     record->state = 0x1D;

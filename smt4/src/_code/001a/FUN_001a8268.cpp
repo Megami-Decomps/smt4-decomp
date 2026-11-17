@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the prologue differs: retail copies left to r5 before right to r4 and loads *left through r5; the build copies right first and loads *left through r0. */
-#include "gamedata/DevilRecord.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" s32 comparePartyUnitsByRankRaceAndId(const s32 *left, const s32 *right);
@@ -19,8 +19,8 @@ static __inline s32 compareUnitSlotsByRace(const s32 *left, const s32 *right)
     }
     GameUnitSortRecord *first = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*left));
     GameUnitSortRecord *second = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*right));
-    const DevilSortRecord *firstDevil = devilGetRecord(first->id);
-    const DevilSortRecord *secondDevil = devilGetRecord(second->id);
+    const DevilRecord *firstDevil = devilGetRecord(first->id);
+    const DevilRecord *secondDevil = devilGetRecord(second->id);
     difference = firstDevil->race - secondDevil->race;
     if (difference != 0) {
         return difference;

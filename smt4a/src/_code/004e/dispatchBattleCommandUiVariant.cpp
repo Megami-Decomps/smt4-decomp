@@ -2,19 +2,11 @@
 #include "battle/btlAction.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/W4_W4Match6b_BtlUnitWork.h"
 #include "gamedata/Table04Record.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleUiOwner { BtlMainStateA *battle; };
-struct BattleUiContext {
-    u8 unk00[0x20];
-    BtlCombatantEntryA *entry;
-    u32 unk24;
-    BtlUnitWork *work;
-    u8 unk2c[0x571];
-    s8 mode;
-};
 struct BattleUiActionMasks {
     u8 unk00[0x18];
     u64 primaryA;
@@ -23,19 +15,18 @@ struct BattleUiActionMasks {
 };
 struct BattleUiQueryResult { u32 words[13]; };
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern void *g_btlAux;
 void btlEntryBuildSummary(BattleUiQueryResult *, BtlMainStateA *, BtlCombatantEntryA *);
 void FUN_004f7724(void *, s32, u32, s32);
 void FUN_004f7ea8(void *, s32, u32, s32);
 void obj4FQueryPairB(void *, u32, u32, s32, u32);
 
-void dispatchBattleCommandUiVariant(BattleUiOwner *owner, BattleUiContext *context)
+void dispatchBattleCommandUiVariant(BattleUiOwner *owner, BtlUnitA *context)
 {
-    s32 mode = context->mode;
-    s32 id = (s16)context->work->commandArg;
-    context->mode = 0;
-    s32 command = (s16)context->work->command;
+    s32 mode = context->uiMode;
+    s32 id = context->data->actionArg;
+    context->uiMode = 0;
+    s32 command = context->data->actionKind;
     const BattleUiActionMasks *masks = (const BattleUiActionMasks *)&g_btlAction;
     if (command == 1) {
         bool allowed = !(context->entry->flags & (masks->primaryA | masks->primaryB | masks->primaryC));

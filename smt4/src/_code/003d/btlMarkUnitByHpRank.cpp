@@ -22,9 +22,9 @@ void btlMarkUnitByHpRank(BtlMainState **contextHandle, s32 rank)
     }
     if (count >= rank) {
         FUN_002b7bca(candidates, count, sizeof(BattleHpRank), reinterpret_cast<s32 (*)(const void *, const void *)>(FUN_0032ad24));
-        btlUnitGet(contextHandle)->selectedUnits[candidates[rank - 1].selectionIndex] = 1;
+        btlUnitGet(contextHandle)->targets[candidates[rank - 1].selectionIndex] = 1;
     } else {
-        btlUnitGet(contextHandle)->selectedUnits[candidates[0].selectionIndex] = 1;
+        btlUnitGet(contextHandle)->targets[candidates[0].selectionIndex] = 1;
     }
 }
 }

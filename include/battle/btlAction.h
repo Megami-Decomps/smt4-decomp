@@ -97,10 +97,25 @@ typedef char BtlActionPlacementSlotOffsetCheck[
 typedef char BtlActionPresentationOffsetCheck[
     offsetof(BtlActionRecord, presentationFlags) == 0x58 ? 1 : -1];
 
-/* The module global: a word and the action data block's pointer, side by side. */
+struct BtlActionSlot;
+struct BtlActionSlotA;
+
+/* The action module's global (Shin Megami Tensei IV, g_btlAction at 0x434278): its four unit slots
+ * (battle/BtlUnitWork.h). The slots pointer is also the symbol g_btlScriptUnit (0x43427c), the script
+ * context reference btlUnitGet resolves. */
 typedef struct BtlActionGlobals {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ void *data;       /* heap block */
+    /* 0x04 */ BtlActionSlot *slots;    /* heap block of four slots */
+    /* 0x08 */ u8 unk08[0x10];
+} BtlActionGlobals;
+typedef char BtlActionGlobalsLayoutCheck[
+    offsetof(BtlActionGlobals, slots) == 4 && sizeof(BtlActionGlobals) == 0x18 ? 1 : -1];
+
+/* The same global in Apocalypse (g_btlAction at 0x571138): twelve unit slots and the entry-flag masks
+ * the target selection tests. */
+typedef struct BtlActionGlobalsA {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ BtlActionSlotA *slots;   /* heap block of twelve slots; also g_btlScriptUnit */
     /* 0x08 */ u8 unk08[8];
     /* 0x10 */ u64 targetableMask; /* entry flags that make a combatant a target */
     union {
@@ -115,21 +130,29 @@ typedef struct BtlActionGlobals {
             u8 unk18[0x40];
             /* 0x58 */ u64 mask;
         } clearedFlags;
+        struct {
+            /* 0x18 */ u64 confirm;      /* the masks FUN_004ecee8 tests the held buttons with */
+            /* 0x20 */ u64 unk20;
+            /* 0x28 */ u64 confirmAlt;
+            /* 0x30 */ u64 cancel;
+            /* 0x38 */ u64 cancelAlt;
+        } buttons;
     };
     /* 0x78 */ u64 untargetableMask; /* entry flags that rule a combatant out */
-    u8 unk80[0xA8];
+    /* 0x80 */ u8 unk80[0xA8];
     /* 0x128 */ u64 interruptMask; /* actor flag bits that block the skill start */
-} BtlActionGlobals;
+    /* 0x130 */ u8 unk130[0x88];
+} BtlActionGlobalsA;
 
-typedef char BtlActionGlobalsLayoutCheck[offsetof(BtlActionGlobals, targetableMask) == 0x10 &&
-    offsetof(BtlActionGlobals, untargetableMask) == 0x78 ? 1 : -1];
+typedef char BtlActionGlobalsALayoutCheck[offsetof(BtlActionGlobalsA, targetableMask) == 0x10 &&
+    offsetof(BtlActionGlobalsA, untargetableMask) == 0x78 && sizeof(BtlActionGlobalsA) == 0x1B8 ? 1 : -1];
 typedef char BtlActionClearedFlagsOffsetCheck[
-    offsetof(BtlActionGlobals, clearedFlags.mask) == 0x58 &&
-    sizeof(BtlActionGlobals) == 0x130 && offsetof(BtlActionGlobals, interruptMask) == 0x128 ? 1 : -1];
+    offsetof(BtlActionGlobalsA, clearedFlags.mask) == 0x58 &&
+    offsetof(BtlActionGlobalsA, interruptMask) == 0x128 ? 1 : -1];
 typedef char BtlActionInteractionMasksOffsetCheck[
-    offsetof(BtlActionGlobals, interaction.requiredMask) == 0x30 &&
-    offsetof(BtlActionGlobals, interaction.reachMask) == 0x38 &&
-    offsetof(BtlActionGlobals, interaction.excludedMask) == 0x40 ? 1 : -1];
+    offsetof(BtlActionGlobalsA, interaction.requiredMask) == 0x30 &&
+    offsetof(BtlActionGlobalsA, interaction.reachMask) == 0x38 &&
+    offsetof(BtlActionGlobalsA, interaction.excludedMask) == 0x40 ? 1 : -1];
 
 struct BtlActionResourceEntry {
     /* 0x00 */ u16 id;

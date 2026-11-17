@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
 u32 FUN_004c5da4(s32 unitIndex, s32 markQueued);
 

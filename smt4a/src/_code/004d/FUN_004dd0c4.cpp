@@ -6,6 +6,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "gamedata/ConsumableRecordA.h"
+#include "battle/BtlGlobals.h"
 
 /* A skill record, as far as the category bits go. */
 struct SkillCategoryView {
@@ -48,13 +49,11 @@ struct UiPositionA {
 };
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 
 SkillCategoryView *dataTable04FindById(u32 id);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 void *rt_memclr(void *block, u32 size);
-BtlCombatantEntryA *btlMainFindEntryByListedId(BtlMainStateA *battle, s32 id);
 void FUN_004aa798(u32 ui, void *arg, s32 count);
 u32 FUN_004aaebc(u32 ui, u32 kind, u32 parameter, u16 option, u16 variant, u16 flags, const void *label,
                  f32 x, f32 y, f32 z);

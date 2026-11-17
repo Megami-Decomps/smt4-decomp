@@ -4,6 +4,7 @@
 #include "battle/ActionStateChannels.h"
 #include "shard/W4_Match1b_Node.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "battle/BtlGlobals.h"
 
 /* Fields of the battle state the cutscene reads beyond the shared prefix. */
 struct ReflectCutsceneView {
@@ -25,7 +26,6 @@ typedef char ReflectCutsceneOffsets[
     offsetof(ReflectActionView, sourceId) == 0x5c ? 1 : -1];
 
 extern "C" {
-extern BtlMain *g_btlMain;
 extern void *DAT_00435d18;
 extern void *DAT_004398d4;
 extern u32 g_btlUiBlock;
@@ -41,8 +41,8 @@ u32 FUN_0024502c(BtlMainState *state, s32 slot);
 u32 soundSlotStopById(u32 id);
 void armySummonSetCommandTransform(BtlMainState *state);
 void modelClearPendingAnimation(BtlMainState *state);
-void modelSlotDetachChild(BtlMain *main);
-void mathVectorClear(BtlMain *main);
+void modelSlotDetachChild(BtlCamera *main);
+void mathVectorClear(BtlCamera *main);
 void btlUiPlaySceneFadeOutWhenReady(u32 uiBlock);
 void slotResetIdle(BtlMainState *state, s32 slot, u32 value);
 void FUN_003ddb50(u32 actor, void *options, u32 value, f32 red, f32 green, f32 blue);
@@ -54,8 +54,8 @@ void actionCreateKindFive(s32 id, void *argument, u32 value);
 void FUN_00244fb0(BtlMainState *state, u32 slot, u32 palette, u32 param, u32 alpha);
 void FUN_00339254(BtlMainState *state);
 void groupStartItems(void *group);
-void objectDestroyGfx(BtlMain *main);
-void FUN_0024082c(BtlMain *main, u32 value);
+void objectDestroyGfx(BtlCamera *main);
+void FUN_0024082c(BtlCamera *main, u32 value);
 void FUN_003dc02c(void *object);
 void FUN_00339dc0(BtlMainState *state);
 void FUN_00338fb0(BtlMainState *state);

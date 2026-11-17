@@ -61,7 +61,7 @@ void FUN_003a8aa0(Obj42247c *screen)
     if (block->mode == 0) {
         s32 total = 0;
         for (s32 id = 1; id < 0x500; ++id) {
-            const DevilSortRecord *devil = devilGetRecord(static_cast<u16>(id));
+            const DevilRecord *devil = devilGetRecord(static_cast<u16>(id));
             const Table00Record *base = dataTable00FindById(static_cast<u16>(id));
             if (devil != NULL && base != NULL && (base->flags & 1)) {
                 ++total;

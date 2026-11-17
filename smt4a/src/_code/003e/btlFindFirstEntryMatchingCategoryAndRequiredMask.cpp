@@ -2,10 +2,10 @@
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-extern BtlMainGlobalsA g_btlMain; /* 0x573920 */
 
 /* Finds the first battle entry whose mask matches both the actor category mask and the required mask; NULL if none. */
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *battle)

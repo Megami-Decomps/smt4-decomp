@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 void* sysMemClear(void* destination, u32 size);
 
 // Clear per-index combatant flags for the requested marked/unmarked candidate partition.

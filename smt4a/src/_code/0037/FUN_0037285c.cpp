@@ -1,7 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlScript.h"
 #include "battle/btlMain.h"
-#include "shard/W4_W4Match6b_BtlUnitWork.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleActionInfo {
     u16 kind;
@@ -9,29 +9,21 @@ struct BattleActionInfo {
     u32 payload[12]; // The query writes thirteen words in total.
 };
 
-struct BtlUnitParametersView {
-    u8 unk00[0x20];
-    BtlCombatantEntryA *parameters;
-};
-
 extern "C" {
 
-BtlUnit *btlUnitGet(u32 id);
 BattleActionInfo btlEntryBuildSummary(BtlMainStateA *state, BtlCombatantEntryA *parameters);
 
 // Select the unit command argument from the queried action's target kind.
 u32 FUN_0037285c(void)
 {
-    BtlUnitWork *work = btlUnitGet(g_btlScriptUnit)->work;
-    work->command = 1;
-    BtlUnit *unit = btlUnitGet(g_btlScriptUnit);
-    BtlCombatantEntryA *parameters =
-        reinterpret_cast<BtlUnitParametersView *>(unit)->parameters;
+    BtlUnitDataA *work = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))->data;
+    work->actionKind = 1;
+    BtlCombatantEntryA *parameters = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))->entry;
     BattleActionInfo info = btlEntryBuildSummary(btlGetMainState(), parameters);
     if (info.targetKind == 1)
-        work->commandArg = 2;
+        work->actionArg = 2;
     else
-        work->commandArg = 1;
+        work->actionArg = 1;
     return 1;
 }
 }

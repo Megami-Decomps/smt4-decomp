@@ -1,16 +1,10 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 struct SkillRollUnit {
     /* 0x00 */ u8 unk00[0x34];
     /* 0x34 */ u16 skills[8];
     /* 0x44 */ u8 unk44[0x1E];
     /* 0x62 */ u16 id;
-};
-
-struct SkillRollRecord {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ u32 level : 7;
-    /* 0x34 */ u32 unk34Bits : 25;
 };
 
 struct SkillRollMetadata {
@@ -20,7 +14,6 @@ struct SkillRollMetadata {
 
 extern "C" {
 
-SkillRollRecord *devilGetRecord(u16 id);
 s32 saveIsRecordValueBounded(u16 id);
 s32 gameDataFlagTestBit(u32 bit);
 s32 randRange(u32 max);
@@ -30,14 +23,14 @@ SkillRollMetadata *findSkillMetadataById(u16 id);
  * set) and reports whether a successful roll finds a skill with metadata flag 0x40. */
 s32 FUN_003f3048(SkillRollUnit *unit, s32 tries, s32 force)
 {
-    SkillRollRecord *record;
+    DevilRecordA *record;
     s32 chance;
 
     if (tries <= 0) {
         return 0;
     }
     record = devilGetRecord(unit->id);
-    chance = saveIsRecordValueBounded(unit->id) / 500 + record->level;
+    chance = saveIsRecordValueBounded(unit->id) / 500 + record->packed.skillChance;
     if (gameDataFlagTestBit(5) != 0) {
         chance += 30;
     }

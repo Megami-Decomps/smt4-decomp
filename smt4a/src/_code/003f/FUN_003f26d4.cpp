@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail reads the g_btlMain masks with ldm/ldr word pairs (this build uses ldrd for the u64 members) and orders the loop bound compare as last > index; initial-fill and mask-test scheduling differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 /* The battle state with the field the AI reads beyond BtlMainStateA's known size. */
 struct BtlAiState : BtlMainStateA {
@@ -9,7 +10,6 @@ struct BtlAiState : BtlMainStateA {
 };
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 void btlSelectSingleRandomTarget(BtlAiState *state);
 void FUN_003efc40(BtlAiState *state);

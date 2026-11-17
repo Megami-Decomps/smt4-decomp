@@ -8,8 +8,8 @@ extern UniteWork *g_unite;
 
 static __inline s32 compareFusionDemons(u16 leftId, u16 rightId)
 {
-    const DevilSortRecord *left = devilGetRecord(leftId);
-    const DevilSortRecord *right = devilGetRecord(rightId);
+    const DevilRecord *left = devilGetRecord(leftId);
+    const DevilRecord *right = devilGetRecord(rightId);
     s32 leftRank = dataTableGetEntry0102Value(left->id);
     s32 result = dataTableGetEntry0102Value(right->id) - leftRank;
     if (result == 0) {

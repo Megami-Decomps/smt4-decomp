@@ -1,19 +1,9 @@
 #include "common.h"
 #include "code/Code0024.h"
 #include "battle/btlEditor.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-
-typedef struct BtlMain {
-    /* 0x000 */ u8 unk000[0x760];
-    /* 0x760 */ s32 unk760;
-} BtlMain;
-
-/* The battle's state block; its 64-bit battle mask at 0x44A0 (BtlMainState::battleMask). */
-typedef struct BtlMainState {
-    /* 0x0000 */ u8 unk0000[0x44A0];
-    /* 0x44A0 */ u64 flags;
-} BtlMainState;
 
 typedef struct BtlTask {
     /* 0x00 */ u32 state;
@@ -27,12 +17,11 @@ typedef struct BtlTask {
 #define BTL_FLAG_ACTIVE 0x100000
 #define BTL_FLAG_UI     0x20000000
 
-extern BtlMain *g_btlMain;
 extern void *g_btlUiBlock;
 extern u32 DAT_00435d18;
 
 extern s32 scrRunOpcodesStub(u32 job);
-extern s32 FUN_00256940(BtlMain *main, BtlMainState *state, s32 arg);
+extern s32 FUN_00256940(BtlCamera *main, BtlMainState *state, s32 arg);
 extern void btlReflectQueueKind34(s32 a, s32 b);
 extern void battleSelectButtonHelpPreset(s32 a);
 
@@ -42,7 +31,7 @@ extern void battleResetCounterAndFlag(u32 arg);
  * the battle flags down. Counts its frames up to 0xFFFF. Always returns 0. */
 s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
 {
-    if ((state->flags & BTL_FLAG_ACTIVE) != 0 && (task->flags & 1) == 0) {
+    if ((state->battleMask & BTL_FLAG_ACTIVE) != 0 && (task->flags & 1) == 0) {
         if (g_btlMain->unk760 >= 0 && FUN_00256940(g_btlMain, state, 1) != 0) {
             btlReflectQueueKind34(0, 0);
         }
@@ -50,15 +39,15 @@ s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
         task->flags |= 1;
     }
     if (scrRunOpcodesStub(task->job) == 2) {
-        if ((state->flags & BTL_FLAG_ACTIVE) != 0) {
+        if ((state->battleMask & BTL_FLAG_ACTIVE) != 0) {
             battleSelectButtonHelpPreset(0);
-            if ((state->flags & BTL_FLAG_UI) != 0) {
+            if ((state->battleMask & BTL_FLAG_UI) != 0) {
                 btlUiObjCSetActive(g_btlUiBlock, 0);
-                state->flags &= ~BTL_FLAG_UI;
+                state->battleMask &= ~BTL_FLAG_UI;
             }
         }
         task->state = 0;
-        state->flags &= ~BTL_FLAG_ACTIVE;
+        state->battleMask &= ~BTL_FLAG_ACTIVE;
         battleResetCounterAndFlag(DAT_00435d18);
     }
     if (task->frames < 0xFFFF) {

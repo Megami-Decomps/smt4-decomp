@@ -25,8 +25,8 @@ u32 FUN_00338584(BtlMainState *state)
         if ((entry->flags & 1) && !(entry->flags & 0x40) && (entry->flags & 0x10)) {
             if (entry == NULL)
                 return 0;
-            DevilRecord *metadata = reinterpret_cast<DevilRecord *>(dataTable00FindById(entry->id));
-            if (metadata->links.linkFlags & 0x10)
+            Table00Record *metadata = dataTable00FindById(entry->id);
+            if (metadata->flags & 0x10)
                 return 0;
             if ((entry->flags & 0x100000) || (entry->flags & 0x10000000))
                 return 0;
@@ -37,7 +37,7 @@ u32 FUN_00338584(BtlMainState *state)
                 if (entry->hp * 100 / entry->maxHp >= 20)
                     return 0;
                 PadState *player = gameGetPlayerData();
-                s32 chance = ((u32(player->unk76) + u32(metadata->header.race)) >> 1) + 5;
+                s32 chance = ((u32(player->unk76) + u32(metadata->level)) >> 1) + 5;
                 if (chance > 10)
                     chance = 10;
                 if (randRange(99) > chance)

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
 struct BattleSkillFilter {
@@ -17,15 +17,13 @@ struct BattleSkillFilter {
     u8 unk1ae[2];
     u32 skillCount;
 };
-struct SkillFilterDefinition { u8 unk00[0x70]; u16 resistances[16]; };
 extern "C" {
-const SkillFilterDefinition *devilGetRecord(u32);
 s32 halfwordKeyEmptyLastCompare(const u16 *, const u16 *);
 const u16 *libc_bsearch(const u16 *, const u16 *, u32, u32, s32 (*)(const u16 *, const u16 *));
 
 u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32, u32 demonId)
 {
-    const SkillFilterDefinition *definition = devilGetRecord(demonId);
+    const DevilRecordA *definition = devilGetRecord(demonId);
     if (filter->requireSkill) {
         if (!libc_bsearch(&filter->skill, filter->skills, filter->skillCount, sizeof(u16), halfwordKeyEmptyLastCompare))
             return 0;
@@ -45,7 +43,7 @@ u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32
     }
     if (filter->requireElement) {
         u32 element = filter->element;
-        u16 resistance = definition->resistances[element & 0x3ff];
+        u16 resistance = definition->affinityWords[element & 0x3ff];
         if (!(resistance & 0xfc00) || (resistance >> 10) == 2) {
             u16 first = 0, last = 0;
             if ((element & 0x3ff) == 0) { first = 0x191; last = 0x194; }

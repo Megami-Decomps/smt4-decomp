@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
 
@@ -7,13 +7,6 @@ typedef struct SortEntry {
     /* 0x2 */ u16 count;
 } SortEntry;
 
-typedef struct DevilRecord {
-    /* 0x0 */ u16 id;
-    /* 0x2 */ u8 rank;
-    /* 0x3 */ u8 grade;
-} DevilRecord;
-
-extern DevilRecord *devilGetRecord(u16 id);
 
 /* qsort-style comparison of two entries: empty entries sort last, then by devil rank (ascending), grade (descending) and id (ascending). */
 s32 devilCompareNonEmptyFirstB(SortEntry *a, SortEntry *b)
@@ -32,9 +25,9 @@ s32 devilCompareNonEmptyFirstB(SortEntry *a, SortEntry *b)
         DevilRecord *recordA = devilGetRecord(a->id);
         DevilRecord *recordB = devilGetRecord(b->id);
 
-        result = recordA->rank - recordB->rank;
+        result = recordA->race - recordB->race;
         if (result == 0) {
-            result = recordB->grade - recordA->grade;
+            result = recordB->level - recordA->level;
             if (result == 0) {
                 result = recordA->id - recordB->id;
             }

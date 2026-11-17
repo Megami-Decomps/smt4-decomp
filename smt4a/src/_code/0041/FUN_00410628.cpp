@@ -67,7 +67,6 @@ typedef struct {
 extern unsigned char DAT_005297d4; /* 0x5297d4 */
 extern unsigned char DAT_00529834; /* 0x529834 */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern int g_btlCamera; /* 0x571508 */
 extern unsigned int g_btlAux; /* 0x573808 */
 extern int g_btlPartnerAttack; /* 0x573c50 */
 extern unsigned int DAT_00573c68; /* 0x573c68 */
@@ -360,7 +359,7 @@ void FUN_00410628(int param_1)
     slotSetRequest(0,0,0xff);
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-    cameraBeginScalarTransition(g_btlCamera,1,0);
+    cameraBeginScalarTransition(((int)g_btlCamera),1,0);
     return;
   case 4:
     temp_v3 = *(int *)(param_1 + 0x14) + 1;
@@ -368,12 +367,12 @@ void FUN_00410628(int param_1)
     if (temp_v3 < 7) {
       return;
     }
-    mathVectorClear(g_btlCamera);
+    mathVectorClear(((int)g_btlCamera));
     markerOwnerUpdatePositions(g_btlStageModel);
-    FUN_004f1c5c(g_btlCamera,0);
-    FUN_004f1edc(reinterpret_cast<BtlCameraA *>(g_btlCamera));
-    temp_v3 = g_btlCamera;
-    *(unsigned int *)(g_btlCamera + 0xc) = *(unsigned int *)(g_btlCamera + 0x14);
+    FUN_004f1c5c(((int)g_btlCamera),0);
+    FUN_004f1edc(g_btlCamera);
+    temp_v3 = ((int)g_btlCamera);
+    *(unsigned int *)(((int)g_btlCamera) + 0xc) = *(unsigned int *)(((int)g_btlCamera) + 0x14);
     *(unsigned int *)(temp_v3 + 0x10) = *(unsigned int *)(temp_v3 + 0x18);
     btlReleaseEntries(temp_v16);
     if (*(int *)(param_1 + 0x184) != 0) {
@@ -392,7 +391,7 @@ void FUN_00410628(int param_1)
     FUN_004f5238(g_btlAux,0,0,10);
     *(unsigned int *)(param_1 + 0x2c) = temp_v2;
     titleSetSlotValueState2(0);
-    FUN_004f41b0(g_btlCamera,0,8);
+    FUN_004f41b0(((int)g_btlCamera),0,8);
     break;
   case 6:
     if (*(int *)(*(int *)(param_1 + 0x2c) + 8) <= *(int *)(*(int *)(param_1 + 0x2c) + 4)) {

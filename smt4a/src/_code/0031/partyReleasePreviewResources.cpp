@@ -30,8 +30,8 @@ void partyReleasePreviewResources(PartyResourceWork *work)
         PartyTextureSlot *slot = partyGetSlot((u16)i);
         if (partySlotIsOccupied(slot)) {
             /* The canonical DevilRecordA is only the 0x40-byte prefix. */
-            const DevilTableRecordA *record = (const DevilTableRecordA *)devilGetRecord(slot->id);
-            statusBustUpPortraitRelease((s16)(record->unk9C + 1), 0);
+            const DevilRecordA *record = devilGetRecord(slot->id);
+            statusBustUpPortraitRelease((s16)(record->model + 1), 0);
         }
     }
     if (work->previewTexture != 0 && work->previewShared == 0 &&

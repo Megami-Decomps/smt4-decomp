@@ -2,7 +2,7 @@
 #include "gamedata/DevilRecord.h"
 #include "gamedata/UnitStats.h"
 
-struct DevilComparisonIdentityView { DevilSortRecord sort; u8 category; u8 variant; };
+struct DevilComparisonIdentityView { struct { u16 id; u8 race; u8 level; } sort; u8 category; u8 variant; };
 struct DevilComparisonSummaryView {
     u16 id;
     u8 race;

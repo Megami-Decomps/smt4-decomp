@@ -24,7 +24,8 @@ s32 scrComm_Battle_UnitSlotParamPositive(void)
         index = 0xB;
     }
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
-    s32 *slotParams = unit->params + index;
+    /* the entry's word at 0x74 + index * 4, addressed as retail does: the word pointer moved by index first */
+    s32 *slotParams = reinterpret_cast<s32 *>(unit->entry) + index;
 
     scrSetResult(slotParams[0x1D] >= 1);
     return 1;

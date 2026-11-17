@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/Table00Lookup.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlTables.h"
 #include "util/Random.h"
@@ -8,18 +8,17 @@ struct BtlMainState;
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
-DevilRecord* dataTable00FindById(u16 id);
 void memClear(void* memory, u32 size);
 
 // Choose one nonzero record choice or battle-table candidate with equal probability.
 u32 btlChooseRandomRecordCandidate(void)
 {
-    const DevilRecord* record = dataTable00FindById((u16)scrGetArg(0));
+    const Table00Record* record = dataTable00FindById((u16)scrGetArg(0));
     u32 candidates[128];
     memClear(candidates, sizeof(candidates));
     u8 count = 0;
     for (s32 i = 0; i < 3; ++i) {
-        u16 value = record->randomChoices.entries[i].value;
+        u16 value = record->drops[i].value;
         if (value != 0) {
             candidates[count++] = value;
         }

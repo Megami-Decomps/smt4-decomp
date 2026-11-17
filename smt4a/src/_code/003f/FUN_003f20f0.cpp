@@ -1,9 +1,9 @@
 /* NON_MATCHING: Exclusion-mask loads are hoisted out of the loop, increasing the saved-register set; retail loads them after the required-mask test. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 /* Finds an unexcluded combatant with the required flags and a nonzero query value. */
 u32 FUN_003f20f0(const BtlMainStateA *state)

@@ -1,6 +1,6 @@
-#include "common.h"
 #include "gamedata/ConsumableRecordA.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
@@ -11,20 +11,14 @@ typedef struct UnitRecord {
     /* 0x62 */ u16 equipment;
 } UnitRecord;
 
-typedef struct EquipmentData {
-    /* 0x00 */ u8 unk00[0xb3];
-    /* 0xb3 */ u8 flags;
-} EquipmentData;
-
-EquipmentData *devilGetRecord(u16 id);
 
 /* For ids 1-60 and 0x79f-0x7de: true when the unit's equipment has flag 4 or one of its skills
  * has the entry's category. */
 s32 FUN_0047fd9c(s32 id, UnitRecord *unit)
 {
     if ((u32)(id - 1) <= 59 || (u32)(id - 0x79f) <= 63) {
-        EquipmentData *equipment = devilGetRecord(unit->equipment);
-        if (equipment != NULL && (equipment->flags & 4)) {
+        DevilRecordA *equipment = devilGetRecord(unit->equipment);
+        if (equipment != NULL && (equipment->extraFlags & 4)) {
             return 1;
         }
         ConsumableRecordA *entry = dataTable8FindRecord(id);

@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "battle/BtlGlobals.h"
 
 /* Action flags extend beyond the shared BtlUnitRecordA prefix. */
 struct BattleActionFlagRecordView {
@@ -13,7 +14,6 @@ struct BattleActionFlagRecordView {
 };
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 void flagsClearActionBits(u16 *flags);
 BattleActionFlagRecordView *gameGetSlotRecord(s32 index);
 BtlPartyBlockA *gameGetSlotTable(void);

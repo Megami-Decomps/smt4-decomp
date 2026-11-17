@@ -1314,23 +1314,6 @@ typedef char BattleTalkBustUpPrefixIVLayoutCheck[
     offsetof(BattleTalkBustUpPrefixIV, devilId) == 0x308 &&
     sizeof(BattleTalkBustUpPrefixIV) == 0x30C ? 1 : -1];
 
-// Accessed prefix of devilGetRecord's returned record in Apocalypse.
-// Comparison-role names do not imply recovered database field meanings.
-// sizeof describes this view, not the full underlying record or its stride.
-struct UniteSortRecordPrefixA {
-    /* 0x00 */ u16 descendingKey;
-    /* 0x02 */ u8 categoryKey;
-    /* 0x03 */ u8 unk03[3];
-    /* 0x06 */ u16 ascendingKey;
-};
-
-typedef char UniteSortRecordPrefixALayoutCheck[
-    offsetof(UniteSortRecordPrefixA, descendingKey) == 0 &&
-    offsetof(UniteSortRecordPrefixA, categoryKey) == 2 &&
-    offsetof(UniteSortRecordPrefixA, unk03) == 3 &&
-    offsetof(UniteSortRecordPrefixA, ascendingKey) == 6 &&
-    sizeof(UniteSortRecordPrefixA) == 8 ? 1 : -1];
-
 /* Accessed prefix of the Apocalypse pick-object controller.
  * The native allocation boundary is not recovered. The script pointer
  * exposes only the first word read by this caller, not a complete script.

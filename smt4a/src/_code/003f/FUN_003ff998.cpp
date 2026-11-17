@@ -3,7 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 

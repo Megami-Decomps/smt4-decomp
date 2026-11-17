@@ -84,25 +84,6 @@ typedef struct MarkEntry {
     /* 0x20 */ u8 flags;
 } MarkEntry;
 
-/* Table entry a unit record is built from. */
-typedef struct UnitTemplate {
-    /* 0x00 */ u8 unk00[0x6];
-    /* 0x06 */ u16 unk06;
-    /* 0x08 */ u8 unk08[0x10];
-    /* 0x18 */ u16 stat0;
-    /* 0x1A */ u16 stat1;
-    /* 0x1C */ u8 unk1C[0x2];
-    /* 0x1E */ u16 stat2;
-    /* 0x20 */ u16 stat3;
-    /* 0x22 */ u16 stat4;
-    /* 0x24 */ u16 stat5;
-    /* 0x26 */ u16 stat6;
-    /* 0x28 */ u8 unk28[0x18];
-    /* 0x40 */ u16 skills[8];
-    /* 0x50 */ u8 unk50[0x50];
-    /* 0xA0 */ u16 name[9];
-} UnitTemplate;
-
 struct UnitSavedSkillData {
     u32 words[6];
 };

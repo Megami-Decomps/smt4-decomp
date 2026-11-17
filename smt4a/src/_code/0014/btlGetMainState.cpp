@@ -1,8 +1,8 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-extern BtlMainGlobalsA g_btlMain;
 
 /* The battle's state block. */
 BtlMainStateA *btlGetMainState(void)

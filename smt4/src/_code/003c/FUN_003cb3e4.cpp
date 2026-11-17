@@ -4,9 +4,9 @@
 #include "battle/BattleHelpers_Smt4.h"
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlActionReflect;
 
 s32 nodeListCountActiveById(u32 id);
@@ -41,7 +41,7 @@ void FUN_00229754(BtlMainState **block, CommandState *work);
 /* Sets the acting combatant's pending action. */
 static __inline void setPendingAction(BtlMainState **block, u8 pending)
 {
-    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = pending;
+    reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index].pending = pending;
 }
 
 static __inline EntryDataBlock *entryData(BtlEntry *entry)
@@ -56,7 +56,7 @@ u32 FUN_003cb3e4(BtlMainState **block, CommandState *work)
     if ((work->flags & 0x1080) == 0) {
         for (s32 index = 0; index < 109; ++index) {
             if (((*block)->actions[index].status & 1) != 0 && FUN_00229914(block, work, index) == 0) {
-                BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<SlotManager *>(*block), index);
+                BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(*block), index);
                 EntryDataBlock *data = entryData(entry);
                 if (data->firstCounter != 0 && data->groupMask == 0) {
                     if ((*block)->affinity.minimumPercentApplied != 0 && btlNodeListAnyReady() != 0)
@@ -112,7 +112,7 @@ u32 FUN_003cb3e4(BtlMainState **block, CommandState *work)
         for (s32 i = 0; i < 109; ++i) {
             if (((*block)->actions[i].status & 1) == 0 || FUN_00229914(block, work, i) != 0)
                 continue;
-            BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<SlotManager *>(*block), i);
+            BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(*block), i);
             EntryDataBlock *data = entryData(entry);
             if (data->secondCounter != 0) {
                 FUN_00246d38(0, work, &(*block)->actions[i], 0x10);

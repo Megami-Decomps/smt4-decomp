@@ -1,10 +1,10 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 s32 jobIsValid(u32 job);
 
-extern BtlMainGlobalsA g_btlMain;
 
 /* True while the battle's second job is valid. */
 bool btlMainIsSecondJobValid(void)

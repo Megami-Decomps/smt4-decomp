@@ -1,12 +1,9 @@
-#include "battle/BattleUnitSlot.h"
-#include "battle/btlMain.h"
-#include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 
 // Resolves a reference to one of the twelve battle-unit work slots.
-BattleUnit* btlUnitGet(BtlMainStateA* const* reference)
+BtlUnitA *btlUnitGet(BtlMainStateA *const *reference)
 {
     if (*reference == NULL)
         return NULL;
@@ -15,7 +12,7 @@ BattleUnit* btlUnitGet(BtlMainStateA* const* reference)
         return NULL;
     if (index >= 12)
         return NULL;
-    BattleUnitSlotView &slot = reinterpret_cast<BattleUnitSlotView *>(g_btlAction.data)[index];
-    return reinterpret_cast<BattleUnit *>(&slot.unit);
+    BtlActionSlotA &slot = g_btlAction.slots[index];
+    return &slot.unit;
 }
 }

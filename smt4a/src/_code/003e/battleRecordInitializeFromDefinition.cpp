@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 struct BattleStatRecord {
     /* 0x000 */ u16 base[7];
@@ -18,26 +18,9 @@ struct BattleStatRecord {
     /* 0x12C */ u16 fallbackId;
 };
 
-struct BattleStatDefinition {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u16 type;
-    /* 0x08 */ u8 unk08[0x10];
-    /* 0x18 */ u16 first;
-    /* 0x1A */ u16 second;
-    /* 0x1C */ u16 unk1c;
-    /* 0x1E */ u16 third;
-    /* 0x20 */ u16 fourth;
-    /* 0x22 */ u16 fifth;
-    /* 0x24 */ u16 sixth;
-    /* 0x26 */ u16 seventh;
-    /* 0x28 */ u8 unk28[0x18];
-    /* 0x40 */ u16 skills[8];
-};
-
 extern "C" {
 void sysMemClear(void *buffer, u32 size);
 u16 dataTable10FindValue(u16 id);
-BattleStatDefinition *devilGetRecord(u16 id);
 void unitRecomputeDerivedStats(BattleStatRecord *record);
 s32 unitHasRankingBonus(u16 id);
 void FUN_002a6894(BattleStatRecord *record);
@@ -55,30 +38,30 @@ extern "C" void battleRecordInitializeFromDefinition(BattleStatRecord *record, u
     if (id == 0)
         return;
     record->id = id;
-    BattleStatDefinition *definition = devilGetRecord(id);
-    record->type = definition->type;
-    record->base[0] = definition->first;
-    record->base[1] = definition->second;
-    record->base[2] = definition->third;
-    record->base[4] = definition->fifth;
-    record->base[5] = definition->sixth;
-    record->base[6] = definition->seventh;
-    record->base[3] = definition->fourth;
+    DevilRecordA *definition = devilGetRecord(id);
+    record->type = definition->level;
+    record->base[0] = definition->baseHp;
+    record->base[1] = definition->baseMp;
+    record->base[2] = definition->stats[0];
+    record->base[4] = definition->stats[2];
+    record->base[5] = definition->stats[3];
+    record->base[6] = definition->stats[4];
+    record->base[3] = definition->stats[1];
     record->currentBase[0] = 0;
     record->currentBase[1] = 0;
-    record->currentBase[2] = definition->third;
-    record->currentBase[4] = definition->fifth;
-    record->currentBase[5] = definition->sixth;
-    record->currentBase[6] = definition->seventh;
-    record->currentBase[3] = definition->fourth;
-    record->skills[0] = definition->skills[0];
-    record->skills[1] = definition->skills[1];
-    record->skills[2] = definition->skills[2];
-    record->skills[3] = definition->skills[3];
-    record->skills[4] = definition->skills[4];
-    record->skills[5] = definition->skills[5];
-    record->skills[6] = definition->skills[6];
-    record->skills[7] = definition->skills[7];
+    record->currentBase[2] = definition->stats[0];
+    record->currentBase[4] = definition->stats[2];
+    record->currentBase[5] = definition->stats[3];
+    record->currentBase[6] = definition->stats[4];
+    record->currentBase[3] = definition->stats[1];
+    record->skills[0] = definition->skills.ids[0];
+    record->skills[1] = definition->skills.ids[1];
+    record->skills[2] = definition->skills.ids[2];
+    record->skills[3] = definition->skills.ids[3];
+    record->skills[4] = definition->skills.ids[4];
+    record->skills[5] = definition->skills.ids[5];
+    record->skills[6] = definition->skills.ids[6];
+    record->skills[7] = definition->skills.ids[7];
     unitRecomputeDerivedStats(record);
     s16 maximum = record->maximum;
     if (unitHasRankingBonus(record->id))

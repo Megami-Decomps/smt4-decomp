@@ -5,16 +5,6 @@
 #include "util/Random.h"
 #include "gamedata/UnitRecordAccess.h"
 
-struct FusionLevelDefinition {
-    DevilSortRecord sort;
-    u16 unk04;
-    u16 flags;
-    u8 unk08[0x24];
-    u32 restrictions;
-    u32 unk30;
-    u16 registryLink;
-    u16 unlockFlag;
-};
 struct FusionLevelParty {
     u8 unk0000[0x90f0];
     s8 slots[24];
@@ -37,18 +27,18 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
     dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     for (u16 id = 0; id < count; ++id) {
-        DevilSortRecord *candidate = devilGetRecord(id);
+        DevilRecord *candidate = devilGetRecord(id);
         if (candidate->level != level || id == previousId || id == firstId || id == secondId) {
             continue;
         }
-        FusionLevelDefinition *definition = (FusionLevelDefinition *)devilGetRecord(candidate->id);
-        if ((definition->restrictions & 0x1c00000) ||
-            (definition->unlockFlag != 0 && !gameFlagIsSet(definition->unlockFlag))) {
+        DevilRecord *definition = devilGetRecord(candidate->id);
+        if ((definition->fusionRestrictions & 0x1c00000) ||
+            (definition->specialFusion.requiredFlag != 0 && !gameFlagIsSet(definition->specialFusion.requiredFlag))) {
             continue;
         }
-        if (definition->registryLink & 1) {
-            u32 registryId = (definition->registryLink & 0xfffe) ?
-                definition->registryLink >> 1 : definition->sort.id;
+        if (definition->specialFusion.prerequisite & 1) {
+            u32 registryId = (definition->specialFusion.prerequisite & 0xfffe) ?
+                definition->specialFusion.prerequisite >> 1 : definition->id;
             GameSavedItem saved;
             if (!gameRecordCopy(registryId, &saved) || !(saved.flags & 0xfc)) {
                 continue;

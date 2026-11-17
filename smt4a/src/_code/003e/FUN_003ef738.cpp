@@ -1,4 +1,5 @@
 /* NON_MATCHING: logic and instruction mix agree; armcc places the shared `return 0` block after the kind tests in retail but after the last handler here (one extra branch). */
+#include "battle/BtlGlobals.h"
 #include "common.h"
 #include "code/Code0019.h"
 #include "gamedata/Table04Record.h"
@@ -28,12 +29,12 @@ typedef struct UnitStats {
     /* 0x1C0 */ s16 selected;
 } UnitStats;
 
-typedef struct BtlUnit {
+typedef struct BtlScriptUnitView {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ UnitOwner *owner;
     /* 0x24 */ u8 unk24[4];
     /* 0x28 */ UnitStats *stats;
-} BtlUnit;
+} BtlScriptUnitView;
 
 extern u32 g_btlScriptUnit;
 extern u32 g_btlUiBlock;
@@ -44,7 +45,7 @@ s32 FUN_004aba3c(u32 block);
 /* Whether the script unit's character is of the given kind. */
 static __inline bool scriptUnitIsKind(s32 kind)
 {
-    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
+    BtlScriptUnitView *unit = reinterpret_cast<BtlScriptUnitView *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
 
     return unit != NULL && unit->owner != NULL && unit->owner->character != NULL &&
         FUN_0019acdc(unit->owner->character->id, 0) == kind;
@@ -60,7 +61,7 @@ s32 FUN_003ef738(void)
         return 0;
     }
     if (FUN_004aba3c(g_btlUiBlock) == -1) {
-        UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->stats;
+        UnitStats *stats = reinterpret_cast<BtlScriptUnitView *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->stats;
 
         if (stats->mode != 2) {
             return 0;

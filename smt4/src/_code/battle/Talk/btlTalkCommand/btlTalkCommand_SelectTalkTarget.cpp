@@ -48,7 +48,7 @@ u32 btlTalkCommand_SelectTalkTarget()
                 low = 1;
             }
             for (u32 id = 1; id <= 1200; ++id) {
-                DevilSortRecord *devil = devilGetRecord((u16)id);
+                DevilRecord *devil = devilGetRecord((u16)id);
                 Table00Record *data = dataTable00FindById((u16)id);
                 if (devil->level >= low && devil->level <= high &&
                     (data->flags & 0x400) && !partyHasStoredDemon(devil->id)) {

@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/btlScript.h"
 #include "battle/BtlMainAccess.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 struct CandidateUnit {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u64 *flags;

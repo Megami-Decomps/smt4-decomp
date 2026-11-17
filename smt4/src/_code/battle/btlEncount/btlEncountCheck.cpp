@@ -1,12 +1,12 @@
 #include "battle/btlEncount.h"
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 s32 jobIsValid(u32 job);
 
 extern s32 g_btlActionReflect;
-extern BtlMain *g_btlMain;
 extern s32 DAT_00435d18;
 extern BtlEncount *g_btlEncount;
 

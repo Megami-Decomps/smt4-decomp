@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
@@ -24,14 +24,8 @@ typedef struct PartyMember {
     /* 0x62 */ u16 devilId;
 } PartyMember;
 
-typedef struct DevilModelData {
-    /* 0x00 */ u8 unk00[0x9C];
-    /* 0x9C */ u16 modelId;
-} DevilModelData;
-
 PartyMember *partyGetSlotPreferredFirst(u16 index);
 s32 partySlotIsOccupied(PartyMember *member);
-DevilModelData *devilGetRecord(u16 devilId);
 u32 FUN_00409fe8(u32 modelId, s32 a, s32 b);
 
 /* Clears the model slots, then loads the model of each of the 12 party members present. */
@@ -45,7 +39,7 @@ void partyModelSlotsLoad(PartyModelWork *work)
     }
     for (i = 0; i < 12; i++) {
         PartyMember *member = partyGetSlotPreferredFirst(i);
-        DevilModelData *data;
+        DevilRecordA *data;
         u16 modelId;
 
         if (partySlotIsOccupied(member) == 0) {
@@ -55,7 +49,7 @@ void partyModelSlotsLoad(PartyModelWork *work)
         if (data == NULL) {
             continue;
         }
-        modelId = data->modelId;
+        modelId = data->model;
         work->slots[i].modelId = modelId;
         work->handles[i].handle = FUN_00409fe8(modelId, 1, 0);
     }

@@ -1,9 +1,9 @@
 /* NON_MATCHING: mask loads are hoisted out of the loop, increasing saved registers and spilling the fallback result. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 u32 recordGetScaledMaximum(u32 sourceId);
 
 // Prefer a matching active battle participant's maximum HP over the record value.

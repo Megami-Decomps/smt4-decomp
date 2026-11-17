@@ -1,9 +1,9 @@
 /* NON_MATCHING: turn-order pruning recovered; initial mask snapshots and loop register allocation differ by one instruction. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 // Remove turn-order entries whose combatants no longer pass the active masks.
 void FUN_003e7ef0(BtlMainStateA* battle)

@@ -1,6 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;

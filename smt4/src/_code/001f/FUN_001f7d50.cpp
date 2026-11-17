@@ -3,9 +3,9 @@
 #include "battle/ActionStateChannels.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 void jobIsValid(u32 job);
 void FUN_002569ac(ActionStateChannels *channels, s32 index);
 u32 FUN_001e48d0(void);
@@ -18,7 +18,7 @@ void FUN_001f7d50(ActionStateChannelOwner *owner, s32 mode, s32 index, s32 argum
 {
     owner->current = (owner->current + 1) % 4;
     jobIsValid(owner->jobs[owner->current]);
-    ActionStateChannels *channels = static_cast<ActionStateChannels *>(g_btlAction.data);
+    ActionStateChannels *channels = reinterpret_cast<ActionStateChannels *>(g_btlAction.slots);
     channels->entries[0].owner = owner;
     ActionStateChannel *channel = &channels->entries[owner->current];
     channel->state = 0;

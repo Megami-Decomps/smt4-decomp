@@ -102,7 +102,7 @@ u32 FUN_0028d320(u32 skillId)
         }
     }
     if (script) {
-        BattleActionUnit *scriptUnit = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
+        BtlUnit *scriptUnit = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
         if (scriptUnit != NULL && scriptUnit->entry != NULL && FUN_0023d488(scriptUnit->entry, skill, 1) == 0) {
             return 0;
         }

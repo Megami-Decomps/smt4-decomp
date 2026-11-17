@@ -60,7 +60,7 @@ UniteCtrl *FUN_003c9c94(UniteCtrl *unite)
     for (i = 0; i < UNITE_RACE_COUNT; i++)
         unite->counts[i] = 0;
     for (n = 0; n < count; n++) {
-        DevilSortRecord *devil = devilGetRecord((u16)n);
+        DevilRecord *devil = devilGetRecord((u16)n);
         if (devil->race < UNITE_RACE_COUNT && (((u16 *)devil)[3] & 1))
             unite->counts[devil->race]++;
     }
@@ -72,7 +72,7 @@ UniteCtrl *FUN_003c9c94(UniteCtrl *unite)
         }
     }
     for (n = 0; n < count; n++) {
-        DevilSortRecord *devil = devilGetRecord((u16)n);
+        DevilRecord *devil = devilGetRecord((u16)n);
         if (devil->race < UNITE_RACE_COUNT && (((u16 *)devil)[3] & 1)) {
             unite->lists[devil->race][filled[devil->race]].id = devil->id;
             unite->lists[devil->race][filled[devil->race]].level = devil->level;

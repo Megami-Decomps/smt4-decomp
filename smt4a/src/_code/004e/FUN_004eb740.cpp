@@ -6,6 +6,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "Model/MoriModelManager.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleEventOwnerRef;
 struct BattleEventCandidate;
@@ -25,7 +26,6 @@ struct BattleCommandSlot {
 typedef char BattleCommandSlotSizeCheck[sizeof(BattleCommandSlot) == 0x1254 ? 1 : -1];
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 u32 FUN_004ea0c0(BattleEventOwnerRef *owner, const BattleEventCandidate *candidate);
 s32 FUN_003edca0(BtlMainStateA *state);
 BtlCombatantEntryA *FUN_003e81bc(BtlMainStateA *state);
@@ -34,11 +34,11 @@ BtlCombatantEntryA *FUN_003e81bc(BtlMainStateA *state);
 void FUN_004eb740(BtlMainStateA **reference, const BattleEventCandidate *candidate)
 {
     if ((*reference)->commandFilter.mode == 8) {
-        reinterpret_cast<BattleCommandSlot *>(g_btlAction.data)[(*reference)->unitRecord.currentSlot].setCommand(0x26);
+        reinterpret_cast<BattleCommandSlot *>(g_btlAction.slots)[(*reference)->unitRecord.currentSlot].setCommand(0x26);
         return;
     }
     if (FUN_004ea0c0(reinterpret_cast<BattleEventOwnerRef *>(reference), candidate)) {
-        reinterpret_cast<BattleCommandSlot *>(g_btlAction.data)[(*reference)->unitRecord.currentSlot].setCommand(0x24);
+        reinterpret_cast<BattleCommandSlot *>(g_btlAction.slots)[(*reference)->unitRecord.currentSlot].setCommand(0x24);
         return;
     }
     if (FUN_003edca0(*reference)) {
@@ -51,6 +51,6 @@ void FUN_004eb740(BtlMainStateA **reference, const BattleEventCandidate *candida
                      entry->indexView.selectionIndex, payload);
         reinterpret_cast<BattleCommandSaveView *>(gameDataBlocksGetSaveData())->pending = 0;
     }
-    reinterpret_cast<BattleCommandSlot *>(g_btlAction.data)[(*reference)->unitRecord.currentSlot].setCommand(0x26);
+    reinterpret_cast<BattleCommandSlot *>(g_btlAction.slots)[(*reference)->unitRecord.currentSlot].setCommand(0x26);
 }
 }

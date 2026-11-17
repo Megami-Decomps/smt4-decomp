@@ -40,10 +40,10 @@ static inline s32 nativeCategoryModifier(const BtlCombatantEntryA *entry, const 
 {
     u16 category = skill->classification.category;
     if (category < 18) {
-        const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(
+        const DevilRecordA *record = reinterpret_cast<const DevilRecordA *>(
             devilGetRecord((u16)reinterpret_cast<const BtlCombatantIdView *>(entry)->id));
         if (record)
-            return record->categoryModifiers.values[category];
+            return record->categoryModifiers[category];
     }
     return 0;
 }

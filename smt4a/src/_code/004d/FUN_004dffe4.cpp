@@ -3,6 +3,7 @@
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "util/Random.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct BattleTargetSelectionView {
@@ -10,7 +11,6 @@ struct BattleTargetSelectionView {
 };
 }
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 void btlActionMarkRandomTargetableUnit(BattleTargetSelectionView *context);
 void FUN_004e6ed8(BattleTargetSelectionView *context, s32 mode);
 void FUN_004e7d20(BattleTargetSelectionView *context, s32 count);

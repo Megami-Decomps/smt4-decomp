@@ -14,8 +14,8 @@ u16 FUN_003c9948(LeveledLists *owner, s32 race, u8 level);
 u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
                  PackedIdentifiers *output)
 {
-    DevilSortRecord *first = devilGetRecord(firstId);
-    DevilSortRecord *second = devilGetRecord(secondId);
+    DevilRecord *first = devilGetRecord(firstId);
+    DevilRecord *second = devilGetRecord(secondId);
     const u8 *pair = dataFindSymmetricPair(first->race, second->race);
     const u8 *table = dataTable05Sub0GetEntries();
     if (first->id == second->id || pair == NULL)

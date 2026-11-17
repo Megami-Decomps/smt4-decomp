@@ -5,14 +5,14 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "ui/UiControl.h"
+#include "battle/BtlGlobals.h"
 
-/* This mode mask lies beyond the recovered BtlActionGlobals prefix. */
+/* This mode mask lies beyond the recovered BtlActionGlobalsA prefix. */
 struct BattleHelpModeMaskView {
     u8 unk00[0xF8];
     u64 mask;
 };
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 void dialogClose(s32 mode);
 void btlHelpFreeEntries(void);
 void FUN_00272584(BtlMainStateA *state, BtlUnit *unit, s32 mode, s32 subject);

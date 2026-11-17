@@ -28,7 +28,8 @@ s32 scrComm_Battle_UnitSlotParamEquals(void)
     }
     value = scrGetArg(1);
     unit = btlUnitGet(g_btlScriptUnit);
-    slotParams = unit->params + index;
+    /* the entry's word at 0x74 + index * 4, addressed as retail does: the word pointer moved by index first */
+    slotParams = reinterpret_cast<s32 *>(unit->entry) + index;
     scrSetResult(slotParams[0x1D] == value);
     return 1;
 }

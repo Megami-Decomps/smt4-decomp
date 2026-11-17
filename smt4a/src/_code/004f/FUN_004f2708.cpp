@@ -15,34 +15,39 @@ struct BattleCameraGateGlobalsView {
 };
 
 extern "C" {
-extern BattleCameraGateGlobalsView g_btlCamera;
 extern u32 g_btlScriptUnit;
 s32 btlStateHasSelectionGateFlag(BtlMainStateA *battle);
 
 /* Gate camera progression on battle masks, the script unit and camera flags. */
+/* g_btlCamera's pointer and the masks the module keeps after it. */
+static __inline BattleCameraGateGlobalsView &cameraGate()
+{
+    return reinterpret_cast<BattleCameraGateGlobalsView &>(g_btlCamera);
+}
+
 u32 FUN_004f2708(u32 unused, BtlMainStateA *battle, s32 checkTransition)
 {
-    if (((g_btlCamera.requiredMarker & battle->markerMasks.bits) == 0 ||
-         (battle->stateFlags64.bits & g_btlCamera.requiredState) == 0) &&
-        !(battle->stateFlags64.bits & g_btlCamera.blocked) &&
+    if (((cameraGate().requiredMarker & battle->markerMasks.bits) == 0 ||
+         (battle->stateFlags64.bits & cameraGate().requiredState) == 0) &&
+        !(battle->stateFlags64.bits & cameraGate().blocked) &&
         !(battle->encounter.controlFlags & 0x10)) {
         if (btlStateHasSelectionGateFlag(battle))
             return 1;
-        if (battle->stateFlags64.bits & g_btlCamera.unitBlocked)
+        if (battle->stateFlags64.bits & cameraGate().unitBlocked)
             return 0;
         BtlCombatantEntryA *unit = reinterpret_cast<BtlCombatantEntryA *>(
             btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if (unit && ((u32)unit->flags & 0x2000))
             return 0;
         if (checkTransition) {
-            if (!g_btlCamera.camera)
+            if (!cameraGate().camera)
                 return 1;
-            if (g_btlCamera.camera->flags & 0x2000000)
+            if (cameraGate().camera->flags & 0x2000000)
                 return 0;
-        } else if (!g_btlCamera.camera) {
+        } else if (!cameraGate().camera) {
             return 1;
         }
-        if (!(g_btlCamera.camera->flags & 0x10000000))
+        if (!(cameraGate().camera->flags & 0x10000000))
             return 1;
     }
     return 0;

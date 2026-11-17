@@ -1,5 +1,5 @@
 /* NON_MATCHING: only the address register of the g_gameDataBlocks load differs (retail keeps the global in r0 and computes id*5 before loading saveBlock into r2). */
-#include "gamedata/DevilRecord.h"
+#include "gamedata/Table00Lookup.h"
 #include "shard/GameDataBlocks.h"
 #include "shard/W6_W6Match3_NameFormState.h"
 
@@ -11,8 +11,8 @@ u16 FUN_0029e9cc(u16 id)
     if (id > 0x500) {
         return 0;
     }
-    const DevilRecord *record = reinterpret_cast<DevilRecord *>(dataTable00FindById(id));
-    if ((record->links.linkFlags & 1) == 0) {
+    const Table00Record *record = dataTable00FindById(id);
+    if ((record->flags & 1) == 0) {
         return 0;
     }
     GameSaveData *save = g_gameDataBlocks.saveBlock;
@@ -22,7 +22,7 @@ u16 FUN_0029e9cc(u16 id)
         return 1;
     }
     for (; index < 3; ++index) {
-        u32 linkedId = record->requirements.linkedIds[index];
+        u32 linkedId = record->linkedIds[index];
         if (linkedId != 0) {
             GameSavedItem *linked = &save->body.items[linkedId];
             if (linked->registrationFlags & 2) {

@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "battle/btlHelp.h"
 #include "battle/btlEditor.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleAction;
 struct BattleRetreatOwner { BtlMainState *script; };
@@ -34,10 +35,9 @@ struct BattleRetreatResourceFields {
 };
 
 extern "C" {
-extern BtlMain *g_btlMain;
 extern BattleVersionResources *DAT_00435d18;
 extern BtlEvent *g_btlEvent;
-bool FUN_00256940(BtlMain *, const BtlMainState *, s32);
+bool FUN_00256940(BtlCamera *, const BtlMainState *, s32);
 void btlReflectQueueKind34(s16, u32);
 u32 FUN_0026beb4(u32, u32, u32, u32, u32);
 s32 FUN_003bf1e4();
@@ -56,7 +56,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
         FUN_00229a3c(0, reinterpret_cast<u32>(action), 0, 5, 0);
         return;
     }
-    BtlMain *main = g_btlMain;
+    BtlCamera *main = g_btlMain;
     if (reinterpret_cast<BattleRetreatMainFields *>(main)->active >= 0 &&
         FUN_00256940(main, script, 1))
         btlReflectQueueKind34(0, 0);

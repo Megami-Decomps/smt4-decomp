@@ -7,30 +7,24 @@ struct UnitSummary {
     u16 kind; // 0x02
     u8 unk04[0x1e];
 };
-// The request mode follows the currently decoded BtlUnitData prefix.
-struct UnitRequestView {
-    u8 unk000[0x14c];
-    u16 active; // 0x14c
-    u16 mode; // 0x14e
-};
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-void btlEntryBuildSummary(UnitSummary *out, BtlMainState *state, const s16 *params);
+void btlEntryBuildSummary(UnitSummary *out, BtlMainState *state, const BtlEntry *entry);
 
 u32 scrCommSelectUnitRequestMode()
 {
-    UnitRequestView *request = (UnitRequestView *)reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data;
-    request->active = 1;
-    const s16 *params = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->params;
+    BtlUnitData *request = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))->data;
+    request->actionKind = 1;
+    const BtlEntry *entry = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))->entry;
     BtlMainState *state = btlGetMainState();
     UnitSummary summary;
-    btlEntryBuildSummary(&summary, state, params);
+    btlEntryBuildSummary(&summary, state, entry);
     if (summary.kind == 1) {
-        request->mode = 2;
+        request->actionArg = 2;
     }
     else {
-        request->mode = 1;
+        request->actionArg = 1;
     }
     return 1;
 }

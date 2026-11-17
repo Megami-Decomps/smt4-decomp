@@ -1,5 +1,6 @@
 /* NON_MATCHING: the 0.0f pool load before the case-35 FUN_004f3f1c call is scheduled before mov r2 where retail places it after mov r1; everything else matches. */
 #include "battle/btlCamera.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct CameraCueWork {
@@ -8,7 +9,6 @@ struct CameraCueWork {
 };
 }
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 void cameraBeginScalarTransition(BtlCameraA *camera, f32 value, u32 duration, u32 mode);
 void FUN_004f3f1c(BtlCameraA *camera, u32 target, u32 parameter, s32 preservePending, f32 duration);
 void FUN_004f41b0(BtlCameraA *camera, u32 first, u32 second);

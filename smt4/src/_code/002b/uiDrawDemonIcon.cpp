@@ -9,7 +9,11 @@
 #include "addon/AocSystem.h"
 
 struct DemonIconRecord {
-    DevilSortRecord key;
+    struct {
+        u16 id;
+        u8 race;
+        u8 level;
+    } key;
     u8 unk04[0x8c];
     u16 image;
     u16 unk92;

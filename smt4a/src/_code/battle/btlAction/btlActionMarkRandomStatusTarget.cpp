@@ -20,6 +20,6 @@ void btlActionMarkRandomStatusTarget(BtlMainStateA **context, u32 status)
     }
     s16 eligibleCount = btlAiFilterCandidatesByExclusionChance(context, candidates, count, 1);
     u32 selected = lcgRandomRange((u16)(eligibleCount - 1));
-    btlUnitGet(context)->selection.targeted[candidates[selected]] = 1;
+    btlUnitGet(context)->targets[candidates[selected]] = 1;
 }
 }

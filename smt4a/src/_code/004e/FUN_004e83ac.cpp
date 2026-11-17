@@ -1,5 +1,6 @@
 /* NON_MATCHING: the entry flags now load as ldrd like retail; remaining differences are the targetable mask pair (retail: two ldr with hi/lo in r4/r5, build ldrd) and the index copy scheduled before the r1 argument move. */
 #include "battle/btlAction.h"
+#include "battle/BtlGlobals.h"
 
 /* The 0x408-byte combatant entry as the action target check sees it. */
 struct ActionTargetEntry {
@@ -34,14 +35,13 @@ struct ActionTargetSlots {
 
 extern "C" {
 
-extern BtlActionGlobals g_btlAction;
 
-ActionTargetEntry *btlMainFindEntryByListedId(ActionTargetBattle *battle, s32 index);
 
 /* Whether the combatant at index (or the one it redirects to) is free and targetable. */
 u32 FUN_004e83ac(ActionTargetOwner *owner, ActionTargetSlots *table, s32 index)
 {
-    ActionTargetEntry *target = btlMainFindEntryByListedId(owner->battle, index);
+    ActionTargetEntry *target = reinterpret_cast<ActionTargetEntry *>(
+        btlMainFindEntryByListedId(reinterpret_cast<BtlMainStateA *>(owner->battle), index));
     if (target != NULL) {
         index = target->selectionIndex;
     }

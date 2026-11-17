@@ -5,6 +5,7 @@
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SaveSlotTable.h"
+#include "battle/BtlGlobals.h"
 
 /* The party member record a battle entry is linked to: its id at 0x46. */
 struct PartyMemberRecord {
@@ -29,9 +30,7 @@ struct BattlePhaseView {
 };
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
-extern void *g_btlMain;
 extern void *g_btlEvent;
 extern void *DAT_00435d18;
 
@@ -80,7 +79,7 @@ u32 FUN_00394b8c(void);
 
 u32 FUN_003d2140(BtlMainState **block, u32 phase)
 {
-    ActionStateChannel *channel = &static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index];
+    ActionStateChannel *channel = &reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index];
     CommandState *work = reinterpret_cast<CommandState *>(reinterpret_cast<u8 *>(channel) + 4);
     BtlMainState *state = *block;
     u32 result = 0;
@@ -249,7 +248,7 @@ u32 FUN_003d2140(BtlMainState **block, u32 phase)
         battleResetCounterAndFlag();
         modelManagerReleaseSlots(DAT_00435d18);
         modelSetResetSlots(DAT_00435d18);
-        static_cast<BtlMain *>(g_btlMain)->flags &= ~0x4000u;
+        static_cast<BtlCamera *>(g_btlMain)->flags &= ~0x4000u;
         eventCommandDispatchPendingCleanup();
         return FUN_00394b8c();
     default:

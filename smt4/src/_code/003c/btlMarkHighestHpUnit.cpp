@@ -16,5 +16,5 @@ extern "C" void btlMarkHighestHpUnit(BtlMainState **owner)
             maximumHp = battle->entries[index].hp;
         }
     }
-    btlUnitGet(owner)->selectedUnits[candidates[candidateCount - 1]] = 1;
+    btlUnitGet(owner)->targets[candidates[candidateCount - 1]] = 1;
 }

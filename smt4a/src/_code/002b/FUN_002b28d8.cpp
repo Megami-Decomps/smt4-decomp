@@ -1,16 +1,9 @@
 #include "shard/W5_W5Match2_UniteWork.h"
-#include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/DevilRecordA.h"
 
-struct FusionSortRecord {
-    u16 id;
-    u8 category;
-    u8 unk03[3];
-    u16 level;
-};
-
-static inline s32 compareFusionComponents(const FusionSortRecord *left, const FusionSortRecord *right)
+static inline s32 compareFusionComponents(const DevilRecordA *left, const DevilRecordA *right)
 {
-    s32 result = left->category - right->category;
+    s32 result = left->race - right->race;
     if (result != 0)
         return result;
     result = right->level - left->level;
@@ -35,14 +28,14 @@ s32 FUN_002b28d8(const u16 *left, const u16 *right)
     if (result == 0) {
         u16 leftId = work->pairList.pairs[*left].packedIds & 0x7FFF;
         u16 rightId = work->pairList.pairs[*right].packedIds & 0x7FFF;
-        const FusionSortRecord *a = reinterpret_cast<FusionSortRecord *>(devilGetRecord(leftId));
-        const FusionSortRecord *b = reinterpret_cast<FusionSortRecord *>(devilGetRecord(rightId));
+        const DevilRecordA *a = devilGetRecord(leftId);
+        const DevilRecordA *b = devilGetRecord(rightId);
         result = compareFusionComponents(a, b);
         if (result == 0) {
             leftId = (work->pairList.pairs[*left].packedIds & 0x3FFFFFFF) >> 15;
             rightId = (work->pairList.pairs[*right].packedIds & 0x3FFFFFFF) >> 15;
-            a = reinterpret_cast<FusionSortRecord *>(devilGetRecord(leftId));
-            b = reinterpret_cast<FusionSortRecord *>(devilGetRecord(rightId));
+            a = devilGetRecord(leftId);
+            b = devilGetRecord(rightId);
             result = compareFusionComponents(a, b);
         }
     }

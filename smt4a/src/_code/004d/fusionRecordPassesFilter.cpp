@@ -1,17 +1,9 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include <stddef.h>
 #include "util/BitsAndBytes.h"
 #include "code/Code002a_Smt4a.h"
 
 /* A demon skill-like record as the fusion/search filter reads it. */
-struct FilterRecord {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u8 category;   /* 0x26 marks the excluded category */
-    /* 0x03 */ u8 unk03[3];
-    /* 0x06 */ u16 count;
-    /* 0x08 */ u8 unk08[2];
-    /* 0x0A */ u16 flags;     /* bit 0: the record can be matched */
-};
 
 /* The conditions a record must meet; each group is enabled by its flag byte. */
 struct RecordFilter {
@@ -54,16 +46,15 @@ typedef char RecordFilterOffsets[sizeof(RecordFilter) == 0x1B8 &&
 
 extern "C" {
 
-FilterRecord *devilGetRecord(u32 id);
 s32 slotRecordFindById(u32 id);
 SlotRecord *gameGetSlotRecord(s32 slot);
 
 /* Whether the record `recordId` passes the filter, with the two member ids given for the party-slot conditions. */
 s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32 recordId)
 {
-    FilterRecord *record = devilGetRecord(recordId);
-    FilterRecord *first;
-    FilterRecord *second;
+    DevilRecordA *record = devilGetRecord(recordId);
+    DevilRecordA *first;
+    DevilRecordA *second;
     s32 count;
 
     if (!(record->flags & 1)) {
@@ -74,12 +65,12 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
             return 0;
         }
     } else {
-        if (filter->matchCategory && record->category != filter->category) {
+        if (filter->matchCategory && record->race != filter->category) {
             return 0;
         }
         s32 bracket = 0;
         if (filter->matchBracket) {
-            count = record->count;
+            count = record->level;
             bracket = filter->bracket;
         }
         if (filter->matchBracket) {
@@ -141,7 +132,7 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
             }
         }
     }
-    if (filter->limitCount && record->count > computeCountLimit()) {
+    if (filter->limitCount && record->level > computeCountLimit()) {
         return 0;
     }
     if (filter->skipLearned && FUN_002a4b28(record->id) != 0) {
@@ -153,7 +144,7 @@ s32 fusionRecordPassesFilter(RecordFilter *filter, u32 memberA, u32 memberB, u32
     first = devilGetRecord(memberA);
     second = devilGetRecord(memberB);
     if (!filter->allowExcludedCategory) {
-        if (first->category == 0x26 || second->category == 0x26) {
+        if (first->race == 0x26 || second->race == 0x26) {
             return 0;
         }
     }

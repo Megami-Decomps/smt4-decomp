@@ -1,5 +1,6 @@
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct CameraDebugMenu {
@@ -8,7 +9,6 @@ struct CameraDebugMenu {
 };
 }
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern f32 DAT_0057150c;
 extern f32 DAT_00571510;
 s32 listBoxItemHasOwner(AsdListBox *list);

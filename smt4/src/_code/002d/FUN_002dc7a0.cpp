@@ -6,8 +6,8 @@ extern "C" UniteWork *g_unite;
 
 static inline s32 compareFusionDemons(u16 first, u16 second)
 {
-    const DevilSortRecord *a = devilGetRecord(first);
-    const DevilSortRecord *b = devilGetRecord(second);
+    const DevilRecord *a = devilGetRecord(first);
+    const DevilRecord *b = devilGetRecord(second);
     s32 order = s32(b->race) - s32(a->race);
     if (order == 0) {
         order = s32(a->level) - s32(b->level);

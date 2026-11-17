@@ -1,14 +1,8 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 namespace {
 /* A demon record: only the fields the filter reads. */
-struct DevilRecord {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u16 level;
-    /* 0x08 */ u8 unk08[2];
-    /* 0x0a */ u16 flags;                /* bit 0: can be summoned by this command */
-};
 
 /* The spawned NPC's job work block (only the fields touched here). */
 struct NpcJobWork {
@@ -28,7 +22,6 @@ s32 scrGetArg(u32 index);
 u32 scrWorkGetValue(u32 slot);
 void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
-DevilRecord *devilGetRecord(u32 id);
 u32 randRange(u32 maximum);
 u32 partyFindFirstUnusedEntry(void);
 void dispatchIfFound(u32 arg, u32 id, s32 flag);
@@ -66,7 +59,7 @@ u32 scrSpawnRandomDemonInLevelRange(void)
         s32 count = 0;
         for (s32 id = 1; id < 0x500; id++) {
             candidates[id] = 0;
-            DevilRecord *record = devilGetRecord((u16)id);
+            DevilRecordA *record = devilGetRecord((u16)id);
             if (record == NULL || (record->flags & 1) == 0 || minimum > record->level || record->level > maximum)
                 continue;
             candidates[count] = id;

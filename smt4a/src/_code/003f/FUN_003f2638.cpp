@@ -1,13 +1,13 @@
 /* NON_MATCHING: the mask test now loads in retail's order; only r2/r3 are swapped between g_btlMain's address and the mask's low word. */
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
+#include "battle/BtlGlobals.h"
 
 struct ReflectionTargetValue {
     /* 0x000 */ u8 unk000[0x1CC];
     /* 0x1CC */ u16 unk1CC;
 };
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 u32 hasFlag80Or1000(u32 id, u32 *flags);
 void FUN_004fefac(s32 id, u32 options, u32 argument);
 

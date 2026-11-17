@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 s32 bitsAt60Test(const void *subject, u32 mask);
 }
 

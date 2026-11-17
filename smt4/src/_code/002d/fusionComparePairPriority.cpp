@@ -5,8 +5,8 @@ extern "C" UniteWork *g_unite;
 
 static __inline s32 comparePairMember(u16 firstId, u16 secondId)
 {
-    const DevilSortRecord *first = devilGetRecord(firstId);
-    const DevilSortRecord *second = devilGetRecord(secondId);
+    const DevilRecord *first = devilGetRecord(firstId);
+    const DevilRecord *second = devilGetRecord(secondId);
     s32 result = second->race - first->race;
     if (result == 0) {
         result = first->level - second->level;

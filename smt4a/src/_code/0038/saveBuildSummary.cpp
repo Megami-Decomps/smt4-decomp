@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
@@ -48,15 +48,7 @@ typedef struct SaveData {
     /* 0x21d90 */ u32 word21d90;
 } SaveData;
 
-typedef struct SummarySource {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u16 value06;
-    /* 0x08 */ u8 unk08[0x38];
-    /* 0x40 */ u8 data40[1];
-} SummarySource;
-
 void memcpySrcFirst(void *first, void *second, s32 size);   /* copies `size` bytes between the two buffers */
-SummarySource *devilGetRecord(s32 id);
 SaveSlot *gameGetSaveSlotData(s32 index);
 u8 gameDataBlocksGetFlagByte(void);
 SaveData *gameDataBlocksGetSaveData(void);
@@ -71,7 +63,7 @@ void saveBuildSummary(SaveSummary *summary)
 {
     SlotTable *table = gameGetSlotTable();
     SaveSlot *slot;
-    SummarySource *source;
+    DevilRecordA *source;
     s32 i;
 
     memcpySrcFirst(table->nameA, summary->nameA, 0xe);
@@ -109,8 +101,8 @@ void saveBuildSummary(SaveSummary *summary)
     summary->unk34 = 0;
     summary->id60 = 0x218;
     source = devilGetRecord(0x218);
-    summary->value62 = source->value06;
-    memcpySrcFirst(source->data40, summary->copy50, 0x10);
+    summary->value62 = source->level;
+    memcpySrcFirst(source->name, summary->copy50, 0x10);
 }
 
 } /* extern "C" */

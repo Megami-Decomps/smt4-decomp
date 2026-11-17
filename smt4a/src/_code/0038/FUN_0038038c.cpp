@@ -1,20 +1,14 @@
-#include "common.h"
-
-struct Record0038038c {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u8 value;
-};
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
 s32 scrGetArg(u32 index);
-Record0038038c *devilGetRecord(u16 id);
 s32 scrSetResult(s32 value);
 
-/* Script command: returns the byte at 0x38 of the record for the id in argument zero. */
+/* Script command: returns the voice category of the demon whose id is argument zero. */
 s32 FUN_0038038c(void)
 {
-    scrSetResult(devilGetRecord(scrGetArg(0))->value);
+    scrSetResult(devilGetRecord((u16)scrGetArg(0))->voiceCategory);
     return 1;
 }
 

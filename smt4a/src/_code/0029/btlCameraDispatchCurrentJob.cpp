@@ -1,8 +1,8 @@
 #include "battle/btlCamera.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-extern BtlCameraA *g_btlCamera;
 
 int FUN_004f2c40(void *obj, u32 arg);
 u32 jobGetWork(void);

@@ -1,4 +1,5 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleFlagCheckView {
     /* 0x00 */ u8 unk00[0xac];
@@ -6,7 +7,6 @@ struct BattleFlagCheckView {
 };
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 bool gameFlagIsSet(u32 flag);
 s32 flagSelectVariant();
 bool FUN_002e2b38();

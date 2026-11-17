@@ -4,6 +4,7 @@
 #include "battle/btlPartnerAttack.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 // The queued command lies beyond the published BtlMainStateA extent.
 struct BattleTransitionStateView {
@@ -18,7 +19,6 @@ struct BattleTransitionSource {
 typedef char BattleTransitionCommandOffsetCheck[
     offsetof(BattleTransitionStateView, command) == 0x4D68 ? 1 : -1];
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 extern BtlPartnerAttackA* g_btlPartnerAttack;
 extern u32 g_btlScriptUnit;
 extern void* g_btlUiBlock;

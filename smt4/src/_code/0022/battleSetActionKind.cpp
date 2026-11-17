@@ -2,15 +2,15 @@
 #include "battle/ActionKindSelection.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 
 /* Default action kind selection: kind 10 when bit 0 of the action flags is set, otherwise 11. */
 void battleSetActionKind(BtlMainState **state)
 {
     const BtlMainState *view = *state;
-    ActionKindThread *thread = &static_cast<ActionKindThread *>(g_btlAction.data)[view->actionState.index];
+    ActionKindThread *thread = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[view->actionState.index];
     if (view->actionState.flags & 1) {
         thread->kind = 10;
     } else {

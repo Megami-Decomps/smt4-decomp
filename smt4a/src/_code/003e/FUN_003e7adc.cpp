@@ -1,7 +1,7 @@
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 
 // Activity is present when either state index or a currently enabled mask bit is set.
 s32 FUN_003e7adc(BtlMainStateA *state)

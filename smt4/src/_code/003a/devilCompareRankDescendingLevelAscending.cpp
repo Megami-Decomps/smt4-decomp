@@ -5,8 +5,8 @@ extern "C" s32 devilCompareRankDescendingLevelAscending(const RankedDevilEntry* 
 {
     s32 order = second->rank - first->rank;
     if (order == 0) {
-        DevilSortRecord* a = devilGetRecord(first->id);
-        DevilSortRecord* b = devilGetRecord(second->id);
+        DevilRecord* a = devilGetRecord(first->id);
+        DevilRecord* b = devilGetRecord(second->id);
         order = a->level - b->level;
         if (order == 0) {
             order = second->id - first->id;

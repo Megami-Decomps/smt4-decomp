@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail uses separate conditional stores and saves five registers; compiled code groups the pair into STM and pads the call frame with R8. */
 #include "common.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleRecord {
     s32 first;  // 0x00

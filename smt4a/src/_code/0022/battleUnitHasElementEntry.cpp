@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 #include "gamedata/Table04Record.h"
 #include "gamedata/EquipmentRecordA.h"
 #include "gamedata/Table00Lookup.h"
@@ -13,14 +13,6 @@ struct SkillRecord {
     u8 element;     /* 0x2f */
     u8 unk30;
     u8 special;     /* 0x31: counts as element 12 */
-};
-
-/* Record of the demon table (devilGetRecord). */
-struct DemonRecord {
-    u8 unk00[0xe];
-    u8 element;     /* 0x0e */
-    u8 unk0f[2];
-    u8 special;     /* 0x11: counts as element 12 */
 };
 
 /* An equipment slot: up to two equipment ids and eight skill ids. */
@@ -52,7 +44,6 @@ const s32 ELEMENT_ANY = 12;
 }
 
 extern "C" {
-DemonRecord *devilGetRecord(u32 id);
 
 /* Whether the unit carries equipment or a skill of element `wanted` (12 also takes the "special" flag);
    with `restricted` set only skill-table entries of kind 2 count and the equipment itself is skipped. */
@@ -97,7 +88,7 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
     }
     if (unit->demonSkills != NULL) {
         if (restricted == 0) {
-            DemonRecord *demon = devilGetRecord(unit->demonId);
+            DevilRecordA *demon = devilGetRecord(unit->demonId);
             if (demon->element == wanted || (wanted == ELEMENT_ANY && demon->special != 0)) {
                 return 1;
             }

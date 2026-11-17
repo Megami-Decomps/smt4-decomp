@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 struct ScriptEffectUnit {
     u8 unk0000[0x1250];
     s32 pending; // 0x1250

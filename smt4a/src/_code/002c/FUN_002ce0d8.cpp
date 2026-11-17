@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
@@ -6,16 +6,6 @@ typedef struct Ref {
     /* 0x0 */ u16 id;
     /* 0x2 */ u16 group;
 } Ref;
-
-typedef struct Record {
-    /* 0x0 */ u16 id;
-    /* 0x2 */ u8 kind;
-    /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 unk4[2];
-    /* 0x6 */ u16 order;
-} Record;
-
-Record *devilGetRecord(u32 id);
 
 /* Compares two refs: refs without a group sort last, then by group, record kind, order (higher first) and id. */
 u32 FUN_002ce0d8(Ref *a, Ref *b)
@@ -31,12 +21,12 @@ u32 FUN_002ce0d8(Ref *a, Ref *b)
     } else {
         result = a->group - groupB;
         if (result == 0) {
-            Record *recordA = devilGetRecord(a->id);
-            Record *recordB = devilGetRecord(b->id);
+            DevilRecordA *recordA = devilGetRecord(a->id);
+            DevilRecordA *recordB = devilGetRecord(b->id);
 
-            result = recordA->kind - recordB->kind;
+            result = recordA->race - recordB->race;
             if (result == 0) {
-                result = recordB->order - recordA->order;
+                result = recordB->level - recordA->level;
                 if (result == 0) {
                     result = recordA->id - recordB->id;
                 }

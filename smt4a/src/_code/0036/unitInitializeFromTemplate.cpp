@@ -17,10 +17,6 @@ void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
         u32 hp, mp;
         u16 strength, magic, vitality, agility, luck;
     };
-    struct DevilNameView {
-        u8 prefix[0xA0];
-        u16 name[9];
-    };
     const Table00RecordA *table = dataTable00FindById(id);
     const BaseStatsView *stats = reinterpret_cast<const BaseStatsView *>(table);
     sysMemClear(unit, 300);
@@ -43,8 +39,8 @@ void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
     unit->skillList.skills[5] = table->skills[5];
     unit->skillList.skills[6] = table->skills[6];
     unit->skillList.skills[7] = table->skills[7];
-    const DevilNameView *devil = reinterpret_cast<const DevilNameView *>(devilGetRecord(id));
-    __aeabi_memcpy4(unit->name, devil->name, sizeof(unit->name));
+    const DevilRecordA *devil = devilGetRecord(id);
+    __aeabi_memcpy4(unit->name, devil->categoryModifiers, sizeof(unit->name));
     unit->unk2A = *reinterpret_cast<const u16 *>(unit->unk0E);
     unit->unk2C = unit->unk10;
 }

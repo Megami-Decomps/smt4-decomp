@@ -2,6 +2,7 @@
 #include "battle/btlCamera.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct CameraDebugMenu {
@@ -10,7 +11,6 @@ struct CameraDebugMenu {
 };
 }
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern u64 DAT_00571718;
 extern f32 DAT_005e1554[3];
 extern f32 DAT_00571570;

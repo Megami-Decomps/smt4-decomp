@@ -1,9 +1,9 @@
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
-extern BtlMainGlobalsA g_btlMain;
 
 u32 btlMainGetUnk14(void)
 {

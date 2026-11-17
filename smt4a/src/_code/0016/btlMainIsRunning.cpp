@@ -1,10 +1,10 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
 s32 jobFind(u32 job);
 
-extern BtlMainGlobalsA g_btlMain;
 
 /* 1 while the battle job runs or the block is to be kept; otherwise 0. */
 s32 btlMainIsRunning(void)

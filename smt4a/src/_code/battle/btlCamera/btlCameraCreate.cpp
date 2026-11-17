@@ -1,12 +1,12 @@
 #include "battle/btlCamera.h"
 #include "AsdSDK/AsdDebug.h"
+#include "battle/BtlGlobals.h"
 extern "C" {
 s32 btlCameraDispatchCurrentJob(void);
 void btlCameraDestroy(void);
 u32 taskCreateDraw(const char*, s32, u32, u32, s32 (*)(void), void (*)(void), void*, u32);
 void* asdMemoryAllocTracked(s32, s32, s32, u32, s32);
 void FUN_004f0e20(BtlCameraA*, BtlCameraJobA*);
-extern BtlCameraA* g_btlCamera;
 
 void btlCameraCreate(BtlCameraJobA* owner)
 {

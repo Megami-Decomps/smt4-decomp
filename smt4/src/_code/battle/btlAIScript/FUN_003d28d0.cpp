@@ -5,6 +5,7 @@
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/DataTable40.h"
+#include "battle/BtlGlobals.h"
 
 /* Battle state words the dispatcher reads beyond the shared prefix. */
 struct CommandPhaseView {
@@ -26,7 +27,6 @@ typedef char CommandPhaseViewOffsets[
     offsetof(CommandPhaseView, word225c) == 0x225c && offsetof(CommandPhaseView, word496c) == 0x496c ? 1 : -1];
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlAiScript;
 extern u32 g_btlActionReflect;
 extern void *DAT_00435d18;
@@ -66,13 +66,13 @@ s32 btlNodeListAnyReady(void);
 /* Sets the acting combatant's pending action. */
 static __inline void setPendingAction(BtlMainState **block, u8 pending)
 {
-    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = pending;
+    reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index].pending = pending;
 }
 
 /* Runs one step of the acting combatant's pending action; returns 1 once a step finished its phase. */
 u32 FUN_003d28d0(BtlMainState **block, u32 phase)
 {
-    ActionStateChannel *channel = &static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index];
+    ActionStateChannel *channel = &reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index];
     CommandState *work = reinterpret_cast<CommandState *>(reinterpret_cast<u8 *>(channel) + 4);
     CommandPhaseView *view = reinterpret_cast<CommandPhaseView *>(*block);
     u8 pending;

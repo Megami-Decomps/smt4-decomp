@@ -5,15 +5,14 @@
 #include "battle/btlAction.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "gamedata/DataTable40.h"
+#include "battle/BtlGlobals.h"
 
 struct BtlSkill;
 extern "C" {
-extern BtlMain *g_btlMain;
 extern void *DAT_00435d18;
-extern BtlActionGlobals g_btlAction;
 extern const char DAT_00400468[]; // battle/army_summon/army_summon.bccam
-void FUN_003d6fd4(BtlMain *battle, const char *path);
-s32 cameraCreateFromStateResource(BtlMain *battle);
+void FUN_003d6fd4(BtlCamera *battle, const char *path);
+s32 cameraCreateFromStateResource(BtlCamera *battle);
 void FUN_003dba3c(void *auxiliary);
 s32 btlAuxAreResourcesReady(void *auxiliary);
 void nameEntriesRegisterVerNamesThenContinue(void *auxiliary);
@@ -85,7 +84,7 @@ u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
         FUN_00338358(*owner);
         if (FUN_00293ed0(*owner)) {
             commandResetThreeChannels(*owner);
-            ActionStateChannels *channels = (ActionStateChannels *)g_btlAction.data;
+            ActionStateChannels *channels = reinterpret_cast<ActionStateChannels *>(g_btlAction.slots);
             channels->entries[(*owner)->current].pending = 13;
             return 1;
         }

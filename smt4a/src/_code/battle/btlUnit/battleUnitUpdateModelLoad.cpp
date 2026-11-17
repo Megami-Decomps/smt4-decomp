@@ -68,7 +68,7 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
             render.flags |= 0x200002;
             FUN_004d854c((s32 *)record->model.owner);
             BtlUnitDataA *data = btlFindEntryBlockByMemberId(state, render.group);
-            btlUiAddRequest(g_btlUiBlock, data->unk02);
+            btlUiAddRequest(g_btlUiBlock, data->id);
             render.variant = 0;
             render.position[0] = 0.0f;
             render.position[1] = 0.0f;

@@ -39,7 +39,7 @@ void uniteRebuildFusionCatalog(void)
     s32 raceCount = 0;
     for (u16 id = 0; id < 1201; ++id) {
         if (devilIsAvailable(work->context, id)) {
-            const DevilSortRecord *record = devilGetRecord(id);
+            const DevilRecord *record = devilGetRecord(id);
             if (itemGetFlagBit1(record->id) || FUN_0029e9cc(record->id)) {
                 if (!options->race || options->race == record->race)
                     work->catalogIV.demons[demonCount++] = record->id;

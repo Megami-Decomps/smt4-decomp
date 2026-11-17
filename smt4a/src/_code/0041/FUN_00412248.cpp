@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlCamera.h"
 #include "gamedata/DataTable.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct BtlIntroTask {
 
 extern u32 g_btlUiBlock; /* 0x57a9c8 */
 extern u32 g_btlAux; /* 0x573808 */
-extern BtlCameraA *g_btlCamera; /* 0x571508 */
 extern u32 g_btlActionReflect; /* 0x5712f0 */
 
 extern int dialogIsActive(void);

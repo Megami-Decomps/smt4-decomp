@@ -8,8 +8,8 @@ extern "C" s32 devilCompareTableValueLevelId(const u16* leftId, const u16* right
     Table00Record* right = dataTable00FindById(*rightId);
     s32 difference = right->maxMp - left->maxMp;
     if (difference == 0) {
-        DevilSortRecord* leftRecord = devilGetRecord(*leftId);
-        DevilSortRecord* rightRecord = devilGetRecord(*rightId);
+        DevilRecord* leftRecord = devilGetRecord(*leftId);
+        DevilRecord* rightRecord = devilGetRecord(*rightId);
         difference = leftRecord->level - rightRecord->level;
         if (difference == 0) {
             difference = *rightId - *leftId;

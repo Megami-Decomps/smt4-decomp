@@ -3,18 +3,18 @@
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable40.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 struct BattleEvent;
 extern BattleEvent *g_btlEvent;
-extern BtlActionGlobals g_btlAction;
 s32 FUN_0027e3b8(BattleEvent *);
 s32 btlEventSelectTrigger(BattleEvent *, s32, s32, s32);
 void battleSetActionKind(BtlMainState **);
 
 static __inline void battleSetSelectedActionThreadKind(s32 index, u8 kind)
 {
-    ActionKindThread *thread = &static_cast<ActionKindThread *>(g_btlAction.data)[index];
+    ActionKindThread *thread = &reinterpret_cast<ActionKindThread *>(g_btlAction.slots)[index];
     thread->kind = kind;
 }
 

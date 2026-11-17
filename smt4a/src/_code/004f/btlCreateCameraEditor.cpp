@@ -1,4 +1,5 @@
 #include "battle/btlCamera.h"
+#include "battle/BtlGlobals.h"
 struct CameraEditorWork {
     u8 prefix[0xC];
     u32 list;
@@ -8,7 +9,6 @@ struct CameraEditorWork {
 typedef char CameraEditorWorkOffsets[offsetof(CameraEditorWork, list) == 0xC &&
     offsetof(CameraEditorWork, mode) == 0x14 ? 1 : -1];
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern const char DAT_005281b0[], DAT_005281a4[], DAT_00528198[], DAT_0052818c[], DAT_00528144[];
 void fontMeasureFixedWidth(void);
 void FUN_0021298c(void);

@@ -14,7 +14,7 @@ s32 scrComm_Battle_UnitDataEquals(void)
     u32 value = scrGetArg(0);
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
 
-    scrSetResult(unit->data->unk02 == value);
+    scrSetResult(unit->data->id == value);
     return 1;
 }
 

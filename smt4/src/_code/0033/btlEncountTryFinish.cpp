@@ -1,4 +1,5 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ s32 recordAreAllCountsNonpositive(void *object);
 s32 nodeListCountActiveById(s32 value, s32 arg);
 
 extern s32 g_btlActionReflect;
-extern BtlMain *g_btlMain;
 extern void *DAT_00435d18;
 
 u32 btlEncountTryFinish(void)

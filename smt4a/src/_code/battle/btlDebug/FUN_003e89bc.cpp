@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BtlGlobals.h"
 
 namespace {
 struct BattleDebugSpacing { s32 step, offset, height; };
@@ -9,7 +10,6 @@ struct BattleDebugLayout { BattleDebugSpacing normal, alternate; s32 origin; };
 struct BattleDebugAux;
 }
 extern "C" {
-extern BtlCameraA *g_btlCamera;
 extern BattleDebugAux *g_btlAux;
 extern BattleDebugLayout DAT_0057a634;
 s32 FUN_00221b34(const void *first, const void *second);

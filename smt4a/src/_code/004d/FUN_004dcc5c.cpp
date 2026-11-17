@@ -4,8 +4,8 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/btlDebug.h"
+#include "battle/BtlGlobals.h"
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 void FUN_004fdcd8(s32 delay, u32 group, s32 first, s32 last, s32 kind, s32 mode, s32 duration, s32 flags);
 void FUN_004fb798(s32 kind, u32 group, s32 mode, BattleRosterRecordA *record, s32 flags, s32 hp, s32 mp, u32 mask, s32 extra, s32 firstDelay, s32 lastDelay, s32 duration, s32 enabled, s32 variant, s32 finish);
 

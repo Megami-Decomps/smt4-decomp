@@ -3,9 +3,9 @@
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "code/Code0019.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlMainGlobalsA g_btlMain;
 u32 hasFlag80Or1000(u32 unit, u32 *flags);
 s32 btlFindSelectionIndexByOrdinal(const BtlMainStateA *battle, s32 ordinal);
 bool FUN_0047f78c();

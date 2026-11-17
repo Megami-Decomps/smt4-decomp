@@ -13,11 +13,6 @@ struct PartySlot {
 };
 
 
-struct BattleCameraView {
-    /* 0x000 */ u8 unk000[0x64C];
-    /* 0x64C */ u32 flags;
-};
-
 /* The object that owns a script process and a message block. */
 struct ScriptOwner {
     /* 0x00 */ u8 unk00[0x24];
@@ -28,7 +23,6 @@ struct ScriptOwner {
 extern "C" {
 extern u32 g_btlAux;
 extern u32 g_btlUiBlock;
-extern BattleCameraView *g_btlCamera;
 
 void scrScriptProcessDestroy(u32 process);
 void asdMemFree(void *block);

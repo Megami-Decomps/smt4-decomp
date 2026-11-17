@@ -13,17 +13,6 @@ struct DemonLevelTable {
     /* 0x38 */ DemonLevelEntry *entries[0x38];
 };
 
-struct DemonEligibilityRecord {
-    /* 0x00 */ DevilSortRecord identity;
-    /* 0x04 */ u8 unk04[2];
-    /* 0x06 */ u16 flags;
-    /* 0x08 */ u8 unk08[0x24];
-    /* 0x2c */ u32 exclusions;
-    /* 0x30 */ u8 unk30[4];
-    /* 0x34 */ u16 condition;
-    /* 0x36 */ u16 requiredFlag;
-};
-
 extern "C" {
 s32 devilIsAvailable(DemonLevelTable *, u16 id);
 
@@ -44,14 +33,14 @@ u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 leve
                 continue;
             }
             if (validate) {
-                DemonEligibilityRecord *record = reinterpret_cast<DemonEligibilityRecord *>(devilGetRecord(entry->id));
-                if (record->exclusions & 0x1c00000) {
+                DevilRecord *record = devilGetRecord(entry->id);
+                if (record->fusionRestrictions & 0x1c00000) {
                     continue;
                 }
-                if (record->requiredFlag && !gameFlagIsSet(record->requiredFlag)) {
+                if (record->specialFusion.requiredFlag && !gameFlagIsSet(record->specialFusion.requiredFlag)) {
                     continue;
                 }
-                u32 condition = record->condition;
+                u32 condition = record->specialFusion.prerequisite;
                 if (condition & 1) {
                     GameSavedItem saved;
                     if (condition & ~1u) {
@@ -59,7 +48,7 @@ u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 leve
                             continue;
                         }
                     } else {
-                        if (!gameRecordCopy(record->identity.id, &saved) || !(saved.flags & 0xfc)) {
+                        if (!gameRecordCopy(record->id, &saved) || !(saved.flags & 0xfc)) {
                             continue;
                         }
                     }

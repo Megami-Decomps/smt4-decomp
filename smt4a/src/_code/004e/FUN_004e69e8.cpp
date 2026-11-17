@@ -4,15 +4,15 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/ConsumableRecordA.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 
 // Select an action's camera mode unless battle-state or marked-target flags suppress it.
 void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
 {
     struct ActionMasksView {
-        BtlActionGlobals action;
+        BtlActionGlobalsA action;
         u8 padding80[0x58];
         u64 required;
         u64 excluded;
@@ -21,24 +21,18 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
         u8 paddingF8[0x90];
         u64 overrideRequired;
     };
-    struct UnitCameraView {
-        BtlUnitA unit;
-        u8 padding[0x568];
-        u32 mode;
-    };
     struct RecordCameraView {
         u8 prefix[0x61];
         u8 mode;
     };
-    UnitCameraView *camera = reinterpret_cast<UnitCameraView *>(unit);
     if (forced != 0) {
-        camera->mode = 1;
+        unit->cameraMode = 1;
         return;
     }
-    camera->mode = 0;
+    unit->cameraMode = 0;
     BtlMainStateA *state = *owner;
     if ((state->encounter.statusFlags & 0x4000000) != 0) {
-        camera->mode = 0x16;
+        unit->cameraMode = 0x16;
         return;
     }
     ActionMasksView *masks = reinterpret_cast<ActionMasksView *>(&g_btlAction);
@@ -53,21 +47,21 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
             (g_btlAction.interaction.excludedMask & entry->flags) == 0 && entry->selection.marked != 0)
             return;
     }
-    s16 kind = (s16)unit->data->unk1BE;
+    s16 kind = unit->data->actionKind;
     s32 id;
     if (kind == 2 || kind == 3) {
-        id = *reinterpret_cast<const s16 *>(unit->data->unk1C0);
+        id = unit->data->actionArg;
     } else {
         if (kind != 8)
             return;
-        id = dataTable8FindRecord(*reinterpret_cast<const s16 *>(unit->data->unk1C0))->skillId;
+        id = dataTable8FindRecord(unit->data->actionArg)->skillId;
         if (id == 0)
             return;
     }
     if (id > 0) {
         const RecordCameraView *record = reinterpret_cast<const RecordCameraView *>(dataTable04FindById(id));
         if (record != NULL && record->mode != 1 && record->mode != 0)
-            camera->mode = record->mode;
+            unit->cameraMode = record->mode;
     }
 }
 }

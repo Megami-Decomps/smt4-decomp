@@ -12,8 +12,8 @@ extern "C" s32 FUN_002e45f8(const DevilPairSortEntry* left, const DevilPairSortE
     } else {
         result = result - left->count;
         if (result == 0) {
-            DevilSortRecord* leftDevil = devilGetRecord(left->id);
-            DevilSortRecord* rightDevil = devilGetRecord(right->id);
+            DevilRecord* leftDevil = devilGetRecord(left->id);
+            DevilRecord* rightDevil = devilGetRecord(right->id);
             result = rightDevil->race - leftDevil->race;
             if (result == 0) {
                 result = leftDevil->level - rightDevil->level;

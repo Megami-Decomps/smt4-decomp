@@ -1,4 +1,5 @@
 #include "battle/btlMain.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ s32 recordAreAllCountsNonpositive(void *object);
 s32 chainCountIdUnflagged(s32 value, s32 arg);
 
 extern s32 g_btlActionReflect;
-extern BtlMainA *g_btlCamera;
 extern void *g_btlAux;
 
 u32 btlEncountTryFinish(void)

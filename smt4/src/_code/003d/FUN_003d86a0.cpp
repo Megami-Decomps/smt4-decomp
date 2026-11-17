@@ -1,9 +1,11 @@
 /* NON_MATCHING: vector snapshot copy grouping, zero-vector stores and saved-register allocation differ. */
 #include "gfx/CameraPoseBlend.h"
 #include "battle/btlMain.h"
+#include "battle/btlCamera.h"
 
 extern "C" {
-extern BtlMain g_btlMain;
+/* NOTE: declared by value here, unlike battle/BtlGlobals.h's pointer (retail check pending). */
+extern BtlCamera g_btlMain;
 extern BattleVector3 DAT_00493518[4];
 
 void FUN_003d86a0(CameraPoseBlendView *camera, u32 unused, u32 duration)

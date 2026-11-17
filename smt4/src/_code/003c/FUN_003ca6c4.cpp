@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/ConsumableRecord.h"
+#include "battle/BtlGlobals.h"
 
 /* The battle UI's position argument, passed by value. */
 struct UiPosition {
@@ -20,7 +21,6 @@ struct CommandActionView {
 };
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 u32 FUN_003aeaa4(u32 ui, u16 kind, u32 value, s16 first, s16 second, u16 third, UiPosition position);
 void FUN_003ae850(u32 ui, void *arg, s32 count);
@@ -103,7 +103,7 @@ void FUN_003ca6c4(BtlMainState **block, CommandState *state)
         BtlActionRecord *action = &(*block)->actions[index];
         if ((action->status & 4) == 0 || (action->status & 0x400) == 0)
             continue;
-        BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<SlotManager *>(*block), action->memberId);
+        BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(*block), action->memberId);
         if ((entry->flags & 0x10) == 0)
             continue;
         if ((entry->flags & 0x100) != 0 && entry->members.ids[0] != action->memberId)

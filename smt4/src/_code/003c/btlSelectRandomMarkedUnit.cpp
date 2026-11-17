@@ -20,7 +20,7 @@ void btlSelectRandomMarkedUnit(BtlMainState **owner)
         }
     }
     s32 pick = randRange((u16)(count - 1));
-    btlUnitGet(owner)->selectedUnits[indices[pick]] = 1;
+    btlUnitGet(owner)->targets[indices[pick]] = 1;
 }
 
 } /* extern "C" */

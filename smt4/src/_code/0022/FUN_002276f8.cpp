@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/BtlGlobals.h"
 
 extern "C" {
 
@@ -10,12 +11,6 @@ typedef struct Owner {
     /* 0x3038 */ u8 state;
 } Owner;
 
-typedef struct BtlMain {
-    /* 0x000 */ u8 unk000[0x634];
-    /* 0x634 */ u32 flags;
-} BtlMain;
-
-extern BtlMain *g_btlMain;
 
 extern void FUN_001ab998(void);
 
@@ -34,7 +29,7 @@ void FUN_002276f8(Owner *owner)
     }
     owner->state = 12;
     owner->flags &= ~2;
-    BtlMain *main = g_btlMain;
+    BtlCamera *main = g_btlMain;
     if (main != NULL) {
         flagsClearBits(&main->flags, 0x04000000u);
     }

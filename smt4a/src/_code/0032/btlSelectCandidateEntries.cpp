@@ -6,7 +6,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
-BattleActionUnit *btlUnitGet(u32 id);
+BtlUnitA *btlUnitGet(u32 id);
 extern u32 g_btlScriptUnit;
 
 void btlSelectCandidateEntries(s32 limit)
@@ -16,9 +16,9 @@ void btlSelectCandidateEntries(s32 limit)
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.required) == 0 &&
             (g_btlCandidateMasks.excluded & entry->flags) == 0) {
-            BattleActionUnit *unit = btlUnitGet(g_btlScriptUnit);
+            BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
             ++count;
-            unit->selectedUnits[index] = index;
+            unit->targets[index] = index;
             if (count >= limit) {
                 return;
             }

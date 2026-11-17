@@ -1,8 +1,7 @@
 #ifndef GAMEDATA_DEVILRECORD_H
 #define GAMEDATA_DEVILRECORD_H
 
-#include "shard/W6_W6Match5_DevilSort.h"
-#include "gamedata/Table00.h"
+#include "common.h"
 #include <stddef.h>
 
 struct DevilChanceData {
@@ -16,42 +15,36 @@ struct DevilLearnedSkill {
     u16 id;
 };
 
-// Table 00's full retail record, with the common ID/race/level prefix.
+/* IV's demon record (data table 0, 0x94 bytes, sorted by id), as devilGetRecord returns it; add-on
+   content supplies further records of the same layout. Apocalypse's differs: DevilRecordA in
+   gamedata/DevilRecordA.h. */
 struct DevilRecord {
-    /* 0x00 */ DevilSortRecord header;
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 race;
+    /* 0x03 */ u8 level;
+    /* 0x04 */ u8 unk04[2];
+    /* 0x06 */ u16 flags;      /* bit 0: listed in the demon stock */
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ u16 baseHp;
+    /* 0x16 */ u16 baseMp;
+    /* 0x18 */ u8 hpGrowth;    /* HP gained per level */
+    /* 0x19 */ u8 mpGrowth;
+    /* 0x1A */ u8 unk1A[0x12];
     union {
-        /* 0x04 */ u8 unk04[0x28];
-        struct {
-            /* 0x04 */ u8 unk04[0x12];
-            /* 0x16 */ u16 linkFlags;
-            /* 0x18 */ u8 unk18[0x14];
-        } links;
-        struct {
-            u8 unk04[2];
-            /* 0x06 */ u16 flags;
-        } fusion;
+        /* 0x2C */ u32 fusionRestrictions;  /* whole-word tests of the restriction bits */
+        /* 0x2C */ DevilChanceData chance;
     };
-    /* 0x2C */ DevilChanceData chance;
     union {
         /* 0x30 */ u8 unk30[0x60];
         struct {
             u8 unk30BeforePrerequisite[4];
-            /* 0x34 */ u16 prerequisite;
-            /* 0x36 */ u16 requiredFlag;
+            /* 0x34 */ u16 prerequisite;  /* bit 0: needs a registry record; upper bits: its index */
+            /* 0x36 */ u16 requiredFlag;  /* unlock flag; 0 = always unlocked */
         } specialFusion;
         struct {
             /* 0x30 */ u8 tone;
             /* 0x31 */ u8 alternate;
         } talk;
-        struct {
-            /* 0x30 */ u8 unk30[0x4c];
-            /* 0x7C */ u16 linkedIds[3];
-            /* 0x82 */ u8 unk82[0x0e];
-        } requirements;
-        struct {
-            /* 0x30 */ u8 unk30[0x28];
-            /* 0x58 */ Table00Choice entries[3];
-        } randomChoices;
         struct {
             /* 0x30 */ u8 unk30[0x0C];
             /* 0x3C */ u16 ids[8];
@@ -64,36 +57,25 @@ struct DevilRecord {
             /* 0x30 */ u8 unk30BeforeInnate[8];
             /* 0x38 */ u16 innateFlag;
         } initialization;
-        struct {
-            u8 unk30BeforeScript[0x5A];
-            /* 0x8A */ char name[6];
-        } aiScript;
     };
     /* 0x90 */ u16 model;
     /* 0x92 */ u8 unk92[2];
 };
 
 typedef char DevilRecordSizeCheck[sizeof(DevilRecord) == 0x94 ? 1 : -1];
+typedef char DevilRecordPrefixCheck[offsetof(DevilRecord, race) == 2 && offsetof(DevilRecord, level) == 3 ? 1 : -1];
 typedef char DevilRecordChanceLayoutCheck[sizeof(DevilChanceData) == 4 &&
     offsetof(DevilRecord, chance) == 0x2C && offsetof(DevilRecord, model) == 0x90 ? 1 : -1];
-typedef char DevilRecordLinkLayoutCheck[offsetof(DevilRecord, links.linkFlags) == 0x16 && offsetof(DevilRecord, requirements.linkedIds) == 0x7c ? 1 : -1];
+typedef char DevilRecordStatsCheck[offsetof(DevilRecord, flags) == 6 && offsetof(DevilRecord, baseHp) == 0x14 &&
+    offsetof(DevilRecord, baseMp) == 0x16 && offsetof(DevilRecord, mpGrowth) == 0x19 ? 1 : -1];
 typedef char DevilRecordTalkOffsetCheck[
     offsetof(DevilRecord, talk.tone) == 0x30 &&
     offsetof(DevilRecord, talk.alternate) == 0x31 ? 1 : -1];
-typedef char DevilRecordRandomChoicesOffsetCheck[
-    offsetof(DevilRecord, randomChoices.entries) == 0x58 &&
-    sizeof(Table00Choice) == 6 ? 1 : -1];
 
 typedef char DevilRecordSkillListOffsetCheck[
     offsetof(DevilRecord, skillList.ids) == 0x3C ? 1 : -1];
 typedef char DevilRecordInnateFlagOffsetCheck[
     offsetof(DevilRecord, initialization.innateFlag) == 0x38 &&
-    sizeof(DevilRecord) == 0x94 ? 1 : -1];
-typedef char DevilRecordAiScriptOffsetCheck[
-    offsetof(DevilRecord, aiScript.name) == 0x8A &&
-    sizeof(DevilRecord) == 0x94 ? 1 : -1];
-typedef char DevilRecordFusionFlagsOffsetCheck[
-    offsetof(DevilRecord, fusion.flags) == 6 &&
     sizeof(DevilRecord) == 0x94 ? 1 : -1];
 typedef char DevilLearnedSkillOffsets[
     sizeof(DevilLearnedSkill) == 4 && offsetof(DevilLearnedSkill, id) == 2 &&
@@ -106,6 +88,8 @@ typedef char DevilRecordSpecialFusionOffsets[
 #ifdef __cplusplus
 extern "C" {
 #endif
+/* The demon record for an id (base table, overridden by add-on records). */
+DevilRecord *devilGetRecord(u16 id);
 /* Canonical declaration (matches the definition). */
 bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);
 #ifdef __cplusplus

@@ -4,8 +4,8 @@
 
 static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
 {
-    const DevilSortRecord *left = devilGetRecord(leftId);
-    const DevilSortRecord *right = devilGetRecord(rightId);
+    const DevilRecord *left = devilGetRecord(leftId);
+    const DevilRecord *right = devilGetRecord(rightId);
     s32 difference = left->race - right->race;
     if (difference == 0) {
         difference = right->level - left->level;

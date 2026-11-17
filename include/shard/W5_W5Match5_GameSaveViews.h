@@ -5,15 +5,6 @@
 #include "gamedata/SaveSlotRecord.h"
 #include <stddef.h>
 
-struct SlotSortInfo {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 priority;
-};
-
-extern "C" {
-SlotSortInfo *devilGetRecord(u16 entryId);
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif

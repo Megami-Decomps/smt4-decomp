@@ -5,7 +5,7 @@
 #include "battle/btlUnit.h"
 #include "battle/btlScript.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
-#include "battle/BattleUnit.h"
+#include "battle/BtlGlobals.h"
 
 // These mask fields extend beyond the shared candidate-mask prefix.
 struct CandidateCommandMasksView {
@@ -29,15 +29,16 @@ u32 FUN_0035e9fc()
 {
     s32 command = scrGetArg(0);
     BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->data;
-    data->unk1BE = 2;
+    data->actionKind = 2;
     ((PendingCommandDataView *)data)->argument = (u16)command;
-    if (data->unk02 == 0x323 && command == 0x80) {
-        ++reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->params[0xed];
+    if (data->id == 0x323 && command == 0x80) {
+        /* the entry's word at 0x3B4 (not named in BtlCombatantEntryA yet) */
+        ++reinterpret_cast<s32 *>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->entry)[0xed];
     }
     u64 flags = btlGetMainState()->stateFlags64.bits;
     const CandidateCommandMasksView *masks = (const CandidateCommandMasksView *)&g_btlCandidateMasks;
     if ((flags & masks->required) != 0 && (flags & masks->excluded) == 0 &&
-        data->unk02 == 0x1b6 && (data->unk110 & 0x10) != 0 &&
+        data->id == 0x1b6 && (data->unk110 & 0x10) != 0 &&
         ((PendingCommandDataView *)data)->argument == 0x9b) {
         gameFlagSetValue(0x596, 1, 1);
     }

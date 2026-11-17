@@ -2,6 +2,7 @@
 #include "battle/BattleUnitRecordState.h"
 #include "battle/btlAction.h"
 #include "battle/BattleActionScale.h"
+#include "battle/BtlGlobals.h"
 
 // A local view of the battle's action job slots and signed ring cursor.
 struct BattleActionRingView {
@@ -15,7 +16,6 @@ typedef char BattleActionRingOffsets[offsetof(BattleActionRingView, jobs) == 0xC
     offsetof(BattleActionRingView, current) == 0xA4 ? 1 : -1];
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 s32 jobIsValid(u32 job);
 void FUN_004dcb40(BattleUnitRecordState *state, BtlMainStateA *battle,
                   u32 mode, s32 combatantIndex, BattleActionScale scale, u32 option);
@@ -31,7 +31,7 @@ void FUN_002b4f28(BtlMainStateA *battle, u32 mode, s32 combatantIndex,
     BattleActionRingView *ring = reinterpret_cast<BattleActionRingView *>(battle);
     ring->current = (ring->current + 1) % 12;
     jobIsValid(ring->jobs[ring->current]);
-    FUN_004dcb40(static_cast<BattleUnitRecordState *>(g_btlAction.data), battle,
+    FUN_004dcb40(reinterpret_cast<BattleUnitRecordState *>(g_btlAction.slots), battle,
                  mode, combatantIndex, scale, option);
     ring->jobs[ring->current] = taskCreateDraw("btlAction Calc", 3, 0, 0,
         FUN_00298354, jobPoolStopCurrent, battle, ring->job);

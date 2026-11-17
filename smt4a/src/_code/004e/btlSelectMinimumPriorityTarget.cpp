@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlGlobals.h"
 
 struct BattleCandidateValueView {
     u8 unk00[0x6e];
@@ -19,11 +20,9 @@ struct BattleTargetMarksView {
 };
 struct BattleUnit;
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 s32 btlAiFilterCandidatesByExclusionChance(BtlMainStateA *const *main, s32 *ids, s32 count, s32 forced);
 void btlActionMarkRandomTargetableUnit(BtlMainStateA *const *main);
 s32 lcgRandomRange(u16 maximum);
-BattleUnit *btlUnitGet(BtlMainStateA *const *main);
 
 void btlSelectMinimumPriorityTarget(BtlMainStateA *const *main)
 {

@@ -1,5 +1,5 @@
 #include "gamedata/FusionCandidateFilter.h"
-#include "gamedata/DevilRecord.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
 u32 FUN_0029dde0();
@@ -11,23 +11,23 @@ GameUnitSortRecord *gameGetUnitRecord(s32);
 u16 fusionCandidateMatchesParentFilter(const FusionCandidateFilter *filter, u16 firstParent, u16 secondParent, u16 resultId)
 {
     DevilRecord *result = (DevilRecord *)devilGetRecord(resultId);
-    if (!(result->fusion.flags & 1))
+    if (!(result->flags & 1))
         return 0;
     if (filter->matchId) {
-        if (result->header.id != filter->id)
+        if (result->id != filter->id)
             return 0;
-    } else if (filter->matchRace && result->header.race != filter->race) {
+    } else if (filter->matchRace && result->race != filter->race) {
         return 0;
     }
-    if (filter->availableOnly && result->header.level > FUN_0029dde0())
+    if (filter->availableOnly && result->level > FUN_0029dde0())
         return 0;
-    if (filter->excludeMarked && itemGetFlagBit1(result->header.id))
+    if (filter->excludeMarked && itemGetFlagBit1(result->id))
         return 0;
-    if (filter->availableOnly && partyMemberFindById(result->header.id))
+    if (filter->availableOnly && partyMemberFindById(result->id))
         return 0;
 
-    DevilSortRecord *first = devilGetRecord(firstParent);
-    DevilSortRecord *second = devilGetRecord(secondParent);
+    DevilRecord *first = devilGetRecord(firstParent);
+    DevilRecord *second = devilGetRecord(secondParent);
     if (!filter->allowSpecialRace && (first->race == 0x26 || second->race == 0x26))
         return 0;
     if (filter->requireParents) {

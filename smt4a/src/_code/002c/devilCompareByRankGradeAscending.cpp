@@ -1,26 +1,16 @@
-#include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
-
-typedef struct DevilRecord {
-    /* 0x0 */ u16 id;
-    /* 0x2 */ u8 rank;
-    /* 0x3 */ u8 unk3;
-    /* 0x4 */ u8 unk4[2];
-    /* 0x6 */ u16 grade;
-} DevilRecord;
-
-extern DevilRecord *devilGetRecord(u16 id);
 
 /* qsort-style comparison of two devil ids by rank (ascending), grade (descending) and id (ascending). */
 s32 devilCompareByRankGradeAscending(u16 *a, u16 *b)
 {
-    DevilRecord *recordA = devilGetRecord(*a);
-    DevilRecord *recordB = devilGetRecord(*b);
-    s32 result = recordA->rank - recordB->rank;
+    DevilRecordA *recordA = devilGetRecord(*a);
+    DevilRecordA *recordB = devilGetRecord(*b);
+    s32 result = recordA->race - recordB->race;
 
     if (result == 0) {
-        result = recordB->grade - recordA->grade;
+        result = recordB->level - recordA->level;
         if (result == 0) {
             result = recordA->id - recordB->id;
         }

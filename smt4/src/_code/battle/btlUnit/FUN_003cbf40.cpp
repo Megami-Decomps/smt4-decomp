@@ -5,6 +5,7 @@
 #include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/DataTable40.h"
+#include "battle/BtlGlobals.h"
 
 /* The battle state words this step reads beyond the shared prefix. */
 struct CommandTargetView {
@@ -30,11 +31,9 @@ struct CommandUnit {
 };
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern u32 g_btlUiBlock;
 extern u32 DAT_00439cf8;
 
-CommandUnit *btlFindEntryBlockByMemberId(BtlMainState *state, s32 unit);
 void FUN_00229098(BtlMainState **block);
 s32 FUN_00229118(BtlMainState **block, s32 a, s32 target, CommandState *work);
 void FUN_002296dc(u32 ui);
@@ -43,7 +42,6 @@ void FUN_00229a24(u32 ui);
 void FUN_00229b10(BtlMainState **block, CommandState *work);
 void bgmSwitchCurrent(BtlMainState *state, u32 value);
 void btlEntryBuildSummary(CommandInfo *info, BtlMainState *state, BtlEntry *entry);
-BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 battleUiIsFadeAndFieldReady(u32 ui);
 s32 FUN_0028d1f4(s32 skill);
@@ -61,7 +59,7 @@ void FUN_003dda20(s32 a, CommandState *work, s32 amount);
 /* Sets the acting combatant's pending action. */
 static __inline void setPendingAction(BtlMainState **block, u8 pending)
 {
-    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = pending;
+    reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[(*block)->actionState.index].pending = pending;
 }
 
 /* Clears the target-pick marks of every action. */
@@ -258,7 +256,7 @@ u32 FUN_003cbf40(BtlMainState **block, CommandState *work)
             } else {
                 action->editorRestore.current = action->editorRestore.saved;
                 if (!done) {
-                    CommandUnit *unit = btlFindEntryBlockByMemberId(*block, action->memberId);
+                    CommandUnit *unit = reinterpret_cast<CommandUnit *>(btlFindEntryBlockByMemberId(*block, action->memberId));
                     if (unit != NULL && (unit->responseFlags & 0x10) == 0) {
                         (*block)->actions[i].editorRestore.current = 0x4c4c4cff;
                         continue;

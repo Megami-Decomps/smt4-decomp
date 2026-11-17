@@ -6,6 +6,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlReflect.h"
 #include "battle/ActionStateChannels.h"
+#include "battle/BtlGlobals.h"
 namespace {
 union PartyPhaseState {
     BtlMainState main;
@@ -26,16 +27,15 @@ struct ScriptActorRecord {
 }
 
 extern "C" {
-extern BtlActionGlobals g_btlAction;
 extern void* g_btlUiBlock;
 s32 nodeListCountActiveById(ReflectContext*, s32);
 s32 FUN_003ae838(void*, s32);
 s32 btlUiAreEntriesIdle(void*);
 s32 btlNodeListAnyReady();
-void FUN_00229754(void*, BattleActionUnit*);
+void FUN_00229754(void*, BtlUnit*);
 
 /* Wait for the UI, then latch the all-four group state before advancing the action. */
-u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BattleActionUnit* action)
+u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BtlUnit* action)
 {
     PartyPhaseContext* context = static_cast<PartyPhaseContext*>(work);
     if (nodeListCountActiveById(g_btlActionReflect, reinterpret_cast<s32>(action)) > 0) {
@@ -68,7 +68,7 @@ u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BattleActionUnit* action)
         state->script.battleMask &= ~(u64)0x10000000;
     } else if (!(state->script.battleMask & 0x10000000)) {
         state->script.battleMask |= 0x10000000;
-        static_cast<ActionStateChannels *>(g_btlAction.data)->entries[context->state->main.actionState.index].pending = 0x1F;
+        reinterpret_cast<ActionStateChannels *>(g_btlAction.slots)->entries[context->state->main.actionState.index].pending = 0x1F;
         return 1;
     }
     FUN_00229754(context, action);
