@@ -1,16 +1,9 @@
 #include "shard/W5_W5Match7_SceneState.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
-struct LmapView33a988 {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ u32 value;
-};
-
 extern "C" {
-
-extern LmapView33a988 *g_lmapView;
 
 // Record the resume point in the flag block: mode 1 with position, heading and view, 2 with the
 // position only, 3 with the map alone.
@@ -28,7 +21,7 @@ void mapRecordResumePoint(void)
         flags->resumePoint.position.y = g_lmapScene->pose.position.y;
         flags->resumePoint.position.z = g_lmapScene->pose.position.z;
         flags->resumePoint.heading = g_lmapScene->pose.targetHeading;
-        flags->resumePoint.viewValue = g_lmapView->value;
+        flags->resumePoint.viewHeading = g_lmapView->heading;
         break;
     case 2:
         flags->resumePoint.mapId = g_gameState.mapId;

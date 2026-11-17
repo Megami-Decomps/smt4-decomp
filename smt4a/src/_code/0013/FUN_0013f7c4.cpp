@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013f7c4` (_code @ 0x13f7c4, 0x868 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -52,7 +52,6 @@ extern unsigned char LAB_0013fbc0; /* 0x13fbc0 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164490. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001678a8. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
@@ -113,8 +112,8 @@ unsigned int FUN_0013f7c4(void)
     FUN_00164490(0);
   }
   if (*(char *)(((int)g_messageMain.banner) + 0x8f) != '\0') {
-    temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(((int)g_messageMain.banner) + 0xb00));
-    temp_v2 = vec2GetYInt(((int)g_messageMain.banner) + 0xb00);
+    temp_v1 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(((int)g_messageMain.banner) + 0xb00)));
+    temp_v2 = vec2GetYInt((UiSpriteState *)(((int)g_messageMain.banner) + 0xb00));
     temp_v3 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();
@@ -149,8 +148,8 @@ unsigned int FUN_0013f7c4(void)
   }
   temp_v1 = ((int)g_messageMain.banner);
   if (*(int *)(((int)g_messageMain.banner) + 0x158) != 0) {
-    temp_v2 = vec2GetXInt(reinterpret_cast<const void *>(((int)g_messageMain.banner) + 0xd30));
-    temp_v4 = vec2GetYInt(temp_v1 + 0xd30);
+    temp_v2 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(((int)g_messageMain.banner) + 0xd30)));
+    temp_v4 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0xd30));
     temp_v3 = renderCtxPackPassFlags(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();

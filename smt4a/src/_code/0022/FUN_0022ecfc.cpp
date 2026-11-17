@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022ecfc` (_code @ 0x22ecfc, 0xa74 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -40,7 +40,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_0023dedc. */
@@ -82,8 +81,8 @@ void FUN_0022ecfc(void)
   unsigned char temp_v16 [84];
   
   temp_v0 = g_uiQuest;
-  temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(g_uiQuest + 0x34));
-  temp_v2 = vec2GetYInt(temp_v0 + 0x34);
+  temp_v1 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(g_uiQuest + 0x34)));
+  temp_v2 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0x34));
   if (*(char *)(temp_v0 + 0x90c) != '\0') {
     temp_v3 = temp_v0 + 0x948;
     temp_v12 = temp_v0 + 0xa10;
@@ -205,8 +204,8 @@ void FUN_0022ecfc(void)
       texDrawTableEntryAtStoredOrigin(2,0x1e,0xad,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0xa1);
     }
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0xac));
-    temp_v5 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0x14c));
-    temp_v8 = vec2GetYInt(temp_v0 + 0x14c);
+    temp_v5 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v0 + 0x14c)));
+    temp_v8 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0x14c));
     temp_v12 = g_renderCtx;
     piVar12 = (int *)(g_renderCtx + 0x1318);
     temp_v9 = piVar12[*piVar12 + 2];

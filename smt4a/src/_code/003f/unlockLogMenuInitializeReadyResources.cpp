@@ -1,5 +1,6 @@
 /* NON_MATCHING: native unrolls nine neighbor writes and retains a redundant initial visible=4 store that this compiler removes. */
 #include "gamedata/DataTable.h"
+#include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
@@ -9,18 +10,14 @@ struct UnlockLogEntry {
     u8 unk02[0x30];
     u16 unlockFlag;
 };
-struct UnlockLogScript {
-    u8 unk000[0x108];
-    u32 state;
-};
 struct UnlockLogWork {
     u8 unk00[0x20];
     UnlockLogEntry *entries;
     u32 unk24;
     void *resource;
-    u32 screen;
+    void *screen;
     void *flow;
-    UnlockLogScript *script;
+    ScriptProcess *script;
     u32 entryCount;
     u32 unk3c;
     u8 unread;
@@ -44,7 +41,6 @@ struct UnlockLogWork {
 };
 
 extern "C" {
-UnlockLogScript *scrScriptProcessCreate(void *flow, u32 screen);
 void FUN_003f5bd8(UnlockLogWork *work, s32 count);
 void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 enabled, s32 colors);
 s32 FUN_001643b4(u32 group, u32 index);
@@ -52,7 +48,7 @@ void dialogEnterState(UnlockLogWork *work, u32 state, u32 argument);
 
 void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
 {
-    if (work->resource == NULL || work->screen == 0 || work->flow == NULL ||
+    if (work->resource == NULL || work->screen == NULL || work->flow == NULL ||
         textureGetIndexedResource(0x31) == NULL)
         return;
     for (s32 index = 0; index < 2; ++index) {
@@ -63,7 +59,7 @@ void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
     work->entries = static_cast<UnlockLogEntry *>(dataTableGetEntries(table));
     work->entryCount = dataTableGetCount(table);
     work->script = scrScriptProcessCreate(work->flow, work->screen);
-    work->script->state = 2;
+    work->script->mode = 2;
     work->unk3c = 0;
     FUN_003f5bd8(work, (s32)work->entryCount);
     for (s32 index = 0; index < 9; ++index)

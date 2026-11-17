@@ -1,13 +1,12 @@
 /* NON_MATCHING: VFP register allocation of the easing temporaries, the table-copy (ldm/str pairs vs retail's grouped stm) and the early-return merging differ; the transition logic is the same. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "frame_tex/FrameTex.h"
 
 extern "C" {
 
-s32 uiSpriteAdvanceAnimation(void *widget);
 void soundPlaySeUnpanned(u32 sound);
 void FUN_0011340c(s32 arg);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 /* Ticks the menu's open/close transition: eases the two scales, steps the item animations and
  * their widgets, and finishes by notifying the controller. Always returns 0. */
@@ -38,10 +37,10 @@ s32 FUN_0010889c(u32 job)
         work->campHeightScale = work->campHeightScale > 0.25f ? work->campHeightScale : 0.25f;
         for (s32 i = 0; i < 24; i++) {
             if (work->campFrame >= frames[i]) {
-                work->campItems[i].visibility.active = 0;
+                work->campItems[i].updated = 0;
             }
         }
-        if (work->campItems[23].visibility.active == 0) {
+        if (work->campItems[23].updated == 0) {
             uiSpriteAdvanceAnimation(&work->campFrameWidget);
         }
     } else {

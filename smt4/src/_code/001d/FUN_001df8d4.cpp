@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/SkillDataLookup.h"
+#include "shard/PassiveSkill.h"
 
 /* The skill learn picker. */
 struct SkillPicker {
@@ -21,8 +22,6 @@ struct SkillPicker {
 
 extern "C" {
 s32 idMapLookup(u32 id);
-void *passiveSkillLookupRecord(u32 id);
-s32 FUN_0026a604(void *passive, void *skill);
 
 /* Picks the next skill to learn from the candidates, preferring the lowest rank of its type, then
  * the best score (power, preferred element, matching passives, minus duplicates of what was
@@ -43,7 +42,7 @@ u32 FUN_001df8d4(SkillPicker *picker)
         s32 element = idMapLookup(id);
         if (picker->preferredElement == element)
             score += 1.0f;
-        void *skill = skillDataFindById(id);
+        const SkillDataRecord *skill = skillDataFindById(id);
         if (skill != NULL) {
             for (s32 j = 0; j < picker->passiveCount; j++) {
                 if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), skill)) {
@@ -75,7 +74,7 @@ u32 FUN_001df8d4(SkillPicker *picker)
         return 0;
     picker->chosen[picker->chosenCount] = picker->candidates[best];
     picker->chosenCount++;
-    void *skill = skillDataFindById(picker->candidates[best]);
+    const SkillDataRecord *skill = skillDataFindById(picker->candidates[best]);
     if (skill != NULL) {
         for (s32 j = 0; j < picker->passiveCount; j++) {
             if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), skill)) {

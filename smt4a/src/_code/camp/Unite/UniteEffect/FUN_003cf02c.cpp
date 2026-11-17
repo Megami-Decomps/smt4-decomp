@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cf02c` (_code @ 0x3cf02c, 0x10e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "gfx/CameraMotion.h"
 #include "camp/Unite/UniteEffect.h"
@@ -36,8 +37,6 @@ int FUN_0040c190(...);
 int candidateGetPreferredValue(...);
 
 int asdLoadFileWithSize(...);
-int uiSpriteAdvanceAnimation(...);
-int FUN_00167458(int, int);
 int asdMemoryAllocTraced(...);
 int FUN_0019eb14(void);
 int uniteCameraInitialize(...);
@@ -160,7 +159,7 @@ unsigned int FUN_003cf02c(void)
   temp_v2 = DAT_0057f2c4;
   temp_v16 = 1.0f;
   temp_v18 = 0x3f800000;
-  uiSpriteAdvanceAnimation(DAT_0057f2c4 + 0x964);
+  uiSpriteAdvanceAnimation((UiSpriteState *)(DAT_0057f2c4 + 0x964), 1.0f);
   *(int *)(temp_v2 + 0x88) = *(int *)(temp_v2 + 0x88) + 2;
   asdAnimGetTrackLastFrame(*(unsigned int *)(temp_v2 + 0x8c),0);
   temp_v16 = (float)(int)temp_v16;
@@ -202,12 +201,12 @@ unsigned int FUN_003cf02c(void)
     temp_v6 = 0;
     do {
       if (temp_v6 <= *(int *)(temp_v2 + 8) - 1) {
-        FUN_00167458(temp_v2 + temp_v6 * 0x8c + 0x360,0);
+        FUN_00167458((UiSpriteState *)(temp_v2 + temp_v6 * 0x8c + 0x360),0);
       }
       temp_v16 = (float)((unsigned long long)temp_v15 >> 0x20);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 5);
-    uiSpriteAdvanceAnimation(temp_v2 + 0x8d8);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v2 + 0x8d8), 1.0f);
     temp_v6 = FUN_00163e84(0);
     if (((temp_v6 != 0) && (temp_v6 = FUN_00163e84(1), temp_v6 != 0)) &&
        (*(char *)(temp_v2 + 0x61a) != '\0')) {
@@ -299,7 +298,7 @@ unsigned int FUN_003cf02c(void)
             else {
               temp_v16 = (float)temp_v18;
               *(unsigned int *)(temp_v6 + temp_v9 * 4 + 100) = 0;
-              uiSpriteAdvanceAnimation(temp_v6 + temp_v9 * 0x8c + 0x6a8);
+              uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v6 + temp_v9 * 0x8c + 0x6a8), 1.0f);
             }
           }
         }
@@ -503,7 +502,7 @@ LAB_003cf9bc:
         temp_v3 = 6;
         *(int *)(temp_v2 + 8) = temp_v10;
         do {
-          uiSpriteSelectAnim((void *)(temp_v2 + temp_v3 * 0x8c + 0x360),1);
+          uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2 + temp_v3 * 0x8c + 0x360)),1);
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 10);
       }
@@ -517,7 +516,7 @@ LAB_003cf9bc:
       temp_v3 = 0;
       do {
         if (*(int *)(temp_v2 + 8) == temp_v10 + temp_v3 * 4) {
-          uiSpriteSelectAnim((void *)(temp_v2 + temp_v3 * 0x8c + 0x6a8),0);
+          uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2 + temp_v3 * 0x8c + 0x6a8)),0);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 4);
@@ -614,7 +613,7 @@ LAB_003cf9bc:
     }
     break;
   case 4:
-    uiSpriteAdvanceAnimation();
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v2 + 0x61c), 1.0f);
     temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x338));
     if ((temp_v6 != 2) || (*(char *)(temp_v2 + 0x6a6) == '\0')) break;
   case 5:
@@ -634,7 +633,7 @@ LAB_003cf9bc:
     *(unsigned int *)(temp_v6 + 8) = 0;
     break;
   case 6:
-    uiSpriteAdvanceAnimation();
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v2 + 0x61c), 1.0f);
     temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x338));
     if ((temp_v6 == 2) && (*(char *)(temp_v2 + 0x6a6) != '\0')) {
       slotSetRequest(0,10,0xff);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail retains inline menu-builder setup/NOPs and a loop bound register; clean C++ factors result branches and defaults differently. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"

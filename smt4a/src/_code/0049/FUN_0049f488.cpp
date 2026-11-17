@@ -1,15 +1,13 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/HowToScreen.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
 #include "util/BitsAndBytes.h"
-#include "util/MathFunctions.h"
 extern "C" {
 s32 renderCtxPackPassFlags(u32 first, u32 second);
-s32 vec2GetYInt(const UiSpriteState *sprite);
 void FUN_0049d244(HowToScreenWork *screen, s32 x, s32 y, f32 progress);
 void FUN_0049e3f8(HowToScreenWork *screen);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 // Draw the tutorial page at its sprite's position, then the choice text of the states showing it.

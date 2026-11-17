@@ -3,6 +3,7 @@
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 struct PlaceWindowPosition {
     f32 x, y;
@@ -23,8 +24,6 @@ struct PlaceWindow {
 extern "C" {
 extern PlaceWindow *g_placeWin;
 s32 renderCtxPackPassFlags(s32 mode, s32 flags);
-s32 vec2GetXInt(const PlaceWindowPosition *);
-s32 vec2GetYInt(const PlaceWindowPosition *);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32 offset);
 void texDrawCompositeSprite(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
 void gxResetColorQuadToWhite(void);
@@ -38,9 +37,9 @@ u8 placeWinDraw(void)
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-        s32 x = vec2GetXInt(&window->position);
+        s32 x = vec2GetXInt((const UiSpriteState *)&window->position);
         s32 translatedX = x + static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
-        s32 y = vec2GetYInt(&window->position);
+        s32 y = vec2GetYInt((const UiSpriteState *)&window->position);
         texDrawCompositeSprite(2, 8, 0xe, translatedX, y, 0x65);
         TextureTableEntryIV *sprite = asdTMTexTableEntryAt(8, 0x10b);
         textDrawString(3, 0xffffffff, (const char *)window->text,

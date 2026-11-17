@@ -1,8 +1,8 @@
 /* NON_MATCHING: stock/active branch blocks are ordered differently and the final callback shares a backward tail; 113 vs 112 instructions. */
 #include "ui/PartyPanelState.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/SaveSlotTableIV.h"
+
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable();
 s32 listCursorGetRowIfUnblocked(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
 void btlItemComputeValues(s32 unit, u16 item, s32 *first, s32 *second);
@@ -14,7 +14,7 @@ void FUN_0026cba4(s32 unit, s32 index, u32 isStock);
 void FUN_0026d3e0(void *selection, s32 stockOnly)
 {
     PartyPanelState *panel = g_partyPanel;
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     s32 unit = 0;
     s32 first = 0;
     s32 second = 0;

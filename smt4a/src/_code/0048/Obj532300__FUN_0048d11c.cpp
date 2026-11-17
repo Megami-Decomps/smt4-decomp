@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/UiSpriteApi.h"
 
 /* An icon that slides into place along a tween. */
 struct SlideIcon {
@@ -18,9 +19,6 @@ struct SlideIcon {
 
 extern "C" {
 void uiSpriteBankApplyPreset(void *sprites, s32 preset);
-s32 uiSpriteAdvanceAnimation(void *tween, f32 step);
-s32 vec2GetXInt(void *tween);
-s32 vec2GetYInt(void *tween);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 
 /* Steps the icon's slide-in: show it, follow the tween until it finishes, then stop animating. */
@@ -33,11 +31,11 @@ void _ZN9Obj53230012FUN_0048d11cEv(SlideIcon *icon)
         icon->state = 1;
     } else if (icon->state == 1) {
         void *tween = icon->tween;
-        if (uiSpriteAdvanceAnimation(tween, 1.0f) != 0) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)tween, 1.0f) != 0) {
             icon->state = 2;
         }
-        s32 y = vec2GetYInt(tween);
-        pointConvertToFloat(icon->position, vec2GetXInt(tween), y);
+        s32 y = vec2GetYInt((const UiSpriteState *)tween);
+        pointConvertToFloat(icon->position, vec2GetXInt((const UiSpriteState *)tween), y);
     } else if (icon->state == 2) {
         icon->animating = 0;
     }

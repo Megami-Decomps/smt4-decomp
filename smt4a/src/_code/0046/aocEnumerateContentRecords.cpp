@@ -4,7 +4,6 @@
 #include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 job, u32 kind);
 WindowStatusResult FUN_005004a8(u32 *parameters, AocEnumerationResult *enumeration,
                               AocContentRecord *records, s32 capacity, s32 offset);

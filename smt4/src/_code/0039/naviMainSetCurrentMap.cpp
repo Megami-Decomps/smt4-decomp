@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 void naviMainSetCurrentMap(u32 unused, u32 map)
 {

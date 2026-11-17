@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~208 rows); the 15-column glyph table DAT_00532b5c is referenced as an external array, retail inlines the type/advance sequence at two places and pushes r3 differently */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "gamedata/GameDataAccess_Shard0031.h"
@@ -43,7 +44,6 @@ extern "C" {
 extern const s16 DAT_00532b5c[];
 
 void scrRunOpcodesStub(u32 process);
-void uiSpriteAdvanceAnimation(void* tabBar, f32 amount);
 s32 largeGridHandleTouchSelection(NameEntryScreen* screen);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestMenuPressed(void);
@@ -73,7 +73,7 @@ static inline void typeCharacter(NameEntryScreen* screen, s32 character)
 void FUN_00483d34(NameEntryScreen* screen)
 {
     scrRunOpcodesStub(screen->process);
-    uiSpriteAdvanceAnimation(screen->tabBar, 1.0f);
+    uiSpriteAdvanceAnimation((UiSpriteState *)screen->tabBar, 1.0f);
     s32 touch = largeGridHandleTouchSelection(screen);
     screen->touchResult = touch;
     if (touch == 1 || touch == 2) return;

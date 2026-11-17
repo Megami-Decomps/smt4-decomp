@@ -13,7 +13,7 @@ struct SaveLoadCleanupBuffersView {
     u8 unk28[0x10];
     void *text;
     void *auxiliary;
-    ScriptResource *script;
+    ScriptProcess *script;
     u8 unk44[0x10];
     void *display;
 };
@@ -27,7 +27,6 @@ struct HandleRegistry;
 extern "C" {
 extern HandleRegistry *g_handleRegistry;
 void asdMemFree(void *memory);
-void scrScriptProcessDestroy(ScriptResource *script);
 void asdTMTexTableReleaseNode(s32 table, s32 entry);
 void FUN_002c1648(void);
 void msgWindowReset(void);

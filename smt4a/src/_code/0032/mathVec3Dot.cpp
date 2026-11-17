@@ -1,5 +1,4 @@
-#include "common.h"
-#include "shard/W6_W6Match3_MapSceneTransition.h"
+#include "util/MathFunctions.h"
 
 /* Computes the dot product of two three-component vectors. */
 extern "C" f32 mathVec3Dot(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ)

@@ -1,4 +1,5 @@
 /* NON_MATCHING: the interpolation callback takes its start/end as one by-value ScalarRange pair (vldmia) and the nullable endpoint guard now matches; remaining: the channel lookup chain uses writeback loads and the dirty/previous stores are scheduled differently. */
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard0034.h"
 
 /* Evaluate the selected model's first scalar animation channel. */

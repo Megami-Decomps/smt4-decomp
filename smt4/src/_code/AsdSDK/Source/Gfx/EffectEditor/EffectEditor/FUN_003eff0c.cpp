@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail uses ldr r0, [pc, #40] where the compiled block uses ldr ip, [pc, #44]. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 struct EffectEditorState {
     u8 unk00[0xA8];

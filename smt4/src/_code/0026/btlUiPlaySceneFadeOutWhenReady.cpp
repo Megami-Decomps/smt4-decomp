@@ -1,9 +1,8 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "battle/BtlUiFade.h"
 
 extern "C" {
 
-extern BtlUiGlobals g_btlUi;
 
 extern s32 playSceneIsFadeInDone(BtlUiObjA *scene);
 extern s32 recordQueryStateThree(BtlUiObjB *timer);

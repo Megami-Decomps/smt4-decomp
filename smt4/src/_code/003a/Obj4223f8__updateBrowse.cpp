@@ -1,6 +1,7 @@
 /* NON_MATCHING: layout, arm order and the FUN_003aab90 tail now follow retail; retail reads the entry count through a pool offset without sharing it with the entries base (add 1024+424) and allocates this/loop registers differently (r5/r4). */
 #include "common.h"
 #include "classes/Obj4223f8.h"
+#include "ui/UiSpriteApi.h"
 
 struct BibleListEntry {
     /* 0x00 */ u8 unk00[4];
@@ -39,8 +40,6 @@ extern "C" {
 void FUN_003a98b8(BibleListUi *ui);
 void FUN_003aab90(u16 *marked);
 void uiAnimationAdvanceChannel(void *animation, s32 channel);
-u32 vec2GetYInt(void *slot);
-u32 vec2GetXInt(void *slot);
 void pointConvertToFloat(void *pointer, u32 x, u32 y);
 s32 gameGetNavigationState(void);
 s32 FUN_00293aac(void);
@@ -72,8 +71,8 @@ void Obj4223f8::updateBrowse()
     if (ui->mode == 4) {
         uiAnimationAdvanceChannel(ui->animation, ui->slotIndex);
         void *slot = ui->slots[ui->slotIndex];
-        u32 y = vec2GetYInt(slot);
-        u32 x = vec2GetXInt(slot);
+        u32 y = vec2GetYInt((const UiSpriteState *)slot);
+        u32 x = vec2GetXInt((const UiSpriteState *)slot);
         pointConvertToFloat(ui->pointer, x, y);
         if (gameGetNavigationState() == 0 || FUN_00293aac() != 0) {
             if (gameGetNavigationState() == 0 && ui->count > 0) {

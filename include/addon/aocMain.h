@@ -1,21 +1,41 @@
-/* addon/aocMain.c and the add-on content (AOC) system around it. Only the fields the readable
- * code touches are named. */
+/* addon/aocMain.c and the add-on content (AOC) system around it (both games). */
 #ifndef ADDON_AOCMAIN_H
 #define ADDON_AOCMAIN_H
 
 #include "common.h"
 #include <stddef.h>
 
-/* Objects embedded in AocMain; known only through the functions that take them. */
-typedef struct AocObjA { /* 0x00 */ u8 unk[0x10]; } AocObjA;
-typedef struct AocObjB { /* 0x00 */ u8 unk[0x10]; } AocObjB;
-typedef struct AocObjC { /* 0x00 */ u8 unk[1]; } AocObjC;
-
 #include "shard/W6_W6Match5_QueuedRequest.h"
+#include "shard/S1NnOs.h"
 
 struct QueuedRequestHandle;
+struct Obj422214Owner;
+class AocBufferRequest;
+class AocAuxBufferRequest;
 
-/* The AOC system's main block (Shin Megami Tensei IV layout). */
+/* The stack the worker thread runs on: the thread starts at `base + size`. */
+typedef struct AocThreadStack {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 base;
+    /* 0x0C */ u32 size;
+} AocThreadStack;
+
+/* The AOC worker thread (0x10 bytes): the online operations run on it, the operation objects
+ * start and join it. */
+typedef struct AocWorkerThread {
+    /* 0x00 */ s32 handle;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ AocThreadStack *stack;
+} AocWorkerThread;
+
+/* The quest-script loader the AOC main runs its scripts through (the script holder's 0x18 bytes). */
+typedef struct AocScriptHolder {
+    /* 0x00 */ u8 unk00[0x18];
+} AocScriptHolder;
+
+/* The AOC system's main block, g_aocMain (0xD68 bytes, the same layout in both games): the content
+ * archive and the online service, the worker thread and its completion event, the quest-script
+ * loader, the content tables and per-slot records, and the request the AOC process is running. */
 typedef struct AocMain {
     /* Queues `request` unless one is already active (_ZN7AocMain12queueRequestE17RequestParametersji). */
     void queueRequest(RequestParameters request, u32 argument, s32 mode);
@@ -23,21 +43,61 @@ typedef struct AocMain {
      * (_ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle). */
     u32 submitTokenRequest(RequestParameters request, QueuedRequestHandle handle);
 
-    union {
-        /* 0x000 */ u8 unk000[0x88];
-        struct {
-            /* 0x000 */ u8 unk000BeforeQuery[0x80];
-            /* 0x080 */ u32 queryResult;
-        } operation;
-    };
-    /* 0x088 */ AocObjA objA;
-    /* 0x098 */ AocObjB objB;
-    /* 0x0A8 */ AocObjC scriptHolder;
-    /* 0x0A9 */ u8 unk0A9[0x4FF];
-    /* 0x5A8 */ void *contentTable; /* owner of the 0x30-byte content entries */
-    /* 0x5AC */ u8 unk5AC[0x1A8];
+    /* 0x000 */ u8 unk000[0x18];
+    /* 0x018 */ u8 contentArchive[0x10];   /* the archive contentFile is reopened from */
+    /* 0x028 */ u8 contentFile[0x54];
+    /* 0x07C */ u8 service[4];             /* the online service the operations query */
+    /* 0x080 */ u32 queryResult;           /* result of the last service query; the content requests are created with it */
+    /* 0x084 */ u8 unk084[4];
+    /* 0x088 */ AocWorkerThread thread;
+    /* 0x098 */ LightEvent operationDone;  /* signalled when the worker finishes an operation */
+    /* 0x0A0 */ u8 unk0A0[8];
+    /* 0x0A8 */ AocScriptHolder scriptHolder;
+    /* 0x0C0 */ u8 jumpRequested;
+    /* 0x0C1 */ u8 skipRestore;
+    /* 0x0C2 */ u8 unk0C2[0x4E6];
+    /* 0x5A8 */ AocBufferRequest *contentRequest; /* its buffer holds the 0x30-byte content entries */
+    /* 0x5AC */ void *contentBuffer;
+    /* 0x5B0 */ AocAuxBufferRequest *itemRequest;  /* the item entries the purchase requests are built from */
+    /* 0x5B4 */ void *itemBuffer;
+    /* 0x5B8 */ u8 unk5B8[0xC0];
+    /* 0x678 */ Obj422214Owner *records;   /* the per-slot content records */
+    /* 0x67C */ s32 recordCount;
+    /* 0x680 */ u8 unk680[8];
+    /* 0x688 */ Obj422214Owner *selectedRecord;
+    /* 0x68C */ u8 unk68C[8];
+    /* 0x694 */ u32 contentCode[16];       /* the content code the purchase is made with */
+    /* 0x6D4 */ u8 contentText[0x80];
     /* 0x754 */ u32 flags;
+    /* 0x758 */ RequestParameters request; /* the request the AOC process is running */
+    /* 0x76C */ u8 panel[0x415];
+    /* 0xB81 */ u8 panelReady;
+    /* 0xB82 */ u8 unkB82[0x1CE];
+    /* 0xD50 */ u8 mode;
+    /* 0xD51 */ u8 unkD51[3];
+    /* 0xD54 */ u32 argument;
+    /* 0xD58 */ u32 progress;
+    /* 0xD5C */ u32 unkD5C;
+    /* 0xD60 */ u32 token;                 /* the token of the submitted request */
+    /* 0xD64 */ u32 process;
 } AocMain;
+
+typedef char AocMainLayoutCheck[sizeof(AocMain) == 0xD68 &&
+    offsetof(AocMain, contentArchive) == 0x18 && offsetof(AocMain, contentFile) == 0x28 &&
+    offsetof(AocMain, service) == 0x7C && offsetof(AocMain, queryResult) == 0x80 &&
+    offsetof(AocMain, thread) == 0x88 && offsetof(AocMain, operationDone) == 0x98 &&
+    offsetof(AocMain, scriptHolder) == 0xA8 && offsetof(AocMain, jumpRequested) == 0xC0 &&
+    offsetof(AocMain, contentRequest) == 0x5A8 && offsetof(AocMain, itemRequest) == 0x5B0 &&
+    offsetof(AocMain, records) == 0x678 && offsetof(AocMain, selectedRecord) == 0x688 &&
+    offsetof(AocMain, contentCode) == 0x694 && offsetof(AocMain, flags) == 0x754 &&
+    offsetof(AocMain, request) == 0x758 && offsetof(AocMain, panelReady) == 0xB81 &&
+    offsetof(AocMain, mode) == 0xD50 && offsetof(AocMain, token) == 0xD60 ? 1 : -1];
+
+extern "C" {
+extern AocMain *g_aocMain;
+/* Whether the content is ready (bit 16 of the flags). */
+s32 objHasFlagBit16(AocMain *main);
+}
 
 /* The display block that AOC drives (Shin Megami Tensei IV layout). */
 typedef struct AocDisplay {
@@ -94,8 +154,6 @@ struct AocJobStateA {
     /* 0x04 */ u8 started;
 };
 
-typedef char AocMainLayoutCheck[sizeof(AocMain) == 0x758 ? 1 : -1];
-
 typedef char AocMusicJobOffsets[offsetof(AocMusicJob, current) == 0x3C ? 1 : -1];
 
 extern "C" {
@@ -111,8 +169,6 @@ s32 FUN_002ad1e0(void *event);
 }
 #endif
 
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -122,6 +178,5 @@ s32 packageKindToRecordKind(s32 kind);
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif

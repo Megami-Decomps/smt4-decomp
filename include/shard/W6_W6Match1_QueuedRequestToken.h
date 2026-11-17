@@ -8,10 +8,4 @@ struct QueuedRequestHandle {
     u32 token;
 };
 
-struct QueuedRequestTokenState {
-    QueuedRequestState state;
-    u32 unkd5c;
-    u32 token;
-};
-
 #endif

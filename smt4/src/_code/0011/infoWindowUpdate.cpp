@@ -1,9 +1,6 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWin.h"
-#include "util/MathFunctions.h"
 
-extern "C" s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
-extern "C" void timerStart(UiSpriteState *sprite, s32 animation, s32 flags);
-extern "C" void uiSlidingSpriteAdvance(UiSpriteState *sprite, s32 value);
 
 /* Advance opening, scrolling and timed closing of the information window. */
 extern "C" s32 infoWindowUpdate(u32 job)

@@ -5,6 +5,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 namespace {
 /* The battle start request: a short form (one word) or the 18-byte form carrying the camera/party setup. */
@@ -57,7 +58,6 @@ extern "C" {
 extern BtlMainGlobals g_btlMainState;
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 owner);
-void *gameGetSlotTable(void);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void *rt_memcpy(void *destination, const void *source, u32 size);
 void FUN_001b6b98(BtlMainWork *work);

@@ -1,4 +1,4 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
@@ -8,7 +8,6 @@ void objSetBaseAndValue(LmapObj *obj, s32 a, u32 b);
 void FUN_00273c54(void);
 void FUN_00273d34(void);
 
-extern LmapMainState *g_lmapMainState;
 
 void lmapMainUpdateObj(void)
 {
@@ -18,7 +17,7 @@ void lmapMainUpdateObj(void)
         FUN_00273d34();
         FUN_00273c54();
         FUN_00264444(&state->obj);
-        objSetBaseAndValue(&state->obj, state->unk40 - 100, state->unk48);
+        objSetBaseAndValue(&state->obj, state->mapId - 100, state->areaId);
         entryListCollectMatches(&state->obj);
     }
 }

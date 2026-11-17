@@ -1,7 +1,7 @@
 /* NON_MATCHING: same instructions as retail now (the +0x400 block view reproduces `ldr r6, =g_gameState+0x400; sub r9, r6, #1024`); only the saved-register numbering differs (retail frozen r5, sprite r7, zero r8, game state r9). */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 /* A field-map panel with two animated sprites and two pulse timers. */
 struct PulsePanel {
@@ -32,10 +32,6 @@ struct GameStateNavBlock {
 s32 naviMainConditionsHold(PulsePanel *panel);
 void FUN_0048c394(PulsePanel *panel);
 s32 FUN_00485d1c(PulsePanel *panel);
-s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 speed);
-s32 uiSpriteGetMode(const UiSpriteState *sprite);
-s32 uiSpriteGetCompletionState(const UiSpriteState *sprite);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 frame);
 
 /* Per-frame update of the panel: advances its two sprite animations and the pulse timers. */
 void _ZN9Obj53230012FUN_00487124Ev(PulsePanel *panel)

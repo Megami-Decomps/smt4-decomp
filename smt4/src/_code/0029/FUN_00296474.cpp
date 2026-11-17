@@ -2,15 +2,15 @@
 #include "status/ExperienceBars.h"
 #include "battle/UnitInitialization.h"
 #include "gamedata/GamePlayerData.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "shard/S1ListPanel.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 struct SavedUnitRecord;
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable();
 u32 dataTable9EntryOrZero(s32 rank);
 u32 devilCalculateRankCost(u32 id, s32 rank, s32 level);
 }
@@ -40,7 +40,7 @@ static void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 index, const
 /* Refresh the player's bar, active demons, and stocked demons not already shown in the party. */
 extern "C" void FUN_00296474(ExperienceBarStateIV *work)
 {
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x28, 0x14);
     const PlayerDataIV *player = gameGetPlayerData();
     u32 required = dataTable9EntryOrZero(player->level + work->playerRankDelta);

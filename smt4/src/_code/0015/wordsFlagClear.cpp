@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard0043.h"
 
 extern "C" {

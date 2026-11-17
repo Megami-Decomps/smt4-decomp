@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "camp/CampState.h"
 
 extern "C" {

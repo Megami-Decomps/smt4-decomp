@@ -3,22 +3,23 @@
 
 extern "C" {
 
-/* Fills a parameter block from its arguments (interleaved halfwords, words). */
+/* Fills a sprite's animation resource with its tables and their byte sizes: position keys, opacity keys, scale keys,
+   image frames and commands. */
 void paramsInit(UiResourceParameters *parameters,
     const void *first, u16 firstBytes, const void *second, u16 secondBytes,
     const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes,
     const void *fifth, u16 fifthBytes)
 {
-    parameters->counts[0] = firstBytes;
-    parameters->counts[1] = secondBytes;
-    parameters->counts[2] = thirdBytes;
-    parameters->counts[3] = fourthBytes;
-    parameters->counts[4] = fifthBytes;
-    parameters->chunks[0] = first;
-    parameters->chunks[1] = second;
-    parameters->chunks[2] = third;
-    parameters->chunks[3] = fourth;
-    parameters->chunks[4] = fifth;
+    parameters->positionKeyBytes = firstBytes;
+    parameters->alphaKeyBytes = secondBytes;
+    parameters->scaleKeyBytes = thirdBytes;
+    parameters->frameKeyBytes = fourthBytes;
+    parameters->commandBytes = fifthBytes;
+    parameters->positionKeys = (UiSpritePositionKey *)first;
+    parameters->alphaKeys = (UiSpriteScalarKey *)second;
+    parameters->scaleKeys = (UiSpriteScalarKey *)third;
+    parameters->frameKeys = (UiSpriteFrameKey *)fourth;
+    parameters->commands = (SpriteAnimationCommand *)fifth;
 }
 
 } /* extern "C" */

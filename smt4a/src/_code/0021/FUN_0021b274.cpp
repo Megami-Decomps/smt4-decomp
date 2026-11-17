@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "camp/CampStateA.h"
 /* NON_MATCHING: register allocation differs (retail keeps `mode` in r0 and the selected track in r4; the build shares r4); the camp pointer is now read per block like retail */
 
 extern "C" {
-void uiSpriteSetKeyframe(UiSpriteState *, s32, u32);
-void uiSpriteSetImageKeyframe(UiSpriteState *, s32, u32);
 
 // Select paired camp animation/image tracks and start the corresponding transition.
 void FUN_0021b274(s32 mode, s32 image, u32 frame)

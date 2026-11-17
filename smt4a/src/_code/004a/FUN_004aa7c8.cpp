@@ -1,7 +1,6 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void uiSpriteSetKeyframeThree(BtlUiObjBA *sprite);
 void menu32PlayCursorSeAndSelect(BtlUiObjCA *menu);
 void FUN_00321500(BtlUiObjAA *menu);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b6390` (_code @ 0x4b6390, 0x788 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "ui/UiControl.h"
@@ -7,15 +8,12 @@
 
 extern "C" {
 
-int uiSpriteStateInitFromSource(...);
 
-int uiSpriteSetKeyframe(...);
 int asdTMTexLoadMainHeap(int, int);
 int asdLoadFileAsyncSimple(...);
 int FUN_002c7e6c(void);
 int FUN_002c85b0(...);
 int campButtonHelpAcquire(void);
-int FUN_0036b644(...);
 int statusBustUpPortraitAcquire(...);
 int objBMarkAndInit20D4(void);
 int stateHolderMarkAndInit2588(void);
@@ -149,45 +147,45 @@ void FUN_004b6390(int param_1)
   paramsClearPacket(param_1);
   paramsInit(reinterpret_cast<UiResourceParameters *>(param_1), &DAT_0053356c,0x60,&DAT_005335cc,0xfc,&DAT_005336c8,0x84,&DAT_0053374c,0x1c,
                &DAT_00533768,0x508);
-  uiSpriteStateInitFromSource(param_1 + 0x20,0x1d,0,param_1,1);
-  uiSpriteSetKeyframe(param_1 + 0x20,0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x20),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
+  uiSpriteSetKeyframe((UiSpriteState *)(param_1 + 0x20),0, 0);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
-    uiSpriteStateInitFromSource(temp_v2 + 0xac,0x1d,0,param_1,1);
-    uiSpriteSetKeyframe(temp_v2 + 0xac,4,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v2 + 0xac),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
+    uiSpriteSetKeyframe((UiSpriteState *)(temp_v2 + 0xac),4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
-  uiSpriteStateInitFromSource(param_1 + 0x50c,0x1d,0,param_1,1);
-  uiSpriteSelectAnim((void *)(param_1 + 0x50c),5);
-  uiSpriteStateInitFromSource(param_1 + 0x598,0x1d,0,param_1,1);
-  uiSpriteSelectAnim((void *)(param_1 + 0x598),0xe);
-  uiSpriteStateInitFromSource(param_1 + 0x624,0x1d,0,param_1,1);
-  uiSpriteSetKeyframe(param_1 + 0x624,0);
-  uiSpriteStateInitFromSource(param_1 + 0x6b0,0x1d,0,param_1,1);
-  uiSpriteSetKeyframe(param_1 + 0x6b0,0);
-  uiSpriteStateInitFromSource(param_1 + 0x73c,0x1d,1000,param_1,0x65);
-  FUN_0036b644(param_1 + 0x73c,0);
-  uiSpriteStateInitFromSource(param_1 + 0x7c8,0x1d,1000,param_1,0x65);
-  uiSpriteStateInitFromSource(param_1 + 0x854,0x1d,1000,param_1,0x65);
-  uiSpriteSelectAnim((void *)(param_1 + 0x854),6);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x50c),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)((void *)(param_1 + 0x50c)),5);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x598),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)((void *)(param_1 + 0x598)),0xe);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x624),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
+  uiSpriteSetKeyframe((UiSpriteState *)(param_1 + 0x624),0, 0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x6b0),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
+  uiSpriteSetKeyframe((UiSpriteState *)(param_1 + 0x6b0),0, 0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x73c),0x1d,1000, (UiResourceParameters *)(param_1),0x65, 1.0f);
+  FUN_0036b644((UiSpriteState *)(param_1 + 0x73c),0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x7c8),0x1d,1000, (UiResourceParameters *)(param_1),0x65, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x854),0x1d,1000, (UiResourceParameters *)(param_1),0x65, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)((void *)(param_1 + 0x854)),6);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
-    uiSpriteStateInitFromSource(temp_v2 + 0x8e0,0x1d,0,param_1,1);
-    uiSpriteSelectAnim((void *)(temp_v2 + 0x8e0),0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v2 + 0x8e0),0x1d,0, (UiResourceParameters *)(param_1),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2 + 0x8e0)),0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);
   *(unsigned int *)(param_1 + 0x43ec) = 0;
-  uiSpriteStateInitFromSource(param_1 + 0x40a8,0x1d,0x160,param_1,0xc9);
-  uiSpriteSelectAnim((void *)(param_1 + 0x40a8),0xb);
-  uiSpriteStateInitFromSource(param_1 + 0x4134,0x1d,0x160,param_1,0xc9);
-  uiSpriteSelectAnim((void *)(param_1 + 0x4134),0xc);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x40a8),0x1d,0x160, (UiResourceParameters *)(param_1),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)((void *)(param_1 + 0x40a8)),0xb);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x4134),0x1d,0x160, (UiResourceParameters *)(param_1),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)((void *)(param_1 + 0x4134)),0xc);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c + 0x41c0;
-    uiSpriteStateInitFromSource(temp_v2,0x1d,temp_v1 + 0x161,param_1,(int)(short)((short)temp_v1 + 0xca));
-    uiSpriteSelectAnim((void *)(temp_v2),0xd);
+    uiSpriteStateInitFromSource((UiSpriteState *)temp_v2,0x1d,temp_v1 + 0x161, (UiResourceParameters *)(param_1),(int)(short)((short)temp_v1 + 0xca), 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2)),0xd);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
   temp_v1 = 0;
@@ -200,7 +198,7 @@ void FUN_004b6390(int param_1)
     *(unsigned char *)(temp_v2 + 0x788e) = 0;
     *(unsigned char *)(temp_v2 + 0x788f) = 0;
     temp_v2 = param_1 + temp_v1 * 0x8c;
-    uiSpriteStateInitFromSource(temp_v2 + 0x24c4,0x1d,0x1a,param_1,0xc9);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v2 + 0x24c4),0x1d,0x1a, (UiResourceParameters *)(param_1),0xc9, 1.0f);
     *(unsigned short *)(temp_v2 + 0x24fe) = 2;
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x25);
@@ -209,8 +207,8 @@ void FUN_004b6390(int param_1)
     temp_v2 = 0;
     do {
       temp_v0 = param_1 + (temp_v1 * 7 + temp_v2 + 0x20) * 0x8c;
-      uiSpriteStateInitFromSource(temp_v0 + 0x20,7,0x80c,param_1,0x97);
-      uiSpriteSelectAnim((void *)(temp_v0 + 0x20),1);
+      uiSpriteStateInitFromSource((UiSpriteState *)(temp_v0 + 0x20),7,0x80c, (UiResourceParameters *)(param_1),0x97, 1.0f);
+      uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v0 + 0x20)),1);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 7);
     temp_v1 = temp_v1 + 1;
@@ -218,10 +216,10 @@ void FUN_004b6390(int param_1)
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
-    uiSpriteStateInitFromSource(temp_v2 + 0x3900,0x1d,0x3e,param_1,0x6a);
-    uiSpriteSelectAnim((void *)(temp_v2 + 0x3900),9);
-    uiSpriteStateInitFromSource(temp_v2 + 0x3cd4,0x1d,0x119,param_1,0xf1);
-    uiSpriteSelectAnim((void *)(temp_v2 + 0x3cd4),10);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v2 + 0x3900),0x1d,0x3e, (UiResourceParameters *)(param_1),0x6a, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2 + 0x3900)),9);
+    uiSpriteStateInitFromSource((UiSpriteState *)(temp_v2 + 0x3cd4),0x1d,0x119, (UiResourceParameters *)(param_1),0xf1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)((void *)(temp_v2 + 0x3cd4)),10);
     *(unsigned short *)(temp_v2 + 0x3d0e) = 2;
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);

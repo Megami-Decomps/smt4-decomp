@@ -1,5 +1,5 @@
 /* NON_MATCHING: render-stack zero constant is initialized after the readiness test rather than before it. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "Model/MoriModelShadowMap.h"
@@ -7,7 +7,6 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantC.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 u32 renderCtxPackPassFlags(u32, u32);
 void FUN_0028cb88(BtlUiObjCA *);
 void renderCtxResetColorScale(RenderCtxA *);

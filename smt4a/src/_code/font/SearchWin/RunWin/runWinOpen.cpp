@@ -1,5 +1,6 @@
 /* Opens the run window: allocates and clears its work area, creates its task and draw task and
  * sets up its sound player and UI. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "font/SearchWin/RunWin.h"
@@ -11,8 +12,6 @@ extern "C" {
 
 typedef void (*VoidFunc)(void);
 
-void uiSpriteStateInitFromSource(void *ui, int a, int b, void *sound, int c, f32 scale);
-int uiSpriteSelectAnim(void *ui, int arg);
 
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
@@ -58,8 +57,8 @@ void runWinOpen(void)
     taskCreateDraw("RunWin DrawDown", 0xed, 0, 0, FUN_00208650, 0, 0, run->task);
     paramsClearPacket(run->sound);
     paramsInit(reinterpret_cast<UiResourceParameters *>(run->sound), runWinResource0, 0x24, runWinResource1, 0x24, 0, 0, 0, 0, runWinResource2, 0x70);
-    uiSpriteStateInitFromSource(run->ui, 8, 0x87, run->sound, 1, 1.0f);
-    uiSpriteSelectAnim(run->ui, 0);
+    uiSpriteStateInitFromSource((UiSpriteState *)run->ui, 8, 0x87, (UiResourceParameters *)(run->sound), 1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)run->ui, 0);
 }
 
 } /* extern "C" */

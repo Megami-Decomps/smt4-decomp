@@ -1,5 +1,5 @@
 /* NON_MATCHING: field addresses match (overlay at 0xC9D8); retail loads the g_btlUi pointer after the push and sign-extends textId only at the FUN_001ecb54 call (the callee takes it as s16-width), build has no sxth. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gamedata/SaveLoadProcess.h"
 #include "gamedata/DataTableAccess_Smt4.h"
 
@@ -15,7 +15,6 @@ struct BattleMessageOverlay {
 };
 }
 extern "C" {
-extern BtlUiGlobals g_btlUi;
 void textFormatBuffer(char *buffer, const char *format, ...);
 void communicationBeginTransition(s32 mode);
 

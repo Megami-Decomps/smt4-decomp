@@ -3,13 +3,13 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 u32 dataTableGetEntry24Byte0(u32 id);
 const char *dataTableGetEntry24Member(u32 id);
 s32 saveOptionIsEnabled(u32 option);
 void efctSetSpeed(f32 value);
-f32 vec2GetSpeed(const void *object);
 void texDrawCompositeSprite(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
 
 /* The speed object the option pulse reads sits at 0x13C of the work; its speed is the f32 at +0x20. */
@@ -29,12 +29,12 @@ void FUN_0023dcec(UniteWorkA *work, s32 row, s32 x, s32 y, s32 selected,
         texDrawCompositeSprite(2, 0x1A, 0x10, x, y, 0x65);
         texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x95, x, y, 0x6A);
         if (saveOptionIsEnabled(option)) {
-            efctSetSpeed(vec2GetSpeed(&reinterpret_cast<OptionSpeedView *>(work)->speedObject) * factor);
+            efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&reinterpret_cast<OptionSpeedView *>(work)->speedObject)) * factor);
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x97, x, y, 0x6D);
             efctSetSpeed(scale);
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x91, x, y, 0x6F);
         } else {
-            efctSetSpeed(vec2GetSpeed(&reinterpret_cast<OptionSpeedView *>(work)->speedObject));
+            efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&reinterpret_cast<OptionSpeedView *>(work)->speedObject)));
             texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x96, x, y, 0x6F);
             efctSetSpeed(scale);
         }

@@ -1,9 +1,8 @@
 /* NON_MATCHING: center-dimension fallback is laid out before the widget query instead of out of line; coordinate registers and normal-slot float tail differ. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 s32 FUN_0035fa18(BtlUiObjCA *widget);
 void FUN_004aa0b0(BtlUiA *ui, u32 alternate, u32 mode, f32 x, f32 y, f32 depth);
 

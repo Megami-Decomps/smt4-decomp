@@ -3,7 +3,6 @@
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern CommandBufferHandleAllocator g_gfxAllocateCallback;
 
 // Allocate command-buffer handles and insert them into the sorted hash registry.

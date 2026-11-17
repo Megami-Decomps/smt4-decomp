@@ -1,11 +1,11 @@
 /* NON_MATCHING: canonical task contracts and the display-state initializer reproduce retail's bases/pool; argument-stack pointer register and final zero-argument scheduling still differ. */
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 extern const char DAT_00404c78[];
 extern const char DAT_00404ca8[];
 extern const char DAT_00404cb8[];
@@ -30,7 +30,7 @@ void requestBeginProcessing(void *request, s8 mode, u32 value);
 static __inline NaviMain *naviMainInitializeState(NaviMain *navi)
 {
     navi->active = 0;
-    navi->unk0009[0] = 0;
+    navi->positionSet = 0;
     navi->posX = 0;
     navi->posY = 0;
     navi->third = 0;
@@ -38,8 +38,8 @@ static __inline NaviMain *naviMainInitializeState(NaviMain *navi)
     navi->unk2C = 0;
     navi->currentMap = 1;
     navi->value = 1.0f;
-    navi->unk38f = 0.0f;
-    navi->unk3Cf = 0.0f;
+    navi->cursor.first = 0.0f;
+    navi->cursor.second = 0.0f;
     return navi;
 }
 

@@ -1,208 +1,134 @@
+/* UI sprite state (0x8C bytes): one texture-table image placed at a 20.12 fixed-point position with an
+   opacity and a uniform scale, animated by four tracks (position, opacity, scale, image frames) that a list
+   of animation commands drives. Every work area that shows a menu sprite embeds one; the functions that
+   play it are declared per game in ui/UiSpriteApi.h. */
 #ifndef UI_UISPRITESTATE_H
 #define UI_UISPRITESTATE_H
 
 #include "common.h"
 #include <stddef.h>
-#include "ui/UiSpriteKeyframes.h"
 
-struct UiSpriteFrameKey {
-    s16 image;
-    u16 duration;
-};
-struct UiSpriteFrameSequenceStep {
-    u8 unk00[8];
-    s32 key;
-    u8 unk0C[0x10];
-};
-
-struct UiSpriteSource {
-    union {
-        /* 0x00 */ u8 unk00[0xC];
-        struct {
-            u8 unk00BeforeFrameSize[6];
-            /* 0x06 */ u16 frameTableBytes;
-        } frameAnimation;
-    };
-    /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    union {
-        /* 0x18 */ u32 unk18;
-        /* 0x18 */ UiSpriteFrameKey *frameKeys;
-    };
-    /* 0x1C */ u32 unk1C;
+/* Position key (0xC bytes): moves the sprite from (startX, startY) to (endX, endY) in pixels over `duration`
+   frames (from the end to the start when the track plays reversed). */
+struct UiSpritePositionKey {
+    /* 0x00 */ s16 startX;
+    /* 0x02 */ s16 startY;
+    /* 0x04 */ s16 endX;
+    /* 0x06 */ s16 endY;
+    /* 0x08 */ u16 duration;
+    /* 0x0A */ u8 loop;           /* when it ends, snap back to the first point and play it again */
+    /* 0x0B */ u8 unk0B;
 };
 
+/* Opacity or scale key (0xC bytes): a value interpolated from `first` to `last` over `duration` frames. */
 struct UiSpriteScalarKey {
-    f32 first;
-    f32 last;
-    u16 duration;
-    u8 loop;
-    u8 unk0B;
+    /* 0x00 */ f32 first;
+    /* 0x04 */ f32 last;
+    /* 0x08 */ u16 duration;
+    /* 0x0A */ u8 loop;
+    /* 0x0B */ u8 unk0B;
 };
 
-struct UiSpriteSequenceStep {
-    u8 unk00[0xC];
-    s32 key;
-    s8 reverse;
-    u8 unk11[0xB];
+/* Image frame (4 bytes): shows `image` for `duration` frames. An image of -1 ends a frame sequence (the
+   sequences of a resource are numbered in order), -2 restarts the current one. */
+struct UiSpriteFrameKey {
+    /* 0x00 */ s16 image;
+    /* 0x02 */ u16 duration;
+};
+
+/* Animation command (0x1C bytes): the key each track starts (negative keys leave the track alone). In a
+   command list each track steps through the commands on its own: a key of -1 ends the list (a -1 position
+   key also ends a command group), -2 restarts it and -3 stops the track. */
+struct SpriteAnimationCommand {
+    /* 0x00 */ s32 positionKey;
+    /* 0x04 */ s8 positionReverse;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ s32 frameSequence;
+    /* 0x0C */ s32 alphaKey;
+    /* 0x10 */ s8 alphaReverse;
+    /* 0x11 */ u8 unk11[3];
+    /* 0x14 */ s32 scaleKey;
+    /* 0x18 */ s8 scaleReverse;
+    /* 0x19 */ u8 unk19[3];
+};
+
+/* A sprite's animation resource (0x20 bytes, filled by paramsInit): the byte size and the address of each
+   key table and of the command list. */
+struct UiResourceParameters {
+    /* 0x00 */ u16 positionKeyBytes;
+    /* 0x02 */ u16 alphaKeyBytes;
+    /* 0x04 */ u16 scaleKeyBytes;
+    /* 0x06 */ u16 frameKeyBytes;
+    /* 0x08 */ u16 commandBytes;
+    /* 0x0A */ u16 unk0A;
+    /* 0x0C */ UiSpritePositionKey *positionKeys;
+    /* 0x10 */ UiSpriteScalarKey *alphaKeys;
+    /* 0x14 */ UiSpriteScalarKey *scaleKeys;
+    /* 0x18 */ UiSpriteFrameKey *frameKeys;
+    /* 0x1C */ SpriteAnimationCommand *commands;
 };
 
 struct UiSpriteState {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 unk08;
-    union {
-        /* 0x0C */ u8 unk0C[0x14];
-        struct {
-            /* 0x0C */ u8 unk0C[4];
-            /* 0x10 */ s32 horizontalOffset;
-        } motion;
-        struct {
-            /* 0x0C */ s32 x;
-            /* 0x10 */ s32 y;
-        } slide;
-    };
-    /* 0x20 */ f32 unk20;
-    /* 0x24 */ f32 unk24;
-    /* 0x28 */ f32 unk28;
-    /* 0x2C */ f32 unk2C;
+    /* 0x00 */ u32 textureTable;   /* the texture table `image` is drawn from */
+    /* 0x04 */ s32 image;          /* -1: none */
+    /* 0x08 */ s32 secondaryImage; /* an image from another source: setting either image clears the other to -1 */
+    /* 0x0C */ s32 x;              /* 20.12 fixed point */
+    /* 0x10 */ s32 y;
+    /* 0x14 */ s32 z;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ f32 alpha;
+    /* 0x24 */ f32 scale[3];       /* the scale track sets all three */
     /* 0x30 */ u8 unk30[8];
-    /* 0x38 */ u16 unk38;
-    /* 0x3A */ u8 unk3A[0xE];
-    /* 0x48 */ UiSpriteSource *source;
-    union {
-        /* 0x4C */ u32 unk4C;
-        /* 0x4C */ UiSpriteKeyframe *keyframes;
-    };
-    /* 0x50 */ s16 animation;
-    union {
-        /* 0x52 */ u8 unk52[6];
-        /* 0x52 */ s16 motionFrame;
-        struct {
-            /* 0x52 */ u16 elapsed;
-            /* 0x54 */ u8 alternate;
-        } keyframeTrack;
-    };
-    union {
-        /* 0x58 */ u32 unk58;
-        /* 0x58 */ UiSpriteScalarKey *verticalKeys;
-    };
-    /* 0x5C */ s16 mode;
-    union {
-        /* 0x5E */ u8 unk5E[6];
-        struct {
-            /* 0x5E */ s16 frame;
-            /* 0x60 */ s8 reverse;
-        } verticalTrack;
-    };
-    /* 0x64 */ u32 unk64;
-    /* 0x68 */ u8 unk68[8];
-    union {
-        /* 0x70 */ u32 unk70;
-        /* 0x70 */ UiSpriteFrameKey *frameKeys;
-    };
-    union {
-        /* 0x74 */ u8 unk74[4];
-        struct {
-            /* 0x74 */ s16 key;
-            /* 0x76 */ s16 elapsed;
-        } frameTrack;
-    };
-    union {
-        /* 0x78 */ u32 unk78;
-        /* 0x78 */ UiSpriteSequenceStep *sequenceSteps;
-        /* 0x78 */ UiSpriteFrameSequenceStep *frameSequence;
-        /* 0x78 */ UiSpriteKeyframeStep *keyframeSteps;
-    };
-    /* 0x7C */ union {
-        u8 unk7C[0xA];
-        struct {
-            u8 unk7C[9];
-            /* 0x85 */ s8 active;
-        } visibility;
-        struct {
-            u8 unk7C[2];
-            /* 0x7E */ s16 step;
-            u8 unk80[4];
-            /* 0x84 */ u8 enabled;
-        } sequence;
-        struct {
-            u8 unk7CBeforeFrameStep[6];
-            /* 0x82 */ s16 step;
-            /* 0x84 */ u8 enabled;
-        } frameSequenceState;
-        struct {
-            /* 0x7C */ s16 step;
-            u8 unk7E[6];
-            /* 0x84 */ u8 enabled;
-        } keyframeSequence;
-    };
-    /* 0x86 */ union {
-        u8 unk86[5];
-        struct {
-            u8 unk86[4];
-            /* 0x8A */ s8 completed;
-        } animationFlags;
-        struct {
-            /* 0x86 */ u8 horizontal;
-            /* 0x87 */ u8 vertical;
-            /* 0x88 */ u8 scale;
-            /* 0x89 */ u8 opacity;
-            /* 0x8A */ u8 complete;
-        } completion;
-        struct {
-            u8 unk86BeforeFrameCompleted[3];
-            /* 0x89 */ u8 completed;
-        } frameFlags;
-    };
+    /* 0x38 */ u16 id;
+    /* 0x3A */ u16 layer;
+    /* 0x3C */ u8 active;
+    /* 0x3D */ u8 unk3D[0xB];
+    /* 0x48 */ UiResourceParameters *resources;
+    /* 0x4C */ UiSpritePositionKey *positionKeys;
+    /* 0x50 */ s16 positionKey;
+    /* 0x52 */ u16 positionFrame;  /* stepped as a u16; read through (s16) where retail compares it signed */
+    /* 0x54 */ s8 positionReverse;
+    /* 0x55 */ u8 unk55[3];
+    /* 0x58 */ UiSpriteScalarKey *alphaKeys;
+    /* 0x5C */ s16 alphaKey;
+    /* 0x5E */ s16 alphaFrame;
+    /* 0x60 */ s8 alphaReverse;
+    /* 0x61 */ u8 unk61[3];
+    /* 0x64 */ UiSpriteScalarKey *scaleKeys;
+    /* 0x68 */ s16 scaleKey;
+    /* 0x6A */ u16 scaleFrame;     /* likewise */
+    /* 0x6C */ s8 scaleReverse;
+    /* 0x6D */ u8 unk6D[3];
+    /* 0x70 */ UiSpriteFrameKey *frameKeys;   /* the current frame sequence */
+    /* 0x74 */ s16 frameIndex;
+    /* 0x76 */ s16 frameElapsed;
+    /* 0x78 */ const SpriteAnimationCommand *commands;  /* the running command list */
+    /* 0x7C */ s16 positionStep;   /* each track's current command */
+    /* 0x7E */ s16 alphaStep;
+    /* 0x80 */ s16 scaleStep;
+    /* 0x82 */ s16 frameStep;
+    /* 0x84 */ u8 commandsRunning; /* a finished key continues with the track's next command */
+    /* 0x85 */ s8 updated;         /* set by every advance */
+    /* 0x86 */ u8 positionDone;
+    /* 0x87 */ u8 alphaDone;
+    /* 0x88 */ u8 scaleDone;
+    /* 0x89 */ u8 frameDone;
+    /* 0x8A */ s8 finished;        /* all four tracks are done */
     /* 0x8B */ u8 unk8B;
 };
 
-typedef char UiSpriteStateSizeCheck[sizeof(UiSpriteState) == 0x8C ? 1 : -1];
-typedef char UiSpriteStateOffsetsCheck[offsetof(UiSpriteState, source) == 0x48 && offsetof(UiSpriteState, animation) == 0x50 && offsetof(UiSpriteState, mode) == 0x5C && offsetof(UiSpriteState, unk86) == 0x86 ? 1 : -1];
-typedef char UiSpriteStateActiveOffsetCheck[offsetof(UiSpriteState, visibility.active) == 0x85 ? 1 : -1];
-typedef char UiSpriteStateCompletionOffsetCheck[offsetof(UiSpriteState, animationFlags.completed) == 0x8A ? 1 : -1];
-typedef char UiSpriteMotionOffsetsCheck[
-    offsetof(UiSpriteState, motion.horizontalOffset) == 0x10 &&
-    offsetof(UiSpriteState, motionFrame) == 0x52 &&
-    offsetof(UiSpriteState, completion.horizontal) == 0x86 &&
-    offsetof(UiSpriteState, completion.opacity) == 0x89 &&
+typedef char UiSpriteKeysLayoutCheck[
+    sizeof(UiSpritePositionKey) == 0xC && sizeof(UiSpriteScalarKey) == 0xC && sizeof(UiSpriteFrameKey) == 4 &&
+    sizeof(SpriteAnimationCommand) == 0x1C && offsetof(SpriteAnimationCommand, scaleKey) == 0x14 &&
+    sizeof(UiResourceParameters) == 0x20 && offsetof(UiResourceParameters, frameKeyBytes) == 6 &&
+    offsetof(UiResourceParameters, positionKeys) == 0xC && offsetof(UiResourceParameters, commands) == 0x1C ? 1 : -1];
+typedef char UiSpriteStateLayoutCheck[
+    offsetof(UiSpriteState, alpha) == 0x20 && offsetof(UiSpriteState, layer) == 0x3A &&
+    offsetof(UiSpriteState, resources) == 0x48 && offsetof(UiSpriteState, positionFrame) == 0x52 &&
+    offsetof(UiSpriteState, alphaKeys) == 0x58 && offsetof(UiSpriteState, scaleKeys) == 0x64 &&
+    offsetof(UiSpriteState, frameKeys) == 0x70 && offsetof(UiSpriteState, commands) == 0x78 &&
+    offsetof(UiSpriteState, frameStep) == 0x82 && offsetof(UiSpriteState, updated) == 0x85 &&
+    offsetof(UiSpriteState, positionDone) == 0x86 && offsetof(UiSpriteState, finished) == 0x8A &&
     sizeof(UiSpriteState) == 0x8C ? 1 : -1];
-typedef char UiSpriteSlideOffsetsCheck[
-    offsetof(UiSpriteState, slide.x) == 0xC &&
-    offsetof(UiSpriteState, slide.y) == 0x10 &&
-    sizeof(UiSpriteState) == 0x8C ? 1 : -1];
-typedef char UiSpriteVerticalTrackOffsetsCheck[
-    offsetof(UiSpriteState, verticalKeys) == 0x58 &&
-    offsetof(UiSpriteState, verticalTrack.frame) == 0x5E &&
-    offsetof(UiSpriteState, verticalTrack.reverse) == 0x60 &&
-    offsetof(UiSpriteState, sequenceSteps) == 0x78 &&
-    offsetof(UiSpriteState, sequence.step) == 0x7E &&
-    offsetof(UiSpriteState, sequence.enabled) == 0x84 &&
-    sizeof(UiSpriteScalarKey) == 0xC && sizeof(UiSpriteSequenceStep) == 0x1C &&
-    sizeof(UiSpriteState) == 0x8C ? 1 : -1];
-typedef char UiSpriteFrameTrackOffsetsCheck[
-    offsetof(UiSpriteSource, frameAnimation.frameTableBytes) == 6 &&
-    offsetof(UiSpriteSource, frameKeys) == 0x18 &&
-    offsetof(UiSpriteState, frameKeys) == 0x70 &&
-    offsetof(UiSpriteState, frameTrack.key) == 0x74 &&
-    offsetof(UiSpriteState, frameTrack.elapsed) == 0x76 &&
-    offsetof(UiSpriteState, frameSequence) == 0x78 &&
-    offsetof(UiSpriteState, frameSequenceState.step) == 0x82 &&
-    offsetof(UiSpriteState, frameSequenceState.enabled) == 0x84 &&
-    offsetof(UiSpriteState, frameFlags.completed) == 0x89 &&
-    sizeof(UiSpriteFrameKey) == 4 && sizeof(UiSpriteFrameSequenceStep) == 0x1C &&
-    offsetof(UiSpriteFrameSequenceStep, key) == 8 &&
-    sizeof(UiSpriteSource) == 0x20 && sizeof(UiSpriteState) == 0x8C ? 1 : -1];
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-/* Canonical declaration (matches the definition). */
-void uiSpriteSelectAnim(void *sprite, s32 group);
-#ifdef __cplusplus
-}
-#endif
 
 #endif

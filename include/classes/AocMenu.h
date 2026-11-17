@@ -2,7 +2,7 @@
 #define CLASSES_AOCMENU_H
 
 #include "common.h"
-#include "shard/ScriptProcess.h"
+#include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "classes/SelectionState.h"
 #include "classes/Obj4221a4.h"

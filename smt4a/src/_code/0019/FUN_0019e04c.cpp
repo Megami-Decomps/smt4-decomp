@@ -9,8 +9,8 @@ u32 FUN_0019e04c(ModelBoneAttachment *attachment, ModelBoneAttachmentRoot *paren
 {
     if (!modelHasLoadedAttachment(attachment->object))
         return 0;
-    ModelBoneMatrixProvider *source = parent->model->owner->secondary.skeleton.provider;
-    ModelBoneMatrixProvider *destination = attachment->object->model->owner->secondary.skeleton.provider;
+    ModelBoneMatrixProvider *source = parent->model->sceneNode->skeleton;
+    ModelBoneMatrixProvider *destination = attachment->object->model->sceneNode->skeleton;
     ModelBoneWorldMatrixSet *worldMatrices = source->vtable->getWorldMatrices(source);
     SkeletonMatrix44 *world = &worldMatrices->matrices[attachment->sourceBone];
     SkeletonMatrix34 transform = *reinterpret_cast<SkeletonMatrix34 *>(world);

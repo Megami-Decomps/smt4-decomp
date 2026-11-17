@@ -1,5 +1,5 @@
 /* NON_MATCHING: relative-pointer null handling and matrix/bounds evaluation order differ; retail keeps a shared zero register and a call/return rather than this tail call. */
-#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gfx/ModelBoneLookup.h"
 
 struct ModelDepthBounds {
@@ -18,7 +18,7 @@ struct ModelDepthBoneBinding {
     RelativePointer index;
 };
 struct ModelDepthInstance {
-    AsdTrackOwner *owner;
+    AsdMdlSceneNode *sceneNode;
     ModelBoneResource *resource;
 };
 struct ModelDepthMeshInstance {
@@ -41,14 +41,14 @@ extern "C" f32 FUN_002255c0(ModelDepthInstance *instance,
     ModelDepthMesh *mesh = (ModelDepthMesh *)meshes[meshInstance->index].get();
     const SkeletonMatrix34 *matrix;
     if (mesh->boneCount != 1) {
-        matrix = &instance->owner->transform.defaultMatrix;
+        matrix = &instance->sceneNode->worldMatrix;
         ModelDepthBounds *bounds = (ModelDepthBounds *)mesh->bounds.get();
         return nw_gfx_SceneHelper_CalculateDepth(&bounds->center, matrix, camera);
     } else {
         RelativePointer *bones = (RelativePointer *)mesh->bones.get();
         ModelDepthBoneBinding *binding = (ModelDepthBoneBinding *)bones->get();
         u32 boneIndex = *(u32 *)binding->index.get();
-        ModelBoneMatrixProvider *provider = instance->owner->secondary.skeleton.provider;
+        ModelBoneMatrixProvider *provider = instance->sceneNode->skeleton;
         ModelBoneMatrixSet *matrices = provider->vtable->getMatrices(provider);
         matrix = &matrices->matrices[boneIndex];
     }

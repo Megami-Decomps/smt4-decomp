@@ -1,11 +1,10 @@
 #include "battle/btlMain.h"
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void campCommonBgAcquire(void);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,

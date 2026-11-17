@@ -1,5 +1,6 @@
 /* NON_MATCHING: updates a field NPC marker (appears after leaving the trigger range, rises into view, shows its message, then follows the NPC with a height offset based on the lmap view); written from the decompilation, the goto structure is rebuilt as blocks, distSpatial's arguments are not recovered and float/bit comparisons are written as float compares */
 #include "common.h"
+#include "map/LmapViewGlobals.h"
 #include "game/GameStateA.h"
 
 #define NPC_FLAG_PENDING 0x01
@@ -52,11 +53,6 @@ struct FieldNpc {
     /* 0xA0 */ f32 offsetZ;
 };
 
-struct LmapViewHeight {
-    /* 0x000 */ u8 unk000[0x308];
-    /* 0x308 */ f32 height;
-};
-
 struct NpcGameBlock {
     /* 0x0000 */ u8 unk0000[0x14E8];
     /* 0x14E8 */ s32 forceAppear;
@@ -64,7 +60,6 @@ struct NpcGameBlock {
 
 extern "C" {
 
-extern LmapViewHeight *g_lmapView;
 
 NpcGameBlock *gameFlagsGetBlock(void);
 f32 distSpatial(void);

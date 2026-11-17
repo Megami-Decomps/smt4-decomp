@@ -1,5 +1,5 @@
 /* NON_MATCHING: explicit idle phases restore the six-entry jump table; floating-zero preload, idle/default return placement and selected-map argument/global load scheduling differ. */
-#include "map/LmapGlobals.h"
+#include "map/LmapMainGlobals.h"
 #include "game/GameStateA.h"
 struct MapElevationView {
     u8 prefix[0xB];
@@ -24,7 +24,6 @@ struct MapElevationView {
 typedef char MapElevationOffsets[offsetof(MapElevationView, phase) == 0x18 &&
     offsetof(MapElevationView, opacity) == 0xDC && offsetof(MapElevationView, flags) == 0xF4 ? 1 : -1];
 extern "C" {
-extern LmapMainStateA *g_lmapMainState;
 void FUN_00227a70(void);
 void FUN_002a2e98(s32 map, u32 variant, u32 specialMap, u32 mode);
 void FUN_0033feb8(LmapMainStateA *state);

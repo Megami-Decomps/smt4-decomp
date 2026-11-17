@@ -11,7 +11,6 @@ struct AocFileContentBuffer {
     u32 size;
 };
 extern "C" {
-extern AocMain *g_aocMain;
 extern const char DAT_003ff230[];
 void asdMemFree(void *buffer);
 u32 FUN_003550f4(u32 *size, u32 kind, u32 id, s32 first, s32 second, s32 flags);
@@ -34,7 +33,7 @@ WindowStatusOperationResult FUN_0038bae8(AocFileContentBuffer *content, u32 id)
         jyoucyuGetTableEntry(0);
         operation.status = 100;
         operation.result = result;
-        if ((u32)legacyResourceIdRemap(&result) != 0xC9413891 && FUN_002ad1e0(&g_aocMain->objB) != 0) {
+        if ((u32)legacyResourceIdRemap(&result) != 0xC9413891 && FUN_002ad1e0(&g_aocMain->operationDone) != 0) {
             g_aocMain->flags &= ~0x10000;
             operation.status = 200;
         }

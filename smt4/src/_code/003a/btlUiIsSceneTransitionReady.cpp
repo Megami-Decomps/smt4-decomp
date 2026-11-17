@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 s32 playSceneIsFadeInDone(BtlUiObjA *obj);
 s32 btlUiTargetIsSpriteComplete(BtlUiObjB *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 bool btlUiIsSceneTransitionReady(void)
 {

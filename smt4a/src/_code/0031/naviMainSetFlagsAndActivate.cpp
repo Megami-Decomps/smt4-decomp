@@ -1,7 +1,7 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 void flagsSetIfUnset3(s32, s32, s32, s32, s32, s32);
 s32 naviMainConditionsHold(NaviTransitionState *);
 void menuMarkActive(NaviTransitionState *);

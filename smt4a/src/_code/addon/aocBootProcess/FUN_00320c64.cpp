@@ -5,7 +5,6 @@
 
 extern "C" {
 extern AocBootGlobals g_aocBoot;
-extern AocMain *g_aocMain;
 void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void FUN_0015f258(void *dialog);
 void FUN_0024b280(void);

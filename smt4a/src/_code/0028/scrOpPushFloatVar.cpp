@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script opcode: pushes the float variable the instruction's operand indexes. */
-u32 scrOpPushFloatVar(ScriptVmProcess *process)
+u32 scrOpPushFloatVar(ScriptProcess *process)
 {
     scriptVmPushFloat(process, process->floatVariables[process->code[process->pc].decoded.operand].f);
     process->pc++;

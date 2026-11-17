@@ -78,7 +78,7 @@ u32 FUN_002d400c(void)
         {
             AsdMdlObject *model = g_lmapScene->stageModel;
             model->flags |= 2;
-            model->node->resource->positionFollowed = 0;
+            model->node->sceneNode->positionFollowed = 0;
         }
         g_lmapScene->unk168 = 0;
         g_lmapScene->unk16C = -1;

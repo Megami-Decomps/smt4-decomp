@@ -1,12 +1,12 @@
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "shard/W6_W6Match3_ContentWordList.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable(void);
 const ContentWordList *dataTable54FindById(u32 id);
 s32 gameCountUnits(void);
-StatBlock *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(const StatBlock *unit, u32 bit);
 s32 itemGetFlagBit1(u16 id);
 u32 arrayContainsU16(u16 *sources, s32 count, u32 mode);
@@ -16,7 +16,7 @@ u32 arrayContainsU16(u16 *sources, s32 count, u32 mode);
 extern "C" u32 partyClassifyRequestedSources(u32, u32 listId, u16 *sources)
 {
     s32 count = 0;
-    PartyDamageSlotsIV *party = gameGetSlotTable();
+    SaveSlotTableIV *party = gameGetSlotTable();
     const ContentWordList *list = dataTable54FindById(listId);
     if (list == NULL) {
         return 0;

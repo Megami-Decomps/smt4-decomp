@@ -1,7 +1,8 @@
 /* NON_MATCHING: retail loads g_btlUi's address before uiFadeRelease (owner r5, g_btlUi r6, ui r4); here it is loaded after the call. A local pointer to g_btlUi hoists the load but renumbers owner/global/ui to r6/r4/r5. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct BtlUiJobWork {
     /* 0x54 */ u32 job;
 } BtlUiJobWork;
 
-extern BtlUiGlobals g_btlUi;
 
 int FUN_00287188(BtlUiObjC *object);
 int uiFadeRelease(void);

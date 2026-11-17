@@ -1,27 +1,10 @@
 /* NON_MATCHING: entry (mov r0,#0), slot-pointer arithmetic and arm placement now match retail; armcc still emits three compiler nop hints around the shared scrSetResult call and a different tail layout. */
 #include "common.h"
+#include "result/Result.h"
 #include "script/ScriptArgs.h"
 #include "gamedata/UnitRecordAccess.h"
 
-struct ResultSlot {
-    s8 unitId;        // 0x000
-    u8 unk001[0x61F]; // 0x001
-};
-
-
-struct ResultScreen {
-    u8 unk0000[0x3654];       // 0x0000
-    ResultSlot slots[25];     // 0x3654
-    u32 slotCount;            // 0xCF74
-    s32 selected;             // 0xCF78
-    u8 unkCF7C[0xBC];         // 0xCF7C
-    s32 valueIndex;           // 0xD038
-    u32 pendingValue;         // 0xD03C
-};
-
 extern "C" {
-
-extern ResultScreen *g_result;
 
 
 /* Script command: returns the pending result value (arg != 0) or the selected unit's value at the current index; 0 without a result screen. */
@@ -32,8 +15,8 @@ s32 FUN_003245b8(void)
     if (g_result != NULL) {
         u32 value;
         if (which == 0) {
-            ResultSlot *slot = &g_result->slots[g_result->selected];
-            value = gameGetUnitRecord(slot->unitId)->skills.ids[g_result->valueIndex];
+            ResultEntry *entry = &g_result->entries[g_result->current];
+            value = gameGetUnitRecord(entry->unitIndex)->skills.ids[g_result->valueIndex];
         } else {
             value = g_result->pendingValue;
         }

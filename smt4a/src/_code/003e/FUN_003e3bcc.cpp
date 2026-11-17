@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e3bcc` (_code @ 0x3e3bcc, 0x4a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -62,7 +63,6 @@ extern unsigned char LAB_003e400c; /* 0x3e400c */
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: buttonHelpSetText. */
 extern int slotRecordFindById(unsigned short);
-extern unsigned int *gameGetSlotTable(void);
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_0023b45c. */

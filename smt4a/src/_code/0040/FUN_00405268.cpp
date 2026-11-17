@@ -1,5 +1,5 @@
 /* NON_MATCHING: ARMCC folds sprite-field addresses and merges transition tails differently; retail also retains extra branches in its animation-variant selection. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "addon/PackageSelection.h"
 
@@ -29,13 +29,10 @@ struct ContentListState {
 
 extern "C" {
 void contentListWaitAndInitialize(ContentListState* list);
-s32 uiSpriteAdvanceAnimation(UiSpriteState* sprite, f32 speed);
 void FUN_004029f4(ContentListState* list, u32 state, u32 entry);
 void FUN_00403e2c(ContentListState* list);
 void* textureGetIndexedResource(u32 table);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void uiSpriteSetKeyframe(UiSpriteState* sprite, s16 frame, u32 flags);
-void uiSpriteSetImageKeyframe(UiSpriteState* sprite, s16 frame, u32 flags);
 void FUN_00402f58(ContentListState* list);
 s32 useCounterIsFinished(void);
 void useCounterRelease(void);
@@ -74,7 +71,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         if (!uiSpriteAdvanceAnimation(&list->secondSprite, 1.0f)) {
             break;
         }
-        if (list->secondSprite.mode != 1) {
+        if (list->secondSprite.alphaKey != 1) {
             u16 table = list->texture->content.table;
             u16 node = list->texture->content.node;
             if (table != 0 &&
@@ -96,12 +93,12 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         break;
     case 6:
         if (uiSpriteAdvanceAnimation(&list->thirdSprite, 1.0f)) {
-            if (list->thirdSprite.mode != 1) {
+            if (list->thirdSprite.alphaKey != 1) {
                 FUN_004029f4(list, 7, 0);
                 list->firstFlag = 0;
                 list->secondFlag = 0;
             } else {
-                s16 frame = list->thirdSprite.animation == 7 ? 4 : 5;
+                s16 frame = list->thirdSprite.positionKey == 7 ? 4 : 5;
                 uiSpriteSetKeyframe(&list->thirdSprite, frame, 0);
                 uiSpriteSetImageKeyframe(&list->thirdSprite, 0, 0);
                 if (++list->animationPhase > 1) {

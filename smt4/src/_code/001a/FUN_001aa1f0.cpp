@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script opcode: pushes the integer immediate stored in the instruction after this one. */
-u32 FUN_001aa1f0(ScriptVmProcess *process)
+u32 FUN_001aa1f0(ScriptProcess *process)
 {
     process->pc++;
     scriptVmPush(process, SCRIPT_VM_TAG_INT, process->code[process->pc].word);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00205cc8` (_code @ 0x205cc8, 0x534 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "battle/BtlMainAccess.h"
 #include "sys/RuntimeObjects.h"
@@ -9,9 +10,6 @@ extern "C" {
 int FUN_002630e0(unsigned int *, int, unsigned int);
 int uiStoreTextureEntryCenter(...);
 int FUN_002963ec(...);
-int uiSpriteSetImageKeyframe(int, int, int);
-int spriteStartAnimationByIndex(...);
-int uiSpriteAdvanceAnimation(int);
 int FUN_003adca8(int, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -82,12 +80,12 @@ void FUN_00205cc8(int param_1)
           temp_v6 = 0;
           if (temp_v6 < temp_v3) {
             do {
-              uiSpriteSetImageKeyframe(temp_v7 + temp_v6 * 0x8c + 0x7f4c,0xc,0);
+              uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v7 + temp_v6 * 0x8c + 0x7f4c),0xc,0);
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < temp_v3);
           }
-          uiSpriteSetImageKeyframe(temp_v7 + 0x8208,0xc,0);
-          uiSpriteSetImageKeyframe(temp_v7 + 0x8294,0xc,0);
+          uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v7 + 0x8208),0xc,0);
+          uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v7 + 0x8294),0xc,0);
         }
         else if (*(char *)(temp_v7 + 0x7fd6) != '\0') {
           *(unsigned char *)(temp_v7 + 0x832c) = 0;
@@ -101,14 +99,14 @@ void FUN_00205cc8(int param_1)
       temp_v6 = 0;
       if (temp_v6 < temp_v3) {
         do {
-          uiSpriteAdvanceAnimation(temp_v7 + temp_v6 * 0x8c + 0x7f4c);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + temp_v6 * 0x8c + 0x7f4c));
           temp_v4 = temp_v7 + temp_v6 * 4;
           temp_v6 = temp_v6 + 1;
           *(int *)(temp_v4 + 0x8330) = *(int *)(temp_v4 + 0x8330) + 1;
         } while (temp_v6 < temp_v3);
       }
-      uiSpriteAdvanceAnimation(temp_v7 + 0x8208);
-      uiSpriteAdvanceAnimation(temp_v7 + 0x8294);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0x8208));
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0x8294));
       if (*(char *)(temp_v7 + 0x832c) == '\0') goto LAB_00205ea4;
     }
     else {
@@ -145,7 +143,7 @@ LAB_00205ea4:
           *(unsigned char *)(temp_v7 + 0xbfe4) = 0;
         }
         if (*(int *)(temp_v7 + 0xbfe8) >= 3) {
-          uiSpriteAdvanceAnimation(temp_v7 + 0xbf4c);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0xbf4c));
         }
       }
       else {
@@ -155,9 +153,9 @@ LAB_00205ea4:
           if (*(int *)(temp_v7 + 0xbfe8) >= 0xc) {
 LAB_00205fe0:
             if (*(short *)(temp_v7 + 0xbfa8) != 0xc) {
-              uiSpriteSetImageKeyframe(temp_v7 + 0xbf4c,0xc,0);
+              uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v7 + 0xbf4c),0xc,0);
               if (*(int *)(temp_v7 + 0xbfe8) >= 3) {
-                uiSpriteAdvanceAnimation(temp_v7 + 0xbf4c);
+                uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0xbf4c));
               }
             }
             else if (*(char *)(temp_v7 + 0xbfd6) != '\0') {
@@ -165,17 +163,17 @@ LAB_00205fe0:
               *(unsigned char *)(temp_v7 + 0xbfe4) = 0;
             }
             else if (*(int *)(temp_v7 + 0xbfe8) >= 3) {
-              uiSpriteAdvanceAnimation(temp_v7 + 0xbf4c);
+              uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0xbf4c));
             }
           }
           else if (*(int *)(temp_v7 + 0xbfe8) >= 3) {
-            uiSpriteAdvanceAnimation(temp_v7 + 0xbf4c);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0xbf4c));
           }
         }
         else {
           if (*(int *)(temp_v7 + 0xbfe8) >= 0x12) goto LAB_00205fe0;
           if (*(int *)(temp_v7 + 0xbfe8) >= 3) {
-            uiSpriteAdvanceAnimation(temp_v7 + 0xbf4c);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0xbf4c));
           }
         }
       }
@@ -220,11 +218,11 @@ LAB_00206088:
           }
         }
         temp_v4 = temp_v3 + 0xbf4c;
-        pairSetFirstResetSecond((void *)(temp_v4),temp_v5);
+        pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v4)),temp_v5);
         uiStoreTextureEntryCenter(temp_v4,0x15,0x416);
         FUN_002963ec(temp_v4,(int)(short)(int)*(float *)(temp_v3 + 0xbfd8),
                      (int)(short)(int)*(float *)(temp_v3 + 0xbfdc));
-        spriteStartAnimationByIndex(temp_v4,10);
+        spriteStartAnimationByIndex((UiSpriteState *)temp_v4,10);
         *(unsigned char *)(temp_v7 + 0xd618) = 0;
         *(char *)(temp_v6 + 0xe00c) = *(char *)(temp_v6 + 0xe00c) + '\x01';
       }

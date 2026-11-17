@@ -9,8 +9,6 @@ extern "C" {
 #define UI_TEX_NONE (-1)
 
 extern void asdTMTexTableReleaseNode(s32 table, s32 node);
-extern void uiSpriteSetImageKeyframe(UiTexSprite *sprite, s32 a, s32 b);
-extern s32 uiSpriteAdvanceAnimation(UiTexSprite *sprite, f32 time);
 extern void entryDispatchUpdate(void *anim, s32 count);
 
 /* Per-frame update of the screen's texture loader: advances the cycle counter, starts the queued
@@ -24,17 +22,17 @@ void uiTexLoaderUpdate(UiTexLoader *loader)
         loader->cycle = (loader->cycle + 1) % 16;
     }
 
-    if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE, loader->next.keyframe) != 0 && uiSpriteGetCompletionState((const UiAnimatedSprite *)&loader->sprite) != 0) {
+    if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE, loader->next.keyframe) != 0 && uiSpriteGetCompletionState((const UiSpriteState *)&loader->sprite) != 0) {
         s32 entryFrame = loader->entries[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(loader))]->frame + 1;
         if (loader->next.keyframe == entryFrame) {
             loader->pending.node = loader->next.node;
             loader->pending.keyframe = loader->next.keyframe;
             loader->next.node = UI_TEX_NONE;
             loader->next.keyframe = UI_TEX_NONE;
-            uiSpriteSetImageKeyframe(&loader->sprite, 1, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&loader->sprite), 1, 0);
         }
     }
-    if (loader->pending.node != UI_TEX_NONE && uiSpriteAdvanceAnimation(&loader->sprite, 1.0f) != 0) {
+    if (loader->pending.node != UI_TEX_NONE && uiSpriteAdvanceAnimation((UiSpriteState *)(&loader->sprite), 1.0f) != 0) {
         loader->current = loader->pending;
         loader->pending.node = UI_TEX_NONE;
         loader->pending.keyframe = UI_TEX_NONE;

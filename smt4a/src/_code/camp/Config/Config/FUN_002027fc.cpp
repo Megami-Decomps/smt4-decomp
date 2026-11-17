@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002027fc` (_code @ 0x2027fc, 0x52c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -12,7 +12,6 @@ extern "C" {
 int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, unsigned int, unsigned int, int);
-int vec2GetYInt(int);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
@@ -103,8 +102,8 @@ void FUN_002027fc(void)
   }
   resourceRunOperationIfUnblocked(temp_v0);
   listCursorGetRowIfUnblocked(temp_v0);
-  temp_v3 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0xe8));
-  temp_v4 = vec2GetYInt(temp_v0 + 0xe8);
+  temp_v3 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v0 + 0xe8)));
+  temp_v4 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0xe8));
   efctSetSpeed();
   texDrawCompositeSprite(2,0x24,0,temp_v3,temp_v4,0xb);
   texDrawCompositeSprite(2,0x24,0xd,temp_v3,temp_v4,0xb);
@@ -127,8 +126,8 @@ void FUN_002027fc(void)
         temp_v11 = temp_v5 + temp_v10;
         temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,temp_v11));
         temp_v13 = temp_v0 + temp_v10 * 0x8c;
-        temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v13 + 0x174));
-        temp_v13 = vec2GetYInt(temp_v13 + 0x174);
+        temp_v7 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v13 + 0x174)));
+        temp_v13 = vec2GetYInt((UiSpriteState *)(temp_v13 + 0x174));
         temp_v3 = 0;
         if (*(int *)(temp_v0 + 0x88) == temp_v10) {
           temp_v17 = 0x2bceffff;

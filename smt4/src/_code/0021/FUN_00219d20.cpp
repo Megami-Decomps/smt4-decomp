@@ -1,4 +1,5 @@
 /* NON_MATCHING: rename polling stack grouping and callback scheduling have not yet been matched. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "gfx/EffectKeyboard.h"
 

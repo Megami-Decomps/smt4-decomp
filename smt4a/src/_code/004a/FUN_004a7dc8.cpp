@@ -2,10 +2,10 @@
 #include "shard/S1ListPanel.h"
 #include "code/Code004a_Smt4a.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 void efctSetSpeed(f32 opacity);
-f32 vec2GetSpeed(const void *object);
 void uiDrawTableTextureAtRectCorner(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
 void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 
@@ -24,7 +24,7 @@ void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 altern
     const TextureTableEntryIV *frame = layoutFindTableEntry(&work->frameDraw.region, anchor + 0x42F);
     s32 x = frame->x;
     s32 y = frame->y;
-    efctSetSpeed(vec2GetSpeed(&reinterpret_cast<const TransitionSpeedView *>(work)->frameSpeed));
+    efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&reinterpret_cast<const TransitionSpeedView *>(work)->frameSpeed)));
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x426, x, y, color);
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x427, x, y, color);
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x428, x, y, color);
@@ -34,7 +34,7 @@ void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 altern
         uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x5CF, x, y, color);
         uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x5D0, x, y, color);
         uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x5D2, x, y, color);
-        efctSetSpeed(vec2GetSpeed(&reinterpret_cast<const TransitionSpeedView *>(work)->secondarySpeed));
+        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&reinterpret_cast<const TransitionSpeedView *>(work)->secondarySpeed)));
         uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x5D1, x, y, color);
         efctSetSpeed(1.0f);
         return;
@@ -42,7 +42,7 @@ void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 altern
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x42A, x, y, color);
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x42B, x, y, color);
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x5C9, x, y, color);
-    efctSetSpeed(vec2GetSpeed(&reinterpret_cast<const TransitionSpeedView *>(work)->secondarySpeed));
+    efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&reinterpret_cast<const TransitionSpeedView *>(work)->secondarySpeed)));
     uiDrawTableTextureAtRectCorner(&work->frameDraw.region, 0x42C, x, y, color);
     efctSetSpeed(1.0f);
 }

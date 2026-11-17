@@ -10,10 +10,10 @@ struct CallbackWorkflow {
     /* 0x08 */ u32 step;
     /* 0x0C */ u32 timer;
     /* 0x10 */ void *heapA;
-    /* 0x14 */ ScriptRunState *script;
+    /* 0x14 */ ScriptProcess *script;
     /* 0x18 */ void *heapB;
     /* 0x1C */ void *resource;
-    /* 0x20 */ ScriptRunState *process;
+    /* 0x20 */ ScriptProcess *process;
     /* 0x24 */ void *allocation;
     /* 0x28 */ u32 unk28;
     /* 0x2C */ u32 region;
@@ -22,7 +22,6 @@ struct CallbackWorkflow {
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-ScriptRunState *scrScriptProcessCreate(void *heapA, void *heapB);
 void FUN_004cbb38(CallbackWorkflow *work);
 void FUN_004cbd70(CallbackWorkflow *work);
 u16 *saveGetSelectedRecordSlot(u32 region);
@@ -34,15 +33,14 @@ s32 FUN_002effbc();
 s32 btlTalkBustUpGetValue();
 void btlTalkBustUpSetDemonTexture(u16 entry, u32 option);
 void btlTalkBustUpSetUnk2F4(u32 value);
-void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 btlTalkBustupMatchesEntry(u16 entry);
 s32 bgmGetStateById(u32 id);
-s32 scrRunOpcodesStub(ScriptRunState *process);
+s32 scrRunOpcodesStub(ScriptProcess *process);
 void FUN_002c85b0(u32 value);
 void FUN_002c39dc(u32 first, u32 second, u32 third);
 void FUN_00284ee4(u32 value);
 void FUN_00215bbc();
-void scrScriptProcessDestroy(ScriptRunState *process);
 void asdMemFree(void *allocation);
 void btlTalkBustUpDestroy();
 void soundChannelStopAll(u32 channel);
@@ -53,7 +51,7 @@ void lmapMainCallIfActive();
 s32 mikadoPollShutdown();
 void mikadoRequestSoundChannel();
 void bgmFadeOut(u32 duration);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 }
 
 // Drive the callback's resource, dialogue, and return-to-map workflow.

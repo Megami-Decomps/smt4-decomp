@@ -1,9 +1,8 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 
-extern BtlUiGlobals g_btlUi;
 
 void FUN_0025c2d0(u32 unused, u8 value)
 {

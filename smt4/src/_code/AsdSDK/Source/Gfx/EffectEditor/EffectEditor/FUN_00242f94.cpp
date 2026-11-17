@@ -1,4 +1,5 @@
 /* NON_MATCHING: with effMenu.h's render-node helper inlined only the selection/value registers differ: retail keeps the selection in r5 (then reuses r5 for the constant 1) and the value in r6. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 #include "AsdSDK/EffectEditorSelectionTransfer.h"
 #include "AsdSDK/AsdDebug.h"

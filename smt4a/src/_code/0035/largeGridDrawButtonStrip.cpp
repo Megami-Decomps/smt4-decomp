@@ -1,26 +1,19 @@
 /* NON_MATCHING: retail repeats an already-decided button-type test and duplicates offset drawing paths; the readable version shares those paths. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
-#include "util/MathFunctions.h"
 #include "gamedata/GameDataAccess.h"
 #include "shard/TextureDrawCall.h"
 
-struct GridButtonSlide {
-    u8 unk00[0xc];
-    s32 x, y; // fixed-point coordinates
-    u8 unk14[0xc];
-    f32 alpha;
-};
 struct LargeGridButtonDraw {
     u8 unk000[0x44];
     f32 alpha;
     u8 unk048[0x68];
-    GridButtonSlide slide; // 0xb0
-    u8 unk0d4[0x364];
+    UiSpriteState slide; // 0x0b0
+    u8 unk13c[0x2fc];
     s16 touches[145]; // 0x438
 };
 extern "C" {
 void efctSetSpeed(f32);
-s32 vec2GetYInt(GridButtonSlide *);
 
 void largeGridDrawButtonStrip(LargeGridButtonDraw *work, s32 x, s32 y, s32 button, f32 scale)
 {

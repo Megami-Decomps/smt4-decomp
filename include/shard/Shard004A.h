@@ -50,7 +50,7 @@ typedef struct Screen4A {
         } input;
         struct {
             u8 unk00E0BeforeSprite[0x47C];
-            /* 0x055C */ UiAnimatedSprite selection;
+            /* 0x055C */ UiSpriteState selection;
         } animation;
         struct {
             u8 unk00E0BeforeControls[0x738];

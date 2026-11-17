@@ -3,7 +3,6 @@
 
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 void globalCriticalSectionEnterForward();
 void globalCriticalSectionLeaveForward();
 void FUN_001963e0();
@@ -48,8 +47,8 @@ void gfxCommandBufferSubmit(AsdCmdBuffer *buffer, u32 size)
     buffer->committedOffset = buffer->writeOffset;
     globalCriticalSectionEnterForward();
     ++buffer->listCount;
-    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled && !g_asdGfxContext.submission.pending) {
-        g_asdGfxContext.submission.pending = 1;
+    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submitEnabled && !g_asdGfxContext.submitPending) {
+        g_asdGfxContext.submitPending = 1;
         FUN_001963e0();
     }
     globalCriticalSectionLeaveForward();

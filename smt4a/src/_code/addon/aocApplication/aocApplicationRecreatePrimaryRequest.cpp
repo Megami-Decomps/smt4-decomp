@@ -1,5 +1,6 @@
 /* Recreates the application's 128 KiB work buffer and the decoder object that runs on it. */
 #include "addon/AocBufferRequest.h"
+#include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -9,21 +10,21 @@ void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFron
 void rt_memclr(void *buffer, u32 size);
 void sysFatalBreak(void);
 
-void aocApplicationRecreatePrimaryRequest(AocApplicationRequestView *app)
+void aocApplicationRecreatePrimaryRequest(AocMain *app)
 {
-    if (app->primary != NULL) {
-        delete app->primary;
-        app->primary = NULL;
+    if (app->contentRequest != NULL) {
+        delete app->contentRequest;
+        app->contentRequest = NULL;
     }
-    if (app->primaryBuffer != NULL) {
-        asdMemFree(app->primaryBuffer);
-        app->primaryBuffer = NULL;
+    if (app->contentBuffer != NULL) {
+        asdMemFree(app->contentBuffer);
+        app->contentBuffer = NULL;
     }
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\aocApplication.cpp", 360);
-    app->primaryBuffer = asdMemoryAlloc(0x10000, 0x100, 0, 0x20000, 1);
-    rt_memclr(app->primaryBuffer, 0x20000);
-    if (app->primaryBuffer != NULL) {
-        app->primary = new AocBufferRequest(app->source, app->primaryBuffer, 0x20000);
+    app->contentBuffer = asdMemoryAlloc(0x10000, 0x100, 0, 0x20000, 1);
+    rt_memclr(app->contentBuffer, 0x20000);
+    if (app->contentBuffer != NULL) {
+        app->contentRequest = new AocBufferRequest(app->queryResult, app->contentBuffer, 0x20000);
     } else {
         sysFatalBreak();
     }

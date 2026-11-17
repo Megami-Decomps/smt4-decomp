@@ -1,6 +1,7 @@
 /* Starts the mode-10 popup when the scroll position passes the entry's height (adjusted per direction) and a candidate exists. */
 #include "common.h"
 #include "map/PopupStateA.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -9,13 +10,7 @@ typedef struct {
     u16 height;    /* 0x08 */
 } PopupEntry;
 
-typedef struct {
-    u8 unk00[300]; /* 0x00 */
-    u16 id;        /* 0x12c */
-} PopupCandidate;
-
 s32 randRange(u32 id);
-PopupCandidate *saveSlotFindSelected(void);
 PopupEntry *dataTable02FindConditionalMapRecord(u32 a, u32 b);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataBlocksGetTableFlag(void);
@@ -27,7 +22,7 @@ void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
     s32 adjust;
     s32 scrollY;
     PopupEntry *entry;
-    PopupCandidate *candidate;
+    PartySlotA *candidate;
 
     if (g_popupState->state != 0) {
         return;

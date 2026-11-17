@@ -1,20 +1,14 @@
 /* NON_MATCHING: embedded graphics context corrected; format/allocation saved registers still differ. */
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
-#include "shard/W6_W6Match5_DisplayMode.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
-struct BoundTextureStorage : GraphicsTarget {
-    u32 heap;
-};
-typedef char BoundTextureStorageLayoutCheck[
-    sizeof(BoundTextureStorage) == 0x18 && offsetof(BoundTextureStorage, heap) == 0x14 ? 1 : -1];
 extern "C" {
 extern DriverMemoryCallbacks g_gfxAllocateCallback;
 }
 
 extern "C" void FUN_002c2534(u32 format, u32 width, u32 height, u32 heap)
 {
-    BoundTextureStorage *texture = static_cast<BoundTextureStorage *>(
-        g_asdGfxContext.query.targets[g_asdGfxContext.query.active]);
+    AsdGfxTarget *texture = g_asdGfxContext.targets[g_asdGfxContext.activeTarget];
     u32 bytesPerPixel;
     switch (format) {
     case 0x8051:
@@ -33,11 +27,11 @@ extern "C" void FUN_002c2534(u32 format, u32 width, u32 height, u32 heap)
     }
     if (heap == 0x10000 || heap == 0x20000 || heap == 0x30000) {
         if (texture->pixels != NULL && g_gfxAllocateCallback.release != NULL) {
-            g_gfxAllocateCallback.release(texture->heap, 0x104, texture->unk00, texture->pixels);
+            g_gfxAllocateCallback.release(texture->heap, 0x104, texture->id, texture->pixels);
         }
         void *allocation;
         if (g_gfxAllocateCallback.allocate != NULL) {
-            allocation = g_gfxAllocateCallback.allocate(heap, 0x104, texture->unk00,
+            allocation = g_gfxAllocateCallback.allocate(heap, 0x104, texture->id,
                                                         bytesPerPixel * width * height);
         } else {
             allocation = NULL;

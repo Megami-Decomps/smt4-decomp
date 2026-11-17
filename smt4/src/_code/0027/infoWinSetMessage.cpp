@@ -1,11 +1,10 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWin.h"
 
 extern "C" {
 
 void asdTextDrawDirectoryEntry(void *text, s32 a, s32 b, s32 c, s32 d, const void *message, u32 arg);
 f32 effectSpawnDefaultArguments(void *text);
-void timerStart(void *timer, s32 a, s32 b);
-s32 vec2GetXInt(void *timer);
 
 /* Shows a message in the info window, widening it for text over 630 pixels wide. */
 void infoWinSetMessage(const void *message, u32 arg)

@@ -1,8 +1,7 @@
 /* NON_MATCHING: register allocation only: retail keeps the bank count in ip and the entry base in r3 (swapped in the build). */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 
 // Report an active request in a bank unless that bank is suppressed.
 u32 FUN_004a94a8(u32, s32 bank)

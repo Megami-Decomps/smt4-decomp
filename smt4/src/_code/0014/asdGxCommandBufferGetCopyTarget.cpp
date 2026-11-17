@@ -2,7 +2,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern u8 *g_commandBufferCursor;
 
 void FUN_0014d8c8(AsdCmdBuffer *buffer, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 *third);
@@ -12,10 +11,8 @@ void FUN_0014d8c8(AsdCmdBuffer *buffer, u32 first, AsdCmdRecord *entries, u32 se
 void *asdGxCommandBufferGetCopyTarget(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 unused, u32 *third)
 {
     AsdGfxContext *asdGfxContextPtr = &g_asdGfxContext;
-    // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.
-    struct BufferNode { AsdCmdBuffer buffer; BufferNode *next; };
     void *copyTarget = &entries[index].unk10;
-    BufferNode *node = reinterpret_cast<BufferNode *>(asdGfxContextPtr->bufferRegistry.buckets[handle & 31]);
+    CommandBufferHandleNode *node = asdGfxContextPtr->buffers[handle & 31];
 
     if (node != NULL) {
         u32 id;

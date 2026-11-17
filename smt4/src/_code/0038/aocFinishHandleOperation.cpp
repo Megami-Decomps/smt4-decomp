@@ -3,7 +3,6 @@
 #include "nn/Result.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 id, u32 flags);
 WindowStatusResult FUN_00354608(void *parameters, AocHandleSource *source);
 WindowStatusResult archiveFileReplaceHandle(void *destination, void *source);

@@ -1,9 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/Shard003B.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
-extern void *saveSlotFindSelected(void);
 extern void unitRecordResetCurrentValues(void *slot);
 extern void saveSlotApplySelected(void *state);
 

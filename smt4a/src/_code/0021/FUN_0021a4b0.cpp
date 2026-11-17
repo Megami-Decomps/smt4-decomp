@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "code/Code002a_VariantA.h"
 #include "quest_center/QuestRecordA.h"
 /* NON_MATCHING: cursor/definition pointer lifetimes differ, and the final state update uses strd rather than separate writeback stores; 80 instructions each. */
@@ -12,7 +13,6 @@ void FUN_00417e08(u32 questId);
 void gameOptionsClassifyMode();
 void optionsSetFlag1();
 void uiQuestRefreshDetailPages(u32 questId);
-void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_003dea6c(u32 questId, s32 state, s32 enabled);
 s32 scrScriptProcessStartEntry(u32 script, u32 entry);
 const char *dataFindKindRecordWithAocOverrides(u32 textId, s32 mode);
@@ -47,7 +47,7 @@ void FUN_0021a4b0()
     gameOptionsClassifyMode();
     optionsSetFlag1();
     uiQuestRefreshDetailPages(questId);
-    uiSpriteSelectAnim(quest->acceptance.sprite, 2);
+    uiSpriteSelectAnim((UiSpriteState *)quest->acceptance.sprite, 2);
     FUN_003dea6c(questId, 0, 1);
     QuestRecordA *definition = questDataGetRecord(questId);
     if (definition && definition->kind == 11) {

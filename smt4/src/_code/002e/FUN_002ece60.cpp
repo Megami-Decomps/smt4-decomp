@@ -1,7 +1,8 @@
 #include "camp/CecMenu.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "event/2dEvent/Npc2d.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 u32 scrScriptProcessCreate(u32 resource, u32 screen);
@@ -11,7 +12,6 @@ void cecProcessStart(void);
 void FUN_0025461c(void);
 void cecProcessDestroy(void);
 s32 scrRunOpcodesStub(u32 process);
-PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 flagWordTestBit(const void *record, u32 flag);
 void objectFlagsClear(void *record, u32 flag);
 void FUN_0026b9bc(void);
@@ -37,7 +37,7 @@ u32 FUN_002ece60(CampCecMenu *work)
         break;
     case 1:
         if (scrRunOpcodesStub(work->script.process) == 2) {
-            PartyDamageSlotsIV *slots = gameGetSlotTable();
+            SaveSlotTableIV *slots = gameGetSlotTable();
             for (s32 index = 0; index < 24; ++index) {
                 if (slots->stock[index] >= 0) {
                     if (flagWordTestBit(gameGetUnitRecord(slots->stock[index]), 2) != 0) {

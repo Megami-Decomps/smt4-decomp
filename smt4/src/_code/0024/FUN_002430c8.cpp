@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail stores the zero owner again before creating the request and reloads the request after storing its state; this build drops the store and keeps the pointer. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {

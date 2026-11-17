@@ -1,9 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDown.h"
 
 
 extern "C" {
 
-extern void timerStart(void *timer, s32 mode, s32 value);
 
 /* Enters `next`, remembering the previous one and restarting the state counter. */
 static __inline void statusDownEnter(StatusDownState *work, u32 next)

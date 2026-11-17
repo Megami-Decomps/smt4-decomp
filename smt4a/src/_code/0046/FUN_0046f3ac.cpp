@@ -11,7 +11,7 @@ int jyoucyuGetTableEntry(...);
 int aocPackageOwnerFreeTables(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int _ZN7AocMain12queueRequestE17RequestParametersji(...);
-u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
+u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(void *, const RequestParameters*, QueuedRequestHandle);
 int byteIsAtLeast100(...);
 int legacyResourceIdRemap(...);
 int resultHandleFailure(...);
@@ -327,7 +327,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
             static_cast<u32>(piVar1[3])
           );
           QueuedRequestHandle handle = {parameters.word(1), parameters.word(2)};
-          temp_v3 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+          temp_v3 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<void *>(g_aocMain),
                                 &parameters, handle);
         }
         if (temp_v3 != 0) {

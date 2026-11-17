@@ -14,8 +14,6 @@ void statusCameraDestroy();
 void mdlPartsRelease(void *model);
 s32 lmapMainIsRunning();
 void asdModelSlotRelease(s32);
-void timerStart(UiAnimatedSprite *, s32, s32);
-void spriteStartAnimationByIndex(UiAnimatedSprite *, s32);
 
 void beginStatusPanelClose()
 {
@@ -41,7 +39,7 @@ void *script = lmapSceneGetScript();
         if (state->unk1E80)
             statusCameraDestroy();
     }
-    UiAnimatedSprite *sprites = (UiAnimatedSprite *)(state->unk0301 + 0x8b); // 0x38c
+    UiSpriteState *sprites = (UiSpriteState *)(state->unk0301 + 0x8b); // 0x38c
     timerStart(&sprites[0], 5, 0);
     spriteStartAnimationByIndex(&sprites[1], 3);
     spriteStartAnimationByIndex(&sprites[2], 3);

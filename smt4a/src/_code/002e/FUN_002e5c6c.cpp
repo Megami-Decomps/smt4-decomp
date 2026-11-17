@@ -1,4 +1,5 @@
 /* NON_MATCHING: directory/entry lifetimes swap r5/r6; width comparison and text-right addition scheduling differ. */
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 
 extern "C" {
@@ -7,9 +8,6 @@ void *fileSectionGetData(void *section, u32 entry, u32 subsection);
 void asdTextDrawDirectoryEntry(void *text, s32 font, u32 color, s32 flags,
                                s32 mode, void *directory, u32 entry);
 f32 effectSpawnDefaultArguments(void *text);
-void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
-void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 flags);
-s32 vec2GetXInt(void *sprite);
 
 /* Set and measure a directory message before opening the information popup. */
 void FUN_002e5c6c(u32 entry)

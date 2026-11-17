@@ -1,6 +1,6 @@
 /* NON_MATCHING: completion getter sequences match retail; retail shares one `mode = 0` store between cases 4 and 6, factors the phase tests as bne/b and orders the pending/current copy before the sprite address, constants in a different order. */
 #include "ui/MenuState.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include <stddef.h>
 
 extern "C" {

@@ -1,4 +1,5 @@
 /* Starts the countdown (30 frames) with the given mode byte: marks the object active and resets its timer. */
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWin.h"
 #include "ui/UiControl.h"
 
@@ -6,7 +7,6 @@ extern "C" {
 
 
 
-extern void timerStart(void *timer, s32 a, s32 b);
 
 void dialogOpen(u8 mode)
 {

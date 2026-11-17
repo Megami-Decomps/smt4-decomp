@@ -29,7 +29,7 @@ static __inline void saveJumpTransform(const MapJumpRequest *request)
     g_gameState.savedHeadingCopy = request->transform[4];
 }
 
-extern "C" void FUN_00394508(AocObjC *controller)
+extern "C" void FUN_00394508(AocScriptHolder *controller)
 {
     const MapJumpRequest *request = gameJumpRequestGet();
     u32 map;

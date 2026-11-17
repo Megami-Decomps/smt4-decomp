@@ -10,7 +10,6 @@ u32 scrRunOpcodesStub(u32 process);
 s32 messageGetChoiceResult(void);
 u32 messageMainIsIdle(void);
 void scrScriptProcessStartEntry(u32 process, u32 entry);
-void uiSpriteSetImageKeyframe(UiAnimatedSprite* sprite, s32 keyframe, s32 mode);
 void FUN_00183e58(void);
 void stateSetterEnterState(StateSetterSpriteWork* work, s32 state);
 
@@ -32,7 +31,7 @@ void FUN_00485308(StateSetterSpriteWork* work)
         u32 script;
         s8 scriptStarted;
         u8 unk271[0x13B];
-        UiAnimatedSprite sprite;
+        UiSpriteState sprite;
     };
     typedef char ConfirmationOffsets[sizeof(NameBuffer) == 0x12 &&
         offsetof(ConfirmationView, name) == 0xB0 &&

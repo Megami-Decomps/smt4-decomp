@@ -9,11 +9,19 @@ struct PassiveSkillRecord {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u16 id;
     /* 0x22 */ u16 sortKey;
-    /* 0x24 */ u8 unk24[0x2];
+    /* 0x24 */ u8 hpPercentTens; /* stat passives: hp bonus, in tens of percent */
+    /* 0x25 */ u8 mpPercentTens; /* stat passives: mp bonus, in tens of percent */
     /* 0x26 */ u8 holdChance;    /* percent: chance the skill applies when held */
     /* 0x27 */ u8 triggerChance; /* percent */
     union {
         /* 0x28 */ u8 unk28[0x10];
+        struct {
+            /* 0x28 */ u8 statBonus[5]; /* stat passives: the five stat bonuses */
+        } stats;
+        struct {
+            u8 unk28[0x7];
+            /* 0x2F */ u8 expBonus; /* experience passives: percent bonus (0 = none) */
+        } experience;
         struct {
             /* 0x28 */ u8 unk28[0xA];
             /* 0x32 */ u8 category;
@@ -34,6 +42,9 @@ struct PassiveSkillRecord {
     /* 0x38 */ u32 affinity;
 };
 
+typedef char PassiveSkillRecordBonusOffsetCheck[
+    offsetof(PassiveSkillRecord, hpPercentTens) == 0x24 && offsetof(PassiveSkillRecord, mpPercentTens) == 0x25 &&
+    offsetof(PassiveSkillRecord, stats.statBonus) == 0x28 && offsetof(PassiveSkillRecord, experience.expBonus) == 0x2F ? 1 : -1];
 typedef char PassiveSkillRecordAffinityOffsetCheck[
     offsetof(PassiveSkillRecord, affinity) == 0x38 ? 1 : -1];
 typedef char PassiveSkillRecordHoldChanceOffsetCheck[
@@ -47,35 +58,16 @@ typedef char PassiveSkillRecordRankOffsetCheck[
 typedef char PassiveSkillRecordScalingOffsetCheck[
     offsetof(PassiveSkillRecord, scaling.percent) == 0x36 && sizeof(PassiveSkillRecord) == 0x3C ? 1 : -1];
 
-/* An active skill record (ids up to 400). */
-struct ActiveSkillRecord {
-    union {
-        /* 0x00 */ u8 unk00[0x24];
-        struct {
-            /* 0x00 */ u8 unk00[0x20];
-            /* 0x20 */ u16 costParameter;
-        } cost;
-        struct {
-            u8 prefix00[0x23];
-            u8 category;
-        } classification;
-    };
-    /* 0x24 */ u16 sortKey;
-};
-
-typedef char ActiveSkillRecordCostOffsetCheck[
-    offsetof(ActiveSkillRecord, cost.costParameter) == 0x20 &&
-    sizeof(ActiveSkillRecord) == 0x26 ? 1 : -1];
-typedef char ActiveSkillRecordCategoryOffsetCheck[
-    offsetof(ActiveSkillRecord, classification.category) == 0x23 &&
-    sizeof(ActiveSkillRecord) == 0x26 ? 1 : -1];
-
 /* A skill list entry: the skill id and the unit that holds it (negative for none). */
 struct SkillListEntry {
     /* 0x00 */ u32 skillId;
     /* 0x04 */ s32 unit;
 };
 
+struct SkillDataRecord;
+
 extern "C" const PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
+/* Whether a passive skill's affinity word matches a skill record (the skill inheritance pick). IV only. */
+extern "C" bool FUN_0026a604(const PassiveSkillRecord *passive, const SkillDataRecord *skill);
 
 #endif

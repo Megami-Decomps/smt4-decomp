@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "code/Code0023_Smt4.h"
 
 extern "C" {
-extern NaviMain *g_naviMain;
 
 u32 NaviMain_GetPosX(void)
 {

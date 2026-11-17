@@ -1,21 +1,11 @@
 /* NON_MATCHING: the per-slot array addressing is rebuilt from different base registers in retail and the early-return paths merge differently; the slot refresh logic is the same. */
 #include "common.h"
 #include "code/Code0018.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-
-/* A party/slot record (only the fields copied here). */
-typedef struct SlotRecord {
-    /* 0x00 */ u8 unk00[0x2A];
-    /* 0x2A */ u16 statA;
-    /* 0x2C */ u16 statB;
-    /* 0x2E */ u8 unk2e[0x2C];
-    /* 0x5A */ u8 unk5a[4];
-    /* 0x5E */ u16 flagsB;
-    /* 0x60 */ u16 flags;
-    /* 0x62 */ u16 word;
-    /* 0x64 */ u16 statC;
-} SlotRecord;
 
 /* The screen block's per-slot arrays (five slots each). */
 typedef struct SlotScreen {
@@ -37,19 +27,10 @@ typedef struct SlotScreen {
     /* 0x4BB0 */ s32 counts[5];
 } SlotScreen;
 
-typedef struct SlotTable {
-    u8 unk0000[0x1C9F];
-    s8 stock[5];
-} SlotTable;
-
-s32 saveSlotFindSelected(void);
-SlotRecord *gameGetPlayerData(void);
-SlotRecord *gameGetSlotRecord(s32 index);
-SlotTable *gameGetSlotTable(void);
-SlotRecord *btlMainGetUnk14(void);
+SlotRecordA *btlMainGetUnk14(void);
 s32 btlScriptUnitHasFlags(u32 job);
 s32 uiEntryGetState(u32 job, s32 slot);
-s32 bitsAt60Test(SlotRecord *record, u32 bit);
+s32 bitsAt60Test(SlotRecordA *record, u32 bit);
 void btlQueueActionMessage(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
 
 /* Refreshes slot `slot` of the screen: clears its stats, then fills them from the player, the
@@ -70,18 +51,18 @@ void FUN_0023f328(SlotScreen *screen, s32 slot, s32 reset)
     }
     if (slot == 0) {
         if (screen->mode == 0) {
-            SlotRecord *player = gameGetPlayerData();
+            PlayerDataA *player = gameGetPlayerData();
 
-            screen->statA[0] = player->statA;
-            screen->statB[0] = player->statB;
-            screen->statC[0] = player->word;
+            screen->statA[0] = player->hp;
+            screen->statB[0] = player->mp;
+            screen->statC[0] = player->level;
             screen->slotRef[0] = 0xFFFF;
             screen->word[0] = 0xFFFFFFFF;
-            screen->unavailable[0] = (player->flagsB & 2) != 0 ? 1 : 0;
+            screen->unavailable[0] = (player->ailments & 2) != 0 ? 1 : 0;
             return;
         }
         if (screen->mode == 1) {
-            SlotRecord *unit = btlMainGetUnk14();
+            SlotRecordA *unit = btlMainGetUnk14();
 
             if (unit == NULL) {
                 screen->unavailable[0] = 1;
@@ -90,44 +71,44 @@ void FUN_0023f328(SlotScreen *screen, s32 slot, s32 reset)
             if (reset != 0) {
                 screen->slotRef[0] = 0xFFFE;
             }
-            screen->statA[0] = unit->statA;
-            screen->statB[0] = unit->statB;
-            screen->statC[0] = unit->statC;
-            screen->word[0] = unit->word;
+            screen->statA[0] = unit->hp;
+            screen->statB[0] = unit->mp;
+            screen->statC[0] = unit->level;
+            screen->word[0] = unit->id;
             screen->unavailable[0] = bitsAt60Test(unit, 1) != 0 ? 1 : 0;
             return;
         }
     } else if (slot == 4) {
-        SlotRecord *saved = (SlotRecord *)saveSlotFindSelected();
+        PartySlotA *saved = saveSlotFindSelected();
 
         if (partySlotIsOccupied(saved) == 0) {
             return;
         }
-        screen->statA[4] = saved->statA;
+        screen->statA[4] = saved->record.hp;
         screen->slotRef[4] = 0xFFFD;
-        screen->word[4] = saved->word;
+        screen->word[4] = saved->record.id;
         return;
     }
-    SlotTable *table = gameGetSlotTable();
+    SaveSlotTableA *table = gameGetSlotTable();
 
     if (screen->counts[slot] > 0) {
         if (reset != 0) {
-            screen->slotRef[slot] = table->stock[slot];
+            screen->slotRef[slot] = table->reserve[slot - 1];
         }
         if (screen->slotRef[slot] >= 0) {
-            SlotRecord *record = gameGetSlotRecord(screen->slotRef[slot]);
+            SlotRecordA *record = gameGetSlotRecord(screen->slotRef[slot]);
 
-            if ((record->flags & 0x400) != 0) {
-                table->stock[slot] = (s8)0xFF;
+            if ((record->ailments & 0x400) != 0) {
+                table->reserve[slot - 1] = (s8)0xFF;
                 screen->unavailable[slot] = 1;
                 if (btlScriptUnitHasFlags(screen->job) == 0) {
                     btlQueueActionMessage(0, 0, 0x1000295, 0, 1, 0, 0);
                 }
             } else {
-                screen->statA[slot] = record->statA;
-                screen->statB[slot] = record->statB;
-                screen->statC[slot] = record->statC;
-                screen->word[slot] = record->word;
+                screen->statA[slot] = record->hp;
+                screen->statB[slot] = record->mp;
+                screen->statC[slot] = record->level;
+                screen->word[slot] = record->id;
                 screen->unavailable[slot] = 0;
                 if (bitsAt60Test(record, 1) != 0 && uiEntryGetState(screen->job, slot) == 0) {
                     screen->unavailable[slot] = 1;

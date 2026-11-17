@@ -1,4 +1,5 @@
 /* NON_MATCHING: same control flow as retail (shared step increment, duplicated sprite loops, out-of-line else), but the build keeps different values in r5-r8 (retail hoists 0 into r8 and the outgoing sprite pointer into r5) and stores stage/state with strd. */
+#include "ui/UiSpriteApi.h"
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
 #include "code/Code0039.h"
@@ -8,10 +9,6 @@
 extern "C" {
 
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
-s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
-s32 vec2GetXInt(const UiSpriteState *sprite);
-s32 vec2GetYInt(const UiSpriteState *sprite);
-s32 uiSpriteGetCompletionState(const void *record);
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
 void commonBgStopChildAndBeginTransition(void);

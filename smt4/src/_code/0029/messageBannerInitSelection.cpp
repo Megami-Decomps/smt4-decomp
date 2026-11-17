@@ -1,12 +1,10 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 #include "code/Code0029_Smt4.h"
 
 extern "C" {
 u32 FUN_002d8c28(void);
 const u32 *gameGetSlotTable(void);
-void uiSpriteStateInitFromSource(void *widget, u32 kind, s32 id, void *context, u32 style, f32 scale);
-void pairSetFirstResetSecond(void *widget, s32 value);
-void spriteStartAnimationByIndex(void *widget, s32 animation);
 
 /* Initializes the banner's selected value and default widget settings. */
 u32 messageBannerInitSelection(u8 mode, s32 useCurrentValue)

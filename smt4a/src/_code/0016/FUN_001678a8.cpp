@@ -1,7 +1,7 @@
 /* NON_MATCHING: initial message-state load register and final state-pop tail-call lowering differ. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "util/BitsAndBytes.h"
 
@@ -41,7 +41,6 @@ void efctSetSpeed(f32);
 void gxResetColorQuadToWhite();
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 void effectRenderTransformedInstance(UiSpriteState *, f32);
-void pairSetSecondResetFirst(UiSpriteState *, u32);
 
 void FUN_001678a8(MessageWindowA *message)
 {

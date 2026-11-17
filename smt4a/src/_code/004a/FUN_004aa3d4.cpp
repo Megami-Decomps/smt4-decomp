@@ -1,5 +1,5 @@
 /* NON_MATCHING: global UI ownership is corrected; attack-label resource accessors and shared case exits still differ. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/GameDataAccess.h"
 #include "mapnavi/naviMain.h"
@@ -30,7 +30,6 @@ struct UnitState {
     u8 *action;                  /* 0x28 */
 };
 
-extern BtlUiGlobalsA g_btlUi;
 extern u32 g_btlScriptUnit;        /* 0x57113c */
 
 s32 resourceRunOperationIfUnblocked(u8 *list);

@@ -36,6 +36,10 @@ typedef struct BtlUiObjC {
             u8 prefix[0x882];
             /* 0x3900 */ BtlUiUnitRecord records[4];
         } unitRecords;
+        struct {
+            u8 prefix[0x19A];
+            /* 0x3218 */ u8 cursor[0x6E8];  /* the support-unit selection list */
+        } supportSelection;
     };
     /* 0x5758 */ s32 columnCount;
     /* 0x575c */ u8 unk575C[0x1c];
@@ -70,12 +74,23 @@ struct BtlUiPositionRequestRow {
     BtlUiPositionRequest entries[32];
 };
 
-typedef struct BtlUiAnimationGroup {
-    s8 active;
-    u8 unk01[0x1B];
-    s8 disabled;
-    u8 unk1D[0x3E3];
-} BtlUiAnimationGroup;
+/* One number popup (0x400 bytes, from 0x8C in the battle UI's objD in both games): five digit
+ * sprites, two label sprites and the state that places them. */
+typedef struct BtlUiNumberSlot {
+    /* 0x000 */ UiSpriteState digitSprites[5];
+    /* 0x2BC */ UiSpriteState labelSprites[2];
+    /* 0x3D4 */ BattleUiActionVector position;
+    /* 0x3E0 */ s8 active;
+    /* 0x3E1 */ u8 anchored;      /* whether the position is kept on screen (3D depth shift) */
+    /* 0x3E2 */ u8 unk3E2[2];
+    /* 0x3E4 */ u32 digitTimers[5];
+    /* 0x3F8 */ s32 number;
+    /* 0x3FC */ s8 disabled;
+    /* 0x3FD */ u8 unk3FD[3];
+} BtlUiNumberSlot;
+typedef char BtlUiNumberSlotLayoutCheck[offsetof(BtlUiNumberSlot, position) == 0x3D4 &&
+    offsetof(BtlUiNumberSlot, active) == 0x3E0 && offsetof(BtlUiNumberSlot, number) == 0x3F8 &&
+    offsetof(BtlUiNumberSlot, disabled) == 0x3FC && sizeof(BtlUiNumberSlot) == 0x400 ? 1 : -1];
 typedef struct BtlUiAnimationMarker {
     s8 active;
     u8 unk01[0x17];
@@ -86,6 +101,7 @@ typedef struct BtlUiAnimationMarkerRow {
 typedef struct BtlUiObjD {
     union {
         /* 0x0000 */ u8 unk[0x7180];
+        /* 0x0000 */ UiSpriteState sprite;
         struct {
             u8 prefix[0x4124];
             BtlUiAvailabilityRow rows[1];
@@ -102,9 +118,9 @@ typedef struct BtlUiObjD {
             s8 counts[1];
         } availabilityCounts;
         struct {
-            u8 prefix[0x46C];
-            BtlUiAnimationGroup groups[1];
-        } animationGroups;
+            u8 prefix[0x8C];
+            BtlUiNumberSlot slots[16];
+        } numbers;
         struct {
             u8 prefix[0x4B38];
             BtlUiAnimationMarkerRow rows[1];
@@ -117,6 +133,16 @@ typedef struct BtlUiObjD {
             u8 prefix[0x61EC];
             BattleUiActionSlot slots[12];
         } actionRequests;
+        /* The battle command window (0xC9D8 in BtlUi). */
+        struct {
+            u8 prefix[0x4B18];
+            /* 0x4B18 */ u8 active;
+            /* 0x4B19 */ u8 unk4B19[3];
+            /* 0x4B1C */ s32 timer;          /* set to 40 when the window opens */
+            /* 0x4B20 */ s32 unk4B20;
+            /* 0x4B24 */ u32 kind;           /* the command */
+            /* 0x4B28 */ u16 value;          /* the command's skill or item */
+        } commandWindow;
     };
 } BtlUiObjD;
 typedef char BtlUiObjDAvailabilityOffsetsCheck[
@@ -129,27 +155,41 @@ typedef char BtlUiObjDAvailabilityOffsetsCheck[
     sizeof(BtlUiAvailabilityRow) == 0xA0 &&
     sizeof(BtlUiAvailabilityCell) == 0x14 ? 1 : -1];
 typedef char BtlUiObjDAnimationOffsetsCheck[
-    offsetof(BtlUiObjD, animationGroups.groups) == 0x46C &&
+    offsetof(BtlUiObjD, numbers.slots) == 0x8C &&
     offsetof(BtlUiObjD, animationMarkers.rows) == 0x4B38 &&
     offsetof(BtlUiObjD, animationCounts.counts) == 0x573C &&
-    offsetof(BtlUiAnimationGroup, disabled) == 0x1C &&
-    sizeof(BtlUiAnimationGroup) == 0x400 && sizeof(BtlUiAnimationMarker) == 0x18 &&
+    sizeof(BtlUiAnimationMarker) == 0x18 &&
     sizeof(BtlUiAnimationMarkerRow) == 0xC0 && sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
+typedef char BtlUiCommandWindowOffsetCheck[
+    offsetof(BtlUiObjD, commandWindow.active) == 0x4B18 &&
+    offsetof(BtlUiObjD, commandWindow.value) == 0x4B28 ? 1 : -1];
 typedef char BtlUiActionRequestsOffsetCheck[
     offsetof(BtlUiObjD, actionRequests.slots) == 0x61EC &&
     sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
+
+/* Two words the panel hands back to its caller as a pair. */
+typedef struct BtlUiValuePair {
+    u32 first;
+    u32 second;
+} BtlUiValuePair;
 
 /* Panel status is embedded at 0x7e00; its active flag belongs to the sprite animation. */
 typedef struct BtlUiPanelState {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u32 unk20;
-    /* 0x24 */ u8 unk24[0x14];
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ BtlUiValuePair firstPair;
+    /* 0x30 */ BtlUiValuePair secondPair;
     /* 0x38 */ s32 state;
     /* 0x3C */ u8 unk3C[0x0C];
     /* 0x48 */ u8 requiresTargetSelection;
-    /* 0x49 */ u8 unk49[2];
+    /* 0x49 */ u8 pairFlag;              /* reported with the two pairs */
+    /* 0x4A */ u8 unk4A;
     /* 0x4B */ u8 spriteActive;
 } BtlUiPanelState;
+typedef char BtlUiPanelStateLayoutCheck[offsetof(BtlUiPanelState, firstPair) == 0x28 &&
+    offsetof(BtlUiPanelState, state) == 0x38 && offsetof(BtlUiPanelState, pairFlag) == 0x49 &&
+    sizeof(BtlUiPanelState) == 0x4C ? 1 : -1];
 
 typedef struct BtlUiSettings {
     /* 0x00 */ u16 slotRanks[4];
@@ -181,12 +221,25 @@ typedef struct BtlUiGlobals {
 } BtlUiGlobals;
 
 /* Apocalypse layout: the same four widgets at other offsets. */
-typedef struct BtlUiObjAA { /* 0x0000 */ u8 unk[0x24B4]; } BtlUiObjAA;
+typedef struct BtlUiObjAA {
+    union {
+        /* 0x0000 */ u8 unk[0x24B4];
+        struct {
+            u8 prefix[0x23F8];
+            /* 0x23F8 */ u8 subobject[0xBC];  /* FUN_00502754 returns the panel that follows it */
+        } tail;
+    };
+} BtlUiObjAA;
 typedef struct BtlUiObjBA { /* 0x0000 */ u8 unk[0x408]; } BtlUiObjBA;
 typedef struct BtlUiObjCA { /* 0x0000 */ u8 unk[0x38B0]; } BtlUiObjCA;
 typedef struct BtlUiObjDA {
     union {
         /* 0x0000 */ u8 unk[0x5AA4];
+        /* 0x0000 */ UiSpriteState sprite;
+        struct {
+            u8 prefix[0x8C];
+            /* 0x75B4 in BtlUiA */ BtlUiNumberSlot slots[16];
+        } numbers;
         struct {
             u8 unk0000[0x3D8];
             BattleUiBankStatus banks[16];
@@ -221,17 +274,23 @@ typedef struct BtlUiA {
             /* 0x6AF4 */ BtlUiUnitRecordA records[4];
         } unitRecords;
     };
-    /* 0x7488 */ u32 unk7488;
-    /* 0x748C */ u8 unk748C[0x14];
+    /* 0x7488 */ u32 unk7488;              /* the preview controller, deleted on teardown */
+    /* 0x748C */ u8 unk748C[4];
+    /* 0x7490 */ BtlUiValuePair firstPair;
+    /* 0x7498 */ BtlUiValuePair secondPair;
     /* 0x74A0 */ s32 state;
-    /* 0x74A4 */ u8 unk74A4[0x0F];
+    /* 0x74A4 */ u8 unk74A4[0x0D];
+    /* 0x74B1 */ u8 pairFlag;              /* reported with the two pairs */
+    /* 0x74B2 */ u8 unk74B2;
     /* 0x74B3 */ s8 spriteActive;
     /* 0x74B4 */ u8 unk74B4[2];
     /* 0x74B6 */ u16 unk74B6;
     /* 0x74B8 */ u16 unk74B8;
-    /* 0x74BA */ u8 unk74BA[0x42];
+    /* 0x74BA */ u8 unk74BA[2];
+    /* 0x74BC */ u16 listedIds[0x20];
     /* 0x74FC */ u16 ids[4];
-    /* 0x7504 */ u8 unk7504[0x24];
+    /* 0x7504 */ s8 listedIdCount;
+    /* 0x7505 */ u8 unk7505[0x23];
     /* 0x7528 */ BtlUiObjDA objD;
     /* 0xCFCC */ union {
         u8 unkCFCC[0x6000];
@@ -274,7 +333,8 @@ typedef char BtlUiColumnLayoutCheck[sizeof(BtlUiColumnRecord) == 0x2c &&
     sizeof(BtlUiObjC) == 0x59a0 &&
     offsetof(BtlUiObjC, unk307C) == 0x307c &&
     offsetof(BtlUiObjC, columnCount) == 0x5758 &&
-    offsetof(BtlUiObjC, columns) == 0x5778 ? 1 : -1];
+    offsetof(BtlUiObjC, columns) == 0x5778 &&
+    offsetof(BtlUiObjC, supportSelection.cursor) == 0x3218 ? 1 : -1];
 typedef char BtlUiLayoutCheck[sizeof(BtlUi) == 0xf040 &&
     offsetof(BtlUi, objC) == 0x2460 &&
     offsetof(BtlUi, panelState) == 0x7e00 &&
@@ -286,6 +346,10 @@ typedef char BtlUiARequestOffsetsCheck[sizeof(BtlUiObjDA) == 0x5AA4 &&
     sizeof(BtlUiA) == 0x12FD0 && offsetof(BtlUiA, objD.requests.banks) == 0x7900 &&
     offsetof(BtlUiA, requestCounts.counts) == 0xF064 ? 1 : -1];
 
+typedef char BtlUiAPanelOffsetsCheck[offsetof(BtlUiA, firstPair) == 0x7490 &&
+    offsetof(BtlUiA, pairFlag) == 0x74B1 && offsetof(BtlUiA, listedIds) == 0x74BC &&
+    offsetof(BtlUiA, listedIdCount) == 0x7504 && offsetof(BtlUiA, objD.numbers.slots) == 0x75B4 &&
+    offsetof(BtlUiA, objA.tail.subobject) == 0x2400 ? 1 : -1];
 typedef char BtlUiObjDAAvailabilityOffsetsCheck[
     offsetof(BtlUiObjDA, availability.rows) == 0x40D8 &&
     offsetof(BtlUiA, objD.availability.rows) == 0xB600 &&

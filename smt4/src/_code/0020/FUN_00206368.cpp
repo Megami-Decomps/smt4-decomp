@@ -1,9 +1,9 @@
 /* NON_MATCHING: visibility clearing unrolls into direct byte stores instead of retail's per-sprite accessor loop; alternate branch layout and ID constants differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/SpriteRowList.h"
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
-void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 layer);
 
 void FUN_00206368(SpriteRowList *list, u32 alternate, u16 rowCount, u16 selectedRow)
 {
@@ -15,7 +15,7 @@ void FUN_00206368(SpriteRowList *list, u32 alternate, u16 rowCount, u16 selected
     list->cursor = 0;
     list->state = 2;
     for (s32 index = 0; index < 61; ++index)
-        list->sprites[index].visibility.active = 0;
+        list->sprites[index].updated = 0;
     for (s32 row = 0; row < list->rowCount; ++row) {
         if (list->alternate) {
             pairSetFirstResetSecond(&list->sprites[row], 1);

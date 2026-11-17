@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script command: stores scrPopInt's result into the variable named by the instruction's argument. */
-u32 scrOpStoreIntVar(ScriptVmProcess *process)
+u32 scrOpStoreIntVar(ScriptProcess *process)
 {
     s32 value = scrPopInt(process);
 

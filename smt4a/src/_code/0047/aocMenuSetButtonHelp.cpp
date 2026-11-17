@@ -1,19 +1,10 @@
 #include "classes/AocMenu.h"
+#include "addon/aocMain.h"
 #include "classes/Obj422214Owner.h"
 #include "shard/Shard004A.h"
 #include "shard/W6_W6Match2_StatusBytes.h"
 
-/* The part of the add-on main block that holds the per-slot records (0x9c8 bytes each). */
-struct AocSlotTableView {
-    /* 0x000 */ u8 unk000[0x678];
-    /* 0x678 */ Obj422214Owner *records;
-    /* 0x67C */ u32 count;
-};
-typedef char AocSlotTableViewOffsets[
-    offsetof(AocSlotTableView, records) == 0x678 && offsetof(AocSlotTableView, count) == 0x67c ? 1 : -1];
-
 extern "C" {
-extern AocSlotTableView *g_aocMain;
 
 void sysPlaySe(u32 id);
 void FUN_00182084(void);
@@ -23,7 +14,7 @@ void ifTouchDecrementTimer(void);
 void buttonHelpSetText(const s8 *text, u32 color);
 void buttonHelpSetPanelState(u8 value);
 void buttonHelpSetSelectedId(u16 value);
-u8 countOwnerIsValidIndex(const AocSlotTableView *owner, u32 index);
+u8 countOwnerIsValidIndex(const AocMain *owner, u32 index);
 u32 statusDecodeActivityState(const StatusBytes *status);
 
 enum {
@@ -45,7 +36,7 @@ static __inline u32 selectedSlot(const AocMenu *menu)
     return flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&menu->selection));
 }
 
-static __inline Obj422214Owner *selectedRecord(AocSlotTableView *main, const AocMenu *menu)
+static __inline Obj422214Owner *selectedRecord(AocMain *main, const AocMenu *menu)
 {
     return &main->records[selectedSlot(menu)];
 }
@@ -92,7 +83,7 @@ void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode)
         return;
     case 2: {
         menu->flags |= AOC_MENU_HELP_SHOWN;
-        AocSlotTableView *main = g_aocMain;
+        AocMain *main = g_aocMain;
         selectedSlot(menu);
         if (mode != 0) {
             sysPlaySe(0xcd);

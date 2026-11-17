@@ -4,7 +4,6 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 job, u32 kind);
 WindowStatusResult FUN_003df5d0(u32 *parameters, AocEnumerationResult *enumeration,
                               AocContentRecord *records, s32 capacity, s32 offset);

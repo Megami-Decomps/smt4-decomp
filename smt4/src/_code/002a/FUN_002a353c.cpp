@@ -17,9 +17,9 @@ void FUN_002a353c(EffectTimelinePart *owner, u32 packed)
         effectColorMultiply(&DAT_004ea81c.color, &DAT_004ea81c.color, &DAT_004ea81c.factor);
         u32 color = effectColorPack(DAT_004ea81c.color);
         Resource *resource = child->block;
-        void (*apply)(void *, s32) = g_handlerTable[resource->type].callback30;
+        void (*apply)(void *, u32) = g_handlerTable[resource->type].setPackedColor;
         if (apply != NULL) {
-            apply(resource->data, (s32)color);
+            apply(resource->data, color);
         }
     }
 }

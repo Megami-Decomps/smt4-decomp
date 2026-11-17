@@ -1,12 +1,11 @@
 /* NON_MATCHING: Glyph-case tail layout, work/index saved registers, timer argument scheduling and the selected-field address differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 #include <stddef.h>
 
 extern "C" {
-void spriteStartAnimationByIndex(ButtonHelpDisplayUnit *unit, s32 value);
 u16 FUN_002aa024(s32 resource, s32 glyph);
-void FUN_002a9fdc(ButtonHelpDisplayUnit *unit, s32 value);
-void timerStart(ButtonHelpDisplayUnit *unit, s32 mode, s32 value);
+void FUN_002a9fdc(UiSpriteState *unit, s32 value);
 void FUN_002ae028(void *animation);
 
 void FUN_002ae5e0(void)
@@ -17,8 +16,8 @@ void FUN_002ae5e0(void)
         s32 phase;
         s32 state;
         u8 unk014[0x20];
-        ButtonHelpDisplayUnit choices[6];
-        ButtonHelpDisplayUnit sides[2];
+        UiSpriteState choices[6];
+        UiSpriteState sides[2];
         ButtonHelpKind kinds[6];
         u16 glyphs[6];
         s32 cursor;

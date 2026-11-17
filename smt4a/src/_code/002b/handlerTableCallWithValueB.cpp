@@ -2,14 +2,14 @@
 
 extern "C" {
 
-/* Runs the handler's callback at 0x24 (if its type has one) on the resource data and `arg`. */
-void handlerTableCallWithValueB(Resource *resource, s32 arg)
+/* Sets the resource's orientation through its type's handler, if it has one. */
+void handlerTableCallWithValueB(Resource *resource, const f32 *orientation)
 {
-    void (*callback)(void *data, s32 arg);
+    void (*callback)(void *data, const f32 *orientation);
 
-    callback = g_handlerTable[resource->type].callback24;
+    callback = g_handlerTable[resource->type].setOrientation;
     if (callback != NULL) {
-        callback(resource->data, arg);
+        callback(resource->data, orientation);
         return;
     }
 }

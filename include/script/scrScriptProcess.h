@@ -1,45 +1,63 @@
-/* script/scrScriptProcess.c: script resources. */
+/* script/scrScriptProcess.c: script processes (ScriptProcess, script/ScriptVm.h) built from
+ * loaded FLW0 script files and kept in one list. */
 #ifndef SCRIPT_SCRSCRIPTPROCESS_H
 #define SCRIPT_SCRSCRIPTPROCESS_H
 
 #include "common.h"
+#include "script/ScriptVm.h"
 
-/* A script resource node (doubly linked list). */
-typedef struct ScriptResource {
-    /* 0x00 */ u8 unk00[0xD4];
-    /* 0xD4 */ void *bufC;                /* heap block, freed on release */
-    /* 0xD8 */ u8 unkD8[0x10];
-    /* 0xE8 */ void *bufA;                /* heap block, freed on release */
-    /* 0xEC */ void *bufB;                /* heap block, freed on release */
-    /* 0xF0 */ struct ScriptResource *prev;
-    /* 0xF4 */ struct ScriptResource *next;
-} ScriptResource;
-
-typedef struct ScriptResourceList {
-    /* 0x00 */ s32 count;
-    /* 0x04 */ ScriptResource *head;
-    /* 0x08 */ ScriptResource *tail;
-} ScriptResourceList;
-
-/* Prefix used when a freshly created script is put into execution mode. */
-struct ScriptRunState {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ s32 mode;
+/* The section types of a script file. */
+enum ScriptSectionType {
+    SCRIPT_SECTION_NAMES = 0,
+    SCRIPT_SECTION_LABELS = 1,
+    SCRIPT_SECTION_CODE = 2,
+    SCRIPT_SECTION_DATA = 3,
+    SCRIPT_SECTION_STRINGS = 4
 };
-typedef char ScriptRunStateModeOffsetCheck[
-    __INTADDR__(&((ScriptRunState *)0)->mode) == 0x108 ? 1 : -1];
+
+/* A section table entry of a script file (0x10 bytes). */
+struct ScriptFileSection {
+    /* 0x00 */ u32 type;            /* ScriptSectionType */
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ s32 size;
+    /* 0x0C */ u32 offset;          /* from the start of the file */
+};
+
+/* A script file ("FLW0"): header, then the section table (observed fields). */
+struct ScriptFile {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ char magic[4];
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ s32 sectionCount;
+    /* 0x14 */ s16 intVariableCount;
+    /* 0x16 */ s16 floatVariableCount;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ ScriptFileSection sections[1];
+};
+
+/* Every live script process, in creation order. */
+struct ScriptProcessList {
+    /* 0x00 */ s32 count;
+    /* 0x04 */ ScriptProcess *head;
+    /* 0x08 */ ScriptProcess *tail;
+};
 
 extern "C" {
+
+extern ScriptProcessList g_scrScriptResources;
+
+/* Creates a script process from a loaded script file (`script`); `owner` becomes its
+ * commandOwner. Returns NULL when the file is not a usable script. */
+ScriptProcess *scrScriptProcessCreate(void *script, void *owner);
+
+/* Frees a process, its variables and its command allocation, and unlinks it. */
+void scrScriptProcessDestroy(ScriptProcess *process);
+
 void FUN_00298d50(u32 value);
-}
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 /* Canonical declaration (matches the definition). */
 u32 FUN_0022fbc0(void *screen);
-#ifdef __cplusplus
-}
-#endif
+
+} /* extern "C" */
 
 #endif

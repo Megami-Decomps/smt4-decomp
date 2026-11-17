@@ -1,12 +1,10 @@
 /* NON_MATCHING: tiled frame behavior restored; tile pointer scheduling differs and retail target contains only the first word of the 24-byte tile-kind literal. */
 #include "frame_tex/FrameTex.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/ComWin/ComWin.h"
 
 extern "C" {
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
 void FUN_002a9fdc(UiSpriteState *sprite, s32 key, s32 mode);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 group, s32 image);
 void soundPlaySeUnpanned(u32 sound);

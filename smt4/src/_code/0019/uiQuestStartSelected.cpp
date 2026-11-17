@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the state-change stores differ: retail stores the previous state, then the new one with a writeback (str [r0,#8]; str [r0,#4]!) and the timer through that pointer; the build merges them into stm */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "code/Code0029_VariantB.h"
 
@@ -38,7 +39,6 @@ void uiQuestCountDetailPages(u32 id);
 void FUN_00290404(void);
 void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
-void spriteStartAnimationByIndex(u8 *panel, s32 value);
 s32 scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 resourceRunOperationIfUnblocked(u8 *list);
 
@@ -60,7 +60,7 @@ void uiQuestStartSelected(void)
     gameGetOptionProgressStatus();
     gameOptionsEnableAndReset();
     uiQuestCountDetailPages(id);
-    spriteStartAnimationByIndex(quest->panel, 2);
+    spriteStartAnimationByIndex((UiSpriteState *)quest->panel, 2);
     uiBindRecordRewardText(id, 0, 1);
     if (scrScriptProcessStartEntry(quest->script, 3) != 0) {
         buttonHelpSetPreset(0x9e);

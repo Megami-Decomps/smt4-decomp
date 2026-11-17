@@ -1,16 +1,11 @@
 #include "AsdSDK/AsdMemAlloc.h"
+#include "classes/AllocatorState.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
 
-struct AllocationLockOwner {
-    u32 unk00;
-    u32 *mutex; // 0x04, points at the mutex handle
-};
-
 extern "C" {
 
-extern AllocationLockOwner g_allocationAddressRanges; /* 0x5b4028 */
 void asdAllocatorLock(void);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void rt_memclr(void *buffer, u32 size);

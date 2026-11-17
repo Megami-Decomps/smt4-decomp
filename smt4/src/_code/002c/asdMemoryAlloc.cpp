@@ -1,5 +1,6 @@
 /* NON_MATCHING: header setup inlined like smt4a FUN_001844ac; only the scheduling of the padding computation against the header stores differs (retail computes the misalignment first). */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "classes/AllocatorState.h"
 #include "bible/bibleDevil.h"
 
 /* The header in front of an aligned allocation; the word just before the user data points back at it. */
@@ -10,9 +11,7 @@ struct AlignedAllocationHeader {
     /* 0x08 */ u8 unk08[0x34];
 };
 typedef char AlignedAllocationHeaderSize[sizeof(AlignedAllocationHeader) == 0x3C ? 1 : -1];
-struct MemoryAllocationGlobals { u32 unk00; void *lock; };
 extern "C" {
-extern MemoryAllocationGlobals DAT_00465120;
 void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
 void *FUN_002b24d8(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);

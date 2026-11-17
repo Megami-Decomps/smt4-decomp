@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 /* NON_MATCHING: the placement and show/hide tail match; in the camera-distance test retail reloads `flags` after the square root (the build keeps it in r1) and allocates the deltas to s1/s2/s0, and the rise step's float registers differ. */
 #include "classes/Obj42233c.h"
 #include "map/LmapGlobals.h"
@@ -5,9 +6,9 @@
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "game/GameState.h"
 
+/* NodeEnableResource is this code's partial view of the model (AsdMdlNode). */
 extern "C" {
 f32 sqrtf(f32 value);
-void nodeSetTranslation(NodeEnableResource *node, s32 index, const f32 *position);
 void modelPartSetRotationDegrees(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(NodeEnableResource *node, s32 index, f32 x, f32 y, f32 z);
 }
@@ -39,7 +40,7 @@ void Obj42233c::stop()
             basePosition[2] + offset[2]
         };
         NodeEnableNode *node = (NodeEnableNode *)handle;
-        nodeSetTranslation(node->resource, 0, translated);
+        nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(node->resource), 0, translated);
         modelPartSetRotationDegrees(((NodeEnableNode *)handle)->resource, 0, rotation[0], rotation[1], rotation[2]);
         nodeSetScale(((NodeEnableNode *)handle)->resource, 0, scale[0], scale[1], scale[2]);
         if ((flags & 4) != 0) {

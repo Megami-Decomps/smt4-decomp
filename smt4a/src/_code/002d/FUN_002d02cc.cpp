@@ -1,6 +1,6 @@
 /* NON_MATCHING: armcc loads the view pointer before the flag check; retail loads it after (ldrne). Everything else matches. */
 #include "battle/btlView.h"
-extern "C" float mathPositionHeadingDegrees(BattleViewVec3 from, BattleViewVec3 to);
+#include "util/MathFunctions.h"
 
 extern "C" {
 extern BattleViewState g_battleViewState;

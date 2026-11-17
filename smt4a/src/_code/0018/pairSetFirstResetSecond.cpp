@@ -1,20 +1,8 @@
-#include "common.h"
-#include "sys/RuntimeObjects.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" {
-
-typedef struct Pair {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 first;
-    /* 0x08 */ u32 second;
-} Pair;
-
-/* Sets the first word to `first` and the second to -1. */
-void pairSetFirstResetSecond(void *handle, u32 first)
+/* Shows image `image` of the sprite's texture table, dropping the secondary image. */
+extern "C" void pairSetFirstResetSecond(UiSpriteState *sprite, s32 image)
 {
-    Pair *object = static_cast<Pair *>(handle);
-    object->first = first;
-    object->second = 0xFFFFFFFF;
+    sprite->image = image;
+    sprite->secondaryImage = -1;
 }
-
-} /* extern "C" */

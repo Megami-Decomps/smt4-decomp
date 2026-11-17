@@ -1,86 +1,59 @@
 /* NON_MATCHING: endpoint/sequence register lifetimes, cold completion exit and interpolation scheduling differ; redundant mirror stores are omitted. */
-#include "ui/UiSpriteState.h"
-
-struct UiSpriteScaleSequenceStep {
-    u8 unk00[0x14];
-    s32 key;
-    s8 reverse;
-    u8 unk19[3];
-};
-// A private view of the scale channel, whose sequence uses a different key
-// displacement from the vertical and frame sequence formats.
-struct SpriteScaleTrackView {
-    u8 prefix[0x64];
-    UiSpriteScalarKey *keys;
-    s16 key;
-    u16 elapsed;
-    s8 reverse;
-    u8 unk6D[0xB];
-    UiSpriteScaleSequenceStep *sequence;
-    u8 unk7C[4];
-    s16 step;
-};
-typedef char SpriteScaleTrackViewOffsets[
-    offsetof(SpriteScaleTrackView, keys) == 0x64 &&
-    offsetof(SpriteScaleTrackView, reverse) == 0x6C &&
-    offsetof(SpriteScaleTrackView, sequence) == 0x78 &&
-    offsetof(SpriteScaleTrackView, step) == 0x80 &&
-    sizeof(UiSpriteScaleSequenceStep) == 0x1C ? 1 : -1];
+#include "ui/UiSpriteApi.h"
 
 static __inline void uiSpriteBeginScaleStep(UiSpriteState *sprite, s16 index, s8 reverse)
 {
-    SpriteScaleTrackView *track = (SpriteScaleTrackView *)sprite;
-    track->key = index;
-    track->elapsed = 0;
-    track->reverse = reverse;
-    sprite->animationFlags.completed = 0;
-    const UiSpriteScalarKey *key = &track->keys[index];
-    sprite->unk24 = reverse ? key->last : key->first;
+    sprite->scaleKey = index;
+    sprite->scaleFrame = 0;
+    sprite->scaleReverse = reverse;
+    sprite->finished = 0;
+    const UiSpriteScalarKey *key = &sprite->scaleKeys[index];
+    sprite->scale[0] = reverse ? key->last : key->first;
 }
 
+// Advances the scale track by `rate` frames: interpolates its key, then loops it or continues with the next command.
 extern "C" void FUN_00182348(UiSpriteState *sprite, f32 rate)
 {
-    SpriteScaleTrackView *track = (SpriteScaleTrackView *)sprite;
-    if (sprite->completion.scale || track->keys == NULL) {
-        sprite->completion.scale = 1;
+    if (sprite->scaleDone || sprite->scaleKeys == NULL) {
+        sprite->scaleDone = 1;
         return;
     }
-    const UiSpriteScalarKey *key = &track->keys[track->key];
-    f32 current = sprite->unk24;
+    const UiSpriteScalarKey *key = &sprite->scaleKeys[sprite->scaleKey];
+    f32 current = sprite->scale[0];
     f32 delta = key->last - key->first;
-    f32 direction = track->reverse ? key->first - key->last : delta;
-    f32 target = track->reverse ? key->first : key->last;
+    f32 direction = sprite->scaleReverse ? key->first - key->last : delta;
+    f32 target = sprite->scaleReverse ? key->first : key->last;
     bool reached = direction < 0.0f ? target >= current : target <= current;
     if (reached) {
         if (key->loop) {
-            sprite->unk24 = track->reverse ? key->last : key->first;
-            track->elapsed = 0;
+            sprite->scale[0] = sprite->scaleReverse ? key->last : key->first;
+            sprite->scaleFrame = 0;
         } else {
-            sprite->unk24 = target;
-            if (sprite->sequence.enabled && track->sequence != NULL &&
-                track->sequence[track->step].key != -1) {
-                UiSpriteScaleSequenceStep *sequence = track->sequence;
-                ++track->step;
-                const UiSpriteScaleSequenceStep *step = &sequence[track->step];
-                if (step->key == -1 || step->key == -3) {
-                    sprite->completion.scale = 1;
-                } else if (step->key == -2) {
-                    track->step = 0;
-                    uiSpriteBeginScaleStep(sprite, (s16)sequence[0].key, sequence[0].reverse);
+            sprite->scale[0] = target;
+            if (sprite->commandsRunning && sprite->commands != NULL &&
+                sprite->commands[sprite->scaleStep].scaleKey != -1) {
+                const SpriteAnimationCommand *commands = sprite->commands;
+                ++sprite->scaleStep;
+                const SpriteAnimationCommand *step = &commands[sprite->scaleStep];
+                if (step->scaleKey == -1 || step->scaleKey == -3) {
+                    sprite->scaleDone = 1;
+                } else if (step->scaleKey == -2) {
+                    sprite->scaleStep = 0;
+                    uiSpriteBeginScaleStep(sprite, (s16)commands[0].scaleKey, commands[0].scaleReverse);
                 } else {
-                    uiSpriteBeginScaleStep(sprite, (s16)step->key, step->reverse);
+                    uiSpriteBeginScaleStep(sprite, (s16)step->scaleKey, step->scaleReverse);
                 }
             } else {
-                sprite->completion.scale = 1;
+                sprite->scaleDone = 1;
             }
         }
     } else {
         f32 duration = (f32)(u32)key->duration / rate;
-        if (track->reverse)
+        if (sprite->scaleReverse)
             delta = key->first - key->last;
-        sprite->unk24 = delta / duration + current;
-        ++track->elapsed;
+        sprite->scale[0] = delta / duration + current;
+        ++sprite->scaleFrame;
     }
-    sprite->unk28 = sprite->unk24;
-    sprite->unk2C = sprite->unk24;
+    sprite->scale[1] = sprite->scale[0];
+    sprite->scale[2] = sprite->scale[0];
 }

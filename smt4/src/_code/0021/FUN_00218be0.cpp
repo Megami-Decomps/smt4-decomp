@@ -1,15 +1,13 @@
 /* NON_MATCHING: retail stores cursor/mode with a writeback str pair (no stm) and copies the zero register into the loop counter. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "font/ComWin/ComWin.h"
 
-struct PanelSlot {
-    u8 unk00[0x8c];
-};
 
 struct PanelList {
     u8 unk0000[0x20];
-    PanelSlot first[10];   // 0x0020, 0x8c bytes each
-    PanelSlot second[10];  // 0x0598
+    UiSpriteState first[10];   // 0x0020, 0x8c bytes each
+    UiSpriteState second[10];  // 0x0598
     u8 unk0b10[0x217c - 0xb10];
     u32 cursor;            // 0x217c
     u32 mode;              // 0x2180

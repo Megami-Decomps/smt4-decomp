@@ -1,4 +1,4 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -6,7 +6,6 @@ void FUN_001a9104(BtlUiObjCA *obj, u16 *ids);
 void fillTwoWordsWithByte(u16 *ids, s32 value);
 u16 uiFindValidIdOrdinal(u32 owner, s32 index);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void btlUiIdsRefresh(void)
 {

@@ -9,7 +9,6 @@ struct AocModelStatus {
 };
 
 extern "C" {
-extern AocMain *g_aocMain;
 s32 btlTalkBustUpGetValue(void);
 s32 objGetFlagBit16(AocMain *main);
 AocModelStatus *packageFindFileRefByName(void *owner, s32 category, s32 model);

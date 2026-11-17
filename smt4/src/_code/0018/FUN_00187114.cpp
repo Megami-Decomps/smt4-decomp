@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00187114` (_code @ 0x187114, 0x1408 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -74,8 +75,6 @@ extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -153,7 +152,7 @@ void FUN_00187114(int param_1,int param_2)
         if (*(int *)(temp_v2 + 0x40c) >= 9) {
           temp_v5 = FUN_0029d644(temp_v18);
           if (temp_v5 == temp_v3 + 1) {
-            temp_v9 = vec2GetXInt(temp_v2 + 0x2e4);
+            temp_v9 = vec2GetXInt((UiSpriteState *)(temp_v2 + 0x2e4));
           }
           goto LAB_0018730c;
         }
@@ -164,7 +163,7 @@ LAB_0018730c:
           if (*(int *)(temp_v2 + 0x53c) == temp_v3) {
             temp_v9 = *(int *)(temp_v2 + 0x40c);
             if (temp_v9 >= 9) {
-              temp_v9 = vec2GetXInt(temp_v2 + 0x2e4);
+              temp_v9 = vec2GetXInt((UiSpriteState *)(temp_v2 + 0x2e4));
               goto LAB_0018733c;
             }
             temp_v9 = temp_v9 * -0x28;
@@ -183,7 +182,7 @@ LAB_0018733c:
               temp_v9 = temp_v9 * -0x28;
             }
             else {
-              temp_v9 = vec2GetXInt(temp_v2 + 0x2e4);
+              temp_v9 = vec2GetXInt((UiSpriteState *)(temp_v2 + 0x2e4));
             }
           }
         }
@@ -400,9 +399,9 @@ LAB_001876ec:
                 gxSetMirroredClippedScissor((int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                              (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                              (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
-                temp_v8 = vec2GetYInt(temp_v2 + 0x1cc);
+                temp_v8 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0x1cc));
                 temp_v1 = *(short *)(temp_v9 + 10);
-                temp_v5 = vec2GetXInt(temp_v2 + 0x1cc);
+                temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v2 + 0x1cc));
                 texDrawTableEntryAtStoredOrigin(2,0x1a,0x502,temp_v5 + param_1 + (int)*(short *)(temp_v9 + 8),
                              temp_v8 + param_2 + (int)temp_v1,0xc9);
                 temp_v8 = g_titleScene;

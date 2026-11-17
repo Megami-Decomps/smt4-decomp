@@ -10,7 +10,6 @@ static inline void placeTextChangeState(PlaceTextTransition *transition, s32 nex
 
 extern "C" {
 u32 FUN_004962e4(SceneResourceWaitState *state);
-ScriptProcess *scrScriptProcessCreate(void *source, u32 size);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void titleSetSlotValueState2(s32 screen, s32 frames);
 const PlaceTextRecord *dataTable17Type1GetEntry(PlaceTextTableCursor *cursor, s32 index);
@@ -23,10 +22,11 @@ void placeWinStartText(const char *text);
 void _ZN9Obj53604412FUN_0049569cEv(PlaceTextTransition *transition)
 {
     if (FUN_004962e4(reinterpret_cast<SceneResourceWaitState *>(transition)) != 0) {
-        ScriptProcess *process = scrScriptProcessCreate(transition->layoutSource, transition->layoutSize);
+        /* The owner word is the layout size here. */
+        ScriptProcess *process = scrScriptProcessCreate(transition->layoutSource, reinterpret_cast<void *>(transition->layoutSize));
         transition->first = process;
         scriptProcessSetMode(process, 2);
-        process = scrScriptProcessCreate(transition->layoutSource, transition->layoutSize);
+        process = scrScriptProcessCreate(transition->layoutSource, reinterpret_cast<void *>(transition->layoutSize));
         transition->second = process;
         scriptProcessSetMode(process, 2);
         titleSetSlotValueState2(0, 10);

@@ -1,6 +1,6 @@
 #include "font/InfoWin.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -13,8 +13,6 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, s32 group, s32 id, UiResourceParameters *parameters, s32 flags, f32 scale);
-void timerStart(UiSpriteState *sprite, s32 mode, s32 frame);
 void *asdTextCreate(u32 flags);
 void asdTextSetBaseColor(void *text, u32 color);
 void positionStateSet(void *text, u32 mode, u32 color, f32 position);

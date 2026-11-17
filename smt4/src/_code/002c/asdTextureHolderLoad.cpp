@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_TextureHolder.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_TextureHolder.h"
 

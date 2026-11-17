@@ -1,7 +1,6 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void menu32EnterState27(void *section);
 /* Sets the battle menu argument and enters state 27. */
 void FUN_004ac044() {

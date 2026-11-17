@@ -13,7 +13,6 @@ struct AttachmentNodeView {
 };
 
 extern "C" {
-void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
 void modelGetBoneTranslationByName(AsdMdlNode *, const char *, f32 *);
 void textFormatBuffer(char *, const char *, ...);
 void FUN_002c159c(void *camera, f32 first, f32 second);

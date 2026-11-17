@@ -1,4 +1,4 @@
-/* Releases a script resource: frees its buffers, unlinks it from the resource list and frees it. */
+/* Releases a script process: frees its variables and command allocation, unlinks it from the process list and frees it. */
 #include "common.h"
 #include "script/scrScriptProcess.h"
 
@@ -6,42 +6,41 @@ extern "C" {
 
 int asdMemFree(void *ptr);               /* heap free */
 
-extern ScriptResourceList g_scrScriptResources;
 
-/* Removes a resource from the global resource list. */
-static inline void scriptResourceUnlink(ScriptResource *res)
+/* Removes a process from the global process list. */
+static inline void scriptProcessUnlink(ScriptProcess *process)
 {
-    if (g_scrScriptResources.head == res) {
-        g_scrScriptResources.head = res->next;
+    if (g_scrScriptResources.head == process) {
+        g_scrScriptResources.head = process->next;
     } else {
-        res->prev->next = res->next;
+        process->prev->next = process->next;
     }
-    if (g_scrScriptResources.tail == res) {
-        g_scrScriptResources.tail = res->prev;
+    if (g_scrScriptResources.tail == process) {
+        g_scrScriptResources.tail = process->prev;
     } else {
-        res->next->prev = res->prev;
+        process->next->prev = process->prev;
     }
-    res->prev = NULL;
-    res->next = NULL;
+    process->prev = NULL;
+    process->next = NULL;
     g_scrScriptResources.count--;
 }
 
-void scrScriptProcessDestroy(ScriptResource *res)
+void scrScriptProcessDestroy(ScriptProcess *process)
 {
-    if (res->bufA != NULL) {
-        asdMemFree(res->bufA);
-        res->bufA = NULL;
+    if (process->intVariables != NULL) {
+        asdMemFree(process->intVariables);
+        process->intVariables = NULL;
     }
-    if (res->bufB != NULL) {
-        asdMemFree(res->bufB);
-        res->bufB = NULL;
+    if (process->floatVariables != NULL) {
+        asdMemFree(process->floatVariables);
+        process->floatVariables = NULL;
     }
-    if (res->bufC != NULL) {
-        asdMemFree(res->bufC);
-        res->bufC = NULL;
+    if (process->allocation != NULL) {
+        asdMemFree(process->allocation);
+        process->allocation = NULL;
     }
-    scriptResourceUnlink(res);
-    asdMemFree(res);
+    scriptProcessUnlink(process);
+    asdMemFree(process);
 }
 
 } /* extern "C" */

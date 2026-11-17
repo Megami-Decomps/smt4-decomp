@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match2_HelpResources.h"
+#include "script/scrScriptProcess.h"
 
 struct QuestTalkActor {
     u8 unk000[0x1fc];
@@ -25,7 +26,6 @@ struct QuestTalkWork {
 extern "C" {
 void sysPlaySe(s32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **output, s32 flags);
-ScriptProcess *scrScriptProcessCreate(void *bytecode, void *messages);
 u32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 s32 scrRunOpcodesStub(ScriptProcess *script);

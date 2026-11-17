@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028fce8` (_code @ 0x28fce8, 0x578 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
 
-int uiSpriteSelectAnim(...);
 int sysPlayVoice(int);
 
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -51,7 +51,7 @@ void FUN_0028fce8(int param_1,int param_2,int param_3)
       do {
         temp_v4 = ((temp_v3 - *(short *)(param_1 + 0x244a)) - unaff_r6) + 0x13;
         if (*piVar4 != 0) {
-          pairSetFirstResetSecond((void *)(param_1 + temp_v4 * 0x8c + 0x20),8);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + temp_v4 * 0x8c + 0x20)),8);
         }
         else {
           temp_v1 = btlIsDefeatSuppressed();
@@ -61,12 +61,12 @@ void FUN_0028fce8(int param_1,int param_2,int param_3)
           else {
             temp_v2 = 0xa5;
           }
-          pairSetFirstResetSecond((void *)(param_1 + temp_v4 * 0x8c + 0x20),temp_v2);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + temp_v4 * 0x8c + 0x20)),temp_v2);
         }
         unaff_r9 = param_1 + (((temp_v3 - *(short *)(param_1 + 0x244a)) - unaff_r6) + 0x31) * 0x8c;
-        uiSpriteSelectAnim(unaff_r9 + 0x20,10);
+        uiSpriteSelectAnim((UiSpriteState *)(unaff_r9 + 0x20),10);
         if (*piVar4 != 0) {
-          pairSetFirstResetSecond((void *)(unaff_r9 + 0x20),0xfa7);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(unaff_r9 + 0x20)),0xfa7);
         }
         else {
           temp_v4 = btlIsDefeatSuppressed();
@@ -74,7 +74,7 @@ void FUN_0028fce8(int param_1,int param_2,int param_3)
           if (temp_v4 == 0) {
             temp_v2 = unaff_r11;
           }
-          pairSetFirstResetSecond((void *)(unaff_r9 + 0x20),temp_v2);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(unaff_r9 + 0x20)),temp_v2);
         }
         unaff_r6 = unaff_r6 + 1;
       } while (unaff_r6 < *(short *)(param_1 + 0x244e));
@@ -96,55 +96,55 @@ void FUN_0028fce8(int param_1,int param_2,int param_3)
   }
   if (temp_v0 >= 1) {
     do {
-      uiSpriteSelectAnim(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x20,2);
-      uiSpriteSelectAnim(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x598,2);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x20),2);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x598),2);
       temp_v3 = *(short *)(param_1 + 0x2448) + unaff_r6;
       if (temp_v3 < 4) {
         if (temp_v3 == 0) {
-          uiSpriteSelectAnim(temp_v4,unaff_r9);
+          uiSpriteSelectAnim((UiSpriteState *)temp_v4,unaff_r9);
         }
-        uiSpriteSelectAnim(param_1 + temp_v3 * 0x8c + 0x2208,unaff_r9);
+        uiSpriteSelectAnim((UiSpriteState *)(param_1 + temp_v3 * 0x8c + 0x2208),unaff_r9);
       }
       if (*piVar4 != 0) {
-        pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x20),1);
-        pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xb10),8);
-        pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1088),3);
-        pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1600),unaff_r11);
+        pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x20)),1);
+        pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xb10)),8);
+        pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1088)),3);
+        pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1600)),unaff_r11);
         temp_v3 = *(short *)(param_1 + 0x2448) + unaff_r6;
         if (temp_v3 < 4) {
           if (temp_v3 == 0) {
-            pairSetFirstResetSecond((void *)(temp_v4),0xbd);
+            pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v4)),0xbd);
           }
-          pairSetFirstResetSecond((void *)(param_1 + temp_v3 * 0x8c + 0x2208),0xbc - temp_v3);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + temp_v3 * 0x8c + 0x2208)),0xbc - temp_v3);
         }
       }
       else {
         temp_v3 = btlIsDefeatSuppressed();
         temp_v1 = param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x20;
         if (temp_v3 != 0) {
-          pairSetFirstResetSecond((void *)(temp_v1),0xa3);
-          pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xb10),0xa5);
-          pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1088),0xa4);
-          pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1600),0xfb0);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v1)),0xa3);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xb10)),0xa5);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1088)),0xa4);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1600)),0xfb0);
           temp_v3 = *(short *)(param_1 + 0x2448) + unaff_r6;
           if (temp_v3 < 4) {
             if (temp_v3 == 0) {
-              pairSetFirstResetSecond((void *)(temp_v4),0xc2);
+              pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v4)),0xc2);
             }
-            pairSetFirstResetSecond((void *)(param_1 + temp_v3 * 0x8c + 0x2208),0xc1 - temp_v3);
+            pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + temp_v3 * 0x8c + 0x2208)),0xc1 - temp_v3);
           }
         }
         else {
-          pairSetFirstResetSecond((void *)(temp_v1),0);
-          pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xb10),7);
-          pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1088),2);
-          pairSetFirstResetSecond((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1600),4000);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v1)),0);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xb10)),7);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1088)),2);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x1600)),4000);
           temp_v3 = *(short *)(param_1 + 0x2448) + unaff_r6;
           if (temp_v3 < 4) {
             if (temp_v3 == 0) {
-              pairSetFirstResetSecond((void *)(temp_v4),0xb8);
+              pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v4)),0xb8);
             }
-            pairSetFirstResetSecond((void *)(param_1 + temp_v3 * 0x8c + 0x2208),0xb7 - temp_v3);
+            pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + temp_v3 * 0x8c + 0x2208)),0xb7 - temp_v3);
           }
         }
       }
@@ -153,16 +153,16 @@ void FUN_0028fce8(int param_1,int param_2,int param_3)
   }
   else if (temp_v0 < 0) {
     do {
-      uiSpriteSelectAnim((param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c) - 0x6c,8);
-      uiSpriteSelectAnim(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x50c,8);
-      uiSpriteSelectAnim(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xa84,9);
-      uiSpriteSelectAnim(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xffc,8);
+      uiSpriteSelectAnim((UiSpriteState *)((param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c) - 0x6c),8);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0x50c),8);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xa84),9);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + (*(short *)(param_1 + 0x2448) + unaff_r6) * 0x8c + 0xffc),8);
       temp_v1 = (int)*(short *)(param_1 + 0x2448) + (unaff_r6 - 1);
       if (temp_v1 < 4) {
         if (temp_v1 == 0) {
-          uiSpriteSelectAnim(temp_v4,temp_v3);
+          uiSpriteSelectAnim((UiSpriteState *)temp_v4,temp_v3);
         }
-        uiSpriteSelectAnim(param_1 + temp_v1 * 0x8c + 0x2208,temp_v3);
+        uiSpriteSelectAnim((UiSpriteState *)(param_1 + temp_v1 * 0x8c + 0x2208),temp_v3);
       }
       unaff_r6 = unaff_r6 - 1;
     } while (*(short *)(param_1 + 0x244c) < unaff_r6);

@@ -1,4 +1,6 @@
 #include "gamedata/FlagBitTests.h"
+#include "shard/PassiveSkill.h"
+#include "result/Result.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
 /* NON_MATCHING: reward/passive loops retain different registers and stack spills; first unit record now supplies the final member index and the money guard encloses its linker-inlined bonus query. */
@@ -23,32 +25,14 @@ struct BattleReward {
     s32 itemCount[REWARD_ITEM_SLOTS]; /* 0x24 */
 };
 
-/* Totals collected by the result screen (observed fields only). */
-struct ResultTotals {
-    u8 pad0000[0x35B4];
-    s32 totalExp;                   /* 0x35B4 */
-    s32 expByMember[PARTY_SLOTS];   /* 0x35B8 */
-    s32 itemId[REWARD_ITEM_SLOTS];  /* 0x3618 */
-    s32 itemCount[REWARD_ITEM_SLOTS]; /* 0x3630 */
-    s32 pad3648[2];
-    s32 totalMoney;                 /* 0x3650 */
-};
-
 struct SlotTable {
     u8 pad0000[0x90F0];
     s8 member[PARTY_SLOTS];         /* 0x90F0 */
 };
 
 
-struct PassiveSkill {
-    u8 pad00[0x2F];
-    u8 expBonusPercent;             /* 0x2F */
-};
-
-extern ResultTotals *g_result;      /* 0x44dc20 */
 
 u16 dataTable09Sub3GetRecord(s32 a, s32 b);
-PassiveSkill *passiveSkillLookupRecord(u32 skill);
 s32 playerPadTestBit(u32 bit);
 SlotTable *gameGetSlotTable(void);
 s32 questQueryFalse(void);
@@ -57,7 +41,7 @@ s32 questQueryFalse(void);
  * experience over the party members that are in the party, reduced for members not in the active slots. */
 void FUN_00223360(BattleReward *reward)
 {
-    ResultTotals *totals = g_result;
+    ResultWork *totals = g_result;
     SlotTable *slots = gameGetSlotTable();
     PlayerDataIV *player = gameGetPlayerData();
 
@@ -72,7 +56,7 @@ void FUN_00223360(BattleReward *reward)
             money += bonus;
         }
     }
-    totals->totalMoney += money;
+    totals->gold += money;
 
     for (s32 i = 0; i < REWARD_ITEM_SLOTS; i++) {
         s32 id = reward->itemId[i];
@@ -82,13 +66,13 @@ void FUN_00223360(BattleReward *reward)
         }
         if (id != 0 && count != 0) {
             for (s32 j = 0; j < REWARD_ITEM_SLOTS; j++) {
-                if (totals->itemId[j] == id) {
-                    totals->itemCount[j] += count;
+                if (totals->itemIds[j] == id) {
+                    totals->itemCounts[j] += count;
                     break;
                 }
-                if (totals->itemId[j] == 0) {
-                    totals->itemId[j] = id;
-                    totals->itemCount[j] = count;
+                if (totals->itemIds[j] == 0) {
+                    totals->itemIds[j] = id;
+                    totals->itemCounts[j] = count;
                     break;
                 }
             }
@@ -102,7 +86,7 @@ void FUN_00223360(BattleReward *reward)
         partyExp = 1;
     }
     if (playerPadTestBit(1) == 0 && playerPadTestBit(10) == 0) {
-        totals->totalExp += partyExp;
+        totals->totalExperience += partyExp;
     }
 
     for (s32 i = 0; i < PARTY_SLOTS; i++) {
@@ -122,9 +106,9 @@ void FUN_00223360(BattleReward *reward)
         f32 scale = 1.0f;
         for (s32 k = 0; k < 8; k++) {
             if (unit->skills.ids[k] != 0) {
-                PassiveSkill *skill = passiveSkillLookupRecord(unit->skills.ids[k]);
-                if (skill != 0 && skill->expBonusPercent != 0) {
-                    scale = (f32)skill->expBonusPercent * 0.01f * scale;
+                const PassiveSkillRecord *skill = passiveSkillLookupRecord(unit->skills.ids[k]);
+                if (skill != 0 && skill->experience.expBonus != 0) {
+                    scale = (f32)skill->experience.expBonus * 0.01f * scale;
                 }
             }
         }
@@ -139,7 +123,7 @@ void FUN_00223360(BattleReward *reward)
         if ((s32)value <= 0 && exp != 0) {
             value = 1;
         }
-        totals->expByMember[firstUnit->growth.slot] += value;
+        totals->unitExperience[firstUnit->growth.slot] += value;
     }
 }
 

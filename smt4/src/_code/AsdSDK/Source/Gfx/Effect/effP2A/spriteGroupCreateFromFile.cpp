@@ -1,4 +1,5 @@
 /* NON_MATCHING: input/count registers swap, constructor stores retain different pointer bases, and the paired flag tests fold to one TST with the cold tail inlined. -O2 candidate. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_SpriteTextureResource.h"
 #include "shard/W6_W6Match2_TextureHolder.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"

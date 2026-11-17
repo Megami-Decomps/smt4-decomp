@@ -4,10 +4,6 @@
 
 extern "C" {
 
-extern AocMainA *g_aocMain; /* 0x570260 */
-
-extern int objHasFlagBit16(AocMainA * context);
-
 /* Whether the context's check passes and packageFindRecordByName accepts kind 25 for the two arguments. */
 u32 FUN_00191f18(u32 slot, u32 arg)
 {

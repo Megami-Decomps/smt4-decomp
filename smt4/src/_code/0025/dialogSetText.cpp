@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWin.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -5,8 +6,6 @@ extern "C" {
 
 
 int asdTextDrawFormatted(void *textObject, int arg1, u32 arg2, int arg3, int arg4, void *text);
-int timerStart(void *window, int arg1, int arg2);
-int vec2GetXInt(void *window);
 void *rt_memcpy(void *dst, const void *src, u32 size);
 
 /* Sets the dialog text (NUL-terminated, at most 0x5a bytes): copies it, sizes the window around it and starts the message. */

@@ -2,11 +2,10 @@
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match3_NameFormStateA.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "util/BitsAndBytes.h"
 extern "C" {
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 
 // Draw layered form decorations, fading the foreground separately and restoring effect speed.
 void FUN_00485108(NameFormStateA *form, s32 x, s32 y, f32 speed)

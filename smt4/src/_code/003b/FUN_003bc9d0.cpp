@@ -67,7 +67,7 @@ s32 padIsButtonPressed(u32 button);
 static inline void modelFlagDestroyed(AsdMdlObject *model)
 {
     model->flags |= 2;
-    model->node->resource->positionFollowed = 0;
+    model->node->sceneNode->positionFollowed = 0;
 }
 
 /* Updates the title intro: loads the logo scene and camera on the first call, then plays it until

@@ -1,4 +1,5 @@
 /* NON_MATCHING: idle-clock clamp, texture queue reloads, and embedded-selector register allocation differ. */
+#include "ui/UiSpriteApi.h"
 #include "shard/S3SceneWidget.h"
 #include "shard/S1ListMenu.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 int jobStop(int job, int arg);
@@ -6,11 +7,6 @@ int dataTableFree(int id);
 int texSetRelease(void);
 int indexedSlotsClear(void *block);
 }
-
-typedef struct HandleRegistry {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ u32 flags;
-} HandleRegistry;
 
 /* The child object an owner releases when it stops. */
 class OwnerChild {
@@ -44,8 +40,6 @@ public:
 };
 
 extern "C" {
-
-extern HandleRegistry *g_handleRegistry;
 
 /* Releases the child, clears the registry flags 0-1, finishes the owner through its vtable and stops its job. */
 void jobOwnerStopB(JobOwner *owner)

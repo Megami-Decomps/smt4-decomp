@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00114474` (_code @ 0x114474, 0x1800 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "ui/MessageMain.h"
 
@@ -23,13 +24,10 @@ int mathInterpolateTimed(...);
 int gameDataCounterSpend(int);
 void uiLayoutSelectionSpritePair(void* context);
 int ifTouchRegionRemove(void);
-int pairSetFirstResetSecond(...);
 int msgBoxFlagsClear(...);
 int recordPackedValue(unsigned int);
 int eventQueueAddUnique(int);
-int uiSlidingSpriteAdvance(...);
 int eventQueueAddUniqueIfValid(...);
-int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
 int objFlagsSetBits(unsigned int, int);
 int VectorFloatToUnsigned(double, int);
@@ -127,14 +125,14 @@ unsigned int FUN_00114474(void)
     if (!temp_v10 || temp_v7 != '\0') {
       if (*(char *)(temp_v3 + 0x82) != '\x01') {
         if (*(char *)(temp_v3 + 0x82) == '\x02') {
-          temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x7e0);
+          temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x7e0));
           if (temp_v6 != 0) {
             *(unsigned char *)(temp_v3 + 0x82) = 3;
           }
         }
       }
       else {
-        temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x7e0);
+        temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x7e0));
         if (temp_v6 != 0) {
           *(unsigned char *)(temp_v3 + 0x82) = 3;
         }
@@ -145,7 +143,7 @@ unsigned int FUN_00114474(void)
       switch(*(unsigned char *)(temp_v3 + 0x7c)) {
       case 1:
         if ((*(char *)(DAT_0043e18c + 0x5f) == '\0') &&
-           (temp_v6 = uiSlidingSpriteAdvance(temp_v3 + 0x754,0), temp_v6 != 0)) {
+           (temp_v6 = uiSlidingSpriteAdvance((UiSpriteState *)(temp_v3 + 0x754),0), temp_v6 != 0)) {
           *(unsigned char *)(temp_v3 + 0x7c) = 2;
         }
         break;
@@ -230,7 +228,7 @@ unsigned int FUN_00114474(void)
         *(int *)(temp_v3 + 100) = *(int *)(temp_v3 + 100) + 1;
         break;
       case 4:
-        temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x754);
+        temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x754));
         if (temp_v6 != 0) {
           *(unsigned char *)(temp_v3 + 0x7d) = 0;
           *(unsigned char *)(temp_v3 + 0x7e) = 0;
@@ -241,7 +239,7 @@ unsigned int FUN_00114474(void)
     switch(*(unsigned char *)(DAT_0043e190 + 0x88)) {
     case 1:
       if ((*(char *)(DAT_0043e18c + 0x5f) == '\0') &&
-         (uiSlidingSpriteAdvance(DAT_0043e190 + 0x984,0), *(char *)(DAT_0043e190 + 0xa0e) != '\0')) {
+         (uiSlidingSpriteAdvance((UiSpriteState *)(DAT_0043e190 + 0x984),0), *(char *)(DAT_0043e190 + 0xa0e) != '\0')) {
         *(unsigned char *)(temp_v6 + 0x88) = 2;
       }
       break;
@@ -267,7 +265,7 @@ unsigned int FUN_00114474(void)
       }
       break;
     case 4:
-      temp_v4 = uiSpriteAdvanceAnimation(DAT_0043e190 + 0x984);
+      temp_v4 = uiSpriteAdvanceAnimation((UiSpriteState *)(DAT_0043e190 + 0x984));
       if (temp_v4 != 0) {
         *(unsigned char *)(temp_v6 + 0x88) = 2;
       }
@@ -291,7 +289,7 @@ unsigned int FUN_00114474(void)
             if ('\x05' < temp_v7) {
               *(unsigned char *)(temp_v4 + 0x41) = 0;
             }
-            pairSetFirstResetSecond(temp_v3 + temp_v6 * 0x8c + 0x498,(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
+            pairSetFirstResetSecond((UiSpriteState *)(temp_v3 + temp_v6 * 0x8c + 0x498),(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
           }
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < *(int *)(temp_v3 + 0x24));
@@ -344,7 +342,7 @@ LAB_001149c8:
       temp_v6 = *(int *)(temp_v3 + 0x18);
       temp_v10 = 0;
       if (temp_v7 == '\v') {
-        uiSpriteAdvanceAnimation(temp_v3 + 0x380);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x380));
         if (0 < *(int *)(temp_v3 + 0x60)) {
           *(int *)(temp_v3 + 0x60) = *(int *)(temp_v3 + 0x60) - 1;
         }
@@ -545,7 +543,7 @@ LAB_00114ee0:
       }
       break;
     }
-    uiSpriteAdvanceAnimation(temp_v3 + 0x2f4);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x2f4));
     temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x20);
     if ((temp_v6 != 0) && (temp_v6 = msgBoxFlagsTestAny(*(unsigned int *)(temp_v3 + 4),0x40), temp_v6 != 0)) {
       temp_v1 = 4;
@@ -575,13 +573,13 @@ joined_r0x00114a10:
            (!((temp_v7 == '\x10' || temp_v7 == '\x11') || temp_v7 == '\x12'))) {
           if (temp_v7 != '\x13') {
             if ((temp_v7 == '\a' || temp_v7 == '\b') || temp_v7 == '\t') {
-              uiSpriteAdvanceAnimation(temp_v3 + 0x40c);
+              uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x40c));
             }
-            temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
+            temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0xc4));
             if (temp_v6 != 0) goto LAB_00115134;
           }
           else {
-            uiSlidingSpriteAdvance(temp_v3 + 0xc4,0);
+            uiSlidingSpriteAdvance((UiSpriteState *)(temp_v3 + 0xc4),0);
             if (*(char *)(temp_v3 + 0x14e) != '\0') {
               *(unsigned char *)(temp_v3 + 8) = 1;
               temp_v2 = ifTouchRegionAddRequested(0x3a,0x98);
@@ -593,16 +591,16 @@ joined_r0x00114a10:
           }
         }
         else {
-          uiSpriteAdvanceAnimation(temp_v3 + 0x1dc);
-          temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
-          if ((temp_v6 != 0) && (temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0x150), temp_v6 != 0)) {
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x1dc));
+          temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0xc4));
+          if ((temp_v6 != 0) && (temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x150)), temp_v6 != 0)) {
             temp_v7 = *(char *)(temp_v3 + 0x266);
             goto joined_r0x001159d0;
           }
         }
         break;
       }
-      uiSpriteAdvanceAnimation(DAT_0043e18c + 0x2f4);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(DAT_0043e18c + 0x2f4));
       temp_v6 = 0;
       FUN_002c1658(0,1);
       if (temp_v6 == 0) {
@@ -626,8 +624,8 @@ LAB_001151a8:
           goto LAB_001151d8;
         }
 LAB_001151e4:
-        uiSlidingSpriteAdvance(temp_v3 + 0xc4,0);
-        uiSlidingSpriteAdvance(temp_v3 + 0x268,0);
+        uiSlidingSpriteAdvance((UiSpriteState *)(temp_v3 + 0xc4),0);
+        uiSlidingSpriteAdvance((UiSpriteState *)(temp_v3 + 0x268),0);
         if (*(char *)(temp_v3 + 9) == '\v') {
           temp_v7 = *(char *)(temp_v3 + 0xa12);
           if (temp_v7 != -0x23) {
@@ -769,14 +767,14 @@ LAB_001151e4:
         temp_v4 = temp_v3 + temp_v6;
         if (*(char *)(temp_v4 + 0x37) != '\0') {
           temp_v8 = temp_v3 + temp_v6 * 0x8c;
-          uiSpriteAdvanceAnimation(temp_v8 + 0x498);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v8 + 0x498));
           if ((*(unsigned char *)(temp_v8 + 0x520) & *(unsigned char *)(temp_v8 + 0x51f)) != 0) {
             temp_v7 = *(char *)(temp_v4 + 0x41) + '\x01';
             *(char *)(temp_v4 + 0x41) = temp_v7;
             if ('\x05' < temp_v7) {
               *(unsigned char *)(temp_v4 + 0x41) = 0;
             }
-            pairSetFirstResetSecond(temp_v8 + 0x498,(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
+            pairSetFirstResetSecond((UiSpriteState *)(temp_v8 + 0x498),(int)*(char *)(temp_v4 + 0x41) / 2 + 0x8b);
           }
           else {
             temp_v10 = 0;
@@ -800,7 +798,7 @@ LAB_00115134:
           if (((!(temp_v7 == '\x02' || temp_v7 == '\x03')) && (!(temp_v7 == '\x04' || temp_v7 == '\x05')))
              && (!((temp_v7 == '\x10' || temp_v7 == '\x11') || temp_v7 == '\x12'))) {
             if (((temp_v7 == '\a' || temp_v7 == '\b') || temp_v7 == '\t') &&
-               (uiSpriteAdvanceAnimation(temp_v3 + 0x40c), *(char *)(temp_v3 + 0xa12) != '\0')) {
+               (uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x40c)), *(char *)(temp_v3 + 0xa12) != '\0')) {
               if (*(char *)(temp_v3 + 0xa26) != '\0') {
                 buttonHelpSetPreset();
                 temp_v5 = 0;
@@ -813,7 +811,7 @@ LAB_00115134:
               }
               *(unsigned char *)(temp_v3 + 0xa12) = 0;
             }
-            temp_v6 = uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
+            temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0xc4));
             if (temp_v6 != 0) {
               *(unsigned char *)(temp_v3 + 8) = 0;
               msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
@@ -822,8 +820,8 @@ LAB_00115134:
             }
           }
           else {
-            uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
-            uiSpriteAdvanceAnimation(temp_v3 + 0x1dc);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0xc4));
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x1dc));
             if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x266) != '\0')) {
               *(unsigned char *)(temp_v3 + 8) = 0;
               msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
@@ -833,7 +831,7 @@ LAB_00115134:
           }
         }
         else {
-          uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0xc4));
           if (*(char *)(temp_v3 + 0x14e) != '\0') {
             *(unsigned char *)(temp_v3 + 8) = 0;
             msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
@@ -843,8 +841,8 @@ LAB_00115134:
         }
       }
       else {
-        uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
-        uiSpriteAdvanceAnimation(temp_v3 + 0x268);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0xc4));
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x268));
         if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x2f2) != '\0')) {
           *(unsigned char *)(temp_v3 + 8) = 0;
           msgBoxFlagsClearBit7(*(unsigned int *)(temp_v3 + 4));
@@ -874,7 +872,7 @@ LAB_00115134:
       if (0 < *(int *)(temp_v3 + 0x24)) {
         do {
           temp_v4 = temp_v3 + temp_v6 * 0x8c;
-          uiSpriteAdvanceAnimation(temp_v4 + 0x498);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v4 + 0x498));
           if (*(char *)(temp_v4 + 0x51f) != '\0') {
             *(unsigned char *)(temp_v3 + temp_v6 + 0x37) = 0;
           }
@@ -953,16 +951,16 @@ LAB_00114fc0:
   case 7:
     if ((*(char *)(temp_v3 + 9) != '\v') || (*(char *)(DAT_0043e190 + 0x5f) != '\0'))
     goto LAB_00115ab4;
-    uiSpriteAdvanceAnimation(temp_v3 + 0xc4);
-    uiSpriteAdvanceAnimation(temp_v3 + 0x268);
-    uiSpriteAdvanceAnimation(temp_v3 + 0x380);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0xc4));
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x268));
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v3 + 0x380));
     break;
   case 8:
     if (*(char *)(temp_v3 + 9) != '\v') goto LAB_00115ab4;
     if (*(char *)(DAT_0043e190 + 0x5f) != '\0') goto LAB_00114fbc;
-    uiSlidingSpriteAdvance(temp_v3 + 0xc4,0);
-    uiSlidingSpriteAdvance(temp_v3 + 0x268,0);
-    uiSlidingSpriteAdvance(temp_v3 + 0x380,0);
+    uiSlidingSpriteAdvance((UiSpriteState *)(temp_v3 + 0xc4),0);
+    uiSlidingSpriteAdvance((UiSpriteState *)(temp_v3 + 0x268),0);
+    uiSlidingSpriteAdvance((UiSpriteState *)(temp_v3 + 0x380),0);
     if ((*(char *)(temp_v3 + 0x14e) != '\0') && (*(char *)(temp_v3 + 0x2f2) != '\0')) {
       temp_v7 = *(char *)(temp_v3 + 0x40a);
 joined_r0x001159d0:

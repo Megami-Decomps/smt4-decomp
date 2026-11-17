@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003493dc` (_code @ 0x3493dc, 0x70c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "camp/PartyPanel/PartyPanel.h"
@@ -7,13 +8,11 @@
 
 extern "C" {
 
-int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 
 int taskCreateDraw(...);
 int asdOperatorNew(...);
 int asdMemoryAllocTracked(...);
-int uiSpriteSetKeyframe(...);
 int gameGetSlotTable(...);
 int gridNavigationConfigure(...);
 int FUN_00230ac0(...);
@@ -154,36 +153,36 @@ void FUN_003493dc(int param_1)
   paramsClearPacket(puVar8);
   paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 0x12), &DAT_0052d888,0xb4,&DAT_0052d93c,0xa8,&DAT_0052d9e4,0x18,0,0,
                &DAT_0052d9fc,0x39c);
-  uiSpriteStateInitFromSource(puVar2 + 0x1a,0x11,0x24,puVar2 + 0x12,0x6a);
-  uiSpriteSelectAnim(puVar2 + 0x1a,0);
-  uiSpriteStateInitFromSource(puVar2 + 0x3d,0x11,0x25,puVar2 + 0x12,0x6a);
-  uiSpriteSelectAnim(puVar2 + 0x3d,1);
-  uiSpriteStateInitFromSource(puVar2 + 0x60,0x11,0,puVar2 + 0x12,0x6a);
-  uiSpriteSetKeyframe(puVar2 + 0x60,4,0);
-  uiSpriteStateInitFromSource(puVar2 + 0x83,0x11,0,puVar2 + 0x12,0x6a);
-  uiSpriteSelectAnim(puVar2 + 0x83,2);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x1a),0x11,0x24, (UiResourceParameters *)(puVar2 + 0x12),0x6a, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x1a),0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x3d),0x11,0x25, (UiResourceParameters *)(puVar2 + 0x12),0x6a, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x3d),1);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x60),0x11,0, (UiResourceParameters *)(puVar2 + 0x12),0x6a, 1.0f);
+  uiSpriteSetKeyframe((UiSpriteState *)(puVar2 + 0x60),4,0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x83),0x11,0, (UiResourceParameters *)(puVar2 + 0x12),0x6a, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x83),2);
   temp_v1 = 0;
   do {
-    uiSpriteStateInitFromSource(puVar2 + temp_v1 * 0x23 + 0xa6,0x11,0,puVar2 + 0x12,0x6a);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + temp_v1 * 0x23 + 0xa6),0x11,0, (UiResourceParameters *)(puVar2 + 0x12),0x6a, 1.0f);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
-  uiSpriteStateInitFromSource(puVar2 + 0x132,0x11,0,puVar2 + 0x12,0x6a);
-  uiSpriteStateInitFromSource(puVar2 + 0x24a,0x11,1,puVar2 + 0x12,0x6a);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x132),0x11,0, (UiResourceParameters *)(puVar2 + 0x12),0x6a, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x24a),0x11,1, (UiResourceParameters *)(puVar2 + 0x12),0x6a, 1.0f);
   FUN_00230ac0(4,0xffffffff,0);
-  uiSpriteStateInitFromSource(puVar2 + 0x155,0x11,1000,puVar2 + 0x12,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x155,3);
-  uiSpriteStateInitFromSource(puVar2 + 0x178,0x11,1000,puVar2 + 0x12,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x178,4);
-  uiSpriteStateInitFromSource(puVar2 + 0x19b,0x11,0xb5,puVar2 + 0x12,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x19b,5);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x155),0x11,1000, (UiResourceParameters *)(puVar2 + 0x12),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x155),3);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x178),0x11,1000, (UiResourceParameters *)(puVar2 + 0x12),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x178),4);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x19b),0x11,0xb5, (UiResourceParameters *)(puVar2 + 0x12),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x19b),5);
   puVar2[0x485] = 0;
-  uiSpriteStateInitFromSource(puVar2 + 0x1be,0x11,0x160,puVar2 + 0x12,0xc9);
-  uiSpriteSelectAnim(puVar2 + 0x1be,6);
+  uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + 0x1be),0x11,0x160, (UiResourceParameters *)(puVar2 + 0x12),0xc9, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(puVar2 + 0x1be),6);
   temp_v1 = 0;
   do {
-    uiSpriteStateInitFromSource(puVar2 + temp_v1 * 0x23 + 0x1e1,0x11,temp_v1 + 0x161,puVar2 + 0x12,
-                 (int)(short)((short)temp_v1 + 0xca));
-    uiSpriteSelectAnim(puVar2 + temp_v1 * 0x23 + 0x1e1,7);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar2 + temp_v1 * 0x23 + 0x1e1),0x11,temp_v1 + 0x161, (UiResourceParameters *)(puVar2 + 0x12),
+                 (int)(short)((short)temp_v1 + 0xca), 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar2 + temp_v1 * 0x23 + 0x1e1),7);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
   gridNavigationConfigure(puVar2 + 0x309,4,1,4,1,1);

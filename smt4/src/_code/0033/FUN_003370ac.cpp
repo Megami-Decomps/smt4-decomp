@@ -3,7 +3,6 @@
 #include "battle/btlUnit.h"
 #include "gamedata/PlayerInitialization.h"
 #include "gamedata/NkmBaseRecord.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/SaveSlotTableIV.h"
 

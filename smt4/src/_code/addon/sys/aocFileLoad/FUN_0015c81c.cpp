@@ -6,7 +6,7 @@
 extern "C" {
 
 int aocResolveMountPath(...);
-u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
+u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(void *, const RequestParameters*, QueuedRequestHandle);
 u32 resourceResultMatchesRemappedCodes(const u32 *result);
 u32 resourceResultMatchesKnownRanges(const u32 *result);
 int asdLoadFileAsyncNoCallback(...);
@@ -432,7 +432,7 @@ LAB_0015cfcc:
           uStack_298, temp_v17, uStack_290
         );
         QueuedRequestHandle handle = {parameters.word(1), parameters.word(2)};
-        temp_v2 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+        temp_v2 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<void *>(g_aocMain),
                               &parameters, handle);
       }
       if (temp_v2 != 0) {

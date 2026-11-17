@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/Shard0049.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "event/2dEvent/SmokeFade.h"
 
 /* The scene past the class prefix: the sprite animation, current page and loaded resource. */
@@ -27,9 +27,6 @@ extern "C" {
 extern u32 g_handleRegistry;
 void FUN_0038b010(u8 value);
 void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
-void FUN_00167458(UiSpriteState *, s32);
-s32 vec2GetXInt(const UiSpriteState *);
-s32 vec2GetYInt(const UiSpriteState *);
 void pointConvertToFloat(AsdTextureRegion *, s32, s32);
 u32 tableGroupFindEntryIndex(u32, const char *);
 void scrScriptProcessStartEntry(void *, u32);
@@ -78,7 +75,7 @@ void Obj536044::FUN_00494740()
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);
         pointConvertToFloat(&scene->region, x, y);
-        if (uiSpriteGetCompletionState((const UiAnimatedSprite *)sprite)) {
+        if (uiSpriteGetCompletionState((const UiSpriteState *)sprite)) {
             scene->finishPageTransition();
         }
         break;

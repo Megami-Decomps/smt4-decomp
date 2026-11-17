@@ -5,7 +5,7 @@
 extern "C" {
 extern SaveLoadUIBaseA g_saveLoadUIBase;
 s32 saveLoadThreadHasResult(void);
-s32 scrRunOpcodesStub(ScriptRunState *script);
+s32 scrRunOpcodesStub(ScriptProcess *script);
 s32 byteArr5Get3(void);
 s32 byteTripleGetV0(void);
 void gameDataAddHomeButtonHold(u32 bits);
@@ -14,7 +14,7 @@ void messageMainSetFlag(s32 enabled);
 void sysPlaySe(s32 sound);
 void *gameDataBlocksGetSaveData(void);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
-void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void saveLoadProcessCreate(s32 slot, s32 mode);
 
 // Run a save operation, maintain the HOME-button hold and finish its success/failure script.
@@ -29,7 +29,7 @@ void FUN_0041dcc0(SaveLoadControllerA *controller)
             u8 started;
             u8 done;
             u8 unk012[0x2e];
-            ScriptRunState *script;
+            ScriptProcess *script;
             u8 unk044[0x18];
             u8 loading;
             u8 unk05d[0xf];

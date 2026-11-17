@@ -1,4 +1,5 @@
 /* NON_MATCHING: ordinal and accepted-count values remain in registers instead of retail argument homing; scene gate folds to direct addressing and return tails differ. */
+#include "ui/UiSpriteApi.h"
 #include "shard/PlayScene.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GameDataAccess_VariantE.h"

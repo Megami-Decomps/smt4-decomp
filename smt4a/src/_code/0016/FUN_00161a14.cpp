@@ -1,13 +1,11 @@
 /* NON_MATCHING: register allocation and how the 64-bit timeout is loaded (retail reads its halves with separate ldr, build with ldm). */
 #include "common.h"
-#include "shard/S3AsdGfxWait.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {
 
 s64 FUN_001623d0(void);
 void FUN_00170184(void);
-
-extern AsdGfxWaitContext g_asdGfxContext;
 
 /* Waits (yielding) while the context's waiting flag is set; when a timeout is set and runs out,
  * runs the timeout callback and returns. */
@@ -19,7 +17,7 @@ void FUN_00161a14(void)
         start = FUN_001623d0();
     }
     for (;;) {
-        if (g_asdGfxContext.waiting == 0) {
+        if (g_asdGfxContext.submitPending == 0) {
             return;
         }
         if (g_asdGfxContext.timeout != 0) {

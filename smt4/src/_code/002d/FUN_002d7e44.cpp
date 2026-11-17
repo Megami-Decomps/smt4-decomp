@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "title/titleMain.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/S1ListPanel.h"

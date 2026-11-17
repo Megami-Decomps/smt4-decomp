@@ -5,7 +5,7 @@ extern "C" {
 // Read a stack value relative to the top and convert it to a float.
 f32 scriptReadStackValueAsFloat(s32 depth)
 {
-    ScriptVmProcess* process = g_scrContext.active;
+    ScriptProcess* process = g_scrContext.active;
     s32 index = process->depth - depth - 1;
 
     switch (process->tags[index]) {

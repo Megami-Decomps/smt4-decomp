@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fc6e8` (_code @ 0x1fc6e8, 0x130c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "battle/btlTargetSelect.h"
 #include "shard/W6_W6Match8_BattleDebug.h"

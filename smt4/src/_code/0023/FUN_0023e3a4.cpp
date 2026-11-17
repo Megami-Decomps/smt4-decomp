@@ -3,10 +3,7 @@
 
 extern "C" {
 
-extern AocMain *g_aocMain;
-
 extern s32 packageFindRecordByName(u32 a, u32 b, u32 c);
-extern s32 objHasFlagBit16(AocMain * main);
 
 /* Returns 1 when objHasFlagBit16 passes (only checked when `check` is set) and packageFindRecordByName(a, 0x10, b) succeeds. */
 u32 FUN_0023e3a4(u32 a, u32 b, s32 check)

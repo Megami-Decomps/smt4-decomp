@@ -16,14 +16,13 @@ struct ItemExchangeWork {
     s32 previousState;
     void *screen;
     void *scriptResource;
-    ScriptRunState *script;
+    ScriptProcess *script;
     u32 unk1C;
     u32 key;
     ItemExchangeOffer offers[3];
 };
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-ScriptRunState *scrScriptProcessCreate(void *resource, void *screen);
 u32 flagValueRead(u32 item);
 
 /* Moves the exchange work to `state`, remembering the state it left and restarting its timer. */

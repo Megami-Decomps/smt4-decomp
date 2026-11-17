@@ -1,11 +1,11 @@
 #include "camp/CampState.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "gamedata/UnitStats.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable();
-StatBlock *gameGetUnitRecord(s32);
 void FUN_00283f30(UnitSummarySkills *, s32);
 void gridNavigationConfigure(GridNavigation *, u32, s32, s32, s32, s32);
 void FUN_00282f80(s32);
@@ -13,7 +13,7 @@ void FUN_00282f80(s32);
 void FUN_00262d40()
 {
     CampState *work = g_camp;
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     u32 count = 0;
     memClear(work->skills, sizeof(work->skills));
     UnitSummarySkills playerSkills;

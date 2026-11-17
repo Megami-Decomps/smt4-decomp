@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDown.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
@@ -5,7 +6,6 @@ extern "C" {
 
 
 
-extern void timerStart(void *timer, s32 id, s32 arg);
 extern void ifTouchRegionRemove(void);
 extern void *__aeabi_memset4(void *dest, s32 size, s32 value);
 extern void buttonHelpSetText(s32 arg, u32 color);

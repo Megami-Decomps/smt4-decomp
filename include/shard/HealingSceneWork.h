@@ -2,7 +2,7 @@
 #define SHARD_HEALINGSCENEWORK_H
 
 #include "common.h"
-#include "shard/ScriptProcess.h"
+#include "script/scrScriptProcess.h"
 
 /* A model of the Spring of Healing scene: a polymorphic object (slot 1 is the deleting
  * destructor) registered in g_handleRegistry through `object`. */

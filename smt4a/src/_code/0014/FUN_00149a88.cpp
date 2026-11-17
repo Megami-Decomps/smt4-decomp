@@ -1,9 +1,9 @@
-#include "shard/W6_W6Match5_DisplayMode.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 // Read a property of the selected graphics target, leaving unsupported queries unchanged.
 extern "C" void FUN_00149a88(u32 property, u32 *result)
 {
-    GraphicsTarget *target = g_asdGfxContext.query.targets[g_asdGfxContext.query.active];
+    AsdGfxTarget *target = g_asdGfxContext.targets[g_asdGfxContext.activeTarget];
     if (target == NULL)
         return;
     switch (property) {

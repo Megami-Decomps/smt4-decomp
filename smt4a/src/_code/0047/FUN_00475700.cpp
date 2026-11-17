@@ -15,7 +15,7 @@ int FUN_0042792c(...);
 int FUN_00427c38(int *, unsigned char [1024], int);
 int FUN_00427ff4(...);
 int stringFormatUnbounded(...);
-void aocApplicationRecreatePrimaryRequest(AocApplicationRequestView *app);
+void aocApplicationRecreatePrimaryRequest(struct AocMain *app);
 int FUN_00473980(...);
 int FUN_00474d0c(void);
 int FUN_00500244(...);
@@ -196,7 +196,7 @@ int * FUN_00475700(int param_1)
       temp_v14[2] = temp_v0 + 0xe3;
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
-    aocApplicationRecreatePrimaryRequest(reinterpret_cast<AocApplicationRequestView *>(temp_v0));
+    aocApplicationRecreatePrimaryRequest(reinterpret_cast<struct AocMain *>(temp_v0));
     textFormatBuffer(temp_v8,"ascending");
     textFormatBuffer(temp_v9,"SET_SALE_INDEX");
     textFormatBuffer(temp_v10,"integer");

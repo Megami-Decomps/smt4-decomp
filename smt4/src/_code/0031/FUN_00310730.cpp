@@ -1,13 +1,11 @@
 /* NON_MATCHING: retail is messageBannerInitSelection(0, 0) inlined from the same source file, with the mode value (0 for unk7F) kept in its own register r5 and 11 loaded before the text buffer address; a duplicated static inline (inlined, extern or static) folds the mode away and keeps the 0 in one register. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 #include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 
 u32 scrGetArg(u32 index);
-void uiSpriteStateInitFromSource(void *record, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
-void pairSetFirstResetSecond(void *pair, s32 first);
-void spriteStartAnimationByIndex(void *widget, s32 mode);
 
 /* Script command: open the banner message window with the text id from argument 0. */
 u32 FUN_00310730(void)

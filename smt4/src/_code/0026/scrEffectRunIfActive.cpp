@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct Context {
 } Context;
 
 Context *gameDataBlocksGetSaveData(void);
-int spriteStartAnimationByIndex(void *target, int arg);
 
 /* Script command: if the context is active, runs spriteStartAnimationByIndex on the banner's frame sprite. */
 u32 scrEffectRunIfActive(void)

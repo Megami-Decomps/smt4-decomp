@@ -1,9 +1,8 @@
 #include "ui/PartyPanelStateA.h"
-#include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 #include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
-PartyStatusSlots* gameGetSlotTable(void);
 void btlItemComputeValues(s32 unit, u16 item, s32* first, s32* second);
 void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
 s32 partyWidgetGetX(PartyPanelWidget *widget);
@@ -12,7 +11,7 @@ s32 partyWidgetGetCost(PartyPanelWidget *widget);
 void partyPanelRefreshItemPreview(void)
 {
     PartyPanelStateA *panel = g_partyPanel;
-    PartyStatusSlots* slots = gameGetSlotTable();
+    SaveSlotTableA* slots = gameGetSlotTable();
     s32 first = 0;
     s32 second = 0;
     if (panel->activeSlots[0]) {

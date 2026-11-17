@@ -2,14 +2,14 @@
 
 extern "C" {
 
-/* Runs the handler's callback at 0x20 (if its type has one) on the resource data and `arg`. */
-void resourceRunHandlerCallback(Resource *resource, s32 arg)
+/* Sets the resource's position through its type's handler, if it has one. */
+void resourceRunHandlerCallback(Resource *resource, const Vec4 *position)
 {
-    void (*callback)(void *data, s32 arg);
+    void (*callback)(void *data, const Vec4 *position);
 
-    callback = g_handlerTable[resource->type].callback20;
+    callback = g_handlerTable[resource->type].setPosition;
     if (callback != NULL) {
-        callback(resource->data, arg);
+        callback(resource->data, position);
         return;
     }
 }

@@ -1,11 +1,9 @@
 #include "common.h"
+#include "map/LmapMainGlobals.h"
 #include "game/GameStateA.h"
 #include "mikado/mikadoMain.h"
 
-// This music gate lies beyond the shared map-main state prefix.
-struct MapBgmGate { u8 unk000[0x9e1]; s8 blocked; };
 extern "C" {
-extern MapBgmGate *g_lmapMainState;
 s32 gameFlagIsSet(u32 flag);
 s32 bgmGetStateById(u32 id);
 void bgmResumeOrRequestTrack(u32 id);
@@ -13,9 +11,9 @@ void bgmResumeOrRequestTrack(u32 id);
 // Select the map music variant from story flags, avoiding restarts while it is active.
 void lmapUpdateMapBgm()
 {
-    MapBgmGate *gate = g_lmapMainState;
+    LmapMainStateA *map = g_lmapMainState;
     GameStateA *game = &g_gameState;
-    if (!game->scriptPending && game->bgmReleased && !gate->blocked) {
+    if (!game->scriptPending && game->bgmReleased && !map->bgmBlocked) {
         g_gameState.bgmId = 0x100003e;
         if (gameFlagIsSet(0x137) && !gameFlagIsSet(0x189)) {
             g_gameState.bgmId = 0x1000074;

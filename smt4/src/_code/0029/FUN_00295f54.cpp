@@ -1,6 +1,7 @@
 /* NON_MATCHING: resource slot and distinct message paths match; one address-add schedule and dialog-mode constant setup differ. */
 #include "gamedata/UnitStats.h"
 #include "code/Code002b_Smt4.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct UnitNotificationView {
     u8 unk0000[0x356C];
@@ -16,7 +17,6 @@ extern "C" {
 s32 dialogIsActive();
 s32 dialogGetTimer();
 void infoWinStartTimer(s32);
-const StatBlock *gameGetUnitRecord(s32);
 const char *dataTable01FindByIdWithAoc(u32);
 const char *demonGetRaceLabel(u16, u32);
 char *libc_strcpy(char *, const char *);

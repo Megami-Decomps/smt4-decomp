@@ -1,10 +1,9 @@
 #include "ui/PartyPanelState.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "script/ScriptArgs.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 extern "C" {
-PartyDamageSlotsIV* gameGetSlotTable(void);
 
 // Publishes the demon ID of the selected party slot or selected list entry.
 u32 FUN_00311154(void)

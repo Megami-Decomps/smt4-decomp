@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include "code/Code0029.h"
 #include "bible/bibleAnalyze.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 struct StatusCursor;
@@ -13,14 +14,9 @@ s32 flaggedValueHolderGetTotal(void *holder);
 void messageMainSetTargetFlags(s32 flags);
 void gameClearUnlockedSavedId(u32 id);
 void buttonHelpSetPreset(s32 preset);
-void uiSlidingSpriteAdvance(void *vec, s32 value);
-void uiSpriteAdvanceAnimation(void *vec);
 void statusOpenSkillSelection(u16 skill, s32 mode);
 u32 statusDownGetValue(void);
 s32 statusScreenIsClosed(void);
-u32 vec2GetYInt(void *vec);
-u32 vec2GetXInt(void *vec);
-s32 uiSpriteGetCompletionState(const void *record);
 
 // One selectable entry of the status list (0x20 bytes).
 struct StatusListEntry {
@@ -80,9 +76,9 @@ void Obj422448::FUN_003ab128()
         break;
     case 2: {
         StatusCursor *cursor = &flow->cursorB;
-        uiSpriteAdvanceAnimation(cursor);
-        pointConvertToFloat(flow->pointer, vec2GetXInt(cursor), vec2GetYInt(cursor));
-        if (uiSpriteGetCompletionState(cursor) != 0) {
+        uiSpriteAdvanceAnimation((UiSpriteState *)cursor);
+        pointConvertToFloat(flow->pointer, vec2GetXInt((const UiSpriteState *)cursor), vec2GetYInt((const UiSpriteState *)cursor));
+        if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) != 0) {
             flow->state++;
         }
         return;
@@ -104,9 +100,9 @@ void Obj422448::FUN_003ab128()
     }
     case 4: {
         StatusCursor *cursor = &flow->cursorA;
-        uiSlidingSpriteAdvance(cursor, 0);
-        pointConvertToFloat(flow->pointer, vec2GetXInt(cursor), vec2GetYInt(cursor));
-        if (uiSpriteGetCompletionState(cursor) == 0) {
+        uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
+        pointConvertToFloat(flow->pointer, vec2GetXInt((const UiSpriteState *)cursor), vec2GetYInt((const UiSpriteState *)cursor));
+        if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) == 0) {
             return;
         }
         if (buttonHelpIsNotActive() == 0) {

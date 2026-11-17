@@ -1,16 +1,8 @@
 #include "camp/Unite/UniteGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
-// The playback fields follow the shared model-node prefix.
-struct UniteModelPlayback : AsdMdlNode {
-    u8 unk30[0x44];
-    f32 speed; // 0x74
-    f32 frame; // 0x78
-};
-
 extern "C" {
 f32 sndObjectForwardField8(void *sound);
-AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, s32 bank);
 void modelSetScale(AsdMdlNode *node, f32 frame);
 void FUN_00210194(AsdMdlObject *model, f32 value);
 
@@ -26,9 +18,8 @@ void uniteLoadPreviewRoomModel(void)
         AsdMdlObject *model = *slot;
         if (model->flags & 4) {
             model->flags &= ~4;
-            UniteModelPlayback *playback = (UniteModelPlayback *)model->node;
-            playback->speed = 1.0f;
-            modelSetScale(model->node, ((UniteModelPlayback *)model->node)->frame);
+            model->node->animationSpeed = 1.0f;
+            modelSetScale(model->node, model->node->speed);
         }
         FUN_00210194(*slot, value);
     }

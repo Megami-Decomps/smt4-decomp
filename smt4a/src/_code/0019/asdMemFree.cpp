@@ -7,14 +7,13 @@
 
 extern "C" {
 
-extern AllocatorState g_allocationAddressRanges;
 
 void asdAllocatorLock(void);
 void *FUN_0017fe8c(void *memory);
 void asdMemoryFreeRegion(void *memory);
 
 /* Releases the allocator lock (a kernel mutex), reporting a failed release. */
-static __inline void allocatorUnlock(AllocatorState &state)
+static __inline void allocatorUnlock(AllocatorStateA &state)
 {
     s32 result = nn::svc::ReleaseMutex(*state.mutex);
     bool failed = nnResultIsFailure(result);
@@ -29,10 +28,10 @@ void asdMemFree(void *memory)
 {
     asdAllocatorLock();
     u32 address = (u32)memory;
-    u32 firstStart = g_allocationAddressRanges.firstRangeStart;
-    u32 secondStart = g_allocationAddressRanges.secondRangeStart;
-    if ((firstStart <= address && address <= firstStart + g_allocationAddressRanges.firstRangeSize) ||
-        (secondStart <= address && address <= secondStart + g_allocationAddressRanges.secondRangeSize)) {
+    u32 firstStart = g_allocationAddressRanges.regionBase[2];
+    u32 secondStart = g_allocationAddressRanges.regionBase[3];
+    if ((firstStart <= address && address <= firstStart + g_allocationAddressRanges.regionSize[2]) ||
+        (secondStart <= address && address <= secondStart + g_allocationAddressRanges.regionSize[3])) {
         asdMemoryFreeRegion(memory);
         allocatorUnlock(g_allocationAddressRanges);
     } else {

@@ -1,6 +1,6 @@
 /* NON_MATCHING: indexed neighbor accesses recover retail cell offsets; spawn-path load scheduling and VFP/register allocation still differ. */
 #include "shard/W5_W5Match7_SceneState.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 struct LmapCell {
@@ -24,14 +24,9 @@ struct LmapSpawn {
     /* 0x0c */ u8 unk0c[0x38];
 };
 
-struct LmapView {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ f32 heading;
-};
 
 extern "C" {
 extern LmapSpawn g_lmapSpawns[];
-extern LmapView *g_lmapView;
 s32 lmapGetSpawnIndex(void);
 
 // Place the map camera at its saved cell or at an explicit entry point.

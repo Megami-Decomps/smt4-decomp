@@ -40,9 +40,8 @@ struct QuestScene {
 };
 
 extern "C" {
-extern AocMain *g_aocMain;
 
-s32 sysLightEventTryWait(AocObjB *event);
+s32 sysLightEventTryWait(LightEvent *event);
 void uiSpriteAdvanceAnimation(PanelSprite *panel, f32 step);
 void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(JobOwner *owner);
@@ -57,7 +56,7 @@ void aocReleasePackageOwner(AocSystemA *system);
 // shuts down instead: it stops its job, clears the result and returns to state 17.
 void FUN_0047c36c(QuestScene *scene)
 {
-    if ((u32)(scene->state - 4) < 11 && sysLightEventTryWait(&g_aocMain->objB) != 0) {
+    if ((u32)(scene->state - 4) < 11 && sysLightEventTryWait(&g_aocMain->operationDone) != 0) {
         g_aocMain->flags &= ~0x10000;
         aocMenuSetButtonHelp((SceneWindowWork *)scene, -1, 0);
         jobOwnerFreeSlotAndStop((JobOwner *)scene->owner);
@@ -74,7 +73,7 @@ void FUN_0047c36c(QuestScene *scene)
         operation->status = 1;
         operation->first = 0;
         operation->result = WindowStatusResult(operation->first);
-        FUN_0016ccb4(&g_aocMain->operation.queryResult);
+        FUN_0016ccb4(&g_aocMain->queryResult);
         g_aocMain->flags &= ~0x10000;
         if (scene->state == 10) {
             aocClearDisplayFlag(g_aocSystem);

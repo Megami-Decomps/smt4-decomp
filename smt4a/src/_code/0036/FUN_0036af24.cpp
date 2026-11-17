@@ -2,16 +2,10 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/mapMain.h"
-#include "map/LmapGlobals.h"
-
-struct LmapTransitionView {
-    u8 unk00[0x18];
-    f32 value;
-};
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 extern MapMainA* g_mapMain;
-extern LmapTransitionView* g_lmapView;
 
 // Snapshot the current map and the requested destination for a transition.
 void FUN_0036af24(void)
@@ -27,7 +21,7 @@ void FUN_0036af24(void)
         g_gameState.savedObjectId = g_gameState.currentObjectId;
         g_gameState.savedPosition = g_lmapScene->pose.position;
         g_gameState.savedHeading = g_lmapScene->pose.heading;
-        g_gameState.savedHeadingCopy = g_lmapView->value;
+        g_gameState.savedHeadingCopy = g_lmapView->heading;
         g_gameState.targetMapId = map->transition.mapId;
         g_gameState.targetAreaId = map->transition.areaId;
         g_gameState.targetPosition = g_gameState.pointPosition;

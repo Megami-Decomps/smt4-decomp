@@ -1,4 +1,5 @@
 /* NON_MATCHING: draws the camp menu's "new" marker for a menu id when the matching notification flag is set; written from the decompilation and the retail disassembly, the id dispatch and render-stack scheduling not compared with retail */
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
@@ -76,7 +77,7 @@ void FUN_0026e8b8(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
     texDrawTableEntryAtStoredOrigin(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
     u32 active = jobGetScalarValue() != 0.0f;
-    efctSetSpeed(g_camp->sprites[37].unk20 * (f32)active); /* the icon sprite's speed */
+    efctSetSpeed(g_camp->sprites[37].alpha * (f32)active); /* the icon sprite's speed */
     RenderCtxA *context = g_renderCtx;
     s32 state = packNibblesAndByte(6, 1, 0);
     renderStackSet(&context->stackB, state);

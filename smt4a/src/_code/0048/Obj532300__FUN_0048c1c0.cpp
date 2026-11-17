@@ -1,4 +1,5 @@
 /* NON_MATCHING: armcc keeps g_gameState's address in r8 across the switch; retail reloads it from the pool at every use (r8 saved but unused), which also changes later constant scheduling. */
+#include "ui/UiSpriteApi.h"
 #include "ui/NaviCategorySelection.h"
 #include "game/GameStateA.h"
 #include "ui/ButtonHelp.h"
@@ -23,14 +24,14 @@ struct NaviCategoryTransitionView {
     u8 unk0014[0x4BC];
     f32 position[2];
     u8 unk04D8[0xC];
-    ButtonHelpDisplayUnit bank;
+    UiSpriteState bank;
     u8 unk0570[0x20];
-    ButtonHelpDisplayUnit cursor;
+    UiSpriteState cursor;
     u8 unk061C[0x624];
-    ButtonHelpDisplayUnit entries[6];
+    UiSpriteState entries[6];
     u8 unk0F88[0x118];
-    ButtonHelpDisplayUnit lower;
-    ButtonHelpDisplayUnit upper;
+    UiSpriteState lower;
+    UiSpriteState upper;
 };
 typedef char NaviCategoryTransitionOffsets[
     offsetof(NaviCategoryTransitionView, flags) == 0x10 && offsetof(NaviCategoryTransitionView, position) == 0x4D0 &&
@@ -39,13 +40,10 @@ typedef char NaviCategoryTransitionOffsets[
     offsetof(NaviCategoryTransitionView, upper) == 0x112C ? 1 : -1];
 
 extern "C" {
-void uiSpriteBankApplyPreset(ButtonHelpDisplayUnit *unit, u32 preset);
+void uiSpriteBankApplyPreset(UiSpriteState *unit, u32 preset);
 void FUN_00168980(u32 sound);
-s32 uiSpriteAdvanceAnimation(ButtonHelpDisplayUnit *unit, f32 step);
 void msgWindowReset(void);
 void sub68OwnerDestroy(void);
-s32 vec2GetYInt(const void *point);
-s32 vec2GetXInt(const void *point);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 
 // Animate category confirmation, commit its selection/refresh requests, and release the temporary panel when closed.
@@ -65,7 +63,7 @@ void _ZN9Obj53230012FUN_0048c1c0Ev(NaviCategorySelectionWork *work)
             uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->entries[index], 1.0f);
         uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->upper, 1.0f);
         uiSpriteAdvanceAnimation(&((NaviCategoryTransitionView *)work)->lower, 1.0f);
-        ButtonHelpDisplayUnit *cursor = &((NaviCategoryTransitionView *)work)->cursor;
+        UiSpriteState *cursor = &((NaviCategoryTransitionView *)work)->cursor;
         if (uiSpriteAdvanceAnimation(cursor, 1.0f) && buttonHelpStateIsNot3()) {
             work->selection = work->selectedIcon;
             work->refresh[0] = 1;

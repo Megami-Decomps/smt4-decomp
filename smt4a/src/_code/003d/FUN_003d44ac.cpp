@@ -1,14 +1,10 @@
 /* NON_MATCHING: register choice only: retail stores the three floats through the incoming r0 and loads the tail-called uiStoreTextureEntryCenter's base/constant in r0/r1 (here r4 and r1/r0) */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include <stddef.h>
 #include "sys/RuntimeObjects.h"
 
 /* One UI sprite instance, 0x8C bytes. */
-struct LayoutSprite {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ u8 visible;
-    /* 0x3D */ u8 unk3D[0x8C - 0x3D];
-};
 
 struct LayoutState {
     /* 0x00 */ u32 unk00;
@@ -18,7 +14,7 @@ struct LayoutState {
 /* A five-sprite layout: the first sprites show the entry, the rest depend on its kind. */
 struct SpriteLayout {
     /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ LayoutSprite sprites[5];
+    /* 0x020 */ UiSpriteState sprites[5];
     /* 0x2DC */ LayoutState state;
     /* 0x2E4 */ u8 unk2E4[0x2F0 - 0x2E4];
     /* 0x2F0 */ u32 kind;
@@ -37,11 +33,9 @@ typedef char SpriteLayoutOffsets[offsetof(SpriteLayout, sprites) == 0x20 &&
 
 extern "C" {
 
-void uiSpriteStateInitFromSource(LayoutSprite *sprite, s32 group, s32 image, void *owner, s32 flags, f32 scale);
-void uiSpriteSelectAnim(LayoutSprite *sprite, s32 anim);
-void uiStoreTextureEntryCenter(LayoutSprite *sprite, s32 group, s32 value);
-void uiGetLayoutPointDifference(LayoutSprite *sprite, s32 group, s32 first, s32 second);
-void FUN_0036b63c(LayoutSprite *sprite, u8 value);
+void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 group, s32 value);
+void uiGetLayoutPointDifference(UiSpriteState *sprite, s32 group, s32 first, s32 second);
+void FUN_0036b63c(UiSpriteState *sprite, u8 value);
 
 /* The animation id of the layout's n-th sprite state. */
 static __inline s32 layoutId(const SpriteLayout *layout, s32 n)
@@ -62,7 +56,7 @@ void FUN_003d44ac(SpriteLayout *layout)
     state->unk00 = 0;
     state->unk04 = 0;
     for (i = 0; i < 5; i++) {
-        uiSpriteStateInitFromSource(&layout->sprites[i], 16, -1, layout, 0x97, 1.0f);
+        uiSpriteStateInitFromSource(&layout->sprites[i], 16, -1, (UiResourceParameters *)(layout), 0x97, 1.0f);
     }
     pairSetFirstResetSecond(&layout->sprites[0], layout->baseId * 1000);
     uiSpriteSelectAnim(&layout->sprites[0], 0);

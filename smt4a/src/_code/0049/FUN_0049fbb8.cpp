@@ -1,7 +1,6 @@
-#include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartyStatusSlots *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 s32 FUN_002c7bb0(u32 user, s32 target, u32 id, s32 *result);
 }
@@ -20,7 +19,7 @@ extern "C" s32 FUN_0049fbb8(u32 mode, s32 predicate, u16 argument)
     case 0:
     case 1:
         count = gameSlotTableFindFree();
-        slots = gameGetSlotTable()->active.slots;
+        slots = gameGetSlotTable()->party;
         break;
     case 2:
     case 3:

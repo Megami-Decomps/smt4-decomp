@@ -3,11 +3,14 @@
 
 #include "common.h"
 
+struct AocMain;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-s32 FUN_00473910(u8 *unused, u32 id);
+/* Looks up the AOC text entry `id` (-1: none); the main block itself is not read. */
+s32 FUN_00473910(AocMain *main, u32 id);
 
 #ifdef __cplusplus
 }

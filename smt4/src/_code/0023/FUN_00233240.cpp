@@ -6,13 +6,11 @@ extern "C" {
 /* An owner of eight animated sprites at 0x20. */
 typedef struct SpriteSetOwner {
     /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ SpritePlaybackView sprites[8];
+    /* 0x020 */ UiSpriteState sprites[8];
 } SpriteSetOwner;
 
-void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
-void spriteStartAnimationByIndex(SpritePlaybackView *sprite, s32 key);
 
-static __inline void spriteSetStart(SpritePlaybackView *sprite, s32 key)
+static __inline void spriteSetStart(UiSpriteState *sprite, s32 key)
 {
     timerStart(sprite, key, 0);
 }

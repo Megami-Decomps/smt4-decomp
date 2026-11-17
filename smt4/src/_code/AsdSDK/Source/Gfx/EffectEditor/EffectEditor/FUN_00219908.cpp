@@ -1,4 +1,5 @@
 /* NON_MATCHING: the stick values stay unwritten as in retail (its stub call was inlined away) but the argument setup for that call is not emitted, the phase samples are inlined in another order and register assignment differs (237 vs 234 rows); the free camera update is the same. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 
 extern "C" {

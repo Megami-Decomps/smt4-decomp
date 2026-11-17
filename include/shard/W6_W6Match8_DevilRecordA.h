@@ -3,13 +3,12 @@
 
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
-#include "ui/UiSpriteKeyframes.h"
+#include "ui/UiSpriteApi.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void uiSpriteSetKeyframe(UiSpriteKeyframeState *sprite, u32 frame, u32 alternate);
 
 #ifdef __cplusplus
 }

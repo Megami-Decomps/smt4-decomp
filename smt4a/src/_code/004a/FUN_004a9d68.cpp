@@ -1,5 +1,6 @@
 /* NON_MATCHING: slot-relative addresses, aggregate copy and mask-update scheduling differ. */
-#include "battle/btlUI.h"
+#include "ui/UiSpriteApi.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "code/Code0015.h"
 #include "battle/BattleHelpers_VariantB.h"
@@ -14,9 +15,7 @@ static inline u32 findActionSlot(BtlUiA *ui)
 }
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
-void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 animation);
 
 // Reserve a projected effect slot and synchronize the owner's completion-mask bit.
 u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)

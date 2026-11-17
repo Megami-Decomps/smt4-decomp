@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032ba8c` (_code @ 0x32ba8c, 0x71c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -52,7 +52,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: dataTableGet. */
@@ -103,8 +102,8 @@ unsigned int FUN_0032ba8c(void)
   int temp_v30;
   
   temp_v1 = g_titleConfig;
-  temp_v2 = vec2GetXInt(reinterpret_cast<const void *>(g_titleConfig + 0x5c));
-  temp_v3 = vec2GetYInt(temp_v1 + 0x5c);
+  temp_v2 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(g_titleConfig + 0x5c)));
+  temp_v3 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0x5c));
   temp_v26 = (unsigned int)(*(int *)(temp_v1 + 8) == 1);
   temp_v10 = 0;
   temp_v11 = 0;

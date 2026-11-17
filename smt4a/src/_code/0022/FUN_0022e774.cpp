@@ -2,7 +2,7 @@
 #include "shard/Shard0033.h"
 #include "status/StatusCamera.h"
 #include "code/Code0038.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 class StatusScreenModel {
 public:

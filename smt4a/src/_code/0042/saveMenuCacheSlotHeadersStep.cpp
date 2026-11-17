@@ -3,7 +3,7 @@
 #include "shard/SaveSlotHeaderWork.h"
 
 extern "C" {
-u32 scrRunOpcodesStub(ScriptState *script);
+u32 scrRunOpcodesStub(ScriptProcess *script);
 void saveLoadProcessCreate(s32 slot, s32 mode);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
 void FUN_00420a2c(SaveSlotHeaderWork *work);

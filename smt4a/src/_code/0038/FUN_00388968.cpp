@@ -1,10 +1,10 @@
 /* NON_MATCHING: panel tail-flag addressing and sprite initialization registers differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "script/ScriptArgs.h"
 #include "ui/UiControl.h"
 
 extern "C" {
-void uiSpriteStateInitFromSource(void *, s32, s32, void *, s32, f32);
 
 // Start the designated message-panel animation and wait for its pending flag to clear.
 u8 FUN_00388968(void)
@@ -23,8 +23,8 @@ u8 FUN_00388968(void)
         u32 value = scrGetArg(0);
         MessageWindowA *panel = g_messageMain.banner;
         void *sprite = &panel->sprites[34];
-        uiSpriteStateInitFromSource(sprite, 4, 0xabe1, &panel->parameters, 11, 1.0f);
-        uiSpriteSelectAnim(sprite, 11);
+        uiSpriteStateInitFromSource((UiSpriteState *)sprite, 4, 0xabe1, &panel->parameters, 11, 1.0f);
+        uiSpriteSelectAnim((UiSpriteState *)sprite, 11);
         MessageAnimationView *animation = reinterpret_cast<MessageAnimationView *>(panel);
         animation->value = value;
         animation->pending = 1;

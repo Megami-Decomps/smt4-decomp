@@ -39,7 +39,7 @@ struct FlagWorkBanks {
             /* 0x0003 */ u8 unk0003;
             /* 0x0004 */ MapVector position;
             /* 0x0010 */ f32 heading;
-            /* 0x0014 */ u32 viewValue;
+            /* 0x0014 */ f32 viewHeading; /* the map view's heading (g_lmapView) */
         } resumePoint;
     };
     /* 0x0744 */ u32 first[16];

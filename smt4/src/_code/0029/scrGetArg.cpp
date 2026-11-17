@@ -7,7 +7,7 @@ extern "C" {
  * values and resolving variable references. */
 s32 scrGetArg(s32 index)
 {
-    ScriptVmProcess *process = g_scrContext.active;
+    ScriptProcess *process = g_scrContext.active;
     s32 slot = process->depth - index - 1;
 
     switch (process->tags[slot]) {

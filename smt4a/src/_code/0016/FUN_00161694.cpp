@@ -2,31 +2,15 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 void FUN_0017e1a0(s32 screen, u32 index, const void *left, const void *right,
     u32 stride, u32 format, u32 active);
 
 void FUN_00161694(s32 requestedScreen)
 {
-    // Display presentation fields follow the shared graphics-context prefix.
-    struct DisplayBuffer { u32 unk00; u8 *pixels; s32 format, width, height; u32 heap; };
-    struct PresentationView {
-        AsdGfxContext prefix;
-        DisplayBuffer *buffers[2];
-        DisplayBuffer *stereo;
-        s32 x[2], stereoX;
-        s32 y[2], stereoY;
-        u32 indices[2];
-        u8 unk154[0x10];
-        s32 displayMode;
-    };
-    typedef char LayoutCheck[offsetof(PresentationView, buffers) == 0x128 &&
-        offsetof(PresentationView, indices) == 0x14c &&
-        offsetof(PresentationView, displayMode) == 0x164 ? 1 : -1];
-    PresentationView *state = reinterpret_cast<PresentationView *>(&g_asdGfxContext);
+    AsdGfxContext *state = &g_asdGfxContext;
     for (s32 screen = 0; screen < 2; ++screen) {
         if (requestedScreen == screen + 0x400 || requestedScreen == 0x402) {
-            DisplayBuffer *buffer = state->buffers[screen];
+            AsdGfxTarget *buffer = state->targets[screen];
             u32 format, bytesPerPixel;
             switch (buffer->format) {
             case 0x8051: format = 1; bytesPerPixel = 3; break; // RGB8
@@ -40,13 +24,13 @@ void FUN_00161694(s32 requestedScreen)
             const u8 *right = NULL;
             u32 flags = format;
             if (screen == 0) {
-                switch (state->displayMode) {
+                switch (state->topScreenMode) {
                 case 0x701:
                     break;
                 case 0x702: {
-                    DisplayBuffer *stereo = state->stereo;
+                    AsdGfxTarget *stereo = state->targets[2];
                     right = stereo->pixels + bytesPerPixel *
-                        (stereo->width * (stereo->height - state->prefix.presentation.croppedRows[0] - state->stereoY) + state->stereoX);
+                        (stereo->width * (stereo->height - state->screenWidths[0] - state->targetY[2]) + state->targetX[2]);
                     flags = format | 0x20;
                     break;
                 }
@@ -56,10 +40,10 @@ void FUN_00161694(s32 requestedScreen)
                 }
             }
             const u8 *left = buffer->pixels + bytesPerPixel *
-                (buffer->width * (buffer->height - state->prefix.presentation.croppedRows[screen] - state->y[screen]) + state->x[screen]);
-            FUN_0017e1a0(screen, state->indices[screen], left, right,
-                buffer->width * bytesPerPixel, flags, state->indices[screen]);
-            state->indices[screen] = state->indices[screen] == 0;
+                (buffer->width * (buffer->height - state->screenWidths[screen] - state->targetY[screen]) + state->targetX[screen]);
+            FUN_0017e1a0(screen, state->swapIndices[screen], left, right,
+                buffer->width * bytesPerPixel, flags, state->swapIndices[screen]);
+            state->swapIndices[screen] = state->swapIndices[screen] == 0;
         }
     }
 }

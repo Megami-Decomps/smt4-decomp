@@ -5,8 +5,6 @@
 
 extern "C" {
 
-extern AocMain *g_aocMain;
-
 s32 asdFsIsSdCardDetected(void);
 s32 objGetFlagBit16(AocMain *main);
 void asdOperatorDeleteB(void *block);

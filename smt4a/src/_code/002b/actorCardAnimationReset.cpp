@@ -1,5 +1,5 @@
 #include "battle/ActorCardAnimations.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "battle/BattleHelpers_VariantB.h"
 
 extern "C" {

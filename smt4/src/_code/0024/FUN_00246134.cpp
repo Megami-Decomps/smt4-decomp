@@ -2,17 +2,12 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "common.h"
-
-struct PassiveSkill {
-    u8 unk00[0x38];
-    u32 bits;               // 0x38
-};
+#include "shard/PassiveSkill.h"
 
 extern "C" {
 
 void selectionCopySupportedValue(u32 skill, s32* out);
 void btlEntryGetPassiveSkillIds(BtlEntry* entry, u16* passiveIds);
-PassiveSkill* passiveSkillLookupRecord(u16 id);
 
 static __inline BtlEntry* findEntry(u32 unitId)
 {
@@ -76,9 +71,9 @@ u32 FUN_00246134(u32 unitId, u32 skillId, s32 mode, s32 target)
     for (s32 i = 0; i < 9; i++) {
         u32 id = passiveIds[i];
         if (id == 0) continue;
-        PassiveSkill* passive = passiveSkillLookupRecord(id);
-        if (passive != NULL && skillId == ((passive->bits & 0xffff) >> 0xb)) {
-            u32 effect = (passive->bits & 0xfffff) >> 0x10;
+        const PassiveSkillRecord* passive = passiveSkillLookupRecord(id);
+        if (passive != NULL && skillId == ((passive->affinity & 0xffff) >> 0xb)) {
+            u32 effect = (passive->affinity & 0xfffff) >> 0x10;
             if (effect == 1) passiveFlags |= 0x80000;
             else if (effect == 2) passiveFlags |= 0x10000;
             else if (effect == 3) passiveFlags |= 0x20000;

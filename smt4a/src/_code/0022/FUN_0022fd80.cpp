@@ -1,29 +1,28 @@
 #include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 /* NON_MATCHING: minimum-one guard still emits an extra conditional branch; percentage accumulator now matches retail multiply operand order. */
-#include "shard/Shard0032.h"
+#include "gamedata/GamePlayerData.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 #include "gamedata/SkillDataRecord.h"
 
 extern "C" {
-const UnitRecord *gameGetPlayerData(void);
 u32 dataTable9Type3GetClamped(u16 playerId, u32 kind);
 
 // Apply all equipped percentage modifiers, then the player's table-specific rate.
 u32 FUN_0022fd80(s32 value, u32 kind)
 {
-    const UnitRecord *player = gameGetPlayerData();
+    const PlayerDataA *player = gameGetPlayerData();
     f32 multiplier = 1.0f;
-    const UnitRecord *equipment = gameGetPlayerData();
+    const PlayerDataA *equipment = gameGetPlayerData();
     for (s32 slot = 0; slot < 7; ++slot) {
         u32 itemId = 0;
         switch (slot) {
-        case 0: itemId = equipment->stats[0]; break;
-        case 1: itemId = equipment->stats[1]; break;
-        case 2: itemId = equipment->stats[2]; break;
-        case 3: itemId = equipment->stats[3]; break;
-        case 4: itemId = equipment->stats[4]; break;
-        case 5: itemId = equipment->stats[5]; break;
-        case 6: itemId = equipment->stats[6]; break;
+        case 0: itemId = equipment->equipment[0]; break;
+        case 1: itemId = equipment->equipment[1]; break;
+        case 2: itemId = equipment->equipment[2]; break;
+        case 3: itemId = equipment->equipment[3]; break;
+        case 4: itemId = equipment->equipment[4]; break;
+        case 5: itemId = equipment->equipment[5]; break;
+        case 6: itemId = equipment->equipment[6]; break;
         }
         const EquipmentRecordA *item = itemTableGetEquipmentRecord(itemId);
         if (item != NULL && item->modifierId != 0) {
@@ -37,7 +36,7 @@ u32 FUN_0022fd80(s32 value, u32 kind)
     u32 adjusted = value;
     adjusted *= percentage;
     adjusted /= 100;
-    u32 rate = dataTable9Type3GetClamped(player->id, kind);
+    u32 rate = dataTable9Type3GetClamped(player->level, kind);
     u32 result = adjusted * rate / 100;
     if (result == 0) {
         if (adjusted != 0)

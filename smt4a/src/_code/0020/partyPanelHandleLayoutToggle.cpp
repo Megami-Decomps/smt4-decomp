@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "code/Code002a.h"
 #include "code/Code002a_VariantA.h"
@@ -16,8 +17,8 @@ struct PartyPanelMenu {
     /* 0x034 */ u8 unk034[0xE];
     /* 0x042 */ s8 alternate;
     /* 0x043 */ u8 unk043[0x485];
-    /* 0x4C8 */ UiSpriteKeyframeState alternateSprite;
-    /* 0x4C8 */ u8 unk4C8[0xA10 - 0x4C8 - sizeof(UiSpriteKeyframeState)];
+    /* 0x4C8 */ UiSpriteState alternateSprite;
+    /* 0x4C8 */ u8 unk4C8[0xA10 - 0x4C8 - sizeof(UiSpriteState)];
     /* 0xA10 */ void *characters[4];
     /* 0xA20 */ void *demons[0x18];
     /* 0xA80 */ u8 unkA80[0xC88 - 0xA80];

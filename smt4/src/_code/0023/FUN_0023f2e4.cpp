@@ -4,7 +4,6 @@
 #include <string.h>
 
 extern "C" {
-void asdMdlManagerMarkDestroy(void *);
 char *strncpy(char *, const char *, u32);
 
 void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
@@ -34,9 +33,9 @@ void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
             slot->state = 2;
             slot->model->flags |= 2;
             AsdMdlNode *node = slot->model->node;
-            node->resource->positionFollowed = 0;
+            node->sceneNode->positionFollowed = 0;
             if (node->unk0c >= 0) {
-                asdMdlManagerMarkDestroy(slot->model->node);
+                asdMdlManagerMarkDestroy(slot->model);
                 return;
             }
         }

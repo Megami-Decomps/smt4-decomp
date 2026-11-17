@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/HowToScreen.h"
 #include "text/TextDraw.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
@@ -42,7 +42,6 @@ void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 mode);
 void paramsClearPacket(UiResourceParameters *parameters);
 
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 table, u32 argument, UiResourceParameters *parameters, u32 order, f32 scale);
 
 // Load tutorial message/texture resources and initialize the four tutorial UI sprites.
 void FUN_0049d3f0(HowToScreenWork *work)

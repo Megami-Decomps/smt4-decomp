@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c8940` (_code @ 0x2c8940, 0x6bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -34,7 +34,6 @@ typedef struct {
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int uniteGetWork(void);
@@ -148,16 +147,16 @@ void FUN_002c8940(int param_1,int param_2)
   }
   efctSetSpeed();
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
-    temp_v6 = vec2GetYInt(temp_v1 + 0xb0);
+    temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0xb0));
     temp_v0 = *(short *)(temp_v8 + 10);
-    temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v1 + 0xb0));
+    temp_v7 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v1 + 0xb0)));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x3e,temp_v7 + param_1 + (int)*(short *)(temp_v8 + 8),
                  temp_v6 + param_2 + (int)temp_v0,0x83);
   }
   else {
-    temp_v6 = vec2GetYInt(temp_v1 + 0xb0);
+    temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0xb0));
     temp_v0 = *(short *)(temp_v8 + 10);
-    temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v1 + 0xb0));
+    temp_v7 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v1 + 0xb0)));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x27e,temp_v7 + param_1 + (int)*(short *)(temp_v8 + 8),
                  temp_v6 + param_2 + (int)temp_v0,0x83);
   }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail initialises the 18 slots in a one-per-iteration loop that reloads each halfword before storing 100; armcc unrolls the bitfield stores by two. */
 #include "common.h"
+#include "shard/PassiveSkill.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 
 namespace {
@@ -8,15 +9,9 @@ struct AffinitySlot {
     u16 id : 10;
     u16 state : 6;
 };
-
-struct PassiveSkillAffinity {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u32 affinity;
-};
 }
 
 extern "C" {
-const PassiveSkillAffinity *passiveSkillLookupRecord(u32 id);
 void FUN_00394edc(u32 devilId, AffinitySlot *slots);
 
 struct PassiveSkillSet {
@@ -38,7 +33,7 @@ static __inline u32 resolvePassiveAffinity(const u16 *skills, u8 kind)
         if (!skills[i]) {
             continue;
         }
-        const PassiveSkillAffinity *skill = passiveSkillLookupRecord(skills[i]);
+        const PassiveSkillRecord *skill = passiveSkillLookupRecord(skills[i]);
         if (!skill) {
             continue;
         }

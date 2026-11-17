@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation and frame: retail keeps the three arguments in the stack frame (push {r0-r2}) and reaches the model through sub-object pointers (r8 = &model->records, fp = &model->containers); the scan logic is the same. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/S3AsdModelAttr.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
@@ -16,7 +16,7 @@ extern const char DAT_0053d1a0[];  /* "EPLSIGN" */
 
 /* Rebuilds the model's attribute records for `key`: one record per id of every matching entry
  * of the file's containers. */
-void FUN_001ad2a4(AsdModelAttrModel *model, u8 *data, s32 key)
+void FUN_001ad2a4(AsdMdlNode *model, u8 *data, s32 key)
 {
     AsdEplBlockHeader block;
     AsdEplEntry *entry;

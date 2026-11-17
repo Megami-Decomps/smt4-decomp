@@ -1,4 +1,5 @@
 /* NON_MATCHING: GPU initialization global-address grouping and zero-store scheduling differ. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "code/Code002c_Result.h"

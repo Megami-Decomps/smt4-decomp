@@ -1,4 +1,5 @@
 #include "code/Code0023.h"
+#include "addon/aocMain.h"
 /* NON_MATCHING: retail unpacks the pending event with an ldm/stm copy into a second 20-byte temp, keeps the state constants in r6/r7/r8 and orders the switch tests as a compare ladder (frame 72 bytes here 52); the state machine, calls and stored fields are the same. */
 #include "classes/AocMenu.h"
 #include "classes/Obj422594.h"
@@ -15,16 +16,9 @@ public:
 
 namespace {
 
-/* The art-of-contents record: only the word at +0x67c is read. */
-struct AocBlock {
-    /* 0x000 */ u8 unk000[0x67c];
-    /* 0x67c */ s32 entry;
-};
-
 }
 
 extern "C" {
-extern AocBlock *g_aocMain;
 s32 strIsEmpty(RequestParameters *event);
 s32 byteIsAtLeast100(RequestParameters *event);
 void jobStopAndClearFlags(u32 *job);
@@ -48,7 +42,7 @@ void AocMenu::runWindowOperation()
 {
     u32 * job = reinterpret_cast<u32 *>(this);
     RequestParameters event;
-    AocBlock *aoc = g_aocMain;
+    AocMain *aoc = g_aocMain;
     WindowOperation *operation = reinterpret_cast<WindowOperation *>(job[0x82]);
     switch (job[2]) {
     case 0:
@@ -111,8 +105,8 @@ void AocMenu::runWindowOperation()
         if (strIsEmpty(&event) != 0) {
             jobStopAndClearFlags(job);
             WindowOperation *current;
-            if (aoc->entry != 0) {
-                listScrollerInitialize(job + 0x90, 3, aoc->entry, 0, 1, 1);
+            if (aoc->recordCount != 0) {
+                listScrollerInitialize(job + 0x90, 3, aoc->recordCount, 0, 1, 1);
                 Obj422594 *object = reinterpret_cast<Obj422594 *>(job + 0xba);
                 reinterpret_cast<u8 *>(job)[0x24d] = 1;
                 object->initialize(job + 0x90);

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "classes/Obj4223c4.h"
 #include "status/StatusCamera.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -22,13 +23,9 @@ typedef struct Menu {
     /* 0xFC */ Cursor cursor;
 } Menu;
 
-s8 uiSpriteGetCompletionState(const Cursor *cursor);
 int buttonHelpIsNotActive(void);
 int pointConvertToFloat(void *layout, u32 a, u32 b);
 int FUN_0029d960(Menu *menu);
-int uiSlidingSpriteAdvance(Cursor *cursor, int arg);
-u32 vec2GetYInt(Cursor *cursor);
-u32 vec2GetXInt(Cursor *cursor);
 
 /* Refreshes the menu layout from its cursor; if the cursor is enabled and buttonHelpIsNotActive allows it, switches the menu to state (2, 0) and refreshes again. */
 }
@@ -40,11 +37,11 @@ void Obj4223c4::FUN_003a7834()
     u32 width;
     u32 height;
 
-    uiSlidingSpriteAdvance(cursor, 0);
-    width = vec2GetYInt(cursor);
-    height = vec2GetXInt(cursor);
+    uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
+    width = vec2GetYInt((const UiSpriteState *)cursor);
+    height = vec2GetXInt((const UiSpriteState *)cursor);
     pointConvertToFloat(menu->layout, height, width);
-    if (uiSpriteGetCompletionState(cursor) != 0 && buttonHelpIsNotActive() != 0) {
+    if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) != 0 && buttonHelpIsNotActive() != 0) {
         FUN_002a0cc8(0);
         menu->state.first = 2;
         menu->state.second = 0;

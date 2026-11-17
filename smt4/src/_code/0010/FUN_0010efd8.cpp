@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 
 struct Unk49381c {

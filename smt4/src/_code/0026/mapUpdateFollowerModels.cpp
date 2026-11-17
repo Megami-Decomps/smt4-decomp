@@ -1,6 +1,5 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "map/LmapGlobals.h"
-#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
 #include "game/GameState.h"
 
 struct Inner0020ffe0;
@@ -26,11 +25,10 @@ extern "C" {
 
 
 void animOwnerSetScale(AsdMdlObject *object, f32 scale);
-void nodeSetTranslation(AsdMdlNode *node, s32 index, f32 *position);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void modelSetScale(AsdMdlNode *node, f32 value);
+void modelSelectPrimaryMotion(AsdMdlNode *model, s32 motionIndex, f32 blend);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
-void modelSelectPrimaryMotion(AsdMotionModel *model, s32 motionIndex, f32 blend);
 s32 gameFlagIsSet(u32 flag);
 u32 modelGetCurrentMotion(Inner0020ffe0 *model);
 
@@ -42,7 +40,7 @@ static __inline void asdMdlObjectHide(AsdMdlObject **slot)
 
     if ((object->flags & MDL_OBJECT_HIDDEN) == 0) {
         object->flags |= MDL_OBJECT_HIDDEN;
-        object->node->resource->positionFollowed = 0;
+        object->node->sceneNode->positionFollowed = 0;
         animOwnerSetScale(*slot, 0.0f);
     }
 }
@@ -54,7 +52,7 @@ static __inline void asdMdlObjectShow(AsdMdlObject **slot)
 
     if ((object->flags & MDL_OBJECT_HIDDEN) != 0) {
         object->flags &= ~MDL_OBJECT_HIDDEN;
-        object->node->resource->positionFollowed = 1;
+        object->node->sceneNode->positionFollowed = 1;
         animOwnerSetScale(*slot, 1.0f);
     }
 }
@@ -97,13 +95,13 @@ void mapUpdateFollowerModels(FollowerWork *work)
         motion = 2;
     }
     if ((s32)modelGetCurrentMotion(reinterpret_cast<Inner0020ffe0 *>(work->body->node)) != motion) {
-        modelSelectPrimaryMotion((AsdMotionModel *)work->body->node, motion, 0.0f);
+        modelSelectPrimaryMotion(work->body->node, motion, 0.0f);
     }
     nodeSetTranslation(work->shadow->node, 0, &g_lmapScene->pose.position.x);
     modelPartSetRotationDegrees(work->shadow->node, 0, 0.0f, g_lmapScene->pose.heading, 0.0f);
     nodeSetScale(work->shadow->node, 0, 50.0f, 50.0f, 50.0f);
     if (work->shadowMotionPending != 0) {
-        modelSelectPrimaryMotion((AsdMotionModel *)work->shadow->node, (s32)work->shadowMotion, 0.0f);
+        modelSelectPrimaryMotion(work->shadow->node, (s32)work->shadowMotion, 0.0f);
         work->shadowMotionPending = 0;
     }
 }

@@ -1,9 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "camp/CampStateA.h"
 
 extern "C" {
 
-void uiSpriteSetKeyframe(UiSpriteState *unit, s32 a, s32 b);
-void uiSpriteSetImageKeyframe(UiSpriteState *unit, s32 a, s32 b);
 void FUN_0037c8e4(s32 a, s32 b);
 void messageRestoreBanner(void);
 

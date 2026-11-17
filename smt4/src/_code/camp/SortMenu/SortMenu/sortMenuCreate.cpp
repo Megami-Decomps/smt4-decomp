@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SortMenu.h"
 #include "AsdSDK/AsdDebug.h"
@@ -33,9 +34,6 @@ s32 FUN_001a1f8c(u32);
 s32 FUN_001a26dc(u32);
 void drawParameterBlockClear(UiResourceParameters *);
 
-void uiSpriteStateInitFromSource(SortMenuSprite *, u32, u32, UiResourceParameters *, u32, f32);
-void uiSpriteSetImageKeyframe(SortMenuSprite *, u32, u32);
-void timerStart(SortMenuSprite *, u32, u32);
 
 void sortMenuCreate(u32 owner, u8 option)
 {

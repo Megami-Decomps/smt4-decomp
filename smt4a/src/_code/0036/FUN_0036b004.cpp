@@ -2,18 +2,13 @@
 #include "map/mapMain.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 extern MapMainA *g_mapMain;
 
 void FUN_0036b004(void)
 {
-    struct MapViewScalarView {
-        u8 unk00[0x18];
-        f32 value;
-    };
-    extern MapViewScalarView *g_lmapView;
     MapMainA *map = g_mapMain;
     mapProbePositionDownward(&g_gameState.pointPosition);
     g_gameState.savedLocationSet = 1;
@@ -24,7 +19,7 @@ void FUN_0036b004(void)
     g_gameState.savedPosition.y = g_lmapScene->pose.position.y;
     g_gameState.savedPosition.z = g_lmapScene->pose.position.z;
     g_gameState.savedHeading = g_gameState.overviewHeading + 180.0f;
-    g_gameState.savedHeadingCopy = g_lmapView->value;
+    g_gameState.savedHeadingCopy = g_lmapView->heading;
     g_gameState.targetMapId = map->transition.mapId;
     g_gameState.targetAreaId = map->transition.areaId;
     g_gameState.targetPosition = g_gameState.pointPosition;

@@ -1,6 +1,6 @@
 #ifndef GFX_MODELBONEANIMATION_H
 #define GFX_MODELBONEANIMATION_H
-#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "gfx/ModelBoneLookup.h"
 
 struct ModelBoneAnimationResource {

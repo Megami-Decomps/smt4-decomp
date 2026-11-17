@@ -1,8 +1,7 @@
 /* NON_MATCHING: register allocation only: in the row search retail reuses r5 (the dead `count - 1`) for the row offset where the build takes r6. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 
 /* Append to the row ending at this position, otherwise use the first empty row. */
 u32 FUN_004aa0b0(u32 request, u8 flags, u8 mode, f32 x, f32 y, f32 z)

@@ -74,7 +74,7 @@ typedef char PlaySceneTargetingOffsets[
     sizeof(PlayScene) == 0x591C ? 1 : -1];
 typedef char PlaySceneIntroAnimationOffsets[
     offsetof(PlayScene, intro.animation) == 0xAC &&
-    offsetof(PlayScene, intro.animation.unk20) == 0xCC &&
+    offsetof(PlayScene, intro.animation.alpha) == 0xCC &&
     sizeof(PlayScene) == 0x591C ? 1 : -1];
 
 #ifdef __cplusplus

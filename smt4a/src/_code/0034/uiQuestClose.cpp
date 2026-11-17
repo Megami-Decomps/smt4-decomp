@@ -8,8 +8,8 @@ extern "C" {
 int jobStop(unsigned int, int);
 void asdMemFree(void *allocation);
 int asdTMTexTableReleaseNode(int, int);
-struct ScriptResource;
-void scrScriptProcessDestroy(ScriptResource *resource);
+struct ScriptProcess;
+void scrScriptProcessDestroy(ScriptProcess *resource);
 int uiFadeSetVisible(int);
 
 typedef struct TouchRegions {
@@ -22,10 +22,10 @@ typedef struct UiQuest {
     /* 0x004 */ u8 unk004[0x8F0];
     /* 0x8F4 */ void *buffer8f4;
     /* 0x8F8 */ void *buffer8f8;
-    /* 0x8FC */ ScriptResource *process8fc;
+    /* 0x8FC */ ScriptProcess *process8fc;
     /* 0x900 */ void *buffer900;
     /* 0x904 */ void *buffer904;
-    /* 0x908 */ ScriptResource *process908;
+    /* 0x908 */ ScriptProcess *process908;
     /* 0x90C */ u8 unk90c[0x3F4];
     /* 0xD00 */ TouchRegions touch;
 } UiQuest;

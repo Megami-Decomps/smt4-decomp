@@ -1,10 +1,9 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
 void FUN_00308d3c(void);
 
-extern LmapMainState *g_lmapMainState;
 
 void lmapMainCallIfActive2(void)
 {

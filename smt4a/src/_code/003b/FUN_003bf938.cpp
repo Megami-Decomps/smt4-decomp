@@ -1,14 +1,13 @@
 /* NON_MATCHING: closing-animation loop peels its initial bound check, and the inlined replacement search adds a join NOP. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "gamedata/GameSaveDataA.h"
 #include "code/Code0018.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 s32 scrGetCommandFrame(void);
-void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_004bd410(u16 id);
-PartySlotA *saveSlotFindSelected(void);
-PartySlotA *partyGetSlot(u16 index);
 void FUN_003e4e4c(u16 id);
 }
 

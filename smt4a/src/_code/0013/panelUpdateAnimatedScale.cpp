@@ -1,4 +1,5 @@
 /* NON_MATCHING: scale arithmetic scheduling, short-circuit guards and visibility accessor differ; -O2 candidate. */
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTexA.h"
 
 static __inline s32 scaleBits(f32 scale)
@@ -13,7 +14,6 @@ static const s32 kExpandedXBits = 0x3ec28f5c;
 static const s32 kExpandedYBits = 0x3eb851ec;
 
 extern "C" {
-void uiSpriteAdvanceAnimation(UiSpriteState *, f32);
 void FUN_001536e4(FrameTexWorkA *);
 void FUN_0014aa9c(s32);
 
@@ -40,7 +40,7 @@ u8 panelUpdateAnimatedScale(u32 job)
                 uiSpriteAdvanceAnimation(&panel->campItems[i], 1.0f);
             uiSpriteAdvanceAnimation(&panel->campWidgets[2], 1.0f);
             uiSpriteAdvanceAnimation(&panel->campWidgets[3], 1.0f);
-            if (panel->campWidgets[3].animationFlags.completed)
+            if (panel->campWidgets[3].finished)
                 uiSpriteAdvanceAnimation(&panel->campWidgets[0], 1.0f);
         } else {
             f32 x = panel->campWidthScale;

@@ -32,7 +32,6 @@ typedef char AmbientMovementOffsets[offsetof(AmbientMovementActor, movement) == 
 
 extern "C" {
 void FUN_0039560c(AmbientMovementWork *work);
-f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 void FUN_0039568c(AmbientMovementWork *work)
 {

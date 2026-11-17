@@ -1,16 +1,14 @@
 /* NON_MATCHING: initialises the battle UI block (sprite pools, four timer set, draw parameters, 16 skill tabs, 12 card rows, detail object); written from the decompilation, the draw-parameter chunk addresses and loop shapes not compared with retail */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/ComWin/ComWin.h"
 
-struct BtlUiSprite {
-    /* 0x00 */ u8 data[0x8C];
-};
 
 /* One of the 16 skill tabs (0x400 bytes): five entry sprites, two labels and a visibility flag. */
 struct BtlSkillTab {
-    /* 0x000 */ BtlUiSprite entries[5];
-    /* 0x2BC */ BtlUiSprite header;
-    /* 0x348 */ BtlUiSprite footer;
+    /* 0x000 */ UiSpriteState entries[5];
+    /* 0x2BC */ UiSpriteState header;
+    /* 0x348 */ UiSpriteState footer;
     /* 0x3D4 */ u8 unk3D4[0xC];
     /* 0x3E0 */ u8 visible;
     /* 0x3E1 */ u8 unk3E1[0x1F];
@@ -18,7 +16,7 @@ struct BtlSkillTab {
 
 /* One of the 16 command rows (0xA0 bytes). */
 struct BtlCommandRow {
-    /* 0x00 */ BtlUiSprite sprite;
+    /* 0x00 */ UiSpriteState sprite;
     /* 0x8C */ u8 unk8C[0xC];
     /* 0x98 */ u8 enabled;
     /* 0x99 */ u8 unk99[7];
@@ -26,8 +24,8 @@ struct BtlCommandRow {
 
 /* One of the 12 status rows (0x14C bytes). */
 struct BtlStatusRow {
-    /* 0x000 */ BtlUiSprite icon;
-    /* 0x08C */ BtlUiSprite label;
+    /* 0x000 */ UiSpriteState icon;
+    /* 0x08C */ UiSpriteState label;
     /* 0x118 */ u16 value;
     /* 0x11A */ u8 unk11A[0x32];
 };
@@ -59,7 +57,7 @@ struct BtlUiBlock {
     /* 0x7E9E */ u8 unk7E9E;
     /* 0x7E9F */ u8 unk7E9F;
     /* 0x7EA0 */ UiResourceParameters resources;
-    /* 0x7EC0 */ BtlUiSprite cursor;
+    /* 0x7EC0 */ UiSpriteState cursor;
     /* 0x7F4C */ BtlSkillTab tabs[16];
     /* 0xBF4C */ BtlCommandRow commands[16];
     /* 0xC94C */ u8 unkC94C[0x1760];
@@ -82,8 +80,6 @@ void uiInitializeFourTimerSet(void *timers);
 void FUN_00199b9c(void *detail, BtlSetupSource *source);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void uiSpriteStateInitFromSource(BtlUiSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flags, f32 speed);
-void uiSpriteSetImageKeyframe(BtlUiSprite *sprite, s32 keyframe, s32 flag);
 void *asdOperatorNew(u32 size, BtlSetupSource *owner);
 void *FUN_0033d3e4(void *memory);
 

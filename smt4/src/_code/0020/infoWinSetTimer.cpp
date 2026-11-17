@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWin.h"
 
 extern "C" {

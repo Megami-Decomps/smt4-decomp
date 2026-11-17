@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00206528` (_code @ 0x206528, 0x47c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -8,8 +9,6 @@ extern "C" {
 int panelSetupButtons(int);
 int packageFileDisableByKindName(...);
 int asdTMTexTableReleaseNode(int);
-int spriteStartAnimationByIndex(int, int);
-int uiSpriteAdvanceAnimation(int);
 int objectSetPosition(int);
 int FUN_0032c3fc(...);
 int VectorSignedToFloat(int, int);
@@ -60,7 +59,7 @@ unsigned int FUN_00206528(void)
       case 0:
       case 1:
         temp_v1 = g_btlTalkBustUp + 0x20;
-        uiSpriteAdvanceAnimation(temp_v1);
+        uiSpriteAdvanceAnimation((UiSpriteState *)temp_v1);
         break;
       case 2:
       case 6:
@@ -74,13 +73,13 @@ unsigned int FUN_00206528(void)
       case 0x11:
       case 0x12:
       case 0x13:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(g_btlTalkBustUp + 0x20));
         temp_v1 = temp_v0 + 0xac;
-        uiSpriteAdvanceAnimation(temp_v1);
+        uiSpriteAdvanceAnimation((UiSpriteState *)temp_v1);
         break;
       case 3:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
-        uiSpriteAdvanceAnimation(temp_v0 + 0xac);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(g_btlTalkBustUp + 0x20));
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + 0xac));
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
         temp_v1 = temp_v3 + ((temp_v1 >> 5) - (temp_v1 >> 0x1f)) * -0x3c;
@@ -124,31 +123,31 @@ unsigned int FUN_00206528(void)
         objectSetPosition(temp_v0 + 0xac);
         break;
       case 4:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(g_btlTalkBustUp + 0x20));
         temp_v1 = 0;
         do {
           temp_v4 = temp_v0 + temp_v1;
           if (*(char *)(temp_v4 + 0x2dc) != '\0') {
-            temp_v2 = uiSpriteAdvanceAnimation(temp_v0 + temp_v1 * 0x8c + 0xac);
+            temp_v2 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + temp_v1 * 0x8c + 0xac));
             if (temp_v2 != 0) {
               *(unsigned char *)(temp_v4 + 0x2dc) = 0;
             }
           }
           else if ((*(int *)(temp_v0 + 0x2ec) % 10 == 0) && (temp_v2 = randNextInRange(3), temp_v2 == temp_v1))
           {
-            spriteStartAnimationByIndex(temp_v0 + temp_v1 * 0x8c + 0xac,6);
+            spriteStartAnimationByIndex((UiSpriteState *)(temp_v0 + temp_v1 * 0x8c + 0xac),6);
             *(unsigned char *)(temp_v4 + 0x2dc) = 1;
           }
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < 4);
         break;
       case 5:
-        uiSpriteAdvanceAnimation(temp_v0 + 0xac);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + 0xac));
         temp_v1 = temp_v0 + 0x138;
-        uiSpriteAdvanceAnimation(temp_v1);
+        uiSpriteAdvanceAnimation((UiSpriteState *)temp_v1);
         break;
       case 8:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(g_btlTalkBustUp + 0x20));
         temp_v3 = *(unsigned int *)(temp_v0 + 0x2ec);
         temp_v1 = (int)(((long long)(int)temp_v3 * -0x77777777 + ((unsigned long long)temp_v3 << 0x20)) >> 0x20);
         temp_v1 = temp_v3 + ((temp_v1 >> 7) - (temp_v1 >> 0x1f)) * -0xf0;
@@ -191,14 +190,14 @@ unsigned int FUN_00206528(void)
         break;
       case 0xc:
       case 0x10:
-        uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
-        uiSpriteAdvanceAnimation(temp_v0 + 0xac);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(g_btlTalkBustUp + 0x20));
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + 0xac));
         temp_v1 = temp_v0 + 0x138;
-        uiSpriteAdvanceAnimation(temp_v1);
+        uiSpriteAdvanceAnimation((UiSpriteState *)temp_v1);
       }
     }
     else {
-      uiSpriteAdvanceAnimation(g_btlTalkBustUp + 0x20);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(g_btlTalkBustUp + 0x20));
       temp_v1 = g_btlTalkBustUp;
       if (*(char *)(temp_v0 + 0xaa) != '\0') {
         if (*(short *)(temp_v0 + 0x7c) != 10) {

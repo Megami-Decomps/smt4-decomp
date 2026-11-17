@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild of the title button-help draw; retail's inlined state push/pop uses pointer arithmetic on the stack top (`piVar[top + 2]`) in a different register assignment and the float x/y order of textDrawString is inferred, not verified. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -44,8 +45,6 @@ void FUN_002b75ec(u32 sprite, s32 x, s32 y, s32 a, s32 b, s32 c);
 void textDrawString(s32 a, u32 icon, void *object, f32 x, f32 y);
 void renderCtxResetColorScale(RenderCtx *scene);
 s32 renderCtxPackPassFlags(s32 a, s32 b);
-u32 vec2GetXInt(void *vec);
-u32 vec2GetYInt(void *vec);
 
 /* Draws the title screen's button help: its fade or icon sprites and the two button icons. */
 u8 FUN_002109cc(void)
@@ -61,8 +60,8 @@ u8 FUN_002109cc(void)
                     fadeObjectResetIfActive(NULL);
                     fadeObjectResetIfActive(help->fadeObject);
                 } else {
-                    u32 x = vec2GetXInt(help->anchor);
-                    u32 y = vec2GetYInt(help->anchor);
+                    u32 x = vec2GetXInt((UiSpriteState *)help->anchor);
+                    u32 y = vec2GetYInt((UiSpriteState *)help->anchor);
                     texDrawTableEntryAtStoredOrigin(2, 0x12, 0, x, y, 0x10);
                     texDrawTableEntryAtStoredOrigin(2, 0x12, 1, x, y, 0x10);
                 }

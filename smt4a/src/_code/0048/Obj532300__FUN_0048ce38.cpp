@@ -1,5 +1,6 @@
 #include "common.h"
 #include "test/BustupViewer.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -14,9 +15,6 @@ typedef struct UiCursorWork {
     /* 0x590 */ u8 motion[1];
 } UiCursorWork;
 
-s32 uiSpriteAdvanceAnimation(void *motion, f32 step);
-s32 vec2GetXInt(void *vec);
-s32 vec2GetYInt(void *vec);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 
@@ -32,11 +30,11 @@ void _ZN9Obj53230012FUN_0048ce38Ev(UiCursorWork *work)
     case 1: {
         void *motion = work->motion;
 
-        if (uiSpriteAdvanceAnimation(motion, 1.0f) && buttonHelpStateIsNot3()) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)motion, 1.0f) && buttonHelpStateIsNot3()) {
             work->state = 2;
             work->flags |= 2;
         }
-        pointConvertToFloat(work->position, vec2GetXInt(motion), vec2GetYInt(motion));
+        pointConvertToFloat(work->position, vec2GetXInt((const UiSpriteState *)motion), vec2GetYInt((const UiSpriteState *)motion));
         break;
     }
     }

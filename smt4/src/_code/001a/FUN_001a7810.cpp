@@ -4,11 +4,11 @@
 #include "shard/S3UiLookup.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 void texDrawCompositeSprite(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *sprite);
 const u16 *dataTable24Sub0GetRecordS90(u32 id);
 s32 fontMeasureLineAdvance(const u16 *text, s32 font);
 void textDrawString(s32 layer, u32 color, const u16 *text,
@@ -23,7 +23,7 @@ void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 altern
     if (highlighted != 0) {
         texDrawCompositeSprite(2, 0x24, 11, x, y, 101);
         color = 0xFFFFFFFF;
-        efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect) * 0.5f + 0.5f);
+        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&static_cast<LabelOwnerView *>(owner)->effect)) * 0.5f + 0.5f);
     } else if (alternate != 0) {
         texDrawCompositeSprite(2, 0x24, 10, x, y, 101);
         color = 0xFF;

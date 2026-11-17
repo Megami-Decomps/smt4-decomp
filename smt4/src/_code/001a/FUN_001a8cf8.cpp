@@ -2,8 +2,8 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-#include "AsdSDK/MdlManagerDestroy.h"
 #include "game/GameState.h"
+#include "util/MathFunctions.h"
 
 #define MAP_RANGE_ENTRY_COUNT 16
 
@@ -43,7 +43,7 @@ struct MapRangeEntry {
     /* 0x24 */ s32 effectId;
     /* 0x28 */ u8 hasModel;
     /* 0x29 */ u8 unk29[3];
-    /* 0x2C */ s32 model;
+    /* 0x2C */ AsdMdlObject *model;
     /* 0x30 */ u8 modelVisible;
     /* 0x31 */ u8 unk31[3];
     /* 0x34 */ s32 objectIndex;
@@ -67,7 +67,6 @@ extern MapRangeWork *g_mapRangeWork;
 
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathGetShortestAngleDelta(f32 first, f32 second);
-f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
 f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
 void FUN_002df824(s32 id, s32 flag);
 void FUN_002879dc(s32 a, s32 b, s32 c);
@@ -92,7 +91,7 @@ u32 FUN_001a8cf8(void)
                 f32 delta = mathGetShortestAngleDelta(entry->heading, heading);
                 if (delta > -90.0f && delta < 90.0f)
                     facing = 1;
-                if (mathDistanceBetweenPoints(g_gameState.event.encounterSourcePosition, entry->position) < 300.0f
+                if (mathDistanceBetweenPoints(g_gameState.event.encounterSourcePosition.x, g_gameState.event.encounterSourcePosition.y, g_gameState.event.encounterSourcePosition.z, entry->position.x, entry->position.y, entry->position.z) < 300.0f
                     && mathAbsHeadingErrorToPoint(g_gameState.event.encounterSourcePosition.x,
                                     g_gameState.event.encounterSourcePosition.y,
                                     g_gameState.event.encounterSourcePosition.z,
@@ -120,7 +119,7 @@ u32 FUN_001a8cf8(void)
             if (entry->timer >= 0x3C) {
                 u32 next;
                 if (entry->hasModel) {
-                    if (entry->model == 0)
+                    if (entry->model == NULL)
                         break;
                     asdMdlManagerMarkDestroy(entry->model);
                     entry->modelVisible = 0;
@@ -138,9 +137,9 @@ u32 FUN_001a8cf8(void)
             entry->phase = MAP_RANGE_DONE;
             break;
         case MAP_RANGE_DONE:
-            if (entry->model != 0) {
-                asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(entry->model));
-                entry->model = 0;
+            if (entry->model != NULL) {
+                asdMdlManagerDestroy(entry->model);
+                entry->model = NULL;
             }
             entry->active = 0;
             entry->phase = 0;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: adjacent option arrays lose merged-global address arithmetic and copy-buffer registers differ. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 #include "AsdSDK/EffectEditorSelectionTransfer.h"
 #include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"

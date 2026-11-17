@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 
 extern "C" {
 
-int timerStart(void *timer, int a, int b);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x1C4];
@@ -13,7 +13,7 @@ typedef struct Obj {
 void objStartTimerIfIdle(Obj *obj)
 {
     if (obj->timerRunning == 0) {
-        timerStart(obj->timer, 2, 1);
+        timerStart((UiSpriteState *)obj->timer, 2, 1);
     }
 }
 

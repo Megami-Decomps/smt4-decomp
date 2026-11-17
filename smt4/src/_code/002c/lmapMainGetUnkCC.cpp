@@ -1,12 +1,11 @@
-#include "map/lmapMain.h"
+#include "map/LmapMainGlobals.h"
 
 extern "C" {
 
-extern LmapMainState *g_lmapMainState;
 
 u32 lmapMainGetUnkCC(void)
 {
-    return g_lmapMainState->unkCC;
+    return g_lmapMainState->state;
 }
 
 } /* extern "C" */

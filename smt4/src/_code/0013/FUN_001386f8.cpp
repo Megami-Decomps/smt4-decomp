@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the unrolled slot loop swaps its address and byte registers (retail r3/r2, armcc r2/r3). */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"

@@ -1,22 +1,18 @@
 /* NON_MATCHING: the shop-script arms for slots 7 and 8 keep separate scrRunOpcodesStub tails (retail jumps arm 7 into arm 8's run), the case-0 step store uses r1 not r0, and the cursor-animation address scheduling differs. */
 #include "shard/S2Scene3a.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "code/Code0023.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
-struct ScriptRunState;
+struct ScriptProcess;
 struct ModelBoneAttachmentRoot;
 
 extern "C" {
 void FUN_00233240(void *animation, s32 value);
-void uiSlidingSpriteAdvance(UiSpriteState *animation, s32 value);
-s32 vec2GetYInt(const UiSpriteState *animation);
-s32 vec2GetXInt(const UiSpriteState *animation);
-s32 uiSpriteGetCompletionState(const UiSpriteState *animation);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 u32 tableGroupFindEntryIndex(void *resource, const char *name);
-void scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
-s32 scrRunOpcodesStub(ScriptRunState *process);
+void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
+s32 scrRunOpcodesStub(ScriptProcess *process);
 s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 void nodeSetTranslation3f(void *node, s32 relative, f32 x, f32 y, f32 z);
 
@@ -40,7 +36,7 @@ void FUN_003a099c(Scene3a *scene)
         u8 unk00C[0x154];
         void *scriptResource;
         u32 unk164;
-        ScriptRunState *scriptProcess;
+        ScriptProcess *scriptProcess;
         u8 unk16C[0x214];
         f32 cursor[2];
         u8 unk388[0x20];

@@ -1,8 +1,7 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern BtlUiGlobalsA g_btlUi;
 
 int partyStatusSetSlotLabel(void *holder, s16 value);
 

@@ -5,7 +5,6 @@ void FUN_00234cd8(DummyAttachmentSource *, s32, s32);
 void FUN_00341a3c(DummyAttachmentSource *);
 void textFormatBuffer(char *, const char *, ...);
 void modelGetBoneTranslationByName(AsdMdlNode *, const char *, f32 *);
-void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
 
 /* Run the active member callback, update source playback and bind both sets of dummy markers. */
 void dummyAttachmentUpdate(DummyAttachmentWork *work)

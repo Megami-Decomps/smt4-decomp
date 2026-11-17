@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b1a00` (_code @ 0x4b1a00, 0x144c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -66,7 +66,6 @@ extern unsigned int FUN_0014bd84(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_00185e84. */
@@ -235,9 +234,9 @@ LAB_004b1d78:
           temp_v3 = temp_v28;
         }
         else {
-          temp_v8 = vec2GetXInt(reinterpret_cast<const void *>(temp_v30));
+          temp_v8 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v30)));
           temp_v8 = param_2 + temp_v8;
-          temp_v5 = vec2GetYInt(temp_v30);
+          temp_v5 = vec2GetYInt((UiSpriteState *)temp_v30);
           temp_v5 = param_3 + temp_v5;
           temp_v3 = temp_v30;
         }

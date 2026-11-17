@@ -2,7 +2,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 void nngxLockEnter(void);
 void nngxLockLeave(void);
 void FUN_002ba2b8(void);
@@ -35,9 +34,9 @@ void asdCmdBufferAppendCopyTransfer(AsdCmdBuffer *buffer, const void *source, u3
     }
     nngxLockEnter();
     ++buffer->listCount;
-    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled != 0 &&
-        g_asdGfxContext.submission.pending == 0) {
-        g_asdGfxContext.submission.pending = 1;
+    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submitEnabled != 0 &&
+        g_asdGfxContext.submitPending == 0) {
+        g_asdGfxContext.submitPending = 1;
         FUN_002ba2b8();
     }
     nngxLockLeave();

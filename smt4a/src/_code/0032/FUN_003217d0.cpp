@@ -7,6 +7,7 @@
 #include "shard/W6_W6Match8_TitleOverlay.h"
 #include "util/BitsAndBytes.h"
 #include <stddef.h>
+#include "ui/UiSpriteApi.h"
 
 /* The panel's draw switches. */
 struct ResultPanelFlags {
@@ -31,7 +32,6 @@ extern u64 DAT_0057a9b0; /* battle state flags that hide the panel's frame */
 
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 offset);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *element);
 void FUN_003b21a4(ResultPanel *panel);
 
 #define RESULT_PANEL_STEREO_SCALE 0.29f
@@ -53,11 +53,11 @@ void FUN_003217d0(ResultPanel *panel)
     frame = (s32)renderCtxCalculateStereoParallax(g_renderCtx, RESULT_PANEL_STEREO_SCALE);
     if (flags->drawGlow != 0) {
         const f32 minimumScale = 0.0f;
-        f32 first = vec2GetSpeed(&panel->elements[0]);
+        f32 first = vec2GetSpeed((const UiSpriteState *)&panel->elements[0]);
         if (first > minimumScale) {
             efctSetSpeed(first);
             texDrawTableEntryAtStoredOrigin(2, 12, 1000, frame, 0, 0x1F);
-            f32 third = vec2GetSpeed(&panel->elements[2]);
+            f32 third = vec2GetSpeed((const UiSpriteState *)&panel->elements[2]);
             if (third > minimumScale) {
                 efctSetSpeed(third);
                 renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));

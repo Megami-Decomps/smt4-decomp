@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match1_BattleStageModel.h"
 
 extern "C" {
-void nodeSetTranslation3f(NodeOwner* owner, u32 reserved, NodeVec3 translation);
+void nodeSetTranslation3f(AsdMdlNode* node, s32 index, NodeVec3 translation);
 
 void btlStageUpdateNodePositions(BattleStageModel* stage, NodeVec3 position)
 {
@@ -25,7 +25,6 @@ static __inline NodeVec3 nodeVec3Splat(f32 value)
 }
 
 s32 modelHasLoadedAttachment(BattleStageNode *node);
-void lightOwnerRegister(BattleStageNode *node, s32 enable);
 void FUN_002e1230(BattleStageNode *node, s32 enable);
 void animOwnerSetScale(BattleStageNode *node, f32 scale);
 void FUN_002a04f0(s32 value);
@@ -42,7 +41,8 @@ u32 FUN_00340558(BattleStageModel *stage)
     }
     for (index = 0; index < 3; ++index) {
         if (stage->scene.nodes[index] != NULL) {
-            lightOwnerRegister(stage->scene.nodes[index], 1);
+            /* A stage node is the model object the light owner registers. */
+            lightOwnerRegister(reinterpret_cast<AsdMdlObject *>(stage->scene.nodes[index]), 1);
             FUN_002e1230(stage->scene.nodes[index], 1);
             animOwnerSetScale(stage->scene.nodes[index], 1.0f);
         }

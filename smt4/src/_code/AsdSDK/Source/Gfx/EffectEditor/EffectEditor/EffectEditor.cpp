@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
 #define EFFECT_EDITOR_STORAGE_DEFINITIONS
 #include "gfx/EffectEditorStorage.h"

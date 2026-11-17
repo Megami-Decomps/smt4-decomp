@@ -1,5 +1,6 @@
 /* NON_MATCHING: initialises the GX graphics presets from a configuration (command buffers, the three render target blocks, display environment, default lighting/scale constants); written from the decompilation, the unrolled per-block target loops are merged into one helper and the many DAT_ globals keep their retail names, and the callback/label arguments of FUN_00149ae0, asdGfxSetTargetParameter and FUN_0014a82c (code and data labels in retail) are passed as NULL */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 #define GX_TARGET_BLOCK_TOP 0
 #define GX_TARGET_BLOCK_WIDE 1
@@ -49,13 +50,10 @@ void FUN_00149950(u32 count, u32 *handles);
 void FUN_00161074(u32 handle);
 void FUN_00149864(u32 format, u32 width, u32 height, u32 flags);
 void FUN_00149a88(u32 query, u32 *result);
-void FUN_00149840(u32 arg);
 void FUN_00144c9c(u32 a, u32 b, u32 c);
 void asdGxCommandListSetLists(void *lists);
 void asdGxCommandListSetNewListId(u32 id);
 void asdGxBindCmdlistAt(void *list, u32 arg);
-void asdGfxSetTargetParameter(u32 id, const void *data);
-void FUN_0014a82c(u32 id, u32 flag, const void *data);
 void FUN_0013f048(void);
 
 /* Creates the display buffers of one screen ring and records their addresses. */
@@ -74,7 +72,7 @@ static __inline void gxTargetBlockInit(AsdGxDisplayBuffers *block, u32 mode, u32
         FUN_00149a88(GX_RESULT_QUERY, &result);
         block->addresses[i] = result;
     }
-    FUN_00149840(0);
+    FUN_00149840(0, 0);
 }
 
 void FUN_00139c90(GxConfig *config)
@@ -122,7 +120,7 @@ void FUN_00139c90(GxConfig *config)
     DAT_0063ff4c = 0x4682937D;
     DAT_0063ff48 = 0;
     asdGfxSetTargetParameter(GX_MODE_TOP, NULL);
-    FUN_0014a82c(0x4FE74FAF, 0, NULL);
+    FUN_0014a82c(0x4FE74FAF, NULL);
     FUN_0013f048();
     DAT_0063ff88 = DAT_0063fe48 != GX_DEFAULT_DISPLAY_B;
     DAT_0063ff89 = DAT_0063fec0 != GX_DEFAULT_DISPLAY_B;

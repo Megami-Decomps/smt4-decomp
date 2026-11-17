@@ -35,7 +35,6 @@ extern "C" {
 extern VisibilityScene *g_modelGroups;
 void FUN_001e2d88();
 void modelSetScale(AsdMdlNode *, f32);
-void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
 void modelPartSetRotationDegrees(AsdMdlNode *, s32, f32, f32, f32);
 void modelSelectPrimaryMotion(AsdMdlNode *, f32);
 

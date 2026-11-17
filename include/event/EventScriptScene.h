@@ -11,7 +11,7 @@ struct EventScriptScene {
     /* 0x030 */ u8 unk030[0xD84];
     /* 0xDB4 */ void *scriptData;
     /* 0xDB8 */ void *messageData;
-    /* 0xDBC */ ScriptRunState *process;
+    /* 0xDBC */ ScriptProcess *process;
 };
 
 typedef char EventScriptSceneOffsets[

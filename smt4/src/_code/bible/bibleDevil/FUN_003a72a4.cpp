@@ -2,6 +2,7 @@
 #include "common.h"
 #include "bible/bibleDevil.h"
 #include "code/Code0029.h"
+#include "ui/UiSpriteApi.h"
 
 /* One animated cursor channel of the screen's widget. */
 struct BibleDevilChannel { u8 unk00[0x8c]; };
@@ -49,8 +50,6 @@ extern BibleDevilTasks DAT_0043d9c8;
 
 s32 useCounterIsFinished(void);
 void uiAnimationAdvanceChannel(BibleDevilWidget *, s32);
-u32 vec2GetYInt(BibleDevilChannel *);
-u32 vec2GetXInt(BibleDevilChannel *);
 void pointConvertToFloat(void *, u32, u32);
 s32 gameGetNavigationState(void);
 s32 gameGetFlagByte12e8(void);
@@ -79,7 +78,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
     }
     uiAnimationAdvanceChannel(&screen->widget, screen->selected);
     BibleDevilChannel *channel = &screen->widget.channels[screen->selected];
-    pointConvertToFloat(screen->rectangle, vec2GetXInt(channel), vec2GetYInt(channel));
+    pointConvertToFloat(screen->rectangle, vec2GetXInt((const UiSpriteState *)channel), vec2GetYInt((const UiSpriteState *)channel));
 
     if (gameGetNavigationState() != 0 && FUN_00293aac() == 0) {
         screen->state = 10;

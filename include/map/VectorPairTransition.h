@@ -20,10 +20,10 @@ struct VectorPairTransition {
     VectorPair delta;
     f32 smoothingDivisor;
 };
-/* Apocalypse copies one additional, currently opaque word with the transition. */
+/* Apocalypse copies the final camera heading with the transition. */
 struct VectorPairTransitionA {
     VectorPairTransition value;
-    u32 unk70;
+    f32 heading; /* the heading the map camera takes when the move ends */
 };
 struct VectorTransitionWork {
     u8 unk000[0x220];
@@ -41,7 +41,7 @@ typedef char VectorPairTransitionLayoutCheck[sizeof(VectorPair) == 0x18 &&
 typedef char VectorTransitionWorkOffsets[offsetof(VectorTransitionWork, transition) == 0x220 &&
     offsetof(VectorTransitionGlobals, work) == 4 && sizeof(VectorTransitionGlobals) == 8 ? 1 : -1];
 typedef char VectorPairTransitionALayoutCheck[sizeof(VectorPairTransitionA) == 0x74 &&
-    offsetof(VectorPairTransitionA, value) == 0 && offsetof(VectorPairTransitionA, unk70) == 0x70 ? 1 : -1];
+    offsetof(VectorPairTransitionA, value) == 0 && offsetof(VectorPairTransitionA, heading) == 0x70 ? 1 : -1];
 
 static inline void vectorPairComputeDelta(BattleVector3& delta, const BattleVector3& target,
                                          const BattleVector3& start, s32 duration)

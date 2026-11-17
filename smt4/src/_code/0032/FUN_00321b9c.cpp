@@ -1,12 +1,10 @@
 /* NON_MATCHING: zero constants and saved arguments use different registers, changing text-buffer setup and return scheduling. */
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMain.h"
 #include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
-int pairSetFirstResetSecond(void *pair, s32 value);
-int uiSpriteStateInitFromSource(void *widget, s32 kind, u32 selection, void *text, s32 capacity, f32 scale);
-int spriteStartAnimationByIndex(void *widget, s32 mode);
 
 /* Begin a script message using the current game slot and requested message id. */
 u32 FUN_00321b9c(void)

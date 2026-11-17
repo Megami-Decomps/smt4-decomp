@@ -3,7 +3,7 @@
 
 #include "common.h"
 #include "gamedata/DataTable25.h"
-#include "ui/UiSpriteKeyframes.h"
+#include "ui/UiSpriteApi.h"
 
 struct CollectionEntry {
     u16 id;
@@ -33,7 +33,6 @@ DataTable25Record *FUN_002bcf4c(u32 id);
 extern "C" {
 #endif
 
-void timerStart(UiSpriteKeyframeState *sprite, u32 frame, u32 alternate);
 
 #ifdef __cplusplus
 }

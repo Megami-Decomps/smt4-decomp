@@ -25,7 +25,7 @@ struct PlayLogRow {
 /* The play log screen's work as its per-frame update reads it. */
 struct PlayLogScreen {
     /* 0x000 */ UiResourceParameters parameters;
-    /* 0x020 */ UiAnimatedSprite sprites[5];
+    /* 0x020 */ UiSpriteState sprites[5];
     /* 0x2DC */ ScrollSelection list;
     /* 0x340 */ s32 frame;
     /* 0x344 */ s32 state;
@@ -51,9 +51,7 @@ typedef char PlayLogScreenOffsetCheck[
 extern "C" {
 extern PlayLogScreen *g_playLog;
 s32 padQueryLogicalKey(s32 key, s32 mode);
-s32 uiSpriteAdvanceAnimation(void *sprite, f32 step);
 s32 FUN_001643b4(u32 file, u32 index);
-void uiSpriteSelectAnim(void *sprite, s16 group);
 void eventQueueAddUniqueIfValid(s32 event);
 void FUN_002007f4(void *work);
 u8 FUN_00228b04(ScrollSelection *list, s32 mode);

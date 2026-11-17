@@ -4,6 +4,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/Shard0032.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "gamedata/SaveSlotRecord.h"
 
 /* A fusion pair as the unite screen reads it: one 64-bit word of bit fields. */
 struct UnitePairBits {
@@ -54,7 +55,6 @@ void buttonHelpSetText(const s8 *text, u32 color);
 s32 buttonHelpGetPanelMode(void);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list);
 s32 listCursorGetRowIfUnblocked(const void *object);
-void *slotRecordFindById(u32 id);
 void unitRecordBuild(s32 id, UnitRecord *out);
 void FUN_0035ad50(u32 id, UnitRecord *unit);
 void FUN_0032d0c8(void *directory, u32 index, u16 id, void *record);

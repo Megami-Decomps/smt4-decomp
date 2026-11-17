@@ -1,18 +1,16 @@
 #include "battle/btlPartnerAttack.h"
 #include "script/scrScriptProcess.h"
-struct ScriptState;
+struct ScriptProcess;
 extern "C" {
 extern const char DAT_00529854[];
 extern const char DAT_00529870[];
 void textFormatBuffer(char *output, const char *format, ...);
-void scrScriptProcessDestroy(ScriptResource *script);
 void asdMemFree(void *memory);
 void FUN_00416610(void *entries);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
-ScriptRunState *scrScriptProcessCreate(void *data, u32 flags);
-void scrScriptProcessStartEntry(ScriptRunState *state, u32 entry);
-void scriptProcessSetMode(ScriptRunState *state, s32 mode);
-u32 scrRunOpcodesStub(ScriptState *state);
+void scrScriptProcessStartEntry(ScriptProcess *state, u32 entry);
+void scriptProcessSetMode(ScriptProcess *state, s32 mode);
+u32 scrRunOpcodesStub(ScriptProcess *state);
 }
 static inline void releasePartnerScript(BtlPartnerAttackA *work)
 {
@@ -56,7 +54,7 @@ extern "C" void btlPartnerUpdateScript(BtlPartnerAttackA *work)
         scrScriptProcessStartEntry(work->runState, 0);
         break;
     case 2:
-        if (!work->scriptProcess || scrRunOpcodesStub(reinterpret_cast<ScriptState *>(work->scriptProcess)) == 2) {
+        if (!work->scriptProcess || scrRunOpcodesStub(reinterpret_cast<ScriptProcess *>(work->scriptProcess)) == 2) {
             if (work->argument && work->selected >= 0) {
                 FUN_00416610(work->entries);
                 work->actionState = 5;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: Quad bounds and clamp constants use different VFP scheduling. */
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 
 // Padding uses the engine's signed IEEE-754 bit comparison, including its NaN behavior.

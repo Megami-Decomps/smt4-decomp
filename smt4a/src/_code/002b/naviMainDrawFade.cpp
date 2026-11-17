@@ -1,14 +1,6 @@
-#include "common.h"
-
-/* The Apocalypse navi object, seen only down to its fade state. */
-struct NaviMainView {
-    /* 0x00000 */ u8 unk00000[0x206bc];
-    /* 0x206bc */ u8 fade[1];
-};
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
-extern NaviMainView *g_naviMain;
-
 void byteScreenFadeUpdateDraw(void *fade);
 
 /* "NAVI FADE DRAW" task: advances and draws the navi screen's fade, if the navi object exists; returns 0. */
@@ -17,7 +9,7 @@ s32 naviMainDrawFade(u32 handle)
     if (g_naviMain == NULL) {
         return 0;
     }
-    byteScreenFadeUpdateDraw(g_naviMain->fade);
+    byteScreenFadeUpdateDraw(g_naviMain->slider);
     return 0;
 }
 

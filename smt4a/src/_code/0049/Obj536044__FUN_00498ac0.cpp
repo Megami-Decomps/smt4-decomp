@@ -1,6 +1,7 @@
 #include "classes/Obj536044.h"
 #include "common.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "ui/UiSpriteApi.h"
 
 /* The appraisal shop scene. */
 struct AppraisalShop : public Obj536044 {
@@ -12,7 +13,7 @@ struct AppraisalShop : public Obj536044 {
         /* 0x03CC */ u8 sprites[0xD8];
         struct {
             u8 unk03CC[0x20];
-            /* 0x03EC */ UiAnimatedSprite cursor;
+            /* 0x03EC */ UiSpriteState cursor;
             u8 unk0478[0x2C];
         } animation;
     };
@@ -45,8 +46,6 @@ struct CountAt30;
 struct CountAt5A;
 extern "C" {
 void ifTouchRegionRemove(void);
-s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
-void FUN_00167458(void *vec, s32 arg);
 void sysPlaySe(s32 id);
 void uiSpriteBankApplyPreset(void *sprites, s32 preset);
 s32 scrRunOpcodesStub(u32 script);
@@ -67,8 +66,6 @@ void releaseEntriesA(CountAt30 *menu);
 void releaseEntriesB(CountAt5A *owner);
 void menuSynchronizeFlaggedSelection(MenuSelectionScan *menu, FlaggedMenuList *values);
 s32 messageMainIsIdle(void);
-u32 vec2GetXInt(void *vec);
-u32 vec2GetYInt(void *vec);
 s32 flaggedValueHolderGetTotal(void *values);
 }
 
@@ -114,7 +111,7 @@ void Obj536044::FUN_00498ac0()
         }
         return;
     case 3: {
-        UiAnimatedSprite *cursor = &appraisalShop(this)->animation.cursor;
+        UiSpriteState *cursor = &appraisalShop(this)->animation.cursor;
         FUN_00167458(cursor, 0);
         u32 y = vec2GetYInt(cursor);
         u32 x = vec2GetXInt(cursor);

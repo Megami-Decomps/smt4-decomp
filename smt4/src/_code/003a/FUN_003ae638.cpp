@@ -1,7 +1,6 @@
 /* NON_MATCHING: cell-column addresses require extra arithmetic and an extra literal; count/base registers differ from retail. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
-extern "C" BtlUiGlobals g_btlUi;
 
 /* Check whether the UI row itself or any of its listed cells is active. */
 extern "C" u32 FUN_003ae638(u32 unused, s32 row)

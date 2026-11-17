@@ -1,6 +1,7 @@
 /* NON_MATCHING: scoped visibility and linker speed getter recover frame and tail call; reset-speed constant lifetime and row pointer schedule differ. */
 #include "common.h"
 #include "code/Code002a.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -41,7 +42,6 @@ typedef struct PanelWorkView {
 } PanelWorkView;
 
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 void words2Copy(void *panel, PanelPair *out);
 void pairAt8Get(void *panel, PanelPair *out);
 void FUN_004935c8(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
@@ -73,7 +73,7 @@ void FUN_004a5344(PanelWork *work)
     struct PanelSelection { u8 prefix[0xA872]; s16 index; };
     const PanelSelection *selection = reinterpret_cast<const PanelSelection *>(work);
     const PanelScaleBank *bank = reinterpret_cast<const PanelScaleBank *>(work);
-    f32 scale = vec2GetSpeed(&bank->entries[selection->index]);
+    f32 scale = vec2GetSpeed((const UiSpriteState *)&bank->entries[selection->index]);
     u32 style = ((PanelWorkView *)work)->style;
 
     FUN_004935c8(work->panel, 1, 0, 0, style, scale);

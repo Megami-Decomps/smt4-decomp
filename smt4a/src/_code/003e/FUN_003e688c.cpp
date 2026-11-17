@@ -8,10 +8,8 @@
 struct BtlMainStateA;
 extern "C" {
 void asdMemFree(void *data);
-void scrScriptProcessDestroy(void *process);
-ScriptRunState *scrScriptProcessCreate(void *data, s32 mode);
-void scrScriptProcessStartEntry(void *process, s32 entry);
-s32 scrRunOpcodesStub(void *process);
+void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
+s32 scrRunOpcodesStub(ScriptProcess *process);
 s32 FUN_003efb18(BtlMainStateA *battle);
 
 /* Loads and executes a battle AI script, then releases both its process and file data. */
@@ -36,7 +34,7 @@ s32 FUN_003e688c(BtlAiScript *runner)
     case 2:
         if (runner->data != NULL) {
             runner->process = scrScriptProcessCreate(runner->data, 0);
-            ((ScriptRunState *)runner->process)->mode = 1;
+            runner->process->mode = 1;
             scrScriptProcessStartEntry(runner->process, 0);
             runner->unk0C = 3;
         }

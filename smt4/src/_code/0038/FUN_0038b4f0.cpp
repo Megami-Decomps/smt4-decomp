@@ -1,16 +1,16 @@
 /* NON_MATCHING: whole-parameter assignment uses one five-register LDM/STM and a larger saved frame; retail splits the first/final words from a three-word copy and merges flags with the first word. */
-#include "shard/W6_W6Match1_QueuedRequestToken.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 void* jyoucyuGetTableEntry(u32 index);
 
 // Queues parameters and their token unless a request is already pending.
-u32 FUN_0038b4f0(QueuedRequestState* state, const RequestParameters* parameters, u32 token)
+u32 FUN_0038b4f0(AocMain *main, const RequestParameters* parameters, u32 token)
 {
-    if (!(state->flags & 8)) {
-        state->parameters = *parameters;
-        reinterpret_cast<QueuedRequestTokenState*>(state)->token = token;
-        state->flags |= 9;
+    if (!(main->flags & 8)) {
+        main->request = *parameters;
+        main->token = token;
+        main->flags |= 9;
         jyoucyuGetTableEntry(0);
     }
     return 1;

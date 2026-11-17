@@ -55,15 +55,6 @@ void forwardRecoveredCallback(void *context);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void nodeSetScale(NodeOwner *owner, NodeVec3 scale);
-
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {

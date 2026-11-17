@@ -1,5 +1,6 @@
 /* NON_MATCHING: twin of the IV FUN_0038ebd8 - retail unpacks the pending event with an ldm/stm copy into a second 20-byte temp, keeps the state constants in r6/r7/r8 and orders the switch tests as a compare ladder (frame 72 bytes here 52); the state machine, calls and stored fields are the same. */
 #include "classes/AocMenu.h"
+#include "addon/aocMain.h"
 #include "classes/Obj422594.h"
 #include "test/BustupViewer.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -15,16 +16,9 @@ public:
 
 namespace {
 
-/* The art-of-contents record: only the word at +0x67c is read. */
-struct AocBlock {
-    /* 0x000 */ u8 unk000[0x67c];
-    /* 0x67c */ s32 entry;
-};
-
 }
 
 extern "C" {
-extern AocBlock *g_aocMain;
 s32 isEmptyString(RequestParameters *event);
 s32 byteIsAtLeast100(RequestParameters *event);
 void jobFlagsWorkStop(u32 *job);
@@ -110,8 +104,8 @@ void AocMenu::runWindowOperation()
         if (isEmptyString(&event) != 0) {
             jobFlagsWorkStop(job);
             WindowOperation *current;
-            if (g_aocMain->entry != 0) {
-                listScrollerInitialize(job + 0x90, 3, g_aocMain->entry, 0, 1, 1);
+            if (g_aocMain->recordCount != 0) {
+                listScrollerInitialize(job + 0x90, 3, g_aocMain->recordCount, 0, 1, 1);
                 Obj422594 *object = reinterpret_cast<Obj422594 *>(job + 0xba);
                 reinterpret_cast<u8 *>(job)[0x24d] = 1;
                 object->initialize(job + 0x90);

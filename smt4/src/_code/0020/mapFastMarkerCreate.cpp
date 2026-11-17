@@ -3,9 +3,7 @@
 
 extern "C" {
 void textFormatBuffer(char *output, const char *format, ...);
-AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 group);
 void lightOwnerRegister(AsdMdlObject *model, u32 enabled);
-void nodeSetTranslation(AsdMdlNode *node, s32 index, const f32 *position);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void asdTMTexTablePrepareNodeImage(u32 group, u32 id);

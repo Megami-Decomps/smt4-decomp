@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the global pool load is placed before the push (retail: right after it); the loop reads count in its condition, which fixed the value/count loads. */
 #include "shard/Shard0033.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "status/StatusCamera.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 

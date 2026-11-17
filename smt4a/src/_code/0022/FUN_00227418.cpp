@@ -75,13 +75,13 @@ u32 FUN_00227418(void)
         FUN_00288538(1);
         break;
     case 0x20: case 0x21: case 0x22:
-        if (uniteGetState() == 3 || camp->sprites[0].animationFlags.completed == 0) {
+        if (uniteGetState() == 3 || camp->sprites[0].finished == 0) {
             campDrawBar(camp);
             FUN_00217f14();
         }
         break;
     case CAMP_MENU_UNITE_LOCKED:
-        if (camp->unitSelectActive != 0 && camp->sprites[0].animationFlags.completed == 0) {
+        if (camp->unitSelectActive != 0 && camp->sprites[0].finished == 0) {
             campDrawBar(camp);
             FUN_00217f14();
         }

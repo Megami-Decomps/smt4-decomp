@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild of the status-down menu draw; retail enters the shared "unselected cell" test by goto from two branches and keeps the cursor row and the highlight flag in registers across the calls, and the banner text literal is the draft's decoding of the original bytes. */
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDownA.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -14,7 +15,6 @@ void efctSetSpeed(f32 alpha);
 void textFormatBuffer(u8 *buffer, const char *format);
 s32 fontMeasureLineAdvance(u8 *text, s32 font);
 void statusDownDrawEndBanner(s32 x, s32 y, f32 alpha);
-s32 vec2GetYInt(void *vec);
 void FUN_002f67c4(s32 card, s32 x, s32 y, s32 order);
 void FUN_0037e5c0(s32 card, s32 x, s32 y);
 

@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026b0e4` (_code @ 0x26b0e4, 0x10ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -55,7 +55,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
@@ -116,8 +115,8 @@ unsigned int FUN_0026b0e4(void)
   int temp_v24;
   
   temp_v11 = g_statusDown;
-  temp_v0 = vec2GetXInt(reinterpret_cast<const void *>(g_statusDown + 0x28));
-  temp_v1 = vec2GetYInt(temp_v11 + 0x28);
+  temp_v0 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(g_statusDown + 0x28)));
+  temp_v1 = vec2GetYInt((UiSpriteState *)(temp_v11 + 0x28));
   float bannerAlpha = *(float *)(temp_v11 + 0x48);
   if (bannerAlpha < 0.0f) {
     bannerAlpha = 0.0f;

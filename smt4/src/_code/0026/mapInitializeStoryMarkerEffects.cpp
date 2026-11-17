@@ -1,9 +1,8 @@
 #include "common.h"
+#include "map/LmapMainGlobals.h"
 
 struct MapEffectRecord { f32 x, y, z; u32 id, first, second; };
-struct MapEffectState { u8 unk00[0x40]; u32 map; };
 extern "C" {
-extern MapEffectState *g_lmapMainState;
 extern MapEffectRecord DAT_00447358[16];
 extern const char DAT_004043b8[];
 void FUN_00297a00();
@@ -20,8 +19,8 @@ void mapInitializeStoryMarkerEffects(u32 context)
     FUN_00297a00();
     FUN_0027b65c(context, 0);
     mapSpawnActiveSlotEffects();
-    MapEffectState *map = g_lmapMainState;
-    if (gameFlagIsSet(0x261) && map->map == 101) {
+    LmapMainState *map = g_lmapMainState;
+    if (gameFlagIsSet(0x261) && map->mapId == 101) {
         for (u32 i = 0; i < 16; ++i) {
             const MapEffectRecord &record = DAT_00447358[i];
             FUN_00263cb8(0, 0, DAT_004043b8, 60, 39, -1, record.first & 0xff, record.second & 0xff,

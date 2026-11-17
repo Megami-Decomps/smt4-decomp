@@ -3,6 +3,7 @@
 #include "camp/Unite/UniteWork.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 
 struct PartyPanelFusionResult {
     u8 available;  // 0x00
@@ -15,7 +16,6 @@ extern "C" {
 
 u8 FUN_004da344(UniteWorkA *work, u32 first, u32 second, s32 special, PartyPanelFusionResult *output);
 u32 FUN_002a4b28(u32 index);
-SlotRecordA *slotRecordFindById(u32 id);
 void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
 void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);

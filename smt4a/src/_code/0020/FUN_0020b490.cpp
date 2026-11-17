@@ -5,13 +5,13 @@
 #include "code/Code002c.h"
 #include "gamedata/SaveSlotTable.h"
 
-struct ScriptRunState;
+struct ScriptProcess;
 extern "C" {
 s32 ifTouchRegionRemove(void);
 void sysPlaySe(u16 sound);
 void FUN_00168980(s32 mode);
 void buttonHelpSetText(s32 target, u32 color);
-void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 void statusDownSwitchTab(u8 value);
 void FUN_002c8538(u8 value);
 void FUN_002c85b0(u8 value);
@@ -35,7 +35,7 @@ void FUN_0020b490(EngineUnits *result, s32 mode)
         u32 unk4378;
         u32 pending;
         u8 unk4380[0x20];
-        ScriptRunState *script;
+        ScriptProcess *script;
         u8 unk43a4[0x10];
         s16 touchRegionCount;
     };

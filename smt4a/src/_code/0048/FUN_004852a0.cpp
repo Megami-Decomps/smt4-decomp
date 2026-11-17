@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "ui/UiSpriteApi.h"
 
 struct StateSetterSpriteWork {
     u8 unk000[0xa4];
@@ -6,14 +7,11 @@ struct StateSetterSpriteWork {
     u32 unk0a8;
     s32 savedSpriteX;
     u8 unk0b0[0x270];
-    UiAnimatedSprite firstSprite; // 0x320
-    UiAnimatedSprite secondSprite; // 0x3ac
+    UiSpriteState firstSprite; // 0x320
+    UiSpriteState secondSprite; // 0x3ac
 };
 
 extern "C" {
-s32 FUN_00167458(UiAnimatedSprite* sprite, s32 reverse);
-s32 uiSpriteAdvanceAnimation(UiAnimatedSprite* sprite, f32 frameStep);
-s32 vec2GetXInt(UiAnimatedSprite* sprite);
 void stateSetterEnterState(StateSetterSpriteWork* work, s32 state);
 
 void FUN_004852a0(StateSetterSpriteWork* work)

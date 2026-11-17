@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script command: logical not; pops a number and pushes 1 when it is zero, else 0. */
-u32 scrOpLogicalNot(ScriptVmProcess *process)
+u32 scrOpLogicalNot(ScriptProcess *process)
 {
     s32 result;
 

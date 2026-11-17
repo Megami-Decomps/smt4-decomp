@@ -1,4 +1,5 @@
 /* NON_MATCHING: prologue order, fallback-name lifetime and the constant-argument schedule of the final tail call differ. */
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
 #include "code/Code0033.h"
@@ -12,10 +13,6 @@ struct BibleAnalyzeTextGlobals {
 }
 extern "C" {
 u32 shopListItemGetId(const BibleAnalyzeListEntry *entry);
-void uiSpriteAdvanceAnimation(UiAnimatedSprite *, f32 speed);
-s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
-s32 vec2GetXInt(const UiAnimatedSprite *);
-s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 u8 buttonHelpIsNotActive(void);
 void FUN_0032d0c8(s32 channel, s32 kind, u32 id, s32 mode);
@@ -32,7 +29,7 @@ extern BibleAnalyzeTextGlobals DAT_0057f0a0;
 void Obj55c8d0::FUN_004a4d70()
 {
     Screen4A * screen = reinterpret_cast<Screen4A *>(this);
-    UiAnimatedSprite *selection = &screen->animation.selection;
+    UiSpriteState *selection = &screen->animation.selection;
     screen->unkA872 = 8;
     uiSpriteAdvanceAnimation(selection, 1.0f);
     s32 y = vec2GetYInt(selection);

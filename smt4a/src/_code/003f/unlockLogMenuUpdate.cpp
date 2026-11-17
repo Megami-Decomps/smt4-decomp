@@ -17,13 +17,13 @@ struct UnlockLogUpdateWork {
     /* 0x040 */ u8 unk040[0xe4];
     /* 0x124 */ s32 counter;
     /* 0x128 */ u8 unk128[0x44];
-    /* 0x16C */ SpritePlaybackView first;
-    /* 0x1F8 */ SpritePlaybackView second;
-    /* 0x284 */ SpritePlaybackView third;
+    /* 0x16C */ UiSpriteState first;
+    /* 0x1F8 */ UiSpriteState second;
+    /* 0x284 */ UiSpriteState third;
     /* 0x310 */ u8 unk310[0x118];
-    /* 0x428 */ SpritePlaybackView fourth;
+    /* 0x428 */ UiSpriteState fourth;
     /* 0x4B4 */ u8 unk4b4[0x8c];
-    /* 0x540 */ SpritePlaybackView fifth;
+    /* 0x540 */ UiSpriteState fifth;
     /* 0x5CC */ u8 unk5cc[8];
     /* 0x5D4 */ u8 visible;
     /* 0x5D5 */ u8 unk5d5[0xf];
@@ -35,9 +35,6 @@ extern "C" {
 void unlockLogMenuInitializeReadyResources(UnlockLogUpdateWork *work);
 void FUN_003f5ed8(UnlockLogUpdateWork *work);
 void dialogEnterState(UnlockLogUpdateWork *work, u32 state, u32 argument);
-u32 uiSpriteAdvanceAnimation(SpritePlaybackView *sprite, f32 speed);
-void uiSpriteSetKeyframe(SpritePlaybackView *sprite, s16 key, s32 mode);
-void uiSpriteSetImageKeyframe(SpritePlaybackView *sprite, s16 key, s32 mode);
 void FUN_003f56ac(UnlockLogUpdateWork *work);
 void scrScriptProcessStartEntry(void *script, u32 entry);
 s32 scrRunOpcodesStub(void *script);
@@ -71,12 +68,12 @@ extern "C" s32 unlockLogMenuUpdate(UnlockLogUpdateWork *work)
         u32 firstDone = uiSpriteAdvanceAnimation(&work->fifth, 1.0f);
         u32 secondDone = uiSpriteAdvanceAnimation(&work->second, 1.0f);
         if (firstDone & secondDone)
-            dialogEnterState(work, work->second.frameKey == 1 ? work->nextState : 7, 0);
+            dialogEnterState(work, work->second.alphaKey == 1 ? work->nextState : 7, 0);
         break;
     }
     case 6:
         if (uiSpriteAdvanceAnimation(&work->third, 1.0f)) {
-            if (work->third.frameKey != 1) {
+            if (work->third.alphaKey != 1) {
                 dialogEnterState(work, 7, 0);
                 work->firstFlag = 0;
                 work->secondFlag = 0;

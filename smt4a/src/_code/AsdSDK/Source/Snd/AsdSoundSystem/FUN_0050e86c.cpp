@@ -1,16 +1,16 @@
 /* NON_MATCHING: retail keeps the defaults pointer in ip and pools it before 1.0f; the build keeps it in r0 and pools 1.0f first. */
 #include "common.h"
 #include "util/BitsAndBytes.h"
+#include "shard/W6_W6Match7_QuadVectors.h"
 struct StartupVectorDefaults {
     /* 0x00 */ u8 unk00[0x1C];
     /* 0x1C */ f32 unk1C[4];
-    /* 0x2C */ f32 vectors[4][4];
+    /* 0x2C */ QuadVector vectors[4];
 };
 extern "C" {
 extern StartupVectorDefaults DAT_006306f8;
 extern u32 DAT_0063098c[5];
-void vectorSetAllOne(f32*);
-void* __aeabi_vec_ctor_nocookie_nodtor(void*, void (*)(f32*), u32, u32);
+void* __aeabi_vec_ctor_nocookie_nodtor(void*, void (*)(QuadVector*), u32, u32);
 
 void FUN_0050e86c(void)
 {

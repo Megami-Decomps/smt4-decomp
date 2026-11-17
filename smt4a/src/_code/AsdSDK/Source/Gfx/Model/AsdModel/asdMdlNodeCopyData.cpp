@@ -31,20 +31,18 @@ EmitterCloneModelBody *FUN_001b6d08(const ModelInstanceDescription *description,
     void *resource, AsdAllocatorObject *allocator);
 void FUN_00386548(EmitterCloneModelBody *instance);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
-void FUN_0019cbf8(AsdMdlObject *model);
-void FUN_0019d57c(AsdMdlObject *model, u32 context);
+void FUN_0019cbf8(AsdMdlNode *model);
+void FUN_0019d57c(AsdMdlNode *model, u8 *data);
 
-void asdMdlNodeCopyData(AsdMdlObject *destination, const AsdMdlObject *source, s32 mode)
+void asdMdlNodeCopyData(AsdMdlNode *destination, AsdMdlNode *source, s32 mode)
 {
     // The instance array and native model pointer extend past the recovered shared model prefix.
     struct ModelView {
-        AsdMdlObject prefix;
-        u8 unk1C[8];
+        u8 prefix[0x24];
         EmitterCloneModelBody **instances;
         u32 instanceCount;
         EmitterCloneModelBody *instance;
     };
-    struct SharedResource { u32 references; u8 unk04[8]; u32 context; };
     typedef char LayoutCheck[sizeof(ModelInstanceDescription) == 32 &&
         __INTADDR__(&((ModelView *)0)->instance) == 0x2c ? 1 : -1];
     ModelView *result = reinterpret_cast<ModelView *>(destination);
@@ -69,9 +67,8 @@ void asdMdlNodeCopyData(AsdMdlObject *destination, const AsdMdlObject *source, s
         destination->flags |= 2;
         ++g_gfxSettings.unk40;
     }
-    destination->request = source->request;
-    SharedResource *resource = static_cast<SharedResource *>(destination->request);
-    ++resource->references;
+    destination->file = source->file;
+    ++destination->file->refCount;
     result->instanceCount = 1;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 0x129b);
     result->instances = static_cast<EmitterCloneModelBody **>(asdMemoryAlloc(0x100, 0x100, 0, result->instanceCount * 4, 1));
@@ -79,6 +76,6 @@ void asdMdlNodeCopyData(AsdMdlObject *destination, const AsdMdlObject *source, s
     if (mode == 0) {
         FUN_0019cbf8(destination);
     }
-    FUN_0019d57c(destination, static_cast<SharedResource *>(destination->request)->context);
+    FUN_0019d57c(destination, destination->file->data);
 }
 }

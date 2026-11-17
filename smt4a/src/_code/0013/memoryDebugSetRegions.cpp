@@ -1,14 +1,8 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "classes/AllocatorState.h"
 
 /* The memory debug display's copy of the four heap regions (Apocalypse layout). */
-struct MemoryDebugRegions {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u32 regionBase[4]; /* main, extra, VRAM A, VRAM B */
-    /* 0x30 */ u32 regionSize[4];
-};
-
 extern "C" {
-extern MemoryDebugRegions g_allocationAddressRanges;
 
 /* Records the four heap regions (main, extra, VRAM A, VRAM B) for the memory debug display. */
 void memoryDebugSetRegions(AsdMemRegion main, AsdMemRegion extra, AsdMemRegion vramA, AsdMemRegion vramB)

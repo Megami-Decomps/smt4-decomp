@@ -3,20 +3,13 @@
 #include "mapnavi/naviMain.h"
 #include "gamedata/SkillDataRecord.h"
 #include "sys/RuntimeObjects.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 
 /* Battle reward input: base experience and the enemy level it came from. */
 struct RewardSource {
     s32 experience;
     s32 level;
-};
-
-/* A party member's slot record (accessed fields). */
-struct SlotRecord {
-    u8 unk00[0x34];
-    u16 itemIds[8];     // 0x34
-    u8 unk44[0x20];
-    u16 growthType;     // 0x64
-    u8 unk66;           // 0x66: reward slot the member's share goes to
 };
 
 struct ItemRecord {
@@ -40,11 +33,9 @@ struct RewardOwner {
 
 extern "C" {
 extern RewardOwner g_engineCleanupOwner;
-s8 *gameGetSlotTable(void);
 void gameGetPlayerData(void);
 s32 FUN_0022fd80(s32 experience, s32 level);
-SlotRecord *gameGetSlotRecord(s32 slot);
-s32 bitsAt60Test(SlotRecord *record, u32 bit);
+s32 bitsAt60Test(SlotRecordA *record, u32 bit);
 s32 dataTable9Type3GetClamped(u32 growthType, s32 level);
 void *partyGetSlotPreferredFirst(u32 index);
 s32 partySlotMatchesSelected(void *actor);
@@ -53,34 +44,34 @@ s32 partySlotMatchesSelected(void *actor);
 void FUN_00331c60(RewardSource *source)
 {
     RewardTotals *totals = g_engineCleanupOwner.totals;
-    s8 *slotTable = gameGetSlotTable();
+    SaveSlotTableA *slotTable = gameGetSlotTable();
     gameGetPlayerData();
     s32 experience = source->experience;
     s32 level = source->level;
     if (playerHasFlagBit(1) == 0 && playerHasFlagBit(10) == 0)
         totals->entries[0].total += FUN_0022fd80(experience, level);
     for (s32 slot = 0; slot < 24; slot++) {
-        if (slotTable[0x1C88 + slot] < 0)
+        if (slotTable->party[slot] < 0)
             continue;
-        SlotRecord *record = gameGetSlotRecord(slotTable[0x1C88 + slot]);
+        SlotRecordA *record = gameGetSlotRecord(slotTable->party[slot]);
         if (bitsAt60Test(record, 1) != 0 || bitsAt60Test(record, 10) != 0 || bitsAt60Test(record, 2) != 0)
             continue;
-        SlotRecord *member = gameGetSlotRecord(slotTable[0x1C88 + slot]);
+        SlotRecordA *member = gameGetSlotRecord(slotTable->party[slot]);
         f32 multiplier = 1.0f;
         for (s32 i = 0; i < 8; i++) {
-            if (member->itemIds[i] != 0) {
-                ItemRecord *item = reinterpret_cast<ItemRecord *>(dataTable41FindById(member->itemIds[i]));
+            if (member->skills[i] != 0) {
+                ItemRecord *item = reinterpret_cast<ItemRecord *>(dataTable41FindById(member->skills[i]));
                 if (item != 0 && item->experienceRate != 0)
                     multiplier = item->experienceRate * 0.01f * multiplier;
             }
         }
         u32 baseShare = static_cast<u32>(experience * static_cast<s32>(multiplier * 100.0f)) / 100;
-        u32 share = baseShare * dataTable9Type3GetClamped(member->growthType, level) / 100;
+        u32 share = baseShare * dataTable9Type3GetClamped(member->level, level) / 100;
         if (share == 0 && baseShare != 0)
             share = 1;
         if (share == 0 && experience != 0)
             share = 1;
-        totals->entries[1 + record->unk66].total += share;
+        totals->entries[1 + record->tableIndex].total += share;
     }
     for (u32 i = 0; i < 12; i++) {
         void *actor = partyGetSlotPreferredFirst(static_cast<u16>(i));

@@ -1,8 +1,8 @@
 /* NON_MATCHING: the category-bytes update now matches; in the payload-bytes update retail holds the usage block in r3 and the alignment in r1 (the build swaps them), and schedules add r0, r4, #20 one instruction later. */
 #include "sys/AllocationTracking.h"
+#include "classes/AllocatorState.h"
 
 extern "C" {
-extern AllocationTracking g_allocationAddressRanges;
 u32 FUN_0019c40c(AllocationHeaderA *header);
 
 static void subtractCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)

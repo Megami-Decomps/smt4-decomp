@@ -1,4 +1,5 @@
 /* NON_MATCHING: the capture flags are now reached through base+0xf00 as in retail; armcc still chains the captured/shown tests with conditional loads (retail branches on each) and places the counter update's return block differently (retail falls into FUN_001137fc's call and returns from the end). */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "frame_tex/FrameTex.h"

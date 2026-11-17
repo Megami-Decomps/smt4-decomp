@@ -10,7 +10,6 @@ EngineUnitRecord *partyGetSlotPreferredFirst(u16 index);
 u8 flagAt4IsClearOrMissing(void);
 u32 uiSelectedRecordGetFirst(void);
 
-extern EngineUnitsRef g_engineCleanupOwner;
 
 /* Script command: returns the active unit's id (argument set) or its record's id; without a unit
  * table, the selected record's id, or 0 when the flag is clear. */

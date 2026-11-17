@@ -1,8 +1,8 @@
 #include "ui/PartyPanelState.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/SaveSlotTableIV.h"
+
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable(void);
 void btlItemComputeValues(s32 unit, u16 item, s32 *first, s32 *second);
 s32 partyWidgetGetX(PartyPanelWidget *widget);
 s32 partyWidgetGetCost(PartyPanelWidget *widget);
@@ -13,7 +13,7 @@ void FUN_00298d28(s32 x, s32 y);
 void partyPanelRefreshItemPreview(void)
 {
     PartyPanelState *panel = g_partyPanel;
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     s32 first = 0, second = 0;
     if (panel->activeSlots[0] != 0) {
         btlItemComputeValues(-1, panel->previewItem, &first, &second);

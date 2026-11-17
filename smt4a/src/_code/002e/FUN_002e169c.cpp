@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~205 rows); retail loads the render-context pointer before the ring-push value call and spills differently */
 #include "common.h"
 #include "camp/RenderCtx.h"
@@ -50,7 +50,6 @@ extern ButtonHelpHolder g_buttonHelp;
 u32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
-s32 vec2GetYInt(void* vec);
 void FUN_00164168(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);
 void FUN_002acfc8(void* label, s32 x, s32 y);
 void skinObjectUpdateMatrices(RenderCtxA* ctx);
@@ -74,8 +73,8 @@ u8 FUN_002e169c(void)
                 fadeObjectResetIfActive(help->fadeD);
                 fadeObjectResetIfActive(help->fadeB);
             } else {
-                s32 x = vec2GetXInt(help->fadeA);
-                s32 y = vec2GetYInt(help->fadeA);
+                s32 x = vec2GetXInt((UiSpriteState *)help->fadeA);
+                s32 y = vec2GetYInt((UiSpriteState *)help->fadeA);
                 texDrawTableEntryAtStoredOrigin(2, 10, 0, x, y, 16);
                 texDrawTableEntryAtStoredOrigin(2, 10, 1, x, y, 16);
                 texDrawTableEntryAtStoredOrigin(2, 10, 163, x, y, 16);

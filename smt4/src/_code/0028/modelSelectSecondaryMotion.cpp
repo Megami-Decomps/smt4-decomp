@@ -1,11 +1,11 @@
 /* NON_MATCHING: virtual-call operands, track accessor setup and blend-store scheduling differ. */
-#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
-static __inline f32 secondaryMotionBlendLimit(const AsdMotionModel *model)
+static __inline f32 secondaryMotionBlendLimit(const AsdMdlNode *model)
 {
-    if (model->secondary.motionCount > 0 && model->owner->secondary.active != 0) {
-        AsdTrackOwner *owner = model->owner;
-        AsdTrackNode *node = owner->list->getItem(owner->secondary.index, 0);
+    if (model->secondaryMotionCount > 0 && model->sceneNode->secondaryActive != 0) {
+        AsdMdlSceneNode *sceneNode = model->sceneNode;
+        AsdTrackNode *node = sceneNode->trackList->getItem(sceneNode->secondaryIndex, 0);
         if (node != NULL)
             return static_cast<AsdTrackBlendNode *>(node)->blendLimit;
     }
@@ -13,16 +13,16 @@ static __inline f32 secondaryMotionBlendLimit(const AsdMotionModel *model)
 }
 
 // Select a secondary motion and update its interpolation without exceeding the track's limit.
-extern "C" void modelSelectSecondaryMotion(AsdMotionModel *model, s32 index, f32 blend)
+extern "C" void modelSelectSecondaryMotion(AsdMdlNode *model, s32 index, f32 blend)
 {
-    model->secondaryRate.speed = 1.0f;
-    if (index < 0 || model->secondary.motionCount <= 0 || index >= model->secondary.motionCount)
+    model->secondarySpeed = 1.0f;
+    if (index < 0 || model->secondaryMotionCount <= 0 || index >= model->secondaryMotionCount)
         return;
-    AsdMotionInstance *instance = model->secondary.instance;
+    AsdMotionInstance *instance = model->secondaryInstance;
     if (instance == NULL)
         return;
-    instance->vtbl->setMotion(instance, model->secondary.motionTable[index]);
-    model->secondary.currentMotion = index;
+    instance->vtbl->setMotion(instance, model->secondaryMotionTable[index]);
+    model->secondaryCurrentMotion = index;
     if (blend != 0.0f) {
         f32 limit = secondaryMotionBlendLimit(model);
         if (blend > limit)

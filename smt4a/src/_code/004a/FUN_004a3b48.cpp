@@ -111,12 +111,12 @@ void FUN_004a3b48(StatusPanel *panel)
             UnitRecord unit;
             __aeabi_memcpy4(&unit, member, sizeof(UnitRecord));
             for (s32 i = 0; i < 0x40; i++) {
-                unit.inheritance.flags[i] = 0;
+                unit.inheritedFlags[i] = 0;
             }
             unitRecomputeDerivedStats(&unit);
-            unit.unk2A = recordGetScaledMaximum(&unit);
-            unit.unk2C = unit.unk10;
-            ((u16 *)unit.unk5E)[1] = 0;
+            unit.hp = recordGetScaledMaximum(&unit);
+            unit.mp = unit.maxMp;
+            unit.ailments = 0;
             objBInitBlock19D0(&unit, 0);
             FUN_0033449c(1);
             if (state->viewing != 0) {

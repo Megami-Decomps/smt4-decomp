@@ -1,4 +1,5 @@
 /* NON_MATCHING: structure now matches retail (branch-duplicated surface copy, 480-wide view when the single-view flag is clear and the primary surface is used); scheduling of the scale divisions/VFP conversions and of the g_titleScene loads still differs */
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "frame_tex/FrameTex.h"

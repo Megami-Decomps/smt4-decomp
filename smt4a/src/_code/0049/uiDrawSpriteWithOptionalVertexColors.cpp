@@ -9,7 +9,6 @@ extern "C" {
 f32 jobGetScalarValue();
 void efctSetSpeed(f32);
 void gxResetColorQuadToWhite();
-void vectorSetAllOne(QuadVector *);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *, void (*)(QuadVector *), u32, u32);
 void quadSetOrderedVectors(const QuadVector *, const QuadVector *, const QuadVector *,
                   const QuadVector *, s32, s32);

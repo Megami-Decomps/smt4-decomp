@@ -1,6 +1,7 @@
 /* NON_MATCHING: allocation sites now repeat the heap-kind selection inline with their asdDebugTrace(MoriModelResource.cpp, line) calls like retail (lines 131/134, 159/162, 176, 188/191, 208, 218/221); remaining differences are register numbering and the shared fallthrough jumps */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 #define MEMORY_DEFAULT 0x10000
 #define MEMORY_MAIN 0x20000
@@ -31,7 +32,6 @@ struct CameraAnimState {
 extern "C" {
 void *asdMemoryAlloc(u32 kind, u32 alignment, u32 region, u32 size, u32 option);
 void *asdMemoryAllocAligned(u32 kind, u32 alignment, u32 region, u32 size, u32 align, u32 option);
-void FUN_0017cf74(void *from, void *to);
 void _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(void *state, void *resource);
 
 /* Loads a camera animation resource into `state`: points its six tables into the resource, then
@@ -124,13 +124,13 @@ void FUN_00187e08(u8 *state, u8 *resource, s32 kindC, s32 kindA, s32 kindB)
     }
     _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(state + 0xC, resource);
     if (kindA != MEMORY_DEFAULT && *(s32 *)(resource + 0x2C) != 0)
-        FUN_0017cf74(previousA, t->slots[3]);
+        FUN_0017cf74(previousA, t->slots[3], *(u32 *)(resource + 0x2C));
     if (*(s32 *)(resource + 0x30) != 0 && kindB != MEMORY_DEFAULT)
-        FUN_0017cf74(NULL, t->slots[4]);
+        FUN_0017cf74(NULL, t->slots[4], *(u32 *)(resource + 0x30));
     if (kindC != MEMORY_DEFAULT && *(s32 *)(resource + 0x28) != 0)
-        FUN_0017cf74(t->alignedAMirror, t->slots[2]);
+        FUN_0017cf74(t->alignedAMirror, t->slots[2], *(u32 *)(resource + 0x28));
     if (kindD != MEMORY_DEFAULT && *(s32 *)(resource + 0x3C) != 0)
-        FUN_0017cf74(t->alignedBMirror, t->alignedB);
+        FUN_0017cf74(t->alignedBMirror, t->alignedB, *(u32 *)(resource + 0x3C));
 }
 
 } /* extern "C" */

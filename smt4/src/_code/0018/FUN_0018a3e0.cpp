@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018a3e0` (_code @ 0x18a3e0, 0x880 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -35,7 +36,6 @@ int uiScrollHandleActionsOrTouch(...);
 int gameGetUnitRecord(void);
 int ifTouchRegionRemove(void);
 int eventQueueAddUniqueIfValid(...);
-int timerStart(...);
 int FUN_002c1658(...);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
@@ -143,7 +143,7 @@ void FUN_0018a3e0(void)
     beginStatusPanelClose();
     FUN_00298d0c(0);
     FUN_00299900(0);
-    timerStart(temp_v6 + 0x6d4,3,0);
+    timerStart((UiSpriteState *)(temp_v6 + 0x6d4),3,0);
     *(unsigned int *)(temp_v6 + 0x20) = 6;
     temp_v3 = g_camp;
     puVar9 = (unsigned int *)(g_camp + 0x18);
@@ -208,12 +208,12 @@ void FUN_0018a3e0(void)
       }
       temp_v3 = gameGetFlagByte12e8();
       if (temp_v3 < 0) {
-        timerStart(temp_v6 + 0x6d4,4,0);
+        timerStart((UiSpriteState *)(temp_v6 + 0x6d4),4,0);
       }
       else {
         temp_v3 = gameGetFlagByte12e8();
         if (0 < temp_v3) {
-          timerStart(temp_v6 + 0x6d4,3,0);
+          timerStart((UiSpriteState *)(temp_v6 + 0x6d4),3,0);
         }
       }
       *(unsigned int *)(temp_v6 + 0x20) = 0x15;
@@ -321,7 +321,7 @@ LAB_0018a948:
             return;
           }
           campReleaseScreenTouchRegions(temp_v6 + 0x1dc,1);
-          timerStart(temp_v6 + 0x6d4,3,0);
+          timerStart((UiSpriteState *)(temp_v6 + 0x6d4),3,0);
           FUN_0029dfc0(0);
           FUN_00298d0c(0);
           *(unsigned int *)(temp_v6 + 0x20) = 0xf;
@@ -383,7 +383,7 @@ LAB_0018a948:
     beginStatusPanelClose();
     FUN_00298d0c(0);
     FUN_00299900(0);
-    timerStart(temp_v6 + 0x6d4,3,0);
+    timerStart((UiSpriteState *)(temp_v6 + 0x6d4),3,0);
     *(unsigned int *)(temp_v6 + 0x20) = 6;
     temp_v6 = g_camp;
     puVar9 = (unsigned int *)(g_camp + 0x18);

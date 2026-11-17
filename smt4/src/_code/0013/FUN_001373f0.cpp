@@ -10,7 +10,6 @@ struct AsdCmdChunk {
 };
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern u32 *g_commandBufferCursor;
 extern u32 *g_commandBufferEnd;
 
@@ -26,10 +25,8 @@ void FUN_002ba2b8(void);
  * 8-byte aligned) and, for the active buffer, advances the write cursor and wakes the submitter. */
 void FUN_001373f0(u32 handle, AsdCmdChunk *chunk)
 {
-    // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.
-    struct BufferNode { AsdCmdBuffer buffer; BufferNode *next; };
     bool first = true;
-    BufferNode *node = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
+    CommandBufferHandleNode *node = g_asdGfxContext.buffers[handle & 31];
     AsdCmdBuffer *buffer;
     u32 i;
 
@@ -84,9 +81,9 @@ void FUN_001373f0(u32 handle, AsdCmdChunk *chunk)
         if (chunk->recordCount != 0) {
             nngxLockEnter();
             buffer->listCount += chunk->recordCount;
-            if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled != 0 &&
-                g_asdGfxContext.submission.pending == 0) {
-                g_asdGfxContext.submission.pending = 1;
+            if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submitEnabled != 0 &&
+                g_asdGfxContext.submitPending == 0) {
+                g_asdGfxContext.submitPending = 1;
                 FUN_002ba2b8();
             }
             nngxLockLeave();

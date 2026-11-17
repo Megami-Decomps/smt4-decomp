@@ -5,18 +5,15 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 extern AocDisplay *g_aocDisplay;
 void FUN_00233818(const void **dispatch);
 void ifTouchRegionClearAll(void *window);
 void jobStopAndClearFlags(void *owner);
 void jobOwnerFreeSlotAndStop(u32 *job);
-void scrScriptProcessDestroy(void *script);
 void asdTMTexTableReleaseNode(s32 entry, s32 node);
 void asdMemFree(void *memory);
 void jobStop(u32 job, s32 mode);
 s32 jobIsValid(u32 job);
-
 
 /* Clears flag bits of the add-on main object. */
 static __inline void aocMainClearFlags(AocMain *main, u32 mask)
@@ -27,31 +24,22 @@ static __inline void aocMainClearFlags(AocMain *main, u32 mask)
 void AocMenu::releaseStepResources()
 {
     SceneWindowWork * work = reinterpret_cast<SceneWindowWork *>(this);
-    union MainView {
-        AocMain base;
-        struct {
-            u8 unk000[0xb81];
-            u8 refreshDisplay;
-            u8 unkb82[0x1ce];
-            u8 refreshContent;
-        } refresh;
-    };
     union CleanupView {
         SceneWindowWork base;
         struct {
             u8 unk0000[0x350];
             void *buffer;
             u32 unk0354;
-            void *script;
+            ScriptProcess *script;
             u8 unk035c[0x1450];
             s32 touchRegion;
         } resources;
     };
-    MainView *main = reinterpret_cast<MainView *>(g_aocMain);
+    AocMain *main = g_aocMain;
     CleanupView *scene = reinterpret_cast<CleanupView *>(work);
-    aocMainClearFlags(&main->base, 0x100);
-    main->refresh.refreshContent = 1;
-    main->refresh.refreshDisplay = 1;
+    aocMainClearFlags(main, 0x100);
+    main->mode = 1;
+    main->panelReady = 1;
     aocMainClearFlags(g_aocMain, 0x70);
     g_aocDisplay->operationActive = 0;
     ifTouchRegionClearAll(work->windowStorage);

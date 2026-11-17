@@ -1,4 +1,4 @@
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -11,7 +11,6 @@ struct SlotPanel {
 }
 
 extern "C" {
-f32 vec2GetSpeed(const void *object);
 u32 dataTable24Sub0GetRecordS90X(u32 index);
 const char *dataTable24Sub0GetRecordS90(u32 index);
 s32 sceneSelectionGetSlotId(void);

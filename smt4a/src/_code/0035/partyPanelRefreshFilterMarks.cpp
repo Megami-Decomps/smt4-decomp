@@ -2,9 +2,9 @@
 #include "ui/PartyPanelStateA.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-SlotRecordA *slotRecordFindById(u16 id);
 void __aeabi_memset4(void *, u32 bytes, s32 value);
 
 // Reset party-panel marks and match active party/storage slots against filter IDs.

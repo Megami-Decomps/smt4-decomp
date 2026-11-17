@@ -1,4 +1,5 @@
 /* NON_MATCHING: the entry-count quarter rounding, the partner-slot scan and the sound selection branches are scheduled and laid out differently; the setup sequence is the same. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
@@ -53,7 +54,6 @@ void sysPlaySe(u32 id);
 void buttonHelpSelectSlot(s32 a, s32 b, s32 c);
 void paramsClearPacket(void *packet);
 
-void uiSpriteStateInitFromSource(void *sprite, s32 a, s32 b, void *packet, s32 c);
 void FUN_004be990(PartnerScreen *screen, s32 a, s32 b);
 u8 FUN_002857b8(void);
 
@@ -125,7 +125,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
         paramsClearPacket(screen->params);
         paramsInit(reinterpret_cast<UiResourceParameters *>(screen->params), DAT_0052d780, 0x60, DAT_0052d7e0, 0x18, NULL, 0, 0, 0, NULL, 0);
         for (s32 i = 0; i < 4; i++) {
-            uiSpriteStateInitFromSource((u8 *)screen + 0x30 + i * 0x8C, 0x11, 0, screen->params, 0x6A);
+            uiSpriteStateInitFromSource((UiSpriteState *)((u8 *)screen + 0x30 + i * 0x8C), 0x11, 0, (UiResourceParameters *)(screen->params), 0x6A, 1.0f);
         }
         FUN_004be990(screen, 0, -1);
         screen->unk344 = 0;

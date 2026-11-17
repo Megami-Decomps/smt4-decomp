@@ -1,14 +1,13 @@
-#include "battle/btlUI.h"
+#include "ui/UiSpriteApi.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-void uiSpriteSetImageKeyframe(BtlUiObjD *obj, s32 a, s32 b);
 
-extern BtlUiGlobals g_btlUi;
 
 void FUN_003ae2b0(void)
 {
-    uiSpriteSetImageKeyframe(&g_btlUi.ui->objD, 0xE, 0);
+    uiSpriteSetImageKeyframe(&g_btlUi.ui->objD.sprite, 0xE, 0);
 }
 
 } /* extern "C" */

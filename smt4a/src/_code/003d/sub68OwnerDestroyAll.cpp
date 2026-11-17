@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "shard/Shard003D.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 extern void FUN_00168980(u32 arg);
 extern void texSetRelease(void);

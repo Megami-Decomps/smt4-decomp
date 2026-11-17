@@ -1,18 +1,13 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/PopupStateA.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-
-typedef struct Candidate {
-    /* 0x000 */ u8 unk000[300];
-    /* 0x12C */ u16 id;
-} Candidate;
 
 void FUN_00152f44(void);
 void gameFlagsGetBlock(void);
 s32 randRange(u32 id);
-Candidate *saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 const char *popupSelectWeightedMessage(u32 kind, u16 id);
 
@@ -21,7 +16,7 @@ void FUN_00294c28(void)
 {
     PopupStateA *popup;
     const char *message;
-    Candidate *candidate;
+    PartySlotA *candidate;
     s32 value;
     u16 id;
 

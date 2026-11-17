@@ -2,7 +2,6 @@
 #include "gfx/CommandBufferHandles.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern CommandBufferHandleAllocator g_gfxAllocateCallback;
 void sysMemClear(void *memory, u32 size);
 

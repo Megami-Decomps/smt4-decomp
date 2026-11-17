@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/Shard0048.h"
 
 extern "C" {
@@ -9,12 +10,11 @@ typedef struct Block12DCOwner {
     /* 0x12DC */ u8 block12DC[4];
 } Block12DCOwner;
 
-extern void uiSpriteSetKeyframe(u8 *block, s32 a, s32 b);
 
 void block12DCOwnerStart6(Block12DCOwner *obj)
 {
     obj->unk12D1 = 1;
-    uiSpriteSetKeyframe(obj->block12DC, 6, 0);
+    uiSpriteSetKeyframe((UiSpriteState *)obj->block12DC, 6, 0);
 }
 
 } /* extern "C" */

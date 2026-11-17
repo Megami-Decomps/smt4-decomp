@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script opcode: pushes a copy of the last stack slot (tag and value) on the stack. */
-u32 FUN_001dc810(ScriptVmProcess *process)
+u32 FUN_001dc810(ScriptProcess *process)
 {
     process->tags[process->depth] = process->tags[SCRIPT_VM_RESULT_SLOT];
     s32 depth = process->depth;

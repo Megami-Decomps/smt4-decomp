@@ -1,5 +1,6 @@
 /* NON_MATCHING: the player/unit duplicated accessors are expanded in another order than retail and the status-bit scan branches differ; the item effect logic is the same. */
 #include "common.h"
+#include "shard/PassiveSkill.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
@@ -12,11 +13,6 @@ typedef struct EffectRecord {
     /* 0x74 */ u16 percentGain;
     /* 0x76 */ u16 unk76;
 } EffectRecord;
-
-typedef struct PassiveSkill {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u32 flags;               /* 0x1000000: blocks the guard */
-} PassiveSkill;
 
 /* A party unit (only the fields used here). */
 typedef struct EffectUnit {
@@ -39,7 +35,6 @@ s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(EffectUnit *unit, u32 bit);
 void playerPadSetBit(u32 bit);
 void objectFlagSetBit(EffectUnit *unit, u32 bit);
-PassiveSkill *passiveSkillLookupRecord(u32 id);
 u32 dataTable9EntryOrZero(u32 tier);
 u32 devilCalcLevelScaledCost(u32 id, u32 level);
 s32 FUN_00295cec(void);
@@ -79,9 +74,9 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
                     bool blocked = false;
 
                     for (s32 i = 0; i < 8; i++) {
-                        PassiveSkill *skill = passiveSkillLookupRecord(skills[i]);
+                        const PassiveSkillRecord *skill = passiveSkillLookupRecord(skills[i]);
 
-                        if (skill != NULL && (skill->flags & 0x1000000) != 0) {
+                        if (skill != NULL && (skill->affinity & 0x1000000) != 0) {
                             blocked = true;
                             break;
                         }

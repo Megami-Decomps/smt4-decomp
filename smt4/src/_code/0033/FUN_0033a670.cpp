@@ -3,10 +3,10 @@
 #include "shard/Shard0031.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 void unitStateClearEventBits(u16 *flags);
-SlotTable *gameGetSlotTable();
 
 // Clear transient event state, retaining KO state and its zero-HP consequence.
 void FUN_0033a670(BtlMainState *battle)

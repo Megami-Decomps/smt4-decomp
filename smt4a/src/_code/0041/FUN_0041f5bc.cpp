@@ -1,6 +1,6 @@
 /* NON_MATCHING: transition reset stores and completion-field address scheduling differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 extern "C" {
 extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
 void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 animation, s32 frame);

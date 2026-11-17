@@ -1,13 +1,12 @@
 /* NON_MATCHING: queue/radius base addressing and active/inactive branch placement differ. */
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
-#include "map/lmapMain.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 f32 distSpatial(MapVector first, SoundActorQueuePosition second);
 s32 asd3dSoundActorIsPlaying(u32 handle);
 void FUN_003d5000(u32 handle);
 u32 soundActorStartOnFreeChannel(u32 soundId, SoundActorQueuePosition position);
-extern LmapExtraA *g_lmapView;
 
 // Start nearby ambient sounds, with distance hysteresis and a short stopped-actor grace period.
 void FUN_00275558(void)
@@ -24,7 +23,7 @@ void FUN_00275558(void)
         if (entry->active && entry->unk10 == 1) {
             // Ambient sound identifiers index a bank beginning at this identifier.
             f32 radius = DAT_005821a0.radii[entry->soundId - 0x100030c];
-            f32 distance = distSpatial(g_lmapView->camera.savedEye, entry->position);
+            f32 distance = distSpatial(g_lmapView->savedEye, entry->position);
             if (entry->unk0c) {
                 if (distance > radius + 50.0f) {
                     FUN_003d5000(entry->handle);

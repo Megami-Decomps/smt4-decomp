@@ -1,11 +1,11 @@
 /* NON_MATCHING: initialization loops unroll and transition constant/register lifetimes differ. */
 #include "ui/PartyPanelState.h"
 #include "gamedata/UnitStats.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-const StatBlock *gameGetUnitRecord(s32 index);
 const StatBlock *partyMemberFindById(u32 id);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 
@@ -39,7 +39,7 @@ void FUN_0026c9c0()
     for (s32 index = 0; index < 24; ++index) {
         s32 unit = work->entries[index].packedIndex;
         if (unit < 0 ||
-            (reinterpret_cast<const PartyDamageUnitIV *>(gameGetUnitRecord(unit))->ailments & 0x404)) {
+            (reinterpret_cast<const StatBlock *>(gameGetUnitRecord(unit))->ailments & 0x404)) {
             work->entries[index].available = 0;
         }
     }

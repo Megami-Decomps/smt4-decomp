@@ -1,10 +1,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-#include "AsdSDK/asdMdlManagerClone.h"
 
 extern "C" {
 
-AsdMdlObject *asdMdlObjectNew(void);
-void asdMdlNodeCopyData(AsdMdlNode *node, AsdMdlNode *src, u32 arg);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
 
 extern u32 g_asdMdlList;
@@ -14,7 +11,7 @@ AsdMdlObject *asdMdlManagerClone(AsdMdlObject *src, u32 arg)
 {
     AsdMdlObject *obj = asdMdlObjectNew();
 
-    obj->node->param = src->node->param;
+    obj->node->drawMask = src->node->drawMask;
     asdMdlNodeCopyData(obj->node, src->node, arg);
     asdListAdd(&g_asdMdlList, obj, 0);
     return obj;

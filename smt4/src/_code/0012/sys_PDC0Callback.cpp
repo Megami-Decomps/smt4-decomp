@@ -1,22 +1,14 @@
-#include "common.h"
-
-struct DisplayCallbackState {
-    /* 0x000 */ u8 unk000[0x154];
-    /* 0x154 */ s32 counters[2];
-    /* 0x15C */ void (*callbacks[2])(u32 display);
-};
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {
-
-extern DisplayCallbackState g_asdGfxContext;
 
 /* Dispatches the display callback and advances its bounded counter. */
 void sys_PDC0Callback(void)
 {
-    if (g_asdGfxContext.callbacks[0] != NULL) {
-        g_asdGfxContext.callbacks[0](0x400);
+    if (g_asdGfxContext.displayCallbacks[0] != NULL) {
+        g_asdGfxContext.displayCallbacks[0](0x400);
     }
-    g_asdGfxContext.counters[0] = (g_asdGfxContext.counters[0] + 1) % 0x7FFFFFFF;
+    g_asdGfxContext.vblankCounts[0] = (g_asdGfxContext.vblankCounts[0] + 1) % 0x7FFFFFFF;
 }
 
 } /* extern "C" */

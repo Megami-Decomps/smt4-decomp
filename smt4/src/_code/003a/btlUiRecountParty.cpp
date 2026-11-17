@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void partyRecountSlots(BtlUiObjC *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 void btlUiRecountParty(void)
 {

@@ -1,8 +1,7 @@
-#include "common.h"
+#include "mapnavi/NaviMainGlobals.h"
 
 extern "C" {
 
-extern void *g_naviMain;
 
 u8 NaviMain_IsCreated(void)
 {

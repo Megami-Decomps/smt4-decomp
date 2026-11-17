@@ -1,6 +1,5 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 #include "gamedata/UnitRecordAccess.h"

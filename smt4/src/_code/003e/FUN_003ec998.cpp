@@ -1,24 +1,18 @@
 /* NON_MATCHING: vector initialization is an explicit loop rather than retail's C++ array-construction helper. */
 #include "common.h"
+#include "shard/W6_W6Match7_QuadVectors.h"
 #include "util/BitsAndBytes.h"
 
-struct DefaultVector4 {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-    /* 0x08 */ f32 z;
-    /* 0x0c */ f32 w;
-};
 struct GraphicsVectorDefaults {
     /* 0x00 */ u8 unk00[0x1c];
     /* 0x1c */ f32 unk1c[4];
-    /* 0x2c */ DefaultVector4 vectors[4];
+    /* 0x2c */ QuadVector vectors[4];
 };
 
 extern "C" {
 extern u32 DAT_0044ea20[2];
 extern GraphicsVectorDefaults DAT_004d4680;
 extern u32 DAT_004d4914[4];
-void vectorSetAllOne(DefaultVector4 *vector);
 
 void FUN_003ec998(u32 first, u32 second, u32 *output)
 {

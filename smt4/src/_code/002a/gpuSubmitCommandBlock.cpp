@@ -2,7 +2,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern u8 *g_commandBufferCursor;
 void nngxLockEnter(void);
 void nngxLockLeave(void);
@@ -31,8 +30,8 @@ void gpuSubmitCommandBlock(const void *commands, u32 byteCount, s32 copyCommands
             nngxLockEnter();
             ++list->listCount;
             if (g_asdGfxContext.activeBuffer == list &&
-                g_asdGfxContext.submission.enabled && !g_asdGfxContext.submission.pending) {
-                g_asdGfxContext.submission.pending = 1;
+                g_asdGfxContext.submitEnabled && !g_asdGfxContext.submitPending) {
+                g_asdGfxContext.submitPending = 1;
                 FUN_002ba2b8();
             }
             nngxLockLeave();

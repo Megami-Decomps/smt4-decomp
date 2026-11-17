@@ -1,13 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 #include "shard/TextureDrawCall.h"
-#include "util/MathFunctions.h"
 
 extern "C" {
 
-s32 uiSpriteAdvanceAnimation(void *sprite, f32 step);
-void FUN_00167458(void *sprite, s32 arg);
-void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 arg);
-void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
 
 static inline void infoWindowBeginClose()
 {

@@ -1,5 +1,5 @@
 #include "shard/Shard0035.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -10,8 +10,8 @@ void objBInitBlocks274300(void)
     ObjB *obj = g_gameGlobals.instance;
 
     obj->unk20AD = 1;
-    uiSpriteSelectAnim(obj->block274, 7);
-    uiSpriteSelectAnim(obj->block300, 8);
+    uiSpriteSelectAnim((UiSpriteState *)obj->block274, 7);
+    uiSpriteSelectAnim((UiSpriteState *)obj->block300, 8);
 }
 
 } /* extern "C" */

@@ -6,7 +6,6 @@
 #include "addon/AocSystem.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 RequestParameters FUN_003887cc(AocSystem *system);
 void aocMenuSetButtonHelp(AocMenu *menu, s32 request, s32 mode);
 void aocLoadingTaskStart(AocMenu *menu, u32 request);
@@ -49,7 +48,7 @@ void AocMenu::closeMenu()
         FUN_00126fb8(reinterpret_cast<u8 *>(g_aocMain) + 0x80);
         aocClearDisplayFlag(g_aocSystem);
         aocReleasePackageOwner(g_aocSystem);
-        if (FUN_002ad1e0(&g_aocMain->objB) != 0)
+        if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
             g_aocMain->flags &= ~0x10000u;
         return;
     }
@@ -73,7 +72,7 @@ void AocMenu::closeMenu()
                 menu->substep = 3;
             } else if (byteIsAtLeast100(&request) != 0) {
                 menu->substep = 9999;
-                if (FUN_002ad1e0(&g_aocMain->objB) != 0)
+                if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
                     g_aocMain->flags &= ~0x10000u;
                 jobStopAndClearFlags(menu);
             }
@@ -95,7 +94,7 @@ void AocMenu::closeMenu()
         if (!flagBit(flags, 2) && !flagBit(flags, 3)) {
             aocClearDisplayFlag(g_aocSystem);
             aocReleasePackageOwner(g_aocSystem);
-            if (FUN_002ad1e0(&g_aocMain->objB) != 0)
+            if (FUN_002ad1e0(&g_aocMain->operationDone) != 0)
                 g_aocMain->flags &= ~0x10000u;
             menu->step = 3;
             menu->substep = 0;

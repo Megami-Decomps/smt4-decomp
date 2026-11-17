@@ -1,5 +1,6 @@
 /* NON_MATCHING: typed rewrite of the command controller target setup, the smt4a variant of FUN_003ca6c4 with 64-bit entry masks (461 vs 462 rows); register allocation of the mask halves and loop pointers differs. */
 #include "common.h"
+#include "gamedata/SkillDataLookup.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -7,14 +8,6 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "gamedata/ConsumableRecordA.h"
 #include "battle/BtlGlobals.h"
-
-/* A skill record, as far as the category bits go. */
-struct SkillCategoryView {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u32 unknownBits : 5;
-    /* 0x28 */ u32 category : 4;
-    /* 0x28 */ u32 moreBits : 23;
-};
 
 /* The command's chosen skill: the kind of thing it is and its id. */
 struct CommandSelectionA {
@@ -51,7 +44,6 @@ struct UiPositionA {
 extern "C" {
 extern u32 g_btlUiBlock;
 
-SkillCategoryView *skillDataFindById(u32 id);
 void __aeabi_memset4(void *block, u32 size, s32 value);
 void *rt_memclr(void *block, u32 size);
 void FUN_004aa798(u32 ui, void *arg, s32 count);
@@ -71,9 +63,9 @@ static __inline u64 actionMask(u32 offset)
 #define MASK_MODE_B 0xF0   /* battle flag: second mode */
 
 /* Skills of category 2, 3 and 4 make the window's choice unavailable to the ordinary targets. */
-static __inline bool skillHasSpecialCategory(const SkillCategoryView *skill)
+static __inline bool skillHasSpecialCategory(const SkillDataRecordA *skill)
 {
-    u32 category = skill->category;
+    u32 category = skill->itemProperties.category;
     return category == 2 || category == 3 || category == 4;
 }
 
@@ -91,7 +83,7 @@ void FUN_004dd0c4(BtlMainStateA **block, CommandStateA *state)
     bool normal = true;
     s32 value = selection->value;
     s32 kind = selection->kind;
-    const SkillCategoryView *skill = skillDataFindById(value);
+    const SkillDataRecordA *skill = skillDataFindById(value);
     const ConsumableRecordA *record = itemTableGetItemRecord(value);
     if (kind == 2) {
         if (skill != NULL && skillHasSpecialCategory(skill))

@@ -5,6 +5,7 @@
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -28,9 +29,6 @@ s32 renderCtxPackPassFlags(s32 a, s32 b);
 void FUN_00218640(void);
 void FUN_002f6048(QuestUi *ui);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-s32 vec2GetXInt(void *vector);
-s32 vec2GetYInt(void *vector);
-f32 vec2GetSpeed(const void *vector);
 void efctSetSpeed(f32 speed);
 void uiFadeDraw(u32 id);
 void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
@@ -90,9 +88,9 @@ u32 FUN_0023b4cc(void)
         }
         ui = g_uiQuest;
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.3f);
-        s32 x = vec2GetXInt(ui->panel);
-        s32 y = vec2GetYInt(ui->panel);
-        f32 speed = vec2GetSpeed(ui->panel);
+        s32 x = vec2GetXInt((const UiSpriteState *)ui->panel);
+        s32 y = vec2GetYInt((const UiSpriteState *)ui->panel);
+        f32 speed = vec2GetSpeed((const UiSpriteState *)ui->panel);
 
         efctSetSpeed(speed);
         u16 category = ui->category;

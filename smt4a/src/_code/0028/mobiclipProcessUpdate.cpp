@@ -35,12 +35,6 @@ struct MovieTaskWork {
     /* 0x74 */ u8 special, stopRequested, error, autoSkip, allowSkip, preset;
     /* 0x7A */ u16 unk7a;
 };
-struct MovieControlGate {
-    u8 unk00[0x98];
-    AocObjB event;
-    u8 unk0a8[0x6ac];
-    u32 flags;
-};
 typedef char MovieDirectoryEntrySizeCheck[sizeof(MovieDirectoryEntry) == 0x228 ? 1 : -1];
 typedef char MovieTaskWorkSizeCheck[sizeof(MovieTaskWork) == 0x7c ? 1 : -1];
 
@@ -71,7 +65,7 @@ s32 FUN_0022655c(const char *path);
 void FUN_00213bc8(const char *path);
 u32 FUN_003d2eec(const char *path);
 void titleSetSlotValueState2(u32 screen, u32 duration);
-u32 sysLightEventTryWait(AocObjB *event);
+u32 sysLightEventTryWait(LightEvent *event);
 void FUN_00229104();
 s32 moviePumpUntilReady();
 s32 slotIsActive(u32 button);
@@ -221,8 +215,8 @@ extern "C" s32 mobiclipProcessUpdate()
         ++work->state;
         return 0;
     case 4:
-        if (work->special && sysLightEventTryWait(&((MovieControlGate *)g_aocMain)->event)) {
-            ((MovieControlGate *)g_aocMain)->flags &= ~0x10000u;
+        if (work->special && sysLightEventTryWait(&g_aocMain->operationDone)) {
+            g_aocMain->flags &= ~0x10000u;
             work->state = 9;
             return 0;
         }

@@ -1,8 +1,7 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gamedata/SaveLoadProcess.h"
 
 extern "C" {
-extern BtlUiGlobals g_btlUi;
 void FUN_001e1104(BtlUiObjB *, s32 mode, s32 options, s32 firstStrike);
 void FUN_00206368(BtlUiObjA *, s32 mode, s32 first, s32 second);
 u16 slotFindNonnegativeRank(void *owner, u32 slot);

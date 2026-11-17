@@ -6,7 +6,6 @@ extern "C" {
 
 extern u8 *g_commandBufferCursor;
 extern u8 *g_commandBufferEnd;
-extern AsdGfxContext g_asdGfxContext;
 
 /* Resets the active command buffer: clears its record list and counters and rewinds the write
  * cursor and end pointer to the buffer's start. */
@@ -22,7 +21,7 @@ void asdModelResetCommandBuffer(void)
     }
     memClear(buf->list, buf->listCount * 0x1c);
     buf->unk0c = 0;
-    buf->unk10 = 0;
+    buf->submittedBytes = 0;
     buf->listCount = 0;
     buf->unk28 = 0;
     buf->unk14 = 0;

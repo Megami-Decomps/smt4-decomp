@@ -1,13 +1,12 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 #include "text/TextDraw.h"
 
 extern "C" {
 f32 fontMeasureTextWidth(const char *text, s32 font, f32 initialWidth);
-void uiSpriteSetKeyframe(void *sprite, s32 track, s32 frame);
 void asdTextFormatStream(void *text, s32 font, u32 color, s32 mode, s32 alignment, const char *buffer);
 void sysMemClear(void *buffer, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-s32 vec2GetXInt(const void *vector);
 
 /* Expands popup text, updates its scrolling bounds, and resets its display timer. */
 void infoWinExpandAndSetText(const char *text)

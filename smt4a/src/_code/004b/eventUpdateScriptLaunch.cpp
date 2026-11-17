@@ -6,7 +6,7 @@ struct EventScriptLaunchWorkView {
     u8 unk090[0x10e0];
     void *bytecode; /* 0x1170 */
     void *messages; /* 0x1174 */
-    ScriptRunState *script; /* 0x1178 */
+    ScriptProcess *script; /* 0x1178 */
 };
 struct EventScriptLaunchGlobalsView {
     u8 unk00[0x98];
@@ -20,16 +20,14 @@ typedef char EventScriptLaunchWorkOffsets[offsetof(EventScriptLaunchWorkView, by
 extern "C" {
 extern EventScriptLaunchGlobalsView DAT_005f16fc;
 void FUN_004b75d0(TransformInterpolation *);
-s32 scrRunOpcodesStub(ScriptRunState *);
-void scrScriptProcessDestroy(ScriptRunState *);
+s32 scrRunOpcodesStub(ScriptProcess *);
 void asdMemFree(void *);
 void messageSetScriptDisplayMode();
 void textFormatBuffer(char *, const char *, ...);
 void *asdLoadFileSyncDefault(const char *);
-ScriptRunState *scrScriptProcessCreate(void *, void *);
-void scriptProcessSetMode(ScriptRunState *process, s32 mode);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *, const char *);
-void scrScriptProcessStartEntry(ScriptRunState *, u32);
+void scrScriptProcessStartEntry(ScriptProcess *, u32);
 
 /* Load and run an event entry, releasing both resources after the script completes. */
 void eventUpdateScriptLaunch(EventScriptLaunchWorkView *work)

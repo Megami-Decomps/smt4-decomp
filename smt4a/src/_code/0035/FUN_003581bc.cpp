@@ -4,6 +4,7 @@
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -23,8 +24,6 @@ extern MapDepartView *g_mapDepart;
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
-s32 vec2GetXInt(const void *vector);
-s32 vec2GetYInt(const void *vector);
 void FUN_002c0940(u8 text[64], s32 value);
 f32 fontMeasureTextWidth(u8 text[64], u32 style, f32 scale);
 
@@ -39,8 +38,8 @@ u32 FUN_003581bc(void)
         efctSetSpeed(1.0f);
         gxResetColorQuadToWhite();
         if (depart->state == 11) {
-            s32 x = vec2GetXInt(depart->position);
-            s32 y = vec2GetYInt(depart->position);
+            s32 x = vec2GetXInt((const UiSpriteState *)depart->position);
+            s32 y = vec2GetYInt((const UiSpriteState *)depart->position);
             depart = g_mapDepart;
             TextureTableEntryIV *panel = asdTMTexTableEntryAt(29, 202);
             texDrawTableEntryAtStoredOrigin(2, 29, 194, panel->x + x, panel->y + y, 101);

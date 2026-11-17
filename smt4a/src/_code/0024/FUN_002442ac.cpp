@@ -1,108 +1,66 @@
 /* NON_MATCHING: instructions now match; only the literal pool order differs (armcc puts the reused 100/0/1/50 floats before the global address, retail keeps first-use order). */
-#include "map/lmapMain.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 void FUN_00303710(void);
 void FUN_00352a14(void);
-extern u32 g_handleRegistry;
-extern LmapExtraGlobalsA DAT_005806a0;
+extern Obj557c48 *g_handleRegistry;
 
 // Reset the map camera's defaults, transitions, and tracked resource handle.
 void FUN_002442ac(void)
 {
-    // The initialized tail extends beyond the shared LmapExtraA prefix.
-    struct CameraDefaultsView {
-        u32 state, phase, flags; // 0x000
-        u8 unk00C[8];
-        u32 unk014;
-        u8 unk018[4];
-        f32 angle; // 0x01c
-        u8 unk020[0x48];
-        f32 target[3]; // 0x068
-        f32 eye[4]; // 0x074
-        u8 unk084[0x18];
-        f32 scale; // 0x09c
-        u8 unk0A0[0x10];
-        u32 transitionState; // 0x0b0
-        u8 enabled, pending;
-        u16 elapsed, duration;
-        u8 unk0BA[2];
-        f32 rotation[2]; // 0x0bc
-        f32 zoom; // 0x0c4
-        u32 preset; // 0x0c8
-        f32 presets[5][16]; // 0x0cc
-        s32 selected; // 0x20c
-        f32 transition[4]; // 0x210
-        u8 transitioning; // 0x220
-        u8 unk221[0x7b];
-        f32 blend[3]; // 0x29c
-        u32 blendMode, priority;
-        s16 bounds[4]; // 0x2b0
-        u8 blendEnabled;
-        u8 unk2B9[3];
-        u32 pendingRequest;
-        u8 unk2C0[0x44];
-        u8 active;
-        u8 unk305[3];
-        f32 distance, velocity, acceleration; // 0x308
-        u32 handle; // 0x314
-    };
-    typedef char CameraDefaultsOffsets[
-        offsetof(CameraDefaultsView, presets) == 0xcc &&
-        offsetof(CameraDefaultsView, blend) == 0x29c &&
-        offsetof(CameraDefaultsView, handle) == 0x314 ? 1 : -1];
-    CameraDefaultsView *camera = reinterpret_cast<CameraDefaultsView *>(DAT_005806a0.extra);
-    camera->state = 0;
+    LmapViewA *camera = DAT_005806a0.view;
+    camera->mode = 0;
     camera->phase = 0;
-    camera->flags = 0;
-    camera->preset = 0;
-    camera->selected = -1;
-    camera->presets[0][0] = 100.0f;
-    camera->presets[1][0] = 220.0f;
-    camera->presets[2][0] = 0.0f;
-    camera->presets[3][0] = 700.0f;
-    camera->presets[4][0] = 42.0f;
-    camera->transitionState = 0;
-    camera->angle = 0.0f;
+    camera->unk008 = 0;
+    camera->contextValue = 0;
+    camera->contextOverride = -1;
+    camera->targetHeight[0] = 100.0f;
+    camera->eyeHeight[0] = 220.0f;
+    camera->lateralDistance[0] = 0.0f;
+    camera->rearDistance[0] = 700.0f;
+    camera->fieldOfView[0] = 42.0f;
+    camera->contextMode = 0;
+    camera->heightBias = 0.0f;
     camera->unk014 = 0;
     camera->scale = 1.0f;
-    camera->transition[0] = 0.0f;
-    camera->transition[1] = 0.0f;
-    camera->transition[2] = 0.0f;
-    camera->transition[3] = 0.0f;
-    camera->velocity = 0.0f;
-    camera->acceleration = 0.0f;
-    camera->transitioning = 0;
-    camera->blendEnabled = 0;
-    camera->active = 0;
-    camera->blend[0] = 0.0f;
-    camera->blend[1] = 0.0f;
-    camera->blend[2] = 0.0f;
-    camera->blendMode = 0;
+    camera->unk210 = 0.0f;
+    camera->unk214 = 0.0f;
+    camera->raised = 0.0f;
+    camera->unk21C = 0.0f;
+    camera->unk30C = 0.0f;
+    camera->unk310 = 0.0f;
+    camera->moving = 0;
+    camera->unk2B8 = 0;
+    camera->unk304 = 0;
+    camera->targetOffset.x = 0.0f;
+    camera->targetOffset.y = 0.0f;
+    camera->targetOffset.z = 0.0f;
+    camera->requestActive = 0;
     camera->priority = 0;
-    camera->bounds[0] = 0;
-    camera->bounds[1] = 0;
-    camera->bounds[2] = 0;
-    camera->bounds[3] = 0;
-    camera->eye[0] = 0.0f;
-    camera->eye[1] = 50.0f;
-    camera->eye[2] = 0.0f;
-    camera->target[0] = 0.0f;
-    camera->eye[3] = 40.0f;
-    camera->target[1] = 50.0f;
-    camera->target[2] = 100.0f;
-    camera->distance = 0.0f;
-    camera->enabled = 0;
-    camera->pending = 0;
-    camera->elapsed = 0;
-    camera->duration = 0;
-    camera->rotation[0] = 0.0f;
-    camera->rotation[1] = 0.0f;
-    camera->zoom = 1.0f;
+    camera->requestId = 0;
+    camera->unk2B2 = 0;
+    camera->unk2B4 = 0;
+    camera->unk2B6 = 0;
+    camera->lookTo.x = 0.0f;
+    camera->lookTo.y = 50.0f;
+    camera->lookTo.z = 0.0f;
+    camera->lookFrom.x = 0.0f;
+    camera->unk080 = 40.0f;
+    camera->lookFrom.y = 50.0f;
+    camera->lookFrom.z = 100.0f;
+    camera->height = 0.0f;
+    camera->flagB4 = 0;
+    camera->flagB5 = 0;
+    camera->timer = 0;
+    camera->step = 0;
+    camera->axis.x = 0.0f;
+    camera->axis.y = 0.0f;
+    camera->axis.z = 1.0f;
     FUN_00352a14();
-    camera = reinterpret_cast<CameraDefaultsView *>(DAT_005806a0.extra);
-    camera->pendingRequest = 0;
-    camera->handle = g_handleRegistry;
+    camera = DAT_005806a0.view;
+    camera->clip = NULL;
+    camera->modelManager = g_handleRegistry;
     FUN_00303710();
 }
 }

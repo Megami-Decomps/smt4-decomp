@@ -1,16 +1,7 @@
-#include "common.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" {
-
-struct FlagRecord {
-    /* 0x00 */ u8 unk00[0x8A];
-    /* 0x8A */ s8 flags;
-};
-
-/* Read the record's flag byte. */
-s8 uiSpriteGetCompletionState(const FlagRecord *record)
+/* The finished flag: every track of the sprite is done. */
+extern "C" s8 uiSpriteGetCompletionState(const UiSpriteState *sprite)
 {
-    return record->flags;
-}
-
+    return sprite->finished;
 }

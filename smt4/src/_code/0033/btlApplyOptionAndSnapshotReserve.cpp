@@ -1,8 +1,8 @@
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
-#include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include <stddef.h>
+#include "gamedata/SaveSlotTableIV.h"
 extern "C" {
 void FUN_003c8428(s32 selection);
 s32 gameGetOptionProgressStatus(void);
@@ -11,7 +11,6 @@ void FUN_00256124(void);
 void gameOptionsEnableAndReset(void);
 void FUN_002560a4(s32 command);
 void FUN_003c86bc(void);
-PartyDamageSlotsIV *gameGetSlotTable(void);
 void FUN_00337cfc(BtlMainState *state, void *snapshot, GameUnitSortRecord *unit);
 void FUN_00255e38(BtlMainState *state, void *snapshot, s32 mode, s32 slot, s32 flags);
 

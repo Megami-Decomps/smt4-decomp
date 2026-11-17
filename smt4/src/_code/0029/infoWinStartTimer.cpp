@@ -1,9 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWin.h"
 #include "code/Code0029_Smt4.h"
 
 extern "C" {
 
-int timerStart(void *timer, int a, int b);
 
 
 

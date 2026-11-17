@@ -1,8 +1,7 @@
 /* NON_MATCHING: the menu sub-object pointer is retained across refresh instead of recomputed afterwards. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void fillTwoWordsWithByte(void *destination, u32 value);
 u16 uiFindValidIdOrdinal(u32 source, u32 ordinal);
 void FUN_001a9104(BtlUiObjCA *menu, const u16 *ids);

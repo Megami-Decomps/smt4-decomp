@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "battle/BattleHelpers_VariantB.h"
 
 namespace {

@@ -1,26 +1,9 @@
-#include "result/ResultInput.h"
+#include "result/Result.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
-/* Local view: process handles and result kind lie beyond ResultInputWork's recovered end. */
-struct ResultProcessWorkIV {
-    ResultInputWork input;
-    u8 unk3530[0x30];
-    u8 kind;
-    u8 unk3561[0xD644 - 0x3561];
-    u32 calculate;
-    u32 unkD648;
-    u32 drawDown;
-    u8 unkD650[8];
-};
-typedef char ResultProcessWorkIVOffsetsCheck[
-    offsetof(ResultProcessWorkIV, kind) == 0x3560 &&
-    offsetof(ResultProcessWorkIV, calculate) == 0xD644 &&
-    offsetof(ResultProcessWorkIV, drawDown) == 0xD64C && sizeof(ResultProcessWorkIV) == 0xD658 ? 1 : -1];
-
 extern "C" {
-extern ResultProcessWorkIV *g_result;
 extern const char DAT_00405dfc[];
 extern const char DAT_00405df0[];
 extern const char DAT_00405ddc[];
@@ -33,8 +16,8 @@ s32 FUN_001a16c0(u32 process);
 s32 FUN_001c8974(u32 process);
 u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, void *parent);
-void FUN_003b7b58(ResultProcessWorkIV *work);
-void resultSetMenuState(ResultProcessWorkIV *work, s32 state);
+void FUN_003b7b58(ResultWork *work);
+void resultSetMenuState(ResultWork *work, s32 state);
 
 // Create the result calculation process, stereo upper-screen tasks, and lower-screen task once.
 void resultCreate(u8 kind)
@@ -42,8 +25,8 @@ void resultCreate(u8 kind)
     if (!g_result) {
         commonBgAcquire();
         asdDebugTrace(DAT_00405dfc, 4708);
-        g_result = (ResultProcessWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(ResultProcessWorkIV), 1);
-        ResultProcessWorkIV *work = g_result;
+        g_result = (ResultWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(ResultWork), 1);
+        ResultWork *work = g_result;
         work->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00405df0), 2, 0, 0, FUN_0018c0ec, scrResultDestroy, 0);
         taskCreateDraw(DAT_00405ddc, 0x80, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));
         taskCreateDraw(DAT_00405dc8, 0xDE, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));

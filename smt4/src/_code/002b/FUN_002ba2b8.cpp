@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail builds the type 2/3/4 register words as bit-field struct writes (bic/orr chains, hoisted masks r8/r9/fp) and loads the argument words with ldm; built packs the words with shifts and masks */
-#include "shard/W6_W6Match5_DisplayMode.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 /* The recorded render-state command carried by a graphics queue entry. */
 struct RenderCommand {
@@ -14,7 +14,7 @@ struct RenderCommand {
     /* 0x14 */ u32 e;
     /* 0x18 */ u32 f;
 };
-typedef char RenderCommandSizeCheck[sizeof(RenderCommand) == sizeof(GraphicsQueueEntry) ? 1 : -1];
+typedef char RenderCommandSizeCheck[sizeof(RenderCommand) == sizeof(AsdCmdRecord) ? 1 : -1];
 
 extern "C" {
 
@@ -27,15 +27,15 @@ void FUN_00147948(u32 a, u32 b, u32 c, u32 d);
 /* Replays the recorded render-state commands of the current graphics queue up to the limit. */
 void FUN_002ba2b8(void)
 {
-    if (g_asdGfxContext.submission.ready == 1)
+    if (g_asdGfxContext.ready == 1)
         return;
-    GraphicsQueue *queue = g_asdGfxContext.submission.queue;
-    if ((s32)queue->activeCount >= (s32)queue->pendingCount)
+    AsdCmdBuffer *queue = g_asdGfxContext.activeBuffer;
+    if ((s32)queue->unk24 >= (s32)queue->listCount)
         return;
     do {
-        if ((s32)queue->activeCount >= (s32)(g_asdGfxContext.submission.replayLimit + queue->currentEntry))
+        if ((s32)queue->unk24 >= (s32)(g_asdGfxContext.replayLimit + queue->unk28))
             return;
-        RenderCommand *cmd = reinterpret_cast<RenderCommand *>(&queue->entries[queue->activeCount]);
+        RenderCommand *cmd = reinterpret_cast<RenderCommand *>(&queue->entries[queue->unk24]);
         switch (cmd->type) {
         case 0:
             FUN_00142fb8(cmd->b, cmd->a, cmd->c, ~cmd->d & 1);
@@ -71,12 +71,12 @@ void FUN_002ba2b8(void)
             break;
         }
         }
-        queue->activeCount++;
+        queue->unk24++;
         if (cmd->last == 1) {
-            g_asdGfxContext.submission.ready = 1;
+            g_asdGfxContext.ready = 1;
             return;
         }
-    } while ((s32)queue->activeCount < (s32)queue->pendingCount);
+    } while ((s32)queue->unk24 < (s32)queue->listCount);
 }
 
 } /* extern "C" */

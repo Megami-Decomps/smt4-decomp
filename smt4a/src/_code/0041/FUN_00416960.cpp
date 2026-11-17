@@ -1,4 +1,5 @@
 /* NON_MATCHING: text-pointer load precedes slot resets, and projected-coordinate updates reuse the X sum instead of retail's store/reload sequence; message-debug hooks are restored. */
+#include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "ui/AnimatedMessageSlots.h"
 #include "battle/btlMain.h"
@@ -9,7 +10,7 @@
 
 struct PartnerMessageOwnerView {
     AnimatedMessageSlot slots[12];
-    UiSpriteSource source;
+    UiResourceParameters source;
 };
 struct PartnerMessageOffset {
     f32 x, y;
@@ -25,9 +26,6 @@ typedef char PartnerMessageViewOffsets[offsetof(PartnerMessageOwnerView, source)
 
 extern "C" {
 void asdMemFreeSlot(void **object);
-void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 kind, u32 color, const UiSpriteSource *source, u16 priority, f32 scale);
-void pairSetFirstResetSecond(UiSpriteState *sprite, s32 image);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
 void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 mode, s32 state);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);

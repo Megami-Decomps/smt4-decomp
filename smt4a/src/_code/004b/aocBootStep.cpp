@@ -5,13 +5,11 @@ extern "C" {
 
 void infoWinSetValue(s32 arg);
 void FUN_004b7d88(AocStep *step);
-void scriptHolderBReset(AocObjC *obj, s32 arg);
-void scriptHolderFree1(AocObjC *obj);
+void scriptHolderBReset(AocScriptHolder *obj, s32 arg);
+void scriptHolderFree1(AocScriptHolder *obj);
 void FUN_004731d8(void);
 u32 scriptHolderUpdate(ScriptHolder *holder);
 s32 gameBlockByte27E98Is1To3(void);
-
-extern AocMain *g_aocMain;
 
 void aocBootStep(AocStep *step)
 {

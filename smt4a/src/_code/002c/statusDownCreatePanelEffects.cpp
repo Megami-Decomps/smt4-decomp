@@ -1,11 +1,11 @@
 /* NON_MATCHING: animated-position speed getter calls match; effect IDs and alternate mode retain different saved-register roles. */
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDownA.h"
 #include "shard/TextureDrawCall.h"
 #include <stddef.h>
 
 extern "C" {
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *position);
 
 // Build the status-down panel and its mode-specific accents.
 void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)

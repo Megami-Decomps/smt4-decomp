@@ -1,4 +1,5 @@
 /* NON_MATCHING: vector-copy transfer class, scratch lifetimes, and final branch lowering differ. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match6_EffectRender.h"
 #include "gfx/EffectEditorStorage.h"
 

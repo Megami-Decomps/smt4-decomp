@@ -3,10 +3,10 @@
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/LmapGlobals.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
 void FUN_003250ac(void *movement, MapVector current, MapVector destination);
-f32 mathPositionHeadingDegrees(MapVector current, MapVector destination);
 void controllerSetRotationEulerDegrees(u32 controller, f32 x, f32 y, f32 z);
 
 void FUN_0032714c(MapVector destination)

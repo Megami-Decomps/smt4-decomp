@@ -1,6 +1,7 @@
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/CampStateA.h"
+#include "ui/UiSpriteApi.h"
 
 struct CampSpritePivot {
     f32 depth;
@@ -8,7 +9,6 @@ struct CampSpritePivot {
     u16 x, y;
 };
 extern "C" {
-f32 vec2GetSpeed(const void *vector); /* linker-inlined: vldr s0, [r0, #0x20] */
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 speed);
 void FUN_00281000(CampSpritePivot *pivot, f32 depth, s32 horizontalMode, s32 verticalMode, s32 x, s32 y);

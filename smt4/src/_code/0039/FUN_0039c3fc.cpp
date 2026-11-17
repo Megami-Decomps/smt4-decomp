@@ -1,18 +1,13 @@
 /* NON_MATCHING: control flow, completion getter and callee order match retail; armcc keeps the sprite pointer/dirty-store addresses and the zero constant in different registers (zero in r0 instead of r2, display pointer re-copied for call arguments). */
+#include "ui/UiSpriteApi.h"
 #include "map/NaviDisplayTransition.h"
 
 extern "C" {
-s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
-void uiSlidingSpriteAdvance(UiSpriteState *sprite, s32 mode);
-s32 vec2GetXInt(const UiSpriteState *sprite);
-s32 vec2GetYInt(const UiSpriteState *sprite);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 void naviMainSetCurrentMap(u16 *state, u32 map);
 void FUN_0039f860(u16 *state, s32 option);
 void FUN_002316e8(MapNaviDisplay *display);
 void mapNaviDisplayLoadMap(MapNaviDisplay *display, s32 map);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 option);
 
 // Animate the map switch, loading the new map between its outgoing and incoming phases.
 void FUN_0039c3fc(MapNaviDisplay *display)

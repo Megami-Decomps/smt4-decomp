@@ -4,7 +4,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 void globalCriticalSectionEnterForward(void);
 void globalCriticalSectionLeaveForward(void);
 void FUN_001963e0(void);
@@ -25,11 +24,11 @@ void asdGxCommandListFinishCurrent(void)
         callbackArg = buffer->listIndex;
     }
     if (record->done.resetState != 0) {
-        gfx->submission.enabled = 0;
-        gfx->submission.unk18 = 0;
-        gfx->submission.pending = 0;
+        gfx->submitEnabled = 0;
+        gfx->ready = 0;
+        gfx->submitPending = 0;
     } else if (buffer->listIndex >= buffer->listCount) {
-        gfx->submission.pending = 0;
+        gfx->submitPending = 0;
     } else {
         FUN_001963e0();
     }

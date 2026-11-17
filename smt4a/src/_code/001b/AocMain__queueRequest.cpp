@@ -3,17 +3,15 @@
 /* Queues `request` for processing unless one is already active. */
 void AocMain::queueRequest(RequestParameters request, u32 argument, s32 mode)
 {
-    QueuedRequestState *state = reinterpret_cast<QueuedRequestState *>(this);
-
-    u32 flags = state->flags;
-    if ((flags & 1) == 0) {
-        flags |= 5;
-        state->flags = flags;
+    u32 currentFlags = flags;
+    if ((currentFlags & 1) == 0) {
+        currentFlags |= 5;
+        flags = currentFlags;
         if (mode != 0) {
-            state->mode = mode;
+            this->mode = mode;
         }
-        state->parameters = request;
-        state->argument = argument;
-        state->progress = 0;
+        this->request = request;
+        this->argument = argument;
+        progress = 0;
     }
 }

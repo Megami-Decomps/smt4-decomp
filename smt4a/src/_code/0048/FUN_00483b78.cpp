@@ -1,7 +1,7 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 namespace {
 struct KeyboardPanelState {
@@ -23,7 +23,6 @@ void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 void gxResetColorQuadToWhite();
 s32 renderCtxPackPassFlags(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 void FUN_004845ac(KeyboardPanelState *panel, u8 page, f32 progress);
 void skinObjectUpdateMatrices(RenderCtxA *context);

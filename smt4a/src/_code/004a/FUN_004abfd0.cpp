@@ -1,10 +1,9 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
 void saveSlotBeginTransition(BtlUiObjCA *obj, u32 value, s32 flag);
 
-extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004abfd0(u32 unused, u32 value)
 {

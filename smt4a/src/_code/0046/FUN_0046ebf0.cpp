@@ -3,10 +3,6 @@
 
 extern "C" {
 
-extern AocMainA *g_aocMain;
-
-s32 objHasFlagBit16(AocMainA * main);
-
 /* Returns 1 when objHasFlagBit16 succeeds on the add-on main object and packageFindRecordByName(arg0, 0x39, arg1) succeeds too. */
 u32 FUN_0046ebf0(u32 arg0, u32 arg1)
 {

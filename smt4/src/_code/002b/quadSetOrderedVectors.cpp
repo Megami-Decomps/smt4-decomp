@@ -4,7 +4,6 @@
 extern "C" {
 extern const s32 DAT_004091d0[5][4];
 extern QuadVectorState DAT_004d4680;
-void vectorSetAllOne(QuadVector *);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *, void (*)(QuadVector *), u32 size, u32 count);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 

@@ -3,6 +3,7 @@
 #include "util/BitsAndBytes_VariantA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 /* Fixed-point (20.12) position pair. */
 struct FixedPosition {
@@ -32,10 +33,7 @@ struct IconScroller {
 
 extern "C" {
 
-s32 vec2GetXInt(FixedPosition *position);
-s32 vec2GetYInt(FixedPosition *position);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const IconFade *fade);
 void texDrawTableEntryAtStoredOrigin(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
 void gxSetMirroredClippedScissor(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
 
@@ -60,11 +58,11 @@ void FUN_002dc120(IconScroller *scroller, s32 amount)
     if (scroller->icon > 3) {
         return;
     }
-    s32 x = vec2GetXInt(&scroller->position);
-    s32 y = vec2GetYInt(&scroller->position);
+    s32 x = vec2GetXInt((const UiSpriteState *)&scroller->position);
+    s32 y = vec2GetYInt((const UiSpriteState *)&scroller->position);
     x = x + scroller->offsetX;
     y = y + scroller->offsetY;
-    efctSetSpeed(vec2GetSpeed(&scroller->fade));
+    efctSetSpeed(vec2GetSpeed((const UiSpriteState *)&scroller->fade));
     TextureTableEntryIV *entry = asdTMTexTableEntryAt(0x15, scroller->icon + 0x52);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));

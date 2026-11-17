@@ -1,47 +1,47 @@
 /* NON_MATCHING: interpolation cold branch and sequence reset paths are merged differently; VFP allocation differs. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
-// Advance the vertical interpolation key and its optional sequence.
+// Advances the opacity track: interpolates its key, then loops it or continues with the next command.
 void FUN_002b1e08(UiSpriteState *sprite)
 {
-    if (sprite->completion.vertical != 0 || sprite->verticalKeys == NULL)
+    if (sprite->alphaDone != 0 || sprite->alphaKeys == NULL)
         return;
-    UiSpriteScalarKey *key = &sprite->verticalKeys[sprite->mode];
-    if (sprite->verticalTrack.frame < key->duration) {
+    UiSpriteScalarKey *key = &sprite->alphaKeys[sprite->alphaKey];
+    if (sprite->alphaFrame < key->duration) {
         f32 delta;
-        if (sprite->verticalTrack.reverse)
+        if (sprite->alphaReverse)
             delta = (key->first - key->last) / (f32)(u32)key->duration;
         else
             delta = (key->last - key->first) / (f32)(u32)key->duration;
-        ++sprite->verticalTrack.frame;
-        sprite->unk20 += delta;
+        ++sprite->alphaFrame;
+        sprite->alpha += delta;
         return;
     }
     if (key->loop != 0) {
-        sprite->unk20 = sprite->verticalTrack.reverse ? key->last : key->first;
-        sprite->verticalTrack.frame = 0;
+        sprite->alpha = sprite->alphaReverse ? key->last : key->first;
+        sprite->alphaFrame = 0;
         return;
     }
-    sprite->unk20 = sprite->verticalTrack.reverse ? key->first : key->last;
-    if (sprite->sequence.enabled && sprite->sequenceSteps != NULL &&
-        sprite->sequenceSteps[sprite->sequence.step].key != -1) {
-        ++sprite->sequence.step;
-        UiSpriteSequenceStep *step = &sprite->sequenceSteps[sprite->sequence.step];
-        if (step->key != -1 && step->key != -3) {
-            if (step->key == -2) {
-                sprite->sequence.step = 0;
-                step = sprite->sequenceSteps;
+    sprite->alpha = sprite->alphaReverse ? key->first : key->last;
+    if (sprite->commandsRunning && sprite->commands != NULL &&
+        sprite->commands[sprite->alphaStep].alphaKey != -1) {
+        ++sprite->alphaStep;
+        const SpriteAnimationCommand *step = &sprite->commands[sprite->alphaStep];
+        if (step->alphaKey != -1 && step->alphaKey != -3) {
+            if (step->alphaKey == -2) {
+                sprite->alphaStep = 0;
+                step = sprite->commands;
             }
-            sprite->mode = step->key;
-            sprite->verticalTrack.frame = 0;
-            sprite->verticalTrack.reverse = step->reverse;
-            sprite->completion.complete = 0;
-            key = &sprite->verticalKeys[sprite->mode];
-            sprite->unk20 = sprite->verticalTrack.reverse ? key->last : key->first;
+            sprite->alphaKey = step->alphaKey;
+            sprite->alphaFrame = 0;
+            sprite->alphaReverse = step->alphaReverse;
+            sprite->finished = 0;
+            key = &sprite->alphaKeys[sprite->alphaKey];
+            sprite->alpha = sprite->alphaReverse ? key->last : key->first;
             return;
         }
     }
-    sprite->completion.vertical = 1;
+    sprite->alphaDone = 1;
 }
 }

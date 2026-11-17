@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "battle/BattleHelpers_Smt4.h"
 
 extern "C" {
 
 void indexedObjectInvalidateEntries(BtlUiObjA *obj);
 
-extern BtlUiGlobals g_btlUi;
 
 void btlUiInvalidateIndexedEntries(void)
 {

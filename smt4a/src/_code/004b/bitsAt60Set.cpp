@@ -1,11 +1,11 @@
-#include "shard/Shard004B.h"
 #include "util/BitsAndBytes_VariantE_Shard004B.h"
+#include "gamedata/GameSaveDataA.h"
 
 extern "C" {
 
-void bitsAt60Set(BitsAt60 *obj, u8 bit)
+void bitsAt60Set(SlotRecordA *obj, u8 bit)
 {
-    obj->bits = obj->bits | (u16)(1 << bit);
+    obj->ailments = obj->ailments | (u16)(1 << bit);
 }
 
 } /* extern "C" */

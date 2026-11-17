@@ -3,6 +3,7 @@
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
+#include "util/MathFunctions.h"
 
 struct MapBreakableEntry {
     /* 0x00 */ u8 active;
@@ -21,7 +22,6 @@ struct MapBreakableWork {
 };
 extern "C" {
 extern MapBreakableWork* g_mapHakai;
-f32 mathAngleDeltaDegrees(f32 current, f32 target);
 f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
 }

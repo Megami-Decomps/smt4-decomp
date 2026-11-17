@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: retail hoists the 0x900 and 0xf88 sub-struct bases into registers (r9/sl, 8-byte frame); member layout of the menu object is not recovered. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -27,9 +27,7 @@ struct SlotMenu {
 }
 
 extern "C" {
-extern int vec2GetYInt(void *);
 extern void efctSetSpeed(f32);
-extern f32 vec2GetSpeed(const void *animation);
 extern f32 jobGetScalarValue(void);
 extern void texDrawCompositeSprite(s32, s32, u32, s32, s32, s32);
 extern void buttonHelpSetText(s32, u32);
@@ -44,19 +42,19 @@ void FUN_004bade4(SlotMenu *menu)
     if (menu->active != 0 && menu->unk9EC == 0) {
         f32 savedSpeed = jobGetScalarValue();
         void *pos = menu->position;
-        s32 x = vec2GetXInt(pos);
-        s32 y = vec2GetYInt(pos);
+        s32 x = vec2GetXInt((UiSpriteState *)pos);
+        s32 y = vec2GetYInt((UiSpriteState *)pos);
         texDrawTableEntryAtStoredOrigin(2, 0x1f, 0x1f, x, y, 0x1f);
         texDrawTableEntryAtStoredOrigin(2, 0x1f, 0x20, x, y, 0x1f);
         TextureTableEntryIV *info = asdTMTexTableEntryAt(0x1f, 0x21);
         s32 dx = info->x;
         s32 dy = info->y;
-        s32 sx = vec2GetXInt(pos) + dx;
-        s32 sy = dy + vec2GetYInt(pos);
+        s32 sx = vec2GetXInt((UiSpriteState *)pos) + dx;
+        s32 sy = dy + vec2GetYInt((UiSpriteState *)pos);
         efctSetSpeed(1.0f);
         texDrawCompositeSprite(2, 0x1f, menu->spriteBase, sx, sy, 0x1f);
         if (menu->spriteAccent != -1) {
-            efctSetSpeed(vec2GetSpeed(&menu->accent));
+            efctSetSpeed(vec2GetSpeed((UiSpriteState *)(&menu->accent)));
             texDrawCompositeSprite(2, 0x1f, menu->spriteAccent, sx, sy, 0x20);
         }
         s32 first = FUN_002a482c(menu);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a321c` (_code @ 0x1a321c, 0x3b10 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -142,8 +143,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -395,8 +394,8 @@ unsigned char FUN_001a321c(void)
         }
         if ((*(char *)(temp_v34 + 0x7e5) != '\0') && (*(char *)(temp_v34 + 0x7ea) != '\0')) {
           unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xd);
-          temp_v7 = vec2GetXInt(temp_v34 + 0x1e8);
-          temp_v6 = vec2GetYInt(temp_v34 + 0x1e8);
+          temp_v7 = vec2GetXInt((UiSpriteState *)(temp_v34 + 0x1e8));
+          temp_v6 = vec2GetYInt((UiSpriteState *)(temp_v34 + 0x1e8));
           texDrawTableEntryAtStoredOrigin(2,0x1a,0xbd,(unsigned char *)((int)temp_v28 + temp_v7),temp_v6 + (int)temp_v30,0xd3)
           ;
         }
@@ -1304,10 +1303,10 @@ LAB_001a3ea8:
                     (**(romwright_code **)(temp_v10 + 0x12c8))();
                     *(unsigned char *)(temp_v10 + 0x12c4) = 0;
                   }
-                  temp_v10 = vec2GetYInt(temp_v34 + 0x44);
+                  temp_v10 = vec2GetYInt((UiSpriteState *)(temp_v34 + 0x44));
                   temp_v2 = *(short *)(temp_v36 + 10);
                   temp_v10 = temp_v10 + (int)temp_v30;
-                  temp_v12 = vec2GetXInt(temp_v34 + 0x44);
+                  temp_v12 = vec2GetXInt((UiSpriteState *)(temp_v34 + 0x44));
                   texDrawTableEntryAtStoredOrigin(2,0x1a,0x75,(unsigned char *)(temp_v12 + (int)temp_v28),temp_v10 + temp_v2,
                                0xdd);
                   temp_v10 = g_titleScene;
@@ -1334,10 +1333,10 @@ LAB_001a3ea8:
                     (**(romwright_code **)(temp_v10 + 0x12c8))();
                     *(unsigned char *)(temp_v10 + 0x12c4) = 0;
                   }
-                  temp_v10 = vec2GetYInt(temp_v34 + 0x44);
+                  temp_v10 = vec2GetYInt((UiSpriteState *)(temp_v34 + 0x44));
                   temp_v2 = *(short *)(temp_v36 + 10);
                   temp_v10 = temp_v10 + (int)temp_v30;
-                  temp_v12 = vec2GetXInt(temp_v34 + 0x44);
+                  temp_v12 = vec2GetXInt((UiSpriteState *)(temp_v34 + 0x44));
                   texDrawTableEntryAtStoredOrigin(2,0x1a,0x73,(unsigned char *)(temp_v12 + (int)temp_v28),temp_v10 + temp_v2,
                                0xdd);
                   temp_v10 = g_titleScene;

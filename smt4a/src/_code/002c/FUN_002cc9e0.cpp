@@ -2,7 +2,9 @@
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "common.h"
-#include "ui/PartyPanelCapacity.h"
+#include "shard/Shard0031.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/SaveSlotTable.h"
 #include "code/Code002a.h"
 
 /* One command-menu entry (only the fields read here). */
@@ -14,12 +16,6 @@ struct CommandEntry {
     /* 0x5C */ u16 flagA;
     /* 0x5E */ u16 flagB;
     /* 0x60 */ u32 attributes;     /* bit 0: needs the target to be free */
-};
-
-/* A party member record (only the fields read here). */
-struct MemberRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 equipment;
 };
 
 /* The battle command work (only the fields read here). */
@@ -51,22 +47,20 @@ struct BattleMasks {
 extern "C" {
 extern BattleMasks DAT_00573b88;
 
-u8 *gameGetSlotTable(void);
-MemberRecord *gameGetSlotRecord(s32 id);
 CommandEntry *FUN_002cc228(u32 index, s32 first);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
-s32 idListHasFlaggedRecord(MemberRecord *member);
+s32 idListHasFlaggedRecord(SlotRecordA *member);
 s32 btlIsDefeatSuppressed(void);
 s32 FUN_002b24fc(void);
 
 /* Whether a target command is usable by the member: allowed by the member's equipment when no
  * flagged record applies. */
-static bool targetCommandAllowed(CommandEntry *entry, MemberRecord *member)
+static bool targetCommandAllowed(CommandEntry *entry, SlotRecordA *member)
 {
     if ((entry->attributes & 1) || btlIsDefeatSuppressed() == 0 || btlIsDefeatSuppressed() == 0)
         return false;
-    NkmBaseRecordA *info = nkmBaseGetRecord(member->equipment);
+    NkmBaseRecordA *info = nkmBaseGetRecord(member->id);
     return info != NULL && (info->extraFlags & 4) != 0;
 }
 
@@ -76,14 +70,14 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
 {
     if (inBattle != 0 && work->mode == 6)
         return 11;
-    u8 *table = gameGetSlotTable();
+    SaveSlotTableA *table = gameGetSlotTable();
     CommandEntry *entry = NULL;
     s32 count = 0;
     for (s32 t = 0; t < 10; t++) {
         entry = FUN_002cc228(t & 0xFF, work->selected == 0);
-        MemberRecord *member = NULL;
-        if (work->selected != 0 && (s8)table[0x1C9F + work->selected] >= 0)
-            member = gameGetSlotRecord((s8)gameGetSlotTable()[0x1C9F + work->selected]);
+        SlotRecordA *member = NULL;
+        if (work->selected != 0 && table->reserve[work->selected - 1] >= 0)
+            member = gameGetSlotRecord(gameGetSlotTable()->reserve[work->selected - 1]);
         if (entry == NULL || entry->valid != 1)
             continue;
         if (entry->flagA != 0 && gameFlagIsSet(entry->flagA) == 0)

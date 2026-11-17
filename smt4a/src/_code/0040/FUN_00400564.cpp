@@ -1,6 +1,7 @@
 /* NON_MATCHING: block layout only: retail resolves the member (gameGetSlotRecord inline path) after the shared checks, lays the 'status cure' tail (orr #4 / tst #1 / 0x1b test) out after the exit branch and sets up result/wanted in a different order. */
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
 
 /* A skill/item effect definition as the usability check reads it. */
 struct EffectDefinition {
@@ -15,21 +16,11 @@ struct EffectDefinition {
     /* 0x3C */ u32 condition;
 };
 
-/* A party member's record: the status mask is at 0x60. */
-struct MemberRecord {
-    /* 0x00 */ u8 unk00[0x2A];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ u8 unk2C[0x34];
-    /* 0x60 */ u16 status;
-};
-
 extern "C" {
-MemberRecord *gameGetSlotRecord(s32 slot);
-MemberRecord *gameGetSaveSlotData(s32 slot);
-MemberRecord *btlMainGetUnk14(void);
+SlotRecordA *btlMainGetUnk14(void);
 u32 btlIsDefeatSuppressed(void);
 s32 FUN_002b4e7c(PlayerDataA *record);
-s32 FUN_002b4dcc(MemberRecord *record);
+s32 FUN_002b4dcc(SlotRecordA *record);
 void FUN_003ff524(u16 *flags, s32 kind);
 u32 btlCanSelectReservePartyMember(const void *entry);
 s32 FUN_003ff888(void);
@@ -84,7 +75,7 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
             useful |= 0x4000000;
         }
     } else {
-        MemberRecord *member;
+        SlotRecordA *member;
         if (slot < 0 && btlIsDefeatSuppressed() != 0) {
             member = btlMainGetUnk14();
         } else if (fromSave != 0) {
@@ -95,13 +86,13 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
         if (member == 0) {
             return 3;
         }
-        if ((wanted & 1) != 0 && (member->status & 0x402) == 0 && FUN_002b4dcc(member) != member->hp) {
+        if ((wanted & 1) != 0 && (member->ailments & 0x402) == 0 && FUN_002b4dcc(member) != member->hp) {
             useful = 1;
         }
         if ((wanted & 4) != 0) {
             curable = 0;
             FUN_003ff524(&curable, effect->condition & 0x7f);
-            if ((curable & member->status) != 0) {
+            if ((curable & member->ailments) != 0) {
                 useful |= 4;
             }
             if ((useful & 4) != 0) {
@@ -118,7 +109,7 @@ u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
                 }
             }
         }
-        if ((wanted & 0x4000000) != 0 && member->status == 0) {
+        if ((wanted & 0x4000000) != 0 && member->ailments == 0) {
             useful |= 0x4000000;
         }
     }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail keeps the second entry's address in a register (base + 0x70); armcc folds the offset into the accesses. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 

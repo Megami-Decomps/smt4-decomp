@@ -1,17 +1,14 @@
-#include "common.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 
-struct CameraState { u8 unk00[0x50]; f32 x; u32 unk54; f32 z; f32 targetX; u32 unk60; f32 targetZ; };
-struct CameraOwner { u32 unk00; CameraState *state; };
-extern CameraOwner DAT_005806a0;
 f32 __hardfp_atan2f(f32 x, f32 y);
 
 f32 cameraGetHeadingDegrees(void)
 {
-    CameraState *state = DAT_005806a0.state;
-    f32 x = state->x - state->targetX;
-    f32 z = state->z - state->targetZ;
+    LmapViewA *view = DAT_005806a0.view;
+    f32 x = view->savedEye.x - view->savedTarget.x;
+    f32 z = view->savedEye.z - view->savedTarget.z;
     return __hardfp_atan2f(x, z) * 57.3248405456543f;
 }
 

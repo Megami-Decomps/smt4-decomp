@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7e6c` (_code @ 0x2c7e6c, 0x6c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "text/TextDraw.h"
@@ -8,15 +9,11 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 
 int positionStateSet(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(...);
 int sysMemClear(...);
 int FUN_0034a544(...);
 int FUN_003e4140(...);
@@ -121,45 +118,45 @@ void FUN_002c7e6c(void)
     positionStateSet(puVar5[0x82d],0,0x646464ff);
     paramsClearPacket(puVar1 + 9);
     paramsInit(reinterpret_cast<UiResourceParameters *>(puVar1 + 9), &DAT_005362a8,0xe4,&DAT_0053638c,0xcc,0,0,0,0,&DAT_00536458,0x3f0);
-    uiSpriteStateInitFromSource(puVar1 + 0x106,0xf,0,puVar1 + 9,1);
-    uiSpriteSetKeyframe(puVar1 + 0x106,1,0);
-    uiSpriteStateInitFromSource(puVar1 + 0x129,0x12,1,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0x129,0);
-    uiSpriteStateInitFromSource(puVar1 + 0x14c,0x12,2,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0x14c,1);
-    uiSpriteStateInitFromSource(puVar1 + 0x16f,0x12,0,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0x16f,2);
-    uiSpriteStateInitFromSource(puVar1 + 0x192,0x12,0,puVar1 + 9,1);
-    uiSpriteSetKeyframe(puVar1 + 0x192,7,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x106),0xf,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSetKeyframe((UiSpriteState *)(puVar1 + 0x106),1,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x129),0x12,1, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0x129),0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x14c),0x12,2, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0x14c),1);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x16f),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0x16f),2);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x192),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSetKeyframe((UiSpriteState *)(puVar1 + 0x192),7,0);
     temp_v1 = 0;
     do {
       puVar5 = puVar1 + temp_v1 * 0x23 + 0x1fb;
-      uiSpriteStateInitFromSource(puVar5,0x12,0,puVar1 + 9,1);
-      uiSpriteSetKeyframe(puVar5,0x10,0);
-      uiSpriteSetImageKeyframe(puVar5,0xd,0);
-      uiSpriteStateInitFromSource(puVar1 + temp_v1 * 0x23 + 0x359,0x12,0,puVar1 + 9,1);
-      uiSpriteSetKeyframe(puVar1 + temp_v1 * 0x23 + 0x359,1,0);
+      uiSpriteStateInitFromSource((UiSpriteState *)puVar5,0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+      uiSpriteSetKeyframe((UiSpriteState *)puVar5,0x10,0);
+      uiSpriteSetImageKeyframe((UiSpriteState *)puVar5,0xd,0);
+      uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + temp_v1 * 0x23 + 0x359),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+      uiSpriteSetKeyframe((UiSpriteState *)(puVar1 + temp_v1 * 0x23 + 0x359),1,0);
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 10);
-    uiSpriteStateInitFromSource(puVar1 + 0x4b7,0x12,0,puVar1 + 9,1);
-    uiSpriteStateInitFromSource(puVar1 + 0x11,0x12,0,puVar1 + 9,1);
-    uiSpriteSetKeyframe(puVar1 + 0x11,6,0);
-    uiSpriteStateInitFromSource(puVar1 + 0x57,0x12,0,puVar1 + 9,1);
-    uiSpriteSetImageKeyframe(puVar1 + 0x57,4,0);
-    uiSpriteStateInitFromSource(puVar1 + 0x7a,0x12,0,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0x7a,6);
-    uiSpriteStateInitFromSource(puVar1 + 0x9d,0x12,0,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0x9d,7);
-    uiSpriteStateInitFromSource(puVar1 + 0xc0,0x12,0,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0xc0,8);
-    uiSpriteStateInitFromSource(puVar1 + 0x34,0x12,0,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0x34,4);
-    uiSpriteStateInitFromSource(puVar1 + 0x1b5,0x12,0,puVar1 + 9,1);
-    uiSpriteSetKeyframe(puVar1 + 0x1b5,8,0);
-    uiSpriteStateInitFromSource(puVar1 + 0x1d8,0x12,0,puVar1 + 9,1);
-    uiSpriteSetKeyframe(puVar1 + 0x1d8,8,0);
-    uiSpriteStateInitFromSource(puVar1 + 0xe3,0x12,0,puVar1 + 9,1);
-    uiSpriteSelectAnim(puVar1 + 0xe3,10);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x4b7),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x11),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSetKeyframe((UiSpriteState *)(puVar1 + 0x11),6,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x57),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSetImageKeyframe((UiSpriteState *)(puVar1 + 0x57),4,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x7a),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0x7a),6);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x9d),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0x9d),7);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0xc0),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0xc0),8);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x34),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0x34),4);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x1b5),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSetKeyframe((UiSpriteState *)(puVar1 + 0x1b5),8,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0x1d8),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSetKeyframe((UiSpriteState *)(puVar1 + 0x1d8),8,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)(puVar1 + 0xe3),0x12,0, (UiResourceParameters *)(puVar1 + 9),1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)(puVar1 + 0xe3),10);
     puVar1 = DAT_00588fd4;
     if (DAT_00588fd4 != (unsigned int *)0x0) {
       *(unsigned char *)((int)DAT_00588fd4 + 0x20d1) = 0;

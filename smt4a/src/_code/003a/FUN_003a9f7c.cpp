@@ -1,10 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include "camp/RenderCtxA.h"
-#include "util/MathFunctions.h"
 /* NON_MATCHING: dispatch guard peeling, sprite visibility getter, and mask/register loads differ. */
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 
@@ -38,7 +37,7 @@ void FUN_003a9f7c(BtlUiObjAA* object)
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
     s32 x = vec2GetXInt(&panel->anchor) + parallax;
     for (s32 i = 0; i < 10; ++i) {
-        if (i <= 3 && panel->frame.visibility.active != 0) {
+        if (i <= 3 && panel->frame.updated != 0) {
             if (i == 0) {
                 effectRenderTransformedInstance(&panel->frame, (f32)x);
             }

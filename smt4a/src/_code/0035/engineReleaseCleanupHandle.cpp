@@ -1,17 +1,12 @@
-#include "common.h"
+#include "shard/X14_EngineUnits.h"
 
 extern "C" {
 
-struct CleanupOwner {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 handle;
-};
-extern CleanupOwner g_engineCleanupOwner;
-void cleanupProcessUpdate(u32 handle);
+void cleanupProcessUpdate(void *scene);
 
 void engineReleaseCleanupHandle(void)
 {
-    cleanupProcessUpdate(g_engineCleanupOwner.handle);
+    cleanupProcessUpdate(g_engineCleanupOwner.scene);
 }
 
 } /* extern "C" */

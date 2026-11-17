@@ -1,7 +1,9 @@
 /* NON_MATCHING: readable rebuild of the main-partner select menu's state machine (draft args completed from the surrounding calls: the entry index passed to the script start, the destroyed script and the lost return of padQueryLogicalKey); armcc here shares the state-store tail and the script reload differently. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/Shard0031.h"
 #include "code/Code002a_VariantA.h"
+#include "gamedata/SaveSlotTable.h"
 
 /* The partner select menu (only the fields the state machine reads). */
 struct PartnerMenuFull {
@@ -34,12 +36,10 @@ s32 FUN_004be1c8(PartnerMenuFull *menu);
 s32 FUN_004bea0c(PartnerMenuFull *menu);
 s32 FUN_004bf174(PartnerMenuFull *menu);
 void gameGlobalsSetMenuOpenFlag(s32 owner);
-void uiSpriteAdvanceAnimation(void *panel);
 s32 scrRunOpcodesStub(u32 script);
 void messageBannerRestartOrClear(void);
 s32 messageMainGetValue(void);
 void sysPlaySe(s32 id);
-void *partyGetSlot(u32 devil);
 void FUN_003e4e4c(u32 devil);
 void FUN_0035d03c(s32 flag);
 void FUN_00228b04(void *list, s32 flag);
@@ -62,7 +62,7 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         break;
     case 2:
         gameGlobalsSetMenuOpenFlag(1);
-        uiSpriteAdvanceAnimation(menu->panel);
+        uiSpriteAdvanceAnimation((UiSpriteState *)menu->panel, 1.0f);
         if (menu->panelClosed != 0) {
             gameGlobalsSetMenuOpenFlag(0);
             menu->state = menu->returnState;

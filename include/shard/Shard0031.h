@@ -281,37 +281,12 @@ typedef struct FlaggedEntry {
     /* 0x62 */ u8 inactive;
 } FlaggedEntry;
 
-typedef struct Lookup62 {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 id;
-} Lookup62;
-
 typedef struct Player1C {
     /* 0x00 */ u8 unk00[0x1C];
     /* 0x1C */ s16 value;
 } Player1C;
 
 /* One demon record in the slot table. */
-typedef struct SlotTableEntry {
-    /* 0x000 */ u8 unk000[0x66];
-    /* 0x066 */ u8 slotId;
-    /* 0x067 */ u8 unk067[0xC5];
-} SlotTableEntry;
-typedef char SlotTableEntrySizeCheck[sizeof(SlotTableEntry) == 0x12C ? 1 : -1];
-
-typedef struct SlotTable {
-    /* 0x0000 */ u8 unk0000[0x68];
-    /* 0x0068 */ SlotTableEntry entries[0x18];
-    /* 0x1C88 */ s8 slots[0x18];      /* -1 = empty */
-} SlotTable;
-typedef char SlotTableSlotsOffsetCheck[sizeof(SlotTable) == 0x1CA0 ? 1 : -1];
-
-struct PartyStatusSlots {
-    /* 0x0000 */ SlotTable active;
-    /* 0x1CA0 */ s8 reserve[3];
-};
-typedef char PartyStatusSlotsSizeCheck[sizeof(PartyStatusSlots) == 0x1CA3 ? 1 : -1];
-
 typedef struct JobRef {
     /* 0x00 */ u32 job;
     /* 0x04 */ u8 unk04[0x1];

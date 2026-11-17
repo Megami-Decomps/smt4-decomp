@@ -1,8 +1,8 @@
+#include "ui/UiSpriteApi.h"
 #include "camp/CampState.h"
 
 extern "C" {
 
-int timerStart(void *timer, int a, int b);
 
 /* Starts the camp's sprite animations: the first one, the eight at sprites[5..12] and sprites[4]. */
 void campTimersStart(void)

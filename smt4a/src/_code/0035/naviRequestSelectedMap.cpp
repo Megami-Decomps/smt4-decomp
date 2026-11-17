@@ -1,9 +1,9 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 void menuEnterState11(NaviTransitionState* menu, u32 selection);
 
 // Requests the selected map, or clears the pending request when it is already current.

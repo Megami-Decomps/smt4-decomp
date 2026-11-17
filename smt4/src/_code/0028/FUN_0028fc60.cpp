@@ -1,9 +1,9 @@
 /* NON_MATCHING: common single-target lookup loop, applicability normalization and saved register allocation differ. */
-#include "shard/W7_W7Match2_PartyDamage.h"
+
 #include "gamedata/ConsumableRecord.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable();
 s32 itemApplyToMember(s32, const ConsumableRecord *, s32, s32, s32);
 
 u32 FUN_0028fc60(u32 id)
@@ -18,7 +18,7 @@ u32 FUN_0028fc60(u32 id)
         if (!item)
             return 0;
         bool applicable = itemApplyToMember(-1, item, 1, 0, 0) == 0;
-        PartyDamageSlotsIV *slots = gameGetSlotTable();
+        SaveSlotTableIV *slots = gameGetSlotTable();
         for (s32 i = 0; i < 24; ++i) {
             s32 slot = slots->stock[i];
             if (slot >= 0 && itemApplyToMember(slot, item, 1, 0, 0) == 0)
@@ -26,7 +26,7 @@ u32 FUN_0028fc60(u32 id)
         }
         return applicable;
     }
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     for (s32 i = -1; i < 24; ++i) {
         s32 slot = -1;
         if (i >= 0) {

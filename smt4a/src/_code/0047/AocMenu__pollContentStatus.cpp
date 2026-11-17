@@ -32,7 +32,6 @@ struct AocPollMenu {
 };
 
 extern "C" {
-extern AocMain *g_aocMain;
 
 void FUN_00476e58(AocPollMenu *menu, s32 first, s32 second);
 AocPollHandler *windowCreateStatusOperation(u8 *storage, s32 kind);

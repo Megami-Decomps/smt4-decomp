@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the first downsample level's two dimension copies (and the second level's height copy) load the source pointer into r1 and the destination into r0, where retail uses r0/r1; FUN_0010854c is the same job with the opposite tie-break. */
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"

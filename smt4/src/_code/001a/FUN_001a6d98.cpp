@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a6d98` (_code @ 0x1a6d98, 0x834 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -48,8 +49,6 @@ extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -77,8 +76,8 @@ void FUN_001a6d98(void)
   unsigned char temp_v13 [84];
   
   temp_v0 = g_uiQuest;
-  temp_v1 = vec2GetXInt(g_uiQuest + 0x34);
-  temp_v2 = vec2GetYInt(temp_v0 + 0x34);
+  temp_v1 = vec2GetXInt((UiSpriteState *)(g_uiQuest + 0x34));
+  temp_v2 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0x34));
   if (*(char *)(temp_v0 + 0x5c4) != '\0') {
     temp_v3 = temp_v0 + 0x5fc;
     temp_v12 = temp_v0 + 0x6c4;
@@ -167,8 +166,8 @@ void FUN_001a6d98(void)
       texDrawTableEntryAtStoredOrigin(2,0x29,0xad,temp_v5,temp_v4,0xa1);
     }
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0xac));
-    temp_v5 = vec2GetXInt(temp_v0 + 0x14c);
-    temp_v8 = vec2GetYInt(temp_v0 + 0x14c);
+    temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v0 + 0x14c));
+    temp_v8 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0x14c));
     temp_v12 = g_titleScene;
     piVar12 = (int *)(g_titleScene + 0x130c);
     temp_v9 = piVar12[*piVar12 + 2];

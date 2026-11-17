@@ -1,23 +1,17 @@
 #include "camp/UnitComparison.h"
 #include "camp/CampStateQueries_UnitComparison.h"
-#include "shard/Shard0031.h"
 #include "shard/Shard0032.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/SaveSlotTable.h"
 #include "addon/LookupRecord.h"
 
-struct PartyComparisonTable : PartyStatusSlots {
-    s8 count;
-};
-typedef char PartyComparisonCountOffset[offsetof(PartyComparisonTable, count) == 0x1CA3 ? 1 : -1];
-
 static inline UnitRecord *findComparisonPartyUnit(u32 id)
 {
-    PartyComparisonTable *party = (PartyComparisonTable *)gameGetSlotTable();
-    for (u16 i = 0; i < static_cast<u8>(party->count); ++i) {
-        s32 slot = party->active.slots[i];
+    SaveSlotTableA *party = gameGetSlotTable();
+    for (u16 i = 0; i < party->count; ++i) {
+        s32 slot = party->party[i];
         if (slot >= 0) {
-            UnitRecord *unit = (UnitRecord *)&party->active.entries[slot];
+            UnitRecord *unit = (UnitRecord *)&party->entries[slot];
             if (unit->id == id) {
                 return unit;
             }
@@ -42,23 +36,23 @@ void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
     UnitRecord saved;
     if (compareParty) {
         FUN_0035ad50(id, &saved);
-        row->level = saved.unk64;
+        row->level = saved.level;
         row->maximum = recordGetScaledMaximum(&saved);
-        row->secondaryMaximum = saved.unk10;
+        row->secondaryMaximum = saved.maxMp;
 
         UnitRecord *current = findComparisonPartyUnit(id);
-        row->otherLevel = current->unk64;
+        row->otherLevel = current->level;
         row->otherMaximum = recordGetScaledMaximum(current);
-        row->otherSecondaryMaximum = current->unk10;
+        row->otherSecondaryMaximum = current->maxMp;
     } else {
         FUN_0035ad50(id, &saved);
-        row->level = saved.unk64;
+        row->level = saved.level;
         row->maximum = recordGetScaledMaximum(&saved);
-        row->secondaryMaximum = saved.unk10;
+        row->secondaryMaximum = saved.maxMp;
         FUN_0035ad50(id, &saved);
-        row->otherLevel = saved.unk64;
+        row->otherLevel = saved.level;
         row->otherMaximum = recordGetScaledMaximum(&saved);
-        row->otherSecondaryMaximum = saved.unk10;
+        row->otherSecondaryMaximum = saved.maxMp;
     }
 }
 }

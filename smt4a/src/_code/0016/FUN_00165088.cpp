@@ -1,4 +1,5 @@
 /* NON_MATCHING: HUD panel state reset by state id (hide or reset the sprites depending on the open/lock checks); written from the decompilation, branch/tail-call layout not compared with retail */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
 #include "ui/UiControl.h"
@@ -36,7 +37,6 @@ struct PanelWork {
 
 extern "C" {
 s32 padQueryLogicalKey(s32 a, s32 b);
-void uiSpriteSetImageKeyframe(PanelSprite *sprite, s32 keyframe, s32 flag);
 void workSetStateByte(PanelSprite *sprite, s32 value);
 
 /* Closes the panel parts that belong to the state; when the panel may stay open the sprites are
@@ -52,7 +52,7 @@ void FUN_00165088(PanelWork *panel, u32 state)
         if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0)
             workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
         else
-            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
         return;
     case 2:
     case 3:
@@ -65,8 +65,8 @@ void FUN_00165088(PanelWork *panel, u32 state)
             sprites[PANEL_SPRITE_MAIN].hidden = 0;
             sprites[PANEL_SPRITE_SIDE].hidden = 0;
         } else {
-            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
-            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_SIDE], 2, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_SIDE]), 2, 0);
         }
         workSetStateByte(&sprites[PANEL_SPRITE_SECOND], 0);
         return;
@@ -74,7 +74,7 @@ void FUN_00165088(PanelWork *panel, u32 state)
         if (padQueryLogicalKey(9, 2) != 0 || slotIsActive(6) != 0)
             workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
         else if (*(s32 *)&sprites[PANEL_SPRITE_MAIN].progress == 0x3F800000)
-            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
         return;
     case 7:
     case 8:
@@ -83,26 +83,26 @@ void FUN_00165088(PanelWork *panel, u32 state)
             sprites[PANEL_SPRITE_MAIN].hidden = 0;
             workSetStateByte(&sprites[PANEL_SPRITE_SEVENTH], 0);
         } else {
-            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
-            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_SEVENTH], 2, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 2, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_SEVENTH]), 2, 0);
         }
         return;
     case 0xB:
-        uiSpriteSelectAnim(&sprites[PANEL_SPRITE_MAIN], 7);
-        uiSpriteSelectAnim(&sprites[PANEL_SPRITE_FOURTH], 7);
+        uiSpriteSelectAnim((UiSpriteState *)(&sprites[PANEL_SPRITE_MAIN]), 7);
+        uiSpriteSelectAnim((UiSpriteState *)(&sprites[PANEL_SPRITE_FOURTH]), 7);
         sprites[PANEL_SPRITE_SIXTH].hidden = 0;
-        uiSpriteSelectAnim(&sprites[PANEL_SPRITE_LAST], 7);
+        uiSpriteSelectAnim((UiSpriteState *)(&sprites[PANEL_SPRITE_LAST]), 7);
         return;
     case 0xC:
         for (s32 i = 0; i < 5; i++) {
             if (panel->rowActive[i] != 0)
-                uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_ROWS + i], 5, 0);
+                uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_ROWS + i]), 5, 0);
         }
         panel->cursorBusy = 0;
         return;
     case 0xD:
         if (panel->selectedRowActive != 0)
-            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_CURSORS + panel->selectedRow], 5, 0);
+            uiSpriteSetImageKeyframe((UiSpriteState *)(&sprites[PANEL_SPRITE_CURSORS + panel->selectedRow]), 5, 0);
         panel->cursorBusy = 0;
         return;
     }

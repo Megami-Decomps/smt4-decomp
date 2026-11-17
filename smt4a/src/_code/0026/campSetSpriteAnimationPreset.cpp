@@ -1,9 +1,8 @@
 /* NON_MATCHING: preset key/image branches match; the first sprite's global reload is folded and retained pointer/key registers differ. */
+#include "ui/UiSpriteApi.h"
 #include "camp/CampStateA.h"
 
 extern "C" {
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 key, u32 restart);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, u32 restart);
 
 static __inline s32 campAnimationPresetKey(s32 animation)
 {

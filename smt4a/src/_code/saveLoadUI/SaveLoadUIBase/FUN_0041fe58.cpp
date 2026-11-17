@@ -1,4 +1,5 @@
 /* NON_MATCHING: the allocation/copy sequence and the slot-clearing loop are scheduled differently from retail; the screen setup is the same. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -85,8 +86,6 @@ void FUN_003f86f0(void);
 void sysMemClear(void *block, u32 size);
 void paramsClearPacket(void *packet);
 
-void uiSpriteStateInitFromSource(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
-void uiSpriteInitializeState(void *sprite, u32 group, u32 id, u32 size, void *owner, u32 anim, f32 scale);
 u8 saveLoadProcessGetState(void);
 void sysPlaySe(u32 id);
 void FUN_0041f020(SaveLoadUI *ui, s32 arg);
@@ -136,9 +135,9 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     ui->buffer = asdMemoryAlloc(0x100, 0x100, 0, 100, 1);
     paramsClearPacket(ui->params);
     paramsInit(reinterpret_cast<UiResourceParameters *>(ui->params), DAT_00533d50, 0x78, DAT_00533dc8, 0x18, NULL, 0, 0, 0, DAT_00533de0, 0xE0);
-    uiSpriteStateInitFromSource(ui->sprite0, 0x2B, 1, ui->params, 0xC9, 1.0f);
-    uiSpriteInitializeState(ui->sprite1, 0x2B, 0x51, 2, ui->params, 2, 1.0f);
-    uiSpriteInitializeState(ui->sprite2, 0x2B, 0x52, 2, ui->params, 2, 1.0f);
+    uiSpriteStateInitFromSource((UiSpriteState *)ui->sprite0, 0x2B, 1, (UiResourceParameters *)(ui->params), 0xC9, 1.0f);
+    uiSpriteInitializeState((UiSpriteState *)ui->sprite1, 0x2B, 0x51, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);
+    uiSpriteInitializeState((UiSpriteState *)ui->sprite2, 0x2B, 0x52, 2, (UiResourceParameters *)(ui->params), 2, 1.0f);
     ui->unk618 = 0;
     ui->unk61c = 0.0f;
     ui->unk30c = 0;

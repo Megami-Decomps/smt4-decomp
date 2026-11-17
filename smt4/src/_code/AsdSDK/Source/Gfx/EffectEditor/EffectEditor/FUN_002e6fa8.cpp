@@ -1,4 +1,5 @@
 /* NON_MATCHING: layout and instruction sequence match; only register numbering differs: retail keeps &g_effectEditor in r7, the dir literal in r6 and the locals' base in r5 (loading &g_effectEditor and the result before allocating the frame) and reads the node state through r0, so it reloads the label before the inlined `mov r0, #0` stub; this build uses r6/r5/r7 and r1 and omits that reload. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 

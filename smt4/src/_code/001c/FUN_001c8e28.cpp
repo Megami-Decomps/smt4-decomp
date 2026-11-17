@@ -769,4 +769,5 @@ code_r0x001c9900:
   return 0;
 }
 */
+#include "ui/UiSpriteApi.h"
 #include "common.h"

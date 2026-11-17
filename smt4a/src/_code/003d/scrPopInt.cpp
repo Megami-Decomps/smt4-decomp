@@ -5,7 +5,7 @@ extern "C" {
 
 /* Pops the top value of the script stack and returns it as an int, converting float values and
  * resolving variable references. */
-s32 scrPopInt(ScriptVmProcess *process)
+s32 scrPopInt(ScriptProcess *process)
 {
     s32 slot = --process->depth;
     u8 *tags = process->tags;

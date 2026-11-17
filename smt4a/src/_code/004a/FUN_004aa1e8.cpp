@@ -1,9 +1,8 @@
 /* NON_MATCHING: the availability row now matches (flag at +0x4C of a 0xA0-byte row, add #0xB600); retail hoists slot*640 out of the unrolled cell loop and keeps slot*5 in r5, the build indexes (slot*32 + i)*20. */
 #include "common.h"
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 
 u32 FUN_004aa1e8(u32 unused, s32 slot)
 {

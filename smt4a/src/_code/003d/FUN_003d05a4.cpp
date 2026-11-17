@@ -1,11 +1,9 @@
 /* NON_MATCHING: two instructions remain: retail extends the choice with `sxth` (the build's `s16 initial` switched as `(u16)initial` gives `uxth`; the signed forms move the gridNavigationConfigure constants to r9/r8) and keeps the icon in r1 (stm {r1, r4}). */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
-struct MenuSprite {
-    /* 0x00 */ u8 data[0x8C];
-};
 
 struct MenuChoice {
     /* 0x00 */ s32 icon;
@@ -21,9 +19,9 @@ struct ChoiceMenuWork {
     /* 0x0BC */ s32 end;
     /* 0x0C0 */ u8 unk0C0[8];
     /* 0x0C8 */ UiResourceParameters resources;
-    /* 0x0E8 */ MenuSprite header;
-    /* 0x174 */ MenuSprite entries[5];
-    /* 0x430 */ MenuSprite cursor;
+    /* 0x0E8 */ UiSpriteState header;
+    /* 0x174 */ UiSpriteState entries[5];
+    /* 0x430 */ UiSpriteState cursor;
     /* 0x4BC */ s32 cursorShown;
 };
 
@@ -47,10 +45,6 @@ static const u32 sMenuPacketC[28] = {
 s32 gameFlagIsSet(s32 flag);
 void gridNavigationConfigure(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
 
-void uiSpriteStateInitFromSource(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, u16 flag, f32 scale);
-void uiSpriteSetKeyframe(MenuSprite *sprite, s32 keyframe, s32 restart);
-void uiSpriteSetImageKeyframe(MenuSprite *sprite, s32 keyframe, s32 initial);
-void uiSpriteSelectAnim(MenuSprite *sprite, s32 animation);
 
 /* Sets up the menu: frame size by entry count, the visible entries (icon, slot), the initial
  * selection from `initial` and the sprites. */

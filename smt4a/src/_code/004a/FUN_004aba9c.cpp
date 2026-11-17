@@ -1,9 +1,8 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gamedata/SkillDataRecord.h"
 
 extern "C" {
 
-extern BtlUiGlobalsA g_btlUi;
 
 bool FUN_004aba9c(u32 arg0)
 {

@@ -2,9 +2,10 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/Shard004B.h"
 #include "gamedata/SaveSlotTable.h"
 #include "battle/BtlGlobals.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/GameDataAccess_Shard004B.h"
 
 static inline s32 clampVital(s32 value, s32 maximum)
 {
@@ -18,8 +19,6 @@ static inline s32 clampVital(s32 value, s32 maximum)
 }
 
 extern "C" {
-ScaledRecordValues *gameGetSlotRecord(s32 slot);
-s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 
 void FUN_004c80f0(s32 id, s32 kind, s32 delta)
 {
@@ -40,33 +39,33 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
         }
         BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, id);
         if (entry->data.record) {
-            reinterpret_cast<ScaledRecordValues *>(entry->data.record)->current = vitals->hp;
-            reinterpret_cast<ScaledRecordValues *>(entry->data.record)->secondaryCurrent = vitals->mp;
+            reinterpret_cast<SlotRecordA *>(entry->data.record)->hp = vitals->hp;
+            reinterpret_cast<SlotRecordA *>(entry->data.record)->mp = vitals->mp;
         } else if (entry->data.secondaryRecord) {
-            reinterpret_cast<ScaledRecordValues *>(entry->data.secondaryRecord)->current = vitals->hp;
-            reinterpret_cast<ScaledRecordValues *>(entry->data.secondaryRecord)->secondaryCurrent = vitals->mp;
+            reinterpret_cast<SlotRecordA *>(entry->data.secondaryRecord)->hp = vitals->hp;
+            reinterpret_cast<SlotRecordA *>(entry->data.secondaryRecord)->mp = vitals->mp;
         } else if (entry->data.specialRecord) {
-            ScaledRecordValues *selected = reinterpret_cast<ScaledRecordValues *>(saveSlotFindSelected());
+            SlotRecordA *selected = &saveSlotFindSelected()->record;
             if (!selected) {
                 return;
             }
-            if (reinterpret_cast<ScaledRecordValues *>(entry->data.specialRecord) == selected) {
-                reinterpret_cast<ScaledRecordValues *>(entry->data.specialRecord)->current = vitals->hp;
-                reinterpret_cast<ScaledRecordValues *>(entry->data.specialRecord)->secondaryCurrent = vitals->mp;
+            if (reinterpret_cast<SlotRecordA *>(entry->data.specialRecord) == selected) {
+                reinterpret_cast<SlotRecordA *>(entry->data.specialRecord)->hp = vitals->hp;
+                reinterpret_cast<SlotRecordA *>(entry->data.specialRecord)->mp = vitals->mp;
             } else {
-                selected->current = vitals->hp;
-                selected->secondaryCurrent = vitals->mp;
+                selected->hp = vitals->hp;
+                selected->mp = vitals->mp;
             }
         }
     } else {
-        ScaledRecordValues *record = gameGetSlotRecord(id - 109);
+        SlotRecordA *record = gameGetSlotRecord(id - 109);
         if (kind == 0) {
-            s32 current = record->current;
+            s32 current = record->hp;
             s32 maximum = recordGetScaledMaximum(record);
-            record->current = clampVital(delta + current, maximum);
+            record->hp = clampVital(delta + current, maximum);
         } else if (kind == 1) {
-            record->secondaryCurrent = clampVital((s16)record->secondaryCurrent + delta,
-                                                   (s16)record->secondaryMaximum);
+            record->mp = clampVital((s16)record->mp + delta,
+                                                   (s16)record->maxMp);
         }
     }
 }

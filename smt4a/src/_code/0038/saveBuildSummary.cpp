@@ -1,4 +1,6 @@
 #include "gamedata/NkmBaseRecordA.h"
+#include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 
@@ -28,47 +30,30 @@ typedef struct SaveSummary {
     /* 0x62 */ u16 value62;
 } SaveSummary;
 
-typedef struct SlotTable {
-    /* 0x0000 */ u8 unk0000[4];
-    /* 0x0004 */ u8 nameA[0x4c];
-    /* 0x0050 */ u8 nameB[0x16];
-    /* 0x0066 */ u16 value66;
-    /* 0x0068 */ u8 unk0068[0x2be4];
-    /* 0x2c4c */ u16 value2c4c;
-} SlotTable;
-
-typedef struct SaveSlot {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 value62;
-    /* 0x64 */ u16 value64;
-} SaveSlot;
-
 typedef struct SaveData {
     /* 0x00000 */ u8 unk00000[0x21d90];
     /* 0x21d90 */ u32 word21d90;
 } SaveData;
 
 void memcpySrcFirst(void *first, void *second, s32 size);   /* copies `size` bytes between the two buffers */
-SaveSlot *gameGetSaveSlotData(s32 index);
 u8 gameDataBlocksGetFlagByte(void);
 SaveData *gameDataBlocksGetSaveData(void);
 u32 gameDataBlocksGetWord27E90(void);
 void gameDataBlocksSetFlagBits(s32 bits, s32 value);
 s32 gameFlagIsSet(u32 flag);
-SlotTable *gameGetSlotTable(void);
-SaveSlot *saveSlotFindSelected(void);
 
 /* Fills the save summary from the slot table, the save data, the selected save slot and the party. */
 void saveBuildSummary(SaveSummary *summary)
 {
-    SlotTable *table = gameGetSlotTable();
-    SaveSlot *slot;
+    SaveSlotTableA *table = gameGetSlotTable();
+    PartySlotA *slot;
+    SlotRecordA *saved;
     NkmBaseRecordA *source;
     s32 i;
 
-    memcpySrcFirst(table->nameA, summary->nameA, 0xe);
-    memcpySrcFirst(table->nameB, summary->nameB, 0x12);
-    summary->value36 = table->value66;
+    memcpySrcFirst(table->hero.equipment, summary->nameA, 0xe);
+    memcpySrcFirst(table->hero.name, summary->nameB, 0x12);
+    summary->value36 = table->hero.level;
     summary->word28 = gameDataBlocksGetSaveData()->word21d90;
     summary->unk24 = 0;
     summary->flagByte = gameDataBlocksGetFlagByte();
@@ -80,20 +65,20 @@ void saveBuildSummary(SaveSummary *summary)
     summary->word30 = gameDataBlocksGetWord27E90();
     summary->unk22 = 0;
     summary->unk23 = 0;
-    summary->value38 = table->value2c4c;
+    summary->value38 = table->preferredId;
     slot = saveSlotFindSelected();
     if (slot == NULL) {
         summary->value44 = 0;
         summary->value3a = 0;
     } else {
-        summary->value44 = slot->value62;
-        summary->value3a = slot->value64;
+        summary->value44 = slot->record.id;
+        summary->value3a = slot->record.level;
     }
     summary->unk42 = 0;
     for (i = 0; i < 3; i++) {
-        slot = gameGetSaveSlotData(i);
-        if (slot != NULL) {
-            summary->partyValues[i] = slot->value62;
+        saved = gameGetSaveSlotData(i);
+        if (saved != NULL) {
+            summary->partyValues[i] = saved->id;
         } else {
             summary->partyValues[i] = 0;
         }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -16,10 +17,7 @@ typedef struct Widget {
     /* 0x224 */ s32 position[2];
 } Widget;
 
-extern s32 uiSpriteAdvanceAnimation(s32 *position);
 extern s32 buttonHelpStateIsNot3(void);
-extern s32 vec2GetXInt(s32 *position);
-extern s32 vec2GetYInt(s32 *position);
 extern void pointConvertToFloat(void *sprite, s32 x, s32 y);
 extern void FUN_00233240(void *shadow, s32 value);
 
@@ -34,11 +32,11 @@ void FUN_0039c9d4(Widget *widget)
         widget->state = 1;
     } else if (widget->state == 1) {
         position = widget->position;
-        if (uiSpriteAdvanceAnimation(position) != 0 && buttonHelpStateIsNot3() != 0) {
+        if (uiSpriteAdvanceAnimation((UiSpriteState *)position) != 0 && buttonHelpStateIsNot3() != 0) {
             widget->state = 2;
             widget->flags |= WIDGET_FLAG_READY;
         }
-        pointConvertToFloat(widget->sprite, vec2GetXInt(position), vec2GetYInt(position));
+        pointConvertToFloat(widget->sprite, vec2GetXInt((const UiSpriteState *)position), vec2GetYInt((const UiSpriteState *)position));
     }
 }
 

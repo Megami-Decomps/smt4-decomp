@@ -4,8 +4,8 @@
 
 #include "common.h"
 #include <stddef.h>
-struct ScriptRunState;
-struct ScriptResource;
+struct ScriptProcess;
+struct ScriptProcess;
 
 struct BtlPartnerAttackA {
     /* 0x00 */ u32 unk00;
@@ -20,8 +20,8 @@ struct BtlPartnerAttackA {
     /* 0x24 */ void *scriptData;
     /* 0x28 */ union {
         void *scriptProcess;
-        ScriptRunState *runState;
-        ScriptResource *scriptResource;
+        ScriptProcess *runState;
+        ScriptProcess *scriptResource;
     };
     /* 0x2c */ u32 unk2c;
     /* 0x30 */ void *entries;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: stored unsigned ID and signed menu conversion match retail; only initial global-work pointer/constant setup is scheduled differently. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gamedata/KeyedCatalog.h"
 
 extern "C" {
@@ -16,7 +16,6 @@ struct BtlUiWork {
 };
 
 
-extern BtlUiGlobalsA g_btlUi;
 s32 textFormatBuffer(char *output, const char *format, ...);
 void menuStateBeginSelect(s16 id);
 void FUN_00227af0(const char *text);

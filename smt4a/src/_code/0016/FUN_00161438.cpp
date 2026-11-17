@@ -1,4 +1,4 @@
-#include "shard/Block61a470.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
@@ -6,12 +6,12 @@ extern "C" {
 /* Marks a graphics pool entry, or the whole pool, dirty. */
 void FUN_00161438(s32 index)
 {
-    Pool *pool = g_asdGfxContext.pool;
+    AsdCmdBuffer *pool = g_asdGfxContext.cmdBuffer;
     if (pool == NULL) {
         return;
     }
     if (index == -1) {
-        pool->unk3C = 1;
+        pool->callbackAtEnd = 1;
     } else {
         /* The dirty flag is the second byte of entry `index - 1`. */
         s32 offset = (index - 1) * sizeof(GraphicsPoolEntry) + 1;

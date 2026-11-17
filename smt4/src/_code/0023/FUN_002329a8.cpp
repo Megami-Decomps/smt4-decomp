@@ -18,13 +18,11 @@ struct ModelCloneOwner {
     AsdMdlObject *model; // 0x6c
 };
 extern "C" {
-AsdMdlObject *asdMdlManagerClone(u32 source, u32 flags);
-void nodeSetTranslation(AsdMdlNode *node, s32 index, const Vec3f *translation);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 
 // Clone and enable a model, resetting its root translation, rotation and scale.
-void FUN_002329a8(ModelCloneOwner *owner, u32 source)
+void FUN_002329a8(ModelCloneOwner *owner, AsdMdlObject *source)
 {
     owner->model = asdMdlManagerClone(source, 0);
     lightOwnerRegister(owner->model, 1);
@@ -34,7 +32,7 @@ void FUN_002329a8(ModelCloneOwner *owner, u32 source)
     owner->flags |= 2;
     f32 zero = 0.0f;
     Vec3f origin = {zero, zero, zero};
-    nodeSetTranslation(owner->model->node, 0, &origin);
+    nodeSetTranslation(owner->model->node, 0, &origin.x);
     modelPartSetRotationDegrees(owner->model->node, 0, zero, zero, zero);
     nodeSetScale(owner->model->node, 0, 1.0f, 1.0f, 1.0f);
 }

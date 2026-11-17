@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ab804` (_code @ 0x2ab804, 0x760 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "gamedata/GameFlags.h"
 #include "romwright_types.h"
@@ -10,7 +11,6 @@ int dataTableGetCount(...);
 int dataTableGetEntries(...);
 
 int asdLoadFileWithSize(...);
-int uiSpriteStateInitFromSource(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdOperatorNew(...);
@@ -18,8 +18,6 @@ int asdMemoryAllocTracked(...);
 int memAlloc(...);
 int resultReportIfFailed(...);
 int asdMemoryAllocTraced(...);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
 int FUN_00184b90(...);
 int __aeabi_memset4(...);
 int modelLoadFileAsyncByName(...);
@@ -231,20 +229,20 @@ void FUN_002ab804(void)
   rebuildFusionCatalogLists();
   paramsClearPacket(piVar2 + 1);
   paramsInit(reinterpret_cast<UiResourceParameters *>(piVar2 + 1),&DAT_0052ef50,0x84,&DAT_0052efd4,0x60,0,0,0,0,&DAT_0052f034,0x1dc);
-  uiSpriteStateInitFromSource(piVar2 + 9,0x1a,0,piVar2 + 1,1);
-  uiSpriteSelectAnim(piVar2 + 9,0);
-  uiSpriteStateInitFromSource(piVar2 + 0x2c,0x1a,0,piVar2 + 1,1);
-  uiSpriteSelectAnim(piVar2 + 0x2c,4);
-  uiSpriteStateInitFromSource(piVar2 + 0x4f,0x1a,0,piVar2 + 1,1);
-  uiSpriteSelectAnim(piVar2 + 0x4f,1);
-  uiSpriteStateInitFromSource(piVar2 + 0x72,0x1a,0,piVar2 + 1,1);
+  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 9),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 9),0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x2c),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0x2c),4);
+  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x4f),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0x4f),1);
+  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x72),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
   FUN_00184b90(piVar2,1);
-  uiSpriteStateInitFromSource(piVar2 + 0x95,0x1a,0,piVar2 + 1,1);
-  uiSpriteSetKeyframe(piVar2 + 0x95,5,0);
-  uiSpriteStateInitFromSource(piVar2 + 0xb8,0x1a,0,piVar2 + 1,1);
-  uiSpriteSelectAnim(piVar2 + 0xb8,2);
-  uiSpriteStateInitFromSource(piVar2 + 0xdb,0x1a,0,piVar2 + 1,1);
-  uiSpriteSelectAnim(piVar2 + 0xdb,3);
+  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0x95),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
+  uiSpriteSetKeyframe((UiSpriteState *)(piVar2 + 0x95),5,0);
+  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0xb8),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0xb8),2);
+  uiSpriteStateInitFromSource((UiSpriteState *)(piVar2 + 0xdb),0x1a,0, (UiResourceParameters *)(piVar2 + 1),1, 1.0f);
+  uiSpriteSelectAnim((UiSpriteState *)(piVar2 + 0xdb),3);
   loadSlotEnsureLoaded(0x24);
   loadSlotEnsureLoaded(0x22);
   piVar2[0x10d] = -1;

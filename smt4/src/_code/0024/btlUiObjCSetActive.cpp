@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "code/Code0024.h"
 
 extern "C" {
 
 void FUN_00225214(BtlUiObjC *obj, u8 value);
 
-extern BtlUiGlobals g_btlUi;
 
 void btlUiObjCSetActive(void *block, u8 value)
 {

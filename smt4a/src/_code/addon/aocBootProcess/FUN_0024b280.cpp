@@ -33,7 +33,6 @@ struct AocBootDialogView {
 
 extern "C" {
 extern AocBootGlobals g_aocBoot;
-extern QueuedRequestState *g_aocMain;
 
 void aocReleasePackageOwner(AocSystemA *system);
 void jobOwnerFreeSlotAndStop(void *owner);

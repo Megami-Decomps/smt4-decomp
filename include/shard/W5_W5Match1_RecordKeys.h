@@ -30,11 +30,6 @@ struct UnsignedRecordKey32 {
     /* 0x20 */ u16 key;
 };
 
-struct JobStatusState {
-    /* 0x00 */ u8 padding[0x10];
-    /* 0x10 */ void *work;
-};
-
 struct CallbackListNode {
     /* 0x00 */ CallbackListNode *next;
     /* 0x04 */ CallbackListNode *previous;
@@ -233,28 +228,6 @@ struct Vector4 {
     f32 x, y, z, w;
 };
 
-struct GfxCallbackPrefix {
-    /* 0x000 */ u8 unk000[0x170];
-};
-
-/* The enable flag and callback binding at the end of the graphics context. */
-struct GfxCallbackSlot {
-    /* 0x0 */ u32 enabled;
-    /* 0x4 */ u32 unk04;
-    /* 0x8 */ CallbackBinding binding;
-};
-
-/* The slot is a second base at 0x170. */
-struct GfxCallbackState : GfxCallbackPrefix, GfxCallbackSlot {
-};
-typedef char GfxCallbackStateSizeCheck[sizeof(GfxCallbackState) == 0x180 ? 1 : -1];
-
-static __inline void gfxCallbackSlotSet(GfxCallbackSlot &slot, CallbackBinding binding, u32 enabled)
-{
-    slot.enabled = enabled;
-    slot.binding = binding;
-}
-
 struct InitialWorkState {
     /* 0x00 */ u32 value;
     /* 0x04 */ u8 active;
@@ -344,18 +317,6 @@ struct ScriptScalarWork {
     /* 0x10 */ f32 speed;
 };
 
-struct HalfwordTarget {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u16 value;
-};
-
-struct ScopedHalfwordState {
-    /* 0x00 */ u16 previous;
-    /* 0x02 */ u16 depth;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ HalfwordTarget *target;
-};
-
 struct LookupListNode {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ u32 key;
@@ -365,12 +326,6 @@ struct LookupListNode {
 
 struct LookupList {
     LookupListNode *head;
-};
-
-struct GfxTargetParameters {
-    /* 0x000 */ u8 unk000[0x15C];
-    /* 0x15C */ u32 first;
-    /* 0x160 */ u32 second;
 };
 
 struct MasterSoundOwner {

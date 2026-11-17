@@ -6,7 +6,7 @@
 extern "C" {
 
 int _ZN7AocMain12queueRequestE17RequestParametersji(...);
-u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
+u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(void *, const RequestParameters*, QueuedRequestHandle);
 int resourceResultMatchesKnownRanges(void);
 int resourceResultMatchesRemappedCodes(void);
 
@@ -437,7 +437,7 @@ LAB_001cce80:
           uStack_298, temp_v17, uStack_290
         );
         QueuedRequestHandle handle = {parameters.word(1), parameters.word(2)};
-        temp_v3 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+        temp_v3 = _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(reinterpret_cast<void *>(g_aocMain),
                               &parameters, handle);
       }
       if (temp_v3 != 0) {

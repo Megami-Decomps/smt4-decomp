@@ -26,17 +26,6 @@ typedef struct NodeTransform {
     }
 } NodeTransform;
 
-/* The object a node owner points at: the transform sits at 0x4c. */
-typedef struct NodeObject {
-    /* 0x00 */ u8 unk00[0x4C];
-    /* 0x4C */ NodeTransform transform;
-} NodeObject;
-
-typedef struct NodeOwner {
-    /* 0x00 */ u8 unk00[0x2C];
-    /* 0x2C */ NodeObject *object;
-} NodeOwner;
-
 /* Intrusive tree links used by the release traversal. */
 typedef struct ReleaseTreeNode {
     /* 0x00 */ u8 unk00[0x24];

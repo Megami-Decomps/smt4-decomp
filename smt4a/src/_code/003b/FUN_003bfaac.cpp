@@ -2,7 +2,7 @@
 
 struct PromptDialog {
     u8 unk000[0x16C];          // 0x000
-    SpritePlaybackView sprite; // 0x16C
+    UiSpriteState sprite; // 0x16C
     u8 unk1F8[0x3DC];          // 0x1F8
     u8 open;                   // 0x5D4
 };
@@ -18,8 +18,6 @@ extern "C" {
 
 extern PromptHandles g_engineResourceHandles; /* 0x57f254 */
 
-void uiSpriteSetKeyframe(SpritePlaybackView *sprite, s16 key, s8 mode);
-void uiSpriteSetImageKeyframe(SpritePlaybackView *sprite, s16 key, s8 mode);
 void dialogEnterState(PromptDialog *dialog, s32 state, s32 arg);
 void FUN_0039c0e4(void);
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00218640` (_code @ 0x218640, 0x13b8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
@@ -17,7 +18,6 @@ int textDrawString(...);
 int effectRenderTransformedInstance(...);
 int FUN_00164168(...);
 int texDrawCompositeSprite(...);
-int vec2GetXInt(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int renderCtxCalculateStereoParallax(...);
@@ -59,7 +59,6 @@ extern unsigned int FUN_00156868(unsigned int);
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned int);
@@ -135,8 +134,8 @@ void FUN_00218640(void)
   temp_v3 = g_uiQuest;
   temp_v19 = 0x3ea66666;
   renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v4 = vec2GetXInt(temp_v3 + 0x34);
-  temp_v5 = vec2GetYInt(temp_v3 + 0x34);
+  temp_v4 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x34));
+  temp_v5 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x34));
   temp_v30 = temp_v3 + 0x900;
   if (*(char *)(temp_v3 + 0x90c) != '\0') {
     temp_v13 = temp_v3 + 0x948;
@@ -167,9 +166,9 @@ void FUN_00218640(void)
   temp_v13 = temp_v5;
   temp_v12 = temp_v4;
   if ((temp_v6 == 0x17 || temp_v6 == 0x18) || temp_v6 == 0x19) {
-    temp_v12 = vec2GetXInt();
+    temp_v12 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x494));
     temp_v12 = temp_v12 + temp_v4;
-    temp_v13 = vec2GetYInt(temp_v3 + 0x494);
+    temp_v13 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x494));
     temp_v13 = temp_v13 + temp_v5;
   }
   texDrawCompositeSprite(2,0x1e,2,temp_v12 + (int)temp_v18,temp_v13,0x65);
@@ -286,9 +285,9 @@ void FUN_00218640(void)
     temp_v6 = temp_v4 + (int)temp_v17;
     temp_v13 = temp_v5;
     if ((temp_v12 == 0x17 || temp_v12 == 0x18) || temp_v12 == 0x19) {
-      temp_v13 = vec2GetXInt();
+      temp_v13 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x494));
       temp_v6 = temp_v13 + temp_v4 + (int)temp_v17;
-      temp_v13 = vec2GetYInt(temp_v3 + 0x494);
+      temp_v13 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x494));
       temp_v13 = temp_v13 + temp_v5;
       if (*(int *)(temp_v3 + 4) != 0x18) goto LAB_00218d20;
 LAB_00218eb4:
@@ -335,9 +334,9 @@ LAB_00218d20:
   temp_v20 = (unsigned long long)(unsigned int)temp_v18 << 0x20;
   renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v12 = (int)temp_v18;
-  temp_v13 = vec2GetXInt(temp_v3 + 0x1d8);
+  temp_v13 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1d8));
   temp_v6 = temp_v13 + temp_v4 + temp_v12;
-  temp_v13 = vec2GetYInt(temp_v3 + 0x1d8);
+  temp_v13 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1d8));
   temp_v13 = temp_v13 + temp_v5;
   efctSetSpeed();
   texDrawCompositeSprite(2,0x1e,3,temp_v6,temp_v13,0x65);

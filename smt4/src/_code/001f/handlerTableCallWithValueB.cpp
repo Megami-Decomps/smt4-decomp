@@ -1,28 +1,16 @@
-#include "common.h"
+#include "shard/Resource.h"
 
 extern "C" {
 
-typedef struct HandlerEntry {
-    /* 0x00 */ u8 unk00[0x24];
-    /* 0x24 */ void (*handler)(u32 arg, s32 value);
-    /* 0x28 */ u8 unk28[0x1C];
-} HandlerEntry;
-
-typedef struct Request {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u16 index;
-    /* 0x6 */ u8 unk6[2];
-    /* 0x8 */ u32 arg;
-} Request;
-
-extern HandlerEntry g_handlerTable[]; /* 0x464110 */
-
-void handlerTableCallWithValueB(Request *request, s32 value)
+/* Sets the resource's orientation through its type's handler, if it has one. */
+void handlerTableCallWithValueB(Resource *resource, const f32 *orientation)
 {
-    void (*handler)(u32 arg, s32 value) = g_handlerTable[request->index].handler;
+    void (*callback)(void *data, const f32 *orientation);
 
-    if (handler != NULL) {
-        handler(request->arg, value);
+    callback = g_handlerTable[resource->type].setOrientation;
+    if (callback != NULL) {
+        callback(resource->data, orientation);
+        return;
     }
 }
 

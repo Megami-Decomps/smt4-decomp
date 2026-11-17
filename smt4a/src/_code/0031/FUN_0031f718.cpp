@@ -51,7 +51,7 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
         }
         if (gameProgressIsAdvanced()) {
             session->unk2017 = 16;
-            memset(unit.skillList.skills, 0, sizeof(unit.skillList.skills));
+            memset(unit.skills, 0, sizeof(unit.skills));
             FUN_0034dae0(info, id);
         }
     } else {

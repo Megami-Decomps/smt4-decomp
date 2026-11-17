@@ -1,9 +1,8 @@
 /* NON_MATCHING: direction normalization elides retail's intermediate reloads, and vector copies/saved registers differ. */
-#include "map/LmapGlobals.h"
+#include "map/LmapMainGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 extern "C" {
-extern LmapMainStateA *g_lmapMainState;
 u32 table23FindRecordByKey(s32 category, s32 subtype, u32 variant);
 Table23Record *dataTableGetRecord23(u32 index);
 f32 distSpatial(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);

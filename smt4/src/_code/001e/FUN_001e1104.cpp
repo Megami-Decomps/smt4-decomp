@@ -1,17 +1,18 @@
 /* NON_MATCHING: scheduling only: retail stores the style word before the active byte (str [600]; strb [606]); built swaps the two stores */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
 
-typedef struct Anim { u8 unk[0x8C]; } Anim;      /* animation objects, known through their setter functions */
+      /* animation objects, known through their setter functions */
 
 typedef struct Panel {
     /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ Anim animA;
-    /* 0x0AC */ Anim animB;
-    /* 0x138 */ Anim animC;
-    /* 0x1C4 */ Anim timer;
+    /* 0x020 */ UiSpriteState animA;
+    /* 0x0AC */ UiSpriteState animB;
+    /* 0x138 */ UiSpriteState animC;
+    /* 0x1C4 */ UiSpriteState timer;
     /* 0x250 */ s32 phase;
     /* 0x254 */ s32 step;
     /* 0x258 */ s32 style;
@@ -20,9 +21,6 @@ typedef struct Panel {
     /* 0x25E */ u8 active;
 } Panel;
 
-extern void pairSetSecondResetFirst(void *anim, s32 value);
-extern void spriteStartAnimationByIndex(void *anim, s32 value);
-extern void timerStart(void *timer, s32 a, s32 b);
 
 /* Starts the panel's animations for style 0 or 1 and resets its phase. */
 void FUN_001e1104(Panel *panel, s32 style, u8 flagB, u8 flagA)

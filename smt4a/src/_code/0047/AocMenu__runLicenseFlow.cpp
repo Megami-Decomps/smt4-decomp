@@ -1,6 +1,7 @@
 /* NON_MATCHING: typed rewrite of the license flow (281 vs 293 rows): retail keeps three RequestParameters temporaries (60-byte frame) and assigns constants/globals to different registers; step order, handler lifetime and the shared result ladder follow retail. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
+#include "classes/Obj422214Owner.h"
 #include "test/BustupViewer.h"
 #include "util/BitsAndBytes.h"
 
@@ -28,19 +29,8 @@ struct AocLicenseMenu {
 };
 
 /* The add-on main block's selected-record pointer and the cleared licence data. */
-struct AocLicenseMain {
-    /* 0x000 */ u8 unk000[0x688];
-    /* 0x688 */ u8 *selected;
-    /* 0x68C */ u8 unk68C[8];
-    /* 0x694 */ u32 request[16];
-    /* 0x6D4 */ u8 text[0x80];
-};
-typedef char AocLicenseMainOffsets[
-    offsetof(AocLicenseMain, selected) == 0x688 && offsetof(AocLicenseMain, request) == 0x694 &&
-    offsetof(AocLicenseMain, text) == 0x6d4 ? 1 : -1];
 
 extern "C" {
-extern AocLicenseMain *g_aocMain;
 
 void sysMemClear(void *destination, u32 size);
 AocLicenseHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
@@ -71,7 +61,7 @@ void AocMenu::runLicenseFlow()
 {
     AocLicenseMenu *menu = reinterpret_cast<AocLicenseMenu *>(this);
     RequestParameters result;
-    AocLicenseMain *aocMain = g_aocMain;
+    AocMain *aocMain = g_aocMain;
     switch (menu->step) {
     case 0:
         if (buttonHelpStateIsNot3() == 0) {
@@ -137,7 +127,7 @@ void AocMenu::runLicenseFlow()
     case 5:
         releaseHandler(menu);
         startHandler(menu, 7);
-        menu->handler->detail = *reinterpret_cast<u16 *>(aocMain->selected + 0x9aa);
+        menu->handler->detail = aocMain->selectedRecord->contentId;
         menu->step = 6;
         return;
     case 6:
@@ -149,11 +139,11 @@ void AocMenu::runLicenseFlow()
                 delete menu->handler;
                 menu->handler = NULL;
             }
-            AocLicenseMain *main = g_aocMain;
+            AocMain *main = g_aocMain;
             for (s32 index = 0; index < 16; ++index) {
-                main->request[index] = 0;
+                main->contentCode[index] = 0;
             }
-            sysMemClear(main->text, 0x80);
+            sysMemClear(main->contentText, 0x80);
             return;
         }
         if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {

@@ -1,9 +1,8 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-#include "shard/W6_W6Match2_MemoryDebug.h"
+#include "classes/AllocatorState.h"
 
 extern "C" {
 
-extern MemoryDebugState DAT_00465120;
 
 /* Records the four heap regions (main, extra, VRAM A, VRAM B) for the memory debug display. */
 void memoryDebugSetRegions(AsdMemRegion main, AsdMemRegion extra, AsdMemRegion vramA, AsdMemRegion vramB)

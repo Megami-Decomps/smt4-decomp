@@ -1,22 +1,15 @@
-#include "AsdSDK/MdlManagerDestroy.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-
-typedef struct ObjFUN_00152bec {
-    /* 0x00 */ u32 flags;
-    /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ void *child;
-} ObjFUN_00152bec;
 
 /* A debug hook armlink removed (the jump to it became a nop). */
 __declspec(noreturn) __weak void FUN_00152bec_hook(void *obj);
 
-void asdMdlManagerMarkDestroy(u32 handle)
+/* Marks the model object for destruction by the manager. */
+void asdMdlManagerMarkDestroy(AsdMdlObject *obj)
 {
-    ObjFUN_00152bec *obj = reinterpret_cast<ObjFUN_00152bec *>(handle);
-
     obj->flags |= 0x200000;
-    FUN_00152bec_hook(obj->child);
+    FUN_00152bec_hook(obj->node);
 }
 
 } /* extern "C" */

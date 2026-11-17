@@ -1,4 +1,5 @@
 /* NON_MATCHING: native animation-alpha getters restored; frame-glyph lifetime and base-coordinate saved registers still differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/AnimatedDigitPanel.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
@@ -8,9 +9,6 @@
 
 extern "C" {
 void efctSetSpeed(f32 alpha);
-s32 vec2GetXInt(const SpritePlaybackView *position);
-s32 vec2GetYInt(const SpritePlaybackView *position);
-f32 vec2GetSpeed(const SpritePlaybackView *position);
 void FUN_003f54c4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 void FUN_003f61b4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 

@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the second downsample level's height copy swaps r0/r1 (retail loads the source pointer into r1). */
+#include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"

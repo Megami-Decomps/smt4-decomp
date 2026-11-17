@@ -1,9 +1,8 @@
 #include "common.h"
 #include "code/Code0028_Smt4a.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
-
-void vec2GetYInt(u8 *member);
 
 typedef struct Object {
     /* 0x00 */ u8 unk00[0x34];
@@ -15,7 +14,7 @@ extern Object *g_placeWin;
 void FUN_00284f70(void)
 {
     if (g_placeWin != NULL) {
-        vec2GetYInt(g_placeWin->member34);
+        vec2GetYInt((const UiSpriteState *)g_placeWin->member34);
         return;
     }
 }

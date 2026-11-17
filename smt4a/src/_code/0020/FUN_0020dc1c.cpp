@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020dc1c` (_code @ 0x20dc1c, 0x9bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -24,7 +25,6 @@ int sysPlayVoice(...);
 int FUN_004803e4(...);
 int flagValueSub(...);
 
-int uiSpriteAdvanceAnimation(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
 int gridNavigationConfigure(int, int, int, int);
@@ -208,13 +208,13 @@ void FUN_0020dc1c(void)
 LAB_0020de28:
     temp_v5 = g_camp;
     temp_v6 = widgetSubCallIfVisible(g_camp + 0x40);
-    uiSpriteAdvanceAnimation(temp_v5 + 0x658);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + 0x658), 1.0f);
     if ((*(short *)(temp_v5 + 0x964) != 2) && (*(short *)(temp_v5 + 0x964) != 10)) {
       temp_v3 = 0;
       if (temp_v3 < temp_v6) {
         do {
           if (temp_v3 <= *(int *)(temp_v5 + 0x14) - 1) {
-            uiSpriteAdvanceAnimation(temp_v5 + temp_v3 * 0x8c + 0x914);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + temp_v3 * 0x8c + 0x914), 1.0f);
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < temp_v6);
@@ -224,7 +224,7 @@ LAB_0020de28:
       temp_v3 = 0;
       while (temp_v6 = temp_v6 - 1, -1 < temp_v6) {
         if (temp_v3 <= *(int *)(temp_v5 + 0x14) - 1) {
-          uiSpriteAdvanceAnimation(temp_v5 + temp_v6 * 0x8c + 0x914);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v5 + temp_v6 * 0x8c + 0x914), 1.0f);
         }
         temp_v3 = temp_v3 + 1;
       }
@@ -373,13 +373,13 @@ LAB_0020de28:
     return;
   case 3:
     temp_v6 = widgetSubCallIfVisible(g_camp + 0x40);
-    uiSpriteAdvanceAnimation(temp_v4 + 0x658);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v4 + 0x658), 1.0f);
     if ((*(short *)(temp_v4 + 0x964) != 2) && (*(short *)(temp_v4 + 0x964) != 10)) {
       temp_v5 = 0;
       if (temp_v5 < temp_v6) {
         do {
           if (temp_v5 <= *(int *)(temp_v4 + 0x14) - 1) {
-            uiSpriteAdvanceAnimation(temp_v4 + temp_v5 * 0x8c + 0x914);
+            uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v4 + temp_v5 * 0x8c + 0x914), 1.0f);
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < temp_v6);
@@ -389,7 +389,7 @@ LAB_0020de28:
       temp_v5 = 0;
       while (temp_v6 = temp_v6 - 1, -1 < temp_v6) {
         if (temp_v5 <= *(int *)(temp_v4 + 0x14) - 1) {
-          uiSpriteAdvanceAnimation(temp_v4 + temp_v6 * 0x8c + 0x914);
+          uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v4 + temp_v6 * 0x8c + 0x914), 1.0f);
         }
         temp_v5 = temp_v5 + 1;
       }

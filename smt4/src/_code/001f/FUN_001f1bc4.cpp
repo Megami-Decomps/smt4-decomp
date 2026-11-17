@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f1bc4` (_code @ 0x1f1bc4, 0x4ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029_VariantA.h"
@@ -36,8 +37,6 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: textDrawString. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 
@@ -159,8 +158,8 @@ void FUN_001f1bc4(int param_1,int param_2)
     }
     gxSetMirroredClippedScissor(*(short *)(temp_v5 + 8) + param_1,*(short *)(temp_v5 + 10) + temp_v1,
                  (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1],1);
-    temp_v11 = vec2GetYInt(temp_v0 + 0xb0);
-    temp_v5 = vec2GetXInt(temp_v0 + 0xb0);
+    temp_v11 = vec2GetYInt((UiSpriteState *)(temp_v0 + 0xb0));
+    temp_v5 = vec2GetXInt((UiSpriteState *)(temp_v0 + 0xb0));
     texDrawTableEntryAtStoredOrigin(2,0x24,0xc4,temp_v5 + param_1,temp_v11 + temp_v1,0xbf);
     temp_v11 = g_titleScene;
     piVar13 = (int *)(g_titleScene + 0x130c);

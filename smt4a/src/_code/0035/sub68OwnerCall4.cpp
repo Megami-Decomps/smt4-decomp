@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "shard/Shard0035.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 extern s32 block66OwnerClear(u8 *sub);
 

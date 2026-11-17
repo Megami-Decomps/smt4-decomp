@@ -6,7 +6,6 @@
 #include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
 
 extern "C" {
-extern AocMain *g_aocMain;
 
 // A content entry as the loader walks it: 0x30 bytes, the count of u16 items at 0x28.
 struct AocListEntry {
@@ -49,7 +48,7 @@ void FUN_0038ae30(AocListJob *job)
         return;
     }
     AocListEntry *entry;
-    FUN_00234624(&entry, aoc->contentTable, job->entryIndex);
+    FUN_00234624(&entry, aoc->contentRequest, job->entryIndex);
     u32 itemCount = FUN_00234618(&entry);
     void *owner; // Retail forwards an uninitialised owner hint in r5.
     u16 *ids = (u16 *)asdOperatorNewB(itemCount * 2, owner);

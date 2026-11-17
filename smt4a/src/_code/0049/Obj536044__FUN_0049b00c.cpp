@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "network/DataStore/DataStoreMain.h"
 #include "code/Code0035.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -51,8 +52,6 @@ extern unsigned char LAB_0049bcfc; /* 0x49bcfc */
 extern unsigned char LAB_0049bd0c; /* 0x49bd0c */
 
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned int vec2GetXInt(unsigned int *);
-extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
@@ -138,8 +137,8 @@ void _ZN9Obj53604412FUN_0049b00cEv(unsigned int *param_1)
     break;
   case 1:
     entryDispatchUpdate(param_1 + 0xf3,6);
-    temp_v4 = vec2GetYInt(param_1 + 0x1cd);
-    temp_v2 = vec2GetXInt(param_1 + 0x1cd);
+    temp_v4 = vec2GetYInt((const UiSpriteState *)(param_1 + 0x1cd));
+    temp_v2 = vec2GetXInt((const UiSpriteState *)(param_1 + 0x1cd));
     pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
     if (*(char *)((int)param_1 + 0x7be) != '\0') {
       FUN_00493a7c(param_1 + 0x2d2);
@@ -270,8 +269,8 @@ void _ZN9Obj53604412FUN_0049b00cEv(unsigned int *param_1)
   case 3:
     if ((*param_1 & 0x1000) != 0) {
       entryDispatchUpdate(param_1 + 0xf3,7);
-      temp_v4 = vec2GetYInt(param_1 + 0x1f0);
-      temp_v2 = vec2GetXInt(param_1 + 0x1f0);
+      temp_v4 = vec2GetYInt((const UiSpriteState *)(param_1 + 0x1f0));
+      temp_v2 = vec2GetXInt((const UiSpriteState *)(param_1 + 0x1f0));
       pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x84a) == '\0') break;
     }
@@ -395,8 +394,8 @@ joined_r0x0049bb38:
     scrRunOpcodesStub(param_1[99]);
     if ((*param_1 & 0x1000) != 0) {
       entryDispatchUpdate(param_1 + 0xf3,7);
-      temp_v4 = vec2GetYInt(param_1 + 0x1f0);
-      temp_v2 = vec2GetXInt(param_1 + 0x1f0);
+      temp_v4 = vec2GetYInt((const UiSpriteState *)(param_1 + 0x1f0));
+      temp_v2 = vec2GetXInt((const UiSpriteState *)(param_1 + 0x1f0));
       pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x84a) != '\0') {
         *param_1 = *param_1 & 0xffffefff;

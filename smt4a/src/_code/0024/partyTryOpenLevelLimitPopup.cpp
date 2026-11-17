@@ -4,10 +4,10 @@
 #include "gamedata/NkmEnemyLookup.h"
 #include "map/PopupStateA.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 void FUN_00152f44(void);
-void *saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 const char *popupSelectWeightedMessage(u32 kind, u16 slot);

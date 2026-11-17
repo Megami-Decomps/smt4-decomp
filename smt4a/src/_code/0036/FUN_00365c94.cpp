@@ -2,17 +2,16 @@
 #include "map/SceneSpawn.h"
 #include "game/GameStateA.h"
 #include "map/mapMain.h"
-#include "map/LmapGlobals.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
 extern MapMainA *g_mapMain;
-extern LmapExtraA *g_lmapView;
 u32 table23FindRecordByKey(s32, s32, u32);
 const SceneSpawnRecord *dataTableGetRecord23(u32);
 void navigationSetArguments(s32, s32, f32);
 void naviMainSetRequestTriple(s32, s32, u32);
 void naviMainApplyRequestValue(s32);
-void naviMainSetPosition(LmapScenePose *pose);
+void naviMainSetPosition(const MapVector *position);
 void naviMainSetRequestValue(s32);
 void FUN_0033e014(s32, s32);
 
@@ -32,7 +31,7 @@ void FUN_00365c94(s32 map, s32 area, u32 point)
     pose->previousPosition = *position;
     pose->heading = static_cast<f32>(spawn->heading);
     pose->targetHeading = pose->heading;
-    g_lmapView->followPose.heading = static_cast<f32>(spawn->heading);
+    g_lmapView->heading = static_cast<f32>(spawn->heading);
     g_gameState.mapId = main->transition.mapId = spawn->key.map;
     g_gameState.areaId = main->transition.areaId = spawn->key.area;
     g_gameState.currentObjectId = spawn->key.variant;
@@ -43,7 +42,7 @@ void FUN_00365c94(s32 map, s32 area, u32 point)
     naviMainSetRequestTriple(region->map, region->area, g_gameState.currentObjectId);
     g_gameState.currentObjectId = spawn->key.variant == 0xFF ? ~0u : spawn->key.variant;
     naviMainApplyRequestValue(region->map);
-    naviMainSetPosition(&g_lmapScene->pose);
+    naviMainSetPosition(&g_lmapScene->pose.position);
     naviMainSetRequestValue(1);
     FUN_0033e014(g_gameState.mapId, g_gameState.areaId);
     main->unk28 = 0x8A;

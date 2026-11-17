@@ -1,9 +1,8 @@
 /* NON_MATCHING: jump table now matches (labels 0..5); the vector copies use ldm/stm where retail uses ldrd/strd and the map ternaries share a zero register differently. */
-#include "map/LmapGlobals.h"
+#include "map/LmapMainGlobals.h"
 #include "game/GameState.h"
 
 extern "C" {
-extern LmapMainState *g_lmapMainState;
 void mapCollisionRelease();
 void FUN_0027b2b4(s32 map, u32 entry, s32 secondaryMap, s32 mode);
 void FUN_002d508c(LmapMainState *state);

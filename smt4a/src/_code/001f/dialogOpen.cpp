@@ -1,4 +1,5 @@
 /* Starts the countdown (30 frames) with the given mode byte: marks the object active, resets its two timers and clears the done flag. */
+#include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 #include "ui/UiControl.h"
 
@@ -6,8 +7,6 @@ extern "C" {
 
 
 
-extern void uiSpriteSetKeyframe(void *timer, s32 a, s32 b);
-extern void uiSpriteSetImageKeyframe(void *timer, s32 a, s32 b);
 
 void dialogOpen(u8 mode)
 {

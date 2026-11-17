@@ -1,5 +1,5 @@
 #include "shard/NaviMain.h"
-extern "C" NaviMain *g_naviMain;
+#include "mapnavi/NaviMainGlobals.h"
 
 /* Ask the live navigation screen to close. */
 extern "C" void naviRequestClose(u32 handle)

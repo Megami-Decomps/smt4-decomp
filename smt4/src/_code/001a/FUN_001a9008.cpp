@@ -6,8 +6,6 @@
 
 extern "C" {
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
-void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
 void modelPartSetRotationDegrees(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 
 void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)

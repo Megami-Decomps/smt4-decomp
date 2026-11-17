@@ -1,13 +1,11 @@
-#include "common.h"
-#include "shard/W4_Match1b_Node.h"
-#include "shard/W6_W6Match3_ForwardEffect.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
-/* Sets the scale of the owner's node transform and flags it as changed. */
-void nodeSetScale(NodeOwner *owner, NodeVec3 scale)
+/* Sets the scale of the model's scene-node transform and flags it as changed. */
+void nodeSetScale(AsdMdlNode *node, s32 index, NodeVec3 scale)
 {
-    NodeTransform *transform = &owner->object->transform;
+    NodeTransform *transform = &node->sceneNode->transform;
 
     transform->scale = scale;
     transform->flags |= NODE_FLAG_TRANSFORM_DIRTY;

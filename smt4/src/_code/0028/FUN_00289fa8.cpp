@@ -1,7 +1,6 @@
 /* NON_MATCHING: position queue indexing and float-store register allocation differ. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
-extern "C" BtlUiGlobals g_btlUi;
 
 /* Append to an existing position group or start an unused group. */
 extern "C" u32 FUN_00289fa8(u32, u8 kind, u8 mode, f32 x, f32 y, f32 z)

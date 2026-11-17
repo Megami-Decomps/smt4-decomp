@@ -1,5 +1,5 @@
 #include "common.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "classes/Obj4223f8.h"
 
 // Private views of the fields accessed by this routine.
@@ -20,10 +20,6 @@ extern "C" {
 void pointConvertToFloat(void* destination, s32 x, s32 y);
 s32 FUN_00295618(void);
 void gameSetIconDisplayEnabled(s32 value);
-void uiSpriteAdvanceAnimation(UiSpriteState* position);
-s32 vec2GetYInt(const UiSpriteState* position);
-s32 vec2GetXInt(const UiSpriteState* position);
-s8 uiSpriteGetCompletionState(const UiSpriteState* position);
 s32 buttonHelpStateIsNot3(void);
 s32 utilityReturnSuccess(void* state);
 

@@ -1,9 +1,9 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/Shard003B.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
-extern void *saveSlotFindSelected(void);
 extern s32 bitsAt60Test(void *slot, u32 flag);
 extern void unitRecordResetCurrentValues(void *slot);
 extern void recordSetClampedCurrent(void *slot, s32 value);

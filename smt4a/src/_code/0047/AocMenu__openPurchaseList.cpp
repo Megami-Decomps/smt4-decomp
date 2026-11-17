@@ -8,7 +8,6 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-extern QueuedRequestState *g_aocMain;
 extern const char DAT_00526444[];
 s32 appletIsRegistered406(void);
 void FUN_00441f54(void);
@@ -16,7 +15,6 @@ void FUN_0016ccb4(void *query);
 void aocMenuInitializeSprites(AocMenu *menu);
 void asdTMTexTableLoadSprites(s32 table);
 u32 dataTableValueOrZero(s32 index);
-ScriptProcess *scrScriptProcessCreate(void *tableFile, u32 tableValue);
 void sysMemClear(void *buffer, u32 size);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 }
@@ -38,8 +36,9 @@ void AocMenu::openPurchaseList()
     u32 size;
     tableFile = asdLoadFileWithSize(DAT_00526444, &size, 0);
     tableValue = dataTableValueOrZero(0x40);
-    script = scrScriptProcessCreate(tableFile, tableValue);
-    script->state = 2;
+    /* The owner word is a table value here, not a pointer. */
+    script = scrScriptProcessCreate(tableFile, reinterpret_cast<void *>(tableValue));
+    script->mode = 2;
     step = 1;
     substep = 0;
     if (window != NULL) {

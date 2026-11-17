@@ -7,8 +7,8 @@ struct DigitPanelDisplay {
     /* 0x000 */ u8 unk000[0x124];
     /* 0x124 */ s32 state;
     /* 0x128 */ u8 unk128[0xD0];
-    /* 0x1F8 */ SpritePlaybackView position;
-    /* 0x284 */ SpritePlaybackView contentPosition;
+    /* 0x1F8 */ UiSpriteState position;
+    /* 0x284 */ UiSpriteState contentPosition;
 };
 
 typedef char DigitPanelDisplayOffsets[

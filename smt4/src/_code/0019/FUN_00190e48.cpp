@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00190e48` (_code @ 0x190e48, 0x9e8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -53,8 +54,6 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: quadSetOrderedVectors. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -127,9 +126,9 @@ void FUN_00190e48(void)
     if ((*(char *)(temp_v9 + 0x494) != '\0') &&
        (temp_v8 = temp_v5 + temp_v7 * 0x8c, *(char *)(temp_v8 + 0xb9) != '\0')) {
       acStack_130[temp_v7] = '\x01';
-      temp_v3 = vec2GetXInt(temp_v8 + 0x34);
+      temp_v3 = vec2GetXInt((UiSpriteState *)(temp_v8 + 0x34));
       aiStack_c8[temp_v7] = temp_v3 + *(short *)(temp_v8 + 0x4c);
-      temp_v3 = vec2GetYInt(temp_v8 + 0x34);
+      temp_v3 = vec2GetYInt((UiSpriteState *)(temp_v8 + 0x34));
       aiStack_b0[temp_v7] = temp_v3 + *(short *)(temp_v8 + 0x4e);
       temp_v11 = VectorFloatToUnsigned(*(float *)(temp_v8 + 0x54) * temp_v16,3);
       temp_v6 = (temp_v11 & 0xff) - 0x100;

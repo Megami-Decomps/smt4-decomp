@@ -1,19 +1,16 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028b350` (_code @ 0x28b350, 0xd0c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match8_TextHistory.h"
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
 
-int uiSpriteSetImageKeyframe(...);
 
 int randRange(...);
-int uiSpriteStateInitFromSource(...);
 int padQueryLogicalKey(...);
 int uiApplyIndexedPanelSpriteSizes(...);
-int pairSetSecondResetFirst(...);
-int uiSpriteSelectAnim(...);
 int sentinelLookupGetValue(void);
 int rangeSelectionSelectEndpoint(...);
 int FUN_00202188(...);
@@ -75,32 +72,32 @@ void FUN_0028b350(int param_1,int param_2)
   float temp_v13;
   int temp_v14 [8];
   
-  uiSpriteStateInitFromSource(param_1 + 0x1b4,8,0xffffffff,param_1 + 0x194,0xb);
-  uiSpriteStateInitFromSource(param_1 + 0x240,8,0xffffffff,param_1 + 0x194,0xb);
-  uiSpriteStateInitFromSource(param_1 + 0x2cc,8,0xffffffff,param_1 + 0x194,0xb);
-  uiSpriteStateInitFromSource(param_1 + 0x358,8,0xffffffff,param_1 + 0x194,0xb);
-  uiSpriteStateInitFromSource(param_1 + 0x3e4,8,0xffffffff,param_1 + 0x194,0xb);
-  uiSpriteStateInitFromSource(param_1 + 0x470,8,0xffffffff,param_1 + 0x194,0xb);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x1b4),8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x240),8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x2cc),8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x358),8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x3e4),8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+  uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x470),8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
   temp_v6 = param_1 + 0x4fc;
-  uiSpriteStateInitFromSource(temp_v6,8,0xffffffff,param_1 + 0x194,0xb);
+  uiSpriteStateInitFromSource((UiSpriteState *)temp_v6,8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
   temp_v7 = param_1 + 0x18ac;
-  uiSpriteStateInitFromSource(temp_v7,8,0xffffffff,param_1 + 0x194,0xb);
+  uiSpriteStateInitFromSource((UiSpriteState *)temp_v7,8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
   switch(param_2) {
   default:
     return;
   case 1:
-    pairSetFirstResetSecond((void *)(param_1 + 0x1b4),2000);
+    pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x1b4)),2000);
     temp_v6 = 9;
     padQueryLogicalKey(9,2);
     if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
-      uiSpriteSelectAnim(param_1 + 0x1b4,0);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),0);
     }
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x7d4);
-    pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
-    uiSpriteSelectAnim(param_1 + 0x3e4,4);
+    pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x3e4)),7);
+    uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x3e4),4);
     uiStoreTextureEntryCenter(param_1 + 0x3e4,8,0x47);
     return;
   case 2:
@@ -115,22 +112,22 @@ void FUN_0028b350(int param_1,int param_2)
     FUN_00202188(*(unsigned int *)(param_1 + 4),0,0,0x10,0xffffffff);
     temp_v0 = *(unsigned short *)(*(int *)(param_1 + 4) + 0x48);
     *(unsigned int *)(*(int *)(param_1 + 4) + 0x10) = temp_v11;
-    pairSetFirstResetSecond((void *)(param_1 + 0x1b4),2000);
+    pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x1b4)),2000);
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x7d4);
     if (temp_v0 < 3) {
-      pairSetSecondResetFirst(param_1 + 0x2cc,0x1f);
+      pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x2cc),0x1f);
     }
     else if (temp_v0 < 5) {
-      pairSetSecondResetFirst(param_1 + 0x2cc,0x1b);
+      pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x2cc),0x1b);
     }
     else if (temp_v0 < 7) {
-      pairSetSecondResetFirst(param_1 + 0x2cc,0x1c);
+      pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x2cc),0x1c);
     }
     else if (temp_v0 < 9) {
-      pairSetSecondResetFirst(param_1 + 0x2cc,0x1e);
+      pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x2cc),0x1e);
     }
     else {
-      pairSetSecondResetFirst(param_1 + 0x2cc,0x1d);
+      pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x2cc),0x1d);
     }
     temp_v6 = 9;
     padQueryLogicalKey(9,2);
@@ -139,11 +136,11 @@ void FUN_0028b350(int param_1,int param_2)
       *(unsigned char *)(param_1 + 0x351) = 1;
     }
     else {
-      uiSpriteSelectAnim(param_1 + 0x1b4,0);
-      uiSpriteSelectAnim(param_1 + 0x2cc,1);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),0);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x2cc),1);
     }
-    pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
-    uiSpriteSelectAnim(param_1 + 0x3e4,4);
+    pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x3e4)),7);
+    uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x3e4),4);
     uiStoreTextureEntryCenter(param_1 + 0x3e4,8,0x47);
     if (param_2 != 3) {
       if (param_2 != 0x11) {
@@ -153,64 +150,64 @@ void FUN_0028b350(int param_1,int param_2)
               if (param_2 != 0x13) {
                 return;
               }
-              pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7dd);
+              pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x240)),0x7dd);
               rangeSelectionSelectEndpoint(param_1 + 0x240,1,0);
               uiGetLayoutPointDifference(param_1 + 0x240,8,0x7e0,0x7dd);
             }
             else {
-              pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7d2);
+              pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x240)),0x7d2);
               rangeSelectionSelectEndpoint(param_1 + 0x240,1,0);
               uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d6,0x7d2);
             }
           }
           else {
-            pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7de);
+            pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x240)),0x7de);
             rangeSelectionSelectEndpoint(param_1 + 0x240,1,0);
             uiGetLayoutPointDifference(param_1 + 0x240,8,0x7e1,0x7de);
           }
         }
         else {
-          pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7d3);
+          pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x240)),0x7d3);
           rangeSelectionSelectEndpoint(param_1 + 0x240,1,0);
           uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d7,0x7d3);
         }
       }
       else {
-        pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7dc);
+        pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x240)),0x7dc);
         rangeSelectionSelectEndpoint(param_1 + 0x240,1,0);
         uiGetLayoutPointDifference(param_1 + 0x240,8,0x7df,0x7dc);
       }
     }
     else {
-      pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7d1);
+      pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x240)),0x7d1);
       rangeSelectionSelectEndpoint(param_1 + 0x240,1,0);
       uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d5,0x7d1);
     }
     *(unsigned short *)(param_1 + 0x27a) = 2;
     return;
   case 6:
-    pairSetSecondResetFirst(param_1 + 0x1b4,0x10);
+    pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),0x10);
     temp_v6 = 9;
     padQueryLogicalKey(9,2);
     if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
-      uiSpriteSelectAnim(param_1 + 0x1b4,0);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),0);
     }
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x111);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
     *(unsigned short *)(param_1 + 0x1ee) = 2;
-    pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
-    uiSpriteSelectAnim(param_1 + 0x3e4,4);
+    pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x3e4)),7);
+    uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x3e4),4);
     uiStoreTextureEntryCenter(param_1 + 0x3e4,8,0x47);
     return;
   case 7:
   case 8:
-    pairSetSecondResetFirst(param_1 + 0x1b4,6);
+    pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),6);
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x36);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
-    pairSetSecondResetFirst(temp_v6,7);
+    pairSetSecondResetFirst((UiSpriteState *)temp_v6,7);
     uiStoreTextureEntryCenter(temp_v6,8,0x36);
     *(unsigned char *)(param_1 + 0x538) = 1;
     temp_v7 = 9;
@@ -219,20 +216,20 @@ void FUN_0028b350(int param_1,int param_2)
       temp_v7 = slotIsActive(6);
 joined_r0x0028baa4:
       if (temp_v7 == 0) {
-        uiSpriteSelectAnim(param_1 + 0x1b4,3);
-        uiSpriteSelectAnim(temp_v6,3);
-        pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
-        uiSpriteSelectAnim(param_1 + 0x3e4,4);
+        uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),3);
+        uiSpriteSelectAnim((UiSpriteState *)temp_v6,3);
+        pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x3e4)),7);
+        uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x3e4),4);
         uiStoreTextureEntryCenter(param_1 + 0x3e4,8,0x47);
         return;
       }
     }
     break;
   case 9:
-    pairSetSecondResetFirst(param_1 + 0x1b4,4);
+    pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),4);
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x22);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
-    pairSetSecondResetFirst(temp_v6,5);
+    pairSetSecondResetFirst((UiSpriteState *)temp_v6,5);
     uiStoreTextureEntryCenter(temp_v6,8,0x36);
     *(unsigned char *)(param_1 + 0x538) = 1;
     temp_v7 = 9;
@@ -243,27 +240,27 @@ joined_r0x0028baa4:
     }
     break;
   case 10:
-    pairSetSecondResetFirst(param_1 + 0x1b4,2);
+    pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),2);
     temp_v6 = 9;
     padQueryLogicalKey(9,2);
     if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
-      uiSpriteSelectAnim(param_1 + 0x1b4,5);
+      uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),5);
     }
     uiStoreTextureEntryCenter(param_1 + 0x1b4,8,0x15);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
     return;
   case 0xb:
-    pairSetSecondResetFirst(param_1 + 0x1b4,0xb);
-    uiSpriteSelectAnim(param_1 + 0x1b4,6);
-    pairSetSecondResetFirst(param_1 + 0x358,0xf);
-    uiSpriteSelectAnim(param_1 + 0x358,6);
-    pairSetFirstResetSecond((void *)(param_1 + 0x470),0xc);
-    uiSpriteSelectAnim(param_1 + 0x470,9);
-    pairSetSecondResetFirst(temp_v7,0x1a);
-    uiSpriteSelectAnim(temp_v7,4);
+    pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),0xb);
+    uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),6);
+    pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x358),0xf);
+    uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x358),6);
+    pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x470)),0xc);
+    uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x470),9);
+    pairSetSecondResetFirst((UiSpriteState *)temp_v7,0x1a);
+    uiSpriteSelectAnim((UiSpriteState *)temp_v7,4);
     *(unsigned int *)(param_1 + 0x1a18) = 0;
     *(unsigned int *)(param_1 + 0x1a1c) = 0;
     *(unsigned int *)(param_1 + 0x1a20) = 0;
@@ -378,9 +375,9 @@ LAB_0028bd98:
     do {
       *(unsigned char *)(param_1 + temp_v6 + 0x37) = 0;
       temp_v7 = param_1 + temp_v6 * 0x8c + 0x588;
-      uiSpriteStateInitFromSource(temp_v7,8,0xffffffff,param_1 + 0x194,0xb);
-      pairSetFirstResetSecond((void *)(temp_v7),0x8b);
-      uiSpriteSetImageKeyframe(temp_v7,4,0);
+      uiSpriteStateInitFromSource((UiSpriteState *)temp_v7,8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+      pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v7)),0x8b);
+      uiSpriteSetImageKeyframe((UiSpriteState *)temp_v7,4,0);
       rangeSelectionSelectEndpoint(temp_v7,6,0);
       uiStoreTextureEntryCenter(temp_v7,8,temp_v14[temp_v6] + 0x8f);
       temp_v6 = temp_v6 + 1;
@@ -409,9 +406,9 @@ LAB_0028bd98:
     *(unsigned char *)(param_1 + 0x5c) = 0;
     temp_v2 = *(short *)(param_1 + 0x56);
     temp_v7 = param_1 + temp_v2 * 0x8c + 0x844;
-    uiSpriteStateInitFromSource(temp_v7,8,0xffffffff,param_1 + 0x194,0xb);
-    pairSetFirstResetSecond((void *)(temp_v7),0x8b);
-    uiSpriteSetImageKeyframe(temp_v7,4,0);
+    uiSpriteStateInitFromSource((UiSpriteState *)temp_v7,8,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+    pairSetFirstResetSecond((UiSpriteState *)((void *)(temp_v7)),0x8b);
+    uiSpriteSetImageKeyframe((UiSpriteState *)temp_v7,4,0);
     rangeSelectionSelectEndpoint(temp_v7,6,0);
     uiStoreTextureEntryCenter(temp_v7,8,temp_v6 + temp_v2);
     *(unsigned char *)(param_1 + 0x5e) = 0;
@@ -419,15 +416,15 @@ LAB_0028bd98:
     *(unsigned short *)(param_1 + 0x62) = 0;
     return;
   case 0x14:
-    uiSpriteStateInitFromSource(param_1 + 0x1b4,0x2f,0xffffffff,param_1 + 0x194,0xb);
-    pairSetSecondResetFirst(param_1 + 0x1b4,0x10);
-    uiSpriteSelectAnim(param_1 + 0x1b4,6);
+    uiSpriteStateInitFromSource((UiSpriteState *)(param_1 + 0x1b4),0x2f,0xffffffff, (UiResourceParameters *)(param_1 + 0x194),0xb, 1.0f);
+    pairSetSecondResetFirst((UiSpriteState *)(param_1 + 0x1b4),0x10);
+    uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x1b4),6);
     return;
   }
   *(unsigned char *)(param_1 + 0x239) = 1;
   *(unsigned char *)(param_1 + 0x581) = 1;
-  pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
-  uiSpriteSelectAnim(param_1 + 0x3e4,4);
+  pairSetFirstResetSecond((UiSpriteState *)((void *)(param_1 + 0x3e4)),7);
+  uiSpriteSelectAnim((UiSpriteState *)(param_1 + 0x3e4),4);
   uiStoreTextureEntryCenter(param_1 + 0x3e4,8,0x47);
   return;
 }

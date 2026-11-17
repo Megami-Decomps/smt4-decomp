@@ -3,12 +3,11 @@
 #include "battle/btlMain.h"
 #include "battle/BattleSkillResponseMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/Shard004B.h"
 #include "battle/BtlGlobals.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "gamedata/GameDataAccess_Shard004B.h"
 
 extern "C" {
-ScaledRecordValues *gameGetSlotRecord(s32 slot);
-s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 s32 FUN_004c55e4(s32 unit, u32 skill);
 f32 FUN_004c28b4(s32 unit, s32 kind);
 

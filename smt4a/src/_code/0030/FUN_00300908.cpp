@@ -2,14 +2,14 @@
 
 extern "C" {
 
-/* Runs the handler's callback at 0x2C (if its type has one) on the resource data and `arg`. */
-void FUN_00300908(Resource *resource, u32 arg)
+/* Sets the resource's colour through its type's handler, if it has one. */
+void FUN_00300908(Resource *resource, const Vec4 *color)
 {
-    void (*callback)(void *data, u32 arg);
+    void (*callback)(void *data, const Vec4 *color);
 
-    callback = g_handlerTable[resource->type].callback2C;
+    callback = g_handlerTable[resource->type].setColor;
     if (callback != NULL) {
-        callback(resource->data, arg);
+        callback(resource->data, color);
         return;
     }
 }

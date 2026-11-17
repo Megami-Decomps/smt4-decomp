@@ -1,10 +1,11 @@
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "classes/Obj55ca08.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "ui/TimerSlot.h"
 #include <stddef.h>
 
-struct ScriptRunState;
+struct ScriptProcess;
 struct ScriptTable;
 
 /* The panel object the appraisal screen owns; slot 3 synchronizes it with the selection. */
@@ -29,7 +30,7 @@ struct AppraiseScene {
     /* 0x00010 */ u8 unk00010[0x150];
     /* 0x00160 */ ScriptTable *table;
     /* 0x00164 */ u8 unk00164[4];
-    /* 0x00168 */ ScriptRunState *script;
+    /* 0x00168 */ ScriptProcess *script;
     /* 0x0016C */ u8 unk0016C[0x214];
     /* 0x00380 */ f32 point[2];
     /* 0x00388 */ u8 unk00388[0x20];
@@ -56,9 +57,9 @@ typedef char AppraiseSceneLayoutCheck[offsetof(AppraiseScene, selection) == 0x82
     offsetof(AppraiseScene, total) == 0x15D20 && offsetof(AppraiseScene, choice) == 0x15D68 ? 1 : -1];
 
 extern "C" {
-u32 scrRunOpcodesStub(ScriptRunState *state);
+u32 scrRunOpcodesStub(ScriptProcess *state);
 u32 tableGroupFindEntryIndex(ScriptTable *table, const char *name);
-void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
+void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 void FUN_00233240(void *animations, s32 value);
 s32 uiAnimationAdvanceChannel(void *animations, s32 channel);
@@ -74,12 +75,8 @@ void messageTargetSetValue(u32 value, s32 arg);
 s32 sys43e188GetState(void);
 void buttonHelpSetPreset(u32 preset);
 void ifTouchRegionRemove(void);
-void uiSlidingSpriteAdvance(TimerSlot *timer, s32 value);
 void FUN_002328b4(void);
 void sceneApplyTransaction(AppraiseScene *scene);
-s32 vec2GetXInt(const void *object);
-s32 vec2GetYInt(const void *object);
-s8 uiSpriteGetCompletionState(const void *record);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
 
 /* The panel pointer is the selection object's word at +0x34 (scene +0x85C). */
@@ -126,10 +123,10 @@ void FUN_003a2c48(AppraiseScene *scene)
     case 3:
         {
         TimerSlot *slide = &scene->slide;
-        uiSlidingSpriteAdvance(slide, 0);
-        pointConvertToFloat(scene->point, vec2GetXInt(slide), vec2GetYInt(slide));
+        uiSlidingSpriteAdvance((UiSpriteState *)slide, 0);
+        pointConvertToFloat(scene->point, vec2GetXInt((UiSpriteState *)slide), vec2GetYInt((UiSpriteState *)slide));
         scrRunOpcodesStub(scene->script);
-        if (uiSpriteGetCompletionState(slide)) {
+        if (uiSpriteGetCompletionState((UiSpriteState *)slide)) {
             messageTargetSetValue(scene->total, 0);
             scene->state = 4;
         }

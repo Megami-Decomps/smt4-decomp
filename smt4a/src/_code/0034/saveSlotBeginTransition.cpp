@@ -1,6 +1,6 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {

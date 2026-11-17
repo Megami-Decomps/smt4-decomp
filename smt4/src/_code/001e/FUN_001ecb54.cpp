@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/CommandWindow.h"
 #include "gamedata/SaveLoadProcess.h"
 

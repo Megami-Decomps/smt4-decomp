@@ -1,10 +1,12 @@
-#include "shard/Block61a470.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {
-void FUN_00149840(u32 first, u32 second)
+
+/* Sets the display offset of the active target. */
+void FUN_00149840(s32 x, s32 y)
 {
-    u32 *base = (u32 *)&g_asdGfxContext;
-    base[g_asdGfxContext.state + 0x4D] = first;
-    base[g_asdGfxContext.state + 0x50] = second;
+    g_asdGfxContext.targetX[g_asdGfxContext.activeTarget] = x;
+    g_asdGfxContext.targetY[g_asdGfxContext.activeTarget] = y;
 }
-}
+
+} /* extern "C" */

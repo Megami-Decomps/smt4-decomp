@@ -18,7 +18,7 @@ struct AocTableFiles {
 
 extern "C" {
 s32 asdFsIsSdCardDetected(void);
-u32 objGetFlagBit16(AocMainA *aoc);
+u32 objGetFlagBit16(AocMain *aoc);
 void *dataTableFileGetTable(u32 fileId, u32 flags);
 void *dataTableGetEntries(void *table);
 s32 dataTableGetCount(void *table);

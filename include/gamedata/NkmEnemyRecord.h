@@ -81,7 +81,8 @@ struct NkmEnemyRecordA {
     /* 0x88 */ s16 portraitId;
     /* 0x8A */ u16 unk8A;               /* reported by a script command */
     /* 0x8C */ s16 battleTextureId;
-    /* 0x8E */ u8 unk8E[0x14];
+    /* 0x8E */ char aiScriptName[6];     /* battle/AI/<name>.bf */
+    /* 0x94 */ u8 unk94[0xE];
     /* 0xA2 */ u8 bustUp;               /* the bust-up height: 0 tall, 1 average, 2 low */
     /* 0xA3 */ u8 bustUpVariation;
     /* 0xA4 */ u8 variant;              /* the texture variant drawn for the demon */
@@ -94,7 +95,7 @@ typedef char Table00RecordAOffsetCheck[sizeof(NkmEnemyRecordA) == 0xA8 &&
     offsetof(NkmEnemyRecordA, stats) == 0xC && offsetof(NkmEnemyRecordA, flags) == 0x16 &&
     offsetof(NkmEnemyRecordA, skills) == 0x50 && offsetof(NkmEnemyRecordA, choices) == 0x60 &&
     offsetof(NkmEnemyRecordA, experience) == 0x74 && offsetof(NkmEnemyRecordA, relatedIds) == 0x80 &&
-    offsetof(NkmEnemyRecordA, portraitId) == 0x88 && offsetof(NkmEnemyRecordA, battleTextureId) == 0x8C &&
+    offsetof(NkmEnemyRecordA, portraitId) == 0x88 && offsetof(NkmEnemyRecordA, battleTextureId) == 0x8C && offsetof(NkmEnemyRecordA, aiScriptName) == 0x8E &&
     offsetof(NkmEnemyRecordA, bustUp) == 0xA2 && offsetof(NkmEnemyRecordA, variant) == 0xA4 && offsetof(NkmEnemyRecordA, scriptFlags) == 0xA5 ? 1 : -1];
 
 #endif

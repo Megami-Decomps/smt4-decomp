@@ -1,5 +1,5 @@
 /* NON_MATCHING: register-only with the s8 flag: retail reloads the flag at the end through a pool-literal 0x74b0 + register index and keeps the UI object in r6 and constants in r9,sl,fp,r8. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gamedata/SkillDataRecord.h"
 #include "gamedata/ConsumableRecordA.h"
 
@@ -21,7 +21,6 @@ static inline bool commandRequiresTargetSelection(const CommandSkillRecord *skil
 }
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void FUN_002ccde8(Menu32 *menu, s16 *kind, s16 *id);
 void FUN_002fa7a8(Menu32 *menu);
 void menu32EnterState27(Menu32 *menu);

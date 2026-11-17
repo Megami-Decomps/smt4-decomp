@@ -26,7 +26,6 @@ struct AocMenuSprites {
 };
 
 extern "C" {
-extern AocMain *g_aocMain;
 extern const char DAT_003ff12c[];
 void drawParameterBlockClear(UiResourceParameters *parameters);
 

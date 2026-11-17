@@ -1,6 +1,7 @@
 /* NON_MATCHING: near (197 rows against 198): same switch cases, calls and constants; retail keeps the stage-mode index in r5 through a conditional move (cmp; movge; blt) where ours uses `subs`, hoists the party count/offset pair loads differently in case 4, copies the camera position as three plain words with swapped r0/r1, and holds the battle block in r8/r4 differently in case 6 */
 #include "battle/BtlMainAccess.h"
 #include "code/Code0018.h"
+#include "util/MathFunctions.h"
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef short s16;
@@ -64,7 +65,6 @@ s32 FUN_004116a0(StageState *state);
 s32 btlSpawnStageHeightEffects(StageState *state);
 s32 asdMemFree(void *memory);
 s32 asdLoadFileAsyncSimple(const u8 *name, void **destination, s32 flag);
-s32 mathVectorClear(f32 *vector);
 s32 btlStageGetModeIndex(u32 context);
 s32 FUN_00411c04(StageState *state, s32 flag);
 s32 partyCountActiveSlots(void);

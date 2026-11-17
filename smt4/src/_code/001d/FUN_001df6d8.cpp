@@ -1,4 +1,5 @@
 /* NON_MATCHING: scalar-channel registers and the large timer-field address decomposition differ. */
+#include "ui/UiSpriteApi.h"
 #include "camp/Unite/UniteGlobals.h"
 #include "shard/Shard0034.h"
 

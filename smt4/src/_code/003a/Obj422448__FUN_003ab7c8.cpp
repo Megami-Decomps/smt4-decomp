@@ -1,5 +1,6 @@
 #include "common.h"
 #include "classes/Obj422448.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -18,11 +19,7 @@ typedef struct Entity003ab7c8 {
     /* 0x188 */ Placement placement;
 } Entity003ab7c8;
 
-void uiSpriteAdvanceAnimation(Placement *placement);
-u32 vec2GetYInt(Placement *placement);
-u32 vec2GetXInt(Placement *placement);
 void pointConvertToFloat(u8 *target, u32 x, u32 y);
-s8 uiSpriteGetCompletionState(const Placement *placement);
 s32 buttonHelpStateIsNot3(void);
 s32 FUN_00241a44(void);
 s32 FUN_00295618(void);
@@ -37,11 +34,11 @@ void Obj422448::FUN_003ab7c8()
     u32 y;
     u32 x;
 
-    uiSpriteAdvanceAnimation(placement);
-    y = vec2GetYInt(placement);
-    x = vec2GetXInt(placement);
+    uiSpriteAdvanceAnimation((UiSpriteState *)placement);
+    y = vec2GetYInt((const UiSpriteState *)placement);
+    x = vec2GetXInt((const UiSpriteState *)placement);
     pointConvertToFloat(entity->target, x, y);
-    if (uiSpriteGetCompletionState(placement) != 0 && buttonHelpStateIsNot3() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
+    if (uiSpriteGetCompletionState((const UiSpriteState *)placement) != 0 && buttonHelpStateIsNot3() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
         entity->state = 11;
         entity->stateArg = 0;
     }

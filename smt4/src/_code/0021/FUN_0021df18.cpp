@@ -1,6 +1,7 @@
 /* NON_MATCHING: Work-table indexing, scene-position argument loads, and the final request stores use different scratch registers. */
 #include "map/LmapGlobals.h"
 #include "map/mapDepart.h"
+#include "util/MathFunctions.h"
 
 namespace {
 struct NearestGimicEntry {
@@ -20,7 +21,6 @@ struct NearestGimicWork {
 }
 extern "C" {
 extern NearestGimicWork *g_mapGimic;
-f32 mathDistanceBetweenPoints(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1);
 
 /* Requests the nearest active gimmick of the selected interaction kind. */
 void FUN_0021df18(void)

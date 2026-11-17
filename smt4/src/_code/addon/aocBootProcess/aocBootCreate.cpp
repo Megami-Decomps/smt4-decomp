@@ -9,7 +9,6 @@
 extern "C" {
 
 extern AocBootGlobals g_aocBoot;
-extern AocMain *g_aocMain;
 
 void uiResourceParametersInitDefault(void *dialog);
 s32 aocBootUpdate(u32 handle);

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-/* Runs the handler callback (if any) for the resource's type on its data. */
+/* Runs the resource type's handler callback (if any) on its data. */
 void eventDispatchIfSet(Resource *resource)
 {
     void (*callback)(void *data);

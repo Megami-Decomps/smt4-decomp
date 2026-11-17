@@ -1,9 +1,8 @@
 /* NON_MATCHING: register allocation only: retail reuses r5 for the entry-offset arithmetic and keeps the vector store address in r7 (built pushes r8). */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "shard/S1Mover.h"
 
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 
 /* Reuse a group at the same position, or open an empty group, and append a request. */
 u32 FUN_004a9588(u32 unused, u32 value, u8 first, u8 second,

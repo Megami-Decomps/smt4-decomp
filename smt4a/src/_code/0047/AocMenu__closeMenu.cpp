@@ -6,7 +6,6 @@
 #include "addon/AocSystemA.h"
 
 extern "C" {
-extern QueuedRequestState *g_aocMain;
 RequestParameters FUN_0046f3ac(AocSystemA *system);
 void aocMenuSetButtonHelp(AocMenu *menu, s32 request, s32 mode);
 void aocLoadingTaskStart(AocMenu *menu, u32 request);

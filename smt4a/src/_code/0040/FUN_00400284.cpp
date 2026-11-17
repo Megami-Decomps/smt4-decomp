@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail evaluates the two target kinds (player, slot unit) with the combination logic inlined twice in a different order and keeps the status mask in a packed local; the result is the same. */
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
 
@@ -16,22 +17,9 @@ typedef struct UseItem {
     /* 0x68 */ u32 flags;               /* 4: revives (everything) */
 } UseItem;
 
-/* A target unit (a party slot record or the player): the fields that differ are given per kind. */
-typedef struct SlotUnit {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ s16 maxMp;
-    /* 0x12 */ u8 unk12[0x18];
-    /* 0x2A */ s16 hp;
-    /* 0x2C */ s16 mp;
-    /* 0x2E */ u8 unk2e[0x32];
-    /* 0x60 */ u16 flags;               /* 0x400/0x402: cannot be healed */
-} SlotUnit;
-
-SlotUnit *gameGetSlotRecord(s32 index);
-SlotUnit *gameGetSaveSlotData(void);
-SlotUnit *btlMainGetUnk14(void);
+SlotRecordA *btlMainGetUnk14(void);
 s32 btlIsDefeatSuppressed(void);
-s16 FUN_002b4dcc(SlotUnit *unit);
+s16 FUN_002b4dcc(SlotRecordA *unit);
 s16 FUN_002b4e7c(void);
 void FUN_003ff524(u32 *mask, s32 kind);
 
@@ -64,22 +52,22 @@ u32 FUN_00400284(s32 unit, s32 fromSave, UseItem *item, u32 statusMask)
     u32 mask = statusMask;
 
     if (unit >= 0 || btlIsDefeatSuppressed() != 0) {
-        SlotUnit *target;
+        SlotRecordA *target;
 
         if (unit < 0 && btlIsDefeatSuppressed() != 0) {
             target = btlMainGetUnk14();
         } else if (fromSave != 0) {
-            target = gameGetSaveSlotData();
+            target = gameGetSaveSlotData(unit);
         } else {
             target = gameGetSlotRecord(unit);
         }
         if (target == NULL) {
             return 3;
         }
-        if ((gives & 1) != 0 && (target->flags & 0x402) == 0 && FUN_002b4dcc(target) != target->hp) {
+        if ((gives & 1) != 0 && (target->ailments & 0x402) == 0 && FUN_002b4dcc(target) != target->hp) {
             can = 1;
         }
-        if ((gives & 2) != 0 && (target->flags & 0x402) == 0 && target->mp != target->maxMp) {
+        if ((gives & 2) != 0 && (target->ailments & 0x402) == 0 && target->mp != target->maxMp) {
             can |= 2;
         }
         if ((gives & 3) == 3 && (can & 3) != 0) {
@@ -93,7 +81,7 @@ u32 FUN_00400284(s32 unit, s32 fromSave, UseItem *item, u32 statusMask)
         }
         mask &= 0xFFFF0000;
         FUN_003ff524(&mask, (item->flags & 4) != 0 ? 0x25 : (item->statusKind & 0x7F));
-        mask = (u16)mask & target->flags;
+        mask = (u16)mask & target->ailments;
         if ((u16)mask != 0) {
             can |= 4;
         }

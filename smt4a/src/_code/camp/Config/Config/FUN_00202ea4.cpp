@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "code/Code002a_VariantA.h"
 #include "game/GameStateA.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00202ea4` (_code @ 0x202ea4, 0xaa0 bytes) from smt4a.cxi.
@@ -12,14 +13,10 @@ extern "C" {
 int sysPlaySe(...);
 int obj04Finish(void);
 
-int uiSpriteStateInitFromSource(...);
 int padQueryLogicalKey(...);
-int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int eventQueueAddUnique(...);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(...);
 int dataTableGet(...);
 int buttonHelpSetText(...);
 int gameDataBlocksGetTableFlag(void);
@@ -97,7 +94,7 @@ void FUN_00202ea4(void)
   unsigned char temp_v12 [16];
   
   temp_v7 = g_config;
-  uiSpriteAdvanceAnimation(g_config + 0x430);
+  uiSpriteAdvanceAnimation((UiSpriteState *)(g_config + 0x430), 1.0f);
   temp_v6 = g_config;
   temp_v11 = 0;
   switch(*(unsigned int *)(temp_v7 + 100)) {
@@ -161,12 +158,12 @@ void FUN_00202ea4(void)
     }
     break;
   case 1:
-    uiSpriteAdvanceAnimation(temp_v7 + 0xe8);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0xe8), 1.0f);
     temp_v6 = uiSearchPrimary(temp_v7);
     temp_v11 = 0;
     if (0 < temp_v6) {
       do {
-        uiSpriteAdvanceAnimation(temp_v7 + temp_v11 * 0x8c + 0x174);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + temp_v11 * 0x8c + 0x174), 1.0f);
         temp_v11 = temp_v11 + 1;
       } while (temp_v11 < temp_v6);
     }
@@ -222,14 +219,14 @@ void FUN_00202ea4(void)
         eventQueueAddUniqueIfValid(0x100020f);
         messageMainSetFlag(1);
         buttonHelpSetText(0,0xf4f4f4ff);
-        uiSpriteSetKeyframe(temp_v7 + 0xe8,1,0);
-        uiSpriteSetImageKeyframe(temp_v7 + 0xe8,1,0);
+        uiSpriteSetKeyframe((UiSpriteState *)(temp_v7 + 0xe8),1,0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v7 + 0xe8),1,0);
         temp_v6 = 0;
         do {
           temp_v11 = temp_v7 + temp_v6 * 0x8c;
-          uiSpriteStateInitFromSource(temp_v11 + 0x174,0x24,0x57,temp_v7 + 200,1);
-          uiSpriteSetKeyframe(temp_v11 + 0x174,1,0);
-          uiSpriteSetImageKeyframe(temp_v11 + 0x174,1,0);
+          uiSpriteStateInitFromSource((UiSpriteState *)(temp_v11 + 0x174),0x24,0x57, (UiResourceParameters *)(temp_v7 + 200),1, 1.0f);
+          uiSpriteSetKeyframe((UiSpriteState *)(temp_v11 + 0x174),1,0);
+          uiSpriteSetImageKeyframe((UiSpriteState *)(temp_v11 + 0x174),1,0);
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 5);
         *(unsigned int *)(temp_v7 + 0x4bc) = 0;
@@ -470,12 +467,12 @@ LAB_00203688:
     }
     break;
   case 4:
-    uiSpriteAdvanceAnimation(temp_v7 + 0xe8);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + 0xe8), 1.0f);
     temp_v6 = uiSearchPrimary(temp_v7);
     temp_v11 = 0;
     if (0 < temp_v6) {
       do {
-        uiSpriteAdvanceAnimation(temp_v7 + temp_v11 * 0x8c + 0x174);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v7 + temp_v11 * 0x8c + 0x174), 1.0f);
         temp_v11 = temp_v11 + 1;
       } while (temp_v11 < temp_v6);
     }

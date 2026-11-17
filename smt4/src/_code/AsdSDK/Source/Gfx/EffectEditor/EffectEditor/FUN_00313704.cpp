@@ -1,4 +1,5 @@
 /* NON_MATCHING: tail-call argument setup: build moves the resource-name pointer (r1) before reloading the label (r0); retail reloads first. */
+#include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 extern "C" {
 void asdMemoryFreeLocked(void* memory);

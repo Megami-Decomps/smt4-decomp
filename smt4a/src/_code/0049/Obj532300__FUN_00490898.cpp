@@ -5,7 +5,6 @@
 
 extern "C" {
 void uiPlayGatedActionFeedback(void);
-void uiSpriteAdvanceAnimation(UiAnimatedSprite *sprite, f32 value);
 NavigationPoint *sub68OwnerGetBlock60(void *scene);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
 void FUN_002d22c0(s32 value);

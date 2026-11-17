@@ -5,7 +5,7 @@
 struct ScriptScreenBundleView {
     /* 0x0 */ void *bytecode;
     /* 0x4 */ void *messages;
-    /* 0x8 */ ScriptRunState *script;
+    /* 0x8 */ ScriptProcess *script;
 };
 struct ScriptScreenCleanupView {
     u8 unk000[0x9c];
@@ -17,7 +17,6 @@ struct ScriptScreenCleanupView {
 typedef char ScriptScreenCleanupOffsets[offsetof(ScriptScreenCleanupView, secondary.script) == 0xd90 ? 1 : -1];
 
 extern "C" {
-void scrScriptProcessDestroy(ScriptRunState *);
 void asdMemFree(void *);
 void spriteTable2aFree(void *);
 void FUN_003bbafc(void *);

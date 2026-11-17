@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a1f8c` (_code @ 0x1a1f8c, 0x73c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
 #include "code/Code0029_Smt4.h"
@@ -15,7 +16,6 @@ int libc_bsearch(...);
 int ifTouchRegionAddRequested(int, int);
 int ifTouchRegionRemove(void);
 int eventQueueAddUniqueIfValid(...);
-int uiSpriteAdvanceAnimation(...);
 int FUN_002c1658(...);
 
 /* stack frame of void: 7 slot(s), 23 byte(s) */
@@ -97,7 +97,7 @@ unsigned int FUN_001a1f8c(void)
     do {
       if (temp_v5 <= *(int *)(temp_v0 + 0x748)) {
         temp_v6 = temp_v0 + temp_v5 * 0x8c;
-        uiSpriteAdvanceAnimation(temp_v6 + 0x28);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v6 + 0x28));
         if ((temp_v9 - 1 <= temp_v5) && (*(char *)(temp_v6 + 0xb2) != '\0')) {
           *(unsigned int *)(temp_v0 + 0x744) = 2;
           if (*(char *)(temp_v0 + 0x74e) != '\x02') {
@@ -163,13 +163,13 @@ LAB_001a2150:
     } while (temp_v5 < temp_v9);
     break;
   case 2:
-    uiSpriteAdvanceAnimation(DAT_0043dd24 + 0x5a0);
-    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(DAT_0043dd24 + 0x5a0));
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + 0x62c));
     temp_v9 = temp_v0 + 0x788;
     temp_v10 = FUN_0029ee54();
     temp_v5 = FUN_0029d644(temp_v9);
     if (temp_v5 < temp_v10) {
-      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + 0x6b8));
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v6 = listCursorGetRowIfUnblocked(temp_v9);
@@ -308,12 +308,12 @@ LAB_001a2150:
     buttonHelpSetText(puVar13,0x323232ff);
     break;
   case 3:
-    uiSpriteAdvanceAnimation(DAT_0043dd24 + 0x5a0);
-    uiSpriteAdvanceAnimation(temp_v0 + 0x62c);
+    uiSpriteAdvanceAnimation((UiSpriteState *)(DAT_0043dd24 + 0x5a0));
+    uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + 0x62c));
     temp_v9 = FUN_0029ee54();
     temp_v10 = FUN_0029d644(temp_v0 + 0x788);
     if (temp_v10 < temp_v9) {
-      uiSpriteAdvanceAnimation(temp_v0 + 0x6b8);
+      uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v0 + 0x6b8));
     }
     temp_v9 = DAT_0043dd24;
     if (*(char *)(temp_v0 + 0x74e) != '\x02') {

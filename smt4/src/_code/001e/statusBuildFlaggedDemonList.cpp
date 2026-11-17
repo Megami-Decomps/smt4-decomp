@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the first entry store differs: retail computes the entry address in r1 and the id in r2 (built swaps them). */
+#include "ui/UiSpriteApi.h"
 #include "status/StatusDown.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "status/StatusCamera.h"

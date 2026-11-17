@@ -1,4 +1,5 @@
 /* NON_MATCHING: the page dispatch chain is laid out with the bodies inline in retail (compare-and-branch order differs) and the page-0 query result is tested differently; the opened list and scene state per page are the same. */
+#include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
@@ -27,14 +28,13 @@ s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
 u32 FUN_00293988(void *scene);
 s32 FUN_0029ee54(void);
 void playSceneSetState(SkillMenuWork *work, s32 state, s32 flag);
-void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 flag);
 void buttonHelpSetText(u32 record, u32 color);
 
 /* Resets the six menu sprites' keyframes. */
 static __inline void resetSprites(SkillMenuWork *work)
 {
     for (s32 i = 0; i < 6; i++) {
-        uiSpriteSetImageKeyframe(work->sprites[i], 0, 0);
+        uiSpriteSetImageKeyframe((UiSpriteState *)work->sprites[i], 0, 0);
     }
 }
 

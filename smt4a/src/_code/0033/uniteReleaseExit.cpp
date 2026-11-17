@@ -2,7 +2,6 @@
 
 extern "C" {
 
-extern EngineUnitsRef g_engineCleanupOwner;
 
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 flags);

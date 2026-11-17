@@ -2,11 +2,11 @@
 #include "map/ModelSelectionLabel.h"
 #include "map/mapDepart.h"
 #include "game/GameState.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
 extern DeferredModelWork *g_deferredMapModels;
 void FUN_00266fac(s32 mode, s32 id);
-f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
 f32 mathAbsHeadingErrorToPoint(f32, f32, f32, f32, f32, f32, f32);
 ModelSelectionLabel *dataTable2AGetEntryWithAoc(u32);
 char *libc_strcpy(char *, const char *);

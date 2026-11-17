@@ -1,5 +1,6 @@
 /* NON_MATCHING: shared case-1/2 script launch, default-choice retention branch, AOC flag addressing and mode/frame store grouping differ. */
 #include "script/scrScriptProcess.h"
+#include "addon/aocMain.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "font/InfoWinA.h"
 #include <stddef.h>
@@ -17,16 +18,16 @@ struct MapMenuCompletionWork {
     u8 unk0110[0x1008];
     MapMenuReturnRecord *record;
     u8 unk111c[0x14];
-    ScriptRunState *script;
+    ScriptProcess *script;
     u8 unk1134[8];
     InfoWindowA *info;
     u8 unk1140[0x10];
     void *battleTable;
     u8 unk1154[4];
-    ScriptRunState *battleProcess;
+    ScriptProcess *battleProcess;
     void *resultTable;
     void *resultMessages;
-    ScriptRunState *resultProcess;
+    ScriptProcess *resultProcess;
     u8 unk1168[4];
     s32 choice;
 };
@@ -36,17 +37,15 @@ typedef char MapMenuCompletionOffsets[
     offsetof(MapMenuCompletionWork, script) == 0x1130 &&
     offsetof(MapMenuCompletionWork, choice) == 0x116c ? 1 : -1];
 extern "C" {
-extern void *g_aocMain;
 s32 FUN_004ba698(FlaggedValueHolder *);
-s32 scrRunOpcodesStub(ScriptRunState *);
+s32 scrRunOpcodesStub(ScriptProcess *);
 void FUN_004b7d88(MapMenuCompletionWork *);
 u16 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 void sysPlaySe(u32);
 void dialogOpen(u32);
 void *asdLoadFileSyncDefault(const char *);
-ScriptRunState *scrScriptProcessCreate(void *, void *);
 u32 tableGroupFindEntryIndex(void *, const char *);
-void scrScriptProcessStartEntry(ScriptRunState *, u32);
+void scrScriptProcessStartEntry(ScriptProcess *, u32);
 
 void FUN_004b7b74(MapMenuCompletionWork *work)
 {
@@ -56,10 +55,9 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
         return;
     FUN_004b7d88(work);
     work->selection = flaggedValueHolderGetTotal(&work->holder);
-    struct AocMenuTransitionView { u8 unk00[0xc1]; u8 pending; };
-    AocMenuTransitionView *aoc = static_cast<AocMenuTransitionView *>(g_aocMain);
-    if (aoc->pending) {
-        aoc->pending = 0;
+    AocMain *aoc = g_aocMain;
+    if (aoc->skipRestore) {
+        aoc->skipRestore = 0;
         work->mode = 10;
         work->frame = 0;
         return;

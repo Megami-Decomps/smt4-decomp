@@ -1,8 +1,8 @@
 #include "common.h"
+#include "gamedata/SkillDataLookup.h"
 
 extern "C" {
 
-u32 skillDataFindById(u16 id);
 s32 FUN_003df57c(u16 id, u32 flag);
 
 /* Compares two entries by their looked-up values; empty or unknown ids compare equal. */
@@ -14,8 +14,8 @@ s32 FUN_002fe144(const u16 *idA, const u16 *idB)
     if (*idB == 0) {
         return 0;
     }
-    u32 entryA = skillDataFindById(*idA);
-    u32 entryB = skillDataFindById(*idB);
+    const SkillDataRecordA *entryA = skillDataFindById(*idA);
+    const SkillDataRecordA *entryB = skillDataFindById(*idB);
     if (entryA == 0) {
         return 0;
     }

@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include "status/StatusCamera.h"
 #include "bible/bibleAnalyze.h"
+#include "ui/UiSpriteApi.h"
 
 /* This analysis screen extends beyond the shared BibleScreen work area. */
 struct BibleAnalyzeCursorView {
@@ -39,10 +40,6 @@ typedef char BibleAnalyzeNameOffset[offsetof(BibleAnalyzeWorkView, nameId) == 0x
 
 extern "C" {
 u16 shopListItemGetId(const BibleAnalyzeEntryView *entry);
-s8 uiSpriteGetCompletionState(const BibleAnalyzeCursorView *record);
-void uiSlidingSpriteAdvance(BibleAnalyzeCursorView *, s32);
-s32 vec2GetYInt(BibleAnalyzeCursorView *);
-s32 vec2GetXInt(BibleAnalyzeCursorView *);
 void pointConvertToFloat(void *, s32, s32);
 s32 flaggedValueHolderGetTotal(void *);
 void FUN_0029da34(s32, s32, u16, s32);
@@ -62,11 +59,11 @@ void Obj4223f8::followCursorAndDescribe()
     char text[64];
     u8 nameBuffer[8];
     BibleAnalyzeCursorView *cursor = &work->cursor;
-    uiSlidingSpriteAdvance(cursor, 0);
-    s32 y = vec2GetYInt(cursor);
-    s32 x = vec2GetXInt(cursor);
+    uiSlidingSpriteAdvance((UiSpriteState *)cursor, 0);
+    s32 y = vec2GetYInt((const UiSpriteState *)cursor);
+    s32 x = vec2GetXInt((const UiSpriteState *)cursor);
     pointConvertToFloat(work->position, x, y);
-    if (uiSpriteGetCompletionState(cursor) && buttonHelpIsNotActive()) {
+    if (uiSpriteGetCompletionState((const UiSpriteState *)cursor) && buttonHelpIsNotActive()) {
         FUN_002a0cc8(0);
         work->state = 2;
         work->stateArg = 0;

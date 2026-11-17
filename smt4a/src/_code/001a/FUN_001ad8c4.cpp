@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdScene.h"
 extern "C" {
 s32 nw_anim_res_ResAnim_IsFullBakedAnim(void **resource);
-void nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(AsdTrackOwner *owner, s32 enabled);
+void nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(AsdMdlSceneNode *owner, s32 enabled);
 ModelBoneAnimationInstance *FUN_001b8108(ModelBoneAnimationCreateInfo *info, void *allocator);
 
 static __inline ModelBoneAnimationInstance *createBoneAnimation(void *animationResource, f32 duration, u32 options, bool combinedTransforms)
@@ -23,10 +23,10 @@ static __inline ModelBoneAnimationInstance *createBoneAnimation(void *animationR
 }
 
 // Build an animation for the model's active skeleton target, then bind it.
-ModelBoneAnimationInstance *FUN_001ad8c4(AsdTrackOwner *owner, void *resource, u32 options)
+ModelBoneAnimationInstance *FUN_001ad8c4(AsdMdlSceneNode *owner, void *resource, u32 options)
 {
     ModelBoneAnimationTarget *target = owner->activeTarget;
-    ModelBoneResource *modelResource = ModelBoneResource::cast(owner->model.resource);
+    ModelBoneResource *modelResource = ModelBoneResource::cast(owner->boneResource);
     ModelBoneSkeleton *skeleton = modelResource->skeleton.get();
     if (nw_anim_res_ResAnim_IsFullBakedAnim(&resource))
         nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(owner, 1);

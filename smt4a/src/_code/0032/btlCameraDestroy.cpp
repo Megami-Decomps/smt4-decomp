@@ -1,15 +1,9 @@
 #include "battle/btlCamera.h"
+#include "Model/MoriModelManager.h"
 #include "shard/JobWork.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
-
-typedef struct HandleRegistry {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u32 cameraHandle;
-} HandleRegistry;
-
-extern HandleRegistry *g_handleRegistry;
 
 extern void jobStop(u32 job, s32 arg);
 extern void jobRefStopAndFree(void);
@@ -29,7 +23,7 @@ void btlCameraDestroy(u32 job)
     CameraBackend *backend;
 
     if (camera != NULL) {
-        g_handleRegistry->cameraHandle = 0;
+        g_handleRegistry->camera = NULL;
         jobRefStopAndFree();
         uiFreeCallback(camera->job);
         camera->job = 0;

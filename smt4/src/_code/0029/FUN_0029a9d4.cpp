@@ -25,7 +25,6 @@ static __inline u8 findLearnedSkillRank(const PlayerDataIV *player, u32 skillId)
 }
 
 extern "C" {
-s32 FUN_00283ebc(SkillDataRecord *skill, s32 rank, u32 modifier);
 s32 flagBitIsSet(u32 flag);
 SkillCostDiscountView *appCostRecordFindById(u16 id);
 

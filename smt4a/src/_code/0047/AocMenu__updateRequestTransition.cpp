@@ -2,7 +2,7 @@
 #include "shard/W4_Match3_AocMainA.h"
 #include "addon/AocRequestTransition.h"
 
-extern "C" void _ZN7AocMain12queueRequestE17RequestParametersji(AocMainA *, const RequestParameters *, s32, s32);
+extern "C" void _ZN7AocMain12queueRequestE17RequestParametersji(AocMain *, const RequestParameters *, s32, s32);
 
 /* Submit an AOC request, then release its completion callback when it finishes. */
 void AocMenu::updateRequestTransition()

@@ -1,6 +1,6 @@
 /* NON_MATCHING: transition reset stores and completion-field address scheduling differ. */
 #include "common.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {

@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (221 vs ~221 rows); frame size and register assignment of the helper-inlined ring operations differ */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -44,8 +45,6 @@ u32 renderCtxPackPassFlags(u32 a, u32 b);
 void FUN_00197e34(void);
 void FUN_00186a48(void);
 f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
-s32 vec2GetXInt(void* vec);
-s32 vec2GetYInt(void* vec);
 void uiFadeDraw(u32 id);
 void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
 u32 FUN_002bcddc(u16 id, u32 arg);
@@ -109,8 +108,8 @@ u32 FUN_001ad9f0(void)
         quest = g_uiQuest;
         s32 shift = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
         void* pointer = quest->pointer;
-        s32 x = vec2GetXInt(pointer);
-        s32 y = vec2GetYInt(pointer);
+        s32 x = vec2GetXInt((UiSpriteState *)pointer);
+        s32 y = vec2GetYInt((UiSpriteState *)pointer);
         u16 category = quest->category;
         if (quest->revealed == 0) uiFadeDraw(0x92);
         x += shift;

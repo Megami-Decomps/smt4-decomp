@@ -64,13 +64,16 @@ typedef struct SlotRecordA {
         /* 0x034 */ u16 skills[8];
         /* 0x034 */ u32 skillWords[4];  /* the same ids, copied as words */
     };
-    /* 0x044 */ u8 unk044[8];
-    /* 0x04C */ u16 name[9];
+    /* 0x044 */ s8 skillRanks[8];     /* the rank of each skill (PlayerDataA.skillRanks) */
+    union {
+        /* 0x04C */ u16 name[9];
+        /* 0x04C */ s8 categoryRanks[18]; /* a devil's inherited rank per skill category (partyRecordSetEquippedItemClampRank) */
+    };
     /* 0x05E */ u16 stateFlags;
     /* 0x060 */ u16 ailments;         /* bit 1: down (0 HP), bit 2: kept by the flag scans, bit 10: cannot lose HP */
     /* 0x062 */ u16 id;               /* the devil's id (nkmBaseGetRecord) */
     /* 0x064 */ u16 level;
-    /* 0x066 */ u8 experienceSlot;    /* the reward tally slot the record's experience share goes to */
+    /* 0x066 */ u8 tableIndex;       /* the record's own index in SaveSlotTableA.entries (what party[] and reserve[] hold; the reward tally row of its experience share) */
     /* 0x067 */ u8 unk067;
     /* 0x068 */ u8 inheritedFlags[0x40]; /* per-skill learned/inherited bytes */
     /* 0x0A8 */ u8 unk0A8[0x82];
@@ -80,7 +83,7 @@ typedef struct SlotRecordA {
 
 typedef char SlotRecordAOffsetCheck[offsetof(SlotRecordA, maxHp) == 0x0E && offsetof(SlotRecordA, stats) == 0x20 &&
     offsetof(SlotRecordA, hp) == 0x2A && offsetof(SlotRecordA, experience) == 0x30 && offsetof(SlotRecordA, skills) == 0x34 &&
-    offsetof(SlotRecordA, name) == 0x4C && offsetof(SlotRecordA, ailments) == 0x60 && offsetof(SlotRecordA, id) == 0x62 &&
+    offsetof(SlotRecordA, skillRanks) == 0x44 && offsetof(SlotRecordA, name) == 0x4C && offsetof(SlotRecordA, categoryRanks) == 0x4C && offsetof(SlotRecordA, ailments) == 0x60 && offsetof(SlotRecordA, id) == 0x62 &&
     offsetof(SlotRecordA, level) == 0x64 && offsetof(SlotRecordA, inheritedFlags) == 0x68 &&
     offsetof(SlotRecordA, streak) == 0x12A && sizeof(SlotRecordA) == 0x12C ? 1 : -1];
 
@@ -109,6 +112,7 @@ typedef struct SaveSlotTableA {
     /* 0x1DD8 */ u8 unk1DD8[4];
     /* 0x1DDC */ PartySlotA slots[12];
     /* 0x2C4C */ u16 preferredId;
+    /* 0x2C4E */ u16 unk2C4E;         /* a small counter (tested < 8) */
 } SaveSlotTableA;
 
 typedef char SaveSlotTableOffsetCheck[offsetof(SaveSlotTableA, entries) == 0x68 && offsetof(SaveSlotTableA, party) == 0x1C88 &&

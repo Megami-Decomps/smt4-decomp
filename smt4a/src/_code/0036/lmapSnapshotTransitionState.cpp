@@ -1,9 +1,8 @@
-#include "map/LmapGlobals.h"
+#include "map/LmapMainGlobals.h"
 #include "game/GameStateA.h"
 
 extern "C" {
 
-extern LmapMainStateA *g_lmapMainState;
 
 void lmapSnapshotTransitionState(void)
 {

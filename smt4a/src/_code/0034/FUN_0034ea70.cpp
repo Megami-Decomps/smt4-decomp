@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ typedef struct PartyPopup {
 
 extern u8 *g_renderCtx;
 
-s32 vec2GetXInt(const void *vector);
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
@@ -76,7 +76,7 @@ void FUN_0034ea70(PartyPopup *popup)
             x += width - (width / 7) * step;
         }
     } else {
-        x += vec2GetXInt(popup->slide);
+        x += vec2GetXInt((const UiSpriteState *)popup->slide);
         speed = popup->slideSpeed;
     }
     efctSetSpeed(speed);

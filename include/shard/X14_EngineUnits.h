@@ -35,10 +35,18 @@ typedef struct EngineUnits {
     /* 0x7F30 */ u32 job;
 } EngineUnits;
 
-typedef struct EngineUnitsRef {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ EngineUnits *instance;
-} EngineUnitsRef;
+/* g_engineCleanupOwner (Apocalypse, a global block, not a pointer): the result screen's work and the
+ * scene shown over it, each deleted when it finishes. */
+typedef struct EngineCleanupOwner {
+    /* 0x00 */ s8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ EngineUnits *instance;   /* the result screen work */
+    /* 0x08 */ void *scene;             /* the scene shown over it (arousal skill, selection, ...) */
+    /* 0x0C */ u8 unk0C[0x14];
+    /* 0x20 */ f32 alpha;
+} EngineCleanupOwner;
+
+extern "C" EngineCleanupOwner g_engineCleanupOwner;
 
 /* A record with its id at 0x62. */
 typedef struct EngineUnitRecord {
@@ -50,7 +58,9 @@ typedef char EngineUnitsOffsets[sizeof(EngineUnit) == 0x150 && offsetof(EngineUn
     offsetof(EngineUnits, units) == 0x442C && offsetof(EngineUnits, current) == 0x74C0 &&
     offsetof(EngineUnits, exitMode) == 0x4398 && offsetof(EngineUnits, exitSe) == 0x439A &&
     offsetof(EngineUnits, job) == 0x7F30 &&
-    offsetof(EngineUnitRecord, id) == 0x62 ? 1 : -1];
+    offsetof(EngineUnitRecord, id) == 0x62 &&
+    offsetof(EngineCleanupOwner, instance) == 0x4 && offsetof(EngineCleanupOwner, scene) == 0x8 &&
+    offsetof(EngineCleanupOwner, alpha) == 0x20 ? 1 : -1];
 typedef char EngineUnitsPartyMarkerOffsetsCheck[
     offsetof(EngineUnits, partyMarkers.reserve) == 0x753C &&
     offsetof(EngineUnits, partyMarkers.active) == 0x753F &&

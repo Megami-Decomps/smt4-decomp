@@ -1,9 +1,8 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "battle/PortraitPanel.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
-extern BtlUiGlobalsA g_btlUi;
 void sysMemClear(void *memory, u32 size);
 void statusBustUpPortraitAcquire(s16 portrait, s32 kind);
 

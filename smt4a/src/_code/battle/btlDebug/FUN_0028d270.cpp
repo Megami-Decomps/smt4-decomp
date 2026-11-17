@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028d270` (_code @ 0x28d270, 0x24cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
@@ -73,8 +74,6 @@ extern unsigned int DAT_00573bfc; /* 0x573bfc */
 /* Supplied declaration required: FUN_0014bd84. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
-extern int vec2GetXInt(void);
-extern int vec2GetYInt(int);
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
@@ -194,8 +193,8 @@ void FUN_0028d270(int param_1)
     temp_v21 = 1;
   }
   temp_v30 = FUN_002cc9e0(param_1,0);
-  temp_v1 = vec2GetXInt();
-  temp_v2 = vec2GetYInt(param_1 + 0x12b8);
+  temp_v1 = vec2GetXInt((UiSpriteState *)(param_1 + 0x12b8));
+  temp_v2 = vec2GetYInt((UiSpriteState *)(param_1 + 0x12b8));
   temp_v15 = 0;
   temp_v23 = 0;
   temp_v19 = resourceRunOperationIfUnblocked(*temp_v24);

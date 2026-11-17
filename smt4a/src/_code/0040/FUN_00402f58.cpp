@@ -1,5 +1,5 @@
 /* NON_MATCHING: image-keyframe constant reuse and page-transition argument scheduling differ (73 rows each). */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 s32 padQueryLogicalKey(u32 button, s32 repeat);

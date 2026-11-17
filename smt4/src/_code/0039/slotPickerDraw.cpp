@@ -5,6 +5,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ typedef struct SlotPicker {
 
 
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void gxResetColorQuadToWhite(void);
 s32 renderCtxPackPassFlags(s32 a, s32 b);
@@ -41,7 +41,7 @@ void renderCtxResetColorScale(RenderCtx *context);
  * slot's cursor (blinking every 30 frames) and the slot's two-glyph label. */
 void slotPickerDraw(SlotPicker *picker)
 {
-    f32 scale = vec2GetSpeed(&picker->fade);
+    f32 scale = vec2GetSpeed((const UiSpriteState *)&picker->fade);
 
     efctSetSpeed(scale);
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);

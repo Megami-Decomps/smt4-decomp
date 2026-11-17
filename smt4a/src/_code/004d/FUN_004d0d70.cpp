@@ -1,9 +1,9 @@
 /* NON_MATCHING: positive bounds guard (push before the compare), loop forms and control flow match retail; retail keeps the slot table in r2 (mov r2,r0) while the build addresses it from r0/r1, so scratch registers differ. */
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-Lookup62 *gameGetSlotRecord(u32 slot);
 
 // Remove a slot from party selections and compact the active slot ordering.
 u32 FUN_004d0d70(u32 slot)

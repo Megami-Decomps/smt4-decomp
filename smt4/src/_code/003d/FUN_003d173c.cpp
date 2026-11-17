@@ -5,6 +5,7 @@
 #include "shard/W4_Match1b_Node.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "battle/BtlGlobals.h"
+#include "util/MathFunctions.h"
 
 /* Fields of the battle state the cutscene reads beyond the shared prefix. */
 struct ReflectCutsceneView {
@@ -42,7 +43,6 @@ u32 soundSlotStopById(u32 id);
 void armySummonSetCommandTransform(BtlMainState *state);
 void modelClearPendingAnimation(BtlMainState *state);
 void modelSlotDetachChild(BtlCamera *main);
-void mathVectorClear(BtlCamera *main);
 void btlUiPlaySceneFadeOutWhenReady(u32 uiBlock);
 void slotResetIdle(BtlMainState *state, s32 slot, u32 value);
 void FUN_003ddb50(u32 actor, void *options, u32 value, f32 red, f32 green, f32 blue);
@@ -92,7 +92,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
             armySummonSetCommandTransform(*block);
             modelClearPendingAnimation(*block);
             modelSlotDetachChild(g_btlMain);
-            mathVectorClear(g_btlMain);
+            mathVectorClear(g_btlMain->cameraPosition);
             btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
             slotResetIdle(*block, 0, 10);
             btlQueueKeyedScalarReflectAction(0, channel, 0x100010a, 0, 0, 0, 1);

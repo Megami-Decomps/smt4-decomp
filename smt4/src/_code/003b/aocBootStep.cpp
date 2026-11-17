@@ -4,13 +4,11 @@ extern "C" {
 
 void FUN_0022af9c(s32 arg);
 void buttonHelpSelectByProgress(AocStep *step);
-void scrLoaderResetWithFlag(AocObjC *obj, s32 arg);
-void scrLoaderRelease(AocObjC *obj);
+void scrLoaderResetWithFlag(AocScriptHolder *obj, s32 arg);
+void scrLoaderRelease(AocScriptHolder *obj);
 void gameJumpRequestClear(void);
-s32 questSysLoadStep(AocObjC *obj);
+s32 questSysLoadStep(AocScriptHolder *obj);
 s32 gameJumpRequestIsPending(void);
-
-extern AocMain *g_aocMain;
 
 void aocBootStep(AocStep *step)
 {

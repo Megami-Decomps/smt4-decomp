@@ -1,4 +1,4 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
@@ -6,7 +6,6 @@ void objStartTimerIfIdle(BtlUiObjB *obj);
 void FUN_00218be0(BtlUiObjA *obj);
 void FUN_002dc4e4(BtlUiObjC *obj, u32 value);
 
-extern BtlUiGlobals g_btlUi;
 
 void FUN_003af0c4(u32 unused, u32 value)
 {

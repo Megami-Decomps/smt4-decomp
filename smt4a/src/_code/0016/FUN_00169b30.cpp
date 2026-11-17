@@ -1,4 +1,5 @@
 /* NON_MATCHING: near: same logic, 153 rows against 151; retail interleaves the four total sums with the slot lookup (ldm of three counters), keeps the old follow-up on the stack and the table copy at sp+24, so scheduling/frame size differ. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "sys/RuntimeObjects.h"
 
@@ -110,7 +111,7 @@ void FUN_00169b30(CardOwner *owner, s32 player)
     }
     slot->counter[oldPick]--;
     table->pickValue[player] = pickValue;
-    pairSetFirstResetSecond((u8 *)owner + player * 0x8C + 0x54, pickValue);
+    pairSetFirstResetSecond((UiSpriteState *)((u8 *)owner + player * 0x8C + 0x54), pickValue);
     record = &table->record[player];
     if (slot->counter[3] < 1 && total3 < 2) {
         followUp = 0;

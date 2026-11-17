@@ -1,10 +1,10 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/CampStateA.h"
 
 extern "C" {
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 scale);
-f32 vec2GetSpeed(const void *vector);
 
 void campDrawFrame(u32 first, u32 second, s32 alternate, f32 scale)
 {

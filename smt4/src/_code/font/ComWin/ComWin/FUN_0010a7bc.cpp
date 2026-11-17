@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/CommandWindow.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
@@ -12,7 +13,6 @@ void FUN_0011a434(void *task);
 void taskCreateDraw(const char *name, s32 priority, s32 mode, s32 flags, void (*callback)(void *), u32 work, void *argument, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
-void uiSpriteInitializeState(UiSpriteState *sprite, s32 bank, s32 image, s32 animation, UiResourceParameters *packet, s32 flags, f32 scale);
 /* The command window's sprite resource packets, in retail's order (0x30, 0x30 and 0x118 bytes). */
 static const u32 sComWinPacketB[12] = {
     0x0, 0x3f800000, 0x4, 0x3f800000, 0x0, 0x4, 0x3f000000, 0x3f800000,

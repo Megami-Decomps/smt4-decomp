@@ -3,6 +3,7 @@
 #include "code/Code0033.h"
 #include "shard/Shard004A.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "gamedata/SaveSlotRecord.h"
 
 /* One row of the quest list: the quest id sits at +4. */
 struct QuestListRow {
@@ -55,7 +56,6 @@ void sendEvent100020E(void);
 void screen4AEnter(QuestMenu *menu);
 void uniteCreatePreviewModel(void);
 void sysPlaySe(u32 id);
-void *slotRecordFindById(u16 id);
 void FUN_0035ad50(u32 id, char *buffer);
 void FUN_0032d0c8(s32 a, s32 b, u32 id, void *data);
 

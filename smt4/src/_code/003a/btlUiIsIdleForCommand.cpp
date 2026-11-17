@@ -1,8 +1,7 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern BtlUiGlobals g_btlUi;
 
 /* Reports whether the battle UI is in its idle state. */
 bool btlUiIsIdleForCommand()

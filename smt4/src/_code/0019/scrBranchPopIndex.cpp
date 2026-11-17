@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Pops an integer and jumps to the instruction after it; does nothing while the stack is empty. */
-s32 scrBranchPopIndex(ScriptVmProcess *process)
+s32 scrBranchPopIndex(ScriptProcess *process)
 {
     if (process->depth == 0) {
         return 0;

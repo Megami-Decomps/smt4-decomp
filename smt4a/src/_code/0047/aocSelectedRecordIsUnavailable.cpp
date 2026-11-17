@@ -7,7 +7,6 @@ s32 FUN_00476dfc(const void*, const void*);
 u32 objGetFlagBit16(void*);
 u8 rosterHasLeader(void);
 u16 rosterGetLeaderId(void);
-extern AocMain* g_aocMain;
 
 // Checks the current add-on record against the owner's table and add-on availability flag.
 u32 aocSelectedRecordIsUnavailable(AocSystemA* system)

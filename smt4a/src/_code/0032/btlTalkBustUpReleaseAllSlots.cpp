@@ -1,4 +1,5 @@
 /* Releases every in-use slot of the manager and clears its active flag. */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "ui/UiControl.h"
 
@@ -31,7 +32,7 @@ void btlTalkBustUpReleaseAllSlots(void)
 
             if (slot->inUse != 0) {
                 void *sub = slot->sub;
-                uiSpriteSelectAnim(sub, 1);
+                uiSpriteSelectAnim((UiSpriteState *)sub, 1);
             }
         }
         manager->active = 0;

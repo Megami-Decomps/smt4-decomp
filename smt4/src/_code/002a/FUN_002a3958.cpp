@@ -13,12 +13,12 @@ struct EffectRotationWorkspace {
 typedef char EffectRotationWorkspaceMatrixOffsetCheck[
     offsetof(EffectRotationWorkspace, factor) == 0x110 &&
     offsetof(EffectRotationWorkspace, matrix) == 0x140 ? 1 : -1];
+/* The orientation handler, called here with the composed rotation quaternion. */
 typedef void (*ApplyEffectRotation)(void *data, const RotationQuaternion *rotation);
 }
 
 extern "C" {
 extern EffectRotationWorkspace DAT_004ea81c;
-extern Handler g_handlerTable[];
 void gfxQuaternionWorkspaceBuildMatrix(void);
 void FUN_002a2c00(void);
 void FUN_002a3ab0(EffectTimelinePart *part, const f32 *origin);
@@ -49,7 +49,7 @@ void FUN_002a3958(EffectTimelinePart *part, const RotationQuaternion *rotation)
         FUN_002a2c00();
         RotationQuaternion composed = workspace->base.rotation;
         ApplyEffectRotation apply = reinterpret_cast<ApplyEffectRotation>(
-            g_handlerTable[child->block->type].callback24);
+            g_handlerTable[child->block->type].setOrientation);
         if (apply != NULL)
             apply(child->block->data, &composed);
     }

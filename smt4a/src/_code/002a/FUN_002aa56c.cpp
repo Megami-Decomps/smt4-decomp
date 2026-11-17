@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002aa56c` (_code @ 0x2aa56c, 0x1204 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -40,7 +40,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: uiDrawItemOrStatusIcon. */
@@ -275,16 +274,16 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x7e,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc9);
   efctSetSpeed();
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
-    temp_v7 = vec2GetYInt(temp_v1 + 0xb0);
+    temp_v7 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0xb0));
     temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(temp_v1 + 0xb0));
+    temp_v1 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v1 + 0xb0)));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x7c,temp_v1 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v7 + param_2 + (int)temp_v0,0xce);
   }
   else {
-    temp_v7 = vec2GetYInt(temp_v1 + 0xb0);
+    temp_v7 = vec2GetYInt((UiSpriteState *)(temp_v1 + 0xb0));
     temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(temp_v1 + 0xb0));
+    temp_v1 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v1 + 0xb0)));
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x282,temp_v1 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v7 + param_2 + (int)temp_v0,0xce);
   }

@@ -1,5 +1,5 @@
 /* NON_MATCHING: the render-stack dirty-clear zero is materialized later than in retail. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/CommonBg/CommonBg.h"
@@ -9,7 +9,6 @@ extern "C" {
 void FUN_001e071c(BtlUiObjC *);
 void renderCtxResetColorScale(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
-extern BtlUiGlobals g_btlUi;
 s32 renderCtxPackPassFlags(u32, u32);
 
 // Draw the lower battle UI only after both texture sets have finished loading.

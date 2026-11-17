@@ -1,4 +1,5 @@
 #include "common.h"
+#include "classes/AllocatorState.h"
 
 extern "C" {
 
@@ -10,15 +11,9 @@ typedef struct AsdMemoryBlock {
     /* 0x08 */ u8 unk08[0x34];
 } AsdMemoryBlock;
 
-typedef struct AsdMemoryLock {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 criticalSection;
-} AsdMemoryLock;
 
-extern AsdMemoryLock DAT_00465120;
-
-void nn_os_CriticalSection_Enter(u32 section);
-void nn_os_CriticalSection_Leave(u32 section);
+void nn_os_CriticalSection_Enter(void *section);
+void nn_os_CriticalSection_Leave(void *section);
 AsdMemoryBlock *FUN_002b24d8(u32 heap, u32 kind, u32 flags, u32 size, s32 tag);
 void asdMemoryTrackAllocation(AsdMemoryBlock *block);
 void rt_memclr(void *dest, u32 size);
@@ -43,7 +38,7 @@ static __inline void *asdMemoryBlockInit(AsdMemoryBlock *block, u32 size, u16 al
 /* Allocates `size` cleared bytes aligned to `alignment` (at least 0x80); the block header sits below. */
 void *asdMemoryAllocAligned(u32 heap, u32 kind, u32 flags, u32 size, u32 alignment, s32 tag)
 {
-    nn_os_CriticalSection_Enter(DAT_00465120.criticalSection);
+    nn_os_CriticalSection_Enter(DAT_00465120.lock);
     if (alignment < 0x80) {
         alignment = 0x80;
     }
@@ -52,7 +47,7 @@ void *asdMemoryAllocAligned(u32 heap, u32 kind, u32 flags, u32 size, u32 alignme
     AsdMemoryBlock *block = FUN_002b24d8(heap, kind, flags, total, tag);
     void *data = asdMemoryBlockInit(block, total, alignment, 0);
     rt_memclr(data, size);
-    nn_os_CriticalSection_Leave(DAT_00465120.criticalSection);
+    nn_os_CriticalSection_Leave(DAT_00465120.lock);
     return data;
 }
 

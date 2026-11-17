@@ -1,9 +1,8 @@
 /* NON_MATCHING: bodies, bitfield id extraction and loop layout match retail; only the prologue differs (retail tests chain before loading g_unite, so selection stays in r0; the build hoists the g_unite load above the test). */
 #include "camp/Unite/UniteGlobals.h"
-#include "shard/Shard004B.h"
+#include "gamedata/SaveSlotRecord.h"
 
 extern "C" {
-BitsAt60 *slotRecordFindById(u32);
 
 // Test whether a selected fusion pair or chain contains a unit with flag bit two.
 u32 FUN_002ac2b4(s32 selection, s32 chain)
@@ -28,8 +27,8 @@ u32 FUN_002ac2b4(s32 selection, s32 chain)
                 id = work->pairList.pairs[selection].ids.secondId;
             }
             if (id != 0) {
-                BitsAt60 *record = slotRecordFindById(id);
-                if (record != NULL && (record->bits & 4) != 0) {
+                SlotRecordA *record = slotRecordFindById(id);
+                if (record != NULL && (record->ailments & 4) != 0) {
                     result = 1;
                     break;
                 }
@@ -40,8 +39,8 @@ u32 FUN_002ac2b4(s32 selection, s32 chain)
         const ChainSelectionView *view = reinterpret_cast<const ChainSelectionView *>(g_unite);
         for (s32 index = 0; index < 12; ++index) {
             if (view->groups[selection].ids[index] != 0) {
-                BitsAt60 *record = slotRecordFindById(view->groups[selection].ids[index]);
-                if (record != NULL && (record->bits & 4) != 0) {
+                SlotRecordA *record = slotRecordFindById(view->groups[selection].ids[index]);
+                if (record != NULL && (record->ailments & 4) != 0) {
                     result = 1;
                     break;
                 }

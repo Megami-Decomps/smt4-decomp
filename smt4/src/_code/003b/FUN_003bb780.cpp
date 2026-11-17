@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation (retail addresses the cursor flags through a base register at menu+0x600 and keeps constants in different registers) */
+#include "ui/UiSpriteApi.h"
 #include "shard/S1ListMenu.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029.h"
@@ -6,12 +7,9 @@
 extern "C" {
 
 f32 jobGetScalarValue(void);
-s32 vec2GetXInt(Vec2Int *v);
-s32 vec2GetYInt(Vec2Int *v);
 void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 f32 *asdTMTexTableEntryAt(s32 group, s32 id);
 void efctSetSpeed(f32 alpha);
-f32 vec2GetSpeed(const void *animation);
 s32 rangeLimitMin(ListMenu *menu);
 u32 flaggedEntryGetValueByState(ListMenu *menu);
 u32 flaggedValueHolderGetTotal(ListMenu *menu);
@@ -28,8 +26,8 @@ void FUN_003bb780(ListMenu *menu)
 
     f32 savedAlpha = jobGetScalarValue();
     Vec2Int *position = &menu->position;
-    s32 x = vec2GetXInt(position);
-    s32 y = vec2GetYInt(position);
+    s32 x = vec2GetXInt((UiSpriteState *)position);
+    s32 y = vec2GetYInt((UiSpriteState *)position);
 
     texDrawTableEntryAtStoredOrigin(2, 42, 31, x, y, 31);
     texDrawTableEntryAtStoredOrigin(2, 42, 32, x, y, 31);
@@ -37,8 +35,8 @@ void FUN_003bb780(ListMenu *menu)
     s16 *frame = (s16 *)asdTMTexTableEntryAt(42, 33);
     s16 offsetX = frame[4];
     s16 offsetY = frame[5];
-    s32 iconX = vec2GetXInt(position) + offsetX;
-    s32 iconY = vec2GetYInt(position) + offsetY;
+    s32 iconX = vec2GetXInt((UiSpriteState *)position) + offsetX;
+    s32 iconY = vec2GetYInt((UiSpriteState *)position) + offsetY;
 
     efctSetSpeed(1.0f);
     texDrawCompositeSprite(2, 42, menu->iconA, iconX, iconY, 31);

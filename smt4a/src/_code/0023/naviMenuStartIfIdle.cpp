@@ -1,8 +1,8 @@
 #include "shard/NaviMain.h"
+#include "mapnavi/NaviMainGlobals.h"
 #include "common.h"
 
 extern "C" {
-extern NaviMainA *g_naviMain;
 
 void stateHandlerCallExtended(u8 *menu);
 s32 sceneTexturesAreLoaded(void);

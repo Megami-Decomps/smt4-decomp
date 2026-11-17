@@ -27,23 +27,12 @@ struct AocConfirmMenu {
     /* 0x358 */ u32 script;
 };
 
-struct AocConfirmMain {
-    /* 0x000 */ u8 unk000[0x754];
-    /* 0x754 */ u32 flags;
-};
-
-struct AocConfirmMainModes {
-    /* 0x000 */ u8 unk000[0xD50];
-    /* 0xD50 */ u8 mode;
-};
-
 struct AocConfirmDisplay {
     /* 0x0000 */ u8 unk0000[0x450C];
     /* 0x450C */ u8 flag;
 };
 
 extern "C" {
-extern AocConfirmMain *g_aocMain;
 extern AocConfirmDisplay *g_aocDisplay;
 
 void buttonHelpSetEnabled(u32 value);
@@ -95,7 +84,7 @@ void AocMenu::runConfirmation()
         g_aocDisplay->flag = 0;
         ifTouchRegionClearAll(menu->touchRegions);
         FUN_00233818(menu->notice);
-        ((AocConfirmMainModes *)g_aocMain)->mode = 2;
+        g_aocMain->mode = 2;
         scrScriptProcessStartEntry(menu->script, tableGroupFindEntryIndex(menu->resource, "aoc_IsConnect"));
         aocMenuSetButtonHelp(menu, 0, 1);
         menu->step = 1;

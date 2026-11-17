@@ -1,16 +1,12 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: native depth getter and grouped snapshots now agree; owner/index saved registers and header destination base still differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/TextureDrawCall.h"
 
-struct SpritePositionView { u8 unk00[0x20]; f32 depth; u8 unk24[0x68]; };
 struct PositionSnapshot { s32 x, y; f32 depth; };
 struct SpriteSnapshot { PositionSnapshot position; u8 unk0c[0x38]; };
 
 extern "C" {
-void uiSpriteAdvanceAnimation(void *sprite, f32 delta);
-s32 vec2GetYInt(const void *sprite);
-f32 vec2GetSpeed(const void *sprite);
 
 // Advance the revealed sprites and save their positions as transition origins.
 void FUN_00420a2c(void *context)
@@ -19,8 +15,8 @@ void FUN_00420a2c(void *context)
         SaveLoadTransitionPrefixA state;
         struct {
             u8 unk000[0x474];
-            SpritePositionView header;
-            SpritePositionView entries[1];
+            UiSpriteState header;
+            UiSpriteState entries[1];
         } sprites;
         struct {
             u8 unk000[0x624];

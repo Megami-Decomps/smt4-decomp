@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/CommandWindow.h"
 #include "code/Code0020.h"
 

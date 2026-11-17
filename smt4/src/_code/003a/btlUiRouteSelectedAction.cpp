@@ -1,5 +1,5 @@
 /* NON_MATCHING: target-kind compare now matches retail (bitfield); retail shares one `requiresTargetSelection = 1` store between all arms and reads the flag back through a pool-constant offset, ours duplicates the store and reuses the flag pointer. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "gamedata/SkillDataLookup.h"
 #include "gamedata/ConsumableRecord.h"
 
@@ -11,7 +11,6 @@ struct BattleActionDetails {
 };
 
 extern "C" {
-extern BtlUiGlobals g_btlUi;
 void btlCommandMenuResolveLayout(BtlUiObjC *, s16 *kind, s16 *id);
 void FUN_00218480(BtlUiObjC *);
 void FUN_0028bfe4(BtlUiObjC *);

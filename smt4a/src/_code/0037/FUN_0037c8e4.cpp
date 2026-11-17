@@ -1,11 +1,9 @@
+#include "ui/UiSpriteApi.h"
 #include "ui/MessageMainA.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 u32 gameDataBlocks2GetWord4(void);
-void uiSpriteStateInitFromSource(void* sprite, s32 kind, u32 flags, void* data,
-                  s32 count, f32 scale);
-void pairSetFirstResetSecond(void* pair, s32 first);
 }
 
 // Initialize the message state from the selected data source and prepare its sprite.

@@ -1,25 +1,22 @@
 /* NON_MATCHING: slide initialization block layout, signed-motion arithmetic and completion normalization differ. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
-void FUN_002b1e08(UiSpriteState *);
-void controllerUpdateUniformScaleTrack(UiSpriteState *);
-void spriteSequencePlayerAdvance(UiSpriteState *);
 
 s32 FUN_00296284(UiSpriteState *sprite, s32 reverse, s32 vertical)
 {
-    s32 frame = sprite->motionFrame;
+    s32 frame = (s16)sprite->positionFrame;
     if (frame == 0) {
         if (!vertical) {
-            sprite->slide.x = 320 * 4096;
-            sprite->slide.y = 0;
+            sprite->x = 320 * 4096;
+            sprite->y = 0;
         } else {
-            sprite->slide.y = 320 * 4096;
-            sprite->slide.x = 0;
+            sprite->y = 320 * 4096;
+            sprite->x = 0;
         }
         if (reverse) {
-            sprite->slide.x = -sprite->slide.x;
-            sprite->slide.y = -sprite->slide.y;
+            sprite->x = -sprite->x;
+            sprite->y = -sprite->y;
         }
     }
     s32 speed = 75;
@@ -31,31 +28,31 @@ s32 FUN_00296284(UiSpriteState *sprite, s32 reverse, s32 vertical)
     if (reverse)
         speed = -speed;
     if (vertical) {
-        sprite->slide.y -= speed * 4096;
-        s32 position = sprite->slide.y >> 12;
+        sprite->y -= speed * 4096;
+        s32 position = sprite->y >> 12;
         if (reverse ? position >= 0 : position <= 0) {
-            sprite->slide.y = 0;
-            sprite->completion.horizontal = 1;
+            sprite->y = 0;
+            sprite->positionDone = 1;
         } else {
-            sprite->animationFlags.completed = 0;
+            sprite->finished = 0;
         }
     } else {
-        sprite->slide.x -= speed * 4096;
-        s32 position = sprite->slide.x >> 12;
+        sprite->x -= speed * 4096;
+        s32 position = sprite->x >> 12;
         if (reverse ? position >= 0 : position <= 0) {
-            sprite->slide.x = 0;
-            sprite->completion.horizontal = 1;
+            sprite->x = 0;
+            sprite->positionDone = 1;
         } else {
-            sprite->animationFlags.completed = 0;
+            sprite->finished = 0;
         }
     }
-    sprite->motionFrame = frame + 1;
+    sprite->positionFrame = frame + 1;
     FUN_002b1e08(sprite);
     controllerUpdateUniformScaleTrack(sprite);
     spriteSequencePlayerAdvance(sprite);
-    sprite->animationFlags.completed = sprite->completion.horizontal && sprite->completion.vertical &&
-                                      sprite->completion.scale && sprite->completion.opacity;
-    sprite->visibility.active = 1;
-    return sprite->animationFlags.completed;
+    sprite->finished = sprite->positionDone && sprite->alphaDone &&
+                                      sprite->scaleDone && sprite->frameDone;
+    sprite->updated = 1;
+    return sprite->finished;
 }
 }

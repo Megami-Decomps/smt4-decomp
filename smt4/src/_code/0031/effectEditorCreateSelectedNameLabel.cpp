@@ -1,4 +1,5 @@
 /* NON_MATCHING: the item-index sum now matches retail (named position local, extraOffset + index); remaining: the unk14 store loads its constant (9) before reloading the node pointer, retail reloads the pointer first. */
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"

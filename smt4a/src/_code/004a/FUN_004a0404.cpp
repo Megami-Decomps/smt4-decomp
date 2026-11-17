@@ -1,14 +1,14 @@
 /* NON_MATCHING: skill ID remains immediate rather than retail's preserved registers; skill-loop and party-register allocation differ. */
-#include "shard/Shard0031.h"
-#include "shard/Shard0032.h"
-#include "shard/Shard004B.h"
-#include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotRecord.h"
+#include "code/Code004b_Smt4a.h"
 #include "gamedata/SaveSlotTable.h"
 
-static __inline bool recoveryUnitHasSkill(const UnitRecord *unit, u16 skill)
+/* The skill list is at 0x34 in both the unit record and the player's record (PlayerDataA); the player is passed as a unit record. */
+static __inline bool recoveryUnitHasSkill(const SlotRecordA *unit, u16 skill)
 {
     for (s32 index = 0; index < 8; ++index) {
-        if (unit->skillList.skills[index] == skill)
+        if (unit->skills[index] == skill)
             return true;
     }
     return false;
@@ -18,18 +18,16 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_003df57c(u32 skill, u32 mode);
 s32 gameSlotTableFindFree();
-UnitRecord *gameGetSlotRecord(s32 slot);
-s32 skillGetAdjustedCost(UnitRecord *unit, u32 skill);
 
 // Check whether the player or a usable party demon can afford the recovery skill.
 u32 FUN_004a0404()
 {
     if (!gameFlagIsSet(0x401))
         return 0;
-    UnitRecord *player = reinterpret_cast<UnitRecord *>(gameGetPlayerData());
-    if (recoveryUnitHasSkill(player, 0x8c)) {
-        player = reinterpret_cast<UnitRecord *>(gameGetPlayerData());
-        if (FUN_003df57c(0x8c, 1) < static_cast<s16>(player->unk2C))
+    PlayerDataA *player = gameGetPlayerData();
+    if (recoveryUnitHasSkill(reinterpret_cast<const SlotRecordA *>(player), 0x8c)) {
+        player = gameGetPlayerData();
+        if (FUN_003df57c(0x8c, 1) < static_cast<s16>(player->mp))
             return 1;
     }
     s32 slotCount = gameSlotTableFindFree();
@@ -37,15 +35,14 @@ u32 FUN_004a0404()
     for (s32 slot = 0; slot < slotCount; ++slot) {
         if (slots[slot] < 0)
             continue;
-        UnitRecord *unit = gameGetSlotRecord(slots[slot]);
+        SlotRecordA *unit = gameGetSlotRecord(slots[slot]);
         if (!unit)
             continue;
         if (recoveryUnitHasSkill(unit, 0x8c) &&
-            skillGetAdjustedCost(unit, 0x8c) < static_cast<s16>(unit->unk2C)) {
-            const ScaledRecordValues *values = reinterpret_cast<const ScaledRecordValues *>(unit);
-            if (values->flags & 2)
+            skillGetAdjustedCost(unit, 0x8c) < static_cast<s16>(unit->mp)) {
+            if (unit->ailments & 2)
                 return 0;
-            if (values->flags & 0x400)
+            if (unit->ailments & 0x400)
                 return 0;
             return 1;
         }

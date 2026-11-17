@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail returns directly from every state (no shared epilogue), keeps the process in r4 with g_aocMain in r6 and copies the result through two stack records with ldm/stm; this build merges exits and reuses fewer registers. */
 #include "classes/AocMenu.h"
+#include "addon/aocMain.h"
+#include "classes/Obj422214Owner.h"
 #include "code/Code0023.h"
 #include "common.h"
 
@@ -40,13 +42,7 @@ struct AocMenuProcess {
     /* 0x358 */ void *script;
 };
 
-struct AocGlobals {
-    /* 0x000 */ u8 unk000[0x678];
-    /* 0x678 */ u8 *units;
-};
-
 extern "C" {
-extern AocGlobals *g_aocMain;
 
 void aocLoadingTaskStart(AocMenuProcess *process, s32 value);
 void aocMenuSetButtonHelp(AocMenuProcess *process, s32 a, s32 b);
@@ -71,7 +67,7 @@ void AocMenu::runScriptMenu()
 {
     AocMenuProcess * process = reinterpret_cast<AocMenuProcess *>(this);
     RequestParameters record;
-    AocGlobals *aoc = g_aocMain;
+    AocMain *aoc = g_aocMain;
     switch (process->phase) {
     case 0:
         process->flags |= 0x10000;
@@ -86,7 +82,7 @@ void AocMenu::runScriptMenu()
             AocMenuObject *object = (AocMenuObject *)&process->unk20C;
             FUN_00233fcc(object, 3);
             process->active = object;
-            object->result[4] = *(u16 *)(aoc->units + flaggedValueHolderGetTotal(process->holder) * 0x9c8 + 0x9aa);
+            object->result[4] = aoc->records[flaggedValueHolderGetTotal(process->holder)].contentId;
             process->phase = 2;
             return;
         }

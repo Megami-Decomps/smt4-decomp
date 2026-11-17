@@ -1,5 +1,6 @@
 /* NON_MATCHING: only register assignment differs: retail builds the description through r1 and puts the constant 0 argument in r1 just before FUN_002b3acc, armcc here uses r0 and sets r1 early (and loads r8 later). */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "gfx/ModelBoneLookup.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/asdMemoryGetAllocatorA.h"
 
@@ -25,10 +26,10 @@ struct AsdGfxSettings {
 };
 extern AsdGfxSettings g_gfxSettings;
 
-void *FUN_002b3acc(AsdMdlBuildDesc *desc, s32 mode, u32 value, void *allocator);
-void FUN_002fb604(void *model);
+AsdMdlSceneNode *FUN_002b3acc(AsdMdlBuildDesc *desc, s32 mode, ModelBoneResource *resource, void *allocator);
+void FUN_002fb604(AsdMdlSceneNode *sceneNode);
 void FUN_002a9244(AsdMdlNode *node);
-void FUN_001457ec(AsdMdlNode *node, s32 value);
+void FUN_001457ec(AsdMdlNode *node, u8 *data);
 void *asdMemoryAlloc(u32 size, u32 alignment, u32 flags, u32 bytes, u32 enabled);
 
 // Copy a model node: build the model for the copy (a shared or a fresh one), take a reference on
@@ -36,36 +37,36 @@ void *asdMemoryAlloc(u32 size, u32 alignment, u32 flags, u32 bytes, u32 enabled)
 void asdMdlNodeCopyData(AsdMdlNode *dest, AsdMdlNode *source, s32 mode)
 {
     if (mode == 1) {
-        AsdMdlResource *resource = source->resource;
-        resource->state->flags->flags |= 1;
+        AsdMdlSceneNode *sceneNode = source->sceneNode;
+        sceneNode->skeleton->resource->flags |= 1;
         void *allocator = asdMemoryGetAllocatorA();
-        u32 handle = source->resource->unk008;
+        ModelBoneResource *handle = source->sceneNode->boneResource;
         AsdMdlBuildDesc desc;
-        desc.unk1c = source->resource->state;
-        desc.unk14 = source->resource;
-        desc.unk18 = source->resource;
-        dest->resource = (AsdMdlResource *)FUN_002b3acc(&desc, 0, handle, allocator);
+        desc.unk1c = source->sceneNode->skeleton;
+        desc.unk14 = source->sceneNode;
+        desc.unk18 = source->sceneNode;
+        dest->sceneNode = FUN_002b3acc(&desc, 0, handle, allocator);
     } else if (mode == 0) {
         void *allocator = asdMemoryGetAllocatorA();
-        u32 handle = source->resource->unk008;
+        ModelBoneResource *handle = source->sceneNode->boneResource;
         AsdMdlBuildDesc desc;
         desc.unk10 = 0x834;
-        dest->resource = (AsdMdlResource *)FUN_002b3acc(&desc, 0, handle, allocator);
+        dest->sceneNode = FUN_002b3acc(&desc, 0, handle, allocator);
     }
-    if (source->unk00 & 2) {
-        FUN_002fb604(dest->resource);
-        dest->unk00 |= 2;
+    if (source->flags & 2) {
+        FUN_002fb604(dest->sceneNode);
+        dest->flags |= 2;
         g_gfxSettings.sharedModels++;
     }
-    dest->data = source->data;
-    (*(s32 *)dest->data)++;
+    dest->file = source->file;
+    dest->file->refCount++;
     dest->count = 1;
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 0x1244);
     dest->table = (void **)asdMemoryAlloc(0x100, 0x100, 0, dest->count << 2, 1);
-    dest->table[0] = dest->resource;
+    dest->table[0] = dest->sceneNode;
     if (mode == 0) {
         FUN_002a9244(dest);
     }
-    FUN_001457ec(dest, ((s32 *)dest->data)[3]);
+    FUN_001457ec(dest, dest->file->data);
 }
 }

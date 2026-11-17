@@ -1,8 +1,8 @@
 #include "gamedata/GameSaveDataA.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
-PartySlotA* partyGetSlot(u32 index);
 u32 partySlotIsOccupied(const PartySlotA* slot);
 void FUN_003e4e4c(u16 id);
 

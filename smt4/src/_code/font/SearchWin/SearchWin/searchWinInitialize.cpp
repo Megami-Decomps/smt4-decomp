@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "font/SearchWin/SearchWin.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
@@ -20,8 +21,6 @@ void FUN_001acdd8(u32);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
 void drawParameterBlockClear(UiResourceParameters *);
 
-void uiSpriteStateInitFromSource(void *, s32, s32, UiResourceParameters *, s32, f32);
-void spriteStartAnimationByIndex(void *, s32);
 
 // Initialize the search-window process, both stereo draw jobs and its animated parameter block.
 void searchWinInitialize(void)
@@ -44,7 +43,7 @@ void searchWinInitialize(void)
     DrawingView *draw = reinterpret_cast<DrawingView *>(work);
     drawParameterBlockClear(&draw->parameters);
     paramsInit(&draw->parameters, DAT_00403b80, sizeof(DAT_00403b80), DAT_00403ba4, sizeof(DAT_00403ba4), 0, 0, 0, 0, DAT_00403bc8, sizeof(DAT_00403bc8));
-    uiSpriteStateInitFromSource(draw->animation, 14, 135, &draw->parameters, 1, 1.0f);
-    spriteStartAnimationByIndex(draw->animation, 0);
+    uiSpriteStateInitFromSource((UiSpriteState *)draw->animation, 14, 135, &draw->parameters, 1, 1.0f);
+    spriteStartAnimationByIndex((UiSpriteState *)draw->animation, 0);
 }
 }

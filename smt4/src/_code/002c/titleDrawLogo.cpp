@@ -3,6 +3,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
 #include "camp/RenderCtxTitle.h"
+#include "ui/UiSpriteApi.h"
 
 /* The title logo: four effect elements and the flags that enable its two draw passes. */
 struct TitleLogo {
@@ -18,7 +19,6 @@ extern "C" {
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *element);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 
 #define TITLE_LOGO_STEREO_SCALE 0.29f
@@ -35,11 +35,11 @@ void titleDrawLogo(TitleLogo *logo)
     frame = (s32)renderCtxCalculateStereoParallax(g_titleScene, TITLE_LOGO_STEREO_SCALE);
     if (logo->drawGlow != 0) {
         const f32 minimumScale = 0.0f;
-        f32 first = vec2GetSpeed(&logo->elements[0]);
+        f32 first = vec2GetSpeed((const UiSpriteState *)&logo->elements[0]);
         if (first > minimumScale) {
             efctSetSpeed(first);
             texDrawTableEntryAtStoredOrigin(2, 0x14, 1000, frame, 0, 0x1F);
-            f32 third = vec2GetSpeed(&logo->elements[2]);
+            f32 third = vec2GetSpeed((const UiSpriteState *)&logo->elements[2]);
             if (third > minimumScale) {
                 efctSetSpeed(third);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));

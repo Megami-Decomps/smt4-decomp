@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail loads the flag address (ldr r7) before `sub sp, #260`; built emits it after the sub */
+#include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W6_W6Match2_TextureHolder.h"
 

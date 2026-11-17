@@ -6,7 +6,6 @@ struct CommandSegmentLink {
     u32 commandCount;
 };
 extern "C" {
-extern AsdGfxContext g_asdGfxContext;
 extern u32 *g_commandBufferCursor;
 extern u32 g_commandBufferEnd;
 void globalCriticalSectionEnterForward(void);
@@ -67,9 +66,9 @@ void FUN_0017d43c(void)
     buffer->committedOffset = buffer->writeOffset;
     globalCriticalSectionEnterForward();
     ++buffer->listCount;
-    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled != 0 &&
-        g_asdGfxContext.submission.pending == 0) {
-        g_asdGfxContext.submission.pending = 1;
+    if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submitEnabled != 0 &&
+        g_asdGfxContext.submitPending == 0) {
+        g_asdGfxContext.submitPending = 1;
         FUN_001963e0();
     }
     globalCriticalSectionLeaveForward();

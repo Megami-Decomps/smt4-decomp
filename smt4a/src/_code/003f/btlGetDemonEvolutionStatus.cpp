@@ -8,7 +8,7 @@ static __inline u8 demonEvolutionStatus(const UnitRecord *unit, const NkmBaseRec
 {
     u8 status = 1;
     if (evolution->evolutionTarget != 0 && gameStockContainsEntry(evolution->evolutionTarget) == 0) {
-        status = evolution->evolutionLevel <= unit->unk64 ? 0 : 2;
+        status = evolution->evolutionLevel <= unit->level ? 0 : 2;
     }
     return status;
 }

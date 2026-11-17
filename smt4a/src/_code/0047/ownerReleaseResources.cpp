@@ -1,19 +1,20 @@
 #include "addon/AocBufferRequest.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
 void asdMemFree(void *memory);
 
 /* Releases the object and the buffer an owner holds. */
-void ownerReleaseResources(AocApplicationRequestView *owner)
+void ownerReleaseResources(AocMain *owner)
 {
-    if (owner->auxiliary != NULL) {
-        delete owner->auxiliary;
-        owner->auxiliary = NULL;
+    if (owner->itemRequest != NULL) {
+        delete owner->itemRequest;
+        owner->itemRequest = NULL;
     }
-    if (owner->auxiliaryBuffer != NULL) {
-        asdMemFree(owner->auxiliaryBuffer);
-        owner->auxiliaryBuffer = NULL;
+    if (owner->itemBuffer != NULL) {
+        asdMemFree(owner->itemBuffer);
+        owner->itemBuffer = NULL;
     }
 }
 

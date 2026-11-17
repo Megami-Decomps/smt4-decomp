@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "code/Code003f.h"
+#include "ui/UiSpriteApi.h"
 
 struct MenuLayerTrack {
     u8 unk00[0x20];
@@ -18,31 +19,28 @@ struct MenuLayerComposition {
     MenuLayerTrack background;
 };
 extern "C" {
-s32 vec2GetXInt(MenuLayerTrack *track);
-s32 vec2GetYInt(MenuLayerTrack *track);
 void efctSetSpeed(f32 alpha);
 void FUN_003f54c4(MenuLayerComposition *owner, s32 x, s32 y, f32 alpha);
 void FUN_003f61b4(MenuLayerComposition *owner, s32 x, s32 y, f32 alpha);
-f32 vec2GetSpeed(const void *track);
 
 /* Draws background glyphs followed by the positioned, faded content and its overlay. */
 void FUN_003f6e24(MenuLayerComposition *owner, s32 y, u32 color, f32 alpha)
 {
-    vec2GetXInt(&owner->background);
-    vec2GetYInt(&owner->background);
-    vec2GetSpeed(&owner->background);
+    vec2GetXInt((const UiSpriteState *)&owner->background);
+    vec2GetYInt((const UiSpriteState *)&owner->background);
+    vec2GetSpeed((const UiSpriteState *)&owner->background);
     y += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(alpha);
     texDrawTableEntryAtStoredOrigin(2, 0x31, 0, y, color, 0x8D);
     texDrawTableEntryAtStoredOrigin(2, 0x31, 1, y, color, 0x8D);
     texDrawTableEntryAtStoredOrigin(2, 0x31, 9, y, color, 0x8D);
-    s32 x = vec2GetXInt(&owner->position);
-    s32 positionY = vec2GetYInt(&owner->position);
-    f32 contentAlpha = vec2GetSpeed(&owner->position);
+    s32 x = vec2GetXInt((const UiSpriteState *)&owner->position);
+    s32 positionY = vec2GetYInt((const UiSpriteState *)&owner->position);
+    f32 contentAlpha = vec2GetSpeed((const UiSpriteState *)&owner->position);
     FUN_003f5b14(owner, x, positionY, 0x17, 0x1A, contentAlpha);
-    s32 offsetX = vec2GetXInt(&owner->offset) + x;
-    s32 offsetY = vec2GetYInt(&owner->offset) + positionY;
-    contentAlpha *= vec2GetSpeed(&owner->offset);
+    s32 offsetX = vec2GetXInt((const UiSpriteState *)&owner->offset) + x;
+    s32 offsetY = vec2GetYInt((const UiSpriteState *)&owner->offset) + positionY;
+    contentAlpha *= vec2GetSpeed((const UiSpriteState *)&owner->offset);
     FUN_003f54c4(owner, offsetX, offsetY, contentAlpha);
     FUN_003f61b4(owner, x, positionY, contentAlpha);
 }

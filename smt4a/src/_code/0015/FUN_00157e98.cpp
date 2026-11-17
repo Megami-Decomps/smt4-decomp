@@ -4,13 +4,13 @@
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "AsdSDK/Source/Gfx/AsdGfxContext.h"
 
 extern "C" {
 u32 gxIsStereoscopic3dEnabled(void);
 s32 FUN_0019a2ac(u32 *destination, const void *source, u32 command);
 s32 FUN_0019a270(u32 *destination, const void *source, u32 command);
 s32 asdModelCommitCommandRange(u32 *begin, u32 *end);
-s32 FUN_0017cdcc(u32 resource, u32 count);
 s32 renderCtxResetFrameState(RenderCtxA *context);
 
 u32 FUN_00157e98(ModelCommandPrefixA *model, const u8 *commandData)
@@ -56,7 +56,7 @@ u32 FUN_00157e98(ModelCommandPrefixA *model, const u8 *commandData)
 
     const u8 *selectedResource = reinterpret_cast<const u8 *>(model)
         + static_cast<u32>(model->resourceIndex) * 0x4cu + 0x48u;
-    FUN_0017cdcc(*reinterpret_cast<const u32 *>(selectedResource), model->count);
+    FUN_0017cdcc(*reinterpret_cast<const void *const *>(selectedResource), model->count);
     renderCtxResetFrameState(g_renderCtx);
     return 1;
 }

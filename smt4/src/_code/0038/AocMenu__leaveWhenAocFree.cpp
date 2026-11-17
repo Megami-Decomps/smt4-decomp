@@ -2,8 +2,6 @@
 #include "addon/aocMain.h"
 #include "classes/Obj422594.h"
 
-extern "C" AocMain* g_aocMain;
-
 static __inline bool aocOperationBusy(u32 flags)
 {
     if (flags & 4)

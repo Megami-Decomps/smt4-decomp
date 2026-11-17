@@ -3,9 +3,9 @@
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
-f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
 
 // Trigger the first nearby waiting map marker and place its appearance effect above the player.
 void FUN_002e8a78(f32 x, f32 y, f32 z)

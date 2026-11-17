@@ -1,18 +1,15 @@
 #include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0028.h"
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "camp/CampState.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct SpriteInfo;
 extern "C" {
 void efctSetSpeed(f32 speed);
-f32 vec2GetSpeed(const void *object);
 void texDrawCompositeSprite(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 s32 ifTouchGetSelectionModeForRegion(u32 region);
-s32 vec2GetXInt(UiSpriteState* animation);
-s32 vec2GetYInt(UiSpriteState* animation);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 
 void FUN_0028f694(s32 x, s32 y, u32 region)

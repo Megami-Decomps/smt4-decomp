@@ -3,15 +3,14 @@
 
 extern "C" {
 
-void FUN_001b3428(AocObjA *obj);
+void FUN_001b3428(AocWorkerThread *obj);
 
-extern AocMain *g_aocMain;
 extern AocDisplay *g_aocDisplay;
 
 void aocClearDisplayFlag(void *system)
 {
     g_aocDisplay->operationActive = 0;
-    FUN_001b3428(&g_aocMain->objA);
+    FUN_001b3428(&g_aocMain->thread);
 }
 
 } /* extern "C" */

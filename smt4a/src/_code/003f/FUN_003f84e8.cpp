@@ -1,5 +1,5 @@
 /* NON_MATCHING: resource bundle relocation now agrees; paramsInit outgoing argument-store scheduling still differs. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct SpritePanelResourceBundle {
@@ -16,9 +16,6 @@ extern "C" {
 extern const SpritePanelResourceBundle g_spritePanelResourceBundle;
 void paramsClearPacket(UiResourceParameters *);
 
-void uiSpriteStateInitFromSource(UiSpriteState *, u32, s32, UiResourceParameters *, u32, f32);
-void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
-void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
 
 /* Load the shared animation packet and initialize this panel's individual sprite states. */
 void FUN_003f84e8(void *work)

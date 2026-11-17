@@ -1,25 +1,21 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-#include "AsdSDK/asdMdlManagerCreateFromSource.h"
 
 extern "C" {
 
-AsdMdlObject *asdMdlObjectNew(void);
-void *asdMdlBuildNodeData(void *source, void *arg);
-void asdMdlNodeInit(AsdMdlNode *node, u32 param);
-void asdMdlObjectBuildBounds(AsdMdlObject *obj);
+AsdModelFile *asdMdlBuildNodeData(void *source, u32 size);
 void asdListAdd(u32 *list, AsdMdlObject *obj, s32 arg);
 
 extern u32 g_asdMdlList;
 
 /* Creates a model object from a model source: builds its data, initializes the shared node with
- * `param`, registers the object and adds it to the model list. */
-AsdMdlObject *asdMdlManagerCreateFromSource(void *source, void *arg, u32 param)
+ * `drawMask`, registers the object and adds it to the model list. */
+AsdMdlObject *asdMdlManagerCreateFromSource(void *source, u32 size, u32 drawMask)
 {
     AsdMdlObject *obj = asdMdlObjectNew();
 
-    obj->node->param = param;
-    obj->node->data = asdMdlBuildNodeData(source, arg);
-    asdMdlNodeInit(obj->node, param);
+    obj->node->drawMask = drawMask;
+    obj->node->file = asdMdlBuildNodeData(source, size);
+    asdMdlNodeInit(obj->node, drawMask);
     asdMdlObjectBuildBounds(obj);
     asdListAdd(&g_asdMdlList, obj, 0);
     return obj;

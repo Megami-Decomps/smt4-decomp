@@ -1,4 +1,5 @@
 /* NON_MATCHING: same block layout and calls as retail and the four cleared target slots now use the retail immediate addressing; the build still hoists the shared `1` state argument into r2 before the button compares, where retail materialises it in each block. */
+#include "ui/UiSpriteApi.h"
 #include "battle/BattleCommandMenu.h"
 #include "shard/PlayScene.h"
 
@@ -10,7 +11,6 @@ void FUN_00297b94(PlayScene *scene, u32 first, u32 second);
 u32 FUN_00297ca4(PlayScene *scene, u32 flag);
 void playSceneSetState(PlayScene *scene, s32 state, s32 flag);
 void flaggedEntrySetValueB(void *entry, s32 value);
-void spriteStartAnimationByIndex(void *sprite, s32 index);
 void FUN_002cfed0(PlayScene *scene, u32 argument, s32 flag, u32 other);
 
 // Handles a button press (`button`, -1: none) on the battle command menu: moves to the matching menu state, or hands the
@@ -21,9 +21,9 @@ void FUN_00297f1c(PlayScene *scene, u32 argument, s32 button, u32 other)
         scene->unk305C = 0;
         FUN_0028e9ec(scene);
         flaggedEntrySetValueB(&scene->targeting.selector, 0);
-        spriteStartAnimationByIndex(reinterpret_cast<u8 *>(scene) + 0x20, 0);
+        spriteStartAnimationByIndex((UiSpriteState *)(reinterpret_cast<u8 *>(scene) + 0x20), 0);
         for (s32 i = 0; i < 8; i++) {
-            spriteStartAnimationByIndex(reinterpret_cast<u8 *>(scene) + 0x138 + i * 0x8c, 0);
+            spriteStartAnimationByIndex((UiSpriteState *)(reinterpret_cast<u8 *>(scene) + 0x138 + i * 0x8c), 0);
         }
         scene->unk3054 = 0x2d;
         playSceneSetState(scene, 0x10, 1);

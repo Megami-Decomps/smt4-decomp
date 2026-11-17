@@ -14,7 +14,7 @@ static u16 skillSortKey(const SkillListEntry *entry)
     if (idIsAbove400(entry->skillId)) {
         return passiveSkillLookupRecord(entry->skillId)->sortKey;
     }
-    return reinterpret_cast<const ActiveSkillRecord *>(skillDataFindById(entry->skillId))->sortKey;
+    return skillDataFindById(entry->skillId)->sort.sortKey;
 }
 
 /* Tie-break by the holding units' sort keys (0 without a unit), then itemSortCompareRankThenKey (FUN_00219208's body). */

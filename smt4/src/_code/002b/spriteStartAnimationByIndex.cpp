@@ -1,24 +1,20 @@
-#include "shard/W6_W6Match8_AnimatedSprite.h"
-#include "font/ComWin/ComWin.h"
+#include "ui/UiSpriteApi.h"
 
-extern "C" void spriteStartAnimation(SpritePlaybackView *sprite, const SpriteAnimationCommand *animation);
-
-/* The `index`th animation command group: groups are separated by commands whose position key is -1. */
-static inline SpriteAnimationCommand *findSpriteCommand(SpriteAnimationResource *resource, s32 index)
+/* The first command of group `group`: groups are separated by commands whose position key is -1. */
+static __inline SpriteAnimationCommand *findSpriteCommand(UiResourceParameters *resources, s32 group)
 {
-    s32 group = 0;
-    for (u32 i = 0; i < resource->commandBytes / sizeof(SpriteAnimationCommand); ++i) {
-        if (group == index)
-            return &resource->commands[i];
-        if (resource->commands[i].positionKey == -1)
-            ++group;
+    s32 current = 0;
+    for (u32 i = 0; i < resources->commandBytes / sizeof(SpriteAnimationCommand); ++i) {
+        if (current == group)
+            return &resources->commands[i];
+        if (resources->commands[i].positionKey == -1)
+            ++current;
     }
     return NULL;
 }
 
-/* Starts the sprite's `index`th animation command. */
-extern "C" void spriteStartAnimationByIndex(void *object, s32 index)
+/* Runs the sprite's command group `index`. */
+extern "C" void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 index)
 {
-    SpritePlaybackView *sprite = static_cast<SpritePlaybackView *>(object);
-    spriteStartAnimation(sprite, findSpriteCommand(sprite->resource, index));
+    spriteStartAnimation(sprite, findSpriteCommand(sprite->resources, index));
 }

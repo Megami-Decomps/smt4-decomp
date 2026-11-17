@@ -1,4 +1,5 @@
 /* NON_MATCHING: Obj4223f8::confirmSelection matches in logic, calls and the virtual panel rebind; retail keeps this+0x500 in a register for the mode flag, passes the shared strings through registers hoisted early, and addresses the state/substate pair with strd, so scheduling and frame size (68 vs 76) differ. */
+#include "ui/UiSpriteApi.h"
 #include "classes/Obj4223f8.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -39,8 +40,6 @@ extern const char DAT_0040226c[];   /* the "unknown" placeholder name */
 extern const char DAT_00402274[];   /* "%s%s" */
 extern const char *DAT_0043d990[];
 s32 uiAnimationAdvanceChannel(void *channels, s32 index);
-s32 vec2GetYInt(void *point);
-s32 vec2GetXInt(void *point);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 void buttonHelpSetPreset(s32 preset);
 const char *dataLookupDisplayName(u8 *scratch, u32 id);
@@ -57,8 +56,8 @@ void Obj4223f8::confirmSelection()
     Obj4223f8HandlerView *self = reinterpret_cast<Obj4223f8HandlerView *>(this);
     s32 advanced = uiAnimationAdvanceChannel(self->channels, selectedIndex);
     u8 *point = self->points + selectedIndex * 0x8C;
-    s32 y = vec2GetYInt(point);
-    pointConvertToFloat(&self->cursor, vec2GetXInt(point), y);
+    s32 y = vec2GetYInt((UiSpriteState *)point);
+    pointConvertToFloat(&self->cursor, vec2GetXInt((UiSpriteState *)point), y);
     if (advanced == 0) {
         return;
     }

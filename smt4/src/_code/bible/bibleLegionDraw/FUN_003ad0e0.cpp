@@ -1,5 +1,5 @@
 /* NON_MATCHING: allocation debug trace now matches; the state pointer/saved registers (r9 in the build) and the resource packing still differ. */
-#include "ui/UiSpriteState.h"
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -44,8 +44,6 @@ extern const u8 DAT_00402400[];
 u32 FUN_003ac480();
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
-void uiSpriteStateInitFromSource(UiSpriteState *, u32, u32, UiSpriteSource *, u16, f32);
-void uiSpriteSetImageKeyframe(UiSpriteState *, s32 image, s32 frame);
 
 void FUN_003ad0e0()
 {
@@ -85,7 +83,7 @@ void FUN_003ad0e0()
         drawParameterBlockClear(&state->parameters);
         paramsInit(&state->parameters, DAT_004023c4, 0x24, DAT_004023e8, 0x18,
             NULL, 0, NULL, 0, DAT_00402400, 0x70);
-        UiSpriteSource *source = reinterpret_cast<UiSpriteSource *>(&state->parameters);
+        UiResourceParameters *source = reinterpret_cast<UiResourceParameters *>(&state->parameters);
         for (s32 index = 0; index < 2; ++index) {
             uiSpriteStateInitFromSource(&state->sprites[index], 0x23, 0, source, 0x15, 1.0f);
             uiSpriteSetImageKeyframe(&state->sprites[index], 0, 0);

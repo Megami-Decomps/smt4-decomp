@@ -1,8 +1,8 @@
 /* NON_MATCHING: only register numbering differs (retail keeps the usage record in r0/r2 where the build uses r1). */
 #include "sys/AllocationTracking.h"
+#include "classes/AllocatorState.h"
 
 extern "C" {
-extern AllocationTracking DAT_00465120;
 u32 FUN_002b30fc(AllocationHeader *header);
 
 AllocationHeader *FUN_001246cc(void *payload)

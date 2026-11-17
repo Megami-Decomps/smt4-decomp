@@ -1,4 +1,5 @@
 /* NON_MATCHING: global/zero saved registers and the selection-array address scratch register differ. */
+#include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 #include "font/ComWin/ComWin.h"
 
@@ -6,8 +7,7 @@ extern "C" {
 
 
 void ifTouchDecrementTimer(void);
-void timerStart(ButtonHelpDisplayUnit *part, s32 kind, s32 arg);
-void FUN_002a9fdc(ButtonHelpDisplayUnit *part, s32 arg1, s32 arg2);
+void FUN_002a9fdc(UiSpriteState *part, s32 arg1, s32 arg2);
 
 /* Hide the button help panel: hide its buttons, drop (or just count down) its touch regions, close its arrows. */
 void FUN_00289c98(s32 clearTouches)

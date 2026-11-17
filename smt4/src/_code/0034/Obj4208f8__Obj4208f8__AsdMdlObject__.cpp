@@ -23,5 +23,5 @@ Obj4208f8::Obj4208f8(AsdMdlObject *m)
     unkA8 = unk30;
     AsdMdlObject *mdl = model;
     mdl->flags &= ~2u;
-    mdl->node->resource->positionFollowed = 1;
+    mdl->node->sceneNode->positionFollowed = 1;
 }

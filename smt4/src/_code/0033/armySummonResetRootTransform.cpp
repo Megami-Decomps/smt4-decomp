@@ -1,18 +1,17 @@
 #include "shard/W6_W6Match5_ArmySummon.h"
-#include "shard/W4_Match1b_Node.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-void nodeSetTranslation3f(NodeOwner *owner, u32 selector, f32 x, f32 y, f32 z);
-void modelPartSetRotationDegrees(NodeOwner *owner, u32 selector, f32 x, f32 y, f32 z);
+void nodeSetTranslation3f(AsdMdlNode *node, s32 index, NodeVec3 translation);
+void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, NodeVec3 degrees);
 
 // Restore the summoned model's root translation and rotation to zero.
 void armySummonResetRootTransform(ArmySummonState *state)
 {
     if (state->model) {
-        nodeSetTranslation3f(reinterpret_cast<NodeOwner *>(state->model->node),
-                             0, 0.0f, 0.0f, 0.0f);
-        modelPartSetRotationDegrees(reinterpret_cast<NodeOwner *>(state->model->node),
-                     0, 0.0f, 0.0f, 0.0f);
+        NodeVec3 zero = nodeVec3(0.0f, 0.0f, 0.0f);
+        nodeSetTranslation3f(state->model->node, 0, zero);
+        modelPartSetRotationDegrees(state->model->node, 0, zero);
     }
 }
 }

@@ -1,3 +1,4 @@
+#include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/PlaceWin.h"
 #include "AsdSDK/AsdDebug.h"
@@ -28,8 +29,6 @@ u32 taskCreateDraw(const char *name, u32 group, u32, u32,
                    u32 (*draw)(u32), u32, u32, u32 parent);
 void paramsClearPacket(void *packet);
 
-void uiSpriteStateInitFromSource(void *animation, u32 layer, u32 resource, const void *packet, u16 mode, f32 scale);
-void uiSpriteSelectAnim(void *animation, u32 index);
 
 /* Allocate the place caption window, create its update/draw jobs and initialize its animation. */
 void placeWinCreate(void)
@@ -49,7 +48,7 @@ void placeWinCreate(void)
     paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet),
                sPlaceWinPacketA, sizeof(sPlaceWinPacketA), sPlaceWinPacketB, sizeof(sPlaceWinPacketB),
                NULL, 0, NULL, 0, sPlaceWinPacketC, sizeof(sPlaceWinPacketC));
-    uiSpriteStateInitFromSource(window->animation, 8, 0x87, window->parameters.packet, 1, 1.0f);
-    uiSpriteSelectAnim(window->animation, 0);
+    uiSpriteStateInitFromSource((UiSpriteState *)window->animation, 8, 0x87, (UiResourceParameters *)(window->parameters.packet), 1, 1.0f);
+    uiSpriteSelectAnim((UiSpriteState *)window->animation, 0);
 }
 }

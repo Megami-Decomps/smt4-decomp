@@ -1,9 +1,8 @@
 /* Loads the four setting values from the owner's table into the context and refreshes dependent state. */
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 
 extern "C" {
 
-extern BtlUiGlobals g_btlUi;
 
 extern void memFill8(BtlUiSettings *settings, s32 arg);
 extern u16 slotFindNonnegativeRank(u32 owner, s32 index);

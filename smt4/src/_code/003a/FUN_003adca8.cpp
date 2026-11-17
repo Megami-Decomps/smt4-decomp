@@ -1,22 +1,15 @@
 /* NON_MATCHING: readable rebuild of the battle UI's number popup setup (five digit sprites plus two label sprites); the draft's floats arrive in s0-s2 (x, y, z) ahead of three stack ints, which armcc here places the same way, but the digit loop's divisor update and the per-digit sprite id selection are scheduled differently. */
 #include "common.h"
+#include "battle/BtlUiGlobal.h"
+#include "ui/UiSpriteApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* The battle UI's global: a pointer to the popup block at +0x20. */
-struct BattleUiGlobal {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u8 *block;
-};
-
 extern "C" {
-extern BattleUiGlobal g_btlUi;
 
 u32 asdCameraGetSavedRenderPairs(void);
 void FUN_002630e0(f32 *vector, s32 a, u32 stereo);
-void spriteStartAnimationByIndex(u8 *sprite, s32 animation);
-void uiStoreTextureEntryCenter(u8 *sprite, s32 group, s32 part);
-void FUN_002963ec(u8 *sprite, s32 x, s32 y);
-void pairSetFirstResetSecond(u8 *sprite, s32 id);
+void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 group, s32 part);
+void FUN_002963ec(UiSpriteState *sprite, s32 x, s32 y);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
 /* Sets up popup slot `slot`: shows `value` as five digit sprites (the sprite set depends on
@@ -26,21 +19,21 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
                   s32 stereo)
 {
     f32 position[3] = { x, y, z };
-    u8 *block = g_btlUi.block;
+    BtlUi *ui = g_btlUi.ui;
     if (stereo != 0)
         FUN_002630e0(position, 0, asdCameraGetSavedRenderPairs());
-    u8 *popup = block + slot * 0x400;
-    popup[0x832C] = 1;
-    popup[0x832D] = (u8)stereo;
-    *(s32 *)(popup + 0x8344) = value;
-    *(f32 *)(popup + 0x8320) = position[0];
-    *(f32 *)(popup + 0x8324) = position[1];
-    *(f32 *)(popup + 0x8328) = position[2];
-    popup[0x8348] = 0;
+    BtlUiNumberSlot *popup = &ui->objD.numbers.slots[slot];
+    popup->active = 1;
+    popup->anchored = (u8)stereo;
+    popup->number = value;
+    popup->position.x = position[0];
+    popup->position.y = position[1];
+    popup->position.z = position[2];
+    popup->disabled = 0;
     s32 divisor = 10000;
     for (s32 digit = 4; digit >= 0; digit--) {
-        *(u32 *)(popup + digit * 4 + 0x8330) = 0;
-        u8 *sprite = popup + digit * 0x8C + 0x7F4C;
+        popup->digitTimers[digit] = 0;
+        UiSpriteState *sprite = &popup->digitSprites[digit];
         spriteStartAnimationByIndex(sprite, 3);
         uiStoreTextureEntryCenter(sprite, 0x15, digit + 0x41A);
         FUN_002963ec(sprite, (s16)(s32)position[0], (s16)(s32)position[1]);
@@ -53,8 +46,8 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
         value -= __aeabi_idivmod(value, divisor) * divisor;
         divisor /= 10;
     }
-    u8 *first = popup + 0x8208;
-    u8 *second = popup + 0x8294;
+    UiSpriteState *first = &popup->labelSprites[0];
+    UiSpriteState *second = &popup->labelSprites[1];
     spriteStartAnimationByIndex(first, 9);
     spriteStartAnimationByIndex(second, 9);
     if (negative == 0) {
@@ -76,10 +69,10 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
     }
     uiStoreTextureEntryCenter(first, 0x15, 0x419);
     uiStoreTextureEntryCenter(second, 0x15, 0x418);
-    TextureTableEntryIV *size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x820C));
+    TextureTableEntryIV *size = asdTMTexTableEntryAt(0x15, first->image);
     FUN_002963ec(first, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
     FUN_002963ec(first, (s16)(s32)position[0], (s16)(s32)position[1]);
-    size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x8298));
+    size = asdTMTexTableEntryAt(0x15, second->image);
     FUN_002963ec(second, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
     FUN_002963ec(second, (s16)(s32)position[0], (s16)(s32)position[1]);
 }

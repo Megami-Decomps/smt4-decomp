@@ -1,11 +1,10 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiGlobal.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
 
 void state40CIsNot4(u32 arg);
 
-extern BtlUiGlobalsA g_btlUi;
 
 s32 FUN_004ab718(void)
 {

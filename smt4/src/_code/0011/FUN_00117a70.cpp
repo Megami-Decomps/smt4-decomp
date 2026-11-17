@@ -1,4 +1,5 @@
 /* NON_MATCHING: frame texture quad draw; retail reaches the flag/blend fields through a second base register (tex + 0xF00), keeps the filter flag in one compare and divides in a different register order */
+#include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "frame_tex/FrameTex.h"

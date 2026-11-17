@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cea8c` (_code @ 0x1cea8c, 0x1540 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -39,9 +40,6 @@ int buttonHelpSetText(...);
 int messageStatesSetFirst(...);
 int FUN_002b7bca(...);
 int buttonHelpSetPreset(...);
-int timerStart(...);
-int spriteStartAnimationByIndex(...);
-int uiSpriteAdvanceAnimation(...);
 int whisperEffectFinish(void);
 int whisperEffectStart(...);
 
@@ -107,7 +105,6 @@ extern int infoWindowIsActive(void);
 extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
-extern int uiSlidingSpriteAdvance(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
@@ -162,7 +159,7 @@ void FUN_001cea8c(int param_1)
   temp_v4 = param_1 + *(int *)(param_1 + 0xcf78) * 0x620;
   temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x3654));
   temp_v6 = gameGetPlayerData();
-  uiSpriteAdvanceAnimation(param_1 + 0x624);
+  uiSpriteAdvanceAnimation((UiSpriteState *)(param_1 + 0x624));
   piVar9 = (int *)(param_1 + 0x3534);
   temp_v25[0] = '\0';
   temp_v15 = *piVar9;
@@ -338,11 +335,11 @@ void FUN_001cea8c(int param_1)
       temp_v5 = 0;
       do {
         temp_v9 = param_1 + temp_v5 * 0x8c;
-        temp_v15 = uiSpriteAdvanceAnimation(temp_v9 + 0x7c8);
+        temp_v15 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v9 + 0x7c8));
         if (temp_v15 == 0) {
           temp_v24 = 0;
         }
-        temp_v15 = uiSpriteAdvanceAnimation(temp_v9 + 0xc28);
+        temp_v15 = uiSpriteAdvanceAnimation((UiSpriteState *)(temp_v9 + 0xc28));
         if (temp_v15 == 0) {
           temp_v24 = 0;
         }
@@ -355,7 +352,7 @@ void FUN_001cea8c(int param_1)
         }
         temp_v4 = 0;
         do {
-          spriteStartAnimationByIndex(param_1 + temp_v4 * 0x8c + 0x7c8,0);
+          spriteStartAnimationByIndex((UiSpriteState *)(param_1 + temp_v4 * 0x8c + 0x7c8),0);
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < 0x10);
         *piVar9 = 2;
@@ -384,7 +381,7 @@ void FUN_001cea8c(int param_1)
         }
         else {
           buttonHelpSetText(0,0x323232ff);
-          timerStart(param_1 + 0xac,1,0);
+          timerStart((UiSpriteState *)(param_1 + 0xac),1,0);
           *piVar9 = *piVar9 + 1;
           if (*piVar25 == 3) {
             *(unsigned short *)(param_1 + *(int *)(param_1 + 0xd2c4) * 2 + 0xd134) = 0;
@@ -403,7 +400,7 @@ void FUN_001cea8c(int param_1)
       if (temp_v5 == 0) {
         return;
       }
-      temp_v5 = uiSpriteAdvanceAnimation(param_1 + 0xac);
+      temp_v5 = uiSpriteAdvanceAnimation((UiSpriteState *)(param_1 + 0xac));
       if (temp_v5 == 0) {
         return;
       }
@@ -417,7 +414,7 @@ void FUN_001cea8c(int param_1)
   switch(temp_v15) {
   case 0:
     *(unsigned char *)(temp_v5 + 0x4b) = 1;
-    timerStart(param_1 + 0xac,4,0);
+    timerStart((UiSpriteState *)(param_1 + 0xac),4,0);
     temp_v11 = *(unsigned int *)(temp_v6 + 0x34);
     temp_v17 = *(unsigned int *)(temp_v6 + 0x38);
     temp_v19 = *(unsigned int *)(temp_v6 + 0x3c);
@@ -445,7 +442,7 @@ void FUN_001cea8c(int param_1)
     whisperEffectStart(*(unsigned short *)(temp_v5 + 0x46));
     return;
   case 1:
-    temp_v15 = uiSlidingSpriteAdvance(param_1 + 0xac,0);
+    temp_v15 = uiSlidingSpriteAdvance((UiSpriteState *)(param_1 + 0xac),0);
     if (temp_v15 == 0) {
       return;
     }
@@ -525,7 +522,7 @@ void FUN_001cea8c(int param_1)
       do {
         temp_v8 = param_1 + temp_v10 * 2;
         if (*(short *)(temp_v8 + 0xd114) == *(short *)(temp_v9 + 0xd134)) {
-          spriteStartAnimationByIndex(param_1 + temp_v10 * 0x8c + 0x7c8,5);
+          spriteStartAnimationByIndex((UiSpriteState *)(param_1 + temp_v10 * 0x8c + 0x7c8),5);
           *(short *)(temp_v8 + 0xd124) = *(short *)(temp_v8 + 0xd124) + 1;
         }
         temp_v10 = temp_v10 + 1;
@@ -533,7 +530,7 @@ void FUN_001cea8c(int param_1)
       temp_v10 = 0;
       do {
         if (*(short *)(temp_v5 + temp_v10 * 2 + 0x34) == *(short *)(temp_v9 + 0xd134)) {
-          spriteStartAnimationByIndex(param_1 + temp_v10 * 0x8c + 0xc28,5);
+          spriteStartAnimationByIndex((UiSpriteState *)(param_1 + temp_v10 * 0x8c + 0xc28),5);
         }
         temp_v10 = temp_v10 + 1;
       } while (temp_v10 < 8);
@@ -716,12 +713,12 @@ LAB_001cfdfc:
         *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) + 1;
         arrayContainsU16(temp_v7,8,*(unsigned short *)(temp_v5 + 0x34));
         if (temp_v7 != 0) {
-          spriteStartAnimationByIndex(param_1 + temp_v6 * 0x8c + 0xc28,5);
+          spriteStartAnimationByIndex((UiSpriteState *)(param_1 + temp_v6 * 0x8c + 0xc28),5);
           temp_v4 = 0;
           do {
             temp_v6 = param_1 + temp_v4 * 2;
             if (*(short *)(temp_v6 + 0xd114) == *(short *)(temp_v5 + 0x34)) {
-              spriteStartAnimationByIndex(param_1 + temp_v4 * 0x8c + 0x7c8,5);
+              spriteStartAnimationByIndex((UiSpriteState *)(param_1 + temp_v4 * 0x8c + 0x7c8),5);
               *(unsigned short *)(temp_v6 + 0xd124) = 1;
             }
             temp_v4 = temp_v4 + 1;
@@ -925,16 +922,16 @@ LAB_001cf5dc:
         }
       }
 LAB_001cf6b0:
-      spriteStartAnimationByIndex(param_1 + 0x6b0,6);
-      spriteStartAnimationByIndex(param_1 + temp_v4 * 0x8c + 0x7c8,5);
+      spriteStartAnimationByIndex((UiSpriteState *)(param_1 + 0x6b0),6);
+      spriteStartAnimationByIndex((UiSpriteState *)(param_1 + temp_v4 * 0x8c + 0x7c8),5);
     }
     if (*piVar27 >= 2) {
       if (*piVar27 >= 6) {
-        uiSpriteAdvanceAnimation(param_1 + temp_v4 * 0x8c + 0x7c8);
+        uiSpriteAdvanceAnimation((UiSpriteState *)(param_1 + temp_v4 * 0x8c + 0x7c8));
       }
-      temp_v6 = uiSpriteAdvanceAnimation(param_1 + 0x6b0);
+      temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(param_1 + 0x6b0));
       if ((temp_v6 != 0) && (param_1 = param_1 + temp_v4 * 0x8c, *(char *)(param_1 + 0x852) != '\0')) {
-        spriteStartAnimationByIndex(param_1 + 0x7c8,0);
+        spriteStartAnimationByIndex((UiSpriteState *)(param_1 + 0x7c8),0);
         FUN_002b7bca(temp_v7,8,2,&LAB_002c6e64);
         *piVar9 = 2;
         temp_v4 = listCursorGetRowIfUnblocked(temp_v10);

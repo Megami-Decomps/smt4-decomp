@@ -1,6 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/FlagBitTests.h"
+#include "gamedata/UnitRecordAccess.h"
 
 /* Function-local view: these fields extend beyond the canonical recovered slot prefix. */
 struct ReserveSlotSelectionView {
@@ -15,7 +16,6 @@ typedef char ReserveSlotSelectionViewOffsets[
 
 extern "C" {
 ReserveSlotSelectionView *gameGetSlotTable(void);
-StatBlock *gameGetUnitRecord(s32 slot);
 s32 randRange(u32 maximum);
 
 // Choose at most one eligible reserve unit using its encounter probability tier.

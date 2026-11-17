@@ -2,10 +2,9 @@
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
-#include "map/lmapMain.h"
+#include "map/LmapViewGlobals.h"
 
 extern "C" {
-extern LmapExtraA *g_lmapView;
 
 void soundActorStartOnFreeChannel(u32 sound);
 void FUN_0050245c(f32 x, f32 y, f32 z);
@@ -18,7 +17,7 @@ u32 FUN_00233e10(u8 blocked, s32 index)
     MapIfStateA *state = g_mapIf.state;
     state->unk1C = blocked;
     MapIfRecord *record = &g_mapIf.state->records[index];
-    if (index != -1 && record->active != 0 && g_lmapView->unkB0 != record->navigation.destination) {
+    if (index != -1 && record->active != 0 && g_lmapView->contextMode != record->navigation.destination) {
         state->unk1C = 0;
     }
     if (state->unk1C == 0) {
@@ -64,7 +63,7 @@ u32 FUN_00233e10(u8 blocked, s32 index)
             soundActorStartOnFreeChannel(0x10002ab);
         } else if (record->reset.values[2] != 0) {
             record->state = 7;
-            if (g_gameState.inputBlocked != 0 && g_lmapView->camera.mode == 0) {
+            if (g_gameState.inputBlocked != 0 && g_lmapView->mode == 0) {
                 // the entry is left in state 7 without a sound or a jump marker
             } else if (g_gameState.mapId < 100) {
                 soundActorStartOnFreeChannel(0x10002ab);

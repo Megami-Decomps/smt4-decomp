@@ -1,28 +1,24 @@
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
+#include "gamedata/SkillDataLookup.h"
 #include "battle/BattleEntrySummary.h"
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
 void btlEntryBuildSummary(BattleEntrySummary *summary, BtlMainState *state, const BtlEntry *entry);
-const ActiveSkillRecord *skillDataFindById(s32 skillId);
 void btlEntryGetPassiveSkillIds(const BtlEntry *entry, u16 *skills);
 
 /* Test the active skill and learned passive skills for a zero-based category. */
 u32 btlEntryHasSkillCategory(const BtlEntry *entry, s32 category)
 {
-    struct ActiveSkillCategoryView {
-        u8 unk00[0x3C];
-        u8 category;
-    };
     u32 found = 0;
     BattleEntrySummary summary;
     btlEntryBuildSummary(&summary, btlGetMainState(), entry);
     if (summary.skill.skillId) {
-        const ActiveSkillRecord *skill = skillDataFindById(summary.skill.skillId);
+        const SkillDataRecord *skill = skillDataFindById(summary.skill.skillId);
         if (skill) {
-            u32 value = reinterpret_cast<const ActiveSkillCategoryView *>(skill)->category;
+            u32 value = skill->menuCategory;
             if (value && (s32)(value - 1) == category) {
                 found = 1;
             }

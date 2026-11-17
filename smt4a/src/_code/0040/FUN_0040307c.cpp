@@ -1,4 +1,4 @@
-#include "util/MathFunctions.h"
+#include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040307c` (_code @ 0x40307c, 0x488 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -26,7 +26,6 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_1_stack;
 
-extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: uiDrawListScrollBar. */
@@ -54,8 +53,8 @@ void FUN_0040307c(int param_1)
   int temp_v11;
   unsigned int temp_v12;
   
-  temp_v0 = vec2GetXInt(reinterpret_cast<const void *>(param_1 + 0x14c));
-  temp_v1 = vec2GetYInt(param_1 + 0x14c);
+  temp_v0 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(param_1 + 0x14c)));
+  temp_v1 = vec2GetYInt((UiSpriteState *)(param_1 + 0x14c));
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x32,0x4d,temp_v0,temp_v1,0x60);
   texDrawTableEntryAtStoredOrigin(2,0x32,0x4e,temp_v0,temp_v1,0x60);

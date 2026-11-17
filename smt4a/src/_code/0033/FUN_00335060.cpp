@@ -2,6 +2,8 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "code/Code0018.h"
+#include "ui/UiSpriteApi.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct SaveRowSprite {
     /* 0x00 */ u8 data[0x8C];
@@ -10,11 +12,6 @@ struct SaveRowSprite {
 struct SaveListWork {
     /* 0x000 */ u8 unk000[0xF18];
     /* 0xF18 */ SaveRowSprite rows[1];   /* row 0 is the selected slot, the rest follow */
-};
-
-struct SaveSlotEntry {
-    /* 0x000 */ u8 unk000[0x12C];
-    /* 0x12C */ u16 id;
 };
 
 struct SaveRowFrame {
@@ -32,18 +29,14 @@ struct SaveRowImage {
 #define SAVE_ROW_NO_SELECTION 0xFFFFFFFFu
 
 extern "C" {
-SaveSlotEntry *saveSlotFindSelected(void);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 SaveRowFrame *asdTMTexTableEntryAt(u32 table, u32 index);
-SaveSlotEntry *FUN_00187068(s32 index);
 s32 gameFlagIsSet(u32 flag);
 s32 flagSelectVariant(void);
-s32 vec2GetXInt(SaveRowSprite *sprite);
-s32 vec2GetYInt(SaveRowSprite *sprite);
 void FUN_0037e8a4(SaveListWork *work);
-void FUN_003721b0(SaveListWork *work, SaveSlotEntry *entry, s32 row, s32 x, s32 y);
+void FUN_003721b0(SaveListWork *work, PartySlotA *entry, s32 row, s32 x, s32 y);
 void FUN_002ca878(SaveListWork *work, s32 x, s32 y);
 void FUN_0037eb64(SaveListWork *work, s32 x, s32 y);
 
@@ -60,14 +53,14 @@ void FUN_00335060(SaveListWork *work)
         selectedId = saveSlotFindSelected()->id;
 
     for (s32 slot = 0; slot < SAVE_LIST_SLOT_COUNT; slot++) {
-        SaveSlotEntry *entry = FUN_00187068(slot);
+        PartySlotA *entry = FUN_00187068(slot);
         if (partySlotIsOccupied(entry) != 0) {
             SaveRowSprite *sprite = &work->rows[row];
-            s32 x = vec2GetXInt(sprite);
-            s32 y = vec2GetYInt(sprite);
+            s32 x = vec2GetXInt((const UiSpriteState *)sprite);
+            s32 y = vec2GetYInt((const UiSpriteState *)sprite);
             if (entry->id == selectedId) {
-                x = vec2GetXInt(&work->rows[0]);
-                y = vec2GetYInt(&work->rows[0]);
+                x = vec2GetXInt((const UiSpriteState *)&work->rows[0]);
+                y = vec2GetYInt((const UiSpriteState *)&work->rows[0]);
                 FUN_003721b0(work, entry, 0, x, y);
             } else {
                 FUN_003721b0(work, entry, row, x, y);
@@ -83,15 +76,15 @@ void FUN_00335060(SaveListWork *work)
         s16 footerOffset = footerFrame->image->offset;
         s16 rowOffset = rowFrame->image->offset;
         SaveRowSprite *sprite = &work->rows[row];
-        s32 x = vec2GetXInt(sprite);
-        s32 y = vec2GetYInt(sprite);
+        s32 x = vec2GetXInt((const UiSpriteState *)sprite);
+        s32 y = vec2GetYInt((const UiSpriteState *)sprite);
         FUN_002ca878(work, x, y + footerOffset + rowHeight + rowOffset + 1);
         row++;
     }
 
     SaveRowSprite *sprite = &work->rows[row];
-    s32 x = vec2GetXInt(sprite);
-    s32 y = vec2GetYInt(sprite);
+    s32 x = vec2GetXInt((const UiSpriteState *)sprite);
+    s32 y = vec2GetYInt((const UiSpriteState *)sprite);
     FUN_0037eb64(work, x, y);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);

@@ -4,9 +4,9 @@
 #include "shard/S1ListPanel.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "ui/UiSpriteApi.h"
 
 extern "C" {
-f32 vec2GetSpeed(const void *vector); /* linker-inlined: vldr s0, [r0, #0x20] */
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 const char *dataTableGetEntry24Member(u32 id);
@@ -20,7 +20,7 @@ void FUN_0022f9c8(UniteWorkA *work, s32 index, s32 x, s32 y, s32 selected, s32 a
     if (selected) {
         texDrawCompositeSprite(2, 26, 11, x, y, 101);
         color = 255;
-        efctSetSpeed(0.5f + (vec2GetSpeed(work->optionPulse.speedObject) * 0.5f) * fade);
+        efctSetSpeed(0.5f + (vec2GetSpeed((const UiSpriteState *)work->optionPulse.speedObject) * 0.5f) * fade);
     } else if (active) {
         texDrawCompositeSprite(2, 26, 10, x, y, 101);
         color = 0xFFFFFFFF;

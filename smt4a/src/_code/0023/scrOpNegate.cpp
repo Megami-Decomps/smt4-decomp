@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Script opcode: negates the value on top of the stack (through its variable for the variable tags). */
-u32 scrOpNegate(ScriptVmProcess *process)
+u32 scrOpNegate(ScriptProcess *process)
 {
     switch (process->tags[process->depth - 1]) {
     case SCRIPT_VM_TAG_INT:
