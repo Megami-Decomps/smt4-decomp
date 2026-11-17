@@ -31,7 +31,7 @@ void FUN_002f4b2c(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 firstDelay, u16 lastDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
-/* From map 100 on the request also carries the destination's state. */
+/* Past story stage 100 the request also carries the destination's state. */
 static __inline void mapDepartCopyDestination(MapDepartureInitView *work, const MapDepartureRequest *request)
 {
     if (g_gameState.mapId >= 100) {

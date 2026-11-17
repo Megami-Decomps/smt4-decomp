@@ -94,6 +94,8 @@ The [documentation index](docs/README.md) groups the available references:
 - **Code reconstruction:** the matching rules, the readability standard and naming.
 - **Project notes:** layout, shared code between the games, where names and source-file placements
   come from, and what counts as proven.
+- **Match notes:** the retail evidence for single matches that changed a shared declaration, a
+  header or the configuration.
 
 ## Acknowledgements
 
