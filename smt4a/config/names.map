@@ -6888,3 +6888,4 @@
 002c7e6c statusAcquireSharedResources
 002cdad4 btlEventPanelInitialize
 002c5468 mapRebuildWallAutoTiles
+002326b4 mapSystemLoadSharedFiles
