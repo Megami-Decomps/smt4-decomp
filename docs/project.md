@@ -30,9 +30,6 @@ tools/worktrees.py    git worktrees for parallel work: each links orig/ and buil
                       builds and relinks on its own, and hands back its changes as a patch
 tools/layout.py       field offsets of struct views from the compiler, and every view of one object merged
                       by offset (--anchor SYMBOL): the input for one declaration per object
-tools/permuter.py     searches source rewrites (statement order, operand order, comparison direction, condition
-                      spelling, int types, a constant held in a local) of near-miss functions for one that
-                      compiles to the retail bytes; runs unattended on Linux or Windows, results to review
 ```
 
 Every function is its own `.cpp`, compiled by armcc 4.1 [Build 1454] (`--cpp --no_rtti -O3 -Otime`; a unit
