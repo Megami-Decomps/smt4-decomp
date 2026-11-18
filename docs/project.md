@@ -21,6 +21,8 @@ tools/shared.py       pairs the functions both games share and compares their pr
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
 tools/trial.py        scores many source variants of one function in parallel, from temporary copies, as fdiff
                       would; --flags probes other cflags and multifile partners (diagnostics, not evidence)
+tools/usercheck.py    re-scores, as fdiff does, every unit a change reaches (edited sources and every user of a changed,
+                      new or deleted header) at BASE and now, and lists what moved; exit 1 on a regression
 tools/names.py        names a function or global in every file at once and records the evidence
 tools/units.py        fixes the function list: splits merged units, adds the code the analysis missed
                       (branch targets, callbacks, stub bodies), extends cut-short ones, moves late starts

@@ -51,7 +51,8 @@ Every match must be one a programmer could have written for a reason.
      event or ready flags, ring cursors);
   3. retail reloads it where no other source shape can (no intervening call or aliasing store
      between the loads);
-  4. every user of the type still compiles, and every function that was `IDENTICAL` stays so.
+  4. every user of the type still compiles, and every function that was `IDENTICAL` stays so
+     (`tools/usercheck.py`, below).
 
   Example: `MovieSync::state` (`include/shard/S2MovieSync.h`), polled by
   `movieSyncDrainSourcePositions` while the playback thread changes it; retail reloads it before
@@ -81,7 +82,10 @@ Every match must be one a programmer could have written for a reason.
   each user; unrelated layouts with coincidentally identical names need distinct type names.
   Check which class owns a tail field before extending a base: sibling classes can have
   different fields at the same offset. Assert both the base extent and each derived layout.
-  Recheck every previously matching consumer of either affected header with `fdiff`.
+  Recheck every consumer of a header or declaration you change with `python -B tools/usercheck.py [BASE]`:
+  it scores, as `fdiff` does, each unit the change reaches (edited sources, and every source that includes
+  a changed, new or deleted header) at BASE (default `HEAD`) and now, lists the units whose score moved
+  and exits 1 on a regression or a new compile failure. Don't swap headers in place to compare.
   [Shared declarations](#shared-declarations) lists the headers that own such types and contracts.
 - Function declarations live in subsystem headers (`ui/UiControl.h`, `gamedata/GameDataAccess.h`,
   `battle/BattleHelpers.h`, `AsdSDK/Source/Gfx/AsdGfxHelpers.h`, ...), never in a header named after
@@ -342,7 +346,8 @@ shared object, does not cast the object to a local view, and does not redeclare 
   field is, and the type the code needs (signedness and width change the generated loads).
 - **A sub-object with its own users** (a work area, a table inside the state) is its own struct,
   embedded at its offset, not a union of every unit's guess.
-- Converting a unit to the shared struct must keep it IDENTICAL (or, for a near miss, no worse).
+- Converting a unit to the shared struct must keep it IDENTICAL (or, for a near miss, no worse);
+  `tools/usercheck.py` checks that for every unit the change reaches.
 - `python -B tools/declcheck.py [BASE]` (run by CI on every change) fails when the lines a change adds
   to a unit redeclare a function, global or struct that a shared header declares. Moving a declaration
   into a shared header never fails it; `--all` counts the older local copies still to remove. A local
