@@ -21,6 +21,8 @@ sibling doing the same, a header declaring it, or a real function's body; see do
 import os
 import re
 import subprocess
+import shutil
+import tempfile
 import sys
 from pathlib import Path
 
@@ -60,9 +62,23 @@ def game_of(path):
 
 
 def added_lines(base):
-    """{unit path: text of the lines the change adds} for the .cpp units under <game>/src."""
-    diff = subprocess.run(["git", "diff", "--unified=0", base, "--", "smt4/src", "smt4a/src"],
-                          cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
+    """{unit path: text of the lines the change adds} for the .cpp units under <game>/src.
+
+    The working tree is compared as CI will see it once committed: untracked sources (a file
+    `names.py` renamed, a new unit) count too, and a renamed file only for the lines it changed.
+    That runs on a private copy of the index, so the real one is never touched."""
+    paths = ["smt4/src", "smt4a/src"]
+    env = dict(os.environ)
+    with tempfile.TemporaryDirectory() as tmp:
+        index = subprocess.run(["git", "rev-parse", "--git-path", "index"], cwd=ROOT, capture_output=True,
+                               text=True).stdout.strip()
+        index = Path(index) if Path(index).is_absolute() else ROOT / index
+        if index.exists():
+            shutil.copyfile(index, Path(tmp) / "index")
+        env["GIT_INDEX_FILE"] = str(Path(tmp) / "index")
+        subprocess.run(["git", "add", "-A", "--", *paths], cwd=ROOT, env=env, capture_output=True)
+        diff = subprocess.run(["git", "diff", "--cached", "-M", "--unified=0", base, "--", *paths], cwd=ROOT, env=env,
+                              capture_output=True, text=True, encoding="utf-8", errors="replace").stdout
     out, current = {}, None
     for line in diff.splitlines():
         if line.startswith("+++ "):
