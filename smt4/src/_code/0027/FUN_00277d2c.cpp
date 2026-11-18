@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
 #include "map/MapZoneLabels.h"
+#include "map/MapCollisionPlacement.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -109,8 +110,6 @@ static float romwright_fabs_4(float value)
 extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
 extern unsigned int *mapBlockBitIsSet(int);
-extern char *dataTable2cSub0GetRecord(int);
-extern char *dataTable2cSub3GetRecord(int);
 /* Supplied declaration required: contentEntryGetC. */
 
 /* Supplied declaration required: dataTable2cSub3GetCount. */
