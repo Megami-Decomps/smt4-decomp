@@ -58469,12 +58469,12 @@
     },
     {
       "address": "0x2bd158",
-      "function": "FUN_002bd158",
+      "function": "textConvertToGlyphPairsInto",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bd158.o",
+      "object": "build/obj/_code/002b/textConvertToGlyphPairsInto.o",
       "size": 156,
-      "source": "src/_code/002b/FUN_002bd158.cpp",
-      "target": "orig/target/_code/002b/FUN_002bd158.o",
+      "source": "src/_code/002b/textConvertToGlyphPairsInto.cpp",
+      "target": "orig/target/_code/002b/textConvertToGlyphPairsInto.o",
       "thumb": false
     },
     {

@@ -4977,3 +4977,4 @@
 002cdf2c resultApplySpoils inferred applies a ResultSpoils (macca, experience, items) on the result screen
 0023547c uiQuestAnswerConfirm inferred quest answer confirmation; all three callers pass an s8 flag
 002b753c asdTextGetFinalLineIndex inferred Returns the final zero-based line index while scanning the bounded encoded text stream; F801 increments it and F81A assigns an explicit line index. Native argument/result recovery and exact match; not an original-name claim.
+002bd158 textConvertToGlyphPairsInto inferred Native two-pointer byte-to-glyph-pair conversion; high-bit pairs, newline F8/01, table expansion, double-zero terminator and default output buffer. Void counterpart of textConvertToGlyphPairs; natural signed-output source matches retail.

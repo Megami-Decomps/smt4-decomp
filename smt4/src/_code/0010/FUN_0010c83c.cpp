@@ -1,3 +1,4 @@
+#include "font/TextGlyphEncoding.h"
 #include "quest_center/QuestText.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010c83c` (_code @ 0x10c83c, 0x8b0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -16,7 +17,6 @@ int FUN_002bcf4c(int);
 int textConvertToGlyphPairs(...);
 int dataTable01FindByIdWithAoc(...);
 int FUN_002bd0f8(...);
-int FUN_002bd158(...);
 int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int libc_strcpy(...);
@@ -47,7 +47,6 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: textConvertToGlyphPairs. */
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: FUN_002bd0f8. */
-/* Supplied declaration required: FUN_002bd158. */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
@@ -125,7 +124,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         else {
           temp_v6 = FUN_002bcf10(*(unsigned short *)(param_2 + *param_4 * 2 + 2) - 1);
           libc_strcpy(temp_v11,temp_v6);
-          FUN_002bd158(temp_v11,temp_v12);
+          textConvertToGlyphPairsInto(temp_v11,reinterpret_cast<s8 *>(temp_v12));
           FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
         }
         *param_4 = *param_4 + 1;
@@ -138,7 +137,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         temp_v7 = (unsigned int)*(unsigned short *)(param_2 + *param_4 * 2 + 2);
         dataFindKindRecordWithAocOverrides(temp_v7,1);
         libc_strcpy(temp_v11,temp_v7);
-        FUN_002bd158(temp_v11,temp_v12);
+        textConvertToGlyphPairsInto(temp_v11,reinterpret_cast<s8 *>(temp_v12));
         FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
         *param_4 = *param_4 + 1;
         return 1;
@@ -179,7 +178,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
     case 0xf875:
       temp_v6 = FUN_002bcf10(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0xf);
       libc_strcpy(temp_v11,temp_v6);
-      FUN_002bd158(temp_v11,temp_v12);
+      textConvertToGlyphPairsInto(temp_v11,reinterpret_cast<s8 *>(temp_v12));
       FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
       break;
     case 0xf876:
@@ -258,7 +257,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       }
       temp_v6 = reinterpret_cast<u32>(FUN_002bcddc(temp_v4,1));
       libc_strcpy(temp_v11,temp_v6);
-      FUN_002bd158(temp_v11,temp_v12);
+      textConvertToGlyphPairsInto(temp_v11,reinterpret_cast<s8 *>(temp_v12));
       FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
       return 1;
     case 0xf87d:
@@ -310,7 +309,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
   else {
     temp_v6 = demonGetRaceLabel(*(unsigned short *)(param_2 + *param_4 * 2 + 2),1);
     libc_strcpy(temp_v11,temp_v6);
-    FUN_002bd158(temp_v11,temp_v12);
+    textConvertToGlyphPairsInto(temp_v11,reinterpret_cast<s8 *>(temp_v12));
     FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
   }
   *param_4 = *param_4 + 1;

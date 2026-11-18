@@ -1,3 +1,4 @@
+#include "font/TextGlyphEncoding.h"
 #include "map/MapSpawn.h"
 #include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
@@ -186,7 +187,6 @@ int FUN_002804ec(...);
 int tableGroupFindEntryIndex(...);
 int textEncodeFontSlot(...);
 int FUN_002a04f0(...);
-int FUN_002bd158(void);
 int dataFindKindRecordWithAocOverrides(...);
 int FUN_002c29d8(...);
 int MapEpl_Init(...);
@@ -659,7 +659,6 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: buttonHelpSetPresetDefault. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002bd158. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
@@ -1622,8 +1621,7 @@ LAB_001b9210:
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
       DAT_0049f9ac = *(float *)(g_lmapScene + 0x50);
-      dataFindKindRecordWithAocOverrides(DAT_0049f9cc,0);
-      FUN_002bd158();
+      textConvertToGlyphPairsInto(reinterpret_cast<const u8 *>(dataFindKindRecordWithAocOverrides(DAT_0049f9cc,0)), reinterpret_cast<s8 *>(temp_v22));
       textEncodeFontSlot(0,temp_v22);
       __aeabi_memcpy4(&DAT_0049f978,0x1b95f8,0x16);
       return 0;
@@ -3388,8 +3386,7 @@ LAB_001bc008:
       }
       else if (DAT_0049fa58 != '\0') {
         buttonHelpSetPresetDefault();
-        dataFindKindRecordWithAocOverrides(DAT_0049fa5c,1);
-        FUN_002bd158();
+        textConvertToGlyphPairsInto(reinterpret_cast<const u8 *>(dataFindKindRecordWithAocOverrides(DAT_0049fa5c,1)), reinterpret_cast<s8 *>(temp_v22));
         textEncodeFontSlot(0,temp_v22);
         messageSetConfirmDisplayMode();
         temp_v16 = tableGroupFindEntryIndex(puVar14[0x13],0x1bc5a4);

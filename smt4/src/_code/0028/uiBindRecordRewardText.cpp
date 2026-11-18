@@ -1,3 +1,4 @@
+#include "font/TextGlyphEncoding.h"
 /* NON_MATCHING: title branch placement, reward switch layout, and register allocation differ from retail. */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
@@ -8,7 +9,6 @@ const char *dataTable0cLookupById(u32 id);
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 alternate);
 const char *dataTable01FindByIdWithAoc(u32 id);
 char *libc_strcpy(char *destination, const char *source);
-void FUN_002bd158(const char *source, char *destination);
 void textEncodeFontSlot(s32 index, const char *text);
 
 // Bind a record's title/description and, optionally, its six reward slots to UI text fields.
@@ -23,7 +23,7 @@ void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)
             title = record->description;
         }
         libc_strcpy(text, title);
-        FUN_002bd158(text, formatted);
+        textConvertToGlyphPairsInto(reinterpret_cast<const u8 *>(text), reinterpret_cast<s8 *>(formatted));
         textEncodeFontSlot(0x28, formatted);
     } else {
         QuestRecord *record = questDataGetRecord(id);

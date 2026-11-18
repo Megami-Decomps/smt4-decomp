@@ -1,3 +1,4 @@
+#include "font/TextGlyphEncoding.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ebedc` (_code @ 0x1ebedc, 0x7ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -27,7 +28,6 @@ int unitRecalculateEffectiveStats(...);
 int dataTable06Sub1GetRecord(void);
 int nkmBaseGetRecord(void);
 int dataTable01FindByIdWithAoc(...);
-int FUN_002bd158(...);
 int cecCardBuild(...); // declcheck: local (the shared CecProcessSlot prototype does not fit this draft yet)
 int libc_strcpy(...);
 int soundPlaySeUnpanned(...);
@@ -84,7 +84,6 @@ extern int gameGetSlotTable(void);
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
-/* Supplied declaration required: FUN_002bd158. */
 /* Supplied declaration required: cecCardBuild. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
@@ -146,7 +145,7 @@ unsigned int FUN_001ebedc(int param_1)
     nkmBaseGetRecord();
     temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
-    FUN_002bd158(temp_v15,temp_v16);
+    textConvertToGlyphPairsInto(temp_v15,reinterpret_cast<s8 *>(temp_v16));
     textEncodeFontSlot(0,temp_v16);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x126);
     dataTable01FindByIdWithAoc(temp_v6);
@@ -363,7 +362,7 @@ LAB_001ec4d0:
     nkmBaseGetRecord();
     temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
-    FUN_002bd158(temp_v15,temp_v16);
+    textConvertToGlyphPairsInto(temp_v15,reinterpret_cast<s8 *>(temp_v16));
     textEncodeFontSlot(0,temp_v16);
     temp_v6 = FUN_00262f78();
     temp_v6 = temp_v6 & 0xffff;
