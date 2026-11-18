@@ -2,28 +2,15 @@
 #include "code/Code0028.h"
 #include "gamedata/GamePlayerData.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-
-extern void *gameGetUnitRecord(void);
-
-typedef struct Unit {
-    /* 0x00 */ u8 unk00[0xE];
-    /* 0x0E */ s16 unk0E;
-    /* 0x10 */ u8 unk10[0x36];
-    /* 0x46 */ u16 id;
-} Unit;
-
-typedef struct Party {
-    /* 0x0000 */ u8 unk0000[0x90F0];
-    /* 0x90F0 */ s8 slots[0x18];
-} Party;
 
 int FUN_00288ddc(int limit, u32 id)
 {
     PlayerDataIV *pad;
-    Party *party;
-    Unit *unit;
+    SaveSlotTableIV *party;
+    StatBlock *unit;
     int i;
 
     if ((int)id < 0) {
@@ -32,11 +19,12 @@ int FUN_00288ddc(int limit, u32 id)
             return 1;
         }
     } else {
-        party = (Party *)gameGetSlotTable();
+        party = gameGetSlotTable();
         i = 0;
         do {
-            if ((((party->slots[i] >= 0) && (unit = (Unit *)gameGetUnitRecord(), unit != NULL)) &&
-                 (unit->id == id)) && (unit->unk0E < limit)) {
+            const s32 slot = party->stock[i];
+            if ((((slot >= 0) && (unit = gameGetUnitRecord(slot), unit != NULL)) &&
+                 (unit->id == id)) && (unit->maxHp < limit)) {
                 return 1;
             }
             i = i + 1;
