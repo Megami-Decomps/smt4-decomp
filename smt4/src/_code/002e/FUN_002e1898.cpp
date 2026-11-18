@@ -67,9 +67,9 @@ u32 FUN_002e1898(CampCecMenu *menu)
     }
     if ((FUN_0031e384(menu->polling.work) & 2) != 0) {
         if ((FUN_002228d4() & 2) != 0)
-            g_campCec->visibility.flags |= 2;
+            g_campCec->card.flags |= 2;
         else
-            g_campCec->visibility.flags &= ~2;
+            g_campCec->card.flags &= ~2;
     }
     return result;
 }

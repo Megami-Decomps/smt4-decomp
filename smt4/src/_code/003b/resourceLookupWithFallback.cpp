@@ -1,19 +1,11 @@
-#include "common.h"
+#include "cec/CecOutbox.h"
 
-extern "C" {
-
-int asdCecOutboxGetMessageCount(void);
-void *cecOutboxPost(u8 *list);
-int asdCecReadOutboxMessage(void *entry, u32 key);
-
-/* When asdCecOutboxGetMessageCount allows it, looks up the entry for `key`; if that fails, retries with no entry. */
-void resourceLookupWithFallback(u8 *owner, u32 key)
+// Read the owner's saved message, falling back to slot zero if its key is absent or unreadable.
+extern "C" void resourceLookupWithFallback(Obj420a1c *owner, CecProcessSlot *out)
 {
-    if (asdCecOutboxGetMessageCount() != 0) {
-        if (asdCecReadOutboxMessage(cecOutboxPost(owner + 0xc), key) == 0) {
-            asdCecReadOutboxMessage(NULL, key);
-        }
+    if (asdCecOutboxGetMessageCount()) {
+        const CecMessageKey *key = reinterpret_cast<const CecMessageKey *>(owner->messageId.data);
+        if (!asdCecReadOutboxMessage(cecOutboxPost(key), out))
+            asdCecReadOutboxMessage(0, out);
     }
 }
-
-} /* extern "C" */

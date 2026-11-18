@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019715c` (_code @ 0x19715c, 0x748 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "camp/Config/Config.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -8,7 +9,6 @@ extern "C" {
 
 int FUN_00194b14(void);
 
-int FUN_0018b49c(...);
 int FUN_001ae538(...);
 int FUN_001aed18(int, int, int);
 int FUN_001f3958(int, int, int);
@@ -37,7 +37,7 @@ typedef struct {
 extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0018b49c. */
+/* Supplied declaration required: configDrawOptionPanel. */
 /* Supplied declaration required: FUN_00194b14. */
 /* Supplied declaration required: FUN_001ae538. */
 /* Supplied declaration required: FUN_001aed18. */
@@ -228,7 +228,7 @@ void FUN_0019715c(int param_1,int param_2)
     if (param_1 != 0x17) {
       if (param_1 >= 0x18) {
         if (param_1 == 0x27) {
-          FUN_0018b49c(temp_v2,temp_v3,param_2);
+          configDrawOptionPanel(temp_v2,temp_v3,param_2);
           return;
         }
         if (param_1 != 0x29) {

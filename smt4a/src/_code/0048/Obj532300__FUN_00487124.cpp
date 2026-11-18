@@ -30,7 +30,7 @@ struct GameStateNavBlock {
 };
 
 s32 naviMainConditionsHold(PulsePanel *panel);
-void FUN_0048c394(PulsePanel *panel);
+void naviMapHandleInput(PulsePanel *panel);
 s32 FUN_00485d1c(PulsePanel *panel);
 
 /* Per-frame update of the panel: advances its two sprite animations and the pulse timers. */
@@ -47,7 +47,7 @@ void _ZN9Obj53230012FUN_00487124Ev(PulsePanel *panel)
     }
     frozen = (panel->flags & 0x1000) >> 12;
     if (naviMainConditionsHold(panel) != 0 && panel->mode != 0 && g_gameState.paused != 0) {
-        FUN_0048c394(panel);
+        naviMapHandleInput(panel);
     }
     if (g_gameState.paused != 0) {
         uiSpriteAdvanceAnimation(&panel->first, 1.0f);

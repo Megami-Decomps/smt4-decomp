@@ -12,7 +12,6 @@ extern ShopTabIcons DAT_0044e020[];
 void uiRectDrawAtBottomRight(void *header, u32 id, s32 dx, s32 dy, u32 flags);
 void FUN_00231bcc(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void FUN_0022f1d0(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
-void FUN_002332e8(ShopPanel *panel, s32 first, s32 second);
 s32 FUN_0029e924(ShopCategoryList *list);
 s32 flaggedEntryGetValueByState(ShopCategoryList *list);
 s32 rangeLimitMin(ShopCategoryList *list);
@@ -21,8 +20,8 @@ s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 /* Redraws the shop screen's header icons and the visible slots of the current category. */
 void FUN_003a1f00(ShopScreen *screen, u32 sprite)
 {
-    u32 headerColor = screen->color;
-    switch (screen->category) {
+    u32 headerColor = screen->listId;
+    switch (screen->slot) {
     case 0:
         sprite = 0;
         break;
@@ -45,33 +44,33 @@ void FUN_003a1f00(ShopScreen *screen, u32 sprite)
         sprite = 4;
         break;
     }
-    uiRectDrawAtBottomRight(screen->header, sprite, 0, 0, headerColor);
-    u32 color = screen->color;
-    FUN_00231bcc(screen->header, screen->tab + 0x61, 0, 0, color, 1);
-    FUN_00231bcc(screen->header, 0x65, 0, 0, color, 1);
-    FUN_00231bcc(screen->header, 0x66, 0, 0, color, 1);
+    uiRectDrawAtBottomRight(&screen->region, sprite, 0, 0, headerColor);
+    u32 color = screen->listId;
+    FUN_00231bcc(&screen->region, screen->tab + 0x61, 0, 0, color, 1);
+    FUN_00231bcc(&screen->region, 0x65, 0, 0, color, 1);
+    FUN_00231bcc(&screen->region, 0x66, 0, 0, color, 1);
     s32 firstIndex = DAT_0044e020[screen->tab].first;
     s32 secondIndex = DAT_0044e020[screen->tab].second;
     u32 firstIcons[4] = {0x6F, 0x6E, 0x71, 0x70};
     u32 secondIcons[4] = {0x7A, 0x79, 0x7C, 0x7B};
-    FUN_00231bcc(screen->header, firstIcons[firstIndex], 0, 0, color, 1);
-    FUN_00231bcc(screen->header, secondIcons[secondIndex], 0, 0, color, 1);
+    FUN_00231bcc(&screen->region, firstIcons[firstIndex], 0, 0, color, 1);
+    FUN_00231bcc(&screen->region, secondIcons[secondIndex], 0, 0, color, 1);
 
-    s32 mode = screen->mode;
+    s32 mode = screen->phase;
     s32 compact = (mode == 5 || mode == 9) || (mode == 6 || mode == 10) || (mode == 7 || mode == 11) ||
                   (mode == 15 || mode == 16);
-    ShopCategoryList *list = &screen->lists[screen->category];
-    ShopSlot *slots = screen->tables[screen->category].slots;
+    ShopCategoryList *list = &screen->slotInfo[screen->slot];
+    ShopSlot *slots = screen->lists[screen->slot].items;
     s32 first = FUN_0029e924(list);
     s32 count = rangeLimitMin(list);
     for (s32 i = 0; i < count; ++i) {
         if (!compact || flaggedEntryGetValueByState(list) != i)
             FUN_0022f1d0(screen, i + 1, 0, &slots[first + i]);
     }
-    if (compact && list->limit > 0)
+    if (compact && list->range.count > 0)
         FUN_0022f1d0(screen, flaggedEntryGetValueByState(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
-    FUN_002332e8(screen->panel, FUN_0029e924(list), flaggedEntryGetValueByState(list));
-    screen->panel->refresh(color);
+    FUN_002332e8(screen->view, FUN_0029e924(list), flaggedEntryGetValueByState(list));
+    screen->view->refresh(color);
 }
 
 } /* extern "C" */

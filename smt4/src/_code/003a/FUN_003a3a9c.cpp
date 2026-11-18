@@ -63,7 +63,7 @@ void FUN_003a3a9c(SelectMenu *menu)
     messageTargetSetValue(0, 0);
     u32 accepted = FUN_0022fbc0(menu);
     FUN_0022fb64(menu);
-    if (reinterpret_cast<MenuList *>(&work->cursors[work->category])->marked > 0 && FUN_0027ee9c())
+    if (work->cursors[work->category].range.count > 0 && FUN_0027ee9c())
         accepted = 1;
     s32 category = work->category;
     u32 index = flaggedValueHolderGetTotal(&work->cursors[category].holder);

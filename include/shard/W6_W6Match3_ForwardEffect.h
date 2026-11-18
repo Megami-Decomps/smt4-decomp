@@ -39,7 +39,7 @@ u32 asdListBoxCreateDefault(u32 first,u32 second,u32 third,u32 fourth);
 extern "C" {
 #endif
 
-u32 cecProcessForward(s32 arg);
+u32 cecProcessForward(const void *card);
 
 #ifdef __cplusplus
 }

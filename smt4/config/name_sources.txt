@@ -4915,3 +4915,9 @@
 0031c344 itemApplyPermanentStatBoost inferred Applies supported permanent stat-boost items to player or unit, or checks applicability while preserving native clamp behavior.
 002d1ce0 mapBgLoadArchivesStep inferred Advances optional sky and destination BAM archive async loads through map departure states; native path literals and shared MapDepartWork owner.
 00339b64 btlAdvanceResidentResourceLoad inferred Lock-protected worker advances resident battle resources and creates the legion script with its command owner, then marks initialization complete.
+003a2960 shopDrawEquippedItemPage inferred draws the shop's equipped-item page (adds the equipped row FUN_003a1d04 and FUN_003a1f00 lack)
+0018b49c configDrawOptionPanel inferred draws the Config screen's option frame, heading (table 0x36) and its 2 or 3 choices
+00196fe8 configDrawChoices inferred draws the Config option's choice labels with the selection
+001ec6e0 campCecLoaderThread inferred StreetPass screen loader thread: starts the CEC process, loads CecItemTable/CecUnionTable/CecMain_scr/CecMain_msg, rebuilds and sends the card
+002bd2b4 cecCardBuild inferred builds the StreetPass card (CecCardData) from the selected demon
+002005a0 cecOutboxReadCard inferred reads the card currently in the CEC outbox into a buffer

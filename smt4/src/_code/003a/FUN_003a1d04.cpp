@@ -1,40 +1,22 @@
-/* NON_MATCHING: initial color-load scheduling, saved registers and held-row address scheduling differ. */
+/* NON_MATCHING: scene/selection registers and initial frame-color scheduling differ. */
 #include "shard/S2Scene3a.h"
-#include "shard/W6_W6Match4_FlaggedValueHolder.h"
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "shard/Shard004A.h"
+#include "code/Code0029.h"
 
 extern "C" {
 void uiRectDrawAtBottomRight(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color);
 void FUN_00231bcc(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, u32 flags);
 void FUN_003a07a0(Scene3a *scene, s32 category);
-s32 FUN_0029e924(const FlaggedValueHolder *holder);
 s32 rangeLimitMin(const FlaggedValueHolder *holder);
 s32 flaggedEntryGetValueByState(const FlaggedValueHolder *holder);
-u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
 void FUN_0022f1d0(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *entry);
-void FUN_002332e8(void *scrollbar, u32 offset, u32 selected);
 
-void FUN_003a1d04(Scene3a *scene, u32 image)
+// Draw the other shop page without the equipped-item row.
+void FUN_003a1d04(Scene3a *scene)
 {
-    struct Scrollbar;
-    struct ScrollbarVtable { u32 reserved[4]; void (*draw)(Scrollbar *, u32 color); };
-    struct Scrollbar { const ScrollbarVtable *vtable; };
-    // The canonical scene has an over-wide callback-table prefix and only two recovered lists.
-    struct DrawingView {
-        u8 prefix[0x37C];
-        u32 color;
-        AsdTextureRegion region;
-        u8 padding3A0[0x4BC];
-        Scrollbar *scrollbar;
-        s32 category;
-        u8 padding864[0x1C];
-        FlaggedValueHolder controls[9];
-        Scene3aList lists[9];
-    };
-    typedef char DrawingOffsets[sizeof(FlaggedValueHolder) == 0x74 &&
-        offsetof(DrawingView, controls) == 0x880 && offsetof(DrawingView, lists) == 0xC94 ? 1 : -1];
-    DrawingView *view = reinterpret_cast<DrawingView *>(scene);
-    switch (view->category) {
+    u32 frameColor = scene->listId;
+    u32 image;
+    switch (scene->slot) {
     case 0: image = 0; break;
     case 1: case 2: image = 1; break;
     case 3: case 4: case 5: image = 2; break;
@@ -42,30 +24,27 @@ void FUN_003a1d04(Scene3a *scene, u32 image)
     case 7: image = 3; break;
     case 8: image = 4; break;
     }
-    uiRectDrawAtBottomRight(&view->region, image, 0, 0, view->color);
-    u32 color = view->color;
-    FUN_00231bcc(&view->region, 100, 0, 0, color, 1);
-    FUN_003a07a0(scene, view->category);
+    uiRectDrawAtBottomRight(&scene->region, image, 0, 0, frameColor);
+    u32 color = scene->listId;
+    FUN_00231bcc(&scene->region, 100, 0, 0, color, 1);
+    FUN_003a07a0(scene, scene->slot);
     s32 phase = scene->phase;
     bool selectedOverlay = phase == 5 || phase == 9 || phase == 6 || phase == 10 ||
         phase == 7 || phase == 11 || phase == 15 || phase == 16;
-    FlaggedValueHolder *holder = &view->controls[view->category];
-    Scene3aEntry *entries = view->lists[view->category].entries;
-    s32 offset = FUN_0029e924(holder);
-    s32 visible = rangeLimitMin(holder);
+    Scene3aSlotInfo *page = &scene->slotInfo[scene->slot];
+    Scene3aEntry *entries = scene->lists[scene->slot].items;
+    s32 offset = FUN_0029e924(&page->holder);
+    s32 visible = rangeLimitMin(&page->holder);
     for (s32 row = 0; row < visible; ++row) {
-        if (!selectedOverlay || flaggedEntryGetValueByState(holder) != row)
+        if (!selectedOverlay || flaggedEntryGetValueByState(&page->holder) != row)
             FUN_0022f1d0(scene, row + 1, 0, &entries[offset + row]);
     }
-    struct CountsView { u32 prefix[2]; s32 count; };
-    if (selectedOverlay && reinterpret_cast<const CountsView *>(holder)->count > 0) {
-        u32 held = flaggedValueHolderGetTotal(holder);
-        s32 row = flaggedEntryGetValueByState(holder);
-        FUN_0022f1d0(scene, row + 1, 1, &entries[held]);
+    if (selectedOverlay && page->range.count > 0) {
+        const Scene3aEntry *held = &entries[flaggedValueHolderGetTotal(&page->holder)];
+        FUN_0022f1d0(scene, flaggedEntryGetValueByState(&page->holder) + 1, 1, held);
     }
-    s32 selected = flaggedEntryGetValueByState(holder);
-    s32 first = FUN_0029e924(holder);
-    FUN_002332e8(view->scrollbar, first, selected);
-    view->scrollbar->vtable->draw(view->scrollbar, color);
+    s32 selected = flaggedEntryGetValueByState(&page->holder);
+    FUN_002332e8(scene->view, FUN_0029e924(&page->holder), selected);
+    scene->view->refresh(color);
 }
 }

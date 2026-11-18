@@ -17,8 +17,6 @@ void FUN_002355ac(u8 value);
 
 void FUN_00233818(Obj *obj);
 
-void FUN_002332e8(Obj *obj, u32 a, u32 b);
-
 int FUN_002333f0(Obj *obj);
 
 u32 FUN_0023c0d0(StateRef *ref, CounterBlock *block, s32 index, s32 delta);

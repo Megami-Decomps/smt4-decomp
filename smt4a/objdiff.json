@@ -71601,13 +71601,13 @@
       "target_path": "orig/target/_code/0017/_ZN14AllocatedArrayI10ArrayEntryED1Ev.o"
     },
     {
-      "base_path": "build/obj/_code/0017/FUN_0017efa4.o",
+      "base_path": "build/obj/_code/0017/skeletonUpdateWorldMatrices.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0017efa4",
+            "name": "skeletonUpdateWorldMatrices",
             "size": 2264,
             "vram": "0x17efa4"
           }
@@ -71615,10 +71615,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0017/FUN_0017efa4.cpp"
+        "source_path": "src/_code/0017/skeletonUpdateWorldMatrices.cpp"
       },
-      "name": "_code/0017/FUN_0017efa4",
-      "target_path": "orig/target/_code/0017/FUN_0017efa4.o"
+      "name": "_code/0017/skeletonUpdateWorldMatrices",
+      "target_path": "orig/target/_code/0017/skeletonUpdateWorldMatrices.o"
     },
     {
       "base_path": "build/obj/_code/0017/FUN_0017f87c.o",
@@ -308590,13 +308590,13 @@
       "target_path": "orig/target/_code/0048/stateSetterFlagsClear.o"
     },
     {
-      "base_path": "build/obj/_code/0048/FUN_0048c394.o",
+      "base_path": "build/obj/_code/0048/naviMapHandleInput.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0048c394",
+            "name": "naviMapHandleInput",
             "size": 2352,
             "vram": "0x48c394"
           }
@@ -308604,10 +308604,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0048/FUN_0048c394.cpp"
+        "source_path": "src/_code/0048/naviMapHandleInput.cpp"
       },
-      "name": "_code/0048/FUN_0048c394",
-      "target_path": "orig/target/_code/0048/FUN_0048c394.o"
+      "name": "_code/0048/naviMapHandleInput",
+      "target_path": "orig/target/_code/0048/naviMapHandleInput.o"
     },
     {
       "base_path": "build/obj/_code/0048/naviMainEnterState6.o",

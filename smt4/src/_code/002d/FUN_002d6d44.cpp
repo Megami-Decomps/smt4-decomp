@@ -20,7 +20,7 @@ int scrScriptProcessStartEntry(...);
 int messageMainGetChoiceResult(void);
 int FUN_0029e774(void);
 int buttonHelpSetPreset(...);
-int FUN_002bd2b4(...);
+int cecCardBuild(...); // declcheck: local (the shared CecProcessSlot prototype does not fit this draft yet)
 int rt_aeabi_memclr(int, int);
 int FUN_003111e8(...);
 
@@ -44,7 +44,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: messageMainGetChoiceResult. */
 /* Supplied declaration required: FUN_0029e774. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bd2b4. */
+/* Supplied declaration required: cecCardBuild. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_003111e8. */
 
@@ -90,7 +90,7 @@ unsigned int FUN_002d6d44(int param_1)
       *(char *)(param_1 + 0x123) = (char)temp_v0;
     }
     temp_v3 = FUN_00259800();
-    FUN_002bd2b4(*(int *)(param_1 + 8),(int)*(short *)(*(int *)(param_1 + 8) + 0x34),
+    cecCardBuild(*(int *)(param_1 + 8),(int)*(short *)(*(int *)(param_1 + 8) + 0x34),
                  *(unsigned char *)(param_1 + 0x123),temp_v3);
     if (*(short *)(*(int *)(param_1 + 8) + 0x34) == 0) {
       rt_aeabi_memclr(*(int *)(param_1 + 8) + 0x38,0x14);
@@ -150,7 +150,7 @@ unsigned int FUN_002d6d44(int param_1)
     }
     *(unsigned short *)(param_1 + 0x120) = 0;
     temp_v3 = FUN_00259800();
-    FUN_002bd2b4(*(int *)(param_1 + 8),(int)*(short *)(param_1 + 0x120),
+    cecCardBuild(*(int *)(param_1 + 8),(int)*(short *)(param_1 + 0x120),
                  *(unsigned char *)(*(int *)(param_1 + 8) + 0x37),temp_v3);
     if (*(short *)(param_1 + 0x120) == 0) {
       rt_aeabi_memclr(*(int *)(param_1 + 8) + 0x38,0x14);
@@ -216,7 +216,7 @@ unsigned int FUN_002d6d44(int param_1)
     }
     FUN_0026d5a4();
     temp_v3 = FUN_00259800();
-    FUN_002bd2b4(*(int *)(param_1 + 8),(int)*(short *)(param_1 + 0x120),
+    cecCardBuild(*(int *)(param_1 + 8),(int)*(short *)(param_1 + 0x120),
                  *(unsigned char *)(*(int *)(param_1 + 8) + 0x37),temp_v3);
     characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0xac));

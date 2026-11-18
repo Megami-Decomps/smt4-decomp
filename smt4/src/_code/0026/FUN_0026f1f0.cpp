@@ -6,7 +6,7 @@ extern CampCecMenu *g_campCec;
 
 u32 FUN_0026f1f0(void)
 {
-    return g_campCec->unkCF8;
+    return g_campCec->messageFile;
 }
 
 } /* extern "C" */

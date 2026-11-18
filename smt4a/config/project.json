@@ -36065,12 +36065,12 @@
     },
     {
       "address": "0x17efa4",
-      "function": "FUN_0017efa4",
+      "function": "skeletonUpdateWorldMatrices",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_0017efa4.o",
+      "object": "build/obj/_code/0017/skeletonUpdateWorldMatrices.o",
       "size": 2264,
-      "source": "src/_code/0017/FUN_0017efa4.cpp",
-      "target": "orig/target/_code/0017/FUN_0017efa4.o",
+      "source": "src/_code/0017/skeletonUpdateWorldMatrices.cpp",
+      "target": "orig/target/_code/0017/skeletonUpdateWorldMatrices.o",
       "thumb": false
     },
     {
@@ -157345,12 +157345,12 @@
     },
     {
       "address": "0x48c394",
-      "function": "FUN_0048c394",
+      "function": "naviMapHandleInput",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_0048c394.o",
+      "object": "build/obj/_code/0048/naviMapHandleInput.o",
       "size": 2352,
-      "source": "src/_code/0048/FUN_0048c394.cpp",
-      "target": "orig/target/_code/0048/FUN_0048c394.o",
+      "source": "src/_code/0048/naviMapHandleInput.cpp",
+      "target": "orig/target/_code/0048/naviMapHandleInput.o",
       "thumb": false
     },
     {

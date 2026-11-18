@@ -34,7 +34,7 @@ u32 overlayIsNotBusy(void);
 }
 
 extern "C" {
-u32 FUN_002005a0(int id);
+u32 cecOutboxReadCard(struct CecProcessSlot *out);
 }
 
 extern "C" {

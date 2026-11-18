@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 #include "shard/Shard0048.h"
-#include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "shop/EquipmentMenuPage.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "Model/MoriModelContent.h"
 
@@ -18,25 +18,7 @@ typedef struct Entry80 {
     /* 0x00 */ u8 data[0x80];
 } Entry80;
 
-/* Nine equipment pages have matching cursor and item-id tables. */
-struct EquipmentMenuCursor {
-    union {
-        u8 data[0x74];
-        FlaggedValueHolder holder;
-        struct {
-            u8 unk00[8];
-            /* 0x08 */ s32 count;
-        } range;
-    };
-};
-struct EquipmentMenuItem {
-    u16 id;
-    u16 unk02;
-};
-struct EquipmentMenuPage {
-    EquipmentMenuItem items[1024];
-    u16 unk1000;
-};
+/* Apocalypse equipment shop. */
 struct EquipmentMenuState {
     union {
         /* 0x00000 */ u8 unk00000[0xB40];

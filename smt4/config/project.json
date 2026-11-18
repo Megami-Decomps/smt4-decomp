@@ -20073,12 +20073,12 @@
     {
       "address": "0x18b49c",
       "file": "camp/Config/Config",
-      "function": "FUN_0018b49c",
+      "function": "configDrawOptionPanel",
       "module": "_code",
-      "object": "build/obj/_code/camp/Config/Config/FUN_0018b49c.o",
+      "object": "build/obj/_code/camp/Config/Config/configDrawOptionPanel.o",
       "size": 680,
-      "source": "src/_code/camp/Config/Config/FUN_0018b49c.cpp",
-      "target": "orig/target/_code/camp/Config/Config/FUN_0018b49c.o",
+      "source": "src/_code/camp/Config/Config/configDrawOptionPanel.cpp",
+      "target": "orig/target/_code/camp/Config/Config/configDrawOptionPanel.o",
       "thumb": false
     },
     {
@@ -20766,12 +20766,12 @@
     },
     {
       "address": "0x196fe8",
-      "function": "FUN_00196fe8",
+      "function": "configDrawChoices",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_00196fe8.o",
+      "object": "build/obj/_code/0019/configDrawChoices.o",
       "size": 360,
-      "source": "src/_code/0019/FUN_00196fe8.cpp",
-      "target": "orig/target/_code/0019/FUN_00196fe8.o",
+      "source": "src/_code/0019/configDrawChoices.cpp",
+      "target": "orig/target/_code/0019/configDrawChoices.o",
       "thumb": false
     },
     {
@@ -25939,12 +25939,12 @@
     },
     {
       "address": "0x1ec6e0",
-      "function": "FUN_001ec6e0",
+      "function": "campCecLoaderThread",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001ec6e0.o",
+      "object": "build/obj/_code/001e/campCecLoaderThread.o",
       "size": 616,
-      "source": "src/_code/001e/FUN_001ec6e0.cpp",
-      "target": "orig/target/_code/001e/FUN_001ec6e0.o",
+      "source": "src/_code/001e/campCecLoaderThread.cpp",
+      "target": "orig/target/_code/001e/campCecLoaderThread.o",
       "thumb": false
     },
     {
@@ -27722,12 +27722,12 @@
     },
     {
       "address": "0x2005a0",
-      "function": "FUN_002005a0",
+      "function": "cecOutboxReadCard",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_002005a0.o",
+      "object": "build/obj/_code/0020/cecOutboxReadCard.o",
       "size": 72,
-      "source": "src/_code/0020/FUN_002005a0.cpp",
-      "target": "orig/target/_code/0020/FUN_002005a0.o",
+      "source": "src/_code/0020/cecOutboxReadCard.cpp",
+      "target": "orig/target/_code/0020/cecOutboxReadCard.o",
       "thumb": false
     },
     {
@@ -58529,12 +58529,12 @@
     },
     {
       "address": "0x2bd2b4",
-      "function": "FUN_002bd2b4",
+      "function": "cecCardBuild",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002bd2b4.o",
+      "object": "build/obj/_code/002b/cecCardBuild.o",
       "size": 364,
-      "source": "src/_code/002b/FUN_002bd2b4.cpp",
-      "target": "orig/target/_code/002b/FUN_002bd2b4.o",
+      "source": "src/_code/002b/cecCardBuild.cpp",
+      "target": "orig/target/_code/002b/cecCardBuild.o",
       "thumb": false
     },
     {
@@ -98536,12 +98536,12 @@
     },
     {
       "address": "0x3a2960",
-      "function": "FUN_003a2960",
+      "function": "shopDrawEquippedItemPage",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a2960.o",
+      "object": "build/obj/_code/003a/shopDrawEquippedItemPage.o",
       "size": 744,
-      "source": "src/_code/003a/FUN_003a2960.cpp",
-      "target": "orig/target/_code/003a/FUN_003a2960.o",
+      "source": "src/_code/003a/shopDrawEquippedItemPage.cpp",
+      "target": "orig/target/_code/003a/shopDrawEquippedItemPage.o",
       "thumb": false
     },
     {

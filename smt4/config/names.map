@@ -5259,3 +5259,9 @@
 0031c344 itemApplyPermanentStatBoost
 002d1ce0 mapBgLoadArchivesStep
 00339b64 btlAdvanceResidentResourceLoad
+003a2960 shopDrawEquippedItemPage
+0018b49c configDrawOptionPanel
+00196fe8 configDrawChoices
+001ec6e0 campCecLoaderThread
+002bd2b4 cecCardBuild
+002005a0 cecOutboxReadCard

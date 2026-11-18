@@ -40299,13 +40299,13 @@
       "target_path": "orig/target/_code/0018/scrOpLessEqual.o"
     },
     {
-      "base_path": "build/obj/_code/camp/Config/Config/FUN_0018b49c.o",
+      "base_path": "build/obj/_code/camp/Config/Config/configDrawOptionPanel.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0018b49c",
+            "name": "configDrawOptionPanel",
             "size": 680,
             "vram": "0x18b49c"
           }
@@ -40314,10 +40314,10 @@
           "_code",
           "camp/Config/Config"
         ],
-        "source_path": "src/_code/camp/Config/Config/FUN_0018b49c.cpp"
+        "source_path": "src/_code/camp/Config/Config/configDrawOptionPanel.cpp"
       },
-      "name": "_code/camp/Config/Config/FUN_0018b49c",
-      "target_path": "orig/target/_code/camp/Config/Config/FUN_0018b49c.o"
+      "name": "_code/camp/Config/Config/configDrawOptionPanel",
+      "target_path": "orig/target/_code/camp/Config/Config/configDrawOptionPanel.o"
     },
     {
       "base_path": "build/obj/_code/camp/Config/Config/configOpen.o",
@@ -41613,13 +41613,13 @@
       "target_path": "orig/target/_code/0019/FUN_00196d78.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_00196fe8.o",
+      "base_path": "build/obj/_code/0019/configDrawChoices.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00196fe8",
+            "name": "configDrawChoices",
             "size": 360,
             "vram": "0x196fe8"
           }
@@ -41627,10 +41627,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_00196fe8.cpp"
+        "source_path": "src/_code/0019/configDrawChoices.cpp"
       },
-      "name": "_code/0019/FUN_00196fe8",
-      "target_path": "orig/target/_code/0019/FUN_00196fe8.o"
+      "name": "_code/0019/configDrawChoices",
+      "target_path": "orig/target/_code/0019/configDrawChoices.o"
     },
     {
       "base_path": "build/obj/_code/0019/FUN_0019715c.o",
@@ -51686,13 +51686,13 @@
       "target_path": "orig/target/_code/001e/FUN_001ebedc.o"
     },
     {
-      "base_path": "build/obj/_code/001e/FUN_001ec6e0.o",
+      "base_path": "build/obj/_code/001e/campCecLoaderThread.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001ec6e0",
+            "name": "campCecLoaderThread",
             "size": 616,
             "vram": "0x1ec6e0"
           }
@@ -51700,10 +51700,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001e/FUN_001ec6e0.cpp"
+        "source_path": "src/_code/001e/campCecLoaderThread.cpp"
       },
-      "name": "_code/001e/FUN_001ec6e0",
-      "target_path": "orig/target/_code/001e/FUN_001ec6e0.o"
+      "name": "_code/001e/campCecLoaderThread",
+      "target_path": "orig/target/_code/001e/campCecLoaderThread.o"
     },
     {
       "base_path": "build/obj/_code/001e/campCecViewUpdateValue.o",
@@ -55169,13 +55169,13 @@
       "target_path": "orig/target/_code/0020/FUN_00200574.o"
     },
     {
-      "base_path": "build/obj/_code/0020/FUN_002005a0.o",
+      "base_path": "build/obj/_code/0020/cecOutboxReadCard.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002005a0",
+            "name": "cecOutboxReadCard",
             "size": 72,
             "vram": "0x2005a0"
           }
@@ -55183,10 +55183,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0020/FUN_002005a0.cpp"
+        "source_path": "src/_code/0020/cecOutboxReadCard.cpp"
       },
-      "name": "_code/0020/FUN_002005a0",
-      "target_path": "orig/target/_code/0020/FUN_002005a0.o"
+      "name": "_code/0020/cecOutboxReadCard",
+      "target_path": "orig/target/_code/0020/cecOutboxReadCard.o"
     },
     {
       "base_path": "build/obj/_code/0020/FUN_002005ec.o",
@@ -115647,13 +115647,13 @@
       "target_path": "orig/target/_code/002b/FUN_002bd29c.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002bd2b4.o",
+      "base_path": "build/obj/_code/002b/cecCardBuild.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002bd2b4",
+            "name": "cecCardBuild",
             "size": 364,
             "vram": "0x2bd2b4"
           }
@@ -115661,10 +115661,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002bd2b4.cpp"
+        "source_path": "src/_code/002b/cecCardBuild.cpp"
       },
-      "name": "_code/002b/FUN_002bd2b4",
-      "target_path": "orig/target/_code/002b/FUN_002bd2b4.o"
+      "name": "_code/002b/cecCardBuild",
+      "target_path": "orig/target/_code/002b/cecCardBuild.o"
     },
     {
       "base_path": "build/obj/_code/002b/memCopy.o",
@@ -194534,13 +194534,13 @@
       "target_path": "orig/target/_code/shop/shopMain/shopMenuUpdateInput.o"
     },
     {
-      "base_path": "build/obj/_code/003a/FUN_003a2960.o",
+      "base_path": "build/obj/_code/003a/shopDrawEquippedItemPage.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003a2960",
+            "name": "shopDrawEquippedItemPage",
             "size": 744,
             "vram": "0x3a2960"
           }
@@ -194548,10 +194548,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003a/FUN_003a2960.cpp"
+        "source_path": "src/_code/003a/shopDrawEquippedItemPage.cpp"
       },
-      "name": "_code/003a/FUN_003a2960",
-      "target_path": "orig/target/_code/003a/FUN_003a2960.o"
+      "name": "_code/003a/shopDrawEquippedItemPage",
+      "target_path": "orig/target/_code/003a/shopDrawEquippedItemPage.o"
     },
     {
       "base_path": "build/obj/_code/003a/FUN_003a2c48.o",

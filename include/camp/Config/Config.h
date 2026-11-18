@@ -5,17 +5,21 @@
 #include "common.h"
 #include <stddef.h>
 #include "script/ScriptVm.h"
+#include "ui/GridNavigation.h"
 
 /* Work area, Shin Megami Tensei IV. */
 typedef struct ConfigWork {
-    /* 0x00 */ u8 unk00[0x64];
+    /* 0x00 */ GridNavigation cursor;
     /* 0x64 */ s32 state;
     /* 0x68 */ u8 unk68[0xC];
     /* 0x74 */ s16 countA;
-    /* 0x76 */ u8 unk76[0x8];
+    /* 0x76 */ s16 touchGroup;
+    /* 0x78 */ s16 choiceRegions[3];
     /* 0x7E */ s16 countB;
-    /* 0x80 */ s32 unk80;
-    /* 0x84 */ u8 unk84[0x24];
+    /* 0x80 */ union {
+        s32 unk80;             /* initial selection of the first row */
+        s32 selectedChoice[10];
+    };
     /* 0xA8 */ u8 flag;
     /* 0xA9 */ u8 unkA9[0x3];
     /* 0xAC */ void *heapA;               /* heap block, freed on close */
@@ -23,6 +27,20 @@ typedef struct ConfigWork {
     /* 0xB4 */ ScriptProcess *resource;               /* released on close */
     /* 0xB8 */ u32 unkB8;
 } ConfigWork;
+
+typedef char ConfigWorkLayoutCheck[offsetof(ConfigWork, selectedChoice) == 0x80 &&
+    offsetof(ConfigWork, flag) == 0xA8 && sizeof(ConfigWork) == 0xBC ? 1 : -1];
+
+/* Table 0x36, section 0: the row heading and labels for its choice buttons. */
+struct ConfigurationChoices {
+    char heading[30];
+    char labels[3][10];
+    u8 unk3C[0x44];
+};
+typedef char ConfigChoicesStrideCheck[sizeof(ConfigurationChoices) == 0x80 ? 1 : -1];
+/* FUN_0019715c tail-calls the draw with its third (unused here) display parameter in r2. */
+extern "C" void configDrawOptionPanel(s32 x, s32 y, s32 display);
+extern "C" void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices);
 
 /* Sprite drawing parameters in the Apocalypse work area. */
 typedef struct ConfigDrawParams {

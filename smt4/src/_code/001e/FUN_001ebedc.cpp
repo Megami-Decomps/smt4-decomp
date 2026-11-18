@@ -28,7 +28,7 @@ int dataTable06Sub1GetRecord(void);
 int nkmBaseGetRecord(void);
 int dataTable01FindByIdWithAoc(...);
 int FUN_002bd158(...);
-int FUN_002bd2b4(...);
+int cecCardBuild(...); // declcheck: local (the shared CecProcessSlot prototype does not fit this draft yet)
 int libc_strcpy(...);
 int soundPlaySeUnpanned(...);
 int __aeabi_memset4(...);
@@ -85,7 +85,7 @@ extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: FUN_002bd158. */
-/* Supplied declaration required: FUN_002bd2b4. */
+/* Supplied declaration required: cecCardBuild. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -347,7 +347,7 @@ LAB_001ec410:
       }
       temp_v5 = FUN_00259800();
       temp_v8 = gameDataBlocksGetFlagByteA();
-      FUN_002bd2b4(g_campCec + 0x48,(int)*(short *)(temp_v7 + 0x46),temp_v8,temp_v5);
+      cecCardBuild(g_campCec + 0x48,(int)*(short *)(temp_v7 + 0x46),temp_v8,temp_v5);
       FUN_002597c0();
       cecProcessForward(g_campCec + 0x48);
       FUN_002595e0(g_campCec + 0x48);
