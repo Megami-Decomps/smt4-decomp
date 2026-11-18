@@ -178,7 +178,7 @@ typedef struct GameState {
     /* 0x0B0 */ s32 unk0B0;
     /* 0x0B4 */ s32 unk0B4;
     /* 0x0B8 */ s8 unk0B8;
-    /* 0x0B9 */ u8 unk0B9;
+    /* 0x0B9 */ s8 unk0B9;
     /* 0x0BA */ u8 unk0BA;
     /* 0x0BB */ u8 unk0BB;
     /* 0x0BC */ u8 unk0BC;

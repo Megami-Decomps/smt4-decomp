@@ -73,7 +73,7 @@ extern unsigned int DAT_0049f9c4; /* 0x49f9c4 */
 extern unsigned char DAT_0049f9c8; /* 0x49f9c8 */
 extern unsigned int DAT_0049f9d0; /* 0x49f9d0 */
 extern unsigned char DAT_0049f9d4; /* 0x49f9d4 */
-extern unsigned char DAT_0049f9d5; /* 0x49f9d5 */
+extern signed char DAT_0049f9d5; /* 0x49f9d5 */
 extern unsigned char DAT_0049f9d6; /* 0x49f9d6 */
 extern unsigned char DAT_0049f9d7; /* 0x49f9d7 */
 extern unsigned char DAT_0049f9d8; /* 0x49f9d8 */
