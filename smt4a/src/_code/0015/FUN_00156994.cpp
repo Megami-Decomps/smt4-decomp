@@ -70,7 +70,7 @@ void FUN_0016a130(void *object);
 void FUN_0016a220(ModelInstance *model, f32 dt);
 void FUN_0017352c(void *flags, void *outMatrix, void *scratch);
 void FUN_001782c8(AnimBinding *anim, void *states, void *bindings, f32 time);
-void FUN_0017efa4(void *flags, void *out, s32 mode);
+void skeletonUpdateWorldMatrices(void *flags, void *out, s32 mode);
 void FUN_0017f87c(AnimBinding *anim, void *states, void *bindings, void *trackKind, f32 time);
 void trackAdvance(AnimTrackState *track, f32 dt);
 void FUN_001881c8(void);
@@ -129,7 +129,7 @@ void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
         model->unk200 = 1;
         nn_math_ARMv6_MTX34CopyAsm(model->normalWorld, model->worldMatrix);
     } else {
-        FUN_0017efa4(model->unk0E4, model->normalMatrix, 0);
+        skeletonUpdateWorldMatrices(model->unk0E4, model->normalMatrix, 0);
         model->unk200 = 0;
         nn_math_ARMv6_MTX34InvTransposeAsm(model->normalWorld, model->normalMatrix);
         nn_math_ARMv6_MTX34MultAsm(model->normalWorld, model->worldMatrix, model->normalWorld);

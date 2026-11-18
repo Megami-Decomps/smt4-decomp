@@ -8,8 +8,7 @@ s32 rangeLimitMin(MenuList *list);
 s32 flaggedEntryGetValueByState(MenuList *list);
 u32 flaggedValueHolderGetTotal(MenuList *list);
 void FUN_003a21b8(SelectMenu *menu, s32 index, s32 marked, s32 value);
-void FUN_002332e8(MenuView *view, s32 first, s32 selected);
-void FUN_003a2960(SelectMenu *menu);
+void shopDrawEquippedItemPage(SelectMenu *menu);
 void FUN_003a1d04(SelectMenu *menu);
 void FUN_003a1f00(SelectMenu *menu);
 void FUN_003a0f88(SelectMenu *menu);
@@ -21,10 +20,10 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
     if (menu->flags & MENU_REFRESH) {
         u32 listId = menu->listId;
 
-        uiRectDrawAtBottomRight(menu->cursor, 10, 0, 0, listId);
+        uiRectDrawAtBottomRight(&menu->region, 10, 0, 0, listId);
 
         bool pickMode = false;
-        if (menu->mode == 4) {
+        if (menu->substep == 4) {
             pickMode = true;
         }
         MenuList *list = &menu->list;
@@ -36,7 +35,7 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
                 FUN_003a21b8(menu, i + 1, 0, first + i);
             }
         }
-        if (pickMode && list->marked > 0) {
+        if (pickMode && list->range.count > 0) {
             u32 marked = flaggedValueHolderGetTotal(list);
 
             FUN_003a21b8(menu, flaggedEntryGetValueByState(list) + 1, 1, marked);
@@ -44,9 +43,9 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
         s32 selected = flaggedEntryGetValueByState(list);
 
         FUN_002332e8(menu->view, FUN_0029e924(list), selected);
-        menu->view->vtbl->setList(menu->view, listId);
+        menu->view->refresh(listId);
     } else if (menu->flags & MENU_CANCEL) {
-        FUN_003a2960(menu);
+        shopDrawEquippedItemPage(menu);
     } else if (menu->flags & MENU_CONFIRM) {
         FUN_003a1d04(menu);
     } else if (menu->flags & MENU_SCROLL) {

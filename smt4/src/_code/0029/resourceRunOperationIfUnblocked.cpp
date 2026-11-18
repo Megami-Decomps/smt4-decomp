@@ -1,15 +1,13 @@
-#include "common.h"
-
-namespace { struct Object { u8 padding[0x62]; u8 disabled; }; }
+#include "ui/GridNavigation.h"
 
 extern "C" {
-/* Reads or updates the current object state. */
-u32 FUN_002d5720(const Object *object);
-u32 resourceRunOperationIfUnblocked(const Object *object)
+u32 FUN_002d5720(const RowWidget *rows);
+
+// An empty grid has no selection index.
+u32 resourceRunOperationIfUnblocked(const GridNavigation *grid)
 {
-    if (object->disabled != 0) {
+    if (grid->empty)
         return 0;
-    }
-    return FUN_002d5720(object);
+    return FUN_002d5720(&grid->rows);
 }
 }

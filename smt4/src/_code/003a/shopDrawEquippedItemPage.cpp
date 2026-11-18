@@ -1,0 +1,68 @@
+/* NON_MATCHING: the equipment scene and held-row flag use opposite saved registers (r6/r5).
+ * The header row is cleared with EquipmentMenuItem::clearOptions, the body sceneApplyTransaction inlines too. */
+#include "shard/S2Scene3a.h"
+#include "shard/Shard004A.h"
+#include "gamedata/GamePlayerData.h"
+#include "code/Code0029.h"
+
+extern "C" {
+s32 flaggedEntryGetValueByState(const FlaggedValueHolder *holder);
+void uiRectDrawAtBottomRight(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color);
+void FUN_00231bcc(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, u32 flags);
+void FUN_003a07a0(Scene3a *scene, s32 category);
+void FUN_0022ea70(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *entry);
+s32 rangeLimitMin(const FlaggedValueHolder *holder);
+
+// Draw the equipped item above the visible shop rows. In the selection phases, paint the held row last.
+void shopDrawEquippedItemPage(Scene3a *scene)
+{
+    u32 frameColor = scene->listId;
+    u32 image;
+    switch (scene->slot) {
+    case 0: image = 0; break;
+    case 1: case 2: image = 1; break;
+    case 3: case 4: case 5: image = 2; break;
+    case 6: image = 11; break;
+    case 7: image = 3; break;
+    case 8: image = 4; break;
+    }
+    uiRectDrawAtBottomRight(&scene->region, image, 0, 0, frameColor);
+    u32 color = scene->listId;
+    FUN_00231bcc(&scene->region, scene->slot + 90, 0, 0, color, 1);
+    FUN_003a07a0(scene, scene->slot);
+    Scene3aEntry header;
+    header.id = 0;
+    header.clearOptions();
+    u16 equipped = 0;
+    switch (scene->slot) {
+    case 0: equipped = gameGetPlayerData()->equipment[0]; break;
+    case 1: equipped = gameGetPlayerData()->equipment[1]; break;
+    case 2: equipped = gameGetPlayerData()->equipment[2]; break;
+    case 3: equipped = gameGetPlayerData()->equipment[3]; break;
+    case 4: equipped = gameGetPlayerData()->equipment[4]; break;
+    case 5: equipped = gameGetPlayerData()->equipment[5]; break;
+    case 6: equipped = gameGetPlayerData()->equipment[6]; break;
+    }
+    header.id = equipped;
+    FUN_0022ea70(scene, 0, 0, &header);
+
+    s32 phase = scene->phase;
+    bool selectedOverlay = phase == 5 || phase == 9 || phase == 6 || phase == 10 ||
+        phase == 7 || phase == 11 || phase == 15 || phase == 16;
+    Scene3aSlotInfo *page = &scene->slotInfo[scene->slot];
+    Scene3aEntry *entries = scene->lists[scene->slot].items;
+    s32 offset = FUN_0029e924(&page->holder);
+    s32 visible = rangeLimitMin(&page->holder);
+    for (s32 row = 0; row < visible; ++row) {
+        if (!selectedOverlay || flaggedEntryGetValueByState(&page->holder) != row)
+            FUN_0022ea70(scene, row + 2, 0, &entries[offset + row]);
+    }
+    if (selectedOverlay && page->range.count > 0) {
+        const Scene3aEntry *held = &entries[flaggedValueHolderGetTotal(&page->holder)];
+        FUN_0022ea70(scene, flaggedEntryGetValueByState(&page->holder) + 2, 1, held);
+    }
+    s32 selected = flaggedEntryGetValueByState(&page->holder);
+    FUN_002332e8(scene->view, FUN_0029e924(&page->holder), selected);
+    scene->view->refresh(color);
+}
+}

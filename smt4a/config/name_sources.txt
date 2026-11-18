@@ -7430,3 +7430,5 @@
 002c5468 mapRebuildWallAutoTiles inferred Rebuilds interior state-2 wall cells from four state-1 neighbor bits; writes MapCell.autoTile fields using two 16-byte tables. Native writable data at 005814A4/005814B4 verified byte-for-byte; source constness corrected to match segment ownership.
 002326b4 mapSystemLoadSharedFiles inferred map/mapCommon.cpp shared script/message and fifteen MoriModelContent resource initialization; same role and shared filenames as IV mapSystemLoadSharedFiles.
 00491c60 lmapRefreshDestinationAvailability inferred Refreshes normal and extra destination-list availability from native map, quest, ownership and interaction-variant rules; missing variant argument restored.
+0048c394 naviMapHandleInput inferred navigation map input step: circle pad, confirm/cancel/zoom/category/menu buttons, touch drag with inertia
+0017efa4 skeletonUpdateWorldMatrices inferred skeleton world-matrix update over SkeletonInstanceBuffers with three scaling rules

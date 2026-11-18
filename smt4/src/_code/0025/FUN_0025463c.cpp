@@ -1,12 +1,6 @@
 #include "camp/CecMenu.h"
 
-extern "C" {
-
-extern CampCecMenu *g_campCec;
-
-u8 *FUN_0025463c(void)
+extern "C" CecProcessSlot *FUN_0025463c()
 {
-    return g_campCec->block048;
+    return &g_campCec->card;
 }
-
-} /* extern "C" */

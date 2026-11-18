@@ -1,18 +1,8 @@
-#include "common.h"
-#include "code/Code0023_Smt4.h"
+#include "shop/ShopPanel.h"
 
-extern "C" {
-
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[0x40];
-    /* 0x40 */ u32 unk40;
-    /* 0x44 */ u32 unk44;
-} Obj;
-
-void FUN_002332e8(Obj *obj, u32 a, u32 b)
+// Position the scrollbar at the first visible row and the cursor within that page.
+extern "C" void FUN_002332e8(ShopPanel *panel, s32 first, s32 selected)
 {
-    obj->unk40 = a;
-    obj->unk44 = b;
+    panel->firstRow = first;
+    panel->selectedRow = selected;
 }
-
-} /* extern "C" */

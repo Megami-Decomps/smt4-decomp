@@ -17,7 +17,7 @@ int scrScriptProcessStartEntry(...);
 int scrScriptProcessCreate(void);
 int gameGetUnitRecord(...);
 int buttonHelpSetPreset(int);
-int FUN_002bd2b4(unsigned int, int, int);
+int cecCardBuild(unsigned int, int, int); // declcheck: local (the shared CecProcessSlot prototype does not fit this draft yet)
 int rt_aeabi_memclr(int, int);
 int FUN_002d67fc(int);
 int campCecEditDestroy(void);
@@ -41,7 +41,7 @@ extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bd2b4. */
+/* Supplied declaration required: cecCardBuild. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002d67fc. */
 extern int FUN_002e1afc(void);
@@ -102,7 +102,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
         if (temp_v3 == 6 || temp_v3 == 8) {
           FUN_002597c0();
           temp_v1 = FUN_0025463c();
-          FUN_002bd2b4(temp_v1,0,0);
+          cecCardBuild(temp_v1,0,0);
           FUN_0025463c();
           cecProcessForward();
           temp_v3 = FUN_0025463c();
@@ -190,7 +190,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
             }
             FUN_002597c0();
             temp_v1 = FUN_0025463c();
-            FUN_002bd2b4(temp_v1,0,0);
+            cecCardBuild(temp_v1,0,0);
             FUN_0025463c();
             temp_v3 = cecProcessForward();
             if (temp_v3 == 5) {

@@ -7,15 +7,11 @@
 
 #include "common.h"
 #include "nn/os/Thread.h"
+#include "cec/CecMessage.h"
 #include <stddef.h>
 
 class Obj420a1c;
 class Obj557ec0;
-
-/* One of IV's twelve 0x4C-byte message slots (cecSlotGet). */
-struct CecProcessSlot {
-    /* 0x00 */ u8 data[0x4C];
-};
 
 /* The StreetPass process (Shin Megami Tensei IV, 0x460 bytes). */
 struct CecProcess {

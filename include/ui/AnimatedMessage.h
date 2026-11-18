@@ -19,7 +19,8 @@ struct AnimatedMessageWork {
     /* 0x12E0 */ UiSpriteState sprites[2];
 };
 struct UiTextFontGlobals {
-    /* 0x00 */ u8 unk00[0xc];
+    /* 0x00 */ f32 dragFriction;    /* what the navigation map's slide is scaled by each frame */
+    /* 0x04 */ u8 unk04[8];
     /* 0x0C */ u32 font;
 };
 

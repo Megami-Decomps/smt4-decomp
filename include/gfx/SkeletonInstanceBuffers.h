@@ -2,9 +2,31 @@
 #define GFX_SKELETONINSTANCEBUFFERS_H
 #include "common.h"
 #include <stddef.h>
-struct SkeletonMatrix44 { f32 values[16]; };
 struct SkeletonMatrix34 { f32 values[12]; };
 struct SkeletonVector3 { f32 values[3]; };
+/* Flags of a joint's pose (SkeletonJointPose::flags). */
+enum {
+    SKELETON_JOINT_DIRTY = 0x2,               /* the local transform changed */
+    SKELETON_JOINT_WORLD_VALID = 0x4,         /* the world matrix is up to date */
+    SKELETON_JOINT_SCALE_COMPENSATE = 0x400000, /* the parent's scale only moves the joint */
+    SKELETON_JOINT_UNIT_SCALE = 0x2800000,    /* all set: the joint's own scale is one */
+    SKELETON_JOINT_IDENTITY_MATRIX = 0xC000000, /* all set: the local matrix is the identity */
+    SKELETON_JOINT_UNIT_WORLD_SCALE = 0x28000000, /* all set: the accumulated scale is one */
+    SKELETON_JOINT_INHERITED = 0xE8000000     /* a joint's flags << 4, masked by its parent's */
+};
+/* A joint's pose: its flags, scale and local matrix. */
+struct SkeletonJointPose {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ SkeletonVector3 scale;
+    /* 0x10 */ SkeletonMatrix34 matrix;
+};
+/* One 0x40-byte element of SkeletonInstanceBuffers::matrices. */
+struct SkeletonMatrix44 {
+    union {
+        f32 values[16];
+        SkeletonJointPose joint;
+    };
+};
 struct SkeletonJointResource {
     u32 flags;
     u16 id;
@@ -44,6 +66,7 @@ struct SkeletonBufferRequirements {
 struct SkeletonBufferCursor { u8 *current, *end; };
 struct SkeletonBufferBlock { void *data; u32 bytes; };
 typedef char SkeletonInstanceBufferOffsetsCheck[
+    sizeof(SkeletonMatrix44) == 0x40 && offsetof(SkeletonJointPose, matrix) == 0x10 &&
     sizeof(SkeletonJointResource) == 0x64 &&
     offsetof(SkeletonJointResource, localMatrix) == 0x2C &&
     offsetof(SkeletonInstanceResource, joints) == 0x70 &&

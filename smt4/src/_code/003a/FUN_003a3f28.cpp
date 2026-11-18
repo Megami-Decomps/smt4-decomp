@@ -31,64 +31,64 @@ void FUN_003a3f28(ShopScreen *screen)
         useCounterRelease();
         FUN_002a0cc8(0);
         buttonHelpSelectMenuPreset(screen);
-        if (screen->variant == 1) {
+        if (screen->help.variant == 1) {
             screen->substep = 0;
-            screen->mode = screen->category != 8 ? 15 : 16;
+            screen->phase = screen->slot != 8 ? 15 : 16;
             return;
         }
-        if (screen->category == 7) {
-            screen->mode = 6;
+        if (screen->slot == 7) {
+            screen->phase = 6;
             screen->substep = 0;
             return;
         }
-        screen->mode = screen->category == 8 ? 7 : 5;
+        screen->phase = screen->slot == 8 ? 7 : 5;
         screen->substep = 0;
         return;
     }
-    ShopSlotTable *table = &screen->tables[screen->category];
-    flaggedValueHolderGetTotal(&screen->lists[screen->category]);
+    ShopSlotTable *table = &screen->lists[screen->slot];
+    flaggedValueHolderGetTotal(&screen->slotInfo[screen->slot]);
     switch (useCounterGetCurrentValue()) {
     case 3:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0164);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0164);
         else
-            FUN_0027f3dc(table->slots, table->count, 4, equipmentComparePowerThenOrder);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), equipmentComparePowerThenOrder);
         break;
     case 7:
-        if (screen->category == 8) {
+        if (screen->slot == 8) {
             if (useCounterGetValue() == 0)
-                FUN_0027f3dc(table->slots, table->count, 4, FUN_003a075c);
+                FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a075c);
             else
-                FUN_0027f3dc(table->slots, table->count, 4, FUN_003a06b8);
+                FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a06b8);
         } else if (useCounterGetValue() == 0) {
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a06fc);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a06fc);
         } else {
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0674);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0674);
         }
         break;
     case 12:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_0039fd24);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_0039fd24);
         else
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a63a8);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a63a8);
         break;
     case 15:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a05e8);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a05e8);
         else
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0078);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0078);
         break;
     case 16:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0118);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0118);
         else
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_0039fcd8);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_0039fcd8);
         break;
     case 28:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0028);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a0028);
         else
-            FUN_0027f3dc(table->slots, table->count, 4, rankedEntryCompare);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), rankedEntryCompare);
         break;
     }
 }

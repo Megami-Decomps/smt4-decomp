@@ -2,15 +2,6 @@
 #include "gamedata/PartyMoney.h"
 #include "gamedata/EquipmentSortPower.h"
 
-/* Clears the entry's ten option bits and keeps the six preserved ones. */
-static inline void clearOptions(Scene3aEntry *entry)
-{
-    u32 bits = entry->unk02;
-    bits >>= 10;
-    bits <<= 10;
-    entry->unk02 = bits;
-}
-
 extern "C" {
 void FUN_002306f8(const Scene3aEntry* item, s32 quantity, u32 flags);
 void FUN_0026e630(u32 amount);
@@ -30,12 +21,12 @@ void sceneApplyTransaction(Scene3a* scene)
         }
         if (contentGetEntryKind(id) == 10) {
             FUN_0026e630(aocGetContentFlags(id) * quantity);
-            clearOptions(&item);
+            item.clearOptions();
             item.id = id;
             FUN_002306f8(&item, -(s32)quantity, 0);
             continue;
         }
-        clearOptions(&item);
+        item.clearOptions();
         item.id = id;
         FUN_002306f8(&item, quantity, 0);
     }

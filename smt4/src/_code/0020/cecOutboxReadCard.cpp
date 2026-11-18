@@ -1,19 +1,19 @@
 #include "cec/CecProcessGlobal.h"
+#include "cec/CecOutbox.h"
 #include "camp/CampCec/CampCecView.h"
 
 extern "C" {
 
-int resourceLookupWithFallback(Obj420a1c *messageBox, int id);
 extern int asdCecOutboxHasMessage(Obj420a1c *messageBox);
 
 
-u32 FUN_002005a0(int id)
+u32 cecOutboxReadCard(CecProcessSlot *out)
 {
     CecProcess *process = g_cecProcess;
     u32 found = 0;
 
-    if ((g_cecProcess != NULL && id != 0) && asdCecOutboxHasMessage(g_cecProcess->messageBox) != 0) {
-        resourceLookupWithFallback(process->messageBox, id);
+    if ((g_cecProcess != NULL && out != NULL) && asdCecOutboxHasMessage(g_cecProcess->messageBox) != 0) {
+        resourceLookupWithFallback(process->messageBox, out);
         found = 1;
     }
     return found;

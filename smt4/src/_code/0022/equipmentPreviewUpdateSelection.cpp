@@ -16,7 +16,7 @@ void FUN_0029a0cc(PlayerDataIV *);
 void equipmentPreviewUpdateSelection(Scene3a *scene)
 {
     s32 slot = scene->slot;
-    u32 item = scene->lists[slot].entries[flaggedValueHolderGetTotal(&scene->slotInfo[slot])].id;
+    u32 item = scene->lists[slot].items[flaggedValueHolderGetTotal(&scene->slotInfo[slot])].id;
     if (FUN_003c2d54(&scene->slotInfo[scene->slot]) || scene->selectedItem != item) {
         FUN_002996d8(0);
         scene->preview.requested = 0;

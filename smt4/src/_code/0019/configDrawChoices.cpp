@@ -4,19 +4,14 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-namespace {
-struct ConfigurationChoices {
-    char heading[30];
-    char labels[3][10];
-};
-}
+#include "camp/Config/Config.h"
 extern "C" {
 extern const char DAT_004028ec[];
 void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 
 // Draw configuration choices with the selected background and horizontally centered labels.
-void FUN_00196fe8(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices)
+void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices)
 {
     s32 firstPosition = 0x42;
     if (count > 2)

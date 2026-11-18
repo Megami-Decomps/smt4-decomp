@@ -4,10 +4,11 @@
 #include "camp/CommonBg/CommonBg.h"
 #include "AsdSDK/AsdMemUtil.h"
 
-struct PartyPanelRecord {
-    u8 unk00[0x38];
-    u8 skillsAndDemon[0x14];
-};
+#include "cec/CecMessage.h"
+#include "code/Code0025_Smt4.h"
+#include "shard/W6_W6Match3_ForwardEffect.h"
+
+typedef CecProcessSlot PartyPanelRecord;
 struct PartyPanelRefreshTimer {
     u8 unk00[0xC];
     u32 elapsed;
@@ -49,9 +50,6 @@ typedef char PartyPanelRefreshLayoutCheck[
     offsetof(PartyPanelRefreshWork, refresh) == 0x126 &&
     offsetof(PartyPanelRefreshWork, extraIndex) == 0x148 ? 1 : -1];
 extern "C" {
-PartyPanelRecord *FUN_002bd2b4(PartyPanelRecord *record, s32 unit, u8 kind, s32 index);
-void FUN_002597c0(void);
-void cecProcessForward(PartyPanelRecord *record);
 void rt_aeabi_memclr(void *data, u32 size);
 void characterInfoPanelPopulate(void *panel, PartyPanelRecord *record, void *preview);
 void uiDrawRecordNameLabels(void *labels, PartyPanelRecord *record);
@@ -66,12 +64,12 @@ u32 FUN_002fc7a0(PartyPanelRefreshWork *work)
     if (work->refresh != 0) {
         work->refresh = 0;
         memClear(work->record, sizeof(PartyPanelRecord));
-        FUN_002bd2b4(work->record, work->unit, work->kind,
+        cecCardBuild(work->record, work->unit, work->kind,
                     work->pageIndex + work->baseIndex + work->extraIndex);
         FUN_002597c0();
         cecProcessForward(work->record);
         if (work->unit == 0) {
-            rt_aeabi_memclr(work->record->skillsAndDemon, sizeof(work->record->skillsAndDemon));
+            rt_aeabi_memclr(&work->record->demon, sizeof(work->record->demon));
         }
         characterInfoPanelPopulate(work->characterPanel, work->record, work->preview);
         uiDrawRecordNameLabels(work->nameLabels, work->record);

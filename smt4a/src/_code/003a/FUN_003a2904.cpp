@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0017efa4(int, int, int);
+int skeletonUpdateWorldMatrices(int, int, int);
 int mathPositionHeadingDegrees(void);
 int __hardfp_atan2f(void);
 int VectorFloatToUnsigned(double, int);
@@ -49,7 +49,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0017efa4. */
+/* Supplied declaration required: skeletonUpdateWorldMatrices. */
 extern int FUN_001a7a20(int, unsigned char *, unsigned int);
 extern unsigned int libc_strlen(unsigned char *);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -249,7 +249,7 @@ void FUN_003a2904(void)
         temp_v0 = temp_v2 + temp_v0 * 0x40 + 0x10;
         nn_math_ARMv6_MTX34MultAsm(temp_v0,temp_v0,&temp_v25);
       }
-      FUN_0017efa4(temp_v5,temp_v4 + 0x120,0);
+      skeletonUpdateWorldMatrices(temp_v5,temp_v4 + 0x120,0);
     }
     temp_v3 = temp_v3 + 1;
     if (temp_v3 >= 0x23) {

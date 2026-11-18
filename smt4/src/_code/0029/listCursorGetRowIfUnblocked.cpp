@@ -1,17 +1,14 @@
-#include "common.h"
+#include "ui/GridNavigation.h"
 #include "code/Code0029_VariantB.h"
 
-namespace { struct Object { u8 padding[0x62]; u8 disabled; }; }
-
 extern "C" {
-/* Reads or updates the current object state. */
-u32 FUN_002cb8d0(const Object *object);
+u32 FUN_002cb8d0(const RowWidget *rows);
+
 u32 listCursorGetRowIfUnblocked(const void *handle)
 {
-    const Object *object = static_cast<const Object *>(handle);
-    if (object->disabled != 0) {
+    const GridNavigation *grid = static_cast<const GridNavigation *>(handle);
+    if (grid->empty)
         return 0;
-    }
-    return FUN_002cb8d0(object);
+    return FUN_002cb8d0(&grid->rows);
 }
 }

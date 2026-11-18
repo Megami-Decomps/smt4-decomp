@@ -22,11 +22,14 @@ struct NavigationFadeWork {
     /* 0x07B91 */ u8 flag7B91;
     /* 0x07B92 */ u8 unk07B92[0x1897E];
     /* 0x20510 */ u32 cursorMode;
+    /* 0x20514 */ u8 unk20514[0x130];
+    /* 0x20644 */ u8 mapChangeRequested;
 };
 
 typedef char NavigationFadeWorkOffsets[
     offsetof(NavigationFadeWork, scene) == 0x4CC && offsetof(NavigationFadeWork, sprites) == 0xC40 &&
     offsetof(NavigationFadeWork, headerSprite) == 0x10A0 && offsetof(NavigationFadeWork, footerSprite) == 0x112C &&
-    offsetof(NavigationFadeWork, flag7B90) == 0x7B90 && offsetof(NavigationFadeWork, cursorMode) == 0x20510 ? 1 : -1];
+    offsetof(NavigationFadeWork, flag7B90) == 0x7B90 && offsetof(NavigationFadeWork, cursorMode) == 0x20510 &&
+    offsetof(NavigationFadeWork, mapChangeRequested) == 0x20644 ? 1 : -1];
 
 #endif

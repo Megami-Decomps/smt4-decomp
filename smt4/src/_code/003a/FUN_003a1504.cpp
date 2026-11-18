@@ -33,7 +33,7 @@ void FUN_003a1504(Scene3a *scene)
             FUN_0029defc(0xffffffff, 0);
             statusPanelSetOpen(1);
             list = &scene->lists[scene->slot];
-            id = list->entries[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
+            id = list->items[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
             if (id != 0) {
                 if (contentGetEntryKind(id) == 4) {
                     FUN_0029a084(0, id);

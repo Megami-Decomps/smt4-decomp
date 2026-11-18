@@ -1,100 +1,80 @@
-/* A scene object with a per-phase update callback table and a loading state machine. */
+/* The IV shop scene shared by the category, appraisal, loading and transaction handlers. */
 #ifndef S2_SCENE3A_H
 #define S2_SCENE3A_H
 
-#include "common.h"
+#include "shop/EquipmentMenuPage.h"
+#include "shop/ShopPanel.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include <stddef.h>
 
 struct Scene3a;
-typedef void (Scene3a::*Scene3aFunc)(void);
+typedef void (Scene3a::*Scene3aFunc)();
+typedef ShopPanel MenuView;
 
-#define SCENE3A_SLOTS 2
-
-/* Per-slot data flaggedValueHolderGetTotal searches (0x74 bytes). */
-typedef struct Scene3aSlotInfo {
-    u8 unk00[0x74];
-} Scene3aSlotInfo;
-
-typedef struct Scene3aEntry {
-    u16 id;     /* 0x0: 0 = empty */
-    union {
-        u16 unk02;  /* 0x2 */
-        struct {
-            u16 options : 10;
-            u16 preserved : 6; // upper bits survive option updates
-        } attributes;
-    };
-} Scene3aEntry;
-
-/* A slot's entry list. */
-typedef struct Scene3aList {
-    Scene3aEntry entries[0x400]; /* 0x000 */
-    u16 unk1000;                 /* 0x1000 */
-} Scene3aList;
-
-struct Scene3aTransactionRecord {
-    u16 unk00;
-    u16 id;
-    u16 quantity;
-};
-
-/* Loading states of Scene3a::state. */
+enum { SCENE3A_SLOTS = 9 };
+typedef EquipmentMenuCursor Scene3aSlotInfo;
+typedef EquipmentMenuItem Scene3aEntry;
+typedef EquipmentMenuPage Scene3aList;
+struct Scene3aTransactionRecord { u16 unk00, id, quantity; };
 enum {
-    SCENE3A_STATE_IDLE = 0,
-    SCENE3A_STATE_START = 1,
-    SCENE3A_STATE_RUNNING = 2,
-    SCENE3A_STATE_STOP = 3,
-    SCENE3A_STATE_FINISH = 4
+    SCENE3A_STATE_IDLE, SCENE3A_STATE_START, SCENE3A_STATE_RUNNING,
+    SCENE3A_STATE_STOP, SCENE3A_STATE_FINISH
 };
-
 struct Scene3a {
-    /* 0x00000 */ u8 unk00[4];
-    /* 0x00004 */ s32 phase;                  /* index of the update callback to run */
+    /* 0x00000 */ u32 flags;
+    /* 0x00004 */ s32 phase;
     union {
-        /* 0x00008 */ u8 unk08[0x18];
+        /* 0x00008 */ s32 substep;
+        struct {
+            u8 unk08[8];
+            /* 0x00010 */ s32 variant;
+            /* 0x00014 */ u8 forceOverride;
+            u8 unk15[3];
+            /* 0x00018 */ s32 context;
+        } help;
         struct {
             u8 unk08BeforePreview[0x16];
             /* 0x0001E */ u8 requested;
             /* 0x0001F */ u8 ready;
         } preview;
     };
-    /* 0x00020 */ struct {
-        Scene3aFunc func;                     /* member function pointer, 8 bytes */
-    } updateFuncs[0x100];                     /* one per phase (count unknown) */
-    /* 0x00820 */ u8 unk820[0x40];
-    /* 0x00860 */ s32 slot;                   /* current slot */
-    /* 0x00864 */ u8 unk864[0x1c];
+    /* Callback storage ends no later than the script resource at 0x160. */
+    /* 0x00020 */ struct { Scene3aFunc func; } updateFuncs[0x28];
+    /* 0x00160 */ u8 unk160[0x21C];
+    /* 0x0037C */ u32 listId;
+    /* 0x00380 */ AsdTextureRegion region;
+    /* 0x003A0 */ u8 unk3A0[0x4BC];
+    /* 0x0085C */ MenuView *view;
+    /* 0x00860 */ s32 slot;
+    /* 0x00864 */ s32 tab;
+    /* 0x00868 */ u8 unk868[0x18];
     /* 0x00880 */ Scene3aSlotInfo slotInfo[SCENE3A_SLOTS];
-    /* 0x00968 */ u8 unk968[0x32c];
-    /* 0x00c94 */ Scene3aList lists[SCENE3A_SLOTS];
-    /* 0x02c98 */ union {
-        u8 unk2c98[0x1308c];
-        struct {
-            u8 unk2C98[0x7084];
-            /* 0x09D1C */ Scene3aTransactionRecord records[0x2000];
-            /* 0x15D1C */ u16 count;
-            /* 0x15D1E */ u8 unk15D1E[2];
-            /* 0x15D20 */ u32 totalAmount;
-        } transaction;
-    };
-    /* 0x15d24 */ s32 state;                  /* SCENE3A_STATE_* */
+    /* 0x00C94 */ Scene3aList lists[SCENE3A_SLOTS];
+    /* 0x09CA8 */ EquipmentMenuCursor list; // appraisal list
+    struct {
+        /* 0x09D1C */ Scene3aTransactionRecord records[0x2000];
+        /* 0x15D1C */ u16 count;
+        /* 0x15D1E */ u8 unk15D1E[2];
+        /* 0x15D20 */ u32 totalAmount;
+    } transaction;
+    /* 0x15D24 */ s32 state;
     union {
-        /* 0x15d28 */ u8 unk15d28[0x20];
+        u8 unk15d28[0x20];
         struct {
-            /* 0x15d28 */ u32 item;
-            u8 unk15d2c[0x1c];
+            /* 0x15D28 */ u32 item;
+            u8 unk15d2c[0x1C];
         } equipmentPreview;
     };
-    /* 0x15d48 */ void *modelManager;         /* destroyed when the scene stops */
-    /* 0x15d4c */ u8 unk15d4c[8];
-    /* 0x15d54 */ u32 selectedItem;
+    /* 0x15D48 */ void *modelManager;
+    /* 0x15D4C */ u8 unk15d4c[8];
+    /* 0x15D54 */ u32 selectedItem;
 };
+typedef char Scene3aPageLayoutCheck[offsetof(Scene3a, listId) == 0x37C &&
+    offsetof(Scene3a, region) == 0x380 && offsetof(Scene3a, view) == 0x85C &&
+    offsetof(Scene3a, slotInfo) == 0x880 && offsetof(Scene3a, lists) == 0xC94 &&
+    offsetof(Scene3a, list) == 0x9CA8 ? 1 : -1];
 typedef char Scene3aTransactionLayoutCheck[sizeof(Scene3aEntry) == 4 &&
     sizeof(Scene3aTransactionRecord) == 6 && offsetof(Scene3aEntry, attributes) == 2 &&
-    offsetof(Scene3a, transaction.records) == 0x9D1C &&
-    offsetof(Scene3a, transaction.count) == 0x15D1C &&
+    offsetof(Scene3a, transaction.records) == 0x9D1C && offsetof(Scene3a, transaction.count) == 0x15D1C &&
     offsetof(Scene3a, transaction.totalAmount) == 0x15D20 && sizeof(Scene3a) == 0x15D58 ? 1 : -1];
-typedef char Scene3aEntryAttributesStorageCheck[offsetof(Scene3aEntry, attributes) == 2 &&
-    sizeof(((Scene3aEntry *)0)->attributes) == 2 ? 1 : -1];
-
 #endif

@@ -21,9 +21,8 @@ u32 FUN_002ece60(CampCecMenu *work)
     u32 result = 0;
     switch (work->scriptFlow.phase) {
     case 0:
-        if (work->scriptResource != 0 && work->unkCF8 != 0) {
-            /* unkCF8 is the owner word the script's message commands use. */
-            ScriptProcess *process = scrScriptProcessCreate(work->scriptResource, (void *)work->unkCF8);
+        if (work->scriptResource != 0 && work->messageFile != 0) {
+            ScriptProcess *process = scrScriptProcessCreate(work->scriptResource, (void *)work->messageFile);
             s32 entry = work->scriptFlow.kind == 1 ? 0x1C : 0x1D;
             work->script.process = process;
             scrScriptProcessStartEntry(process, entry);

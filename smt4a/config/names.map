@@ -6890,3 +6890,5 @@
 002c5468 mapRebuildWallAutoTiles
 002326b4 mapSystemLoadSharedFiles
 00491c60 lmapRefreshDestinationAvailability
+0048c394 naviMapHandleInput
+0017efa4 skeletonUpdateWorldMatrices

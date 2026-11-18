@@ -1,13 +1,10 @@
-#include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "cec/CecOutbox.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 
-void cecMessageBoxFindMessageByKey(AsdCecMessageBox *box, s32 kind, u32 arg);
-
-void cecOutboxPost(u32 arg)
+u32 cecOutboxPost(const CecMessageKey *key)
 {
-    cecMessageBoxFindMessageByKey(g_asdCec.cec->box, ASD_CEC_OUTBOX, arg);
+    return cecMessageBoxFindMessageByKey(g_asdCec.cec->box, ASD_CEC_OUTBOX, key);
 }
-
-} /* extern "C" */
+}

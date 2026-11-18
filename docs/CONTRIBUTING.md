@@ -252,6 +252,12 @@ a sibling setter or another user of the same lookup is usually written the same 
   explicit cases even when a case and `default` do the same thing: merging them changes the whole
   decision tree.
 - Two identical branches that retail cross-jumps come from one inline helper called in both.
+- A condition computed inside a guarded block and tested after the blocks join is a flag:
+  `bool changed = false; if (ready && enabled) changed = memcmp(...) != 0; if (changed) { ... }`
+  (smt4 `FUN_001ec6e0`). Nesting the test inside the guard gives a different branch layout.
+- A worker thread is `for (;;) { if (work->stop) break; switch (work->state) { ... } sleep(span); }`
+  with each `case` advancing `state++` and falling through; the stop flag is an `s8`, and the sleep
+  takes its `nn::fnd::TimeSpan` by value.
 
 **Locals, constants and literal pools**
 - A local pointer to a global moves its pool word earlier; a constant passed through a
