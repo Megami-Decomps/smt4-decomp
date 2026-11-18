@@ -32,7 +32,7 @@ bytes one function, keeping the first real name, else the first written source, 
 """
 import argparse
 import bisect
-import importlib.util
+import importlib
 import json
 import os
 import re
@@ -44,13 +44,6 @@ from pathlib import Path
 ROOT = Path(os.path.abspath(__file__)).parent.parent
 GAMES = ("smt4", "smt4a")
 sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
-
-
-def module(game, name):
-    spec = importlib.util.spec_from_file_location(f"{name}_{game}", ROOT / game / "tools" / f"{name}.py")
-    loaded = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(loaded)
-    return loaded
 
 
 def load(game):
@@ -182,7 +175,7 @@ def missing(game):
     """[(address, size, 'arm' | 'thumb' | 'extend' | 'move' | 'join' | 'split', note)] of what the analysis
     got wrong ('split': the size column is the offset of the second function)."""
     root = ROOT / game
-    split, n3ds = module(game, "split"), module(game, "n3ds")
+    split, n3ds = importlib.import_module("split"), importlib.import_module("n3ds")  # split() is this tool's own
     project = json.loads((root / "config" / "project.json").read_text(encoding="utf-8"))
     base, code, _segments = n3ds.load_code(root / project["image"]["orig"], "_code")
     sections = next(m for m in json.loads((root / "config" / "modules.json").read_text(encoding="utf-8"))["modules"]

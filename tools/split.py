@@ -22,7 +22,8 @@ pools are `$d` mapping symbols, a pool that follows the function's last
 instruction (before the next function) is part of the object, and
 `.ARM.attributes` says ARMv6K/VFPv2 (MPCore).
 
-    python3 tools/split.py [--module ID] [--only SUBSTR] [--out DIR]
+    python3 ../tools/split.py [--module ID] [--only SUBSTR] [--out DIR]    in smt4/ or smt4a/
+    python3 tools/split.py --project GAME [...]                             anywhere
 
 Standard library only.
 """
@@ -40,7 +41,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 import n3ds  # noqa: E402
 
-ROOT = Path(os.path.abspath(__file__)).parent.parent
+REPO = Path(os.path.abspath(__file__)).parent.parent
+ROOT = None  # the game directory main() works on (project_root)
 MAX_FUNCTION_BYTES = 1 << 20
 # The 3DS target: Tag_CPU_name, Tag_CPU_arch (v6K), Tag_FP_arch (VFPv2).
 CPU = ("MPCore", 9, 2)
@@ -591,12 +593,26 @@ class Module:
         return build_object(name, bytes(code), thumb, relocs, pools, attributes, local_symbols, size, space=space)
 
 
+def project_root(project=None):
+    """The game directory a tool works on: `--project` (a path, or a game's directory name in this
+    repository), else the working directory when it is one (it holds config/project.json)."""
+    candidates = [Path(project), REPO / project] if project else [Path.cwd()]
+    for candidate in candidates:
+        if (candidate / "config" / "project.json").is_file():
+            return Path(os.path.abspath(candidate))
+    raise SystemExit(f"{project or Path.cwd()}: not a game directory: run this in smt4/ or smt4a/, or pass --project GAME")
+
+
 def main():
+    global ROOT
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser.add_argument("--project", help="the game directory (default: the working directory)")
     parser.add_argument("--module", help="only this module id (config/modules.json)")
     parser.add_argument("--only", help="only objects whose path contains this")
-    parser.add_argument("--out", default=str(ROOT), help="write the objects below this directory (default: the project)")
+    parser.add_argument("--out", help="write the objects below this directory (default: the project)")
     args = parser.parse_args()
+    ROOT = project_root(args.project)
+    args.out = args.out or str(ROOT)
     started = time.time()
     project = json.loads((ROOT / "config" / "project.json").read_text(encoding="utf-8"))
     modules = json.loads((ROOT / "config" / "modules.json").read_text(encoding="utf-8"))["modules"]

@@ -17,7 +17,9 @@ defines (`DAT_<addr>`, functions linked as bytes) are defined at their
 addresses. The linked image is compared with the decompressed `.code` of the
 dump (`image.orig` in config/project.json; tools/n3ds.py reads it).
 
-    python3 tools/relink.py [--matched] [--full] [--exclude FUN_a,FUN_b] [--module ID] [--ld PATH] [--objcopy PATH]
+    python3 ../tools/relink.py [--matched] [--full] [--exclude FUN_a,FUN_b] [--module ID] [--ld PATH] [--objcopy PATH]
+
+in smt4/ or smt4a/; elsewhere, `--project GAME` names the game directory.
 
 `--matched` reads build/report.json (`python3 build.py report`). The objects it
 relinks come from `python3 build.py split` (orig/target) and `python3 build.py`
@@ -47,12 +49,11 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(os.path.abspath(__file__)).parent.parent
 sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
 import n3ds  # noqa: E402
 import split  # noqa: E402
 
-OUT = ROOT / "build" / "relink"
+ROOT = OUT = None  # the game directory and its build/relink/, set by main()
 
 
 def find_tool(explicit, name):
@@ -322,7 +323,9 @@ def matched_functions():
 
 
 def main():
+    global ROOT, OUT
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser.add_argument("--project", help="the game directory (default: the working directory)")
     parser.add_argument("--image", help="the dump (default: image.orig of config/project.json)")
     parser.add_argument("--module", help="module id of config/modules.json (default: the first)")
     parser.add_argument("--ld")
@@ -333,6 +336,8 @@ def main():
                              "back to retail); by default only matched functions link as objects and the rest as bytes")
     parser.add_argument("--exclude", default="", help="comma-separated functions to keep as retail bytes")
     args = parser.parse_args()
+    ROOT = split.project_root(args.project)
+    OUT = ROOT / "build" / "relink"
     ld, objcopy = find_tool(args.ld, "ld"), find_tool(args.objcopy, "objcopy")
     started = time.time()
 

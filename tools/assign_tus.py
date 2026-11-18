@@ -187,7 +187,7 @@ def main():
     parser.add_argument("--holdout", type=float, help="hide this share of anchors and report how many come back right")
     args = parser.parse_args()
     root = Path(os.path.abspath(REPO / args.project))
-    sys.path.insert(0, str(root / "tools"))
+    sys.path.insert(0, str(REPO / "tools"))
     from n3ds import load_code
 
     project = json.loads((root / "config" / "project.json").read_text())

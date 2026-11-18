@@ -10,7 +10,8 @@ stops the build, and archive members cannot escape the install directory.
 Standard library only. `file://` URLs are accepted so a project can be built
 offline from tools you already hold (the manifest says where each came from).
 
-    python3 tools/download_tool.py ID [ID...] [--manifest FILE] [--dest DIR]
+    python3 ../tools/download_tool.py ID [ID...] [--manifest FILE] [--dest DIR]   in smt4/ or smt4a/
+    python3 tools/download_tool.py --project GAME ID [ID...]                      anywhere
 """
 import argparse
 import hashlib
@@ -26,7 +27,8 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-ROOT = Path(os.path.abspath(__file__)).parent.parent
+sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
+from split import project_root  # noqa: E402
 
 
 def host_keys():
@@ -148,9 +150,14 @@ def load_manifest(path):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("ids", nargs="+")
-    parser.add_argument("--manifest", default=str(ROOT / "config" / "toolchain.json"))
-    parser.add_argument("--dest", default=str(ROOT / "build" / "tools"))
+    parser.add_argument("--project", help="the game directory (default: the working directory)")
+    parser.add_argument("--manifest", help="default: <project>/config/toolchain.json")
+    parser.add_argument("--dest", help="default: <project>/build/tools")
     args = parser.parse_args(argv)
+    if not (args.manifest and args.dest):
+        root = project_root(args.project)
+        args.manifest = args.manifest or str(root / "config" / "toolchain.json")
+        args.dest = args.dest or str(root / "build" / "tools")
     tools = load_manifest(args.manifest)
     cache = Path(args.dest) / ".cache"
     for tool_id in args.ids:

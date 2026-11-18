@@ -72,7 +72,7 @@ python build.py fetch               # the pinned armcc, objdiff-cli and arm-none
 python build.py split               # checks the dump, writes each retail function as an object
 python build.py                     # compiles every function with armcc
 python build.py report              # objdiff -> build/report.json
-python tools/relink.py --matched    # links every matched function into the retail .code
+python ../tools/relink.py --matched # links every matched function into the retail .code
 ```
 
 `build.py split` refuses any other build of the game. `relink.py` prints `MATCH` when the linked

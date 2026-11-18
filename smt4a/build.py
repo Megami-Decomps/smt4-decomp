@@ -389,7 +389,7 @@ def carve(obj, unit):
     Returns False (object untouched) when it references a dropped section by section symbol that no
     name resolves."""
     import struct
-    sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT.parent / "tools"))
     import split
     data = Path(obj).read_bytes()
     sections, symbols = read_elf(data)
@@ -477,7 +477,7 @@ def link_aliases(obj):
     import struct
     global _ALIASES
     if _ALIASES is None:
-        sys.path.insert(0, str(ROOT / "tools"))
+        sys.path.insert(0, str(ROOT.parent / "tools"))
         import split
         path = ROOT / "config" / "symbols.txt"
         own = {**{address: name for address, (name, _size, _thumb) in split.read_symbols(path).items()},
@@ -614,20 +614,20 @@ def fetch():
     if FAMILY == "armcc" and os.name != "nt":
         tools.append("wibo")
     ids = [t for t in tools if t in MANIFEST]
-    status = subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), *ids])
+    status = subprocess.call([sys.executable, str(ROOT.parent / "tools" / "download_tool.py"), "--project", str(ROOT), *ids])
     # tools/relink.py links with GNU ld; a host the pinned binutils do not cover can bring its own.
-    if "binutils-arm-none-eabi" in MANIFEST and (ROOT / "tools" / "relink.py").exists():
-        if subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), "binutils-arm-none-eabi"]) != 0:
+    if "binutils-arm-none-eabi" in MANIFEST and (ROOT.parent / "tools" / "relink.py").exists():
+        if subprocess.call([sys.executable, str(ROOT.parent / "tools" / "download_tool.py"), "--project", str(ROOT), "binutils-arm-none-eabi"]) != 0:
             print("note: tools/relink.py needs arm-none-eabi binutils: put them on PATH or pass --ld/--objcopy", file=sys.stderr)
     return status
 
 
 def split(arguments):
     """tools/split.py: the retail target objects, from the dump and config/ only."""
-    script = ROOT / "tools" / "split.py"
+    script = ROOT.parent / "tools" / "split.py"
     if not script.exists():
         raise SystemExit("this project has no tools/split.py (only Nintendo 3DS projects can rebuild orig/target without romwright)")
-    return subprocess.call([sys.executable, str(script), *arguments])
+    return subprocess.call([sys.executable, str(script), "--project", str(ROOT), *arguments])
 
 
 def text_size(path):
@@ -674,7 +674,7 @@ def report():
     if not any((ROOT / unit["target_path"]).exists() for unit in json.loads(config.read_text())["units"]):
         raise SystemExit(
             "orig/target/ holds no retail objects: "
-            + ("run `python3 build.py split` (it needs your dump in orig/)" if (ROOT / "tools" / "split.py").exists()
+            + ("run `python3 build.py split` (it needs your dump in orig/)" if (ROOT.parent / "tools" / "split.py").exists()
                else "regenerate the project with romwright-cli new-project (they are cut from your dump)")
         )
     BUILD.mkdir(exist_ok=True)

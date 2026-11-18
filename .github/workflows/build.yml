@@ -44,6 +44,10 @@ jobs:
         run: |
           if [ -n "$BASE" ] && git cat-file -e "$BASE" 2>/dev/null; then python -B tools/declcheck.py "$BASE"; else python -B tools/declcheck.py HEAD~1; fi
 
+      # The tree's count of such redeclarations may only fall: config/declcheck_ceiling.txt holds the most it may have.
+      - name: Declaration ceiling
+        run: python -B tools/declcheck.py --all --ratchet
+
       # The pinned armcc, objdiff-cli and arm-none-eabi binutils, each checked against its sha256.
       - name: Cache tools
         uses: actions/cache@v4
@@ -120,8 +124,8 @@ jobs:
       - name: Relink proof
         if: steps.orig.outputs.available == 'true'
         run: |
-          (cd smt4 && python tools/relink.py --matched)
-          (cd smt4a && python tools/relink.py --matched)
+          (cd smt4 && python ../tools/relink.py --matched)
+          (cd smt4a && python ../tools/relink.py --matched)
 
       - name: Upload reports
         if: steps.orig.outputs.available == 'true'

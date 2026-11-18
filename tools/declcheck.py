@@ -3,6 +3,8 @@ struct of a name that a shared header declares.
 
     python -B tools/declcheck.py [BASE]      check `git diff BASE` (default: HEAD~1); exit 1 on new cases
     python -B tools/declcheck.py --all       count every existing case in the tree (no failure)
+    python -B tools/declcheck.py --all --ratchet   exit 1 when the count exceeds config/declcheck_ceiling.txt
+    python -B tools/declcheck.py --all --lower     write a count below the ceiling there
 
 Shared headers are everything under include/ and each game's <game>/include/. A unit (`<game>/src/**.cpp`)
 that writes its own prototype or `extern` of a name one of them declares, or its own `struct X {` for a
@@ -23,6 +25,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(os.path.abspath(__file__)).parent.parent
+# The most local redeclarations the tree may hold (CI runs --all --ratchet): it only ever comes down.
+CEILING = ROOT / "config" / "declcheck_ceiling.txt"
 COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
 PROTO = re.compile(r"^[ \t]*(?:extern\s+(?:\"C\"\s+)?)?(?:static\s+)?(?:const\s+)?(?!(?:else|return|do|case|goto|throw|delete|new|if|while|for|switch)\b)[A-Za-z_][\w:<>]*[\s\*&]+([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^()]*\)[^;{}()]*)*\)\s*;", re.M)
 EXTERN = re.compile(r"^[ \t]*extern\s+(?:\"C\"\s+)?(?:const\s+)?(?:struct\s+)?[A-Za-z_][\w:]*[\s\*]+([A-Za-z_]\w*)\s*(?:\[[^\]]*\])?\s*;", re.M)
@@ -92,6 +96,24 @@ def defined_elsewhere(name, path):
             {m[1] for m in STATIC.finditer((ROOT / other).read_text(encoding="utf-8", errors="replace"))}]
 
 
+def ratchet(total, write=False):
+    """Hold the --all count at or below the tracked ceiling; --lower records a lower count."""
+    ceiling = int(CEILING.read_text(encoding="utf-8").split()[0])
+    rel = CEILING.relative_to(ROOT).as_posix()
+    if total > ceiling:
+        print(f"{total - ceiling} above the ceiling of {ceiling} ({rel}): include the shared header instead of "
+              "declaring its names again (`python -B tools/declcheck.py BASE` lists the new ones)")
+        sys.exit(1)
+    if total < ceiling and write:
+        CEILING.write_text(f"{total}\n", encoding="utf-8", newline="\n")
+        print(f"ceiling lowered from {ceiling} to {total} in {rel}: commit it")
+    elif total < ceiling:
+        print(f"{ceiling - total} below the ceiling of {ceiling}: lower it with "
+              f"`python -B tools/declcheck.py --all --lower` (writes {total} to {rel}) and commit that")
+    else:
+        print(f"at the ceiling ({rel})")
+
+
 def main():
     if "--all" in sys.argv:
         total = 0
@@ -101,6 +123,8 @@ def main():
                 d, t = names_in(unit.read_text(encoding="utf-8", errors="replace"))
                 total += len((d & decls) - {unit.stem}) + len(t & types)
         print(f"{total} local redeclarations of names a shared header declares")
+        if "--ratchet" in sys.argv or "--lower" in sys.argv:
+            ratchet(total, write="--lower" in sys.argv)
         return
     base = sys.argv[1] if len(sys.argv) > 1 else "HEAD~1"
     shared = {}

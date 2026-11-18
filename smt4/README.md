@@ -18,7 +18,7 @@ python build.py fetch              # pinned armcc, objdiff-cli, arm-none-eabi bi
 python build.py split              # checks orig/smt4_v1.2.0.cxi, writes the retail target objects orig/target/**.o
 python build.py                    # compiles every unit (--force rebuilds, --strict fails on errors)
 python build.py report             # objdiff over objdiff.json -> build/report.json
-python tools/relink.py --matched   # links the whole .code and compares it with retail: must print MATCH
+python ../tools/relink.py --matched  # links the whole .code and compares it with retail: must print MATCH
 ```
 
 `orig/` and `build/` hold bytes derived from your dump and never enter version control.
@@ -47,6 +47,10 @@ python tools/relink.py --matched   # links the whole .code and compares it with 
 
 - `build.py`: compiles units, repeats what armlink did to retail (linker NOPs, inlined leaf calls,
   veneers), cuts multi-function objects down to the unit's function, and runs objdiff.
+
+The rest are in the top-level [`tools/`](../tools/), shared by both games. `split.py`, `relink.py` and
+`download_tool.py` work on the game directory they run in (`--project smt4` from anywhere else).
+
 - `tools/split.py`: rebuilds the retail target objects from your dump and `config/`, refusing any other
   build of the game. Run it again after renaming (`tools/names.py` does).
 - `tools/relink.py`: links the `.code` with GNU ld from retail bytes and, with `--matched`, from every
@@ -62,7 +66,7 @@ The retail side of a unit is one function cut out of the linked image. Calls and
 functions are relocations, as a compiler emits them, and literal pools are data: a pool word holding an
 address relocates to that function, to the named global, or to `DAT_<address>` (declare it as
 `extern ... DAT_00412345;` and the operand matches). objdiff ignores some operand differences, so 100%
-there is not proof: a function counts once `tools/relink.py --matched` links its compiled object into a
+there is not proof: a function counts once `relink.py --matched` links its compiled object into a
 byte-identical `.code`.
 
 ## Toolchain licence

@@ -80,7 +80,7 @@ def load_game(game: str) -> dict:
         proof = json.loads((build / "relink" / "proof.json").read_text())
     except FileNotFoundError as error:
         sys.exit(f"{error.filename} is missing: run `python -B build.py report` and "
-                 f"`python -B tools/relink.py --matched` in {game}/ first")
+                 f"`python -B ../tools/relink.py --matched` in {game}/ first")
     if not proof["match"]:
         sys.exit(f"{game}: the last relink did not match retail; nothing can be credited")
     proven = set(proof["proven"])
@@ -134,7 +134,7 @@ def twin_pairs() -> list[dict]:
     out.parent.mkdir(exist_ok=True)
     subprocess.run([sys.executable, "-B", str(ROOT / "tools" / "shared.py"), "--json", str(out)],
                    cwd=ROOT, check=True, capture_output=True)
-    return json.loads(out.read_text())
+    return json.loads(out.read_text())["exact"]
 
 
 def category(folder: str) -> str:

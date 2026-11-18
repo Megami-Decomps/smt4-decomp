@@ -54,7 +54,7 @@ INCLUDE = re.compile(rb'^[ \t]*#[ \t]*include[ \t]*([<"])([^>"\r\n]+)[>"]', re.M
 SCANNED = (".h", ".hpp", ".hh", ".inc", ".inl", ".c", ".cc", ".cpp", ".cxx")
 # Changes that can move any unit's score without touching its inputs.
 GLOBAL = re.compile(r"^(?:smt4a?/(?:build\.py|tools/|config/(?:symbols\.txt|inlined\.txt|numbers\.txt|toolchain\.json|modules\.json))"
-                    r"|tools/fdiff\.py$)")
+                    r"|tools/(?:fdiff|split|n3ds)\.py$)")
 ABSENT = "absent"
 SHORT = {"smt4": "4", "smt4a": "a"}  # game directories in the BASE tree
 
@@ -258,9 +258,9 @@ class BaseTree:
             self.written.add(rel)
 
     def prepare(self, game, sources):
-        """Write the game's side of BASE: headers, config, build.py, tools, then the sources and every
-        file they include (a `#include "Other.cpp"` next to them), as BASE has them."""
-        prefixes = ("include/", f"{game}/include/", f"{game}/config/", f"{game}/tools/")
+        """Write the game's side of BASE: headers, config, build.py, the tools it imports, then the sources
+        and every file they include (a `#include "Other.cpp"` next to them), as BASE has them."""
+        prefixes = ("include/", f"{game}/include/", f"{game}/config/", f"{game}/tools/", "tools/split.py", "tools/n3ds.py")
         bulk = [p for p in self.listing if p.startswith(prefixes) or p == f"{game}/build.py"]
         self.write(self.blobs.fetch(p for p in bulk if p not in self.written))
         for shared in worktrees.SHARED:
