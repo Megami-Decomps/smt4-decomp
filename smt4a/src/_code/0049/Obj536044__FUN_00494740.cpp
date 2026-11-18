@@ -10,7 +10,6 @@
 
 /* The scene past the class prefix: the sprite animation, current page and loaded resource. */
 struct ShopMenuView : public Obj536044 {
-    u8 unk0190[0x210];
     /* 0x03A0 */ u32 color;
     /* 0x03A4 */ AsdTextureRegion region;
     /* 0x03C4 */ u8 unk03C4[8];

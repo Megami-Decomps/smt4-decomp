@@ -12,7 +12,7 @@ int FUN_0020b490(int, int);
 int resourceTableReleaseHandles(void);
 int bgmReleaseStopped(void);
 int FUN_002c8778(int);
-int FUN_002f0c18(void);
+int uiQuestCreate(void);
 int dataTable41FindById(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(int);
@@ -42,7 +42,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: resourceTableReleaseHandles. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_002c8778. */
-/* Supplied declaration required: FUN_002f0c18. */
+/* Supplied declaration required: uiQuestCreate. */
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -92,7 +92,7 @@ void FUN_00331714(int param_1)
   temp_v4 = gameGetSlotTable();
   gameGetPlayerData();
   FUN_0020b490(temp_v3,0);
-  FUN_002f0c18();
+  uiQuestCreate();
   FUN_002c8778(*(unsigned short *)(param_1 + 0x38));
   temp_v5 = mapMainIsBusy();
   if ((temp_v5 != 0) || (temp_v5 = lmapMainIsRunning(), temp_v5 != 0)) {

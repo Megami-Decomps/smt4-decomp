@@ -1,4 +1,4 @@
-/* NON_MATCHING: result/state/flags allocation and initial zero scheduling differ; -O2 candidate. */
+/* NON_MATCHING: result, state and flags use different saved registers; the default voice id is zeroed later than in retail. */
 #include "map/MapIfGlobals.h"
 
 extern "C" {

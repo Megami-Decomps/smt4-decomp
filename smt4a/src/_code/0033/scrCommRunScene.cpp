@@ -5,7 +5,7 @@ extern "C" {
 extern u32 scrGetArg(s32 index);
 extern s32 scrGetCommandFrame(void);
 extern void scrCommMessageSetMode(s32 value);
-extern void FUN_002f0c18(void);
+extern void uiQuestCreate(void);
 extern void FUN_0038b710(u32 scene);
 extern s32 stateHolder4IsZero(void);
 extern void uiQuestClose(void);
@@ -20,7 +20,7 @@ u8 scrCommRunScene(void)
 
     if (scrGetCommandFrame() == 0) {
         scrCommMessageSetMode(1);
-        FUN_002f0c18();
+        uiQuestCreate();
         FUN_0038b710(scene);
     }
     running = stateHolder4IsZero();

@@ -6,7 +6,7 @@ extern u32 scrGetArg(u32 index);
 extern s32 scrGetCommandFrame(void);
 extern void partyEntrySetBit0AndFlag80(u32 id);
 extern s32 FUN_00162ea4(void);
-extern void FUN_002f0c18(void);
+extern void uiQuestCreate(void);
 extern void FUN_003a7c3c(u32 id);
 extern s32 stateHolder4IsZero2(void);
 extern void uiQuestClose(void);
@@ -23,7 +23,7 @@ s32 scrPartyEntryJoin(void)
         if (FUN_00162ea4() != 0) {
             return 1;
         }
-        FUN_002f0c18();
+        uiQuestCreate();
         FUN_003a7c3c(id);
     }
     if (stateHolder4IsZero2() != 0) {

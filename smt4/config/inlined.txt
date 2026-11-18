@@ -50,3 +50,7 @@ handleObjectGetHandle = 0xe5900000; // 0x10fcb0 (FUN_0010fc90: add r0, r4, #20, 
 contentIndexGetValue = 0xe1d000b0; // 0x15dd2c (FUN_0015dc2c: add r0, r5, #8, then a lone ldrh r0, [r0] used as an argument)
 
 packScissorCoordinates = 0xe1800801; // inferred removed helper x | (y << 16); FUN_0029a17c +0x64/+0xac; gxSetClippedBottomScreenScissor +0x13c/+0x180 retain r0/r1 argument copies; see docs/notes/scissor-coordinate-packing.md
+uniteCtrlSetIncludeSameRace = 0xe5c01142; // 0x28b944 in FUN_0028b7f8 (party panel create, twin of smt4a FUN_003493dc): strb r1,[r0,#0x142] in place of the call
+partyWidgetSetEmpty = 0xe5c01020; // 0x28b97c in FUN_0028b7f8: strb r1,[r0,#0x20] in place of the call
+partyWidgetSetUnitId = 0xe5801034; // 0x28b988 in FUN_0028b7f8: str r1,[r0,#0x34] in place of the call
+partyWidgetSetIsCharacter = 0xe5c01021; // 0x28b9bc in FUN_0028b7f8: strb r1,[r0,#0x21] in place of the call

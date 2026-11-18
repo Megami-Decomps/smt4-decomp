@@ -36,7 +36,7 @@ int FUN_002f78a0(...);
 int campCommonBgAcquire(...);
 int campButtonHelpAcquire(...);
 int FUN_003423e8(...);
-int FUN_003493dc(...);
+int partyPanelCreate(...);
 int FUN_0038b1c4(...);
 int FUN_003a7040(...);
 int pair40Set(...);
@@ -99,7 +99,7 @@ extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_003344b4. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003423e8. */
-/* Supplied declaration required: FUN_003493dc. */
+/* Supplied declaration required: partyPanelCreate. */
 extern unsigned char FUN_0036d134(void);
 /* Supplied declaration required: FUN_0038b1c4. */
 extern int aocDataBlockHasEntries(void);
@@ -238,7 +238,7 @@ void FUN_002c3398(void)
   campSelectorRebuildList(0x17);
   campSelectorRebuildList(0x18);
   campSelectorRebuildList(0x19);
-  FUN_003493dc(1);
+  partyPanelCreate(1);
   temp_v6 = g_partyPanel;
   gameGetSlotTable(&g_partyPanel,0,0xffffffff);
   *(unsigned char *)(temp_v6 + 0x9b4) = 1;

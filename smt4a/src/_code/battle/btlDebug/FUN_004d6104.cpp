@@ -114,7 +114,7 @@ void FUN_003ed238(DebugBattle *battle, u32 mask);
 
 void btlDebugNormalizeMarkerFlags(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d1470(DebugMenu *menu, DebugBattle *battle);
-void FUN_004d1af8(DebugMenu *menu, DebugBattle *battle);
+void btlDebugFlagMenuCreate(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d2124(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d290c(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d3360(DebugMenu *menu, DebugBattle *battle);
@@ -535,7 +535,7 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
         break;
     }
     case 9:
-        FUN_004d1af8(menu, battle);
+        btlDebugFlagMenuCreate(menu, battle);
         next = 10;
         break;
     case 10:

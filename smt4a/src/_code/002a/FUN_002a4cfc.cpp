@@ -51,7 +51,7 @@ int FUN_002a5cf4(void);
 int FUN_002a7b74(void);
 int bibleOpenMode2(...);
 int FUN_002e738c(int);
-int FUN_002f0c18(void);
+int uiQuestCreate(void);
 int FUN_00319b10(void);
 int uiQuestReturnToList(void);
 int FUN_00334560(void);
@@ -108,7 +108,7 @@ extern int objectApplyIfUnblocked(int);
 extern int uniteHasPendingIdle(void);
 /* Supplied declaration required: FUN_002e2404. */
 /* Supplied declaration required: FUN_002e738c. */
-/* Supplied declaration required: FUN_002f0c18. */
+/* Supplied declaration required: uiQuestCreate. */
 /* Supplied declaration required: FUN_00319b10. */
 /* Supplied declaration required: uiQuestReturnToList. */
 extern int stateAtF4IsActive(void);
@@ -328,7 +328,7 @@ void FUN_002a4cfc(void)
     FUN_002a5cf4();
     messageDismissNumericBanner(1);
     campChangeState(0x26);
-    FUN_002f0c18();
+    uiQuestCreate();
     FUN_00334560();
     *(unsigned char *)(temp_v3 + 0x3178) = 1;
     return;
@@ -336,7 +336,7 @@ void FUN_002a4cfc(void)
     FUN_002a5cf4();
     messageDismissNumericBanner(1);
     campChangeState(0x27);
-    FUN_002f0c18();
+    uiQuestCreate();
     uiQuestReturnToList();
     *(unsigned char *)(temp_v3 + 0x3179) = 1;
     return;

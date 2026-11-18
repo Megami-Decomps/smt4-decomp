@@ -20583,12 +20583,12 @@
     },
     {
       "address": "0x193130",
-      "function": "FUN_00193130",
+      "function": "particleRingEmitterUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_00193130.o",
+      "object": "build/obj/_code/0019/particleRingEmitterUpdate.o",
       "size": 768,
-      "source": "src/_code/0019/FUN_00193130.cpp",
-      "target": "orig/target/_code/0019/FUN_00193130.o",
+      "source": "src/_code/0019/particleRingEmitterUpdate.cpp",
+      "target": "orig/target/_code/0019/particleRingEmitterUpdate.o",
       "thumb": false
     },
     {
@@ -40108,12 +40108,12 @@
     },
     {
       "address": "0x24d94c",
-      "function": "FUN_0024d94c",
+      "function": "btlBuildDemonSnapshot",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_0024d94c.o",
+      "object": "build/obj/_code/0024/btlBuildDemonSnapshot.o",
       "size": 592,
-      "source": "src/_code/0024/FUN_0024d94c.cpp",
-      "target": "orig/target/_code/0024/FUN_0024d94c.o",
+      "source": "src/_code/0024/btlBuildDemonSnapshot.cpp",
+      "target": "orig/target/_code/0024/btlBuildDemonSnapshot.o",
       "thumb": false
     },
     {
@@ -48214,12 +48214,12 @@
     {
       "address": "0x28b7f8",
       "file": "camp/PartyPanel/PartyPanel",
-      "function": "FUN_0028b7f8",
+      "function": "partyPanelCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/PartyPanel/PartyPanel/FUN_0028b7f8.o",
+      "object": "build/obj/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.o",
       "size": 1604,
-      "source": "src/_code/camp/PartyPanel/PartyPanel/FUN_0028b7f8.cpp",
-      "target": "orig/target/_code/camp/PartyPanel/PartyPanel/FUN_0028b7f8.o",
+      "source": "src/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.cpp",
+      "target": "orig/target/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.o",
       "thumb": false
     },
     {
@@ -78751,12 +78751,12 @@
     },
     {
       "address": "0x331158",
-      "function": "FUN_00331158",
+      "function": "campUpdateListInput",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_00331158.o",
+      "object": "build/obj/_code/0033/campUpdateListInput.o",
       "size": 820,
-      "source": "src/_code/0033/FUN_00331158.cpp",
-      "target": "orig/target/_code/0033/FUN_00331158.o",
+      "source": "src/_code/0033/campUpdateListInput.cpp",
+      "target": "orig/target/_code/0033/campUpdateListInput.o",
       "thumb": false
     },
     {
@@ -95350,12 +95350,12 @@
     },
     {
       "address": "0x38a1e0",
-      "function": "FUN_0038a1e0",
+      "function": "aocBoardUpdateAnimation",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_0038a1e0.o",
+      "object": "build/obj/_code/0038/aocBoardUpdateAnimation.o",
       "size": 656,
-      "source": "src/_code/0038/FUN_0038a1e0.cpp",
-      "target": "orig/target/_code/0038/FUN_0038a1e0.o",
+      "source": "src/_code/0038/aocBoardUpdateAnimation.cpp",
+      "target": "orig/target/_code/0038/aocBoardUpdateAnimation.o",
       "thumb": false
     },
     {
@@ -96294,12 +96294,12 @@
     },
     {
       "address": "0x392e74",
-      "function": "FUN_00392e74",
+      "function": "aocMenuUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_00392e74.o",
+      "object": "build/obj/_code/0039/aocMenuUpdate.o",
       "size": 536,
-      "source": "src/_code/0039/FUN_00392e74.cpp",
-      "target": "orig/target/_code/0039/FUN_00392e74.o",
+      "source": "src/_code/0039/aocMenuUpdate.cpp",
+      "target": "orig/target/_code/0039/aocMenuUpdate.o",
       "thumb": false
     },
     {
@@ -101308,12 +101308,12 @@
     },
     {
       "address": "0x3b7084",
-      "function": "FUN_003b7084",
+      "function": "resultDrawLevelUpPanel",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003b7084.o",
+      "object": "build/obj/_code/003b/resultDrawLevelUpPanel.o",
       "size": 2736,
-      "source": "src/_code/003b/FUN_003b7084.cpp",
-      "target": "orig/target/_code/003b/FUN_003b7084.o",
+      "source": "src/_code/003b/resultDrawLevelUpPanel.cpp",
+      "target": "orig/target/_code/003b/resultDrawLevelUpPanel.o",
       "thumb": false
     },
     {
@@ -101608,12 +101608,12 @@
     },
     {
       "address": "0x3ba998",
-      "function": "FUN_003ba998",
+      "function": "mikadoCampVisitUpdate",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003ba998.o",
+      "object": "build/obj/_code/003b/mikadoCampVisitUpdate.o",
       "size": 1764,
-      "source": "src/_code/003b/FUN_003ba998.cpp",
-      "target": "orig/target/_code/003b/FUN_003ba998.o",
+      "source": "src/_code/003b/mikadoCampVisitUpdate.cpp",
+      "target": "orig/target/_code/003b/mikadoCampVisitUpdate.o",
       "thumb": false
     },
     {
@@ -103743,12 +103743,12 @@
     },
     {
       "address": "0x3cb3e4",
-      "function": "FUN_003cb3e4",
+      "function": "btlCommandTurnEnd",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003cb3e4.o",
+      "object": "build/obj/_code/003c/btlCommandTurnEnd.o",
       "size": 1924,
-      "source": "src/_code/003c/FUN_003cb3e4.cpp",
-      "target": "orig/target/_code/003c/FUN_003cb3e4.o",
+      "source": "src/_code/003c/btlCommandTurnEnd.cpp",
+      "target": "orig/target/_code/003c/btlCommandTurnEnd.o",
       "thumb": false
     },
     {

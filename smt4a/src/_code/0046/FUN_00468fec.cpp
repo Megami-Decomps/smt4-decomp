@@ -1,5 +1,6 @@
 /* NON_MATCHING: typed rewrite; everything matches except register allocation of the four-slot copy (retail temporaries r2/r3/ip and a shared r0+256 base for the last record, build uses r3 and per-record bases). */
 #include "common.h"
+#include "gamedata/NpcRoomTable.h"
 #include "gfx/ControllerModel.h"
 #include "Model/MoriModelContent.h"
 #include "code/Code003a.h"
@@ -9,15 +10,6 @@
 #include "ui/UiControl.h"
 #include "code/Code0021_Smt4a.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
-
-/* One of the four candidate quests the chooser lists. */
-struct QuestMatchRecord {
-    u8 unk00[8];
-    u16 value;      // 0x08
-    u8 unk0A[0x48];
-    u8 first;       // 0x52
-    u8 second;      // 0x53
-};
 
 /* The chooser's copy of one candidate. */
 struct QuestChoiceSlot {
@@ -66,7 +58,6 @@ void FUN_0037c8e4(s32 first, s32 second);
 void messageMainSetTargetFlags(s32 flags);
 s32 panelIsActiveState2(void);
 u8 gameFlagIsSet(u32 flag);
-QuestMatchRecord *dataTableFindMatching35(void);
 s32 messageGetChoiceResult(void);
 void messageBannerRestartOrClear(void);
 
@@ -135,20 +126,13 @@ void FUN_00468fec(QuestChoiceWork *work)
         work->flags |= 0x200;
         FUN_0037d6e4(1);
         work->matchesLoaded = 1;
-        QuestMatchRecord *records = dataTableFindMatching35();
+        const NpcRoomEventRecord *records = dataTableFindMatching35(1);
         if (records != NULL) {
-            work->slots[0].first = records[0].first;
-            work->slots[0].value = records[0].value;
-            work->slots[0].second = records[0].second;
-            work->slots[1].first = records[1].first;
-            work->slots[1].value = records[1].value;
-            work->slots[1].second = records[1].second;
-            work->slots[2].first = records[2].first;
-            work->slots[2].value = records[2].value;
-            work->slots[2].second = records[2].second;
-            work->slots[3].first = records[3].first;
-            work->slots[3].value = records[3].value;
-            work->slots[3].second = records[3].second;
+            for (s32 i = 0; i < 4; ++i) {
+                work->slots[i].first = records[i].param;
+                work->slots[i].value = records[i].value;
+                work->slots[i].second = records[i].unk53;
+            }
         }
         FUN_00214da4();
         work->state = 8;

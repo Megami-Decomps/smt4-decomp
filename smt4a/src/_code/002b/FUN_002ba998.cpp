@@ -85,7 +85,7 @@ int FUN_0037693c(...);
 int btlPartnerAttackInitialize(...);
 int soundChannelRequestIfEnabled(...);
 void bgmRequestSelectedChannelFade(unsigned int frames);
-int FUN_003e9cec(int, unsigned char [688], unsigned int, int);
+int btlInitializeDemonUnitState(int, unsigned char [688], unsigned int, int);
 int btlActionPrepareFromSource(int, int, int);
 int FUN_003ea69c(int, unsigned char [688], unsigned int);
 int btlMainBuffersFree(int, int);
@@ -226,7 +226,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003e49e8. */
 /* Supplied declaration required: FUN_003e854c. */
 /* Supplied declaration required: FUN_003e892c. */
-/* Supplied declaration required: FUN_003e9cec. */
+/* Supplied declaration required: btlInitializeDemonUnitState. */
 /* Supplied declaration required: btlActionPrepareFromSource. */
 /* Supplied declaration required: FUN_003ea69c. */
 /* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
@@ -363,7 +363,7 @@ void FUN_002ba998(unsigned int param_1)
     do {
       if (-1 < *(char *)(temp_v6 + temp_v9 + 0x1ca0)) {
         temp_v11 = gameGetSaveSlotData(temp_v9);
-        FUN_003e9cec(temp_v7,temp_v23,temp_v11,0);
+        btlInitializeDemonUnitState(temp_v7,temp_v23,temp_v11,0);
         FUN_004ca63c(temp_v7,temp_v23,0,temp_v9 + 1,0);
       }
       temp_v9 = (temp_v9 + 1) & 0xffff;

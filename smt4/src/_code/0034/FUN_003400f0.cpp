@@ -1,4 +1,4 @@
-/* NON_MATCHING: compile-time directory constant restores owner registers; accessory vector construction and record-loop operand allocation still differ. */
+/* NON_MATCHING: The first argument-save move and accessory vector component loads/conversions/stores differ in order. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlMain.h"
@@ -49,7 +49,7 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
     u32 count = dataTableGetCount(table);
     const BattleStageAccessoryRecord *record = NULL;
     for (u32 index = 0; index < count; ++index) {
-        if (stage->key0 == entries[index].area && entries[index].variant == stage->key1) {
+        if (entries[index].area == stage->key0 && entries[index].variant == stage->key1) {
             record = &entries[index];
             break;
         }
@@ -57,13 +57,11 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
     if (!record)
         return;
     for (s32 index = 0; index < 2; ++index) {
-        const BattleStageAccessoryPart *part = &record->parts[index];
-        if (part->name[0] != '0') {
-            textFormatBuffer(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, part->name);
+        if (record->parts[index].name[0] != '0') {
+            textFormatBuffer(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, record->parts[index].name);
             stage->scene.nodes[index + 1] = reinterpret_cast<BattleStageNode *>(asdMdlManagerCreateSecondList(path, options));
-            stage->scene.offsets[index + 1].x = (f32)part->position[0];
-            stage->scene.offsets[index + 1].y = (f32)part->position[1];
-            stage->scene.offsets[index + 1].z = (f32)part->position[2];
+            NodeVec3 offset = { (f32)record->parts[index].position[0], (f32)record->parts[index].position[1], (f32)record->parts[index].position[2] };
+            stage->scene.offsets[index + 1] = offset;
         }
     }
 }

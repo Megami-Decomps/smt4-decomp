@@ -8,7 +8,7 @@ extern "C" {
 // Select a valid stored value, resolving slot-backed values through the party record.
 s32 selectionGetValidatedField(u32 selector)
 {
-    SelectionValuePayload *values = &reinterpret_cast<SelectionValueRecord *>(saveGetUserSettingsBlock())->values;
+    SelectionValuePayload *values = &reinterpret_cast<SaveUserSelectionRecord *>(saveGetUserSettingsBlock())->values;
     switch (selector) {
     case 0:
         if (values->slot >= 0) {

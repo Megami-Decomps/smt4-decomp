@@ -39,7 +39,7 @@ int messageMainApplyClose(void);
 int FUN_002251d4(...);
 int FUN_0028a368(...);
 int FUN_0028a924(...);
-int FUN_0028b7f8(...);
+int partyPanelCreate(...);
 int playSceneFadeInStart(...);
 int uiSpriteOperationIsComplete(void);
 int btlTalkBustUpReleaseAllSlots(void);
@@ -116,7 +116,7 @@ extern int battleTalkGetBustState(void);
 /* Supplied declaration required: partyPanelReleaseResources. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
-/* Supplied declaration required: FUN_0028b7f8. */
+/* Supplied declaration required: partyPanelCreate. */
 /* Supplied declaration required: playSceneTimerSubStart. */
 /* Supplied declaration required: playSceneFadeInStart. */
 /* Supplied declaration required: uiSpriteOperationIsComplete. */
@@ -431,7 +431,7 @@ int FUN_0019e138(unsigned int job)
       btlCommandMenuResolveLayout(temp_v0 + 0x2460,&temp_v18,&temp_v17);
       temp_v4 = FUN_0028c028(temp_v0 + 0x2460);
       if (temp_v4 != 0) {
-        FUN_0028b7f8(1);
+        partyPanelCreate(1);
         FUN_0028a924(0xe,0,0xffffffff);
         FUN_0028a368(1);
       }
@@ -439,13 +439,13 @@ int FUN_0019e138(unsigned int job)
         if (!((short)temp_v18 == 2 || (short)temp_v18 == 3)) {
           if ((short)temp_v18 != 9) {
             if ((short)temp_v18 == 0xd) {
-              FUN_0028b7f8(1);
+              partyPanelCreate(1);
               FUN_0028a924(10,0,0xffffffff);
               FUN_0028a368(1);
             }
           }
           else {
-            FUN_0028b7f8(1);
+            partyPanelCreate(1);
             if (*(int *)(temp_v0 + 0x54bc) != 0) {
               temp_v12 = gameGetSlotTable();
               temp_v4 = *(int *)(temp_v0 + 0x54bc);
@@ -469,7 +469,7 @@ int FUN_0019e138(unsigned int job)
             temp_v4 = gameGetSlotTable();
             temp_v4 = (int)*(char *)(*(int *)(temp_v0 + 0x54bc) + temp_v4 + 0x9107);
           }
-          FUN_0028b7f8(1);
+          partyPanelCreate(1);
           FUN_0028a924(5,(int)(short)temp_v17,temp_v4);
           FUN_0028a368(1);
         }
@@ -482,7 +482,7 @@ int FUN_0019e138(unsigned int job)
           temp_v4 = gameGetSlotTable();
           temp_v4 = (int)*(char *)(*(int *)(temp_v0 + 0x54bc) + temp_v4 + 0x9107);
         }
-        FUN_0028b7f8(1);
+        partyPanelCreate(1);
         FUN_0028a924(8,(int)(short)temp_v17,temp_v4);
         FUN_0028a368(1);
       }

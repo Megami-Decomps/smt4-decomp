@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads the node motion via a linker-inlined getter after a nop-bodied call (nop, ldr r0,[r0,#56]) and loads the first loop model flags separately per branch; the callee pair is unidentified. */
+/* NON_MATCHING: the extra-slot loop hoists the model flag load into both paths; the ordinary-slot loop also schedules the flag load and loading-state check differently. */
 #include "map/MapStateSlots.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -26,28 +26,28 @@ void FUN_00275364(void)
     if (g_mapStateSlots->unk04 == 0x65) {
         for (s32 index = 0; index < 3; ++index) {
             MapStateSlot *slot = &((StateWithExtraSlots *)g_mapStateSlots)->extraSlots[index];
-            if (slot->active != 0) {
-                AsdMdlObject *model = (AsdMdlObject *)slot->resources.model;
-                if (g_gameState.loading != 0) {
-                    if ((model->flags & 2) == 0) {
-                        model->flags |= 2;
-                        model->node->sceneNode->positionFollowed = 0;
-                    }
-                } else {
-                    if ((model->flags & 2) != 0) {
-                        model->flags &= ~2;
-                        model->node->sceneNode->positionFollowed = 1;
-                    }
-                    if (slot->motion.mode != 0) {
-                        nodeSetTranslation(model->node, 0, slot->motion.position);
-                        modelPartSetRotationDegrees(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
-                        if (modelGetCurrentMotion(model->node) != slot->motion.elapsed) {
-                            modelSelectPrimaryMotion(model->node, 0.0f);
-                            modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);
-                        }
-                        slot->motion.mode = 0;
-                    }
+            if (slot->active == 0)
+                continue;
+            AsdMdlObject *model = (AsdMdlObject *)slot->resources.model;
+            if (g_gameState.loading != 0) {
+                if ((model->flags & 2) != 0)
+                    continue;
+                model->flags |= 2;
+                model->node->sceneNode->positionFollowed = 0;
+                continue;
+            }
+            if ((model->flags & 2) != 0) {
+                model->flags &= ~2;
+                model->node->sceneNode->positionFollowed = 1;
+            }
+            if (slot->motion.mode != 0) {
+                nodeSetTranslation(model->node, 0, slot->motion.position);
+                modelPartSetRotationDegrees(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
+                if (modelGetCurrentMotion(model->node) != slot->motion.elapsed) {
+                    modelSelectPrimaryMotion(model->node, 0.0f);
+                    modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);
                 }
+                slot->motion.mode = 0;
             }
         }
     }

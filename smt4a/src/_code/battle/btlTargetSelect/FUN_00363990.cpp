@@ -1,4 +1,4 @@
-/* NON_MATCHING: identical to retail apart from the constants 1 and 0 living in r6/r7 instead of r7/r6; needs the _ZN9Obj557bd8C1Ev / TargetMarkerEntry constructor / vtable renames applied. */
+/* NON_MATCHING: retail keeps the constants 1 and 0 in r6 and r7 respectively; the build swaps those registers. */
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/AsdDebug.h"
 #include "battle/btlMain.h"

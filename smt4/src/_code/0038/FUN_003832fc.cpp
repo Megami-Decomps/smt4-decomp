@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the pose id (i + 1) behind a count > 0 guard and keeps the search loop rotated with the flag-load predicated (ldrhgt); ours tests the count at the loop head and loads the forbidden flag unconditionally; the rank compare has retail's register assignment but its two operands reversed (cmp r1, r0 vs cmp r0, r1). */
+/* NON_MATCHING: only the two operands of the rank comparison are reversed. */
 #include "common.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 
@@ -56,7 +56,8 @@ extern void FUN_0031e2bc(u32 text, u8 *name, s32 flag);
 /* Whether a record with this record's id has already been picked. */
 static __inline s32 hunterPickContains(const HunterCompany *company, const HunterRecord *record)
 {
-    for (s32 index = 0; index < company->pickCount; index++) {
+    s32 count = company->pickCount;
+    for (s32 index = 0; index < count; index++) {
         if ((u32)company->picks[index].id == record->id) {
             return 1;
         }
@@ -102,14 +103,17 @@ void FUN_003832fc(HunterCompany *company)
     FUN_002b7bca(company->picks, company->pickCount, sizeof(HunterPick), sortCompareEntryKey);
     if (company->randomizePoses == 1) {
         for (u32 i = 0; i < 6; i++) {
-            for (j = 0; j < company->pickCount && company->picks[j].id != i + 1; j++) {
+            bool found = false;
+            for (j = 0; j < company->pickCount; j++) {
+                if (company->picks[j].id == i + 1) {
+                    record = dataTable27Sub0GetRecord(company->table, company->picks[j].recordIndex);
+                    pose = (record->pose == 1 || record->pose != 2) ? 2 : 1;
+                    found = true;
+                    break;
+                }
             }
-            if (j < company->pickCount) {
-                record = dataTable27Sub0GetRecord(company->table, company->picks[j].recordIndex);
-                pose = (record->pose == 1 || record->pose != 2) ? 2 : 1;
-            } else {
+            if (!found)
                 pose = randBetween(1, 2);
-            }
             textFormatBuffer(name, "hunter_company_npc%d_%d", i + 1, pose);
             FUN_0031e2bc(company->nameSlots[i]->text, name, 0);
             textFormatBuffer(name, "hunter_company_npc%d_%d_add1", i + 1, pose);

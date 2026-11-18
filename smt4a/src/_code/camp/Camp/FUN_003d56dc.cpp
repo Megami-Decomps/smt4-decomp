@@ -79,7 +79,7 @@ int titleSetSlotValueState2(...);
 
 int eventQueueAddUniqueIfValid(...);
 int itemTableGetItemRecord(void);
-int FUN_001ffe84(void);
+int campSkillListUpdate(void);
 int FUN_0020dc1c(void);
 int FUN_0021b274(...);
 int campResetScreen(void);
@@ -185,7 +185,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_001fdde8. */
-/* Supplied declaration required: FUN_001ffe84. */
+/* Supplied declaration required: campSkillListUpdate. */
 /* Supplied declaration required: FUN_00202ea4. */
 extern int uniteStateIsDone(void);
 /* Supplied declaration required: campChangeState. */
@@ -1024,7 +1024,7 @@ LAB_003d6870:
     FUN_003daf0c(0xe);
     break;
   case 0x11:
-    FUN_001ffe84();
+    campSkillListUpdate();
     break;
   case 0x12:
     temp_v4 = FUN_00284e94();

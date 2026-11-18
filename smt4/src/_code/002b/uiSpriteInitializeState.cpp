@@ -6,7 +6,7 @@ extern "C" {
 /* Clears the sprite and sets its texture table, images, animation resource (whose tables the tracks take), id
    and opacity, at scale 1 with every track done. */
 void uiSpriteInitializeState(UiSpriteState *sprite, u32 textureTable, s32 image, s32 secondaryImage,
-                             UiResourceParameters *resources, u16 id, f32 alpha)
+                             UiResourceParameters *resources, s16 id, f32 alpha)
 {
     memClear(sprite, sizeof(UiSpriteState));
     sprite->textureTable = textureTable;

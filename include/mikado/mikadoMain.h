@@ -21,6 +21,33 @@ public:
     u8 unk52C[0x17F0 - 0x4CC - sizeof(FloatState)];
 };
 
+/* Apocalypse's counterpart (0x7A0 bytes, mikado/moveCamera/MoveCameraCtrl.cpp): the scene's camera
+ * controller; its floating-point state sits at 0x4F0. */
+class MikadoTalkWorkA {
+public:
+    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    static void operator delete(void *block);
+    u8 unk000[0x4F0];
+    FloatState state;
+    u8 unk550[0x7A0 - 0x4F0 - sizeof(FloatState)];
+};
+
+/* A row of data table 33's type list (a mikado location): 0x88 bytes in both games. */
+struct MikadoRecord {
+    /* 0x00 */ s8 id;
+    /* 0x01 */ s8 group;
+    /* 0x02 */ u8 name[0x3D];      /* shown in the place window */
+    /* 0x3F */ u8 messageId;       /* its line in mikado/talk.mbm */
+    /* 0x40 */ char image[0x20];   /* scene file under mikado/, "0" for none */
+    /* 0x60 */ s32 modelSet;       /* data table 33 list of its models, negative for none */
+    /* 0x64 */ u16 altFlagA;       /* either flag set: the alternate scene file is loaded too */
+    /* 0x66 */ u16 altFlagB;
+    /* 0x68 */ char altImage[0x20];
+};
+typedef char MikadoRecordLayoutCheck[sizeof(MikadoRecord) == 0x88 && offsetof(MikadoRecord, messageId) == 0x3F &&
+    offsetof(MikadoRecord, modelSet) == 0x60 && offsetof(MikadoRecord, altImage) == 0x68 &&
+    sizeof(MikadoTalkWorkA) == 0x7A0 && offsetof(MikadoTalkWorkA, state) == 0x4F0 ? 1 : -1];
+
 /* The mikado camera object (0xEB0 bytes). Its constructor is inline: it clears a few fields and
  * constructs the members that have constructors. */
 class MikadoCamera {
@@ -40,14 +67,15 @@ public:
     /* 0x24 */ u8 ready;                  /* set once the scene finished loading */
     /* 0x25 */ u8 unk25[3];
     /* 0x28 */ s32 state;
-    /* 0x2C */ u32 unk2C;
-    /* 0x30 */ u32 unk30;
+    /* 0x2C */ u32 step;                   /* step within the state */
+    /* 0x30 */ s32 frame;                  /* frames counted by the step */
     /* 0x34 */ s32 unk34;
     /* 0x38 */ u8 unk38[4];
     /* 0x3C */ UShortVec3 positionA;
     /* 0x42 */ UShortVec3 positionB;
-    /* 0x48 */ u8 unk48[4];
-    /* 0x4C */ u16 unk4C;
+    /* 0x48 */ u8 exitRequest[4];          /* how to leave with the camp's resources kept: [0] map selection
+                                            * 100-199, [1] below 100, [2] 200 and up, [3] save mode 2 */
+    /* 0x4C */ u16 menuTotal;              /* flaggedValueHolderGetTotal of the menu */
     /* 0x4E */ u16 unk4E;
     /* 0x50 */ u8 unk50[8];
     /* 0x58 */ f32 unk58;
@@ -56,10 +84,14 @@ public:
     /* 0x9C */ SelectionFlags selectionFlags;
     /* 0xAB */ u8 unkAB[0x65];
     /* 0x110 */ Obj55ca08 sub;             /* secondary base object (the camera is deleted through it) */
-    /* 0x14C */ u8 unk14C[0xD58 - 0x14C];
+    /* 0x14C */ u8 unk14C[0x6CC - 0x14C];
+    /* 0x6CC */ u8 menuLocked;             /* set while the scene leaves for the camp */
+    /* 0x6CD */ u8 unk6CD[0xD58 - 0x6CD];
     /* 0xD58 */ u32 unkD58;
-    /* 0xD5C */ u32 unkD5C;
-    /* 0xD60 */ u8 unkD60[0xC];
+    /* 0xD5C */ const MikadoRecord *record; /* the location shown */
+    /* 0xD60 */ u8 unkD60[4];
+    /* 0xD64 */ s32 group;
+    /* 0xD68 */ u8 unkD68[4];
     /* 0xD6C */ u32 unkD6C;
     /* 0xD70 */ u32 unkD70;
     /* 0xD74 */ u32 unkD74;
@@ -69,11 +101,16 @@ public:
     /* 0xD84 */ u32 unkD84;
     /* 0xD88 */ u32 checkBf;               /* "mikado/check.bf" */
     /* 0xD8C */ u32 checkMbm;              /* "mikado/check.mbm" */
-    /* 0xD90 */ u8 unkD90[0xDB0 - 0xD90];
+    /* 0xD90 */ u8 unkD90[0xDAC - 0xD90];
+    /* 0xDAC */ s8 keepUi;                 /* the camp asked to keep the scene's windows closed */
+    /* 0xDAD */ u8 unkDAD[3];
     /* 0xDB0 */ u32 unkDB0;
-    /* 0xDB4 */ u8 unkDB4[0xE5C - 0xDB4];
+    /* 0xDB4 */ u8 unkDB4[0xE58 - 0xDB4];
+    /* 0xE58 */ s8 cacheLoaded;            /* the location has a scene: talkWork and the model files exist */
+    /* 0xE59 */ u8 unkE59[3];
     /* 0xE5C */ MikadoTalkWork *talkWork;
-    /* 0xE60 */ u8 unkE60[0xEB0 - 0xE60];
+    /* 0xE60 */ void *modelFiles[10];      /* the location's model set, loaded from mikado/NAME.bam */
+    /* 0xE88 */ u32 modelFileSizes[10];
 };
 
 /* The mikado controller's work area. */
@@ -98,6 +135,11 @@ typedef struct MikadoGlobals {
     /* 0x0C */ u32 cameraStartC;
 } MikadoGlobals;
 
+typedef char MikadoCameraLayoutCheck[sizeof(MikadoCamera) == 0xEB0 && offsetof(MikadoCamera, menuLocked) == 0x6CC &&
+    offsetof(MikadoCamera, record) == 0xD5C && offsetof(MikadoCamera, group) == 0xD64 &&
+    offsetof(MikadoCamera, talkMbm) == 0xD80 && offsetof(MikadoCamera, keepUi) == 0xDAC &&
+    offsetof(MikadoCamera, cacheLoaded) == 0xE58 && offsetof(MikadoCamera, talkWork) == 0xE5C &&
+    offsetof(MikadoCamera, modelFileSizes) == 0xE88 ? 1 : -1];
 typedef char MikadoWorkLayoutCheck[sizeof(MikadoWork) == 0xC &&
     offsetof(MikadoWork, camera) == 8 ? 1 : -1];
 typedef char MikadoGlobalsLayoutCheck[sizeof(MikadoGlobals) == 0x10 &&

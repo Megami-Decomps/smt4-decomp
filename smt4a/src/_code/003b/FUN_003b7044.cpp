@@ -7,7 +7,7 @@ void sysPlaySe(s32 soundId);
 s32 FUN_00162ea4(void);
 u32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
-void FUN_002f0c18(s32 value);
+void uiQuestCreate(s32 value);
 s32 uiQuestIsIdle(void);
 void FUN_002f1554(u32 id);
 void uiQuestClose(void);
@@ -25,7 +25,7 @@ u8 FUN_003b7044(void)
         if (result != 0) {
             return 1;
         }
-        FUN_002f0c18(result);
+        uiQuestCreate(result);
         FUN_002f1554(first);
     }
     result = uiQuestIsIdle();

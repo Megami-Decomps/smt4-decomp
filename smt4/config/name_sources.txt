@@ -4921,3 +4921,12 @@
 001ec6e0 campCecLoaderThread inferred StreetPass screen loader thread: starts the CEC process, loads CecItemTable/CecUnionTable/CecMain_scr/CecMain_msg, rebuilds and sends the card
 002bd2b4 cecCardBuild inferred builds the StreetPass card (CecCardData) from the selected demon
 002005a0 cecOutboxReadCard inferred reads the card currently in the CEC outbox into a buffer
+0028b7f8 partyPanelCreate inferred twin of smt4a FUN_003493dc
+003ba998 mikadoCampVisitUpdate inferred twin of smt4a FUN_004b990c
+003b7084 resultDrawLevelUpPanel inferred battle result level-up panel draw (result/Result.h)
+003cb3e4 btlCommandTurnEnd inferred battle command end-of-turn processing (scans, mark loop, reflect creation)
+0038a1e0 aocBoardUpdateAnimation inferred AocBoardWork job process: plays the three board sprites in sequence; twin of smt4a FUN_00472568
+00193130 particleRingEmitterUpdate inferred advances a ParticleRingEmitter (50-node ring) one frame; twin of smt4a FUN_00213020
+0024d94c btlBuildDemonSnapshot inferred builds the battle log's 0x5B0-byte snapshot of a party demon from its save record
+00331158 campUpdateListInput inferred camp list screen input: confirm/cancel events, touch regions
+00392e74 aocMenuUpdate inferred twin of smt4a FUN_0047c36c

@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+struct ScriptProcess;
+
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
 class Obj536044 {
@@ -58,6 +60,12 @@ protected:
     /* 0x184 */ u32 tableGroup;
     /* 0x188 */ u8 unk188[4];
     /* 0x18C */ void *controller;
+    /* 0x190 */ u8 unk190[0x204];
+    /* 0x394 */ void *resultTable;
+    /* 0x398 */ void *resultMessages;
+    /* 0x39C */ ScriptProcess *resultScript;
 };
+
+typedef char Obj536044SizeCheck[sizeof(Obj536044) == 0x3A0 ? 1 : -1];
 
 #endif

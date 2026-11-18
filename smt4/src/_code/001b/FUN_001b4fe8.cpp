@@ -11,7 +11,7 @@ void commonBgAcquire();
 void buttonHelpAcquireResources();
 void buttonHelpCreate();
 void FUN_00296fec();
-void FUN_00392e74(SceneResource *);
+void aocMenuUpdate(SceneResource *);
 void titleSetSlotValueState2(u32, u32);
 void soundChannelStopAll(u32);
 void FUN_002c5700();
@@ -38,7 +38,7 @@ u32 FUN_001b4fe8()
         break;
     }
     case 1:
-        FUN_00392e74(work->resource);
+        aocMenuUpdate(work->resource);
         if (reinterpret_cast<SceneWindowWork *>(work->resource)->unk0000 & 1)
             work->state.pending = 2;
         break;

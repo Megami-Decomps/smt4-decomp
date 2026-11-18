@@ -1,5 +1,6 @@
-/* NON_MATCHING: typed branch payloads restore frame and literal name copy; zero-pair stores and saved constant registers differ. */
+/* NON_MATCHING: registering the saved entry uses two word stores instead of STM, and the jump group is loaded through the game-state base instead of a separate literal. */
 #include "common.h"
+#include "shard/W6_W6Match5_SequencePacket.h"
 #include "quest_center/QuestRecord.h"
 #include "gamedata/Table1bOr1c.h"
 #include <string.h>
@@ -35,18 +36,11 @@ typedef struct SceneWork {
     /* 0xDAC */ u8 returnToMap;
 } SceneWork;
 
-struct SceneSequenceOptions {
-    u32 id;
-    u32 first;
-    u32 second;
-};
 struct NamedSceneSequence {
     u32 id;
     s32 slot;
     char name[24];
 };
-
-extern s32 DAT_0049fd14;
 
 s32 spriteTableFreeLoaded(void *sprites);
 void asdSequenceRequest(u32 kind, void *payload, u32 size);
@@ -82,7 +76,7 @@ void FUN_003b92b4(SceneWork *work)
         titleSetSlotValueState2(0, 10);
         titleSetSlotValueState2(1, 10);
     } else if ((flags & 0x4000000) != 0) {
-        SceneSequenceOptions payload = {work->record->id, 0, 0};
+        ScriptSequencePacket payload(work->record->id, 0, 0);
         asdSequenceRequest(16, &payload, sizeof(payload));
     } else if ((flags & 0x200000) != 0) {
         gameCopyPersistentSave();
@@ -109,7 +103,7 @@ void FUN_003b92b4(SceneWork *work)
     } else if (work->requestEvent8 != 0) {
         asdSequenceRequest(8, NULL, 0);
     } else if (work->requestCounter != 0) {
-        u32 payload = DAT_0049fd14 - 200;
+        u32 payload = g_gameState.jumpRequest.selection.group - 200;
         asdSequenceRequest(14, &payload, sizeof(payload));
     } else if (work->returnToMap != 0) {
         void *entry = rosterGetLeaderId();

@@ -7432,3 +7432,17 @@
 00491c60 lmapRefreshDestinationAvailability inferred Refreshes normal and extra destination-list availability from native map, quest, ownership and interaction-variant rules; missing variant argument restored.
 0048c394 naviMapHandleInput inferred navigation map input step: circle pad, confirm/cancel/zoom/category/menu buttons, touch drag with inertia
 0017efa4 skeletonUpdateWorldMatrices inferred skeleton world-matrix update over SkeletonInstanceBuffers with three scaling rules
+002f0c18 uiQuestCreate evidence __FILE__ c:\SMT4F\...\camp\UIQuest\UIQuest.cpp (line 5209) and it registers the "UIQuest Calc" process and the UIQuest draw tasks
+00215cb8 uiQuestCalc evidence registered by uiQuestCreate as the process "UIQuest Calc"
+0023b4cc uiQuestDrawUpper evidence registered by uiQuestCreate as the draw tasks "UIQuest UDrawLeft"/"UIQuest UDrawRight" (upper screen, both eyes)
+0028587c uiQuestDrawLower evidence registered by uiQuestCreate as the draw task "UIQuest DDraw" (lower screen)
+004d1af8 btlDebugFlagMenuCreate evidence builds the "btl Flag Menu" list box in battle/btlDebug
+003493dc partyPanelCreate inferred camp/PartyPanel unit: allocates and lays out the party panel widgets; twin of smt4 FUN_0028b7f8
+004b990c mikadoCampVisitUpdate inferred mikado scene step machine around a camp visit (closes windows, waits for the camp, applies its result, rebuilds the menu)
+001ffe84 campSkillListUpdate inferred camp skill list input/update (cost payment, user-can-act test, skill dispatch)
+0042021c saveLoadUIUpdate inferred 22-mode save/load screen update
+00472568 aocBoardUpdateAnimation inferred process created by FUN_00472f58 ("Aoc board" tasks); twin of smt4 FUN_0038a1e0
+00213020 particleRingEmitterUpdate inferred twin of smt4 FUN_00193130
+003e9cec btlInitializeDemonUnitState inferred fills a BattleUnitState from a demon's slot record (battle/BattleUnitInit.h)
+0034e784 saveSlotDrawClippedGaugeFrame inferred draws the two-part gauge frame of a save slot with the lower part clipped
+0047c36c aocMenuUpdate inferred AocMenu per-frame update (add-on release shutdown, sprite ticks, step dispatch); twin of smt4 FUN_00392e74

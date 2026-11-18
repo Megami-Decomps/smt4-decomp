@@ -42,7 +42,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 /* Draws the quest screen for its current state: the base screen for most states, the party
  * screen for 0x11-0x13, and for 0x14-0x16 the category picker with its panel and label.
  * Always returns 0. */
-u32 FUN_0023b4cc(void)
+u32 uiQuestDrawUpper(void)
 {
     QuestUi *ui = g_uiQuest;
 

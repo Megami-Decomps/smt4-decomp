@@ -1,15 +1,16 @@
-/* NON_MATCHING: only the register numbers of the final empty-slot search loop (i/temporary) differ. */
 #include "AsdSDK/AsdDebug.h"
+#include "gamedata/nkm/NkmGrowEvent.h"
+#include <string.h>
 #include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
-// The demon's eight skill ids; copied as one 16-byte block.
-union GrowSkillSet { u16 ids[8]; u32 words[4]; };
-struct GrowDemon {
-    u8 unk00[0x34];
-    GrowSkillSet skills;
-    u8 unk44[0x1e];
-    u16 id;
+// Both sets of excluded skills are sorted and searched as one contiguous list.
+union ExcludedSkills {
+    u16 ids[16];
+    struct {
+        u32 equipped[4];
+        u16 learned[8];
+    } sets;
 };
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
@@ -17,11 +18,10 @@ void asdMemFree(void *);
 s32 randRange(u32);
 s32 uiCompareHalfwordKeysDescending(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
-void partyRecordSetEquippedItemClampRank(GrowDemon *, u16);
-void unitRecomputeDerivedStats(GrowDemon *);
-void recordRestoreScaledMaximumPair(GrowDemon *);
+void unitRecomputeDerivedStats(SlotRecordA *demon);
 
-u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
+// Picks a compatible unknown skill, equips it in the first free slot, and refreshes the stats.
+u16 nkmGrowthLearnRandomSkill(SlotRecordA *demon)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\nkm\\NkmGrowEvent.cpp", 598);
     u16 *candidates = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 0x3ea, 1);
@@ -37,19 +37,16 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
     s32 roll = randRange(99);
     if (roll < 3)
         ++rank;
-    struct {
-        GrowSkillSet demon;
-        u16 learned[8];
-    } excluded;
-    excluded.demon = demon->skills;
-    excluded.learned[0] = definition->learnedSkills[0].id;
-    excluded.learned[1] = definition->learnedSkills[1].id;
-    excluded.learned[2] = definition->learnedSkills[2].id;
-    excluded.learned[3] = definition->learnedSkills[3].id;
-    excluded.learned[4] = definition->learnedSkills[4].id;
-    excluded.learned[5] = definition->learnedSkills[5].id;
-    excluded.learned[6] = definition->learnedSkills[6].id;
-    excluded.learned[7] = definition->learnedSkills[7].id;
+    ExcludedSkills excluded;
+    memcpy(excluded.sets.equipped, demon->skillWords, sizeof(excluded.sets.equipped));
+    excluded.sets.learned[0] = definition->learnedSkills[0].id;
+    excluded.sets.learned[1] = definition->learnedSkills[1].id;
+    excluded.sets.learned[2] = definition->learnedSkills[2].id;
+    excluded.sets.learned[3] = definition->learnedSkills[3].id;
+    excluded.sets.learned[4] = definition->learnedSkills[4].id;
+    excluded.sets.learned[5] = definition->learnedSkills[5].id;
+    excluded.sets.learned[6] = definition->learnedSkills[6].id;
+    excluded.sets.learned[7] = definition->learnedSkills[7].id;
     qsort(&excluded, 16, sizeof(u16), uiCompareHalfwordKeysDescending);
     s32 count = 0;
     do {
@@ -59,11 +56,11 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
                 continue;
             bool known = false;
             for (s32 i = 0; i < 16; ++i) {
-                if (excluded.demon.ids[i] == id) {
+                if (excluded.ids[i] == id) {
                     known = true;
                     break;
                 }
-                if (!excluded.demon.ids[i])
+                if (!excluded.ids[i])
                     break;
             }
             if (!known)
@@ -73,12 +70,12 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
     u16 selected = 0;
     if (count > 0) {
         s32 index = randRange((count - 1) & 0xffff);
-        s32 i = 0;
-        while (i < 8 && demon->skills.ids[i])
-            ++i;
-        if (i < 8) {
-            selected = candidates[index];
-            partyRecordSetEquippedItemClampRank(demon, selected);
+        for (s32 i = 0; i < 8; ++i) {
+            if (demon->skills[i] == 0) {
+                selected = candidates[index];
+                partyRecordSetEquippedItemClampRank(demon, selected, i);
+                break;
+            }
         }
     }
     unitRecomputeDerivedStats(demon);

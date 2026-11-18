@@ -1,4 +1,4 @@
-/* NON_MATCHING: structure, jump table and callees match; only the 64-bit flag-mask tests/updates differ in register choice and pair-load form (ldm/ldrd/ldr vs retail), and the case 10/11 toggles store the flag words in a different order. */
+/* NON_MATCHING: structure, jump table and callees match (531 rows each); only the 64-bit flag-mask tests and the two toggles differ: retail loads the flag and mask words in another order or registers (ldm/ldrd/ldr), and in the case 10/11 toggles shares the mask's low word and the final store between the set and clear paths. */
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/BattleUnitSkills.h"
@@ -73,7 +73,7 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
             asdListBoxSetIntItem(editor->listBox, 7, vitals->parameter[2], 1, 999, 0);
             asdListBoxSetIntItem(editor->listBox, 8, vitals->parameter[3], 1, 999, 0);
             asdListBoxSetIntItem(editor->listBox, 9, vitals->parameter[4], 1, 999, 0);
-            asdListBoxSetToggleItem(editor->listBox, 10, (entry->flags & DAT_005715f8.toggleMaskA) != 0);
+            asdListBoxSetToggleItem(editor->listBox, 10, (DAT_005715f8.toggleMaskA & entry->flags) != 0);
             asdListBoxSetToggleItem(editor->listBox, 11, (entry->flags & DAT_005715f8.toggleMaskB) != 0);
             if ((entry->flags & DAT_005715f8.editableMask) != 0)
                 asdListBoxSetIntItem(editor->listBox, 12, saveIsRecordValueBounded(entry->data.id), 0, 100, 0);
@@ -168,7 +168,7 @@ void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
     case 11:
         if (entry != NULL) {
             if (listBoxItemHasOwner(editor->listBox, selected))
-                entry->flags |= DAT_005715f8.toggleMaskB;
+                entry->flags = DAT_005715f8.toggleMaskB | entry->flags;
             else
                 entry->flags = ~DAT_005715f8.toggleMaskB & entry->flags;
             return;

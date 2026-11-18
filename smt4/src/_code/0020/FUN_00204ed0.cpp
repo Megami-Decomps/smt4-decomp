@@ -1,4 +1,5 @@
-/* NON_MATCHING: sprite coordinate loads/adds and initial VFP frame setup remain scheduled differently. */
+#include "shard/W6_W6Match2_FormattedTextSource.h"
+/* NON_MATCHING: VFP frame setup and the sprite-coordinate loads/adds are scheduled differently. */
 #include "shard/S1ListPanel.h"
 #include "text/TextDraw.h"
 #include "addon/AocSystem_Smt4.h"
@@ -7,9 +8,8 @@
 extern "C" {
 
 void texDrawCompositeSprite(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
-void FUN_002bdf94(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *text);
+void FUN_002bdf94(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_002b6c34(s16 id, s32 x, s32 y, s32 size, s32 a, s32 b);
-void textFormatBuffer(char *buffer, const char *format, ...);
 
 /* Draws one registration entry: its frame, name, icon and number, or the empty-entry labels when
  * `id` is 0. */

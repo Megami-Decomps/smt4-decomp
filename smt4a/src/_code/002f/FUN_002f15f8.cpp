@@ -1,7 +1,8 @@
-/* NON_MATCHING: speed-store scheduling, reposition constant register and paired menu-state stores differ. */
+/* NON_MATCHING: the speed store is scheduled one instruction later and the reposition flag's constant takes r1 where retail uses r0 (83 rows each). */
 #include "shard/W5_W5Match7_UiQuest.h"
 
-/* Local view avoids increasing the alignment/extent of the shared nine-byte unk934 region. */
+/* A local view of UiQuestApoc's sprite(7), focusSpeed and repositioned: through the shared fields armcc loads unk90c before the
+   reposition store, which retail does not (8 differing lines instead of 6). */
 struct QuestFocusAnimationView {
     u8 unk000[0x408];
     u8 sprite[0x8C];
@@ -57,11 +58,7 @@ void FUN_002f15f8(u32 questId, s32 reposition)
         uiSpriteSetImageKeyframe(quest->mainSprite, 8, 0);
     }
     uiFadeRequestClear();
-    UiQuestApoc *current = g_uiQuest;
-    s32 previous = current->menuState;
-    current->menuState = 20;
-    current->previousMenuState = previous;
-    current->menuTimer = 0;
+    uiQuestEnterMenuState(g_uiQuest, 20);
     sysPlaySe(26);
     sysPlayVoice(0x10000CB);
 }

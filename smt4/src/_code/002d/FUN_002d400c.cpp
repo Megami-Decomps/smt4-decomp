@@ -1,4 +1,4 @@
-/* NON_MATCHING: stage override selection matches retail; saved game-state/scene-global bases r6/r7 are exchanged. */
+/* NON_MATCHING: the two predicated stage-group stores are exchanged; the rest matches retail. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -32,7 +32,12 @@ u32 FUN_002d400c(void)
         for (s32 i = 0; i < dataTable2eSub1GetCount(); i++) {
             StageRecord *record = dataTable2eSub1GetRecord(i);
             if (record->id == player->areaId) {
-                g_gameState.map.stageGroup = (g_gameState.groupOverride == -1) ? record->stage : g_gameState.groupOverride;
+                s32 overrideValue = g_gameState.groupOverride;
+                if (overrideValue != -1) {
+                    g_gameState.map.stageGroup = overrideValue;
+                } else {
+                    g_gameState.map.stageGroup = record->stage;
+                }
                 break;
             }
         }

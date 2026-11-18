@@ -29,13 +29,13 @@ extern "C" {
 Task1ab6f4 *taskCreate(void (*update)(Task1ab6f4 *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00291340(void *params, void *a, void *b, void *c, void *d);
-void FUN_00193130(Task1ab6f4 *task);
+void particleRingEmitterUpdate(Task1ab6f4 *task);
 
-// Create the task that runs FUN_00193130 with copies of the given data and parameter blocks.
+// Create the task that runs particleRingEmitterUpdate with copies of the given data and parameter blocks.
 __softfp Task1ab6f4 *FUN_001ab6f4(u32 arg0, const void *data, const void *params, u32 arg3,
                                   f32 arg4, u8 arg5, u16 arg6, f32 arg7)
 {
-    Task1ab6f4 *task = taskCreate(FUN_00193130, 0, 0, 0, 0, sizeof(Task1ab6f4), 3, 0, 0);
+    Task1ab6f4 *task = taskCreate(particleRingEmitterUpdate, 0, 0, 0, 0, sizeof(Task1ab6f4), 3, 0, 0);
     if (task != NULL) {
         memClear(task, sizeof(Task1ab6f4));
         __aeabi_memcpy4(task->data, data, sizeof(task->data));

@@ -6892,3 +6892,17 @@
 00491c60 lmapRefreshDestinationAvailability
 0048c394 naviMapHandleInput
 0017efa4 skeletonUpdateWorldMatrices
+002f0c18 uiQuestCreate
+00215cb8 uiQuestCalc
+0023b4cc uiQuestDrawUpper
+0028587c uiQuestDrawLower
+004d1af8 btlDebugFlagMenuCreate
+003493dc partyPanelCreate
+004b990c mikadoCampVisitUpdate
+001ffe84 campSkillListUpdate
+0042021c saveLoadUIUpdate
+00472568 aocBoardUpdateAnimation
+00213020 particleRingEmitterUpdate
+003e9cec btlInitializeDemonUnitState
+0034e784 saveSlotDrawClippedGaugeFrame
+0047c36c aocMenuUpdate

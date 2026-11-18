@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(...);
-int FUN_003e9cec(...);
+int btlInitializeDemonUnitState(...);
 int FUN_004ca63c(...);
 int rt_memcpy(...);
 int __aeabi_memcpy4(...);
@@ -32,7 +32,7 @@ extern unsigned int gameGetSlotTable(void);
 extern unsigned int flagValueGetStorage(void);
 extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e9cec. */
+/* Supplied declaration required: btlInitializeDemonUnitState. */
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -146,13 +146,13 @@ LAB_003ee510:
         *(unsigned int *)(*piVar12 + temp_v5 + 0x108) = 0xffffffff;
         *(unsigned int *)(*piVar12 + temp_v6 + 0xa8) = 0x96;
         if (temp_v4 >= 4) {
-          FUN_003e9cec(temp_v12,temp_v11,DAT_00573934,1);
+          btlInitializeDemonUnitState(temp_v12,temp_v11,DAT_00573934,1);
           FUN_004ca63c(temp_v12,temp_v11,0,0,0);
           temp_v4 = 0;
           do {
             if (-1 < *(char *)(DAT_0057392c + temp_v4 + 0x1ca0)) {
               temp_v3 = gameGetSaveSlotData(temp_v4);
-              FUN_003e9cec(temp_v12,temp_v11,temp_v3,0);
+              btlInitializeDemonUnitState(temp_v12,temp_v11,temp_v3,0);
               FUN_004ca63c(temp_v12,temp_v11,0,temp_v4 + 1,0);
             }
             temp_v4 = temp_v4 + 1;

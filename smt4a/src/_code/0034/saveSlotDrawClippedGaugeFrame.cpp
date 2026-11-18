@@ -1,4 +1,3 @@
-/* NON_MATCHING: recovered signed panel flag, speed accessors and offset pair; clip-rectangle argument scheduling and cached-state scratch registers still differ. */
 #include "ui/UiSpriteApi.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
@@ -31,8 +30,20 @@ void efctSetSpeed(f32 speed);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 flag);
 }
 
+// Replace the blend-stack top and reapply it when changing modes.
+static __inline void applyGaugeBlend(RenderCtxA *context, s32 state)
+{
+    RenderStateStack *stack = &context->stackB;
+    s32 previous = stack->entries[stack->count];
+    stack->entries[stack->count] = state;
+    if (renderStackNeedsApply(stack, previous, state)) {
+        stack->apply(state);
+        stack->dirty = 0;
+    }
+}
+
 /* Draw the two-part gauge frame at the slot position, with the lower part shortened by `shrink` rows. */
-extern "C" void FUN_0034e784(u8 *panel, s32 rows)
+extern "C" void saveSlotDrawClippedGaugeFrame(u8 *panel, s32 rows)
 {
     GaugePanelView *view = reinterpret_cast<GaugePanelView *>(panel);
     if (view->hidden != 0)
@@ -50,15 +61,15 @@ extern "C" void FUN_0034e784(u8 *panel, s32 rows)
     y += offset.y;
     efctSetSpeed(vec2GetSpeed((&view->firstPosition)) * scale);
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(13, view->slot + 0x52);
-    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+    applyGaugeBlend(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);
     renderStackSet(&g_renderCtx->scissor, 3);
     gxSetMirroredClippedScissor(sprite->x + x, sprite->y + y, sprite->placement->width, sprite->placement->height - shrink, 1);
-    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+    applyGaugeBlend(g_renderCtx, packNibblesAndByte(6, 1, 0));
     texDrawTableEntryAtStoredOrigin(2, 13, 0x50, sprite->x + x, sprite->y + y, 0x2E);
     texDrawTableEntryAtStoredOrigin(2, 13, 0x51, sprite->x + x, sprite->y + y, 0x2E);
     renderStackSet(&g_renderCtx->scissor, 0);
-    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
+    applyGaugeBlend(g_renderCtx, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);
 }

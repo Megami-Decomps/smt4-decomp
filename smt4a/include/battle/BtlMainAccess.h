@@ -14,7 +14,9 @@ struct BtlPanelSlotA {
 /* The battle state block as the script and panel code see it: the canonical block followed by the
  * fields the allocation keeps past BtlMainStateA's 0x4CF0 bytes. */
 struct BtlMainStateExtA : BtlMainStateA {
-    /* 0x4CF0 */ u8 unk4CF0[0x74];
+    /* 0x4CF0 */ u8 unk4CF0[0x6C];
+    /* 0x4D5C */ s32 debugDamage;     /* the debug flag menu's "damagecontrol" value */
+    /* 0x4D60 */ u8 unk4D60[4];
     /* 0x4D64 */ s32 infoWindow;
     /* 0x4D68 */ u32 selected;
     /* 0x4D6C */ s32 count;
@@ -27,7 +29,7 @@ struct BtlMainStateExtA : BtlMainStateA {
 typedef char BtlMainStateExtAOffsetCheck[
     sizeof(BtlMainStateA) == 0x4CF0 && offsetof(BtlMainStateExtA, infoWindow) == 0x4D64 &&
     offsetof(BtlMainStateExtA, selected) == 0x4D68 && offsetof(BtlMainStateExtA, count) == 0x4D6C &&
-    offsetof(BtlMainStateExtA, slots) == 0x4D78 &&
+    offsetof(BtlMainStateExtA, slots) == 0x4D78 && offsetof(BtlMainStateExtA, debugDamage) == 0x4D5C &&
     offsetof(BtlMainStateExtA, members) == 0x4E58 ? 1 : -1];
 
 extern "C" {

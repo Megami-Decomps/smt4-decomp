@@ -1,29 +1,19 @@
+#include "addon/AocBoard.h"
 #include "ui/UiSpriteApi.h"
-#include "shard/Shard0047.h"
 
 extern "C" {
 
-typedef struct FlagObj {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 unk004[4];
-    /* 0x008 */ u32 state;
-    /* 0x00C */ u8 unk00C[0x434];
-    /* 0x440 */ UiSpriteState block440;
-    /* 0x4CC */ u8 unk4CC[0x8C];
-    /* 0x558 */ UiSpriteState block558;
-} FlagObj;
-
 
 /* When both flag bits 0x10 and 0x20 are set: enters state 3, clears 0x20 and resets two sub-blocks. */
-void flagObjAdvance(FlagObj *obj)
+void flagObjAdvance(AocBoardWork *board)
 {
-    u32 flags = obj->flags;
+    u32 flags = board->owner.control.flags;
 
     if ((flags & 0x10) != 0 && (flags & 0x20) != 0) {
-        obj->state = 3;
-        obj->flags = flags & ~0x20u;
-        uiSpriteSetImageKeyframe(&obj->block440, 2, 0);
-        uiSpriteSetImageKeyframe(&obj->block558, 2, 0);
+        board->owner.control.frame = 3;
+        board->owner.control.flags = flags & ~0x20u;
+        uiSpriteSetImageKeyframe(&board->sprites[0], 2, 0);
+        uiSpriteSetImageKeyframe(&board->sprites[2], 2, 0);
     }
 }
 

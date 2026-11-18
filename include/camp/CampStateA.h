@@ -21,9 +21,11 @@ typedef struct CampStateA {
     /* 0x0018 */ u32 unk0018;
     /* 0x001C */ s32 state;
     /* 0x0020 */ u32 phase;
-    /* 0x0024 */ u8 unk0024[4];
+    /* 0x0024 */ s32 pendingState;          /* the state the transition state (5) goes on to */
     /* 0x0028 */ s32 previousState;
-    /* 0x002C */ u8 unk002C[0x11];
+    /* 0x002C */ u8 unk002C[0xE];
+    /* 0x003A */ u16 buttonHelpValue;       /* ifTouchGetButtonHelpValue when the sort menu opened */
+    /* 0x003C */ u8 unk003C;
     /* 0x003D */ u8 locked;
     /* 0x003E */ u8 unk003E[2];
     /* 0x0040 */ GridNavigation menuGrid;
@@ -68,7 +70,8 @@ typedef struct CampStateA {
     /* 0x317C */ s32 categoryTimers[25];   /* index 0 is the player, 1..24 the unit slots */
     /* 0x31E0 */ s32 categoryIndices[25];
     /* 0x3244 */ u32 categoryColors[25];
-    /* 0x32A8 */ u8 unk32A8[8];
+    /* 0x32A8 */ s8 menuGroupBorrowed;      /* leaving the list puts the menu back on group 1 */
+    /* 0x32A9 */ u8 unk32A9[7];
     /* 0x32B0 */ u8 noticeFlags[7];
     /* 0x32B7 */ u8 unk32B7[0x109];
 } CampStateA;
@@ -83,6 +86,9 @@ typedef char CampStateAEntriesOffsetCheck[offsetof(CampStateA, entries) == 0x1B7
 typedef char CampStateAIdsOffsetCheck[offsetof(CampStateA, accessoryIds) == 0x307C ? 1 : -1];
 typedef char CampStateACategoryOffsetCheck[offsetof(CampStateA, categoryColors) == 0x3244 ? 1 : -1];
 typedef char CampStateANoticeOffsetCheck[offsetof(CampStateA, noticeFlags) == 0x32B0 ? 1 : -1];
+typedef char CampStateAPendingOffsetCheck[offsetof(CampStateA, pendingState) == 0x24 &&
+    offsetof(CampStateA, buttonHelpValue) == 0x3A && offsetof(CampStateA, locked) == 0x3D &&
+    offsetof(CampStateA, statusSelection) == 0xBC && offsetof(CampStateA, menuGroupBorrowed) == 0x32A8 ? 1 : -1];
 typedef char CampStateASizeCheck[sizeof(CampStateA) == 0x33C0 ? 1 : -1];
 
 #ifdef __cplusplus

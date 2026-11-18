@@ -1,45 +1,13 @@
-/* NON_MATCHING: the skill-affinity pass is now an inline helper as in retail and its loop matches; remaining: retail keeps the HP accumulator's 0 in r7 and stores it for unk1c/unk1e, armcc materializes a separate zero (r5) and copies it. */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "font/SWin/SWin.h"
-#include "gamedata/SkillDataRecord.h"
+#include "gamedata/SkillDataLookup.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
 #include "map/lmapMain.h"
 
-// Demon record in the party/compendium format (0x12c bytes).
-struct DemonRecord {
-    /* 0x00 */ u16 stat0;
-    /* 0x02 */ u16 stat1;
-    /* 0x04 */ u16 stat2;
-    /* 0x06 */ u16 stat3;
-    /* 0x08 */ u16 stat4;
-    /* 0x0a */ u16 stat5;
-    /* 0x0c */ u16 stat6;
-    /* 0x0e */ s16 hpBase;
-    /* 0x10 */ u16 mpBase;
-    /* 0x12 */ u8 unk12[0x0a];
-    /* 0x1c */ u16 unk1c;
-    /* 0x1e */ u16 unk1e;
-    /* 0x20 */ u16 curStat2;
-    /* 0x22 */ u16 curStat3;
-    /* 0x24 */ u16 curStat4;
-    /* 0x26 */ u16 curStat5;
-    /* 0x28 */ u16 curStat6;
-    /* 0x2a */ s16 hpMax;
-    /* 0x2c */ u16 mpMax;
-    /* 0x2e */ u8 unk2e[2];
-    /* 0x30 */ u32 extra;
-    /* 0x34 */ u16 skills[8];
-    /* 0x44 */ s8 affinityBonus[8];
-    /* 0x4c */ s8 growth[18];
-    /* 0x5e */ u8 unk5e[4];
-    /* 0x62 */ u16 id;
-    /* 0x64 */ u16 levelBase;
-    /* 0x66 */ u8 slot;
-    /* 0x67 */ u8 unk67[0x12c - 0x67];
-};
+#include "gamedata/SaveSlotTable.h"
 
-// Saved demon entry (0x80 bytes): same fields in save order.
+// Saved demon entry (0x50 bytes): same fields in save order.
 struct SaveEntry {
     u16 level;              // 0x00
     u16 stat2;              // 0x02
@@ -66,40 +34,52 @@ struct SaveEntry {
 extern "C" {
 
 void sysMemClear(void* data, u32 size);
-s8* gameGetSlotTable(void);
-void gameItemSetFlag(u32 id, s32 value);
-struct SkillRecord { u8 unk00[0x26]; u16 affinity; };
+u8 gameItemSetFlag(u32 id, s16 value);
 void FUN_0031f190(u32 id, s32 arg);
-void unitRecomputeDerivedStats(DemonRecord* record);
-s32 unitHasRankingBonus(u32 id);
-void FUN_002a6894(DemonRecord* record);
+void unitRecomputeDerivedStats(SlotRecordA *record);
+s32 unitHasRankingBonus(u16 id);
+void FUN_002a6894(SlotRecordA *record);
 
 /* Adds each skill's affinity growth to its affinity bonus, clamped to [-9, 9]. */
-static __inline void demonApplySkillAffinities(DemonRecord *record)
+static __inline void demonApplySkillAffinities(SlotRecordA *record)
 {
     if (record == NULL || record->id == 0 || nkmBaseGetRecord(record->id) == NULL)
         return;
     for (s32 i = 0; i < 8; i++) {
         if (record->skills[i] == 0) continue;
-        SkillRecord *skill = (SkillRecord *)skillDataFindById(record->skills[i]);
-        if (skill == NULL || skill->affinity >= 18) continue;
-        u32 affinity = skill->affinity;
-        s8 sum = record->growth[affinity] + record->affinityBonus[i];
-        record->affinityBonus[i] = sum;
-        if (sum > 9) record->affinityBonus[i] = 9;
-        else if (sum < -9) record->affinityBonus[i] = -9;
+        const SkillDataRecordA *skill = skillDataFindById(record->skills[i]);
+        if (skill != NULL && skill->sort.rankCategory < 18) {
+            u32 affinity = skill->sort.rankCategory;
+            s8 sum = record->categoryRanks[affinity] + record->skillRanks[i];
+            record->skillRanks[i] = sum;
+            if (sum > 9) record->skillRanks[i] = 9;
+            else if (sum < -9) record->skillRanks[i] = -9;
+        }
     }
+}
+
+// The same maximum accessor used when building a unit from its table record.
+static __inline s32 scaledHpForRecord(const SlotRecordA *record)
+{
+    if (record == NULL) {
+        return 0;
+    }
+    s16 hp = record->maxHp;
+    if (unitHasRankingBonus(record->id)) {
+        hp = static_cast<s16>(hp * 1.25f);
+    }
+    return hp;
 }
 
 // Builds a demon record for `id` in slot `slot`: kind 0/3 copies the master data, kind 1 the
 // saved entry; kinds other than 3 also claim a free party slot and flag the demon as owned.
-void demonRecordInitialize(DemonRecord* record, u32 slot, u32 id, s32 kind)
+void demonRecordInitialize(SlotRecordA *record, u32 slot, u32 id, s32 kind)
 {
-    sysMemClear(record, 300);
+    sysMemClear(record, sizeof(*record));
     record->id = id;
-    record->slot = slot;
+    record->tableIndex = slot;
     if (kind != 3) {
-        s8* table = gameGetSlotTable() + 0x1c88;
+        s8 *table = gameGetSlotTable()->party;
         for (s32 i = 0; i < 24; i++) {
             if (table[i] < 0) {
                 table[i] = slot;
@@ -109,64 +89,59 @@ void demonRecordInitialize(DemonRecord* record, u32 slot, u32 id, s32 kind)
         gameItemSetFlag((u16)id, 1);
         FUN_002854d8((u16)id, 1);
     }
-    const NkmBaseRecordA* info = reinterpret_cast<const NkmBaseRecordA *>(nkmBaseGetRecord((u16)id));
-    s16 hp = 0;
+    const NkmBaseRecordA *info = reinterpret_cast<const NkmBaseRecordA *>(nkmBaseGetRecord((u16)id));
     switch (kind) {
     case 0:
     case 3:
-        record->levelBase = info->level;
-        record->stat0 = info->baseHp;
-        record->stat1 = info->baseMp;
-        record->stat2 = info->stats[0];
-        record->stat4 = info->stats[2];
-        record->stat5 = info->stats[3];
-        record->stat6 = info->stats[4];
-        record->stat3 = info->stats[1];
-        record->unk1c = 0;
-        record->unk1e = 0;
-        record->curStat2 = info->stats[0];
-        record->curStat4 = info->stats[2];
-        record->curStat5 = info->stats[3];
-        record->curStat6 = info->stats[4];
-        record->curStat3 = info->stats[1];
+        record->level = info->level;
+        record->tableStats[0] = info->baseHp;
+        record->tableStats[1] = info->baseMp;
+        record->tableStats[2] = info->stats[0];
+        record->tableStats[4] = info->stats[2];
+        record->tableStats[5] = info->stats[3];
+        record->tableStats[6] = info->stats[4];
+        record->tableStats[3] = info->stats[1];
+        record->boostedMaxHp = 0;
+        record->boostedMaxMp = 0;
+        record->stats[0] = info->stats[0];
+        record->stats[2] = info->stats[2];
+        record->stats[3] = info->stats[3];
+        record->stats[4] = info->stats[4];
+        record->stats[1] = info->stats[1];
         for (s32 i = 0; i < 8; i++) record->skills[i] = info->skills.ids[i];
-        __aeabi_memcpy4(record->growth, info->categoryModifiers, 18);
+        __aeabi_memcpy4(record->categoryRanks, info->categoryModifiers, 18);
         demonApplySkillAffinities(record);
         FUN_0031f190((u16)id, 0);
         break;
     case 1: {
         SaveEntry save;
         gameDataCopySaveEntry((u16)id, &save);
-        record->levelBase = save.level;
-        record->stat0 = save.stat0;
-        record->stat1 = save.stat1;
-        record->stat2 = save.stat2;
-        record->stat4 = save.stat4;
-        record->stat5 = save.stat5;
-        record->stat6 = save.stat6;
-        record->unk1c = 0;
-        record->unk1e = 0;
-        record->stat3 = save.stat3;
-        record->curStat2 = save.curStat2;
-        record->curStat4 = save.curStat4;
-        record->curStat5 = save.curStat5;
-        record->curStat6 = save.curStat6;
-        record->curStat3 = save.curStat3;
+        record->level = save.level;
+        record->tableStats[0] = save.stat0;
+        record->tableStats[1] = save.stat1;
+        record->tableStats[2] = save.stat2;
+        record->tableStats[4] = save.stat4;
+        record->tableStats[5] = save.stat5;
+        record->tableStats[6] = save.stat6;
+        record->tableStats[3] = save.stat3;
+        record->boostedMaxHp = 0;
+        record->boostedMaxMp = 0;
+        record->stats[0] = save.curStat2;
+        record->stats[2] = save.curStat4;
+        record->stats[3] = save.curStat5;
+        record->stats[4] = save.curStat6;
+        record->stats[1] = save.curStat3;
         for (s32 i = 0; i < 8; i++) record->skills[i] = save.skills[i];
-        record->extra = save.extra;
-        *(reinterpret_cast<u8*>(record) + 299) = (save.flags >> 2) & 0xf;
-        *reinterpret_cast<u64*>(record->affinityBonus) = *reinterpret_cast<u64*>(save.affinityBonus);
-        __aeabi_memcpy4(record->growth, save.growth, 18);
-    }
+        record->experience = save.extra;
+        record->status = (save.flags >> 2) & 0xf;
+        *reinterpret_cast<u64*>(record->skillRanks) = *reinterpret_cast<u64*>(save.affinityBonus);
+        __aeabi_memcpy4(record->categoryRanks, save.growth, 18);
         break;
     }
-    unitRecomputeDerivedStats(record);
-    if (record != NULL) {
-        hp = record->hpBase;
-        if (unitHasRankingBonus(record->id) != 0) hp = (s16)((f32)hp * 1.25f);
     }
-    record->hpMax = hp;
-    record->mpMax = record->mpBase;
+    unitRecomputeDerivedStats(record);
+    record->hp = scaledHpForRecord(record);
+    record->mp = record->maxMp;
     FUN_002a6894(record);
 }
 

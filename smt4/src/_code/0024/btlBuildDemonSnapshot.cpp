@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling only: retail loads the experience, hp-low and hp-high words together before the first store (and hoists the 0x500 memClear size and zero constant earlier); ours interleaves each load with its store. Same instruction multiset, 148 rows each. */
+/* NON_MATCHING: scheduling only: retail loads the experience, hp-low and hp-high words together before their stores (likewise max-HP/stat-offset/variant, and the kind byte before the slot store); ours interleaves each load with its store. Locals holding each loaded field reproduce it, but they are steering. */
 #include "common.h"
 #include "gamedata/EquipmentRecord.h"
 
@@ -65,7 +65,7 @@ u16 recordGetPercentageScaledBase(void);
 void FUN_00253d60(StatGrades *grades, DemonSaveRecord *record);
 
 /* Builds the battle log's snapshot of a party demon from its save record. */
-void FUN_0024d94c(DemonSnapshot *snapshot, DemonSaveRecord *record)
+void btlBuildDemonSnapshot(DemonSnapshot *snapshot, DemonSaveRecord *record)
 {
     StatGrades grades;
 
@@ -109,14 +109,8 @@ void FUN_0024d94c(DemonSnapshot *snapshot, DemonSaveRecord *record)
         snapshot->skillEffectB = recordGetPercentageScaledBase() + snapshot->skillEffectB;
     }
     FUN_00253d60(&grades, record);
-    snapshot->statGrades[0] = grades.values[0] >> 10;
-    snapshot->statGrades[1] = grades.values[1] >> 10;
-    snapshot->statGrades[2] = grades.values[2] >> 10;
-    snapshot->statGrades[3] = grades.values[3] >> 10;
-    snapshot->statGrades[4] = grades.values[4] >> 10;
-    snapshot->statGrades[5] = grades.values[5] >> 10;
-    snapshot->statGrades[6] = grades.values[6] >> 10;
-    snapshot->statGrades[7] = grades.values[7] >> 10;
+    for (u32 i = 0; i < 8; ++i)
+        snapshot->statGrades[i] = grades.values[i] >> 10;
     snapshot->cleared[0] = 0;
     snapshot->cleared[1] = 0;
     snapshot->cleared[2] = 0;

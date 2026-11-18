@@ -58,3 +58,7 @@ contentIndexGetValue = 0xe1d000b0; // 0x1d0fa0 (FUN_001d0ea0, twin of smt4 FUN_0
 partyWidgetSetTransitionKind = 0xe5c01028; // FUN_002ade88: ldr r0,[r7,#2580]; mov r1,#0; strb r1,[r0,#40] in place of a call (same shape as partyWidgetSetTransitionActive)
 packScissorCoordinates = 0xe1800801; // inferred removed helper x | (y << 16); FUN_0035ae58 +0x64/+0xac; renderSetClippedScissor +0x13c/+0x180 retain r0/r1 argument copies; see docs/notes/scissor-coordinate-packing.md
 uniteRenderTargetSetTexture = 0xe5801004; // FUN_002a74ac +0x70: texture in r1, target in r0, store +4; IV counterpart FUN_0021a374.
+fusionRaceSelectionSetIncludeSameRace = 0xe5c0117a; // 0x349528 in FUN_003493dc (party panel create): strb r1,[r0,#0x17a] after mov r1,#const where a call would be, with the call-spacing nops
+partyWidgetSetEmpty = 0xe5c01020; // 0x349560 in FUN_003493dc: strb r1,[r0,#0x20] in place of the call
+partyWidgetSetUnitId = 0xe5801034; // 0x34956c in FUN_003493dc: str r1,[r0,#0x34] in place of the call
+partyWidgetSetIsCharacter = 0xe5c01021; // 0x3495a0 in FUN_003493dc: strb r1,[r0,#0x21] in place of the call

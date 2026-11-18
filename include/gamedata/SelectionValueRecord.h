@@ -16,19 +16,22 @@ struct SelectionValuePayload {
     u8 unk16[0xD]; // 0x16
     s8 positiveMode; // 0x23
 };
-struct SelectionValueRecord {
+struct SaveUserSelectionRecord {
     union {
         u8 unk00[0x20]; // 0x00
         struct {
             u8 unk00[0xC];
             u8 flags; // 0x0C
+            u8 unk0D[2];
+            u8 devilIconFlags; // 0x0F
         } variant;
     };
     SelectionValuePayload values; // 0x20
 };
-typedef char SelectionValueRecordLayoutCheck[sizeof(SelectionValuePayload) == 0x24 &&
-    offsetof(SelectionValueRecord, values) == 0x20 ? 1 : -1];
-typedef char SelectionValueRecordVariantOffsetCheck[
-    offsetof(SelectionValueRecord, variant.flags) == 0xC &&
-    sizeof(SelectionValueRecord) == 0x44 ? 1 : -1];
+typedef char SaveUserSelectionRecordLayoutCheck[sizeof(SelectionValuePayload) == 0x24 &&
+    offsetof(SaveUserSelectionRecord, values) == 0x20 ? 1 : -1];
+typedef char SaveUserSelectionRecordVariantOffsetCheck[
+    offsetof(SaveUserSelectionRecord, variant.flags) == 0xC &&
+    offsetof(SaveUserSelectionRecord, variant.devilIconFlags) == 0xF &&
+    sizeof(SaveUserSelectionRecord) == 0x44 ? 1 : -1];
 #endif

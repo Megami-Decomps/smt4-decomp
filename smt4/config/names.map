@@ -5265,3 +5265,12 @@
 001ec6e0 campCecLoaderThread
 002bd2b4 cecCardBuild
 002005a0 cecOutboxReadCard
+0028b7f8 partyPanelCreate
+003ba998 mikadoCampVisitUpdate
+003b7084 resultDrawLevelUpPanel
+003cb3e4 btlCommandTurnEnd
+0038a1e0 aocBoardUpdateAnimation
+00193130 particleRingEmitterUpdate
+0024d94c btlBuildDemonSnapshot
+00331158 campUpdateListInput
+00392e74 aocMenuUpdate

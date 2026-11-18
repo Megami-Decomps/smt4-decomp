@@ -1,4 +1,4 @@
-/* NON_MATCHING: near miss: only instruction scheduling differs (store of the entry count, the picks/zero stores, the 100-byte copy argument setup) and the final reply reload before the delete. */
+/* NON_MATCHING: the remaining-index loop and the 100-byte copy still use a different register schedule. */
 #include "network/DataStore/DataStoreMain.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -15,18 +15,19 @@ void asdMemFree(void *block);
 void asdOperatorDelete(void *object);
 void asdOperatorDeleteArray(void *array);
 s32 randRange(u32 maximum);
-s32 FUN_00413e28(void);
+s32 FUN_00413e28(DataStoreReply *reply);
 void FUN_00413af4(ReplyString *result, DataStoreReply *reply, s32 index);
-void FUN_00414a24(void);
+void *FUN_00414a24(void *reply);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 
 /* Once the reply has arrived, pick up to ten random entries from it and store them in the entry table. */
 void FUN_003fa2e8(DataStoreWork *work)
 {
     if (work->busy == 0) {
-        if (work->transfer.reply == 0)
+        DataStoreReply *reply = work->transfer.reply;
+        if (reply == NULL)
             return;
-        s32 count = FUN_00413e28();
+        s32 count = FUN_00413e28(reply);
         work->unk4C = count;
         if (count > 0) {
             asdDebugTrace(DAT_00533030, 0x2AE);
@@ -39,8 +40,9 @@ void FUN_003fa2e8(DataStoreWork *work)
             work->unk50 = 0;
             asdDebugTrace(DAT_00533030, 0x2BE);
             s32 *remaining = static_cast<s32 *>(asdMemoryAllocTracked(0x100, 0x100, 0, work->unk4C << 2, 1));
+            s32 *out = remaining;
             for (s32 i = 0; i < static_cast<s32>(work->unk4C); i++)
-                remaining[i] = i;
+                *out++ = i;
             asdDebugTrace(DAT_00533030, 0x2C5);
             s32 *chosen = static_cast<s32 *>(asdMemoryAllocTracked(0x100, 0x100, 0, picks << 2, 1));
             s32 left = work->unk4C;
@@ -70,9 +72,8 @@ void FUN_003fa2e8(DataStoreWork *work)
         }
         work->ready = 1;
     }
-    if (work->transfer.reply != 0) {
-        FUN_00414a24();
-        asdOperatorDelete(work->transfer.reply);
+    if (DataStoreReply *reply = work->transfer.reply) {
+        asdOperatorDelete(FUN_00414a24(reply));
         work->transfer.reply = 0;
     }
 }
