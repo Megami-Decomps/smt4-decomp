@@ -1,5 +1,6 @@
 /* NON_MATCHING: restored help option argument; signed-byte mode dispatch, VFP frame and switch control-flow tails remain unrecovered. */
 #include "romwright_types.h"
+#include "gfx/ModelSlotColorApi.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/ActorCardAnimationApi.h"
@@ -66,7 +67,7 @@ int FUN_003d86a0(...);
 int FUN_003de758(...);
 
 int FUN_0023c638(...);
-int asdModelClearSlotColors(...);
+
 int FUN_0023c700(...);
 int FUN_00244fb0(...);
 int slotResetIdle(...);
@@ -326,13 +327,16 @@ LAB_00344fc0:
   case '\x04':
     if (*(int *)(psVar2 + 0x14) < 1) break;
     temp_v4 = btlGetMainState();
-    VectorSignedToFloat((int)(char)psVar2[0x10],(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(char *)((int)psVar2 + 0x21),(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)(char)psVar2[0x11],(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    asdModelClearSlotColors(temp_v4,*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),(int)(char)psVar2[0x10],
-                 (int)*(char *)((int)psVar2 + 0x21));
+    {
+      const f32 red = static_cast<f32>(*reinterpret_cast<s8 *>(reinterpret_cast<u8 *>(psVar2) + 0x20));
+      const f32 green = static_cast<f32>(*reinterpret_cast<s8 *>(reinterpret_cast<u8 *>(psVar2) + 0x21));
+      const f32 blue = static_cast<f32>(*reinterpret_cast<s8 *>(reinterpret_cast<u8 *>(psVar2) + 0x22));
+      const f32 remaining = static_cast<f32>(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26));
+      asdModelClearSlotColors(temp_v4,
+          0.5f - (0.5f - red * 0.01f) / remaining,
+          0.5f - (0.5f - green * 0.01f) / remaining,
+          0.5f - (0.5f - blue * 0.01f) / remaining);
+    }
     temp_v5 = *(int *)(psVar2 + 0x26);
     *(int *)(psVar2 + 0x26) = temp_v5 + 1;
     if (*(int *)(psVar2 + 0x14) <= temp_v5 + 1) break;
@@ -342,10 +346,17 @@ LAB_00344fc0:
   case '\x05':
     if (*(int *)(psVar2 + 0x14) < 1) break;
     temp_v4 = btlGetMainState();
-    VectorSignedToFloat(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    asdModelBankGetModelUnk08((int)*(short *)(DAT_004398d4 + 0x8c),0);
-    asdModelClearSlotColors(temp_v4);
+    {
+      const f32 remaining = static_cast<f32>(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26));
+      const u32 model = asdModelBankGetModelUnk08((int)*(short *)(DAT_004398d4 + 0x8c), 0);
+      const f32 red = *reinterpret_cast<const f32 *>(model + 0xB8);
+      const f32 green = *reinterpret_cast<const f32 *>(model + 0xBC);
+      const f32 blue = *reinterpret_cast<const f32 *>(model + 0xC0);
+      asdModelClearSlotColors(temp_v4,
+          red - (red - 0.5f) / remaining,
+          green - (green - 0.5f) / remaining,
+          blue - (blue - 0.5f) / remaining);
+    }
     temp_v5 = *(int *)(psVar2 + 0x26);
     *(int *)(psVar2 + 0x26) = temp_v5 + 1;
     if (*(int *)(psVar2 + 0x14) <= temp_v5 + 1) break;

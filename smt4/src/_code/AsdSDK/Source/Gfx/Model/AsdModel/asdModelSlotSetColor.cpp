@@ -1,3 +1,4 @@
+#include "gfx/ModelSlotColorApi.h"
 #include "shard/W5_W5Match2_ModelColor.h"
 extern "C" {
 extern ModelColorBank g_asdModelBanks[];

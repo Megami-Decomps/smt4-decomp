@@ -1,13 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dd1a4` (_code @ 0x3dd1a4, 0x4c4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gfx/ModelSlotColorApi.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
 
 int effectColorInitDefault(...);
 int FUN_002276f8(...);
-int asdModelClearSlotColors(...);
+
 int modelSetAnimationChannels(...);
 int animPlayerSetLoopPolicy(...);
 int modelPartSetRotationDegrees(...);
@@ -95,12 +97,14 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
     }
   }
   if ((*(unsigned int *)(param_1 + 0x3028) & 4) != 0) {
-    effectColorInitDefault(temp_v8);
-    asdModelClearSlotColors(param_2);
+    EffectColor color;
+    effectColorInitDefault(&color);
+    asdModelClearSlotColors(param_2, color.red, color.green, color.blue);
   }
   if ((*(unsigned int *)(param_1 + 0x3028) & 8) != 0) {
-    effectColorInitDefault(temp_v8);
-    asdModelClearSlotColors(param_2);
+    EffectColor color;
+    effectColorInitDefault(&color);
+    asdModelClearSlotColors(param_2, color.red, color.green, color.blue);
     temp_v2 = gameObjectFlagIsSet();
     if (temp_v2 == 0) {
       *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) & 0xfffffff7;
