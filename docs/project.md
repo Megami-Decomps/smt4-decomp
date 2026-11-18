@@ -11,7 +11,11 @@ smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, b
   config/tus.json          function -> original source file (tools/assign_tus.py)
   src/_code/<file>/        functions placed in their original source file's folder (AsdSDK/..., battle/...)
   src/_code/<shard>/       everything else, by address
-  build.py                 compiles every function, runs objdiff, rebuilds the retail target objects
+  build.py                 compiles every function, runs objdiff, rebuilds the retail target objects;
+                           a unit compiles again only when what its object was built from changed
+                           (build/deps.json: the files armcc's --depend lists, the unit's command and
+                           project.json entry, the armlink lookups for its symbols, armcc, build.py);
+                           --force compiles every unit
 include/              headers both games share: structs and accessors, by original source file
 docs/                 the contribution guide and these notes; docs/notes/ holds the evidence for single matches
 tools/relink.py       links the whole .code from the compiled objects and compares it with retail;
