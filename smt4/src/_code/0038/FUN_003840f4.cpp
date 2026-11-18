@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: sets up the quest counter scene (area models, talk work, message files); written from the decompilation and the retail disassembly, the string pool order and local table copy not compared with retail */
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "classes/FloatState.h"
@@ -46,7 +47,7 @@ extern "C" {
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
 void textFormatBuffer(char *out, const char *format, ...);
 void FUN_002a09b4(const char *path, s32 flag);
-void modelSetAnimationChannels(AsdMdlObject *model, s32 channels);
+
 void animOwnerSetScale(AsdMdlObject *model, f32 scale);
 void FUN_002e1230(AsdMdlObject *model, s32 flag);
 void FUN_00235250(Mover *mover);
@@ -94,14 +95,14 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         textFormatBuffer(path, "%s_npc%d.bam", areaNames[scene->area], i + 1);
         scene->npcModels[i] = asdMdlManagerCreateLoaded(path, 7);
         lightOwnerRegister(scene->npcModels[i], 1);
-        modelSetAnimationChannels(scene->npcModels[i], 0);
+        modelSetAnimationChannels(scene->npcModels[i], 0, 0.0f);
         animOwnerSetScale(scene->npcModels[i], 0.0f);
         FUN_002e1230(scene->npcModels[i], 0);
 
         textFormatBuffer(path, "%s_npc%d_add1.bam", areaNames[scene->area], i + 1);
         scene->npcModelsAdd[i] = asdMdlManagerCreateLoaded(path, 7);
         lightOwnerRegister(scene->npcModelsAdd[i], 1);
-        modelSetAnimationChannels(scene->npcModelsAdd[i], 0);
+        modelSetAnimationChannels(scene->npcModelsAdd[i], 0, 0.0f);
         animOwnerSetScale(scene->npcModelsAdd[i], 1.0f);
         FUN_002e1230(scene->npcModels[i], 1);
         AsdMdlObject *model = scene->npcModelsAdd[i];

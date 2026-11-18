@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: restored help option argument; signed-byte mode dispatch, VFP frame and switch control-flow tails remain unrecovered. */
 #include "romwright_types.h"
 #include "gfx/ModelSlotColorApi.h"
@@ -27,7 +28,7 @@ int FUN_0023c1bc(...);
 int FUN_0023c24c(...);
 int FUN_0023c368(...);
 int FUN_0023c428(...);
-int modelSetAnimationChannels(...);
+
 int FUN_0024057c(...);
 int effectAreAllCompletionChecksReady(...);
 int FUN_0026beb4(...);
@@ -883,8 +884,8 @@ joined_r0x0034611c:
     if (temp_v5 != 0) {
       if (temp_v5 != 1) {
         if ((temp_v5 != 2) ||
-           (((temp_v5 = DAT_00435d18, keyedValueFindPair(DAT_00435d18,(int)psVar2[0x12]), temp_v5 != 0 &&
-             (temp_v5 = effectAreAllCompletionChecksReady(), temp_v5 == 0)) &&
+           (((temp_v5 = DAT_00435d18, temp_v5 = keyedValueFindPair(DAT_00435d18,(int)psVar2[0x12],*(int *)(*(int *)(psVar2 + 10) + 0x5c)), temp_v5 != 0 &&
+             (temp_v5 = effectAreAllCompletionChecksReady(temp_v5), temp_v5 == 0)) &&
             ((*(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) & 1) != 0)))) {
           temp_v1 = 1;
           psVar2[1] = temp_v1;
@@ -944,7 +945,7 @@ joined_r0x0034611c:
   case '\'':
     unaff_r5 = (unsigned int *)(int)*(short *)(*(int *)(psVar2 + 10) + 0x62);
     temp_v5 = DAT_00435d18;
-    keyedValueFindPair(DAT_00435d18,(int)psVar2[0x12]);
+    temp_v5 = keyedValueFindPair(DAT_00435d18,(int)psVar2[0x12],*(int *)(*(int *)(psVar2 + 10) + 0x5c));
     if ((temp_v5 != 0) && ((*(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) & 1) != 0)) {
       temp_v9 = *(int *)(psVar2 + 0x26);
       if (temp_v9 != 0) {
@@ -957,9 +958,9 @@ joined_r0x0034611c:
           }
           else {
             if ((*(unsigned short *)(*(int *)(psVar2 + 10) + 0x58) & 0x1000) != 0) {
-              temp_v9 = FUN_0020ffd8();
+              temp_v9 = FUN_0020ffd8(temp_v5);
               if (temp_v9 == 1) {
-                modelSetAnimationChannels(temp_v5,2);
+                modelSetAnimationChannels(reinterpret_cast<AsdMdlObject *>(temp_v5),2,0.0f);
               }
               temp_v5 = 3;
               *(int *)(psVar2 + 0x26) = temp_v5;
@@ -969,7 +970,7 @@ joined_r0x0034611c:
             }
             temp_v9 = effectAreAllCompletionChecksReady(temp_v5);
             if (temp_v9 != 0) {
-              modelSetAnimationChannels(temp_v5,1);
+              modelSetAnimationChannels(reinterpret_cast<AsdMdlObject *>(temp_v5),1,0.0f);
             }
           }
         }
@@ -978,7 +979,7 @@ joined_r0x0034611c:
           if (temp_v9 != 0) {
             temp_v9 = FUN_0020ffd8(temp_v5);
             if (temp_v9 == 0) {
-              modelSetAnimationChannels(temp_v5,1);
+              modelSetAnimationChannels(reinterpret_cast<AsdMdlObject *>(temp_v5),1,0.0f);
             }
             temp_v5 = 2;
             *(int *)(psVar2 + 0x26) = temp_v5;

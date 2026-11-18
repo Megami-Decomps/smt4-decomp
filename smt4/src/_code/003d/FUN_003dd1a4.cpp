@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dd1a4` (_code @ 0x3dd1a4, 0x4c4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -10,7 +11,7 @@ extern "C" {
 int effectColorInitDefault(...);
 int FUN_002276f8(...);
 
-int modelSetAnimationChannels(...);
+
 int animPlayerSetLoopPolicy(...);
 int modelPartSetRotationDegrees(...);
 int btlGetMainState(...);
@@ -175,7 +176,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
           lightOwnerRegister(temp_v1,1);
         }
         modelPartSetRotationDegrees(*(unsigned int *)(*puVar8 + 8),0);
-        modelSetAnimationChannels(*puVar8,0);
+        modelSetAnimationChannels(reinterpret_cast<AsdMdlObject *>(*puVar8),0,0.0f);
         animOwnerSetScale(*puVar8, 0.0f);
         animPlayerSetLoopPolicy(*(unsigned int *)(*puVar8 + 8),1);
         puVar8 = (unsigned int *)*puVar8;

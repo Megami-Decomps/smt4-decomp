@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: explicit hidden-state branches match; only action-table index arithmetic register assignment differs. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match2_KeyedValueTable.h"
@@ -16,7 +17,7 @@ static inline void setModelHidden(AsdMdlObject *model, bool hidden)
 }
 
 extern "C" {
-void modelSetAnimationChannels(AsdMdlObject *model, s32 channels, f32 frame);
+
 void animOwnerSetScale(AsdMdlObject *model, f32 speed);
 
 // Start matching keyed models and reconcile their visibility with the associated action.

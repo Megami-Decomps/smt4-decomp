@@ -1,21 +1,13 @@
-#include "common.h"
-
-struct ModelAnimationState;
-struct ModelAnimationOwner {
-    u32 unk00[2];                // 0x00
-    ModelAnimationState* model;  // 0x08
-};
-
-extern "C" {
-void modelSelectPrimaryMotion(ModelAnimationState* model, s32 index, f32 blend);
-void modelSelectSecondaryMotion(ModelAnimationState* model, s32 index, f32 blend);
-void asdModelSelectSecondaryMotion(ModelAnimationState* model, s32 index, f32 blend);
-
-// Applies the animation selection to all three model animation channels.
-void modelSetAnimationChannels(ModelAnimationOwner* owner, s32 index, f32 blend)
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
+// Existing secondary-channel local declaration debt; actual owner signatures verified.
+struct ModelPropertyController;
+extern "C" void modelSelectSecondaryMotion(AsdMdlNode *model, s32 index, f32 blend);
+extern "C" void asdModelSelectSecondaryMotion(ModelPropertyController *controller, s32 index, f32 blend);
+extern "C" void modelSetAnimationChannels(AsdMdlObject *owner, s32 index, f32 blend)
 {
-    modelSelectPrimaryMotion(owner->model, index, blend);
-    modelSelectSecondaryMotion(owner->model, index, blend);
-    asdModelSelectSecondaryMotion(owner->model, index, blend);
-}
+    modelSelectPrimaryMotion(owner->node, index, blend);
+    modelSelectSecondaryMotion(owner->node, index, blend);
+    // The third channel still has an existing partial controller view of this node.
+    asdModelSelectSecondaryMotion(reinterpret_cast<ModelPropertyController *>(owner->node), index, blend);
 }

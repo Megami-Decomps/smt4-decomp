@@ -1,9 +1,10 @@
+#include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: second selection store recomputes the element address; retail keeps it in r0 (element pointer with fields at +0x30/+0x34 from the 0x1000 base). */
 /* Resets active model animation players and publishes their selected animation indices. */
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
 extern "C" {
-void modelSetAnimationChannels(void *model, s32 channels, f32 blend);
+
 void animPlayerSetLoopPolicy(void *player, s32 policy);
 void modelPartSetRotationDegrees(void *player, s32 index, f32 x, f32 y, f32 z);
 void lightOwnerRegister(void *model, s32 enabled);
@@ -51,7 +52,7 @@ void FUN_003d9d9c(void *object)
                 lightOwnerRegister(slot->model, 1);
             }
             modelPartSetRotationDegrees(slot->model->player, 0, 0.0f, 0.0f, 0.0f);
-            modelSetAnimationChannels(slot->model, 0, 0.0f);
+            modelSetAnimationChannels(reinterpret_cast<AsdMdlObject *>(slot->model), 0, 0.0f);
             animOwnerSetScale(slot->model, 0.0f);
             animPlayerSetLoopPolicy(slot->model->player, 1);
             ModelView *model = slot->model;
