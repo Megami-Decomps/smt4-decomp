@@ -27,7 +27,7 @@ int efctSetSpeed(void);
 int gxResetColorQuadToWhite(void);
 int partyPanelDrawHighlight(...);
 int listCursorGetRowOfChildIfUnblocked(...);
-int FUN_003f3fe4(...);
+int partyPanelWidgetDraw(...);
 int FUN_003f4cc0(...);
 
 typedef int romwright_code(...);
@@ -74,7 +74,7 @@ extern int recordGetModeForId(int);
 extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002ace4c. */
 extern int valueIs1(unsigned int);
-/* Supplied declaration required: FUN_003f3fe4. */
+/* Supplied declaration required: partyPanelWidgetDraw. */
 /* Supplied declaration required: FUN_003f4cc0. */
 
 
@@ -162,7 +162,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
         temp_v5 = vec2GetXInt(temp_v3);
         temp_v6 = vec2GetYInt(temp_v3);
       }
-      FUN_003f3fe4(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0xa10),temp_v5,temp_v6);
+      partyPanelWidgetDraw(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0xa10),temp_v5,temp_v6);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 4);
     if (*(int *)(temp_v2 + 0x1218) == 0) {
@@ -173,7 +173,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
           temp_v3 = temp_v2 + (temp_v4 % 4) * 0x8c;
           temp_v5 = vec2GetXInt(temp_v3 + 0x298);
           temp_v6 = vec2GetYInt(temp_v3 + 0x298);
-          FUN_003f3fe4(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0xa20),temp_v5,temp_v6);
+          partyPanelWidgetDraw(*(unsigned int *)(temp_v2 + temp_v4 * 4 + 0xa20),temp_v5,temp_v6);
           temp_v4 = temp_v4 + 1;
           temp_v3 = gameGetSlotTable();
         } while (temp_v4 < (int)(unsigned int)*(unsigned char *)(temp_v3 + 0x1ca3));
@@ -441,7 +441,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
     temp_v15 = CONCAT44(temp_v12,(int)((unsigned long long)temp_v13 >> 0x20));
     temp_v3 = 0;
     do {
-      FUN_003f3fe4(*(unsigned int *)(temp_v2 + temp_v3 * 4 + 0xa10),aiStack_154[temp_v3],temp_v20[temp_v3]);
+      partyPanelWidgetDraw(*(unsigned int *)(temp_v2 + temp_v3 * 4 + 0xa10),aiStack_154[temp_v3],temp_v20[temp_v3]);
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 4);
     temp_v4 = *(int *)(temp_v2 + 0x2c);
@@ -574,7 +574,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
                      temp_v20[temp_v7]);
       }
       for (; temp_v8 < (int)temp_v10; temp_v8 = temp_v8 + 1) {
-        FUN_003f3fe4(*(unsigned int *)(temp_v2 + temp_v8 * 4 + 0xa20),aiStack_154[temp_v8],temp_v20[temp_v8]
+        partyPanelWidgetDraw(*(unsigned int *)(temp_v2 + temp_v8 * 4 + 0xa20),aiStack_154[temp_v8],temp_v20[temp_v8]
                     );
       }
     }

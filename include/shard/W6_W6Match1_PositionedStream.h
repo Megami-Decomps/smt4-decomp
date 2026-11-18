@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "map/MapVector.h"
 
 struct PositionedStream;
 struct PositionedStreamVtable {
@@ -68,7 +69,10 @@ void FUN_002cc228(u8 character, s32 alternate);
 extern "C" {
 #endif
 
-f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
+/* The distance between two points (smt4: mathDistanceBetweenPoints). */
+f32 distSpatial(MapVector from, MapVector to);
+/* The absolute difference in degrees between a heading and the direction from one point to another. */
+f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
 
 #ifdef __cplusplus
 }

@@ -4,7 +4,7 @@ extern "C" {
 extern u8 DAT_004c4404[];
 extern u8 DAT_004c45a4[];
 
-u8 *FUN_00287704(s32 index)
+u8 *qcGetCenterSlotGroups(s32 index)
 {
     if (index == 0) {
         return DAT_004c4404;

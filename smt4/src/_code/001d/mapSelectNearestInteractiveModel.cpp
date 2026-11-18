@@ -25,14 +25,14 @@ void mapSelectNearestInteractiveModel(f32 x, f32 y, f32 z, f32 heading)
     for (s32 i = 0; i < 64; ++i) {
         if (g_deferredMapModels->entries[i].active) {
             f32 distance = mathDistanceBetweenPoints(x, y, z,
-                g_deferredMapModels->entries[i].offset,
-                g_deferredMapModels->entries[i].x,
-                g_deferredMapModels->entries[i].y);
+                g_deferredMapModels->entries[i].position.x,
+                g_deferredMapModels->entries[i].position.y,
+                g_deferredMapModels->entries[i].position.z);
             if (distance < 90.0f &&
                 mathAbsHeadingErrorToPoint(x, y, z, heading,
-                    g_deferredMapModels->entries[i].offset,
-                    g_deferredMapModels->entries[i].x,
-                    g_deferredMapModels->entries[i].y) < 70.0f &&
+                    g_deferredMapModels->entries[i].position.x,
+                    g_deferredMapModels->entries[i].position.y,
+                    g_deferredMapModels->entries[i].position.z) < 70.0f &&
                 (selected == -1 || distance < nearest)) {
                 selected = i;
                 nearest = distance;

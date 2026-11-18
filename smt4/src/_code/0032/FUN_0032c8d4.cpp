@@ -1694,7 +1694,7 @@ code_r0x0032f574:
       FUN_00297410(0x24);
       uVar6 = 0;
       do {
-        iVar7 = FUN_00254058(uVar6);
+        iVar7 = dataTable24FindById(uVar6);
         if ((iVar7 != 0) && ((*(short *)(iVar7 + 2) == 0 || (iVar7 = FUN_002c09d0(), iVar7 != 0))))
         {
           gameSetAuxiliaryProgressFlag(uVar6);

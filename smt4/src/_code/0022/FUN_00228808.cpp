@@ -1,4 +1,4 @@
-/* NON_MATCHING: the editor-mask test now matches; retail keeps the found unit in r5 (the listedId register) and its flags in r6, armcc swaps them. */
+/* NON_MATCHING: only the editor-mask test differs: retail masks the high word in r2 and moves it into r1 (`and r2, r2, #1; movs r1, r2`), the build does both in r1. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BattleBalanceRow.h"
@@ -16,20 +16,19 @@ u32 FUN_00228808(s32 listedId, u32 unused, s32 mode)
     s32 chance = 40;
     BtlEntry *unit = btlMainFindEntryByListedId(state, listedId);
     if (unit != NULL) {
-        u32 flags = unit->flags;
-        if (flags & 10) {
+        if (unit->flags & 10) {
             chance = 30;
             if (mode == 1)
                 chance = 85;
-        } else if (!(flags & 0x20) && (flags & 0x10)) {
+        } else if (!(unit->flags & 0x20) && (unit->flags & 0x10)) {
             if ((unit->data.values[10] >> 10) == 1)
                 return 0;
             if (mode == 1)
                 chance = 85;
         }
-        if ((flags & 0x10) && unit->data.hp * 100 / unit->data.maxHp <= 40 && chance < 70)
+        if ((unit->flags & 0x10) && unit->data.hp * 100 / unit->data.maxHp <= 40 && chance < 70)
             chance = 70;
-        if (flags & 10)
+        if (unit->flags & 10)
             chance = static_cast<s32>(FUN_0023ea94()->partyMultiplier * static_cast<f32>(chance));
         if (unit->flags & 0x10)
             chance = static_cast<s32>(FUN_0023ea94()->enemyMultiplier * static_cast<f32>(chance));

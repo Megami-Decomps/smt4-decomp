@@ -47,7 +47,7 @@ typedef char AsdTextTextOffsetCheck[sizeof(AsdText) == 0xB4 &&
     offsetof(AsdText, unkB0) == 0xB0 ? 1 : -1];
 
 extern "C" {
-unsigned int FUN_00287704(int param_1);
+unsigned int qcGetCenterSlotGroups(int param_1);
 }
 
 extern "C" {

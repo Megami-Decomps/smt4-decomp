@@ -7497,3 +7497,14 @@
 0032ba8c titleConfigDraw inferred draws the config menu rows, frames and sliders
 003193a8 campCecRecvStatGainState inferred StreetPass receive state that shows the received demon's stat gains
 0049b00c _ZN9Obj53604416shopQuantityStepEv inferred twin of smt4 FUN_003a4a60 (Obj536044 is Apocalypse's shop scene)
+00141f8c messageExpandControlCode inferred expands a message control code (names, ruby runs, portrait/event-picture commands) into the output text
+003a5200 campCecRecvDownloadState inferred StreetPass receive state: banks received records, demon gifts and stat gains
+003f3fe4 partyPanelWidgetDraw inferred draws a party panel widget (HP/MP, ailments, tint overlay)
+003f3a90 partyPanelWidgetDrawAilments inferred draws the party panel widget's ailment strip
+00234528 popupTryStartActionLabelPrompt inferred requests a context popup for the selected unit with the action's label substituted
+003850b4 mapEnemyTryStartApproach inferred starts an enemy's approach when the player is near and facing it
+003ae088 mapEnemyHasTwoNearby inferred whether at least two active enemies are within 200 units
+00378964 mapIfMarkNearbyInteractiveRecord inferred marks the first nearby interactive map-interface record
+00385384 mapIfTriggerNearbyProximityRecord inferred activates the first nearby proximity-trigger record and plays its sound
+00416840 messageIndicatorsUpdate inferred advances the twelve message indicators through their open/loop/close animations
+00156868 dataTableGetNamePayload inferred twin of smt4 dataTableGetNamePayload

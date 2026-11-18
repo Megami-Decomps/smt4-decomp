@@ -100,7 +100,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         }
         if (g_qcMain.resident == 0) {
             if (kind == 1 && gameFlagIsSet(0x235)) {
-                if (!gameFlagIsSet(0x1c0) || !gameFlagIsSet(0x424) || objectFlagBitIsSet(FUN_00287704(1), 4)) {
+                if (!gameFlagIsSet(0x1c0) || !gameFlagIsSet(0x424) || objectFlagBitIsSet(qcGetCenterSlotGroups(1), 4)) {
                     FUN_00287528(0);
                 }
             }

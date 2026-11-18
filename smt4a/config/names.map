@@ -6955,3 +6955,14 @@
 0023dedc uiQuestDrawRowPlate
 0032ba8c titleConfigDraw
 003193a8 campCecRecvStatGainState
+00141f8c messageExpandControlCode
+003a5200 campCecRecvDownloadState
+003f3fe4 partyPanelWidgetDraw
+003f3a90 partyPanelWidgetDrawAilments
+00234528 popupTryStartActionLabelPrompt
+003850b4 mapEnemyTryStartApproach
+003ae088 mapEnemyHasTwoNearby
+00378964 mapIfMarkNearbyInteractiveRecord
+00385384 mapIfTriggerNearbyProximityRecord
+00416840 messageIndicatorsUpdate
+00156868 dataTableGetNamePayload

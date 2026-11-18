@@ -2,10 +2,10 @@
 #include "map/DistanceVisibilityWork.h"
 #include "game/GameStateA.h"
 #include "map/LmapGlobals.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 void FUN_00481ba8(DistanceVisibilityWork *);
-f32 distSpatial(MapVector, MapVector);
 
 void FUN_00481c28(DistanceVisibilityWork *work)
 {

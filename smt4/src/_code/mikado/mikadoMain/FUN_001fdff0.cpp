@@ -42,9 +42,7 @@ u32 FUN_001fdff0(void)
         work->done = 1;
         if (work->camera != NULL) {
             mikadoCameraTeardown(work->camera);
-            if (work->camera != NULL) {
-                delete work->camera;
-            }
+            delete work->camera;
             work->camera = NULL;
         }
         break;

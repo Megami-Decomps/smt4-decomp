@@ -11,7 +11,7 @@ int ptrListRemoveClearOwner(...);
 int naviConfigureEntry(...);
 int FUN_003659f4(void);
 int sub68OwnerStart2(void);
-int FUN_00378964(void);
+int mapIfMarkNearbyInteractiveRecord(void);
 int FUN_00378a1c(void);
 int sysPlayVoice(...);
 
@@ -28,7 +28,7 @@ int mathPositionHeadingDegrees(void);
 int gameFlagsBitSet(int, int);
 int FUN_003689d0(void);
 int mathAbsHeadingErrorToPoint(void);
-int FUN_00385384(void);
+int mapIfTriggerNearbyProximityRecord(void);
 int gameCounterAddSaturating(...);
 int aocFindPackagePayload(unsigned short *, unsigned int);
 int flagValueAdd(...);
@@ -129,10 +129,10 @@ extern int gameFlagsTestSecondBank(int);
 /* Supplied declaration required: FUN_003689d0. */
 /* Supplied declaration required: sub68OwnerStart2. */
 extern int mathCirclesOverlap(void);
-/* Supplied declaration required: FUN_00378964. */
+/* Supplied declaration required: mapIfMarkNearbyInteractiveRecord. */
 /* Supplied declaration required: FUN_00378a1c. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
-/* Supplied declaration required: FUN_00385384. */
+/* Supplied declaration required: mapIfTriggerNearbyProximityRecord. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: aocFindPackagePayload. */
@@ -311,7 +311,7 @@ joined_r0x00249fd4:
                       temp_v17 = 4;
                       temp_v36 = *(unsigned int *)(temp_v8 + 0xcc);
                       temp_v10 = 1;
-                      FUN_00385384();
+                      mapIfTriggerNearbyProximityRecord();
                       FUN_002941c8(&temp_v17,0x84);
                       break;
                     }
@@ -557,7 +557,7 @@ LAB_0024a684:
             if ((((temp_v1 != 3 && temp_v1 != 4) && (temp_v1 != 5 && temp_v1 != 7)) &&
                 (temp_v1 != 0xd && temp_v1 != 0xf)) &&
                ((temp_v1 != 8 && temp_v1 != 9 && (temp_v1 != 10 && temp_v1 != 0x10)))) {
-              FUN_00378964();
+              mapIfMarkNearbyInteractiveRecord();
               if (*(char *)(temp_v8 + 0xd0) != '\0') {
                 if (*(int *)(temp_v8 + 0xd4) == 0) {
                   DAT_005f1774 = 0;
@@ -589,7 +589,7 @@ LAB_0024a684:
               *(unsigned char *)(temp_v8 + 0xc4) = 1;
               *(unsigned int *)(temp_v8 + 0xa8) = 0xb;
               *(unsigned int *)(temp_v8 + 0xc0) = 2;
-              FUN_00378964();
+              mapIfMarkNearbyInteractiveRecord();
             }
           }
           DAT_005f1774 = 0;
@@ -608,7 +608,7 @@ LAB_0024a684:
               temp_v4 = temp_v44 + ((int)(temp_v6 + ((unsigned int)(temp_v6 >> 0x1f) >> 0x1b)) >> 5) * 4;
               *(unsigned int *)(temp_v4 + 0x7c8) = *(unsigned int *)(temp_v4 + 0x7c8) & ~(1 << ((temp_v6 % 0x20) & 0xffU))
               ;
-              FUN_00378964();
+              mapIfMarkNearbyInteractiveRecord();
               if (*(char *)(temp_v8 + 0xd0) != '\0') {
                 if (*(int *)(temp_v8 + 0xd4) != 0) {
                   ptrListRemoveClearOwner(g_handleRegistry,

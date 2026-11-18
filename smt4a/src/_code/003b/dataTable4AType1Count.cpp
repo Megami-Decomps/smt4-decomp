@@ -5,9 +5,10 @@ extern "C" {
 extern void *dataTableGet(u32 index, u32 type);
 extern u32 dataTableGetCount(void *table);
 
-void dataTable4AType1Count(void)
+/* The number of entries of data table 0x4A (type 1). */
+u32 dataTable4AType1Count(void)
 {
-    dataTableGetCount(dataTableGet(0x4A, 1));
+    return dataTableGetCount(dataTableGet(0x4A, 1));
 }
 
 } /* extern "C" */

@@ -61,7 +61,7 @@ struct MapGimicEntryA {
     /* 0x00 */ u8 active;
     /* 0x01 */ u8 requested;
     /* 0x02 */ u8 unk02[2];
-    /* 0x04 */ f32 position[3];
+    /* 0x04 */ MapVector position;
     /* 0x10 */ f32 heading;             /* degrees; 90 when cleared */
     /* 0x14 */ u16 motion;              /* requested motion */
     /* 0x16 */ s16 kind;

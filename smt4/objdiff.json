@@ -6574,13 +6574,13 @@
       "target_path": "orig/target/_code/AsdSDK/Source/Snd/AsdSoundSystem/asdSoundSlotAActivate.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_0010c83c.o",
+      "base_path": "build/obj/_code/0010/messageExpandControlCode.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0010c83c",
+            "name": "messageExpandControlCode",
             "size": 2224,
             "vram": "0x10c83c"
           }
@@ -6588,10 +6588,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_0010c83c.cpp"
+        "source_path": "src/_code/0010/messageExpandControlCode.cpp"
       },
-      "name": "_code/0010/FUN_0010c83c",
-      "target_path": "orig/target/_code/0010/FUN_0010c83c.o"
+      "name": "_code/0010/messageExpandControlCode",
+      "target_path": "orig/target/_code/0010/messageExpandControlCode.o"
     },
     {
       "base_path": "build/obj/_code/AsdSDK/Source/Sys/File/AsdFile/FUN_0010d0f8.o",
@@ -48564,13 +48564,13 @@
       "target_path": "orig/target/_code/001d/FUN_001dbeb8.o"
     },
     {
-      "base_path": "build/obj/_code/001d/FUN_001dbf34.o",
+      "base_path": "build/obj/_code/001d/campCecStatGainState.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001dbf34",
+            "name": "campCecStatGainState",
             "size": 1736,
             "vram": "0x1dbf34"
           }
@@ -48578,10 +48578,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/FUN_001dbf34.cpp"
+        "source_path": "src/_code/001d/campCecStatGainState.cpp"
       },
-      "name": "_code/001d/FUN_001dbf34",
-      "target_path": "orig/target/_code/001d/FUN_001dbf34.o"
+      "name": "_code/001d/campCecStatGainState",
+      "target_path": "orig/target/_code/001d/campCecStatGainState.o"
     },
     {
       "base_path": "build/obj/_code/001d/FUN_001dc608.o",
@@ -52650,13 +52650,13 @@
       "target_path": "orig/target/_code/001f/FUN_001f1bc4.o"
     },
     {
-      "base_path": "build/obj/_code/001f/FUN_001f20b4.o",
+      "base_path": "build/obj/_code/001f/uniteDrawResultPanel.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001f20b4",
+            "name": "uniteDrawResultPanel",
             "size": 3952,
             "vram": "0x1f20b4"
           }
@@ -52664,10 +52664,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001f/FUN_001f20b4.cpp"
+        "source_path": "src/_code/001f/uniteDrawResultPanel.cpp"
       },
-      "name": "_code/001f/FUN_001f20b4",
-      "target_path": "orig/target/_code/001f/FUN_001f20b4.o"
+      "name": "_code/001f/uniteDrawResultPanel",
+      "target_path": "orig/target/_code/001f/uniteDrawResultPanel.o"
     },
     {
       "base_path": "build/obj/_code/001f/uniteGetState.o",
@@ -56094,13 +56094,13 @@
       "target_path": "orig/target/_code/0020/FUN_00203640.o"
     },
     {
-      "base_path": "build/obj/_code/0020/FUN_002036b8.o",
+      "base_path": "build/obj/_code/0020/uniteOptionListDraw.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002036b8",
+            "name": "uniteOptionListDraw",
             "size": 1540,
             "vram": "0x2036b8"
           }
@@ -56108,10 +56108,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0020/FUN_002036b8.cpp"
+        "source_path": "src/_code/0020/uniteOptionListDraw.cpp"
       },
-      "name": "_code/0020/FUN_002036b8",
-      "target_path": "orig/target/_code/0020/FUN_002036b8.o"
+      "name": "_code/0020/uniteOptionListDraw",
+      "target_path": "orig/target/_code/0020/uniteOptionListDraw.o"
     },
     {
       "base_path": "build/obj/_code/mobiclip_ctrl/MobiclipCtrl/mobiclipHeapAllocD.o",
@@ -81195,13 +81195,13 @@
       "target_path": "orig/target/_code/0025/statsAreAllCapped.o"
     },
     {
-      "base_path": "build/obj/_code/0025/FUN_00254058.o",
+      "base_path": "build/obj/_code/0025/dataTable24FindById.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00254058",
+            "name": "dataTable24FindById",
             "size": 96,
             "vram": "0x254058"
           }
@@ -81209,10 +81209,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0025/FUN_00254058.cpp"
+        "source_path": "src/_code/0025/dataTable24FindById.cpp"
       },
-      "name": "_code/0025/FUN_00254058",
-      "target_path": "orig/target/_code/0025/FUN_00254058.o"
+      "name": "_code/0025/dataTable24FindById",
+      "target_path": "orig/target/_code/0025/dataTable24FindById.o"
     },
     {
       "base_path": "build/obj/_code/0025/questClearOwnerModeBitsIfEligible.o",
@@ -93777,13 +93777,13 @@
       "target_path": "orig/target/_code/0028/objectFlagBitIsSet.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_00287704.o",
+      "base_path": "build/obj/_code/0028/qcGetCenterSlotGroups.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00287704",
+            "name": "qcGetCenterSlotGroups",
             "size": 28,
             "vram": "0x287704"
           }
@@ -93791,10 +93791,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_00287704.cpp"
+        "source_path": "src/_code/0028/qcGetCenterSlotGroups.cpp"
       },
-      "name": "_code/0028/FUN_00287704",
-      "target_path": "orig/target/_code/0028/FUN_00287704.o"
+      "name": "_code/0028/qcGetCenterSlotGroups",
+      "target_path": "orig/target/_code/0028/qcGetCenterSlotGroups.o"
     },
     {
       "base_path": "build/obj/_code/0028/screenFadeSlotReset.o",
@@ -187044,13 +187044,13 @@
       "target_path": "orig/target/_code/0038/FUN_003852c8.o"
     },
     {
-      "base_path": "build/obj/_code/0038/FUN_00385448.o",
+      "base_path": "build/obj/_code/0038/qcBoardStep.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00385448",
+            "name": "qcBoardStep",
             "size": 1572,
             "vram": "0x385448"
           }
@@ -187058,10 +187058,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0038/FUN_00385448.cpp"
+        "source_path": "src/_code/0038/qcBoardStep.cpp"
       },
-      "name": "_code/0038/FUN_00385448",
-      "target_path": "orig/target/_code/0038/FUN_00385448.o"
+      "name": "_code/0038/qcBoardStep",
+      "target_path": "orig/target/_code/0038/qcBoardStep.o"
     },
     {
       "base_path": "build/obj/_code/0038/dataTable27Load.o",
@@ -206307,13 +206307,13 @@
       "target_path": "orig/target/_code/003d/FUN_003d73b4.o"
     },
     {
-      "base_path": "build/obj/_code/003d/FUN_003d7404.o",
+      "base_path": "build/obj/_code/003d/btlCameraUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003d7404",
+            "name": "btlCameraUpdate",
             "size": 4232,
             "vram": "0x3d7404"
           }
@@ -206321,10 +206321,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003d/FUN_003d7404.cpp"
+        "source_path": "src/_code/003d/btlCameraUpdate.cpp"
       },
-      "name": "_code/003d/FUN_003d7404",
-      "target_path": "orig/target/_code/003d/FUN_003d7404.o"
+      "name": "_code/003d/btlCameraUpdate",
+      "target_path": "orig/target/_code/003d/btlCameraUpdate.o"
     },
     {
       "base_path": "build/obj/_code/003d/btlStartPackedTransition.o",

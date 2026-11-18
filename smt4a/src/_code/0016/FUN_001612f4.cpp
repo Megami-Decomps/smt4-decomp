@@ -1,4 +1,4 @@
-/* NON_MATCHING: the unlink block is now out of line as in retail (head unlink written as the `previous == NULL` arm) and the command-buffer stores are in retail's order; armcc turns the next-handle update into a min with an unconditional store (retail predicates the store) and swaps the registers of the handle array and the graphics context (r8/r9). */
+/* NON_MATCHING: retail loads the graphics context before the loop (built: inside the handle test, so its pool word follows the allocator's) and compares the next-handle update the other way (retail cmp r0,r1; strcc, built cmp r1,r0; strhi). */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "gfx/HandleRegistry.h"
 
@@ -13,8 +13,9 @@ void FUN_001612f4(s32 count, const u32 *handles)
     for (s32 index = 0; index < count; ++index) {
         u32 handle = handles[index];
         if (handle != 0) {
+            AsdGfxContext *ctx = &g_asdGfxContext;
             CommandBufferHandleNode *previous = NULL;
-            CommandBufferHandleNode *node = g_asdGfxContext.buffers[handle & 31];
+            CommandBufferHandleNode *node = ctx->buffers[handle & 31];
             while (node != NULL) {
                 if (handle <= node->buffer.unk00) {
                     break;
@@ -23,14 +24,14 @@ void FUN_001612f4(s32 count, const u32 *handles)
                 node = node->next;
             }
             if (node != NULL && node->buffer.unk00 == handle) {
-                if (g_asdGfxContext.activeBuffer == &node->buffer) {
-                    g_asdGfxContext.activeBuffer = NULL;
-                    g_asdGfxContext.submitEnabled = 0;
+                if (ctx->activeBuffer == &node->buffer) {
+                    ctx->activeBuffer = NULL;
+                    ctx->submitEnabled = 0;
                 }
-                if (g_asdGfxContext.cmdBuffer == &node->buffer) {
-                    g_commandBufferCursor = NULL;
+                if (ctx->cmdBuffer == &node->buffer) {
                     g_commandBufferEnd = NULL;
-                    g_asdGfxContext.cmdBuffer = NULL;
+                    g_commandBufferCursor = NULL;
+                    ctx->cmdBuffer = NULL;
                 }
                 if (node->buffer.start != NULL && g_gfxAllocateCallback.release != NULL) {
                     g_gfxAllocateCallback.release(0x10000, 0x105, node->buffer.unk00, node->buffer.start);
@@ -40,8 +41,7 @@ void FUN_001612f4(s32 count, const u32 *handles)
                     g_gfxAllocateCallback.nextBufferId = handles[index];
                 }
                 if (previous == NULL) {
-                    CommandBufferHandleNode *head = g_asdGfxContext.buffers[handle & 31];
-                    g_asdGfxContext.buffers[handle & 31] = head->next;
+                    ctx->buffers[handle & 31] = ctx->buffers[handle & 31]->next;
                 } else {
                     previous->next = node->next;
                 }

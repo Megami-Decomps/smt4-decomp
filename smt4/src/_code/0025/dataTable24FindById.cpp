@@ -1,7 +1,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match1_Table24Record.h"
 
-extern "C" Table24Record* FUN_00254058(u32 id)
+extern "C" Table24Record* dataTable24FindById(u32 id)
 {
     void* section = dataTableGet(0x24, 1);
     Table24Record* record = static_cast<Table24Record*>(dataTableGetEntries(section));

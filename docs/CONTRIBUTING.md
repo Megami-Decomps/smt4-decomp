@@ -296,6 +296,14 @@ a sibling setter or another user of the same lookup is usually written the same 
 - A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have
   clobbered, is a linker-inlined constant getter: write the call and add an `inlined.txt` row
   (`titleConfigUpdate`'s default volumes).
+- When a call's only difference is the order its vector arguments load in (retail loads the second
+  first), the callee probably takes the vector by value: declare it so in the shared header
+  (`distSpatial(MapVector, MapVector)`; three by-value floats and six separate floats use the same
+  registers, so the definition alone cannot tell).
+- A `rev16` on a constant between argument moves (`mov r0, rN; rev16 r0, r0; mov rM, r0`) is a
+  one-instruction function armlink inlined, not the compiler's byte-swap idiom: write the call and add
+  an `inlined.txt` row (`textCodeSwapBytes`).
+- A bitfield read as `ldrd …; lsl #15; orr …, lsr #17` belongs to a `u64`-based bitfield struct.
 - A caller that sign-extends a value it passes (`sxth`) usually means the field it came from is
   `s16`; change the field and the prototypes together.
 - Conversions through `static __inline f32 get(p) { return p->field; }`; rounding as

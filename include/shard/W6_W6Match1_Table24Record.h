@@ -4,8 +4,10 @@
 #include "common.h"
 
 struct Table24Record {
-    u16 id;
-    u8 unk02[0x3e];
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[6];
+    /* 0x08 */ char name[0x38];  /* the name starts here; the rest of the record is not mapped */
 };
+typedef char Table24RecordSizeCheck[sizeof(Table24Record) == 0x40 ? 1 : -1];
 
 #endif

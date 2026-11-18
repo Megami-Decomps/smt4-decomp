@@ -8,7 +8,7 @@ extern "C" {
 
 int FUN_0019715c(...);
 int FUN_001978b4(void);
-int FUN_001f20b4(...);
+int uniteDrawResultPanel(...);
 int dataTable15GetUnlockedEntryId(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
@@ -35,7 +35,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019715c. */
 /* Supplied declaration required: FUN_001978b4. */
-/* Supplied declaration required: FUN_001f20b4. */
+/* Supplied declaration required: uniteDrawResultPanel. */
 extern int uniteGetState(void);
 /* Supplied declaration required: dataTable15GetUnlockedEntryId. */
 extern unsigned int objectPartRunUnlessLocked(int);
@@ -203,7 +203,7 @@ LAB_001a03b8:
     if (*(char *)(temp_v1 + 0xab) != '\0') {
       temp_v4 = vec2GetXInt();
       temp_v6 = vec2GetYInt(temp_v1 + 0x878);
-      FUN_001f20b4(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
+      uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                    (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
     }
     FUN_001978b4();
@@ -239,7 +239,7 @@ LAB_001a03b8:
       if (temp_v0 == '\0') {
         temp_v4 = vec2GetXInt();
         temp_v6 = vec2GetYInt(temp_v1 + 0x878);
-        FUN_001f20b4(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
+        uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                      (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
         FUN_001978b4();
       }
@@ -247,7 +247,7 @@ LAB_001a03b8:
     }
     temp_v4 = vec2GetXInt();
     temp_v6 = vec2GetYInt(temp_v1 + 0x878);
-    FUN_001f20b4(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
+    uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                  (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
     FUN_001978b4();
     break;
@@ -257,7 +257,7 @@ LAB_001a03b8:
       if (temp_v0 == '\0') {
         temp_v4 = vec2GetXInt();
         temp_v6 = vec2GetYInt(temp_v1 + 0x878);
-        FUN_001f20b4(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
+        uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                      (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
         FUN_001978b4();
       }

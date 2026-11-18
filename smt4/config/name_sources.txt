@@ -4978,3 +4978,11 @@
 0023547c uiQuestAnswerConfirm inferred quest answer confirmation; all three callers pass an s8 flag
 002b753c asdTextGetFinalLineIndex inferred Returns the final zero-based line index while scanning the bounded encoded text stream; F801 increments it and F81A assigns an explicit line index. Native argument/result recovery and exact match; not an original-name claim.
 002bd158 textConvertToGlyphPairsInto inferred Native two-pointer byte-to-glyph-pair conversion; high-bit pairs, newline F8/01, table expansion, double-zero terminator and default output buffer. Void counterpart of textConvertToGlyphPairs; natural signed-output source matches retail.
+0010c83c messageExpandControlCode inferred twin of smt4a messageExpandControlCode
+001f20b4 uniteDrawResultPanel inferred draws the fusion result panel (demon rows, race labels, level, cursor)
+003d7404 btlCameraUpdate inferred per-frame battle camera update (channels, orbit matrix, eye/target)
+001dbf34 campCecStatGainState inferred StreetPass menu state handing the selected demon its stat gains (twin of smt4a campCecRecvStatGainState)
+00385448 qcBoardStep evidence quest-center board state: starts the qc_LookBoard, qc_GetQuest, qc_NoneQuest and qc_RankOut_* script entries
+002036b8 uniteOptionListDraw inferred draws the fusion screen's option list, cursor row and scroll bar
+00254058 dataTable24FindById inferred finds a data table 0x24 record by id (Table24Record)
+00287704 qcGetCenterSlotGroups inferred the quest center's slot-group block for a location

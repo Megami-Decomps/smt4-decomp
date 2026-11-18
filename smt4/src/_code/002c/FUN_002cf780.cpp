@@ -1,4 +1,3 @@
-/* NON_MATCHING: built keeps the constant 1 in a callee-saved register across the calls (and orders the two selector results differently); retail re-materialises it */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "code/Code0029_VariantB.h"
 
@@ -16,14 +15,10 @@ void FUN_002cf780(void)
 
     quest->panel.detailMode = 1;
     uiQuestLoadResources();
-    s32 base = resourceRunOperationIfUnblocked(quest->panel.alternate.cursor);
-    s32 offset = listCursorGetRowIfUnblocked(quest->panel.alternate.cursor);
-    FUN_0028fe0c(quest->cursor.alternate.ids[offset + base], 1);
+    FUN_0028fe0c(quest->cursor.alternate.ids[resourceRunOperationIfUnblocked(quest->panel.alternate.cursor) +
+                                             listCursorGetRowIfUnblocked(quest->panel.alternate.cursor)], 1);
     timerStart(quest->mainSprite, 0, 0);
-    quest = g_uiQuest;
-    quest->previousState = quest->state;
-    quest->state = 1;
-    quest->timer = 0;
+    uiQuestEnterState(g_uiQuest, 1);
 }
 
 } /* extern "C" */

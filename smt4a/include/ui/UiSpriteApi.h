@@ -30,6 +30,7 @@ void pairSetSecondResetFirst(UiSpriteState *sprite, s32 secondaryImage);
 f32 vec2GetSpeed(const UiSpriteState *sprite);            /* the opacity */
 s16 uiSpriteGetOperationMode(const UiSpriteState *sprite); /* the position key */
 s16 uiSpriteGetMode(const UiSpriteState *sprite);          /* the opacity key */
+s8 uiSpriteGetScaleDone(const UiSpriteState *sprite);       /* the scale track's finished flag */
 void spriteSetLayer(UiSpriteState *sprite, u16 layer);
 
 /* Starts position key `key` and moves the sprite to its first point (its last one when `reverse`). */

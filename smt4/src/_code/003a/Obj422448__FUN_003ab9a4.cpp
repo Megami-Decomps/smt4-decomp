@@ -1,4 +1,3 @@
-/* NON_MATCHING: error byte is now u8 (retail ldrb through the base pointer); retail stores the error code once in a shared block and keeps the confirmation-result block inline after the second arm, here the arms store separately and the block sits after the third. */
 #include "common.h"
 #include "classes/Obj422448.h"
 #include <stddef.h>
@@ -13,10 +12,9 @@ s32 flaggedValueHolderGetTotal(const void *cursor);
 s32 FUN_00262cb0(u16 id);
 s32 statusGetAvailableChoiceCount(void);
 s32 messageMainGetChoiceResult(void);
-
-// Validate a confirmed summon against cost, ownership, and available party capacity.
 }
 
+// Validate a confirmed summon against cost, ownership, and available party capacity.
 void Obj422448::FUN_003ab9a4()
 {
     void * context = reinterpret_cast<void *>(this);
@@ -60,27 +58,27 @@ void Obj422448::FUN_003ab9a4()
     } else {
         SummonEntry *entries = work->entries;
         if (!FUN_00262cb0(entries[flaggedValueHolderGetTotal(work->cursor)].id)) {
-            s32 occupied = statusCountSelectableChoices();
-            s32 capacity = statusGetAvailableChoiceCount();
-            if (occupied >= capacity)
+            if (statusCountSelectableChoices() >= statusGetAvailableChoiceCount())
                 work->error = 5;
         } else {
             work->error = 2;
         }
     }
-    if (work->error == 0) {
-        FUN_0029c43c(-static_cast<s32>(work->entries[flaggedValueHolderGetTotal(work->cursor)].cost), 0);
-        work->state = 6;
-        work->timer = 0;
-        return;
-    }
-    if (work->error == 5) {
+    switch (work->error) {
+    case 5:
         messageMainSetTargetFlags(0);
         work->state = 9;
         work->timer = 0;
-        return;
+        break;
+    case 0:
+        FUN_0029c43c(-static_cast<s32>(work->entries[flaggedValueHolderGetTotal(work->cursor)].cost), 0);
+        work->state = 6;
+        work->timer = 0;
+        break;
+    default:
+        messageMainSetTargetFlags(0);
+        work->state = 8;
+        work->timer = 0;
+        break;
     }
-    messageMainSetTargetFlags(0);
-    work->state = 8;
-    work->timer = 0;
 }

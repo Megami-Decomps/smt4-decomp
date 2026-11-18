@@ -1,4 +1,3 @@
-/* NON_MATCHING: the state change stores as str timer + add + stm; retail writes stmib with writeback and the timer through it (same as FUN_00223cf0). */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "code/Code0029_VariantB.h"
 
@@ -10,16 +9,6 @@ void FUN_0028fe0c(u16 id, s32 mode);
 void FUN_00290d5c(s32 sound);
 s32 resourceRunOperationIfUnblocked(void *cursor);
 void timerStart(void *timer, s32 a, s32 b);
-
-/* Switch the quest menu to a new state, remembering the old one and restarting its timer. */
-static void uiQuestChangeState(s32 state)
-{
-    UiQuest *quest = g_uiQuest;
-
-    quest->previousState = quest->state;
-    quest->state = state;
-    quest->timer = 0;
-}
 
 /* Answer the quest confirmation with `choice`, then leave the detail view: open the selected quest,
  * or go back from state 13 with a cancel sound. */
@@ -36,11 +25,11 @@ void uiQuestAnswerConfirm(s8 choice)
         uiQuestLoadResources();
         FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + listCursorGetRowIfUnblocked(quest->cursor.data)], 1);
         timerStart(quest->mainSprite, 0, 0);
-        uiQuestChangeState(1);
+        uiQuestEnterState(g_uiQuest, 1);
         return;
     }
     timerStart(quest->mainSprite, 2, 0);
-    uiQuestChangeState(3);
+    uiQuestEnterState(g_uiQuest, 3);
     FUN_00290d5c(0xa0);
 }
 

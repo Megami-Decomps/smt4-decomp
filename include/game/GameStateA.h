@@ -192,7 +192,7 @@ struct GameStateA {
     /* 0x2BE */ s16 limit;
     /* 0x2C0 */ s16 minimum;
     /* 0x2C2 */ s8 enemyModelCapacity;
-    /* 0x2C3 */ u8 unk2C3;
+    /* 0x2C3 */ s8 enemyApproachLevel;  /* row of the enemy approach-mode table (set to 0, 3 or a map record's byte 0x13) */
     /* 0x2C4 */ u32 unk2C4;
     /* 0x2C8 */ u8 skipTransitionSnapshot;
     /* 0x2C9 */ u8 unk2C9;

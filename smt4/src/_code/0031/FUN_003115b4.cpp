@@ -1,4 +1,3 @@
-/* NON_MATCHING: selector stores schedule differently; state transition uses strd instead of retail's writeback stores. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "code/Code0029.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -17,18 +16,17 @@ void FUN_003115b4(u32 questId)
     UiQuest *quest = g_uiQuest;
     quest->questId = questId;
     s32 alternate = FUN_00298f88(questId);
+    quest->panel.detailMode = alternate;
+    quest->panel.unkF2 = 1;
     void *cursor;
     u16 *ids;
     if (alternate != 0) {
         cursor = quest->panel.alternate.cursor;
         ids = quest->cursor.alternate.ids;
-    }
-    quest->panel.detailMode = alternate;
-    if (alternate == 0) {
+    } else {
         cursor = &quest->cursor;
         ids = quest->list;
     }
-    quest->panel.unkF2 = 1;
     for (s32 index = 0; index < FUN_0029ee54(cursor); ++index) {
         if (ids[index] == questId) {
             scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(cursor), index);
@@ -39,10 +37,7 @@ void FUN_003115b4(u32 questId)
     FUN_0028fe0c(questId, 0);
     timerStart(quest->mainSprite, 0, 0);
     timerStart(quest->detailAnimation.timer, 2, 0);
-    quest = g_uiQuest;
-    quest->previousState = quest->state;
-    quest->state = 0x17;
-    quest->timer = 0;
+    uiQuestEnterState(g_uiQuest, 0x17);
     buttonHelpSetPreset(0x1A);
     soundPlaySeUnpanned(0x100025C);
 }

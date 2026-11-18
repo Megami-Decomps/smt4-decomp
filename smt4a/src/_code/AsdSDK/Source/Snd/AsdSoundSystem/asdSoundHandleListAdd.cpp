@@ -1,4 +1,4 @@
-/* NON_MATCHING: the search loop and both append tails now line up; retail compares the id through r7 (ip here) and the first tail sets the result in r1 and shares `mov r0, r1` with the second, built returns directly. */
+/* NON_MATCHING: only the search loop's id load differs: retail compares it through r7, the build through ip. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -40,7 +40,13 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
     node->id = id;
     node->unk0d = 0;
     node->unk0f = flag;
-    if (list->head != NULL) {
+    if (list->head == NULL) {
+        node->prev = NULL;
+        node->next = NULL;
+        list->head = node;
+        list->count++;
+        result = 1;
+    } else {
         for (last = list->head; last->next != NULL; last = last->next) {
         }
         node->prev = last;
@@ -48,13 +54,7 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
         last->next = node;
         list->count++;
         result = 1;
-        return result;
     }
-    node->prev = NULL;
-    node->next = NULL;
-    list->head = node;
-    list->count++;
-    result = 1;
     return result;
 }
 

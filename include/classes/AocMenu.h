@@ -11,6 +11,31 @@
 
 extern "C" void asdOperatorDelete(void *block);
 
+struct AsdText;
+
+/* The rows of the content list the stylus can pick (0x34 bytes, vtable at 0x42219c in IV): the
+ * touch regions registered for the visible rows and what the last update found. The layout is the
+ * head of Obj55ca08, the list selector the other menus embed. */
+struct AocTouchRows {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ s32 firstRegion;
+    /* 0x08 */ s32 secondRegion;
+    /* 0x0C */ s32 regionCount;
+    /* 0x10 */ u8 soundEnabled;
+    /* 0x11 */ u8 selected;
+    /* 0x12 */ u8 released;       /* the stylus was lifted from the row under the cursor */
+    /* 0x13 */ u8 unk13;
+    /* 0x14 */ s16 selectedIndex;
+    /* 0x16 */ u8 unk16[2];
+    /* 0x18 */ s16 regions[12];
+    /* 0x30 */ s16 touchCount;
+    /* 0x32 */ u8 movedByPress;   /* the press that is still held moved the cursor here */
+    /* 0x33 */ u8 unk33;
+};
+typedef char AocTouchRowsLayoutCheck[
+    sizeof(AocTouchRows) == 0x34 && offsetof(AocTouchRows, regions) == 0x18 &&
+    offsetof(AocTouchRows, movedByPress) == 0x32 ? 1 : -1];
+
 /* A window the menu owns and deletes when it moves on (slot 1 of its vtable is the deleting destructor). */
 class AocMenuWindow {
 public:
@@ -82,8 +107,10 @@ public:
     /* 0x0238 */ u8 unk0238[8];
     /* 0x0240 */ SelectionFlags selection;
     /* 0x024F */ u8 unk024F[0x65];
-    /* 0x02B4 */ const void *dispatchTable;
-    /* 0x02B8 */ u8 unk02B8[0x30];
+    union {
+        /* 0x02B4 */ const void *dispatchTable;
+        /* 0x02B4 */ AocTouchRows touchRows;
+    };
     /* 0x02E8 */ Obj4221a4 panel;
     /* 0x0350 */ void *tableFile;
     /* 0x0354 */ u32 tableValue;
@@ -109,8 +136,18 @@ public:
     /* 0x17A0 */ union { u32 unk17A0; u32 childJob; };
     /* 0x17A4 */ u8 unk17A4[8];
     /* 0x17AC */ s32 touchMarker;
-    /* 0x17B0 */ u8 unk17B0[0x73C];
-    /* 0x1EEC */ u32 unk1EEC;
+    union {
+        /* 0x17B0 */ u8 unk17B0[0x73C];
+        /* IV's guide is 0x2BC bytes shorter, so its description text and what follows sit lower. */
+        struct {
+            /* 0x17B0 */ u8 unk17B0[0x480];
+            /* 0x1C30 */ AsdText *descriptionText;
+        } iv;
+    };
+    union {
+        /* 0x1EEC */ u32 unk1EEC;
+        /* 0x1EEC */ AsdText *descriptionText; /* Apocalypse; IV's is iv.descriptionText */
+    };
     /* 0x1EF0 */ u8 unk1EF0[0x800];
 };
 
@@ -131,6 +168,10 @@ typedef char AocMenuAnimatedOffsetsCheck[
     __INTADDR__(&((AocMenu *)0)->animated.effects) == 0x37c &&
     __INTADDR__(&((AocMenu *)0)->animated.slowTick) == 0x1128 &&
     __INTADDR__(&((AocMenu *)0)->animated.fastTick) == 0x112c ? 1 : -1];
+typedef char AocMenuTailOffsetsCheck[
+    __INTADDR__(&((AocMenu *)0)->touchRows) == 0x2b4 &&
+    __INTADDR__(&((AocMenu *)0)->iv.descriptionText) == 0x1c30 &&
+    __INTADDR__(&((AocMenu *)0)->descriptionText) == 0x1eec ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {

@@ -5,6 +5,8 @@
 #include "common.h"
 #include <stddef.h>
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "ui/UiSpriteState.h"
+#include "ui/GridNavigation.h"
 
 class RegisteredHandle;
 
@@ -30,12 +32,12 @@ struct UnitePairEntry {
 };
 
 struct UnitePairEntryIV {
-    /* 0x00 */ u32 firstId : 15;
-    /* 0x00 */ u32 secondId : 15;
-    /* 0x00 */ u32 firstType : 2;
-    /* 0x04 */ u32 secondType : 2;
-    /* 0x04 */ u32 resultId : 15;
-    /* 0x04 */ u32 unknown : 15;
+    /* 0x00 */ u64 firstId : 15;
+    /* 0x00 */ u64 secondId : 15;
+    /* 0x00 */ u64 firstType : 2;
+    /* 0x04 */ u64 secondType : 2;
+    /* 0x04 */ u64 resultId : 15;
+    /* 0x04 */ u64 unknown : 15;
 };
 typedef char UnitePairEntryIVSizeCheck[sizeof(UnitePairEntryIV) == 8 ? 1 : -1];
 
@@ -52,6 +54,14 @@ struct UniteWork {
     union {
         /* 0x0000 */ u8 unk0000[0x400];
         /* 0x0000 */ void *context;
+        /* the screen's animated sprites: the result panel and the option list read the same four */
+        struct {
+            /* 0x0000 */ u8 unk0000[0x24];
+            /* 0x0024 */ UiSpriteState fade;   /* its opacity fades the result panel in, the cursor row's highlight */
+            /* 0x00B0 */ UiSpriteState slide;  /* its position scrolls the result highlight, the cursor row's shine */
+            /* 0x013C */ UiSpriteState pulse;  /* its opacity pulses the result panel's cursor */
+            /* 0x01C8 */ UiSpriteState open;   /* finished once the option list has opened */
+        } sprites;
         struct {
             /* 0x0000 */ u8 unk0000[0x1C8];
             /* 0x01C8 */ u8 timer[1];
@@ -89,6 +99,12 @@ struct UniteWork {
             /* 0x478 */ s32 pendingRequest;
             /* 0x47C */ u32 soundChannel;
         } scriptIV;
+        struct {
+            /* 0x438 */ s16 rowRegions[29];     /* touch regions of the visible list rows */
+            /* 0x472 */ s16 scrollUpRegion;
+            /* 0x474 */ s16 scrollDownRegion;
+            /* 0x476 */ s16 scrollThumbRegion;
+        } touchIV;
         struct {
             /* 0x0438 */ u8 unk0438[0x188];
             u16 demons[1201]; /* 0x5c0 */
@@ -173,6 +189,11 @@ struct UniteWork {
     /* 0x9464 */ u32 unk9464;
     union {
         /* 0x9468 */ u8 unk9468[0x170];
+        struct {
+            /* 0x9468 */ u16 ids[76];           /* table 0x24 records the option list shows */
+            /* 0x9500 */ u8 unk9500[8];
+            /* 0x9508 */ GridNavigation list;
+        } optionListIV;
         struct {
             /* 0x9468 */ u8 unk9468[0x98];
             /* 0x9500 */ UniteSubState sub;
@@ -325,6 +346,11 @@ struct UniteDescriptionEntry {
     /* 0x55 */ char text[1];
 };
 typedef char UniteWorkSizeCheck[sizeof(UniteWork) == 0x95F8 ? 1 : -1];
+typedef char UniteWorkOptionListIVOffsets[
+    offsetof(UniteWork, sprites.fade) == 0x24 && offsetof(UniteWork, sprites.slide) == 0xB0 &&
+    offsetof(UniteWork, sprites.pulse) == 0x13C && offsetof(UniteWork, sprites.open) == 0x1C8 && offsetof(UniteWork, touchIV.scrollUpRegion) == 0x472 &&
+    offsetof(UniteWork, touchIV.scrollThumbRegion) == 0x476 && offsetof(UniteWork, optionListIV.ids) == 0x9468 &&
+    offsetof(UniteWork, optionListIV.list) == 0x9508 ? 1 : -1];
 typedef char UniteWorkPairSortOffsetCheck[offsetof(UniteWorkA, pairSort.pairs) == 0x13B8 && offsetof(UniteWorkA, pairSort.sortedPairs) == 0x6832 && offsetof(UniteWorkA, pairSort.sortedCount) == 0x73EC && offsetof(UniteWorkA, pairSort.pairScores) == 0x73F0 ? 1 : -1];
 typedef char UniteWorkIVPairsOffsetCheck[offsetof(UniteWork, pairListIV.pairs) == 0x1390 ? 1 : -1];
 typedef char UniteWorkPairSortIVOffsetCheck[offsetof(UniteWork, pairSortIV.pairs) == 0x1390 && offsetof(UniteWork, pairSortIV.sortedPairs) == 0x6CE2 && offsetof(UniteWork, pairSortIV.sortedCount) == 0x789C && offsetof(UniteWork, pairSortIV.pairScores) == 0x78A0 ? 1 : -1];

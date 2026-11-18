@@ -28,7 +28,7 @@ struct StatBlock {
     };
     /* 0x0E */ s16 maxHp;
     /* 0x10 */ s16 maxMp;
-    /* 0x12 */ u8 unk12[0xA];
+    /* 0x12 */ s16 effectiveStats[5];  /* strength, magic, dexterity, agility, luck */
     /* 0x1C */ u16 cur[2];
     /* 0x20 */ u16 cur2;
     /* 0x22 */ u16 cur6;
@@ -48,18 +48,22 @@ struct StatBlock {
     };
     /* 0x44 */ u16 ailments;   /* ailment and state bits (bit 1: dead) */
     /* 0x46 */ u16 id;         /* the devil's id */
-    /* 0x48 */ u8 level;
     union {
-        /* 0x49 */ u8 unk49Bytes[0x5BB];
+        /* 0x48 */ u8 level;
+        /* 0x48 */ u8 unk48Bytes[0x5BC];
         /* the record's growth and progress state (kept inside the union: retail's stack layout of a
          * local StatBlock matches only with it) */
         struct {
+                /* 0x48 */ u8 unk48;
                 /* 0x49 */ u8 unk49;
                 /* 0x4A */ u8 slot;        /* the record's own index in the slot table */
                 /* 0x4B */ u8 unk4B;
                 /* 0x4C */ u8 progress[0x40];   /* per-unit progress bytes (learned skills, completed goals) */
                 /* 0x8C */ u8 counters[0x500];  /* saturating byte counters */
-                /* 0x58C */ u8 unk58C[0x74];
+                /* 0x58C */ u16 hpBonus;
+                /* 0x58E */ u16 mpBonus;
+                /* 0x590 */ u16 statBonuses[5];
+                /* 0x59A */ u8 unk59A[0x66];
                 /* 0x600 */ u8 probabilityTier;
                 /* 0x601 */ u8 initializationKind;
                 /* 0x602 */ u8 unk602[2];
@@ -79,6 +83,7 @@ typedef char StatBlockUnitOffsets[offsetof(StatBlock, maxHp) == 0x0E && offsetof
     offsetof(StatBlock, id) == 0x46 && offsetof(StatBlock, level) == 0x48 &&
     offsetof(StatBlock, growth.slot) == 0x4A &&
     offsetof(StatBlock, growth.progress) == 0x4C && offsetof(StatBlock, growth.counters) == 0x8C &&
+    offsetof(StatBlock, effectiveStats) == 0x12 && offsetof(StatBlock, growth.statBonuses) == 0x590 &&
     offsetof(StatBlock, growth.probabilityTier) == 0x600 && offsetof(StatBlock, growth.initializationKind) == 0x601 ? 1 : -1];
 
 extern "C" {

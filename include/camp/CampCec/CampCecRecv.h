@@ -7,6 +7,40 @@
 #include "script/ScriptVm.h"
 #include "gamedata/GameSaveDataA.h"
 
+/* A received StreetPass record (100 bytes; the cec inbox batches and the DataStore entries hold the same record):
+ * the sender's summary (PlayerSummary, shard/Shard0032.h, is its prefix) and the demon sent along. */
+typedef struct CampCecReceivedRecord {
+    /* 0x00 */ u16 stats[7];
+    /* 0x0E */ char name[0x12];
+    /* 0x20 */ u8 flags;                   /* bit 2: the sender's name is announced by the script */
+    /* 0x21 */ u8 unk21[7];
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ u8 unk2C[8];
+    /* 0x34 */ u16 selectedId;             /* demonId once the record is accepted */
+    /* 0x36 */ u8 unk36[0x2A];
+    /* 0x60 */ u16 demonId;                /* 0: none sent (slotNameDisplaySetEntry fills the default) */
+    /* 0x62 */ u16 demonLevel;
+} CampCecReceivedRecord;
+
+/* A demon the receive screen can hand over (12 bytes, 90 of them in the screen's second buffer). */
+typedef struct CampCecDemonGift {
+    /* 0x00 */ s16 demonId;
+    /* 0x02 */ s16 requiredTotal;          /* StreetPass total it needs */
+    /* 0x04 */ u8 unk04[8];
+} CampCecDemonGift;
+
+#define CAMPCEC_DEMON_GIFT_COUNT 90
+#define CAMPCEC_ITEM_ROW_COUNT 14
+#define CAMPCEC_ITEM_ROW_LENGTH 5
+#define CAMPCEC_ITEM_GIFT_MAX 32
+
+/* The receive state's own progress block (work + 0x38). */
+typedef struct CampCecRecvProgress {
+    /* 0x00 */ u8 unk00[0x64];
+    /* 0x64 */ s32 count;                  /* records to take, then the number accepted */
+    /* 0x68 */ s32 state;                  /* the receive state's step */
+} CampCecRecvProgress;
+
 /* The receive (StreetPass download) screen's work area. */
 typedef struct CampCecRecv {
     /* 0x00 */ u32 task;                   /* the screen's task handle */
@@ -23,6 +57,38 @@ typedef struct CampCecRecv {
             /* 0x368 */ u8 unk368[0x78];
             /* 0x3E0 */ u32 received;           /* only the received data was set up */
         } resources;
+        struct {
+            /* 0x004 */ u8 unk004BeforeProgress[0x34];
+            /* 0x038 */ CampCecRecvProgress progress;
+            /* 0x0A4 */ u8 unk0A4[0x3C];
+            /* 0x0E0 */ s16 statGains[5];       /* one more point per StreetPass tier, on a random stat */
+            /* 0x0EA */ u8 unk0EA[2];
+            /* 0x0EC */ SlotRecordA unit;       /* the current unit's record, copied when it is a demon */
+            /* 0x218 */ SlotRecordA unitBefore;
+            /* 0x344 */ CampCecDemonGift *gift; /* the demon picked for the player, NULL for none */
+            /* 0x348 */ s16 (*itemRows)[CAMPCEC_ITEM_ROW_LENGTH]; /* item ids by gift kind (14 rows) */
+            /* 0x34C */ CampCecDemonGift *gifts;
+            /* 0x350 */ void *unk350[2];
+            /* 0x358 */ u32 talkScript;         /* camp/CecMainDevilTalk_scr.bf, loading */
+            /* 0x35C */ u32 talkMessages;       /* camp/CecDevilMsg/<tone>.mbm, loading */
+            /* 0x360 */ ScriptProcess *script;
+            /* 0x364 */ ScriptProcess *talkProcess;
+            /* 0x368 */ s16 items[CAMPCEC_ITEM_GIFT_MAX]; /* the item ids handed over, itemCount of them */
+            /* 0x3A8 */ u8 unk3A8[8];
+            /* 0x3B0 */ s32 nextState;
+            /* 0x3B4 */ u8 unk3B4[0xC];
+            /* 0x3C0 */ s32 itemCount;
+            /* 0x3C4 */ u8 unk3C4[8];
+            /* 0x3CC */ s32 rewardA;            /* amount of reward kind 0 */
+            /* 0x3D0 */ s32 rewardB;            /* amount of reward kind 1 */
+            /* 0x3D4 */ u8 unk3D4[4];
+            /* 0x3D8 */ u32 previousTotal;      /* the StreetPass total before these records */
+            /* 0x3DC */ u32 pending;
+            /* 0x3E0 */ u8 unk3E0[4];
+            /* 0x3E4 */ u8 useInbox;
+            /* 0x3E5 */ u8 unk3E5[2];
+            /* 0x3E7 */ u8 talkLoading;
+        } receive;
         struct {
             /* 0x004 */ u8 unk004BeforeGains[0xDC];
             /* 0x0E0 */ s16 statGains[5];       /* stat points still to hand to the unit, one message each */
@@ -46,6 +112,11 @@ typedef struct CampCecRecv {
             /* 0x3EC */ u8 unk3ECBeforeFlag[0x3E8];
             /* 0x7D4 */ u8 unk7D4;              /* FUN_002a5e7c is still owed for the unit */
         } unitFlag;
+        struct {
+            /* 0x3EC */ CampCecReceivedRecord entries[10]; /* the DataStore's records (source 1) */
+            /* 0x7D4 */ u8 unitOwed;
+            /* 0x7D5 */ u8 source;              /* 0: the cec inbox, 1: the DataStore */
+        } received;
     };
     /* 0x7D8 */ void *handles;                 /* handle array freed with the screen */
 } CampCecRecv;
@@ -53,6 +124,17 @@ typedef struct CampCecRecv {
 typedef char CampCecRecvResourceOffsets[offsetof(CampCecRecv, resources.buffers) == 0x348 &&
     offsetof(CampCecRecv, resources.received) == 0x3E0 && offsetof(CampCecRecv, done) == 0x3E8 &&
     offsetof(CampCecRecv, handles) == 0x7D8 ? 1 : -1];
+typedef char CampCecRecvReceiveOffsets[sizeof(CampCecReceivedRecord) == 100 && sizeof(CampCecDemonGift) == 12 &&
+    offsetof(CampCecRecv, receive.progress.count) == 0x9C && offsetof(CampCecRecv, receive.progress.state) == 0xA0 &&
+    offsetof(CampCecRecv, receive.statGains) == 0xE0 && offsetof(CampCecRecv, receive.unit) == 0xEC &&
+    offsetof(CampCecRecv, receive.unitBefore) == 0x218 && offsetof(CampCecRecv, receive.gift) == 0x344 &&
+    offsetof(CampCecRecv, receive.gifts) == 0x34C && offsetof(CampCecRecv, receive.talkScript) == 0x358 &&
+    offsetof(CampCecRecv, receive.script) == 0x360 && offsetof(CampCecRecv, receive.items) == 0x368 &&
+    offsetof(CampCecRecv, receive.nextState) == 0x3B0 && offsetof(CampCecRecv, receive.itemCount) == 0x3C0 &&
+    offsetof(CampCecRecv, receive.rewardA) == 0x3CC && offsetof(CampCecRecv, receive.previousTotal) == 0x3D8 &&
+    offsetof(CampCecRecv, receive.pending) == 0x3DC && offsetof(CampCecRecv, receive.useInbox) == 0x3E4 &&
+    offsetof(CampCecRecv, receive.talkLoading) == 0x3E7 && offsetof(CampCecRecv, received.entries) == 0x3EC &&
+    offsetof(CampCecRecv, received.unitOwed) == 0x7D4 && offsetof(CampCecRecv, received.source) == 0x7D5 ? 1 : -1];
 typedef char CampCecRecvGainOffsets[offsetof(CampCecRecv, gains.statGains) == 0xE0 &&
     offsetof(CampCecRecv, gains.unitBefore) == 0x218 && offsetof(CampCecRecv, gains.nextState) == 0x3B0 &&
     offsetof(CampCecRecv, gains.step) == 0x3BC && offsetof(CampCecRecv, gains.pending) == 0x3DC &&
