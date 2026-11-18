@@ -1,7 +1,7 @@
 #include "common.h"
 
 extern "C" {
-s32 bustupCutAnimSelectSlotsById(void);
+u32 bustupCutAnimSelectSlotsById(s32 id);
 s32 eventTexSelectJobsById(s32 id);
 void messageSetDisplayMode(s32 mode);
 void messageSetConfirmDisplayMode(void);
@@ -11,7 +11,7 @@ u32 FUN_00108074(s32 id)
 {
     if (id == 0) {
         messageSetConfirmDisplayMode();
-    } else if (bustupCutAnimSelectSlotsById() == 0 && eventTexSelectJobsById(id) == 0) {
+    } else if (bustupCutAnimSelectSlotsById(id) == 0 && eventTexSelectJobsById(id) == 0) {
         messageSetDisplayMode(2);
     }
     return 1;
