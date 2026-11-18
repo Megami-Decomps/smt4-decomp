@@ -1,4 +1,4 @@
-/* NON_MATCHING: register assignment (retail keeps map/area in r7/r9 and the -1 spawn mode in sl; built uses r8/sl/r7) and the stack-argument store order (187 vs 186 rows); the placement logic is the same. */
+/* NON_MATCHING: native position/direction/heading argument roles recovered; remaining register allocation and stack-store grouping differ. */
 #include "gamedata/MapSaveBlock.h"
 
 extern "C" {
@@ -7,11 +7,11 @@ extern "C" {
 typedef struct MapEffectEntry {
     /* 0x00 */ s8 map;                  /* -1: unused */
     /* 0x01 */ s8 area;
-    /* 0x02 */ s16 horizontal;
-    /* 0x04 */ s16 vertical;
+    /* 0x02 */ s16 x;
+    /* 0x04 */ s16 y;
     /* 0x06 */ s16 z;
-    /* 0x08 */ s16 y;
-    /* 0x0A */ s16 x;
+    /* 0x08 */ s16 vertical;
+    /* 0x0A */ s16 heading;
     /* 0x0C */ u8 unk0c[4];
     /* 0x10 */ s16 flag;                /* a story flag that changes the spawn chance */
     /* 0x12 */ s8 chanceUnflagged;
@@ -30,7 +30,7 @@ void FUN_0024f24c(u32 resource, u32 kind, u32 owner, u32 appearance, u32 spawnGr
 static __inline void spawnEntryEffect(MapEffectEntry *entry, s32 index)
 {
     FUN_0024f24c(5, 0, (u32) "POLY", 0x3A, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 1, index, index + 0x1300, 0, 0, entry->x,
-                 entry->y, entry->z, entry->vertical, entry->horizontal, 200.0f);
+                 entry->y, entry->z, entry->vertical, 200.0f, entry->heading);
 }
 
 /* With `replay` set, restarts the effects already registered in the map block; otherwise rolls

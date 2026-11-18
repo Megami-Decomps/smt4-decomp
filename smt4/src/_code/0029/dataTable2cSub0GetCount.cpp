@@ -1,14 +1,9 @@
-#include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
-
-int dataTableGetCount(void);
-int dataTableGet(int id, int index);
-
-void dataTable2cSub0GetCount(void)
+/* Number of native map collision placements in table0x2c section0. */
+s32 dataTable2cSub0GetCount(void)
 {
-    dataTableGet(0x2c, 0);
-    dataTableGetCount();
+    return dataTableGetCount(dataTableGet(0x2c, 0));
 }
-
-} /* extern "C" */
+}
