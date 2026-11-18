@@ -60,7 +60,7 @@ void MapDepart_InitState(MapDepartState *state, s32 save)
         point->savePoint.tableId = g_gameState.recordId;
     }
     mapBlockLoadTableRecord();
-    GameStateDepartBlock *block = &g_gameState.depart;
+    GameStateDepartBlock *block = &g_mapDepartState.depart;
     block->value = 0;
     block->counterA = 0;
     block->counterB = 0;

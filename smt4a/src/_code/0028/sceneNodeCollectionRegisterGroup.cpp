@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation (retail hoists the constant 0 into r7 at entry and stores the kind and a zero as one strd) */
+/* NON_MATCHING: the switch and the state test (`if (s32 parent = state)`, as smt4's twin) match; retail hoists the constant 0
+ * into r7 at entry (pushing r4-r8) and stores the copied kind and a zero as one strd. */
 #include "shard/S1Light.h"
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 
@@ -37,8 +38,8 @@ void sceneNodeCollectionRegisterGroup(LightNode *node, s32 kind)
     default:
         return;
     }
-    if (state != 0) {
-        FUN_002246d0(node, state);
+    if (s32 parent = state) {
+        FUN_002246d0(node, parent);
         s32 scene;
         if (kind < 3)
             scene = 0;

@@ -1,5 +1,6 @@
 #include "map/LmapGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "classes/Obj4206e8.h"
 
 extern "C" {
 
@@ -10,9 +11,7 @@ void mdlPartsRelease(void *model);
 void lmapSceneShutdownScript(void)
 {
     mdlPartsRelease(g_lmapScene->playerModel);
-    if (g_lmapScene->playerModel != NULL) {
-        g_lmapScene->playerModel->vtable[1](g_lmapScene->playerModel);
-    }
+    delete g_lmapScene->playerModel;
     g_lmapScene->playerModel = NULL;
     if (g_lmapScene->stageModel != NULL) {
         asdMdlManagerDestroy(g_lmapScene->stageModel);

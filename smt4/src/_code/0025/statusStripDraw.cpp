@@ -1,8 +1,8 @@
-/* NON_MATCHING: draws one party member's status panel (large or small layout): frame, icon, level, HP/MP gauges and
- * numbers, ailment icons and the element tint. Same instructions as retail but for: the frame is 8 bytes larger
- * (124 against 116: retail keeps mp/maxMp/boosted at sp+36..44 under the two text buffers and the level at sp+8),
- * the hidden large panel's empty-frame draw shares its call with the large layout's last overlay (retail: the
- * small layout's), and one render-state update takes its two temporaries in the other registers. */
+/* NON_MATCHING: 34 lines; same instructions and frame (116 bytes, with the retail slots). Two differences: the entry
+ * block is scheduled differently (this build zeroes fp and r9 before the vpush; retail after loading the panel's
+ * origin, with the vpush right behind the push), and the hidden large panel's empty-frame draw shares its call with
+ * the large layout's last overlay where retail shares the small layout's (so the two `nop`s after that call sit in
+ * the other layout and the branches between them move by 8 bytes). */
 #include "common.h"
 #include "status/StatusStrip.h"
 #include "shard/TextureDrawCall.h"
@@ -40,10 +40,11 @@ void FUN_002888a8(s32 value, s32 max, s32 change, u32 base, u32 table, u32 fill,
 void FUN_002bdf94(u32 font, s32 x, s32 y, u32 align, u32 digits, u32 layer, const char *text);
 void statusStripDrawAilments(StatusStrip *strip, s32 x, s32 y);
 
+/* Draws one party member's status panel (large or small layout): frame, icon, level, HP/MP gauges and numbers,
+ * ailment icons and the element tint. */
 void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
 {
     char name[32];
-    char text[32];
     s16 demon = 0;
     s32 level = 0;
     s32 mp = 0;
@@ -51,6 +52,7 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
     s32 maxHp = 0;
     s32 maxMp = 0;
     s32 boosted;
+    char text[32];
     TextureTableEntryIV *entry;
 
     x += panel->originX;
@@ -60,8 +62,8 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
         textFormatBuffer(name, "%s", gameGetPlayerName());
         level = player->level;
         demon = -1;
-        mp = player->mp;
         hp = player->hp;
+        mp = player->mp;
         maxHp = btlSourceGetMaxHp((const BtlUnitSource *)player);
         maxMp = gameGetPlayerData()->maxMp;
         boosted = FUN_00288ddc((s16)maxHp, demon);
@@ -70,8 +72,8 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
         if (unit != NULL) {
             textFormatBuffer(name, "%s", FUN_002bd068(unit->id));
             level = unit->level;
-            mp = unit->mp;
             hp = unit->hp;
+            mp = unit->mp;
             demon = (s16)unit->id;
             maxHp = btlLinkGetMaxHp((BtlUnitLink *)unit);
             maxMp = unit->maxMp;

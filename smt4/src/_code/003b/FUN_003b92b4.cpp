@@ -1,4 +1,6 @@
-/* NON_MATCHING: registering the saved entry uses two word stores instead of STM, and the jump group is loaded through the game-state base instead of a separate literal. */
+/* NON_MATCHING: the jump group's literal (g_mapSelection) matches; the packet stores are scheduled differently: the
+ * branch-4 entry is stored with str/str where retail uses stm, the 0x4000000 branch with stm where retail uses str+strd,
+ * which moves the shared tail by 4 bytes (36 lines; 21 while the request was read through the g_gameState base). */
 #include "common.h"
 #include "shard/W6_W6Match5_SequencePacket.h"
 #include "quest_center/QuestRecord.h"
@@ -103,7 +105,7 @@ void FUN_003b92b4(SceneWork *work)
     } else if (work->requestEvent8 != 0) {
         asdSequenceRequest(8, NULL, 0);
     } else if (work->requestCounter != 0) {
-        u32 payload = g_gameState.jumpRequest.selection.group - 200;
+        u32 payload = g_mapSelection.selection.group - 200;
         asdSequenceRequest(14, &payload, sizeof(payload));
     } else if (work->returnToMap != 0) {
         void *entry = rosterGetLeaderId();

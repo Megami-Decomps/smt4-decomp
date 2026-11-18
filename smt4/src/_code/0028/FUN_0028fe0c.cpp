@@ -24,27 +24,27 @@ void FUN_0028fe0c(u16 quest, u32 state)
         uiBindRecordRewardText(quest, 1, 1);
         u32 directory = dataSetFindRequestedFileByKey(g_aocSystem, quest);
         if (directory != 0) {
-            menu->panel.entryDirectory = directory;
-            menu->panel.entryOwnership.borrowed = 1;
+            menu->panelView.panel.entryDirectory = directory;
+            menu->panelView.panel.entryOwnership.borrowed = 1;
         } else {
             char path[64];
             textFormatBuffer(path, "event/quest/quest%03d.mbm", quest);
             directory = asdLoadFileSyncDefault(path);
-            menu->panel.entryDirectory = directory;
-            menu->panel.entryOwnership.borrowed = 0;
+            menu->panelView.panel.entryDirectory = directory;
+            menu->panelView.panel.entryOwnership.borrowed = 0;
         }
-        asdTextDrawDirectoryEntry(menu->panel.texts[0], 3, -1, 0, 3, directory, 0);
+        asdTextDrawDirectoryEntry(menu->panelView.panel.texts[0], 3, -1, 0, 3, directory, 0);
         s32 detail = FUN_00241c40(quest);
         if (detail > 0)
-            asdTextDrawDirectoryEntry(menu->panel.texts[2], 3, -1, 0, 3, menu->panel.entryDirectory, detail);
+            asdTextDrawDirectoryEntry(menu->panelView.panel.texts[2], 3, -1, 0, 3, menu->panelView.panel.entryDirectory, detail);
         uiBindRecordRewardText(quest, 1, 0);
         s32 reward = FUN_003336dc(quest, state);
         if (reward < 0) {
             QuestRecord *record = questDataGetRecord(quest);
             const u8 *text = textConvertToGlyphPairs(record->detail, NULL);
-            asdTextDrawFormatted(menu->panel.texts[1], 3, -1, 0, 3, "%s", text);
+            asdTextDrawFormatted(menu->panelView.panel.texts[1], 3, -1, 0, 3, "%s", text);
         } else {
-            asdTextDrawDirectoryEntry(menu->panel.texts[1], 3, -1, 0, 3, menu->panel.sysImages, reward);
+            asdTextDrawDirectoryEntry(menu->panelView.panel.texts[1], 3, -1, 0, 3, menu->panelView.panel.sysImages, reward);
         }
         uiQuestCountDetailPages(quest);
     }

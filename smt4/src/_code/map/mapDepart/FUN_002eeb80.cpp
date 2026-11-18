@@ -20,7 +20,7 @@ void mikadoSetCameraFlag80(void);
 s32 mikadoIsCameraNotState7(void);
 void debugOverlaySetShown(s32 shown);
 void FUN_00273f90(void);
-void FUN_00273fc0(void);
+void lmapUpdateSceneModels(void);
 void FUN_00274798(void);
 void FUN_00274fac(void);
 void FUN_0027522c(void);
@@ -127,7 +127,7 @@ u32 FUN_002eeb80(void)
         g_mapDepartWork[10] = 1;
         mapDepartSyncModelVisibility();
         FUN_0029ae60(((u32 *)g_lmapScene)[0x194 / 4]);
-        FUN_00273fc0();
+        lmapUpdateSceneModels();
         FUN_00273f90();
         DAT_00447518.finished = 1;
         return 0;

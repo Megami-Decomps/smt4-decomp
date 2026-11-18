@@ -5,14 +5,12 @@
 #include "battle/btlHelp.h"
 #include "game/GameState.h"
 
-struct JumpDestination { s32 map; u32 area, place; };
 struct NavigationPosition {
     NavigationPosition() : map(0), area(0), reserved(0), x(0.0f), y(0.0f), z(0.0f) {}
     u8 kind, map, area, reserved;
     f32 x, y, z;
 };
 extern "C" {
-extern JumpDestination DAT_0049fd14;
 void FUN_0028d664(AocScriptHolder *, u32);
 s32 FUN_0027398c(AocScriptHolder *);
 void helpResourcesRelease(AocScriptHolder *);
@@ -47,13 +45,13 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
     s32 status = FUN_0027398c(&g_aocMain->scriptHolder);
     if (status) {
         helpResourcesRelease(&g_aocMain->scriptHolder);
-        if (DAT_0049fd14.map >= 0) {
+        if (g_mapSelection.selection.group >= 0) {
             saveSourcePosition(scene);
-            ShortJumpDestination destination = {(u16)DAT_0049fd14.map, (u16)DAT_0049fd14.area,
-                                                 (u16)DAT_0049fd14.place};
+            ShortJumpDestination destination = {(u16)g_mapSelection.selection.group, (u16)g_mapSelection.selection.map,
+                                                 (u16)g_mapSelection.selection.target};
             __ARM_common_memcpy4_6(&scene->destination, &destination);
             scene->flags |= 0x10;
-            if (DAT_0049fd14.map < 200)
+            if (g_mapSelection.selection.group < 200)
                 scene->flags |= 0x100100;
             scene->phase = 0;
             scene->state = 5;

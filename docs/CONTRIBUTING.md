@@ -296,6 +296,16 @@ a sibling setter or another user of the same lookup is usually written the same 
 - A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have
   clobbered, is a linker-inlined constant getter: write the call and add an `inlined.txt` row
   (`titleConfigUpdate`'s default volumes).
+- A state handler written as `if (substate != 0) { …; return; }` followed by a shared tail can
+  hoist addresses in the wrong order; `if (substate == 0) { … } else if (substate == 1) { … }`,
+  reading the global's fields directly rather than through a local pointer, gave retail's.
+- A comparator written with early returns (`if (order != 0) return order;`) can match where the
+  nested-if form does not.
+- A bounds-checked row getter (`if (i >= count) return NULL; return base + i * size;`) as a
+  `static __inline` gives retail's `movcs r0, rN; bcs`.
+- When retail reaches a field through its own pool word even in a function that already holds the
+  enclosing object's base, the field is a separate object: split the symbol (smt4's `g_mapSelection`
+  at 0x49FD14 was carved out of `g_gameState`).
 - When a call's only difference is the order its vector arguments load in (retail loads the second
   first), the callee probably takes the vector by value: declare it so in the shared header
   (`distSpatial(MapVector, MapVector)`; three by-value floats and six separate floats use the same
@@ -355,7 +365,9 @@ a sibling setter or another user of the same lookup is usually written the same 
 - `new (alloc) T` with a constructor and a class `operator new` gives retail's predicated allocation.
 
 **armcc's copy helpers** `__ARM_common_memcpy4_N` are emitted for `strcpy` of an N-byte literal into
-an aligned buffer and for copies of N-byte packed records: write `strcpy` or the assignment. A caller
+an aligned buffer and for copies of N-byte packed records: write `strcpy` or the assignment. Likewise
+`__ARM_common_memclr4_N` is armcc's call for a `memset(p, 0, N)` of a word-aligned buffer it does not clear
+inline (Apocalypse's 9-byte clear-save options, `FUN_00241058`): write the `memset`. A caller
 that retail compiled against an opaque copy (it keeps a dead store into the copied record) declares
 `ARM_common_memcpy4_6_call`, an alias in `config/symbols.txt`.
 

@@ -6,7 +6,7 @@ s32 rosterGetLeaderId();
 /* Processes the pending quest UI update. */
 s32 uiQuestProcessPendingUpdate()
 {
-    if (g_uiQuest->panel.detailMode)
+    if (g_uiQuest->panelView.panel.detailMode)
         return 0;
     return rosterGetLeaderId();
 }

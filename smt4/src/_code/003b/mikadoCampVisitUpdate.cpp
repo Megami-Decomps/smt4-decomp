@@ -1,4 +1,5 @@
-/* NON_MATCHING: twin of Apocalypse's FUN_004b990c (which matches); two differences remain: retail reads the pending jump's group through its own literal (g_gameState+0x3F8: a separate global in the original, here a GameState member reached from the game-state base), and it loads the model file and size for objModelCreateFromSource from camera+index*4 with two offsets where armcc here walks one pointer (ldr with writeback). */
+/* Twin of Apocalypse's FUN_004b990c. Retail reads the pending jump's group through its own pool word, so the
+ * jump request is a global of its own (g_mapSelection, as in Apocalypse), not a member of g_gameState. */
 #include "mikado/mikadoMain.h"
 #include "ui/UiControl.h"
 #include "camp/Camp.h"
@@ -164,9 +165,9 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             case 1:
                 FUN_0026fe0c();
                 FUN_0026faa4();
-                if (g_gameState.jumpRequest.selection.group >= 200) {
+                if (g_mapSelection.selection.group >= 200) {
                     camera->exitRequest[2] = 1;
-                } else if (g_gameState.jumpRequest.selection.group >= 100) {
+                } else if (g_mapSelection.selection.group >= 100) {
                     camera->exitRequest[0] = 1;
                 } else {
                     camera->exitRequest[1] = 1;

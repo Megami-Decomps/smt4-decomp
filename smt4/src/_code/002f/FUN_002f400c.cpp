@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int modelPartSetRotationDegrees(...);
+int modelPartSetRotationDegrees(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int nodeSetTranslation(...);
 int modelSetScale(...);
 int lightOwnerRegister(...);

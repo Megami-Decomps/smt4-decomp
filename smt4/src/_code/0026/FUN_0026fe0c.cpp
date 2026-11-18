@@ -27,7 +27,7 @@ void FUN_0026fe0c(void)
         f32 parameter;
     };
     MapSaveBlock *saved = gameGetMapBlock();
-    TargetView *target = reinterpret_cast<TargetView *>(&g_gameState.jumpRequest);
+    TargetView *target = reinterpret_cast<TargetView *>(&g_mapSelection);
     switch (saved->resumeMode) {
     case 0: {
         target->selection.group = 1;

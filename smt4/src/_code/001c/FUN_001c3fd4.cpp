@@ -34,7 +34,7 @@ int FUN_0026c464(...);
 int uniteLoadPreviewRoomModel(void);
 int FUN_0028a924(...);
 int FUN_0028d1f4(...);
-int uiStoreTextureEntryCenter(...);
+int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int gameGlobalsSetSelected(...);
 int FUN_0029bd4c(void);
 int FUN_0029c43c(...);
@@ -83,7 +83,7 @@ int FUN_0029d8f4(...);
 int FUN_0029defc(...);
 int FUN_0029dfc0(...);
 int scrollOwnerSelectIndex(...);
-int objectPartRunUnlessLocked(...);
+int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int FUN_0029efd8(...);
 int gameGetUnitRecord(...);
 int eventQueueAddUniqueIfValid(...);

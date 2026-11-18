@@ -89,7 +89,7 @@ static void ringReplace(DrawStateRing* ring, u32 value)
 
 // Draws the quest screen's skill-category panel (states 0x14-0x16) or hands the other quest
 // states to their shared drawers, with the title scene's render state pushed around it.
-u32 FUN_001ad9f0(void)
+s32 uiQuestDrawUpper(u32 job)
 {
     QuestUi* quest = g_uiQuest;
     renderCtxSelectStereoLayout(g_titleScene);

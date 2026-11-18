@@ -63,7 +63,6 @@ extern signed char DAT_0049fb69; /* 0x49fb69 */
 extern signed char DAT_0049fb6a; /* 0x49fb6a */
 extern signed char DAT_0049fb6b; /* 0x49fb6b */
 extern signed char DAT_0049fb6c; /* 0x49fb6c */
-extern int DAT_0049fd14; /* 0x49fd14 */
 extern int DAT_0049fd18; /* 0x49fd18 */
 extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 
@@ -118,7 +117,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       navigationApplyOptionalValue(1);
       return;
     }
-    DAT_0049fd14 = -1;
+    g_mapSelection.selection.group = -1;
     DAT_0049f970 = 0;
     FUN_00273358(0xffffffff);
   }
@@ -131,7 +130,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x28) = 0;
       return;
     }
-    DAT_0049fd14 = -1;
+    g_mapSelection.selection.group = -1;
     DAT_0049f970 = 0;
     FUN_00273358(0xffffffff);
   }
@@ -145,7 +144,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x24) = 0x3c;
       return;
     }
-    DAT_0049fd14 = -1;
+    g_mapSelection.selection.group = -1;
     DAT_0049f970 = 0;
     FUN_00273358(0xffffffff);
   }
@@ -195,7 +194,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     *(unsigned int *)(temp_v2 + 0x28) = 0;
     return;
   }
-  if (DAT_0049fd14 != -1) {
+  if (g_mapSelection.selection.group != -1) {
     temp_v3 = *(int *)(temp_v2 + 0x30);
     DAT_0049fb44 = DAT_0049f964 != 0;
     temp_v1 = mapGetDepartureIndex();
@@ -203,7 +202,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       temp_v3 = mapGetDepartureIndex();
     }
     temp_v1 = *(int *)(temp_v2 + 0x2c);
-    temp_v4 = temp_v1 == DAT_0049fd14;
+    temp_v4 = temp_v1 == g_mapSelection.selection.group;
     if (temp_v4) {
       param_3 = DAT_0049fd18;
     }

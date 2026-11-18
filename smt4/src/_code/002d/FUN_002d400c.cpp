@@ -85,8 +85,8 @@ u32 FUN_002d400c(void)
             model->flags |= 2;
             model->node->sceneNode->positionFollowed = 0;
         }
-        g_lmapScene->unk168 = 0;
-        g_lmapScene->unk16C = -1;
+        g_lmapScene->actorMotion = 0;
+        g_lmapScene->appliedActorMotion = -1;
         g_lmapScene->modelSwapStep = 0;
         return 1;
     }

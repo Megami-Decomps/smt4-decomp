@@ -13,10 +13,10 @@ void FUN_002cf780(void)
 {
     UiQuest *quest = g_uiQuest;
 
-    quest->panel.detailMode = 1;
+    quest->panelView.panel.detailMode = 1;
     uiQuestLoadResources();
-    FUN_0028fe0c(quest->cursor.alternate.ids[resourceRunOperationIfUnblocked(quest->panel.alternate.cursor) +
-                                             listCursorGetRowIfUnblocked(quest->panel.alternate.cursor)], 1);
+    FUN_0028fe0c(quest->cursor.alternate.ids[resourceRunOperationIfUnblocked(quest->panelView.panel.alternate.cursor) +
+                                             listCursorGetRowIfUnblocked(quest->panelView.panel.alternate.cursor)], 1);
     timerStart(quest->mainSprite, 0, 0);
     uiQuestEnterState(g_uiQuest, 1);
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00262210(...);
-int uiStoreTextureEntryCenter(int, int, int);
+int uiStoreTextureEntryCenter(int, int, int); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int pairSetFirstResetSecond(...);
 int uiSpriteStateInitFromSource(int, int, unsigned int, int, int);
 int spriteStartAnimationByIndex(...);

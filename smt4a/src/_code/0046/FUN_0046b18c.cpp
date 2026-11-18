@@ -22,7 +22,7 @@ int sysMemClear(unsigned int *, int);
 int buttonHelpSetSelectedId(int);
 int messageSetIndexedFlag(unsigned int, unsigned int);
 int modelPlayClip(...);
-int pickObjStart(unsigned int *, unsigned char *);
+int pickObjStart(unsigned int *, unsigned char *); // declcheck: local (romwright prototype; its types do not fit classes/Obj5333c0.h: including it fails to compile)
 int FUN_0046a278(unsigned int *, unsigned int);
 int candidateGetPreferredValue(...);
 

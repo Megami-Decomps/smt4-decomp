@@ -4984,3 +4984,19 @@
 002036b8 uniteOptionListDraw inferred draws the fusion screen's option list, cursor row and scroll bar
 00254058 dataTable24FindById inferred finds a data table 0x24 record by id (Table24Record)
 00287704 qcGetCenterSlotGroups inferred the quest center's slot-group block for a location
+0049f91c g_gameState inferred size:0x3f8 the game state ends before the jump request: every retail user of the request (0x49fd14) and of the departure block (0x49fd38) has its own pool word, also where it holds the g_gameState base
+0049fd14 g_mapSelection inferred the pending map jump (GameStateJumpRequest, 0x24 bytes like Apocalypse's g_mapSelection): its users address it through their own pool word
+0049fd38 g_mapDepartState inferred the departure block reset when a map is entered (MapDepart_InitState addresses it through its own pool word)
+0049fd14 g_mapSelection inferred size:0x24 GameStateJumpRequest
+0049fd38 g_mapDepartState inferred size:0x25c from the end of g_mapSelection to the old end of g_gameState (0x49ff94)
+00269dc8 uiQuestCreate evidence asdDebugTrace path c:\SMT4\XRD686\sdds4\Patch\camp\UIQuest\UIQuest.cpp (line 3545) and it registers the "UIQuest Calc" process and the UIQuest draw tasks (Apocalypse twin uiQuestCreate, evidence)
+001956c4 uiQuestCalc evidence registered by uiQuestCreate (FUN_00269dc8) as the process "UIQuest Calc" (Apocalypse uiQuestCalc)
+001ad9f0 uiQuestDrawUpper evidence registered by uiQuestCreate as the draw tasks "UIQuest UDrawLeft"/"UIQuest UDrawRight" (Apocalypse uiQuestDrawUpper)
+001ddc7c uiQuestDrawLower evidence registered by uiQuestCreate as the draw task "UIQuest DDraw" (Apocalypse uiQuestDrawLower)
+001b10e4 clearSaveUpdate inferred the "clearSave C" process clearSaveCreate registers: per-frame state machine of the clear-data save screen (fade in, options, unit pick, confirm, save, fade out)
+003b992c eventUpdateScriptLaunch inferred twin of Apocalypse eventUpdateScriptLaunch (inferred): loads event/e%03d/e%03d.bf/.mbm, runs the entry, frees them when the script ends
+00151b88 skillRecordCompareId inferred bsearch comparator of dataTable40BsearchRecord: compares the u16 id at 0x20 of two SkillDataRecord rows (same body as compareRecordKey)
+002dc7a0 fusionComparePairsByRaceLevelAndIdDescending inferred qsort comparator FUN_00196d78 selects: orders fusion pairs by first then second component, descending race, ascending level, descending id
+001f6098 fusionComparePairScoreAscending inferred qsort comparator FUN_00196d78 selects: orders fusion pairs by component score, ascending
+00273fc0 lmapUpdateSceneModels inferred per-frame update of the local map scene's player, marker and stage models (motion frames, poses, visibility)
+001978b4 campDrawCommandMenu inferred draws the camp command menu from CampComTable (command sprites, grid, texture draws)

@@ -1,6 +1,8 @@
 /* NON_MATCHING: reward-list/section registers are exchanged, pipelined loot-weight temporaries differ, and gold multiply operands are reversed. */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
+#include "quest_center/QuestRuntime.h"
+#include "quest_center/QuestStatus.h"
 #include <stddef.h>
 #include "gamedata/SubQuestLootTable.h"
 #include "util/Random.h"
@@ -11,10 +13,6 @@
 
 extern "C" {
 
-typedef struct QuestRuntimeStatus {
-    u8 flags;                  /* bit 3: use the second reward slot set */
-} QuestRuntimeStatus;
-
 /* The aoc system's loot table cache: entries of 0x54 bytes (a key, then the table). */
 typedef struct LootCacheEntry {
     u32 key;
@@ -23,8 +21,6 @@ typedef struct LootCacheEntry {
 
 typedef char QuestRewardLayouts[
     sizeof(LootCacheEntry) == 0x54 && offsetof(LootCacheEntry, table) == 4 ? 1 : -1];
-
-QuestRuntimeStatus *questGetRuntimeStatus(u32 questId); // declcheck: local (QuestStatus.h returns the record as an int)
 
 static __inline SubQuestLootRecord *questRewardFindLootTable(u16 tableId)
 {

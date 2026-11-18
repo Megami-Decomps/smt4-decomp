@@ -6,7 +6,7 @@ extern "C" {
 extern void FUN_001ff724(void);
 extern void uiQuestReturnToList(void);
 
-void stateHolder4Request(u8 value)
+void stateHolder4Request(s8 value)
 {
     UiQuestApoc *obj = g_uiQuest;
 

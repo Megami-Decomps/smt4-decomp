@@ -72,7 +72,7 @@ int gameMoneyAdd(...);
 int FUN_00295cec(...);
 int soundSlotStopById(...);
 int slotUnitIsInActiveParty(...);
-int uiStoreTextureEntryCenter(...);
+int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
 int timerStart(...);

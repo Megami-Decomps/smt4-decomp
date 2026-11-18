@@ -1,18 +1,10 @@
-#include "common.h"
+#include "classes/Obj4206e8.h"
+#include "map/LmapPlayerModel.h"
 
-extern "C" {
+extern "C" u32 modelGetCurrentMotion(AsdMdlNode *node);
 
-u32 modelGetCurrentMotion(void *inner);
-
-typedef struct Node00335118 {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ struct Node00335118 *next;
-} Node00335118;
-
-/* Forwards the object two links down (+8, +8) to modelGetCurrentMotion. */
-void FUN_00335118(Node00335118 *node)
+// Read the active motion of the root model.
+extern "C" u32 FUN_00335118(const Obj4206e8 *group)
 {
-    modelGetCurrentMotion(node->next->next);
+    return modelGetCurrentMotion(group->model()->node);
 }
-
-} /* extern "C" */

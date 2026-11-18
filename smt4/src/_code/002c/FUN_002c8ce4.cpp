@@ -1,4 +1,5 @@
 /* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail; the body is still the raw decompiler control-flow draft, so branch layout and register allocation differ. */
+#include "map/LmapPlayerModel.h"
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/TrigF32.h"
@@ -20,7 +21,6 @@ int FUN_0027f48c(...);
 int FUN_0027f848(void);
 int padGetNormalizedAnalogStick(unsigned int *, unsigned int [13], int);
 int lmapSetSceneId(unsigned int);
-int mapDepartSpawnPlayerEffect(...);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(int [40], unsigned char *, int);
 

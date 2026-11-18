@@ -12,8 +12,8 @@ void FUN_002fec80(u32 questId)
 {
     UiQuest *quest = g_uiQuest;
 
-    quest->panel.unkF2 = 1;
-    quest->panel.detailMode = FUN_00298f88(questId);
+    quest->panelView.panel.unkF2 = 1;
+    quest->panelView.panel.detailMode = FUN_00298f88(questId);
     quest->questId = questId;
     uiQuestLoadResources();
     FUN_0028fe0c(questId, 1);

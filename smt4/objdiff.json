@@ -30747,13 +30747,13 @@
       "target_path": "orig/target/_code/0015/compareRecordKey.o"
     },
     {
-      "base_path": "build/obj/_code/0015/FUN_00151b88.o",
+      "base_path": "build/obj/_code/0015/skillRecordCompareId.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00151b88",
+            "name": "skillRecordCompareId",
             "size": 16,
             "vram": "0x151b88"
           }
@@ -30761,10 +30761,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0015/FUN_00151b88.cpp"
+        "source_path": "src/_code/0015/skillRecordCompareId.cpp"
       },
-      "name": "_code/0015/FUN_00151b88",
-      "target_path": "orig/target/_code/0015/FUN_00151b88.o"
+      "name": "_code/0015/skillRecordCompareId",
+      "target_path": "orig/target/_code/0015/skillRecordCompareId.o"
     },
     {
       "base_path": "build/obj/_code/0015/FUN_00151b98.o",
@@ -41573,13 +41573,13 @@
       "target_path": "orig/target/_code/0019/facingUpdateAngles.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_001956c4.o",
+      "base_path": "build/obj/_code/0019/uiQuestCalc.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001956c4",
+            "name": "uiQuestCalc",
             "size": 5796,
             "vram": "0x1956c4"
           }
@@ -41587,10 +41587,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_001956c4.cpp"
+        "source_path": "src/_code/0019/uiQuestCalc.cpp"
       },
-      "name": "_code/0019/FUN_001956c4",
-      "target_path": "orig/target/_code/0019/FUN_001956c4.o"
+      "name": "_code/0019/uiQuestCalc",
+      "target_path": "orig/target/_code/0019/uiQuestCalc.o"
     },
     {
       "base_path": "build/obj/_code/0019/FUN_00196d78.o",
@@ -41653,13 +41653,13 @@
       "target_path": "orig/target/_code/0019/FUN_0019715c.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_001978b4.o",
+      "base_path": "build/obj/_code/0019/campDrawCommandMenu.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001978b4",
+            "name": "campDrawCommandMenu",
             "size": 1408,
             "vram": "0x1978b4"
           }
@@ -41667,10 +41667,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_001978b4.cpp"
+        "source_path": "src/_code/0019/campDrawCommandMenu.cpp"
       },
-      "name": "_code/0019/FUN_001978b4",
-      "target_path": "orig/target/_code/0019/FUN_001978b4.o"
+      "name": "_code/0019/campDrawCommandMenu",
+      "target_path": "orig/target/_code/0019/campDrawCommandMenu.o"
     },
     {
       "base_path": "build/obj/_code/0019/FUN_00197e34.o",
@@ -44676,13 +44676,13 @@
       "target_path": "orig/target/_code/camp/UIFade/UIFade/uiFadeSetVisible.o"
     },
     {
-      "base_path": "build/obj/_code/001a/FUN_001ad9f0.o",
+      "base_path": "build/obj/_code/001a/uiQuestDrawUpper.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001ad9f0",
+            "name": "uiQuestDrawUpper",
             "size": 856,
             "vram": "0x1ad9f0"
           }
@@ -44690,10 +44690,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001a/FUN_001ad9f0.cpp"
+        "source_path": "src/_code/001a/uiQuestDrawUpper.cpp"
       },
-      "name": "_code/001a/FUN_001ad9f0",
-      "target_path": "orig/target/_code/001a/FUN_001ad9f0.o"
+      "name": "_code/001a/uiQuestDrawUpper",
+      "target_path": "orig/target/_code/001a/uiQuestDrawUpper.o"
     },
     {
       "base_path": "build/obj/_code/001a/uniteRequestSoundChannel.o",
@@ -45038,13 +45038,13 @@
       "target_path": "orig/target/_code/battle/btlMain/FUN_001b0db4.o"
     },
     {
-      "base_path": "build/obj/_code/clear_save/clearSave/FUN_001b10e4.o",
+      "base_path": "build/obj/_code/clear_save/clearSave/clearSaveUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001b10e4",
+            "name": "clearSaveUpdate",
             "size": 1460,
             "vram": "0x1b10e4"
           }
@@ -45053,10 +45053,10 @@
           "_code",
           "clear_save/clearSave"
         ],
-        "source_path": "src/_code/clear_save/clearSave/FUN_001b10e4.cpp"
+        "source_path": "src/_code/clear_save/clearSave/clearSaveUpdate.cpp"
       },
-      "name": "_code/clear_save/clearSave/FUN_001b10e4",
-      "target_path": "orig/target/_code/clear_save/clearSave/FUN_001b10e4.o"
+      "name": "_code/clear_save/clearSave/clearSaveUpdate",
+      "target_path": "orig/target/_code/clear_save/clearSave/clearSaveUpdate.o"
     },
     {
       "base_path": "build/obj/_code/001b/fusionComparePairsByParentLevelRaceId.o",
@@ -49367,13 +49367,13 @@
       "target_path": "orig/target/_code/camp/UIFade/UIFade/uiFadeRequestHalf.o"
     },
     {
-      "base_path": "build/obj/_code/001d/FUN_001ddc7c.o",
+      "base_path": "build/obj/_code/001d/uiQuestDrawLower.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001ddc7c",
+            "name": "uiQuestDrawLower",
             "size": 340,
             "vram": "0x1ddc7c"
           }
@@ -49381,10 +49381,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001d/FUN_001ddc7c.cpp"
+        "source_path": "src/_code/001d/uiQuestDrawLower.cpp"
       },
-      "name": "_code/001d/FUN_001ddc7c",
-      "target_path": "orig/target/_code/001d/FUN_001ddc7c.o"
+      "name": "_code/001d/uiQuestDrawLower",
+      "target_path": "orig/target/_code/001d/uiQuestDrawLower.o"
     },
     {
       "base_path": "build/obj/_code/001d/FUN_001dddd8.o",
@@ -53153,13 +53153,13 @@
       "target_path": "orig/target/_code/001f/fusionComparePairsByRaceLevelAndId.o"
     },
     {
-      "base_path": "build/obj/_code/001f/FUN_001f6098.o",
+      "base_path": "build/obj/_code/001f/fusionComparePairScoreAscending.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001f6098",
+            "name": "fusionComparePairScoreAscending",
             "size": 296,
             "vram": "0x1f6098"
           }
@@ -53167,10 +53167,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001f/FUN_001f6098.cpp"
+        "source_path": "src/_code/001f/fusionComparePairScoreAscending.cpp"
       },
-      "name": "_code/001f/FUN_001f6098",
-      "target_path": "orig/target/_code/001f/FUN_001f6098.o"
+      "name": "_code/001f/fusionComparePairScoreAscending",
+      "target_path": "orig/target/_code/001f/fusionComparePairScoreAscending.o"
     },
     {
       "base_path": "build/obj/_code/001f/FUN_001f61c4.o",
@@ -86858,13 +86858,13 @@
       "target_path": "orig/target/_code/0026/uniteSetMode.o"
     },
     {
-      "base_path": "build/obj/_code/camp/UIQuest/UIQuest/FUN_00269dc8.o",
+      "base_path": "build/obj/_code/camp/UIQuest/UIQuest/uiQuestCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00269dc8",
+            "name": "uiQuestCreate",
             "size": 1408,
             "vram": "0x269dc8"
           }
@@ -86873,10 +86873,10 @@
           "_code",
           "camp/UIQuest/UIQuest"
         ],
-        "source_path": "src/_code/camp/UIQuest/UIQuest/FUN_00269dc8.cpp"
+        "source_path": "src/_code/camp/UIQuest/UIQuest/uiQuestCreate.cpp"
       },
-      "name": "_code/camp/UIQuest/UIQuest/FUN_00269dc8",
-      "target_path": "orig/target/_code/camp/UIQuest/UIQuest/FUN_00269dc8.o"
+      "name": "_code/camp/UIQuest/UIQuest/uiQuestCreate",
+      "target_path": "orig/target/_code/camp/UIQuest/UIQuest/uiQuestCreate.o"
     },
     {
       "base_path": "build/obj/_code/0026/scrEffectRunIfActive.o",
@@ -89563,13 +89563,13 @@
       "target_path": "orig/target/_code/0027/FUN_00273f90.o"
     },
     {
-      "base_path": "build/obj/_code/0027/FUN_00273fc0.o",
+      "base_path": "build/obj/_code/0027/lmapUpdateSceneModels.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00273fc0",
+            "name": "lmapUpdateSceneModels",
             "size": 2004,
             "vram": "0x273fc0"
           }
@@ -89577,10 +89577,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0027/FUN_00273fc0.cpp"
+        "source_path": "src/_code/0027/lmapUpdateSceneModels.cpp"
       },
-      "name": "_code/0027/FUN_00273fc0",
-      "target_path": "orig/target/_code/0027/FUN_00273fc0.o"
+      "name": "_code/0027/lmapUpdateSceneModels",
+      "target_path": "orig/target/_code/0027/lmapUpdateSceneModels.o"
     },
     {
       "base_path": "build/obj/_code/0027/FUN_00274798.o",
@@ -128418,13 +128418,13 @@
       "target_path": "orig/target/_code/002d/FUN_002dc72c.o"
     },
     {
-      "base_path": "build/obj/_code/002d/FUN_002dc7a0.o",
+      "base_path": "build/obj/_code/002d/fusionComparePairsByRaceLevelAndIdDescending.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002dc7a0",
+            "name": "fusionComparePairsByRaceLevelAndIdDescending",
             "size": 256,
             "vram": "0x2dc7a0"
           }
@@ -128432,10 +128432,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002d/FUN_002dc7a0.cpp"
+        "source_path": "src/_code/002d/fusionComparePairsByRaceLevelAndIdDescending.cpp"
       },
-      "name": "_code/002d/FUN_002dc7a0",
-      "target_path": "orig/target/_code/002d/FUN_002dc7a0.o"
+      "name": "_code/002d/fusionComparePairsByRaceLevelAndIdDescending",
+      "target_path": "orig/target/_code/002d/fusionComparePairsByRaceLevelAndIdDescending.o"
     },
     {
       "base_path": "build/obj/_code/002d/fusionComparePairPriority.o",
@@ -200328,13 +200328,13 @@
       "target_path": "orig/target/_code/003b/FUN_003b980c.o"
     },
     {
-      "base_path": "build/obj/_code/003b/FUN_003b992c.o",
+      "base_path": "build/obj/_code/003b/eventUpdateScriptLaunch.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003b992c",
+            "name": "eventUpdateScriptLaunch",
             "size": 292,
             "vram": "0x3b992c"
           }
@@ -200342,10 +200342,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003b/FUN_003b992c.cpp"
+        "source_path": "src/_code/003b/eventUpdateScriptLaunch.cpp"
       },
-      "name": "_code/003b/FUN_003b992c",
-      "target_path": "orig/target/_code/003b/FUN_003b992c.o"
+      "name": "_code/003b/eventUpdateScriptLaunch",
+      "target_path": "orig/target/_code/003b/eventUpdateScriptLaunch.o"
     },
     {
       "base_path": "build/obj/_code/003b/sceneLoadAocScriptStep.o",

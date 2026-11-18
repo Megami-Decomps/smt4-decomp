@@ -23,7 +23,7 @@ int FUN_00298ad8(void);
 int FUN_00298d0c(...);
 int FUN_00298d28(...);
 int campReleaseScreenTouchRegions(...);
-int dataTable15GetUnlockedEntryId(...);
+int dataTable15GetUnlockedEntryId(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int FUN_00299900(...);
 int FUN_00299bc4(int, int);
 int FUN_0029acb0(void);

@@ -7508,3 +7508,7 @@
 00385384 mapIfTriggerNearbyProximityRecord inferred activates the first nearby proximity-trigger record and plays its sound
 00416840 messageIndicatorsUpdate inferred advances the twelve message indicators through their open/loop/close animations
 00156868 dataTableGetNamePayload inferred twin of smt4 dataTableGetNamePayload
+0050d72c __ARM_common_memclr4_9 evidence armcc 4.1 emits and calls this helper under that name: memset(p, 0, 9) of a word-aligned 9-byte buffer compiles to `bl __ARM_common_memclr4_9` with an i.__ARM_common_memclr4_9 section byte-identical to retail (it sits before __ARM_common_memcpy4_7/_9)
+00241058 clearSaveUpdate inferred twin of IV clearSaveUpdate (FUN_001b10e4); the "clearSave C" process clearSaveCreate registers
+00314ef8 btlDebugClose inferred twin of IV btlDebugClose (inferred): stops the debug helper job and clears the owned flags
+0019c920 asdVramBlockListInsert inferred twin of IV asdVramBlockListInsert (inferred): inserts a block into the address-sorted VRAM block list

@@ -1,15 +1,14 @@
-#include "common.h"
-
-namespace { struct Object { u8 padding[0x28]; u8 part[0x3a]; u8 disabled; }; }
+#include "camp/CampMenuEntry.h"
+#include "ui/GridNavigation.h"
 
 extern "C" {
-/* Updates or returns the requested state. */
 u32 FUN_002d5718(const void *part);
-u32 FUN_0029e958(const Object *object)
+
+// The number of entries in the grid's active list, or zero for an empty grid.
+u32 FUN_0029e958(const GridNavigation *grid)
 {
-    if (object->disabled != 0) {
+    if (grid->empty != 0)
         return 0;
-    }
-    return FUN_002d5718(object->part);
+    return FUN_002d5718(&grid->columns);
 }
 }

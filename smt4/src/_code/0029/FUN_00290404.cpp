@@ -24,7 +24,7 @@ void buttonHelpSetText(const u8 *text, u32 color);
 void FUN_00290404()
 {
     UiQuest *menu = g_uiQuest;
-    UiQuestPanel *panel = &menu->panel;
+    UiQuestPanel *panel = &menu->panelView.panel;
     u16 quest;
     if (panel->detailMode) {
         const void *cursor = panel->alternate.cursor;

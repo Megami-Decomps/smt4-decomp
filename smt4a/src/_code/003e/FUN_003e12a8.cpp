@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail keeps the request field stores in source order (kind, unk10, count, unk0C); the build schedules the zero stores first. */
+/* NON_MATCHING: retail keeps the load-state stores in source order (state, count, recordCount, frame); the build schedules the zero stores first. */
 #include "common.h"
+#include "battle/BattleArrangementLoad.h"
 
 extern "C" {
 
@@ -15,13 +16,6 @@ typedef struct AocUiList {
     /* 0x2020 */ AddedEntry added[42];
 } AocUiList;
 
-typedef struct AocLoadRequest {
-    /* 0x00 */ u32 kind;
-    /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ s32 count;
-    /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u32 unk10;
-} AocLoadRequest;
 
 void __aeabi_memset4(void *destination, s32 size, s32 value);
 void uiEntriesReset(AocUiList *list);
@@ -30,10 +24,10 @@ s32 uiHasEntryId(AocUiList *list, u32 id);
 u32 FUN_00409fe8(u32 id, s32 a, s32 b);
 void valueSlotsInsert(AocUiList *list, u32 value);
 void uiInsertIdInFirstFreeSlot(AocUiList *list, s16 id);
-void aocLoaderUpdateRecords(AocLoadRequest *request, AocUiList *list);
+void aocLoaderUpdateRecords(BattleArrangementLoadState *request, AocUiList *list);
 
 /* Rebuilds the list from its source's ids, adding each id it lacks, then requests a kind-11 record update for the added count. */
-void FUN_003e12a8(AocLoadRequest *request, AocUiList *list)
+void FUN_003e12a8(BattleArrangementLoadState *request, AocUiList *list)
 {
     u32 ids[42];
     u32 source;
@@ -60,10 +54,10 @@ void FUN_003e12a8(AocLoadRequest *request, AocUiList *list)
             i++;
         } while (i < count);
     }
-    request->kind = 11;
-    request->unk10 = 0;
-    request->count = added;
-    request->unk0C = 0;
+    request->state = 11;
+    request->count = 0;
+    request->recordCount = added;
+    request->frame = 0;
     aocLoaderUpdateRecords(request, list);
 }
 

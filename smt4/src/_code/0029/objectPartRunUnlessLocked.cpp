@@ -1,22 +1,14 @@
-#include "common.h"
+#include "camp/CampMenuEntry.h"
+#include "ui/GridNavigation.h"
 
 extern "C" {
-
-typedef struct Object0029e908 {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u8 part[0x3a];
-    /* 0x62 */ u8 locked;
-} Object0029e908;
-
 s32 FUN_002cb8d0(u8 *part);
 
-/* Runs FUN_002cb8d0 on the object's part unless the object is locked. */
-s32 objectPartRunUnlessLocked(Object0029e908 *object)
+// The selected entry of the grid's active list, or zero for an empty grid.
+s32 objectPartRunUnlessLocked(GridNavigation *grid)
 {
-    if (object->locked == 0) {
-        return FUN_002cb8d0(object->part);
-    }
+    if (grid->empty == 0)
+        return FUN_002cb8d0(reinterpret_cast<u8 *>(&grid->columns));
     return 0;
 }
-
-} /* extern "C" */
+}

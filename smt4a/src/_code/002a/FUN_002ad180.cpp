@@ -1,4 +1,6 @@
-/* NON_MATCHING: the three render-state pushes match (stack B uses the counted direct push); remaining: retail forms &work->jobs[i] once at the loop top and loads the handle before the drawAll branch (both arms call jobIsValid on it). */
+/* NON_MATCHING: only the origin load in the merged draw tail differs: retail copies it with one vldmia {s0-s1}, this build loads
+ * the two floats separately (the twin smt4 FUN_001f42d4 matches by copying the origin into a local in a plain static helper; here that form
+ * changes the register allocation of the whole function). */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "code/Code0038.h"
@@ -6,14 +8,18 @@
 #include "util/BitsAndBytes.h"
 
 namespace {
+struct EventDrawOrigin {
+    f32 x;
+    f32 y;
+};
+
 /* The event job's work area: the list of jobs to draw and the position they are drawn at. */
 struct EventDrawWork {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ u32 jobs[16];
     /* 0x44 */ s32 jobCount;
     /* 0x48 */ u8 unk48[0x48];
-    /* 0x90 */ f32 x;
-    /* 0x94 */ f32 y;
+    /* 0x90 */ EventDrawOrigin origin;
 };
 
 struct EventTex {
@@ -31,6 +37,12 @@ void FUN_002609d8(u32 job, s32 x, s32 y);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
+/* Draws one job at the work's origin. */
+static __inline void drawJobAtOrigin(EventDrawWork *work, s32 i)
+{
+    FUN_002609d8(work->jobs[i], (s32)work->origin.x, (s32)work->origin.y);
+}
+
 /* Draws the event's jobs under temporary render-state presets. */
 s32 FUN_002ad180(u32 job)
 {
@@ -46,15 +58,12 @@ s32 FUN_002ad180(u32 job)
     renderStackPushCountedDirect(&context->stackB, state);
     for (s32 i = 0; i < work->jobCount; i++) {
         if (g_eventTex->drawAll != 0) {
-            if (!jobIsValid(work->jobs[i]))
-                continue;
-        } else {
-            if (!jobIsValid(work->jobs[i]) || jobGetStatus(work->jobs[i]) != 4)
-                continue;
+            if (jobIsValid(work->jobs[i])) {
+                drawJobAtOrigin(work, i);
+            }
+        } else if (jobIsValid(work->jobs[i]) && jobGetStatus(work->jobs[i]) == 4) {
+            drawJobAtOrigin(work, i);
         }
-        f32 x = work->x;
-        f32 y = work->y;
-        FUN_002609d8(work->jobs[i], (s32)x, (s32)y);
     }
     renderStackPop(&g_renderCtx->stackB);
     renderStackPop(&g_renderCtx->stackA);

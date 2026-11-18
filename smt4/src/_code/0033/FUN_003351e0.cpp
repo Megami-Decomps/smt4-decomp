@@ -1,34 +1,19 @@
-#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-
-struct ScaleGroup {
-    u8 unk00[8];
-    AsdMdlObject *root;      // 0x08
-    u8 unk0c[0xc];
-    struct {
-        AsdMdlObject *node;      // 0x18
-        u8 unk1c[0x4c];
-    } children[3];         // stride 0x50
-};
+#include "classes/Obj4206e8.h"
+#include "map/LmapPlayerModel.h"
 
 extern "C" {
-
-/* Takes the rotation by value here; other callers pass three floats (see modelPartSetRotationDegrees.cpp). */
-void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, NodeVec3 degrees);
-
-static void setModelScale(AsdMdlObject *model, NodeVec3 scale)
+static void setModelRotation(AsdMdlObject *model, NodeVec3 rotation)
 {
-    modelPartSetRotationDegrees(model->node, 0, scale);
+    modelPartSetRotationDegrees(model->node, 0, rotation);
 }
 
-// Apply the scale to the group's root node and to each of its three child nodes.
-void FUN_003351e0(ScaleGroup *group, NodeVec3 scale)
+// Apply the same Euler rotation to the root model and every loaded part.
+void FUN_003351e0(Obj4206e8 *group, NodeVec3 rotation)
 {
-    setModelScale(group->root, scale);
-    for (s32 i = 0; i < 3; i++) {
-        if (group->children[i].node != NULL) {
-            setModelScale(group->children[i].node, scale);
-        }
+    setModelRotation(group->rootModel, rotation);
+    for (s32 i = 0; i < 3; ++i) {
+        if (group->slots[i].model != NULL)
+            setModelRotation(group->slots[i].model, rotation);
     }
 }
-
 } /* extern "C" */

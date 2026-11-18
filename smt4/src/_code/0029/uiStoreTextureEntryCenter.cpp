@@ -1,44 +1,22 @@
-/* NON_MATCHING: same arithmetic and arm layout; retail loads the rectangle's x/y after the size test and groups the size loads. */
-#include "common.h"
+/* NON_MATCHING: rectangle halfword load and arithmetic scheduling differ from retail. */
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
+#include "ui/UiTexturePlacement.h"
 
-extern "C" {
-
-/* A UI rectangle: width/height (top bit is a flag) at 4/6, origin at 8/10, and an optional size override pair at 0xC. */
-struct UiRect {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 width;
-    /* 0x06 */ u16 height;
-    /* 0x08 */ u16 x;
-    /* 0x0A */ u16 y;
-    /* 0x0C */ s16 *size;
-};
-
-/* The target object: a center point at 0x18. */
-struct CenterTarget {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ s16 centerX;
-    /* 0x1A */ s16 centerY;
-};
-
-UiRect *asdTMTexTableEntryAt(void *owner, u32 id);
-
-/* Stores the center of the looked-up rectangle (its size override if present) in the target. */
-void uiStoreTextureEntryCenter(CenterTarget *target, void *owner, u32 id)
+// Store the layout rectangle's center, using the placement's size when present.
+extern "C" void uiStoreTextureEntryCenter(PointDeltaWork *target, u32 table, s32 image)
 {
-    UiRect *rect = asdTMTexTableEntryAt(owner, id);
-    s16 *size = rect->size;
-
-    if (size == NULL) {
-        s32 centerX = rect->x + ((rect->width & 0x7FFF) >> 1);
-        s32 centerY = rect->y + ((rect->height & 0x7FFF) >> 1);
-        target->centerX = centerX;
-        target->centerY = centerY;
+    const TextureTableEntryIV *entry = asdTMTexTableEntryAt(table, image);
+    const TexturePlacementPrefixIV *placement = entry->placement;
+    if (placement == NULL) {
+        s32 centerX = static_cast<u16>(entry->x) + ((entry->width & 0x7FFF) >> 1);
+        s32 centerY = static_cast<u16>(entry->y) + ((entry->height & 0x7FFF) >> 1);
+        target->x = centerX;
+        target->y = centerY;
     } else {
-        s32 centerX = rect->x + size[0] / 2;
-        s32 centerY = rect->y + size[1] / 2;
-        target->centerX = centerX;
-        target->centerY = centerY;
+        s32 centerX = static_cast<u16>(entry->x) + placement->width / 2;
+        s32 centerY = static_cast<u16>(entry->y) + placement->height / 2;
+        target->x = centerX;
+        target->y = centerY;
     }
 }
-
-} /* extern "C" */

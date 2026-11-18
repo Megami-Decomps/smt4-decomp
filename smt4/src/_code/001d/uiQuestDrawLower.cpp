@@ -6,10 +6,10 @@ extern "C" {
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
 void FUN_001a6d98();
 
-u32 FUN_001ddc7c()
+s32 uiQuestDrawLower(u32 job)
 {
     UiQuest *quest = g_uiQuest;
-    if (!quest->panel.unkF2) {
+    if (!quest->panelView.panel.unkF2) {
         RenderCtx *render = g_titleScene;
         renderCtxPushA(render, renderCtxPackPassFlags(1, 0));
         switch (quest->state) {

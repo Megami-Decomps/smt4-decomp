@@ -25,7 +25,10 @@ public:
 
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u16 unk04;   /* starts at 7 */
-    /* 0x08 */ u32 handle;
+    union {
+        /* 0x08 */ u32 handle;
+        /* 0x08 */ AsdMdlObject *model;
+    };
     /* 0x0C */ void *buffer;
     /* 0x10 */ u8 unk10;
     /* 0x11 */ u8 unk11[0x3F];
@@ -37,6 +40,10 @@ class Obj4206e8 {
 public:
     Obj4206e8();
     virtual ~Obj4206e8();
+
+    /* The root and three optional model parts driven together by the map. */
+    AsdMdlObject *model() const { return rootModel; }
+    AsdMdlObject *partModel(s32 part) const { return slots[part].model; }
 
     /* Releases the three slots and the object's own handle. */
     void release()
@@ -50,10 +57,12 @@ public:
         }
     }
 
-private:
     /* 0x00: vtable pointer */
     /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 handle;
+    union {
+        /* 0x08 */ u32 handle;
+        /* 0x08 */ AsdMdlObject *rootModel;
+    };
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ Obj4206e8Slot slots[3];
 };

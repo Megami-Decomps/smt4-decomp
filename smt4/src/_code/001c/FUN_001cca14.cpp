@@ -72,7 +72,7 @@ extern unsigned long long statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0029a284. */
 /* Supplied declaration required: FUN_0029ab54. */
 extern unsigned short *FUN_0029acb0(void);
-extern int objectPartRunUnlessLocked(int);
+extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */

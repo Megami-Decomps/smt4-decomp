@@ -16,11 +16,11 @@ void uiQuestAnswerConfirm(s8 choice)
 {
     UiQuest *quest = g_uiQuest;
 
-    quest->panel.confirming = 1;
-    quest->panel.choice = choice;
+    quest->panelView.panel.confirming = 1;
+    quest->panelView.panel.choice = choice;
     FUN_00189c24();
     quest = g_uiQuest;
-    quest->panel.detailMode = 0;
+    quest->panelView.panel.detailMode = 0;
     if (quest->state != 13) {
         uiQuestLoadResources();
         FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + listCursorGetRowIfUnblocked(quest->cursor.data)], 1);

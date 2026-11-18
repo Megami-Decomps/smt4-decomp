@@ -33,12 +33,12 @@ int btlTalkBustUpCreate(void);
 int eventTexSetFlag(int);
 int scrSetResult(...);
 int uniteReleaseExit(void);
-int FUN_00331714(int *);
+int FUN_00331714(int *); // declcheck: local (romwright prototype; its types do not fit result/ResultSpoils.h: including it fails to compile)
 int btlTalkBustUpSetDemonTexture(unsigned int, int);
 int bustupCutAnimSetFlag(int);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(...);
-int FUN_003df168(int *, unsigned int);
+int FUN_003df168(int *, unsigned int); // declcheck: local (romwright prototype; its types do not fit result/ResultSpoils.h: including it fails to compile)
 int FUN_00417a60(...);
 int gameFlagSlotSetEnableBit(unsigned int, int);
 int optionsClearFlag1(void);

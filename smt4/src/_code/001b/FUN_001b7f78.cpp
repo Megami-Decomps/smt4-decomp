@@ -1,3 +1,4 @@
+#include "map/LmapPlayerModel.h"
 #include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b7f78` (_code @ 0x1b7f78, 0x8098 bytes) from smt4_v1.2.0.cxi.
@@ -102,7 +103,6 @@ int mapInterfaceSetStateTwo(void);
 int FUN_00273840(...);
 int saveSetNavigationPosition(...);
 int FUN_0027fc14(...);
-int mapDepartSpawnPlayerEffect(...);
 int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
 int FUN_0028d664(...);
@@ -121,7 +121,7 @@ int FUN_00273c54(void);
 int FUN_00273d34(void);
 int FUN_00273f5c(void);
 int FUN_00273f90(void);
-int FUN_00273fc0(void);
+int lmapUpdateSceneModels(void);
 int FUN_00274798(void);
 int FUN_00274fac(void);
 int FUN_0027522c(void);
@@ -525,7 +525,7 @@ extern int FUN_0027398c(int);
 /* Supplied declaration required: FUN_00273f5c. */
 extern char *campGetState(void);
 /* Supplied declaration required: FUN_00273f90. */
-/* Supplied declaration required: FUN_00273fc0. */
+/* Supplied declaration required: lmapUpdateSceneModels. */
 /* Supplied declaration required: FUN_00274798. */
 /* Supplied declaration required: FUN_00274fac. */
 /* Supplied declaration required: FUN_0027522c. */
@@ -3010,7 +3010,7 @@ LAB_001bb1d4:
     *(unsigned char *)(g_mapDepartWork + 10) = 1;
     mapDepartSyncModelVisibility();
     FUN_0029ae60(*(unsigned int *)(g_lmapScene + 0x194));
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     mapObjectVisibilityRestore();
     FUN_00273f90();
     puVar14[9] = 0x19;
@@ -3198,7 +3198,7 @@ LAB_001bbd00:
       mapInterfaceSetStateTwo();
     }
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = mapIfHasSelection();
     if (temp_v9 == 0) {
@@ -3458,7 +3458,7 @@ LAB_001bc008:
     lmapSetSceneId(2);
     FUN_002712dc();
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     messageSetConfirmDisplayMode();
     scrScriptProcessStartEntry(puVar14[0x15],0);
     DAT_0049fb45 = 0;
@@ -3470,7 +3470,7 @@ LAB_001bc008:
   case 0x29:
     FUN_002712dc();
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     temp_v10 = scrRunOpcodesStub(puVar14[0x15]);
     if (temp_v10 != 2) {
       return 0;
@@ -3874,7 +3874,7 @@ joined_r0x001bce40:
     FUN_003079b4();
     FUN_002712dc();
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     gameCopyPersistentSave();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     temp_v9 = FUN_00270e34();
@@ -3885,7 +3885,7 @@ joined_r0x001bce40:
       FUN_003079b4();
       FUN_002712dc();
       FUN_00276a3c();
-      FUN_00273fc0();
+      lmapUpdateSceneModels();
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
       puVar14[9] = 0x21;
@@ -3907,7 +3907,7 @@ joined_r0x001bce40:
     FUN_0027052c();
     FUN_001a8cf8();
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     FUN_00275364();
     mapRangeUpdateModelVisibilityAndTransforms();
     temp_v9 = mapMainPollScript();
@@ -5550,7 +5550,7 @@ LAB_001bfc30:
       slotSetRequest(1,10,0xff);
     }
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = screenFadesAllReady();
 joined_r0x001bfcb4:
@@ -5568,7 +5568,7 @@ joined_r0x001bfcb4:
       slotSetRequest(1,10,0xff);
     }
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     puVar14[10] = puVar14[10] + 1;
     temp_v9 = screenFadesAllReady();
     if (temp_v9 == 0) {
@@ -5584,7 +5584,7 @@ joined_r0x001bfcb4:
     if (puVar14[10] == 0) {
       frameTexApplyMode(1);
     }
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     puVar14[9] = 0x6f;
     puVar14[10] = 0;
     break;

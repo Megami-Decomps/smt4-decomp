@@ -27,7 +27,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0028cfbc. */
-extern int objectPartRunUnlessLocked(int);
+extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int recordTableGet(unsigned int, int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */

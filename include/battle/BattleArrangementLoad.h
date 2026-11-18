@@ -5,13 +5,15 @@
 
 struct BattleArrangementLoadState {
     /* 0x00 */ s32 state;
-    /* 0x04 */ u8 unk04[8];
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 recordCount; /* records the loader waits on (aocLoaderUpdateRecords) */
     /* 0x0C */ u32 frame;
     /* 0x10 */ u32 count;
 };
 
 typedef char BattleArrangementLoadStateOffsets[
     sizeof(BattleArrangementLoadState) == 0x14 &&
+    offsetof(BattleArrangementLoadState, recordCount) == 0x08 &&
     offsetof(BattleArrangementLoadState, frame) == 0x0C &&
     offsetof(BattleArrangementLoadState, count) == 0x10 ? 1 : -1];
 #endif

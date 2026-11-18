@@ -7,10 +7,10 @@
 #include "gamedata/NkmEnemyRecord.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "script/ScriptArgs.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "util/Random.h"
 
 extern "C" {
-void sysMemClear(void *memory, u32 size);
-s32 randRange(u32 maximum);
 
 u32 FUN_003b8d18(void)
 {

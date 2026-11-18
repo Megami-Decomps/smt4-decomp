@@ -24,7 +24,7 @@ int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int objectPartRunUnlessLocked(...);
+int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int buttonHelpSetText(...);
 int FUN_002a0cc8(...);
 int FUN_002b7bca(...);
@@ -33,7 +33,7 @@ int statusInventorySort(void);
 
 int FUN_0026adb4(void);
 int FUN_0026ae68(void);
-int uiStoreTextureEntryCenter(...);
+int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int flaggedEntrySetValueA(...);
 int ifTouchGetSelectionModeForRegion(...);
 int flaggedEntryGetValueA(...);

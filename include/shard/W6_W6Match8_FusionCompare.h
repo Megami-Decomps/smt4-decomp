@@ -19,4 +19,17 @@ static __inline s32 fusionCompareRaceLevelIdA(const u32 *first, const u32 *secon
     return result;
 }
 
+/* Orders two fusion components by race, then by level (higher first), then by id; a sort in the
+ * opposite direction passes them swapped. */
+static __inline s32 fusionCompareComponentsA(const NkmBaseRecordA *left, const NkmBaseRecordA *right)
+{
+    s32 result = left->race - right->race;
+    if (result != 0)
+        return result;
+    result = right->level - left->level;
+    if (result != 0)
+        return result;
+    return left->id - right->id;
+}
+
 #endif

@@ -16,7 +16,7 @@ int useCounterStart(void);
 int FUN_0029e328(int);
 int sortMenuCreate(int);
 int scrollOwnerSelectIndex(...);
-int objectPartRunUnlessLocked(...);
+int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int scrollListSetSelectionMarkChanged(...);
 int listCursorGetRowIfUnblocked(...);
 int eventQueueAddUniqueIfValid(int);

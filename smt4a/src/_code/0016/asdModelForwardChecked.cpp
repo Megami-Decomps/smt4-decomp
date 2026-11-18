@@ -1,25 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdModelForwardChecked` (_code @ 0x16f988, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 
-int FUN_0016fa4c(unsigned int);
+s32 FUN_0016fa4c(u32 handle, u32 arg, s32 level, u32 extra);
 
-extern unsigned char DAT_005c0b10; /* 0x5c0b10 */
+/* The service state at 0x5c0b10 (its session handle, DAT_005c0b18, follows at 0x8). */
+struct AsdModelService {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 openCount;
+};
 
-/* Supplied declaration required: FUN_0016fa4c. */
+extern AsdModelService DAT_005c0b10;
 
-
-void asdModelForwardChecked(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Forwards the call to the handler and returns its result. Returns the SDK error codes
+ * 0xd8a067f8 when the counter is not positive and 0xd9006405 when `level` is above 8. */
+s32 asdModelForwardChecked(u32 handle, u32 arg, s32 level, u32 extra)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((0 < (*(int *)((unsigned char *)&DAT_005c0b10 + 0x4))) && (param_3 < 9)) {
-    FUN_0016fa4c(param_1);
-    return;
-  }
-  return;
+    if (DAT_005c0b10.openCount <= 0) {
+        return 0xd8a067f8;
+    }
+    if (level > 8) {
+        return 0xd9006405;
+    }
+    return FUN_0016fa4c(handle, arg, level, extra);
 }
 
 } /* extern "C" */

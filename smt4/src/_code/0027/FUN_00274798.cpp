@@ -11,7 +11,7 @@ int FUN_002878e4(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
-int modelPartSetRotationDegrees(unsigned int, int);
+int modelPartSetRotationDegrees(unsigned int, int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int nodeSetTranslation(unsigned int, int);
 int modelSelectPrimaryMotion(unsigned int);
 int FUN_002b2b64(unsigned int);

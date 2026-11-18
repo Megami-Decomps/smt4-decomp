@@ -59,7 +59,7 @@ int FUN_00297b94(...);
 int FUN_00297ca4(...);
 int playSceneSetState(...);
 int scrollOwnerSelectIndex(...);
-int objectPartRunUnlessLocked(...);
+int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int scrollListSetSelectionMarkChanged(char *, int);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
@@ -147,7 +147,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-extern int FUN_0029e958(int);
+extern int FUN_0029e958(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 /* Supplied declaration required: scrollListSetSelectionMarkChanged. */
 extern int flagWordTestBit(unsigned int *, unsigned int);
 /* Supplied declaration required: buttonHelpSetText. */

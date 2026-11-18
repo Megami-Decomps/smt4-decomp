@@ -1,37 +1,25 @@
-#include "shard/Shard0046.h"
+#include "classes/Obj5333c0.h"
+#include "script/scrScriptProcess.h"
+
+struct TableGroupHeader;
 
 extern "C" {
+s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *name);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 index);
 
-typedef struct PickObj {
-    /* 0x000 */ u8 unk000[0x284];
-    /* 0x284 */ u32 key284;
-    /* 0x288 */ u8 unk288[4];
-    /* 0x28C */ u32 job28C;
-    /* 0x290 */ u32 key290;
-    /* 0x294 */ u8 unk294[4];
-    /* 0x298 */ u32 job298;
-    /* 0x29C */ u8 unk29C[0x18];
-    /* 0x2B4 */ u32 *current;
-} PickObj;
-
-extern s32 tableGroupFindEntryIndex(u32 key, u32 arg);
-extern void scrScriptProcessStartEntry(u32 job, s32 index);
-
-/* Picks the entry through tableGroupFindEntryIndex (the +0x290 key first, else the +0x284 key with `arg`) and starts it. */
-s32 pickObjStart(PickObj *obj, u32 arg)
+// Try the secondary script's entry map first, then fall back to the primary script.
+s32 pickObjStart(Obj5333c0 *scene, const char *entry)
 {
-    s32 index = tableGroupFindEntryIndex(obj->key290, arg);
-    u32 *job;
-
+    s32 index = tableGroupFindEntryIndex(static_cast<TableGroupHeader *>(scene->secondaryData), entry);
+    ScriptProcess **script;
     if (index != -1) {
-        job = &obj->job298;
+        script = &scene->secondary;
     } else {
-        index = tableGroupFindEntryIndex(obj->key284, arg);
-        job = &obj->job28C;
+        index = tableGroupFindEntryIndex(static_cast<TableGroupHeader *>(scene->primaryData), entry);
+        script = &scene->primary;
     }
-    obj->current = job;
-    scrScriptProcessStartEntry(*job, index);
+    scene->script = script;
+    scrScriptProcessStartEntry(*script, index);
     return index;
 }
-
-} /* extern "C" */
+}

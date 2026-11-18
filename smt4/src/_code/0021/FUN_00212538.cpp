@@ -22,7 +22,7 @@ int CONCAT44(...);
 int FUN_0025117c(...);
 int statusStripDraw(...);
 int FUN_00251d98(...);
-int objectPartRunUnlessLocked(...);
+int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int gxResetColorQuadToWhite(void);
 int vec2GetYInt(...);
 int vec2GetXInt(...);

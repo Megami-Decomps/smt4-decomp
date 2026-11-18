@@ -36,7 +36,7 @@ void messageMainSetTargetFlags(s32 flags);
 s32 FUN_002c1658(s32 a, s32 b);
 s32 gameFlagIsSet(u32 flag);
 void eventQueueAddUnique(s32 event);
-void FUN_00269dc8(void);
+void uiQuestCreate(void);
 void FUN_00223cf0(void);
 void FUN_002636b0(void);
 void FUN_002f6208(void);
@@ -65,7 +65,7 @@ void FUN_00382f4c(ChoiceMenu *menu)
                 }
                 if (FUN_002c1658(10, 1) != 0 && gameFlagIsSet(0x24) != 0) {
                     eventQueueAddUnique(0x100016F);
-                    FUN_00269dc8();
+                    uiQuestCreate();
                     FUN_00223cf0();
                     FUN_002636b0();
                     menu->closed = 0;

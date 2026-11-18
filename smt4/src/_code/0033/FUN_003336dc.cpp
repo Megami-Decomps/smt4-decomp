@@ -1,27 +1,22 @@
 /* NON_MATCHING: retail counts the used slots with a two-iteration loop over interleaved halfword pairs and lays the per-count returns out differently; the id selection is the same. */
 #include "common.h"
 #include "quest_center/QuestRecord.h"
+#include "quest_center/QuestRuntime.h"
+#include "quest_center/QuestStatus.h"
 
 extern "C" {
-
-typedef struct QuestFlagEntry {
-    u8 unk00[2];
-    u8 mask;
-} QuestFlagEntry;
-
-QuestFlagEntry *questGetRuntimeStatus(void);
 
 /* The message id describing quest record `id`: by its kind, the id of its first slot and how many
  * of its four slots are used. Returns -1 when there is none. */
 s32 FUN_003336dc(u32 id, u8 mask)
 {
-    QuestFlagEntry *entry = questGetRuntimeStatus();
+    const QuestRuntimeStatus *entry = questGetRuntimeStatus(id);
     QuestRecord *record = questDataGetRecord(id);
 
     if (record == NULL) {
         return -1;
     }
-    if ((entry->mask & mask) == 0 && (record->flags & 0x20) != 0) {
+    if ((entry->stateFlags & mask) == 0 && (record->flags & 0x20) != 0) {
         return 0x11;
     }
     if ((record->flags & 0x10) != 0) {

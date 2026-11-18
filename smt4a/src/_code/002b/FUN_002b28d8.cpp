@@ -1,16 +1,4 @@
-#include "camp/Unite/UniteGlobals.h"
-#include "gamedata/NkmBaseRecordA.h"
-
-static inline s32 compareFusionComponents(const NkmBaseRecordA *left, const NkmBaseRecordA *right)
-{
-    s32 result = left->race - right->race;
-    if (result != 0)
-        return result;
-    result = right->level - left->level;
-    if (result != 0)
-        return result;
-    return left->id - right->id;
-}
+#include "shard/W6_W6Match8_FusionCompare.h"
 
 extern "C" {
 
@@ -29,13 +17,13 @@ s32 FUN_002b28d8(const u16 *left, const u16 *right)
         u16 rightId = work->pairList.pairs[*right].packedIds & 0x7FFF;
         const NkmBaseRecordA *a = nkmBaseGetRecord(leftId);
         const NkmBaseRecordA *b = nkmBaseGetRecord(rightId);
-        result = compareFusionComponents(a, b);
+        result = fusionCompareComponentsA(a, b);
         if (result == 0) {
             leftId = (work->pairList.pairs[*left].packedIds & 0x3FFFFFFF) >> 15;
             rightId = (work->pairList.pairs[*right].packedIds & 0x3FFFFFFF) >> 15;
             a = nkmBaseGetRecord(leftId);
             b = nkmBaseGetRecord(rightId);
-            result = compareFusionComponents(a, b);
+            result = fusionCompareComponentsA(a, b);
         }
     }
     return result;

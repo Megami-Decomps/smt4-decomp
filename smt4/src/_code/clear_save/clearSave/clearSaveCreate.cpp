@@ -15,7 +15,6 @@ void commonBgStopChildAndBeginTransition();
 void *asdLoadFileSyncDefault(const char *path);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 entry);
 void FUN_00282bfc(s32 screen, s32 alpha);
-u32 FUN_001b10e4();
 u32 FUN_001e1418();
 void clearSaveDestroy();
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
@@ -45,7 +44,7 @@ void clearSaveCreate(s32 mode)
         FUN_00282bfc(0, 0xFF);
         FUN_00282bfc(1, 0xFF);
     }
-    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("clearSave C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001b10e4), reinterpret_cast<AsdProcFunc>(clearSaveDestroy), reinterpret_cast<u32>(g_clearSave));
+    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("clearSave C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(clearSaveUpdate), reinterpret_cast<AsdProcFunc>(clearSaveDestroy), reinterpret_cast<u32>(g_clearSave));
     work = g_clearSave;
     work->process = process;
     taskCreateDraw("clearSave L", 0x65, 0, 0, FUN_001e1418, 0, work, process);

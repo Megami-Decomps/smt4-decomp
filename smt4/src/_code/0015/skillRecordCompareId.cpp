@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Compares record keys for sorting. */
-s32 FUN_00151b88(const RecordSortEntry *left, const RecordSortEntry *right)
+s32 skillRecordCompareId(const RecordSortEntry *left, const RecordSortEntry *right)
 {
     return left->key - right->key;
 }

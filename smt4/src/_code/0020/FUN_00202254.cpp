@@ -8,7 +8,7 @@ extern "C" {
 
 extern unsigned char* g_mapCamera;
 
-int modelPartSetRotationDegrees(unsigned int, int);
+int modelPartSetRotationDegrees(unsigned int, int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int nodeSetTranslation(unsigned int, int, float *);
 void FUN_002e29c0(float x, float z, float heading);
 float cameraGetTargetAngle(void);

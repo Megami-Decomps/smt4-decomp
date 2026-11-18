@@ -51,7 +51,9 @@ typedef struct AocSystem {
     /* 0x398 */ QuestRecord *quests;
     /* 0x39C */ AocRecordTable table08[6];  /* data table 8, sections 0-5 */
     /* 0x3E4 */ AocRecordList table23[8];   /* data table 0x23, sections 0-7 */
-    /* 0x424 */ u8 unk424[0x20];
+    /* 0x424 */ u8 unk424[0x10];
+    /* 0x434 */ AocRecordList skills;          /* data table 4, section 0 (0x68-byte SkillDataRecord rows) */
+    /* 0x43C */ AocRecordList table43C;        /* 0x3C-byte rows sorted by the id at 0x20 */
     /* 0x444 */ s32 aiDemonId;              /* the demon whose add-on AI script is in use, -1 when none */
     /* 0x448 */ u32 phase;
     /* 0x44C */ u8 unk44C[4];
@@ -64,6 +66,7 @@ typedef char AocSystemLayoutCheck[sizeof(AocSystem) == 0x450 &&
     offsetof(AocSystem, table1bCount) == 0x384 && offsetof(AocSystem, entries) == 0x390 &&
     offsetof(AocSystem, quests) == 0x398 && offsetof(AocSystem, table08[3].records) == 0x3C4 &&
     offsetof(AocSystem, table23[4].count) == 0x404 && offsetof(AocSystem, table23[7].records) == 0x420 &&
+    offsetof(AocSystem, skills) == 0x434 && offsetof(AocSystem, table43C) == 0x43C &&
     offsetof(AocSystem, aiDemonId) == 0x444 && offsetof(AocSystem, phase) == 0x448 ? 1 : -1];
 
 extern "C" AocSystem *g_aocSystem;

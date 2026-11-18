@@ -31,7 +31,6 @@ typedef struct {
 
 extern int g_mapDepart; /* 0x4475b8 */
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0025b670. */
@@ -125,7 +124,7 @@ unsigned int FUN_002ca09c(void)
           texDrawCompositeSprite(2,0x1c,0x1e,(int)temp_v12,0,0xb);
         }
         temp_v2 = 0;
-        if (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6))) {
+        if (temp_v2 < (*(short *)((unsigned char *)&g_mapDepartState + 0xa6))) {
           do {
             temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,temp_v2 + 0x1105));
             temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,temp_v2 + 0x110d));
@@ -187,7 +186,7 @@ unsigned int FUN_002ca09c(void)
             texDrawTableEntryAtStoredOrigin(2,0xd,(int)temp_v0 % 10,(int)(temp_v10 + (float)temp_v11 + temp_v12),
                          (int)*(short *)(temp_v15 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6)));
+          } while (temp_v2 < (*(short *)((unsigned char *)&g_mapDepartState + 0xa6)));
         }
       }
     }

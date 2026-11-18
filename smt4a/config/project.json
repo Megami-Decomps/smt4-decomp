@@ -41634,12 +41634,12 @@
     },
     {
       "address": "0x19c920",
-      "function": "FUN_0019c920",
+      "function": "asdVramBlockListInsert",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_0019c920.o",
+      "object": "build/obj/_code/0019/asdVramBlockListInsert.o",
       "size": 148,
-      "source": "src/_code/0019/FUN_0019c920.cpp",
-      "target": "orig/target/_code/0019/FUN_0019c920.o",
+      "source": "src/_code/0019/asdVramBlockListInsert.cpp",
+      "target": "orig/target/_code/0019/asdVramBlockListInsert.o",
       "thumb": false
     },
     {
@@ -59138,12 +59138,12 @@
     {
       "address": "0x241058",
       "file": "clear_save/clearSave",
-      "function": "FUN_00241058",
+      "function": "clearSaveUpdate",
       "module": "_code",
-      "object": "build/obj/_code/clear_save/clearSave/FUN_00241058.o",
+      "object": "build/obj/_code/clear_save/clearSave/clearSaveUpdate.o",
       "size": 1476,
-      "source": "src/_code/clear_save/clearSave/FUN_00241058.cpp",
-      "target": "orig/target/_code/clear_save/clearSave/FUN_00241058.o",
+      "source": "src/_code/clear_save/clearSave/clearSaveUpdate.cpp",
+      "target": "orig/target/_code/clear_save/clearSave/clearSaveUpdate.o",
       "thumb": false
     },
     {
@@ -94878,12 +94878,12 @@
     },
     {
       "address": "0x314ef8",
-      "function": "FUN_00314ef8",
+      "function": "btlDebugClose",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_00314ef8.o",
+      "object": "build/obj/_code/0031/btlDebugClose.o",
       "size": 180,
-      "source": "src/_code/0031/FUN_00314ef8.cpp",
-      "target": "orig/target/_code/0031/FUN_00314ef8.o",
+      "source": "src/_code/0031/btlDebugClose.cpp",
+      "target": "orig/target/_code/0031/btlDebugClose.o",
       "thumb": false
     },
     {
@@ -174413,12 +174413,12 @@
     },
     {
       "address": "0x50d72c",
-      "function": "clearTwoWordsAndByte",
+      "function": "__ARM_common_memclr4_9",
       "module": "_code",
-      "object": "build/obj/_code/0050/clearTwoWordsAndByte.o",
+      "object": "build/obj/_code/0050/__ARM_common_memclr4_9.o",
       "size": 20,
-      "source": "src/_code/0050/clearTwoWordsAndByte.cpp",
-      "target": "orig/target/_code/0050/clearTwoWordsAndByte.o",
+      "source": "src/_code/0050/__ARM_common_memclr4_9.cpp",
+      "target": "orig/target/_code/0050/__ARM_common_memclr4_9.o",
       "thumb": false
     },
     {

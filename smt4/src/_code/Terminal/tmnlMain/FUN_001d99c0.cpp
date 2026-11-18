@@ -10,7 +10,7 @@ extern "C" {
 int asdModelSlotSetColor(...);
 int asdModelSlotSetTint(...);
 int floatInterpolateOverDuration(...);
-int FUN_00297684(void);
+int FUN_00297684(void); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int buttonHelpSetContext(...);
 int VectorSignedToFloat(...);
 
@@ -222,7 +222,7 @@ extern int FUN_002c79c4(unsigned int);
 /* Supplied declaration required: FUN_002cf570. */
 /* Supplied declaration required: FUN_002e2948. */
 /* Supplied declaration required: FUN_002fc008. */
-extern int FUN_00335118(unsigned int);
+extern int FUN_00335118(unsigned int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 
 
 unsigned int FUN_001d99c0(void)

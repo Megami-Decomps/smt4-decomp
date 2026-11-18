@@ -1,9 +1,9 @@
+#include "map/LmapPlayerModel.h"
 #include "shard/W6_W6Match5_ArmySummon.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 void nodeSetTranslation3f(AsdMdlNode *node, s32 index, NodeVec3 translation);
-void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, NodeVec3 degrees);
 
 // Restore the summoned model's root translation and rotation to zero.
 void armySummonResetRootTransform(ArmySummonState *state)

@@ -93,7 +93,7 @@ extern int uniteStateIsDone(void);
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_00215bd0. */
-extern int idListAnyValid(void);
+extern int idListAnyValid(void); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0022e714(void);
 extern int FUN_0022e750(void);

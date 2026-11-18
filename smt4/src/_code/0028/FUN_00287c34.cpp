@@ -246,7 +246,6 @@ extern unsigned int DAT_0049fd08; /* 0x49fd08 */
 extern unsigned int DAT_0049fd0c; /* 0x49fd0c */
 extern unsigned char DAT_0049fd10; /* 0x49fd10 */
 extern unsigned char DAT_0049fd11; /* 0x49fd11 */
-extern unsigned int DAT_0049fd14; /* 0x49fd14 */
 extern unsigned int DAT_0049fd18; /* 0x49fd18 */
 extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 extern unsigned int DAT_0049fd20; /* 0x49fd20 */
@@ -485,7 +484,7 @@ void FUN_00287c34(int param_1)
   DAT_0049fd0c = 0xffffffff;
   DAT_0049fd10 = 0;
   DAT_0049fd11 = 1;
-  DAT_0049fd14 = 0xffffffff;
+  g_mapSelection.selection.group = 0xffffffff;
   DAT_0049fd18 = 0xffffffff;
   DAT_0049fd1c = 0xffffffff;
   DAT_0049fd20 = 0xffffffff;

@@ -54,7 +54,7 @@ inline MemoryEntryView* claimEntry(MemoryPoolView* pool)
 
 extern "C" {
 extern u8 g_asdMemory;
-s32 FUN_0019c920(u32* state);
+s32 asdVramBlockListInsert(u32* state); // declcheck: local (the shared declaration does not compile here or changes this unit)
 }
 
 // Initialize the object, claim a pool entry, and initialize the embedded state.
@@ -72,5 +72,5 @@ extern "C" void FUN_00140728(ObjectView* object, u32 entryValue, u32 value)
     MemoryEntryView* entry = claimEntry(memory->unk18);
     entry->unk04 = value;
     entry->unk00 = entryValue;
-    FUN_0019c920(&object->unk0C);
+    asdVramBlockListInsert(&object->unk0C);
 }

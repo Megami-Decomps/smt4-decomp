@@ -5,10 +5,9 @@
 namespace { struct State { u8 padding[0x2f8]; u8 blocked; }; }
 
 extern "C" {
-extern s32 DAT_0049fd14;
 u32 FUN_002cdbbc(void)
 {
-    if (g_gameState.map.savedLocationSet != 0 || DAT_0049fd14 != -1) { asdSequenceRequest(6, NULL, 0); }
+    if (g_gameState.map.savedLocationSet != 0 || g_mapSelection.selection.group != -1) { asdSequenceRequest(6, NULL, 0); }
     return 1;
 }
 }

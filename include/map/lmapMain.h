@@ -12,6 +12,7 @@
 class MoriModelContent;   /* Model/MoriModelContent.h */
 
 struct AsdMdlObject;
+class Obj4206e8;
 class Obj557af8;
 class Obj557c48;
 
@@ -148,8 +149,11 @@ typedef struct LmapScene {
     /* 0x058 */ f32 moveSpeed;
     /* 0x05C */ u8 moveActive;
     /* 0x05D */ u8 unk05D[3];
-    /* 0x060 */ u32 unk060;
-    /* 0x064 */ u8 unk064[4];
+    /* 0x060 */ u32 motionTicks;
+    union {
+        /* 0x064 */ f32 previousMotionFrame;
+        /* 0x064 */ s32 previousMotionFrameBits; /* retail tests frame crossings as signed float bits */
+    };
     /* 0x068 */ f32 unk068;
     /* 0x06C */ u8 unk06C;
     /* 0x06D */ u8 unk06D[3];
@@ -163,37 +167,52 @@ typedef struct LmapScene {
     /* 0x090 */ u32 unk090;
     /* 0x094 */ f32 unk094;
     /* 0x098 */ u8 unk098[0x9C];
-    /* 0x134 */ u8 unk134;
+    /* 0x134 */ u8 updateModels;
     /* 0x135 */ u8 unk135[3];
     /* 0x138 */ LmapScenePositionTransition transition;
     /* 0x15C */ f32 nearClip;  /* 100 */
     /* 0x160 */ f32 farClip;   /* 1000 */
     /* 0x164 */ struct AsdMdlObject *stageModel; /* the stage's model, swapped with the stage */
-    /* 0x168 */ s32 unk168;
-    /* 0x16C */ s32 unk16C;
+    /* 0x168 */ s32 actorMotion;
+    /* 0x16C */ s32 appliedActorMotion;
     /* 0x170 */ s32 modelSwapStep;
-    /* 0x174 */ struct AsdMdlObject *models[3];  /* [1], [2]: from map files 5 and 6 */
-    /* 0x180 */ u8 unk180[5];
+    union {
+        /* 0x174 */ struct AsdMdlObject *models[3];
+        struct {
+            /* 0x174 */ struct AsdMdlObject *encounterMarker;
+            /* 0x178 */ struct AsdMdlObject *mapFile5;
+            /* 0x17C */ struct AsdMdlObject *mapFile6;
+        } markers;
+    };
+    union {
+        /* 0x180 */ u8 unk180[5];
+        struct {
+            /* 0x180 */ u8 showFile6;
+            /* 0x181 */ u8 restartFile6Motion;
+            /* 0x182 */ u8 showFile5;
+            /* 0x183 */ u8 restartFile5Motion;
+            /* 0x184 */ u8 unk184;
+        } markerState;
+    };
     /* 0x185 */ u8 unk185[3];
     /* 0x188 */ u32 unk188;
-    /* 0x18C */ s32 unk18C;
-    /* 0x190 */ u32 unk190;
-    /* 0x194 */ LmapScript *playerModel; /* the player-model holder (an Obj4207d0) */
+    /* 0x18C */ s32 positionalSound;
+    /* 0x190 */ s32 positionalSoundFrames;
+    /* 0x194 */ Obj4206e8 *playerModel; /* a derived holder owns the root and three outfit parts */
     /* 0x198 */ u8 restoreChannelValues;
     /* 0x199 */ u8 unk199[3];
     /* 0x19C */ u32 channelValues[3];    /* the player model's three part channels */
-    /* 0x1A8 */ u32 unk1A8;
-    /* 0x1AC */ u32 unk1AC;
-    /* 0x1B0 */ u32 unk1B0;
-    /* 0x1B4 */ u16 unk1B4;
-    /* 0x1B6 */ u16 unk1B6;
-    /* 0x1B8 */ u16 unk1B8;
+    /* 0x1A8 */ u32 requestedChannelValues[3];
+    /* 0x1B4 */ u16 equippedHead;
+    /* 0x1B6 */ u16 equippedBody;
+    /* 0x1B8 */ u16 equippedLegs;
     /* 0x1BA */ u8 unk1BA[2];
 } LmapScene;
 typedef char LmapSceneOffsetsCheck[offsetof(LmapScene, pose) == 0x1C && offsetof(LmapScene, moveMode) == 0x54 &&
     offsetof(LmapScene, transition) == 0x138 && offsetof(LmapScene, stageModel) == 0x164 &&
     offsetof(LmapScene, playerModel) == 0x194 && offsetof(LmapScene, channelValues) == 0x19C &&
-    offsetof(LmapScene, unk1B8) == 0x1B8 ? 1 : -1];
+    offsetof(LmapScene, markers.mapFile5) == 0x178 && offsetof(LmapScene, markerState.showFile5) == 0x182 &&
+    offsetof(LmapScene, requestedChannelValues) == 0x1A8 && offsetof(LmapScene, equippedLegs) == 0x1B8 ? 1 : -1];
 
 /* The map state block in Apocalypse (0x9370 bytes, allocated by FUN_00272970). */
 typedef struct LmapMainStateA {

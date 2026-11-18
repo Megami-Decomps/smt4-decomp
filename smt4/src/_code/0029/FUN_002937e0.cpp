@@ -1,4 +1,5 @@
 /* NON_MATCHING: branch layout now matches retail (fixed-capacity arm placed before the unlocked-slot arm); the second page's capacity reads now schedule like retail; remaining: the column results are held in swapped saved registers (r7/r8). */
+#include "camp/CampMenuEntry.h"
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -10,7 +11,6 @@ struct PartyCapacityView {
     u8 capacity;
 };
 extern "C" {
-s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 listCursorGetRowIfUnblocked(const GridNavigation *grid);
 void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);

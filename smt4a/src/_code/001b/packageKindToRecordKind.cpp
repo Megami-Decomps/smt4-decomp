@@ -1,52 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `packageKindToRecordKind` (_code @ 0x1b3214, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-
-unsigned int packageKindToRecordKind(int param_1)
-
+// Map a kind id to its counterpart id, -1 when it has none.
+s32 packageKindToRecordKind(s32 kind)
 {
-  if (param_1 == 0x10) {
-    return 0x14;
-  }
-  if (param_1 < 0x11) {
-    if (param_1 == 2) {
-      return 0xd;
-    }
-    if (param_1 < 3) {
-      if (param_1 == 0) {
+    switch (kind) {
+    case 0:
         return 9;
-      }
-      if (param_1 == 1) {
-        return 0xe;
-      }
+    case 1:
+        return 14;
+    case 2:
+        return 13;
+    case 6:
+        return 17;
+    case 15:
+        return 22;
+    case 16:
+        return 20;
+    case 22:
+        return 10;
+    case 23:
+        return 15;
+    case 25:
+        return 58;
+    case 52:
+        return 53;
+    default:
+        return -1;
     }
-    else {
-      if (param_1 == 6) {
-        return 0x11;
-      }
-      if (param_1 == 0xf) {
-        return 0x16;
-      }
-    }
-  }
-  else {
-    if (param_1 == 0x16) {
-      return 10;
-    }
-    if (param_1 == 0x17) {
-      return 0xf;
-    }
-    if (param_1 == 0x19) {
-      return 0x3a;
-    }
-    if (param_1 == 0x34) {
-      return 0x35;
-    }
-  }
-  return 0xffffffff;
 }
 
 } /* extern "C" */

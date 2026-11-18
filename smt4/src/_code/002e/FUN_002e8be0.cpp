@@ -1,4 +1,5 @@
 /* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18 and permutes the 40.0f and view-z registers) */
+#include "map/LmapPlayerModel.h"
 #include "map/mapDepart.h"
 #include "map/LmapGlobals.h"
 #include "util/TrigF32.h"
@@ -23,7 +24,6 @@ void mapIfSetMode1(void);
 s32 FUN_0027ee9c(void);
 void lmapSetSceneId(u32 id);
 void FUN_0027fc14(s32 mode);
-void mapDepartSpawnPlayerEffect(s32 mode);
 void mapSelectContainingRegions(f32 x, f32 z);
 void FUN_002804ec(MapVector *position);
 void buttonHelpSetPreset(s32 preset);

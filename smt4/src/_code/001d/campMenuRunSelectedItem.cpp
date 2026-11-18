@@ -44,7 +44,7 @@ void bibleOpenMode3(s32 unused);
 u32 FUN_002e24c8(void);
 void buttonHelpSetText(const s8 *text, u32 style);
 u32 scrEffectRunIfActive(void);
-void FUN_00269dc8(void);
+void uiQuestCreate(void);
 void FUN_002cf780(void);
 void FUN_00223cf0(void);
 void uniteSetMode(u8 mode);
@@ -229,7 +229,7 @@ void campMenuRunSelectedItem(void)
         guestWinRequestClose();
         messageDismissNumericBanner(1);
         campChangeState(0x23);
-        FUN_00269dc8();
+        uiQuestCreate();
         FUN_002cf780();
         camp->questMenuOpened = 1;
         return;
@@ -238,7 +238,7 @@ void campMenuRunSelectedItem(void)
         guestWinRequestClose();
         messageDismissNumericBanner(1);
         campChangeState(0x24);
-        FUN_00269dc8();
+        uiQuestCreate();
         FUN_00223cf0();
         camp->questListOpened = 1;
         return;

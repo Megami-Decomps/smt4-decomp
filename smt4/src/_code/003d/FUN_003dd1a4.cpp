@@ -10,7 +10,7 @@ int FUN_002276f8(...);
 int asdModelClearSlotColors(...);
 int modelSetAnimationChannels(...);
 int animPlayerSetLoopPolicy(...);
-int modelPartSetRotationDegrees(...);
+int modelPartSetRotationDegrees(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int btlGetMainState(...);
 int asdLoadFileAsyncSimple(...);
 int lightOwnerRegister(...);

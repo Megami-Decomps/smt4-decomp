@@ -4,20 +4,12 @@
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "addon/AocSystemA.h"
 #include "gamedata/GamePlayerData.h"
+#include "result/ResultSpoils.h"
 
 // An entry that comes from the add-on content: its id followed by the body.
 struct AocDropEntry {
     u32 id;
     SubQuestLootRecordA body;  // 0x04
-};
-
-// What a reward roll produced.
-struct RewardResult {
-    u32 items[6];   // 0x00
-    u32 counts[6];  // 0x18
-    u32 money;      // 0x30
-    u32 value;      // 0x34
-    s16 source;     // 0x38 the encounter index the reward came from
 };
 
 extern "C" {
@@ -44,7 +36,7 @@ static __inline SubQuestLootRecordA *findDropEntry(u16 id)
 }
 
 // Rolls the reward of encounter `index` into `result`.
-void FUN_003df168(RewardResult *result, s32 index)
+void FUN_003df168(ResultSpoilsA *result, s32 index)
 {
     QuestRecordA *encounter = questDataGetRecord(index);
     if (encounter == NULL) {

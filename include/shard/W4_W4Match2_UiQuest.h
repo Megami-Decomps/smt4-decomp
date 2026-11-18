@@ -4,6 +4,9 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "ui/UiSpriteState.h"
+
+struct ScriptProcess;
 
 typedef struct UiQuestCursor {
     union {
@@ -53,25 +56,38 @@ typedef struct UiQuestPanel {
 } UiQuestPanel;
 
 typedef struct UiQuest {
-    /* 0x000 */ u8 unk000[4];
+    /* 0x000 */ u32 process;  /* UIQuest Calc, parent of the draw tasks */
     /* 0x004 */ s32 state;
     /* 0x008 */ s32 previousState;
     /* 0x00C */ s32 nextState;
     /* 0x010 */ s32 timer;
-    /* 0x014 */ u8 unk014[0x20];
-    /* 0x034 */ u8 mainSprite[0x8C];
+    /* 0x014 */ UiResourceParameters resources;
     union {
-        /* 0x0C0 */ u8 unk0C0[0x440];
+        /* 0x034 */ UiSpriteState sprites[10];
+        /* 0x034 */ u8 mainSprite[0x8C];
         struct {
-            /* 0x0C0 */ u8 padding[0x3D4];
+            /* 0x034 */ u8 unk034[0x460];
             /* 0x494 */ u8 timer[0x6C];
         } detailAnimation;
+        struct {
+            /* 0x034 */ u8 unk034[0x578];
+            /* 0x5AC */ void *messages;
+            /* 0x5B0 */ void *program;
+            /* 0x5B4 */ ScriptProcess *process;
+        } script;
+        /* Its leading padding covers the last two sprite slots and the script. */
+        struct {
+            /* 0x034 */ u8 unk034[0x4CC];
+            /* 0x500 */ UiQuestPanel panel;
+        } panelView;
     };
-    /* 0x500 */ UiQuestPanel panel;
     /* 0x660 */ UiQuestCursor cursor;
     /* 0x78A */ u16 list[250];
     /* 0x97E */ s16 questId;
     /* 0x980 */ u16 unk980;
+    /* 0x982 */ u16 selectedId;
+    /* 0x984 */ u16 detailMode;
+    /* 0x986 */ u8 unk986[0x76];
 
     /* The state history as the array it is: state, then previousState. */
     s32 *states()
@@ -95,7 +111,9 @@ static __inline void uiQuestEnterState(UiQuest *quest, s32 next)
     quest->timer = 0;
 }
 
-typedef char UiQuestSizeCheck[sizeof(UiQuest) == 0x984 ? 1 : -1];
+typedef char UiQuestSizeCheck[sizeof(UiQuest) == 0x9FC && offsetof(UiQuest, resources) == 0x14 &&
+    offsetof(UiQuest, sprites) == 0x34 && offsetof(UiQuest, script.process) == 0x5B4 &&
+    offsetof(UiQuest, selectedId) == 0x982 && offsetof(UiQuest, detailMode) == 0x984 ? 1 : -1];
 typedef char UiQuestPanelOffsets[offsetof(UiQuestPanel, texts) == 0xD4 && offsetof(UiQuestPanel, sysImages) == 0xE4 &&
     offsetof(UiQuestPanel, confirming) == 0xF1 ? 1 : -1];
 typedef char UiQuestSelectorOffsets[
@@ -106,9 +124,8 @@ typedef char UiQuestSelectorOffsets[
 typedef char UiQuestPanelEntryDirectoryOffsets[
     offsetof(UiQuestPanel, entryDirectory) == 0xE0 &&
     offsetof(UiQuestPanel, entryOwnership.borrowed) == 0xF7 &&
-    sizeof(UiQuestPanel) == 0x160 && sizeof(UiQuest) == 0x984 ? 1 : -1];
+    sizeof(UiQuestPanel) == 0x160 ? 1 : -1];
 typedef char UiQuestDetailModeOffsetCheck[
-    offsetof(UiQuestPanel, detailMode) == 0xC4 && offsetof(UiQuest, panel) == 0x500 &&
-    sizeof(UiQuestPanel) == 0x160 && sizeof(UiQuest) == 0x984 ? 1 : -1];
+    offsetof(UiQuestPanel, detailMode) == 0xC4 && offsetof(UiQuest, panelView.panel) == 0x500 ? 1 : -1];
 
 #endif

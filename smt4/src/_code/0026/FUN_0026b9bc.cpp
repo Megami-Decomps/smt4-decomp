@@ -1,4 +1,5 @@
 /* NON_MATCHING: only register allocation differs (retail spills the expanded-grid pointer to the stack and keeps the first row/column in r7/fp; build spills the first row). */
+#include "camp/CampMenuEntry.h"
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -13,7 +14,6 @@ struct PartyStockView {
 
 extern "C" {
 PartyStockView *gameGetSlotTable(void);
-s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 listCursorGetRowIfUnblocked(const GridNavigation *grid);
 void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);

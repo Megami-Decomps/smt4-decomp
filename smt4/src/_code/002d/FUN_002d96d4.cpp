@@ -80,7 +80,7 @@ extern int partyClassifyRequestedSources(unsigned int, unsigned int, unsigned ch
 extern int FUN_0029d644(unsigned int *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
-extern int objectPartRunUnlessLocked(unsigned int *);
+extern int objectPartRunUnlessLocked(unsigned int *); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: itemGetFlagBit1. */
 extern int listCursorGetRowIfUnblocked(unsigned int *);

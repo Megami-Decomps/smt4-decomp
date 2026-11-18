@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00261a28` (_code @ 0x261a28, 0xb14 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "clear_save/clearSave.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/FlagValueIsPositive.h"
 
@@ -112,7 +113,7 @@ extern unsigned long long bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
-void FUN_00261a28(int param_1)
+void FUN_00261a28(const u8 *options)
 
 {
 /* irregular: 27 native warning(s); review required */
@@ -200,7 +201,7 @@ void FUN_00261a28(int param_1)
   temp_v17[0x29] = '\0';
   temp_v17[0x2a] = '\0';
   temp_v17[0x2b] = '\0';
-  temp_v35 = param_1;
+  temp_v35 = reinterpret_cast<s32>(options);
   do {
     temp_v0 = gameFlagIsSet(temp_v5);
     if (temp_v0 != 0) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: 82 lines; same instructions, frame size and block layout. The list cursor pointer is spilled to sp+60 instead of sp+56 and the focused name's scroll x to sp+44 instead of sp+20 (20 of the lines); the rest are temporary registers in six argument computations (the row plate, name and icon positions, the focused plate and name, the pulse product). */
+/* NON_MATCHING: 64 lines; same instructions, frame size and block layout. The focused name's scroll x is spilled to sp+44 instead of sp+20 (4 of the lines); the rest are temporary registers in six argument computations (the row plate, name and icon positions, the focused plate and name, the pulse product), where retail also loads the focused name's 0.32 scale last. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "camp/RenderCtxA.h"
@@ -31,12 +31,12 @@ void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u
  * and status mark), the enlarged row under the cursor with its scrolling name, and the scroll bar. */
 void uiQuestDrawList(void)
 {
-    UiQuestApoc *quest = g_uiQuest;
-    s32 x = vec2GetXInt(quest->sprite(0));
-    s32 y = vec2GetYInt(quest->sprite(0));
     u8 *cursor;
     u16 *list;
     char text[64];
+    UiQuestApoc *quest = g_uiQuest;
+    s32 x = vec2GetXInt(quest->sprite(0));
+    s32 y = vec2GetYInt(quest->sprite(0));
     const f32 fullSpeed = 1.0f;
 
     if (quest->unk90c) {

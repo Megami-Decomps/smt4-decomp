@@ -1,28 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `soundRequestQueueGetInstance` (_code @ 0x2baed8, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the callee names differ. The code is identical, but the constructor and destructor are still
+ * named FUN_00140ee4 and FUN_0014dc7c (proposed: _ZN2nw3snd8internal20DriverCommandManagerC1Ev / D1Ev, and this
+ * function _ZN2nw3snd8internal20DriverCommandManager11GetInstanceEv: SoundThread's frame calls it right before
+ * DriverCommandManager::ProcessCommand; FUN_002bae7c is a second instance built with the same C1/D1). The rename
+ * also needs: _ZTV9Obj472300 resized to 0x18 (two zero words and four slots; 0x472318-0x472370 hold the nw::snd
+ * singletons' guards), the guard 0x472340 and the instance 0x4e9e48 named, and the ~32 callers (through
+ * classes/Obj421aa4Requests.h, which types the returned object as Obj421aa4Manager) moved to the member. */
+#include "common.h"
 
-extern "C" {
+namespace nw {
+namespace snd {
+namespace internal {
 
-int FUN_00140ee4(unsigned char *);
+/* The sound driver's command queue (0x190 bytes as FUN_00140ee4 constructs it). */
+class DriverCommandManager {
+public:
+    DriverCommandManager();
+    ~DriverCommandManager();
 
-extern unsigned int DAT_00472340; /* 0x472340 */
-extern unsigned char DAT_004e9e48; /* 0x4e9e48 */
+private:
+    u8 unk00[0x190];
+};
 
-/* Supplied declaration required: FUN_00140ee4. */
-extern int __cxa_guard_acquire(unsigned int *);
+} // namespace internal
+} // namespace snd
+} // namespace nw
 
-
-unsigned char * soundRequestQueueGetInstance(void)
-
+/* Returns the driver command queue singleton, constructing it on first use. */
+extern "C" nw::snd::internal::DriverCommandManager *soundRequestQueueGetInstance(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (((DAT_00472340 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00472340), temp_v0 != 0)) {
-    FUN_00140ee4(&DAT_004e9e48);
-  }
-  return &DAT_004e9e48;
-}
+    static nw::snd::internal::DriverCommandManager instance;
 
-} /* extern "C" */
+    return &instance;
+}

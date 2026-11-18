@@ -6,12 +6,11 @@
 extern "C" {
 
 
-extern s32 DAT_0049fd14;
 
 
 u32 FUN_002d8db4(void)
 {
-    if (g_gameState.map.savedLocationSet != 0 || DAT_0049fd14 != -1) {
+    if (g_gameState.map.savedLocationSet != 0 || g_mapSelection.selection.group != -1) {
         asdSequenceRequest(8, NULL, 0);
     }
     return 1;

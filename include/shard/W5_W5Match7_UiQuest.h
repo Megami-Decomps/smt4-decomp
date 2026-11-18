@@ -123,6 +123,7 @@ struct UiQuestApoc {
 
 extern "C" {
 extern UiQuestApoc *g_uiQuest;
+void stateHolder4Request(s8 kind);
 }
 
 /* Enters a menu state: the state history moves down one place, `next` becomes the current state and the

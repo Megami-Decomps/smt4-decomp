@@ -25,7 +25,7 @@ void FUN_00274798(void);
 void FUN_0027522c(void);
 void FUN_00274fac(void);
 void FUN_00276a3c(void);
-void FUN_00273fc0(void);
+void lmapUpdateSceneModels(void);
 void FUN_00275364(void);
 void mapRangeUpdateModelVisibilityAndTransforms(void);
 void FUN_001b4b54(void);
@@ -55,7 +55,7 @@ void mapPerFrameUpdate(void)
     FUN_0027522c();
     FUN_00274fac();
     FUN_00276a3c();
-    FUN_00273fc0();
+    lmapUpdateSceneModels();
     FUN_00275364();
     mapRangeUpdateModelVisibilityAndTransforms();
     FUN_001b4b54();
