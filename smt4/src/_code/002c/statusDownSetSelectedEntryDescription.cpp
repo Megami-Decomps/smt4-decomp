@@ -1,3 +1,4 @@
+#include "font/TextLayoutApi.h"
 /* NON_MATCHING: the selection store is scheduled earlier, enabling saved-register reuse and a 12-byte instead of 16-byte frame; candidate -O2. */
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "addon/aocMain.h"
@@ -12,7 +13,6 @@ void *fileSlotGetBuffer(u32 slot);
 RelativeDirectory *dataArchiveSetFindFileWithEntry(AocSystem *system, s32 entry);
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
                   RelativeDirectory *directory, u32 index);
-u32 FUN_002b753c(AsdText *text);
 void gridNavigationConfigure(GridNavigation *grid, s32 count, s32 rows, s32 columns,
                   s32 wrap, s32 updateColor);
 void flagsSetOrClearBit(u32 *flags, s32 set);
@@ -43,7 +43,7 @@ void statusDownSetSelectedEntryDescription(s32 entry)
         }
         asdTextDrawDirectoryEntry(screen->text, 3, -1, 0, 3, directory, entry);
     }
-    u32 count = FUN_002b753c(screen->text);
+    u32 count = asdTextGetFinalLineIndex(screen->text);
     gridNavigationConfigure(&screen->grid, count, 8, 1, 0, 1);
     flagsSetOrClearBit(&screen->grid.rows.flags, 0);
     screen->listActive = 1;

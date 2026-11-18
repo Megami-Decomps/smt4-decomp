@@ -1,3 +1,4 @@
+#include "font/TextLayoutApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00116a54` (_code @ 0x116a54, 0xb80 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/UiSpriteApi.h"
@@ -46,7 +47,6 @@ extern int FUN_001247d0(unsigned int);
 extern int ifTouchIsActive(void);
 /* Supplied declaration required: titleOverlayDraw. */
 extern int entryListCurrentIsUsable(unsigned int);
-extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
@@ -380,7 +380,7 @@ LAB_00117048:
     renderStackPushIndexed(g_titleScene,3,temp_v6);
     temp_v12 = 0.27f;
     renderCtxCalculateStereoParallax(g_titleScene);
-    temp_v18 = FUN_002b753c(*(unsigned int *)(temp_v4 + 4));
+    temp_v18 = asdTextGetFinalLineIndex(reinterpret_cast<AsdText *>(*(unsigned int *)(temp_v4 + 4)));
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x8e));
     temp_v1 = *(short *)(temp_v5 + 8);
     temp_v2 = *(short *)(temp_v5 + 10);

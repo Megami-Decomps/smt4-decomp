@@ -3,11 +3,30 @@
 #define ASDSDK_SOURCE_GFX_TEXT_ASDTEXT_H
 
 #include "common.h"
+#include "shard/S2NwFont.h"
+#include <stddef.h>
+
+struct FontRegisteredRecord;
+struct AsdTextGlyphRecord {
+    u16 code;
+    u16 reserved;
+    NwFontGlyph glyph;
+    u32 textureIndex;
+};
+typedef char AsdTextGlyphRecordLayout[sizeof(AsdTextGlyphRecord) == 0x20 &&
+    offsetof(AsdTextGlyphRecord, glyph) == 4 &&
+    offsetof(AsdTextGlyphRecord, textureIndex) == 0x1C ? 1 : -1];
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* A text object (0xB4 bytes; smt4a appends an 8-entry table at 0xB4). */
+/* IV allocates this 0xB4-byte text owner. Apocalypse allocates 0xBC bytes,
+ * with an eight-byte extension at 0xB4; this type describes its common prefix. */
 typedef struct AsdText {
-    /* 0x00 */ u8 unk00[0x34];
+    /* 0x00 */ AsdTextGlyphRecord *records;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ s32 begin;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ FontRegisteredRecord *primaryOwner;
+    /* 0x18 */ u8 unk18[0x1C];
     /* 0x34 */ u32 unk34;       /* 0x402 when created */
     /* 0x38 */ u32 color;       /* default color with the low byte cleared */
     /* 0x3C */ u8 unk3c[0x14];
@@ -20,10 +39,12 @@ typedef struct AsdText {
     /* 0xAC */ u8 unkAC;
     /* 0xAD */ u8 unkAD[3];
     /* 0xB0 */ u32 unkB0;
-    /* 0xB4 */ u8 unkB4[8];
 } AsdText;
 
-typedef char AsdTextTextOffsetCheck[sizeof(AsdText) == 0xBC ? 1 : -1];
+typedef char AsdTextTextOffsetCheck[sizeof(AsdText) == 0xB4 &&
+    offsetof(AsdText, begin) == 0x0C &&
+    offsetof(AsdText, primaryOwner) == 0x14 &&
+    offsetof(AsdText, unkB0) == 0xB0 ? 1 : -1];
 
 extern "C" {
 unsigned int FUN_00287704(int param_1);

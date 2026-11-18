@@ -56897,12 +56897,12 @@
     },
     {
       "address": "0x2b753c",
-      "function": "FUN_002b753c",
+      "function": "asdTextGetFinalLineIndex",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b753c.o",
+      "object": "build/obj/_code/002b/asdTextGetFinalLineIndex.o",
       "size": 172,
-      "source": "src/_code/002b/FUN_002b753c.cpp",
-      "target": "orig/target/_code/002b/FUN_002b753c.o",
+      "source": "src/_code/002b/asdTextGetFinalLineIndex.cpp",
+      "target": "orig/target/_code/002b/asdTextGetFinalLineIndex.o",
       "thumb": false
     },
     {

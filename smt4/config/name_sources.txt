@@ -4976,3 +4976,4 @@
 00333b74 questBuildRewardSpoils inferred fills a ResultSpoils with a quest's rewards
 002cdf2c resultApplySpoils inferred applies a ResultSpoils (macca, experience, items) on the result screen
 0023547c uiQuestAnswerConfirm inferred quest answer confirmation; all three callers pass an s8 flag
+002b753c asdTextGetFinalLineIndex inferred Returns the final zero-based line index while scanning the bounded encoded text stream; F801 increments it and F81A assigns an explicit line index. Native argument/result recovery and exact match; not an original-name claim.

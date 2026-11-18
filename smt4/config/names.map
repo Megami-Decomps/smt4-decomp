@@ -5320,3 +5320,4 @@
 00333b74 questBuildRewardSpoils
 002cdf2c resultApplySpoils
 0023547c uiQuestAnswerConfirm
+002b753c asdTextGetFinalLineIndex

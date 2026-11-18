@@ -2,6 +2,8 @@
 #define SMT4_FONT_TEXTLAYOUTAPI_H
 #include "common.h"
 
+struct AsdText;
+
 extern "C" {
 /* Draw/layout flags and a selected line index, followed by x, y, depth and opacity.
  * Flag 2 restricts drawing/measurement to that line; otherwise the index is ignored.
@@ -11,5 +13,9 @@ f32 FUN_002b0800(void *text, f32 x, f32 y, f32 depth, f32 opacity);
 f32 effectSpawnDefaultArguments(void *text);
 /* Measure the selected line without drawing (flags 16 | 2). */
 f32 FUN_00126830(void *text, s32 selectedLine);
+/* Encoded control command operand count; unknown commands consume no operands. */
+u32 sentinelLookupGetValue(u32 code);
+/* Returns the final zero-based line index, honoring explicit line commands. */
+u32 asdTextGetFinalLineIndex(AsdText *text);
 }
 #endif

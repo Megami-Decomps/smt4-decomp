@@ -112485,13 +112485,13 @@
       "target_path": "orig/target/_code/002b/_ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002b753c.o",
+      "base_path": "build/obj/_code/002b/asdTextGetFinalLineIndex.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002b753c",
+            "name": "asdTextGetFinalLineIndex",
             "size": 172,
             "vram": "0x2b753c"
           }
@@ -112499,10 +112499,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002b753c.cpp"
+        "source_path": "src/_code/002b/asdTextGetFinalLineIndex.cpp"
       },
-      "name": "_code/002b/FUN_002b753c",
-      "target_path": "orig/target/_code/002b/FUN_002b753c.o"
+      "name": "_code/002b/asdTextGetFinalLineIndex",
+      "target_path": "orig/target/_code/002b/asdTextGetFinalLineIndex.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002b75ec.o",
