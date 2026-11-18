@@ -159,7 +159,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int __aeabi_idivmod(int, unsigned int);
 
 
-unsigned char FUN_001a321c(void)
+s32 FUN_001a321c(u32 unusedHandle)
 
 {
 /* irregular: 5 goto(s); irregular input(s): in_fpscr; 36 native warning(s); review required */

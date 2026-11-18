@@ -22,7 +22,7 @@ int statusDownCreate(...);
 
 
 extern int FUN_0018f660(...); /* 0x18f660 */
-extern int FUN_001a321c(...); /* 0x1a321c */
+extern s32 FUN_001a321c(u32 unusedHandle); /* 0x1a321c */
 extern int FUN_001cdef8(...); /* 0x1cdef8 */
 static const UiSpritePositionKey sPositionKeys[] = {
 {0,0,0,0,0,0,0},
@@ -108,8 +108,8 @@ void statusAcquireSharedResources(void)
     *workWords = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Status Calc"),2,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_0018f660),0,0);
     taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpLeft"),0x65,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001cdef8),0,0,reinterpret_cast<void *>(*workWords));
     taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawBackUpRight"),0xcc,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001cdef8),0,0,reinterpret_cast<void *>(*workWords));
-    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpLeft"),0x7d,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001a321c),0,0,reinterpret_cast<void *>(*workWords));
-    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpRight"),0xdb,0,0,reinterpret_cast<AsdProcUpdateFunc>(FUN_001a321c),0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpLeft"),0x7d,0,0,FUN_001a321c,0,0,reinterpret_cast<void *>(*workWords));
+    taskCreateDraw(reinterpret_cast<const s8 *>("Status DrawUpRight"),0xdb,0,0,FUN_001a321c,0,0,reinterpret_cast<void *>(*workWords));
     statusDownCreate();
     workWords = reinterpret_cast<u32 *>(g_gameGlobals.data);
     *(unsigned short *)(reinterpret_cast<u32 *>(g_gameGlobals.data) + 0x4bf) = 0;
