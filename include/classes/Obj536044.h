@@ -2,8 +2,16 @@
 #define CLASSES_OBJ536044_H
 
 #include "common.h"
+#include <stddef.h>
+#include "ui/UiSpriteState.h"
+#include "shop/EquipmentMenuPage.h"
+#include "shop/ShopPanel.h"
+#include "shard/W5_W5Match2_PlainData.h"
+#include "shard/W6_W6Match7_NumericStepper.h"
+#include "shard/W6_W6Match6_SpritePresetBank.h"
 
 struct ScriptProcess;
+struct MoriModelContent;
 
 /* A scene whose step functions are listed in the table at 0x536044 (named after it until its real
  * name is known): the table holds member-function pointers, not a vtable. */
@@ -26,7 +34,7 @@ public:
     void FUN_00494a34();
     void FUN_00498ac0();
     void FUN_004995b0();
-    void FUN_00494740();
+    void updatePageTransition();
     void FUN_0049bd20();
     void itemMenuHandleSelectionInput();
     void FUN_00499fdc();
@@ -49,23 +57,77 @@ protected:
         substate = 0;
     }
 
-    /* 0x00 */ u32 flags;
+    /* The quantity state's helpers, inline in Obj536044__FUN_0049b00c.cpp: the item under the
+     * category's cursor, what the chosen quantity of it costs, that price shown as a change of the
+     * player's macca, and starting an entry of the shop script. */
+    EquipmentMenuItem *selectedItem();
+    s32 quantityPrice();
+    void showPriceChange();
+    void startScript(const char *name);
+
+    /* 0x00 */ u32 flags;                /* 0x1000: the quantity panel is on screen */
     /* 0x04 */ s32 state;
     /* 0x08 */ s32 substate;
     /* 0x0C */ s32 timer;
     /* 0x10 */ s32 previousState;
-    /* 0x14 */ u8 unk14[0x10];
+    /* 0x14 */ u8 unk14[0xF];
+    /* 0x23 */ u8 previewReady;         /* the equipment preview model has been requested */
     /* 0x24 */ Handler states[22];
     /* 0xD4 */ ExitHandler exitStates[22];
     /* 0x184 */ u32 tableGroup;
     /* 0x188 */ u8 unk188[4];
-    /* 0x18C */ void *controller;
+    /* 0x18C */ ScriptProcess *controller;  /* the shop script */
     /* 0x190 */ u8 unk190[0x204];
     /* 0x394 */ void *resultTable;
     /* 0x398 */ void *resultMessages;
     /* 0x39C */ ScriptProcess *resultScript;
+    /* 0x3A0 */ u8 unk3A0[4];
+    /* 0x3A4 */ f32 cursorPosition[2];      /* where the appraisal cursor is drawn */
+    /* 0x3AC */ u8 unk3AC[0xC];
+    /* 0x3B8 */ EmptyRange panelRect;       /* where the quantity panel is drawn */
+    /* 0x3CC */ SpritePresetBank animation; /* the scene's thirteen sprites: 0 the cursor, 6 slides the quantity panel in, 7 out */
+    /* 0xB08 */ u8 touchSelection[0x34];    /* the list's touch selection (menuSynchronizeFlaggedSelection) */
+    /* 0xB3C */ ShopPanel *view;
+    /* 0xB40 */ s32 slot;                   /* the category shown (7: items, 8: selling) */
+    /* 0xB44 */ s32 tab;
+    /* 0xB48 */ NumericStepper quantity;    /* how many of the selected item to trade */
+    /* 0xB60 */ EquipmentMenuCursor slotInfo[9];
+    /* 0xF74 */ EquipmentMenuPage lists[9];
+    /* 0x9F86 */ u8 unk9F86[2];
+    /* 0x9F88 */ u8 flaggedValues[0x76];    /* the appraisal list's cursor */
+    /* 0x9FFE */ u16 messages[3];           /* the appraisal records follow: 6 bytes each, the message id first */
+    /* 0xA004 */ u8 unkA004[0xBFFC];
+    /* 0x16000 */ u32 panel;
+    /* 0x16004 */ u8 unk16004[0x24];
+    /* 0x16028 */ MoriModelContent *resource;  /* the equipment preview model */
+    /* 0x1602C */ u8 unk1602C[4];
+    /* 0x16030 */ s16 touchRegionCount;
+    /* 0x16032 */ u8 unk16032[6];
+    /* 0x16038 */ u32 cleared[3];
+    /* 0x16044 */ u8 clearedFlags[2];
+    /* 0x16046 */ u8 unk16046[2];
+    /* 0x16048 */ s32 quantityIndex;        /* the list index the quantity panel was set up for, -1: none */
+
+    friend struct Obj536044LayoutCheck;
 };
 
-typedef char Obj536044SizeCheck[sizeof(Obj536044) == 0x3A0 ? 1 : -1];
+struct Obj536044LayoutCheck {
+    char resultScript[offsetof(Obj536044, resultScript) == 0x39C ? 1 : -1];
+    char previewReady[offsetof(Obj536044, previewReady) == 0x23 ? 1 : -1];
+    char panelRect[offsetof(Obj536044, panelRect) == 0x3B8 ? 1 : -1];
+    char cursorPosition[offsetof(Obj536044, cursorPosition) == 0x3A4 ? 1 : -1];
+    char animation[offsetof(Obj536044, animation) == 0x3CC ? 1 : -1];
+    char cursorSprite[offsetof(Obj536044, animation.sprites[0].finished) == 0x476 ? 1 : -1];
+    char flaggedValues[offsetof(Obj536044, flaggedValues) == 0x9F88 ? 1 : -1];
+    char panel[offsetof(Obj536044, panel) == 0x16000 ? 1 : -1];
+    char resource[offsetof(Obj536044, resource) == 0x16028 ? 1 : -1];
+    char size[sizeof(Obj536044) == 0x1604C ? 1 : -1];
+    char touchSelection[offsetof(Obj536044, touchSelection) == 0xB08 ? 1 : -1];
+    char slot[offsetof(Obj536044, slot) == 0xB40 ? 1 : -1];
+    char quantity[offsetof(Obj536044, quantity) == 0xB48 ? 1 : -1];
+    char slotInfo[offsetof(Obj536044, slotInfo) == 0xB60 ? 1 : -1];
+    char lists[offsetof(Obj536044, lists) == 0xF74 ? 1 : -1];
+    char quantityIndex[offsetof(Obj536044, quantityIndex) == 0x16048 ? 1 : -1];
+};
 
 #endif

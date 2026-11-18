@@ -24,7 +24,7 @@ extern TexFormatHook DAT_005c143c[4];
 
 void rt_memcpy(void *destination, const void *source, u32 size);
 s32 textureConvertLinearTile(u8 tile[256], u32 destination, s32 rows, TexTileState *state);
-s32 FUN_004191f0(u8 tile[256], s32 destination, s32 rows, TexTileState *state);
+s32 textureConvertTiledTile(u8 tile[256], s32 destination, s32 rows, TexTileState *state);
 
 /* Converts a texture between the linear and 8x8-tiled layouts, one tile at a time through a
  * 256-byte buffer. `mode` 1 converts between the two tiled variants, `flipVertical` mirrors the
@@ -101,7 +101,7 @@ u32 FUN_00418cfc(s32 mode, u32 format, u32 type, u32 width, u32 height, u8 *sour
                 } else {
                     offset = (state.tilesX * row * 64 * bpp) / 8 + (column * bpp * 8) / 8;
                 }
-                FUN_004191f0(tile, (s32)(state.destination + offset), 8, &state);
+                textureConvertTiledTile(tile, (s32)(state.destination + offset), 8, &state);
             }
         }
     }

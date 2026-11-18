@@ -20,6 +20,10 @@ struct MapNaviCategoryRecord {
     union {
         /* 0x0A */ u8 padding0A[0xA];
         struct {
+            /* 0x0A */ s8 first;
+            /* 0x0B */ s8 last;
+        } horizontalInterval; // category bounds in grid cells
+        struct {
             /* 0x0A */ s16 unk0A;
             /* 0x0C */ s16 originX;
             /* 0x0E */ s16 originY;
@@ -58,5 +62,7 @@ typedef char MapNaviMarkerLayoutCheck[
 typedef char MapNaviCategoryLayoutCheck[
     sizeof(MapNaviCategoryRecord) == 0x14 && sizeof(MapNaviCategoryGrid) == 8 &&
     offsetof(MapNaviCategoryRecord, category) == 4 &&
-    offsetof(MapNaviCategoryRecord, startX) == 6 ? 1 : -1];
+    offsetof(MapNaviCategoryRecord, startX) == 6 &&
+    offsetof(MapNaviCategoryRecord, horizontalInterval.first) == 0xA &&
+    offsetof(MapNaviCategoryRecord, horizontalInterval.last) == 0xB ? 1 : -1];
 #endif

@@ -9,7 +9,7 @@ struct NumericStepper {
     /* 0x00 */ s32 value;
     /* 0x04 */ s32 maximum;
     /* 0x08 */ s32 minimum;
-    /* 0x0c */ u8 unk0c[4];
+    /* 0x0c */ s32 row;            /* the list row the stepper is drawn on (its touch regions follow it) */
     /* 0x10 */ u8 incrementActive;
     /* 0x11 */ u8 decrementActive;
     /* 0x12 */ s16 incrementKey;
@@ -20,6 +20,16 @@ struct NumericStepper {
 extern "C" {
 void numericStepperHandleInput(NumericStepper* stepper);
 void numericStepperHandleInput(NumericStepper* stepper);
+}
+
+/* Sets the stepper's range and the row it is drawn on; it starts at 1 unless nothing can be chosen
+ * (both shops' quantity panels: IV's shopQuantityStep, Apocalypse's Obj536044::FUN_0049b00c). */
+static __inline void numericStepperSetup(NumericStepper *stepper, s32 maximum, s32 minimum, s32 row)
+{
+    stepper->value = maximum != 0;
+    stepper->maximum = maximum;
+    stepper->minimum = minimum;
+    stepper->row = row;
 }
 
 extern "C" {

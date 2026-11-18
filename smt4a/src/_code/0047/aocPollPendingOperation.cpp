@@ -1,4 +1,4 @@
-/* NON_MATCHING: NRVO now matches (95 rows); retail keeps the hoisted status constant 1 in r7 and the zero in r8 (built swaps them) and loads queryDetail into r1. */
+/* NON_MATCHING: retail and the build interchange the registers for the hoisted status/phase constants. */
 #include "shard/W6_W6Match8_AocPoll.h"
 #include "classes/ResourceLookup.h"
 #include "nn/Result.h"
@@ -7,7 +7,6 @@
 extern "C" {
 s32 FUN_0047d904(void *request, nn::Result *code, u32 *detail);
 WindowStatusResult FUN_00473acc(ResourceLookup *lookup);
-void FUN_001764dc(AocMain *main);
 s32 FUN_00473da0(AocMain *main);
 s32 block88OwnerCheck(AocMain *main);
 
@@ -38,7 +37,7 @@ WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
             if (queryDetail == 0) {
                 output.status = 102;
             } else {
-                FUN_001764dc(main);
+                FUN_001764dc(main, queryDetail);
                 output.status = 103;
             }
         }

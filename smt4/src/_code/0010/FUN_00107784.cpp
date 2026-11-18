@@ -1,4 +1,4 @@
-/* NON_MATCHING: inline stack scheduling, removed target-query hooks, and VFP argument scheduling differ. */
+/* NON_MATCHING: only the VFP argument scheduling before gxSubmitDrawZeroExtraParams differs (retail converts the width into s2 before loading the 0.0f constant), as in the Apocalypse twin FUN_0013c00c. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_SlotState.h"
 #include "camp/RenderCtxTitle.h"
@@ -25,8 +25,8 @@ void FUN_00107784(s32 index)
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
     renderCtxSelectTexture(g_titleScene, 0);
-    f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_titleScene->unk0528));
-    f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_titleScene->unk0528));
+    f32 height = static_cast<f32>(asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene)));
+    f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene)));
     gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
     renderStackPop(&g_titleScene->stackA);
 }

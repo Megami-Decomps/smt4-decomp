@@ -1,4 +1,4 @@
-/* NON_MATCHING: viewport and coordinate register allocation differ, and retail rebases its scissor-mode cache before accessing the state stack. */
+/* NON_MATCHING: only the order of the predicated case-0x501 adjustments differs (retail doubles y and height before halving maximumY with asreq; the build halves first). */
 #include "shard/S1ListPanel.h"
 #include <stddef.h>
 #include "quest_center/qcMain.h"
@@ -14,7 +14,7 @@ extern "C" s32 stateValuesGetBySelector(u32 viewport);
 // Mirror the requested scissor rectangle into viewport coordinates and enable scissoring.
 extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 height)
 {
-    u32 viewport = g_renderCtx->stereoMode;
+    u32 viewport = renderCtxGetStereoMode(g_renderCtx);
     s32 maximumX = FUN_00169d8c(viewport) - 1;
     s32 maximumY = FUN_00169db4(viewport) - 1;
     switch (asdGxPresetsGetEnable(viewport)) {

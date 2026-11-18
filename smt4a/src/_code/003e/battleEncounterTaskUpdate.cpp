@@ -61,7 +61,7 @@ s32 contentRequestStart(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003e21c8(EncounterTask *task, EncounterTaskContext *context);
 u32 FUN_003e0f94(EncounterTask *task);
 s32 FUN_003e1b80(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e26f0(EncounterTask *task, EncounterTaskContext *context);
+s32 btlStepInitEncounterFlags(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003e1a30(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003e2a88(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003e2504(EncounterTask *task, EncounterTaskContext *context);
@@ -192,7 +192,7 @@ extern "C" s32 battleEncounterTaskUpdate(EncounterTask *task, EncounterTaskConte
         return FUN_003e0bb8(task, context);
     case 24:
         switch (FUN_003e0f94(task)) {
-        case 1: return FUN_003e26f0(task, context);
+        case 1: return btlStepInitEncounterFlags(task, context);
         case 2: return FUN_003e1b80(task, context);
         case 3: return FUN_003e1a30(task, context);
         case 4: return FUN_003e2a88(task, context);

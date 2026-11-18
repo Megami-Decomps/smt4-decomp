@@ -10,7 +10,7 @@ void FUN_00256194(void);
 void FUN_00256124(void);
 void gameOptionsEnableAndReset(void);
 void FUN_002560a4(s32 command);
-void FUN_003c86bc(void);
+void supportUnitInitializeRandomCategory(void);
 void FUN_00337cfc(BtlMainState *state, void *snapshot, GameUnitSortRecord *unit);
 void FUN_00255e38(BtlMainState *state, void *snapshot, s32 mode, s32 slot, s32 flags);
 
@@ -60,7 +60,7 @@ void btlApplyOptionAndSnapshotReserve(BtlMainState *state)
                 return;
             switch (progress) {
             case 1:
-                FUN_003c86bc();
+                supportUnitInitializeRandomCategory();
                 break;
             case 2:
                 break;

@@ -41,8 +41,8 @@ void FUN_003844a0(TitleOverlay *overlay)
 
         renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_titleScene, 0);
-        f32 preset = (f32)asdGxPresetsGetByKind(*(u32 *)((u8 *)g_titleScene + 0x528));
-        f32 factor = (f32)asdGxPresetsGetHeightByKind(*(u32 *)((u8 *)g_titleScene + 0x528));
+        f32 preset = (f32)asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene));
+        f32 factor = (f32)asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene));
         gxSubmitDrawZeroExtraParams(alpha, alpha, alpha, alpha, 0.0f, 0.0f, factor, preset, 0.0f);
         renderStackPop(&g_titleScene->stackA);
     }

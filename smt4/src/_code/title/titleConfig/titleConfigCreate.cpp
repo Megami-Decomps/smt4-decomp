@@ -42,7 +42,7 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 screen, u32 flags,
                     s32 (*draw)(void), void (*end)(void), void *work, u32 parent);
 s32 titleConfigUpdate(void);
 void titleConfigDestroy(void);
-s32 FUN_002cb054(void);
+s32 titleConfigDraw(void);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
 void gridNavigationConfigure(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
@@ -62,7 +62,7 @@ extern "C" void titleConfigCreate(void)
     TitleConfigCreateWork *work = (TitleConfigCreateWork *)asdMemAlloc(0x100, 0x100, 0, 0x158, 1);
     g_titleConfig = work;
     work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE_CONFIG_MAIN"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(titleConfigUpdate), reinterpret_cast<AsdProcFunc>(titleConfigDestroy), reinterpret_cast<u32>(work));
-    taskCreateDraw("TITLE_CONFIG D", 0xe6, 0, 0, FUN_002cb054, NULL, NULL, work->process);
+    taskCreateDraw("TITLE_CONFIG D", 0xe6, 0, 0, titleConfigDraw, NULL, NULL, work->process);
     drawParameterBlockClear(&work->resources);
     paramsInit(&work->resources, DAT_00407dd6, 0x18, NULL, 0, NULL, 0, NULL, 0, NULL, 0);
     uiSpriteStateInitFromSource(&work->sprite, 0x2f, 0, &work->resources, 0xc9, 1.0f);

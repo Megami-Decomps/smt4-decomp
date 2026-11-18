@@ -180,7 +180,7 @@ extern unsigned char LAB_00103e18; /* 0x103e18 */
 extern unsigned char LAB_00103e34; /* 0x103e34 */
 extern int renderCtxApplyCurrentA(...); /* 0x10618c */
 extern int renderCtxApplyCurrentB(...); /* 0x1061bc */
-extern int FUN_001061ec(...); /* 0x1061ec */
+extern int titleTimedOverlayDraw(...); /* 0x1061ec */
 extern unsigned char LAB_001071c8; /* 0x1071c8 */
 extern unsigned char g_titleFlags; /* 0x446db0 */
 extern signed char DAT_00446db1; /* 0x446db1 */
@@ -678,7 +678,7 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101d30,0xe4,0);
-  temp_v26 = FUN_001061ec;
+  temp_v26 = titleTimedOverlayDraw;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101d48,0x162,0);

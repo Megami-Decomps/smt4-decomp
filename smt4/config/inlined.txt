@@ -58,3 +58,4 @@ titleConfigDefaultMusic = 0xe3a00032; // 0x1eabdc (titleConfigUpdate+0x1c4, rese
 titleConfigDefaultSound = 0xe3a00050; // 0x1eabfc (titleConfigUpdate+0x1e4, reset of setting 1: a lone mov r0, #80 stored to g_titleConfigValues.sound)
 titleConfigDefaultAuxiliary = 0xe3a00030; // 0x1eac08 (titleConfigUpdate+0x1f0: a lone mov r0, #48 stored to .auxiliary; the sound byte is then reloaded with ldrb r0, [fp, #1] for classifyValueByThreshold, the call's clobber of r0)
 titleConfigDefaultVoice = 0xe3a00050; // 0x1eac28 (titleConfigUpdate+0x210, reset of setting 2: a lone mov r0, #80 stored to g_titleConfigValues.voice and passed on in r0 to calcByteThresholdRank)
+renderCtxGetStereoMode = 0xe5900528; // 0x10783c 0x107858 (FUN_00107784) 0x2e21a0 0x2e21bc (uiFadeQuadDrawJob) 0x3845b4 0x3845d0 (FUN_003844a0), after ldr r0, [rN]: the title scene (twin of the smt4a row)

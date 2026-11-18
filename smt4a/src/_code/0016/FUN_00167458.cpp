@@ -42,7 +42,7 @@ s32 FUN_00167458(UiSpriteState *sprite, s32 reverse)
     sprite->positionFrame = frame + 1;
     FUN_001807a0(sprite, 1.0f);
     FUN_00182348(sprite, 1.0f);
-    FUN_00181948(sprite, 1.0f);
+    spriteSequencePlayerAdvance(sprite, 1.0f);
     if (sprite->positionDone != 0 && sprite->alphaDone != 0 &&
         sprite->scaleDone != 0 && sprite->frameDone != 0) {
         sprite->finished = 1;

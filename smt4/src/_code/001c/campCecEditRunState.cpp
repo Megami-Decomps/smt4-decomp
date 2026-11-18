@@ -17,16 +17,7 @@ u32 campCecEditRunState(void)
                 edit->state = edit->nextState;
                 edit->nextState = -1;
                 if (edit->state == 8) {
-                    edit->unk48 = 0;
-                    edit->unk4C = 0;
-                    edit->unk5C = 0;
-                    edit->unk60 = 0;
-                    edit->unk70 = 0;
-                    edit->unk74 = 0;
-                    edit->unk20 = 0;
-                    edit->unk24 = 0;
-                    edit->unk34 = 0;
-                    edit->unk38 = 0;
+                    campCecEditResetPositions(edit);
                 }
             }
         } else if (result == 1) {

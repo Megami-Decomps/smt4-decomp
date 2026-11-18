@@ -257,6 +257,12 @@ a sibling setter or another user of the same lookup is usually written the same 
   explicit cases even when a case and `default` do the same thing: merging them changes the whole
   decision tree.
 - Two identical branches that retail cross-jumps come from one inline helper called in both.
+- `if (a == b) { X } else { Y }` moves `X` out of line after the next unconditional branch; the `!=`
+  spelling does not. `cmp; beq; cmp; beq; b` is an if/else-if chain, `cmp; beq; cmp; bne; b` a
+  `switch`. Which copy of identical tail blocks survives follows `return` against `break`, and
+  `if (x == 2) {...}` against `if (x != 2) break;`.
+- A search loop that sets `bool found = true; break;` and tests `found` afterwards is jump-threaded
+  into retail's in-loop layout.
 - A condition computed inside a guarded block and tested after the blocks join is a flag:
   `bool changed = false; if (ready && enabled) changed = memcmp(...) != 0; if (changed) { ... }`
   (smt4 `FUN_001ec6e0`). Nesting the test inside the guard gives a different branch layout.
@@ -275,6 +281,8 @@ a sibling setter or another user of the same lookup is usually written the same 
 - A local pointer to a global moves its pool word earlier; a constant passed through a
   `static __inline` helper's parameter moves it later, or keeps it in a callee-saved register;
   named locals declared in retail's pool order fix the order of constants.
+- Chained assignment (`current[i] = maximum[i] = value;`) stores one value through both pointers the
+  way retail does; separate statements reload or reorder it.
 - Locals declared at the top of the function (C89 style), or one loop index reused by two loops,
   change their registers.
 - Assigning a global and then reading it back into a local (`g = alloc(); T *p = g;`) gives retail's

@@ -9,7 +9,7 @@ extern "C" {
 int mapIfActivateRecord(...);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int padGetNormalizedAnalogStick(...);
-int FUN_0027fca0(...);
+int mapDepartSpawnPlayerEffect(...);
 int FUN_002879dc(...);
 int buttonHelpSetPreset(int);
 int VectorSignedToFloat(...);
@@ -60,7 +60,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
-/* Supplied declaration required: FUN_0027fca0. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -396,7 +396,7 @@ void FUN_002e8fdc(void)
       default:
       }
 LAB_002e94f0:
-      FUN_0027fca0(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
       {
       SoundActorQueuePosition position;
       position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
@@ -500,7 +500,7 @@ LAB_002e94f0:
         default:
         }
 LAB_002e9794:
-        FUN_0027fca0(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
         {
         SoundActorQueuePosition position;
         position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;

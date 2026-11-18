@@ -18,7 +18,7 @@ int mapIfActivateRecord(int, unsigned int);
 int table23FindRecordByKey(unsigned int, unsigned int, unsigned int);
 int FUN_0027fae4(void);
 int FUN_0027fc14(...);
-int FUN_0027fca0(unsigned int);
+int mapDepartSpawnPlayerEffect(unsigned int);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int mapEaseSceneHeading(void);
@@ -51,7 +51,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
-/* Supplied declaration required: FUN_0027fca0. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -247,7 +247,7 @@ void FUN_002ea500(void)
         default:
         }
 LAB_002ea9b4:
-        FUN_0027fca0(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
         {
         SoundActorQueuePosition position;
         position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;

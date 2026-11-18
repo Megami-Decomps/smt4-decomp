@@ -8,26 +8,15 @@
 #include "Model/MoriModelManager.h"
 #include "gfx/ControllerModel.h"
 
-/* The scene past the class prefix: the sprite animation, current page and loaded resource. */
+/* The scene with its page-transition step. */
 struct ShopMenuView : public Obj536044 {
-    /* 0x03A0 */ u32 color;
-    /* 0x03A4 */ AsdTextureRegion region;
-    /* 0x03C4 */ u8 unk03C4[8];
-    /* 0x03CC */ SpritePresetBank bank;
-    /* 0x0B08 */ u8 unk0B08[0x38];
-    /* 0x0B40 */ s32 page;
-    /* 0x0B44 */ u8 unk0B44[0x154E4];
-    /* 0x16028 */ MoriModelContent *resource;
     void finishPageTransition();
 };
-typedef char ShopMenuViewOffsetCheck[
-    offsetof(ShopMenuView, bank) == 0x3CC && offsetof(ShopMenuView, page) == 0xB40 &&
-    offsetof(ShopMenuView, resource) == 0x16028 ? 1 : -1];
 
 extern "C" {
 void FUN_0038b010(u8 value);
 void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
-void pointConvertToFloat(AsdTextureRegion *, s32, s32);
+void pointConvertToFloat(f32 *, s32, s32);
 u32 tableGroupFindEntryIndex(u32, const char *);
 void scrScriptProcessStartEntry(void *, u32);
 void scrRunOpcodesStub(void *);
@@ -37,7 +26,7 @@ void scrRunOpcodesStub(void *);
 // start their script entry.
 inline void ShopMenuView::finishPageTransition()
 {
-    switch (page) {
+    switch (slot) {
     case 0: case 1: case 2: case 3: case 4: case 5: case 6:
         if (FUN_0023b3d0())
             changeState(7);
@@ -56,21 +45,21 @@ inline void ShopMenuView::finishPageTransition()
     scrRunOpcodesStub(controller);
 }
 
-void Obj536044::FUN_00494740()
+void Obj536044::updatePageTransition()
 {
     ShopMenuView *scene = static_cast<ShopMenuView *>(this);
     switch (scene->substate) {
     case 0:
         FUN_0038b010(1);
-        uiSpriteBankApplyPreset(&scene->bank, 0);
+        uiSpriteBankApplyPreset(&scene->animation, 0);
         scene->substate = 1;
         break;
     case 1: {
-        UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(&scene->bank.sprites[0]);
+        UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(&scene->animation.sprites[0]);
         FUN_00167458(sprite, 0);
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);
-        pointConvertToFloat(&scene->region, x, y);
+        pointConvertToFloat(scene->cursorPosition, x, y);
         if (uiSpriteGetCompletionState(sprite)) {
             scene->finishPageTransition();
         }

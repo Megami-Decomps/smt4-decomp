@@ -32,7 +32,7 @@ void buttonHelpAcquireResources(void);
 void FUN_002c5620(void);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
 void FUN_002fc1a8(void);
-void FUN_00317e78(void);
+void dataTableSortLookupSections(void);
 void FUN_00324a20(void);
 void fileSlotsPreloadShuffled(void);
 void FUN_0033f784(void);
@@ -96,7 +96,7 @@ s32 jyoucyuLoadStep(u32 handle)
         statusBustUpAcquire();
         FUN_001ddb40();
         spriteTables14And15Load(g_btlUiBlock);
-        FUN_00317e78();
+        dataTableSortLookupSections();
         work->state++;
         break;
     case 9:

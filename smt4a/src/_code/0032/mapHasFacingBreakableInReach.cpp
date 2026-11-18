@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; active/state guards merge, entry addressing uses pre-indexed LDRB, and global/distance-argument register roles differ. */
+/* NON_MATCHING: the saved global-address registers and distance-argument loads are ordered differently. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
@@ -36,10 +36,10 @@ inline f32 distanceBetween(const MapVector& first, const MapVector& second)
 extern "C" u32 mapHasFacingBreakableInReach(void)
 {
     for (s32 index = 0; index < 16; ++index) {
-        const MapBreakableEntry& entry = g_mapHakai->entries[index];
-        if (entry.active == 0) {
+        if (g_mapHakai->entries[index].active == 0) {
             continue;
         }
+        const MapBreakableEntry &entry = g_mapHakai->entries[index];
         if (entry.state == 2 || entry.state == 3 || entry.state == 0) {
             continue;
         }

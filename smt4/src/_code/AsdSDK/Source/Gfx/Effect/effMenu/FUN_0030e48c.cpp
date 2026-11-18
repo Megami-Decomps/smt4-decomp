@@ -18,7 +18,7 @@ int memAlloc(int, int, int, int);
 int renderCtxSelectStereoLayout(int);
 int asdMemFree(void);
 int effectRestoreSavedRenderPairs(int, unsigned int);
-int FUN_002c733c(...);
+int effMenuDrawGradientRect(...);
 int effectDrawProjectedCircleFan(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX44TransposeAsm(...);
@@ -63,7 +63,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: effectRestoreSavedRenderPairs. */
 extern unsigned int asdCameraGetSavedRenderPairs(void);
 extern int renderCtxPackPassFlags(unsigned int);
-/* Supplied declaration required: FUN_002c733c. */
+/* Supplied declaration required: effMenuDrawGradientRect. */
 /* Supplied declaration required: effectDrawProjectedCircleFan. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
@@ -170,7 +170,7 @@ joined_r0x0030e620:
     case 2:
       temp_v15 = 0xff00ffff;
       temp_v16 = 0xff00ffff;
-      FUN_002c733c(param_2[2] - 1,param_2[3] - 1,3);
+      effMenuDrawGradientRect(param_2[2] - 1,param_2[3] - 1,3);
       break;
     case 3:
       temp_v15 = param_2[4];
@@ -179,7 +179,7 @@ joined_r0x0030e620:
       temp_v1 = param_2[3] - 1;
       temp_v2 = param_2[2] - 1;
       temp_v16 = temp_v15;
-      FUN_002c733c(temp_v2,temp_v1,temp_v7,temp_v4);
+      effMenuDrawGradientRect(temp_v2,temp_v1,temp_v7,temp_v4);
       break;
     case 4:
       temp_v15 = param_2[6];
@@ -188,7 +188,7 @@ joined_r0x0030e620:
       temp_v1 = param_2[3];
       temp_v7 = param_2[4];
       temp_v4 = param_2[5];
-      FUN_002c733c(temp_v2,temp_v1,temp_v7,temp_v4);
+      effMenuDrawGradientRect(temp_v2,temp_v1,temp_v7,temp_v4);
       break;
     case 5:
       temp_v15 = param_2[6];

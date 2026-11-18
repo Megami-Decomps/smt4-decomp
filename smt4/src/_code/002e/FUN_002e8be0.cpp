@@ -23,7 +23,7 @@ void mapIfSetMode1(void);
 s32 FUN_0027ee9c(void);
 void lmapSetSceneId(u32 id);
 void FUN_0027fc14(s32 mode);
-void FUN_0027fca0(s32 mode);
+void mapDepartSpawnPlayerEffect(s32 mode);
 void mapSelectContainingRegions(f32 x, f32 z);
 void FUN_002804ec(MapVector *position);
 void buttonHelpSetPreset(s32 preset);
@@ -94,7 +94,7 @@ void FUN_002e8be0(void)
         g_gameState.map.transitionCompleted = 0;
         scene->moveMode = 8;
         scene->moveSpeed = 5.0f;
-        FUN_0027fca0(1);
+        mapDepartSpawnPlayerEffect(1);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;
         break;

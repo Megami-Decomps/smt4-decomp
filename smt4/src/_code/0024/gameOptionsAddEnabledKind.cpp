@@ -5,14 +5,14 @@ extern "C" GameOptions* gameGetSupportUnitData(void);
 extern "C" void gameOptionsAddEnabledKind(s32 kind)
 {
     GameOptions* options = gameGetSupportUnitData();
-    if (!(options->flags & 1) && options->unk60A != kind &&
-        options->unk60C != kind && options->unk60E != kind) {
-        if (options->unk60A == 0) {
-            options->unk60A = (u16)kind;
-        } else if (options->unk60C == 0) {
-            options->unk60C = (u16)kind;
-        } else if (options->unk60E == 0) {
-            options->unk60E = (u16)kind;
+    if (!(options->flags & 1) && options->supportCandidates[0] != kind &&
+        options->supportCandidates[1] != kind && options->supportCandidates[2] != kind) {
+        if (options->supportCandidates[0] == 0) {
+            options->supportCandidates[0] = (u16)kind;
+        } else if (options->supportCandidates[1] == 0) {
+            options->supportCandidates[1] = (u16)kind;
+        } else if (options->supportCandidates[2] == 0) {
+            options->supportCandidates[2] = (u16)kind;
         }
     }
 }

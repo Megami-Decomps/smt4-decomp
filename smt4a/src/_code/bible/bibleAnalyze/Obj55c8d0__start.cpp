@@ -16,7 +16,7 @@ int FUN_004a4848(...);
 int partyIdsReset(...);
 int partyIdsActivateEntry(...);
 int slotPoolResetTrackedState(void);
-int FUN_004cf7cc(...);
+int spritePresetBankInitialize(...);
 int messageIdListSetRange(...);
 int _ZN9Obj422594C1Ev(void);
 
@@ -52,7 +52,7 @@ extern int gameTestProgressFlag(int);
 /* Supplied declaration required: partyIdsReset. */
 /* Supplied declaration required: partyIdsActivateEntry. */
 /* Supplied declaration required: slotPoolResetTrackedState. */
-/* Supplied declaration required: FUN_004cf7cc. */
+/* Supplied declaration required: spritePresetBankInitialize. */
 extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: messageIdListSetRange. */
 /* Supplied declaration required: _ZN9Obj422594C1Ev. */
@@ -154,7 +154,7 @@ void Obj55c8d0::start()
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v0);
   }
-  FUN_004cf7cc(param_1 + 0x37);
+  spritePresetBankInitialize(param_1 + 0x37);
   loadSlotEnsureLoaded(0x22);
   if ((char)param_1[0x218] != '\0') {
     rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x13);

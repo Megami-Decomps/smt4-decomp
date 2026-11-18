@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 renderCtxPackPassFlags(s32 first, s32 second);
-void FUN_0022ecfc(void);
+void uiQuestDrawList(void);
 
 /* Draws quest-menu states that have visible content inside a temporary render-state scope. */
 u32 uiQuestDrawLower(void)
@@ -40,7 +40,7 @@ u32 uiQuestDrawLower(void)
         case 26:
         case 27:
         case 30:
-            FUN_0022ecfc();
+            uiQuestDrawList();
             break;
         }
         renderStackPop(&g_renderCtx->stackA);

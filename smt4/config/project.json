@@ -1935,12 +1935,12 @@
     },
     {
       "address": "0x1061ec",
-      "function": "FUN_001061ec",
+      "function": "titleTimedOverlayDraw",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_001061ec.o",
+      "object": "build/obj/_code/0010/titleTimedOverlayDraw.o",
       "size": 296,
-      "source": "src/_code/0010/FUN_001061ec.cpp",
-      "target": "orig/target/_code/0010/FUN_001061ec.o",
+      "source": "src/_code/0010/titleTimedOverlayDraw.cpp",
+      "target": "orig/target/_code/0010/titleTimedOverlayDraw.o",
       "thumb": false
     },
     {
@@ -20247,12 +20247,12 @@
     },
     {
       "address": "0x191df4",
-      "function": "FUN_00191df4",
+      "function": "uniteSortCandidateList",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_00191df4.o",
+      "object": "build/obj/_code/0019/uniteSortCandidateList.o",
       "size": 400,
-      "source": "src/_code/0019/FUN_00191df4.cpp",
-      "target": "orig/target/_code/0019/FUN_00191df4.o",
+      "source": "src/_code/0019/uniteSortCandidateList.cpp",
+      "target": "orig/target/_code/0019/uniteSortCandidateList.o",
       "thumb": false
     },
     {
@@ -25357,12 +25357,12 @@
     },
     {
       "address": "0x1e3284",
-      "function": "FUN_001e3284",
+      "function": "uiSubMenuResetWork",
       "module": "_code",
-      "object": "build/obj/_code/001e/FUN_001e3284.o",
+      "object": "build/obj/_code/001e/uiSubMenuResetWork.o",
       "size": 340,
-      "source": "src/_code/001e/FUN_001e3284.cpp",
-      "target": "orig/target/_code/001e/FUN_001e3284.o",
+      "source": "src/_code/001e/uiSubMenuResetWork.cpp",
+      "target": "orig/target/_code/001e/uiSubMenuResetWork.o",
       "thumb": false
     },
     {
@@ -27293,12 +27293,12 @@
     {
       "address": "0x1fc390",
       "file": "mikado/mikadoMain",
-      "function": "FUN_001fc390",
+      "function": "mikadoMainCreate",
       "module": "_code",
-      "object": "build/obj/_code/mikado/mikadoMain/FUN_001fc390.o",
+      "object": "build/obj/_code/mikado/mikadoMain/mikadoMainCreate.o",
       "size": 220,
-      "source": "src/_code/mikado/mikadoMain/FUN_001fc390.cpp",
-      "target": "orig/target/_code/mikado/mikadoMain/FUN_001fc390.o",
+      "source": "src/_code/mikado/mikadoMain/mikadoMainCreate.cpp",
+      "target": "orig/target/_code/mikado/mikadoMain/mikadoMainCreate.o",
       "thumb": false
     },
     {
@@ -35798,12 +35798,12 @@
     },
     {
       "address": "0x23547c",
-      "function": "FUN_0023547c",
+      "function": "uiQuestAnswerConfirm",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023547c.o",
+      "object": "build/obj/_code/0023/uiQuestAnswerConfirm.o",
       "size": 188,
-      "source": "src/_code/0023/FUN_0023547c.cpp",
-      "target": "orig/target/_code/0023/FUN_0023547c.o",
+      "source": "src/_code/0023/uiQuestAnswerConfirm.cpp",
+      "target": "orig/target/_code/0023/uiQuestAnswerConfirm.o",
       "thumb": false
     },
     {
@@ -36962,12 +36962,12 @@
     },
     {
       "address": "0x23b260",
-      "function": "FUN_0023b260",
+      "function": "textureConvertTiledTile",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023b260.o",
+      "object": "build/obj/_code/0023/textureConvertTiledTile.o",
       "size": 380,
-      "source": "src/_code/0023/FUN_0023b260.cpp",
-      "target": "orig/target/_code/0023/FUN_0023b260.o",
+      "source": "src/_code/0023/textureConvertTiledTile.cpp",
+      "target": "orig/target/_code/0023/textureConvertTiledTile.o",
       "thumb": false
     },
     {
@@ -45718,12 +45718,12 @@
     },
     {
       "address": "0x277bdc",
-      "function": "FUN_00277bdc",
+      "function": "mapSpawnActiveSignboardEffects",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_00277bdc.o",
+      "object": "build/obj/_code/0027/mapSpawnActiveSignboardEffects.o",
       "size": 308,
-      "source": "src/_code/0027/FUN_00277bdc.cpp",
-      "target": "orig/target/_code/0027/FUN_00277bdc.o",
+      "source": "src/_code/0027/mapSpawnActiveSignboardEffects.cpp",
+      "target": "orig/target/_code/0027/mapSpawnActiveSignboardEffects.o",
       "thumb": false
     },
     {
@@ -46129,12 +46129,12 @@
     },
     {
       "address": "0x27dc24",
-      "function": "FUN_0027dc24",
+      "function": "btlSpriteSelectSource",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_0027dc24.o",
+      "object": "build/obj/_code/0027/btlSpriteSelectSource.o",
       "size": 376,
-      "source": "src/_code/0027/FUN_0027dc24.cpp",
-      "target": "orig/target/_code/0027/FUN_0027dc24.o",
+      "source": "src/_code/0027/btlSpriteSelectSource.cpp",
+      "target": "orig/target/_code/0027/btlSpriteSelectSource.o",
       "thumb": false
     },
     {
@@ -46676,12 +46676,12 @@
     {
       "address": "0x27fca0",
       "file": "map/mapDepart",
-      "function": "FUN_0027fca0",
+      "function": "mapDepartSpawnPlayerEffect",
       "module": "_code",
-      "object": "build/obj/_code/map/mapDepart/FUN_0027fca0.o",
+      "object": "build/obj/_code/map/mapDepart/mapDepartSpawnPlayerEffect.o",
       "size": 296,
-      "source": "src/_code/map/mapDepart/FUN_0027fca0.cpp",
-      "target": "orig/target/_code/map/mapDepart/FUN_0027fca0.o",
+      "source": "src/_code/map/mapDepart/mapDepartSpawnPlayerEffect.cpp",
+      "target": "orig/target/_code/map/mapDepart/mapDepartSpawnPlayerEffect.o",
       "thumb": false
     },
     {
@@ -61595,12 +61595,12 @@
     {
       "address": "0x2c733c",
       "file": "AsdSDK/Source/Gfx/Effect/effMenu",
-      "function": "FUN_002c733c",
+      "function": "effMenuDrawGradientRect",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effMenu/FUN_002c733c.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effMenu/effMenuDrawGradientRect.o",
       "size": 356,
-      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effMenu/FUN_002c733c.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effMenu/FUN_002c733c.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effMenu/effMenuDrawGradientRect.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effMenu/effMenuDrawGradientRect.o",
       "thumb": false
     },
     {
@@ -62148,12 +62148,12 @@
     {
       "address": "0x2cb054",
       "file": "title/titleConfig",
-      "function": "FUN_002cb054",
+      "function": "titleConfigDraw",
       "module": "_code",
-      "object": "build/obj/_code/title/titleConfig/FUN_002cb054.o",
+      "object": "build/obj/_code/title/titleConfig/titleConfigDraw.o",
       "size": 1932,
-      "source": "src/_code/title/titleConfig/FUN_002cb054.cpp",
-      "target": "orig/target/_code/title/titleConfig/FUN_002cb054.o",
+      "source": "src/_code/title/titleConfig/titleConfigDraw.cpp",
+      "target": "orig/target/_code/title/titleConfig/titleConfigDraw.o",
       "thumb": false
     },
     {
@@ -62726,12 +62726,12 @@
     },
     {
       "address": "0x2cdf2c",
-      "function": "FUN_002cdf2c",
+      "function": "resultApplySpoils",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002cdf2c.o",
+      "object": "build/obj/_code/002c/resultApplySpoils.o",
       "size": 924,
-      "source": "src/_code/002c/FUN_002cdf2c.cpp",
-      "target": "orig/target/_code/002c/FUN_002cdf2c.o",
+      "source": "src/_code/002c/resultApplySpoils.cpp",
+      "target": "orig/target/_code/002c/resultApplySpoils.o",
       "thumb": false
     },
     {
@@ -64082,12 +64082,12 @@
     },
     {
       "address": "0x2d6d44",
-      "function": "FUN_002d6d44",
+      "function": "campCecEditMessageState",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002d6d44.o",
+      "object": "build/obj/_code/002d/campCecEditMessageState.o",
       "size": 1516,
-      "source": "src/_code/002d/FUN_002d6d44.cpp",
-      "target": "orig/target/_code/002d/FUN_002d6d44.o",
+      "source": "src/_code/002d/campCecEditMessageState.cpp",
+      "target": "orig/target/_code/002d/campCecEditMessageState.o",
       "thumb": false
     },
     {
@@ -67944,12 +67944,12 @@
     },
     {
       "address": "0x2ec588",
-      "function": "FUN_002ec588",
+      "function": "campCecInboxState",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002ec588.o",
+      "object": "build/obj/_code/002e/campCecInboxState.o",
       "size": 2184,
-      "source": "src/_code/002e/FUN_002ec588.cpp",
-      "target": "orig/target/_code/002e/FUN_002ec588.o",
+      "source": "src/_code/002e/campCecInboxState.cpp",
+      "target": "orig/target/_code/002e/campCecInboxState.o",
       "thumb": false
     },
     {
@@ -75176,12 +75176,12 @@
     },
     {
       "address": "0x317e78",
-      "function": "FUN_00317e78",
+      "function": "dataTableSortLookupSections",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_00317e78.o",
+      "object": "build/obj/_code/0031/dataTableSortLookupSections.o",
       "size": 404,
-      "source": "src/_code/0031/FUN_00317e78.cpp",
-      "target": "orig/target/_code/0031/FUN_00317e78.o",
+      "source": "src/_code/0031/dataTableSortLookupSections.cpp",
+      "target": "orig/target/_code/0031/dataTableSortLookupSections.o",
       "thumb": false
     },
     {
@@ -78871,12 +78871,12 @@
     },
     {
       "address": "0x333b74",
-      "function": "FUN_00333b74",
+      "function": "questBuildRewardSpoils",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_00333b74.o",
+      "object": "build/obj/_code/0033/questBuildRewardSpoils.o",
       "size": 572,
-      "source": "src/_code/0033/FUN_00333b74.cpp",
-      "target": "orig/target/_code/0033/FUN_00333b74.o",
+      "source": "src/_code/0033/questBuildRewardSpoils.cpp",
+      "target": "orig/target/_code/0033/questBuildRewardSpoils.o",
       "thumb": false
     },
     {
@@ -81104,12 +81104,12 @@
     },
     {
       "address": "0x342e5c",
-      "function": "FUN_00342e5c",
+      "function": "uiDrawRoutedConnector",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_00342e5c.o",
+      "object": "build/obj/_code/0034/uiDrawRoutedConnector.o",
       "size": 324,
-      "source": "src/_code/0034/FUN_00342e5c.cpp",
-      "target": "orig/target/_code/0034/FUN_00342e5c.o",
+      "source": "src/_code/0034/uiDrawRoutedConnector.cpp",
+      "target": "orig/target/_code/0034/uiDrawRoutedConnector.o",
       "thumb": false
     },
     {
@@ -94480,12 +94480,12 @@
     },
     {
       "address": "0x3821d8",
-      "function": "FUN_003821d8",
+      "function": "qcDeliveryStep",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_003821d8.o",
+      "object": "build/obj/_code/0038/qcDeliveryStep.o",
       "size": 1684,
-      "source": "src/_code/0038/FUN_003821d8.cpp",
-      "target": "orig/target/_code/0038/FUN_003821d8.o",
+      "source": "src/_code/0038/qcDeliveryStep.cpp",
+      "target": "orig/target/_code/0038/qcDeliveryStep.o",
       "thumb": false
     },
     {
@@ -94550,12 +94550,12 @@
     },
     {
       "address": "0x383674",
-      "function": "FUN_00383674",
+      "function": "qcGetDeliveryQuestId",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00383674.o",
+      "object": "build/obj/_code/0038/qcGetDeliveryQuestId.o",
       "size": 24,
-      "source": "src/_code/0038/FUN_00383674.cpp",
-      "target": "orig/target/_code/0038/FUN_00383674.o",
+      "source": "src/_code/0038/qcGetDeliveryQuestId.cpp",
+      "target": "orig/target/_code/0038/qcGetDeliveryQuestId.o",
       "thumb": false
     },
     {
@@ -95643,12 +95643,12 @@
     {
       "address": "0x38bae8",
       "file": "addon/sys/aocFileContent",
-      "function": "FUN_0038bae8",
+      "function": "aocFileContentPrepareMountBuffer",
       "module": "_code",
-      "object": "build/obj/_code/addon/sys/aocFileContent/FUN_0038bae8.o",
+      "object": "build/obj/_code/addon/sys/aocFileContent/aocFileContentPrepareMountBuffer.o",
       "size": 336,
-      "source": "src/_code/addon/sys/aocFileContent/FUN_0038bae8.cpp",
-      "target": "orig/target/_code/addon/sys/aocFileContent/FUN_0038bae8.o",
+      "source": "src/_code/addon/sys/aocFileContent/aocFileContentPrepareMountBuffer.cpp",
+      "target": "orig/target/_code/addon/sys/aocFileContent/aocFileContentPrepareMountBuffer.o",
       "thumb": false
     },
     {
@@ -98667,12 +98667,12 @@
     },
     {
       "address": "0x3a4a60",
-      "function": "FUN_003a4a60",
+      "function": "shopQuantityStep",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a4a60.o",
+      "object": "build/obj/_code/003a/shopQuantityStep.o",
       "size": 3300,
-      "source": "src/_code/003a/FUN_003a4a60.cpp",
-      "target": "orig/target/_code/003a/FUN_003a4a60.o",
+      "source": "src/_code/003a/shopQuantityStep.cpp",
+      "target": "orig/target/_code/003a/shopQuantityStep.o",
       "thumb": false
     },
     {
@@ -103002,12 +103002,12 @@
     },
     {
       "address": "0x3c3238",
-      "function": "FUN_003c3238",
+      "function": "uiDrawFlagLabels",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c3238.o",
+      "object": "build/obj/_code/003c/uiDrawFlagLabels.o",
       "size": 272,
-      "source": "src/_code/003c/FUN_003c3238.cpp",
-      "target": "orig/target/_code/003c/FUN_003c3238.o",
+      "source": "src/_code/003c/uiDrawFlagLabels.cpp",
+      "target": "orig/target/_code/003c/uiDrawFlagLabels.o",
       "thumb": false
     },
     {
@@ -103392,12 +103392,12 @@
     },
     {
       "address": "0x3c86bc",
-      "function": "FUN_003c86bc",
+      "function": "supportUnitInitializeRandomCategory",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c86bc.o",
+      "object": "build/obj/_code/003c/supportUnitInitializeRandomCategory.o",
       "size": 392,
-      "source": "src/_code/003c/FUN_003c86bc.cpp",
-      "target": "orig/target/_code/003c/FUN_003c86bc.o",
+      "source": "src/_code/003c/supportUnitInitializeRandomCategory.cpp",
+      "target": "orig/target/_code/003c/supportUnitInitializeRandomCategory.o",
       "thumb": false
     },
     {
@@ -103572,12 +103572,12 @@
     },
     {
       "address": "0x3c911c",
-      "function": "FUN_003c911c",
+      "function": "fusionResolveRaceRulePair",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003c911c.o",
+      "object": "build/obj/_code/003c/fusionResolveRaceRulePair.o",
       "size": 408,
-      "source": "src/_code/003c/FUN_003c911c.cpp",
-      "target": "orig/target/_code/003c/FUN_003c911c.o",
+      "source": "src/_code/003c/fusionResolveRaceRulePair.cpp",
+      "target": "orig/target/_code/003c/fusionResolveRaceRulePair.o",
       "thumb": false
     },
     {

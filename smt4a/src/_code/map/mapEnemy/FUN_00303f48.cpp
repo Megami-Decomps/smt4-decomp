@@ -90,7 +90,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b64c0. */
 /* Supplied declaration required: FUN_002b67a0. */
-extern int FUN_002d7c88(unsigned int);
+extern int mapEnemyLoadExtraModel(unsigned int);
 extern char *FUN_00332fcc(void);
 /* Supplied declaration required: FUN_00356308. */
 extern char *FUN_00371058(void);
@@ -539,7 +539,7 @@ LAB_0030444c:
       *(char *)(temp_v2 + 0x1af) = (char)temp_v0;
     }
     *(unsigned short *)(temp_v2 + 0x16e) = 0xffff;
-    temp_v0 = FUN_002d7c88(*(unsigned int *)(temp_v2 + 0x1b0));
+    temp_v0 = mapEnemyLoadExtraModel(*(unsigned int *)(temp_v2 + 0x1b0));
     temp_v14 = (float)((unsigned long long)temp_v13 >> 0x20);
     if (temp_v0 != 0) break;
 LAB_00304874:

@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero-value lifetimes and candidate-cursor address scheduling differ; the search receives its cursor argument. */
+/* NON_MATCHING: only the zero constants differ: retail gives emptySlot its own mov r6, #0 and starts the slot search from it, the build shares the slot-clearing zero. */
 #include "skill/SkillSlotScreen.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
@@ -13,12 +13,13 @@ void skillHelpUpdateAttributeAndTarget(s32 id);
 // skill's candidate entry (scrolled into view), then refresh the skill help for that skill.
 void FUN_00359a08(SkillSlotScreen *screen)
 {
-    s32 emptySlot = 0;
     screen->freedCount--;
-    u16 skill = screen->slots[screen->freedSlots[screen->freedCount]];
-    screen->slots[screen->freedSlots[screen->freedCount]] = 0;
+    s32 freed = screen->freedSlots[screen->freedCount];
+    u16 skill = screen->slots[freed];
+    screen->slots[freed] = 0;
     screen->freedSlots[screen->freedCount] = -1;
 
+    s32 emptySlot = 0;
     for (s32 i = 0; i < 8; i++) {
         if (screen->slots[i] == 0) {
             emptySlot = i;
@@ -40,9 +41,8 @@ void FUN_00359a08(SkillSlotScreen *screen)
             break;
         }
     }
-    u8 *cursor = screen->candidateCursor;
-    s32 limit = uiSearchPrimary(cursor) - 2;
-    s32 last = objectApplyIfUnblocked(cursor) - 2;
+    s32 limit = uiSearchPrimary(screen->candidateCursor) - 2;
+    s32 last = objectApplyIfUnblocked(screen->candidateCursor) - 2;
     s32 scroll = 0;
     if (index > limit) {
         scroll = index - limit;
@@ -52,8 +52,8 @@ void FUN_00359a08(SkillSlotScreen *screen)
         scroll++;
         offset--;
     }
-    scrollOwnerSetValue(cursor, scroll);
-    flaggedEntrySetValueA(cursor, offset);
+    scrollOwnerSetValue(screen->candidateCursor, scroll);
+    flaggedEntrySetValueA(screen->candidateCursor, offset);
     skillHelpUpdateAttributeAndTarget(skill);
 }
 

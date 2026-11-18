@@ -1,15 +1,13 @@
-/* NON_MATCHING: corrected 0.707f mix and three-argument voice allocation; lock/data/initial-state registers still prevent retail STRD. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 extern const char DAT_00409724[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp": __FILE__ */
 extern u8 DAT_004e315c; /* nn::os::CriticalSection guarding the sound layer */
 
-void nn_os_CriticalSection_Enter(void *lock);
-void nn_os_CriticalSection_Leave(void *lock);
 void *asdMemoryAllocAligned(int heap, int alignClass, int unk08, u32 size, u32 align, int fromFront);
 u32 soundBlockGetPayloadEnd(const void *data);
 void FUN_00129020(const void *data);
@@ -28,10 +26,9 @@ void soundQueueArchiveWaveBuffers(u32 voice, void *data, void *waveBuffer0, void
 AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
 {
     AsdSndWaveVoice *sound;
-    void *lock = &DAT_004e315c;
     s32 i;
 
-    nn_os_CriticalSection_Enter(lock);
+    ScopedCriticalLock lock(&DAT_004e315c);
     asdDebugTrace(DAT_00409724, 6423);
     sound = (AsdSndWaveVoice *)asdMemAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdSndWaveVoice), 1);
     sound->unk7c = -1;
@@ -55,7 +52,6 @@ AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
         nn_snd_CTR_InitializeWaveBuffer(sound->waveBuffers[i]);
     }
     soundQueueArchiveWaveBuffers(sound->voice, sound->data, sound->waveBuffers[0], sound->waveBuffers[1], 0);
-    nn_os_CriticalSection_Leave(lock);
     return sound;
 }
 

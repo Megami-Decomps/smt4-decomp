@@ -10,7 +10,7 @@ extern "C" {
 u8 fusionClassifyPair(void *owner, u16 firstId, u16 secondId);
 u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
                  PackedIdentifiers *output);
-u32 FUN_003c911c(LeveledLists *owner, u16 firstId, u16 secondId,
+u32 fusionResolveRaceRulePair(LeveledLists *owner, u16 firstId, u16 secondId,
                  PackedIdentifiers *output);
 const DevilCombinationTableEntryPrefixIV *dataTable05FindByPriorityAndKey(
     u32 firstRace, u32 secondRace);
@@ -27,7 +27,7 @@ u32 FUN_003c9b94(LeveledLists *owner, u16 firstId, u16 secondId,
         break;
     case 2:
     case 3:
-        accepted = FUN_003c911c(owner, firstId, secondId, output);
+        accepted = fusionResolveRaceRulePair(owner, firstId, secondId, output);
         break;
     case 4:
     {

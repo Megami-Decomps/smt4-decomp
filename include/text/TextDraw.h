@@ -7,6 +7,9 @@ extern "C" {
  * and returns the default buffer. */
 char *textExpandGlyphsToBuffer(const char *text, char *out, s32 size);
 
+/* Draws the complete string with the current font at unit scale. */
+void textDrawDefaultString(const char *text, f32 x, f32 y);
+
 /* Draws the whole text at integer x/y with an 8-bit fade amount and a scale. */
 void FUN_0025cc78(const void *text, s32 x, s32 y, s32 fade, f32 scale);
 

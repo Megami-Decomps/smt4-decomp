@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains an unreachable zero-ID iterator guard; readable fixed-range iteration omits it, and selector/state registers differ. */
+/* NON_MATCHING: retail loads the last skill ID and derives the first; the build does the reverse. The prologue and zero-ID guard also schedule differently. */
 #include "ui/UiSpriteApi.h"
 #include "status/StatusDown.h"
 
@@ -30,7 +30,12 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
     screen->skillWords[1] = 0;
     screen->skillWords[2] = 0;
     screen->skillWords[3] = 0;
-    for (u32 id = 0x79f; id <= 0x802; ++id) {
+    const u32 lastSkill = 0x802;
+    const u32 firstSkill = lastSkill - 99;
+    for (u32 id = firstSkill; id <= lastSkill; ++id) {
+        // ID zero is reserved by the skill-table iterator.
+        while (id == 0)
+            ++id;
         if (FUN_00262cb0(static_cast<u16>(id)) && table8Type5GetValue(id)) {
             screen->skillIds[count++] = id;
         }

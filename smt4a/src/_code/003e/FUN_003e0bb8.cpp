@@ -9,7 +9,7 @@ void FUN_003e16cc(BtlStep *, BtlMainStateA *);
 void FUN_003e1a30(BtlStep *, BtlMainStateA *);
 void FUN_003e1b80(BtlStep *, BtlMainStateA *);
 void FUN_003e2504(BtlStep *, BtlMainStateA *);
-void FUN_003e26f0(BtlStep *, BtlMainStateA *);
+void btlStepInitEncounterFlags(BtlStep *, BtlMainStateA *);
 void FUN_003e2a88(BtlStep *, BtlMainStateA *);
 
 // Wait for ordinary transitions to become ready, then initialize and dispatch the encounter transition.
@@ -30,7 +30,7 @@ void FUN_003e0bb8(BtlStep *step, BtlMainStateA *state)
     btlStepEnter(step, 24);
     switch (FUN_003e0f94(step, state)) {
     case 2: FUN_003e1b80(step, state); return;
-    case 1: FUN_003e26f0(step, state); return;
+    case 1: btlStepInitEncounterFlags(step, state); return;
     case 3: FUN_003e1a30(step, state); return;
     case 4: FUN_003e2a88(step, state); return;
     case 5: FUN_003e2504(step, state); return;

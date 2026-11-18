@@ -35,7 +35,7 @@ struct BattleEnemyRuntimeView {
 };
 
 extern "C" {
-void FUN_0027dc24(BtlMainState *state, BattleEnemyFormation *formation, s32 mode);
+void btlSpriteSelectSource(BtlMainState *state, BattleEnemyFormation *formation, s32 mode);
 void FUN_0023ebc8(BtlMainState *state, u8 *payload, const DevilDefinition *definition);
 void FUN_00255e38(BtlMainState *state, u8 *payload, s32 kind, s32 slot, s32 flags);
 void sequenceRequestDeferEx(u32 sequence, const void *parameters);
@@ -71,7 +71,7 @@ extern "C" void battleInitializeEnemyFormation(BtlMainState *state)
     formation->ids[5] = 0;
     formation->scaleX = 1.0f;
     formation->scaleY = 1.0f;
-    FUN_0027dc24(state, battleEnemyFormation(state), 1);
+    btlSpriteSelectSource(state, battleEnemyFormation(state), 1);
     if (g_btlMainState.enemyOverride > 0) {
         const DevilDefinition *definition = reinterpret_cast<const DevilDefinition *>(nkmEnemyFindById((u16)g_btlMainState.enemyOverride));
         BtlEntry temporary;

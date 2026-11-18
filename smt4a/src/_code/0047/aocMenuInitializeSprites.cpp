@@ -30,8 +30,7 @@ void uiStoreTextureEntryCenter(UiSpriteState *, s32 group, s32 image);
 void FUN_0015f258(void *panel);
 u32 spriteHandleCreate(s32 flags);
 void positionStateSet(u32 handle, s32 slot, u32 color, f32 duration);
-void FUN_004cf7cc(void *control);
-void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
+void spritePresetBankInitialize(void *control);
 
 // Initialize the AOC menu's common sprite resources, entry frames and background.
 void aocMenuInitializeSprites(AocMenuSprites *menu)
@@ -57,6 +56,6 @@ void aocMenuInitializeSprites(AocMenuSprites *menu)
     menu->background = spriteHandleCreate(0);
     uiObjectSetColorRgb(menu->background, 0xffffffff);
     positionStateSet(menu->background, 0, 0x646464ff, 0.0f);
-    FUN_004cf7cc(menu->control);
+    spritePresetBankInitialize(menu->control);
 }
 }

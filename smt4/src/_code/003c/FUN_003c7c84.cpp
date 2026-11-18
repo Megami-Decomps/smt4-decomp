@@ -26,7 +26,7 @@ struct UiPlacementDst {
     /* 0x98 */ f32 v2;
 };
 
-void FUN_0027dc24(UiPlacementSrc *src, void *block, int flag);
+void btlSpriteSelectSource(UiPlacementSrc *src, void *block, int flag);
 
 /* Resets the destination's vector, and copies the source position (filling it from the cell if unset). */
 void FUN_003c7c84(UiPlacementDst *dst, UiPlacementSrc *src)
@@ -34,7 +34,7 @@ void FUN_003c7c84(UiPlacementDst *dst, UiPlacementSrc *src)
     dst->v0 = dst->v1 = dst->v2 = 0.0f;
     dst->index = -1;
     if (src->pos.x < 0 || src->pos.y < 0) {
-        FUN_0027dc24(src, src->block, 0);
+        btlSpriteSelectSource(src, src->block, 0);
         s32 x = src->cellX;
         s32 y = src->cellY;
         src->pos.x = x;

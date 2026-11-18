@@ -1,4 +1,3 @@
-/* NON_MATCHING: the group argument and the section count exchange saved registers (r6/r5), and the hoisted devil->effectGroup load lands in r2 instead of overwriting the record pointer in r1. */
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/DataTable.h"
@@ -16,7 +15,6 @@ struct DevilEffectRecord {
 extern "C" {
 extern u32 g_devilRaceEffectCounts[4];
 
-void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 group, s32 effect, u32 context, s32 mode, f32 xScale, f32 yScale);
 
@@ -37,18 +35,15 @@ void devilCreateRaceEffect(u32 devilId, s32 group)
                     break;
                 }
             }
-            DevilEffectRecord record;
-            __aeabi_memcpy4(&record, &records[selected], sizeof(record));
+            DevilEffectRecord record = records[selected];
             s32 *effects = NULL;
             s32 last = -1;
-            if (group == 0)
-                effects = record.first;
-            else if (group == 1)
-                effects = record.second;
-            else if (group == 2)
-                effects = record.third;
-            else if (group == 3)
-                effects = record.fourth;
+            switch (group) {
+            case 0: effects = record.first; break;
+            case 1: effects = record.second; break;
+            case 2: effects = record.third; break;
+            case 3: effects = record.fourth; break;
+            }
             for (u32 i = 0; i < g_devilRaceEffectCounts[group]; ++i) {
                 if (effects[i] != 0)
                     last = static_cast<s8>(i);

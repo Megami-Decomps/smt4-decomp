@@ -36,7 +36,7 @@ f32 FUN_0027f94c(LmapScript *model);
 
 void lmapSetSceneId(u32 sceneId);
 void mapEaseSceneHeading(void);
-void FUN_0027fca0(s32 variant);
+void mapDepartSpawnPlayerEffect(s32 variant);
 void FUN_0027fc14(s32 mode);
 void FUN_0027fae4(f32 x, f32 y, f32 z);
 u32 FUN_002804ec(MapVector *position);
@@ -125,7 +125,7 @@ static __forceinline void lmapScenePlayWarpOutSounds(void)
         soundActorStartOnFreeChannel(0x1000223, lmapSceneSoundPosition());
         break;
     }
-    FUN_0027fca0(-1);
+    mapDepartSpawnPlayerEffect(-1);
     SoundActorQueuePosition position = lmapSceneSoundPosition();
     position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.z += FUN_00282390(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
@@ -153,7 +153,7 @@ static __forceinline void lmapScenePlayWarpInSounds(void)
         soundActorStartOnFreeChannel(0x1000224, lmapSceneSoundPosition());
         break;
     }
-    FUN_0027fca0(-1);
+    mapDepartSpawnPlayerEffect(-1);
     SoundActorQueuePosition position = lmapSceneSoundPosition();
     position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
     position.z += FUN_00282390(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 50.0f;
@@ -249,7 +249,7 @@ void FUN_002712dc(void)
         }
         switch (g_lmapScene->state) {
         case 0:
-            FUN_0027fca0(1);
+            mapDepartSpawnPlayerEffect(1);
             if (g_gameState.mapId != 22) {
                 g_lmapScene->moveMode = 8;
                 g_lmapScene->moveSpeed = 2.0f;
@@ -411,7 +411,7 @@ void FUN_002712dc(void)
         case 0:
             g_lmapScene->moveMode = 27;
             g_lmapScene->moveSpeed = 0.0f;
-            FUN_0027fca0(0);
+            mapDepartSpawnPlayerEffect(0);
             lmapSceneNextState();
             break;
         case 1:
@@ -457,7 +457,7 @@ void FUN_002712dc(void)
         case 0:
             g_lmapScene->moveMode = 19;
             g_lmapScene->moveSpeed = 5.0f;
-            FUN_0027fca0(0);
+            mapDepartSpawnPlayerEffect(0);
             g_lmapScene->unk06C = 0;
             lmapSceneNextState();
             break;
@@ -548,7 +548,7 @@ void FUN_002712dc(void)
         }
         case 1:
             if (++g_lmapScene->stateTime == 6) {
-                FUN_0027fca0(0);
+                mapDepartSpawnPlayerEffect(0);
             }
             if (g_lmapScene->stateTime > 20) {
                 g_lmapScene->moveMode = 10;
@@ -576,12 +576,12 @@ void FUN_002712dc(void)
             case 75:
             case 110:
             case 145:
-                FUN_0027fca0(0);
+                mapDepartSpawnPlayerEffect(0);
                 break;
             }
             if (g_lmapScene->struggleCount + g_lmapScene->stateTime > 120) {
                 mapModelRequest();
-                FUN_0027fca0(0);
+                mapDepartSpawnPlayerEffect(0);
                 g_lmapScene->moveMode = 11;
                 g_lmapScene->moveSpeed = 3.0f;
                 lmapSceneNextState();
@@ -606,7 +606,7 @@ void FUN_002712dc(void)
             g_lmapScene->pose.targetPosition = g_lmapScene->pose.position;
             g_lmapScene->unk06C = 0;
             FUN_002879dc(10, 20, 0);
-            FUN_0027fca0(0);
+            mapDepartSpawnPlayerEffect(0);
             soundActorStartOnFreeChannel(0x1000186, lmapSceneSoundPosition());
             {
                 SoundActorQueuePosition position = lmapSceneSoundPosition();
@@ -784,7 +784,7 @@ void FUN_002712dc(void)
             break;
         case 3:
             if (g_lmapScene->stateTime == 4) {
-                FUN_0027fca0(0);
+                mapDepartSpawnPlayerEffect(0);
                 SoundActorQueuePosition position = lmapSceneSoundPosition();
                 position.x += mathRemPio2f(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 10.0f;
                 position.z += FUN_00282390(g_lmapScene->pose.heading * DEGREES_TO_RADIANS) * 10.0f;

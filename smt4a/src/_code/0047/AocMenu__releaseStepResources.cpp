@@ -1,4 +1,4 @@
-/* NON_MATCHING: global add-on flags are cached rather than reloaded, and final flags/state stores combine into one STM; candidate -O2. */
+/* NON_MATCHING: the flag clears' temporaries take other registers (retail keeps the constant 1 in r1 and the cleared flags in r2), jobStop's zero argument is set later, and the final flags/state/substate stores combine into one STM instead of a STR and a two-register STM. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -40,17 +40,22 @@ void jobFlagsWorkStop(JobFlagsWork *work);
 void ifTouchRegionRemove();
 void asdMemFree(void *buffer);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
-void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
+
+/* Clears flag bits of the add-on main object. */
+static __inline void aocMainClearFlags(AocMain *main, u32 mask)
+{
+    main->flags &= ~mask;
+}
 
 void AocMenu::releaseStepResources()
 {
     AocMenu * object = reinterpret_cast<AocMenu *>(this);
     QuestShutdownWork *work = (QuestShutdownWork *)object;
     AocMain *main = g_aocMain;
-    main->flags &= ~0x100;
+    aocMainClearFlags(main, 0x100);
     main->mode = 1;
     aocMenuSetReadyFlag(main, 1);
-    g_aocMain->flags &= ~0x70;
+    aocMainClearFlags(g_aocMain, 0x70);
     g_aocDisplay->operationActive = 0;
     releaseEntriesB((CountAt5A *)work->entriesB);
     releaseEntriesA((CountAt30 *)work->entriesA);

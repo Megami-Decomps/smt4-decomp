@@ -66,4 +66,10 @@ typedef char MapEffectReservationLayoutCheck[
     sizeof(MapEffectInstance) == 0x178 &&
     offsetof(MapEffectInstance, effect) == 0x124 &&
     offsetof(MapEffectInstance, channel) == 0x16C ? 1 : -1];
+
+// The three scale payloads are passed as words, not as VFP arguments.
+extern "C" s32 FUN_00263cb8(u32 resource, u32 kind, u32 owner, u32 appearanceResource,
+    u32 first, u32 second, u8 red, u8 green, u8 blue, u8 secondaryRed, u8 secondaryGreen,
+    u8 secondaryBlue, s8 channel, u8 mode, u8 flags, u32 scaleX, u32 scaleY, u32 scaleZ,
+    u32 option, f32 x, f32 y, f32 z, f32 rotationY, f32 rotationX, f32 rotationZ, f32 heading);
 #endif

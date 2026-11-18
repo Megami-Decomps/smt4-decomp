@@ -1,13 +1,9 @@
-/* NON_MATCHING: LDRD combines buffer-owner/begin loads and narrows the saved frame; O2 may restore retail's scalar load/store scheduling. */
+/* NON_MATCHING: collection clear/release body matches; only retail's unused fp/r3 frame push and pre-vptr sl zeroing differ. */
 #include "shard/W6_W6Match7_OwnedCollections.h"
 
 namespace {
-inline void destroyCollection(AllocatorOwnedCollection*& slot)
+inline void clearCollection(AllocatorOwnedCollection* collection)
 {
-    AllocatorOwnedCollection* collection = slot;
-    if (collection == NULL) {
-        return;
-    }
     AllocatorOwnedCollectionEntry** end = collection->end;
     for (AllocatorOwnedCollectionEntry** current = collection->begin; current != end; ++current) {
         AllocatorOwnedCollectionEntry* entry = *current;
@@ -18,6 +14,15 @@ inline void destroyCollection(AllocatorOwnedCollection*& slot)
         }
     }
     collection->end = collection->begin;
+}
+
+inline void destroyCollection(AllocatorOwnedCollection*& slot)
+{
+    AllocatorOwnedCollection* collection = slot;
+    if (collection == NULL) {
+        return;
+    }
+    clearCollection(collection);
     if (collection->bufferOwner != NULL && collection->begin != NULL) {
         collection->bufferOwner->release(collection->begin);
     }

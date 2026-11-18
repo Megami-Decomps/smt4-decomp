@@ -1,4 +1,4 @@
-/* NON_MATCHING: Native storage destructors recover subobject bases; pre-destructor values cleanup and loop index address register still differ. */
+/* NON_MATCHING: only the register of the index * 3 temporary in the loop over the first two animation storages differs (retail r1, the build r0). */
 #include "classes/Obj557b18.h"
 #include "shard/W6_W6Match2_AnimationPlayback.h"
 
@@ -19,6 +19,10 @@ struct MoriAnimationStorage {
     void *values;
     ~MoriAnimationStorage();
 };
+/* The third animation storage, whose destructor releases its values before the base's. */
+struct MoriAnimationValuesStorage : MoriAnimationStorage {
+    ~MoriAnimationValuesStorage();
+};
 struct MoriRootStorage {
     u8 unk00[8];
     void *buffer;
@@ -29,7 +33,9 @@ struct MoriModelCleanupView {
     u32 unk000;
     u32 flags;
     MoriRootStorage root;
-    MoriAnimationStorage animations[4]; // 0x24
+    MoriAnimationStorage animations[2]; // 0x24
+    MoriAnimationValuesStorage third; // 0x84
+    MoriAnimationStorage fourth; // 0xb4
     u8 unk0e4[0x128];
     MoriModelOwnedObject *resources; // 0x20c
     u8 unk210[0x44];
@@ -61,6 +67,14 @@ __inline MoriRootStorage::~MoriRootStorage()
     }
 }
 
+__inline MoriAnimationValuesStorage::~MoriAnimationValuesStorage()
+{
+    if (values != NULL) {
+        asdMemFree(values);
+        values = NULL;
+    }
+}
+
 extern "C" void moriModelBodyReleaseOwnedStorage(Obj557b18 *body)
 {
     MoriModelCleanupView *object = (MoriModelCleanupView *)body;
@@ -68,12 +82,8 @@ extern "C" void moriModelBodyReleaseOwnedStorage(Obj557b18 *body)
         delete object->effect;
         object->effect = NULL;
     }
-    object->animations[3].~MoriAnimationStorage();
-    if (object->animations[2].values != NULL) {
-        asdMemFree(object->animations[2].values);
-        object->animations[2].values = NULL;
-    }
-    object->animations[2].~MoriAnimationStorage();
+    object->fourth.~MoriAnimationStorage();
+    object->third.~MoriAnimationValuesStorage();
     for (s32 index = 0; index < 2; ++index) {
         object->animations[index].~MoriAnimationStorage();
     }

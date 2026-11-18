@@ -1,63 +1,47 @@
-/* NON_MATCHING: exact 92-row control/instruction sequence except work base R7 and +0x100 view R8 are swapped from retail; alternate allocation/optimization candidate. */
 #include "battle/BtlEntry.h"
+#include "camp/CampCec/CampCecEdit.h"
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/SaveSlotTableIV.h"
-
-namespace {
-struct RequestedUnitWork {
-    u8 unk000[0x104];
-    s32 status;
-    u8 unk108[8];
-    u32 phase;
-    u8 unk114[0xc];
-    s16 requestedId;
-};
-struct RequestedUnitSlots {
-    u8 unk0000[0x90f0];
-    s8 reserve[24];
-    s8 active[3];
-};
-}
 
 extern "C" {
 s32 partyPanelGetRequestedUnitId();
 void FUN_002579bc(s32 index);
 
-s32 campCecClassifyRequestedUnit(void* context)
+// Queue the edit screen's next message for the requested demon: 5 when it is an unflagged active party member, 2 when it is a flagged stock demon, otherwise 4.
+s32 campCecClassifyRequestedUnit(CampCecEdit *work)
 {
-    RequestedUnitWork* work = static_cast<RequestedUnitWork*>(context);
     s32 result = 0;
     if (partyPanelGetRequestedUnitId()) {
-        work->requestedId = static_cast<s16>(partyPanelGetRequestedUnitId());
-        work->status = -1;
-        RequestedUnitSlots* slots = reinterpret_cast<RequestedUnitSlots*>(gameGetSlotTable());
+        work->unit = static_cast<s16>(partyPanelGetRequestedUnitId());
+        work->nextMessage = -1;
+        SaveSlotTableIV *slots = gameGetSlotTable();
         for (s32 i = 0; i < 3; ++i) {
             if (slots->active[i] >= 0
-                && gameGetUnitRecord(slots->active[i])->id == work->requestedId
+                && gameGetUnitRecord(slots->active[i])->id == work->unit
                 && !flagWordTestBit(gameGetUnitRecord(slots->active[i]), 10)
                 && !flagWordTestBit(gameGetUnitRecord(slots->active[i]), 1)) {
-                work->status = 5;
+                work->nextMessage = 5;
                 break;
             }
         }
-        if (work->status == -1) {
+        if (work->nextMessage == -1) {
             for (s32 i = 0; i < 24; ++i) {
-                if (slots->reserve[i] >= 0
-                    && gameGetUnitRecord(slots->reserve[i])->id == work->requestedId
-                    && (flagWordTestBit(gameGetUnitRecord(slots->reserve[i]), 10)
-                        || flagWordTestBit(gameGetUnitRecord(slots->reserve[i]), 1))) {
-                    work->status = 2;
+                if (slots->stock[i] >= 0
+                    && gameGetUnitRecord(slots->stock[i])->id == work->unit
+                    && (flagWordTestBit(gameGetUnitRecord(slots->stock[i]), 10)
+                        || flagWordTestBit(gameGetUnitRecord(slots->stock[i]), 1))) {
+                    work->nextMessage = 2;
                     break;
                 }
             }
-            if (work->status == -1) {
+            if (work->nextMessage == -1) {
                 FUN_002579bc(0);
-                work->status = 4;
+                work->nextMessage = 4;
             }
         }
         result = 2;
-        work->phase = 2;
+        work->nextState = 2;
     }
     return result;
 }

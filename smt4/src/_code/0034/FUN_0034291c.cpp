@@ -13,7 +13,7 @@ int FUN_002bdf94(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_0032b4f8(int, int, int);
-int FUN_00342e5c(int, float *, float *, unsigned int, int);
+int uiDrawRoutedConnector(int, float *, float *, unsigned int, int);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -40,7 +40,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0032b4f8. */
-/* Supplied declaration required: FUN_00342e5c. */
+/* Supplied declaration required: uiDrawRoutedConnector. */
 
 
 void FUN_0034291c(int param_1)
@@ -125,7 +125,7 @@ void FUN_0034291c(int param_1)
     temp_v1 = 400 - temp_v4;
   }
   FUN_002b659c(temp_v4,0,temp_v1,0xf0);
-  FUN_00342e5c(param_1,&temp_v11,&temp_v12,
+  uiDrawRoutedConnector(param_1,&temp_v11,&temp_v12,
                *(unsigned int *)(param_1 + (unsigned int)(*(char *)(param_1 + 0x55) != '\0') * 4 + 0xdc),0x41)
   ;
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);

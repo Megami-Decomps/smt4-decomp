@@ -8,7 +8,7 @@ public:
     virtual void unk00();
     virtual void unk04();
     virtual void unk08();
-    virtual void unk0C();
+    virtual void update(const void *cursor);   /* follows the category's list cursor */
     virtual void refresh(u32 color);
     /* 0x04 */ u8 unk04Data[0x3C];
     /* 0x40 */ s32 firstRow;

@@ -24,7 +24,7 @@ int gameGetUnitRecord(...);
 int questDataGetRecord(void);
 int dataTable01FindByIdWithAoc(unsigned int);
 int dataFindKindRecordWithAocOverrides(unsigned int, int);
-int FUN_00383674(void);
+int qcGetDeliveryQuestId(void);
 int QuestCenter_GetActiveEntry(void);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -59,7 +59,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: bannerShow. */
 extern int sys43e188GetStateB(void);
-/* Supplied declaration required: FUN_00383674. */
+/* Supplied declaration required: qcGetDeliveryQuestId. */
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
 
 
@@ -111,7 +111,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
   temp_v11 = '\0';
   temp_v14 = 0;
   QuestCenter_GetActiveEntry();
-  temp_v4 = FUN_00383674() & 0xffff;
+  temp_v4 = qcGetDeliveryQuestId() & 0xffff;
   questDataGetRecord();
   temp_v3 = scrWorkGetValue(3);
   if (temp_v3 < 6) {
@@ -196,7 +196,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
         if (*(char *)(temp_v4 + 6) == '\0') {
           temp_v3 = (int)gameGetMapBlock();
           QuestCenter_GetActiveEntry();
-          temp_v2 = FUN_00383674();
+          temp_v2 = qcGetDeliveryQuestId();
           FUN_0028784c(temp_v2,0);
           *(unsigned short *)(temp_v3 + 0x1062) = 0;
           *(unsigned short *)(temp_v3 + 0x1060) = 0;

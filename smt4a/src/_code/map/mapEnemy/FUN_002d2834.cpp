@@ -131,7 +131,7 @@ extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: gameDataBlocksAddFloat. */
 /* Supplied declaration required: FUN_002d1f40. */
-extern int FUN_002d7c88(unsigned int);
+extern int mapEnemyLoadExtraModel(unsigned int);
 /* Supplied declaration required: FUN_00303a5c. */
 /* Supplied declaration required: effectSpawnTypeTen. */
 extern int mapCollisionExists(void);
@@ -1775,7 +1775,7 @@ LAB_002d54c4:
               if (temp_v3 != 0) {
                 *(char *)(temp_v10 + 0x1af) = (char)temp_v3;
               }
-              temp_v3 = FUN_002d7c88(*(unsigned int *)(temp_v10 + 0x1b0));
+              temp_v3 = mapEnemyLoadExtraModel(*(unsigned int *)(temp_v10 + 0x1b0));
             } while (temp_v3 == 0);
             temp_v3 = (int)gameFlagsGetBlock();
             *(unsigned int *)(temp_v10 + 0x3c) = *(unsigned int *)(temp_v10 + 0x48);

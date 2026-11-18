@@ -1,6 +1,6 @@
 #ifndef BATTLE_RESERVE_EDITOR_H
 #define BATTLE_RESERVE_EDITOR_H
-#include "common.h"
+#include "battle/btlMain.h"
 #include <stddef.h>
 
 struct ReserveEditorWork {
@@ -25,4 +25,13 @@ typedef char ReserveEditorRecordOffsets[
     offsetof(ReserveEditorRecord, scale) == 0x40 &&
     offsetof(ReserveEditorRecord, kind) == 0x1BC &&
     offsetof(ReserveEditorRecord, value) == 0x1C0 ? 1 : -1];
+
+/* The reserve editor uses one scalar beyond the common auxiliary battle prefix. */
+struct ReserveEditorAuxStateA {
+    BtlAuxA prefix;
+    u8 unk3054[0x9C70 - sizeof(BtlAuxA)];
+    /* 0x9C70 */ f32 scalar;
+};
+typedef char ReserveEditorAuxStateOffset[sizeof(BtlAuxA) == 0x3054 &&
+    offsetof(ReserveEditorAuxStateA, scalar) == 0x9C70 ? 1 : -1];
 #endif

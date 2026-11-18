@@ -1,4 +1,3 @@
-/* NON_MATCHING: callback targets are resolved; argument decoding and the first process call's stack setup allocate r0/r1/r2/r5 differently. */
 #include "shop/shopMain.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -39,7 +38,7 @@ extern "C" void shopCreateProcessAndDrawTasks(const u32 *arguments, s32 bytes)
     } else {
         work->mode = 1;
     }
-    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005361d4), 4, 0, NULL, FUN_0027dda4, shopProcessMarkFinished, reinterpret_cast<u32>(work));
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005361d4), 4, 0, NULL, FUN_0027dda4, shopProcessMarkFinished, reinterpret_cast<u32>(g_shop));
     taskCreateDraw(DAT_005361c4, 101, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
     taskCreateDraw(DAT_005361c4, 204, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
     taskCreateDraw(DAT_005361b0, 235, 1, 0, ownerChildNotifyEarlyState, NULL, g_shop, work->task);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: eight equality comparisons use reversed CMP operands; control flow and instruction count match. */
+/* NON_MATCHING: only the four comparisons of a loaded portrait against the desired ones use reversed CMP operands (retail cmp id, desired). */
 #include "camp/Unite/UniteGlobals.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
@@ -27,11 +27,11 @@ void FUN_00231574(void)
         }
     }
     for (s32 index = 0; index < 4; ++index) {
-        u16 id = work->portraitSelectionA.desired[selected + index];
-        if (id != 0 && id != static_cast<u16>(work->portraitSelectionA.loaded[0]) &&
-            id != static_cast<u16>(work->portraitSelectionA.loaded[1]) &&
-            id != static_cast<u16>(work->portraitSelectionA.loaded[2]) &&
-            id != static_cast<u16>(work->portraitSelectionA.loaded[3])) {
+        if (work->portraitSelectionA.desired[selected + index] != 0 &&
+            work->portraitSelectionA.desired[selected + index] != static_cast<u16>(work->portraitSelectionA.loaded[0]) &&
+            work->portraitSelectionA.desired[selected + index] != static_cast<u16>(work->portraitSelectionA.loaded[1]) &&
+            work->portraitSelectionA.desired[selected + index] != static_cast<u16>(work->portraitSelectionA.loaded[2]) &&
+            work->portraitSelectionA.desired[selected + index] != static_cast<u16>(work->portraitSelectionA.loaded[3])) {
             for (s32 slot = 0; slot < 4; ++slot) {
                 if (work->portraitSelectionA.loaded[slot] == 0) {
                     statusBustUpPortraitAcquire(static_cast<s16>(work->portraitSelectionA.desired[selected + index]), 1);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: the effect-speed constant and the pushed-state bookkeeping are scheduled differently (retail holds 1.0f in s16 across the pops and spreads the float arguments of the overlay call over s0-s4). */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
 #include "Model/MoriModelShadowMap.h"
 
 extern "C" {
@@ -44,8 +45,8 @@ void FUN_0046a868(TitleOverlayA *overlay)
 
         renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_renderCtx, 0);
-        f32 preset = (f32)asdGxPresetsGetByKind(g_renderCtx->stereoMode);
-        f32 height = (f32)asdGxPresetsGetHeightByKind(g_renderCtx->stereoMode);
+        f32 preset = (f32)asdGxPresetsGetByKind(renderCtxGetStereoMode(g_renderCtx));
+        f32 height = (f32)asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_renderCtx));
         gxSubmitDrawZeroExtraParams(alpha, alpha, alpha, alpha, 0.0f, 0.0f, height, preset, 0.0f);
         renderStackPop(&g_renderCtx->stackA);
     }

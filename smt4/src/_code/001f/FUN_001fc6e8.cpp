@@ -71,7 +71,7 @@ int FUN_00255e38(...);
 int FUN_002560a4(int);
 int FUN_00256124(void);
 int FUN_00256194(void);
-int FUN_0027dc24(int, int, int);
+int btlSpriteSelectSource(int, int, int);
 int gameOptionsEnableAndReset(void);
 int memClear(...);
 int FUN_002f34cc(...);
@@ -82,7 +82,7 @@ int FUN_003ad754(...);
 int partyStockUpdateCounters(void);
 int FUN_003bef90(void);
 int FUN_003c8428(int);
-int FUN_003c86bc(void);
+int supportUnitInitializeRandomCategory(void);
 
 /* stack frame of param_1: 20 slot(s), 80 byte(s) */
 typedef struct {
@@ -149,7 +149,7 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00256194. */
 /* Supplied declaration required: bgmStopNoForce. */
 /* Supplied declaration required: FUN_0027dbc8. */
-/* Supplied declaration required: FUN_0027dc24. */
+/* Supplied declaration required: btlSpriteSelectSource. */
 /* Supplied declaration required: FUN_0027de98. */
 extern int FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: btlEventSelectTrigger. */
@@ -198,7 +198,7 @@ extern int FUN_003bf0a4(void);
 /* Supplied declaration required: FUN_003c7c84. */
 /* Supplied declaration required: FUN_003c7f20. */
 /* Supplied declaration required: FUN_003c8428. */
-/* Supplied declaration required: FUN_003c86bc. */
+/* Supplied declaration required: supportUnitInitializeRandomCategory. */
 /* Supplied declaration required: btlEffectReleaseResources. */
 
 
@@ -281,7 +281,7 @@ void FUN_001fc6e8(unsigned int param_1)
     *(unsigned int *)(temp_v4 + 0xdc) = 0;
     *(unsigned int *)(temp_v4 + 0xf8) = 0x3f800000;
     *(unsigned int *)(temp_v4 + 0xfc) = 0x3f800000;
-    FUN_0027dc24(temp_v4,temp_v4 + 200,0);
+    btlSpriteSelectSource(temp_v4,temp_v4 + 200,0);
     partyStockUpdateCounters();
     FUN_003bef90();
     FUN_00338cfc(temp_v4,0);
@@ -326,7 +326,7 @@ void FUN_001fc6e8(unsigned int param_1)
             }
           }
           else {
-            FUN_003c86bc();
+            supportUnitInitializeRandomCategory();
             temp_v3 = gameGetSlotTable();
             if (*(short *)(temp_v3 + 0x9152) != 0) {
               FUN_00337cfc(temp_v4,temp_v33);

@@ -26,7 +26,7 @@ extern TitleConfigSettings g_titleConfigValues;
 
 void FUN_002a0b58(void);
 void titleConfigDestroy(void);
-void FUN_0032ba8c(void);
+void titleConfigDraw(void);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void), void (*destroy)(void),
                    void *owner, u32 job);
@@ -49,7 +49,7 @@ void FUN_0037a2e4(void)
     TitleConfigA *config = static_cast<TitleConfigA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x160, 1));
     g_titleConfig = config;
     config->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE_CONFIG_MAIN"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002a0b58), reinterpret_cast<AsdProcFunc>(titleConfigDestroy), reinterpret_cast<u32>(config));
-    taskCreateDraw("TITLE_CONFIG D", 0xea, 0, 0, FUN_0032ba8c, NULL, NULL, config->job);
+    taskCreateDraw("TITLE_CONFIG D", 0xea, 0, 0, titleConfigDraw, NULL, NULL, config->job);
     paramsClearPacket(&config->params);
     paramsInit(&config->params, DAT_00536bec, 0x30, DAT_00536bec + 0x30, 0x30, 0, 0, 0, 0, 0, 0);
     uiSpriteStateInitFromSource(&config->window, 36, 0, &config->params, 201, 1.0f);

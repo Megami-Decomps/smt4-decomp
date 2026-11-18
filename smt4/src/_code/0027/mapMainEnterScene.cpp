@@ -23,7 +23,7 @@ void FUN_00297a00(void);
 void FUN_0027b65c(u32 area, u32 point);
 void FUN_002849a4(s32 arg);
 void mapSpawnActiveSlotEffects(void);
-void FUN_00277bdc(void);
+void mapSpawnActiveSignboardEffects(void);
 void FUN_002646d4(s32 arg);
 
 /* Set up the map scene, either returning to it or entering at the stored position. */
@@ -50,7 +50,7 @@ void mapMainEnterScene(void)
         MapPosition position = map->position;
         FUN_00297a00();
         FUN_0027b65c(position.area, position.point);
-        FUN_00277bdc();
+        mapSpawnActiveSignboardEffects();
         mapSpawnActiveSlotEffects();
         FUN_002646d4(1);
     }

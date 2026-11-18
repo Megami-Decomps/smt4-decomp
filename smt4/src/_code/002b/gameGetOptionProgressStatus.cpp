@@ -12,7 +12,7 @@ u32 gameGetOptionProgressStatus()
         if (options->unk46 != 0) {
             return 2;
         }
-    } else if (options->unk60A != 0 || options->unk60C != 0 || options->unk60E != 0) {
+    } else if (options->supportCandidates[0] != 0 || options->supportCandidates[1] != 0 || options->supportCandidates[2] != 0) {
         return 1;
     }
     return 0;

@@ -42,7 +42,7 @@ s32 FUN_004dc3b4(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
 u32 randRange(u32 range);
 s32 slotRecordFindById(u32 id);
 u32 FUN_0023e32c(u16* first, u16* second, u32 id, u32 level);
-u32 uniteFindClosestEligibleCandidate(UniteContext* ctx, u32 race, u32 level, s32 flag);
+u16 uniteFindClosestEligibleCandidate(UniteContext* ctx, u32 race, u32 level, s32 flag);
 SlotTable* gameGetSlotTable(void);
 SlotRecord* gameGetSlotRecord(s32 slot);
 

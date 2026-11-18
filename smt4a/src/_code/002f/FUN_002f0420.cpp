@@ -24,7 +24,7 @@ void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, u32 f, s32 tex
 void statusDownRebuildOwnedDemonList(s16 *demons);
 void FUN_002f001c(s16 *pending);
 void statusReplaceSkills(const u16 *skills, u8 count);
-void FUN_00333de0(void);
+void statusDownSetSelectedEntry(void);
 void FUN_0035da20(u32 *slots, s32 value);
 void statusMarkNewSkills(const u16 *skills, u8 count);
 u8 countUnlockedSlots(void);
@@ -113,7 +113,7 @@ void FUN_002f0420(s32 second, u32 unused, s16 *unusedList)
         return;
     }
     if (SS(0x2017, s8) != 4) {
-        FUN_00333de0();
+        statusDownSetSelectedEntry();
         statusDownRebuildOwnedDemonList(entry + 0x50);
     } else {
         if (*(u32 *)(g_gameGlobals.state + 0x20C0) == 0) {

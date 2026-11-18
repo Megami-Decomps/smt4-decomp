@@ -1,4 +1,4 @@
-/* NON_MATCHING: the mode store is now the linker-inlined scriptProcessSetMode call; only the source-byte load and the preview-mode/phase constant registers are scheduled differently from retail. */
+/* NON_MATCHING: the source-flag store and entry address are scheduled differently around the branch, and the step/phase stm uses another base register (retail r2, built r1). */
 #include "classes/Obj42247c.h"
 #include "classes/Obj4223c4.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -49,11 +49,11 @@ void Obj4223c4::FUN_003a76b8()
         ScriptProcess *preview = scrScriptProcessCreate(state->handleA, state->handleB);
         state->preview = preview;
         scriptProcessSetMode(preview, 2);
-        state->phase = 1;
-        state->timer = 0;
+        view->step = 1;
+        view->phase = 0;
         state->source = 1;
         DetailEntry *entries = state->entries;
-        if (!(state->fromParty != 0)) {
+        if (mode == 0) {
             u16 rawId = entries[flaggedValueHolderGetTotal(&state->selection)].id;
             s16 id = rawId;
             s32 cost = FUN_0029ce60(static_cast<u16>(id), state->source, 0, state->sortMode >= 100, 0);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: readable rebuild matches retail row for row (91/91); only the temporary for the loaded creation arguments (retail r1, built r0) and the stack-argument scratch registers differ. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -41,7 +40,7 @@ void shopMainCreate(const u32 *arguments, s32 argumentSize)
         shop->mode = 1;
     }
     shop->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004076b0), 2, 0, 0, FUN_001d9634,
-                                        shopMainOnEnd, reinterpret_cast<u32>(shop));
+                                        shopMainOnEnd, reinterpret_cast<u32>(g_shop));
     taskCreateDraw(reinterpret_cast<const s8 *>(DAT_004076a0), 0x65, 1, 0, shopMainUpdateChild, NULL,
                    reinterpret_cast<u32>(g_shop), reinterpret_cast<void *>(shop->task));
     taskCreateDraw(reinterpret_cast<const s8 *>(DAT_004076a0), 0xCC, 1, 0, shopMainUpdateChild, NULL,

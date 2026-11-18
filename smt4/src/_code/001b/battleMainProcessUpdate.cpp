@@ -173,7 +173,7 @@ void mathVectorClear(void *main);
 void transformClearVectors(void *main);
 s32 dialogIsActive();
 void infoWinStartTimer(u32 state);
-void FUN_0027dc24(BattleTaskContext *work, BattleTaskParameters *parameters, u32 flags);
+void btlSpriteSelectSource(BattleTaskContext *work, BattleTaskParameters *parameters, u32 flags);
 void FUN_00338cfc(BattleTaskContext *work, u32 enabled);
 void FUN_0027dbc8(u32 kind, u32 enabled);
 void jobStopIfValidC(BattleTaskContext *work);
@@ -295,7 +295,7 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
         work->parameters.values[index] = 0;
     work->parameters.scaleX = 1.0f;
     work->parameters.scaleY = 1.0f;
-    FUN_0027dc24(work, &work->parameters, 0);
+    btlSpriteSelectSource(work, &work->parameters, 0);
     FUN_00338cfc(work, 1);
     if (!(work->parameters.mode.flags & 8))
         FUN_0027dbc8(3, 1);

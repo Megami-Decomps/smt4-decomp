@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial-state store scheduling, resource-address pooling and sprite-index multiply registers differ. */
+/* NON_MATCHING: only the button-address multiply in the sprite loop differs (retail computes index * 35 in r0, the build in r1). */
 #include "shard/S3SceneWidget.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/UiSpriteApi.h"
@@ -8,9 +8,16 @@ extern "C" {
 void uiInitializeEightTimerSet(void *timers);
 
 void drawParameterBlockClear(UiResourceParameters *parameters);
-extern const u8 DAT_00404e08[];
-extern const u8 DAT_00404e14[];
-extern const u8 DAT_00404e2c[];
+
+/* Animation tables for paramsInit, defined statically in the original file. */
+static const s32 sMoveKeys[3] = { 10 << 16, -2 << 16, 4 };
+struct SceneFloatKey {
+    f32 from;
+    f32 to;
+    s32 frames;
+};
+static const SceneFloatKey sFadeKeys[2] = { { 0.0f, 1.0f, 4 }, { 0.0f, 1.0f, 10 } };
+static const s32 sSpriteKeys[14] = { -3, 0, -3, 0, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0 };
 
 void FUN_003bb1f0(SceneWidget *widget)
 {
@@ -44,8 +51,8 @@ void FUN_003bb1f0(SceneWidget *widget)
     work->queuedKey = -1;
     memset(work->loaded, 0, sizeof(work->loaded));
     drawParameterBlockClear(&work->parameters);
-    paramsInit(&work->parameters, DAT_00404e08, 12, DAT_00404e14, 24,
-        0, 0, 0, 0, DAT_00404e2c, 56);
+    paramsInit(&work->parameters, sMoveKeys, sizeof(sMoveKeys), sFadeKeys, sizeof(sFadeKeys),
+        NULL, 0, NULL, 0, sSpriteKeys, sizeof(sSpriteKeys));
     for (s32 index = 0; index < 10; ++index) {
         uiSpriteStateInitFromSource(&work->buttons[index], SCENE_TEXTURE_TABLE, 0, &work->parameters, 21, 1.0f);
         uiSpriteSetImageKeyframe(&work->buttons[index], 0, 0);

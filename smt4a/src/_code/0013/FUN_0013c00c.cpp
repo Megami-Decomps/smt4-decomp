@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 29 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: only the VFP argument scheduling before gxSubmitDrawZeroExtraParams differs (retail converts the width into s2 before loading the 0.0f constant). */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match3_SlotState.h"
@@ -24,8 +24,8 @@ void FUN_0013c00c(s32 index)
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, renderCtxPackPassFlags(1, false));
         renderCtxSelectTexture(g_renderCtx, NULL);
-        f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_renderCtx->stereoMode));
-        f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_renderCtx->stereoMode));
+        f32 height = static_cast<f32>(asdGxPresetsGetByKind(renderCtxGetStereoMode(g_renderCtx)));
+        f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_renderCtx)));
         gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
         renderStackPop(&g_renderCtx->stackA);
     }

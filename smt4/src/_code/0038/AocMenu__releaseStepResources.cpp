@@ -1,4 +1,4 @@
-/* NON_MATCHING: global flag reload is folded and final transition stores use a combined STM. */
+/* NON_MATCHING: initial flag-store scheduling differs and the final transition stores use a combined STM. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "ui/SceneWindowWork.h"
@@ -39,7 +39,7 @@ void AocMenu::releaseStepResources()
     CleanupView *scene = reinterpret_cast<CleanupView *>(work);
     aocMainClearFlags(main, 0x100);
     main->mode = 1;
-    main->panelReady = 1;
+    aocMenuSetReadyFlag(main, 1);
     aocMainClearFlags(g_aocMain, 0x70);
     g_aocDisplay->operationActive = 0;
     ifTouchRegionClearAll(work->windowStorage);

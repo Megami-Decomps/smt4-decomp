@@ -69,12 +69,10 @@ void FUN_001523b8(EffectEditorCamera *, s32, f32, f32, f32, f32);
 void FUN_003627ac(f32, f32);
 }
 
-static __inline EffectSelectionTemplate *findEditorTemplate(const EffectSelectionBlock *block)
+static __inline EffectSelectionTemplate *findEditorTemplate(EffectSelectionCatalogEntry **catalog, u16 type, u16 id, u16 groupCount)
 {
-    u16 type = block->type;
-    u16 id = block->id;
-    for (u16 group = 0; group < 13; ++group) {
-        EffectSelectionCatalogEntry *entry = DAT_0059e624[group];
+    for (u16 group = 0; group < groupCount; ++group) {
+        EffectSelectionCatalogEntry *entry = catalog[group];
         if (entry != NULL) {
             for (; entry->parts != NULL; ++entry) {
                 if (entry->parts->type == type && entry->parts->id == id) {
@@ -203,11 +201,11 @@ extern "C" void effectEditorApplyHandlerState(EffectHandlerRequest *request)
     handlerTableCallWithValue(request, controls->parameters.value);
 }
 
-/* NON_MATCHING: index scheduling, catalog bound materialization and register allocation differ. */
+/* NON_MATCHING: catalog search register allocation and final reset-store grouping differ (retail keeps the group zero in r4 for the NULL result and the resets, and uses r9). */
 extern "C" u32 effectEditorActivateSelection()
 {
-    EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.list,
-        g_effectEditor.index + DAT_0059e9a8.object.indices.extraOffset);
+    s32 index = g_effectEditor.index + DAT_0059e9a8.object.indices.extraOffset;
+    EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.list, index);
     g_effectEditor.item = item;
     __aeabi_memcpy4(&g_effectEditorSettings, item, 0x90);
     __aeabi_memcpy4(&g_effectEditorSavedSnapshot, item, 0x80);
@@ -223,7 +221,7 @@ extern "C" u32 effectEditorActivateSelection()
     void *instance = effBlockCreateFromBlock(g_effectEditor.block);
     effectEditorApplyHandlerState(static_cast<EffectHandlerRequest *>(instance));
     g_effectEditor.instance = instance;
-    g_effectEditor.object = findEditorTemplate(item->block);
+    g_effectEditor.object = findEditorTemplate(DAT_0059e624, item->block->type, item->block->id, 13);
     g_effectEditor.object->context = reinterpret_cast<EffectSelectionContext *>(&DAT_0059e9a8.object);
     g_effectEditor.unk4c = 0;
     g_effectEditor.unk50 = 0;

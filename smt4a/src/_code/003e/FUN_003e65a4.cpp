@@ -1,4 +1,4 @@
-/* NON_MATCHING: state-transition stores, script-start call predication and saved registers differ. */
+/* NON_MATCHING: the script-start call is not predicated and the choice paths emit separate tail calls. */
 #include "shop/ShopItemDescription.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -15,7 +15,7 @@ void FUN_003c3e14();
 // Register shop voices, run the selection script, and dispatch the chosen description entry.
 void FUN_003e65a4(ShopItemDescription *work)
 {
-    switch (work->state) {
+    switch (work->selectionState.state) {
     case 0:
         if (work->initialVoice.sound != 0)
             scrSetStringSlot(0, reinterpret_cast<const char *>(dataFindKindRecordWithAocOverrides(work->initialVoice.sound, 0)));
@@ -29,7 +29,7 @@ void FUN_003e65a4(ShopItemDescription *work)
         s32 entry = tableGroupFindEntryIndex(work->tableGroup, DAT_005332c4);
         if (entry >= 0)
             scrScriptProcessStartEntry(work->script, entry);
-        work->state = 2;
+        work->selectionState.state = 2;
         break;
     }
     case 2: {
@@ -37,23 +37,20 @@ void FUN_003e65a4(ShopItemDescription *work)
             return;
         s32 choice = messageGetChoiceResult();
         if (choice != -1 && choice != 3) {
-            // A word overlay here would raise the two-byte-aligned entry type's alignment.
-            struct SelectionView { u8 prefix[0x4C]; s32 selected; };
-            reinterpret_cast<SelectionView *>(work)->selected = choice;
+            work->progress.selectedEntry = choice;
             scrScriptProcessStartEntry(work->script, work->entries[choice].scriptEntry);
-            work->state = 3;
+            work->selectionState.state = 3;
+            return FUN_003c3e14();
         } else {
-            u32 previousMode = work->mode;
-            work->mode = 3;
-            work->state = 0;
-            work->previousMode = previousMode;
+            ShopDescriptionState next(3, 0, work->selectionState.mode);
+            work->selectionState = next;
         }
         FUN_003c3e14();
         break;
     }
     case 3:
         if (scrRunOpcodesStub(work->script) == 2)
-            work->state = 1;
+            work->selectionState.state = 1;
         break;
     }
 }

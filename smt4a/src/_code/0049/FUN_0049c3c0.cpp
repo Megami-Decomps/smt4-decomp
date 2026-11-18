@@ -64,7 +64,7 @@ extern "C" {
 void FUN_0049669c(SelectionScene *scene);
 void FUN_0049a9a8(void);
 void placeWinCreate(void);
-void FUN_004cf7cc(void *timers);
+void spritePresetBankInitialize(void *timers);
 void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
 void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
@@ -113,7 +113,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     scene->unk00394[2] = 0;
     scene->hasProgress = 0;
     scene->shown = 0;
-    FUN_004cf7cc(scene->timers);
+    spritePresetBankInitialize(scene->timers);
     rectangleInitializeSelection(&scene->firstRectangle, 0x140, 0, 0x20);
     rectangleInitializeSelection(&scene->secondRectangle, 0x140, 0, 0x20);
     Obj55c880 *window = new Obj55c880;

@@ -1,422 +1,298 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Quest_UpdateObjective` (_code @ 0x213c20, 0x88c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "common.h"
+#include "script/ScriptArgs.h"
 #include "gamedata/MapSaveBlock.h"
-#include "romwright_types.h"
+#include "quest_center/QuestRecord.h"
+#include "quest_center/QuestDelivery.h"
+#include "quest_center/qcMain.h"
+#include "result/ResultSpoils.h"
+#include "shard/GameOptions.h"
+#include "addon/LookupRecord.h"
 #include "ui/MessageMain.h"
 #include "code/Code0028_Smt4.h"
+#include "camp/ButtonHelp/ButtonHelp.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
 
-int asdMemFreeIfNotNull(...);
-int FUN_00250d84(...);
-int messageForwardDefaultMode(...);
-int uiBindRecordRewardText(...);
-int textEncodeFontSlot(...);
-int FUN_0029bbc8(void);
-int partyFindActiveSlotById(...);
-int FUN_0029ede8(...);
-int dataFindKindRecordWithAocOverrides(...);
-int libc_strcpy(...);
-int messageSetConfirmDisplayMode(void);
-int asdOperatorNewC(void);
-int FUN_00333af8(...);
-int FUN_00348a1c(...);
+void scrWorkSetValue(s32 index, u32 value);
+u32 scrWorkGetValue(s32 index);
+void *fileSlotGetBuffer(u32 id);
+u32 goalConditionsSatisfied(u32 id);
+u32 FUN_002e4464(void);
+void eventTexSetFlag(s32 flag);
+void bustupCutAnimSetFlag(u8 value);
+bool btlTalkBustUpExists(void);
+u32 btlTalkBustUpGetId(void);
+void btlTalkBustUpSetUnk2F4(u8 value);
+void btlTalkBustUpCreate(void);
+void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous);
+void messageSlotSet(s32 value);
+void resultCreate(u8 kind);
+void scrResultStopJobAndReleaseUi(void);
+u16 rosterGetLeaderId(void); // declcheck: local (its headers belong to the sound and shard units)
+int FUN_00333a38(u32 id, int checkFlag);
+void FUN_00333af8(u32 area, u16 *out, s32 onlyActive);
+u8 FUN_0034888c(u32 id);
+u32 FUN_00348a1c(u32 index);
+GameOptions *gameGetSupportUnitData(void); // declcheck: local (GameDataAccess.h returns it as an int)
+u8 *gameGetPlayerName(void); // declcheck: local (GameDataAccess.h comes with the int gameGetSupportUnitData)
+u8 *dataFindKindRecordWithAocOverrides(u32 id, int payload);
+char *libc_strcpy(char *dst, const char *src); // declcheck: local (the shared one takes unsigned int pointers)
+void textEncodeFontSlot(s32 slot, const u8 *text); // declcheck: local (declared in the sound system's header)
+void FUN_0029ede8(s32 index, u32 first, u32 second, u32 third); // declcheck: local (declared in the compendium's header)
+void messageSetConfirmDisplayMode(void);
+s32 messageForwardDefaultMode(const void *messages, s32 message, s32 frame, s32 mode, s32 option);
+u32 messageMainGetChoiceResult(void);
+void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description);
+void *asdOperatorNewC(u32 size);
+void asdMemFreeIfNotNull(void *block);
 
-int eventTexSetFlag(int);
-int scrWorkGetValue(...);
-int scrWorkSetValue(...);
-int messageSlotSet(int);
-int scrCommMessageSetMode(...);
-int scrSetResult(...);
-int FUN_002900d0(void);
-int btlTalkBustUpSetUnk2F4(int);
-int btlTalkBustUpSetDemonTexture(unsigned int, int);
-int btlTalkBustUpCreate(void);
-int scrResultStopJobAndReleaseUi(void);
-int resultCreate(int);
-int questDataGetRecord(void);
-int buttonHelpSetPreset(int);
-int dataTable01FindByIdWithAoc(...);
-int FUN_002cdf2c(int *);
-int bustupCutAnimSetFlag(int);
-int FUN_00333b74(int *, unsigned int);
-int FUN_0034888c(...);
-
-/* stack frame of void: 14 slot(s), 56 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} void_stack;
-
-/* Supplied declaration required: FUN_001a1648. */
-/* Supplied declaration required: eventTexSetFlag. */
-extern int btlTalkBustUpExists(void);
-/* Supplied declaration required: asdMemFreeIfNotNull. */
-/* Supplied declaration required: FUN_00250d84. */
-extern int goalConditionsSatisfied(unsigned int);
-/* Supplied declaration required: scrWorkGetValue. */
-/* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: messageForwardDefaultMode. */
-/* Supplied declaration required: FUN_0028784c. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: scrCommMessageSetMode. */
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: uiBindRecordRewardText. */
-/* Supplied declaration required: FUN_002900d0. */
-extern int rosterHasLeader(void);
-extern unsigned int rosterGetLeaderId(void);
-/* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
-/* Supplied declaration required: textEncodeFontSlot. */
-/* Supplied declaration required: btlTalkBustUpCreate. */
-extern unsigned int scrGetArg(unsigned int);
-extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: scrResultStopJobAndReleaseUi. */
-/* Supplied declaration required: resultCreate. */
-/* Supplied declaration required: FUN_0029bbc8. */
-/* Supplied declaration required: partyFindActiveSlotById. */
-/* Supplied declaration required: FUN_0029ede8. */
-extern int fileSlotGetBuffer(unsigned int);
-/* Supplied declaration required: questDataGetRecord. */
-extern int gameGetSupportUnitData(void);
-extern int FUN_002b8660(void);
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: dataTable01FindByIdWithAoc. */
-extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: messageSetConfirmDisplayMode. */
-/* Supplied declaration required: asdOperatorNewC. */
-/* Supplied declaration required: FUN_002cdf2c. */
-/* Supplied declaration required: bustupCutAnimSetFlag. */
-extern int FUN_002e4464(void);
-extern unsigned int btlTalkBustUpGetId(void);
-extern int FUN_00333a38(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00333af8. */
-/* Supplied declaration required: FUN_00333b74. */
-/* Supplied declaration required: FUN_0034888c. */
-/* Supplied declaration required: FUN_00348a1c. */
-
-
-unsigned int scrComm_Quest_UpdateObjective(void)
-
+/* Script command: hands in quest `arg 0`. The first frame checks the quest's goals (result 0 when
+ * they are not met) and picks the first step; the following frames run it from work value 0:
+ *   2-3  ask for each requirement in turn (work value 2), 4 answers "no" (result 2),
+ *   5    thanks the player once everything was taken,
+ *   0-1  pay the rewards on the result screen, restoring the portrait afterwards,
+ *   7    announce each quest the delivery unlocked (work value 3 of work value 2).
+ * Returns 1 when the command is over; the result is 1 once the quest is closed. */
+u32 scrComm_Quest_UpdateObjective(void)
 {
-/* irregular: 35 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned short *puVar11;
-  int temp_v10;
-  unsigned int temp_v11;
-  int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  unsigned int temp_v19;
-  unsigned int temp_v20;
-  unsigned int temp_v21;
-  unsigned int temp_v22;
-  unsigned int temp_v23;
-  
-  temp_v0 = scrGetArg(0) & 0xffff;
-  temp_v1 = scrGetCommandFrame();
-  if (temp_v1 == 0) {
-    scrWorkSetValue(0);
-    temp_v3 = temp_v0;
-    questDataGetRecord();
-    temp_v1 = goalConditionsSatisfied(temp_v0);
-    if (temp_v1 == 0) {
-      scrSetResult(0);
-      return 1;
-    }
-    if (*(char *)(temp_v3 + 6) == '\0') {
-      scrWorkSetValue(0,2);
-      scrWorkSetValue(1,0);
-      scrWorkSetValue(2,0);
-      if (*(char *)(temp_v3 + 6) != '\0') {
-        return 0;
-      }
-      temp_v1 = (int)gameGetMapBlock();
-      FUN_0028784c(temp_v0,0);
-      *(unsigned short *)(temp_v1 + 0x1062) = 0;
-      *(unsigned short *)(temp_v1 + 0x1060) = 0;
-      return 0;
-    }
-    if (*(char *)(temp_v3 + 6) != '\x04') {
-      temp_v2 = 0;
-      temp_v5 = 0;
-    }
-    else {
-      scrWorkSetValue(0,2);
-      scrWorkSetValue(1,0);
-      temp_v2 = 0;
-      temp_v5 = 2;
-    }
-    scrWorkSetValue(temp_v5,temp_v2);
-    return 0;
-  }
-  temp_v1 = fileSlotGetBuffer(0x1e);
-  temp_v3 = temp_v0;
-  questDataGetRecord();
-  temp_v2 = scrWorkGetValue(0);
-  switch(temp_v2) {
-  case 0:
-    temp_v1 = FUN_002e4464();
-    if (temp_v1 == 0) {
-      eventTexSetFlag(0);
-      bustupCutAnimSetFlag(0);
-      temp_v1 = btlTalkBustUpExists();
-      if (temp_v1 != 0) {
-        temp_v2 = btlTalkBustUpGetId();
-        scrWorkSetValue(2,temp_v2);
-      }
-      else {
-        scrWorkSetValue(2,0xffffffff);
-      }
-      btlTalkBustUpSetUnk2F4(0);
-      scrWorkSetValue(3,0);
-      scrCommMessageSetMode(1);
-      resultCreate(1);
-      temp_v22 = 0;
-      temp_v23 = 0;
-      temp_v10 = 0;
-      temp_v11 = 0;
-      temp_v12 = 0;
-      temp_v13 = 0;
-      temp_v14 = 0;
-      temp_v15 = 0;
-      temp_v16 = 0;
-      temp_v17 = 0;
-      temp_v18 = 0;
-      temp_v19 = 0;
-      temp_v20 = 0;
-      temp_v21 = 0;
-      FUN_00333b74(&temp_v10,temp_v0);
-      FUN_002cdf2c(&temp_v10);
-      scrWorkSetValue(0,1);
-    }
-    break;
-  case 1:
-    temp_v1 = FUN_002b8660();
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    scrResultStopJobAndReleaseUi();
-    scrCommMessageSetMode(0xffffffff);
-    messageSlotSet(0);
-    buttonHelpSetPreset(0x90);
-    scrWorkGetValue(3);
-    eventTexSetFlag(1);
-    bustupCutAnimSetFlag(1);
-    temp_v3 = scrWorkGetValue(2);
-    if (-1 < (int)temp_v3) {
-      temp_v1 = btlTalkBustUpExists();
-      if (temp_v1 == 0) {
-        btlTalkBustUpCreate();
-      }
-      if ((temp_v3 != 0) && (temp_v4 = btlTalkBustUpGetId(), temp_v4 != temp_v3)) {
-        btlTalkBustUpSetDemonTexture(temp_v3 & 0xffff,0);
-      }
-      btlTalkBustUpSetUnk2F4(1);
-    }
-    temp_v1 = rosterHasLeader();
-    if ((temp_v1 != 0) && (temp_v3 = rosterGetLeaderId(), temp_v3 == temp_v0)) {
-      FUN_002900d0();
-      temp_v1 = FUN_00333a38(temp_v0,1);
-      if (temp_v1 != 0) {
-        scrWorkSetValue(0,7);
-        scrWorkSetValue(2,temp_v1);
-        temp_v2 = 0;
-        temp_v5 = 3;
-        scrWorkSetValue(temp_v5,temp_v2);
-        return 0;
-      }
-    }
-    FUN_0034888c(temp_v0);
-    scrSetResult(1);
-    return 1;
-  case 2:
-    temp_v6 = scrWorkGetValue(2);
-    temp_v2 = 9;
-    if (*(char *)(temp_v3 + 6) != '\x04') {
-      temp_v6 = temp_v3 + temp_v6 * 8;
-      if (*(short *)(temp_v6 + 0x16c) != 1) {
-        if (*(short *)(temp_v6 + 0x16c) == 2) {
-          temp_v0 = (unsigned int)*(unsigned short *)(temp_v6 + 0x16e);
-          temp_v2 = 10;
-          dataTable01FindByIdWithAoc(temp_v0);
-          libc_strcpy(&temp_v12,temp_v0);
-          textEncodeFontSlot(8,&temp_v12);
-          FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
+    u16 questId = scrGetArg(0);
+
+    if (scrGetCommandFrame() == 0) {
+        scrWorkSetValue(0, 0);
+
+        QuestRecord *record = questDataGetRecord(questId);
+
+        if (goalConditionsSatisfied(questId) != 0) {
+            if (record->kind == 0) {
+                scrWorkSetValue(0, 2);
+                scrWorkSetValue(1, 0);
+                scrWorkSetValue(2, 0);
+                if (record->kind == 0) {
+                    MapSaveBlock *map = gameGetMapBlock();
+
+                    FUN_0028784c(questId, 0);
+                    map->completedItem = 0;
+                    map->progressedItem = 0;
+                }
+            } else if (record->kind == 4) {
+                scrWorkSetValue(0, 2);
+                scrWorkSetValue(1, 0);
+                scrWorkSetValue(2, 0);
+            } else {
+                scrWorkSetValue(0, 0);
+            }
+            return 0;
         }
-      }
-      else {
-        temp_v0 = (unsigned int)*(unsigned short *)(temp_v6 + 0x16e);
-        if (*(int *)(temp_v6 + 0x170) == 1) {
-          temp_v2 = 8;
+        scrSetResult(0);
+        return 1;
+    }
+
+    void *messages = fileSlotGetBuffer(0x1e);
+    QuestRecord *record = questDataGetRecord(questId);
+    s32 finished = 1;
+
+    switch (scrWorkGetValue(0)) {
+    case 0:
+        if (FUN_002e4464() == 0) {
+            eventTexSetFlag(0);
+            bustupCutAnimSetFlag(0);
+            if (btlTalkBustUpExists()) {
+                scrWorkSetValue(2, btlTalkBustUpGetId());
+            } else {
+                scrWorkSetValue(2, (u32)-1);
+            }
+            btlTalkBustUpSetUnk2F4(0);
+            scrWorkSetValue(3, 0);
+            scrCommMessageSetMode(1);
+            resultCreate(1);
+
+            ResultSpoils spoils;
+
+            questBuildRewardSpoils(&spoils, questId);
+            resultApplySpoils(&spoils);
+            scrWorkSetValue(0, 1);
         }
-        dataFindKindRecordWithAocOverrides(temp_v0,1);
-        libc_strcpy(&temp_v12,temp_v0);
-        textEncodeFontSlot(0,&temp_v12);
-        FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
-      }
-    }
-    else {
-      temp_v2 = 8;
-      temp_v7 = gameGetSupportUnitData();
-      temp_v0 = (unsigned int)*(unsigned short *)(temp_v7 + 0x46);
-      dataTable01FindByIdWithAoc(temp_v0);
-      libc_strcpy(&temp_v12,temp_v0);
-      textEncodeFontSlot(0,&temp_v12);
-      FUN_0029ede8(0x18,*(unsigned int *)(temp_v3 + temp_v6 * 8 + 0x170),0xffffffff,0);
-    }
-    messageSetConfirmDisplayMode();
-    temp_v10 = 1;
-    messageForwardDefaultMode(temp_v1,temp_v2,0,6);
-    scrWorkSetValue(1,0);
-    scrWorkSetValue(0,3);
-    break;
-  case 3:
-    messageSetConfirmDisplayMode();
-    FUN_001a1648();
-    temp_v2 = scrWorkGetValue(1);
-    temp_v10 = 0;
-    messageForwardDefaultMode(temp_v1,0xb,temp_v2);
-    temp_v6 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v6 + 1);
-    if (temp_v1 != 1) {
-      return 0;
-    }
-    temp_v1 = messageMainGetChoiceResult();
-    if (temp_v1 != 0) {
-      scrWorkSetValue(1,0);
-      scrWorkSetValue(0,4);
-      return 0;
-    }
-    temp_v1 = scrWorkGetValue(2);
-    temp_v1 = temp_v1 + 1;
-    scrWorkSetValue(2,temp_v1);
-    if (*(char *)(temp_v3 + 6) != '\x04') {
-      if (*(char *)(temp_v3 + 6) != '\0') {
-        return 0;
-      }
-      if ((temp_v1 < 6) && (*(short *)(temp_v3 + temp_v1 * 8 + 0x16c) != 0)) {
-        scrWorkSetValue(0,2);
-        return 0;
-      }
-      temp_v1 = 0;
-      do {
-        temp_v6 = temp_v3 + temp_v1 * 8;
-        if (*(short *)(temp_v6 + 0x16c) != 1) {
-          if (*(short *)(temp_v6 + 0x16c) == 2) {
-            partyFindActiveSlotById(*(unsigned short *)(temp_v6 + 0x16e));
-            FUN_0029bbc8();
-          }
+        finished = 0;
+        break;
+    case 1: {
+        if (FUN_002b8660() == 0) {
+            finished = 0;
+            break;
         }
-        else {
-          FUN_00250d84(*(unsigned short *)(temp_v6 + 0x16e),*(unsigned int *)(temp_v6 + 0x170));
+        scrResultStopJobAndReleaseUi();
+        scrCommMessageSetMode(-1);
+        messageSlotSet(0);
+        buttonHelpSetPreset(0x90);
+        scrWorkGetValue(3);
+        eventTexSetFlag(1);
+        bustupCutAnimSetFlag(1);
+
+        s32 portrait = scrWorkGetValue(2);
+
+        if (portrait >= 0) {
+            if (!btlTalkBustUpExists()) {
+                btlTalkBustUpCreate();
+            }
+            if (portrait != 0 && btlTalkBustUpGetId() != portrait) {
+                btlTalkBustUpSetDemonTexture((u16)portrait, 0);
+            }
+            btlTalkBustUpSetUnk2F4(1);
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-      scrWorkSetValue(1,0);
-      temp_v2 = 5;
-      temp_v5 = 0;
-      scrWorkSetValue(temp_v5,temp_v2);
-      return 0;
+        if (rosterHasLeader() != 0 && rosterGetLeaderId() == questId) {
+            FUN_002900d0();
+
+            s32 unlocked = FUN_00333a38(questId, 1);
+
+            if (unlocked != 0) {
+                scrWorkSetValue(0, 7);
+                scrWorkSetValue(2, unlocked);
+                scrWorkSetValue(3, 0);
+                finished = 0;
+            }
+        }
+        break;
     }
-    scrWorkSetValue(0);
-    break;
-  case 4:
-    messageSetConfirmDisplayMode();
-    temp_v2 = scrWorkGetValue(1);
-    temp_v10 = 0;
-    messageForwardDefaultMode(temp_v1,0xc,temp_v2,6);
-    temp_v6 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v6 + 1);
-    if (temp_v1 == 1) {
-      scrSetResult(2);
-      return 1;
+    case 2: {
+        s32 index = scrWorkGetValue(2);
+        s32 message = 9;
+        char name[64];
+
+        if (record->kind == 4) {
+            message = 8;
+            libc_strcpy(name, (const char *)dataTable01FindByIdWithAoc(gameGetSupportUnitData()->unk46));
+            textEncodeFontSlot(0, (const u8 *)name);
+            FUN_0029ede8(0x18, record->requirements[index].count, (u32)-1, 0);
+        } else {
+            switch (record->requirements[index].kind) {
+            case 1:
+                if (record->requirements[index].count == 1) {
+                    message = 8;
+                }
+                libc_strcpy(name, (const char *)dataFindKindRecordWithAocOverrides(record->requirements[index].id, 1));
+                textEncodeFontSlot(0, (const u8 *)name);
+                FUN_0029ede8(0x18, record->requirements[index].count, (u32)-1, 0);
+                break;
+            case 2:
+                message = 10;
+                libc_strcpy(name, (const char *)dataTable01FindByIdWithAoc(record->requirements[index].id));
+                textEncodeFontSlot(8, (const u8 *)name);
+                FUN_0029ede8(0x18, record->requirements[index].count, (u32)-1, 0);
+                break;
+            }
+        }
+        messageSetConfirmDisplayMode();
+        messageForwardDefaultMode(messages, message, 0, 6, 1);
+        scrWorkSetValue(1, 0);
+        scrWorkSetValue(0, 3);
+        finished = 0;
+        break;
     }
-    break;
-  case 5:
-    temp_v5 = 0x3a;
-    temp_v6 = scrWorkGetValue(2);
-    temp_v2 = gameGetPlayerName();
-    libc_strcpy(&temp_v12,temp_v2);
-    textEncodeFontSlot(0,&temp_v12);
-    if (temp_v6 >= 2) {
-      temp_v5 = 0x3b;
+    case 3: {
+        messageSetConfirmDisplayMode();
+        FUN_001a1648();
+
+        s32 done = messageForwardDefaultMode(messages, 11, scrWorkGetValue(1), 11, 0);
+
+        scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+        finished = 0;
+        if (done != 1) {
+            break;
+        }
+        if (messageMainGetChoiceResult() != 0) {
+            scrWorkSetValue(1, 0);
+            scrWorkSetValue(0, 4);
+            break;
+        }
+
+        s32 next = scrWorkGetValue(2) + 1;
+
+        scrWorkSetValue(2, next);
+        if (record->kind == 4) {
+            scrWorkSetValue(0, 0);
+        } else if (record->kind == 0) {
+            if (next < 6 && record->requirements[next].kind != 0) {
+                scrWorkSetValue(0, 2);
+                break;
+            }
+            questTakeRequirements(record);
+            scrWorkSetValue(1, 0);
+            scrWorkSetValue(0, 5);
+        }
+        break;
     }
-    messageSetConfirmDisplayMode();
-    temp_v2 = scrWorkGetValue(1);
-    temp_v10 = 0;
-    messageForwardDefaultMode(temp_v1,temp_v5,temp_v2,6);
-    temp_v6 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v6 + 1);
-    if (temp_v1 != 1) {
-      return 0;
+    case 4: {
+        messageSetConfirmDisplayMode();
+
+        s32 done = messageForwardDefaultMode(messages, 12, scrWorkGetValue(1), 6, 0);
+
+        scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+        if (done == 1) {
+            scrSetResult(2);
+            return 1;
+        }
+        finished = 0;
+        break;
     }
-    scrWorkSetValue(1,0);
-    scrWorkSetValue(0);
-    break;
-  default:
-    FUN_0034888c(temp_v0);
-    scrSetResult(1);
-    return 1;
-  case 7:
-    temp_v7 = scrWorkGetValue(3);
-    temp_v8 = scrWorkGetValue(2);
-    temp_v6 = temp_v8 << 1;
-    asdOperatorNewC();
-    FUN_00333af8(temp_v0,temp_v6,1);
-    puVar11 = (unsigned short *)(temp_v6 + temp_v7 * 2);
-    uiBindRecordRewardText(*puVar11,0,1);
-    messageSetConfirmDisplayMode();
-    temp_v2 = scrWorkGetValue(1);
-    temp_v10 = 0;
-    messageForwardDefaultMode(temp_v1,0x10,temp_v2,6);
-    temp_v9 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v9 + 1);
-    if (temp_v1 == 1) {
-      FUN_00348a1c(*puVar11);
-      if (temp_v8 <= temp_v7 + 1) {
-        scrWorkSetValue(1,0);
-        scrWorkSetValue(2,0);
-        scrWorkSetValue(3,0);
-        asdMemFreeIfNotNull(temp_v6);
-        FUN_0034888c(temp_v0);
+    case 5: {
+        s32 message = 0x3a;
+        s32 taken = scrWorkGetValue(2);
+        char name[64];
+
+        libc_strcpy(name, (const char *)gameGetPlayerName());
+        textEncodeFontSlot(0, (const u8 *)name);
+        if (taken > 1) {
+            message = 0x3b;
+        }
+        messageSetConfirmDisplayMode();
+
+        s32 done = messageForwardDefaultMode(messages, message, scrWorkGetValue(1), 6, 0);
+
+        scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+        if (done == 1) {
+            scrWorkSetValue(1, 0);
+            scrWorkSetValue(0, 0);
+        }
+        finished = 0;
+        break;
+    }
+    case 7: {
+        s32 index = scrWorkGetValue(3);
+        s32 count = scrWorkGetValue(2);
+        u16 *unlocked = (u16 *)asdOperatorNewC(count * sizeof(u16));
+
+        FUN_00333af8(questId, unlocked, 1);
+        uiBindRecordRewardText(unlocked[index], 0, 1);
+        messageSetConfirmDisplayMode();
+
+        s32 done = messageForwardDefaultMode(messages, 16, scrWorkGetValue(1), 6, 0);
+
+        scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+        if (done == 1) {
+            FUN_00348a1c(unlocked[index]);
+            index++;
+            if (index < count) {
+                scrWorkSetValue(1, 0);
+                scrWorkSetValue(3, index);
+            } else {
+                scrWorkSetValue(1, 0);
+                scrWorkSetValue(2, 0);
+                scrWorkSetValue(3, 0);
+                asdMemFreeIfNotNull(unlocked);
+                break;
+            }
+        }
+        asdMemFreeIfNotNull(unlocked);
+        finished = 0;
+        break;
+    }
+    }
+    if (finished) {
+        FUN_0034888c(questId);
         scrSetResult(1);
         return 1;
-      }
-      scrWorkSetValue(1,0);
-      scrWorkSetValue(3,temp_v7 + 1);
     }
-    asdMemFreeIfNotNull(temp_v6);
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */
