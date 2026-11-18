@@ -10,7 +10,7 @@ int FUN_001dddd8(...);
 int FUN_001eef8c(...);
 int FUN_001f0540(...);
 int FUN_001f1bc4(...);
-int FUN_002036b8(unsigned int, unsigned int);
+int uniteOptionListDraw(unsigned int, unsigned int);
 int FUN_00215d68(...);
 int uiDrawListScrollBar(...);
 int debugDrawText(...);
@@ -46,7 +46,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001eef8c. */
 /* Supplied declaration required: FUN_001f0540. */
 /* Supplied declaration required: FUN_001f1bc4. */
-/* Supplied declaration required: FUN_002036b8. */
+/* Supplied declaration required: uniteOptionListDraw. */
 /* Supplied declaration required: FUN_00215d68. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: debugDrawText. */
@@ -111,7 +111,7 @@ unsigned int FUN_001add9c(void)
   case 4:
     temp_v7 = vec2GetXInt((UiSpriteState *)(temp_v3 + 0x1c8));
     temp_v8 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0x1c8));
-    FUN_002036b8(temp_v7,temp_v8);
+    uniteOptionListDraw(temp_v7,temp_v8);
     break;
   case 5:
   case 8:

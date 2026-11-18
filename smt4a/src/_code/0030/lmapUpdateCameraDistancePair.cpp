@@ -1,11 +1,10 @@
 #include "map/mapDepart.h"
 #include "map/LmapViewGlobals.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 extern u8 g_localCamera;
 
-f32 distSpatial(f32 firstX, f32 firstY, f32 firstZ,
-                f32 secondX, f32 secondY, f32 secondZ);
 void uiSetFloatPair(u8* camera, f32 first, f32 second);
 
 // Set the camera float pair from the horizontal target distance and target state.
@@ -18,16 +17,12 @@ void lmapUpdateCameraDistancePair(void)
 
     LmapSceneA *scene = g_lmapScene;
     LmapViewA *view = g_lmapViewHolder.view;
-    MapVector scenePosition;
-    scenePosition.x = scene->pose.position.x;
+    /* both points on the ground plane: the horizontal distance */
+    MapVector scenePosition = scene->pose.position;
     scenePosition.y = 0.0f;
-    scenePosition.z = scene->pose.position.z;
-    MapVector targetPosition;
-    targetPosition.x = view->savedEye.x;
+    MapVector targetPosition = view->savedEye;
     targetPosition.y = 0.0f;
-    targetPosition.z = view->savedEye.z;
-    distance.value = distSpatial(scenePosition.x, scenePosition.y, scenePosition.z,
-                                 targetPosition.x, targetPosition.y, targetPosition.z);
+    distance.value = distSpatial(scenePosition, targetPosition);
 
     if (distance.bits < 0x43340000) {
         distance.value -= 40.0f;

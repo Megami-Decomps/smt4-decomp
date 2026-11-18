@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 /* A map location the player can be near. */
 struct NearbyLocation {
@@ -32,7 +33,6 @@ struct LocationTableEntry {
 
 extern "C" {
 extern NearbyLocationState *DAT_00581280;
-f32 distSpatial(MapVector a, MapVector b);
 const LocationTableEntry *dataTable2aGetEntryWithAoc(s32 index);
 char *libc_strcpy(char *destination, const char *source);
 void FUN_00234044(s32 found, s32 index);

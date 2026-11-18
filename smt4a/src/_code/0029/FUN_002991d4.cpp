@@ -17,7 +17,7 @@ int partyAddMoneyClamped(...);
 int FUN_001628c0(...);
 int uiSpriteAdvanceAnimation(...);
 int uiSpriteSetKeyframe(...);
-int FUN_00234528(...);
+int popupTryStartActionLabelPrompt(...);
 int popupStateClose(void);
 int gameDataAddCappedPoints(...);
 int FUN_002e5c2c(...);
@@ -130,7 +130,7 @@ extern int gameFlagIsSet(unsigned int, int, int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: mapPopupReset. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00234528. */
+/* Supplied declaration required: popupTryStartActionLabelPrompt. */
 /* Supplied declaration required: FUN_00246128. */
 /* Supplied declaration required: popupStateClose. */
 extern int messageMainIsIdle(void);
@@ -626,7 +626,7 @@ LAB_0029a094:
                (*(char *)(temp_v4 + 0xa1) == '\0')) {
               FUN_00295108(0,(int)DAT_005f1e18,*(int *)(temp_v4 + 0x98) * 0x2aaaaaab);
               FUN_00246128();
-              FUN_00234528(*(unsigned int *)(temp_v4 + 0xa4),*(unsigned int *)(temp_v4 + 0xa8));
+              popupTryStartActionLabelPrompt(*(unsigned int *)(temp_v4 + 0xa4),*(unsigned int *)(temp_v4 + 0xa8));
             }
             *(unsigned char *)(temp_v4 + 0xa1) = 1;
           }

@@ -1,9 +1,9 @@
-/* NON_MATCHING: The nearest-entry loop allocates its distance and entry registers differently. */
+/* NON_MATCHING: only scratch registers differ: retail scales the entry index into r1 and loads g_mapGimic into r0 (built: r0/r1), in the loop and in the final request stores. */
 #include "map/MapGimicGlobal.h"
 #include "map/LmapGlobals.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
-f32 distSpatial(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1);
 
 /* Requests the nearest active gimmick of the selected interaction kind. */
 void FUN_003128d8(void)
@@ -13,9 +13,7 @@ void FUN_003128d8(void)
     for (s32 i = 0; i < MAP_GIMIC_ENTRIES; ++i) {
         MapGimicEntryA *entry = &g_mapGimic->entries[i];
         if (entry->active != 0 && entry->kind == 0xF) {
-            s32 distance = static_cast<s32>(distSpatial(
-                g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z,
-                entry->position[0], entry->position[1], entry->position[2]));
+            s32 distance = static_cast<s32>(distSpatial(g_lmapScene->pose.position, entry->position));
             if (distance < bestDistance) {
                 bestDistance = distance;
                 bestIndex = i;
@@ -23,8 +21,9 @@ void FUN_003128d8(void)
         }
     }
     if (bestIndex != -1) {
-        g_mapGimic->entries[bestIndex].motion = 1;
-        g_mapGimic->entries[bestIndex].requested = 1;
+        MapGimicEntryA *best = &g_mapGimic->entries[bestIndex];
+        best->motion = 1;
+        best->requested = 1;
     }
 }
 }

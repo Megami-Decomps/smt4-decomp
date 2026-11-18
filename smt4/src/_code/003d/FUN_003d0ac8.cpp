@@ -1,4 +1,4 @@
-/* NON_MATCHING: action-record address hoisting and participant-index load scheduling differ. */
+/* NON_MATCHING: retail keeps the queue kind 4 in fp across the loop and reads the action status with add + ldr #80; the build keeps 80 in fp for a register-offset load. */
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -22,16 +22,15 @@ u32 FUN_003d0ac8(BtlMainState **state, void *copies, s32 subject, s32 target)
     }
     u32 queued = 0;
     for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
-        u32 status = (*state)->actions[i].status;
-        if ((status & 1) != 0 && (status & 0x80) != 0 && i != subject &&
+        if (((*state)->actions[i].status & 1) != 0 && ((*state)->actions[i].status & 0x80) != 0 &&
+            i != subject &&
             valueRangeSameSide(i, subject)) {
             BtlEntry *candidate = btlMainFindEntryByListedId(*state, i);
             if ((candidate->data.statusFlags & 0x1C0) == 0) {
                 u16 skill = btlEntryRollPassiveSkill(i);
                 if (skill != 0) {
-                    BtlActionRecord *records = (*state)->actions;
-                    FUN_0023c154(*state, 4, records[i].participant.combatantIndex,
-                        records[target].participant.combatantIndex, skill);
+                    FUN_0023c154(*state, 4, (*state)->actions[i].participant.combatantIndex,
+                        (*state)->actions[target].participant.combatantIndex, skill);
                     queued = 1;
                 }
             }

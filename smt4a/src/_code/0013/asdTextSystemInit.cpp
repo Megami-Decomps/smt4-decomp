@@ -14,7 +14,7 @@ void FUN_001409d4(u8 *table);
 void FUN_00144554(u8 *table);
 void asdTextSetDefaultColor(u32 color);
 s32 resourceIsSpecialId(u32 id);
-void FUN_00141f8c(void);
+void messageExpandControlCode(void);
 void FUN_00142d70(s32 (*predicate)(u32), void (*callback)(void));
 void FUN_0013f444(u32 id, s32 slot, s32 arg);
 void FUN_00140280(void (*callback)(void));
@@ -48,7 +48,7 @@ void asdTextSystemInit(void)
     FUN_001409d4(&DAT_0057f598);
     FUN_00144554(&DAT_0057f5d8);
     asdTextSetDefaultColor(0xFFFFFF00);
-    FUN_00142d70(resourceIsSpecialId, FUN_00141f8c);
+    FUN_00142d70(resourceIsSpecialId, messageExpandControlCode);
     FUN_0013f444(0xF87A, 1, 0);
     FUN_0013f444(0xF87B, 4, 0);
     FUN_00140280(FUN_0013cae4);

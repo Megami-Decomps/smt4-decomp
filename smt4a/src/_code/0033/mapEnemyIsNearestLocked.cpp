@@ -1,9 +1,9 @@
 #include "map/MapEnemyGlobal.h"
 #include "map/LmapGlobals.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 
-f32 distSpatial(MapVector a, MapVector b);
 
 /* Distance from the field position to a slot; slots in state 2 count 300 units farther. */
 static __inline f32 sceneSlotDistance(const MapEnemyEntryA *slot)

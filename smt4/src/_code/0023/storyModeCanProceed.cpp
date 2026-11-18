@@ -2,7 +2,7 @@
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-void *FUN_00287704(u32 index);
+void *qcGetCenterSlotGroups(u32 index);
 s32 objectFlagBitIsSet(void *object, u32 bit);
 }
 
@@ -15,5 +15,5 @@ extern "C" s32 storyModeCanProceed(u32 mode)
         return 0;
     if (!gameFlagIsSet(448) || !gameFlagIsSet(0x424))
         return 1;
-    return objectFlagBitIsSet(FUN_00287704(1), 4) != 0;
+    return objectFlagBitIsSet(qcGetCenterSlotGroups(1), 4) != 0;
 }

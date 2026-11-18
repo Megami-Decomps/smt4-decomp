@@ -66,10 +66,10 @@ void FUN_00382878(int param_1)
     FUN_00287528(&temp_v9);
     if (*(unsigned char **)(param_1 + 0x1c) != temp_v9) {
       *(unsigned char **)(param_1 + 0x1c) = temp_v9;
-      FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+      qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
       sysResetTimestampState();
     }
-    temp_v2 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+    temp_v2 = qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
     temp_v1 = objectFlagBitIsSet(temp_v2,4);
     if (temp_v1 == 0) {
       temp_v8 = 0;
@@ -93,7 +93,7 @@ void FUN_00382878(int param_1)
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 4);
       }
-      temp_v2 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+      temp_v2 = qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
       FUN_00381958(temp_v2,param_1 + 0x20,*(unsigned int *)(param_1 + 0x1c),temp_v8);
       if (*(int *)(param_1 + 0x1c) == 0) {
         gameFlagSetValue(0x424, 1, 1);
@@ -101,7 +101,7 @@ void FUN_00382878(int param_1)
     }
   }
   else {
-    FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+    qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
     temp_v1 = FUN_003819b8();
     if (temp_v1 != 5) {
       temp_v2 = 0;
@@ -129,10 +129,10 @@ void FUN_00382878(int param_1)
           }
         }
       }
-      temp_v3 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+      temp_v3 = qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
       *(unsigned short *)(temp_v3 + 0xc) = 0;
       if ((*(char *)(param_1 + 0x18) == '\0') && (temp_v3 = gameFlagIsSet(0x55), temp_v3 == 0)) {
-        temp_v3 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+        temp_v3 = qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
         *(unsigned short *)(temp_v3 + 0xc) = 8;
       }
       temp_v8 = 0;
@@ -156,12 +156,12 @@ void FUN_00382878(int param_1)
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 4);
       }
-      temp_v6 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+      temp_v6 = qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
       temp_v9 = (unsigned char *)0x14;
       qcUtilityBuildAndMarkTabList(temp_v6,temp_v1,param_1 + 0x20,temp_v8,temp_v2);
     }
   }
-  temp_v1 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
+  temp_v1 = qcGetCenterSlotGroups(*(unsigned char *)(param_1 + 0x18));
   temp_v3 = dataTable26GroupGetRecordS2(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
   temp_v4 = dataTable26GroupGetRecord(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
   puVar10 = (unsigned char *)(temp_v3 + (unsigned int)*(unsigned char *)(temp_v1 + 10) * 0x20);

@@ -95,7 +95,7 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_003646d4(unsigned int);
 /* Supplied declaration required: FUN_0036d984. */
-extern int FUN_003850b4(void);
+extern int mapEnemyTryStartApproach(void);
 extern int linkHolderCallFirst(unsigned int);
 extern int itemListGetCurrentIdOrInvalid(unsigned int);
 extern int FUN_004ffa14(unsigned int);
@@ -221,7 +221,7 @@ LAB_00222954:
       }
       if ((DAT_005f0d24 == '\0') || (DAT_005f0d20 = DAT_005f0d20 + 1, 0x1517 >= DAT_005f0d20)) {
 LAB_00222b78:
-        temp_v1 = FUN_003850b4();
+        temp_v1 = mapEnemyTryStartApproach();
         if (temp_v1 != 0) goto LAB_00222b88;
       }
       if (DAT_005f0d28 >= 1) {
@@ -268,7 +268,7 @@ LAB_00222b78:
     }
     temp_v1 = lmapSceneGetUnk0();
     if ((temp_v1 != 0x1f) || (DAT_005f0d1c == '\0')) {
-      temp_v1 = FUN_003850b4();
+      temp_v1 = mapEnemyTryStartApproach();
       if (temp_v1 != 0) {
         FUN_00223fac();
         DAT_005f0ca4 = 1;
@@ -373,7 +373,7 @@ LAB_00222b78:
     FUN_002240f0();
     return;
   case 7:
-    temp_v1 = FUN_003850b4();
+    temp_v1 = mapEnemyTryStartApproach();
     if (temp_v1 == 0) {
       FUN_002d0394();
       if (DAT_005f0cc0 != '\0') {

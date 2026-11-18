@@ -14,7 +14,7 @@ void FUN_002947b8(CollisionVector *result, CollisionVector position)
         const MapGimicEntryA &record = g_mapGimic->entries[index];
         if (record.active != 0 && record.kind == 13) {
             CollisionVector resolved;
-            CollisionVector center = {record.position[0], record.position[1], record.position[2]};
+            CollisionVector center = {record.position.x, record.position.y, record.position.z};
             if (mapResolveCircleOverlapXZ(&resolved, position, 50.0f, center, 50.0f)) {
                 position = resolved;
             }

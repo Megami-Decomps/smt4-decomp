@@ -1,15 +1,12 @@
 #include "common.h"
 #include "util/MathFunctions.h"
-
-struct Position {
-    f32 x, y, z;
-};
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 f32 __hardfp_atan2f(f32 x, f32 z);
 
 // Absolute heading error between the current facing and the X/Z direction to a point.
-f32 mathAbsHeadingErrorToPoint(Position from, f32 heading, Position to)
+f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to)
 {
     f32 dx = to.x - from.x;
     f32 dz = to.z - from.z;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only register allocation differs (retail keeps the population count in r0 and the scratch ORs in r1/r2; the build uses r1 for the count and r0/r2). */
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -17,34 +16,34 @@ u32 FUN_0038dc84(void)
         return 1;
     }
     for (s32 bit = 0; bit < 32; ++bit) {
-        s32 mask = 1 << bit;
-        if ((mask & first) != 0) {
+        if ((first & (1 << bit)) != 0) {
             ++count;
         }
-        if ((mask & second) != 0) {
+        if ((second & (1 << bit)) != 0) {
             ++count;
         }
     }
     s32 ordinal = randBetween(0, count - 1);
-    s32 seen = 0;
+    // The counter is reused to number the set bits while scanning for the chosen one.
+    count = 0;
     for (s32 bit = 0; bit < 32; ++bit) {
         if ((first & (1 << bit)) != 0) {
-            if (ordinal == seen) {
+            if (ordinal == count) {
                 result = bit;
                 break;
             }
-            ++seen;
+            ++count;
         }
     }
     // Zero also acts as the not-found sentinel, including when the first mask selected bit zero.
     if (result == 0) {
         for (s32 bit = 0; bit < 32; ++bit) {
             if ((second & (1 << bit)) != 0) {
-                if (ordinal == seen) {
+                if (ordinal == count) {
                     result = bit + 32;
                     break;
                 }
-                ++seen;
+                ++count;
             }
         }
     }

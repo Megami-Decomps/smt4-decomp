@@ -21,9 +21,9 @@ void mapDeferredModelsReset(void)
         work->entries[i].modelId = -1;
         work->entries[i].flags = 0;
         work->entries[i].speed = 4.0f;
-        work->entries[i].offset = -9.0f;
-        work->entries[i].x = 0.0f;
-        work->entries[i].y = 0.0f;
+        work->entries[i].position.x = -9.0f;
+        work->entries[i].position.y = 0.0f;
+        work->entries[i].position.z = 0.0f;
         work->entries[i].angle = 90.0f;
         work->entries[i].handle = 0;
         work->entries[i].z = 0.0f;

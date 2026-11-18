@@ -59,7 +59,7 @@ CampCecRecv* asdMemoryAllocTracked(u32 size, u32 alignment, u32 heap, u32 tracke
 void sysMemClear(void* data, u32 size);
 void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, void (*draw)(void), s32 c, s32 d, u32 parent);
 void FUN_0035a840(void);
-void FUN_003a5200(void);
+void campCecRecvDownloadState(void);
 void jobScene360WaitStep(void);
 void FUN_0032e4a4(void);
 void campCecRecvStatGainState(void);
@@ -110,7 +110,7 @@ void FUN_00344348(u8 fromMenu)
     recv->unk3b0 = -1;
     recv->unk3b4 = -1;
     recv->handlers[0] = FUN_0035a840;
-    recv->handlers[1] = FUN_003a5200;
+    recv->handlers[1] = campCecRecvDownloadState;
     recv->handlers[2] = jobScene360WaitStep;
     recv->handlers[3] = FUN_0032e4a4;
     recv->handlers[4] = campCecRecvStatGainState;

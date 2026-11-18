@@ -22,7 +22,7 @@ typedef char BattleAnimationControllerViewOffsetsCheck[
 extern "C" {
 void FUN_00410f84(BattleAnimationControllerView *controller);
 void FUN_00412248(BattleAnimationControllerView *controller);
-void FUN_00416840(void *argument);
+void messageIndicatorsUpdate(void *argument);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
 
 // Apply state transitions, advance looping animation slots and saturate the elapsed-frame count.
@@ -65,7 +65,7 @@ u32 FUN_0041210c(BattleAnimationControllerView *controller)
         controller->frames = 0xFFFF;
     }
     if (controller->callbackArgument != NULL) {
-        FUN_00416840(controller->callbackArgument);
+        messageIndicatorsUpdate(controller->callbackArgument);
     }
     return 0;
 }

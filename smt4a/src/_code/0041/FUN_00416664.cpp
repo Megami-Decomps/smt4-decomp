@@ -46,7 +46,7 @@ void FUN_00416664(BattleLabelEntryViewA *entries)
             const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(8, 142);
             s32 centerX = anchor->x + anchor->placement->width / 2;
             s32 y = anchor->y;
-            if (entry->kind == 2 && ((s8)entry->sprite.scaleDone & (s8)entry->sprite.alphaDone)) {
+            if (entry->kind == 2 && (uiSpriteGetScaleDone(&entry->sprite) & (s8)entry->sprite.alphaDone)) {
                 FUN_00164168(entry->message, entry->position.x + centerX - entry->textWidth / 2 + offset,
                              entry->position.y + y, 61, 6, 0, 1.0f);
             }

@@ -1,12 +1,10 @@
-/* NON_MATCHING: saved vector copy order and loop-index/entry core registers differ. */
 #include "map/MapIfGlobals.h"
-#include "shard/S1Mover.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
-f32 distSpatial(Vec3f first, Vec3f second);
 
 // Mark the first nearby map-interface record in one of the interactive categories.
-void FUN_00378964(Vec3f position)
+void mapIfMarkNearbyInteractiveRecord(MapVector position)
 {
     MapIfStateA *map = g_mapIf.state;
     for (s32 index = 0; index < 128; ++index) {
@@ -21,8 +19,7 @@ void FUN_00378964(Vec3f position)
                 f32 value;
                 s32 bits;
             } distance;
-            Vec3f point = {entry->position.x, entry->position.y, entry->position.z};
-            distance.value = distSpatial(position, point);
+            distance.value = distSpatial(position, entry->position);
             if (distance.bits < 0x41200000) {
                 entry->state = 20;
                 return;

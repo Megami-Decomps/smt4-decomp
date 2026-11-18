@@ -38,9 +38,9 @@ void mapGimmickResetControllers(void)
         MapGimicEntryA *entry = &g_mapGimic->entries[index];
         entry->active = 0;
         entry->requested = 0;
-        entry->position[0] = 0.0f;
-        entry->position[1] = 0.0f;
-        entry->position[2] = 0.0f;
+        entry->position.x = 0.0f;
+        entry->position.y = 0.0f;
+        entry->position.z = 0.0f;
         entry->heading = 90.0f;
         entry->motion = 0;
         entry->kind = 0;

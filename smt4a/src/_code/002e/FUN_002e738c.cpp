@@ -1,4 +1,4 @@
-/* NON_MATCHING: native work construction recovered; nullable-constructor result, callback/global pools and child-task argument scheduling differ. */
+/* NON_MATCHING: only the process callback's pool load differs: retail loads it into r1 after the owner store, the build into r2 before it. */
 /* Starts the partner process and its draw jobs unless the requested mode is nonvisual. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/CallbackOwner.h"
@@ -21,12 +21,12 @@ s32 callbackDispatchToPresentOwner(u32 process);
 s32 FUN_0031d85c(u32 process);
 s32 FUN_0031d7cc(u32 process);
 void FUN_004bd794(void *work, s32 mode);
-extern CallbackOwnerSlots g_callbackOwnerSlotsF0;
+extern CallbackOwnerSlots g_callbackOwnerSlots;
 
 void FUN_002e738c(s32 mode)
 {
-    PartnerWork *work = new PartnerWork();
-    g_callbackOwnerSlotsF0.owner = (CallbackOwner *)work;
+    g_callbackOwnerSlots.owner = (CallbackOwner *)new PartnerWork();
+    PartnerWork *work = (PartnerWork *)g_callbackOwnerSlots.owner;
     work->process = asdProcessCreateSimple((const s8 *)"PARTNER PROC", 4, 0, 0, callbackDispatchToPresentOwner, NULL, 0);
     if (mode != 1) {
         taskCreateDraw((const s8 *)"PARTNER UL", 126, 0, 0, FUN_0031d85c, NULL, 0, (void *)work->process);

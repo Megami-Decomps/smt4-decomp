@@ -1,4 +1,4 @@
-/* NON_MATCHING: key-entry base addressing and VFP interpolation register allocation differ. */
+/* NON_MATCHING: only the final segment's four key loads differ: retail loads start.frame, start.value, end.frame, end.value and converts the frame count first; the build loads both frames first and converts the value change first. */
 #include "gfx/KeyframeSegment.h"
 extern "C" {
 f32 FUN_002039d0(s32 mode, s32 range, s32 inclusive);
@@ -9,23 +9,23 @@ void FUN_002c76fc(KeyframeSegmentState *state, const KeyframeSegmentState *defin
     if (state->keyIndex >= 3)
         state->keyIndex = 4;
     s32 current = state->keyIndex;
-    s32 step = 1;
-    for (; current + step < 4; ++step) {
+    for (s32 step = 1; current + step < 4; ++step) {
         state->duration = definition->keys[current + step].time - definition->keys[current].time;
-        if (state->duration > 0) {
-            if (state->keys[step + current].value != 0 && state->keys[step + current].randomRange > 0) {
-                f32 variation = FUN_002039d0(2, state->keys[step + current].randomRange, 1);
-                state->keys[state->keyIndex + step].value -= (u16)(s32)variation;
-            }
-            s32 nextIndex = state->keyIndex + step;
-            const KeyframeSegmentEntry *start = &state->keys[state->keyIndex];
-            const KeyframeSegmentEntry *next = &state->keys[nextIndex];
-            state->slope = (f32)((s32)next->value - (s32)start->value) /
-                (f32)(next->time - start->time);
-            state->target = (f32)next->value;
-            state->keyIndex = (s8)nextIndex;
-            return;
+        if (state->duration <= 0)
+            continue;
+        if (state->keys[current + step].value != 0 &&
+            state->keys[current + step].randomRange > 0) {
+            f32 variation = FUN_002039d0(2, state->keys[current + step].randomRange, 1);
+            state->keys[state->keyIndex + step].value -= (s32)variation;
         }
+        s32 currentIndex = state->keyIndex;
+        s32 nextIndex = currentIndex + step;
+        s32 duration = state->keys[nextIndex].time - state->keys[currentIndex].time;
+        s32 distance = state->keys[nextIndex].value - state->keys[currentIndex].value;
+        state->slope = (f32)distance / (f32)duration;
+        state->target = (f32)state->keys[nextIndex].value;
+        state->keyIndex = (s8)nextIndex;
+        return;
     }
 }
 }

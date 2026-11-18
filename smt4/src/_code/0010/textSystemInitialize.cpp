@@ -23,7 +23,7 @@ void FUN_0010a770(Callback callback);
 void asdTextRegisterSlot(u32 id, s32 slot, Callback callback);
 void asdTextSetDefaultRenderSetting(u32 setting);
 void FUN_0010a2f8(void);
-void FUN_0010c83c(void);
+void messageExpandControlCode(void);
 void scrCommQueueRequest(void);
 void FUN_00109b08(void);
 void FUN_00108074(void);
@@ -49,7 +49,7 @@ void textSystemInitialize(void)
     FUN_0010b3b0(DAT_0043e1b8);
     FUN_0010e594(DAT_0043e1f8);
     asdTextSetDefaultColor(0xffffff00);
-    callbackBindingInstall(FUN_0010a2f8, FUN_0010c83c);
+    callbackBindingInstall(FUN_0010a2f8, messageExpandControlCode);
     FUN_0010a694(0xf87a, 1, 0);
     FUN_0010a694(0xf87b, 4, 0);
     scrCommSetQueueRequestCallback(scrCommQueueRequest);

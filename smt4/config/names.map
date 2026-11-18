@@ -5320,3 +5320,11 @@
 00333b74 questBuildRewardSpoils
 002cdf2c resultApplySpoils
 0023547c uiQuestAnswerConfirm
+0010c83c messageExpandControlCode
+001f20b4 uniteDrawResultPanel
+003d7404 btlCameraUpdate
+001dbf34 campCecStatGainState
+00385448 qcBoardStep
+002036b8 uniteOptionListDraw
+00254058 dataTable24FindById
+00287704 qcGetCenterSlotGroups

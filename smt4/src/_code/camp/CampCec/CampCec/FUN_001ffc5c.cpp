@@ -16,7 +16,7 @@ void campCecStopCommThread();
 void campCecInboxState();
 void FUN_002ccb7c();
 void FUN_001ebedc();
-void FUN_001dbf34();
+void campCecStatGainState();
 void FUN_002110ac();
 void FUN_002e1898();
 void FUN_002114fc();
@@ -65,7 +65,7 @@ void FUN_001ffc5c()
     work->handlers[1] = campCecInboxState;
     work->handlers[2] = FUN_002ccb7c;
     work->handlers[3] = FUN_001ebedc;
-    work->handlers[4] = FUN_001dbf34;
+    work->handlers[4] = campCecStatGainState;
     work->handlers[5] = FUN_002110ac;
     work->handlers[6] = FUN_002e1898;
     work->handlers[9] = FUN_002114fc;
@@ -90,7 +90,7 @@ void FUN_001ffc5c()
     } else {
         buttonHelpSetPreset(3);
         work->helpInitialized = 0;
-        work->unkD62 = 1;
+        work->rewardPortraitPending = 1;
         work->savedBannerPending = 0;
         buttonHelpSetPreset(0xB9);
         FUN_002579bc(0);

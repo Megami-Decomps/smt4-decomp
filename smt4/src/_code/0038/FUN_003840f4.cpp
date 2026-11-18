@@ -52,7 +52,7 @@ void FUN_002e1230(AsdMdlObject *model, s32 flag);
 void FUN_00235250(Mover *mover);
 void FUN_00234f5c(QuestTalkWork *talk, const char *name, s32 flag);
 void asdLoadFileAsyncSimple(const char *path, u32 *handle, s32 flags);
-void FUN_00287704(u32 area);
+void qcGetCenterSlotGroups(u32 area);
 s32 timerStampIsExpired(void);
 void sysResetTimestampState(void);
 s32 storyModeCanProceed(u8 area);
@@ -136,9 +136,9 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
     asdLoadFileAsyncSimple(tableName, &scene->messageTable, 0);
 
     if (scene->area != QUEST_AREA_LAW && scene->area != QUEST_AREA_CHAOS) {
-        FUN_00287704(scene->area);
+        qcGetCenterSlotGroups(scene->area);
         if (timerStampIsExpired() != 0) {
-            FUN_00287704(scene->area);
+            qcGetCenterSlotGroups(scene->area);
             sysResetTimestampState();
         }
     }

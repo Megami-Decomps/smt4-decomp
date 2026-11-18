@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "map/MapVector.h"
 
 struct DeferredModelEntry {
     /* 0x00 */ u8 active;
@@ -13,9 +14,7 @@ struct DeferredModelEntry {
     /* 0x08 */ s16 modelId;
     /* 0x0A */ u16 flags;
     /* 0x0C */ float speed;
-    /* 0x10 */ float offset;
-    /* 0x14 */ float x;
-    /* 0x18 */ float y;
+    /* 0x10 */ MapVector position;
     /* 0x1C */ float angle;
     /* 0x20 */ u32 handle;
     /* 0x24 */ float z;
@@ -45,7 +44,8 @@ struct DeferredModelWork {
 };
 
 typedef char DeferredModelEntrySizeCheck[sizeof(DeferredModelEntry) == 0x38 ? 1 : -1];
-typedef char DeferredModelIdOffsetCheck[offsetof(DeferredModelEntry, id) == 6 ? 1 : -1];
+typedef char DeferredModelIdOffsetCheck[offsetof(DeferredModelEntry, id) == 6 && offsetof(DeferredModelEntry, position) == 0x10 &&
+    offsetof(DeferredModelEntry, angle) == 0x1C ? 1 : -1];
 typedef char DeferredModelWorkEntriesCheck[offsetof(DeferredModelWork, entries) == 0xC ? 1 : -1];
 typedef char DeferredModelWorkPendingCheck[offsetof(DeferredModelWork, pending) == 0xE0C ? 1 : -1];
 typedef char DeferredModelWorkUpdatingCheck[offsetof(DeferredModelWork, updating) == 0xE3C ? 1 : -1];

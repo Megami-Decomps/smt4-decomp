@@ -3,12 +3,12 @@
 
 
 extern "C" {
-/* Computes or forwards the requested value. */
-f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ)
+/* The distance between two points. */
+f32 distSpatial(MapVector from, MapVector to)
 {
-    f32 dx = otherX - x;
-    f32 dy = otherY - y;
-    f32 dz = otherZ - z;
+    f32 dx = to.x - from.x;
+    f32 dy = to.y - from.y;
+    f32 dz = to.z - from.z;
     return __sqrtf(dx * dx + dy * dy + dz * dz);
 }
 }

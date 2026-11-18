@@ -72,9 +72,28 @@ typedef struct UiQuest {
     /* 0x78A */ u16 list[250];
     /* 0x97E */ s16 questId;
     /* 0x980 */ u16 unk980;
+
+    /* The state history as the array it is: state, then previousState. */
+    s32 *states()
+    {
+        return &state;
+    }
 } UiQuest;
 
 extern UiQuest *g_uiQuest;
+
+/* How many states the quest menu remembers: the current one and the one before it. */
+#define UI_QUEST_STATE_HISTORY 2
+
+/* Enters a state: the state history moves down one place, `next` becomes the current state and the
+   state timer restarts (Apocalypse's uiQuestEnterMenuState). */
+static __inline void uiQuestEnterState(UiQuest *quest, s32 next)
+{
+    for (u32 i = UI_QUEST_STATE_HISTORY - 1; i > 0; --i)
+        quest->states()[i] = quest->states()[i - 1];
+    quest->states()[0] = next;
+    quest->timer = 0;
+}
 
 typedef char UiQuestSizeCheck[sizeof(UiQuest) == 0x984 ? 1 : -1];
 typedef char UiQuestPanelOffsets[offsetof(UiQuestPanel, texts) == 0xD4 && offsetof(UiQuestPanel, sysImages) == 0xE4 &&

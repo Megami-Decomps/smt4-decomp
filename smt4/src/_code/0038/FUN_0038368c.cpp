@@ -45,7 +45,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00235368. */
 extern int dataTable26GroupGetRecord(unsigned int *, unsigned char, unsigned int);
 /* Supplied declaration required: effectSpawnDefaultArguments. */
-extern int FUN_00287704(unsigned char);
+extern int qcGetCenterSlotGroups(unsigned char);
 /* Supplied declaration required: gxSetUniformQuadColors. */
 /* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: libc_strcat. */
@@ -100,7 +100,7 @@ void FUN_0038368c(unsigned int *param_1)
   float fStack_64;
   
   if ((*param_1 & 0x10) != 0) {
-    temp_v0 = FUN_00287704((char)param_1[6]);
+    temp_v0 = qcGetCenterSlotGroups((char)param_1[6]);
     dataTable26GroupGetRecordS2(param_1 + 8,(char)param_1[6],0);
     temp_v26 = dataTable26GroupGetRecord(param_1 + 8,(char)param_1[6],0);
     temp_v6 = param_1[0x167] + 1;

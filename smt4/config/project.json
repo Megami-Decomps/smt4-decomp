@@ -3126,12 +3126,12 @@
     },
     {
       "address": "0x10c83c",
-      "function": "FUN_0010c83c",
+      "function": "messageExpandControlCode",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010c83c.o",
+      "object": "build/obj/_code/0010/messageExpandControlCode.o",
       "size": 2224,
-      "source": "src/_code/0010/FUN_0010c83c.cpp",
-      "target": "orig/target/_code/0010/FUN_0010c83c.o",
+      "source": "src/_code/0010/messageExpandControlCode.cpp",
+      "target": "orig/target/_code/0010/messageExpandControlCode.o",
       "thumb": false
     },
     {
@@ -24337,12 +24337,12 @@
     },
     {
       "address": "0x1dbf34",
-      "function": "FUN_001dbf34",
+      "function": "campCecStatGainState",
       "module": "_code",
-      "object": "build/obj/_code/001d/FUN_001dbf34.o",
+      "object": "build/obj/_code/001d/campCecStatGainState.o",
       "size": 1736,
-      "source": "src/_code/001d/FUN_001dbf34.cpp",
-      "target": "orig/target/_code/001d/FUN_001dbf34.o",
+      "source": "src/_code/001d/campCecStatGainState.cpp",
+      "target": "orig/target/_code/001d/campCecStatGainState.o",
       "thumb": false
     },
     {
@@ -26433,12 +26433,12 @@
     },
     {
       "address": "0x1f20b4",
-      "function": "FUN_001f20b4",
+      "function": "uniteDrawResultPanel",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001f20b4.o",
+      "object": "build/obj/_code/001f/uniteDrawResultPanel.o",
       "size": 3952,
-      "source": "src/_code/001f/FUN_001f20b4.cpp",
-      "target": "orig/target/_code/001f/FUN_001f20b4.o",
+      "source": "src/_code/001f/uniteDrawResultPanel.cpp",
+      "target": "orig/target/_code/001f/uniteDrawResultPanel.o",
       "thumb": false
     },
     {
@@ -28197,12 +28197,12 @@
     },
     {
       "address": "0x2036b8",
-      "function": "FUN_002036b8",
+      "function": "uniteOptionListDraw",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_002036b8.o",
+      "object": "build/obj/_code/0020/uniteOptionListDraw.o",
       "size": 1540,
-      "source": "src/_code/0020/FUN_002036b8.cpp",
-      "target": "orig/target/_code/0020/FUN_002036b8.o",
+      "source": "src/_code/0020/uniteOptionListDraw.cpp",
+      "target": "orig/target/_code/0020/uniteOptionListDraw.o",
       "thumb": false
     },
     {
@@ -41010,12 +41010,12 @@
     },
     {
       "address": "0x254058",
-      "function": "FUN_00254058",
+      "function": "dataTable24FindById",
       "module": "_code",
-      "object": "build/obj/_code/0025/FUN_00254058.o",
+      "object": "build/obj/_code/0025/dataTable24FindById.o",
       "size": 96,
-      "source": "src/_code/0025/FUN_00254058.cpp",
-      "target": "orig/target/_code/0025/FUN_00254058.o",
+      "source": "src/_code/0025/dataTable24FindById.cpp",
+      "target": "orig/target/_code/0025/dataTable24FindById.o",
       "thumb": false
     },
     {
@@ -47425,12 +47425,12 @@
     },
     {
       "address": "0x287704",
-      "function": "FUN_00287704",
+      "function": "qcGetCenterSlotGroups",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00287704.o",
+      "object": "build/obj/_code/0028/qcGetCenterSlotGroups.o",
       "size": 28,
-      "source": "src/_code/0028/FUN_00287704.cpp",
-      "target": "orig/target/_code/0028/FUN_00287704.o",
+      "source": "src/_code/0028/qcGetCenterSlotGroups.cpp",
+      "target": "orig/target/_code/0028/qcGetCenterSlotGroups.o",
       "thumb": false
     },
     {
@@ -94700,12 +94700,12 @@
     },
     {
       "address": "0x385448",
-      "function": "FUN_00385448",
+      "function": "qcBoardStep",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00385448.o",
+      "object": "build/obj/_code/0038/qcBoardStep.o",
       "size": 1572,
-      "source": "src/_code/0038/FUN_00385448.cpp",
-      "target": "orig/target/_code/0038/FUN_00385448.o",
+      "source": "src/_code/0038/qcBoardStep.cpp",
+      "target": "orig/target/_code/0038/qcBoardStep.o",
       "thumb": false
     },
     {
@@ -104496,12 +104496,12 @@
     },
     {
       "address": "0x3d7404",
-      "function": "FUN_003d7404",
+      "function": "btlCameraUpdate",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d7404.o",
+      "object": "build/obj/_code/003d/btlCameraUpdate.o",
       "size": 4232,
-      "source": "src/_code/003d/FUN_003d7404.cpp",
-      "target": "orig/target/_code/003d/FUN_003d7404.o",
+      "source": "src/_code/003d/btlCameraUpdate.cpp",
+      "target": "orig/target/_code/003d/btlCameraUpdate.o",
       "thumb": false
     },
     {

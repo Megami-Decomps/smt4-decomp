@@ -1,9 +1,9 @@
-/* NON_MATCHING: the saved global-address registers and distance-argument loads are ordered differently. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 #include "util/MathFunctions.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 struct MapBreakableEntry {
     /* 0x00 */ u8 active;
@@ -22,17 +22,10 @@ struct MapBreakableWork {
 };
 extern "C" {
 extern MapBreakableWork* g_mapHakai;
-f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
-f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
 }
 
-namespace {
-inline f32 distanceBetween(const MapVector& first, const MapVector& second)
-{
-    return distSpatial(first.x, first.y, first.z, second.x, second.y, second.z);
-}
-}
 
+/* Whether a breakable object stands within reach in front of the player. */
 extern "C" u32 mapHasFacingBreakableInReach(void)
 {
     for (s32 index = 0; index < 16; ++index) {
@@ -54,10 +47,8 @@ extern "C" u32 mapHasFacingBreakableInReach(void)
         } else {
             frontFacing = 0;
         }
-        f32 distance = distanceBetween(g_lmapScene->pose.position, entry.position);
-        const MapVector& cachedPosition =
-            g_gameState.breakableCheckPosition;
-        const f32 cachedDistance = distanceBetween(cachedPosition, entry.position);
+        f32 distance = distSpatial(g_lmapScene->pose.position, entry.position);
+        const f32 cachedDistance = distSpatial(g_gameState.breakableCheckPosition, entry.position);
         if (distance > cachedDistance) {
             distance = cachedDistance;
         }

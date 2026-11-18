@@ -1,4 +1,4 @@
-/* NON_MATCHING (b1454): only the load order of the four key fields differs (retail loads start.frame, start.value, end.frame, end.value; built loads frames first) and the regs that follow. */
+/* NON_MATCHING: only the final segment's four key loads differ: retail loads start.frame, start.value, end.frame, end.value and converts the frame count first; the build loads both frames first and converts the value change first. */
 #include "gfx/ScalarCurveTransition.h"
 extern "C" {
 f32 FUN_00291620(s32 mode, s32 maximum, u32 divisor);
@@ -18,13 +18,12 @@ void FUN_002031dc(ScalarCurveTransition *curve, const ScalarCurveTransition *tim
             f32 adjustment = FUN_00291620(2, curve->keys[current + step].randomAmplitude, 1);
             curve->keys[curve->currentKey + step].value -= static_cast<s32>(adjustment);
         }
-        s32 nextIndex = curve->currentKey + step;
-        const ScalarCurveKey *start = &curve->keys[curve->currentKey];
-        const ScalarCurveKey *end = &curve->keys[nextIndex];
-        s32 frameCount = end->frame - start->frame;
-        s32 valueChange = end->value - start->value;
+        s32 currentIndex = curve->currentKey;
+        s32 nextIndex = currentIndex + step;
+        s32 frameCount = curve->keys[nextIndex].frame - curve->keys[currentIndex].frame;
+        s32 valueChange = curve->keys[nextIndex].value - curve->keys[currentIndex].value;
         curve->slope = static_cast<f32>(valueChange) / static_cast<f32>(frameCount);
-        curve->target = static_cast<f32>(end->value);
+        curve->target = static_cast<f32>(curve->keys[nextIndex].value);
         curve->currentKey = static_cast<s8>(nextIndex);
         return;
     }

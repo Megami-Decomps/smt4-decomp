@@ -34,7 +34,7 @@ struct CampCecMenu {
             /* 0x0D4 */ u16 statGains[5];   /* stat points the selected demon earned, one per new pass */
             /* 0x0DE */ u8 unk0DE[2];
             /* 0x0E0 */ StatBlock unit;     /* the selected demon as it was before the rewards */
-            /* 0x6E4 */ u8 unk6E4[0x604];
+            /* 0x6E4 */ StatBlock beforeStatGains; /* the copy the status panel compares the raised stats with */
             /* 0xCE8 */ CampCecDemonRecord *offeredDemon; /* the reward demon picked this time, NULL when none */
         } rewardUnit;
     };
@@ -94,7 +94,7 @@ struct CampCecMenu {
     };
     /* 0xD60 */ s8 optionalProcessAvailable;
     /* 0xD61 */ u8 helpInitialized;
-    /* 0xD62 */ u8 unkD62;
+    /* 0xD62 */ u8 rewardPortraitPending; /* set when the next reward state brings its portrait back */
     /* 0xD63 */ u8 savedBannerPending;
     /* 0xD64 */ u8 loading;
     /* 0xD65 */ s8 stopLoader;

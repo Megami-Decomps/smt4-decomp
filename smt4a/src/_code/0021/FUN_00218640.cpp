@@ -52,7 +52,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
-extern unsigned int FUN_00156868(unsigned int);
+extern unsigned int dataTableGetNamePayload(unsigned int);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
@@ -225,7 +225,7 @@ void FUN_00218640(void)
     temp_v17 = temp_v16;
     renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x1a));
-    temp_v8 = FUN_00156868(temp_v25);
+    temp_v8 = dataTableGetNamePayload(temp_v25);
     textFormatBuffer(temp_v27,"%s",temp_v8);
     temp_v12 = temp_v4 + (int)temp_v16;
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);

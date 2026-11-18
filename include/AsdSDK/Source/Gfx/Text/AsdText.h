@@ -26,7 +26,7 @@ typedef struct AsdText {
 typedef char AsdTextTextOffsetCheck[sizeof(AsdText) == 0xBC ? 1 : -1];
 
 extern "C" {
-unsigned int FUN_00287704(int param_1);
+unsigned int qcGetCenterSlotGroups(int param_1);
 }
 
 extern "C" {
