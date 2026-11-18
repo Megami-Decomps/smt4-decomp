@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the row-sprite ids from inside a larger static table (DAT_004040d4+0x34) and orders the mode-11/19 branches differently; register allocation and block layout differ. */
 #include "common.h"
+#include "font/TextLayoutApi.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
 
@@ -20,7 +21,6 @@ u32 renderCtxPackPassFlags(u32 value, bool enabled);
 void renderStackPushIndexed(RenderCtx *scene, u32 slot, u32 value);
 void renderCtxPopState(RenderCtx *scene, u32 slot);
 void texDrawCompositeSprite(u32 screen, u32 group, u32 id, s32 x, s32 y, u32 priority);
-f32 FUN_00126830(u8 *view, s32 index);
 void positionStateSet(f32 scale, u8 *view, u32 a, u32 color);
 void FUN_002b75ec(f32 scale, u8 *view, s32 x, s32 y, u32 style, u32 priority, s32 index);
 

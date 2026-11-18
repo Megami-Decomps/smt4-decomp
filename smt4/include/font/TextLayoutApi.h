@@ -8,5 +8,7 @@ extern "C" {
 f32 FUN_002b080c(void *text, u32 flags, s32 limit, f32 x, f32 y, f32 depth, f32 opacity);
 f32 FUN_002b0800(void *text, f32 x, f32 y, f32 depth, f32 opacity);
 f32 effectSpawnDefaultArguments(void *text);
+/* Measure the prefix ending at the supplied character index (mode 18). */
+f32 FUN_00126830(void *text, s32 limit);
 }
 #endif
