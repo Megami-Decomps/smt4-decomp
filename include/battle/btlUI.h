@@ -7,6 +7,7 @@
 #define BATTLE_BTLUI_H
 
 #include "common.h"
+#include "ui/UiSpriteState.h"
 #include "battle/BattleUiRequests.h"
 #include "battle/BattleUiActionSlot.h"
 #include <stddef.h>
@@ -19,7 +20,13 @@ typedef struct BtlUiColumnRecord {
 
 /* Shin Megami Tensei IV layout. */
 typedef struct BtlUiObjA { /* 0x0000 */ u8 unk[0x21F8]; } BtlUiObjA;
-typedef struct BtlUiObjB { /* 0x000 */ u8 unk[0x260]; } BtlUiObjB;
+typedef struct BtlUiObjB {
+    /* 0x000 */ u8 unk000[0x1C4];
+    /* 0x1C4 */ UiSpriteState timer;
+    /* 0x250 */ u8 unk250[0x10];
+} BtlUiObjB;
+typedef char BtlUiObjBTimerLayoutCheck[
+    offsetof(BtlUiObjB, timer) == 0x1C4 && sizeof(BtlUiObjB) == 0x260 ? 1 : -1];
 /* One unit's UI record, copied in whole from the caller. */
 typedef struct BtlUiUnitRecord {
     /* 0x000 */ u8 unk000[0x46];
