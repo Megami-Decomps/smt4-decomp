@@ -1,3 +1,4 @@
+#include "map/LmapGlobals.h"
 /* NON_MATCHING: navi map marker placement; float scheduling and the hoisted constants (s19/s22 pairs, vpush d8-d11) differ from retail */
 #include "gamedata/MapSaveBlock.h"
 #include "game/GameState.h"
@@ -40,7 +41,6 @@ struct NaviMapWork {
 extern "C" {
 
 s32 NaviMain_GetPosX(void);
-f32 *lmapSceneGetObj(void *handle);
 NaviVec2 *NaviMain_GetCursorPos(void *handle);
 void pairCopy(void *source, NaviVec2 *destination);
 s32 saveTestFlagRow(u8 row, u8 column);
@@ -53,7 +53,7 @@ void FUN_0039eb4c(NaviMapWork *work)
     gameGetMapBlock();
     u16 *handle = &work->player;
     s32 area = NaviMain_GetPosX();
-    f32 *player = lmapSceneGetObj(handle);
+    f32 *player = reinterpret_cast<f32 *>(lmapSceneGetObj(handle));
     f32 worldX = player[0];
     f32 worldZ = player[2];
     NaviVec2 cursor = *NaviMain_GetCursorPos(handle);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00277d2c` (_code @ 0x277d2c, 0x2f9c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
+#include "map/MapZoneLabels.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -111,7 +112,7 @@ extern unsigned int *mapBlockBitIsSet(int);
 extern char *dataTable2cSub0GetRecord(int);
 extern char *dataTable2cSub3GetRecord(int);
 /* Supplied declaration required: contentEntryGetC. */
-extern unsigned int dataTable2cSub2GetRecord(int);
+
 /* Supplied declaration required: dataTable2cSub3GetCount. */
 extern int FUN_00323500(void);
 extern int FUN_00323570(void);
@@ -521,7 +522,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
         temp_v11 = VectorSignedToFloat((int)*(short *)(pcVar4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v15 = VectorSignedToFloat((int)*(short *)(pcVar4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v31 = VectorSignedToFloat((int)*(short *)(pcVar4 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v7 = dataTable2cSub2GetRecord((int)*(short *)(pcVar4 + 0x12));
+        temp_v7 = reinterpret_cast<unsigned int>(dataTable2cSub2GetRecord((int)*(short *)(pcVar4 + 0x12)));
         temp_v2 = (int)DAT_004bf898 * 0x20;
         *(unsigned int *)(&DAT_004be698 + temp_v2) = temp_v9;
         *(float *)(temp_v2 + 0x4be69c) = temp_v28;

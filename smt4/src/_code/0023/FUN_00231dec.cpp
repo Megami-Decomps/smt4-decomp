@@ -1,6 +1,9 @@
+#include "map/LmapGlobals.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00231dec` (_code @ 0x231dec, 0x768 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
+#include "map/MapZoneLabels.h"
+#include "map/lmapMain.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -9,7 +12,6 @@ extern "C" {
 
 int pairCopy(int, float *);
 int FUN_00231bcc(...);
-int lmapSceneGetObj(int);
 int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
 int FUN_00288f78(...);
 int textDrawString(...);
@@ -60,7 +62,7 @@ extern unsigned int vec2GetXInt(int);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_002e039c(int);
+
 /* Supplied declaration required: drawEffectResourceWithColors. */
 /* Supplied declaration required: FUN_0039fb38. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
@@ -100,7 +102,9 @@ void FUN_00231dec(int param_1)
   VectorSignedToFloat(0x100 - DAT_0044cdd8,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v3 = NaviMain_GetPosX();
   temp_v1 = NaviMain_GetPosY(temp_v18);
-  lmapSceneGetObj(temp_v18);
+  const LmapScenePose *scenePose = lmapSceneGetObj(reinterpret_cast<const u16 *>(temp_v18));
+  const f32 zoneX = scenePose->position.x;
+  const f32 zoneZ = scenePose->position.z;
   temp_v17 = 0.0f;
   temp_v16 = 0.0f;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
@@ -120,8 +124,8 @@ void FUN_00231dec(int param_1)
     else {
       temp_v5 = gameFlagIsSet(0x529);
       if ((temp_v5 != 0) && (temp_v5 = FUN_00288f78(temp_v3), temp_v5 != 3)) {
-        temp_v3 = FUN_002e039c((int)temp_v1);
-        libc_strcpy(temp_v9,temp_v3);
+        const char *zoneLabel = FUN_002e039c((s32)temp_v1, zoneX, zoneZ);
+        libc_strcpy(temp_v9,zoneLabel);
       }
       else {
         textFormatBuffer(temp_v15,&LAB_00232470);

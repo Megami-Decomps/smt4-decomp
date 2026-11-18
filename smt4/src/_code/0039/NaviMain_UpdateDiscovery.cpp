@@ -1,3 +1,4 @@
+#include "map/LmapGlobals.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `NaviMain_UpdateDiscovery` (_code @ 0x39f01c, 0x5f8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -48,7 +49,6 @@ extern signed char DAT_0049f941; /* 0x49f941 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231dec. */
-extern unsigned int lmapSceneGetObj(void);
 extern int FUN_00288f78(int);
 extern int flagBitIsSet(unsigned int);
 extern int FUN_002b8694(void);
@@ -120,7 +120,7 @@ void NaviMain_UpdateDiscovery(int param_1)
     __aeabi_memcpy4(temp_v24,&DAT_00404b70,0x48);
     __aeabi_memcpy4(temp_v25,&DAT_00404bb8,0x48);
     __aeabi_memcpy4(temp_v26,&DAT_00404c00,0x48);
-    puVar6 = (unsigned int *)lmapSceneGetObj();
+    puVar6 = (unsigned int *)lmapSceneGetObj(reinterpret_cast<const u16 *>(param_1 + 0x162));
     temp_v16 = romwright_piece_4_4(puVar6[2],*puVar6);
     temp_v4 = NaviMain_GetPosY(param_1 + 0x162);
     NaviMain_GetCurrentMap(param_1 + 0x162);

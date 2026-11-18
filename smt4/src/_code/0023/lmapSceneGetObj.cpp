@@ -4,7 +4,7 @@ extern "C" {
 
 
 /* The scene's embedded player pose. */
-LmapScenePose *lmapSceneGetObj(void)
+LmapScenePose *lmapSceneGetObj(const u16 *handle)
 {
     return &g_lmapScene->pose;
 }

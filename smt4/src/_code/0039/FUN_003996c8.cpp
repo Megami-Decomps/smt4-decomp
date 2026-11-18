@@ -1,3 +1,4 @@
+#include "map/LmapGlobals.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003996c8` (_code @ 0x3996c8, 0x468 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
@@ -37,7 +38,6 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
-extern float *lmapSceneGetObj(void);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 extern int FUN_00288f78(unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
@@ -78,7 +78,7 @@ void FUN_003996c8(int param_1)
   temp_v2 = (int)gameGetMapBlock();
   temp_v3 = param_1 + 0x162;
   temp_v1 = 0;
-  pfVar5 = (float *)lmapSceneGetObj();
+  pfVar5 = (float *)lmapSceneGetObj(reinterpret_cast<const u16 *>(temp_v3));
   temp_v8 = *pfVar5;
   temp_v10 = pfVar5[1];
   temp_v9 = pfVar5[2];

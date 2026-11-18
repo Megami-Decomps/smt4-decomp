@@ -1,3 +1,4 @@
+#include "map/LmapGlobals.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399d0c` (_code @ 0x399d0c, 0xf58 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
@@ -61,7 +62,6 @@ extern unsigned int mapExplorationCellIsMarked(unsigned int, int, int);
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
 /* Supplied declaration required: titleScissorApplyOrClearRequests. */
-extern float *lmapSceneGetObj(int);
 extern int FUN_00288f78(int);
 /* Supplied declaration required: FUN_002b04e8. */
 extern int FUN_002b8694(void);
@@ -133,7 +133,7 @@ void FUN_00399d0c(int param_1)
   temp_v37 = temp_v44 + 0x162;
   temp_v3 = NaviMain_GetPosX();
   NaviMain_GetPosY(temp_v37);
-  pfVar5 = (float *)lmapSceneGetObj(temp_v37);
+  pfVar5 = (float *)lmapSceneGetObj(reinterpret_cast<const u16 *>(temp_v37));
   temp_v24 = *pfVar5;
   temp_v19 = pfVar5[2];
   puVar6 = (unsigned int *)NaviMain_GetCursorPos(temp_v37);

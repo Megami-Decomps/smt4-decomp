@@ -7,6 +7,9 @@
 
 extern "C" {
 
+/* Navigation handle retained by the API; this implementation uses the active scene. */
+LmapScenePose *lmapSceneGetObj(const u16 *handle);
+
 extern LmapScene *g_lmapScene; /* 0x447e88 */
 
 }
