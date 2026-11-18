@@ -10,8 +10,8 @@ void jobStop(u32 job, s32 arg);
 void ifTouchRegionRemove(void);
 void asdMemFree(void *block);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
-void asdTMTexTableFreeEntry(s32 table);
-void asdOperatorDelete(void *block);
+
+
 
 /* Tears down the controller's work: touch regions, memory slots, buffers and texture table 51,
  * then stops its job and deletes the work area. */

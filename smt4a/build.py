@@ -7,7 +7,9 @@ compiler: the pinned clang (a compile check: no byte-identical build exists) or,
 where the platform's retail compiler is pinned (3DS armcc), that compiler, so
 objdiff compares every unit with its retail function byte for byte. This script
 compiles every unit and writes build/compile_report.json. A unit that does not
-compile is reported, not fatal, unless --strict is given.
+compile is reported, not fatal, unless --strict is given. A unit is compiled again
+only when something its object depends on changed (see `Deps`); --force compiles
+every selected unit.
 
     python3 build.py [-j N] [--strict] [--clang PATH | --armcc PATH] [--only SUBSTR]
     python3 build.py build/obj/<module>/<shard>/<name>.o     (what objdiff runs)
@@ -20,6 +22,7 @@ Standard library only.
 import argparse
 import concurrent.futures
 import glob
+import hashlib
 import json
 import os
 import re
@@ -85,14 +88,6 @@ def compiler_version(compiler):
     return lines[0].strip() if lines else "unknown"
 
 
-def headers_mtime():
-    newest = 0.0
-    for directory in (ROOT / "include", SHARED_INCLUDE):
-        for path in directory.rglob("*.h"):
-            newest = max(newest, path.stat().st_mtime)
-    return newest
-
-
 def command(compiler, unit, source, obj):
     mode = []
     if "thumb" in unit:  # ARM: compile each function in the mode it was decoded in
@@ -108,8 +103,7 @@ def command(compiler, unit, source, obj):
     # function. Needs evidence like "cflags": IDENTICAL with the list, not without.
     together = [ROOT / UNITS_BY_FUNCTION[name]["source"] for name in unit.get("multifile", ()) if name in UNITS_BY_FUNCTION]
     if FAMILY == "armcc":
-        system = Path(compiler).resolve().parent.parent / "include"
-        includes = ["-J", str(system)] if system.is_dir() else []
+        includes = system_include(compiler)
         # armcc --multifile checks declarations across the files it compiles together (#1171, which
         # cannot be downgraded): a unit's local callee declarations must agree with the callees' sources.
         multifile = ["--multifile", "--no_autoinline", "--split_sections"] if together else []
@@ -129,6 +123,17 @@ def command(compiler, unit, source, obj):
         + mode
         + ["-I", str(ROOT / "include"), "-c", str(source), "-o", str(obj)]
     )
+
+
+_SYSTEM_INCLUDES = {}
+
+
+def system_include(compiler):
+    """`-J` and armcc's own include directory, when it has one."""
+    if compiler not in _SYSTEM_INCLUDES:
+        system = Path(compiler).resolve().parent.parent / "include"
+        _SYSTEM_INCLUDES[compiler] = ["-J", str(system)] if system.is_dir() else []
+    return list(_SYSTEM_INCLUDES[compiler])
 
 
 _SYMBOL_ADDRESSES = None
@@ -389,7 +394,7 @@ def carve(obj, unit):
     Returns False (object untouched) when it references a dropped section by section symbol that no
     name resolves."""
     import struct
-    sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT.parent / "tools"))
     import split
     data = Path(obj).read_bytes()
     sections, symbols = read_elf(data)
@@ -470,20 +475,26 @@ def name_static_initialiser(obj, unit):
 _ALIASES = None
 
 
+def symbol_aliases():
+    """{alias: the address's own name} for the `type:alias` lines of config/symbols.txt."""
+    global _ALIASES
+    with _CACHE_LOCK:
+        if _ALIASES is None:
+            sys.path.insert(0, str(ROOT.parent / "tools"))
+            import split
+            path = ROOT / "config" / "symbols.txt"
+            own = {**{address: name for address, (name, _size, _thumb) in split.read_symbols(path).items()},
+                   **split.read_objects(path)}
+            _ALIASES = {alias: own[address] for alias, address in split.read_aliases(path).items() if address in own}
+    return _ALIASES
+
+
 def link_aliases(obj):
     """An undefined reference to a `type:alias` name of config/symbols.txt (a second name the linker
     gives an address that has its own: `__init_array_end` of an empty array is `__init_array_start`)
     is pointed at the address's own name, the one retail's relocation carries."""
     import struct
-    global _ALIASES
-    if _ALIASES is None:
-        sys.path.insert(0, str(ROOT / "tools"))
-        import split
-        path = ROOT / "config" / "symbols.txt"
-        own = {**{address: name for address, (name, _size, _thumb) in split.read_symbols(path).items()},
-               **split.read_objects(path)}
-        _ALIASES = {alias: own[address] for alias, address in split.read_aliases(path).items() if address in own}
-    if not _ALIASES:
+    if not symbol_aliases():
         return
     data = bytearray(Path(obj).read_bytes())
     sections, _ = read_elf(data)
@@ -524,8 +535,10 @@ def run_compiler(cmd):
 
 def finish_object(compiler, unit, source, obj):
     """What happens to a freshly compiled unit object: a destructor's or a file's extra functions and
-    vtable are cut away (recompiling with --split_sections), then armlink's NOPs are applied."""
-    if not name_static_initialiser(obj, unit) and needs_carving(obj, unit):
+    vtable are cut away (recompiling with --split_sections), then armlink's NOPs are applied.
+    Returns whether the object needed carving (which reads tools/split.py and the retail target)."""
+    carving = not name_static_initialiser(obj, unit) and needs_carving(obj, unit)
+    if carving:
         split_command = command(compiler, unit, source, obj)
         split_command.insert(split_command.index("-o"), "--split_sections")
         done = run_compiler(split_command)
@@ -533,18 +546,267 @@ def finish_object(compiler, unit, source, obj):
             carve(obj, unit)
     link_aliases(obj)
     link_weak_calls(obj, unit)
+    return carving
 
 
-def compile_unit(compiler, unit, newest_header, force):
+DEPS_VERSION = 1
+# Walked once per build: every file a unit can read from them is stat'ed from the directory listing.
+WATCHED = (ROOT / "src", ROOT / "include", SHARED_INCLUDE)
+INCLUDE_LINE = re.compile(rb'^[ \t]*#[ \t]*include[ \t]*(?:[<"]([^>"\r\n]+)[>"]|[^\s<"])', re.M)
+
+
+def dep_key(path):
+    """A file as build/deps.json names it: relative to this directory where possible, '/'-separated,
+    in the case the file system compares."""
+    path = str(path)
+    if not os.path.isabs(path) and "\\" not in path and "//" not in path and "/." not in path and not path.startswith("."):
+        return path.lower() if os.name == "nt" else path  # already relative and clean: what normcase gives
+    path = os.path.normcase(os.path.normpath(os.path.join(ROOT, path)))
+    try:
+        path = os.path.relpath(path, os.path.normcase(str(ROOT)))
+    except ValueError:  # another drive
+        pass
+    return path.replace("\\", "/")
+
+
+class Deps:
+    """build/deps.json: what each unit's object was built from, so a build compiles only the units
+    whose inputs changed. A unit is up to date when its object is the one recorded (same mtime and
+    size) and one digest still agrees: the files the compile read (the source, every header armcc's
+    `--depend` listed, multifile partners' sources, and for a carved unit tools/split.py and its retail
+    target) by mtime and size; the unit's command; its project.json entry and its partners'; the
+    compiler; this script; and, for every symbol the object names, what the armlink steps look up for
+    it (its address in symbols.txt, an inlined body from the target objects or config/inlined.txt, a
+    veneer stub, an alias). A file that appears under src/ or the include directories with the name of
+    a file a unit read may shadow it: that unit is compiled again. Anything not recorded is compiled."""
+
+    def __init__(self, compiler):
+        self.started = time.time_ns()  # a file modified since may have changed under a compile
+        self.stats, self.listing = {}, set()
+        for top in WATCHED:
+            self.walk(top, self.listing)
+        self.walk(BUILD / "obj", None)
+        self.compiler = compiler
+        exe = Path(compiler) if Path(compiler).exists() else Path(shutil.which(compiler) or compiler)
+        stat = exe.stat() if exe.exists() else None
+        # The compiler is armcc.exe and its own headers (whose `#include _RWSTD_CSTDLIB` no scan follows).
+        self.system = dep_key(Path(compiler).resolve().parent.parent / "include")
+        headers = set()
+        self.walk(ROOT / self.system, headers)
+        runner = [(path, self.stat(dep_key(path))) for path in launcher()]  # wibo
+        self.static = json.dumps([DEPS_VERSION, hashlib.sha1(Path(__file__).read_bytes()).hexdigest(), str(exe),
+                                  stat and [stat.st_mtime_ns, stat.st_size], runner, COMPILER,
+                                  sorted((key, self.stats[key]) for key in headers)])
+        self.lines, self.scanned = {}, {}
+        self.lock = threading.Lock()
+        self.mine = {}  # object -> record (None: compiled, nothing recordable) for the units built here
+        self.records, listing = self.load()
+        self.records = self.unshadowed(self.records, self.listing - listing)
+
+    def walk(self, top, listing):
+        todo = [(str(top), dep_key(top))]
+        while todo:
+            directory, prefix = todo.pop()
+            try:
+                entries = list(os.scandir(directory))
+            except OSError:
+                continue
+            for entry in entries:
+                key = f"{prefix}/{os.path.normcase(entry.name)}"
+                if entry.is_dir():
+                    todo.append((entry.path, key))
+                elif entry.is_file():
+                    stat = entry.stat()
+                    self.stats[key] = (stat.st_mtime_ns, stat.st_size)
+                    if listing is not None:
+                        listing.add(key)
+
+    @staticmethod
+    def unshadowed(records, new):
+        """The records that read no file named like one of the `new` files."""
+        new = {key.rsplit("/", 1)[-1] for key in new}
+        if not new:
+            return records
+        return {obj: record for obj, record in records.items() if not any(key.rsplit("/", 1)[-1] in new for key in record["f"])}
+
+    def stat(self, key):
+        """(mtime_ns, size) of a file as this build first saw it, None when it does not exist."""
+        if key not in self.stats:
+            try:
+                stat = os.stat(ROOT / key)
+                self.stats[key] = (stat.st_mtime_ns, stat.st_size)
+            except OSError:
+                self.stats[key] = None
+        return self.stats[key]
+
+    @staticmethod
+    def load():
+        """({object: {d, f, n, o}}, listing) from build/deps.json, empty when absent or another version."""
+        try:
+            data = json.loads((BUILD / "deps.json").read_text(encoding="utf-8"))
+            if data.get("version") != DEPS_VERSION:
+                raise ValueError
+            files, names = data["files"], data["names"]
+            records = {obj: dict(d=r["d"], f=[files[i] for i in r["f"]], n=[names[i] for i in r["n"]], o=r["o"])
+                       for obj, r in data["units"].items()}
+            return records, set(data["listing"])
+        except (OSError, ValueError, KeyError, IndexError, TypeError):
+            return {}, set()
+
+    def digest(self, unit, files, names):
+        partners = [UNITS_BY_FUNCTION.get(name) for name in unit.get("multifile", ())]
+        cmd = command(self.compiler, unit, ROOT / unit["source"], ROOT / unit["object"])
+        h = hashlib.sha1(json.dumps([self.static, unit, partners, cmd], sort_keys=True).encode())
+        for key in files:
+            line = self.lines.get(key)
+            if line is None:
+                line = self.lines[key] = f"{key}\0{self.stat(key)}\n".encode()
+            h.update(line)
+        for name in names:
+            line = self.lines.get("\0" + name)
+            if line is None:
+                line = self.lines["\0" + name] = (f"{name}\0{symbol_addresses().get(name)}\0{inlined_bodies().get(name)}\0"
+                                           f"{veneer_stubs().get(name)}\0{symbol_aliases().get(name)}\n").encode()
+            h.update(line)
+        return h.hexdigest()
+
+    def fresh(self, unit):
+        record = self.records.get(unit["object"])
+        return (record is not None and self.stats.get(dep_key(unit["object"])) == tuple(record["o"])
+                and self.digest(unit, record["f"], record["n"]) == record["d"])
+
+    def depend_file(self, path):
+        """The files armcc's `--depend` output lists, or None when it is missing or a path in it does
+        not resolve to a file here (wibo or Wine may name them their own way)."""
+        try:
+            text = path.read_text(encoding="utf-8", errors="surrogateescape")
+        except OSError:
+            return None
+        keys = []
+        for line in text.splitlines():
+            if not line.strip():
+                continue
+            match = re.fullmatch(r'\s*"(.*)":\s*"(.*)"\s*', line)
+            if not match:
+                return None
+            name = match[2].replace("\\", "/")
+            if os.name != "nt" and re.match(r"^[A-Za-z]:/", name):
+                name = name[2:] if name[0] in "zZ" else name  # Wine's Z: is the host's root
+            key = dep_key(name)
+            if self.stat(key) is None:
+                return None
+            keys.append(key)
+        return keys or None
+
+    def includes(self, path):
+        if path not in self.scanned:
+            try:
+                data = (ROOT / path).read_bytes()
+            except OSError:
+                data = b""
+            self.scanned[path] = [m[1] and m[1].decode("utf-8", "surrogateescape").strip().replace("\\", "/")
+                                  for m in INCLUDE_LINE.finditer(data)]
+        return self.scanned[path]
+
+    def scan(self, sources):
+        """Every file the sources can include, for a compile whose `--depend` output is unusable: each
+        `#include` resolved in the including file's directory, the -I directories and the compiler's
+        own, keeping every candidate that exists (a superset of armcc's choice) and, when none does,
+        the first as a file that does not exist yet. None when a source or header includes a macro.
+        The compiler's own headers are part of the compiler: not followed."""
+        search = [ROOT / "include", SHARED_INCLUDE, ROOT / self.system]
+        seen, todo = set(), [dep_key(source) for source in sources]
+        while todo:
+            key = todo.pop()
+            if key in seen:
+                continue
+            seen.add(key)
+            if self.stat(key) is None or key.startswith(self.system + "/"):
+                continue
+            here = (ROOT / key).parent
+            for name in self.includes(key):
+                if name is None:
+                    return None
+                candidates = [dep_key(name)] if os.path.isabs(name) else [dep_key(d / name) for d in [here] + search]
+                existing = [c for c in candidates if self.stat(c) is not None]
+                todo += existing or candidates[:1]
+        return sorted(seen)
+
+    def record(self, unit, depend, names, carving):
+        """Record a unit compiled in this build; None for `depend` when its object is gone."""
+        obj = unit["object"]
+        record, files = None, None
+        if depend is not None:
+            sources = [ROOT / unit["source"]] + [ROOT / UNITS_BY_FUNCTION[name]["source"] for name in unit.get("multifile", ())
+                                                 if name in UNITS_BY_FUNCTION]
+            files = self.depend_file(depend)
+            files = files if files is not None else self.scan(sources)
+        if files is not None:
+            files = set(files) | {dep_key(source) for source in sources}
+            if carving:
+                files |= {dep_key(ROOT.parent / "tools" / "split.py"), dep_key(unit["target"])}
+            files, names = sorted(files), sorted(names)
+            stat = (ROOT / obj).stat()
+            # A file changed since this build began may have changed during the compile: not recorded.
+            if all(s is None or s[0] < self.started for s in map(self.stat, files)):
+                record = dict(d=self.digest(unit, files, names), f=files, n=names, o=[stat.st_mtime_ns, stat.st_size])
+        with self.lock:
+            self.mine[obj] = record
+
+    def save(self):
+        """Merge this build's records into build/deps.json as it is now (another build may have
+        written it since) and replace it. Records another build wrote that a file new to this build's
+        listing may shadow are dropped."""
+        records, listing = self.load()
+        if not self.mine and listing == self.listing:
+            return
+        objects = {unit["object"] for unit in PROJECT["units"]}
+        records = self.unshadowed({obj: record for obj, record in records.items() if obj in objects and obj not in self.mine},
+                                  self.listing - listing)
+        records.update((obj, record) for obj, record in self.mine.items() if record is not None)
+        files, names = {}, {}
+        units = {obj: dict(d=r["d"], f=[files.setdefault(k, len(files)) for k in r["f"]],
+                           n=[names.setdefault(n, len(names)) for n in r["n"]], o=r["o"]) for obj, r in sorted(records.items())}
+        text = json.dumps(dict(version=DEPS_VERSION, files=list(files), names=list(names), listing=sorted(self.listing),
+                               units=units), separators=(",", ":"))
+        BUILD.mkdir(exist_ok=True)
+        temporary = BUILD / f"deps.json.{os.getpid()}.tmp"
+        temporary.write_text(text, encoding="utf-8", newline="\n")
+        for attempt in range(20):  # Windows refuses to replace a file another build is reading
+            try:
+                os.replace(temporary, BUILD / "deps.json")
+                return
+            except PermissionError:
+                time.sleep(0.1)
+        temporary.unlink()  # the old records stay: each still checks its object's mtime and size
+
+
+def object_names(obj):
+    """The symbol names a compiled object defines or references."""
+    _sections, symbols = read_elf(Path(obj).read_bytes())
+    return {s["name"] for s in symbols if s["name"] and s["type"] != 3 and not s["name"].startswith("$")}
+
+
+def compile_unit(compiler, unit, deps):
     source = ROOT / unit["source"]
     obj = ROOT / unit["object"]
-    if not force and obj.exists() and obj.stat().st_mtime >= max(source.stat().st_mtime, newest_header):
-        return unit, "cached", ""
     obj.parent.mkdir(parents=True, exist_ok=True)
-    done = run_compiler(command(compiler, unit, source, obj))
-    if done.returncode == 0:
-        finish_object(compiler, unit, source, obj)
-        return unit, "ok", ""
+    cmd = command(compiler, unit, source, obj)
+    depend = obj.with_suffix(".d")
+    if FAMILY == "armcc":  # the files the compile reads (only the object's .comment records the option)
+        at = cmd.index("-o")
+        cmd[at:at] = [f"--depend={depend}", "--depend_format=unix_quoted"]
+    try:
+        done = run_compiler(cmd)
+        if done.returncode == 0:
+            names = object_names(obj)
+            carving = finish_object(compiler, unit, source, obj)
+            deps.record(unit, depend, names, carving)
+            return unit, "ok", ""
+    finally:
+        if depend.exists():
+            depend.unlink()
+    deps.record(unit, None, (), False)
     if obj.exists():
         obj.unlink()
     output = done.stderr + done.stdout
@@ -558,7 +820,9 @@ def units_present():
 
 def build(args):
     compiler = find_compiler(args)
-    units = units_present()
+    started = time.time()
+    deps = Deps(compiler)
+    units = [unit for unit in PROJECT["units"] if deps.stat(dep_key(unit["source"])) is not None]  # units_present(), from the walk
     wanted = [a for a in args.paths]
     if wanted:
         by_object = {unit["object"]: unit for unit in units}
@@ -568,19 +832,21 @@ def build(args):
         units = [unit for unit in units if args.only in unit["source"]]
     if not units:
         raise SystemExit("no units to build (src/ is empty or nothing matched)")
-    newest_header = headers_mtime()
-    started = time.time()
-    results = {"ok": 0, "cached": 0, "failed": 0}
+    stale = units if args.force else [unit for unit in units if not deps.fresh(unit)]
+    results = {"ok": 0, "cached": len(units) - len(stale), "failed": 0}
     failures = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        futures = [pool.submit(compile_unit, compiler, unit, newest_header, args.force) for unit in units]
-        for index, future in enumerate(concurrent.futures.as_completed(futures), 1):
-            unit, status, message = future.result()
-            results[status] += 1
-            if status == "failed":
-                failures.append({"function": unit["function"], "source": unit["source"], "first_error": message})
-            if len(units) > 200 and index % 1000 == 0:
-                print(f"  {index}/{len(units)}", flush=True)
+    try:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
+            futures = [pool.submit(compile_unit, compiler, unit, deps) for unit in stale]
+            for index, future in enumerate(concurrent.futures.as_completed(futures), 1):
+                unit, status, message = future.result()
+                results[status] += 1
+                if status == "failed":
+                    failures.append({"function": unit["function"], "source": unit["source"], "first_error": message})
+                if len(stale) > 200 and index % 1000 == 0:
+                    print(f"  {index}/{len(stale)}", flush=True)
+    finally:
+        deps.save()
     compiled = results["ok"] + results["cached"]
     report = {
         "compiler": compiler_version(compiler),
@@ -589,6 +855,7 @@ def build(args):
         "target": COMPILER.get("target", COMPILER.get("arch")),
         "units": len(units),
         "compiled": compiled,
+        "rebuilt": results["ok"] + results["failed"],
         "failed": results["failed"],
         "seconds": round(time.time() - started, 1),
         "failures": sorted(failures, key=lambda f: f["source"]),
@@ -597,7 +864,7 @@ def build(args):
         BUILD.mkdir(exist_ok=True)
         (BUILD / "compile_report.json").write_text(json.dumps(report, indent=2) + "\n")
     print(
-        f"compiled {compiled}/{len(units)} units with {report['compiler']} "
+        f"compiled {compiled}/{len(units)} units ({results['ok'] + results['failed']} rebuilt) with {report['compiler']} "
         f"({results['failed']} failed{', see build/compile_report.json' if not args.paths else ''})"
     )
     for failure in failures[:10]:
@@ -614,20 +881,20 @@ def fetch():
     if FAMILY == "armcc" and os.name != "nt":
         tools.append("wibo")
     ids = [t for t in tools if t in MANIFEST]
-    status = subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), *ids])
+    status = subprocess.call([sys.executable, str(ROOT.parent / "tools" / "download_tool.py"), "--project", str(ROOT), *ids])
     # tools/relink.py links with GNU ld; a host the pinned binutils do not cover can bring its own.
-    if "binutils-arm-none-eabi" in MANIFEST and (ROOT / "tools" / "relink.py").exists():
-        if subprocess.call([sys.executable, str(ROOT / "tools" / "download_tool.py"), "binutils-arm-none-eabi"]) != 0:
+    if "binutils-arm-none-eabi" in MANIFEST and (ROOT.parent / "tools" / "relink.py").exists():
+        if subprocess.call([sys.executable, str(ROOT.parent / "tools" / "download_tool.py"), "--project", str(ROOT), "binutils-arm-none-eabi"]) != 0:
             print("note: tools/relink.py needs arm-none-eabi binutils: put them on PATH or pass --ld/--objcopy", file=sys.stderr)
     return status
 
 
 def split(arguments):
     """tools/split.py: the retail target objects, from the dump and config/ only."""
-    script = ROOT / "tools" / "split.py"
+    script = ROOT.parent / "tools" / "split.py"
     if not script.exists():
         raise SystemExit("this project has no tools/split.py (only Nintendo 3DS projects can rebuild orig/target without romwright)")
-    return subprocess.call([sys.executable, str(script), *arguments])
+    return subprocess.call([sys.executable, str(script), "--project", str(ROOT), *arguments])
 
 
 def text_size(path):
@@ -674,7 +941,7 @@ def report():
     if not any((ROOT / unit["target_path"]).exists() for unit in json.loads(config.read_text())["units"]):
         raise SystemExit(
             "orig/target/ holds no retail objects: "
-            + ("run `python3 build.py split` (it needs your dump in orig/)" if (ROOT / "tools" / "split.py").exists()
+            + ("run `python3 build.py split` (it needs your dump in orig/)" if (ROOT.parent / "tools" / "split.py").exists()
                else "regenerate the project with romwright-cli new-project (they are cut from your dump)")
         )
     BUILD.mkdir(exist_ok=True)

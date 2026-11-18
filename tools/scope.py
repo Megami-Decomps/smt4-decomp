@@ -19,11 +19,15 @@ First-party anchors: functions in an original source-file folder (`src/_code/<mo
 names starting with `asd`. Run it again after naming passes.
 """
 import argparse
-import importlib.util
 import json
 import os
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(os.path.abspath(__file__)).parent))
+import n3ds  # noqa: E402
+import split  # noqa: E402
 
 ROOT = Path(os.path.abspath(__file__)).parent.parent
 GAMES = ("smt4", "smt4a")
@@ -35,17 +39,9 @@ FIRST_PARTY = re.compile(r"^(?:asd|Asd|_ZN\d+Asd)")
 ADDRESS_FOLDER = re.compile(r"[0-9a-f]{4}")
 
 
-def module(game, name):
-    spec = importlib.util.spec_from_file_location(f"{name}_{game}", ROOT / game / "tools" / f"{name}.py")
-    loaded = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(loaded)
-    return loaded
-
-
 def classify(game):
     """{address: (name, reason)} of the third-party functions."""
     root = ROOT / game
-    split, n3ds = module(game, "split"), module(game, "n3ds")
     project = json.loads((root / "config" / "project.json").read_text(encoding="utf-8"))
     base, code, _segments = n3ds.load_code(root / project["image"]["orig"], "_code")
     functions = split.read_symbols(root / "config" / "symbols.txt")

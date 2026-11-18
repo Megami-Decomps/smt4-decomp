@@ -7,7 +7,7 @@
 extern "C" {
 
 
-extern s32 scrGetArg(s32 index);
+
 
 /* Script command: result is 1 when a live entry with the given id has the compared parameter
  * (kind 0, 1 or 2 selects it) equal to the third argument. */

@@ -8,7 +8,7 @@ typedef struct Inventory {
     /* 0x910B */ u8 capacity;
 } Inventory;
 
-int scrGetArg(int index);
+
 Inventory *gameGetSlotTable(void);
 int gameCountUnits(void);
 

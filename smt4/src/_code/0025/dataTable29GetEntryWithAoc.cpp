@@ -9,8 +9,8 @@ typedef struct TableEntry {
 } TableEntry; /* 0x1C */
 
 extern void *g_aocSystem;
-extern void *dataTableGet(s32 group, s32 index);
-extern u32 dataTableGetCount(void *table);
+
+
 extern u32 groupedFileTablesCountRecordsOfKind(void *aoc, s32 type, s32 flag);
 extern TableEntry *aocPackagesGetHashTable3Entry(void *aoc, u32 index);
 

@@ -8,8 +8,8 @@ typedef struct ContentEntry00308cd4 {
     /* 0x00 */ u8 data[0x1c];
 } ContentEntry00308cd4;
 
-void *dataTableGet(s32 table, s32 slot);
-u32 dataTableGetCount(void *table);
+
+
 
 /* Entry `index` of data table 0x23's section 4, continuing into the add-on content's extra entries (NULL past the end). */
 ContentEntry00308cd4 *contentEntryGet(u32 index)

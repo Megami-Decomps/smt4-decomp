@@ -11,8 +11,8 @@ typedef struct Entry0026a69c {
 
 typedef s32 Compare0026a69c(const void *a, const void *b);
 
-void *dataTableGet(s32 table, s32 slot);
-u32 dataTableGetCount(void *table);
+
+
 Entry0026a69c *libc_bsearch(const Entry0026a69c *key, const Entry0026a69c *base, u32 count, u32 size, Compare0026a69c *compare);
 
 s32 idMapCompareKeys(const void *left, const void *right);

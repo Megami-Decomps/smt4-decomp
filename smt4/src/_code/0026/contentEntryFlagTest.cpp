@@ -20,8 +20,8 @@ typedef struct Record0026a794 {
 typedef s32 Compare0026a794(const Entry0026a794 *a, const Entry0026a794 *b);
 
 Entry0026a794 *recordTableFindById(AocSystem *aoc, u32 id);
-void *dataTableGet(s32 table, s32 slot);
-u32 dataTableGetCount(void *table);
+
+
 Entry0026a794 *libc_bsearch(const Entry0026a794 *key, const Entry0026a794 *base, u32 count, u32 size, Compare0026a794 *compare);
 
 s32 passiveSkillCompareById(const Entry0026a794 *first, const Entry0026a794 *second);

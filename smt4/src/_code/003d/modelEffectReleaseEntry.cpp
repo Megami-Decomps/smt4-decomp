@@ -12,8 +12,8 @@ struct ModelEffectOwner {
 };
 
 extern "C" {
-void asdMdlManagerMarkDestroy(AsdMdlObject *model);
-void asdMdlManagerDestroy(AsdMdlObject *model);
+
+
 
 void modelEffectReleaseEntry(ModelEffectOwner *owner, u32 index)
 {

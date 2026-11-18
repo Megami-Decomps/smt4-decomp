@@ -48,9 +48,9 @@ void jobOwnerFreeSlotAndStop(JobOwner *owner);
 void jobFlagsWorkStop(JobFlagsWork *work);
 u32 jobIsValid(u32 job);
 u32 jobStop(u32 job, s32 mode);
-void ifTouchRegionRemove();
+
 void FUN_0016ccb4(u32 *queryResult);
-void aocReleasePackageOwner(AocSystemA *system);
+
 
 // Runs the scene one frame. While the content is released (states 4..14 with the add-on event signalled) the scene
 // shuts down instead: it stops its job, clears the result and returns to state 17.

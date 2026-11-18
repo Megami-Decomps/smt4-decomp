@@ -23,7 +23,7 @@ struct ListMenu {
 };
 
 extern "C" {
-void renderCtxSelectStereoLayout(RenderCtx *context);
+
 void gxResetColorQuadToWhite(void);
 void efctSetSpeed(f32 speed);
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
@@ -35,7 +35,7 @@ void FUN_003909d0(ListMenu *menu, s32 row, s32 value, bool selected);
 void FUN_002332e8(MenuSlider *panel, s32 first, s32 second);
 void uiDrawListScrollBar(u32 object, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h, u32 i, u32 j,
     s32 x, s32 y, s32 z, u32 priority, u32 last);
-void renderCtxApplyTransforms(RenderCtx *context);
+
 void renderCtxResetColorScale(RenderCtx *context);
 s32 numberPanelGetValue(MenuSlider *panel);
 s32 numberPanelGetFirst(MenuSlider *panel);

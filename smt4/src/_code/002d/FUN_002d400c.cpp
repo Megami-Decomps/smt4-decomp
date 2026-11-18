@@ -19,9 +19,9 @@ s32 dataTable2eSub1GetCount(void);
 StageRecord *dataTable2eSub1GetRecord(s32 index);
 s32 dataTable2eSub0GetCount(void);
 StageRecord *dataTable2eSub0GetRecord(s32 index);
-void asdMdlManagerMarkDestroy(AsdMdlObject *model);
-void asdMdlManagerDestroy(AsdMdlObject *model);
-AsdMdlObject *asdMdlManagerCreateFromSource(void *source, u32 argument, u32 param);
+
+
+
 
 /* Step the scene model swap: pick the stage for the player's map, then release the old model and load the new one. Returns true when idle. */
 u32 FUN_002d400c(void)

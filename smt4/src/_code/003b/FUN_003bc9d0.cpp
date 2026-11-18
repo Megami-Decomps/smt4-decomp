@@ -49,15 +49,15 @@ void modelSlotAttachChild(TitleIntroCamera *camera, s32 index);
 void *asdCameraGetSavedRenderPairs(void);
 void FUN_002a8638(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
 void FUN_002c1e30(void *camera, s32 flag, CameraView view);
-AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
+
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
-void lightOwnerRegister(AsdMdlObject *model, u32 enabled);
+
 void modelSetScale(void *node, f32 speed);
 s32 effTimelineIsDone(void *effect);
 void slotSetRequest(s32 slot, s32 value, s32 arg);
 s32 screenFadeIsBusy(void);
-void asdMdlManagerMarkDestroy(AsdMdlObject *model);
-void asdMdlManagerDestroy(AsdMdlObject *model);
+
+
 void modelRemoveFromSlotList(void *camera, s32 arg);
 void gfxObjectDestroy(void *object);
 void asdModelSlotRelease(s32 slot);

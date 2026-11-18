@@ -7,7 +7,7 @@
 extern "C" {
 
 
-s32 scrGetArg(s32 index);
+
 
 /* Script command: sets the result to 1 when the live, non-excluded unit with id `arg0` has a count of at least `arg1`. */
 u32 FUN_002ff08c(void)

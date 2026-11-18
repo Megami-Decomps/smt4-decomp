@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void asdMdlManagerMarkDestroy(AsdMdlObject *model);
+
 void gfxObjectDestroy(u32 arg);
 void FUN_00275be8(s32 arg);
 void buttonHelpRelease(void);
@@ -10,7 +10,7 @@ void modelRemoveFromSlotList(u32 arg, s32 flag);
 void fileSlotFree(s32 arg);
 void asdWorkAreaReset(void);
 void asdModelSlotRelease(s32 arg);
-void asdMdlManagerDestroy(AsdMdlObject *model);
+
 void asdMemFree(void *block);
 void titleTexTableFreeEntries(void);
 

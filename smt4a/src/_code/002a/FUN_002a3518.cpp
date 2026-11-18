@@ -5,8 +5,8 @@
 extern "C" {
 
 void eventTexRequestStopAll(void);
-u32 scrGetCommandOwner(void);
-u32 scrGetCommandFrame(void);
+
+
 s32 messageWindowShowOrPoll(u32 a, u32 b, u32 frame, s32 state, s32 wait, s32 flags);
 
 /* Shows the script command's first argument as a message with message state `mode`. */

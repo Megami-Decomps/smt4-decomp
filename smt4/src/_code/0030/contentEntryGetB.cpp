@@ -8,8 +8,8 @@ typedef struct Entry0030f5e0 {
     /* 0x00 */ u8 data[8];
 } Entry0030f5e0;
 
-void *dataTableGet(s32 table, s32 slot);
-u32 dataTableGetCount(void *table);
+
+
 Entry0030f5e0 *contentEntryGetFromFiles1(AocSystem *aoc, u32 index);
 
 /* Entry `index` of data table 0x29's section 1, continuing into the add-on content's entries (NULL past the end). */

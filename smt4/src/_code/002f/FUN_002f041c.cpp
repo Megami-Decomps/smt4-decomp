@@ -4,7 +4,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
+
 
 // Script result: 1 when an active, unblocked entry with the given id is at or below the HP percentage.
 u32 FUN_002f041c(void)

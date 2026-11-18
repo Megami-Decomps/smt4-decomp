@@ -8,8 +8,8 @@ typedef struct Entry00291ba4 {
     /* 0x00 */ u8 data[0x2c];
 } Entry00291ba4;
 
-void *dataTableGet(s32 table, s32 slot);
-u32 dataTableGetCount(void *table);
+
+
 Entry00291ba4 *aocPackagesGetHashTable4Entry(AocSystem *aoc, u32 index);
 
 /* Entry `index` of data table 0x29's section 4, continuing into the add-on content's entries (NULL past the end). */

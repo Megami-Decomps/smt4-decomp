@@ -15,8 +15,8 @@ extern const char DAT_0052e1e4[], DAT_0052e24c[], DAT_0052e2b4[], DAT_0052e31c[]
 extern const char DAT_0052e384[], DAT_0052e3ec[], DAT_0052e454[], DAT_0052e4bc[];
 extern const char DAT_0052e524[], DAT_0052e58c[], DAT_0052e5f4[], DAT_0052e65c[];
 extern const char DAT_0052e6c4[], DAT_0052e72c[], DAT_0052e794[];
-void *dataTableGetEntries(void *table);
-u32 dataTableGetCount(void *table);
+
+
 s32 arrayCompareSignedHalfword(const void *, const void *);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));

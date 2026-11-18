@@ -6,8 +6,8 @@
 
 extern "C" {
 void asdModelSlotRelease(u32);
-void asdMdlManagerMarkDestroy(AsdMdlObject *);
-void asdMdlManagerDestroy(AsdMdlObject *);
+
+
 void FUN_00152ed8(ModelSelector *);
 void asdMemFree(void *);
 void asdWorkAreaReset();

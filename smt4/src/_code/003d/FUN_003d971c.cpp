@@ -10,8 +10,8 @@ void screenFadeResetAndRelease(MaterialMergeOwner *);
 void FUN_002276f8(MaterialMergeOwner *);
 void modelManagerReleaseSlots(MaterialMergeOwner *);
 void FUN_00241d58(BattleSpritePlacement *);
-void asdMdlManagerMarkDestroy(AsdMdlObject *);
-void asdMdlManagerDestroy(AsdMdlObject *);
+
+
 void asdMemFree(void *);
 }
 

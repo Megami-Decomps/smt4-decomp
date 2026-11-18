@@ -7,7 +7,7 @@
 extern "C" {
 
 
-s32 scrGetArg(s32 index);
+
 
 /* Script command: sets the result to 1 when the live, non-excluded unit with id `arg0` has state 2 in slot `arg1`. */
 u32 scrUnitSlotHasState(void)

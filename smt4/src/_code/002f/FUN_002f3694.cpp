@@ -16,7 +16,7 @@ struct AreaSlotRecord {
 
 extern "C" {
 
-s32 dataTable2eSub2GetCount(void);
+
 s32 dataTableGetRecordFortyEight(void);
 s32 dataTableGetRecordFortyNine(void);
 AreaSlotRecord *FUN_0027ee24(s32 index);

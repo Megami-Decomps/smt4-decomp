@@ -10,8 +10,8 @@ extern "C" {
 
 
 void gxResetColorQuadToWhite(void);
-void efctSetSpeed(f32 speed);
-void renderCtxSelectStereoLayout(RenderCtx* scene);
+
+
 s32 renderCtxPackPassFlags(s32 a, s32 b);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);

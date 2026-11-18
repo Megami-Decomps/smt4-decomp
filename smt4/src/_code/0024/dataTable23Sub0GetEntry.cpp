@@ -8,8 +8,8 @@ typedef struct Table23Entry {
     /* 0x00 */ u8 unk00[0x20];
 } Table23Entry; /* 0x20 */
 
-extern void *dataTableGet(s32 group, s32 index);
-extern u32 dataTableGetCount(void *table);
+
+
 
 /* Returns entry `index` of data table 0x23/0, continuing into the AOC content entries after the base ones; NULL when out of range. */
 Table23Entry *dataTable23Sub0GetEntry(u32 index)

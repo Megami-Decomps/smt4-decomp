@@ -4,8 +4,8 @@
 
 extern "C" {
 s32 scrMessageKindGetValue(void);
-u32 scrGetCommandOwner(void);
-u32 scrGetCommandFrame(void);
+
+
 u32 messageWindowShowOrPoll(u32 context, s32 argument, s32 frame, s32 kind, s32 enabled, u32 flags);
 
 static __inline s32 messageKind(s32 kind)

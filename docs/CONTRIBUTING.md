@@ -7,7 +7,8 @@ original source**. Both games are one build tree, so most work lands twice: fix 
 ## The loop
 
 1. Pick a function. `build/report.json` (after `python -B build.py report`) scores every function;
-   `python -B tools/shared.py --list ported` lists functions matched in one game and not its twin;
+   `python -B tools/shared.py --list port` lists unproven functions whose twin is proven (exact, or a
+   near twin with the struct offsets to change);
    `python -B tools/triage.py` sorts the unproven ones by what their diff looks like, and
    `python -B tools/similar.py` names, for each, the proven functions whose retail code is most alike
    (start from that function's source: see [Matching techniques](#matching-techniques)).
@@ -27,7 +28,7 @@ original source**. Both games are one build tree, so most work lands twice: fix 
 3. Make it readable (below), rerunning `fdiff` after each step.
 4. Name it: add rows to a TSV and run `python -B tools/names.py apply ROWS.tsv`.
 5. Prove it, in each game you touched:
-   `python -B build.py && python -B build.py report && python -B tools/relink.py --matched`
+   `python -B build.py && python -B build.py report && python -B ../tools/relink.py --matched`
    must print `MATCH`, with the function counted as proven.
 6. Port the twin (`tools/shared.py` pairs them): same source, the twin's own callee and global names.
 
@@ -350,11 +351,12 @@ shared object, does not cast the object to a local view, and does not redeclare 
   `tools/usercheck.py` checks that for every unit the change reaches.
 - `python -B tools/declcheck.py [BASE]` (run by CI on every change) fails when the lines a change adds
   to a unit redeclare a function, global or struct that a shared header declares. Moving a declaration
-  into a shared header never fails it; `--all` counts the older local copies still to remove. A local
-  declaration kept on purpose, because the shared one's types change this caller's code, carries
-  `// declcheck: local (reason)` on its line. It also lists, without failing, each `static` helper a
-  change adds that its unit calls once: give the evidence the helper rule asks for, or write the body
-  in place.
+  into a shared header never fails it; `--all` counts the older local copies still to remove, and CI's
+  `--all --ratchet` fails when that count rises above `config/declcheck_ceiling.txt` (`--lower` records
+  a fall: commit it). A local declaration kept on purpose, because the shared one's types change this
+  caller's code, carries `// declcheck: local (reason)` on its line. It also lists, without failing,
+  each `static` helper a change adds that its unit calls once: give the evidence the helper rule asks
+  for, or write the body in place.
 
 ### Contracts
 

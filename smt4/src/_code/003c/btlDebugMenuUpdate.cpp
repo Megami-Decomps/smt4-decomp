@@ -98,9 +98,9 @@ void FUN_0024ef90(u32 handle);
 s32 padIsButtonPressed(s32 button);
 s32 dataTable03Sub0GetCount(void);
 s32 dataTable22GetCount(void);
-void *dataTableGet(s32 table, s32 index);
-void *dataTableGetEntries(void *section);
-u32 dataTableGetCount(void *section);
+
+
+
 
 void FUN_003c3360(DebugMenu *menu, DebugBattle *battle);
 void FUN_003c33c8(DebugMenu *menu, DebugBattle *battle);

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-s32 scrGetArg(s32 arg);
+
 
 extern u32 g_btlScriptUnit;
 

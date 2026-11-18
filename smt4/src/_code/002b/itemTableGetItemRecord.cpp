@@ -7,8 +7,8 @@
 extern "C" {
 
 extern ConsumableRecord *dataTable08Sub1FindById(AocSystem *system, u32 id);
-extern void *dataTableGet(s32 table, s32 section);
-extern u32 dataTableGetCount(void *section);
+
+
 extern ConsumableRecord *libc_bsearch(ConsumableRecord *key, ConsumableRecord *entries, u32 count, s32 size, u8 *compare);
 
 /* The record for `id`: the AOC system's own, else a search of the table. */

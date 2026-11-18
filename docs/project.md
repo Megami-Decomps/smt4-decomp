@@ -3,7 +3,7 @@
 ## Layout
 
 ```
-smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, build.py, tools/
+smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, build.py
   config/symbols.txt       every function's name, address and size, and every named global; a
                            `type:alias` line is a second linker name for a named address
                            (`__init_array_end` of the empty init array), built as that address's name
@@ -11,13 +11,21 @@ smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, b
   config/tus.json          function -> original source file (tools/assign_tus.py)
   src/_code/<file>/        functions placed in their original source file's folder (AsdSDK/..., battle/...)
   src/_code/<shard>/       everything else, by address
-  build.py                 compiles every function, runs objdiff, rebuilds the retail target objects
-  tools/relink.py          links the whole .code from the compiled objects and compares it with retail;
-                           --matched writes build/relink/proof.json, what the progress site credits
+  build.py                 compiles every function, runs objdiff, rebuilds the retail target objects;
+                           a unit compiles again only when what its object was built from changed
+                           (build/deps.json: the files armcc's --depend lists, the unit's command and
+                           project.json entry, the armlink lookups for its symbols, armcc, build.py);
+                           --force compiles every unit
 include/              headers both games share: structs and accessors, by original source file
 docs/                 the contribution guide and these notes; docs/notes/ holds the evidence for single matches
+tools/relink.py       links the whole .code from the compiled objects and compares it with retail;
+                      --matched writes <game>/build/relink/proof.json, what the progress site credits
+tools/split.py        rebuilds the retail target objects (`build.py split`); tools/n3ds.py reads the dump,
+                      tools/download_tool.py fetches the pinned toolchain (`build.py fetch`). relink, split
+                      and download_tool work on the game directory they run in, or on `--project GAME`
 tools/assign_tus.py   places functions in source files from assert paths and file-local data
-tools/shared.py       pairs the functions both games share and compares their progress
+tools/shared.py       pairs the functions both games share (exact, or with struct offsets moved) and lists the
+                      unproven ones whose twin is proven
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
 tools/trial.py        scores many source variants of one function in parallel, from temporary copies, as fdiff
                       would; --flags probes other cflags and multifile partners (diagnostics, not evidence)
@@ -34,7 +42,8 @@ tools/worktrees.py    git worktrees for parallel work: each links orig/ and buil
                       builds and relinks on its own, and hands back its changes as a patch
 tools/declcheck.py    fails when a change adds a unit-local copy of a function, global or struct that a
                       shared header declares (CI runs it on every push and pull request); also lists, without
-                      failing, new static helpers the unit calls only once
+                      failing, new static helpers the unit calls only once. `--all --ratchet` fails when the
+                      tree's count rises above config/declcheck_ceiling.txt
 tools/layout.py       field offsets of struct views from the compiler, and every view of one object merged
                       by offset (--anchor SYMBOL): the input for one declaration per object
 ```
@@ -53,6 +62,16 @@ same original file has the same path in both (`AsdSDK/Source/Sys/File/AsdFile`, 
 functions with the same code in both games (about 4,300: 40% of IV's, 25% of Apocalypse's): same
 instructions, same constants and floats, only branch targets and image addresses free. A function matched in one game
 and not the other is a porting candidate (`--list ported`): its source very likely matches the twin too.
+
+Much of the rest differs only where a struct moved (`GameState` against `GameStateA`). Near twins
+(`--list near`, about 1,400 more) have the same instructions, registers and internal branches once the
+immediate offsets of loads, stores and add/sub are masked, and the offsets that changed form one map from
+each base register; a split `add #0x4800; ldr [#0x224]` counts as one offset. Each pair lists its
+moved offsets (`0x1c4->0x2dc`). A shape with several candidates is paired only on positive evidence:
+calls at the same positions to functions already paired, paired callers calling both at the same
+position, or the same file in `config/tus.json`; the rest stays out. `--list port` lists every
+unproven first-party function whose exact or near twin `relink.py --matched` proved, largest first,
+with the twin's source and the offsets to change.
 
 ## Names
 

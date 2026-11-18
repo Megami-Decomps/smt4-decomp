@@ -28,8 +28,8 @@ void resourceOwnerReleaseAll(StatusScreenModel *model);
 void resourceOwnerReleaseAndReset(HandleRegistry *registry);
 s32 lmapMainIsRunning(void);
 void statusCameraDestroy(void);
-void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 key, s32 arg);
-void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 arg);
+
+
 void gameStateChange(s32 state);
 
 /* Closes the status panel: hides the status model, restarts the panel's sprite animations and
