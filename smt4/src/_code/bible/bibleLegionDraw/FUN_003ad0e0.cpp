@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocation debug trace now matches; the state pointer/saved registers (r9 in the build) and the resource packing still differ. */
+/* NON_MATCHING: only the scheduling of the state initialisation stores differs (retail stores progress278 before speed and sets r4 before the first float store). */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
@@ -38,12 +38,19 @@ typedef char LegionDrawLayout[sizeof(LegionDrawState) == 0x474 &&
 }
 extern "C" {
 extern LegionDrawGlobals g_countdown;
-extern const u8 DAT_004023c4[];
-extern const u8 DAT_004023e8[];
-extern const u8 DAT_00402400[];
 u32 FUN_003ac480();
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
+
+/* Animation tables for paramsInit, defined statically in the original file. */
+struct LegionFloatKey {
+    f32 from;
+    f32 to;
+    s32 frames;
+};
+static const u32 sMoveKeys[9] = { 0x140, 0x0, 0x8, 0x0, 0xfec0, 0x4, 0x172, 0x0, 0x10040 };
+static const LegionFloatKey sFadeKeys[2] = { { 0.0f, 1.0f, 8 }, { 1.0f, 0.0f, 8 } };
+static const s32 sSpriteKeys[28] = { -3, 0, -3, -3, 0, -3, 0, -3, 0, -3, -3, 0, -3, 0, -3, 0, -3, -2, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0 };
 
 void FUN_003ad0e0()
 {
@@ -81,13 +88,12 @@ void FUN_003ad0e0()
         LegionDrawState *state = g_countdown.state;
         state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("LegionDrawUp CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_003ac480), NULL, NULL);
         drawParameterBlockClear(&state->parameters);
-        paramsInit(&state->parameters, DAT_004023c4, 0x24, DAT_004023e8, 0x18,
-            NULL, 0, NULL, 0, DAT_00402400, 0x70);
-        UiResourceParameters *source = reinterpret_cast<UiResourceParameters *>(&state->parameters);
+        paramsInit(&state->parameters, sMoveKeys, sizeof(sMoveKeys), sFadeKeys, sizeof(sFadeKeys),
+            NULL, 0, NULL, 0, sSpriteKeys, sizeof(sSpriteKeys));
         for (s32 index = 0; index < 2; ++index) {
-            uiSpriteStateInitFromSource(&state->sprites[index], 0x23, 0, source, 0x15, 1.0f);
+            uiSpriteStateInitFromSource(&state->sprites[index], 0x23, 0, &state->parameters, 0x15, 1.0f);
             uiSpriteSetImageKeyframe(&state->sprites[index], 0, 0);
-            uiSpriteStateInitFromSource(&state->sprites[index + 2], 0x23, 0, source, 0x15, 1.0f);
+            uiSpriteStateInitFromSource(&state->sprites[index + 2], 0x23, 0, &state->parameters, 0x15, 1.0f);
             uiSpriteSetImageKeyframe(&state->sprites[index + 2], 1, 0);
         }
     }

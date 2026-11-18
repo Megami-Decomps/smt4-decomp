@@ -1,4 +1,4 @@
-/* NON_MATCHING: Refresh-result registers, count-store scheduling and retail's unused panel-call arguments differ. */
+/* NON_MATCHING: only retail's extra halfword load of work->unit into r2 after the count store is missing (an unrecovered use: likely the argument of a call armlink removed). */
 #include "common.h"
 #include <stddef.h>
 #include "camp/CommonBg/CommonBg.h"
@@ -76,7 +76,10 @@ u32 FUN_002fc7a0(PartyPanelRefreshWork *work)
         FUN_002595e0(work->record);
         linkHolderApplyFlag(work->link, 1);
         work->selected = -1;
-        work->count = work->compact == 0 ? 6 : 3;
+        if (work->compact == 0)
+            work->count = 6;
+        else
+            work->count = 3;
         work->substate = 2;
         work->state = 5;
         work->timers[2].elapsed = 0;

@@ -20,7 +20,7 @@ int FUN_0027f48c(...);
 int FUN_0027f848(void);
 int padGetNormalizedAnalogStick(unsigned int *, unsigned int [13], int);
 int lmapSetSceneId(unsigned int);
-int FUN_0027fca0(...);
+int mapDepartSpawnPlayerEffect(...);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(int [40], unsigned char *, int);
 
@@ -62,7 +62,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: lmapSetSceneId. */
-/* Supplied declaration required: FUN_0027fca0. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -155,7 +155,7 @@ void FUN_002c8ce4(void)
           if (DAT_0049fb34 != 0) {
             if (DAT_0049fb34 == 1) {
               if (*(int *)(g_lmapScene + 8) == 5) {
-                FUN_0027fca0(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 FUN_0025bc80();
                 effectSpawnAheadOfScene(30.0f,20.0f);
               }
@@ -169,7 +169,7 @@ joined_r0x002c9850:
             }
             if (DAT_0049fb34 == 2) {
               if (*(int *)(g_lmapScene + 8) == 5) {
-                FUN_0027fca0(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 FUN_0025bc80();
                 effectSpawnAheadOfScene(30.0f,20.0f);
               }
@@ -178,7 +178,7 @@ joined_r0x002c9850:
             }
             if (DAT_0049fb34 == 3) {
               if (*(int *)(g_lmapScene + 8) == 5) {
-                FUN_0027fca0(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 FUN_0025bc80();
                 effectSpawnAheadOfScene(-130.0f,20.0f);
               }
@@ -188,7 +188,7 @@ joined_r0x002c9850:
           }
           else {
             if (*(int *)(g_lmapScene + 8) == 5) {
-              FUN_0027fca0(0xffffffff);
+              mapDepartSpawnPlayerEffect(0xffffffff);
               FUN_0025bc80();
               effectSpawnAheadOfScene(-130.0f,20.0f);
             }
@@ -382,7 +382,7 @@ joined_r0x002c99a8:
                 position.y = *(float *)(g_lmapScene + 0x20) + 130.0f;
                 soundActorStartOnFreeChannel(0x10001f3, position);
                 }
-                FUN_0027fca0(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
               }
               if ((*(int *)(g_lmapScene + 8) == 6) &&
                  (FUN_0025bc80(), *(int *)(g_lmapScene + 8) == 6)) {
@@ -411,7 +411,7 @@ joined_r0x002c99a8:
               position.y = *(float *)(g_lmapScene + 0x20) + 130.0f;
               soundActorStartOnFreeChannel(0x10001f2, position);
               }
-              FUN_0027fca0(0xffffffff);
+              mapDepartSpawnPlayerEffect(0xffffffff);
             }
             if (*(int *)(g_lmapScene + 8) == 4) {
               FUN_0025bc80();
@@ -435,7 +435,7 @@ joined_r0x002c99a8:
             temp_v2 = randBetween(0,2);
             soundActorStartOnFreeChannel(temp_v2 + 0x100022f, position);
             }
-            FUN_0027fca0(0xffffffff);
+            mapDepartSpawnPlayerEffect(0xffffffff);
           }
           if (*(int *)(g_lmapScene + 8) == 6) {
             FUN_0025bc80();
@@ -459,7 +459,7 @@ joined_r0x002c99a8:
           temp_v2 = randBetween(0,2);
           soundActorStartOnFreeChannel(temp_v2 + 0x100022c, position);
           }
-          FUN_0027fca0(0xffffffff);
+          mapDepartSpawnPlayerEffect(0xffffffff);
         }
         if ((*(int *)(g_lmapScene + 8) == 6) && (FUN_0025bc80(), *(int *)(g_lmapScene + 8) == 6))
         {

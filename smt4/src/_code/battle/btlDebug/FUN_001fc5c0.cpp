@@ -30,7 +30,7 @@ const char *aocIndexValueOrDefault(u32 index);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
 u32 FUN_002561d8(BtlDebugWork *work, u32 unit, s32 flags);
 void FUN_003c2fe8(BtlDebugMenu *menu, u32 value);
-void FUN_003c3238(BtlDebugMenu *menu, u32 value);
+void uiDrawFlagLabels(BtlDebugMenu *menu, u32 value);
 
 /* Battle debug menu update: act on the selected list item for the menu's current state. */
 s32 FUN_001fc5c0(u32 handle)
@@ -52,12 +52,12 @@ s32 FUN_001fc5c0(u32 handle)
         break;
     case 14:
         if (asdListBoxGetSelectedItemId(menu->listBox) == 0) {
-            FUN_003c3238(menu, FUN_002561d8(work, menu->unit, 1));
+            uiDrawFlagLabels(menu, FUN_002561d8(work, menu->unit, 1));
         }
         break;
     case 12:
         if (asdListBoxGetSelectedItemId(menu->listBox) == 0) {
-            FUN_003c3238(menu, FUN_002561d8(work, menu->unit, 1));
+            uiDrawFlagLabels(menu, FUN_002561d8(work, menu->unit, 1));
         }
         break;
     }

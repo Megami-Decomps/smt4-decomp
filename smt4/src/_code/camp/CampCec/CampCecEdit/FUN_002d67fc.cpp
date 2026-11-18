@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d67fc` (_code @ 0x2d67fc, 0x548 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "camp/CampCec/CampCecEdit.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
@@ -34,11 +35,10 @@ extern unsigned char campCecEditDrawSelectedImage; /* 0x1ebdb8 */
 extern int campCecEditDrawContents(...); /* 0x210e38 */
 extern unsigned char recordQueryModeZero; /* 0x220d38 */
 extern int FUN_00220d58(...); /* 0x220d58 */
-extern int FUN_002d6d44(...); /* 0x2d6d44 */
+extern int campCecEditMessageState(...); /* 0x2d6d44 */
 extern int FUN_002e1744(...); /* 0x2e1744 */
 extern int FUN_002ec514(...); /* 0x2ec514 */
 extern int FUN_002fc7a0(...); /* 0x2fc7a0 */
-extern int campCecClassifyRequestedUnit(void*); /* 0x2fc8dc */
 extern int FUN_003172e0(...); /* 0x3172e0 */
 extern int FUN_00321af0(...); /* 0x321af0 */
 extern unsigned int *g_campCecEdit; /* 0x43dad0 */
@@ -114,7 +114,7 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[0x55] = 0;
   puVar1[0x57] = 0xffffffff;
   puVar1[0x2d] = (unsigned int)FUN_002e1744;
-  puVar1[0x2f] = (unsigned int)FUN_002d6d44;
+  puVar1[0x2f] = (unsigned int)campCecEditMessageState;
   puVar1[0x2e] = (unsigned int)FUN_00220d58;
   puVar1[0x30] = (unsigned int)campCecClassifyRequestedUnit;
   puVar1[0x31] = (unsigned int)FUN_002fc7a0;

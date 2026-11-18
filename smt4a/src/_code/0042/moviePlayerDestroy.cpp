@@ -4,7 +4,7 @@
 #include "mobiclip_ctrl/DeblockerHandle.h"
 
 extern "C" {
-void FUN_00425cd8(void *player);
+void mobiclipS4PlayerDestroy(void *player);
 void deblockerHandleRelease(u32 *handle);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
 }
@@ -25,7 +25,7 @@ extern "C" {
 /* Stops the player, releases its deblocker and closes its thread. */
 MoviePlayerView *moviePlayerDestroy(MoviePlayerView *player)
 {
-    FUN_00425cd8(player);
+    mobiclipS4PlayerDestroy(player);
     u32 *handle = &player->deblocker;
     deblockerHandleRelease(handle);
     mwmofilterDeblockerRelease(*handle);

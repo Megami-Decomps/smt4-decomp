@@ -13,11 +13,17 @@ struct ShopDescriptionEntry {
         } voice;
     };
 };
-struct ShopItemDescription {
-    u32 unk00;
+struct ShopDescriptionState {
     u32 mode;
     s32 state;
     u32 previousMode;
+
+    ShopDescriptionState(u32 nextMode, s32 nextState, u32 oldMode)
+        : mode(nextMode), state(nextState), previousMode(oldMode) {}
+};
+struct ShopItemDescription {
+    u32 unk00;
+    ShopDescriptionState selectionState;
     u32 unk10;
     u32 tableGroup;
     u32 script;
@@ -34,12 +40,15 @@ struct ShopItemDescription {
         struct {
             u8 unk2C[0x1C];
             s32 nextEntry;
+            s32 selectedEntry;
         } progress;
     };
 };
 typedef char ShopItemDescriptionLayoutCheck[
     offsetof(ShopItemDescription, entries) == 0x2C &&
-    offsetof(ShopItemDescription, progress.nextEntry) == 0x48 && sizeof(ShopItemDescription) == 0x50 ? 1 : -1];
+    offsetof(ShopItemDescription, selectionState) == 0x04 &&
+    offsetof(ShopItemDescription, progress.nextEntry) == 0x48 &&
+    offsetof(ShopItemDescription, progress.selectedEntry) == 0x4C && sizeof(ShopItemDescription) == 0x50 ? 1 : -1];
 typedef char ShopItemVoiceOffsetsCheck[
     sizeof(ShopDescriptionEntry) == 0xC &&
     offsetof(ShopDescriptionEntry, voice.sound) == 6 &&

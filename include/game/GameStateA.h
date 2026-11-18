@@ -191,7 +191,8 @@ struct GameStateA {
     /* 0x2A4 */ u8 unk2A4[0x1A];
     /* 0x2BE */ s16 limit;
     /* 0x2C0 */ s16 minimum;
-    /* 0x2C2 */ u8 unk2C2[2];
+    /* 0x2C2 */ s8 enemyModelCapacity;
+    /* 0x2C3 */ u8 unk2C3;
     /* 0x2C4 */ u32 unk2C4;
     /* 0x2C8 */ u8 skipTransitionSnapshot;
     /* 0x2C9 */ u8 unk2C9;

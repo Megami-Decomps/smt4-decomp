@@ -1,0 +1,128 @@
+/* NON_MATCHING: 104 lines; twin of smt4a FUN_0032ba8c, same frame and block layout. Retail keeps the row frame's x sum in r0 and loads the render context after it, swaps r1/r2 in the cursor's first blend-state change and the label position's sums, and does not share the unpressed knob draw of the selected row with the unselected row's (it stores that call's stack arguments one by one where this build pairs them). */
+#include "ui/UiSpriteApi.h"
+#include "title/titleConfig.h"
+#include "camp/RenderCtxTitle.h"
+#include "shard/TextureDrawCall.h"
+#include "shard/W6_W6Match2_FormattedTextSource.h"
+#include "util/BitsAndBytes.h"
+#include "text/TextDraw.h"
+#include "gfx/SpritePartDraw.h"
+#include "gamedata/DataTable.h"
+#include "code/Code0029.h"
+#include "code/Code002a_VariantA.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include <string.h>
+
+extern "C" {
+
+extern TitleConfigCallbackView *g_titleConfig;
+
+s32 resourceRunOperationIfUnblocked(const void *list);
+s32 ifTouchGetSelectionModeForRegion(s32 region);
+
+/* Draws a row's frame, and the additive cursor over the selected one. */
+static __inline void titleConfigDrawRowFrame(s32 rowX, s32 rowY, bool isSelected)
+{
+    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+    if (!isSelected) {
+        texDrawTableEntryAtStoredOrigin(2, 0x2f, 0xc, rowX, rowY, 0xb);
+    } else {
+        texDrawTableEntryAtStoredOrigin(2, 0x2f, 0xd, rowX, rowY, 0xb);
+    }
+    renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+    texDrawCompositeSprite(2, 0x2f, 1, rowX, rowY, 0x10);
+    if (isSelected) {
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+        texDrawCompositeSprite(2, 0x2f, 2, rowX, rowY, 0x15);
+        renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+    }
+}
+
+/* Draws a row's slider with its knob at `level`; the selected row's arrows and knob light up while touched. */
+static __inline void titleConfigDrawSlider(s32 rowX, s32 rowY, s32 level, bool isSelected)
+{
+    TitleConfigCallbackView *menu = g_titleConfig;
+    s32 mode;
+    texDrawCompositeSprite(2, 0x2f, 3, rowX, rowY, 0x1f);
+    TextureTableEntryIV *knob = asdTMTexTableEntryAt(0x2f, level + 0x5b);
+    if (isSelected) {
+        mode = ifTouchGetSelectionModeForRegion(menu->leftButton);
+        if (mode == 1 || mode == 2 || mode == 6) {
+            texDrawCompositeSprite(2, 0x2f, 5, rowX, rowY, 0x15);
+        } else {
+            texDrawCompositeSprite(2, 0x2f, 4, rowX, rowY, 0x1f);
+        }
+        mode = ifTouchGetSelectionModeForRegion(menu->rightButton);
+        if (mode == 1 || mode == 2 || mode == 6) {
+            texDrawCompositeSprite(2, 0x2f, 7, rowX, rowY, 0x15);
+        } else {
+            texDrawCompositeSprite(2, 0x2f, 6, rowX, rowY, 0x1f);
+        }
+        mode = ifTouchGetSelectionModeForRegion(menu->slider);
+        if (mode == 1 || mode == 2 || mode == 6) {
+            texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x32, knob->x + rowX, knob->y + rowY, 0x29);
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x31, knob->x + rowX, knob->y + rowY, 0x29);
+        }
+    } else {
+        texDrawCompositeSprite(2, 0x2f, 4, rowX, rowY, 0x1f);
+        texDrawCompositeSprite(2, 0x2f, 6, rowX, rowY, 0x1f);
+        texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x31, knob->x + rowX, knob->y + rowY, 0x29);
+    }
+}
+
+/* The config menu's draw task: the window, then one row per visible setting (its frame, label, the reset
+ * button of the selected row, and the slider with its arrows and knob). */
+s32 titleConfigDraw(void)
+{
+    TitleConfigCallbackView *config = g_titleConfig;
+    s32 x = vec2GetXInt(&config->window);
+    s32 y = vec2GetYInt(&config->window);
+    s32 editing = 0;
+    if (config->state == 1) {
+        editing = 1;
+    }
+    char text[64] = {0};
+
+    texDrawCompositeSprite(2, 0x2f, 0xc, x, y, 0xb);
+    s32 selected = resourceRunOperationIfUnblocked(config->cursor) + listCursorGetRowIfUnblocked(config->cursor);
+    for (s32 row = 0; row < (s32)FUN_0029d644(config->cursor); row++) {
+        memset(text, 0, sizeof(text));
+        bool isSelected = false;
+        u32 color = 0xe09800ff;
+        if (editing && resourceRunOperationIfUnblocked(config->cursor) + row == selected) {
+            isSelected = true;
+            color = 0x72e027ff;
+        }
+        TextureTableEntryIV *entry = asdTMTexTableEntryAt(0x2f, row + 0x1f);
+
+        titleConfigDrawRowFrame(entry->x + x, entry->y + y, isSelected);
+
+        TextureTableEntryIV *labelEntry = asdTMTexTableEntryAt(0x2f, 0x1a);
+        u32 setting = resourceRunOperationIfUnblocked(config->cursor) + row;
+        if (setting < 3) {
+            TitleConfigHelpEntry *labels = (TitleConfigHelpEntry *)dataTableGetEntries(dataTableGet(0x3a, 1));
+            textFormatBuffer(text, "%s", &labels[setting]);
+            textDrawString(2, color, text, (f32)(entry->x + labelEntry->x + x), (f32)(entry->y + labelEntry->y + y), 0.0f,
+                           0.0f, 1.0f);
+        }
+
+        if (isSelected) {
+            texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x1c, entry->x + x, entry->y + y, 0x1f);
+            s32 mode = ifTouchGetSelectionModeForRegion(config->resetButton);
+            if (mode == 1 || mode == 2 || mode == 6) {
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x1d, entry->x + x, entry->y + y, 0x1f);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+            }
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x1b, entry->x + x, entry->y + y, 0x1f);
+        }
+
+        titleConfigDrawSlider(entry->x + x, entry->y + y,
+                              config->settings[resourceRunOperationIfUnblocked(config->cursor) + row], isSelected);
+    }
+    return 0;
+}
+
+} /* extern "C" */

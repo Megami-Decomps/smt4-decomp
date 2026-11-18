@@ -1,4 +1,3 @@
-/* NON_MATCHING: special-mode preference lookup is placed before the shared sort tests instead of in retail's cold block, changing two alignment NOPs; sort bodies otherwise match. */
 #include "camp/Unite/UniteGlobals.h"
 #include <stdlib.h>
 #include "event/2dEvent/2dEventTex.h"
@@ -20,15 +19,15 @@ s32 FUN_002b2ca8(const void *a, const void *b);
 s32 btlDevilCompareValueKindAndOrder(const void *a, const void *b);
 void arraySortQsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
+// Apply the saved sort preference for the current fusion menu mode.
 void uniteSortCandidateList(void)
 {
     UniteWorkA *work = g_unite;
     const u8 *setting;
-    if (work->menu.mode != 2) {
-        setting = &reinterpret_cast<FusionSortPreferences *>(saveGetUserSettingsBlock())->normal;
-    } else {
+    if (work->menu.mode == 2)
         setting = &reinterpret_cast<FusionSortPreferences *>(saveGetUserSettingsBlock())->special;
-    }
+    else
+        setting = &reinterpret_cast<FusionSortPreferences *>(saveGetUserSettingsBlock())->normal;
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {
         if (ascending) {

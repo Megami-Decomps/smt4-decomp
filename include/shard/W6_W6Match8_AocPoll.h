@@ -17,4 +17,10 @@ typedef char AocPollStepLayoutCheck[
     offsetof(AocPollStep, result) == 0x0C &&
     offsetof(AocPollStep, request) == 0x18 && sizeof(AocPollStep) == 0x1C ? 1 : -1];
 
+extern "C" {
+// Flush the current frame and dispatch the error detail returned by the request.
+void FUN_002b4810(AocMain *main, u32 detail); // IV
+void FUN_001764dc(AocMain *main, u32 detail); // Apocalypse
+}
+
 #endif

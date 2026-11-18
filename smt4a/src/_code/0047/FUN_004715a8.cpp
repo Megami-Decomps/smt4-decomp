@@ -10,7 +10,7 @@ s32 objGetFlagBit16(AocMain *main);
 void asdOperatorDeleteB(void *block);
 void *asdOperatorNewE(u32 bytes);
 EntryState *__aeabi_vec_ctor_nocookie_nodtor(EntryState *, void (*)(EntryState *), u32 size, u32 count);
-void FUN_004701d8(AocSystemA *owner, s32 kind, s32 capacity, EntryState *output);
+void aocLoadPackageFilesByKind(AocSystemA *owner, s32 kind, s32 capacity, EntryState *output);
 
 /* Rebuilds the state entries for the packages of `kind`, or drops the pending flag when no SD card is present. */
 static __inline void rebuildStates(AocSystemA *owner, s32 kind)
@@ -32,7 +32,7 @@ static __inline void rebuildStates(AocSystemA *owner, s32 kind)
                 }
                 owner->states = states;
             }
-            FUN_004701d8(owner, kind, owner->stateCount, owner->states);
+            aocLoadPackageFilesByKind(owner, kind, owner->stateCount, owner->states);
         }
     } else {
         g_aocMain->flags &= ~0x10000u;

@@ -1,18 +1,6 @@
 /* NON_MATCHING: compiler hoists animation/key pointers across channel stores and uses r6 rather than lr for sequence scanning. */
 #include "ui/UiSpriteApi.h"
-
-/* The first frame of sequence `sequence`: each sequence ends with an image of -1. */
-static inline UiSpriteFrameKey *findSpriteSequence(UiResourceParameters *resources, s16 sequence)
-{
-    s32 group = 0;
-    for (u32 index = 0; index < resources->frameKeyBytes / sizeof(UiSpriteFrameKey); ++index) {
-        if (group == sequence)
-            return &resources->frameKeys[index];
-        if (resources->frameKeys[index].image == -1)
-            ++group;
-    }
-    return NULL;
-}
+#include "ui/UiSpriteSequence.h"
 
 /* Runs a command list: starts the key each track's first command names. */
 extern "C" void uiSpriteSetAnimationCommand(UiSpriteState *sprite, const SpriteAnimationCommand *command)
@@ -57,7 +45,7 @@ extern "C" void uiSpriteSetAnimationCommand(UiSpriteState *sprite, const SpriteA
         }
     }
     if (sprite->commands->frameSequence > -1) {
-        sprite->frameKeys = findSpriteSequence(sprite->resources, (s16)sprite->commands->frameSequence);
+        sprite->frameKeys = uiSpriteFindFrameSequence(sprite->resources, (s16)sprite->commands->frameSequence);
         if (sprite->frameKeys != NULL) {
             sprite->frameIndex = 0;
             sprite->frameElapsed = 0;

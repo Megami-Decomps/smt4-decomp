@@ -94,6 +94,8 @@ extern "C" {
 extern AocMain *g_aocMain;
 /* Whether the content is ready (bit 16 of the flags). */
 s32 objHasFlagBit16(AocMain *main);
+/* Set the panel-ready byte via the setter armlink inlined in the menu units. */
+void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
 }
 
 /* The display block that AOC drives (Shin Megami Tensei IV layout). */

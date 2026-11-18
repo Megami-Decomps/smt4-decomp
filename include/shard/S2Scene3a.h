@@ -5,6 +5,10 @@
 #include "shop/EquipmentMenuPage.h"
 #include "shop/ShopPanel.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W5_W5Match2_PlainData.h"
+#include "shard/W6_W6Match7_NumericStepper.h"
+#include "script/ScriptVm.h"
 #include <stddef.h>
 
 struct Scene3a;
@@ -20,8 +24,13 @@ enum {
     SCENE3A_STATE_IDLE, SCENE3A_STATE_START, SCENE3A_STATE_RUNNING,
     SCENE3A_STATE_STOP, SCENE3A_STATE_FINISH
 };
+/* The screen's eight animated sprites (uiAnimationAdvanceChannel, FUN_00233240). */
+struct Scene3aSprites {
+    /* 0x000 */ u8 unk00[0x20];
+    /* 0x020 */ UiSpriteState sprites[8];   /* 6 slides the quantity panel in, 7 out */
+};
 struct Scene3a {
-    /* 0x00000 */ u32 flags;
+    /* 0x00000 */ u32 flags;                /* 0x1000: the quantity panel is on screen */
     /* 0x00004 */ s32 phase;
     union {
         /* 0x00008 */ s32 substep;
@@ -33,6 +42,10 @@ struct Scene3a {
             /* 0x00018 */ s32 context;
         } help;
         struct {
+            u8 unk08BeforeFrames[4];
+            /* 0x0000C */ s32 frames;       /* frames spent in the current substep */
+        } wait;
+        struct {
             u8 unk08BeforePreview[0x16];
             /* 0x0001E */ u8 requested;
             /* 0x0001F */ u8 ready;
@@ -40,14 +53,24 @@ struct Scene3a {
     };
     /* Callback storage ends no later than the script resource at 0x160. */
     /* 0x00020 */ struct { Scene3aFunc func; } updateFuncs[0x28];
-    /* 0x00160 */ u8 unk160[0x21C];
+    /* 0x00160 */ void *scriptTable;        /* the shop script's entry names (tableGroupFindEntryIndex) */
+    /* 0x00164 */ u8 unk164[4];
+    /* 0x00168 */ ScriptProcess *process;   /* the shop script */
+    /* 0x0016C */ u8 unk16C[0x210];
     /* 0x0037C */ u32 listId;
-    /* 0x00380 */ AsdTextureRegion region;
-    /* 0x003A0 */ u8 unk3A0[0x4BC];
+    union {
+        /* 0x00380 */ AsdTextureRegion region;
+        struct {
+            u8 unk380[0x14];
+            /* 0x00394 */ EmptyRange rect;  /* where the quantity panel is drawn */
+        } panel;
+    };
+    /* 0x003A8 */ Scene3aSprites animation;
+    /* 0x00828 */ u8 touchSelection[0x34];  /* the list's touch selection (Obj55ca08) */
     /* 0x0085C */ MenuView *view;
     /* 0x00860 */ s32 slot;
     /* 0x00864 */ s32 tab;
-    /* 0x00868 */ u8 unk868[0x18];
+    /* 0x00868 */ NumericStepper quantity;  /* how many of the selected item to trade */
     /* 0x00880 */ Scene3aSlotInfo slotInfo[SCENE3A_SLOTS];
     /* 0x00C94 */ Scene3aList lists[SCENE3A_SLOTS];
     /* 0x09CA8 */ EquipmentMenuCursor list; // appraisal list
@@ -68,6 +91,8 @@ struct Scene3a {
     /* 0x15D48 */ void *modelManager;
     /* 0x15D4C */ u8 unk15d4c[8];
     /* 0x15D54 */ u32 selectedItem;
+    /* 0x15D58 */ u8 unk15D58[0x10];
+    /* 0x15D68 */ s32 quantityIndex;        /* the list index the quantity panel was set up for, -1: none */
 };
 typedef char Scene3aPageLayoutCheck[offsetof(Scene3a, listId) == 0x37C &&
     offsetof(Scene3a, region) == 0x380 && offsetof(Scene3a, view) == 0x85C &&
@@ -76,5 +101,11 @@ typedef char Scene3aPageLayoutCheck[offsetof(Scene3a, listId) == 0x37C &&
 typedef char Scene3aTransactionLayoutCheck[sizeof(Scene3aEntry) == 4 &&
     sizeof(Scene3aTransactionRecord) == 6 && offsetof(Scene3aEntry, attributes) == 2 &&
     offsetof(Scene3a, transaction.records) == 0x9D1C && offsetof(Scene3a, transaction.count) == 0x15D1C &&
-    offsetof(Scene3a, transaction.totalAmount) == 0x15D20 && sizeof(Scene3a) == 0x15D58 ? 1 : -1];
+    offsetof(Scene3a, transaction.totalAmount) == 0x15D20 && offsetof(Scene3a, selectedItem) == 0x15D54 &&
+    offsetof(Scene3a, quantityIndex) == 0x15D68 ? 1 : -1];
+typedef char Scene3aQuantityLayoutCheck[offsetof(Scene3a, wait.frames) == 0xC &&
+    offsetof(Scene3a, scriptTable) == 0x160 && offsetof(Scene3a, process) == 0x168 &&
+    offsetof(Scene3a, panel.rect) == 0x394 && offsetof(Scene3a, animation) == 0x3A8 &&
+    offsetof(Scene3a, touchSelection) == 0x828 && offsetof(Scene3a, quantity) == 0x868 &&
+    sizeof(NumericStepper) == 0x18 ? 1 : -1];
 #endif

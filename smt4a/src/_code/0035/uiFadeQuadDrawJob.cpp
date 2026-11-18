@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 37 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: only VFP register allocation differs: retail keeps the 0.0f constant in s17 and the height in s16 (the build swaps them) and loads the fade amount into s1. */
 #include "common.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
@@ -19,15 +19,15 @@ u32 uiFadeQuadDrawJob(u32 job)
     if (work->alpha != 0.0f) {
         u32 color = work->color;
         RenderCtxA *context = g_renderCtx;
-        u32 alpha = static_cast<u32>(work->alpha * static_cast<f32>(color & 0xff));
+        u32 alpha = static_cast<u32>(static_cast<f32>(color & 0xff) * work->alpha);
         if (alpha > 255) {
             alpha = 255;
         }
         color = (color & 0xffffff00) | alpha;
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_renderCtx, 0);
-        f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_renderCtx->unk052C));
-        f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_renderCtx->unk052C));
+        f32 height = static_cast<f32>(asdGxPresetsGetByKind(renderCtxGetStereoMode(g_renderCtx)));
+        f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_renderCtx)));
         gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
         renderStackPop(&g_renderCtx->stackA);
     }

@@ -15,7 +15,7 @@ int mapIfActivateRecord(int, unsigned int);
 int mapInterfaceSetStateTwo(void);
 int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
-int FUN_0027fca0(unsigned int);
+int mapDepartSpawnPlayerEffect(unsigned int);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(int);
 int mapEaseSceneHeading(void);
@@ -50,7 +50,7 @@ extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
-/* Supplied declaration required: FUN_0027fca0. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -109,7 +109,7 @@ void FUN_002e9b60(void)
                 *(unsigned int *)(temp_v0 + 0x54) = 0x10;
                 *(unsigned int *)(temp_v0 + 0x58) = 0;
                 soundActorStartOnFreeChannel(0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
-                FUN_0027fca0(0xffffffff);
+                mapDepartSpawnPlayerEffect(0xffffffff);
                 SoundActorQueuePosition position;
                 position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
                 position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
@@ -266,7 +266,7 @@ void FUN_002e9b60(void)
     *(float *)(temp_v0 + 0x20) = temp_v4;
     if ((temp_v2 == 1) || ((temp_v2 == 0xb || temp_v2 == 0x1c) || temp_v2 == 0x29)) {
       soundActorStartOnFreeChannel((temp_v2 & 3) + 0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
-      FUN_0027fca0(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {
       mapInterfaceSetStateTwo();

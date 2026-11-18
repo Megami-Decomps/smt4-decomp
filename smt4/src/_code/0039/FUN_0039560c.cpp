@@ -1,38 +1,26 @@
 /* NON_MATCHING: FP scheduling: retail loads the target with one vldmia, scene components with vldr and the 1.0f constant late */
+#include "map/AmbientMovement.h"
 #include "map/LmapGlobals.h"
 #include <math.h>
-
-struct ChaseTarget {
-    u8 unk00[0x28];  // 0x00
-    f32 position[3]; // 0x28
-};
-
-struct ChaseMotion {
-    u8 unk00[0x0C];       // 0x00
-    ChaseTarget *target;  // 0x0C
-    f32 velocity[3];      // 0x10
-    u8 unk1c[4];          // 0x1C
-    f32 speed;            // 0x20
-};
 
 extern "C" {
 
 /* Points the velocity from the target toward the map scene position, scaled to the speed. */
-void FUN_0039560c(ChaseMotion *motion)
+void FUN_0039560c(AmbientMovementWork *motion)
 {
-    const f32 *target = motion->target->position;
+    const MapVector &target = motion->actor->movement.position;
     f32 speed = motion->speed;
-    f32 tx = target[0];
-    f32 ty = target[1];
-    f32 tz = target[2];
+    f32 tx = target.x;
+    f32 ty = target.y;
+    f32 tz = target.z;
     f32 dx = g_lmapScene->pose.position.x - tx;
     f32 dy = g_lmapScene->pose.position.y - ty;
     f32 dz = g_lmapScene->pose.position.z - tz;
     f32 scale = 1.0f / __sqrtf(dx * dx + dy * dy + dz * dz);
 
-    motion->velocity[0] = dx * scale * speed;
-    motion->velocity[1] = dy * scale * speed;
-    motion->velocity[2] = dz * scale * speed;
+    motion->velocity.x = dx * scale * speed;
+    motion->velocity.y = dy * scale * speed;
+    motion->velocity.z = dz * scale * speed;
 }
 
 } /* extern "C" */

@@ -35,7 +35,8 @@ struct SavedUnitSelectionResource {
 struct SavedUnitSelection {
     union {
         u8 unk000[0x54];
-        struct {
+        /* The selection screen's state track. */
+        struct SavedUnitSelectionEditor {
             u8 prefix[7];
             /* 0x007 */ u8 state;
             /* 0x008 */ u32 frame;

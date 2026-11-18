@@ -13,7 +13,7 @@ u32 campCecUpdateState();
 s32 questQueryFalse();
 u32 campCecDrawDimmingOverlay();
 void campCecStopCommThread();
-void FUN_002ec588();
+void campCecInboxState();
 void FUN_002ccb7c();
 void FUN_001ebedc();
 void FUN_001dbf34();
@@ -62,7 +62,7 @@ void FUN_001ffc5c()
     work->unkD30 = -1;
     work->substate = 0;
     work->handlers[0] = campCecStopCommThread;
-    work->handlers[1] = FUN_002ec588;
+    work->handlers[1] = campCecInboxState;
     work->handlers[2] = FUN_002ccb7c;
     work->handlers[3] = FUN_001ebedc;
     work->handlers[4] = FUN_001dbf34;

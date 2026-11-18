@@ -13,7 +13,7 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 u32 gameDataCopySaveEntry(u32 id, void *out);
 
-u32 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, u32 level, s32 checkRecord)
+u16 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, u32 level, s32 checkRecord)
 {
     u16 bestDifference = 999;
     u32 bestId = 0;

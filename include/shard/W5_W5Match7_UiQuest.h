@@ -52,7 +52,7 @@ struct UiQuestApoc {
             /* 0x8FC */ ScriptProcess *process; /* runs `program` with `messages` */
         } script;
     };
-    /* 0x90c */ u8 unk90c;
+    /* 0x90c */ s8 unk90c;             /* the list shown is the alternate one (alternateView()) */
     /* 0x90d */ s8 unk90D;
     /* 0x90e */ s8 unk90E;
     /* 0x90f */ s8 mode;
@@ -90,7 +90,16 @@ struct UiQuestApoc {
     /* 0xccc */ u16 unkCCC;
     /* 0xcce */ u16 selectedId;
     /* 0xcd0 */ s16 detailMode;
-    /* 0xcd2 */ u8 unkCD2[0x76];
+    union {
+        /* 0xcd2 */ u8 unkCD2[0x76];
+        struct {
+            /* 0xcd2 */ u8 unkCD2BeforeRegions[0x56];
+            /* 0xd28 */ s16 rowRegions[11];  /* touch regions of the visible list rows */
+            /* 0xd3e */ s16 scrollUpRegion;  /* touch regions of the list's scroll bar: its two arrows */
+            /* 0xd40 */ s16 scrollDownRegion;
+            /* 0xd42 */ s16 scrollThumbRegion; /* and its thumb */
+        } touch;
+    };
     /* 0xd48 */ u32 firstCounter;
     /* 0xd4c */ u32 secondCounter;
 
@@ -127,6 +136,9 @@ static __inline void uiQuestEnterMenuState(UiQuestApoc *quest, s32 next)
 }
 
 typedef char UiQuestApocSizeCheck[sizeof(UiQuestApoc) == 0xD50 ? 1 : -1];
+typedef char UiQuestApocTouchOffsets[
+    offsetof(UiQuestApoc, touch.rowRegions) == 0xD28 && offsetof(UiQuestApoc, touch.scrollUpRegion) == 0xD3E &&
+    offsetof(UiQuestApoc, touch.scrollThumbRegion) == 0xD42 ? 1 : -1];
 typedef char UiQuestApocDetailSpriteOffsetCheck[
     offsetof(UiQuestApoc, detailAnimation.sprite) == 0x494 &&
     sizeof(UiQuestApoc) == 0xD50 ? 1 : -1];

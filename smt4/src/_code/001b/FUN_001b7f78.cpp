@@ -103,7 +103,7 @@ int mapInterfaceSetStateTwo(void);
 int FUN_00273840(...);
 int saveSetNavigationPosition(...);
 int FUN_0027fc14(...);
-int FUN_0027fca0(...);
+int mapDepartSpawnPlayerEffect(...);
 int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
 int FUN_0028d664(...);
@@ -206,7 +206,7 @@ int FUN_0022373c(void);
 int mapDepartSetTarget(...);
 int FUN_00276a3c(void);
 int FUN_00277b5c(...);
-int FUN_00277bdc(void);
+int mapSpawnActiveSignboardEffects(void);
 int FUN_00277d2c(...);
 int mapGimicUpdateVisualBounds(void);
 int FUN_0027ae90(void);
@@ -243,7 +243,7 @@ int NaviMain_SetCurrentMap(...);
 void NaviMain_Start(int unused, int requestId);
 int mapRangeWorkReset(void);
 int mapDepartRequest(...);
-int FUN_001e3284(void);
+int uiSubMenuResetWork(void);
 int mapObjRequestTransition(...);
 int mapGimicStartRequest(...);
 int mapRangeStartRequest(...);
@@ -565,7 +565,7 @@ extern int FUN_00276348(int);
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00276a3c. */
 /* Supplied declaration required: FUN_00277b5c. */
-/* Supplied declaration required: FUN_00277bdc. */
+/* Supplied declaration required: mapSpawnActiveSignboardEffects. */
 /* Supplied declaration required: FUN_00277d2c. */
 /* Supplied declaration required: mapGimicUpdateVisualBounds. */
 /* Supplied declaration required: FUN_0027ae90. */
@@ -604,7 +604,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
-/* Supplied declaration required: FUN_0027fca0. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: FUN_00280ac0. */
 /* Supplied declaration required: FUN_00280ccc. */
@@ -713,7 +713,7 @@ extern int FUN_00328b1c(int);
 /* Supplied declaration required: mapDepartRequest. */
 /* Supplied declaration required: FUN_001d2f48. */
 /* Supplied declaration required: objectDestroyModelManager. */
-/* Supplied declaration required: FUN_001e3284. */
+/* Supplied declaration required: uiSubMenuResetWork. */
 /* Supplied declaration required: mapObjRequestTransition. */
 /* Supplied declaration required: mapObjSelectFirstEntry. */
 /* Supplied declaration required: lmapSceneCreateEffect. */
@@ -1227,7 +1227,7 @@ LAB_001b8b40:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8b60:
-    FUN_001e3284();
+    uiSubMenuResetWork();
     FUN_002d3e88(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001b8b80:
@@ -1402,7 +1402,7 @@ LAB_001b8e80:
       temp_v13 = puVar14[0xc];
       FUN_00297a00();
       FUN_0027b65c(temp_v16,temp_v13);
-      FUN_00277bdc();
+      mapSpawnActiveSignboardEffects();
       mapSpawnActiveSlotEffects();
     }
     temp_v0 = DAT_0049f950;
@@ -3375,7 +3375,7 @@ LAB_001bc008:
     mapPerFrameUpdate();
     temp_v9 = FUN_002eb134();
     if (temp_v9 == 0) {
-      FUN_0027fca0(0);
+      mapDepartSpawnPlayerEffect(0);
       temp_v9 = g_mapCamera;
       if (DAT_0049fa3a != '\0') {
         *(unsigned int *)(g_mapCamera + 0xac) = 0;
@@ -5262,7 +5262,7 @@ LAB_001bf578:
     }
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf598:
-    FUN_001e3284();
+    uiSubMenuResetWork();
     FUN_002d3e88(puVar14[0xb],puVar14[0xc]);
     puVar14[9] = puVar14[9] + 1;
 LAB_001bf5b8:
@@ -5334,7 +5334,7 @@ LAB_001bf6c8:
         temp_v13 = puVar14[0xc];
         FUN_00297a00();
         FUN_0027b65c(temp_v16,temp_v13);
-        FUN_00277bdc();
+        mapSpawnActiveSignboardEffects();
         mapSpawnActiveSlotEffects();
       }
       FUN_0021be00();

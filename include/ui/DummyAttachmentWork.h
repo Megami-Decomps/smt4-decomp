@@ -30,13 +30,27 @@ struct DummyAttachmentNpcEntry {
 
 struct ScriptProcess;
 
+/* An event a finished delivery can start (0x1a bytes): the first row whose location and flags fit. */
+struct QcDeliveryEvent {
+    char name[0x12];    // 0x00, "e022_02"
+    u16 requiredFlag;   // 0x12, 0: none, 0xffff: quests 0x65-0x67 completed instead of a flag
+    u16 forbiddenFlag;  // 0x14, 0: none
+    u16 location;       // 0x16, DummyAttachmentWork::location
+    u16 unk18;
+};
+
 /* The quest center scene's work area. `state` picks the member callback at 0x5c8 and `step` is that
  * callback's own progress. */
 struct DummyAttachmentWork {
     u32 flags; // 0x00, 0x100 while an NPC conversation runs
     u32 state; // 0x04
     s32 step; // 0x08
-    u8 unk0c[0x14];
+    u8 unk0c[4];
+    s8 kind; // 0x10, the row of data table 0x28/0 shown; also the quest menu's confirmation choice
+    u8 unk11[3];
+    const QcDeliveryEvent *deliveryEvent; // 0x14, the event a finished delivery unlocked
+    u8 location; // 0x18, which quest center this is (0: Mikado, 1-3: the Tokyo ones, by quest area)
+    u8 unk19[7];
     u8 npcTable; // 0x20, the `this` of the table 0x27 accessors
     u8 mode; // 0x21
     u8 unk22[0x596];
@@ -44,7 +58,8 @@ struct DummyAttachmentWork {
     u32 npcMessageFile; // 0x5bc, the loaded "n%03d.mbm"
     ScriptProcess *npcScript; // 0x5c0
     ScriptProcess **sceneScript; // 0x5c4
-    u8 unk5c8[0x748];
+    u8 unk5c8[0x744];
+    u32 questId; // 0xd0c, the quest list entry chosen for delivery
     AsdMdlObject *primary[6]; // 0xd10
     AsdMdlObject *secondary[6]; // 0xd28
     u8 initialized; // 0xd40
@@ -73,6 +88,11 @@ struct DummyAttachmentWork {
 
 typedef char DummyAttachmentLayoutCheck[
     offsetof(DummyAttachmentSource, model) == 0x1c &&
+    sizeof(QcDeliveryEvent) == 0x1a &&
+    offsetof(DummyAttachmentWork, kind) == 0x10 &&
+    offsetof(DummyAttachmentWork, deliveryEvent) == 0x14 &&
+    offsetof(DummyAttachmentWork, location) == 0x18 &&
+    offsetof(DummyAttachmentWork, questId) == 0xd0c &&
     offsetof(DummyAttachmentWork, mode) == 0x21 &&
     offsetof(DummyAttachmentWork, primary) == 0xd10 &&
     offsetof(DummyAttachmentWork, secondary) == 0xd28 &&

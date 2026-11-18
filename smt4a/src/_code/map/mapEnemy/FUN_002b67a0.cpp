@@ -8,7 +8,7 @@ extern "C" {
 
 int asdMemoryAllocTraced(int, unsigned char *, int);
 int distSpatial(void);
-int FUN_002d7c88(unsigned int);
+int mapEnemyLoadExtraModel(unsigned int);
 void FUN_00357b18(unsigned int, int, int, int, int, int, int);
 int gameFlagIsSetByBlockAt156c(...);
 int sub68OwnerStart1(...);
@@ -39,7 +39,7 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002d7c88. */
+/* Supplied declaration required: mapEnemyLoadExtraModel. */
 /* Supplied declaration required: FUN_00357b18. */
 /* Supplied declaration required: gameFlagIsSetByBlockAt156c. */
 /* Supplied declaration required: sub68OwnerStart1. */
@@ -147,7 +147,7 @@ unsigned int FUN_002b67a0(int param_1)
                   *(unsigned short *)(temp_v4 + 0x1aa) = 0;
                   *(int *)(temp_v4 + 0x1b0) = (int)pcVar4[0xe];
                   *(short *)(temp_v4 + 0x16e) = temp_v10;
-                  FUN_002d7c88(*(unsigned int *)(temp_v4 + 0x1b0));
+                  mapEnemyLoadExtraModel(*(unsigned int *)(temp_v4 + 0x1b0));
                   *(int *)(temp_v4 + 0xac) = (int)pcVar4[0xb];
                   temp_v2 = *(int *)(g_lmapScene + 0x1c);
                   distSpatial();

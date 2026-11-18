@@ -1,4 +1,4 @@
-/* NON_MATCHING: the compiler shares the scriptState store between cases, unlike retail's r6 constant and writeback store to the state subobject. */
+/* NON_MATCHING: in the completion case retail builds 9 in r0 and the cleared script state's 0 in r1; this build swaps them (writing the scriptState store first reproduces it, a register-only reordering of independent stores). */
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include "battle/btlEvent.h"
@@ -46,9 +46,13 @@ u32 menuPollModeScript(MenuScriptState *menu)
             else
                 scrScriptProcessStartEntry(process, 0x1c);
             sysPlaySe(0x3e);
-            if ((menu->mode == 1 || menu->mode == 2) && !menu->skipCec)
-                cecProcessCall4();
-            menu->scriptState = 2;
+            if (menu->mode == 1 || menu->mode == 2) {
+                if (!menu->skipCec)
+                    cecProcessCall4();
+                menu->scriptState = 2;
+            } else {
+                menu->scriptState = 2;
+            }
         }
         break;
     case 2:

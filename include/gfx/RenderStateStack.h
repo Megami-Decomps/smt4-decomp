@@ -84,6 +84,17 @@ static __inline void renderStackPop(RenderStateStack *st)
     }
 }
 
+/* Pops the top state and uses the shared state-change predicate, as in the layered sprite draws. */
+static __inline void renderStackPopChecked(RenderStateStack *st)
+{
+    int previous = st->entries[st->count];
+    int current = st->entries[--st->count];
+    if (renderStackNeedsApply(st, previous, current)) {
+        st->apply(current);
+        st->dirty = 0;
+    }
+}
+
 /* Replaces the current state without changing the stack depth. */
 static __inline void renderStackSet(RenderStateStack *st, int state)
 {

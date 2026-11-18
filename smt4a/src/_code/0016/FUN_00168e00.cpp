@@ -1,4 +1,4 @@
-/* NON_MATCHING: Surface-selector load register, one clamp move and the three render-state push register schedules differ. */
+/* NON_MATCHING: the clamp computations are scheduled differently and the three render-state pushes use other registers. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 
@@ -10,7 +10,7 @@ s32 stateValuesGetBySelector(u32 selector);
 
 u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height)
 {
-    u32 selector = g_renderCtx->stereoMode;
+    u32 selector = renderCtxGetStereoMode(g_renderCtx);
     s32 maxX = FUN_00169d8c(selector) - 1;
     s32 maxY = FUN_00169db4(selector) - 1;
     switch (asdGxPresetsGetEnable(selector)) {

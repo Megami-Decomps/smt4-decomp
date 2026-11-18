@@ -33,7 +33,7 @@ void FUN_0041f6e0(SaveSlotHeaderWork *ui);
 void FUN_0041f4c0(SaveSlotHeaderWork *ui);
 void FUN_0041f22c(SaveSlotHeaderWork *ui);
 void FUN_0041f110(SaveSlotHeaderWork *ui);
-void FUN_0041ed4c(SaveSlotHeaderWork *ui);
+void savedUnitEditorApplyOrClose(SaveSlotHeaderWork *ui);
 void FUN_0041eeec(SaveSlotHeaderWork *ui);
 void FUN_0041f5bc(SaveSlotHeaderWork *ui);
 void FUN_0041fd5c(SaveSlotHeaderWork *ui);
@@ -154,7 +154,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         sysPlaySe(157);
         saveLoadUiChangeMode(ui, 8, 0);
     case 8:
-        FUN_0041ed4c(ui);
+        savedUnitEditorApplyOrClose(ui);
         break;
     case 9:
         switch (ui->step) {

@@ -1,57 +1,49 @@
-/* NON_MATCHING: only the optional third parent's saturating count increment swaps the index/value registers (r2/r1 instead of r1/r2). */
+/* NON_MATCHING: prologue moves third-present flag with movne/moveq instead of mov #1 + moveq #0, and second parent's count increment swaps r1/r2 (14 diff lines). */
 #include "common.h"
+#include "shard/GameOptions.h"
 #include "gamedata/NkmBaseRecord.h"
 
-struct UnitInheritanceRecord {
-    u8 unk00[0x46];
-    u16 id; // 0x46
-    u8 unk48[4];
-    u8 traits[64]; // 0x4c
-    u8 ancestors[0x500]; // 0x8c
-};
-extern "C" void bitsetSetBit(UnitInheritanceRecord *record, u16 skill);
-extern "C" void unitRecalculateEffectiveStats(UnitInheritanceRecord *record);
+extern "C" void bitsetSetBit(GameOptions *record, u32 bit);
+extern "C" void unitRecalculateEffectiveStats(GameOptions *record);
 
 // Merge inherited traits and saturating ancestor counts, then rebuild the result's stats.
-extern "C" void uniteMergeInheritedSkillsAndStats(void *, const UnitInheritanceRecord *first, const UnitInheritanceRecord *second, const UnitInheritanceRecord *third, UnitInheritanceRecord *result)
+extern "C" void uniteMergeInheritedSkillsAndStats(void *, const GameOptions *first, const GameOptions *second, const GameOptions *third, GameOptions *result)
 {
-    bool hasThird = true;
-    if (third == NULL)
-        hasThird = false;
+    bool hasThird = third != NULL;
     if (hasThird) {
         for (s32 i = 0; i < 64; ++i) {
-            result->traits[i] = first->traits[i];
-            result->traits[i] |= second->traits[i];
-            result->traits[i] |= third->traits[i];
+            result->inheritance.flags[i] = first->inheritance.flags[i];
+            result->inheritance.flags[i] |= second->inheritance.flags[i];
+            result->inheritance.flags[i] |= third->inheritance.flags[i];
         }
     } else {
         for (s32 i = 0; i < 64; ++i) {
-            result->traits[i] = first->traits[i];
-            result->traits[i] |= second->traits[i];
+            result->inheritance.flags[i] = first->inheritance.flags[i];
+            result->inheritance.flags[i] |= second->inheritance.flags[i];
         }
     }
-    bitsetSetBit(result, nkmBaseGetRecord(result->id)->innateFlag);
+    bitsetSetBit(result, nkmBaseGetRecord(result->unk46)->innateFlag);
     if (hasThird) {
         for (s32 i = 0; i < 0x500; ++i) {
-            s32 total = first->ancestors[i] + second->ancestors[i];
-            total += third->ancestors[i];
+            s32 total = first->inheritance.counts[i] + second->inheritance.counts[i];
+            total += third->inheritance.counts[i];
             if (total > 255)
                 total = 255;
-            result->ancestors[i] = total;
+            result->inheritance.counts[i] = total;
         }
     } else {
         for (s32 i = 0; i < 0x500; ++i) {
-            s32 total = first->ancestors[i] + second->ancestors[i];
+            s32 total = first->inheritance.counts[i] + second->inheritance.counts[i];
             if (total > 255)
                 total = 255;
-            result->ancestors[i] = total;
+            result->inheritance.counts[i] = total;
         }
     }
-    if (result->ancestors[first->id] < 255)
-        ++result->ancestors[first->id];
-    if (result->ancestors[second->id] < 255)
-        ++result->ancestors[second->id];
-    if (hasThird && result->ancestors[third->id] < 255)
-        ++result->ancestors[third->id];
+    if (result->inheritance.counts[first->unk46] < 255)
+        ++result->inheritance.counts[first->unk46];
+    if (result->inheritance.counts[second->unk46] < 255)
+        ++result->inheritance.counts[second->unk46];
+    if (hasThird && result->inheritance.counts[third->unk46] < 255)
+        ++result->inheritance.counts[third->unk46];
     unitRecalculateEffectiveStats(result);
 }

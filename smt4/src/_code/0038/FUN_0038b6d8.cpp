@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 objGetFlagBit0(const WindowOperationRequest *request);
-WindowOperationResult FUN_0038bae8(WindowOperationState *state, u32 id);
+WindowOperationResult aocFileContentPrepareMountBuffer(WindowOperationState *state, u32 id);
 
 // Store a window request and dispatch it only when its active flag is set.
 WindowOperationResult FUN_0038b6d8(WindowOperationState *state,
@@ -14,6 +14,6 @@ WindowOperationResult FUN_0038b6d8(WindowOperationState *state,
     state->request = *request;
     if (!objGetFlagBit0(&state->request))
         return result;
-    return FUN_0038bae8(state, request->id);
+    return aocFileContentPrepareMountBuffer(state, request->id);
 }
 }

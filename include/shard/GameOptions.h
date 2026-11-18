@@ -5,6 +5,14 @@
 #include "common.h"
 #include <stddef.h>
 
+struct GameOptionsSupportStats {
+    /* 0x00 */ u16 base[7];
+    /* 0x0E */ u16 current[7];
+    /* 0x1C */ u16 maximum[7];
+    /* 0x2A */ u16 health;
+    /* 0x2C */ u16 mana;
+};
+
 typedef struct GameOptions {
     union {
         /* 0x0000 */ u8 unk0000[0x46];
@@ -15,6 +23,7 @@ typedef struct GameOptions {
             u8 unk0010[0x34];
             /* 0x0044 */ u16 ailments;   /* bit 1: dead */
         } guest;
+        GameOptionsSupportStats supportStats;
     };
     /* 0x0046 */ u16 unk46;
     union {
@@ -29,9 +38,7 @@ typedef struct GameOptions {
     /* 0x0604 */ u16 unk604;
     /* 0x0606 */ u16 supportIndex;
     /* 0x0608 */ u16 flags;
-    /* 0x060A */ u16 unk60A;
-    /* 0x060C */ u16 unk60C;
-    /* 0x060E */ u16 unk60E;
+    /* 0x060A */ u16 supportCandidates[3];
 } GameOptions;
 
 typedef char GameOptionsLayoutCheck[sizeof(GameOptions) == 0x610 &&
@@ -43,5 +50,9 @@ typedef char GameOptionsGuestOffsets[
 typedef char GameOptionsInheritanceOffsets[
     offsetof(GameOptions, inheritance.flags) == 0x4C &&
     offsetof(GameOptions, inheritance.counts) == 0x8C ? 1 : -1];
+typedef char GameOptionsSupportOffsets[
+    offsetof(GameOptions, supportStats.maximum) == 0x1C &&
+    offsetof(GameOptions, supportStats.mana) == 0x2C &&
+    offsetof(GameOptions, supportCandidates) == 0x60A ? 1 : -1];
 
 #endif

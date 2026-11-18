@@ -17,7 +17,7 @@ int FUN_001a90e0(unsigned char *);
 int sysMemClear(...);
 int rt_memclr(unsigned char *, int);
 int rectangleInitializeSelection(unsigned char *, int, int, int);
-int FUN_004cf7cc(...);
+int spritePresetBankInitialize(...);
 int fillTwoWordsWithByte(...);
 int paramsClearPacket(unsigned char *);
 
@@ -48,7 +48,7 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: Obj532300::resetHandlers. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: FUN_004cf7cc. */
+/* Supplied declaration required: spritePresetBankInitialize. */
 /* Supplied declaration required: fillTwoWordsWithByte. */
 /* Supplied declaration required: paramsClearPacket. */
 
@@ -112,7 +112,7 @@ void FUN_00485e74(unsigned char *param_1)
   uiSpriteSetImageKeyframe(param_1 + 0x1244,5,0);
   uiSpriteStateInitFromSource(param_1 + 0x112c,0x13,0x112e,param_1 + 0xc20,0x15);
   uiSpriteSetKeyframe(param_1 + 0x112c,4,0);
-  FUN_004cf7cc(param_1 + 0x4e4);
+  spritePresetBankInitialize(param_1 + 0x4e4);
   *(unsigned int *)(param_1 + 0x1480) = 0;
   *(unsigned int *)(param_1 + 0x1484) = 0xa0;
   *(unsigned int *)(param_1 + 0x1488) = 0x78;

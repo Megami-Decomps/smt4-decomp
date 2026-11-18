@@ -141,7 +141,9 @@ struct UniteWork {
             /* 0x6214 */ u8 cursor[0x64];
             /* 0x6278 */ u16 desired[500];
             /* 0x6660 */ s16 loaded[4];
-            u8 unk6668[0x2C6C];
+            /* 0x6668 */ u8 unk6668[8];
+            /* 0x6670 */ u32 candidateCount;
+            /* 0x6674 */ u8 unk6674[0x2C60];
             /* 0x92D4 */ u8 alternateCursor[0x64];
         } portraitSelectionIV;
         struct {
@@ -345,6 +347,7 @@ typedef char UniteWorkPortraitSelectionOffsetsCheck[
     offsetof(UniteWork, portraitSelectionIV.cursor) == 0x6214 &&
     offsetof(UniteWork, portraitSelectionIV.desired) == 0x6278 &&
     offsetof(UniteWork, portraitSelectionIV.loaded) == 0x6660 &&
+    offsetof(UniteWork, portraitSelectionIV.candidateCount) == 0x6670 &&
     offsetof(UniteWork, portraitSelectionIV.alternateCursor) == 0x92D4 &&
     sizeof(UniteWork) == 0x95F8 ? 1 : -1];
 typedef char UniteWorkPortraitSelectionAOffsetsCheck[

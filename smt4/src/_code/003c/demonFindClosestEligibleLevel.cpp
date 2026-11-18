@@ -17,7 +17,7 @@ extern "C" {
 s32 devilIsAvailable(DemonLevelTable *, u16 id);
 
 // Find the closest eligible table entry at or below the requested level.
-u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 level, s32 validate)
+u16 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 level, s32 validate)
 {
     u32 result = 0;
     u8 bestDistance = 0xff;

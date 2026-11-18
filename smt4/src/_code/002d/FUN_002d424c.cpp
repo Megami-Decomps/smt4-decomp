@@ -10,7 +10,7 @@ extern "C" {
 int FUN_0019db68(void);
 int mapInterfaceSetStateTwo(void);
 int FUN_0027fae4(void);
-int FUN_0027fca0(...);
+int mapDepartSpawnPlayerEffect(...);
 int buttonHelpSetPreset(int);
 
 int mapDestroyOverlayModel(void);
@@ -51,7 +51,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
-/* Supplied declaration required: FUN_0027fca0. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
@@ -292,7 +292,7 @@ void FUN_002d424c(void)
         break;
       default:
       }
-      FUN_0027fca0(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
       SoundActorQueuePosition position;
       position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;

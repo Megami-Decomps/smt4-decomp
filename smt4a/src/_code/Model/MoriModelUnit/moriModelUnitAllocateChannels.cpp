@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the zero constant into r8 at entry (built copies it from the index register) and keeps the float count in r5 / byte size in r6 (swapped here). */
+/* NON_MATCHING: only the zero constant differs: retail loads it into r8 at entry, the build copies it from the channel index register before the loop. */
 #include "Model/ModelUnitBuffers.h"
 #include "Model/IdArraySize.h"
 #include "AsdSDK/AsdDebug.h"
@@ -23,29 +23,33 @@ static __inline s32 maxElementCount(UnitMeshTable *table)
     return capacity;
 }
 
+/* moriModelChannelInitialize's body: reset a channel and allocate its id array. */
+static __inline void channelInitialize(UnitChannel *channel, s32 capacity)
+{
+    channel->unk00 = 0;
+    channel->unk04 = 0.0f;
+    channel->unk08 = 0.0f;
+    channel->unk0c = 0;
+    channel->data = NULL;
+    channel->unk2c = 0;
+    channel->enabled = 1;
+    channel->capacity = capacity;
+    if (capacity > 0) {
+        u32 bytes = idArrayByteSize(capacity);
+        asdDebugTrace(g_moriModelUnitSourceFileName, 0x1a8);
+        channel->data = static_cast<u16 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
+        idArrayConstruct(channel->array, channel->data, capacity);
+    }
+}
+
 // Size both mesh channels from the largest mesh and allocate the node position array.
 void moriModelUnitAllocateChannels(ModelUnitBuffers *unit)
 {
     UnitModelView *view = unit->content == NULL ? NULL : &unit->content->view;
     if (view != NULL) {
         s32 capacity = maxElementCount(view->table);
-        for (s32 index = 0; index < 2; ++index) {
-            UnitChannel *channel = &unit->channels[index];
-            channel->unk00 = 0;
-            channel->unk04 = 0.0f;
-            channel->unk08 = 0.0f;
-            channel->unk0c = 0;
-            channel->data = NULL;
-            channel->unk2c = 0;
-            channel->enabled = 1;
-            channel->capacity = capacity;
-            if (capacity > 0) {
-                u32 bytes = idArrayByteSize(capacity);
-                asdDebugTrace(g_moriModelUnitSourceFileName, 0x1a8);
-                channel->data = static_cast<u16 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
-                idArrayConstruct(channel->array, channel->data, capacity);
-            }
-        }
+        for (s32 index = 0; index < 2; ++index)
+            channelInitialize(&unit->channels[index], capacity);
         UnitFloatChannel *positions = &unit->positions;
         s32 floatCount = unit->nodes->count * 3;
         u32 bytes = floatCount * sizeof(f32);

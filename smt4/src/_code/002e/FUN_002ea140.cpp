@@ -30,7 +30,7 @@ extern "C" {
 void mapIfActivateRecord(s32 active, u32 record);
 void lmapSetSceneId(u32 scene);
 void FUN_0027fc14(s32 mode);
-void FUN_0027fca0(s32 mode);
+void mapDepartSpawnPlayerEffect(s32 mode);
 void mapSelectContainingRegions(void);
 void FUN_002804ec(f32 *position);
 void mapEaseSceneHeading(void);
@@ -116,7 +116,7 @@ void FUN_002ea140(void)
         g_gameState.map.transitionCompleted = 0;
         scene->moveMode = 8;
         scene->moveSpeed = 5.0f;
-        FUN_0027fca0(1);
+        mapDepartSpawnPlayerEffect(1);
         scene = g_lmapScene;
         scene->state++;
         scene->stateTime = 0;
@@ -137,7 +137,7 @@ void FUN_002ea140(void)
     case LMAP_STATE_EXIT_WAIT:
         scene->stateTime++;
         if (scene->stateTime >= LMAP_EXIT_FRAMES) {
-            FUN_0027fca0(0);
+            mapDepartSpawnPlayerEffect(0);
             lmapSetSceneId(LMAP_SCENE_MAP);
         }
         break;

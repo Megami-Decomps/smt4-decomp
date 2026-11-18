@@ -36,7 +36,6 @@ void uiResourceParametersInitDefault(void *panel);
 AsdText *asdTextCreate(u32 flags);
 void positionStateSet(AsdText *text, s32 slot, u32 color, f32 duration);
 void uiInitializeEightTimerSet(void *control);
-void aocMenuSetReadyFlag(AocMain *owner, u8 ready);
 
 // Initialize the AOC menu's common sprite resources, entry frames and text.
 void aocMenuInitializePanelSprites(AocMenuSprites *menu)

@@ -21,7 +21,7 @@ struct PartySlotsView {
 
 extern "C" {
 u32 uniteChooseAvailableDevilAtLevel(u32 first, u32 second, u32 result, u32 level);
-u32 demonFindClosestEligibleLevel(LevelLists *lists, s32 race, u32 level, s32 arg);
+u16 demonFindClosestEligibleLevel(LevelLists *lists, s32 race, u32 level, s32 arg);
 s32 itemGetFlagBit1(u16 id);
 PartySlotsView *gameGetSlotTable(void);
 s32 partyMemberFindById(u32 id);

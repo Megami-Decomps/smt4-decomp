@@ -100,7 +100,7 @@ s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 step)
     }
     FUN_001807a0(sprite, step);
     FUN_00182348(sprite, step);
-    FUN_00181948(sprite, step);
+    spriteSequencePlayerAdvance(sprite, step);
     if (sprite->positionDone != 0 && sprite->alphaDone != 0 && sprite->scaleDone != 0 && sprite->frameDone != 0) {
         sprite->finished = 1;
     } else {

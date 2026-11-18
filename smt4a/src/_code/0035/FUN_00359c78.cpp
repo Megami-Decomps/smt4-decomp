@@ -1,4 +1,4 @@
-/* NON_MATCHING: canonical context push matches; pop still allocates previous/current values in exchanged registers and omits retail's callback-argument move. */
+/* NON_MATCHING: the context reload and first add of the pop's stack address use a different scratch register. */
 #include "ui/SpriteIndicator.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
@@ -20,7 +20,7 @@ void FUN_00359c78(SpriteLayerBlendState *blend, s32 x, s32 y)
     s32 state = packNibblesAndByte(6, 1, 0);
     renderCtxPushB(context, state);
     texDrawCompositeSprite(2, 46, 12, x, y, 107);
-    renderStackPop(&g_renderCtx->stackB);
+    renderStackPopChecked(&g_renderCtx->stackB);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     texDrawTableEntryAtStoredOrigin(2, 46, 146, blend->offset + x, y, 108);

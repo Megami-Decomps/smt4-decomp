@@ -8,7 +8,7 @@ extern "C" {
 extern const u8 DAT_00532924[];
 void paramsClearPacket(UiResourceParameters *packet);
 
-void FUN_004cf7cc(SpritePresetBank *bank);
+void spritePresetBankInitialize(SpritePresetBank *bank);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, s32 preset);
 
 // Reset row-selection state and bind the menu's row and extra sprites to their shared preset packet.
@@ -43,7 +43,7 @@ void FUN_004ba1f4(Menu4C *menu)
         uiSpriteSetImageKeyframe(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0, 0);
     }
     uiSpriteStateInitFromSource(reinterpret_cast<UiSpriteState *>(menu->unkF88), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
-    FUN_004cf7cc(reinterpret_cast<SpritePresetBank *>(menu->blockA8));
+    spritePresetBankInitialize(reinterpret_cast<SpritePresetBank *>(menu->blockA8));
     uiSpriteBankApplyPreset(reinterpret_cast<SpritePresetBank *>(menu->blockA8), 0xc);
 }
 }

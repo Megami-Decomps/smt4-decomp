@@ -17,7 +17,7 @@ int FUN_004a3e04(...);
 int partyIdsReset(...);
 int partyIdsActivateEntry(...);
 int slotPoolResetTrackedState(void);
-int FUN_004cf7cc(...);
+int spritePresetBankInitialize(...);
 int messageIdListSetRange(...);
 
 typedef int romwright_code(...);
@@ -52,7 +52,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: partyIdsReset. */
 /* Supplied declaration required: partyIdsActivateEntry. */
 /* Supplied declaration required: slotPoolResetTrackedState. */
-/* Supplied declaration required: FUN_004cf7cc. */
+/* Supplied declaration required: spritePresetBankInitialize. */
 extern int flaggedValueHolderGetTotal(int *);
 extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: messageIdListSetRange. */
@@ -115,7 +115,7 @@ void Obj55c89c::start()
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v0);
   }
-  FUN_004cf7cc(param_1 + 0x37);
+  spritePresetBankInitialize(param_1 + 0x37);
   temp_v0 = param_1[10];
   if (temp_v0 >= 10) {
     temp_v0 = 10;

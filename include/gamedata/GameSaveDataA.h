@@ -77,7 +77,10 @@ typedef struct SlotRecordA {
     /* 0x066 */ u8 tableIndex;       /* the record's own index in SaveSlotTableA.entries (what party[] and reserve[] hold; the reward tally row of its experience share) */
     /* 0x067 */ u8 unk067;
     /* 0x068 */ u8 inheritedFlags[0x40]; /* per-skill learned/inherited bytes */
-    /* 0x0A8 */ u8 unk0A8[0x82];
+    union {
+        /* 0x0A8 */ u8 unk0A8[0x82];
+        /* 0x0A8 */ u16 bonuses[7];   /* points added to the table's max HP, max MP and five stats (unitRecomputeDerivedStats) */
+    };
     /* 0x12A */ s8 streak;
     /* 0x12B */ u8 status;
 } SlotRecordA;

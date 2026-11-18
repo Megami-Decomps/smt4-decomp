@@ -6,7 +6,7 @@ extern "C" {
 void asdTMTexTableLoadTmx(u32, u32);
 void asdLoadFileAsyncSimple(const char *, u32 *, u32);
 void FUN_004029f4(HunterDatabaseWork *, s32, s32);
-void FUN_00405c94(HunterDatabaseWork *);
+void hunterDatabaseSetupWidgets(HunterDatabaseWork *);
 void FUN_00471d94(u32);
 extern u32 g_aocSystem;
 extern const char DAT_0052d10c[];
@@ -49,7 +49,7 @@ void hunterDatabaseLoadResources(HunterDatabaseWork *work)
         work->sprites[index] = sprite;
         uiObjectSetColorRgb(sprite, ~0u);
     }
-    FUN_00405c94(work);
+    hunterDatabaseSetupWidgets(work);
     FUN_004029f4(work, 1, 0);
 }
 }

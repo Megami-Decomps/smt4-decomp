@@ -9,7 +9,7 @@ struct RaceFusionRecipe {
 extern "C" {
 u8 fusionClassifyPair(void *context, u16 firstId, u16 secondId);
 u32 FUN_004db198(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output);
-u32 FUN_004db2b8(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output);
+u32 fusionResolveRaceRulePair(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output);
 RaceFusionRecipe *dataTable05FindByPriorityAndKey(u32, u32);
 }
 
@@ -24,7 +24,7 @@ extern "C" u32 FUN_004dc3b4(void *context, u16 firstId, u16 secondId, PackedIden
         break;
     case 2:
     case 3:
-        accepted = FUN_004db2b8(context, firstId, secondId, output);
+        accepted = fusionResolveRaceRulePair(context, firstId, secondId, output);
         break;
     case 4: {
         const NkmBaseRecordA *first = nkmBaseGetRecord(firstId);

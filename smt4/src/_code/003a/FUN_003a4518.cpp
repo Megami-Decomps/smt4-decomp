@@ -18,7 +18,7 @@ extern int FUN_003a3354(...); /* 0x3a3354 */
 extern int FUN_003a3a9c(...); /* 0x3a3a9c */
 extern int FUN_003a3c7c(...); /* 0x3a3c7c */
 extern int FUN_003a3f28(...); /* 0x3a3f28 */
-extern int FUN_003a4a60(...); /* 0x3a4a60 */
+extern int shopQuantityStep(...); /* 0x3a4a60 */
 
 
 void FUN_003a4518(int param_1)
@@ -58,11 +58,11 @@ void FUN_003a4518(int param_1)
   *(unsigned int *)(param_1 + 0x5c) = 0;
   *(romwright_code **)(param_1 + 0x60) = FUN_003a3f28;
   *(unsigned int *)(param_1 + 100) = 0;
-  *(romwright_code **)(param_1 + 0x68) = FUN_003a4a60;
+  *(romwright_code **)(param_1 + 0x68) = shopQuantityStep;
   *(unsigned int *)(param_1 + 0x6c) = 0;
-  *(romwright_code **)(param_1 + 0x70) = FUN_003a4a60;
+  *(romwright_code **)(param_1 + 0x70) = shopQuantityStep;
   *(unsigned int *)(param_1 + 0x74) = 0;
-  *(romwright_code **)(param_1 + 0x78) = FUN_003a4a60;
+  *(romwright_code **)(param_1 + 0x78) = shopQuantityStep;
   *(unsigned int *)(param_1 + 0x7c) = 0;
   *(unsigned int *)(param_1 + 0x80) = 0x3a3130;
   *(unsigned int *)(param_1 + 0x84) = 0;

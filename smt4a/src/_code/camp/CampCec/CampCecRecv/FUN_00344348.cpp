@@ -62,7 +62,7 @@ void FUN_0035a840(void);
 void FUN_003a5200(void);
 void jobScene360WaitStep(void);
 void FUN_0032e4a4(void);
-void FUN_003193a8(void);
+void campCecRecvStatGainState(void);
 void FUN_0035a3f0(void);
 void FUN_0035a7c4(void);
 void dataSceneWaitStep(void);
@@ -113,7 +113,7 @@ void FUN_00344348(u8 fromMenu)
     recv->handlers[1] = FUN_003a5200;
     recv->handlers[2] = jobScene360WaitStep;
     recv->handlers[3] = FUN_0032e4a4;
-    recv->handlers[4] = FUN_003193a8;
+    recv->handlers[4] = campCecRecvStatGainState;
     recv->handlers[5] = FUN_0035a3f0;
     recv->handlers[6] = FUN_0035a7c4;
     recv->handlers[7] = dataSceneWaitStep;

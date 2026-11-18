@@ -21,8 +21,6 @@ extern BtlAuxA *g_btlAux;
 /* Opens the reserve-unit debug list: position, scale and yaw controls for the marked record. */
 void btlReserveEditorOpenList(ReserveEditorWork *work, BtlMainStateA *battle)
 {
-    /* The auxiliary scalar is beyond the shared BtlAuxA prefix. */
-    struct AuxEditorView { u8 unk0000[0x9C70]; f32 scalar; };
     if (jobIsValid(work->listBox)) {
         FUN_003592dc(work->listBox);
         jobStop(work->listBox, 0);
@@ -49,7 +47,7 @@ void btlReserveEditorOpenList(ReserveEditorWork *work, BtlMainStateA *battle)
         asdListBoxSetIntItem(work->listBox, 0, 0, 0, 32, 0);
         asdListBoxSetIntItem(work->listBox, 1, 0, 0, 42, 0);
     }
-    asdListBoxSetFloatItem(work->listBox, 7, 0, 100, ((AuxEditorView *)g_btlAux)->scalar);
+    asdListBoxSetFloatItem(work->listBox, 7, 0, 100, reinterpret_cast<ReserveEditorAuxStateA *>(g_btlAux)->scalar);
     asdListBoxSetIntItem(work->listBox, 8, DAT_00571140, 0, 255, 0);
     asdListBoxSetIntItem(work->listBox, 9, 0, 0, 1, 0);
 }

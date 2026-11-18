@@ -13,9 +13,9 @@ void FUN_00256194(void)
         if (options->unk46 == 0x4b1) {
             reinterpret_cast<int>(memClear(options, 0x604));
         }
-        options->unk60A = 0;
-        options->unk60C = 0;
-        options->unk60E = 0;
+        options->supportCandidates[0] = 0;
+        options->supportCandidates[1] = 0;
+        options->supportCandidates[2] = 0;
     }
 }
 

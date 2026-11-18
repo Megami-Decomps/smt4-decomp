@@ -1,4 +1,4 @@
-/* NON_MATCHING: the -1 selection store goes through the stage register (r5) in retail and the FUN_0027dc24 arguments are set up in descending register order; otherwise identical. */
+/* NON_MATCHING: the -1 selection store goes through the stage register (r5) in retail and the btlSpriteSelectSource arguments are set up in descending register order; otherwise identical. */
 #include "battle/btlMain.h"
 #include "battle/btlStage.h"
 #include "AsdSDK/AsdDebug.h"
@@ -8,7 +8,7 @@ extern "C" {
 extern BtlStageGlobals g_btlStage;
 s32 btlStageRunWork(void);
 void FUN_0021eda8(u32 handle);
-void FUN_0027dc24(BtlMainState* battle, void* description, u32 mode);
+void btlSpriteSelectSource(BtlMainState* battle, void* description, u32 mode);
 u32 taskCreateDraw(const char* name, u32 priority, u32 flags, u32 mode,
                    s32 (*update)(void), void (*destroy)(u32), void* work, u32 parent);
 
@@ -39,7 +39,7 @@ void FUN_001e2350(BtlMainState* battle)
     }
     stage->setup.selection = -1;
     if (setup->identifiers.stageId < 0 || setup->identifiers.stageVariant < 0) {
-        FUN_0027dc24(battle, setup->description, 0);
+        btlSpriteSelectSource(battle, setup->description, 0);
         setup->identifiers.stageId = setup->defaultStage;
         setup->identifiers.stageVariant = setup->defaultVariant;
     }

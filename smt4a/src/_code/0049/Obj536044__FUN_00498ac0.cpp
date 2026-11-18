@@ -3,42 +3,10 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "ui/UiSpriteApi.h"
 
-/* The appraisal shop scene. */
+/* The scene as the appraisal shop sees it: the script handle as the script calls take it. */
 struct AppraisalShop : public Obj536044 {
     u32 script() const { return reinterpret_cast<u32>(controller); }
-    /* 0x03A0 */ u8 unk03A0[4];
-    /* 0x03A4 */ f32 cursorPosition[2];
-    /* 0x03AC */ u8 unk03AC[0x20];
-    union {
-        /* 0x03CC */ u8 sprites[0xD8];
-        struct {
-            u8 unk03CC[0x20];
-            /* 0x03EC */ UiSpriteState cursor;
-            u8 unk0478[0x2C];
-        } animation;
-    };
-    /* 0x04A4 */ u8 unk04A4[0x64];
-    /* 0x0508 */ u8 unk0508[0x600];
-    /* 0x0B08 */ u8 menu[0x34];
-    /* 0x0B3C */ void **menuOwner;
-    /* 0x0B40 */ u8 unk0B40[0x9448];
-    /* 0x9F88 */ u8 flaggedValues[0x76];
-    /* 0x9FFE */ u16 messages[3];
-    /* 0xA004 */ u8 unkA004[0xBFFC];
-    /* 0x16000 */ u32 panel;
-    /* 0x16004 */ u8 unk16004[0x2C];
-    /* 0x16030 */ s16 touchRegionCount;
-    /* 0x16032 */ u8 unk16032[6];
-    /* 0x16038 */ u32 cleared[3];
-    /* 0x16044 */ u8 clearedFlags[2];
-    /* 0x16046 */ u8 unk16046[2];
-    /* 0x16048 */ s32 selection;
 };
-typedef char AppraisalShopCursorLayoutCheck[
-    offsetof(AppraisalShop, cursorPosition) == 0x3A4 &&
-    offsetof(AppraisalShop, animation.cursor) == 0x3EC &&
-    offsetof(AppraisalShop, animation.cursor.finished) == 0x476 &&
-    sizeof(AppraisalShop) == 0x1604C ? 1 : -1];
 
 struct MenuSelectionScan;
 struct FlaggedMenuList;
@@ -88,7 +56,7 @@ void Obj536044::FUN_00498ac0()
         appraisalShop(this)->cleared[2] = 0;
         appraisalShop(this)->clearedFlags[0] = 0;
         appraisalShop(this)->clearedFlags[1] = 0;
-        appraisalShop(this)->selection = -1;
+        appraisalShop(this)->quantityIndex = -1;
         appraisalShop(this)->substate = 1;
         return;
     case 1:
@@ -105,13 +73,13 @@ void Obj536044::FUN_00498ac0()
         if (messageMainIsIdle() != 0) {
             scrScriptProcessStartEntry(appraisalShop(this)->script(), tableGroupFindEntryIndex(appraisalShop(this)->tableGroup, "shop_Kantei2"));
             scrRunOpcodesStub(appraisalShop(this)->script());
-            uiSpriteBankApplyPreset(appraisalShop(this)->sprites, 0);
+            uiSpriteBankApplyPreset(&appraisalShop(this)->animation, 0);
             sysPlaySe(0x79);
             appraisalShop(this)->substate = 3;
         }
         return;
     case 3: {
-        UiSpriteState *cursor = &appraisalShop(this)->animation.cursor;
+        UiSpriteState *cursor = &appraisalShop(this)->animation.sprites[0];
         FUN_00167458(cursor, 0);
         u32 y = vec2GetYInt(cursor);
         u32 x = vec2GetXInt(cursor);
@@ -125,11 +93,11 @@ void Obj536044::FUN_00498ac0()
     }
     case 4: {
         scrRunOpcodesStub(appraisalShop(this)->script());
-        menuSynchronizeFlaggedSelection(reinterpret_cast<MenuSelectionScan *>(appraisalShop(this)->menu), reinterpret_cast<FlaggedMenuList *>(appraisalShop(this)->flaggedValues));
-        (*(void (**)(void **, void *))((u8 *)*appraisalShop(this)->menuOwner + 0xC))(appraisalShop(this)->menuOwner, appraisalShop(this)->flaggedValues);
+        menuSynchronizeFlaggedSelection(reinterpret_cast<MenuSelectionScan *>(appraisalShop(this)->touchSelection), reinterpret_cast<FlaggedMenuList *>(appraisalShop(this)->flaggedValues));
+        appraisalShop(this)->view->update(appraisalShop(this)->flaggedValues);
         sub10OwnerStart(appraisalShop(this)->flaggedValues);
-        entryDispatchUpdate(appraisalShop(this)->sprites, 2);
-        entryDispatchUpdate(appraisalShop(this)->sprites, 0xC);
+        entryDispatchUpdate(&appraisalShop(this)->animation, 2);
+        entryDispatchUpdate(&appraisalShop(this)->animation, 0xC);
         s32 total = flaggedValueHolderGetTotal(appraisalShop(this)->flaggedValues);
         screenShowMessage(appraisalShop(this)->messages[total * 3]);
         if (FUN_004d0584() != 0) {
@@ -144,8 +112,8 @@ void Obj536044::FUN_00498ac0()
     case 5:
         if (messageMainIsIdle() != 0 && panelStateIs0() == 1) {
             FUN_004963f8(appraisalShop(this));
-            releaseEntriesB(reinterpret_cast<CountAt5A *>(appraisalShop(this)->menuOwner));
-            releaseEntriesA(reinterpret_cast<CountAt30 *>(appraisalShop(this)->menu));
+            releaseEntriesB(reinterpret_cast<CountAt5A *>(appraisalShop(this)->view));
+            releaseEntriesA(reinterpret_cast<CountAt30 *>(appraisalShop(this)->touchSelection));
             for (s32 i = 0; i < appraisalShop(this)->touchRegionCount; i++)
                 ifTouchRegionRemove();
             appraisalShop(this)->changeState(5);

@@ -73,7 +73,7 @@ int uniteValueRefresh(void);
 int FUN_0031fb04(void);
 int lmapMainCallIfActive(void);
 int gauntletAppMenuKillTask(void);
-int FUN_003b078c(void);
+int dataTableSortLookupSections(void);
 int soundChannelStopAll(...);
 int titleSetSlotValueState2(...);
 
@@ -348,7 +348,7 @@ extern unsigned short uiQuestRunEnabledAction(void);
 /* Supplied declaration required: FUN_003a7c00. */
 extern int FUN_003ae848(void);
 /* Supplied declaration required: FUN_003b01e8. */
-/* Supplied declaration required: FUN_003b078c. */
+/* Supplied declaration required: dataTableSortLookupSections. */
 /* Supplied declaration required: aocScriptReleaseTableAndReset. */
 extern unsigned char FUN_003b6f00(void);
 extern int byteArr5Get4(void);
@@ -1293,7 +1293,7 @@ LAB_003d6870:
       *(unsigned char *)((int)puVar2 + 0xb7) = 1;
       *(unsigned char *)(puVar2 + 0x2e) = 0;
       *(unsigned char *)((int)puVar2 + 0xb9) = 3;
-      FUN_003b078c();
+      dataTableSortLookupSections();
       uiSpriteSetKeyframe(puVar2 + 0x222,9,0);
       uiSpriteSetImageKeyframe(puVar2 + 0x222,0x13,0);
       uniteStartOrQueueRequest(0);

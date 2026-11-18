@@ -7470,3 +7470,30 @@
 002c7150 s4LoadCreate evidence asdDebugTrace of c:\SMT4F\SMT4F\sdds4\program	itle\S4Load.cpp; allocates g_s4Load, loads title/loadS4.bf/.mbm and starts process "S4 LOAD TEST C" with s4LoadDestroy
 00412c54 vertexAttributeUploadStreams inferred copies the position/colour/packed-colour/texcoord streams into primitive memory and binds them in the 0x790-byte vertex attribute state; twin smt4 FUN_00346f2c
 0047a298 aocMenuDrawGuideDown evidence registered by taskCreateDraw("Aoc guide DOWN") in AocMenu::runConnectedProcess
+00181948 spriteSequencePlayerAdvance inferred twin of smt4 spriteSequencePlayerAdvance (frame-key track advance with the rate scale)
+00370d84 partnerTopicCreate evidence creates the process and draw tasks registered as "PartnerTopic PROC", "PartnerTopic UL"/"UR"/"DD"
+00425cd8 mobiclipS4PlayerDestroy inferred twin of smt4 mobiclipS4PlayerDestroy (helper_S4Player teardown: thread join, region delete)
+004701d8 aocLoadPackageFilesByKind inferred copies the add-on package files of one kind into the output slots and opens each
+0024b0e8 titleConfigRebuildTouchRegions inferred clears and re-adds the config menu's touch regions around the selected row
+004da144 supportUnitInitializeRandomCategory inferred picks a nonzero support-unit candidate at random and resets its stats
+00313440 mapSpawnActiveSignboardEffects inferred twin of smt4 FUN_00277bdc
+004d3c94 btlReserveEditorApplySelection inferred applies the debug list box's selected value to the marked reserve record
+004191f0 textureConvertTiledTile inferred twin of smt4 FUN_0023b260
+00405c94 hunterDatabaseSetupWidgets inferred called by hunterDatabaseLoadResources; inits the five widgets from the parameter packet
+002d7c88 mapEnemyLoadExtraModel inferred loads one map-enemy extra model (map/mapEnemy, capacity from the game state)
+003b078c dataTableSortLookupSections inferred twin of smt4 FUN_00317e78
+0013a9c8 titleTimedOverlayDraw inferred draws the title overlay quad with g_titleFlags.overlay's fade in/out
+004b726c mapMenuDispatchAction inferred switch over the map menu action record's kind
+0041ed4c savedUnitEditorApplyOrClose inferred applies the staged stats (editor state 5) or releases the editor resources (state 9)
+004db2b8 fusionResolveRaceRulePair inferred resolves a fusion pair through the race rule table (kinds 1 and 3)
+00333de0 statusDownSetSelectedEntry inferred stores the selected entry and draws its directory text
+003e26f0 btlStepInitEncounterFlags inferred battle step that ORs the encounter transition/finished masks into the state flags
+004cf7cc spritePresetBankInitialize inferred loads the preset tables and initialises the bank's 13 sprites
+004b3a4c partyPanelDrawSlotPart inferred draws one part of the status panel row of a save slot
+004b5db8 partyPanelDrawPartySlotPart inferred draws one part of the status panel row of a party slot
+004b42b0 partyPanelDrawAilmentIcon inferred draws a slot's ailment icon, cycling through several with a fade
+0022ecfc uiQuestDrawList inferred draws the quest list rows, focused plate and scroll bar
+0023dedc uiQuestDrawRowPlate inferred draws a quest list row plate and returns the text colour
+0032ba8c titleConfigDraw inferred draws the config menu rows, frames and sliders
+003193a8 campCecRecvStatGainState inferred StreetPass receive state that shows the received demon's stat gains
+0049b00c _ZN9Obj53604416shopQuantityStepEv inferred twin of smt4 FUN_003a4a60 (Obj536044 is Apocalypse's shop scene)

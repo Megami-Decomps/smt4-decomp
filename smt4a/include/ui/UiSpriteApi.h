@@ -42,7 +42,7 @@ s32 uiSpriteAdvanceAnimation(UiSpriteState *sprite, f32 step);
 /* The opacity, scale and image-frame tracks' advance. */
 void FUN_001807a0(UiSpriteState *sprite, f32 step);
 void FUN_00182348(UiSpriteState *sprite, f32 step);
-void FUN_00181948(UiSpriteState *sprite, f32 step);
+void spriteSequencePlayerAdvance(UiSpriteState *sprite, f32 step);
 /* Starts frame sequence `sequence` of the sprite's resource. */
 void FUN_0036b644(UiSpriteState *sprite, s32 sequence);
 /* uiSpriteAdvanceAnimation with the position track replaced by a slide in from 320 pixels to the right (left

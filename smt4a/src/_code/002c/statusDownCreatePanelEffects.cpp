@@ -1,4 +1,4 @@
-/* NON_MATCHING: animated-position speed getter calls match; effect IDs and alternate mode retain different saved-register roles. */
+/* NON_MATCHING: target/g_statusDown/alternate saved-register roles (r8/r9/r6) differ from retail (r9/r8/r6) and second g_statusDown load is not hoisted. */
 #include "ui/UiSpriteApi.h"
 #include "status/StatusDownA.h"
 #include "shard/TextureDrawCall.h"
@@ -10,8 +10,7 @@ void efctSetSpeed(f32 speed);
 // Build the status-down panel and its mode-specific accents.
 void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)
 {
-    StatusDownStateA *status = g_statusDown;
-    efctSetSpeed(vec2GetSpeed(&status->sprites[1]));
+    efctSetSpeed(vec2GetSpeed(&g_statusDown->sprites[1]));
     for (s32 i = 0; i < 3; ++i)
         texDrawTableEntryAtStoredOrigin(2, 0x12, 0x56f + i, target, flags, 0xbf);
     efctSetSpeed(1.0f);
@@ -31,7 +30,7 @@ void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)
     texDrawTableEntryAtStoredOrigin(2, 0x12, panel, target, flags, 0xc1);
     texDrawTableEntryAtStoredOrigin(2, 0x12, firstAccent, target, flags, 0xc1);
     texDrawTableEntryAtStoredOrigin(2, 0x12, secondAccent, target, flags, 0xc2);
-    efctSetSpeed(vec2GetSpeed(&status->sprites[3]));
+    efctSetSpeed(vec2GetSpeed(&g_statusDown->sprites[3]));
     texDrawTableEntryAtStoredOrigin(2, 0x12, finalAccent, target, flags, 0xc4);
     efctSetSpeed(1.0f);
 }

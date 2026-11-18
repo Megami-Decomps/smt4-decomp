@@ -1,5 +1,4 @@
-/* NON_MATCHING: 64-bit flag-mask loads and temporary VFP-register choices differ from retail; control flow and draw calls otherwise agree. */
-#include "common.h"
+#include "status/StatusFlagLabels.h"
 
 struct FlagLabelRecord {
     u64 flags; // 0x000
@@ -16,7 +15,6 @@ u32 entryTableCallSlot3(u32 table);
 void textFormatBuffer(char *output, const char *format, ...);
 const char *gameGetPlayerName();
 const char *dataTable01GetRecordWithAocOverride(u16 message);
-void textDrawDefaultString(const char *text, f32 x, f32 y);
 }
 
 // Draw the first applicable flag label and its associated description.
@@ -36,10 +34,10 @@ extern "C" void uiDrawFlagLabels(void *, const FlagLabelRecord *record)
     } else if (record->flags & DAT_005715f8[5]) {
         textFormatBuffer(label, DAT_00528138);
         description = dataTable01GetRecordWithAocOverride(record->message);
-    } else if (record->flags & DAT_005715f8[4]) {
+    } else if (DAT_005715f8[4] & record->flags) {
         textFormatBuffer(label, DAT_00528140);
         description = dataTable01GetRecordWithAocOverride(record->message);
     }
-    textDrawDefaultString(label, 228.0f, 42.0f);
-    textDrawDefaultString(description, 228.0f, static_cast<f32>(lineHeight) + 42.0f);
+    drawFlagLabelLine(label, 0);
+    drawFlagLabelLine(description, lineHeight);
 }

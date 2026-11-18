@@ -119,7 +119,7 @@ void FUN_004d2124(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d290c(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d3360(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d3950(DebugMenu *menu, DebugBattle *battle);
-void FUN_004d3c94(DebugMenu *menu, DebugBattle *battle);
+void btlReserveEditorApplySelection(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d3df0(DebugMenu *menu, DebugBattle *battle);
 void FUN_004d463c(DebugMenu *menu);
 void FUN_004d5290(DebugMenu *menu, DebugBattle *battle);
@@ -700,7 +700,7 @@ u32 FUN_004d6104(DebugMenu *menu, DebugBattle *battle)
         next = 0x1c;
         break;
     case 0x1c:
-        FUN_004d3c94(menu, battle);
+        btlReserveEditorApplySelection(menu, battle);
         if (padButtonIsPressed(0) == 0)
             return 0;
         next = DEBUG_STATE_DONE;

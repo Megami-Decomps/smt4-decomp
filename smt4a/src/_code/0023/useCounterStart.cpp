@@ -1,10 +1,10 @@
-/* NON_MATCHING: the global pool load is placed before the push (retail: right after it) and the count/value/loop scratch registers are numbered differently; the loop reads count in its condition like retail. */
+/* NON_MATCHING: only the global pool load is placed before the push (retail: right after it), matching smt4 twin (2 diff lines). */
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteApi.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
-void scrollListSetSelectionTracked(void *);
 s32 buttonHelpGetPanelMode(void);
 s32 buttonHelpGetPanelState(void);
 const char *screenGetEntry(u32);
@@ -35,7 +35,7 @@ void useCounterStart(void)
         const u8 *value = saveGetUserSettingsBlock() + work->valueOffset;
         for (s32 index = 0; index < work->count; ++index) {
             if (work->values[index] == (*value & 0x7f)) {
-                scrollListSetSelectionTracked(work->selection);
+                scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(work->selection), index);
                 break;
             }
         }

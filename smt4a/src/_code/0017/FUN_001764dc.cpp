@@ -1,13 +1,14 @@
-#include "common.h"
+#include "shard/W6_W6Match8_AocPoll.h"
 
 extern "C" {
 
-extern void FUN_00161a10(void *object);
-extern void FUN_001764f4(void *object);
-void FUN_001764dc(void *object, void *second)
+extern void FUN_00161a10(void);
+extern void FUN_001764f4(u32 detail);
+
+void FUN_001764dc(AocMain *, u32 detail)
 {
-    FUN_00161a10(object);
-    FUN_001764f4(second);
+    FUN_00161a10();
+    FUN_001764f4(detail);
 }
 
 } /* extern "C" */

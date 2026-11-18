@@ -14,8 +14,8 @@ int efctSetSpeed(void);
 int gxResetColorQuadToWhite(void);
 int gxSetMirroredClippedScissor(...);
 int partyGetSlotPreferredFirst(...);
-int FUN_004b3a4c(...);
-int FUN_004b5db8(...);
+int partyPanelDrawSlotPart(...);
+int partyPanelDrawPartySlotPart(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -47,8 +47,8 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern int partySlotMatchesSelected(void);
 /* Supplied declaration required: partyGetSlotPreferredFirst. */
-/* Supplied declaration required: FUN_004b3a4c. */
-/* Supplied declaration required: FUN_004b5db8. */
+/* Supplied declaration required: partyPanelDrawSlotPart. */
+/* Supplied declaration required: partyPanelDrawPartySlotPart. */
 
 
 void FUN_004b2e50(int param_1,int param_2,int param_3)
@@ -167,7 +167,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
         temp_v3 = vec2GetYInt((UiSpriteState *)(temp_v3 + 0xac));
         temp_v11 = temp_v11 + temp_v3;
         temp_v3 = param_1 + (temp_v0 + 1) * 0x28;
-        FUN_004b3a4c(param_1,temp_v1,(int)*(char *)(temp_v2 + 0x1c88),temp_v13,temp_v12,temp_v11,
+        partyPanelDrawSlotPart(param_1,temp_v1,(int)*(char *)(temp_v2 + 0x1c88),temp_v13,temp_v12,temp_v11,
                      (int)*(short *)(temp_v3 + 0x7888),(int)*(char *)(temp_v3 + 0x788e),
                      (int)*(short *)(temp_v3 + 0x788a),(int)*(short *)(temp_v3 + 0x7890));
         if ((temp_v1 == 8) && (*(char *)(param_1 + temp_v7 + 0x753f) != '\0')) {
@@ -211,7 +211,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
           temp_v13 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0x3f4));
           temp_v11 = temp_v11 + temp_v13;
           temp_v13 = param_1 + (temp_v9 + 0x19) * 0x28;
-          FUN_004b5db8(param_1,temp_v1,temp_v9,temp_v7,temp_v12,temp_v11,(int)*(short *)(temp_v13 + 0x7888),
+          partyPanelDrawPartySlotPart(param_1,temp_v1,temp_v9,temp_v7,temp_v12,temp_v11,(int)*(short *)(temp_v13 + 0x7888),
                        (int)*(char *)(temp_v13 + 0x788e),(int)*(short *)(temp_v13 + 0x788a),
                        (int)*(short *)(temp_v13 + 0x7890));
           temp_v7 = temp_v7 + 1;

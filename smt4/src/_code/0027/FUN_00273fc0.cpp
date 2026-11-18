@@ -18,7 +18,7 @@ int lightOwnerRegister(...);
 int FUN_0025bc80(void);
 int vec4Forward(void);
 f32 FUN_0027f94c(int);
-int FUN_0027fca0(unsigned int);
+int mapDepartSpawnPlayerEffect(unsigned int);
 int modelSelectSecondaryMotion(...);
 int modelPartSetRotationDegrees(...);
 int nodeSetTranslation(...);
@@ -55,7 +55,7 @@ extern int asdMdlManagerCreateFromSource(void *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 /* Supplied declaration required: vec4Forward. */
 /* Supplied declaration required: FUN_0027f94c. */
-/* Supplied declaration required: FUN_0027fca0. */
+/* Supplied declaration required: mapDepartSpawnPlayerEffect. */
 /* Supplied declaration required: modelSelectSecondaryMotion. */
 /* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
@@ -171,7 +171,7 @@ void FUN_00273fc0(void)
                      (temp_v2 < 0x42940000 && (s32)piVar7 >= 0x42940000)) ? -20.0f : 20.0f,
                     20.0f);
         FUN_0025bc80();
-        FUN_0027fca0(0xffffffff);
+        mapDepartSpawnPlayerEffect(0xffffffff);
       }
     }
     else if (((g_lmapScene[0x19] < 0x40000000) && ((int)piVar7 >= 0x40000000)) ||
@@ -179,7 +179,7 @@ void FUN_00273fc0(void)
       effectSpawnAheadOfScene((g_lmapScene[0x19] < 0x40000000 && (s32)piVar7 >= 0x40000000) ?
                   -20.0f : 20.0f,40.0f);
       FUN_0025bc80();
-      FUN_0027fca0(0xffffffff);
+      mapDepartSpawnPlayerEffect(0xffffffff);
     }
     g_lmapScene[0x19] = (int)piVar7;
   }

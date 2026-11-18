@@ -84,6 +84,12 @@ struct TitleConfigCallbackView {
     /* 0x150 */ void *dataB;
     /* 0x154 */ ScriptProcess *process;
 };
+/* Apocalypse: a row of section 1 of data table 0x3A, the label of one config setting (0x94 bytes). */
+struct TitleConfigLabelA {
+    /* 0x00 */ char text[0x94];
+};
+typedef char TitleConfigLabelASizeCheck[sizeof(TitleConfigLabelA) == 0x94 ? 1 : -1];
+
 struct TitleConfigHelpEntry {
     /* 0x00 */ u8 unk00[0x16];
     /* 0x16 */ char text[0x80];

@@ -4952,3 +4952,27 @@
 00346f2c vertexAttributeUploadStreams inferred twin of smt4a FUN_00412c54
 0010835c frameTexHdrCaptureLeft evidence registered as process "HDRCL" (HDR capture, left) by FUN_001043c8 with frameTexReleaseWork; builds the half-size copies of the scene surface and sets capturedLeft (Hydrogen: frameTexHdrCaptureUpdate)
 0010854c frameTexHdrCaptureRight evidence registered as process "HDRCR" (twin of frameTexHdrCaptureLeft, "HDRCL") in FUN_001043c8
+00191df4 uniteSortCandidateList inferred twin of smt4a uniteSortCandidateList (same sort-preference dispatch over the fusion candidate list)
+003c3238 uiDrawFlagLabels inferred twin of smt4a uiDrawFlagLabels (category/description label pair at 228,42)
+003c86bc supportUnitInitializeRandomCategory inferred twin of smt4a FUN_004da144
+00277bdc mapSpawnActiveSignboardEffects inferred spawns the "KANBAN" (signboard) box effect in front of each active map object in states 6/7/9/11
+0038bae8 aocFileContentPrepareMountBuffer inferred twin of smt4a aocFileContentPrepareMountBuffer (addon/sys/aocFileContent.cpp)
+0023b260 textureConvertTiledTile inferred recursive quadrant tiling; sibling of textureConvertLinearTile in the same converter
+00317e78 dataTableSortLookupSections inferred qsorts data tables 5/6 sections and table 0x1f before binary searches
+001061ec titleTimedOverlayDraw inferred twin of smt4a FUN_0013a9c8
+002c733c effMenuDrawGradientRect inferred effMenu gradient rectangle submitted with gxSubmitDrawZeroExtraParams
+001e3284 uiSubMenuResetWork inferred resets every sub-menu work entry
+00342e5c uiDrawRoutedConnector inferred draws a clamped diagonal plus horizontal connector line
+0027fca0 mapDepartSpawnPlayerEffect inferred map/mapDepart: spawns an effect at a jittered player position
+001fc390 mikadoMainCreate inferred mikado/mikadoMain: allocates the work and creates its process and draw tasks
+003c911c fusionResolveRaceRulePair inferred twin of smt4a FUN_004db2b8
+0027dc24 btlSpriteSelectSource inferred builds the battle sprite from its override template, data-table entry or fallback
+002cb054 titleConfigDraw inferred twin of smt4a FUN_0032ba8c
+002ec588 campCecInboxState inferred StreetPass inbox state on CampCecMenu (cards, rewards, talk)
+003821d8 qcDeliveryStep inferred quest center delivery state; starts the "qc_Delivery*" script entries
+00383674 qcGetDeliveryQuestId inferred returns the quest id of the delivery being handled
+003a4a60 shopQuantityStep inferred shop quantity panel state (numeric stepper, price change)
+002d6d44 campCecEditMessageState inferred state 2 of the StreetPass card editor: runs its messages and acts on the answers
+00333b74 questBuildRewardSpoils inferred fills a ResultSpoils with a quest's rewards
+002cdf2c resultApplySpoils inferred applies a ResultSpoils (macca, experience, items) on the result screen
+0023547c uiQuestAnswerConfirm inferred quest answer confirmation; all three callers pass an s8 flag

@@ -7,6 +7,8 @@
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
+/* Returns context->stereoMode (a getter armlink inlines at every call). */
+s32 renderCtxGetStereoMode(RenderCtxA *context);
 }
 
 #endif

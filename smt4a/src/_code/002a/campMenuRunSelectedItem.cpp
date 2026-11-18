@@ -62,7 +62,7 @@ void FUN_0038800c(u32 value);
 s32 campCecEditIsStateSixteen(void);
 void FUN_0036cf98(u8 value);
 void FUN_0038a694(void);
-void FUN_00370d84(void);
+void partnerTopicCreate(void);
 void FUN_002a4708(void);
 void texEntrySpritesLoad(void);
 
@@ -494,7 +494,7 @@ void campMenuRunSelectedItem(void)
         campChangeState(0x51);
         FUN_002a5cf4();
         hideNumericBanner();
-        FUN_00370d84();
+        partnerTopicCreate();
         break;
     case 0x46:
         campChangeState(0x52);

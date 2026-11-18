@@ -11,7 +11,7 @@ void optionsApplyOverride(s32 value);
 void FUN_004d9ebc(s32 mode);
 void optionsResetIfFlagSet(void);
 void optionsResetIfNoFlag(void);
-void FUN_004da144(void);
+void supportUnitInitializeRandomCategory(void);
 void optionsSetFlag1(void);
 
 /* Applies battle-specific option overrides and rebuilds the player's temporary combatant. */
@@ -58,7 +58,7 @@ void battleApplyOptionOverrides(BtlMainStateA *battle)
             case 0:
                 return;
             case 1:
-                FUN_004da144();
+                supportUnitInitializeRandomCategory();
                 break;
             case 2:
                 break;

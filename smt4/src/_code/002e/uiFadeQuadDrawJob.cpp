@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 37 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: alpha/extent conversion scheduling differs; the preset lookups' stereo mode is the inlined renderCtxGetStereoMode getter (armcc's hint NOPs around it now match). */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "event/eventCommand.h"
@@ -27,8 +27,8 @@ u32 uiFadeQuadDrawJob(u32 job)
         color = (color & 0xffffff00) | alpha;
         renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
         renderCtxSelectTexture(g_titleScene, 0);
-        f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_titleScene->unk0528));
-        f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_titleScene->unk0528));
+        f32 height = static_cast<f32>(asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene)));
+        f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene)));
         gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
         renderStackPop(&g_titleScene->stackA);
     }
