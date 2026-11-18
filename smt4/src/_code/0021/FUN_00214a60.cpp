@@ -10,7 +10,7 @@ int screenDrawShadedRect(...);
 int textFormatFullWidthTwoDigits(...);
 int FUN_0025090c(...);
 float FUN_0028f4b4(const char *, unsigned int, float);
-int FUN_002907c4(...);
+int textFormatFullWidthNumber(...);
 int buttonHelpSetText(int, int);
 int gxSetUniformQuadColors(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
@@ -72,7 +72,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: textFormatFullWidthTwoDigits. */
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_0028f4b4. */
-/* Supplied declaration required: FUN_002907c4. */
+/* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gxSetUniformQuadColors. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -263,7 +263,7 @@ unsigned int FUN_00214a60(void)
                         );
           temp_v16 = (temp_v10 >> 5) - (temp_v10 >> 0x1f);
           temp_v10 = temp_v14 + ((temp_v15 >> 5) - (temp_v15 >> 0x1f)) * -0x3c;
-          FUN_002907c4(temp_v28,(temp_v9 >> 0xb) - (temp_v9 >> 0x1f));
+          textFormatFullWidthNumber(temp_v28,(temp_v9 >> 0xb) - (temp_v9 >> 0x1f));
           textFormatFullWidthTwoDigits(temp_v16 / 10,temp_v33);
           textFormatFullWidthTwoDigits(temp_v16 % 10,temp_v30);
           textFormatFullWidthTwoDigits(temp_v10 / 10,temp_v31);

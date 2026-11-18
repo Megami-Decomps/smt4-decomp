@@ -1,5 +1,6 @@
 /* NON_MATCHING: only entry instruction scheduling and the switch-index versus sound-flags scratch registers differ. */
 #include "map/MapIfGlobals.h"
+#include "ui/UiControl.h"
 #include "addon/LookupRecord.h"
 extern "C" {
 u32 FUN_002bfdd4(void);
@@ -7,7 +8,6 @@ void textFormatFullWidthTwoDigits(s32 count, char *text);
 void textFormatBuffer(char *output, const char *format, ...);
 const char *textConvertToGlyphPairs(void *record, s32 variant);
 void dialogSetText(const char *text);
-void dialogOpen(s32 slot, s32 mode);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 group, u32 sound, u32 voice, u32 flags, f32 leftVolume, f32 rightVolume);
 

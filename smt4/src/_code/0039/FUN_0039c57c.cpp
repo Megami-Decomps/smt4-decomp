@@ -1,4 +1,4 @@
-/* NON_MATCHING: lookup-owned table contexts restore call setup; selected-section/refresh stores use swapped value/constant registers. */
+/* NON_MATCHING: at the first match the section byte loads into r0 and the refresh constant into r1; retail swaps them (the fallback match is identical). */
 #include "map/NavigationInterpolation.h"
 #include "gamedata/MapNaviCategories.h"
 #include "shard/MapNaviTable_GetCategoryCount.h"
@@ -55,9 +55,8 @@ static inline const MapNaviCategoryRecord *findNaviCategory(s32 map, s32 area)
     }
     return 0;
 }
-static inline void applyNaviSection(NaviSectionSelectionView *work, const MapNaviSectionRecord *record)
+static inline void applyNaviSection(NaviSectionSelectionView *work, s8 section)
 {
-    s8 section = record->section;
     work->state.selection = section;
     work->selectedSection = section;
     work->refreshFirst = 1;
@@ -69,7 +68,7 @@ extern "C" void FUN_0039c57c(NaviSectionSelectionView *work, u32 category)
     s32 area = NaviMain_GetPosY(work->motion.cursorData);
     const MapNaviSectionRecord *section = findNaviSection(map, category);
     if (section) {
-        applyNaviSection(work, section);
+        applyNaviSection(work, section->section);
         return;
     }
     work->state.selection = 0;
@@ -77,6 +76,6 @@ extern "C" void FUN_0039c57c(NaviSectionSelectionView *work, u32 category)
     if (fallback) {
         section = findNaviSection(map, fallback->category);
         if (section)
-            applyNaviSection(work, section);
+            applyNaviSection(work, section->section);
     }
 }

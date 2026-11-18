@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail keeps the entry list in sl and the constant 1 in fp (build swaps them) and updates the window state through a writeback load (ldrh [r0,#4]!). */
+/* NON_MATCHING: the entry-list address and the constant 1 swap callee-saved registers (retail: list in sl, 1 in fp), and the widget flag update addresses the halfword directly where retail uses a writeback load (ldrh [r0, #4]!); the tab flag after it loads into r1 (retail r0). */
+#include "AsdSDK/AsdDebugHooks.h"
+#include "code/Code0022_Smt4.h"
 #include "classes/Obj42247c.h"
 #include "classes/Obj4221a4.h"
 #include "gamedata/NkmBaseRecord.h"
@@ -44,9 +46,7 @@ void FUN_0022e17c(CompendiumListEntryIV *entry, u16 id, s32 useCurrent);
 void recordAppendFloatEntry(CompendiumEntryListIV *list, const CompendiumListEntryIV *entry);
 void motionPlayForMode(void *screen, s32 mode, s32 flags);
 void listScrollerInitialize(SelectionFlags *selection, s32 rows, s32 count, s32 current, s32 first, s32 second);
-u8 gaugePercent(CompendiumEntryListIV *list, u32 scale);
 void *jyoucyuGetTableEntry(s32 index);
-void *FUN_0023a1b8(void *object);
 void FUN_003a9bb4(void *screen);
 void messageIdListInit(Obj55ca08 *selection, u32 table, u32 first, s32 count);
 
@@ -76,9 +76,9 @@ void FUN_003a8aa0(Obj42247c *screen)
         work->total = total;
         motionPlayForMode(screen, 1, 1);
         listScrollerInitialize(&screen->flags, 10, block->count, 0, 1, 1);
-        FUN_0023a1b8(&screen->flags);
+        asdDebugHookPtrInt(&screen->flags, 1);
         screen->flags.active = 1;
-        work->completion = gaugePercent(&work->list, 1);
+        work->completion = gaugePercent(reinterpret_cast<GaugeOwner0022e0b0 *>(&work->list));
         jyoucyuGetTableEntry(0);
         jyoucyuGetTableEntry(0);
     } else {
@@ -88,12 +88,14 @@ void FUN_003a8aa0(Obj42247c *screen)
     window->initialize(&screen->flags);
     window = reinterpret_cast<Obj4221a4 *>(screen->touchSelection.unk34);
     window->state |= 0x1000;
-    if (block->mode != 0) {
-        messageIdListInit(&screen->touchSelection, 0x1c, 0x1030, work->visibleCount >= 10 ? 10 : work->visibleCount);
-        screen->touchSelection.soundEnabled = 1;
+    s32 count = work->visibleCount;
+    if (block->mode == 0) {
+        count = count < 10 ? count : 10;
+        messageIdListInit(&screen->touchSelection, 0x1d, 0x40e, count);
     } else {
-        messageIdListInit(&screen->touchSelection, 0x1d, 0x40e, work->visibleCount >= 10 ? 10 : work->visibleCount);
-        screen->touchSelection.soundEnabled = 1;
+        count = count < 10 ? count : 10;
+        messageIdListInit(&screen->touchSelection, 0x1c, 0x1030, count);
     }
+    screen->touchSelection.soundEnabled = 1;
 }
 }

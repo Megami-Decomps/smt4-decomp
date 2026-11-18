@@ -1,18 +1,18 @@
-/* NON_MATCHING: remaining: retail issues the two pool loads (place start, /10 multiplier) predicated (ldrne) before the zero branch; the build loads them after the beq */
+/* NON_MATCHING: the offset's zero is set before the value test and the two pool loads (place start, /10 multiplier) after it; retail sets the zero last. */
 #include "common.h"
 
 extern "C" {
 s32 libc_sprintf(char* destination, const char* format, ...);
 s32 textFormatBuffer(char* destination, const char* format, ...);
 
-void FUN_002c0940(char* output, s32 value)
+void textFormatFullWidthNumber(char* output, s32 value)
 {
+    s32 offset = 0;
     s32 remaining = value;
     if (value == 0) {
         libc_sprintf(output, "\x82\x4F");
         return;
     }
-    s32 offset = 0;
     for (s32 place = 100000000; place > 0; place /= 10) {
         if (place <= value) {
             s32 digit = remaining / place;

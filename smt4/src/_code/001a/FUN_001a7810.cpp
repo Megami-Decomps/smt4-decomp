@@ -1,4 +1,4 @@
-/* NON_MATCHING: branch structure, getter and text coordinates now match; armcc still fuses the 0.5*x+0.5 pulse into a vmla (retail: vmul/vadd with one constant register) and schedules the background-call argument setup around the else-if branch differently. */
+/* NON_MATCHING: branch structure, getter, text coordinates and the background calls now match; armcc still fuses the 0.5*x+0.5 pulse into a vmla (retail: vmul/vadd with one constant register). */
 #include "ui/PartyPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S3UiLookup.h"
@@ -40,8 +40,8 @@ void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 altern
     const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x24, 0xA4);
     s32 textWidth = fontMeasureLineAdvance(text, 2);
     s32 centered = (position->placement->width - textWidth) / 2;
-    s32 textY = position->y + y;
-    s32 textX = position->x + (centered + x);
-    textDrawString(2, color, text, (f32)textX, (f32)textY, 0.55f, 0.0f, speed);
+    f32 textX = position->x + (centered + x);
+    f32 textY = position->y + y;
+    textDrawString(2, color, text, textX, textY, 0.55f, 0.0f, speed);
 }
 }

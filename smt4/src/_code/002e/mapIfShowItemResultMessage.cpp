@@ -1,5 +1,6 @@
 /* NON_MATCHING: result, state and flags use different saved registers; the default voice id is zeroed later than in retail. */
 #include "map/MapIfGlobals.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 u32 FUN_002bfdd4();
@@ -9,7 +10,6 @@ u32 dataFindKindRecordWithAocOverrides(u32, s32);
 const char *textConvertToGlyphPairs(u32, s32);
 void textFormatBuffer(char *, const char *, ...);
 void dialogSetText(const char *);
-void dialogOpen(s32, s32);
 void FUN_002bfc24(s32, u32, u32, u32, f32, f32);
 
 // Show the result of obtaining map items and choose the matching spoken message.

@@ -17,7 +17,7 @@ s32 FUN_002e2014();
 void stateAtF4Destroy();
 void sysPlaySe(u32);
 void partyPanelRefreshFromSlotTable();
-void FUN_0034280c(s32);
+void campCecEditCreate(s32);
 
 // Poll the edit confirmation, tear it down on acceptance and refresh the party panel.
 u32 campCecEditPollConfirmation(CampCecEditController* controller)
@@ -25,7 +25,7 @@ u32 campCecEditPollConfirmation(CampCecEditController* controller)
     u32 result = 0;
     switch (campCecEditIsOpen()) {
     case 0:
-        FUN_0034280c(0);
+        campCecEditCreate(0);
         break;
     default:
         if (FUN_002e2014() != 0) {

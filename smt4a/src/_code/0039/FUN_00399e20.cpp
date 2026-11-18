@@ -6,7 +6,7 @@
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-void FUN_002c0940(char *out, s32 value);
+void textFormatFullWidthNumber(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void battleAttributeFormatName(char *buffer, u32 attribute);
 void skillFormatTargetLabel(char *buffer, u32 target);
@@ -31,8 +31,8 @@ void FUN_00399e20(s32 textId, u32 flags)
         FUN_00359974(0x25, range & 0xF, 0xFFFFFFFF, 0);
     } else {
         char minimum[8], maximum[8];
-        FUN_002c0940(minimum, range & 0xF);
-        FUN_002c0940(maximum, first->hitRange >> 4);
+        textFormatFullWidthNumber(minimum, range & 0xF);
+        textFormatFullWidthNumber(maximum, first->hitRange >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
         scrSetStringSlot(0x25, text);
     }

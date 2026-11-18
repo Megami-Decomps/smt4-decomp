@@ -6906,3 +6906,14 @@
 003e9cec btlInitializeDemonUnitState
 0034e784 saveSlotDrawClippedGaugeFrame
 0047c36c aocMenuUpdate
+0022f9c8 uniteDrawOptionRow
+002c0940 textFormatFullWidthNumber
+0041704c resultInputOpenStatus
+002b50e4 btlEditorCreate
+0041cbac filterCreate4Poly
+002a4488 eventSnowNoiseUpdate
+0034280c campCecEditCreate
+002a4cfc campMenuRunSelectedItem
+0021c45c btlUiPartyDisplayInit
+00202ea4 configUpdate
+0031a914 configValueName

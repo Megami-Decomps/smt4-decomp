@@ -23,7 +23,7 @@ int FUN_00180310(...);
 int renderCtxCalculateStereoParallax(...);
 int gameFlagBlockGet(void);
 int questDataGetRecord(void);
-int FUN_002c0940(...);
+int textFormatFullWidthNumber(...);
 int partyDrawCategorySelectionIcon(...);
 int VectorSignedToFloat(...);
 
@@ -74,7 +74,7 @@ extern int idIsAtLeast350(unsigned int);
 extern short *dataTableGetEntry37(unsigned int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int listCursorGetRowIfUnblocked(int);
-/* Supplied declaration required: FUN_002c0940. */
+/* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: FUN_002ebda8. */
 /* Supplied declaration required: FUN_002f7730. */
 /* Supplied declaration required: partyDrawCategorySelectionIcon. */
@@ -246,7 +246,7 @@ void FUN_00218640(void)
         }
       }
       else {
-        FUN_002c0940(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
+        textFormatFullWidthNumber(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
         textFormatBuffer(temp_v27,"%s\x81@\x82l\x82\x81\x82\x83\x82\x83\x82\x81",temp_v28);
         temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x1b));
       }
@@ -269,7 +269,7 @@ void FUN_00218640(void)
       temp_v12 = (int)temp_v18 + (int)temp_v16;
       FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v12 + 3,
                    (temp_v5 - 1) + (int)*(short *)(temp_v13 + 10),0,7,0x6a);
-      FUN_002c0940(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
+      textFormatFullWidthNumber(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v4 + temp_v12 + 10,(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
@@ -453,9 +453,9 @@ LAB_00218d20:
       temp_v9 = FUN_003df004(temp_v25,temp_v12,&puStack_188);
       if (temp_v9 != 0) {
         temp_v26 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x34));
-        FUN_002c0940(temp_v33,temp_v24);
+        textFormatFullWidthNumber(temp_v33,temp_v24);
         temp_v35 = temp_v29 + temp_v12 * 8;
-        FUN_002c0940(temp_v31,*(unsigned int *)(temp_v35 + 0x104));
+        textFormatFullWidthNumber(temp_v31,*(unsigned int *)(temp_v35 + 0x104));
         temp_v19 = (unsigned int)temp_v23;
         if (temp_v19 != 0) {
           FUN_002ebda8();

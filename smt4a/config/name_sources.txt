@@ -7446,3 +7446,14 @@
 003e9cec btlInitializeDemonUnitState inferred fills a BattleUnitState from a demon's slot record (battle/BattleUnitInit.h)
 0034e784 saveSlotDrawClippedGaugeFrame inferred draws the two-part gauge frame of a save slot with the lower part clipped
 0047c36c aocMenuUpdate inferred AocMenu per-frame update (add-on release shutdown, sprite ticks, step dispatch); twin of smt4 FUN_00392e74
+0022f9c8 uniteDrawOptionRow inferred draws one unite option row: frame (pulsing while selected), active marker and centred option name
+002c0940 textFormatFullWidthNumber inferred twin of smt4 FUN_002907c4: full-width Shift-JIS digits
+0041704c resultInputOpenStatus inferred result-input phase machine that opens the player's or the selected unit's status, runs entry script 14 and restores the next state (ResultInputWork)
+002b50e4 btlEditorCreate evidence creates the "btlEditor Calc" process and "btlEditor DrawUp" task; asdDebugTrace path programattletlEditor.cpp; twin smt4 FUN_001f7fac
+0041cbac filterCreate4Poly inferred twin of smt4 FUN_0034b6d4 (4-poly filter create)
+002a4488 eventSnowNoiseUpdate inferred state machine of the 2D event snow-noise effect (EventSnowNoiseWork in g_eventEffect): load, pulse, blink
+0034280c campCecEditCreate evidence asdDebugTrace path camp\CampCec\CampCecEdit.cpp; creates the "CampCecEdit Calc" process and its DrawUp/DrawDown tasks
+002a4cfc campMenuRunSelectedItem inferred runs the camp menu item under the cursor (opens its screen, list, script or unite mode); twin smt4 FUN_001d0750
+0021c45c btlUiPartyDisplayInit inferred twin of smt4 FUN_00199b9c: initialises the battle UI's party display
+00202ea4 configUpdate inferred the Config screen's update (camp/Config/Config): opens the script, slides the rows in, picks, confirms and applies a value
+0031a914 configValueName inferred display name of a config value (0..4) from data table 0x36; "NoTableLoaded"/"NoName" placeholders; FUN_00202ea4 inlines it

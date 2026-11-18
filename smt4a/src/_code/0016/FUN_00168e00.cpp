@@ -2,21 +2,10 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 
-/* Scissor stacks follow the shared rendering-context prefix. */
-struct ScissorContextView {
-    u8 unk0000[0x1318];
-    RenderStateStack mode;
-    RenderStateStack lower;
-    RenderStateStack upper;
-};
-typedef char ScissorOffsetsCheck[offsetof(ScissorContextView, lower) == 0x1338 &&
-    offsetof(ScissorContextView, upper) == 0x1358 && sizeof(ScissorContextView) == 0x1378 ? 1 : -1];
-
-
 extern "C" {
 u32 FUN_00169d8c(u32 selector);
 u32 FUN_00169db4(u32 selector);
-s32 asdGxPresetsGetEnable(u32 selector);
+u32 asdGxPresetsGetEnable(u32 selector);
 s32 stateValuesGetBySelector(u32 selector);
 
 u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height)
@@ -64,9 +53,9 @@ u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height)
     if (upperY > maxY) {
         upperY = maxY;
     }
-    renderStackPush(&((ScissorContextView *)g_renderCtx)->lower, (u32)lowerY | ((u32)lowerX << 16));
-    renderStackPush(&((ScissorContextView *)g_renderCtx)->upper, (u32)upperY | ((u32)upperX << 16));
-    renderStackPush(&((ScissorContextView *)g_renderCtx)->mode, 3);
+    renderStackPush(&g_renderCtx->scissorMinimum, (u32)lowerY | ((u32)lowerX << 16));
+    renderStackPush(&g_renderCtx->scissorMaximum, (u32)upperY | ((u32)upperX << 16));
+    renderStackPush(&g_renderCtx->scissor, 3);
     return 1;
 }
 }

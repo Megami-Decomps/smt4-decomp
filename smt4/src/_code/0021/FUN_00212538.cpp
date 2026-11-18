@@ -20,7 +20,7 @@ int VectorSignedToFloat(...);
 
 int CONCAT44(...);
 int FUN_0025117c(...);
-int FUN_0025141c(...);
+int statusStripDraw(...);
 int FUN_00251d98(...);
 int objectPartRunUnlessLocked(...);
 int gxResetColorQuadToWhite(void);
@@ -56,7 +56,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int FUN_001c36b8(void);
 /* Supplied declaration required: FUN_0025117c. */
 /* Supplied declaration required: FUN_002512c4. */
-/* Supplied declaration required: FUN_0025141c. */
+/* Supplied declaration required: statusStripDraw. */
 /* Supplied declaration required: FUN_00251d98. */
 extern int FUN_00252180(unsigned int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
@@ -159,7 +159,7 @@ unsigned int FUN_00212538(void)
         temp_v4 = vec2GetXInt(temp_v2);
         temp_v5 = vec2GetYInt(temp_v2);
       }
-      FUN_0025141c(*(unsigned int *)(temp_v1 + temp_v3 * 4 + 0x6c8),temp_v4,temp_v5);
+      statusStripDraw(*(unsigned int *)(temp_v1 + temp_v3 * 4 + 0x6c8),temp_v4,temp_v5);
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 4);
     temp_v3 = 0;
@@ -169,7 +169,7 @@ unsigned int FUN_00212538(void)
         temp_v2 = temp_v1 + (temp_v3 % 4) * 0x8c;
         temp_v4 = vec2GetXInt(temp_v2 + 0x298);
         temp_v5 = vec2GetYInt(temp_v2 + 0x298);
-        FUN_0025141c(*(unsigned int *)(temp_v1 + temp_v3 * 4 + 0x6d8),temp_v4,temp_v5);
+        statusStripDraw(*(unsigned int *)(temp_v1 + temp_v3 * 4 + 0x6d8),temp_v4,temp_v5);
         temp_v3 = temp_v3 + 1;
         temp_v2 = gameGetSlotTable();
       } while (temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x910b));
@@ -425,7 +425,7 @@ unsigned int FUN_00212538(void)
     } while (temp_v2 < 4);
     temp_v2 = 0;
     do {
-      FUN_0025141c(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0x6c8),aiStack_13c[temp_v2],temp_v18[temp_v2]);
+      statusStripDraw(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0x6c8),aiStack_13c[temp_v2],temp_v18[temp_v2]);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 4);
     temp_v3 = *(int *)(temp_v1 + 0x2c);
@@ -566,7 +566,7 @@ unsigned int FUN_00212538(void)
                   );
     }
     for (; temp_v7 < (int)temp_v9; temp_v7 = temp_v7 + 1) {
-      FUN_0025141c(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 0x6d8),aiStack_13c[temp_v7],temp_v18[temp_v7]);
+      statusStripDraw(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 0x6d8),aiStack_13c[temp_v7],temp_v18[temp_v7]);
     }
     if (*(unsigned char *)(temp_v1 + 0x66c) < 2) {
       efctSetSpeed();

@@ -73,7 +73,7 @@ u32 FUN_004a8750(u16 id, u8 category, s32 flag, s32 full, s32 extra);
 void inventoryListAppend(EntryList *list, u8 *entry);
 void FUN_004a84e8(EntryList *list, s32 mode);
 void listScrollerInitialize(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
-u8 gaugePercent(EntryList *list, s32 arg);
+u8 gaugePercent(EntryList *list);
 u8 calcPercentClamped(s32 numerator, s32 denominator);
 void messageIdListSetRange(void *header, s32 a, s32 b, s32 count);
 s32 gameFlagIsSet(u32 flag);
@@ -179,7 +179,7 @@ void FUN_004a1958(EntryScreen *screen)
         listScrollerInitialize(screen->layout, 10, screen->list.count, 0, 1, 1);
         asdDebugHookPtrInt(screen->layout, 1);
         screen->dirty = 1;
-        screen->percent = gaugePercent(&screen->list, 1);
+        screen->percent = gaugePercent(&screen->list);
         jyoucyuGetTableEntry(0);
     }
     screen->panel->rebuild(screen->layout);

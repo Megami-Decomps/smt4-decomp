@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc keeps g_gameState's address in r8 across the switch; retail reloads it from the pool at every use (r8 saved but unused), which also changes later constant scheduling. */
+/* NON_MATCHING: the refresh/discovered byte offsets (0x7b91-0x7b93) are synthesized from the state constant 2 (orr with 2) where retail derives them from 0x7b91 (add 1, orr asr 13); registers shift around them. */
 #include "ui/UiSpriteApi.h"
 #include "ui/NaviCategorySelection.h"
 #include "game/GameStateA.h"

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/UiControl.h"
 #include "event/2dEvent/EventEffect.h"
 
 struct StepText {
@@ -26,7 +27,6 @@ extern "C" {
 s32 scrRunOpcodesStub(u32 script);
 void FUN_004b7d88(TextStep *step);
 void FUN_00215978(s32 arg);
-void dialogOpen(u8 mode, u8 arg);
 void placeWinStartText(const void *text);
 void placeWinSetValue(s32 value);
 

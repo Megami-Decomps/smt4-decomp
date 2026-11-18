@@ -44,7 +44,7 @@ typedef struct CampCecEdit {
     /* 0x126 */ u8 unk126[0x3A];
 } CampCecEdit;
 
-/* smt4a: the edit screen has a different layout; see FUN_0034280c. */
+/* smt4a: the edit screen has a different layout; see campCecEditCreate. */
 typedef char CampCecEditLayoutCheck[sizeof(CampCecEdit) == 0x160 ? 1 : -1];
 
 typedef char CampCecEditStateOffsets[offsetof(CampCecEdit, unk74) == 0x74 && offsetof(CampCecEdit, nextState) == 0x110 && offsetof(CampCecEdit, unk125) == 0x125 ? 1 : -1];

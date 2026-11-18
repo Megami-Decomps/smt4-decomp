@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/UiControl.h"
 #include "event/2dEvent/EventEffect.h"
 #include "script/scrScriptProcess.h"
 
@@ -27,7 +28,6 @@ typedef struct Menu {
 } Menu;
 
 int asdMemFree(void *resource);
-int dialogOpen(int arg0, int arg1);
 int placeWinStartText(u8 *name);
 int placeWinSetValue(int arg);
 

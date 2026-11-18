@@ -5274,3 +5274,16 @@
 0024d94c btlBuildDemonSnapshot
 00331158 campUpdateListInput
 00392e74 aocMenuUpdate
+00295f54 unitNotificationShowNext
+002dabac uniteConfirmResultPair
+002907c4 textFormatFullWidthNumber
+00275be8 frameTexCampSetMode
+002905d0 uiQuestRefreshButtonHelp
+001f7fac btlEditorCreate
+0034b6d4 filterCreate4Poly
+001d0750 campMenuRunSelectedItem
+0025141c statusStripDraw
+0033c1bc statusStripDrawAilments
+001aed18 campSkillListDraw
+00384be8 qcNpcSelectStep
+00199b9c btlUiPartyDisplayInit

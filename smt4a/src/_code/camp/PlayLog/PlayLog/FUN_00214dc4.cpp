@@ -12,7 +12,7 @@ int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int fontMeasureLineAdvance(...);
-int FUN_002c0940(...);
+int textFormatFullWidthNumber(...);
 int uiDrawListScrollBar(...);
 int VectorSignedToFloat(...);
 
@@ -44,7 +44,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern int resourceRunOperationIfUnblocked(int);
-/* Supplied declaration required: FUN_002c0940. */
+/* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: uiDrawListScrollBar. */
 extern int uiSearchPrimary(int);
 
@@ -118,14 +118,14 @@ void FUN_00214dc4(void)
         if (*(char *)(temp_v3 + 0x3f) != '\x01') {
           if (*(char *)(temp_v3 + 0x37) != '0') {
             temp_v7 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
-            FUN_002c0940(temp_v11,
+            textFormatFullWidthNumber(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v7 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
             textFormatBuffer(temp_v10,"%s\x81@%s",temp_v11,temp_v3 + 0x37);
           }
           else {
             temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
-            FUN_002c0940(temp_v11,
+            textFormatFullWidthNumber(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
             textFormatBuffer(temp_v10,"%s",temp_v11);
@@ -135,8 +135,8 @@ void FUN_00214dc4(void)
           temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
           temp_v5 = *(unsigned int *)(temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c);
           temp_v9 = temp_v5 % 0xe10;
-          FUN_002c0940(temp_v11,temp_v5 / 0xe10,temp_v9 * -0x77777777);
-          FUN_002c0940(temp_v12,temp_v9 / 0x3c);
+          textFormatFullWidthNumber(temp_v11,temp_v5 / 0xe10,temp_v9 * -0x77777777);
+          textFormatFullWidthNumber(temp_v12,temp_v9 / 0x3c);
           textFormatBuffer(temp_v10,&LAB_00215248,temp_v11,temp_v12);
         }
         puVar9 = temp_v10;

@@ -1,8 +1,8 @@
 #include "common.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 
-extern int dialogOpen(int mode, int flag);
 extern const char *scrGetArgString(s32 index);
 extern int infoWinExpandAndSetText(const char *text);
 extern int infoWinSetTimer(u32 arg);

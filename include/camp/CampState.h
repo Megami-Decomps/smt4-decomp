@@ -16,7 +16,9 @@ struct CampSkillEntry {
 
 typedef struct CampState {
     /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[0x10];
+    /* 0x0004 */ u8 unk0004[8];
+    /* 0x000C */ u32 unk000C;               /* FUN_002e24c8()'s result when menu item 0x1A opens */
+    /* 0x0010 */ u8 unk0010[4];
     /* 0x0014 */ u32 substep;
     /* 0x0018 */ s32 state;
     /* 0x001C */ s32 phase;
@@ -63,11 +65,17 @@ typedef struct CampState {
     /* 0x21B0 */ u16 bodyIds[120];
     /* 0x22A0 */ u16 legsIds[120];
     /* 0x2390 */ u16 accessoryIds[120];
-    /* 0x2480 */ u8 unk2480[0x10];
+    /* 0x2480 */ u8 unk2480[0xC];
+    /* 0x248C */ u8 questMenuOpened;        /* set by menu item 0x1B (quest menu) */
+    /* 0x248D */ u8 questListOpened;        /* set by menu item 0x1C (quest list) */
+    /* 0x248E */ u8 uniteMode3Opened;       /* set by menu item 0x2F (unite mode 3) */
+    /* 0x248F */ u8 unk248F;
     /* 0x2490 */ s32 categoryTimers[25];   /* index 0 is the player, 1..24 the unit slots */
     /* 0x24F4 */ s32 categoryIndices[25];
     /* 0x2558 */ u32 categoryColors[25];
-    /* 0x25BC */ u8 unk25BC[8];
+    /* 0x25BC */ u8 unk25BC;
+    /* 0x25BD */ u8 slotRequestPending;     /* set by menu item 7 with slot request 10 */
+    /* 0x25BE */ u8 unk25BE[6];
 } CampState;
 
 typedef char CampStateMenuGridOffsetCheck[offsetof(CampState, menuGrid) == 0x34 ? 1 : -1];
@@ -79,6 +87,8 @@ typedef char CampStateTouchOffsetCheck[offsetof(CampState, touchRegions) == 0xDF
 typedef char CampStateSkillsOffsetCheck[offsetof(CampState, skills) == 0xE3C ? 1 : -1];
 typedef char CampStateIdsOffsetCheck[offsetof(CampState, accessoryIds) == 0x2390 ? 1 : -1];
 typedef char CampStateCategoryOffsetCheck[offsetof(CampState, categoryColors) == 0x2558 ? 1 : -1];
+typedef char CampStateMenuFlagsOffsetCheck[offsetof(CampState, unk000C) == 0xC &&
+    offsetof(CampState, questMenuOpened) == 0x248C && offsetof(CampState, slotRequestPending) == 0x25BD ? 1 : -1];
 typedef char CampStateSizeCheck[sizeof(CampState) == 0x25C4 ? 1 : -1];
 
 #ifdef __cplusplus

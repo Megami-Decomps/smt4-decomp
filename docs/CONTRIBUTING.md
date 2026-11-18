@@ -270,6 +270,8 @@ a sibling setter or another user of the same lookup is usually written the same 
   the nested block that uses it, the earlier tail calls come back.
 
 **Locals, constants and literal pools**
+- In a `switch` on a mode, a work pointer declared inside each `case` (`T *work = g_x;`) puts the
+  global's pool word before the float constants the cases share; one declared at the top puts it after.
 - A local pointer to a global moves its pool word earlier; a constant passed through a
   `static __inline` helper's parameter moves it later, or keeps it in a callee-saved register;
   named locals declared in retail's pool order fix the order of constants.
@@ -283,6 +285,9 @@ a sibling setter or another user of the same lookup is usually written the same 
   integer stores, float members included, where field-by-field `0.0f` stores use VFP registers.
 - Reading `table->count` at each use instead of caching it in a local changes which registers the
   loop's values get; try both before calling a difference allocation.
+- A lone `mov r0, #const` where a call would be, followed by a reload of a value the call would have
+  clobbered, is a linker-inlined constant getter: write the call and add an `inlined.txt` row
+  (`titleConfigUpdate`'s default volumes).
 - A caller that sign-extends a value it passes (`sxth`) usually means the field it came from is
   `s16`; change the field and the prototypes together.
 - Conversions through `static __inline f32 get(p) { return p->field; }`; rounding as

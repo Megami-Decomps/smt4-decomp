@@ -1,5 +1,6 @@
 /* NON_MATCHING: script-start inline NOPs, global load ordering and merged state/timer stores differ from retail. */
 #include "camp/CampScriptCleanup.h"
+#include "ui/UiControl.h"
 #include "addon/aocMain.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -44,7 +45,6 @@ u16 flaggedValueHolderGetTotal(const FlaggedValueHolder *value);
 s32 tableGroupFindEntryIndex(const void *script, const char *entry);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void *asdLoadFileSyncDefault(const char *path);
-void dialogOpen(s32 mode);
 void infoWinSetMessage(void *window, u32 message);
 
 void FUN_003b8c40(CampResultStateView *work)
@@ -82,13 +82,13 @@ void FUN_003b8c40(CampResultStateView *work)
         scrScriptProcessStartEntry(work->resultProcess, tableGroupFindEntryIndex(work->resultScript, "ProcCharonRequestFirst"));
         break;
     case 4:
-        dialogOpen(0);
+        dialogOpen(0, 0);
         infoWinSetMessage(work->informationWindow, work->message->message);
         work->state = 5;
         work->timer = 0;
         break;
     default:
-        dialogOpen(0);
+        dialogOpen(0, 0);
         infoWinSetMessage(work->informationWindow, work->message->message);
         work->state = 5;
         work->timer = 0;

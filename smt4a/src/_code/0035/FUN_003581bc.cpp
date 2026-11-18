@@ -24,7 +24,7 @@ extern MapDepartView *g_mapDepart;
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
-void FUN_002c0940(u8 text[64], s32 value);
+void textFormatFullWidthNumber(u8 text[64], s32 value);
 f32 fontMeasureTextWidth(u8 text[64], u32 style, f32 scale);
 
 /* Draws the departure screen's counter panel under a temporary render-state preset. */
@@ -53,7 +53,7 @@ u32 FUN_003581bc(void)
             }
             TextureTableEntryIV *digits = asdTMTexTableEntryAt(29, 203);
             u8 text[64];
-            FUN_002c0940(text, counter);
+            textFormatFullWidthNumber(text, counter);
             f32 width = fontMeasureTextWidth(text, 3, 1.0f);
             textDrawString(3, 0x57d8ffff, (const char *)text,
                          panel->x + digits->x + x + (56 - (s32)width) / 2,

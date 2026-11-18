@@ -13,7 +13,7 @@ int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int uiDrawDataEntryRow(...);
-int FUN_0022f9c8(...);
+int uniteDrawOptionRow(...);
 int FUN_0023dcec(...);
 int resourceRunOperationIfUnblocked(...);
 int VectorSignedToFloat(...);
@@ -41,7 +41,7 @@ extern unsigned char LAB_00285f24; /* 0x285f24 */
 /* Supplied declaration required: FUN_00180310. */
 extern int uniteGetWork(void);
 /* Supplied declaration required: uiDrawDataEntryRow. */
-/* Supplied declaration required: FUN_0022f9c8. */
+/* Supplied declaration required: uniteDrawOptionRow. */
 /* Supplied declaration required: FUN_0023dcec. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int listCursorGetRowIfUnblocked(int);
@@ -189,7 +189,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
                   } while (temp_v6 < temp_v5);
                 }
                 temp_v7 = temp_v13 + temp_v7;
-                FUN_0022f9c8(temp_v0,temp_v5,param_1 + temp_v10,param_2 + temp_v12,0,
+                uniteDrawOptionRow(temp_v0,temp_v5,param_1 + temp_v10,param_2 + temp_v12,0,
                              (int)*(char *)(temp_v7 + 0x10));
                 if (*(char *)(temp_v7 + 0x10) == '\0') break;
               }
@@ -228,7 +228,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
                 temp_v4 = temp_v4 + 1;
               } while (temp_v4 < temp_v10);
             }
-            FUN_0022f9c8(temp_v0,temp_v10,*(short *)(temp_v1 + 8) + param_1,
+            uniteDrawOptionRow(temp_v0,temp_v10,*(short *)(temp_v1 + 8) + param_1,
                          *(short *)(temp_v1 + 10) + param_2,1,(int)*(char *)(temp_v13 + temp_v9 + 0x10)
                         );
           }

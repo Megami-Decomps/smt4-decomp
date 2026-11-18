@@ -5,19 +5,7 @@
 #include "gamedata/UnitRecordAccess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/RenderCtxTitle.h"
-
-// Status icon strip of one party member: only the fields used here.
-struct StatusStrip {
-    u8 unk00[0x18];
-    s32 scroll;             // 0x18
-    s32 cursor;             // 0x1c
-    u8 unk20[2];
-    u8 isPlayerVariant;     // 0x22
-    u8 unk23[9];
-    s32 originX;            // 0x2c
-    s32 originY;            // 0x30
-    s32 member;             // 0x34: unit index, negative for the player
-};
+#include "status/StatusStrip.h"
 
 extern "C" {
 
@@ -30,7 +18,7 @@ static void setDrawState(s32 value)
 
 // Draws the status ailment icons of a member; with two or more it also draws the
 // icon that follows the highlighted one, offset by the scroll position.
-void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
+void statusStripDrawAilments(StatusStrip* strip, s32 x, s32 y)
 {
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;

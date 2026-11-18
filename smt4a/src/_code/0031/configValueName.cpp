@@ -38,7 +38,7 @@ static __inline s32 partySlotRow(s16 slot)
 }
 
 /* The display name of party slot `index` (0..4) from data table 0x36; placeholder texts when the table is not loaded or the index is out of range. */
-const char *FUN_0031a914(s32 index)
+const char *configValueName(s32 index)
 {
     const char *result;
 

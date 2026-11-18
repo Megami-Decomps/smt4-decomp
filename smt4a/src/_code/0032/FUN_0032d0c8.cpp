@@ -8,7 +8,7 @@
 
 extern "C" {
 void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
-void FUN_002c0940(char *output, s32 value);
+void textFormatFullWidthNumber(char *output, s32 value);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void battleAttributeFormatName(char *out, s32 kind);
 void skillFormatTargetLabel(char *text, s32 target);
@@ -34,8 +34,8 @@ void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 devilId, u32 extr
     } else {
         char low[8];
         char high[8];
-        FUN_002c0940(low, devil->attack.minHits);
-        FUN_002c0940(high, devil->attack.maxHits);
+        textFormatFullWidthNumber(low, devil->attack.minHits);
+        textFormatFullWidthNumber(high, devil->attack.maxHits);
         textFormatBuffer(text, "%s\x81\x60%s", low, high);
         scrSetStringSlot(37, text);
     }

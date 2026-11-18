@@ -173,14 +173,17 @@ def string_end(code, to):
     return stop + 1 if stop >= 0 else -1
 
 
-def literal_pools(entry, code, thumb):
+def literal_pools(entry, code, thumb, sized=0):
     """(merged data ranges, words a PC-relative LDR reads, end) of an ARM/Thumb function, as
     byte offsets: A32 LDR/LDRD/VLDR and Thumb LDR with PC as the base. One pass in address
     order, so a pool word is data when the scan reaches it and is not decoded. A PC-relative
     ADD/ADR addresses a string literal armcc placed among the pools (C code takes no address of a
     label): data up to its NUL, rounded up to the word. `end` is where the bytes end once every
     pool they read and every string they address is counted (past `code` when one lies behind it;
-    a string not ended inside `code` asks for one more word)."""
+    a string not ended inside `code` asks for one more word). `sized`: the size config/symbols.txt
+    gives the function. A constant addressed right after the last pool word a load reads that starts
+    with a zero byte, when that size reaches past it, is the function's trailing data up to that size
+    (a local aggregate's initializer), not an empty string."""
     length = len(code)
     skew = entry % 4
     data, ranges, words, addressed = set(), [], [], []
@@ -261,7 +264,11 @@ def literal_pools(entry, code, thumb):
                 table, count = switch_table(code, at)
                 read(table, count * 4, False)
     word_end = lambda offset: offset + (4 - (offset + skew) % 4) % 4   # up to the next word of the image
+    pool_end = max((end for _start, end in ranges), default=None)  # past the last word a load reads
     for to in addressed:
+        if to == pool_end and to < min(sized, length) and not code[to]:
+            ranges.append((to, min(sized, length)))
+            continue
         if to >= length:
             if to < length + 4096:
                 reach = max(reach, word_end(to + 1))
@@ -546,7 +553,7 @@ class Module:
         if not code:
             return None
         low, high = address, address + size
-        pools, words, end = literal_pools(address, code, thumb)
+        pools, words, end = literal_pools(address, code, thumb, size)
         # The pools a function's loads read and the strings it addresses follow its last instruction
         # and belong to its object: take them in while they end before the next function.
         following = bisect.bisect_right(self.starts, address)
@@ -556,7 +563,7 @@ class Module:
             if longer is None:
                 break
             code = longer
-            pools, words, end = literal_pools(address, code, thumb)
+            pools, words, end = literal_pools(address, code, thumb, size)
         # A jump inside the function is control flow; a call to its own entry is recursion (a call
         # past its last instruction, in the pool area taken in above, is not part of the function).
         branches = [(origin, to, self.names[to]) for origin, to, links in direct_branches(address, code, thumb, pools)

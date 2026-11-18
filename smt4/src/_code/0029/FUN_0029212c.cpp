@@ -7,7 +7,7 @@ extern "C" {
 
 int skillFormatTargetLabel(...);
 int btlFormatCategoryLabel(...);
-int FUN_002907c4(...);
+int textFormatFullWidthNumber(...);
 int textEncodeFontSlot(...);
 int asdTextDrawDirectoryEntry(...);
 int FUN_0029ede8(...);
@@ -35,7 +35,7 @@ extern int DAT_0043da2c; /* 0x43da2c */
 
 /* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: btlFormatCategoryLabel. */
-/* Supplied declaration required: FUN_002907c4. */
+/* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: textEncodeFontSlot. */
 extern int FUN_00295cec(void);
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
@@ -145,8 +145,8 @@ void FUN_0029212c(int param_1)
       FUN_0029ede8(0x25,temp_v0 & 0xf,0xffffffff,0);
     }
     else {
-      FUN_002907c4(temp_v13,temp_v0 & 0xf);
-      FUN_002907c4(temp_v14,*(unsigned char *)(temp_v5 + 0x58) >> 4);
+      textFormatFullWidthNumber(temp_v13,temp_v0 & 0xf);
+      textFormatFullWidthNumber(temp_v14,*(unsigned char *)(temp_v5 + 0x58) >> 4);
       textFormatBuffer(&temp_v12,"%s\x81`%s",temp_v13,temp_v14);
       textEncodeFontSlot(0x25,&temp_v12);
     }
@@ -189,7 +189,7 @@ void FUN_0029212c(int param_1)
       if (temp_v10 < 0) {
         temp_v11 = -temp_v10;
       }
-      FUN_002907c4(temp_v18,temp_v11);
+      textFormatFullWidthNumber(temp_v18,temp_v11);
       if (temp_v10 != 0) {
         if (temp_v10 >= 1) {
           textFormatBuffer(&temp_v12,"\x81{%s");

@@ -77,7 +77,7 @@ extern const u8 DAT_00401c6c[];   /* the draw-parameter chunks lie in front of i
 
 void FUN_001f50ac(void *pool);
 void uiInitializeFourTimerSet(void *timers);
-void FUN_00199b9c(void *detail, BtlSetupSource *source);
+void btlUiPartyDisplayInit(void *detail, BtlSetupSource *source);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
 void *asdOperatorNew(u32 size, BtlSetupSource *owner);
@@ -92,7 +92,7 @@ void FUN_003ad76c(void *unused, BtlSetupSource *source)
     block->unk7E9E = 0;
     FUN_001f50ac(block->pool + 0);
     uiInitializeFourTimerSet(block->timers);
-    FUN_00199b9c(block->detail, source);
+    btlUiPartyDisplayInit(block->detail, source);
     block = g_btlUiBlock;
     block->cardA = 0;
     block->cardC = 0;

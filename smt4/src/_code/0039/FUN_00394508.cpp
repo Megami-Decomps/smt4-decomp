@@ -1,4 +1,4 @@
-/* NON_MATCHING: jump-kind branches and saved transform copy scheduling differ. */
+/* NON_MATCHING: the constant 1 shared by the saved-location flags is kept in a callee-saved register (r6) through the final controller store, where retail holds it in r1 and rematerialises 1 at the end; the kind-2 area/object stores do not pair into stm. */
 #include "map/MapJumpTransition.h"
 #include "map/mapDepart.h"
 #include "addon/aocMain.h"
@@ -32,7 +32,6 @@ static __inline void saveJumpTransform(const MapJumpRequest *request)
 extern "C" void FUN_00394508(AocScriptHolder *controller)
 {
     const MapJumpRequest *request = gameJumpRequestGet();
-    u32 map;
     if (request->kind == 1) {
         g_gameState.map.savedLocationSet = 1;
         g_gameState.savedMapId = request->map;
@@ -51,10 +50,10 @@ extern "C" void FUN_00394508(AocScriptHolder *controller)
         g_gameState.map.savedLocationSet = 1;
         g_gameState.savedMapId = request->map;
         g_gameState.savedAreaId = 0;
-        map = request->map;
+        u32 map = request->map;
         asdSequenceRequest(14, &map, sizeof(map));
     } else if (gameStateIsFlagSetAndLarge() != 0) {
-        map = g_gameState.savedMapId - 200;
+        u32 map = g_gameState.savedMapId - 200;
         asdSequenceRequest(14, &map, sizeof(map));
     } else if (FUN_002080e8() != 0) {
         asdSequenceRequest(8, NULL, 0);

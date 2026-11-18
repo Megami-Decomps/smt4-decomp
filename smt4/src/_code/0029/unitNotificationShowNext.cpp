@@ -1,5 +1,5 @@
-/* NON_MATCHING: resource slot and distinct message paths match; one address-add schedule and dialog-mode constant setup differ. */
 #include "gamedata/UnitStats.h"
+#include "ui/UiControl.h"
 #include "code/Code002b_Smt4.h"
 #include "gamedata/UnitRecordAccess.h"
 
@@ -14,7 +14,6 @@ struct UnitNotificationView {
 typedef char UnitNotificationOffsets[offsetof(UnitNotificationView, current) == 0xCFC8 &&
     offsetof(UnitNotificationView, count) == 0xCFCA ? 1 : -1];
 extern "C" {
-s32 dialogIsActive();
 s32 dialogGetTimer();
 void infoWinStartTimer(s32);
 const char *dataTable01FindByIdWithAoc(u32);
@@ -22,11 +21,11 @@ const char *demonGetRaceLabel(u16, u32);
 char *libc_strcpy(char *, const char *);
 void textEncodeFontSlot(u32, const char *);
 void infoWinSetMessage(u32, u32);
-void dialogOpen(u8);
 void infoWinSetTimer(s32);
 void infoWinSetValue(s32);
 
-void FUN_00295f54(UnitNotificationView *notifications, s32)
+/* Shows the next queued unit notification in the info window (the generic message for slot 0, else the unit's name and race). */
+void unitNotificationShowNext(UnitNotificationView *notifications, s32)
 {
     if (!notifications->count || notifications->count == notifications->current)
         return;
@@ -36,7 +35,6 @@ void FUN_00295f54(UnitNotificationView *notifications, s32)
             infoWinStartTimer(1);
         return;
     }
-    u32 *messages = &notifications->messages;
     s16 index = -1;
     for (s32 i = 0; i < 25; ++i) {
         if (notifications->order[i] == notifications->current) {
@@ -45,7 +43,7 @@ void FUN_00295f54(UnitNotificationView *notifications, s32)
         }
     }
     if (index == 0) {
-        infoWinSetMessage(*messages, 200);
+        infoWinSetMessage(notifications->messages, 200);
     } else {
         const StatBlock *unit = gameGetUnitRecord(index - 1);
         char text[32] = {};
@@ -53,10 +51,10 @@ void FUN_00295f54(UnitNotificationView *notifications, s32)
         textEncodeFontSlot(8, text);
         libc_strcpy(text, demonGetRaceLabel(unit->id, 0));
         textEncodeFontSlot(16, text);
-        infoWinSetMessage(*messages, 201);
+        infoWinSetMessage(notifications->messages, 201);
     }
     ++notifications->current;
-    dialogOpen(1);
+    dialogOpen(1, 1);
     if (notifications->count == notifications->current) {
         infoWinSetTimer(-1);
         infoWinSetValue(0);

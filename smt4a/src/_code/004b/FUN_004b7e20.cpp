@@ -197,7 +197,7 @@ void FUN_004b7e20(int param_1)
       *(unsigned char *)(param_1 + 0xa88) = 0;
       DAT_0058800c = 0;
       buttonHelpSetPanelState(1);
-      dialogOpen(0);
+      dialogOpen(0, 0);
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
       return;
     }
@@ -227,7 +227,7 @@ void FUN_004b7e20(int param_1)
   }
   *(unsigned int *)(param_1 + 0x2c) = 0;
   *(unsigned int *)(param_1 + 0x28) = 5;
-  dialogOpen(0);
+  dialogOpen(0, 0);
   infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f))
   ;
   DAT_0058800c = 0;

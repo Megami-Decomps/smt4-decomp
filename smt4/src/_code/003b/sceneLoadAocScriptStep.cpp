@@ -1,4 +1,5 @@
 #include "addon/QuestScriptLoader.h"
+#include "ui/UiControl.h"
 #include "addon/aocMain.h"
 #include "font/PlaceWin.h"
 
@@ -8,7 +9,6 @@ int buttonHelpSelectByProgress(void *scene);
 int FUN_002305e8(int a);
 u32 FUN_002736e8(AocScriptHolder *loader);
 int FUN_0027db24(int a);
-int dialogOpen(int a, int b);
 int infoWinSetMessage(u32 a, int b);
 int buttonHelpSetPreset(int preset);
 

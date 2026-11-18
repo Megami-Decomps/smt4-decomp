@@ -1,4 +1,4 @@
-/* NON_MATCHING: Centered text metric loads, integer-to-float conversion order and color/zero literal order differ. */
+/* NON_MATCHING: the centring offset's halving folds into the add (retail keeps a separate asr and adds the left edge to it), the label's y is computed before x, and the 0.0f literal pools before the colour. */
 #include "gfx/UiControlDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -27,9 +27,8 @@ void FUN_0041b060(FramedBadgeOwner *owner, const UiScaledDrawPosition *position,
     }
     TextureTableEntryIV *metrics = asdTMTexTableEntryAt(0x2B, 0x8A);
     s32 width = fontMeasureLineAdvance(text, 4);
-    textDrawString(4, 0x646464FF, text,
-                 (f32)((metrics->placement->width - width) / 2 + (position->x + metrics->x)),
-                 (f32)(metrics->y + position->y), 0.0f, 0.0f, position->speed);
+    s32 offset = (metrics->placement->width - width) / 2;
+    textDrawString(4, 0x646464FF, text, (f32)(offset + (position->x + metrics->x)), (f32)(metrics->y + position->y), 0.0f, 0.0f, position->speed);
     texDrawTableEntryAtStoredOrigin(2, 0x2B, 0x96, position->x, position->y, 2);
     texDrawTableEntryAtStoredOrigin(2, 0x2B, owner->frame, position->x, position->y, 2);
     FUN_0041af74(owner, value, position, 0x646464FF);

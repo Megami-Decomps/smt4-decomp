@@ -108395,13 +108395,13 @@
       "target_path": "orig/target/_code/camp/Config/Config/configOpen.o"
     },
     {
-      "base_path": "build/obj/_code/camp/Config/Config/FUN_00202ea4.o",
+      "base_path": "build/obj/_code/camp/Config/Config/configUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00202ea4",
+            "name": "configUpdate",
             "size": 2720,
             "vram": "0x202ea4"
           }
@@ -108410,10 +108410,10 @@
           "_code",
           "camp/Config/Config"
         ],
-        "source_path": "src/_code/camp/Config/Config/FUN_00202ea4.cpp"
+        "source_path": "src/_code/camp/Config/Config/configUpdate.cpp"
       },
-      "name": "_code/camp/Config/Config/FUN_00202ea4",
-      "target_path": "orig/target/_code/camp/Config/Config/FUN_00202ea4.o"
+      "name": "_code/camp/Config/Config/configUpdate",
+      "target_path": "orig/target/_code/camp/Config/Config/configUpdate.o"
     },
     {
       "base_path": "build/obj/_code/0020/FUN_00203950.o",
@@ -111270,13 +111270,13 @@
       "target_path": "orig/target/_code/0021/FUN_0021c424.o"
     },
     {
-      "base_path": "build/obj/_code/battle/btlDebug/FUN_0021c45c.o",
+      "base_path": "build/obj/_code/battle/btlDebug/btlUiPartyDisplayInit.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0021c45c",
+            "name": "btlUiPartyDisplayInit",
             "size": 3232,
             "vram": "0x21c45c"
           }
@@ -111285,10 +111285,10 @@
           "_code",
           "battle/btlDebug"
         ],
-        "source_path": "src/_code/battle/btlDebug/FUN_0021c45c.cpp"
+        "source_path": "src/_code/battle/btlDebug/btlUiPartyDisplayInit.cpp"
       },
-      "name": "_code/battle/btlDebug/FUN_0021c45c",
-      "target_path": "orig/target/_code/battle/btlDebug/FUN_0021c45c.o"
+      "name": "_code/battle/btlDebug/btlUiPartyDisplayInit",
+      "target_path": "orig/target/_code/battle/btlDebug/btlUiPartyDisplayInit.o"
     },
     {
       "base_path": "build/obj/_code/battle/btlDebug/FUN_0021d13c.o",
@@ -113612,13 +113612,13 @@
       "target_path": "orig/target/_code/0022/uiDrawDataEntryRow.o"
     },
     {
-      "base_path": "build/obj/_code/0022/FUN_0022f9c8.o",
+      "base_path": "build/obj/_code/0022/uniteDrawOptionRow.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0022f9c8",
+            "name": "uniteDrawOptionRow",
             "size": 420,
             "vram": "0x22f9c8"
           }
@@ -113626,10 +113626,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0022/FUN_0022f9c8.cpp"
+        "source_path": "src/_code/0022/uniteDrawOptionRow.cpp"
       },
-      "name": "_code/0022/FUN_0022f9c8",
-      "target_path": "orig/target/_code/0022/FUN_0022f9c8.o"
+      "name": "_code/0022/uniteDrawOptionRow",
+      "target_path": "orig/target/_code/0022/uniteDrawOptionRow.o"
     },
     {
       "base_path": "build/obj/_code/0022/statusDownDrawIndicatorPairs.o",
@@ -129628,13 +129628,13 @@
       "target_path": "orig/target/_code/event/2dEvent/EventEffect/FUN_002a4334.o"
     },
     {
-      "base_path": "build/obj/_code/event/2dEvent/EventEffect/FUN_002a4488.o",
+      "base_path": "build/obj/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a4488",
+            "name": "eventSnowNoiseUpdate",
             "size": 440,
             "vram": "0x2a4488"
           }
@@ -129643,10 +129643,10 @@
           "_code",
           "event/2dEvent/EventEffect"
         ],
-        "source_path": "src/_code/event/2dEvent/EventEffect/FUN_002a4488.cpp"
+        "source_path": "src/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.cpp"
       },
-      "name": "_code/event/2dEvent/EventEffect/FUN_002a4488",
-      "target_path": "orig/target/_code/event/2dEvent/EventEffect/FUN_002a4488.o"
+      "name": "_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate",
+      "target_path": "orig/target/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.o"
     },
     {
       "base_path": "build/obj/_code/002a/gameDataBlocksValueGet.o",
@@ -130150,13 +130150,13 @@
       "target_path": "orig/target/_code/002a/texTableRefAcquire.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002a4cfc.o",
+      "base_path": "build/obj/_code/002a/campMenuRunSelectedItem.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a4cfc",
+            "name": "campMenuRunSelectedItem",
             "size": 4088,
             "vram": "0x2a4cfc"
           }
@@ -130164,10 +130164,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002a4cfc.cpp"
+        "source_path": "src/_code/002a/campMenuRunSelectedItem.cpp"
       },
-      "name": "_code/002a/FUN_002a4cfc",
-      "target_path": "orig/target/_code/002a/FUN_002a4cfc.o"
+      "name": "_code/002a/campMenuRunSelectedItem",
+      "target_path": "orig/target/_code/002a/campMenuRunSelectedItem.o"
     },
     {
       "base_path": "build/obj/_code/002a/FUN_002a5cf4.o",
@@ -132525,13 +132525,13 @@
       "target_path": "orig/target/_code/battle/btlCamera/btlCameraCreate.o"
     },
     {
-      "base_path": "build/obj/_code/battle/btlEditor/FUN_002b50e4.o",
+      "base_path": "build/obj/_code/battle/btlEditor/btlEditorCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002b50e4",
+            "name": "btlEditorCreate",
             "size": 332,
             "vram": "0x2b50e4"
           }
@@ -132540,10 +132540,10 @@
           "_code",
           "battle/btlEditor"
         ],
-        "source_path": "src/_code/battle/btlEditor/FUN_002b50e4.cpp"
+        "source_path": "src/_code/battle/btlEditor/btlEditorCreate.cpp"
       },
-      "name": "_code/battle/btlEditor/FUN_002b50e4",
-      "target_path": "orig/target/_code/battle/btlEditor/FUN_002b50e4.o"
+      "name": "_code/battle/btlEditor/btlEditorCreate",
+      "target_path": "orig/target/_code/battle/btlEditor/btlEditorCreate.o"
     },
     {
       "base_path": "build/obj/_code/battle/btlEffect/btlEffectCreateTasks.o",
@@ -134964,13 +134964,13 @@
       "target_path": "orig/target/_code/002c/bitTableIndexIsClear.o"
     },
     {
-      "base_path": "build/obj/_code/002c/FUN_002c0940.o",
+      "base_path": "build/obj/_code/002c/textFormatFullWidthNumber.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002c0940",
+            "name": "textFormatFullWidthNumber",
             "size": 416,
             "vram": "0x2c0940"
           }
@@ -134978,10 +134978,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002c/FUN_002c0940.cpp"
+        "source_path": "src/_code/002c/textFormatFullWidthNumber.cpp"
       },
-      "name": "_code/002c/FUN_002c0940",
-      "target_path": "orig/target/_code/002c/FUN_002c0940.o"
+      "name": "_code/002c/textFormatFullWidthNumber",
+      "target_path": "orig/target/_code/002c/textFormatFullWidthNumber.o"
     },
     {
       "base_path": "build/obj/_code/002c/FUN_002c0b10.o",
@@ -187244,13 +187244,13 @@
       "target_path": "orig/target/_code/0031/FUN_0031a5e4.o"
     },
     {
-      "base_path": "build/obj/_code/0031/FUN_0031a914.o",
+      "base_path": "build/obj/_code/0031/configValueName.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0031a914",
+            "name": "configValueName",
             "size": 160,
             "vram": "0x31a914"
           }
@@ -187258,10 +187258,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0031/FUN_0031a914.cpp"
+        "source_path": "src/_code/0031/configValueName.cpp"
       },
-      "name": "_code/0031/FUN_0031a914",
-      "target_path": "orig/target/_code/0031/FUN_0031a914.o"
+      "name": "_code/0031/configValueName",
+      "target_path": "orig/target/_code/0031/configValueName.o"
     },
     {
       "base_path": "build/obj/_code/network/DataStore/DataStoreMain/dataStoreGetValue50.o",
@@ -199347,13 +199347,13 @@
       "target_path": "orig/target/_code/0034/FUN_003426c0.o"
     },
     {
-      "base_path": "build/obj/_code/camp/CampCec/CampCecEdit/FUN_0034280c.o",
+      "base_path": "build/obj/_code/camp/CampCec/CampCecEdit/campCecEditCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0034280c",
+            "name": "campCecEditCreate",
             "size": 1552,
             "vram": "0x34280c"
           }
@@ -199362,10 +199362,10 @@
           "_code",
           "camp/CampCec/CampCecEdit"
         ],
-        "source_path": "src/_code/camp/CampCec/CampCecEdit/FUN_0034280c.cpp"
+        "source_path": "src/_code/camp/CampCec/CampCecEdit/campCecEditCreate.cpp"
       },
-      "name": "_code/camp/CampCec/CampCecEdit/FUN_0034280c",
-      "target_path": "orig/target/_code/camp/CampCec/CampCecEdit/FUN_0034280c.o"
+      "name": "_code/camp/CampCec/CampCecEdit/campCecEditCreate",
+      "target_path": "orig/target/_code/camp/CampCec/CampCecEdit/campCecEditCreate.o"
     },
     {
       "base_path": "build/obj/_code/0034/FUN_00342e24.o",
@@ -265649,13 +265649,13 @@
       "target_path": "orig/target/_code/0041/FUN_00416e60.o"
     },
     {
-      "base_path": "build/obj/_code/0041/FUN_0041704c.o",
+      "base_path": "build/obj/_code/0041/resultInputOpenStatus.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0041704c",
+            "name": "resultInputOpenStatus",
             "size": 484,
             "vram": "0x41704c"
           }
@@ -265663,10 +265663,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0041/FUN_0041704c.cpp"
+        "source_path": "src/_code/0041/resultInputOpenStatus.cpp"
       },
-      "name": "_code/0041/FUN_0041704c",
-      "target_path": "orig/target/_code/0041/FUN_0041704c.o"
+      "name": "_code/0041/resultInputOpenStatus",
+      "target_path": "orig/target/_code/0041/resultInputOpenStatus.o"
     },
     {
       "base_path": "build/obj/_code/0041/FUN_00417234.o",
@@ -267775,13 +267775,13 @@
       "target_path": "orig/target/_code/0041/Obj42094c__prepareGeometry.o"
     },
     {
-      "base_path": "build/obj/_code/battle/Filter/Filter4Poly/FUN_0041cbac.o",
+      "base_path": "build/obj/_code/battle/Filter/Filter4Poly/filterCreate4Poly.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0041cbac",
+            "name": "filterCreate4Poly",
             "size": 404,
             "vram": "0x41cbac"
           }
@@ -267790,10 +267790,10 @@
           "_code",
           "battle/Filter/Filter4Poly"
         ],
-        "source_path": "src/_code/battle/Filter/Filter4Poly/FUN_0041cbac.cpp"
+        "source_path": "src/_code/battle/Filter/Filter4Poly/filterCreate4Poly.cpp"
       },
-      "name": "_code/battle/Filter/Filter4Poly/FUN_0041cbac",
-      "target_path": "orig/target/_code/battle/Filter/Filter4Poly/FUN_0041cbac.o"
+      "name": "_code/battle/Filter/Filter4Poly/filterCreate4Poly",
+      "target_path": "orig/target/_code/battle/Filter/Filter4Poly/filterCreate4Poly.o"
     },
     {
       "base_path": "build/obj/_code/0041/FUN_0041cd5c.o",

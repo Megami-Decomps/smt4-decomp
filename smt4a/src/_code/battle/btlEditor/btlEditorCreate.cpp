@@ -20,7 +20,7 @@ s32 FUN_004f2708(BtlCameraA* camera, BtlMainStateA* battle, u32 option);
 void FUN_004aa780(void* work, u32 enabled);
 extern BattleEditorGlobalsA g_btlEditor;
 
-void FUN_002b50e4(BtlMainStateA* battle)
+void btlEditorCreate(BtlMainStateA* battle)
 {
     u32 job = taskCreateDraw("btlEditor Calc", 4, 0, 0, FUN_002984d4,
         FUN_003285dc, battle, battle->job);

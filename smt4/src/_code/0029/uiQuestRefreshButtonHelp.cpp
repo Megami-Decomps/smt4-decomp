@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads g_uiQuest a second time for the first page test (ldr r0,[r0]); built reuses the first load. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 
@@ -11,14 +10,14 @@ extern s32 listCursorGetRowIfUnblocked(UiQuestCursor *cursor);
 extern s32 resourceRunOperationIfUnblocked(UiQuestCursor *cursor);
 
 /* Refreshes the quest menu's button help for the current page/selection and queues the matching cursor sounds. */
-void FUN_002905d0(void)
+void uiQuestRefreshButtonHelp(void)
 {
     UiQuest *menu = g_uiQuest;
     UiQuestPanel *panel = &menu->panel;
     u16 current;
 
-    if (menu->panel.detailMode != 0) {
-        if (g_uiQuest->panel.page == 1) {
+    if (panel->detailMode != 0) {
+        if (menu->panel.page == 1) {
             buttonHelpSetPreset(0x6C);
         }
         if (menu->panel.page == 2) {
@@ -31,7 +30,7 @@ void FUN_002905d0(void)
         }
         return;
     }
-    if (g_uiQuest->panel.page == 1) {
+    if (menu->panel.page == 1) {
         buttonHelpSetPreset(0x6F);
     }
     if (menu->panel.page == 2) {

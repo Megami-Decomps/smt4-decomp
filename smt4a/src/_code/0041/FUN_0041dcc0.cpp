@@ -1,4 +1,4 @@
-/* NON_MATCHING: block layout and instruction count now match retail; only register allocation of the profile copy (index in r2 vs r0) and the slot-flag store (r0/r1 swapped) differ */
+/* NON_MATCHING: block layout and the profile copy now match retail; the copy's destination index loads into r2 (retail r0) and the slot-flag store swaps r0/r1. Writing that store as work->base.slotFlags[work->base.selectedSlot] (mixing the two views of the controller) is IDENTICAL but is not a shape the original could have had. */
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "script/scrScriptProcess.h"
 
@@ -73,8 +73,8 @@ void FUN_0041dcc0(SaveLoadControllerA *controller)
             work->operation.finishing = 1;
             if (byteArr5Get3()) {
                 gameDataBlocksReleaseHold(1);
-                const SaveProfileView *save = static_cast<const SaveProfileView *>(gameDataBlocksGetSaveData());
-                __aeabi_memcpy4(work->operation.profiles[controller->selectedSlot], save->profile, sizeof(save->profile));
+                const u32 *profile = static_cast<const SaveProfileView *>(gameDataBlocksGetSaveData())->profile;
+                __aeabi_memcpy4(work->operation.profiles[controller->selectedSlot], profile, sizeof(work->operation.profiles[0]));
                 controller->slotFlags[controller->selectedSlot] = 1;
                 scrScriptProcessStartEntry(work->operation.script, 5);
             } else {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the pulse speed is the linker-inlined vec2GetSpeed and the option blocks now match; only the centred-label arguments are scheduled differently (retail loads anchor->y first and the anchor x after the halved width). */
 #include "camp/Unite/UniteWork.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
@@ -12,7 +11,8 @@ void texDrawCompositeSprite(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 
 const char *dataTableGetEntry24Member(u32 id);
 s32 fontMeasureLineAdvance(const char *text, u32 screen);
 
-void FUN_0022f9c8(UniteWorkA *work, s32 index, s32 x, s32 y, s32 selected, s32 active,
+/* Draws one unite option row: its frame (pulsing while selected), its active marker and its centred name. */
+void uniteDrawOptionRow(UniteWorkA *work, s32 index, s32 x, s32 y, s32 selected, s32 active,
     f32 opacity, f32 fade)
 {
     efctSetSpeed(fade);
@@ -37,8 +37,7 @@ void FUN_0022f9c8(UniteWorkA *work, s32 index, s32 x, s32 y, s32 selected, s32 a
     const char *name = dataTableGetEntry24Member(work->optionNamesA.ids[index]);
     const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(26, 164);
     s32 width = fontMeasureLineAdvance(name, 2);
-    s32 drawX = anchor->x + ((anchor->placement->width - width) / 2 + x);
-    s32 drawY = anchor->y + y;
-    textDrawString(2, color, name, (f32)drawX, (f32)drawY, 0.55f, 0.0f, opacity);
+    s32 offset = (anchor->placement->width - width) / 2;
+    textDrawString(2, color, name, (f32)(anchor->x + (offset + x)), (f32)(anchor->y + y), 0.55f, 0.0f, opacity);
 }
 }

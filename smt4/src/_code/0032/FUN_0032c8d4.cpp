@@ -366,7 +366,7 @@ code_r0x0032d518:
     puVar17[5] = 0;
     if (iVar7 == 0x30) {
       func_0x002419b0();
-      FUN_00275be8(2);
+      frameTexCampSetMode(2);
     }
     break;
   case 5:
@@ -462,7 +462,7 @@ code_r0x0032d518:
     }
     if (iVar7 == 0x30) {
       func_0x002419b0();
-      FUN_00275be8(2);
+      frameTexCampSetMode(2);
     }
     break;
   case 6:
@@ -1343,7 +1343,7 @@ code_r0x0032d518:
     puVar17[7] = 0;
     puVar17[5] = 0;
     func_0x002419b0();
-    FUN_00275be8(2);
+    frameTexCampSetMode(2);
     break;
   case 0x23:
     iVar7 = FUN_00241990();
@@ -1389,7 +1389,7 @@ code_r0x0032d518:
         puVar17[7] = 0;
         puVar17[5] = 0;
         func_0x002419b0();
-        FUN_00275be8(2);
+        frameTexCampSetMode(2);
       }
       else {
         FUN_00299900(0);
@@ -1439,7 +1439,7 @@ code_r0x0032d518:
       puVar3[6] = iVar7;
       if (iVar7 == 0x30) {
         func_0x002419b0();
-        FUN_00275be8(2);
+        frameTexCampSetMode(2);
       }
       if (puVar17[6] == 0x1a) {
         uVar18 = 3;
@@ -1686,7 +1686,7 @@ code_r0x0032f574:
     puVar9[6] = iVar7;
     if (iVar7 == 0x30) {
       func_0x002419b0();
-      FUN_00275be8(2);
+      frameTexCampSetMode(2);
     }
     break;
   case 0x36:

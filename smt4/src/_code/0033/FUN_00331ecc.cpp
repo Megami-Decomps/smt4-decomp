@@ -610,7 +610,7 @@ LAB_003323f0:
                 *(unsigned int *)(iVar7 + 0x14) = 0;
                 *(unsigned int *)(iVar7 + 0x18) = 0x30;
                 func_0x002419b0();
-                FUN_00275be8(2);
+                frameTexCampSetMode(2);
               }
               campReleaseTouchRegions();
             }

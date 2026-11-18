@@ -135,7 +135,7 @@ int FUN_002758d8(void);
 int FUN_002759bc(void);
 int mapDepartSyncModelVisibility(void);
 int FUN_00275bc8(void);
-int FUN_00275be8(...);
+int frameTexCampSetMode(...);
 int frameTexResetFlags(void);
 int FUN_00280ac0(...);
 int FUN_0028a420(...);
@@ -539,7 +539,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_002759bc. */
 /* Supplied declaration required: mapDepartSyncModelVisibility. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275be8. */
+/* Supplied declaration required: frameTexCampSetMode. */
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_00275dec. */
 /* Supplied declaration required: battlePrepareEncounter. */
@@ -2955,7 +2955,7 @@ LAB_001bb1d4:
     if (puVar14[10] == 10) {
       DAT_0049fb48 = 1;
       FUN_00275dc4();
-      FUN_00275be8(1);
+      frameTexCampSetMode(1);
       FUN_00275bc8();
     }
     if (puVar14[10] == 0xb) {
@@ -3062,7 +3062,7 @@ LAB_001bb1d4:
     if (temp_v9 == 0) {
       return 0;
     }
-    FUN_00275be8(0);
+    frameTexCampSetMode(0);
     if (DAT_0049f950 != '\0') {
       temp_v9 = 0x6f;
       temp_v16 = 0;
@@ -3101,7 +3101,7 @@ LAB_001bb1d4:
       return 0;
     }
     if (puVar14[10] == 0) {
-      FUN_00275be8(0);
+      frameTexCampSetMode(0);
     }
     temp_v9 = puVar14[10];
     puVar14[10] = temp_v9 + 1;

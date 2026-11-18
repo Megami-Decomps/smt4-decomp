@@ -29,7 +29,7 @@ int VectorUnsignedToFloat(...);
 
 int FUN_001afc0c(void);
 int FUN_00290404(void);
-int FUN_002905d0(void);
+int uiQuestRefreshButtonHelp(void);
 int scrScriptProcessStartEntry(...);
 int scrScriptProcessCreate(unsigned int, unsigned int);
 int buttonHelpGetMode(void);
@@ -62,7 +62,7 @@ extern unsigned char FUN_00290248(unsigned short);
 extern int gameJumpRequestIsPending(void);
 /* Supplied declaration required: rosterGetLeaderId. */
 /* Supplied declaration required: FUN_00290404. */
-/* Supplied declaration required: FUN_002905d0. */
+/* Supplied declaration required: uiQuestRefreshButtonHelp. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: scrScriptProcessCreate. */
 extern int messageMainGetChoiceResult(void);
@@ -153,7 +153,7 @@ unsigned int FUN_001956c4(void)
       temp_v3 = ifTouchRegionAddRequested(0x29,0xc1);
       *(unsigned short *)(temp_v1 + 0x9f6) = temp_v3;
       *(short *)(temp_v1 + 0x9f8) = *(short *)(temp_v1 + 0x9f8) + 3;
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
       FUN_00290404();
       temp_v11 = gameFlagIsSet(0x215);
       if (temp_v11 == 0) {
@@ -377,7 +377,7 @@ unsigned int FUN_001956c4(void)
       }
     }
     else {
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
     }
     temp_v7 = 4;
     temp_v11 = g_uiQuest;
@@ -397,7 +397,7 @@ unsigned int FUN_001956c4(void)
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
     }
@@ -440,7 +440,7 @@ unsigned int FUN_001956c4(void)
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
     }
@@ -475,7 +475,7 @@ unsigned int FUN_001956c4(void)
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
     }
@@ -522,7 +522,7 @@ unsigned int FUN_001956c4(void)
       return 0;
     }
     FUN_00290404();
-    FUN_002905d0();
+    uiQuestRefreshButtonHelp();
     temp_v7 = 2;
     break;
   case 10:
@@ -531,7 +531,7 @@ unsigned int FUN_001956c4(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002905d0();
+    uiQuestRefreshButtonHelp();
     temp_v7 = 2;
     break;
   case 0xb:
@@ -543,7 +543,7 @@ unsigned int FUN_001956c4(void)
     temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
       temp_v7 = 2;
       break;
     }
@@ -576,7 +576,7 @@ unsigned int FUN_001956c4(void)
     temp_v11 = gameFlagIsSet(0x216);
     if (temp_v11 == 0) {
       FUN_00290404();
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
       temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
       temp_v5 = listCursorGetRowIfUnblocked(temp_v1 + 0x660);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
@@ -624,7 +624,7 @@ unsigned int FUN_001956c4(void)
 joined_r0x0019627c:
       if (temp_v0 == '\0') {
         FUN_00290404();
-        FUN_002905d0();
+        uiQuestRefreshButtonHelp();
         temp_v7 = 2;
         break;
       }
@@ -673,7 +673,7 @@ joined_r0x0019627c:
       return 0;
     }
     FUN_00290404();
-    FUN_002905d0();
+    uiQuestRefreshButtonHelp();
     temp_v7 = 2;
     break;
   case 0x11:
@@ -849,7 +849,7 @@ joined_r0x0019627c:
       return 0;
     }
     if (*(char *)(temp_v1 + 0x5f0) == '\0') {
-      FUN_002905d0();
+      uiQuestRefreshButtonHelp();
       FUN_00290404();
       if (*(char *)(temp_v1 + 0x5f6) != '\0') {
         temp_v11 = resourceRunOperationIfUnblocked(temp_v1 + 0x660);
@@ -1122,7 +1122,7 @@ joined_r0x0019627c:
       return 0;
     }
     useCounterRelease();
-    FUN_002905d0();
+    uiQuestRefreshButtonHelp();
     FUN_00290404();
     temp_v7 = 2;
   }

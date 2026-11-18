@@ -17,7 +17,7 @@ struct PackedNumberPanelView {
 typedef char PackedNumberPanelValueOffsetCheck[offsetof(PackedNumberPanelView, packedValue) == 0x7E3C ? 1 : -1];
 
 extern "C" {
-void FUN_002c0940(char *, u32);
+void textFormatFullWidthNumber(char *, u32);
 f32 fontMeasureTextWidth(const char *, u32, f32);
 void gxResetColorQuadToWhite(void);
 
@@ -34,7 +34,7 @@ void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
     if (value > 9999)
         value = 9999;
     const TextureTableEntryIV *number = asdTMTexTableEntryAt(0x1D, 0xCB);
-    FUN_002c0940(text, value);
+    textFormatFullWidthNumber(text, value);
     s32 width = static_cast<s32>(fontMeasureTextWidth(text, 3, 1.0f));
     s32 textX = anchor->x + number->x + x + (56 - width) / 2;
     s32 textY = anchor->y + number->y + y;

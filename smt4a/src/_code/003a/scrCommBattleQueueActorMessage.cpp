@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail duplicates return epilogues and schedules outgoing stack stores later; alternate optimization may fix these differences. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
@@ -38,31 +37,30 @@ u8 scrCommBattleQueueActorMessage()
     }
     reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     u32 encounter = ((BtlMainStateA *)btlGetMainState())->activity.currentAction;
-    if (encounter != 0x167 && encounter != 0x168) {
-        if (actor != 0) {
-            FUN_002980e4(actor, 0);
-            ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
-            BtlMainStateA *state = btlGetMainState();
-            FUN_004fb6f4(0, 0, &state->roster[target], value, actor, 0, -1);
-            btlEmitMessageTableEntries(actor, (u32)unit,
-                ((BattleMessageSource *)g_btlAux)->messages, 0, target, target);
-        }
-    } else if (actor != 0) {
+    if (encounter == 0x167 || encounter == 0x168) {
+        if (actor == 0)
+            return 1;
         BattlePendingUnit *unit = (BattlePendingUnit *)reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if (unit->pending != 0) {
-            s32 count = chainCountIdUnflagged((ChainOwner *)g_btlActionReflect, 0);
-            if (count <= 0) {
+            bool done = chainCountIdUnflagged((ChainOwner *)g_btlActionReflect, 0) <= 0;
+            if (done) {
                 unit->pending = 0;
             }
-            return count <= 0;
+            return done;
         }
         FUN_002980e4(actor, 0);
-        BtlMainStateA *state = btlGetMainState();
-        FUN_004fb6f4(0, 0, &state->roster[target], value, actor, 0, -1);
-        btlEmitMessageTableEntries(actor, (u32)unit,
-            ((BattleMessageSource *)g_btlAux)->messages, 0, target, target);
+        FUN_004fb6f4(0, 0, &btlGetMainState()->roster[target], value, actor, 0, -1);
+        BattleMessageTable *messages = ((BattleMessageSource *)g_btlAux)->messages;
+        btlEmitMessageTableEntries(actor, (u32)unit, messages, 0, target, target);
         ++unit->pending;
         return 0;
+    }
+    if (actor != 0) {
+        FUN_002980e4(actor, 0);
+        ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
+        FUN_004fb6f4(0, 0, &btlGetMainState()->roster[target], value, actor, 0, -1);
+        BattleMessageTable *messages = ((BattleMessageSource *)g_btlAux)->messages;
+        btlEmitMessageTableEntries(actor, (u32)unit, messages, 0, target, target);
     }
     return 1;
 }

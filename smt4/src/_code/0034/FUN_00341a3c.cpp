@@ -1,4 +1,4 @@
-/* NON_MATCHING: the new coordinates now stay in VFP registers for the first part update (y/z swap s1/s2); the snap-to-final path still forwards the stored position where retail reloads it with one ldm, and the tail call to FUN_00341bec is not turned into the linker's branch-NOP. */
+/* NON_MATCHING: the first part update and the tail call match (the position goes to movedPartSetPosition by value); retail reads parts[0] for the first providerEntrySetVector through a pointer kept in r6 (built: [r5, #1388]), and on the snap-to-final path copies both vectors with ldm/stm and reloads the position with one ldm, where the build forwards the copied words (part in ldm/stm, z through s0). */
 #include "shard/S1Mover.h"
 
 extern "C" {
@@ -6,6 +6,15 @@ extern "C" {
 void providerEntrySetVector(MovedPart *part, Vec3f *position);
 void nodeSetTranslation(u32 node, s32 flags, Vec3f *translation);
 void FUN_00341bec(Mover *mover);
+
+// Set the part's translation (its matrix's last column) and mark the transform dirty.
+static __inline void movedPartSetPosition(MovedPart *part, Vec3f position)
+{
+    part->x = position.x;
+    part->y = position.y;
+    part->z = position.z;
+    part->flags |= MOVED_PART_DIRTY;
+}
 
 /* Step the mover by one frame; when its 10 frames are over, snap to the final positions. Then run
  * the second stage. */
@@ -19,12 +28,11 @@ void FUN_00341a3c(Mover *mover)
         mover->positionB.y += mover->velocityB.y;
         mover->positionB.z += mover->velocityB.z;
 
-        MovedPart *part = mover->parts[0];
-
-        part->x = x;
-        part->y = y;
-        part->z = z;
-        part->flags |= MOVED_PART_DIRTY;
+        Vec3f position;
+        position.x = x;
+        position.y = y;
+        position.z = z;
+        movedPartSetPosition(mover->parts[0], position);
         providerEntrySetVector(mover->parts[0], &mover->positionB);
 
         if (mover->moveNode != 0) {
@@ -40,11 +48,7 @@ void FUN_00341a3c(Mover *mover)
             mover->position = mover->finalPosition;
             mover->positionB = mover->finalPositionB;
 
-            part = mover->parts[0];
-            part->x = mover->position.x;
-            part->y = mover->position.y;
-            part->z = mover->position.z;
-            part->flags |= MOVED_PART_DIRTY;
+            movedPartSetPosition(mover->parts[0], mover->position);
             providerEntrySetVector(mover->parts[0], &mover->positionB);
 
             if (mover->moveNode != 0) {

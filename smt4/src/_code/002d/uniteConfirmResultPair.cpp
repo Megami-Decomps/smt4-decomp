@@ -1,7 +1,24 @@
-/* NON_MATCHING: snapshot copy grouping and packed-pair read/modify/write store combining differ. */
 #include "camp/Unite/UniteGlobals.h"
 #include <string.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+
+/* A fusion pair entry as retail reads and writes it: one 64-bit bitfield record. Kept local: an
+ * 8-aligned shared pair type would change UniteWork's size and other users' record alignment. */
+struct UnitePairBits {
+    u64 firstId : 15;
+    u64 secondId : 15;
+    u64 firstType : 2;
+    u64 secondType : 2;
+    u64 resultId : 15;
+    u64 reserved : 15;
+};
+typedef char UnitePairBitsSizeCheck[sizeof(UnitePairBits) == 8 ? 1 : -1];
+
+/* The 64-bit view of a pair entry. */
+static __inline UnitePairBits *unitePairBits(UnitePairEntryIV *entry)
+{
+    return reinterpret_cast<UnitePairBits *>(entry);
+}
 
 extern "C" {
 void FUN_00257a50(void *cursor, s32 index, s32 mode);
@@ -16,32 +33,20 @@ void messageTargetSetValue(s32 value, s32 mode);
 void buttonHelpSetText(const char *text, u32 color);
 void uniteMenuChangeState(u32 state, s32 preservePrevious);
 
-void FUN_002dabac(s32 index)
+/* Confirms fusion result `index`: snapshots it, makes it the first pair of the list and opens its status screen. */
+void uniteConfirmResultPair(s32 index)
 {
     UniteWork *work = g_unite;
     work->eventFlagsIV.ready = 1;
     FUN_00257a50(work->resultSelectionIV.cursor, index, 0);
     memcpy(work->resultSnapshotIV.words, work->resultSelectionIV.selected.words,
         sizeof(work->resultSnapshotIV.words));
-    // The retail packet uses 64-bit fields. Keep that aligned view local: making the shared
-    // pair type 8-aligned would change UniteWork's size and other users' record alignment.
-    struct PairBits {
-        u64 firstId : 15;
-        u64 secondId : 15;
-        u64 firstType : 2;
-        u64 secondType : 2;
-        u64 resultId : 15;
-        u64 reserved : 15;
-    };
-    typedef char PairSizeCheck[sizeof(PairBits) == 8 ? 1 : -1];
-    const PairBits *selected = reinterpret_cast<const PairBits *>(&work->resultPairsIV.pairs[index]);
-    PairBits *pair = reinterpret_cast<PairBits *>(&work->pairListIV.pairs[0]);
-    pair->resultId = selected->resultId;
-    pair->firstId = selected->firstId;
-    pair->secondId = selected->secondId;
-    pair->firstType = 1;
-    pair->secondType = 1;
-    pair->reserved = 0;
+    unitePairBits(&work->pairListIV.pairs[0])->resultId = unitePairBits(&work->resultPairsIV.pairs[index])->resultId;
+    unitePairBits(&work->pairListIV.pairs[0])->firstId = unitePairBits(&work->resultPairsIV.pairs[index])->firstId;
+    unitePairBits(&work->pairListIV.pairs[0])->secondId = unitePairBits(&work->resultPairsIV.pairs[index])->secondId;
+    unitePairBits(&work->pairListIV.pairs[0])->firstType = 1;
+    unitePairBits(&work->pairListIV.pairs[0])->secondType = 1;
+    unitePairBits(&work->pairListIV.pairs[0])->reserved = 0;
     FUN_0029c4c8(1);
     FUN_0029defc(work->resultSelectionIV.selected.id, 0);
     FUN_0029c4e4(work->resultSelectionIV.cursor, 0);

@@ -10,7 +10,7 @@ extern "C" {
 void FUN_001f4568(s32 mode, u32 context, u32 devil, char *output);
 void skillFormatTargetLabel(char *output, s32 target);
 s32 btlFormatCategoryLabel(char *output, s32 category);
-void FUN_002907c4(char *output, s32 value);
+void textFormatFullWidthNumber(char *output, s32 value);
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
     RelativeDirectory *directory, u32 index);
 void FUN_0029ede8(s32 slot, u32 value, u32 mask, u32 flags);
@@ -33,8 +33,8 @@ void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 cont
     } else {
         char minimum[8];
         char maximum[8];
-        FUN_002907c4(minimum, minimumHits);
-        FUN_002907c4(maximum, (devil->attackProperties >> 8) & 7);
+        textFormatFullWidthNumber(minimum, minimumHits);
+        textFormatFullWidthNumber(maximum, (devil->attackProperties >> 8) & 7);
         textFormatBuffer(buffer, "%s\x81\x60%s", minimum, maximum);
         textEncodeFontSlot(0x25, reinterpret_cast<const u8 *>(buffer));
     }

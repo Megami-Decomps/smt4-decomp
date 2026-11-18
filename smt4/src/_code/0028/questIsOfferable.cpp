@@ -1,4 +1,3 @@
-/* NON_MATCHING: questId/record saved registers are swapped (retail r5/r6) and retail predicates `mov r0, questId` before the id >= 0x15e branch. */
 #include "map/mapDepart.h"
 #include "quest_center/QuestRecord.h"
 #include "quest_center/QuestStatus.h"
@@ -15,6 +14,22 @@ extern "C" {
 u32 questRequirementsMet(u16 questId);
 u32 questIsCompleted(s32 questId);
 s32 gameFlagIsSet(u32 flag);
+
+// The body of recordCategoryNineIsActiveInMode24, which retail inlines here.
+static __inline s32 questIsModeNineRecord(u32 recordId)
+{
+    if (recordId < 0x15e) {
+        return 0;
+    }
+    const QuestRecord *record = questDataGetRecord(recordId);
+    if (record == NULL) {
+        return 0;
+    }
+    if (record->kind == 9 && g_gameState.mapId == 24) {
+        return 1;
+    }
+    return 0;
+}
 
 bool questIsOfferable(u16 questId)
 {
@@ -33,8 +48,7 @@ bool questIsOfferable(u16 questId)
         return false;
     }
     if (questId >= 0x15e) {
-        const QuestRecord *current = questDataGetRecord(questId);
-        if (current != NULL && current->kind == 9 && g_gameState.mapId == 0x18) {
+        if (questIsModeNineRecord(questId)) {
             return false;
         }
     } else {

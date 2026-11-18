@@ -4930,3 +4930,16 @@
 0024d94c btlBuildDemonSnapshot inferred builds the battle log's 0x5B0-byte snapshot of a party demon from its save record
 00331158 campUpdateListInput inferred camp list screen input: confirm/cancel events, touch regions
 00392e74 aocMenuUpdate inferred twin of smt4a FUN_0047c36c
+00295f54 unitNotificationShowNext inferred shows the next queued unit notification in the info window (message 200 for slot 0, else 201 with the unit's name and race), then opens the dialog
+002dabac uniteConfirmResultPair inferred confirms fusion result `index`: snapshots it, writes it as the pair list's first pair and opens its status
+002907c4 textFormatFullWidthNumber inferred formats a non-negative value as Shift-JIS full-width digits (0x824F for zero); twin smt4a FUN_002c0940
+00275be8 frameTexCampSetMode inferred resets (0), opens (1, 24 animated tiles) or closes (2) the CAMP frame-texture transition in g_frameTex; sibling of frameTexApplyMode
+002905d0 uiQuestRefreshButtonHelp inferred sets the quest menu's button-help presets for the page/selection and queues the cursor sound hints
+001f7fac btlEditorCreate evidence creates the "btlEditor Calc" process and "btlEditor DrawUp" task; asdDebugTrace path battletlEditor.cpp; twin smt4a FUN_002b50e4
+0034b6d4 filterCreate4Poly inferred allocates and constructs the 4-poly filter (Obj42094c) with identity motions; named after its sibling filterCreateQuad; twin smt4a FUN_0041cbac
+001d0750 campMenuRunSelectedItem inferred IV twin of smt4a FUN_002a4cfc: runs the camp menu item under the cursor
+0025141c statusStripDraw inferred draws one party member's status strip (frame, level, HP/MP gauges, ailment icons; StatusStrip)
+0033c1bc statusStripDrawAilments inferred draws the ailment icons of a StatusStrip
+001aed18 campSkillListDraw inferred draws the camp skill list
+00384be8 qcNpcSelectStep evidence quest-center NPC selection step; starts the script entry "qc_NpcSelect" and follows the chosen NPC
+00199b9c btlUiPartyDisplayInit inferred initialises the battle UI's party display (ActorCardAnimations sprites, loads battle/BattleUI.mbm); twin smt4a FUN_0021c45c

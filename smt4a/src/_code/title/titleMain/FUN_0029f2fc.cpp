@@ -12,7 +12,7 @@ extern "C" {
 int __ARM_common_memcpy4_9(...);
 int asdSequenceRequest(...);
 int configOpen(...);
-int FUN_00202ea4(void);
+int configUpdate(void);
 int FUN_0020e79c(void);
 int stateModeDispatch(...);
 int configDestroy(void);
@@ -100,7 +100,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: configOpen. */
-/* Supplied declaration required: FUN_00202ea4. */
+/* Supplied declaration required: configUpdate. */
 /* Supplied declaration required: FUN_0020e79c. */
 extern int slotIsReady(unsigned int);
 extern int configIsClosed(void);
@@ -948,7 +948,7 @@ LAB_0029fb00:
     }
     break;
   case 0x15:
-    FUN_00202ea4();
+    configUpdate();
     temp_v5 = configIsClosed();
     puVar5 = DAT_00589170;
     if (temp_v5 != 0) {

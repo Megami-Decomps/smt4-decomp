@@ -10,7 +10,7 @@ extern "C" {
 int FUN_00194b14(void);
 
 int FUN_001ae538(...);
-int FUN_001aed18(int, int, int);
+int campSkillListDraw(int, int, int);
 int FUN_001f3958(int, int, int);
 int FUN_0028f694(...);
 int FUN_0028f870(...);
@@ -40,7 +40,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: configDrawOptionPanel. */
 /* Supplied declaration required: FUN_00194b14. */
 /* Supplied declaration required: FUN_001ae538. */
-/* Supplied declaration required: FUN_001aed18. */
+/* Supplied declaration required: campSkillListDraw. */
 /* Supplied declaration required: FUN_001f3958. */
 /* Supplied declaration required: FUN_0028f694. */
 /* Supplied declaration required: FUN_0028f870. */
@@ -97,7 +97,7 @@ void FUN_0019715c(int param_1,int param_2)
     if (param_1 < 0x14) {
       switch(param_1) {
       case 9:
-        FUN_001aed18(temp_v2,temp_v3,param_2);
+        campSkillListDraw(temp_v2,temp_v3,param_2);
         return;
       case 10:
         FUN_001f3958(temp_v2,temp_v3,param_2);

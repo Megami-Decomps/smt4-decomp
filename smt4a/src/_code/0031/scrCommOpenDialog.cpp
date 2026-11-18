@@ -1,9 +1,9 @@
 #include "map/mapDepart.h"
+#include "ui/UiControl.h"
 #include "game/GameStateA.h"
 
 extern "C" {
 
-void dialogOpen(s32 a, s32 b);
 void scrGetArgString(s32 index);
 void infoWinExpandAndSetText(void);
 

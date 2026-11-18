@@ -13,7 +13,9 @@ u32 categoryGetColor(u32 category);
 
 u32 dialogIsActive(void);
 
-void dialogOpen(u8 mode);
+/* Opens the info window's dialog in style `mode`. Every retail caller also sets r1 (`mov r1, #1; mov r0, r1`,
+ * `mov r1, #0; mov r0, r1`); the body does not read it. */
+void dialogOpen(u8 mode, s32 flag);
 
 void drawTextAtRelativePosition(const void *position, u32 drawContext, s32 xOffset, s32 yOffset, s32 option0, s32 option1, u32 color, s32 option2, const char *text);
 

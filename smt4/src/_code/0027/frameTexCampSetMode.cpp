@@ -1,4 +1,3 @@
-/* NON_MATCHING: tiled frame behavior restored; tile pointer scheduling differs and retail target contains only the first word of the 24-byte tile-kind literal. */
 #include "frame_tex/FrameTex.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
@@ -10,11 +9,11 @@ void uiStoreTextureEntryCenter(UiSpriteState *sprite, s32 group, s32 image);
 void soundPlaySeUnpanned(u32 sound);
 
 // Reset, open or close the CAMP frame-texture transition and initialize its 24 animated tiles.
-void FUN_00275be8(s32 mode)
+void frameTexCampSetMode(s32 mode)
 {
-    FrameTexWork *work = g_frameTex;
     switch (mode) {
-    case 0:
+    case 0: {
+        FrameTexWork *work = g_frameTex;
         work->campActive = 0;
         work->campFrame = 0;
         work->campClosing = 0;
@@ -25,7 +24,9 @@ void FUN_00275be8(s32 mode)
         work->campCapturedLeft = 0;
         work->campCapturedRight = 0;
         break;
+    }
     case 1: {
+        FrameTexWork *work = g_frameTex;
         work->campActive = 1;
         work->campFrame = 0;
         work->campClosing = 0;
@@ -46,13 +47,15 @@ void FUN_00275be8(s32 mode)
         }
         break;
     }
-    case 2:
+    case 2: {
+        FrameTexWork *work = g_frameTex;
         soundPlaySeUnpanned(0x100025B);
         work->campFrame = 0;
         work->campClosing = 1;
         work->campSpeed = 7.0f;
         uiSpriteSetImageKeyframe(&work->campFrameWidget, 0, 1);
         break;
+    }
     }
 }
 }

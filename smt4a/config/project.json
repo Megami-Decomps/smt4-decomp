@@ -54583,12 +54583,12 @@
     {
       "address": "0x202ea4",
       "file": "camp/Config/Config",
-      "function": "FUN_00202ea4",
+      "function": "configUpdate",
       "module": "_code",
-      "object": "build/obj/_code/camp/Config/Config/FUN_00202ea4.o",
+      "object": "build/obj/_code/camp/Config/Config/configUpdate.o",
       "size": 2720,
-      "source": "src/_code/camp/Config/Config/FUN_00202ea4.cpp",
-      "target": "orig/target/_code/camp/Config/Config/FUN_00202ea4.o",
+      "source": "src/_code/camp/Config/Config/configUpdate.cpp",
+      "target": "orig/target/_code/camp/Config/Config/configUpdate.o",
       "thumb": false
     },
     {
@@ -56068,12 +56068,12 @@
     {
       "address": "0x21c45c",
       "file": "battle/btlDebug",
-      "function": "FUN_0021c45c",
+      "function": "btlUiPartyDisplayInit",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlDebug/FUN_0021c45c.o",
+      "object": "build/obj/_code/battle/btlDebug/btlUiPartyDisplayInit.o",
       "size": 3232,
-      "source": "src/_code/battle/btlDebug/FUN_0021c45c.cpp",
-      "target": "orig/target/_code/battle/btlDebug/FUN_0021c45c.o",
+      "source": "src/_code/battle/btlDebug/btlUiPartyDisplayInit.cpp",
+      "target": "orig/target/_code/battle/btlDebug/btlUiPartyDisplayInit.o",
       "thumb": false
     },
     {
@@ -57249,12 +57249,12 @@
     },
     {
       "address": "0x22f9c8",
-      "function": "FUN_0022f9c8",
+      "function": "uniteDrawOptionRow",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022f9c8.o",
+      "object": "build/obj/_code/0022/uniteDrawOptionRow.o",
       "size": 420,
-      "source": "src/_code/0022/FUN_0022f9c8.cpp",
-      "target": "orig/target/_code/0022/FUN_0022f9c8.o",
+      "source": "src/_code/0022/uniteDrawOptionRow.cpp",
+      "target": "orig/target/_code/0022/uniteDrawOptionRow.o",
       "thumb": false
     },
     {
@@ -65473,12 +65473,12 @@
     {
       "address": "0x2a4488",
       "file": "event/2dEvent/EventEffect",
-      "function": "FUN_002a4488",
+      "function": "eventSnowNoiseUpdate",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/EventEffect/FUN_002a4488.o",
+      "object": "build/obj/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.o",
       "size": 440,
-      "source": "src/_code/event/2dEvent/EventEffect/FUN_002a4488.cpp",
-      "target": "orig/target/_code/event/2dEvent/EventEffect/FUN_002a4488.o",
+      "source": "src/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.cpp",
+      "target": "orig/target/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.o",
       "thumb": false
     },
     {
@@ -65744,12 +65744,12 @@
     },
     {
       "address": "0x2a4cfc",
-      "function": "FUN_002a4cfc",
+      "function": "campMenuRunSelectedItem",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a4cfc.o",
+      "object": "build/obj/_code/002a/campMenuRunSelectedItem.o",
       "size": 4088,
-      "source": "src/_code/002a/FUN_002a4cfc.cpp",
-      "target": "orig/target/_code/002a/FUN_002a4cfc.o",
+      "source": "src/_code/002a/campMenuRunSelectedItem.cpp",
+      "target": "orig/target/_code/002a/campMenuRunSelectedItem.o",
       "thumb": false
     },
     {
@@ -66950,12 +66950,12 @@
     {
       "address": "0x2b50e4",
       "file": "battle/btlEditor",
-      "function": "FUN_002b50e4",
+      "function": "btlEditorCreate",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlEditor/FUN_002b50e4.o",
+      "object": "build/obj/_code/battle/btlEditor/btlEditorCreate.o",
       "size": 332,
-      "source": "src/_code/battle/btlEditor/FUN_002b50e4.cpp",
-      "target": "orig/target/_code/battle/btlEditor/FUN_002b50e4.o",
+      "source": "src/_code/battle/btlEditor/btlEditorCreate.cpp",
+      "target": "orig/target/_code/battle/btlEditor/btlEditorCreate.o",
       "thumb": false
     },
     {
@@ -68188,12 +68188,12 @@
     },
     {
       "address": "0x2c0940",
-      "function": "FUN_002c0940",
+      "function": "textFormatFullWidthNumber",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002c0940.o",
+      "object": "build/obj/_code/002c/textFormatFullWidthNumber.o",
       "size": 416,
-      "source": "src/_code/002c/FUN_002c0940.cpp",
-      "target": "orig/target/_code/002c/FUN_002c0940.o",
+      "source": "src/_code/002c/textFormatFullWidthNumber.cpp",
+      "target": "orig/target/_code/002c/textFormatFullWidthNumber.o",
       "thumb": false
     },
     {
@@ -95798,12 +95798,12 @@
     },
     {
       "address": "0x31a914",
-      "function": "FUN_0031a914",
+      "function": "configValueName",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_0031a914.o",
+      "object": "build/obj/_code/0031/configValueName.o",
       "size": 160,
-      "source": "src/_code/0031/FUN_0031a914.cpp",
-      "target": "orig/target/_code/0031/FUN_0031a914.o",
+      "source": "src/_code/0031/configValueName.cpp",
+      "target": "orig/target/_code/0031/configValueName.o",
       "thumb": false
     },
     {
@@ -101935,12 +101935,12 @@
     {
       "address": "0x34280c",
       "file": "camp/CampCec/CampCecEdit",
-      "function": "FUN_0034280c",
+      "function": "campCecEditCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/CampCec/CampCecEdit/FUN_0034280c.o",
+      "object": "build/obj/_code/camp/CampCec/CampCecEdit/campCecEditCreate.o",
       "size": 1552,
-      "source": "src/_code/camp/CampCec/CampCecEdit/FUN_0034280c.cpp",
-      "target": "orig/target/_code/camp/CampCec/CampCecEdit/FUN_0034280c.o",
+      "source": "src/_code/camp/CampCec/CampCecEdit/campCecEditCreate.cpp",
+      "target": "orig/target/_code/camp/CampCec/CampCecEdit/campCecEditCreate.o",
       "thumb": false
     },
     {
@@ -135548,12 +135548,12 @@
     },
     {
       "address": "0x41704c",
-      "function": "FUN_0041704c",
+      "function": "resultInputOpenStatus",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041704c.o",
+      "object": "build/obj/_code/0041/resultInputOpenStatus.o",
       "size": 484,
-      "source": "src/_code/0041/FUN_0041704c.cpp",
-      "target": "orig/target/_code/0041/FUN_0041704c.o",
+      "source": "src/_code/0041/resultInputOpenStatus.cpp",
+      "target": "orig/target/_code/0041/resultInputOpenStatus.o",
       "thumb": false
     },
     {
@@ -136625,12 +136625,12 @@
     {
       "address": "0x41cbac",
       "file": "battle/Filter/Filter4Poly",
-      "function": "FUN_0041cbac",
+      "function": "filterCreate4Poly",
       "module": "_code",
-      "object": "build/obj/_code/battle/Filter/Filter4Poly/FUN_0041cbac.o",
+      "object": "build/obj/_code/battle/Filter/Filter4Poly/filterCreate4Poly.o",
       "size": 404,
-      "source": "src/_code/battle/Filter/Filter4Poly/FUN_0041cbac.cpp",
-      "target": "orig/target/_code/battle/Filter/Filter4Poly/FUN_0041cbac.o",
+      "source": "src/_code/battle/Filter/Filter4Poly/filterCreate4Poly.cpp",
+      "target": "orig/target/_code/battle/Filter/Filter4Poly/filterCreate4Poly.o",
       "thumb": false
     },
     {

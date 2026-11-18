@@ -763,7 +763,7 @@ LAB_0026e1e4:
     } while (temp_v9 < (int)*puVar27);
     *(unsigned int *)(param_1 + 0x436c) = 10;
     infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x43a4)), 0xca);
-    dialogOpen(1);
+    dialogOpen(1, 1);
   default:
 LAB_0026e038:
     if (temp_v23 != 0) {

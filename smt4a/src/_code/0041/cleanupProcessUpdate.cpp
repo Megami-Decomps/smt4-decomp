@@ -18,7 +18,7 @@ struct CleanupProcessState {
 
 extern "C" {
 s32 FUN_00416e60(CleanupProcessState *state);
-s32 FUN_0041704c(CleanupProcessState *state);
+s32 resultInputOpenStatus(CleanupProcessState *state);
 s32 FUN_00417234(CleanupProcessState *state);
 s32 FUN_0041774c(CleanupProcessState *state);
 void scrScriptProcessStartEntry(void *script, u32 entry);
@@ -41,7 +41,7 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
     case 1:
         return FUN_00416e60(process);
     case 2:
-        return FUN_0041704c(process);
+        return resultInputOpenStatus(process);
     case 3:
         switch (process->stage) {
         case 0:

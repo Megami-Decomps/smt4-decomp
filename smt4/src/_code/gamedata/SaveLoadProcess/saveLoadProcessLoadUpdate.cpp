@@ -1,4 +1,4 @@
-/* NON_MATCHING: payload subaddresses use fewer saved registers and success/failure state-store blocks merge differently. */
+/* NON_MATCHING: the option store loads work->option straight into r1; retail moves the save-data pointer to r1 and loads the option into r0 (one instruction). */
 #include "gamedata/SaveLoadProcessState.h"
 #include "shard/JobWork.h"
 #include "shard/GameDataBlocks.h"
@@ -6,18 +6,11 @@
 #include "gamedata/SaveLoadProcess.h"
 #include "mobiclip_ctrl/MobiclipCtrl.h"
 
-struct SaveFilePayloadIV {
-    u32 table[32];
-    u32 settings[2];
-    u32 save[0x24d28 / 4];
-};
-typedef char SaveFilePayloadIVSizeCheck[sizeof(SaveFilePayloadIV) == 0x24db0 ? 1 : -1];
 extern "C" {
 s32 FUN_001a1d08();
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void *gameDataBlocksGetTable();
-void __ARM_common_memcpy4_8(void *settings, const void *savedSettings);
 GameSaveData *gameDataBlocksGetSaveData();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void clockRecordStartSeconds();
@@ -36,16 +29,19 @@ s32 saveLoadProcessLoadUpdate(u32 job)
         break;
     case 5:
         if (FUN_001a1d08() == 1) {
-            if (FUN_002cedbc() != 0) {
-                work->state = 7;
-            } else {
+            if (FUN_002cedbc() == 0) {
                 const SaveFilePayloadIV *payload = static_cast<const SaveFilePayloadIV *>(work->buffer);
-                __aeabi_memcpy4(gameDataBlocksGetTable(), payload->table, sizeof(payload->table));
-                __ARM_common_memcpy4_8(configGetSettings(), payload->settings);
-                __aeabi_memcpy4(gameDataBlocksGetSaveData(), payload->save, sizeof(payload->save));
+                const u32 *table = payload->table;
+                const ConfigSettingsImage *settings = &payload->settings;
+                const u32 *save = payload->save;
+                __aeabi_memcpy4(gameDataBlocksGetTable(), table, sizeof(payload->table));
+                *reinterpret_cast<ConfigSettingsImage *>(configGetSettings()) = *settings;
+                __aeabi_memcpy4(gameDataBlocksGetSaveData(), save, sizeof(payload->save));
                 gameDataBlocksGetSaveData()->metadata.option = work->option;
                 clockRecordStartSeconds();
                 work->state = 6;
+            } else {
+                work->state = 7;
             }
         }
         break;

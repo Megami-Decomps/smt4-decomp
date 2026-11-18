@@ -15,7 +15,7 @@ int uiBindRecordRewardText(...);
 int FUN_0028fe0c(unsigned int, int);
 int rosterGetLeaderId(void);
 int FUN_00290404(void);
-int FUN_002905d0(void);
+int uiQuestRefreshButtonHelp(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
@@ -47,7 +47,7 @@ extern bool questIsOfferable(unsigned short);
 extern int rosterHasLeader(void);
 /* Supplied declaration required: rosterGetLeaderId. */
 /* Supplied declaration required: FUN_00290404. */
-/* Supplied declaration required: FUN_002905d0. */
+/* Supplied declaration required: uiQuestRefreshButtonHelp. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int FUN_00298e00(unsigned int);
 extern int questIsCompleted(unsigned int);
@@ -142,7 +142,7 @@ void FUN_001afc0c(void)
         }
         FUN_0028fe0c(temp_v10,1);
         FUN_00290404();
-        FUN_002905d0();
+        uiQuestRefreshButtonHelp();
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x982);
         temp_v13 = SBORROW4(temp_v4,temp_v10);
         temp_v9 = temp_v4 - temp_v10;
@@ -175,7 +175,7 @@ void FUN_001afc0c(void)
         }
         FUN_0028fe0c(temp_v10,1);
         FUN_00290404();
-        FUN_002905d0();
+        uiQuestRefreshButtonHelp();
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x982);
         temp_v13 = SBORROW4(temp_v4,temp_v10);
         temp_v9 = temp_v4 - temp_v10;

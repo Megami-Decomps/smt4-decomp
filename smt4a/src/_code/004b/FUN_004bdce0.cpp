@@ -33,7 +33,8 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
             textFormatBuffer(text, DAT_0052d838, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
             TextureTableEntryIV *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
             s32 width = fontMeasureLineAdvance(text, 1);
-            s32 labelX = origin->x + (placement->x + (placement->placement->width - width) / 2 + x);
+            s32 offset = (placement->placement->width - width) / 2;
+            s32 labelX = origin->x + (placement->x + offset + x);
             s32 labelY = placement->y + origin->y + y;
             u32 color = 0xFFFFFFFF;
             if ((record->label.flags & 2) != 0) {

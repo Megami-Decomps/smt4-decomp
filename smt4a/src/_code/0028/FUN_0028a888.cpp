@@ -11,7 +11,7 @@ int itemTableGetEquipmentRecord(void);
 int skillDataFindById(void);
 int battleAttributeFormatName(...);
 int skillFormatTargetLabel(...);
-int FUN_002c0940(...);
+int textFormatFullWidthNumber(...);
 int sysMemClear(...);
 int scrSetStringSlot(...);
 int equipmentGetCappedUpgradeBonuses(...);
@@ -48,7 +48,7 @@ extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: FUN_002c0940. */
+/* Supplied declaration required: textFormatFullWidthNumber. */
 extern int FUN_002e5c2c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: scrSetStringSlot. */
@@ -136,8 +136,8 @@ void FUN_0028a888(int param_1)
       FUN_00359974(0x25,temp_v0 & 0xf,0xffffffff,0);
     }
     else {
-      FUN_002c0940(temp_v10,temp_v0 & 0xf);
-      FUN_002c0940(temp_v13,*(unsigned char *)(param_1 + 0x28) >> 4);
+      textFormatFullWidthNumber(temp_v10,temp_v0 & 0xf);
+      textFormatFullWidthNumber(temp_v13,*(unsigned char *)(param_1 + 0x28) >> 4);
       textFormatBuffer(temp_v12,"%s\x81`%s",temp_v10,temp_v13);
       scrSetStringSlot(0x25,temp_v12);
     }
@@ -206,7 +206,7 @@ void FUN_0028a888(int param_1)
       if (temp_v8 < 0) {
         temp_v9 = -temp_v8;
       }
-      FUN_002c0940(temp_v18,temp_v9);
+      textFormatFullWidthNumber(temp_v18,temp_v9);
       if (temp_v8 != 0) {
         if (temp_v8 >= 1) {
           textFormatBuffer(temp_v12,"\x81{%s");

@@ -1,4 +1,4 @@
-/* NON_MATCHING: description stores, VFP constant lifetimes and vector initialization scheduling differ. */
+/* NON_MATCHING: the kind store's constant takes r2 (retail r0), the attenuation and cutoff constants load early into extra VFP registers, and the last two direction components merge into vstmia. */
 #include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
 #include "AsdSDK/AsdDebug.h"
 extern "C" {
@@ -24,20 +24,9 @@ AsdSceneLight *FUN_00151c18(void)
     light->object = _ZN9Obj55b4a86createEPvP18AsdAllocatorObject(&description, allocator);
     light->parameters = light->object->parameters;
     light->parameters->kind = 2;
-    f32 *position = light->parameters->position;
-    position[2] = 5.0f;
-    position[0] = 0.0f;
-    position[1] = 15.0f;
-    f32 *ambient = light->parameters->ambient;
-    ambient[0] = 0.2f;
-    ambient[1] = 0.2f;
-    ambient[2] = 0.2f;
-    ambient[3] = 1.0f;
-    f32 *diffuse = light->parameters->diffuse;
-    diffuse[0] = 1.0f;
-    diffuse[1] = 1.0f;
-    diffuse[2] = 1.0f;
-    diffuse[3] = 1.0f;
+    asdSceneLightSetVector(light->parameters->position, 0.0f, 15.0f, 5.0f);
+    asdSceneLightSetGray(light->parameters->ambient, 0.2f);
+    asdSceneLightSetGray(light->parameters->diffuse, 1.0f);
     f32 *attenuation = light->parameters->attenuation;
     attenuation[0] = 0.01f;
     attenuation[1] = 0.001f;
@@ -46,10 +35,10 @@ AsdSceneLight *FUN_00151c18(void)
     f32 *cutoff = light->parameters->cutoff;
     cutoff[0] = 1.0f;
     cutoff[1] = 1.5707964f;
-    f32 *direction = light->parameters->direction;
-    direction[0] = 0.0f;
-    direction[1] = 0.0f;
-    direction[2] = -1.0f;
+    AsdSceneLightParameters *parameters = light->parameters;
+    parameters->direction[0] = 0.0f;
+    parameters->direction[1] = 0.0f;
+    parameters->direction[2] = -1.0f;
     return light;
 }
 }

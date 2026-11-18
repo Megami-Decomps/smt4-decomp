@@ -38,7 +38,7 @@ extern PlayLogView *g_playLog;
 s32 resourceRunOperationIfUnblocked(void *list);
 void uiDrawListScrollBar(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s32 s2, s32 s3, s32 s4, s32 s5, s32 s6,
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
-void FUN_002907c4(char *out, u32 value);
+void textFormatFullWidthNumber(char *out, u32 value);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
 void textFormatBuffer(char *out, const char *format, ...);
 void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y);
@@ -76,17 +76,17 @@ void FUN_00194b14(void)
         if (entry->kind != 1) {
             u32 value = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2)];
             if (entry->unit[0] != '0') {
-                FUN_002907c4(first, value);
+                textFormatFullWidthNumber(first, value);
                 textFormatBuffer(text, "%s\x81@%s", first, entry->unit);
             } else {
-                FUN_002907c4(first, value);
+                textFormatFullWidthNumber(first, value);
                 textFormatBuffer(text, "%s", first);
             }
         } else {
             u32 seconds = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2)];
             u32 rest = seconds % PLAYLOG_SECONDS_PER_HOUR;
-            FUN_002907c4(first, seconds / PLAYLOG_SECONDS_PER_HOUR);
-            FUN_002907c4(second, rest / 60);
+            textFormatFullWidthNumber(first, seconds / PLAYLOG_SECONDS_PER_HOUR);
+            textFormatFullWidthNumber(second, rest / 60);
             textFormatBuffer(text, "%s\x82g\x81@%s\x82l", first, second);
         }
         s32 width = fontMeasureLineAdvance(text, 2);

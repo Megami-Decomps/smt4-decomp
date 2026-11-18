@@ -1,8 +1,8 @@
 #include "map/MapIfGlobals.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 
-void dialogOpen(s32 a, s32 b);
 void infoWinExpandAndSetText(s32 arg);
 
 void mapIfStart(s32 arg)

@@ -8,7 +8,7 @@ extern u32 DAT_00433e80, DAT_00433ec0, DAT_00433f0c, DAT_00433f4c, DAT_00433f8c,
 
 u32 *filterCreateQuad(u32 *table, u32 arg1, u32 arg2);
 u32 *FUN_003481ec(u32 *table, u32 arg1, u32 arg2);
-u32 *FUN_0034b6d4(u32 *table, u32 arg1, u32 arg2);
+u32 *filterCreate4Poly(u32 *table, u32 arg1, u32 arg2);
 u32 *FUN_0034c24c(u32 *table, u32 arg1, u32 arg2);
 
 // Initializes the table of the given kind (0-10) and returns it; NULL for an unknown kind.
@@ -23,7 +23,7 @@ u32 *FUN_00246644(u32 kind, u32 arg1, u32 arg2)
         table = FUN_003481ec(&DAT_00433ec0, arg1, arg2);
         break;
     case 2:
-        table = FUN_0034b6d4(&DAT_00433f0c, arg1, arg2);
+        table = filterCreate4Poly(&DAT_00433f0c, arg1, arg2);
         break;
     case 3:
         table = filterCreateQuad(&DAT_00433f4c, arg1, arg2);

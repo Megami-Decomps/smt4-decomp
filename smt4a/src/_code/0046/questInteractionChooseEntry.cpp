@@ -1,4 +1,4 @@
-/* NON_MATCHING: O3 combines the final flags/state/counter writes into one STM instead of retail's STR plus STM; zero/one load order also differs. O2 candidate. */
+/* NON_MATCHING: the cleared flags word takes r1 and the state constant r0 is set before the flag store; retail clears the flags in r0 and loads 17 after storing it. */
 #include "shard/Shard0046.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match7_QuestInteraction.h"
@@ -65,8 +65,8 @@ void questInteractionChooseEntry(QuestInteraction *object)
     }
     FUN_0037d6e4(0);
     object->flags &= ~0x200u;
-    object->state = 17;
     object->counter = 0;
+    object->state = 17;
     if (messageWindowIsState1() != 0) {
         messageBannerRestartOrClear();
     }
