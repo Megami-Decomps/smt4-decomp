@@ -4,6 +4,12 @@
  * and retail shares mode 22 with the tail of mode 6 and the hand-back of mode 12 with the waits where armcc here keeps the
  * first wait's copy. */
 #include "common.h"
+#include "sys/RuntimeObjects.h"
+#include "gamedata/GameDataAccess.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
+#include "mobiclip_ctrl/MobiclipCtrl.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
+#include "camp/CampMenuEntry.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/SavedUnitSelection.h"
 #include "network/DataStore/DataStoreMain.h"
@@ -36,15 +42,9 @@ void FUN_0041e3a0(SaveSlotHeaderWork *ui, s32 resetHeader);
 void FUN_0041dbdc(SaveSlotHeaderWork *ui, s32 flag);
 void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *ui);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 index);
-void slotSetRequest(s32 slot, s32 kind, s32 value);
 DataBlockTable *gameDataBlocksGetTable(void);
-void *gameDataBlocksGetSaveData(void);
-void *configGetSettings(void);
-void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void __ARM_common_memcpy4_8(void *destination, const void *source);
-s32 gameFlagIsSet(s32 flag);
 
-void gameDataAddHomeButtonHold(s32 value);
 void messageMainSetFlag(s32 value);
 void sysPlaySe(s32 id);
 void gameDataIncrementCounterCapped(void);

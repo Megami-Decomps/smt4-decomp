@@ -3,6 +3,7 @@
 #define ASDSDK_EFFECT_PARTICLEEMITTER_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/ParticleCreate.h"
 #include <stddef.h>
 
 struct ParticleNode {
@@ -43,7 +44,7 @@ struct ParticleRingEmitter {
     /* 0x184 */ s32 duration;
     /* 0x188 */ s32 tintValue;
     /* 0x18C */ u8 unk18C[0x90];
-    /* 0x21C */ u32 contextB;
+    /* 0x21C */ union { u32 contextB; QuadEffectConfig *effectConfig; };
     /* 0x220 */ u32 contextC;
     /* 0x224 */ u32 context;
     /* 0x228 */ u32 *owner;

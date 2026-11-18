@@ -1,5 +1,6 @@
-/* NON_MATCHING: taskCreate takes the priority float on the stack in retail (vstr s0,[sp] before the integer arguments); a plain f32 parameter goes in s0, which shifts every following stack argument; the rest of the setup matches in shape. */
+/* NON_MATCHING: native pointer/word arguments recovered; instruction scheduling remains under verification. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/ParticleCreate.h"
 
 extern "C" {
 
@@ -16,7 +17,7 @@ typedef struct QuadEffectTask {
     /* 0x000 */ u8 base[0x134];          /* copy of the caller's base record */
     /* 0x134 */ u8 extra[0xB0];          /* copy of the caller's extra record when `hasExtra` is set */
     /* 0x1E4 */ u8 unk1e4[0x84];
-    /* 0x268 */ f32 scale;
+    /* 0x268 */ u32 value268;
     /* 0x26C */ QuadCorner corners[4];
     /* 0x2CC */ u8 unk2cc[4];
     /* 0x2D0 */ u16 unk2d0;
@@ -27,7 +28,7 @@ typedef struct QuadEffectTask {
     /* 0x37C */ u32 owner;
     /* 0x380 */ u8 hasExtra;
     /* 0x381 */ u8 unk381[3];
-    /* 0x384 */ f32 fade;
+    /* 0x384 */ ParticleNode **ownerSlot;
     /* 0x388 */ u8 unk388[0x61];
     /* 0x3E9 */ u8 flag;
     /* 0x3EA */ u16 timeA;
@@ -42,30 +43,21 @@ typedef struct QuadEffectConfig {
     /* 0x11 */ u8 kind;
 } QuadEffectConfig;
 
-/* The by-value tail of the argument list (it travels on the stack next to the integer arguments). */
-typedef struct QuadEffectParams {
-    f32 fade;
-    f32 priority;
-    u8 flag;
-    u32 unused;
-    u16 time;
-    f32 scale;
-} QuadEffectParams;
-
-void FUN_002129b8(QuadEffectTask *task);
-void FUN_00238490(QuadEffectTask *task);
-void FUN_00237dd0(QuadEffectTask *task);
-QuadEffectTask *taskCreate(void (*update)(QuadEffectTask *), void (*a)(QuadEffectTask *), void (*b)(QuadEffectTask *),
-                           void (*c)(QuadEffectTask *), f32 priority, u32 size, u32 list, u32 e, u32 f);
+void FUN_002129b8(void *task);
+void FUN_00238490(void *task);
+void FUN_00237dd0(void *task);
+void *taskCreate(TaskFunc update, TaskFunc phase0, TaskFunc phase1, TaskFunc phase3,
+                 TaskFunc destroy, s32 workSize, s32 listIndex, u32 priority, s32 clearWork);
 void sysMemClear(void *block, s32 size);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00213d1c(QuadEffectTask *task);
 
 /* Creates the quad effect task: its update routines depend on the config's kind. Sets up the
  * four colored corners, copies the caller's records in and starts it. */
-QuadEffectTask *FUN_00347688(u32 owner, const void *base, const u8 *extra, u8 hasExtra, QuadEffectConfig *config,
-                             QuadEffectParams params)
+QuadEffectTask *FUN_00347688(u32 owner, const void *base, const void *extraData, u32 hasExtra,
+    QuadEffectConfig *config, ParticleNode **ownerSlot, TaskFunc destroy, u32 index, u32 flags, u32 time, u32 value268)
 {
+    const u8 *extra = static_cast<const u8 *>(extraData);
     QuadEffectTask *task = NULL;
     u8 kind = config->kind;
     u32 list = 3;
@@ -74,11 +66,11 @@ QuadEffectTask *FUN_00347688(u32 owner, const void *base, const u8 *extra, u8 ha
         list = 4;
     }
     if (kind == 0) {
-        task = taskCreate(FUN_002129b8, FUN_00238490, NULL, NULL, params.priority, 0x3F0, list, 0, 0);
+        task = static_cast<QuadEffectTask *>(taskCreate(FUN_002129b8, FUN_00238490, NULL, NULL, destroy, 0x3F0, list, 0, 0));
     } else if (kind == 1) {
-        task = taskCreate(FUN_002129b8, NULL, FUN_00237dd0, NULL, params.priority, 0x3F0, list, 0, 0);
+        task = static_cast<QuadEffectTask *>(taskCreate(FUN_002129b8, NULL, FUN_00237dd0, NULL, destroy, 0x3F0, list, 0, 0));
     } else if (kind == 3) {
-        task = taskCreate(FUN_002129b8, NULL, NULL, FUN_00237dd0, params.priority, 0x3F0, list, 0, 0);
+        task = static_cast<QuadEffectTask *>(taskCreate(FUN_002129b8, NULL, NULL, FUN_00237dd0, destroy, 0x3F0, list, 0, 0));
     }
     if (task != NULL) {
         sysMemClear(task, 0x3F0);
@@ -112,14 +104,14 @@ QuadEffectTask *FUN_00347688(u32 owner, const void *base, const u8 *extra, u8 ha
             task->extra[0xA8] = extra[0xA8];
             task->extra[0xA9] = extra[0xA9];
         }
-        task->scale = params.scale;
+        task->value268 = value268;
         task->unk2d0 = 0;
         task->owner = owner;
         FUN_00213d1c(task);
-        task->fade = params.fade;
-        task->flag = params.flag;
-        task->timeB = params.time;
-        task->timeA = params.time;
+        task->ownerSlot = ownerSlot;
+        task->flag = index;
+        task->timeB = time;
+        task->timeA = time;
     }
     return task;
 }

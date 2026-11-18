@@ -1,17 +1,16 @@
+#include "addon/AocSystem.h"
+#include "addon/AocSystem_VariantA.h"
+#include "ui/UiControl.h"
 /* NON_MATCHING: retail loads the window into r2 and moves it into r0 just before the deleting destructor; the build loads directly into r0. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "sys/RuntimeObjects.h"
 
 extern "C" {
-extern u32 g_aocSystem;
 void aocMenuSetButtonHelp(AocMenu *menu, s32 a, s32 b);
 void jobOwnerFreeSlotAndStop(void *owner);
 void jobStopAndClearFlags(AocMenu *menu);
-void ifTouchRegionRemove(void);
 void FUN_00126fb8(void *block);
-void aocClearDisplayFlag(u32 system);
-void aocReleasePackageOwner(u32 system);
 }
 
 // Both the update and shutdown paths release the child job's touch region.

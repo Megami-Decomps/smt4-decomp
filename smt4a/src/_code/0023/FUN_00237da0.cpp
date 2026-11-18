@@ -1,12 +1,9 @@
-#include "common.h"
-#include "shard/W5_W5Match7_ScriptUnit.h"
+#include "AsdSDK/Source/Gfx/Effect/ParticleCreate.h"
 
-
-extern "C" {
-/* Reads or updates the requested state. */
-u32 FUN_00347688(u32 a, u32 b, u32 c, u32 d, const void *data, u32 flags, u32 extra, u32 e, u32 h, u32 i, u32 j);
-u32 FUN_00237da0(u32 a, u32 b, u32 c, u32 d, const void *data, u32 flags, u32 e, u32 h, u32 i, u32 j)
+extern "C" ParticleNode *FUN_00237da0(u32 owner, const void *base, const void *extra, u32 hasExtra,
+    QuadEffectConfig *config, ParticleNode **ownerSlot, u32 index, u32 flags, u32 time, u32 value268)
 {
-    return FUN_00347688(a, b, c, d, data, flags, 0, e, h, i, j);
-}
+    /* The emitter uses the common particle-node prefix of the allocated effect work. */
+    return reinterpret_cast<ParticleNode *>(FUN_00347688(owner, base, extra, hasExtra,
+        config, ownerSlot, 0, index, flags, time, value268));
 }

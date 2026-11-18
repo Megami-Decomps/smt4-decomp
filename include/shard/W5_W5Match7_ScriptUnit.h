@@ -1,6 +1,7 @@
 #ifndef SHARD_W5_W5MATCH7_SCRIPTUNIT_H
 #define SHARD_W5_W5MATCH7_SCRIPTUNIT_H
 #include "battle/BattleUnitSlot.h"
+#include "AsdSDK/Source/Gfx/Effect/ParticleCreate.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "shard/W4_Match1b_Node.h"
@@ -102,7 +103,7 @@ void nodeTreeReleaseFollowingSiblings(ReleaseTreeNode *node);
 extern "C" {
 #endif
 
-u32 FUN_00237da0(u32 a, u32 b, u32 c, u32 d, const void *data, u32 flags, u32 e, u32 h, u32 i, u32 j);
+
 
 #ifdef __cplusplus
 }

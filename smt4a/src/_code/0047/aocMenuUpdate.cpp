@@ -1,3 +1,4 @@
+#include "ui/UiControl.h"
 /* NON_MATCHING: register allocation of the fast-tick modulo only (retail keeps tick+1 in r2 and the smlal high word in r1; here they swap); a `s32 tick = fastTick + 1;` temporary reproduces it but is steering. */
 #include "addon/aocMain.h"
 #include "classes/AocMenu.h"
@@ -14,9 +15,7 @@ s32 sysLightEventTryWait(LightEvent *event);
 void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(JobOwner *owner);
 void jobFlagsWorkStop(JobFlagsWork *work);
-void ifTouchRegionRemove();
 void FUN_0016ccb4(u32 *queryResult);
-void aocReleasePackageOwner(AocSystemA *system);
 
 // Drop the interactive child, including any touch region it owns.
 static __inline void aocMenuStopChild(AocMenu *scene)

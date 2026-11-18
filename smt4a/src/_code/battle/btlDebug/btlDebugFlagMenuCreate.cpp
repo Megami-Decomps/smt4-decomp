@@ -1,3 +1,6 @@
+#include "sys/RuntimeObjects.h"
+#include "AsdSDK/Source/Util/AsdListBoxValueApi.h"
+#include "battle/btlDebug.h"
 /* NON_MATCHING: 395 rows each, same calls, constants and stack use. Only the 25 debug-flag tests differ: for some of them retail loads the two words of the flags and of the mask in another order (ldm/ldrd/ldr) or computes the two halves in the other registers. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/SaveSlotTable.h"
@@ -17,14 +20,9 @@ extern BtlUiCloseState DAT_005715f8;
 extern const AsdListBoxEntry DAT_00571b40[33];
 extern u32 DAT_0057a6e8;
 
-u32 jobIsValid(u32 handle);
-u32 jobStop(u32 handle, u16 delay);
 void FUN_003592dc(u32 handle);
 void asdListBoxAddItems(u32 list, const AsdListBoxEntry *entries, s32 count);
-void asdListBoxSetByteValue(u32 list, s32 value);
-void jobSetText(u32 job, const char *text);
 void asdListBoxSetToggleItem(u32 list, u32 id, s32 on);
-void asdListBoxSetIntItem(u32 list, u32 id, s32 value, s32 minimum, s32 maximum, u32 option);
 s32 FUN_003e53ec(void);
 
 /* Rebuilds the battle flag menu ("btl Flag Menu"): closes the old list box and fills a new one with the

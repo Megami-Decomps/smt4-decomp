@@ -1,8 +1,6 @@
 #include "AsdSDK/Source/Gfx/Effect/ParticleEmitter.h"
 
 extern "C" {
-ParticleNode *FUN_00237da0(u32 context, void *position, void *params, s32 two, u32 contextB, ParticleNode **slot,
-                           u32 index, u32 flag, s32 one, u32 contextC);
 f32 FUN_002039d0(s32 mode, s32 maximum, u32 divisor);
 f32 FUN_0028324c(s32 mode, s32 lower, s32 upper, u32 divisor);
 f32 FUN_00283328(s32 mode, u32 numerator, u32 denominator);
@@ -49,7 +47,7 @@ void particleRingEmitterUpdate(ParticleRingEmitter *emitter)
             nodeTreeReleaseItem(emitter->nodes[index]);
         u32 life = (u32)(emitter->lifeSeconds * 10.0f);
         ParticleNode *node = FUN_00237da0(emitter->context, emitter->position, &emitter->colorValue, 2,
-                                          emitter->contextB, &emitter->nodes[index], (u8)index, emitter->flag, 1,
+                                          emitter->effectConfig, &emitter->nodes[index], (u8)index, emitter->flag, 1,
                                           emitter->contextC);
         emitter->nodes[index] = node;
         node->life = FUN_002039d0(2, emitter->lifeJitter, 100) + node->life;

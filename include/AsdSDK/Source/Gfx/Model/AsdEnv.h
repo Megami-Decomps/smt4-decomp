@@ -2,6 +2,7 @@
 #define ASDSDK_SOURCE_GFX_MODEL_ASDENV_H
 
 #include "common.h"
+#include "AsdSDK/Source/Util/AsdListBoxValueApi.h"
 #include "nw/ut/RuntimeTypeInfo.h"
 #include "shard/W6_W6Match6_ResourceId.h"
 
@@ -67,10 +68,6 @@ public:
     /* 0x04 */ u8 unk04[0x50];
     /* 0x54 */ AsdEnvLeafData *data;
 };
-
-extern "C" {
-void asdListBoxSetByteValue(u32 listBox, u8 value);
-}
 
 extern "C" {
 u32 *gameFlagBlockGetEntry(s32 index);
