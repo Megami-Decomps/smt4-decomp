@@ -1,15 +1,6 @@
-#include "common.h"
+#include "gamedata/FusionCandidateFilter.h"
 
-extern "C" {
-
-typedef struct Obj {
-    /* 0x000 */ u8 unk000[0x178];
-    /* 0x178 */ u32 unk178;
-} Obj;
-
-void FUN_00269bc4(Obj *obj)
+extern "C" void FUN_00269bc4(FusionCandidateFilter *owner)
 {
-    obj->unk178 = 0;
+    owner->skillCount = 0;
 }
-
-} /* extern "C" */

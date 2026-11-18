@@ -1,41 +1,24 @@
-/* NON_MATCHING: bitfield stores into the result and register allocation of the skill-gathering loops differ from retail. */
+/* NON_MATCHING: packed-result stores and skill-loop scheduling still differ.
+ * The fourth argument is an output record; the return is the eligibility status. */
 #include "common.h"
+#include "gamedata/FusionCandidateFilter.h"
+#include "gamedata/PackedIdentifiers.h"
+#include "gamedata/GameDataAccess_VariantC.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SkillFlags.h"
 #include "gamedata/PairedKeyRecord.h"
 
-// Result descriptor of a fusion: the two parent ids, the product and its summed cost.
-struct FusionResult {
-    u32 firstParent : 15;
-    u32 secondParent : 15;
-    u32 pad : 2;
-    u32 keep : 2;
-    u32 product : 15;
-    u32 cost : 15;
-};
-
-// The parts of a demon record read here.
-// Demon being assembled by the fusion preview.
-struct FusionPreviewUnit {
-    u8 unk00[0x146];
-    u16 skills[0x18];   // 0x146
-    s32 skillCount;     // 0x178
-    u8 unk17c;
-    u8 hasCost;         // 0x17d
-};
+typedef char FusionResultPackedSizeCheck[sizeof(PackedIdentifiers) == 8 ? 1 : -1];
 
 extern "C" {
 
 PairedKeyRecord* dataTable1fFindPairedKey(u16 first, u16 second);
-s32 devilIsAvailable(FusionPreviewUnit* unit, u16 id);
 void FUN_002b7bca(void* base, s32 count, s32 size, void* compare);
-s32 fusionCandidateMatchesParentFilter(FusionPreviewUnit* unit, u32 first, u32 second, u16 product);
-void battleCandidateMatchesSkillFilters(FusionPreviewUnit* unit, u32 first, u32 second, u32 product);
 extern u8 halfwordKeyEmptyLastCompare;
 // Builds the fusion result of two demons: product, inherited skills and cost.
-FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, FusionResult* result)
+u32 FUN_002624c4(FusionCandidateFilter* unit, u16 first, u16 second, PackedIdentifiers* result)
 {
-    FusionPreviewUnit* ret = NULL;
+    u32 ret = 0;
     PairedKeyRecord* pair;
     if (first < second) {
         pair = dataTable1fFindPairedKey(first, second);
@@ -44,12 +27,13 @@ FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, 
     }
     if (pair == NULL) return ret;
     if ((pair->value & 0xffff) == 0) return ret;
-    if (!devilIsAvailable(unit, pair->value & 0xffff)) return ret;
+    if (!devilIsAvailable(reinterpret_cast<u32>(unit), pair->value & 0xffff)) return ret;
     if (!fusionCandidateMatchesParentFilter(unit, first, second, pair->value & 0xffff)) return ret;
 
-    result->firstParent = first;
-    result->secondParent = second;
-    result->product = pair->value;
+    result->firstIdentifier = first;
+    result->secondIdentifier = second;
+    result->resultIdentifier = pair->value;
+    result->cost = 0;
 
     NkmBaseRecord *record = nkmBaseGetRecord(pair->value & 0xffff);
     for (s32 i = 0; i < 8; i++) {
@@ -71,7 +55,7 @@ FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, 
         unit->skillCount++;
     }
 
-    if (unit->hasCost != 0) {
+    if (unit->availableOnly != 0) {
         s32 cost = record->level * 0x14 + record->stats[0] + record->stats[1] + record->stats[2] +
                    record->stats[3] + record->stats[4];
         for (s32 i = 0; i < 0x18; i++) {
@@ -81,8 +65,7 @@ FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, 
         }
         result->cost = cost;
     }
-    battleCandidateMatchesSkillFilters(unit, first, second, result->product);
-    ret = unit;
+    ret = battleCandidateMatchesSkillFilters(unit, first, second, result->resultIdentifier);
     return ret;
 }
 

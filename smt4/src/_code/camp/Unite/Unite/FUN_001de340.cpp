@@ -1,3 +1,4 @@
+#include "gamedata/FusionCandidateFilter.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001de340` (_code @ 0x1de340, 0x1360 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -14,9 +15,7 @@ int FUN_002b7bca(...);
 int nkmBaseGetRecord(void);
 int asdMemFree(...);
 
-int FUN_002624c4(...);
 int halfwordListAppendGroup(...);
-int FUN_00269bc4(...);
 int gameRecordCopy(int, unsigned short [14]);
 int partyMemberFindById(...);
 int threadSleepDuration(...);
@@ -283,7 +282,7 @@ void FUN_001de340(int *param_1)
                 if ((unsigned int)param_1[0x16c] <= (unsigned int)param_1[0x16d]) break;
                 temp_v5 = itemGetFlagBit1(temp_v1);
                 if (temp_v5 != 0) {
-                  FUN_00269bc4(*param_1);
+                  FUN_00269bc4(reinterpret_cast<FusionCandidateFilter *>(*param_1));
                   halfwordListAppendGroup(*param_1,0,temp_v4 + 0x34);
                   param_1[param_1[0x16d] * 2 + 0x4e4] =
                        (param_1[param_1[0x16d] * 2 + 0x4e4] & 0x3fffffffU) | 0x40000000;
@@ -309,8 +308,8 @@ void FUN_001de340(int *param_1)
                          (param_1[param_1[0x16d] * 2 + 0x4e5] & 0xfffffffcU) | 1;
                     halfwordListAppendGroup(*param_1,1,temp_v5 + 0x34);
                   }
-                  temp_v5 = FUN_002624c4(*param_1,*(unsigned short *)(temp_v4 + 0x46),temp_v1,
-                                       param_1 + param_1[0x16d] * 2 + 0x4e4);
+                  temp_v5 = FUN_002624c4(reinterpret_cast<FusionCandidateFilter *>(*param_1),*(unsigned short *)(temp_v4 + 0x46),temp_v1,
+                                       reinterpret_cast<PackedIdentifiers *>(param_1 + param_1[0x16d] * 2 + 0x4e4));
                   if (temp_v5 != 0) {
                     *temp_v29 = param_1[0x16d] + 1;
                   }
@@ -374,7 +373,7 @@ LAB_001dea48:
                 do {
                   if (((unsigned int)piVar9[0x16c] <= (unsigned int)piVar9[0x16d]) || ((char)piVar9[0x2514] == '\0')
                      ) break;
-                  FUN_00269bc4(*piVar9);
+                  FUN_00269bc4(reinterpret_cast<FusionCandidateFilter *>(*piVar9));
                   if ((temp_v4 == 0) ||
                      ((temp_v6 = flagWordTestBit(temp_v4,10), temp_v6 != 0 ||
                       (temp_v6 = flagWordTestBit(temp_v4,2), temp_v6 != 0)))) {
@@ -429,7 +428,7 @@ LAB_001decc4:
                       piVar9[temp_v6 * 2 + 0x4e4] = piVar9[temp_v6 * 2 + 0x4e4];
                       piVar9[temp_v6 * 2 + 0x4e5] = (piVar9[temp_v6 * 2 + 0x4e5] & 0xfffffffcU) | 1;
                     }
-                    temp_v6 = FUN_002624c4(*piVar9,temp_v21,temp_v13,piVar9 + piVar9[0x16d] * 2 + 0x4e4)
+                    temp_v6 = FUN_002624c4(reinterpret_cast<FusionCandidateFilter *>(*piVar9),temp_v21,temp_v13,reinterpret_cast<PackedIdentifiers *>(piVar9 + piVar9[0x16d] * 2 + 0x4e4))
                     ;
                     if (temp_v6 != 0) {
                       *temp_v40 = piVar9[0x16d] + 1;
@@ -471,7 +470,7 @@ LAB_001dedf4:
                 if (((temp_v6 == 0) && (temp_v6 = flagWordTestBit(temp_v5,10), temp_v6 == 0)) &&
                    ((temp_v6 = flagWordTestBit(temp_v2,2), temp_v6 == 0 &&
                     (temp_v6 = flagWordTestBit(temp_v5,2), temp_v6 == 0)))) {
-                  FUN_00269bc4(*param_1);
+                  FUN_00269bc4(reinterpret_cast<FusionCandidateFilter *>(*param_1));
                   halfwordListAppendGroup(*param_1,0,temp_v2 + 0x34);
                   halfwordListAppendGroup(*param_1,1,temp_v5 + 0x34);
                   temp_v6 = param_1[0x16d];
@@ -481,8 +480,8 @@ LAB_001dedf4:
                   temp_v6 = *temp_v29;
                   param_1[temp_v6 * 2 + 0x4e4] = temp_v14;
                   param_1[temp_v6 * 2 + 0x4e5] = (temp_v13 & 0xfffffffc) | 1;
-                  temp_v2 = FUN_002624c4(*param_1,*(unsigned short *)(temp_v2 + 0x46),
-                                       *(unsigned short *)(temp_v5 + 0x46),param_1 + *temp_v29 * 2 + 0x4e4
+                  temp_v2 = FUN_002624c4(reinterpret_cast<FusionCandidateFilter *>(*param_1),*(unsigned short *)(temp_v2 + 0x46),
+                                       *(unsigned short *)(temp_v5 + 0x46),reinterpret_cast<PackedIdentifiers *>(param_1 + *temp_v29 * 2 + 0x4e4)
                                       );
                   if (temp_v2 != 0) {
                     *temp_v29 = param_1[0x16d] + 1;

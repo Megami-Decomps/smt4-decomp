@@ -1,7 +1,14 @@
 /* NON_MATCHING: readable rewrite compiles; retail unrolls the skill collection and keeps the panel in a callee-saved register with a 68-byte frame; unit lookup returns NULL where the draft reads address 0 */
 #include "ui/PartyPanelState.h"
+#include "gamedata/FusionCandidateFilter.h"
+#include "gamedata/PackedIdentifiers.h"
 #include "gamedata/UnitRecordAccess.h"
 
+
+typedef char PartyFusionResultBoundaryCheck[
+    offsetof(PartyPanelState, fusionDescriptor) == 0xB48 &&
+    offsetof(PartyPanelState, fusionResult) == 0xB50 &&
+    sizeof(PackedIdentifiers) == 8 ? 1 : -1];
 
 struct SlotTable {
     u8 unk0000[0x90f0];
@@ -11,8 +18,6 @@ struct SlotTable {
 extern "C" {
 SlotTable* gameGetSlotTable(void);
 StatBlock* partyMemberFindById(u32 id);
-void FUN_00269bc4(void* unite);
-s32 FUN_002624b8(void* unite, StatBlock* first, StatBlock* second);
 void FUN_0029dc74(u32 product, void* resultUnit);
 void uniteMergeInheritedSkillsAndStats(void* unite, StatBlock* first, StatBlock* second, s32 mode, void* resultUnit);
 s32 gameCountUnits(void);
@@ -50,17 +55,18 @@ u32 FUN_001d1828(void)
     for (s32 i = 0; i < 2; i++) parents[i] = partyMemberFindById(panel->fusionParentIds[i] & 0xffff);
     if (parents[0] == NULL || parents[1] == NULL) return 0;
 
-    FUN_00269bc4(panel->unite);
-    if (FUN_002624b8(panel->unite, parents[0], parents[1]) == 0) return 0;
-    FUN_0029dc74((panel->fusionProduct & 0x1ffff) >> 2, panel->fusionResult);
+    FUN_00269bc4(static_cast<FusionCandidateFilter *>(panel->unite));
+    if (FUN_002624b8(static_cast<FusionCandidateFilter *>(panel->unite), parents[0], parents[1],
+                     &panel->fusionDescriptor) == 0) return 0;
+    FUN_0029dc74(panel->fusionDescriptor.resultIdentifier, panel->fusionResult);
     uniteMergeInheritedSkillsAndStats(panel->unite, parents[0], parents[1], 0, panel->fusionResult);
 
     s16 inherited[20];
     for (s32 i = 0; i < 16; i++) inherited[i] = 0;
     u32 count = 0;
-    StatBlock* first = findPartyUnit(panel->fusionParents & 0x7fff);
+    StatBlock* first = findPartyUnit(panel->fusionDescriptor.firstIdentifier);
     count = appendSkills(inherited, count, first);
-    StatBlock* second = findPartyUnit((panel->fusionParents & 0x3fffffff) >> 0xf);
+    StatBlock* second = findPartyUnit(panel->fusionDescriptor.secondIdentifier);
     count = appendSkills(inherited, count, second);
     FUN_0029b130(inherited, count, 0);
 

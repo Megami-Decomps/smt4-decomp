@@ -3,22 +3,6 @@
 #include "gamedata/SkillFlags.h"
 
 namespace {
-struct FusionSkillFilterView {
-    u8 prefix[0x120];
-    s8 matchSkill;
-    u8 padding121;
-    u16 skill;
-    u8 padding124[0xE];
-    s8 matchAffinity;
-    u8 padding133;
-    u16 affinity;
-    u8 padding136[0xD];
-    s8 matchCategory;
-    u16 category;
-    u16 skills[24];
-    u8 padding176[2];
-    u32 count;
-};
 struct DevilAffinityView {
     u8 prefix[0x6C];
     u16 resistances[16];
@@ -32,10 +16,10 @@ void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
 // Check the selected skill, skill category and affinity-dependent passive-skill range.
 u32 battleCandidateMatchesSkillFilters(FusionCandidateFilter *owner, u32 unusedA, u32 unusedB, u16 id)
 {
-    FusionSkillFilterView *filter = reinterpret_cast<FusionSkillFilterView *>(owner);
+    FusionCandidateFilter *filter = owner;
     const DevilAffinityView *record = reinterpret_cast<const DevilAffinityView *>(nkmBaseGetRecord(id));
     if (filter->matchSkill) {
-        if (!libc_bsearch(&filter->skill, filter->skills, filter->count, sizeof(u16), halfwordKeyEmptyLastCompare))
+        if (!libc_bsearch(&filter->skill, filter->skills, filter->skillCount, sizeof(u16), halfwordKeyEmptyLastCompare))
             return 0;
     } else if (filter->matchCategory) {
         bool found = false;
