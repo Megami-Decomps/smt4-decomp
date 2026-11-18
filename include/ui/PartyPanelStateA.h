@@ -15,7 +15,8 @@ struct UniteWorkA;
 
 typedef struct PartyPanelStateA {
     /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[8];
+    /* 0x0004 */ u8 unk0004[4];
+    /* 0x0008 */ u32 drawJob;
     /* 0x000C */ void *files[2];
     /* 0x0014 */ ScriptProcess *script;
     /* 0x0018 */ u32 phase;                 /* step within the current scene state */
@@ -36,7 +37,8 @@ typedef struct PartyPanelStateA {
     /* 0x0042 */ u8 alternate;              /* the alternate layout: cursors move on the alternate grids */
     /* 0x0043 */ u8 unk0043;
     /* 0x0044 */ s8 helpMode;
-    /* 0x0045 */ u8 unk0045[0x23];
+    /* 0x0045 */ u8 unk0045[3];
+    /* 0x0048 */ UiResourceParameters parameters; /* the sprites' animation resource */
     /* 0x0068 */ UiSpriteState sprites[17];     /* indexed by PARTY_PANEL_SPRITE_* */
     /* 0x09B4 */ u8 panelState;             /* what the panel was opened for */
     /* 0x09B5 */ u8 unk09B5[3];
@@ -55,7 +57,7 @@ typedef struct PartyPanelStateA {
     /* 0x0CEC */ GridNavigation stockGridAlternate;
     /* 0x0D50 */ GridNavigation fullGrid;             /* state 8: the party row above the stock page */
     /* 0x0DB4 */ GridNavigation fullGridAlternate;
-    /* 0x0E18 */ u8 unk0E18[0x64];
+    /* 0x0E18 */ GridNavigation columnGrid;           /* six rows in one column */
     /* 0x0E7C */ s32 fusionParentIds[2];
     /* 0x0E84 */ s32 fusionParentCount;
     /* 0x0E88 */ u8 fusionParentIsDemon[2];
@@ -76,13 +78,18 @@ typedef struct PartyPanelStateA {
     /* 0x1080 */ PlayerDataA previewPlayer;                  /* a copy of the player data */
     /* 0x10E4 */ u8 previewUnit[0x12C];               /* a copy of a slot record */
     /* 0x1210 */ u8 disabled;
-    /* 0x1211 */ u8 unk1211[7];
+    /* 0x1211 */ u8 unk1211[3];
+    /* 0x1214 */ u32 unk1214;
     /* 0x1218 */ s32 layoutMode;
     /* 0x121C */ u8 unk121C[4];
 } PartyPanelStateA;
 
 typedef char PartyPanelStateASizeCheck[sizeof(PartyPanelStateA) == 0x1220 ? 1 : -1];
 typedef char PartyPanelStateAOffsetCheck[
+    offsetof(PartyPanelStateA, drawJob) == 0x8 &&
+    offsetof(PartyPanelStateA, parameters) == 0x48 &&
+    offsetof(PartyPanelStateA, columnGrid) == 0xE18 &&
+    offsetof(PartyPanelStateA, unk1214) == 0x1214 &&
     offsetof(PartyPanelStateA, sceneState) == 0x1C &&
     offsetof(PartyPanelStateA, page) == 0x2C &&
     offsetof(PartyPanelStateA, previewItem) == 0x36 &&

@@ -107710,13 +107710,13 @@
       "target_path": "orig/target/_code/001f/FUN_001ffba8.o"
     },
     {
-      "base_path": "build/obj/_code/001f/FUN_001ffe84.o",
+      "base_path": "build/obj/_code/001f/campSkillListUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001ffe84",
+            "name": "campSkillListUpdate",
             "size": 2380,
             "vram": "0x1ffe84"
           }
@@ -107724,10 +107724,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001f/FUN_001ffe84.cpp"
+        "source_path": "src/_code/001f/campSkillListUpdate.cpp"
       },
-      "name": "_code/001f/FUN_001ffe84",
-      "target_path": "orig/target/_code/001f/FUN_001ffe84.o"
+      "name": "_code/001f/campSkillListUpdate",
+      "target_path": "orig/target/_code/001f/campSkillListUpdate.o"
     },
     {
       "base_path": "build/obj/_code/0020/FUN_002007f4.o",
@@ -110205,13 +110205,13 @@
       "target_path": "orig/target/_code/0021/FUN_002129b8.o"
     },
     {
-      "base_path": "build/obj/_code/0021/FUN_00213020.o",
+      "base_path": "build/obj/_code/0021/particleRingEmitterUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00213020",
+            "name": "particleRingEmitterUpdate",
             "size": 768,
             "vram": "0x213020"
           }
@@ -110219,10 +110219,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0021/FUN_00213020.cpp"
+        "source_path": "src/_code/0021/particleRingEmitterUpdate.cpp"
       },
-      "name": "_code/0021/FUN_00213020",
-      "target_path": "orig/target/_code/0021/FUN_00213020.o"
+      "name": "_code/0021/particleRingEmitterUpdate",
+      "target_path": "orig/target/_code/0021/particleRingEmitterUpdate.o"
     },
     {
       "base_path": "build/obj/_code/0021/FUN_00213330.o",
@@ -110709,13 +110709,13 @@
       "target_path": "orig/target/_code/0021/FUN_00215bd0.o"
     },
     {
-      "base_path": "build/obj/_code/0021/FUN_00215cb8.o",
+      "base_path": "build/obj/_code/0021/uiQuestCalc.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00215cb8",
+            "name": "uiQuestCalc",
             "size": 5772,
             "vram": "0x215cb8"
           }
@@ -110723,10 +110723,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0021/FUN_00215cb8.cpp"
+        "source_path": "src/_code/0021/uiQuestCalc.cpp"
       },
-      "name": "_code/0021/FUN_00215cb8",
-      "target_path": "orig/target/_code/0021/FUN_00215cb8.o"
+      "name": "_code/0021/uiQuestCalc",
+      "target_path": "orig/target/_code/0021/uiQuestCalc.o"
     },
     {
       "base_path": "build/obj/_code/0021/uiUpdateChainedSpriteRows.o",
@@ -116587,13 +116587,13 @@
       "target_path": "orig/target/_code/camp/UIFade/UIFade/uiFadeSetVisible.o"
     },
     {
-      "base_path": "build/obj/_code/0023/FUN_0023b4cc.o",
+      "base_path": "build/obj/_code/0023/uiQuestDrawUpper.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0023b4cc",
+            "name": "uiQuestDrawUpper",
             "size": 912,
             "vram": "0x23b4cc"
           }
@@ -116601,10 +116601,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/FUN_0023b4cc.cpp"
+        "source_path": "src/_code/0023/uiQuestDrawUpper.cpp"
       },
-      "name": "_code/0023/FUN_0023b4cc",
-      "target_path": "orig/target/_code/0023/FUN_0023b4cc.o"
+      "name": "_code/0023/uiQuestDrawUpper",
+      "target_path": "orig/target/_code/0023/uiQuestDrawUpper.o"
     },
     {
       "base_path": "build/obj/_code/0023/uniteSoundRequest.o",
@@ -125112,13 +125112,13 @@
       "target_path": "orig/target/_code/camp/UIFade/UIFade/uiFadeRequestHalf.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_0028587c.o",
+      "base_path": "build/obj/_code/0028/uiQuestDrawLower.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0028587c",
+            "name": "uiQuestDrawLower",
             "size": 340,
             "vram": "0x28587c"
           }
@@ -125126,10 +125126,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_0028587c.cpp"
+        "source_path": "src/_code/0028/uiQuestDrawLower.cpp"
       },
-      "name": "_code/0028/FUN_0028587c",
-      "target_path": "orig/target/_code/0028/FUN_0028587c.o"
+      "name": "_code/0028/uiQuestDrawLower",
+      "target_path": "orig/target/_code/0028/uiQuestDrawLower.o"
     },
     {
       "base_path": "build/obj/_code/camp/Unite/UniteCamera/uniteCameraInitialize.o",
@@ -155155,13 +155155,13 @@
       "target_path": "orig/target/_code/002f/FUN_002f0bd8.o"
     },
     {
-      "base_path": "build/obj/_code/camp/UIQuest/UIQuest/FUN_002f0c18.o",
+      "base_path": "build/obj/_code/camp/UIQuest/UIQuest/uiQuestCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002f0c18",
+            "name": "uiQuestCreate",
             "size": 1720,
             "vram": "0x2f0c18"
           }
@@ -155170,10 +155170,10 @@
           "_code",
           "camp/UIQuest/UIQuest"
         ],
-        "source_path": "src/_code/camp/UIQuest/UIQuest/FUN_002f0c18.cpp"
+        "source_path": "src/_code/camp/UIQuest/UIQuest/uiQuestCreate.cpp"
       },
-      "name": "_code/camp/UIQuest/UIQuest/FUN_002f0c18",
-      "target_path": "orig/target/_code/camp/UIQuest/UIQuest/FUN_002f0c18.o"
+      "name": "_code/camp/UIQuest/UIQuest/uiQuestCreate",
+      "target_path": "orig/target/_code/camp/UIQuest/UIQuest/uiQuestCreate.o"
     },
     {
       "base_path": "build/obj/_code/002f/FUN_002f12d0.o",
@@ -201159,13 +201159,13 @@
       "target_path": "orig/target/_code/0034/partyPanelGetState.o"
     },
     {
-      "base_path": "build/obj/_code/camp/PartyPanel/PartyPanel/FUN_003493dc.o",
+      "base_path": "build/obj/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003493dc",
+            "name": "partyPanelCreate",
             "size": 1804,
             "vram": "0x3493dc"
           }
@@ -201174,10 +201174,10 @@
           "_code",
           "camp/PartyPanel/PartyPanel"
         ],
-        "source_path": "src/_code/camp/PartyPanel/PartyPanel/FUN_003493dc.cpp"
+        "source_path": "src/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.cpp"
       },
-      "name": "_code/camp/PartyPanel/PartyPanel/FUN_003493dc",
-      "target_path": "orig/target/_code/camp/PartyPanel/PartyPanel/FUN_003493dc.o"
+      "name": "_code/camp/PartyPanel/PartyPanel/partyPanelCreate",
+      "target_path": "orig/target/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.o"
     },
     {
       "base_path": "build/obj/_code/0034/partyPanelIsActive.o",
@@ -202426,13 +202426,13 @@
       "target_path": "orig/target/_code/0034/engineFreeOptionalWork.o"
     },
     {
-      "base_path": "build/obj/_code/0034/FUN_0034e784.o",
+      "base_path": "build/obj/_code/0034/saveSlotDrawClippedGaugeFrame.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0034e784",
+            "name": "saveSlotDrawClippedGaugeFrame",
             "size": 740,
             "vram": "0x34e784"
           }
@@ -202440,10 +202440,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_0034e784.cpp"
+        "source_path": "src/_code/0034/saveSlotDrawClippedGaugeFrame.cpp"
       },
-      "name": "_code/0034/FUN_0034e784",
-      "target_path": "orig/target/_code/0034/FUN_0034e784.o"
+      "name": "_code/0034/saveSlotDrawClippedGaugeFrame",
+      "target_path": "orig/target/_code/0034/saveSlotDrawClippedGaugeFrame.o"
     },
     {
       "base_path": "build/obj/_code/0034/FUN_0034ea70.o",
@@ -253720,13 +253720,13 @@
       "target_path": "orig/target/_code/003e/stateFinishIfPresent.o"
     },
     {
-      "base_path": "build/obj/_code/003e/FUN_003e9cec.o",
+      "base_path": "build/obj/_code/003e/btlInitializeDemonUnitState.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003e9cec",
+            "name": "btlInitializeDemonUnitState",
             "size": 588,
             "vram": "0x3e9cec"
           }
@@ -253734,10 +253734,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003e/FUN_003e9cec.cpp"
+        "source_path": "src/_code/003e/btlInitializeDemonUnitState.cpp"
       },
-      "name": "_code/003e/FUN_003e9cec",
-      "target_path": "orig/target/_code/003e/FUN_003e9cec.o"
+      "name": "_code/003e/btlInitializeDemonUnitState",
+      "target_path": "orig/target/_code/003e/btlInitializeDemonUnitState.o"
     },
     {
       "base_path": "build/obj/_code/003e/FUN_003e9f38.o",
@@ -268519,13 +268519,13 @@
       "target_path": "orig/target/_code/saveLoadUI/SaveLoadUIBase/FUN_0041fe58.o"
     },
     {
-      "base_path": "build/obj/_code/0042/FUN_0042021c.o",
+      "base_path": "build/obj/_code/0042/saveLoadUIUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0042021c",
+            "name": "saveLoadUIUpdate",
             "size": 1620,
             "vram": "0x42021c"
           }
@@ -268533,10 +268533,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0042/FUN_0042021c.cpp"
+        "source_path": "src/_code/0042/saveLoadUIUpdate.cpp"
       },
-      "name": "_code/0042/FUN_0042021c",
-      "target_path": "orig/target/_code/0042/FUN_0042021c.o"
+      "name": "_code/0042/saveLoadUIUpdate",
+      "target_path": "orig/target/_code/0042/saveLoadUIUpdate.o"
     },
     {
       "base_path": "build/obj/_code/0042/saveMenuCacheSlotHeadersStep.o",
@@ -301660,13 +301660,13 @@
       "target_path": "orig/target/_code/0047/flagObjAdvance.o"
     },
     {
-      "base_path": "build/obj/_code/0047/FUN_00472568.o",
+      "base_path": "build/obj/_code/0047/aocBoardUpdateAnimation.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00472568",
+            "name": "aocBoardUpdateAnimation",
             "size": 688,
             "vram": "0x472568"
           }
@@ -301674,10 +301674,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0047/FUN_00472568.cpp"
+        "source_path": "src/_code/0047/aocBoardUpdateAnimation.cpp"
       },
-      "name": "_code/0047/FUN_00472568",
-      "target_path": "orig/target/_code/0047/FUN_00472568.o"
+      "name": "_code/0047/aocBoardUpdateAnimation",
+      "target_path": "orig/target/_code/0047/aocBoardUpdateAnimation.o"
     },
     {
       "base_path": "build/obj/_code/0047/FUN_00472820.o",
@@ -303924,13 +303924,13 @@
       "target_path": "orig/target/_code/0047/aocMenuDrawScreen.o"
     },
     {
-      "base_path": "build/obj/_code/0047/FUN_0047c36c.o",
+      "base_path": "build/obj/_code/0047/aocMenuUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0047c36c",
+            "name": "aocMenuUpdate",
             "size": 552,
             "vram": "0x47c36c"
           }
@@ -303938,10 +303938,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0047/FUN_0047c36c.cpp"
+        "source_path": "src/_code/0047/aocMenuUpdate.cpp"
       },
-      "name": "_code/0047/FUN_0047c36c",
-      "target_path": "orig/target/_code/0047/FUN_0047c36c.o"
+      "name": "_code/0047/aocMenuUpdate",
+      "target_path": "orig/target/_code/0047/aocMenuUpdate.o"
     },
     {
       "base_path": "build/obj/_code/0047/stateHandlerCall.o",
@@ -319202,13 +319202,13 @@
       "target_path": "orig/target/_code/004b/mapSceneInitializeScriptAndEntry.o"
     },
     {
-      "base_path": "build/obj/_code/004b/FUN_004b990c.o",
+      "base_path": "build/obj/_code/004b/mikadoCampVisitUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004b990c",
+            "name": "mikadoCampVisitUpdate",
             "size": 1728,
             "vram": "0x4b990c"
           }
@@ -319216,10 +319216,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004b/FUN_004b990c.cpp"
+        "source_path": "src/_code/004b/mikadoCampVisitUpdate.cpp"
       },
-      "name": "_code/004b/FUN_004b990c",
-      "target_path": "orig/target/_code/004b/FUN_004b990c.o"
+      "name": "_code/004b/mikadoCampVisitUpdate",
+      "target_path": "orig/target/_code/004b/mikadoCampVisitUpdate.o"
     },
     {
       "base_path": "build/obj/_code/004b/uiClampScrollOffset.o",
@@ -325671,13 +325671,13 @@
       "target_path": "orig/target/_code/004d/FUN_004d1470.o"
     },
     {
-      "base_path": "build/obj/_code/battle/btlDebug/FUN_004d1af8.o",
+      "base_path": "build/obj/_code/battle/btlDebug/btlDebugFlagMenuCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004d1af8",
+            "name": "btlDebugFlagMenuCreate",
             "size": 1572,
             "vram": "0x4d1af8"
           }
@@ -325686,10 +325686,10 @@
           "_code",
           "battle/btlDebug"
         ],
-        "source_path": "src/_code/battle/btlDebug/FUN_004d1af8.cpp"
+        "source_path": "src/_code/battle/btlDebug/btlDebugFlagMenuCreate.cpp"
       },
-      "name": "_code/battle/btlDebug/FUN_004d1af8",
-      "target_path": "orig/target/_code/battle/btlDebug/FUN_004d1af8.o"
+      "name": "_code/battle/btlDebug/btlDebugFlagMenuCreate",
+      "target_path": "orig/target/_code/battle/btlDebug/btlDebugFlagMenuCreate.o"
     },
     {
       "base_path": "build/obj/_code/004d/FUN_004d2124.o",

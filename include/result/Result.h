@@ -14,7 +14,11 @@
 /* One party slot's result record (0x620 bytes). */
 struct ResultEntry {
     /* 0x000 */ s8 unitIndex;        /* the unit record shown in this slot */
-    /* 0x001 */ u8 unk001[0x49];
+    /* 0x001 */ u8 unk001[0x1F];
+    /* 0x020 */ s16 maxHp;           /* the player's maximum HP, MP and five stats when the level-up began */
+    /* 0x022 */ s16 maxMp;
+    /* 0x024 */ s16 stats[5];
+    /* 0x02E */ u8 unk02E[0x1C];
     /* 0x04A */ u16 overrideId;      /* demon id reported instead of the unit's own */
     /* 0x04C */ u8 unk04C[0x5BC];
     /* 0x608 */ u16 value;
@@ -48,11 +52,16 @@ struct ResultWork : ResultInputWork {
     /* 0x3654 */ ResultEntry entries[RESULT_ENTRY_COUNT];
     /* 0xCF74 */ u32 entryCount;
     /* 0xCF78 */ s32 current;                 /* index of the current entry */
-    /* 0xCF7C */ u8 unkCF7C[0xBC];
+    /* 0xCF7C */ u8 unkCF7C[0x50];
+    /* 0xCFCC */ s32 remainingPoints;         /* stat points still to hand out */
+    /* 0xCFD0 */ u8 unkCFD0[4];
+    /* 0xCFD4 */ u8 statCursor[0x64];         /* the list cursor over the five stats */
     /* 0xD038 */ s32 valueIndex;
     /* 0xD03C */ u32 pendingValue;
     /* 0xD040 */ s32 scriptValue;             /* reported to the script by FUN_003235a8 */
-    /* 0xD044 */ u8 unkD044[0x5FD];
+    /* 0xD044 */ u8 unkD044[0x4EC];
+    /* 0xD530 */ s8 startLevel;               /* the player's level before the level-ups */
+    /* 0xD531 */ u8 unkD531[0x110];
     /* 0xD641 */ u8 rewardFlagA;              /* copied from the battle reward (+0x3C) */
     /* 0xD642 */ u8 rewardFlagB;              /* copied from the battle reward (+0x3D) */
     /* 0xD643 */ u8 unkD643;
@@ -70,6 +79,11 @@ typedef char ResultWorkOffsetsCheck[
     offsetof(ResultWork, rewardFlagA) == 0xD641 && offsetof(ResultWork, calculate) == 0xD644 &&
     offsetof(ResultWork, drawDown) == 0xD64C && sizeof(ResultEntry) == 0x620 &&
     offsetof(ResultEntry, value) == 0x608 && sizeof(ResultWork) == 0xD658 ? 1 : -1];
+typedef char ResultWorkLevelUpOffsetsCheck[
+    offsetof(ResultEntry, maxHp) == 0x20 && offsetof(ResultEntry, stats) == 0x24 &&
+    offsetof(ResultEntry, overrideId) == 0x4A && offsetof(ResultWork, remainingPoints) == 0xCFCC &&
+    offsetof(ResultWork, statCursor) == 0xCFD4 && offsetof(ResultWork, valueIndex) == 0xD038 &&
+    offsetof(ResultWork, startLevel) == 0xD530 && offsetof(ResultWork, rewardFlagA) == 0xD641 ? 1 : -1];
 
 extern "C" {
 extern ResultWork *g_result;

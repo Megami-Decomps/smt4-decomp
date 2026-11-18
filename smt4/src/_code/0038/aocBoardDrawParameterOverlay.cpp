@@ -1,19 +1,9 @@
 #include "ui/UiSpriteApi.h"
-#include "gfx/DrawParameterOwner.h"
+#include "addon/AocBoard.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
 #include "camp/RenderCtxTitle.h"
-
-namespace {
-// The speed belongs beyond the canonical draw-owner prefix, whose size remains 0x440.
-struct ParameterOverlayWorkView {
-    DrawParameterOwner owner;
-    UiSpriteState animation; // 0x440, speed at animation + 0x20
-};
-typedef char ParameterOverlayWorkSpeedOffsetCheck[
-    offsetof(ParameterOverlayWorkView, animation) == 0x440 && sizeof(ParameterOverlayWorkView) == 0x4CC ? 1 : -1];
-}
 
 extern "C" {
 s32 renderCtxPackPassFlags(u32 preset, u32 index);
@@ -24,7 +14,7 @@ void renderCtxResetColorScale(RenderCtx *context);
 // Draw the enabled overlay at the owner's animation speed and restore render state.
 u32 aocBoardDrawParameterOverlay(u32 job)
 {
-    ParameterOverlayWorkView *work = (ParameterOverlayWorkView *)jobGetWork(job);
+    AocBoardWork *work = reinterpret_cast<AocBoardWork *>(jobGetWork(job));
     if (work->owner.dirty == 0)
         return 0;
     u32 enabled = work->owner.control.flags & 0x10;
@@ -32,7 +22,7 @@ u32 aocBoardDrawParameterOverlay(u32 job)
         return enabled;
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    efctSetSpeed(vec2GetSpeed(&work->animation));
+    efctSetSpeed(vec2GetSpeed(&work->sprites[0]));
     texDrawTableEntryAtStoredOrigin(2, 14, 0x14F, 0, 0, 6);
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);

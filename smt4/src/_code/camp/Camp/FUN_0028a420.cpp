@@ -18,7 +18,7 @@ int campRebuildOwnedInventoryCategory(...);
 int FUN_00282f80(...);
 int table8Type5GetValue(void);
 int commonBgAcquire(void);
-int FUN_0028b7f8(...);
+int partyPanelCreate(...);
 int buttonHelpCreate(void);
 int pair40Set(...);
 int FUN_00297408(void);
@@ -73,7 +73,7 @@ extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_00282f80. */
 /* Supplied declaration required: table8Type5GetValue. */
 /* Supplied declaration required: commonBgAcquire. */
-/* Supplied declaration required: FUN_0028b7f8. */
+/* Supplied declaration required: partyPanelCreate. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_00292bcc. */
 /* Supplied declaration required: pair40Set. */
@@ -201,7 +201,7 @@ void FUN_0028a420(void)
   campRefreshEquipmentCategory(0x15);
   campRefreshEquipmentCategory(0x16);
   campRefreshEquipmentCategory(0x17);
-  FUN_0028b7f8(1);
+  partyPanelCreate(1);
   temp_v6 = g_partyPanel;
   gameGetSlotTable(&g_partyPanel,0,0xffffffff);
   *(unsigned char *)(temp_v6 + 0x66c) = 1;

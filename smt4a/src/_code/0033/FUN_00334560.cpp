@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the menu-state transition tail differs: retail stores the previous state, then the new state with a writeback store, then the zeroed timer; the build hoists the zero and merges the two state stores into one stm. */
 #include "shard/W5_W5Match7_UiQuest.h"
 
 extern "C" {
@@ -15,12 +14,22 @@ void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
 s32 campIsState85(void);
 void FUN_00202400(void);
 
-/* Moves the quest menu to `next`, remembering the state it left and restarting its timer. */
-static __inline void uiQuestEnterMenuState(UiQuestApoc *quest, s32 next)
+/* Opens a special quest's detail on its first special page (page 0 when it has none); the same block
+ * is inlined in uiQuestReturnToList, FUN_00334560 and FUN_0023eaf8. */
+static __inline void uiQuestSelectSpecialDetailPage(u16 id)
 {
-    quest->previousMenuState = quest->menuState;
-    quest->menuState = next;
-    quest->menuTimer = 0;
+    UiQuestApoc *quest = g_uiQuest;
+    if (!partyEntryBitsBit4(id) && questHasSpecialDetailPage(id)) {
+        s32 index;
+        for (index = 0; index < quest->listState.count; ++index) {
+            if (FUN_002f7730(index, id) == 3)
+                break;
+        }
+        if (index >= quest->listState.count)
+            index = 0;
+        quest->listState.selection = index;
+        quest->listState.previousSelection = index;
+    }
 }
 
 // Enter details from the alternate quest list, selecting a special detail page when available.
@@ -32,19 +41,8 @@ void FUN_00334560(void)
     u16 id = quest->alternateView()->list[resourceRunOperationIfUnblocked(quest->alternateView()->cursor) +
                                             listCursorGetRowIfUnblocked(quest->alternateView()->cursor)];
     FUN_003d498c(id, 1);
-    u16 selected = quest->selectedId = id;
-    UiQuestApoc *current = g_uiQuest;
-    if (!partyEntryBitsBit4(selected) && questHasSpecialDetailPage(selected)) {
-        s32 index = 0;
-        for (; index < current->listState.count; ++index) {
-            if (FUN_002f7730(index, selected) == 3)
-                break;
-        }
-        if (current->listState.count <= index)
-            index = 0;
-        current->listState.selection = index;
-        current->listState.previousSelection = index;
-    }
+    quest->selectedId = id;
+    uiQuestSelectSpecialDetailPage(id);
     if (quest->detailMode > 2)
         questMarkSelectedSpecialDetail();
     uiSpriteSetKeyframe(quest->mainSprite, 0, 0);

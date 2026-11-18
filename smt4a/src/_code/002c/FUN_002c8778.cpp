@@ -1,4 +1,3 @@
-/* NON_MATCHING: remaining: the menu-state store group: retail emits `stmib r0!, {r1, r2}` then `str r6, [r0, #8]`, the build stores the timer first and uses `stm` with an extra add (72 vs 71 rows) */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "ui/UiSpriteApi.h"
 #include <stddef.h>
@@ -10,43 +9,25 @@ void sysPlayVoice(u32 voice);
 // Reset the quest detail animations, select the quest, and enter the confirmation state.
 void FUN_002c8778(u16 questId)
 {
-    // The trailing counters are beyond the currently documented UiQuestApoc layout.
-    struct QuestEntryView {
-        u8 unk000[0x34];
-        UiSpriteState mainSprite;
-        u8 unk0c0[0x4ec];
-        UiSpriteState details[6]; // 0x5ac
-        u8 unk8f4[0x40];
-        u32 detailTimer; // 0x934
-        u8 unk938[0x392];
-        u16 questId; // 0xcca
-        u8 unkccc[0x7c];
-        u32 firstCounter; // 0xd48
-        u32 secondCounter; // 0xd4c
-    };
-    typedef char QuestEntryViewOffsetCheck[offsetof(QuestEntryView, details) == 0x5ac && offsetof(QuestEntryView, questId) == 0xcca && offsetof(QuestEntryView, firstCounter) == 0xd48 ? 1 : -1];
-    QuestEntryView *menu = reinterpret_cast<QuestEntryView *>(g_uiQuest);
+    UiQuestApoc *menu = g_uiQuest;
     menu->questId = questId;
     menu->detailTimer = 0;
-    uiSpriteSetKeyframe(&menu->mainSprite, 1, 0);
-    uiSpriteSetImageKeyframe(&menu->mainSprite, 8, 0);
+    uiSpriteSetKeyframe(menu->sprite(0), 1, 0);
+    uiSpriteSetImageKeyframe(menu->sprite(0), 8, 0);
     if (menu) {
-        uiSpriteSetKeyframe(&menu->details[0], 7, 0);
-        uiSpriteSetImageKeyframe(&menu->details[0], 11, 0);
-        uiSpriteSetKeyframe(&menu->details[1], 8, 0);
-        uiSpriteSetImageKeyframe(&menu->details[1], 11, 0);
-        uiSpriteSelectAnim(&menu->details[2], 6);
-        uiSpriteSelectAnim(&menu->details[3], 7);
-        uiSpriteSelectAnim(&menu->details[4], 8);
-        spriteSetLayer(&menu->details[4], 2);
-        uiSpriteSelectAnim(&menu->details[5], 10);
+        uiSpriteSetKeyframe(menu->sprite(10), 7, 0);
+        uiSpriteSetImageKeyframe(menu->sprite(10), 11, 0);
+        uiSpriteSetKeyframe(menu->sprite(11), 8, 0);
+        uiSpriteSetImageKeyframe(menu->sprite(11), 11, 0);
+        uiSpriteSelectAnim(menu->sprite(12), 6);
+        uiSpriteSelectAnim(menu->sprite(13), 7);
+        uiSpriteSelectAnim(menu->sprite(14), 8);
+        spriteSetLayer(menu->sprite(14), 2);
+        uiSpriteSelectAnim(menu->sprite(15), 10);
         menu->firstCounter = 0;
         menu->secondCounter = 0;
     }
-    UiQuestApoc *state = g_uiQuest;
-    state->previousMenuState = state->menuState;
-    state->menuState = 0x11;
-    state->menuTimer = 0;
+    uiQuestEnterMenuState(g_uiQuest, 0x11);
     sysPlaySe(0x1a);
     sysPlayVoice(0x10000ca);
 }

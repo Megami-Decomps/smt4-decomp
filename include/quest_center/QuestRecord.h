@@ -19,7 +19,7 @@ struct QuestReward {
    Apocalypse's differs: QuestRecordA in quest_center/QuestRecordA.h. */
 struct QuestRecord {
     /* 0x000 */ u16 id;
-    /* 0x002 */ u8 unk002[2];
+    /* 0x002 */ s16 eventId;            /* event/eNNN/eNNN.bf run when the quest is started from the camp */
     /* 0x004 */ u16 order;              /* list order */
     /* 0x006 */ u8 kind;                /* quest category (6: activated by questActivateEligibleCategorySix, 9: mode-24 records) */
     /* 0x007 */ u8 flags;               /* bit 0, bit 1: tested flags; bit 2: also gated on flags 0x674-0x67B; 0x10: unavailable; 0x20: needs the mask; 0x40: has a detail page; 0x80: active */

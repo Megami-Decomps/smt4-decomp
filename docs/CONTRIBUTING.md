@@ -263,6 +263,11 @@ a sibling setter or another user of the same lookup is usually written the same 
 - A worker thread is `for (;;) { if (work->stop) break; switch (work->state) { ... } sleep(span); }`
   with each `case` advancing `state++` and falling through; the stop flag is an `s8`, and the sleep
   takes its `nn::fnd::TimeSpan` by value.
+- A run of `ldr r2,[r0,#4]; stmib r0!,{r1,r2}` (or `str r2,[r0,#8]; str r1,[r0,#4]!`) is a history
+  shift: `for (u32 i = N - 1; i > 0; --i) states[i] = states[i - 1]; states[0] = next;` over an array
+  member, with a `u32` index (`s32` compiles differently). See `uiQuestEnterMenuState`.
+- An address-taken local declared at function scope stops every tail call in the function; declared in
+  the nested block that uses it, the earlier tail calls come back.
 
 **Locals, constants and literal pools**
 - A local pointer to a global moves its pool word earlier; a constant passed through a
@@ -274,6 +279,12 @@ a sibling setter or another user of the same lookup is usually written the same 
   reload.
 - A status local (`s32 result = 1;`) after the argument read keeps a constant shared by a shift and
   the return value in a callee-saved register.
+- Value-initialising a real contiguous subobject (`emitter->cycle = EmitterCycle();`) clears it with
+  integer stores, float members included, where field-by-field `0.0f` stores use VFP registers.
+- Reading `table->count` at each use instead of caching it in a local changes which registers the
+  loop's values get; try both before calling a difference allocation.
+- A caller that sign-extends a value it passes (`sxth`) usually means the field it came from is
+  `s16`; change the field and the prototypes together.
 - Conversions through `static __inline f32 get(p) { return p->field; }`; rounding as
   `f32 half = 0.5f;` declared first, then `floorf(scaled + half)`.
 - A plain `static` function that armcc inlines on its own and the same body marked `static __inline`

@@ -11,10 +11,10 @@ extern "C" {
 /* Clears the sprite and sets its texture table, its images, its animation resource, its id and its opacity
    (scale 1, every track done). */
 void uiSpriteInitializeState(UiSpriteState *sprite, u32 textureTable, s32 image, s32 secondaryImage,
-                             UiResourceParameters *resources, u16 id, f32 alpha);
+                             UiResourceParameters *resources, s16 id, f32 alpha);
 /* uiSpriteInitializeState without a secondary image. */
 void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 textureTable, s32 image,
-                                 UiResourceParameters *resources, u16 id, f32 alpha);
+                                 UiResourceParameters *resources, s16 id, f32 alpha);
 /* Starts opacity key `key` (from its last value to its first when `reverse`). */
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 reverse);
 /* The finished flag: every track is done. */

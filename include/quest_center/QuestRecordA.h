@@ -20,7 +20,7 @@ struct QuestRewardA {
    IV's differs: QuestRecord in quest_center/QuestRecord.h. */
 struct QuestRecordA {
     /* 0x000 */ u16 id;
-    /* 0x002 */ u8 unk002[2];
+    /* 0x002 */ s16 eventId;            /* event/eNNN/eNNN.bf run when the quest is started from the camp */
     /* 0x004 */ u16 order;              /* list order */
     /* 0x006 */ u8 kind;                /* quest category (9: mode-24 records) */
     /* 0x007 */ u8 flags;               /* bit 0, bit 1: tested flags; 8: unavailable; 0x10: needs the mask */

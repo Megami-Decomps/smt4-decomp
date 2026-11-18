@@ -2,16 +2,26 @@
 #define CAMP_SCRIPTPANELRESOURCES_H
 #include "common.h"
 #include <stddef.h>
+#include "shard/Shard004B.h"
 struct ScriptProcess;
-struct ListEntry20;
+struct MikadoRecord;
+class MikadoTalkWorkA;
 struct CampScriptPanelResources {
     union {
         /* 0x0000 */ u8 unk0000[0x90];
         struct {
             u8 unk0000[0x20];
             /* 0x0020 */ u32 flags;
-            u8 unk0024[0x18];
+            u32 unk0024;
+            /* 0x0028 */ u32 state;
+            /* 0x002C */ u32 step;         /* step within the state */
+            /* 0x0030 */ s32 frame;        /* frames counted by the step */
+            u8 unk0034[8];
             /* 0x003C */ s16 sceneId;
+            u8 unk003E[0xA];
+            /* 0x0048 */ u8 exitRequest[4]; /* how to leave with the camp's resources kept: [0] map selection 100-199,
+                                             * [1] below 100, [2] 200 and up, [3] save mode 2 */
+            /* 0x004C */ u16 menuTotal;    /* flaggedValueHolderGetTotal of the menu */
         } mikado;
         struct {
             u8 prefix[0x28];
@@ -26,11 +36,22 @@ struct CampScriptPanelResources {
         /* 0x0094 */ u32 textureImage;
         struct { u8 prefix[8]; u8 menu[1]; } selectionMenu;
         struct { u8 prefix[0x1088]; ListEntry20 *entry; } selected;
+        struct {
+            u8 prefix[8];
+            /* 0x009C */ Menu4C menu;
+            /* 0x1114 */ u8 table33[4];
+            /* 0x1118 */ const MikadoRecord *record; /* the location shown */
+            /* 0x111C */ ListEntry20 *entry;
+            /* 0x1120 */ s32 group;
+        } panel;
     };
     /* 0x1128 */ void *scriptFileA;
     /* 0x112C */ void *messageFileA;
     /* 0x1130 */ ScriptProcess *scriptA;
-    /* 0x1134 */ u8 unk1134[0x1C];
+    /* 0x1134 */ u8 unk1134[4];
+    /* 0x1138 */ void *talkScript;   /* "mikado/talk.bf" */
+    /* 0x113C */ void *talkMessages; /* "mikado/talk.mbm" */
+    /* 0x1140 */ u8 unk1140[0x10];
     /* 0x1150 */ void *scriptFileB;
     /* 0x1154 */ void *messageFileB;
     /* 0x1158 */ ScriptProcess *scriptB;
@@ -39,7 +60,10 @@ struct CampScriptPanelResources {
     /* 0x1169 */ u8 unk1169[0xAB];
     /* 0x1214 */ s8 cacheLoaded;
     /* 0x1215 */ u8 unk1215[3];
-    /* 0x1218 */ u32 cacheHandle;
+    union {
+        /* 0x1218 */ u32 cacheHandle;
+        /* 0x1218 */ MikadoTalkWorkA *talkWork; /* the scene's camera controller, while cacheLoaded */
+    };
     /* 0x121C */ void *cachedFiles[10];
 };
 typedef char CampScriptPanelResourceOffsets[(offsetof(CampScriptPanelResources, scriptA) == 0x1130 && offsetof(CampScriptPanelResources, cacheLoaded) == 0x1214 && sizeof(CampScriptPanelResources) == 0x1244) ? 1 : -1];
@@ -54,6 +78,18 @@ typedef char CampScriptPanelTransitionOffsets[
     offsetof(CampScriptPanelResources, selectionMenu.menu) == 0x9C &&
     offsetof(CampScriptPanelResources, selected.entry) == 0x111C &&
     sizeof(CampScriptPanelResources) == 0x1244 ? 1 : -1];
+typedef char CampScriptPanelViewOffsets[
+    offsetof(CampScriptPanelResources, mikado.step) == 0x2C &&
+    offsetof(CampScriptPanelResources, mikado.exitRequest) == 0x48 &&
+    offsetof(CampScriptPanelResources, mikado.menuTotal) == 0x4C &&
+    offsetof(CampScriptPanelResources, panel.menu) == 0x9C &&
+    offsetof(CampScriptPanelResources, panel.menu.inputLocked) == 0xA88 &&
+    offsetof(CampScriptPanelResources, panel.record) == 0x1118 &&
+    offsetof(CampScriptPanelResources, panel.group) == 0x1120 &&
+    offsetof(CampScriptPanelResources, talkMessages) == 0x113C &&
+    offsetof(CampScriptPanelResources, keepUi) == 0x1168 &&
+    offsetof(CampScriptPanelResources, talkWork) == 0x1218 &&
+    offsetof(CampScriptPanelResources, cachedFiles) == 0x121C ? 1 : -1];
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: The enabled constant stays live in r6, enlarging the save set; final menu-state stores are scheduled differently. */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "code/Code001b.h"
 
@@ -19,10 +18,7 @@ void FUN_0038b710(u32 questId)
     FUN_003d498c(questId, 1);
     uiSpriteSetKeyframe(quest->mainSprite, 0, 0);
     uiSpriteSetImageKeyframe(quest->mainSprite, 8, 0);
-    UiQuestApoc *current = g_uiQuest;
-    current->previousMenuState = current->menuState;
-    current->menuState = 1;
-    current->menuTimer = 0;
+    uiQuestEnterMenuState(g_uiQuest, 1);
     quest->nextMenuState = 0x1c;
 }
 }

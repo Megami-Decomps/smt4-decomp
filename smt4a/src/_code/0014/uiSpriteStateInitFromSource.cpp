@@ -3,7 +3,7 @@
 
 // uiSpriteInitializeState, inlined.
 static __inline void uiSpriteInitializeStateInline(UiSpriteState *sprite, u32 textureTable, s32 image, s32 secondaryImage,
-                                                   UiResourceParameters *resources, u16 id, f32 alpha)
+                                                   UiResourceParameters *resources, s16 id, f32 alpha)
 {
     sysMemClear(sprite, sizeof(UiSpriteState));
     sprite->textureTable = textureTable;
@@ -29,7 +29,7 @@ static __inline void uiSpriteInitializeStateInline(UiSpriteState *sprite, u32 te
 
 /* Initializes the sprite without a secondary image. */
 extern "C" void uiSpriteStateInitFromSource(UiSpriteState *sprite, u32 textureTable, s32 image,
-                                            UiResourceParameters *resources, u16 id, f32 alpha)
+                                            UiResourceParameters *resources, s16 id, f32 alpha)
 {
     uiSpriteInitializeStateInline(sprite, textureTable, image, -1, resources, id, alpha);
 }

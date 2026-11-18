@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocation/global-store and process-create argument scratch registers differ; local full-allocation view preserves shared prefix. */
+/* NON_MATCHING: the data-size store and the first process-create call use different scratch registers. */
 #include "title/S4Load.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
@@ -48,12 +48,10 @@ u32 FUN_002c7150(void)
     LoadInitializationView *work = static_cast<LoadInitializationView *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(LoadInitializationView), 1));
     g_s4Load = reinterpret_cast<S4Load *>(work);
     work->state = 0;
-    s32 index = 0;
-    do {
+    for (s32 index = 0; index < 2; ++index) {
         rt_aeabi_memclr(work->slotData[index], sizeof(work->slotData[index]));
         work->slotState[index] = 0;
-        ++index;
-    } while (index < 2);
+    }
     work->selection = 0;
     work->page = 1;
     work->loaded = 0;

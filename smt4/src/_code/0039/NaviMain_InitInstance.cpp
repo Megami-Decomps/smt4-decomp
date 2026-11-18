@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps -1 in one register for the byte at +0xc and the halfword at +0x121c0, merges nothing in the 0xb7c..0xb84 stores (here two are fused into an stm), and refers to its key tables through DAT_00404a9c rather than .constdata; the same stores and calls in the same order. */
+/* NON_MATCHING: armcc combines the view-size stores into an stm and schedules memFill8's value argument earlier than retail. */
 #include "gamedata/MapSaveBlock.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
@@ -63,7 +63,7 @@ struct NaviMainWork {
     /* 0x121bc */ u8 unk121BC;
     /* 0x121bd */ u8 unk121bd[0x1];
     /* 0x121be */ u16 unk121BE;
-    /* 0x121c0 */ u16 unk121C0;
+    /* 0x121c0 */ s16 discoveredMap; /* -1 until the discovery pass tracks a map */
     /* 0x121c2 */ u8 unk121c2[0xa];
     /* 0x121cc */ u32 unk121CC;
     /* 0x121d0 */ u8 unk121d0[0x14];
@@ -154,7 +154,7 @@ void NaviMain_InitInstance(NaviMainWork *work)
     work->unk12268 = 0;
     work->unk121BC = 0;
     work->unk121BE = 0;
-    work->unk121C0 = -1;
+    work->discoveredMap = -1;
     memFill8(work->unk122E8, 1);
     for (s32 i = 0; i < 32; i++) {
         work->halves[i].first = 0;

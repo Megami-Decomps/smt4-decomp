@@ -54234,12 +54234,12 @@
     },
     {
       "address": "0x1ffe84",
-      "function": "FUN_001ffe84",
+      "function": "campSkillListUpdate",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001ffe84.o",
+      "object": "build/obj/_code/001f/campSkillListUpdate.o",
       "size": 2380,
-      "source": "src/_code/001f/FUN_001ffe84.cpp",
-      "target": "orig/target/_code/001f/FUN_001ffe84.o",
+      "source": "src/_code/001f/campSkillListUpdate.cpp",
+      "target": "orig/target/_code/001f/campSkillListUpdate.o",
       "thumb": false
     },
     {
@@ -55522,12 +55522,12 @@
     },
     {
       "address": "0x213020",
-      "function": "FUN_00213020",
+      "function": "particleRingEmitterUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_00213020.o",
+      "object": "build/obj/_code/0021/particleRingEmitterUpdate.o",
       "size": 768,
-      "source": "src/_code/0021/FUN_00213020.cpp",
-      "target": "orig/target/_code/0021/FUN_00213020.o",
+      "source": "src/_code/0021/particleRingEmitterUpdate.cpp",
+      "target": "orig/target/_code/0021/particleRingEmitterUpdate.o",
       "thumb": false
     },
     {
@@ -55786,12 +55786,12 @@
     },
     {
       "address": "0x215cb8",
-      "function": "FUN_00215cb8",
+      "function": "uiQuestCalc",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_00215cb8.o",
+      "object": "build/obj/_code/0021/uiQuestCalc.o",
       "size": 5772,
-      "source": "src/_code/0021/FUN_00215cb8.cpp",
-      "target": "orig/target/_code/0021/FUN_00215cb8.o",
+      "source": "src/_code/0021/uiQuestCalc.cpp",
+      "target": "orig/target/_code/0021/uiQuestCalc.o",
       "thumb": false
     },
     {
@@ -58764,12 +58764,12 @@
     },
     {
       "address": "0x23b4cc",
-      "function": "FUN_0023b4cc",
+      "function": "uiQuestDrawUpper",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023b4cc.o",
+      "object": "build/obj/_code/0023/uiQuestDrawUpper.o",
       "size": 912,
-      "source": "src/_code/0023/FUN_0023b4cc.cpp",
-      "target": "orig/target/_code/0023/FUN_0023b4cc.o",
+      "source": "src/_code/0023/uiQuestDrawUpper.cpp",
+      "target": "orig/target/_code/0023/uiQuestDrawUpper.o",
       "thumb": false
     },
     {
@@ -63139,12 +63139,12 @@
     },
     {
       "address": "0x28587c",
-      "function": "FUN_0028587c",
+      "function": "uiQuestDrawLower",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_0028587c.o",
+      "object": "build/obj/_code/0028/uiQuestDrawLower.o",
       "size": 340,
-      "source": "src/_code/0028/FUN_0028587c.cpp",
-      "target": "orig/target/_code/0028/FUN_0028587c.o",
+      "source": "src/_code/0028/uiQuestDrawLower.cpp",
+      "target": "orig/target/_code/0028/uiQuestDrawLower.o",
       "thumb": false
     },
     {
@@ -78540,12 +78540,12 @@
     {
       "address": "0x2f0c18",
       "file": "camp/UIQuest/UIQuest",
-      "function": "FUN_002f0c18",
+      "function": "uiQuestCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/UIQuest/UIQuest/FUN_002f0c18.o",
+      "object": "build/obj/_code/camp/UIQuest/UIQuest/uiQuestCreate.o",
       "size": 1720,
-      "source": "src/_code/camp/UIQuest/UIQuest/FUN_002f0c18.cpp",
-      "target": "orig/target/_code/camp/UIQuest/UIQuest/FUN_002f0c18.o",
+      "source": "src/_code/camp/UIQuest/UIQuest/uiQuestCreate.cpp",
+      "target": "orig/target/_code/camp/UIQuest/UIQuest/uiQuestCreate.o",
       "thumb": false
     },
     {
@@ -102857,12 +102857,12 @@
     {
       "address": "0x3493dc",
       "file": "camp/PartyPanel/PartyPanel",
-      "function": "FUN_003493dc",
+      "function": "partyPanelCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/PartyPanel/PartyPanel/FUN_003493dc.o",
+      "object": "build/obj/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.o",
       "size": 1804,
-      "source": "src/_code/camp/PartyPanel/PartyPanel/FUN_003493dc.cpp",
-      "target": "orig/target/_code/camp/PartyPanel/PartyPanel/FUN_003493dc.o",
+      "source": "src/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.cpp",
+      "target": "orig/target/_code/camp/PartyPanel/PartyPanel/partyPanelCreate.o",
       "thumb": false
     },
     {
@@ -103493,12 +103493,12 @@
     },
     {
       "address": "0x34e784",
-      "function": "FUN_0034e784",
+      "function": "saveSlotDrawClippedGaugeFrame",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_0034e784.o",
+      "object": "build/obj/_code/0034/saveSlotDrawClippedGaugeFrame.o",
       "size": 740,
-      "source": "src/_code/0034/FUN_0034e784.cpp",
-      "target": "orig/target/_code/0034/FUN_0034e784.o",
+      "source": "src/_code/0034/saveSlotDrawClippedGaugeFrame.cpp",
+      "target": "orig/target/_code/0034/saveSlotDrawClippedGaugeFrame.o",
       "thumb": false
     },
     {
@@ -129443,12 +129443,12 @@
     },
     {
       "address": "0x3e9cec",
-      "function": "FUN_003e9cec",
+      "function": "btlInitializeDemonUnitState",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003e9cec.o",
+      "object": "build/obj/_code/003e/btlInitializeDemonUnitState.o",
       "size": 588,
-      "source": "src/_code/003e/FUN_003e9cec.cpp",
-      "target": "orig/target/_code/003e/FUN_003e9cec.o",
+      "source": "src/_code/003e/btlInitializeDemonUnitState.cpp",
+      "target": "orig/target/_code/003e/btlInitializeDemonUnitState.o",
       "thumb": false
     },
     {
@@ -136998,12 +136998,12 @@
     },
     {
       "address": "0x42021c",
-      "function": "FUN_0042021c",
+      "function": "saveLoadUIUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_0042021c.o",
+      "object": "build/obj/_code/0042/saveLoadUIUpdate.o",
       "size": 1620,
-      "source": "src/_code/0042/FUN_0042021c.cpp",
-      "target": "orig/target/_code/0042/FUN_0042021c.o",
+      "source": "src/_code/0042/saveLoadUIUpdate.cpp",
+      "target": "orig/target/_code/0042/saveLoadUIUpdate.o",
       "thumb": false
     },
     {
@@ -153802,12 +153802,12 @@
     },
     {
       "address": "0x472568",
-      "function": "FUN_00472568",
+      "function": "aocBoardUpdateAnimation",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00472568.o",
+      "object": "build/obj/_code/0047/aocBoardUpdateAnimation.o",
       "size": 688,
-      "source": "src/_code/0047/FUN_00472568.cpp",
-      "target": "orig/target/_code/0047/FUN_00472568.o",
+      "source": "src/_code/0047/aocBoardUpdateAnimation.cpp",
+      "target": "orig/target/_code/0047/aocBoardUpdateAnimation.o",
       "thumb": false
     },
     {
@@ -154976,12 +154976,12 @@
     },
     {
       "address": "0x47c36c",
-      "function": "FUN_0047c36c",
+      "function": "aocMenuUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_0047c36c.o",
+      "object": "build/obj/_code/0047/aocMenuUpdate.o",
       "size": 552,
-      "source": "src/_code/0047/FUN_0047c36c.cpp",
-      "target": "orig/target/_code/0047/FUN_0047c36c.o",
+      "source": "src/_code/0047/aocMenuUpdate.cpp",
+      "target": "orig/target/_code/0047/aocMenuUpdate.o",
       "thumb": false
     },
     {
@@ -162725,12 +162725,12 @@
     },
     {
       "address": "0x4b990c",
-      "function": "FUN_004b990c",
+      "function": "mikadoCampVisitUpdate",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004b990c.o",
+      "object": "build/obj/_code/004b/mikadoCampVisitUpdate.o",
       "size": 1728,
-      "source": "src/_code/004b/FUN_004b990c.cpp",
-      "target": "orig/target/_code/004b/FUN_004b990c.o",
+      "source": "src/_code/004b/mikadoCampVisitUpdate.cpp",
+      "target": "orig/target/_code/004b/mikadoCampVisitUpdate.o",
       "thumb": false
     },
     {
@@ -166019,12 +166019,12 @@
     {
       "address": "0x4d1af8",
       "file": "battle/btlDebug",
-      "function": "FUN_004d1af8",
+      "function": "btlDebugFlagMenuCreate",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlDebug/FUN_004d1af8.o",
+      "object": "build/obj/_code/battle/btlDebug/btlDebugFlagMenuCreate.o",
       "size": 1572,
-      "source": "src/_code/battle/btlDebug/FUN_004d1af8.cpp",
-      "target": "orig/target/_code/battle/btlDebug/FUN_004d1af8.o",
+      "source": "src/_code/battle/btlDebug/btlDebugFlagMenuCreate.cpp",
+      "target": "orig/target/_code/battle/btlDebug/btlDebugFlagMenuCreate.o",
       "thumb": false
     },
     {

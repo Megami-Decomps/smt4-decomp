@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "ui/UiSpriteState.h"
 
 /* Coordinate controls used by the result-screen input callback. */
 struct ResultInputPosition {
@@ -50,7 +51,13 @@ struct ResultInputWork {
         } screen;
     };
     /* 0x00AC */ ResultInputPosition menuPosition;
-    /* 0x00B4 */ u8 unk00B4[0x458];
+    union {
+        /* 0x00B4 */ u8 unk00B4[0x458];
+        struct {
+            u8 prefixB4[0x340];
+            /* 0x03F4 */ UiSpriteState sprite; /* the highlighted stat row; its opacity fades the row's backdrop */
+        } statHighlight;
+    };
     /* 0x050C */ ResultInputPosition rewardPosition;
     union {
         /* 0x0514 */ u8 unk0514[0x84];
@@ -85,6 +92,7 @@ typedef char ResultInputResourceOffsets[
     offsetof(ResultInputWork, resources.demonMessages) == 0x2c &&
     offsetof(ResultInputWork, resources.selectedId) == 0x34 ? 1 : -1];
 typedef char ResultInputAnimationOffsets[
+    offsetof(ResultInputWork, statHighlight.sprite) == 0x3F4 &&
     offsetof(ResultInputWork, rewardAnimation.effectSpeed) == 0x52C &&
     offsetof(ResultInputWork, detailAnimation.effectSpeed) == 0x5B8 &&
     offsetof(ResultInputWork, curtain.curtainSprite) == 0x73C &&

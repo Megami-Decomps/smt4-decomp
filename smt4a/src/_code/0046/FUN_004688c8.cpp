@@ -14,7 +14,7 @@ int messageSetMode(int);
 int questDataGetRecord(void);
 int partyFindSlotById(int);
 int resultCreate(int);
-int FUN_002f0c18(void);
+int uiQuestCreate(void);
 int uniteReleaseExit(void);
 int FUN_00331714(int *);
 int uiQuestClose(void);
@@ -65,7 +65,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int screenFadeIsBusy(void);
 extern int FUN_002a746c(void);
 /* Supplied declaration required: resultCreate. */
-/* Supplied declaration required: FUN_002f0c18. */
+/* Supplied declaration required: uiQuestCreate. */
 extern unsigned int FUN_0031f8cc(void);
 /* Supplied declaration required: uniteReleaseExit. */
 /* Supplied declaration required: FUN_00331714. */
@@ -155,7 +155,7 @@ LAB_004689f8:
               temp_v4 = param_1[2] + 1;
             }
             else {
-              FUN_002f0c18();
+              uiQuestCreate();
               stateHolder4Request((int)(char)param_1[4]);
               temp_v4 = 3;
             }
@@ -182,7 +182,7 @@ LAB_004689f8:
     }
     param_1[2] = param_1[2] + 1;
   case 2:
-    FUN_002f0c18();
+    uiQuestCreate();
     stateHolder4Request((int)(char)param_1[4]);
     temp_v4 = param_1[2] + 1;
     break;

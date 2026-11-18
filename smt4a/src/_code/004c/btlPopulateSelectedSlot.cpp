@@ -45,7 +45,7 @@ RecoverableSlot *gameGetSlotRecord(s32);
 s32 bitsAt60Test(RecoverableSlot *, u32);
 u16 recordGetScaledMaximum(RecoverableSlot *);
 void bitsAt60Clear(RecoverableSlot *, u32);
-void FUN_003e9cec(BattleSlotState *, BattleSlotCore *, RecoverableSlot *, u32);
+void btlInitializeDemonUnitState(BattleSlotState *, BattleSlotCore *, RecoverableSlot *, u32);
 BattleSlotVisual *FUN_003e83b4(BattleSlotState *, s32, u32);
 void btlQueueActionMessage(s32, s32, u32, s32, s32, s32, s32);
 void FUN_004a9c24(BtlUiA *ui, s32, s32, s32);
@@ -63,7 +63,7 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
             record->hp = recordGetScaledMaximum(record);
             bitsAt60Clear(record, 2);
         }
-        FUN_003e9cec(battle, &scratch.core, record, 0);
+        btlInitializeDemonUnitState(battle, &scratch.core, record, 0);
         if (party->selected[slot] >= 0) {
             BattleSlotVisual *unit = FUN_003e83b4(battle, destination, 0);
             s32 assignedIndex = unit->unitIndex - 1;

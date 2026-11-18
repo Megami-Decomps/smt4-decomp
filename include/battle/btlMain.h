@@ -585,14 +585,25 @@ typedef struct BtlMainStateA {
             u8 prefix[0x25BA];
             u8 count; /* 0x45BA */
         } escapes;
+        struct {
+            u8 prefix[0x102C];
+            /* 0x302C */ s32 lastSaveTime;   /* "last save time" */
+            /* 0x3030 */ u32 unk3030;
+            /* 0x3034 */ s32 ddmDevilCount;  /* "DDM devil cnt" */
+        } debugValues;                       /* values the debug flag menu edits, by its labels */
     };
     /* 0x4CD0 */ u8 unk4cd0;
     /* 0x4CD1 */ s8 unk4cd1;
-    /* 0x4CD2 */ u8 unk4cd2[6];
+    /* 0x4CD2 */ u8 unk4cd2[2];
+    /* 0x4CD4 */ s32 debugEnemySkill; /* the debug flag menu's "enemy skill" value */
     /* 0x4CD8 */ u64 scriptFlags;
     /* 0x4CE0 */ u8 unk4ce0[0xC];
     /* 0x4CEC */ s32 specialEffect; /* effect handle for the special combatant, 0 = none */
 } BtlMainStateA;
+typedef char BtlMainStateADebugValueOffsetCheck[
+    offsetof(BtlMainStateA, debugValues.lastSaveTime) == 0x302C &&
+    offsetof(BtlMainStateA, debugValues.ddmDevilCount) == 0x3034 &&
+    offsetof(BtlMainStateA, debugEnemySkill) == 0x4CD4 && offsetof(BtlMainStateA, scriptFlags) == 0x4CD8 ? 1 : -1];
 typedef char BtlMainStateABattleMaskViewOffsetCheck[
     offsetof(BtlMainStateA, activity.first) == 0xEC && offsetof(BtlMainStateA, activity.currentAction) == 0xF0 &&
     offsetof(BtlMainStateA, activity.second) == 0x10C && sizeof(BattleCountSlot) == 4 &&

@@ -1,4 +1,4 @@
-/* NON_MATCHING: ratio VFP division destination, selected table-row/count register allocation and threshold load order differ. */
+/* NON_MATCHING: table-row, count and loop-index registers differ, as do the order of the threshold loads and the scratch register used for the out-of-range NULL. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/PartnerInfoTable.h"

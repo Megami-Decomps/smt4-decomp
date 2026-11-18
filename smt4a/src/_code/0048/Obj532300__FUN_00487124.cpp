@@ -1,4 +1,4 @@
-/* NON_MATCHING: same instructions as retail now (the +0x400 block view reproduces `ldr r6, =g_gameState+0x400; sub r9, r6, #1024`); only the saved-register numbering differs (retail frozen r5, sprite r7, zero r8, game state r9). */
+/* NON_MATCHING: the navigation flag uses the unsplit game-state base, and its address and the frozen bit occupy different saved registers. */
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "ui/UiSpriteApi.h"
@@ -67,37 +67,44 @@ void _ZN9Obj53230012FUN_00487124Ev(PulsePanel *panel)
             }
         }
     }
-    if (panel->pulseState == 0) {
+    switch (panel->pulseState) {
+    case 0:
         panel->pulseTimer++;
         if (panel->pulseTimer > 10) {
             panel->pulseState = 1;
             panel->pulseTimer = 0;
         }
-    } else if (panel->pulseState == 1) {
+        break;
+    case 1:
         panel->pulseTimer++;
         if (panel->pulseTimer > 10) {
             panel->pulseTimer = 0;
             panel->pulseState = 0;
         }
+        break;
     }
-    if (panel->stepState == 0) {
+    switch (panel->stepState) {
+    case 0:
         panel->stepTimer++;
         if (panel->pulseTimer > 9) {
             panel->stepState = 1;
             panel->stepTimer = 0;
         }
-    } else if (panel->stepState == 1) {
+        break;
+    case 1:
         panel->stepTimer++;
         if (panel->pulseTimer > 9) {
             panel->stepState = 2;
             panel->stepTimer = 0;
         }
-    } else if (panel->stepState == 2) {
+        break;
+    case 2:
         panel->stepTimer++;
         if (panel->pulseTimer > 9) {
             panel->stepState = 0;
             panel->stepTimer = 0;
         }
+        break;
     }
     if (frozen == 0) {
         if (FUN_00485d1c(panel) != 0) {

@@ -9,7 +9,11 @@
 typedef struct ListEntry20 {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u8 kind;
-    /* 0x21 */ u8 unk21[0x39];
+    /* 0x21 */ u8 unk21[7];
+    /* 0x28 */ s16 cameraView;   /* the view the scene's camera controller takes for this entry */
+    /* 0x2A */ u8 unk2A;
+    /* 0x2B */ s8 modelIndex;    /* which of the location's models the entry shows */
+    /* 0x2C */ u8 unk2C[0x2E];
     /* 0x5A */ u16 unk5A;
 } ListEntry20;
 
@@ -32,7 +36,8 @@ typedef struct Menu4C {
     /* 0x0AC */ u8 unk0AC[0x73C];
     /* 0x7E8 */ s32 count;
     /* 0x7EC */ ListEntry20 *list[0x7F];
-    /* 0x9E8 */ u8 unk9E8[5];
+    /* 0x9E8 */ u8 unk9E8[4];
+    /* 0x9EC */ u8 inputLocked;  /* set while the owner leaves for the camp */
     /* 0x9ED */ u8 unk9ED;
     /* 0x9EE */ u8 unk9EE;
     /* 0x9EF */ u8 unk9EF[0x21];

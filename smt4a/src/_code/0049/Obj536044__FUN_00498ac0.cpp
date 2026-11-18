@@ -6,7 +6,7 @@
 /* The appraisal shop scene. */
 struct AppraisalShop : public Obj536044 {
     u32 script() const { return reinterpret_cast<u32>(controller); }
-    /* 0x0190 */ u8 unk0190[0x214];
+    /* 0x03A0 */ u8 unk03A0[4];
     /* 0x03A4 */ f32 cursorPosition[2];
     /* 0x03AC */ u8 unk03AC[0x20];
     union {

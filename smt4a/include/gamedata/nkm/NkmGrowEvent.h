@@ -6,6 +6,7 @@
 
 extern "C" {
 s32 recordRestoreScaledMaximumPair(SlotRecordA *record);
+void partyRecordSetEquippedItemClampRank(SlotRecordA *record, u32 item, s32 slot);
 }
 
 #endif

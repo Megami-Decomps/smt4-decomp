@@ -1,15 +1,10 @@
-/* NON_MATCHING: state transition, panel arguments and tail-field offsets recovered; selected-tab/item address evaluation and saved registers still differ. */
+/* NON_MATCHING: the item-page address is scheduled after the cursor query, and the tab and item use different saved registers. */
 #include "common.h"
+#include "shard/Shard004A.h"
+#include "shop/EquipmentMenuPage.h"
 #include <stddef.h>
 
 extern "C" {
-
-/* One tab's value holder (0x74 bytes; only the count word at +8 is read here). */
-typedef struct ShopTab {
-    /* 0x00 */ u8 holder[8];
-    /* 0x08 */ s32 count;
-    /* 0x0C */ u8 unk0c[0x68];
-} ShopTab;
 
 /* The shop screen work block (only the fields used here, by their offsets). */
 typedef struct ShopMainWork {
@@ -29,8 +24,8 @@ typedef struct ShopMainWork {
     /* 0x00B40 */ s32 tab;
     /* 0x00B44 */ s32 cursor;
     /* 0x00B48 */ u8 unk00b48[0x18];
-    /* 0x00B60 */ ShopTab tabs[9];
-    /* 0x00F74 */ u16 items[9][2049];   /* per tab: entries of two halfwords */
+    /* 0x00B60 */ EquipmentMenuCursor tabs[9];
+    /* 0x00F74 */ EquipmentMenuPage pages[9];
     /* 0x09F86 */ u8 unk09f86[0x1602C - 0x9F86];
     /* 0x1602C */ s16 leftRecord;
     /* 0x1602E */ s16 rightRecord;
@@ -65,7 +60,6 @@ u32 panelSetTarget(u32 target, u8 flag);
 s32 FUN_004954e8(ShopMainWork *work);
 void messageChoiceShowCurrent(ShopMainWork *work);
 s32 FUN_004d0584(void);
-s32 flaggedValueHolderGetTotal(void *holder);
 s32 FUN_00498408(ShopMainWork *work, u16 item);
 s32 FUN_001ba3d0(u16 item);
 s32 FUN_0047fe44(u16 item);
@@ -106,12 +100,12 @@ void _ZN9Obj53604412FUN_00499fdcEv(ShopMainWork *work)
     s32 blocked = FUN_004954e8(work);
 
     messageChoiceShowCurrent(work);
-    if (work->tabs[work->tab].count > 0 && FUN_004d0584() != 0) {
+    if (work->tabs[work->tab].range.count > 0 && FUN_004d0584() != 0) {
         blocked = 1;
     }
     s32 tab = work->tab;
-    s32 total = flaggedValueHolderGetTotal(&work->tabs[tab]);
-    u16 item = work->items[tab][total * 2];
+    u32 total = flaggedValueHolderGetTotal(&work->tabs[tab].holder);
+    u16 item = work->pages[tab].items[total].id;
 
     if ((work->tab != 8 || ((FUN_00498408(work, item) == 0 || FUN_001ba3d0(item) > 1) && FUN_0047fe44(item) == 0))
         && blocked != 0) {

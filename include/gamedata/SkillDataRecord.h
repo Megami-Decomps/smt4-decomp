@@ -107,6 +107,7 @@ struct SkillDataRecordA {
             /* 0x00 */ u8 unk00[0x23];
             /* 0x23 */ u8 category;
             /* 0x24 */ u16 sortKey; /* the skill list order (the listing sort key is at 0x2C) */
+            /* 0x26 */ u16 rankCategory; /* category rank used for the equipped skill */
         } sort;
         struct {
             /* 0x00 */ char name[0x20]; /* the resource name (the sentinel "0": none) */
@@ -209,6 +210,7 @@ typedef char Table04RecordASizeCheck[sizeof(SkillDataRecordA) == 0x88 &&
 typedef char Table04CategoryOffsetCheck[offsetof(SkillDataRecordA, sort.category) == 0x23 &&
     offsetof(SkillDataRecordA, sort.sortKey) == 0x24 && offsetof(SkillDataRecordA, menuCategory) == 0x3C ? 1 : -1];
 typedef char Table04IdentityOffsetCheck[offsetof(SkillDataRecordA, identity.id) == 0x20 ? 1 : -1];
+typedef char Table04RankCategoryOffsetCheck[offsetof(SkillDataRecordA, sort.rankCategory) == 0x26 ? 1 : -1];
 typedef char Table04ExtraRecordOffsets[sizeof(Table04ExtraRecord) == 0x48 &&
     offsetof(Table04ExtraRecord, id) == 0x20 && offsetof(Table04ExtraRecord, flags) == 0x44 ? 1 : -1];
 typedef char Table04ExtraModifierOffsets[offsetof(Table04ExtraRecord, modifier.percentage) == 0x2F &&

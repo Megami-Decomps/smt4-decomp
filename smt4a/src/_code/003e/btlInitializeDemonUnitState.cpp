@@ -1,4 +1,4 @@
-/* NON_MATCHING: two scheduling differences only (the 0x1BE clear's address temp is computed after the 0x110 stores, and one skill-slot bitfield update loads its old halfword after instead of before the shift); 147 rows each. */
+/* NON_MATCHING: two scheduling differences only (the 0x1BE clear's address is computed after the unk116 store instead of before it, and one skill-slot bitfield update loads its old halfword after instead of before the shift); a `u8 *firstClearGroup = unit->clear1BE;` temporary hoisted above the stores reproduces both, but it is steering. */
 #include "battle/BattleUnitInit.h"
 #include "gamedata/NkmBaseRecordA.h"
 
@@ -14,7 +14,7 @@ void sysMemClear(void *memory, u32 size);
 
 /* Initializes a battle unit's state block from a party demon record; `enemy` marks a unit that is not
  * one of the party's slots. */
-void FUN_003e9cec(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s32 enemy)
+void btlInitializeDemonUnitState(u32 unused, BattleUnitState *unit, UnitSourceRecord *record, s32 enemy)
 {
     NkmBaseRecordA *model;
     s32 i;

@@ -18,7 +18,7 @@ void campCommonBgAcquire(void);
 void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
 void FUN_003a7644(AocMenu *menu);
-void FUN_0047c36c(AocMenu *menu);
+void aocMenuUpdate(AocMenu *menu);
 void titleSetSlotValueState2(s32 channel, s32 value);
 void soundChannelStopAll(s32 mask);
 void aocMainShutdown(void);
@@ -41,7 +41,7 @@ u32 FUN_0024b5ac(void)
         screen->state = 1;
         break;
     case 1:
-        FUN_0047c36c(screen->menu);
+        aocMenuUpdate(screen->menu);
         if ((screen->menu->flags & 1) != 0) {
             screen->state = 2;
         }

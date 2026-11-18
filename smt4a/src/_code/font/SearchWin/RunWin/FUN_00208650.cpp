@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected retail parallax (0.25f) and label color (0x57d8ffff); the early returns give retail's shared zero-result epilogue; label coordinate conversion and the signed /5 and %8 scheduling still differ. */
+/* NON_MATCHING: label coordinate register allocation and the draw call's argument and literal-pool order differ. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -45,20 +45,18 @@ u8 FUN_00208650(void)
         s32 x = vec2GetXInt((const UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt((const UiSpriteState *)win->anchor);
         efctSetSpeed(win->alpha);
-        RenderCtxA *scene = g_renderCtx;
         texDrawCompositeSprite(2, 8, 19, x, y, 110);
+        RenderCtxA *scene = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackPushCountedDirect(&scene->stackB, state);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x150, x, 0, 111);
         texDrawTableEntryAtStoredOrigin(2, 8, 0x151, x, 0, 111);
         renderStackPop(&g_renderCtx->stackB);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x153);
-        textDrawString(4, 0x57D8FFFF, (const char *)win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
-                     win->alpha);
-        s32 step = win->frame / 5;
-        s32 lit = step % 8;
+        textDrawString(4, 0x57D8FFFF, (const char *)win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f, win->alpha);
+        s32 lit = (win->frame / 5) % 8;
         s32 litPrevious = (lit + 7) % 8;
-        s32 lit2 = (step + 4) % 8;
+        s32 lit2 = (win->frame / 5 + 4) % 8;
         s32 lit2Previous = (lit2 + 7) % 8;
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: learned-skill exclusion copy is looped and zero/stack-base scheduling differs. */
 #include "gamedata/UnitStats.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SkillFlags.h"
@@ -19,8 +18,8 @@ u16 nkmGrowEventLearnRandomSkill(StatBlock *unit)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\nkm\\NkmGrowEvent.cpp", 585);
     u16 *candidates = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 501 * sizeof(u16), 1);
-    const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(unit->id));
     s32 tier = 0;
+    const NkmBaseRecord *record = reinterpret_cast<const NkmBaseRecord *>(nkmBaseGetRecord(unit->id));
     for (s32 index = 0; index < 8; ++index) {
         u16 skill = record->skills[index];
         if (skill != 0) {
@@ -63,8 +62,7 @@ u16 nkmGrowEventLearnRandomSkill(StatBlock *unit)
         s32 selection = randNextInRange((u16)(count - 1));
         for (s32 index = 0; index < 8; ++index) {
             if (unit->skills.ids[index] == 0) {
-                learned = candidates[selection];
-                unit->skills.ids[index] = learned;
+                learned = unit->skills.ids[index] = candidates[selection];
                 break;
             }
         }

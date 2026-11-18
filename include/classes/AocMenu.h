@@ -66,6 +66,10 @@ public:
         /* 0x000C */ u8 unk000C[0x1FC];
         struct {
             /* 0x000C */ u32 unk000C;
+            /* 0x0010 */ StepCallback flat[63];
+        } stepDispatch;
+        struct {
+            /* 0x000C */ u32 unk000C;
             /* 0x0010 */ StepCallback update[21];
             /* 0x00B8 */ StepCallback draw[21];
             /* 0x0160 */ StepCallback finish[21];
@@ -102,8 +106,10 @@ public:
     /* 0x1794 */ u32 unk1794;
     /* 0x1798 */ u32 unk1798;
     /* 0x179C */ u8 unk179C[4];
-    /* 0x17A0 */ u32 unk17A0;
-    /* 0x17A4 */ u8 unk17A4[0x748];
+    /* 0x17A0 */ union { u32 unk17A0; u32 childJob; };
+    /* 0x17A4 */ u8 unk17A4[8];
+    /* 0x17AC */ s32 touchMarker;
+    /* 0x17B0 */ u8 unk17B0[0x73C];
     /* 0x1EEC */ u32 unk1EEC;
     /* 0x1EF0 */ u8 unk1EF0[0x800];
 };
@@ -114,6 +120,8 @@ typedef char AocMenuMemberOffsetsCheck[
     offsetof(AocMenu, dispatchTable) == 0x2B4 && offsetof(AocMenu, panel) == 0x2E8 &&
     offsetof(AocMenu, tableFile) == 0x350 ? 1 : -1];
 typedef char AocMenuCallbackOffsetsCheck[
+    __INTADDR__(&((AocMenu *)0)->stepDispatch.flat) == 0x10 &&
+    __INTADDR__(&((AocMenu *)0)->touchMarker) == 0x17AC &&
     __INTADDR__(&((AocMenu *)0)->callbacks.update) == 0x10 &&
     __INTADDR__(&((AocMenu *)0)->callbacks.draw) == 0xb8 &&
     __INTADDR__(&((AocMenu *)0)->callbacks.finish) == 0x160 &&

@@ -1,4 +1,3 @@
-/* NON_MATCHING: quest/id-list saved registers differ, and menu-state stores combine into STRD rather than retail's individual stores. */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "code/Code001b.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -18,10 +17,17 @@ void FUN_003a7c3c(u32 quest)
     UiQuestApoc *work = g_uiQuest;
     work->questId = quest;
     s32 alternate = dataTable1bOr1cRecordHasFlag1(quest);
-    void *cursor = alternate != 0 ? work->alternateView()->cursor : work->cursor;
     work->unk90c = alternate;
-    u16 *ids = alternate != 0 ? work->alternateView()->list : work->list;
     work->unk93E = 1;
+    void *cursor;
+    u16 *ids;
+    if (alternate != 0) {
+        cursor = work->alternateView()->cursor;
+        ids = work->alternateView()->list;
+    } else {
+        cursor = work->cursor;
+        ids = work->list;
+    }
     for (s32 index = 0; index < objectApplyIfUnblocked(cursor); ++index) {
         if (ids[index] == quest) {
             scrollListSetSelectionTracked(reinterpret_cast<ScrollSelection *>(cursor), index);
@@ -34,10 +40,7 @@ void FUN_003a7c3c(u32 quest)
     uiSpriteSetKeyframe(work->detailAnimation.sprite, 2, 0);
     uiSpriteSetImageKeyframe(work->mainSprite, 8, 0);
     uiSpriteSetImageKeyframe(work->detailAnimation.sprite, 9, 0);
-    work = g_uiQuest;
-    work->previousMenuState = work->menuState;
-    work->menuState = 23;
-    work->menuTimer = 0;
+    uiQuestEnterMenuState(g_uiQuest, 23);
     sysPlaySe(26);
     sysPlayVoice(0x1000308);
 }

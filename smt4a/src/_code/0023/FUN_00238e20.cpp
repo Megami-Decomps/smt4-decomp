@@ -4,7 +4,7 @@
 
 extern "C" {
 /* Callback signature is not recovered here; only its code address is used. */
-void FUN_00213020();
+void particleRingEmitterUpdate();
 void *taskCreate(void (*entry)(), u32, u32, u32, u32, u32, u32, u32, u32);
 void sysMemClear(void *destination, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
@@ -18,7 +18,7 @@ InitializedLayoutTaskA *FUN_00238e20(
     u32 parameter5, u8 parameter6, u16 parameter7, u32 parameter8)
 {
     InitializedLayoutTaskA *task = static_cast<InitializedLayoutTaskA *>(
-        taskCreate(FUN_00213020, 0, 0, 0, 0, 0x304, 3, 0, 0));
+        taskCreate(particleRingEmitterUpdate, 0, 0, 0, 0, 0x304, 3, 0, 0));
     if (task != 0) {
         sysMemClear(task, 0x304);
         __aeabi_memcpy4(&task->parameters, parameters, 0x134);

@@ -1,7 +1,6 @@
 #include "ui/UiSpriteApi.h"
 #include "code/Code002a_VariantA.h"
 #include "quest_center/QuestRecordA.h"
-/* NON_MATCHING: cursor/definition pointer lifetimes differ, and the final state update uses strd rather than separate writeback stores; 80 instructions each. */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "quest_center/QuestRequirement.h"
 #include "shard/Shard0031.h"
@@ -21,17 +20,10 @@ void FUN_00359974(s32 type, u32 message, s32 argument, s32 flags);
 void sysPlaySe(s32 sound);
 void FUN_003d474c();
 
-static __inline void uiQuestEnterMenuState(UiQuestApoc *quest, u32 next)
-{
-    quest->previousMenuState = quest->menuState;
-    quest->menuState = next;
-    quest->menuTimer = 0;
-}
-
 // Accept the highlighted quest and enter its normal or special-script confirmation flow.
 void FUN_0021a4b0()
 {
-    // The existing definition's byte-aligned padding cannot contain an aligned metadata union.
+    // A kind-11 record keeps a text id and a message id where the others keep their reward.
     struct SpecialQuestMetadata {
         u8 unk000[0xf2];
         u16 textId;
@@ -40,9 +32,7 @@ void FUN_0021a4b0()
     typedef char SpecialQuestMetadataOffsets[offsetof(SpecialQuestMetadata, textId) == 0xf2 && offsetof(SpecialQuestMetadata, messageId) == 0xf4 ? 1 : -1];
     UiQuestApoc *quest = g_uiQuest;
     quest->state = 1;
-    s32 page = resourceRunOperationIfUnblocked(quest->cursor);
-    s32 selection = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(quest->cursor));
-    u32 questId = quest->list[selection + page];
+    u32 questId = quest->list[resourceRunOperationIfUnblocked(quest->cursor) + listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(quest->cursor))];
     FUN_00417e08(questId);
     gameOptionsClassifyMode();
     optionsSetFlag1();
@@ -51,11 +41,10 @@ void FUN_0021a4b0()
     FUN_003dea6c(questId, 0, 1);
     QuestRecordA *definition = questDataGetRecord(questId);
     if (definition && definition->kind == 11) {
-        const SpecialQuestMetadata *metadata = reinterpret_cast<const SpecialQuestMetadata *>(definition);
         char text[132];
-        libc_strcpy(text, dataFindKindRecordWithAocOverrides(metadata->textId, 0));
+        libc_strcpy(text, dataFindKindRecordWithAocOverrides(reinterpret_cast<const SpecialQuestMetadata *>(definition)->textId, 0));
         scrSetStringSlot(0, text);
-        FUN_00359974(0x18, metadata->messageId, -1, 0);
+        FUN_00359974(0x18, reinterpret_cast<const SpecialQuestMetadata *>(definition)->messageId, -1, 0);
         if (!scrScriptProcessStartEntry(quest->acceptance.script, 0x13))
             return;
     } else {

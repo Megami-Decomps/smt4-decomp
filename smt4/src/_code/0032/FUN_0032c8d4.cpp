@@ -585,7 +585,7 @@ code_r0x0032d518:
     break;
   case 10:
     uVar18 = 0xb;
-    FUN_00331158(uVar18);
+    campUpdateListInput(uVar18);
     break;
   case 0xb:
     iVar7 = FUN_0028a318();
@@ -620,10 +620,10 @@ code_r0x0032d518:
     break;
   case 0xc:
     uVar18 = 0xc;
-    FUN_00331158(uVar18);
+    campUpdateListInput(uVar18);
     break;
   case 0xd:
-    FUN_00331158(0xd);
+    campUpdateListInput(0xd);
     break;
   case 0xe:
     FUN_0018a3e0();

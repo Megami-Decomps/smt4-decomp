@@ -44,7 +44,7 @@ u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel);
 u32 btlChooseAlternateSkillOrFallback(BtlMainState **block, CommandState *work);
 u32 FUN_003cbce4(BtlMainState **block, CommandState *work);
 u32 FUN_003cb244(BtlMainState **block, CommandState *work);
-u32 FUN_003cb3e4(BtlMainState **block, CommandState *work);
+u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work);
 u32 btlAiWaitUiAndUpdatePartyGroup4Latch(BtlMainState **block, CommandState *work);
 u32 FUN_003cfb60(BtlMainState **block, CommandState *work);
 void FUN_00229b10(BtlMainState **block, CommandState *work);
@@ -179,7 +179,7 @@ u32 FUN_003d28d0(BtlMainState **block, u32 phase)
     case 28:
         return FUN_003cfb60(block, work);
     case 29:
-        return FUN_003cb3e4(block, work);
+        return btlCommandTurnEnd(block, work);
     case 30:
         return btlAiWaitUiAndUpdatePartyGroup4Latch(block, work);
     case 31:

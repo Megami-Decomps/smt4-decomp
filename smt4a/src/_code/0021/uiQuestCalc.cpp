@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00215cb8` (_code @ 0x215cb8, 0x168c bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `uiQuestCalc` (_code @ 0x215cb8, 0x168c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
@@ -97,7 +97,7 @@ extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: optionsClearFlag1. */
 
 
-unsigned int FUN_00215cb8(void)
+unsigned int uiQuestCalc(void)
 
 {
 /* irregular: 2 goto(s); 37 native warning(s); review required */

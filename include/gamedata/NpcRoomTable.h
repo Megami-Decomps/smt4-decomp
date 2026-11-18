@@ -29,6 +29,9 @@ typedef char NpcRoomEventRecordLayoutCheck[
     offsetof(NpcRoomEventRecord, param) == 0x52 ? 1 : -1];
 
 #ifdef __cplusplus
+/* Apocalypse: the first event for `id` whose required/excluded flag conditions hold. */
+extern "C" NpcRoomEventRecord *dataTableFindMatching35(u32 id);
+
 /* The rows of section 1 of `table` (dataTableGet(0x35, 1)). */
 static inline NpcRoomEventRecord *npcRoomEventRecords(void *table)
 {

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-extern u8 g_campState[];
+extern CampResult g_campState;
 
-u8 *campGetState(void)
+CampResult *campGetState(void)
 {
-    return g_campState;
+    return &g_campState;
 }
 
 } /* extern "C" */

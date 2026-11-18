@@ -1,5 +1,4 @@
 #include "ui/UiSpriteApi.h"
-/* NON_MATCHING: 211 rows versus retail 209: successful selection shares its argument-setup tail with the final SELECT event instead of the common event-call tail. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -45,7 +44,7 @@ static void campChangeState(u32 state)
 }
 
 /* Input handling for one of the three camp list screens (`kind` 11, 12 or 13). */
-void FUN_00331158(s32 kind)
+void campUpdateListInput(s32 kind)
 {
     CampState *camp = g_camp;
     GridNavigation *list = 0;
@@ -88,9 +87,10 @@ void FUN_00331158(s32 kind)
             campReleaseScreenTouchRegions(list, 1);
             guestWinRequestClose();
             messageDismissNumericBanner(1);
-            return eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
+        } else {
+            return eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
         }
-        return eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
+        return eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
     }
 
     if (FUN_002c1658(1, 1) != 0) {

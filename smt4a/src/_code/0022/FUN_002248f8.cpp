@@ -43,7 +43,7 @@ int btlIsDefeatSuppressed(void);
 int FUN_002c39dc(...);
 int FUN_002ccde8(int, unsigned int *, unsigned int *);
 int btlTalkBustUpSetDemonTexture(int, int);
-int FUN_003493dc(...);
+int partyPanelCreate(...);
 int FUN_0035d0e4(void);
 int btlTalkBustUpReleaseTexture(void);
 int btlTalkBustUpSetUnk2F4(int);
@@ -152,7 +152,7 @@ extern int menu32ModeIsNot4(int);
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int partyPanelGetFlag(void);
 extern unsigned int partyPanelGetState(void);
-/* Supplied declaration required: FUN_003493dc. */
+/* Supplied declaration required: partyPanelCreate. */
 extern int FUN_0034ed68(int);
 /* Supplied declaration required: FUN_0034efe0. */
 /* Supplied declaration required: owner2DCInitSub. */
@@ -476,7 +476,7 @@ unsigned int FUN_002248f8(void)
       FUN_002ccde8(temp_v0 + 0x28c4,&temp_v17,&temp_v16);
       temp_v4 = menu32State387CIs7(temp_v0 + 0x28c4);
       if (temp_v4 != 0) {
-        FUN_003493dc(1);
+        partyPanelCreate(1);
         FUN_002c39dc(0xe,0,0xffffffff);
         btlIsDefeatSuppressed();
         FUN_0035d0e4();
@@ -486,13 +486,13 @@ unsigned int FUN_002248f8(void)
         if (!((short)temp_v17 == 2 || (short)temp_v17 == 3)) {
           if ((short)temp_v17 != 9) {
             if ((short)temp_v17 == 0xd) {
-              FUN_003493dc(1);
+              partyPanelCreate(1);
               FUN_002c39dc(10,0,0xffffffff);
               FUN_00284ee4(1);
             }
           }
           else {
-            FUN_003493dc(1);
+            partyPanelCreate(1);
             if (*(int *)(temp_v0 + 0x6154) != 0) {
               temp_v10 = gameGetSlotTable();
               temp_v4 = *(int *)(temp_v0 + 0x6154);
@@ -516,7 +516,7 @@ unsigned int FUN_002248f8(void)
             temp_v4 = gameGetSlotTable();
             temp_v4 = (int)*(char *)(*(int *)(temp_v0 + 0x6154) + temp_v4 + 0x1c9f);
           }
-          FUN_003493dc(1);
+          partyPanelCreate(1);
           FUN_002c39dc(5,(int)(short)temp_v16,temp_v4);
           btlIsDefeatSuppressed();
           FUN_0035d0e4();
@@ -531,7 +531,7 @@ unsigned int FUN_002248f8(void)
           temp_v4 = gameGetSlotTable();
           temp_v4 = (int)*(char *)(*(int *)(temp_v0 + 0x6154) + temp_v4 + 0x1c9f);
         }
-        FUN_003493dc(1);
+        partyPanelCreate(1);
         FUN_002c39dc(8,(int)(short)temp_v16,temp_v4);
         btlIsDefeatSuppressed();
         FUN_0035d0e4();

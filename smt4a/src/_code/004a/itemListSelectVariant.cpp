@@ -11,7 +11,7 @@ void itemListSelectVariant(ItemListSelectionOwner *owner, s32 useAlternate, s32 
     if (owner->selection.value == 0) {
         return;
     }
-    u8 &variant = reinterpret_cast<SelectionValueRecord *>(saveGetUserSettingsBlock())->variant.flags;
+    u8 &variant = reinterpret_cast<SaveUserSelectionRecord *>(saveGetUserSettingsBlock())->variant.flags;
     s8 selection;
     switch (variant & 0x7F) {
     case 2:

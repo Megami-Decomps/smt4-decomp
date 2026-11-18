@@ -1,4 +1,4 @@
-/* NON_MATCHING: two instructions remain: retail extends the choice with `sxth` (the build's `s16 initial` switched as `(u16)initial` gives `uxth`; the signed forms move the gridNavigationConfigure constants to r9/r8) and keeps the icon in r1 (stm {r1, r4}). */
+/* NON_MATCHING: retail sign-extends the initial choice and uses r1 for the icon across the slot switch, with the destination address in r0. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"

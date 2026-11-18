@@ -5,7 +5,7 @@ extern "C" {
 
 extern s32 gameFlagSlotAdvanceCounter(u32 id);
 extern s32 FUN_00162ea4(void);
-extern s32 FUN_002f0c18(void);
+extern s32 uiQuestCreate(void);
 extern s32 FUN_002f1554(u32 id);
 extern s32 uiQuestIsIdle(void);
 extern s32 uiQuestClose(void);
@@ -23,7 +23,7 @@ u32 FUN_0031e644(void)
         if (FUN_00162ea4() != 0) {
             return 1;
         }
-        FUN_002f0c18();
+        uiQuestCreate();
         FUN_002f1554(id);
     }
     if (uiQuestIsIdle() == 0) {

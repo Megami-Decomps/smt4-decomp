@@ -7,7 +7,7 @@ s32 renderCtxPackPassFlags(s32 first, s32 second);
 void FUN_0022ecfc(void);
 
 /* Draws quest-menu states that have visible content inside a temporary render-state scope. */
-u32 FUN_0028587c(void)
+u32 uiQuestDrawLower(void)
 {
     UiQuestApoc *work = g_uiQuest;
     if (work->unk93E == 0) {

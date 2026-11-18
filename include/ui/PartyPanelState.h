@@ -22,7 +22,8 @@ struct PartyPanelUnitPreview {
 
 typedef struct PartyPanelState {
     /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[8];
+    /* 0x0004 */ u8 unk0004[4];
+    /* 0x0008 */ u32 drawJob;
     /* 0x000C */ void *files[2];
     /* 0x0014 */ ScriptProcess *script;
     /* 0x0018 */ u32 phase;                 /* step within the current scene state */
@@ -43,7 +44,8 @@ typedef struct PartyPanelState {
     /* 0x0042 */ u8 alternate;              /* the alternate layout: cursors move on the alternate grids */
     /* 0x0043 */ u8 unk0043;
     /* 0x0044 */ s8 helpMode;
-    /* 0x0045 */ u8 unk0045[0x23];
+    /* 0x0045 */ u8 unk0045[3];
+    /* 0x0048 */ UiResourceParameters parameters; /* the sprites' animation resource */
     /* 0x0068 */ UiSpriteState sprites[11];            /* indexed by PARTY_PANEL_SPRITE_* */
     /* 0x066C */ u8 panelState;             /* PARTY_MODE_*: what the panel was opened for */
     /* 0x066D */ u8 unk066D[3];
@@ -62,7 +64,7 @@ typedef struct PartyPanelState {
     /* 0x09A4 */ GridNavigation stockGridAlternate;
     /* 0x0A08 */ GridNavigation fullGrid;             /* state 8: the party row above the stock page */
     /* 0x0A6C */ GridNavigation fullGridAlternate;
-    /* 0x0AD0 */ u8 unk0AD0[0x64];
+    /* 0x0AD0 */ GridNavigation columnGrid;           /* six rows in one column */
     /* 0x0B34 */ s32 fusionParentIds[2];
     /* 0x0B3C */ s32 fusionParentCount;
     /* 0x0B40 */ u8 unk0B40[8];
@@ -77,11 +79,15 @@ typedef struct PartyPanelState {
     /* 0x1160 */ PlayerDataIV previewPlayer;
     /* 0x11EC */ PartyPanelUnitPreview previewUnit;
     /* 0x17F0 */ u8 disabled;
+    /* 0x17F1 */ u8 unk17F1[7];                       /* the panel is allocated and cleared as 0x17F8 bytes */
 } PartyPanelState;
 
 typedef char PartyPanelUnitPreviewSizeCheck[sizeof(PartyPanelUnitPreview) == 0x604 ? 1 : -1];
-typedef char PartyPanelStateSizeCheck[sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
+typedef char PartyPanelStateSizeCheck[sizeof(PartyPanelState) == 0x17F8 ? 1 : -1];
 typedef char PartyPanelStateOffsetCheck[
+    offsetof(PartyPanelState, drawJob) == 0x8 &&
+    offsetof(PartyPanelState, parameters) == 0x48 &&
+    offsetof(PartyPanelState, columnGrid) == 0xAD0 &&
     offsetof(PartyPanelState, sceneState) == 0x1C &&
     offsetof(PartyPanelState, page) == 0x2C &&
     offsetof(PartyPanelState, previewItem) == 0x36 &&

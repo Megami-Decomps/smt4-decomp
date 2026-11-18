@@ -860,8 +860,11 @@ struct SaveLoadTransitionPrefixA {
 };
 
 struct SaveLoadUiSharedPrefixA {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ u32 selectedValue;
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 setFlag470;      /* a finished save sets game flag 0x470 */
+    /* 0x03 */ u8 setFlag471;      /* a finished save sets game flag 0x471 */
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ u32 selectedValue;  /* the slot the screen ended on */
 };
 
 typedef char SaveLoadTransitionPrefixAHeadCheck[
@@ -879,6 +882,7 @@ typedef char SaveLoadTransitionPrefixATailCheck[
     offsetof(SaveLoadTransitionPrefixA, transition.progress) == 0x6F4 &&
     sizeof(SaveLoadTransitionPrefixA) == 0x6F8 ? 1 : -1];
 typedef char SaveLoadUiSharedPrefixACheck[
+    offsetof(SaveLoadUiSharedPrefixA, setFlag470) == 2 &&
     offsetof(SaveLoadUiSharedPrefixA, selectedValue) == 0x14 &&
     sizeof(SaveLoadUiSharedPrefixA) == 0x18 ? 1 : -1];
 

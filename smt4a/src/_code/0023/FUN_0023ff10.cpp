@@ -1,30 +1,26 @@
-/* NON_MATCHING: the list sub-object comes from the one-instruction accessor questUiGetList (inlined by armlink, config/inlined.txt) and is passed to resourceRunOperationIfUnblocked; the remaining differences are armcc keeping the list in r7 and the offset in r6 (retail the reverse) plus a nop armcc emits before that call (151 rows against 150). */
+/* NON_MATCHING: Retail forms the list address in r0 and copies it to r6; armcc forms it in r6 and copies it to r0. */
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
 #include "game/GameStateA.h"
 #include "shard/Shard0031.h"
 #include "code/Code002a_VariantA.h"
 
-/* The quest screen's state (observed fields). */
+/* The quest screen's list area begins 0x800 bytes into the work. */
 struct QuestUiLower {
-    /* 0x000 */ u8 unk000[0x10C];
+    u8 unk000[0x10c];
+    u8 detailView;
+    u8 unk10D[3];
+    s32 column;
+    u8 unk114[4];
+    s32 page;
+    u8 unk11C[0x90];
+    u8 list[0x12A];
+    u16 ids[1];
 };
 
 struct QuestUi {
-    /* 0x000 */ u8 unk000[0x800];
-    /* 0x800 */ QuestUiLower lower;
-    /* 0x90C */ u8 detailView;
-    /* 0x90D */ u8 unk90D[3];
-    /* 0x910 */ s32 column;
-    /* 0x914 */ u8 unk914[4];
-    /* 0x918 */ s32 page;
-    /* 0x91C */ u8 unk91C[0x21];
-    /* 0x93D */ u8 unk93D;
-    /* 0x93E */ u8 unk93E[6];
-    /* 0x944 */ u8 unk944;
-    /* 0x945 */ u8 unk945[0x67];
-    /* 0x9AC */ u8 list[0x12A];
-    /* 0xAD6 */ u16 ids[1];
+    u8 unk000[0x800];
+    QuestUiLower lower;
 };
 
 /* The part of the quest screen state from 0x900 on that holds the lock flags. */
@@ -42,7 +38,6 @@ extern QuestUi *g_uiQuest;
 void sysPlaySe(u32 id);
 void buttonHelpSelectSlot(s32 a, s32 b, s32 c, s32 d);
 s32 resourceRunOperationIfUnblocked(void *list);
-void *questUiGetList(QuestUiLower *lower);
 s32 partyEntryFlagsBit3(u32 id);
 u32 rosterGetLeaderId(void);
 
@@ -53,33 +48,31 @@ void FUN_0023ff10(void)
     QuestUi *ui = g_uiQuest;
     QuestUiFlags *flags = (QuestUiFlags *)((u8 *)ui + 0x900);
     u32 id;
-    s32 pageOffset;
-    s32 row;
     QuestRecordA *record;
 
-    if (ui->detailView != 0) {
+    if (ui->lower.detailView != 0) {
         if (g_gameState.alternateNaviMap != 0) {
-            if (ui->page == 1) {
+            if (ui->lower.page == 1) {
                 sysPlaySe(0x10E);
             }
-            if (ui->page == 2) {
-                if (ui->column == 0) {
+            if (ui->lower.page == 2) {
+                if (ui->lower.column == 0) {
                     sysPlaySe(0x10F);
                 }
-                if (ui->column == 1) {
+                if (ui->lower.column == 1) {
                     sysPlaySe(0x110);
                     return;
                 }
             }
         } else {
-            if (ui->page == 1) {
+            if (ui->lower.page == 1) {
                 sysPlaySe(0x6E);
             }
-            if (ui->page == 2) {
-                if (ui->column == 0) {
+            if (ui->lower.page == 2) {
+                if (ui->lower.column == 0) {
                     sysPlaySe(0x6F);
                 }
-                if (ui->column == 1) {
+                if (ui->lower.column == 1) {
                     sysPlaySe(0x70);
                     return;
                 }
@@ -87,42 +80,42 @@ void FUN_0023ff10(void)
         }
         return;
     }
-    if (ui->page == 1) {
+    if (ui->lower.page == 1) {
         sysPlaySe(0x71);
     }
-    if (ui->page == 2) {
+    if (ui->lower.page == 2) {
         if (flags->altRow != 0) {
-            if (ui->column == 0) {
+            if (ui->lower.column == 0) {
                 sysPlaySe(0xF7);
             }
-            if (ui->column == 1) {
+            if (ui->lower.column == 1) {
                 sysPlaySe(0xF8);
             }
         } else {
-            if (ui->column == 0) {
+            if (ui->lower.column == 0) {
                 sysPlaySe(0x72);
             }
-            if (ui->column == 1) {
+            if (ui->lower.column == 1) {
                 sysPlaySe(0x73);
             }
         }
     }
-    if (ui->page == 3) {
-        if (ui->column == 0) {
+    if (ui->lower.page == 3) {
+        if (ui->lower.column == 0) {
             sysPlaySe(0x74);
         }
-        if (ui->column == 1) {
+        if (ui->lower.column == 1) {
             sysPlaySe(0x75);
         }
-        if (ui->column == 2) {
+        if (ui->lower.column == 2) {
             sysPlaySe(0x76);
         }
     }
-    void *list = questUiGetList(&ui->lower);
+    void *list = ui->lower.list;
 
-    pageOffset = resourceRunOperationIfUnblocked(list);
-    row = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(list));
-    id = ui->ids[pageOffset + row];
+    s32 pageOffset = resourceRunOperationIfUnblocked(list);
+    s32 row = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(list));
+    id = ui->lower.ids[pageOffset + row];
     record = questDataGetRecord(id);
     if (flags->locked != 0) {
         buttonHelpSelectSlot(5, 1, 0x32, 1);
