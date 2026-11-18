@@ -1,4 +1,4 @@
-/* NON_MATCHING: register pressure - retail keeps the frame, actor and skill in registers and re-evaluates the frame offsets per use, while this version spills r0-r3 and the derived frames; the stack-argument layout (two skipped words, the speed passed as raw bits) and the calls are the same. */
+/* NON_MATCHING: register pressure - retail keeps the frame, actor and skill in registers and re-evaluates the frame offsets per use, while this version spills r0-r3 and the derived frames; the stack-argument layout (one unused word, the speed passed as raw bits) and the calls are the same. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "common.h"
@@ -21,7 +21,7 @@ void btlQueueKeyedScalarReflectAction(s32 a, s32 b, u32 sound, s32 c, s32 d, s32
 
 /* Queues the reflect actions of a skill use: the optional pre-effect, the one or two damage amounts (with their
    effect and, when a status flag changes, the effect sound), and the follow-up status actions. Always returns 1. */
-u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unused5, u32 unused6, s32 firstAmount, s32 secondAmount,
+u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, s32 firstAmount, s32 secondAmount,
                  u32 unused7, u32 statusMask, s32 preDelay, s32 effectDelay, s32 preSide, u32 effectSpeedBits,
                  u32 clearMask)
 {
