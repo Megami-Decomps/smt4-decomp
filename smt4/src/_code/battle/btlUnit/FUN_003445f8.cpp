@@ -1,3 +1,5 @@
+#include "battle/BattleCameraTransitionApi.h"
+#include "battle/BattleActionPosition.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003445f8` (_code @ 0x3445f8, 0x6fc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
@@ -8,14 +10,11 @@ extern "C" {
 
 int FUN_0023cb70(int, unsigned int, int, int);
 int transitionConfigureAndReset(int, unsigned int, int);
-int FUN_0023cd08(...);
 int FUN_00256898(int, unsigned int);
 int btlReflectQueueKind34(int, unsigned int);
 int FUN_002630e0(...);
-int FUN_003d64dc(...);
 int FUN_003d6b7c(...);
 int FUN_003d710c(...);
-int btlSetVectorTransitionTarget(int, unsigned int, int);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -137,7 +136,13 @@ void FUN_003445f8(unsigned int param_1,int param_2)
   case 0xd:
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+      {
+        BattleVector3 position = FUN_0023cd08(reinterpret_cast<BtlMainState *>(temp_v4),
+            (int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+        in_s0 = position.x;
+        in_s1 = position.y;
+        in_s2 = position.z;
+      }
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
     }
@@ -166,7 +171,13 @@ void FUN_003445f8(unsigned int param_1,int param_2)
       return;
     }
     temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-    FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+    {
+        BattleVector3 position = FUN_0023cd08(reinterpret_cast<BtlMainState *>(temp_v4),
+            (int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+        in_s0 = position.x;
+        in_s1 = position.y;
+        in_s2 = position.z;
+      }
     if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
       in_s0 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x580);
       in_s2 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
@@ -178,7 +189,8 @@ LAB_00344904:
         in_s2 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
       }
     }
-    btlSetVectorTransitionTarget(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+    btlSetVectorTransitionTarget(reinterpret_cast<BattleVectorTransition *>(g_btlMain),
+        *(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),in_s0,in_s1,in_s2);
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
     temp_v4 = asdCameraGetSavedRenderPairs();
@@ -294,7 +306,13 @@ LAB_00344904:
   case 0x18:
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+      {
+        BattleVector3 position = FUN_0023cd08(reinterpret_cast<BtlMainState *>(temp_v4),
+            (int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+        in_s0 = position.x;
+        in_s1 = position.y;
+        in_s2 = position.z;
+      }
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
     }
@@ -321,12 +339,19 @@ LAB_00344904:
   case 0x19:
     if (*(int *)(param_2 + 0x14) != 0) {
       temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
-      FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+      {
+        BattleVector3 position = FUN_0023cd08(reinterpret_cast<BtlMainState *>(temp_v4),
+            (int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
+        in_s0 = position.x;
+        in_s1 = position.y;
+        in_s2 = position.z;
+      }
       if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
         in_s0 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x580);
         in_s2 = *(float *)(reinterpret_cast<int>(g_btlMain) + 0x588);
       }
-      FUN_003d64dc(reinterpret_cast<int>(g_btlMain),*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+      FUN_003d64dc(reinterpret_cast<SecondaryVectorTransitionView *>(g_btlMain),
+        *(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48),in_s0,in_s1,in_s2);
       temp_v11[0] = in_s0;
       temp_v12 = in_s2;
       temp_v4 = asdCameraGetSavedRenderPairs();

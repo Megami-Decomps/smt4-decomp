@@ -1,3 +1,4 @@
+#include "battle/BattleCameraTransitionApi.h"
 /* NON_MATCHING: snapshot address anchoring, copy coalescing, and saved-register lifetimes differ; local view preserves shared prefix size. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "shard/W5_W5Match8_CameraTransition.h"

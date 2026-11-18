@@ -1,3 +1,4 @@
+#include "battle/BattleCameraTransitionApi.h"
 #include "battle/BattleActionPosition.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: restored help option argument; signed-byte mode dispatch, VFP frame and switch control-flow tails remain unrecovered. */
@@ -61,7 +62,6 @@ int driftObjectStart(...);
 int FUN_003c1a2c(...);
 int FUN_003d6420(...);
 int FUN_003d6644(...);
-int FUN_003d6df0(...);
 int transitionClearAxisVectors(...);
 int FUN_003d86a0(...);
 int FUN_003de758(...);
@@ -659,7 +659,7 @@ LAB_00345938:
         }
         btlUiInitializeDisplayChannel(g_btlUiBlock,temp_v5);
         if (psVar2[0x12] != 0) {
-          FUN_003d6df0(reinterpret_cast<int>(g_btlMain));
+          FUN_003d6df0(reinterpret_cast<BattleCameraTimerState *>(g_btlMain),0.5f,0.5f,10.0f);
         }
       }
       break;

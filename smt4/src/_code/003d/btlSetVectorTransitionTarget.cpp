@@ -1,3 +1,4 @@
+#include "battle/BattleCameraTransitionApi.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "battle/btlCamera.h"
 
