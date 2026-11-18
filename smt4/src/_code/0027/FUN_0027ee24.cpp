@@ -1,6 +1,7 @@
 #include "addon/aocMain.h"
 #include "code/Code0027_Smt4.h"
 #include "addon/AocSystem.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -10,16 +11,13 @@ typedef struct Entry {
 
 
 
-extern void *dataTableGet(u32 table, u32 index);
-extern u32 dataTableGetCount(void *table);
-extern Entry *dataTableGetEntries(void);
 extern Entry *dataFindGroupedRecord(AocSystem *system, u32 index);
 
 /* Returns entry `index` of data table 0x31, or of the AOC system's extra entries that follow it; NULL when out of range. */
 Entry *FUN_0027ee24(u32 index)
 {
     void *table = dataTableGet(0x31, 0);
-    Entry *entries = dataTableGetEntries();
+    Entry *entries = static_cast<Entry *>(dataTableGetEntries(table));
     u32 count = dataTableGetCount(table);
 
     if (index < count) {
