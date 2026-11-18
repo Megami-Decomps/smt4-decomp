@@ -1,8 +1,7 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-
-int asdMdlManagerDestroy(void);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x98];
@@ -13,11 +12,11 @@ typedef struct Obj {
 void objDestroyModels(Obj *obj)
 {
     if (obj->modelA != 0) {
-        asdMdlManagerDestroy();
+        asdMdlManagerDestroy((AsdMdlObject *)obj->modelA);
         obj->modelA = 0;
     }
     if (obj->modelB != 0) {
-        asdMdlManagerDestroy();
+        asdMdlManagerDestroy((AsdMdlObject *)obj->modelB);
         obj->modelB = 0;
     }
 }
