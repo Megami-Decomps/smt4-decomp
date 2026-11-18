@@ -1,13 +1,8 @@
-#include "common.h"
-#include "shard/W5_W5Match7_ScriptUnit.h"
+#include "gamedata/FlagValueIsPositive.h"
+#include "code/Code0028.h"
 
-extern "C" {
-
-extern int flagValueRead(void);
-
-u8 flagValueIsPositive(void)
+/* Whether the requested flag has a positive stored value. */
+extern "C" u8 flagValueIsPositive(s32 index)
 {
-    return 0 < flagValueRead();
+    return 0 < flagValueRead(index);
 }
-
-} /* extern "C" */
