@@ -12,7 +12,7 @@ int scrWorkSetValue(...);
 int messageForwardDefaultMode(...);
 int textEncodeFontSlot(...);
 int dataTable54FindById(void);
-int FUN_0029fa0c(int, int *);
+int fusionListAvailableSpecialRecipes(int, int *);
 int dataTable01FindByIdWithAoc(...);
 int libc_strcpy(...);
 int __aeabi_memset4(...);
@@ -34,7 +34,7 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: textEncodeFontSlot. */
 extern int partyClassifyRequestedSources(int, unsigned short, unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
-/* Supplied declaration required: FUN_0029fa0c. */
+/* Supplied declaration required: fusionListAvailableSpecialRecipes. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: libc_strcpy. */
@@ -76,7 +76,7 @@ unsigned int FUN_003116c8(void)
     g_unite[0x250b] = 0;
     __aeabi_memset4(piVar12,0x50,0xffffffff);
     temp_v5 = *piVar3;
-    FUN_0029fa0c(temp_v5,piVar3 + 0x24cf);
+    fusionListAvailableSpecialRecipes(temp_v5,piVar3 + 0x24cf);
     temp_v8 = 0;
     *(short *)(piVar3 + 0x24ce) = (short)temp_v5;
     temp_v9 = 0;

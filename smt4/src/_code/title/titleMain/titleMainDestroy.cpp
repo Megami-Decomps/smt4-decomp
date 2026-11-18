@@ -4,7 +4,7 @@ extern "C" {
 
 
 void gfxObjectDestroy(u32 arg);
-void FUN_00275be8(s32 arg);
+void frameTexCampSetMode(s32 arg);
 void buttonHelpRelease(void);
 void modelRemoveFromSlotList(u32 arg, s32 flag);
 void fileSlotFree(s32 arg);
@@ -39,7 +39,7 @@ void titleMainDestroy(u32 handle)
     gfxObjectDestroy(title->unk88);
     title->unk88 = 0;
     asdWorkAreaReset();
-    FUN_00275be8(0);
+    frameTexCampSetMode(0);
     buttonHelpRelease();
     if (*slot != NULL) {
         asdMemFree(*slot);

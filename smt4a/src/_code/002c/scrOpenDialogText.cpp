@@ -1,9 +1,9 @@
 #include "font/InfoWinTextApi.h"
 #include "common.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 
-extern int dialogOpen(int mode, int flag);
 extern const char *scrGetArgString(s32 index);
 extern int infoWinSetTimer(u32 arg);
 

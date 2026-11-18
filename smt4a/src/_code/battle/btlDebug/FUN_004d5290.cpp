@@ -1,4 +1,4 @@
-/* NON_MATCHING: camera position snapshot load grouping and angle-conversion VFP register allocation differ. */
+/* NON_MATCHING: the angle conversion loads 1/256 after the first multiply; retail loads both scale literals (360 into s1, 1/256 into s2) before the camera fields. */
 #include "battle/DebugPanel.h"
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
@@ -33,7 +33,8 @@ void FUN_004d5290(BattleDebugPanelWork *work, const BattleDebugPanelParent *pare
     asdListBoxSetFloatItem(work->panelJob, 1, position.x + offset.x, -999, 999);
     asdListBoxSetFloatItem(work->panelJob, 2, position.y + offset.y, -999, 999);
     asdListBoxSetFloatItem(work->panelJob, 3, position.z + offset.z, -999, 999);
-    asdListBoxSetFloatItem(work->panelJob, 4, (g_btlCamera->basePose.angle + g_btlCamera->unk10) * 360.0f * (1.0f / 256.0f), 0, 360);
+    f32 angle = g_btlCamera->basePose.angle + g_btlCamera->unk10;
+    asdListBoxSetFloatItem(work->panelJob, 4, angle * 360.0f * (1.0f / 256.0f), 0, 360);
     asdListBoxSetFloatItem(work->panelJob, 5, g_btlCamera->basePose.distance + g_btlCamera->unk0C, -90, 90);
     asdListBoxSetToggleItem(work->panelJob, 6, (g_btlCamera->flags & 0x20000000) >> 29);
 }

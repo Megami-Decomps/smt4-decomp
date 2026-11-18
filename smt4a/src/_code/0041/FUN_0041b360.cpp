@@ -48,7 +48,7 @@ extern unsigned char DAT_00533f4c; /* 0x533f4c */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameFlagIsSet(unsigned int);
 extern short dataTable10FindValue(short);
-extern unsigned int FUN_0031a914(unsigned char);
+extern unsigned int configValueName(unsigned char);
 /* Supplied declaration required: FUN_003849cc. */
 /* Supplied declaration required: FUN_0041af74. */
 /* Supplied declaration required: FUN_0041b060. */
@@ -164,7 +164,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
     uiDrawItemOrStatusIcon((int)temp_v0,temp_v6 + *(short *)(temp_v3 + 8),temp_v7 + *(short *)(temp_v3 + 10),0x15,
                  0);
   }
-  temp_v2 = FUN_0031a914(*(unsigned char *)(param_2 + 99));
+  temp_v2 = configValueName(*(unsigned char *)(param_2 + 99));
   rt_memcpy(temp_v9,temp_v2,0x40);
   puVar3 = temp_v9;
   fontMeasureLineAdvance(puVar3,2);

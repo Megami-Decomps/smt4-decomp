@@ -538,7 +538,7 @@ void FUN_001cea8c(int param_1)
     } while (temp_v15 < *(int *)(param_1 + 0xd2c4));
     *piVar9 = 10;
     infoWinSetMessage(*(unsigned int *)(param_1 + 0x356c),0xca);
-    dialogOpen(1);
+    dialogOpen(1, 1);
   default:
     temp_v5 = temp_v26;
 joined_r0x001cec14:

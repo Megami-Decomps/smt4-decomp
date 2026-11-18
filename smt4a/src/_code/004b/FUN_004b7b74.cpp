@@ -1,5 +1,6 @@
 /* NON_MATCHING: shared case-1/2 script launch, default-choice retention branch, AOC flag addressing and mode/frame store grouping differ. */
 #include "script/scrScriptProcess.h"
+#include "ui/UiControl.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "font/InfoWinA.h"
@@ -41,7 +42,6 @@ s32 FUN_004ba698(FlaggedValueHolder *);
 void FUN_004b7d88(MapMenuCompletionWork *);
 u16 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 void sysPlaySe(u32);
-void dialogOpen(u32);
 void *asdLoadFileSyncDefault(const char *);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptProcess *, u32);
@@ -83,7 +83,7 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
             tableGroupFindEntryIndex(work->resultTable, "ProcCharonRequestFirst"));
         break;
     default:
-        dialogOpen(0);
+        dialogOpen(0, 0);
         infoWinSetText(reinterpret_cast<const char *>(work->info), work->record->textId);
         work->mode = 5;
         work->frame = 0;

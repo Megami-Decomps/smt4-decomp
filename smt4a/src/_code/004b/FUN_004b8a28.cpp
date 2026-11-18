@@ -1,4 +1,5 @@
 #include "shard/W4_Match3_AocMainA.h"
+#include "ui/UiControl.h"
 #include "event/2dEvent/EventEffect.h"
 
 extern "C" {
@@ -24,7 +25,6 @@ typedef struct Menu {
 
 
 int sysPlaySe(int arg);
-int dialogOpen(int arg0, int arg1);
 int placeWinStartText(u8 *name);
 int FUN_00215978(int arg);
 int placeWinSetValue(int arg);

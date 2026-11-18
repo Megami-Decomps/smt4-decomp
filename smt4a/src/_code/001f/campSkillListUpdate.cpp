@@ -3,6 +3,7 @@
  * before the row lookup, which shifts the later nops), and retail places the FUN_00228b04 test after the shared help refresh
  * it branches back to. */
 #include "camp/CampStateA.h"
+#include "camp/CampSkillList.h"
 #include "camp/CampMenuEntry.h"
 #include "camp/UIFade/UIFade.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -59,13 +60,6 @@ void flagBanksResetPendingState(s32 overrideEnabled);
 void sortMenuAcquire(u32 owner, u8 option);
 }
 
-/* The row of the skill list (grids[3]) the cursor is on. */
-static __inline s32 campSkillListRow(CampStateA *camp)
-{
-    return resourceRunOperationIfUnblocked(reinterpret_cast<Object *>(&camp->grids[3])) +
-           listCursorGetRowIfUnblocked(&camp->grids[3]);
-}
-
 /* The MP the selected skill costs its unit (a negative unit is the player). */
 static __inline s32 campSelectedSkillCost(void)
 {
@@ -79,10 +73,10 @@ static __inline s32 campSelectedSkillCost(void)
 }
 
 /* Remembers the status screen's row. */
-static __inline void campSetStatusSelection(s32 row)
+static __inline void campSetStatusSelection(CampStateA *camp, s32 row)
 {
-    if (g_camp != NULL) {
-        g_camp->statusSelection = row;
+    if (camp != NULL) {
+        camp->statusSelection = row;
     }
 }
 
@@ -152,7 +146,7 @@ extern "C" void campSkillListUpdate(void)
             return;
         }
         FUN_003344b4(0, -campSelectedSkillCost());
-        campSetStatusSelection(campSkillListRow(camp));
+        campSetStatusSelection(g_camp, campSkillListRow(camp));
         FUN_002cb278(&camp->grids[3], 1);
         camp->phase++;
         return;
@@ -190,7 +184,7 @@ extern "C" void campSkillListUpdate(void)
     } else {
         if (!FUN_0022e714()) {
             FUN_003344b4(0, -campSelectedSkillCost());
-            campSetStatusSelection(row);
+            campSetStatusSelection(g_camp, row);
             if (camp->entries[row].unit < 0) {
                 FUN_0031f718(-1, 0, 0);
                 statusPanelSetOpen(1);

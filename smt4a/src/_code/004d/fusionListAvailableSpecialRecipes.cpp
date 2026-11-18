@@ -1,4 +1,4 @@
-/* NON_MATCHING: save-entry/count stack slots and the ingredient-presence zero scratch register differ. */
+/* NON_MATCHING: stack frame is 8 bytes larger than retail (140 vs 132) and the ingredient-presence zero scratch register is r0 instead of r1. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "util/BitsAndBytes_VariantB.h"
 #include "code/Code002a_Smt4a.h"
@@ -42,8 +42,8 @@ u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes)
         const NkmBaseRecordA *result = nkmBaseGetRecord(recipe->resultId);
         if (result->unlockFlag != 0 && !gameFlagIsSet(result->unlockFlag))
             continue;
+        FusionSavedDemon saved;
         if (result->saveRequirement & 1) {
-            FusionSavedDemon saved;
             if (result->saveRequirement & ~1u) {
                 if (!gameDataCopySaveEntry(result->saveRequirement >> 1, &saved) || !(saved.flags & 0xfc))
                     continue;

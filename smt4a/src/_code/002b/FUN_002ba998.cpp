@@ -8,7 +8,7 @@ extern "C" {
 int scrScriptProcessDestroy(void);
 int slotSetRequest(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_002b50e4(...);
+int btlEditorCreate(...);
 
 int jobStop(...);
 int sysPlaySe(...);
@@ -202,7 +202,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00291ce8. */
 /* Supplied declaration required: FUN_002b4f28. */
 /* Supplied declaration required: btlCameraCreate. */
-/* Supplied declaration required: FUN_002b50e4. */
+/* Supplied declaration required: btlEditorCreate. */
 /* Supplied declaration required: btlEffectCreateTasks. */
 /* Supplied declaration required: btlResultTaskStart. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
@@ -1225,7 +1225,7 @@ LAB_002bbdec:
     *(unsigned int *)(temp_v7 + 0xa4) = 0;
     puVar8 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
     *puVar8 = 0;
-    FUN_002b50e4(temp_v7);
+    btlEditorCreate(temp_v7);
   }
   return;
 }

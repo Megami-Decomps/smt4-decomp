@@ -93,7 +93,7 @@ int FUN_002757a8(void);
 int FUN_002758d8(void);
 int FUN_002759bc(void);
 int FUN_00275bc8(void);
-int FUN_00275be8(...);
+int frameTexCampSetMode(...);
 int FUN_00275dc4(void);
 int buttonHelpSelectMapPreset(void);
 int mapEntryTriggerForScene(...);
@@ -408,7 +408,7 @@ extern unsigned int campGetState(void);
 /* Supplied declaration required: FUN_002758d8. */
 /* Supplied declaration required: FUN_002759bc. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00275be8. */
+/* Supplied declaration required: frameTexCampSetMode. */
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_00275dec. */
 /* Supplied declaration required: buttonHelpSelectMapPreset. */
@@ -1429,7 +1429,7 @@ joined_r0x001d535c:
     if (puVar7[4] == 1) {
       DAT_0049fb48 = 1;
       FUN_00275dc4();
-      FUN_00275be8(1);
+      frameTexCampSetMode(1);
       FUN_00275bc8();
     }
     puVar17 = g_lmapMainState;
@@ -1546,7 +1546,7 @@ joined_r0x001d535c:
     if (temp_v6 + 1 < 2) {
       return 0;
     }
-    FUN_00275be8(0);
+    frameTexCampSetMode(0);
     if (DAT_0049f950 == '\0') {
       *(unsigned short *)(g_mapCamera + 0xb2) = 0xd;
       DAT_0049f934 = 0;
@@ -1562,7 +1562,7 @@ joined_r0x001d535c:
     temp_v6 = puVar7[4];
     puVar7[4] = temp_v6 + 1;
     if (temp_v6 + 1 == 2) {
-      FUN_00275be8(0);
+      frameTexCampSetMode(0);
     }
     if ((int)puVar7[4] >= 7) {
       if (puVar7[4] != 7) {

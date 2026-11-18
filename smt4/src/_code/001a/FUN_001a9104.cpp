@@ -26,7 +26,7 @@ s32 FUN_00287874(u16 quest);
 s32 questPassesAvailabilityConditions(u16 quest);
 s32 FUN_00298e40(u16 quest, s32 index, QuestRewardEntry *entry);
 void mapIfShowItemResultMessage(s32 message, u32 item, u32 amount);
-void FUN_002e8598(s32 message, u32 item);
+void mapIfShowRemainingRequirementDialog(s32 message, u32 item);
 
 /* Walks the finished quests (ids 100-399) and shows the result message each one calls for,
    from the items the player handed in and the rewards that were granted. Returns the kind of
@@ -93,16 +93,16 @@ s32 FUN_001a9104(void)
                                 item = wanted;
                                 message = 9;
                             }
-                            FUN_002e8598(message, item);
+                            mapIfShowRemainingRequirementDialog(message, item);
                         } else {
-                            FUN_002e8598(6, offered);
+                            mapIfShowRemainingRequirementDialog(6, offered);
                             result = 1;
                             firstKindDone = 1;
                         }
                     } else if (total != 0) {
-                        FUN_002e8598(0xb, wanted);
+                        mapIfShowRemainingRequirementDialog(0xb, wanted);
                     } else {
-                        FUN_002e8598(10, offered);
+                        mapIfShowRemainingRequirementDialog(10, offered);
                         result = 1;
                         firstKindDone = 1;
                     }

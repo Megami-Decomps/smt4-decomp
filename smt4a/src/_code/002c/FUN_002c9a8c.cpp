@@ -166,7 +166,7 @@ void FUN_002c9a8c(int param_1)
       temp_v20 = FUN_0022e750();
       if ((temp_v20 != 0) && (*(char *)(temp_v19 + 0x8a) != '\0')) {
         infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x43a4)), 0xcc);
-        dialogOpen(1);
+        dialogOpen(1, 1);
         infoWinSetTimer(0x3c);
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
       }
@@ -487,7 +487,7 @@ LAB_002ca524:
     temp_v19 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43a0));
     if (temp_v19 != 2) break;
     infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x43a4)), 0xcc);
-    dialogOpen(1);
+    dialogOpen(1, 1);
     infoWinSetTimer(0x3c);
     temp_v19 = 2;
     *(int *)(param_1 + 0x436c) = temp_v19;

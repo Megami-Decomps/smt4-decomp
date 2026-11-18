@@ -1,4 +1,4 @@
-/* NON_MATCHING: special-page reference uses a 0x944 base rather than grouped 0x900 byte loads; callback predication and page-selection success layout differ (105/107). */
+/* NON_MATCHING: block layout and the page search match retail; only the special-page increment swaps registers (count in r2/r0 and the detail-mode offset in r1, retail r1 and r0). */
 #include "quest_center/QuestRecordA.h"
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "code/Code002f.h"
@@ -69,15 +69,15 @@ extern "C" void uiQuestRefreshDetailPages(s32 id)
             }
         }
     }
-    if (flags->hasSpecialPage == 0) {
-        quest->listState.selection = 0;
-    } else {
+    if (flags->hasSpecialPage != 0) {
         for (s32 page = 0; page < quest->listState.count; ++page) {
             if (FUN_002f7730(page, id) == 3) {
                 quest->listState.selection = page;
                 break;
             }
         }
+    } else {
+        quest->listState.selection = 0;
     }
     if (quest->listState.selection >= quest->listState.count) {
         quest->listState.selection = 0;

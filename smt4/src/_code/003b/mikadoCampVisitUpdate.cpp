@@ -1,5 +1,6 @@
 /* NON_MATCHING: twin of Apocalypse's FUN_004b990c (which matches); two differences remain: retail reads the pending jump's group through its own literal (g_gameState+0x3F8: a separate global in the original, here a GameState member reached from the game-state base), and it loads the model file and size for objModelCreateFromSource from camera+index*4 with two offsets where armcc here walks one pointer (ldr with writeback). */
 #include "mikado/mikadoMain.h"
+#include "ui/UiControl.h"
 #include "camp/Camp.h"
 #include "game/GameState.h"
 #include "gamedata/MapSaveBlock.h"
@@ -35,12 +36,11 @@ void listScrollToId(SelectionFlags *menu, u32 id);
 void objBlockInitAndMark(SelectionFlags *menu);
 void FUN_0022b6c4(SelectionFlags *menu); // declcheck: local (code/Code0022_Smt4.h types the argument as a Context view)
 void FUN_002305e8(u8 value);
-void dialogOpen(s32 mode, s32 flag); // declcheck: local (ui/UiControl.h declares one argument; retail passes two here)
 void infoWinStartTimer(s32 immediate); // declcheck: local (retail passes 0; the definition takes nothing)
 void infoWinSetMessage(const void *message, u32 id);
 void FUN_00275dc4(void);
 void messageMainFinishWindow(void);
-void FUN_00275be8(s32 mode);
+void frameTexCampSetMode(s32 mode);
 void FUN_00275dec(void);
 void frameTexApplyMode(s32 mode);
 void commonBgStopChildAndReset(void);
@@ -78,7 +78,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
         FUN_002305e8(0);
         FUN_0022af9c(0);
         FUN_00275dc4();
-        FUN_00275be8(1);
+        frameTexCampSetMode(1);
         if (camera->flags & 0x40) {
             camera->flags &= ~0x40;
             messageMainFinishWindow();
@@ -158,7 +158,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             /* The camp stays loaded: leave the scene for wherever the pending jump points. */
             FUN_0026ff54();
             FUN_00287c34(1);
-            FUN_00275be8(0);
+            frameTexCampSetMode(0);
             switch (gameDataBlocksGetSaveData()[2]) {
             case 0:
             case 1:
@@ -189,7 +189,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             listScrollToId(&camera->selectionFlags, kind);
             camera->menuTotal = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&camera->selectionFlags));
         }
-        FUN_00275be8(0);
+        frameTexCampSetMode(0);
         commonBgStopChildAndBeginTransition();
         objBlockInitAndMark(&camera->selectionFlags);
         FUN_0022b6c4(&camera->selectionFlags);

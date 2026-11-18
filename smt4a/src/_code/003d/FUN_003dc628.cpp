@@ -35,7 +35,7 @@ int campReleaseSlotTouchRegions(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int campShowSelectedEntryHelp(...);
 int scrollOwnerSelectIndex(...);
-int FUN_002a4cfc(void);
+int campMenuRunSelectedItem(void);
 int FUN_002a5cf4(void);
 int FUN_002c7e24(void);
 int FUN_002e26c4(...);
@@ -110,7 +110,7 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: campShowSelectedEntryHelp. */
 /* Supplied declaration required: listCursorGetRowOfChildIfUnblocked. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
-/* Supplied declaration required: FUN_002a4cfc. */
+/* Supplied declaration required: campMenuRunSelectedItem. */
 /* Supplied declaration required: FUN_002a5cf4. */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a73f8(void);
@@ -570,7 +570,7 @@ LAB_003dcd84:
               *(unsigned char *)(temp_v9 + 0x32a8) = 1;
             }
           }
-          FUN_002a4cfc();
+          campMenuRunSelectedItem();
           if ((*(char *)(temp_v5 + 2) == '\0') || (*(char *)(temp_v9 + 0x32a8) != '\0')) {
             if (*(int *)(temp_v9 + 0x1c) != 6) {
               campShowSelectedEntryHelp(0);

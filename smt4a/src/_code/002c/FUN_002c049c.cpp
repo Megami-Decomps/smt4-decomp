@@ -21,7 +21,7 @@ void cecProcessCall4(void);
 s32 cecProcessForward(void);
 void playerSummaryFill(void);
 void FUN_002f4014(void);
-void FUN_0034280c(s32 arg);
+void campCecEditCreate(s32 arg);
 void stateAtF4Destroy(void);
 void gameDataBlocksSetFlagBits(u32 flag, s32 value);
 s32 gameDataTestFlags(u32 flag);
@@ -131,7 +131,7 @@ u32 FUN_002c049c(void)
                         setting->done = 1;
                     }
                 } else if (stage == 7) {
-                    FUN_0034280c(1);
+                    campCecEditCreate(1);
                     setting->waiting = 1;
                     setting->flags = 0;
                 } else {

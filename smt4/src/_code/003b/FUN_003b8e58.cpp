@@ -1,5 +1,6 @@
 /* NON_MATCHING: step function of the mikado gate scene (starts the entry script for the current gate, runs it, swaps the gate model and closes into the dialog phase, or hands over to the content transition); written from the decompilation, the step ladder is rebuilt as a switch and the register/branch layout not compared with retail */
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "ui/UiControl.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
 
 #define GATE_STEP_BEGIN 0
@@ -80,7 +81,6 @@ void FUN_0022b6c4(void *block);
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, int enabled);
 void FUN_0023d344(NodeEnableOwner *model);
 void FUN_002636d0(s32 flag);
-void dialogOpen(s32 flag);
 void infoWinSetMessage(u32 infoWin, u8 message);
 s32 rosterGetLeaderId(void);
 u32 tableGroupFindEntryIndex(u32 group, u8 *name);
@@ -101,7 +101,7 @@ static __inline void gateEnterDialog(GateScene *scene)
 {
     scene->phase = GATE_PHASE_DIALOG;
     scene->step = 0;
-    dialogOpen(0);
+    dialogOpen(0, 0);
     infoWinSetMessage(scene->infoWin, scene->info->message);
     DAT_0044cfb8 = 0;
     scene->unk6CE = 0;
@@ -211,7 +211,7 @@ void FUN_003b8e58(GateScene *scene)
         scene->marked = 0;
         DAT_0044cfb8 = 0;
         FUN_002636d0(1);
-        dialogOpen(0);
+        dialogOpen(0, 0);
         infoWinSetMessage(scene->infoWin, scene->info->message);
         return;
 

@@ -40,5 +40,20 @@ struct AsdSceneLightDescription {
     u32 unk08;
     u32 count;
 };
+/* Stores a gray light color with full alpha (the default lights' ambient, diffuse and specular colors). */
+static __inline void asdSceneLightSetGray(f32 *color, f32 intensity)
+{
+    color[0] = intensity;
+    color[1] = intensity;
+    color[2] = intensity;
+    color[3] = 1.0f;
+}
+/* Stores a three-component light vector (a default light's position or attenuation). */
+static __inline void asdSceneLightSetVector(f32 *vector, f32 x, f32 y, f32 z)
+{
+    vector[0] = x;
+    vector[1] = y;
+    vector[2] = z;
+}
 typedef char AsdSceneLightOffsets[offsetof(AsdSceneLightParameters, kind) == 0xB8 && offsetof(AsdSceneLightParameters, ambient) == 0xBC && offsetof(AsdSceneLightParameters, attenuation) == 0xE8 && sizeof(AsdSceneLightParameters) == 0x100 && sizeof(AsdSceneLight) == 0xC && sizeof(AsdSceneLightDescription) == 0x10 ? 1 : -1];
 #endif

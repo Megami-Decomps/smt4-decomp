@@ -1,4 +1,5 @@
-/* NON_MATCHING: ARMCC merges input/navigation tails and retains the configuration work in r4 rather than retail's r5. */
+/* The reset branch calls the default-volume getters (titleConfigDefaultMusic/Sound/Voice/Auxiliary in
+ * title/titleConfig.h), which armlink inlined as `mov r0, #50/#80/#80/#48` and removed (smt4/config/inlined.txt). */
 #include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
 #include "script/scrScriptProcess.h"
@@ -32,25 +33,44 @@ u8 thresholdGetPrimary(u32 step);
 u8 thresholdGetSecondary(u32 step);
 u8 digitGlyphLookup(u32 step);
 void titleConfigApplyAudio(void);
-void *titleConfigGetModeFlag(void);
-void audioApplyChannelVolume(u32 index, void *touch, u32 enabled);
+u32 titleConfigGetModeFlag(void);
+void audioApplyChannelVolume(u32 slot, u32 value, s32 frames);
 void workCommandRefreshActiveSlots(void);
 u32 FUN_002bfdc4(void);
-void FUN_002bfc24(u32 player, u32 sound, u32 bank, u32 priority);
+void FUN_002bfc24(u32 player, u32 sound, u32 bank, u32 priority, f32 left, f32 right);
 s32 FUN_0029efd8(void *cursor, u32 enabled);
 void scrScriptProcessStartEntry(void *process, u32 entry);
-void __ARM_common_memcpy4_8(TitleConfigValues *values, const void *saved);
 s32 messageMainGetChoiceResult(void);
+
+/* Shows the help text of the setting the cursor is on. */
+static __inline void titleConfigShowHelp(void)
+{
+    TitleConfigCallbackView *work = g_titleConfig;
+    s32 selected = resourceRunOperationIfUnblocked(work->cursor) + listCursorGetRowIfUnblocked(work->cursor);
+    const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
+
+    buttonHelpSetText(help[selected].text, 0x323232FF);
+    FUN_00259e98();
+}
+
+/* Sends the edited volumes to the sound system. */
+static __inline void titleConfigApplyVolumes(void)
+{
+    titleConfigApplyAudio();
+    audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
+    audioApplyChannelVolume(1, titleConfigGetModeFlag(), 1);
+}
 
 /* Update the title configuration controls, previews, confirmation, and cancellation. */
 u32 titleConfigUpdate(void)
 {
     TitleConfigCallbackView *work = g_titleConfig;
+
     switch (work->state) {
-    case 0: {
+    case 0:
         if (!asdTMTexTableNodeIsLoaded(0x2F, 0) || !uiSpriteAdvanceAnimation(&work->window) ||
             work->dataA == NULL || work->dataB == NULL) {
-            return 0;
+            break;
         }
         work->buttons[0] = ifTouchRegionAddRequested(0x2F, 0x1F);
         ++work->countA;
@@ -58,102 +78,119 @@ u32 titleConfigUpdate(void)
         ++work->countA;
         work->buttons[2] = ifTouchRegionAddRequested(0x2F, 0x21);
         ++work->countA;
-        s32 selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-        selected += listCursorGetRowIfUnblocked(g_titleConfig->cursor);
-        const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
-        buttonHelpSetText(help[selected].text, 0x323232FF);
-        FUN_00259e98();
+        titleConfigShowHelp();
         work->process = scrScriptProcessCreate(work->dataA, work->dataB);
         work->state = 1;
-        return 0;
-    }
+        break;
     case 1: {
-        s32 selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-        selected += listCursorGetRowIfUnblocked(work->cursor);
+        /* the setting under the cursor: retail reads the menu block again for this part */
+        TitleConfigCallbackView *config = g_titleConfig;
+        s32 selected = resourceRunOperationIfUnblocked(config->cursor) + listCursorGetRowIfUnblocked(config->cursor);
         dataTableGetEntries(dataTableGet(0x3A, 1));
-        s32 &value = work->settings[selected];
-        s32 previous = value;
-        if (work->resetButton >= 0 &&
-            (ifTouchGetSelectionModeForRegion(work->resetButton) == 6 || FUN_002c1658(9, 1))) {
+        s32 previous = config->settings[selected];
+
+        /* the reset button restores the selected setting's default */
+        if (config->resetButton >= 0 &&
+            (ifTouchGetSelectionModeForRegion(config->resetButton) == 6 || FUN_002c1658(9, 1))) {
             switch (selected) {
             case 0:
-                g_titleConfigValues.music = 50;
-                work->settings[0] = bgmVolumeToStep(50);
+                g_titleConfigValues.music = titleConfigDefaultMusic();
+                config->settings[0] = bgmVolumeToStep(g_titleConfigValues.music);
                 break;
             case 1:
-                g_titleConfigValues.sound = 80;
-                g_titleConfigValues.auxiliary = 48;
-                work->settings[1] = classifyValueByThreshold(80);
+                g_titleConfigValues.sound = titleConfigDefaultSound();
+                g_titleConfigValues.auxiliary = titleConfigDefaultAuxiliary();
+                config->settings[1] = classifyValueByThreshold(g_titleConfigValues.sound);
                 break;
             case 2:
-                g_titleConfigValues.voice = 80;
-                work->settings[2] = calcByteThresholdRank(80);
+                g_titleConfigValues.voice = titleConfigDefaultVoice();
+                config->settings[2] = calcByteThresholdRank(g_titleConfigValues.voice);
                 break;
             }
             eventQueueAddUnique(0x100016D);
         }
-        s32 button = ifTouchGetSelectionModeForRegion(work->leftButton);
-        bool left = button == 2 || (button == 1 && ifTouchGetActiveCounter() < 1);
-        button = ifTouchGetSelectionModeForRegion(work->rightButton);
-        bool right = button == 2 || (button == 1 && ifTouchGetActiveCounter() < 1);
-        if (left || FUN_002c1658(4, 0)) {
-            --value;
-            if (value < 1) {
-                value = 0;
+
+        /* the arrows count when released, or while held without the stylus moving */
+        bool left = false;
+        bool right = false;
+        s32 mode = ifTouchGetSelectionModeForRegion(config->leftButton);
+        if (mode == 1) {
+            if (ifTouchGetActiveCounter() < 1) {
+                left = true;
             }
+        } else if (mode == 2) {
+            left = true;
+        }
+        mode = ifTouchGetSelectionModeForRegion(config->rightButton);
+        if (mode == 1) {
+            if (ifTouchGetActiveCounter() < 1) {
+                right = true;
+            }
+        } else if (mode == 2) {
+            right = true;
+        }
+
+        if (left || FUN_002c1658(4, 0)) {
+            --config->settings[selected];
+            config->settings[selected] = config->settings[selected] > 0 ? config->settings[selected] : 0;
             FUN_002c1658(4, 0);
         } else if (right || FUN_002c1658(3, 0)) {
-            ++value;
-            if (value > 10) {
-                value = 10;
-            }
+            ++config->settings[selected];
+            config->settings[selected] = config->settings[selected] > 10 ? 10 : config->settings[selected];
             FUN_002c1658(3, 0);
         } else {
-            button = ifTouchGetSelectionModeForRegion(work->slider);
-            if (button == 1 || button == 2) {
-                const TextureTableEntryIV *slider = asdTMTexTableEntryAt(0x2F, 0x33);
-                s32 position = FUN_001c3688() - ifTouchGetRegionX(work->slider);
-                value = position * 10 / slider->placement->width;
+            mode = ifTouchGetSelectionModeForRegion(config->slider);
+            if (mode == 1 || mode == 2) {
+                const TextureTableEntryIV *bar = asdTMTexTableEntryAt(0x2F, 0x33);
+                s32 offset = FUN_001c3688() - ifTouchGetRegionX(config->slider);
+                config->settings[selected] = offset * 10 / bar->placement->width;
             }
         }
-        g_titleConfigValues.music = indexedByteLookup(work->settings[0]);
-        g_titleConfigValues.sound = thresholdGetPrimary(work->settings[1]);
-        g_titleConfigValues.voice = thresholdGetSecondary(work->settings[2]);
-        g_titleConfigValues.auxiliary = digitGlyphLookup(work->settings[1]);
-        if (value != previous) {
-            titleConfigApplyAudio();
-            audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
-            audioApplyChannelVolume(1, titleConfigGetModeFlag(), 1);
-            if (selected < 2) {
+
+        g_titleConfigValues.music = indexedByteLookup(config->settings[0]);
+        g_titleConfigValues.sound = thresholdGetPrimary(config->settings[1]);
+        g_titleConfigValues.voice = thresholdGetSecondary(config->settings[2]);
+        g_titleConfigValues.auxiliary = digitGlyphLookup(config->settings[1]);
+        if (config->settings[selected] != previous) {
+            /* previews the changed volume */
+            titleConfigApplyVolumes();
+            switch (selected) {
+            case 0:
+            case 1:
                 eventQueueAddUnique(0x100016D);
-            } else if (selected == 2) {
+                break;
+            case 2:
                 workCommandRefreshActiveSlots();
-                u32 bank = FUN_002bfdc4();
-                FUN_002bfc24(0, 0x2712, bank, 2);
+                FUN_002bfc24(0, 0x2712, FUN_002bfdc4(), 2, 0.707f, 0.707f);
+                break;
             }
-            return 0;
+            break;
         }
+
         if (FUN_0029efd8(work->cursor, 1)) {
-            selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-            selected += listCursorGetRowIfUnblocked(g_titleConfig->cursor);
-            const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
-            buttonHelpSetText(help[selected].text, 0x323232FF);
-            FUN_00259e98();
-            return 0;
+            titleConfigShowHelp();
+            break;
         }
-        s32 current = listCursorGetRowIfUnblocked(g_titleConfig->cursor);
-        for (s32 index = 0; index < 3; ++index) {
-            if (index != current && ifTouchGetSelectionModeForRegion(work->buttons[index]) == 6) {
-                eventQueueAddUnique(0x100016C);
-                scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(work->cursor), index);
-                selected = resourceRunOperationIfUnblocked(g_titleConfig->cursor);
-                selected += listCursorGetRowIfUnblocked(g_titleConfig->cursor);
-                const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));
-                buttonHelpSetText(help[selected].text, 0x323232FF);
-                FUN_00259e98();
-                return 0;
+
+        /* a touched row other than the cursor's takes the cursor */
+        {
+            TitleConfigCallbackView *list = g_titleConfig;
+            s32 current = listCursorGetRowIfUnblocked(list->cursor);
+            bool picked = false;
+            for (s32 row = 0; row < 3; ++row) {
+                if (row != current && ifTouchGetSelectionModeForRegion(list->buttons[row]) == 6) {
+                    eventQueueAddUnique(0x100016C);
+                    scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(list->cursor), row);
+                    picked = true;
+                    break;
+                }
+            }
+            if (picked) {
+                titleConfigShowHelp();
+                break;
             }
         }
+
         if (FUN_002c1658(0, 1)) {
             eventQueueAddUniqueIfValid(0x100016D);
             scrScriptProcessStartEntry(work->process, 2);
@@ -161,39 +198,35 @@ u32 titleConfigUpdate(void)
         } else if (FUN_002c1658(1, 1)) {
             eventQueueAddUniqueIfValid(0x100016E);
             timerStart(&work->window, 1, 0);
-            __ARM_common_memcpy4_8(&g_titleConfigValues, work->saved);
-            titleConfigApplyAudio();
-            audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
-            audioApplyChannelVolume(1, titleConfigGetModeFlag(), 1);
+            g_titleConfigValues = work->saved;
+            titleConfigApplyVolumes();
             work->state = 3;
         }
-        return 0;
+        break;
     }
     case 2:
         if (scrRunOpcodesStub(work->process) != 2) {
-            return 0;
+            break;
         }
         switch (messageMainGetChoiceResult()) {
-        case 1:
-            work->state = 1;
-            return 0;
         case 0:
             timerStart(&work->window, 1, 0);
-            work->state = 3;
             g_titleConfigValues.changed = 1;
-            return 0;
-        default:
-            return 0;
+            work->state = 3;
+            break;
+        case 1:
+            work->state = 1;
+            break;
         }
+        break;
     case 3:
         if (uiSpriteAdvanceAnimation(&work->window)) {
             work->state = 4;
         }
-        return 0;
+        break;
     case 4:
         return ~0u;
-    default:
-        return 0;
     }
+    return 0;
 }
 }

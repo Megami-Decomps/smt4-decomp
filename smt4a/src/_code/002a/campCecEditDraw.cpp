@@ -13,7 +13,7 @@ u32 campCecEditDraw(void)
 
     object = g_campCecEdit;
     if (object->imageActive != 0) {
-        requestImageDraw((u32)object->unk08, object->image);
+        requestImageDraw((u32)object->unk08, object->second.image);
     }
     return 0;
 }

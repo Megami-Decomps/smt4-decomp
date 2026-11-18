@@ -9,7 +9,7 @@
 extern "C" {
 
 float FUN_0028f4b4(const char *, unsigned int, float);
-int FUN_002907c4(...);
+int textFormatFullWidthNumber(...);
 int questIsCompleted(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int questDataGetRecord(void);
@@ -52,7 +52,7 @@ extern unsigned int dataTableGetNamePayload(unsigned int);
 extern int questPassesAvailabilityConditions(unsigned int);
 extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_0028f4b4. */
-/* Supplied declaration required: FUN_002907c4. */
+/* Supplied declaration required: textFormatFullWidthNumber. */
 extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: questIsCompleted. */
 extern int FUN_00298e40(unsigned int, int, unsigned char **);
@@ -237,7 +237,7 @@ void FUN_00197e34(void)
         }
       }
       else {
-        FUN_002907c4(temp_v26,psVar14[2]);
+        textFormatFullWidthNumber(temp_v26,psVar14[2]);
         textFormatBuffer(temp_v24,"%s\x81@\x82l\x82\x81\x82\x83\x82\x83\x82\x81",temp_v26);
         temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x1b));
       }
@@ -260,7 +260,7 @@ void FUN_00197e34(void)
       temp_v11 = (int)(temp_v16 + 3.0f) + (int)temp_v17;
       FUN_002bdf94(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0,7,
                    0x6a);
-      FUN_002907c4(temp_v26,psVar14[2]);
+      textFormatFullWidthNumber(temp_v26,psVar14[2]);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v4 + temp_v11 + 7,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffffffff,temp_v26);
@@ -425,9 +425,9 @@ LAB_00198518:
       temp_v9 = FUN_00298e40(temp_v25,temp_v6,&puStack_178);
       if (temp_v9 != 0) {
         temp_v27 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x34));
-        FUN_002907c4(temp_v29,temp_v22);
+        textFormatFullWidthNumber(temp_v29,temp_v22);
         temp_v23 = temp_v7 + temp_v6 * 8;
-        FUN_002907c4(temp_v28,*(unsigned int *)(temp_v23 + 0x170));
+        textFormatFullWidthNumber(temp_v28,*(unsigned int *)(temp_v23 + 0x170));
         temp_v12 = temp_v21 & 0xffff;
         if ((*(unsigned char *)((unsigned char *)&temp_v21 + 2)) != '\0') {
           dataFindKindRecordWithAocOverrides(temp_v12,0);

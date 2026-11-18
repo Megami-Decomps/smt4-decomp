@@ -1,4 +1,4 @@
-/* NON_MATCHING: demon list population and comparison rows restored; owner subobject bases, local stack placement and help-tail ordering differ. */
+/* NON_MATCHING: the entry-list address and the constant 1 swap callee-saved registers (retail: list in sl, 1 in fp), and the widget flag update addresses the halfword directly where retail uses a writeback load (ldrh [r0, #4]!). */
 #include "AsdSDK/AsdDebugHooks.h"
 #include "shard/Shard004A.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
@@ -45,7 +45,7 @@ void slotPoolResetTrackedState(InventoryListView *list);
 s32 itemIsCollectedWithRelated(u16 id);
 void inventoryListAppend(InventoryListView *list, const CampUnitComparison *record);
 void listScrollerInitialize(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
-u8 gaugePercent(InventoryListView *list, u32 mode);
+u8 gaugePercent(InventoryListView *list);
 void *jyoucyuGetTableEntry(u32 index);
 void FUN_004a5b20(Screen4A *work);
 void messageIdListSetRange(InventoryHelpList *help, u32 group, u32 image, s32 count);
@@ -77,9 +77,9 @@ void FUN_004a4848(Screen4A *owner)
         reinterpret_cast<InventoryTotalView *>(owner)->total = total;
         itemListSelectVariant(reinterpret_cast<ItemListSelectionOwner *>(owner), 1, 1);
         listScrollerInitialize(&work->cursor, 10, work->list.count, 0, 1, 1);
-        asdDebugHookPtr(&work->cursor);
+        asdDebugHookPtrInt(&work->cursor, 1);
         work->cursor.enabled = 1;
-        work->percentage = gaugePercent(&work->list, 1);
+        work->percentage = gaugePercent(&work->list);
         jyoucyuGetTableEntry(0);
         jyoucyuGetTableEntry(0);
     } else {

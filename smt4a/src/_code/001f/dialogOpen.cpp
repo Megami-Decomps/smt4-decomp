@@ -8,7 +8,7 @@ extern "C" {
 
 
 
-void dialogOpen(u8 mode)
+void dialogOpen(u8 mode, s32 flag)
 {
     InfoWindowA *countdown = g_infoWin;
 

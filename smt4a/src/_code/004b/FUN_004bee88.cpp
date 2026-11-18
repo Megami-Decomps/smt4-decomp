@@ -64,8 +64,9 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
                          "\202\201\202\226\202\205\201\100\202\201\202\216\202\231\201\100\202\220\202\201\202\222\202\224"
                          "\202\216\202\205\202\222\202\223\201\104");
         s32 width = fontMeasureLineAdvance(text, 3);
+        s32 offset = (notice->placement->width - width) / 2;
 
-        textDrawString(3, -1, (const char *)text, (f32)(x + notice->x + (notice->placement->width - width) / 2),
+        textDrawString(3, -1, (const char *)text, (f32)(x + notice->x + offset),
                      (f32)(notice->y + y), 0.0f, 0.0f, scale);
         efctSetSpeed(1.0f);
     }

@@ -1,6 +1,7 @@
 #include "font/InfoWinTextApi.h"
 /* NON_MATCHING: typed rewrite of the navigation map button handler; same blocks and calls as retail (232 vs 230 rows): the two stack arguments of rectRecRead are stored separately instead of one strd, early exits share the return and the saved registers are numbered differently (retail game state r7, navigation block r6, zero r8). */
 #include "gamedata/MapSaveBlockA.h"
+#include "ui/UiControl.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "map/NavigationInterpolation.h"
@@ -21,7 +22,7 @@ struct NaviInputPanel {
     /* 0x00066 */ u8 unk00066[0x466];
     /* 0x004CC */ u8 scene[4];
     /* 0x004D0 */ u8 unk004D0[0x770];
-    /* 0x00C40 */ u8 sprites[6][0x8C];
+    /* 0x00C40 */ UiSpriteState sprites[6];
     /* 0x00F88 */ u8 unk00F88[0x6C08];
     /* 0x07B90 */ u8 refreshCategory;
     /* 0x07B91 */ u8 refreshMarker;
@@ -56,9 +57,7 @@ NavigationPoint *sub68OwnerGetBlock60(void *scene);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
 void naviRequestSelectedMap(void);
 void sysPlayVoice(u32 id);
-void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 frame);
 void dialogClose(s32 immediate);
-void dialogOpen(s32 mode);
 s32 FUN_002d22c0(s32 value);
 void lmapEnableSceneState(void);
 s32 lmapSceneGetUnk0(void);
@@ -96,7 +95,7 @@ u32 FUN_00489480(NaviInputPanel *panel)
                 panel->step = 13;
                 FUN_002d22c0(1);
                 for (s32 i = 0; i < 6; ++i)
-                    uiSpriteSetKeyframe(panel->sprites[i], 4, 0);
+                    uiSpriteSetKeyframe(&panel->sprites[i], 4, 0);
                 panel->infoPending = 1;
                 if (settings->naviRefreshSecond != 0)
                     settings->naviRefreshSecond = 0;
@@ -108,7 +107,7 @@ u32 FUN_00489480(NaviInputPanel *panel)
             sysPlayVoice(0x100020F);
             naviRequestSelectedMap();
             for (s32 i = 0; i < 6; ++i)
-                uiSpriteSetKeyframe(panel->sprites[i], 7, 0);
+                uiSpriteSetKeyframe(&panel->sprites[i], 7, 0);
             panel->listActive = 1;
             handled = 1;
         } else {
@@ -124,7 +123,7 @@ u32 FUN_00489480(NaviInputPanel *panel)
             panel->refreshCategory = 1;
             panel->refreshMarker = 1;
             for (s32 i = 0; i < 6; ++i)
-                uiSpriteSetKeyframe(panel->sprites[i], 7, 0);
+                uiSpriteSetKeyframe(&panel->sprites[i], 7, 0);
             dialogClose(1);
             if (naviGetActiveStateValue(panel->scene) == static_cast<u32>(NaviMain_GetCurrentMap(reinterpret_cast<int>(panel->scene))))
                 g_gameState.naviMapPending = 0;
@@ -140,7 +139,7 @@ u32 FUN_00489480(NaviInputPanel *panel)
     if (DAT_005f19fc.alternateNaviMap == 0 && g_gameState.paused != 0 && mapIfGetState() == 0 &&
         panel->infoPending != 0) {
         infoWinExpandAndSetText((const char *)(DAT_00532760));
-        dialogOpen(1);
+        dialogOpen(1, 1);
         infoWinSetTimer(-1);
         panel->infoPending = 0;
     }

@@ -2,16 +2,6 @@
 #include "ui/DummyAttachmentWork.h"
 #include "script/scrScriptProcess.h"
 
-/* The renderer fields lie beyond the shared AsdMdlNode prefix. */
-struct AttachmentRenderer {
-    u8 unk00[0x1f6];
-    u8 dirty;
-};
-struct AttachmentNodeView {
-    u8 unk00[0x2c];
-    AttachmentRenderer *renderer;
-};
-
 extern "C" {
 void modelGetBoneTranslationByName(AsdMdlNode *, const char *, f32 *);
 void textFormatBuffer(char *, const char *, ...);
@@ -37,9 +27,7 @@ void FUN_003846e8(DummyAttachmentWork *work)
             modelGetBoneTranslationByName(work->source->model->node, name, position);
         } else {
             modelGetBoneTranslationByName(work->alternate->node, name, position);
-            AsdMdlObject *model = work->alternate;
-            model->flags &= ~2;
-            reinterpret_cast<AttachmentNodeView *>(model->node)->renderer->dirty = 1;
+            asdMdlObjectShow(work->alternate);
         }
         nodeSetTranslation(work->primary[index]->node, 0, position);
         nodeSetTranslation(work->secondary[index]->node, 0, position);

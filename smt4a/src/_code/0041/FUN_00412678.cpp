@@ -1,4 +1,4 @@
-/* NON_MATCHING: the slot loops now match retail (element pointer stops strength reduction); only the command-word-count local lands in r0 (retail r1) and its load/argument setup around FUN_00501084 is scheduled differently. */
+/* NON_MATCHING: the slot loops now match retail (element pointer stops strength reduction); the cached-command emit matches through its inline helper; only begin and texture swap their callee-saved registers (r6/r7). */
 #include "gfx/TextureCommands.h"
 #include "classes/Obj42072c.h"
 
@@ -35,6 +35,18 @@ static __inline u32 *vertexResetCommandSlots(u32 *commands, const Obj42072cState
     return commands;
 }
 
+// Generate the cached command words on first use, copy them out and append the texture commands
+// (FUN_00419c34, FUN_00419ce0 and FUN_00419d8c do the same with their own caches).
+static __inline u32 *cacheEmitCommands(Obj42072cState *cache, u32 *commands, const TextureCommandSource *texture)
+{
+    if (cache->commandWordCount == 0) {
+        u32 *end = FUN_00501084(cache, cache->commands);
+        cache->commandWordCount = end - cache->commands;
+    }
+    __aeabi_memcpy4(commands, cache->commands, cache->commandWordCount * sizeof(u32));
+    return FUN_00500fe4((u32)cache, commands + cache->commandWordCount, texture);
+}
+
 extern "C" void FUN_00412678(u32 unused, Obj42072cState *cache, const TextureCommandSource *texture)
 {
     u32 *begin = (u32 *)asdGxGetCommandCursor();
@@ -48,12 +60,7 @@ extern "C" void FUN_00412678(u32 unused, Obj42072cState *cache, const TextureCom
     *commands++ = 0x100;
     *commands++ = 0x30253;
     commands = vertexResetCommandSlots(commands, cache);
-    if (cache->commandWordCount == 0) {
-        u32 *end = FUN_00501084(cache, cache->commands);
-        cache->commandWordCount = end - cache->commands;
-    }
-    __aeabi_memcpy4(commands, cache->commands, cache->commandWordCount * sizeof(u32));
-    commands = FUN_00500fe4((u32)cache, commands + cache->commandWordCount, texture);
+    commands = cacheEmitCommands(cache, commands, texture);
     commands = vertexResetCommandSlots(commands, cache);
     asdModelCommitCommandRange((u32)begin, (u32)commands);
 }

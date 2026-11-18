@@ -8,7 +8,7 @@
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-void FUN_002907c4(char *, u32);
+void textFormatFullWidthNumber(char *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
 void textEncodeFontSlot(u32, const char *);
 void btlFormatCategoryLabel(char *, u32);
@@ -32,8 +32,8 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
         FUN_0029ede8(0x25, hits & 0xf, -1, 0);
     } else {
         char minimum[8], maximum[8];
-        FUN_002907c4(minimum, hits & 0xf);
-        FUN_002907c4(maximum, entry->hitRange >> 4);
+        textFormatFullWidthNumber(minimum, hits & 0xf);
+        textFormatFullWidthNumber(maximum, entry->hitRange >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); // CP932 full-width wave dash.
         textEncodeFontSlot(0x25, text);
     }

@@ -16,14 +16,17 @@ struct CampListEntryA {
 
 typedef struct CampStateA {
     /* 0x0000 */ u32 job;
-    /* 0x0004 */ u8 unk0004[0x10];
+    /* 0x0004 */ u8 unk0004[8];
+    /* 0x000C */ u32 unk000C;               /* FUN_0035c810()'s result when menu item 0x1C opens */
+    /* 0x0010 */ u8 unk0010[4];
     /* 0x0014 */ u32 substep;
     /* 0x0018 */ u32 unk0018;
     /* 0x001C */ s32 state;
     /* 0x0020 */ u32 phase;
     /* 0x0024 */ s32 pendingState;          /* the state the transition state (5) goes on to */
     /* 0x0028 */ s32 previousState;
-    /* 0x002C */ u8 unk002C[0xE];
+    /* 0x002C */ u32 unk002C;               /* cleared when the StreetPass script (0x26) starts */
+    /* 0x0030 */ u8 unk0030[0xA];
     /* 0x003A */ u16 buttonHelpValue;       /* ifTouchGetButtonHelpValue when the sort menu opened */
     /* 0x003C */ u8 unk003C;
     /* 0x003D */ u8 locked;
@@ -66,12 +69,17 @@ typedef struct CampStateA {
     /* 0x2E9C */ u16 bodyIds[120];
     /* 0x2F8C */ u16 legsIds[120];
     /* 0x307C */ u16 accessoryIds[120];
-    /* 0x316C */ u8 unk316C[0x10];
+    /* 0x316C */ u8 unk316C[0xC];
+    /* 0x3178 */ u8 questMenuOpened;        /* set by menu item 0x1D (quest menu) */
+    /* 0x3179 */ u8 questListOpened;        /* set by menu item 0x1E (quest list) */
+    /* 0x317A */ u8 uniteMode4Opened;       /* set by menu item 0x31 (unite mode 4) */
+    /* 0x317B */ u8 unk317B;
     /* 0x317C */ s32 categoryTimers[25];   /* index 0 is the player, 1..24 the unit slots */
     /* 0x31E0 */ s32 categoryIndices[25];
     /* 0x3244 */ u32 categoryColors[25];
     /* 0x32A8 */ s8 menuGroupBorrowed;      /* leaving the list puts the menu back on group 1 */
-    /* 0x32A9 */ u8 unk32A9[7];
+    /* 0x32A9 */ u8 slotRequestPending;     /* set by menu item 7 with slot request 10 */
+    /* 0x32AA */ u8 unk32AA[6];
     /* 0x32B0 */ u8 noticeFlags[7];
     /* 0x32B7 */ u8 unk32B7[0x109];
 } CampStateA;
@@ -89,6 +97,8 @@ typedef char CampStateANoticeOffsetCheck[offsetof(CampStateA, noticeFlags) == 0x
 typedef char CampStateAPendingOffsetCheck[offsetof(CampStateA, pendingState) == 0x24 &&
     offsetof(CampStateA, buttonHelpValue) == 0x3A && offsetof(CampStateA, locked) == 0x3D &&
     offsetof(CampStateA, statusSelection) == 0xBC && offsetof(CampStateA, menuGroupBorrowed) == 0x32A8 ? 1 : -1];
+typedef char CampStateAMenuFlagsOffsetCheck[offsetof(CampStateA, unk000C) == 0xC && offsetof(CampStateA, unk002C) == 0x2C &&
+    offsetof(CampStateA, questMenuOpened) == 0x3178 && offsetof(CampStateA, slotRequestPending) == 0x32A9 ? 1 : -1];
 typedef char CampStateASizeCheck[sizeof(CampStateA) == 0x33C0 ? 1 : -1];
 
 #ifdef __cplusplus

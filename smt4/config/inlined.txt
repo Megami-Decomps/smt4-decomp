@@ -54,3 +54,7 @@ uniteCtrlSetIncludeSameRace = 0xe5c01142; // 0x28b944 in FUN_0028b7f8 (party pan
 partyWidgetSetEmpty = 0xe5c01020; // 0x28b97c in FUN_0028b7f8: strb r1,[r0,#0x20] in place of the call
 partyWidgetSetUnitId = 0xe5801034; // 0x28b988 in FUN_0028b7f8: str r1,[r0,#0x34] in place of the call
 partyWidgetSetIsCharacter = 0xe5c01021; // 0x28b9bc in FUN_0028b7f8: strb r1,[r0,#0x21] in place of the call
+titleConfigDefaultMusic = 0xe3a00032; // 0x1eabdc (titleConfigUpdate+0x1c4, reset of setting 0: a lone mov r0, #50 stored to g_titleConfigValues.music and passed on in r0 to bgmVolumeToStep)
+titleConfigDefaultSound = 0xe3a00050; // 0x1eabfc (titleConfigUpdate+0x1e4, reset of setting 1: a lone mov r0, #80 stored to g_titleConfigValues.sound)
+titleConfigDefaultAuxiliary = 0xe3a00030; // 0x1eac08 (titleConfigUpdate+0x1f0: a lone mov r0, #48 stored to .auxiliary; the sound byte is then reloaded with ldrb r0, [fp, #1] for classifyValueByThreshold, the call's clobber of r0)
+titleConfigDefaultVoice = 0xe3a00050; // 0x1eac28 (titleConfigUpdate+0x210, reset of setting 2: a lone mov r0, #80 stored to g_titleConfigValues.voice and passed on in r0 to calcByteThresholdRank)

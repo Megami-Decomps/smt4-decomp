@@ -12,7 +12,7 @@ void Obj536044::resetHandlers()
     states[3] = &Obj536044::FUN_00498ac0;
     states[4] = &Obj536044::waitController;
     states[5] = &Obj536044::FUN_004995b0;
-    states[6] = &Obj536044::FUN_00494740;
+    states[6] = &Obj536044::updatePageTransition;
     states[7] = &Obj536044::FUN_0049bd20;
     states[8] = &Obj536044::itemMenuHandleSelectionInput;
     states[9] = &Obj536044::FUN_00499fdc;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: completion getter sequences match retail; retail shares one `mode = 0` store between cases 4 and 6, factors the phase tests as bne/b and orders the pending/current copy before the sprite address, constants in a different order. */
+/* NON_MATCHING: the phase chain ends beq/b where retail has bne/b, and the delayed-phase copy and phase constants use r0 where retail uses r1 (the sprite address is formed before the copy's store). */
 #include "ui/MenuState.h"
 #include "ui/UiSpriteApi.h"
 #include <stddef.h>
@@ -60,8 +60,9 @@ u32 FUN_00156230(void)
     case 6:
         uiSpriteAdvanceAnimation(&work->sprites[0], 1.0f);
         uiSpriteAdvanceAnimation(&work->sprites[2], 1.0f);
-        if (uiSpriteGetCompletionState(&work->sprites[0]) && uiSpriteGetCompletionState(&work->sprites[2]))
-            work->mode = 0;
+        if (!uiSpriteGetCompletionState(&work->sprites[0]) || !uiSpriteGetCompletionState(&work->sprites[2]))
+            break;
+        work->mode = 0;
         break;
     }
     ++work->timer;

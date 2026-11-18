@@ -28,7 +28,7 @@ int FUN_003a76b8(void);
 int FUN_003b01e8(void);
 int aocScriptReleaseTableAndReset(void);
 
-int FUN_00202ea4(void);
+int configUpdate(void);
 int FUN_0021545c(void);
 int campReleaseRegisteredTouchRegions(void);
 int useCounterStart(void);
@@ -186,7 +186,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_001fdde8. */
 /* Supplied declaration required: campSkillListUpdate. */
-/* Supplied declaration required: FUN_00202ea4. */
+/* Supplied declaration required: configUpdate. */
 extern int uniteStateIsDone(void);
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
@@ -1613,7 +1613,7 @@ LAB_003d6870:
     }
     break;
   case 0x2e:
-    FUN_00202ea4();
+    configUpdate();
     temp_v4 = configIsClosed();
 joined_r0x003d7c38:
     if (temp_v4 != 0) {

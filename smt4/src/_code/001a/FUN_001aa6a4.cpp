@@ -5,7 +5,7 @@
 extern "C" {
 
 int facingUpdateAngles(int, int);
-int FUN_00286198(...);
+int mtx44RotateYXZDegrees(...);
 int mtxMakeTranslation(...);
 int layoutApplyForState(int);
 int FUN_002b2144(...);
@@ -65,7 +65,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: facingUpdateAngles. */
-/* Supplied declaration required: FUN_00286198. */
+/* Supplied declaration required: mtx44RotateYXZDegrees. */
 /* Supplied declaration required: mtxMakeTranslation. */
 /* Supplied declaration required: layoutApplyForState. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
@@ -212,10 +212,10 @@ void FUN_001aa6a4(int param_1)
   temp_v10 = 1.0f;
   if ((*(unsigned char *)(param_1 + 0x130) & 1) != 0) {
     if (*(char *)(param_1 + 0x380) == '\x01') {
-      FUN_00286198(temp_v18,*(int *)(param_1 + 4) - *(int *)(param_1 + 0x160),
+      mtx44RotateYXZDegrees(temp_v18,*(int *)(param_1 + 4) - *(int *)(param_1 + 0x160),
                    *(int *)(param_1 + 0x164) - *(int *)(param_1 + 8),
                    *(int *)(param_1 + 0x168) - *(int *)(param_1 + 0xc));
-      FUN_00286198(temp_v18,0,-*(int *)(param_1 + 0x368));
+      mtx44RotateYXZDegrees(temp_v18,0,-*(int *)(param_1 + 0x368));
       temp_v3 = (int)*(short *)(param_1 + 0x170);
       temp_v0 = 0;
       temp_v8 = *(short *)(param_1 + 0x16e) - 0x5a;
@@ -225,7 +225,7 @@ void FUN_001aa6a4(int param_1)
       temp_v8 = *(int *)(param_1 + 8);
       temp_v0 = *(unsigned int *)(param_1 + 0xc);
     }
-    FUN_00286198(temp_v18,temp_v3,temp_v8,temp_v0);
+    mtx44RotateYXZDegrees(temp_v18,temp_v3,temp_v8,temp_v0);
     temp_v9 = temp_v4;
   }
   else if (*(char *)(param_1 + 0x380) != '\0') {
@@ -258,20 +258,20 @@ void FUN_001aa6a4(int param_1)
       pfVar2[1] = temp_v16;
       pfVar2[2] = temp_v17;
     } while (temp_v3 < 4);
-    FUN_00286198(temp_v18,0,0,*(unsigned int *)(param_1 + 0xc));
+    mtx44RotateYXZDegrees(temp_v18,0,0,*(unsigned int *)(param_1 + 0xc));
     temp_v9 = temp_v2;
   }
   else {
     temp_v3 = *(int *)(param_1 + 4);
     temp_v8 = *(int *)(param_1 + 8);
     temp_v0 = *(unsigned int *)(param_1 + 0xc);
-    FUN_00286198(temp_v18,temp_v3,temp_v8,temp_v0);
+    mtx44RotateYXZDegrees(temp_v18,temp_v3,temp_v8,temp_v0);
     temp_v9 = temp_v4;
   }
   temp_v12 = 0.1f;
   temp_v13 = -0.1f;
   if (*(char *)(param_1 + 0x1d9) == '\0') {
-    FUN_00286198(temp_v18,(int)*(float *)(param_1 + 0x204),-(int)*(float *)(param_1 + 0x208),
+    mtx44RotateYXZDegrees(temp_v18,(int)*(float *)(param_1 + 0x204),-(int)*(float *)(param_1 + 0x208),
                  -(int)*(float *)(param_1 + 0x20c));
     temp_v3 = -0x49f49f49;
     temp_v9 = (unsigned int)*(float *)(param_1 + 0x200);

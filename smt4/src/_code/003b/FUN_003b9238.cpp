@@ -1,4 +1,5 @@
 #include "font/PlaceWin.h"
+#include "ui/UiControl.h"
 
 struct StepText {
     u8 unk00[2];     // 0x00
@@ -25,7 +26,6 @@ extern "C" {
 s32 scrRunOpcodesStub(u32 script);
 void buttonHelpSelectByProgress(TextStep *step);
 void FUN_0027db24(s32 arg);
-void dialogOpen(u8 mode, u8 arg);
 void infoWinSetMessage(u32 window, s32 id);
 void FUN_002305e8(s32 value);
 

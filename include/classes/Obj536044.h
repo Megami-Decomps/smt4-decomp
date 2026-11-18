@@ -26,7 +26,7 @@ public:
     void FUN_00494a34();
     void FUN_00498ac0();
     void FUN_004995b0();
-    void FUN_00494740();
+    void updatePageTransition();
     void FUN_0049bd20();
     void itemMenuHandleSelectionInput();
     void FUN_00499fdc();

@@ -1,0 +1,61 @@
+/* NON_MATCHING: the literal pool order now matches (session read back from DAT_00435ce8); retail loads the DAT_00435ce8, 0x1E9D and g_btlMain pool words together after the allocation, the build sets r1 = -1 first and loads g_btlMain after the session stores. */
+#include "battle/BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/EnemyEditor.h"
+#include "AsdSDK/AsdDebug.h"
+#include <stddef.h>
+#include "map/mapDepart.h"
+#include "battle/btlEditor.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "battle/BtlGlobals.h"
+#include "battle/BtlUiGlobal.h"
+struct BtlUi;
+/* The allocated session extends beyond the shared EnemyEditorWork prefix. */
+struct EditorSessionState {
+    union {
+        EnemyEditorWork editor;
+        struct {
+            u32 mode;
+            u32 actor;
+            u8 unk08[8];
+            s16 selection;
+            s8 leftSelection;
+            s8 rightSelection;
+        } initial;
+    };
+    u32 unk14;
+};
+typedef char EditorSessionStateLayoutCheck[(sizeof(EditorSessionState) == 0x18 && offsetof(EditorSessionState, initial.leftSelection) == 0x12) ? 1 : -1];
+extern "C" {
+extern void *DAT_00435ce8;
+u32 jobDispatchOptionalOwner(u32 job);
+u32 battleEditorRunForJob(u32 job);
+void FUN_002c9edc(u32 job);
+u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, u32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
+s32 FUN_00256940(BtlCamera *battle, BtlMainState *owner, u32 enabled);
+void btlReflectQueueKind34(s32 mode, s32 index);
+
+void btlEditorCreate(BtlMainState *battle)
+{
+    u32 editorJob = taskCreateDraw("btlEditor Calc", 2, 0, 0, jobDispatchOptionalOwner, FUN_002c9edc, battle, battle->job);
+    battle->editor.job = editorJob;
+    taskCreateDraw("btlEditor DrawUp", 0x73, 0, 0, battleEditorRunForJob, 0, battle, editorJob);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEditor.cpp", 972);
+    DAT_00435ce8 = asdMemAlloc(0x100, 0x100, 0, sizeof(EditorSessionState), 1);
+    EditorSessionState *session = static_cast<EditorSessionState *>(DAT_00435ce8);
+    session->initial.mode = 0;
+    session->initial.actor = battle->completedCount;
+    session->editor.selection = -1;
+    session->initial.leftSelection = -1;
+    session->initial.rightSelection = -1;
+    if (g_btlMain) {
+        if (g_btlMain->unk760 >= 0 && FUN_00256940(g_btlMain, battle, 1))
+            btlReflectQueueKind34(0, 0);
+        FUN_00256898(1, 0);
+    }
+    battle->editorMask |= 0x80000;
+    BtlUi *ui = g_btlUiBlock;
+    if (ui)
+        FUN_0025c2d0(ui, 1);
+}
+}

@@ -1,4 +1,4 @@
-/* NON_MATCHING: list/self/source pointer allocation and the panel-flag writeback addressing differ; the name ID argument and weak debug hook now match. */
+/* NON_MATCHING: `this` and the source record swap callee-saved registers (retail: this in r7, source in r6), the frame is set up after copying `this`, and the panel-flag update addresses the halfword directly where retail uses a writeback load (ldrh [r0, #4]!). */
 #include "classes/Obj422448.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include <stddef.h>
@@ -77,9 +77,7 @@ void Obj422448::buildList()
 {
     Obj422448Layout *self = reinterpret_cast<Obj422448Layout *>(this);
 
-    void *list = &self->listCount;
-
-    entryTableClear(list);
+    entryTableClear(&self->listCount);
     u16 id = 0x79F;
     s32 scanned = 0;
     do {
@@ -92,7 +90,7 @@ void Obj422448::buildList()
                 entry.unk1C = aocIndexValueOrDefault(source->nameId);
                 entry.unk08 = source->unk28;
                 entry.unk0E = source->unk24;
-                recordAppendFloatEntry(list, &entry);
+                recordAppendFloatEntry(&self->listCount, &entry);
             }
         }
         id++;
@@ -125,15 +123,14 @@ void Obj422448::buildList()
         if ((*kind & 0x80) != 0) {
             line = line + 1;
         }
-        entryCollectionSortByMode(list, line);
+        entryCollectionSortByMode(&self->listCount, line);
     }
     listScrollerInitialize(self->holder, 10, (s16)self->listCount, 0, 1, 1);
     asdDebugHookPtrInt(self->holder, 1);
     self->unk02D = 1;
-    BibleListPanel *&panel = self->panel;
-    panel->rebind(self->holder);
-    panel->flags |= 0x1000;
-    self->gauge = gaugePercent(list);
+    self->panel->rebind(self->holder);
+    self->panel->flags |= 0x1000;
+    self->gauge = gaugePercent(&self->listCount);
     jyoucyuGetTableEntry(0);
     jyoucyuGetTableEntry(0);
 }

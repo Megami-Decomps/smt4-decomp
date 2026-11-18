@@ -1,10 +1,10 @@
 #include "font/PlaceWin.h"
+#include "ui/UiControl.h"
 #include "script/scrScriptProcess.h"
 
 extern "C" {
 
 int FUN_002305e8(int a);
-int dialogOpen(int a, int b);
 int infoWinSetMessage(u32 a, int b);
 int asdMemFree(u32 ptr);
 

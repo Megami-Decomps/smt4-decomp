@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023c168(int, unsigned int, unsigned int, int, int, int);
+int mobiclipFrameSetCreate(int, unsigned int, unsigned int, int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 extern romwright_code *g_mobiclipAllocator; /* 0x589528 */
 extern romwright_code *DAT_0058952c; /* 0x58952c */
 
-/* Supplied declaration required: FUN_0023c168. */
+/* Supplied declaration required: mobiclipFrameSetCreate. */
 
 
 unsigned int FUN_00513910(romwright_code *param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -40,7 +40,7 @@ unsigned int FUN_00513910(romwright_code *param_1,unsigned int param_2,unsigned 
       *(int *)(temp_v0 + 0x2c) = temp_v1;
       if (temp_v1 != 0) {
         temp_v1 = temp_v0;
-        FUN_0023c168(temp_v0,param_2,param_3,param_4,0,1);
+        mobiclipFrameSetCreate(temp_v0,param_2,param_3,param_4,0,1);
         if (temp_v1 != 0) {
           *(unsigned int *)(temp_v0 + 0x30) = 0;
           *(unsigned int *)(temp_v0 + 0x34) = 0;

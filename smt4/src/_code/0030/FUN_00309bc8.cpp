@@ -6,7 +6,7 @@
 #include "gamedata/GamePlayerData.h"
 
 extern "C" {
-void FUN_002907c4(char *buffer, u32 value);
+void textFormatFullWidthNumber(char *buffer, u32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void textEncodeFontSlot(u32 slot, const char *text);
 void btlFormatCategoryLabel(char *buffer, u32 value);
@@ -31,8 +31,8 @@ void FUN_00309bc8(u32 context, u32 depth)
         FUN_0029ede8(0x25, attackCount & 0xF, 0xFFFFFFFF, 0);
     } else {
         char countLabels[2][8];
-        FUN_002907c4(countLabels[0], attackCount & 0xF);
-        FUN_002907c4(countLabels[1], firearm->hitRange >> 4);
+        textFormatFullWidthNumber(countLabels[0], attackCount & 0xF);
+        textFormatFullWidthNumber(countLabels[1], firearm->hitRange >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", countLabels[0], countLabels[1]);
         textEncodeFontSlot(0x25, text);
     }

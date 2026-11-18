@@ -1,10 +1,10 @@
 #include "font/InfoWinTextApi.h"
 #include "map/mapDepart.h"
+#include "ui/UiControl.h"
 #include "game/GameStateA.h"
 
 extern "C" {
 
-void dialogOpen(s32 a, s32 b);
 const char *scrGetArgString(s32 index);
 
 s32 scrCommOpenDialog(void)

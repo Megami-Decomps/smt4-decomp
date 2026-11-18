@@ -32077,12 +32077,12 @@
     },
     {
       "address": "0x1678a8",
-      "function": "FUN_001678a8",
+      "function": "messageWindowDrawSprites",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_001678a8.o",
+      "object": "build/obj/_code/0016/messageWindowDrawSprites.o",
       "size": 512,
-      "source": "src/_code/0016/FUN_001678a8.cpp",
-      "target": "orig/target/_code/0016/FUN_001678a8.o",
+      "source": "src/_code/0016/messageWindowDrawSprites.cpp",
+      "target": "orig/target/_code/0016/messageWindowDrawSprites.o",
       "thumb": false
     },
     {
@@ -54583,12 +54583,12 @@
     {
       "address": "0x202ea4",
       "file": "camp/Config/Config",
-      "function": "FUN_00202ea4",
+      "function": "configUpdate",
       "module": "_code",
-      "object": "build/obj/_code/camp/Config/Config/FUN_00202ea4.o",
+      "object": "build/obj/_code/camp/Config/Config/configUpdate.o",
       "size": 2720,
-      "source": "src/_code/camp/Config/Config/FUN_00202ea4.cpp",
-      "target": "orig/target/_code/camp/Config/Config/FUN_00202ea4.o",
+      "source": "src/_code/camp/Config/Config/configUpdate.cpp",
+      "target": "orig/target/_code/camp/Config/Config/configUpdate.o",
       "thumb": false
     },
     {
@@ -55371,12 +55371,12 @@
     },
     {
       "address": "0x21252c",
-      "function": "FUN_0021252c",
+      "function": "mtx44RotateYXZDegrees",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_0021252c.o",
+      "object": "build/obj/_code/0021/mtx44RotateYXZDegrees.o",
       "size": 492,
-      "source": "src/_code/0021/FUN_0021252c.cpp",
-      "target": "orig/target/_code/0021/FUN_0021252c.o",
+      "source": "src/_code/0021/mtx44RotateYXZDegrees.cpp",
+      "target": "orig/target/_code/0021/mtx44RotateYXZDegrees.o",
       "thumb": false
     },
     {
@@ -56068,12 +56068,12 @@
     {
       "address": "0x21c45c",
       "file": "battle/btlDebug",
-      "function": "FUN_0021c45c",
+      "function": "btlUiPartyDisplayInit",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlDebug/FUN_0021c45c.o",
+      "object": "build/obj/_code/battle/btlDebug/btlUiPartyDisplayInit.o",
       "size": 3232,
-      "source": "src/_code/battle/btlDebug/FUN_0021c45c.cpp",
-      "target": "orig/target/_code/battle/btlDebug/FUN_0021c45c.o",
+      "source": "src/_code/battle/btlDebug/btlUiPartyDisplayInit.cpp",
+      "target": "orig/target/_code/battle/btlDebug/btlUiPartyDisplayInit.o",
       "thumb": false
     },
     {
@@ -57249,12 +57249,12 @@
     },
     {
       "address": "0x22f9c8",
-      "function": "FUN_0022f9c8",
+      "function": "uniteDrawOptionRow",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022f9c8.o",
+      "object": "build/obj/_code/0022/uniteDrawOptionRow.o",
       "size": 420,
-      "source": "src/_code/0022/FUN_0022f9c8.cpp",
-      "target": "orig/target/_code/0022/FUN_0022f9c8.o",
+      "source": "src/_code/0022/uniteDrawOptionRow.cpp",
+      "target": "orig/target/_code/0022/uniteDrawOptionRow.o",
       "thumb": false
     },
     {
@@ -58844,12 +58844,12 @@
     },
     {
       "address": "0x23c168",
-      "function": "FUN_0023c168",
+      "function": "mobiclipFrameSetCreate",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023c168.o",
+      "object": "build/obj/_code/0023/mobiclipFrameSetCreate.o",
       "size": 536,
-      "source": "src/_code/0023/FUN_0023c168.cpp",
-      "target": "orig/target/_code/0023/FUN_0023c168.o",
+      "source": "src/_code/0023/mobiclipFrameSetCreate.cpp",
+      "target": "orig/target/_code/0023/mobiclipFrameSetCreate.o",
       "thumb": false
     },
     {
@@ -61893,12 +61893,12 @@
     {
       "address": "0x27dbac",
       "file": "title/S4Load",
-      "function": "FUN_0027dbac",
+      "function": "s4LoadDrawUpperJob",
       "module": "_code",
-      "object": "build/obj/_code/title/S4Load/FUN_0027dbac.o",
+      "object": "build/obj/_code/title/S4Load/s4LoadDrawUpperJob.o",
       "size": 488,
-      "source": "src/_code/title/S4Load/FUN_0027dbac.cpp",
-      "target": "orig/target/_code/title/S4Load/FUN_0027dbac.o",
+      "source": "src/_code/title/S4Load/s4LoadDrawUpperJob.cpp",
+      "target": "orig/target/_code/title/S4Load/s4LoadDrawUpperJob.o",
       "thumb": false
     },
     {
@@ -65473,12 +65473,12 @@
     {
       "address": "0x2a4488",
       "file": "event/2dEvent/EventEffect",
-      "function": "FUN_002a4488",
+      "function": "eventSnowNoiseUpdate",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/EventEffect/FUN_002a4488.o",
+      "object": "build/obj/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.o",
       "size": 440,
-      "source": "src/_code/event/2dEvent/EventEffect/FUN_002a4488.cpp",
-      "target": "orig/target/_code/event/2dEvent/EventEffect/FUN_002a4488.o",
+      "source": "src/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.cpp",
+      "target": "orig/target/_code/event/2dEvent/EventEffect/eventSnowNoiseUpdate.o",
       "thumb": false
     },
     {
@@ -65744,12 +65744,12 @@
     },
     {
       "address": "0x2a4cfc",
-      "function": "FUN_002a4cfc",
+      "function": "campMenuRunSelectedItem",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a4cfc.o",
+      "object": "build/obj/_code/002a/campMenuRunSelectedItem.o",
       "size": 4088,
-      "source": "src/_code/002a/FUN_002a4cfc.cpp",
-      "target": "orig/target/_code/002a/FUN_002a4cfc.o",
+      "source": "src/_code/002a/campMenuRunSelectedItem.cpp",
+      "target": "orig/target/_code/002a/campMenuRunSelectedItem.o",
       "thumb": false
     },
     {
@@ -66950,12 +66950,12 @@
     {
       "address": "0x2b50e4",
       "file": "battle/btlEditor",
-      "function": "FUN_002b50e4",
+      "function": "btlEditorCreate",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlEditor/FUN_002b50e4.o",
+      "object": "build/obj/_code/battle/btlEditor/btlEditorCreate.o",
       "size": 332,
-      "source": "src/_code/battle/btlEditor/FUN_002b50e4.cpp",
-      "target": "orig/target/_code/battle/btlEditor/FUN_002b50e4.o",
+      "source": "src/_code/battle/btlEditor/btlEditorCreate.cpp",
+      "target": "orig/target/_code/battle/btlEditor/btlEditorCreate.o",
       "thumb": false
     },
     {
@@ -68188,12 +68188,12 @@
     },
     {
       "address": "0x2c0940",
-      "function": "FUN_002c0940",
+      "function": "textFormatFullWidthNumber",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002c0940.o",
+      "object": "build/obj/_code/002c/textFormatFullWidthNumber.o",
       "size": 416,
-      "source": "src/_code/002c/FUN_002c0940.cpp",
-      "target": "orig/target/_code/002c/FUN_002c0940.o",
+      "source": "src/_code/002c/textFormatFullWidthNumber.cpp",
+      "target": "orig/target/_code/002c/textFormatFullWidthNumber.o",
       "thumb": false
     },
     {
@@ -69015,12 +69015,12 @@
     {
       "address": "0x2c7150",
       "file": "title/S4Load",
-      "function": "FUN_002c7150",
+      "function": "s4LoadCreate",
       "module": "_code",
-      "object": "build/obj/_code/title/S4Load/FUN_002c7150.o",
+      "object": "build/obj/_code/title/S4Load/s4LoadCreate.o",
       "size": 400,
-      "source": "src/_code/title/S4Load/FUN_002c7150.cpp",
-      "target": "orig/target/_code/title/S4Load/FUN_002c7150.o",
+      "source": "src/_code/title/S4Load/s4LoadCreate.cpp",
+      "target": "orig/target/_code/title/S4Load/s4LoadCreate.o",
       "thumb": false
     },
     {
@@ -95798,12 +95798,12 @@
     },
     {
       "address": "0x31a914",
-      "function": "FUN_0031a914",
+      "function": "configValueName",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_0031a914.o",
+      "object": "build/obj/_code/0031/configValueName.o",
       "size": 160,
-      "source": "src/_code/0031/FUN_0031a914.cpp",
-      "target": "orig/target/_code/0031/FUN_0031a914.o",
+      "source": "src/_code/0031/configValueName.cpp",
+      "target": "orig/target/_code/0031/configValueName.o",
       "thumb": false
     },
     {
@@ -101935,12 +101935,12 @@
     {
       "address": "0x34280c",
       "file": "camp/CampCec/CampCecEdit",
-      "function": "FUN_0034280c",
+      "function": "campCecEditCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/CampCec/CampCecEdit/FUN_0034280c.o",
+      "object": "build/obj/_code/camp/CampCec/CampCecEdit/campCecEditCreate.o",
       "size": 1552,
-      "source": "src/_code/camp/CampCec/CampCecEdit/FUN_0034280c.cpp",
-      "target": "orig/target/_code/camp/CampCec/CampCecEdit/FUN_0034280c.o",
+      "source": "src/_code/camp/CampCec/CampCecEdit/campCecEditCreate.cpp",
+      "target": "orig/target/_code/camp/CampCec/CampCecEdit/campCecEditCreate.o",
       "thumb": false
     },
     {
@@ -121726,12 +121726,12 @@
     {
       "address": "0x3b6820",
       "file": "event/2dEvent/Npc2d",
-      "function": "FUN_003b6820",
+      "function": "npc2dCreatePortraitVariantJob",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/Npc2d/FUN_003b6820.o",
+      "object": "build/obj/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.o",
       "size": 492,
-      "source": "src/_code/event/2dEvent/Npc2d/FUN_003b6820.cpp",
-      "target": "orig/target/_code/event/2dEvent/Npc2d/FUN_003b6820.o",
+      "source": "src/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.cpp",
+      "target": "orig/target/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.o",
       "thumb": false
     },
     {
@@ -125229,12 +125229,12 @@
     {
       "address": "0x3c8fd4",
       "file": "event/2dEvent/Npc2d",
-      "function": "FUN_003c8fd4",
+      "function": "npc2dCreatePortraitCenterJob",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/Npc2d/FUN_003c8fd4.o",
+      "object": "build/obj/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.o",
       "size": 476,
-      "source": "src/_code/event/2dEvent/Npc2d/FUN_003c8fd4.cpp",
-      "target": "orig/target/_code/event/2dEvent/Npc2d/FUN_003c8fd4.o",
+      "source": "src/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.cpp",
+      "target": "orig/target/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.o",
       "thumb": false
     },
     {
@@ -130226,12 +130226,12 @@
     },
     {
       "address": "0x3ef738",
-      "function": "FUN_003ef738",
+      "function": "btlScriptGetSelectedSkillDemonId",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003ef738.o",
+      "object": "build/obj/_code/003e/btlScriptGetSelectedSkillDemonId.o",
       "size": 544,
-      "source": "src/_code/003e/FUN_003ef738.cpp",
-      "target": "orig/target/_code/003e/FUN_003ef738.o",
+      "source": "src/_code/003e/btlScriptGetSelectedSkillDemonId.cpp",
+      "target": "orig/target/_code/003e/btlScriptGetSelectedSkillDemonId.o",
       "thumb": false
     },
     {
@@ -135056,12 +135056,12 @@
     },
     {
       "address": "0x412c54",
-      "function": "FUN_00412c54",
+      "function": "vertexAttributeUploadStreams",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_00412c54.o",
+      "object": "build/obj/_code/0041/vertexAttributeUploadStreams.o",
       "size": 496,
-      "source": "src/_code/0041/FUN_00412c54.cpp",
-      "target": "orig/target/_code/0041/FUN_00412c54.o",
+      "source": "src/_code/0041/vertexAttributeUploadStreams.cpp",
+      "target": "orig/target/_code/0041/vertexAttributeUploadStreams.o",
       "thumb": false
     },
     {
@@ -135488,12 +135488,12 @@
     },
     {
       "address": "0x416960",
-      "function": "FUN_00416960",
+      "function": "btlPartnerMessageSetSlot",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_00416960.o",
+      "object": "build/obj/_code/0041/btlPartnerMessageSetSlot.o",
       "size": 492,
-      "source": "src/_code/0041/FUN_00416960.cpp",
-      "target": "orig/target/_code/0041/FUN_00416960.o",
+      "source": "src/_code/0041/btlPartnerMessageSetSlot.cpp",
+      "target": "orig/target/_code/0041/btlPartnerMessageSetSlot.o",
       "thumb": false
     },
     {
@@ -135548,12 +135548,12 @@
     },
     {
       "address": "0x41704c",
-      "function": "FUN_0041704c",
+      "function": "resultInputOpenStatus",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041704c.o",
+      "object": "build/obj/_code/0041/resultInputOpenStatus.o",
       "size": 484,
-      "source": "src/_code/0041/FUN_0041704c.cpp",
-      "target": "orig/target/_code/0041/FUN_0041704c.o",
+      "source": "src/_code/0041/resultInputOpenStatus.cpp",
+      "target": "orig/target/_code/0041/resultInputOpenStatus.o",
       "thumb": false
     },
     {
@@ -136625,12 +136625,12 @@
     {
       "address": "0x41cbac",
       "file": "battle/Filter/Filter4Poly",
-      "function": "FUN_0041cbac",
+      "function": "filterCreate4Poly",
       "module": "_code",
-      "object": "build/obj/_code/battle/Filter/Filter4Poly/FUN_0041cbac.o",
+      "object": "build/obj/_code/battle/Filter/Filter4Poly/filterCreate4Poly.o",
       "size": 404,
-      "source": "src/_code/battle/Filter/Filter4Poly/FUN_0041cbac.cpp",
-      "target": "orig/target/_code/battle/Filter/Filter4Poly/FUN_0041cbac.o",
+      "source": "src/_code/battle/Filter/Filter4Poly/filterCreate4Poly.cpp",
+      "target": "orig/target/_code/battle/Filter/Filter4Poly/filterCreate4Poly.o",
       "thumb": false
     },
     {
@@ -138072,12 +138072,12 @@
     },
     {
       "address": "0x424ecc",
-      "function": "FUN_00424ecc",
+      "function": "recordTableLoadKind2Payloads",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00424ecc.o",
+      "object": "build/obj/_code/0042/recordTableLoadKind2Payloads.o",
       "size": 516,
-      "source": "src/_code/0042/FUN_00424ecc.cpp",
-      "target": "orig/target/_code/0042/FUN_00424ecc.o",
+      "source": "src/_code/0042/recordTableLoadKind2Payloads.cpp",
+      "target": "orig/target/_code/0042/recordTableLoadKind2Payloads.o",
       "thumb": false
     },
     {
@@ -154846,12 +154846,12 @@
     },
     {
       "address": "0x47a298",
-      "function": "FUN_0047a298",
+      "function": "aocMenuDrawGuideDown",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_0047a298.o",
+      "object": "build/obj/_code/0047/aocMenuDrawGuideDown.o",
       "size": 460,
-      "source": "src/_code/0047/FUN_0047a298.cpp",
-      "target": "orig/target/_code/0047/FUN_0047a298.o",
+      "source": "src/_code/0047/aocMenuDrawGuideDown.cpp",
+      "target": "orig/target/_code/0047/aocMenuDrawGuideDown.o",
       "thumb": false
     },
     {
@@ -158426,12 +158426,12 @@
     },
     {
       "address": "0x494740",
-      "function": "_ZN9Obj53604412FUN_00494740Ev",
+      "function": "_ZN9Obj53604420updatePageTransitionEv",
       "module": "_code",
-      "object": "build/obj/_code/0049/Obj536044__FUN_00494740.o",
+      "object": "build/obj/_code/0049/Obj536044__updatePageTransition.o",
       "size": 468,
-      "source": "src/_code/0049/Obj536044__FUN_00494740.cpp",
-      "target": "orig/target/_code/0049/Obj536044__FUN_00494740.o",
+      "source": "src/_code/0049/Obj536044__updatePageTransition.cpp",
+      "target": "orig/target/_code/0049/Obj536044__updatePageTransition.o",
       "thumb": false
     },
     {

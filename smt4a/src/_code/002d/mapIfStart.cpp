@@ -1,10 +1,9 @@
 #include "map/MapInterfaceApi.h"
 #include "font/InfoWinTextApi.h"
 #include "map/MapIfGlobals.h"
+#include "ui/UiControl.h"
 
 extern "C" {
-
-void dialogOpen(s32 a, s32 b);
 
 void mapIfStart(const char *text)
 {

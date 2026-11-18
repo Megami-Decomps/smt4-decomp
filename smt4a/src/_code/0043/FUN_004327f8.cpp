@@ -1,4 +1,4 @@
-/* NON_MATCHING: payload length reads and the output length setter (FUN_002b3170, linker-inlined) now match retail; remaining: armcc adds nop hints after the stream call/compare and if-converts the marker clamp (vcvtle/vmovle) differently. */
+/* NON_MATCHING: armcc adds nop hints after the stream-result compare and around the marker store, and the predicated marker clamp keeps the converted value unmasked (retail moves it through r1 and masks it with andle). */
 #include "shard/Shard0031.h"
 
 /* Only the six I/O fields of the existing zlib stream are accessed here. */
@@ -50,16 +50,16 @@ u32 FUN_004327f8(OnlineCompressionOwner *owner, RangeObject *input, RangeObject 
         owner->work->stream.totalOutput < objectGetLengthField(input)) {
         f32 expansion = static_cast<f32>(objectGetLengthField(input)) /
                         static_cast<f32>(owner->work->stream.totalOutput) + 1.0f;
-        u8 marker = expansion <= 255.0f ? static_cast<u8>(static_cast<u32>(expansion)) : 255;
+        u8 marker = expansion > 255.0f ? 255 : static_cast<u32>(expansion);
         FUN_002b3170(output, owner->work->stream.totalOutput + 1);
         *onlineBufferGetData(output) = marker;
     } else {
         u8 *destination = output->payload.base + output->pos;
         FUN_002b3170(output, objectGetLengthField(input) + 1);
-        *destination = 0;
+        *destination++ = 0;
         u32 length = objectGetLengthField(input);
         u8 *source = onlineBufferGetData(input);
-        rt_memcpy(destination + 1, source, length);
+        rt_memcpy(destination, source, length);
     }
     return 0;
 }

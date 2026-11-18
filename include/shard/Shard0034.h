@@ -216,18 +216,28 @@ struct ActorDetailsTextObjectsIV {
     /* 0x88 */ s16 portrait;
     /* 0x8A */ u8 unk8a[2];
 };
-struct ActorDetailsRecordIV {
+/* The values an actor's detail panel lists (0x14 bytes). */
+struct ActorDetailsStatsIV {
+    /* 0x00 */ s16 values[8];
+    /* 0x10 */ u8 unk10[2];
+    /* 0x12 */ u8 specialValue;
+    /* 0x13 */ u8 unk13;
+};
+/* An actor's identity as the detail panel shows it (0x38 bytes). */
+struct ActorDetailsProfileIV {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u8 flags;
     /* 0x21 */ u8 unk21[0x15];
     /* 0x36 */ u8 level;
     /* 0x37 */ u8 style; /* 0 and 1 select the two supported palettes. */
-    /* 0x38 */ s16 values[8];
-    /* 0x48 */ u8 unk48[2];
-    /* 0x4A */ u8 specialValue;
+};
+struct ActorDetailsRecordIV {
+    /* 0x00 */ ActorDetailsProfileIV profile;
+    /* 0x38 */ ActorDetailsStatsIV stats;
 };
 typedef char ActorDetailsTextObjectsIVSizeCheck[sizeof(ActorDetailsTextObjectsIV) == 0x8C ? 1 : -1];
-typedef char ActorDetailsRecordIVSizeCheck[sizeof(ActorDetailsRecordIV) == 0x4C ? 1 : -1];
+typedef char ActorDetailsRecordIVSizeCheck[sizeof(ActorDetailsRecordIV) == 0x4C &&
+    offsetof(ActorDetailsRecordIV, stats.specialValue) == 0x4A ? 1 : -1];
 
 typedef struct Holder48 {
     /* 0x00 */ u8 unk00[0x48];

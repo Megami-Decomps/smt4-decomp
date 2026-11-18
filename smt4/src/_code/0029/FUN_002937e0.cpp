@@ -1,4 +1,4 @@
-/* NON_MATCHING: branch layout now matches retail (fixed-capacity arm placed before the unlocked-slot arm); remaining: column results held in swapped saved registers (r7/r8) and the two stack-argument stores scheduled before the capacity load. */
+/* NON_MATCHING: branch layout now matches retail (fixed-capacity arm placed before the unlocked-slot arm); the second page's capacity reads now schedule like retail; remaining: the column results are held in swapped saved registers (r7/r8). */
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -35,10 +35,8 @@ void FUN_002937e0(void)
         gridNavigationConfigure(&panel->stockGrid, 12, 3, 4, 1, 1);
         gridNavigationConfigure(&panel->fullGrid, 16, 4, 4, 1, 1);
     } else {
-        party = reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable());
-        gridNavigationConfigure(&panel->stockGrid, party->capacity - 12, 3, 4, 1, 1);
-        party = reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable());
-        gridNavigationConfigure(&panel->fullGrid, party->capacity - 8, 4, 4, 1, 1);
+        gridNavigationConfigure(&panel->stockGrid, reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable())->capacity - 12, 3, 4, 1, 1);
+        gridNavigationConfigure(&panel->fullGrid, reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable())->capacity - 8, 4, 4, 1, 1);
     }
     scrollOwnerSelectIndex(&panel->stockGrid, firstRow);
     scrollListSetSelectionMarkChanged(reinterpret_cast<ScrollSelection *>(&panel->stockGrid), firstColumn);

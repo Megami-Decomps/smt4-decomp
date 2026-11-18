@@ -45,7 +45,7 @@ void FUN_0042cb68(void *);
 void FUN_0042cb74(PrimitiveBatch *);
 void sysMemClear(void *, u32);
 void FUN_00412b3c(PrimitiveSource *, PrimitiveBatchWork *);
-void FUN_00412c54(PrimitiveSource *, PrimitiveBatchWork *);
+void vertexAttributeUploadStreams(PrimitiveSource *, PrimitiveBatchWork *);
 void *asdPrimAlloc(u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void FUN_00412678(PrimitiveSource *, PrimitiveBatchWork *, PrimitiveIndices *);
@@ -74,7 +74,7 @@ void primitiveSourceBuildBatch(PrimitiveSource *source)
             indices.address = asdGxGetPhysicalAddress(reinterpret_cast<u32>(source->indices));
             indices.count = source->indexCount;
         } else {
-            FUN_00412c54(source, &work);
+            vertexAttributeUploadStreams(source, &work);
             u32 count = source->indexCount;
             void *copy = asdPrimAlloc(count * sizeof(u16));
             rt_memcpy(copy, source->indices, count * sizeof(u16));

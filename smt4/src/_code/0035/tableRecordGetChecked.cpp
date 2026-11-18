@@ -1,16 +1,9 @@
-#include "common.h"
+#include "record/RecordTable.h"
 
-struct IndexedRecord { u8 bytes[16]; };
-struct RecordTable {
-    /* 0x000 */ u8 unk00[0x484];
-    /* 0x484 */ s32 count;
-    /* 0x488 */ u8 padding[0x20];
-    /* 0x4a8 */ IndexedRecord records[1];
-};
-/* Returns an in-range record, otherwise null. */
-extern "C" IndexedRecord *tableRecordGetChecked(RecordTable *table, s32 index)
+/* Returns an in-range kind-1 record, otherwise null. */
+extern "C" RecordKind1 *tableRecordGetChecked(RecordTable *table, s32 index)
 {
-    if (index >= 0 && index < table->count)
-        return &table->records[index];
+    if (index >= 0 && index < table->kind1Count)
+        return &table->kind1[index];
     return NULL;
 }

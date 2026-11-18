@@ -136,9 +136,22 @@ typedef struct StateAtF4 {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u16 *unk08;
     /* 0x0C */ u32 *unk0C;
-    /* 0x10 */ u8 unk10[0x14];
-    /* 0x24 */ u8 image[1];
-    /* 0x25 */ u8 unk25[0x27];
+    union {
+        /* 0x10 */ u8 unk10[0x14];
+        /* 0x10 */ u8 panels[2][0x14];   /* two 0x14-byte records, cleared on creation; [1] starts with `image` */
+        struct {
+            u8 unk10[0x14];
+            /* 0x24 */ u8 image[1];
+        } second;
+    };
+    union {
+        /* 0x38 */ u8 unk38[0x14];
+        struct {
+            /* 0x38 */ f32 alpha;
+            /* 0x3C */ s32 x;            /* 30 on creation */
+            /* 0x40 */ s32 y;
+        } cursor;                        /* the third 0x14-byte record (FUN_002e1d1c draws it) */
+    };
     /* 0x4C */ ScriptProcess *scriptProcess;
     /* 0x50 */ void *buf50;
     /* 0x54 */ void *buf54;
@@ -150,19 +163,50 @@ typedef struct StateAtF4 {
             s32 (*callbacks[36])(struct StateAtF4 *state);
             s32 previousMode;
         } dispatch;
+        struct {
+            /* 0x60 */ s32 (*handlers[10])(struct StateAtF4 *state); /* the mode handlers set on creation */
+            /* 0x88 */ s32 values[24];   /* a table of small ids, filled on creation */
+            /* 0xE8 */ s32 state;        /* campCecEditIsStateSixteen tests it; -1 on creation */
+            /* 0xEC */ s32 nextState;
+            /* 0xF0 */ s32 previousMode;
+        } table;
     };
     /* 0xF4 */ s32 mode;
     /* 0xF8 */ s32 phase;
-    /* 0x0FC */ u8 unk0FC[0x12];
+    /* 0x0FC */ s32 unk0FC;              /* -1 on creation */
+    /* 0x100 */ s32 unk100;
+    /* 0x104 */ s32 activeMemberCount;   /* party members with neither ailment bit 10 nor bit 1 */
+    /* 0x108 */ u16 unk108;              /* the save block's u16 at 0x27E0C, twice */
+    /* 0x10A */ u16 unk10A;
+    /* 0x10C */ u8 unk10C;
+    /* 0x10D */ u8 unk10D;               /* the save block's byte at 0x27E0E */
     /* 0x10E */ u8 imageActive;
     /* 0x10F */ u8 unk10F;
-    /* 0x110 */ u8 unk110[0x3C];
+    /* 0x110 */ u8 unk110[2];
+    /* 0x112 */ u8 unk112;               /* 1 on creation */
+    /* 0x113 */ u8 openMode;             /* the argument the screen was created with */
+    /* 0x114 */ u8 unk114;
+    /* 0x115 */ u8 unk115[3];
+    /* 0x118 */ s32 unk118;
+    /* 0x11C */ u8 unk11C[4];
+    /* 0x120 */ s32 unk120;
+    /* 0x124 */ s32 unk124;              /* 32 on creation */
+    /* 0x128 */ s32 unk128;
+    /* 0x12C */ u8 unk12C;
+    /* 0x12D */ u8 unk12D;
+    /* 0x12E */ u8 unk12E[2];
+    /* 0x130 */ s32 unk130;              /* -56 on creation */
+    /* 0x134 */ s32 unk134;
+    /* 0x138 */ u8 unk138[4];
+    /* 0x13C */ s32 unk13C;
+    /* 0x140 */ s32 unk140;
+    /* 0x144 */ s32 unk144;
+    /* 0x148 */ s32 unk148;              /* -1 on creation */
     /* 0x14C */ u32 unk14C;
-    union {
-        /* 0x150 */ u8 unk150[0x1C];
-        /* 0x150 */ s32 frameCounter;
-    };
-    /* 0x16C */ u8 unk16C[0xE];
+    /* 0x150 */ s32 frameCounter;
+    /* 0x154 */ u8 unk154;               /* 1 on creation */
+    /* 0x155 */ u8 unk155[0x17];
+    /* 0x16C */ u8 unk16C[0xE];          /* the player's equipment when the screen opened */
     union {
         /* 0x17A */ u8 unk17A[0xF];
         struct {
@@ -171,12 +215,21 @@ typedef struct StateAtF4 {
         } preview;
     };
     /* 0x189 */ u8 unk189;
-} StateAtF4;
+    /* 0x18A */ u8 unk18A[2];
+    /* 0x18C */ u32 unk18C;
+    /* 0x190 */ u8 unk190[4];
+    /* 0x194 */ u8 unk194;
+    /* 0x195 */ u8 unk195[3];
+} StateAtF4;   /* 0x198 bytes, as campCecEditCreate allocates it */
 typedef char StateAtF4DispatchOffsetCheck[
     offsetof(StateAtF4, dispatch.callbacks) == 0x60 &&
     offsetof(StateAtF4, dispatch.previousMode) == 0xF0 &&
     offsetof(StateAtF4, frameCounter) == 0x150 &&
-    sizeof(StateAtF4) == 0x18C ? 1 : -1];
+    offsetof(StateAtF4, cursor.x) == 0x3C && offsetof(StateAtF4, table.values) == 0x88 &&
+    offsetof(StateAtF4, table.state) == 0xE8 && offsetof(StateAtF4, activeMemberCount) == 0x104 &&
+    offsetof(StateAtF4, openMode) == 0x113 && offsetof(StateAtF4, unk148) == 0x148 &&
+    offsetof(StateAtF4, unk154) == 0x154 && offsetof(StateAtF4, unk18C) == 0x18C &&
+    sizeof(StateAtF4) == 0x198 ? 1 : -1];
 typedef char StateAtF4OutfitSelectionOffsetCheck[
     offsetof(StateAtF4, preview.outfitSelectionActive) == 0x188 ? 1 : -1];
 
@@ -185,8 +238,8 @@ typedef struct FlagAt4 {
     /* 0x04 */ u8 flag;
 } FlagAt4;
 
-typedef char CampCecEditALayoutCheck[sizeof(StateAtF4) == 0x18C ? 1 : -1];
+typedef char CampCecEditALayoutCheck[sizeof(StateAtF4) == 0x198 ? 1 : -1];
 
-typedef char CampCecEditAOffsets[offsetof(StateAtF4, image) == 0x24 && offsetof(StateAtF4, imageActive) == 0x10E && offsetof(StateAtF4, unk10F) == 0x10F && offsetof(StateAtF4, unk14C) == 0x14C ? 1 : -1];
+typedef char CampCecEditAOffsets[offsetof(StateAtF4, second.image) == 0x24 && offsetof(StateAtF4, imageActive) == 0x10E && offsetof(StateAtF4, unk10F) == 0x10F && offsetof(StateAtF4, unk14C) == 0x14C ? 1 : -1];
 
 #endif

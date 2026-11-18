@@ -1,5 +1,6 @@
 /* NON_MATCHING: work/touch-list bases coalesce, and script mode 2 remains in a saved register through activation. */
 #include "common.h"
+#include "ui/UiControl.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -27,7 +28,6 @@ struct UnitScreenReadyViewA {
 };
 extern "C" {
 void scriptProcessSetMode(ScriptProcess* process, s32 mode);
-void dialogOpen(s32 first, s32 second);
 void __aeabi_memset4(void* destination, u32 size, u32 value);
 void ifTouchRegionRemove(void);
 void ifTouchResetRecord(void);

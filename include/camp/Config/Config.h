@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include "script/ScriptVm.h"
 #include "ui/GridNavigation.h"
+#include "ui/UiSpriteState.h"
 
 /* Work area, Shin Megami Tensei IV. */
 typedef struct ConfigWork {
@@ -42,35 +43,62 @@ typedef char ConfigChoicesStrideCheck[sizeof(ConfigurationChoices) == 0x80 ? 1 :
 extern "C" void configDrawOptionPanel(s32 x, s32 y, s32 display);
 extern "C" void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices);
 
-/* Sprite drawing parameters in the Apocalypse work area. */
-typedef struct ConfigDrawParams {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ f32 speedScale;            /* scales the effect speed of the screen's sprites */
-    /* 0x24 */ u8 unk24[0x6C];
-} ConfigDrawParams;
+/* One row of the Apocalypse screen (8 bytes): the value it selects and its help text. */
+typedef struct ConfigRowA {
+    /* 0x00 */ s32 value;
+    /* 0x04 */ u32 helpId;                /* record of table 0x36, section 1 */
+} ConfigRowA;
+
+/* Table 0x36, section 1 (0x44 bytes): a help text. */
+typedef struct ConfigHelpRecordA {
+    /* 0x00 */ s8 text[0x44];
+} ConfigHelpRecordA;
+
+/* Table 0x36, section 0, Apocalypse: a heading and the names of the values. */
+typedef struct ConfigNameTableA {
+    /* 0x00 */ char heading[0x1e];
+    /* 0x1e */ char names[5][0xc];
+} ConfigNameTableA;
 
 /* Work area, Shin Megami Tensei IV: Apocalypse. */
 typedef struct ConfigWorkA {
-    /* 0x00 */ u8 unk00[0x64];
+    /* 0x00 */ GridNavigation cursor;
     /* 0x64 */ s32 state;                  /* 6 = closed */
-    /* 0x68 */ s32 unk68;
-    /* 0x6C */ u8 unk6C[0xC];
-    /* 0x78 */ s16 count;
+    /* 0x68 */ s32 unk68;                  /* the state's own step */
+    /* 0x6C */ s16 touchGroup;
+    /* 0x6E */ s16 regions[5];             /* each row's touch region */
+    /* 0x78 */ s16 count;                  /* touch regions in use */
     /* 0x7A */ u16 unk7A;
     /* 0x7C */ void *heapA;               /* heap block, freed on close */
     /* 0x80 */ void *heapB;               /* heap block, freed on close */
     /* 0x84 */ ScriptProcess *resource;               /* released on close */
-    /* 0x88 */ u8 unk88[0x34];
-    /* 0xBC */ u32 unkBC;
-    /* 0xC0 */ u8 param;
-    /* 0xC1 */ u8 unkC1[0x36F];
-    /* 0x430 */ ConfigDrawParams draw;
+    /* 0x88 */ s32 row;                    /* the selected row */
+    /* 0x8C */ s32 firstRegionImage;       /* texture table entry of the first row's touch rectangle */
+    /* 0x90 */ u8 unk90[4];
+    /* 0x94 */ ConfigRowA rows[5];
+    /* 0xBC */ u32 unkBC;                  /* the value in effect */
+    /* 0xC0 */ u8 param;                   /* opened in game: a change has to be confirmed */
+    /* 0xC1 */ u8 unkC1[3];
+    /* 0xC4 */ s32 previous;               /* the value to restore when a change is refused */
+    /* 0xC8 */ UiResourceParameters resources;
+    /* 0xE8 */ UiSpriteState sprites[6];   /* [0] the frame, [1..5] the rows */
+    /* 0x430 */ UiSpriteState cursorSprite;
+    /* 0x4BC */ s32 frames;
     /* 0x4C0 */ s8 hasType24A;
     /* 0x4C1 */ s8 hasType24B;
-    /* 0x4C2 */ u8 unk4C2[0xA];
+    /* 0x4C2 */ u8 unk4C2[2];
+    /* 0x4C4 */ s32 initialValue;          /* the value when the screen opened or last applied one */
+    /* 0x4C8 */ s32 pendingValue;
 } ConfigWorkA;
 typedef char ConfigWorkALayoutCheck[
     sizeof(ConfigWorkA) == 0x4CC &&
+    offsetof(ConfigWorkA, regions) == 0x6E &&
+    offsetof(ConfigWorkA, rows) == 0x94 &&
+    offsetof(ConfigWorkA, unkBC) == 0xBC &&
+    offsetof(ConfigWorkA, sprites) == 0xE8 &&
+    offsetof(ConfigWorkA, cursorSprite) == 0x430 &&
+    offsetof(ConfigWorkA, frames) == 0x4BC &&
+    offsetof(ConfigWorkA, initialValue) == 0x4C4 &&
     offsetof(ConfigWorkA, hasType24A) == 0x4C0 &&
     offsetof(ConfigWorkA, hasType24B) == 0x4C1 ? 1 : -1];
 

@@ -17,7 +17,7 @@ int aocActivateFileGroupFlags(...);
 int FUN_0026f824(...);
 int FUN_0026fe0c(void);
 int FUN_0026ff54(void);
-int FUN_00275be8(...);
+int frameTexCampSetMode(...);
 int FUN_00275dc4(void);
 int FUN_0028703c(...);
 int FUN_00287c34(...);
@@ -108,7 +108,7 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_0026faa4. */
 /* Supplied declaration required: FUN_0026fe0c. */
 /* Supplied declaration required: FUN_0026ff54. */
-/* Supplied declaration required: FUN_00275be8. */
+/* Supplied declaration required: frameTexCampSetMode. */
 /* Supplied declaration required: FUN_00275dc4. */
 extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: FUN_0028703c. */
@@ -477,7 +477,7 @@ int FUN_001e9990(unsigned int handle)
       *(unsigned char *)(puVar13 + 0x1f) = 1;
       puVar13[0x20] = 2;
       FUN_00275dc4();
-      FUN_00275be8(1);
+      frameTexCampSetMode(1);
       temp_v4 = 7;
     }
     else if (temp_v4 != 0) {
@@ -505,7 +505,7 @@ int FUN_001e9990(unsigned int handle)
       *(unsigned char *)(puVar13 + 0x1f) = 1;
       puVar13[0x20] = 2;
       FUN_00275dc4();
-      FUN_00275be8(1);
+      frameTexCampSetMode(1);
       temp_v4 = 9;
     }
     else {
@@ -564,7 +564,7 @@ LAB_001ea4cc:
       temp_v1 = ifTouchRegionAddRequested(0x11,0x19);
       *(unsigned short *)((int)puVar13 + 0x7a) = temp_v1;
       *(unsigned char *)((int)puVar13 + 0x61) = 0;
-      FUN_00275be8(2);
+      frameTexCampSetMode(2);
       *(unsigned char *)(puVar13 + 0x21) = 1;
       FUN_002a09b4("title/title_top.bcenv",0);
       *(unsigned char *)((int)puVar13 + 0x85) = 1;

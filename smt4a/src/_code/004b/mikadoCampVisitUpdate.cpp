@@ -1,4 +1,5 @@
 #include "camp/ScriptPanelResources.h"
+#include "ui/UiControl.h"
 #include "camp/Camp.h"
 #include "camp/CampStateQueries.h"
 #include "mikado/mikadoMain.h"
@@ -39,7 +40,6 @@ void menu4CStartBlock74(Menu4C *menu);
 void menu4CReset(Menu4C *menu);
 void placeWinSetValue(u8 value);
 void infoWinSetValue(u8 value);
-void dialogOpen(s32 mode, s32 flag); // declcheck: local (ui/UiControl.h declares one argument; retail passes two here)
 void dialogClose(s32 immediate);
 void objectE0ResetFlags1040(void);
 void obj04Finish(void);

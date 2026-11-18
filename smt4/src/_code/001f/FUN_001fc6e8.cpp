@@ -10,7 +10,7 @@ extern "C" {
 
 int gameDataSlotSetFlag(...);
 int FUN_001f7d50(...);
-int FUN_001f7fac(...);
+int btlEditorCreate(...);
 int FUN_001f8290(...);
 int btlGameOverCreateTasks(...);
 int gameDataEntrySetLevel(...);
@@ -126,7 +126,7 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: FUN_001e2350. */
 /* Supplied declaration required: FUN_001f7d50. */
 /* Supplied declaration required: btlCameraCreateDrawTaskAndInitializeStorage. */
-/* Supplied declaration required: FUN_001f7fac. */
+/* Supplied declaration required: btlEditorCreate. */
 /* Supplied declaration required: btlEffectCreate. */
 /* Supplied declaration required: FUN_001f8290. */
 /* Supplied declaration required: btlEncountInitialize. */
@@ -916,7 +916,7 @@ LAB_001fd348:
     *(unsigned int *)(temp_v4 + 0x84) = 0;
     puVar5 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     *puVar5 = 0;
-    FUN_001f7fac(temp_v4);
+    btlEditorCreate(temp_v4);
     return;
   }
   return;

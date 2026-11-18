@@ -1,23 +1,17 @@
-/* NON_MATCHING: settings-copy destination uses r2 followed by an extra mov r0,r2. */
 #include "gamedata/SaveLoadProcessState.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
 #include "gamedata/SaveLoadProcess.h"
 #include "shard/JobWork.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "mobiclip_ctrl/MobiclipCtrl.h"
 
-struct SaveFilePayloadIV {
-    u32 table[32];
-    u32 settings[2];
-    u32 save[0x24d28 / 4];
-};
 struct SaveWriteBodyPrefix {
     u16 version;
     u8 mode;
     u8 slot;
 };
 typedef char SaveWriterPayloadLayoutCheck[
-    sizeof(SaveFilePayloadIV) == 0x24DB0 && offsetof(SaveFilePayloadIV, save) == 0x88 &&
     offsetof(SaveWriteBodyPrefix, mode) == 2 && sizeof(SaveWriteBodyPrefix) == 4 ? 1 : -1];
 
 extern "C" {
@@ -26,10 +20,8 @@ void asdMemFree(void *memory);
 void titleConfigStoreOptions(void);
 GameSaveData *gameDataBlocksGetSaveData(void);
 const void *gameDataBlocksGetTable(void);
-const void *configGetSettings(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void __ARM_common_memcpy4_8(void *destination, const void *settings);
 void clockRecordStartSeconds(void);
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 extern SaveByteSettings g_byteSettings;
@@ -46,7 +38,7 @@ s32 saveLoadProcessSaveUpdate(u32 process)
         titleConfigStoreOptions();
         gameDataBlocksGetSaveData()->metadata.option = work->option;
         rt_memcpy(work->buffer, gameDataBlocksGetTable(), 0x80);
-        __ARM_common_memcpy4_8(((SaveFilePayloadIV *)work->buffer)->settings, configGetSettings());
+        ((SaveFilePayloadIV *)work->buffer)->settings = *reinterpret_cast<const ConfigSettingsImage *>(configGetSettings());
         SaveWriteBodyPrefix *body = (SaveWriteBodyPrefix *)((SaveFilePayloadIV *)work->buffer)->save;
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), 0x24D28);
         body->version = 3;

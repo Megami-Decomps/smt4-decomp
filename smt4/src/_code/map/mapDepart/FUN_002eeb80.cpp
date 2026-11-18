@@ -32,7 +32,7 @@ void FUN_002758d8(void);
 void FUN_002759bc(void);
 void mapDepartSyncModelVisibility(void);
 void FUN_00275bc8(void);
-void FUN_00275be8(s32 arg);
+void frameTexCampSetMode(s32 arg);
 void FUN_00275dc4(void);
 void mapUpdatePerFrame(void);
 void mapEntryTriggerForScene(u32 scene);
@@ -73,7 +73,7 @@ u32 FUN_002eeb80(void)
     }
     if (DAT_00447518.finished != 0) {
         g_gameState.mapReady = 0;
-        FUN_00275be8(0);
+        frameTexCampSetMode(0);
         DAT_00447518.started = 0;
         DAT_00447518.finished = 0;
         if (DAT_00447518.overlayShown != 0) {
@@ -89,7 +89,7 @@ u32 FUN_002eeb80(void)
             g_gameState.map.mapLoadActive = 1;
             frameTexResetFlags();
             FUN_00275dc4();
-            FUN_00275be8(1);
+            frameTexCampSetMode(1);
             FUN_00275bc8();
         }
         if (DAT_00447518.frame == 0xB) {
