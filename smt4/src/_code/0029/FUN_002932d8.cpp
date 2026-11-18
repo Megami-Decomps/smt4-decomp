@@ -1,3 +1,4 @@
+#include "ui/PartyPanelNavigation.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/PartyPanelState.h"
 
@@ -5,7 +6,7 @@ extern "C" {
 
 int slotPlacementAssignSlotAndPosition(PartyPanelWidget *widget, u32 slot);
 
-void FUN_002932d8(void)
+void FUN_002932d8(GridNavigation *)
 {
     PartyPanelState *scene = g_partyPanel;
     int i;

@@ -16,7 +16,7 @@ extern MapEffectReservationState DAT_00447a28;
 extern DirectionalMapEffectReservationView DAT_004afd64[];
 extern MapEffectInstance DAT_004a1264[];
 s32 FUN_0021c694(MapEffectAttachmentRequest *);
-u32 mapIfSpawnEffect(u32, u32, u32, u32, f32, f32, f32, f32);
+s32 mapIfSpawnEffect(u32, s32, u32, s32, f32, f32, f32, f32);
 
 void FUN_0024f24c(u32 resource, u32 kind, u32 owner, u32 appearance, u32 spawnGroup, u32 spawnMode,
                   u8 color0, u8 color1, u8 color2, u8 color3, u8 color4, u8 color5,

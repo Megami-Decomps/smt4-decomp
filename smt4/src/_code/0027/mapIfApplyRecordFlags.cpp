@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int mapFlagSet(u32 value);
+void mapFlagSet(s32 value);
 
 void mapIfApplyRecordFlags(void)
 {

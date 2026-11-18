@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int mathSinCos(float *, float [10]);
+void mathSinCos(f32 *sine, f32 *cosine, f32 phase);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -19,18 +19,15 @@ extern unsigned int *DAT_00447a7c; /* 0x447a7c */
 /* Supplied declaration required: mathSinCos. */
 
 
-int mapIfSpawnEffect(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
+s32 mapIfSpawnEffect(u32 param_1, s32 param_2, u32 param_3, s32 param_4,
+                     f32 x, f32 y, f32 z, f32 heading)
 
 {
-/* irregular: 10 goto(s); irregular input(s): in_s0, in_s1, in_s2, in_s3; 5 native warning(s); review required */
+/* irregular: 10 goto(s); 5 native warning(s); review required */
   unsigned int temp_v0;
   int temp_v1;
   int temp_v2;
-  unsigned int in_s0;
   unsigned int temp_v3;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
   unsigned int temp_v4;
   float temp_v5;
   float temp_v6;
@@ -39,7 +36,7 @@ int mapIfSpawnEffect(unsigned int param_1,int param_2,unsigned int param_3,unsig
   unsigned int temp_v9;
   unsigned int temp_v10;
   float temp_v11;
-  float temp_v12 [10];
+  f32 phaseCosine;
   
   if (param_2 != 0) {
     temp_v2 = 0;
@@ -58,16 +55,16 @@ int mapIfSpawnEffect(unsigned int param_1,int param_2,unsigned int param_3,unsig
         *(int *)(temp_v1 + 0x1e4) = param_2;
         *(unsigned int *)(temp_v1 + 0x1e8) = param_1;
         *(unsigned int *)(temp_v1 + 0x1ec) = param_4;
-        *(unsigned int *)(temp_v1 + 0x244) = in_s3;
-        *(unsigned int *)(temp_v1 + 0x22c) = in_s0;
-        *(unsigned int *)(temp_v1 + 0x230) = in_s1;
-        *(unsigned int *)(temp_v1 + 0x234) = in_s2;
+        *(f32 *)(temp_v1 + 0x244) = heading;
+        *(f32 *)(temp_v1 + 0x22c) = x;
+        *(f32 *)(temp_v1 + 0x230) = y;
+        *(f32 *)(temp_v1 + 0x234) = z;
         temp_v8 = 110.0f;
         temp_v9 = 0x447a0000;
         temp_v10 = 0x43960000;
-        *(unsigned int *)(temp_v1 + 0x220) = in_s0;
-        *(unsigned int *)(temp_v1 + 0x224) = in_s1;
-        *(unsigned int *)(temp_v1 + 0x228) = in_s2;
+        *(f32 *)(temp_v1 + 0x220) = x;
+        *(f32 *)(temp_v1 + 0x224) = y;
+        *(f32 *)(temp_v1 + 0x228) = z;
         if (param_2 < 0x22) {
           if (param_2 != 0x17) {
             if (param_2 != 0xd) {
@@ -130,14 +127,14 @@ LAB_00252ec0:
                   return temp_v2;
                 }
                 if (param_2 != 0xb) {
-                  mathSinCos(&temp_v11,temp_v12);
+                  mathSinCos(&temp_v11, &phaseCosine, (heading + 180.0f) * 0.7111111f);
                   *(float *)(temp_v1 + 0x22c) = *(float *)(temp_v1 + 0x22c) + temp_v11 * 50.0f;
-                  *(float *)(temp_v1 + 0x234) = *(float *)(temp_v1 + 0x234) + temp_v12[0] * 50.0f;
+                  *(float *)(temp_v1 + 0x234) = *(float *)(temp_v1 + 0x234) + phaseCosine * 50.0f;
                   goto LAB_002525f8;
                 }
-                mathSinCos(&temp_v11,temp_v12);
+                mathSinCos(&temp_v11, &phaseCosine, heading * 0.7111111f);
                 *(float *)(temp_v1 + 0x22c) = *(float *)(temp_v1 + 0x22c) + temp_v11 * 15.0f;
-                *(float *)(temp_v1 + 0x234) = *(float *)(temp_v1 + 0x234) + temp_v12[0] * 15.0f;
+                *(float *)(temp_v1 + 0x234) = *(float *)(temp_v1 + 0x234) + phaseCosine * 15.0f;
                 goto LAB_00252784;
               }
 LAB_00252a68:

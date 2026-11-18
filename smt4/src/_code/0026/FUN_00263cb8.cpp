@@ -6,7 +6,7 @@ extern MapEffectReservationState DAT_00447a28;
 extern MapEffectReservation DAT_004afd64[];
 extern MapEffectInstance DAT_004a1264[];
 s32 FUN_0021c694(MapEffectAttachmentRequest* request);
-u32 mapIfSpawnEffect(u32 resource, u32 first, u32 second, u32 option, f32 x, f32 y, f32 z, f32 heading);
+s32 mapIfSpawnEffect(u32 resource, s32 first, u32 second, s32 option, f32 x, f32 y, f32 z, f32 heading);
 
 s32 FUN_00263cb8(u32 resource, u32 kind, u32 owner, u32 appearanceResource,
     u32 first, u32 second, u8 red, u8 green, u8 blue, u8 secondaryRed, u8 secondaryGreen,

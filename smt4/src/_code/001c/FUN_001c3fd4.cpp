@@ -1,3 +1,4 @@
+#include "ui/PartyPanelNavigation.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c3fd4` (_code @ 0x1c3fd4, 0x48d8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "ui/UiSpriteApi.h"
@@ -76,8 +77,6 @@ int scrollListSetSelectionMarkChanged(...);
 int FUN_0026d5a4(void);
 int FUN_0026d654(...);
 int FUN_0026d670(void);
-int partyPanelToggleRefresh(...);
-int FUN_002932d8(...);
 int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
 int FUN_0029defc(...);
@@ -155,8 +154,6 @@ extern unsigned char FUN_00282e70(void);
 extern int flagValueRead(unsigned short);
 /* Supplied declaration required: FUN_00292bcc. */
 /* Supplied declaration required: pair40Set. */
-/* Supplied declaration required: partyPanelToggleRefresh. */
-/* Supplied declaration required: FUN_002932d8. */
 /* Supplied declaration required: partyPanelSetState. */
 /* Supplied declaration required: partyPanelRebuildTouchRegions. */
 /* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
@@ -512,10 +509,10 @@ joined_r0x001c43a0:
       if (temp_v8 != 6) {
         temp_v24 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v24 + 0x6b6));
         if (temp_v24 != 6) goto LAB_001c4748;
-        partyPanelToggleRefresh(temp_v4);
+        partyPanelToggleRefresh(reinterpret_cast<GridNavigation *>(temp_v4));
       }
       else {
-        FUN_002932d8(temp_v4);
+        FUN_002932d8(reinterpret_cast<GridNavigation *>(temp_v4));
       }
       FUN_002937e0();
       partyPanelSetState(3,1);
@@ -744,10 +741,10 @@ LAB_001c4748:
       if (temp_v9 != 6) {
         temp_v11 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v11 + 0x6b6));
         if (temp_v11 != 6) goto LAB_001c4df0;
-        partyPanelToggleRefresh(temp_v24);
+        partyPanelToggleRefresh(reinterpret_cast<GridNavigation *>(temp_v24));
       }
       else {
-        FUN_002932d8(temp_v24);
+        FUN_002932d8(reinterpret_cast<GridNavigation *>(temp_v24));
       }
       FUN_002937e0();
       FUN_0029dfc0(0);
@@ -1121,10 +1118,10 @@ LAB_001c545c:
       if (temp_v11 != 6) {
         temp_v16 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v16 + 0x6b6));
         if (temp_v16 != 6) goto LAB_001c589c;
-        partyPanelToggleRefresh(temp_v8);
+        partyPanelToggleRefresh(reinterpret_cast<GridNavigation *>(temp_v8));
       }
       else {
-        FUN_002932d8(temp_v8);
+        FUN_002932d8(reinterpret_cast<GridNavigation *>(temp_v8));
       }
       FUN_002937e0();
       temp_v6 = listCursorGetRowIfUnblocked(temp_v8);
@@ -2147,7 +2144,7 @@ joined_r0x001c7220:
            (*(char *)(*(int *)(g_partyPanel + temp_v6 * 4 + 0x6d8) + 0x28) != '\0')) {
           if (temp_v6 >= 0xc) {
             if (*(int *)(g_partyPanel + 0x2c) != 0) goto LAB_001c7720;
-            partyPanelToggleRefresh(g_partyPanel + 0x940);
+            partyPanelToggleRefresh(reinterpret_cast<GridNavigation *>(g_partyPanel + 0x940));
             goto LAB_001c7700;
           }
           break;
@@ -2155,7 +2152,7 @@ joined_r0x001c7220:
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 0x18);
       if (*(int *)(g_partyPanel + 0x2c) == 1) {
-        FUN_002932d8(g_partyPanel + 0x940);
+        FUN_002932d8(reinterpret_cast<GridNavigation *>(g_partyPanel + 0x940));
 LAB_001c7700:
         FUN_002937e0();
         FUN_0029dfc0(0);
