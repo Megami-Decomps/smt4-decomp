@@ -1,3 +1,4 @@
+#include "battle/BattleActionPosition.h"
 #include "ui/UiSpriteApi.h"
 #include "code/Code002c.h"
 /* NON_MATCHING: slot-relative addressing and aggregate copy use core registers rather than retail's VFP transfer. */

@@ -1,3 +1,4 @@
+#include "battle/BattleActionPosition.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: restored help option argument; signed-byte mode dispatch, VFP frame and switch control-flow tails remain unrecovered. */
 #include "romwright_types.h"
@@ -45,7 +46,6 @@ int keyedValueFindPair(...);
 int btlReflectSetValuePair(...);
 int FUN_0023c5c0(...);
 int btlReflectCreateKind18(...);
-int FUN_0023cd08(...);
 int FUN_0023f4e4(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlReflectQueueKind34(...);
@@ -54,7 +54,6 @@ int FUN_00293230(...);
 int FUN_00338060(...);
 int FUN_003445f8(...);
 int btlUiInitializeDisplayChannel(...);
-int FUN_003ae418(...);
 int FUN_003bcdb0(...);
 int btlAddClampedVital(...);
 unsigned int btlDispatchTargetActionKind(int target, int kind, unsigned int argument);
@@ -788,7 +787,7 @@ LAB_00345938:
     }
     if (temp_v11 && temp_v7 != 0) {
       puVar9 = (unsigned int *)*param_1;
-      btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
+      puVar9 = reinterpret_cast<unsigned int *>(btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar9), (int)*(short *)(*(int *)(psVar2 + 10) + 0x62)));
       if ((*puVar9 & 10) != 0) {
         temp_v5 = FUN_00293230(unaff_r5);
         if (temp_v5 == 0) {
@@ -801,8 +800,9 @@ LAB_00345938:
         if (temp_v5 == 0) {
           btlQueueKeyedScalarReflectAction(0,*(unsigned int *)(psVar2 + 4),0x10001d3,0,1,0,0);
         }
-        FUN_0023cd08(*param_1,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
-        FUN_003ae418(g_btlUiBlock,puVar9);
+        BattleVector3 position = FUN_0023cd08(reinterpret_cast<BtlMainState *>(*param_1),
+            (int)*(short *)(*(int *)(psVar2 + 10) + 0x62),0);
+        FUN_003ae418(g_btlUiBlock,puVar9,position.x,position.y,position.z);
       }
     }
     break;

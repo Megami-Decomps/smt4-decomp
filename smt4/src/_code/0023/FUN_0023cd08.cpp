@@ -1,3 +1,4 @@
+#include "battle/BattleActionPosition.h"
 /* NON_MATCHING: member search is not pair-unrolled; vector-return epilogues and height-kind branches merge. */
 #include "battle/btlAction.h"
 #include "battle/BtlEntry.h"
