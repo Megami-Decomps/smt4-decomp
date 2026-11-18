@@ -18,7 +18,7 @@ extern int FUN_003a3354(...); /* 0x3a3354 */
 extern int FUN_003a3a9c(...); /* 0x3a3a9c */
 extern int FUN_003a3c7c(...); /* 0x3a3c7c */
 extern int FUN_003a3f28(...); /* 0x3a3f28 */
-extern int shopQuantityStep(...); /* 0x3a4a60 */
+extern int shopQuantityStep(...); /* 0x3a4a60 */ // declcheck: local (SMT4 global callback, not Apocalypse Obj536044 member)
 
 
 void FUN_003a4518(int param_1)

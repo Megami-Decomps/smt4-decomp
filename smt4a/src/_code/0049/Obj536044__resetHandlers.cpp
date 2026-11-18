@@ -17,9 +17,9 @@ void Obj536044::resetHandlers()
     states[8] = &Obj536044::itemMenuHandleSelectionInput;
     states[9] = &Obj536044::FUN_00499fdc;
     states[10] = &Obj536044::FUN_0049a2b4;
-    states[11] = &Obj536044::FUN_0049b00c;
-    states[12] = &Obj536044::FUN_0049b00c;
-    states[13] = &Obj536044::FUN_0049b00c;
+    states[11] = &Obj536044::shopQuantityStep;
+    states[12] = &Obj536044::shopQuantityStep;
+    states[13] = &Obj536044::shopQuantityStep;
     states[14] = &Obj536044::shopUpdateCharonRequestTransition;
     states[20] = &Obj536044::sceneMarkActiveEnterState21;
     states[15] = &Obj536044::FUN_004969a8;

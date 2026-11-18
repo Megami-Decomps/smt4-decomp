@@ -106,7 +106,7 @@ inline void Obj536044::startScript(const char *name)
  * selected item to buy or sell while the list stays live, asks for confirmation through the shop
  * script, settles the money and the inventory, and offers to equip a bought piece of equipment.
  * Leaves for the category's list state (7, 8 or 9). IV's FUN_003a4a60 is the same state. */
-void Obj536044::FUN_0049b00c()
+void Obj536044::shopQuantityStep()
 {
     bool previewPending = false;
 
