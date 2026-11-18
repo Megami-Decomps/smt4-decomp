@@ -13,7 +13,7 @@ void btlQueueKeyedScalarReflectAction(u32 a, u32 b, u32 event, s32 c, s32 d, s32
 // Menu cursor step for the given direction `kind`: works out how far the two cursors move
 // (clamped to the row limit), optionally sends the "cannot move" notice, then queues the
 // movement as a reflect action. Always returns 1.
-u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, f32 speed)
+u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, u32 refresh)
 {
     s32 moveX = 0;
     s32 moveY = 0;
@@ -104,7 +104,7 @@ u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, f32 speed)
     action->kind = 30;
     action->first = (s16)(s32)stepX;
     action->second = (s16)(s32)stepY;
-    action->scalar = speed;
+    action->value = refresh;
     return 1;
 }
 
