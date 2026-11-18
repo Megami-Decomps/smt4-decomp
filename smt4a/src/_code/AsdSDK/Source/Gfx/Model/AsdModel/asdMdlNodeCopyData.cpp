@@ -1,4 +1,4 @@
-/* NON_MATCHING: native description default-clear stores, source-resource load scheduling and a few core registers differ. */
+/* NON_MATCHING: register allocation/scheduling differs in description construction (r0 vs r1) and flags |= 2 (r1 vs r2). */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Gfx/Effect/EmitterCloneResource.h"
 #include "shard/S1GfxModel.h"
@@ -12,12 +12,12 @@ struct ModelInstanceDescription {
     u32 alignment, auxiliaryAlignment, enabled, flags;
     EmitterCloneModelBody *source, *model;
     EmitterCloneRenderStateOwner *renderState;
-    ModelInstanceDescription(u32 initialFlags = 0)
+    ModelInstanceDescription()
     {
         first = 1;
         second = 1;
         enabled = 1;
-        flags = initialFlags;
+        flags = 0;
         source = NULL;
         model = NULL;
         renderState = NULL;
@@ -59,7 +59,8 @@ void asdMdlNodeCopyData(AsdMdlNode *destination, AsdMdlNode *source, s32 mode)
     } else if (mode == 0) {
         AsdAllocatorObject *allocator = asdMemoryGetAllocatorA();
         void *resource = original->instance->source.resource;
-        ModelInstanceDescription description(0x834);
+        ModelInstanceDescription description;
+        description.flags = 0x834;
         result->instance = FUN_001b6d08(&description, 0, resource, allocator);
     }
     if ((source->flags & 2) != 0) {

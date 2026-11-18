@@ -12,7 +12,7 @@ void rt_memcpy(void *destination, const void *source, u32 bytes);
 void FUN_0042c7c8(void *vertex, const ShaderBindSymbol *symbol, u32 physicalAddress, u32 format);
 
 /* The SDK vertex-state object occupies 0x790 bytes. */
-void FUN_00412c54(VertexStreamSource *source, void *vertex)
+void vertexAttributeUploadStreams(VertexStreamSource *source, void *vertex)
 {
     sysMemClear(vertex, 0x790);
     ShaderBindSymbol position;

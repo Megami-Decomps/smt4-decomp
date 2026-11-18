@@ -19,7 +19,7 @@ struct ModelBuffers {
 
 extern "C" {
 
-void FUN_00346f2c(ModelBuffers *model);
+void vertexAttributeUploadStreams(ModelBuffers *model);
 void *asdPrimAlloc(u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 u32 osVirtToPhysAddress(void *address);
@@ -32,7 +32,7 @@ void FUN_0034724c(ModelBuffers *model)
         CommandRange *range = &model->range;
 
         if ((model->flags & 0x100) == 0) {
-            FUN_00346f2c(model);
+            vertexAttributeUploadStreams(model);
             u32 count = model->indexCount;
             u32 bytes = count << 1;
             void *copy = asdPrimAlloc(bytes);

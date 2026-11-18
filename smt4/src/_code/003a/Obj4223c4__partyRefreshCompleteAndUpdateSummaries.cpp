@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only (retail keeps the screen in r9, the 0x500 block in r6, the entries base in r7 and the id in r8; build allocates this/entries/id differently). */
+/* NON_MATCHING: only block-base scheduling differs (retail computes work+0x500 after messageMainGetChoiceResult; build hoists it before). */
 #include "common.h"
 #include "classes/Obj4223c4.h"
 #include "quest_center/qcMain.h"
@@ -105,19 +105,19 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
     }
     buttonHelpSetPreset(buttonHelpGetMode());
     FUN_002a0cc8(0);
-    if (block->count < 1) {
+    if (block->count <= 0) {
         if (!block->keepDisplay)
             messageDismissNumericBanner(1);
         buttonHelpSetText(0, 0x323232ff);
         beginStatusPanelClose();
         FUN_00233240(work->control, 1);
         FUN_002a0cc8(1);
-        work->state = 11;
-        work->phase = 0;
+        step = 11;
+        phase = 0;
         FUN_00232848();
         uniteLoadPreviewRoomModel();
         return;
     }
-    work->state = 2;
-    work->phase = 0;
+    step = 2;
+    phase = 0;
 }

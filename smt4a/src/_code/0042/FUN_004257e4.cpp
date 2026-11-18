@@ -48,7 +48,7 @@ void moviePumpCurrentStreamPackets(MoviePacketPump *pump);
 int FUN_004245b4(MovieUpdateView *sync);
 int movieSyncPollBackend(MovieUpdateView *sync);
 int FUN_00424c4c(MovieUpdateView *sync);
-int FUN_00424ecc(MovieUpdateView *sync);
+int recordTableLoadKind2Payloads(MovieUpdateView *sync);
 int runItemsOfInner(u32 backend, u32 handle);
 int readInnerWord6(u32 backend, s32 *value);
 
@@ -105,7 +105,7 @@ void FUN_004257e4(MovieUpdateView *player)
                 FUN_00424c4c(player);
             }
             if (player->view.mode == 1) {
-                FUN_00424ecc(player);
+                recordTableLoadKind2Payloads(player);
             }
             if (player->view.state == 7) {
                 nn_os_CriticalSection_Leave(player);

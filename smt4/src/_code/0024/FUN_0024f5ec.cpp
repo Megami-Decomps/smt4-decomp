@@ -27,7 +27,7 @@ void camSetMatrixB(RenderCtx *context, const Matrix44 *matrix);
 void renderCtxSelectBlendPreset(u32 mode);
 s32 renderCtxPackPassFlags(u32 kind, u32 value);
 void FUN_00347198(TiledIndexMesh *mesh);
-void FUN_00346f2c(TiledIndexMesh *mesh);
+void vertexAttributeUploadStreams(TiledIndexMesh *mesh);
 void FUN_00343778(RenderCtx *context, const TiledMeshRowDrawState *row);
 void FUN_0023b724(TiledIndexMesh *mesh, s32 mode, s32 firstIndex, s32 indexCount);
 void renderCtxResetColorScale(RenderCtx *context);
@@ -52,7 +52,7 @@ void FUN_0024f5ec(TiledMeshDrawWork *work, u32 mode)
         FUN_00347198(work->mesh);
         work->dirty = 0;
     }
-    FUN_00346f2c(work->mesh);
+    vertexAttributeUploadStreams(work->mesh);
     for (s32 row = 0; row < work->rowCount; ++row) {
         FUN_00343778(g_titleScene, &work->rows[row]);
         FUN_0023b724(work->mesh, 0, work->trianglesPerRow * row * 3, work->trianglesPerRow * 3);

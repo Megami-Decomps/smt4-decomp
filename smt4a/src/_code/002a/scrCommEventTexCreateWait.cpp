@@ -17,7 +17,7 @@ u32 eventTexGetCurrent(void);
 void eventTexSetCurrent(u32 handle);
 s32 jobIsValid(u32 handle);
 s32 eventTexHasEmptySlot(void);
-u32 FUN_003b6820(u32 id, s32 mode, u32 arg);
+u32 npc2dCreatePortraitVariantJob(u32 id, s32 mode, u32 arg);
 void eventInsertSortedTextureJob(u32 handle);
 
 /* Script command: on its first frame creates the event texture job from arguments 0 and 1 and
@@ -36,7 +36,7 @@ u32 scrCommEventTexCreateWait(void)
         return 1;
     }
     if (eventTexHasEmptySlot() != 0) {
-        u32 handle = FUN_003b6820(id, 1, arg);
+        u32 handle = npc2dCreatePortraitVariantJob(id, 1, arg);
         if (handle != 0) {
             eventTexSetCurrent(handle);
             eventInsertSortedTextureJob(handle);

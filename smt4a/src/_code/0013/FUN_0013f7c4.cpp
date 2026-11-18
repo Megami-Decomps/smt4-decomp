@@ -22,7 +22,7 @@ int textDrawString(...);
 int FUN_00164490(int);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
-int FUN_001678a8(int);
+int messageWindowDrawSprites(int);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int FUN_00180310(...);
@@ -53,7 +53,7 @@ extern unsigned char LAB_0013fbc0; /* 0x13fbc0 */
 /* Supplied declaration required: FUN_00164490. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001678a8. */
+/* Supplied declaration required: messageWindowDrawSprites. */
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169e38. */
 /* Supplied declaration required: renderCtxPopState. */
@@ -92,7 +92,7 @@ unsigned int FUN_0013f7c4(void)
         renderCtxPopState(g_renderCtx,3);
         efctSetSpeed();
       }
-      FUN_001678a8(temp_v1);
+      messageWindowDrawSprites(temp_v1);
       FUN_00151e4c(((int)g_messageMain.banner));
     }
   }
@@ -105,7 +105,7 @@ unsigned int FUN_0013f7c4(void)
       renderCtxPopState(g_renderCtx,3);
       efctSetSpeed();
     }
-    FUN_001678a8(temp_v1);
+    messageWindowDrawSprites(temp_v1);
     FUN_00151e4c(((int)g_messageMain.banner));
   }
   if ((*(char *)(((int)g_messageMain.banner) + 0x8e) != '\0') && (*(char *)(((int)g_messageMain.banner) + 0x91) == '\0')) {

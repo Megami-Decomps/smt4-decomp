@@ -1,4 +1,4 @@
-/* The record table loader's object (Shin Megami Tensei IV: Apocalypse). */
+/* The record table loader's object (shared across SMT IV and Apocalypse). */
 #ifndef RECORD_RECORDTABLE_H
 #define RECORD_RECORDTABLE_H
 

@@ -11,7 +11,7 @@ void moviePumpCurrentStreamPackets(MoviePacketPump*);
 int FUN_0034ff9c(int);
 int movieSyncPollBackend(int);
 int FUN_00350634(int);
-int FUN_003508b4(int);
+int recordTableLoadKind2Payloads(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0034ff9c. */
 /* Supplied declaration required: movieSyncPollBackend. */
 /* Supplied declaration required: FUN_00350634. */
-/* Supplied declaration required: FUN_003508b4. */
+/* Supplied declaration required: recordTableLoadKind2Payloads. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 extern void nn_os_LightEvent_ClearSignal(unsigned int);
@@ -50,7 +50,7 @@ void FUN_003511cc(int param_1,unsigned int param_2,unsigned int param_3,int para
         FUN_00350634(param_1);
       }
       if (*(char *)(param_1 + 0x11) == '\x01') {
-        FUN_003508b4(param_1);
+        recordTableLoadKind2Payloads(param_1);
       }
       if (*(int *)(param_1 + 0xc) == 7) {
         nn_os_CriticalSection_Leave(param_1);

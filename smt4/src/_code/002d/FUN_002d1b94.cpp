@@ -1,4 +1,4 @@
-/* NON_MATCHING: the transition helper and the per-map call now match; remaining: retail addresses the spawn position stores from the scene base (r1+28..) and places g_lmapScene before the 180.0 literal, where the build uses the transform pointer. */
+/* NON_MATCHING: the spawn stores now address the scene base as retail does (same shape as smt4a lmapInitializeArea); remaining: retail copies the position vector to targetPosition/previousPosition with vldmia/vstmia, the build through core registers (ldm/stm), shifting the literal pool. */
 #include "map/LmapMainGlobals.h"
 #include "map/MapDepartTarget.h"
 #include "map/SceneSpawn.h"
@@ -35,15 +35,14 @@ void FUN_002d1b94(u32 destination, u32 flags)
     mapDepartSetTarget(target->group, target->map, target->target);
     state->areaId = destination;
     g_gameState.areaId = destination;
-    LmapScenePose *pose = &g_lmapScene->pose;
-    pose->position.x = static_cast<f32>(spawn->x);
-    pose->position.y = static_cast<f32>(spawn->y);
-    pose->position.z = static_cast<f32>(spawn->z);
-    MapVector position = pose->position;
-    pose->targetPosition = position;
-    pose->heading = 180.0f;
-    pose->targetHeading = 180.0f;
-    pose->previousPosition = position;
+    g_lmapScene->pose.position.x = static_cast<f32>(spawn->x);
+    g_lmapScene->pose.position.y = static_cast<f32>(spawn->y);
+    g_lmapScene->pose.position.z = static_cast<f32>(spawn->z);
+    MapVector position = g_lmapScene->pose.position;
+    g_lmapScene->pose.targetPosition = position;
+    g_lmapScene->pose.heading = 180.0f;
+    g_lmapScene->pose.targetHeading = 180.0f;
+    g_lmapScene->pose.previousPosition = position;
     mapCollisionRelease();
     if (state->mapId == 101) {
         FUN_0027b2b4(state->mapId, state->areaId, 101, 10);

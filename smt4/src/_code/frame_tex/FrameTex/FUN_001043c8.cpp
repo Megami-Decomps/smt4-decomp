@@ -32,8 +32,8 @@ extern int FUN_001080c0(...); /* 0x1080c0 */
 extern int FUN_0010812c(unsigned int job); /* 0x10812c */
 extern int FUN_001081b0(unsigned int job); /* 0x1081b0 */
 extern int FUN_0010821c(...); /* 0x10821c */
-extern int FUN_0010835c(unsigned int job); /* 0x10835c */
-extern int FUN_0010854c(unsigned int job); /* 0x10854c */
+extern int frameTexHdrCaptureLeft(unsigned int job); /* 0x10835c */
+extern int frameTexHdrCaptureRight(unsigned int job); /* 0x10854c */
 extern int titleJobRefreshSurface(...); /* 0x108754 */
 extern int titleJobRefreshOverlaySurface(...); /* 0x1087f4 */
 extern s32 FUN_0010889c(u32 job);
@@ -111,9 +111,9 @@ void FUN_001043c8(void)
   *(unsigned char *)(puVar2 + 0x3e6) = 0;
   *(unsigned char *)((int)puVar2 + 0xf99) = 0;
   *(unsigned char *)(puVar2 + 0x3f8) = 0;
-  asdProcessCreateSimple("HDRCL",0x6a,0,0,FUN_0010835c,frameTexReleaseWork,puVar1);
+  asdProcessCreateSimple("HDRCL",0x6a,0,0,frameTexHdrCaptureLeft,frameTexReleaseWork,puVar1);
   *puVar2 = (unsigned int)puVar4;
-  taskCreateDraw("HDRCR",0xce,0,0,FUN_0010854c,0,g_frameTex,puVar4);
+  taskCreateDraw("HDRCR",0xce,0,0,frameTexHdrCaptureRight,0,g_frameTex,puVar4);
   taskCreateDraw("HDRDL",0x6b,0,0,FUN_001080c0,0,g_frameTex,*puVar2);
   taskCreateDraw("HDRDR",0xcf,0,0,FUN_0010812c,0,g_frameTex,*puVar2);
   taskCreateDraw("ZanCL",0x6d,0,0,titleJobRefreshSurface,0,g_frameTex,*puVar2);

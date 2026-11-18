@@ -18,7 +18,7 @@ int FUN_003edfd4(...);
 int FUN_003f2498(...);
 int btlApplyDirectionBucket(...);
 int FUN_004112b0(...);
-int FUN_00416960(...);
+int btlPartnerMessageSetSlot(...);
 int btlPlayEntrySound(...);
 int partyAddMoneyClamped(...);
 int FUN_004c8c10(...);
@@ -216,7 +216,7 @@ extern int controllerGetRecordValue(void);
 /* Supplied declaration required: FUN_0040dcdc. */
 /* Supplied declaration required: FUN_00410410. */
 /* Supplied declaration required: FUN_004112b0. */
-/* Supplied declaration required: FUN_00416960. */
+/* Supplied declaration required: btlPartnerMessageSetSlot. */
 extern unsigned int FUN_0047ecc8(void);
 /* Supplied declaration required: FUN_0047effc. */
 /* Supplied declaration required: btlPlayEntrySound. */
@@ -1426,7 +1426,7 @@ LAB_0040fb78:
   case 'B':
     temp_v8 = *(unsigned int *)(g_btlPartnerAttack + 0x30);
     FUN_004112b0(g_btlPartnerAttack,*(unsigned int *)(psVar2 + 0x14));
-    FUN_00416960(temp_v8,*(unsigned int *)(psVar2 + 0x14));
+    btlPartnerMessageSetSlot(temp_v8,*(unsigned int *)(psVar2 + 0x14));
     break;
   case 'C':
     temp_v3 = reinterpret_cast<int>(btlGetMainState());

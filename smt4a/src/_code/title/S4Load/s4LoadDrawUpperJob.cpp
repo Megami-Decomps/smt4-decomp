@@ -22,7 +22,7 @@ static inline void drawLoadSlotLabels(S4Load *work, s32 firstSprite, s32 slotCou
     }
 }
 
-u32 FUN_0027dbac(void)
+u32 s4LoadDrawUpperJob(void)
 {
     // The canonical byte padding starts at five, so expose its word state through a local view.
     struct PhaseView { u8 prefix[8]; u32 phase; };

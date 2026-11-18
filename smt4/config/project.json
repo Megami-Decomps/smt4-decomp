@@ -2316,22 +2316,22 @@
     },
     {
       "address": "0x10835c",
-      "function": "FUN_0010835c",
+      "function": "frameTexHdrCaptureLeft",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010835c.o",
+      "object": "build/obj/_code/0010/frameTexHdrCaptureLeft.o",
       "size": 492,
-      "source": "src/_code/0010/FUN_0010835c.cpp",
-      "target": "orig/target/_code/0010/FUN_0010835c.o",
+      "source": "src/_code/0010/frameTexHdrCaptureLeft.cpp",
+      "target": "orig/target/_code/0010/frameTexHdrCaptureLeft.o",
       "thumb": false
     },
     {
       "address": "0x10854c",
-      "function": "FUN_0010854c",
+      "function": "frameTexHdrCaptureRight",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010854c.o",
+      "object": "build/obj/_code/0010/frameTexHdrCaptureRight.o",
       "size": 516,
-      "source": "src/_code/0010/FUN_0010854c.cpp",
-      "target": "orig/target/_code/0010/FUN_0010854c.o",
+      "source": "src/_code/0010/frameTexHdrCaptureRight.cpp",
+      "target": "orig/target/_code/0010/frameTexHdrCaptureRight.o",
       "thumb": false
     },
     {
@@ -47213,12 +47213,12 @@
     },
     {
       "address": "0x286198",
-      "function": "FUN_00286198",
+      "function": "mtx44RotateYXZDegrees",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_00286198.o",
+      "object": "build/obj/_code/0028/mtx44RotateYXZDegrees.o",
       "size": 492,
-      "source": "src/_code/0028/FUN_00286198.cpp",
-      "target": "orig/target/_code/0028/FUN_00286198.o",
+      "source": "src/_code/0028/mtx44RotateYXZDegrees.cpp",
+      "target": "orig/target/_code/0028/mtx44RotateYXZDegrees.o",
       "thumb": false
     },
     {
@@ -52131,12 +52131,12 @@
     },
     {
       "address": "0x29fa0c",
-      "function": "FUN_0029fa0c",
+      "function": "fusionListAvailableSpecialRecipes",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_0029fa0c.o",
+      "object": "build/obj/_code/0029/fusionListAvailableSpecialRecipes.o",
       "size": 512,
-      "source": "src/_code/0029/FUN_0029fa0c.cpp",
-      "target": "orig/target/_code/0029/FUN_0029fa0c.o",
+      "source": "src/_code/0029/fusionListAvailableSpecialRecipes.cpp",
+      "target": "orig/target/_code/0029/fusionListAvailableSpecialRecipes.o",
       "thumb": false
     },
     {
@@ -67495,12 +67495,12 @@
     },
     {
       "address": "0x2e8598",
-      "function": "FUN_002e8598",
+      "function": "mapIfShowRemainingRequirementDialog",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e8598.o",
+      "object": "build/obj/_code/002e/mapIfShowRemainingRequirementDialog.o",
       "size": 392,
-      "source": "src/_code/002e/FUN_002e8598.cpp",
-      "target": "orig/target/_code/002e/FUN_002e8598.o",
+      "source": "src/_code/002e/mapIfShowRemainingRequirementDialog.cpp",
+      "target": "orig/target/_code/002e/mapIfShowRemainingRequirementDialog.o",
       "thumb": false
     },
     {
@@ -75736,12 +75736,12 @@
     {
       "address": "0x31bc80",
       "file": "event/2dEvent/Npc2d",
-      "function": "FUN_0031bc80",
+      "function": "npc2dCreatePortraitVariantJob",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/Npc2d/FUN_0031bc80.o",
+      "object": "build/obj/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.o",
       "size": 460,
-      "source": "src/_code/event/2dEvent/Npc2d/FUN_0031bc80.cpp",
-      "target": "orig/target/_code/event/2dEvent/Npc2d/FUN_0031bc80.o",
+      "source": "src/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.cpp",
+      "target": "orig/target/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.o",
       "thumb": false
     },
     {
@@ -77735,12 +77735,12 @@
     {
       "address": "0x32743c",
       "file": "event/2dEvent/Npc2d",
-      "function": "FUN_0032743c",
+      "function": "npc2dCreatePortraitCenterJob",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/Npc2d/FUN_0032743c.o",
+      "object": "build/obj/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.o",
       "size": 448,
-      "source": "src/_code/event/2dEvent/Npc2d/FUN_0032743c.cpp",
-      "target": "orig/target/_code/event/2dEvent/Npc2d/FUN_0032743c.o",
+      "source": "src/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.cpp",
+      "target": "orig/target/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.o",
       "thumb": false
     },
     {
@@ -81580,12 +81580,12 @@
     },
     {
       "address": "0x346f2c",
-      "function": "FUN_00346f2c",
+      "function": "vertexAttributeUploadStreams",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_00346f2c.o",
+      "object": "build/obj/_code/0034/vertexAttributeUploadStreams.o",
       "size": 496,
-      "source": "src/_code/0034/FUN_00346f2c.cpp",
-      "target": "orig/target/_code/0034/FUN_00346f2c.o",
+      "source": "src/_code/0034/vertexAttributeUploadStreams.cpp",
+      "target": "orig/target/_code/0034/vertexAttributeUploadStreams.o",
       "thumb": false
     },
     {
@@ -83422,12 +83422,12 @@
     },
     {
       "address": "0x3508b4",
-      "function": "FUN_003508b4",
+      "function": "recordTableLoadKind2Payloads",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_003508b4.o",
+      "object": "build/obj/_code/0035/recordTableLoadKind2Payloads.o",
       "size": 516,
-      "source": "src/_code/0035/FUN_003508b4.cpp",
-      "target": "orig/target/_code/0035/FUN_003508b4.o",
+      "source": "src/_code/0035/recordTableLoadKind2Payloads.cpp",
+      "target": "orig/target/_code/0035/recordTableLoadKind2Payloads.o",
       "thumb": false
     },
     {

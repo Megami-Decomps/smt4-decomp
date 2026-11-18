@@ -5287,3 +5287,12 @@
 001aed18 campSkillListDraw
 00384be8 qcNpcSelectStep
 00199b9c btlUiPartyDisplayInit
+002e8598 mapIfShowRemainingRequirementDialog
+003508b4 recordTableLoadKind2Payloads
+0032743c npc2dCreatePortraitCenterJob
+0031bc80 npc2dCreatePortraitVariantJob
+0029fa0c fusionListAvailableSpecialRecipes
+00286198 mtx44RotateYXZDegrees
+00346f2c vertexAttributeUploadStreams
+0010835c frameTexHdrCaptureLeft
+0010854c frameTexHdrCaptureRight

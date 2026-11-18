@@ -15,12 +15,12 @@ u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
                    u32 (*draw)(), u32 destroy, void *work, u32 parent);
 u32 FUN_002364fc();
 void s4LoadDestroy();
-u32 FUN_0027dbac();
+u32 s4LoadDrawUpperJob();
 u32 FUN_002bd488();
 void asdProcessClearSelectedFlags(u32 job, u32 flags, u32 option);
 
 // Create the title load screen, its two save-slot buffers, asynchronous script loads and tasks.
-u32 FUN_002c7150(void)
+u32 s4LoadCreate(void)
 {
     // Save-slot buffers extend beyond the canonical script-resource prefix.
     struct LoadInitializationView {
@@ -64,8 +64,8 @@ u32 FUN_002c7150(void)
     work->sprite = spriteHandleCreate(0);
     work->closing = 0;
     work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("S4 LOAD TEST C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002364fc), reinterpret_cast<AsdProcFunc>(s4LoadDestroy), NULL);
-    taskCreateDraw("S4 LOAD TEST UL", 0x7E, 0, 0, FUN_0027dbac, 0, NULL, work->job);
-    taskCreateDraw("S4 LOAD TEST UR", 0xDA, 0, 0, FUN_0027dbac, 0, NULL, work->job);
+    taskCreateDraw("S4 LOAD TEST UL", 0x7E, 0, 0, s4LoadDrawUpperJob, 0, NULL, work->job);
+    taskCreateDraw("S4 LOAD TEST UR", 0xDA, 0, 0, s4LoadDrawUpperJob, 0, NULL, work->job);
     taskCreateDraw("S4 LOAD TEST D", 0xEC, 0, 0, FUN_002bd488, 0, NULL, work->job);
     asdProcessClearSelectedFlags(work->job, 0x80000, 0);
     return work->job;

@@ -11,7 +11,7 @@ void dialogSetText(const char *text);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 group, u32 sound, u32 voice, u32 flags, f32 leftVolume, f32 rightVolume);
 
-void FUN_002e8598(u32 kind, u32 item, s32 count)
+void mapIfShowRemainingRequirementDialog(u32 kind, u32 item, s32 count)
 {
     MapIfState *work = g_mapIf.state;
     u32 sound = 0;

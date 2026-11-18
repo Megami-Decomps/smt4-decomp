@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 42 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: stack-address evaluation order and pool order match retail; only r8/r9 allocation for empty vs selected differs. */
 #include "camp/CampCec/CampCecView.h"
 #include "camp/RenderCtx.h"
 #include "shard/Shard0032.h"
@@ -19,7 +19,8 @@ struct CecViewDrawState {
         } footerState;
     } rowWork; // 0xb4
     u32 cursor[5]; // 0xf0
-    u8 unk104[0x10];
+    u32 handle[3]; // 0x104
+    u32 handleB; // 0x110
     s32 selected, top;
     u32 unk11c, total;
     u8 unk124[8];
@@ -44,8 +45,7 @@ void efctSetSpeed(f32);
 
 u32 campCecViewDrawEntries()
 {
-    CampCecViewA *view = g_campCecView;
-    CecViewDrawState *draw = (CecViewDrawState *)view;
+    CecViewDrawState *draw = (CecViewDrawState *)g_campCecView;
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     RenderCtxA *render = g_renderCtx;
     renderCtxPushA(render, renderCtxPackPassFlags(1, 0));
@@ -57,7 +57,7 @@ u32 campCecViewDrawEntries()
         const TextureTableEntryIV *position = asdTMTexTableEntryAt(46, i + 150);
         s32 y = position->y;
         s32 x = position->x;
-        saveSlotDrawSummary(view->handle[i], entry, &draw->rowWork.rows[i], x, y, empty);
+        saveSlotDrawSummary(draw->handle[i], entry, &draw->rowWork.rows[i], x, y, empty);
         if (selected && !draw->rowWork.footerState.inactive)
             FUN_00359c78(draw->cursor, x, y);
         if ((entry->base.flags & 0x10) && !draw->rowWork.footerState.inactive)

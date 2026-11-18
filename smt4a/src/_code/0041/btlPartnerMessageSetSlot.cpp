@@ -37,7 +37,7 @@ void objFlagsSetBits(TextMeasureState *text, u32 flags);
 void asdTextDrawDirectoryEntry(TextMeasureState *text, s32 type, u32 color, s32 first, s32 second, void *directory, u32 entry);
 s32 textMeasureLineWidth(TextMeasureState *text, s32 line);
 
-void FUN_00416960(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector4 world)
+void btlPartnerMessageSetSlot(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector4 world)
 {
     AnimatedMessageSlot *slot = &owner->slots[index];
     slot->messageId = 0;

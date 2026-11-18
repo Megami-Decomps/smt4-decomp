@@ -1,4 +1,3 @@
-/* NON_MATCHING: the FUN_002a2e98 arms match retail (per-arm calls) and the scene is read directly; remaining: retail copies the position's x,y words with ldm/stm and z from a register (here one three-word ldm/stm) and orders the global loads differently. */
 #include "map/lmapMain.h"
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
@@ -50,7 +49,9 @@ void lmapInitializeArea(u32 area, u32 spawnId)
     g_lmapScene->pose.position.x = (f32)spawn->x;
     g_lmapScene->pose.position.y = (f32)spawn->y;
     g_lmapScene->pose.position.z = (f32)spawn->z;
-    g_lmapScene->pose.previousPosition = g_lmapScene->pose.targetPosition = g_lmapScene->pose.position;
+    MapVector position = g_lmapScene->pose.position;
+    g_lmapScene->pose.targetPosition = position;
+    g_lmapScene->pose.previousPosition = position;
     g_lmapScene->pose.heading = 180.0f;
     g_lmapScene->pose.targetHeading = 180.0f;
     FUN_00227a70();

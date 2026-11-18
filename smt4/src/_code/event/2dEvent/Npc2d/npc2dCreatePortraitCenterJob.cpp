@@ -1,4 +1,4 @@
-/* NON_MATCHING: block layout now matches (deferred-load arm out of line); only the process callback arguments differ (build: str + stm, callbacks loaded r1 then r0; retail: callbacks loaded r0/r1 first and one `stm sp, {r0, r1, r4}`). */
+/* NON_MATCHING: literal pool order for speed (0.3f) vs callback pointers (update, end) differs (10 diff lines). */
 #include "event/NpcTextureWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -21,7 +21,7 @@ s32 FUN_001dfc64(u32);
 void FUN_002db92c(u32);
 
 /* Create an NPC texture process with its three image rectangles and optional first-image origin. */
-void FUN_0032743c(s32 npcId)
+void npc2dCreatePortraitCenterJob(s32 npcId)
 {
     asdDebugTrace(DAT_0040357c, 900);
     NpcTextureWork *work = (NpcTextureWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(NpcTextureWork), 1);
@@ -63,7 +63,9 @@ void FUN_0032743c(s32 npcId)
     } else {
         work->deferred = 1;
     }
+    AsdProcUpdateFunc update = FUN_001dfc64;
+    AsdProcFunc end = FUN_002db92c;
     work->speed = 0.3f;
-    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, update, end, reinterpret_cast<u32>(work));
 }
 }

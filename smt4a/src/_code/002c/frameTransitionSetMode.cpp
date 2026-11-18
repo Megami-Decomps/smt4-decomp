@@ -1,6 +1,12 @@
-/* NON_MATCHING: the 60-byte preset copy now matches retail (local struct copy: one vldmia/vstmia of 15 registers); retail keeps one preserved register and stack word fewer (r7 for the frame pointer global, 4-byte frame) than the build (r8, 8 bytes). */
 #include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTexA.h"
+#include "map/lmapMain.h"
+
+/* Same-TU copy of frameTexSetValue (src/_code/002c/frameTexSetValue.cpp), autoinlined by armcc. */
+static void setFrameTexValue(u8 value)
+{
+    g_frameTex->value = value;
+}
 
 static __inline void frameTransitionPresetsCopy(const FrameTexTransitionPresets *source, FrameTexTransitionPresets *destination)
 {
@@ -9,7 +15,6 @@ static __inline void frameTransitionPresetsCopy(const FrameTexTransitionPresets 
 }
 extern "C" {
 extern const FrameTexTransitionPresets g_frameTransitionDefaultPresets;
-void sysPlayVoice(u32 sound);
 void FUN_003b7b4c(FrameTexWorkA *work);
 
 /* Resets (0), opens (1) or closes (2) the CAMP transition. */
@@ -36,7 +41,7 @@ void frameTransitionSetMode(s32 mode)
         work->campWidthScale = 0.25f;
         work->campHeightScale = 0.25f;
         work->campSpeed = 20.0f;
-        g_frameTex->value = 1;
+        setFrameTexValue(1);
         uiSpriteStateInitFromSource(&work->campWidgets[0], 20, 2000, &work->campResources, 11, 1.0f);
         uiSpriteSetImageKeyframe(&work->campWidgets[0], 0, 0);
         frameTransitionPresetsCopy(&g_frameTransitionDefaultPresets, &work->transitionPresets);

@@ -62,7 +62,7 @@ u16 FUN_003f0bd8(BtlMainStateA *battle, s32 a);
 u16 FUN_003f1a9c(BtlMainStateA *battle, s32 a);
 s32 FUN_003efb18(BtlMainStateA *battle);
 u16 FUN_003f217c(BtlMainStateA *battle);
-s32 FUN_003ef738(BtlMainStateA *battle);
+s32 btlScriptGetSelectedSkillDemonId(BtlMainStateA *battle);
 s32 FUN_003f23fc(BtlMainStateA *battle);
 s32 FUN_003e84fc(BtlMainStateA *battle);
 s32 FUN_003f25e8(BtlMainStateA *battle);
@@ -134,7 +134,7 @@ u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
             btlUnitSetParam(units, 1, 0, 1);
         }
         {
-            s32 action = FUN_003ef738(units->battle);
+            s32 action = btlScriptGetSelectedSkillDemonId(units->battle);
 
             if ((FUN_003f23fc(units->battle) != 0 || FUN_003e84fc(units->battle) != 0 ||
                  FUN_003f25e8(units->battle) != 0) &&

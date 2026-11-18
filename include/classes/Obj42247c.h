@@ -36,7 +36,7 @@ public:
 
     /* 0x004 */ u8 unk004[0x10];
     /* 0x014 */ u32 step;              /* index into the derived class's state handler tables */
-    /* 0x018 */ u8 unk018[4];
+    /* 0x018 */ u32 phase;             /* the current step's sub-state, cleared on each step change */
     /* 0x01C */ u8 active;
     /* 0x01D */ u8 visible;
     /* 0x01E */ u8 selected;

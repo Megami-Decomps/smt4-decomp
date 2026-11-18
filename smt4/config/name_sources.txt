@@ -4943,3 +4943,12 @@
 001aed18 campSkillListDraw inferred draws the camp skill list
 00384be8 qcNpcSelectStep evidence quest-center NPC selection step; starts the script entry "qc_NpcSelect" and follows the chosen NPC
 00199b9c btlUiPartyDisplayInit inferred initialises the battle UI's party display (ActorCardAnimations sprites, loads battle/BattleUI.mbm); twin smt4a FUN_0021c45c
+002e8598 mapIfShowRemainingRequirementDialog inferred formats '%s type(s) of demon remaining.' / '%s: %s Remaining' and opens the map-interface dialog with voice
+003508b4 recordTableLoadKind2Payloads inferred twin of smt4a FUN_00424ecc
+0032743c npc2dCreatePortraitCenterJob inferred Npc2d.cpp NPC portrait job centred at x 72 in screen region 5; twin smt4a FUN_003c8fd4
+0031bc80 npc2dCreatePortraitVariantJob inferred Npc2d.cpp NPC portrait job for a position and flag-selected variant (NpcPortraitVariantRecord); twin smt4a FUN_003b6820
+0029fa0c fusionListAvailableSpecialRecipes inferred twin of smt4a fusionListAvailableSpecialRecipes (shared.py unique near twin)
+00286198 mtx44RotateYXZDegrees inferred twin of smt4a FUN_0021252c
+00346f2c vertexAttributeUploadStreams inferred twin of smt4a FUN_00412c54
+0010835c frameTexHdrCaptureLeft evidence registered as process "HDRCL" (HDR capture, left) by FUN_001043c8 with frameTexReleaseWork; builds the half-size copies of the scene surface and sets capturedLeft (Hydrogen: frameTexHdrCaptureUpdate)
+0010854c frameTexHdrCaptureRight evidence registered as process "HDRCR" (twin of frameTexHdrCaptureLeft, "HDRCL") in FUN_001043c8

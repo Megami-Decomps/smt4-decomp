@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the first downsample level's two dimension copies (and the second level's height copy) load the source pointer into r1 and the destination into r0, where retail uses r0/r1; FUN_0010854c is the same job with the opposite tie-break. */
+/* NON_MATCHING: only the second downsample level's height copy swaps r0/r1 (retail loads the source pointer into r1). */
 #include "ui/UiSpriteApi.h"
 #include "frame_tex/FrameTex.h"
 #include "camp/RenderCtx.h"
@@ -11,11 +11,14 @@ s32 FUN_002bfadc(u32 arg, AsdTexture *surface);
 void surfaceCopy(AsdTexture *src, AsdTexture *dst);
 
 
-/* Builds the successive half-size copies of the work's source surface (a chain through two further surfaces when the downsample chain exists). */
-s32 FUN_0010835c(u32 job)
+/* Builds the successive half-size copies of the work's base surface (a chain through two further surfaces when the downsample chain exists). */
+s32 frameTexHdrCaptureRight(u32 job)
 {
     FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
-    work->hdr.capturedLeft = 0;
+    work->hdr.capturedRight = 0;
+    if (stateValuesGetBySelector(0) != 0) {
+        return 0;
+    }
     if (work->hdr.enabled == 0) {
         return 0;
     }
@@ -63,8 +66,8 @@ s32 FUN_0010835c(u32 job)
             work->sceneSurface->dimensions.height >>= 1;
         }
     }
-    work->hdr.capturedLeft = 1;
-    work->hdr.capturedRight = 0;
+    work->hdr.capturedRight = 1;
+    work->hdr.capturedLeft = 0;
     return 0;
 }
 

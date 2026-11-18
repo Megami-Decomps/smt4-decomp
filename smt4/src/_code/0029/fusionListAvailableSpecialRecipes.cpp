@@ -14,7 +14,7 @@ bool gameRecordCopy(u32 id, GameSavedItem *record);
 s32 gameCountUnits(void);
 s32 itemGetFlagBit1(u16 id);
 
-u16 FUN_0029fa0c(u32 context, u16 *output)
+u16 fusionListAvailableSpecialRecipes(u32 context, u16 *output)
 {
     // The result identifier follows the recovered ingredients-only FusionRecipe prefix.
     struct CompleteRecipeView { FusionRecipe recipe; u16 result; };

@@ -22,7 +22,7 @@ void* asdPrimAlloc(u32 size);
 void* rt_memcpy(void* destination, const void* source, u32 size);
 void FUN_0023b9d0(VertexAttributeState*, const VertexAttributeDescription*, u32 address, u32 format);
 
-void FUN_00346f2c(PolyGeomBuf* geometry)
+void vertexAttributeUploadStreams(PolyGeomBuf* geometry)
 {
     // The upload state follows the published buffer prefix; do not grow that shared type.
     struct UploadView {

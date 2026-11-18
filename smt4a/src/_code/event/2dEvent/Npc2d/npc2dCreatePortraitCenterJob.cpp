@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the asdProcessCreateSimple stack arguments differ: retail loads the update/destroy callbacks into r0/r1 (pool order update, destroy) and stores them with one `stm sp, {r0, r1, r4}`; armcc here evaluates the call right to left (`str r1, [sp]; stm r5, {r0, r4}`, pool order destroy, update). */
+/* NON_MATCHING: initial handle/table/state scheduling and callback literal pool order (update vs destroy) differ (16 diff lines). */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -25,7 +25,7 @@ extern const s8 DAT_0052f4f0[];  // "EVE_2dTex"
 
 // Creates the 2D texture effect job for NPC `id`: loads the anchors of its three texture slots and
 // starts the "EVE_2dTex" process.
-u32 FUN_003c8fd4(u32 id)
+u32 npc2dCreatePortraitCenterJob(u32 id)
 {
     asdDebugTrace(DAT_0052f4fc, 0x400);
     NpcTextureEffectWork *work = (NpcTextureEffectWork *)asdMemoryAllocTracked(
@@ -73,6 +73,8 @@ u32 FUN_003c8fd4(u32 id)
         work->resourceState = 1;
     }
     work->speed = 0.26f;
-    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, FUN_002897cc, FUN_0034da3c, (u32)work);
+    AsdProcFunc end = FUN_0034da3c;
+    AsdProcUpdateFunc update = FUN_002897cc;
+    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, update, end, (u32)work);
 }
 }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: logic and instruction mix agree; armcc places the shared `return 0` block after the kind tests in retail but after the last handler here (one extra branch). */
 #include "battle/BtlGlobals.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "common.h"
@@ -52,7 +51,7 @@ static __inline bool scriptUnitIsKind(s32 kind)
 }
 
 /* Script command: for the selected skill, returns its word for the script unit's kind when that skill exists. */
-s32 FUN_003ef738(void)
+s32 btlScriptGetSelectedSkillDemonId(void)
 {
     s32 skillId;
     SkillRecord *record;
@@ -60,32 +59,37 @@ s32 FUN_003ef738(void)
     if (!scriptUnitIsKind(1) && !scriptUnitIsKind(4) && !scriptUnitIsKind(3)) {
         return 0;
     }
-    if (FUN_004aba3c(g_btlUiBlock) == -1) {
+    if (FUN_004aba3c(g_btlUiBlock) != -1) {
+        skillId = FUN_004aba3c(g_btlUiBlock);
+    } else {
         ScriptUnitMode *stats = reinterpret_cast<BtlScriptUnitView *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->stats;
 
         if (stats->mode != 2) {
             return 0;
         }
         skillId = stats->selected;
-    } else {
-        skillId = FUN_004aba3c(g_btlUiBlock);
     }
     record = (SkillRecord *)skillDataFindById(skillId);
     if (record == NULL) {
         return 0;
     }
     if (scriptUnitIsKind(1)) {
-        if (record->words[0] != 0) {
-            return nkmBaseGetRecord(record->words[0]) != NULL ? (s16)record->words[0] : 0;
+        if (record->words[0] == 0) {
+            return 0;
         }
-    } else if (scriptUnitIsKind(4)) {
-        if (record->words[1] != 0) {
-            return nkmBaseGetRecord(record->words[1]) != NULL ? (s16)record->words[1] : 0;
+        return nkmBaseGetRecord(record->words[0]) != NULL ? (s16)record->words[0] : 0;
+    }
+    if (scriptUnitIsKind(4)) {
+        if (record->words[1] == 0) {
+            return 0;
         }
-    } else if (scriptUnitIsKind(3)) {
-        if (record->words[2] != 0) {
-            return nkmBaseGetRecord(record->words[2]) != NULL ? (s16)record->words[2] : 0;
+        return nkmBaseGetRecord(record->words[1]) != NULL ? (s16)record->words[1] : 0;
+    }
+    if (scriptUnitIsKind(3)) {
+        if (record->words[2] == 0) {
+            return 0;
         }
+        return nkmBaseGetRecord(record->words[2]) != NULL ? (s16)record->words[2] : 0;
     }
     return 0;
 }

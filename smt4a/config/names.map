@@ -6368,7 +6368,7 @@
 00494a34 _ZN9Obj53604412FUN_00494a34Ev
 00498ac0 _ZN9Obj53604412FUN_00498ac0Ev
 004995b0 _ZN9Obj53604412FUN_004995b0Ev
-00494740 _ZN9Obj53604412FUN_00494740Ev
+00494740 _ZN9Obj53604420updatePageTransitionEv
 0049bd20 _ZN9Obj53604412FUN_0049bd20Ev
 00499fdc _ZN9Obj53604412FUN_00499fdcEv
 0049a2b4 _ZN9Obj53604412FUN_0049a2b4Ev
@@ -6917,3 +6917,15 @@
 0021c45c btlUiPartyDisplayInit
 00202ea4 configUpdate
 0031a914 configValueName
+003ef738 btlScriptGetSelectedSkillDemonId
+0023c168 mobiclipFrameSetCreate
+00416960 btlPartnerMessageSetSlot
+001678a8 messageWindowDrawSprites
+00424ecc recordTableLoadKind2Payloads
+003c8fd4 npc2dCreatePortraitCenterJob
+003b6820 npc2dCreatePortraitVariantJob
+0021252c mtx44RotateYXZDegrees
+0027dbac s4LoadDrawUpperJob
+002c7150 s4LoadCreate
+00412c54 vertexAttributeUploadStreams
+0047a298 aocMenuDrawGuideDown

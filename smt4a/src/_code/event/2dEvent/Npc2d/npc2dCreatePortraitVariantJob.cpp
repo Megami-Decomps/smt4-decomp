@@ -19,7 +19,7 @@ s32 aocRunByName(AocSystemA *system, u32 table, u32 file, s32 mode);
 void FUN_002897cc(JobWork *job);
 void FUN_0034da3c(JobWork *job);
 
-void FUN_003b6820(u32 id, s32 placement, u32 variant)
+void npc2dCreatePortraitVariantJob(u32 id, s32 placement, u32 variant)
 {
     // This constructor's Apocalypse allocation extends the shared NPC work prefix to 0xBC.
     union PortraitTaskWorkA {

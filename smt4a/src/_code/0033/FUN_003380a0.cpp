@@ -14,7 +14,7 @@ int camSetMatrixB(int, int *);
 int materialUploadChangedParameterVector(int, unsigned int);
 int FUN_00412678(unsigned int, unsigned char [352], int *);
 int asdPrimCopyIndexRange(unsigned int, int *, int, int);
-int FUN_00412c54(unsigned int, unsigned char [352]);
+int vertexAttributeUploadStreams(unsigned int, unsigned char [352]);
 int FUN_0042cb74(unsigned char *);
 
 typedef int romwright_code(...);
@@ -46,7 +46,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: materialUploadChangedParameterVector. */
 /* Supplied declaration required: FUN_00412678. */
 /* Supplied declaration required: asdPrimCopyIndexRange. */
-/* Supplied declaration required: FUN_00412c54. */
+/* Supplied declaration required: vertexAttributeUploadStreams. */
 /* Supplied declaration required: FUN_0042cb74. */
 
 
@@ -157,7 +157,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   temp_v16 = 0;
   temp_v17 = 0;
   temp_v18 = 0;
-  FUN_00412c54(*param_1,temp_v14);
+  vertexAttributeUploadStreams(*param_1,temp_v14);
   temp_v5 = 0;
   if (temp_v5 < *(short *)(param_1 + 2)) {
     do {

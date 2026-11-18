@@ -5034,13 +5034,13 @@
       "target_path": "orig/target/_code/0010/scrCommQueueRequest.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_0010835c.o",
+      "base_path": "build/obj/_code/0010/frameTexHdrCaptureLeft.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0010835c",
+            "name": "frameTexHdrCaptureLeft",
             "size": 492,
             "vram": "0x10835c"
           }
@@ -5048,19 +5048,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_0010835c.cpp"
+        "source_path": "src/_code/0010/frameTexHdrCaptureLeft.cpp"
       },
-      "name": "_code/0010/FUN_0010835c",
-      "target_path": "orig/target/_code/0010/FUN_0010835c.o"
+      "name": "_code/0010/frameTexHdrCaptureLeft",
+      "target_path": "orig/target/_code/0010/frameTexHdrCaptureLeft.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_0010854c.o",
+      "base_path": "build/obj/_code/0010/frameTexHdrCaptureRight.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0010854c",
+            "name": "frameTexHdrCaptureRight",
             "size": 516,
             "vram": "0x10854c"
           }
@@ -5068,10 +5068,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_0010854c.cpp"
+        "source_path": "src/_code/0010/frameTexHdrCaptureRight.cpp"
       },
-      "name": "_code/0010/FUN_0010854c",
-      "target_path": "orig/target/_code/0010/FUN_0010854c.o"
+      "name": "_code/0010/frameTexHdrCaptureRight",
+      "target_path": "orig/target/_code/0010/frameTexHdrCaptureRight.o"
     },
     {
       "base_path": "build/obj/_code/0010/titleJobRefreshSurface.o",
@@ -93355,13 +93355,13 @@
       "target_path": "orig/target/_code/0028/nn_math_ARMv6_MTX33CopyAsm.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_00286198.o",
+      "base_path": "build/obj/_code/0028/mtx44RotateYXZDegrees.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00286198",
+            "name": "mtx44RotateYXZDegrees",
             "size": 492,
             "vram": "0x286198"
           }
@@ -93369,10 +93369,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_00286198.cpp"
+        "source_path": "src/_code/0028/mtx44RotateYXZDegrees.cpp"
       },
-      "name": "_code/0028/FUN_00286198",
-      "target_path": "orig/target/_code/0028/FUN_00286198.o"
+      "name": "_code/0028/mtx44RotateYXZDegrees",
+      "target_path": "orig/target/_code/0028/mtx44RotateYXZDegrees.o"
     },
     {
       "base_path": "build/obj/_code/0028/nn_math_ARMv6_MTX34InvTransposeAsm.o",
@@ -103080,13 +103080,13 @@
       "target_path": "orig/target/_code/0029/gridNavigationConfigure.o"
     },
     {
-      "base_path": "build/obj/_code/0029/FUN_0029fa0c.o",
+      "base_path": "build/obj/_code/0029/fusionListAvailableSpecialRecipes.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0029fa0c",
+            "name": "fusionListAvailableSpecialRecipes",
             "size": 512,
             "vram": "0x29fa0c"
           }
@@ -103094,10 +103094,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0029/FUN_0029fa0c.cpp"
+        "source_path": "src/_code/0029/fusionListAvailableSpecialRecipes.cpp"
       },
-      "name": "_code/0029/FUN_0029fa0c",
-      "target_path": "orig/target/_code/0029/FUN_0029fa0c.o"
+      "name": "_code/0029/fusionListAvailableSpecialRecipes",
+      "target_path": "orig/target/_code/0029/fusionListAvailableSpecialRecipes.o"
     },
     {
       "base_path": "build/obj/_code/0029/uniteMenuChangeState.o",
@@ -133242,13 +133242,13 @@
       "target_path": "orig/target/_code/002e/mapFlagsWriteBit.o"
     },
     {
-      "base_path": "build/obj/_code/002e/FUN_002e8598.o",
+      "base_path": "build/obj/_code/002e/mapIfShowRemainingRequirementDialog.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002e8598",
+            "name": "mapIfShowRemainingRequirementDialog",
             "size": 392,
             "vram": "0x2e8598"
           }
@@ -133256,10 +133256,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002e/FUN_002e8598.cpp"
+        "source_path": "src/_code/002e/mapIfShowRemainingRequirementDialog.cpp"
       },
-      "name": "_code/002e/FUN_002e8598",
-      "target_path": "orig/target/_code/002e/FUN_002e8598.o"
+      "name": "_code/002e/mapIfShowRemainingRequirementDialog",
+      "target_path": "orig/target/_code/002e/mapIfShowRemainingRequirementDialog.o"
     },
     {
       "base_path": "build/obj/_code/002e/mapIfShowItemResultMessage.o",
@@ -149412,13 +149412,13 @@
       "target_path": "orig/target/_code/0031/eventTexGetCurrent.o"
     },
     {
-      "base_path": "build/obj/_code/event/2dEvent/Npc2d/FUN_0031bc80.o",
+      "base_path": "build/obj/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0031bc80",
+            "name": "npc2dCreatePortraitVariantJob",
             "size": 460,
             "vram": "0x31bc80"
           }
@@ -149427,10 +149427,10 @@
           "_code",
           "event/2dEvent/Npc2d"
         ],
-        "source_path": "src/_code/event/2dEvent/Npc2d/FUN_0031bc80.cpp"
+        "source_path": "src/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.cpp"
       },
-      "name": "_code/event/2dEvent/Npc2d/FUN_0031bc80",
-      "target_path": "orig/target/_code/event/2dEvent/Npc2d/FUN_0031bc80.o"
+      "name": "_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob",
+      "target_path": "orig/target/_code/event/2dEvent/Npc2d/npc2dCreatePortraitVariantJob.o"
     },
     {
       "base_path": "build/obj/_code/event/eventCommand/eventCommandStop.o",
@@ -153341,13 +153341,13 @@
       "target_path": "orig/target/_code/event/2dEvent/2dEventTex/eventTexAddHandle.o"
     },
     {
-      "base_path": "build/obj/_code/event/2dEvent/Npc2d/FUN_0032743c.o",
+      "base_path": "build/obj/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0032743c",
+            "name": "npc2dCreatePortraitCenterJob",
             "size": 448,
             "vram": "0x32743c"
           }
@@ -153356,10 +153356,10 @@
           "_code",
           "event/2dEvent/Npc2d"
         ],
-        "source_path": "src/_code/event/2dEvent/Npc2d/FUN_0032743c.cpp"
+        "source_path": "src/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.cpp"
       },
-      "name": "_code/event/2dEvent/Npc2d/FUN_0032743c",
-      "target_path": "orig/target/_code/event/2dEvent/Npc2d/FUN_0032743c.o"
+      "name": "_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob",
+      "target_path": "orig/target/_code/event/2dEvent/Npc2d/npc2dCreatePortraitCenterJob.o"
     },
     {
       "base_path": "build/obj/_code/0032/FUN_00327624.o",
@@ -160937,13 +160937,13 @@
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Prim/AsdPrimRenderData/FUN_00346b84.o"
     },
     {
-      "base_path": "build/obj/_code/0034/FUN_00346f2c.o",
+      "base_path": "build/obj/_code/0034/vertexAttributeUploadStreams.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00346f2c",
+            "name": "vertexAttributeUploadStreams",
             "size": 496,
             "vram": "0x346f2c"
           }
@@ -160951,10 +160951,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0034/FUN_00346f2c.cpp"
+        "source_path": "src/_code/0034/vertexAttributeUploadStreams.cpp"
       },
-      "name": "_code/0034/FUN_00346f2c",
-      "target_path": "orig/target/_code/0034/FUN_00346f2c.o"
+      "name": "_code/0034/vertexAttributeUploadStreams",
+      "target_path": "orig/target/_code/0034/vertexAttributeUploadStreams.o"
     },
     {
       "base_path": "build/obj/_code/0034/FUN_0034711c.o",
@@ -164609,13 +164609,13 @@
       "target_path": "orig/target/_code/0035/FUN_00350854.o"
     },
     {
-      "base_path": "build/obj/_code/0035/FUN_003508b4.o",
+      "base_path": "build/obj/_code/0035/recordTableLoadKind2Payloads.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003508b4",
+            "name": "recordTableLoadKind2Payloads",
             "size": 516,
             "vram": "0x3508b4"
           }
@@ -164623,10 +164623,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0035/FUN_003508b4.cpp"
+        "source_path": "src/_code/0035/recordTableLoadKind2Payloads.cpp"
       },
-      "name": "_code/0035/FUN_003508b4",
-      "target_path": "orig/target/_code/0035/FUN_003508b4.o"
+      "name": "_code/0035/recordTableLoadKind2Payloads",
+      "target_path": "orig/target/_code/0035/recordTableLoadKind2Payloads.o"
     },
     {
       "base_path": "build/obj/_code/0035/FUN_00350ab8.o",

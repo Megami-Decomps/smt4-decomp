@@ -17,7 +17,7 @@ int FUN_0020e79c(void);
 int stateModeDispatch(...);
 int configDestroy(void);
 int FUN_00283d74(...);
-int FUN_002c7150(void);
+int s4LoadCreate(void);
 int gameApplyFlagTriggers(void);
 int FUN_00324c94(...);
 int FUN_00363c58(...);
@@ -113,7 +113,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00283d74. */
 extern int recordGetModeForId(int);
 extern int menuAreModeTexturesLoaded(unsigned int *);
-/* Supplied declaration required: FUN_002c7150. */
+/* Supplied declaration required: s4LoadCreate. */
 extern int jyoucyuGetLevel(void);
 extern int pairedAvailabilityBothReady(void);
 extern int buttonHelpIsActionActive(unsigned int);
@@ -978,7 +978,7 @@ LAB_0029fb00:
     }
     break;
   case 0x16:
-    FUN_002c7150();
+    s4LoadCreate();
     puVar4[0x1f] = 0;
     puVar4[0x1e] = 0x17;
     puVar4[0x20] = 0;

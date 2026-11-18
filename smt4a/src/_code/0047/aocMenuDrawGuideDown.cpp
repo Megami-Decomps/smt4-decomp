@@ -31,7 +31,7 @@ s32 FUN_00473754(AocMain *main, s32 id, AocDrawText *text);
 }
 
 // Draw the expansion-content information panel at its mode-selected position.
-extern "C" s32 FUN_0047a298(u32 job)
+extern "C" s32 aocMenuDrawGuideDown(u32 job)
 {
     AocDrawWork *work = jobGetWork(job);
     AocMain *main = g_aocMain;

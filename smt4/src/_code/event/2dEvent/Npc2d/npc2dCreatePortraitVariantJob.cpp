@@ -1,4 +1,4 @@
-/* NON_MATCHING: default-state stores now match; the process callback arguments still use STR plus STM (callbacks loaded into r1/r2) instead of retail's single `stm sp, {r0, r1, r4}` with the callbacks loaded first (same tail in FUN_00252190 / FUN_00285e44). */
+/* NON_MATCHING: literal pool order for speed (0.3f) vs callback pointers (update, end) differs (10 diff lines). */
 #include "event/NpcTextureWork.h"
 #include "addon/aocMain.h"
 #include "code/Code002a.h"
@@ -25,7 +25,7 @@ void asdTMTexTablePrepareNodeImage(s32 table, s32 node);
 s32 FUN_001dfc64(u32 process);
 void FUN_002db92c(u32 process);
 
-void FUN_0031bc80(u32 npc, s32 position, u32 variant)
+void npc2dCreatePortraitVariantJob(u32 npc, s32 position, u32 variant)
 {
     if (gameFlagIsSet(0x522)) {
         if (aocContentGetIndexedRecord(dataTable25FindById(npc), variant) == NULL)
@@ -72,7 +72,9 @@ void FUN_0031bc80(u32 npc, s32 position, u32 variant)
         else
             asdTMTexTablePrepareNodeImage(work->textureTable, work->textureNode);
     }
+    AsdProcUpdateFunc update = FUN_001dfc64;
+    AsdProcFunc end = FUN_002db92c;
     work->speed = 0.3f;
-    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, update, end, reinterpret_cast<u32>(work));
 }
 }

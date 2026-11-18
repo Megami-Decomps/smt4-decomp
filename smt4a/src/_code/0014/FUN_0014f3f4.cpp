@@ -11,7 +11,7 @@ int effectRenderTransformedInstance(...);
 int FUN_00163ec4(...);
 int FUN_00164034(...);
 int FUN_00164168(...);
-int FUN_001678a8(...);
+int messageWindowDrawSprites(...);
 int gxResetColorQuadToWhite(void);
 int SBORROW4(...);
 
@@ -68,7 +68,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00165b08. */
 extern int ifTouchIsActive(void);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001678a8. */
+/* Supplied declaration required: messageWindowDrawSprites. */
 /* Supplied declaration required: fontMeasureTextWidth. */
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_001688c4(unsigned int);
@@ -275,7 +275,7 @@ char FUN_0014f3f4(void)
       efctSetSpeed();
     }
     temp_v18 = temp_v24;
-    FUN_001678a8(temp_v5);
+    messageWindowDrawSprites(temp_v5);
     temp_v9 = *(unsigned int *)(temp_v5 + 0xc);
     if ((temp_v9 & 0x20) != 0) goto LAB_0014fe54;
     if (((temp_v5 == 0) || (temp_v9 = (unsigned int)*(unsigned char *)(temp_v5 + 8), temp_v9 != 4)) ||

@@ -7457,3 +7457,16 @@
 0021c45c btlUiPartyDisplayInit inferred twin of smt4 FUN_00199b9c: initialises the battle UI's party display
 00202ea4 configUpdate inferred the Config screen's update (camp/Config/Config): opens the script, slides the rows in, picks, confirms and applies a value
 0031a914 configValueName inferred display name of a config value (0..4) from data table 0x36; "NoTableLoaded"/"NoName" placeholders; FUN_00202ea4 inlines it
+003ef738 btlScriptGetSelectedSkillDemonId inferred battle script command: for the selected skill (UI block or script unit's stats), returns the demon id in the skill record's word for the script unit's kind 1/4/3 when nkmBaseGetRecord has it (Hydrogen btlAIScriptResolveSkillDemonId / Carbon btlScrGetSelectedSkillSummonDemonId merged)
+0023c168 mobiclipFrameSetCreate inferred allocates the Mobiclip decoder state (0x670) and the frame set's luma/chroma buffers for width x height; returns 1 on success (Hydrogen: videoDecoderAllocFrameBuffers)
+00416960 btlPartnerMessageSetSlot evidence asdDebugHookPtr("btlPartnerMessage") in its body; initialises one AnimatedMessageSlot with a message id and the projected world position
+001678a8 messageWindowDrawSprites inferred draws the MessageWindowA frame, category, mode and special sprites with stereo parallax while message->state is set (Carbon's name; Hydrogen: messageWindowDrawEffect)
+00424ecc recordTableLoadKind2Payloads inferred loads each kind-2 record's header and payload of a RecordTable, checks it against the kind-0 records; state 1 when done, 7 with an error flag; twin smt4 FUN_003508b4
+003c8fd4 npc2dCreatePortraitCenterJob inferred Npc2d.cpp job (process EVE_2dTex) for an NPC portrait centred at x 72 in screen region 5; twin smt4 FUN_0032743c (Hydrogen: npc2dCreateTextureEffect)
+003b6820 npc2dCreatePortraitVariantJob inferred twin of smt4 FUN_0031bc80 (id, placement, variant)
+00494740 _ZN9Obj53604420updatePageTransitionEv inferred Obj536044::updatePageTransition(): state handler that drives the page sprite and calls ShopMenuView::finishPageTransition
+0021252c mtx44RotateYXZDegrees inferred wraps integer Y, X, Z degree angles to [0, 360), converts to 256-unit angles and post-multiplies the Matrix44 by each rotation; twin smt4 FUN_00286198 (Carbon: mtxRotateByWrappedDegreesYXZ)
+0027dbac s4LoadDrawUpperJob evidence registered by taskCreateDraw("S4 LOAD TEST UL") and ("S4 LOAD TEST UR") in the S4Load.cpp creator (Carbon; Hydrogen: s4LoadDrawScreen)
+002c7150 s4LoadCreate evidence asdDebugTrace of c:\SMT4F\SMT4F\sdds4\program	itle\S4Load.cpp; allocates g_s4Load, loads title/loadS4.bf/.mbm and starts process "S4 LOAD TEST C" with s4LoadDestroy
+00412c54 vertexAttributeUploadStreams inferred copies the position/colour/packed-colour/texcoord streams into primitive memory and binds them in the 0x790-byte vertex attribute state; twin smt4 FUN_00346f2c
+0047a298 aocMenuDrawGuideDown evidence registered by taskCreateDraw("Aoc guide DOWN") in AocMenu::runConnectedProcess

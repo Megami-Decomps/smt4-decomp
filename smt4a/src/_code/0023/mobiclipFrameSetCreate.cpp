@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail derives the three table pointers as a running chain (+0x2100 each) from the first table; armcc computes the third from the base (+0x4200) and orders the stride stores differently. */
+/* NON_MATCHING: armcc computes the third table pointer directly from the base (+0x4200) instead of a running +0x2100 chain and schedules the stride=0x400 store after movls. */
 #include "common.h"
 #include "mobiclip/MobiclipAllocator.h"
 
@@ -8,9 +8,7 @@ struct MobiclipDecoderState {
     /* 0x04 */ u32 width;
     /* 0x08 */ u32 height;
     /* 0x0C */ u8 unk0C[0x30];
-    /* 0x3C */ u8 *tableA;
-    /* 0x40 */ u8 *tableB;
-    /* 0x44 */ u8 *tableC;
+    /* 0x3C */ u8 *tables[3];
     /* 0x48 */ u32 unk48;
 };
 
@@ -37,7 +35,7 @@ extern MobiclipTables DAT_0053faa0;
 void rt_memclr(void *destination, u32 size);
 
 /* Creates the decoder state and frame buffers for the given size; returns 1 on success. */
-u32 FUN_0023c168(MobiclipFrameSet *set, u32 width, u32 height, u32 frameCount, s32 flags, s32 mode)
+u32 mobiclipFrameSetCreate(MobiclipFrameSet *set, u32 width, u32 height, u32 frameCount, s32 flags, s32 mode)
 {
     u32 i;
     if (mode == 0 || mode != 1)
@@ -45,16 +43,16 @@ u32 FUN_0023c168(MobiclipFrameSet *set, u32 width, u32 height, u32 frameCount, s
     if (!(width <= 0x400 && flags == 0))
         return 0;
     rt_memclr(set, 0x20);
-    MobiclipDecoderState *decoder = (MobiclipDecoderState *)callGlobalHook(0x670);
-    set->decoder = decoder;
-    if (decoder == NULL)
+    set->decoder = (MobiclipDecoderState *)callGlobalHook(0x670);
+    if (set->decoder == NULL)
         return 0;
+    MobiclipDecoderState *decoder = set->decoder;
     u8 *table = DAT_0053faa0.tables[0];
-    decoder->tableA = table;
-    table += 0x2100;
-    decoder->tableB = table;
-    table += 0x2100;
-    decoder->tableC = table;
+    s32 k = 0;
+    while (k < 3) {
+        decoder->tables[k++] = table;
+        table += 0x2100;
+    }
     decoder->unk48 = 0;
     decoder->width = width;
     decoder->height = height;
