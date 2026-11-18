@@ -1,3 +1,4 @@
+#include "font/InfoWinTextApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023173c` (_code @ 0x23173c, 0x590 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -9,7 +10,6 @@ int dataFindKindRecordWithAocOverrides(...);
 int dataTable01GetRecordWithAocOverride(...);
 int asdMemFree(void);
 int dialogOpen(...);
-int infoWinExpandAndSetText(...);
 int uiNavigatorStart(...);
 int infoWinSetTimer(void);
 int libc_strcpy(...);
@@ -213,7 +213,7 @@ joined_r0x002318b0:
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 6:
-      infoWinExpandAndSetText(puVar1 + 0x416);
+      infoWinExpandAndSetText((const char *)(puVar1 + 0x416));
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;

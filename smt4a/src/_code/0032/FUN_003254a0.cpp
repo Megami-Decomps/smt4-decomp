@@ -1,3 +1,4 @@
+#include "font/InfoWinTextApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003254a0` (_code @ 0x3254a0, 0x4cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -6,7 +7,6 @@
 extern "C" {
 
 int dialogClose(int);
-int infoWinExpandAndSetText(...);
 int nameTableFind(int, int);
 int infoWindowShow(int, int, int);
 int infoWinSetTimer(unsigned int);
@@ -129,14 +129,14 @@ LAB_00325644:
             temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v6);
             if ((temp_v6 == 0) && (temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v7), temp_v6 == 0)) goto LAB_003256bc;
           }
-          infoWinExpandAndSetText(temp_v4);
+          infoWinExpandAndSetText((const char *)(temp_v4));
           infoWindowShow(g_gameState.mapId,DAT_005f1600,1);
           infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';
         }
         else {
 LAB_003256bc:
-          infoWinExpandAndSetText(&LAB_00325978);
+          infoWinExpandAndSetText((const char *)(&LAB_00325978));
           infoWindowShow(g_gameState.mapId,DAT_005f1600,1);
           infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';

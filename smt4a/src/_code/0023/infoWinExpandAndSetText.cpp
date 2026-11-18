@@ -1,3 +1,4 @@
+#include "font/InfoWinTextApi.h"
 #include "ui/UiSpriteApi.h"
 #include "font/InfoWinA.h"
 #include "text/TextDraw.h"

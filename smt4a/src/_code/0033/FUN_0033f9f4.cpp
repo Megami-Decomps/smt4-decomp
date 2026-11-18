@@ -1,3 +1,4 @@
+#include "map/MapInterfaceApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033f9f4` (_code @ 0x33f9f4, 0x460 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
@@ -8,7 +9,6 @@
 extern "C" {
 
 int mathAngleDeltaDegrees(void);
-int mapIfStart(unsigned int);
 float FUN_0033abb4(float, float);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -132,7 +132,7 @@ void FUN_0033f9f4(void)
       *pcVar7 = '\x02';
       temp_v13 = 0x33fd64;
       *(unsigned char *)(temp_v3 + 0x95) = 1;
-      mapIfStart(temp_v13);
+      mapIfStart((const char *)(temp_v13));
     }
     else {
       *pcVar7 = temp_v0 - '\x01';
@@ -141,20 +141,20 @@ void FUN_0033f9f4(void)
           if (temp_v0 == '\x03') {
             temp_v13 = 0x33fd64;
             *(unsigned char *)(temp_v3 + 0x95) = 1;
-            mapIfStart(temp_v13);
+            mapIfStart((const char *)(temp_v13));
           }
         }
         else {
 LAB_0033fda4:
           temp_v13 = 0x33fe80;
           *(unsigned char *)(temp_v3 + 0x95) = 1;
-          mapIfStart(temp_v13);
+          mapIfStart((const char *)(temp_v13));
         }
       }
       else {
         temp_v13 = 0x33fe54;
         *(unsigned char *)(temp_v3 + 0x95) = 1;
-        mapIfStart(temp_v13);
+        mapIfStart((const char *)(temp_v13));
       }
     }
   }
@@ -165,7 +165,7 @@ LAB_0033fda4:
       *pbVar8 = 0;
       temp_v13 = 0x33fe54;
       *(unsigned char *)(temp_v3 + 0x95) = 1;
-      mapIfStart(temp_v13);
+      mapIfStart((const char *)(temp_v13));
     }
     else {
       *pbVar8 = temp_v1 + 1;
@@ -174,13 +174,13 @@ LAB_0033fda4:
         if (temp_v1 == 1) {
           temp_v13 = 0x33fd64;
           *(unsigned char *)(temp_v3 + 0x95) = 1;
-          mapIfStart(temp_v13);
+          mapIfStart((const char *)(temp_v13));
         }
       }
       else {
         temp_v13 = 0x33fe54;
         *(unsigned char *)(temp_v3 + 0x95) = 1;
-        mapIfStart(temp_v13);
+        mapIfStart((const char *)(temp_v13));
       }
     }
   }

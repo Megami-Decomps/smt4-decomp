@@ -1,3 +1,4 @@
+#include "font/InfoWinTextApi.h"
 /* NON_MATCHING: oversized recovered state machine differs from retail control flow; removed a draft flag-set call absent from the retail unit. */
 #include "romwright_types.h"
 
@@ -65,7 +66,6 @@ int mapIfReleaseResource(...);
 void FUN_00297f00(int value, int count);
 int mapIfReleaseSlot4(...);
 int mapTrapArm(...);
-int FUN_002c2d44(...);
 int FUN_002de104(...);
 int FUN_003024a0(...);
 int mapMainStartEntry(...);

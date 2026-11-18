@@ -1,3 +1,4 @@
+#include "map/MapInterfaceApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002991d4` (_code @ 0x2991d4, 0x15bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -58,7 +59,6 @@ int gameFlagsWriteBlockBit(int, int);
 int FUN_003774e8(int, unsigned char *, unsigned char *, unsigned int *);
 int FUN_003799d0(void);
 int FUN_0037c8e4(...);
-int mapIfStartNavigation(...);
 int FUN_003a6b10(...);
 int FUN_003ca244(void);
 int sysPlayVoice(...);
@@ -553,9 +553,7 @@ LAB_00299e1c:
               if (temp_v11 != 0) {
                 temp_v11 = saveSlotSelectedIsId175();
                 if (temp_v11 != 0) {
-                  temp_v17[0] = 1;
-                  temp_v17[1] = 0;
-                  mapIfStartNavigation(0xaf,&LAB_0029a23c,0);
+                  mapIfStartNavigation(0xaf,(const char *)&LAB_0029a23c,0,0,1);
                   temp_v12 = FUN_00152f44();
                   temp_v11 = randRange(99);
                   if (temp_v11 < 0x21) {
@@ -574,9 +572,7 @@ LAB_00299e1c:
                 }
               }
               else {
-                temp_v17[0] = 1;
-                temp_v17[1] = 0;
-                mapIfStartNavigation(0xaf,&LAB_0029a23c,0);
+                mapIfStartNavigation(0xaf,(const char *)&LAB_0029a23c,0,0,1);
                 temp_v12 = FUN_00152f44();
                 temp_v11 = randRange(99);
                 if (temp_v11 < 0x21) {

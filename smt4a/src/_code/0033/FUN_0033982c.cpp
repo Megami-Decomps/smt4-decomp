@@ -1,3 +1,4 @@
+#include "map/MapInterfaceApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033982c` (_code @ 0x33982c, 0xb38 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
@@ -9,7 +10,6 @@ extern "C" {
 int libm_cosf(void);
 int libm_sinf(void);
 int mathAngleDeltaDegrees(void);
-int mapIfStart(...);
 int FUN_0030250c(void);
 float FUN_0033abb4(float, float);
 int SBORROW4(int, int);
@@ -347,17 +347,17 @@ LAB_00339bb4:
       if (temp_v5 != '\0') {
         if (temp_v5 != '\x01') {
           if (temp_v5 == '\x02') {
-            mapIfStart(0x339e8c);
+            mapIfStart((const char *)(0x339e8c));
           }
         }
         else {
           temp_v3 = 0x33a1c8;
-          mapIfStart(temp_v3);
+          mapIfStart((const char *)(temp_v3));
         }
       }
       else {
         temp_v3 = 0x33a19c;
-        mapIfStart(temp_v3);
+        mapIfStart((const char *)(temp_v3));
       }
     }
     else if (temp_v0) {
@@ -373,17 +373,17 @@ LAB_00339bb4:
         if (temp_v5 != '\x01') {
           if (temp_v5 == '\x02') {
             temp_v3 = 0x339e8c;
-            mapIfStart(temp_v3);
+            mapIfStart((const char *)(temp_v3));
           }
         }
         else {
           temp_v3 = 0x33a1c8;
-          mapIfStart(temp_v3);
+          mapIfStart((const char *)(temp_v3));
         }
       }
       else {
         temp_v3 = 0x33a19c;
-        mapIfStart(temp_v3);
+        mapIfStart((const char *)(temp_v3));
       }
     }
   }

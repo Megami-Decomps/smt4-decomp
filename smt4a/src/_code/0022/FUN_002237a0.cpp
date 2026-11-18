@@ -1,3 +1,4 @@
+#include "map/MapInterfaceApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002237a0` (_code @ 0x2237a0, 0x800 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -13,10 +14,8 @@ int FUN_001628c0(...);
 int eventQueueAddUnique(...);
 int FUN_00234880(void);
 int FUN_00295108(void);
-int mapIfStart(void);
 int popupQueueInsertUnique(...);
 int FUN_00312af0(void);
-int mapIfStartNavigation(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -245,7 +244,7 @@ LAB_00223df0:
       }
     }
     else if (popup->message != 0) {
-      mapIfStart();
+      mapIfStart((const char *)(popup->message));
       if (g_popupState->state == 0xd) {
         temp_v1 = 0x10000ba;
       }

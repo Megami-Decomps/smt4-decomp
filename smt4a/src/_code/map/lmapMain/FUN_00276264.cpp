@@ -1,3 +1,4 @@
+#include "map/MapInterfaceApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276264` (_code @ 0x276264, 0x6f00 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
@@ -110,7 +111,6 @@ int FUN_00294cfc(...);
 int FUN_00295108(...);
 int FUN_002b80b8(void);
 void FUN_002b80fc(float x, float y, float z);
-int mapIfStart(...);
 int libc_strcpy(...);
 int tableGroupFindEntryIndex(...);
 int frameTexInitActive(void);
@@ -1795,7 +1795,7 @@ LAB_00278b38:
                                     temp_v8 = buttonHelpIsActionActive(0x13);
                                     if ((temp_v8 != 0) && (temp_v8 = FUN_004a0f5c(), temp_v8 != 0)) {
                                       textFormatBuffer(&uStack_b0,0x278fdc,temp_v8);
-                                      mapIfStart(&uStack_b0);
+                                      mapIfStart((const char *)(&uStack_b0));
                                       sysPlayVoice(0x100021c);
                                     }
                                   }
@@ -1840,7 +1840,7 @@ LAB_00278b38:
                                 }
                                 if (*(char *)(temp_v5 + 0xdfc) != '\0') {
                                   *(unsigned char *)(temp_v5 + 0xdfc) = 0;
-                                  mapIfStart(0x279000);
+                                  mapIfStart((const char *)(0x279000));
                                   return 0;
                                 }
                                 if (*(int *)(temp_v5 + 0x14f0) != 0) {
@@ -1855,7 +1855,7 @@ LAB_00278b38:
                                     "玂袂薂䂁薂蚂蚂薂莂钂䂁辂蚂䂁钂袂薂䂁悂貂貂閂銂覂躂螂䂁皂膂钂薂銂䂁袂膂鎂䂁銂閂躂䂁辂閂钂䒁"
                                     ;
                                   }
-                                  mapIfStart(pcVar11);
+                                  mapIfStart((const char *)(pcVar11));
                                   *(int *)(temp_v5 + 0x150c) = 0;
                                   return 0;
                                 }

@@ -1,3 +1,4 @@
+#include "font/InfoWinTextApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d9b50` (_code @ 0x2d9b50, 0x12e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
@@ -45,7 +46,6 @@ int libm_cosf(...);
 int libm_sinf(...);
 void FUN_00297f00(int value, int count);
 int mapTrapArm(...);
-int FUN_002c2d44(...);
 int FUN_002d1f40(...);
 int FUN_003024a0(...);
 int mapMainStartEntry(...);

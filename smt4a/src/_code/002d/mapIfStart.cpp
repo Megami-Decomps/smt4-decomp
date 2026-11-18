@@ -1,17 +1,18 @@
+#include "map/MapInterfaceApi.h"
+#include "font/InfoWinTextApi.h"
 #include "map/MapIfGlobals.h"
 
 extern "C" {
 
 void dialogOpen(s32 a, s32 b);
-void infoWinExpandAndSetText(s32 arg);
 
-void mapIfStart(s32 arg)
+void mapIfStart(const char *text)
 {
     MapIfStateA *state = g_mapIf.state;
 
     state->dialogOpen = 1;
     state->unk20 = 0;
-    infoWinExpandAndSetText(arg);
+    infoWinExpandAndSetText(text);
     dialogOpen(0, 1);
 }
 

@@ -1,3 +1,4 @@
+#include "font/InfoWinTextApi.h"
 /* NON_MATCHING: typed rewrite of the navigation map button handler; same blocks and calls as retail (232 vs 230 rows): the two stack arguments of rectRecRead are stored separately instead of one strd, early exits share the return and the saved registers are numbered differently (retail game state r7, navigation block r6, zero r8). */
 #include "gamedata/MapSaveBlockA.h"
 #include "map/mapDepart.h"
@@ -62,7 +63,6 @@ s32 FUN_002d22c0(s32 value);
 void lmapEnableSceneState(void);
 s32 lmapSceneGetUnk0(void);
 s32 mapIfGetState(void);
-void infoWinExpandAndSetText(const void *text);
 void infoWinSetTimer(s32 frames);
 extern u8 DAT_00532760[];
 extern GameStateNavBlock DAT_005f19fc;
@@ -139,7 +139,7 @@ u32 FUN_00489480(NaviInputPanel *panel)
     }
     if (DAT_005f19fc.alternateNaviMap == 0 && g_gameState.paused != 0 && mapIfGetState() == 0 &&
         panel->infoPending != 0) {
-        infoWinExpandAndSetText(DAT_00532760);
+        infoWinExpandAndSetText((const char *)(DAT_00532760));
         dialogOpen(1);
         infoWinSetTimer(-1);
         panel->infoPending = 0;

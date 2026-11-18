@@ -30,7 +30,10 @@ ROOT = Path(os.path.abspath(__file__)).parent.parent
 # The most local redeclarations the tree may hold (CI runs --all --ratchet): it only ever comes down.
 CEILING = ROOT / "config" / "declcheck_ceiling.txt"
 COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
-PROTO = re.compile(r"^[ \t]*(?:extern\s+(?:\"C\"\s+)?)?(?:static\s+)?(?:const\s+)?(?!(?:else|return|do|case|goto|throw|delete|new|if|while|for|switch)\b)[A-Za-z_][\w:<>]*[\s\*&]+([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^()]*\)[^;{}()]*)*\)\s*;", re.M)
+# A return-type token may contain namespace colons, but cannot end in a single
+# label colon. Otherwise a label followed by a call looks like a multiline prototype.
+# Preserve existing constructor recognition after C++ class access specifiers.
+PROTO = re.compile(r"^[ \t]*(?:extern\s+(?:\"C\"\s+)?)?(?:static\s+)?(?:const\s+)?(?!(?:else|return|do|case|goto|throw|delete|new|if|while|for|switch)\b)(?:[A-Za-z_][\w:<>]*(?<!:)|public:|protected:|private:)[\s\*&]+([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^()]*\)[^;{}()]*)*\)\s*;", re.M)
 EXTERN = re.compile(r"^[ \t]*extern\s+(?:\"C\"\s+)?(?:const\s+)?(?:struct\s+)?[A-Za-z_][\w:]*[\s\*]+([A-Za-z_]\w*)\s*(?:\[[^\]]*\])?\s*;", re.M)
 STRUCT = re.compile(r"\b(?:struct|class|union)\s+([A-Za-z_]\w*)\s*(?::[^{;]*)?\{")
 STATIC = re.compile(r"^[ \t]*static\s+(?:(?:__inline|inline|__forceinline)\s+)?(?:const\s+)?(?:struct\s+)?[A-Za-z_][\w:<>]*(?:\s+const)?[\s\*&]+([A-Za-z_]\w*)\s*\(", re.M)
