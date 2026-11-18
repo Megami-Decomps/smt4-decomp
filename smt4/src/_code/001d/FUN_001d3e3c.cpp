@@ -1,3 +1,4 @@
+#include "map/MapSpawn.h"
 #include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3e3c` (_code @ 0x1d3e3c, 0x5448 bytes) from smt4_v1.2.0.cxi.
@@ -154,7 +155,6 @@ int questClassifyCompletionNotification(void);
 int mapMarkVisitedAndUpdateRegionFlags(unsigned int, unsigned int);
 int FUN_00277b5c(...);
 int navigationSetArguments(...);
-int mapSetDepartureIndex(...);
 int actorApplyAlpha(void);
 int dataTableGetRecord23(void);
 int table23FindRecordByKey(...);
@@ -761,7 +761,7 @@ unsigned int FUN_001d3e3c(void)
     textFormatBuffer(temp_v29,&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
     DAT_0049f942 = 0;
-    mapSetDepartureIndex();
+    mapSetDepartureIndex(0);
     FUN_0028527c(0);
     DAT_0049f928 = puVar7[0x10];
     DAT_0049f92c = puVar7[0x12];

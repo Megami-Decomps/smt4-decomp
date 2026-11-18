@@ -1,3 +1,4 @@
+#include "map/MapSpawn.h"
 #include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b7f78` (_code @ 0x1b7f78, 0x8098 bytes) from smt4_v1.2.0.cxi.
@@ -233,10 +234,8 @@ int mapCompleteGroup(...);
 int navigationSetArguments(...);
 int mapEntryTriggerForScene(...);
 int mapSkyTableLoad(...);
-int mapSetDepartureIndex(...);
 int FUN_0028527c(...);
 int naviRegisterTransitionsAndRequest(...);
-int mapGetDepartureIndex(void);
 int commonBgStopChildAndBeginTransition(void);
 int scrScriptProcessCreate(...);
 int textFormatBuffer(...);
@@ -1058,7 +1057,7 @@ LAB_001b848c:
     if (puVar14[0xb] != 0x18) {
       *(unsigned char *)(temp_v9 + 0x792) = 0;
       DAT_0049f942 = '\0';
-      mapSetDepartureIndex();
+      mapSetDepartureIndex(0);
       FUN_0028527c(0);
     }
     else {

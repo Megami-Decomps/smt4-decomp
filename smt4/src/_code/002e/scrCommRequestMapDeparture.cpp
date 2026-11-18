@@ -1,3 +1,4 @@
+#include "map/MapSpawn.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "game/GameState.h"
@@ -5,7 +6,6 @@
 extern "C" {
 
 void mapDepartSetTarget(s32 a, s32 b, s32 c);
-void mapSetDepartureIndex(u32 value);
 u32 scrGetArg(...);
 
 

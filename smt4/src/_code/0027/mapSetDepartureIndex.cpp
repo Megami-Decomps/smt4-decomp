@@ -1,9 +1,10 @@
+#include "map/MapSpawn.h"
 #include "gamedata/MapSaveBlock.h"
 
 extern "C" {
 
 
-void mapSetDepartureIndex(u8 value)
+void mapSetDepartureIndex(s32 value)
 {
     MapSaveBlock *work = gameGetMapBlock();
 
