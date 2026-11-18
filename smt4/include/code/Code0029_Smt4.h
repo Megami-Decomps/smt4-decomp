@@ -32,7 +32,7 @@ void messageOwnerSetState(MessageOwner *owner, s32 state);
 
 u32 messageBannerInitSelection(u8 mode, s32 useCurrentValue);
 
-void infoWinStartTimer(void);
+void infoWinStartTimer(s32 unused);
 
 void FUN_00297b94(PlayScene *scene, s32 selection, s32 page);
 

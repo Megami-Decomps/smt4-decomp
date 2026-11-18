@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e5e78` (_code @ 0x1e5e78, 0x25f8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0029_Smt4.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
 
@@ -16,7 +17,7 @@ int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
-int infoWinStartTimer(...);
+
 int mathSinCos(...);
 int FUN_0030fb0c(char *, int);
 int VectorSignedToFloat(...);

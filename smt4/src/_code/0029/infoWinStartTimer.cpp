@@ -7,7 +7,7 @@ extern "C" {
 
 
 
-void infoWinStartTimer(void)
+void infoWinStartTimer(s32 unused)
 {
     InfoWindow *obj = g_infoWin;
 
