@@ -23,6 +23,10 @@ original source**. Both games are one build tree, so most work lands twice: fix 
    `--keep` writes the best one only if it beats the current source. A grid holds only variants the
    rules allow: types, real prototypes, `switch` against `if`, loop forms, helpers with evidence. Not
    permutations of declarations or single-use wrappers: a match found that way is steering.
+   On large functions add `--shape` (to fdiff.py or trial.py): it also scores the diff with branch
+   targets and pc-relative offsets blanked and pool words compared as a set, so one real change no
+   longer counts as every row it shifts (qcBoardStep: 206 raw, 56 shape). Rank variants by it; a
+   match is still IDENTICAL by the raw diff.
    `--flags` scores the unit under other cflags and with each callee in a `multifile` run; those are
    diagnostics, and the config changes only with the evidence below.
 3. Make it readable (below), rerunning `fdiff` after each step.

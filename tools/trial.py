@@ -1,6 +1,6 @@
 """Score many source variants of one function at once, without touching its source.
 
-    python -B tools/trial.py <game> <function> <variants.py | DIR> [--jobs N] [--show K] [--keep]
+    python -B tools/trial.py <game> <function> <variants.py | DIR> [--jobs N] [--show K] [--keep] [--shape]
     python -B tools/trial.py <game> <function> --flags [--jobs N] [--show K]
 
 `variants.py` defines `def variants(src):` yielding `(label, text)` pairs, each text a whole source
@@ -17,6 +17,10 @@ best K.
 
 `--keep` writes the best variant over the real source, only when it scores strictly better than the
 baseline. It never adds or removes a `NON_MATCHING` comment: that stays your edit.
+
+`--shape` adds fdiff's shape score (branch targets and pc offsets ignored, pool words as a set) and
+ranks by it, then by the raw score. Use it for large functions, where one real change shifts many
+later rows; `--keep` still requires a strictly better raw score.
 
 `--flags` scores, instead of variants, the current source under other compiler flags (-O2/-O3,
 -Otime/-Ospace, --fpu=softvfp and their combinations) and in a `--multifile` run with each direct
@@ -75,6 +79,7 @@ class Trial:
         # Short: Windows' 260-character path limit applies to armcc, and unit names can be long.
         self.scratch = Path(tempfile.mkdtemp(prefix=f"{function[:16]}-", dir=self.home / "build" / "trial"))
         self.counter = itertools.count()
+        self.shape = False  # also compute fdiff.shape_score (main sets it for --shape)
         self.local = set()  # temporary sources that include a file next to the real source
         # A variant that includes a file next to the real source (`#include "File.cpp"`) still finds it
         # from its temporary copy: that directory is searched first, as it is for the real source.
@@ -109,8 +114,11 @@ class Trial:
             diff, note, retail_rows, built_rows = fdiff.compare(self.tool, self.target, obj, f"{self.game} {self.unit['function']}")
         except SystemExit as stop:  # an object objdump cannot read, an empty function
             return dict(status="FAIL", score=None, error=str(stop))
-        return dict(status="DIFFERS" if diff else "IDENTICAL", score=score(diff), diff=diff, note=note,
-                    rows=(retail_rows, built_rows))
+        result = dict(status="DIFFERS" if diff else "IDENTICAL", score=score(diff), diff=diff, note=note,
+                      rows=(retail_rows, built_rows))
+        if self.shape:
+            result["shape"] = fdiff.shape_score(self.tool, self.target, obj)[0] if diff else 0
+        return result
 
     def callees(self, src):
         """Functions with a unit that retail's code calls directly, and unit functions the source names."""
@@ -176,6 +184,7 @@ def main():
     parser.add_argument("--show", type=int, default=0, metavar="K", help="print the diffs of the best K")
     parser.add_argument("--keep", action="store_true", help="write the best variant to the source if strictly better")
     parser.add_argument("--flags", action="store_true", help="diagnostics: score the source under other cflags and multifile")
+    parser.add_argument("--shape", action="store_true", help="also score with branch targets/pc offsets ignored and rank by it")
     parser.add_argument("--root", type=Path, default=TOOLS.parent, help=argparse.SUPPRESS)  # another checkout
     args = parser.parse_args()
     if args.flags == bool(args.variants):
@@ -184,6 +193,7 @@ def main():
         parser.error("--flags changes no file: put a proven flag in config/project.json yourself")
 
     trial = Trial(args.root.resolve(), args.game, args.function)
+    trial.shape = args.shape
     try:
         raw = trial.source.read_bytes()
         src = raw.decode("utf-8", "surrogateescape")
@@ -214,16 +224,22 @@ def main():
         if origin != index:
             result["same"] = jobs[origin][0]
         rows.append((index, label, result))
-    order = sorted(rows, key=lambda r: (r[2]["score"] is None, r[2]["score"] or 0, r[0]))
+    if args.shape:
+        order = sorted(rows, key=lambda r: (r[2]["score"] is None, r[2].get("shape") or 0, r[2]["score"] or 0, r[0]))
+    else:
+        order = sorted(rows, key=lambda r: (r[2]["score"] is None, r[2]["score"] or 0, r[0]))
 
     print(f"{args.game} {args.function} ({trial.unit['source']}): {len(jobs) - 1} "
-          f"{'probes' if args.flags else 'variants'} and the baseline, {len(results)} compiled")
+          f"{'probes' if args.flags else 'variants'} and the baseline, {len(results)} compiled"
+          + ("; scores shown as shape/raw" if args.shape else ""))
     if args.flags:
         print("DIAGNOSTICS ONLY: a flag or multifile partner that scores better is a lead, not evidence; see "
               "docs/CONTRIBUTING.md (\"Compiler flags need evidence\", \"--multifile\") before changing config/project.json")
     width = max(len(label) for _i, label, _r in rows)
     for _index, label, result in order:
         shown = "FAIL" if result["score"] is None else str(result["score"])
+        if args.shape and result["score"] is not None:
+            shown = f"{result.get('shape', 0)}/{shown}"
         detail = result["error"] if result["status"] == "FAIL" else result["status"]
         if result.get("same"):
             detail += f" (same text as {result['same']})"
