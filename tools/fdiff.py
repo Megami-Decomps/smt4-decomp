@@ -1,6 +1,6 @@
 """Compile one function and diff its code against the retail function.
 
-    python -B tools/fdiff.py <game> <function> [--no-build]
+    python -B tools/fdiff.py <game> <function> [--no-build] [--shape]
 
 Builds the function's unit with the game's build.py, disassembles the retail target object and
 the compiled object with relocations, and prints the instructions that differ. Branch and pool
@@ -9,6 +9,12 @@ IDENTICAL when the code and relocations agree: that function is then expected to
 objdiff and to be proven by `tools/relink.py --matched`. A pool word that points into the
 object's own `.constdata`/`.data`/`.bss` where retail's names a symbol (`DAT_x`) counts as equal:
 the note after IDENTICAL says so, and relink.py is what checks the address.
+
+`--shape` also prints a shape score: the diff with branch targets and pc-relative offsets blanked
+and pool words compared as a set (each one present on one side only counts once). In a large
+function most raw lines are knock-on shifts of a few real differences; the shape score counts the
+real ones, so it is the better guide when judging variants. It is a diagnostic: a match is still
+IDENTICAL by the raw diff.
 """
 
 import argparse
@@ -194,11 +200,54 @@ def compare(tool, target, obj, what):
     return diff, note, len(retail), len(built)
 
 
+BRANCH = re.compile(r"^(b(?:lx?|x)?(?:eq|ne|cs|cc|hs|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?(?:\.[nw])?)\s+[0-9a-f]+$")
+CBZ = re.compile(r"^(cbn?z\s+\w+, )[0-9a-f]+$")
+PC_OFFSET = re.compile(r"(\[pc, #)-?\d+(\])")
+PC_ADD = re.compile(r"^((?:add|sub|adr)\w*\s+\w+, pc, )#\d+$")
+DATA = (".word", ".short", ".byte", ".ascii")
+
+
+def shape_rows(rows):
+    """(instructions, pool words): the listing without addresses, branch targets and pc-relative
+    offsets blanked, and its data words set apart."""
+    code, pool = [], []
+    for row in rows:
+        row = re.sub(r"^\s*[0-9a-f]+: ", "", row)
+        if row.startswith(DATA):
+            pool.append(row)
+            continue
+        row = BRANCH.sub(r"\1\t<target>", row)
+        row = CBZ.sub(r"\1<target>", row)
+        row = PC_OFFSET.sub(r"\1N\2", row)
+        row = PC_ADD.sub(r"\1#N", row)
+        code.append(row)
+    return code, pool
+
+
+def shape_score(tool, target, obj):
+    """(score, diff): differing instruction lines after shape_rows, plus pool words found on one
+    side only (as a multiset)."""
+    retail_code, retail_pool = shape_rows(listing(tool, target))
+    built_code, built_pool = shape_rows(listing(tool, obj))
+    diff = list(difflib.unified_diff(retail_code, built_code, "retail", "built", n=2, lineterm=""))
+    score = sum(1 for line in diff if re.match(r"^[-+][^-+]", line))
+    left = list(built_pool)
+    unmatched = []
+    for word in retail_pool:
+        if word in left:
+            left.remove(word)
+        else:
+            unmatched.append("-" + word)
+    unmatched += ["+" + word for word in left]
+    return score + len(unmatched), diff + (["pool words on one side only:"] + unmatched if unmatched else [])
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("game", choices=["smt4", "smt4a"])
     parser.add_argument("function")
     parser.add_argument("--no-build", action="store_true", help="diff the existing object")
+    parser.add_argument("--shape", action="store_true", help="also print the shape score and its diff (diagnostic)")
     args = parser.parse_args()
     project = json.loads((ROOT / args.game / "config" / "project.json").read_text())
     unit = next((u for u in project["units"] if u["function"] == args.function), None)
@@ -219,6 +268,13 @@ def main():
         print(f"IDENTICAL: {args.game} {args.function} ({unit['source']}){note}")
         return
     print(f"DIFFERS: {args.game} {args.function} ({unit['source']}), retail {retail_rows} vs built {built_rows} rows")
+    if args.shape:
+        score, shape = shape_score(objdump(args.game), ROOT / args.game / unit["target"], ROOT / args.game / unit["object"])
+        raw = sum(1 for line in diff if re.match(r"^[-+][^-+]", line))
+        print(f"raw score {raw}, shape score {score} (branch targets and pc offsets ignored, pool words as a set)")
+        for line in shape:
+            print(line)
+        sys.exit(1)
     for line in diff:
         print(line)
     sys.exit(1)
