@@ -14,6 +14,8 @@
 #define BTL_ENTRY_FLAG_PRESENT  0x10
 #define BTL_ENTRY_FLAG_BLOCKED  0x40
 
+struct StatBlock;
+
 /* A persistent unit record, including its eight equipment item ids. */
 typedef struct BtlEquip {
     union {
@@ -114,6 +116,7 @@ typedef struct BtlUnitData {
     union {
         /* 0x1B0 */ BtlEquip *equipB;     /* [0x27C] */
         /* 0x1B0 */ BtlUnitLink *link;
+        /* 0x1B0 */ StatBlock *partyUnit; /* saved record of an active party member */
     };
     union {
         /* 0x1B4 */ u32 unk1B4;           /* [0x280] */

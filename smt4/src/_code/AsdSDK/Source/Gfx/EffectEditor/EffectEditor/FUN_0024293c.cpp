@@ -9,7 +9,7 @@ int effEditorNodeChainApply(unsigned char *);
 int padAlternateButtonIndex(...);
 int FUN_0024dd90(unsigned char *);
 int effMenuListAppend(void);
-int FUN_002826d4(int, int, int, int, unsigned int, unsigned int);
+int effMenuAppendColorRect(int, int, int, int, unsigned int, unsigned int);
 int FUN_00282780(int, int, int, int);
 int padIsButtonRepeat(...);
 int padIsButtonPressed(...);
@@ -54,7 +54,7 @@ extern float DAT_004d92c0; /* 0x4d92c0 */
 /* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
-/* Supplied declaration required: FUN_002826d4. */
+/* Supplied declaration required: effMenuAppendColorRect. */
 /* Supplied declaration required: FUN_00282780. */
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -235,7 +235,7 @@ LAB_00242b34:
   temp_v15[2] = (float)param_1[3];
   temp_v14[3] = 0;
   temp_v15[3] = (float)temp_v13;
-  FUN_002826d4(0xa8,0x74,0xb8,0x10,0x80808080,0xff000000);
+  effMenuAppendColorRect(0xa8,0x74,0xb8,0x10,0x80808080,0xff000000);
   temp_v13 = 0x43380000;
   temp_v5 = 0;
   do {

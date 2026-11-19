@@ -16,7 +16,7 @@ void FUN_0029bbc8(u8 id);
 void FUN_0029c1c8(u32 id, u32 a, u32 b);
 void FUN_0029bde4(StatBlock* record);
 s32 recordContainsPairedId(StatBlock* record, u32 skill);
-void FUN_002b7bca(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
+void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 dataTable06Sub1CompareBySortKeys(const void* a, const void* b);
 u32 flagCountUnlockedSlots(StatBlock* record);
 void unitRecalculateEffectiveStats(StatBlock* record);
@@ -58,7 +58,7 @@ u32 FUN_0033bb94(StatBlock* source, u32 arg, u16* outSkills)
             }
         }
     }
-    FUN_002b7bca(outSkills, 8, 2, dataTable06Sub1CompareBySortKeys);
+    qsort(outSkills, 8, 2, dataTable06Sub1CompareBySortKeys);
     s32 unlocked = flagCountUnlockedSlots(record);
     if (8 - added > 0) outSkills[added] = 0;
 

@@ -68,7 +68,7 @@ void nw_gfx_SceneTraverser_Begin(u32 node, u32 other);
 void FUN_0018d01c(u32 node);
 void asdGxCommandListBegin(u32 list);
 void asdGxCommandListEnd(u32 list, s32 arg);
-void FUN_0018e9d8(TransformBuilder *builder, u32 root);
+void nw_gfx_SceneNode_AttachChild(TransformBuilder *builder, u32 root);
 void asdGxCommandListStartRecord(u32 *recorder);
 s32 FUN_0018c8c8(char *buffer, s32 size, s32 limit, const char *format, u32 value);
 void FUN_00186a64(u32 *recorder);
@@ -96,7 +96,7 @@ void FUN_00176e84(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
         DrawDispatchArgs first = {renderer, job->state};
         _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, first);
         asdGxCommandListEnd(state->commandList, 0);
-        FUN_0018e9d8(g_asdModelTransformBuilder[pass], DAT_005b3c90[pass]);
+        nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[pass], DAT_005b3c90[pass]);
         FUN_00197eb0((u8 *)g_asdModelTransformBuilder[pass] + 16, DAT_005b3c98[pass]);
         builder = g_asdModelTransformBuilder[pass];
         roots = g_effAsdLightHandle[pass];

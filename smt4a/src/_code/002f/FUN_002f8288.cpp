@@ -17,7 +17,7 @@ extern int g_partyPanel; /* 0x57f268 */
 extern unsigned int gameGetSlotRecord(unsigned int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002c7bb0. */
-/* Supplied declaration required: FUN_003344b4. */
+/* Supplied declaration required: statusPreviewMpChange. */
 extern int FUN_003df57c(unsigned short, unsigned int);
 extern int skillGetAdjustedCost(unsigned int, unsigned short);
 
@@ -88,14 +88,14 @@ void FUN_002f8288(void)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);
   if (*(short *)(temp_v0 + 0x38) < 0) {
-    FUN_003344b4(*(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x40), *(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x44));
+    statusPreviewMpChange(*(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x40), *(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x44));
     return;
   }
   temp_v1 = 0;
   do {
     if (*(int *)(temp_v0 + temp_v1 * 8 + 0xa80) == (int)*(short *)(temp_v0 + 0x38)) {
       temp_v4 = temp_v0 + temp_v1 * 4;
-      FUN_003344b4(*(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x40), *(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x44));
+      statusPreviewMpChange(*(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x40), *(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x44));
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);

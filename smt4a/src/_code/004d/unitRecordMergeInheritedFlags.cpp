@@ -5,7 +5,7 @@
 
 extern "C" {
 void unitRecordBuild(u32 id, UnitRecord *record);
-void FUN_0035ad50(u32 id, UnitRecord *record);
+void unitRecordBuildFromSave(u32 id, UnitRecord *record);
 void unitRecomputeDerivedStats(UnitRecord *record);
 
 // Union inherited flags from the twelve selected saved or template unit records.
@@ -21,7 +21,7 @@ void unitRecordMergeInheritedFlags(u32, const ContentWordList *sources, UnitReco
             if (kind == 1) {
                 record = slotRecordFindById(id);
             } else if (kind == 3) {
-                FUN_0035ad50(id, &temporary);
+                unitRecordBuildFromSave(id, &temporary);
                 record = &temporary;
             } else if (kind == 2) {
                 unitRecordBuild(id, &temporary);

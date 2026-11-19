@@ -49,7 +49,7 @@ extern s32 FUN_00385b1c(u8 *table);
 extern HunterRecord *dataTable27Sub0GetRecord(u8 *table, s32 index);
 extern s32 dataTable27Sub0GetCount(u8 *table);
 extern s32 gameFlagIsSet(s32 flag);
-extern void FUN_002b7bca(void *base, s32 count, s32 size, s32 (*compare)(const HunterPick *, const HunterPick *));
+extern void qsort(void *base, s32 count, s32 size, s32 (*compare)(const HunterPick *, const HunterPick *));
 extern s32 randBetween(s32 low, s32 high);
 extern void FUN_0031e2bc(u32 text, u8 *name, s32 flag);
 
@@ -100,7 +100,7 @@ void FUN_003832fc(HunterCompany *company)
             break;
         }
     }
-    FUN_002b7bca(company->picks, company->pickCount, sizeof(HunterPick), sortCompareEntryKey);
+    qsort(company->picks, company->pickCount, sizeof(HunterPick), sortCompareEntryKey);
     if (company->randomizePoses == 1) {
         for (u32 i = 0; i < 6; i++) {
             bool found = false;

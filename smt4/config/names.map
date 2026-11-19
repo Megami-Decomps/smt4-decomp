@@ -5341,3 +5341,12 @@
 001f6098 fusionComparePairScoreAscending
 00273fc0 lmapUpdateSceneModels
 001978b4 campDrawCommandMenu
+002b7bca qsort
+002f7794 btlScriptDamageListedTargetPercent
+002826d4 effMenuAppendColorRect
+002e1898 campCecMenuIdleState
+0030bc90 scrCommCecGetCount
+00329b70 uniteEffectUpdate
+002daff4 campDrawSelectedEquipmentDetails
+00208504 mapDepartAdvanceCameraSequence
+003d2140 btlCommandEnterPhase

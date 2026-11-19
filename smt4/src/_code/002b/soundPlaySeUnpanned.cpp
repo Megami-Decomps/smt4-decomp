@@ -1,13 +1,12 @@
-#include "common.h"
+#include "sound/soundEffect.h"
 
 extern "C" {
-
-extern int soundPlaySePanned(unsigned int id, int param);
+s32 soundPlaySePanned(u32 id, u32 position);
 
 /* Calls soundPlaySePanned with its second argument fixed at 0. */
-void soundPlaySeUnpanned(unsigned int id)
+s32 soundPlaySeUnpanned(u32 id)
 {
-    soundPlaySePanned(id, 0);
+    return soundPlaySePanned(id, 0);
 }
 
 } /* extern "C" */

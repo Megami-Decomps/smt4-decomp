@@ -11,7 +11,7 @@ extern "C" {
 int statusPanelSetOpen(...);
 int FUN_0029defc(...);
 int gridNavigationConfigure(...);
-int FUN_002b7bca(...);
+int qsort(...);
 int nkmBaseGetRecord(void);
 int asdMemFree(...);
 
@@ -91,7 +91,7 @@ extern int gameGetSlotTable(void);
 extern int gameCountUnits(void);
 /* Supplied declaration required: partyMemberFindById. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: threadSleepDuration. */
 extern int gameDataBlocksGetSaveData(void);
@@ -587,15 +587,15 @@ LAB_001dedf4:
                 piVar12 = (int *)((int)piVar12 + 1);
               }
               asdMemFree(piVar8);
-              FUN_002b7bca(temp_v19,param_1[0x16d],8,&LAB_002dcf9c);
+              qsort(temp_v19,param_1[0x16d],8,&LAB_002dcf9c);
             }
             else {
-              FUN_002b7bca(temp_v19,temp_v13,8,FUN_002d0544);
+              qsort(temp_v19,temp_v13,8,FUN_002d0544);
             }
           }
           else {
             gameFlagSetValue(0x461, 0, 1);
-            FUN_002b7bca(temp_v19,param_1[0x16d],8,&LAB_002dcf9c);
+            qsort(temp_v19,param_1[0x16d],8,&LAB_002dcf9c);
             temp_v13 = 0;
             temp_v14 = 0;
             if (*temp_v29 != 0) {
@@ -714,34 +714,34 @@ LAB_001df3cc:
           temp_v15 = ~(*pbVar20 >> 7) & 1;
           if ((*pbVar20 & 0x7f) == 1) {
             if (temp_v15 != 0) {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareRaceLevelDescending);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareRaceLevelDescending);
             }
             else {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByRankGradeId);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByRankGradeId);
             }
           }
           if ((*pbVar20 & 0x7f) == 2) {
             if (temp_v15 != 0) {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_001d1d78);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,FUN_001d1d78);
             }
             else {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002c6e90);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002c6e90);
             }
           }
           if ((*pbVar20 & 0x7f) == 0x31) {
             if (temp_v15 != 0) {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareBySetCategoryGrade);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareBySetCategoryGrade);
             }
             else {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompare);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,devilCompare);
             }
           }
           if ((*pbVar20 & 0x7f) == 3) {
             if (temp_v15 != 0) {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareTablePriority);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareTablePriority);
             }
             else {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByEntryValue);
+              qsort(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByEntryValue);
             }
           }
         }

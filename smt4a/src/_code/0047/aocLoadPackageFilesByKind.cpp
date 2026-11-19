@@ -1,14 +1,14 @@
-/* NON_MATCHING: path-buffer address setup and the empty-directory guard are scheduled differently. */
-#include "runtime/Stdio.h"
+/* NON_MATCHING: only the empty-file-list guard: retail branches on the count before forming the mount name's address (group + 0x24). */
+#include <stdio.h>
 #include "addon/AocSystemA.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/TableEntryCache.h"
 #include <string.h>
 
 struct AocDisplay;
+static const char s_packagePathFormat[] = "%s/%s";
 extern "C" {
 extern AocDisplay *g_aocDisplay;
-extern const char DAT_005265ac[];
 void *FUN_001b2ebc(AocDisplay *display, const char *path, s32 option,
                    void *size, s32 enabled, s32 alignment, s32 flags);
 
@@ -32,7 +32,7 @@ void aocLoadPackageFilesByKind(AocSystemA *owner, s32 kind, s32 capacity, AocPac
                     return;
                 memcpy(&output[outputIndex], &group->files[index], offsetof(AocPackageFile, unk0E));
                 AocPackageFile *slot = &output[outputIndex];
-                __2sprintf(path, DAT_005265ac, directory, record->name);
+                sprintf(path, s_packagePathFormat, directory, record->name);
                 slot->data = FUN_001b2ebc(g_aocDisplay, path, 0, &slot->result, 1, 0x80, 0);
                 slot->available = 1;
                 owner->states[outputIndex++].requested = 1;

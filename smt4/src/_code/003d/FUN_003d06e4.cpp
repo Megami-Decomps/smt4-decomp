@@ -10,7 +10,7 @@ extern "C" {
 s32 sortRecordCompareKey(const void *a, const void *b);
 s32 FUN_002197a0(const void *a, const void *b);
 s32 unitCompareByPriorityValue(const void *a, const void *b);
-void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
+void qsort(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_003d10a0(BtlMainState **block, CommandState *state, BtlEntry **units, s32 count, s32 mode);
 void btlEntryGetPassiveSkillIds(BtlEntry *entry, u16 *skills);
 s32 FUN_0029a9d4(u32 id, s32 arg);
@@ -33,16 +33,16 @@ void FUN_003d06e4(BtlMainState **block, CommandState *state)
             count++;
         }
     }
-    FUN_002b7bca(units, count, 4, sortRecordCompareKey);
+    qsort(units, count, 4, sortRecordCompareKey);
     if (FUN_003d10a0(block, state, units, count, 1) != 0) {
         return;
     }
     u16 skills[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     btlEntryGetPassiveSkillIds(state->entry, skills);
     if ((state->entry->flags & 2) != 0) {
-        FUN_002b7bca(skills, 9, 2, FUN_002197a0);
+        qsort(skills, 9, 2, FUN_002197a0);
     } else {
-        FUN_002b7bca(skills, 9, 2, unitCompareByPriorityValue);
+        qsort(skills, 9, 2, unitCompareByPriorityValue);
     }
     for (s32 i = 0; i < 9; i++) {
         if (skills[i] != 0) {

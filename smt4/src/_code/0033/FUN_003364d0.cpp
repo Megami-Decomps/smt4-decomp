@@ -4,7 +4,7 @@
 #include "battle/btlAction.h"
 
 extern "C" {
-void FUN_002b7bca(void *base, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
+void qsort(void *base, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
 s32 sortCompareWeightDescending(const void *a, const void *b);
 }
 
@@ -70,7 +70,7 @@ extern "C" void FUN_003364d0(BtlMainState *state, u32 flags)
             }
         }
     }
-    FUN_002b7bca(groups, groupCount, sizeof(ActionGroup), sortCompareWeightDescending);
+    qsort(groups, groupCount, sizeof(ActionGroup), sortCompareWeightDescending);
 
     for (s32 index = 4; index < 54; index++) {
         BtlActionRecord *action = &state->actions[index];

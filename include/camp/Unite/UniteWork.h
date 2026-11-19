@@ -213,6 +213,11 @@ struct UniteWorkA {
         /* 0x0000 */ void *context;
         struct {
             /* 0x0000 */ u8 unk0000[0x1C8];
+            /* 0x01C8 */ UiSpriteState open;
+            /* 0x0254 */ UiSpriteState listOffset;
+        } sprites;
+        struct {
+            /* 0x0000 */ u8 unk0000[0x1C8];
             /* 0x01C8 */ u8 timer[1];
         } event;
         struct {
@@ -239,11 +244,21 @@ struct UniteWorkA {
         struct {
             /* 0x0404 */ s32 previous;
             /* 0x0408 */ s32 saved;
+            /* 0x040C */ s32 returnTo;
         } history;
     };
     /* 0x0434 */ s32 request;
     /* 0x0438 */ union {
         /* 0x0438 */ u8 unk0438[0x8E88];
+        struct {
+            /* 0x0438 */ u8 unk0438[0x3A];
+            /* 0x0472 */ s16 scrollUpRegion;
+            /* 0x0474 */ s16 scrollDownRegion;
+            /* 0x0476 */ s16 scrollThumbRegion;
+            /* 0x0478 */ u8 unk0478[0x84];
+            /* 0x04FC */ ScrollSelection sourceList;
+            /* 0x0560 */ ScrollSelection partnerList;
+        } selectionLists;
         struct {
             /* 0x0438 */ u8 unk0438BeforeSelection[0x8A50];
             /* 0x8E88 */ s16 selectedIndex;
@@ -267,7 +282,9 @@ struct UniteWorkA {
         struct {
             /* 0x0438 */ u8 unk0438[0x54];
             /* 0x048C */ u32 soundChannel;
-            /* 0x0490 */ u8 unk0490[0x8C00];
+            /* 0x0490 */ u8 unk0490[0x8BE1];
+            /* 0x9071 */ s8 helpAvailable;
+            /* 0x9072 */ u8 unk9072[0x1E];
             /* 0x9090 */ u8 busy;
             /* 0x9091 */ u8 unk9091[0x13];
             /* 0x90A4 */ u32 unk90A4;
@@ -324,7 +341,9 @@ struct UniteWorkA {
             /* 0x8F7A */ u16 selectedCount;
         } selectionCountA;
         struct {
-            /* 0x0438 */ u8 unk0438[0x8E44];
+            /* 0x0438 */ u8 unk0438[0x8E40];
+            /* 0x9278 */ u8 highlightFrame;
+            /* 0x9279 */ u8 unk9279[3];
             /* 0x927C */ u32 ids[1];
         } optionNamesA;
         struct {
@@ -337,6 +356,13 @@ struct UniteWorkA {
         } inheritanceA;
     };
 };
+
+typedef char UniteWorkADrawOffsets[
+    offsetof(UniteWorkA, sprites.open) == 0x1C8 && offsetof(UniteWorkA, sprites.listOffset) == 0x254 &&
+    offsetof(UniteWorkA, history.returnTo) == 0x40C && offsetof(UniteWorkA, selectionLists.scrollUpRegion) == 0x472 &&
+    offsetof(UniteWorkA, selectionLists.sourceList) == 0x4FC && offsetof(UniteWorkA, selectionLists.partnerList) == 0x560 &&
+    offsetof(UniteWorkA, returnState.helpAvailable) == 0x9071 && offsetof(UniteWorkA, returnState.busy) == 0x9090 &&
+    offsetof(UniteWorkA, optionNamesA.highlightFrame) == 0x9278 && sizeof(UniteWorkA) == 0x92C0 ? 1 : -1];
 
 typedef char UniteWorkBlockedOffsetCheck[
     offsetof(UniteWork, blocked) == 0x9450 && sizeof(UniteWork) == 0x95F8 ? 1 : -1];

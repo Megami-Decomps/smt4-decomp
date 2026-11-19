@@ -125,4 +125,22 @@ extern "C" {
 extern AsdSoundSystemA g_asdSoundSystem;
 }
 
+/* The registered sound node with `id`, NULL when none is registered: the walk the registered-sound
+ * functions (asdSoundRegisteredSetPause, asdSoundRegisteredStop, asdSoundRegisteredRestart) each have inline. */
+static __inline AsdSndHandleNode *asdSoundRegisteredFind(s32 id)
+{
+    AsdSoundSystemA *system = &g_asdSoundSystem;
+    AsdSndHandleNode *node = system->registered.handles;
+    for (s32 index = 0; index < system->registered.count; ++index) {
+        if (node == NULL) {
+            break;
+        }
+        if (node->id == id) {
+            return node;
+        }
+        node = node->next;
+    }
+    return NULL;
+}
+
 #endif

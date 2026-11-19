@@ -22,7 +22,7 @@ struct BattleActionOrderEntry {
 };
 extern "C" {
 s32 sortCompareWeightAscending(const void *left, const void *right);
-void FUN_002b7bca(void *records, u32 count, u32 stride,
+void qsort(void *records, u32 count, u32 stride,
                   s32 (*compare)(const void *, const void *));
 
 /* Numbers the flagged actions of each group (field 0x45) in ascending weight order. */
@@ -44,7 +44,7 @@ void btlAssignGroupedActionOrder(BtlMainState *state, u32 unusedFlags)
                 ++count;
             }
         }
-        FUN_002b7bca(entries, count, sizeof(BattleActionOrderEntry), sortCompareWeightAscending);
+        qsort(entries, count, sizeof(BattleActionOrderEntry), sortCompareWeightAscending);
         u32 order = 0;
         s32 actionIndex;
         for (s32 index = 0; index < 20; ++index) {

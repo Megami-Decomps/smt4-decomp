@@ -5003,3 +5003,12 @@
 00273fc0 lmapUpdateSceneModels inferred per-frame update of the local map scene's player, marker and stage models (motion frames, poses, visibility)
 001978b4 campDrawCommandMenu inferred draws the camp command menu from CampComTable (command sprites, grid, texture draws)
 002be624 __2sprintf evidence armlib sprintf entry (armcc 4.1 calls sprintf as __2sprintf): retail callers keep the prologue armcc gives a sprintf call under <stdio.h> (R_ARM_NONE _printf_* feature refs on the first instruction), FUN_0022d9c8 IDENTICAL as sprintf; 0x28-byte Thumb armlib body (_printf_char_common with the _sputc writer, then the NUL)
+002b7bca qsort evidence armlib qsort: its 0x88 Thumb bytes are identical to smt4a qsort (0x10063a); dataTableSortLookupSections calls it at the same sites as the smt4a twin, whose <stdlib.h> qsort form scores 40->16 here once named (build/w45_dataTableSortLookupSections_after_qsort.cpp)
+002f7794 btlScriptDamageListedTargetPercent inferred script command: damages the listed target by argument-1 percent of its maximum HP and queues effect message 0x10001c1 (sibling of btlScriptApplyPercentHpMpEffect)
+002826d4 effMenuAppendColorRect inferred effMenu helper appending a rectangle with two packed colour words (callers pass 0x80808080 / 0xff000000); smt4a twin FUN_002cf28c
+002e1898 campCecMenuIdleState inferred StreetPass menu idle state: dispatches the selected action (substate 1-3) and keeps the idle help and saved banner up; smt4a twin FUN_0035a2a4
+0030bc90 scrCommCecGetCount inferred script command: returns the current StreetPass count or the selected saved entry's count; smt4a twin FUN_0039ec04
+00329b70 uniteEffectUpdate inferred fusion effect sequence update (TMD CALC callback registered by uniteStartEffectProcesses)
+002daff4 campDrawSelectedEquipmentDetails inferred draws the selected equipment row and its comparison with the equipped item
+00208504 mapDepartAdvanceCameraSequence inferred map departure caller's six staged camera moves
+003d2140 btlCommandEnterPhase inferred battle command phase dispatcher; its caller forwards the pending phase after committing it

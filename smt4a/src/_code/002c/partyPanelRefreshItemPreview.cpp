@@ -33,11 +33,11 @@ void partyPanelRefreshItemPreview(void)
         }
     }
     if (panel->selection < 0) {
-        FUN_003344b4(partyWidgetGetX(panel->characters[0]), partyWidgetGetCost(panel->characters[0]));
+        statusPreviewMpChange(partyWidgetGetX(panel->characters[0]), partyWidgetGetCost(panel->characters[0]));
     } else {
         for (s32 index = 0; index < 24; ++index) {
             if (static_cast<s32>(panel->entries[index].packedIndex) == panel->selection) {
-                FUN_003344b4(partyWidgetGetX(panel->demons[index]), partyWidgetGetCost(panel->demons[index]));
+                statusPreviewMpChange(partyWidgetGetX(panel->demons[index]), partyWidgetGetCost(panel->demons[index]));
             }
         }
     }

@@ -1,19 +1,10 @@
-/* NON_MATCHING: only the mode switch's store order differs: retail stores the new mode before the remembered one (here the remembered mode is stored first; the shared enterMode shape with FUN_0041f110 gives retail's registers). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/SaveSlotHeaderWork.h"
-
-/* Switches to another mode, remembering the one it leaves. */
-static void enterMode(SaveSlotHeaderWork *work, u8 mode)
-{
-    work->previousMode = work->mode;
-    work->mode = mode;
-}
 
 extern "C" {
 u32 scrRunOpcodesStub(ScriptProcess *script);
 void saveLoadProcessCreate(s32 slot, s32 mode);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
-void FUN_00420a2c(SaveSlotHeaderWork *work);
 s32 byteTripleGetV0();
 s32 byteArr5Get3();
 const void *gameDataBlocksGetTable();
@@ -39,7 +30,7 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
         if (work->scriptPending) {
             scrRunOpcodesStub(work->script);
         }
-        FUN_00420a2c(work);
+        saveLoadUiAdvanceSprites(work);
         if (!byteTripleGetV0()) {
             return;
         }
@@ -71,11 +62,11 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
         if (work->scriptPending) {
             scrRunOpcodesStub(work->script);
         }
-        if (uiSpriteGetCompletionState(&work->sprites[work->spriteCount]) != 0) {
+        if (uiSpriteGetCompletionState(&work->slotSprites[work->spriteCount - 1]) != 0) {
             ++work->step;
             return;
         }
-        FUN_00420a2c(work);
+        saveLoadUiAdvanceSprites(work);
         return;
     case 3:
         if (work->scriptPending) {
@@ -84,9 +75,7 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
             }
             work->scriptPending = 0;
         }
-        enterMode(work, 0x13);
-        work->step = 0;
-        work->phase = 0;
+        saveLoadUiChangeMode(work, 19, 0);
         return;
     }
 }

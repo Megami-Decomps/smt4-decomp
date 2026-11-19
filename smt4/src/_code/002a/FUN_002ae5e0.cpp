@@ -1,13 +1,15 @@
-/* NON_MATCHING: Glyph-case tail layout, work/index saved registers, timer argument scheduling and the selected-field address differ. */
+/* NON_MATCHING: only the touchPressed clear differs: retail forms the 0x4BC halfword's base (work + 0x400) separately
+ * and stores it after the FUN_002ae028 argument; the build reuses one base. FUN_001385f8 has the same residue. */
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelpGlobal.h"
 #include <string.h>
 
 extern "C" {
 u16 FUN_002aa024(s32 resource, s32 glyph);
-void FUN_002a9fdc(UiSpriteState *unit, s32 value);
+void FUN_002a9fdc(UiSpriteState *unit, s32 state, s32 mode);
 void FUN_002ae028(void *animation);
 
+/* Rebuilds the button-help touch regions for the six slots, restarts the panel sprites and clears the touch flags. */
 void FUN_002ae5e0(void)
 {
     ButtonHelpWork *work = g_buttonHelp.work;
@@ -19,12 +21,18 @@ void FUN_002ae5e0(void)
         }
         if (kind == 7) {
             work->touchRegions[index] = FUN_002aa024(0x12, 0x73);
-        } else if (kind == 8) {
+            continue;
+        }
+        if (kind == 8) {
             work->touchRegions[index] = FUN_002aa024(0x12, 0x59);
-        } else if (kind == 9) {
+            continue;
+        }
+        if (kind == 9) {
             work->touchRegions[index] = FUN_002aa024(0x12, 0x85);
-        } else if ((kind == 10 || kind == 11) || (kind == 12 || kind == 13) ||
-                   (kind == 14 || kind == 15 || kind == 16)) {
+            continue;
+        }
+        if ((kind == 10 || kind == 11) || (kind == 12 || kind == 13) ||
+            (kind == 14 || kind == 15 || kind == 16)) {
             switch (index) {
             case 0:
             case 1:
@@ -47,7 +55,7 @@ void FUN_002ae5e0(void)
         if (work->mode == 1) {
             timerStart(&work->panelSprites[index], 2, 0);
         } else {
-            FUN_002a9fdc(&work->panelSprites[index], 0);
+            FUN_002a9fdc(&work->panelSprites[index], 0, 0);
         }
     }
     memset(work->touchPressed, 0, sizeof(work->touchPressed));

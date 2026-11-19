@@ -4,7 +4,7 @@
 #include "game/GameGlobalsRef.h"
 
 extern "C" {
-void FUN_0035ad50(u32 id, void *record);
+void unitRecordBuildFromSave(u32 id, void *record);
 void FUN_0026fd50(void *display, const void *record, u32 mode, u32 options);
 
 // Load a character into the session display and update whether it can be selected.
@@ -14,7 +14,7 @@ void FUN_0034a9c4(u32 id, u32 options)
     ObjB *session = g_gameGlobals.instance;
     bool allowed = true;
     session->sessionDisplay.active = 1;
-    FUN_0035ad50(id, record);
+    unitRecordBuildFromSave(id, record);
     session->unk2017 = 5;
     FUN_0026fd50(session->block1390, record, 0, options);
     session->unk20B0 = 1;

@@ -6,6 +6,7 @@
 #include "battle/BtlEntry.h"
 
 struct BtlActionRecord;
+struct BtlMainState;
 
 /* The acting combatant's command object: what it may respond with and the choice the player made. */
 struct CommandSelection {
@@ -22,7 +23,9 @@ struct CommandSelection {
 /* The command controller's state: the open windows, the player's selection and the ordered target slots. */
 struct CommandState {
     /* 0x000 */ u32 flags;                /* 0x80: first window done, 0x1000: second window done */
-    /* 0x004 */ u8 unk004[0x1c];
+    /* 0x004 */ u8 unk004[8];
+    /* 0x00C */ u32 phaseTimer;
+    /* 0x010 */ u8 unk010[0x10];
     /* 0x020 */ BtlEntry *entry;          /* the acting combatant; flag bit 1: it can use items */
     /* 0x024 */ BtlActionRecord *record;
     /* 0x028 */ CommandSelection *selection;
@@ -72,7 +75,13 @@ struct CommandInfo {
     /* 0x1d */ u8 unk1d[3];
 };
 
+extern "C" {
+void btlCommandEnterPhase(BtlMainState **block, s32 phase);
+void FUN_00244fb0(BtlMainState *state, u32 slot, u32 palette, u32 frames, u32 alpha);
+}
+
 typedef char CommandControllerOffsets[
+    offsetof(CommandState, phaseTimer) == 0xC &&
     offsetof(CommandSelection, kind) == 0x14c &&
     offsetof(CommandState, windowId) == 0x2c &&
     offsetof(CommandState, mode) == 0x30 &&

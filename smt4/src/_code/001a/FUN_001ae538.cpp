@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029_VariantA.h"
+#include "camp/CampEquipment.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_00283f80(...);
 int FUN_0028f870(...);
 int gameGetPlayerData(void);
 int texDrawCompositeSprite(...);
-int FUN_002daff4(...);
 
 /* stack frame of param_4: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -33,7 +33,6 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002daff4. */
 
 
 void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -198,7 +197,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     temp_v1 = listCursorGetRowIfUnblocked(temp_v9);
     temp_v0 = *(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2);
     temp_v6 = listCursorGetRowIfUnblocked(temp_v9);
-    FUN_002daff4(temp_v10,temp_v6 + 2,temp_v0,temp_v11,param_3);
+    campDrawSelectedEquipmentDetails(temp_v10,temp_v6 + 2,temp_v0,temp_v11,param_3);
   }
   return;
 }

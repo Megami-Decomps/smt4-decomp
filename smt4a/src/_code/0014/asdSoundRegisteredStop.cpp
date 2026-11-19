@@ -1,4 +1,4 @@
-/* NON_MATCHING: recovered incoming fade frames and canonical sound owner; search-match and stop-flag branch block placement still differs. */
+/* NON_MATCHING: recovered incoming fade frames and canonical sound owner; with the shared registered-node walk only the zero for the retired node's unk08 differs (here hoisted into r6, retail materialises it at the store), which shifts the branch offsets. */
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
@@ -6,19 +6,11 @@ void asdSoundObjectStop(s32 handle, s32 frames);
 s32 FUN_0016003c(s32 handle);
 
 // Request a registered sound's stop, then retire its node once playback has ended.
-u32 FUN_00140924(s32 id, s32 frames)
+u32 asdSoundRegisteredStop(s32 id, s32 frames)
 {
     u32 retired = 0;
-    AsdSoundSystemA *system = &g_asdSoundSystem;
-    AsdSndHandleNode *node = system->registered.handles;
-    for (s32 i = 0; i < system->registered.count; ++i) {
-        if (node == NULL) {
-            break;
-        }
-        if (node->id != id) {
-            node = node->next;
-            continue;
-        }
+    AsdSndHandleNode *node = asdSoundRegisteredFind(id);
+    if (node != NULL) {
         if ((node->value & 0x10) == 0) {
             if (node->handle != 0) {
                 asdSoundObjectStop(node->handle, frames);
@@ -30,7 +22,6 @@ u32 FUN_00140924(s32 id, s32 frames)
             retired = 1;
             node->unk08 = 0;
         }
-        break;
     }
     return retired;
 }

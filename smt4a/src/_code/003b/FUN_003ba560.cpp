@@ -13,7 +13,7 @@ typedef char ModelLightBindingLayoutCheck[offsetof(ModelLightBinding, track) == 
 extern "C" {
 u32 asdModelGetSlotArray0(s32 slot);
 void FUN_0032c518(void *model, s32 slot);
-void FUN_0018e9d8(u32 node, u32 value);
+void nw_gfx_SceneNode_AttachChild(u32 node, u32 value);
 void settings5BAddFlags(u32 flags);
 void effApplyModelLight(s32 slot);
 f32 nw_anim_PlayPolicy_Loop(f32 lower, f32 upper, f32 value);
@@ -45,12 +45,12 @@ extern "C" void FUN_003ba560(ModelLightBinding *binding, s32 slot)
     if (slot != 0) {
         if (slot != 1)
             return;
-        FUN_0018e9d8(node, binding->value);
+        nw_gfx_SceneNode_AttachChild(node, binding->value);
         settings5BAddFlags(2);
         trackSetLoopPolicy(binding->track, 0);
         effApplyModelLight(1);
     } else {
-        FUN_0018e9d8(node, binding->value);
+        nw_gfx_SceneNode_AttachChild(node, binding->value);
         settings5BAddFlags(1);
         trackSetLoopPolicy(binding->track, 0);
         effApplyModelLight(0);

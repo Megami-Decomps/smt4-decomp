@@ -4,6 +4,7 @@
 #include <stddef.h>
 struct BtlEntry;
 struct BtlActionRecord;
+struct BtlMainState;
 struct ActionStateChannelOwner {
     /* 0x00 */ u8 unk00[0xC];
     /* 0x0C */ u32 jobs[4];
@@ -11,7 +12,10 @@ struct ActionStateChannelOwner {
     /* 0x84 */ s32 current;
 };
 struct ActionStateChannel {
-    /* 0x000 */ ActionStateChannelOwner *owner;
+    union {
+        /* 0x000 */ ActionStateChannelOwner *owner;
+        /* 0x000 */ BtlMainState *battle;
+    };
     /* 0x004 */ u32 flags;
     /* 0x008 */ s8 state;
     /* 0x009 */ s8 pending;

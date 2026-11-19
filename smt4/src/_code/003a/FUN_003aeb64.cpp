@@ -36,7 +36,7 @@ struct OrderPair {
 extern "C" {
 s32 btlFindNthActiveSpecialEntry(BtlMainState *state, s32 arg);
 s32 recordCompareFloatKey(const void *a, const void *b);
-void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
+void qsort(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 PartySlot *saveResolvePartySlot(s32 index);
 
 /* The side (0 or 1) an unplaced unit is listed under. */
@@ -79,10 +79,10 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
         }
     }
     if (orderCount[0] > 1) {
-        FUN_002b7bca(order[0], orderCount[0], 8, recordCompareFloatKey);
+        qsort(order[0], orderCount[0], 8, recordCompareFloatKey);
     }
     if (orderCount[1] > 1) {
-        FUN_002b7bca(order[1], orderCount[1], 8, recordCompareFloatKey);
+        qsort(order[1], orderCount[1], 8, recordCompareFloatKey);
     }
     s32 rowCount = 0;
     s32 seenCount = 0;

@@ -1,4 +1,7 @@
-/* NON_MATCHING: same calls, constants, switch tables and stack slots as retail (693 vs 699 rows). Retail saves x before y on entry, schedules the argument loads of several text draws in another order (the entry and offset coordinates are summed in the other order or registers), and in the stat loop computes the arrow sprite's position before the after/before comparison where armcc repeats it in both branches. */
+/* NON_MATCHING: same calls, constants, switch tables and stack slots as retail (693 vs 691 rows). Retail saves x before y
+ * on entry; it picks other scratch registers or load orders for the argument blocks of five of the eight number draws and
+ * of the second render-state change; and in the stat loop it writes the sprite-158 draw's stack arguments with two str
+ * (here strd) and gives the 165 and 166 draws each other's store form. */
 #include "result/Result.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
@@ -47,7 +50,7 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, table, 143, entry->x + x, entry->y + y, 106);
     texDrawTableEntryAtStoredOrigin(2, table, 145, entry->x + x, entry->y + y, 106);
     offset = asdTMTexTableEntryAt(table, 149);
-    FUN_002bdf94(0, offset->x + entry->x + x, offset->y + entry->y + y, 1, 4, 106, "%d", before);
+    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", before);
     offset = asdTMTexTableEntryAt(table, 153);
     drawSetColorFromRGBA8(0x72e027ff);
     FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", after);
@@ -63,7 +66,7 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", before);
     offset = asdTMTexTableEntryAt(table, 153);
     drawSetColorFromRGBA8(0x72e027ff);
-    FUN_002bdf94(0, offset->x + entry->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", after);
+    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 4, 106, "%d", after);
     gxResetColorQuadToWhite();
 
     for (s32 i = 0; i < 5; ++i) {
@@ -142,10 +145,10 @@ void resultDrawLevelUpPanel(ResultWork *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, table, 169, entry->x + x, entry->y + y, 106);
     texDrawTableEntryAtStoredOrigin(2, table, row + 170, entry->x + x, entry->y + y, 106);
     offset = asdTMTexTableEntryAt(table, 182);
-    FUN_002bdf94(0, entry->x + offset->x + x, offset->y + entry->y + y, 1, 3, 111, "%d", before);
+    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 111, "%d", before);
     offset = asdTMTexTableEntryAt(table, 185);
     drawSetColorFromRGBA8(after > before ? 0x72e027ff : 0xffffffff);
-    FUN_002bdf94(0, entry->x + offset->x + x, offset->y + entry->y + y, 1, 3, 111, "%d", after);
+    FUN_002bdf94(0, entry->x + offset->x + x, entry->y + offset->y + y, 1, 3, 111, "%d", after);
     gxResetColorQuadToWhite();
     texDrawTableEntryAtStoredOrigin(2, table, 175, entry->x + x, entry->y + y, 111);
     texDrawTableEntryAtStoredOrigin(2, table, 178, entry->x + x, entry->y + y, 111);

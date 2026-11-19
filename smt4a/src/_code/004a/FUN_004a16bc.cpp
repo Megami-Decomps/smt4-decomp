@@ -56,7 +56,7 @@ void sendEvent100020E(void);
 void screen4AEnter(QuestMenu *menu);
 void uniteCreatePreviewModel(void);
 void sysPlaySe(u32 id);
-void FUN_0035ad50(u32 id, char *buffer);
+void unitRecordBuildFromSave(u32 id, char *buffer);
 void FUN_0032d0c8(s32 a, s32 b, u32 id, void *data);
 
 // Per-frame input for the quest menu: start the detail view, confirm the page or cancel.
@@ -112,7 +112,7 @@ void FUN_004a16bc(QuestMenu *menu)
             FUN_0032d0c8(0, 1, (u16)id, slotRecordFindById((u16)id));
         } else {
             char text[304];
-            FUN_0035ad50((u16)id, text);
+            unitRecordBuildFromSave((u16)id, text);
             FUN_0032d0c8(0, 1, (u16)id, text);
         }
         return;

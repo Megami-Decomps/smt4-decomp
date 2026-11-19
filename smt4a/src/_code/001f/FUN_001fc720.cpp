@@ -24,7 +24,7 @@ int skillDataFindById(void);
 int statusDownDrawIndicatorPairs(int, int);
 int FUN_002c7e24(void);
 int unitRecordBuild(int, unsigned char [300]);
-int FUN_0035ad50(int, unsigned char [300]);
+int unitRecordBuildFromSave(int, unsigned char [300]);
 int statDrawClampedDelta(...);
 int recordFindAcceptedById(int);
 int recordContainsPairedId(...);
@@ -79,7 +79,7 @@ extern int FUN_002c7e3c(void);
 extern int FUN_002c7e54(void);
 /* Supplied declaration required: unitRecordBuild. */
 extern int uiSearchPrimary(int);
-/* Supplied declaration required: FUN_0035ad50. */
+/* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: recordFindAcceptedById. */
 extern unsigned int FUN_003df57c(unsigned short, unsigned int);
@@ -179,7 +179,7 @@ void FUN_001fc720(int param_1,int param_2)
         }
       }
       else {
-        FUN_0035ad50(*(unsigned short *)(temp_v25 + 0x98),temp_v19);
+        unitRecordBuildFromSave(*(unsigned short *)(temp_v25 + 0x98),temp_v19);
       }
       if (*(short *)(temp_v25 + 0x98) < 0) {
         temp_v3 = countUnlockedSlots();

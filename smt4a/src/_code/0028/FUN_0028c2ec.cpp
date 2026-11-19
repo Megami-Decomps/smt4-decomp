@@ -91,7 +91,7 @@ void FUN_0028c2ec(u32 id, s32 direct)
             }
             FUN_002c7bb0(panel->selection, slot, panel->previewItem, &out);
             panel->characters[position + 1]->result = out;
-            FUN_003344b4(out, panel->characters[position + 1]->value);
+            statusPreviewMpChange(out, panel->characters[position + 1]->value);
             return;
         }
         if (panel->alternate != 0) {
@@ -103,7 +103,7 @@ void FUN_0028c2ec(u32 id, s32 direct)
     }
     FUN_002c7bb0(panel->selection, panel->entries[index].packedIndex, panel->previewItem, &out);
     panel->demons[index]->result = out;
-    FUN_003344b4(out, panel->demons[index]->value);
+    statusPreviewMpChange(out, panel->demons[index]->value);
 }
 
 } /* extern "C" */

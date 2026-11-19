@@ -25,7 +25,7 @@ typedef struct QuestEntry {
 extern QuestMenu *g_uiQuest;
 
 extern u32 FUN_0029ee54(QuestCursor *cursor);
-extern void FUN_002b7bca(void *list, u32 count, u32 size, SortCompare compare);
+extern void qsort(void *list, u32 count, u32 size, SortCompare compare);
 extern void FUN_0027f3dc(void *list, u32 count, u32 size, SortCompare compare);
 
 extern int entryCompareFlagsCategoryOrder(const void *, const void *);
@@ -54,30 +54,30 @@ void uiQuestSortListByEntryKind(s32 mode)
 
         if ((*info & 0x7F) == 0x22) {
             if (primary) {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, dataTable1bOr1cCompareRecordKeys);
+                qsort(list, FUN_0029ee54(cursor), 2, dataTable1bOr1cCompareRecordKeys);
             } else {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, dataTableCompareRecordValues);
+                qsort(list, FUN_0029ee54(cursor), 2, dataTableCompareRecordValues);
             }
         }
         if ((*info & 0x7F) == 0x21) {
             if (primary) {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_001f62ec);
+                qsort(list, FUN_0029ee54(cursor), 2, FUN_001f62ec);
             } else {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, recordCompareKindAndOrder);
+                qsort(list, FUN_0029ee54(cursor), 2, recordCompareKindAndOrder);
             }
         }
         if ((*info & 0x7F) == 0x18) {
             if (primary) {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_00219488);
+                qsort(list, FUN_0029ee54(cursor), 2, FUN_00219488);
             } else {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_002f2798);
+                qsort(list, FUN_0029ee54(cursor), 2, FUN_002f2798);
             }
         }
         if ((*info & 0x7F) == 0x19) {
             if (primary) {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, entryCompareFlagsCategoryOrder);
+                qsort(list, FUN_0029ee54(cursor), 2, entryCompareFlagsCategoryOrder);
             } else {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_002193bc);
+                qsort(list, FUN_0029ee54(cursor), 2, FUN_002193bc);
             }
         }
         if ((*info & 0x7F) == 0x1A) {

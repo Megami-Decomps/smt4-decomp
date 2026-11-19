@@ -4,17 +4,9 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 #include <stdlib.h>
-#include "event/2dEvent/2dEventTex.h"
+#include "camp/Unite/UnitePreferences.h"
 #include "code/Code004d.h"
 
-struct FusionCatalogCriteria {
-    u8 unk00[8];
-    s16 race;
-    u8 unk0a[0xb];
-    s8 skillCategory; // 0x15
-    u8 unk16[0xd];
-    s8 levelBand; // 0x23
-};
 extern "C" {
 extern const u32 DAT_0052f210[];
 void sysMemClear(void *, u32);
@@ -28,7 +20,7 @@ u32 FUN_00229210(s32);
 void rebuildFusionCatalogLists()
 {
     UniteWorkA *work = g_unite;
-    const FusionCatalogCriteria *filter = (const FusionCatalogCriteria *)(saveGetUserSettingsBlock() + 0x20);
+    const FusionCatalogCriteria *filter = uniteGetCatalogCriteria();
     sysMemClear(work->catalogA.demons, sizeof(work->catalogA.demons));
     rt_memclr(work->catalogA.races, sizeof(work->catalogA.races));
     sysMemClear(work->catalogA.skills, sizeof(work->catalogA.skills));

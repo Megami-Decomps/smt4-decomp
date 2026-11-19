@@ -1,4 +1,3 @@
-/* NON_MATCHING: current-stat zero stores are scheduled earlier and the skill-copy base uses r5 instead of ip. */
 #include "shard/Shard0032.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include <string.h>
@@ -11,7 +10,7 @@ void unitRecomputeDerivedStats(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
 
 // Restore the saved demon's stats, skills, name, and status into a runtime unit.
-void FUN_0035ad50(u32 id, UnitRecord *unit)
+void unitRecordBuildFromSave(u32 id, UnitRecord *unit)
 {
     nkmBaseGetRecord(id);
     SavedUnitRecordA saved;
@@ -25,9 +24,9 @@ void FUN_0035ad50(u32 id, UnitRecord *unit)
     unit->tableStats[4] = saved.baseStats[2];
     unit->tableStats[5] = saved.baseStats[3];
     unit->tableStats[6] = saved.baseStats[4];
+    unit->tableStats[3] = saved.baseStats[1];
     unit->boostedMaxHp = 0;
     unit->boostedMaxMp = 0;
-    unit->stats[3] = saved.baseStats[1];
     unit->stats[0] = saved.currentStats[0];
     unit->stats[2] = saved.currentStats[2];
     unit->stats[3] = saved.currentStats[3];

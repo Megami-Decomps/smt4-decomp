@@ -37,7 +37,7 @@ void __aeabi_memset4(void* block, u32 size, s32 value);
 SlotTable* gameGetSlotTable(void);
 u8* asdOperatorNewC(u32 size);
 s32 flagWordTestBit(StatBlock* unit, u32 bit);
-void FUN_002b7bca(void* base, u32 count, s32 size, s32 (*compare)(const void*, const void*));
+void qsort(void* base, u32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 sortCompareRankThenOrder(const void* a, const void* b);
 void asdMemFreeIfNotNull(void* block);
 
@@ -75,7 +75,7 @@ void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
         }
     }
     if (count != 0) {
-        FUN_002b7bca(candidates, count, 4, sortCompareRankThenOrder);
+        qsort(candidates, count, 4, sortCompareRankThenOrder);
         if ((s32)count >= 4) count = 3;
         s32 next = 0;
         if ((s32)count > 0) {

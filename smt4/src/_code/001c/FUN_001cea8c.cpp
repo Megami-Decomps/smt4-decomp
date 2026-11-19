@@ -38,7 +38,7 @@ int FUN_0029bd4c(void);
 int beginStatusPanelClose(void);
 int buttonHelpSetText(...);
 int messageStatesSetFirst(...);
-int FUN_002b7bca(...);
+int qsort(...);
 int buttonHelpSetPreset(...);
 int whisperEffectFinish(void);
 int whisperEffectStart(...);
@@ -101,7 +101,7 @@ extern int sys43e188GetState(void);
 extern int gameGetUnitRecord(int);
 extern int gameGetPlayerData(void);
 extern int infoWindowIsActive(void);
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int buttonHelpGetStatus(void);
@@ -267,14 +267,14 @@ void FUN_001cea8c(int param_1)
         }
         temp_v15 = temp_v15 + 1;
       } while (temp_v15 < 8);
-      FUN_002b7bca(temp_v7,8,2,&LAB_002c6e64);
+      qsort(temp_v7,8,2,&LAB_002c6e64);
       if (!temp_v24) {
         temp_v15 = *(int *)(param_1 + 0xd2c4) - 1;
         *(int *)(param_1 + 0xd2c4) = temp_v15;
         *(unsigned short *)(param_1 + temp_v15 * 2 + 0xd134) = 0;
       }
       FUN_001c8a7c(param_1,temp_v5,temp_v6,temp_v4);
-      FUN_002b7bca(temp_v7,8,2,&LAB_002c6e64);
+      qsort(temp_v7,8,2,&LAB_002c6e64);
       *(unsigned int *)(param_1 + 0xd2c4) = 0;
       temp_v4 = 0;
       *(unsigned int *)(param_1 + 0xd2c8) = 0;
@@ -876,7 +876,7 @@ LAB_001cf28c:
             temp_v9 = temp_v9 + 1;
           } while (temp_v9 < temp_v18);
         }
-        FUN_002b7bca(temp_v8,8,2,&LAB_002c6e64);
+        qsort(temp_v8,8,2,&LAB_002c6e64);
         *(short *)(temp_v15 + 0xd114) = temp_v3;
         *(unsigned short *)(temp_v15 + 0xd124) = 0;
         temp_v9 = FUN_0029aafc();
@@ -932,7 +932,7 @@ LAB_001cf6b0:
       temp_v6 = uiSpriteAdvanceAnimation((UiSpriteState *)(param_1 + 0x6b0));
       if ((temp_v6 != 0) && (param_1 = param_1 + temp_v4 * 0x8c, *(char *)(param_1 + 0x852) != '\0')) {
         spriteStartAnimationByIndex((UiSpriteState *)(param_1 + 0x7c8),0);
-        FUN_002b7bca(temp_v7,8,2,&LAB_002c6e64);
+        qsort(temp_v7,8,2,&LAB_002c6e64);
         *piVar9 = 2;
         temp_v4 = listCursorGetRowIfUnblocked(temp_v10);
         buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));

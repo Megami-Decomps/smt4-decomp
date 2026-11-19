@@ -1,49 +1,14 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
-#include "gamedata/BattleUnitSkills.h"
-#include "gamedata/NkmEnemyRecord.h"
-#include "gamedata/SkillDataRecord.h"
 #include "util/SlotRangeSelect.h"
-#include "gamedata/NkmEnemyLookup.h"
+#include "battle/BtlEntrySkills.h"
 
 extern "C" {
 BtlCombatantEntryA *btlFindFirstEntryMatchingCategoryAndRequiredMask(BtlMainStateA *state);
-u32 btlEntryHasCategoryThreeSkill(BtlCombatantEntryA *unit);
 s32 btlResolveEntryChoice(s32 choice);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-}
-
-/* Whether any of the unit's skill sources lists a category-three skill. */
-static inline u32 unitHasCategoryThreeSkill(BtlCombatantEntryA *unit)
-{
-    if (unit->data.record != NULL) {
-        for (s32 i = 0; i < 8; ++i) {
-            SkillDataRecordA *skill = skillDataFindById(unit->data.record->skills[i]);
-            if (skill != NULL && skill->sort.category == 3) {
-                return 1;
-            }
-        }
-    }
-    if (unit->data.secondaryRecord != NULL) {
-        for (s32 i = 0; i < 8; ++i) {
-            SkillDataRecordA *skill = skillDataFindById(unit->data.secondaryRecord->skills[i]);
-            if (skill != NULL && skill->sort.category == 3) {
-                return 1;
-            }
-        }
-    }
-    if (unit->data.candidate != NULL) {
-        NkmEnemyRecordA *record = nkmEnemyFindById(unit->data.id);
-        for (s32 i = 0; i < 8; ++i) {
-            SkillDataRecordA *skill = skillDataFindById(record->skills[i]);
-            if (skill != NULL && skill->sort.category == 3) {
-                return 1;
-            }
-        }
-    }
-    return 0;
 }
 
 extern "C" {

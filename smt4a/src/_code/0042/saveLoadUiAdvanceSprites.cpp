@@ -9,7 +9,7 @@ struct SpriteSnapshot { PositionSnapshot position; u8 unk0c[0x38]; };
 extern "C" {
 
 // Advance the revealed sprites and save their positions as transition origins.
-void FUN_00420a2c(void *context)
+void saveLoadUiAdvanceSprites(void *context)
 {
     union CaptureView {
         SaveLoadTransitionPrefixA state;

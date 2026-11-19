@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail ORs the 64-bit initialised mask into the state flags with two word loads/stores (build uses ldrd/strd) and counts the slot loop down differently. */
+/* NON_MATCHING: only the slot-reset loop swaps its registers (retail: count-down counter in r2, row address in r3; here r3/r2); the 64-bit state tests and the mask OR now match. */
 #include "battle/btlEncount.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -16,7 +16,7 @@ void gameCounterAddSaturating(s32 kind, s32 enabled);
 void frameTexRequestFade(s32 state);
 
 // Create the encounter job, reset its candidate slots and queue the initial encounter state.
-void FUN_002cf698(BtlMainStateA *battle)
+void btlEncountInitialize(BtlMainStateA *battle)
 {
     // The retail allocation extends beyond the shared work prefix.
     struct EncounterWork { BtlEncount base; u32 pending; };
@@ -41,10 +41,11 @@ void FUN_002cf698(BtlMainStateA *battle)
     gameCounterAddSaturating(2, 1);
     if (battle->encounterGate.disabled == 0 && battle->encounterSelection.id >= 0 &&
         !(battle->encounter.statusFlags & 0x2000000)) {
-        if (!(battle->stateFlags64.bits & g_btlEncount.initialStateMask) &&
-            !(g_btlEncount.initializedMask & battle->stateFlags64.bits)) {
+        u64 flags = battle->stateFlags64.bits;
+        if ((flags & g_btlEncount.initialStateMask) == 0 &&
+            (flags & g_btlEncount.initializedMask) == 0) {
             frameTexRequestFade(2);
-            battle->stateFlags64.bits |= g_btlEncount.initializedMask;
+            battle->stateFlags64.bits = g_btlEncount.initializedMask | battle->stateFlags64.bits;
         }
     }
 }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: StreetPass menu update is complete; switch case joining and initialized/refresh flag block layout differ. */
 #include "common.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -13,9 +12,9 @@ struct CampCecMenuState {
     /* 0x14C */ s32 selection;
     /* 0x150 */ u8 unk150[0xc];
     /* 0x15C */ u8 controls[0x11];
-    /* 0x16D */ u8 initialized;
+    /* 0x16D */ s8 initialized;
     /* 0x16E */ u8 unk16e;
-    /* 0x16F */ u8 refreshRequested;
+    /* 0x16F */ s8 refreshRequested;
 };
 struct CampCecFlags {
     /* 0x00 */ u8 unk00[0x60];
@@ -35,7 +34,7 @@ extern CampCecFlagGlobals g_campCec;
 }
 
 /* Apply the StreetPass menu selection and synchronize its enabled flag. */
-extern "C" s32 FUN_0035a2a4(CampCecMenuState *work)
+extern "C" s32 campCecRecvMenuIdleState(CampCecMenuState *work)
 {
     s32 result = 0;
     switch (work->selection) {
@@ -52,11 +51,11 @@ extern "C" s32 FUN_0035a2a4(CampCecMenuState *work)
                 ++count;
             }
         }
-        if (count != 0) {
-            work->state = 5;
-        } else {
+        if (count == 0) {
             sysPlaySe(62);
             work->state = 8;
+        } else {
+            work->state = 5;
         }
         break;
     }

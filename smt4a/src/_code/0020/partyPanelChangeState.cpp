@@ -39,7 +39,7 @@ void partyPanelChangeState(s32 state, s32 rememberPrevious)
             partyWidgetSetTransitionActive(panel->demons[index], 0);
             partyWidgetSetTransitionPending(panel->demons[index], 0);
         }
-        FUN_003344b4(0, 0);
+        statusPreviewMpChange(0, 0);
     }
     if (panel->sceneState == 0x16) {
         for (s32 index = 0; index < 4; ++index) {
@@ -52,7 +52,7 @@ void partyPanelChangeState(s32 state, s32 rememberPrevious)
             partyWidgetSetTransitionActive(panel->demons[index], 0);
             partyWidgetSetTransitionPending(panel->demons[index], 0);
         }
-        FUN_003344b4(0, 0);
+        statusPreviewMpChange(0, 0);
         if (panel->activeSlots[0] != 0)
             obj48Arm(panel->characters[0], 0xFF);
         for (s32 index = 0; index < 3; ++index) {

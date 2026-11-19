@@ -131,7 +131,7 @@ void FUN_00241b24(int *param_1,int param_2)
             goto LAB_0024226c;
           case 0x12:
           case 0x13:
-            FUN_002cf28c(DAT_005c10cc + 4,DAT_005c10d0,0x20,0x20,0x80000000);
+            effMenuAppendColorRect(DAT_005c10cc + 4,DAT_005c10d0,0x20,0x20,0x80000000);
             DAT_005c10d4 = 2;
             FUN_00100388(auStack_98,0x2421d8,*piVar8);
             DAT_005c10d4 = iVar10;

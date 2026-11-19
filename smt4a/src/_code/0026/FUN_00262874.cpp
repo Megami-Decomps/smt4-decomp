@@ -63,7 +63,7 @@ int FUN_002ade88(void);
 int FUN_002f707c(...);
 int FUN_00333694(...);
 int objBInitBlock19D0(...);
-int FUN_003344b4(...);
+int statusPreviewMpChange(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_00372100(...);
 int menuStateStartSelect(...);
 int obj48Arm(...);
@@ -246,7 +246,7 @@ extern int gameGlobalsGetState(void);
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_003344b4. */
+/* Supplied declaration required: statusPreviewMpChange. */
 /* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0034cda0. */
@@ -1286,7 +1286,7 @@ LAB_00264384:
           *(unsigned char *)(*(int *)(temp_v14 + 0xa20) + 0x27) = 0;
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < 0x18);
-        FUN_003344b4(0);
+        statusPreviewMpChange(0);
         if (*(char *)(temp_v1 + 0x9b4) != '\v') {
           FUN_0023b45c(0);
         }

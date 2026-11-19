@@ -242,6 +242,16 @@ typedef struct BtlMainState {
     union {
         /* 0x49E8 */ u8 unk49E8[0x70];
         struct {
+            /* 0x49E8 */ u8 unk49E8[0x24];
+            /* 0x4A0C */ u32 baseColor[2];
+            /* 0x4A14 */ u32 previousColor[2];
+            /* 0x4A1C */ u32 color[2];
+            /* 0x4A24 */ u32 mode[2];
+            /* 0x4A2C */ u32 timer[2];
+            /* 0x4A34 */ u32 parameters[2];
+            /* 0x4A3C */ u32 palette[2];
+        } slotColorFade;
+        struct {
             u8 prefix49E8[0x14];
             /* 0x49FC */ u16 flags;
             /* 0x49FE */ u16 step;
@@ -249,6 +259,8 @@ typedef struct BtlMainState {
         } residentLoad;
     };
 } BtlMainState;
+typedef char BtlMainStateColorFadeOffsets[offsetof(BtlMainState, slotColorFade.baseColor) == 0x4A0C &&
+    offsetof(BtlMainState, slotColorFade.palette) == 0x4A3C ? 1 : -1];
 typedef char BtlMainStateResidentOffsets[
     offsetof(BtlMainState,residentResources.commonMessages)==0x2230 &&
     offsetof(BtlMainState,residentResources.legionMessages)==0x2248 &&

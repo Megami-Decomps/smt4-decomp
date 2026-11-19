@@ -29,7 +29,7 @@ void FUN_0017712c(void*, void*, u32, u32);
 void FUN_00197eb0(void*, u32);
 void sceneTraverserVisit(void*, void*);
 void FUN_00176800(void*, void*, u32);
-void FUN_0018e9d8(void*, u32);
+void nw_gfx_SceneNode_AttachChild(void*, u32);
 void FUN_00176e84(void*, u32, u32, u32);
 void FUN_0017721c(void*, u32, u32, u32);
 void nw_gfx_RenderContext_ResetState_2B7478(void*);
@@ -61,7 +61,7 @@ void asdModelRenderLightPass(void)
         FUN_00176800(passOwner(settings), settings->attachInfo[0], settings->slotState[0]);
     }
     if (g_asdLightCount.visitEnabled && !g_asdLightCount.visitSuppressed) {
-        FUN_0018e9d8(passVisitor(settings), settings->sceneGroupRoot[0]);
+        nw_gfx_SceneNode_AttachChild(passVisitor(settings), settings->sceneGroupRoot[0]);
         sceneTraverserVisit(settings->attachInfo[0], passVisitor(settings));
     }
     if (!(gxIsStereoscopic3dEnabled() != 1)) {

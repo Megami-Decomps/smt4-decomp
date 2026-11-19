@@ -56,7 +56,7 @@ s32 buttonHelpGetPanelMode(void);
 s32 resourceRunOperationIfUnblocked(ScrollSelection *list);
 s32 listCursorGetRowIfUnblocked(const void *object);
 void unitRecordBuild(s32 id, UnitRecord *out);
-void FUN_0035ad50(u32 id, UnitRecord *unit);
+void unitRecordBuildFromSave(u32 id, UnitRecord *unit);
 void FUN_0032d0c8(void *directory, u32 index, u16 id, void *record);
 void skillHelpUpdateAttributeAndTarget(s32 id);
 void FUN_002c8550(s32 mode);
@@ -112,7 +112,7 @@ void FUN_0020b908(u32 state, s32 rememberPrevious)
         if (unite->pairKind == 1) {
             void *record = slotRecordFindById(unite->pairs[pair].firstId);
             if (record == NULL) {
-                FUN_0035ad50(unite->pairs[pair].firstId, &unit);
+                unitRecordBuildFromSave(unite->pairs[pair].firstId, &unit);
                 record = &unit;
             }
             FUN_0032d0c8(NULL, 1, unite->pairs[pair].firstId, record);
@@ -120,7 +120,7 @@ void FUN_0020b908(u32 state, s32 rememberPrevious)
         if (unite->pairKind == 2) {
             void *record = slotRecordFindById(unite->pairs[pair].secondId);
             if (record == NULL) {
-                FUN_0035ad50(unite->pairs[pair].secondId, &unit);
+                unitRecordBuildFromSave(unite->pairs[pair].secondId, &unit);
                 record = &unit;
             }
             FUN_0032d0c8(NULL, 1, unite->pairs[pair].secondId, record);

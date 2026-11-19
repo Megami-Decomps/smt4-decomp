@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_0018e9d8(u32 node);
+void nw_gfx_SceneNode_AttachChild(u32 node);
 void FUN_001767a4(void *pass, void *visitor);
 
 /* Attach the pending node of scene slot 0 or 1 and clear its bookkeeping. */
@@ -15,13 +15,13 @@ void FUN_00359454(s32 which)
 
     if (which == 0) {
         state->node0 = state->pendingNode[0];
-        FUN_0018e9d8(state->sceneNode[0]);
+        nw_gfx_SceneNode_AttachChild(state->sceneNode[0]);
         *nodes->target = state->node0;
         state->slotState[0] = 0;
         FUN_001767a4(state->attachInfo[0], state->transformBuilder[0]);
     } else if (which == 1) {
         state->node1 = state->pendingNode[1];
-        FUN_0018e9d8(state->sceneNode[1]);
+        nw_gfx_SceneNode_AttachChild(state->sceneNode[1]);
         *nodes->target = state->node1;
         state->slotState[1] = 0;
         FUN_001767a4(state->attachInfo[1], state->transformBuilder[1]);

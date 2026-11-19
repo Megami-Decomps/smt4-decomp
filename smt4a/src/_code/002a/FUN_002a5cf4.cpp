@@ -16,7 +16,7 @@ void FUN_002a5cf4(void)
         if (panel->panelState != 12 && panel->panelState != 4 && panel->panelState != 15 && panel->panelState != 17 && panel->panelState != 19) {
             FUN_00230ac0(7, -1, 0, 0);
         }
-        FUN_003344b4(0, 0);
+        statusPreviewMpChange(0, 0);
         if (panel->panelState != 1 && panel->panelState != 6 && panel->panelState != 7 && panel->panelState != 18) {
             FUN_0022e774();
         }

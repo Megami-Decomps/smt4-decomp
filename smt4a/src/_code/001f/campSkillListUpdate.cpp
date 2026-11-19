@@ -1,7 +1,6 @@
-/* NON_MATCHING: calls, branches, tail calls and addressing agree; what differs: the constant 1 and the second cost lookup's
- * temporary trade sl/fp, phase 0 computes the row into r1 before loading g_camp into r0 (here r0/r1, and armcc adds a nop
- * before the row lookup, which shifts the later nops), and retail places the FUN_00228b04 test after the shared help refresh
- * it branches back to. */
+/* NON_MATCHING: every instruction, branch, tail call, padding nop and address agrees with retail (604 rows each) except
+ * one register trade: retail keeps the constant 1 in sl and the second MP-change lookup's temporary in fp, this build the
+ * other way round (six instructions). */
 #include "camp/CampStateA.h"
 #include "camp/CampSkillList.h"
 #include "camp/CampMenuEntry.h"
@@ -60,24 +59,16 @@ void flagBanksResetPendingState(s32 overrideEnabled);
 void sortMenuAcquire(u32 owner, u8 option);
 }
 
-/* The MP the selected skill costs its unit (a negative unit is the player). */
-static __inline s32 campSelectedSkillCost(void)
+/* The MP change using the selected skill would cause its unit (a negative unit is the player). */
+static __inline s32 campSelectedSkillMpChange(void)
 {
     CampStateA *camp = g_camp;
     s32 row = campSkillListRow(camp);
 
     if (camp->entries[row].unit < 0) {
-        return FUN_003df57c(camp->entries[row].id, 1);
+        return -FUN_003df57c(camp->entries[row].id, 1);
     }
-    return skillGetAdjustedCost(gameGetSlotRecord(camp->entries[row].unit), camp->entries[row].id);
-}
-
-/* Remembers the status screen's row. */
-static __inline void campSetStatusSelection(CampStateA *camp, s32 row)
-{
-    if (camp != NULL) {
-        camp->statusSelection = row;
-    }
+    return -skillGetAdjustedCost(gameGetSlotRecord(camp->entries[row].unit), camp->entries[row].id);
 }
 
 /* Takes the row's skill cost from its unit's MP. */
@@ -145,8 +136,13 @@ extern "C" void campSkillListUpdate(void)
         if (!FUN_0023b3d0()) {
             return;
         }
-        FUN_003344b4(0, -campSelectedSkillCost());
-        campSetStatusSelection(g_camp, campSkillListRow(camp));
+        statusPreviewMpChange(0, campSelectedSkillMpChange());
+        /* remembers the row for the status screen */
+        s32 row = campSkillListRow(camp);
+        CampStateA *current = g_camp;
+        if (current != NULL) {
+            current->statusSelection = row;
+        }
         FUN_002cb278(&camp->grids[3], 1);
         camp->phase++;
         return;
@@ -183,8 +179,11 @@ extern "C" void campSkillListUpdate(void)
         }
     } else {
         if (!FUN_0022e714()) {
-            FUN_003344b4(0, -campSelectedSkillCost());
-            campSetStatusSelection(g_camp, row);
+            statusPreviewMpChange(0, campSelectedSkillMpChange());
+            CampStateA *current = g_camp;
+            if (current != NULL) {
+                current->statusSelection = row;
+            }
             if (camp->entries[row].unit < 0) {
                 FUN_0031f718(-1, 0, 0);
                 statusPanelSetOpen(1);
@@ -219,14 +218,9 @@ extern "C" void campSkillListUpdate(void)
                                          camp->touch.scrollRegions[0], camp->touch.scrollRegions[1],
                                          camp->touch.scrollRegions[2], &touched, 0, 1)) {
             campRefreshEntryHelp(camp);
-            return;
-        }
-        if (FUN_00228b04(&camp->grids[3], 1)) {
+        } else if (FUN_00228b04(&camp->grids[3], 1)) {
             campRefreshEntryHelp(camp);
-            return;
-        }
-
-        if ((padQueryLogicalKey(0, 1) || touched) && FUN_0022e714()) {
+        } else if ((padQueryLogicalKey(0, 1) || touched) && FUN_0022e714()) {
             if (FUN_002684d0(camp->entries[row].id, static_cast<s16>(camp->entries[row].unit)) &&
                 FUN_0022a030(camp->entries[row].unit, camp->entries[row].id) &&
                 campSkillUserCanAct(&camp->entries[row])) {
@@ -279,7 +273,7 @@ extern "C" void campSkillListUpdate(void)
         } else if (padQueryLogicalKey(1, 1) && !FUN_002a7410()) {
             campTouchRegionsRemoveGroup(&camp->grids[3], 1);
             campRestoreMenuGroup(camp);
-            FUN_003344b4(0, 0);
+            statusPreviewMpChange(0, 0);
             FUN_0022e774();
             FUN_0035dbd4(0);
             campShowSelectedEntryHelp(0);

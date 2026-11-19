@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018e9d8(unsigned int, unsigned int);
+int nw_gfx_SceneNode_AttachChild(unsigned int, unsigned int);
 
 /* stack frame of param_2: 19 slot(s), 64 byte(s) */
 typedef struct {
@@ -43,7 +43,7 @@ extern unsigned int g_asdModelSlotArray2; /* 0x5b3cb0 */
 extern unsigned int DAT_005b3cb4; /* 0x5b3cb4 */
 
 extern unsigned int asdMemoryGetDefaultAllocator(void);
-/* Supplied declaration required: FUN_0018e9d8. */
+/* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 extern unsigned int nw_gfx_TransformNode_DynamicBuilder_Create(unsigned char *, unsigned int);
 
 
@@ -132,7 +132,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v8 = 0;
     DAT_005b3c90 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(g_asdModelTransformBuilder,DAT_005b3c90);
+  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_005b3c90);
   temp_v1 = asdMemoryGetDefaultAllocator();
   temp_v5 = 1;
   temp_v7 = 1;
@@ -140,7 +140,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
   uStack_40 = 8;
   temp_v4 = 0;
   DAT_005b3c98 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v4,temp_v1);
-  FUN_0018e9d8(g_asdModelTransformBuilder,DAT_005b3c98);
+  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_005b3c98);
   temp_v0 = param_1[4];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -166,7 +166,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v8 = 0;
     g_asdModelSlotArray0 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(g_asdModelTransformBuilder,g_asdModelSlotArray0);
+  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,g_asdModelSlotArray0);
   temp_v0 = param_1[6];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -192,7 +192,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v8 = 0;
     g_asdModelSlotArray1 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(g_asdModelTransformBuilder,g_asdModelSlotArray1);
+  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,g_asdModelSlotArray1);
   temp_v0 = param_1[8];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -218,7 +218,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v8 = 0;
     g_asdModelSlotArray2 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(g_asdModelTransformBuilder,g_asdModelSlotArray2);
+  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,g_asdModelSlotArray2);
   temp_v0 = *param_2;
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -269,7 +269,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v8 = 0;
     DAT_005b3c94 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(DAT_005b3c8c,DAT_005b3c94);
+  nw_gfx_SceneNode_AttachChild(DAT_005b3c8c,DAT_005b3c94);
   temp_v1 = asdMemoryGetDefaultAllocator();
   temp_v5 = 1;
   temp_v7 = 1;
@@ -277,7 +277,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
   uStack_40 = 8;
   temp_v4 = 0;
   DAT_005b3c9c = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v4,temp_v1);
-  FUN_0018e9d8(DAT_005b3c8c,DAT_005b3c9c);
+  nw_gfx_SceneNode_AttachChild(DAT_005b3c8c,DAT_005b3c9c);
   temp_v0 = param_2[4];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -303,7 +303,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v8 = 0;
     DAT_005b3ca4 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(DAT_005b3c8c,DAT_005b3ca4);
+  nw_gfx_SceneNode_AttachChild(DAT_005b3c8c,DAT_005b3ca4);
   temp_v0 = param_2[6];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -329,7 +329,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v11 = 8;
     DAT_005b3cac = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(DAT_005b3c8c,DAT_005b3cac);
+  nw_gfx_SceneNode_AttachChild(DAT_005b3c8c,DAT_005b3cac);
   temp_v0 = param_2[8];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -355,7 +355,7 @@ void FUN_0013d42c(int *param_1,int *param_2)
     temp_v8 = 0;
     DAT_005b3cb4 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  FUN_0018e9d8(DAT_005b3c8c,DAT_005b3cb4);
+  nw_gfx_SceneNode_AttachChild(DAT_005b3c8c,DAT_005b3cb4);
   return;
 }
 

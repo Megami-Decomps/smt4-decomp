@@ -28844,12 +28844,12 @@
     },
     {
       "address": "0x208504",
-      "function": "FUN_00208504",
+      "function": "mapDepartAdvanceCameraSequence",
       "module": "_code",
-      "object": "build/obj/_code/0020/FUN_00208504.o",
+      "object": "build/obj/_code/0020/mapDepartAdvanceCameraSequence.o",
       "size": 1652,
-      "source": "src/_code/0020/FUN_00208504.cpp",
-      "target": "orig/target/_code/0020/FUN_00208504.o",
+      "source": "src/_code/0020/mapDepartAdvanceCameraSequence.cpp",
+      "target": "orig/target/_code/0020/mapDepartAdvanceCameraSequence.o",
       "thumb": false
     },
     {
@@ -46858,12 +46858,12 @@
     {
       "address": "0x2826d4",
       "file": "AsdSDK/Source/Gfx/Effect/effMenu",
-      "function": "FUN_002826d4",
+      "function": "effMenuAppendColorRect",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effMenu/FUN_002826d4.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Effect/effMenu/effMenuAppendColorRect.o",
       "size": 160,
-      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effMenu/FUN_002826d4.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effMenu/FUN_002826d4.o",
+      "source": "src/_code/AsdSDK/Source/Gfx/Effect/effMenu/effMenuAppendColorRect.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Effect/effMenu/effMenuAppendColorRect.o",
       "thumb": false
     },
     {
@@ -56997,12 +56997,12 @@
     },
     {
       "address": "0x2b7bca",
-      "function": "FUN_002b7bca",
+      "function": "qsort",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002b7bca.o",
+      "object": "build/obj/_code/002b/qsort.o",
       "size": 136,
-      "source": "src/_code/002b/FUN_002b7bca.cpp",
-      "target": "orig/target/_code/002b/FUN_002b7bca.o",
+      "source": "src/_code/002b/qsort.cpp",
+      "target": "orig/target/_code/002b/qsort.o",
       "thumb": true
     },
     {
@@ -64669,12 +64669,12 @@
     },
     {
       "address": "0x2daff4",
-      "function": "FUN_002daff4",
+      "function": "campDrawSelectedEquipmentDetails",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002daff4.o",
+      "object": "build/obj/_code/002d/campDrawSelectedEquipmentDetails.o",
       "size": 2252,
-      "source": "src/_code/002d/FUN_002daff4.cpp",
-      "target": "orig/target/_code/002d/FUN_002daff4.o",
+      "source": "src/_code/002d/campDrawSelectedEquipmentDetails.cpp",
+      "target": "orig/target/_code/002d/campDrawSelectedEquipmentDetails.o",
       "thumb": false
     },
     {
@@ -66103,12 +66103,12 @@
     },
     {
       "address": "0x2e1898",
-      "function": "FUN_002e1898",
+      "function": "campCecMenuIdleState",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e1898.o",
+      "object": "build/obj/_code/002e/campCecMenuIdleState.o",
       "size": 356,
-      "source": "src/_code/002e/FUN_002e1898.cpp",
-      "target": "orig/target/_code/002e/FUN_002e1898.o",
+      "source": "src/_code/002e/campCecMenuIdleState.cpp",
+      "target": "orig/target/_code/002e/campCecMenuIdleState.o",
       "thumb": false
     },
     {
@@ -70195,12 +70195,12 @@
     },
     {
       "address": "0x2f7794",
-      "function": "FUN_002f7794",
+      "function": "btlScriptDamageListedTargetPercent",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f7794.o",
+      "object": "build/obj/_code/002f/btlScriptDamageListedTargetPercent.o",
       "size": 228,
-      "source": "src/_code/002f/FUN_002f7794.cpp",
-      "target": "orig/target/_code/002f/FUN_002f7794.o",
+      "source": "src/_code/002f/btlScriptDamageListedTargetPercent.cpp",
+      "target": "orig/target/_code/002f/btlScriptDamageListedTargetPercent.o",
       "thumb": false
     },
     {
@@ -73223,12 +73223,12 @@
     },
     {
       "address": "0x30bc90",
-      "function": "FUN_0030bc90",
+      "function": "scrCommCecGetCount",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030bc90.o",
+      "object": "build/obj/_code/0030/scrCommCecGetCount.o",
       "size": 80,
-      "source": "src/_code/0030/FUN_0030bc90.cpp",
-      "target": "orig/target/_code/0030/FUN_0030bc90.o",
+      "source": "src/_code/0030/scrCommCecGetCount.cpp",
+      "target": "orig/target/_code/0030/scrCommCecGetCount.o",
       "thumb": false
     },
     {
@@ -78311,12 +78311,12 @@
     },
     {
       "address": "0x329b70",
-      "function": "FUN_00329b70",
+      "function": "uniteEffectUpdate",
       "module": "_code",
-      "object": "build/obj/_code/0032/FUN_00329b70.o",
+      "object": "build/obj/_code/0032/uniteEffectUpdate.o",
       "size": 3296,
-      "source": "src/_code/0032/FUN_00329b70.cpp",
-      "target": "orig/target/_code/0032/FUN_00329b70.o",
+      "source": "src/_code/0032/uniteEffectUpdate.cpp",
+      "target": "orig/target/_code/0032/uniteEffectUpdate.o",
       "thumb": false
     },
     {
@@ -104083,12 +104083,12 @@
     },
     {
       "address": "0x3d2140",
-      "function": "FUN_003d2140",
+      "function": "btlCommandEnterPhase",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d2140.o",
+      "object": "build/obj/_code/003d/btlCommandEnterPhase.o",
       "size": 1900,
-      "source": "src/_code/003d/FUN_003d2140.cpp",
-      "target": "orig/target/_code/003d/FUN_003d2140.o",
+      "source": "src/_code/003d/btlCommandEnterPhase.cpp",
+      "target": "orig/target/_code/003d/btlCommandEnterPhase.o",
       "thumb": false
     },
     {

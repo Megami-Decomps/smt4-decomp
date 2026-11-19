@@ -13,7 +13,7 @@ int slotRecordFindById(...);
 int partyFindSlotById(int);
 int FUN_002a5e7c(...);
 int arrayContainsU16(...);
-int FUN_0035ad50(unsigned int, unsigned char [98]);
+int unitRecordBuildFromSave(unsigned int, unsigned char [98]);
 int findSkillMetadataById(void);
 int unitRecomputeDerivedStats(...);
 int FUN_004bd17c(...);
@@ -65,7 +65,7 @@ extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a6894. */
 /* Supplied declaration required: arrayContainsU16. */
-/* Supplied declaration required: FUN_0035ad50. */
+/* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: unitRecomputeDerivedStats. */
@@ -149,7 +149,7 @@ unsigned char FUN_001ff014(int param_1)
   temp_v2 = g_unite[param_1 * 2 + 0x4ee] & 0x7fff;
   if (temp_v5 != 1) {
     if (temp_v5 == 3) {
-      FUN_0035ad50(temp_v2,temp_v32);
+      unitRecordBuildFromSave(temp_v2,temp_v32);
     }
   }
   else {
@@ -160,7 +160,7 @@ unsigned char FUN_001ff014(int param_1)
   temp_v38 = temp_v32;
   if ((piVar1[param_1 * 2 + 0x4ef] & 3U) != 1) {
     if ((piVar1[param_1 * 2 + 0x4ef] & 3U) == 3) {
-      FUN_0035ad50(temp_v5,temp_v30);
+      unitRecordBuildFromSave(temp_v5,temp_v30);
     }
   }
   else {

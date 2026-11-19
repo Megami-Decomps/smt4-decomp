@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_002b7928(...);
-int FUN_002b7bca(...);
+int qsort(...);
 int FUN_002b7c54(...);
 int rt_memclr(void);
 int asdMemFree(void);
@@ -42,7 +42,7 @@ extern int DAT_00465138; /* 0x465138 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b7928. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_002b7c54. */
 extern int padIsButtonRepeat(unsigned int);
 extern int padIsButtonPressed(unsigned int);
@@ -249,7 +249,7 @@ LAB_00115f7c:
         if (temp_v0 >= 0x2001) {
           temp_v0 = 0x2000;
         }
-        FUN_002b7bca(temp_v20,temp_v0,4);
+        qsort(temp_v20,temp_v0,4);
         if ((unsigned int)DAT_00465128[6] >= 0x2000) {
           temp_v0 = 0x1fff - DAT_00465128[4];
         }

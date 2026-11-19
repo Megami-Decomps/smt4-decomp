@@ -37,21 +37,34 @@ namespace gfx {
 /* Adds a parentless node to the children, which then report their owner as parent. */
 inline bool SceneNodeChildren::attach(SceneNode *node)
 {
-    bool attached = false;
-    if (node->parent == NULL) {
-        attached = nodes.push_back(node);
-        if (attached) {
-            node->parent = owner;
-        }
+    if (node->parent != NULL) {
+        return false;
+    }
+    bool attached = nodes.push_back(node);
+    if (attached) {
+        node->parent = owner;
     }
     return attached;
+}
+
+/* Whether `node` is this node's parent or one of its ancestors: the body of
+ * nw_gfx_SceneNode_IsCircularReference, which recurses up the parents. */
+inline bool sceneNodeIsCircularReference(const SceneNode *self, const SceneNode *node)
+{
+    const SceneNode *ancestor = self->parent;
+    if (ancestor == NULL) {
+        return false;
+    }
+    if (ancestor == node) {
+        return true;
+    }
+    return nw_gfx_SceneNode_IsCircularReference(ancestor, node);
 }
 
 /* Attaches a node unless that would make this node its own ancestor. */
 inline bool SceneNode::attachChild(SceneNode *node)
 {
-    SceneNode *ancestor = parent;
-    if (ancestor != NULL && (ancestor == node || nw_gfx_SceneNode_IsCircularReference(ancestor, node))) {
+    if (sceneNodeIsCircularReference(this, node)) {
         return false;
     }
     return children.attach(node);

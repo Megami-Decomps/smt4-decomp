@@ -8,7 +8,7 @@ extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void asdMemFree(void *);
 s32 randNextInRange(u32);
-void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
+void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
 s32 dataCompareUnsignedHalfwordKeysDescending(const void *, const void *);
 void unitRecalculateEffectiveStats(StatBlock *);
 void FUN_002954bc(StatBlock *);
@@ -34,7 +34,7 @@ u16 nkmGrowEventLearnRandomSkill(StatBlock *unit)
     memcpy(known, unit->skills.ids, sizeof(unit->skills));
     for (s32 index = 0; index < 8; ++index)
         known[8 + index] = record->learnedSkills[index].id;
-    FUN_002b7bca(known, 16, sizeof(u16), dataCompareUnsignedHalfwordKeysDescending);
+    qsort(known, 16, sizeof(u16), dataCompareUnsignedHalfwordKeysDescending);
 
     s32 count = 0;
     do {

@@ -15,7 +15,7 @@ int FUN_002268d0(...);
 int btlQueueKeyedScalarReflectAction(...);
 int btlAdjustPropertyClamped(...);
 int gameCounterAddSaturating(...);
-int FUN_002b7bca(int [2], int, int, unsigned char *);
+int qsort(int [2], int, int, unsigned char *);
 int FUN_003ddee0(int, unsigned int, int, int);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
@@ -56,7 +56,7 @@ extern int idSetFindSubjectIndex(unsigned int, int);
 extern int FUN_00293230(unsigned int *);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: gameCounterAddSaturating. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 extern int FUN_003bd0e8(int);
 /* Supplied declaration required: FUN_003ddee0. */
 
@@ -198,7 +198,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
             }
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < 0x36);
-          FUN_002b7bca(temp_v14,temp_v4,4,&LAB_0019d7bc);
+          qsort(temp_v14,temp_v4,4,&LAB_0019d7bc);
           temp_v6 = 0;
           temp_v4 = 0;
           do {

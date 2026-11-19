@@ -1,4 +1,3 @@
-/* NON_MATCHING: 138 lines, most of them branch targets shifted by six missing rows; every case body matches. The difference is which copy of the shared `step++; break` tail each case branches to: retail sends steps 0-2 to step 3's copy and steps 4, 5 and 7 to step 6's (step 2 keeps its own scrScriptProcessStartEntry call), this build sends steps 0-5 to step 3's and merges step 2's call into step 4's. */
 #include "camp/CampCec/CampCecRecv.h"
 #include "script/scrScriptProcess.h"
 #include "addon/LookupRecord.h"
@@ -60,8 +59,6 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
     s32 result = 0;
     SlotRecordA *unit = FUN_0031cf00();
     char name[36];
-    s32 gain;
-    s32 message;
 
     switch (recv->gains.step) {
     case 0:
@@ -94,7 +91,9 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
         }
         recv->gains.step++;
         break;
-    case 4:
+    case 4: {
+        s32 gain;
+        s32 message = 0;
         libc_strcpy((unsigned int *)name, (unsigned int *)dataTable01GetRecordWithAocOverride(unit->id));
         scrSetStringSlot(0, name);
         if ((gain = recv->gains.statGains[0]) > 0) {
@@ -157,6 +156,11 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
             if (unit->baseStats[4] >= 999 && unit->baseStats[4] == before) {
                 message = 13;
             }
+        }
+        if (message != 0) {
+            FUN_00359974(1, gain, 0xffffffff, 0);
+            scrScriptProcessStartEntry(recv->resources.scripts[0], message);
+            recv->gains.step++;
         } else {
             FUN_002c85b0(0);
             statusDownSwitchTab(0);
@@ -169,49 +173,40 @@ s32 campCecRecvStatGainState(CampCecRecv *recv)
                 FUN_002a5e7c(unit->id);
                 recv->unitFlag.unk7D4 = 0;
             }
-            break;
         }
-        FUN_00359974(1, gain, 0xffffffff, 0);
-        scrScriptProcessStartEntry(recv->resources.scripts[0], message);
-        recv->gains.step++;
         break;
+    }
     case 5:
-        if (scrRunOpcodesStub(recv->resources.scripts[0]) != 2) {
-            break;
+        if (scrRunOpcodesStub(recv->resources.scripts[0]) == 2) {
+            recv->gains.step--;
         }
-        recv->gains.step--;
         break;
     case 6:
-        if (!battleTalkIsBustReady()) {
-            break;
+        if (battleTalkIsBustReady() && devilIsTextureLoaded(gameDataGetRecordValue(), 1)) {
+            btlTalkBustUpReleaseTexture();
+            btlTalkBustUpSetDemonTexture(unit->id, 1);
+            recv->gains.unk3E6 = 0;
+            FUN_002c8538(1);
+            FUN_00215bd0();
+            if (partyPanelIsActive()) {
+                sysPlaySe(0xce);
+            } else {
+                sysPlaySe(0xe5);
+            }
+            recv->gains.step++;
         }
-        if (!devilIsTextureLoaded(gameDataGetRecordValue(), 1)) {
-            break;
-        }
-        btlTalkBustUpReleaseTexture();
-        btlTalkBustUpSetDemonTexture(unit->id, 1);
-        recv->gains.unk3E6 = 0;
-        FUN_002c8538(1);
-        FUN_00215bd0();
-        if (partyPanelIsActive()) {
-            sysPlaySe(0xce);
-        } else {
-            sysPlaySe(0xe5);
-        }
-        recv->gains.step++;
         break;
     case 7:
-        if (!FUN_0023b3d0()) {
-            break;
+        if (FUN_0023b3d0()) {
+            FUN_002c85b0(0);
+            FUN_0033449c(1);
+            statusDisplayBindUnitRecord(&recv->gains.unitBefore, 0, 0, NULL);
+            objBInitBlock19D0(FUN_0031cf00(), 0, 0);
+            FUN_003343c0(0);
+            statusPanelSetOpen(1);
+            FUN_0038b548(0);
+            recv->gains.step++;
         }
-        FUN_002c85b0(0);
-        FUN_0033449c(1);
-        statusDisplayBindUnitRecord(&recv->gains.unitBefore, 0, 0, NULL);
-        objBInitBlock19D0(FUN_0031cf00(), 0, 0);
-        FUN_003343c0(0);
-        statusPanelSetOpen(1);
-        FUN_0038b548(0);
-        recv->gains.step++;
         break;
     case 8:
         if (FUN_0022e750()) {

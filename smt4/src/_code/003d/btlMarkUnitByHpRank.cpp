@@ -4,7 +4,7 @@
 #include "battle/btlMain.h"
 
 extern "C" {
-void FUN_002b7bca(void *elements, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+void qsort(void *elements, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
 
 // Select the requested HP rank among entries carrying flag 0x400 (rank is one-based).
@@ -21,7 +21,7 @@ void btlMarkUnitByHpRank(BtlMainState **contextHandle, s32 rank)
         }
     }
     if (count >= rank) {
-        FUN_002b7bca(candidates, count, sizeof(BattleHpRank), reinterpret_cast<s32 (*)(const void *, const void *)>(FUN_0032ad24));
+        qsort(candidates, count, sizeof(BattleHpRank), reinterpret_cast<s32 (*)(const void *, const void *)>(FUN_0032ad24));
         btlUnitGet(contextHandle)->targets[candidates[rank - 1].selectionIndex] = 1;
     } else {
         btlUnitGet(contextHandle)->targets[candidates[0].selectionIndex] = 1;

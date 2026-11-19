@@ -26,7 +26,7 @@ extern RenderSceneLightState g_asdLightCount;
 void FUN_0017712c(ModelOwner *owner, void *traverser, u32 mask, s32 enabled);
 void FUN_00197eb0(void *builderState, u32 tree);
 void FUN_00176800(ModelOwner *owner, void *traverser, s32 enabled);
-void FUN_0018e9d8(void *builder, u32 tree);
+void nw_gfx_SceneNode_AttachChild(void *builder, u32 tree);
 void FUN_00176e84(ModelOwner *owner, u32 mask, s32 mode, s32 flags);
 void nw_gfx_RenderContext_ResetState_2B7478(void *context);
 void renderCtxResetFrameState(RenderCtxA *context);
@@ -47,7 +47,7 @@ extern "C" void renderSceneUpdate(void)
     if (!g_asdLightCount.skipOwner)
         FUN_00176800(g_gfxSettings.owner[1], g_gfxSettings.attachInfo[1], 1);
     if (g_asdLightCount.visit && !g_asdLightCount.skipVisit) {
-        FUN_0018e9d8(g_gfxSettings.transformBuilder[1], g_gfxSettings.sceneGroupRoot[1]);
+        nw_gfx_SceneNode_AttachChild(g_gfxSettings.transformBuilder[1], g_gfxSettings.sceneGroupRoot[1]);
         sceneTraverserVisit(g_gfxSettings.attachInfo[1], g_gfxSettings.transformBuilder[1]);
     }
     FUN_00176e84(g_gfxSettings.owner[1], g_gfxSettings.node1, 2, 0);

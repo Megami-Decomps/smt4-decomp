@@ -41,7 +41,7 @@ int FUN_004fed5c(...);
 int lcgRandomGetNormalizedFloat(void);
 int btlEventTaskCreate(...);
 void FUN_002b4f28(BtlMainStateA *, unsigned int mode, int combatantIndex, BattleActionScale scale, unsigned int option);
-int FUN_002cf698(...);
+int btlEncountInitialize(...);
 int FUN_00363990(...);
 int FUN_00385c44(...);
 int FUN_003e49e8(void);
@@ -206,7 +206,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: btlEffectCreateTasks. */
 /* Supplied declaration required: btlResultTaskStart. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
-/* Supplied declaration required: FUN_002cf698. */
+/* Supplied declaration required: btlEncountInitialize. */
 /* Supplied declaration required: mapDepartPrepare. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
@@ -491,7 +491,7 @@ void FUN_002ba998(unsigned int param_1)
     if (temp_v6 == 0) {
       btlEventTaskCreate(temp_v7);
     }
-    FUN_002cf698(temp_v7);
+    btlEncountInitialize(temp_v7);
     if ((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573b58) != 0 ||
         (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573b5c) != 0) {
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x10000000;

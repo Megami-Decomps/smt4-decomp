@@ -13,7 +13,7 @@ int FUN_00202178(...);
 int effEditorNodeChainApply(...);
 int asdDebugLog(...);
 int FUN_002b3fd8(int, int, int, int);
-int FUN_002cf28c(...);
+int effMenuAppendColorRect(...);
 int effMenuListAppend(void);
 int VectorSignedToFloat(int, int);
 
@@ -79,7 +79,7 @@ extern int slotIsActive(unsigned int);
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_002b3fd8. */
-/* Supplied declaration required: FUN_002cf28c. */
+/* Supplied declaration required: effMenuAppendColorRect. */
 /* Supplied declaration required: effMenuListAppend. */
 
 
@@ -589,7 +589,7 @@ LAB_00346d7c:
   if (DAT_0059dc2c == 1) {
     effEditorNodeChainApply(0x59eac0);
   }
-  FUN_002cf28c(0xa8,0x10,0xb8,0x10,0x80808080,0xff000000);
+  effMenuAppendColorRect(0xa8,0x10,0xb8,0x10,0x80808080,0xff000000);
   temp_v14 = 0x4338000000000000;
   puVar10 = (unsigned char *)0x0;
   if (puVar13 != (unsigned char *)0x0) {
@@ -685,7 +685,7 @@ LAB_00346d7c:
   temp_v17[3] = 0.0f;
   temp_v18[3] = (float)temp_v16;
   temp_v17[2] = temp_v17[1];
-  FUN_002cf28c(0xa8,0x2c,0xb8,0x10,0x80808080,0xff000000);
+  effMenuAppendColorRect(0xa8,0x2c,0xb8,0x10,0x80808080,0xff000000);
   temp_v5 = 0;
   do {
     temp_v13 = temp_v17[temp_v5 + 6];

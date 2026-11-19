@@ -1,9 +1,5 @@
-/* NON_MATCHING: all 22 mode handlers, the jump table and the sprite waits (modes 15-18) agree with retail; what differs is
- * scheduling around the mode changes: modes 16/17 store the new mode and the step before the remembered mode, mode 19 clears
- * the step first, mode 21 loads the old mode before testing the pending one, modes 6 and 9 hold the final 1 in r0 (here r1),
- * and retail shares mode 22 with the tail of mode 6 and the hand-back of mode 12 with the waits where armcc here keeps the
- * first wait's copy. */
 #include "common.h"
+#include <string.h>
 #include "sys/RuntimeObjects.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
@@ -27,23 +23,20 @@ struct DataBlockTable {
 };
 
 extern "C" {
-extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
 void saveLoadUIStart(SaveSlotHeaderWork *ui);
 void FUN_0041f6e0(SaveSlotHeaderWork *ui);
 void FUN_0041f4c0(SaveSlotHeaderWork *ui);
 void FUN_0041f22c(SaveSlotHeaderWork *ui);
-void FUN_0041f110(SaveSlotHeaderWork *ui);
+void saveLoadUiWaitPopupDismissed(SaveSlotHeaderWork *ui);
 void savedUnitEditorApplyOrClose(SaveSlotHeaderWork *ui);
 void FUN_0041eeec(SaveSlotHeaderWork *ui);
-void FUN_0041f5bc(SaveSlotHeaderWork *ui);
-void FUN_0041fd5c(SaveSlotHeaderWork *ui);
-void FUN_00420a2c(SaveSlotHeaderWork *ui);
+void saveLoadUiRestartSpritesAndWait(SaveSlotHeaderWork *ui);
+void saveLoadUiRestartSlotSpritesAndWait(SaveSlotHeaderWork *ui);
 void FUN_0041e3a0(SaveSlotHeaderWork *ui, s32 resetHeader);
 void FUN_0041dbdc(SaveSlotHeaderWork *ui, s32 flag);
 void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *ui);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 index);
 DataBlockTable *gameDataBlocksGetTable(void);
-void __ARM_common_memcpy4_8(void *destination, const void *source);
 
 void messageMainSetFlag(s32 value);
 void sysPlaySe(s32 id);
@@ -51,62 +44,11 @@ void gameDataIncrementCounterCapped(void);
 void FUN_002ac390(void);
 }
 
-/* Moves to another mode, remembering the one it leaves. */
-static __inline void saveLoadUiEnterMode(SaveSlotHeaderWork *ui, s32 mode)
-{
-    ui->previousMode = ui->mode;
-    ui->mode = mode;
-    ui->step = 0;
-}
-
-/* Moves to another mode and sets the one to follow it. */
-static __inline void saveLoadUiChangeMode(SaveSlotHeaderWork *ui, s32 mode, s32 next)
-{
-    saveLoadUiEnterMode(ui, mode);
-    ui->phase = next;
-}
-
-/* Switches to another mode: the new mode is stored first, then the one it replaces. */
-static __inline void saveLoadUiSetMode(SaveSlotHeaderWork *ui, u8 mode)
-{
-    u8 previous = ui->mode;
-
-    ui->mode = mode;
-    ui->previousMode = previous;
-    ui->step = 0;
-}
-
-/* Goes to a mode with nothing queued after it; arriving at mode 22 hands the selection back to the shared base. */
-static __inline void saveLoadUiGoTo(SaveSlotHeaderWork *ui, s32 mode)
-{
-    saveLoadUiSetMode(ui, mode);
-    ui->phase = 0;
-    if (ui->mode == 22) {
-        g_saveLoadUIBase.selectedValue = ui->selected;
-        ui->finished = 1;
-    }
-}
-
-/* Advances the slot sprites; once the last one has settled, leaves for the pending mode (arriving at
- * mode 22 hands the selection back to the shared base). */
-static __inline void saveLoadUiWaitSprites(SaveSlotHeaderWork *ui)
-{
-    FUN_00420a2c(ui);
-    if (uiSpriteGetCompletionState(&ui->sprites[ui->spriteCount]) != 0) {
-        saveLoadUiEnterMode(ui, ui->phase);
-        ui->phase = 0;
-        if (ui->mode == 22) {
-            g_saveLoadUIBase.selectedValue = ui->selected;
-            ui->finished = 1;
-        }
-    }
-}
-
 /* Copies the edited tables, settings and save data back into the game. */
 static __inline void saveLoadUiCommit(SaveSlotHeaderWork *ui)
 {
     __aeabi_memcpy4(gameDataBlocksGetTable(), ui->tableBuffer, 128);
-    __ARM_common_memcpy4_8(configGetSettings(), ui->settingsBuffer);
+    memcpy(configGetSettings(), ui->settingsBuffer, 8);
     __aeabi_memcpy4(gameDataBlocksGetSaveData(), ui->saveBuffer, 0x2A71C);
 }
 
@@ -126,22 +68,25 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         FUN_0041f22c(ui);
         break;
     case 5:
-        FUN_0041f110(ui);
+        saveLoadUiWaitPopupDismissed(ui);
         break;
     case 6:
-        if (FUN_0026c3a0() != 0) {
-            saveLoadUiCommit(ui);
-            if (g_saveLoadUIBase.setFlag470 != 0 && !gameFlagIsSet(0x470)) {
-                gameFlagSetValue(0x470, 1, 1);
-            }
-            if (g_saveLoadUIBase.setFlag471 != 0 && !gameFlagIsSet(0x471)) {
-                gameFlagSetValue(0x471, 1, 1);
-            }
-            FUN_00168980(3);
-            ui->selected = g_saveLoadUIBase.selectedValue;
-            saveLoadUiChangeMode(ui, 22, 0);
-            ui->finished = 1;
+        if (FUN_0026c3a0() == 0) {
+            break;
         }
+        saveLoadUiCommit(ui);
+        if (g_saveLoadUIBase.setFlag470 != 0 && !gameFlagIsSet(0x470)) {
+            gameFlagSetValue(0x470, 1, 1);
+        }
+        if (g_saveLoadUIBase.setFlag471 != 0 && !gameFlagIsSet(0x471)) {
+            gameFlagSetValue(0x471, 1, 1);
+        }
+        FUN_00168980(3);
+        ui->selected = g_saveLoadUIBase.selectedValue;
+        saveLoadUiSetMode(ui, 22, 0);
+        /* Fall through: the flow is finished. */
+    case 22:
+        ui->finished = 1;
         break;
     case 7:
         gameDataAddHomeButtonHold(1);
@@ -178,8 +123,6 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
             FUN_002ac390();
             saveLoadUiCommit(ui);
             saveLoadUiChangeMode(ui, 22, 0);
-            g_saveLoadUIBase.selectedValue = ui->selected;
-            ui->finished = 1;
             break;
         }
         break;
@@ -196,26 +139,27 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         break;
     case 12:
         if (FUN_0026c3a0() != 0) {
-            saveLoadUiGoTo(ui, 22);
+            saveLoadUiChangeMode(ui, 22, 0);
         }
         break;
     case 13:
-        FUN_0041f5bc(ui);
+        saveLoadUiRestartSpritesAndWait(ui);
         break;
     case 14:
-        FUN_0041fd5c(ui);
+        saveLoadUiRestartSlotSpritesAndWait(ui);
         break;
     case 15:
         saveLoadUiWaitSprites(ui);
         break;
     case 16:
         FUN_0041e3a0(ui, 1);
-        saveLoadUiEnterMode(ui, 18);
+        /* Waits in mode 18; the pending mode stays queued. */
+        saveLoadUiChangeMode(ui, 18, ui->phase);
         saveLoadUiWaitSprites(ui);
         break;
     case 17:
         FUN_0041e3a0(ui, 0);
-        saveLoadUiEnterMode(ui, 18);
+        saveLoadUiChangeMode(ui, 18, ui->phase);
         saveLoadUiWaitSprites(ui);
         break;
     case 18:
@@ -229,8 +173,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
             } else {
                 FUN_0041dbdc(ui, 1);
             }
-            saveLoadUiSetMode(ui, 14);
-            ui->phase = 4;
+            saveLoadUiChangeMode(ui, 14, 4);
         }
         break;
     case 20:
@@ -240,14 +183,11 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         if (scrRunOpcodesStub(ui->script) == 2) {
             u8 next = ui->phase;
             if (next != 0) {
-                saveLoadUiGoTo(ui, next);
+                saveLoadUiChangeMode(ui, next, 0);
             } else {
-                saveLoadUiSetMode(ui, 19);
+                saveLoadUiChangeMode(ui, 19, 0);
             }
         }
-        break;
-    case 22:
-        ui->finished = 1;
         break;
     }
 }

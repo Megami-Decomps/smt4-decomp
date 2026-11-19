@@ -9,7 +9,7 @@ int effEditorNodeChainApply(int);
 int padAlternateButtonIndex(...);
 int FUN_0024dd90(int);
 int effMenuListAppend(void);
-int FUN_002826d4(...);
+int effMenuAppendColorRect(...);
 int FUN_00282780(int, int, int, int);
 int padIsButtonRepeat(...);
 int padIsButtonPressed(...);
@@ -72,7 +72,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
-/* Supplied declaration required: FUN_002826d4. */
+/* Supplied declaration required: effMenuAppendColorRect. */
 /* Supplied declaration required: FUN_00282780. */
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -436,7 +436,7 @@ LAB_00243564:
   *(unsigned int *)(temp_v11 + 0x10) = temp_v29;
   *(unsigned int *)(temp_v11 + 0x14) = 0x3d;
   effMenuListAppend();
-  FUN_002826d4(0xa8,0x10,0x90,0x5a,0,0xff000000);
+  effMenuAppendColorRect(0xa8,0x10,0x90,0x5a,0,0xff000000);
   if (temp_v13 != 0) {
     temp_v20 = 144.0f;
     temp_v22 = 0x42340000;

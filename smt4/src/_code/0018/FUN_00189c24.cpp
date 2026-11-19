@@ -24,7 +24,7 @@ s32 FUN_00298e40(u32 id, s32 index, QuestObjectiveProgress *progress);
 s32 questIsCompleted(u32 id);
 s32 FUN_00298e00(u32 id);
 s32 idIsAtLeast350(u32 id);
-void FUN_002b7bca(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 dataTable1bOr1cCompareRecordKeys(const void *left, const void *right);
 void gridNavigationConfigure(void *list, s32 count, s32 visible, s32 a, s32 b, s32 c);
 void uiQuestSortListByEntryKind(s32 kind);
@@ -116,7 +116,7 @@ void FUN_00189c24(void)
         }
         quest->list[openCount++] = id;
     }
-    FUN_002b7bca(quest->cursor.alternate.ids, reportCount, sizeof(u16), dataTable1bOr1cCompareRecordKeys);
+    qsort(quest->cursor.alternate.ids, reportCount, sizeof(u16), dataTable1bOr1cCompareRecordKeys);
     void *reportList = quest->panelView.panel.alternate.cursor;
     gridNavigationConfigure(reportList, reportCount, 10, 1, 1, 1);
     gridNavigationConfigure(quest->cursor.data, openCount, 10, 1, 1, 1);

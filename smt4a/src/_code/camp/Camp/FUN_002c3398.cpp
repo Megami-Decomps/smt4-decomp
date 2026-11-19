@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_003344b4(...);
+int statusPreviewMpChange(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int obj48Arm(...);
 
 int FUN_0020d934(...);
@@ -96,7 +96,7 @@ extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_002f78a0. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
-/* Supplied declaration required: FUN_003344b4. */
+/* Supplied declaration required: statusPreviewMpChange. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003423e8. */
 /* Supplied declaration required: partyPanelCreate. */
@@ -512,7 +512,7 @@ LAB_002c4a2c:
       *(unsigned char *)(*(int *)(temp_v5 + 0xa20) + 0x27) = 0;
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x18);
-    FUN_003344b4(0);
+    statusPreviewMpChange(0);
   }
   if (*(int *)(temp_v1 + 0x1c) == 0x16) {
     temp_v6 = 0;
@@ -531,7 +531,7 @@ LAB_002c4a2c:
       *(unsigned char *)(*(int *)(temp_v5 + 0xa20) + 0x27) = 0;
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x18);
-    FUN_003344b4(0);
+    statusPreviewMpChange(0);
     if (*(char *)(temp_v1 + 0x9c0) != '\0') {
       obj48Arm(*(unsigned int *)(temp_v1 + 0xa10),0xff);
     }

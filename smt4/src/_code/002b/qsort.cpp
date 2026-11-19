@@ -7,7 +7,7 @@ extern "C" void FUN_002b79cc(void *elements, u32 count, u32 elementSize,
                               ElementCompare compare);
 
 // Inserts each element into the sorted prefix after a preliminary pass for larger arrays.
-extern "C" void FUN_002b7bca(void *elements, u32 count, u32 elementSize,
+extern "C" void qsort(void *elements, u32 count, u32 elementSize,
                              ElementCompare compare)
 {
     if (elementSize == 0 || count == 0) {

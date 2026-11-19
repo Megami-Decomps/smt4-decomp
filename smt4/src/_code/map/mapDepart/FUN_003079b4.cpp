@@ -4,7 +4,7 @@
 extern "C" {
 
 int FUN_001f87d4(void);
-int FUN_00208504(void);
+int mapDepartAdvanceCameraSequence(void);
 int FUN_0021b0f0(void);
 int FUN_0021b2ec(void);
 int FUN_00282228(int *);
@@ -59,7 +59,7 @@ extern int DAT_0049fa0c; /* 0x49fa0c */
 extern int DAT_0049fa10; /* 0x49fa10 */
 
 /* Supplied declaration required: FUN_001f87d4. */
-/* Supplied declaration required: FUN_00208504. */
+/* Supplied declaration required: mapDepartAdvanceCameraSequence. */
 /* Supplied declaration required: FUN_0021b0f0. */
 /* Supplied declaration required: FUN_0021b2ec. */
 extern int vectorPairTransitionStep(void);
@@ -186,7 +186,7 @@ void FUN_003079b4(void)
     piVar7[0x22] = temp_v11;
     break;
   case 5:
-    FUN_00208504();
+    mapDepartAdvanceCameraSequence();
     break;
   case 6:
     temp_v25 = 0.017453292f;

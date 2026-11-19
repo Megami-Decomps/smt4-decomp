@@ -1,4 +1,3 @@
-/* NON_MATCHING: current C compilation omits the retail ARM hint NOP before the record lookup; the original source/inlining shape remains unrecovered. */
 #include "camp/CampCec/CampCecRecv.h"
 #include "script/ScriptArgs.h"
 
@@ -11,14 +10,15 @@ extern "C" {
 extern CampCecRecv* g_campCecRecv;
 CampCecRecord* FUN_0031cf00(void);
 
-// Returns the screen value or the current received record's value to the script.
-u32 FUN_0039ec04(void)
+// Returns to the script the receive screen's value when the argument asks for it, else the current received
+// record's value (0 when there is no receive screen).
+u32 scrCommCecGetCount(void)
 {
     s32 screenValue = scrGetArg(0);
-    if (g_campCecRecv == NULL) {
-        scrSetResult(0);
-    } else if (screenValue != 0) {
+    if (g_campCecRecv != NULL && screenValue != 0) {
         scrSetResult(g_campCecRecv->scriptValue.value);
+    } else if (g_campCecRecv == NULL) {
+        scrSetResult(0);
     } else {
         scrSetResult(FUN_0031cf00()->value);
     }

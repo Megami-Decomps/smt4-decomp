@@ -3,7 +3,7 @@
 extern "C" {
 u8 campCecRecvExists(void);
 u8 campCecRecvIsDone(void);
-void FUN_0037bd00(void);
+void campCecRecvDestroy(void);
 void sysPlaySe(u32 id);
 void partyPanelRefreshFromSlotTable(void);
 void FUN_00344348(s32 mode);
@@ -17,7 +17,7 @@ u32 campCecRecvWaitAndResume(CampCecResumeState* work)
         break;
     default:
         if (campCecRecvIsDone()) {
-            FUN_0037bd00();
+            campCecRecvDestroy();
             sysPlaySe(0x10d);
             work->state = 1;
             work->unk14c = 0;
