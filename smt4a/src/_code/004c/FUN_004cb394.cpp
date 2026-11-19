@@ -120,9 +120,7 @@ void FUN_004cb394(void *owner, StatusTintRecord *record)
                 return;
             }
             next++;
-            if (next >= 14) {
-                next = 0;
-            }
+            next = next >= 14 ? 0 : next;
         } while (status != next);
     }
 }

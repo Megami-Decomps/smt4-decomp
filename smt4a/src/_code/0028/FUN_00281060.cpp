@@ -1,4 +1,4 @@
-/* NON_MATCHING: the glyph table is now the retail data symbol (DAT_0053d3e8, copied to the stack with vldm/vstm); the frame is 8 bytes larger than retail's 36 and the length return/loop scheduling differ. */
+/* NON_MATCHING: the glyph table is the retail data symbol (DAT_0053d3e8, copied to the stack with vldm/vstm); this build places it at sp+16 in a 44-byte frame (retail sp+12, 36 bytes), and the zero-length early exit returns r4 instead of sharing the r6 exit. */
 #include "common.h"
 #include "runtime/Stdio.h"
 
@@ -44,20 +44,16 @@ s32 FUN_00281060(char *destination, u32 value, s32 width, s32 zeroPad)
     } else {
         __2sprintf(buffer, DAT_0053d40c, value);
     }
-    if (width > 0) {
-        const s8 *character = reinterpret_cast<const s8 *>(buffer + (10 - width));
-        do {
-            u32 digit = 10;
-            if ((u32)(*character - '0') <= 9) {
-                digit = *character - '0';
-            }
-            if (destination != NULL) {
-                *destination++ = digits.glyphs[digit][0];
-                *destination++ = digits.glyphs[digit][1];
-            }
-            --width;
-            ++character;
-        } while (width > 0);
+    const s8 *character = reinterpret_cast<const s8 *>(buffer + (10 - width));
+    for (; width > 0; --width, ++character) {
+        u32 digit = 10;
+        if ((u32)(*character - '0') <= 9) {
+            digit = *character - '0';
+        }
+        if (destination != NULL) {
+            *destination++ = digits.glyphs[digit][0];
+            *destination++ = digits.glyphs[digit][1];
+        }
     }
     return length;
 }

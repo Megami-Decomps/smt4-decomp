@@ -5055,3 +5055,18 @@
 002897f0 eventScriptFindCompletionFlag inferred its result is stored as the event's completion flag and later passed to gameFlagSetValue (FUN_0019f3dc); Apocalypse inlines a `mov r0, #0` stub of it
 00283f80 equipListDrawRowDetails inferred draws an equipment list row's details (name, category badge, attack/defence values compared with the equipped item)
 0018b978 configUpdate inferred the config screen's update (choices, help, touch regions); smt4a's configUpdate is the same screen
+0011c834 ipcServiceSessionAcquire inferred opens the "ndm:u" service session on the first reference under its critical section; the acquire half of ipcServiceSessionRelease
+0023a244 ipcServiceSessionRelease inferred same code as smt4a ipcServiceSessionRelease (reference drop, CloseHandle on the last, 0xC8A06BF8 with none held)
+002b30fc asdMemClassifyAddress inferred returns which of g_asdMemState's four registered regions holds an address (0 when none)
+00146704 handleCloseAndReset inferred closes a handle (fatal on failure) and replaces it with the default handle value; returns the nn::Result
+00125e64 titleDbgBgDraw inferred twin of smt4a titleDbgBgDraw (title debug background, PC/ROM load label, title string)
+00102438 faderStepAll inferred steps every screen fader (frame count, start/end interpolation per state)
+001a9f6c rotationFromAxisDegrees inferred builds a rotation from a normalised axis and an angle in degrees (sine/cosine of the half angle)
+0021f354 tmnlDrawDestinationName inferred twin of smt4a FUN_003161b4 (same terminal name draw)
+001a6d98 uiQuestDrawList inferred twin of smt4a uiQuestDrawList (quest list rows, focused plate, scroll bar)
+001e553c mapDepartUpdate inferred the "DEPART C" process update MapDepart_Init registers (found-item list, prompt, exit and event script)
+002ccc28 campCommandGetImages inferred a camp command's icon and label image ids (selected variant with the last argument 1)
+001a26dc sortMenuDraw inferred the draw callback sortMenuCreate registers for the "SORT DDRAW" task
+0022f1d0 shopDrawListRow inferred draws one shop list row (frame, badge, marks, name, price, owned count)
+0028fb3c itemGetOwnedCount inferred the owned count drawn beside a shop row (forwards flagValueRead)
+00230e04 shopSlotGetPrice inferred a shop slot entry's price

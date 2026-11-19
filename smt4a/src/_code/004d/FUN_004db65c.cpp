@@ -32,11 +32,9 @@ FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, PackedIdent
 {
     FusionState *found = 0;
     PairedKeyRecord *record;
-    if (first < second) {
-        record = dataTable1fFindPairedKey(first, second);
-    } else {
-        record = dataTable1fFindPairedKey(second, first);
-    }
+    record = first < second
+        ? dataTable1fFindPairedKey(first, second)
+        : dataTable1fFindPairedKey(second, first);
     if (record != 0) {
         result->firstIdentifier = first;
         result->secondIdentifier = second;

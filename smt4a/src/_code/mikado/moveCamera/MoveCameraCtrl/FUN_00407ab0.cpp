@@ -91,8 +91,7 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
     ctrl->unk08 = 0;
     ctrl->unk04 = 0;
     ctrl->pointCount = 0;
-    if (dataName == NULL)
-        dataName = cameraName;
+    dataName = dataName == NULL ? cameraName : dataName;
     ctrl->hasPoints = 0;
 
     char path[128];

@@ -31,9 +31,7 @@ u32 FUN_001a16c0(u32 job)
 
             if (curtain < 16) {
                 curtain = curtain * -30;
-                if (curtain < -240) {
-                    curtain = -240;
-                }
+                curtain = curtain < -240 ? -240 : curtain;
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
                 if (curtain > -240) {
                     texDrawTableEntryAtStoredOrigin(2, 0x28, 0x113, 0, curtain, 0xF1);

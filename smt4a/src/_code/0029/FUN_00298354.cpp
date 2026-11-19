@@ -41,11 +41,9 @@ extern "C" s32 FUN_00298354(u32 handle)
         previous = 11;
     }
     u32 previousState;
-    if (jobIsValid(jobs->jobs[previous])) {
-        previousState = slotProgress(&work->slots[((JobPool *)work->battle)->current])->state;
-    } else {
-        previousState = ~0u;
-    }
+    previousState = jobIsValid(jobs->jobs[previous])
+        ? slotProgress(&work->slots[((JobPool *)work->battle)->current])->state
+        : ~0u;
     s32 state = (slot->flags & 2) ? slot->pendingState : slot->state;
     if (state == 11 && previousState <= 29) {
         canAdvance = false;

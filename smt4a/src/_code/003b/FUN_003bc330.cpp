@@ -22,7 +22,7 @@ u32 FUN_003bc330(void)
             if ((g_btlCandidateMasks.required & entry->flags) != 0 &&
                 (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
                 (entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
-                (entry->flags & g_btlCandidateMasks.singleAction) == 0 &&
+                !hasSingleAction(g_btlCandidateMasks, *entry) &&
                 battleUnitHasElementEntry(entry, first, second)) {
                 ++count;
             }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: rewritten from the retail flow; node field scheduling and the VFP register numbering of the fade interpolation differ (retail converts the elapsed count into a separate s4). */
+/* NON_MATCHING: rewritten from the retail flow; the fade interpolation now matches, only the request-node field stores are scheduled differently (retail loads the params word into r1 and shifts the fade bit before the first store). */
 #include "classes/Obj421aa4Requests.h"
 #include "classes/SoundVoiceOwner.h"
 
@@ -19,11 +19,9 @@ extern "C" void FUN_00379e18(SoundVoiceOwner *owner)
             f32 value;
             s32 elapsed = fade->elapsed;
             s32 duration = fade->duration;
-            if (elapsed >= duration) {
-                value = fade->target;
-            } else {
-                value = (fade->target - fade->start) * (f32)elapsed / (f32)duration + fade->start;
-            }
+            value = elapsed >= duration
+                ? fade->target
+                : (fade->target - fade->start) * (f32)elapsed / (f32)duration + fade->start;
             node->word2 = *(u32 *)&value;
             listAppendNode(manager, node);
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same search; retail walks the key pointer in the incoming register with write-back loads, this build allocates the pointer and tick in different registers. */
+/* NON_MATCHING: the lookup is an inlined helper as in its byte-key sibling FUN_003f8ad0 (retail's writeback load); IDENTICAL under -O2 -Otime (as FUN_003f8ad0; not applied: the neighbouring curve units match at the default flags (animCurveFindPackedKey, resourceGetPackedSampleFloat) or get worse with it (frameCurveFindKeyAtTime)), at -O3 armcc numbers the curve copy and the tick r1/r2 where retail uses r2/r1. */
 #include "common.h"
 
 struct CurveKey {
@@ -14,7 +14,7 @@ struct Curve {
 };
 
 /* Value of the last key whose time is not after `time`, searched from an interpolated guess. */
-extern "C" s32 FUN_003f8b54(const Curve *curve, f32 time)
+static __inline s32 curveLookup(const Curve *curve, f32 time)
 {
     u32 tick = (u32)time;
     const CurveKey *key = curve->keys;
@@ -36,4 +36,9 @@ extern "C" s32 FUN_003f8b54(const Curve *curve, f32 time)
         }
     }
     return key->value;
+}
+
+extern "C" s32 FUN_003f8b54(const Curve *curve, f32 time)
+{
+    return curveLookup(curve, time);
 }

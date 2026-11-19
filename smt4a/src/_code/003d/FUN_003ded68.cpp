@@ -1,9 +1,9 @@
 #include "shard/W5_W5Match7_DataRecord.h"
 #include "quest_center/QuestRecordA.h"
+#include "quest_center/QuestUnlock.h"
 extern "C" {
 ItemEligibilityStateA* gameGetPlayerData(void);
 s32 goalConditionsSatisfied(s32);
-s32 gameUnlockRecordRequirementsMet(s32);
 s32 partyEntryFlagsBit3(s32);
 s32 partyEntryFlagsBit1(s32);
 

@@ -286,33 +286,45 @@ struct RenderUpdateContextPrefixA {
     u8 transform[0x40];
 };
 
-/* Observed Apocalypse state prefix, not a recovered allocation boundary. */
-struct RenderUpdateStatePrefixA {
-    u8 unk000[4];
-    u32 flags;
-    u8 unk008[0x10];
-    RenderUpdateOutputPrefixA *output;
+/* The trailing parameter block of the Apocalypse render-update state (retail addresses it as a block). */
+struct RenderUpdateParametersA {
+    f32 value0;     /* 0x00 */
+    f32 value1;     /* 0x04 */
+    u8 unk08[8];
+    f32 value2;     /* 0x10 */
+    u8 attribute0;  /* 0x14 */
+    u8 attribute1;
+    u8 attribute2;
+    u8 mode;        /* 0x17 */
+};
+
+/* The block at 0x10 of the Apocalypse render-update state: the output and the projection values
+ * (retail reaches them through state + 0x10). */
+struct RenderUpdateCoreA {
+    u8 unk00[8];
+    RenderUpdateOutputPrefixA *output; /* 0x08 */
     union {
-        u8 unk01C[0xB8];
+        u8 unk0C[0xB8];
         struct {
             u8 prefix[0xB0];
             s32 kind;
             f32 depthOffset;
         } projection;
     };
-    f32 value3;
-    f32 value4;
+    f32 value3; /* 0xC4 */
+    f32 value4; /* 0xC8 */
+};
+
+/* Observed Apocalypse state prefix, not a recovered allocation boundary. */
+struct RenderUpdateStatePrefixA {
+    u8 unk000[4];
+    u32 flags;
+    u8 unk008[8];
+    RenderUpdateCoreA core; /* 0x10 */
     u8 unk0DC[4];
     RenderUpdateBatchA *batch;
     u8 unk0E4[0x98];
-    f32 value0;
-    f32 value1;
-    u8 unk184[8];
-    f32 value2;
-    u8 attribute0;
-    u8 attribute1;
-    u8 attribute2;
-    u8 mode;
+    RenderUpdateParametersA parameters; /* 0x17C */
 };
 
 typedef char RenderUpdateOutputPrefixALayoutCheck[
@@ -328,24 +340,25 @@ typedef char RenderUpdateContextPrefixALayoutCheck[
 typedef char RenderUpdateStatePrefixALayoutCheck[
     sizeof(RenderUpdateStatePrefixA) == 0x194 &&
     offsetof(RenderUpdateStatePrefixA, flags) == 4 &&
-    offsetof(RenderUpdateStatePrefixA, output) == 0x18 &&
-    offsetof(RenderUpdateStatePrefixA, value3) == 0xD4 &&
-    offsetof(RenderUpdateStatePrefixA, value4) == 0xD8 &&
+    offsetof(RenderUpdateStatePrefixA, core) == 0x10 &&
+    offsetof(RenderUpdateStatePrefixA, core.output) == 0x18 &&
+    offsetof(RenderUpdateStatePrefixA, core.value3) == 0xD4 &&
+    offsetof(RenderUpdateStatePrefixA, core.value4) == 0xD8 &&
     offsetof(RenderUpdateStatePrefixA, batch) == 0xE0 &&
-    offsetof(RenderUpdateStatePrefixA, value0) == 0x17C &&
-    offsetof(RenderUpdateStatePrefixA, value1) == 0x180 &&
-    offsetof(RenderUpdateStatePrefixA, value2) == 0x18C &&
-    offsetof(RenderUpdateStatePrefixA, attribute0) == 0x190 &&
-    offsetof(RenderUpdateStatePrefixA, attribute1) == 0x191 &&
-    offsetof(RenderUpdateStatePrefixA, attribute2) == 0x192 &&
-    offsetof(RenderUpdateStatePrefixA, mode) == 0x193 ? 1 : -1];
+    offsetof(RenderUpdateStatePrefixA, parameters.value0) == 0x17C &&
+    offsetof(RenderUpdateStatePrefixA, parameters.value1) == 0x180 &&
+    offsetof(RenderUpdateStatePrefixA, parameters.value2) == 0x18C &&
+    offsetof(RenderUpdateStatePrefixA, parameters.attribute0) == 0x190 &&
+    offsetof(RenderUpdateStatePrefixA, parameters.attribute1) == 0x191 &&
+    offsetof(RenderUpdateStatePrefixA, parameters.attribute2) == 0x192 &&
+    offsetof(RenderUpdateStatePrefixA, parameters.mode) == 0x193 ? 1 : -1];
 typedef char RenderUpdateProjectionOffsets[
     offsetof(RenderUpdateContextPrefixA, projection.fieldOfView) == 0x28 &&
     offsetof(RenderUpdateContextPrefixA, projection.nearClip) == 0x2c &&
     offsetof(RenderUpdateContextPrefixA, projection.farClip) == 0x30 &&
     offsetof(RenderUpdateContextPrefixA, projection.aspect) == 0x34 &&
-    offsetof(RenderUpdateStatePrefixA, projection.kind) == 0xcc &&
-    offsetof(RenderUpdateStatePrefixA, projection.depthOffset) == 0xd0 &&
+    offsetof(RenderUpdateStatePrefixA, core.projection.kind) == 0xcc &&
+    offsetof(RenderUpdateStatePrefixA, core.projection.depthOffset) == 0xd0 &&
     sizeof(RenderUpdateContextPrefixA) == 0xe8 &&
     sizeof(RenderUpdateStatePrefixA) == 0x194 ? 1 : -1];
 

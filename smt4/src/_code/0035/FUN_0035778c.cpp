@@ -4,7 +4,7 @@ extern "C" {
 
 s32 nn_cec_CTR_detail_InitializeCecControl(void);
 void FUN_00358f98(void);
-s32 FUN_0011c834(void);
+s32 ipcServiceSessionAcquire(void);
 void nn_cfg_CTR_Initialize(void);
 u8 nn_cfg_CTR_IsDebugMode(void);
 void FUN_001467a4(void);
@@ -30,7 +30,7 @@ s32 FUN_0035778c(void)
             return init;
         }
         FUN_00358f98();
-        s32 setup = FUN_0011c834();
+        s32 setup = ipcServiceSessionAcquire();
         result = setup;
         if (!nnResultIsSuccess(setup)) {
             return setup;

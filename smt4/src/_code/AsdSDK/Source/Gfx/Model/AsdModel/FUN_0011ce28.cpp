@@ -17,11 +17,9 @@ s32 FUN_0011ce28(u32 request)
         s32 result = FUN_001383a8(&DAT_00471ba4, request);
         const u32 status = static_cast<u32>(result);
         s32 level;
-        if (status & 0x80000000u) {
-            level = static_cast<s32>(status >> 27) - 32;
-        } else {
-            level = static_cast<s32>(status >> 27);
-        }
+        level = status & 0x80000000u
+            ? static_cast<s32>(status >> 27) - 32
+            : static_cast<s32>(status >> 27);
 
         if (level == -5) {
             u32 summary = (status & 0x07e00000u) >> 21;

@@ -15,7 +15,7 @@ void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 s32 FUN_003da8f4(s32 cursor, u32 value);
 void campDrawDetailArea(s32 item, u32 mode);
-void FUN_00217f14(void);
+void campDrawCommandMenu(void);
 void FUN_00288538(s32 flag);
 s32 uniteGetState(void);
 s32 vec2GetXInt(void);
@@ -45,7 +45,7 @@ static __inline void campDrawItemDetail(CampStateA *camp)
         FUN_00288538(0);
     if (camp->unitSelectActive != 0)
         campDrawBar(camp);
-    FUN_00217f14();
+    campDrawCommandMenu();
 }
 
 u32 FUN_00227418(void)
@@ -77,13 +77,13 @@ u32 FUN_00227418(void)
     case 0x20: case 0x21: case 0x22:
         if (uniteGetState() == 3 || camp->sprites[0].finished == 0) {
             campDrawBar(camp);
-            FUN_00217f14();
+            campDrawCommandMenu();
         }
         break;
     case CAMP_MENU_UNITE_LOCKED:
         if (camp->unitSelectActive != 0 && camp->sprites[0].finished == 0) {
             campDrawBar(camp);
-            FUN_00217f14();
+            campDrawCommandMenu();
         }
         break;
     default:

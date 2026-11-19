@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild of the item-sale list builder; retail hoists the list base (+0x9FFC), the counter address and the price accumulator address into callee-saved registers and builds the packed item word in a stack slot with piece moves, which armcc here allocates differently. */
+#include "gamedata/EquipmentSortPower.h"
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -52,7 +53,6 @@ s32 sortCompareKeyPair(const void *left, const void *right);
 
 u16 *statisticsGetCounter(u8 rank, u32 seed);
 s32 FUN_0028e9d0(u32 flag);
-s32 FUN_0028fb3c(u32 flag);
 void aocRecordLookup83(u32 flag);
 u32 resolveWeightedItemChoice(u32 a, u32 b, u32 c, u32 d);
 s32 FUN_0022f1b8(u32 item);
@@ -75,7 +75,7 @@ void FUN_003a4210(SaleMenu *menu)
     for (u32 flag = 0x3B7; flag < 0x47F; flag++) {
         if (!FUN_0028e9d0(flag))
             continue;
-        s32 owned = FUN_0028fb3c(flag);
+        s32 owned = itemGetOwnedCount(flag);
         for (s32 n = 0; n < owned; n++) {
             aocRecordLookup83(flag);
             u32 choice = resolveWeightedItemChoice(flag, 0xFFFF, 0xFFFF, 1);

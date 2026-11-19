@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc merges the highlighted draw branches and tail-calls the global speed setter, unlike retail. */
+/* NON_MATCHING: with the glyph buffer scoped to the draw (retail tail-calls efctSetSpeed) only the callee-saved registers differ: retail keeps x/y in r7/r8 and dimmed in r6, the build x/y in r6/r7 and dimmed in r8. */
 #include "common.h"
 #include "text/TextDraw.h"
 
@@ -34,13 +34,15 @@ extern "C" void uiDrawEncodedGlyph(void *, s32 code, s32 x, s32 y, s32 dimmed, s
         if (opacity < 0.0f)
             opacity = 0.0f;
     }
-    u8 text[3];
-    text[0] = static_cast<u8>(static_cast<u32>(code) >> 8);
-    text[1] = static_cast<u8>(code);
-    text[2] = 0;
-    if (highlighted)
-        textDrawString(static_cast<f32>(x), static_cast<f32>(y), 0.0f, 4, 0.0f, color, opacity, (const char *)text);
-    else
-        textDrawString(static_cast<f32>(x), static_cast<f32>(y), 0.0f, 3, 0.0f, color, opacity, (const char *)text);
+    {
+        u8 text[3];
+        text[0] = static_cast<u8>(static_cast<u32>(code) >> 8);
+        text[1] = static_cast<u8>(code);
+        text[2] = 0;
+        if (highlighted)
+            textDrawString(static_cast<f32>(x), static_cast<f32>(y), 0.0f, 4, 0.0f, color, opacity, (const char *)text);
+        else
+            textDrawString(static_cast<f32>(x), static_cast<f32>(y), 0.0f, 3, 0.0f, color, opacity, (const char *)text);
+    }
     efctSetSpeed(speed);
 }

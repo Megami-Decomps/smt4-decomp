@@ -11,7 +11,7 @@ extern "C" {
 extern ShopTabIcons DAT_0044e020[];
 void uiRectDrawAtBottomRight(void *header, u32 id, s32 dx, s32 dy, u32 flags);
 void FUN_00231bcc(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
-void FUN_0022f1d0(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
+void shopDrawListRow(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
 s32 FUN_0029e924(ShopCategoryList *list);
 s32 flaggedEntryGetValueByState(ShopCategoryList *list);
 s32 rangeLimitMin(ShopCategoryList *list);
@@ -65,10 +65,10 @@ void FUN_003a1f00(ShopScreen *screen, u32 sprite)
     s32 count = rangeLimitMin(list);
     for (s32 i = 0; i < count; ++i) {
         if (!compact || flaggedEntryGetValueByState(list) != i)
-            FUN_0022f1d0(screen, i + 1, 0, &slots[first + i]);
+            shopDrawListRow(screen, i + 1, 0, &slots[first + i]);
     }
     if (compact && list->range.count > 0)
-        FUN_0022f1d0(screen, flaggedEntryGetValueByState(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
+        shopDrawListRow(screen, flaggedEntryGetValueByState(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
     FUN_002332e8(screen->view, FUN_0029e924(list), flaggedEntryGetValueByState(list));
     screen->view->refresh(color);
 }

@@ -1,7 +1,17 @@
-/* NON_MATCHING: same shape as smt4 contentTransitionProcessDeparture (flag tests and the record stores of state and phase match); remaining: retail places the shared state-17 tail right after the sequence request (the map branches branch back to it) and orders the 6/8 selection's movge/movlt the other way. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "map/MapSelection.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include <stddef.h>
+
+/* The transition's departure work: the map-departure flags and the delayed-return counter. */
+struct ContentDepartureWorkA : ContentTransition {
+    /* 0x0048 */ u8 specialMapPending;
+    /* 0x0049 */ u8 mapPending;
+    /* 0x004A */ u8 unk004a[0x10EA];
+    /* 0x1134 */ s16 delayFrames;
+};
+typedef char ContentDepartureWorkALayout[offsetof(ContentDepartureWorkA, specialMapPending) == 0x48 &&
+    offsetof(ContentDepartureWorkA, delayFrames) == 0x1134 ? 1 : -1];
 
 extern "C" {
 extern MapSelection g_mapSelection;
@@ -13,78 +23,65 @@ void campScriptPanelResourcesRelease(ContentTransition *work);
 void mikadoLoadSceneResources(ContentTransition *work);
 void __ARM_common_memcpy4_6(ShortJumpDestination *source, ShortJumpDestination *destination);
 
-/* True when a pending request flag that supersedes the departure is set. */
-static __inline bool departureIsSuperseded(u32 flags)
+/* Whether either of two flag bits is set. */
+static __inline bool flagsAny(u32 flags, u32 first, u32 second)
 {
-    if (flags & 0x200000)
+    if (flags & first)
         return true;
-    if (flags & 0x40000)
-        return true;
-    if (flags & 0x800000)
-        return true;
-    if (flags & 0x4000000)
-        return true;
-    if (flags & 0x1000000)
-        return true;
-    if (flags & 0x2000000)
-        return true;
-    if (flags & 0x8000000)
-        return true;
-    if (flags & 0x20000000)
+    if (flags & second)
         return true;
     return false;
 }
 
-// Finish delayed departure, switch sequence or prepare the requested map destination.
-void FUN_004b9410(ContentTransition *work)
+/* Departure step of a content transition: waits out the fade or the delayed return, then starts the
+ * requested sequence, map departure or scene load. */
+void FUN_004b9410(ContentDepartureWorkA *work)
 {
-    struct DepartureWorkView {
-        ContentTransition transition;
-        u8 worldMapReady;
-        u8 localMapReady;
-        u8 padding[0x10EA];
-        s16 delay;
-    };
-    DepartureWorkView *departure = reinterpret_cast<DepartureWorkView *>(work);
-    if ((work->flags & 0x100) == 0 && screenFadeIsBusy())
+    if (!(work->flags & 0x100) && screenFadeIsBusy() != 0) {
         return;
+    }
     u32 flags = work->flags;
-    if ((flags & 0x400000) != 0) {
-        ++departure->delay;
-        if (departure->delay >= 30) {
+    if (flags & 0x400000) {
+        ++work->delayFrames;
+        if (work->delayFrames >= 30) {
             FUN_004a0bac(0, 1);
             titleSetSlotValueState2(0, 10);
-            work->flags &= ~0x400000;
+            work->flags &= ~0x400000u;
             work->step = contentTransitionStep(5, 0);
         }
         return;
     }
-    if (!departureIsSuperseded(flags) && (flags & 0x10) != 0) {
-        if ((flags & 0x80000) != 0) {
-            asdSequenceRequest(g_mapSelection.id < 100 ? 6 : 8, 0, 0);
-            work->step.state = 0x11;
-            work->step.phase = 0;
-            return;
-        } else if ((flags & 0x100000) != 0) {
-            s32 map = (s16)work->destination.map;
-            if (map >= 100) {
-                if (map != 100)
-                    mapPlaceSet(map, 1, -1);
-                departure->worldMapReady = 1;
-            } else {
-                mapPlaceSet(map, (s16)work->destination.area, (s16)work->destination.place);
-                departure->localMapReady = 1;
-            }
-        } else {
-            campScriptPanelResourcesRelease(work);
-            __ARM_common_memcpy4_6(reinterpret_cast<ShortJumpDestination *>(&work->sourceMap), &work->destination);
-            mikadoLoadSceneResources(work);
-            work->step = contentTransitionStep(2, 0);
-            work->flags &= ~0x10;
-            return;
-        }
+    if (flagsAny(flags, 0x200000, 0x40000) || flagsAny(flags, 0x800000, 0x4000000) ||
+        flagsAny(flags, 0x1000000, 0x2000000) || flagsAny(flags, 0x8000000, 0x20000000) || !(flags & 0x10)) {
+        work->step.state = 17;
+        work->step.phase = 0;
+        return;
     }
-    work->step.state = 0x11;
+    if (flags & 0x80000) {
+        asdSequenceRequest(g_mapSelection.id >= 100 ? 8 : 6, NULL, 0);
+    } else if (flags & 0x100000) {
+        s32 map = (s16)work->destination.map;
+        if (map >= 100) {
+            if (map != 100) {
+                mapPlaceSet(map, 1, -1);
+            }
+            work->specialMapPending = 1;
+        } else {
+            mapPlaceSet(map, (s16)work->destination.area, (s16)work->destination.place);
+            work->mapPending = 1;
+        }
+        work->step.state = 17;
+        work->step.phase = 0;
+        return;
+    } else {
+        campScriptPanelResourcesRelease(work);
+        __ARM_common_memcpy4_6(reinterpret_cast<ShortJumpDestination *>(&work->sourceMap), &work->destination);
+        mikadoLoadSceneResources(work);
+        work->step = contentTransitionStep(2, 0);
+        work->flags &= ~0x10u;
+        return;
+    }
+    work->step.state = 17;
     work->step.phase = 0;
 }
 }

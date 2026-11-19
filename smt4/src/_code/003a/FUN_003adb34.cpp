@@ -1,8 +1,7 @@
-/* NON_MATCHING: animation-group indexing swaps the r3/ip scratch-register allocation. */
-/* Reports an active number popup in an enabled battle UI slot or one of its markers. */
 #include "battle/BtlUiGlobal.h"
 
 extern "C" {
+/* Reports an active number popup in an enabled battle UI slot or one of its markers. */
 u32 FUN_003adb34(u32 unused, s32 group)
 {
     BtlUi *ui = g_btlUi.ui;
@@ -10,8 +9,7 @@ u32 FUN_003adb34(u32 unused, s32 group)
         if (ui->objD.numbers.slots[group].active) {
             return 1;
         }
-        s32 count = ui->objD.animationCounts.counts[group];
-        for (s32 i = 0; count > i; ++i) {
+        for (s32 i = 0; i < ui->objD.animationCounts.counts[group]; ++i) {
             if (ui->objD.animationMarkers.rows[group].entries[i].active) {
                 return 1;
             }

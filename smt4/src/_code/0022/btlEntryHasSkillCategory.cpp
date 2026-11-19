@@ -15,8 +15,8 @@ u32 btlEntryHasSkillCategory(const BtlEntry *entry, s32 category)
     u32 found = 0;
     BattleEntrySummary summary;
     btlEntryBuildSummary(&summary, btlGetMainState(), entry);
-    if (summary.skill.skillId) {
-        const SkillDataRecord *skill = skillDataFindById(summary.skill.skillId);
+    if (summary.skillId) {
+        const SkillDataRecord *skill = skillDataFindById(summary.skillId);
         if (skill) {
             u32 value = skill->menuCategory;
             if (value && (s32)(value - 1) == category) {

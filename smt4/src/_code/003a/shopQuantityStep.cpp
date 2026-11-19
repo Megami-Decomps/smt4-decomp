@@ -29,7 +29,7 @@ void FUN_00233240(Scene3aSprites *sprites, u32 index);
 void rectangleInitializeSelection(EmptyRange *range, s32 x, s32 y, s32 selection);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 void FUN_0022e538(NumericStepper *stepper);
-s32 FUN_00230e04(const ShopSlot *item);
+s32 shopSlotGetPrice(const ShopSlot *item);
 s32 aocItemGetPrice(const ShopSlot *item);
 u32 messageTargetSetValue(u32 value, u8 flag);
 void FUN_002937c8(ShopCategoryList *list);
@@ -79,7 +79,7 @@ static __inline s32 shopQuantityPrice(ShopScreen *screen)
     if (screen->slot == 8) {
         return aocItemGetPrice(item) * screen->quantity.value;
     } else {
-        return FUN_00230e04(item) * screen->quantity.value;
+        return shopSlotGetPrice(item) * screen->quantity.value;
     }
 }
 
@@ -197,7 +197,7 @@ void shopQuantityStep(ShopScreen *screen)
             s32 maximum;
 
             if (screen->slot == 8) {
-                s32 held = FUN_0028fb3c(item->id);
+                s32 held = itemGetOwnedCount(item->id);
 
                 if (held < 0) {
                     held = 0;
@@ -209,7 +209,7 @@ void shopQuantityStep(ShopScreen *screen)
                     maximum--;
                 }
             } else {
-                maximum = btlRollClamped(item->id, FUN_00230e04(item));
+                maximum = btlRollClamped(item->id, shopSlotGetPrice(item));
             }
             numericStepperSetup(&screen->quantity, maximum, 0, row);
             FUN_0022e538(&screen->quantity);

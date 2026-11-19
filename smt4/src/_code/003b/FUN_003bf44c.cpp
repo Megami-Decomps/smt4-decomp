@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail preserves two additional integer registers and uses separate multiply/add scheduling. */
+/* NON_MATCHING: the division by 60 written in both arms and the separate bonus product give retail's hoisted 0x88888889 and vmul/vadd; remaining: retail also loads the 0.0f clamp floor into s17 before the clock call. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BattleBalanceRow.h"
@@ -20,10 +20,12 @@ s32 FUN_003bf44c()
 {
     BattleAmountWork *battle = reinterpret_cast<BattleAmountWork *>(btlGetMainState());
     gameGetSlotTable();
+    f32 minutes;
     u32 seconds = clockGetSecondsSinceStart();
     if (seconds == 0xffffffff)
-        seconds = saveBlockGetPlaySeconds();
-    f32 minutes = (f32)(seconds / 60);
+        minutes = (f32)(saveBlockGetPlaySeconds() / 60);
+    else
+        minutes = (f32)(seconds / 60);
     if (battle->elapsedMinutes != -1)
         minutes = (f32)battle->elapsedMinutes;
     if (minutes < 0.0f)
@@ -32,7 +34,8 @@ s32 FUN_003bf44c()
         minutes = 120.0f;
     f32 level = (f32)gameGetPlayerData()->level;
     f32 base = FUN_002b99b8(level, 2.5f) + level * 80.0f;
-    s32 amount = (s32)(base + base * minutes * 0.008333334f);
+    f32 bonus = base * minutes * 0.008333334f;
+    s32 amount = (s32)(base + bonus);
     s32 scaled = (s32)(FUN_0023ea94()->amountMultiplier * (f32)amount);
     return scaled == 0 ? 1 : scaled;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the lookup is now an inlined helper (the table pointer advances with the retail writeback load); armcc numbers the table copy and key r1/r2 where retail uses r2/r1. */
+/* NON_MATCHING: the lookup is an inlined helper (the table pointer advances with the retail writeback load) and walks down first as retail does; IDENTICAL under -O2 -Otime (as its u16 sibling FUN_003f8b54; not applied: the neighbouring curve units match at the default flags (animCurveFindPackedKey, resourceGetPackedSampleFloat) or get worse with it (frameCurveFindKeyAtTime)), at -O3 armcc numbers the table copy and key r1/r2 where retail uses r2/r1. */
 #include "common.h"
 
 struct ByteEntry003f8ad0 {
@@ -25,15 +25,15 @@ static __inline s32 byteCurveLookup(const ByteTable003f8ad0 *curve, f32 x)
         entry = &curve->entries[curve->count - 1];
         if (key < entry->key) {
             entry = &curve->entries[(u32)(curve->scale * ((f32)(curve->count - 1) * x))];
-            if (key >= entry->key) {
+            if (key < entry->key) {
+                do {
+                    entry--;
+                } while (entry->key > key);
+            } else {
                 do {
                     entry++;
                 } while (key >= entry->key);
                 entry--;
-            } else {
-                do {
-                    entry--;
-                } while (entry->key > key);
             }
         }
     }

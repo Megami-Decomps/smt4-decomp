@@ -64,8 +64,7 @@ u32 asdMdlObjectBuildBounds(AsdMdlObject *object)
                     f32 z = corner.v[2] * 0.5f + center.v[2];
                     if (radius < z)
                         radius = z;
-                    if (height < y)
-                        height = y;
+                    height = height < y ? y : height;
                 }
                 bounds->radius = radius;
                 bounds->height = height;

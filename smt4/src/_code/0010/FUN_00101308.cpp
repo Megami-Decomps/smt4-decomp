@@ -17,7 +17,7 @@ int sleepQueryAnswer(...);
 int FUN_002c560c(...);
 int FUN_002c5620(...);
 
-int FUN_00102438(...);
+int faderStepAll(...);
 int asdProcessUpdate(...);
 int FUN_00103c9c(...);
 int FUN_00103d48(...);
@@ -269,7 +269,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00102438. */
+/* Supplied declaration required: faderStepAll. */
 /* Supplied declaration required: FUN_0010250c. */
 /* Supplied declaration required: messageInitializeDisplay. */
 /* Supplied declaration required: ifTouchAcquire. */
@@ -737,7 +737,7 @@ LAB_00101b80:
           temp_v2 = 2;
         }
         iRam00446dcc = temp_v2;
-        FUN_00102438();
+        faderStepAll();
         if (DAT_00446db4 != '\0') {
           FUN_00105970();
           if (DAT_00446db4 != '\0') {

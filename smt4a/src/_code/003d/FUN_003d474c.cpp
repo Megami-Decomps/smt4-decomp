@@ -29,7 +29,7 @@ s32 partyEntryFlagsBit3(u32 id);
 s32 partyEntryBitsBit4(u32 id);
 u32 questHasSpecialDetailPage(u32 id);
 u32 rosterGetLeaderId(void);
-s32 FUN_003de75c(u32 id);
+s32 questRecordIsUsable(u32 id);
 s32 FUN_00284dbc(u32 id); /* a `mov r0, #0` stub armlink inlines */
 void *dataTableGet(u32 table, u32 section);
 void *dataTableGetEntries(void *section);
@@ -64,7 +64,7 @@ void FUN_003d474c(void)
         QuestRecordA *record = questDataGetRecord(id);
 
         if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
-            if (FUN_003de75c(id) == 0 && FUN_00284dbc(id) == 0) {
+            if (questRecordIsUsable(id) == 0 && FUN_00284dbc(id) == 0) {
                 if (partyEntryFlagsBit3(id) == 0) {
                     state = 5;
                 } else if (partyEntryBitsBit4(id) != 0) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: only register choice differs (retail keeps the resource in r5 and the record in r4 and takes the record's NULL from the shared zero register r6). */
+/* NON_MATCHING: retail predicates the resource check (moveq r5, r0 / mov r5, #0) where this build materializes the NULL in r0 first, and retail takes the record's NULL from the shared zero register r6. */
 #include "common.h"
 
 extern "C" {
@@ -34,11 +34,7 @@ static __inline GfxRecord *gfxSelfRelativeRecord(s32 *offset)
 void FUN_00451ea8(GfxResource *resource)
 {
     GfxResource *checked;
-    if (resource != NULL && (~resource->flags & 0x20000011) == 0) {
-        checked = resource;
-    } else {
-        checked = NULL;
-    }
+    checked = resource != NULL && (~resource->flags & 0x20000011) == 0 ? resource : NULL;
 
     if (checked->owner != 0) {
         GfxRecord *record = gfxSelfRelativeRecord(&checked->recordOffset);

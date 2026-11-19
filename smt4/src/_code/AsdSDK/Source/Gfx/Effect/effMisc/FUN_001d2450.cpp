@@ -30,8 +30,7 @@ ParticleInstanceIV *FUN_001d2450(ParticleSourcePrefixIV *source)
     if (count == 0)
         count = definition->fallbackCount;
     count *= source->resource->definition->countMultiplier;
-    if (count > 300)
-        count = 300;
+    count = count > 300 ? 300 : count;
 
     ParticleInstanceIV *instance = allocateParticleInstance(sizeof(ParticleInstanceIV));
     instance->index = -1;

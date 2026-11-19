@@ -29,10 +29,13 @@ struct UnitModelView {
     u8 unk00[0x30];
     UnitMeshTable *table;       /* 0x30 */
 };
-/* The data the unit's extra object is built from; only its count is known. */
+struct ModelEffectEntry;
+
+/* The model content's shared table of extra effects. */
 struct UnitExtraData {
-    u8 unk00[8];
-    s32 count;                  /* 0x08 */
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 count;
+    /* 0x0C */ ModelEffectEntry **entries;
 };
 struct UnitModelContent {
     u8 unk00[0xc];
@@ -68,11 +71,32 @@ struct UnitNodeTable {
 
 struct ModelUnitBuffers;
 
-/* The object built for a unit whose content has extra data (0x24 bytes). */
+/* A private list of effects copied from the unit's shared table. */
+struct ModelEffectList {
+    ModelEffectList() : count(0), items(NULL) {}
+    /* 0x00 */ s32 count;
+    /* 0x04 */ ModelEffectEntry **items;
+};
+
+/* The extra effect state associated with an individual model unit. */
 struct ModelUnitExtra {
     ModelUnitExtra(UnitExtraData *data, ModelUnitBuffers *owner);
-    u8 unk00[0x24];
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ UnitExtraData *table;
+    /* 0x08 */ ModelUnitBuffers *owner;
+    /* 0x0C */ s32 count;
+    /* 0x10 */ u32 modelId;
+    /* 0x14 */ ModelEffectList filtered;
+    /* 0x1C */ ModelEffectList list;
 };
+
+typedef char ModelUnitExtraLayoutCheck[sizeof(ModelUnitExtra) == 0x24 &&
+    offsetof(UnitExtraData, count) == 8 && offsetof(UnitExtraData, entries) == 0xC &&
+    offsetof(ModelUnitExtra, table) == 4 && offsetof(ModelUnitExtra, owner) == 8 &&
+    offsetof(ModelUnitExtra, modelId) == 0x10 && offsetof(ModelUnitExtra, filtered) == 0x14 &&
+    offsetof(ModelUnitExtra, list) == 0x1C ? 1 : -1];
+
+extern "C" void FUN_0041a270(ModelUnitExtra *effects);
 
 struct ModelUnitBuffers {
     u8 unk00[8];

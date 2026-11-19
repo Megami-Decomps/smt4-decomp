@@ -39,9 +39,7 @@ s32 FUN_004f7924(void *owner, BtlActionRecord *action)
     }
     BtlMainStateA *battle = btlGetMainState();
     s32 subject = idSetFindSubjectIndex(battle, action);
-    if (subject < 0) {
-        subject = 0;
-    }
+    subject = subject < 0 ? 0 : subject;
     BtlUnitDataA *subjects = btlFindEntryBlockByMemberId(battle, action->apocalypse.memberId);
     u16 id = subjects->id;
     s32 key = subjects->parts[subject];

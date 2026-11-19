@@ -46,10 +46,10 @@ extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: FUN_00230d2c. */
 /* Supplied declaration required: FUN_00230d84. */
-extern unsigned int FUN_00230e04(unsigned short *);
+extern unsigned int shopSlotGetPrice(unsigned short *);
 /* Supplied declaration required: contentGetKindValue. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern unsigned int FUN_0028fb3c(unsigned int);
+extern unsigned int itemGetOwnedCount(unsigned int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 extern int vec2GetYInt(int);
@@ -184,7 +184,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     temp_v14 = 0xffffffff;
     if (param_2 != 0 && temp_v5 != 8) {
-      temp_v10 = FUN_00230e04(param_4);
+      temp_v10 = shopSlotGetPrice(param_4);
       temp_v5 = btlRollClamped(*param_4,temp_v10);
       if (temp_v5 == 0) {
         temp_v14 = 0x787878ff;
@@ -199,7 +199,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     temp_v14 = 0xff;
     if (param_2 != 0 && temp_v5 != 8) {
-      temp_v10 = FUN_00230e04(param_4);
+      temp_v10 = shopSlotGetPrice(param_4);
       temp_v5 = btlRollClamped(*param_4,temp_v10);
       if (temp_v5 == 0) {
         temp_v14 = 0x5a5a5aff;
@@ -291,7 +291,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   sprintf((char *)temp_v20,(const char *)&LAB_0022f1a0,temp_v5);
   drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v21,0,7,temp_v6,temp_v12,temp_v20);
   if (param_2 != 0) {
-    temp_v8 = FUN_00230e04(param_4);
+    temp_v8 = shopSlotGetPrice(param_4);
     if (param_3 != 0) {
       temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xba);
       temp_v9 = 0xffffffff;
@@ -305,7 +305,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     sprintf((char *)temp_v20,(const char *)&LAB_0022f1a4,temp_v8);
     drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
   }
-  temp_v8 = FUN_0028fb3c(temp_v22);
+  temp_v8 = itemGetOwnedCount(temp_v22);
   if (param_3 != 0) {
     temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xbc);
     temp_v9 = 0xf49800ff;

@@ -83,24 +83,21 @@ struct SaveSlotDisplayRecord {
 typedef char SaveSlotTextObjectsSizeCheck[sizeof(SaveSlotTextObjects) == 0x0C ? 1 : -1];
 typedef char SaveSlotDisplayRecordSizeCheck[sizeof(SaveSlotDisplayRecord) == 0x3C ? 1 : -1];
 
-/* Return 10 for a leading blank; work in pairs of decimal places to keep divisions constant. */
+/* The decimal digit of `value` at `place` (1: the units), or 10 where a leading blank belongs. */
 static __inline u32 saveSlotDecimalDigit(u32 value, u8 place)
 {
-    if (value == 0) {
-        return place == 1 ? 0 : 10;
+    if (value == 0 && place == 1) {
+        return 0;
     }
-    u32 scale = (place & 1) == 0 ? 10 : 1;
-    for (u32 pair = ((u32)place - 1) >> 1; pair != 0; --pair) {
-        scale *= 100;
+    u32 scale = 1;
+    for (u32 i = place - 1; i != 0; i--) {
+        scale *= 10;
     }
-    if (value < scale) {
+    if (scale > value) {
         return 10;
     }
-    if ((place & 1) == 0) {
+    for (u32 i = place - 1; i != 0; i--) {
         value /= 10;
-    }
-    for (u32 pair = ((u32)place - 1) >> 1; pair != 0; --pair) {
-        value /= 100;
     }
     return value % 10;
 }

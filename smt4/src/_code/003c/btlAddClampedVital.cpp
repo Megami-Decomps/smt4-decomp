@@ -10,8 +10,7 @@ extern "C" {
 static __inline void addClampedVital(s16 *value, s16 maximum, s32 amount)
 {
     s32 result = *value + amount;
-    if (result < 0)
-        result = 0;
+    result = result < 0 ? 0 : result;
     if (result > maximum)
         result = maximum;
     *value = result;

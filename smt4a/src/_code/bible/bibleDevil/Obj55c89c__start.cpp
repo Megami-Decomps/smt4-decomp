@@ -117,9 +117,7 @@ void Obj55c89c::start()
   }
   spritePresetBankInitialize(param_1 + 0x37);
   temp_v0 = param_1[10];
-  if (temp_v0 >= 10) {
-    temp_v0 = 10;
-  }
+  temp_v0 = temp_v0 >= 10 ? 10 : temp_v0;
   messageIdListSetRange(param_1 + 0x206,0x14,0x40e,temp_v0);
   *(unsigned char *)(param_1 + 0x20a) = 1;
   buttonHelpSetText(0,0xf4f4f4ff);

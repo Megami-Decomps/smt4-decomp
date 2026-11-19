@@ -1,63 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042c5d0` (_code @ 0x42c5d0, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the command tail and the slot records (post-increment stores) match; retail stores the first header words one by one with the zero in r4 (build: an stm and the zero in r5), which renames the zero register throughout. */
+#include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
+u32 *FUN_00188a34(void);
+u32 *asdGxAppendStateReset(u32 *commands, u32 enabled);
+u32 *FUN_0042cbd8(u32 *commands, u32 enabled);
+u32 *FUN_0042c3c4(u32 *commands, u32 enabled);
 
-int sysMemClear(unsigned int *, int);
-
-extern unsigned int *FUN_00188a34(void);
-extern unsigned int asdGxAppendStateReset(unsigned int *, unsigned int);
-/* Supplied declaration required: sysMemClear. */
-extern unsigned int *FUN_0042c3c4(unsigned int *, unsigned int);
-extern unsigned int *FUN_0042cbd8(unsigned int, unsigned int);
-
-
-unsigned int * FUN_0042c5d0(void)
-
+// Build the default GPU state packet, including all twelve attribute slots.
+u32 *FUN_0042c5d0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int *piVar3;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = (unsigned int *)FUN_00188a34();
-  puVar1[1] = 0xf0201;
-  *puVar1 = 0;
-  puVar1[3] = 0xf0202;
-  puVar1[2] = 0;
-  sysMemClear(puVar1 + 4,0x98);
-  temp_v1 = 0;
-  puVar1[5] = 0x823f0203;
-  piVar3 = (int *)(puVar1 + 0x2a);
-  temp_v2 = 0xc;
-  do {
-    piVar3[2] = 0;
-    piVar3[3] = 0;
-    piVar3[4] = 0;
-    piVar3[5] = 0;
-    *piVar3 = temp_v1;
-    piVar3[1] = -0x7fc0fdce;
-    temp_v2 = temp_v2 - 1;
-    piVar3 = piVar3 + 6;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v2 != 0);
-  puVar1[0x72] = 0;
-  puVar1[0x73] = 0x100e0;
-  temp_v0 = asdGxAppendStateReset(puVar1 + 0x74,1);
-  puVar1 = (unsigned int *)FUN_0042cbd8(temp_v0,1);
-  *puVar1 = 0;
-  puVar1[1] = 0x10062;
-  puVar1[2] = 0;
-  puVar1[3] = 0x10118;
-  puVar1[4] = 0;
-  puVar1[5] = 0x10047;
-  puVar1 = (unsigned int *)FUN_0042c3c4(puVar1 + 6,1);
-  *puVar1 = 0;
-  puVar1[1] = 0xf011b;
-  return puVar1 + 2;
+    u32 *commands = FUN_00188a34();
+    commands[1] = 0x000F0201;
+    commands[0] = 0;
+    commands[3] = 0x000F0202;
+    commands[2] = 0;
+    u32 *cursor = commands + 4;
+    sysMemClear(cursor, 0x98);
+    cursor[1] = 0x823F0203;
+    cursor += 0x98 / sizeof(u32);
+    for (u32 index = 0; index < 12; ++index) {
+        *cursor++ = index;
+        *cursor++ = 0x803F0232;
+        *cursor++ = 0;
+        *cursor++ = 0;
+        *cursor++ = 0;
+        *cursor++ = 0;
+    }
+    *cursor++ = 0;
+    *cursor++ = 0x000100E0;
+    cursor = asdGxAppendStateReset(cursor, 1);
+    cursor = FUN_0042cbd8(cursor, 1);
+    *cursor++ = 0;
+    *cursor++ = 0x00010062;
+    *cursor++ = 0;
+    *cursor++ = 0x00010118;
+    *cursor++ = 0;
+    *cursor++ = 0x00010047;
+    cursor = FUN_0042c3c4(cursor, 1);
+    *cursor++ = 0;
+    *cursor++ = 0x000F011B;
+    return cursor;
 }
-
-} /* extern "C" */
+}

@@ -82,8 +82,7 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
     } else if ((roster->motion.flags & 0x10) == 0 || forceAttachment != 0) {
         BattleGroupPositionMembersView *group = btlMainFindEntryByListedId(state, roster->motion.group);
         s32 attachment = group != NULL ? battleFindPositionMember(group, roster->motion.group) : -1;
-        if (attachment < 0)
-            attachment = 0;
+        attachment = attachment < 0 ? 0 : attachment;
         BattleAppearancePositionView *appearance = btlFindEntryBlockByMemberId(state, index);
         EnemyDrawOffsetOwner *node = stateEntryFindById(state, appearance->nodeKeys[attachment]);
         btlEnemyDrawCalcVerticalOffset(node, reinterpret_cast<BattleVector3 *>(&position), roster->motion.scale);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail looks the record up once more at the end and reads flag bit 1 ((flags & 2) >> 1) before returning 1 regardless; the original use of that bit is unknown. */
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
+#include "quest_center/QuestUnlock.h"
 
 extern "C" {
 

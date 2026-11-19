@@ -4,11 +4,13 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/GridNavigation.h"
+#include "gamedata/DataTable.h"
+#include "util/BinarySearch.h"
 
-/* One 0x72-byte row of data table 0x38, section 0: a sort key and its help line (sorted by id). */
+/* One 0x72-byte row of data table 0x38, section 0: a sort key, its label and its help line (sorted by id). */
 struct SortMenuKeyRecord {
     /* 0x00 */ u16 id;
-    /* 0x02 */ u8 unk02[0x16];
+    /* 0x02 */ char name[0x16];     /* the row's label */
     /* 0x18 */ char help[0x5A];
 };
 
@@ -28,7 +30,8 @@ struct SortMenuWork {
     s16 ids[13]; // 0x76c: touch regions, [0..2] the scroll bar, [3..12] the rows
     s16 touchRegionCount; // 0x786
     GridNavigation list; // 0x788
-    u8 unk7ec[8];
+    s32 terminalMap; // 0x7ec: option 2: the id whose name (terminalGetCharacterDisplayName) heads the list
+    u8 unk7f0[4];
     u8 helpSaved; // 0x7f4: the button help to restore on closing was saved
     u8 helpIsDefault; // 0x7f5
     char helpText[0x82]; // 0x7f6
@@ -41,5 +44,23 @@ typedef char SortMenuWorkPacketLayoutCheck[
     offsetof(SortMenuWork, ids) == 0x76c && offsetof(SortMenuWork, list) == 0x788 &&
     offsetof(SortMenuWork, helpText) == 0x7f6 && sizeof(SortMenuKeyRecord) == 0x72 &&
     sizeof(SortMenuWork) == 0x878 ? 1 : -1];
+
+/* The sort keys from here on have no row in the key table. */
+#define SORT_MENU_KEY_COUNT 0x4C
+
+extern "C" {
+s32 recordCompareSignedValue(const void *left, const void *right);
+}
+
+/* The row of sort key `key` in the key table. */
+static __inline SortMenuKeyRecord *sortMenuFindKey(u8 key)
+{
+    DataTableView<SortMenuKeyRecord> keys(0x38, 0);
+    SortMenuKeyRecord wanted;
+
+    wanted.id = key;
+    return static_cast<SortMenuKeyRecord *>(libc_bsearch(&wanted, keys.entries, keys.count,
+                                                         sizeof(SortMenuKeyRecord), recordCompareSignedValue));
+}
 
 #endif

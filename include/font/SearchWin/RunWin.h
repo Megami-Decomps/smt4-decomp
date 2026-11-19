@@ -51,10 +51,15 @@ struct RequestImageSelector {
 };
 typedef char RequestImageSelectorSizeCheck[sizeof(RequestImageSelector) == 0x23 ? 1 : -1];
 
+/* A draw offset in pixels, copied by value. */
+struct MessageDrawOffset {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+};
+
 struct MessageDrawTransform {
     /* 0x00 */ f32 alpha;
-    /* 0x04 */ s32 x;
-    /* 0x08 */ s32 y;
+    /* 0x04 */ MessageDrawOffset offset;
 };
 typedef char MessageDrawTransformSizeCheck[sizeof(MessageDrawTransform) == 0x0C ? 1 : -1];
 

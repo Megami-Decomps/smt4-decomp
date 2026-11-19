@@ -1,25 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `atomicAddS32` (_code @ 0x2f4f20, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the exclusive retry and returned old value match; the compiler swaps the sum/status registers and moves the result after the retry branch. */
+#include "sys/AtomicCounter.h"
 
-extern "C" {
-
-int hasExclusiveAccess(int *);
-
-/* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-
-
-void atomicAddS32(int *param_1,int param_2)
-
+// Add to a shared counter atomically, returning its previous value.
+extern "C" s32 atomicAddS32(s32 *counter, s32 amount)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  
-  do {
-    temp_v0 = (unsigned char)hasExclusiveAccess(param_1);
-  } while (!temp_v0);
-  *param_1 = *param_1 + param_2;
-  return;
+    u32 before;
+    do {
+        before = __ldrex(counter);
+    } while (__strex(before + static_cast<u32>(amount), counter) != 0);
+    return static_cast<s32>(before);
 }
-
-} /* extern "C" */

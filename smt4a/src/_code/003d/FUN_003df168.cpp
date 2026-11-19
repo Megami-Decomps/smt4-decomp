@@ -81,11 +81,9 @@ void FUN_003df168(ResultSpoilsA *result, s32 index)
     } else {
         PlayerDataA *player = gameGetPlayerData();
         u32 scaled;
-        if (gameGetUnlockedCountLimit() > player->level) {
-            scaled = levelGetExpRequirement(player->level);
-        } else {
-            scaled = levelGetExpRequirement(gameGetUnlockedCountLimit() - 1);
-        }
+        scaled = gameGetUnlockedCountLimit() > player->level
+            ? levelGetExpRequirement(player->level)
+            : levelGetExpRequirement(gameGetUnlockedCountLimit() - 1);
         result->value = scaled;
         result->value = scaled * record->percent / 100;
     }

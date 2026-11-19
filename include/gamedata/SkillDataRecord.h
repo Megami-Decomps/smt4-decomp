@@ -47,6 +47,15 @@ struct SkillDataRecord {
             u32 category : 4;
             u32 unk09 : 23;
         } itemProperties;
+        struct {
+            u32 unk00 : 5;
+            u32 targeting : 4;
+            u32 unk09 : 3;
+            u32 element : 5;
+            u32 minimumHits : 4;
+            u32 maximumHits : 4;
+            u32 unk19 : 7;
+        } attackProperties; /* what a battle summary takes from the word */
     };
     union {
         /* 0x2C */ u8 unk2C[0x10];
@@ -78,6 +87,12 @@ struct SkillDataRecord {
             /* 0x39 */ u8 flags;
         } itemUse;
         struct {
+            u8 prefix[2];
+            /* 0x2E */ u8 unk2E;
+            /* 0x2F */ u8 ailment;
+            /* 0x30 */ u8 ailmentRate;
+        } attack;
+        struct {
             u8 prefix[0xC];
             /* 0x38 */ u32 rankFlags; /* the sign bit locks the rank bonuses */
         } rankInfo;
@@ -85,6 +100,11 @@ struct SkillDataRecord {
     union {
         /* 0x3C */ u32 flags;
         /* 0x3C */ u8 menuCategory; /* the category (1-based) battle code tests with btlEntryHasSkillCategory */
+        struct {
+            u8 prefix[2];
+            /* 0x3E */ u8 percent;
+            /* 0x3F */ u8 percentage;
+        } ratios;
     };
     /* 0x40 */ u8 unk40[3];
     /* 0x43 */ u8 percentCost; /* the percentage cost, used when `costs.fixedCost` is 0 */

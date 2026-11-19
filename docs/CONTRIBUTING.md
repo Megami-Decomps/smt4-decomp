@@ -107,6 +107,9 @@ Every match must be one a programmer could have written for a reason.
   - a constant division that calls `__aeabi_idivmod`/`__aeabi_uidivmod` instead of multiplying is
     `-Ospace` (the STL and SDK containers were built that way). Write `/` and `%` and set the flag;
     never call the helper by hand;
+  - Apocalypse's Thumb online library (around 0x11e000-0x128000) was built `-O3 -Ospace`: every unit
+    there that needs a flag matches with it (`FUN_00124350`, `isLeapYear`, `FUN_00126d1c`,
+    `FUN_0012736c`, `FUN_00127570`, `FUN_00122a10`); the proven ones at the default flags match either way;
   - `--cpu=5TE` (Thumb register moves written `movs rd, rm` where MPCore armcc writes `mov`: runtime
     and library code), `-O2`: only when the function is IDENTICAL with the flag and not without it;
   - `--fpu=softvfp`: code built without VFP. Retail copies 8- and 12-byte values through core
@@ -275,6 +278,14 @@ a sibling setter or another user of the same lookup is usually written the same 
   union has the same calling convention.
 - A result reported through `FUN_002c3510` (smt4a `FUN_0013ebd8`) is an `nn::Result`
   (`nn/Result.h`): declare and return it as one. `nn::Result result;` constructs `0xE7E3FFFF`.
+- An SDK service wrapper that returns a failure result or 0 (often from under a `ScopedCriticalLock`)
+  returns `nn::Result`, not `s32`: with `s32` armcc gives the result and the reference-count pointer
+  other registers (smt4 `FUN_0011c834`, smt4a `FUN_0015997c`, smt4 `FUN_00146704`). Only where every
+  caller treats the value as a result (sign test, forwarding); keep `s32`/`bool` for 0/1 answers.
+- A registered callback that casts its base parameter to a derived view (`Work *work = (Work *)base;`)
+  and then mixes both pointers compiles to other alias and cross-jump decisions than one that declares
+  the parameter as the derived struct (`struct ContentDepartureWork : ContentTransition { ... };`,
+  `void f(ContentDepartureWork *work)`): smt4 `contentTransitionProcessDeparture`, smt4a `FUN_004b9410`.
 
 **64-bit flag masks**
 - A flag mask is a real `u64`, tested as `if (a & mask) return 1; return 0;` (or
@@ -329,6 +340,10 @@ a sibling setter or another user of the same lookup is usually written the same 
   named locals declared in retail's pool order fix the order of constants.
 - Chained assignment (`current[i] = maximum[i] = value;`) stores one value through both pointers the
   way retail does; separate statements reload or reorder it.
+- A clamp or two-way choice of a local written as a ternary (`count = count > 300 ? 300 : count;`,
+  `checked = ok ? resource : NULL;`) and the same as an `if` assign through different registers; try
+  both (about forty near misses moved). Not for globals, and an `else if` chain stays a chain: don't
+  split it into an `else` holding a ternary.
 - Locals declared at the top of the function (C89 style), or one loop index reused by two loops,
   change their registers.
 - Assigning a global and then reading it back into a local (`g = alloc(); T *p = g;`) gives retail's
@@ -492,6 +507,10 @@ a sibling setter or another user of the same lookup is usually written the same 
   (`Base(kind) : kind(kind)`) gives retail's order; members of types with their own zeroing
   constructors give its registers.
 - `new (alloc) T` with a constructor and a class `operator new` gives retail's predicated allocation.
+- A native initializer list (`: vtable(...), table(data), owner(unit), count(data->count)`) plus
+  members whose own constructors zero them (`ModelEffectList() : count(0), items(NULL) {}`) pairs the
+  stores into retail's `strd`; the same stores written in the body do not (smt4a
+  `ModelUnitExtra::ModelUnitExtra`).
 
 **armcc's copy helpers** `__ARM_common_memcpy4_N` are emitted for `strcpy` of an N-byte literal into
 an aligned buffer and for copies of N-byte packed records: write `strcpy` or the assignment. Likewise

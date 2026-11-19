@@ -5,7 +5,7 @@
 extern "C" {
 s32 scriptProcessCreateWhenReady(ResultWorkA *view);
 void FUN_004b2e50(ResultWorkA *view, s32 a, s32 b);
-void FUN_004b4f9c(ResultWorkA *view, s32 x, s32 y);
+void resultDrawStatAllocation(ResultWorkA *view, s32 x, s32 y);
 void FUN_004b40f4(ResultWorkA *view, s32 x, s32 y);
 void FUN_004b1a00(ResultWorkA *view, s32 x, s32 y);
 
@@ -26,7 +26,7 @@ u32 FUN_00267c70(void)
     case 11: {
         s32 x = vec2GetXInt(&view->gridCursor);
         s32 y = vec2GetYInt(&view->gridCursor);
-        FUN_004b4f9c(view, x, y);
+        resultDrawStatAllocation(view, x, y);
         break;
     }
     case 19: {

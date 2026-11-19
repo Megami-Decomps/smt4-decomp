@@ -1,4 +1,4 @@
-/* NON_MATCHING: same constant-register/store grouping difference as the sibling allocators (vptr and state stores are not paired into stm). */
+/* NON_MATCHING: the owner/argument pair uses the state base at object + 4 instead of addressing the pair from the complete object. */
 #include "classes/AllocatedSelection.h"
 
 /* Allocates a kind-thirteen node from its owner's allocator. */

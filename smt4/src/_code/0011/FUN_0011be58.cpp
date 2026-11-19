@@ -21,7 +21,7 @@ static __inline void soundCallbackBankClear(SoundCallbackBanks *banks, s32 index
 }
 
 /* Open the DSP resource once, clear callback banks, and initialize its pending queue. */
-s32 FUN_0011be58(void)
+nn::Result FUN_0011be58(void)
 {
     if (g_callbackState.resource) {
         return 0;

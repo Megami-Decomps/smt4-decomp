@@ -64,7 +64,7 @@ int msgWindowReset(void);
 int uniteResetPreview(void);
 int processQueryChain(void);
 int FUN_002a7b74(void);
-int FUN_002ab804(void);
+int uniteCreate(void);
 int frameTexSetValue(...);
 int FUN_002c8538(...);
 int dataTableAndTexRelease(void);
@@ -238,7 +238,7 @@ extern int FUN_002a746c(void);
 /* Supplied declaration required: FUN_002a7b74. */
 extern int uniteRequestGet(void);
 extern int uniteGetState(void);
-/* Supplied declaration required: FUN_002ab804. */
+/* Supplied declaration required: uniteCreate. */
 /* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: campFusionResultCommand. */
 /* Supplied declaration required: buttonHelpSetPanelState. */
@@ -1281,7 +1281,7 @@ LAB_003d6870:
     }
     if ((int)puVar2[5] >= 2) {
       FUN_0014afa8();
-      FUN_002ab804();
+      uniteCreate();
       uniteSetMode(3);
       temp_v4 = 0x1f;
       campChangeState(temp_v4);

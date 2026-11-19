@@ -1,4 +1,4 @@
-/* NON_MATCHING: the table walk (pool word at the table base) and the state-allocation failure exit now match; retail loads the two stack arguments separately (mode into r7 first) where this build merges them into one ldm with the registers swapped, and schedules the three table stores and the stride default differently. */
+/* NON_MATCHING: the mode tests, the table walk and the failure exits match; retail stores the three table pointers by stepping one register (base, +0x2100, +0x2100) where this build computes the third from the base first, and puts the 1024 stride default in r0 instead of r1. */
 #include "mobiclip_ctrl/VxDecoder.h"
 #include "mobiclip/MobiclipAllocator.h"
 
@@ -10,10 +10,10 @@ void rt_memclr(void *memory, u32 bytes);
 u32 FUN_001ae420(VxDecoder *decoder, u32 width, u32 height, u32 bufferCount,
                   u32 format, u32 mode)
 {
-    switch (mode) {
-    case 0:
-        break;
-    case 1:
+    if (mode == 0) {
+        return 0;
+    }
+    if (mode == 1) {
         if (width > 1024 || format != 0) {
             return 0;
         }
@@ -57,8 +57,6 @@ u32 FUN_001ae420(VxDecoder *decoder, u32 width, u32 height, u32 bufferCount,
         }
         decoder->currentBuffer = bufferCount - 1;
         return 1;
-    default:
-        break;
     }
     return 0;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: three register/scheduling differences remain: the 4-bit loop keeps its index base and row counter in ip/fp instead of fp/sl (alpha in sl instead of ip), and the 8-bit row loop recomputes the pre-increment bias (row - 1) per row where retail hoists indices - 1 out of the row loop. */
+/* NON_MATCHING: the nibble select is now one conditional expression (retail's alpha register); remaining: the 4-bit loop keeps its row counter and index base in r9/sl where retail uses sl/fp, and the 8-bit row loop recomputes the pre-increment bias (row - 1) per row where retail hoists indices - 1 out of the row loop. */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/AsdDebug.h"
 #include "gfx/PackedColorBytes.h"
@@ -24,7 +24,6 @@ static __inline u32 expandAlpha(u32 alpha)
 }
 
 extern "C" {
-void asdMemFree(void *memory);
 void FUN_00418fe0(u32 width, u32 height, u32 *source, void *destination);
 
 /* Expands an 4-/8-bit indexed image to flipped RGBA words and uploads it into the texture. */
@@ -57,11 +56,7 @@ void tmxDecodeToTexture(AsdTexture *texture, const IndexedImage *image, u32 size
                 u32 x = 0;
                 do {
                     s32 index = (height - y - 1) * width + x;
-                    u32 value = indices[index >> 1];
-                    if ((x & 1) != 0)
-                        value >>= 4;
-                    else
-                        value &= 0xf;
+                    u32 value = (x & 1) ? indices[index >> 1] >> 4 : indices[index >> 1] & 0xf;
                     x++;
                     u32 color = palette[value];
                     u32 alpha = expandAlpha(color >> 24);

@@ -2,18 +2,18 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+#include "sys/AtomicCounter.h"
+
 extern "C" {
 
-int atomicAddS32(int, int);
 
-/* Supplied declaration required: atomicAddS32. */
 
 
 int sharedRefAddRef(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  atomicAddS32(param_1 + 4,1);
+  atomicAddS32(reinterpret_cast<s32 *>(param_1 + 4), 1);
   return param_1;
 }
 

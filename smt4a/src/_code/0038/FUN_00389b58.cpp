@@ -24,8 +24,7 @@ u32 FUN_00389b58(s32 index)
         EffectTimelineRecord record;
         __aeabi_memcpy4(&record, &storage->timing.templates[timeline[entry].recordIndex], sizeof(record));
         s16 repetitions = timeline[entry].repetitions;
-        if (repetitions < 1)
-            repetitions = 1;
+        repetitions = repetitions < 1 ? 1 : repetitions;
         s16 duration = 0;
         if (record.kind == 0)
             duration = record.firstDuration;

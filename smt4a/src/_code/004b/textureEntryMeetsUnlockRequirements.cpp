@@ -1,6 +1,7 @@
 #include "gamedata/EncounterSelection.h"
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
+#include "quest_center/QuestUnlock.h"
 #include "shard/Shard0034.h"
 #include "gamedata/GamePlayerData.h"
 
@@ -12,7 +13,6 @@ UnlockSpriteEntryView *dataTable02GetRecordWithAocPackage(s32 index);
 s32 partyEntryFlagsBit3(u16 id);
 s32 goalConditionsSatisfied(u16 id);
 s32 flagValueRead(u32 index);
-s32 gameUnlockRecordRequirementsMet(u16 id);
 
 s32 textureEntryMeetsUnlockRequirements(u32 index)
 {

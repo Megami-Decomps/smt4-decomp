@@ -71,9 +71,7 @@ void FUN_003913d8(EffectPrimitiveWork *work)
         if (!(0.0f <= acceleration)) {
             /* A decelerating ring stops growing at its apex. */
             f32 apex = (fabsf(speed) / (acceleration * 0.5f)) * -0.5f;
-            if (time > apex) {
-                time = apex;
-            }
+            time = time > apex ? apex : time;
         }
         s32 segments = primitive->vertexCount / 4;
         RingSegment *out = primitive->vertices->segments;

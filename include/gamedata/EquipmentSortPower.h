@@ -24,7 +24,8 @@ u32 contentGetEntryKind(u32 id);
 extern "C" {
 #endif
 
-u16 FUN_0028fb3c(s32 arg0);
+/* Forwards to flagValueRead (s32): callers compare the result signed. */
+s32 itemGetOwnedCount(s32 arg0);
 
 #ifdef __cplusplus
 }

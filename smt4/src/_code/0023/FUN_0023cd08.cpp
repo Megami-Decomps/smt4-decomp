@@ -28,8 +28,7 @@ BattleVector3 FUN_0023cd08(BtlMainState *state, s32 index, s32 forceEnemy)
     if (!(action->status & 0x10) || forceEnemy) {
         BtlEntry *entry = btlMainFindEntryByListedId(state, action->memberId);
         s32 part = entry ? findAnchorMember(entry, action->memberId) : -1;
-        if (part < 0)
-            part = 0;
+        part = part < 0 ? 0 : part;
         BtlUnitData *source = btlFindEntryBlockByMemberId(state, index);
         const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(idSlotsFindEntryById(state, source->parts[part]));
         enemyDrawCalcVerticalOffset(owner, &position, action->geometry.scale);

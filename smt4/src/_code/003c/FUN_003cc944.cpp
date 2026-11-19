@@ -48,8 +48,7 @@ void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allAct
         if (!member)
             continue;
         s32 memberIndex = idSetFindSubjectIndex(*battle, action);
-        if (memberIndex < 0)
-            memberIndex = 0;
+        memberIndex = memberIndex < 0 ? 0 : memberIndex;
         s32 model = member->parts[memberIndex];
         BattleActionCacheView *cache = (BattleActionCacheView *)*battle;
         const BattleActionCacheKeyView *identity = (const BattleActionCacheKeyView *)action;

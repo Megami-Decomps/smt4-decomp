@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001a9f6c(...);
+int rotationFromAxisDegrees(...);
 int quadHolderCopyOut(...);
 int quadSourceCopyOut(...);
 int mathMatrixApplyTranslation(...);
@@ -155,7 +155,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001a9f6c. */
+/* Supplied declaration required: rotationFromAxisDegrees. */
 /* Supplied declaration required: quadHolderCopyOut. */
 /* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: mathMatrixApplyTranslation. */
@@ -376,7 +376,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                 temp_v57 = pfVar9->field_0x4;
                 temp_v58 = pfVar9->field_0x8;
                 temp_v59 = pfVar9->field_0xc;
-                FUN_001a9f6c(&temp_v30,&temp_v57,0);
+                rotationFromAxisDegrees(&temp_v30,&temp_v57,0);
               }
               temp_v2 = pfVar9->field_0x0;
               *(unsigned int *)(temp_v2 + 0x4c) = temp_v30;
@@ -485,7 +485,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                 temp_v19 = pfVar9->field_0x4;
                 temp_v20 = pfVar9->field_0x8;
                 temp_v21 = pfVar9->field_0xc;
-                FUN_001a9f6c(temp_v55,&temp_v19,0);
+                rotationFromAxisDegrees(temp_v55,&temp_v19,0);
               }
               matrix44SetIdentity(&temp_v30);
               matrix43Multiply(&temp_v30,temp_v55,&temp_v39);

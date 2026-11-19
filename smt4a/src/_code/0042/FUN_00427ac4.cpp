@@ -18,7 +18,7 @@ struct ArchiveRef {
 
 // Checks each referenced title (64-bit title ID: platform 4, category from `kind`) of category 0x8c
 // with the service query; returns the first failure code (or "already present"), else 0.
-s32 FUN_00427ac4(const ArchiveRef *refs, u32 count)
+nn::Result FUN_00427ac4(const ArchiveRef *refs, u32 count)
 {
     s8 status[12];
     s32 result = FUN_00426a80(status);

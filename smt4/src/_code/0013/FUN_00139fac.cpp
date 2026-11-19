@@ -12,7 +12,7 @@ void FUN_00139fac(void)
   if (DAT_00472a4c == 0) {
     if (DAT_00472a48 != '\0') {
       DAT_00472a48 = 0;
-      iVar1 = FUN_00146704(&DAT_00473854);
+      iVar1 = handleCloseAndReset(&DAT_00473854);
       if (-1 < iVar1) {
         DAT_00472a50 = 0;
       }

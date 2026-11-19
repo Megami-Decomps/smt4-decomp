@@ -63,9 +63,7 @@ s32 FUN_0030d824(s32 type, u16 *lens, u32 codes, HuffCode **table, u32 *bits, u1
             break;
         }
     }
-    if (root > max) {
-        root = max;
-    }
+    root = root > max ? max : root;
     if (max == 0) {
         here.op = 64;
         here.bits = 1;

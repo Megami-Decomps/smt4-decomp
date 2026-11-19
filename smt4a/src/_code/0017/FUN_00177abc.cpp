@@ -30,10 +30,9 @@ u32 *FUN_00177abc(const GpuDepthRange *range, u32 *commands)
     f32 quantizedOffset = 0.0f;
     if (range->quantized) {
         f32 offset;
-        if (range->bits == 24)
-            offset = (range->scale * 128.0f) / 16777215.0f;
-        else
-            offset = range->scale / (f32)((1 << range->bits) - 1);
+        offset = range->bits == 24
+            ? (range->scale * 128.0f) / 16777215.0f
+            : range->scale / (f32)((1 << range->bits) - 1);
         quantizedOffset = (f32)gpuEncodeFloat24Flush(offset);
     }
     commands[0] = (u32)quantizedOffset;

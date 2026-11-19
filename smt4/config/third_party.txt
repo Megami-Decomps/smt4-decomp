@@ -2995,6 +2995,7 @@
 0x003eaf9c FUN_003eaf9c between
 0x003eb02c FUN_003eb02c between
 0x003eb068 FUN_003eb068 between
+0x003eb078 mathlib_ceilf library
 0x003eb108 FUN_003eb108 callers
 0x003f57c4 videoResetFilterState callers
 0x003f57dc FUN_003f57dc between

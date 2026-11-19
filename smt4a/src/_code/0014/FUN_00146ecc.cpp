@@ -4,7 +4,7 @@ extern "C" {
 
 s32 FUN_00170404(u32 arg);
 u32 FUN_0015a318(void);
-s32 FUN_0015997c(void);
+s32 ipcServiceSessionAcquire(void);
 void sysFatalBreak(void);
 s32 FUN_0016f198(u32 arg);
 u32 FUN_0016f15c(u32 command); /* IPC request taking a command number (code at 0x16F15C) */
@@ -16,7 +16,7 @@ u32 FUN_00146ecc(u32 arg)
         u32 busy = FUN_0015a318();
 
         if (busy == 0) {
-            if (nnResultIsFailure(FUN_0015997c())) {
+            if (nnResultIsFailure(ipcServiceSessionAcquire())) {
                 sysFatalBreak();
             }
             FUN_0016f198(15);

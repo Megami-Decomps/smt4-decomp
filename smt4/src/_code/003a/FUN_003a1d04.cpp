@@ -9,7 +9,7 @@ void FUN_00231bcc(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, 
 void FUN_003a07a0(Scene3a *scene, s32 category);
 s32 rangeLimitMin(const FlaggedValueHolder *holder);
 s32 flaggedEntryGetValueByState(const FlaggedValueHolder *holder);
-void FUN_0022f1d0(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *entry);
+void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *entry);
 
 // Draw the other shop page without the equipped-item row.
 void FUN_003a1d04(Scene3a *scene)
@@ -37,11 +37,11 @@ void FUN_003a1d04(Scene3a *scene)
     s32 visible = rangeLimitMin(&page->holder);
     for (s32 row = 0; row < visible; ++row) {
         if (!selectedOverlay || flaggedEntryGetValueByState(&page->holder) != row)
-            FUN_0022f1d0(scene, row + 1, 0, &entries[offset + row]);
+            shopDrawListRow(scene, row + 1, 0, &entries[offset + row]);
     }
     if (selectedOverlay && page->range.count > 0) {
         const Scene3aEntry *held = &entries[flaggedValueHolderGetTotal(&page->holder)];
-        FUN_0022f1d0(scene, flaggedEntryGetValueByState(&page->holder) + 1, 1, held);
+        shopDrawListRow(scene, flaggedEntryGetValueByState(&page->holder) + 1, 1, held);
     }
     s32 selected = flaggedEntryGetValueByState(&page->holder);
     FUN_002332e8(scene->view, FUN_0029e924(&page->holder), selected);

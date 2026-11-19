@@ -14,6 +14,6 @@ f32 btlEntryGetNormalizedPercent(u32 id)
     BtlEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     BattleEntrySummary summary;
     btlEntryBuildSummary(&summary, btlGetMainState(), entry);
-    return static_cast<f32>(static_cast<u32>(summary.ratios.percent)) * 0.01f;
+    return static_cast<f32>(static_cast<u32>(summary.percent)) * 0.01f;
 }
 }

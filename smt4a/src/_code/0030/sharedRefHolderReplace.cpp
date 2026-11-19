@@ -1,10 +1,10 @@
-#include "common.h"
+#include "sys/AtomicCounter.h"
 
 extern "C" {
 
 typedef struct SharedRef {
     /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u8 refCount[1];
+    /* 0x4 */ s32 refCount;
 } SharedRef;
 
 typedef struct RefHolder {
@@ -13,7 +13,6 @@ typedef struct RefHolder {
 } RefHolder;
 
 extern void sharedRefRelease(SharedRef *ref);
-extern void atomicAddS32(void *refCount, s32 amount);
 
 /* Replaces the holder's shared reference with `ref`: releases the old one and takes a reference on the new one. */
 void sharedRefHolderReplace(RefHolder *holder, SharedRef *ref)
@@ -25,7 +24,7 @@ void sharedRefHolderReplace(RefHolder *holder, SharedRef *ref)
         holder->ref = NULL;
     }
     if (ref != NULL) {
-        u8 *counter = ref->refCount;
+        s32 *counter = &ref->refCount;
 
         holder->ref = ref;
         atomicAddS32(counter, 1);

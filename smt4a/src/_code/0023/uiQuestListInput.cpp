@@ -43,7 +43,7 @@ void buttonHelpSetText(const s8 *text, u32 color);
 void sortMenuAcquire(u32 owner, u8 option);
 void useCounterStart(void);
 void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle);
-u32 FUN_003de75c(u32 id);
+u32 questRecordIsUsable(u32 id);
 s32 questQueryFalse(void);
 u32 partyEntryFlagsBit3(s32 index);
 u8 rosterHasLeader(void); // declcheck: local (its header belongs to the memory manager)
@@ -192,7 +192,7 @@ void uiQuestListInput(void)
 
                 FUN_003dea6c(id, 0, 1);
                 if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
-                    if (FUN_003de75c(id) || questQueryFalse()) {
+                    if (questRecordIsUsable(id) || questQueryFalse()) {
                         if (!partyEntryFlagsBit3(id) || record->kind == 9) {
                             if (rosterHasLeader()) {
                                 /* Another quest is in progress. */

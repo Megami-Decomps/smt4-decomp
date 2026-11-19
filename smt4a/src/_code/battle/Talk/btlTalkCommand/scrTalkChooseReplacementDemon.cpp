@@ -37,8 +37,7 @@ u32 scrTalkChooseReplacementDemon()
         if (randBetween(lower, upper) <= 0) {
             scrSetResult(-1);
         } else {
-            if (lower <= 0)
-                lower = 1;
+            lower = lower <= 0 ? 1 : lower;
             for (u32 id = 1; id <= 1200; ++id) {
                 const NkmBaseRecordA *demon = nkmBaseGetRecord((u16)id);
                 const NkmEnemyRecordA *definition = nkmEnemyFindById((u16)id);

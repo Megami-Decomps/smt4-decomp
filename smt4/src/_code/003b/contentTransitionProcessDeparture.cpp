@@ -1,16 +1,18 @@
-/* NON_MATCHING: the flag tests and the state stores (record assignments where retail stores state and phase with one stm) match; remaining: retail places the shared state-17 tail right after the sequence request (the map branches branch back to it) and orders the 6/8 selection's movge/movlt the other way. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "map/mapDepart.h"
 #include "game/GameState.h"
+#include <stddef.h>
 
-struct ContentDepartureWork {
-    ContentTransition transition;
+/* The transition's departure work: the map-departure flags and the delayed-return counter. */
+struct ContentDepartureWork : ContentTransition {
     /* 0x048 */ u8 specialMapPending;
     /* 0x049 */ u8 mapPending;
     /* 0x04A */ u8 unk04a[0xd2e];
     /* 0xD78 */ s16 delayFrames;
 };
+typedef char ContentDepartureWorkLayout[offsetof(ContentDepartureWork, specialMapPending) == 0x48 &&
+    offsetof(ContentDepartureWork, delayFrames) == 0xD78 ? 1 : -1];
 
 extern "C" {
 s32 screenFadeIsBusy();
@@ -33,52 +35,54 @@ static __inline bool flagsAny(u32 flags, u32 first, u32 second)
 
 /* Departure step of a content transition: waits out the fade or the delayed return, then starts the
  * requested sequence, map departure or scene load. */
-void contentTransitionProcessDeparture(ContentTransition *transition)
+void contentTransitionProcessDeparture(ContentDepartureWork *work)
 {
-    ContentDepartureWork *work = (ContentDepartureWork *)transition;
-    if (!(transition->flags & 0x100) && screenFadeIsBusy() != 0) {
+    if (!(work->flags & 0x100) && screenFadeIsBusy() != 0) {
         return;
     }
-    u32 flags = transition->flags;
+    u32 flags = work->flags;
     if (flags & 0x400000) {
         ++work->delayFrames;
         if (work->delayFrames >= 30) {
             FUN_00249b18(0, 1);
             titleSetSlotValueState2(0, 10);
-            transition->flags &= ~0x400000u;
-            transition->step = contentTransitionStep(5, 0);
+            work->flags &= ~0x400000u;
+            work->step = contentTransitionStep(5, 0);
         }
         return;
     }
-    if (!flagsAny(flags, 0x200000, 0x40000) && !flagsAny(flags, 0x800000, 0x4000000) &&
-        !flagsAny(flags, 0x1000000, 0x2000000) && !flagsAny(flags, 0x8000000, 0x20000000) && (flags & 0x10)) {
-        if (flags & 0x80000) {
-            asdSequenceRequest(static_cast<s32>(g_mapSelection.selection.group) < 100 ? 6 : 8, NULL, 0);
-            transition->step.state = 17;
-            transition->step.phase = 0;
-            return;
-        } else if (flags & 0x100000) {
-            s32 map = (s16)transition->destination.map;
-            if (map >= 100) {
-                if (map != 100) {
-                    mapDepartSetTarget(map, 1, ~0u);
-                }
-                work->specialMapPending = 1;
-            } else {
-                mapDepartSetTarget(map, (s16)transition->destination.area,
-                                   (s16)transition->destination.place);
-                work->mapPending = 1;
-            }
-        } else {
-            FUN_003b8b0c(transition);
-            __ARM_common_memcpy4_6(&transition->sourceMap, &transition->destination);
-            mikadoLoadSceneResources(transition);
-            transition->step = contentTransitionStep(2, 0);
-            transition->flags &= ~0x10u;
-            return;
-        }
+    if (flagsAny(flags, 0x200000, 0x40000) || flagsAny(flags, 0x800000, 0x4000000) ||
+        flagsAny(flags, 0x1000000, 0x2000000) || flagsAny(flags, 0x8000000, 0x20000000) || !(flags & 0x10)) {
+        work->step.state = 17;
+        work->step.phase = 0;
+        return;
     }
-    transition->step.state = 17;
-    transition->step.phase = 0;
+    if (flags & 0x80000) {
+        asdSequenceRequest(static_cast<s32>(g_mapSelection.selection.group) >= 100 ? 8 : 6, NULL, 0);
+    } else if (flags & 0x100000) {
+        s32 map = (s16)work->destination.map;
+        if (map >= 100) {
+            if (map != 100) {
+                mapDepartSetTarget(map, 1, ~0u);
+            }
+            work->specialMapPending = 1;
+        } else {
+            mapDepartSetTarget(map, (s16)work->destination.area,
+                               (s16)work->destination.place);
+            work->mapPending = 1;
+        }
+        work->step.state = 17;
+        work->step.phase = 0;
+        return;
+    } else {
+        FUN_003b8b0c(work);
+        __ARM_common_memcpy4_6(&work->sourceMap, &work->destination);
+        mikadoLoadSceneResources(work);
+        work->step = contentTransitionStep(2, 0);
+        work->flags &= ~0x10u;
+        return;
+    }
+    work->step.state = 17;
+    work->step.phase = 0;
 }
 }

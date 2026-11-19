@@ -136,6 +136,20 @@ struct TextureTableEntryIV;
 struct TextureTableEntryIV *asdTMTexTableEntryAt(u32 file, s32 index);
 #ifdef __cplusplus
 }
+
+/* The drawn size of texture `index` in table `file`: the placement's size when its mode is 1,
+ * otherwise the entry's own size without the flag bit (inlined by the sized table draws). */
+static __inline void asdTMTexTableEntrySize(u32 file, s32 index, u32 *width, u32 *height)
+{
+    TextureTableEntryIV *entry = asdTMTexTableEntryAt(file, index);
+    if (entry->placement != NULL && entry->placement->mode == 1) {
+        *width = entry->placement->width;
+        *height = entry->placement->height;
+    } else {
+        *width = entry->width & 0xFFFF7FFF;
+        *height = entry->height & 0xFFFF7FFF;
+    }
+}
 #endif
 
 #endif

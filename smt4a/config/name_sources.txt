@@ -7587,3 +7587,21 @@
 0040a640 statisticsResetShopCounters inferred clears the shop statistics counters for data table 0x18's rows
 00497874 shopDrawEquipmentList inferred draws the shop's equipment page: visible rows, selected row and scroll indicator
 0034dae0 statusScaleUnitDisplayVitals inferred scales an enemy record's max HP/MP by the progression multiplier for display
+005020c0 dateTimeGetHour evidence same body as smt4 dateTimeGetHour (0x3e0c80), between nn_fnd_DateTime_GetDay and GetYear
+0015997c ipcServiceSessionAcquire inferred exact twin of smt4 FUN_0011c834 ("ndm:u", g_ipcServiceSessionHandle); release is ipcServiceSessionRelease
+0019c40c asdMemClassifyAddress inferred exact twin of smt4 FUN_002b30fc
+00136d24 faderStepAll inferred twin of smt4 FUN_00102438
+00237354 rotationFromAxisDegrees inferred twin of smt4 FUN_001a9f6c
+00146910 osSetHeapSize inferred grows or shrinks the heap with ControlMemory and records the new size on success
+003161b4 tmnlDrawDestinationName inferred "TMNL DD" draw callback: the destination terminal's name on opening, then the render-state pass
+003b6250 uniteDrawSelectionButtonStrip inferred draws the fusion button strip, caption tinted by the selected touch region's mode
+003b1018 scrCommSingleActionSlotMatchesSelected inferred script command: the unit's single-action mask and the selected party slot; sets the script result
+003de75c questRecordIsUsable inferred quest record requirement and lock-flag test
+003c4da8 scrCommGetActiveUnitId inferred script command: the active unit's record id through the save slot table (scrSetResult)
+0047f98c btlPlayIndexedVoice inferred plays an indexed battle voice request for the partner attack (BCWAV request callee)
+002ab804 uniteCreate inferred twin of smt4 uniteCreate (same "Unite Calc"/"Unite DDraw" names, the Unite.cpp debug path)
+00217f14 campDrawCommandMenu inferred twin of smt4 campDrawCommandMenu
+0034fab4 effSwingEmitterUpdate inferred the spiral emitter's update without its two curve values (effSpiralEmitterUpdate's sibling)
+0032ef5c campCommandGetImages inferred twin of smt4 FUN_002ccc28
+0026e8b8 campDrawCommandNewMark inferred draws the camp command's "new" mark
+004b4f9c resultDrawStatAllocation inferred result screen state 11: draws the stat point allocation panel

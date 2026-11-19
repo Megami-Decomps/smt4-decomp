@@ -52,7 +52,7 @@ inline s32 ArchiveIconFile::tryOpen(ArchiveIconSource source, const ArchiveIconP
 /* Opens the archive's content header and picks the pair for the current language/region: first the pairs
  * stored after the header (matching both key and value), then the 7 defaults (matching the value only).
  * Returns an nn::Result; the chosen pair is written to the target. */
-extern "C" s32 FUN_00427360(ArchiveContentTarget *target)
+extern "C" nn::Result FUN_00427360(ArchiveContentTarget *target)
 {
     char path[48];
     u16 widePath[48];

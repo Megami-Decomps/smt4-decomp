@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the 64-bit marker mask with ldrd (built ldm) and reaches the slot value without ldr/str writeback (built `ldr [r6,#2532]!`); slot stride, minimum clamp and result match. */
+/* NON_MATCHING: the mask test swaps r2/r3 for the halves of the word pair at +400 (retail loads the low word into r3), and retail reaches the slot value without ldr/str writeback (built `ldr [r6,#2532]!`); slot stride, minimum clamp and result match. */
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -34,8 +34,7 @@ u8 FUN_004e5f2c(BtlMainStateA **owner, void *values, s32 index, s32 change)
     MinimumValueEntryView *entry = static_cast<MinimumValueEntryView *>(btlMainFindEntryByListedId(state, index));
     if (entry != NULL && entry->minimumPercent > 0) {
         s32 minimum = (entry->maximum * entry->minimumPercent) / 100;
-        if (minimum <= 0)
-            minimum = 1;
+        minimum = minimum <= 0 ? 1 : minimum;
         if (value < minimum)
             value = minimum;
     }

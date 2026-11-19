@@ -19,7 +19,6 @@ void FUN_001d99c0(void);
 void tmnlOnComplete(void);
 void FUN_001fe23c(void);
 void FUN_002e0948(void);
-void FUN_0021f354(void);
 
 extern TmnlWork *g_tmnl;
 
@@ -82,7 +81,7 @@ void FUN_001db0b8(const u32 *entry)
     work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMNL C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_001d99c0), reinterpret_cast<AsdProcFunc>((void *)tmnlOnComplete), 0);
     taskCreateDraw("TMNL UD", 117, 0, 0, (void *)FUN_001fe23c, 0, 0, work->task);
     taskCreateDraw("TMNL UD", 211, 0, 0, (void *)FUN_002e0948, 0, 0, work->task);
-    taskCreateDraw("TMNL DD", 231, 0, 0, (void *)FUN_0021f354, 0, 0, work->task);
+    taskCreateDraw("TMNL DD", 231, 0, 0, (void *)tmnlDrawDestinationName, 0, 0, work->task);
 }
 
 }

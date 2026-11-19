@@ -20,7 +20,7 @@ int FUN_0015a5c0(...);
 int appletIsExitRequested(...);
 int FUN_001703b0(...);
 
-int FUN_00136d24(...);
+int faderStepAll(...);
 int asdProcessUpdate(...);
 int gameDataFlagsClearBits(...);
 int FUN_001386b4(...);
@@ -277,7 +277,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00136d24. */
+/* Supplied declaration required: faderStepAll. */
 /* Supplied declaration required: FUN_00136df8. */
 /* Supplied declaration required: FUN_00137144. */
 /* Supplied declaration required: ifTouchAcquireUser. */
@@ -697,7 +697,7 @@ LAB_00136430:
           temp_v2 = 2;
         }
         iRam0057ffec = temp_v2;
-        FUN_00136d24();
+        faderStepAll();
         if (g_jyoucyuLevel != '\0') {
           FUN_0013a144();
           if (g_jyoucyuLevel != '\0') {

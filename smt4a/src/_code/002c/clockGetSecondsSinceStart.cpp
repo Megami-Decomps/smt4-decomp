@@ -20,7 +20,7 @@ s32 nn_fnd_DateTime_GetDay(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetMonth(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetYear(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_DateToDays(s32 year, s32 month, s32 day);
-s32 FUN_005020c0(const NnDateTime *dateTime);
+s32 dateTimeGetHour(const NnDateTime *dateTime);
 s32 dateTimeGetMinute(const NnDateTime *dateTime);
 s32 dateTimeGetSecond(const NnDateTime *dateTime);
 
@@ -39,7 +39,7 @@ s32 clockGetSecondsSinceStart(void)
     seconds = nn_fnd_DateTime_DateToDays(nn_fnd_DateTime_GetYear(&now), nn_fnd_DateTime_GetMonth(&now),
                                          nn_fnd_DateTime_GetDay(&now));
     seconds *= 24;
-    seconds += FUN_005020c0(&now);
+    seconds += dateTimeGetHour(&now);
     seconds *= 60;
     seconds += dateTimeGetMinute(&now);
     seconds *= 60;

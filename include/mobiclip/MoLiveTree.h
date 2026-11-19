@@ -9,15 +9,17 @@ namespace MoLive {
 
 /* The links every tree node starts with (an AA tree: the level balances it). */
 struct TreeLinks {
+    TreeLinks() : left(this), right(this), parent(this), level(0) {}
+
     /* 0x00 */ TreeLinks *left;
     /* 0x04 */ TreeLinks *right;
     /* 0x08 */ TreeLinks *parent;
-    /* 0x0C */ u32 level;
+    /* 0x0C */ u8 level;
 };
 
 /* The part of the tree that does not depend on what it stores. */
 struct TreeBase {
-    /* Makes an empty tree; `hook` is stored in unk20. */
+    /* Makes an empty tree and remembers its hook. */
     TreeBase(void (*hook)());
 
     /* 0x00 */ TreeLinks *root;
@@ -25,8 +27,12 @@ struct TreeBase {
     /* 0x14 */ TreeLinks *first;
     /* 0x18 */ TreeLinks *last;
     /* 0x1C */ u32 count;
-    /* 0x20 */ void *unk20;
+    /* 0x20 */ void (*callback)();
 };
+
+typedef char TreeBaseLayoutCheck[sizeof(TreeLinks) == 0x10 &&
+    offsetof(TreeLinks, level) == 0xC && offsetof(TreeBase, nil) == 4 &&
+    offsetof(TreeBase, callback) == 0x20 && sizeof(TreeBase) == 0x24 ? 1 : -1];
 
 } /* namespace MoLive */
 

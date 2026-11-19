@@ -798,14 +798,10 @@ LAB_00345938:
     temp_v5 = *param_1;
     if ((*(unsigned int *)(temp_v5 + 0x44a8) & 8) == 0) {
       temp_v9 = (int)psVar2[0x12] + (int)*(short *)(temp_v5 + 0x4968);
-      if (temp_v9 < 0) {
-        temp_v9 = 0;
-      }
+      temp_v9 = temp_v9 < 0 ? 0 : temp_v9;
       *(short *)(temp_v5 + 0x4968) = (short)temp_v9;
       temp_v5 = (int)psVar2[0x13] + (int)*(short *)(*param_1 + 0x496a);
-      if (temp_v5 < 0) {
-        temp_v5 = 0;
-      }
+      temp_v5 = temp_v5 < 0 ? 0 : temp_v5;
       *(short *)(*param_1 + 0x496a) = (short)temp_v5;
       if (*(int *)(psVar2 + 0x14) != 0) {
         FUN_00338060(*param_1,0);

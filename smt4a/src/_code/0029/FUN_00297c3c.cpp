@@ -40,11 +40,9 @@ void FUN_00297c3c(void)
         EngineEffectRecord *record = &g_engineRecordList->records[i];
         if (record->active != 0 && record->state != 8 && record->control.unmanaged == 0) {
             Obj557b18 *model;
-            if (record->flag2C != 0) {
-                model = record->ownModels->body;
-            } else {
-                model = g_engineRecordList->models[record->modelSlot].models->body;
-            }
+            model = record->flag2C != 0
+                ? record->ownModels->body
+                : g_engineRecordList->models[record->modelSlot].models->body;
             if (g_gameState.loading != 0) {
                 if ((model->flags & 1) == 0) {
                     model->flags |= 3;

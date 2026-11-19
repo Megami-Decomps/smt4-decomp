@@ -135,11 +135,9 @@ void FUN_00270104(SkillMenuWork *work)
             } else {
                 adjust = -1;
             }
-            if ((reinterpret_cast<HelpBattleView *>(btlGetMainState())->flags & DAT_00573bc8) != 0) {
-                index = index + adjust + 1;
-            } else {
-                index = *(u16 *)((u8 *)work + work->page * 0x10 + (index + adjust) * 2 + 0x3C44);
-            }
+            index = (reinterpret_cast<HelpBattleView *>(btlGetMainState())->flags & DAT_00573bc8) != 0
+                ? index + adjust + 1
+                : *(u16 *)((u8 *)work + work->page * 0x10 + (index + adjust) * 2 + 0x3C44);
         }
         if (index == 0) {
             return;

@@ -9,7 +9,7 @@ s32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(AsdCecMessageBox *box);
 s32 nn_cec_CTR_MessageBox_WriteBoxInfo(AsdCecMessageBox *box, s32 kind, CecMessageIndexHeader *header, AsdCecMessageIndexEntry *ids); // declcheck: local (protos__code.h has only the decompiler's untyped prototype)
 
 // Reset inbox/outbox storage and refresh the corresponding message index under the CEC lock.
-s32 FUN_00358664(AsdCecMessageBox *box, s32 kind)
+nn::Result FUN_00358664(AsdCecMessageBox *box, s32 kind)
 {
     struct MutationCallbacks {
         void *unk00[2];

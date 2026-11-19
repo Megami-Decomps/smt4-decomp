@@ -35,11 +35,24 @@ struct NkmBaseRecord {
     /* 0x04 */ u8 unk04;
     /* 0x05 */ u8 category;          /* 1, 4, 5: the classes battle scripts look for */
     /* 0x06 */ u16 flags;            /* bit 0: listed in the demon stock */
-    /* 0x08 */ u16 attackProperties; /* normal attack: bits 1-4 target, 5-7 minimum hits, 8-10 maximum hits */
+    union {
+        /* 0x08 */ u16 attackProperties; /* normal attack: bits 1-4 target, 5-7 minimum hits, 8-10 maximum hits */
+        struct {
+            u16 unk0 : 1;
+            u16 targeting : 4;
+            u16 minimumHits : 3;
+            u16 maximumHits : 3;
+            u16 unk11 : 5;
+        } attack;
+    };
     /* 0x0A */ u8 element;           /* normal attack's element (mapCategoryToTableId maps it to a table) */
     /* 0x0B */ u8 unk0B;
     /* 0x0C */ u8 attackAilment;     /* normal attack's ailment, 0 = none */
-    /* 0x0D */ u8 unk0D[7];
+    /* 0x0D */ u8 attackAilmentRate;
+    /* 0x0E */ u8 unk0E;
+    /* 0x0F */ u8 unk0F;             /* copied to a battle summary's unk14 */
+    /* 0x10 */ u16 unk10;            /* copied to a battle summary's unk08 (100 for a player) */
+    /* 0x12 */ u16 attackPower;      /* normal attack's power */
     /* 0x14 */ u16 baseHp;
     /* 0x16 */ u16 baseMp;
     /* 0x18 */ u8 hpGrowth;          /* HP gained per level */

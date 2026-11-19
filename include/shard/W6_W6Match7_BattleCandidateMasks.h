@@ -29,4 +29,12 @@ typedef char BattleCandidateMaximumSourceOffsetsCheck[
     sizeof(BattleCandidateMasks) == 0x38 ? 1 : -1];
 
 extern "C" BattleCandidateMasks g_btlCandidateMasks;
+
+// Both the script entry and the combatant record expose the same action flags.
+template <class Entry>
+static __inline bool hasSingleAction(const BattleCandidateMasks &masks, const Entry &entry)
+{
+    return (entry.flags & masks.singleAction) != 0;
+}
+
 #endif

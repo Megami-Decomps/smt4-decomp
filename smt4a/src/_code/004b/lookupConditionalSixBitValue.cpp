@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/GamePlayerData.h"
 #include "quest_center/QuestRecordA.h"
+#include "quest_center/QuestUnlock.h"
 
 struct PackedValueEntry {
     union {
@@ -16,7 +17,6 @@ const PackedValueEntry *dataTable02GetRecordWithAocPackage(u32);
 s32 partyEntryFlagsBit3(u16);
 s32 goalConditionsSatisfied(u16);
 s32 flagValueRead(u32);
-s32 gameUnlockRecordRequirementsMet(u16);
 
 u32 lookupConditionalSixBitValue(u32 id)
 {

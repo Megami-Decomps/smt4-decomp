@@ -1,9 +1,9 @@
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
+#include "quest_center/QuestUnlock.h"
 
 extern "C" {
 
-extern s32 gameUnlockRecordRequirementsMet(s32 id);
 extern s32 gameFlagIsSet(u32 flag);
 
 /* 1 when the id has a record that is available; 0 if there is none, or flag A is set while flag B is not. */

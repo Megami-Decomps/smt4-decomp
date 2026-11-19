@@ -135,9 +135,7 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
             if (gameDataBlocksGetTableFlag() != 2) {
                 if (gameDataBlocksGetTableFlag() == 4) {
                     chance = (s32)((f32)chance * 0.1f);
-                    if (chance >= 71) {
-                        chance = 70;
-                    }
+                    chance = chance >= 71 ? 70 : chance;
                 }
             } else {
                 chance = chance / 2;

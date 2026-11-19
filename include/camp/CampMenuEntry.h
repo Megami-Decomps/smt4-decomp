@@ -9,7 +9,7 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 u32 idListAnyValid(const CampComRecord *record);
 u8 dataTable15GetUnlockedEntryId(u32 group, s32 index);
-void FUN_002ccc28(u32 command, u32 *icon, u32 *label, s32 selected);
+void campCommandGetImages(u32 command, u32 *icon, u32 *label, s32 selected);
 u32 FUN_0029e958(const GridNavigation *grid);
 s32 objectPartRunUnlessLocked(GridNavigation *grid);
 }

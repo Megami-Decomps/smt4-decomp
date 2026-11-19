@@ -34,13 +34,17 @@ struct GameStateFile {
     /* 0x04 */ u32 buffer;
 };
 
-/* The departure's block (g_mapDepartState + 0), reset as one when a map is entered. */
+/* The departure's block (g_mapDepartState + 0), reset as one when a map is entered: the relics found on
+ * the map (mapDepart's result list), then the same list with equal ids merged and counted. */
 struct GameStateDepartBlock {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ u32 value;
-    /* 0x54 */ u8 unk54[0x50];
-    /* 0xA4 */ u16 counterA;
-    /* 0xA6 */ u16 counterB;
+    /* 0x00 */ u32 foundIds[16];
+    /* 0x40 */ u8 foundIsNew[16];     /* the id's unlock flag was still clear */
+    /* 0x50 */ s32 foundCount;
+    /* 0x54 */ s16 listIds[16];       /* foundIds without repeats */
+    /* 0x74 */ u8 listIsNew[16];
+    /* 0x84 */ s16 listAmounts[16];   /* how often each id was found */
+    /* 0xA4 */ s16 listCount;
+    /* 0xA6 */ s16 listShown;         /* rows the result list has revealed so far */
 };
 
 /* The script and event block (0x100): script entries, event requests and the pending encounter. */
@@ -284,7 +288,8 @@ typedef char GameStateLocationOffsets[offsetof(GameState, savedMapId) == 0x2FC &
 typedef char GameStateTailOffsets[offsetof(GameState, mapMode) == 0x370 && offsetof(GameState, environmentPreset) == 0x390 &&
     offsetof(GameState, overlayKind) == 0x3A8 && offsetof(GameState, showAllEntries) == 0x3E0 &&
     offsetof(GameState, groupOverride) == 0x3F0 && sizeof(GameStateJumpRequest) == 0x24 &&
-    offsetof(GameStateDepart, depart.counterB) == 0xA6 ? 1 : -1];
+    offsetof(GameStateDepart, depart.foundCount) == 0x50 && offsetof(GameStateDepart, depart.listIds) == 0x54 &&
+    offsetof(GameStateDepart, depart.listAmounts) == 0x84 && offsetof(GameStateDepart, depart.listShown) == 0xA6 ? 1 : -1];
 
 extern "C" {
 extern GameState g_gameState;

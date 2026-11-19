@@ -9,4 +9,7 @@ struct LongDivisionResult {
     u64 remainder;
 };
 
+/* armlib's signed 64-bit division: the quotient and the remainder (with the dividend's sign). */
+extern "C" __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
+
 #endif

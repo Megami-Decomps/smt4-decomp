@@ -46,9 +46,7 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
     }
 
     len = libc_strlen(path);
-    if (len > 8) {
-        len = 8;
-    }
+    len = len > 8 ? 8 : len;
     hasDevice = 0;
     for (i = 0; i < len; i++) {
         if (path[i] == ':') {

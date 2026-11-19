@@ -77,8 +77,7 @@ void Obj55c8d0::FUN_004a4658()
     if (screen->unk0860 != 0) {
         u32 key;
         const char *name = dataLookupDisplayName(&key, screen->displayNameId);
-        if (name == NULL)
-            name = DAT_0052b5bc;
+        name = name == NULL ? DAT_0052b5bc : name;
         char message[80];
         __2sprintf(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
         buttonHelpSetText(message, 0x323232FF);

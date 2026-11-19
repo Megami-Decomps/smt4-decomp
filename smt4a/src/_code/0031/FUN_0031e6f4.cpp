@@ -142,8 +142,7 @@ void FUN_0031e6f4(BattleRewards *rewards)
         if ((s32)share < 1 && experience != 0)
             share = 1;
         u32 target = slot + 0x19;
-        if (target >= 0x25)
-            target = 0x24;
+        target = target >= 0x25 ? 0x24 : target;
         *reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(tally) + target * 0x28 + 0x7870) += share;
     }
 }

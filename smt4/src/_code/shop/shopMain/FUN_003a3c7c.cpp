@@ -1,4 +1,5 @@
 /* NON_MATCHING: only difference is the compiler hoisting &work->category (add r7,r5,#2144) and reusing it for the three category reads; retail reloads from r5+0x860 each time (same as FUN_003a3a9c) */
+#include "gamedata/EquipmentSortPower.h"
 #include "shard/S1SelectMenu.h"
 #include "shard/Shard0049.h"
 #include "script/scrScriptProcess.h"
@@ -12,7 +13,6 @@ void FUN_0022fb64(SelectMenu *);
 s32 FUN_0027ee9c(void);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 s32 playerSlotHoldsEntry(SelectMenu *, u16);
-s32 FUN_0028fb3c(u16);
 void FUN_002328b4(void);
 void FUN_0022e648(SelectMenu *, s32);
 s32 inputIsQuestRepeatRight(void);
@@ -90,7 +90,7 @@ void FUN_003a3c7c(SelectMenu *menu)
     EquipmentMenuItem *items = work->pages[category].items;
     u32 index = flaggedValueHolderGetTotal(&work->cursors[category].holder);
     u16 id = items[index].id;
-    if ((work->category != 8 || playerSlotHoldsEntry(menu, id) == 0 || FUN_0028fb3c(id) > 1) && accepted) {
+    if ((work->category != 8 || playerSlotHoldsEntry(menu, id) == 0 || itemGetOwnedCount(id) > 1) && accepted) {
         FUN_002328b4();
         FUN_0022e648(menu, 11);
         return;

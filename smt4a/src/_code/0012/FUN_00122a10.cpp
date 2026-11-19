@@ -1,5 +1,7 @@
-/* NON_MATCHING: retail keeps success/error codes in separate stack slots and shares a different result-construction tail. */
+/* Built -O3 -Ospace like the rest of the Thumb online library (FUN_00124350, isLeapYear, FUN_00126d1c, FUN_0012736c,
+ * FUN_00127570): retail derives the error codes from one pool word and shares the result tails. */
 #include "common.h"
+#include "classes/OnlineResult.h"
 
 struct OnlineConnection {
     /* 0x00 */ u8 unk00[0x22];
@@ -15,21 +17,16 @@ struct OnlineRequestOwner {
 
 extern "C" {
 s32 FUN_001038f2(OnlineRequestOwner* owner, u32 request, u32 context);
-void _ZN12OnlineResultC1ERKj(void* result, const u32* code);
 
 // Report invalid requests and connection state before submitting an online request.
-void FUN_00122a10(void* output, OnlineRequestOwner* owner, u32 request, u32)
+OnlineResult FUN_00122a10(OnlineRequestOwner* owner, u32 request, u32)
 {
-    u32 code;
-    if (request == 0) {
-        code = 0x8001000a;
-    } else if (owner->connection != NULL && owner->connection->state != 5) {
-        code = 0x80010004;
-    } else if (FUN_001038f2(owner, request, owner->context) != 0) {
-        code = 0x00010001;
-    } else {
-        code = 0x8001000d;
-    }
-    _ZN12OnlineResultC1ERKj(output, &code);
+    if (request == 0)
+        return OnlineResult(0x8001000a);
+    if (owner->connection != NULL && owner->connection->state != 5)
+        return OnlineResult(0x80010004);
+    if (FUN_001038f2(owner, request, owner->context) == 0)
+        return OnlineResult(0x8001000d);
+    return OnlineResult(0x00010001);
 }
 }

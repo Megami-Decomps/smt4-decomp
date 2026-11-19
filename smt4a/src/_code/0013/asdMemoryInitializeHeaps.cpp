@@ -7,7 +7,7 @@ extern "C" {
 
 u32 nnosGetAppMemAlloc(void);
 u32 FUN_00146ac0(void);
-void FUN_00146910(u32 size);
+void osSetHeapSize(u32 size);
 void FUN_00146b14(u32 size);
 u32 FUN_00146898(void);
 void nnosInitAddressSpaceOnce(u32 base, u32 size);
@@ -29,7 +29,7 @@ extern const u8 DAT_00558414;               /* ExpHeapBase vtable */
  * creates the main heap over the block it reserves (everything but `heapSize` + `arg2` bytes). */
 void asdMemoryInitializeHeaps(u32 reserve, u32 heapSize, u32 arg2)
 {
-    FUN_00146910(nnosGetAppMemAlloc() - FUN_00146ac0() - reserve);
+    osSetHeapSize(nnosGetAppMemAlloc() - FUN_00146ac0() - reserve);
     FUN_00146b14(reserve);
     u32 addressSpace = FUN_00146898();
 

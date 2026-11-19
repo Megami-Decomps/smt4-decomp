@@ -18,14 +18,12 @@
 
 #define SORT_MENU_TEXTURES 30
 #define SORT_MENU_HELP_COLOR 0x323232FF
-#define SORT_MENU_KEY_COUNT 0x4C
 /* The rows the list shows at once. */
 #define SORT_MENU_ROWS(work) ((work)->option == 2 ? 10 : 9)
 
 extern "C" {
 
 extern SortMenuSingleton g_useCounter;
-s32 recordCompareSignedValue(const void *left, const void *right);
 u32 resourceRunOperationIfUnblocked(const GridNavigation *grid);
 void buttonHelpSetText(const char *text, u32 color);
 s32 ifTouchRegionAddRequested(u32 file, s32 index);
@@ -35,17 +33,6 @@ u32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV
 /* Moves the list's cursor from the pad. */
 u8 FUN_0029efd8(GridNavigation *list, s32 notify);
 s32 FUN_002c1658(s32 button, s32 mode);
-
-/* The row of sort key `key` in the key table. */
-static __inline SortMenuKeyRecord *sortMenuFindKey(u8 key)
-{
-    DataTableView<SortMenuKeyRecord> keys(0x38, 0);
-    SortMenuKeyRecord wanted;
-
-    wanted.id = key;
-    return static_cast<SortMenuKeyRecord *>(libc_bsearch(&wanted, keys.entries, keys.count,
-                                                         sizeof(SortMenuKeyRecord), recordCompareSignedValue));
-}
 
 /* Advances the frame and, when the list scrolls, the scroll bar. */
 static __inline void sortMenuAdvanceFrame(SortMenuWork *work)

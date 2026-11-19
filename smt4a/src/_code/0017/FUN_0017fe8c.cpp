@@ -3,7 +3,7 @@
 #include "classes/AllocatorState.h"
 
 extern "C" {
-u32 FUN_0019c40c(AllocationHeaderA *header);
+u32 asdMemClassifyAddress(AllocationHeaderA *header);
 
 static void subtractCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)
 {
@@ -25,9 +25,9 @@ AllocationHeaderA *FUN_0017fe8c(void *payload)
     --usage->count;
     usage->bytes -= header->size;
     if ((header->tag & 0xFF) < 8) {
-        u32 category = FUN_0019c40c(header);
+        u32 category = asdMemClassifyAddress(header);
         subtractCategoryBytes(header->size, g_asdMemState.usage, category);
-        category = FUN_0019c40c(header);
+        category = asdMemClassifyAddress(header);
         subtractCategoryPayloadBytes(g_asdMemState.usage, category, header->size - header->alignment);
     }
     AllocationLink *link = &header->link;

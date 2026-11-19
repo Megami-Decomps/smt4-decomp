@@ -82,8 +82,7 @@ u32 FUN_004c1114(u32 id, s32 kind)
         luck = luck - over;
     }
     f32 chance = base + base * (luck * 0.01f + over * 0.0025f);
-    if (chance > 70.0f)
-        chance = 70.0f;
+    chance = chance > 70.0f ? 70.0f : chance;
     chance += resistance * 15.0f;
     char label[32] = { 0 };
     sprintf(label, name);

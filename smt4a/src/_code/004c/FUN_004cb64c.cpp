@@ -95,9 +95,7 @@ void FUN_004cb64c(BtlSlotBattle *battle, BtlSpawnEntry *entry)
     if ((entry->flags & ENTRY_ACTIVE) != 0) {
         if ((entry->flags & ENTRY_REGISTER_ID) != 0) {
             index = idSetFindSubjectIndex(battle, entry);
-            if (index < 0) {
-                index = 0;
-            }
+            index = index < 0 ? 0 : index;
             table = btlFindEntryBlockByMemberId(battle, entry->tableIndex);
             id = table->ids[index];
             if (uiHasEntryId(battle, id) == 0) {

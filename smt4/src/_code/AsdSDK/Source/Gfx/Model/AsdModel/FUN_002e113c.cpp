@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail hoists both group-table loads before the attach, emits two nop hints after the attach call and saves r8; branch layout differs. */
 #include "common.h"
 #include "gfx/LightRegistry.h"
 
@@ -33,9 +32,9 @@ void FUN_002e113c(AsdModelGroupLink *link, s32 group)
         return;
     }
     link->group = group;
-    if (group == 0 || group == 1) {
-        nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray1[group], link->node);
-    } else if (group == -1) {
+    if (link->group == 0 || link->group == 1) {
+        nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray1[link->group], link->node);
+    } else if (link->group == -1) {
         FUN_002abbe8(g_asdModelSlotArray1[previous]->children, link->node);
     }
     if (link->group == 0 || previous == 0) {

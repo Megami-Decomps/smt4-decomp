@@ -24,7 +24,7 @@ int FUN_003f1b3c(int, unsigned int, int, int ***);
 int markerOwnerUpdatePositions(...);
 int FUN_00411c04(int, int);
 int FUN_00416610(unsigned int);
-int FUN_0047f98c(unsigned int);
+int btlPlayIndexedVoice(unsigned int);
 int mathVectorClear(...);
 int FUN_004f1c5c(...);
 void FUN_004f1edc(BtlCameraA *camera);
@@ -98,7 +98,7 @@ extern unsigned int dataTableGetEntries(void);
 extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00411c04. */
 /* Supplied declaration required: FUN_00416610. */
-/* Supplied declaration required: FUN_0047f98c. */
+/* Supplied declaration required: btlPlayIndexedVoice. */
 /* Supplied declaration required: mathVectorClear. */
 /* Supplied declaration required: FUN_004f1c5c. */
 /* Supplied declaration required: cameraBeginScalarTransition. */
@@ -296,7 +296,7 @@ void FUN_00410628(int param_1)
           temp_v18 = 0x3f59999a;
           uStack_48 = 0x3f19999a;
         }
-        FUN_0047f98c(*(unsigned int *)(param_1 + temp_v3 * 4 + 0x18c));
+        btlPlayIndexedVoice(*(unsigned int *)(param_1 + temp_v3 * 4 + 0x18c));
         *(int *)(param_1 + 0x1c8) = *(int *)(param_1 + 0x1c8) + 1;
         *(unsigned char *)(param_1 + temp_v3 + 0x1bc) = 1;
       }

@@ -35,8 +35,7 @@ s32 asdSndPlaySlotB(u32 id, u32 level, u32 frames, f32 pitch, f32 pan)
         f32 volume = 0.0f;
         if (level != 0) {
             volume = 1.0f + ((f32)level - 64.0f) * (2.0f / 127.0f);
-            if (volume > 2.0f)
-                volume = 2.0f;
+            volume = volume > 2.0f ? 2.0f : volume;
         }
         handle->setVolume(0.0f, 0);
         handle->setPitch(1.0f);

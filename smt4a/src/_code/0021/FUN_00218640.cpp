@@ -77,7 +77,7 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002ebda8. */
 /* Supplied declaration required: FUN_002f7730. */
 /* Supplied declaration required: partyDrawCategorySelectionIcon. */
-extern int FUN_003de75c(unsigned int);
+extern int questRecordIsUsable(unsigned int);
 extern int recordIsAvailable(unsigned int);
 extern unsigned int aocGetEntryData(unsigned short);
 extern int FUN_003df004(unsigned int, int, unsigned char **);
@@ -361,7 +361,7 @@ LAB_00218d20:
       }
     }
     else {
-      temp_v9 = FUN_003de75c(temp_v25);
+      temp_v9 = questRecordIsUsable(temp_v25);
       if (temp_v9 != 0) {
         temp_v19 = rosterGetLeaderId();
         if (temp_v19 == temp_v25) {

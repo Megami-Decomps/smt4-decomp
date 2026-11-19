@@ -11,6 +11,8 @@ public:
 /* A nonvirtual state base is initialized before the concrete object's vtable. */
 struct AllocatedSelectionState {
     AllocatedSelectionState() : index(-1) {}
+    AllocatedSelectionState(SelectionObjectAllocator *allocator, u32 value)
+        : owner(allocator), parameter(value), index(-1) {}
     /* 0x00 */ u32 active;
     /* 0x04 */ u32 kind;
     /* 0x08 */ SelectionObjectAllocator *owner;
@@ -75,9 +77,8 @@ public:
 class Obj55c9c0 : public AllocatedSelectionState {
 public:
     Obj55c9c0(SelectionObjectAllocator *allocator, u32 value)
+        : AllocatedSelectionState(allocator, value)
     {
-        owner = allocator;
-        parameter = value;
         active = 3;
         unk24 = 6;
         unk25 = 0;

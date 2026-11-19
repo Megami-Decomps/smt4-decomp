@@ -21,7 +21,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: questDataGetRecord. */
-extern int FUN_003de75c(void);
+extern int questRecordIsUsable(void);
 extern int recordIsAvailable(int);
 extern int recordCategoryNineIsActiveInMode24(int);
 extern int FUN_003df004(int, int, int *);
@@ -87,7 +87,7 @@ uiQuestDrawRowPlate(int param_1,unsigned int param_2,unsigned int param_3,unsign
     }
     if (*(char *)(param_1 + 6) != '\0') {
       if (*(char *)(param_1 + 6) != '\n') {
-        temp_v0 = FUN_003de75c();
+        temp_v0 = questRecordIsUsable();
         if (temp_v0 != 0) {
           temp_v0 = rosterGetLeaderId();
           if (temp_v0 == temp_v5) {

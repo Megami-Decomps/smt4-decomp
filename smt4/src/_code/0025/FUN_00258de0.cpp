@@ -47,11 +47,9 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
         }
     }
     if (unit != NULL) {
-        if (reinterpret_cast<s32>(btlGetMainState()) == 0) {
-            unitMaximum = unit->maxHp;
-        } else {
-            unitMaximum = btlLinkGetMaxHp(unit);
-        }
+        unitMaximum = reinterpret_cast<s32>(btlGetMainState()) == 0
+            ? unit->maxHp
+            : btlLinkGetMaxHp(unit);
     }
 
     if (FUN_001ad4c0(effect) != 0) {

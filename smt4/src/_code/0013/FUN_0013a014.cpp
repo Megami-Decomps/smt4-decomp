@@ -10,7 +10,7 @@ void FUN_0013a014(void)
     DAT_00472a44 = DAT_00472a44 - 1;
   }
   if (DAT_00472a44 == 0) {
-    iVar1 = FUN_00146704(&DAT_00473850);
+    iVar1 = handleCloseAndReset(&DAT_00473850);
     if (-1 < iVar1) {
       DAT_00472a50 = 0;
       DAT_00473854 = 0;

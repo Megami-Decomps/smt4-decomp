@@ -22,9 +22,7 @@ void FUN_002d5374()
     f32 dy = camera->savedEye.y - camera->savedTarget.y;
     f32 dz = camera->savedEye.z - camera->savedTarget.z;
     f32 length = sqrtf(dx * dx + dy * dy + dz * dz);
-    if (length < 0.01f) {
-        length = 0.01f;
-    }
+    length = length < 0.01f ? 0.01f : length;
     f32 distance = length < 300.0f ? length : 300.0f;
     f32 directionX = dx / length;
     f32 directionY = dy / length;

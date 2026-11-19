@@ -100,8 +100,8 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     }
     if (expanded != 0) {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.29f);
-        texDrawCompositeSprite(2, 0x39, 0x0F, transform->x + x + offset, y, 0x71);
-        texDrawCompositeSprite(2, 0x39, 0x10, transform->x + x + offset, y, 0x71);
+        texDrawCompositeSprite(2, 0x39, 0x0F, transform->offset.x + x + offset, y, 0x71);
+        texDrawCompositeSprite(2, 0x39, 0x10, transform->offset.x + x + offset, y, 0x71);
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
         for (s32 index = 0; index < 7; ++index) {
             if (texts->skillIds[index] == 0) {
@@ -109,7 +109,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             }
             const TextureTableEntryIV *row = asdTMTexTableEntryAt(0x39, index + 0xAC);
             s32 rowY = row->y + y;
-            s32 rowX = row->x + transform->x + x;
+            s32 rowX = row->x + transform->offset.x + x;
             texDrawCompositeSprite(2, 0x39, 0x11, rowX + offset, rowY, 0x71);
             position = asdTMTexTableEntryAt(0x39, 0xAA);
             itemDrawCategoryBadge(texts->skillIds[index], position->x + rowX + offset,

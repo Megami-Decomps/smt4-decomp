@@ -1,39 +1,28 @@
-/* NON_MATCHING: candidate/request registers differ, and the alternate-search return adds a branch-to-next NOP. */
-#include "common.h"
+/* NON_MATCHING: the loop uses the retail registers, but the compiler tests the final index and predicates the candidate ID load instead of loading it before breaking. */
+#include "gamedata/SaveSlotTable.h"
+#include "script/ScriptArgs.h"
 #include "ui/MessageMainA.h"
 #include "code/Code003e.h"
 #include "code/Code0018.h"
 
-struct SaveSlotView {
-    u8 unk00[0x12c];
-    u16 unk12C; // 0x12c
-};
-
 extern "C" {
-u32 scrGetArg(u32 index);
-SaveSlotView* saveSlotFindSelected(void);
-SaveSlotView* partyGetSlot(u16 index);
-
-static __inline s32 findEligibleAlternate(u32 requestedValue)
-{
-    for (s32 index = 0; index < 12; ++index) {
-        SaveSlotView *candidate = partyGetSlot((u16)index);
-        if (candidate->unk12C != requestedValue && partySlotIsOccupied(candidate) != 0)
-            return candidate->unk12C;
-    }
-    return 0;
-}
 
 // Select an eligible alternate before processing the currently selected value.
 u32 FUN_00357d2c(void)
 {
-    const u32 requestedValue = scrGetArg(0);
-    SaveSlotView* selectedSlot = saveSlotFindSelected();
-
-    if (selectedSlot != 0 && selectedSlot->unk12C == requestedValue) {
-        FUN_003e4e4c(findEligibleAlternate(requestedValue));
+    s32 requestedValue = scrGetArg(0);
+    PartySlotA *selected = saveSlotFindSelected();
+    if (selected != NULL && selected->id == requestedValue) {
+        s32 index;
+        const PartySlotA *candidate;
+        for (index = 0; index < 12; ++index) {
+            candidate = partyGetSlot((u16)index);
+            if (candidate->id != requestedValue && partySlotIsOccupied(candidate)) {
+                break;
+            }
+        }
+        FUN_003e4e4c(index < 12 ? candidate->id : 0);
     }
-
     FUN_003e48dc((u16)requestedValue);
     return 1;
 }

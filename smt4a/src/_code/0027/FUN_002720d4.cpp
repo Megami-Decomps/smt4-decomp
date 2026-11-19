@@ -22,8 +22,7 @@ ParticleInstanceA *FUN_002720d4(ParticleSourcePrefixA *source)
     if (count == 0)
         count = definition->fallbackCount;
     count *= source->resource->capacity->countMultiplier;
-    if (count > 300)
-        count = 300;
+    count = count > 300 ? 300 : count;
 
     asdDebugTrace(DAT_00544b38, 450);
     ParticleInstanceA *instance = static_cast<ParticleInstanceA *>(

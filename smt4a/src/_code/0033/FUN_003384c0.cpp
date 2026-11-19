@@ -37,9 +37,7 @@ EffEmitter *FUN_003384c0(EffEmitter *source)
         count = description->countDefault;
     }
     u32 maxCount = count * original->resource->description->multiplier;
-    if (maxCount > 100) {
-        maxCount = 100;
-    }
+    maxCount = maxCount > 100 ? 100 : maxCount;
     asdDebugTrace(DAT_00544ac4, 450);
     EmitterView *clone = static_cast<EmitterView *>(memAlloc(0x10000, 0x100, 0, 0xa8, 0x10, 1));
     rt_memclr(clone, 0xa8);

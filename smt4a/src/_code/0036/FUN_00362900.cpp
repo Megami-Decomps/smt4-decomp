@@ -7,7 +7,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_001bc460(...);
-int FUN_00237354(...);
+int rotationFromAxisDegrees(...);
 int matrix43Multiply(...);
 int mathMatrixApplyTranslation(...);
 int matrix44SetIdentity(...);
@@ -157,7 +157,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: mathMatrixApplyScale. */
-/* Supplied declaration required: FUN_00237354. */
+/* Supplied declaration required: rotationFromAxisDegrees. */
 /* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: mathMatrixApplyTranslation. */
 /* Supplied declaration required: matrix44SetIdentity. */
@@ -376,7 +376,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 temp_v57 = pfVar9->field_0x4;
                 temp_v58 = pfVar9->field_0x8;
                 temp_v59 = pfVar9->field_0xc;
-                FUN_00237354(&temp_v30,&temp_v57,0);
+                rotationFromAxisDegrees(&temp_v30,&temp_v57,0);
               }
               temp_v2 = pfVar9->field_0x0;
               *(unsigned int *)(temp_v2 + 0x4c) = temp_v30;
@@ -485,7 +485,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 temp_v19 = pfVar9->field_0x4;
                 temp_v20 = pfVar9->field_0x8;
                 temp_v21 = pfVar9->field_0xc;
-                FUN_00237354(temp_v55,&temp_v19,0);
+                rotationFromAxisDegrees(temp_v55,&temp_v19,0);
               }
               matrix44SetIdentity(&temp_v30);
               matrix43Multiply(&temp_v30,temp_v55,&temp_v39);

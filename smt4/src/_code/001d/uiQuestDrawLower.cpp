@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 renderCtxPackPassFlags(u32 mode, u32 flags);
-void FUN_001a6d98();
+void uiQuestDrawList();
 
 s32 uiQuestDrawLower(u32 job)
 {
@@ -38,7 +38,7 @@ s32 uiQuestDrawLower(u32 job)
         case 26:
         case 27:
         case 30:
-            FUN_001a6d98();
+            uiQuestDrawList();
             break;
         }
         renderStackPop(&g_titleScene->stackA);

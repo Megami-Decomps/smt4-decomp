@@ -22,7 +22,7 @@ void clockGetTicksAsMicroseconds(NnDateTime *now);
 s32 nn_fnd_DateTime_GetYear(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetMonth(const NnDateTime *dateTime);
 s32 nn_fnd_DateTime_GetDay(const NnDateTime *dateTime);
-s32 FUN_005020c0(const NnDateTime *dateTime);
+s32 dateTimeGetHour(const NnDateTime *dateTime);
 s32 dateTimeGetMinute(const NnDateTime *dateTime);
 s32 dateTimeGetSecond(const NnDateTime *dateTime);
 
@@ -35,7 +35,7 @@ void FUN_00303088(PackedDateTime *packed)
     packed->year = nn_fnd_DateTime_GetYear(&now);
     packed->month = nn_fnd_DateTime_GetMonth(&now);
     packed->day = nn_fnd_DateTime_GetDay(&now);
-    packed->hour = FUN_005020c0(&now);
+    packed->hour = dateTimeGetHour(&now);
     packed->minute = dateTimeGetMinute(&now);
     packed->second = dateTimeGetSecond(&now);
 }

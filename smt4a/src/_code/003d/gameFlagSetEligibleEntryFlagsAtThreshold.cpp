@@ -1,11 +1,11 @@
 #include "common.h"
 #include "quest_center/QuestRecordA.h"
+#include "quest_center/QuestUnlock.h"
 #include "gamedata/GameFlags.h"
 
 // Private view of the record returned by questDataGetRecord.
 extern "C" {
 u8* gameFlagBlockGetEntry(u16 entryId);
-s32 gameUnlockRecordRequirementsMet(u16 entryId);
 
 // Set the associated flags for eligible entries whose nonzero threshold has been reached.
 void gameFlagSetEligibleEntryFlagsAtThreshold(s32 threshold)

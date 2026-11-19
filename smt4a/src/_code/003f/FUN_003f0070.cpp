@@ -7,7 +7,6 @@
 
 extern "C" {
 s32 FUN_003e4978(void);
-s32 partySlotMatchesSelected(PartySlotA *slot);
 s32 lcgRandomRange(u16 maximum);
 void FUN_003f1b3c(u32 request, void *record, s32 kind, s32 *value, u32 result[3]);
 void FUN_0047f7ac(s32 enabled, u32 result);

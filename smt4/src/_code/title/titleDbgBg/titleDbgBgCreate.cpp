@@ -23,7 +23,7 @@ extern "C" {
 extern DebugBackgroundWork *g_titleDbgBg;
 void titleDbgBgDestroy();
 void FUN_001251d8();
-void FUN_00125e64();
+void titleDbgBgDraw();
 u32 taskCreateDraw(const char *name, s32 group, s32 priority, s32 flags,
                    void (*draw)(), void (*destroy)(), void *data, u32 parent);
 }
@@ -44,5 +44,5 @@ extern "C" void titleDbgBgCreate()
     sprintf(label->text, "%s %s", s_buildDate, s_buildTime);
     work->visible = 0;
     work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TBG C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001251d8), reinterpret_cast<AsdProcFunc>(titleDbgBgDestroy), NULL);
-    taskCreateDraw("TBG U", 0x73, 0, 0, FUN_00125e64, NULL, NULL, work->process);
+    taskCreateDraw("TBG U", 0x73, 0, 0, titleDbgBgDraw, NULL, NULL, work->process);
 }

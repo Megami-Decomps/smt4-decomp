@@ -1,13 +1,13 @@
-/* NON_MATCHING: the initialization helper's failure test and out-of-line block placement, and the id/value register assignment, differ. */
+/* NON_MATCHING: retail keeps the id in r5 and the value pointer in r6 (the build swaps them) and predicates the FUN_004264d0 argument moves. */
 #include "common.h"
 #include "nn/Result.h"
 
 extern "C" u8 DAT_005891a4;
-extern "C" s32 FUN_0042656c(u32 id, bool *ready);
-extern "C" s32 FUN_004264d0(u32 destination, u32 source, u32 size);
-extern "C" s32 FUN_00426478(u32 id, u32 value);
-extern "C" s32 FUN_004266e4(u32 destination, u32 source, u8 first, u8 second);
-extern "C" s32 FUN_0015997c();
+extern "C" s32 FUN_0042656c(u32 request, u8 *reply);
+extern "C" s32 FUN_004264d0(u32 handle, u32 buffer, u32 value);
+extern "C" s32 FUN_00426478(u32 buffer, u32 size);
+extern "C" s32 FUN_004266e4(u32 inputAddress, u32 outputAddress, u8 firstFlag, u8 secondFlag);
+extern "C" s32 ipcServiceSessionAcquire();
 extern "C" s32 FUN_00432040(u32 mode);
 extern "C" void ipcServiceSessionRelease();
 
@@ -15,7 +15,7 @@ static __inline s32 sessionEnsureInitialized()
 {
     s32 result = 0;
     if (DAT_005891a4 == 0) {
-        result = FUN_0015997c();
+        result = ipcServiceSessionAcquire();
         if (nnResultIsFailure(result))
             return result;
         result = FUN_00432040(1);
@@ -28,9 +28,9 @@ static __inline s32 sessionEnsureInitialized()
 }
 
 // Prepare a session and apply the caller's value after initialization succeeds.
-extern "C" s32 FUN_00426344(u32 id, const u32 *value)
+extern "C" nn::Result FUN_00426344(u32 id, const u32 *value)
 {
-    bool ready;
+    u8 ready;
     s32 result = FUN_0042656c(id, &ready);
     if (nnResultIsFailure(result))
         return result;

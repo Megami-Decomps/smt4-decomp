@@ -37,9 +37,7 @@ void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
     texDrawTableEntryAtStoredOrigin(2, COUNTER_GROUP, 0xC5, frame->x + x, frame->y + y, 0x74);
     texDrawTableEntryAtStoredOrigin(2, COUNTER_GROUP, 0xC6, frame->x + x, frame->y + y, 0x79);
     value = work->value >> 12;
-    if (value > COUNTER_MAX) {
-        value = COUNTER_MAX;
-    }
+    value = value > COUNTER_MAX ? COUNTER_MAX : value;
     digit = asdTMTexTableEntryAt(COUNTER_GROUP, 0xCB);
     thousands = value / 1000;
     value %= 1000;

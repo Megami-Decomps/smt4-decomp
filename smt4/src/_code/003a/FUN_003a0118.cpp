@@ -1,4 +1,4 @@
-/* Compares two entries: by FUN_0028fb3c key of their ids (descending), then by their aocEntryGetSortOrder rank. */
+/* Compares two entries: by itemGetOwnedCount key of their ids (descending), then by their aocEntryGetSortOrder rank. */
 #include "common.h"
 #include "gamedata/EquipmentSortPower.h"
 
@@ -12,8 +12,8 @@ s32 FUN_003a0118(const SortEntry *first, const SortEntry *second)
 {
     u16 idA = first->id;
     u16 idB = second->id;
-    s32 keyA = FUN_0028fb3c(idA);
-    s32 keyB = FUN_0028fb3c(idB);
+    s32 keyA = itemGetOwnedCount(idA);
+    s32 keyB = itemGetOwnedCount(idB);
     s32 diff = keyB - keyA;
 
     if (diff != 0) {

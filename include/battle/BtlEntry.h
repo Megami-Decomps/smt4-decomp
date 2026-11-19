@@ -24,6 +24,11 @@ typedef struct BtlEquip {
             u8 unk00[4];
             /* 0x04 */ u16 id;
         } weapon;
+        struct {
+            /* 0x00 */ u16 sword;
+            /* 0x02 */ u16 gun;
+            /* 0x04 */ u16 bullet;
+        } arms;                 /* the player's equipment ids */
     };
     /* 0x0E */ s16 maxHp;
     /* 0x10 */ s16 maxMp;
@@ -48,7 +53,17 @@ typedef char BtlEntryActionIVSizeCheck[sizeof(BtlEntryActionIV) == 8 ? 1 : -1];
 /* A unit's detail record: bit 9 of the halfword at 0x16 marks an eligible unit. */
 struct BtlUnitDetail {
     /* 0x00 */ u8 unk00[0x16];
-    /* 0x16 */ u16 flags;
+    /* 0x16 */ u16 flags;            /* the top four bits: the normal attack's targeting */
+    /* 0x18 */ u8 minimumHits : 3;
+    /* 0x18 */ u8 maximumHits : 3;
+    /* 0x18 */ u8 unk18 : 2;
+    /* 0x19 */ u8 element;
+    /* 0x1A */ u8 unk1A;
+    /* 0x1B */ u8 ailment;
+    /* 0x1C */ u8 ailmentRate;
+    /* 0x1D */ u8 unk1D;
+    /* 0x1E */ u16 unk1E;
+    /* 0x20 */ u16 power;
 };
 
 /* The object a unit is linked to; its id at +0x46 is what a script refers to the unit by. */
@@ -121,6 +136,7 @@ typedef struct BtlUnitData {
     union {
         /* 0x1B4 */ u32 unk1B4;           /* [0x280] */
         /* 0x1B4 */ BtlEquip *reserve;
+        /* 0x1B4 */ BtlUnitLink *guest;   /* a support unit's demon when it has no support record */
     };
     union {
         /* 0x1B8 */ void *devil;          /* [0x284] non-NULL when the entry is a demon */

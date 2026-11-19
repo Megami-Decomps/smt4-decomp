@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00235438` (_code @ 0x235438, 0x6cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "quest_center/QuestUnlock.h"
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
@@ -57,7 +58,6 @@ extern int FUN_003de92c(unsigned short);
 extern int FUN_003dedf0(unsigned int);
 /* Supplied declaration required: FUN_003deea4. */
 extern int FUN_003df004(unsigned int, int, unsigned int *);
-extern int gameUnlockRecordRequirementsMet(unsigned int);
 /* Supplied declaration required: partyEntryTriggerIfLevelAndFlag3. */
 /* Supplied declaration required: FUN_00417b70. */
 extern int partyEntryBitsBit5(unsigned int);

@@ -1,4 +1,5 @@
-/* NON_MATCHING: draw offsets use ldrd instead of retail's ldm; color-path registers and decimal-formatter layout also differ. */
+/* NON_MATCHING: retail keeps the record in r7 and x in r9 (here r8 and r7), places the level text below the time
+ * buffer (sp+16 and sp+32; here sp+24 and sp+12), and unrolls the decimal-digit helper's two loops by two. */
 #include <stdio.h>
 #include "saveLoadUI/saveLoadUI.h"
 #include "gamedata/NkmBaseRecordA.h"
@@ -28,8 +29,9 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     }
     gxResetColorQuadToWhite();
     efctSetSpeed(transform->alpha);
-    x += transform->x;
-    y += transform->y;
+    MessageDrawOffset offset = transform->offset;
+    x += offset.x;
+    y += offset.y;
     if (preview != 0) {
         texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x56, x, y, 0x65);
         return;
@@ -55,12 +57,11 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     }
     const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x2E, 0x75);
     uiObjectSetColorRgb((u32)texts->name, nameColor);
-    textDrawFaded(texts->name, position->x + x, position->y + y, 0x66, 1.0f);
+    textDrawFaded(texts->name, position->x + x, position->y + y, 0x66, transform->alpha);
     if ((record->flags & 2) != 0) {
         position = asdTMTexTableEntryAt(0x2E, 0x76);
-        u32 color = record->style == 0 ? 0x006E0000 : 0x00F33700;
-        uiObjectSetColorRgb((u32)texts->optional, color);
-        textDrawFaded(texts->optional, position->x + x, position->y + y, 0x66, 1.0f);
+        uiObjectSetColorRgb((u32)texts->optional, record->style == 0 ? 0x006E0000 : 0x00F33700);
+        textDrawFaded(texts->optional, position->x + x, position->y + y, 0x66, transform->alpha);
     }
     texDrawTableEntryAtStoredOrigin(2, 0x2E, 0x5A, x, y, 0x66);
     if (record->portrait != 0) {
@@ -96,7 +97,8 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     sprintf(time, "%c", ':');
     position = asdTMTexTableEntryAt(0x2E, 0x7A);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
-    for (s32 index = 0, place = 4; place >= 1; ++index, --place) {
+    s32 index = 0;
+    for (s32 place = 4; place >= 1; ++index, --place) {
         u32 digit = saveSlotDecimalDigit(hours, (u8)place);
         if (digit == 10) {
             time[index] = ' ';
@@ -104,7 +106,7 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
             sprintf(time + index, "%d", digit);
         }
     }
-    time[4] = '\0';
+    time[index] = '\0';
     position = asdTMTexTableEntryAt(0x2E, 0x82);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     position = asdTMTexTableEntryAt(0x2E, 0x89);

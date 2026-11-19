@@ -1,4 +1,4 @@
-/* NON_MATCHING: ARMCC merges highlighted/plain draw calls and does not reproduce retail's branch hints or final setter tail call. */
+/* NON_MATCHING: with the glyph buffer scoped to the draw (retail tail-calls efctSetSpeed) only the callee-saved registers differ: retail keeps x/y in r7/r8 and dim in r6, the build x/y in r6/r7 and dim in r8 (as smt4 uiDrawEncodedGlyph). */
 #include "shard/W6_W6Match7_FontResource.h"
 #include "text/TextDraw.h"
 #include "shard/W6_W6Match2_HelpResources.h"
@@ -28,14 +28,16 @@ void textDrawEncodedGlyph(void *, u32 code, s32 x, s32 y, s32 dim, s32 highlight
             drawAlpha = 0.0f;
         }
     }
-    char text[3];
-    text[0] = (char)(code >> 8);
-    text[1] = (char)code;
-    text[2] = 0;
-    if (highlighted != 0) {
-        textDrawString((f32)x, (f32)y, 0.0f, 4, 0.0f, color, drawAlpha, text);
-    } else {
-        textDrawString((f32)x, (f32)y, 0.0f, 3, 0.0f, color, drawAlpha, text);
+    {
+        char text[3];
+        text[0] = (char)(code >> 8);
+        text[1] = (char)code;
+        text[2] = 0;
+        if (highlighted != 0) {
+            textDrawString((f32)x, (f32)y, 0.0f, 4, 0.0f, color, drawAlpha, text);
+        } else {
+            textDrawString((f32)x, (f32)y, 0.0f, 3, 0.0f, color, drawAlpha, text);
+        }
     }
     efctSetSpeed(alpha);
 }

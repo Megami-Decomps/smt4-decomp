@@ -22,7 +22,7 @@ extern unsigned int DAT_00473850; /* 0x473850 */
 extern unsigned int DAT_00473854; /* 0x473854 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern int FUN_00146704(unsigned int *);
+extern int handleCloseAndReset(unsigned int *);
 /* Supplied declaration required: asdFatalError. */
 
 
@@ -40,7 +40,7 @@ void FUN_001283e4(int param_1)
       if (DAT_00472a4c == 0) {
         if (DAT_00472a48 != '\0') {
           DAT_00472a48 = 0;
-          temp_v0 = FUN_00146704(&DAT_00473854);
+          temp_v0 = handleCloseAndReset(&DAT_00473854);
           if (-1 < temp_v0) {
             DAT_00472a50 = 0;
           }
@@ -55,7 +55,7 @@ void FUN_001283e4(int param_1)
         DAT_00472a44 = DAT_00472a44 - 1;
       }
       if (DAT_00472a44 == 0) {
-        temp_v0 = FUN_00146704(&DAT_00473850);
+        temp_v0 = handleCloseAndReset(&DAT_00473850);
         if (-1 < temp_v0) {
           DAT_00472a50 = 0;
           DAT_00473854 = 0;

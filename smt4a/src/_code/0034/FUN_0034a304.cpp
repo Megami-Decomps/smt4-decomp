@@ -17,9 +17,7 @@ extern "C" s32 FUN_0034a304(const AttributeModifierLists *record, s32 count, s32
         count = -count;
         sign = -1;
     }
-    if (count > 9) {
-        count = 9;
-    }
+    count = count > 9 ? 9 : count;
     s32 total = 0;
     for (s32 index = 0; index < count && modifiers[index].kind; ++index) {
         if (modifiers[index].kind == kind) {

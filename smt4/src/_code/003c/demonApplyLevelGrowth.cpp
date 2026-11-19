@@ -51,8 +51,7 @@ extern "C" void demonApplyLevelGrowth(DemonLevelWork *work, s32 levels)
         0, record->baseHp, record->baseMp, record->hpGrowth, record->mpGrowth, 0, 0
     };
     s32 hp = record->baseHp + record->level * record->hpGrowth;
-    if (hp > 9999)
-        hp = 9999;
+    hp = hp > 9999 ? 9999 : hp;
     parameters.hp = hp;
     s32 mp = (record->baseMp + record->level * record->mpGrowth) * 45 / 100;
     if (mp > 9999)

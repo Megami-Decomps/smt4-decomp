@@ -1,33 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_fnd_DateTime_GetYear` (_code @ 0x502128, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/fnd/DateTime.h"
+#include "shard/W6_W6Match2_LongDivision.h"
 
-extern "C" {
-
-int dateConvertDaysToCalendar(int [2], int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: dateConvertDaysToCalendar. */
-extern int ll_sdiv(int, int, unsigned int, unsigned int);
-
-
-int nn_fnd_DateTime_GetYear(unsigned int *param_1)
-
+/* The year of a DateTime. */
+extern "C" s32 nn_fnd_DateTime_GetYear(const nn::fnd::DateTime *dateTime)
 {
-/* irregular: irregular input(s): in_r3; 2 native warning(s); review required */
-  int temp_v0;
-  int in_r3;
-  int temp_v1 [2];
-  
-  temp_v1[0] = in_r3;
-  temp_v0 = ll_sdiv(*param_1 + 0x7cfc8400,param_1[1] + 0x395f + (unsigned int)(0x83037bff < *param_1),86400000
-                  ,0);
-  dateConvertDaysToCalendar(temp_v1,0,0,temp_v0 - 0xb2407);
-  return temp_v1[0];
+    s64 days = ll_sdiv(dateTime->milliseconds + DATE_TIME_EPOCH_OFFSET, DATE_TIME_MILLISECONDS_PER_DAY).quotient;
+    s32 year;
+    dateConvertDaysToCalendar(&year, NULL, NULL, (s32)(days - DATE_TIME_EPOCH_DAYS));
+    return year;
 }
-
-} /* extern "C" */

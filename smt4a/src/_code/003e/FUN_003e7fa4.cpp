@@ -102,9 +102,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
         if (!(actor->flags & 0x10) || force != 0) {
             BattleSlotList* slots = btlMainFindEntryByListedId(world, actor->slotId);
             s32 slot = slotIndexOf(slots, actor->slotId);
-            if (slot < 0) {
-                slot = 0;
-            }
+            slot = slot < 0 ? 0 : slot;
             EnemyDrawObject* object = stateEntryFindById(world, btlFindEntryBlockByMemberId(world, index)->drawIds[slot]);
             enemyDrawCalcVerticalOffset(object, &position, actor->scale);
             position.x += actor->position.x;

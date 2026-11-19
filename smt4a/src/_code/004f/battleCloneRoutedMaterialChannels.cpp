@@ -25,9 +25,7 @@ void battleCloneRoutedMaterialChannels(MaterialMergeOwner *owner, u32 kind, s32 
         return;
     }
     s32 variant = idSetFindSubjectIndex(btlGetMainState(), record);
-    if (variant < 0) {
-        variant = 0;
-    }
+    variant = variant < 0 ? 0 : variant;
     const BtlUnitDataA *variants = btlFindEntryBlockByMemberId(btlGetMainState(), group);
     if (variants == NULL) {
         return;

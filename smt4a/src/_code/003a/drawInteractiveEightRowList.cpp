@@ -14,7 +14,7 @@ struct EightRowListDraw {
 };
 extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
-void FUN_003b6250(s32, s32, f32);
+void uniteDrawSelectionButtonStrip(s32, s32, f32);
 void uiDrawLayeredSpriteEffect(s32, s32, f32);
 void FUN_003cbd04(EightRowListDraw *, u32, u32, s32, s32, s32, u32, f32);
 void FUN_003cdeb0(EightRowListDraw *, u32, s32, s32, f32);
@@ -27,7 +27,7 @@ void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interact
     s32 selected = listCursorGetRowIfUnblocked(reinterpret_cast<const Object *>(&work->grid));
     bool headerSelected = false;
     if (interactive && (base + selected >= work->selectionLimit || work->headerOverride)) {
-        FUN_003b6250(x, y, scale);
+        uniteDrawSelectionButtonStrip(x, y, scale);
         headerSelected = true;
     } else {
         uiDrawLayeredSpriteEffect(x, y, scale);

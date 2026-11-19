@@ -3,7 +3,7 @@
 #include "classes/AllocatorState.h"
 
 extern "C" {
-u32 FUN_002b30fc(const AllocationHeader *);
+u32 asdMemClassifyAddress(const AllocationHeader *);
 
 static void addCategoryBytes(u32 bytes, AllocationUsage *usage, u32 category)
 {
@@ -22,9 +22,9 @@ void asdMemoryTrackAllocation(AllocationHeader *block)
     ++usage->count;
     usage->bytes += block->size;
     if ((usage->tag & 0xff) < 8) {
-        u32 category = FUN_002b30fc(block);
+        u32 category = asdMemClassifyAddress(block);
         addCategoryBytes(block->size, g_asdMemState.usage, category);
-        category = FUN_002b30fc(block);
+        category = asdMemClassifyAddress(block);
         addCategoryPayloadBytes(block->size - block->alignment - sizeof(AllocationHeader), g_asdMemState.usage, category);
     }
     usage = g_asdMemState.usage;

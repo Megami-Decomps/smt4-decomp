@@ -8,13 +8,13 @@
 extern "C" {
 void btlEntryBuildSummary(BattleEntrySummary* summary, BtlMainState* state, const BtlEntry* entry);
 
-// Read the unsigned value and signed stat from a listed combatant's summary.
+// Read the element and signed category from a listed combatant's summary.
 void btlGetListedSummaryValues(u32 id, u32* value, s32* stat)
 {
     BtlEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     BattleEntrySummary summary;
     btlEntryBuildSummary(&summary, btlGetMainState(), entry);
-    *value = summary.value;
-    *stat = summary.stat;
+    *value = summary.element;
+    *stat = summary.category;
 }
 }

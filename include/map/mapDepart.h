@@ -24,6 +24,52 @@ typedef struct MapDepart {
     /* 0x08 */ u8 freeOnEnd;     /* 0 = keep the block after the job ends */
 } MapDepart;
 
+struct AsdTexture;
+struct ScriptProcess;
+
+/* The departure job's whole block (Shin Megami Tensei IV, 0x80 bytes); MapDepart is its public prefix. */
+typedef struct MapDepartJobWork {
+    /* 0x00 */ MapDepart prefix;
+    /* 0x0C */ s32 mode;             /* 0: leaving through the map's exit; 1, 2: a single relic (entry) */
+    /* 0x10 */ s32 map;
+    /* 0x14 */ s32 entry;
+    /* 0x18 */ s32 state;
+    /* 0x1C */ s32 counter;          /* frames in the state */
+    /* 0x20 */ u8 listActive;        /* the result list is being revealed */
+    /* 0x21 */ u8 unk21[3];
+    /* 0x24 */ s32 listDelay;
+    /* 0x28 */ s32 listFrame;        /* a row appears every 13 frames */
+    /* 0x2C */ u8 listDone;          /* every row is shown */
+    /* 0x2D */ u8 promptActive;
+    /* 0x2E */ u8 unk2E[2];
+    /* 0x30 */ s32 promptDelay;
+    /* 0x34 */ u8 promptReady;
+    /* 0x35 */ u8 unk35[3];
+    /* 0x38 */ s32 promptFrame;
+    /* 0x3C */ u8 effectActive;
+    /* 0x3D */ u8 unk3D[3];
+    /* 0x40 */ s32 effectDelay;
+    /* 0x44 */ s32 effectFrame;      /* loops every 31 frames */
+    /* 0x48 */ u32 destinationState[4];
+    /* 0x58 */ void *scriptData;     /* the loaded .bf script */
+    /* 0x5C */ void *messageData;    /* the loaded .mbm messages */
+    /* 0x60 */ ScriptProcess *script;
+    /* 0x64 */ u32 completionFlag;   /* game flag set when the event script ends, 0 = none */
+    /* 0x68 */ u8 unk68[0x14];
+    /* 0x7C */ AsdTexture *texture;  /* node 4 of texture table 10 */
+} MapDepartJobWork;
+typedef char MapDepartJobWorkLayoutCheck[
+    offsetof(MapDepartJobWork, mode) == 0xC && offsetof(MapDepartJobWork, state) == 0x18 &&
+    offsetof(MapDepartJobWork, listDone) == 0x2C && offsetof(MapDepartJobWork, effectActive) == 0x3C &&
+    offsetof(MapDepartJobWork, destinationState) == 0x48 && offsetof(MapDepartJobWork, scriptData) == 0x58 &&
+    offsetof(MapDepartJobWork, texture) == 0x7C && sizeof(MapDepartJobWork) == 0x80 ? 1 : -1];
+
+/* The departure module's globals (0x4475b8): the job's block and a counter the job advances when it ends. */
+typedef struct MapDepartModule {
+    /* 0x00 */ MapDepartJobWork *work;
+    /* 0x04 */ s32 exitCycle;        /* 0..2 */
+} MapDepartModule;
+
 struct AsdMdlObject;
 
 /* Resources kept while departing (Shin Megami Tensei IV), one block behind a module global. */

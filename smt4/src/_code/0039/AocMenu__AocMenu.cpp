@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail stores the far members (0x1798, 0x17a0, 0x1eec) as [literal offset, this] after a writeback store at 0x11b0; the build adds to the chained pointer instead. */
+/* NON_MATCHING: retail stores the far members (0x1798, 0x17a0, 0x1c30) as [literal offset, this] after a writeback store at 0x11b0, recomputing this from it; the build adds to the panel pointer instead. */
 #include "classes/AocMenu.h"
 
 extern "C" {
@@ -18,6 +18,6 @@ AocMenu::AocMenu() : flags(0), dispatchTable(DAT_0042219c)
     unk1794 = 0;
     unk1798 = 0;
     unk17A0 = 0;
-    unk1EEC = 0;
+    iv.descriptionText = NULL;
     initializeStepCallbacks();
 }

@@ -13,6 +13,6 @@ f32 btlEntryGetSummaryRatio(u32 listedId)
     BtlEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     BattleEntrySummary summary;
     btlEntryBuildSummary(&summary, btlGetMainState(), entry);
-    return (f32)summary.ratios.percentage * 0.01f;
+    return (f32)summary.percentage * 0.01f;
 }
 }

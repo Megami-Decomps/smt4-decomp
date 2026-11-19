@@ -1,4 +1,4 @@
-/* NON_MATCHING: 32 rows, in the coordinate arguments of a few calls (the attack value call, 0x527, among them): retail
+/* NON_MATCHING: 24 rows, in the coordinate arguments of a few calls (the attack value call, 0x527, among them): retail
  * loads and sums the row and part coordinates in another order and through other scratch registers. Every site is written
  * `row + part + x` (no per-site order picked by score). Everything else agrees. */
 #include <stdio.h>
@@ -119,10 +119,7 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
     case 0x12: {
         equippedId = player->equipped.gun;
         s32 equippedAttack;
-        if (equippedId == 0)
-            equippedAttack = 0;
-        else
-            equippedAttack = itemTableGetEquipmentRecord(equippedId)->traitBits.group;
+        equippedAttack = equippedId == 0 ? 0 : itemTableGetEquipmentRecord(equippedId)->traitBits.group;
         drawSetColorFromRGBA8(0xFFFFFFFF);
         setStatComparisonColor(item->traitBits.group, equippedAttack);
         part = asdTMTexTableEntryAt(texture, 0x542);

@@ -57,8 +57,7 @@ void FUN_00410410(BattleActionContext *context, const CapacityAction *action)
     if (!((g_btlActionReflect.stateBlockMask & context->state->battle.stateFlags64.bits) == 0 && action->kind == 0x27))
         return;
     s32 capacity = action->first + context->state->battle.targetCapacity.counts[0];
-    if (capacity < 0)
-        capacity = 0;
+    capacity = capacity < 0 ? 0 : capacity;
     context->state->battle.targetCapacity.counts[0] = capacity;
     capacity = action->second + context->state->battle.targetCapacity.counts[1];
     if (capacity < 0)

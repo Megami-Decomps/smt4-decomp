@@ -16,19 +16,12 @@ void texDrawTableEntrySized(u32, u32, s32, u32, u32, u32, u32, u32);
 
 void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer, s32 alpha, s32 useColors)
 {
+    u32 width;
+    u32 height;
+    asdTMTexTableEntrySize(0x13, spriteId, &width, &height);
+    f32 previousAlpha = jobGetScalarValue();
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x13, spriteId);
     ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->placement);
-    u32 width, height;
-    if (extension != NULL && extension->mode == 1) {
-        width = extension->width;
-        height = extension->height;
-    } else {
-        width = sprite->width & 0x7fff;
-        height = sprite->height & 0x7fff;
-    }
-    f32 previousAlpha = jobGetScalarValue();
-    sprite = asdTMTexTableEntryAt(0x13, spriteId);
-    extension = reinterpret_cast<ItemSpriteExtension *>(sprite->placement);
     if (extension != NULL && extension->mode == 1) {
         texDrawTableEntrySized(2, 0x13, spriteId, x, y, width, height, layer);
         return;

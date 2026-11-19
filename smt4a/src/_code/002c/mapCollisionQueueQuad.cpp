@@ -10,10 +10,9 @@ void mapCollisionQueueQuad(s32 queue, u16 tag, u16 material, CollisionVector a, 
                   CollisionVector c, CollisionVector d, CollisionVector normal)
 {
     CollisionQuad *quad;
-    if (queue)
-        quad = &DAT_005e2714[g_mapCollision.secondCount++];
-    else
-        quad = &g_mapCollision.first[g_mapCollision.firstCount++];
+    quad = queue
+        ? &DAT_005e2714[g_mapCollision.secondCount++]
+        : &g_mapCollision.first[g_mapCollision.firstCount++];
     quad->normal = normal;
     quad->distance = normal.x * a.x + normal.y * a.y + normal.z * a.z;
     quad->vertices[0] = a;

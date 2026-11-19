@@ -13,7 +13,7 @@ int FUN_0039fcd8(const SortEntry *a, const SortEntry *b)
 {
     u16 idA = a->id;
     u16 idB = b->id;
-    int diff = FUN_0028fb3c(idA) - FUN_0028fb3c(idB);
+    int diff = itemGetOwnedCount(idA) - itemGetOwnedCount(idB);
 
     if (diff != 0) {
         return diff;

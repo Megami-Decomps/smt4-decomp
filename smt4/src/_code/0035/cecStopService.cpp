@@ -11,7 +11,7 @@ struct CecState {
 };
 
 extern CecState DAT_004656ca;
-s32 FUN_0023a244(void);
+s32 ipcServiceSessionRelease(void);
 s32 FUN_00358f74(void);
 void FUN_00358d34(void);
 
@@ -21,7 +21,7 @@ s32 cecStopService(void)
 
     if (DAT_004656ca.initialized != 0) {
         if (DAT_004656ca.flushPending != 0) {
-            s32 flushResult = FUN_0023a244();
+            s32 flushResult = ipcServiceSessionRelease();
 
             if (nnResultIsFailure(flushResult)) {
                 return flushResult;

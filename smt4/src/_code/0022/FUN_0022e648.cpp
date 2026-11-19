@@ -1,4 +1,5 @@
 /* NON_MATCHING: the duration add, the element base address (computed before the total query) and the clamp now match retail; retail keeps no zero register (state/frame stores are separate, the last two result words are two stm pairs) where the build merges them into one stm with a hoisted zero. */
+#include "gamedata/EquipmentSortPower.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
 struct SelectionRollGroup {
@@ -22,9 +23,8 @@ struct SelectionRollWork {
 extern "C" {
 s32 flaggedEntryGetValueByState(FlaggedValueHolder *);
 s32 flaggedValueHolderGetTotal(FlaggedValueHolder *);
-u32 FUN_00230e04(u16 *);
+u32 shopSlotGetPrice(u16 *);
 s32 btlRollClamped(u16, u32);
-s32 FUN_0028fb3c(u16);
 s32 playerSlotHoldsEntry(SelectionRollWork *, u16);
 }
 
@@ -39,9 +39,9 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
     u16 *entry = &values[selected * 2];
     s32 result;
     if (work->category != 8) {
-        result = btlRollClamped(*entry, FUN_00230e04(entry));
+        result = btlRollClamped(*entry, shopSlotGetPrice(entry));
     } else {
-        s32 value = FUN_0028fb3c(*entry);
+        s32 value = itemGetOwnedCount(*entry);
         if (value < 0) {
             value = 0;
         } else if (value > 99) {
