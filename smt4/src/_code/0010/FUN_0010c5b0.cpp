@@ -10,7 +10,7 @@ s32 FUN_001221a0(s32 handle);
 static __inline AsdSndSlotC *soundOutputC(u32 index)
 {
     if (index == 0 || index == 1) {
-        return (&g_asdSound.outputC0)[index];
+        return g_asdSound.outputC[index];
     }
     return NULL;
 }

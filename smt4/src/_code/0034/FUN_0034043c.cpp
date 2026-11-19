@@ -10,7 +10,7 @@ struct StageGradientWork {
 
 extern "C" {
 void FUN_0024ac7c(u32 enabled);
-void FUN_002e2444(u32 first, u32 middle, u32 last);
+void frameTexStartTransition(u32 first, u32 middle, u32 last);
 
 // Repacks the gradient's outer stops from its RGB and alphas, keeps the middle stop's RGB, and applies it.
 void FUN_0034043c(StageGradientWork *work)
@@ -19,6 +19,6 @@ void FUN_0034043c(StageGradientWork *work)
     work->packed[1] = (work->packed[1] & 0xffffff00) | work->alpha[1];
     work->packed[2] = work->alpha[2] | (work->rgb[0] << 24) | (work->rgb[1] << 16) | (work->rgb[2] << 8);
     FUN_0024ac7c(1);
-    FUN_002e2444(work->packed[0], work->packed[1], work->packed[2]);
+    frameTexStartTransition(work->packed[0], work->packed[1], work->packed[2]);
 }
 }

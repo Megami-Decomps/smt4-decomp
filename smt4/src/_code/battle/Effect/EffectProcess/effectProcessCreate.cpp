@@ -26,8 +26,8 @@ u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, 
 u32 effectProcessCreate(u8 keepScene)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\Effect\\EffectProcess.cpp", 147);
-    EffectProcess *work = (EffectProcess *)asdMemAlloc(0x100, 0x100, 0, sizeof(EffectProcess), 1);
-    g_effectProcessActive = work;
+    g_effectProcessActive = (EffectProcess *)asdMemAlloc(0x100, 0x100, 0, sizeof(EffectProcess), 1);
+    EffectProcess *work = g_effectProcessActive;
     memClear(work, sizeof(EffectProcess));
     work->keepScene = keepScene;
     taskInitLists();

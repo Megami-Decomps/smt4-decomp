@@ -47,7 +47,7 @@ void FUN_00309fcc(u32 a, u32 b);
 extern "C" {
 #endif
 
-u8 *libcLocaleGetTables(void);
+u8 *rt_locale(void);
 
 #ifdef __cplusplus
 }

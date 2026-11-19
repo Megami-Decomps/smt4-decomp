@@ -2,7 +2,7 @@
 #include "nn/svc.h"
 
 /* Ends the calling thread. */
-extern "C" void FUN_00144f88(void)
+extern "C" void svcExitThread(void)
 {
     nn::svc::ExitThread();
 }

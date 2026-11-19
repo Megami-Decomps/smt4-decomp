@@ -1,12 +1,11 @@
-/* NON_MATCHING: about 70 lines once branch targets are set aside; the flow, the blocks, the frame and the
- * pool match except for the points below
- * (IV's FUN_003a4a60 is the same state and differs the same way):
- * - numericStepperSetup's stores (written in field order) are scheduled differently: retail stores
- *   the value/maximum pair first and then minimum/row with one stm;
- * - the two idle lines are written in substeps 6 and 9: retail keeps "shop_itembuy" in substep 6 and
- *   substep 9 jumps to it; this build keeps the copy of substep 9;
- * - schedules: the sign flip against panelSetTarget's second argument, and the category load
- *   in r1 before screenShowMessage and in substep 10. */
+/* NON_MATCHING: 44 lines, the same rows and pool as retail; three register schedules remain
+ * (IV's shopQuantityStep is the same state and differs the same way):
+ * - numericStepperSetup: retail keeps the starting value in r0 and stores the value/maximum pair before
+ *   it loads the minimum, so the stores stay in field order; this build holds the value in r1 and
+ *   stores minimum/row first. (Naming the starting value in a local before the call gives retail's
+ *   code; a temporary with one use, so it is not written.)
+ * - the selected item's id before screenShowMessage (substep 2) and in substep 10: retail loads the
+ *   category into r1 and builds the two table addresses in r1-r3; this build uses r0-r2. */
 #include "classes/Obj536044.h"
 #include "sys/FlagWord.h"
 #include "ui/UiSpriteApi.h"
@@ -91,10 +90,11 @@ inline void Obj536044::showPriceChange()
 {
     s32 price = quantityPrice();
 
-    if (slot != 8) {
-        price = -price;
+    if (slot == 8) {
+        panelSetTarget(price, 0);
+    } else {
+        panelSetTarget(-price, 0);
     }
-    panelSetTarget(price, 0);
 }
 
 inline void Obj536044::startScript(const char *name)
@@ -288,11 +288,12 @@ void Obj536044::shopQuantityStep()
             if (slot == 8) {
                 messageMainSetFlag(0);
                 startScript("shop_selloff");
-                scrRunOpcodesStub(controller);
             } else if (slot == 7) {
                 startScript("shop_itembuy");
-                scrRunOpcodesStub(controller);
+            } else {
+                break;
             }
+            scrRunOpcodesStub(controller);
         }
         break;
     case 7: {
@@ -356,11 +357,12 @@ void Obj536044::shopQuantityStep()
             substate = 3;
             if (slot == 8) {
                 startScript("shop_selloff");
-                scrRunOpcodesStub(controller);
             } else if (slot == 7) {
                 startScript("shop_itembuy");
-                scrRunOpcodesStub(controller);
+            } else {
+                break;
             }
+            scrRunOpcodesStub(controller);
         }
         break;
     case 10:

@@ -3,6 +3,7 @@
 #define SHARD_SHARD004B_H
 
 #include "common.h"
+#include "ui/UiSpriteState.h"
 
 #include "shard/Shard004A.h"
 
@@ -40,7 +41,8 @@ typedef struct Menu4C {
     /* 0x9EC */ u8 inputLocked;  /* set while the owner leaves for the camp */
     /* 0x9ED */ u8 unk9ED;
     /* 0x9EE */ u8 unk9EE;
-    /* 0x9EF */ u8 unk9EF[0x21];
+    /* 0x9EF */ u8 unk9EF;
+    /* 0x9F0 */ UiResourceParameters rowParameters;  /* the row sprites' animation resource */
     /* 0xA10 */ u8 rowsA10[10][0x8C];
     /* 0xF88 */ u8 unkF88[0x8C];
     /* 0x1014 */ u32 unk1014;

@@ -1,22 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `fileGetHandleChecked` (_code @ 0x239ab8, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Built with -Ospace, as its look-alike fsGetUserMountHandle: retail predicates the report call (ldreq; moveq r1, pc; bleq). */
+#include "nn/fs/ArchiveFile.h"
+#include "nn/Result.h"
+#include "sys/PlatformFault.h"
 
-extern "C" {
-
-int sysReportCheckFailure(unsigned int, int);
-
-/* Supplied declaration required: sysReportCheckFailure. */
-
-
-unsigned int fileGetHandleChecked(int param_1)
-
+/* Report an unopened file before returning the IPC handle it holds. */
+extern "C" u32 fileGetHandleChecked(FsArchiveFile *file)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 4) == 0) {
-    sysReportCheckFailure(0xe0a046da,0x239ad4);
-  }
-  return *(unsigned int *)(param_1 + 4);
+    if (file->handle == 0) {
+        nn::Result unopenedFile(0xE0A046DA);
+        sysReportCheckFailure(unopenedFile, __current_pc());
+    }
+    return file->handle;
 }
-
-} /* extern "C" */

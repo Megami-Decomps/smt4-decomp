@@ -1,11 +1,11 @@
-/* Uses completion only for a non-reversed mode-three position track. */
-#include "ui/UiSpriteApi.h"
 #include "battle/btlUI.h"
-extern "C" s32 recordQueryStateThree(const BtlUiObjB *owner)
+#include "ui/UiSpriteApi.h"
+
+/* Read completion for a mode-three timer when the position isn't reversed. */
+extern "C" s32 recordQueryStateThree(BtlUiObjB *owner)
 {
-    if (uiSpriteGetOperationMode(&owner->timer) != 3)
-        return 1;
-    if (owner->timer.positionReverse != 0)
-        return 1;
-    return uiSpriteGetCompletionState(&owner->timer);
+    if (uiSpriteGetOperationMode(&owner->timer) == 3 && owner->timer.positionReverse == 0) {
+        return uiSpriteGetCompletionState(&owner->timer);
+    }
+    return 1;
 }

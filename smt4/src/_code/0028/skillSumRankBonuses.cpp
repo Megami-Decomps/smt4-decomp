@@ -4,7 +4,7 @@
 extern "C" {
 
 /* Sums the amounts of the leading rank bonuses of one kind; a zero kind ends the list. */
-s32 FUN_00283ebc(const SkillDataRecord *record, s32 rank, u32 kind)
+s32 skillSumRankBonuses(const SkillDataRecord *record, s32 rank, u32 kind)
 {
     if (record != NULL && (record->rankInfo.rankFlags & 0x80000000) == 0) {
         s32 limit = rank - 1;

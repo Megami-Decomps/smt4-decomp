@@ -29,8 +29,8 @@ void FUN_00297a00(void);
 // fills the three marker quads (one facing the camera, two lying on the ground plane).
 void MapIf_Register(u32 parent, u8 variant)
 {
-    MapIfState *state = (MapIfState *)asdMemAlloc(0x100, 0x100, 0, 0xcce8, 1);
-    g_mapIf.state = state;
+    g_mapIf.state = (MapIfState *)asdMemAlloc(0x100, 0x100, 0, 0xcce8, 1);
+    MapIfState *state = g_mapIf.state;
     state->unk14 = 0;
     state->mode = 0;
     state->unk18 = 0;

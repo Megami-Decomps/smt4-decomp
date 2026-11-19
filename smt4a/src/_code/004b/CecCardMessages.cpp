@@ -28,7 +28,7 @@ u16 g_gameTitleText[34] = {
     ' ', 'I', 'V', ':', '\n', 'A', 'p', 'o', 'c', 'a', 'l', 'y', 'p', 's', 'e', 0
 };
 
-u32 FUN_0042d694(u32 resource);
+u32 cecMakeResourceId(u32 resource);
 s32 FUN_00316750(const u16* text, const void* data, u32 size, u32 argument, u32 timeout);
 s32 FUN_003a476c(u32, u32, const char *, const void *, u32, const u16 *, u32, u32);
 
@@ -37,7 +37,7 @@ u32 cecSendCardData(CecMessageRequest* request, u32 argument)
 {
     u32 status = 0;
     cecSettingsSet(2, 3, 0xFF, 0);
-    u32 resource = FUN_0042d694(0x19A2);
+    u32 resource = cecMakeResourceId(0x19A2);
     cecWriteMessageBoxNameAndData(resource, g_resourceDispatchContext, g_gameTitleText,
                                  request->nameData, 0x1200);
     s32 result = FUN_00316750(g_cecCardsReceivedText, request->messageData, 0xC80, argument, 100);
@@ -62,7 +62,7 @@ u32 cecSendCardData(CecMessageRequest* request, u32 argument)
 // Initialize the card message box, translating its state to menu status bits.
 u32 cecCardMessageBoxInit(CecCardOwner *owner)
 {
-    u32 box = FUN_0042d694(0x19a2);
+    u32 box = cecMakeResourceId(0x19a2);
     s32 result = FUN_003a476c(box, g_resourceDispatchContext, g_cecCardServiceId,
                             owner->data, 0x1200, g_gameTitleText, 32, 99);
     switch (result) {
@@ -80,7 +80,7 @@ u32 cecCardMessageBoxInit(CecCardOwner *owner)
         return 3;
     }
     cecSettingsSet(2, 3, 255, 0);
-    box = FUN_0042d694(0x19a2);
+    box = cecMakeResourceId(0x19a2);
     result = cecWriteMessageBoxNameAndData(box, g_resourceDispatchContext,
                                          g_gameTitleText, owner->data, 0x1200);
     return result == 5 ? 0x11 : 0;

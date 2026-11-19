@@ -5012,3 +5012,18 @@
 002daff4 campDrawSelectedEquipmentDetails inferred draws the selected equipment row and its comparison with the equipped item
 00208504 mapDepartAdvanceCameraSequence inferred map departure caller's six staged camera moves
 003d2140 btlCommandEnterPhase inferred battle command phase dispatcher; its caller forwards the pending phase after committing it
+001383c0 svcSleepThread inferred svc 0x0A (SleepThread) and bx lr, after third-party code at 0x138370; smt4a's svcSleepThread is the same wrapper
+00144f88 svcExitThread inferred svc 9 (ExitThread) and bx lr, right after nn_os_Thread_ThreadStart
+002c6a04 rt_locale inferred armlib __rt_locale: returns the locale block; rt_ctype_table calls it and adds 4
+002c6a50 rt_ctype_table inferred armlib __rt_ctype_table: __rt_locale() + 4
+002e2444 frameTexStartTransition inferred twin of smt4a frameTexStartTransition (same source)
+00212120 infoWinOpenEntry inferred opens the info window on a text-directory entry (inlined infoWinSetMessage); twin of smt4a FUN_002e5c6c
+001a9008 mapFastModelCreate inferred creates the map's m%03d_fast.bam model (mapIf.cpp, like mapFastMarkerCreate)
+00109580 soundEffectInitializeReverb inferred fills the FxReverb parameters and calls nw_snd_FxReverb_*; sibling of soundEffectInitializeDelay
+004c5628 g_soundReverbFilterSize inferred the reverb's three filter lengths, pointed at by the parameter block's filterSize
+00246f18 btlPollVersionedEffectTexture inferred registers a VER texture request once, then polls the texture cache
+003370ac btlInitializeActivePartyUnits inferred sets up the player and occupied party slots' battle units
+00283ebc skillSumRankBonuses inferred sums the skill rank bonuses
+002d4e58 lmapRestoreSpawnPose inferred restores the spawn position, snapshots and headings from table 23
+0033361c bgmHasPendingResume inferred tests the two BGM request channels' flag bits 2 and 0x20
+002eb674 mapSaveSceneReturnSnapshot inferred saves the scene's return position snapshot

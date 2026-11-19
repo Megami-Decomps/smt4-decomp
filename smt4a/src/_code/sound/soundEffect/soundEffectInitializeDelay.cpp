@@ -12,7 +12,7 @@ u32 nw_snd_FxDelay_GetRequiredMemSize(SoundEffectDelay *effect);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void nw_snd_FxDelay_AssignWorkBuffer(SoundEffectDelay *effect, void *buffer, u32 size);
 void queueRequesterNode(u32 bus, SoundEffectDelay *effect);
-void FUN_0013ddf0();
+void soundEffectInitializeReverb();
 
 void soundEffectInitializeDelay()
 {
@@ -28,6 +28,6 @@ void soundEffectInitializeDelay()
         nw_snd_FxDelay_AssignWorkBuffer(&DAT_006195dc, g_soundEffectBuffers, size);
         queueRequesterNode(0, &DAT_006195dc);
     }
-    FUN_0013ddf0();
+    soundEffectInitializeReverb();
 }
 }

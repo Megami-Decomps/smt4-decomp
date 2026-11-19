@@ -1,10 +1,10 @@
 /* NON_MATCHING: owner/mask spills are hoisted to entry and the inner hexadecimal loop is strength-reduced; retail delays spills and keeps a count-up cursor loop. */
+#include "camp/CampCec/CampCecView.h"
 #include "common.h"
 
 extern "C" {
 u32 FUN_002c6864(u32 owner, u32 mask);
 u32 FUN_002c6966(u32 owner, u32 mask, const char *text);
-u8 *libcLocaleGetTables(void);
 
 // An asterisk introduces five hexadecimal words; the mask selects which to replace.
 u32 FUN_002c6902(u32 owner, u32 mask, const char *text)
@@ -26,7 +26,7 @@ u32 FUN_002c6902(u32 owner, u32 mask, const char *text)
                 value = (value << 4) | character;
             }
             if (mask & (1u << index))
-                reinterpret_cast<u32 *>(libcLocaleGetTables())[index] = value;
+                reinterpret_cast<u32 *>(rt_locale())[index] = value;
         }
     }
     return FUN_002c6864(owner, mask);

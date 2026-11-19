@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the camera field addresses (eye/target/keepScene base pointers) and allocates r8 for the draw callback; the allocation result is stored to the global before sysMemClear's argument setup here */
+/* NON_MATCHING: retail hoists the camera field addresses (eye/target/keepScene base pointers) and allocates r8 for the draw callback */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -41,8 +41,8 @@ s32 renderScopedTaskPhaseThree(u32 job);
 u32 FUN_0031b654(u8 keepScene)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\dds4\\program\\battle\\Effect\\EffectProcess.cpp", 150);
-    EffectProcessInit *process = (EffectProcessInit *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x53C, 1);
-    g_effectProcessActive = process;
+    g_effectProcessActive = (EffectProcessInit *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x53C, 1);
+    EffectProcessInit *process = g_effectProcessActive;
     sysMemClear(process, 0x53C);
     process->keepScene = keepScene;
     taskInitLists();

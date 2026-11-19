@@ -23,7 +23,7 @@ unsigned int FUN_001f3e48(void)
     }
     else {
       iVar1 = DAT_00573808;
-      FUN_004f6d34(DAT_00573808,pcVar3);
+      btlPollVersionedEffectTexture(DAT_00573808,pcVar3);
       if (iVar1 == 0) {
         return 0;
       }
@@ -36,7 +36,7 @@ unsigned int FUN_001f3e48(void)
     *(unsigned int *)pcVar3 = 1;
     *(unsigned int *)(unaff_r4 + 0x14) = 0;
     iVar1 = DAT_00573808;
-    FUN_004f6d34(DAT_00573808,pcVar3);
+    btlPollVersionedEffectTexture(DAT_00573808,pcVar3);
     if (iVar1 == 0) {
       return 0;
     }

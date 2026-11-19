@@ -47,7 +47,7 @@ s32 FUN_003be918(u32 skillId, s32 attackerId, s32 targetId, s32 first, f32 base,
     if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
         const SkillDataRecord *record = skillDataFindById(skillId);
         if (record != NULL) {
-            skillBonus = FUN_00283ebc(record, playerGetSkillRank(skillId), 1);
+            skillBonus = skillSumRankBonuses(record, playerGetSkillRank(skillId), 1);
         }
     }
 

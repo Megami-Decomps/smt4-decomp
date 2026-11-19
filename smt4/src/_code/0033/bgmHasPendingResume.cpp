@@ -19,7 +19,7 @@ static __inline bool jyoucyuIsReady(const Jyoucyu *entry)
 }
 
 /* Returns 1 when none is pending and one of the two entries has both flag bits 2 and 0x20 set. */
-u32 FUN_0033361c(void)
+u32 bgmHasPendingResume(void)
 {
     if (jyoucyuGetTableEntry(1) != 0) {
         return 0;

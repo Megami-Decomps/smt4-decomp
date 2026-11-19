@@ -1,30 +1,9 @@
-/* NON_MATCHING: same stores; the scheduler orders the vtable store and the float constant loads differently (retail loads the six tuning floats together and writes them with one vstm right after the byte stores; the build interleaves them with the zero stores). Lead: with 0x24-0x38 as a member struct whose default constructor sets the six floats, 0xAC-0xC3 as two zero-initialised 3-float members, and the rest in the init list, only r2/r3 (vtable vs 0x66) stay swapped. */
 #include "classes/Obj557b28.h"
 
+/* Constructs the tuning block with its defaults (the state bytes and tuning values construct
+ * themselves). */
 Obj557b28::Obj557b28()
-    : unk04(0)
+    : unk04(0), unk08(0), unk0c(0), unk10(0), unk14(0), unk18(0), unk1c(0),
+      unkAc(0.0f), unkB0(0.0f), unkB4(0.0f), unkB8(0.0f), unkBc(0.0f), unkC0(0.0f), unkC4(1)
 {
-    unk08 = 0;
-    unk0c = 0;
-    unk10 = 0;
-    unk14 = 0;
-    unk18 = 0;
-    unk1c = 0;
-    unk20 = 0;
-    unk21 = 0;
-    unk22 = 0;
-    unk23 = 0x66;
-    unk24 = 3.0f;
-    unk28 = 20000.0f;
-    unk2c = 0.6597344f;
-    unk30 = 1.7f;
-    unk34 = 1.6666666f;
-    unk38 = 250.0f;
-    unkAc = 0.0f;
-    unkB0 = 0.0f;
-    unkB4 = 0.0f;
-    unkB8 = 0.0f;
-    unkBc = 0.0f;
-    unkC0 = 0.0f;
-    unkC4 = 1;
 }

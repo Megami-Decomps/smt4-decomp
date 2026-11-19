@@ -1,7 +1,6 @@
 #include "battle/BtlUiGlobal.h"
 extern "C" {
 s32 playSceneIsFadeInDone(void *scene);
-s32 recordQueryStateThree(void *state);
 s32 btlSceneIsReady(void)
 {
     BtlUi *ui = g_btlUi.ui;

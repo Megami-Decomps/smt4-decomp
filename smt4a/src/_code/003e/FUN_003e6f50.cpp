@@ -10,7 +10,7 @@ extern const char DAT_00528618[]; /* Dead_eyes */
 extern const char DAT_005285fc[]; /* battle/gameover/gameover.bf */
 extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
 void FUN_004f7b84(void *aux, const char *name);
-s32 FUN_004f6d34(void *aux);
+s32 btlPollVersionedEffectTexture(void *aux);
 void *gameDataBlocksGetSaveData(void);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void campCommonBgRelease(void);
@@ -51,14 +51,14 @@ s32 FUN_003e6f50(BtlGameOverA *work)
     case GAMEOVER_STATE_EYES_START:
         FUN_004f7b84(g_btlAux, DAT_00528618);
         work->state = GAMEOVER_STATE_EYES_WAIT;
-        if (FUN_004f6d34(g_btlAux) != 0) {
+        if (btlPollVersionedEffectTexture(g_btlAux) != 0) {
             work->state = GAMEOVER_STATE_TIMELINE;
             work->timing.frameCounter = 0;
             return FUN_003e6c14(work);
         }
         break;
     case GAMEOVER_STATE_EYES_WAIT:
-        if (FUN_004f6d34(g_btlAux) != 0) {
+        if (btlPollVersionedEffectTexture(g_btlAux) != 0) {
             work->state = GAMEOVER_STATE_TIMELINE;
             work->timing.frameCounter = 0;
             return FUN_003e6c14(work);

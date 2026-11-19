@@ -11,7 +11,7 @@ u8 *FUN_002e2ecc(u8 *buffer, u32 categories)
     if ((categories & ~(0u - categories)) != 0) {
         u8 *cursor = buffer + 1;
         *buffer = '*';
-        const u32 *references = reinterpret_cast<const u32 *>(FUN_002e2ec0());
+        const u32 *references = reinterpret_cast<const u32 *>(rt_locale());
         for (s32 category = 0; category < 5; ++category) {
             u32 reference = references[category];
             for (s32 digitIndex = 0; digitIndex < 8; ++digitIndex) {
@@ -25,11 +25,11 @@ u8 *FUN_002e2ecc(u8 *buffer, u32 categories)
     }
     u32 reference;
     switch (categories) {
-    case 1: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[0]; break;
-    case 2: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[1]; break;
-    case 4: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[2]; break;
-    case 8: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[3]; break;
-    case 16: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[4]; break;
+    case 1: reference = reinterpret_cast<const u32 *>(rt_locale())[0]; break;
+    case 2: reference = reinterpret_cast<const u32 *>(rt_locale())[1]; break;
+    case 4: reference = reinterpret_cast<const u32 *>(rt_locale())[2]; break;
+    case 8: reference = reinterpret_cast<const u32 *>(rt_locale())[3]; break;
+    case 16: reference = reinterpret_cast<const u32 *>(rt_locale())[4]; break;
     default: return NULL;
     }
     if (reference == 0) {

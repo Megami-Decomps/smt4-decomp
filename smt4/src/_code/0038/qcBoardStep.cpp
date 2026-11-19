@@ -1,8 +1,8 @@
-/* NON_MATCHING: the control flow, calls and shared tails match. Retail also keeps the constant 1 it stores to
- * the notice flag in sl from the prologue, which moves 7, 6 and the event table to r7, r8 and r9 (most of the
- * 104 rows), tests that flag with a branch where this build predicates the load, copies the first panel
- * position with two word loads (built: ldm) and, as in qcDeliveryStep, holds the flag word in r1 while it
- * loads slotSetRequest's arguments. */
+/* NON_MATCHING: the control flow, calls, blocks and shared tails match (same row count). Retail also keeps
+ * the constant 1 it stores to the notice flag in sl from the prologue, which moves 7, 6 and the event table to
+ * r7, r8 and r9 (most of the 64 rows); it copies the first panel position with two word loads (built: ldm),
+ * holds the board location in r0 and the panel results' `and` in r1 (built: r1 and r2) and, as in
+ * qcDeliveryStep, holds the flag word in r1 while it loads slotSetRequest's arguments. */
 #include "ui/DummyAttachmentWork.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/ButtonHelp.h"

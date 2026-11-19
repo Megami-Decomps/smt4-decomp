@@ -7532,3 +7532,14 @@
 0041fd5c saveLoadUiRestartSlotSpritesAndWait inferred save menu mode 14: restarts the slot sprites, then waits in mode 15
 003344b4 statusPreviewMpChange inferred status panel preview of an MP change (campSkillListUpdate passes the selected skill's cost)
 0023b8b0 uniteDrawPanel inferred fusion screen draw task
+0019a35c svcExitThread inferred byte-identical to smt4 svcExitThread (svc 9)
+002e2a98 rt_ctype_table inferred armlib __rt_ctype_table, as smt4
+002e2ec0 rt_locale inferred armlib __rt_locale: the function rt_ctype_table calls, as smt4
+002e5c6c infoWinOpenEntry inferred twin of smt4 FUN_00212120 (inlined infoWinSetText)
+00234118 mapFastModelCreate inferred twin of smt4 FUN_001a9008
+0013ddf0 soundEffectInitializeReverb inferred twin of smt4 FUN_00109580
+00619780 g_soundReverbFilterSize inferred twin of smt4 DAT_004c5628
+004f6d34 btlPollVersionedEffectTexture inferred twin of smt4 FUN_00246f18
+0033f188 lmapRestoreSpawnPose inferred twin of smt4 FUN_002d4e58
+003ddfd8 bgmHasPendingResume inferred twin of smt4 FUN_0033361c
+0042d694 cecMakeResourceId inferred byte-identical retail twin of smt4 cecMakeResourceId

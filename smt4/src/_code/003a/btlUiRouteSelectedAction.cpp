@@ -15,7 +15,6 @@ void btlCommandMenuResolveLayout(BtlUiObjC *, s16 *kind, s16 *id);
 void FUN_00218480(BtlUiObjC *);
 void FUN_0028bfe4(BtlUiObjC *);
 s32 playSceneIsFadeInDone(BtlUiObjA *);
-s32 recordQueryStateThree(BtlUiObjB *);
 void playSceneFadeOutStart(BtlUiObjA *);
 void playSceneTimerSubStartReverse(BtlUiObjB *);
 

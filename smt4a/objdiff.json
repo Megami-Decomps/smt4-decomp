@@ -49600,13 +49600,13 @@
       "target_path": "orig/target/_code/0013/resourceDestroy.o"
     },
     {
-      "base_path": "build/obj/_code/sound/soundEffect/FUN_0013ddf0.o",
+      "base_path": "build/obj/_code/sound/soundEffect/soundEffectInitializeReverb.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0013ddf0",
+            "name": "soundEffectInitializeReverb",
             "size": 212,
             "vram": "0x13ddf0"
           }
@@ -49615,10 +49615,10 @@
           "_code",
           "sound/soundEffect"
         ],
-        "source_path": "src/_code/sound/soundEffect/FUN_0013ddf0.cpp"
+        "source_path": "src/_code/sound/soundEffect/soundEffectInitializeReverb.cpp"
       },
-      "name": "_code/sound/soundEffect/FUN_0013ddf0",
-      "target_path": "orig/target/_code/sound/soundEffect/FUN_0013ddf0.o"
+      "name": "_code/sound/soundEffect/soundEffectInitializeReverb",
+      "target_path": "orig/target/_code/sound/soundEffect/soundEffectInitializeReverb.o"
     },
     {
       "base_path": "build/obj/_code/0013/FUN_0013dee0.o",
@@ -81934,13 +81934,13 @@
       "target_path": "orig/target/_code/0019/FUN_0019a318.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_0019a35c.o",
+      "base_path": "build/obj/_code/0019/svcExitThread.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0019a35c",
+            "name": "svcExitThread",
             "size": 8,
             "vram": "0x19a35c"
           }
@@ -81948,10 +81948,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_0019a35c.cpp"
+        "source_path": "src/_code/0019/svcExitThread.cpp"
       },
-      "name": "_code/0019/FUN_0019a35c",
-      "target_path": "orig/target/_code/0019/FUN_0019a35c.o"
+      "name": "_code/0019/svcExitThread",
+      "target_path": "orig/target/_code/0019/svcExitThread.o"
     },
     {
       "base_path": "build/obj/_code/0019/FUN_0019a364.o",
@@ -114495,13 +114495,13 @@
       "target_path": "orig/target/_code/0023/FUN_00234044.o"
     },
     {
-      "base_path": "build/obj/_code/map/mapIf/FUN_00234118.o",
+      "base_path": "build/obj/_code/map/mapIf/mapFastModelCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00234118",
+            "name": "mapFastModelCreate",
             "size": 304,
             "vram": "0x234118"
           }
@@ -114510,10 +114510,10 @@
           "_code",
           "map/mapIf"
         ],
-        "source_path": "src/_code/map/mapIf/FUN_00234118.cpp"
+        "source_path": "src/_code/map/mapIf/mapFastModelCreate.cpp"
       },
-      "name": "_code/map/mapIf/FUN_00234118",
-      "target_path": "orig/target/_code/map/mapIf/FUN_00234118.o"
+      "name": "_code/map/mapIf/mapFastModelCreate",
+      "target_path": "orig/target/_code/map/mapIf/mapFastModelCreate.o"
     },
     {
       "base_path": "build/obj/_code/0023/FUN_002342b8.o",
@@ -142105,13 +142105,13 @@
       "target_path": "orig/target/_code/002e/FUN_002e2848.o"
     },
     {
-      "base_path": "build/obj/_code/002e/libcLocaleGetCtypeTable.o",
+      "base_path": "build/obj/_code/002e/rt_ctype_table.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "libcLocaleGetCtypeTable",
+            "name": "rt_ctype_table",
             "size": 16,
             "vram": "0x2e2a98"
           }
@@ -142119,10 +142119,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002e/libcLocaleGetCtypeTable.cpp"
+        "source_path": "src/_code/002e/rt_ctype_table.cpp"
       },
-      "name": "_code/002e/libcLocaleGetCtypeTable",
-      "target_path": "orig/target/_code/002e/libcLocaleGetCtypeTable.o"
+      "name": "_code/002e/rt_ctype_table",
+      "target_path": "orig/target/_code/002e/rt_ctype_table.o"
     },
     {
       "base_path": "build/obj/_code/002e/campShutdown.o",
@@ -142205,13 +142205,13 @@
       "target_path": "orig/target/_code/002e/scrFloatOp.o"
     },
     {
-      "base_path": "build/obj/_code/002e/FUN_002e2ec0.o",
+      "base_path": "build/obj/_code/002e/rt_locale.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002e2ec0",
+            "name": "rt_locale",
             "size": 8,
             "vram": "0x2e2ec0"
           }
@@ -142219,10 +142219,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002e/FUN_002e2ec0.cpp"
+        "source_path": "src/_code/002e/rt_locale.cpp"
       },
-      "name": "_code/002e/FUN_002e2ec0",
-      "target_path": "orig/target/_code/002e/FUN_002e2ec0.o"
+      "name": "_code/002e/rt_locale",
+      "target_path": "orig/target/_code/002e/rt_locale.o"
     },
     {
       "base_path": "build/obj/_code/002e/FUN_002e2ecc.o",
@@ -144551,13 +144551,13 @@
       "target_path": "orig/target/_code/002e/ifTouchGetActiveCounter.o"
     },
     {
-      "base_path": "build/obj/_code/002e/FUN_002e5c6c.o",
+      "base_path": "build/obj/_code/002e/infoWinOpenEntry.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002e5c6c",
+            "name": "infoWinOpenEntry",
             "size": 276,
             "vram": "0x2e5c6c"
           }
@@ -144565,10 +144565,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002e/FUN_002e5c6c.cpp"
+        "source_path": "src/_code/002e/infoWinOpenEntry.cpp"
       },
-      "name": "_code/002e/FUN_002e5c6c",
-      "target_path": "orig/target/_code/002e/FUN_002e5c6c.o"
+      "name": "_code/002e/infoWinOpenEntry",
+      "target_path": "orig/target/_code/002e/infoWinOpenEntry.o"
     },
     {
       "base_path": "build/obj/_code/002e/FUN_002e5d88.o",
@@ -198019,13 +198019,13 @@
       "target_path": "orig/target/_code/0033/FUN_0033eb28.o"
     },
     {
-      "base_path": "build/obj/_code/0033/FUN_0033f188.o",
+      "base_path": "build/obj/_code/0033/lmapRestoreSpawnPose.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0033f188",
+            "name": "lmapRestoreSpawnPose",
             "size": 148,
             "vram": "0x33f188"
           }
@@ -198033,10 +198033,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0033/FUN_0033f188.cpp"
+        "source_path": "src/_code/0033/lmapRestoreSpawnPose.cpp"
       },
-      "name": "_code/0033/FUN_0033f188",
-      "target_path": "orig/target/_code/0033/FUN_0033f188.o"
+      "name": "_code/0033/lmapRestoreSpawnPose",
+      "target_path": "orig/target/_code/0033/lmapRestoreSpawnPose.o"
     },
     {
       "base_path": "build/obj/_code/0033/lmapSceneStartMovement.o",
@@ -249509,13 +249509,13 @@
       "target_path": "orig/target/_code/003d/FUN_003dc628.o"
     },
     {
-      "base_path": "build/obj/_code/003d/FUN_003ddfd8.o",
+      "base_path": "build/obj/_code/003d/bgmHasPendingResume.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_003ddfd8",
+            "name": "bgmHasPendingResume",
             "size": 80,
             "vram": "0x3ddfd8"
           }
@@ -249523,10 +249523,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/003d/FUN_003ddfd8.cpp"
+        "source_path": "src/_code/003d/bgmHasPendingResume.cpp"
       },
-      "name": "_code/003d/FUN_003ddfd8",
-      "target_path": "orig/target/_code/003d/FUN_003ddfd8.o"
+      "name": "_code/003d/bgmHasPendingResume",
+      "target_path": "orig/target/_code/003d/bgmHasPendingResume.o"
     },
     {
       "base_path": "build/obj/_code/003d/bgmRequestSelectedChannelFade.o",
@@ -275865,13 +275865,13 @@
       "target_path": "orig/target/_code/0042/FUN_0042d5b4.o"
     },
     {
-      "base_path": "build/obj/_code/0042/FUN_0042d694.o",
+      "base_path": "build/obj/_code/0042/cecMakeResourceId.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0042d694",
+            "name": "cecMakeResourceId",
             "size": 20,
             "vram": "0x42d694"
           }
@@ -275879,10 +275879,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0042/FUN_0042d694.cpp"
+        "source_path": "src/_code/0042/cecMakeResourceId.cpp"
       },
-      "name": "_code/0042/FUN_0042d694",
-      "target_path": "orig/target/_code/0042/FUN_0042d694.o"
+      "name": "_code/0042/cecMakeResourceId",
+      "target_path": "orig/target/_code/0042/cecMakeResourceId.o"
     },
     {
       "base_path": "build/obj/_code/0042/moduleStartOnce.o",
@@ -331666,13 +331666,13 @@
       "target_path": "orig/target/_code/004f/FUN_004f6ad4.o"
     },
     {
-      "base_path": "build/obj/_code/004f/FUN_004f6d34.o",
+      "base_path": "build/obj/_code/004f/btlPollVersionedEffectTexture.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004f6d34",
+            "name": "btlPollVersionedEffectTexture",
             "size": 236,
             "vram": "0x4f6d34"
           }
@@ -331680,10 +331680,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004f/FUN_004f6d34.cpp"
+        "source_path": "src/_code/004f/btlPollVersionedEffectTexture.cpp"
       },
-      "name": "_code/004f/FUN_004f6d34",
-      "target_path": "orig/target/_code/004f/FUN_004f6d34.o"
+      "name": "_code/004f/btlPollVersionedEffectTexture",
+      "target_path": "orig/target/_code/004f/btlPollVersionedEffectTexture.o"
     },
     {
       "base_path": "build/obj/_code/004f/obj4FSlotsReset.o",

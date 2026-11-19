@@ -1,7 +1,8 @@
-/* NON_MATCHING: retail keeps a zero field term (mov r1, #0; orr r0, r1, r0, lsl #8) that the build folds away. */
+/* NON_MATCHING: retail has a linker NOP and combines a separately initialized zero low byte with the masked ID; the compiler folds the expression to one shift. */
 #include "common.h"
 
 extern "C" {
+/* Pack a resource id for the local StreetPass message box. */
 s32 cecMakeResourceId(u32 value)
 {
     return (value & 0xFF0FFFFF) << 8;

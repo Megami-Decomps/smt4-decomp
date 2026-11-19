@@ -7,7 +7,7 @@ u8 FUN_0031cee0(void)
 {
     GameSaveBodyA *sub = &g_gameDataBlocks.saveBlock->body;
 
-    return sub->record.flag0e;
+    return sub->record.tail.flag0e;
 }
 
 }

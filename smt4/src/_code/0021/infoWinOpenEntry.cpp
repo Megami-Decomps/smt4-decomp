@@ -37,7 +37,7 @@ static __inline void setMessage(const void *message, u32 arg)
 }
 
 /* Opens the info window on text entry `message` of the current text directory. */
-extern "C" void FUN_00212120(u32 message)
+extern "C" void infoWinOpenEntry(u32 message)
 {
     void *directory = FUN_002cf11c();
     if (fileSectionGetData(directory, message, 0) == NULL) {

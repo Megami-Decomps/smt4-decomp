@@ -22,7 +22,7 @@ s32 asdSoundSetOutputPause(u32 channel, s32 operation, u32 frames)
 {
     s32 result = 0;
     if (channel == 0 || channel == 1) {
-        AsdSndSlotC *slot = (&g_asdSound.outputC0)[channel];
+        AsdSndSlotC *slot = g_asdSound.outputC[channel];
         if (slot != NULL) {
             switch (operation) {
             case 0:

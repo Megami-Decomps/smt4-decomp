@@ -75,7 +75,7 @@ int btlSpriteSelectSource(int, int, int);
 int gameOptionsEnableAndReset(void);
 int memClear(...);
 int FUN_002f34cc(...);
-int FUN_003370ac(int);
+int btlInitializeActivePartyUnits(int);
 int FUN_00337cfc(...);
 int FUN_00338cfc(int, int);
 int FUN_003ad754(...);
@@ -183,7 +183,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002f34cc. */
 /* Supplied declaration required: FUN_00308d5c. */
 /* Supplied declaration required: battleInitializeEnemyFormation. */
-/* Supplied declaration required: FUN_003370ac. */
+/* Supplied declaration required: btlInitializeActivePartyUnits. */
 /* Supplied declaration required: FUN_00337cfc. */
 /* Supplied declaration required: FUN_00338cfc. */
 /* Supplied declaration required: FUN_0033a670. */
@@ -285,7 +285,7 @@ void FUN_001fc6e8(unsigned int param_1)
     partyStockUpdateCounters();
     FUN_003bef90();
     FUN_00338cfc(temp_v4,0);
-    FUN_003370ac(temp_v4);
+    btlInitializeActivePartyUnits(temp_v4);
     if ((*(unsigned int *)(temp_v4 + 0x44a0) & 0x40000) == 0) {
       if (*(short *)(temp_v4 + 0x11c) != 0) {
         FUN_003c8428((int)*(short *)(temp_v4 + 0x11c));

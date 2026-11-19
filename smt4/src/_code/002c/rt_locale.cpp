@@ -5,7 +5,7 @@ extern "C" {
 
 extern u8 DAT_004efca0;
 
-u8 *libcLocaleGetTables(void)
+u8 *rt_locale(void)
 {
     return &DAT_004efca0;
 }

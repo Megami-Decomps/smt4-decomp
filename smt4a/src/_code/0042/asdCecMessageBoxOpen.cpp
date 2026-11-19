@@ -11,7 +11,7 @@ void FUN_0042e870(AsdCecMessageBox* box, s32 release);
 void FUN_0042d5b4(s32 enabled);
 void __aeabi_memcpy4(void* destination, const void* source, u32 bytes);
 s32 FUN_0042d798(AsdCecMessageBox* box, CecMessageIndexHeader* header,
-                  AsdCecMessageId* ids, u32 capacity, s32 kind);
+                  AsdCecMessageIndexEntry* ids, u32 capacity, s32 kind);
 u32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(AsdCecMessageBox* box);
 void clockGetTicksAsMicroseconds(u64* clock);
 void FUN_00193038(CecCalendarDate* date, const u64* clock);

@@ -1,19 +1,13 @@
-#include "common.h"
-
-struct ResourceHolder0050094c {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ void *resource;
-};
+#include "nn/fs/ArchiveFile.h"
 
 extern "C" {
 
-void *fileGetHandleChecked(ResourceHolder0050094c *holder);
 u32 nn_fs_ipc_File_GetSize(u32 *file, s64 *size);
 
 /* Returns the size of the file the holder's resource names. */
-u32 FUN_0050094c(ResourceHolder0050094c *holder, s64 *size)
+u32 FUN_0050094c(FsArchiveFile *holder, s64 *size)
 {
-    u32 file = (u32)fileGetHandleChecked(holder);
+    u32 file = fileGetHandleChecked(holder);
     return nn_fs_ipc_File_GetSize(&file, size);
 }
 

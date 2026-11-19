@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "sys/PlatformFault.h"
 
 /* Functions in the 0x002b0000 code block whose subsystem is not known yet; each declaration matches its definition. */
 struct FileHandle;
@@ -12,8 +13,6 @@ u8 infoWindowIsActive(void);
 f32 FUN_002b0800(void *text, f32 x, f32 y, f32 depth, f32 opacity);
 
 void FUN_002b011c(void);
-
-void sysReportCheckFailure(s32 key, u32 address, u32 failed);
 
 u8 FUN_002bfdd4(void);
 

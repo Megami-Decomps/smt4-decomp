@@ -5,7 +5,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "addon/LookupRecord.h"
-#include "gamedata/DataTable25.h"
+#include "gamedata/DataTable25Apocalypse.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/SaveSlotTable.h"
 #include "shard/W5_W5Match7_FlagBanks.h"

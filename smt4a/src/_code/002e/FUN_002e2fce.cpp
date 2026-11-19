@@ -2,7 +2,7 @@
 #include "common.h"
 #include "camp/CampCec/CampCecView.h"
 
-// Private view of the record returned by FUN_002e2ec0.
+// Private view of the record returned by rt_locale.
 struct RecordView002e2fce {
     u8* unk00;  // 0x00
     u32 unk04;  // 0x04
@@ -26,7 +26,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (result == 0) {
             return;
         }
-        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk04 = result + 1;
+        reinterpret_cast<RecordView002e2fce*>(rt_locale())->unk04 = result + 1;
     }
 
     if (flags & 1) {
@@ -34,7 +34,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (data == 0) {
             return;
         }
-        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk00 = data;
+        reinterpret_cast<RecordView002e2fce*>(rt_locale())->unk00 = data;
     }
 
     if (flags & 4) {
@@ -42,7 +42,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (data == 0) {
             return;
         }
-        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk08 = data;
+        reinterpret_cast<RecordView002e2fce*>(rt_locale())->unk08 = data;
     }
 
     if (flags & 8) {
@@ -50,7 +50,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (result == 0) {
             return;
         }
-        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk0C = result;
+        reinterpret_cast<RecordView002e2fce*>(rt_locale())->unk0C = result;
     }
 
     if (flags & 16) {
@@ -58,7 +58,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (data == 0) {
             return;
         }
-        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk10 = data;
+        reinterpret_cast<RecordView002e2fce*>(rt_locale())->unk10 = data;
     }
 
     FUN_002e2ecc(identifier, flags);

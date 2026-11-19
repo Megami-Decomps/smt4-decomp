@@ -14,7 +14,7 @@ struct FaultRecord {
 extern FaultRecord DAT_004d4200;
 void FUN_002ad4f8(FaultRecord *record);
 
-void sysReportCheckFailure(s32 key, u32 address, u32 failed)
+void sysReportCheckFailure(s32 key, u32 address, ...)
 {
     FaultRecord *record = &DAT_004d4200;
     record->unk01 = 0;

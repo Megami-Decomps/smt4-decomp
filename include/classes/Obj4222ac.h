@@ -17,13 +17,4 @@ public:
 
 typedef char Obj4222acSizeCheck[sizeof(Obj4222ac) == 0x80 ? 1 : -1];
 
-struct Obj4222acMotion {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ f32 position[3];
-    /* 0x34 */ u8 unk34[0x2c];
-    /* 0x60 */ u32 handle;
-};
-
-typedef char Obj4222acMotionSizeCheck[sizeof(Obj4222acMotion) == 0x64 ? 1 : -1];
-
 #endif

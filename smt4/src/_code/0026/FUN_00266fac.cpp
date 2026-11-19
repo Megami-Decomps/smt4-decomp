@@ -1,6 +1,8 @@
-/* NON_MATCHING: only the literal-pool order differs: retail places the 1/3 scale before the g_deferredMapModels word. */
+/* NON_MATCHING: only the third position float's load is scheduled differently: retail adds the position offset first
+ * and loads it as `vldr s3, [r0, #8]` after the vldmia; this build folds it into `vldr s3, [r0, #36]` before. */
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "game/GameState.h"
+#include "map/DeferredModels.h"
 
 struct HudVec3 {
     f32 x, y, z;
@@ -21,24 +23,9 @@ struct MapHudSelection {
     u8 unk017[0x25];
     MapHudAnimation animation; /* 0x3C */
 };
-struct DeferredMapModelPosition {
-    u8 unk00[0x1C];
-    SoundActorQueuePosition position; /* 0x1C */
-    u8 unk28[0x10];
-};
 extern "C" {
 extern MapHudSelection *g_mapIf;
-extern DeferredMapModelPosition *g_deferredMapModels;
-}
-
-/* A world position scaled down to the sound system's units. */
-static __inline SoundActorQueuePosition soundPositionFromWorld(const SoundActorQueuePosition &world)
-{
-    SoundActorQueuePosition position = world;
-    position.x /= 3.0f;
-    position.y /= 3.0f;
-    position.z /= 3.0f;
-    return position;
+extern DeferredModelWork *g_deferredMapModels;
 }
 
 /* Restart the HUD's selection animation and sound at the selected map model. */
@@ -53,7 +40,13 @@ extern "C" void FUN_00266fac(s32 mode, s32 id)
     if (mode != 0) {
         animation->id = id;
         if (g_gameState.mapId > 100) {
-            soundActorStartOnFreeChannel(0x10001FD, soundPositionFromWorld(g_deferredMapModels[id].position));
+            /* The sound system works in thirds of map units. */
+            MapVector world = g_deferredMapModels->entries[id].position;
+            SoundActorQueuePosition position;
+            position.x = world.x / 3.0f;
+            position.y = world.y / 3.0f;
+            position.z = world.z / 3.0f;
+            soundActorStartOnFreeChannel(0x10001FD, position);
         }
         animation->position.x = 0.0f;
         animation->position.y = 20.0f;

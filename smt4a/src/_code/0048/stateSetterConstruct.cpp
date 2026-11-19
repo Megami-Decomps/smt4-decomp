@@ -15,10 +15,25 @@ struct StateHandler {
     s32 adjust;
 };
 
+#include "ui/UiSpriteState.h"
+/* Animation key tables passed to paramsInit; the original file defined them statically. */
+static const UiSpritePositionKey sNamePositionKeys[] = {
+    {320, 0, 0, 0, 8, 0, 0},
+    {0, 0, -320, 0, 4, 0, 0},
+};
+static const UiSpriteScalarKey sNameAlphaKeys[] = {
+    {0.0f, 1.0f, 8, 0, 0},
+    {0.3f, 1.0f, 20, 0, 0},
+    {1.0f, 0.3f, 40, 0, 0},
+};
+static const SpriteAnimationCommand sNameCommands[] = {
+    {-3, 0, {0, 0, 0}, -3, 1, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, -2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+};
+
 extern "C" {
-extern const u8 DAT_00532e94[];
-extern const u8 DAT_00532eac[];
-extern const u8 DAT_00532ed0[];
 extern u16 DAT_00588108;
 
 void rect48Init(void *setter);
@@ -118,7 +133,7 @@ void stateSetterConstruct(u8 *setter, u8 source)
     *(u32 *)(setter + 0x26C) = scrScriptProcessCreate();
     u8 *packet = setter + 0x274;
     paramsClearPacket(packet);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(packet), DAT_00532e94, 0x18, DAT_00532eac, 0x24, 0, 0, 0, 0, DAT_00532ed0, 0x70);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(packet), sNamePositionKeys, sizeof(sNamePositionKeys), sNameAlphaKeys, sizeof(sNameAlphaKeys), NULL, 0, NULL, 0, sNameCommands, sizeof(sNameCommands));
     uiSpriteStateInitFromSource(setter + 0x294, 0x23, 0, packet, 1);
     uiSpriteSelectAnim(setter + 0x294, 0);
     uiSpriteStateInitFromSource(setter + 0x320, 0x23, 0, packet, 1);

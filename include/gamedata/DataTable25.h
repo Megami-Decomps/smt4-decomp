@@ -3,6 +3,7 @@
 #define GAMEDATA_DATATABLE25_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct AocSystem;
 
@@ -14,11 +15,14 @@ struct DataTable25Record {
     /* 0x20 */ u16 id;
     /* 0x22 */ u8 unk22[0x2c - 0x22];
 };
+typedef char DataTable25RecordLayoutCheck[
+    sizeof(DataTable25Record) == 0x2C && offsetof(DataTable25Record, id) == 0x20 ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+DataTable25Record *aocPackageFindRecordById(AocSystem *system, u32 id);
 DataTable25Record *dataTable25FindById(u32 id);
 
 #ifdef __cplusplus

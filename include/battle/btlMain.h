@@ -450,7 +450,9 @@ typedef struct BtlMainStateA {
         } reinforcement;
     };
     /* 0x1EC0 */ s16 unk1EC0;
-    /* 0x1EC2 */ u8 unk1EC2[0x12];
+    /* 0x1EC2 */ u8 unk1EC2[2];
+    /* 0x1EC4 */ void *arrangementFile; /* the encounter's loaded arrangement file, NULL until it arrives */
+    /* 0x1EC8 */ u8 unk1EC8[0xC];
     union {
         /* 0x1ED4 */ u32 unk1ED4;
         /* 0x1ED4 */ BattleRosterRecordA *roster;

@@ -13,7 +13,7 @@ int dialogOpen(...);
 int uiNavigatorStart(...);
 int infoWinSetTimer(void);
 int libc_strcpy(...);
-int FUN_002e5c6c(...);
+int infoWinOpenEntry(...);
 int sysMemClear(unsigned char [104], int);
 int scrSetStringSlot(...);
 int FUN_0047f8ac(...);
@@ -40,7 +40,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: uiNavigatorStart. */
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e5c6c. */
+/* Supplied declaration required: infoWinOpenEntry. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: scrSetStringSlot. */
 /* Supplied declaration required: FUN_0047f8ac. */
@@ -192,7 +192,7 @@ joined_r0x002318b0:
         }
         scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       }
-      FUN_002e5c6c(puVar1[2]);
+      infoWinOpenEntry(puVar1[2]);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 4:

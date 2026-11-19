@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the two counts with separate LDRs and converts the track height early; this build uses LDM and schedules the float conversions differently. */
+/* NON_MATCHING: same loads and operations; retail schedules the float conversions differently (the scroll offset is loaded early, the track height converted again just before the multiply) and clears *x after the conversions, where armcc hoists the zero to the entry. */
 #include "shard/ScrollbarGeometry.h"
 
 extern "C" void FUN_003c2e5c(const ScrollbarGeometry *bar, s32 *x, s32 *y,

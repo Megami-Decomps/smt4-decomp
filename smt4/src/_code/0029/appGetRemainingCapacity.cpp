@@ -1,42 +1,29 @@
-/* NON_MATCHING: retail predicates the capacity load and the zeroed total on the owner check (ldrbne/movne); this build branches first. */
-#include "common.h"
-#include "status/StatusCamera.h"
+#include "gamedata/GauntletAppTable.h"
+#include "gamedata/GameDataAccess.h"
 #include "gamedata/SkillDataLookup.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 
 extern "C" {
-
-typedef struct AppSlotOwner {
-    /* 0x00 */ u8 unk00[0x22];
-    /* 0x22 */ u8 capacity;
-} AppSlotOwner;
-
-typedef struct AppCostRecord {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ s32 cost;
-} AppCostRecord;
-
-AppCostRecord *appCostRecordFindById(u16 id);
-s32 flagBitIsSet(u32 bit);
 
 /* Returns the capacity of `id` left after the costs of the installed apps 12-15 (at least 1), or 0
  * when `id` has no record. */
 s32 appGetRemainingCapacity(u32 id)
 {
-    AppSlotOwner *owner = reinterpret_cast<AppSlotOwner *>(skillDataFindById(id));
-    if (owner != NULL) {
-        s32 capacity = owner->capacity;
-        s32 used = 0;
+    const SkillDataRecord *skill = skillDataFindById(id);
+    s32 capacity = skill != NULL ? skill->cost.baseCost : 0;
+    s32 used = 0;
+    if (skill != NULL) {
         if (flagBitIsSet(12)) {
-            used += appCostRecordFindById(12)->cost;
+            used += static_cast<const GauntletAppRecord *>(appCostRecordFindById(12))->skillCostDiscount;
         }
         if (flagBitIsSet(13)) {
-            used += appCostRecordFindById(13)->cost;
+            used += static_cast<const GauntletAppRecord *>(appCostRecordFindById(13))->skillCostDiscount;
         }
         if (flagBitIsSet(14)) {
-            used += appCostRecordFindById(14)->cost;
+            used += static_cast<const GauntletAppRecord *>(appCostRecordFindById(14))->skillCostDiscount;
         }
         if (flagBitIsSet(15)) {
-            used += appCostRecordFindById(15)->cost;
+            used += static_cast<const GauntletAppRecord *>(appCostRecordFindById(15))->skillCostDiscount;
         }
         s32 remaining = capacity - used;
         if (remaining <= 0) {

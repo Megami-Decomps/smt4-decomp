@@ -10,11 +10,11 @@ struct LocaleCharset {
 };
 typedef s32 (*CharsetConverter)(u8 *out, u32 wide, u32 state);
 
-LocaleCharset **libcLocaleGetCtypeTable(void);
+LocaleCharset **rt_ctype_table(void);
 
 s32 FUN_002e3f88(u8 *out, u32 wide, u32 state)
 {
-    LocaleCharset *charset = *libcLocaleGetCtypeTable();
+    LocaleCharset *charset = *rt_ctype_table();
 
     if (charset->table[0x101] == 1) {
         return ((CharsetConverter)((u8 *)&charset->converterOffset + charset->converterOffset))(out, wide, state);

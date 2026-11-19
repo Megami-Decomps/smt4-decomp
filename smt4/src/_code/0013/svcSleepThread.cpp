@@ -5,7 +5,7 @@
 extern "C" {
 
 /* Sleeps the calling thread for the 64-bit nanosecond count (low word, high word). */
-void FUN_001383c0(u32 nanosecondsLow, u32 nanosecondsHigh)
+void svcSleepThread(u32 nanosecondsLow, u32 nanosecondsHigh)
 {
     nn::svc::SleepThread(nanosecondsLow, nanosecondsHigh);
 }

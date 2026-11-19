@@ -18,7 +18,7 @@ int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 int FUN_0013cab8(...);
 int asdMemoryAllocTracked(...);
 int asdMemoryAllocTraced(...);
-int FUN_00234118(...);
+int mapFastModelCreate(...);
 int calcHeadingRoundedToCardinalDirection(...);
 int effPartClone(...);
 int FUN_002b56e0(...);
@@ -313,7 +313,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: mapIfShowActionMarker. */
 /* Supplied declaration required: FUN_00233e10. */
-/* Supplied declaration required: FUN_00234118. */
+/* Supplied declaration required: mapFastModelCreate. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: mapIfSpawnCaveAction. */
 /* Supplied declaration required: FUN_00246014. */
@@ -5248,7 +5248,7 @@ LAB_002dad8c:
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
       FUN_00303460(5);
-      FUN_00234118();
+      mapFastModelCreate();
       piVar18 = g_lmapScene;
       piVar10 = g_lmapScene + 10;
       g_lmapScene[0x14] = g_lmapScene[0x13];

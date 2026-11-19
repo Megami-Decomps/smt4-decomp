@@ -26,7 +26,7 @@ u32 FUN_002e2f6a(u32 owner, u32 mask, const char *text)
                 value = (value << 4) | character;
             }
             if (mask & (1u << index))
-                reinterpret_cast<u32 *>(FUN_002e2ec0())[index] = value;
+                reinterpret_cast<u32 *>(rt_locale())[index] = value;
         }
     }
     return FUN_002e2ecc(owner, mask);

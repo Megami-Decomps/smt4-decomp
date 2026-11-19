@@ -173,8 +173,7 @@ typedef struct AsdSoundSystem {
     /* 0x1204 */ AsdSndSlotB *currentSlotB;
     /* 0x1208 */ AsdSndAuxSlot *currentAux0;
     /* 0x120c */ AsdSndAuxSlot *currentAux1;
-    /* 0x1210 */ AsdSndSlotC *outputC0;
-    /* 0x1214 */ AsdSndSlotC *outputC1;
+    /* 0x1210 */ AsdSndSlotC *outputC[ASD_SND_SLOT_C_COUNT];
     /* 0x1218 */ AsdSndSlotA *currentSlotA;
     /* 0x121c */ u8 archiveLoaded;
     /* 0x121d */ u8 pad121d[3];

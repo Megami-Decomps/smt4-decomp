@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial map-global load/prologue ordering differs; the model-creation body matches. */
 #include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "map/mapDepart.h"
@@ -8,9 +7,11 @@
 extern "C" {
 void modelPartSetRotationDegrees(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 
-void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
+/* Places the map's fast-travel model at the given position and heading (the m099 model on map 24). */
+void mapFastModelCreate(f32 x, f32 y, f32 z, f32 heading)
 {
-    MapIfModelSlot *work = &g_mapIf.state->slots[0];
+    MapIfState *state = g_mapIf.state;
+    MapIfModelSlot *work = &state->slots[0];
     char path[128];
     work->active = 1;
     work->state = 0;

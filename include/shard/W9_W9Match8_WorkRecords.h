@@ -95,25 +95,29 @@ typedef char ParameterUpdatePrefixIVLayout[
 // The reverb object is used only through the SDK's pointer interface.
 struct SoundReverbEffect;
 
-// Reverb parameters and the three integers their table pointer references.
+// The reverb's three filter lengths, a separate object the parameters point at (it follows the
+// parameter block in .bss; retail addresses it as the block's base plus 0x24).
+struct SoundReverbFilterSize {
+    /* 0x0 */ s32 lengths[3];
+};
+
+// Reverb parameters (the SDK's FxReverb parameter block).
 struct SoundReverbParameters {
     /* 0x00 */ s32 integerParameters[3];
     /* 0x0C */ f32 scalarParameters[2];
-    /* 0x14 */ const s32 *integerTable;
+    /* 0x14 */ const SoundReverbFilterSize *filterSize;
     /* 0x18 */ f32 additionalScalars[2];
     /* 0x20 */ u8 flags[2];
     /* 0x22 */ u8 unk22[2];
-    /* 0x24 */ s32 integerValues[3];
 };
 
 typedef char SoundReverbParametersLayoutCheck[
-    sizeof(SoundReverbParameters) == 0x30 &&
+    sizeof(SoundReverbParameters) == 0x24 && sizeof(SoundReverbFilterSize) == 0xC &&
     offsetof(SoundReverbParameters, integerParameters) == 0 &&
     offsetof(SoundReverbParameters, scalarParameters) == 0x0C &&
-    offsetof(SoundReverbParameters, integerTable) == 0x14 &&
+    offsetof(SoundReverbParameters, filterSize) == 0x14 &&
     offsetof(SoundReverbParameters, additionalScalars) == 0x18 &&
-    offsetof(SoundReverbParameters, flags) == 0x20 &&
-    offsetof(SoundReverbParameters, integerValues) == 0x24 ? 1 : -1];
+    offsetof(SoundReverbParameters, flags) == 0x20 ? 1 : -1];
 
 struct UiLayoutResourceIV;
 

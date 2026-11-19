@@ -17,7 +17,7 @@ static __inline bool chordFlagsHeld(const ChordFlagState *state)
 }
 
 // Require both chord flags in either state, unless the resident table entry is active.
-u32 FUN_003ddfd8(void)
+u32 bgmHasPendingResume(void)
 {
     if (jyoucyuGetTableEntry(1) != NULL) {
         return 0;

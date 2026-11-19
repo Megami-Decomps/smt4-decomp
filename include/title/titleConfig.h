@@ -21,6 +21,17 @@ typedef struct TitleConfig {
     /* 0x154 */ ScriptProcess *process;    /* script process object */
 } TitleConfig;
 
+/* The sound settings the menu edits (g_titleConfigValues); eight bytes copied as one record. */
+struct TitleConfigValues {
+    /* 0x00 */ u8 music;
+    /* 0x01 */ u8 sound;
+    /* 0x02 */ u8 voice;
+    /* 0x03 */ u8 auxiliary;
+    /* 0x04 */ u8 changed;
+    /* 0x05 */ u8 unk05[3];
+};
+typedef char TitleConfigValuesSizeCheck[sizeof(TitleConfigValues) == 8 ? 1 : -1];
+
 /* The same block in Apocalypse: the trailing pointers sit eight bytes further on. */
 typedef struct TitleConfigA {
     /* 0x000 */ u32 job;
@@ -36,7 +47,7 @@ typedef struct TitleConfigA {
     /* 0x024 */ s16 countB;
     /* 0x026 */ u8 unk26[2];
     /* 0x028 */ u32 settingIndex[3]; /* list positions of the music, sound and voice settings */
-    /* 0x034 */ u8 saved[8];         /* the settings the menu opened with */
+    /* 0x034 */ TitleConfigValues saved; /* the settings the menu opened with */
     /* 0x03C */ UiResourceParameters params;
     /* 0x05C */ UiSpriteState window;  /* sprite of the menu window */
     /* 0x0E8 */ f32 cursorScale;
@@ -50,16 +61,6 @@ typedef char TitleConfigATouchRegionsOffsetCheck[
     __INTADDR__(&((TitleConfigA *)0)->touchRegions) == 0x1C &&
     sizeof(TitleConfigA) == 0x160 ? 1 : -1];
 
-/* The sound settings the menu edits (g_titleConfigValues); eight bytes copied as one record. */
-struct TitleConfigValues {
-    /* 0x00 */ u8 music;
-    /* 0x01 */ u8 sound;
-    /* 0x02 */ u8 voice;
-    /* 0x03 */ u8 auxiliary;
-    /* 0x04 */ u8 changed;
-    /* 0x05 */ u8 unk05[3];
-};
-typedef char TitleConfigValuesSizeCheck[sizeof(TitleConfigValues) == 8 ? 1 : -1];
 
 struct TitleConfigCallbackView {
     /* 0x000 */ u32 job;

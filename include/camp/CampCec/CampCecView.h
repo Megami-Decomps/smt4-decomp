@@ -38,7 +38,7 @@ u32 cecOutboxReadCard(struct CecProcessSlot *out);
 }
 
 extern "C" {
-u8 *FUN_002e2ec0(void);
+u8 *rt_locale(void);
 }
 
 extern "C" {

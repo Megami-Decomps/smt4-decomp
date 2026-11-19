@@ -1,61 +1,21 @@
-/* NON_MATCHING: packed-selection loads and three member snapshots use different registers and stack placement. */
+/* NON_MATCHING: 420 lines. Retail lays the three unit records out as second (sp+4), generated, first
+ * (here first, second, generated), computes the first's address before anything else and keeps both
+ * parents' addresses in stack slots for the merge call; it reaches the pair through the work plus
+ * index*8 with the 0x390 offset left in each load (here one pair pointer), keeps needsNotification in fp
+ * (here a stack slot), and builds the second parent with a predicated call. */
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
-#include "camp/Unite/UniteWork.h"
+#include "camp/Unite/UniteGlobals.h"
 #include <stddef.h>
 #include "gamedata/SkillFlags.h"
+#include "gamedata/UnitStats.h"
 
 extern "C" {
 
-struct WordBlock32 {
-    u32 words[8];
-};
-
-struct PartyMemberView {
-    u8 unknown00[0x0e];       // 0x000
-    u16 currentValueA;       // 0x00e
-    u16 currentValueB;       // 0x010
-    u8 unknown12[0x18];      // 0x012
-    u16 savedValueA;         // 0x02a
-    u16 savedValueB;         // 0x02c
-    u8 unknown2e[6];         // 0x02e
-    u16 skills[8];           // 0x034
-    u8 unknown44[2];         // 0x044
-    u16 id;                  // 0x046
-    u8 status;               // 0x048
-    u8 unknown49[3];         // 0x049
-    WordBlock32 attributes;            // 0x04c
-    WordBlock32 secondaryAttributes;   // 0x06c
-    u8 extendedData[0x500];   // 0x08c
-    u8 unknown58c[0x78];      // 0x58c
-};
-
-struct UniteStateView {
-    void* context;                     // 0x0000
-    u8 unknown0004[0x138c];   // 0x0004
-    UnitePairEntryIV selections[
-        (0x66a8 - 0x1390) / 8];        // 0x1390
-    u16 savedSkills[8];       // 0x66a8
-    u8 unknown66b8[2];        // 0x66b8
-    u16 savedMemberId;        // 0x66ba
-    u8 unknown66bc[4];        // 0x66bc
-    WordBlock32 savedAttributes;       // 0x66c0
-    WordBlock32 savedSecondary;        // 0x66e0
-    u8 savedExtended[0x500];  // 0x6700
-    u8 unknown6c00[0x2420];   // 0x6c00
-    u16 inheritedSkills[24]; // 0x9020
-    u8 unknown9050[0x408];    // 0x9050
-    u32 resultIndex;         // 0x9458
-    u32 resultStatus;        // 0x945c
-};
-
-extern UniteStateView* g_unite;
-
-extern "C" {
-PartyMemberView* partyMemberFindById(u32 id);
+StatBlock* partyMemberFindById(u32 id); // declcheck: local (returns the unit record; the shared prototype keeps the decompiler's int)
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
-void unitInitializeFromSavedRecord(u32 id, PartyMemberView* destination);
-int FUN_003c88f0(void* context, PartyMemberView* first, PartyMemberView* second);
+void unitInitializeFromSavedRecord(u32 id, StatBlock* destination);
+int FUN_003c88f0(void* context, StatBlock* first, StatBlock* second);
 int FUN_003c92b8(void* context, u32 firstId,
                  u32 secondId, UnitePairEntryIV* selection);
 int partyFindActiveSlotById(u32 id);
@@ -63,43 +23,41 @@ void FUN_0029bbc8(int slot);
 void* partyFindFreeStockSlot();
 int itemGetFlagBit1(u32 id);
 void FUN_0029c1c8(void* object, u32 id, int mode);
-void uniteMergeInheritedSkillsAndStats(void* context, PartyMemberView* first,
-                 PartyMemberView* second, int mode, PartyMemberView* result);
+void uniteMergeInheritedSkillsAndStats(void* context, StatBlock* first,
+                 StatBlock* second, int mode, StatBlock* result);
 int arrayContainsU16(const u16* values, int count, u32 value);
 int dataTable06ComparePriority(const void* left, const void* right);
 void qsort(void* base, int count, int elementSize,
                   int (*compare)(const void*, const void*));
-int flagCountUnlockedSlots(PartyMemberView* member);
+int flagCountUnlockedSlots(StatBlock* member); // declcheck: local (takes the unit; the shared prototype drops the argument)
 u32 randNextInRange(u32 maximum);
-void unitRecalculateEffectiveStats(PartyMemberView* member);
-u32 FUN_0029c0c0(void* context, PartyMemberView* member);
+void unitRecalculateEffectiveStats(StatBlock* member);
+u32 FUN_0029c0c0(void* context, StatBlock* member);
 void FUN_0029bed8(u32 id);
 void gameCounterAddSaturating(int flag, int value);
-void FUN_0029bde4(PartyMemberView* member);
-}
+void FUN_0029bde4(StatBlock* member);
 
-extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
+/* Performs the selected fusion: builds both parents, removes them from the party, creates the result
+ * in a free stock slot and gives it the inherited skills (or, when the fusion fails, the unit that
+ * was shown), then heals it and counts the fusion. Returns 1 when the fusion succeeded. */
+int uniteCreateSelectedResult(u32 selectionIndex)
 {
-    UniteStateView* state = g_unite;
-    UnitePairEntryIV* selection = &state->selections[selectionIndex];
-    PartyMemberView first;
-    PartyMemberView second;
+    UniteWork *state = g_unite;
+    UnitePairEntryIV* selection = &state->pairListIV.pairs[selectionIndex];
+    StatBlock first;
+    StatBlock second;
     bool succeeded = false;
 
-    const u32 firstId = selection->firstId;
-    switch (selection->firstType) {
-    case 1:
-        __aeabi_memcpy4(&first, partyMemberFindById(firstId), 0x604);
-        break;
-    case 3:
-        unitInitializeFromSavedRecord(firstId, &first);
-        break;
+    if (selection->firstType == 1) {
+        first = *partyMemberFindById(selection->firstId);
+    } else if (selection->firstType == 3) {
+        unitInitializeFromSavedRecord(selection->firstId, &first);
     }
 
     const u32 secondId = selection->secondId;
     switch (selection->secondType) {
     case 1:
-        __aeabi_memcpy4(&second, partyMemberFindById(secondId), 0x604);
+        second = *partyMemberFindById(secondId);
         break;
     case 3:
         unitInitializeFromSavedRecord(secondId, &second);
@@ -125,19 +83,20 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
     const bool needsNotification = itemGetFlagBit1(selection->resultId) == 0;
     FUN_0029c1c8(object, selection->resultId, 0);
 
-    PartyMemberView* member;
+    StatBlock* member;
     if (succeeded) {
-        PartyMemberView generated;
+        StatBlock generated;
         generated.id = static_cast<u16>(selection->resultId);
         uniteMergeInheritedSkillsAndStats(state->context, &first, &second, 0, &generated);
         member = partyMemberFindById(generated.id);
-        member->attributes = generated.attributes;
-        member->secondaryAttributes = generated.secondaryAttributes;
-        __aeabi_memcpy4(member->extendedData, generated.extendedData, 0x500);
+        member->growth.progressWords[0] = generated.growth.progressWords[0];
+        member->growth.progressWords[1] = generated.growth.progressWords[1];
+        __aeabi_memcpy4(member->growth.counters, generated.growth.counters, 0x500);
 
         u16 candidates[32] = {0};
+        /* The skills chosen for inheritance come first, the result's own flagged skills after them. */
         for (int i = 0; i < 24; ++i)
-            candidates[i] = state->inheritedSkills[i];
+            candidates[i] = state->secondListIV.indices[i];
 
         NkmBaseRecord *original = nkmBaseGetRecord(originalResultId);
         for (int i = 0; i < 8; ++i) {
@@ -154,14 +113,14 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
             const int unlocked = flagCountUnlockedSlots(member);
             for (int i = 0; i < 32; ++i) {
                 if (candidates[i] == 0 ||
-                    arrayContainsU16(member->skills, 8, candidates[i]) != 0)
+                    arrayContainsU16(member->skills.ids, 8, candidates[i]) != 0)
                     continue;
 
                 int slot = 0;
                 if (unlocked > 0) {
                     while (slot < unlocked) {
-                        if (member->skills[slot] == 0) {
-                            member->skills[slot] = candidates[i];
+                        if (member->skills.ids[slot] == 0) {
+                            member->skills.ids[slot] = candidates[i];
                             break;
                         }
                         ++slot;
@@ -172,22 +131,22 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
             }
         } else {
             for (int i = 0; i < 8; ++i) {
-                if ((dataTable06Sub1GetRecord(member->skills[i])->flags & 0x20) != 0) {
-                    if (arrayContainsU16(candidates, 32, member->skills[i]) == 0)
-                        candidates[24 + i] = member->skills[i];
-                    member->skills[i] = 0;
+                if ((dataTable06Sub1GetRecord(member->skills.ids[i])->flags & 0x20) != 0) {
+                    if (arrayContainsU16(candidates, 32, member->skills.ids[i]) == 0)
+                        candidates[24 + i] = member->skills.ids[i];
+                    member->skills.ids[i] = 0;
                 }
             }
 
-            qsort(member->skills, 8, 2, dataTable06ComparePriority);
+            qsort(member->skills.ids, 8, 2, dataTable06ComparePriority);
             qsort(candidates, 32, 2, dataTable06ComparePriority);
             const int unlocked = flagCountUnlockedSlots(member);
             for (int slot = 0; slot < unlocked; ++slot) {
-                if (member->skills[slot] != 0 || candidates[0] == 0)
+                if (member->skills.ids[slot] != 0 || candidates[0] == 0)
                     continue;
 
                 if (slot < 4) {
-                    member->skills[slot] = candidates[0];
+                    member->skills.ids[slot] = candidates[0];
                     candidates[0] = 0;
                 } else {
                     int count = 0;
@@ -202,7 +161,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
                     }
                     const u32 chosen = randNextInRange(
                         static_cast<u16>(count - 1));
-                    member->skills[slot] = candidates[chosen];
+                    member->skills.ids[slot] = candidates[chosen];
                     candidates[chosen] = 0;
                 }
                 qsort(candidates, 32, 2, dataTable06ComparePriority);
@@ -211,22 +170,22 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
 
         unitRecalculateEffectiveStats(member);
         state->resultIndex = FUN_0029c0c0(state->context, member);
-        state->resultStatus = member->status;
+        state->resultLevel = member->level;
     } else {
-        member = partyMemberFindById(state->savedMemberId);
-        member->attributes = state->savedAttributes;
-        member->secondaryAttributes = state->savedSecondary;
-        __aeabi_memcpy4(member->extendedData, state->savedExtended, 0x500);
+        member = partyMemberFindById(state->resultSelectionIV.unit.id);
+        member->growth.progressWords[0] = state->resultSelectionIV.unit.growth.progressWords[0];
+        member->growth.progressWords[1] = state->resultSelectionIV.unit.growth.progressWords[1];
+        __aeabi_memcpy4(member->growth.counters, state->resultSelectionIV.unit.growth.counters, 0x500);
         const int unlocked = flagCountUnlockedSlots(member);
-        __aeabi_memcpy4(member->skills, state->savedSkills,
+        __aeabi_memcpy4(member->skills.ids, state->resultSelectionIV.unit.skills.ids,
                     static_cast<u32>(unlocked) << 1);
         unitRecalculateEffectiveStats(member);
         state->resultIndex = FUN_0029c0c0(state->context, member);
-        state->resultStatus = member->status;
+        state->resultLevel = member->level;
     }
 
-    member->savedValueA = member->currentValueA;
-    member->savedValueB = member->currentValueB;
+    member->hp = member->maxHp;
+    member->mp = member->maxMp;
     if (needsNotification)
         FUN_0029bed8(member->id);
     gameCounterAddSaturating(38, 1);

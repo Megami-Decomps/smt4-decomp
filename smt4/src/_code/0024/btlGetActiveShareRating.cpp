@@ -1,4 +1,3 @@
-/* NON_MATCHING: block order only (the 3/4 choice now compares with 39 as retail): retail falls through from the 70% test into the shared `return 5` and places the 3/4 choice after it. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
@@ -10,31 +9,32 @@ extern "C" {
  * total: 5 at 70% or more (or when the check fails), 4 from 40%, else 3. */
 u32 btlGetActiveShareRating(void)
 {
-    if (btlGetMainState() != NULL) {
-        s32 id = btlGetMainState()->playerCheck.checkId;
-        if (reinterpret_cast<s32>(btlFindEntryBlockByMemberId(btlGetMainState(), id)) != 0) {
-            s32 percent = 0;
-            s32 total = btlGetMainState()->unitTotal;
-            s32 active = 0;
-            s32 i;
+    if (btlGetMainState() == NULL) {
+        return 5;
+    }
+    s32 id = btlGetMainState()->playerCheck.checkId;
+    if (reinterpret_cast<s32>(btlFindEntryBlockByMemberId(btlGetMainState(), id)) == 0) {
+        return 5;
+    }
+    s32 percent = 0;
+    s32 total = btlGetMainState()->unitTotal;
+    s32 active = 0;
+    s32 i;
 
-            for (i = 0; i < 109; i++) {
-                BtlActionRecord *unit = &btlGetMainState()->actions[i];
-                if ((unit->status & 1) && (unit->status & 2) && (unit->status & 0x10) &&
-                    !(unit->stateFlags & 2)) {
-                    active++;
-                }
-            }
-            if (total != 0) {
-                percent = active * 100 / total;
-            }
-            if (percent >= 70) {
-                return 5;
-            }
-            return (percent <= 39) ? 3 : 4;
+    for (i = 0; i < 109; i++) {
+        BtlActionRecord *unit = &btlGetMainState()->actions[i];
+        if ((unit->status & 1) && (unit->status & 2) && (unit->status & 0x10) &&
+            !(unit->stateFlags & 2)) {
+            active++;
         }
     }
-    return 5;
+    if (total != 0) {
+        percent = active * 100 / total;
+    }
+    if (percent >= 70) {
+        return 5;
+    }
+    return (percent <= 39) ? 3 : 4;
 }
 
 } /* extern "C" */

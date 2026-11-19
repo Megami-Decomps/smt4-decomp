@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the frame size differs (retail 376, here 384): the local message id is 8 bytes in retail (id at sp+368 ends the frame),
- * while AsdCecMessageId is declared 12 bytes to fit the message box's index entries. */
 #include "nn/Result.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"

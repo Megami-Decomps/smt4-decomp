@@ -20,6 +20,7 @@ public:
     /* 0x04 */ u32 icon48;
     /* 0x08 */ u32 icon40;
     /* 0x0C */ CecMessageId messageId;
+    /* 0x14 */ u32 unk14;
 };
 
 typedef char Obj420a1cSizeCheck[sizeof(Obj420a1c) == 0x18 ? 1 : -1];

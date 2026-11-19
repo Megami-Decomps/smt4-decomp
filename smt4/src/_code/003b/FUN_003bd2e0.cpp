@@ -14,7 +14,7 @@ int btlEntryGetPassiveSkillIds(void);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int btlEntryBuildSummary(...);
 int passiveSkillLookupRecord(void);
-int FUN_00283ebc(...);
+int skillSumRankBonuses(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int skillDataFindById(void);
 int itemTableGetItemRecord(void);
 int VectorSignedToFloat(...);
@@ -75,7 +75,7 @@ extern unsigned int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: FUN_00283ebc. */
+/* Supplied declaration required: skillSumRankBonuses. */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int playerGetSkillRank(unsigned int);
 /* Supplied declaration required: skillDataFindById. */
@@ -313,7 +313,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar7), temp_v3);
             if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, skillDataFindById(), temp_v6 != 0)) {
               temp_v3 = playerGetSkillRank(temp_v8);
-              FUN_00283ebc(temp_v6,temp_v3,3);
+              skillSumRankBonuses(temp_v6,temp_v3,3);
               temp_v14 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
             }
             else {

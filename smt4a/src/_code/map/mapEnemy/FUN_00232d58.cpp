@@ -18,9 +18,8 @@ void mapEnemyRelease(u32 job);
 void FUN_00232d58(u32 parent)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp", 519);
-    MapEnemyA *enemy = (MapEnemyA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapEnemyA), 1);
-
-    g_mapEnemy = enemy;
+    g_mapEnemy = (MapEnemyA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapEnemyA), 1);
+    MapEnemyA *enemy = g_mapEnemy;
     enemy->task = taskCreateDraw(reinterpret_cast<const s8 *>("MENEMY"), 4, 0, 0, mapEnemyCleanupUpdate, mapEnemyRelease, 0,
                                  reinterpret_cast<void *>(parent));
     enemy->state = 0;

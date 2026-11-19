@@ -1,14 +1,14 @@
 /* NON_MATCHING: retail uses the flag-setting `adds r0, r0, #4`; the compiler emits a plain add here. */
 #include "common.h"
+#include "camp/CampCec/CampCecView.h"
 
 extern "C" {
 
-u8 *libcLocaleGetTables(void);
 
-/* Returns libcLocaleGetTables() advanced by 4 bytes. */
-u8 *libcLocaleGetCtypeTable(void)
+/* Returns rt_locale() advanced by 4 bytes. */
+u8 *rt_ctype_table(void)
 {
-    return libcLocaleGetTables() + 4;
+    return rt_locale() + 4;
 }
 
 } /* extern "C" */

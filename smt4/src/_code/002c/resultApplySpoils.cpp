@@ -27,7 +27,7 @@ s32 lmapMainIsRunning(void);
 void bgmReleaseStopped(void);
 void soundChannelStopAll(s32 channel);
 void resourceTableReleaseHandles(void);
-s32 FUN_0033361c(void);
+s32 bgmHasPendingResume(void);
 void bgmRequestSelectedChannelFade(u32 frames);
 void soundChannelRequestIfEnabled(u32 id, s32 arg);
 void gameCounterAddSaturating(s32 counter, s32 amount);
@@ -51,7 +51,7 @@ void resultApplySpoils(ResultSpoils *spoils)
         bgmReleaseStopped();
         soundChannelStopAll(15);
         resourceTableReleaseHandles();
-    } else if (FUN_0033361c() == 0) {
+    } else if (bgmHasPendingResume() == 0) {
         bgmRequestSelectedChannelFade(30);
     }
     soundChannelRequestIfEnabled(0x100003C, 0);

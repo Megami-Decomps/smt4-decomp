@@ -1,213 +1,195 @@
-/* NON_MATCHING: phase-load fallthrough merging, 64-bit mask scheduling, and switch/body placement differ from retail. */
+/* NON_MATCHING: 174 lines. Case order, callees and each transition's store order follow retail. Still
+ * different: retail gives several states their own copies of the arguments, as inlined per-state functions
+ * would (state 0 keeps the main state in r6 and its flag word's address in r5; states 9 and 19 store through
+ * r0 with the main state still in r1, so no reload before the tail call); state 26's first test has its own
+ * `mov r0, #0; pop`; state 14 stores the state before the zero and state 16 after the argument moves. */
 #include "battle/btlMain.h"
+#include "battle/btlEncount.h"
+#include "code/Code0040_Smt4a.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "code/Code0013.h"
 #include "battle/BtlGlobals.h"
 
-struct EncounterTask {
-    /* 0x00 */ u32 state;
-    /* 0x04 */ u8 unk04[8];
-    /* 0x0C */ u32 stage;
-    /* 0x10 */ u32 timer;
-};
-struct EncounterTaskContext {
-    /* 0x0000 */ u8 unk0000[0x1ec4];
-    /* 0x1EC4 */ void *records;
-    /* 0x1EC8 */ u8 unk1ec8[0xc];
-    /* 0x1ED4 */ BattleRosterRecordA *roster;
-    /* 0x1ED8 */ u8 unk1ed8;
-    /* 0x1ED9 */ u8 markedCount;
-    /* 0x1EDA */ u8 unk1eda[0x26c6];
-    /* 0x45A0 */ u64 flags;
-};
-struct EncounterTaskGlobals {
-    /* 0x00 */ u8 unk00[0x60];
-    /* 0x60 */ u64 requiredFlags;
-};
-
 extern "C" {
 extern BtlStep *g_btlEvent;
-extern EncounterTaskGlobals g_btlEncount;
+extern BtlEncounterGlobalsA g_btlEncount;
 extern void *g_btlActionReflect;
 extern void *g_btlAux;
-s32 isEntryUsable(BtlStep *event);
+s32 isEntryUsable(BtlStep *event); // declcheck: local (takes the event step; the shared prototype has the decompiler's s32 *)
 s32 FUN_004d7a70(BtlStep *event, u32 kind, u32 value, u32 flags);
 void frameTexRequestFade(u32 state);
 void FUN_0013cab8(u32 index, u32 first, u32 second);
 void FUN_004d7fe4(BtlStep *event);
-s32 FUN_003e11ac(EncounterTask *task, EncounterTaskContext *context);
+s32 FUN_003e11ac(BtlStep *step, BtlMainStateA *state);
 s32 loadSlotIsLoaded(u32 slot);
 void loadSlotRequestAsync(u32 slot, u32 flags);
-s32 FUN_003e2470(EncounterTask *task, EncounterTaskContext *context);
-void FUN_003f1334(EncounterTaskContext *context);
-s32 loadSlotMainIsLoaded(EncounterTaskContext *context);
-s32 FUN_003e1114(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003f0f2c(EncounterTaskContext *context);
-s32 FUN_003e30b0(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e21a8(EncounterTask *task, EncounterTaskContext *context);
-s32 aocLoaderUpdateRecords(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e0510(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e3188(EncounterTask *task, EncounterTaskContext *context);
-s32 btlRosterGroupAllInactive(EncounterTaskContext *context, u32 enabled);
-void FUN_003ed238(EncounterTaskContext *context, u32 flags);
-s32 FUN_003e025c(EncounterTask *task, EncounterTaskContext *context);
+s32 FUN_003e2470(BtlStep *step, BtlMainStateA *state);
+void FUN_003f1334(BtlMainStateA *state); // declcheck: local (retail passes the main state in r0; the shared prototype has no argument)
+s32 loadSlotMainIsLoaded(BtlMainStateA *state);
+s32 FUN_003e1114(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003f0f2c(BtlMainStateA *state); // declcheck: local (the shared prototype takes another view of the main state)
+s32 FUN_003e03b0(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e12a8(BtlStep *step, BtlMainStateA *state);
+s32 aocLoaderUpdateRecords(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e0510(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e3188(BtlStep *step, BtlMainStateA *state);
+void FUN_003ed238(BtlMainStateA *state, u32 flags);
+s32 FUN_003e025c(BtlStep *step, BtlMainStateA *state);
 s32 FUN_004f2294(BtlCameraA *camera);
 void btlCameraObjectCreate(BtlCameraA *camera);
-s32 FUN_003e1068(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003ece50(EncounterTaskContext *context);
-void FUN_003eaa9c(EncounterTaskContext *context);
-s32 FUN_003e1454(EncounterTask *task, EncounterTaskContext *context);
-s32 contentRequestStart(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e21c8(EncounterTask *task, EncounterTaskContext *context);
-u32 FUN_003e0f94(EncounterTask *task);
-s32 FUN_003e1b80(EncounterTask *task, EncounterTaskContext *context);
-s32 btlStepInitEncounterFlags(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e1a30(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e2a88(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e2504(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e16cc(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e0cd4(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_003e0bb8(EncounterTask *task, EncounterTaskContext *context);
-s32 chainCountIdUnflagged(void *reflect, EncounterTask *task);
+s32 FUN_003e1068(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003ece50(BtlMainStateA *state);
+void FUN_003eaa9c(BtlMainStateA *state);
+s32 FUN_003e1454(BtlStep *step, BtlMainStateA *state);
+s32 contentRequestStart(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e21c8(BtlStep *step, BtlMainStateA *state);
+u32 FUN_003e0f94(BtlStep *step);
+s32 FUN_003e1b80(BtlStep *step, BtlMainStateA *state);
+s32 btlStepInitEncounterFlags(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e1a30(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e2a88(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e2504(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e16cc(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e0cd4(BtlStep *step, BtlMainStateA *state);
+s32 FUN_003e0bb8(BtlStep *step, BtlMainStateA *state);
 s32 recordAreAllCountsNonpositive(void *auxiliary);
 s32 eventCommandRangeCheck(BtlCameraA *camera);
-void stateFinishIfPresent(EncounterTaskContext *context);
+void stateFinishIfPresent(BtlMainStateA *state);
 void eventCommandClearPending(BtlCameraA *camera);
 }
 
-/* Dispatch encounter phases and finish only after all action and command work drains. */
-extern "C" s32 battleEncounterTaskUpdate(EncounterTask *task, EncounterTaskContext *context)
+/* State 5: waits for the main slot, then starts the enemy model step. */
+static __inline s32 encounterWaitMainSlot(BtlStep *step, BtlMainStateA *state)
 {
-    switch (task->state) {
+    if (!loadSlotMainIsLoaded(state))
+        return 0;
+    step->counters.unk10 = 0;
+    step->state = 6;
+    step->counters.unk0C = 0;
+    return FUN_003e1114(step, state);
+}
+
+/* Dispatch encounter phases and finish only after all action and command work drains. */
+extern "C" s32 battleEncounterTaskUpdate(BtlStep *step, BtlMainStateA *state)
+{
+    switch (step->state) {
     case 0:
         if (isEntryUsable(g_btlEvent))
             return 0;
         if (FUN_004d7a70(g_btlEvent, 9, -1u, 0)) {
-            if (!(context->flags & g_btlEncount.requiredFlags)) {
+            if (!(g_btlEncount.initializedMask & state->stateFlags64.bits)) {
                 frameTexRequestFade(2);
-                context->flags |= g_btlEncount.requiredFlags;
+                state->stateFlags64.bits = g_btlEncount.initializedMask | state->stateFlags64.bits;
                 if (pairedAvailabilityGetState(1) == 3)
                     FUN_0013cab8(1, 10, 0xff);
             }
             FUN_004d7fe4(g_btlEvent);
         }
-        task->timer = 0;
-        task->stage = 0;
-        task->state = 1;
-        return FUN_003e11ac(task, context);
+        btlStepEnter(step, 1);
+        return FUN_003e11ac(step, state);
     case 1:
-        return FUN_003e11ac(task, context);
+        return FUN_003e11ac(step, state);
     case 2:
         if (!loadSlotIsLoaded(0x4e))
             loadSlotRequestAsync(0x4e, 0);
-        task->timer = 0;
-        task->stage = 0;
-        task->state = 3;
-        return FUN_003e2470(task, context);
+        btlStepEnter(step, 3);
+        return FUN_003e2470(step, state);
     case 3:
-        return FUN_003e2470(task, context);
+        return FUN_003e2470(step, state);
     case 4:
-        FUN_003f1334(context);
-        task->state = 5;
-        task->timer = 0;
-        task->stage = 0;
+        FUN_003f1334(state);
+        step->state = 5;
+        step->counters.unk0C = step->counters.unk10 = 0;
+        return encounterWaitMainSlot(step, state);
     case 5:
-        if (!loadSlotMainIsLoaded(context))
-            return 0;
-        task->timer = 0;
-        task->state = 6;
-        task->stage = 0;
-        return FUN_003e1114(task, context);
+        return encounterWaitMainSlot(step, state);
     case 6:
-        return FUN_003e1114(task, context);
+        return FUN_003e1114(step, state);
     case 7:
-        if (!FUN_003f0f2c(context))
+        if (!FUN_003f0f2c(state))
             return 0;
-        task->timer = 0;
-        task->state = 8;
-        task->stage = 0;
-        return FUN_003e30b0(task, context);
+        btlStepEnter(step, 8);
+        return FUN_003e03b0(step, state);
     case 8:
-        return FUN_003e30b0(task, context);
+        return FUN_003e03b0(step, state);
     case 9:
-        if (context->records == NULL)
+        if (state->arrangementFile == NULL)
             return 0;
-        task->timer = 0;
-        task->state = 10;
-        task->stage = 0;
-        return FUN_003e21a8(task, context);
+        step->counters.unk10 = 0;
+        step->state = 10;
+        step->counters.unk0C = 0;
+        return FUN_003e12a8(step, state);
     case 10:
-        return FUN_003e21a8(task, context);
+        return FUN_003e12a8(step, state);
     case 11:
-        return aocLoaderUpdateRecords(task, context);
+        return aocLoaderUpdateRecords(step, state);
     case 12:
-        return FUN_003e0510(task, context);
+        return FUN_003e0510(step, state);
+    /* States 17 and 18 come before 13 in retail (18 ends by entering 13). */
+    case 17:
+        return FUN_003e3188(step, state);
+    case 18:
+        if (!btlRosterGroupAllInactive(state, 1))
+            return 0;
+        FUN_003ed238(state, 0x400);
+        for (s32 index = 4; index < 54; ++index) {
+            BattleRosterRecordA *record = &state->roster[index];
+            u32 flags = record->render.flags;
+            if ((flags & 1) && (flags & 0x80) && (flags & 0x400))
+                ++state->flaggedRoster.count;
+        }
+        step->counters.unk10 = 0;
+        step->state = 13;
+        step->counters.unk0C = 0;
+        return FUN_003e025c(step, state);
     case 13:
-        return FUN_003e025c(task, context);
+        return FUN_003e025c(step, state);
     case 14:
         if (!FUN_004f2294(g_btlCamera))
             return 0;
         btlCameraObjectCreate(g_btlCamera);
-        task->state = 15;
-        task->timer = 0;
-        task->stage = 0;
-        return FUN_003e1068(task, context);
+        step->state = 15;
+        step->counters.unk0C = step->counters.unk10 = 0;
+        return FUN_003e1068(step, state);
     case 15:
-        return FUN_003e1068(task, context);
+        return FUN_003e1068(step, state);
     case 16:
-        if (!FUN_003ece50(context))
+        if (!FUN_003ece50(state))
             return 0;
-        FUN_003eaa9c(context);
-        task->timer = 0;
-        task->stage = 0;
-        task->state = 20;
-        return FUN_003e1454(task, context);
-    case 17:
-        return FUN_003e3188(task, context);
-    case 18:
-        if (!btlRosterGroupAllInactive(context, 1))
-            return 0;
-        FUN_003ed238(context, 0x400);
-        for (s32 index = 4; index < 54; ++index) {
-            u32 flags = context->roster[index].render.flags;
-            if ((flags & 1) && (flags & 0x80) && (flags & 0x400))
-                ++context->markedCount;
-        }
-        task->timer = 0;
-        task->state = 13;
-        task->stage = 0;
-        return FUN_003e025c(task, context);
+        FUN_003eaa9c(state);
+        btlStepEnter(step, 20);
+        return FUN_003e1454(step, state);
     case 19:
-        task->timer = 0;
-        task->state = 20;
-        task->stage = 0;
-        return FUN_003e1454(task, context);
+        step->counters.unk10 = 0;
+        step->state = 20;
+        step->counters.unk0C = 0;
+        return FUN_003e1454(step, state);
     case 20:
-        return FUN_003e1454(task, context);
+        return FUN_003e1454(step, state);
     case 21:
-        return contentRequestStart(task, context);
+        return contentRequestStart(step, state);
     case 22:
-        return FUN_003e21c8(task, context);
+        return FUN_003e21c8(step, state);
     case 23:
-        return FUN_003e0bb8(task, context);
+        return FUN_003e0bb8(step, state);
     case 24:
-        switch (FUN_003e0f94(task)) {
-        case 1: return btlStepInitEncounterFlags(task, context);
-        case 2: return FUN_003e1b80(task, context);
-        case 3: return FUN_003e1a30(task, context);
-        case 4: return FUN_003e2a88(task, context);
-        case 5: return FUN_003e2504(task, context);
-        default: return FUN_003e16cc(task, context);
+        switch (FUN_003e0f94(step)) {
+        case 2: return FUN_003e1b80(step, state);
+        case 1: return btlStepInitEncounterFlags(step, state);
+        case 3: return FUN_003e1a30(step, state);
+        case 4: return FUN_003e2a88(step, state);
+        case 5: return FUN_003e2504(step, state);
+        default: return FUN_003e16cc(step, state);
         }
     case 25:
-        return FUN_003e0cd4(task, context);
+        return FUN_003e0cd4(step, state);
     case 26:
-        if (chainCountIdUnflagged(g_btlActionReflect, task) > 0 ||
+        if (chainCountIdUnflagged((ChainOwner *)g_btlActionReflect, (s32)step) > 0 ||
             !recordAreAllCountsNonpositive(g_btlAux) || !eventCommandRangeCheck(g_btlCamera))
             return 0;
         if (g_btlCamera->flags & 0x80000)
             return 0;
-        stateFinishIfPresent(context);
+        stateFinishIfPresent(state);
         g_btlCamera->flags &= ~0x4000u;
         eventCommandClearPending(g_btlCamera);
         return -1;

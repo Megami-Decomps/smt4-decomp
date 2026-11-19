@@ -1,20 +1,13 @@
-/* NON_MATCHING: only the inner loop test differs: retail compares k against the count (cmp k, count; blt), built the reverse */
 #include "shard/W8X15_PackageList.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/DataTable25.h"
 #include "addon/AocSystem.h"
 
 extern "C" {
 void *dataTableFileGetTable(void *file, u32 section);
 
-/* A 0x2c-byte record of a kind-11 package data table. */
-typedef struct {
-    u8 unk00[0x20];
-    s16 id;         /* 0x20 */
-    u8 unk22[0x2c - 0x22];
-} PackageIdRecord;
-
 /* Returns the record with `id` from the kind-11 data tables of the loaded packages, or NULL. */
-PackageIdRecord *aocPackageFindRecordById(AocSystem *system, s32 id)
+DataTable25Record *aocPackageFindRecordById(AocSystem *system, u32 id)
 {
     for (s32 i = 0; i < system->packageCount; i++) {
         AocPackage *entry = &system->packages[i];
@@ -24,13 +17,14 @@ PackageIdRecord *aocPackageFindRecordById(AocSystem *system, s32 id)
             for (u32 j = 0; j < fileCount; j++) {
                 if (names[j].kind == 11) {
                     void *table = dataTableFileGetTable(entry->files[j].data, 0);
-                    PackageIdRecord *records = (PackageIdRecord *)dataTableGetEntries(table);
+                    DataTable25Record *records = (DataTable25Record *)dataTableGetEntries(table);
                     s32 count = dataTableGetCount(table);
                     for (s32 k = 0; k < count; k++) {
-                        const PackageIdRecord *record = &records[k];
-                        if (record->id == id) {
-                            return &records[k];
+                        const DataTable25Record *record = &records[k];
+                        if (static_cast<s16>(record->id) != static_cast<s32>(id)) {
+                            continue;
                         }
+                        return &records[k];
                     }
                 }
             }

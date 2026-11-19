@@ -1,4 +1,4 @@
-#include "common.h"
+#include "event/bustupEvent/BustupSprite.h"
 
 extern "C" {
 
@@ -7,30 +7,6 @@ typedef struct AddonSpriteRecord {
     /* 0x00 */ u16 unk00;
     /* 0x02 */ u16 textureEntry;
 } AddonSpriteRecord;
-
-/* A bustup sprite and its transition state. */
-typedef struct BustupSprite {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ void *request;      /* the addon table request, NULL when none */
-    /* 0x08 */ s32 slot;
-    /* 0x0C */ s32 unk0c;
-    /* 0x10 */ u8 unk10[4];
-    /* 0x14 */ s32 textureIndex;   /* -1 when no texture is held */
-    /* 0x18 */ u8 unk18[0xC];
-    /* 0x24 */ s32 operation;      /* the transition being played */
-    /* 0x28 */ f32 progress;
-    /* 0x2C */ f32 progressEnd;
-    /* 0x30 */ s8 hidden;
-    /* 0x31 */ u8 unk31[3];
-    /* 0x34 */ u8 position[0x24];
-    /* 0x58 */ f32 offset[3];
-    /* 0x64 */ u8 unk64[0x10];
-    /* 0x74 */ f32 duration;       /* frames the transition takes */
-    /* 0x78 */ u8 unk78[0x10];
-    /* 0x88 */ f32 fade;
-    /* 0x8C */ u8 unk8c;
-    /* 0x8D */ u8 fading;
-} BustupSprite;
 
 void aocSlotRelease(BustupSprite *sprite);
 void bustupPlaceActiveSlot(void *position, s32 slot);
@@ -69,11 +45,11 @@ void bustupSpriteStartTransition(BustupSprite *sprite, u32 operation, s32 durati
         break;
     case 6:
         sprite->duration = duration == 0 ? 10.0f : (f32)duration;
-        bustupPlaceActiveSlot(sprite->position, sprite->slot);
+        bustupPlaceActiveSlot(&sprite->position, sprite->slot);
         sprite->hidden = 1;
-        sprite->offset[1] = 0.0f;
-        sprite->offset[0] = 0.0f;
-        sprite->offset[2] = 0.0f;
+        sprite->moveStartOffset = 0.0f;
+        sprite->offset = 0.0f;
+        sprite->moveEndOffset = 0.0f;
         sprite->progress = 0.0f;
         aocSlotRelease(sprite);
         break;

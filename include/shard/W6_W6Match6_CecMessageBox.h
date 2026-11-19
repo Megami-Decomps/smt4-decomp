@@ -40,7 +40,7 @@ typedef char CecMessageIndexHeaderLayout[
 
 struct CecMessageIndex {
     CecMessageIndexHeader header;
-    AsdCecMessageId ids[33]; // 0x20
+    AsdCecMessageIndexEntry ids[33]; // 0x20
     u32 capacity; // 0x1ac
 };
 

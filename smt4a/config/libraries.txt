@@ -5,3 +5,5 @@
 # CollectionContext.cpp, InstantiationContext.cpp) are in the image, smt4 has no counterpart, and
 # most of the block is already third-party by name (online*, streamReader*, wstr*) or callers.
 thumb 0x2e2000 0x311800 OnlineCore source paths in the image; Thumb -Ospace block absent from smt4
+# The CTR-SDK's crt0 entry point (smt4's twin): no frame, a run of calls ending in a tail `b svcExitProcess`.
+arm 0x100000 0x100024 CTR-SDK-crt0 image entry point; calls the SDK's init routines and tail-branches to svcExitProcess

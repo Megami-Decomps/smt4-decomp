@@ -6610,7 +6610,7 @@
 0051ec68 libcVformat
 0017ffa8 texTableRecordCallWithParams
 001bc124 libm_sinf
-002e2a98 libcLocaleGetCtypeTable
+002e2a98 rt_ctype_table
 001762d4 idEntryTableFindById
 001b4ddc effPartInitDefaults
 00184c50 gpuSubmitPositionColorTexCoord
@@ -6988,3 +6988,12 @@
 0041fd5c saveLoadUiRestartSlotSpritesAndWait
 003344b4 statusPreviewMpChange
 0023b8b0 uniteDrawPanel
+0019a35c svcExitThread
+002e2ec0 rt_locale
+002e5c6c infoWinOpenEntry
+00234118 mapFastModelCreate
+0013ddf0 soundEffectInitializeReverb
+004f6d34 btlPollVersionedEffectTexture
+0033f188 lmapRestoreSpawnPose
+003ddfd8 bgmHasPendingResume
+0042d694 cecMakeResourceId

@@ -73,9 +73,8 @@ static __inline void readButtonPosition(f32 *position, u32 id)
 void FUN_002a1358(u8 *options)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\title\\titleMain.cpp", 453);
-    TitleMain *title = (TitleMain *)asdMemoryAlloc(0x10000, 0x100, 0, 0x260, 1);
-
-    g_titleMain.main = title;
+    g_titleMain.main = (TitleMain *)asdMemoryAlloc(0x10000, 0x100, 0, 0x260, 1);
+    TitleMain *title = g_titleMain.main;
     title->unk008 = 0;
     title->unk00c = 0;
     title->unk010 = 0;

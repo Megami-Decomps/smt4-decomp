@@ -1,29 +1,18 @@
-#include "common.h"
+#include "gamedata/DataTable25Apocalypse.h"
 #include "gamedata/DataTable.h"
 #include "code/Code0028_Smt4a.h"
 #include "addon/AocSystemA.h"
 
 extern "C" {
 
-struct AocSystemA;
-
-/* A record of data table 25 (0x28 bytes); `id` at 0x20 is the search key. */
-struct DataTable25Record {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u16 id;
-    /* 0x22 */ u8 unk22[0x28 - 0x22];
-};
-
-
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 signedKeyRecordCompare(const void *a, const void *b);
-DataTable25Record *aocPackageFindRecordById(AocSystemA *system, u32 id);
 
 
 /* Finds the record with `id`: the add-on content's override first, else a search of data table 25. */
-DataTable25Record *FUN_00283498(u32 id)
+DataTable25RecordA *FUN_00283498(u32 id)
 {
-    DataTable25Record *record = aocPackageFindRecordById(g_aocSystem, id);
+    DataTable25RecordA *record = aocPackageFindRecordById(g_aocSystem, id);
 
     if (record != NULL) {
         return record;
@@ -31,9 +20,9 @@ DataTable25Record *FUN_00283498(u32 id)
     void *table = dataTableGet(25, 0);
     void *entries = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
-    DataTable25Record key;
+    DataTable25RecordA key;
     key.id = id;
-    return (DataTable25Record *)libc_bsearch(&key, entries, count, sizeof(DataTable25Record), signedKeyRecordCompare);
+    return (DataTable25RecordA *)libc_bsearch(&key, entries, count, sizeof(DataTable25RecordA), signedKeyRecordCompare);
 }
 
 } /* extern "C" */

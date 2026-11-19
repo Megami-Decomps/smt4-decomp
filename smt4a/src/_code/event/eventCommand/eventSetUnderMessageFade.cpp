@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the second taskCreateDraw's owner reload differs: retail `ldr r1, [r4]`, build `ldr r0, [r4]`. */
 #include "event/eventCommand.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
@@ -16,8 +15,8 @@ void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha)
 {
     if (g_eventCommand.command == NULL) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\eventCommand.cpp", 0x307);
-        EventCommand *command = static_cast<EventCommand *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventCommand), 1));
-        g_eventCommand.command = command;
+        g_eventCommand.command = static_cast<EventCommand *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventCommand), 1));
+        EventCommand *command = g_eventCommand.command;
         command->alpha = 0.0f;
         command->duration = 0;
         command->elapsed = 0;

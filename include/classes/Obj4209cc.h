@@ -28,6 +28,13 @@ class Obj4209ccPart {
 public:
     virtual ~Obj4209ccPart();
 
+    /* Destroys the part, then hands its memory back to the allocator it came from. */
+    void destroy()
+    {
+        this->~Obj4209ccPart();
+        allocator->release(this);
+    }
+
     /* 0x04 */ Obj4209ccAllocator *allocator;
 };
 

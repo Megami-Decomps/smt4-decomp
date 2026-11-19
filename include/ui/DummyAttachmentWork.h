@@ -82,7 +82,7 @@ struct DummyAttachmentWork {
         u8 unkD48[0x14];
         struct {
             u8 unkD48[0xc];
-            u8 fullNoticePlayed; // 0xd54, the "no free slot" sound was played for this board
+            s8 fullNoticePlayed; // 0xd54, the "no free slot" sound was played for this board
             u8 unkD55[3];
             s32 inputWait;       // 0xd58, frames left before the board takes input
         } boardState;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Entry-reset loop counters and global-base registers differ. */
+/* NON_MATCHING: the entry pool's base and the counters' address swap registers (r5/r6), and the secondary vectors' address is formed with a separate add of 124. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
@@ -8,23 +8,26 @@ extern "C" {
 extern EntryPoolCountersA DAT_00580c90;
 extern EntryPoolRecordA DAT_005f32a0[160];
 
+/* Clears a three-float vector. */
+static __inline void vec3Clear(f32 *vector)
+{
+    vector[0] = 0.0f;
+    vector[1] = 0.0f;
+    vector[2] = 0.0f;
+}
+
+/* Clears every entry of the entry pool and its counters, and deselects the active group. */
 void FUN_00244acc(void)
 {
     DAT_00580c90.first = 0;
     for (s32 i = 0; i < 160; ++i) {
         EntryPoolRecordA &entry = DAT_005f32a0[i];
         for (s32 j = 0; j < 8; ++j) {
-            entry.primaryVectors[j][0] = 0.0f;
-            entry.primaryVectors[j][1] = 0.0f;
-            entry.primaryVectors[j][2] = 0.0f;
+            vec3Clear(entry.primaryVectors[j]);
         }
-        entry.vector6C[0] = 0.0f;
-        entry.vector6C[1] = 0.0f;
-        entry.vector6C[2] = 0.0f;
+        vec3Clear(entry.vector6C);
         for (s32 j = 0; j < 6; ++j) {
-            entry.secondaryVectors[j][0] = 0.0f;
-            entry.secondaryVectors[j][1] = 0.0f;
-            entry.secondaryVectors[j][2] = 0.0f;
+            vec3Clear(entry.secondaryVectors[j]);
             entry.scalars[j] = 0.0f;
         }
         entry.value178 = 0;

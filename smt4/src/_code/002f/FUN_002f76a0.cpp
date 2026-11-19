@@ -4,12 +4,12 @@ extern "C" {
 
 extern u32 DAT_00435d18;
 
-s32 FUN_00246f18(u32 value);
+s32 btlPollVersionedEffectTexture(u32 value);
 
-/* Script condition: FUN_00246f18 accepts DAT_00435d18. */
+/* Script condition: btlPollVersionedEffectTexture accepts DAT_00435d18. */
 s32 FUN_002f76a0(void)
 {
-    return FUN_00246f18(DAT_00435d18) != 0;
+    return btlPollVersionedEffectTexture(DAT_00435d18) != 0;
 }
 
 } /* extern "C" */

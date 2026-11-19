@@ -11,6 +11,11 @@ struct UnitSummarySkills {
     };
 };
 
+/* Half of a unit's progress bytes, copied as words. */
+struct UnitProgressWords {
+    u32 words[8];
+};
+
 /* IV: a saved unit record (0x604 bytes): the 24 records of the save block's slot table
  * (SaveSlotTableIV.units), returned by gameGetUnitRecord() (gamedata/UnitRecordAccess.h). */
 struct StatBlock {
@@ -58,7 +63,10 @@ struct StatBlock {
                 /* 0x49 */ u8 unk49;
                 /* 0x4A */ u8 slot;        /* the record's own index in the slot table */
                 /* 0x4B */ u8 unk4B;
-                /* 0x4C */ u8 progress[0x40];   /* per-unit progress bytes (learned skills, completed goals) */
+                union {
+                    /* 0x4C */ u8 progress[0x40];   /* per-unit progress bytes (learned skills, completed goals) */
+                    /* 0x4C */ UnitProgressWords progressWords[2];  /* the same bytes, as the two blocks fusion copies */
+                };
                 /* 0x8C */ u8 counters[0x500];  /* saturating byte counters */
                 /* 0x58C */ u16 hpBonus;
                 /* 0x58E */ u16 mpBonus;

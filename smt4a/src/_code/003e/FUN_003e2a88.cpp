@@ -9,7 +9,7 @@ void FUN_003ed6e8(BtlMainStateA *battle);
 void FUN_003f26d4(BtlMainStateA *battle);
 void FUN_004aa2e0(BtlUiA *ui, s32 mode);
 void FUN_004f1c5c(void *camera, s32 duration);
-s32 FUN_004f6d34(BtlAuxA *effects);
+s32 btlPollVersionedEffectTexture(BtlAuxA *effects);
 u32 FUN_004f7b84(void *effects, const char *name);
 extern BtlAuxA *g_btlAux;
 extern const char DAT_00528548[];
@@ -39,7 +39,7 @@ void FUN_003e2a88(BtlStep *step, BtlMainStateA *battle)
         g_btlCamera->flags |= 0x4000;
         step->counters.unk0C |= 2;
     }
-    if ((step->counters.unk0C & 2) != 0 && FUN_004f6d34(g_btlAux)) {
+    if ((step->counters.unk0C & 2) != 0 && btlPollVersionedEffectTexture(g_btlAux)) {
         FUN_003e2840(step, battle, 4);
         if (g_btlCamera->duration == 0)
             FUN_004f1c5c(g_btlCamera, 120);

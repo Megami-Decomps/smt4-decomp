@@ -3,14 +3,14 @@
 
 /* Functions in the 0x00280000 code block whose subsystem is not known yet; each declaration matches its definition. */
 struct RenderInitialState;
-struct DataTable25Record;
+struct DataTable25RecordA;
 struct Entry;
 struct Matrix44;
 extern "C" {
 
 s32 FUN_00281024(RenderInitialState *state);
 
-DataTable25Record * FUN_00283498(u32 id);
+DataTable25RecordA * FUN_00283498(u32 id);
 
 void FUN_00284f70(void);
 

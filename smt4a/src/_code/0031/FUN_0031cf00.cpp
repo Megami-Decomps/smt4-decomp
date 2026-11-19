@@ -6,7 +6,7 @@ extern "C" SlotRecordA *FUN_0031cf00(void)
 {
     SlotRecordA *result = 0;
     GameSaveBodyA *body = &g_gameDataBlocks.saveBlock->body;
-    s32 identifier = body->record.value;
+    s32 identifier = body->record.tail.value;
     SaveSlotTableA *lookup = &body->slots;
 
     if (identifier != 0) {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: body, branches and the allocate-then-construct result now match; retail loads &g_mapIf before the store constants and places g_gameState.mapId's pool word before g_mapIf's. */
 #include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
@@ -13,9 +12,10 @@ extern "C" {
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 
 // Create the map's fast model at the supplied position and heading.
-void FUN_00234118(MapIfSpawnPose pose)
+void mapFastModelCreate(MapIfSpawnPose pose)
 {
-    MapIfModelSlotA *slot = &g_mapIf.state->slots[0];
+    MapIfStateA *mapIf = g_mapIf.state;
+    MapIfModelSlotA *slot = &mapIf->slots[0];
     slot->active = 1;
     slot->state = 0;
     slot->timer = 0;
