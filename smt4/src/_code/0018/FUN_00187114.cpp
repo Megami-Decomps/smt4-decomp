@@ -56,7 +56,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: statusDownDrawSkillRow. */
 /* Supplied declaration required: appGetRemainingCapacity. */
 extern unsigned int FUN_0029a9d4(unsigned short, unsigned int);
-extern int FUN_0029aafc(void);
+extern int countUnlockedSlots(void);
 /* Supplied declaration required: FUN_0029ab54. */
 extern int FUN_0029ac94(void);
 /* Supplied declaration required: FUN_0029acb0. */
@@ -260,7 +260,7 @@ LAB_0018733c:
     }
     else {
       if (*(short *)(temp_v19 + 0x7e) < 0) {
-        temp_v4 = FUN_0029aafc();
+        temp_v4 = countUnlockedSlots();
       }
       else {
         temp_v4 = partyMemberFindById(*(unsigned short *)(temp_v19 + 0x7e));

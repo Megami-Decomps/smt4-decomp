@@ -11,7 +11,7 @@ typedef struct GameDataFlagsView {
 
 extern GameDataFlagsView g_gameDataBlocks;
 
-s32 FUN_00140e00(void);
+s32 sleepModeSetEnabled(void);
 
 /* Clears the given bits of the flag word and updates the "no flags set" byte. */
 void gameDataFlagsClearBits(u32 mask)
@@ -19,11 +19,11 @@ void gameDataFlagsClearBits(u32 mask)
     g_gameDataBlocks.flags &= ~mask;
     if (g_gameDataBlocks.flags != 0) {
         g_gameDataBlocks.noFlags = 0;
-        FUN_00140e00();
+        sleepModeSetEnabled();
         return;
     }
     g_gameDataBlocks.noFlags = 1;
-    FUN_00140e00();
+    sleepModeSetEnabled();
 }
 
 } /* extern "C" */

@@ -43,7 +43,6 @@ extern int gameGetPlayerData(void);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: questDataGetRecord. */
 /* Supplied declaration required: goalConditionsSatisfied. */
-extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_002466a8. */
 /* Supplied declaration required: FUN_00295024. */
 /* Supplied declaration required: FUN_00295108. */
@@ -122,7 +121,7 @@ int FUN_00235438(void)
       }
       temp_v2 = partyEntryFlagsBit1(temp_v10);
       if (temp_v2 == 0) goto LAB_002358f0;
-      temp_v2 = FUN_001bd118(temp_v10);
+      temp_v2 = table1bOr1cGetRecordValue(temp_v10);
       if (temp_v2 != 10) {
         if (temp_v2 != 1) {
           if (temp_v2 == 0) {
@@ -319,7 +318,7 @@ LAB_002358f0:
               temp_v12 = temp_v7 != 0;
             }
             if (temp_v12) {
-              temp_v2 = FUN_001bd118(temp_v10);
+              temp_v2 = table1bOr1cGetRecordValue(temp_v10);
               if ((temp_v2 == 10) && (temp_v2 = goalConditionsSatisfied(temp_v10), temp_v2 != 0)) {
                 FUN_00417b70(temp_v10);
                 temp_v17 = 99;

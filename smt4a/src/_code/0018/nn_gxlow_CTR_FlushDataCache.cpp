@@ -7,13 +7,13 @@ extern "C" {
 extern u32 DAT_0053f524; /* the current-process pseudo handle */
 
 extern u32 nn_gxlow_CTR_GetGpu(void);
-extern u32 FUN_001a2960(u32 gpu, u32 process, u32 address, u32 size);
+extern u32 nn_gxlow_CTR_Gpu_FlushDataCache(u32 gpu, u32 process, u32 address, u32 size);
 
 void nn_gxlow_CTR_FlushDataCache(u32 address, u32 size)
 {
     u32 process = DAT_0053f524;
 
-    FUN_001a2960(nn_gxlow_CTR_GetGpu(), process, address, size);
+    nn_gxlow_CTR_Gpu_FlushDataCache(nn_gxlow_CTR_GetGpu(), process, address, size);
 }
 
 }

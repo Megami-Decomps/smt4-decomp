@@ -4,13 +4,6 @@
 
 #include "common.h"
 
-extern "C" {
-
-/* The byte at +6 of record `id` (0 when there is no record). */
-s32 table1bOr1cGetRecordValue(u32 id);
-
-} /* extern "C" */
-
 #ifdef __cplusplus
 extern "C" {
 #endif

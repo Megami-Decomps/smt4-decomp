@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001bc730(...);
+int nw_gfx_internal_NWCopyMtx34Reverse(...);
 int FUN_001bc768(...);
 int FUN_001c4504(int);
 int nn_math_ARMv6_MTX34MultAsm(...);
@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 
-/* Supplied declaration required: FUN_001bc730. */
+/* Supplied declaration required: nw_gfx_internal_NWCopyMtx34Reverse. */
 /* Supplied declaration required: FUN_001bc768. */
 /* Supplied declaration required: FUN_001c4504. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -87,7 +87,7 @@ void FUN_001b0928(int param_1,int param_2,int param_3,int param_4)
     }
     if ((char)puVar2[0x14] != '\0') {
       FUN_001bc768(puVar5 + 8,temp_v0 + 0x148,0x3bf02c1);
-      FUN_001bc730(puVar5 + 0x15,temp_v0 + 0x178);
+      nw_gfx_internal_NWCopyMtx34Reverse(puVar5 + 0x15,temp_v0 + 0x178);
       puVar5[0x21] = 0;
       puVar5[0x22] = 0;
       puVar5[0x23] = 0;
@@ -118,10 +118,10 @@ void FUN_001b0928(int param_1,int param_2,int param_3,int param_4)
       FUN_001bc768(puVar5 + 8,temp_v6,0x3bf02c1);
       temp_v1 = nw_gfx_TransformNode_InverseWorldMatrix(param_2);
       nn_math_ARMv6_MTX34MultAsm(temp_v5,temp_v1,temp_v0 + 0x178);
-      FUN_001bc730(puVar5 + 0x15,temp_v5);
+      nw_gfx_internal_NWCopyMtx34Reverse(puVar5 + 0x15,temp_v5);
       temp_v1 = nw_gfx_TransformNode_InverseWorldMatrix(param_2);
-      FUN_001bc730(puVar5 + 0x21,temp_v1);
-      FUN_001bc730(puVar5 + 0x2d,param_2 + 0x8c);
+      nw_gfx_internal_NWCopyMtx34Reverse(puVar5 + 0x21,temp_v1);
+      nw_gfx_internal_NWCopyMtx34Reverse(puVar5 + 0x2d,param_2 + 0x8c);
     }
     temp_v7 = 0;
     temp_v8 = 0;

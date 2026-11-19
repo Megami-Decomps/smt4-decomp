@@ -15,7 +15,7 @@ struct StatusSelectionRecord {
 };
 }
 extern "C" {
-u32 FUN_0029aafc();
+u32 countUnlockedSlots();
 u32 flagCountUnlockedSlots(u32 flags);
 void statusReplaceSkills(u16 *skills, u8 count);
 void FUN_002e2fb0(u16 *skills, u8 count);
@@ -38,7 +38,7 @@ void FUN_00258a24(s32 alternate)
         selection = reinterpret_cast<StatusSelectionRecord *>(data->unk18B0);
     u32 count = 8;
     if (primary->memberId < 0)
-        count = FUN_0029aafc();
+        count = countUnlockedSlots();
     else if (primary->memberId > 0 && data->unk1E66 != 6)
         count = flagCountUnlockedSlots(0);
     statusReplaceSkills(primary->skills, count);

@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_5_stack;
 
-extern int FUN_0035a42c(unsigned short, unsigned short);
+extern int classifyPair(unsigned short, unsigned short);
 extern int FUN_0035a454(char *, unsigned int, int, int);
 /* Supplied declaration required: FUN_0035a4e8. */
 
@@ -81,7 +81,7 @@ unsigned int FUN_0035a574(char *param_1,int *param_2,unsigned short *param_3,int
       else {
         temp_v3 = param_3[1];
       }
-      temp_v6 = FUN_0035a42c(temp_v0,temp_v3);
+      temp_v6 = classifyPair(temp_v0,temp_v3);
       if (temp_v6 < 1) goto LAB_0035a6f0;
       temp_v1 = FUN_0035a454(param_1,1,param_5,(int)temp_v12[0]);
       if ((temp_v15[0] - temp_v9 < temp_v1) && (temp_v12[0] != '\0')) break;

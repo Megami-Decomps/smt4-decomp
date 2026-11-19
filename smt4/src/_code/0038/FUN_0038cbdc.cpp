@@ -15,7 +15,7 @@ int legacyResourceIdRemap(...);
 int FUN_00352e6c(...);
 int FUN_00352f9c(int *, unsigned char [1024], int);
 int FUN_003531dc(...);
-int FUN_0038b174(...);
+int aocApplicationRecreatePrimaryRequest(...);
 int FUN_0038c224(void);
 
 /* stack frame of param_1: 10 slot(s), 37 byte(s) */
@@ -45,8 +45,8 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_002341d4. */
 /* Supplied declaration required: recordGetOptionalValue. */
 /* Supplied declaration required: FUN_00234330. */
-extern unsigned int FUN_0023445c(int);
-extern unsigned int FUN_00234468(int);
+extern unsigned int halfPair48LowByteA(int);
+extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: archiveFileReplaceHandle. */
 /* Supplied declaration required: stringFormatUnbounded. */
@@ -54,7 +54,7 @@ extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: FUN_00352e6c. */
 /* Supplied declaration required: FUN_00352f9c. */
 /* Supplied declaration required: FUN_003531dc. */
-/* Supplied declaration required: FUN_0038b174. */
+/* Supplied declaration required: aocApplicationRecreatePrimaryRequest. */
 /* Supplied declaration required: FUN_0038c224. */
 extern unsigned int FUN_003df36c(unsigned int);
 extern int nn_fnd_DateTime_DateToDays(int, int, int);
@@ -114,8 +114,8 @@ int * FUN_0038cbdc(int param_1)
     piVar6 = temp_v14;
     FUN_00352f9c(piVar6,temp_v7,0x400);
     temp_v17 = 1;
-    temp_v2 = FUN_00234468(temp_v0 + 0x28);
-    temp_v3 = FUN_0023445c(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00234330(&temp_v12,0,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 0x368) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x36c) = uStack_9c;
@@ -133,8 +133,8 @@ int * FUN_0038cbdc(int param_1)
     *(unsigned int *)(temp_v0 + 0x39c) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x3a0) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x3a4) = uStack_64;
-    temp_v2 = FUN_00234468(temp_v0 + 0x28);
-    temp_v3 = FUN_0023445c(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00234330(&temp_v12,2,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 0x3a8) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x3ac) = uStack_9c;
@@ -152,8 +152,8 @@ int * FUN_0038cbdc(int param_1)
     *(unsigned int *)(temp_v0 + 0x3dc) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x3e0) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x3e4) = uStack_64;
-    temp_v2 = FUN_00234468(temp_v0 + 0x28);
-    temp_v3 = FUN_0023445c(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00234330(&temp_v12,3,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 1000) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x3ec) = uStack_9c;
@@ -171,8 +171,8 @@ int * FUN_0038cbdc(int param_1)
     *(unsigned int *)(temp_v0 + 0x41c) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x420) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x424) = uStack_64;
-    temp_v2 = FUN_00234468(temp_v0 + 0x28);
-    temp_v3 = FUN_0023445c(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00234330(&temp_v12,5,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 0x428) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x42c) = uStack_9c;
@@ -201,7 +201,7 @@ int * FUN_0038cbdc(int param_1)
       temp_v14[2] = temp_v0 + 0xe3;
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
-    FUN_0038b174(temp_v0);
+    aocApplicationRecreatePrimaryRequest(temp_v0);
     sprintf((char *)temp_v8,(const char *)&LAB_0038d040);
     sprintf((char *)temp_v9,(const char *)&LAB_0038cfec);
     sprintf((char *)temp_v10,(const char *)&LAB_0038d04c);

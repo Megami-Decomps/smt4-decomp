@@ -22,7 +22,7 @@ extern "C" {
 
 void matrix44SetIdentity(void);
 void FUN_00514598(void);
-void FUN_001bc460(void);
+void gfxQuaternionWorkspaceBuildMatrix(void);
 
 /* Builds the 3x4 rotation matrix of a quaternion (translation zero) through the camera workspace. */
 void gfxQuaternionToMatrix34(Matrix34 *output, const Vector4 *quaternion)
@@ -30,7 +30,7 @@ void gfxQuaternionToMatrix34(Matrix34 *output, const Vector4 *quaternion)
     matrix44SetIdentity();
     g_vectorScratch.first.vector = *quaternion;
     FUN_00514598();
-    FUN_001bc460();
+    gfxQuaternionWorkspaceBuildMatrix();
     // Copy the first three floats of each of the workspace matrix's rows.
     output->row0 = *reinterpret_cast<const Vec3 *>(g_vectorScratch.matrix.rows[0]);
     output->row1 = *reinterpret_cast<const Vec3 *>(g_vectorScratch.matrix.rows[1]);

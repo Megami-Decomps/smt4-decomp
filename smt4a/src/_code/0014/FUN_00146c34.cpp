@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00146a74(void);
+int runtimeInitializeSharedHandle(void);
 int nnosInitAddressSpaceApplication(void);
 int nnosInitAddressSpaceHeap(void);
 int FUN_00146cbc(void);
@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned int DAT_005c1be8; /* 0x5c1be8 */
 
-/* Supplied declaration required: FUN_00146a74. */
+/* Supplied declaration required: runtimeInitializeSharedHandle. */
 /* Supplied declaration required: nnosInitAddressSpaceApplication. */
 /* Supplied declaration required: nnosInitAddressSpaceHeap. */
 /* Supplied declaration required: FUN_00146cbc. */
@@ -34,7 +34,7 @@ void FUN_00146c34(void)
   unsigned int temp_v0;
   unsigned int temp_v1 [2];
   
-  FUN_00146a74();
+  runtimeInitializeSharedHandle();
   FUN_00146cbc();
   nnosInitAddressSpaceHeap();
   nnosInitAddressSpaceApplication();

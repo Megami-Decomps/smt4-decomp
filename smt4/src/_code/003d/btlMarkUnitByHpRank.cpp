@@ -21,7 +21,7 @@ void btlMarkUnitByHpRank(BtlMainState **contextHandle, s32 rank)
         }
     }
     if (count >= rank) {
-        qsort(candidates, count, sizeof(BattleHpRank), reinterpret_cast<s32 (*)(const void *, const void *)>(FUN_0032ad24));
+        qsort(candidates, count, sizeof(BattleHpRank), reinterpret_cast<s32 (*)(const void *, const void *)>(callbackCompareDescendingState));
         btlUnitGet(contextHandle)->targets[candidates[rank - 1].selectionIndex] = 1;
     } else {
         btlUnitGet(contextHandle)->targets[candidates[0].selectionIndex] = 1;

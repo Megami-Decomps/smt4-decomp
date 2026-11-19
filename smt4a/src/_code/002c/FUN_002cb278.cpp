@@ -1,7 +1,7 @@
 #include "camp/CampStateA.h"
 
 extern "C" {
-u16 FUN_001643b4(u32 table, u32 image);
+u16 ifTouchRegionAddRequested(u32 table, u32 image);
 s32 objectApplyIfUnblocked(const void *controller);
 s32 uiSearchPrimary(const void *controller);
 
@@ -12,13 +12,13 @@ void FUN_002cb278(const void *controller, s32 mode)
     CampStateA *state = g_camp;
     if (objectApplyIfUnblocked(controller) > uiSearchPrimary(controller)) {
         if (mode == 0) {
-            state->touch.scrollRegions[0] = FUN_001643b4(20, 0x572);
-            state->touch.scrollRegions[1] = FUN_001643b4(20, 0x570);
-            state->touch.scrollRegions[2] = FUN_001643b4(20, 0x571);
+            state->touch.scrollRegions[0] = ifTouchRegionAddRequested(20, 0x572);
+            state->touch.scrollRegions[1] = ifTouchRegionAddRequested(20, 0x570);
+            state->touch.scrollRegions[2] = ifTouchRegionAddRequested(20, 0x571);
         } else {
-            state->touch.scrollRegions[0] = FUN_001643b4(20, 0x56d);
-            state->touch.scrollRegions[1] = FUN_001643b4(20, 0x56e);
-            state->touch.scrollRegions[2] = FUN_001643b4(20, 0x56f);
+            state->touch.scrollRegions[0] = ifTouchRegionAddRequested(20, 0x56d);
+            state->touch.scrollRegions[1] = ifTouchRegionAddRequested(20, 0x56e);
+            state->touch.scrollRegions[2] = ifTouchRegionAddRequested(20, 0x56f);
         }
     }
     if (mode == 0) {
@@ -26,16 +26,16 @@ void FUN_002cb278(const void *controller, s32 mode)
             if (index >= objectApplyIfUnblocked(controller)) {
                 break;
             }
-            state->touch.rowRegions[index] = FUN_001643b4(20, index + 0x40f);
+            state->touch.rowRegions[index] = ifTouchRegionAddRequested(20, index + 0x40f);
         }
-        state->touch.scrollRegions[3] = FUN_001643b4(20, 0x576);
-        state->touch.scrollRegions[4] = FUN_001643b4(20, 0x577);
+        state->touch.scrollRegions[3] = ifTouchRegionAddRequested(20, 0x576);
+        state->touch.scrollRegions[4] = ifTouchRegionAddRequested(20, 0x577);
     } else {
         for (s32 index = 0; index < uiSearchPrimary(controller); ++index) {
             if (index >= objectApplyIfUnblocked(controller)) {
                 return;
             }
-            state->touch.rowRegions[index] = FUN_001643b4(20, index + 0x40d);
+            state->touch.rowRegions[index] = ifTouchRegionAddRequested(20, index + 0x40d);
         }
     }
 }

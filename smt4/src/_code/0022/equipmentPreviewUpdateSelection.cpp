@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *);
-u32 FUN_003c2d54(Scene3aSlotInfo *);
+u32 uiStateHasAnyActiveFlag(Scene3aSlotInfo *);
 void FUN_002996d8(u32);
 s32 contentGetEntryKind(u32);
 void FUN_0029963c(u32, u16);
@@ -17,7 +17,7 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
 {
     s32 slot = scene->slot;
     u32 item = scene->lists[slot].items[flaggedValueHolderGetTotal(&scene->slotInfo[slot])].id;
-    if (FUN_003c2d54(&scene->slotInfo[scene->slot]) || scene->selectedItem != item) {
+    if (uiStateHasAnyActiveFlag(&scene->slotInfo[scene->slot]) || scene->selectedItem != item) {
         FUN_002996d8(0);
         scene->preview.requested = 0;
         scene->preview.ready = 0;

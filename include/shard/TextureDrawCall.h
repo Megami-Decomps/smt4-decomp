@@ -44,14 +44,4 @@ u32 FUN_00288498(void);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-u32 FUN_002886b0(unsigned arg0);
-
-#ifdef __cplusplus
-}
-#endif
-
 #endif

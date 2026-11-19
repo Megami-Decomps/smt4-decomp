@@ -16,7 +16,7 @@ void nodeListOwnerFree(void *owner);
 void effectEditorObjectDestroy(EffectTextRequest *request);
 void FUN_002f82ac(EffectTextRequest *request);
 EffectTextRequest *effMenuCreate(void *owner, u32 size);
-u32 FUN_00318cac(EffectTextRequest *request);
+u32 linkedObjGetValue(EffectTextRequest *request);
 u32 formattedTextCopyLabel(EffectTextRequest *request, EffectTextResult *result);
 void FUN_003241c4(EffectTextRequest *request, void *body);
 
@@ -28,7 +28,7 @@ void FUN_002430c8(u32 unused, u32 size, EffectTextResult *result)
         FUN_002f82ac(g_effectEditor.request);
         result->state = g_effectEditor.request->state;
         result->label = formattedTextCopyLabel(g_effectEditor.request, result);
-        result->extra = FUN_00318cac(g_effectEditor.request);
+        result->extra = linkedObjGetValue(g_effectEditor.request);
         FUN_003241c4(g_effectEditor.request, result->body);
         if (result->state == 1) {
             effectEditorObjectDestroy(g_effectEditor.request);

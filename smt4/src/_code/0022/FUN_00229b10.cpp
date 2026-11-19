@@ -8,7 +8,7 @@
 extern "C" {
 struct BattleEvent;
 extern BattleEvent *g_btlEvent;
-s32 FUN_0027e3b8(BattleEvent *);
+s32 isEntryUsable(BattleEvent *); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "BattleEvent *" is incompatible with parameter of type "int *")
 s32 btlEventSelectTrigger(BattleEvent *, s32, s32, s32);
 void battleSetActionKind(BtlMainState **);
 
@@ -26,7 +26,7 @@ void FUN_00229b10(BtlMainState **state, const ActionKindSelection *selection)
         u8 unk00[0x4B];
         u8 special;
     };
-    if (!FUN_0027e3b8(g_btlEvent)) {
+    if (!isEntryUsable(g_btlEvent)) {
         s32 unit = selection->entry->unitIndex;
         if ((u16)selection->command->kind != 11) {
             if (btlEventSelectTrigger(g_btlEvent, 3, unit, 0)) {

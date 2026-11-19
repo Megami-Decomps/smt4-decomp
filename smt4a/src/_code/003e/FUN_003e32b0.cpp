@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "code/Code003c_Smt4a.h"
 
 /* Record of one shop entry candidate (an id's table record). */
 struct ShopSlot {
@@ -32,8 +33,6 @@ s32 messageGetChoiceResult(void);
 s32 tableGroupFindEntryIndex(u32 table, const char *name);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 void sysPlaySe(s32 se);
-void FUN_003c3e14(void);
-void FUN_003c1060(void);
 void fillThreeWordsWithByte(s32 *words, u32 value);
 u32 dataTable01GetRecordWithAocOverride(u32 id);
 s32 gameFlagIsSet(u32 flag);
@@ -68,7 +67,7 @@ void FUN_003e32b0(NpcShopSelect *scene)
             scene->choices[count] = i;
             count++;
         }
-        FUN_003c1060();
+        messageMainRequestBanner();
 
         bool plain = scene->previousState == 5 || scene->previousState == 4 || scene->fromCancel != 0;
         s32 entry;
@@ -115,7 +114,7 @@ void FUN_003e32b0(NpcShopSelect *scene)
                 scene->state = 4;
                 scene->step = 0;
             }
-            FUN_003c3e14();
+            messageMainClearBannerRequest();
             sysPlaySe(0);
         }
         return;

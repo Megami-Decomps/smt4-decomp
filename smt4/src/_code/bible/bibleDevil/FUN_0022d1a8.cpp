@@ -51,7 +51,7 @@ extern BibleDevilRows g_bibleDevilRows;
 s32 FUN_0029e924(void *list);
 s32 rangeLimitMin(void *list);
 u32 FUN_0029ce60(u32 devilId, s32 column, s32 flag);
-BibleLayoutPoint *FUN_002bf4f0(void *layout, s32 id);
+BibleLayoutPoint *layoutFindTableEntry(void *layout, s32 id);
 
 /* The shown stat of the entry at `index`: 0 when the column has none. */
 static __inline u32 bibleStatOf(const BibleDevilEntry *entry, bool perDevil, s32 column)
@@ -111,7 +111,7 @@ void FUN_0022d1a8(BibleDevilWork *work)
         g_bibleDevilRows.color[i] = color;
 
         u32 textColor = BIBLE_COLOR_NONE;
-        BibleLayoutPoint *label = FUN_002bf4f0(work->layout, i + 0x42F);
+        BibleLayoutPoint *label = layoutFindTableEntry(work->layout, i + 0x42F);
         s32 labelX = label->x;
         s32 labelY = label->y;
         u32 shown = FUN_0029ce60(devilId, work->column, work->mode != 0);
@@ -122,7 +122,7 @@ void FUN_0022d1a8(BibleDevilWork *work)
             if (baseline < shown)
                 textColor = BIBLE_COLOR_HIGHER;
         }
-        BibleLayoutPoint *value2 = FUN_002bf4f0(work->layout, 0x4C6);
+        BibleLayoutPoint *value2 = layoutFindTableEntry(work->layout, 0x4C6);
         g_bibleDevilRows.x[i] = value2->x + labelX;
         g_bibleDevilRows.y[i] = value2->y + labelY;
         sprintf(g_bibleDevilRows.text[i], "%d", shown);

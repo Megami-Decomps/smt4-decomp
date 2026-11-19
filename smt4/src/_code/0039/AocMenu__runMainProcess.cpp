@@ -15,6 +15,7 @@
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "ui/UiControl.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "code/Code004d.h"
 
 extern "C" {
 
@@ -24,10 +25,9 @@ WindowStatusResult archiveFileReplaceHandle(void *file, const void *archive);
 void recordClearWideHandle(void *file);
 s32 flaggedEntryGetValueByState(FlaggedValueHolder *holder);
 void listCursorSetPosition(FlaggedValueHolder *holder, s32 position);
-void FUN_00233410(FlaggedValueHolder *holder); // declcheck: local (the header names the definition's private view of the list)
-s32 stateCounterBelowLimit(FlaggedValueHolder *holder, s32 offset);
+void sub10OwnerStart(FlaggedValueHolder *holder); // declcheck: local (the header names the definition's private view of the list)
 void recordResetIndex(AocTouchRows *rows);
-s32 FUN_002333f0(AocTouchRows *rows); // declcheck: local (the header names the definition's private view of the rows)
+s32 selectOwnerGetSelected(AocTouchRows *rows); // declcheck: local (the header names the definition's private view of the rows)
 s8 uiSubStateGetReady(const AocTouchRows *rows);
 void FUN_00233404(void);
 s32 ifTouchIsInitialSelection(s32 region);
@@ -39,7 +39,7 @@ RelativeDirectory *FUN_0023478c(AocMain *main, s32 index); // declcheck: local (
 void FUN_002869e8(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);
 void aocMenuSetButtonHelp(AocMenu *menu, u32 selection, s32 mode);
 s32 bgmGetStateById(u32 id);
-void FUN_00287328(u32 id);
+void bgmResumeOrRequestTrack(u32 id);
 u32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 s32 messageMainGetChoiceResult(void);
@@ -179,13 +179,13 @@ void AocMenu::runMainProcess()
         showDescription(this, text);
         panel.ready = 1;
         if (bgmGetStateById(AOC_MENU_BGM) != 1) {
-            FUN_00287328(AOC_MENU_BGM);
+            bgmResumeOrRequestTrack(AOC_MENU_BGM);
         }
         return;
     }
     case 1: {
         s32 previous = flaggedValueHolderGetTotal(contentList(this));
-        FUN_00233410(contentList(this));
+        sub10OwnerStart(contentList(this));
         touchRowsUpdate(&touchRows, contentList(this));
         _ZN13ObjBase3c2ef07vfunc0cEv(&panel, contentList(this));
         if (flaggedValueHolderGetTotal(contentList(this)) != previous) {
@@ -194,7 +194,7 @@ void AocMenu::runMainProcess()
         }
         if (uiSubStateGetReady(&touchRows) != 0) {
             /* A tap on the row under the cursor does what the A button would. */
-            if (stateCounterBelowLimit(contentList(this), FUN_002333f0(&touchRows)) == 0) {
+            if (stateCounterBelowLimit(contentList(this), selectOwnerGetSelected(&touchRows)) == 0) {
                 return;
             }
             if (!aocIsEntryIndexValid(main, selectedSlot(this))) {

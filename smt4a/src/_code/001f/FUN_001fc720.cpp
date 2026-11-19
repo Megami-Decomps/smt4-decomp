@@ -6,6 +6,7 @@
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int nkmEnemyFindById(void);
 int fadeObjectResetIfActive(...);
 int FUN_00288b20(...);
 
-int FUN_0014bd84(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
@@ -57,7 +57,7 @@ extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014bd84. */
+/* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -256,7 +256,7 @@ LAB_001fca00:
         sprintf((char *)temp_v20,"\x81H\x81H\x81H");
       }
       else {
-        temp_v14 = FUN_0014bd84(*(unsigned short *)(temp_v7 + 0x59c));
+        temp_v14 = aocIndexValueOrDefault(*(unsigned short *)(temp_v7 + 0x59c));
         sprintf((char *)temp_v20,"%s",temp_v14);
       }
       if ((*(char *)(temp_v28 + 0x98) == '\0') || (temp_v16 = temp_v3 <= temp_v11, temp_v11 < temp_v3)) {
@@ -475,7 +475,7 @@ LAB_001fd80c:
                 texDrawTableEntryAtStoredOrigin(2,0x12,0x504,*(short *)(temp_v7 + 8) + param_1,
                              *(short *)(temp_v7 + 10) + param_2,0xc6);
                 temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x50a));
-                temp_v14 = FUN_0014bd84(*(unsigned short *)(temp_v25 + 0xbc));
+                temp_v14 = aocIndexValueOrDefault(*(unsigned short *)(temp_v25 + 0xbc));
                 sprintf((char *)temp_v20,"%s",temp_v14);
                 VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) +
                                     param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -521,7 +521,7 @@ LAB_001fd80c:
                                0xb5,0);
                 }
                 temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x4f7));
-                temp_v14 = FUN_0014bd84(*(unsigned short *)(temp_v25 + 0xbc));
+                temp_v14 = aocIndexValueOrDefault(*(unsigned short *)(temp_v25 + 0xbc));
                 sprintf((char *)temp_v20,"%s",temp_v14);
                 VectorSignedToFloat(*(short *)(temp_v12 + 8) + temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat(*(short *)(temp_v12 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -607,7 +607,7 @@ LAB_001fcee8:
   }
   else {
     temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x40f));
-    temp_v14 = FUN_0014bd84(*(unsigned int *)(temp_v2 + 0x658));
+    temp_v14 = aocIndexValueOrDefault(*(unsigned int *)(temp_v2 + 0x658));
     sprintf((char *)temp_v20,"%s",temp_v14);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v11 + 10) + param_2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

@@ -15,9 +15,9 @@ unsigned int playerSlotHoldsEntry(unsigned int param_1,unsigned int param_2);
 
 void FUN_002355ac(u8 value);
 
-void FUN_00233818(Obj *obj);
+void releaseEntriesA(Obj *obj);
 
-int FUN_002333f0(Obj *obj);
+int selectOwnerGetSelected(Obj *obj);
 
 u32 FUN_0023c0d0(StateRef *ref, CounterBlock *block, s32 index, s32 delta);
 
@@ -29,7 +29,7 @@ void providerEntrySetVector(Owner *owner, u32 *vector);
 
 u32 NaviMain_GetPosX(void);
 
-void FUN_00233410(Obj *obj);
+void sub10OwnerStart(Obj *obj);
 
 void transitionConfigureAndReset(TransitionRecord *record,u32 first,u32 second,f32 value);
 

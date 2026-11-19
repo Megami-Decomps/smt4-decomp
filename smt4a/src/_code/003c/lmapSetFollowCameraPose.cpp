@@ -1,4 +1,5 @@
 #include "map/LmapViewGlobals.h"
+#include "util/TrigF32.h"
 
 struct MapFollowCameraOutput {
     u8 unk00[0x1c];
@@ -8,7 +9,6 @@ struct MapFollowCameraOutput {
 extern "C" {
 s32 FUN_003033d4();
 f32 libm_sinf(f32 radians);
-f32 libm_cosf(f32 radians);
 extern MapFollowCameraOutput DAT_005f19fc;
 
 void lmapSetFollowCameraPose()

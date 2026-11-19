@@ -15,7 +15,7 @@ int dataTableFileGetTable(...);
 int packageEntryGetFileCount(void);
 int packageEntryGetDirectory(void);
 int packageEntryIsLoaded(...);
-int FUN_002b486c(void);
+int aocPackageOwnerFreeTables(void);
 int FUN_0038e2ac(unsigned int);
 int FUN_00393620(unsigned int, unsigned int);
 int texTableEntryAttachStex(unsigned int, unsigned int);
@@ -156,7 +156,7 @@ extern unsigned char FUN_00387c68; /* 0x387c68 */
 /* Supplied declaration required: packageEntryGetFileCount. */
 /* Supplied declaration required: packageEntryGetDirectory. */
 /* Supplied declaration required: packageEntryIsLoaded. */
-/* Supplied declaration required: FUN_002b486c. */
+/* Supplied declaration required: aocPackageOwnerFreeTables. */
 /* Supplied declaration required: qsort. */
 extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
@@ -239,7 +239,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
   int *temp_v57;
   int *temp_v58;
   
-  FUN_002b486c();
+  aocPackageOwnerFreeTables();
   temp_v38 = &param_1->field_0x404;
   temp_v39 = &param_1->field_0x40c;
   temp_v40 = &param_1->field_0x414;

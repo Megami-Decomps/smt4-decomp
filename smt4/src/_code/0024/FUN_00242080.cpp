@@ -9,13 +9,12 @@ extern "C" {
 extern const char DAT_00400002;
 void FUN_002f82ac(EffectTextRequest *request);
 s32 formattedTextCopyLabel(EffectTextRequest *request, char *buffer);
-s32 FUN_00318cac(EffectTextRequest *request);
+s32 linkedObjGetValue(EffectTextRequest *request);
 void effectEditorObjectDestroy(EffectTextRequest *request);
 void nodeListOwnerFree(void *owner);
 void effMenuAddEntry(void *owner, const char *label, s32 kind, u32 value, s32 flags);
 EffectTextRequest *effMenuCreate(void *owner);
 LinkedItem *linkedFindItemByIndex(LinkedItems *items, s32 index);
-void effResourcePromoteReferences(LinkedItems *items, LinkedItem *item);
 void linkedItemsRedirectToReplacement(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
 void effBlockSetBlobB(EffBlock *block, const void *data, s32 size, u16 tag);
 
@@ -32,7 +31,7 @@ u32 FUN_00242080(u32 flags)
         FUN_002f82ac(g_effectEditor.request);
         result.state = g_effectEditor.request->state;
         result.kind = formattedTextCopyLabel(g_effectEditor.request, result.label);
-        result.index = FUN_00318cac(g_effectEditor.request);
+        result.index = linkedObjGetValue(g_effectEditor.request);
         if (result.state == 1) {
             effectEditorObjectDestroy(g_effectEditor.request);
             g_effectEditor.request = NULL;

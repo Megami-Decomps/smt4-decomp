@@ -88,7 +88,7 @@ extern int panelIsMissingOrFlagClear(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_003c3e14. */
+/* Supplied declaration required: messageMainClearBannerRequest. */
 /* Supplied declaration required: eventTexAddHandle. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: titleSetSlotValueState2. */
@@ -144,7 +144,7 @@ unsigned int FUN_00214324(void)
           asdSequenceRequest(4,&temp_v8,0x20);
           puVar2 = g_npcRoom;
           if (g_npcRoom != (unsigned int *)0x0) {
-            FUN_003c3e14();
+            messageMainClearBannerRequest();
             if (*(short *)(puVar2 + 0x40) == 0x22) {
               soundChannelStopAll(0xf);
               bgmFadeOut(0x3c);

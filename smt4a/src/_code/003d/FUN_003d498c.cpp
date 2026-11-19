@@ -7,7 +7,7 @@
 #include "addon/AocSystemA.h"
 extern "C" {
 void FUN_003dea6c(u32 id, s32 enabled, s32 flags);
-void *FUN_0046c0f8(AocSystemA *system, u32 id);
+void *dataSetFindRequestedFileByKey(AocSystemA *system, u32 id);
 void *asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 window, s32 mode, u32 color, u32 flags, s32 type, const void *data, s32 entry);
 s32 partyEntryGetByte1(u32 id);
@@ -24,7 +24,7 @@ void FUN_003d498c(u32 id, u32 mode)
     if (!id)
         return;
     FUN_003dea6c(id, 1, 1);
-    void *messages = FUN_0046c0f8(g_aocSystem, id);
+    void *messages = dataSetFindRequestedFileByKey(g_aocSystem, id);
     if (messages) {
         work->detailMessages = messages;
         work->messageOwnership.addonOwned = 1;

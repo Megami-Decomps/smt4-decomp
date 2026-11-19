@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "map/lmapMain.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "map/MapSceneAccess.h"
 struct LinkHolder;
 
 struct FusionSavedSelection {
@@ -46,7 +47,6 @@ void FUN_002a7b74();
 void uniteStartOrQueueRequest(s32 mode);
 void FUN_0020b908(s32 id, s32 enabled);
 LmapScript *lmapSceneGetScript();
-void FUN_003857b4(u8 value);
 void linkHolderClearFlag(LinkHolder *holder);
 
 // Validate the saved ingredients and populate the special-fusion recipe/result lists.
@@ -88,7 +88,7 @@ void fusionPrepareSpecialRecipeList()
     FUN_0020b908(0x26, 1);
     LmapScript *script = lmapSceneGetScript();
     if (script != NULL) {
-        FUN_003857b4(1);
+        lmapSceneSetUnk134(1);
         linkHolderClearFlag(reinterpret_cast<LinkHolder *>(script));
     }
 }

@@ -40,7 +40,7 @@ u32 FUN_00270e34(void)
     __2sprintf(messagePath, DAT_004044d4, event->event, event->event);
     void *messages;
     if (aocPackageGrantsItem(g_aocSystem, event->event, 0) != 0) {
-        map->scriptData = FUN_00289de4(g_aocSystem, event->event, 0);
+        map->scriptData = aocDrawText7(g_aocSystem, event->event, 0);
         messages = aocBufferQueueDisplay(g_aocSystem, event->event, 0);
         map->messageData = messages;
         if (map->scriptData == NULL || messages == NULL) {

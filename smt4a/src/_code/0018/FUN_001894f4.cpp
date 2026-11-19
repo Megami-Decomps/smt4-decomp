@@ -14,7 +14,7 @@ extern signed char DAT_005c1494; /* 0x5c1494 */
 extern int DAT_005c1498; /* 0x5c1498 */
 extern unsigned int DAT_005c1fd0; /* 0x5c1fd0 */
 
-extern int FUN_001a0d70(unsigned int *);
+extern int handleCloseAndReset(unsigned int *);
 extern unsigned int FUN_001a0e10(void);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -33,7 +33,7 @@ void FUN_001894f4(void)
   }
   if ((DAT_005c1498 == 0) && (DAT_005c1494 != '\0')) {
     DAT_005c1494 = '\0';
-    temp_v1 = FUN_001a0d70(&DAT_005c1fd0);
+    temp_v1 = handleCloseAndReset(&DAT_005c1fd0);
     if (-1 < temp_v1) {
       DAT_005b479c = 0;
     }

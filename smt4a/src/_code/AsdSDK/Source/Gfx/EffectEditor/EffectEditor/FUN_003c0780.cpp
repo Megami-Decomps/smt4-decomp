@@ -6,7 +6,7 @@ extern "C" {
 
 int padButtonIsPressed(...);
 int memAlloc(int, int, int, int, int, int);
-int FUN_001bc460(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_00200bcc(unsigned char *);
 int FUN_00202178(int);
 int effEditorNodeChainApply(unsigned char *);
@@ -78,7 +78,7 @@ extern float DAT_00647358; /* 0x647358 */
 
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_001bc460. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
@@ -193,7 +193,7 @@ u32 FUN_003c0780(EffectEditorSnapshot *record, s32 param_2)
   DAT_006472e0 = record->parameters.rotation.y;
   DAT_006472e4 = record->parameters.rotation.z;
   DAT_006472e8 = record->parameters.rotation.w;
-  FUN_001bc460();
+  gfxQuaternionWorkspaceBuildMatrix();
   temp_v10 = DAT_00647354;
   temp_v8 = DAT_00647350;
   temp_v6 = DAT_0064734c;

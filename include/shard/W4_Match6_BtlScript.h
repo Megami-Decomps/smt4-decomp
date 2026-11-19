@@ -9,7 +9,7 @@
 #define BTL_UNIT_FLAG_BUSY_B 0x1000
 
 extern "C" {
-u8 FUN_003bf570(int value);
+u8 isOutsideRange4To53(int value);
 }
 
 #endif

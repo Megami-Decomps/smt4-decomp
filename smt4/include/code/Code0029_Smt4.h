@@ -22,7 +22,7 @@ void FUN_00295214(u8 value);
 
 void FUN_0029c4e4(u32 value, int copy);
 
-void FUN_00292bcc(Obj *obj, u32 value);
+void obj48Arm(Obj *obj, u32 value);
 
 void FUN_0029c424(u8 value);
 

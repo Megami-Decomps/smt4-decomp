@@ -19,7 +19,7 @@ extern "C" {
 extern CallbackState g_callbackState; /* 0x589284 */
 extern u8 DAT_005b4824;               /* 0x5b4824 */
 
-s32 FUN_001a0ff4(void *handle, void *buffer, u32 size, u32 a, u32 b, u8 *busy);
+s32 nn_dsp_CTR_DSP_LoadComponent(void *handle, void *buffer, u32 size, u32 a, u32 b, u8 *busy);
 
 /* Starts the callback job on the state's handle with its buffer unless it is busy; marks it started on success. */
 void FUN_00159030(void)
@@ -31,7 +31,7 @@ void FUN_00159030(void)
     g_callbackState.valueA = 0xFF;
     g_callbackState.valueB = 0xFF;
     if (g_callbackState.handle != NULL && g_callbackState.busy == 0) {
-        result = FUN_001a0ff4(g_callbackState.handle, g_callbackState.buffer, g_callbackState.bufferSize, 0xFF, 0xFF,
+        result = nn_dsp_CTR_DSP_LoadComponent(g_callbackState.handle, g_callbackState.buffer, g_callbackState.bufferSize, 0xFF, 0xFF,
                               &g_callbackState.busy);
     } else {
         result = 0xC8A0A7FC;

@@ -5,7 +5,7 @@ struct MovieRenderState;
 
 extern "C" {
 s32 gxIsStereoscopic3dEnabled(void);
-void FUN_00423a1c(MovieRenderState *state, s32 screen);
+void asdGxUpdateActiveGroupSurface(MovieRenderState *state, s32 screen);
 extern MovieRenderState DAT_00617e70;
 
 // Dispatch movie rendering to screen zero or one when the render mode permits it.
@@ -15,9 +15,9 @@ void mobiclipRenderCurrentScreen(void)
         if (g_renderCtx->unk052C != 1) {
             return;
         }
-        FUN_00423a1c(&DAT_00617e70, 1);
+        asdGxUpdateActiveGroupSurface(&DAT_00617e70, 1);
     } else {
-        FUN_00423a1c(&DAT_00617e70, 0);
+        asdGxUpdateActiveGroupSurface(&DAT_00617e70, 0);
     }
 }
 }

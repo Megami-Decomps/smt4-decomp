@@ -5,7 +5,7 @@
 
 extern "C" {
 void ifTouchRegionRemove(void);
-u16 FUN_001643b4(u32, s32);
+u16 ifTouchRegionAddRequested(u32, s32);
 void __aeabi_memset4(void *, u32, s32);
 
 struct RosterCountView { u8 prefix[0x1CA3]; u8 count; };
@@ -25,16 +25,16 @@ void FUN_0023e908(void)
     touchPanelClearRegions(panel);
     if (panel->alternate) {
         for (s32 i = 0; i < 4; ++i) {
-            panel->touch.characters[i] = FUN_001643b4(0x11, i + 0x57);
+            panel->touch.characters[i] = ifTouchRegionAddRequested(0x11, i + 0x57);
             ++panel->touch.count;
         }
         for (s32 i = 0; i < reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count; ++i) {
-            panel->touch.demons[i] = FUN_001643b4(0x11, i + 0x5B);
+            panel->touch.demons[i] = ifTouchRegionAddRequested(0x11, i + 0x5B);
             ++panel->touch.count;
         }
     } else {
         for (s32 i = 0; i < 4; ++i) {
-            panel->touch.characters[i] = FUN_001643b4(0x11, i + 0x2D);
+            panel->touch.characters[i] = ifTouchRegionAddRequested(0x11, i + 0x2D);
             ++panel->touch.count;
         }
         s32 visibleCount = 12;
@@ -45,11 +45,11 @@ void FUN_0023e908(void)
             visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count - 12;
         }
         for (s32 i = 0; i < visibleCount; ++i) {
-            panel->touch.demons[i] = FUN_001643b4(0x11, i + 0x31);
+            panel->touch.demons[i] = ifTouchRegionAddRequested(0x11, i + 0x31);
             ++panel->touch.count;
         }
-        panel->touch.previousPage = FUN_001643b4(0x11, 0x24);
-        panel->touch.nextPage = FUN_001643b4(0x11, 0x25);
+        panel->touch.previousPage = ifTouchRegionAddRequested(0x11, 0x24);
+        panel->touch.nextPage = ifTouchRegionAddRequested(0x11, 0x25);
         panel->touch.count += 2;
     }
 }

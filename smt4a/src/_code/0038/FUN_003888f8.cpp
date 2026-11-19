@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code003c_Smt4a.h"
 
 struct ShopSelectionResult {
     /* 0x000 */ u8 unk000[0x194];
@@ -7,7 +8,6 @@ struct ShopSelectionResult {
 extern "C" {
 ShopSelectionResult *shopGetResult();
 s32 scrGetCommandFrame();
-void FUN_003c1060();
 s32 selector16038Pick(ShopSelectionResult *shop);
 void questCenterShowDisplayMessage(void *selection, s32 result);
 void *shopResultGetSelection(ShopSelectionResult *shop);
@@ -18,7 +18,7 @@ extern "C" void FUN_003888f8()
 {
     void *selection = shopResultGetSelection(shopGetResult());
     if (scrGetCommandFrame() == 0) {
-        FUN_003c1060();
+        messageMainRequestBanner();
     }
     questCenterShowDisplayMessage(selection, selector16038Pick(shopGetResult()));
 }

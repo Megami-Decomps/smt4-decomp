@@ -15,7 +15,7 @@ void stateSetterConstruct(NameFormStateA *form, s32 mode);
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 argument, void *draw, void *unused, void *work,
                    u32 parent);
 u32 nameEntryUpdateTask(void);
-void FUN_00316108(void);
+void nameWorkMarkDone(void);
 void nameDrawIfVisible(void);
 void nameFormUpdateCallback(void);
 
@@ -30,7 +30,7 @@ void nameMainCreateJobs(const u32 *mode, u32 unused)
     } else {
         stateSetterConstruct(&work->form, static_cast<s8>(*mode));
     }
-    work->state.task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00532f70), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)nameEntryUpdateTask), reinterpret_cast<AsdProcFunc>((void *)FUN_00316108), reinterpret_cast<u32>(g_name.work));
+    work->state.task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00532f70), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)nameEntryUpdateTask), reinterpret_cast<AsdProcFunc>((void *)nameWorkMarkDone), reinterpret_cast<u32>(g_name.work));
     /* Both modes use the same draw priorities here (IV's twin gives mode 1 its own). */
     if (mode != NULL && *mode == 1) {
         taskCreateDraw(DAT_00532f80, 0x85, 1, 0, (void *)nameDrawIfVisible, 0, g_name.work, work->state.task);

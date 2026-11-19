@@ -4,6 +4,7 @@
 #include "code/Code0038.h"
 #include "ui/UiSpriteApi.h"
 #include "game/GameGlobalsRef.h"
+#include "map/MapSceneAccess.h"
 
 class StatusScreenModel {
 public:
@@ -47,7 +48,7 @@ void FUN_0022e774(void)
                 position.y = game->statusModelPosition[1] + 1000.0f;
                 position.z = game->statusModelPosition[2];
                 linkHolderRunAll((StatusScreenModel *)game->unk2034, &position);
-                FUN_003857b4(1);
+                lmapSceneSetUnk134(1);
             }
         } else if (game->unk2034) {
             resourceOwnerReleaseAll((StatusScreenModel *)game->unk2034);

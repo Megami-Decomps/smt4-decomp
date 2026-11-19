@@ -34,7 +34,7 @@ void gridNavigationConfigure(void *list, s32 count, s32 columns, s32 a, s32 b, s
 void scrollListSetSelectionTracked(void *list, s32 value);
 void ifTouchRegionRemove(void);
 s32 objectApplyIfUnblocked(void *list);
-s16 FUN_001643b4(s32 category, s32 index);
+s16 ifTouchRegionAddRequested(s32 category, s32 index);
 
 /* Rebuilds the unite menu's entry list from SearchTable.tbb (listing every record up to the first
  * one the player has not unlocked) and, when asked, re-registers the touch regions. */
@@ -83,11 +83,11 @@ void FUN_0028a2e8(s32 resetTouch)
         ifTouchRegionRemove();
         ifTouchRegionRemove();
         for (i = 0; i < objectApplyIfUnblocked(list) && i < 8; i++) {
-            menu->touchIds[i] = FUN_001643b4(0x1A, 0xA9 + i);
+            menu->touchIds[i] = ifTouchRegionAddRequested(0x1A, 0xA9 + i);
         }
-        menu->prevTouchId = FUN_001643b4(0x1A, 0x1F0);
-        menu->backTouchId = FUN_001643b4(0x1A, 0x1EE);
-        menu->nextTouchId = FUN_001643b4(0x1A, 0x1EF);
+        menu->prevTouchId = ifTouchRegionAddRequested(0x1A, 0x1F0);
+        menu->backTouchId = ifTouchRegionAddRequested(0x1A, 0x1EE);
+        menu->nextTouchId = ifTouchRegionAddRequested(0x1A, 0x1EF);
     }
 }
 

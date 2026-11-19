@@ -27,7 +27,7 @@ typedef struct AocBootGlobals {
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void FUN_0027e9c0(void *obj);
+void flagObjAdvance(void *obj);
 #ifdef __cplusplus
 }
 #endif

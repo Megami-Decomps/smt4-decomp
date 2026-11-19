@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "map/MapSpawn.h"
 #include "game/GameState.h"
+#include "code/Code0013.h"
 
 extern "C" {
 
@@ -89,7 +90,6 @@ extern int dataTableGetRecord23(void);
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: FUN_002c29d8. */
-extern int FUN_002c2a04(unsigned int);
 
 
 void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
@@ -252,11 +252,11 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     *(unsigned int *)(temp_v2 + 0x28) = 0;
     mapMainEnterScene();
     FUN_0027d0ec();
-    temp_v2 = FUN_002c2a04(0);
+    temp_v2 = pairedAvailabilityGetState(0);
     if (temp_v2 == 3) {
       FUN_002c29d8(0,10,0xff);
     }
-    temp_v2 = FUN_002c2a04(1);
+    temp_v2 = pairedAvailabilityGetState(1);
     if (temp_v2 != 3) {
       return;
     }
@@ -282,11 +282,11 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_00271010(0);
     *(unsigned int *)(temp_v2 + 0x24) = 0x15;
     *(unsigned int *)(temp_v2 + 0x28) = 0;
-    temp_v2 = FUN_002c2a04(0);
+    temp_v2 = pairedAvailabilityGetState(0);
     if (temp_v2 == 3) {
       FUN_002c29d8(0,10,0xff);
     }
-    temp_v2 = FUN_002c2a04(1);
+    temp_v2 = pairedAvailabilityGetState(1);
     if (temp_v2 != 3) {
       return;
     }

@@ -61,7 +61,7 @@ extern unsigned char LAB_004b2e4c; /* 0x4b2e4c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bd84(unsigned short);
+extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -279,7 +279,7 @@ LAB_004b1d78:
             temp_v17 = 0x72e027ff;
           }
           temp_v24 = (int)asdTMTexTableEntryAt(temp_v22,0xdf);
-          temp_v10 = FUN_0014bd84(*(unsigned short *)(temp_v32 + 0xa4));
+          temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v32 + 0xa4));
           sprintf((char *)temp_v12,(const char *)&LAB_004b1dc8,temp_v10);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v24 + 10) + temp_v5,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -361,7 +361,7 @@ LAB_004b1d78:
         temp_v10 = 0x72e027ff;
       }
       temp_v24 = (int)asdTMTexTableEntryAt(temp_v22,0xfe);
-      temp_v2 = FUN_0014bd84(*(unsigned short *)(temp_v1 + 0x76a4));
+      temp_v2 = aocIndexValueOrDefault(*(unsigned short *)(temp_v1 + 0x76a4));
       sprintf((char *)temp_v12,(const char *)&LAB_004b25b0,temp_v2);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v24 + 10) + param_3,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -433,7 +433,7 @@ LAB_004b1d78:
             temp_v17 = 0xff;
           }
           temp_v24 = (int)asdTMTexTableEntryAt(temp_v22,0xdf);
-          temp_v10 = FUN_0014bd84(*(unsigned short *)(temp_v25 + 0x34));
+          temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v25 + 0x34));
           sprintf((char *)temp_v12,(const char *)&LAB_004b25b0,temp_v10);
           VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v24 + 10) + param_3
                               ,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -512,7 +512,7 @@ LAB_004b1d78:
       temp_v10 = 0x9b9b9bff;
     }
     temp_v8 = (int)asdTMTexTableEntryAt(temp_v22,0xfe);
-    temp_v2 = FUN_0014bd84(*(unsigned short *)(temp_v1 + 0x34));
+    temp_v2 = aocIndexValueOrDefault(*(unsigned short *)(temp_v1 + 0x34));
     sprintf((char *)temp_v12,(const char *)&LAB_004b2e4c,temp_v2);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_3,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

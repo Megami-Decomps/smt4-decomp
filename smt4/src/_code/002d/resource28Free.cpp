@@ -1,0 +1,42 @@
+#include "common.h"
+
+extern "C" {
+
+int resourceCollectionDestroy(void);
+int bufferObjDestroy(u32 obj);
+int objectBufferFree(void);
+int asdMemFree(int ptr);
+
+typedef struct Sub {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+} Sub;
+
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ Sub *sub;
+    /* 0x2C */ int unk2C;
+    /* 0x30 */ int unk30;
+} Obj;
+
+void resource28Free(Obj *obj)
+{
+    Sub *sub;
+
+    if (obj->unk2C != 0) {
+        resourceCollectionDestroy();
+    }
+    if (obj->sub != NULL) {
+        sub = obj->sub;
+        bufferObjDestroy(sub->unk10);
+        bufferObjDestroy(sub->unk14);
+        asdMemFree((int)sub);
+    }
+    if (obj->unk30 != 0) {
+        objectBufferFree();
+    }
+    asdMemFree((int)obj);
+}
+
+} /* extern "C" */

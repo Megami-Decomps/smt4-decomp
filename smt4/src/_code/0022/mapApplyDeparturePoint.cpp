@@ -1,8 +1,8 @@
 #include "shard/W5_W5Match2_MapDepartureRecord.h"
+#include "map/mapDepart.h"
 extern "C" {
 u32 mapGetDepartureIndex(void);
 void mapDepartSetTarget(s32 first,s32 second,s32 third);
-void mapSetDepartureIndex(s32 value);
 u32 FUN_0028527c(s32 value);
 extern MapDepartureRecord DAT_00447f40[];
 /* Select the current map departure coordinates and clear the pending transition. */

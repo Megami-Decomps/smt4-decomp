@@ -28,8 +28,6 @@ s32 FUN_0028cfbc(Widget *widget);
 
 void FUN_00283f30(Dest *dest, int withSource);
 
-u32 FUN_002886c8(u32 questId);
-
 s32 FUN_0028299c(Owner *owner);
 
 void FUN_00287188(CampScreen *screen);

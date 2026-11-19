@@ -4,7 +4,7 @@ extern "C" {
 
 int effBehaviorRun(...);
 int FUN_002e7278(...);
-int FUN_003024d0(...);
+int effObjectParticleInitMotion(...);
 
 typedef struct Item {
     /* 0x00 */ u8 unk00[0x10];
@@ -50,7 +50,7 @@ void FUN_00313824(Obj *obj)
         if ((obj->type == 3) && (i = 0, 0 < count)) {
             do {
                 if (item->unk10 == 0) {
-                    FUN_003024d0(obj, record);
+                    effObjectParticleInitMotion(obj, record);
                 }
                 i = i + 1;
                 item = item + 1;

@@ -10,7 +10,7 @@ extern "C" {
 extern s32 g_asdLightCount; /* 0x4dad80 */
 extern u32 g_asdModelSlotArray3; /* 0x464bb4 */
 s32 sceneQueryFalse(void);
-void FUN_0013290c(u32 a, u32 b);
+void gfxFlushLightRenderCommands(u32 a, u32 b); // declcheck: local (the shared declaration in code/Code0013_Smt4.h does not compile here: argument of type "u32" is incompatible with parameter of type "LightRenderOwner *")
 void FUN_002c3a14(RenderCtx *scene);
 void registerBlockRequestGroups(u32 groups);
 
@@ -22,7 +22,7 @@ void FUN_0011891c(void)
     }
     const u32 *flags = g_gfxSettings.slotFlags;
     if (g_asdLightCount > 0 || (flags[0] & 1) != 0) {
-        FUN_0013290c(g_asdModelSlotArray3, g_gfxSettings.unk28);
+        gfxFlushLightRenderCommands(g_asdModelSlotArray3, g_gfxSettings.unk28);
         if (sceneQueryFalse() != 0) {
             registerBlockRequestGroups(0x3fff);
         }

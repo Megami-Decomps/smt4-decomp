@@ -26,7 +26,7 @@ void FUN_00232848(void);
 void FUN_00233240(void *, u32);
 void messageMainFinishWindow(void);
 void ifTouchRegionClearAll(MenuView *);
-void FUN_00233818(Obj55ca08 *);
+void releaseEntriesA(Obj55ca08 *); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "playerSlotHoldsEntry" has "C" linkage)
 void ifTouchRegionRemove(void);
 s32 inputIsQuestCancelPressed(void);
 void FUN_0022fa2c(SelectMenu *);
@@ -118,7 +118,7 @@ void FUN_003a3c7c(SelectMenu *menu)
             work->action = 2;
         }
         ifTouchRegionClearAll(work->handler);
-        FUN_00233818(reinterpret_cast<Obj55ca08 *>(work->controls));
+        releaseEntriesA(reinterpret_cast<Obj55ca08 *>(work->controls));
         for (s32 i = 0; i < work->touchCount; ++i)
             ifTouchRegionRemove();
         work->phase = 1;

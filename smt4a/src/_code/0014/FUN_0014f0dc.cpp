@@ -3,7 +3,7 @@
 #include "status/StatusCamera.h"
 
 extern "C" {
-void FUN_0018aa5c(Matrix34Data *matrix, const Vec3 *eye, const Vec3 *up, const Vec3 *target);
+void nn_math_ARMv6_MTX34LookAtC_FAST(Matrix34Data *matrix, const Vec3 *eye, const Vec3 *up, const Vec3 *target);
 void FUN_00162330(Matrix34Data *destination, const Matrix34Data *source);
 void memCopyWords(const void *source, void *destination, u32 byteCount);
 void nn_math_ARMv6_MTX44TransposeAsm(Matrix44 *destination, const Matrix44 *source);
@@ -48,7 +48,7 @@ void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target
     if (alignment == 1.0f || alignment == -1.0f) {
         return;
     }
-    FUN_0018aa5c(&view->view, &view->eye, &view->up, &view->target);
+    nn_math_ARMv6_MTX34LookAtC_FAST(&view->view, &view->eye, &view->up, &view->target);
     FUN_00162330(&view->normal, &view->view);
     memCopyWords(&view->view, &view->expanded, 0x30);
     view->expanded.values[12] = 0.0f;

@@ -1,4 +1,5 @@
 #include "status/StatusCamera.h"
+#include "util/TrigF32.h"
 
 /* The point the unite camera orbits: its position, look-at point, up vector and angles. */
 struct UniteCameraTarget {
@@ -19,7 +20,6 @@ struct UniteCamera {
 extern "C" {
 extern UniteCamera *g_uniteCamera;
 f32 libm_sinf(f32 angle);
-f32 libm_cosf(f32 angle);
 void FUN_0014f0dc(UniteCamera *camera, UniteCameraTarget *target, const Vec3 *eye, const Vec3 *lookAt);
 void FUN_00280070(UniteCamera *camera, s32 mode, Vec3 up);
 

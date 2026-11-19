@@ -8,7 +8,7 @@ extern "C" {
 
 int btlShowListedActionMessage(...);
 int FUN_00227d18(void);
-int FUN_00227d70(...);
+int resolveBattleValue(...);
 int btlEffectFindSlotId(...);
 int FUN_00227fac(void);
 int FUN_002280b0(...);
@@ -127,7 +127,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 extern int valueRangeSameSide(int, int);
 /* Supplied declaration required: btlShowListedActionMessage. */
 /* Supplied declaration required: FUN_00227d18. */
-/* Supplied declaration required: FUN_00227d70. */
+/* Supplied declaration required: resolveBattleValue. */
 extern int btlFindEffectValueByNamePrefix(int);
 /* Supplied declaration required: btlEffectFindSlotId. */
 extern int FUN_00227ecc(int, unsigned int);
@@ -805,7 +805,7 @@ LAB_003cd944:
       temp_v12 = FUN_002280b0(DAT_00435d18);
       temp_v12 = temp_v12 + temp_v7;
       temp_v5 = DAT_00435d18;
-      FUN_00227d70(DAT_00435d18,temp_v68);
+      resolveBattleValue(DAT_00435d18,temp_v68);
       if (temp_v70 == 1) {
         temp_v15 = 2;
       }
@@ -854,7 +854,7 @@ LAB_003cd944:
         }
         if ((temp_v18 != 0 && temp_v3 != 6) && temp_v3 != 7) {
           temp_v5 = DAT_00435d18;
-          FUN_00227d70(DAT_00435d18,temp_v68);
+          resolveBattleValue(DAT_00435d18,temp_v68);
           FUN_00229a3c(temp_v5 + temp_v69,param_2,0,0x20,1);
         }
       }
@@ -880,7 +880,7 @@ LAB_003cd944:
           temp_v13 = FUN_002280b0(DAT_00435d18);
           temp_v13 = temp_v13 + temp_v7;
           temp_v8 = DAT_00435d18;
-          FUN_00227d70(DAT_00435d18,0);
+          resolveBattleValue(DAT_00435d18,0);
           FUN_002551ac(0,param_2,temp_v37,0,temp_v39,0xffffffff,0xffffffff,
                        *(unsigned short *)((int)param_2 + *(short *)(temp_v37 + 0x62) * 10 + 0x9d4),
                        (int)*(short *)(temp_v5 + 0x1b6),0,0,0,0,1,0,temp_v8 + temp_v69,temp_v13,temp_v12,
@@ -899,7 +899,7 @@ LAB_003cd944:
       }
       else {
         temp_v5 = DAT_00435d18;
-        FUN_00227d70(DAT_00435d18,temp_v68);
+        resolveBattleValue(DAT_00435d18,temp_v68);
         temp_v8 = *(int *)(*param_1 + 0x1e98) + temp_v43 * 4;
         if (temp_v8 != 0) {
           temp_v5 = temp_v5 + *(int *)(temp_v8 + 0x5c) + temp_v30 + temp_v7 + 10;
@@ -1219,7 +1219,7 @@ LAB_003ce96c:
   }
   if (temp_v18 == 1) {
     temp_v5 = DAT_00435d18;
-    FUN_00227d70(DAT_00435d18,0);
+    resolveBattleValue(DAT_00435d18,0);
     btlShowListedActionMessage(param_1,param_2,param_8,temp_v5,0);
     temp_v5 = *param_1;
     temp_v7 = (int)*(short *)(*(int *)(temp_v5 + 0x1e98) + param_8 * 0x114 + 0x60);

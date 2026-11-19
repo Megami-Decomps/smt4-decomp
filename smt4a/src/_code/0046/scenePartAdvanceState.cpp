@@ -2,6 +2,7 @@
 #include "common.h"
 #include "code/Code0013.h"
 #include "ui/UiControl.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct ScenePart00469e1c {
 
 s32 scrRunOpcodesStub(u32 handle);
 void titleSetSlotValueState2(s32 index, s32 value);
-void FUN_003c1060(void);
 
 /* Once the handle reports 2, picks the next state (0x10 for kinds 1 and 2, else 3 and resets finished slots), then refreshes. */
 void scenePartAdvanceState(ScenePart00469e1c *part)
@@ -39,7 +39,7 @@ void scenePartAdvanceState(ScenePart00469e1c *part)
         }
     }
     messageSetMode(0);
-    FUN_003c1060();
+    messageMainRequestBanner();
 }
 
 } /* extern "C" */

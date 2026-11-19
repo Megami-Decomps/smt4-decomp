@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SkillFlags.h"
+#include "code/Code003f.h"
 
 /* Table 14 record: rank id and the odds (percent) of shifting the rank. */
 struct RankShiftRecord {
@@ -14,7 +15,6 @@ struct SkillSet {
 };
 
 extern "C" {
-RankShiftRecord *dataTable14Sub0GetRecord(u8 rank);
 u32 randNextInRange(int limit);
 u8 flagBitIsSet(u32 bit);
 
@@ -39,7 +39,7 @@ u32 FUN_0033be90(const SkillSet *current, s32 slot, u16 devilId)
         return 0;
     }
     u8 rank = dataTable06Sub1GetRecord(current->ids[slot])->flags & 0x1F;
-    const u8 *weights = dataTable14Sub0GetRecord(rank)->weights;
+    const u8 *weights = static_cast<RankShiftRecord *>(dataTable14Sub0GetRecord(rank))->weights;
     u8 bucket = 0;
     u8 total = 0;
     u32 roll = randNextInRange(99);

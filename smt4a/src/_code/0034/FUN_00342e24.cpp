@@ -149,7 +149,7 @@ unsigned int FUN_00342e24(int param_1)
       return 3;
     }
 code_r0x00343274:
-    FUN_003c1060();
+    messageMainRequestBanner();
     *(unsigned int *)(param_1 + 0xfc) = 0xffffffff;
     *(unsigned int *)(param_1 + 0xf8) = 2;
     *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;

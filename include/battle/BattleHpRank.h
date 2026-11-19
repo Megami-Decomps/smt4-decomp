@@ -8,5 +8,5 @@ struct BattleHpRank {
 };
 typedef char BattleHpRankSizeCheck[sizeof(BattleHpRank) == 8 ? 1 : -1];
 
-extern "C" s32 FUN_0032ad24(const BattleHpRank *earlier, const BattleHpRank *later);
+extern "C" s32 callbackCompareDescendingState(const BattleHpRank *earlier, const BattleHpRank *later);
 #endif

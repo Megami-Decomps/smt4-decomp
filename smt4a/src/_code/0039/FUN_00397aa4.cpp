@@ -8,7 +8,7 @@ int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 
 extern unsigned int g_sinCosTable; /* 0x536d14 */

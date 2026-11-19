@@ -61,7 +61,7 @@ s32 listCursorGetRowOfChildIfUnblocked(void *object);
 void ifTouchRegionRemove(void);
 void __aeabi_memset4(void *destination, u32 size, u32 value);
 s32 widgetSubCallIfVisible(ScrollSelection *list);
-s32 FUN_001643b4(u32 file, u32 index);
+s32 ifTouchRegionAddRequested(u32 file, u32 index);
 s32 uiSearchPrimary(ScrollSelection *list);
 s32 objectApplyIfUnblocked(ScrollSelection *list);
 
@@ -75,7 +75,7 @@ static __inline void addSelectionRegions(CommandMenuScreen *work)
             index = i + (8 - count) / 2 + 0x106;
         else
             index = i + (7 - count) / 2 + 0xFF;
-        work->regions[i] = FUN_001643b4(0xD, index);
+        work->regions[i] = ifTouchRegionAddRequested(0xD, index);
         work->regionCount++;
     }
 }
@@ -129,42 +129,42 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
                 first = 0xBB;
             else
                 first = 0xB3;
-            work->regions[0x16 / 2 + i] = FUN_001643b4(0xD, first + i);
+            work->regions[0x16 / 2 + i] = ifTouchRegionAddRequested(0xD, first + i);
             work->regionCount++;
         }
         if (uiSearchPrimary(work->current) < objectApplyIfUnblocked(work->current)) {
             if (*selected == 1) {
-                work->regions[0x10 / 2] = FUN_001643b4(0xD, 0x199);
-                work->regions[0x12 / 2] = FUN_001643b4(0xD, 0x197);
-                work->regions[0x14 / 2] = FUN_001643b4(0xD, 0x198);
+                work->regions[0x10 / 2] = ifTouchRegionAddRequested(0xD, 0x199);
+                work->regions[0x12 / 2] = ifTouchRegionAddRequested(0xD, 0x197);
+                work->regions[0x14 / 2] = ifTouchRegionAddRequested(0xD, 0x198);
             } else if (*selected == 2) {
-                work->regions[0x10 / 2] = FUN_001643b4(0xD, 0x193);
-                work->regions[0x12 / 2] = FUN_001643b4(0xD, 0x191);
-                work->regions[0x14 / 2] = FUN_001643b4(0xD, 0x192);
+                work->regions[0x10 / 2] = ifTouchRegionAddRequested(0xD, 0x193);
+                work->regions[0x12 / 2] = ifTouchRegionAddRequested(0xD, 0x191);
+                work->regions[0x14 / 2] = ifTouchRegionAddRequested(0xD, 0x192);
             } else {
-                work->regions[0x10 / 2] = FUN_001643b4(0xD, 0x196);
-                work->regions[0x12 / 2] = FUN_001643b4(0xD, 0x194);
-                work->regions[0x14 / 2] = FUN_001643b4(0xD, 0x195);
+                work->regions[0x10 / 2] = ifTouchRegionAddRequested(0xD, 0x196);
+                work->regions[0x12 / 2] = ifTouchRegionAddRequested(0xD, 0x194);
+                work->regions[0x14 / 2] = ifTouchRegionAddRequested(0xD, 0x195);
             }
             work->regionCount += 3;
         }
     }
     if (mode == 0x13) {
-        work->regions[0x22 / 2] = FUN_001643b4(0xD, 0x1B3);
+        work->regions[0x22 / 2] = ifTouchRegionAddRequested(0xD, 0x1B3);
         work->regionCount++;
         for (s32 i = 0; i < work->pageCount; i++) {
             CommandPageEntry *page = &work->pages[i];
             if (page->present != 0) {
                 if ((nkmEnemyFindById(page->id)->level & 0x8000) != 0) {
                     if (work->pageFlag != 0) {
-                        work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x1A0);
+                        work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, 0x1A0);
                     } else if (page->value - 0x14A <= 4u || page->value - 0x165 <= 3u) {
-                        work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x19F);
+                        work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, 0x19F);
                     } else {
-                        work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x19E);
+                        work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, 0x19E);
                     }
                 } else {
-                    work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, page->value);
+                    work->regions[0x24 / 2 + i] = ifTouchRegionAddRequested(0xD, page->value);
                 }
                 work->regionCount++;
             }
@@ -174,7 +174,7 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
         ScrollSelection *list = &work->allList;
         for (s32 i = 0; i < widgetSubCallIfVisible(list); i++) {
             if (work->blocked[i] == 0) {
-                work->regions[0x38 / 2 + i] = FUN_001643b4(0xD, i + 0x36);
+                work->regions[0x38 / 2 + i] = ifTouchRegionAddRequested(0xD, i + 0x36);
                 work->regionCount++;
             }
         }
@@ -183,7 +183,7 @@ void btlCommandMenuEnterMode(CommandMenuScreen *work, s32 mode, s32 rememberPrev
         ScrollSelection *list = &work->allList;
         for (s32 i = 0; i < widgetSubCallIfVisible(list); i++) {
             if (work->chosen[i] == 1) {
-                work->regions[0x38 / 2 + i] = FUN_001643b4(0xD, i + 0x36);
+                work->regions[0x38 / 2 + i] = ifTouchRegionAddRequested(0xD, i + 0x36);
                 work->regionCount++;
             }
         }

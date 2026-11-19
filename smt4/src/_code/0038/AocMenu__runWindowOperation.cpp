@@ -27,7 +27,7 @@ void aocMenuSetButtonHelp(u32 *job, s32 a, s32 b);
 void FUN_00234124(u32 *job, RequestParameters *event);
 s32 buttonHelpStateIsNot3(void);
 void ifTouchRegionClearAll(u32 *regions);
-void FUN_00233818(u32 *entries);
+void releaseEntriesA(u32 *entries); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u32 *" is incompatible with parameter of type "Obj *")
 void FUN_00233e70(u32 *job, s32 a, s32 b);
 void listScrollerInitialize(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
 void touchRegisterFirstRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
@@ -52,7 +52,7 @@ void AocMenu::runWindowOperation()
     case 1:
         if (buttonHelpStateIsNot3() != 0) {
             ifTouchRegionClearAll(job + 0xba);
-            FUN_00233818(job + 0xad);
+            releaseEntriesA(job + 0xad);
             aocLoadingTaskStart(job, 0);
             FUN_00233fcc(job + 0x83, 0);
             job[2] = 2;

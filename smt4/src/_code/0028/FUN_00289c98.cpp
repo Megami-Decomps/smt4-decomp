@@ -7,7 +7,7 @@ extern "C" {
 
 
 void ifTouchDecrementTimer(void);
-void FUN_002a9fdc(UiSpriteState *part, s32 arg1, s32 arg2);
+void rangeSelectionSelectEndpoint(UiSpriteState *part, s32 arg1, s32 arg2);
 
 /* Hide the button help panel: hide its buttons, drop (or just count down) its touch regions, close its arrows. */
 void FUN_00289c98(s32 clearTouches)
@@ -26,7 +26,7 @@ void FUN_00289c98(s32 clearTouches)
         if (panel->mode == 1) {
             timerStart(&panel->panelSprites[i], 3, 0);
         } else {
-            FUN_002a9fdc(&panel->panelSprites[i], 0, 1);
+            rangeSelectionSelectEndpoint(&panel->panelSprites[i], 0, 1);
         }
     }
     g_buttonHelp.work->phase = 0;

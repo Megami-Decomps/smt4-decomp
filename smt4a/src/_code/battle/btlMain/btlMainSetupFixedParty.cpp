@@ -18,6 +18,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemCopy.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "code/Code0029.h"
 
 /* A row of table 0x4E, section 0: the demons of a fixed party and the section (less one) of its flag values. */
 struct WPartyDataRow {
@@ -37,7 +38,6 @@ typedef char WPartyDataRowSize[sizeof(WPartyDataRow) == 0xC && sizeof(WPartyFlag
 
 extern "C" {
 
-void dispatchIfFound(s32 slot, u32 id, s32 kind);
 s32 partySlotFindIndex(const SlotRecordA *record);
 void flagValueAdd(s32 id, u32 amount);
 void FUN_003997b0(void);

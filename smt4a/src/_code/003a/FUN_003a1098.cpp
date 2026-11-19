@@ -54,7 +54,7 @@ extern unsigned int asdCameraGetSavedRenderPairs(void);
 extern int renderCtxPackPassFlags(unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: asdMemFree. */
-extern unsigned int FUN_001c5b4c(unsigned int);
+extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: effectSubmitDefaultVectors. */
 /* Supplied declaration required: FUN_00290c28. */
@@ -240,14 +240,14 @@ joined_r0x003a122c:
       temp_v19 = param_2[7];
       temp_v20 = param_2[8];
       temp_v7 = *(unsigned int *)(g_renderCtx + 0x52c);
-      temp_v4 = FUN_001c5b4c(temp_v7);
+      temp_v4 = asdCameraValueGet(temp_v7);
       FUN_002a1850(&temp_v15,0,temp_v4);
       FUN_002a1850(&temp_v18,0,temp_v4,&temp_v18);
       renderCtxSelectTexture(g_renderCtx,0);
       renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
       FUN_0032c810((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
-      temp_v7 = FUN_001c5b4c(temp_v7);
+      temp_v7 = asdCameraValueGet(temp_v7);
       effectRestoreSavedRenderPairs(g_renderCtx,temp_v7);
       break;
     case 9:

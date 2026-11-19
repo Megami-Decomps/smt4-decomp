@@ -12,7 +12,7 @@ struct ContentEntryRef {
 
 extern "C" {
 void FUN_00123934();
-void FUN_00234624(HalfwordBufferHandle *out, void *table, u32 index);
+void table30GetEntryB(HalfwordBufferHandle *out, void *table, u32 index); // declcheck: local (the shared declaration in gamedata/GameDataAccess_Shard0050.h does not compile here: argument of type "HalfwordBufferHandle *" is incompatible with parameter of type "u8 **")
 u32 FUN_00234618(HalfwordBufferHandle *handle);
 u32 halfwordBufferCopyRange(HalfwordBufferHandle *handle, u16 *destination, u32 requested, u32 offset);
 WindowStatusResult FUN_003539e8(void *file, void *archive, const u16 *path, u32 count);
@@ -40,7 +40,7 @@ WindowStatusOperationResult Obj422230::vfunc0c(const void *)
         }
     } else {
         ContentEntryRef ref;
-        FUN_00234624(&ref.handle, manager->contentRequest, state);
+        table30GetEntryB(&ref.handle, manager->contentRequest, state);
         u32 count = FUN_00234618(&ref.handle);
         u16 path[64];
         halfwordBufferCopyRange(&ref.handle, path, count, 0);

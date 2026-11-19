@@ -22,7 +22,7 @@ void movieSyncDrainSourcePositions(MovieSync *sync);
 void FUN_004241e0(MovieSync *sync);
 void FUN_00425448(MovieSync *sync);
 void playHandleStart(MovieReadHandle *read);
-void FUN_00425aa0(MovieSync *sync);
+void mobiclipYieldPlaybackThread(MovieSync *sync);
 void FUN_00424938(MovieSync *sync);
 s32 movieSyncGetState(MovieSync *sync);
 
@@ -62,7 +62,7 @@ bool moviePumpUntilReady()
         }
         if (g_mobiclipCtrl.stopRequested)
             canceled = true;
-        FUN_00425aa0(&g_mobiclipPlayer);
+        mobiclipYieldPlaybackThread(&g_mobiclipPlayer);
         state = movieSyncGetState(&g_mobiclipPlayer);
     } while (!started && !canceled && state != 7 && state != 1);
     if (started)

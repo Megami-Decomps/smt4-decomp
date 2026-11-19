@@ -42,7 +42,7 @@ unsigned int FUN_002169cc(void)
             puVar3 = *(unsigned int **)(iVar5 + 0x658);
             *puVar3 = *puVar3 | 2;
             *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 0;
-            FUN_0028703c(*(unsigned int *)(*(int *)(iVar5 + 0x658) + 8));
+            animationEvaluateCallback(*(unsigned int *)(*(int *)(iVar5 + 0x658) + 8));
             modelSetScale(*(unsigned int *)(*(int *)(iVar5 + 0x658) + 8));
             uVar4 = uVar4 + 1;
           } while (uVar4 < 0x1c);
@@ -65,7 +65,7 @@ unsigned int FUN_002169cc(void)
         *(unsigned int *)(iVar5 + 0x3c) = uVar10;
         *(unsigned char *)(iVar5 + 0x58) = 1;
       }
-      FUN_0028703c(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8));
+      animationEvaluateCallback(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8));
       in_s0 = (float)uVar11;
       modelSetScale(*(unsigned int *)(*piVar7 + 8));
       *(unsigned int *)(iVar2 + 0x5ec) = 3;
@@ -78,7 +78,7 @@ unsigned int FUN_002169cc(void)
          ((func_0x002d5808(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8)), in_s0 == fVar12 ||
           (iVar5 = FUN_0025a03c(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8)), iVar5 != 0)))) {
         FUN_002f50b8(*(unsigned int *)(*(int *)(iVar2 + 0x5e4) + 8));
-        FUN_0028703c(*(unsigned int *)(*piVar7 + 8));
+        animationEvaluateCallback(*(unsigned int *)(*piVar7 + 8));
         modelSetScale(*(unsigned int *)(*piVar7 + 8));
         uVar10 = 4;
 code_r0x00216c3c:

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001a8f48(void);
-int FUN_001a901c(void);
+int nw_snd_internal_GroupFile_FileHeader_GetFileBlock(void);
+int nw_snd_internal_GroupFile_FileHeader_GetInfoExBlock(void);
 int nw_snd_internal_GroupFile_FileHeader_GetInfoBlock(void);
 
-/* Supplied declaration required: FUN_001a8f48. */
-/* Supplied declaration required: FUN_001a901c. */
+/* Supplied declaration required: nw_snd_internal_GroupFile_FileHeader_GetFileBlock. */
+/* Supplied declaration required: nw_snd_internal_GroupFile_FileHeader_GetInfoExBlock. */
 /* Supplied declaration required: nw_snd_internal_GroupFile_FileHeader_GetInfoBlock. */
 
 
@@ -27,8 +27,8 @@ int * FUN_00190808(int *param_1,int *param_2)
     piVar1 = param_2;
     nw_snd_internal_GroupFile_FileHeader_GetInfoBlock();
     piVar2 = param_2;
-    FUN_001a8f48();
-    FUN_001a901c();
+    nw_snd_internal_GroupFile_FileHeader_GetFileBlock();
+    nw_snd_internal_GroupFile_FileHeader_GetInfoExBlock();
     if ((piVar1 != (int *)0x0) && (piVar2 != (int *)0x0)) {
       *param_1 = (int)(piVar1 + 2);
       param_1[1] = (int)(piVar2 + 2);

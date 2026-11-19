@@ -210,7 +210,7 @@ code_r0x001dd71c:
     mobiclipShutdown();
     func_0x00106080();
     func_0x00105ef8();
-    FUN_001036fc();
+    soundEffectInitializeDelay();
     FUN_00106650();
     titleConfigApplyAudio();
     func_0x003336c8();

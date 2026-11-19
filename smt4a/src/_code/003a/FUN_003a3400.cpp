@@ -9,7 +9,7 @@ extern "C" {
 extern DebugBoundsRegistry DAT_006160e0;
 extern const DebugBoundsPalette DAT_00532240;
 s32 renderCtxPackPassFlags(s32 mode, s32 enabled);
-void FUN_00280a08(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+void gxEmitColoredQuad(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
     f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
     u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor);
 
@@ -32,7 +32,7 @@ void FUN_003a3400(f32 height)
                 f32 maximumZ = bounds->maximum[2];
                 f32 maximumX = bounds->maximum[0];
                 u32 color = colors[index % 12] | 0x70;
-                FUN_00280a08(minimumX, height, minimumZ,
+                gxEmitColoredQuad(minimumX, height, minimumZ,
                     minimumX, height, maximumZ,
                     maximumX, height, minimumZ,
                     maximumX, height, maximumZ, color, color, color, color);

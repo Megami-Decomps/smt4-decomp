@@ -9,7 +9,7 @@ int effectNodeUpdateTransform(...);
 int resOwnerRunNodeHandlers(...);
 int FUN_001ac8ec(...);
 int FUN_001b4eb8(...);
-int FUN_001bc460(...);
+int gfxQuaternionWorkspaceBuildMatrix(...);
 int eventDispatch(...);
 int eventDispatchIfSet(...);
 int handlerTableCall(...);
@@ -79,7 +79,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: FUN_001ac8ec. */
 /* Supplied declaration required: FUN_001b4eb8. */
-/* Supplied declaration required: FUN_001bc460. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: eventDispatch. */
 /* Supplied declaration required: eventDispatchIfSet. */
 /* Supplied declaration required: handlerTableCall. */
@@ -144,7 +144,7 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
         DAT_006472e0 = fStack_84;
         DAT_006472e4 = fStack_80;
         DAT_006472e8 = fStack_7c;
-        FUN_001bc460();
+        gfxQuaternionWorkspaceBuildMatrix();
         temp_v0 = DAT_00647348;
         DAT_0064734c = temp_v22;
         temp_v1 = 0;
@@ -239,7 +239,7 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
       DAT_006472e0 = fStack_84;
       DAT_006472e4 = fStack_80;
       DAT_006472e8 = fStack_7c;
-      FUN_001bc460();
+      gfxQuaternionWorkspaceBuildMatrix();
       temp_v0 = DAT_0064733c;
       DAT_0064734c = temp_v22;
       temp_v1 = 0;

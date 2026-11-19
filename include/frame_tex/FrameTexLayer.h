@@ -16,7 +16,7 @@ struct FrameTexLayer {
     /* 0x01 */ s8 ready;
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ s32 levels;           /* the capture was downsampled 2^levels times */
-    /* 0x08 */ u8 captureResult;     /* FUN_002bfadc's result; 0 selects the full-width extent */
+    /* 0x08 */ u8 captureResult;     /* gxCopyFramebufferToSurface's result; 0 selects the full-width extent */
     /* 0x09 */ s8 capturedLeft;
     /* 0x0A */ s8 capturedRight;
     /* 0x0B */ u8 unk0B;

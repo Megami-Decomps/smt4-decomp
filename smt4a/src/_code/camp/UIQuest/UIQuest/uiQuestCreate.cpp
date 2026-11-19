@@ -15,6 +15,7 @@
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/RosterView.h"
 #include "quest_center/QuestRecordA.h"
+#include "quest_center/QuestStatus.h"
 #include "script/scrScriptProcess.h"
 #include "sys/RuntimeObjects_Smt4a.h"
 #include "ui/ParamsClearPacket.h"
@@ -27,8 +28,6 @@ s32 uiQuestDrawUpper(u32 job);
 s32 uiQuestDrawLower(u32 job);
 void asdTMTexTableLoadSprites(s32 table);
 void FUN_001ff724(void);
-u32 partyEntryGetBit5(s32 index);
-u32 partyEntryGetBit6(s32 index);
 void gameFlagClearModeBits(s32 index);
 void uiGetLayoutPointDifference(UiSpriteState *sprite, u32 table, u32 first, u32 second);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 table, s32 image);

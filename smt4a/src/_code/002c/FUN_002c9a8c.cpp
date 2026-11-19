@@ -50,7 +50,7 @@ typedef struct {
 extern int infoWinHasValue(void);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern unsigned short FUN_001643b4(unsigned int, int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -135,7 +135,7 @@ void FUN_002c9a8c(int param_1)
     uiSpriteSetKeyframe(temp_v19,0);
     temp_v20 = 0;
     do {
-      temp_v11 = FUN_001643b4(0x1d,temp_v20 + 0xba);
+      temp_v11 = ifTouchRegionAddRequested(0x1d,temp_v20 + 0xba);
       *(unsigned short *)(param_1 + temp_v20 * 2 + 0x43b6) = temp_v11;
       temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,temp_v20 + 0xba));
       temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x117));

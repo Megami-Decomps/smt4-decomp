@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ca2d0(...);
+int nw_gfx_TransformNode_GetMemorySizeForInitialize(...);
 int FUN_001d02f4(...);
 int nw_gfx_AnimGroup_GetMemorySizeForInitialize(...);
 
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_8_stack;
 
-/* Supplied declaration required: FUN_001ca2d0. */
+/* Supplied declaration required: nw_gfx_TransformNode_GetMemorySizeForInitialize. */
 /* Supplied declaration required: FUN_001d02f4. */
 /* Supplied declaration required: nw_gfx_AnimGroup_GetMemorySizeForInitialize. */
 
@@ -45,7 +45,7 @@ void FUN_001c070c(int *param_1,fn_001c070c_arg1 *param_2,int param_3,int param_4
   unsigned int temp_v2;
   int temp_v3;
   
-  FUN_001ca2d0(param_1,param_2,param_3,param_4,param_5,param_6);
+  nw_gfx_TransformNode_GetMemorySizeForInitialize(param_1,param_2,param_3,param_4,param_5,param_6);
   temp_v0 = param_2->field_0xb4;
   temp_v0 = ((((((temp_v0 + (((((((((*param_1 + param_1[1]) - 1U) & ~(param_1[1] - 1U)) + temp_v0 * 4 +
                              param_1[1]) - 1) & ~(param_1[1] - 1U)) + temp_v0 * 0x88 + param_1[1]) - 1

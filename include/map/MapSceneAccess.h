@@ -12,6 +12,8 @@ u8 lmapGetSpawnIndex(void);
 
 u32 lmapSceneGetUnk0(void);
 
+void lmapSceneSetUnk134(u8 value);
+
 void naviMainQueueRequest(u32 id);
 
 } /* extern "C" */

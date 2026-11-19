@@ -38,7 +38,7 @@ struct UnlockLogWork {
 extern "C" {
 void FUN_003f5bd8(UnlockLogWork *work, s32 count);
 void gridNavigationConfigure(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 enabled, s32 colors);
-s32 FUN_001643b4(u32 group, u32 index);
+s32 ifTouchRegionAddRequested(u32 group, u32 index);
 void dialogEnterState(UnlockLogWork *work, u32 state, u32 argument);
 
 void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
@@ -63,12 +63,12 @@ void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
     work->visible = work->count < 4 ? work->count : 4;
     gridNavigationConfigure(&work->list, work->count, work->visible, 1, 1, 1);
     for (s32 index = 0; index < 4 && index < work->visible; ++index) {
-        work->rowRegions[index] = FUN_001643b4(0x31, index + 0x88);
+        work->rowRegions[index] = ifTouchRegionAddRequested(0x31, index + 0x88);
         ++work->regionCount;
     }
-    work->buttons[0] = FUN_001643b4(0x31, 0xa9);
-    work->buttons[1] = FUN_001643b4(0x31, 0xaa);
-    work->buttons[2] = FUN_001643b4(0x31, 0xab);
+    work->buttons[0] = ifTouchRegionAddRequested(0x31, 0xa9);
+    work->buttons[1] = ifTouchRegionAddRequested(0x31, 0xaa);
+    work->buttons[2] = ifTouchRegionAddRequested(0x31, 0xab);
     work->regionCount += 3;
     dialogEnterState(work, 2, 3);
 }

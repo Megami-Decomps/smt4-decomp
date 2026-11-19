@@ -22,7 +22,7 @@ u32 FUN_003103e4(u32 resource, u32 applicationId, const char *applicationName, u
                  u32 messageSize, const char *messageBoxName, u32 parameter6, u32 parameter7);
 s32 cecWriteMessageBoxNameAndData(u32, u32, const char *, const void *, u32);
 s32 FUN_0021f57c(const char *, const void *, u32, u32, u32);
-void FUN_002d55f0(void *);
+void asdCecCopySettings(void *); // declcheck: local (the shared declaration in AsdSDK/Source/Net/Cec/AsdCec.h does not compile here: argument of type "u8 *" is incompatible with parameter of type "u32")
 
 // Write a communication card and translate platform errors into menu status bits.
 u32 cecSendCardData(CecCardOwner *owner, u32 argument)
@@ -46,7 +46,7 @@ u32 cecSendCardData(CecCardOwner *owner, u32 argument)
             status = 0x11;
         }
     } else {
-        FUN_002d55f0(owner->state);
+        asdCecCopySettings(owner->state);
     }
     return status;
 }

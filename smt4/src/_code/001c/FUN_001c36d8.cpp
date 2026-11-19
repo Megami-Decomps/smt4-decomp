@@ -16,10 +16,10 @@ int gameCopyPersistentSave(void);
 int FUN_00287c34(int);
 
 int playerRecalcStatsFromEquipment(...);
-int FUN_0029c1c8(...);
+int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029.h does not compile here: too few arguments in function call)
 int unitRecalculateEffectiveStats(...);
 int gameFlagIsSet(...);
-int FUN_00333edc(void);
+int playerSyncPair2AOnce(void);
 int FUN_0033f86c(int, int);
 int FUN_00394fd8(...);
 int __aeabi_memcpy4(...);
@@ -73,13 +73,13 @@ extern int gameDataGetWorkBlock(void);
 /* Supplied declaration required: FUN_00287c34. */
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: playerRecalcStatsFromEquipment. */
-/* Supplied declaration required: FUN_0029c1c8. */
+/* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_00333edc. */
+/* Supplied declaration required: playerSyncPair2AOnce. */
 /* Supplied declaration required: FUN_0033f86c. */
 /* Supplied declaration required: FUN_00394fd8. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -373,7 +373,7 @@ void FUN_001c36d8(int param_1)
                     *(unsigned int *)(temp_v2 + 0x4c) = *(unsigned int *)(temp_v3 + 0x4c);
                     *(unsigned int *)(temp_v2 + 0x50) = temp_v9;
                     playerRecalcStatsFromEquipment(0);
-                    FUN_00333edc();
+                    playerSyncPair2AOnce();
                     temp_v22 = 1;
                     break;
                   case 1:
@@ -395,7 +395,7 @@ void FUN_001c36d8(int param_1)
                       temp_v8 = temp_v6 + 0x94;
                       temp_v4 = flagWordTestBit(temp_v8,2);
                       if (temp_v4 != 0) {
-                        FUN_0029c1c8(0,*(unsigned short *)(temp_v6 + 0xda));
+                        dispatchIfFound(0,*(unsigned short *)(temp_v6 + 0xda));
                         temp_v6 = gameGetUnitRecord(0);
                         __aeabi_memcpy4(temp_v6,temp_v8,0x604);
                         *(unsigned char *)(temp_v6 + 0x4a) = 0;

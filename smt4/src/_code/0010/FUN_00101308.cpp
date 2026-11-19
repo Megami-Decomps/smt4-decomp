@@ -51,7 +51,7 @@ int messageInitializeDisplay(...);
 int ifTouchAcquire(...);
 int gameDataAllocBlocks(...);
 int FUN_00102e34(...);
-int FUN_001036fc(...);
+int soundEffectInitializeDelay(...);
 int FUN_00103f74(...);
 int modelStartProcessGroup(...);
 int FUN_001043c8(...);
@@ -87,7 +87,7 @@ int appletCloseApplication(...);
 int FUN_00103cec(...);
 int FUN_00103fec(...);
 int FUN_0010421c(...);
-int FUN_001042dc(...);
+int mathInitDefaultUnitVector(...);
 int asdPrimInit(...);
 int FUN_001049ac(...);
 int asdTMTexTableLoadList(...);
@@ -281,7 +281,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned long long asdSoundRefreshPlayerState(void);
 /* Supplied declaration required: FUN_00103504. */
 extern unsigned int asdModelGetStatic40(void);
-/* Supplied declaration required: FUN_001036fc. */
+/* Supplied declaration required: soundEffectInitializeDelay. */
 extern int asdSystemGetOperationPending(void);
 extern unsigned int asdModelGetStringConst(void);
 extern unsigned int asdModelGetStatic3C(void);
@@ -309,7 +309,7 @@ extern int appletGetBusyFlag(void);
 /* Supplied declaration required: FUN_0010421c. */
 /* Supplied declaration required: appletUnlockAndRestoreDisplay. */
 extern unsigned int asdModelGetStatic50(void);
-/* Supplied declaration required: FUN_001042dc. */
+/* Supplied declaration required: mathInitDefaultUnitVector. */
 /* Supplied declaration required: asdPrimInit. */
 /* Supplied declaration required: FUN_001043c8. */
 /* Supplied declaration required: FUN_001049ac. */
@@ -500,7 +500,7 @@ void FUN_00101308(void)
   temp_v2 = g_titleScene;
   temp_v3 = renderCtxPackPassFlags(5,1);
   *(unsigned int *)(temp_v2 + 0x1378) = temp_v3;
-  FUN_001042dc();
+  mathInitDefaultUnitVector();
   asdGxPresetVectorSet(0);
   asdGxPresetVectorSet(1);
   __aeabi_vec_ctor_nocookie_nodtor(&temp_v26,&LAB_001071c8,0x3c,2);
@@ -593,7 +593,7 @@ void FUN_00101308(void)
   soundSetupArchiveAndSlots();
   soundInitializePersistentSlots();
   FUN_00106650();
-  FUN_001036fc();
+  soundEffectInitializeDelay();
   titleConfigResetDefaults();
   titleConfigApplyAudio();
   titleSequenceInit();

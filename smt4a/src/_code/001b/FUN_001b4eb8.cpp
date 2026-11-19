@@ -28,7 +28,7 @@ struct SkelNode {
 }
 
 extern "C" {
-void FUN_001bc460(void);
+void gfxQuaternionWorkspaceBuildMatrix(void);
 
 /* Poses the joint chain below `root`: the workspace quaternion is root's rotation plus the given offset, and
    every child's local vector is rotated by the resulting matrix and accumulated into it before the child's
@@ -45,7 +45,7 @@ void FUN_001b4eb8(SkelNode *root, Vector4 *offsetIn)
     workspace->first.vector.w = workspace->first.vector.w + workspace->second.vector.w;
     Vector4 sum = workspace->first.vector;
     workspace->first.vector = root->rotation;
-    FUN_001bc460();
+    gfxQuaternionWorkspaceBuildMatrix();
     f32 scale = root->scaleA * root->scaleB;
     f32 matrix[16];
     for (s32 i = 0; i < 16; i++) {

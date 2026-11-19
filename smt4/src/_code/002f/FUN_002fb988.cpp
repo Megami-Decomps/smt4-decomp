@@ -15,7 +15,7 @@ int FUN_0026413c(void);
 int FUN_0027f48c(int, int);
 int padGetNormalizedAnalogStick(float *, unsigned int [12], int);
 int __hardfp_atan2f(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int gameCounterAddSaturating(int, int);
@@ -56,7 +56,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: padGetNormalizedAnalogStick. */
 /* Supplied declaration required: __hardfp_atan2f. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -172,7 +172,7 @@ void FUN_002fb988(int param_1)
       temp_v2 = g_lmapScene;
       *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v12 * temp_v8;
       temp_v14 = *(float *)(temp_v2 + 0x50) * temp_v14;
-      FUN_00282390();
+      libm_cosf();
       temp_v2 = g_lmapScene;
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v14 * temp_v8;
       *(unsigned int *)(param_1 + 0xc0) = 1;

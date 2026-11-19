@@ -39,7 +39,7 @@ extern unsigned char LAB_0028b068; /* 0x28b068 */
 extern unsigned char LAB_0028b078; /* 0x28b078 */
 extern unsigned char LAB_0028b084; /* 0x28b084 */
 
-extern unsigned int FUN_0014bd84(void);
+extern unsigned int aocIndexValueOrDefault(void);
 extern unsigned int itemGetStackLimit(int);
 /* Supplied declaration required: itemTableGetItemRecord. */
 /* Supplied declaration required: itemTableGetEquipmentRecord. */
@@ -315,7 +315,7 @@ void FUN_0028a888(int param_1)
     } while (temp_v4 < 5);
     scrSetStringSlot(0x29,temp_v12);
     if (*(short *)(temp_v6 + 0x3a) != 0) {
-      temp_v3 = FUN_0014bd84();
+      temp_v3 = aocIndexValueOrDefault();
       sprintf((char *)temp_v12,"%s",temp_v3);
     }
     else {

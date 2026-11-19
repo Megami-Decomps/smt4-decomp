@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00262210(...);
+int uiGetLayoutPointDifference(...); // declcheck: local (romwright prototype; the shared declaration in camp/UIQuest/UIQuest.h does not compile here: argument of type "int" is incompatible with parameter of type "PointDeltaWork *")
 int uiStoreTextureEntryCenter(int, int, int); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int pairSetFirstResetSecond(...);
 int uiSpriteStateInitFromSource(int, int, unsigned int, int, int);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00262210. */
+/* Supplied declaration required: uiGetLayoutPointDifference. */
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
@@ -60,7 +60,7 @@ void FUN_0032c3fc(int param_1)
     return;
   case 8:
     pairSetFirstResetSecond(param_1 + 0x20,0x13881);
-    FUN_00262210(param_1 + 0x20,0x18,80000,0x13881);
+    uiGetLayoutPointDifference(param_1 + 0x20,0x18,80000,0x13881);
     return;
   case 0xc:
   case 0x10:

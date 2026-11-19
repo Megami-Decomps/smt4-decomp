@@ -32,7 +32,7 @@ void __aeabi_memset4(void* destination, u32 size, u32 value);
 void ifTouchRegionRemove(void);
 void ifTouchResetRecord(void);
 UnitCategoryRecord* partyGetSlot(u16 unit);
-u16 FUN_001643b4(u32 table, s32 region);
+u16 ifTouchRegionAddRequested(u32 table, s32 region);
 void statusPanelSetOpen(s32 opened);
 
 void FUN_004be1c8(UnitScreenReadyViewA* work)
@@ -63,7 +63,7 @@ void FUN_004be1c8(UnitScreenReadyViewA* work)
     for (s32 index = 0; index < 12; ++index) {
         UnitCategoryRecord* unit = partyGetSlot(static_cast<u16>(index));
         if (unit && partySlotIsOccupied(unit)) {
-            u16 region = FUN_001643b4(0x11, work->touchCount + 0xAE);
+            u16 region = ifTouchRegionAddRequested(0x11, work->touchCount + 0xAE);
             work->touchRegions[work->touchCount] = region;
             ++work->touchCount;
         }

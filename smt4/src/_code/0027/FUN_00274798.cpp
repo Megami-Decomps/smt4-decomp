@@ -14,7 +14,7 @@ int mathPositionHeadingDegrees(void);
 int modelPartSetRotationDegrees(unsigned int, int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int nodeSetTranslation(unsigned int, int);
 int modelSelectPrimaryMotion(unsigned int);
-int FUN_002b2b64(unsigned int);
+int ownerGetFloatValue(unsigned int); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h does not compile here: more than one instance of overloaded function "nodeSetTranslation" has "C" linkage)
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -41,7 +41,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 /* Supplied declaration required: modelPartSetRotationDegrees. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
-/* Supplied declaration required: FUN_002b2b64. */
+/* Supplied declaration required: ownerGetFloatValue. */
 
 
 void FUN_00274798(void)
@@ -263,7 +263,7 @@ LAB_002748b4:
               modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8));
               *(int *)(temp_v1 + 0x30) = (int)temp_v13;
             }
-            FUN_002b2b64(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8));
+            ownerGetFloatValue(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8));
             if ((*(int *)(temp_v1 + 0x2c) == 1) && (temp_v11 < 0x44960000)) {
               temp_v9 = *(int *)(temp_v1 + 0x30);
               if ((((temp_v9 < 0x3f800000) && (temp_v8 >= 0x3f800000)) ||

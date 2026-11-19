@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b4128(unsigned int *, int, int);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 
 /* stack frame of param_6: 59 slot(s), 236 byte(s) */

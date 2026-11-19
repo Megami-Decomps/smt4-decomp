@@ -44,7 +44,7 @@ void soundChannelStopAll(u32 channel);
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, u16 option);
 void titleSetSlotValueState2(u32 index, u32 value);
-void FUN_00324c48(u32 first, u32 second, u32 third, f32 a, f32 b, f32 c, f32 d, f32 e);
+void gameStateSetJumpRequest(u32 first, u32 second, u32 third, f32 a, f32 b, f32 c, f32 d, f32 e);
 void gameStateClearFlag();
 void asdSequenceRequest(u32 sequence, u32 first, u32 second);
 }
@@ -134,7 +134,7 @@ extern "C" s32 FUN_004ce3c0(HealingSceneWork *work)
                 titleSetSlotValueState2(0, 1);
                 titleSetSlotValueState2(1, 1);
             } else {
-                FUN_00324c48(g_gameState.savedMapId, g_gameState.savedAreaId, g_gameState.savedObjectId,
+                gameStateSetJumpRequest(g_gameState.savedMapId, g_gameState.savedAreaId, g_gameState.savedObjectId,
                               DAT_005f1b80[0], DAT_005f1b80[1], DAT_005f1b80[2],
                               DAT_005f1b80[3], DAT_005f1b80[4]);
                 gameStateClearFlag();

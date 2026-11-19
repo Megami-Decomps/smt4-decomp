@@ -7,6 +7,7 @@
 #include "shard/Shard0040.h"
 #include "title/titleMain.h"
 #include "code/Code001c.h"
+#include "code/Code0038.h"
 
 namespace {
 struct FountainInitializationView {
@@ -42,7 +43,6 @@ u8 FUN_0040af60(LockedObj *owner);
 void FUN_0040ae70(LockedObj *owner, u32 enabled);
 void mapLoadSkyTable(u32 number);
 void mapEnvironmentApplyPreset(s32 preset, s32 mode);
-CameraParameterOwner *FUN_00387350(const char *name);
 void asdCameraInitializeDefaults(CameraMatrixCache *camera, u32 mode);
 void cameraExportParameters(CameraParameters *output, const CameraParameterOwner *owner);
 void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
@@ -82,7 +82,7 @@ void FUN_004cdddc(FountainInitializationView *work)
         FUN_0040ae70(work->resources, 1);
     mapLoadSkyTable(200);
     mapEnvironmentApplyPreset(4, 0);
-    CameraParameterOwner *parameters = FUN_00387350("fountain/fountain.bccam");
+    CameraParameterOwner *parameters = static_cast<CameraParameterOwner *>(asdCameraLoadFromFile("fountain/fountain.bccam"));
     work->mode = 0;
     work->cameraParameters = parameters;
     asdCameraInitializeDefaults(&work->camera, 1);

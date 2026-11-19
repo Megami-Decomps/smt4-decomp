@@ -31,7 +31,7 @@ int optionsClearFlag1(void);
 int SBORROW4(...);
 
 int uiSpriteAdvanceAnimation(...);
-int FUN_001643b4(int, int);
+int ifTouchRegionAddRequested(int, int);
 int sysPlaySe(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
@@ -54,7 +54,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_001643b4. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -140,17 +140,17 @@ unsigned int uiQuestCalc(void)
       do {
         temp_v6 = objectApplyIfUnblocked(temp_v9);
         if (temp_v6 <= temp_v5) break;
-        temp_v3 = FUN_001643b4(0x1e,temp_v5 + 0x9e);
+        temp_v3 = ifTouchRegionAddRequested(0x1e,temp_v5 + 0x9e);
         temp_v6 = temp_v5 * 2;
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)(temp_v1 + temp_v6 + 0xd28) = temp_v3;
         *(short *)(temp_v1 + 0xd44) = *(short *)(temp_v1 + 0xd44) + 1;
       } while (temp_v5 < 10);
-      temp_v3 = FUN_001643b4(0x1e,0xbf);
+      temp_v3 = ifTouchRegionAddRequested(0x1e,0xbf);
       *(unsigned short *)(temp_v1 + 0xd3e) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1e,0xc0);
+      temp_v3 = ifTouchRegionAddRequested(0x1e,0xc0);
       *(unsigned short *)(temp_v1 + 0xd40) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1e,0xc1);
+      temp_v3 = ifTouchRegionAddRequested(0x1e,0xc1);
       *(unsigned short *)(temp_v1 + 0xd42) = temp_v3;
       *(short *)(temp_v1 + 0xd44) = *(short *)(temp_v1 + 0xd44) + 3;
       FUN_0023ff10();

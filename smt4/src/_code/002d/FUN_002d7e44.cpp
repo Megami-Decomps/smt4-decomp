@@ -2,12 +2,12 @@
 #include "title/titleMain.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/S1ListPanel.h"
+#include "code/Code0030.h"
 
 extern "C" {
 extern TitleScene *g_titleScene;
 u32 renderCtxPackPassFlags(u32 mode, u32 option);
 s32 effMenuGetFlag();
-void effMenuCallHandler(s32 mode, u32 enabled);
 void FUN_001db658(s32 count, u32 colorA, u32 colorB, f32 x, f32 y, f32 z, f32 height);
 
 // Draw the effect editor under a temporary scene state, with an optional debug backdrop.

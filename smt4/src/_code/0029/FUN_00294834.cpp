@@ -10,7 +10,7 @@ int FUN_0025bab8(...);
 int colorSetAndCachePica(...);
 int asdModelSlotGetResource(...);
 int asdModelSlotSetTranslation(...);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int VectorSignedToFloat(...);
 
@@ -45,7 +45,7 @@ extern unsigned char LAB_00294c1c; /* 0x294c1c */
 /* Supplied declaration required: asdModelSlotGetResource. */
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: asdModelSlotSetTranslation. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 
 
@@ -99,7 +99,7 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   uStack_14 = param_4;
   mathRemPio2f();
   temp_v4 = temp_v2;
-  FUN_00282390();
+  libm_cosf();
   VectorSignedToFloat((int)param_7,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)((unsigned long long)param_7 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)param_8,(unsigned char)(in_fpscr >> 0x16) & 3);

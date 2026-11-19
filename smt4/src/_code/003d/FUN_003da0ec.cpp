@@ -12,7 +12,7 @@ int _ZN9Obj42111cC1Ej(...);
 int actionSequenceDispatchTriggers(...);
 int actionSequenceUpdateLoopTransition(...);
 int FUN_00226fc0(int);
-int FUN_0023aa28(unsigned int, unsigned int *, int);
+int pairSourceGet(unsigned int, unsigned int *, int);
 int animationSelectThirdPart(...);
 int textureCachePollReady(void);
 int FUN_00249e54(unsigned int, char *);
@@ -72,7 +72,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: actionSequenceUpdateLoopTransition. */
 /* Supplied declaration required: FUN_00226fc0. */
 extern int rangeIsValid(void);
-/* Supplied declaration required: FUN_0023aa28. */
+/* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: animationSelectThirdPart. */
 extern int FUN_00246708(void);
 /* Supplied declaration required: textureCachePollReady. */
@@ -166,7 +166,7 @@ void FUN_003da0ec(int param_1)
     }
     else {
       FUN_00257e74(*(unsigned int *)(param_1 + 0x3058));
-      FUN_0023aa28(*(unsigned int *)(param_1 + 0x3058),(unsigned int *)(param_1 + 0x3060),
+      pairSourceGet(*(unsigned int *)(param_1 + 0x3058),(unsigned int *)(param_1 + 0x3060),
                    param_1 + 0x3064);
     }
     if (*(int *)(param_1 + 0x304c) != 0) {
@@ -185,7 +185,7 @@ void FUN_003da0ec(int param_1)
     }
     else {
       FUN_00257e74(*(unsigned int *)(param_1 + 0x305c));
-      FUN_0023aa28(*(unsigned int *)(param_1 + 0x305c),(unsigned int *)(param_1 + 0x3068),
+      pairSourceGet(*(unsigned int *)(param_1 + 0x305c),(unsigned int *)(param_1 + 0x3068),
                    param_1 + 0x306c);
     }
     temp_v6 = DAT_004398d4;

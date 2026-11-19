@@ -3,11 +3,11 @@
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "nw/math/MTX34.h"
+#include "util/TrigF32.h"
 
 using nw::math::MTX34;
 
 extern "C" {
-f32 libm_cosf(f32 radians);
 f32 libm_sinf(f32 radians);
 void eplSlotStartRequest(s32 slot);
 void mapEplSetSlotPosition(s32 slot, f32 x, f32 y, f32 z);

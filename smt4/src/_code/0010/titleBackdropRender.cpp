@@ -12,7 +12,7 @@ static __inline int encEffLeftCapturePending(FrameTexWork *work)
 }
 
 extern int surfaceCopy(AsdTexture *dst, AsdTexture *src);
-extern int FUN_002bfadc(int arg, AsdTexture *surface);
+extern int gxCopyFramebufferToSurface(int arg, AsdTexture *surface);
 
 /* First ENCEFF set's left capture: renders the scene into the left surface once, then halves the surface size. */
 u32 titleBackdropRender(u32 job)
@@ -25,7 +25,7 @@ u32 titleBackdropRender(u32 job)
     renderCtxSelectStereoLayout(g_titleScene);
     work->surfaceLeft->dimensions.width = 0x200;
     work->surfaceLeft->dimensions.height = 0x200;
-    work->encEffCaptureResult = FUN_002bfadc(0, work->surfaceLeft);
+    work->encEffCaptureResult = gxCopyFramebufferToSurface(0, work->surfaceLeft);
     surfaceCopy(work->surfaceLeft, work->surfaceLeft);
     work->surfaceLeft->dimensions.width >>= 1;
     work->surfaceLeft->dimensions.height >>= 1;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite (171 vs 172 rows) matches except callee-saved register numbering: retail reuses the dead argument register r1 (sl) as the copy pointer */
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "code/Code0029.h"
 
 struct SlotTable {
     u8 unk0000[0x9108];
@@ -13,7 +14,6 @@ extern "C" {
 void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
 void FUN_0029bbc8(u8 id);
-void FUN_0029c1c8(u32 id, u32 a, u32 b);
 void FUN_0029bde4(StatBlock* record);
 s32 recordContainsPairedId(StatBlock* record, u32 skill);
 void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
@@ -34,7 +34,7 @@ u32 FUN_0033bb94(StatBlock* source, u32 arg, u16* outSkills)
     else if (table->party[1] == id) partyIndex = 1;
     else if (table->party[2] == id) partyIndex = 2;
     FUN_0029bbc8(source->growth.slot);
-    FUN_0029c1c8(id, arg, 0);
+    dispatchIfFound(id, arg, 0);
     StatBlock* record = gameGetUnitRecord(id);
     if (partyIndex >= 0) table->party[partyIndex] = record->growth.slot;
     for (s32 i = 0; i < 0x40; i++) {

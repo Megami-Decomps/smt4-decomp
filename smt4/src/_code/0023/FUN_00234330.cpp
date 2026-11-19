@@ -2,8 +2,8 @@
 
 extern "C" {
 
-const char *FUN_0035a010(u32 value);
-const char *FUN_0035a060(u32 value);
+const char *lookupTable5B47D0(u32 value);
+const char *lookupTable5B47A0(u32 value);
 s32 stringFormatUnbounded(char *dest, const char *format, ...);
 void rt_memcpy(void *dest, const void *src, u32 size);
 
@@ -31,7 +31,7 @@ static const char *naKeyFormat(u32 kind)
 void FUN_00234330(char *dest, u32 kind, u32 first, u32 second)
 {
     char key[0x44];
-    stringFormatUnbounded(key, naKeyFormat(kind), FUN_0035a010(first), FUN_0035a060(second));
+    stringFormatUnbounded(key, naKeyFormat(kind), lookupTable5B47D0(first), lookupTable5B47A0(second));
     rt_memcpy(dest, key, 0x40);
 }
 

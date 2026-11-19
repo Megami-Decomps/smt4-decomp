@@ -6,7 +6,7 @@ s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 u32 nw_snd_SoundArchive_GetSoundType(void *archive, s32 id);
 s32 asd3dSoundActorIsPlaying(u32 channel);
 u32 asdSoundEnsureArchiveItemLoaded(u32 id);
-u8 FUN_0015e2bc(AsdSnd3dActorA *actor, s32 *handle, s32 id, s32 flags);
+u8 nw_snd_SoundStartable_StartSound(AsdSnd3dActorA *actor, s32 *handle, s32 id, s32 flags);
 
 /* Starts sound `id` on idle 3D actor `channel` at the 3D start volume; returns whether it started. */
 u8 asd3dSoundActorStart(s32 id, u32 channel)
@@ -28,7 +28,7 @@ u8 asd3dSoundActorStart(s32 id, u32 channel)
             return 0;
         }
         AsdSnd3dActorA *actor = &sound3d->actors[channel];
-        success = FUN_0015e2bc(actor, &sound3d->handles[channel], id, 0) == 0;
+        success = nw_snd_SoundStartable_StartSound(actor, &sound3d->handles[channel], id, 0) == 0;
         f32 volume;
         if (sound3d->volume == 0) {
             volume = 0.0f;

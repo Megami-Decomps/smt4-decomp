@@ -2,6 +2,7 @@
 #include "shard/W5_W5Match7_SceneState.h"
 #include "AsdSDK/TexTableEntryRange.h"
 #include "game/GameState.h"
+#include "map/mapDepart.h"
 
 struct CursorPoint {
     f32 x, y;
@@ -24,7 +25,6 @@ struct NavigationDrag {
 
 extern "C" {
 s32 effectForwardModeOne(s32, s32, s32, s32);
-s32 FUN_002319c0(void);
 void FUN_003c2e0c(s32 *x, s32 *y);
 CursorPoint *NaviMain_GetCursorPos(void *cursorData);
 
@@ -52,7 +52,7 @@ u32 naviUpdateDragCapture(NavigationDrag *drag)
             drag->heldFrames = 0;
         } else {
             if (drag->flags & 0x10000) {
-                if (!FUN_002319c0() || g_gameState.inputBlocked) {
+                if (!setFullScreenRect() || g_gameState.inputBlocked) {
                     drag->flags &= ~0x20000;
                 } else {
                     if (drag->heldFrames < 0xffff)

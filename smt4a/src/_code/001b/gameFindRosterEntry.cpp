@@ -3,7 +3,7 @@
 extern "C" {
 void *gameFlagBlockGet(void);
 s32 dataTable1bOr1cRecordHasFlag1(u32);
-s32 FUN_001bd118(u32);
+s32 table1bOr1cGetRecordValue(u32); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: cannot overload functions distinguished by return type alone)
 
 // Find the persistent roster entry matching a unit identifier.
 void *gameFindRosterEntry(u32 unitId)
@@ -14,7 +14,7 @@ void *gameFindRosterEntry(u32 unitId)
             if (roster->active[i].id == unitId)
                 return &roster->active[i];
         }
-    } else if (FUN_001bd118(unitId) == 1) {
+    } else if (table1bOr1cGetRecordValue(unitId) == 1) {
         for (s32 i = 1; i < 20; ++i) {
             if (roster->stock[i].id == unitId)
                 return &roster->stock[i];

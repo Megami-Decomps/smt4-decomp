@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1d74` (_code @ 0x3f1d74, 0x370 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ int FUN_003e4e4c(void);
 int partyRefreshOrInsertSlot(void);
 int partyAdjustCounterIfEnoughActive(int);
 int flagValueAdd(int);
-int dispatchIfFound(int, int, int);
 
 typedef struct fn_003f1d74_arg0 fn_003f1d74_arg0;
 struct fn_003f1d74_arg0 {

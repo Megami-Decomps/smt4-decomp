@@ -36,7 +36,7 @@ extern u32 g_btlActionReflect;
 extern void *DAT_00435d18;
 extern void *g_btlEvent;
 s32 nodeListCountActiveById(u32 list, ReflectTarget *target);
-s32 FUN_0027e3b8(void *event);
+s32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 void battleResetCounterAndFlag(void *owner);
 void btlReflectInitKind9(s32 layer, ReflectTarget *target, u32 context, u32 kind, u32 mode);
 void *FUN_003cfc84(ReflectActor *actor, ReflectTarget *target, s32 alternate);
@@ -80,7 +80,7 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
             return 0;
         }
     }
-    if (FUN_0027e3b8(g_btlEvent) == 0) {
+    if (isEntryUsable(g_btlEvent) == 0) {
         FUN_003d0220(actor, target, 1);
         void *ready = FUN_003cfc84(actor, target, 1);
         target->step = target->step + 1;

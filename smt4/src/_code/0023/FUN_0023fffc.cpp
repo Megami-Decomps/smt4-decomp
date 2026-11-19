@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite compiles (175 vs 168 rows); register allocation and frame size (12 vs 16 bytes) differ */
+#include "code/Code0013.h"
 #include "common.h"
 #include "shard/W6_W6Match2_ScrollList.h"
 #include "code/Code002c_Smt4.h"
@@ -53,7 +54,6 @@ void FUN_0023fbdc(BattleLoadState* state, BattleMain* battle);
 s32 pairedEntryTableContains(BattleMain* battle, u16 id);
 void btlQueueKeyedScalarReflectAction(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 void frameTexApplyMode(s32 mode);
-s32 FUN_002c2a04(s32 a);
 void FUN_00339e38(BattleMain* battle);
 void FUN_0033a01c(BattleMain* battle);
 void vec3CopyFromOffsetC(u32 object);
@@ -99,8 +99,8 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
         frameTexApplyMode(2);
         battle->flags |= 0x40000000;
     }
-    if (FUN_002c2a04(0) == 3) FUN_002c29d8(0, 10, 0xff);
-    if (FUN_002c2a04(1) == 3) FUN_002c29d8(1, 10, 0xff);
+    if (pairedAvailabilityGetState(0) == 3) FUN_002c29d8(0, 10, 0xff);
+    if (pairedAvailabilityGetState(1) == 3) FUN_002c29d8(1, 10, 0xff);
     if (screenFadesAllReady() != 0) {
         state->phase = 0xe;
         state->unk0c = 0;

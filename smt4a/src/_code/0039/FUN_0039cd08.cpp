@@ -2,13 +2,13 @@
 /* Script command: applies its argument to the object partyFindFirstUnusedEntry returns, and returns that object as the result. */
 #include "common.h"
 #include "battle/BtlUiGlobal.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
 u32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
 void FUN_002d8b34(u32 arg);
-void dispatchIfFound(u32 result, u32 arg, s32 flag);
 u32 partyFindFirstUnusedEntry(void);
 
 __weak void FUN_0039cd08_hook(BtlUiA *value);

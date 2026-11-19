@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
-u32 FUN_0015e2bc(void* player, AsdSndHandleNode* handle, s32 soundId, s32 option);
+u32 nw_snd_SoundStartable_StartSound(void* player, AsdSndHandleNode* handle, s32 soundId, s32 option);
 void asdSoundObjectStop(s32 handle, s32 frames); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_0015e874(s32 handle, s32 frames, f32 volume); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
@@ -29,7 +29,7 @@ u32 asdSoundRegisteredRestart(s32 id, s32 soundId, u32 volume, u32 fadeFrames)
     AsdSndHandleNode* node = asdSoundRegisteredFind(id);
     if (node != NULL) {
         soundStop(node, 0);
-        if ((u8)FUN_0015e2bc(g_asdSoundSystem.player, node, soundId, 0) == 0) {
+        if ((u8)nw_snd_SoundStartable_StartSound(g_asdSoundSystem.player, node, soundId, 0) == 0) {
             soundSetVolume(node, 0, 0.0f);
             node->unk0d = volume;
             if (volume > 127)

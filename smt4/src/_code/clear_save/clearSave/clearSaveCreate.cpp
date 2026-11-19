@@ -14,7 +14,7 @@ void buttonHelpCreate();
 void commonBgStopChildAndBeginTransition();
 void *asdLoadFileSyncDefault(const char *path);
 void asdTMTexTablePrepareNodeImage(s32 table, s32 entry);
-void FUN_00282bfc(s32 screen, s32 alpha);
+void titleRestartSlotState3(s32 screen, s32 alpha);
 u32 FUN_001e1418();
 void clearSaveDestroy();
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
@@ -41,8 +41,8 @@ void clearSaveCreate(s32 mode)
     script->mode = 2;
     asdTMTexTablePrepareNodeImage(2, 0x83);
     if (work->active != 0) {
-        FUN_00282bfc(0, 0xFF);
-        FUN_00282bfc(1, 0xFF);
+        titleRestartSlotState3(0, 0xFF);
+        titleRestartSlotState3(1, 0xFF);
     }
     u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("clearSave C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(clearSaveUpdate), reinterpret_cast<AsdProcFunc>(clearSaveDestroy), reinterpret_cast<u32>(g_clearSave));
     work = g_clearSave;

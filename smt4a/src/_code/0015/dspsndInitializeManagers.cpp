@@ -9,7 +9,7 @@ extern NnSndVoiceManager g_nnSndVoiceManager;
 extern DspsndState g_dspsndState;
 s32 FUN_0016f864(void);
 s32 FUN_0016f574(DspsndState *state, u32 mode);
-void FUN_001a167c(NnSndMasterManager *manager, s8 value);
+void nnSndMasterManagerSetMode(NnSndMasterManager *manager, s8 value);
 void FUN_0016f25c(NnSndMasterManager *manager);
 void nn_snd_CTR_VoiceManager_Initialize(NnSndVoiceManager *manager);
 u32 FUN_001bd5f8(void);
@@ -36,7 +36,7 @@ s32 dspsndInitializeManagers(void)
     s8 mode = reinterpret_cast<const SystemSoundInfo *>(0x1FF81000)->mode;
 
     g_sndSystemState.hardwareMode = mode;
-    FUN_001a167c(&g_nnSndMasterManager, mode);
+    nnSndMasterManagerSetMode(&g_nnSndMasterManager, mode);
     nn_snd_CTR_VoiceManager_Initialize(&g_nnSndVoiceManager);
     FUN_0016f25c(&g_nnSndMasterManager);
     nn_snd_CTR_DspFxManager_Initialize(FUN_001bd5f8());

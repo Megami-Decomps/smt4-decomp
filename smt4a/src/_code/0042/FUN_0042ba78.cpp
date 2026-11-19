@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001885b8(int *, int, int, int);
+int nn_fs_ipc_FileSystem_CloseArchive(int *, int, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001885b8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
 extern unsigned long long FUN_00500924(unsigned int *);
 
 
@@ -32,7 +32,7 @@ FUN_0042ba78(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     temp_v3 = param_4;
     temp_v2 = FUN_00500924(param_1);
     temp_v3 = (unsigned int)temp_v2;
-    FUN_001885b8(&temp_v3,(int)((unsigned long long)temp_v2 >> 0x20),temp_v0,temp_v1);
+    nn_fs_ipc_FileSystem_CloseArchive(&temp_v3,(int)((unsigned long long)temp_v2 >> 0x20),temp_v0,temp_v1);
     param_1[2] = 0;
     param_1[3] = 0;
   }

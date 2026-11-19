@@ -41,7 +41,7 @@ int FUN_004aa008(...);
 int FUN_004c0850(...);
 int FUN_004c6edc(...);
 int FUN_004c80f0(...);
-int FUN_004c8284(...);
+int channelRunMagnitudeQueries(...); // declcheck: local (romwright prototype; the shared declaration in battle/btlAction.h does not compile here: too few arguments in function call)
 int FUN_004c9d04(...);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 int colorFadeStartRgb(...);
@@ -232,7 +232,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004c0850. */
 /* Supplied declaration required: FUN_004c6edc. */
 /* Supplied declaration required: FUN_004c80f0. */
-/* Supplied declaration required: FUN_004c8284. */
+/* Supplied declaration required: channelRunMagnitudeQueries. */
 /* Supplied declaration required: FUN_004c8800. */
 /* Supplied declaration required: FUN_004c8c10. */
 /* Supplied declaration required: FUN_004c8cb0. */
@@ -1244,7 +1244,7 @@ LAB_0040f684:
     FUN_004c6edc((int)*(short *)(*(int *)(psVar2 + 10) + 0x6a),*(unsigned int *)(psVar2 + 0x14));
     break;
   case '6':
-    FUN_004c8284((int)*(short *)(*(int *)(psVar2 + 10) + 0x6a),*(unsigned int *)(psVar2 + 0x14));
+    channelRunMagnitudeQueries((int)*(short *)(*(int *)(psVar2 + 10) + 0x6a),*(unsigned int *)(psVar2 + 0x14));
     break;
   case '7':
     if (*(int *)(psVar2 + 0x14) == 0) {

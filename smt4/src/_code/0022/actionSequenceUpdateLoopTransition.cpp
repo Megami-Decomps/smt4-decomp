@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_ActionController.h"
 
 extern "C" {
-s32 FUN_0034c794(void *);
+s32 state2CIs4(void *);
 f32 animationGetFurthestFrame(void *);
 void FUN_00226a90(ActionController *, s16, s32);
 void FUN_0023c700(ActionController *, s32, s32, s32, s32, s32, f32, f32);
@@ -13,7 +13,7 @@ void btlQueueKeyedScalarReflectAction(s32, s32, u32, s32, s32, s32, s32);
 // Track animation loops and enter the next action phase when playback finishes.
 void actionSequenceUpdateLoopTransition(ActionController *controller)
 {
-    if (FUN_0034c794(controller->animation)) {
+    if (state2CIs4(controller->animation)) {
         s16 frame = (s32)animationGetFurthestFrame(controller->animation);
         s16 previousFrame = controller->previousFrame;
         if (previousFrame > frame) {
@@ -40,7 +40,7 @@ void actionSequenceUpdateLoopTransition(ActionController *controller)
         FUN_00226a90(controller, totalFrame, 2);
         controller->previousFrame = (s32)animationGetFurthestFrame(controller->animation);
     }
-    if (!FUN_0034c794(controller->animation) || (controller->flags & 0x1000)) {
+    if (!state2CIs4(controller->animation) || (controller->flags & 0x1000)) {
         animationSelectThirdPart(controller->animation);
         controller->state = 12;
         actionSequenceDispatchTriggers(controller);

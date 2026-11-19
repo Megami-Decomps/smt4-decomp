@@ -187,7 +187,7 @@ int naviMainSetSelectionResetProgress(...);
 int lmapInitializeActorHandles(void);
 int FUN_0033e014(...);
 int FUN_00356674(void);
-int FUN_00376fb8(...);
+int mapSetDepartureIndex(...); // declcheck: local (romwright prototype; including map/mapDepart.h does not compile here: it redeclares mapProbePositionDownward)
 int FUN_00379d58(void);
 int FUN_00398004(...);
 int FUN_003de188(...);
@@ -417,7 +417,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: gameDataTableGetFlag. */
 extern int FUN_001ba570(void);
-extern int FUN_001bd118(void);
+extern int table1bOr1cGetRecordValue(void); // declcheck: local (romwright prototype; the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 /* Supplied declaration required: modelLoadFileAsyncByName. */
 /* Supplied declaration required: asdLoadFileAsyncWrap. */
 /* Supplied declaration required: asdEnvResetModelBank. */
@@ -531,7 +531,7 @@ extern int FUN_00356380(void);
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: FUN_00376f84. */
 /* Supplied declaration required: FUN_00376fa4. */
-/* Supplied declaration required: FUN_00376fb8. */
+/* Supplied declaration required: mapSetDepartureIndex. */
 /* Supplied declaration required: FUN_00378000. */
 /* Supplied declaration required: mapEnvironmentSelectPreset. */
 /* Supplied declaration required: dataTableGetRecord23. */
@@ -730,7 +730,7 @@ unsigned int FUN_00276264(void)
       case 0:
       case 3:
         temp_v8 = rosterGetLeaderId();
-        if ((temp_v8 != 0) && (temp_v8 = FUN_001bd118(), temp_v8 == 6)) {
+        if ((temp_v8 != 0) && (temp_v8 = table1bOr1cGetRecordValue(), temp_v8 == 6)) {
           puVar2[0x277] = 1;
         }
         if (*(short *)(temp_v5 + 0x22) != 0) {
@@ -931,7 +931,7 @@ unsigned int FUN_00276264(void)
       FUN_0040ae70(puVar2[0x24db],1);
     }
     DAT_005f1623 = 0;
-    FUN_00376fb8();
+    mapSetDepartureIndex();
     FUN_00398004(0);
     DAT_005f1608 = puVar2[0x10];
     DAT_005f160c = puVar2[0x12];
@@ -3424,20 +3424,20 @@ LAB_0027a030:
     if (temp_v4 != 1) {
       if (temp_v4 == 2) {
         temp_v8 = 0;
-        FUN_00376fb8(temp_v8);
+        mapSetDepartureIndex(temp_v8);
         temp_v8 = 0x6d;
         puVar2[3] = temp_v8;
         puVar2[4] = 0;
         break;
       }
       if (temp_v4 == 3) {
-        FUN_00376fb8(0);
+        mapSetDepartureIndex(0);
       }
     }
     else {
       temp_v8 = dataTable2FType0GetEntry((int)*(short *)(temp_v5 + 0x2a));
       temp_v8 = (int)*(short *)(temp_v8 + 8);
-      FUN_00376fb8(temp_v8);
+      mapSetDepartureIndex(temp_v8);
     }
     temp_v8 = 0x6d;
     puVar2[3] = temp_v8;
@@ -4569,7 +4569,7 @@ joined_r0x0027ce58:
     }
     else if (*(char *)((int)puVar2 + 9) != '\0') {
       temp_v8 = rosterGetLeaderId();
-      if ((temp_v8 != 0) && (temp_v5 = FUN_001bd118(), temp_v5 == 6)) {
+      if ((temp_v8 != 0) && (temp_v5 = table1bOr1cGetRecordValue(), temp_v5 == 6)) {
         questDataGetRecord();
         FUN_00270c58(*(unsigned short *)(temp_v8 + 0xd4));
         return 0xffffffff;

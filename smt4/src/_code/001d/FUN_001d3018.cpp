@@ -8,7 +8,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00208e4c(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
@@ -55,7 +55,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00208e4c. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -160,7 +160,7 @@ void FUN_001d3018(void)
     *(float *)(temp_v2 + 0x28) = temp_v10 * *(float *)(temp_v2 + 0x20);
     *(unsigned int *)(temp_v2 + 0x2c) = temp_v20;
     temp_v18 = *(float *)(temp_v2 + 0x24) * temp_v18;
-    FUN_00282390();
+    libm_cosf();
     *(float *)(temp_v2 + 0x30) = temp_v18 * *(float *)(temp_v2 + 0x20);
     if (0 < DAT_0049fadc) {
       DAT_0049fadc = DAT_0049fadc - 1;

@@ -1,4 +1,4 @@
-/* Adds `mask` to the game data block's flags (+0x18), clears its byte +1 and continues with FUN_00140e00(0) (a tail call). */
+/* Adds `mask` to the game data block's flags (+0x18), clears its byte +1 and continues with sleepModeSetEnabled(0) (a tail call). */
 #include "common.h"
 
 extern "C" {
@@ -12,13 +12,13 @@ struct Blocks002684ac {
 
 extern Blocks002684ac g_gameDataBlocks;
 
-void FUN_00140e00(u32 arg);
+void sleepModeSetEnabled(u32 arg);
 
 void gameDataBlocksAddFlags(u32 mask)
 {
     g_gameDataBlocks.dirty = 0;
     g_gameDataBlocks.flags |= mask;
-    FUN_00140e00(0);
+    sleepModeSetEnabled(0);
 }
 
 }

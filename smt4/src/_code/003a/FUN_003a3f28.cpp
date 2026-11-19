@@ -10,7 +10,7 @@ s32 useCounterGetValue(void);
 s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 void FUN_0027f3dc(ShopSlot *slots, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_0039fcd8(const void *, const void *);
-s32 FUN_0039fd24(const void *, const void *);
+s32 halfDifference(const void *, const void *);
 s32 equipmentComparePowerThenOrder(const void *, const void *);
 s32 FUN_003a0028(const void *, const void *);
 s32 FUN_003a0078(const void *, const void *);
@@ -21,7 +21,7 @@ s32 FUN_003a0674(const void *, const void *);
 s32 FUN_003a06b8(const void *, const void *);
 s32 FUN_003a06fc(const void *, const void *);
 s32 FUN_003a075c(const void *, const void *);
-s32 FUN_003a63a8(const void *, const void *);
+s32 recordCompareValues(const void *, const void *);
 s32 rankedEntryCompare(const void *, const void *);
 
 /* Once the use counter has finished, leaves the sort state; otherwise sorts the current category's slots by the chosen key. */
@@ -68,9 +68,9 @@ void FUN_003a3f28(ShopScreen *screen)
         break;
     case 12:
         if (useCounterGetValue() == 0)
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_0039fd24);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), halfDifference);
         else
-            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), FUN_003a63a8);
+            FUN_0027f3dc(table->items, table->count, sizeof(ShopSlot), recordCompareValues);
         break;
     case 15:
         if (useCounterGetValue() == 0)

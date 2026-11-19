@@ -2,12 +2,11 @@
 #include "map/PickObjectResources.h"
 #include "code/Code0013.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32);
-void FUN_003c1060(void);
 void messageSetMode(s32);
-void FUN_003c3e14(void);
 void sysPlaySe(s32);
 void pickObjStart(PickObjectResources *, const char *);
 void titleSetSlotValueState2(s32, s32);
@@ -23,9 +22,9 @@ void FUN_00468574(PickObjectResources *work)
         work->secondary = scrScriptProcessCreate(work->secondaryData, work->secondaryInfo);
         scriptProcessSetMode(work->secondary, 2);
         if (gameFlagIsSet(0x467)) {
-            FUN_003c1060();
+            messageMainRequestBanner();
             messageSetMode(1);
-            FUN_003c3e14();
+            messageMainClearBannerRequest();
             sysPlaySe(0x92);
             pickObjStart(work, "qc_startEvent");
             work->state = 15;

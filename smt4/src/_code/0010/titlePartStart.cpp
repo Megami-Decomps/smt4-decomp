@@ -5,7 +5,7 @@
 
 extern "C" {
 
-u8 FUN_002bfadc(s32 mode, AsdTexture *surface);
+u8 gxCopyFramebufferToSurface(s32 mode, AsdTexture *surface);
 
 /* Fade set's left capture: once the fade is enabled and the left screen not yet captured, captures it into the 512x512 left surface. Always returns 0. */
 u32 titlePartStart(u32 job)
@@ -18,7 +18,7 @@ u32 titlePartStart(u32 job)
     renderCtxSelectStereoLayout(g_titleScene);
     work->surfaceLeft->dimensions.width = 0x200;
     work->surfaceLeft->dimensions.height = 0x200;
-    work->fadeCaptureResult = FUN_002bfadc(0, work->surfaceLeft);
+    work->fadeCaptureResult = gxCopyFramebufferToSurface(0, work->surfaceLeft);
     work->fadeCapturedLeft = 1;
     return 0;
 }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: the script-start call is not predicated and the choice paths emit separate tail calls. */
 #include "shop/ShopItemDescription.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 extern const char DAT_005332c4[];
@@ -9,8 +10,6 @@ s32 scrRunOpcodesStub(u32 script);
 u32 scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 panelIsMissingOrFlagClear();
 s32 tableGroupFindEntryIndex(u32 table, const char *name);
-void FUN_003c1060();
-void FUN_003c3e14();
 
 // Register shop voices, run the selection script, and dispatch the chosen description entry.
 void FUN_003e65a4(ShopItemDescription *work)
@@ -25,7 +24,7 @@ void FUN_003e65a4(ShopItemDescription *work)
             scrSetStringSlot(2, reinterpret_cast<const char *>(dataFindKindRecordWithAocOverrides(work->entries[1].voice.sound, 0)));
         // Fall through: the initial voices and subsequent descriptions use the same selection entry.
     case 1: {
-        FUN_003c1060();
+        messageMainRequestBanner();
         s32 entry = tableGroupFindEntryIndex(work->tableGroup, DAT_005332c4);
         if (entry >= 0)
             scrScriptProcessStartEntry(work->script, entry);
@@ -40,12 +39,12 @@ void FUN_003e65a4(ShopItemDescription *work)
             work->progress.selectedEntry = choice;
             scrScriptProcessStartEntry(work->script, work->entries[choice].scriptEntry);
             work->selectionState.state = 3;
-            return FUN_003c3e14();
+            return messageMainClearBannerRequest();
         } else {
             ShopDescriptionState next(3, 0, work->selectionState.mode);
             work->selectionState = next;
         }
-        FUN_003c3e14();
+        messageMainClearBannerRequest();
         break;
     }
     case 3:

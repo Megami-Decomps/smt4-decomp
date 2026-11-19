@@ -3,7 +3,7 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-u32 FUN_002bfadc(s32 mode, AsdTexture *surface);
+u32 gxCopyFramebufferToSurface(s32 mode, AsdTexture *surface);
 s32 stateValuesGetBySelector(void);
 
 // "ZanCR" capture: captures the right screen into the afterimage's right surface under the same gates as the left capture.
@@ -32,7 +32,7 @@ s32 titleJobRefreshOverlaySurface(u32 job)
     renderCtxSelectStereoLayout(g_titleScene);
     work->zanSurfaceRight->dimensions.width = 512;
     work->zanSurfaceRight->dimensions.height = 512;
-    work->zan.captureResult = FUN_002bfadc(0, work->zanSurfaceRight);
+    work->zan.captureResult = gxCopyFramebufferToSurface(0, work->zanSurfaceRight);
     work->zan.capturedRight = 1;
     return 0;
 }

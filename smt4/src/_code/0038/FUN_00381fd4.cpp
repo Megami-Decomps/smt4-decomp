@@ -5,6 +5,7 @@
 #include "code/Code002c.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "code/Code0013.h"
 
 extern "C" {
 extern const u8 DAT_00405878[23];
@@ -40,9 +41,9 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
         work->state = work->mode == 1 || work->mode == 2 ? 14 : 3;
         work->frame = 0;
         if (work->mode != 1 && work->mode != 2) {
-            if (FUN_002c2a04(0) == 3)
+            if (pairedAvailabilityGetState(0) == 3)
                 titleSetSlotValueState2(0, 10);
-            if (FUN_002c2a04(1) == 3)
+            if (pairedAvailabilityGetState(1) == 3)
                 titleSetSlotValueState2(1, 10);
         }
     }

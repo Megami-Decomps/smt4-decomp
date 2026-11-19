@@ -37,7 +37,7 @@ ListEntry20 *FUN_0022b8c0(SelectionFlags *menu); // declcheck: local (code/Code0
 void listScrollToId(SelectionFlags *menu, u32 id);
 void objBlockInitAndMark(SelectionFlags *menu);
 void FUN_0022b6c4(SelectionFlags *menu); // declcheck: local (code/Code0022_Smt4.h types the argument as a Context view)
-void FUN_002305e8(u8 value);
+void placeWinSetValue(u8 value);
 void infoWinStartTimer(s32 immediate); // declcheck: local (retail passes 0; the definition takes nothing)
 void infoWinSetMessage(const void *message, u32 id);
 void FUN_00275dc4(void);
@@ -54,7 +54,7 @@ void FUN_0026fe0c(void);
 void FUN_0026faa4(void);
 s32 FUN_002b8694(void);
 u32 screenFadeIsBusy(void);
-void FUN_00273f5c(void);
+void clearFlags310To31F(void);
 void naviClearObjectBlock(void);
 void mapClearPendingEntries(void);
 void FUN_00273d34(void);
@@ -77,7 +77,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
     FUN_0022b778(camera);
     switch (camera->step) {
     case 0:
-        FUN_002305e8(0);
+        placeWinSetValue(0);
         FUN_0022af9c(0);
         FUN_00275dc4();
         frameTexCampSetMode(1);
@@ -142,7 +142,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
                 g_gameState.event.transitionRequest13 = 1;
             }
             gameGetMapBlock()->mapId = 0;
-            FUN_00273f5c();
+            clearFlags310To31F();
             naviClearObjectBlock();
             mapClearPendingEntries();
             if (result->requestPrimary) {
@@ -246,7 +246,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
             dialogOpen(0, 0);
             infoWinSetMessage(reinterpret_cast<const void *>(camera->talkMbm), camera->record->messageId);
             placeWinStartText(camera->record->name);
-            FUN_002305e8(1);
+            placeWinSetValue(1);
             FUN_0022af9c(1);
         }
         break;

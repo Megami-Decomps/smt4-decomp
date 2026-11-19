@@ -100,7 +100,7 @@ u32 btlItemComputeValues(u32 owner, u32 id, u32* first, u32* second);
 extern "C" {
 #endif
 
-void FUN_004713ec(u32 context, u32 arg, u32 second, u32 third);
+void aocDisplayQueueFormattedEntry(u32 context, u32 arg, u32 second, u32 third);
 
 #ifdef __cplusplus
 }

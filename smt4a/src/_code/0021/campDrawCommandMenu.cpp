@@ -25,7 +25,6 @@ u32 uniteIsPhase26Active(void);
 u32 uniteRequestGet(void);
 u8 uniteNotBusy(void);
 s32 widgetSubCallIfVisible(GridNavigation *grid);
-u8 FUN_003da8f4(u32 group, s32 index);
 /* The icon and label images of a camp command (the selected pair when `selected`). */
 /* The "new" marker of a camp command. */
 void campDrawCommandNewMark(s32 menu, s32 x, s32 y, u32 flags, s32 plain);
@@ -94,7 +93,7 @@ extern "C" void campDrawCommandMenu(void)
             continue;
         }
 
-        const u32 command = FUN_003da8f4(camp->menuGroup, row);
+        const u32 command = dataTable15GetUnlockedEntryId(camp->menuGroup, row);
         const s32 evenLayout = 4 + (8 - count) / 2;
         const s32 oddLayout = 20 + (7 - count) / 2;
         const s32 layout = (count & 1) != 0 ? oddLayout : evenLayout;
@@ -126,7 +125,7 @@ extern "C" void campDrawCommandMenu(void)
         highlightX = vec2GetXInt(&camp->sprites[CAMP_SPRITE_SELECTED_ICON]);
         highlightY = vec2GetYInt(&camp->sprites[CAMP_SPRITE_SELECTED_ICON]);
     }
-    const u32 command = FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
+    const u32 command = dataTable15GetUnlockedEntryId(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
     s32 layout;
     if ((count & 1) == 0)
         layout = 12 + (8 - count) / 2;

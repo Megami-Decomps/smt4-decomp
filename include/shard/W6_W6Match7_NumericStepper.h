@@ -74,7 +74,7 @@ void naviMainSetValuePair(u32 unused, const NaviValuePair *value);
 extern "C" {
 #endif
 
-unsigned int FUN_003d98a0(unsigned int param_1,int param_2);
+unsigned int btlEffectNameHasPrefix(unsigned int param_1,int param_2);
 
 #ifdef __cplusplus
 }

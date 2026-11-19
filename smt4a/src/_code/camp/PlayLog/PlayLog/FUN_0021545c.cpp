@@ -46,7 +46,7 @@ typedef char PlayLogScreenOffsetCheck[
 extern "C" {
 extern PlayLogScreen *g_playLog;
 s32 padQueryLogicalKey(s32 key, s32 mode);
-s32 FUN_001643b4(u32 file, u32 index);
+s32 ifTouchRegionAddRequested(u32 file, u32 index);
 void eventQueueAddUniqueIfValid(s32 event);
 void FUN_002007f4(void *work);
 u8 FUN_00228b04(ScrollSelection *list, s32 mode);
@@ -68,9 +68,9 @@ void FUN_0021545c(void)
                 uiSpriteAdvanceAnimation(&work->sprites[i], 1.0f);
         }
         if (uiAnimatedSpriteIsFinished(&work->sprites[4])) {
-            work->touchRegions[0] = FUN_001643b4(0x25, 0x1A);
-            work->touchRegions[1] = FUN_001643b4(0x25, 0x1B);
-            work->touchRegions[2] = FUN_001643b4(0x25, 0x1C);
+            work->touchRegions[0] = ifTouchRegionAddRequested(0x25, 0x1A);
+            work->touchRegions[1] = ifTouchRegionAddRequested(0x25, 0x1B);
+            work->touchRegions[2] = ifTouchRegionAddRequested(0x25, 0x1C);
             work->count += 3;
             work->state = 1;
             work->pending = 0;

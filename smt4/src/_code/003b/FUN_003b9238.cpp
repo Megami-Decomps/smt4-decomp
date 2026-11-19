@@ -27,7 +27,7 @@ s32 scrRunOpcodesStub(u32 script);
 void buttonHelpSelectByProgress(TextStep *step);
 void FUN_0027db24(s32 arg);
 void infoWinSetMessage(u32 window, s32 id);
-void FUN_002305e8(s32 value);
+void placeWinSetValue(s32 value);
 
 /* When the step's script finishes, opens the text of its entry and moves the step to state 5. */
 void FUN_003b9238(TextStep *step)
@@ -41,7 +41,7 @@ void FUN_003b9238(TextStep *step)
         step->state = 5;
         step->unk6CC = 0;
         placeWinStartText(step->textEntry->text);
-        FUN_002305e8(1);
+        placeWinSetValue(1);
     }
 }
 

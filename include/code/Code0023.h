@@ -10,8 +10,6 @@ void FUN_00232848(void);
 
 void *FUN_00233fcc(void *unused, u32 kind);
 
-void FUN_00234624(int *out, void *owner, u32 index);
-
 void *FUN_00239218(u32 index);
 
 u32 FUN_0023b3b8(void);

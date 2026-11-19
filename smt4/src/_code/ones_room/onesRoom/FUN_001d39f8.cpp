@@ -13,7 +13,7 @@ void commonBgStopChildAndBeginTransition(void);
 void buttonHelpSetPreset(s32);
 void *asdLoadFileSyncDefault(const char *);
 void scrScriptProcessStartEntry(ScriptProcess *, s32);
-void FUN_00282bfc(s32, s32);
+void titleRestartSlotState3(s32, s32);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 onesRoomTeardown(u32);
 void onesRoomSetEnabled(void);
@@ -41,8 +41,8 @@ void FUN_001d39f8(s32 inactive)
     scrScriptProcessStartEntry(room->process, 0);
     room->freeOnEnd = 0;
     if (room->active) {
-        FUN_00282bfc(0, 0xFF);
-        FUN_00282bfc(1, 0xFF);
+        titleRestartSlotState3(0, 0xFF);
+        titleRestartSlotState3(1, 0xFF);
     }
     g_onesRoom->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("onesRoom C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(onesRoomTeardown), reinterpret_cast<AsdProcFunc>(onesRoomSetEnabled), reinterpret_cast<u32>(g_onesRoom));
 }

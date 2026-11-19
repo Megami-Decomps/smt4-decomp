@@ -10,7 +10,7 @@ inline void MikadoCamera::operator delete(void *block)
 
 extern "C" {
 extern MikadoGlobals g_mikado;
-void FUN_003ba734(MikadoCamera *camera, const UShortVec3 *start);
+void menu4CSetValue42(MikadoCamera *camera, const UShortVec3 *start); // declcheck: local (the shared declaration in code/Code003b_Smt4.h does not compile here: argument of type "MikadoCamera *" is incompatible with parameter of type "Obj *")
 void mikadoCameraTeardown(MikadoCamera *camera);
 void sceneUpdateHandlerAndWidget(MikadoCamera *camera);
 
@@ -27,7 +27,7 @@ u32 FUN_001fdff0(void)
         UShortVec3 start;
         start.a = g_mikado.cameraStartA;
         start.c = g_mikado.cameraStartC;
-        FUN_003ba734(work->camera, &start);
+        menu4CSetValue42(work->camera, &start);
         work->state = 1;
         break;
     }

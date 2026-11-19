@@ -13,7 +13,7 @@ int residentApplyFallbackValues(void);
 int FUN_00266c5c(int *, int *, float *);
 int randomGetNormalizedFloat(void);
 int __hardfp_atan2f(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int FUN_00298d50(...);
@@ -64,7 +64,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00266c5c. */
 /* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: __hardfp_atan2f. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00298d50. */
@@ -314,7 +314,7 @@ void FUN_00276a3c(void)
     g_mapCamera[0xd] =
          (int)(*(float *)(g_lmapScene + 0x1c) - temp_v9 * (float)g_mapCamera[temp_v4 + 0x62]);
     temp_v9 = (float)piVar4[6] * temp_v12;
-    FUN_00282390();
+    libm_cosf();
     temp_v3 = g_lmapScene;
     piVar4 = g_mapCamera;
     temp_v14 = 90.0f;
@@ -328,7 +328,7 @@ void FUN_00276a3c(void)
     g_mapCamera[0x10] =
          (int)((float)g_mapCamera[0x10] + temp_v9 * (float)g_mapCamera[temp_v4 + 0x52]);
     temp_v9 = ((float)piVar4[6] - temp_v14) * temp_v12;
-    FUN_00282390();
+    libm_cosf();
     piVar4 = g_mapCamera;
     g_mapCamera[0x12] =
          (int)((float)g_mapCamera[0x12] + temp_v9 * (float)g_mapCamera[temp_v4 + 0x52]);
@@ -338,7 +338,7 @@ void FUN_00276a3c(void)
     g_mapCamera[0xd] =
          (int)((float)g_mapCamera[0xd] + temp_v9 * (float)g_mapCamera[temp_v4 + 0x52]);
     temp_v12 = ((float)piVar4[6] - temp_v14) * temp_v12;
-    FUN_00282390();
+    libm_cosf();
     piVar4 = g_mapCamera;
     pfVar7 = (float *)(g_mapCamera + 0xe);
     pfVar8 = (float *)(g_mapCamera + 0x11);

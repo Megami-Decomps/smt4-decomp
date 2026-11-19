@@ -5,6 +5,7 @@
 #include "result/ResultSpoils.h"
 #include "code/Code0029.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
@@ -78,7 +79,7 @@ void resultApplySpoils(ResultSpoils *spoils)
         }
         itemTotal += spoils->itemCount[i];
     }
-    if (FUN_00298f88(spoils->sourceId) == 0) {
+    if (dataTable1bOr1cRecordHasFlag1(spoils->sourceId) == 0) {
         gameCounterAddSaturating(0x22, 1);
         gameCounterAddSaturating(0x23, gold);
         gameCounterAddSaturating(0x24, itemTotal);

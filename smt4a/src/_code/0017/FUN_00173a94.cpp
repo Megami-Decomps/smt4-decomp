@@ -22,7 +22,7 @@ struct CleanupStateView {
 extern "C" {
 extern u8 DAT_00646e74;
 void nw_ut_internal_LinkListImpl_erase_2B743C(void* entries, u32 context);
-void FUN_001915c4(void* storage, u32 first, u32 second);
+void nw_snd_internal_PoolImpl_DestroyImpl(void* storage, u32 first, u32 second);
 }
 
 // Reset an active state, drain its entries, and release its remaining storage.
@@ -45,7 +45,7 @@ extern "C" u8 FUN_00173a94(CleanupStateView* state)
         nw_ut_internal_LinkListImpl_erase_2B743C(&state->entries, state->entryContext);
     }
 
-    FUN_001915c4(&state->storage, state->storageFirst, state->storageSecond);
+    nw_snd_internal_PoolImpl_DestroyImpl(&state->storage, state->storageFirst, state->storageSecond);
     state->storageFirst = 0;
     state->storageSecond = 0;
     state->storageCount = 0;

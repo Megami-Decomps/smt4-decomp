@@ -13,7 +13,7 @@ extern s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *info);
 extern s32 contentGetEntryKind(u32 id);
 extern void gameGlobalsSetSelected(s32 a);
 extern void gameReleaseDataReference(void);
-extern void FUN_002305e8(s32 a);
+extern void placeWinSetValue(s32 a);
 extern void beginStatusPanelClose(void);
 extern void messageWindowStartTimer(s32 a);
 extern void asdMdlManagerDestroy(void *manager);
@@ -55,7 +55,7 @@ void FUN_003a1504(Scene3a *scene)
             *state = SCENE3A_STATE_IDLE;
             gameGlobalsSetSelected(0);
             gameReleaseDataReference();
-            FUN_002305e8(1);
+            placeWinSetValue(1);
         }
         break;
     case SCENE3A_STATE_FINISH:

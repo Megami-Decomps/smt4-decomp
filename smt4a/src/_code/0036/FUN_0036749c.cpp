@@ -2,6 +2,7 @@
 #include "common.h"
 #include "game/GameStateA.h"
 #include "map/LmapViewGlobals.h"
+#include "util/TrigF32.h"
 
 #define LMAP_STATE_SETUP 0
 #define LMAP_STATE_SETTLE 1
@@ -34,7 +35,6 @@ void FUN_00324e38(s32 mode);
 void FUN_00327ee8(void);
 void FUN_002e364c(f32 *position);
 void mapEaseSceneHeading(void);
-f32 libm_cosf(f32 angle);
 f32 libm_sinf(f32 angle);
 f32 distSpatial(void);
 f32 mathPositionHeadingDegrees(void);

@@ -4,7 +4,6 @@
 #include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
-nn::Result queryFailureResultOrZero(void *owner);
 u32 FUN_0035f7dc(void*);
 
 // Retrieves a status block, copies its public half, and records the translated result.

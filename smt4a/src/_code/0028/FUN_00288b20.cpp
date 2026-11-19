@@ -164,7 +164,7 @@ LAB_00288c34:
       sprintf((char *)temp_v13,"\x81H\x81H\x81H");
     }
     else {
-      temp_v6 = FUN_0014bd84(param_3);
+      temp_v6 = aocIndexValueOrDefault(param_3);
       sprintf((char *)temp_v13,"%s",temp_v6);
     }
   }

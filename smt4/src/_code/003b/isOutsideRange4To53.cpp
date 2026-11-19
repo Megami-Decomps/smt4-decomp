@@ -1,0 +1,15 @@
+#include "common.h"
+#include "shard/W4_Match6_BtlScript.h"
+
+extern "C" {
+
+/* 0 for values 4-0x35, otherwise 1. */
+u8 isOutsideRange4To53(int value)
+{
+    if (value - 4U < 0x32) {
+        return 0;
+    }
+    return 1;
+}
+
+} /* extern "C" */

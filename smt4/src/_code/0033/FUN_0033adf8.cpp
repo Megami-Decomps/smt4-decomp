@@ -100,7 +100,7 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     slots->party[2] = 0xff;
     slots->slotLimit = 8;
     for (s32 i = 0; i < slots->slotLimit; i++) {
-        if (scenario->slotIds[i] != 0) FUN_0029c1c8(i, scenario->slotIds[i], 0);
+        if (scenario->slotIds[i] != 0) dispatchIfFound(i, scenario->slotIds[i], 0);
     }
     s32 partyCount = 0;
     for (s32 i = 0; i < 3; i++) {

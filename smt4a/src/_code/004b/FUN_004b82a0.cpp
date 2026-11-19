@@ -57,7 +57,7 @@ char *libc_strcpy(char *destination, const char *source);
 void bgmReleaseStopped(void);
 void soundChannelStopAll(s32 channel);
 void *rosterGetLeaderId(void);
-s32 FUN_001bd118(void);
+s32 table1bOr1cGetRecordValue(void); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 SceneRecord *menu4CGetCurrentEntry(void *sprites);
 void FUN_004b7a08(SceneWork *work);
 void FUN_00270c58(u32 id);
@@ -118,7 +118,7 @@ void FUN_004b82a0(SceneWork *work)
     } else if (work->returnToMap != 0) {
         void *entry = rosterGetLeaderId();
 
-        if (entry != NULL && FUN_001bd118() == 6) {
+        if (entry != NULL && table1bOr1cGetRecordValue() == 6) {
             work->record = menu4CGetCurrentEntry(work->sprites);
             FUN_004b7a08(work);
             FUN_00270c58(*(u16 *)(reinterpret_cast<u8 *>(questDataGetRecord((u32)(entry))) + 0xD4));

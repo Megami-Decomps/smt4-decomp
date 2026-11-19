@@ -6,9 +6,8 @@ extern "C" {
 
 s32 FUN_00293f10(s32 id, s32 mapped);
 
-u32 FUN_00298f88(u32 id);
-
-void FUN_0029c1c8(s32 id, u16 a, bool b);
+/* Initialises the unit record of `slot` for unit `id` (`kind` selects the initial state), when the slot has one. */
+void dispatchIfFound(s32 slot, u32 id, s32 kind);
 
 u32 FUN_0029c43c(u32 value, u8 flag);
 

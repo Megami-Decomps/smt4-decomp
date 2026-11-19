@@ -25,14 +25,14 @@ static __inline s32 resultDescription(s32 status)
 }
 
 extern "C" {
-void FUN_0016cdc0(SaveDataArchivePath *path, u8 mediaType, u64 titleId);
+void nn_fs_ExtSaveDataSpecifier_Make(SaveDataArchivePath *path, u8 mediaType, u64 titleId);
 nn::Result FUN_0042b3b8(SaveDataArchive **archive, const SaveDataArchivePath *path, u32 flags);
 s32 FUN_001aeefc(const char *name, SaveDataArchive *archive, u32 first, u32 second);
 
 s32 FUN_00429fcc(const char *name, u64 titleId)
 {
     SaveDataArchivePath path;
-    FUN_0016cdc0(&path, 1, titleId);
+    nn_fs_ExtSaveDataSpecifier_Make(&path, 1, titleId);
     SaveDataArchive *archive;
     nn::Result status = FUN_0042b3b8(&archive, &path, 0);
     nn::Result module = nnResultModule(status);

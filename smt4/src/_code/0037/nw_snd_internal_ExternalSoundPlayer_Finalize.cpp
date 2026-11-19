@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_003798f8(int *, unsigned int);
+int word14Clear(int *, unsigned int);
 int FUN_003799f8(int *, int);
 int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
 
-/* Supplied declaration required: FUN_003798f8. */
+/* Supplied declaration required: word14Clear. */
 /* Supplied declaration required: FUN_003799f8. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
 
@@ -24,7 +24,7 @@ void nw_snd_internal_ExternalSoundPlayer_Finalize(int param_1,unsigned int param
   if (piVar1 != (int *)(param_1 + 4)) {
     do {
       piVar2 = (int *)*piVar1;
-      FUN_003798f8(piVar1 + -0x3b,param_2);
+      word14Clear(piVar1 + -0x3b,param_2);
       nw_ut_internal_LinkListImpl_erase_2B743C(param_1,piVar1);
       FUN_003799f8(piVar1 + -0x3b,param_1);
       piVar1 = piVar2;

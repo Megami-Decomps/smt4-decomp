@@ -1,8 +1,8 @@
 /* NON_MATCHING: VFP allocation and scene-position load grouping differ; the directional calculation and tail calls match. */
 #include "map/LmapGlobals.h"
+#include "util/TrigF32.h"
 
 extern "C" {
-f32 libm_cosf(f32 radians);
 f32 libm_sinf(f32 radians);
 void FUN_003136e4(f32 angle, f32 distance);
 s32 FUN_003644bc(void);

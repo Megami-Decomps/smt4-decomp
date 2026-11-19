@@ -1,6 +1,8 @@
 /* NON_MATCHING: the inner loop is laid out differently (retail tests at the top and keeps the critical section pointer in a register). */
 /* Removes every entry whose key is `key` from the three entry lists of `self` (under its critical section) and destroys it. */
 #include "common.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
+#include "classes/Obj55c244.h"
 
 extern "C" {
 
@@ -28,16 +30,13 @@ struct Owner0037a2a8 {
     /* 0x2c */ u8 criticalSection[0x10];
 };
 
-void nn_os_CriticalSection_Enter(u8 *cs);
-void nn_os_CriticalSection_Leave(u8 *cs);
 void nw_ut_internal_LinkListImpl_erase_2BAE30(EntryList0037a2a8 *list, ListNode0037a2a8 *node);
-void nn_os_LightEvent_Signal(u8 *payload);
 
 void nw_snd_internal_TaskManager_CancelTasksByKeyImpl(Owner0037a2a8 *self, u32 key)
 {
     u32 i;
 
-    nn_os_CriticalSection_Enter(self->criticalSection);
+    nn_os_CriticalSection_Enter(reinterpret_cast<CriticalSection *>(self->criticalSection));
     for (i = 0; i < 3; i++) {
         EntryList0037a2a8 *list = &self->lists[(u8)i];
         ListNode0037a2a8 *node = list->root.next;
@@ -53,7 +52,7 @@ void nw_snd_internal_TaskManager_CancelTasksByKeyImpl(Owner0037a2a8 *self, u32 k
             }
         }
     }
-    nn_os_CriticalSection_Leave(self->criticalSection);
+    nn_os_CriticalSection_Leave(reinterpret_cast<CriticalSection *>(self->criticalSection));
 }
 
 }

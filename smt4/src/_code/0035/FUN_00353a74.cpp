@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00239fc4. */
 /* Supplied declaration required: recordValidatePair. */
-extern int queryFailureResultOrZero(unsigned int);
+extern int queryFailureResultOrZero(unsigned int); // declcheck: local (romwright prototype; the shared declaration in classes/WindowStatus.h does not compile here: more than one instance of overloaded function "recordValidatePair" has "C" linkage)
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: FUN_003542c4. */
 

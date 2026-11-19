@@ -7,6 +7,7 @@
 #include "gamedata/Table1bOr1c.h"
 #include <string.h>
 #include "game/GameState.h"
+#include "code/Code001b.h"
 
 extern "C" {
 

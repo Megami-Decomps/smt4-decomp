@@ -25,7 +25,7 @@ static inline s32 effectPacketMode(s32 type)
 
 extern "C" {
 void FUN_0037cdcc(u32, u32, EffectEditorPacket *);
-void FUN_003ca0ec(void *, EffectSelectionItem *);
+void effResourcePromoteReferences(void *, EffectSelectionItem *); // declcheck: local (the shared declaration in shard/W5_W5Match2_LinkedItems.h does not compile here: argument of type "void *" is incompatible with parameter of type "LinkedItems *")
 void effBlockCopyDataB(EffectSelectionBlock *, const void *, u32, u32);
 void taskRunWithObject(EffectSelectionBlock *, const EffectEditorPacket *, s32);
 }
@@ -38,7 +38,7 @@ extern "C" u32 FUN_003cd7c4(u32 request, u32 argument)
     if (packet.state == 2) {
         result = 0x400000;
     } else if (packet.state == 1) {
-        FUN_003ca0ec(g_effectEditor.list, g_effectEditor.item);
+        effResourcePromoteReferences(g_effectEditor.list, g_effectEditor.item);
         if (packet.type != 8) {
             taskRunWithObject(g_effectEditor.block, &packet, effectPacketMode(packet.type));
         } else {

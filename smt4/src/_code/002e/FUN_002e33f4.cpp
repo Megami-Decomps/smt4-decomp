@@ -30,7 +30,7 @@ typedef struct EffectUnit {
 s32 randNextInRange(u32 limit);
 EffectUnit *gameGetPlayerData(void);
 void FUN_00283f30(u16 skills[8], s32 arg);
-void FUN_002485d4(EffectUnit *unit, u16 skills[8]);
+void halves34Copy(EffectUnit *unit, u16 skills[8]); // declcheck: local (the shared declaration in code/Code0024_Smt4.h does not compile here: argument of type "EffectUnit *" is incompatible with parameter of type "Source *")
 s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(EffectUnit *unit, u32 bit);
 void playerPadSetBit(u32 bit);
@@ -67,7 +67,7 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
                     FUN_00283f30(skills, 0);
                     guarded = playerPadTestBit(5);
                 } else {
-                    FUN_002485d4(unit, skills);
+                    halves34Copy(unit, skills);
                     guarded = flagWordTestBit(unit, 5);
                 }
                 if (guarded == 0) {

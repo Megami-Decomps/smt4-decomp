@@ -21,7 +21,7 @@ int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
 int mathSinCos(...);
 int mtx44Copy(...);
-int FUN_002f81b0(...);
+int childHolderCopyOut(...);
 int nn_math_ARMv6_MTX44MultAsm(...);
 
 /* stack frame of (int)emitter: 64 slot(s), 256 byte(s) */
@@ -131,7 +131,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: mathSinCos. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002f81b0. */
+/* Supplied declaration required: childHolderCopyOut. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
 
@@ -322,7 +322,7 @@ void effEmitterUpdate(EffectEmitter *emitter)
       refCountIncrement(reinterpret_cast<int *>(temp_v79));
     }
     else {
-      FUN_002f81b0(puVar8,&temp_v72);
+      childHolderCopyOut(puVar8,&temp_v72);
       temp_v2 = temp_v72 << 4;
       temp_v75 = temp_v2 & 0xffff;
       temp_v7 = (f32)(s32)(temp_v2);

@@ -5,7 +5,7 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-u32 FUN_002bfadc(u32 mode, AsdTexture *surface);
+u32 gxCopyFramebufferToSurface(u32 mode, AsdTexture *surface);
 
 /* "ZanCL" capture: captures the left screen into the afterimage's left surface once the layer is ready, the scene surface exists and neither capture blocking nor the CAMP effect is active. */
 u32 titleJobRefreshSurface(u32 job)
@@ -30,7 +30,7 @@ u32 titleJobRefreshSurface(u32 job)
     renderCtxSelectStereoLayout(g_titleScene);
     work->zanSurfaceLeft->dimensions.width = 512;
     work->zanSurfaceLeft->dimensions.height = 512;
-    work->zan.captureResult = FUN_002bfadc(0, work->zanSurfaceLeft);
+    work->zan.captureResult = gxCopyFramebufferToSurface(0, work->zanSurfaceLeft);
     work->zan.capturedLeft = 1;
     return 0;
 }

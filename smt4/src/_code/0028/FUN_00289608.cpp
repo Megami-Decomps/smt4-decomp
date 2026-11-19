@@ -2,6 +2,7 @@
 #include "code/Code002c.h"
 #include "util/MemoryHelpers_VariantB.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code0013.h"
 
 extern "C" {
 
@@ -31,11 +32,11 @@ void FUN_00289608(AocScriptHolder *task, u8 flag)
         buttonHelpCreate();
     }
     task->entry = 12;
-    s32 firstState = FUN_002c2a04(0);
+    s32 firstState = pairedAvailabilityGetState(0);
     if (firstState == 3) {
         titleSetSlotValueState2(0, 5);
     }
-    if (FUN_002c2a04(1) == 3) {
+    if (pairedAvailabilityGetState(1) == 3) {
         titleSetSlotValueState2(1, 5);
     }
 }

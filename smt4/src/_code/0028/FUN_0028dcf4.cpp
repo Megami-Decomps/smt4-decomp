@@ -6,9 +6,9 @@
 extern "C" {
 
 int pairSetSecondResetFirst(...);
-int FUN_00262210(...);
+int uiGetLayoutPointDifference(...); // declcheck: local (romwright prototype; the shared declaration in camp/UIQuest/UIQuest.h does not compile here: argument of type "int" is incompatible with parameter of type "PointDeltaWork *")
 int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
-int FUN_002a9fdc(...);
+int rangeSelectionSelectEndpoint(...);
 int sentinelLookupGetValue(void);
 int uiSpriteSetImageKeyframe(...);
 void uiLayoutSelectionSpritePair(void* context);
@@ -31,9 +31,9 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: pairSetSecondResetFirst. */
-/* Supplied declaration required: FUN_00262210. */
+/* Supplied declaration required: uiGetLayoutPointDifference. */
 /* Supplied declaration required: uiStoreTextureEntryCenter. */
-/* Supplied declaration required: FUN_002a9fdc. */
+/* Supplied declaration required: rangeSelectionSelectEndpoint. */
 /* Supplied declaration required: sentinelLookupGetValue. */
 extern int charCodeIsPrivateUseGlyph(unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -103,37 +103,37 @@ void FUN_0028dcf4(int param_1,int param_2)
                 return;
               }
               pairSetFirstResetSecond(param_1 + 0x150,0x7dd);
-              FUN_002a9fdc(param_1 + 0x150,1,0);
-              FUN_00262210(param_1 + 0x150,0xe,0x7e0,0x7dd);
+              rangeSelectionSelectEndpoint(param_1 + 0x150,1,0);
+              uiGetLayoutPointDifference(param_1 + 0x150,0xe,0x7e0,0x7dd);
             }
             else {
               pairSetFirstResetSecond(param_1 + 0x150,0x7d2);
-              FUN_002a9fdc(param_1 + 0x150,1,0);
-              FUN_00262210(param_1 + 0x150,0xe,0x7d6,0x7d2);
+              rangeSelectionSelectEndpoint(param_1 + 0x150,1,0);
+              uiGetLayoutPointDifference(param_1 + 0x150,0xe,0x7d6,0x7d2);
             }
           }
           else {
             pairSetFirstResetSecond(param_1 + 0x150,0x7de);
-            FUN_002a9fdc(param_1 + 0x150,1,0);
-            FUN_00262210(param_1 + 0x150,0xe,0x7e1,0x7de);
+            rangeSelectionSelectEndpoint(param_1 + 0x150,1,0);
+            uiGetLayoutPointDifference(param_1 + 0x150,0xe,0x7e1,0x7de);
           }
         }
         else {
           pairSetFirstResetSecond(param_1 + 0x150,0x7d3);
-          FUN_002a9fdc(param_1 + 0x150,1,0);
-          FUN_00262210(param_1 + 0x150,0xe,0x7d7,0x7d3);
+          rangeSelectionSelectEndpoint(param_1 + 0x150,1,0);
+          uiGetLayoutPointDifference(param_1 + 0x150,0xe,0x7d7,0x7d3);
         }
       }
       else {
         pairSetFirstResetSecond(param_1 + 0x150,0x7dc);
-        FUN_002a9fdc(param_1 + 0x150,1,0);
-        FUN_00262210(param_1 + 0x150,0xe,0x7df,0x7dc);
+        rangeSelectionSelectEndpoint(param_1 + 0x150,1,0);
+        uiGetLayoutPointDifference(param_1 + 0x150,0xe,0x7df,0x7dc);
       }
     }
     else {
       pairSetFirstResetSecond(param_1 + 0x150,0x7d1);
-      FUN_002a9fdc(param_1 + 0x150,1,0);
-      FUN_00262210(param_1 + 0x150,0xe,0x7d5,0x7d1);
+      rangeSelectionSelectEndpoint(param_1 + 0x150,1,0);
+      uiGetLayoutPointDifference(param_1 + 0x150,0xe,0x7d5,0x7d1);
     }
     *(unsigned short *)(param_1 + 0x18a) = 2;
     return;
@@ -299,7 +299,7 @@ LAB_0028e528:
       uiSpriteStateInitFromSource(temp_v7,0xe,0xffffffff,param_1 + 0xa4,0xb);
       pairSetFirstResetSecond(temp_v7,0x8b);
       uiSpriteSetImageKeyframe(temp_v7,4,0);
-      FUN_002a9fdc(temp_v7,6,0);
+      rangeSelectionSelectEndpoint(temp_v7,6,0);
       uiStoreTextureEntryCenter(temp_v7,0xe,temp_v11[temp_v4] + 0x8f);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 5);

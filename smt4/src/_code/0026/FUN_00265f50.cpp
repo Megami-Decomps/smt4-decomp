@@ -8,7 +8,7 @@ extern "C" {
 int FUN_0025247c(unsigned char [4]);
 int residentApplyFallbackValues(void);
 int __hardfp_atan2f(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int FUN_002c159c(unsigned char *);
 int FUN_002c1e30(unsigned char *, int);
@@ -42,7 +42,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0025247c. */
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: __hardfp_atan2f. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002c159c. */
@@ -97,7 +97,7 @@ void FUN_00265f50(int param_1)
   *(float *)(param_1 + 0x60) =
        (float)temp_v10 - temp_v4 * *(float *)(g_mapCamera + *(int *)(g_mapCamera + 0xc4) * 4 + 0x188);
   temp_v9 = *(float *)(param_1 + 0x50) * temp_v9;
-  FUN_00282390();
+  libm_cosf();
   temp_v0 = g_mapCamera;
   *(float *)(param_1 + 0x68) =
        in_s16 - temp_v9 * *(float *)(g_mapCamera + *(int *)(g_mapCamera + 0xc4) * 4 + 0x188);

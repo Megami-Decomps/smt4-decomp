@@ -1,6 +1,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 #include "classes/Obj421460.h"
+#include "shard/W6_W6Match3_RotationY.h"
 
 typedef f32 (*AnimPlayPolicy)(f32 lower, f32 upper, f32 value);
 
@@ -15,7 +16,6 @@ extern "C" {
 u32 asdModelGetSlotArray0(s32 index);
 void FUN_002cbaf8(u32 node, s32 index);
 void nw_gfx_SceneNode_AttachChild(u32 parent, u32 child);
-void FUN_00244d98(s32 index);
 extern f32 nw_anim_PlayPolicy_Loop(f32 lower, f32 upper, f32 value);
 }
 
@@ -45,13 +45,13 @@ extern "C" void modelSlotAttachChild(ModelSlotOwner *owner, s32 index)
         nw_gfx_SceneNode_AttachChild(slot, owner->child);
         sysFlagsSetBits(1);
         playerSetLoopPolicy(owner->player, 0);
-        FUN_00244d98(0);
+        effApplyModelLight(0);
         return;
     }
     if (index == 1) {
         nw_gfx_SceneNode_AttachChild(slot, owner->child);
         sysFlagsSetBits(2);
         playerSetLoopPolicy(owner->player, 0);
-        FUN_00244d98(1);
+        effApplyModelLight(1);
     }
 }

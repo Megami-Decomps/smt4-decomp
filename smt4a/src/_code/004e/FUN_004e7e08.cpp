@@ -67,7 +67,7 @@ u32 FUN_004e7e08(ActionContext *context, ReflectAction *action)
 {
     if (btlScriptUnitHasFlags(context->owner) != 0) {
         if (!propertiesAtMaximum(*(s16 *)(action->target + 0x6A)))
-            FUN_004c8284(*(s16 *)(action->target + 0x6A), 3, 1, 0);
+            channelRunMagnitudeQueries(*(s16 *)(action->target + 0x6A), 3, 1, 0);
         g_btlScriptUnit[context->owner->unitIndex].phase = 0x1D;
         return 1;
     }
@@ -93,7 +93,7 @@ u32 FUN_004e7e08(ActionContext *context, ReflectAction *action)
         if (propertiesAtMaximum(*(s16 *)(action->target + 0x6A))) {
             btlReflectQueueValueAction(10, action, 0x40, action->attacker, 0);
         } else {
-            FUN_004c8284(*(s16 *)(action->target + 0x6A), 3, 1, 0);
+            channelRunMagnitudeQueries(*(s16 *)(action->target + 0x6A), 3, 1, 0);
             FUN_004fbeac(10, action, 0, 0x3F, 0);
         }
         next = 3;

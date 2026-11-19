@@ -46,7 +46,7 @@ void FUN_002e8be0(void)
         scene->unk06C = 0;
         scene->pose.targetPosition = g_gameState.overviewPosition;
         g_lmapScene->pose.targetPosition.x = g_lmapScene->pose.targetPosition.x + mathRemPio2f(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
-        g_lmapScene->pose.targetPosition.z = g_lmapScene->pose.targetPosition.z + FUN_00282390(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->pose.targetPosition.z = g_lmapScene->pose.targetPosition.z + libm_cosf(g_gameState.heading * DEGREES_TO_RADIANS) * 40.0f;
         g_lmapScene->pose.targetHeading = g_gameState.overviewHeading;
         FUN_0027fc14(11);
         g_mapCamera->contextMode = -2;
@@ -56,7 +56,7 @@ void FUN_002e8be0(void)
         f32 viewY = g_gameState.overviewPosition.y;
         f32 viewZ = g_gameState.overviewPosition.z;
         viewX += mathRemPio2f(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
-        viewZ += FUN_00282390(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        viewZ += libm_cosf(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         FUN_001b4478(viewX, viewY, viewZ, g_gameState.heading);
         g_lmapScene->state = g_lmapScene->state + 1;
         g_lmapScene->stateTime = 0;

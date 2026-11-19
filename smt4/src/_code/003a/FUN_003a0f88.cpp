@@ -36,7 +36,7 @@ extern "C" {
 
 
 u32 flaggedEntryGetValueByState(const ChoicePanelEntry *entry);
-const SpritePosition *FUN_002bf4f0(void *sprites, u32 id);
+const SpritePosition *layoutFindTableEntry(void *sprites, u32 id);
 void uiRectDrawAtBottomRight(void *sprites, s32 mode, s32 x, s32 y, s32 depth);
 void FUN_00231bcc(void *sprites, u32 image, s32 x, s32 y, s32 depth, u32 flags);
 void drawTextAtRelativePosition(void *sprites, s32 a, s32 x, s32 y, s32 b, u32 mode, u32 color, s32 depth,
@@ -54,10 +54,10 @@ void FUN_003a0f88(ChoicePanel *panel)
     if (kind == 7 || kind == 8) {
         step = 1;
     }
-    const SpritePosition *frame = FUN_002bf4f0(panel->sprites, flaggedEntryGetValueByState(&panel->entries[kind]) + step + 0x4f);
+    const SpritePosition *frame = layoutFindTableEntry(panel->sprites, flaggedEntryGetValueByState(&panel->entries[kind]) + step + 0x4f);
     s32 frameX = frame->x;
     s32 frameY = frame->y;
-    const SpritePosition *origin = FUN_002bf4f0(panel->sprites, 200);
+    const SpritePosition *origin = layoutFindTableEntry(panel->sprites, 200);
     s32 x = origin->x + frameX;
     s32 y = frameY + origin->y;
     if (panel->kind == 8) {
@@ -76,7 +76,7 @@ void FUN_003a0f88(ChoicePanel *panel)
     }
     renderStackPop(&g_titleScene->stackB);
     s32 value = panel->value;
-    const SpritePosition *numberPos = FUN_002bf4f0(panel->sprites, 199);
+    const SpritePosition *numberPos = layoutFindTableEntry(panel->sprites, 199);
     u32 color = 0xffffffff;
     if (panel->value == panel->selected) {
         color = 0xf49800ff;

@@ -7,7 +7,7 @@
 extern "C" {
 
 int CONCAT44(unsigned int, double);
-int FUN_00262210(...);
+int uiGetLayoutPointDifference(...); // declcheck: local (romwright prototype; the shared declaration in camp/UIQuest/UIQuest.h does not compile here: argument of type "int" is incompatible with parameter of type "PointDeltaWork *")
 int FUN_002963ec(...);
 int effectRenderTransformedInstance(...);
 int vec2GetYInt(...);
@@ -29,7 +29,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00262210. */
+/* Supplied declaration required: uiGetLayoutPointDifference. */
 /* Supplied declaration required: FUN_002963ec. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
@@ -255,7 +255,7 @@ void FUN_0032fe34(int param_1)
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     temp_v1 = vec2GetXInt(param_1 + 0x20);
     temp_v2 = vec2GetYInt(param_1 + 0x20);
-    FUN_00262210(param_1 + 0xac,0x18,*(int *)(param_1 + 0xb0) - 1);
+    uiGetLayoutPointDifference(param_1 + 0xac,0x18,*(int *)(param_1 + 0xb0) - 1);
     FUN_002963ec(param_1 + 0xac,(int)temp_v1,(int)temp_v2);
     temp_v8 = g_titleScene;
     if (*(int *)(param_1 + 0x2f0) == 7) {

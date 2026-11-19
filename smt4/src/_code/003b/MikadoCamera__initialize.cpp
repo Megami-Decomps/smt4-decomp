@@ -19,7 +19,7 @@ void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
 void FUN_00240cec(s32 arg);
 void spriteTable2aLoad(SelectionFlags *panel);
-void FUN_00282bfc(s32 slot, u32 value);
+void titleRestartSlotState3(s32 slot, u32 value);
 void FUN_00235250(Mover *mover);
 void placeWinCreate(void);
 }
@@ -61,8 +61,8 @@ void MikadoCamera::initialize()
     exitRequest[1] = 0;
     exitRequest[2] = 0;
     exitRequest[3] = 0;
-    FUN_00282bfc(0, 0xFF);
-    FUN_00282bfc(1, 0xFF);
+    titleRestartSlotState3(0, 0xFF);
+    titleRestartSlotState3(1, 0xFF);
     talkWork = new MikadoTalkWork;
     FUN_00235250(reinterpret_cast<Mover *>(talkWork));
     placeWinCreate();

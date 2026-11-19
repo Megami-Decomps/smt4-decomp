@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stdio.h>
 #include "game/GameStateA.h"
+#include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 
 #define SHOP_STATE_OPEN 0
 #define SHOP_STATE_WAIT_LIST 1
@@ -49,7 +50,6 @@ void _ZN9Obj55ca08D1Ev(void *detail);
 void fileSlot17Acquire(s32 *slot);
 void fileSlot17Release(s32 *slot);
 s32 storyFlagRangeAnySet(void);
-s32 isFlag10Set(void);
 void setFlag10(void);
 s32 lmapMainGetUnk74(void);
 s32 gameStateIsFlagSetAndLarge(void);

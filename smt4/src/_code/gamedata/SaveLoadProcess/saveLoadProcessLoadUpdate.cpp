@@ -29,7 +29,7 @@ s32 saveLoadProcessLoadUpdate(u32 job)
         break;
     case 5:
         if (FUN_001a1d08() == 1) {
-            if (FUN_002cedbc() == 0) {
+            if (byte1IsZero() == 0) {
                 const SaveFilePayloadIV *payload = static_cast<const SaveFilePayloadIV *>(work->buffer);
                 const u32 *table = payload->table;
                 const ConfigSettingsImage *settings = &payload->settings;

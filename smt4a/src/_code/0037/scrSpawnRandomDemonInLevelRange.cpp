@@ -1,5 +1,6 @@
 #include "gamedata/NkmBaseRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "code/Code0029.h"
 
 namespace {
 /* A demon record: only the fields the filter reads. */
@@ -24,7 +25,6 @@ void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
 u32 randRange(u32 maximum);
 u32 partyFindFirstUnusedEntry(void);
-void dispatchIfFound(u32 arg, u32 id, s32 flag);
 u32 npc2dCreateDemonPortrait(u32 id, s32 a, s32 b, s32 c, f32 scale);
 void eventTexSetJobParam(u32 job);
 void eventInsertSortedTextureJob(u32 job);

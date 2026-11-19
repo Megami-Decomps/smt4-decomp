@@ -10,7 +10,7 @@ int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int ownerGetFloatValue(...);
 int cameraExportParameters(...);
-int FUN_001ac2d4(...);
+int modelSelectPrimaryMotion(...);
 int asdModelSlotRelease(...);
 int asdEnvResetModelBank(...);
 int asdMdlManagerDestroy(...);
@@ -22,7 +22,7 @@ int modelRemoveFromSlotList(...);
 int animPlayerSetLoopPolicy(...);
 int FUN_0037a898(...);
 int gfxObjectDestroy(...);
-int FUN_003ba560(...);
+int modelSlotAttachChild(...);
 int FUN_003d502c(...);
 int titleSetSlotValueState2(...);
 int VectorSignedToFloat(...);
@@ -40,7 +40,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: cameraExportParameters. */
 struct ModelBoneAttachmentRoot;
 extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
-/* Supplied declaration required: FUN_001ac2d4. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdEnvResetModelBank. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -53,10 +53,10 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: modelRemoveFromSlotList. */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: FUN_0037a898. */
-extern unsigned int FUN_00387350(char *);
+extern unsigned int asdCameraLoadFromFile(char *);
 /* Supplied declaration required: gfxObjectDestroy. */
 extern int floatOwnerIsDone(unsigned int);
-/* Supplied declaration required: FUN_003ba560. */
+/* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_003d502c. */
 /* Supplied declaration required: titleSetSlotValueState2. */
 
@@ -80,9 +80,9 @@ unsigned int FUN_002caea0(void)
     if (temp_v1 == 0) {
       asdEnvResetModelBank("event/oc/oc_loop.bcenv",0);
       *(unsigned int *)(temp_v0 + 0x55c) = 0;
-      temp_v2 = FUN_00387350("event/oc/oc_loop.bccam");
+      temp_v2 = asdCameraLoadFromFile("event/oc/oc_loop.bccam");
       *(unsigned int *)(temp_v0 + 0x560) = temp_v2;
-      temp_v2 = FUN_00387350("event/oc/oc_start.bccam");
+      temp_v2 = asdCameraLoadFromFile("event/oc/oc_start.bccam");
       *(unsigned int *)(temp_v0 + 0x564) = temp_v2;
       temp_v2 = asdMdlManagerCreateSecondList("event/oc/oc_loop.bam",0x38);
       *(unsigned int *)(temp_v0 + 0x558) = temp_v2;
@@ -96,14 +96,14 @@ unsigned int FUN_002caea0(void)
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {
         lightOwnerRegister(temp_v1,1);
         animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
-        FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
+        modelSelectPrimaryMotion(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
         animationEvaluateCallback(*(unsigned int *)(*piVar4 + 8));
         faderSetValue(*(unsigned int *)(*piVar4 + 8));
       }
       FUN_003d502c(0);
       temp_v2 = *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x574) * 4 + 0x560);
       *(unsigned int *)(temp_v0 + 0x55c) = temp_v2;
-      FUN_003ba560(temp_v2,0);
+      modelSlotAttachChild(temp_v2,0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + 0x560) + 4);
       *(romwright_code **)(temp_v1 + 0x4c) = nw_anim_PlayPolicy_Loop;
       *(unsigned char *)(temp_v1 + 0x58) = 1;
@@ -126,14 +126,14 @@ unsigned int FUN_002caea0(void)
       temp_v1 = (int)in_s0;
       FUN_0037a898(*(unsigned int *)(*piVar4 + 8));
       piVar5 = (int *)(temp_v0 + 0x574);
-      FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
+      modelSelectPrimaryMotion(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
       modelRemoveFromSlotList(*(unsigned int *)(temp_v0 + 0x55c),0);
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       *piVar5 = 0;
-      FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),0);
+      modelSelectPrimaryMotion(*(unsigned int *)(*piVar4 + 8),0);
       temp_v2 = *(unsigned int *)(temp_v0 + *piVar5 * 4 + 0x560);
       *(unsigned int *)(temp_v0 + 0x55c) = temp_v2;
-      FUN_003ba560(temp_v2,0);
+      modelSlotAttachChild(temp_v2,0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + *piVar5 * 4 + 0x560) + 4);
       temp_v2 = *(unsigned int *)(temp_v1 + 0x44);
       (**(romwright_code **)(temp_v1 + 0x4c))(*(unsigned int *)(temp_v1 + 0x50));

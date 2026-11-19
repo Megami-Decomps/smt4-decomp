@@ -53,4 +53,9 @@ typedef struct AsdCecMessageIndexEntry {
     /* 0x00 */ u8 data[12];
 } AsdCecMessageIndexEntry;
 
+extern "C" {
+/* Copies the CEC settings `arg` into the module. */
+void asdCecCopySettings(u32 arg);
+}
+
 #endif

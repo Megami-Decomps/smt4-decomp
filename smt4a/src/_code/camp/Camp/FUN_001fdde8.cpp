@@ -4,6 +4,7 @@
 #include "network/DataStore/DataStoreMain.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/CampMenuEntry.h"
 
 extern "C" {
 
@@ -126,7 +127,6 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: FUN_0038b5fc. */
 /* Supplied declaration required: campCecPreviewEquipmentChoice. */
 /* Supplied declaration required: sysPlayVoice. */
-extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: controllerSetPositionXyz. */
 /* Supplied declaration required: modelPlayClip. */
@@ -668,7 +668,7 @@ void FUN_001fdde8(int param_1)
 LAB_001fea60:
   flaggedEntrySetValueB(temp_v5 + 0x40,temp_v9);
   temp_v3 = listCursorGetRowOfChildIfUnblocked(temp_v5 + 0x40);
-  param_1 = FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v3);
+  param_1 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v5 + 0xa4),temp_v3);
   campShowSelectedEntryHelp();
   campTouchRegionsRemoveGroup(temp_v13,0);
   *(unsigned int *)(temp_v5 + 0x20) = 2;

@@ -21,7 +21,6 @@ extern "C" {
 extern BattleDebugInitializationGlobalsView DAT_005715f8;
 extern const AsdListBoxEntry DAT_00571980[];
 extern const char DAT_00528078[];
-s32 FUN_002761c8(u32 process);
 s32 FUN_002ba870(u32 process);
 s32 lmapJobQueryZero(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
@@ -36,7 +35,7 @@ void FUN_002919b4(BtlMainStateA *battle, s32 menuMode)
 {
     battle->markerMasks.bits |= DAT_005715f8.mask;
     battle->uiJobs.menuJob = taskCreateDraw((const s8 *)"btlDebug Calc", 4, 0, 0,
-        FUN_002761c8, btlDebugClose, (u32)battle, (void *)battle->job);
+        btlDebugDispatchCurrentJob, btlDebugClose, (u32)battle, (void *)battle->job);
     taskCreateDraw((const s8 *)"btlDebug DrawUp", 0x75, 0, 0, FUN_002ba870, 0,
         (u32)battle, (void *)battle->uiJobs.menuJob);
     taskCreateDraw((const s8 *)"btlDebug DrawDown", 0xea, 0, 0, lmapJobQueryZero, 0,

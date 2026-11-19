@@ -2,11 +2,11 @@
 #include "game/GameStateA.h"
 #include "map/mapDepart.h"
 #include "map/LmapViewGlobals.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 extern MapMainA *g_mapMain;
 f32 libm_sinf(f32 angle);
-f32 libm_cosf(f32 angle);
 
 // Save the departure point behind the player and the corresponding arrival point.
 void mapSnapshotOffsetTransition(void)

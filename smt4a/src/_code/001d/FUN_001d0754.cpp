@@ -5,7 +5,7 @@
 extern "C" {
 
 JobManager *FUN_001b1998(void);
-void FUN_001d0788(JobManager *manager, JobNode *node, s32 priority);
+void nw_snd_internal_TaskManager_AppendTask(JobManager *manager, JobNode *node, s32 priority);
 
 /* Resets a job and hands it to the job manager at priority 1 (the function that follows). */
 void FUN_001d0754(Job *job)
@@ -14,7 +14,7 @@ void FUN_001d0754(Job *job)
     job->self0 = job;
     job->self1 = job;
     job->head = job->next;
-    FUN_001d0788(FUN_001b1998(), &job->node, 1);
+    nw_snd_internal_TaskManager_AppendTask(FUN_001b1998(), &job->node, 1);
 }
 
 } /* extern "C" */

@@ -3,6 +3,7 @@
 #include "camp/RenderCtxA.h"
 #include "code/Code002a.h"
 #include "camp/CampStateA.h"
+#include "camp/CampMenuEntry.h"
 
 #define CAMP_MENU_SUB 0x47
 #define CAMP_MENU_UNITE_FIRST 0x20
@@ -13,7 +14,6 @@ extern "C" {
 
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
-s32 FUN_003da8f4(s32 cursor, u32 value);
 void campDrawDetailArea(s32 item, u32 mode);
 void campDrawCommandMenu(void);
 void FUN_00288538(s32 flag);
@@ -27,7 +27,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 /* The id of the item under the cursor. */
 static __inline s32 campCursorItem(CampStateA *camp)
 {
-    return FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
+    return dataTable15GetUnlockedEntryId(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
 }
 
 static __inline void campDrawBar(CampStateA *camp)

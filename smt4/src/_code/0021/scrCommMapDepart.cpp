@@ -4,7 +4,6 @@
 
 extern "C" {
 void mapDepartSetTarget(s32 area, u32 map, u32 entrance);
-void mapSetDepartureIndex(u32 map);
 s32 scrGetArg(u32 index);
 
 /* Sets the departure destination and requests the map transition sequence. */

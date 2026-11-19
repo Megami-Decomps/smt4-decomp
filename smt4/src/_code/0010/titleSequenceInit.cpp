@@ -1,3 +1,4 @@
+#include "code/Code0013.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdSequence.h"
 
@@ -8,7 +9,6 @@ extern u8 DAT_00446f2c;
 void asdSequenceStart(s32 group, AsdSeqState *states, u32 stateCount);
 void paramTripleSet(u32 first, u32 second, u32 third);
 void setCallbackBinding(CallbackBinding binding);
-u8 FUN_002c2a04(s32 index);
 void FUN_002c29d8(u32 index, u32 value, u32 extra);
 void FUN_00118170(void);
 void titleDbgBgStopThunk(void);
@@ -22,10 +22,10 @@ void titleSequenceInit(void)
     binding.context = (void *)titleDbgBgStopThunk;
     binding.callback = (void (*)(void *))FUN_00118170;
     setCallbackBinding(binding);
-    if (FUN_002c2a04(0) == 3) {
+    if (pairedAvailabilityGetState(0) == 3) {
         FUN_002c29d8(0, 10, 0xff);
     }
-    if (FUN_002c2a04(1) == 3) {
+    if (pairedAvailabilityGetState(1) == 3) {
         FUN_002c29d8(1, 10, 0xff);
     }
 }

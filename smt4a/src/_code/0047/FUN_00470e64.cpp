@@ -6,7 +6,7 @@
 extern "C" {
 
 int dataTableFileGetTable(...);
-int FUN_001b2ebc(...);
+int fileQueueRequestAndWait(...);
 int packageEntryGetDirectory(...);
 int packageEntryGetFileCount(...);
 int asdOperatorDeleteB(...);
@@ -48,7 +48,7 @@ extern unsigned int g_aocDisplay; /* 0x57027c */
 extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_001b2ebc. */
+/* Supplied declaration required: fileQueueRequestAndWait. */
 extern int packageEntryIsLoaded(void);
 /* Supplied declaration required: packageEntryGetDirectory. */
 /* Supplied declaration required: packageEntryGetFileCount. */
@@ -138,7 +138,7 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
                 __aeabi_memcpy4(temp_v9,*(int *)(temp_v14 + 0x4c) + temp_v5 * 0x10,0xe);
                 sprintf((char *)temp_v8,"%s/%s",temp_v10,pcVar9 + 1);
                 temp_v4 = g_aocDisplay;
-                FUN_001b2ebc(g_aocDisplay,temp_v8,0,temp_v9 + 2,1,0x80,0);
+                fileQueueRequestAndWait(g_aocDisplay,temp_v8,0,temp_v9 + 2,1,0x80,0);
                 temp_v7 = temp_v7 + 1;
                 *temp_v9 = temp_v4;
                 *(unsigned char *)(temp_v9 + 3) = 1;

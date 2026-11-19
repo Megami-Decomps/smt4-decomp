@@ -3,6 +3,7 @@
 #include "gamedata/GameFlags.h"
 #include "code/Code002c.h"
 #include "battle/BtlGlobals.h"
+#include "code/Code0013.h"
 struct BattleActionHistoryState;
 
 extern "C" {
@@ -30,7 +31,7 @@ s32 jobIsValid(u32 job);
 s32 FUN_0023f074(BtlEndTask *task);
 s32 eventFlagForScene(s32 scene);
 
-/* Once both FUN_002c2a04 slots report 3, stops the battle's jobs and starts the follow-up job (flag 0x817). */
+/* Once both pairedAvailabilityGetState slots report 3, stops the battle's jobs and starts the follow-up job (flag 0x817). */
 s32 FUN_0023f194(BtlEndTask *task)
 {
     if (task->unk0C == 0) {
@@ -40,7 +41,7 @@ s32 FUN_0023f194(BtlEndTask *task)
         return 0;
     }
     {
-        if (FUN_002c2a04(0) == 3 && FUN_002c2a04(1) == 3) {
+        if (pairedAvailabilityGetState(0) == 3 && pairedAvailabilityGetState(1) == 3) {
             BtlMainState *state = btlGetMainState();
             FUN_0033a780(reinterpret_cast<BattleActionHistoryState *>(state));
             btlTalkBustUpDestroy();

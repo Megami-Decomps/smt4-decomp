@@ -32,7 +32,7 @@ s32 FUN_002c1d5c(void);
 void FUN_002a09b4(char *path, s32 mode);
 u32 asdMdlManagerCreateSecondList(char *path, u32 count);
 s32 FUN_00221e1c(u32 handle);
-void FUN_002fe144(u32 handle);
+void modelWorkDestroy(u32 handle);
 
 /* Creates the model-map state for battle map (mapId, variant), loads its environment and model list, and starts its calc process. */
 void event3dEventModelMapCreate(u32 mapId, u32 variant)
@@ -56,6 +56,6 @@ void event3dEventModelMapCreate(u32 mapId, u32 variant)
         map->unk00C = 0;
         map->loaded = 1;
     }
-    map->process = asdProcessCreateSimple((const s8 *)DAT_00403698, 2, 0, 0, FUN_00221e1c, FUN_002fe144, (u32)map);
+    map->process = asdProcessCreateSimple((const s8 *)DAT_00403698, 2, 0, 0, FUN_00221e1c, modelWorkDestroy, (u32)map);
 }
 }

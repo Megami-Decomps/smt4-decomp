@@ -58,7 +58,7 @@ void Obj4223c4::shopPurchaseConfirmSelected()
         u16 itemId = id;
         s32 slot = partyFindFreeStockSlot();
         if (slot != -1) {
-            FUN_0029c1c8(slot, itemId, purchaseMenuIsDiscounted(menu));
+            dispatchIfFound(slot, itemId, purchaseMenuIsDiscounted(menu));
         }
         s32 price = FUN_0029ce60(id, menu->discounted, 0, menu->level >= 100, 0);
         partyMoneyAddForward(-price);

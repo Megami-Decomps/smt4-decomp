@@ -7,9 +7,9 @@
 #include "gamedata/RankedSelection.h"
 #include "battle/BattleUnit.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BattleHpRank.h"
 
 extern "C" {
-s32 callbackCompareDescendingState(const void *left, const void *right);
 void qsort(void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
 void FUN_004e7d20(BtlMainStateA **owner, s32 rank)
@@ -27,7 +27,7 @@ void FUN_004e7d20(BtlMainStateA **owner, s32 rank)
         }
     }
     if (count >= rank) {
-        qsort(entries, count, sizeof(*entries), callbackCompareDescendingState);
+        qsort(entries, count, sizeof(*entries), reinterpret_cast<s32 (*)(const void *, const void *)>(callbackCompareDescendingState));
         ((TargetView *)btlUnitGet(owner))->targets[entries[rank - 1].index] = 1;
     } else {
         ((TargetView *)btlUnitGet(owner))->targets[entries[0].index] = 1;

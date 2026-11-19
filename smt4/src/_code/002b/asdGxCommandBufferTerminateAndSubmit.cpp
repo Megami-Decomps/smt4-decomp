@@ -6,7 +6,7 @@ extern u32 *g_commandBufferCursor;
 extern u32 *g_commandBufferEnd;
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void FUN_002aa624(AsdCmdBuffer *buffer, AsdCmdRecord *record);
+void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *record);
 void FUN_002ba2b8(void);
 
 // Terminate buffered GPU commands, enqueue a submission record, and request submission.
@@ -46,7 +46,7 @@ void asdGxCommandBufferTerminateAndSubmit(void)
     record->commands = buffer->start + buffer->committedOffset;
     record->byteCount = buffer->writeOffset - buffer->committedOffset;
     if (buffer->unk34 != 0)
-        FUN_002aa624(buffer, record);
+        heapCloseOpenBlock(buffer, record);
     record->flags &= ~2u;
     if (buffer->flag3d != 0)
         record->flags |= 1;

@@ -30,7 +30,7 @@ struct AocListJob {
 };
 
 WindowStatusResult FUN_00354608(void *parameters, void *source);
-void FUN_00234624(AocListEntry **entry, void *table, u32 index);
+void table30GetEntryB(AocListEntry **entry, void *table, u32 index); // declcheck: local (the shared declaration in gamedata/GameDataAccess_Shard0050.h does not compile here: argument of type "AocListEntry **" is incompatible with parameter of type "u8 **")
 u32 FUN_00234618(AocListEntry **entry);
 WindowStatusResult FUN_003df0c4(AocListEntry **entry, u8 *extra, AocListItem *item, s32 flag, u32 index);
 WindowStatusResult FUN_003df4dc(void *handle, void *buffer, u32 count);
@@ -48,7 +48,7 @@ void FUN_0038ae30(AocListJob *job)
         return;
     }
     AocListEntry *entry;
-    FUN_00234624(&entry, aoc->contentRequest, job->entryIndex);
+    table30GetEntryB(&entry, aoc->contentRequest, job->entryIndex);
     u32 itemCount = FUN_00234618(&entry);
     void *owner; // Retail forwards an uninitialised owner hint in r5.
     u16 *ids = (u16 *)asdOperatorNewB(itemCount * 2, owner);

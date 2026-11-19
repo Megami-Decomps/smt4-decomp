@@ -1,0 +1,17 @@
+#include "common.h"
+#include "code/Code0027.h"
+
+extern "C" {
+
+u32 isEntryUsable(int *obj)
+{
+    if (*obj == 0) {
+        return 0;
+    }
+    if (*obj == 10 && obj[10] < 1) {
+        return 0;
+    }
+    return 1;
+}
+
+} /* extern "C" */

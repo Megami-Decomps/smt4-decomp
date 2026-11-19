@@ -17,7 +17,7 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void FUN_002aa624(AsdCmdBuffer *buffer, AsdCmdRecord *records);
+void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *records);
 void FUN_002ba2b8(void);
 
 /* Appends a recorded command chunk to the command buffer named `handle`: copies its records into the
@@ -74,7 +74,7 @@ void FUN_001373f0(u32 handle, AsdCmdChunk *chunk)
     rt_memcpy(buffer->start + buffer->writeOffset, chunk->data, chunk->dataBytes);
     buffer->writeOffset += chunk->dataBytes;
     if (buffer->unk34 != 0 && chunk->recordCount != 0) {
-        FUN_002aa624(buffer, &buffer->entries[buffer->listCount]);
+        heapCloseOpenBlock(buffer, &buffer->entries[buffer->listCount]);
     }
     if (g_asdGfxContext.cmdBuffer == buffer) {
         g_commandBufferCursor = (u32 *)((u8 *)g_commandBufferCursor + (chunk->dataBytes & ~3u));

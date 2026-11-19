@@ -19,7 +19,7 @@ u8 *nw_snd_Sound3DListener_Sound3DListener_sub_object(u8 *part);
 void FUN_00401654(void *element);
 void objectRegisterPart(void *element);
 void FUN_0045bbdc(void *element);
-extern u8 FUN_00417a10, FUN_0045b824;
+extern u8 frameHeapInitializeRange, FUN_0045b824;
 void FUN_003f2cb0(void *object);
 
 // Constructs g_asdSoundSystem: the archive, player and data manager, the slot arrays, the 3D
@@ -30,7 +30,7 @@ void FUN_0051159c(void)
     object = FUN_0045e798(object + 0x194);
     object = FUN_0045c310(object + 0x118);
     object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x278, FUN_00401654, 0x70, 4);
-    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x1c0, (ElementCtor)&FUN_00417a10, 0x3c, 2);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x1c0, (ElementCtor)&frameHeapInitializeRange, 0x3c, 2);
     object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x80, objectRegisterPart, 0x3c, 4);
     object = FUN_0045c0ac(object + 0xf0);
     object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x3c, FUN_0045bbdc, 0x88, 0x10);

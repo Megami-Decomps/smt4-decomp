@@ -50,7 +50,7 @@ u32 FUN_004babd8(Menu4C *menu)
     if (!menu->unk9EE) {
         if (menu->selectionInput.enabled) {
             u32 selected = selectOwnerGetSelected(menu->block74);
-            if (FUN_004d0058(menu, selected))
+            if (stateCounterBelowLimit(menu, selected))
                 changed = 1;
         }
         if (FUN_004d0584())

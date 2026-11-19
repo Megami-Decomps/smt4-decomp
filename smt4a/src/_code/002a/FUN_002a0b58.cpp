@@ -47,13 +47,13 @@ unsigned int FUN_002a0b58(void)
         iVar2 = *(int *)(iVar6 + 0x158);
       }
       if ((bVar10 && bVar11) && iVar2 != 0) {
-        uVar1 = FUN_001643b4(0x24,0x1f);
+        uVar1 = ifTouchRegionAddRequested(0x24,0x1f);
         *(unsigned short *)(iVar6 + 0x14) = uVar1;
         *(short *)(iVar6 + 0x1a) = *(short *)(iVar6 + 0x1a) + 1;
-        uVar1 = FUN_001643b4(0x24,0x20);
+        uVar1 = ifTouchRegionAddRequested(0x24,0x20);
         *(unsigned short *)(iVar6 + 0x16) = uVar1;
         *(short *)(iVar6 + 0x1a) = *(short *)(iVar6 + 0x1a) + 1;
-        uVar1 = FUN_001643b4(0x24,0x21);
+        uVar1 = ifTouchRegionAddRequested(0x24,0x21);
         *(unsigned short *)(iVar6 + 0x18) = uVar1;
         *(short *)(iVar6 + 0x1a) = *(short *)(iVar6 + 0x1a) + 1;
         iVar2 = DAT_00589164;

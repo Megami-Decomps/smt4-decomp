@@ -4,7 +4,7 @@
 
 extern "C" {
 void ifTouchRegionClearAll(void *controller);
-void FUN_00233818(void *work);
+void releaseEntriesA(void *work); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "MenuWork *" is incompatible with parameter of type "Obj *")
 void messageIdListInit(void *work, s32 kind, u32 sprite, u32 state);
 u16 ifTouchRegionAddRequested(u32 bank, u32 entry);
 void buttonHelpSelectMenuPreset(Scene3a *scene);
@@ -46,7 +46,7 @@ void FUN_002302d8(Scene3a *scene, s32 refreshHelp)
         offsetof(MenuView, regionCount) == 0x15D50 ? 1 : -1];
     MenuView *work = reinterpret_cast<MenuView *>(scene);
     ifTouchRegionClearAll(work->controller);
-    FUN_00233818(&work->menu);
+    releaseEntriesA(&work->menu);
     for (s32 index = 0; index < work->regionCount; ++index)
         ifTouchRegionRemove();
     work->regionCount = 0;

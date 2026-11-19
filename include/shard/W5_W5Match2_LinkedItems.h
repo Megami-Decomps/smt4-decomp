@@ -44,7 +44,7 @@ typedef char LinkedItemReferenceLayout[
 extern "C" {
 #endif
 
-void FUN_003ca0ec(LinkedItems *items, LinkedItem *item);
+void effResourcePromoteReferences(LinkedItems *items, LinkedItem *item);
 
 #ifdef __cplusplus
 }

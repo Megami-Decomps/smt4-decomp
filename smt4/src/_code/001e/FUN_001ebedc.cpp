@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ebedc` (_code @ 0x1ebedc, 0x7ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "code/Code0029.h"
 #include "romwright_types.h"
 #include "code/Code0025_Smt4.h"
 
@@ -21,7 +22,6 @@ int scrScriptProcessStartEntry(...);
 int FUN_0029bbc8(int);
 int FUN_0029bde4(...);
 int FUN_0029bed8(...);
-int FUN_0029c1c8(int, int, int);
 int slotSetRequest(int, int, unsigned int);
 int unitRecalculateEffectiveStats(...);
 int dataTable06Sub1GetRecord(void);
@@ -72,7 +72,7 @@ extern int randBetween(unsigned int, int);
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: FUN_0029bed8. */
-/* Supplied declaration required: FUN_0029c1c8. */
+/* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagCountUnlockedSlots(int);
@@ -201,7 +201,7 @@ unsigned int FUN_001ebedc(int param_1)
       *(unsigned char *)(temp_v7 + temp_v9 + 0x90f0) = 0xff;
       temp_v7 = itemGetFlagBit1(temp_v1);
       temp_v19 = (unsigned int)(temp_v7 == 0);
-      FUN_0029c1c8(temp_v2,temp_v1,0);
+      dispatchIfFound(temp_v2,temp_v1,0);
       temp_v7 = gameGetUnitRecord(temp_v2);
       temp_v2 = 0;
       temp_v9 = 0;

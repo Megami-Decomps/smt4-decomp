@@ -6,9 +6,9 @@ struct Entry;
 struct EntryOwner;
 extern "C" {
 
-void FUN_003c3e14(void);
+void messageMainClearBannerRequest(void);
 
-void FUN_003c1060(void);
+void messageMainRequestBanner(void);
 
 void FUN_003c91e8(void);
 

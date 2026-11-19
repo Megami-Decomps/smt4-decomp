@@ -7,6 +7,6 @@ extern "C" {
 f32 mathRemPio2f(f32 radians);
 
 /* Single-precision cosine (libm cosf); the angle is in radians. */
-f32 FUN_00282390(f32 radians);
+f32 libm_cosf(f32 radians);
 
 } /* extern "C" */

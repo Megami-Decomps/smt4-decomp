@@ -19,7 +19,7 @@ int dataRecordGetKindValue(...);
 int playerSecondaryGetKindValue(void);
 int playerPrimaryGetKindValue(void);
 
-int FUN_0014bd84(...);
+int aocIndexValueOrDefault(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Text/AsdText.h does not compile here: too few arguments in function call)
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -53,7 +53,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_0014bd84. */
+/* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -76,7 +76,7 @@ extern unsigned char *btlMainGetUnk14(void);
 extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int listCursorGetRowIfUnblocked(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
-extern unsigned int FUN_002f8e98(unsigned int);
+extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 extern int FUN_002fa75c(void);
 extern int FUN_00372794(int, int, unsigned char *);
 /* Supplied declaration required: statDrawClampedDelta. */
@@ -351,7 +351,7 @@ void FUN_003743a4(int param_1)
               temp_v16[0] = temp_v2;
               texDrawTableEntryAtStoredOrigin(2,0xd,0x11f,temp_v4);
               temp_v8 = (int)(short)*(unsigned int *)(param_1 + 0x3e18);
-              temp_v9 = FUN_0014bd84(temp_v8);
+              temp_v9 = aocIndexValueOrDefault(temp_v8);
               sprintf((char *)temp_v19,"%s",temp_v9);
               temp_v3 = FUN_003df57c(temp_v8,1);
               temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12e));
@@ -390,7 +390,7 @@ void FUN_003743a4(int param_1)
           temp_v3 = reinterpret_cast<int>(btlGetMainState());
           if (!((DAT_00573bfc & *(unsigned int *)(temp_v3 + 0x45ac)) == 0 &&
                (DAT_00573bf8 & *(unsigned int *)(temp_v3 + 0x45a8)) == 0)) {
-            temp_v9 = FUN_002f8e98(temp_v5 & 0xff);
+            temp_v9 = dataTable16Sub2GetRecordS64(temp_v5 & 0xff);
             sprintf((char *)temp_v19,"%s",temp_v9);
           }
           else {
@@ -403,7 +403,7 @@ void FUN_003743a4(int param_1)
               temp_v3 = gameDataFlagTestBit(temp_v16[temp_v12]);
               if (temp_v3 != 0) {
                 if (temp_v13 == temp_v5) {
-                  temp_v9 = FUN_002f8e98(temp_v12 & 0xff);
+                  temp_v9 = dataTable16Sub2GetRecordS64(temp_v12 & 0xff);
                   sprintf((char *)temp_v19,"%s",temp_v9);
                   break;
                 }
@@ -466,7 +466,7 @@ void FUN_003743a4(int param_1)
         reinterpret_cast<int>(btlGetMainState());
         temp_v1 = 0;
       }
-      temp_v9 = FUN_0014bd84();
+      temp_v9 = aocIndexValueOrDefault();
       sprintf((char *)temp_v19,"%s",temp_v9);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12e));
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -506,13 +506,13 @@ void FUN_003743a4(int param_1)
         if (!((*(unsigned int *)(temp_v3 + 0x45a8) & DAT_00573bf0) == 0 &&
              (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bf4) == 0)) {
           temp_v8 = (int)(short)temp_v5;
-          temp_v9 = FUN_0014bd84(temp_v8);
+          temp_v9 = aocIndexValueOrDefault(temp_v8);
           sprintf((char *)temp_v19,"%s",temp_v9);
           temp_v3 = skillGetAdjustedCost(temp_v17,temp_v8);
         }
         else {
           temp_v8 = (int)*(short *)(param_1 + *piVar15 * 0x10 + temp_v5 * 2 + 0x3c42);
-          temp_v9 = FUN_0014bd84(temp_v8);
+          temp_v9 = aocIndexValueOrDefault(temp_v8);
           sprintf((char *)temp_v19,"%s",temp_v9);
           temp_v3 = skillGetAdjustedCost(temp_v17,temp_v8);
         }
@@ -558,13 +558,13 @@ void FUN_003743a4(int param_1)
           if (!((*(unsigned int *)(temp_v3 + 0x45a8) & DAT_00573bf0) == 0 &&
                (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bf4) == 0)) {
             temp_v8 = (int)(short)(((short)temp_v5 - (short)temp_v6) + 1);
-            temp_v9 = FUN_0014bd84(temp_v8);
+            temp_v9 = aocIndexValueOrDefault(temp_v8);
             sprintf((char *)temp_v19,"%s",temp_v9);
             temp_v3 = FUN_003df57c(temp_v8,1);
           }
           else {
             temp_v8 = (int)*(short *)(param_1 + *piVar15 * 0x10 + (temp_v5 - temp_v6) * 2 + 0x3c44);
-            temp_v9 = FUN_0014bd84(temp_v8);
+            temp_v9 = aocIndexValueOrDefault(temp_v8);
             sprintf((char *)temp_v19,"%s",temp_v9);
             temp_v3 = FUN_003df57c(temp_v8,1);
           }

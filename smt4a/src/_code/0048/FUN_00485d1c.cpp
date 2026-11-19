@@ -13,7 +13,6 @@ extern "C" {
 void FUN_0031879c(void);
 u32 naviMainConditionsHold(NavigationPollingWork *work);
 u32 FUN_00488ce8(NavigationPollingWork *work);
-u32 setFullScreenRect(void);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
 void FUN_00489480(NavigationPollingWork *work);
 void FUN_0048981c(NavigationPollingWork *work);

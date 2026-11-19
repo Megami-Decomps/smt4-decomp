@@ -5,6 +5,7 @@
 #include "code/Code0023.h"
 #include "shop/shopMain.h"
 #include "gamedata/NkmEnemyLookup.h"
+#include "code/Code004d.h"
 
 extern "C" {
 
@@ -49,8 +50,7 @@ s32 inputIsQuestCancelPressed(void);
 s32 FUN_0027ee9c(void);
 s8 uiStateGetFirstFlag(const void *state);
 s8 uiSubStateGetReady(const StateWindow *window);
-u32 FUN_002333f0(StateWindow *window);
-s32 stateCounterBelowLimit(ShopHolder *holder, u32 value);
+u32 selectOwnerGetSelected(StateWindow *window); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "StateWindow *" is incompatible with parameter of type "Obj *")
 s32 FUN_00262cb0(u16 id);
 s32 gameSlotTableGetHeader(void);
 int scrScriptProcessStartEntry(u32 process, s32 entry);
@@ -94,7 +94,7 @@ void Obj422448::FUN_003abed8()
     }
     StateWindow *window = &screen->window;
     if (uiSubStateGetReady(window) != 0) {
-        if (stateCounterBelowLimit(&screen->holder, FUN_002333f0(window)) != 0) {
+        if (stateCounterBelowLimit(&screen->holder, selectOwnerGetSelected(window)) != 0) {
             confirm = 1;
         }
     }

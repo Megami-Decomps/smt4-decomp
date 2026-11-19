@@ -17,7 +17,6 @@ int messageDismissNumericBanner(...);
 int messageBannerInitSelection(...);
 int btlScriptQueueRequestIfIdle(...);
 int FUN_003bf5a8(...);
-int channelRunMagnitudeQueries(...);
 int workAdoptGlobalHandle(...);
 
 int FUN_0020ffd8(...);
@@ -77,7 +76,7 @@ int asdMemFree(...);
 int asdModelBankGetModelUnk08(...);
 int FUN_00344158(...);
 int FUN_00344cf4(...);
-int FUN_00394bbc(...);
+int resourcePairApply(...);
 int FUN_003adc64(...);
 int btlUiInitializeIndexedSlots(...);
 int FUN_003c0390(unsigned int request, int entryIndex, unsigned char argument);
@@ -165,7 +164,7 @@ extern unsigned int FUN_00336740(int);
 /* Supplied declaration required: FUN_00344cf4. */
 extern unsigned int FUN_0039471c(unsigned int);
 extern unsigned int FUN_0039474c(void);
-/* Supplied declaration required: FUN_00394bbc. */
+/* Supplied declaration required: resourcePairApply. */
 /* Supplied declaration required: FUN_003adc64. */
 /* Supplied declaration required: btlUiInitializeDisplayChannel. */
 /* Supplied declaration required: FUN_003ae418. */
@@ -174,7 +173,6 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: FUN_003bcdb0. */
 /* Supplied declaration required: FUN_003bf5a8. */
 /* Supplied declaration required: btlAddClampedVital. */
-/* Supplied declaration required: channelRunMagnitudeQueries. */
 /* Supplied declaration required: btlDispatchTargetActionKind. */
 /* Supplied declaration required: FUN_003c0390. */
 /* Supplied declaration required: btlMessageStartUnlessFlagged. */
@@ -319,7 +317,7 @@ LAB_00344fc0:
       *(unsigned int *)(DAT_00435d18 + 0x3028) = temp_v7 | 2;
       temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
       if (*(char *)(temp_v5 + 0x59c) != '\0') {
-        FUN_00394bbc(*(unsigned int *)(temp_v5 + 0x594) & 0xffff,*(unsigned int *)(psVar2 + 4));
+        resourcePairApply(*(unsigned int *)(temp_v5 + 0x594) & 0xffff,*(unsigned int *)(psVar2 + 4));
       }
     }
     break;

@@ -34,7 +34,7 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
     if (index < count - screen->freedCount) {
         color = 0x9fe7ffff;
     }
-    sprintf(text, "%s", FUN_0014bd84(screen->slots[index]));
+    sprintf(text, "%s", aocIndexValueOrDefault(screen->slots[index]));
     const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
     textDrawString(label->x + x, label->y + y, 0.0f, 2, 0.0f, color, effect, text);
     const TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1a, 0x177);

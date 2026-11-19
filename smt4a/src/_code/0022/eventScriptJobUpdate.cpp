@@ -58,7 +58,7 @@ void FUN_0047e430(AocScriptHolder *holder, u8 showButtonHelp);
 s32 scriptHolderUpdateForward(AocScriptHolder *holder);
 void scriptHolderFree2(AocScriptHolder *holder);
 u8 gameBlockByte27E98Is1To3(void);
-void FUN_00324c48(u32 map, u32 entrance, u32 object, f32 a, f32 b, f32 c, f32 d, f32 e);
+void gameStateSetJumpRequest(u32 map, u32 entrance, u32 object, f32 a, f32 b, f32 c, f32 d, f32 e);
 void FUN_004731d8(void);
 u32 mapRestoreSavedDestination(AocScriptHolder *holder, s32 changeSequence);
 }
@@ -232,13 +232,13 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
         const MapJumpRequest *request = reinterpret_cast<const MapJumpRequest *>(gameBlockGetArea27E98());
         switch (request->kind) {
         case 1:
-            FUN_00324c48(request->map, request->entrance, request->object,
+            gameStateSetJumpRequest(request->map, request->entrance, request->object,
                          request->transform[0], request->transform[1], request->transform[2],
                          request->transform[3], request->transform[4]);
             asdSequenceRequest(6, NULL, 0);
             break;
         case 2:
-            FUN_00324c48(request->map + 100, request->entrance, (u32)-1,
+            gameStateSetJumpRequest(request->map + 100, request->entrance, (u32)-1,
                          request->transform[0], request->transform[1], request->transform[2],
                          request->transform[3], request->transform[4]);
             g_gameState.currentObjectId = (u32)-1;

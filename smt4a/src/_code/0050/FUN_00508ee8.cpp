@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char *FUN_00508508(int *, int);
+extern unsigned char *nw_snd_internal_StreamSoundFile_TrackInfoTable_GetTrackInfo(int *, int);
 extern int *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetTrackInfoTable(unsigned int);
 
 
@@ -27,7 +27,7 @@ unsigned int FUN_00508ee8(int param_1,unsigned char *param_2,int param_3)
       temp_v0 = 0;
     }
     else {
-      puVar3 = (unsigned char *)FUN_00508508(piVar1,param_3);
+      puVar3 = (unsigned char *)nw_snd_internal_StreamSoundFile_TrackInfoTable_GetTrackInfo(piVar1,param_3);
       *param_2 = *puVar3;
       param_2[1] = puVar3[1];
       param_2[2] = puVar3[2];

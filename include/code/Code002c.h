@@ -8,8 +8,6 @@ void *FUN_002c17c0(s32 index);
 
 u8 *saveGetFlagRowTable(void);
 
-u8 FUN_002c2a04(int index);
-
 u32 asdCameraGetSavedRenderPairs(void);
 
 u8 *FUN_002c7e24(void);

@@ -1,6 +1,7 @@
 /* Applies the current entry to the sub-state and its handler, refreshes the display and reports whether the sub-state is ready and accepted. */
 #include "common.h"
 #include "classes/Obj55ca08.h"
+#include "code/Code004d.h"
 
 extern "C" {
 
@@ -37,9 +38,8 @@ typedef struct Screen {
 } Screen;
 
 extern void uiAnimationAdvanceChannel(void *display, s32 id);
-extern void FUN_00233410(Entry *entry);
-extern s32 stateCounterBelowLimit(Entry *entry, u32 value);
-extern u32 FUN_002333f0(SubState *subState);
+extern void sub10OwnerStart(Entry *entry); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "selectOwnerGetSelected" has "C" linkage)
+extern u32 selectOwnerGetSelected(SubState *subState); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "sub10OwnerStart" has "C" linkage)
 extern s8 uiSubStateGetReady(const SubState *subState);
 
 u32 FUN_0022fbc0(Screen *screen)
@@ -49,12 +49,12 @@ u32 FUN_0022fbc0(Screen *screen)
 
     ((Obj55ca08 *)&screen->subState)->Obj55ca08::synchronize((const u8 *)entry);
     screen->handler->vtbl->apply(screen->handler, entry);
-    FUN_00233410(entry);
+    sub10OwnerStart(entry);
     uiAnimationAdvanceChannel(screen->display, 2);
     uiAnimationAdvanceChannel(screen->display, 3);
     accepted = 0;
     if (uiSubStateGetReady(&screen->subState) != 0) {
-        if (stateCounterBelowLimit(entry, FUN_002333f0(&screen->subState)) != 0) {
+        if (stateCounterBelowLimit(entry, selectOwnerGetSelected(&screen->subState)) != 0) {
             accepted = 1;
         }
     }

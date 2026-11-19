@@ -120,7 +120,7 @@ int FUN_003423e8(...);
 int FUN_003dc628(void);
 
 int uiSpriteAdvanceAnimation(...);
-int FUN_001643b4(...);
+int ifTouchRegionAddRequested(...);
 int sysPlaySe(...);
 int buttonHelpSetText(...);
 int FUN_0020d700(void);
@@ -139,7 +139,7 @@ int screenSetColor670(int, int, int, int);
 int FUN_0035a094(...);
 int FUN_0037c8e4(...);
 int messageRestoreBanner(void);
-int FUN_003da8f4(...);
+int dataTable15GetUnlockedEntryId(...); // declcheck: local (romwright prototype; the shared declaration in camp/CampMenuEntry.h does not compile here: more than one instance of overloaded function "FUN_002e26c4" has "C" linkage)
 
 /* stack frame of void: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -171,7 +171,7 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: workCommandRefreshActiveSlots. */
 extern unsigned char ifTouchGetSelectionMode(void);
-/* Supplied declaration required: FUN_001643b4. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 extern int lmapMainIsRunning(void);
 extern unsigned int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -358,7 +358,7 @@ extern int sceneHolderUpdate(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d386c. */
 /* Supplied declaration required: titleSetSlotValueState2. */
-/* Supplied declaration required: FUN_003da8f4. */
+/* Supplied declaration required: dataTable15GetUnlockedEntryId. */
 /* Supplied declaration required: campUpdateListInput. */
 /* Supplied declaration required: FUN_003dc628. */
 extern int FUN_003deee4(unsigned int);
@@ -501,7 +501,7 @@ unsigned int FUN_003d56dc(void)
     temp_v4 = FUN_00163e84(0);
     if (temp_v4 != 0) {
       temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
-      temp_v4 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
+      temp_v4 = dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),temp_v6);
       if ((((temp_v4 != 0x48 && temp_v4 != 0x49) && (temp_v4 != 0x4a && temp_v4 != 0x4b)) &&
           ((temp_v4 != 0x4c && temp_v4 != 0x4d) && temp_v4 != 0x4e)) ||
          (temp_v10 = FUN_0036cf78(), temp_v10 != 0)) {
@@ -536,7 +536,7 @@ unsigned int FUN_003d56dc(void)
               FUN_002f3bc4(&temp_v15,temp_v4,0);
               if (puVar7 != (unsigned int *)0x0) {
                 temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v4 + 0x87));
-                temp_v3 = FUN_001643b4(0x1a,temp_v4 + 0x87);
+                temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v4 + 0x87);
                 *(unsigned short *)((int)puVar12 + temp_v4 * 2 + 0x1b54) = temp_v3;
                 temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x7f));
                 temp_v11 = (int)(short)(*(short *)(temp_v10 + 8) + *(short *)(temp_v12 + 8));
@@ -577,7 +577,7 @@ unsigned int FUN_003d56dc(void)
             if ((temp_v7 & 1) != 0) {
               temp_v10 = (int)(7 - temp_v7) / 2 + 0x14;
             }
-            temp_v3 = FUN_001643b4(0x14,temp_v10 + temp_v4);
+            temp_v3 = ifTouchRegionAddRequested(0x14,temp_v10 + temp_v4);
             temp_v4 = temp_v4 + 1;
             *(unsigned short *)((int)puVar2 + (unsigned int)*pbVar20 * 2 + 0x1b22) = temp_v3;
             *pbVar20 = *pbVar20 + 1;
@@ -606,7 +606,7 @@ unsigned int FUN_003d56dc(void)
             }
           }
           else {
-            temp_v3 = FUN_001643b4(0x14,0xe0);
+            temp_v3 = ifTouchRegionAddRequested(0x14,0xe0);
             *(unsigned short *)((int)puVar2 + 0x1b32) = temp_v3;
             *(char *)(puVar2 + 0x6db) = *(char *)(puVar2 + 0x6db) + '\x01';
             if (*(char *)((int)puVar2 + 0xa5) == '\x01') {
@@ -666,11 +666,11 @@ unsigned int FUN_003d56dc(void)
     }
     buttonHelpSetText(0,0xf4f4f4ff);
     if (puVar2[10] != 0x22) {
-      FUN_003da8f4((int)*(char *)(puVar2 + 0x29),
+      dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),
                    (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x29) + 0xa7));
       temp_v4 = FUN_002e26c4();
       if ((*(unsigned char *)(temp_v4 + 3) & 0xf) == 0) {
-        FUN_003da8f4((int)*(char *)((int)puVar2 + 0xa5),
+        dataTable15GetUnlockedEntryId((int)*(char *)((int)puVar2 + 0xa5),
                      (int)*(char *)((int)puVar2 + *(char *)((int)puVar2 + 0xa5) + 0xa7));
         temp_v10 = FUN_002e26c4();
         if ((*(unsigned char *)(temp_v10 + 3) & 0xf) != 0) {
@@ -678,7 +678,7 @@ unsigned int FUN_003d56dc(void)
         }
       }
       if (*(unsigned char *)(temp_v4 + 3) >> 4 == 0) {
-        FUN_003da8f4((int)*(char *)((int)puVar2 + 0xa5),
+        dataTable15GetUnlockedEntryId((int)*(char *)((int)puVar2 + 0xa5),
                      (int)*(char *)((int)puVar2 + *(char *)((int)puVar2 + 0xa5) + 0xa7));
         temp_v4 = FUN_002e26c4();
         if ((*(unsigned char *)(temp_v4 + 3) & 0xf0) != 0) {
@@ -702,7 +702,7 @@ unsigned int FUN_003d56dc(void)
     if (((temp_v4 == 0) || (*(char *)((int)puVar2 + 0x6e2) == '\0')) ||
        (*(char *)((int)puVar2 + 0x76e) == '\0')) break;
     temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
-    temp_v6 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
+    temp_v6 = dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),temp_v6);
     temp_v4 = puVar2[9];
     if (temp_v4 == 0x11) {
       temp_v4 = objectApplyIfUnblocked(puVar2 + 0x7b);
@@ -784,9 +784,9 @@ unsigned int FUN_003d56dc(void)
         switch(temp_v4) {
         case 6:
           temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
-          temp_v4 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
+          temp_v4 = dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),temp_v6);
           temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
-          FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
+          dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),temp_v6);
           temp_v10 = FUN_002e26c4();
           if ((((temp_v4 != 0x48 && temp_v4 != 0x49) && (temp_v4 != 0x4a && temp_v4 != 0x4b)) &&
               (temp_v4 != 0x4c && temp_v4 != 0x4d)) && (temp_v4 != 0x4e && temp_v4 != 0x35)) {
@@ -1270,7 +1270,7 @@ LAB_003d6870:
     break;
   case 0x1d:
     temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
-    FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
+    dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),temp_v6);
     FUN_001fdde8();
     break;
   case 0x1e:
@@ -1412,7 +1412,7 @@ LAB_003d6870:
         *(unsigned char *)(puVar2 + 0x2e) = 0;
         FUN_0037e1b0(0xffffffff,1);
         FUN_0022e774();
-        FUN_003da8f4((int)*(char *)(puVar2 + 0x29),
+        dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),
                      (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x29) + 0xa7));
         FUN_002a7b74();
         uniteStartOrQueueRequest(0);
@@ -1439,7 +1439,7 @@ LAB_003d6870:
       campChangeState(5);
       FUN_0026f7f0();
       partyPanelRefreshFromSlotTable();
-      temp_v4 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),
+      temp_v4 = dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),
                            (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x29) + 0xa7));
       if (temp_v4 == 0x1b) {
         FUN_0037c8e4(1,0);
@@ -1576,13 +1576,13 @@ LAB_003d6870:
     break;
   case 0x2c:
     temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar2 + 0x10);
-    temp_v6 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
+    temp_v6 = dataTable15GetUnlockedEntryId((int)*(char *)(puVar2 + 0x29),temp_v6);
     puVar12 = g_camp;
     temp_v4 = useCounterIsFinished();
     if (temp_v4 != 0) {
       useCounterRelease();
       temp_v6 = listCursorGetRowOfChildIfUnblocked(puVar12 + 0x10);
-      FUN_003da8f4((int)*(char *)(puVar12 + 0x29),temp_v6);
+      dataTable15GetUnlockedEntryId((int)*(char *)(puVar12 + 0x29),temp_v6);
       campShowSelectedEntryHelp();
       sysPlaySe(*(unsigned short *)((int)puVar12 + 0x3a));
       if (puVar12[10] == 0x11) {

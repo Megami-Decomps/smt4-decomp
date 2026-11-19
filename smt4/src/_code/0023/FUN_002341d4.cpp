@@ -8,7 +8,7 @@ WindowStatusResult FUN_00353154(void *provider, void *identifier);
 WindowStatusResult FUN_002345a4(void *provider, void *record, const void *identifier);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_002ba81c(char *destination, const char *source, u32 capacity);
-u32 FUN_002344d8(void *owner, u16 *buffer, u32 length, const void *identifier);
+u32 textConvertToBoundedWide(void *owner, u16 *buffer, u32 length, const void *identifier);
 
 // Populate the product name and localized title/description, preserving the first provider failure.
 WindowStatusResult FUN_002341d4(ResourceDisplayMetadata *metadata)
@@ -27,8 +27,8 @@ WindowStatusResult FUN_002341d4(ResourceDisplayMetadata *metadata)
     result = FUN_002345a4(metadata->provider, &text, identifier);
     if (nnResultIsFailure(legacyResourceIdRemap(&result)))
         return result;
-    result = WindowStatusResult(FUN_002344d8(metadata, metadata->title, 0x20, text.titleIdentifier));
-    result = WindowStatusResult(FUN_002344d8(metadata, metadata->description, 0x20, text.descriptionIdentifier));
+    result = WindowStatusResult(textConvertToBoundedWide(metadata, metadata->title, 0x20, text.titleIdentifier));
+    result = WindowStatusResult(textConvertToBoundedWide(metadata, metadata->description, 0x20, text.descriptionIdentifier));
     return WindowStatusResult(0);
 }
 }

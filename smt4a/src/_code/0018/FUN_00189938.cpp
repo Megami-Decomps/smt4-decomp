@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00189a38(void);
-int FUN_001a0ff4(int, unsigned int, unsigned int, int, int, signed char *);
+int nn_dsp_CTR_DSP_LoadComponent(int, unsigned int, unsigned int, int, int, signed char *);
 int FUN_001a1118(int, int);
 
 typedef int romwright_code(...);
@@ -28,7 +28,7 @@ extern unsigned int DAT_005892a0; /* 0x5892a0 */
 extern unsigned char DAT_0061a664; /* 0x61a664 */
 
 /* Supplied declaration required: FUN_00189a38. */
-/* Supplied declaration required: FUN_001a0ff4. */
+/* Supplied declaration required: nn_dsp_CTR_DSP_LoadComponent. */
 /* Supplied declaration required: FUN_001a1118. */
 
 
@@ -45,7 +45,7 @@ void FUN_00189938(void)
     }
     else {
       temp_v0 = DAT_0058928c;
-      FUN_001a0ff4(DAT_0058928c,DAT_0058929c,DAT_005892a0,DAT_00589288,DAT_0058928a,&DAT_00589285);
+      nn_dsp_CTR_DSP_LoadComponent(DAT_0058928c,DAT_0058929c,DAT_005892a0,DAT_00589288,DAT_0058928a,&DAT_00589285);
     }
     if (temp_v0 < 0) {
       FUN_00189a38();

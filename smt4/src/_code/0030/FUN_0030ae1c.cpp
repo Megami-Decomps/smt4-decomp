@@ -2,13 +2,13 @@
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "battle/BtlUiGlobal.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
 extern u32 scrGetArg(u32 index);
 extern void scrSetResult(u32 value);
 extern u32 partyFindFreeStockSlot(void);
-extern void FUN_0029c1c8(u32 object, u32 arg, int flag);
 
 /* Script command: creates an object from argument 0 and returns it. */
 s32 FUN_0030ae1c(void)
@@ -16,7 +16,7 @@ s32 FUN_0030ae1c(void)
     u32 arg = scrGetArg(0);
     u32 object = partyFindFreeStockSlot();
 
-    FUN_0029c1c8(object, arg, 0);
+    dispatchIfFound(object, arg, 0);
     asdDebugHookPtr(g_btlUiBlock);
     scrSetResult(object);
     return 1;

@@ -22,7 +22,7 @@ typedef struct Slot {
 } Slot;
 
 s32 FUN_00237a94(Slot **slot, u8 *owner);
-s32 FUN_00237d64(u8 *variant, u32 *value);
+s32 variantSetPlain(u8 *variant, u32 *value);
 
 /* Adds the key to the owner's next free slot and advances the iterator; returns 2 when no slot can be made, else 0. */
 u32 FUN_0035d074(ListIter *iter, u32 *outKey, u32 *key, u8 **owner)
@@ -35,7 +35,7 @@ u32 FUN_0035d074(ListIter *iter, u32 *outKey, u32 *key, u8 **owner)
         return 2;
     }
     value = *key;
-    FUN_00237d64(slot->variant, &value);
+    variantSetPlain(slot->variant, &value);
     *outKey = *key;
     iter->node = iter->node->next;
     return 0;

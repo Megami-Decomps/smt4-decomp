@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match3_PointDifference.h"
 
 extern "C" {
-void FUN_00262210(PointDeltaWork* output, u32 bank, u32 firstIndex, u32 secondIndex);
+void uiGetLayoutPointDifference(PointDeltaWork* output, u32 bank, u32 firstIndex, u32 secondIndex);
 }
 
 #endif

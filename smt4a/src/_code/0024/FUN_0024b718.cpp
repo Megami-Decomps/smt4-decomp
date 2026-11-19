@@ -40,7 +40,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: battleFlagsQueryBlockedOrForced. */
 extern int btlStateHasSelectionGateFlag(int);
 extern int btlScriptUnitIsNotKind6(int);
-extern int FUN_0040ddec(unsigned int, unsigned int);
+extern int btlReflectCountEntriesById(unsigned int, unsigned int);
 extern int btlUiCanStartMenu(void);
 /* Supplied declaration required: btlHelpFreeAll. */
 /* Supplied declaration required: btlHelpFreeEntries. */
@@ -141,7 +141,7 @@ unsigned int FUN_0024b718(void)
             return 0;
           }
         }
-        temp_v5 = FUN_0040ddec(g_btlActionReflect,0x34);
+        temp_v5 = btlReflectCountEntriesById(g_btlActionReflect,0x34);
         if (0 < temp_v5) {
           return 0;
         }

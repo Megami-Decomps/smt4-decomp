@@ -27,7 +27,7 @@ void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 void texDrawCompositeSprite(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
+f32 fontMeasureTextWidth(const u8 *text, s32 mode, f32 scale); // declcheck: local (including ui/AnimatedMessage.h does not compile here: its renderCtxPackPassFlags and renderStackPushIndexed prototypes differ from this unit's)
 
 /* Draws the title banner and its centered caption; marks it complete once its closing animation ends. */
 void FUN_0039ba2c(TitleBannerView *banner)
@@ -41,7 +41,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
     TextureTableEntryIV *info = asdTMTexTableEntryAt(28, 0x111B);
     u8 text[64];
     __aeabi_memcpy4(text, DAT_00404c48, 45);
-    s32 textWidth = (s32)FUN_0028f4b4(text, 2, 0.0f);
+    s32 textWidth = (s32)fontMeasureTextWidth(text, 2, 0.0f);
     f32 center = (f32)((info->placement->width - textWidth) / 2);
     f32 x = (f32)(vec2GetXInt(&banner->sprite) + info->x) + center + origin.x;
     textDrawString(x, (f32)info->y + origin.y, 0.0f, 2, 0.0f, DAT_0044cdc8.color, 1.0f, reinterpret_cast<const char *>(text));

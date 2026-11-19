@@ -6,10 +6,10 @@ extern "C" {
 
 int asdMemoryAllocTracked(...);
 int asdMemFree(...);
-int FUN_0023aa50(...);
-int FUN_0023aa8c(...);
+int keyedRecordSetVectorPair2(...);
+int keyedRecordSetVectorPair3(...);
 int keyedRecordSetVectorPair0(...);
-int FUN_0023aca0(...);
+int keyedRecordSetVectorPair1(...);
 int sysMemClear(void);
 int keyedCopyPayload(...);
 int strcmp(int, unsigned char *);
@@ -63,10 +63,10 @@ extern unsigned char LAB_003480c4; /* 0x3480c4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0023aa50. */
-/* Supplied declaration required: FUN_0023aa8c. */
+/* Supplied declaration required: keyedRecordSetVectorPair2. */
+/* Supplied declaration required: keyedRecordSetVectorPair3. */
 /* Supplied declaration required: keyedRecordSetVectorPair0. */
-/* Supplied declaration required: FUN_0023aca0. */
+/* Supplied declaration required: keyedRecordSetVectorPair1. */
 extern int libc_strlen(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: keyedCopyPayload. */
@@ -507,9 +507,9 @@ LAB_00347c88:
   effectAllocateSavedEntries(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
   keyedCopyPayload(temp_v49,param_2 + 0x14);
   keyedRecordSetVectorPair0(temp_v49,temp_v47);
-  FUN_0023aca0(temp_v49,&temp_v23);
-  FUN_0023aa50(temp_v49,&temp_v31);
-  FUN_0023aa8c(temp_v49,&temp_v39);
+  keyedRecordSetVectorPair1(temp_v49,&temp_v23);
+  keyedRecordSetVectorPair2(temp_v49,&temp_v31);
+  keyedRecordSetVectorPair3(temp_v49,&temp_v39);
   asdMemFree(temp_v3);
   asdMemFree(temp_v12);
   return temp_v49;

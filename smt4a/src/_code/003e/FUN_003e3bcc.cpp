@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/SaveSlotTable.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
@@ -22,12 +23,11 @@ int FUN_00359974(int, unsigned int, unsigned int, int);
 int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
 int messageDismissNumericBanner(...);
-int FUN_003c1060(void);
-int FUN_003c3e14(void);
+int messageMainRequestBanner(void); // declcheck: local (romwright prototype; the shared declaration in code/Code003c_Smt4a.h does not compile here: cannot overload functions distinguished by return type alone)
+int messageMainClearBannerRequest(void); // declcheck: local (romwright prototype; the shared declaration in code/Code003c_Smt4a.h does not compile here: cannot overload functions distinguished by return type alone)
 int messageMainSetTargetFlags(...);
 int partyAddMoneyClamped(int);
 int unitRecomputeDerivedStats(int);
-int dispatchIfFound(unsigned int, int, int);
 int partyRecordSetEquippedItemClampRank(int, int, int);
 int FUN_004cd4b8(int, int);
 
@@ -83,8 +83,8 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: messageDismissNumericBanner. */
-/* Supplied declaration required: FUN_003c1060. */
-/* Supplied declaration required: FUN_003c3e14. */
+/* Supplied declaration required: messageMainRequestBanner. */
+/* Supplied declaration required: messageMainClearBannerRequest. */
 /* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: partyAddMoneyClamped. */
 /* Supplied declaration required: unitRecomputeDerivedStats. */
@@ -181,7 +181,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
         else {
           param_1->field_0x8 = 10;
         }
-        FUN_003c3e14();
+        messageMainClearBannerRequest();
         messageMainSetTargetFlags(0);
         return;
       }
@@ -232,7 +232,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     scrSetStringSlot(0,temp_v5);
     FUN_00359974(0x19,*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),
                  0xffffffff,0);
-    FUN_003c1060();
+    messageMainRequestBanner();
     messageMainSetTargetFlags(1);
     sysPlaySe(0xa4);
     temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fd0);

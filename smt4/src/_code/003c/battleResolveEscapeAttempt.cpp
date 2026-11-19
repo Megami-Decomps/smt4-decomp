@@ -43,7 +43,7 @@ u32 FUN_0026beb4(u32, u32, u32, u32, u32);
 s32 FUN_003bf1e4();
 u32 randRange(s32);
 void gameCounterAddSaturating(s32, u32);
-u32 FUN_0027e3b8(BtlEvent *);
+u32 isEntryUsable(BtlEvent *); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "BtlEvent *" is incompatible with parameter of type "int *")
 u32 btlEventSelectTrigger(BtlEvent *, u32, s32, u32);
 void FUN_0027e38c(BtlEvent *);
 
@@ -80,7 +80,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     if (fields->result == 4 || success) {
         gameCounterAddSaturating(4, 1);
         reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->result = 4;
-        if (FUN_0027e3b8(g_btlEvent))
+        if (isEntryUsable(g_btlEvent))
             return;
         if (btlEventSelectTrigger(g_btlEvent, 6, -1, 0)) {
             FUN_0027e38c(g_btlEvent);

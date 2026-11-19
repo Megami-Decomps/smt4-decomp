@@ -58,7 +58,7 @@ extern int FUN_001c36b8(void);
 /* Supplied declaration required: FUN_002512c4. */
 /* Supplied declaration required: statusStripDraw. */
 /* Supplied declaration required: FUN_00251d98. */
-extern int FUN_00252180(unsigned int);
+extern int valueIs1(unsigned int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
@@ -149,7 +149,7 @@ unsigned int FUN_00212538(void)
     texDrawCompositeSprite(2,0x19,3,temp_v4,temp_v5,0x5b);
     temp_v3 = 0;
     do {
-      temp_v6 = FUN_00252180(*(unsigned int *)(temp_v1 + 0x6c8));
+      temp_v6 = valueIs1(*(unsigned int *)(temp_v1 + 0x6c8));
       if (temp_v6 != 0) {
         temp_v5 = 0;
         temp_v4 = temp_v5;
@@ -173,7 +173,7 @@ unsigned int FUN_00212538(void)
         temp_v2 = gameGetSlotTable();
       } while (temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x910b));
     }
-    temp_v2 = FUN_00252180(*(unsigned int *)(temp_v1 + 0x6c8));
+    temp_v2 = valueIs1(*(unsigned int *)(temp_v1 + 0x6c8));
     if (temp_v2 == 0) {
       switch(*(unsigned int *)(temp_v1 + 0x1c)) {
       case 4:
@@ -609,7 +609,7 @@ unsigned int FUN_00212538(void)
       texDrawTableEntryAtStoredOrigin(2,0x19,temp_v4,temp_v6 + temp_v10,temp_v7 + temp_v8,0xa6);
     }
     efctSetSpeed();
-    temp_v6 = FUN_00252180(*(unsigned int *)(temp_v1 + 0x6c8));
+    temp_v6 = valueIs1(*(unsigned int *)(temp_v1 + 0x6c8));
     if (temp_v6 == 0) {
       switch(*(unsigned int *)(temp_v1 + 0x1c)) {
       case 4:

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "code/Code0049_Smt4a.h"
+#include "code/Code004d.h"
 
 struct SubmenuRecord {
     /* 0x00 */ u8 unk00[0x74];
@@ -32,7 +33,6 @@ void sub10OwnerStart(SubmenuRecord *record);
 void entryDispatchUpdate(void *owner, s32 value);
 s32 selectOwnerGetSelected(SubmenuSelectionOwner *owner);
 s32 selectOwnerGetActive(const SubmenuSelectionOwner *owner);
-s32 FUN_004d0058(SubmenuRecord *record, s32 selected);
 
 /* Starts the current submenu record and applies an active flagged selection. */
 u32 FUN_004954e8(SubmenuWork *work)
@@ -45,7 +45,7 @@ u32 FUN_004954e8(SubmenuWork *work)
     entryDispatchUpdate(work->unk3CC, 12);
     u32 result = 0;
     if (selectOwnerGetActive(&work->selection) != 0) {
-        if (FUN_004d0058(record, selectOwnerGetSelected(&work->selection)) != 0) {
+        if (stateCounterBelowLimit(record, selectOwnerGetSelected(&work->selection)) != 0) {
             result = 1;
         }
     }

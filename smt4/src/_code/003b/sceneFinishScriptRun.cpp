@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002305e8(int a);
+int placeWinSetValue(int a);
 int infoWinSetMessage(u32 a, int b);
 int asdMemFree(u32 ptr);
 
@@ -45,7 +45,7 @@ void sceneFinishScriptRun(Scene *scene)
         scene->unk2C = 0;
         scene->unk6CC = 0;
         placeWinStartText(scene->inner->text);
-        FUN_002305e8(1);
+        placeWinSetValue(1);
         return;
     }
 }

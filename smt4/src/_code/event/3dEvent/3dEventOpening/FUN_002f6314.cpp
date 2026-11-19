@@ -8,6 +8,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "code/Code0038.h"
 
 struct Event3dOpeningWork {
     u32 process;
@@ -40,7 +41,6 @@ s32 FUN_00205184(u32 process);
 void event3dOpeningDestroy(u32 process);
 s32 FUN_002c1d5c(void);
 void FUN_002a09b4(const char *path, s32 flags);
-MoveCameraResource *asdCameraLoadFromFile(const char *path);
 
 u32 FUN_002f6314(void)
 {
@@ -75,8 +75,8 @@ u32 FUN_002f6314(void)
         work->frame = 0;
         FUN_002a09b4(DAT_004036f8, 0);
         work->selectedCamera = 0;
-        work->loopCamera = asdCameraLoadFromFile(DAT_004036e0);
-        work->startCamera = asdCameraLoadFromFile(DAT_004036c8);
+        work->loopCamera = static_cast<MoveCameraResource *>(asdCameraLoadFromFile(DAT_004036e0));
+        work->startCamera = static_cast<MoveCameraResource *>(asdCameraLoadFromFile(DAT_004036c8));
         work->model = asdMdlManagerCreateSecondList(DAT_004036b0, 0x38);
         work->active = 1;
     }

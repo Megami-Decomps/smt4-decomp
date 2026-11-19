@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_002358b4(int, int);
 int FUN_00379c18(int, int);
-int FUN_00379c90(int, int);
+int word8HolderSetFromTable(int, int);
 int FUN_0037b174(unsigned char [8], unsigned int);
 int FUN_0037fad8(int, unsigned int, unsigned int, unsigned int);
 int FUN_0037fddc(int, unsigned char [4], unsigned int, int);
@@ -36,7 +36,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002358b4. */
 /* Supplied declaration required: FUN_00379c18. */
-/* Supplied declaration required: FUN_00379c90. */
+/* Supplied declaration required: word8HolderSetFromTable. */
 /* Supplied declaration required: FUN_0037b174. */
 /* Supplied declaration required: FUN_0037fad8. */
 /* Supplied declaration required: FUN_0037fddc. */
@@ -94,7 +94,7 @@ void FUN_003e7210(unsigned int param_1,unsigned int param_2,unsigned int param_3
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
         *(float *)(temp_v0 + 0x100) = temp_v2 * 4.881899e-07f;
         *(unsigned int *)(temp_v0 + 0x10c) = temp_v8;
-        FUN_00379c90(temp_v0 + 0x90,temp_v9);
+        word8HolderSetFromTable(temp_v0 + 0x90,temp_v9);
         nw_snd_internal_CurveAdshr_SetHold(temp_v0 + 0x90,temp_v12);
         FUN_00379c18(temp_v0 + 0x90,temp_v10);
         *(unsigned char *)(temp_v0 + 0xa8) = temp_v11;

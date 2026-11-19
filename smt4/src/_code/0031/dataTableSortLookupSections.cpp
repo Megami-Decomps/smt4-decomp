@@ -5,7 +5,7 @@
 extern "C" {
 s32 uiCompareBytePriorityAndKey(const void *, const void *);
 s32 uiCompareBytePriorityThenKey(const void *, const void *);
-s32 FUN_002d06dc(const void *, const void *);
+s32 packedKeyCompare(const void *, const void *);
 s32 recordCompareUnsignedValue(const void *, const void *);
 s32 tableCompareWordByteKeys(const void *, const void *);
 s32 tableCompareHalfwordKeys(const void *, const void *);
@@ -29,7 +29,7 @@ extern "C" void dataTableSortLookupSections(void)
 {
     sortTableSection<u32>(5, 1, uiCompareBytePriorityAndKey);
     sortTableSection<u32>(5, 2, uiCompareBytePriorityThenKey);
-    sortTableSection<u32>(5, 3, FUN_002d06dc);
+    sortTableSection<u32>(5, 3, packedKeyCompare);
     sortTableSection<u32[7]>(5, 4, recordCompareUnsignedValue);
     sortTableSection<u32>(5, 7, tableCompareWordByteKeys);
     sortTableSection<u32[5]>(5, 8, tableCompareHalfwordKeys);

@@ -20,7 +20,7 @@ void FUN_00232848(void);
 void FUN_00233240(void *, u32);
 void messageMainFinishWindow(void);
 void ifTouchRegionClearAll(MenuView *);
-void FUN_00233818(Obj55ca08 *);
+void releaseEntriesA(Obj55ca08 *); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "Obj55ca08 *" is incompatible with parameter of type "Obj *")
 void ifTouchRegionRemove(void);
 s32 inputIsQuestCancelPressed(void);
 void FUN_0022fa2c(SelectMenu *);
@@ -80,7 +80,7 @@ void FUN_003a3a9c(SelectMenu *menu)
         FUN_00233240(work->sprites, 1);
         messageMainFinishWindow();
         ifTouchRegionClearAll(work->handler);
-        FUN_00233818(reinterpret_cast<Obj55ca08 *>(work->controls));
+        releaseEntriesA(reinterpret_cast<Obj55ca08 *>(work->controls));
         for (s32 i = 0; i < work->touchCount; ++i)
             ifTouchRegionRemove();
         work->phase = 1;

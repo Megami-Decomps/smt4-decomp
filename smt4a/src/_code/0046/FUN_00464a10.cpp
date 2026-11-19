@@ -15,7 +15,7 @@ typedef struct BufRef {
     u8 *ptr;
 } BufRef;
 
-int FUN_001915c4(BufRef first, BufRef second, int size);
+int nw_snd_internal_PoolImpl_DestroyImpl(BufRef first, BufRef second, int size);
 int __aeabi_vec_dtor(void *dst, u8 *src, int size, int align);
 int FUN_004637fc(Object *self);
 
@@ -28,7 +28,7 @@ int FUN_00464a10(Object *self)
     FUN_004637fc(self);
     first.ptr = self->bufferA;
     second.ptr = self->bufferB;
-    FUN_001915c4(first, second, 0xb00);
+    nw_snd_internal_PoolImpl_DestroyImpl(first, second, 0xb00);
     __aeabi_vec_dtor(self->bufferB, (u8 *)0x1914b4, 0x58, 0x20);
     return constructObj0055c19c(self->member) - 100;
 }

@@ -56,7 +56,7 @@ void btlTargetSelectSetEntry(s32 entryIndex, const TargetValueView* source, u32 
         entry->unk0D = field0D;
         entry->unk0E = field0E;
 
-        u32 context = FUN_0027db08(0);
+        u32 context = obj80Select(0);
         TargetValueView value = *source;
         FUN_002630e0(&value, 0, context, &value);
         entry->words = value.words;

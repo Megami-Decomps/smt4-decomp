@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00137ed0(void);
+int asdSequenceRequestInitial(void);
 int asdSequenceRequest(...);
 int lookupNameEntry(...);
 int FUN_002ba998(void);
@@ -171,7 +171,7 @@ extern unsigned int DAT_0064c078; /* 0x64c078 */
 extern unsigned int DAT_0064c07c; /* 0x64c07c */
 extern unsigned int DAT_0064c080; /* 0x64c080 */
 
-/* Supplied declaration required: FUN_00137ed0. */
+/* Supplied declaration required: asdSequenceRequestInitial. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern int gameDataBlocksGetSaveData(void);
 extern int jobIsValid(unsigned int);
@@ -1095,7 +1095,7 @@ LAB_0024d284:
       else if (*(int *)(temp_v2 + 0x4c80) != 1) {
         if (*(int *)(temp_v2 + 0x4c80) == 0) {
           sysClearCachedFlag();
-          FUN_00137ed0();
+          asdSequenceRequestInitial();
         }
       }
       else {

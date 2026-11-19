@@ -8,7 +8,7 @@ int FUN_001529a0(...);
 int FUN_0015493c(int, int *, unsigned int **, unsigned int **);
 int drawableSetRectangle(void);
 int asdMemoryGetDefaultAllocator(void);
-int FUN_0017314c(int *, unsigned int);
+int nw_gfx_Camera_DynamicBuilder_Create(int *, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -53,7 +53,7 @@ extern float DAT_005b3c44; /* 0x5b3c44 */
 /* Supplied declaration required: FUN_0015493c. */
 /* Supplied declaration required: drawableSetRectangle. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
-/* Supplied declaration required: FUN_0017314c. */
+/* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
 
 
 void FUN_00143424(void)
@@ -116,7 +116,7 @@ void FUN_00143424(void)
   temp_v8 = 0;
   temp_v7 = 0;
   DAT_005b3c14 = temp_v2;
-  FUN_0017314c(&temp_v6,temp_v0);
+  nw_gfx_Camera_DynamicBuilder_Create(&temp_v6,temp_v0);
   puVar8 = temp_v12;
   DAT_005b3c18 = (unsigned char *)puVar2;
   if ((temp_v12 != (unsigned int *)0x0) && ((char)temp_v13 != '\0')) {
@@ -138,7 +138,7 @@ void FUN_00143424(void)
   temp_v11 = romwright_piece_3_1((((unsigned int)(temp_v11) >> 8) & 0xffffffU),1);
   temp_v8 = 0;
   temp_v7 = 0;
-  FUN_0017314c(&temp_v6,temp_v0);
+  nw_gfx_Camera_DynamicBuilder_Create(&temp_v6,temp_v0);
   puVar8 = temp_v12;
   DAT_005b3c1c = (unsigned char *)puVar4;
   if ((temp_v12 != (unsigned int *)0x0) && ((char)temp_v13 != '\0')) {

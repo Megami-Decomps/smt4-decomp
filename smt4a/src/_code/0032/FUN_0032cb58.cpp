@@ -6,7 +6,7 @@ s32 nw_snd_SoundArchive_IsAvailable(const void *archive);
 s32 nw_snd_SoundArchive_GetSoundType(const void *archive, s32 soundId);
 s32 asd3dSoundActorIsPlaying(u32 actor);
 s32 FUN_00151340(s32 soundId);
-u32 FUN_0015e2bc(AsdSnd3dActorA *actor, s32 *handle, s32 soundId, s32 flags);
+u32 nw_snd_SoundStartable_StartSound(AsdSnd3dActorA *actor, s32 *handle, s32 soundId, s32 flags);
 
 // Start a sound on an idle spatial actor and apply the system's normalized volume.
 u8 FUN_0032cb58(s32 soundId, u32 actorIndex)
@@ -18,7 +18,7 @@ u8 FUN_0032cb58(s32 soundId, u32 actorIndex)
         nw_snd_SoundArchive_IsAvailable(system->archive) != 0 &&
         nw_snd_SoundArchive_GetSoundType(system->archive, soundId) != 0 &&
         asd3dSoundActorIsPlaying(actorIndex) == 0 && FUN_00151340(soundId) != 0) {
-        success = (FUN_0015e2bc(&sound3d->actors[actorIndex], &sound3d->handles[actorIndex], soundId, 0) & 0xFF) == 0;
+        success = (nw_snd_SoundStartable_StartSound(&sound3d->actors[actorIndex], &sound3d->handles[actorIndex], soundId, 0) & 0xFF) == 0;
         union { f32 value; s32 bits; } volume;
         if (sound3d->volume == 0) {
             volume.value = 0.0f;

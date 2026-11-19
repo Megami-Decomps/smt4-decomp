@@ -8,7 +8,7 @@ int FUN_002358b4(int, int);
 int FUN_002a1f84(unsigned int, int);
 int _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv(unsigned char [8], unsigned int);
 int FUN_00379c18(int, int);
-int FUN_00379c90(int, int);
+int word8HolderSetFromTable(int, int);
 int FUN_0037b174(unsigned char [8], unsigned int);
 int FUN_0037fad8(int, int, unsigned char *, int);
 int FUN_0037fddc(int, unsigned char [4], unsigned int, unsigned int);
@@ -27,7 +27,7 @@ extern unsigned char LAB_0037e5a0; /* 0x37e5a0 */
 /* Supplied declaration required: FUN_002a1f84. */
 /* Supplied declaration required: _ZN2nw3snd8internal19WaveSoundFileReaderC1EPKv. */
 /* Supplied declaration required: FUN_00379c18. */
-/* Supplied declaration required: FUN_00379c90. */
+/* Supplied declaration required: word8HolderSetFromTable. */
 /* Supplied declaration required: FUN_0037b174. */
 /* Supplied declaration required: FUN_0037fad8. */
 /* Supplied declaration required: FUN_0037fddc. */
@@ -79,7 +79,7 @@ unsigned int FUN_0037e278(int param_1)
       if (temp_v3 == 0) {
         return 0;
       }
-      FUN_00379c90(temp_v2 + 0x90,*(unsigned char *)(param_1 + 0x8c));
+      word8HolderSetFromTable(temp_v2 + 0x90,*(unsigned char *)(param_1 + 0x8c));
       nw_snd_internal_CurveAdshr_SetHold(temp_v2 + 0x90,*(unsigned char *)(param_1 + 0x8f));
       FUN_00379c18(temp_v2 + 0x90,*(unsigned char *)(param_1 + 0x8d));
       *(unsigned char *)(temp_v2 + 0xa8) = *(unsigned char *)(param_1 + 0x8e);

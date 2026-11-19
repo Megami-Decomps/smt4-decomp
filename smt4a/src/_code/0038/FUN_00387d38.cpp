@@ -6,9 +6,9 @@
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "gamedata/SaveSlotRecord.h"
 #include "gamedata/SaveSlotTable.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
-void FUN_003c1060();
 void FUN_00331380(s32 value);
 void sysPlaySe(s32 sound);
 s32 partyPanelExists();
@@ -36,16 +36,16 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
         u8 cancelled;
     };
     ReturnState *state = reinterpret_cast<ReturnState *>(work);
-    if (FUN_003b6fc4() != 0) {
+    if (partyPanelGetRequestedUnitId() != 0) {
         state->previousId = state->selectedId;
-        state->selectedId = FUN_003b6fc4();
+        state->selectedId = partyPanelGetRequestedUnitId();
         state->destination = -1;
         SaveSlotTableA *party = gameGetSlotTable();
         for (s32 index = 0; index < 3; ++index) {
             if (party->reserve[index] >= 0 &&
                 gameGetSlotRecord(party->reserve[index])->id == state->selectedId &&
                 gameGetSlotRecord(party->reserve[index])->id == state->source->record.ailments) {
-                FUN_003c1060();
+                messageMainRequestBanner();
                 state->destination = 5;
                 break;
             }
@@ -55,7 +55,7 @@ u32 FUN_00387d38(CharacterRefreshWork *work)
                 if (party->party[index] >= 0 &&
                     gameGetSlotRecord(party->party[index])->id == state->selectedId &&
                     gameGetSlotRecord(party->party[index])->id == state->source->record.ailments) {
-                    FUN_003c1060();
+                    messageMainRequestBanner();
                     state->destination = 5;
                     break;
                 }

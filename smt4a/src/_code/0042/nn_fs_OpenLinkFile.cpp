@@ -2,15 +2,15 @@
 
 extern "C" {
 
-int FUN_0042c070(int *handle, u32 arg);
+int nn_fs_ipc_File_SetPriority(int *handle, u32 arg);
 extern int fileGetHandleChecked(void);
 
-/* Calls fileGetHandleChecked for a value and passes it to FUN_0042c070 by address. */
+/* Calls fileGetHandleChecked for a value and passes it to nn_fs_ipc_File_SetPriority by address. */
 void nn_fs_OpenLinkFile(u32 unused, u32 arg)
 {
     int handle = fileGetHandleChecked();
 
-    FUN_0042c070(&handle, arg);
+    nn_fs_ipc_File_SetPriority(&handle, arg);
 }
 
 } /* extern "C" */

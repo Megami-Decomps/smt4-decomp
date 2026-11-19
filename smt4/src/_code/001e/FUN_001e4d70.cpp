@@ -10,13 +10,13 @@ extern "C" {
 int eventScriptFindCompletionFlag(...);
 
 int asdLoadFileSetUseRawPaths(int);
-int FUN_00282bfc(int, int);
+int titleRestartSlotState3(int, int);
 int screenFadeSlotReset(int);
 int msgWindowReset(void);
 int commonBgStopChildAndBeginTransition(void);
 int commonBgAcquire(void);
 int aocBufferQueueDisplay(int, unsigned int, int);
-int FUN_00289de4(int, unsigned int, int);
+int aocDrawText7(int, unsigned int, int); // declcheck: local (romwright prototype; the shared declaration in addon/AocFileBufferApi.h does not compile here: more than one instance of overloaded function "aocBufferQueueDisplay" has "C" linkage)
 int buttonHelpCreate(void);
 int messageSlotSet(int);
 int buttonHelpRelease(void);
@@ -45,7 +45,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int messageAnyWindowActive(void);
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int asdLoadFileGetUseRawPaths(void);
-/* Supplied declaration required: FUN_00282bfc. */
+/* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: screenFadeSlotReset. */
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: eventScriptFindCompletionFlag. */
@@ -53,7 +53,7 @@ extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
-/* Supplied declaration required: FUN_00289de4. */
+/* Supplied declaration required: aocDrawText7. */
 extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: messageSlotSet. */
@@ -188,7 +188,7 @@ unsigned int FUN_001e4d70(void)
     temp_v0 = aocPackageGrantsItem(g_aocSystem,puVar1[5],0);
     if (temp_v0 != 0) {
       temp_v0 = g_aocSystem;
-      FUN_00289de4(g_aocSystem,puVar1[5],0);
+      aocDrawText7(g_aocSystem,puVar1[5],0);
       puVar1[0xb] = temp_v0;
       temp_v0 = g_aocSystem;
       aocBufferQueueDisplay(g_aocSystem,puVar1[5],0);
@@ -220,8 +220,8 @@ unsigned int FUN_001e4d70(void)
       *(unsigned char *)((int)puVar1 + 0x21) = 0;
     }
     if (*(char *)((int)puVar1 + 0x23) != '\0') {
-      FUN_00282bfc(0,0xff);
-      FUN_00282bfc(1,0xff);
+      titleRestartSlotState3(0,0xff);
+      titleRestartSlotState3(1,0xff);
     }
     temp_v0 = puVar1[0xb];
     scrScriptProcessCreate(temp_v0,puVar1[0xd]);

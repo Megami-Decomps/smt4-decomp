@@ -1,0 +1,27 @@
+#include "common.h"
+
+extern "C" {
+
+void eventInitializeBlinkFade(void);
+void FUN_003b6d04(void);
+s32 scrGetCommandFrame(void);
+s32 eventEffectIsStateTwo(void);
+
+/* Script command: when scrGetCommandFrame reports nonzero, runs FUN_003b6d04 if eventEffectIsStateTwo allows it and returns whether it did; otherwise runs eventInitializeBlinkFade and returns 0. */
+u8 eventEffectTryFreeTextures(void)
+{
+    s32 result;
+
+    result = scrGetCommandFrame();
+    if (result != 0) {
+        result = eventEffectIsStateTwo();
+        if (result != 0) {
+            FUN_003b6d04();
+        }
+        return result != 0;
+    }
+    eventInitializeBlinkFade();
+    return 0;
+}
+
+} /* extern "C" */

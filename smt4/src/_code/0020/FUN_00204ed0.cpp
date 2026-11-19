@@ -5,6 +5,7 @@
 #include "text/TextDraw.h"
 #include "addon/AocSystem_Smt4.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 

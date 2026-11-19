@@ -30,7 +30,7 @@ unsigned int qcGetCenterSlotGroups(int param_1);
 }
 
 extern "C" {
-u32 FUN_0014bd84(u32 index);
+u32 aocIndexValueOrDefault(u32 index);
 }
 
 extern "C" {

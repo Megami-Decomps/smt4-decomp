@@ -63,7 +63,7 @@ void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32
     panel->position.y = position->y;
     panel->position.z = position->z;
     TargetInfoProjection projected;
-    FUN_002630e0(&projected, 0, FUN_0027db08(0), &panel->position);
+    FUN_002630e0(&projected, 0, obj80Select(0), &panel->position);
     panel->projected = projected;
     if (projected.x > 210.0f) {
         panel->side = 0;

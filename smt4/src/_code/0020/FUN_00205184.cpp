@@ -8,7 +8,7 @@ extern "C" {
 int asdMdlManagerMarkDestroy(...);
 int animPlayerSetLoopPolicy(...);
 int gfxObjectDestroy(...);
-int FUN_0028703c(...);
+int animationEvaluateCallback(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h does not compile here: more than one instance of overloaded function "asdMdlManagerMarkDestroy" has "C" linkage)
 int modelSetScale(...);
 void modelRemoveFromSlotList(...);
 int titleSetSlotValueState2(...);
@@ -20,7 +20,7 @@ int modelSelectPrimaryMotion(...);
 int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
 int cameraExportParameters(...);
-int FUN_002b2b64(...);
+int ownerGetFloatValue(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h does not compile here: more than one instance of overloaded function "asdMdlManagerMarkDestroy" has "C" linkage)
 int FUN_002c159c(...);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
@@ -36,7 +36,7 @@ extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 /* Supplied declaration required: gfxObjectDestroy. */
 extern int effTimelineIsDone(unsigned int);
 extern unsigned int asdCameraLoadFromFile(char *);
-/* Supplied declaration required: FUN_0028703c. */
+/* Supplied declaration required: animationEvaluateCallback. */
 /* Supplied declaration required: screenFadeSlotReset. */
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: modelSetScale. */
@@ -52,7 +52,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 struct ModelBoneAttachmentRoot;
 extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 /* Supplied declaration required: cameraExportParameters. */
-/* Supplied declaration required: FUN_002b2b64. */
+/* Supplied declaration required: ownerGetFloatValue. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c159c. */
 extern int FUN_002c1d5c(void);
@@ -97,7 +97,7 @@ unsigned int FUN_00205184(void)
         lightOwnerRegister(temp_v1,1);
         animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
         modelSelectPrimaryMotion(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x570));
-        FUN_0028703c(*(unsigned int *)(*piVar4 + 8));
+        animationEvaluateCallback(*(unsigned int *)(*piVar4 + 8));
         modelSetScale(*(unsigned int *)(*piVar4 + 8));
       }
       FUN_002a04f0(0);
@@ -122,7 +122,7 @@ unsigned int FUN_00205184(void)
     temp_v1 = effTimelineIsDone(*(unsigned int *)(temp_v0 + 0x558));
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c1d5c(), temp_v1 != 0)) {
       piVar5 = (int *)(temp_v0 + 0x554);
-      FUN_002b2b64(*(unsigned int *)(*(int *)(temp_v0 + 0x554) + 8));
+      ownerGetFloatValue(*(unsigned int *)(*(int *)(temp_v0 + 0x554) + 8));
       temp_v1 = (int)in_s0;
       FUN_002f50b8(*(unsigned int *)(*piVar5 + 8));
       piVar4 = (int *)(temp_v0 + 0x570);

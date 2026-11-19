@@ -1,6 +1,7 @@
 /* NON_MATCHING: close: control flow, tables and calls match; built folds the preset calls into predicated moves, computes the form pointer differently and splits the two lookup loops with different register use */
 #include "common.h"
 #include <stddef.h>
+#include "name/nameMain.h"
 
 /* A name as the engine stores it: nine two-byte characters and a terminator. */
 struct NameBuffer {
@@ -56,7 +57,6 @@ void nameEntryCopyEditedName(NameTask *task, NameBuffer *name);
 void textEncodeFontSlot(s32 slot, NameBuffer *name);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 NameBuffer *logFormatBuffer(NameBuffer *name, const char *text, s32 mode);
-s32 FUN_00309fcc(NameBuffer *name, const char *text);
 
 /* One step of the name-entry task: starts the entry script once the system is ready, then waits for it to ask for
  * confirmation and validates the converted name. */
@@ -131,7 +131,7 @@ void FUN_00397b40(NameTask *task)
         }
     }
     result = logFormatBuffer(&name, task->confirmText, 1);
-    lookup = FUN_00309fcc(&name, task->confirmText);
+    lookup = convertToBufferAndStore(reinterpret_cast<const char *>(&name), reinterpret_cast<u16 *>(task->confirmText));
     if (result->words[0] == 0 && lookup < 6) {
         buttonHelpResetSlots();
         messageOwnerSetState(task, 7);

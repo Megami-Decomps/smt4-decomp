@@ -24,7 +24,7 @@ typedef struct CampScreen {
 } CampScreen;
 
 void asdMemFree(void *block);
-void FUN_00205bf4(void);
+void dataTableFree16(void);
 void statusBustUpPortraitRelease(s16 portrait, s32 a);
 s32 FUN_002b6ad0(void);
 SupportUnitData *gameGetSupportUnitData(void);
@@ -42,7 +42,7 @@ void FUN_00287188(CampScreen *screen)
         asdMemFree(screen->buffer);
         screen->buffer = NULL;
     }
-    FUN_00205bf4();
+    dataTableFree16();
     statusBustUpPortraitRelease(-1, 1);
     for (i = 0; i < 3; i++) {
         if (screen->portraits[i] > 0) {

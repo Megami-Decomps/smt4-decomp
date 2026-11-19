@@ -20,7 +20,7 @@ void textureSlotReplace(TextureSlot *slot, u32 id);
 
 void effectEditorObjectDestroy(Obj *obj);
 
-void FUN_002485d4(Source *source, u16 *dst);
+void halves34Copy(Source *source, u16 *dst);
 
 void FUN_002493a4(GeometryOwner *owner, u32 id, u32 kind);
 

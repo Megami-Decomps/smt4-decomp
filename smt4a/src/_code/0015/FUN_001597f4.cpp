@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_0016f114(void *self);
+void nn_hid_DisableAccelerometer(void *self);
 
-/* Runs FUN_0016f114 on `self` and returns it. */
+/* Runs nn_hid_DisableAccelerometer on `self` and returns it. */
 void *FUN_001597f4(void *self)
 {
-    FUN_0016f114(self);
+    nn_hid_DisableAccelerometer(self);
     return self;
 }
 

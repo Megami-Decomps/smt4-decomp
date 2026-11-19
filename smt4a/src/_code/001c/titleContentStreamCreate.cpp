@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001885e8(int *, int [2], int, int, int, int *, int, int, int *, int, int, int);
+int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int [2], int, int, int, int *, int, int, int *, int, int, int);
 int FUN_0019fc70(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001a007c(void);
 int FUN_001a0164(void);
@@ -35,7 +35,7 @@ extern unsigned int DAT_005893a8; /* 0x5893a8 */
 extern unsigned int DAT_0062d388; /* 0x62d388 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001885e8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 /* Supplied declaration required: FUN_0019fc70. */
 /* Supplied declaration required: FUN_001a007c. */
 /* Supplied declaration required: FUN_001a0164. */
@@ -96,7 +96,7 @@ titleContentStreamCreate(int *param_1,unsigned int *param_2,unsigned int param_3
       temp_v1 = param_4;
       temp_v2 = param_3;
       uStack_3c = param_3;
-      FUN_001885e8(piVar4,temp_v3,0,0x2345678a,2,&temp_v8,0x10,2,&temp_v4,0x14,1,0);
+      nn_fs_ipc_FileSystem_OpenFileDirectly(piVar4,temp_v3,0,0x2345678a,2,&temp_v8,0x10,2,&temp_v4,0x14,1,0);
       temp_v0 = temp_v3[0];
       if (-1 < (int)piVar4) {
         piVar2 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate

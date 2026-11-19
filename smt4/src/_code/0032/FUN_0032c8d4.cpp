@@ -1373,7 +1373,7 @@ code_r0x0032d518:
       if (cRam00493788 != '\0') {
         iVar16 = FUN_002c2950();
         *(unsigned short *)(iVar16 + 0x22) = 0;
-        FUN_00273f5c();
+        clearFlags310To31F();
         naviClearObjectBlock();
         FUN_0027d908();
       }

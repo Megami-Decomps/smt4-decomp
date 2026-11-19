@@ -27,7 +27,7 @@ typedef struct BtlCameraPose {
     /* 0x40 */ f32 fov;
 } BtlCameraPose;
 
-/* A screen-shake generator (20 bytes; FUN_00257e74 steps it, FUN_0023aa28 reads its offset). */
+/* A screen-shake generator (20 bytes; FUN_00257e74 steps it, pairSourceGet reads its offset). */
 typedef struct BtlCameraShake {
     /* 0x00 */ u32 words[5];
 } BtlCameraShake;

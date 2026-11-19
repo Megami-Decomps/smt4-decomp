@@ -5,7 +5,7 @@ extern "C" {
 
 int CONCAT44(...);
 int effGetFrameStep(void);
-int FUN_001bc460(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
 int FUN_00321d7c(...);
@@ -72,7 +72,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: effGetFrameStep. */
-/* Supplied declaration required: FUN_001bc460. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_0027134c. */
 /* Supplied declaration required: FUN_002fe2e8. */
 /* Supplied declaration required: FUN_00321d7c. */
@@ -147,7 +147,7 @@ void FUN_0038f7a0(int param_1)
     temp_v15 = (unsigned long long)(unsigned int)pfVar10[0x39] << 0x20;
     temp_v16 = pfVar10[0x38];
     temp_v2 = temp_v19;
-    FUN_001bc460();
+    gfxQuaternionWorkspaceBuildMatrix();
     FUN_00375c74(param_1,pfVar10,temp_v28,&temp_v25);
     temp_v6 = 0;
     if (temp_v7 != 0) {

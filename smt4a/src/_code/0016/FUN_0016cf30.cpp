@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001885e8(int *, int *, int, int, int, unsigned int *****, int, int, unsigned int, int, int, int);
+int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int *, int, int, int, unsigned int *****, int, int, unsigned int, int, int, int);
 int FUN_0019fc70(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001a007c(void);
 int FUN_001a0164(void);
@@ -29,7 +29,7 @@ typedef struct {
 
 extern unsigned int DAT_005893a8; /* 0x5893a8 */
 
-/* Supplied declaration required: FUN_001885e8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 /* Supplied declaration required: FUN_0019fc70. */
 /* Supplied declaration required: FUN_001a007c. */
 /* Supplied declaration required: FUN_001a0164. */
@@ -65,7 +65,7 @@ FUN_0016cf30(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
       temp_v6 = DAT_005893a8;
       piVar2 = &temp_v6;
       temp_v1 = param_2;
-      FUN_001885e8(piVar2,&temp_v2,0,3,1,temp_v4,1,2,param_7,0xc,1,0);
+      nn_fs_ipc_FileSystem_OpenFileDirectly(piVar2,&temp_v2,0,3,1,temp_v4,1,2,param_7,0xc,1,0);
       if (-1 < (int)piVar2) {
         temp_v0 = (int *)0x0;
         piVar2 = (int *)(**(romwright_code **)(*piVar1 + 0x3c))(piVar1,&temp_v0,temp_v2);

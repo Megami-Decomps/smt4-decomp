@@ -11,7 +11,7 @@ int FUN_001bf898(unsigned int *, unsigned int *, unsigned int *);
 int FUN_001bfb7c(int *, unsigned int *, unsigned int *, unsigned int);
 int FUN_001c070c(...);
 int FUN_001c1048(int *, unsigned int *, int *, unsigned int);
-int FUN_001ca2d0(unsigned int *, unsigned int *, int, int);
+int nw_gfx_TransformNode_GetMemorySizeForInitialize(unsigned int *, unsigned int *, int, int);
 int nw_gfx_AmbientLight_GetMemorySizeInternal(...);
 int nw_gfx_AnimGroup_GetMemorySizeForInitialize(...);
 int nw_gfx_Camera_GetMemorySizeInternal(unsigned int *, unsigned int *, int, int);
@@ -82,7 +82,7 @@ extern int *FUN_001c0324(int *, unsigned int *, unsigned int *, unsigned int);
 extern int *FUN_001c0a0c(int *, unsigned int *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_001c1048. */
 extern int *FUN_001c16bc(int *, unsigned int *, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_001ca2d0. */
+/* Supplied declaration required: nw_gfx_TransformNode_GetMemorySizeForInitialize. */
 /* Supplied declaration required: nw_gfx_AmbientLight_GetMemorySizeInternal. */
 /* Supplied declaration required: nw_gfx_AnimGroup_GetMemorySizeForInitialize. */
 /* Supplied declaration required: nw_gfx_Camera_GetMemorySizeInternal. */
@@ -220,7 +220,7 @@ int * nw_gfx_SceneBuilder_CreateObjectByResourceType(fn_001bad18_arg0 *param_1,u
             *param_2 = (((*param_2 + param_2[1]) - 1) & ~(param_2[1] - 1)) + 0x148;
             temp_v7 = (unsigned int)temp_v11;
             temp_v8 = (unsigned int *)temp_v12;
-            FUN_001ca2d0(param_2,param_5,temp_v9,temp_v10);
+            nw_gfx_TransformNode_GetMemorySizeForInitialize(param_2,param_5,temp_v9,temp_v10);
           }
           goto LAB_001bb4c4;
         }

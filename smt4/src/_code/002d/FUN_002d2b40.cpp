@@ -84,7 +84,7 @@ extern "C" u32 FUN_002d2b40()
             ahead.y = enemy->position.y;
             ahead.z = enemy->position.z;
             ahead.x += mathRemPio2f(enemy->heading * 0.017453292f) * 100.0f;
-            ahead.z += FUN_00282390(enemy->heading * 0.017453292f) * 100.0f;
+            ahead.z += libm_cosf(enemy->heading * 0.017453292f) * 100.0f;
             player.x = g_lmapScene->pose.position.x;
             player.y = g_lmapScene->pose.position.y;
             player.z = g_lmapScene->pose.position.z;

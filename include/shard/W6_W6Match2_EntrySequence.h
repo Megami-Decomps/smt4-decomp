@@ -37,16 +37,6 @@ void FUN_00220ffc(void);
 extern "C" {
 #endif
 
-void FUN_00309fcc(u32 a, u32 b);
-
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 u8 *rt_locale(void);
 
 #ifdef __cplusplus
@@ -78,16 +68,6 @@ extern "C" {
 #endif
 
 bool FUN_001387c0(void);
-
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-u32 FUN_00221b70(int index);
 
 #ifdef __cplusplus
 }

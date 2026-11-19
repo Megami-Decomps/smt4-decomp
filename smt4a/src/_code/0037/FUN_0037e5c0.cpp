@@ -57,7 +57,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
         power = skillGetAdjustedCost(list->source, demon);
     }
     TextureTableEntryIV *name = asdTMTexTableEntryAt(18, 0x579);
-    sprintf(text, "%s", FUN_0014bd84(demon));
+    sprintf(text, "%s", aocIndexValueOrDefault(demon));
     textDrawString(name->x + x, name->y + y, 0.2f, 3, 0.0f, color, speed, text);
     TextureTableEntryIV *level = asdTMTexTableEntryAt(18, 0x57d);
     FUN_00180310(1, level->x + x, level->y + y, 1, 4, 221, "%d", power);

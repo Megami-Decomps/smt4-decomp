@@ -21,6 +21,7 @@
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_UiResourceParameters.h"
+#include "code/Code0038.h"
 
 /* The screen's sprite animation tables. */
 static const UiSpritePositionKey sUnitePositionKeys[] = {
@@ -74,7 +75,6 @@ u32 fileSlotLoad(u32 id);
 s32 lmapMainIsRunning(void);
 void FUN_00294834(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
                   f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
-void *asdCameraLoadFromFile(const char *path);
 void statusCameraSelectPreset(s32 preset);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
 

@@ -35,7 +35,7 @@ void releaseEntriesB(EquipmentMenuPanelView *);
 void releaseEntriesA(MessageIdList *);
 void ifTouchRegionRemove();
 void messageIdListSetRange(MessageIdList *, u32, s32, s32);
-u16 FUN_001643b4(u32, u32);
+u16 ifTouchRegionAddRequested(u32, u32);
 void FUN_00498ff0(EquipmentMenuState *);
 
 void FUN_004964e0(EquipmentMenuResetView *menu, s32 refresh)
@@ -58,8 +58,8 @@ void FUN_004964e0(EquipmentMenuResetView *menu, s32 refresh)
     }
     messageIdListSetRange(&menu->reset.messages, 0x20, firstItem, itemCount);
     menu->reset.messages.unk10 = 1;
-    menu->touchHandles[0] = FUN_001643b4(0x14, 0x576);
-    menu->touchHandles[1] = FUN_001643b4(0x14, 0x577);
+    menu->touchHandles[0] = ifTouchRegionAddRequested(0x14, 0x576);
+    menu->touchHandles[1] = ifTouchRegionAddRequested(0x14, 0x577);
     menu->touchCount += 2;
     if (refresh)
         FUN_00498ff0(&menu->state);

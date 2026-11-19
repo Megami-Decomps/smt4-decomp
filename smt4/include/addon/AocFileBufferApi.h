@@ -9,7 +9,7 @@ extern "C" {
 AocPackageFile *packageFindFileByTypeAndId(AocSystem *system, s32 type, s32 id, char *path);
 u32 fileQueueRequestAndWait(FileQueue *queue, const char *path, const char *secondPath,
                             u32 *transferredBytes, u32 mode, u32 bytes, void *context);
-void *FUN_00289de4(AocSystem *system, s32 id, const char *secondPath);
+void *aocDrawText7(AocSystem *system, s32 id, const char *secondPath);
 void *aocBufferQueueDisplay(AocSystem *system, s32 id, const char *secondPath);
 }
 #endif

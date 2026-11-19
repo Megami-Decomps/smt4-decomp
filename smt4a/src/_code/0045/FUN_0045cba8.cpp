@@ -17,7 +17,7 @@ int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0045db6c(...);
 int FUN_0045f410(...);
 int obj50Set(...);
-int FUN_0045f67c(...);
+int soundObjectPostByte0b(...);
 int FUN_0045f724(...);
 int vslot9ObjRefresh(...);
 int UnsignedDoesSaturate(...);
@@ -89,7 +89,7 @@ extern unsigned long long FUN_0045b904(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0045e228. */
 /* Supplied declaration required: FUN_0045f410. */
 /* Supplied declaration required: obj50Set. */
-/* Supplied declaration required: FUN_0045f67c. */
+/* Supplied declaration required: soundObjectPostByte0b. */
 /* Supplied declaration required: FUN_0045f724. */
 /* Supplied declaration required: vslot9ObjRefresh. */
 extern int FUN_004611ec(int, int *);
@@ -653,7 +653,7 @@ LAB_0045d254:
           }
           return 0xff;
         }
-        FUN_0045f67c(piVar4,(int)temp_v43);
+        soundObjectPostByte0b(piVar4,(int)temp_v43);
         if ((param_7 != (unsigned int *)0x0) && ((*param_7 & 0x100) != 0)) {
           piVar4[0x3d] = param_7[0x29];
         }

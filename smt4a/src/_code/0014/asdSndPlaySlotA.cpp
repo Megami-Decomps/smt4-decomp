@@ -20,7 +20,7 @@ extern "C" {
 s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 u32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 id);
 u32 asdSoundEnsureArchiveItemLoaded(u32 id);
-u32 FUN_0015e2bc(void *player, AuxiliarySoundHandle *handle, u32 id, u32 flags);
+u32 nw_snd_SoundStartable_StartSound(void *player, AuxiliarySoundHandle *handle, u32 id, u32 flags);
 
 // Play a wave sound or an allowed streamed sound in the first free slot, with a bounded volume fade.
 s32 asdSndPlaySlotA(u32 id, u32 level, u32 frames)
@@ -46,7 +46,7 @@ s32 asdSndPlaySlotA(u32 id, u32 level, u32 frames)
         return index;
     }
     AuxiliarySoundHandle *handle = (AuxiliarySoundHandle *)&slots->handles[index];
-    bool started = (u8)FUN_0015e2bc(g_asdSoundSystem.player, handle, id, 0) == 0;
+    bool started = (u8)nw_snd_SoundStartable_StartSound(g_asdSoundSystem.player, handle, id, 0) == 0;
     if (level > 127)
         level = 127;
     f32 volume = 0.0f;

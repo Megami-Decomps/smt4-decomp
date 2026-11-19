@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "addon/AocSystem.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct NpcPortraitVariantRecord {
     u16 texture;
@@ -68,7 +69,7 @@ void npc2dCreatePortraitVariantJob(u32 npc, s32 position, u32 variant)
     } else {
         work->deferred = 0;
         if (aocRunByName(g_aocSystem, work->textureTable, work->textureNode, 1))
-            FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), work->textureTable, work->textureNode, 0x10000);
+            aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->textureTable, work->textureNode, 0x10000);
         else
             asdTMTexTablePrepareNodeImage(work->textureTable, work->textureNode);
     }

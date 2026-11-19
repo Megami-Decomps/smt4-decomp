@@ -1,4 +1,5 @@
 #include "map/LmapViewGlobals.h"
+#include "util/TrigF32.h"
 
 struct FollowCameraTargets {
     u8 prefix[0x34];
@@ -12,7 +13,6 @@ extern "C" {
 extern FollowCameraTargets DAT_005f19fc;
 s32 FUN_003033d4(void);
 f32 libm_sinf(f32);
-f32 libm_cosf(f32);
 
 void lmapSetFollowCameraTargetPose(void)
 {

@@ -4,6 +4,7 @@
 #include "camp/PartyPanel/PartyPanel.h"
 #include "code/Code0031_Smt4a.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int linkHolderApplyFlag(...);
 int FUN_00284ee4(...);
 int FUN_002c39dc(...);
 int rt_aeabi_memclr(...);
-int FUN_003c1060(void);
 int FUN_003c1094(...);
 int sysPlayVoice(int);
 
@@ -36,7 +36,7 @@ extern int buttonHelpIsActionActive(unsigned int);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00319aec. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003c1060. */
+/* Supplied declaration required: messageMainRequestBanner. */
 /* Supplied declaration required: FUN_003c1094. */
 /* Supplied declaration required: sysPlayVoice. */
 
@@ -82,7 +82,7 @@ unsigned int FUN_00318e84(int param_1)
     case 1:
       FUN_00319aec(0);
       *(unsigned int *)(param_1 + 0x134) = 300;
-      FUN_003c1060();
+      messageMainRequestBanner();
       rt_aeabi_memclr(param_1 + 0x38,0x14);
       *(unsigned int *)(param_1 + 0x3c) = 0x1e;
       *(unsigned char *)(param_1 + 0x12d) = 0;

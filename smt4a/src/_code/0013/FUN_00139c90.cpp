@@ -72,7 +72,7 @@ static __inline void gxTargetBlockInit(AsdGxDisplayBuffers *block, u32 mode, u32
         FUN_00149a88(GX_RESULT_QUERY, &result);
         block->addresses[i] = result;
     }
-    FUN_00149840(0, 0);
+    nngxDisplayEnv(0, 0);
 }
 
 void FUN_00139c90(GxConfig *config)

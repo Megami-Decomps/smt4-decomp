@@ -16,7 +16,7 @@ extern SaveWriteWorker g_saveLoadThread;
 void asdSaveHeaderInit(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
 s32 FUN_00214950(u32, const char *);
-u32 FUN_002cbe70(s32 mode);
+u32 colorForMode(s32 mode);
 }
 
 /* Write a queued save block and update the first-file completion result. */
@@ -36,5 +36,5 @@ extern "C" void FUN_002d8f3c(u32 context)
         }
         g_saveLoadThread.busy = 0;
     }
-    FUN_002cbe70(file);
+    colorForMode(file);
 }

@@ -13,11 +13,13 @@
 #include "event/bustupEvent/BustupTex.h"
 #include "script/scrScriptProcess.h"
 #include "shard/TextureDrawCall.h"
+#include "quest_center/QuestStatus.h"
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "sys/RuntimeObjects_Smt4.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/UiTexturePlacement.h"
+#include "code/Code001b.h"
 
 extern "C" {
 s32 uiQuestCalc(u32 job);
@@ -106,11 +108,11 @@ extern "C" void uiQuestCreate(void)
     FUN_00189c24();
 
     for (u16 id = 0; id < 400; ++id) {
-        if (questReadRuntimeFlag(id, 2) && FUN_00298f88(id) && (FUN_002886c8(id) || FUN_002886b0(id)))
+        if (questReadRuntimeFlag(id, 2) && dataTable1bOr1cRecordHasFlag1(id) && (partyEntryGetBit5(id) || partyEntryGetBit6(id)))
             gameFlagClearModeBits(id);
     }
     for (u16 id = 0; id < 400; ++id) {
-        if (questReadRuntimeFlag(id, 2) && !FUN_00298f88(id) && (FUN_002886c8(id) || FUN_002886b0(id)))
+        if (questReadRuntimeFlag(id, 2) && !dataTable1bOr1cRecordHasFlag1(id) && (partyEntryGetBit5(id) || partyEntryGetBit6(id)))
             gameFlagClearModeBits(id);
     }
 
@@ -138,7 +140,7 @@ extern "C" void uiQuestCreate(void)
     pairSetHalves(reinterpret_cast<Obj *>(&quest->sprites[6]), 0, 120);
     uiSpriteStateInitFromSource(&quest->sprites[7], 41, 92, &quest->resources, 161, 1.0f);
     timerStart(&quest->sprites[7], 0, 0);
-    FUN_00262210(reinterpret_cast<PointDeltaWork *>(&quest->sprites[7]), 41, 90, 92);
+    uiGetLayoutPointDifference(reinterpret_cast<PointDeltaWork *>(&quest->sprites[7]), 41, 90, 92);
     uiSpriteStateInitFromSource(&quest->sprites[8], 41, 0, &quest->resources, 201, 1.0f);
     timerStart(&quest->sprites[8], 2, 0);
     uiSpriteStateInitFromSource(&quest->sprites[9], 41, 0, &quest->resources, 201, 1.0f);

@@ -12,7 +12,6 @@ s32 dspsndInitializeManagers(void);
 void sysFatalBreak(void);
 void sndMasterManagerSetVolume(f32 volume);
 void FUN_00159e58(u32 mode);
-u32 FUN_0015e0c8(const SoundSystemInitParameters *parameters);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 options, u32 bytes, s32 clear);
 void FUN_0015de34(const SoundSystemInitParameters *parameters, u8 *buffer, u32 bytes);
 
@@ -41,7 +40,7 @@ void FUN_00142b84(s32 auxiliaryMode)
     parameters.profiling = 0;
     parameters.auxiliary = 1;
     parameters.profileBufferSize = -1;
-    u32 bytes = FUN_0015e0c8(&parameters);
+    u32 bytes = nw_snd_SoundSystem_GetRequiredMemSize(&parameters);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 617);
     u8 *buffer = static_cast<u8 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
     g_asdSoundSystem.workBuffer = buffer;

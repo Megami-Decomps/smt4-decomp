@@ -8,7 +8,7 @@ extern "C" {
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int FUN_00233e10(...);
 int FUN_00246014(void);

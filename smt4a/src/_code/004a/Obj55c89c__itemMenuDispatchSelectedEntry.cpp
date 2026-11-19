@@ -1,5 +1,6 @@
 #include "common.h"
 #include "classes/Obj55c89c.h"
+#include "code/Code0029.h"
 
 struct MenuEntry {
     u8 unk00[4];
@@ -23,7 +24,6 @@ extern "C" {
 s32 FUN_0035dbb0(void);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 partyFindFirstUnusedEntry(void);
-void dispatchIfFound(s32 index, u32 id, bool flag);
 void gameGlobalsSetMenuOpenFlag(s32 value);
 
 u32 shopListItemGetId(const MenuEntry *entry);

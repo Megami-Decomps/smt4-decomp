@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "code/Code0035.h"
+#include "code/Code003c_Smt4a.h"
 
 struct ScriptProcess;
 
@@ -31,8 +32,6 @@ struct NpcShopExchangeWork {
 
 extern "C" {
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 mode);
-void FUN_003c1060();
-void FUN_003c3e14();
 s32 flagValueRead(u32 id);
 s32 itemGetStackLimit(u32 id);
 void flagValueSub(u32 id, u32 count);
@@ -74,7 +73,7 @@ extern "C" void FUN_003e618c(NpcShopExchangeWork *work)
             scrSetStringSlot(1, dataFindKindRecordWithAocOverrides(offer->payment, 0));
         }
         FUN_00359974(24, offer->cost, -1, 0);
-        FUN_003c1060();
+        messageMainRequestBanner();
         npcShopStartEntry(work, "npcShop_ExChange");
         work->step++;
         break;
@@ -86,7 +85,7 @@ extern "C" void FUN_003e618c(NpcShopExchangeWork *work)
             } else {
                 work->step = 99;
             }
-            FUN_003c3e14();
+            messageMainClearBannerRequest();
         }
         break;
     case 2: {

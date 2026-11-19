@@ -4,7 +4,6 @@
 struct DateTimeValue;
 
 extern "C" {
-nn::Result queryFailureResultOrZero(void *owner);
 s32 FUN_00353248(void *owner, DateTimeValue *output);
 
 // Read the owner's current time and return its translated status, reporting a failed result to the owner.

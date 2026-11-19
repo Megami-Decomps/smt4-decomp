@@ -2,7 +2,7 @@
 
 extern "C" {
 u32 asdListBoxCreate(u32, s32, s32, s32, s32);
-void FUN_00227200(u32, void *, void *);
+void jobSetWork7C(u32, void *, void *);
 void FUN_002271e8(u32, s32, s32);
 void jobSetText(u32, const char *);
 void asdListBoxAddItem(u32, const char *);
@@ -19,7 +19,7 @@ void FUN_003d8b34(EnemyEditorWork *work, EnemyEditorResourceIV *resource, u32 pa
 {
     u32 list = asdListBoxCreate(parent, 0xeb, 16, 32, 4);
     work->list = list;
-    FUN_00227200(list, reinterpret_cast<void *>(FUN_00192a9c), reinterpret_cast<void *>(textMeasureFixedWidth));
+    jobSetWork7C(list, reinterpret_cast<void *>(FUN_00192a9c), reinterpret_cast<void *>(textMeasureFixedWidth));
     FUN_002271e8(list, 12, 16);
     jobSetText(list, DAT_0040063c);
     asdListBoxAddItem(list, DAT_00400630);

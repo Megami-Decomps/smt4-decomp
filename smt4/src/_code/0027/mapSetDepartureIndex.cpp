@@ -1,13 +1,14 @@
 #include "gamedata/MapSaveBlock.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
 
-void mapSetDepartureIndex(u8 value)
+void mapSetDepartureIndex(u32 index)
 {
     MapSaveBlock *work = gameGetMapBlock();
 
-    work->departureIndex = value;
+    work->departureIndex = index;
 }
 
 } /* extern "C" */

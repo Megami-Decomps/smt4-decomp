@@ -31,8 +31,8 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: wordsFlagClear. */
-extern unsigned int FUN_00501fb4(unsigned char *, int *);
-extern unsigned int FUN_00502038(unsigned char *, short **);
+extern unsigned int nn_dbm_RomPathTool_PathParser_GetAsFileName(unsigned char *, int *);
+extern unsigned int nn_dbm_RomPathTool_PathParser_GetAsDirectoryName(unsigned char *, short **);
 /* Supplied declaration required: FUN_00522040. */
 /* Supplied declaration required: FUN_00522278. */
 /* Supplied declaration required: n_dbm_HierarchicalRomFileTableTemplate_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomF. */
@@ -168,7 +168,7 @@ LAB_005223c8:
     return temp_v1;
   }
   if (param_5 != 0) {
-    temp_v1 = FUN_00502038(temp_v15,&temp_v7);
+    temp_v1 = nn_dbm_RomPathTool_PathParser_GetAsDirectoryName(temp_v15,&temp_v7);
     if ((int)temp_v1 < 0) {
       return temp_v1;
     }
@@ -228,7 +228,7 @@ LAB_005223c8:
       return 0xe0c04702;
     }
     *param_4 = (int)psVar9;
-    temp_v21 = FUN_00501fb4(temp_v15,param_4 + 1);
+    temp_v21 = nn_dbm_RomPathTool_PathParser_GetAsFileName(temp_v15,param_4 + 1);
   }
   if ((int)temp_v21 < 0) {
     return temp_v21;

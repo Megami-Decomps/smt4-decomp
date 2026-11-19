@@ -195,7 +195,7 @@ void AocMenu::runMainProcess()
         }
         if (selectOwnerGetActive(&touchRows) != 0) {
             /* A tap on the row under the cursor does what the A button would. */
-            if (FUN_004d0058(contentList(this), selectOwnerGetSelected(&touchRows)) == 0) {
+            if (stateCounterBelowLimit(contentList(this), selectOwnerGetSelected(&touchRows)) == 0) {
                 return;
             }
             if (!countOwnerIsValidIndex(main, selectedSlot(this))) {

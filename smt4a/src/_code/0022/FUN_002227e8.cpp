@@ -9,7 +9,7 @@ extern "C" {
 
 void FUN_00297f00(int value, int count);
 
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int FUN_00223fac(void);
 int FUN_002240f0(void);

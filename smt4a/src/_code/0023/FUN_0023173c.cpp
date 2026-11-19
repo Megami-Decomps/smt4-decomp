@@ -27,7 +27,7 @@ extern unsigned int *g_btlHelp; /* 0x5738e8 */
 extern unsigned int uRam005738f0; /* 0x5738f0 */
 extern unsigned int uRam005738f4; /* 0x5738f4 */
 
-extern unsigned int FUN_0014bd84(int);
+extern unsigned int aocIndexValueOrDefault(int);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int infoWinHasValue(void);
@@ -205,7 +205,7 @@ joined_r0x002318b0:
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 5:
-      temp_v0 = FUN_0014bd84((int)(short)puVar1[2]);
+      temp_v0 = aocIndexValueOrDefault((int)(short)puVar1[2]);
       libc_strcpy(temp_v4,temp_v0);
       scrSetStringSlot(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(puVar1 + 6)), *(unsigned int *)(puVar1 + 4) & 0xffff);

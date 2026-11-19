@@ -10,7 +10,7 @@ WindowStatusResult FUN_004289cc(void* owner, void* request, const void* metadata
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }
-    status = FUN_004283cc(owner);
+    status = queryFailureResultOrZero(owner);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00237a94(int [2], int);
-int FUN_00237d64(int, int *);
+int variantSetPlain(int, int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00237a94. */
-/* Supplied declaration required: FUN_00237d64. */
+/* Supplied declaration required: variantSetPlain. */
 
 
 unsigned int FUN_0035cfec(int *param_1,int *param_2,unsigned int *param_3,int *param_4)
@@ -31,7 +31,7 @@ unsigned int FUN_0035cfec(int *param_1,int *param_2,unsigned int *param_3,int *p
   }
   else {
     temp_v1 = *param_3;
-    FUN_00237d64(temp_v2[0] + 8,&temp_v1);
+    variantSetPlain(temp_v2[0] + 8,&temp_v1);
     *param_2 = *param_4;
     *param_1 = *(int *)(*param_1 + 4);
     temp_v0 = 0;

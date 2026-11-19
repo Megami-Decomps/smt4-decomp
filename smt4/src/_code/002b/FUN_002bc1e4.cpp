@@ -5,7 +5,7 @@ extern u32 *g_commandBufferCursor;
 extern u32 *g_commandBufferEnd;
 void nngxLockEnter(void);
 void nngxLockLeave(void);
-void FUN_002aa624(AsdCmdBuffer *buffer, AsdCmdRecord *record);
+void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *record);
 void FUN_002ba2b8(void);
 
 void FUN_002bc1e4(void)
@@ -46,7 +46,7 @@ void FUN_002bc1e4(void)
     record->commands = buffer->start + buffer->committedOffset;
     record->byteCount = buffer->writeOffset - buffer->committedOffset;
     if (buffer->unk34)
-        FUN_002aa624(buffer, record);
+        heapCloseOpenBlock(buffer, record);
     record->flags &= ~2;
     if (buffer->flag3d)
         record->flags |= 1;

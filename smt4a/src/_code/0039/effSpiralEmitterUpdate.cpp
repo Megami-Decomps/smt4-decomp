@@ -8,7 +8,7 @@
 #include "gfx/SpiralEmitter.h"
 
 extern "C" {
-void FUN_001bc460(void);
+void gfxQuaternionWorkspaceBuildMatrix(void);
 f32 FUN_001a1ee0(f32 angle);
 s32 FUN_0037a844(void);
 void FUN_00375c74(ParticleEmissionState *state, const ParticleEmissionDefinition *definition, u8 *burst, s32 *count,
@@ -39,7 +39,7 @@ extern "C" void effSpiralEmitterUpdate(ParticleEmissionState *emitter)
     u8 angleMode = definition->angleMode;
     f32 gravity = definition->gravity;
     g_vectorScratch.first.rotation = definition->rotation;
-    FUN_001bc460();
+    gfxQuaternionWorkspaceBuildMatrix();
     u8 burst;
     s32 emitCount;
     Vector4 previous;

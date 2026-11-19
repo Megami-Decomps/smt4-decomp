@@ -7,8 +7,8 @@ extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 key);
 s32 ifTouchIsInitialSelection(s32 key);
 s32 FUN_003c2b44(u32 mode);
-s32 FUN_003c2b14(u32 mode);
-s32 FUN_003c2ae4(u32 mode);
+s32 getMaskType3(u32 mode);
+s32 getMaskType4(u32 mode);
 void FUN_00233404(void);
 }
 
@@ -47,10 +47,10 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
     } else if (FUN_003c2b44(0) != 0 && stepper->value == stepper->minimum) {
         stepper->value = stepper->maximum;
     } else {
-        if (FUN_003c2b14(0) != 0) {
+        if (getMaskType3(0) != 0) {
             stepper->value += 10;
         }
-        if (FUN_003c2ae4(0) != 0) {
+        if (getMaskType4(0) != 0) {
             stepper->value -= 10;
         }
         if (FUN_003c2a54(0) != 0) {

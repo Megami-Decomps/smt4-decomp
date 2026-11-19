@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 FUN_002c1d5c(void);
-void FUN_00282bfc(u32, u32);
+void titleRestartSlotState3(u32, u32);
 void slotSetRequest(u32, u32, u32);
 
 // Begin a slot request on the first frame and wait for completion on later frames.
@@ -29,10 +29,10 @@ u32 scrSlotRequestByArg(void)
         if (FUN_002c1d5c() != 0) {
             switch (scrGetArg(0)) {
             case 0:
-                FUN_00282bfc(0, 0xff);
+                titleRestartSlotState3(0, 0xff);
                 break;
             case 1:
-                FUN_00282bfc(0, ~0u);
+                titleRestartSlotState3(0, ~0u);
                 break;
             }
         }

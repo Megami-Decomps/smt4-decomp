@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001c08ec(void);
+int effectApplyFiveComponentsWithDefaults(void); // declcheck: local (romwright prototype; the shared declaration in code/Code001c_Smt4.h does not compile here: too few arguments in function call)
 int flagsPackFourBooleans(...);
 int FUN_0023e024(...);
 int renderCtxResetColorScale(...);
@@ -57,7 +57,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001c08ec. */
+/* Supplied declaration required: effectApplyFiveComponentsWithDefaults. */
 /* Supplied declaration required: flagsPackFourBooleans. */
 /* Supplied declaration required: FUN_0023e024. */
 extern int gxPackFadeKindAlphaWord(unsigned int);
@@ -267,7 +267,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
   renderCtxSelectTexture(g_titleScene,0);
-  FUN_001c08ec();
+  effectApplyFiveComponentsWithDefaults();
   temp_v0 = g_titleScene;
   piVar5 = (int *)(g_titleScene + 0x128c);
   temp_v1 = *piVar5;

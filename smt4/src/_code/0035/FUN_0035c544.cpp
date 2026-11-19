@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00237d64(int *, int *[2]);
+int variantSetPlain(int *, int *[2]);
 int FUN_00237d78(void);
 int FUN_00238aac(int *, int);
 int FUN_0035c44c(int *, int **, int [2]);
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp64; /* 0x64: local_64 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00237d64. */
+/* Supplied declaration required: variantSetPlain. */
 /* Supplied declaration required: FUN_00237d78. */
 /* Supplied declaration required: FUN_00238aac. */
 /* Supplied declaration required: FUN_0035c44c. */
@@ -96,7 +96,7 @@ int * FUN_0035c544(int *param_1,int *param_2,int *param_3,romwright_code *param_
       *piVar5 = (int)piVar2;
       *(int **)(*piVar2 + 4) = piVar2;
       temp_v4[0] = piVar3;
-      FUN_00237d64(piVar2 + 2,temp_v4);
+      variantSetPlain(piVar2 + 2,temp_v4);
       while (*(char *)(*param_1 + 8) == '\x01') {
         *param_1 = *(int *)(*param_1 + 4);
         temp_v5[0] = (int *)*param_3;
@@ -160,7 +160,7 @@ int * FUN_0035c544(int *param_1,int *param_2,int *param_3,romwright_code *param_
           return (int *)0x2;
         }
         temp_v5[0] = piVar3;
-        FUN_00237d64(piVar2 + 2,temp_v5);
+        variantSetPlain(piVar2 + 2,temp_v5);
       }
       *temp_v11 = (int)piVar3;
     }

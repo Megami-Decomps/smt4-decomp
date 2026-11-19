@@ -55,7 +55,7 @@ struct RowPanel {
 
 extern "C" {
 s8 uiSubStateGetSelected(const CursorState *cursor);
-LayoutSlot *FUN_002bf4f0(u8 *layout, u32 id);
+LayoutSlot *layoutFindTableEntry(u8 *layout, u32 id);
 void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
 void drawTextAtSnappedRectangle(u8 *layout, f32 x, f32 y, s32 style, u32 color, const char *text, f32 scale, f32 c, f32 d);
 void FUN_00231bcc(u8 *layout, u32 image, s32 x, s32 y, s32 alpha, u32 flags);
@@ -73,9 +73,9 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
     f32 scale = (f32)(0x100 - alpha) * (1.0f / 256.0f);
     LayoutSlot *slot;
     if (selected == 0)
-        slot = FUN_002bf4f0(panel->layout, index + 0x40E);
+        slot = layoutFindTableEntry(panel->layout, index + 0x40E);
     else
-        slot = FUN_002bf4f0(panel->layout, index + 0x42F);
+        slot = layoutFindTableEntry(panel->layout, index + 0x42F);
     s32 baseX = slot->x;
     s32 baseY = slot->y;
     s32 style;
@@ -94,7 +94,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
     if (FUN_00262cb0(panel->idEntries[row].id))
         color = 0x5A5A5AFF;
     const char *name = panel->list.entries[row].name;
-    LayoutSlot *box = FUN_002bf4f0(panel->layout, nameBox);
+    LayoutSlot *box = layoutFindTableEntry(panel->layout, nameBox);
     drawTextAtSnappedRectangle(panel->layout, (f32)(box->x + baseX), (f32)(box->y + baseY), style, color, name, scale, 1.0f, 0.0f);
     u32 iconBox;
     if (selected == 0) {
@@ -103,7 +103,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
         iconBox = 0x476;
         FUN_00231bcc(panel->layout, 0x4DF, baseX, baseY, alpha, 1);
     }
-    LayoutSlot *icon = FUN_002bf4f0(panel->layout, iconBox);
+    LayoutSlot *icon = layoutFindTableEntry(panel->layout, iconBox);
     ScreenPoint origin;
     pairCopy(panel->layout, &origin);
     f32 iconX = (f32)(icon->x + baseX) + origin.x;
@@ -113,9 +113,9 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
     sprintf(text, "%8d", panel->list.entries[row].count);
     LayoutSlot *countBox;
     if (selected == 0)
-        countBox = FUN_002bf4f0(panel->layout, 0x4DE);
+        countBox = layoutFindTableEntry(panel->layout, 0x4DE);
     else
-        countBox = FUN_002bf4f0(panel->layout, 0x4F0);
+        countBox = layoutFindTableEntry(panel->layout, 0x4F0);
     drawTextAtRelativePosition(panel->layout, 0, countBox->x + baseX, countBox->y + baseY, 0, 7, 0xFFFFFFFF, alpha, text);
 }
 

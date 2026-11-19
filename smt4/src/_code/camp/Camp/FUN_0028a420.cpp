@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_0026c868(void);
-int FUN_00292bcc(...);
+int obj48Arm(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "pair40Set" has "C" linkage)
 int slotPlacementAssignSlotAndPosition(...);
 int FUN_00298d28(...);
 
@@ -75,7 +75,7 @@ extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: commonBgAcquire. */
 /* Supplied declaration required: partyPanelCreate. */
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_00292bcc. */
+/* Supplied declaration required: obj48Arm. */
 /* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: slotPlacementAssignSlotAndPosition. */
 /* Supplied declaration required: FUN_00297408. */
@@ -482,19 +482,19 @@ LAB_0028b6d0:
       } while (temp_v6 < 0x18);
       FUN_00298d28(0);
       if (*(char *)(temp_v0 + 0x678) != '\0') {
-        FUN_00292bcc(*(unsigned int *)(temp_v0 + 0x6c8),0xff);
+        obj48Arm(*(unsigned int *)(temp_v0 + 0x6c8),0xff);
       }
       temp_v6 = 0;
       do {
         if (*(char *)(temp_v0 + temp_v6 + 0x679) != '\0') {
-          FUN_00292bcc(*(unsigned int *)(temp_v0 + temp_v6 * 4 + 0x6cc),0xff);
+          obj48Arm(*(unsigned int *)(temp_v0 + temp_v6 * 4 + 0x6cc),0xff);
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 3);
       temp_v6 = 0;
       do {
         if (*(short *)(temp_v0 + temp_v6 * 8 + 0x73c) != 0) {
-          FUN_00292bcc(*(unsigned int *)(temp_v0 + temp_v6 * 4 + 0x6d8),0xff);
+          obj48Arm(*(unsigned int *)(temp_v0 + temp_v6 * 4 + 0x6d8),0xff);
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 0x18);

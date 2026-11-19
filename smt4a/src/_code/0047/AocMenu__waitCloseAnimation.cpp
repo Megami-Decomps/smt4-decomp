@@ -1,10 +1,10 @@
 #include "classes/AocMenu.h"
 #include "shard/ScreenTransitionState.h"
 #include "ui/SceneWindowWork.h"
+#include "addon/aocBootProcess.h"
 
 extern "C" {
 void eventQueueAddUniqueIfValid(u32);
-void flagObjAdvance(void *);
 void aocEntryPanelCreateText(void *, u32, u32, u32);
 void jobOwnerFreeSlotAndStop(void *);
 void aocMenuSetButtonHelp(ScreenTransitionState *, s32, u32);

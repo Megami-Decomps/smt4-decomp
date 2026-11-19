@@ -28,7 +28,7 @@ int FUN_00214da4(void);
 int gameStateClearFlag(void);
 int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
-int FUN_00324c48(...);
+int gameStateSetJumpRequest(...);
 int useCounterSelectMode2(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
@@ -221,7 +221,7 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: sortMenuAcquire. */
 extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
-/* Supplied declaration required: FUN_00324c48. */
+/* Supplied declaration required: gameStateSetJumpRequest. */
 /* Supplied declaration required: useCounterSelectMode2. */
 /* Supplied declaration required: obj7ECSetPair. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -1090,7 +1090,7 @@ LAB_0027edcc:
           }
           else {
             if ((DAT_005f1b74 == temp_v3) && (DAT_005f1b78 == *(char *)(temp_v7 + 0x56fd3a))) {
-              FUN_00324c48(DAT_005f1b74,DAT_005f1b78,DAT_005f1b7c);
+              gameStateSetJumpRequest(DAT_005f1b74,DAT_005f1b78,DAT_005f1b7c);
             }
             else {
               mapPlaceSet(temp_v3,(int)*(char *)(temp_v7 + 0x56fd3a),(int)*(char *)(temp_v7 + 0x56fd3b)

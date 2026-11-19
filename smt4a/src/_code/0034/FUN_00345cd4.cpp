@@ -4,9 +4,9 @@
 #include "code/Code0014.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "code/Code0015.h"
+#include "code/Code0030.h"
 extern "C" {
 
-void FUN_00300100(s32 handler, s32 flag);
 void requestDispatch(void *request);
 void effectNodeUpdatePlacedChildren(EffectNode *node);
 void uiSpriteRefreshMode(RenderCtxA *context);
@@ -25,7 +25,7 @@ void FUN_00345cd4(void)
     } else {
         uiSpriteRefreshMode(g_renderCtx);
     }
-    FUN_00300100(1, 1);
+    effMenuCallHandler(1, 1);
     if (g_effectEditor.resource != NULL) {
         requestDispatch(g_effectEditor.resource);
     }

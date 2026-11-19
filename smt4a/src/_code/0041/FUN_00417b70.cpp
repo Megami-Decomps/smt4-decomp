@@ -53,7 +53,7 @@ void FUN_00417b70(s32 id)
     entry->unk0High = 0;
     entry->unk2Low = 0;
     entry->unk2Top = 0;
-    kind = FUN_001bd118(id);
+    kind = table1bOr1cGetRecordValue(id);
     if (kind != 6 && kind != 9 && kind != 0xB && kind != 0xC && itemDataIsFlagClear(id) != 0) {
         FUN_00417e08(id);
     }

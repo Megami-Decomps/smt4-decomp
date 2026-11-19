@@ -55,7 +55,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int screenFadesAllReady(void);
@@ -168,7 +168,7 @@ void FUN_002ea500(void)
           *(unsigned int *)(temp_v0 + 0x30) = temp_v6;
           *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((temp_v3 + 180.0f) * 0.017453292f) * 110.0f;
           temp_v0 = g_lmapScene;
-          *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 110.0f;
+          *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 110.0f;
           FUN_0027fc14(10);
           *(unsigned int *)(g_mapCamera + 0xac) = 0xffffffff;
           buttonHelpSetPreset(0xdb);
@@ -177,7 +177,7 @@ void FUN_002ea500(void)
           MapMarkerPosition marker;
           marker.x = *(float *)&DAT_0049f9a0 + mathRemPio2f(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
           marker.y = *(float *)&DAT_0049f9a4 + 10.0f;
-          marker.z = *(float *)&DAT_0049f9a8 + FUN_00282390(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
+          marker.z = *(float *)&DAT_0049f9a8 + libm_cosf(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 20.0f;
           marker.w = *(float *)(g_lmapScene + 0x50) + 180.0f;
           FUN_00248114(marker);
           }
@@ -251,7 +251,7 @@ LAB_002ea9b4:
         {
         SoundActorQueuePosition position;
         position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
-        position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+        position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
         temp_v0 = randBetween(0,1);
         soundActorStartOnFreeChannel(temp_v0 + 0x100023c, position);

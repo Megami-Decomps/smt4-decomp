@@ -42,7 +42,7 @@ void effectSetProcessScalar(f32 value);
 u32 eventCommandGetPendingCleanup(void);
 u8 *FUN_0018f654(u8 *object);
 void FUN_00257e74(BtlCameraShake *shake);
-void FUN_0023aa28(BtlCameraShake *shake, f32 *x, f32 *y);
+void pairSourceGet(BtlCameraShake *shake, f32 *x, f32 *y);
 u32 rangeIsValid(BtlCameraShake *shake);
 
 #define FIXED_ANGLE_PER_RADIAN 40.743664f  /* 256 / (2 * pi): the sine table's units */
@@ -294,7 +294,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
         }
         if (camera->flags & 0x40000) {
             FUN_00257e74(&camera->shake);
-            FUN_0023aa28(&camera->shake, &pan.x, &pan.y);
+            pairSourceGet(&camera->shake, &pan.x, &pan.y);
             if (rangeIsValid(&camera->shake)) {
                 camera->shake = BtlCameraShake();
                 camera->flags &= ~0x40000;
@@ -305,7 +305,7 @@ s32 btlCameraUpdate(BtlCamera *camera)
         panExtra.x = 0.0f;
         if (camera->flags & 0x400000) {
             FUN_00257e74(&camera->shakeExtra);
-            FUN_0023aa28(&camera->shakeExtra, &panExtra.x, &panExtra.y);
+            pairSourceGet(&camera->shakeExtra, &panExtra.x, &panExtra.y);
             if (rangeIsValid(&camera->shakeExtra)) {
                 camera->shakeExtra = BtlCameraShake();
                 camera->flags &= ~0x400000;

@@ -29,7 +29,7 @@ extern const u8 DAT_004017f4;
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 option, u32 bytes, s32 fromFront);
 /* This factory supplies an owner tag even though the allocator body ignores it. */
 s32 FUN_002e0730(u32 job);
-s32 FUN_002f4aec(u32 job);
+s32 payloadWorkRelease(u32 job);
 void btlTargetSelectDestroy(u32 job);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
@@ -57,10 +57,10 @@ extern "C" void btlTargetSelectCreate(BtlMainState *owner)
         FUN_002e0730, btlTargetSelectDestroy, reinterpret_cast<u32>(work),
         reinterpret_cast<void *>(owner->job));
     taskCreateDraw(reinterpret_cast<const s8 *>("btlTargetSelect DrawUpL"), 0x7a, 0, 0,
-                   FUN_002f4aec, NULL, reinterpret_cast<u32>(work),
+                   payloadWorkRelease, NULL, reinterpret_cast<u32>(work),
                    reinterpret_cast<void *>(owner->targetSelect.job));
     taskCreateDraw(reinterpret_cast<const s8 *>("btlTargetSelect DrawUpR"), 0xd8, 0, 0,
-                   FUN_002f4aec, NULL, reinterpret_cast<u32>(work),
+                   payloadWorkRelease, NULL, reinterpret_cast<u32>(work),
                    reinterpret_cast<void *>(owner->targetSelect.job));
 
     drawParameterBlockClear(&work->parameters);

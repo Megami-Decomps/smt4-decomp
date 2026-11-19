@@ -63,8 +63,8 @@ void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 void FUN_00233240(void *animations, s32 value);
 s32 uiAnimationAdvanceChannel(void *animations, s32 channel);
-void FUN_00233410(const u8 *selection);
-void FUN_00233818(Obj55ca08 *selection);
+void sub10OwnerStart(const u8 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "releaseEntriesA" has "C" linkage)
+void releaseEntriesA(Obj55ca08 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "sub10OwnerStart" has "C" linkage)
 void ifTouchRegionClearAll(AppraisePanel *panel);
 s32 FUN_0027ee9c(void);
 void FUN_0029212c(u32 id);
@@ -136,7 +136,7 @@ void FUN_003a2c48(AppraiseScene *scene)
         scrRunOpcodesStub(scene->script);
         scene->selection.synchronize(reinterpret_cast<const u8 *>(&scene->holder));
         appraisePanel(scene)->synchronize(reinterpret_cast<const u8 *>(&scene->holder));
-        FUN_00233410(reinterpret_cast<const u8 *>(&scene->holder));
+        sub10OwnerStart(reinterpret_cast<const u8 *>(&scene->holder));
         uiAnimationAdvanceChannel(scene->animations, 2);
         uiAnimationAdvanceChannel(scene->animations, 3);
         FUN_0029212c(scene->entries[flaggedValueHolderGetTotal(&scene->holder)].id);
@@ -152,7 +152,7 @@ void FUN_003a2c48(AppraiseScene *scene)
         if (sys43e188GetState() && messageMainTargetIsClear() == 1) {
             sceneApplyTransaction(scene);
             ifTouchRegionClearAll(appraisePanel(scene));
-            FUN_00233818(&scene->selection);
+            releaseEntriesA(&scene->selection);
             for (s32 i = 0; i < scene->touchCount; i++)
                 ifTouchRegionRemove();
             scene->mode = 3;

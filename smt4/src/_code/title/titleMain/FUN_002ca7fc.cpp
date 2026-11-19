@@ -4,7 +4,7 @@
 
 extern "C" {
 
-float FUN_0028f4b4(const char *, unsigned int, float);
+float fontMeasureTextWidth(const char *, unsigned int, float); // declcheck: local (romwright prototype; the shared declaration in ui/AnimatedMessage.h does not compile here: more than one instance of overloaded function "textDrawString" has "C" linkage)
 int textDrawString(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
@@ -26,7 +26,7 @@ extern int g_titleMain; /* 0x44e300 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0028f4b4. */
+/* Supplied declaration required: fontMeasureTextWidth. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -110,7 +110,7 @@ int FUN_002ca7fc(unsigned int handle)
       dataTableGet(0x3a,0);
       temp_v4 = dataTableGetEntries();
       temp_v4 = temp_v4 + temp_v1 * 0x56;
-      temp_v6 = FUN_0028f4b4(reinterpret_cast<const char *>(temp_v4), 4, 0.0f);
+      temp_v6 = fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v4), 4, 0.0f);
       temp_v5 = (int)temp_v0 - (int)temp_v6;
       temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v6 = temp_v6 * (float)temp_v9;

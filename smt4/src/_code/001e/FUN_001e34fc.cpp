@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e34fc` (_code @ 0x1e34fc, 0x438 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W4_Match1b_RegisteredHandle.h"
 #include <stdio.h>
 #include "romwright_types.h"
 
@@ -35,7 +36,6 @@ extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: vectorQueuePushPosition. */
 /* Supplied declaration required: FUN_002f479c. */
 /* Supplied declaration required: FUN_002fb4a4. */
-extern int FUN_00316d64(int, int);
 extern int FUN_0031b7dc(void);
 
 
@@ -142,7 +142,7 @@ LAB_001e36a4:
               temp_v1 = (unsigned int)*(unsigned char *)((int)psVar3 + 0x33);
             }
             if ((!temp_v5 || temp_v1 == 0x13) &&
-               (temp_v4 = FUN_00316d64((int)psVar3[2],(int)psVar3[3]), temp_v4 != 0)) {
+               (temp_v4 = flagPairCondition((int)psVar3[2],(int)psVar3[3]), temp_v4 != 0)) {
               if (param_3 == 0) {
                 g_deferredMapModels[1] = (int)psVar8;
                 break;

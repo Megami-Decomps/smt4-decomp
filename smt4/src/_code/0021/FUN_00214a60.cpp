@@ -10,7 +10,7 @@ extern "C" {
 int screenDrawShadedRect(...);
 int textFormatFullWidthTwoDigits(...);
 int FUN_0025090c(...);
-float FUN_0028f4b4(const char *, unsigned int, float);
+float fontMeasureTextWidth(const char *, unsigned int, float); // declcheck: local (romwright prototype; the shared declaration in ui/AnimatedMessage.h does not compile here: more than one instance of overloaded function "textDrawString" has "C" linkage)
 int textFormatFullWidthNumber(...);
 int buttonHelpSetText(int, int);
 int gxSetUniformQuadColors(...);
@@ -71,7 +71,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: screenDrawShadedRect. */
 /* Supplied declaration required: textFormatFullWidthTwoDigits. */
 /* Supplied declaration required: FUN_0025090c. */
-/* Supplied declaration required: FUN_0028f4b4. */
+/* Supplied declaration required: fontMeasureTextWidth. */
 /* Supplied declaration required: textFormatFullWidthNumber. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gxSetUniformQuadColors. */
@@ -239,7 +239,7 @@ unsigned int FUN_00214a60(void)
           }
           FUN_0025090c(temp_v14,*(unsigned short *)(temp_v17 + 0x2a6),2,temp_v27);
           temp_v2 = **(short **)(temp_v9 + 0xc);
-          FUN_0028f4b4(reinterpret_cast<const char *>(temp_v27), 2, 0.0f);
+          fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v27), 2, 0.0f);
           temp_v5 = *(int *)(temp_v5 + temp_v4 * 4 + 0x68);
           VectorSignedToFloat((int)temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(temp_v5 + *(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

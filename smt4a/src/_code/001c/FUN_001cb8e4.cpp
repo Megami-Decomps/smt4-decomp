@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001d12a0(void);
+int nw_snd_internal_SequenceSoundFile_FileHeader_GetLabelBlock(void);
 int nw_snd_internal_SequenceSoundFile_FileHeader_GetDataBlock(void);
 
-/* Supplied declaration required: FUN_001d12a0. */
+/* Supplied declaration required: nw_snd_internal_SequenceSoundFile_FileHeader_GetLabelBlock. */
 /* Supplied declaration required: nw_snd_internal_SequenceSoundFile_FileHeader_GetDataBlock. */
 
 
@@ -25,7 +25,7 @@ int * FUN_001cb8e4(int *param_1,int *param_2)
     nw_snd_internal_SequenceSoundFile_FileHeader_GetDataBlock();
     param_1[1] = (int)(param_2 + 2);
     temp_v0 = *param_1;
-    FUN_001d12a0();
+    nw_snd_internal_SequenceSoundFile_FileHeader_GetLabelBlock();
     param_1[2] = temp_v0 + 8;
     return param_1;
   }

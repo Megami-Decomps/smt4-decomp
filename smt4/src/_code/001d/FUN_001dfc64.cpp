@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001dfc64` (_code @ 0x1dfc64, 0x450 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int aocHandleButtons(...);
 int asdTMTexTableReleaseNode(...);
-int FUN_002ae8e4(...);
 int eventQueueAddUnique(...);
 int jobStop(...);
 int asdTMTexTablePrepareNodeImage(...);
@@ -59,7 +59,7 @@ extern int FUN_00294fe0(unsigned int);
 extern int nkdwHeaderParse(unsigned int);
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_002ae8e4. */
+/* Supplied declaration required: aocLoadTextureNode. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -101,7 +101,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
       temp_v1 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
                            1);
       if (temp_v1 != 0) {
-        FUN_002ae8e4(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
+        aocLoadTextureNode(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
                      0x10000);
       }
       else {

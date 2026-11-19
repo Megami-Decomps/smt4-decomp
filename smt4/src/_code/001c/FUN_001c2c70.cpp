@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002015e4(...);
+int scalarTimelineUpdate(...);
 int FUN_00212224(...);
 int FUN_0026e768(...);
 int FUN_00291060(...);
@@ -61,7 +61,7 @@ extern int DAT_00433238; /* 0x433238 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_002015e4. */
+/* Supplied declaration required: scalarTimelineUpdate. */
 /* Supplied declaration required: FUN_00212224. */
 /* Supplied declaration required: FUN_0026e768. */
 /* Supplied declaration required: FUN_00291060. */
@@ -314,7 +314,7 @@ void FUN_001c2c70(float *param_1)
   temp_v17 = param_1 + 4;
   temp_v16 = param_1 + 1;
   temp_v18 = param_1 + 7;
-  FUN_002015e4(param_1 + 0x66,param_1 + 0xd,param_1 + 0x11,param_1 + 0xf);
+  scalarTimelineUpdate(param_1 + 0x66,param_1 + 0xd,param_1 + 0x11,param_1 + 0xf);
   temp_v17 = param_1 + 5;
   temp_v16 = param_1 + 2;
   temp_v18 = param_1 + 8;

@@ -32,7 +32,7 @@ int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
 int FUN_002804ec(int);
 int mapEaseSceneHeading(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int mathPositionHeadingDegrees(void);
@@ -69,7 +69,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -162,7 +162,7 @@ void FUN_0027fde4(void)
               temp_v2 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v6 * temp_v15;
               temp_v7 = (*(float *)(temp_v2 + 0x4c) + temp_v12) * temp_v7;
-              FUN_00282390();
+              libm_cosf();
               temp_v2 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v7 * temp_v15;
               FUN_0025247c(temp_v2);
@@ -179,7 +179,7 @@ void FUN_0027fde4(void)
               temp_v2 = g_lmapScene;
               *(float *)(g_lmapScene + 0x118) = *(float *)(g_lmapScene + 0x118) + temp_v6 * temp_v15;
               temp_v7 = (*(float *)(temp_v2 + 0x50) + temp_v12) * temp_v7;
-              FUN_00282390();
+              libm_cosf();
               temp_v2 = g_lmapScene + 0x124;
               *(float *)(g_lmapScene + 0x120) = *(float *)(g_lmapScene + 0x120) + temp_v7 * temp_v15;
               FUN_0025247c(temp_v2);

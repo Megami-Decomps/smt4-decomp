@@ -25,7 +25,7 @@ void FUN_001a14e8()
 {
     FUN_00350bd0(&g_mobiclipPlayer, 0, 0);
     FUN_00350ac4(&g_mobiclipPlayer, 0);
-    const MobiclipStartRecord *record = movieRecordTableGetEntry(&g_mobiclipPlayer, FUN_00350ab8(&g_mobiclipPlayer, 0));
+    const MobiclipStartRecord *record = movieRecordTableGetEntry(&g_mobiclipPlayer, table46COwnerGet(&g_mobiclipPlayer, 0));
     if (!DAT_004c3a50.Obj420a2c::buildEntries((Obj420a2cOwner *)&DAT_004c3a44,
                                            (Obj420a2cSource *)record, NULL))
         sysBreakWithCallback(1);

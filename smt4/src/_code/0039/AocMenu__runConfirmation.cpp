@@ -37,7 +37,7 @@ extern AocConfirmDisplay *g_aocDisplay;
 
 void buttonHelpSetEnabled(u32 value);
 void ifTouchRegionClearAll(void *regions);
-void FUN_00233818(void *notice);
+void releaseEntriesA(void *notice); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u8 *" is incompatible with parameter of type "Obj *")
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void aocMenuSetButtonHelp(AocConfirmMenu *menu, u32 state, s32 enabled);
@@ -82,7 +82,7 @@ void AocMenu::runConfirmation()
         g_aocMain->flags &= ~0x100;
         g_aocDisplay->flag = 0;
         ifTouchRegionClearAll(menu->touchRegions);
-        FUN_00233818(menu->notice);
+        releaseEntriesA(menu->notice);
         g_aocMain->mode = 2;
         scrScriptProcessStartEntry(menu->script, tableGroupFindEntryIndex(menu->resource, "aoc_IsConnect"));
         aocMenuSetButtonHelp(menu, 0, 1);

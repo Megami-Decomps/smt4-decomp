@@ -1,13 +1,13 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "camp/CampStateA.h"
+#include "camp/CampMenuEntry.h"
 
 
 extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 listCursorGetRowOfChildIfUnblocked(void *list);
-s32 FUN_003da8f4(s32 category, u32 selection);
 s32 partyCountOccupiedSlots(void);
 void FUN_00335060(CampStateA *camp);
 void skinObjectUpdateMatrices(RenderCtxA *context);
@@ -34,7 +34,7 @@ u32 campDrawCurrentSubscreen(void)
     CampStateA *camp = g_camp;
     renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
     renderCtxPushA(g_renderCtx, renderCtxPackPassFlags(1, false));
-    s32 entryKind = FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
+    s32 entryKind = dataTable15GetUnlockedEntryId(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
     switch (camp->state) {
     case 1: case 2: case 3: case 4: case 5: case 6: case 7:
     case 9: case 10: case 11: case 15: case 16:

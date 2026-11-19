@@ -39,7 +39,7 @@ extern "C" u32 FUN_002ba870(u32 job)
             break;
         case 10:
             if (asdListBoxGetSelectedItemId(menu->list) == 12) {
-                FUN_0014bd84(work->font);
+                aocIndexValueOrDefault(work->font);
                 textDrawDefaultString(256.0f, 42.0f);
             }
             break;

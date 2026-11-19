@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00234170(...);
 int FUN_00234330(...);
-int FUN_002344d8(...);
+int textConvertToBoundedWide(...);
 int FUN_0026281c(...);
 int FUN_002b4b80(int, int);
 int wstrlenU16(...);
@@ -59,9 +59,9 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00234170. */
 /* Supplied declaration required: FUN_00234330. */
-extern unsigned int FUN_0023445c(int);
-extern unsigned int FUN_00234468(int);
-/* Supplied declaration required: FUN_002344d8. */
+extern unsigned int halfPair48LowByteA(int);
+extern unsigned int halfPair48LowByteB(int);
+/* Supplied declaration required: textConvertToBoundedWide. */
 /* Supplied declaration required: FUN_0026281c. */
 extern int legacyResourceIdRemap(int);
 extern unsigned char objGetFlagBit0(int);
@@ -263,8 +263,8 @@ int FUN_0038d598(int param_1)
       if ((temp_v9 != 0) && (FUN_002c5e80(temp_v9,0,10), temp_v9 == 1)) {
         *(unsigned char *)(temp_v12 + 0x9b0) = 1;
       }
-      temp_v3 = FUN_00234468(temp_v7 + 0x28);
-      temp_v4 = FUN_0023445c(temp_v7 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v7 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v7 + 0x28);
       FUN_00234330(&temp_v25,0,temp_v4,temp_v3);
       temp_v17 = temp_v25;
       uStack_1c0c = uStack_1b8c;
@@ -287,12 +287,12 @@ int FUN_0038d598(int param_1)
         temp_v9 = 0x38da64;
       }
       temp_v5 = temp_v7;
-      FUN_002344d8(temp_v7,temp_v12,0x40,temp_v9);
+      textConvertToBoundedWide(temp_v7,temp_v12,0x40,temp_v9);
       if (temp_v5 < 0) {
         return temp_v5;
       }
-      temp_v3 = FUN_00234468(temp_v7 + 0x28);
-      temp_v4 = FUN_0023445c(temp_v7 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v7 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v7 + 0x28);
       FUN_00234330(&temp_v33,2,temp_v4,temp_v3);
       temp_v27 = temp_v33;
       uStack_1b4c = uStack_1ac4;
@@ -315,13 +315,13 @@ int FUN_0038d598(int param_1)
         temp_v9 = 0x38da64;
       }
       temp_v5 = temp_v7;
-      FUN_002344d8(temp_v7,temp_v12 + 0x80,0x80,temp_v9);
+      textConvertToBoundedWide(temp_v7,temp_v12 + 0x80,0x80,temp_v9);
       if (temp_v5 < 0) {
         return temp_v5;
       }
       memClear(asStack_830,0x800);
-      temp_v3 = FUN_00234468(temp_v7 + 0x28);
-      temp_v4 = FUN_0023445c(temp_v7 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v7 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v7 + 0x28);
       FUN_00234330(&temp_v35,3,temp_v4,temp_v3);
       temp_v29 = temp_v35;
       uStack_1b0c = uStack_1a84;
@@ -344,7 +344,7 @@ int FUN_0038d598(int param_1)
         temp_v9 = 0x38da64;
       }
       temp_v5 = temp_v7;
-      FUN_002344d8(temp_v7,asStack_830,0x400,temp_v9);
+      textConvertToBoundedWide(temp_v7,asStack_830,0x400,temp_v9);
       if (temp_v5 < 0) {
         return temp_v5;
       }
@@ -403,8 +403,8 @@ int FUN_0038d598(int param_1)
       *(unsigned char *)(temp_v9 + 0x182) = 0xff;
       *(unsigned char *)(temp_v9 + 0x183) = 0;
       *(unsigned char *)(temp_v9 + 0x180) = 0xff;
-      temp_v3 = FUN_00234468(temp_v7 + 0x28);
-      temp_v4 = FUN_0023445c(temp_v7 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v7 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v7 + 0x28);
       FUN_00234330(&temp_v23,5,temp_v4,temp_v3);
       temp_v17 = temp_v23;
       uStack_1c0c = uStack_1bcc;

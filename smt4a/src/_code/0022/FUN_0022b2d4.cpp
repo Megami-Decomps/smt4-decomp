@@ -110,7 +110,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
-extern unsigned int FUN_0014bd84(unsigned int);
+extern unsigned int aocIndexValueOrDefault(unsigned int);
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
@@ -1409,7 +1409,7 @@ LAB_0022b9b8:
     FUN_00185e84((int)(short)temp_v10,temp_v27[5] + *(short *)(temp_v4 + 8),
                  temp_v27[6] + *(short *)(temp_v4 + 10),0xe2,0);
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0xc4));
-    temp_v6 = FUN_0014bd84(temp_v10);
+    temp_v6 = aocIndexValueOrDefault(temp_v10);
     VectorSignedToFloat(temp_v27[6] + *(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v27[5] + *(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,0xffffffff,temp_v6);

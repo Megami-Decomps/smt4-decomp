@@ -6,7 +6,7 @@
 extern "C" {
 
 extern s32 stateValuesGetBySelector(s32 arg);
-extern u8 FUN_002bfadc(s32 arg, AsdTexture *surface);
+extern u8 gxCopyFramebufferToSurface(s32 arg, AsdTexture *surface);
 
 /* Fade set's right capture: captures the right screen once while the fade is enabled, or marks the capture pending while a state selector is set. */
 s32 titleCaptureSurfaceOnce(u32 job)
@@ -19,7 +19,7 @@ s32 titleCaptureSurfaceOnce(u32 job)
         renderCtxSelectStereoLayout(g_titleScene);
         work->surfaceRight->dimensions.width = 0x200;
         work->surfaceRight->dimensions.height = 0x200;
-        work->fadeCaptureResult = FUN_002bfadc(0, work->surfaceRight);
+        work->fadeCaptureResult = gxCopyFramebufferToSurface(0, work->surfaceRight);
         work->fadeCapturedRight = 1;
     }
     return 0;

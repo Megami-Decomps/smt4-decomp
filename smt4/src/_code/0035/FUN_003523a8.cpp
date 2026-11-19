@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0023a20c(unsigned char *);
+int recordTableAppend(unsigned char *);
 int FUN_002c5e80(unsigned int, int, int);
-int FUN_00353098(int);
-int FUN_0035313c(void);
+int pricingSelectionBuildPredicate(int);
+int wordPairClear(void);
 int FUN_0035361c(int, unsigned char **, unsigned int);
 int FUN_003536c4(int, int, int);
 int FUN_0035f834(int, unsigned int, int *, int);
@@ -41,11 +41,11 @@ extern unsigned int DAT_00471a54; /* 0x471a54 */
 extern unsigned char DAT_004e655c; /* 0x4e655c */
 extern unsigned char DAT_004e675c; /* 0x4e675c */
 
-/* Supplied declaration required: FUN_0023a20c. */
+/* Supplied declaration required: recordTableAppend. */
 extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002c5e80. */
-/* Supplied declaration required: FUN_00353098. */
-/* Supplied declaration required: FUN_0035313c. */
+/* Supplied declaration required: pricingSelectionBuildPredicate. */
+/* Supplied declaration required: wordPairClear. */
 /* Supplied declaration required: FUN_0035361c. */
 extern unsigned char *FUN_003536a8(int);
 extern unsigned int FUN_003536b4(int);
@@ -99,13 +99,13 @@ int FUN_003523a8(int param_1,int param_2,unsigned int param_3,int *param_4)
     temp_v10 = FUN_003536b4(param_1);
     temp_v3 = *(unsigned int *)(param_1 + 8);
     temp_v5 = *(unsigned int *)(param_1 + 0xc);
-    FUN_0035313c();
-    FUN_0023a20c(&LAB_00352674);
-    FUN_0023a20c(&LAB_0035267c);
-    FUN_0023a20c(&LAB_00352684);
-    FUN_0023a20c(&LAB_00352690);
-    FUN_0023a20c(&LAB_003526a0);
-    FUN_00353098((char)param_4[10]);
+    wordPairClear();
+    recordTableAppend(&LAB_00352674);
+    recordTableAppend(&LAB_0035267c);
+    recordTableAppend(&LAB_00352684);
+    recordTableAppend(&LAB_00352690);
+    recordTableAppend(&LAB_003526a0);
+    pricingSelectionBuildPredicate((char)param_4[10]);
     temp_v23 = (int *)*param_4;
     if ((int *)*param_4 == (int *)0x0) {
       temp_v23 = param_4;

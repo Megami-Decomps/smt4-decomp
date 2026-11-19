@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "map/MapSceneAccess.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ int aocDataBlockResolveEntries(void);
 int FUN_0031416c(...);
 int FUN_00316580(...);
 int statusBustUpPortraitAcquire(int, int);
-int FUN_003857b4(...);
 int statusBustUpPortraitRelease(...);
 int FUN_003e40d0(...);
 int linkHolderApplyFirst(...);
@@ -105,9 +105,9 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: statusBustUpPortraitAcquire. */
 extern int lmapSceneGetScript(void);
 extern int statusDownGetMode(void);
-/* Supplied declaration required: FUN_003857b4. */
+/* Supplied declaration required: lmapSceneSetUnk134. */
 /* Supplied declaration required: statusBustUpPortraitRelease. */
-extern int FUN_0039c1f4(void);
+extern int partyPanelIsStateThree(void);
 /* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: FUN_003e40d0. */
 /* Supplied declaration required: linkHolderApplyFirst. */
@@ -315,7 +315,7 @@ unsigned int FUN_00208c08(void)
       *(int *)(temp_v2 + 0x2034) = temp_v3;
       *(unsigned short *)(temp_v2 + 0x138e) = 0xffff;
       if (temp_v3 != 0) {
-        FUN_003857b4(0);
+        lmapSceneSetUnk134(0);
         linkHolderClearFlag(*(unsigned int *)(temp_v2 + 0x2034));
         DAT_00588fd2 = 0;
       }
@@ -623,7 +623,7 @@ LAB_00209b8c:
                && ((temp_v7 = statusDownGetFlag(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
               (temp_v3 = FUN_002c7cb4(), temp_v3 != 0)) &&
              (((temp_v3 = FUN_002effbc(), temp_v3 != 0 && (temp_v3 = objStateNotEnding(), temp_v3 != 0)) &&
-              (temp_v3 = FUN_0039c1f4(), temp_v3 == 0)))) {
+              (temp_v3 = partyPanelIsStateThree(), temp_v3 == 0)))) {
             temp_v3 = 8;
             padQueryLogicalKey(8,0);
             if (temp_v3 != 0) {
@@ -651,7 +651,7 @@ LAB_00209b8c:
           if (((temp_v11 && temp_v8 != 0) && (temp_v7 = FUN_00334044(), temp_v7 >= 2)) &&
              (((temp_v7 = statusDownGetFlag(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)) &&
               ((((temp_v3 = FUN_002c7cb4(), temp_v3 != 0 && (temp_v3 = FUN_002effbc(), temp_v3 != 0)) &&
-                (temp_v3 = objStateNotEnding(), temp_v3 != 0)) && (temp_v3 = FUN_0039c1f4(), temp_v3 == 0)))))) {
+                (temp_v3 = objStateNotEnding(), temp_v3 != 0)) && (temp_v3 = partyPanelIsStateThree(), temp_v3 == 0)))))) {
             temp_v3 = 7;
             padQueryLogicalKey(7,0);
             if (temp_v3 != 0) {
@@ -677,7 +677,7 @@ LAB_00209b8c:
               ((temp_v7 = statusDownGetFlag(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
              ((((temp_v3 = FUN_002c7cb4(), temp_v3 != 0 && (temp_v3 = FUN_002effbc(), temp_v3 != 0)) &&
                (temp_v3 = objStateNotEnding(), temp_v3 != 0)) &&
-              ((temp_v3 = FUN_0039c1f4(), temp_v3 == 0 && (*(int *)(temp_v2 + 0x1374) != 0)))))) {
+              ((temp_v3 = partyPanelIsStateThree(), temp_v3 == 0 && (*(int *)(temp_v2 + 0x1374) != 0)))))) {
             temp_v3 = 1;
             padQueryLogicalKey();
             if (temp_v3 != 0) {

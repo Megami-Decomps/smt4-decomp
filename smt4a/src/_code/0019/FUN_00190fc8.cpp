@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001a89e4(void);
+int nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock(void);
 
-/* Supplied declaration required: FUN_001a89e4. */
+/* Supplied declaration required: nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock. */
 
 
 int * FUN_00190fc8(int *param_1,int *param_2)
@@ -17,7 +17,7 @@ int * FUN_00190fc8(int *param_1,int *param_2)
   param_1[1] = 0;
   if ((*param_2 == 0x44535743) && (param_2[2] - 0x1000000U < 0x101)) {
     *param_1 = (int)param_2;
-    FUN_001a89e4();
+    nw_snd_internal_WaveSoundFile_FileHeader_GetInfoBlock();
     if (param_2 != (int *)0x0) {
       param_1[1] = (int)(param_2 + 2);
       return param_1;

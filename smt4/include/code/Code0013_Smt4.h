@@ -12,7 +12,7 @@ extern "C" {
 
 void FUN_001394c8(int a);
 
-void FUN_0013290c(LightRenderOwner* owner, LightRenderParameters* argument);
+void gfxFlushLightRenderCommands(LightRenderOwner* owner, LightRenderParameters* argument);
 
 void FUN_00138c14(List *list);
 

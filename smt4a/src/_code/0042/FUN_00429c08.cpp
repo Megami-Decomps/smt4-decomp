@@ -36,7 +36,7 @@ static void copyUpper(s8 *upper, const s8 *name, u32 limit)
 /* Looks the upper-cased name up in the record and returns its status; a failure code comes back as the result. */
 extern "C" WindowStatusResult FUN_00429c08(StatusRecord *record, const s8 *name)
 {
-    nn::Result error = FUN_004283cc(record);
+    nn::Result error = queryFailureResultOrZero(record);
     if (!nnResultIsFailure(error)) {
         s8 upper[32];
         copyUpper(upper, name, 31);

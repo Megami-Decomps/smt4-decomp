@@ -11,7 +11,7 @@ int asdMdlManagerMarkDestroy(void);
 int FUN_001fc0a8(void);
 int FUN_0027ee24(void);
 int FUN_0027eee0(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathAbsHeadingErrorToPoint(void);
 int FUN_00295a18(int, int);
@@ -64,8 +64,8 @@ extern int mapDepartIsRunning(void);
 extern int FUN_0027ee9c(void);
 extern unsigned int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
-extern int FUN_0027ef00(void);
-/* Supplied declaration required: FUN_00282390. */
+extern int mathCirclesOverlap(void);
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: FUN_00295a18. */
@@ -129,10 +129,10 @@ unsigned int FUN_0027052c(void)
           if (*(short *)(g_mapStateSlots + 4) < 100) {
             temp_v0 = *(short *)(temp_v6 + 0x7c);
             if ((temp_v0 != 3 && temp_v0 != 4) && temp_v0 != 5) {
-              temp_v3 = FUN_0027ef00();
+              temp_v3 = mathCirclesOverlap();
               goto joined_r0x002706c8;
             }
-            temp_v3 = FUN_0027ef00();
+            temp_v3 = mathCirclesOverlap();
             if (temp_v3 == 0) break;
             temp_v3 = *(int *)(temp_v6 + 100);
             mathAbsHeadingErrorToPoint();
@@ -142,7 +142,7 @@ unsigned int FUN_0027052c(void)
             if (temp_v3 < 0x43160001) break;
           }
           else {
-            temp_v3 = FUN_0027ef00();
+            temp_v3 = mathCirclesOverlap();
 joined_r0x002706c8:
             if (temp_v3 == 0) break;
           }
@@ -212,7 +212,7 @@ joined_r0x002706c8:
                       mathRemPio2f();
                       temp_v14 = temp_v14 + temp_v11 * temp_v13;
                       temp_v11 = *(float *)(temp_v6 + 0x70) * (float)((unsigned long long)temp_v12 >> 0x20);
-                      FUN_00282390();
+                      libm_cosf();
                       temp_v3 = g_lmapScene;
                       *(float *)(g_lmapScene + 0x28) = temp_v14;
                       *(unsigned int *)(temp_v3 + 0x2c) = temp_v8;

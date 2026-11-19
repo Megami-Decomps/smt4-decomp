@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_002485d4(void *a, void *b);
+int halves34Copy(void *a, void *b); // declcheck: local (the shared declaration in code/Code0024_Smt4.h does not compile here: argument of type "void *" is incompatible with parameter of type "Source *")
 int FUN_00283f30(void *a, int b);
 int FUN_002e1f1c(u32 a, void *b, int c);
 
@@ -45,7 +45,7 @@ void btlEntryGetPassiveSkillIds(Obj *obj, Target *target)
         FUN_002e1f1c(obj->unk0CE, target, 8);
         return;
     }
-    FUN_002485d4(source, target);
+    halves34Copy(source, target);
 }
 
 } /* extern "C" */

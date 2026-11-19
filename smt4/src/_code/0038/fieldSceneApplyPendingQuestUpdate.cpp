@@ -44,7 +44,7 @@ s32 questGetPrimaryState(void);
 u8 questGetSecondaryState(void);
 s32 FUN_002cf738(void);
 
-void FUN_00273f5c(void);
+void clearFlags310To31F(void);
 void mapClearPendingEntries(void);
 void FUN_00273d34(void);
 void FUN_00273c54(void);
@@ -98,7 +98,7 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
         MapSaveBlock *map = gameGetMapBlock();
 
         map->mapId = 0;
-        FUN_00273f5c();
+        clearFlags310To31F();
         mapClearPendingEntries();
         if (primaryState == 0) {
             map->quest = pending->placeId;

@@ -11,7 +11,7 @@ int FUN_0022e17c(unsigned char [8], int, int);
 void entryTableClear(void *table);
 int messageIdListInit(...);
 int listScrollerInitialize(...);
-int FUN_00233818(void);
+int releaseEntriesA(void); // declcheck: local (romwright prototype; the shared declaration in code/Code0023_Smt4.h does not compile here: too few arguments in function call)
 int ifTouchRegionClearAll(unsigned int);
 int FUN_0029ce60(unsigned int, int, int);
 int itemGetFlagBit1(...);
@@ -37,7 +37,7 @@ extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: entryTableClear. */
 /* Supplied declaration required: messageIdListInit. */
 /* Supplied declaration required: listScrollerInitialize. */
-/* Supplied declaration required: FUN_00233818. */
+/* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: FUN_0029ce60. */
 /* Supplied declaration required: itemGetFlagBit1. */
@@ -71,7 +71,7 @@ void FUN_0022d434(int param_1)
   unsigned int temp_v13;
   
   ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
-  FUN_00233818();
+  releaseEntriesA();
   temp_v2 = param_1 + 0x5a8;
   if (*(char *)(param_1 + 0x5a4) != '\x01') {
     entryTableClear(reinterpret_cast<void *>(temp_v2));

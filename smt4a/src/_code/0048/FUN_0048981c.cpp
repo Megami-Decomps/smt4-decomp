@@ -16,7 +16,7 @@ int FUN_0048d248(...);
 int rectRecRead(...);
 int sub68OwnerGetBlock60(...);
 int naviMainSetValuePair(...);
-int setFullScreenRect(void);
+int setFullScreenRect(void); // declcheck: local (romwright prototype; the shared declaration in map/mapDepart.h does not compile here: cannot overload functions distinguished by return type alone)
 int FUN_004d040c(...);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED

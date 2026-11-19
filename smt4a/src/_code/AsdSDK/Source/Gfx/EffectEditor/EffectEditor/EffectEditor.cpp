@@ -66,7 +66,7 @@ void FUN_00387454();
 void asdCameraInitializeDefaults(EffectEditorCamera *, s32);
 void FUN_0014f0dc(void *, const PhaseVector *, const PhaseVector *, const PhaseVector *);
 void FUN_001523b8(EffectEditorCamera *, s32, f32, f32, f32, f32);
-void FUN_003627ac(f32, f32);
+void floatPairStore(f32, f32);
 }
 
 static __inline EffectSelectionTemplate *findEditorTemplate(EffectSelectionCatalogEntry **catalog, u16 type, u16 id, u16 groupCount)
@@ -159,7 +159,7 @@ extern "C" void FUN_002830cc(void)
     g_effectEditor.mode = 0;
     g_effectEditor.inhibited = 0;
     g_effectEditorInitialVector.setIdentity();
-    FUN_003627ac(0.0f, 0.0f);
+    floatPairStore(0.0f, 0.0f);
 }
 
 /* NON_MATCHING: aggregate transfer classes and temporary/register allocation differ. */

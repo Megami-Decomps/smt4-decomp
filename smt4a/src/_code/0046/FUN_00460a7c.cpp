@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0050ae88(void);
+int nw_snd_internal_WaveFile_FileHeader_GetDataBlock(void);
 int nw_snd_internal_WaveFile_FileHeader_GetInfoBlock(void);
 
-/* Supplied declaration required: FUN_0050ae88. */
+/* Supplied declaration required: nw_snd_internal_WaveFile_FileHeader_GetDataBlock. */
 /* Supplied declaration required: nw_snd_internal_WaveFile_FileHeader_GetInfoBlock. */
 
 
@@ -24,7 +24,7 @@ int * FUN_00460a7c(int *param_1,int *param_2,int param_3)
     *param_1 = (int)param_2;
     nw_snd_internal_WaveFile_FileHeader_GetInfoBlock();
     piVar1 = (int *)*param_1;
-    FUN_0050ae88();
+    nw_snd_internal_WaveFile_FileHeader_GetDataBlock();
     if (((param_2 != (int *)0x0) && (piVar1 != (int *)0x0)) &&
        ((*param_2 == 0x4f464e49 && (*piVar1 == 0x41544144)))) {
       param_1[2] = (int)(piVar1 + 2);

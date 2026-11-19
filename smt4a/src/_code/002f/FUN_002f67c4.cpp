@@ -27,7 +27,7 @@ extern unsigned char LAB_002f6b94; /* 0x2f6b94 */
 extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0014bd84(short);
+extern unsigned int aocIndexValueOrDefault(short);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
@@ -86,7 +86,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
       temp_v1 = skillGetAdjustedCost(*(unsigned int *)(temp_v2 + 0x24fc),temp_v0);
     }
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x561));
-    temp_v3 = FUN_0014bd84(temp_v0);
+    temp_v3 = aocIndexValueOrDefault(temp_v0);
     sprintf((char *)temp_v6,(const char *)&LAB_002f6b8c,temp_v3);
     VectorSignedToFloat(0xf9 - param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

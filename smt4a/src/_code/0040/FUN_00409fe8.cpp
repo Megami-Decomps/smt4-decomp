@@ -18,7 +18,7 @@ void FUN_003fc1b0(Obj557b08 *model, s32 id);
 void FUN_003fcd20(Obj557b08 *model);
 void aocQueueType0c(u32 system, s32 id, void **handle, const char *path);
 s32 FUN_00470b18(u32 system, s32 id, s32 flag);
-void FUN_004713ec(u32 system, s32 id, void **handle, const char *path);
+void aocDisplayQueueFormattedEntry(u32 system, s32 id, void **handle, const char *path); // declcheck: local (the shared declaration in shard/W5_W5Match7_EntrySort.h does not compile here: argument of type "void **" is incompatible with parameter of type "u32")
 
 /* Returns the cached model resource for `id` (negative ids are NPCs), creating and starting its
  * load when it is not cached yet. */
@@ -71,7 +71,7 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
             model->kind = 6;
             model->index = id - 1;
             if (FUN_00470b18(g_aocSystem, id, 1) != 0) {
-                FUN_004713ec(g_aocSystem, id, &model->handle, path);
+                aocDisplayQueueFormattedEntry(g_aocSystem, id, &model->handle, path);
                 return model;
             }
             if (synchronous == 0) {

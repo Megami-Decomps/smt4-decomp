@@ -1,6 +1,7 @@
 /* Starts the selection script for the previous shop state, then handles its result. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "code/Code003c_Smt4a.h"
 
 struct ScriptProcess;
 struct NpcShopNameEntry {
@@ -28,13 +29,11 @@ extern const char g_npcShopSelectSpecialEntryName[]; // "npcShop_Select_01"
 extern const char g_npcShopSelectState5EntryName[]; // "npcShop_Select_03"
 extern const char g_npcShopSelectDefaultEntryName[]; // "npcShop_Select_00"
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 mode);
-void FUN_003c1060();
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 bool panelIsMissingOrFlagClear();
 u32 messageGetChoiceResult();
-void FUN_003c3e14();
 void obj04Finish();
 }
 
@@ -66,7 +65,7 @@ extern "C" void npcShopUpdateSelectionScript(NpcShopSelectWork *work)
         if (work->names[2].id != 0) {
             scrSetStringSlot(2, dataFindKindRecordWithAocOverrides(work->names[2].id, 0));
         }
-        FUN_003c1060();
+        messageMainRequestBanner();
         if (work->previousState == 4) {
             npcShopStartEntry(work, g_npcShopSelectRepeatEntryName);
         } else if (work->previousState == 6) {
@@ -89,7 +88,7 @@ extern "C" void npcShopUpdateSelectionScript(NpcShopSelectWork *work)
                 work->selected = selected;
                 npcShopChangeState(work, 4);
             }
-            FUN_003c3e14();
+            messageMainClearBannerRequest();
             obj04Finish();
         }
         break;

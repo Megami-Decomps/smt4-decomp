@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, int);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int FUN_0045c58c(unsigned int, float *, float [10]);
 int FUN_0045e960(void);
 

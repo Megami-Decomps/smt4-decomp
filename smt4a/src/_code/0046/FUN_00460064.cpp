@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00460068(void);
+void nw_snd_internal_TaskManager_CancelTasksByKeyImpl(void);
 
-/* Runs FUN_00460068 (placed right after, so the call is a linker NOP). */
+/* Runs nw_snd_internal_TaskManager_CancelTasksByKeyImpl (placed right after, so the call is a linker NOP). */
 void FUN_00460064(void)
 {
-    FUN_00460068();
+    nw_snd_internal_TaskManager_CancelTasksByKeyImpl();
 }
 
 } /* extern "C" */

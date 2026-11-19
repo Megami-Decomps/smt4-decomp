@@ -35,7 +35,7 @@ typedef struct {
 extern unsigned int idSlotsFindEntryById(unsigned char *, unsigned int);
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 extern int idSetFindSubjectIndex(unsigned char *, int);
-extern int FUN_0027db08(unsigned int);
+extern int obj80Select(unsigned int); // declcheck: local (romwright prototype; the shared declaration in code/Code0027.h does not compile here: more than one instance of overloaded function "idSlotsFindEntryById" has "C" linkage)
 /* Supplied declaration required: __hardfp_atan2f. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
@@ -83,7 +83,7 @@ unsigned int FUN_001b7a0c(void)
   temp_v16 = 0.0f;
   temp_v18 = temp_v16;
   if (g_btlMain != 0) {
-    temp_v0 = FUN_0027db08(0);
+    temp_v0 = obj80Select(0);
     temp_v14 = *(float *)(temp_v0 + 0x10) - *(float *)(temp_v0 + 4);
     temp_v2 = in_fpscr & 0xfffffff;
     in_fpscr = temp_v2 | ((unsigned int)(temp_v14 == temp_v16) << 0x1e);

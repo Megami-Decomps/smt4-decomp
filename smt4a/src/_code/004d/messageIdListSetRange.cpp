@@ -5,7 +5,7 @@ extern "C" {
 
 void ifTouchRegionRemove(void);
 void __aeabi_memset4(void *dst, u32 size, s32 value);
-u16 FUN_001643b4(u32 group, u32 item);
+u16 ifTouchRegionAddRequested(u32 group, u32 item);
 
 /* Resets the list and fills it with `itemCount` message ids from `group` starting at `firstItem`. */
 void messageIdListSetRange(MessageIdList *list, u32 group, s32 firstItem, s32 itemCount)
@@ -27,7 +27,7 @@ void messageIdListSetRange(MessageIdList *list, u32 group, s32 firstItem, s32 it
     }
     s32 item;
     for (item = 0; item < itemCount; item++) {
-        list->ids[item] = FUN_001643b4(group, firstItem + item);
+        list->ids[item] = ifTouchRegionAddRequested(group, firstItem + item);
         list->idCount++;
     }
 }

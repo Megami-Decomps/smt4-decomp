@@ -76,7 +76,7 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     } else if (mode == 1 || mode == 2 || mode == 6) {
         color = 0xf5ff9fff;
     }
-    sprintf(text, "%s", FUN_0014bd84(screen->entryIds[entry]));
+    sprintf(text, "%s", aocIndexValueOrDefault(screen->entryIds[entry]));
     SlotIconPosition *nameBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a2));
     textDrawString((f32)(frame->x + nameBox->x + x), (f32)(frame->y + nameBox->y + y), 0.0f, 3, 0.0f, color, scale, text);
     SlotIconPosition *statBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a1));

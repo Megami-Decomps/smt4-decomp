@@ -14,7 +14,7 @@ int mapSetSceneState(...);
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int mapIfShowActionMarker(void);
 int FUN_00233e10(...);

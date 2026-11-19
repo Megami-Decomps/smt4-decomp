@@ -43,7 +43,7 @@ u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot,
         if (event->type != type)
             continue;
         if (((type == 3 || type == 4) || (type == 7 || type == 5)) && slot >= 0) {
-            s32 special = FUN_003bf570(slot);
+            s32 special = isOutsideRange4To53(slot);
             BtlEntry *unit = &battle->entries[slot];
             switch (event->condition) {
             case 1:

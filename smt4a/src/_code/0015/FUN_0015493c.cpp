@@ -69,7 +69,7 @@ struct NwCamera {
 extern "C" {
 NwResource *FUN_0017250c(void);
 NwResource *FUN_001723f0(u32 id);
-NwCamera *FUN_0017314c(NwCameraBuilder *builder, u32 id);
+NwCamera *nw_gfx_Camera_DynamicBuilder_Create(NwCameraBuilder *builder, u32 id);
 
 static __inline void nwResourceRelease(NwResourceRef *ref)
 {
@@ -116,7 +116,7 @@ NwCamera *FUN_0015493c(u32 id, const NwVec3 *view, const NwVec3 *position, const
     builder.transform.owns = 1;
     builder.unk24 = 1;
 
-    NwCamera *camera = FUN_0017314c(&builder, id);
+    NwCamera *camera = nw_gfx_Camera_DynamicBuilder_Create(&builder, id);
     nwResourceRelease(&builder.transform);
     nwResourceRelease(&builder.projection);
 

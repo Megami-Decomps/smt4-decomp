@@ -84,7 +84,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned short FUN_001643b4(unsigned int, unsigned int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
@@ -593,15 +593,15 @@ LAB_0029fb00:
         }
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 5);
-      temp_v3 = FUN_001643b4(9,0x27);
+      temp_v3 = ifTouchRegionAddRequested(9,0x27);
       *(unsigned short *)(puVar5 + 0x14) = temp_v3;
-      temp_v3 = FUN_001643b4(9,0x28);
+      temp_v3 = ifTouchRegionAddRequested(9,0x28);
       *(unsigned short *)((int)puVar5 + 0x52) = temp_v3;
-      temp_v3 = FUN_001643b4(9,0x29);
+      temp_v3 = ifTouchRegionAddRequested(9,0x29);
       *(unsigned short *)(puVar5 + 0x15) = temp_v3;
-      temp_v3 = FUN_001643b4(9,0x2a);
+      temp_v3 = ifTouchRegionAddRequested(9,0x2a);
       *(unsigned short *)((int)puVar5 + 0x56) = temp_v3;
-      temp_v3 = FUN_001643b4(9,0x2b);
+      temp_v3 = ifTouchRegionAddRequested(9,0x2b);
       *(unsigned short *)(puVar5 + 0x16) = temp_v3;
       puVar4[0x1e] = 9;
       puVar4[0x1f] = 0;

@@ -22,7 +22,7 @@ int partyFindActiveSlotById(u32 id);
 void FUN_0029bbc8(int slot);
 void* partyFindFreeStockSlot();
 int itemGetFlagBit1(u32 id);
-void FUN_0029c1c8(void* object, u32 id, int mode);
+void dispatchIfFound(void* object, u32 id, int mode); // declcheck: local (the shared declaration in code/Code0029.h does not compile here: argument of type "void *" is incompatible with parameter of type "s32")
 void uniteMergeInheritedSkillsAndStats(void* context, StatBlock* first,
                  StatBlock* second, int mode, StatBlock* result);
 int arrayContainsU16(const u16* values, int count, u32 value);
@@ -81,7 +81,7 @@ int uniteCreateSelectedResult(u32 selectionIndex)
 
     void* object = partyFindFreeStockSlot();
     const bool needsNotification = itemGetFlagBit1(selection->resultId) == 0;
-    FUN_0029c1c8(object, selection->resultId, 0);
+    dispatchIfFound(object, selection->resultId, 0);
 
     StatBlock* member;
     if (succeeded) {

@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001bc460(...);
+int gfxQuaternionWorkspaceBuildMatrix(...);
 int rotationFromAxisDegrees(...);
 int matrix43Multiply(...);
 int mathMatrixApplyTranslation(...);
@@ -155,7 +155,7 @@ extern float DAT_00647358; /* 0x647358 */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001bc460. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: rotationFromAxisDegrees. */
 /* Supplied declaration required: matrix43Multiply. */
@@ -290,7 +290,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
         DAT_006472e0 = fStack_1b4;
         DAT_006472e4 = fStack_1b0;
         DAT_006472e8 = fStack_1ac;
-        FUN_001bc460();
+        gfxQuaternionWorkspaceBuildMatrix();
         if (0 < temp_v7) {
           unaff_r10 = (float *)&g_effectRingScratchColor;
         }
@@ -431,7 +431,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
         DAT_006472e0 = fStack_1b4;
         DAT_006472e4 = fStack_1b0;
         DAT_006472e8 = fStack_1ac;
-        FUN_001bc460();
+        gfxQuaternionWorkspaceBuildMatrix();
         temp_v40 = DAT_00647324;
         temp_v42 = DAT_0064732c;
         temp_v43 = DAT_00647330;

@@ -43,7 +43,7 @@ void aocResetOperationState(AocSystem *system);
 void aocClearDisplayFlag(AocSystem *system);
 void aocEntryPanelCreateText(void *owner, s32 a, s32 b, s32 c);
 RequestParameters FUN_003887cc(AocSystem *system);
-u8 FUN_003943f8(const void *value);
+u8 startsWithH(const void *value);
 u8 strIsEmpty(const void *value);
 u8 byteIsAtLeast100(const void *value);
 
@@ -103,7 +103,7 @@ u32 aocBootUpdate(void)
             aocBootCancel(boot);
             break;
         }
-        if (FUN_003943f8(&request) != 0) {
+        if (startsWithH(&request) != 0) {
             boot->state = AOC_BOOT_STATE_CHECK;
             aocEntryPanelCreateText(boot->dialog, 0xBE, 2, 0);
             boot->dialogOpen = 1;
@@ -117,7 +117,7 @@ u32 aocBootUpdate(void)
         if (boot->dialogOpen != 0) {
             if (boot->frames < AOC_BOOT_DIALOG_MIN_FRAMES)
                 return 0;
-            FUN_0027e9c0(boot->dialog);
+            flagObjAdvance(boot->dialog);
         }
         boot->state = AOC_BOOT_STATE_CLOSE_DIALOG;
         break;

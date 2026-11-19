@@ -48,7 +48,6 @@ extern "C" {
 void rectRecRead(u32 group, u32 id, s32 *x, s32 *y, s32 *width, s32 *height);
 
 s32 gameFlagIsSet(u32 id);
-s32 setFullScreenRect(void);
 s32 gameFlagsClassify(void);
 s32 FUN_004d0420(ScreenRect rect);
 u32 naviGetActiveStateValue(void *scene);

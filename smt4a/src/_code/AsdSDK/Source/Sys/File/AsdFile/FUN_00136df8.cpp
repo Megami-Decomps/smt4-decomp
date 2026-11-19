@@ -13,7 +13,7 @@ extern u8 g_asdFileEvent[];
 void FUN_00146720();
 u32 resourceCallDefaultOptions(u32 first, u32 second, u32 mode);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
-void FUN_0014685c(u32 first, u32 second, void *buffer, u32 size, u32 mode);
+void romPathForward(u32 first, u32 second, void *buffer, u32 size, u32 mode); // declcheck: local (the shared declaration in shard/W6_W6Match7_SoundInit.h does not compile here: argument of type "void *" is incompatible with parameter of type "u32")
 u32 FUN_0014a930(u32 *handle, u32 initial, u32 maximum);
 u32 FUN_0019a364(u32 *handle, u32 mutex, u32 mode);
 void nn_os_LightEvent_Initialize(void *event, u32 mode);
@@ -28,7 +28,7 @@ void FUN_00136df8()
     u32 size = resourceCallDefaultOptions(16, 16, 1);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 336);
     g_asdFile.buffer = asdMemoryAlloc(0x100, 0x100, 0, size, 1);
-    FUN_0014685c(16, 16, g_asdFile.buffer, size, 1);
+    romPathForward(16, 16, g_asdFile.buffer, size, 1);
     u32 handle = 0;
     u32 result;
     if (g_asdFile.semaphore) {

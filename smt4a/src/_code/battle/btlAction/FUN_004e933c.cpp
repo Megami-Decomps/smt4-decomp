@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "shard/W4_Match6_BtlScript.h"
 
 extern "C" {
 
@@ -48,7 +49,6 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: btlEntryBuildSummary. */
-extern int isOutsideRange4To53(int);
 /* Supplied declaration required: FUN_004c8340. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004e7c04. */

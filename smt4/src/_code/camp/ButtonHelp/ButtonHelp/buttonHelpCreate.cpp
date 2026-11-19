@@ -36,7 +36,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
-void FUN_00262210(UiSpriteState *unit, s32 kind, s32 count, s32 mode);
+void uiGetLayoutPointDifference(UiSpriteState *unit, s32 kind, s32 count, s32 mode); // declcheck: local (the shared declaration in camp/UIQuest/UIQuest.h does not compile here: argument of type "UiSpriteState *" is incompatible with parameter of type "PointDeltaWork *")
 void uiStoreTextureEntryCenter(UiSpriteState *unit, s32 kind, s32 count);
 u32 asdTextCreate(s32 arg);
 void asdTextSetBaseColor(u32 text, u32 color);
@@ -68,7 +68,7 @@ void buttonHelpCreate(void)
                    &sButtonHelpPacketC, 0xC, NULL, 0, sButtonHelpPacketE, 0xA8);
         for (s32 i = 0; i < 6; i++) {
             uiSpriteStateInitFromSource(&help->slotSprites[i], 0x12, 3, &help->resources, 0x10, 1.0f);
-            FUN_00262210(&help->slotSprites[i], 0x12, i + 0x11, 3);
+            uiGetLayoutPointDifference(&help->slotSprites[i], 0x12, i + 0x11, 3);
         }
         uiSpriteStateInitFromSource(&help->panelSprites[0], 0x12, 0, &help->resources, 0x10, 1.0f);
         uiSpriteStateInitFromSource(&help->panelSprites[1], 0x12, 1, &help->resources, 0x10, 1.0f);

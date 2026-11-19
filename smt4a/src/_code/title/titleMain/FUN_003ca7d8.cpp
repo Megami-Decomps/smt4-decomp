@@ -30,7 +30,7 @@ extern "C" {
 extern TitleMainView g_titleMain;
 s32 sysPlaySe(s32 soundId);
 void frameTransitionSetMode(s32 mode);
-u16 FUN_001643b4(u32 group, u32 entry);
+u16 ifTouchRegionAddRequested(u32 group, u32 entry);
 
 static inline void setTitleState(TitleStateView *state, u32 nextState)
 {
@@ -46,11 +46,11 @@ void FUN_003ca7d8(void)
     state->unk40 = 0.0f;
     state->unk44 = 0.0f;
     sysPlaySe(0xA1);
-    state->unk50 = FUN_001643b4(9, 0x27);
-    state->unk52 = FUN_001643b4(9, 0x28);
-    state->unk54 = FUN_001643b4(9, 0x29);
-    state->unk56 = FUN_001643b4(9, 0x2A);
-    state->unk58 = FUN_001643b4(9, 0x2B);
+    state->unk50 = ifTouchRegionAddRequested(9, 0x27);
+    state->unk52 = ifTouchRegionAddRequested(9, 0x28);
+    state->unk54 = ifTouchRegionAddRequested(9, 0x29);
+    state->unk56 = ifTouchRegionAddRequested(9, 0x2A);
+    state->unk58 = ifTouchRegionAddRequested(9, 0x2B);
     state->unk3D = 0;
     frameTransitionSetMode(2);
     state->unk60 = 1;

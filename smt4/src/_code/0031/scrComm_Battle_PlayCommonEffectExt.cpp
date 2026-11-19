@@ -14,7 +14,7 @@ extern u32 g_btlScriptUnit;
 extern const char DAT_00400428[];
 extern const char DAT_00400434[];
 s32 scrGetArg(s32 index);
-s32 FUN_0027e3b8(BtlEvent *event);
+s32 isEntryUsable(BtlEvent *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "BtlEvent *" is incompatible with parameter of type "int *")
 u32 FUN_0024550c(BtlEffectOwner *owner);
 void FUN_002454c4(BtlEffectOwner *owner, const char *name, u32 flags, s32 mode);
 u32 FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, u32 parameter, s32 lookupId, s32 extraTarget);
@@ -26,7 +26,7 @@ u32 scrComm_Battle_PlayCommonEffectExt(void)
     s32 target = scrGetArg(0);
     u32 value = scrGetArg(1);
     s32 amount = scrGetArg(2);
-    if (FUN_0027e3b8(g_btlEvent) != 0 && FUN_0024550c(DAT_00435d18) == 0) {
+    if (isEntryUsable(g_btlEvent) != 0 && FUN_0024550c(DAT_00435d18) == 0) {
         return 0;
     }
     if (amount != 0) {

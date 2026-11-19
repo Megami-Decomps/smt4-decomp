@@ -4,7 +4,7 @@
 
 
 extern "C" {
-u32 FUN_002e26ac(void);
+u32 dataTable15Sub0GetCount(void);
 s32 gameDataFlagTestBit(u32 bit);
 void gridNavigationConfigure(void *list, s32 a, s32 b, s32 c, s32 d, s32 e);
 void scrollOwnerSelectIndex(void *list, s32 index);
@@ -24,7 +24,7 @@ void FUN_0020d700(void)
     }
     u8 picked = 0;
     s32 visible = 0;
-    u32 count = FUN_002e26ac();
+    u32 count = dataTable15Sub0GetCount();
     for (u32 i = 0; i < count; i++) {
         CampComRecord *entry = dataTable15GetEntry(i);
         if (entry != NULL && entry->group == camp->menuGroup &&

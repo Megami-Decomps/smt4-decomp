@@ -2,6 +2,7 @@
 #include "gfx/CameraManager.h"
 #include "AsdSDK/AsdDebug.h"
 #include "title/titleMain.h"
+#include "util/TrigF32.h"
 
 /* The fusion work appends its settings pointer to the shared camera prefix. */
 struct UniteCameraWorkView {
@@ -22,7 +23,6 @@ void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void *, u32);
 void FUN_00154180(s32, s32, s32, s32);
 f32 libm_sinf(f32);
-f32 libm_cosf(f32);
 void asdCameraInitializeDefaults(ManagedCamera *, s32);
 void FUN_0014f0dc(ManagedCamera *, const Vec3f *, const Vec3f *, const Vec3f *);
 void FUN_001523b8(ManagedCamera *, s32, f32, f32, f32, f32);

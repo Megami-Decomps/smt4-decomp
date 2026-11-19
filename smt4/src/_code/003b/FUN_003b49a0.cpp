@@ -52,7 +52,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: contentEntryFlagTest. */
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 extern unsigned int appGetRemainingCapacity(unsigned short);
-extern int FUN_0029aafc(void);
+extern int countUnlockedSlots(void);
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: arrayContainsU16. */
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -155,7 +155,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x3ec));
   texDrawTableEntryAtStoredOrigin(2,0x28,*(unsigned int *)(param_1 + 0x628),*(short *)(temp_v1 + 8) + param_2,
                *(short *)(temp_v1 + 10) + param_3,0x65);
-  temp_v15 = FUN_0029aafc();
+  temp_v15 = countUnlockedSlots();
   temp_v25 = (int *)(param_1 + 0x3544);
   temp_v26 = temp_v16 | temp_v18;
   temp_v13 = param_1 + 0xd134;

@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_00273c54(void);
 int FUN_00273d34(void);
-int FUN_00273f5c(void);
+int clearFlags310To31F(void);
 int battlePrepareEncounter(void);
 int mapClearPendingEntries(void);
 int naviClearObjectBlock(void);
@@ -14,7 +14,7 @@ extern int mapMainIsBusy(void);
 
 u32 scrComm_Map_SyncViewFromCamera(void)
 {
-    FUN_00273f5c();
+    clearFlags310To31F();
     mapClearPendingEntries();
     if (mapMainIsBusy() != 0) {
         naviClearObjectBlock();

@@ -13,7 +13,7 @@ s32 questTestPackedFlag(u32 flag);
 void questSetPackedFlag(u32 index, s32 enabled);
 s32 gameFlagIsSet(u32 flag);
 
-void FUN_00282bfc(u32 first, u32 second);
+void titleRestartSlotState3(u32 first, u32 second);
 u32 taskCreateDraw(const char *name, u16 priority, u32 workSize, void *update, void *draw, void *destroy, void *work, u32 value);
 void FUN_001d99c0(void);
 void tmnlOnComplete(void);
@@ -76,7 +76,7 @@ void FUN_001db0b8(const u32 *entry)
     } else {
         work->unk14 = 0;
         work->unk10 = 1;
-        FUN_00282bfc(0, 255);
+        titleRestartSlotState3(0, 255);
     }
     work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMNL C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_001d99c0), reinterpret_cast<AsdProcFunc>((void *)tmnlOnComplete), 0);
     taskCreateDraw("TMNL UD", 117, 0, 0, (void *)FUN_001fe23c, 0, 0, work->task);

@@ -6,7 +6,7 @@
 extern "C" {
 
 int btlTargetSelectSetMode(...);
-int FUN_00368d74(...);
+int btlTargetSelectSetEntry(...);
 int FUN_00368e10(...);
 int FUN_003e7fa4(...);
 int btlEntryBuildSummary(...);
@@ -40,7 +40,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: btlTargetSelectSetMode. */
-/* Supplied declaration required: FUN_00368d74. */
+/* Supplied declaration required: btlTargetSelectSetEntry. */
 /* Supplied declaration required: FUN_00368e10. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: btlEntryBuildSummary. */
@@ -281,7 +281,7 @@ LAB_004eafdc:
       temp_v10 = (*(unsigned short *)(temp_v5 + 0x110) & 0x10) >> 4;
       temp_v9 = temp_v3;
       temp_v11[0] = temp_v1;
-      FUN_00368d74(temp_v0,&temp_v14,*(unsigned short *)(temp_v5 + 2),temp_v7,temp_v15,temp_v8);
+      btlTargetSelectSetEntry(temp_v0,&temp_v14,*(unsigned short *)(temp_v5 + 2),temp_v7,temp_v15,temp_v8);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 5);
     temp_v2 = 2;

@@ -10,7 +10,7 @@ int padQueryLogicalKey(...);
 int uiSpriteAdvanceAnimation(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
-int FUN_001643b4(int, int);
+int ifTouchRegionAddRequested(int, int);
 int buttonHelpSetText(...);
 int FUN_00228b04(int, int);
 int objectApplyIfUnblocked(...);
@@ -32,7 +32,7 @@ extern int DAT_0057f280; /* 0x57f280 */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_001643b4. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_00228b04. */
 extern unsigned int mapGetDisplayName(unsigned char);
@@ -94,7 +94,7 @@ unsigned int FUN_0022a0a0(void)
             temp_v6 = 0;
             if (temp_v6 < temp_v8) {
               do {
-                temp_v3 = FUN_001643b4(0x15,temp_v6 + 7);
+                temp_v3 = ifTouchRegionAddRequested(0x15,temp_v6 + 7);
                 temp_v4 = temp_v6 * 2;
                 temp_v6 = temp_v6 + 1;
                 *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
@@ -106,7 +106,7 @@ unsigned int FUN_0022a0a0(void)
             temp_v6 = 0;
             if (temp_v6 < temp_v8) {
               do {
-                temp_v3 = FUN_001643b4(0x15,temp_v6 + 0x2b);
+                temp_v3 = ifTouchRegionAddRequested(0x15,temp_v6 + 0x2b);
                 temp_v4 = temp_v6 * 2;
                 temp_v6 = temp_v6 + 1;
                 *(unsigned short *)(temp_v0 + temp_v4 + 0x772) = temp_v3;
@@ -121,11 +121,11 @@ unsigned int FUN_0022a0a0(void)
           temp_v6 = objectApplyIfUnblocked(temp_v5);
           temp_v4 = uiSearchPrimary(temp_v5);
           if (temp_v4 < temp_v6) {
-            temp_v3 = FUN_001643b4(0x15,0x46);
+            temp_v3 = ifTouchRegionAddRequested(0x15,0x46);
             *(unsigned short *)(temp_v0 + 0x76c) = temp_v3;
-            temp_v3 = FUN_001643b4(0x15,0x47);
+            temp_v3 = ifTouchRegionAddRequested(0x15,0x47);
             *(unsigned short *)(temp_v0 + 0x76e) = temp_v3;
-            temp_v3 = FUN_001643b4(0x15,0x48);
+            temp_v3 = ifTouchRegionAddRequested(0x15,0x48);
             *(unsigned short *)(temp_v0 + 0x770) = temp_v3;
             *(short *)(temp_v0 + 0x786) = *(short *)(temp_v0 + 0x786) + 3;
           }

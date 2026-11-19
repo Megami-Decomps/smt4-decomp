@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0042bd10(unsigned int [2], int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int nn_fs_ipc_FileSystem_DeleteFile(unsigned int [2], int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0042bd10. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_DeleteFile. */
 extern unsigned int FUN_00500924(void);
 
 
@@ -35,7 +35,7 @@ void FUN_0042b4fc(int param_1,unsigned int *param_2)
     temp_v0 = *(unsigned int *)(param_1 + 8);
     temp_v1 = *(unsigned int *)(param_1 + 0xc);
     temp_v5[0] = FUN_00500924();
-    FUN_0042bd10(temp_v5,0,temp_v0,temp_v1,temp_v3,temp_v4,temp_v2);
+    nn_fs_ipc_FileSystem_DeleteFile(temp_v5,0,temp_v0,temp_v1,temp_v3,temp_v4,temp_v2);
   }
   return;
 }

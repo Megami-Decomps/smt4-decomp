@@ -4,8 +4,8 @@ extern "C" {
 
 int linkListEraseObject(u32 a, int b);
 int FUN_002c4038(int obj);
-int FUN_0037b140(int slot);
-int FUN_0037bd18(int slot);
+int wordsFlag8Reset(int slot);
+int wordsFlagReset(int slot);
 int nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(int player);
 extern u32 FUN_002a2174(void);
 
@@ -23,8 +23,8 @@ void FUN_0037f700(int player)
     }
     i = 0;
     do {
-        FUN_0037b140(player + i * 0xc + 0x130);
-        FUN_0037bd18(player + i * 0x10 + 0xf0);
+        wordsFlag8Reset(player + i * 0xc + 0x130);
+        wordsFlagReset(player + i * 0x10 + 0xf0);
         i = i + 1;
     } while (i < 4);
     FUN_002c4038(player);

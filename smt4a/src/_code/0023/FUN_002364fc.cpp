@@ -120,7 +120,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
       if (*(int *)(iVar2 + 0xc) != 0x15) {
         return 0;
       }
-      FUN_003c1060();
+      messageMainRequestBanner();
       func_0x002a4b88(0);
       return 0;
     }
@@ -374,7 +374,7 @@ joined_r0x00236f30:
       return 0;
     }
 code_r0x00236f38:
-    FUN_003c1060();
+    messageMainRequestBanner();
     FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),0xb);
     *(unsigned int *)(iVar2 + 8) = 0x15;
     *(unsigned int *)(iVar2 + 0x9c) = 0;

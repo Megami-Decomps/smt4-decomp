@@ -19,7 +19,7 @@ void renderEditorSceneDrawOverlay(void)
     if (getFloatPairValue() && renderCtxGetStereoMode(g_renderCtx) == 0 && displayIsStereoActive()) {
         mono = 0;
     }
-    FUN_00300100(0, mono);
+    effMenuCallHandler(0, mono);
     renderStackPop(&g_renderCtx->stackA);
     if (g_effectEditor.overlayEnabled) {
         FUN_00280840(30, 0.0f, 0.0f, 0.0f, 17.5f, 0x606060FF, 0x909090FF);

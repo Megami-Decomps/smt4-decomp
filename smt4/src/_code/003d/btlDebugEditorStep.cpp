@@ -74,7 +74,7 @@ s32 padIsButtonPressed(u32 button);
 u32 asdListBoxCreate(u32 parent, s32 group, s32 x, s32 y, s32 flags);
 void FUN_00192a9c(const Point2 *position, const u32 *handle, u32 value);
 u32 textMeasureFixedWidth(const char *text);
-void FUN_00227200(u32 list, void (*draw)(const Point2 *, const u32 *, u32), u32 (*measure)(const char *));
+void jobSetWork7C(u32 list, void (*draw)(const Point2 *, const u32 *, u32), u32 (*measure)(const char *));
 void FUN_002271e8(u32 list, s32 width, s32 height);
 void asdListBoxAddItem(u32 list, const char *text);
 u32 asdListBoxGetSelectedItemId(u32 list);
@@ -93,7 +93,7 @@ void btlCameraEditorInitializeList(BattleDebugEditorJob *job, BtlMainState *stat
 static __inline void debugListCreate(BattleDebugEditorJob *job, BtlMainState *state)
 {
     job->list = asdListBoxCreate(state->editor.job, 0xEB, 16, 32, 4);
-    FUN_00227200(job->list, FUN_00192a9c, textMeasureFixedWidth);
+    jobSetWork7C(job->list, FUN_00192a9c, textMeasureFixedWidth);
     FUN_002271e8(job->list, 12, 16);
 }
 

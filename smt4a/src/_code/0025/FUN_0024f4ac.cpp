@@ -34,7 +34,7 @@ unsigned int FUN_0024f4ac(void)
   else if (*(char *)(unaff_r4 + 0xd) != '\0') {
     DAT_005f1a50 = 0xffffffff;
     iVar5 = rosterGetLeaderId();
-    if ((iVar5 != 0) && (iVar6 = FUN_001bd118(), iVar6 == 6)) {
+    if ((iVar5 != 0) && (iVar6 = table1bOr1cGetRecordValue(), iVar6 == 6)) {
       questDataGetRecord();
       FUN_00270c58(*(unsigned short *)(iVar5 + 0xd4));
       return 0xffffffff;

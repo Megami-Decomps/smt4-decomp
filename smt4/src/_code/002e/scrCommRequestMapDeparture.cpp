@@ -5,7 +5,6 @@
 extern "C" {
 
 void mapDepartSetTarget(s32 a, s32 b, s32 c);
-void mapSetDepartureIndex(u32 value);
 u32 scrGetArg(...);
 
 

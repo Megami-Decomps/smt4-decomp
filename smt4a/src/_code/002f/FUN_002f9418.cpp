@@ -43,7 +43,7 @@ typedef struct {
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int ifTouchGetSelectionMode(void);
-extern unsigned short FUN_001643b4(unsigned int, unsigned int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -121,7 +121,7 @@ LAB_002f9458:
     if (temp_v8 != 0) {
       *puVar15 = 2;
       *temp_v19 = 0;
-      temp_v1 = FUN_001643b4(0xd,0x1b3);
+      temp_v1 = ifTouchRegionAddRequested(0xd,0x1b3);
       *(unsigned short *)(param_1 + 0x4830) = temp_v1;
       temp_v0 = 0;
       temp_v6 = 0;
@@ -138,7 +138,7 @@ LAB_002f9458:
           if ((*(unsigned short *)(temp_v5 + 2) & 0x8000) != 0) {
             temp_v0 = 1;
             if (*(char *)(param_1 + 0x4857) != '\0') {
-              temp_v1 = FUN_001643b4(0xd,0x1a0);
+              temp_v1 = ifTouchRegionAddRequested(0xd,0x1a0);
               *(unsigned short *)(param_1 + temp_v8 * 2 + 0x4832) = temp_v1;
             }
             else {
@@ -151,17 +151,17 @@ LAB_002f9458:
                 temp_v9 = temp_v5 == 3;
               }
               if (!(temp_v10 && !temp_v9)) {
-                temp_v1 = FUN_001643b4(0xd,0x19f);
+                temp_v1 = ifTouchRegionAddRequested(0xd,0x19f);
                 *(unsigned short *)(param_1 + temp_v8 * 2 + 0x4832) = temp_v1;
               }
               else {
-                temp_v1 = FUN_001643b4(0xd,0x19e);
+                temp_v1 = ifTouchRegionAddRequested(0xd,0x19e);
                 *(unsigned short *)(param_1 + temp_v8 * 2 + 0x4832) = temp_v1;
               }
             }
           }
           else {
-            temp_v1 = FUN_001643b4(0xd,*(unsigned int *)(temp_v2 + 0x488c));
+            temp_v1 = ifTouchRegionAddRequested(0xd,*(unsigned int *)(temp_v2 + 0x488c));
             *(unsigned short *)(param_1 + temp_v8 * 2 + 0x4832) = temp_v1;
             if (*(char *)(temp_v2 + 0x4894) != '\0') {
               temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x4858);

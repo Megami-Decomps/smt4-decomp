@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00282228(int *);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 
 /* stack frame of void: 13 slot(s), 52 byte(s) */
@@ -30,7 +30,7 @@ extern int g_lmapScene; /* 0x447e88 */
 
 extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282228. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 
 
@@ -98,7 +98,7 @@ void mapDepartAdvanceCameraSequence(void)
     temp_v12 = temp_v12 + temp_v7;
     temp_v8 = temp_v8 + temp_v4 * 300.0f;
     temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-    FUN_00282390();
+    libm_cosf();
     temp_v20 = temp_v10 + temp_v4 * temp_v13;
     temp_v7 = *(float *)(g_lmapScene + 0x1c);
     temp_v13 = *(float *)(g_lmapScene + 0x20);
@@ -110,7 +110,7 @@ void mapDepartAdvanceCameraSequence(void)
     temp_v7 = temp_v7 + temp_v4 * temp_v11;
     temp_v13 = temp_v13 + temp_v9;
     temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-    FUN_00282390();
+    libm_cosf();
     temp_v23 = temp_v10 + temp_v2 * temp_v11;
     temp_v25 = 0x1e;
     temp_v24 = 0;
@@ -141,7 +141,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v11 = temp_v11 + temp_v7;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v20 = temp_v10 + temp_v4 * temp_v12;
       temp_v7 = *(float *)(g_lmapScene + 0x1c);
       temp_v12 = *(float *)(g_lmapScene + 0x20);
@@ -154,7 +154,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v12 = temp_v12 + temp_v9;
       temp_v7 = temp_v7 + temp_v4 * 200.0f;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v23 = temp_v10 + temp_v2 * temp_v8;
       temp_v25 = 0x5a;
       temp_v24 = 0;
@@ -185,7 +185,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v10 = temp_v10 + temp_v13;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v20 = temp_v7 + temp_v4 * temp_v12;
       temp_v7 = *(float *)(g_lmapScene + 0x1c);
       temp_v12 = *(float *)(g_lmapScene + 0x20);
@@ -197,7 +197,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v7 = temp_v7 + temp_v4 * temp_v11;
       temp_v12 = temp_v12 + temp_v11;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v23 = temp_v9 + temp_v2 * temp_v11;
       temp_v25 = 10;
       temp_v24 = 0;
@@ -228,7 +228,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v8 = temp_v8 + temp_v4 * temp_v12;
       temp_v10 = temp_v10 + temp_v13;
       temp_v4 = *(float *)(g_lmapScene + 0x4c) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v20 = temp_v7 + temp_v4 * temp_v12;
       temp_v9 = *(float *)(g_lmapScene + 0x1c);
       temp_v12 = *(float *)(g_lmapScene + 0x20);
@@ -240,7 +240,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v9 = temp_v9 + temp_v4 * temp_v11;
       temp_v12 = temp_v12 + 280.0f;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v3) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v23 = temp_v7 + temp_v2 * temp_v11;
       temp_v25 = 0x50;
       temp_v24 = 0;
@@ -272,7 +272,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v7 = temp_v7 + temp_v3 * temp_v4;
       temp_v19 = temp_v12 + temp_v10;
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v20 = temp_v11 + temp_v3 * temp_v4;
       temp_v4 = *(float *)(g_lmapScene + 0x1c);
       temp_v11 = *(float *)(g_lmapScene + 0x20);
@@ -283,7 +283,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v4 = temp_v4 + temp_v3 * temp_v8;
       temp_v11 = temp_v11 + temp_v8;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v9) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v23 = temp_v10 + temp_v2 * temp_v8;
       temp_v25 = 0xf;
       temp_v24 = 1;
@@ -315,7 +315,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v9 = temp_v9 + temp_v3 * temp_v4;
       temp_v12 = temp_v12 + temp_v10;
       temp_v3 = (*(float *)(g_lmapScene + 0x4c) - temp_v13) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v20 = temp_v11 + temp_v3 * temp_v4;
       temp_v10 = 165.0f;
       temp_v4 = *(float *)(g_lmapScene + 0x24);
@@ -327,7 +327,7 @@ void mapDepartAdvanceCameraSequence(void)
       temp_v3 = (float)temp_v5 + temp_v3 * temp_v7;
       temp_v8 = (float)((unsigned long long)temp_v5 >> 0x20) + temp_v8;
       temp_v2 = (*(float *)(g_lmapScene + 0x4c) - temp_v10) * temp_v2;
-      FUN_00282390();
+      libm_cosf();
       temp_v23 = temp_v4 + temp_v2 * temp_v7;
       temp_v25 = 0x69;
       temp_v24 = 0;

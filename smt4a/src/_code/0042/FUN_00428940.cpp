@@ -11,7 +11,7 @@ WindowStatusResult FUN_00428940(void *file, void *archive, const u16 *path, u32 
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }
-    status = FUN_004283cc(file);
+    status = queryFailureResultOrZero(file);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

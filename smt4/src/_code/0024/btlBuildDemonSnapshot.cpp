@@ -16,7 +16,7 @@ __packed struct DemonSaveRecord {
     /* 0x2C */ u16 hpHigh;
     /* 0x2E */ u8 unk2E[2];
     /* 0x30 */ s32 experience;
-    /* 0x34 */ u16 learned[8];             /* count given by FUN_0029aafc */
+    /* 0x34 */ u16 learned[8];             /* count given by countUnlockedSlots */
     /* 0x44 */ u8 unk44[0x2E];
     /* 0x72 */ u16 variant;
     /* 0x74 */ u8 unk74[2];
@@ -57,7 +57,7 @@ extern "C" {
 void memClear(void *memory, s32 size);
 s32 dataTable9EntryOrZero(u8 index);
 s32 btlSourceGetMaxHp(DemonSaveRecord *record);
-s32 FUN_0029aafc(void);
+s32 countUnlockedSlots(void);
 void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 u32 gameGetPlayerName(void);
 void libc_strcpy(void *destination, u32 source);
@@ -82,7 +82,7 @@ void btlBuildDemonSnapshot(DemonSnapshot *snapshot, DemonSaveRecord *record)
     snapshot->stats = record->stats;
     snapshot->groupB = record->groupB;
     snapshot->skills = record->skills;
-    __aeabi_memcpy4((void *)snapshot->learned, (void *)record->learned, FUN_0029aafc() * 2);
+    __aeabi_memcpy4((void *)snapshot->learned, (void *)record->learned, countUnlockedSlots() * 2);
     libc_strcpy((void *)snapshot->playerName, gameGetPlayerName());
     if ((s16)snapshot->stats.values[2] >= 1000) {
         snapshot->stats.values[2] = 999;

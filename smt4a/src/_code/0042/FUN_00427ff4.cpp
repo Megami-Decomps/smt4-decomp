@@ -10,7 +10,7 @@ s32 FUN_00428104(void *owner, DateTimeValue *output);
 // Read the owner's current time and return its translated status, reporting a failed result to the owner.
 WindowStatusResult FUN_00427ff4(void *owner, DateTimeValue *output)
 {
-    nn::Result status = FUN_004283cc(owner);
+    nn::Result status = queryFailureResultOrZero(owner);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

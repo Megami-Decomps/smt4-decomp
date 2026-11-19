@@ -6,6 +6,7 @@
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "code/Code0019_Smt4.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0013.h"
 
 extern "C" {
 
@@ -20,7 +21,7 @@ int FUN_0026fe0c(void);
 int FUN_0026ff54(void);
 int frameTexCampSetMode(...);
 int FUN_00275dc4(void);
-int FUN_0028703c(...);
+int animationEvaluateCallback(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h does not compile here: more than one instance of overloaded function "modelSetScale" has "C" linkage)
 int FUN_00287c34(...);
 int uiFadeRelease(void);
 int soundChannelStopAll(...);
@@ -111,7 +112,7 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: frameTexCampSetMode. */
 /* Supplied declaration required: FUN_00275dc4. */
 extern int jobWorkerPollAndFree(void);
-/* Supplied declaration required: FUN_0028703c. */
+/* Supplied declaration required: animationEvaluateCallback. */
 /* Supplied declaration required: FUN_00287c34. */
 extern int screenFadesAllReady(void);
 /* Supplied declaration required: commonBgAcquire. */
@@ -149,7 +150,6 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1e30. */
-extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: jobStop. */
 extern unsigned int asdCameraGetSavedRenderPairs(void);
 /* Supplied declaration required: asdSequenceRequest. */
@@ -216,7 +216,7 @@ int FUN_001e9990(unsigned int handle)
     puVar13[0x17] = temp_v6;
     FUN_002bc0e0();
     if (*(char *)((int)puVar13 + 0x95) == '\0') {
-      temp_v4 = FUN_002c2a04(0);
+      temp_v4 = pairedAvailabilityGetState(0);
       if (temp_v4 != 0) {
         titleSetSlotValueState2(0,4);
         titleSetSlotValueState2(1,4);
@@ -433,7 +433,7 @@ int FUN_001e9990(unsigned int handle)
       *puVar10 = *puVar10 | 2;
       *(unsigned char *)(*(int *)(puVar10[2] + 0x2c) + 0x1f6) = 0;
       puVar3[0x26] = (int)temp_v9;
-      FUN_0028703c(*(unsigned int *)(puVar3[0x24] + 8));
+      animationEvaluateCallback(*(unsigned int *)(puVar3[0x24] + 8));
       in_s0 = (float)temp_v9;
       modelEvaluateFirstScalarChannel(*(unsigned int *)(puVar3[0x24] + 8));
       puVar10 = (unsigned int *)puVar3[0x24];

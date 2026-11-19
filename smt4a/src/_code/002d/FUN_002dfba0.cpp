@@ -8,7 +8,7 @@ extern "C" {
 
 int renderCtxSelectTexture(...);
 int FUN_0019e3d0(...);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int __hardfp_atan2f(void);
 int VectorFloatToUnsigned(...);

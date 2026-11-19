@@ -1,6 +1,7 @@
 /* NON_MATCHING: camp StreetPass (CEC) loader thread body: loads the CEC tables and script, fills the outgoing message record from the save data and forwards it, then waits until the files have arrived; written from the decompilation, the stack buffers of the CEC id helpers and the return-value plumbing are approximated */
 #include "common.h"
 #include "event/2dEvent/EventEffect.h"
+#include "camp/CampCec/CampCecView.h"
 
 #define CEC_STEP_START 0
 #define CEC_STEP_WAIT_FILES 1
@@ -60,7 +61,6 @@ u32 gameDataBlocksGetWord27E8C(void);
 void rt_aeabi_memclr(void *block, u32 size);
 s32 cecQueryOptionalProcess(void);
 s32 gameDataTestFlags(u32 mask);
-void FUN_002c0b10(u16 *id);
 s32 rt_memcmp(const void *a, const void *b, u32 size);
 void cecProcessCall2(void);
 void cecProcessForward(void);
@@ -99,7 +99,7 @@ void FUN_002a28c0(CecThreadWork *work)
                 if (work->cecAvailable != 0 && gameDataTestFlags(0x20) != 0) {
                     u16 id[2];
                     u8 ownId[CEC_MESSAGE_RECORD_ID_SIZE];
-                    FUN_002c0b10(id);
+                    cecOutboxReadCard(reinterpret_cast<CecProcessSlot *>(id));
                     if (rt_memcmp(ownId, FUN_002bf520()->ownerId, CEC_MESSAGE_RECORD_ID_SIZE) != 0) {
                         if (FUN_002bf520()->unk60 != 0) {
                             cecProcessCall2();

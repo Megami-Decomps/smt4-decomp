@@ -12,6 +12,7 @@
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "camp/Unite/UniteEffectState.h"
+#include "code/Code0038.h"
 
 /* Animation tables for paramsInit; the original file defined them statically. */
 static const s32 sKeysFirst[9] = { 320, 0, 8, 1310720, 0, 8, 0, 0, 1 };
@@ -52,10 +53,9 @@ u32 eventResourceCacheAcquire(s32 model, s32 mode);
 void FUN_0033dcec(u32 texture, s32 a, s32 b);
 u32 asdVramBGetFreeBytes(void);
 void FUN_00343e5c(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
-CameraObject *asdCameraLoadFromFile(const char *path);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 
-void FUN_002a9fdc(UiSpriteState *sprite, s32 a, s32 b);
+void rangeSelectionSelectEndpoint(UiSpriteState *sprite, s32 a, s32 b);
 void spriteSetVisible(UiSpriteState *sprite, u8 visible);
 
 /* Starts the fusion-result screen: loads the result devils' textures, the stage model and camera
@@ -81,23 +81,23 @@ void uniteResultInitialize(void)
     if (work->materialCount == 2) {
         if (work->sacrifice) {
             work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2_ac.bam", 7);
-            work->camera = asdCameraLoadFromFile("camp/jakyou_union2_ac.bccam");
+            work->camera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union2_ac.bccam"));
         } else {
             work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2.bam", 7);
-            work->camera = asdCameraLoadFromFile("camp/jakyou_union2.bccam");
+            work->camera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union2.bccam"));
         }
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }
     if (work->materialCount == 3) {
         work->model = asdMdlManagerCreateLoaded("camp/jakyou_union3.bam", 7);
-        work->camera = asdCameraLoadFromFile("camp/jakyou_union3.bccam");
+        work->camera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union3.bccam"));
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }
     if (work->materialCount == 4) {
         work->model = asdMdlManagerCreateLoaded("camp/jakyou_union4.bam", 7);
-        work->camera = asdCameraLoadFromFile("camp/jakyou_union4.bccam");
+        work->camera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union4.bccam"));
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }
@@ -121,7 +121,7 @@ void uniteResultInitialize(void)
         spriteStartAnimationByIndex(&work->sprites[i], 0);
     }
     uiSpriteInitializeState(&work->panel, 0x24, -1, 0x18, &work->resources, 0x65, 1.0f);
-    FUN_002a9fdc(&work->panel, 0, 0);
+    rangeSelectionSelectEndpoint(&work->panel, 0, 0);
     spriteSetLayer(&work->panel, 2);
     uiStoreTextureEntryCenter(reinterpret_cast<PointDeltaWork *>(&work->panel), 0x24, 0x21c);
     spriteSetVisible(&work->panel, 1);

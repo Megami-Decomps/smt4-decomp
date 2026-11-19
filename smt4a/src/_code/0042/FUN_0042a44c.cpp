@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001885b8(...);
+int nn_fs_ipc_FileSystem_CloseArchive(...);
 int FUN_0042b8dc(char **, int **, int *, int);
 int FUN_00500924(char **);
 
@@ -31,7 +31,7 @@ typedef struct {
 
 extern unsigned int DAT_005893a8; /* 0x5893a8 */
 
-/* Supplied declaration required: FUN_001885b8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
 /* Supplied declaration required: FUN_0042b8dc. */
 /* Supplied declaration required: FUN_00500924. */
 extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
@@ -83,7 +83,7 @@ char ** FUN_0042a44c(void)
     if (temp_v8 != 0 || temp_v9 != 0) {
       temp_v4 = FUN_00500924(&temp_v6);
       temp_v11 = (unsigned int)temp_v4;
-      FUN_001885b8(&temp_v11,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
+      nn_fs_ipc_FileSystem_CloseArchive(&temp_v11,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
     }
   }
   else {
@@ -103,7 +103,7 @@ char ** FUN_0042a44c(void)
       if (temp_v8 != 0 || temp_v9 != 0) {
         temp_v4 = FUN_00500924(&temp_v6);
         temp_v16 = (unsigned int)temp_v4;
-        FUN_001885b8(&temp_v16,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
+        nn_fs_ipc_FileSystem_CloseArchive(&temp_v16,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
       }
     }
     else {
@@ -114,7 +114,7 @@ char ** FUN_0042a44c(void)
         temp_v0 = temp_v8;
         if (temp_v8 != 0 || temp_v9 != 0) {
           FUN_00500924(&temp_v6);
-          FUN_001885b8(&temp_v5,temp_v2,temp_v0,temp_v1);
+          nn_fs_ipc_FileSystem_CloseArchive(&temp_v5,temp_v2,temp_v0,temp_v1);
           temp_v8 = 0;
           temp_v9 = 0;
         }
@@ -124,7 +124,7 @@ char ** FUN_0042a44c(void)
         temp_v6 = "룜B떨B듼B";
         if (temp_v8 != 0 || temp_v9 != 0) {
           FUN_00500924(&temp_v6);
-          FUN_001885b8(&temp_v5,temp_v3,temp_v0,temp_v1);
+          nn_fs_ipc_FileSystem_CloseArchive(&temp_v5,temp_v3,temp_v0,temp_v1);
         }
         return (char **)0x0;
       }
@@ -132,7 +132,7 @@ char ** FUN_0042a44c(void)
       if (temp_v8 != 0 || temp_v9 != 0) {
         temp_v4 = FUN_00500924(&temp_v6);
         temp_v17 = (unsigned int)temp_v4;
-        FUN_001885b8(&temp_v17,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
+        nn_fs_ipc_FileSystem_CloseArchive(&temp_v17,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
         temp_v8 = 0;
         temp_v9 = 0;
       }
@@ -141,7 +141,7 @@ char ** FUN_0042a44c(void)
       if (temp_v9 != 0 || temp_v8 != 0) {
         temp_v4 = FUN_00500924(&temp_v6);
         temp_v18 = (unsigned int)temp_v4;
-        FUN_001885b8(&temp_v18,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
+        nn_fs_ipc_FileSystem_CloseArchive(&temp_v18,(int)((unsigned long long)temp_v4 >> 0x20),temp_v8,temp_v9);
       }
     }
   }

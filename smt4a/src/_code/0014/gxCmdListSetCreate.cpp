@@ -9,7 +9,7 @@ void asdGfxSetCmdBufferState(u32 a, u32 b);
 void asdModelResetCommandBuffer(void);
 void asdGxMarkSubmissionReady(void);
 void FUN_001536e0(void);
-void FUN_001615e4(void (*callback)(void));
+void asdGfxSetCmdBufferUnk38(void (*callback)(void));
 void FUN_00161438(s32 value);
 
 /* Creates `config.count` command lists, gives each a buffer and a reset state, then binds the first. */
@@ -31,7 +31,7 @@ void gxCmdListSetCreate(GxCmdListSet *set, GxCmdListConfig config)
     }
     nngxBindCmdlist(set->lists[0]);
     asdGxMarkSubmissionReady();
-    FUN_001615e4(FUN_001536e0);
+    asdGfxSetCmdBufferUnk38(FUN_001536e0);
     FUN_00161438(-1);
 }
 

@@ -3,7 +3,7 @@
 #include "code/Code0029_Smt4.h"
 
 extern "C" {
-u32 FUN_002d8c28(void);
+u32 gameDataBlocks2GetWord4(void);
 const u32 *gameGetSlotTable(void);
 
 /* Initializes the banner's selected value and default widget settings. */
@@ -17,7 +17,7 @@ u32 messageBannerInitSelection(u8 mode, s32 useCurrentValue)
         panel->counterValue = value;
         panel->counterBase = value;
     } else {
-        u32 value = FUN_002d8c28();
+        u32 value = gameDataBlocks2GetWord4();
         panel->counterValue = value;
         panel->counterBase = value;
     }

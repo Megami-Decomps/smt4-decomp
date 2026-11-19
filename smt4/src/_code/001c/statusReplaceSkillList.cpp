@@ -13,7 +13,7 @@ void FUN_0026a978(const u32 *result, s32 selection);
 StatusSkillMemberView *partyMemberFindById(u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
 s32 FUN_0026a9cc(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
-u32 FUN_0029aafc();
+u32 countUnlockedSlots();
 u32 flagCountUnlockedSlots();
 
 // Replace the status skill list and recompute its party-member-specific selection data.
@@ -30,7 +30,7 @@ void statusReplaceSkillList(const u16 *skills)
     SkillSelectionView *selection = reinterpret_cast<SkillSelectionView *>(data);
     u32 count = 8;
     if (selection->memberId < 0) {
-        count = FUN_0029aafc();
+        count = countUnlockedSlots();
     } else if (selection->memberId > 0 && data->unk1E66 != 6) {
         partyMemberFindById((u16)selection->memberId);
         count = flagCountUnlockedSlots();

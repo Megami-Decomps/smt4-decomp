@@ -25,7 +25,7 @@ extern unsigned char DAT_00558024; /* 0x558024 */
 
 /* Supplied declaration required: fileHandleClose. */
 extern int archiveStreamOpenConverted(unsigned char **);
-extern int FUN_002befc0(void);
+extern int requestSubmitRecordById(void);
 extern int romFileStreamOpen(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: holderReleaseObject. */
 /* Supplied declaration required: taggedObjectRelease. */
@@ -59,7 +59,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
     if (param_1 != 1) {
       if (param_1 != 2) {
         if (param_1 == 3) {
-          temp_v0 = FUN_002befc0();
+          temp_v0 = requestSubmitRecordById();
         }
       }
       else {

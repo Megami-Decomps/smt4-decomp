@@ -53,7 +53,7 @@ typedef char AsdCameraLayoutCheck[offsetof(AsdCamera, view) == 0x38 && offsetof(
     offsetof(AsdCamera, stereo) == 0x4A0 && sizeof(AsdCamera) == 0x50C ? 1 : -1];
 
 extern "C" {
-u8 FUN_00343af0(void);
+u8 isFlag10Set(void);
 }
 
 #endif

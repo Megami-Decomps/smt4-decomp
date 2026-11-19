@@ -5,7 +5,7 @@
 extern "C" {
 
 void objFlagsSetBits(u32 object, u32 bits);
-void FUN_002d65d0(void);
+void bustupCutAnimClearFlags(void);
 void FUN_002e20b4(void);
 void asdTextDrawDirectoryEntry(u32 box, u32 font, s32 color, s32 x, s32 y, const void *message, u32 index);
 void asdTextDrawFormatted(u32 box, u32 font, s32 color, s32 x, s32 y, const char *format, ...);
@@ -20,7 +20,7 @@ void FUN_0028e6d0(MessageWindow *win, const void *message, u32 index, s32 kind, 
     u32 oldFlags = win->flags;
 
     objFlagsSetBits(box, 8);
-    FUN_002d65d0();
+    bustupCutAnimClearFlags();
     FUN_002e20b4();
     if (message == NULL) {
         win->empty = 1;
@@ -41,7 +41,7 @@ void FUN_0028e6d0(MessageWindow *win, const void *message, u32 index, s32 kind, 
             asdTextDrawDirectoryEntry(box, 3, task, 0, 3, message, index);
         }
     }
-    FUN_002d65d0();
+    bustupCutAnimClearFlags();
     FUN_002e20b4();
     if (win->displayMode == 20) {
         win->mode = kind;

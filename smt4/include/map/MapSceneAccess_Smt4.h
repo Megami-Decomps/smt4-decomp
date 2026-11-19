@@ -5,8 +5,6 @@
 struct RotationTargetGroup;
 extern "C" {
 
-void lmapSceneSetUnk134(u8 value);
-
 void mapRangeEntriesRun(void);
 
 int MapNaviTable_GetCategoryRecord(u32 unused, u32 index);

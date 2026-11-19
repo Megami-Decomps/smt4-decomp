@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "status/StatusCamera.h"
 #include "map/MapSceneAccess_Smt4.h"
+#include "map/MapSceneAccess.h"
 
 class StatusScreenModel {
 public:

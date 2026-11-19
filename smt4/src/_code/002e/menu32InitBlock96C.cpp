@@ -1,0 +1,14 @@
+#include "ui/UiSpriteApi.h"
+#include "shard/PlayScene.h"
+
+extern "C" {
+
+int playSceneSetState(PlayScene *scene, int a, int b);
+
+void menu32InitBlock96C(PlayScene *scene)
+{
+    timerStart(&scene->timerC, 0xd, 0);
+    playSceneSetState(scene, 0xe, 1);
+}
+
+} /* extern "C" */

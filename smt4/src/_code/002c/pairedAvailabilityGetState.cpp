@@ -1,0 +1,17 @@
+#include "common.h"
+#include "code/Code002c.h"
+
+extern "C" {
+
+extern struct {
+    u8 unk00[0x10];
+    u8 unk10;
+    u8 unk11[3];
+} DAT_004d9758[];
+
+u8 pairedAvailabilityGetState(int index)
+{
+    return DAT_004d9758[index].unk10;
+}
+
+} /* extern "C" */

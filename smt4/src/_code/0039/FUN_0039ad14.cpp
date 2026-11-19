@@ -18,7 +18,7 @@ u32 FUN_0039ad14(NavigationInterpolation *state)
     }
     if ((state->flags & 0x10) != 0) {
         ++state->elapsed;
-        if ((FUN_002319c0() != 0 && g_gameState.inputBlocked == 0) || state->elapsed > 15) {
+        if ((setFullScreenRect() != 0 && g_gameState.inputBlocked == 0) || state->elapsed > 15) {
             state->flags &= ~0x10;
         } else {
             NavigationPoint position;

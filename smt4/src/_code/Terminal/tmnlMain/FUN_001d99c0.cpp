@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "font/PlaceWin.h"
 #include "game/GameState.h"
+#include "code/Code0013.h"
 extern "C" int FUN_0020ffe8(...);
 
 extern "C" {
@@ -46,7 +47,7 @@ int useCounterSelectMode2(void);
 int scrRunOpcodesStub(...);
 int tmnlFindSlotForItem(...);
 int FUN_0027f94c(...);
-int FUN_00282bfc(...);
+int titleRestartSlotState3(...);
 int FUN_00287030(...);
 int scrScriptProcessStartEntry(...);
 int scrScriptProcessCreate(...);
@@ -63,7 +64,7 @@ int resOwnerRunNodeHandlers(...);
 int buttonHelpSetPreset(...);
 int FUN_002c1658(...);
 int FUN_002c29d8(...);
-int FUN_002cf570(...);
+int obj7ECSetPair(...);
 int FUN_002fc008(...);
 
 int placeWinCreate(void);
@@ -145,7 +146,7 @@ extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_0027f94c. */
 /* Supplied declaration required: effectNodeUpdateTransform. */
 extern int screenFadeIsBusy(void);
-/* Supplied declaration required: FUN_00282bfc. */
+/* Supplied declaration required: titleRestartSlotState3. */
 /* Supplied declaration required: FUN_00287030. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: gameDataGetPlayerName. */
@@ -210,7 +211,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: FUN_002c29d8. */
-extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
@@ -218,7 +218,7 @@ extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 extern unsigned int asdLoadFileSync(unsigned char *, unsigned char *, unsigned int, unsigned int);
 extern int FUN_002c79c4(unsigned int);
 /* Supplied declaration required: useCounterSelectMode2. */
-/* Supplied declaration required: FUN_002cf570. */
+/* Supplied declaration required: obj7ECSetPair. */
 /* Supplied declaration required: FUN_002e2948. */
 /* Supplied declaration required: FUN_002fc008. */
 extern int FUN_00335118(unsigned int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
@@ -442,8 +442,8 @@ unsigned int FUN_001d99c0(void)
         if (temp_v6 != 0) {
           puVar2[4] = 0;
           puVar2[5] = 0;
-          FUN_00282bfc(0,0xff);
-          FUN_00282bfc(1,0xff);
+          titleRestartSlotState3(0,0xff);
+          titleRestartSlotState3(1,0xff);
         }
         break;
       case 2:
@@ -470,11 +470,11 @@ unsigned int FUN_001d99c0(void)
           textEncodeFontSlot(0x28,pcVar10);
           temp_v3 = asdLoadFileSyncDefault(&LAB_001da2c8);
           puVar2[0xb] = temp_v3;
-          temp_v6 = FUN_002c2a04(0);
+          temp_v6 = pairedAvailabilityGetState(0);
           if (temp_v6 == 3) {
             FUN_002c29d8(0,10,0xff);
           }
-          temp_v6 = FUN_002c2a04(1);
+          temp_v6 = pairedAvailabilityGetState(1);
           if (temp_v6 == 3) {
             FUN_002c29d8(1,10,0xff);
           }
@@ -509,7 +509,7 @@ unsigned int FUN_001d99c0(void)
         if (puVar2[0x179] != 0) {
           buttonHelpSetPreset(0xa6);
           sortMenuCreate(0xffffffff,2);
-          FUN_002cf570(puVar2[6],puVar2[7]);
+          obj7ECSetPair(puVar2[6],puVar2[7]);
           temp_v6 = 0;
           if (temp_v6 < (int)puVar2[0x179]) {
             do {
@@ -672,7 +672,7 @@ LAB_001da638:
               if ((temp_v6 == 0) || (temp_v6 = effectAreAllCompletionChecksReady(puVar2[puVar2[0x158] + 0xd]), temp_v6 == 0)
                  ) {
                 temp_v6 = (int)*(float *)(*(int *)(puVar2[puVar2[0x154] + 0xf] + 4) + 0x38);
-                if ((temp_v6 >= 6) && (temp_v2 = FUN_002c2a04(0), temp_v2 == 3)) {
+                if ((temp_v6 >= 6) && (temp_v2 = pairedAvailabilityGetState(0), temp_v2 == 3)) {
                   titleSetSlotValueState2(0,8);
                 }
                 if (temp_v6 == 0xb4) {
@@ -906,7 +906,7 @@ LAB_001da638:
               FUN_0020ffe8(puVar2[0xc],0x13);
               *(unsigned char *)(puVar2 + 0x155) = 0;
             }
-            FUN_00282bfc(0,0xff);
+            titleRestartSlotState3(0,0xff);
             *(unsigned char *)(puVar2 + 0x15b) = 0;
             *(unsigned char *)(puVar2 + 0x15e) = 0;
             *(unsigned char *)(puVar2 + 0x161) = 0;

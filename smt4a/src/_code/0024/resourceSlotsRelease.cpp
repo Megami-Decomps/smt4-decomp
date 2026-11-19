@@ -27,9 +27,9 @@ typedef struct Pool {
 extern Pool *DAT_00581280;
 
 int FUN_0020ef94(void);
-int FUN_00353d1c(void);
+int vectorQueueClearActiveSlots(void);
 
-/* Releases the resource of every pool slot (highest first), then runs FUN_00353d1c and FUN_0020ef94. */
+/* Releases the resource of every pool slot (highest first), then runs vectorQueueClearActiveSlots and FUN_0020ef94. */
 void resourceSlotsRelease(void)
 {
     int i;
@@ -42,7 +42,7 @@ void resourceSlotsRelease(void)
             DAT_00581280->slots[i].resource = NULL;
         }
     }
-    FUN_00353d1c();
+    vectorQueueClearActiveSlots();
     FUN_0020ef94();
 }
 

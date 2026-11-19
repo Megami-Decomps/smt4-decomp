@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ca2d0(int *, int, int, unsigned int, unsigned int, unsigned int);
+int nw_gfx_TransformNode_GetMemorySizeForInitialize(int *, int, int, unsigned int, unsigned int, unsigned int);
 int nw_gfx_AnimGroup_GetMemorySizeForInitialize(int *, int, int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_001ca2d0. */
+/* Supplied declaration required: nw_gfx_TransformNode_GetMemorySizeForInitialize. */
 /* Supplied declaration required: nw_gfx_AnimGroup_GetMemorySizeForInitialize. */
 
 
@@ -28,7 +28,7 @@ void FUN_001be098(int *param_1,int param_2,int param_3,unsigned int param_4,unsi
   unsigned char temp_v3;
   
   *param_1 = (((*param_1 + param_1[1]) - 1U) & ~(param_1[1] - 1U)) + 0x188;
-  FUN_001ca2d0(param_1,param_2,param_3,param_4,param_5,param_6);
+  nw_gfx_TransformNode_GetMemorySizeForInitialize(param_1,param_2,param_3,param_4,param_5,param_6);
   temp_v3 = (param_3 << 0x10) >> 0x18 != 0;
   *param_1 = (((*param_1 + param_1[1]) - 1U) & ~(param_1[1] - 1U)) + 0x100;
   temp_v0 = 0;

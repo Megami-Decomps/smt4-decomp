@@ -5,13 +5,13 @@
 #include "gamedata/DataTable4CValue.h"
 #include "gfx/ControllerModel.h"
 #include "Model/MoriModelManager.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 extern MapRndMazeA g_mapRndMaze;
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
 f32 libm_sinf(f32 radians);
-f32 libm_cosf(f32 radians);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 
 void FUN_002ef048()

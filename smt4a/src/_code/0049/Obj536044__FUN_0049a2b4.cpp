@@ -47,7 +47,7 @@ s32 FUN_0049448c(const void *, const void *);
 s32 FUN_004944d0(const void *, const void *);
 s32 FUN_00494530(const void *, const void *);
 s32 recordCompareValues(const void *, const void *);
-s32 FUN_0049d0f0(const void *, const void *);
+s32 rankedEntryCompare(const void *, const void *);
 
 /* Per frame: when the counter finishes, moves to the next phase; otherwise re-sorts the current page's list in the selected order. */
 void _ZN9Obj53604412FUN_0049a2b4Ev(SortMenu *menu)
@@ -111,7 +111,7 @@ void _ZN9Obj53604412FUN_0049a2b4Ev(SortMenu *menu)
                     arraySortQsort(list->entries, list->count, 4, FUN_00493d38);
                     return;
                 }
-                arraySortQsort(list->entries, list->count, 4, FUN_0049d0f0);
+                arraySortQsort(list->entries, list->count, 4, rankedEntryCompare);
                 return;
             }
         }

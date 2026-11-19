@@ -1,6 +1,7 @@
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "code/Code0029.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "code/Code001b.h"
 extern "C" s32 FUN_0029ee54(void *cursor);
 
 extern "C" {
@@ -15,7 +16,7 @@ void FUN_003115b4(u32 questId)
 {
     UiQuest *quest = g_uiQuest;
     quest->questId = questId;
-    s32 alternate = FUN_00298f88(questId);
+    s32 alternate = dataTable1bOr1cRecordHasFlag1(questId);
     quest->panelView.panel.detailMode = alternate;
     quest->panelView.panel.unkF2 = 1;
     void *cursor;

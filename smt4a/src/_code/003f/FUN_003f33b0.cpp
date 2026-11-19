@@ -1,6 +1,7 @@
 /* NON_MATCHING: instruction rows now equal retail (169); recordContainsPairedId takes the skill id and the slot count is signed; only register numbering differs (retail keeps the arg/out-skills pair in r7/r8 and the table in r6 after the 0x1c00 add). */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
+#include "code/Code0029.h"
 
 // Party member record (0x12c bytes): only the parts merged here.
 struct MemberRecord {
@@ -25,7 +26,6 @@ void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
 MemberRecord* gameGetSlotRecord(u8 id);
 void FUN_004d0d70(u8 id);
-void dispatchIfFound(u8 id, u32 arg, s32 mode);
 s32 bitsAt60Test(void* record, u32 bit);
 void bitsAt60Set(void* record, u32 bit);
 void FUN_002a6894(void* record);

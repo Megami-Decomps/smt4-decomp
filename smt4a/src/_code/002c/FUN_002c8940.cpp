@@ -37,7 +37,7 @@ typedef struct {
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int uniteGetWork(void);
 extern int recordGetModeForId(int);
-extern int FUN_002861fc(unsigned short);
+extern int dataTable24FindById(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int listCursorGetRowIfUnblocked(int);
 extern int bitTableIndexIsClear(unsigned short);
@@ -77,7 +77,7 @@ void FUN_002c8940(int param_1,int param_2)
       if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = listCursorGetRowIfUnblocked(temp_v2), temp_v4 != temp_v8)) {
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v8 + 0x2e));
         temp_v5 = temp_v1 + (temp_v3 + temp_v8) * 2;
-        temp_v6 = FUN_002861fc(*(unsigned short *)(temp_v5 + 0x90a8));
+        temp_v6 = dataTable24FindById(*(unsigned short *)(temp_v5 + 0x90a8));
         if (temp_v6 != 0) {
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x1d3,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2
                        ,0x6a);
@@ -103,7 +103,7 @@ void FUN_002c8940(int param_1,int param_2)
   temp_v3 = resourceRunOperationIfUnblocked(temp_v2);
   temp_v4 = listCursorGetRowIfUnblocked(temp_v2);
   temp_v3 = temp_v1 + (temp_v4 + temp_v3) * 2;
-  temp_v4 = FUN_002861fc(*(unsigned short *)(temp_v3 + 0x90a8));
+  temp_v4 = dataTable24FindById(*(unsigned short *)(temp_v3 + 0x90a8));
   if (*(char *)(temp_v1 + 0x252) == '\0' || temp_v4 == 0) {
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x272,param_1,param_2,0x97);
     uiDrawListScrollBar(temp_v2,param_1,param_2,0x1a,0x23,0x24,0x25,0x1f,0x21,0x20,0x22,

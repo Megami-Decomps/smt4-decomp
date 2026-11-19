@@ -8,6 +8,7 @@
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
+#include "quest_center/QuestStatus.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 #include "text/TextDraw.h"
 #include "gamedata/GameDataAccess.h"
@@ -23,8 +24,6 @@ u32 uiQuestDrawRowPlate(u32 questId, s32 x, s32 y, s32 depth, s32 focused, s32 p
 const char *FUN_00156850(u32 questId, u32 key);
 void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
-u32 partyEntryGetBit5(s32 index);
-u32 partyEntryGetBit6(s32 index);
 u32 partyEntryBitsBit4(s32 index);
 u32 partyEntryFlagsBit3(s32 index);
 u32 questHasSpecialDetailPage(u32 id);

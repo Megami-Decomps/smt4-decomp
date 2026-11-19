@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "addon/AocSystem.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
 extern const char DAT_004037b0[];
 extern const char DAT_004037a0[];
@@ -42,7 +43,7 @@ void bustupTextureStart(u32 id, s32 keepPlacement)
     } else {
         if (work->node != -1) {
             if (aocRunByName(g_aocSystem, work->table, work->node, 1))
-                work->texture = FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
+                work->texture = aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
             else
                 work->texture = asdTMTexTablePrepareNodeImage(work->table, work->node);
         }

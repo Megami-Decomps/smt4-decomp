@@ -4,6 +4,7 @@
 #include "gamedata/TableEntryRef.h"
 #include "nn/Result.h"
 #include "code/Code0023.h"
+#include "gamedata/GameDataAccess_Shard0050.h"
 
 extern "C" {
 void FUN_00123934();
@@ -18,7 +19,7 @@ WindowStatusOperationResult Obj4221fc::vfunc0c(const void *)
     AocMain *manager = g_aocMain;
     FUN_00123934();
     TableEntryRef ref;
-    FUN_00234624(reinterpret_cast<int *>(&ref.entry), manager->contentRequest, state);
+    table30GetEntryB(reinterpret_cast<u8 **>(&ref.entry), reinterpret_cast<Table30 *>(manager->contentRequest), state);
     ItemCodeInfo request = FUN_003df244(&ref.entry);
     output.result = FUN_003540d8(manager->service, manager->contentArchive, &request);
     if (!nnResultIsFailure(legacyResourceIdRemap(&output.result))) {

@@ -3,7 +3,7 @@
 
 extern "C" {
 extern MapWorkEntries *DAT_00581280;
-void FUN_002241d0();
+void mapTimerBanksReset();
 
 /* Clears the controller work and its 64 records to their defaults, then finishes the reset. */
 void FUN_0020ef94()
@@ -70,6 +70,6 @@ void FUN_0020ef94()
         work->records[index].unk38 = 0;
         work->records[index].ready = 0;
     }
-    FUN_002241d0();
+    mapTimerBanksReset();
 }
 }

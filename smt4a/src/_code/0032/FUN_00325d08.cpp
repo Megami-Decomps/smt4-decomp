@@ -16,7 +16,7 @@ int __hardfp_atan2f(void);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int FUN_002469d0(void);
 int FUN_0025ef68(...);
 int distSpatial(void);

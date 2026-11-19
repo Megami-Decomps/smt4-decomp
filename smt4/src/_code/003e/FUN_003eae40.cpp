@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0037b140(int *);
+int wordsFlag8Reset(int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0037b140. */
+/* Supplied declaration required: wordsFlag8Reset. */
 
 
 void FUN_003eae40(int param_1,unsigned int param_2,unsigned int param_3)
@@ -46,7 +46,7 @@ LAB_003eaeb0:
       temp_v3 = temp_v1 == param_3;
     }
     if (!temp_v4 || temp_v3) {
-      FUN_0037b140(piVar4 + temp_v2 * 3 + 0x4c);
+      wordsFlag8Reset(piVar4 + temp_v2 * 3 + 0x4c);
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);

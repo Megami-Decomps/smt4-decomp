@@ -237,7 +237,7 @@ void modelSelectionActivate(ModelSelection* selection, int modelIndex, int anima
         }
     }
 
-    void* parameterOwner = FUN_00244d98(0);
+    void* parameterOwner = effApplyModelLight(0);
     ModelParameters* parameters = asdCameraGetSavedRenderPairs(parameterOwner);
     FUN_002a8638(model,
                  &parameters->value28,

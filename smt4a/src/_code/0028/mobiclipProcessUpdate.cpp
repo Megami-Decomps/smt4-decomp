@@ -72,7 +72,7 @@ s32 slotIsActive(u32 button);
 void slotSetRequest(u32 slot, u32 duration, u32 color);
 s32 pairedAvailabilityBothReady();
 void mobiclipCtrlShutdown();
-void FUN_001f51ac();
+void mobiclipShutdown();
 void soundSetupArchiveAndSlots();
 void soundInitializePersistentSlots();
 void soundEffectInitializeDelay();
@@ -110,7 +110,7 @@ static __forceinline void openMovieDirectory(MovieDirectory *directory)
 
 static inline void resetMoviePlayback()
 {
-    FUN_001f51ac();
+    mobiclipShutdown();
     soundSetupArchiveAndSlots();
     soundInitializePersistentSlots();
     soundEffectInitializeDelay();

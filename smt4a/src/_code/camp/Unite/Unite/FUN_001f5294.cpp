@@ -7,6 +7,8 @@
 #include "event/2dEvent/SmokeFade.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0029.h"
+#include "map/MapSceneAccess.h"
 
 extern "C" {
 
@@ -22,7 +24,6 @@ int FUN_0031db84(...);
 int arrayContainsU16(...);
 int uniteReleaseExit(void);
 int FUN_0034c340(...);
-int FUN_003857b4(...);
 int pairLogDestroy(void);
 int FUN_0039c744(void);
 int fusionPrepareSpecialRecipeList(void);
@@ -42,7 +43,7 @@ int panelSetMode3(...);
 int FUN_0031f688(void);
 int pairLogAppend(...);
 int FUN_00333dc8(...);
-int FUN_00334694(...);
+int pairLogSetValue(...);
 int FUN_00359a08(...);
 int uniteStartEffectProcesses(void);
 int FUN_0035dd60(...);
@@ -50,7 +51,6 @@ int uniteCreatePreviewModel(void);
 int gameCounterAddSaturating(...);
 int countersRaiseA(...);
 int FUN_004bd17c(...);
-int dispatchIfFound(...);
 int bitsAt60Clear(...);
 int FUN_004d0d70(void);
 int contentCountAvailableDemons(...);
@@ -121,7 +121,7 @@ int entryDefIsAvailable(...);
 
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
-int FUN_001643b4(...);
+int ifTouchRegionAddRequested(...);
 int buttonHelpSelectSlot(...);
 int buttonHelpSetText(...);
 int FUN_00228b04(...);
@@ -215,7 +215,7 @@ extern int engineCleanupIsDone(void);
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_001643b4. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short recordGetScaledMaximum(int);
@@ -280,7 +280,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
-extern int FUN_002a748c(void);
+extern int screenIsStateEight(void);
 /* Supplied declaration required: uniteResultInitialize. */
 /* Supplied declaration required: FUN_002a7b74. */
 extern int FUN_002ac2b4(unsigned int, unsigned char);
@@ -322,7 +322,7 @@ extern int gameGlobalsGetState(void);
 /* Supplied declaration required: gameGlobalsSetMenuOpenFlag. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_00334694. */
+/* Supplied declaration required: pairLogSetValue. */
 /* Supplied declaration required: uniteSelectedFusionIsEnabled. */
 extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: buttonHelpGetValue. */
@@ -347,7 +347,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_0037e1b0. */
-/* Supplied declaration required: FUN_003857b4. */
+/* Supplied declaration required: lmapSceneSetUnk134. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: pairLogDestroy. */
 /* Supplied declaration required: FUN_0039c744. */
@@ -749,16 +749,16 @@ s32 FUN_001f5294(u32)
       temp_v4 = 0;
       if (temp_v12 == '\0') {
         do {
-          temp_v3 = FUN_001643b4(0x1a,temp_v4 + 0x2e);
+          temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v4 + 0x2e);
           temp_v5 = temp_v4 * 2;
           temp_v4 = temp_v4 + 1;
           *(unsigned short *)((int)piVar3 + temp_v5 + 0x438) = temp_v3;
         } while (temp_v4 < 10);
-        temp_v3 = FUN_001643b4(0x1a,499);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,499);
         *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f1);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f1);
         *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f2);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f2);
         *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
       }
       temp_v4 = uiQuestIsCreated();
@@ -910,16 +910,16 @@ s32 FUN_001f5294(u32)
       do {
         temp_v6 = objectApplyIfUnblocked(piVar3 + 0x13f);
         if (temp_v6 <= temp_v5) break;
-        temp_v3 = FUN_001643b4(0x1a,temp_v5 + 0xa9);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0xa9);
         temp_v6 = temp_v5 * 2;
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)((int)piVar3 + temp_v6 + 0x438) = temp_v3;
       } while (temp_v5 < 8);
-      temp_v3 = FUN_001643b4(0x1a,0x1f0);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f0);
       *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,0x1ee);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1ee);
       *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,0x1ef);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1ef);
       *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
     }
     if (g_unite != (int *)0x0) {
@@ -1334,7 +1334,7 @@ LAB_001f6b9c:
       do {
         temp_v6 = objectApplyIfUnblocked(piVar3 + 0x158);
         if (temp_v6 <= temp_v5) break;
-        temp_v3 = FUN_001643b4(0x1a,temp_v5 + 0x22a);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0x22a);
         temp_v6 = temp_v5 * 2;
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)((int)piVar3 + temp_v6 + 0x44c) = temp_v3;
@@ -1767,32 +1767,32 @@ LAB_001f732c:
         do {
           temp_v6 = objectApplyIfUnblocked(piVar3 + 0x1876);
           if (temp_v6 <= temp_v5) break;
-          temp_v3 = FUN_001643b4(0x1a,temp_v5 + 0x2e);
+          temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0x2e);
           temp_v6 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
           *(unsigned short *)((int)piVar3 + temp_v6 + 0x438) = temp_v3;
         } while (temp_v5 < 10);
-        temp_v3 = FUN_001643b4(0x1a,499);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,499);
         *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f1);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f1);
         *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f2);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f2);
         *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
       }
       else {
         do {
           temp_v6 = widgetSubCallIfVisible(piVar3 + 0x188f);
           if (temp_v6 <= temp_v5) break;
-          temp_v3 = FUN_001643b4(0x1a,temp_v5 + 0xe3);
+          temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0xe3);
           temp_v6 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
           *(unsigned short *)((int)piVar3 + temp_v6 + 0x438) = temp_v3;
         } while (temp_v5 < 4);
-        temp_v3 = FUN_001643b4(0x1a,0x1f9);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f9);
         *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f8);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f8);
         *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f7);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f7);
         *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
       }
       *(unsigned char *)(piVar3 + 0x125) = 0;
@@ -1995,18 +1995,18 @@ LAB_001f77ec:
       do {
         temp_v6 = objectApplyIfUnblocked(temp_v40[0]);
         if (temp_v6 <= temp_v5) break;
-        temp_v3 = FUN_001643b4(0x1a,temp_v5 + 0x125);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0x125);
         temp_v6 = temp_v5 * 2;
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)((int)piVar3 + temp_v6 + 0x438) = temp_v3;
       } while (temp_v5 < 5);
-      temp_v3 = FUN_001643b4(0x1a,499);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,499);
       *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,0x1f1);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f1);
       *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,0x1f2);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f2);
       *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,0x1fe);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1fe);
       temp_v5 = 0;
       *(unsigned short *)(piVar3 + 0x117) = temp_v3;
       do {
@@ -2503,29 +2503,29 @@ LAB_001f8d58:
       temp_v4 = 0;
       do {
         if (piVar3[0x23a1] <= temp_v4) break;
-        temp_v3 = FUN_001643b4(0x1a,temp_v4 + 0x185);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v4 + 0x185);
         temp_v5 = temp_v4 * 2;
         temp_v4 = temp_v4 + 1;
         temp_v16 = temp_v16 + 1;
         *(unsigned short *)((int)piVar3 + temp_v5 + 0x438) = temp_v3;
       } while (temp_v4 < 8);
       *(short *)(piVar3 + 0x23a2) = temp_v16;
-      temp_v3 = FUN_001643b4(0x1a,0x18d);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x18d);
       temp_v4 = 0;
       *(unsigned short *)((int)piVar3 + (short)piVar3[0x23a2] * 2 + 0x438) = temp_v3;
       do {
         temp_v5 = objectApplyIfUnblocked(piVar3 + 0x236c);
         if (temp_v5 <= temp_v4) break;
-        temp_v3 = FUN_001643b4(0x1a,temp_v4 + 0x17d);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v4 + 0x17d);
         temp_v5 = temp_v4 * 2;
         temp_v4 = temp_v4 + 1;
         *(unsigned short *)((int)piVar3 + temp_v5 + 0x478) = temp_v3;
       } while (temp_v4 < 8);
-      temp_v3 = FUN_001643b4(0x1a,0x1f6);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f6);
       *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,500);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,500);
       *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,0x1f5);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f5);
       *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
     }
     piVar19 = piVar3;
@@ -3042,7 +3042,7 @@ LAB_001f9868:
       contentCountAvailableDemons(temp_v4,piVar19 + 0x23df);
       countersRaiseA(4,temp_v4);
       FUN_002a6894(temp_v5);
-      FUN_00334694((short)piVar3[0x148e]);
+      pairLogSetValue((short)piVar3[0x148e]);
       FUN_0035dd60(0);
       temp_v4 = 0x1000051;
       if (piVar3[0x123] == 0x1000051) {
@@ -3075,7 +3075,7 @@ LAB_001f9868:
                    *(unsigned short *)(ppiVar16 + 0x19));
       temp_v7 = temp_v47[0];
       FUN_001ff014(temp_v47[0]);
-      FUN_00334694((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
+      pairLogSetValue((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2);
       FUN_0035dd60(temp_v7);
       if (piVar3[0x123] == 0x100007b) {
         if (piVar3[0x124] == 0) {
@@ -3123,7 +3123,7 @@ LAB_001f9868:
     temp_v4 = 0x18;
     break;
   case 0x18:
-    temp_v4 = FUN_002a748c();
+    temp_v4 = screenIsStateEight();
     if (temp_v4 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -3162,7 +3162,7 @@ LAB_001f9868:
       FUN_0033449c(0);
       temp_v4 = lmapSceneGetScript();
       if (temp_v4 != 0) {
-        FUN_003857b4(0);
+        lmapSceneSetUnk134(0);
         linkHolderSetFlag(temp_v4);
       }
       piVar19 = g_unite;
@@ -3194,7 +3194,7 @@ LAB_001f9868:
           FUN_0020b908(0x27,1);
           temp_v4 = lmapSceneGetScript();
           if (temp_v4 != 0) {
-            FUN_003857b4(1);
+            lmapSceneSetUnk134(1);
             linkHolderClearFlag(temp_v4);
           }
         }
@@ -3243,32 +3243,32 @@ LAB_001f9868:
         do {
           temp_v6 = objectApplyIfUnblocked(piVar3 + 0x23ac);
           if (temp_v6 <= temp_v5) break;
-          temp_v3 = FUN_001643b4(0x1a,temp_v5 + 0x2e);
+          temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0x2e);
           temp_v6 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
           *(unsigned short *)((int)piVar3 + temp_v6 + 0x438) = temp_v3;
         } while (temp_v5 < 10);
-        temp_v3 = FUN_001643b4(0x1a,499);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,499);
         *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f1);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f1);
         *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f2);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f2);
         *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
       }
       else {
         do {
           temp_v6 = widgetSubCallIfVisible(piVar3 + 0x23c5);
           if (temp_v6 <= temp_v5) break;
-          temp_v3 = FUN_001643b4(0x1a,temp_v5 + 0xe3);
+          temp_v3 = ifTouchRegionAddRequested(0x1a,temp_v5 + 0xe3);
           temp_v6 = temp_v5 * 2;
           temp_v5 = temp_v5 + 1;
           *(unsigned short *)((int)piVar3 + temp_v6 + 0x438) = temp_v3;
         } while (temp_v5 < 4);
-        temp_v3 = FUN_001643b4(0x1a,0x1f9);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f9);
         *(unsigned short *)((int)piVar3 + 0x476) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f8);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f8);
         *(unsigned short *)((int)piVar3 + 0x472) = temp_v3;
-        temp_v3 = FUN_001643b4(0x1a,0x1f7);
+        temp_v3 = ifTouchRegionAddRequested(0x1a,0x1f7);
         *(unsigned short *)(piVar3 + 0x11d) = temp_v3;
       }
       *(unsigned char *)(piVar3 + 0x125) = 0;
@@ -3530,9 +3530,9 @@ LAB_001fac1c:
       return 0;
     }
     if (temp_v12 == '\0') {
-      temp_v3 = FUN_001643b4(0x1a,0x151);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x151);
       *(unsigned short *)(piVar3 + 0x10e) = temp_v3;
-      temp_v3 = FUN_001643b4(0x1a,0x1fe);
+      temp_v3 = ifTouchRegionAddRequested(0x1a,0x1fe);
       temp_v4 = 0;
       *(unsigned short *)(piVar3 + 0x117) = temp_v3;
       do {

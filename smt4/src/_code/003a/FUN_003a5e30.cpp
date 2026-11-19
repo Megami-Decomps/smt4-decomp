@@ -54,7 +54,7 @@ void FUN_003a4518(SelectionScene *scene);
 void shopLoadMessageBankAndSound(SelectionScene *scene);
 void FUN_003a45fc(void);
 void placeWinCreate(void);
-void FUN_00282bfc(s32 channel, s32 value);
+void titleRestartSlotState3(s32 channel, s32 value);
 void titleSetSlotValueState2(s32 a, s32 b);
 s16 *statisticsGetCounter(u8 kind, u32 sub);
 void uiInitializeEightTimerSet(void *timers);
@@ -126,8 +126,8 @@ SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     scene->stepA = 0;
     scene->stepB = 0;
     shopLoadMessageBankAndSound(scene);
-    FUN_00282bfc(0, 0xFF);
-    FUN_00282bfc(1, 0xFF);
+    titleRestartSlotState3(0, 0xFF);
+    titleRestartSlotState3(1, 0xFF);
     u32 music = 0x1000060;
     if (kind == 0) {
         qcSetPersistentStateFlag(subKind, 1);

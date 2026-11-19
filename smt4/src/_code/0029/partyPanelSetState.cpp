@@ -3,7 +3,7 @@
 
 extern "C" {
 void pair40Set(PartyPanelWidget *widget, s32 first, s32 second);
-void FUN_00292bcc(PartyPanelWidget *widget, u32 value);
+void obj48Arm(PartyPanelWidget *widget, u32 value); // declcheck: local (the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "pair40Set" has "C" linkage)
 void FUN_00298d28(s32, s32);
 void partyWidgetSetTransitionActive(PartyPanelWidget *widget, u8 value);
 void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
@@ -46,14 +46,14 @@ void partyPanelSetState(s32 state, s32 rememberPrevious)
         }
         FUN_00298d28(0, 0);
         if (panel->activeSlots[0] != 0)
-            FUN_00292bcc(panel->characters[0], 0xFF);
+            obj48Arm(panel->characters[0], 0xFF);
         for (s32 index = 0; index < 3; ++index) {
             if (panel->activeSlots[index + 1] != 0)
-                FUN_00292bcc(panel->characters[index + 1], 0xFF);
+                obj48Arm(panel->characters[index + 1], 0xFF);
         }
         for (s32 index = 0; index < 24; ++index) {
             if (panel->entries[index].available != 0)
-                FUN_00292bcc(panel->demons[index], 0xFF);
+                obj48Arm(panel->demons[index], 0xFF);
         }
     }
 }

@@ -5,7 +5,7 @@
 extern "C" {
 MapJumpRequest *gameBlockGetArea27E98(void);
 void FUN_004731d8(void);
-void FUN_00324c48(s32, s32, s32, f32, f32, f32, f32, f32);
+void gameStateSetJumpRequest(s32, s32, s32, f32, f32, f32, f32, f32);
 /* armcc copy helper, called by an opaque name (config alias): the call keeps the dead store retail has */
 void ARM_common_memcpy4_6_call(MapJumpDestination *, const MapJumpDestination *);
 }
@@ -16,13 +16,13 @@ extern "C" void FUN_004b9118(MapJumpTransition *work)
     const MapJumpRequest *request = gameBlockGetArea27E98();
     switch (request->kind) {
     case 1:
-        FUN_00324c48(request->map, request->entrance, request->object,
+        gameStateSetJumpRequest(request->map, request->entrance, request->object,
                      request->transform[0], request->transform[1], request->transform[2],
                      request->transform[3], request->transform[4]);
         work->flags |= 0x80010;
         break;
     case 2:
-        FUN_00324c48(request->map + 100, request->entrance, -1,
+        gameStateSetJumpRequest(request->map + 100, request->entrance, -1,
                      request->transform[0], request->transform[1], request->transform[2],
                      request->transform[3], request->transform[4]);
         g_gameState.currentObjectId = (u32)-1;

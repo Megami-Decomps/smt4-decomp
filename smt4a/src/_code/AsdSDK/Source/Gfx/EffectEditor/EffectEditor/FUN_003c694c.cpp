@@ -24,7 +24,7 @@ extern PolyVec4 DAT_005c1110; /* the effect's local length axis, before rotation
 extern PolyVec4 g_effectRingScratchColor; /* staging vector the strip vertices are written through */
 
 void matrixGetTranslation(PolyVec4 *axis);                         /* the camera's view axis */
-void FUN_001bc460(void);                      /* rotation matrix from VEC1 */
+void gfxQuaternionWorkspaceBuildMatrix(void);                      /* rotation matrix from VEC1 */
 void FUN_0037ee54(void);                                           /* VEC1 = VEC1 * rotation matrix */
 void FUN_002f8b30(void);                                           /* normalizes VEC1.xyz */
 void matrixCopySelectedToGlobal(const PolyVec4 *axis, f32 angle); /* rotation matrix about an axis */
@@ -174,7 +174,7 @@ void FUN_003c694c(PolyThunderObject *obj)
     PolyVec4 outerNegated = *VEC1;
 
     *VEC1 = obj->rotation1;
-    FUN_001bc460();
+    gfxQuaternionWorkspaceBuildMatrix();
     *VEC1 = DAT_005c1110;
     FUN_0037ee54();
     vectorScale(VEC1, params->length);

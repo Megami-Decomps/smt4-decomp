@@ -6,7 +6,6 @@
 
 extern "C" {
 
-s32 FUN_001bd118(u32 id);
 s32 goalConditionsSatisfied(u32 id);
 void FUN_004bb6d8(u32 flag, s32 value);
 void clearTwoWords(void *words);
@@ -24,7 +23,7 @@ u32 FUN_00417e08(u16 id)
     if (entry->known == 0 && id < 0x15E) {
         return 0;
     }
-    kind = FUN_001bd118(id);
+    kind = table1bOr1cGetRecordValue(id);
     if (dataTable1bOr1cRecordHasFlag1(id) == 0 && kind != 0 && kind != 10 && kind != 1 && roster->leader != 0) {
         return 0;
     }

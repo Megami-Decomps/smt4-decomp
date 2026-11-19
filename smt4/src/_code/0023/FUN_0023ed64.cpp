@@ -3,6 +3,7 @@
 #include "code/Code002c.h"
 #include "ui/UiControl.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0013.h"
 
 extern "C" {
 void asdTMTexTableLoadTmx(s32 group, s32 option);
@@ -37,7 +38,7 @@ s32 FUN_0023ed64(SplashAnimationState *state)
             soundChannelRequestIfEnabled(0x1000051, 0, 60);
         ++state->phase;
     }
-    if (FUN_002c2a04(0) == 0 &&
+    if (pairedAvailabilityGetState(0) == 0 &&
         (ifTouchGetSelectionMode() == 6 || padIsButtonPressed(0))) {
         state->phase = 2;
         state->wait = 0;
@@ -71,9 +72,9 @@ s32 FUN_0023ed64(SplashAnimationState *state)
     if (state->phase == 1) {
         if (!asdTMTexTableNodeIsLoaded(0x2d, 6))
             return 0;
-        if (FUN_002c2a04(0) == 3)
+        if (pairedAvailabilityGetState(0) == 3)
             titleSetSlotValueState2(0, 30);
-        if (FUN_002c2a04(0) == 2)
+        if (pairedAvailabilityGetState(0) == 2)
             return 0;
         if (state->fadeBits < 0x3f800000)
             state->fade += 0.033333335f;
@@ -87,7 +88,7 @@ s32 FUN_0023ed64(SplashAnimationState *state)
         state->wait = 300;
         slotSetRequest(0, 0x2d, 0xff);
     }
-    if (state->phase == 3 && FUN_002c2a04(0) == 3) {
+    if (state->phase == 3 && pairedAvailabilityGetState(0) == 3) {
         for (s32 index = 1; index < 7; ++index)
             asdTMTexTableReleaseNode(0x2d, index);
         asdTMTexTableFreeEntry(0x2d);

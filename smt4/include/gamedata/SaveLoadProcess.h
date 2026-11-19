@@ -24,7 +24,7 @@ void comWinSetText(const u8* text);
 } /* extern "C" */
 
 extern "C" {
-u8 FUN_002cedbc(void);
+u8 byte1IsZero(void);
 }
 
 extern "C" {

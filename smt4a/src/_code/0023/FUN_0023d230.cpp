@@ -125,7 +125,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     ;
     texDrawTableEntryAtStoredOrigin(2,0x14,0x43d,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0x6f)
     ;
-    temp_v17 = FUN_0014bd84(temp_v9);
+    temp_v17 = aocIndexValueOrDefault(temp_v9);
     if (temp_v17 != 0) {
       temp_v15 = 0xffffffff;
       temp_v3 = resourceRunOperationIfUnblocked(temp_v13);
@@ -227,7 +227,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v7 + 0x42e));
     FUN_0026ec00(*(short *)(temp_v7 + 8) + param_1,*(short *)(temp_v7 + 10) + param_2,temp_v14);
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x449));
-    temp_v17 = FUN_0014bd84(temp_v9);
+    temp_v17 = aocIndexValueOrDefault(temp_v9);
     if (temp_v17 != 0) {
       temp_v2 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v3 = listCursorGetRowIfUnblocked(temp_v13);

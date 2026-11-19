@@ -8,9 +8,9 @@ extern "C" {
 
 int FUN_00234330(...);
 int FUN_00234474(...);
-int FUN_002344d8(...);
+int textConvertToBoundedWide(...);
 int FUN_002345a4(...);
-int FUN_00234624(unsigned char [48], unsigned int, unsigned int);
+int table30GetEntryB(unsigned char [48], unsigned int, unsigned int); // declcheck: local (romwright prototype; the shared declaration in gamedata/GameDataAccess_Shard0050.h does not compile here: argument of type "unsigned char *" is incompatible with parameter of type "u8 **")
 int FUN_0026281c(...);
 int FUN_002b4b80(int, int);
 int wstrlenU16(...);
@@ -67,13 +67,13 @@ extern unsigned char LAB_00394160; /* 0x394160 */
 extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00234330. */
-extern unsigned int FUN_0023445c(int);
-extern unsigned int FUN_00234468(int);
+extern unsigned int halfPair48LowByteA(int);
+extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00234474. */
-/* Supplied declaration required: FUN_002344d8. */
+/* Supplied declaration required: textConvertToBoundedWide. */
 /* Supplied declaration required: FUN_002345a4. */
 extern int FUN_00234618(unsigned char *);
-/* Supplied declaration required: FUN_00234624. */
+/* Supplied declaration required: table30GetEntryB. */
 /* Supplied declaration required: FUN_0026281c. */
 extern int legacyResourceIdRemap(int);
 extern unsigned char objGetFlagBit0(int);
@@ -268,7 +268,7 @@ int FUN_0038c224(int param_1)
     temp_v36 = temp_v8 + 0x568;
     temp_v35 = temp_v8 + 0x528;
     do {
-      FUN_00234624(temp_v45,*(unsigned int *)(temp_v8 + 0x5a8),temp_v13);
+      table30GetEntryB(temp_v45,*(unsigned int *)(temp_v8 + 0x5a8),temp_v13);
       temp_v17 = temp_v45;
       FUN_003def38(&temp_v14,temp_v45);
       temp_v42 = temp_v14;
@@ -286,8 +286,8 @@ int FUN_0038c224(int param_1)
         if ((temp_v9 != 0) && (FUN_002c5e80(temp_v9,0,10), temp_v9 == 1)) {
           *(unsigned char *)(temp_v16 + 0x9b0) = 1;
         }
-        temp_v5 = FUN_00234468(temp_v8 + 0x28);
-        temp_v6 = FUN_0023445c(temp_v8 + 0x28);
+        temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00234330(&temp_v31,0,temp_v6,temp_v5);
         temp_v19 = temp_v31;
         uStack_1c0c = uStack_1acc;
@@ -310,12 +310,12 @@ int FUN_0038c224(int param_1)
           temp_v9 = 0x38c7a4;
         }
         temp_v3 = temp_v8;
-        FUN_002344d8(temp_v8,temp_v16,0x40,temp_v9);
+        textConvertToBoundedWide(temp_v8,temp_v16,0x40,temp_v9);
         if (temp_v3 < 0) {
           return temp_v3;
         }
-        temp_v5 = FUN_00234468(temp_v8 + 0x28);
-        temp_v6 = FUN_0023445c(temp_v8 + 0x28);
+        temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00234330(&temp_v27,2,temp_v6,temp_v5);
         temp_v19 = temp_v27;
         uStack_1c0c = uStack_1b4c;
@@ -338,13 +338,13 @@ int FUN_0038c224(int param_1)
           temp_v9 = 0x38c7a4;
         }
         temp_v3 = temp_v8;
-        FUN_002344d8(temp_v8,temp_v16 + 0x80,0x80,temp_v9);
+        textConvertToBoundedWide(temp_v8,temp_v16 + 0x80,0x80,temp_v9);
         if (temp_v3 < 0) {
           return temp_v3;
         }
         memClear(asStack_858,0x800);
-        temp_v5 = FUN_00234468(temp_v8 + 0x28);
-        temp_v6 = FUN_0023445c(temp_v8 + 0x28);
+        temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00234330(&temp_v29,3,temp_v6,temp_v5);
         temp_v23 = temp_v29;
         uStack_1bcc = uStack_1b0c;
@@ -367,7 +367,7 @@ int FUN_0038c224(int param_1)
           temp_v9 = 0x38c7a4;
         }
         temp_v3 = temp_v8;
-        FUN_002344d8(temp_v8,asStack_858,0x400,temp_v9);
+        textConvertToBoundedWide(temp_v8,asStack_858,0x400,temp_v9);
         if (temp_v3 < 0) {
           return temp_v3;
         }
@@ -427,8 +427,8 @@ int FUN_0038c224(int param_1)
         *(unsigned char *)(temp_v9 + 0x182) = 0xff;
         *(unsigned char *)(temp_v9 + 0x183) = 0;
         *(unsigned char *)(temp_v9 + 0x180) = 0xff;
-        temp_v5 = FUN_00234468(temp_v8 + 0x28);
-        temp_v6 = FUN_0023445c(temp_v8 + 0x28);
+        temp_v5 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00234330(&temp_v19,5,temp_v6,temp_v5);
         temp_v25 = temp_v19;
         uStack_1b8c = uStack_1c0c;

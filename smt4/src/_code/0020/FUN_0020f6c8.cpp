@@ -7,7 +7,7 @@
 extern "C" {
 
 int __hardfp_atan2f(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int FUN_002ba1e0(...);
 int renderCtxSelectTexture(...);
@@ -74,7 +74,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: __hardfp_atan2f. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: renderCtxSelectTexture. */
@@ -180,7 +180,7 @@ void FUN_0020f6c8(void)
     mathRemPio2f();
     temp_v13 = temp_v13 + temp_v17 * temp_v16;
     temp_v18 = *(float *)(g_mapCamera + 0x18) * temp_v18;
-    FUN_00282390();
+    libm_cosf();
     temp_v14 = temp_v14 + temp_v18 * temp_v16;
     temp_v15 = temp_v15 + 400.0f;
     temp_v18 = DAT_00447a84;
@@ -200,7 +200,7 @@ void FUN_0020f6c8(void)
       temp_v9 = 50.0f;
       temp_v13 = temp_v13 + temp_v17 * 50.0f;
       temp_v18 = (*(float *)(g_mapCamera + 0x18) + temp_v10) * temp_v18;
-      FUN_00282390();
+      libm_cosf();
       temp_v14 = temp_v14 + temp_v18 * temp_v9;
       temp_v15 = temp_v15 + temp_v16;
       temp_v18 = DAT_00447a84;
@@ -217,7 +217,7 @@ void FUN_0020f6c8(void)
       temp_v9 = 30.0f;
       temp_v13 = temp_v13 + temp_v16 * 30.0f;
       temp_v18 = (*(float *)(g_mapCamera + 0x18) + temp_v10) * temp_v18;
-      FUN_00282390();
+      libm_cosf();
       temp_v14 = temp_v14 + temp_v18 * temp_v9;
       temp_v15 = temp_v15 + 150.0f;
       temp_v18 = DAT_00447a84;

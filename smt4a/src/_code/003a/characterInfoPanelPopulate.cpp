@@ -128,7 +128,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     panel->raceWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
     for (s32 slot = 0; slot < 8; ++slot) {
         if (record->skills[slot] && record->owner) {
-            textExpandGlyphsToBuffer(reinterpret_cast<const char *>(FUN_0014bd84(record->skills[slot])), buffer, 0);
+            textExpandGlyphsToBuffer(reinterpret_cast<const char *>(aocIndexValueOrDefault(record->skills[slot])), buffer, 0);
             asdTextFormatStream(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
         } else {

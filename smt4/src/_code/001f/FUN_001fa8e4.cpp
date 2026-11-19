@@ -24,7 +24,7 @@ int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int __hardfp_atan2f(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
@@ -71,7 +71,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: __hardfp_atan2f. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
@@ -328,7 +328,7 @@ void FUN_001fa8e4(void)
       *(float *)(g_lmapScene + 0x28) =
            *(float *)(g_lmapScene + 0x28) + temp_v13 * (float)((unsigned long long)temp_v16 >> 0x20);
       temp_v12 = *(float *)(temp_v8 + 0x50) * temp_v12;
-      FUN_00282390();
+      libm_cosf();
       temp_v8 = g_lmapScene;
       *(float *)(g_lmapScene + 0x30) =
            *(float *)(g_lmapScene + 0x30) + temp_v12 * (float)((unsigned long long)temp_v16 >> 0x20);

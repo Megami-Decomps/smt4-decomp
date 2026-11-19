@@ -5,13 +5,12 @@
 #include "code/Code0037.h"
 #include "code/Code003a.h"
 #include "code/Code002c_Smt4a.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 void messageSetMode(s32 mode);
 void placeWinStartText(const u8 *name);
 void messageBannerRestartOrClear(void);
-void FUN_003c1060(void);
-void FUN_003c3e14(void);
 
 s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
@@ -37,7 +36,7 @@ void questInteractionChooseEntry(QuestInteraction *object)
         gameFlagSetValue(0x586, 1, 1);
     }
     if ((specialAvailable & ~announced) != 0 && object->interactive != 0) {
-        FUN_003c3e14();
+        messageMainClearBannerRequest();
         messageSetMode(1);
         pickObjStart(object, "qc_total_quest_ann");
         object->scriptActive = 1;
@@ -46,7 +45,7 @@ void questInteractionChooseEntry(QuestInteraction *object)
         return;
     }
     if (activeQuest > 0 && specialAvailable == 0 && object->interactive != 0) {
-        FUN_003c3e14();
+        messageMainClearBannerRequest();
         messageSetMode(1);
         pickObjStart(object, "qc_total_quest");
         object->scriptActive = 1;
@@ -57,7 +56,7 @@ void questInteractionChooseEntry(QuestInteraction *object)
     Entry40 *entry = dataTable28Type0GetEntry(reinterpret_cast<u32>(&object->entryToken), object->kind);
     placeWinStartText(entry->data);
     if (object->interactive != 0) {
-        FUN_003c1060();
+        messageMainRequestBanner();
         pickObjStart(object, "qc_confirm");
         object->state = 6;
         object->counter = 0;

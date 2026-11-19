@@ -45,7 +45,6 @@ void FUN_0035dbd4(u32 value);
 s32 FUN_0035db94(void);
 void FUN_0021b274(s32 mode, s32 image, u32 frame);
 void FUN_003d386c(s32 useSelector);
-u8 FUN_003da8f4(s32 group, s32 index);
 s32 FUN_003df57c(u32 id, s32 useSkillRank);
 u32 FUN_002684d0(s32 skillId, s32 target);
 void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags);
@@ -92,7 +91,7 @@ static __inline void campPaySkillCost(CampStateA *camp, s32 row)
 /* Shows the help of the menu entry the cursor is on. */
 static __inline void campRefreshEntryHelp(CampStateA *camp)
 {
-    campShowSelectedEntryHelp(FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid)));
+    campShowSelectedEntryHelp(dataTable15GetUnlockedEntryId(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid)));
 }
 
 /* Whether the skill's user can act: the player must not be down; a demon must exist, have neither ailment

@@ -2,6 +2,7 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "code/Code0029.h"
 #include "gamedata/GameDataAccess_VariantA.h"
+#include "code/Code001b.h"
 
 struct ActiveFlagEntrySlotView {
     u16 id;
@@ -30,7 +31,7 @@ u32 FUN_0028eeb8(u32 id)
     if (!(entry->flags & 1) && id < 0x15e)
         return 0;
     s32 selectionKind = table1bOr1cGetRecordValue(id);
-    if (!FUN_00298f88(id) && selectionKind && block->prefix.selectedEntryIndex)
+    if (!dataTable1bOr1cRecordHasFlag1(id) && selectionKind && block->prefix.selectedEntryIndex)
         return 0;
     entry->flags = (entry->flags & ~4) | 2;
     if (entry->value)
@@ -39,7 +40,7 @@ u32 FUN_0028eeb8(u32 id)
         entry->flags &= ~0x40;
     entry->flags &= ~0x80;
     entry->secondaryFlags &= ~5;
-    if (FUN_00298f88(id)) {
+    if (dataTable1bOr1cRecordHasFlag1(id)) {
         if (selectionKind == 1) {
             for (s32 slot = 0; slot < 4; ++slot) {
                 if (!block->slots[slot].id) {

@@ -84,7 +84,7 @@ extern int slotIsActive(unsigned int);
 extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
 extern int ifTouchGetSelectionMode(void);
-extern unsigned short FUN_001643b4(unsigned int, unsigned int);
+extern unsigned short ifTouchRegionAddRequested(unsigned int, unsigned int);
 extern int lmapMainIsRunning(void);
 extern int jobGetWork(void);
 extern int padButtonRepeat(unsigned int);
@@ -901,9 +901,9 @@ LAB_0014cbbc:
               FUN_00167458(temp_v2 + 0x1b4,0);
               if (*(char *)(temp_v2 + 0x23e) != '\0') {
                 *(unsigned char *)(temp_v2 + 8) = 1;
-                temp_v1 = FUN_001643b4(0x2f,0x98);
+                temp_v1 = ifTouchRegionAddRequested(0x2f,0x98);
                 *(unsigned short *)(temp_v2 + 100) = temp_v1;
-                temp_v1 = FUN_001643b4(0x2f,0x99);
+                temp_v1 = ifTouchRegionAddRequested(0x2f,0x99);
                 *(unsigned short *)(temp_v2 + 0x66) = temp_v1;
                 *(unsigned int *)(temp_v2 + 0x70) = 0;
               }
@@ -1036,28 +1036,28 @@ LAB_0014d5c4:
           if (temp_v8 != 2) {
             if (temp_v8 != 3) {
               if (temp_v8 != 4) goto LAB_0014dec8;
-              temp_v1 = FUN_001643b4(8,0xb8);
+              temp_v1 = ifTouchRegionAddRequested(8,0xb8);
               *(unsigned short *)(temp_v2 + 100) = temp_v1;
-              temp_v1 = FUN_001643b4(8,0xb9);
+              temp_v1 = ifTouchRegionAddRequested(8,0xb9);
               *(unsigned short *)(temp_v2 + 0x66) = temp_v1;
-              temp_v1 = FUN_001643b4(8,0xba);
+              temp_v1 = ifTouchRegionAddRequested(8,0xba);
               *(unsigned short *)(temp_v2 + 0x68) = temp_v1;
-              temp_v1 = FUN_001643b4(8,0xbb);
+              temp_v1 = ifTouchRegionAddRequested(8,0xbb);
               *(unsigned short *)(temp_v2 + 0x6a) = temp_v1;
             }
             else {
-              temp_v1 = FUN_001643b4(8,0xa2);
+              temp_v1 = ifTouchRegionAddRequested(8,0xa2);
               *(unsigned short *)(temp_v2 + 100) = temp_v1;
-              temp_v1 = FUN_001643b4(8,0xa3);
+              temp_v1 = ifTouchRegionAddRequested(8,0xa3);
               *(unsigned short *)(temp_v2 + 0x66) = temp_v1;
-              temp_v1 = FUN_001643b4(8,0xa4);
+              temp_v1 = ifTouchRegionAddRequested(8,0xa4);
               *(unsigned short *)(temp_v2 + 0x68) = temp_v1;
             }
           }
           else {
-            temp_v1 = FUN_001643b4(8,0xac);
+            temp_v1 = ifTouchRegionAddRequested(8,0xac);
             *(unsigned short *)(temp_v2 + 100) = temp_v1;
-            temp_v1 = FUN_001643b4(8,0xad);
+            temp_v1 = ifTouchRegionAddRequested(8,0xad);
             *(unsigned short *)(temp_v2 + 0x66) = temp_v1;
           }
         }

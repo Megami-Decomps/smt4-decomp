@@ -12,7 +12,7 @@ extern BtlEffectOwner *DAT_00435d18;
 extern const char DAT_00400428[];
 extern const char DAT_00400434[];
 s32 scrGetArg(s32 index);
-s32 FUN_0027e3b8(u32 event);
+s32 isEntryUsable(u32 event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "u32" is incompatible with parameter of type "int *")
 s32 FUN_0024550c(BtlEffectOwner *owner);
 void __ARM_common_memcpy4_9(char *destination, const char *source);
 void FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
@@ -23,7 +23,7 @@ u32 scrComm_Battle_PlayCommonEffect(void)
 {
     u32 value = scrGetArg(0);
     s32 effect = scrGetArg(1);
-    if (FUN_0027e3b8(g_btlEvent) && !FUN_0024550c(DAT_00435d18))
+    if (isEntryUsable(g_btlEvent) && !FUN_0024550c(DAT_00435d18))
         return 0;
     if (effect != 0) {
         {

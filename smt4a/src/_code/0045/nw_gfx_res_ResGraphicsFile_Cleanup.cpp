@@ -7,7 +7,7 @@ extern "C" {
 int runtimeDispatchObjectRelease(int *);
 int FUN_004516ec(int *);
 int FUN_00452d74(int *);
-int FUN_004679b0(int *);
+int nw_anim_res_ResAnim_Cleanup(int *);
 int nw_gfx_res_ResFog_Cleanup(int *);
 int nw_gfx_res_ResLight_Cleanup(int *);
 int nw_gfx_res_ResModel_Cleanup(int *);
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: runtimeDispatchObjectRelease. */
 /* Supplied declaration required: FUN_004516ec. */
 /* Supplied declaration required: FUN_00452d74. */
-/* Supplied declaration required: FUN_004679b0. */
+/* Supplied declaration required: nw_anim_res_ResAnim_Cleanup. */
 /* Supplied declaration required: nw_gfx_res_ResFog_Cleanup. */
 /* Supplied declaration required: nw_gfx_res_ResLight_Cleanup. */
 /* Supplied declaration required: nw_gfx_res_ResModel_Cleanup. */
@@ -81,7 +81,7 @@ void nw_gfx_res_ResGraphicsFile_Cleanup(int *param_1)
       temp_v1 = 0;
     }
     if (temp_v1 != 0) {
-      FUN_004679b0(&temp_v1);
+      nw_anim_res_ResAnim_Cleanup(&temp_v1);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x80);
@@ -106,7 +106,7 @@ void nw_gfx_res_ResGraphicsFile_Cleanup(int *param_1)
       temp_v1 = 0;
     }
     if (temp_v1 != 0) {
-      FUN_004679b0(&temp_v1);
+      nw_anim_res_ResAnim_Cleanup(&temp_v1);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x78);
@@ -131,7 +131,7 @@ void nw_gfx_res_ResGraphicsFile_Cleanup(int *param_1)
       temp_v1 = 0;
     }
     if (temp_v1 != 0) {
-      FUN_004679b0(&temp_v1);
+      nw_anim_res_ResAnim_Cleanup(&temp_v1);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x70);
@@ -156,7 +156,7 @@ void nw_gfx_res_ResGraphicsFile_Cleanup(int *param_1)
       temp_v1 = 0;
     }
     if (temp_v1 != 0) {
-      FUN_004679b0(&temp_v1);
+      nw_anim_res_ResAnim_Cleanup(&temp_v1);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x68);
@@ -181,7 +181,7 @@ void nw_gfx_res_ResGraphicsFile_Cleanup(int *param_1)
       temp_v1 = 0;
     }
     if (temp_v1 != 0) {
-      FUN_004679b0(&temp_v1);
+      nw_anim_res_ResAnim_Cleanup(&temp_v1);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x28);

@@ -7,9 +7,9 @@
 extern "C" {
 
 int surfaceCopy(AsdTexture *a, AsdTexture *b);
-u8 FUN_002bfadc(int arg, AsdTexture *unit);
+u8 gxCopyFramebufferToSurface(int arg, AsdTexture *unit);
 
-/* "CAMPCL" capture: once the CAMP effect is enabled and the left screen not yet captured, captures it into the left texture (FUN_002bfadc/surfaceCopy, then halves the texture) and marks it captured. */
+/* "CAMPCL" capture: once the CAMP effect is enabled and the left screen not yet captured, captures it into the left texture (gxCopyFramebufferToSurface/surfaceCopy, then halves the texture) and marks it captured. */
 u32 FUN_00109348(u32 job)
 {
     FrameTexWork *work = (FrameTexWork *)jobGetWork(job);
@@ -23,7 +23,7 @@ u32 FUN_00109348(u32 job)
     renderCtxSelectStereoLayout(g_titleScene);
     work->surfaceLeft->dimensions.width = 0x200;
     work->surfaceLeft->dimensions.height = 0x200;
-    work->campCaptureResult = FUN_002bfadc(0, work->surfaceLeft);
+    work->campCaptureResult = gxCopyFramebufferToSurface(0, work->surfaceLeft);
     surfaceCopy(work->surfaceLeft, work->surfaceLeft);
     work->surfaceLeft->dimensions.width >>= 1;
     work->surfaceLeft->dimensions.height >>= 1;

@@ -4,11 +4,12 @@
 #include "mikado/mikadoMain.h"
 #include <stddef.h>
 #include "game/GameState.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
 s32 bgmGetStateById(u32 id);
-s32 FUN_00287328(u32 id);
+s32 bgmResumeOrRequestTrack(u32 id);
 u16 rosterGetLeaderId(void);
 
 /* Selects the map music from the area, or a story override, and starts it unless it is already
@@ -50,6 +51,6 @@ void lmapUpdateMapBgm(void)
     } else if (state == 1 || state == 2) {
         return;
     }
-    FUN_00287328(g_gameState.bgmId);
+    bgmResumeOrRequestTrack(g_gameState.bgmId);
 }
 }

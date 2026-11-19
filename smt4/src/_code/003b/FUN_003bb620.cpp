@@ -4,6 +4,7 @@
 #include "shard/S1ListMenu.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "classes/Obj55ca08.h"
+#include "code/Code004d.h"
 
 // The idle counter extends the recovered widget prefix. The other views share its existing bytes.
 struct SelectionTextureWork {
@@ -15,9 +16,8 @@ typedef char SelectionTextureWorkLayoutCheck[
 
 extern "C" {
 s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *values);
-void FUN_00233410(FlaggedValueHolder *values);
-s32 FUN_002333f0(Obj55ca08 *selector);
-s32 stateCounterBelowLimit(FlaggedValueHolder *values, s32 offset);
+void sub10OwnerStart(FlaggedValueHolder *values); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "selectOwnerGetSelected" has "C" linkage)
+s32 selectOwnerGetSelected(Obj55ca08 *selector); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: more than one instance of overloaded function "sub10OwnerStart" has "C" linkage)
 s32 FUN_0027ee9c();
 s8 uiSubStateGetReady(const Obj55ca08 *subState);
 void asdTMTexTableLoadEntryAsync(u32 table, u32 key);
@@ -31,7 +31,7 @@ u32 FUN_003bb620(SelectionTextureWork *work)
     s32 previous = flaggedValueHolderGetTotal(values);
     if (list->cursorMarked == 0) {
         selector->Obj55ca08::synchronize(reinterpret_cast<const u8 *>(work));
-        FUN_00233410(values);
+        sub10OwnerStart(values);
     }
     if (flaggedValueHolderGetTotal(values) != previous) {
         work->idleFrames = 0;
@@ -69,7 +69,7 @@ u32 FUN_003bb620(SelectionTextureWork *work)
     }
     if (list->cursorMarked == 0) {
         if (uiSubStateGetReady(selector) != 0 &&
-            stateCounterBelowLimit(values, FUN_002333f0(selector)) != 0) {
+            stateCounterBelowLimit(values, selectOwnerGetSelected(selector)) != 0) {
             result = 1;
         }
         if (FUN_0027ee9c() != 0) {

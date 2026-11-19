@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-extern unsigned int FUN_001948f4(unsigned int);
+extern unsigned int nw_snd_internal_SoundArchiveFile_FileHeader_GetFileBlockOffset(unsigned int);
 
 
 void FUN_001739d4(int param_1,unsigned int param_2)
@@ -22,7 +22,7 @@ void FUN_001739d4(int param_1,unsigned int param_2)
   unsigned int temp_v0;
   
   *(unsigned int *)(param_1 + 4) = param_2;
-  temp_v0 = FUN_001948f4(param_2);
+  temp_v0 = nw_snd_internal_SoundArchiveFile_FileHeader_GetFileBlockOffset(param_2);
   *(unsigned int *)(param_1 + 0x10c) = temp_v0;
   nn_os_CriticalSection_Initialize(param_1 + 0x110);
   return;

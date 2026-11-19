@@ -23,7 +23,7 @@ extern unsigned char g_asdSound; /* 0x4e1f68 */
 
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int FUN_00377174(int);
-extern int FUN_003771e0(unsigned char *);
+extern int installVtbl55BDE0(unsigned char *);
 extern int FUN_003773d4(int);
 extern int FUN_00378a54(int);
 extern int nw_snd_Sound3DListener_Sound3DListener_sub_object(int);
@@ -39,7 +39,7 @@ void FUN_003f1cb8(unsigned int param_1,unsigned int param_2,unsigned int *param_
   param_3[1] = param_2;
   DAT_00464ff8 = 0;
   DAT_00464ffc = 0;
-  temp_v0 = FUN_003771e0(&g_asdSound);
+  temp_v0 = installVtbl55BDE0(&g_asdSound);
   temp_v0 = FUN_00378a54(temp_v0 + 0x184);
   temp_v0 = FUN_003773d4(temp_v0 + 0xc0);
   temp_v0 = temp_v0 + 0x278;

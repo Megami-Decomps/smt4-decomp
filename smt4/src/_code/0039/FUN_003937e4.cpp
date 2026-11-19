@@ -84,7 +84,7 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_002cc22c(void);
+extern unsigned int flagsAt6CGet(void);
 extern int asdSoundGetOption0(void);
 /* Supplied declaration required: renderStatePush. */
 extern int asdSoundGetOption3(void);
@@ -186,7 +186,7 @@ int FUN_003937e4(unsigned int param_1,int param_2,unsigned int *param_3)
     temp_v19[temp_v4 * 4 + 3] = temp_v8;
     temp_v4 = temp_v6;
   } while (temp_v6 < 4);
-  temp_v21 = FUN_002cc22c();
+  temp_v21 = flagsAt6CGet();
   if (temp_v9 != 0) {
     temp_v8 = 0.0f;
     if (((((*(unsigned char *)(temp_v9 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) ||

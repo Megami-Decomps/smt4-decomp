@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match2_HelpResources.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystem.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);
@@ -33,7 +34,7 @@ void btlTalkBustUpSetDemonTexture(s32 devilId, s32 asynchronous)
         bustUp->stateCounter = 0;
     } else {
         if (aocRunByName(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureNode, 1) != 0)
-            FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureNode, 0x10000);
+            aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureNode, 0x10000);
         else
             asdTMTexTablePrepareNodeImage(0x18, bustUp->textureNode);
 

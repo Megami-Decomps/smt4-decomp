@@ -2,10 +2,10 @@
 #include "map/LmapGlobals.h"
 #include "game/GameStateA.h"
 #include "gamedata/MapSaveBlockA.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
-void FUN_00376fb8(s32 arg);
 void mapPlaceSet(s32 place, s32 arg1, s32 arg2);
 void gameFlagsLoadTable4cEntry(s32 id);
 
@@ -14,7 +14,7 @@ void gameFlagsLoadTable4cEntry(s32 id);
 u32 scrCommEnterPlaceAndSavePoint(void)
 {
     MapSaveBlockA *flags = gameFlagsGetBlock();
-    FUN_00376fb8(0x65);
+    mapSetDepartureIndex(0x65);
     mapPlaceSet(0x18, 1, 0);
     gameFlagsLoadTable4cEntry(1);
     g_gameState.progressEnabled = 1;

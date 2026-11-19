@@ -17,7 +17,7 @@ int FUN_002533f4(...);
 int effectSpawnTypeTen(void);
 int vec4Forward(...);
 int FUN_0027eee0(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathAbsHeadingErrorToPoint(void);
 int mathGetShortestAngleDelta(void);
@@ -103,7 +103,7 @@ extern int FUN_00256550(unsigned int);
 extern int spriteTemplateGetPreferredDevilId(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: __hardfp_atan2f. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002879dc. */
@@ -1041,7 +1041,7 @@ LAB_0020a4b4:
           mathRemPio2f();
           temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0xe8);
           temp_v20 = *(float *)(temp_v3 + 0x60) * temp_v20;
-          FUN_00282390();
+          libm_cosf();
           temp_v32 = temp_v32 + temp_v20 * *(float *)(temp_v3 + 0xe8);
         }
         temp_v25 = (unsigned long long)(unsigned int)temp_v18;
@@ -1197,7 +1197,7 @@ LAB_0020a9e0:
                   mathRemPio2f();
                   temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0xe8);
                   temp_v20 = *(float *)(temp_v3 + 0x60) * temp_v20;
-                  FUN_00282390();
+                  libm_cosf();
                   temp_v32 = temp_v32 + temp_v20 * *(float *)(temp_v3 + 0xe8);
                 }
                 temp_v6 = 0;
@@ -1681,7 +1681,7 @@ LAB_0020b4ec:
             mathRemPio2f();
             temp_v27 = 100.0f;
             temp_v33 = temp_v33 + temp_v22 * 100.0f;
-            FUN_00282390();
+            libm_cosf();
             temp_v35 = temp_v35 + temp_v11 * temp_v27;
             temp_v40 = temp_v40 + temp_v20;
             temp_v34 = temp_v34 + temp_v20;
@@ -1792,7 +1792,7 @@ LAB_0020b4ec:
         mathRemPio2f();
         temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0x108);
         temp_v20 = *(float *)(temp_v3 + 0x128) * temp_v20;
-        FUN_00282390();
+        libm_cosf();
         temp_v6 = 0;
         temp_v32 = temp_v32 + temp_v20 * *(float *)(temp_v3 + 0x108);
         do {
@@ -1992,7 +1992,7 @@ LAB_0020bd68:
               mathRemPio2f();
               temp_v30 = temp_v30 + temp_v22 * *(float *)(temp_v3 + 0x108);
               temp_v20 = *(float *)(temp_v3 + 0x128) * temp_v20;
-              FUN_00282390();
+              libm_cosf();
               temp_v6 = 0;
               temp_v32 = temp_v32 + temp_v20 * *(float *)(temp_v3 + 0x108);
               do {
@@ -2096,7 +2096,7 @@ LAB_0020c014:
             temp_v26 = 100.0f;
             temp_v39 = temp_v39 + temp_v11 * 100.0f;
             temp_v11 = *(float *)(temp_v3 + 0x104) * temp_v27;
-            FUN_00282390();
+            libm_cosf();
             temp_v35 = temp_v22;
             temp_v41 = temp_v41 + temp_v11 * temp_v26;
             temp_v40 = temp_v40 + 25.0f;
@@ -2108,7 +2108,7 @@ LAB_0020c014:
               mathRemPio2f();
               temp_v30 = temp_v30 + temp_v18 * *(float *)(temp_v3 + 0xe8);
               temp_v27 = *(float *)(temp_v3 + 0x60) * temp_v27;
-              FUN_00282390();
+              libm_cosf();
               temp_v32 = temp_v32 + temp_v27 * *(float *)(temp_v3 + 0xe8);
               temp_v31 = temp_v31 - 5.0f;
               FUN_0025363c(&temp_v30,&temp_v42,0);

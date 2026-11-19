@@ -53,7 +53,7 @@ unsigned int FUN_002f4540(void)
       goto code_r0x002f46b8;
     case 2:
       *(unsigned char *)(iVar2 + 0x5f5) = 1;
-      FUN_003ba560(*(unsigned int *)(iVar2 + 0x5ec),0);
+      modelSlotAttachChild(*(unsigned int *)(iVar2 + 0x5ec),0);
       iVar5 = *(int *)(*(int *)(iVar2 + 0x5ec) + 4);
       if (iVar5 != 0) {
         uVar8 = *(unsigned int *)(iVar5 + 0x44);

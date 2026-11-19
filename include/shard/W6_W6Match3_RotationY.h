@@ -12,7 +12,7 @@ void matrixSetRotationY(f32 radians);
 extern "C" {
 #endif
 
-void*FUN_00244d98(int index);
+void*effApplyModelLight(int index);
 
 #ifdef __cplusplus
 }

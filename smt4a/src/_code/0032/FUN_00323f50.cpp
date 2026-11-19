@@ -12,7 +12,7 @@ int FUN_001a1ee0(...);
 int FUN_001b4a00(...);
 int nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(...);
 int FUN_001b63b0(...);
-int FUN_001bc460(...);
+int gfxQuaternionWorkspaceBuildMatrix(...);
 int renderGetCameraViewMatrix(...);
 int FUN_002371b0(...);
 int gfxResolveTimedTextureFrame(...);
@@ -119,7 +119,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: FUN_001b4a00. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20. */
 /* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_001bc460. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: renderGetCameraViewMatrix. */
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gfxResolveTimedTextureFrame. */
@@ -238,7 +238,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
       DAT_006472e0 = fStack_7c;
       DAT_006472e4 = fStack_78;
       DAT_006472e8 = fStack_74;
-      FUN_001bc460();
+      gfxQuaternionWorkspaceBuildMatrix();
       DAT_0064734c = temp_v20;
       if (0 < temp_v3) {
         pfVar7 = (float *)&g_effectRingScratchColor;

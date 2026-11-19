@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00237a94(...);
 int FUN_00237adc(unsigned int *******, int *, int *, int *);
-int FUN_00237d64(...);
+int variantSetPlain(...);
 int FUN_00237d78(void);
 int FUN_00238170(int, unsigned int *******, int);
 int FUN_00238aac(int *, int);
@@ -31,7 +31,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00237a94. */
 /* Supplied declaration required: FUN_00237adc. */
-/* Supplied declaration required: FUN_00237d64. */
+/* Supplied declaration required: variantSetPlain. */
 /* Supplied declaration required: FUN_00237d78. */
 /* Supplied declaration required: FUN_00238170. */
 /* Supplied declaration required: FUN_00238aac. */
@@ -118,7 +118,7 @@ unsigned int FUN_0035cb7c(int *param_1,int *param_2,int *param_3,int *param_4)
         *piVar4 = (int)piVar2;
         *(int **)(*piVar2 + 4) = piVar2;
         temp_v2 = temp_v7;
-        FUN_00237d64(piVar2 + 2,&temp_v2);
+        variantSetPlain(piVar2 + 2,&temp_v2);
         temp_v12 = temp_v7;
         temp_v2 = *param_4;
         FUN_0035e9c0(temp_v11,&temp_v4,&temp_v2);
@@ -140,7 +140,7 @@ unsigned int FUN_0035cb7c(int *param_1,int *param_2,int *param_3,int *param_4)
     FUN_00237a94(&temp_v9,temp_v0 + 8);
     if (temp_v9 != 0) {
       temp_v8[0] = temp_v12;
-      FUN_00237d64(temp_v9 + 8,temp_v8);
+      variantSetPlain(temp_v9 + 8,temp_v8);
       *temp_v13 = temp_v0;
       *param_1 = *(int *)(*param_1 + 4);
       return 0;
@@ -150,7 +150,7 @@ unsigned int FUN_0035cb7c(int *param_1,int *param_2,int *param_3,int *param_4)
     FUN_00237a94(temp_v3,*param_4 + 8);
     if (temp_v3[0] != 0) {
       temp_v2 = *param_3;
-      FUN_00237d64(temp_v3[0] + 8,&temp_v2);
+      variantSetPlain(temp_v3[0] + 8,&temp_v2);
       *temp_v13 = *param_3;
       *param_1 = *(int *)(*param_1 + 4);
       return 0;

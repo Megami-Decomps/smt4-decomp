@@ -6,7 +6,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
-int FUN_001bc460(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int matrixGetTranslation(float *);
 int FUN_0037ee54(void);
 int FUN_0050d7ac(void);
@@ -92,7 +92,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001a1ee0. */
 extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_001bc460. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: matrixGetTranslation. */
 /* Supplied declaration required: FUN_0037ee54. */
 /* Supplied declaration required: FUN_0050d7ac. */
@@ -188,7 +188,7 @@ void FUN_003b4294(fn_003b4294_arg0 *param_1)
       DAT_006472e0 = param_1->field_0x14;
       DAT_006472e4 = param_1->field_0x18;
       DAT_006472e8 = param_1->field_0x1c;
-      FUN_001bc460();
+      gfxQuaternionWorkspaceBuildMatrix();
       DAT_006472dc = DAT_005c1110;
       DAT_006472e0 = DAT_005c1114;
       DAT_006472e4 = DAT_005c1118;

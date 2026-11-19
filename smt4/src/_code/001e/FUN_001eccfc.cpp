@@ -9,13 +9,13 @@ int messageSlotSet(int a);
 int scrCommMessageSetMode(...);
 int commonBgCreate(void);
 extern int scrGetCommandFrame(void);
-extern int FUN_002ed5bc(void);
+extern int ref208StateIs7(void);
 
 u32 FUN_001eccfc(void)
 {
     scrCommMessageSetMode(1);
     if (scrGetCommandFrame() != 0) {
-        if (FUN_002ed5bc() != 0) {
+        if (ref208StateIs7() != 0) {
             FUN_002123dc();
             scrCommMessageSetMode(0xffffffff);
             messageSlotSet(0);

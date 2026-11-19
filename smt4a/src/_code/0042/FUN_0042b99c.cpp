@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0042c278(int *);
+int nn_fs_ipc_Directory_Close(int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern int *DAT_0062d3e8; /* 0x62d3e8 */
 extern int DAT_0062d3f0; /* 0x62d3f0 */
 extern unsigned int DAT_0062d3f4; /* 0x62d3f4 */
 
-/* Supplied declaration required: FUN_0042c278. */
+/* Supplied declaration required: nn_fs_ipc_Directory_Close. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -31,7 +31,7 @@ void FUN_0042b99c(int *param_1,unsigned int param_2,unsigned int param_3,int par
   temp_v1 = param_1[1];
   temp_v0 = param_4;
   if (temp_v1 != 0) {
-    FUN_0042c278(&temp_v1);
+    nn_fs_ipc_Directory_Close(&temp_v1);
     temp_v0 = temp_v1;
   }
   temp_v1 = temp_v0;

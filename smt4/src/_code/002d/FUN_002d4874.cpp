@@ -55,7 +55,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -113,7 +113,7 @@ void FUN_002d4874(void)
                 mapDepartSpawnPlayerEffect(0xffffffff);
                 SoundActorQueuePosition position;
                 position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
-                position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+                position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
                 position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
                 soundActorStartOnFreeChannel(0x1000240, position);
               }
@@ -158,7 +158,7 @@ void FUN_002d4874(void)
               *(float *)(temp_v0 + 0x2c) = nearestPoint.y - 250.0f;
               *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((*(float *)(temp_v0 + 0x4c) + 180.0f) * 0.017453292f) * 25.0f;
               temp_v0 = g_lmapScene;
-              *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390((*(float *)(temp_v0 + 0x4c) + 180.0f) * 0.017453292f) * 25.0f;
+              *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf((*(float *)(temp_v0 + 0x4c) + 180.0f) * 0.017453292f) * 25.0f;
             }
             else {
               temp_v0 = padIsButtonPressed(6);
@@ -202,7 +202,7 @@ void FUN_002d4874(void)
         *(unsigned int *)(temp_v0 + 0x2c) = temp_v6;
         *(unsigned int *)(temp_v0 + 0x30) = temp_v3;
         *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(g_gameState.heading * 0.017453292f) * 25.0f;
-        *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(g_gameState.heading * 0.017453292f) * 25.0f;
+        *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf(g_gameState.heading * 0.017453292f) * 25.0f;
         temp_v0 = g_lmapScene;
         *(unsigned int *)(temp_v0 + 0x50) = (*(unsigned int *)&g_gameState.overviewHeading);
         FUN_0027fc14(0xd);

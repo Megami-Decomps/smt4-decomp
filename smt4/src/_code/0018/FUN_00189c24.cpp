@@ -2,6 +2,7 @@
  * (this build jumps past it: four branch targets), and forms the report list's address in r0 before copying it to r6
  * (this build forms it in r6). `listed` is declared at the top (C89 style); declared in the loop the
  * function is 304 lines off, so the remaining difference may be the original's declaration placement. */
+#include "code/Code001b.h"
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "quest_center/QuestRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -22,7 +23,6 @@ extern "C" {
 void rt_memclr(void *destination, u32 size);
 s32 questReadRuntimeFlag(u32 id, u32 flag);
 s32 gameFlagIsSet(u32 id);
-u32 FUN_00298f88(u32 id);
 s32 FUN_00298e40(u32 id, s32 index, QuestObjectiveProgress *progress);
 s32 questIsCompleted(u32 id);
 s32 FUN_00298e00(u32 id);
@@ -75,7 +75,7 @@ void FUN_00189c24(void)
             if (gameFlagIsSet(7) != 0 && gameFlagIsSet(0x214) == 0)
                 continue;
         }
-        if (FUN_00298f88(id) != 0) {
+        if (dataTable1bOr1cRecordHasFlag1(id) != 0) {
             quest->cursor.alternate.ids[reportCount++] = id;
             continue;
         }

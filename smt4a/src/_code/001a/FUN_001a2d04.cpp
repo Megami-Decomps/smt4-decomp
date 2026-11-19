@@ -7,7 +7,7 @@ extern "C" {
 int sysReportCheckFailure(int, int);
 int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_00170390(int);
-int FUN_001703b0(int);
+int sleepQueryAnswer(int);
 int FUN_001703e8(...);
 int FUN_00170e58(void);
 int FUN_00170ebc(int);
@@ -26,7 +26,7 @@ extern unsigned char DAT_005891b0; /* 0x5891b0 */
 /* Supplied declaration required: sysReportCheckFailure. */
 /* Supplied declaration required: nn_gxlow_CTR_SaveVramSysArea. */
 /* Supplied declaration required: FUN_00170390. */
-/* Supplied declaration required: FUN_001703b0. */
+/* Supplied declaration required: sleepQueryAnswer. */
 /* Supplied declaration required: FUN_001703e8. */
 /* Supplied declaration required: FUN_00170e58. */
 /* Supplied declaration required: FUN_00170ebc. */
@@ -60,7 +60,7 @@ int FUN_001a2d04(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     FUN_00170ebc(0);
     temp_v0 = FUN_0018b63c();
     if (temp_v0 != 0) {
-      FUN_001703b0(1);
+      sleepQueryAnswer(1);
     }
     while( 1 ) {
       nn_applet_CTR_detail_OpenSession();
@@ -78,7 +78,7 @@ int FUN_001a2d04(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     else {
       temp_v0 = FUN_0018b63c();
       if (temp_v0 != 0) {
-        FUN_001703b0(1);
+        sleepQueryAnswer(1);
       }
     }
     if (temp_v1 < 0) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: encounter-state dispatcher branch tails and state-field stores differ from retail. */
 #include "common.h"
 #include "battle/BtlGlobals.h"
+#include "code/Code0013.h"
 
 struct BattleEncounterQuery {
     u32 step; // 0x00
@@ -28,10 +29,9 @@ extern "C" {
 extern void *g_btlEvent;
 extern void *g_btlActionReflect;
 extern void *DAT_00435d18;
-s32 FUN_0027e3b8(void *event);
+s32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 s32 btlEventSelectTrigger(void *event, u32 kind, s32 index, u32 flags);
 void frameTexApplyMode(u32 mode);
-s32 FUN_002c2a04(u32 channel);
 void FUN_002c29d8(u32 channel, u32 frames, u32 volume);
 void FUN_0027e38c(void *event);
 u32 FUN_00334140(BattleEncounterQuery *query, BattleEncounterContext *context);
@@ -63,13 +63,13 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
 {
     switch (query->step) {
     case 0:
-        if (FUN_0027e3b8(g_btlEvent))
+        if (isEntryUsable(g_btlEvent))
             return 0;
         if (btlEventSelectTrigger(g_btlEvent, 9, -1, 0)) {
             if (!(context->flags & 0x40000000)) {
                 frameTexApplyMode(2);
                 context->flags |= 0x40000000;
-                if (FUN_002c2a04(1) == 3)
+                if (pairedAvailabilityGetState(1) == 3)
                     FUN_002c29d8(1, 10, 255);
             }
             FUN_0027e38c(g_btlEvent);
@@ -77,7 +77,7 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
         query->step = 1;
         // Fall through to the trigger's wait phase.
     case 1:
-        if (FUN_0027e3b8(g_btlEvent))
+        if (isEntryUsable(g_btlEvent))
             return 0;
         query->step = 2;
         return FUN_00334140(query, context);
@@ -127,9 +127,9 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
     case 12:
         return FUN_0023fffc(query, context);
     case 13:
-        if (FUN_002c2a04(0) == 3)
+        if (pairedAvailabilityGetState(0) == 3)
             FUN_002c29d8(0, 10, 255);
-        if (FUN_002c2a04(1) == 3)
+        if (pairedAvailabilityGetState(1) == 3)
             FUN_002c29d8(1, 10, 255);
         if (!screenFadesAllReady())
             return 0;

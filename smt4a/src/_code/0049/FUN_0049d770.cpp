@@ -11,7 +11,7 @@ s32 gameFlagIsSet(u16 flag);
 void flagsAtSetBits01(s32 id);
 s32 FUN_0049ebf0(const void *left, const void *right);
 void gridNavigationConfigure(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 wrap, s32 alternateKeys);
-u16 FUN_001643b4(u32 group, s32 image);
+u16 ifTouchRegionAddRequested(u32 group, s32 image);
 void FUN_00202400(void);
 void FUN_0049d140(CallbackControllerWork *work, s32 state, s32 nextState);
 
@@ -44,12 +44,12 @@ void FUN_0049d770(CallbackControllerWork *work)
     for (s32 row = 0; row < 10; ++row) {
         if (work->catalog.availableCount <= row)
             break;
-        work->list.touchRows[row] = FUN_001643b4(51, row + 93);
+        work->list.touchRows[row] = ifTouchRegionAddRequested(51, row + 93);
         ++work->touchRegionCount;
     }
-    work->list.touchPrevious = FUN_001643b4(51, 88);
-    work->list.touchNext = FUN_001643b4(51, 89);
-    work->list.touchScroll = FUN_001643b4(51, 87);
+    work->list.touchPrevious = ifTouchRegionAddRequested(51, 88);
+    work->list.touchNext = ifTouchRegionAddRequested(51, 89);
+    work->list.touchScroll = ifTouchRegionAddRequested(51, 87);
     work->touchRegionCount += 3;
     FUN_00202400();
     FUN_0049d140(work, 1, 3);

@@ -3,7 +3,7 @@
  * FUN_001043c8 allocates it and registers one draw job per effect and screen ("HDR", "Zan",
  * "CAMP", two "ENCEFF" sets and a cross-fade set (Apocalypse names it "XFADE"), each with left/right capture (CL/CR) and draw (DL/DR)
  * callbacks); every callback receives this work from jobGetWork(). The capture callbacks copy the
- * frame buffer into a texture and record FUN_002bfadc's result and a per-screen "captured" flag,
+ * frame buffer into a texture and record gxCopyFramebufferToSurface's result and a per-screen "captured" flag,
  * which the draw callbacks wait for. Apocalypse's larger layout is FrameTexWorkA in
  * frame_tex/FrameTexA.h. */
 #ifndef FRAME_TEX_FRAMETEX_H

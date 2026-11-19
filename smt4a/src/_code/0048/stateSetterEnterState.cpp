@@ -8,7 +8,7 @@ void sysPlaySe(s32 sound);
 void __aeabi_memset4(void *destination, u32 size, u32 value);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void obj04Finish();
-u16 FUN_001643b4(u32 group, s32 sprite);
+u16 ifTouchRegionAddRequested(u32 group, s32 sprite);
 
 /* Rebuild touch regions on activation and finish the transition on either exit state. */
 void stateSetterEnterState(void *object, s32 nextState)
@@ -42,11 +42,11 @@ void stateSetterEnterState(void *object, s32 nextState)
             entry->regionCount = 0;
         }
         for (s32 i = 0; i < 90; ++i) {
-            entry->regions[i + 3] = FUN_001643b4(0x23, i + 0x56);
+            entry->regions[i + 3] = ifTouchRegionAddRequested(0x23, i + 0x56);
             ++entry->regionCount;
         }
         for (s32 i = 0; i < 4; ++i) {
-            entry->regions[i + 139] = FUN_001643b4(0x23, i + 0xc6);
+            entry->regions[i + 139] = ifTouchRegionAddRequested(0x23, i + 0xc6);
             ++entry->regionCount;
         }
         if (previousState != 4 && previousState != 5) {

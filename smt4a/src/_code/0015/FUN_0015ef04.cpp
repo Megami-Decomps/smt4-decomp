@@ -3,7 +3,6 @@
 
 extern "C" {
 s32 nw_ut_IsValidBinaryFile(const NwFontFileHeader *file, u32 signature, u32 version, u32 minimumBlocks);
-void FUN_00175f48(NwResFontBase *font, NwFontFileHeader *file, NwFontInfo *info);
 
 // Relocate CFNT block pointers in place, then bind its FINF data to an unused font object.
 u32 FUN_0015ef04(NwResFontBase *font, NwFontFileHeader *file)
@@ -68,7 +67,7 @@ u32 FUN_0015ef04(NwResFontBase *font, NwFontFileHeader *file)
     if (info == NULL) {
         return 0;
     }
-    FUN_00175f48(font, file, info);
+    nw_font_ResFontSetResourceBuffer(font, file, info);
     return 1;
 }
 }

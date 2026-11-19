@@ -7,7 +7,7 @@ extern "C" {
 extern u32 g_aocDisplay;
 extern void sysMemClear(u8 *ptr, u32 size);
 extern s32 packageFindFileByTypeAndId(AocSystemA *system, u32 type, u32 id, u8 *buffer);
-extern void *FUN_001b2ebc(u32 display, u8 *buffer, s32 flags, s32 size, s32 d, s32 e, s32 f);
+extern void *fileQueueRequestAndWait(u32 display, u8 *buffer, s32 flags, s32 size, s32 d, s32 e, s32 f);
 
 void *aocDrawText7(AocSystemA *system, u32 id, s32 flags)
 {
@@ -17,7 +17,7 @@ void *aocDrawText7(AocSystemA *system, u32 id, s32 flags)
     sysMemClear(buffer, 0x80);
     size = packageFindFileByTypeAndId(system, 7, id, buffer);
     if (size != 0) {
-        return FUN_001b2ebc(g_aocDisplay, buffer, flags, size + 8, 1, 0x80, 0);
+        return fileQueueRequestAndWait(g_aocDisplay, buffer, flags, size + 8, 1, 0x80, 0);
     }
     return NULL;
 }

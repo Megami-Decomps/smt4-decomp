@@ -7,7 +7,7 @@ s32 frameTextureGetState(void);
 void slotSetRequest(u32 slot, u32 duration, u32 color);
 u32 FUN_002b89a4(s32 slot);
 s32 FUN_002c1d5c(void);
-void FUN_00282bfc(s32 slot, u32 color);
+void titleRestartSlotState3(s32 slot, u32 color);
 
 // Start the requested black/white fade on the active screens, then wait or finish it immediately.
 u32 FUN_0021ea68(void)
@@ -38,12 +38,12 @@ u32 FUN_0021ea68(void)
             s32 mode = scrGetArg(0);
             if (mode == 0) {
                 if (frameTextureGetState() == 0)
-                    FUN_00282bfc(0, 0xff);
-                FUN_00282bfc(1, 0xff);
+                    titleRestartSlotState3(0, 0xff);
+                titleRestartSlotState3(1, 0xff);
             } else if (mode == 1) {
                 if (frameTextureGetState() == 0)
-                    FUN_00282bfc(0, ~0u);
-                FUN_00282bfc(1, ~0u);
+                    titleRestartSlotState3(0, ~0u);
+                titleRestartSlotState3(1, ~0u);
             }
         }
     }

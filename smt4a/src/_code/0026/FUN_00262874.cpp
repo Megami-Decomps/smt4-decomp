@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ int gameCounterAddSaturating(...);
 int countersAddSaturating(...);
 int FUN_004a9ca0(...);
 int unitRecomputeDerivedStats(...);
-int dispatchIfFound(...);
 int bitsAt60Clear(...);
 int partyRecordSetEquippedItemClampRank(...);
 int FUN_004d0d70(void);

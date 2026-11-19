@@ -1,6 +1,7 @@
 /* NON_MATCHING: skill inheritance pick; retail's candidate scan loops are not unrolled (signed counter) and step/cumulative take r5/r4 (swapped here). */
 #include "common.h"
 #include "gamedata/NkmBaseRecordA.h"
+#include "code/Code003f.h"
 
 /* A skill record; the byte at +3 packs the learnable flag (0x80) and the skill rank (low 5 bits). */
 struct SkillMeta {
@@ -18,7 +19,6 @@ struct SkillRankChances {
 extern "C" {
 u32 randRange(u32 maximum);
 SkillMeta *findSkillMetadataById(u32 id);
-SkillRankChances *FUN_003f39ac(u32 rank);
 s32 gameDataFlagTestBit(u32 flag);
 
 #define SKILL_ID_COUNT 0x1F5
@@ -33,7 +33,7 @@ s16 FUN_003f36a4(const u16 *sourceSkills, s32 index, u32 demonId)
         return 0;
 
     u32 rank = findSkillMetadataById(sourceSkills[index])->rankFlags & 0x1F;
-    const u8 *percent = FUN_003f39ac(rank)->percent;
+    const u8 *percent = static_cast<SkillRankChances *>(dataTable14Sub0GetRecord(rank))->percent;
     u8 step = 0;
     u8 cumulative = 0;
     u32 roll = randRange(99);

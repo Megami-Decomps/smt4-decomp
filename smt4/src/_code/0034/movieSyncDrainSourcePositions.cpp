@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match7_MovieSource.h"
 
 extern "C" {
-s32 FUN_0023a5dc(void *queue);
+s32 counterPairRemaining(void *queue);
 s32 FUN_0023a4f8(void *queue);
 void FUN_00350e30(MovieSync *sync);
 void nn_os_LightEvent_Signal(void *event);
@@ -13,7 +13,7 @@ void threadSleepDuration(s64 nanoseconds);
 
 u32 movieSyncDrainSourcePositions(MovieSync *sync)
 {
-    if (FUN_0023a5dc(sync->queue)) {
+    if (counterPairRemaining(sync->queue)) {
         if (!FUN_0023a4f8(sync->queue)) {
             sync->state = 7;
         }

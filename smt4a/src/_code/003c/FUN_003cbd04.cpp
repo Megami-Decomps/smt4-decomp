@@ -122,7 +122,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
       temp_v6 = 0x9b9b9bff;
     }
     param_1 = param_1 + (temp_v1 + param_2) * 2;
-    temp_v4 = FUN_0014bd84(*(unsigned short *)(param_1 + 0x8b70));
+    temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(param_1 + 0x8b70));
     sprintf((char *)temp_v7,"%s",temp_v4);
     temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x178));
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10) + param_6,

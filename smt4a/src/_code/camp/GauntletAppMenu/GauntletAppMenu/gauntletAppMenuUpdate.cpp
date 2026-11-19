@@ -39,7 +39,7 @@ u32 FUN_003dc0c0(GauntletAppMenuWork *menu, u32 mode);
 u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void campHideNumericBanner(void);
 void campResetScreen(void);
-s32 FUN_001643b4(u32 file, s32 index);
+s32 ifTouchRegionAddRequested(u32 file, s32 index);
 u32 padButtonIsPressed(u32 button);
 s32 padQueryLogicalKey(s32 key, s32 mode);
 u8 FUN_00228b04(void *list, s32 notify);
@@ -259,12 +259,12 @@ s32 gauntletAppMenuUpdate(void)
                 if (i >= objectApplyIfUnblocked(gauntletList(menu))) {
                     break;
                 }
-                menu->touch.regions[i] = FUN_001643b4(GAUNTLET_TEXTURES, i + 0x40E);
+                menu->touch.regions[i] = ifTouchRegionAddRequested(GAUNTLET_TEXTURES, i + 0x40E);
                 menu->touch.touchRegionCount++;
             }
-            menu->touch.regions[11] = FUN_001643b4(GAUNTLET_TEXTURES, 0x573);
-            menu->touch.regions[12] = FUN_001643b4(GAUNTLET_TEXTURES, 0x574);
-            menu->touch.regions[13] = FUN_001643b4(GAUNTLET_TEXTURES, 0x575);
+            menu->touch.regions[11] = ifTouchRegionAddRequested(GAUNTLET_TEXTURES, 0x573);
+            menu->touch.regions[12] = ifTouchRegionAddRequested(GAUNTLET_TEXTURES, 0x574);
+            menu->touch.regions[13] = ifTouchRegionAddRequested(GAUNTLET_TEXTURES, 0x575);
             menu->touch.touchRegionCount += 3;
         }
         break;

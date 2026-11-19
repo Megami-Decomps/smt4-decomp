@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and stack spill placement differ (retail spills the touch-panel pointer and keeps the entry base in r6 inside the select arm); the 0x500 block, the ready getter and the tail call to FUN_00233818 now match. */
+/* NON_MATCHING: register allocation and stack spill placement differ (retail spills the touch-panel pointer and keeps the entry base in r6 inside the select arm); the 0x500 block, the ready getter and the tail call to releaseEntriesA now match. */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "status/StatusCamera.h"
@@ -54,7 +54,7 @@ s32 gameGetFlagByte12e8(void);
 void FUN_00233240(void *panel, s32 value);
 void messageDismissNumericBanner(s32 arg);
 void ifTouchRegionClearAll(u32 regions);
-void FUN_00233818(void *panel);
+void releaseEntriesA(void *panel); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u8 *" is incompatible with parameter of type "Obj *")
 s32 flaggedValueHolderGetTotal(void *cursor);
 void textEncodeFontSlot(s32 slot, void *buffer);
 u32 demonGetRaceLabel(u32 id, u32 arg);
@@ -97,7 +97,7 @@ void FUN_003a6f80(DevilListInput *work)
             messageDismissNumericBanner(1);
         }
         ifTouchRegionClearAll(work->touchRegions);
-        FUN_00233818(work->touchPanel);
+        releaseEntriesA(work->touchPanel);
         return;
     }
     if (select != 0) {

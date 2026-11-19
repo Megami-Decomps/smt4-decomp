@@ -6,6 +6,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "code/Code002a.h"
 #include "code/Code002a_VariantA.h"
+#include "camp/CampMenuEntry.h"
 
 /* Items whose use from the camp list runs its own sequence. */
 #define ITEM_CONFIRMED_USE 0x79F  /* asks for confirmation, then is consumed */
@@ -31,7 +32,6 @@ u8 FUN_00228b04(GridNavigation *list, s32 mode);
 void FUN_002cb278(GridNavigation *list, s32 mode);
 s32 resourceRunOperationIfUnblocked(GridNavigation *list); // declcheck: local (the shared prototype takes the opaque Object; the list is a GridNavigation)
 void FUN_0021b274(s32 mode, s32 image, u32 frame);
-u8 FUN_003da8f4(s32 group, s32 index);
 u32 FUN_0048144c(s32 id);
 void flagValueSub(s32 id, u32 amount);
 bool FUN_00481404(u16 id);
@@ -81,7 +81,7 @@ void campUpdateListInput(s32 state)
                                          camp->touch.scrollRegions[0], camp->touch.scrollRegions[1],
                                          camp->touch.scrollRegions[2], &touched, 0, 1) ||
             FUN_00228b04(list, 1)) {
-            campShowSelectedEntryHelp(FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid)));
+            campShowSelectedEntryHelp(dataTable15GetUnlockedEntryId(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid)));
         } else if ((padQueryLogicalKey(0, 1) || touched) && state == 11) {
             s32 row = resourceRunOperationIfUnblocked(list) + listCursorGetRowIfUnblocked(list);
 

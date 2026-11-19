@@ -13,6 +13,7 @@
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
 #include "text/TextCode.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 

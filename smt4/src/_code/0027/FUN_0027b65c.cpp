@@ -88,7 +88,7 @@ extern int mapFlagTest(int);
 /* Supplied declaration required: contentEntryGet. */
 extern int dataTable23Section5CountWithExtras(void);
 extern unsigned int *dataTable2fSub2GetRecord(int);
-extern unsigned int FUN_0031b7b0(void);
+extern unsigned int dataTable23GetCountWithAoc(void);
 extern int dataTable23Type4CountWithAoc(void);
 /* Supplied declaration required: dataTable2fSub1GetCount. */
 /* Supplied declaration required: dataTable2fSub2GetCount. */
@@ -187,7 +187,7 @@ void FUN_0027b65c(int param_1,int param_2)
             }
 LAB_0027b7d0:
             temp_v11 = *puVar2;
-            temp_v3 = FUN_0031b7b0();
+            temp_v3 = dataTable23GetCountWithAoc();
             temp_v13 = 0;
             temp_v4 = temp_v3;
             if (0 < (int)temp_v3) {

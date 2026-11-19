@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001885b8(unsigned char *, char *, int, unsigned int);
+int nn_fs_ipc_FileSystem_CloseArchive(unsigned char *, char *, int, unsigned int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int DAT_005893a8; /* 0x5893a8 */
 extern unsigned int DAT_0062d34c; /* 0x62d34c */
 
-/* Supplied declaration required: FUN_001885b8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
 extern unsigned long long nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
 
@@ -63,7 +63,7 @@ unsigned int FUN_0016d090(unsigned int *param_1,unsigned char *param_2)
     *param_1 = (unsigned int)puVar5;
     temp_v3 = 0;
     if ((int)temp_v4 < 0) {
-      FUN_001885b8(&temp_v6,pcVar6,temp_v7,uStack_24);
+      nn_fs_ipc_FileSystem_CloseArchive(&temp_v6,pcVar6,temp_v7,uStack_24);
       temp_v3 = temp_v4;
     }
   }

@@ -65,7 +65,7 @@ s32 FUN_002328b4(void);
 void FUN_00233240(void *animation, s32 slot);
 s32 uiOwnerUpdateAnimationChannels(BibleBrowseView *view);
 u32 flaggedValueHolderGetTotal(void *list);
-void FUN_00233818(void *selection);
+void releaseEntriesA(void *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "u8 *" is incompatible with parameter of type "Obj *")
 void ifTouchRegionClearAll(u32 owner);
 s32 inputIsQuestCancelPressed(void);
 s32 gameGetNavigationState(void);
@@ -77,13 +77,6 @@ void useCounterStart(void);
 void sortMenuCreate(s32 kind, s32 mode);
 void buttonHelpSetText(s32 text, u32 color);
 void FUN_003a8aa0(BibleBrowseView *view);
-struct LayoutSlot {
-    u8 unk00[8];
-    s16 x;
-    s16 y;
-    const s16 *size;
-};
-LayoutSlot *FUN_002bf4f0(u8 *layout, u32 id);
 s32 FUN_003c2e1c(s32 x, s32 y, s32 w, s32 h);
 s32 FUN_003c2e30(s32 x, s32 y, s32 w, s32 h);
 
@@ -105,11 +98,11 @@ void FUN_003a98b8(BibleBrowseView *view)
     if (tabs->count > 0 && block->tabsShown == 1) {
         s8 *hovered = &view->hovered;
         for (s32 tab = 0; tab < 2; tab++) {
-            LayoutSlot *slot = FUN_002bf4f0(view->layout, tab + 0x1023);
+            const TextureTableEntryIV *slot = layoutFindTableEntry(view->layout, tab + 0x1023);
             s32 x = slot->x;
             s32 y = slot->y;
-            s32 w = slot->size[0];
-            s32 h = slot->size[1];
+            s32 w = slot->placement->width;
+            s32 h = slot->placement->height;
             if (FUN_003c2e1c(x, y, w, h))
                 *hovered = tab;
             if (FUN_003c2e30(x, y, w, h)) {
@@ -138,7 +131,7 @@ void FUN_003a98b8(BibleBrowseView *view)
         view->modeTimer = 0;
         FUN_00233240(view->animation, slotsOf(view)->slotIndex);
         ifTouchRegionClearAll(view->touchOwner);
-        FUN_00233818(view->selection);
+        releaseEntriesA(view->selection);
         return;
     }
     if (confirm == 0) {

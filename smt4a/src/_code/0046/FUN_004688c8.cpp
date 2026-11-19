@@ -165,7 +165,7 @@ extern "C" void FUN_004688c8(Obj5333c0 *scene)
             ResultSpoilsA spoils;
             FUN_003df168(&spoils, scene->deliveryQuestId());
             FUN_00331714(&spoils);
-            if (FUN_001bd118(scene->deliveryQuestId()) == 0)
+            if (table1bOr1cGetRecordValue(scene->deliveryQuestId()) == 0)
                 FUN_00417e08(scene->deliveryQuestId());
             scene->substate = 7;
         } else {

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00221c10(void);
+int effectColorOverrideBeginFadeToGray(void);
 
 typedef struct Obj {
     /* 0x0000 */ u8 unk0000[0x3028];
@@ -12,7 +12,7 @@ typedef struct Obj {
 void FUN_003d9e88(Obj *obj)
 {
     if ((obj->flags & 4) != 0) {
-        FUN_00221c10();
+        effectColorOverrideBeginFadeToGray();
         obj->flags = (obj->flags & 0xfffffffb) | 8;
     }
 }

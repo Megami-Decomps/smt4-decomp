@@ -8,7 +8,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int mathAngleDeltaDegrees(void);
 int FUN_002d2834(void);

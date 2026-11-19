@@ -4,7 +4,7 @@
 extern "C" {
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdMemFree(void *block);
-u32 FUN_0037ab70(u32 file, u32 unk, void *buffer, u32 size);
+u32 saveMediaReadBuffer(u32 file, u32 unk, void *buffer, u32 size);
 void memcpySrcFirst(const void *src, void *dst, u32 size);
 
 /* Reads a save block: header into `header`, payload (`payloadSize` bytes) into `payload`. Returns the reader's result. */
@@ -16,7 +16,7 @@ u32 asdSaveReadBlock(u32 file, u32 unk, void *header, void *payload, u32 payload
 
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\Save\\AsdSaveCommon.cpp", 518);
     buffer = (u8 *)asdMemoryAlloc(0x100, 0x100, 0, total, 1);
-    result = FUN_0037ab70(file, unk, buffer, total);
+    result = saveMediaReadBuffer(file, unk, buffer, total);
     memcpySrcFirst(buffer, header, ASD_SAVE_HEADER_SIZE);
     memcpySrcFirst(buffer + ASD_SAVE_HEADER_SIZE, payload, payloadSize);
     asdMemFree(buffer);

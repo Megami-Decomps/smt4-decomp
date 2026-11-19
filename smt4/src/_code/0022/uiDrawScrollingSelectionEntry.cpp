@@ -10,7 +10,7 @@ struct ScrollingWidgetView {
 typedef char ScrollingWidgetOffsets[offsetof(ScrollingWidgetView, entrance) == 0x214 &&
     offsetof(ScrollingWidgetView, scroll) == 0x2A0 ? 1 : -1];
 extern "C" {
-SpriteInfo *FUN_002bf4f0(void *sprites, u32 id);
+SpriteInfo *layoutFindTableEntry(void *sprites, u32 id); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: a value of type "TextureTableEntryIV *" cannot be used to initialize an entity of type "SpriteInfo *")
 void efctSetSpeed(f32 speed);
 void FUN_00230d84(void *sprites, u32 id, s32 x, s32 y, u32 color);
 void FUN_00231bcc(void *sprites, u32 id, s32 x, s32 y, u32 color, u32 mode);
@@ -18,7 +18,7 @@ void gxSetClippedBottomScreenScissor(s32 x, s32 y, s32 width, s32 height);
 
 void uiDrawScrollingSelectionEntry(ScrollingWidgetView *widget, s32 index, u32 color, s32 selected)
 {
-    SpriteInfo *origin = FUN_002bf4f0(widget->sprites, index + 0x42F);
+    SpriteInfo *origin = layoutFindTableEntry(widget->sprites, index + 0x42F);
     s32 x = origin->x;
     s32 y = origin->y;
     UiSpriteState *entrance = &widget->entrance;
@@ -32,13 +32,13 @@ void uiDrawScrollingSelectionEntry(ScrollingWidgetView *widget, s32 index, u32 c
         FUN_00231bcc(widget->sprites, 0x42B, x, y, color, 1);
     else
         FUN_00231bcc(widget->sprites, 0x42A, x, y, color, 1);
-    SpriteInfo *clip = FUN_002bf4f0(widget->sprites, 0x42A);
+    SpriteInfo *clip = layoutFindTableEntry(widget->sprites, 0x42A);
     s32 clipX = clip->x + x;
     s32 clipY = clip->y + y;
     s32 clipWidth = clip->size[0];
     s32 clipHeight = clip->size[1];
     gxSetClippedBottomScreenScissor(clipX, clipY, clipWidth, clipHeight);
-    SpriteInfo *content = FUN_002bf4f0(widget->sprites, 0x42C);
+    SpriteInfo *content = layoutFindTableEntry(widget->sprites, 0x42C);
     UiSpriteState *scroll = &widget->scroll;
     s32 scrollX = vec2GetXInt(scroll);
     s32 contentX = scrollX + x - (content->bounds.width & 0x7FFF);

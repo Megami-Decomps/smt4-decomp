@@ -9,7 +9,7 @@ extern "C" {
 int FUN_00256550(unsigned int);
 int contentEntryGetE(void);
 int FUN_00267144(void);
-int FUN_00273f5c(void);
+int clearFlags310To31F(void);
 int mathDistanceBetweenPoints(void);
 int lightOwnerRegister(unsigned int, int);
 int gameFlagIsSet(...);
@@ -39,7 +39,7 @@ extern int g_lmapScene; /* 0x447e88 */
 /* Supplied declaration required: contentEntryGetE. */
 /* Supplied declaration required: FUN_00267144. */
 extern int dataTableGetRecordFifty(void);
-/* Supplied declaration required: FUN_00273f5c. */
+/* Supplied declaration required: clearFlags310To31F. */
 extern int FUN_0027d968(void);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
@@ -130,7 +130,7 @@ unsigned int FUN_001f9334(int param_1)
             temp_v12 = 0;
             temp_v2 = 0;
             if ((int)*(short *)(temp_v5 + 0x1e) != (int)*(short *)(pcVar9 + 0x12)) {
-              FUN_00273f5c();
+              clearFlags310To31F();
               *(unsigned short *)(temp_v5 + 0x1e) = *(unsigned short *)(pcVar9 + 0x12);
             }
             if (*(short *)(pcVar9 + 0xc) >= 1) {

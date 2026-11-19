@@ -51,7 +51,7 @@ s32 gameGetFlagByte12e8(void);
 void FUN_00233240(void *status, s32 mode);
 void messageDismissNumericBanner(s32 flag);
 void ifTouchRegionClearAll(u32 region);
-void FUN_00233818(SelectedRow *row);
+void releaseEntriesA(SelectedRow *row); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "SelectedRow *" is incompatible with parameter of type "Obj *")
 s32 demonPurchaseValidate(DevilView *view, u32 devil);
 void textEncodeFontSlot(s32 slot, char *text);
 u32 demonGetRaceLabel(u16 devil, u32 flag);
@@ -92,7 +92,7 @@ void FUN_003a8450(DevilView *view)
         if (view->hideHelp == 0)
             messageDismissNumericBanner(1);
         ifTouchRegionClearAll(view->touchRegion);
-        FUN_00233818(row);
+        releaseEntriesA(row);
         return;
     }
     if (confirm != 0) {

@@ -17,7 +17,7 @@ void handleHolderFree(EffectTextRequest *request);
 s32 linkedObjGetValue(EffectTextRequest *request);
 s32 formattedTextCopyLabel(EffectTextRequest *request, char *label);
 void linkedItemsRedirectToReplacement(void *list, EffectSelectionItem *from, EffectSelectionItem *to);
-void FUN_003ca0ec(void *list, EffectSelectionItem *item);
+void effResourcePromoteReferences(void *list, EffectSelectionItem *item); // declcheck: local (the shared declaration in shard/W5_W5Match2_LinkedItems.h does not compile here: argument of type "void *" is incompatible with parameter of type "LinkedItems *")
 
 // Drive the effect editor's number-entry menu: build the "GENERAL n" list on the first call, then
 // poll it. Once confirmed (state 1) the chosen value is applied to the selected effect item; the
@@ -65,11 +65,11 @@ u32 FUN_003c8878(u32 flags)
         if (input.kind != 8) {
             EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.list, -input.value);
             if (g_effectEditor.item != item) {
-                FUN_003ca0ec(g_effectEditor.list, g_effectEditor.item);
+                effResourcePromoteReferences(g_effectEditor.list, g_effectEditor.item);
                 linkedItemsRedirectToReplacement(g_effectEditor.list, g_effectEditor.item, item);
             }
         } else {
-            FUN_003ca0ec(g_effectEditor.list, g_effectEditor.item);
+            effResourcePromoteReferences(g_effectEditor.list, g_effectEditor.item);
             effBlockCopyDataB(g_effectEditor.block, &input.value, 4);
         }
         result = (u32)&DAT_00400002;

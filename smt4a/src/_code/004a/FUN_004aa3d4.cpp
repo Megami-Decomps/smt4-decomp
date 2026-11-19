@@ -96,7 +96,7 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
         break;
     case 2:
     case 3: {
-        sprintf(text, "%s", FUN_0014bd84(ui->helpValue));
+        sprintf(text, "%s", aocIndexValueOrDefault(ui->helpValue));
         s32 mode;
         if (partyMember != 0) {
             if (playerHasFlagBit(4) != 0) {

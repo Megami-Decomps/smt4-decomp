@@ -36,7 +36,7 @@ struct NumberDrawOrder {
 extern "C" {
 extern f32 DAT_00435e20;
 void effectRenderTransformedInstance(NumberSprite *, f32);
-s32 FUN_0019d734(const void *, const void *);
+s32 btlFloatingNumberComparePriorityDescending(const void *, const void *);
 void qsort(void *, u32, u32, s32 (*)(const void *, const void *));
 
 void btlDrawFloatingNumbers(FloatingNumberScene *scene, s32 pass)
@@ -51,7 +51,7 @@ void btlDrawFloatingNumbers(FloatingNumberScene *scene, s32 pass)
         order[i].priority = scene->numbers[i].priority;
         order[i].active = scene->numbers[i].active != 0;
     }
-    qsort(order, 16, sizeof(NumberDrawOrder), FUN_0019d734);
+    qsort(order, 16, sizeof(NumberDrawOrder), btlFloatingNumberComparePriorityDescending);
     for (s32 i = 0; i < 16; ++i) {
         s32 slot = order[i].index;
         FloatingNumber *number = &scene->numbers[slot];

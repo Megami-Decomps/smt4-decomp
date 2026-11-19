@@ -7,7 +7,7 @@ extern "C" {
 
 int padQueryLogicalKey(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_001643b4(...);
+int ifTouchRegionAddRequested(...);
 int dialogOpen(...);
 int gridNavigationConfigure(...);
 int FUN_0020b490(...);
@@ -82,7 +82,7 @@ extern unsigned char LAB_00321c94; /* 0x321c94 */
 extern int infoWinHasValue(void);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_001643b4. */
+/* Supplied declaration required: ifTouchRegionAddRequested. */
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameGetPlayerData(void);
@@ -708,7 +708,7 @@ LAB_0026e1e4:
     temp_v9 = objectApplyIfUnblocked(temp_v30);
     if (0 < temp_v9) {
       do {
-        temp_v3 = FUN_001643b4(0x1d,temp_v14 + 0xe4);
+        temp_v3 = ifTouchRegionAddRequested(0x1d,temp_v14 + 0xe4);
         temp_v9 = temp_v14 * 2;
         temp_v14 = temp_v14 + 1;
         *(unsigned short *)(param_1 + temp_v9 + 0x43b6) = temp_v3;
@@ -722,7 +722,7 @@ LAB_0026e1e4:
     temp_v4 = 0;
     if (0 < temp_v9 - 1) {
       do {
-        temp_v3 = FUN_001643b4(0x1d,temp_v14 + 0xec);
+        temp_v3 = ifTouchRegionAddRequested(0x1d,temp_v14 + 0xec);
         temp_v18 = temp_v4 + 1;
         *(unsigned short *)(param_1 + temp_v14 * 2 + 0x43c6) = temp_v3;
         temp_v14 = temp_v14 + 1;
@@ -732,7 +732,7 @@ LAB_0026e1e4:
       } while (temp_v14 < temp_v9 - 1);
     }
     *(short *)(temp_v32 + 0x68) = temp_v18 + 8;
-    temp_v3 = FUN_001643b4(0x1d,0x168);
+    temp_v3 = ifTouchRegionAddRequested(0x1d,0x168);
     *(unsigned short *)(param_1 + *(short *)(temp_v32 + 0x68) * 2 + 0x43b6) = temp_v3;
     *(short *)(param_1 + 0x43b4) = *(short *)(param_1 + 0x43b4) + 1;
     if ((int)*puVar27 < 1) {

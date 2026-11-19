@@ -18,7 +18,7 @@ typedef struct Slot {
 } Slot;
 
 extern void FUN_00237a94(Slot **slot, void *key);
-extern void FUN_00237d64(void *header, u32 *value);
+extern void variantSetPlain(void *header, u32 *value);
 
 /* Looks the slot up through `owner`, stores the item's value into it, copies the value to `out` and advances the cursor; 0 on success, 2 when the slot is missing. */
 u32 FUN_0035cea8(Cursor *cursor, u32 *out, u8 **owner, u32 *item)
@@ -31,7 +31,7 @@ u32 FUN_0035cea8(Cursor *cursor, u32 *out, u8 **owner, u32 *item)
         return 2;
     }
     copy = *item;
-    FUN_00237d64(slot->header, &copy);
+    variantSetPlain(slot->header, &copy);
     *out = *item;
     cursor->record = cursor->record->next;
     return 0;

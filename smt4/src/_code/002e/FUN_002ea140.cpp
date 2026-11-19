@@ -49,7 +49,7 @@ static __inline void lmapPlaceBehind(LmapScene *scene, f32 heading)
     scene->pose.targetPosition.z = g_gameState.overviewPosition.z;
     f32 angle = (heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD;
     scene->pose.targetPosition.x += mathRemPio2f(angle) * LMAP_BEHIND_DISTANCE;
-    scene->pose.targetPosition.z += FUN_00282390(angle) * LMAP_BEHIND_DISTANCE;
+    scene->pose.targetPosition.z += libm_cosf(angle) * LMAP_BEHIND_DISTANCE;
 }
 
 void FUN_002ea140(void)

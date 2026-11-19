@@ -1,5 +1,6 @@
 #include "common.h"
 #include "code/Code002e_Smt4a.h"
+#include "map/MapSceneAccess.h"
 
 struct Vec3 {
     f32 x, y, z;
@@ -28,7 +29,6 @@ void FUN_003e5858(void);
 s32 fourPtrsAllNull(LinkHolder *holder);
 void linkHolderRunAll(LinkHolder *holder, Vec3 *position);
 void FUN_003e5558(LinkHolder *holder, Vec3 scale);
-void FUN_003857b4(s32 value);
 
 // Run every link of the target's holder at the target position and apply its uniform scale; 1 when it ran.
 u32 FUN_002e2114(LinkedTarget *target)
@@ -40,7 +40,7 @@ u32 FUN_002e2114(LinkedTarget *target)
             Vec3 position = target->position;
             linkHolderRunAll(target->holder, &position);
             FUN_003e5558(target->holder, Vec3(target->scale));
-            FUN_003857b4(0);
+            lmapSceneSetUnk134(0);
             ran = 1;
         }
     }

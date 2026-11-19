@@ -1,8 +1,8 @@
 #include "gamedata/RankedSelection.h"
+#include "battle/BattleHpRank.h"
 
 extern "C" {
 void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-s32 callbackCompareDescendingState(const void *left, const void *right);
 
 /* Chooses a requested score rank and counts selections of the corresponding result. */
 s32 FUN_004e7b7c(void *owner, const SelectionScoreWork *work, SelectionResult *results,
@@ -18,7 +18,7 @@ s32 FUN_004e7b7c(void *owner, const SelectionScoreWork *work, SelectionResult *r
     if (count < rank) {
         index = candidates[0].index;
     } else {
-        qsort(candidates, count, sizeof(RankedSelection), callbackCompareDescendingState);
+        qsort(candidates, count, sizeof(RankedSelection), reinterpret_cast<s32 (*)(const void *, const void *)>(callbackCompareDescendingState));
         index = candidates[rank - 1].index;
     }
     SelectionResult *result = &results[index];

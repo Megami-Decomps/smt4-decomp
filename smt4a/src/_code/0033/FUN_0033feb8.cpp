@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match2_TitleCommand.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/MapSaveBlockA.h"
+#include "util/TrigF32.h"
 
 // Player controller: only the members this movement update uses.
 struct PlayerController {
@@ -25,7 +26,6 @@ void padGetNormalizedAnalogStick(f32* stickX, f32* stickY, s32 arg);
 void FUN_0033f9f4(void);
 f32 __hardfp_atan2f(f32 y, f32 x);
 f32 libm_sinf(f32 angle);
-f32 libm_cosf(f32 angle);
 s32 FUN_0036d5e0(MapVector* candidate, MapVector* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,

@@ -20,7 +20,7 @@ int FUN_0029bbc8(void);
 int partyFindActiveSlotById(...);
 int gameCounterAddSaturating(...);
 int FUN_0029bed8(...);
-int FUN_0029c1c8(...);
+int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029.h does not compile here: more than one instance of overloaded function "FUN_0029c43c" has "C" linkage)
 int unitRecalculateEffectiveStats(...);
 int useCounterRelease(void);
 int eventQueueAddUnique(...);
@@ -54,7 +54,7 @@ int communicationSetResultPointer(void);
 int btlUiPanelFadeInWhenReady(...);
 int FUN_0026c868(void);
 int FUN_0026c9c0(void);
-int FUN_00292bcc(...);
+int obj48Arm(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029_Smt4.h does not compile here: more than one instance of overloaded function "FUN_0029c4e4" has "C" linkage)
 int scrScriptProcessStartEntry(...);
 int FUN_00298d28(...);
 int FUN_0029a0cc(...);
@@ -153,7 +153,7 @@ extern unsigned char FUN_00282e70(void);
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_0028d1f4. */
 extern int flagValueRead(unsigned short);
-/* Supplied declaration required: FUN_00292bcc. */
+/* Supplied declaration required: obj48Arm. */
 /* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: partyPanelToggleRefresh. */
 /* Supplied declaration required: FUN_002932d8. */
@@ -180,7 +180,7 @@ extern int FUN_0029ae44(void);
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_0029bed8. */
 extern unsigned int FUN_0029c0c0(unsigned int, int);
-/* Supplied declaration required: FUN_0029c1c8. */
+/* Supplied declaration required: dispatchIfFound. */
 extern unsigned int partyFindFreeStockSlot(void);
 extern int messageMainTargetIsClear(void);
 extern int FUN_0029c40c(void);
@@ -1309,7 +1309,7 @@ LAB_001c659c:
                                 if (temp_v6 == 1) {
                                   *(unsigned char *)(temp_v1 + 0x678) = 0;
                                 }
-                                FUN_00292bcc(*(unsigned int *)(temp_v1 + 0x6c8),0xff);
+                                obj48Arm(*(unsigned int *)(temp_v1 + 0x6c8),0xff);
                                 partyPanelSetState(0x13,1);
                                 goto LAB_001c6598;
                               }
@@ -1337,7 +1337,7 @@ LAB_001c659c:
                               __aeabi_memcpy4(temp_v1 + 0x11ec,temp_v7,0x604);
                               FUN_0029c4e4(temp_v1 + 0x11ec,0);
 LAB_001c5fe8:
-                              FUN_00292bcc(*(unsigned int *)(temp_v16 + 0x6c8),0xff);
+                              obj48Arm(*(unsigned int *)(temp_v16 + 0x6c8),0xff);
                               partyPanelSetState(0x13,1);
 LAB_001c6598:
                               temp_v7 = 0x100017c;
@@ -1357,7 +1357,7 @@ LAB_001c6598:
                                 *(unsigned char *)(temp_v1 + 0x678) = 0;
                               }
                               FUN_0026dafc(partyPanelPollSelectedStatusColor());
-                              FUN_00292bcc(*(unsigned int *)(temp_v1 + 0x6c8),0xff);
+                              obj48Arm(*(unsigned int *)(temp_v1 + 0x6c8),0xff);
                               temp_v7 = gameGetPlayerData();
                               __aeabi_memcpy4(temp_v1 + 0x1160,temp_v7,0x8c);
                               FUN_0029a0cc(temp_v1 + 0x1160);
@@ -1535,7 +1535,7 @@ LAB_001c6598:
                             __aeabi_memcpy4(temp_v1 + 0x11ec,temp_v7,0x604);
                             FUN_0029c4e4(temp_v1 + 0x11ec,0);
 LAB_001c653c:
-                            FUN_00292bcc(*(unsigned int *)(temp_v16 + 0x6d8),0xff);
+                            obj48Arm(*(unsigned int *)(temp_v16 + 0x6d8),0xff);
                             partyPanelSetState(0x13,1);
                             goto LAB_001c6598;
                           }
@@ -2664,7 +2664,7 @@ LAB_001c7c50:
           FUN_0029bbc8();
           temp_v7 = partyFindFreeStockSlot();
           temp_v6 = itemGetFlagBit1(*(unsigned short *)(temp_v1 + 0xb96));
-          FUN_0029c1c8(temp_v7,*(unsigned short *)(temp_v1 + 0xb96),0);
+          dispatchIfFound(temp_v7,*(unsigned short *)(temp_v1 + 0xb96),0);
           temp_v4 = gameGetUnitRecord(temp_v7);
           temp_v7 = *(unsigned int *)(temp_v1 + 0xb88);
           temp_v14 = *(unsigned int *)(temp_v1 + 0xb8c);

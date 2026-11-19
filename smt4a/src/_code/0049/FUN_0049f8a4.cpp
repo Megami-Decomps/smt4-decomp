@@ -22,7 +22,7 @@ s32 gameOptionsClassifyMode(void);
 s32 unitHasRankingBonus(u16 equipment);
 void gameCounterAddSaturating(s32 sound);
 void rosterGetLeaderId(void);
-s32 FUN_001bd118(void);
+s32 table1bOr1cGetRecordValue(void); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 
 /* The percentage of `max`, at least 1. */
 static s32 percentOf(s32 max, s32 percent)
@@ -110,7 +110,7 @@ void FUN_0049f8a4(u32 target, s32 percent)
     s32 max = options->maxHp;
     s32 newHp = options->hp - percentOf(max, percent);
     rosterGetLeaderId();
-    bool fourth = FUN_001bd118() == 4;
+    bool fourth = table1bOr1cGetRecordValue() == 4;
     if (newHp <= 0 && !fourth)
         newHp = 1;
     if (newHp > max)

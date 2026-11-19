@@ -1,6 +1,7 @@
 /* NON_MATCHING: with the radians-to-degrees conversion as its own function the two multiplies and their constants match; the FUN_002a8638 out-pointer setup (retail forms &fov last) and the frame-counter load before the two flag stores are scheduled differently. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code0038.h"
 
 /* Radians to degrees, as FUN_00341bec and the title menu's FUN_001e9990 convert the same camera field of view. */
 static f32 radiansToDegrees(f32 radians)
@@ -50,7 +51,6 @@ typedef struct CameraView {
 } CameraView;
 
 void FUN_002a09b4(const char *path, s32 flags);
-TitleIntroCamera *asdCameraLoadFromFile(const char *path);
 void modelSlotAttachChild(TitleIntroCamera *camera, s32 index);
 void *asdCameraGetSavedRenderPairs(void);
 void FUN_002a8638(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
@@ -83,7 +83,7 @@ void FUN_003bc9d0(TitleIntro *intro)
     if (intro->step == 0) {
         asdWorkAreaReset();
         FUN_002a09b4(DAT_00407dc4, 0);
-        intro->camera = asdCameraLoadFromFile(DAT_00407db0);
+        intro->camera = static_cast<TitleIntroCamera *>(asdCameraLoadFromFile(DAT_00407db0));
         modelSlotAttachChild(intro->camera, 0);
         void *camera = asdCameraGetSavedRenderPairs();
         CameraView view;

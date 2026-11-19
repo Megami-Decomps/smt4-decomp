@@ -27,7 +27,7 @@ typedef struct RowPanel {
 } RowPanel;
 
 extern s8 uiSubStateGetSelected(const CursorState *cursor);
-extern LayoutSlot *FUN_002bf4f0(u8 *layout, u32 id);
+extern LayoutSlot *layoutFindTableEntry(u8 *layout, u32 id);
 extern void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
 extern void FUN_0022d9c8(RowPanel *panel, s32 kind, s32 index, s32 selected, s32 alpha, s32 color);
 extern void FUN_0022daac(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
@@ -52,9 +52,9 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
 
     if (selected != 0) {
         alpha = alpha + 1;
-        slot = FUN_002bf4f0(panel->layout, index + 0x42F);
+        slot = layoutFindTableEntry(panel->layout, index + 0x42F);
     } else {
-        slot = FUN_002bf4f0(panel->layout, index + 0x40E);
+        slot = layoutFindTableEntry(panel->layout, index + 0x40E);
     }
     baseX = slot->x;
     baseY = slot->y;
@@ -76,10 +76,10 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
         count = record->maxHp;
     }
     if (selected != 0) {
-        slot = FUN_002bf4f0(panel->layout, 0x49D);
+        slot = layoutFindTableEntry(panel->layout, 0x49D);
         color = 0xFBEB39FF;
     } else {
-        slot = FUN_002bf4f0(panel->layout, 0x48F);
+        slot = layoutFindTableEntry(panel->layout, 0x48F);
         color = 0xFFFFFFFF;
     }
     x = slot->x + baseX;
@@ -92,10 +92,10 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
         count = record->maxMp;
     }
     if (selected != 0) {
-        slot = FUN_002bf4f0(panel->layout, 0x4A1);
+        slot = layoutFindTableEntry(panel->layout, 0x4A1);
         color = 0x6BBB2CFF;
     } else {
-        slot = FUN_002bf4f0(panel->layout, 0x493);
+        slot = layoutFindTableEntry(panel->layout, 0x493);
         color = 0xFFFFFFFF;
     }
     x = baseX + slot->x;

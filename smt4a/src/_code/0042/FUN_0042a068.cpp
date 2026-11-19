@@ -19,7 +19,7 @@ struct FileSystemStateView {
 extern "C" {
 extern FileSystemStateView DAT_00589398;
 
-s32 FUN_0016cdc0(ExtSaveDataInfoView* info, s32 kind, u64 identifier);
+s32 nn_fs_ExtSaveDataSpecifier_Make(ExtSaveDataInfoView* info, s32 kind, u64 identifier);
 u32 nn_fs_ipc_FileSystem_CreateExtSaveData(
     const FileSystemHandleView* handle, const ExtSaveDataInfoView* info,
     u32 creationOption0, u32 creationOption1,
@@ -31,7 +31,7 @@ u32 FUN_0042a068(u64 identifier,
                  u32 creationOption0, u32 creationOption1)
 {
     ExtSaveDataInfoView info;
-    FUN_0016cdc0(&info, 1, identifier);
+    nn_fs_ExtSaveDataSpecifier_Make(&info, 1, identifier);
 
     FileSystemHandleView handle;
     handle.unk00 = DAT_00589398.unk10;

@@ -4,12 +4,12 @@
 #include "game/GameStateA.h"
 #include "util/MathFunctions.h"
 #include "map/MapEnemyGlobal.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 
 u32 randRange(u32 limit);
 f32 libm_sinf(f32 radians);
-f32 libm_cosf(f32 radians);
 s32 FUN_0036d984(MapVector *start, MapVector *end, s32 flags);
 s32 FUN_0025ef68(MapVector *position, MapVector *ground, s32 flags);
 

@@ -57,7 +57,7 @@ s32 FUN_0024550c(void);
 void FUN_00282820(s32 value, u32 user, s32 target, s32 targetCopy);
 s32 scrGetArg(s32 index);
 s32 libc_strlen(const char* s);
-s32 FUN_0027e3b8(u32 event);
+s32 isEntryUsable(u32 event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "u32" is incompatible with parameter of type "int *")
 s32 FUN_0028299c(BattleEffectState* state);
 
 // Script command: plays the effect set `arg0` on every living side, positioned by the sign of `arg1`.
@@ -65,7 +65,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
 {
     u32 effectId = scrGetArg(0);
     s32 direction = scrGetArg(1);
-    s32 inEvent = FUN_0027e3b8(g_btlEvent);
+    s32 inEvent = isEntryUsable(g_btlEvent);
     if (!((inEvent == 0 || FUN_0024550c() != 0) && direction != 0)) return;
 
     EffectRequest request = { 0, 0, 0, NULL, 0, 0, 0, 0 };

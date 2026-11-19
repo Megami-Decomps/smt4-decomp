@@ -64,7 +64,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
@@ -282,7 +282,7 @@ void FUN_002e8fdc(void)
       MapMarkerPosition marker;
       marker.x = *(float *)&DAT_0049f9a0 + mathRemPio2f(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
       marker.y = *(float *)&DAT_0049f9a4;
-      marker.z = *(float *)&DAT_0049f9a8 + FUN_00282390(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
+      marker.z = *(float *)&DAT_0049f9a8 + libm_cosf(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
       marker.w = DAT_0049f9bc;
       FUN_00248114(marker);
       }
@@ -315,7 +315,7 @@ void FUN_002e8fdc(void)
           *(float *)(g_lmapScene + 0xa0) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f(*(float *)(g_lmapScene + 0x50) * 0.017453292f) * 250.0f;
           temp_v0 = g_lmapScene;
           *(float *)(temp_v0 + 0xa4) = *(float *)(temp_v0 + 0x2c) - 500.0f;
-          *(float *)(g_lmapScene + 0xa8) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(*(float *)(temp_v0 + 0x50) * 0.017453292f) * 250.0f;
+          *(float *)(g_lmapScene + 0xa8) = *(float *)(g_lmapScene + 0x30) + libm_cosf(*(float *)(temp_v0 + 0x50) * 0.017453292f) * 250.0f;
           temp_v0 = g_lmapScene;
           *(unsigned int *)(temp_v0 + 0xac) = *(unsigned int *)(temp_v0 + 0x50);
           *(unsigned int *)(temp_v0 + 4) = 0x32;
@@ -400,7 +400,7 @@ LAB_002e94f0:
       {
       SoundActorQueuePosition position;
       position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
-      position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+      position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
       position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
       temp_v0 = randBetween(0,1);
       soundActorStartOnFreeChannel(temp_v0 + 0x100023c, position);
@@ -504,7 +504,7 @@ LAB_002e9794:
         {
         SoundActorQueuePosition position;
         position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
-        position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+        position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
         position.y = *(float *)(g_lmapScene + 0x20) + 100.0f;
         temp_v0 = randBetween(0,1);
         soundActorStartOnFreeChannel(temp_v0 + 0x100023e, position);

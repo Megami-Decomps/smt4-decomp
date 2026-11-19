@@ -27,7 +27,7 @@ s32 FUN_00293230(BtlMainState *state);
 void battleSelectButtonHelpPreset(u32 preset);
 void FUN_002569ac(BtlMainState **block, s32 bank);
 void btlEntryValuesCopy(BtlMainState **block, CommandState *work);
-u32 FUN_0027e3b8(void *event);
+u32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 void FUN_0027e38c(void *event);
 void FUN_003ca6c4(BtlMainState **block, CommandState *work);
 void btlUiRouteSelectedAction(BtlUi *ui);
@@ -92,7 +92,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
     case 28:
         FUN_002569ac(block, actor);
         btlEntryValuesCopy(block, work);
-        if (FUN_0027e3b8(g_btlEvent) != 0)
+        if (isEntryUsable(g_btlEvent) != 0)
             return;
         FUN_0027e38c(g_btlEvent);
         return;
@@ -200,7 +200,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
         battleResolveEscapeAttempt(block, work);
         return;
     case 24:
-        if (FUN_0027e3b8(g_btlEvent) != 0)
+        if (isEntryUsable(g_btlEvent) != 0)
             return;
         if (work->selection->kind == 11) {
             if (btlEventSelectTrigger(g_btlEvent, 7, work->entry->selectionIndex, 0) == 0)
@@ -226,7 +226,7 @@ void btlCommandEnterPhase(BtlMainState **block, s32 phase)
             if ((flags & 1) == 0 || (flags & 0x40) != 0)
                 return;
         }
-        if (FUN_0027e3b8(g_btlEvent) != 0)
+        if (isEntryUsable(g_btlEvent) != 0)
             return;
         if (btlEventSelectTrigger(g_btlEvent, 4, work->entry->selectionIndex, 0) == 0)
             return;

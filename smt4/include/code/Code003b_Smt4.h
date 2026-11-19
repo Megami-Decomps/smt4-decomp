@@ -5,6 +5,6 @@
 struct Obj;
 extern "C" {
 
-void FUN_003ba734(Obj *obj);
+void menu4CSetValue42(Obj *obj);
 
 } /* extern "C" */

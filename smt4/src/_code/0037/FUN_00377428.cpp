@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, int);
 int FUN_00235db4(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int FUN_00377650(unsigned int, float *, float [10]);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00235db4. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: FUN_00377650. */
 
 
@@ -81,13 +81,13 @@ void FUN_00377428(unsigned int param_1,float *param_2,float *param_3)
     temp_v2 = (float)temp_v8;
   }
   temp_v0 = (float)((unsigned long long)temp_v8 >> 0x20);
-  FUN_00282390();
+  libm_cosf();
   temp_v3 = (float)temp_v8;
   temp_v1 = (float)temp_v4;
-  FUN_00282390();
+  libm_cosf();
   temp_v1 = (temp_v0 + temp_v1) * 0.5f;
   temp_v0 = (float)temp_v4;
-  FUN_00282390();
+  libm_cosf();
   temp_v5 = (float)((unsigned long long)temp_v4 >> 0x20);
   *param_2 = temp_v6 * temp_v5 * temp_v7[0];
   *param_3 = temp_v2 * temp_v5 * temp_v7[0] + (temp_v1 / (temp_v1 - temp_v0)) * (temp_v3 - temp_v7[0]) + temp_v3

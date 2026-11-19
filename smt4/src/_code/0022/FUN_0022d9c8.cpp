@@ -8,7 +8,7 @@ static __inline TextLayoutContextIV *ownerContext(void *owner)
 }
 
 extern "C" {
-TextLayoutEntryPrefixIV *FUN_002bf4f0(TextLayoutContextIV *context, s32 id);
+TextLayoutEntryPrefixIV *layoutFindTableEntry(TextLayoutContextIV *context, s32 id); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: a value of type "TextureTableEntryIV *" cannot be assigned to an entity of type "TextLayoutEntryPrefixIV *")
 s32 drawTextAtRelativePosition(TextLayoutContextIV *context, s32 origin,
                                s32 x, s32 y, s32 flags, s32 style,
                                u32 parameterHigh, u32 parameterLow,
@@ -22,11 +22,11 @@ void FUN_0022d9c8(void *owner, s32 value, s32 index, s32 alternateLayout,
     TextLayoutEntryPrefixIV *offset;
 
     if (!(alternateLayout != 0)) {
-        position = FUN_002bf4f0(ownerContext(owner), index + 0x40E);
-        offset = FUN_002bf4f0(ownerContext(owner), 0x489);
+        position = layoutFindTableEntry(ownerContext(owner), index + 0x40E);
+        offset = layoutFindTableEntry(ownerContext(owner), 0x489);
     } else {
-        position = FUN_002bf4f0(ownerContext(owner), index + 0x42F);
-        offset = FUN_002bf4f0(ownerContext(owner), 0x497);
+        position = layoutFindTableEntry(ownerContext(owner), index + 0x42F);
+        offset = layoutFindTableEntry(ownerContext(owner), 0x497);
     }
 
     const s32 x = static_cast<s32>(position->x) + offset->x;

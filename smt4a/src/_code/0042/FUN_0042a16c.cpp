@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001885b8(unsigned char *, char *, int, int);
+int nn_fs_ipc_FileSystem_CloseArchive(unsigned char *, char *, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 extern int DAT_005893a8; /* 0x5893a8 */
 extern unsigned int DAT_0062d34c; /* 0x62d34c */
 
-/* Supplied declaration required: FUN_001885b8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_CloseArchive. */
 extern unsigned int FUN_001aeefc(unsigned int, int *, unsigned int);
 extern unsigned long long nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 extern unsigned int nn_fs_ipc_FileSystem_OpenArchive(unsigned int, unsigned long long *, unsigned int, unsigned int, unsigned char *, unsigned int);
@@ -76,7 +76,7 @@ unsigned int FUN_0042a16c(unsigned int param_1,unsigned int param_2,unsigned int
       }
     }
     else {
-      FUN_001885b8(&temp_v5,pcVar6,temp_v6,iStack_2c);
+      nn_fs_ipc_FileSystem_CloseArchive(&temp_v5,pcVar6,temp_v6,iStack_2c);
     }
   }
   return temp_v3;

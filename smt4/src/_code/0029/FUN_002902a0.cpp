@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the restore flag's 1 differs: built in r1 where retail uses r0. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "code/Code0029.h"
+#include "code/Code001b.h"
 extern "C" s32 FUN_0029ee54(void *cursor);
 
 extern "C" {
@@ -25,7 +26,7 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
     UiQuest *quest = g_uiQuest;
     QuestDetailView *detail = (QuestDetailView *)quest;
     quest->questId = (s16)questId;
-    quest->panelView.panel.detailMode = FUN_00298f88(questId);
+    quest->panelView.panel.detailMode = dataTable1bOr1cRecordHasFlag1(questId);
     detail->speed = 0.2088f;
     timerStart(detail->timer, 0, 0);
     if (restoreSelection == 0) {

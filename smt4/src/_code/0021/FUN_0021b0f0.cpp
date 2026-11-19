@@ -43,7 +43,7 @@ void FUN_0021b0f0(void)
         const f32 degreesToRadians = 0.017453292f;
         f32 x = g_lmapScene->pose.position.x - mathRemPio2f(DAT_004474f0.view->heading * degreesToRadians) *
                 DAT_004474f0.view->rearDistance[preset];
-        f32 z = g_lmapScene->pose.position.z - FUN_00282390(DAT_004474f0.view->heading * degreesToRadians) *
+        f32 z = g_lmapScene->pose.position.z - libm_cosf(DAT_004474f0.view->heading * degreesToRadians) *
                 DAT_004474f0.view->rearDistance[preset];
         f32 height = FUN_001e27f8(vertexX, vertexY, vertexZ, x, z);
         DAT_004474f0.view->values[2] = height - g_lmapScene->pose.position.y;

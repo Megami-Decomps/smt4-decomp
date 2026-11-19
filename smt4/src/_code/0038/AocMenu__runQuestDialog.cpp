@@ -1,11 +1,11 @@
 #include "classes/AocMenu.h"
 #include "ui/SceneWindowWork.h"
+#include "addon/aocBootProcess.h"
 
 extern "C" {
 void aocEntryPanelCreateText(void *dialog, s32 entry, u32 mode, u32 flags);
 void aocMenuSetButtonHelp(SceneWindowWork *window, u32 state, s32 enabled);
 void jobOwnerFreeSlotAndStop(void *owner);
-void FUN_0027e9c0(void *dialog);
 s32 FUN_0027ee9c();
 s32 inputIsQuestMenuPressed();
 void eventQueueAddUniqueIfValid(u32 event);
@@ -36,7 +36,7 @@ void AocMenu::runQuestDialog()
         if (FUN_0027ee9c()) {
             eventQueueAddUniqueIfValid(0x100016D);
             aocMenuSetButtonHelp(window, -1, 0);
-            FUN_0027e9c0(&window->dialogJob);
+            flagObjAdvance(&window->dialogJob);
             window->transition.phase = 2;
             return;
         }
@@ -48,7 +48,7 @@ void AocMenu::runQuestDialog()
                 window->transition.callback->vtable->destroy(window->transition.callback);
                 window->transition.callback = NULL;
             }
-            FUN_0027e9c0(&window->dialogJob);
+            flagObjAdvance(&window->dialogJob);
         }
     }
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018aa5c(unsigned int, float *, float *, float *);
+int nn_math_ARMv6_MTX34LookAtC_FAST(unsigned int, float *, float *, float *);
 int FUN_0018af48(unsigned int, float *, float *);
 int sysFatalBreak(void);
 int nn_math_ARMv6_MTX44FrustumC_FAST(unsigned int);
@@ -37,7 +37,7 @@ extern float DAT_0062d6e4; /* 0x62d6e4 */
 extern float fRam1ff81080; /* 0x1ff81080 */
 extern signed char cRam1ff81084; /* 0x1ff81084 */
 
-/* Supplied declaration required: FUN_0018aa5c. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34LookAtC_FAST. */
 /* Supplied declaration required: FUN_0018af48. */
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44FrustumC_FAST. */
@@ -166,14 +166,14 @@ void FUN_001a1fb4(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v26 = temp_v23 + temp_v20;
   temp_v24 = temp_v14 - param_1[0x17] * temp_v17;
   temp_v27 = temp_v24 + temp_v21;
-  FUN_0018aa5c(temp_v28,&temp_v22,&temp_v18,&temp_v25);
+  nn_math_ARMv6_MTX34LookAtC_FAST(temp_v28,&temp_v22,&temp_v18,&temp_v25);
   temp_v22 = temp_v12 + param_1[0x17] * temp_v15;
   temp_v25 = temp_v22 + temp_v19;
   temp_v23 = temp_v13 + param_1[0x17] * temp_v16;
   temp_v26 = temp_v23 + temp_v20;
   temp_v24 = temp_v14 + param_1[0x17] * temp_v17;
   temp_v27 = temp_v24 + temp_v21;
-  FUN_0018aa5c(param_5,&temp_v22,&temp_v18,&temp_v25);
+  nn_math_ARMv6_MTX34LookAtC_FAST(param_5,&temp_v22,&temp_v18,&temp_v25);
   param_1[0x15] = temp_v5;
   param_1[0x16] = temp_v8;
   param_1[2] = temp_v1;

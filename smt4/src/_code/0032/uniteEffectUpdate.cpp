@@ -16,6 +16,7 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "sys/RuntimeObjects.h"
 #include "sound/soundEffect.h"
+#include "code/Code0038.h"
 
 struct UniteMaterialCue {
     u16 start;
@@ -34,7 +35,6 @@ struct ModelSlotOwner;
 struct ModelRemovalRequestPrefixIV;
 s32 effectAreAllCompletionChecksReady(const EffectOwner *owner);
 f32 asdAnimGetTrackLastFrame(const AnimationTracks *animation, s32 track);
-CameraObject *asdCameraLoadFromFile(const char *path);
 void modelSlotAttachChild(ModelSlotOwner *owner, s32 index);
 void modelRemoveFromSlotList(ModelRemovalRequestPrefixIV *request, s32 index);
 u32 gfxObjectDestroy(CameraObject *object);
@@ -49,7 +49,7 @@ void titleSetSlotValueState2(u32 index, u32 value);
 void soundChannelRequestIfEnabled(u32 soundId, u32 channel, u32 frames);
 void soundChannelStopAll(u32 channel);
 s32 FUN_002c1658(s32 button, s32 mode);
-void FUN_00282bfc(u32 index, u32 extra);
+void titleRestartSlotState3(u32 index, u32 extra);
 void resourceReleaseReference(Obj4207c0Resource *resource);
 char *libc_strcpy(char *destination, const char *source); // declcheck: local (C string contract; EntrySequence.h uses word pointers)
 }
@@ -159,19 +159,19 @@ extern "C" s32 uniteEffectUpdate(u32)
             if (work->materialCount == 2) {
                 if (work->sacrifice) {
                     work->resultModel = asdMdlManagerCreateLoaded("camp/jakyou_union2_ac_loop.bam", 7);
-                    work->resultCamera = asdCameraLoadFromFile("camp/jakyou_union2_ac_loop.bccam");
+                    work->resultCamera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union2_ac_loop.bccam"));
                 } else {
                     work->resultModel = asdMdlManagerCreateLoaded("camp/jakyou_union2_loop.bam", 7);
-                    work->resultCamera = asdCameraLoadFromFile("camp/jakyou_union2_loop.bccam");
+                    work->resultCamera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union2_loop.bccam"));
                 }
             }
             if (work->materialCount == 3) {
                 work->resultModel = asdMdlManagerCreateLoaded("camp/jakyou_union3_loop.bam", 7);
-                work->resultCamera = asdCameraLoadFromFile("camp/jakyou_union3_loop.bccam");
+                work->resultCamera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union3_loop.bccam"));
             }
             if (work->materialCount == 4) {
                 work->resultModel = asdMdlManagerCreateLoaded("camp/jakyou_union4_loop.bam", 7);
-                work->resultCamera = asdCameraLoadFromFile("camp/jakyou_union4_loop.bccam");
+                work->resultCamera  = static_cast<CameraObject *>(asdCameraLoadFromFile("camp/jakyou_union4_loop.bccam"));
             }
             modelRemoveFromSlotList(reinterpret_cast<ModelRemovalRequestPrefixIV *>(work->camera), 0);
             gfxObjectDestroy(work->camera);
@@ -229,7 +229,7 @@ extern "C" s32 uniteEffectUpdate(u32)
         s32 fadeFrame = work->sacrifice ? fusionEffectEndFrame(work->materialCount, true)
                                        : fusionEffectEndFrame(work->materialCount, false);
         if (work->phase == fadeFrame)
-            FUN_00282bfc(0, 0xFFFFFFFF);
+            titleRestartSlotState3(0, 0xFFFFFFFF);
         if (work->phase == fadeFrame + 5)
             titleSetSlotValueState2(0, 30);
         if (work->sacrifice) {

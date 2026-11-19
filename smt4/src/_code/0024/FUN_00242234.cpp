@@ -1,5 +1,6 @@
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
+#include "shard/W5_W5Match2_LinkedItems.h"
 
 struct EffectEditorLoadRequest {
     u8 payload[252];
@@ -10,7 +11,6 @@ struct EffectEditorLoadRequest {
 extern "C" {
 extern const u8 DAT_00400002;
 void FUN_002430c8(u32 source, u32 index, EffectEditorLoadRequest *request);
-void effResourcePromoteReferences(void *list, EffectSelectionItem *item);
 void taskRunWithObject(EffectSelectionBlock *block, const void *payload, u32 type);
 void effBlockSetBlobB(EffectSelectionBlock *block, const void *blob, u32 size, u32 mode);
 
@@ -23,7 +23,7 @@ u32 FUN_00242234(u32 source, u32 index)
     if (request.state == 2) {
         result = 0x400000;
     } else if (request.state == 1) {
-        effResourcePromoteReferences(g_effectEditor.list, g_effectEditor.item);
+        effResourcePromoteReferences(static_cast<LinkedItems *>(g_effectEditor.list), reinterpret_cast<LinkedItem *>(g_effectEditor.item));
         if (request.kind != 8) {
             u32 type;
             switch (request.kind) {

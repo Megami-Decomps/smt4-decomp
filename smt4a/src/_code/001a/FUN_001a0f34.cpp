@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001af3c8(int, unsigned int);
+int nn_dsp_CTR_DSP_SetSemaphore(int, unsigned int);
 
 extern int DAT_0058928c; /* 0x58928c */
 
-/* Supplied declaration required: FUN_001af3c8. */
+/* Supplied declaration required: nn_dsp_CTR_DSP_SetSemaphore. */
 
 
 int FUN_001a0f34(unsigned int param_1)
@@ -19,7 +19,7 @@ int FUN_001a0f34(unsigned int param_1)
   
   if (DAT_0058928c != 0) {
     temp_v0 = DAT_0058928c;
-    FUN_001af3c8(DAT_0058928c,param_1);
+    nn_dsp_CTR_DSP_SetSemaphore(DAT_0058928c,param_1);
     return temp_v0;
   }
   return -0x375f5808;

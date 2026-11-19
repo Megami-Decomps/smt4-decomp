@@ -5,6 +5,7 @@
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
@@ -104,7 +105,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     if ((param_2 & 8) != 0) {
       temp_v4 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x20000);
+        temp_v4 = aocLoadTextureNode(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x20000);
       }
       else {
         temp_v4 = FUN_002e151c(param_1->field_0x8,param_1->field_0xc);
@@ -113,7 +114,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     else if ((param_2 & 0x40) != 0) {
       temp_v4 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x30000);
+        temp_v4 = aocLoadTextureNode(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x30000);
       }
       else {
         temp_v4 = asdTMTexTableActivateImage(param_1->field_0x8,param_1->field_0xc);
@@ -122,7 +123,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     else if ((param_2 & 1) != 0) {
       temp_v4 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x10000);
+        temp_v4 = aocLoadTextureNode(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x10000);
       }
       else {
         temp_v4 = asdTMTexTablePrepareNodeImage(param_1->field_0x8,param_1->field_0xc);

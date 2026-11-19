@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0042c130(int *);
+int nn_fs_ipc_File_Close(int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern int *DAT_0062d3ac; /* 0x62d3ac */
 extern int DAT_0062d3b4; /* 0x62d3b4 */
 extern unsigned int DAT_0062d3b8; /* 0x62d3b8 */
 
-/* Supplied declaration required: FUN_0042c130. */
+/* Supplied declaration required: nn_fs_ipc_File_Close. */
 extern unsigned int fileGetHandleChecked(int *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -31,7 +31,7 @@ void FUN_0042b774(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   temp_v0 = param_4;
   if (param_1[1] != 0) {
     temp_v0 = fileGetHandleChecked(param_1);
-    FUN_0042c130(&temp_v0);
+    nn_fs_ipc_File_Close(&temp_v0);
   }
   (**(romwright_code **)(*param_1 + 0x34))(param_1);
   nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d3b8);

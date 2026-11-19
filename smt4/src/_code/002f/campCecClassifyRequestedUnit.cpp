@@ -3,9 +3,9 @@
 #include "gamedata/FlagBitTests.h"
 #include "gamedata/UnitRecordAccess.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
-s32 partyPanelGetRequestedUnitId();
 void FUN_002579bc(s32 index);
 
 // Queue the edit screen's next message for the requested demon: 5 when it is an unflagged active party member, 2 when it is a flagged stock demon, otherwise 4.

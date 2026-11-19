@@ -70,7 +70,7 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
             return 1;
         }
         u16 chosen = (u16)candidates[randNextInRange((u16)(count - 1))];
-        FUN_0029c1c8(partyFindFreeStockSlot(), chosen, 0);
+        dispatchIfFound(partyFindFreeStockSlot(), chosen, 0);
         scrWorkSetValue(0, 1);
         DAT_0044cfa0 = 0;
         scrWorkSetValue(1, chosen);

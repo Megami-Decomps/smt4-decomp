@@ -15,7 +15,7 @@ void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int gameGetPlayerData(...);
 int drawTextAtSnappedRectangle(...);
-int FUN_002bf4f0(...);
+int layoutFindTableEntry(...); // declcheck: local (romwright prototype; the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: argument of type "int" is incompatible with parameter of type "void *")
 int efctSetSpeed(void);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -54,7 +54,7 @@ extern unsigned int itemGetOwnedCount(unsigned int);
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
-/* Supplied declaration required: FUN_002bf4f0. */
+/* Supplied declaration required: layoutFindTableEntry. */
 /* Supplied declaration required: efctSetSpeed. */
 
 
@@ -99,10 +99,10 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   VectorSignedToFloat(0x100 - temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
   if (param_3 == 0) {
-    temp_v4 = FUN_002bf4f0(param_1 + 0x380,param_2 + 0x27);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x380,param_2 + 0x27);
   }
   else {
-    temp_v4 = FUN_002bf4f0(param_1 + 0x380,param_2 + 0x4f);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x380,param_2 + 0x4f);
   }
   temp_v13 = (int)*(short *)(temp_v4 + 8);
   temp_v4 = (int)*(short *)(temp_v4 + 10);
@@ -119,10 +119,10 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     else {
       FUN_00231bcc(param_1 + 0x380,0x4b,temp_v13,temp_v4,temp_v12,1);
     }
-    temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x4e);
+    temp_v5 = layoutFindTableEntry(param_1 + 0x380,0x4e);
     gxSetClippedBottomScreenScissor(*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
                  (int)**(short **)(temp_v5 + 0xc),(int)(*(short **)(temp_v5 + 0xc))[1]);
-    temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x4d);
+    temp_v5 = layoutFindTableEntry(param_1 + 0x380,0x4d);
     temp_v6 = param_1 + 0x56c;
     temp_v7 = vec2GetXInt();
     temp_v5 = (temp_v7 + temp_v13) - (*(unsigned short *)(temp_v5 + 4) & 0xffff7fff);
@@ -136,10 +136,10 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
       (**(romwright_code **)(temp_v5 + 0x1328))();
       *(unsigned char *)(temp_v5 + 0x1324) = 0;
     }
-    temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xac);
+    temp_v5 = layoutFindTableEntry(param_1 + 0x380,0xac);
   }
   else {
-    temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x99);
+    temp_v5 = layoutFindTableEntry(param_1 + 0x380,0x99);
   }
   temp_v0 = *(short *)(temp_v5 + 8);
   temp_v5 = *(short *)(temp_v5 + 10) + temp_v4;
@@ -150,20 +150,20 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   if (param_2 != 0) {
     if ((param_4[1] & 1) != 0) {
       if (param_3 != 0) {
-        temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xab);
+        temp_v5 = layoutFindTableEntry(param_1 + 0x380,0xab);
       }
       else {
-        temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x98);
+        temp_v5 = layoutFindTableEntry(param_1 + 0x380,0x98);
       }
       uiRectDrawAtBottomRight(param_1 + 0x380,5,*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
                    temp_v12);
     }
     if ((param_4[1] & 2) != 0) {
       if (param_3 != 0) {
-        temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xb2);
+        temp_v5 = layoutFindTableEntry(param_1 + 0x380,0xb2);
       }
       else {
-        temp_v5 = FUN_002bf4f0(param_1 + 0x380,0x9f);
+        temp_v5 = layoutFindTableEntry(param_1 + 0x380,0x9f);
       }
       uiRectDrawAtBottomRight(param_1 + 0x380,6,*(short *)(temp_v5 + 8) + temp_v13,*(short *)(temp_v5 + 10) + temp_v4,
                    temp_v12);
@@ -206,7 +206,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
       }
     }
   }
-  temp_v5 = FUN_002bf4f0(param_1 + 0x380,temp_v19);
+  temp_v5 = layoutFindTableEntry(param_1 + 0x380,temp_v19);
   VectorSignedToFloat(*(short *)(temp_v5 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v5 + 8) + temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
   drawTextAtSnappedRectangle(param_1 + 0x380,temp_v8,temp_v14,temp_v9);
@@ -243,7 +243,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   temp_v6 = contentGetKindValue(temp_v3);
   if (param_3 != 0) {
-    temp_v18 = FUN_002bf4f0(param_1 + 0x380,0xb1);
+    temp_v18 = layoutFindTableEntry(param_1 + 0x380,0xb1);
     temp_v11 = (int)temp_v18;
     temp_v16 = param_2 == 0;
     temp_v7 = 0;
@@ -265,7 +265,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
   }
   else {
-    temp_v18 = FUN_002bf4f0(param_1 + 0x380,0x9e);
+    temp_v18 = layoutFindTableEntry(param_1 + 0x380,0x9e);
     temp_v11 = (int)temp_v18;
     temp_v16 = param_2 == 0;
     temp_v7 = 0;
@@ -293,11 +293,11 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   if (param_2 != 0) {
     temp_v8 = shopSlotGetPrice(param_4);
     if (param_3 != 0) {
-      temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xba);
+      temp_v5 = layoutFindTableEntry(param_1 + 0x380,0xba);
       temp_v9 = 0xffffffff;
     }
     else {
-      temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xa7);
+      temp_v5 = layoutFindTableEntry(param_1 + 0x380,0xa7);
       temp_v9 = 0x5a5a5aff;
     }
     temp_v0 = *(short *)(temp_v5 + 8);
@@ -307,11 +307,11 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   temp_v8 = itemGetOwnedCount(temp_v22);
   if (param_3 != 0) {
-    temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xbc);
+    temp_v5 = layoutFindTableEntry(param_1 + 0x380,0xbc);
     temp_v9 = 0xf49800ff;
   }
   else {
-    temp_v5 = FUN_002bf4f0(param_1 + 0x380,0xa9);
+    temp_v5 = layoutFindTableEntry(param_1 + 0x380,0xa9);
     temp_v9 = 0x7a4c00ff;
   }
   temp_v0 = *(short *)(temp_v5 + 8);

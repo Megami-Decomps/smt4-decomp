@@ -1,6 +1,7 @@
 #include "common.h"
 #include "classes/Obj55c89c.h"
 #include "gamedata/PartyMoney.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ s32 FUN_0035dbb0(void);
 void messageMainSetTargetFlags(s32 arg);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 partyFindFirstUnusedEntry(void);
-void dispatchIfFound(s32 target, u32 id, s32 alternate);
 s32 FUN_004a8750(u16 id, u8 alternate, s32 arg2, bool highLevel, s32 arg4);
 void gameCounterAddSaturating(s32 kind, s32 amount);
 void gameGlobalsSetMenuOpenFlag(s32 arg);

@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00170390(int);
-int FUN_001703b0(int);
+int sleepQueryAnswer(int);
 int FUN_00170474(int);
 int nn_applet_CTR_detail_OpenSession(void);
 int nn_applet_CTR_detail_CloseSession(void);
 int svcSleepThread(int, int);
 
 /* Supplied declaration required: FUN_00170390. */
-/* Supplied declaration required: FUN_001703b0. */
+/* Supplied declaration required: sleepQueryAnswer. */
 /* Supplied declaration required: FUN_00170474. */
 extern int FUN_0018b63c(void);
 /* Supplied declaration required: nn_applet_CTR_detail_OpenSession. */
@@ -31,7 +31,7 @@ int FUN_001a3010(unsigned int param_1)
   FUN_00170474(2);
   temp_v0 = FUN_0018b63c();
   if (temp_v0 != 0) {
-    FUN_001703b0(1);
+    sleepQueryAnswer(1);
   }
   while( 1 ) {
     nn_applet_CTR_detail_OpenSession();
@@ -49,7 +49,7 @@ int FUN_001a3010(unsigned int param_1)
   else {
     temp_v0 = FUN_0018b63c();
     if (temp_v0 != 0) {
-      FUN_001703b0(1);
+      sleepQueryAnswer(1);
     }
   }
   return temp_v1;

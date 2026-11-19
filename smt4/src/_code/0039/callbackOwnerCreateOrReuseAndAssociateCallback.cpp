@@ -13,7 +13,7 @@ void* asdOperatorNew(u32 size);
 CallbackView* callbackOwnerInitialize(void* storage);
 CallbackView* _ZN9Obj4222fcC1Ev(void* storage);
 CallbackView* _ZN9Obj4222ccC1Ev(void* storage);
-void FUN_00395280(CallbackView* callback, CallbackOwnerView* owner);
+void callbackControllerSetOwner(CallbackView* callback, CallbackOwnerView* owner); // declcheck: local (sys/CallbackController.h does not compile here: it redeclares callbackOwnerInitialize, and its owner is the Apocalypse layout with the controller at 0x74, not 0x68)
 
 // Creates the selected callback, or reuses the existing one, and associates it with the owner.
 void callbackOwnerCreateOrReuseAndAssociateCallback(CallbackOwnerView* owner, s32 callbackKind)
@@ -36,6 +36,6 @@ void callbackOwnerCreateOrReuseAndAssociateCallback(CallbackOwnerView* owner, s3
     }
     }
 
-    FUN_00395280(owner->unk68, owner);
+    callbackControllerSetOwner(owner->unk68, owner);
 }
 }

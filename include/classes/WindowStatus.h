@@ -23,7 +23,7 @@ void recordValidatePair(void *owner, WindowStatusResult result);
 WindowStatusResult nnAsyncMapOperationResult(const void *operation);
 WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifier);
 WindowStatusResult FUN_004288e0(void *owner);
-nn::Result FUN_004283cc(void *owner);
+nn::Result queryFailureResultOrZero(void *owner);
 s32 queryResultFailureOnly(const u32 *object);
 }
 

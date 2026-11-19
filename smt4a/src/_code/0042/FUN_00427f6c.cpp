@@ -8,7 +8,7 @@ void rt_memcpy(void*, const void*, u32);
 // Retrieves a status block, copies its public half, and records the translated result.
 WindowStatusResult FUN_00427f6c(void* owner, void* destination)
 {
-    nn::Result status = FUN_004283cc(owner);
+    nn::Result status = queryFailureResultOrZero(owner);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

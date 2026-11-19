@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002358b4(...);
 int FUN_002a1f84(...);
 int FUN_00379c18(...);
-int FUN_00379c90(...);
+int word8HolderSetFromTable(...);
 int VectorSignedToFloat(...);
 int nw_snd_internal_CurveAdshr_SetHold(...);
 int nw_snd_internal_driver_Channel_Release(...);
@@ -141,7 +141,7 @@ extern int nw_snd_internal_driver_SequenceTrack_ChannelCallbackFunc(...); /* 0x3
 /* Supplied declaration required: FUN_002358b4. */
 /* Supplied declaration required: FUN_002a1f84. */
 /* Supplied declaration required: FUN_00379c18. */
-/* Supplied declaration required: FUN_00379c90. */
+/* Supplied declaration required: word8HolderSetFromTable. */
 extern char __aeabi_idivmod(int);
 /* Supplied declaration required: nw_snd_internal_CurveAdshr_SetHold. */
 /* Supplied declaration required: nw_snd_internal_driver_Channel_Release. */
@@ -239,7 +239,7 @@ void nw_snd_internal_driver_SequenceTrack_NoteOn(fn_0037da14_arg0 *param_1,int p
   param_1->field_0xc4 = pfVar9;
 LAB_0037dbb0:
   if (param_1->field_0x8c < 0x80) {
-    FUN_00379c90();
+    word8HolderSetFromTable();
   }
   if (param_1->field_0x8d < 0x80) {
     FUN_00379c18();

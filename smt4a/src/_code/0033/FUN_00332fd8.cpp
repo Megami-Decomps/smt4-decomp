@@ -4,12 +4,12 @@
 #include "gamedata/DataTable4CValue.h"
 #include "gamedata/GameDataAccess.h"
 #include "gamedata/MapSaveBlockA.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 s32 FUN_002393cc(s32 scene);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
 f32 libm_sinf(f32 radians);
-f32 libm_cosf(f32 radians);
 void sceneRegisterBoxEffect(s32 a, s32 b, const char *name, s32 c, s32 d, s32 e, s32 f0, s32 f1, s32 f2, s32 f3,
                             s32 f4, s32 f5, s32 f6, s32 f7, s32 g, s32 h, s32 kind, s32 i, s32 j, s32 k,
                             MapVector position, MapVector size, f32 heading);

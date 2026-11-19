@@ -1,5 +1,6 @@
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "code/Code0029.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
@@ -13,7 +14,7 @@ void FUN_002fec80(u32 questId)
     UiQuest *quest = g_uiQuest;
 
     quest->panelView.panel.unkF2 = 1;
-    quest->panelView.panel.detailMode = FUN_00298f88(questId);
+    quest->panelView.panel.detailMode = dataTable1bOr1cRecordHasFlag1(questId);
     quest->questId = questId;
     uiQuestLoadResources();
     FUN_0028fe0c(questId, 1);

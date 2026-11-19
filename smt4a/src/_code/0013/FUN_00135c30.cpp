@@ -18,7 +18,7 @@ int FUN_0015a410(...);
 int appletUnlockAndSleepIfShellClosed(...);
 int FUN_0015a5c0(...);
 int appletIsExitRequested(...);
-int FUN_001703b0(...);
+int sleepQueryAnswer(...);
 
 int faderStepAll(...);
 int asdProcessUpdate(...);
@@ -392,7 +392,7 @@ extern int FUN_0013bdb8(unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int renderCtxPackPassFlags(unsigned int, unsigned int);
 extern unsigned long long FUN_00170390(unsigned int);
-/* Supplied declaration required: FUN_001703b0. */
+/* Supplied declaration required: sleepQueryAnswer. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: clockGetTicksAsMicroseconds. */
@@ -880,7 +880,7 @@ LAB_00136430:
     temp_v21 = FUN_00139c4c();
     temp_v19 = temp_v21 & 0xffffffff00000000;
   } while ((int)temp_v21 == 0);
-  FUN_001703b0(1);
+  sleepQueryAnswer(1);
   if (g_mobiclipProcess != 0) {
     titleCloseMoviePlayer(1);
   }

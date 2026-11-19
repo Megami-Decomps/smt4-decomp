@@ -147,7 +147,7 @@ void buttonHelpSetPreset(u32 preset);
 s32 btlEventSelectTrigger(void *event, u32 kind, u32 value, u32 flags);
 s32 gameFlagIsSet(u32 id);
 s32 flagBitIsSet(u32 id);
-s32 FUN_0027e3b8(void *event);
+s32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 void FUN_0027e38c(void *event);
 s32 FUN_003aea5c(void *ui);
 s32 btlSceneIsReady(void *ui);
@@ -486,14 +486,14 @@ extern "C" s32 battleMainProcessUpdate()
         setBattleTaskState(7);
         break;
     case 7:
-        if (!FUN_0027e3b8(g_btlEvent)) {
+        if (!isEntryUsable(g_btlEvent)) {
             if (btlEventSelectTrigger(g_btlEvent, 0, -1u, 0))
                 FUN_0027e38c(g_btlEvent);
             setBattleTaskState(8);
         }
         break;
     case 8:
-        if (FUN_0027e3b8(g_btlEvent) || !battleTaskUiReady())
+        if (isEntryUsable(g_btlEvent) || !battleTaskUiReady())
             break;
         switch (work->result) {
         case 1: case 3: case 9: case 10: case 11: case 12: case 13: case 14:
@@ -532,7 +532,7 @@ extern "C" s32 battleMainProcessUpdate()
         }
         break;
     case 11:
-        if (!FUN_0027e3b8(g_btlEvent))
+        if (!isEntryUsable(g_btlEvent))
             setBattleTaskState(12);
         break;
     case 12:
@@ -598,7 +598,7 @@ extern "C" s32 battleMainProcessUpdate()
         }
         break;
     case 19:
-        if (!FUN_0027e3b8(g_btlEvent) && (work->result != 3 || sys43e188GetState()))
+        if (!isEntryUsable(g_btlEvent) && (work->result != 3 || sys43e188GetState()))
             setBattleTaskState(20);
         break;
     case 20:

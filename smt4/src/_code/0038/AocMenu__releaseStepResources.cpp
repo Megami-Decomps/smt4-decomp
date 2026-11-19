@@ -6,7 +6,7 @@
 
 extern "C" {
 extern AocDisplay *g_aocDisplay;
-void FUN_00233818(const void **dispatch);
+void releaseEntriesA(const void **dispatch); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "const void **" is incompatible with parameter of type "Obj *")
 void ifTouchRegionClearAll(void *window);
 void jobStopAndClearFlags(void *owner);
 void jobOwnerFreeSlotAndStop(u32 *job);
@@ -43,7 +43,7 @@ void AocMenu::releaseStepResources()
     aocMainClearFlags(g_aocMain, 0x70);
     g_aocDisplay->operationActive = 0;
     ifTouchRegionClearAll(work->windowStorage);
-    FUN_00233818(&work->dispatchTable);
+    releaseEntriesA(&work->dispatchTable);
     jobOwnerFreeSlotAndStop(&work->dialogJob);
     jobStopAndClearFlags(work);
     if (jobIsValid(work->unk17A0)) {

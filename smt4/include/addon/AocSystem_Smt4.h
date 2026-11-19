@@ -7,10 +7,6 @@ struct ContentRecordKey;
 struct Obj;
 extern "C" {
 
-u32 aocIndexValueOrDefault(u32 index);
-
-void aocDisplayQueueFormattedEntry(u32 a, u32 b, u32 c, u32 d);
-
 ContentRecord* aocContentGetIndexedRecord(const ContentRecordKey* key, u32 index);
 
 void aocEntryBlockStore(Obj *obj, u32 b, u32 a, int flag, u32 c);

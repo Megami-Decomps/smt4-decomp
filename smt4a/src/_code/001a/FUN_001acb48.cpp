@@ -10,7 +10,7 @@ typedef void (*ApplyEffectRotation)(void *data, const RotationQuaternion *rotati
 }
 
 extern "C" {
-void FUN_001bc460(void);
+void gfxQuaternionWorkspaceBuildMatrix(void);
 void FUN_001bc3e4(void);
 void FUN_001b4eb8(EffectTimelinePart *part, const f32 *origin);
 
@@ -20,7 +20,7 @@ void FUN_001acb48(EffectTimelinePart *part, const RotationQuaternion *rotation)
     g_vectorScratch.first.rotation = *rotation;
     part->transform.rotation = g_vectorScratch.first.rotation;
     RotationQuaternion parentRotation = g_vectorScratch.first.rotation;
-    FUN_001bc460();
+    gfxQuaternionWorkspaceBuildMatrix();
     memcpy(&g_vectorScratch.first.rotation, part->transform.localPosition, sizeof(RotationQuaternion));
     f32 x = g_vectorScratch.first.rotation.x;
     f32 y = g_vectorScratch.first.rotation.y;

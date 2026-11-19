@@ -1,5 +1,6 @@
 #include "npc_room/NpcRoom.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ void dataTableFree(s32 arg);
 void bgmFadeOut(s32 arg);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
-void FUN_003c3e14(void);
 void soundChannelStopAll(s32 arg);
 
 extern NpcRoom *g_npcRoom;
@@ -22,7 +22,7 @@ void npcRoomDestroy(void)
     s32 i;
 
     if (g_npcRoom != NULL) {
-        FUN_003c3e14();
+        messageMainClearBannerRequest();
         if (room->mode == NPC_ROOM_MODE_SPECIAL) {
             soundChannelStopAll(0xF);
             bgmFadeOut(0x3C);

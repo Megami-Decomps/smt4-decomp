@@ -10,7 +10,7 @@ int mapAmbientSoundActorsSpawn(unsigned int, unsigned int);
 int bgmReleaseStopped(void);
 int slotFindByPair(int, unsigned int);
 int soundActorQueueStartPending(void);
-int FUN_00287328(int);
+int bgmResumeOrRequestTrack(int);
 int bgmGetStateById(...);
 int gameFlagIsSet(...);
 
@@ -33,7 +33,7 @@ extern int gameMapBlockGetValue(void);
 /* Supplied declaration required: slotFindByPair. */
 /* Supplied declaration required: soundActorQueueStartPending. */
 extern int mapGetDepartureIndex(void);
-/* Supplied declaration required: FUN_00287328. */
+/* Supplied declaration required: bgmResumeOrRequestTrack. */
 /* Supplied declaration required: bgmGetStateById. */
 extern int table1bOr1cGetRecordValue(void);
 extern int rosterGetLeaderId(void);
@@ -83,7 +83,7 @@ void FUN_0027d0ec(void)
         if (temp_v2 != 0 && temp_v2 != 3) {
           return;
         }
-        FUN_00287328(g_gameState.bgmId);
+        bgmResumeOrRequestTrack(g_gameState.bgmId);
         return;
       }
     }
@@ -96,7 +96,7 @@ void FUN_0027d0ec(void)
       if ((temp_v2 != 0) && (temp_v2 != 3)) {
         return;
       }
-      FUN_00287328(g_gameState.bgmId);
+      bgmResumeOrRequestTrack(g_gameState.bgmId);
       return;
     }
   }
@@ -162,7 +162,7 @@ LAB_0027d2f8:
   else {
     bgmReleaseStopped();
   }
-  FUN_00287328(g_gameState.bgmId);
+  bgmResumeOrRequestTrack(g_gameState.bgmId);
   return;
 }
 

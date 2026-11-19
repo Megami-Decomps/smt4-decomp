@@ -1,0 +1,26 @@
+#include "common.h"
+#include "gamedata/ItemSortCategory.h"
+
+extern "C" {
+
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u16 key;
+} Record;
+
+Record *table8Type5FindById(u32 id);
+
+/* Compares two record ids by their records' keys (via itemGetSortCategory), then by id. */
+s32 recordKeyIdCompare(u16 *a, u16 *b)
+{
+    Record *recordA = table8Type5FindById(*a);
+    Record *recordB = table8Type5FindById(*b);
+    s32 diff = itemGetSortCategory(recordB->key) - itemGetSortCategory(recordA->key);
+
+    if (diff == 0) {
+        diff = *b - *a;
+    }
+    return diff;
+}
+
+} /* extern "C" */

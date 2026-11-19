@@ -13,7 +13,7 @@ u32 FUN_00422648(void *stream);
 void FUN_00513d64(void *backend, u32 streamId, void *stream);
 void FUN_00425ab0(MovieSync *sync, void *reader, void *backendReader,
                   void *backendPlayer, void *video, void *audio);
-void FUN_00425aa0(MovieSync *sync);
+void mobiclipYieldPlaybackThread(MovieSync *sync);
 extern MoviePlaybackBackend DAT_00588024;
 extern u8 DAT_00617e58[0x18];
 extern u8 DAT_00617e70[0xA8];
@@ -53,7 +53,7 @@ void FUN_003d2eec(const char *filename)
     FUN_00425ab0(&g_mobiclipPlayer, DAT_00617e58,
         DAT_00588024.reader, DAT_00588024.player, DAT_00617e70, DAT_00617f18);
     do {
-        FUN_00425aa0(&g_mobiclipPlayer);
+        mobiclipYieldPlaybackThread(&g_mobiclipPlayer);
     } while (g_mobiclipPlayer.state != 7 && g_mobiclipPlayer.state != 1);
 }
 }

@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "event/bustupEvent/BustupCutAnim.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "code/Code0038.h"
 
 namespace {
 struct BustupVec3 {
@@ -74,7 +75,6 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
 s32 FUN_002169cc(u32 job);
 s32 jobDrawOrderedChildren(u32 job);
 void bustupCutAnimDestroy(u32 job);
-u32 asdCameraLoadFromFile(const char *path);
 u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
 void FUN_0024edd4(BustupModelNode *node, s32 part);
 void cameraExportParameters(BustupCameraSetup *setup, u32 model);
@@ -116,7 +116,7 @@ u32 FUN_002fc29c(void)
         char path[76];
         for (u32 i = 0; i < BUSTUP_CUT_ENTRIES; i++) {
             sprintf(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
-            block->models[i] = asdCameraLoadFromFile(path);
+            block->models[i] = reinterpret_cast<u32>(asdCameraLoadFromFile(path));
             sprintf(path, "event/BustUpEvent/%s.bam", g_bustupCutAnim.ids[i]);
             block->lists[i] = asdMdlManagerCreateSecondList(path, 7);
         }

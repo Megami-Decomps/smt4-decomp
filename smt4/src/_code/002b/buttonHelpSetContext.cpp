@@ -11,7 +11,7 @@ struct ButtonHelpContextRecord {
 extern "C" {
 ButtonHelpContextRecord *dataTableGetEntry0e(u32 context);
 void ifTouchDecrementTimer(void);
-void FUN_002a9fdc(UiSpriteState *unit, s32 state, s32 mode);
+void rangeSelectionSelectEndpoint(UiSpriteState *unit, s32 state, s32 mode);
 }
 
 /* Closes the slots: hides their sprites and drops their touch regions (combined slots hold two or three). */
@@ -48,7 +48,7 @@ static __inline void buttonHelpClosePanel(s32 clearTouches)
     }
     for (s32 index = 0; index < 2; ++index) {
         if (work->mode != 1)
-            FUN_002a9fdc(&work->panelSprites[index], 0, 1);
+            rangeSelectionSelectEndpoint(&work->panelSprites[index], 0, 1);
         else
             timerStart(&work->panelSprites[index], 3, 0);
     }

@@ -5,6 +5,8 @@
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 #include "game/GameState.h"
+#include "code/Code001b.h"
+#include "code/Code0013.h"
 
 
 // The map scene block (only the fields this function touches).
@@ -37,7 +39,6 @@ void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void soundChannelRequestIfEnabled(s32 id, s32 flag, s32 frames);
 void titleSetSlotValueState2(s32 channel, s32 frames);
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_002c2a04(s32 channel);
 
 // Creates and starts the scene script, selects its BGM and restores the saved work state,
 // then resets the game state to the scene's departure mode.
@@ -55,10 +56,10 @@ void FUN_003ba754(MapSceneView *scene)
     FUN_0022b29c(scene, mode, 0xffffffff);
     scene->cursorX = 400.0f;
     scene->cursorY = 240.0f;
-    if (FUN_002c2a04(0) == 3) {
+    if (pairedAvailabilityGetState(0) == 3) {
         titleSetSlotValueState2(0, 10);
     }
-    if (FUN_002c2a04(1) == 3) {
+    if (pairedAvailabilityGetState(1) == 3) {
         titleSetSlotValueState2(1, 10);
     }
     scene->result = 0;

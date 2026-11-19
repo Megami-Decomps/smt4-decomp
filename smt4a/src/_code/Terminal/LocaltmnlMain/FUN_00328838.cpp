@@ -27,7 +27,7 @@ int titleRestartSlotState3(...);
 int gameStateClearFlag(void);
 int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
-int FUN_00324c48(...);
+int gameStateSetJumpRequest(...);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int buttonHelpSetMode(...);
@@ -166,7 +166,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: placeWinCreate. */
 extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
-/* Supplied declaration required: FUN_00324c48. */
+/* Supplied declaration required: gameStateSetJumpRequest. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: FUN_0036b824. */
@@ -728,7 +728,7 @@ unsigned int FUN_00328838(void)
       temp_v0 = *(int *)(temp_v0 + 0x560) * 0x10;
       if ((DAT_005f1b74 == *(short *)(temp_v0 + 0x56fcd0)) &&
          (DAT_005f1b78 == *(char *)(temp_v0 + 0x56fcd2))) {
-        FUN_00324c48(DAT_005f1b74,DAT_005f1b78,DAT_005f1b7c);
+        gameStateSetJumpRequest(DAT_005f1b74,DAT_005f1b78,DAT_005f1b7c);
       }
       else {
         mapPlaceSet((int)*(short *)(temp_v0 + 0x56fcd0),(int)*(char *)(temp_v0 + 0x56fcd2),

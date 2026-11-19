@@ -9,7 +9,7 @@ char *libc_strcpy(char *dest, const char *src);
 const char *dataFindKindRecordWithAocOverrides(u32 id, s32 arg);
 const char *dataTable01GetRecordWithAocOverride(u16 id);
 const char *contentEntryDataGet(s16 id, s32 arg);
-const char *FUN_0014bd84(u32 id);
+const char *aocIndexValueOrDefault(u32 id); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/Text/AsdText.h does not compile here: argument of type "u32" is incompatible with parameter of type "const char *")
 int FUN_00359974(u32 kind, u32 id, s32 arg0, s32 arg1);
 
 /* Script command: looks up the text for the argument by kind (0-0x1F) and passes it to scrSetStringSlot;
@@ -59,7 +59,7 @@ u32 FUN_002e49fc(void)
     case 21:
     case 22:
     case 23:
-        libc_strcpy(text, FUN_0014bd84(id));
+        libc_strcpy(text, aocIndexValueOrDefault(id));
         scrSetStringSlot(kind, text);
         break;
     case 24:

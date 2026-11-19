@@ -7,7 +7,7 @@ extern "C" {
 int libc_strcat(...);
 int asdMemFree(int);
 int asdTextureCreate(void);
-int FUN_001b2ebc(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
+int fileQueueRequestAndWait(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
 int aocTexExpandCompressedData(int, unsigned int, int);
 int libc_strcpy(...);
 
@@ -25,7 +25,7 @@ extern int g_aocDisplay; /* 0x57027c */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_001b2ebc. */
+/* Supplied declaration required: fileQueueRequestAndWait. */
 /* Supplied declaration required: aocTexExpandCompressedData. */
 extern int libc_strlen(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
@@ -81,7 +81,7 @@ unsigned int FUN_001a6d00(unsigned int param_1,int *param_2,unsigned int param_3
         }
       }
       temp_v2 = g_aocDisplay;
-      FUN_001b2ebc(g_aocDisplay,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
+      fileQueueRequestAndWait(g_aocDisplay,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
       if (temp_v2 != 0) {
         if (*(char *)(param_2[1] + 0xd) != '\0') {
           aocTexExpandCompressedData(temp_v2,temp_v3,0x80);

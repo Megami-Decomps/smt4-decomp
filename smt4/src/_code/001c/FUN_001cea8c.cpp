@@ -11,7 +11,7 @@ int infoWinSetMessage(...);
 int resultUnitStepFinish(...);
 int resultSetMenuState(...);
 int messageMainFinishWindow(void);
-int FUN_0029aafc(void);
+int countUnlockedSlots(void);
 int soundChannelStopAll(...);
 int buttonHelpShowSkillDetails(...);
 int arrayContainsU16(...);
@@ -81,7 +81,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: FUN_0029aafc. */
+/* Supplied declaration required: countUnlockedSlots. */
 /* Supplied declaration required: FUN_0029bd4c. */
 /* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_0029c48c(void);
@@ -481,7 +481,7 @@ void FUN_001cea8c(int param_1)
       }
       temp_v18 = temp_v18 + 1;
     } while (temp_v18 < 8);
-    temp_v11 = FUN_0029aafc();
+    temp_v11 = countUnlockedSlots();
     gridNavigationConfigure(temp_v9,temp_v11,temp_v11,1,1,1);
     gridNavigationConfigure(temp_v10,temp_v15,8,1,1,1);
     temp_v15 = listCursorGetRowIfUnblocked(temp_v10);
@@ -546,7 +546,7 @@ joined_r0x001cec14:
       temp_v5 = 0;
       if (temp_v5 < *(int *)(param_1 + 0xd2c4)) {
         do {
-          temp_v13 = FUN_0029aafc();
+          temp_v13 = countUnlockedSlots();
           temp_v15 = param_1 + temp_v5 * 2;
           temp_v9 = FUN_0026b738(*(unsigned short *)(temp_v15 + 0xd134));
           if (temp_v9 == 0) {
@@ -730,7 +730,7 @@ LAB_001cfdfc:
           buttonHelpShowSkillDetails(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
           *piVar9 = *piVar9 + 1;
         }
-        temp_v4 = FUN_0029aafc();
+        temp_v4 = countUnlockedSlots();
         temp_v5 = 0;
         if (temp_v5 < temp_v4) {
           do {
@@ -879,7 +879,7 @@ LAB_001cf28c:
         qsort(temp_v8,8,2,&LAB_002c6e64);
         *(short *)(temp_v15 + 0xd114) = temp_v3;
         *(unsigned short *)(temp_v15 + 0xd124) = 0;
-        temp_v9 = FUN_0029aafc();
+        temp_v9 = countUnlockedSlots();
         if (temp_v27 != 0) {
           temp_v8 = 0;
           if (0 < temp_v9) {
@@ -908,7 +908,7 @@ LAB_001cf5dc:
         *(unsigned short *)(temp_v15 + 0xd114) =
              *(unsigned short *)(param_1 + *(int *)(param_1 + 0xd2c4) * 2 + 0xd132);
         *(unsigned short *)(temp_v15 + 0xd124) = 0;
-        temp_v9 = FUN_0029aafc();
+        temp_v9 = countUnlockedSlots();
         if (0 < temp_v9) {
           do {
             if (*(short *)(temp_v6 + temp_v8 * 2 + 0x34) == *(short *)(temp_v15 + 0xd114)) {
@@ -917,7 +917,7 @@ LAB_001cf5dc:
               break;
             }
             temp_v8 = temp_v8 + 1;
-            temp_v9 = FUN_0029aafc();
+            temp_v9 = countUnlockedSlots();
           } while (temp_v8 < temp_v9);
         }
       }

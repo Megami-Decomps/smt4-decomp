@@ -21,8 +21,8 @@ extern ModelGroups *g_modelGroups;
 void FUN_0029570c(void);
 void faderSetValue(AsdMdlNode *node, f32 value);
 void nodeSetTranslation(AsdMdlNode *node, s32 mode, const f32 *position);
-void FUN_0036bb1c(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
-void FUN_001ac2d4(AsdMdlNode *node, s32 animation, f32 blend);
+void modelPartSetRotationDegrees(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
+void modelSelectPrimaryMotion(AsdMdlNode *node, s32 animation, f32 blend);
 }
 static inline void suspendModelGroupSlot(ModelGroupResumeSlot *slot)
 {
@@ -62,9 +62,9 @@ extern "C" void FUN_002d8cec(void)
                     else
                         suspendModelGroupSlot(slot);
                     nodeSetTranslation(slot->model->node, 0, slot->position);
-                    FUN_0036bb1c(slot->model->node, 0, 0.0f, slot->yaw, 0.0f);
+                    modelPartSetRotationDegrees(slot->model->node, 0, 0.0f, slot->yaw, 0.0f);
                     if (slot->model->node->currentMotion != slot->animation)
-                        FUN_001ac2d4(slot->model->node, slot->animation, 0.0f);
+                        modelSelectPrimaryMotion(slot->model->node, slot->animation, 0.0f);
                     slot->dirty = 0;
                 }
             }

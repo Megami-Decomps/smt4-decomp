@@ -36,7 +36,7 @@ s32 textureGetIndexedResource(u32);
 s32 aocCountTableRecords(AocSystemA *);
 void FUN_00403b84(ContentListScreen *);
 void gridNavigationConfigure(ContentListScroller *, void *, s32, s32, s32, s32);
-u16 FUN_001643b4(u32, s32);
+u16 ifTouchRegionAddRequested(u32, s32);
 void sortOwnerRun(ContentListScreen *);
 void FUN_00202400();
 void FUN_004029f4(ContentListScreen *, s32, s32);
@@ -73,12 +73,12 @@ void contentListWaitAndInitialize(ContentListScreen *screen)
     for (s32 i = 0; i < 10; ++i) {
         if (i >= screen->visibleCount)
             break;
-        screen->rowTouches[i] = FUN_001643b4(0x32, i + 0x67);
+        screen->rowTouches[i] = ifTouchRegionAddRequested(0x32, i + 0x67);
         ++screen->touchCount;
     }
-    screen->previousTouch = FUN_001643b4(0x32, 0x8c);
-    screen->nextTouch = FUN_001643b4(0x32, 0x8d);
-    screen->backTouch = FUN_001643b4(0x32, 0x8b);
+    screen->previousTouch = ifTouchRegionAddRequested(0x32, 0x8c);
+    screen->nextTouch = ifTouchRegionAddRequested(0x32, 0x8d);
+    screen->backTouch = ifTouchRegionAddRequested(0x32, 0x8b);
     screen->touchCount += 3;
     screen->selected = reinterpret_cast<u32>(contentFindRecordById(screen->selectedId));
     sortOwnerRun(screen);

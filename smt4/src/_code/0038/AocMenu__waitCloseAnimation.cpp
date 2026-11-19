@@ -1,10 +1,10 @@
 #include "classes/AocMenu.h"
 #include "ui/SceneWindowWork.h"
+#include "addon/aocBootProcess.h"
 
 extern "C" {
 void aocEntryPanelCreateText(void *job, u32 message, s32 argument, s32 flags);
 void aocMenuSetButtonHelp(SceneWindowWork *, s32, s32);
-void FUN_0027e9c0(void *job);
 void jobOwnerFreeSlotAndStop(void *job);
 void eventQueueAddUniqueIfValid(u32 eventId);
 s32 buttonHelpHasEnabledEntryForId(u32);
@@ -25,7 +25,7 @@ void AocMenu::waitCloseAnimation()
     case 1:
         if (uiSpriteGetCompletionState(&work->dialog.cursor) && buttonHelpHasEnabledEntryForId(0x10)) {
             eventQueueAddUniqueIfValid(0x100016d);
-            FUN_0027e9c0(job);
+            flagObjAdvance(job);
             aocMenuSetButtonHelp(work, -1, 0);
             work->transition.phase = 2;
         }

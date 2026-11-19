@@ -17,16 +17,6 @@ void lmapSceneBeginPositionTransition(f32 x, f32 y, f32 z, f32 endX, f32 endY, f
 extern "C" {
 #endif
 
-void FUN_002d55f0(u32 arg);
-
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 void FUN_002e00e0(u8 *flag);
 
 #ifdef __cplusplus

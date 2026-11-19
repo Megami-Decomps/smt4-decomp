@@ -9,7 +9,7 @@ extern "C" {
 int uiSetFloatPair(unsigned char *);
 int FUN_0014f0dc(unsigned char *, int, int, int);
 int FUN_001523b8(unsigned char *, int);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int residentApplyFallbackValues(void);
 int FUN_003250ac(unsigned char [4]);

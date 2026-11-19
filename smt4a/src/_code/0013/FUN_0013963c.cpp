@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_0013cab8(s32 channel, s32 a, s32 b);
 void asdSequenceStart(s32 id, u8 *table, s32 size);
-void FUN_0013ea78(s32 id, u8 *table, s32 size);
+void paramTripleSet(s32 id, u8 *table, s32 size);
 void sysSetCachedPair(u8 *start, u8 *end);
 s32 pairedAvailabilityGetState(s32 channel);
 extern u8 DAT_00580000[];
@@ -16,7 +16,7 @@ extern u8 LAB_00151230;   /* end of it */
 void FUN_0013963c(void)
 {
     asdSequenceStart(1, DAT_00580000, 0x1C);
-    FUN_0013ea78(0xC9, DAT_00580150, 0x16);
+    paramTripleSet(0xC9, DAT_00580150, 0x16);
     sysSetCachedPair(&LAB_0015110c, &LAB_00151230);
     if (pairedAvailabilityGetState(0) == 3) {
         FUN_0013cab8(0, 10, 0xFF);

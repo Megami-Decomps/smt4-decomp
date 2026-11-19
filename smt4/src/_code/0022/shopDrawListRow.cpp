@@ -13,7 +13,6 @@
 #include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
-SpriteInfo *FUN_002bf4f0(const AsdTextureRegion *region, u32 id); // declcheck: local (returns the region's sprite entry `id`; the shared prototype is the forwarding definition's one-argument view)
 void FUN_00230d84(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth);
 void FUN_00231bcc(const AsdTextureRegion *region, u32 id, s32 x, s32 y, u32 depth, u32 mode);
 void FUN_00230d2c(const AsdTextureRegion *region, u32 id, s32 x, s32 y, s32 depth, s32 showEquipped);
@@ -48,11 +47,11 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
         depth++;
     }
     f32 z = (f32)(256 - depth) * 0.00390625f;
-    SpriteInfo *origin;
+    const TextureTableEntryIV *origin;
     if (!selected) {
-        origin = FUN_002bf4f0(&scene->region, row + 0x27);
+        origin = layoutFindTableEntry(&scene->region, row + 0x27);
     } else {
-        origin = FUN_002bf4f0(&scene->region, row + 0x4F);
+        origin = layoutFindTableEntry(&scene->region, row + 0x4F);
     }
     s32 x = origin->x;
     s32 y = origin->y;
@@ -69,24 +68,24 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
         } else {
             FUN_00231bcc(&scene->region, 0x4B, x, y, depth, 1);
         }
-        SpriteInfo *clip = FUN_002bf4f0(&scene->region, 0x4E);
+        const TextureTableEntryIV *clip = layoutFindTableEntry(&scene->region, 0x4E);
         s32 clipX = clip->x + x;
         s32 clipY = clip->y + y;
-        s32 clipWidth = clip->size[0];
-        s32 clipHeight = clip->size[1];
+        s32 clipWidth = clip->placement->width;
+        s32 clipHeight = clip->placement->height;
         gxSetClippedBottomScreenScissor(clipX, clipY, clipWidth, clipHeight);
-        SpriteInfo *content = FUN_002bf4f0(&scene->region, 0x4D);
+        const TextureTableEntryIV *content = layoutFindTableEntry(&scene->region, 0x4D);
         UiSpriteState *scroll = &scene->animation.sprites[3];
-        s32 contentX = vec2GetXInt(scroll) + x - (content->bounds.width & 0x7FFF);
+        s32 contentX = vec2GetXInt(scroll) + x - (content->width & 0x7FFF);
         s32 contentY = vec2GetYInt(scroll) + y;
         FUN_00231bcc(&scene->region, 0x4D, contentX, contentY, depth, 1);
         renderStackSet(&g_titleScene->scissor, 0);
     }
-    SpriteInfo *badge;
+    const TextureTableEntryIV *badge;
     if (!selected) {
-        badge = FUN_002bf4f0(&scene->region, 0x99);
+        badge = layoutFindTableEntry(&scene->region, 0x99);
     } else {
-        badge = FUN_002bf4f0(&scene->region, 0xAC);
+        badge = layoutFindTableEntry(&scene->region, 0xAC);
     }
     s32 badgeX = badge->x + x;
     s32 badgeY = badge->y + y;
@@ -97,22 +96,22 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
 
     if (row != 0) {
         if (entry->unk02 & 1) {
-            SpriteInfo *mark;
+            const TextureTableEntryIV *mark;
             if (!selected) {
-                mark = FUN_002bf4f0(&scene->region, 0x98);
+                mark = layoutFindTableEntry(&scene->region, 0x98);
             } else {
-                mark = FUN_002bf4f0(&scene->region, 0xAB);
+                mark = layoutFindTableEntry(&scene->region, 0xAB);
             }
             s32 markX = mark->x + x;
             s32 markY = mark->y + y;
             uiRectDrawAtBottomRight(&scene->region, 5, markX, markY, depth);
         }
         if (entry->unk02 & 2) {
-            SpriteInfo *mark;
+            const TextureTableEntryIV *mark;
             if (!selected) {
-                mark = FUN_002bf4f0(&scene->region, 0x9F);
+                mark = layoutFindTableEntry(&scene->region, 0x9F);
             } else {
-                mark = FUN_002bf4f0(&scene->region, 0xB2);
+                mark = layoutFindTableEntry(&scene->region, 0xB2);
             }
             s32 markX = mark->x + x;
             s32 markY = mark->y + y;
@@ -149,7 +148,7 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
             color = 0x787878FF;
         }
     }
-    SpriteInfo *nameOrigin = FUN_002bf4f0(&scene->region, nameSprite);
+    const TextureTableEntryIV *nameOrigin = layoutFindTableEntry(&scene->region, nameSprite);
     s32 nameX = nameOrigin->x + x;
     s32 nameY = nameOrigin->y + y;
     drawTextAtSnappedRectangle(&scene->region, (f32)nameX, (f32)nameY, font, color, name, z, 0.0f, 1.0f);
@@ -162,13 +161,13 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
         } else {
             price = shopSlotGetPrice(entry);
         }
-        SpriteInfo *priceOrigin;
+        const TextureTableEntryIV *priceOrigin;
         u32 priceColor;
         if (!selected) {
-            priceOrigin = FUN_002bf4f0(&scene->region, 0xA7);
+            priceOrigin = layoutFindTableEntry(&scene->region, 0xA7);
             priceColor = 0x5A5A5AFF;
         } else {
-            priceOrigin = FUN_002bf4f0(&scene->region, 0xBA);
+            priceOrigin = layoutFindTableEntry(&scene->region, 0xBA);
             priceColor = 0xFFFFFFFF;
         }
         s32 priceX = priceOrigin->x + x;
@@ -178,13 +177,13 @@ void shopDrawListRow(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *
     }
 
     s32 owned = itemGetOwnedCount(id);
-    SpriteInfo *ownedOrigin;
+    const TextureTableEntryIV *ownedOrigin;
     u32 ownedColor;
     if (!selected) {
-        ownedOrigin = FUN_002bf4f0(&scene->region, 0xA9);
+        ownedOrigin = layoutFindTableEntry(&scene->region, 0xA9);
         ownedColor = 0x7A4C00FF;
     } else {
-        ownedOrigin = FUN_002bf4f0(&scene->region, 0xBC);
+        ownedOrigin = layoutFindTableEntry(&scene->region, 0xBC);
         ownedColor = 0xF49800FF;
     }
     s32 ownedX = ownedOrigin->x + x;

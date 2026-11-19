@@ -17,17 +17,17 @@ void mobiclipPlayerReleaseHandle(MovieReadHandle *);
 void timedJobBeginStop(MovieSync *);
 void FUN_0011b788(MovieSync *);
 void asdSndApplyPendingVoiceState(MovieReadHandle *);
-s32 FUN_00350e18(MovieSync *);
+s32 block158OwnerHasRemaining(MovieSync *);
 s64 FUN_00350ff8(MovieSync *);
-void FUN_0034fc50(MovieSync *, s64 interval);
+void movieSyncConsumeReadyFrame(MovieSync *, s64 interval);
 s32 FUN_00350c98(MovieSync *, s64 interval);
-void FUN_0034fe14(MovieSync *);
-s32 FUN_00350854(MovieSync *);
+void block158OwnerCheck(MovieSync *);
+s32 block158OwnerReady(MovieSync *);
 void FUN_0034f5f8(MovieReadHandle *);
 void movieSyncDrainSourcePositions(MovieSync *);
 void FUN_0034fbc8(MovieSync *);
 void FUN_00350e30(MovieSync *);
-void FUN_0034f630(MovieReadHandle *);
+void playHandleStart(MovieReadHandle *);
 void mobiclipYieldPlaybackThread(MovieSync *);
 void FUN_00350320(MovieSync *);
 
@@ -43,15 +43,15 @@ u8 mobiclipPollUntilReady(void)
             FUN_0011b788(&g_mobiclipPlayer);
             asdSndApplyPendingVoiceState(&DAT_004c3af8);
         }
-        if (!FUN_00350e18(&g_mobiclipPlayer)) {
+        if (!block158OwnerHasRemaining(&g_mobiclipPlayer)) {
             s64 elapsed = FUN_00350ff8(&g_mobiclipPlayer);
             if (elapsed >= g_mobiclipCtrl.interval) {
-                FUN_0034fc50(&g_mobiclipPlayer, g_mobiclipCtrl.interval);
+                movieSyncConsumeReadyFrame(&g_mobiclipPlayer, g_mobiclipCtrl.interval);
             } else if (FUN_00350c98(&g_mobiclipPlayer, g_mobiclipCtrl.interval)) {
-                FUN_0034fe14(&g_mobiclipPlayer);
+                block158OwnerCheck(&g_mobiclipPlayer);
             }
         }
-        if (FUN_00350854(&g_mobiclipPlayer)) {
+        if (block158OwnerReady(&g_mobiclipPlayer)) {
             s64 elapsed = FUN_00350ff8(&g_mobiclipPlayer);
             if (elapsed >= g_mobiclipCtrl.interval * 6) {
                 FUN_0034f5f8(&DAT_004c3af8);
@@ -60,7 +60,7 @@ u8 mobiclipPollUntilReady(void)
             } else if (elapsed >= 0) {
                 ready = true;
                 FUN_00350e30(&g_mobiclipPlayer);
-                FUN_0034f630(&DAT_004c3af8);
+                playHandleStart(&DAT_004c3af8);
             }
         }
         if (g_mobiclipCtrl.stop) {

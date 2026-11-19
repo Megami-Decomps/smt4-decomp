@@ -43,7 +43,7 @@ static __inline BtlActionSlot *btlActionGetSlot(s32 index)
 /* Runs the action: puts the unit into its idle/hit state (1 when hp <= 1, else 0 and a UI call), fires the action's hooks and marks the unit's slot. Returns 0 when blocked by an event. */
 u32 FUN_003cfb60(BtlWork **work, BtlAction *action)
 {
-    if (FUN_0027e3b8(reinterpret_cast<int *>(g_btlEvent)) != 0) {
+    if (isEntryUsable(reinterpret_cast<int *>(g_btlEvent)) != 0) {
         return 0;
     }
     if ((*work)->state != 13) {

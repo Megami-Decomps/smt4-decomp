@@ -13,7 +13,7 @@ int FUN_00186adc(unsigned int, unsigned int *, int, unsigned int);
 int asdListAdd(int *, int, int);
 int resOwnerRunNodeHandlers(unsigned int);
 int asdMdlNodeInit(int, unsigned int);
-int FUN_001ad22c(unsigned int *, unsigned int);
+int asdModelRebuildAttributeRecords(unsigned int *, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -36,7 +36,7 @@ extern unsigned int ownerGetFloatValue(unsigned int *);
 /* Supplied declaration required: asdListAdd. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: asdMdlNodeInit. */
-/* Supplied declaration required: FUN_001ad22c. */
+/* Supplied declaration required: asdModelRebuildAttributeRecords. */
 
 
 void FUN_00162a50(void)
@@ -120,7 +120,7 @@ void FUN_00162a50(void)
                       temp_v10 = temp_v9;
                     }
                     *puVar9 = *puVar9 & 0xfffffffe;
-                    FUN_001ad22c(puVar9,puVar9[0xe]);
+                    asdModelRebuildAttributeRecords(puVar9,puVar9[0xe]);
                   }
                   else {
                     *(float *)piVar7[9] = temp_v12;

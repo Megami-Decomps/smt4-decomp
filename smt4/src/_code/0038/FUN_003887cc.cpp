@@ -11,7 +11,7 @@ int threadTryJoinAndClose(...);
 int asdFsIsSdCardDetected(...);
 int legacyResourceIdRemap(...);
 int byteIsAtLeast100(...);
-int FUN_002b486c(...);
+int aocPackageOwnerFreeTables(...);
 int FUN_002b4b88(...);
 int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 int _ZN18WindowStatusResultC1Ej(...);
@@ -54,7 +54,7 @@ extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: byteIsAtLeast100. */
 extern int objGetFlagBit0(int);
 extern int FUN_002ad1e0(int);
-/* Supplied declaration required: FUN_002b486c. */
+/* Supplied declaration required: aocPackageOwnerFreeTables. */
 /* Supplied declaration required: FUN_002b4b88. */
 /* Supplied declaration required: _ZN7AocMain12queueRequestE17RequestParametersji. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
@@ -305,7 +305,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
     FUN_002b4b88(*(int *)(param_2 + 0x318),destroyObj0055c6e4);
     *(unsigned int *)(param_2 + 0x318) = 0;
   }
-  FUN_002b486c(param_2);
+  aocPackageOwnerFreeTables(param_2);
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   jyoucyuGetTableEntry(0);
   temp_v3 = g_aocMain;

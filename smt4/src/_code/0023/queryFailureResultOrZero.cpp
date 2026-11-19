@@ -1,19 +1,6 @@
-#include "common.h"
+#include "classes/WindowStatus.h"
 #include "nn/Result.h"
-
 extern "C" {
-
-extern int queryResultFailureOnly(void);
-
-/* Returns the result of queryResultFailureOnly when it is negative, else 0. */
-int queryFailureResultOrZero(void)
-{
-    int result = queryResultFailureOnly();
-
-    if (!nnResultIsFailure(result)) {
-        result = 0;
-    }
-    return result;
+/* Returns only negative failure results. */
+nn::Result queryFailureResultOrZero(void *owner) { s32 result=queryResultFailureOnly(static_cast<const u32 *>(owner)); return nnResultIsFailure(result) ? result : 0; }
 }
-
-} /* extern "C" */

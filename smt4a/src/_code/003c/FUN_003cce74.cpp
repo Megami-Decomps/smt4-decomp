@@ -20,7 +20,7 @@ void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *form
 void FUN_00185e84(s32 id, s32 x, s32 y, u32 flags, s32 a, s32 b);
 void largeGridDrawButtonStrip(GridDetailView *view, s32 x, s32 y, s32 slot, f32 speed);
 void statDrawClampedDelta(void *owner, s32 id, s32 x, s32 y, u32 flags, s32 arg);
-u32 FUN_0014bd84(u16 id);
+u32 aocIndexValueOrDefault(u16 id); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/Text/AsdText.h changes this unit's code: score 190 -> 246)
 s32 recordGetModeForId(s32 id);
 s32 listCursorGetRowIfUnblocked(void *cursor);
 s32 recordContainsPairedId(void *owner, u16 id);
@@ -48,7 +48,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
         s32 mode = recordGetModeForId(view->slotIds[button]);
         if (mode == 1 || mode == 2 || mode == 6)
             color = GRID_COLOR_SPECIAL;
-        sprintf(text, "%s", FUN_0014bd84(entry));
+        sprintf(text, "%s", aocIndexValueOrDefault(entry));
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
         textDrawString((f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 2, 0.0f, color, speed, text);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1A, 0x1A1);

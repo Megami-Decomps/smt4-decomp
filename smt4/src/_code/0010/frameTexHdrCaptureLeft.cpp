@@ -7,7 +7,7 @@
 extern "C" {
 
 s32 stateValuesGetBySelector(u32 arg);
-s32 FUN_002bfadc(u32 arg, AsdTexture *surface);
+s32 gxCopyFramebufferToSurface(u32 arg, AsdTexture *surface);
 void surfaceCopy(AsdTexture *src, AsdTexture *dst);
 
 
@@ -31,7 +31,7 @@ s32 frameTexHdrCaptureLeft(u32 job)
     renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));
     work->sceneSurface->dimensions.width = 0x200;
     work->sceneSurface->dimensions.height = 0x200;
-    work->hdr.captureResult = FUN_002bfadc(0, work->sceneSurface);
+    work->hdr.captureResult = gxCopyFramebufferToSurface(0, work->sceneSurface);
     s32 skipped = stateValuesGetBySelector(0);
     s32 levels = work->hdr.levels;
     if (skipped == 0 && levels > 1) {

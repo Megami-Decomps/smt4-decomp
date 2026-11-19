@@ -11,6 +11,7 @@
 #include "map/mapDepart.h"
 #include "code/Code001d_Smt4.h"
 #include "game/GameState.h"
+#include "code/Code0013.h"
 
 extern "C" {
 
@@ -40,7 +41,7 @@ int FUN_00287c34(...);
 int soundChannelStopAll(...);
 int asdSequenceRequest(...);
 int NaviMain_Destroy(void);
-int FUN_0032c69c(void);
+int bgmStopWithoutEntry(void);
 int mapIfDestroy(void);
 int mapEnemyStopJob(void);
 void objectDestroyModelManager(void);
@@ -65,7 +66,7 @@ int mapCollisionRelease(void);
 int FUN_00281784(void);
 int eventScriptFindCompletionFlag(...);
 int aocBufferQueueDisplay(...);
-int FUN_00289de4(...);
+int aocDrawText7(...); // declcheck: local (romwright prototype; the shared declaration in addon/AocFileBufferApi.h does not compile here: more than one instance of overloaded function "aocBufferQueueDisplay" has "C" linkage)
 int scrScriptProcessDestroy(...);
 int asdModelSlotRelease(...);
 int asdMemFree(...);
@@ -120,7 +121,7 @@ int mapObjectVisibilityRestore(void);
 int mapMainEnterScene(void);
 int FUN_00273c54(void);
 int FUN_00273d34(void);
-int FUN_00273f5c(void);
+int clearFlags310To31F(void);
 int FUN_00273f90(void);
 int lmapUpdateSceneModels(void);
 int FUN_00274798(void);
@@ -234,7 +235,6 @@ int mapCompleteGroup(...);
 int navigationSetArguments(...);
 int mapEntryTriggerForScene(...);
 int mapSkyTableLoad(...);
-int mapSetDepartureIndex(...);
 int FUN_0028527c(...);
 int naviRegisterTransitionsAndRequest(...);
 int mapGetDepartureIndex(void);
@@ -522,7 +522,7 @@ extern int FUN_0027398c(int);
 /* Supplied declaration required: mapMainEnterScene. */
 /* Supplied declaration required: FUN_00273c54. */
 /* Supplied declaration required: FUN_00273d34. */
-/* Supplied declaration required: FUN_00273f5c. */
+/* Supplied declaration required: clearFlags310To31F. */
 extern char *campGetState(void);
 /* Supplied declaration required: FUN_00273f90. */
 /* Supplied declaration required: lmapUpdateSceneModels. */
@@ -584,7 +584,6 @@ extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: mapEntryTriggerForScene. */
 /* Supplied declaration required: mapSkyTableLoad. */
-/* Supplied declaration required: mapSetDepartureIndex. */
 /* Supplied declaration required: actorApplyAlpha. */
 extern int conditionalMessageFind(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetRecord23. */
@@ -632,7 +631,7 @@ extern int screenFadesAllReady(void);
 
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
-/* Supplied declaration required: FUN_00289de4. */
+/* Supplied declaration required: aocDrawText7. */
 extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028a420. */
 /* Supplied declaration required: FUN_0028d664. */
@@ -672,7 +671,6 @@ extern int padIsButtonPressed(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c29d8. */
-extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
@@ -687,7 +685,7 @@ extern int FUN_002eb134(void);
 /* Supplied declaration required: naviMainStartStateTimer. */
 /* Supplied declaration required: FUN_002f3694. */
 extern int FUN_002f400c(void);
-extern unsigned short FUN_002faf78(void);
+extern unsigned short gameFlagsGetWorkValue(void);
 /* Supplied declaration required: gameMapBitSet. */
 /* Supplied declaration required: aocFindSupplementalRecordIndex. */
 /* Supplied declaration required: naviRefreshMainBlock. */
@@ -697,7 +695,7 @@ extern int dataTableFindFirstPermittedRecordIndex(int);
 /* Supplied declaration required: FUN_0031d54c. */
 extern int FUN_00328b1c(int);
 /* Supplied declaration required: NaviMain_Destroy. */
-/* Supplied declaration required: FUN_0032c69c. */
+/* Supplied declaration required: bgmStopWithoutEntry. */
 /* Supplied declaration required: mapIfDestroy. */
 /* Supplied declaration required: MapDepart_Init. */
 /* Supplied declaration required: MapEnemy_Register. */
@@ -1057,7 +1055,7 @@ LAB_001b848c:
     if (puVar14[0xb] != 0x18) {
       *(unsigned char *)(temp_v9 + 0x792) = 0;
       DAT_0049f942 = '\0';
-      mapSetDepartureIndex();
+      mapSetDepartureIndex(0);
       FUN_0028527c(0);
     }
     else {
@@ -1437,7 +1435,7 @@ LAB_001b8e80:
          ((DAT_0049fa38 != '\0' &&
           ((*(char *)((int)puVar14 + 0x45) == '\0' && (*(char *)((int)puVar14 + 0x46) == '\0'))))))
         && (temp_v9 = conditionalMessageFind(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)) &&
-       (temp_v9 = FUN_002c2a04(1), temp_v9 == 3)) {
+       (temp_v9 = pairedAvailabilityGetState(1), temp_v9 == 3)) {
       FUN_002c29d8(1,10,0xff);
     }
     temp_v9 = puVar14[9] + 1;
@@ -1465,12 +1463,12 @@ LAB_001b8e80:
        ((*(char *)((int)puVar14 + 0x45) == '\0' &&
         ((*(char *)((int)puVar14 + 0x46) == '\0' &&
          (temp_v9 = conditionalMessageFind(puVar14[0xb],puVar14[0xc]), temp_v9 == 0)))))) {
-      temp_v9 = FUN_002c2a04(0);
+      temp_v9 = pairedAvailabilityGetState(0);
       if (temp_v9 == 3) {
         FUN_002c29d8(0,10,0xff);
       }
       if (DAT_0049fb9c == 0) {
-        temp_v9 = FUN_002c2a04(1);
+        temp_v9 = pairedAvailabilityGetState(1);
         if (temp_v9 == 3) {
           FUN_002c29d8(1,10,0xff);
         }
@@ -1580,11 +1578,11 @@ LAB_001b9210:
     DAT_0049f93c = 1;
     puVar14[9] = 0x4b;
     puVar14[10] = 0;
-    temp_v9 = FUN_002c2a04(0);
+    temp_v9 = pairedAvailabilityGetState(0);
     if (temp_v9 == 3) {
       FUN_002c29d8(0,10,0xff);
     }
-    temp_v9 = FUN_002c2a04(1);
+    temp_v9 = pairedAvailabilityGetState(1);
     if (temp_v9 == 3) {
       FUN_002c29d8(1,10,0xff);
     }
@@ -3029,7 +3027,7 @@ LAB_001bb1d4:
       DAT_0049fa96 = 1;
     }
     *(unsigned short *)(temp_v9 + 0x22) = 0;
-    FUN_00273f5c();
+    clearFlags310To31F();
     naviClearObjectBlock();
     mapClearPendingEntries();
     if (pcVar13[2] != '\0') {
@@ -3966,11 +3964,11 @@ joined_r0x001bce40:
       puVar14[10] = 0;
       mapMainEnterScene();
       FUN_0027d0ec();
-      temp_v9 = FUN_002c2a04(0);
+      temp_v9 = pairedAvailabilityGetState(0);
       if (temp_v9 == 3) {
         FUN_002c29d8(0,10,0xff);
       }
-      temp_v9 = FUN_002c2a04(1);
+      temp_v9 = pairedAvailabilityGetState(1);
     }
     else {
       FUN_0027fc14(0);
@@ -3985,11 +3983,11 @@ joined_r0x001bce40:
       puVar14[9] = 0x15;
       puVar14[10] = 0;
       mapMainEnterScene();
-      temp_v9 = FUN_002c2a04(0);
+      temp_v9 = pairedAvailabilityGetState(0);
       if (temp_v9 == 3) {
         FUN_002c29d8(0,10,0xff);
       }
-      temp_v9 = FUN_002c2a04(1);
+      temp_v9 = pairedAvailabilityGetState(1);
     }
     if (temp_v9 == 3) {
       FUN_002c29d8(1,10,0xff);
@@ -4539,11 +4537,11 @@ LAB_001bd824:
       return 0;
     }
     if (DAT_0049fd14 == 0xffffffff) {
-      temp_v9 = FUN_002c2a04(0);
+      temp_v9 = pairedAvailabilityGetState(0);
       if (temp_v9 == 3) {
         FUN_002c29d8(0,10,0xff);
       }
-      temp_v9 = FUN_002c2a04(1);
+      temp_v9 = pairedAvailabilityGetState(1);
       if (temp_v9 == 3) {
         FUN_002c29d8(1,10,0xff);
       }
@@ -4603,11 +4601,11 @@ LAB_001bd824:
       mapMainEnterScene();
       FUN_0027d0ec();
       if (DAT_0049fa38 != '\0') {
-        temp_v9 = FUN_002c2a04(0);
+        temp_v9 = pairedAvailabilityGetState(0);
         if (temp_v9 == 3) {
           FUN_002c29d8(0,10,0xff);
         }
-        temp_v9 = FUN_002c2a04(1);
+        temp_v9 = pairedAvailabilityGetState(1);
         if (temp_v9 == 3) {
           FUN_002c29d8(1,10,0xff);
         }
@@ -4756,7 +4754,7 @@ LAB_001be80c:
       return 0;
     }
     temp_v9 = g_aocSystem;
-    FUN_00289de4(g_aocSystem,puVar23[0x19],0);
+    aocDrawText7(g_aocSystem,puVar23[0x19],0);
     puVar23[0x23] = temp_v9;
     temp_v9 = g_aocSystem;
     aocBufferQueueDisplay(g_aocSystem,puVar23[0x19],0);
@@ -5643,7 +5641,7 @@ joined_r0x001bfcb4:
           }
           if (((temp_v19 && temp_v0 == '\0') && ((int)DAT_0049fd14 < 200)) &&
              (DAT_0049fd14 == 0xffffffff)) {
-            FUN_0032c69c();
+            bgmStopWithoutEntry();
           }
         }
       }
@@ -5731,7 +5729,7 @@ joined_r0x001bfcb4:
       uStack_1b8 = (unsigned int)(*(unsigned short *)((unsigned char *)&uStack_1b8 + 2)) << 0x10;
       slotFindByPair(puVar14[0xb],puVar14[0xc]);
       uStack_1c8 = uStack_1c8 & 0xffffff00;
-      temp_v6 = FUN_002faf78();
+      temp_v6 = gameFlagsGetWorkValue();
       uStack_1c8 = romwright_piece_2_2(temp_v6,(unsigned short)uStack_1c8);
       if (DAT_0049f942 != '\0') {
         temp_v10 = mapGetDepartureIndex();

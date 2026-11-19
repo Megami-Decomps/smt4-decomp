@@ -6,7 +6,7 @@ extern "C" {
 
 int vectorPairTransitionStep(void);
 int FUN_00282228(float *);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 
 /* stack frame of void: 13 slot(s), 52 byte(s) */
@@ -31,7 +31,7 @@ extern int g_lmapScene; /* 0x447e88 */
 
 /* Supplied declaration required: vectorPairTransitionStep. */
 /* Supplied declaration required: FUN_00282228. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 
 
@@ -96,7 +96,7 @@ void FUN_0021b2ec(void)
     temp_v4 = 250.0f;
     temp_v14 = temp_v14 + temp_v11 * 250.0f;
     temp_v11 = *(float *)(g_lmapScene + 0x50) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v22 = temp_v12 + temp_v11 * temp_v4;
     temp_v12 = *(float *)(g_lmapScene + 0x30);
     temp_v11 = *(float *)(g_lmapScene + 0x50) * temp_v5;
@@ -108,7 +108,7 @@ void FUN_0021b2ec(void)
     temp_v4 = temp_v4 + temp_v11 * temp_v6;
     temp_v7 = temp_v7 + 300.0f;
     temp_v5 = *(float *)(g_lmapScene + 0x50) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v25 = temp_v12 + temp_v5 * temp_v6;
     temp_v27 = 0x3c;
     temp_v26 = 0;
@@ -139,7 +139,7 @@ void FUN_0021b2ec(void)
       mathRemPio2f();
       temp_v7 = temp_v7 + temp_v4 * temp_v12;
       temp_v4 = (*(float *)(g_lmapScene + 0x50) + temp_v11) * temp_v5;
-      FUN_00282390();
+      libm_cosf();
       temp_v22 = temp_v8 + temp_v4 * temp_v12;
       temp_v4 = *(float *)(g_lmapScene + 0x30);
       temp_v8 = *(float *)(g_lmapScene + 0x28);
@@ -151,7 +151,7 @@ void FUN_0021b2ec(void)
       temp_v8 = temp_v8 + temp_v12 * temp_v6;
       temp_v24 = temp_v10 + temp_v14;
       temp_v5 = (*(float *)(g_lmapScene + 0x50) + temp_v11) * temp_v5;
-      FUN_00282390();
+      libm_cosf();
       temp_v25 = temp_v4 + temp_v5 * temp_v6;
       temp_v26 = 1;
       temp_v27 = 600;
@@ -190,7 +190,7 @@ void FUN_0021b2ec(void)
     mathRemPio2f();
     temp_v7 = temp_v7 + temp_v4 * temp_v12;
     temp_v4 = (*(float *)(g_lmapScene + 0x50) + temp_v11) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v22 = temp_v8 + temp_v4 * temp_v12;
     temp_v4 = *(float *)(g_lmapScene + 0x28);
     temp_v10 = *(float *)(g_lmapScene + 0x2c);
@@ -202,7 +202,7 @@ void FUN_0021b2ec(void)
     temp_v4 = temp_v4 + temp_v12 * temp_v6;
     temp_v18 = temp_v10 + temp_v14;
     temp_v5 = (*(float *)(g_lmapScene + 0x50) + temp_v11) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v19 = temp_v8 + temp_v5 * temp_v6;
     temp_v16 = temp_v20;
     uStack_b4 = temp_v21;
@@ -237,7 +237,7 @@ void FUN_0021b2ec(void)
     temp_v14 = temp_v14 + temp_v12 * 200.0f;
     temp_v8 = temp_v8 + 10.0f;
     temp_v12 = *(float *)(g_lmapScene + 0x50) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v22 = temp_v4 + temp_v12 * temp_v7;
     temp_v4 = *(float *)(g_lmapScene + 0x28);
     temp_v10 = *(float *)(g_lmapScene + 0x2c);
@@ -249,7 +249,7 @@ void FUN_0021b2ec(void)
     temp_v4 = temp_v4 + temp_v12 * temp_v6;
     temp_v24 = temp_v10 + 330.0f;
     temp_v5 = (*(float *)(g_lmapScene + 0x50) - temp_v11) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v25 = temp_v7 + temp_v5 * temp_v6;
     temp_v27 = 0x14;
     temp_v26 = 0;
@@ -279,7 +279,7 @@ void FUN_0021b2ec(void)
         temp_v7 = temp_v7 + temp_v6;
         temp_v14 = temp_v14 + temp_v11 * 160.0f;
         temp_v11 = *(float *)(g_lmapScene + 0x50) * temp_v5;
-        FUN_00282390();
+        libm_cosf();
         temp_v22 = temp_v12 + temp_v11 * temp_v4;
         temp_v12 = *(float *)(g_lmapScene + 0x1c);
         temp_v8 = *(float *)(g_lmapScene + 0x20);
@@ -291,7 +291,7 @@ void FUN_0021b2ec(void)
         temp_v12 = temp_v12 + temp_v11 * temp_v6;
         temp_v8 = temp_v8 + 280.0f;
         temp_v5 = *(float *)(g_lmapScene + 0x50) * temp_v5;
-        FUN_00282390();
+        libm_cosf();
         temp_v25 = temp_v4 + temp_v5 * temp_v6;
         temp_v26 = 1;
         temp_v27 = 600;
@@ -334,7 +334,7 @@ void FUN_0021b2ec(void)
     temp_v7 = temp_v7 + temp_v4 * temp_v12;
     temp_v10 = temp_v10 + temp_v6;
     temp_v6 = *(float *)(g_lmapScene + 0x50) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v22 = temp_v8 + temp_v6 * temp_v12;
     temp_v12 = *(float *)(g_lmapScene + 0x28);
     temp_v8 = *(float *)(g_lmapScene + 0x2c);
@@ -346,7 +346,7 @@ void FUN_0021b2ec(void)
     temp_v12 = temp_v12 + temp_v6 * temp_v11;
     temp_v8 = temp_v8 + temp_v14;
     temp_v5 = (*(float *)(g_lmapScene + 0x50) - temp_v11) * temp_v5;
-    FUN_00282390();
+    libm_cosf();
     temp_v25 = temp_v4 + temp_v5 * temp_v11;
     temp_v27 = 8;
     temp_v26 = 0;
@@ -422,7 +422,7 @@ void FUN_0021b2ec(void)
       temp_v8 = (float)temp_v9 + temp_v4 * temp_v12;
       temp_v6 = (float)((unsigned long long)temp_v9 >> 0x20) + temp_v6;
       temp_v4 = *(float *)(g_lmapScene + 0x50) * temp_v5;
-      FUN_00282390();
+      libm_cosf();
       temp_v22 = temp_v7 + temp_v4 * temp_v12;
       temp_v4 = *(float *)(g_lmapScene + 0x28);
       temp_v10 = *(float *)(g_lmapScene + 0x2c);
@@ -434,7 +434,7 @@ void FUN_0021b2ec(void)
       temp_v4 = temp_v4 + temp_v12 * temp_v11;
       temp_v10 = temp_v10 + temp_v14;
       temp_v5 = (*(float *)(g_lmapScene + 0x50) - temp_v11) * temp_v5;
-      FUN_00282390();
+      libm_cosf();
       temp_v25 = temp_v7 + temp_v5 * temp_v11;
       temp_v27 = 300;
       temp_v26 = 0;

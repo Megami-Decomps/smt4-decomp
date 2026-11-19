@@ -1,6 +1,7 @@
 #include "quest_center/QuestRuntime.h"
 #include "quest_center/QuestRecord.h"
 #include "code/Code0029.h"
+#include "code/Code001b.h"
 
 extern "C" {
 QuestRuntimeFlagBlock *gameGetFlagBlock();
@@ -52,7 +53,7 @@ u8 FUN_0034888c(u32 id)
     ActiveQuests *active = reinterpret_cast<ActiveQuests *>(gameGetFlagBlock());
     status->flags = (status->flags & ~2) | 0x1c;
     status->stateFlags &= ~4;
-    if (FUN_00298f88(id)) {
+    if (dataTable1bOr1cRecordHasFlag1(id)) {
         if (questDataGetRecord(id)->kind == 1) {
             for (s32 i = 0; i < 4; ++i) {
                 if (active->repeated[i].id == id) {

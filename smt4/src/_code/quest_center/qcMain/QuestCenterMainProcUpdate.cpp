@@ -46,7 +46,7 @@ void *asdOperatorNew(u32 size);
 s32 gameFlagIsSet(u32 flag);
 s32 gameStateIsFlagSetAndLarge(void);
 s32 FUN_00287304(void);
-void FUN_00287328(u32 bgm);
+void bgmResumeOrRequestTrack(u32 bgm);
 void FUN_00287528(s32 mode);
 void commonBgStopChildAndBeginTransition(void);
 void commonBgAcquire(void);
@@ -57,7 +57,7 @@ void titleSetSlotValueState2(s32 first, s32 second);
 void FUN_002a6fb8(void);
 void libc_strcpy(char *destination, const char *source);
 void asdSequenceRequest(u32 kind, const void *argument, u32 size);
-void FUN_0032c69c(void);
+void bgmStopWithoutEntry(void);
 void FUN_00381b8c(void);
 void FUN_003840f4(QuestEntry *entry, s32 area, u32 argument, s32 resident);
 void dummyAttachmentUpdate(QuestEntry *entry);
@@ -144,7 +144,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
                 bgmState = bgmGetStateById(bgm);
             }
             if (bgmState != 1) {
-                FUN_00287328(bgm);
+                bgmResumeOrRequestTrack(bgm);
             }
             commonBgAcquire();
             buttonHelpAcquireResources();
@@ -199,7 +199,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
         if (g_qcMain.restoreMenus != 0) {
             titleSetSlotValueState2(0, 1);
             titleSetSlotValueState2(1, 1);
-            FUN_0032c69c();
+            bgmStopWithoutEntry();
         }
         return 0xffffffff;
     }

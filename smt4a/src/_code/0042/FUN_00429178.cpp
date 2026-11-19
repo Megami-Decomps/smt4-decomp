@@ -13,7 +13,7 @@ static __inline WindowStatusResult runRequests(void *owner, void *request, void 
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }
-    status = FUN_004283cc(owner);
+    status = queryFailureResultOrZero(owner);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

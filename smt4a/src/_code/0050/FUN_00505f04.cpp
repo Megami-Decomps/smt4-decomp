@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0044b3c8(...);
 int FUN_00467374(...);
-int FUN_004676c8(...);
+int nw_anim_res_CalcTranslateCurve(...);
 int FUN_00467810(...);
 int nw_anim_res_CalcVector3Curve(...);
 
@@ -31,7 +31,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0044b3c8. */
 /* Supplied declaration required: FUN_00467374. */
-/* Supplied declaration required: FUN_004676c8. */
+/* Supplied declaration required: nw_anim_res_CalcTranslateCurve. */
 /* Supplied declaration required: FUN_00467810. */
 /* Supplied declaration required: nw_anim_res_CalcVector3Curve. */
 
@@ -75,7 +75,7 @@ void FUN_00505f04(unsigned int param_1,fn_00505f04_arg1 *param_2,unsigned int *p
   }
   if ((temp_v4 & 8) == 0) {
     temp_v8[0] = temp_v8[0] & 0xfffffeff;
-    FUN_004676c8(param_2,temp_v8);
+    nw_anim_res_CalcTranslateCurve(param_2,temp_v8);
     param_2->field_0x3c = param_2->field_0x3c | 0x800;
   }
   if ((temp_v4 & 0x20) == 0) {

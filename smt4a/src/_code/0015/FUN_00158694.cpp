@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysReportCheckFailure(...);
-int FUN_001885e8(int *, int [2], int, int, int, unsigned int **);
+int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int [2], int, int, int, unsigned int **);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -30,7 +30,7 @@ extern unsigned int DAT_0062d388; /* 0x62d388 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: sysReportCheckFailure. */
-/* Supplied declaration required: FUN_001885e8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 
 
@@ -65,7 +65,7 @@ int FUN_00158694(int param_1,int param_2,int param_3,unsigned int param_4)
   uStack_54 = 0xc;
   piVar1 = temp_v7;
   temp_v2[2] = param_4;
-  FUN_001885e8(piVar1,temp_v4,0,3,1,temp_v5);
+  nn_fs_ipc_FileSystem_OpenFileDirectly(piVar1,temp_v4,0,3,1,temp_v5);
   if ((int)piVar1 < 0) {
     sysReportCheckFailure();
   }

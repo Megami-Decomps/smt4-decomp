@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001af468(int, unsigned int, unsigned int *);
+int nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram(int, unsigned int, unsigned int *);
 
 extern unsigned char g_callbackState; /* 0x589284 */
 
-/* Supplied declaration required: FUN_001af468. */
+/* Supplied declaration required: nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram. */
 
 
 unsigned int FUN_001a0fb4(unsigned int param_1,unsigned int *param_2)
@@ -17,7 +17,7 @@ unsigned int FUN_001a0fb4(unsigned int param_1,unsigned int *param_2)
 /* irregular: 1 native warning(s); review required */
   *param_2 = 0xffffffff;
   if ((*(int *)((unsigned char *)&g_callbackState + 0x8)) != 0) {
-    FUN_001af468((*(int *)((unsigned char *)&g_callbackState + 0x8)),param_1,param_2);
+    nn_dsp_CTR_DSP_ConvertProcessAddressFromDspDram((*(int *)((unsigned char *)&g_callbackState + 0x8)),param_1,param_2);
   }
   return 0xc8a0a7f8;
 }

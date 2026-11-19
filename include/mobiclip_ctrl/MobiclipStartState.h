@@ -34,7 +34,7 @@ typedef char MobiclipStartStopFlagOffsetCheck[
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-u32 FUN_00350ab8(void *obj, int index);
+u32 table46COwnerGet(void *obj, int index);
 #ifdef __cplusplus
 }
 #endif

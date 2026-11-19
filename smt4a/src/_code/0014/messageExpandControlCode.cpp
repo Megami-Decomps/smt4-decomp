@@ -119,7 +119,7 @@ u32 messageExpandControlCode(s32 code, const u16 *text, u16 *out, s32 *index, s3
         ++*index;
         break;
     case 0xF876:
-        textExpandGlyphsToBuffer((const char *)FUN_0014bd84(text[*index + 1]), name, 0);
+        textExpandGlyphsToBuffer((const char *)aocIndexValueOrDefault(text[*index + 1]), name, 0);
         FUN_0014f2a8(out, position, (const u16 *)name, measureOnly);
         ++*index;
         break;

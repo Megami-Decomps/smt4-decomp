@@ -54,7 +54,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: soundActorStartOnFreeChannel. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -112,7 +112,7 @@ void FUN_002e9b60(void)
                 mapDepartSpawnPlayerEffect(0xffffffff);
                 SoundActorQueuePosition position;
                 position.x = *(float *)(g_lmapScene + 0x1c) + mathRemPio2f(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
-                position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+                position.z = *(float *)(g_lmapScene + 0x24) + libm_cosf(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
                 position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
                 soundActorStartOnFreeChannel(0x1000240, position);
               }
@@ -162,7 +162,7 @@ void FUN_002e9b60(void)
               *(float *)(temp_v0 + 0x2c) = nearestPoint.y - 142.0f;
               *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + mathRemPio2f((nearestYaw + 180.0f) * 0.017453292f) * 35.0f;
               temp_v0 = g_lmapScene;
-              *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 35.0f;
+              *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + libm_cosf((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 35.0f;
             }
             else {
               temp_v0 = padIsButtonPressed(5);
@@ -213,7 +213,7 @@ void FUN_002e9b60(void)
         MapMarkerPosition marker;
         marker.x = g_gameState.overviewPosition.x + mathRemPio2f(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
         marker.y = g_gameState.overviewPosition.y;
-        marker.z = g_gameState.overviewPosition.z + FUN_00282390(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
+        marker.z = g_gameState.overviewPosition.z + libm_cosf(g_gameState.overviewHeading * 0.017453292f) * 150.0f;
         marker.w = g_gameState.heading;
         FUN_00248114(marker);
         temp_v0 = g_lmapScene;

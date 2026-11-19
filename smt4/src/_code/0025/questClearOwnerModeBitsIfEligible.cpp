@@ -1,5 +1,8 @@
+#include "code/Code0029.h"
 #include "code/Code0028_Smt4.h"
 #include "shard/TextureDrawCall.h"
+#include "quest_center/QuestStatus.h"
+#include "code/Code001b.h"
 
 struct Unk2540b8Owner {
     /* 0x000 */ u8 unk000[0x5C4];
@@ -11,7 +14,6 @@ struct Unk2540b8Owner {
 extern "C" {
 
 s32 questReadRuntimeFlag(u16 id, u32 arg);
-s32 FUN_00298f88(u16 id);
 s32 idIsAtLeast350(u16 id);
 void gameFlagClearModeBits(u16 id);
 
@@ -19,16 +21,16 @@ void gameFlagClearModeBits(u16 id);
 void questClearOwnerModeBitsIfEligible(Unk2540b8Owner *owner)
 {
     if (owner->checkFirst != 0) {
-        if (questReadRuntimeFlag(owner->id, 0) && FUN_00298f88(owner->id) &&
-            (FUN_002886c8(owner->id) || FUN_002886b0(owner->id))) {
+        if (questReadRuntimeFlag(owner->id, 0) && dataTable1bOr1cRecordHasFlag1(owner->id) &&
+            (partyEntryGetBit5(owner->id) || partyEntryGetBit6(owner->id))) {
             gameFlagClearModeBits(owner->id);
         }
     } else if (idIsAtLeast350(owner->id)) {
-        if (FUN_002886c8(owner->id)) {
+        if (partyEntryGetBit5(owner->id)) {
             gameFlagClearModeBits(owner->id);
         }
-    } else if (questReadRuntimeFlag(owner->id, 0) && !FUN_00298f88(owner->id) &&
-               (FUN_002886c8(owner->id) || FUN_002886b0(owner->id))) {
+    } else if (questReadRuntimeFlag(owner->id, 0) && !dataTable1bOr1cRecordHasFlag1(owner->id) &&
+               (partyEntryGetBit5(owner->id) || partyEntryGetBit6(owner->id))) {
         gameFlagClearModeBits(owner->id);
     }
 }

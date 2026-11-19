@@ -3,10 +3,10 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "camp/RenderCtxTitle.h"
+#include "code/Code0030.h"
 
 extern "C" {
 
-void effMenuCallHandler(s32 handler, s32 flag);
 void requestDispatch(void *request);
 void effectNodeUpdatePlacedChildren(EffectNode *node);
 void layoutApplyForState(RenderCtx *context);

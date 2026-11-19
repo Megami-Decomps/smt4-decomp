@@ -13,7 +13,7 @@ void eventQueueAddUnique(u32 event);
 void frameTexInitActive(void);
 void frameTexRequestFade(s32 a);
 void *rosterGetLeaderId(void);
-s32 FUN_001bd118(void);
+s32 table1bOr1cGetRecordValue(void); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: too few arguments in function call)
 void qcMainSetMode(s32 mode);
 void FUN_00270c58(u16 id);
 void campButtonHelpRelease(void);
@@ -46,7 +46,7 @@ void FUN_00469d38(StepWork *work)
         break;
     case 2:
         source = rosterGetLeaderId();
-        if (source != NULL && FUN_001bd118() == 6) {
+        if (source != NULL && table1bOr1cGetRecordValue() == 6) {
             qcMainSetMode(1);
             FUN_00270c58(questDataGetRecord(reinterpret_cast<u32>(source))->event.package);
             campButtonHelpRelease();

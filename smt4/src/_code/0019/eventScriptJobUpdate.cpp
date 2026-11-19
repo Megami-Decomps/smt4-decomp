@@ -22,6 +22,7 @@
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "code/Code002c.h"
 #include "code/Code0028_Smt4.h"
+#include "code/Code0013.h"
 
 extern "C" {
 extern EventScriptJobWork *g_aocJob;
@@ -89,14 +90,14 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
         sprintf(commandsPath, "event/e%03d/e%03d.bf", work->eventId, work->eventId);
         sprintf(messagesPath, "event/e%03d/e%03d.mbm", work->eventId, work->eventId);
         if (aocPackageGrantsItem(g_aocSystem, work->eventId, 0)) {
-            work->commands = FUN_00289de4(g_aocSystem, work->eventId, NULL);
+            work->commands = aocDrawText7(g_aocSystem, work->eventId, NULL);
             work->messages = aocBufferQueueDisplay(g_aocSystem, work->eventId, NULL);
             if (work->commands == NULL || work->messages == NULL) {
                 // The package has no script: fade out and leave through the quest-script holder.
                 work->state = 95;
-                if (FUN_002c2a04(0) == 3)
+                if (pairedAvailabilityGetState(0) == 3)
                     titleSetSlotValueState2(0, 5);
-                if (FUN_002c2a04(1) == 3)
+                if (pairedAvailabilityGetState(1) == 3)
                     titleSetSlotValueState2(1, 5);
                 if (campButtonHelpIsActive())
                     FUN_00289c98(1);
@@ -122,7 +123,7 @@ extern "C" s32 eventScriptJobUpdate(u32 job)
         break;
     }
     case 1:
-        if (FUN_002c2a04(0) != 3 || FUN_002c2a04(1) != 3) {
+        if (pairedAvailabilityGetState(0) != 3 || pairedAvailabilityGetState(1) != 3) {
             if (FUN_002897e0())
                 FUN_002897d0(0);
         }

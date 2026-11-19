@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite of the name-entry confirm step; retail tail-calls sysPlaySe/stateSetterEnterState with a 20-byte frame, reads the target through a +0x200 base register and uses sxtb/uxtab for the signed character index, while the build uses a 24-byte frame, plain calls and a pointer-induction loop. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "name/nameMain.h"
 
 struct NameEntryMenu;
 struct NameBuffer {
@@ -58,7 +59,6 @@ void stateSetterEnterState(NameEntryMenu *menu, s32 state);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageMainIsIdle(void);
 s32 messageGetChoiceResult(void);
-s32 convertToBufferAndStore(NameBuffer *name, s8 *destination);
 
 // Steps the name-entry confirmation: first asks the question, then, on the answer, either goes back to editing (state 2)
 // or converts the typed name and checks its length before accepting it (state 6) or rejecting it (state 7).
@@ -118,7 +118,7 @@ void FUN_00484378(NameInputView *menu)
         }
     }
     s32 *status = logFormatBuffer(name, menu->confirmed, 1);
-    s32 length = convertToBufferAndStore(name, menu->confirmed);
+    s32 length = convertToBufferAndStore(reinterpret_cast<const char *>(name), reinterpret_cast<u16 *>(menu->confirmed));
     if (*status == 0 && length < 6) {
         FUN_00183e58();
         stateSetterEnterState(reinterpret_cast<NameEntryMenu *>(menu), 7);

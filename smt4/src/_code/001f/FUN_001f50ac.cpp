@@ -117,7 +117,7 @@ void drawParameterBlockClear(UiResourceParameters *resources);
 
 void uiSpriteStateInitFromSource(SpriteSlot *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void uiStoreTextureEntryCenter(SpriteSlot *sprite, s32 kind, s32 count);
-void FUN_002a9fdc(SpriteSlot *sprite, s32 arg, s32 flag);
+void rangeSelectionSelectEndpoint(SpriteSlot *sprite, s32 arg, s32 flag);
 void spriteStartAnimationByIndex(SpriteSlot *sprite, s32 animation);
 
 #define SPRITE_KIND 0x14
@@ -147,7 +147,7 @@ void FUN_001f50ac(SpritePool *pool)
     for (s32 i = 0; i <= 9; i++) {
         uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 0, &pool->resources, 2, 1.0f);
         uiStoreTextureEntryCenter(&pool->sprites[i], SPRITE_KIND, i + 0xB);
-        FUN_002a9fdc(&pool->sprites[i], 5, 0);
+        rangeSelectionSelectEndpoint(&pool->sprites[i], 5, 0);
     }
     for (s32 i = 10; i <= 19; i++) {
         uiSpriteStateInitFromSource(&pool->sprites[i], SPRITE_KIND, 4, &pool->resources, 2, 1.0f);

@@ -13,6 +13,7 @@
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 #include "shard/TextureDrawCall.h"
+#include "quest_center/QuestStatus.h"
 #include "text/TextDraw.h"
 #include "code/Code0028_Smt4.h"
 #include "code/Code0029.h"
@@ -81,9 +82,9 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x29, 0x9a);
         drawSkillCategoryLabel(id, icon->x + entry->x + x, entry->y + icon->y + y, 0x6f);
         TextureTableEntryIV *mark = asdTMTexTableEntryAt(0x29, 0x9d);
-        if (FUN_002886c8(id)) {
+        if (partyEntryGetBit5(id)) {
             texDrawCompositeSprite(2, 0x29, 0xf, entry->x + mark->x + x, entry->y + mark->y + y, 0x74);
-        } else if (FUN_002886b0(id)) {
+        } else if (partyEntryGetBit6(id)) {
             texDrawCompositeSprite(2, 0x29, 0x10, entry->x + mark->x + x, entry->y + mark->y + y, 0x74);
         }
     }
@@ -129,9 +130,9 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x29, 0xb1);
         drawSkillCategoryLabel(id, icon->x + focus->x + x, focus->y + icon->y + y, 0xb0);
         TextureTableEntryIV *mark = asdTMTexTableEntryAt(0x29, 0xb4);
-        if (FUN_002886c8(id)) {
+        if (partyEntryGetBit5(id)) {
             texDrawCompositeSprite(2, 0x29, 0xf, focus->x + mark->x + x, focus->y + mark->y + y, 0xb0);
-        } else if (FUN_002886b0(id)) {
+        } else if (partyEntryGetBit6(id)) {
             texDrawCompositeSprite(2, 0x29, 0x10, focus->x + mark->x + x, focus->y + mark->y + y, 0xb0);
         }
     }

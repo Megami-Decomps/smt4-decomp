@@ -24,7 +24,7 @@ extern "C" {
 extern DebugMapBoxes g_regionTable;
 extern const DebugMapBoxPalette DAT_00532240;
 s32 renderCtxPackPassFlags(u32 kind, u32 enabled);
-void FUN_00280a08(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor,
+void gxEmitColoredQuad(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor,
     f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ,
     f32 thirdX, f32 thirdY, f32 thirdZ, f32 fourthX, f32 fourthY, f32 fourthZ);
 
@@ -48,7 +48,7 @@ void FUN_003578a0(f32 height)
                 f32 maximumZ = box->maximumZ;
                 f32 maximumX = box->maximumX;
                 u32 color = colors[index % 12] | 0x70;
-                FUN_00280a08(color, color, color, color,
+                gxEmitColoredQuad(color, color, color, color,
                     minimumX, height, minimumZ,
                     minimumX, height, maximumZ,
                     maximumX, height, minimumZ,

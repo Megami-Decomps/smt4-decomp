@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b5bd4(unsigned int, int, int);
+int sysClearRecordByte(unsigned int, int, int);
 int FUN_001bdaa8(unsigned int, int, unsigned short *);
 
 /* stack frame of param_1: 2 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_006446d0; /* 0x6446d0 */
 
-/* Supplied declaration required: FUN_001b5bd4. */
+/* Supplied declaration required: sysClearRecordByte. */
 extern unsigned int FUN_001bd5f8(void);
 /* Supplied declaration required: FUN_001bdaa8. */
 
@@ -51,7 +51,7 @@ void FUN_001af968(int *param_1)
       }
       temp_v0 = *(char *)((int)param_1 + 0xd);
       temp_v2 = FUN_001bd5f8();
-      FUN_001b5bd4(temp_v2,1,(int)temp_v0);
+      sysClearRecordByte(temp_v2,1,(int)temp_v0);
       *(unsigned char *)((int)param_1 + 0xd) = 0xff;
     }
     *param_1 = 0;

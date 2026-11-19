@@ -3,10 +3,10 @@
  * (built: r6, r7, r8, r5), gives the eleven hoisted constants other d8-d13 halves (120 in s21, 250 in s25,
  * 0.0 in s20, ...) and so holds each point as s18/s21/s19 where the build uses s19/s20/s18 with a vldmia. */
 #include "map/LmapViewGlobals.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 f32 libm_sinf(f32 radians);
-f32 libm_cosf(f32 radians);
 void FUN_002d1e44(const VectorPairTransitionA *parameters);
 u32 FUN_0033a374(void);
 }

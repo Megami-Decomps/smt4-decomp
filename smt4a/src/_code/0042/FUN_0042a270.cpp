@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001885e8(unsigned int *, int *, int, int, int, unsigned int [3]);
+int nn_fs_ipc_FileSystem_OpenFileDirectly(unsigned int *, int *, int, int, int, unsigned int [3]);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -30,7 +30,7 @@ extern unsigned int DAT_005893a8; /* 0x5893a8 */
 extern unsigned int DAT_0062d388; /* 0x62d388 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001885e8. */
+/* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
 
 
@@ -77,7 +77,7 @@ FUN_0042a270(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
   uStack_68 = 0x10;
   puVar1 = temp_v12;
   uStack_4c = param_4;
-  FUN_001885e8(puVar1,&temp_v10,0,0x2345678a,2,temp_v11);
+  nn_fs_ipc_FileSystem_OpenFileDirectly(puVar1,&temp_v10,0,0x2345678a,2,temp_v11);
   temp_v0 = temp_v10;
   if ((int)puVar1 < 0) {
     return puVar1;

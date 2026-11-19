@@ -1,9 +1,11 @@
 /* NON_MATCHING: retail copies query into r4 (mov r4, r9) around the arrangement load and uses r1 for the flags |= update; otherwise identical */
+#include "code/Code002c.h"
 #include "battle/BattleEncounter.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match2_ScrollList.h"
 #include "battle/BtlGlobals.h"
+#include "code/Code0013.h"
 
 extern "C" {
 
@@ -25,7 +27,6 @@ s32 pairedEntryTableContains(BtlMainState *context, u16 id);
 void btlQueueKeyedScalarReflectAction(s32, s32, s32, s32, s32, s32, s32);
 void FUN_00254f58(BtlMainState *context);
 void btlSetSelectedListedValue(s32 value);
-s32 FUN_002c2a04(u32 channel);
 void FUN_002c29d8(u32 channel, u32 frames, u32 volume);
 
 /* Starts loading the arrangement file for the encounter. */
@@ -89,10 +90,10 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
                 btlSetSelectedListedValue(3);
             }
         }
-        if (FUN_002c2a04(0) == 3) {
+        if (pairedAvailabilityGetState(0) == 3) {
             FUN_002c29d8(0, 10, 0xff);
         }
-        if (FUN_002c2a04(1) == 3) {
+        if (pairedAvailabilityGetState(1) == 3) {
             FUN_002c29d8(1, 10, 0xff);
         }
         if (screenFadesAllReady() != 0) {

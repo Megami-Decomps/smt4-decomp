@@ -5,9 +5,9 @@
 
 extern "C" {
 extern SceneResourceWork *g_sceneResourceWork;
-void FUN_00282bfc(s32 channel, s32 value);
+void titleRestartSlotState3(s32 channel, s32 value);
 void FUN_001b4fe8(u32 job);
-s32 FUN_0020ece4(u32 job);
+s32 sceneResourceShutdownAoc(u32 job);
 s32 sceneUpdateOptionalResource(u32 job);
 s32 FUN_0020ed2c(u32 job);
 u32 taskCreateDraw(const char *name, s32 priority, s32 group, u32 flags,
@@ -25,10 +25,10 @@ void FUN_001b0c04(s32 preserveChannels)
     work->state.pending = 0;
     if (preserveChannels == 0) {
         work->state.resetChannels = 1;
-        FUN_00282bfc(0, 0xFF);
-        FUN_00282bfc(1, 0xFF);
+        titleRestartSlotState3(0, 0xFF);
+        titleRestartSlotState3(1, 0xFF);
     }
-    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AOCMainProc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001b4fe8), reinterpret_cast<AsdProcFunc>(FUN_0020ece4), reinterpret_cast<u32>(g_sceneResourceWork));
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AOCMainProc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001b4fe8), reinterpret_cast<AsdProcFunc>(sceneResourceShutdownAoc), reinterpret_cast<u32>(g_sceneResourceWork));
     taskCreateDraw("AOCDrawUp L", 0x7D, 1, 0, sceneUpdateOptionalResource, NULL, g_sceneResourceWork, work->job);
     taskCreateDraw("AOCDrawUp R", 0xDB, 1, 0, sceneUpdateOptionalResource, NULL, g_sceneResourceWork, work->job);
     work->tasks.drawJob = taskCreateDraw("AOCDrawDown", 0xE7, 1, 0, FUN_0020ed2c, NULL, g_sceneResourceWork, work->job);

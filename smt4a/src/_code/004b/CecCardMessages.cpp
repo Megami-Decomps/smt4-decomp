@@ -1,8 +1,8 @@
 #include "common.h"
 #include "nn/Result.h"
-#include "map/mapHakai.h"
 #include "network/CecControl.h"
 #include "addon/CecCard.h"
+#include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
 struct CecMessageRequest {

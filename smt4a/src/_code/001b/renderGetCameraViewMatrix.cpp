@@ -33,7 +33,7 @@ typedef struct RenderContext {
 extern RenderContext *g_renderCtx;
 
 s32 gxIsStereoscopic3dEnabled(void);
-RenderCamera *FUN_001c5b4c(s32 eye);
+RenderCamera *asdCameraValueGet(s32 eye);
 RenderCamera *FUN_001c5bd8(RenderContext *context);
 
 /* Copies the active camera's view matrix for the current eye into `out` as a 4x4 matrix. */
@@ -53,7 +53,7 @@ void renderGetCameraViewMatrix(ViewMtx44 *out)
         fixed = true;
         break;
     default:
-        camera = FUN_001c5b4c(eye);
+        camera = asdCameraValueGet(eye);
         break;
     }
 

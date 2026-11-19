@@ -11,7 +11,7 @@ extern "C" {
 /* Runs the operation on `handle`; returns the failing status of the pre-check, or the operation's validated result. */
 WindowStatusResult FUN_00426e18(u32 handle, u32 second, u32 third, u32 fourth)
 {
-    nn::Result status = FUN_004283cc(reinterpret_cast<void *>(handle));
+    nn::Result status = queryFailureResultOrZero(reinterpret_cast<void *>(handle));
 
     bool failed = nnResultIsFailure(status);
 

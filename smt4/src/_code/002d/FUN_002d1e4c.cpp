@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_0021b0f0(void);
 int FUN_0027eee0(void);
-int FUN_00282390(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: more than one instance of overloaded function "mathRemPio2f" has "C" linkage)
 int mathRemPio2f(void);
 int mathGetShortestAngleDelta(void);
 int SBORROW4(int, int);
@@ -43,7 +43,7 @@ extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
 extern int inputIsQuestMenuPressed(void);
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
-/* Supplied declaration required: FUN_00282390. */
+/* Supplied declaration required: libm_cosf. */
 /* Supplied declaration required: mathRemPio2f. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 extern int padIsButtonPressed(unsigned int);
@@ -392,7 +392,7 @@ LAB_002d21d0:
   temp_v21 = 80.0f;
   temp_v22 = temp_v22 + temp_v14 * 80.0f;
   temp_v14 = DAT_004474fc * temp_v17;
-  FUN_00282390();
+  libm_cosf();
   temp_v13 = 150.0f;
   temp_v24 = temp_v24 + temp_v14 * temp_v21;
   temp_v23 = temp_v23 + 150.0f;
@@ -408,7 +408,7 @@ LAB_002d21d0:
   temp_v21 = 300.0f;
   temp_v22 = temp_v22 + temp_v14 * 300.0f;
   temp_v17 = DAT_004474fc * temp_v17;
-  FUN_00282390();
+  libm_cosf();
   temp_v24 = temp_v24 + temp_v17 * temp_v21;
   temp_v23 = temp_v23 + temp_v13;
   temp_v25 = *(unsigned int *)(g_lmapScene + 0x1c);

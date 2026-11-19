@@ -40,7 +40,6 @@ s32 sysLightEventTryWait(void *event);
 void asdFsIsSdCardDetected(void);
 void jyoucyuGetTableEntry(u32 id);
 void aocResetOperationState(AocSystemA *system);
-void flagObjAdvance(void *owner);
 void aocEntryPanelCreateText(void *owner, s32 a, s32 b, s32 c);
 RequestParameters FUN_0046f3ac(AocSystemA *system);
 u8 startsWithH(const void *value);

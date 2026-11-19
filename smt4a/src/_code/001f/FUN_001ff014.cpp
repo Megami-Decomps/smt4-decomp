@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ff014` (_code @ 0x1ff014, 0x704 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int unitRecordBuildFromSave(unsigned int, unsigned char [98]);
 int findSkillMetadataById(void);
 int unitRecomputeDerivedStats(...);
 int FUN_004bd17c(...);
-int dispatchIfFound(unsigned int, unsigned int, int);
 int bitsAt60Clear(int, int);
 int FUN_004d0d70(void);
 int recordMergeByteMasks(...);

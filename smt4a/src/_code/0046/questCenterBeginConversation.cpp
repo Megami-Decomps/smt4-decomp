@@ -5,12 +5,11 @@
 #include "ui/UiControl.h"
 #include "code/Code003a.h"
 #include "code/Code002c_Smt4a.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 void sysPlaySe(s32 id);
 void placeWinStartText(const u8 *name);
-void FUN_003c1060();
-void FUN_003c3e14();
 
 s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
@@ -35,7 +34,7 @@ extern "C" void questCenterBeginConversation(QuestInteraction *object)
         gameFlagSetValue(0x586, 1, 1);
     }
     if ((specialAvailable & ~announced) != 0 && object->interactive != 0) {
-        FUN_003c3e14();
+        messageMainClearBannerRequest();
         messageSetMode(1);
         sysPlaySe(0x92);
         pickObjStart(object, "qc_total_quest_ann");
@@ -45,7 +44,7 @@ extern "C" void questCenterBeginConversation(QuestInteraction *object)
         return;
     }
     if (activeQuest > 0 && specialAvailable == 0 && object->interactive != 0) {
-        FUN_003c3e14();
+        messageMainClearBannerRequest();
         messageSetMode(1);
         sysPlaySe(0x92);
         pickObjStart(object, "qc_total_quest");
@@ -55,7 +54,7 @@ extern "C" void questCenterBeginConversation(QuestInteraction *object)
         return;
     }
     FUN_003a7630(1);
-    FUN_003c1060();
+    messageMainRequestBanner();
     if (object->scriptActive != 0)
         pickObjStart(object, "qc_restart");
     else

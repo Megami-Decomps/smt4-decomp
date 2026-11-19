@@ -18,6 +18,7 @@
 #include "code/Code0024.h"
 #include "ui/ButtonHelp.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
@@ -34,7 +35,7 @@ u32 goalConditionsSatisfied(u32 id);
 u8 idIsAtLeast350(u32 value);
 void uiQuestCreate(void);
 void uiQuestAnswerConfirm(s8 choice);
-u8 FUN_002e31b0(void);
+u8 stateHolder4IsD(void);
 u16 uiQuestGetCurrentEntryId(void);
 void uiQuestClose(void);
 void resultCreate(u8 kind);
@@ -144,7 +145,7 @@ void qcDeliveryStep(DummyAttachmentWork *work)
         work->step++;
         break;
     case 3:
-        if (FUN_002e31b0() != 0) {
+        if (stateHolder4IsD() != 0) {
             work->questId = uiQuestGetCurrentEntryId();
             work->step = 4;
             uiQuestAnswerConfirm(work->kind);

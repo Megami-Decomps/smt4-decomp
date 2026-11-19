@@ -1,11 +1,11 @@
 #include "classes/AocMenu.h"
 #include "ui/SceneWindowWork.h"
+#include "addon/aocBootProcess.h"
 
 extern "C" {
 void aocEntryPanelCreateText(u32 *dialog, s32 value, s32 mode, s32 flags);
 void aocMenuSetButtonHelp(SceneWindowWork *window, s32 value, s32 mode);
 void jobOwnerFreeSlotAndStop(u32 *dialog);
-void flagObjAdvance(u32 *dialog);
 s32 FUN_004d0584(void);
 s32 inputIsQuestMenuPressed(void);
 void eventQueueAddUniqueIfValid(u32 event);

@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "script/scrScriptProcess.h"
 #include "code/Code002c.h"
+#include "code/Code0013.h"
 extern "C" {
 void commonBgAcquire(void);
 void buttonHelpCreate(void);
@@ -17,7 +18,7 @@ u32 FUN_0023ed64(BtlEvent *event);
 /* Enter the battle event script once both fade channels are ready. */
 u32 FUN_0023f074(BtlEvent *event)
 {
-    if (FUN_002c2a04(0) == 3 && FUN_002c2a04(1) == 3) {
+    if (pairedAvailabilityGetState(0) == 3 && pairedAvailabilityGetState(1) == 3) {
         commonBgAcquire();
         buttonHelpCreate();
         commonBgStopChildAndBeginTransition();

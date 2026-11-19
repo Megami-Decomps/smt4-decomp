@@ -15,6 +15,4 @@ s32 listCursorGetRowOfChildIfUnblocked(void *object);
 
 u32 FUN_002a7410(void);
 
-int FUN_002ae8e4(u32 a, u32 file, u32 id, u32 value);
-
 } /* extern "C" */

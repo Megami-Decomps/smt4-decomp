@@ -6,8 +6,8 @@
 extern "C" {
 
 int asdMemoryAlloc(...);
-int FUN_001ac2d4(...);
-int FUN_001ac524(...);
+int modelSelectPrimaryMotion(...);
+int asdModelSelectSecondaryMotion(...);
 int FUN_001ad8c4(...);
 int FUN_001b0e44(...);
 int _ZN9Obj55b56cC1Ej(...);
@@ -133,8 +133,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_001ac2d4. */
-/* Supplied declaration required: FUN_001ac524. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
+/* Supplied declaration required: asdModelSelectSecondaryMotion. */
 /* Supplied declaration required: FUN_001ad8c4. */
 /* Supplied declaration required: FUN_001b0e44. */
 /* Supplied declaration required: _ZN9Obj55b56cC1Ej. */
@@ -384,13 +384,13 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
       param_1->field_0x70 = piVar7;
     }
   }
-  FUN_001ac2d4(param_1,0);
+  modelSelectPrimaryMotion(param_1,0);
   param_1->field_0x7c = temp_v5;
   if ((0 < param_1->field_0x58) && (piVar3 = (int *)param_1->field_0x60, piVar3 != (int *)0x0)) {
     (**(romwright_code **)(*piVar3 + 0x24))(piVar3,*param_1->field_0x54);
     param_1->field_0x5c = 0;
   }
-  FUN_001ac524(param_1,0);
+  asdModelSelectSecondaryMotion(param_1,0);
   return;
 }
 

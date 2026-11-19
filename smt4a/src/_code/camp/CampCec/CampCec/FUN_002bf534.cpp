@@ -21,7 +21,7 @@ int asdLoadFileAsyncSimple(...);
 int FUN_002a4664(...);
 int gameDataGetRecordValue(void);
 int saveNameBlockReset(void);
-int FUN_002c0b10(...);
+int cecOutboxReadCard(...); // declcheck: local (romwright prototype; the shared declaration in camp/CampCec/CampCecView.h does not compile here: argument of type "romwright_code **" is incompatible with parameter of type "CecProcessSlot *")
 int cecProcessForward(...);
 int sysMemClear(void);
 int rt_aeabi_memclr(...);
@@ -98,7 +98,7 @@ extern unsigned char FUN_002a46b8(void);
 extern unsigned char saveFlagGet27e1f(void);
 /* Supplied declaration required: saveNameBlockReset. */
 /* Supplied declaration required: FUN_002a6480. */
-/* Supplied declaration required: FUN_002c0b10. */
+/* Supplied declaration required: cecOutboxReadCard. */
 /* Supplied declaration required: cecProcessForward. */
 extern int libc_strlen(int);
 /* Supplied declaration required: sysMemClear. */
@@ -321,7 +321,7 @@ LAB_002bfc18:
         slotNameDisplaySetEntry(DAT_0057f114 + 0x10,0);
       }
       if ((*(char *)(puVar4 + 0x5b) != '\0') && (temp_v2 = gameDataTestFlags(0x20), temp_v2 != 0)) {
-        FUN_002c0b10(&temp_v9);
+        cecOutboxReadCard(&temp_v9);
         temp_v2 = rt_memcmp(temp_v14,DAT_0057f114 + 0x24,0x14);
         if (temp_v2 != 0) {
           cecProcessCall2();

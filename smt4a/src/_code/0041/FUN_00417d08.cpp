@@ -1,4 +1,5 @@
 #include "common.h"
+#include "quest_center/QuestStatus.h"
 
 struct PartyModeOwner {
     /* 0x000 */ u8 unk000[0x90c];
@@ -10,8 +11,6 @@ struct PartyModeOwner {
 extern "C" {
 s32 gameFlagEntryGetBit(u16 id, u32 bit);
 s32 dataTable1bOr1cRecordHasFlag1(u16 id);
-s32 partyEntryGetBit5(u16 id);
-s32 partyEntryGetBit6(u16 id);
 s32 idIsAtLeast350(u16 id);
 void gameFlagClearModeBits(u16 id);
 

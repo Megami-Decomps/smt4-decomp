@@ -6,11 +6,11 @@
 extern "C" {
 
 int __ARM_common_memcpy4_8(...);
-int FUN_001ac2d4(...);
+int modelSelectPrimaryMotion(...);
 int lightOwnerRegister(...);
 int nodeSetTranslation(...);
 int faderSetValue(...);
-int FUN_0036bb1c(...);
+int modelPartSetRotationDegrees(...);
 int dataTable2CType1Count(void);
 int VectorSignedToFloat(...);
 
@@ -19,13 +19,13 @@ extern int *g_modelGroups; /* 0x581270 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: __ARM_common_memcpy4_8. */
 extern int modelHasLoadedAttachment(int);
-/* Supplied declaration required: FUN_001ac2d4. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: faderSetValue. */
-/* Supplied declaration required: FUN_0036bb1c. */
+/* Supplied declaration required: modelPartSetRotationDegrees. */
 extern char *dataTable2CType1GetEntry(int);
 /* Supplied declaration required: dataTable2CType1Count. */
 
@@ -73,8 +73,8 @@ unsigned int FUN_00378a90(void)
           lightOwnerRegister(piVar3[temp_v2 * 0xb + 0x44d],1);
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v2 * 0xb + 0x446);
-          FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
-          FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
+          modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
+          modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
           ;
           faderSetValue(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x44d];
@@ -119,8 +119,8 @@ unsigned int FUN_00378a90(void)
           lightOwnerRegister(temp_v3,1);
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v1 * 0xb + 0x446);
-          FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
-          FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
+          modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
+          modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
           ;
           faderSetValue(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x44d];
@@ -172,8 +172,8 @@ unsigned int FUN_00378a90(void)
         lightOwnerRegister(temp_v3,1);
         nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
                     );
-        FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
-        FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
+        modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
+        modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
         faderSetValue(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8));
         puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x4b0];
         temp_v1 = temp_v1 + 1;
@@ -254,8 +254,8 @@ LAB_00379048:
       *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x4b1) = 1;
       lightOwnerRegister(piVar3[temp_v2 * 0xb + 0x4b0],1);
       nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
-      FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
-      FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
+      modelPartSetRotationDegrees(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
+      modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
       faderSetValue(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));
       puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x4b0];
       *puVar2 = *puVar2 | 2;

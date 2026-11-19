@@ -5,12 +5,12 @@
 extern "C" {
 
 int recordClampCurrentCount(int, int);
-int FUN_002485d4(int, unsigned short [30]);
+int halves34Copy(int, unsigned short [30]); // declcheck: local (romwright prototype; the shared declaration in code/Code0024_Smt4.h does not compile here: argument of type "int" is incompatible with parameter of type "Source *")
 int padClearBits(int);
 int passiveSkillLookupRecord(void);
 int FUN_00283f30(unsigned short [30], int);
 int playerSetClampedStat(int);
-int FUN_00333fec(int);
+int playerSetClampedValue(int);
 int selectionStateSetClamped(int, int);
 int VectorSignedToFloat(...);
 
@@ -40,7 +40,7 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: recordClampCurrentCount. */
-/* Supplied declaration required: FUN_002485d4. */
+/* Supplied declaration required: halves34Copy. */
 /* Supplied declaration required: padClearBits. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: FUN_00283f30. */
@@ -52,7 +52,7 @@ extern int gameGetSlotTable(void);
 extern int gameGetPlayerData(void);
 extern short FUN_00333fb0(void);
 /* Supplied declaration required: playerSetClampedStat. */
-/* Supplied declaration required: FUN_00333fec. */
+/* Supplied declaration required: playerSetClampedValue. */
 extern unsigned int FUN_00334038(void);
 extern unsigned int FUN_00334048(void);
 /* Supplied declaration required: selectionStateSetClamped. */
@@ -144,7 +144,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
       temp_v3 = FUN_00334048();
       temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(temp_v2 >> 0x16) & 3);
       temp_v6 = (int)(short)((short)(int)(temp_v9 * temp_v10 * (float)temp_v18) + temp_v1);
-      FUN_00333fec(temp_v6);
+      playerSetClampedValue(temp_v6);
       if (temp_v6 == 0) {
         temp_v6 = gameGetPlayerData();
         *(unsigned short *)(temp_v6 + 0x2c) = 0;
@@ -168,7 +168,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
           temp_v19[7] = 0;
           temp_v19[8] = 0;
           temp_v19[9] = 0;
-          FUN_002485d4(temp_v4,temp_v19);
+          halves34Copy(temp_v4,temp_v19);
           temp_v7 = 0;
           do {
             temp_v5 = (unsigned int)temp_v19[temp_v7];

@@ -10,7 +10,7 @@ int recordSetDirection(...);
 int recordSetOrigin(...);
 int FUN_002329a8(...);
 int FUN_00267144(void);
-int FUN_00273f5c(void);
+int clearFlags310To31F(void);
 int gameFlagIsSet(...);
 int FUN_00396034(...);
 int FUN_00396044(...);
@@ -51,7 +51,7 @@ static float romwright_sqrt_4(float value)
 extern int effectPoolCreateObject(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00267144. */
 extern int dataTableGetRecordFifty(void);
-/* Supplied declaration required: FUN_00273f5c. */
+/* Supplied declaration required: clearFlags310To31F. */
 extern int FUN_0027d968(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_00396034. */
@@ -99,7 +99,7 @@ void FUN_003966b8(int param_1)
           temp_v1 = FUN_0027d968();
           if (temp_v1 == *(short *)(pcVar2 + 0x12)) {
             if ((int)*(short *)(temp_v10 + 0x1e) != (int)*(short *)(pcVar2 + 0x12)) {
-              FUN_00273f5c();
+              clearFlags310To31F();
               *(unsigned short *)(temp_v10 + 0x1e) = *(unsigned short *)(pcVar2 + 0x12);
             }
             if (((((int)*pcVar2 == *(int *)(param_1 + 4)) &&

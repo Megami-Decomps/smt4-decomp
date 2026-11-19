@@ -1,5 +1,6 @@
 #include "common.h"
 #include <stdio.h>
+#include "code/Code0038.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct MapGlobals002df598 {
     /* 0x04 */ MapState002df598 *state;
 } MapGlobals002df598;
 
-u32 asdCameraLoadFromFile(u8 *path);
 
 
 extern MapGlobals002df598 DAT_004474f0; /* 0x4474f0 */
@@ -24,7 +24,7 @@ void mapCameraLoad(u32 map, u32 index)
     u8 path[64];
 
     sprintf((char *)path, "map/m%03d/cam%03d_%02d.bccam", map, map, index);
-    DAT_004474f0.state->camera = asdCameraLoadFromFile(path);
+    DAT_004474f0.state->camera = reinterpret_cast<u32>(asdCameraLoadFromFile(reinterpret_cast<const char *>(path)));
 }
 
 } /* extern "C" */

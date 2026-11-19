@@ -1,6 +1,7 @@
 #include "common.h"
 #include "quest_center/QuestRecord.h"
 #include "gamedata/Table1bOr1c.h"
+#include "code/Code001b.h"
 
 extern "C" {
 

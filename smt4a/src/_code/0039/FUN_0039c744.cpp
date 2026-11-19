@@ -1,6 +1,7 @@
 #include "camp/Unite/UniteGlobals.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "gamedata/SaveSlotRecord.h"
+#include "map/MapSceneAccess.h"
 
 /* The pair of party slots remembered for fusion, with the demon IDs they held. */
 struct UniteRememberedSlots {
@@ -22,7 +23,6 @@ void FUN_002a7b74(void);
 void uniteStartOrQueueRequest(s32 request);
 void FUN_0020b908(s32 id, s32 arg);
 void *lmapSceneGetScript(void);
-void FUN_003857b4(s32 arg);
 void linkHolderClearFlag(void *holder);
 
 // Leave fusion: restore the sound, forget remembered slots whose demon changed and queue request 0x12.
@@ -53,7 +53,7 @@ void FUN_0039c744(void)
     FUN_0020b908(0x25, 1);
     void *script = lmapSceneGetScript();
     if (script != NULL) {
-        FUN_003857b4(1);
+        lmapSceneSetUnk134(1);
         linkHolderClearFlag(script);
     }
 }

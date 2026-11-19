@@ -6,7 +6,7 @@ extern "C" {
 
 int effectNodeUpdatePlacedChildren(...);
 int FUN_001b4c1c(...);
-int FUN_001bc460(void);
+int gfxQuaternionWorkspaceBuildMatrix(void);
 int refCountIncrement(void);
 void requestDispatch(void *request);
 int FUN_00290c28(...);
@@ -104,7 +104,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 /* Supplied declaration required: effectNodeUpdatePlacedChildren. */
 /* Supplied declaration required: FUN_001b4c1c. */
-/* Supplied declaration required: FUN_001bc460. */
+/* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_00290c28. */
@@ -242,7 +242,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
         DAT_006472e0 = fStack_84;
         DAT_006472e4 = fStack_80;
         DAT_006472e8 = fStack_7c;
-        FUN_001bc460();
+        gfxQuaternionWorkspaceBuildMatrix();
         temp_v32 = DAT_00647348;
         temp_v26 = DAT_00647344;
         temp_v25 = DAT_00647340;
@@ -410,7 +410,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
         DAT_006472e0 = fStack_84;
         DAT_006472e4 = fStack_80;
         DAT_006472e8 = fStack_7c;
-        FUN_001bc460();
+        gfxQuaternionWorkspaceBuildMatrix();
         DAT_0064734c = temp_v35;
         temp_v1 = 0;
         DAT_00647350 = temp_v36;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
 
 struct DeferredMapModel {
     /* 0x00 */ u8 active;
@@ -27,7 +28,6 @@ extern DeferredMapModels *g_deferredMapModels;
 void asdMdlManagerMarkDestroy(void *);
 void asdMdlManagerDestroy(void *);
 void FUN_002e00e0(void *);
-s32 FUN_00316d64(s32 map, s32 area);
 s32 FUN_001e34fc(s32 map, s32 area, u32 flags);
 
 // Mark stale map models, allow two frames to drain, then release them.
@@ -39,7 +39,7 @@ u32 mapModelsPollDeferredDestroy(void)
     case 0:
         for (i = 0; i < 64; ++i) {
             entry = &g_deferredMapModels->entries[i];
-            if (entry->active && !FUN_00316d64(entry->map, entry->area) && entry->manager) {
+            if (entry->active && !flagPairCondition(entry->map, entry->area) && entry->manager) {
                 asdMdlManagerMarkDestroy(entry->manager);
                 entry->destroyPending = 1;
             }

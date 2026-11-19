@@ -88,7 +88,7 @@ void entryTableInvalidate(u32 table);
 void FUN_003da890(u32 table);
 void FUN_003d9d74(u32 table);
 void FUN_003cee94(BtlMainState **battle, BtlSetupEntry *entry);
-void FUN_003db378(u32 table);
+void runFourUpdates(u32 table);
 s32 btlFindNthActiveSpecialEntry(BtlMainState *state, s32 flag);
 BtlSoundRecord *FUN_00227ecc(u32 table, s32 flag);
 void FUN_0023e52c(BtlMainState **battle, BtlSetupEntry *entry, u32 first, u32 second);
@@ -156,7 +156,7 @@ void FUN_003d3944(BtlMainState **battle, BtlSetupEntry *entry, u32 unused3, u32 
         FUN_003d9d74(DAT_00435d18);
     }
     FUN_003cee94(battle, entry);
-    FUN_003db378(DAT_00435d18);
+    runFourUpdates(DAT_00435d18);
     {
         BtlSoundRecord *sound = FUN_00227ecc(DAT_00435d18, btlFindNthActiveSpecialEntry(*battle, 1) >= 0);
 

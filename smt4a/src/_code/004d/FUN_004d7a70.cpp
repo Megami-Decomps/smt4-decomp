@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W4_Match6_BtlScript.h"
 
 /* One 0x24-byte event condition: a kind, a test on a battle unit and a table-group entry name. */
 struct EventCondition {
@@ -29,7 +30,6 @@ struct EventConditionSet {
 extern "C" {
 extern u64 DAT_005738a0[5];
 extern s32 tableGroupFindEntryIndex(void *, u8 *);
-extern u8 isOutsideRange4To53(s32);
 
 /* Find the first condition of the given kind that holds for the battle unit and record it. */
 u32 FUN_004d7a70(EventConditionSet *set, u32 kind, s32 unit, s32 dryRun)

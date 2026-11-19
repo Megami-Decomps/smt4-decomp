@@ -57,7 +57,7 @@ s32 nodeListCountActiveById(u32 id, void *arg);
 void btlUiClearRowStatuses(BtlUi *ui);
 void battleSetActionKind(BtlMainState **block);
 void FUN_003aeaf4(BtlUi *ui);
-u32 FUN_0027e3b8(void *event);
+u32 isEntryUsable(void *event); // declcheck: local (the shared declaration in code/Code0027.h does not compile here: argument of type "void *" is incompatible with parameter of type "int *")
 s32 FUN_003dcbf4(void *object);
 u32 eftLoadFileRegisterAndParseHeader(void *object);
 u8 FUN_003dcfc8(void *object);
@@ -157,7 +157,7 @@ u32 FUN_003d28d0(BtlMainState **block, u32 phase)
     case 20:
         return FUN_003cbce4(block, work);
     case 24: {
-        if (FUN_0027e3b8(g_btlEvent) != 0)
+        if (isEntryUsable(g_btlEvent) != 0)
             return 0;
         bool restricted = false;
         if (work->selection->kind == 3) {
@@ -205,7 +205,7 @@ u32 FUN_003d28d0(BtlMainState **block, u32 phase)
         FUN_00229754(block, work);
         return 1;
     case 33:
-        if (FUN_0027e3b8(g_btlEvent) != 0)
+        if (isEntryUsable(g_btlEvent) != 0)
             return 0;
         setPendingAction(block, 35);
         return 1;

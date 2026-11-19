@@ -188,7 +188,10 @@ char *FUN_001b43f0(s32 category, s32 id);
 extern "C" {
 #endif
 
-s32 FUN_002319c0(void);
+s32 setFullScreenRect(void);
+
+/* Stores the departure point index in the map save block (callers pass a word; the block keeps a byte). */
+void mapSetDepartureIndex(u32 index);
 
 #ifdef __cplusplus
 }

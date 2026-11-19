@@ -9,7 +9,7 @@
 extern "C" {
 
 int randRange(...);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(int, int);
 int FUN_002296b0(int);
 int FUN_00281b94(...);

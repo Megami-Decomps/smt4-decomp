@@ -75,7 +75,7 @@ void FUN_002d508c(PlayerController* player)
         f32 stride = (player->speed / (f32)steps) * speedScale;
         scene->pose.targetPosition.x += mathRemPio2f(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
-        scene->pose.targetPosition.z += FUN_00282390(scene->pose.targetHeading * 0.017453292f) * stride;
+        scene->pose.targetPosition.z += libm_cosf(scene->pose.targetHeading * 0.017453292f) * stride;
         scene = g_lmapScene;
         if (DAT_0049fce8 == 0) blocked = FUN_002ed094(&scene->pose.targetPosition, &before);
         scene = g_lmapScene;

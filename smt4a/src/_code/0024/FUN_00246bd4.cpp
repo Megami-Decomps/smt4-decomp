@@ -119,7 +119,7 @@ int __aeabi_memcpy4(...);
 int CONCAT44(...);
 int gameFlagsGetBlock(...);
 int randBetween(...);
-int libm_cosf(...);
+int libm_cosf(...); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(...);
 int FUN_002469d0(...);
 int FUN_0025ef68(...);

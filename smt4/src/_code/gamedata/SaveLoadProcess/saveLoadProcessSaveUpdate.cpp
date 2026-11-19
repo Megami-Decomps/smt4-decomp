@@ -50,7 +50,7 @@ s32 saveLoadProcessSaveUpdate(u32 process)
     }
     case 1:
         if (FUN_001a1d08() == 1) {
-            if (FUN_002cedbc()) {
+            if (byte1IsZero()) {
                 asdMemFree(work->buffer);
                 work->state = 3;
                 work->buffer = 0;

@@ -45,7 +45,7 @@ void textConvertToGlyphPairs(const char *source, char *destination);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_002a7c80(char *destination, const char *source);
 const char *aocIndexValueOrDefault(u32 skill);
-f32 FUN_0028f4b4(const char *text, u32 font, f32 spacing);
+f32 fontMeasureTextWidth(const char *text, u32 font, f32 spacing); // declcheck: local (the shared declaration in ui/AnimatedMessage.h does not compile here: cannot overload functions distinguished by return type alone)
 void statusBustUpPortraitRelease(s32 id, u32 kind);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
 extern const char DAT_00402898[];
@@ -103,23 +103,23 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     else
         strcpy(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->demonName, 1, -1u, 0, 0, buffer);
-    panel->demonNameWidth = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
+    panel->demonNameWidth = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
     if (record->demon)
         textConvertToGlyphPairs(demonGetRaceLabel(record->demon, 0), buffer);
     else
         FUN_002a7c80(buffer, "\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->race, 2, -1u, 0, 0, buffer);
-    panel->raceWidth = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
+    panel->raceWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
 
     for (s32 slot = 0; slot < 8; ++slot) {
         if (record->skills[slot]) {
             textConvertToGlyphPairs(aocIndexValueOrDefault(record->skills[slot]), buffer);
             asdTextDrawFormatted(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
-            panel->skillWidths[slot] = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
+            panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
         } else {
             __2sprintf(buffer, "\x81\x7c\x81\x7c\x81\x7c");
             asdTextDrawFormatted(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
-            panel->skillWidths[slot] = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
+            panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
         }
     }
     if (panel->previewId != record->demon) {
@@ -136,5 +136,5 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     }
     __2sprintf(buffer, DAT_00402898);
     asdTextDrawFormatted(panel->previewDescription, 2, -1u, 0, 0, buffer);
-    panel->previewDescriptionWidth = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
+    panel->previewDescriptionWidth = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
 }

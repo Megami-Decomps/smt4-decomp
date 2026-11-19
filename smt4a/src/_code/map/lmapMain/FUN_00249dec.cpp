@@ -17,7 +17,7 @@ int sysPlayVoice(...);
 
 int __ARM_common_memcpy4_9(...);
 int eventQueueAddUnique(...);
-int libm_cosf(void);
+int libm_cosf(void); // declcheck: local (romwright prototype; the shared declaration in util/TrigF32.h does not compile here: too few arguments in function call)
 int libm_sinf(void);
 int FUN_002941c8(int *, int);
 int FUN_002ba170(void);

@@ -57,7 +57,7 @@ void asdMdlObjectBuildBounds(MdlListEntry *entry);
 void asdModelRegisterImage(u32 result, s32 size);
 void FUN_002b2ae8(u32 owner, s32 node, s32 *out);
 void resOwnerRunNodeHandlers(u32 owner);
-u32 FUN_002b2b64(MdlBody *body);
+u32 ownerGetFloatValue(MdlBody *body); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h does not compile here: more than one instance of overloaded function "asdMdlNodeInit" has "C" linkage)
 u32 asdFileRequestGetResult(u32 handle, s32 *size);
 s32 asdFileRequestIsFinished(void);
 
@@ -91,7 +91,7 @@ void FUN_001247f0(void)
                 asdModelRebuildAttributeRecords(body, body->unk58);
             }
         }
-        FUN_002b2b64(body);
+        ownerGetFloatValue(body);
         for (s32 node = 0; node < body->nodeCount; node++) {
             if ((body->nodes[node].flags & MDL_NODE_FLAG_HAS_HANDLER) != 0)
                 resOwnerRunNodeHandlers(body->nodes[node].owner);

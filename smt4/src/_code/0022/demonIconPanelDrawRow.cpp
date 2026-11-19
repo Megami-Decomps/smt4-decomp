@@ -2,7 +2,7 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-SpriteInfo *FUN_002bf4f0(AsdTextureRegion *region, u32 image);
+SpriteInfo *layoutFindTableEntry(AsdTextureRegion *region, u32 image); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h does not compile here: a value of type "TextureTableEntryIV *" cannot be assigned to an entity of type "SpriteInfo *")
 void devilDrawIconRelative(AsdTextureRegion *region, s32 demon, s32 x, s32 y, u32 color);
 s32 partyHasStoredDemon(u16 demon);
 void FUN_00231bcc(AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
@@ -13,16 +13,16 @@ void demonIconPanelDrawRow(DemonIconPanel *panel, s32 showOwned, s32 demon,
 {
     SpriteInfo *rowInfo;
     if (!alternate)
-        rowInfo = FUN_002bf4f0(&panel->region, row + 0x40E);
+        rowInfo = layoutFindTableEntry(&panel->region, row + 0x40E);
     else
-        rowInfo = FUN_002bf4f0(&panel->region, row + 0x42F);
+        rowInfo = layoutFindTableEntry(&panel->region, row + 0x42F);
     s32 x = rowInfo->x;
     s32 y = rowInfo->y;
     SpriteInfo *iconInfo;
     if (!alternate)
-        iconInfo = FUN_002bf4f0(&panel->region, 0x487);
+        iconInfo = layoutFindTableEntry(&panel->region, 0x487);
     else
-        iconInfo = FUN_002bf4f0(&panel->region, 0x495);
+        iconInfo = layoutFindTableEntry(&panel->region, 0x495);
     s32 drawX = iconInfo->x + x;
     s32 drawY = iconInfo->y + y;
     devilDrawIconRelative(&panel->region, (s16)demon, drawX, drawY, color);

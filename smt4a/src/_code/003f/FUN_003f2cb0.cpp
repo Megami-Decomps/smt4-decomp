@@ -20,7 +20,7 @@ extern int _ZN10SoundObj70D1Ev(...); /* 0x40167c */
 extern int _ZN10SoundObj3cD1Ev(...); /* 0x413094 */
 extern int _ZN11SoundHandleD1Ev(...); /* 0x45b830 */
 extern int FUN_0045bc3c(...); /* 0x45bc3c */
-extern int FUN_00467080(...); /* 0x467080 */
+extern int soundObjDetachHandles(...); /* 0x467080 */
 extern unsigned char DAT_0055bd6c; /* 0x55bd6c */
 extern unsigned char DAT_0055bda8; /* 0x55bda8 */
 extern unsigned char DAT_0055bdc8; /* 0x55bdc8 */
@@ -48,7 +48,7 @@ void FUN_003f2cb0(int param_1)
   *(unsigned char **)(param_1 - 0xaa8) = &DAT_0055bda8;
   *(unsigned char **)(param_1 - 0xaa4) = &DAT_0055bdc8;
   __aeabi_vec_dtor(param_1 - 0xb98,_ZN10SoundObj3cD1Ev,0x3c,4);
-  __aeabi_vec_dtor(param_1 - 0xc18,FUN_00467080,0x3c,2);
+  __aeabi_vec_dtor(param_1 - 0xc18,soundObjDetachHandles,0x3c,2);
   __aeabi_vec_dtor(param_1 - 0xdd8,_ZN10SoundObj70D1Ev,0x70,4);
   temp_v0 = FUN_0045c350(param_1 - 0x1050);
   temp_v0 = FUN_0045e8fc(temp_v0 - 0x118);

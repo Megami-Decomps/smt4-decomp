@@ -9,7 +9,7 @@
 
 extern "C" {
 
-float FUN_0028f4b4(const char *, unsigned int, float);
+float fontMeasureTextWidth(const char *, unsigned int, float); // declcheck: local (romwright prototype; the shared declaration in ui/AnimatedMessage.h does not compile here: more than one instance of overloaded function "textDrawString" has "C" linkage)
 int textFormatFullWidthNumber(...);
 int questIsCompleted(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
@@ -51,7 +51,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int dataTableGetNamePayload(unsigned int);
 extern int questPassesAvailabilityConditions(unsigned int);
 extern bool questIsOfferable(unsigned short);
-/* Supplied declaration required: FUN_0028f4b4. */
+/* Supplied declaration required: fontMeasureTextWidth. */
 /* Supplied declaration required: textFormatFullWidthNumber. */
 extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: questIsCompleted. */
@@ -255,7 +255,7 @@ void FUN_00197e34(void)
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffffffff,temp_v24);
-      temp_v16 = FUN_0028f4b4(reinterpret_cast<const char *>(temp_v24), 2, 0.0f);
+      temp_v16 = fontMeasureTextWidth(reinterpret_cast<const char *>(temp_v24), 2, 0.0f);
       temp_v11 = (int)(temp_v16 + 3.0f) + (int)temp_v17;
       FUN_002bdf94(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0,7,
                    0x6a);

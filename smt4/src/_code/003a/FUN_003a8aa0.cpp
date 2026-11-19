@@ -39,7 +39,7 @@ struct CompendiumStateBlockIV {
 };
 extern "C" {
 void ifTouchRegionClearAll(void *window);
-void FUN_00233818(Obj55ca08 *selection);
+void releaseEntriesA(Obj55ca08 *selection); // declcheck: local (the shared declaration in code/Code0023_Smt4.h does not compile here: argument of type "Obj55ca08 *" is incompatible with parameter of type "Obj *")
 void entryTableClear(void *list);
 s32 FUN_0029e9cc(u16 id);
 void FUN_0022e17c(CompendiumListEntryIV *entry, u16 id, s32 useCurrent);
@@ -55,7 +55,7 @@ void FUN_003a8aa0(Obj42247c *screen)
 {
     CompendiumPopulationViewIV *work = reinterpret_cast<CompendiumPopulationViewIV *>(screen);
     ifTouchRegionClearAll(reinterpret_cast<void *>(screen->touchSelection.unk34));
-    FUN_00233818(&screen->touchSelection);
+    releaseEntriesA(&screen->touchSelection);
     entryTableClear(&work->list);
     const CompendiumStateBlockIV *block = reinterpret_cast<const CompendiumStateBlockIV *>(reinterpret_cast<u8 *>(screen) + 0x500);
     if (block->mode == 0) {

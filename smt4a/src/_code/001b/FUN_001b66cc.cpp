@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001bc730(unsigned int *);
+int nw_gfx_internal_NWCopyMtx34Reverse(unsigned int *);
 int FUN_001bc768(unsigned int *, int, unsigned int);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 
-/* Supplied declaration required: FUN_001bc730. */
+/* Supplied declaration required: nw_gfx_internal_NWCopyMtx34Reverse. */
 /* Supplied declaration required: FUN_001bc768. */
 
 
@@ -92,7 +92,7 @@ void FUN_001b66cc(int param_1,int param_2,int param_3,int param_4)
       }
       temp_v3 = *(int *)(temp_v3 + 4);
       if (temp_v6 != 0) {
-        FUN_001bc730(g_commandBufferCursor);
+        nw_gfx_internal_NWCopyMtx34Reverse(g_commandBufferCursor);
         g_commandBufferCursor = g_commandBufferCursor + 0xc;
       }
       else {

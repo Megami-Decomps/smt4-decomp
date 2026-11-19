@@ -151,7 +151,7 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027dbc8. */
 /* Supplied declaration required: btlSpriteSelectSource. */
 /* Supplied declaration required: FUN_0027de98. */
-extern int FUN_0027e3b8(unsigned int *);
+extern int isEntryUsable(unsigned int *); // declcheck: local (romwright prototype; the shared declaration in code/Code0027.h does not compile here: argument of type "unsigned int *" is incompatible with parameter of type "int *")
 /* Supplied declaration required: btlEventSelectTrigger. */
 /* Supplied declaration required: FUN_0027e760. */
 extern int table1bOr1cGetRecordValue(void);
@@ -559,7 +559,7 @@ void FUN_001fc6e8(unsigned int param_1)
     }
     break;
   case 0xb:
-    temp_v3 = FUN_0027e3b8(g_btlEvent);
+    temp_v3 = isEntryUsable(g_btlEvent);
     if (temp_v3 == 0) {
       if ((*(unsigned int *)(temp_v4 + 0x44a0) & 4) != 0) {
         puVar5 = g_btlEvent;
@@ -710,7 +710,7 @@ LAB_001fd348:
     case 8:
       break;
     default:
-      temp_v4 = FUN_0027e3b8(g_btlEvent);
+      temp_v4 = isEntryUsable(g_btlEvent);
       if ((temp_v4 == 0) &&
          (puVar5 = g_btlEvent, btlEventSelectTrigger(g_btlEvent,8,0xffffffff,0),
          puVar5 != (unsigned int *)0x0)) {

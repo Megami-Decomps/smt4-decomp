@@ -18,7 +18,7 @@ WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifie
 {
     FormattedNumericEntry *entryOutput = static_cast<FormattedNumericEntry *>(output);
     const char *text = static_cast<const char *>(identifier);
-    nn::Result ownerStatus = FUN_004283cc(owner);
+    nn::Result ownerStatus = queryFailureResultOrZero(owner);
     if (nnResultIsFailure(ownerStatus))
         return WindowStatusResult(static_cast<u32>(ownerStatus));
 

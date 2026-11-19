@@ -4,7 +4,7 @@
 
 extern "C" {
 /* The active motion's scalar value, or zero when no motion is active. */
-f32 FUN_002b2b64(const AsdMdlNode *node);
+f32 ownerGetFloatValue(const AsdMdlNode *node);
 f32 sndObjectForwardField8(const AsdMdlObject *object);
 /* The outer model holder stores its model object at offset eight. */
 f32 FUN_0027f94c(const void *holder);

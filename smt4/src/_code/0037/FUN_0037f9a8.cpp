@@ -5,8 +5,8 @@ extern "C" {
 
 int linkListEraseObject(unsigned int, int *);
 int FUN_002c4038(int *);
-int FUN_0037b140(int *);
-int FUN_0037bd18(int *);
+int wordsFlag8Reset(int *);
+int wordsFlagReset(int *);
 int nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(int *);
 
 extern unsigned char DAT_00421ddc; /* 0x421ddc */
@@ -14,8 +14,8 @@ extern unsigned char DAT_00421ddc; /* 0x421ddc */
 /* Supplied declaration required: linkListEraseObject. */
 extern unsigned int FUN_002a2174(void);
 /* Supplied declaration required: FUN_002c4038. */
-/* Supplied declaration required: FUN_0037b140. */
-/* Supplied declaration required: FUN_0037bd18. */
+/* Supplied declaration required: wordsFlag8Reset. */
+/* Supplied declaration required: wordsFlagReset. */
 /* Supplied declaration required: nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer. */
 
 
@@ -40,8 +40,8 @@ int * FUN_0037f9a8(int *param_1)
   }
   temp_v1 = 0;
   do {
-    FUN_0037b140(param_1 + temp_v1 * 3 + 0x4c);
-    FUN_0037bd18(param_1 + temp_v1 * 4 + 0x3c);
+    wordsFlag8Reset(param_1 + temp_v1 * 3 + 0x4c);
+    wordsFlagReset(param_1 + temp_v1 * 4 + 0x3c);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
   FUN_002c4038(param_1);

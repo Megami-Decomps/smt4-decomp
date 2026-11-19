@@ -70,7 +70,7 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
         else if (effect == -99)
             text = DAT_0052b4c4;
         else
-            text = reinterpret_cast<const char *>(FUN_0014bd84(effect));
+            text = reinterpret_cast<const char *>(aocIndexValueOrDefault(effect));
     }
     TextureTableEntryIV *position = asdTMTexTableEntryAt(12, 135);
     textDrawString(static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 2, 0.0f, 255, speed, text);

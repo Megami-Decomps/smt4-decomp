@@ -2,11 +2,11 @@
 #include "event/2dEvent/EventFilter.h"
 #include "code/Code0020.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f3e8[6];
-f32 libm_cosf(f32);
 
 // Advance the filter's texture loading, fade-in, pulse and fade-out phases.
 s32 eventFilterUpdate(u32 process)

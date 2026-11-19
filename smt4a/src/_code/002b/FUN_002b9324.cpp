@@ -1,9 +1,9 @@
 #include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include <stddef.h>
+#include "code/Code001b.h"
 extern "C" {
 s32 FUN_001ba570(void);
-s32 FUN_001bd118(u16 id);
 s32 recordIsAvailable(u16 id);
 s32 FUN_003df004(u16 id, s32 slot, s32 *values);
 s32 partyEntryFlagsBit1(u16 id);
@@ -18,7 +18,7 @@ s32 FUN_002b9324(void)
         return 4;
     for (u16 id = 100; id < 400; ++id) {
         if (partyEntryFlagsBit1(id)) {
-            s32 kind = FUN_001bd118(id);
+            s32 kind = table1bOr1cGetRecordValue(id);
             if (kind == 1) {
                 if (partyEntryBitsBit1(id)) {
                     s32 total = 0;

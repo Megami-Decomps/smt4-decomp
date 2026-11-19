@@ -61,7 +61,7 @@ extern MapRangeWork *g_mapRangeWork;
 extern MapRangeModelSource DAT_0049fc0c;
 s32 aocSystemGetTotalCount();
 MapRangeDefinition *dataTable2dGetEntryWithAoc(s32 index);
-s32 FUN_002df7d4(s16 index);
+s32 gameFlagsTestFirstBank(s16 index);
 u32 asdMdlManagerCreateFromSource(const void *source, u32 parameter, u32 flags);
 u32 asdMdlManagerClone(u32 model, s32 flags);
 void lightOwnerRegister(u32 model, s32 enabled);
@@ -71,7 +71,7 @@ void mapRangeUpdateModelVisibilityAndTransforms();
 static inline bool mapRangeIsAvailable(const MapRangeDefinition *definition, s32 index)
 {
     return definition->area != -1 && definition->area == g_mapRangeWork->area &&
-           definition->map == g_mapRangeWork->map && !FUN_002df7d4(static_cast<s16>(index));
+           definition->map == g_mapRangeWork->map && !gameFlagsTestFirstBank(static_cast<s16>(index));
 }
 
 /* Count matching map ranges, then create a base model and clones for their instances. */

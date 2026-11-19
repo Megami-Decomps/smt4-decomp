@@ -1,4 +1,4 @@
-/* Runs the camp menu item under the cursor (FUN_003da8f4 maps the group and row to an item id): opens the
+/* Runs the camp menu item under the cursor (dataTable15GetUnlockedEntryId maps the group and row to an item id): opens the
  * item's screen, list, script or unite mode. The cases are in retail's order. */
 #include "camp/CampStateA.h"
 #include "camp/CampSkillList.h"
@@ -18,7 +18,6 @@
 
 extern "C" {
 
-u8 FUN_003da8f4(s32 group, s32 index);
 void campChangeState(s32 newState);
 void FUN_002a5cf4(void);
 void FUN_002e738c(s32 mode);
@@ -77,7 +76,7 @@ void campMenuRunSelectedItem(void)
 {
     CampStateA *camp = g_camp;
     GridNavigation *grid = NULL;
-    s32 item = FUN_003da8f4(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
+    s32 item = dataTable15GetUnlockedEntryId(camp->menuGroup, listCursorGetRowOfChildIfUnblocked(&camp->menuGrid));
 
     switch (item) {
     case 0:

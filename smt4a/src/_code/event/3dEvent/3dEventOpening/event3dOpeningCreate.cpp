@@ -6,6 +6,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "title/titleMain.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "code/Code0038.h"
 
 namespace {
 // The opening's camera includes a final stereo parameter beyond the shared 0x508-byte prefix.
@@ -55,7 +56,6 @@ s32 FUN_002caea0(u32 handle);
 void event3dOpeningDestroy(u32 handle);
 s32 FUN_00162ea4(void);
 void asdEnvResetModelBank(const char *path, u32 flags);
-u32 FUN_00387350(const char *path);
 
 u32 event3dOpeningCreate(void)
 {
@@ -91,8 +91,8 @@ u32 event3dOpeningCreate(void)
         work->substate = 0;
         asdEnvResetModelBank(DAT_0052f680, 0);
         work->environment = 0;
-        work->loopCamera = FUN_00387350(DAT_0052f668);
-        work->startCamera = FUN_00387350(DAT_0052f650);
+        work->loopCamera = reinterpret_cast<u32>(asdCameraLoadFromFile(DAT_0052f668));
+        work->startCamera = reinterpret_cast<u32>(asdCameraLoadFromFile(DAT_0052f650));
         work->models = reinterpret_cast<u32>(asdMdlManagerCreateSecondList(DAT_0052f638, 0x38));
         work->active = 1;
     }

@@ -1,9 +1,10 @@
+#include "code/Code002c.h"
 #include "map/LmapMainGlobals.h"
 #include "gamedata/GameFlags.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code0013.h"
 
 extern "C" {
-s32 FUN_002c2a04(u32 channel);
 s32 FUN_002897e0();
 void FUN_002897d0(s32 enabled);
 s32 FUN_002897c0();
@@ -33,7 +34,7 @@ u32 lmapMainUpdateScriptTransition()
     ScriptView *work = reinterpret_cast<ScriptView *>(g_lmapMainState);
     switch (work->state) {
     case 0:
-        if ((FUN_002c2a04(0) != 3 || FUN_002c2a04(1) != 3) && FUN_002897e0()) {
+        if ((pairedAvailabilityGetState(0) != 3 || pairedAvailabilityGetState(1) != 3) && FUN_002897e0()) {
             FUN_002897d0(0);
         }
         if (FUN_002897c0()) {

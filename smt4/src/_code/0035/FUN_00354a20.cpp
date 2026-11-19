@@ -18,7 +18,7 @@ extern char s_sys_ECardStatus_0044e4c8[16]; /* 0x44e4c8 */
 
 extern unsigned char libc_toupper(void);
 /* Supplied declaration required: recordValidatePair. */
-extern int queryFailureResultOrZero(int);
+extern int queryFailureResultOrZero(int); // declcheck: local (romwright prototype; the shared declaration in classes/WindowStatus.h does not compile here: more than one instance of overloaded function "recordValidatePair" has "C" linkage)
 extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_00354834(int);

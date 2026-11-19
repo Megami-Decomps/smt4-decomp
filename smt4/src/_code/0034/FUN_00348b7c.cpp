@@ -4,7 +4,7 @@
 extern "C" {
 
 extern int table1bOr1cGetRecordValue(void *id);
-extern int FUN_00298f88(void *id);
+extern int dataTable1bOr1cRecordHasFlag1(void *id); // declcheck: local (the shared declaration in code/Code001b.h does not compile here: more than one instance of overloaded function "table1bOr1cGetRecordValue" has "C" linkage)
 extern u8 *gameGetFlagBlock(void);
 
 /* Finds the address of the slot (0xE bytes each from +0x842, four slots, then +0x87A) in the table whose id matches. */
@@ -12,7 +12,7 @@ int FUN_00348b7c(void *id)
 {
     u8 *table = gameGetFlagBlock();
 
-    if (FUN_00298f88(id) != 0) {
+    if (dataTable1bOr1cRecordHasFlag1(id) != 0) {
         if ((void *)(u32)*(u16 *)(table + 0x842) == id) {
             return (int)(table + 0x842);
         }

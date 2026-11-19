@@ -9,7 +9,7 @@ struct AocDisplay;
 static const char s_packagePathFormat[] = "%s/%s";
 extern "C" {
 extern AocDisplay *g_aocDisplay;
-void *FUN_001b2ebc(AocDisplay *display, const char *path, s32 option,
+void *fileQueueRequestAndWait(AocDisplay *display, const char *path, s32 option,
                    void *size, s32 enabled, s32 alignment, s32 flags);
 
 // Open matching package files into the caller's slots and mark the owner's request slots.
@@ -33,7 +33,7 @@ void aocLoadPackageFilesByKind(AocSystemA *owner, s32 kind, s32 capacity, AocPac
                 memcpy(&output[outputIndex], &group->files[index], offsetof(AocPackageFile, unk0E));
                 AocPackageFile *slot = &output[outputIndex];
                 sprintf(path, s_packagePathFormat, directory, record->name);
-                slot->data = FUN_001b2ebc(g_aocDisplay, path, 0, &slot->result, 1, 0x80, 0);
+                slot->data = fileQueueRequestAndWait(g_aocDisplay, path, 0, &slot->result, 1, 0x80, 0);
                 slot->available = 1;
                 owner->states[outputIndex++].requested = 1;
             }

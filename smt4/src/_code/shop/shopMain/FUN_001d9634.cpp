@@ -38,7 +38,7 @@ extern ShopSequence *DAT_0044df80;
 
 
 s32 storyFlagRangeAnySet(void);
-void FUN_00343b48(void);
+void setFlag10(void);
 void fileSlot17Acquire(s32 *slot);
 void fileSlot17Release(s32 *slot);
 void *asdOperatorNew(u32 bytes);
@@ -76,11 +76,11 @@ u32 FUN_001d9634(void)
     switch (shop->phase) {
     case 0: {
         s32 screen;
-        if (storyFlagRangeAnySet() != 0 && FUN_00343af0() == 0 && (screen = shop->screen) != 6 && screen != 7 &&
+        if (storyFlagRangeAnySet() != 0 && isFlag10Set() == 0 && (screen = shop->screen) != 6 && screen != 7 &&
             screen != 9 && screen != 10 && screen != 11 && screen != 12 && screen != 0x69 && screen != 0x6E &&
             screen != 0x6F && screen != 0x70 && screen != 0x71) {
             shop->requestPending = 1;
-            FUN_00343b48();
+            setFlag10();
             shop->phase = 3;
             break;
         }

@@ -24,7 +24,7 @@ bool useCounterIsFinished();
 void useCounterRelease();
 void sysPlaySe(u32 sound);
 s32 useCounterGetCurrentValue();
-void FUN_004a84e8(ItemListSelectionEntry *selection, s32 mode);
+void entryCollectionSortByMode(ItemListSelectionEntry *selection, s32 mode);
 void FUN_004a3e04(ItemListSelectionOwner *owner);
 
 }
@@ -51,7 +51,7 @@ static __inline void refreshSelectedIcon(ItemListSelectionOwner *owner)
     if (variant & 0x80) {
         ++animation;
     }
-    FUN_004a84e8(&owner->selection, animation);
+    entryCollectionSortByMode(&owner->selection, animation);
 }
 
 // Refresh the selected icon until the use counter finishes, then return to state 2.

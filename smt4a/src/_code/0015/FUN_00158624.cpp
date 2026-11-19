@@ -13,7 +13,7 @@ struct MountedDevice {
 }
 
 extern "C" {
-void FUN_0016cdc0(u8 *specifier, s32 mediaType, u32 saveId, u32 unused);
+void nn_fs_ExtSaveDataSpecifier_Make(u8 *specifier, s32 mediaType, u32 saveId, u32 unused);
 s32 FUN_0016d090(MountedDevice **device, const u8 *specifier);
 s32 FUN_001aeefc(const char *name, MountedDevice *device, u8 downloadable, u8 flags);
 
@@ -22,7 +22,7 @@ s32 FUN_00158624(const char *name, u32 saveId)
 {
     u8 specifier[12];
     MountedDevice *device;
-    FUN_0016cdc0(specifier, 0, saveId, 0);
+    nn_fs_ExtSaveDataSpecifier_Make(specifier, 0, saveId, 0);
     s32 result = FUN_0016d090(&device, specifier);
     if (nnResultIsFailure(result)) {
         return result;

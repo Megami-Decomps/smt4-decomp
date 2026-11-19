@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00175c68(int *);
-int FUN_001915c4(int, unsigned int, unsigned int);
+int nw_snd_internal_PoolImpl_DestroyImpl(int, unsigned int, unsigned int);
 
 /* Supplied declaration required: FUN_00175c68. */
-/* Supplied declaration required: FUN_001915c4. */
+/* Supplied declaration required: nw_snd_internal_PoolImpl_DestroyImpl. */
 
 
 void FUN_0015ec28(int param_1)
@@ -27,7 +27,7 @@ void FUN_0015ec28(int param_1)
         piVar1 = piVar2;
       } while (piVar2 != (int *)(param_1 + 8));
     }
-    FUN_001915c4(param_1,*(unsigned int *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c));
+    nw_snd_internal_PoolImpl_DestroyImpl(param_1,*(unsigned int *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c));
     *(unsigned char *)(param_1 + 0x10) = 0;
   }
   return;

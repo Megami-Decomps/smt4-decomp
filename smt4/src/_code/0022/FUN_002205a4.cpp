@@ -78,7 +78,7 @@ s32 FUN_001241a8();
 void cameraExportParameters(void *camera, CutRef *ref);
 void modelRemoveFromSlotList(CutRef *ref, s32 flag);
 void FUN_0024edd4(CutNodeHead *node, s32 index);
-void FUN_0028703c(u32 object);
+void animationEvaluateCallback(u32 object); // declcheck: local (the shared declaration in AsdSDK/Source/Gfx/Model/AsdMotionControlApi.h does not compile here: more than one instance of overloaded function "modelSetScale" has "C" linkage)
 void modelSetScale(u32 object);
 s32 jobIsValid(u32 job);
 void jobSavePositionSnapshot(u32 job);
@@ -137,7 +137,7 @@ void FUN_002205a4(s32 id, s32 easeKind, s32 frames)
     if (anim->dirty != 0)
         modelRemoveFromSlotList(anim->ref, 0);
     cutRefreshNodes(anim->ref->nodes);
-    FUN_0028703c((u32)anim->node->extra);
+    animationEvaluateCallback((u32)anim->node->extra);
     modelSetScale((u32)anim->node->extra);
 
     s32 (*ease)() = floatInterpolateOverDuration;
@@ -173,7 +173,7 @@ void FUN_002205a4(s32 id, s32 easeKind, s32 frames)
     anim->node = anim->nodes[anim->index];
     anim->dirty = 0;
     cutRefreshNodes(anim->ref->nodes);
-    FUN_0028703c((u32)anim->node->extra);
+    animationEvaluateCallback((u32)anim->node->extra);
     modelSetScale((u32)anim->node->extra);
     cutRefreshNodes(anim->node->extra->first);
     cutRefreshNodes(anim->node->extra->second);

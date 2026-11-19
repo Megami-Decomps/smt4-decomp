@@ -1,9 +1,9 @@
 /* NON_MATCHING (b1454): only VFP register allocation differs (retail keeps the 1.5707964 constant in s1 and the divisor in s2; the build swaps them). */
 #include "common.h"
 #include <math.h>
+#include "util/TrigF32.h"
 
 extern "C" {
-f32 libm_cosf(f32 angle);
 f32 libm_sinf(f32 angle);
 
 // Ease an integer between endpoints, reporting when the destination is reached.

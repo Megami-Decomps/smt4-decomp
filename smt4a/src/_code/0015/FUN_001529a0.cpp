@@ -99,7 +99,7 @@ extern "C" {
 
 SceneObject *FUN_0017250c(void);
 SceneObject *FUN_0017261c(AsdAllocatorObject *allocator);
-BuiltCamera *FUN_0017314c(CameraBuilder *builder, AsdAllocatorObject *allocator);
+BuiltCamera *nw_gfx_Camera_DynamicBuilder_Create(CameraBuilder *builder, AsdAllocatorObject *allocator);
 
 /* Creates a camera at `position` with the given look-at point and projection values. */
 BuiltCamera *FUN_001529a0(AsdAllocatorObject *allocator, const Vector3 *position, const Vector3 *lookAt,
@@ -126,7 +126,7 @@ BuiltCamera *FUN_001529a0(AsdAllocatorObject *allocator, const Vector3 *position
 
         builder.transform.reset(transform);
         builder.lookAt.reset(target);
-        camera = FUN_0017314c(&builder, allocator);
+        camera = nw_gfx_Camera_DynamicBuilder_Create(&builder, allocator);
     }
     camera->x = position->x;
     camera->y = position->y;

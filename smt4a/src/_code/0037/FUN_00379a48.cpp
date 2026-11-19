@@ -20,7 +20,7 @@ extern "C" {
 extern DebugSpatialBoundsQueue DAT_00611874;
 extern const DebugBoundsPalette DAT_00532240;
 u32 renderCtxPackPassFlags(u32, u32);
-void FUN_00280a08(u32, u32, u32, u32,
+void gxEmitColoredQuad(u32, u32, u32, u32,
                  f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
 
 // Draw the queued spatial bounds in cycling colors on a plane above the supplied height.
@@ -43,7 +43,7 @@ void FUN_00379a48(f32 height)
                 f32 maximumZ = bounds->maximum.z;
                 f32 maximumX = bounds->maximum.x;
                 u32 color = colors[index % 12] | 0x70;
-                FUN_00280a08(color, color, color, color,
+                gxEmitColoredQuad(color, color, color, color,
                     minimumX, height, minimumZ,
                     minimumX, height, maximumZ,
                     maximumX, height, minimumZ,

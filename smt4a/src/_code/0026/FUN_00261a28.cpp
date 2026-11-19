@@ -32,7 +32,7 @@ int flagValueSub(...);
 int FUN_0048111c(...);
 int unitRecordResetCurrentValues(...);
 int unitRecomputeDerivedStats(...);
-int dispatchIfFound(...);
+int dispatchIfFound(...); // declcheck: local (romwright prototype; the shared declaration in code/Code0029.h does not compile here: too few arguments in function call)
 int bitsAt60Set(...);
 int __aeabi_memcpy4(...);
 

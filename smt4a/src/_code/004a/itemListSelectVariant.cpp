@@ -3,7 +3,7 @@
 #include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
-void FUN_004a84e8(ItemListSelectionEntry *entry, s32 selection);
+void entryCollectionSortByMode(ItemListSelectionEntry *entry, s32 selection);
 
 // Select the item-list presentation variant, retaining its alternate-state bit.
 void itemListSelectVariant(ItemListSelectionOwner *owner, s32 useAlternate, s32 unused)
@@ -37,6 +37,6 @@ void itemListSelectVariant(ItemListSelectionOwner *owner, s32 useAlternate, s32 
     if (useAlternate != 0 && (variant & 0x80) != 0) {
         ++selection;
     }
-    FUN_004a84e8(&owner->selection, selection);
+    entryCollectionSortByMode(&owner->selection, selection);
 }
 }

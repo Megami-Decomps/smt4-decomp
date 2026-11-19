@@ -190,9 +190,9 @@ void FUN_0017cf74(const void *source, void *destination, u32 bytes);
 /* Queues a command list of `byteCount` bytes on the write buffer (smt4a; flushes it first when it
  * has unsubmitted commands). */
 void FUN_0017cdcc(const void *commands, u32 byteCount);
-/* Sets the display offsets of the active target (smt4 nngxDisplayEnv, smt4a FUN_00149840). */
+/* Sets the display offsets of the active target (smt4 nngxDisplayEnv, smt4a nngxDisplayEnv). */
 void nngxDisplayEnv(s32 x, s32 y);
-void FUN_00149840(s32 x, s32 y);
+void nngxDisplayEnv(s32 x, s32 y);
 /* Sets the display callback of display 0x400, 0x401 or (0x402) both. */
 void asdGfxSetTargetParameter(u32 display, AsdGfxDisplayCallback callback);
 /* Sets the submission wait timeout and the callback run when it expires (smt4 FUN_001131f8,

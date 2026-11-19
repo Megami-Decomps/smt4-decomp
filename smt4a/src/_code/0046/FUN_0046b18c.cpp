@@ -55,7 +55,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: buttonHelpSetSelectedId. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: messageSetIndexedFlag. */
-/* Supplied declaration required: FUN_003c1060. */
+/* Supplied declaration required: messageMainRequestBanner. */
 /* Supplied declaration required: modelPlayClip. */
 /* Supplied declaration required: pickObjStart. */
 /* Supplied declaration required: FUN_0046a278. */
@@ -118,7 +118,7 @@ void FUN_0046b18c(unsigned int *param_1)
         if (param_1[0x2b4] != 1) {
           buttonHelpSetSelectedId(0xa2);
           pickObjStart(param_1,&LAB_0046b4e0);
-          FUN_003c1060();
+          messageMainRequestBanner();
           if ((char)param_1[6] != '\0') {
             return;
           }

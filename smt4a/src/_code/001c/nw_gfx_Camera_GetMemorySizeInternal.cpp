@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ca2d0(...);
+int nw_gfx_TransformNode_GetMemorySizeForInitialize(...);
 int nw_gfx_AnimGroup_GetMemorySizeForInitialize(...);
 
 typedef struct fn_001c0df0_arg1 fn_001c0df0_arg1;
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_001ca2d0. */
+/* Supplied declaration required: nw_gfx_TransformNode_GetMemorySizeForInitialize. */
 /* Supplied declaration required: nw_gfx_AnimGroup_GetMemorySizeForInitialize. */
 
 
@@ -50,7 +50,7 @@ void nw_gfx_Camera_GetMemorySizeInternal
   if (temp_v4 < 3) {
     *param_1 = (((*param_1 + param_1[1]) - 1U) & ~(param_1[1] - 1U)) + 0x20;
   }
-  FUN_001ca2d0(param_1,param_2,param_3,param_4,param_5,param_6);
+  nw_gfx_TransformNode_GetMemorySizeForInitialize(param_1,param_2,param_3,param_4,param_5,param_6);
   temp_v1 = (((*param_1 + param_1[1]) - 1U) & ~(param_1[1] - 1U)) + 200;
   *param_1 = temp_v1;
   if (temp_v3 != 0) {

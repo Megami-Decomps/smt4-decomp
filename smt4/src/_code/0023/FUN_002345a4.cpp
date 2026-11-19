@@ -3,14 +3,13 @@
 
 extern "C" {
 
-nn::Result queryFailureResultOrZero(u32 provider);
 u32 FUN_00353368(u32 provider, u32 record, u32 identifier);
 
 // Reads a record through the provider; a failed provider check is returned as is,
 // otherwise the read result is validated and returned.
 WindowStatusResult FUN_002345a4(u32 provider, u32 record, u32 identifier)
 {
-    nn::Result status = queryFailureResultOrZero(provider);
+    nn::Result status = queryFailureResultOrZero(reinterpret_cast<void *>(provider));
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

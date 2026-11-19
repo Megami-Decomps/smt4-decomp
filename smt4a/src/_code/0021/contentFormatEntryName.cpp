@@ -1,10 +1,10 @@
 #include "common.h"
 #include <stdio.h>
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 extern "C" {
 s32 libc_sprintf(char *destination, const char *format, ...);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-const char *FUN_0014bd84(u32 id);
 const char *FUN_00180114(u32 id);
 const char *contentEntryDataGet(u32 id, u32 kind);
 extern const char *DAT_0057f298[];
@@ -26,7 +26,7 @@ void contentFormatEntryName(u32 context, s32 category, s32 id, char *destination
     } else if (category == 3) {
         libc_sprintf(destination, "%s", contentEntryDataGet(id, 0));
     } else if (category == 4) {
-        libc_sprintf(destination, "%s", FUN_0014bd84(id));
+        libc_sprintf(destination, "%s", aocIndexValueOrDefault(id));
     } else if (category == 5) {
         const char *names[21];
         __aeabi_memcpy4(names, DAT_0052f2b4, sizeof(names));

@@ -6,7 +6,7 @@ s32 nw_snd_SoundArchive_IsAvailable(void *);
 s32 nw_snd_SoundArchive_GetSoundType(void *, u32);
 s32 asd3dSoundActorIsPlaying(u32);
 s32 FUN_00151340(u32);
-u32 FUN_0015e2bc(void *, s32 *, u32, s32);
+u32 nw_snd_SoundStartable_StartSound(void *, s32 *, u32, s32);
 
 /* Start an idle spatial actor and convert the 0..127 volume to its relative gain. */
 u8 FUN_00359768(u32 soundId, u32 actorIndex, u32 volume)
@@ -19,7 +19,7 @@ u8 FUN_00359768(u32 soundId, u32 actorIndex, u32 volume)
         nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem, soundId) &&
         !asd3dSoundActorIsPlaying(actorIndex) && FUN_00151340(soundId)) {
         AsdSnd3dActorA *actor = &sound3d->actors[actorIndex];
-        started = static_cast<u8>(FUN_0015e2bc(actor, &sound3d->handles[actorIndex], soundId, 0)) == 0;
+        started = static_cast<u8>(nw_snd_SoundStartable_StartSound(actor, &sound3d->handles[actorIndex], soundId, 0)) == 0;
         f32 gain;
         if (volume == 0)
             gain = 0.0f;

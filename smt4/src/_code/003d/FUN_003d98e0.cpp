@@ -2,6 +2,7 @@
 /* NON_MATCHING: VFP callee-saved numbering only: retail keeps the incoming x/y pair in d8 (s16/s17) and z in s18, built uses s17/s18 and s16 */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 
@@ -79,7 +80,7 @@ u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexAr
     } else if (found != 0) {
         scale = value;
     }
-    if ((owner->flags & 4) == 0 && FUN_00221b70(effect) != 0) {
+    if ((owner->flags & 4) == 0 && entryIsValid(effect) != 0) {
         FUN_001c2b48(effect);
         owner->flags |= 4;
     }
