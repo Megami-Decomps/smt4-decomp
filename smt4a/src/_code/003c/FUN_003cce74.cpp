@@ -1,5 +1,6 @@
 /* NON_MATCHING: grid slot detail draw (name, detail value and stat delta); the speed parameter (retail s0, kept in s16) is forwarded to the strip and text draws, the entry-id array uses ldrsh/ldrh and the saved-register assignment still differ. */
 #include "common.h"
+#include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -15,7 +16,6 @@ struct GridDetailView {
 };
 
 extern "C" {
-void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *format, u32 value);
 void FUN_00185e84(s32 id, s32 x, s32 y, u32 flags, s32 a, s32 b);
 void largeGridDrawButtonStrip(GridDetailView *view, s32 x, s32 y, s32 slot, f32 speed);
@@ -48,7 +48,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
         s32 mode = recordGetModeForId(view->slotIds[button]);
         if (mode == 1 || mode == 2 || mode == 6)
             color = GRID_COLOR_SPECIAL;
-        textFormatBuffer(text, "%s", FUN_0014bd84(entry));
+        sprintf(text, "%s", FUN_0014bd84(entry));
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
         textDrawString(2, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 0.0f, speed);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1A, 0x1A1);
@@ -63,7 +63,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
         s32 mode = recordGetModeForId(view->slotIds[button]);
         if (mode == 1 || mode == 2 || mode == 6)
             color = GRID_COLOR_SPECIAL;
-        textFormatBuffer(text, "\x81\x7C \x81\x7C \x81\x7C");
+        sprintf(text, "\x81\x7C \x81\x7C \x81\x7C");
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
         textDrawString(3, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 0.0f, speed);
     }

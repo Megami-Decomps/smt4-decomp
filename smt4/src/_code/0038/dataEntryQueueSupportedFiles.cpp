@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the stack-pointer adjustment is scheduled before the first load and the null-row register is initialised conditionally instead of unconditionally. */
+#include <stdio.h>
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -7,7 +8,6 @@
 extern "C" {
 extern AocDisplay *g_aocDisplay;
 void *dataTableFileGetTable(void *file, u32 index);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void aocQueueFileLoad(AocDisplay *display, const char *path, AocPackageFile *file,
                   u32 mode, u32 size, AocPackageFile *context);
 }
@@ -80,7 +80,7 @@ extern "C" void dataEntryQueueSupportedFiles(AocPackage *entry)
             case 0x2f: {
                 char path[0x80];
                 memClear(path, sizeof(path));
-                textFormatBuffer(path, "%s/%s", entry->mountName, rows[index].name);
+                sprintf(path, "%s/%s", entry->mountName, rows[index].name);
                 AocPackageFile *file = &entry->files[index];
                 aocQueueFileLoad(g_aocDisplay, path, file, 1, sizeof(path), file);
                 entry->files[index].available = 1;

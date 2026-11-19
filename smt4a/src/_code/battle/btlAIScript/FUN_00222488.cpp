@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail schedules the g_btlAiScript pool load before `sub sp, sp, #132`; rest identical. */
+#include "runtime/Stdio.h"
 #include "battle/BtlMainAccess.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "battle/btlAIScript.h"
@@ -9,7 +10,6 @@ extern "C" {
 
 void asdMemFree(void *block);
 void sysMemClear(void *dst, u32 size);
-void textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00240c34(const char *path);
 char *libc_strcpy(char *dst, const char *src);
 
@@ -39,9 +39,9 @@ void FUN_00222488(BtlAiScriptActor *actor)
         btlGetMainState();
         name = nkmEnemyFindById(actor->demon->id)->aiScriptName;
         sysMemClear(path, sizeof(path));
-        textFormatBuffer(path, DAT_00527f94, name);
+        __2sprintf(path, DAT_00527f94, name);
         if (FUN_00240c34(path) == 0) {
-            textFormatBuffer(path, DAT_00527fa4);
+            __2sprintf(path, DAT_00527fa4);
         }
         libc_strcpy(script->path, path);
         if (aocContentLookupSucceeds(g_aocSystem, actor->demon->id) != 0) {

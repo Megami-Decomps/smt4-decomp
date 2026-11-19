@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ad414` (_code @ 0x2ad414, 0x608 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "runtime/Stdio.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int libc_strcat(...);
 int nkmEnemyFindById(void);
 int randomGetLowerTenBits(int, int);
@@ -18,7 +18,6 @@ typedef struct {
 
 extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int libc_strlen(char *);
@@ -154,28 +153,28 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
         while( 1 ) {
           switch(temp_v10[temp_v3]) {
           case 0xb:
-            textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
+            __2sprintf((char *)temp_v9,"澂辂覂鎂辂躂");
             break;
           case 0xc:
-            textFormatBuffer(temp_v9,"澂膂躂覂莂");
+            __2sprintf((char *)temp_v9,"澂膂躂覂莂");
             break;
           case 0xd:
-            textFormatBuffer(temp_v9,"犂貂薂薂邂");
+            __2sprintf((char *)temp_v9,"犂貂薂薂邂");
             break;
           case 0xe:
-            textFormatBuffer(temp_v9,"憂覂躂蒂");
+            __2sprintf((char *)temp_v9,"憂覂躂蒂");
             break;
           case 0xf:
-            textFormatBuffer(temp_v9,"犂覂莂讂");
+            __2sprintf((char *)temp_v9,"犂覂莂讂");
             break;
           case 0x11:
-            textFormatBuffer(temp_v9,"抂袂膂銂趂");
+            __2sprintf((char *)temp_v9,"抂袂膂銂趂");
             break;
           case 0x12:
-            textFormatBuffer(temp_v9,"掂膂骂薂");
+            __2sprintf((char *)temp_v9,"掂膂骂薂");
             break;
           case 0x13:
-            textFormatBuffer(temp_v9,(char *)0x52b8a0);
+            __2sprintf((char *)temp_v9,(char *)0x52b8a0);
           }
           libc_strcat(param_4,temp_v9);
           temp_v3 = temp_v3 + 1;
@@ -226,7 +225,7 @@ LAB_002ad77c:
         case 0x13:
           pcVar6 = (char *)0x52b8a0;
         }
-        textFormatBuffer(temp_v9,pcVar6);
+        __2sprintf((char *)temp_v9,pcVar6);
 LAB_002ad7c8:
         libc_strcat(param_4,temp_v9);
         temp_v3 = temp_v3 + 1;
@@ -278,7 +277,7 @@ LAB_002ad880:
         case 0x13:
           pcVar6 = (char *)0x52b8a0;
         }
-        textFormatBuffer(temp_v9,pcVar6);
+        __2sprintf((char *)temp_v9,pcVar6);
 LAB_002ad990:
         libc_strcat(param_4,temp_v9);
         temp_v3 = temp_v3 + 1;

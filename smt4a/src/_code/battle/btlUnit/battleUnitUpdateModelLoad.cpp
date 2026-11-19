@@ -1,4 +1,5 @@
 /* NON_MATCHING: -O2 candidate; retail reloads render flags and retains different state/entry registers and float-store scheduling. */
+#include "runtime/Stdio.h"
 #include "battle/btlMain.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -26,7 +27,6 @@ union BattleModelRecord {
 };
 
 extern "C" {
-void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *word);
 void btlUiAddRequest(BtlUiA *ui, u16 id);
@@ -56,7 +56,7 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
                 record->model.owner = owner;
                 char filename[64] = {};
                 if (entry->data != NULL) {
-                    textFormatBuffer(filename, g_battleEnemyModelPathFormat, (s32)entry->data->modelId);
+                    __2sprintf(filename, g_battleEnemyModelPathFormat, (s32)entry->data->modelId);
                     modelOwnerLoadNamed(record->model.owner, filename);
                 }
             }

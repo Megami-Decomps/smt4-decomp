@@ -1,4 +1,5 @@
 /* NON_MATCHING: restored unsigned category getter plus sign extension; table search exit and saved-register allocation differ. */
+#include "runtime/Stdio.h"
 #include "result/ResultInput.h"
 #include "camp/PartyResourceWork.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
@@ -15,7 +16,6 @@ PartyTextureSlot *saveSlotFindById(u32);
 const char *dataTable01GetRecordWithAocOverride(u32);
 const char *FUN_0014bf3c(u16, u32);
 char *libc_strcpy(char *, const char *);
-void textFormatBuffer(char *, const char *, ...);
 u8 devilGetVoiceCategory(const NkmBaseRecordA *record);
 extern const char DAT_00533c9c[];
 extern const char DAT_00533c84[];
@@ -47,7 +47,7 @@ void FUN_00416d30(ResultInputWork *work)
             }
             if (index == messages.count)
                 entry = NULL;
-            textFormatBuffer(path, DAT_00533d24, entry->archive);
+            __2sprintf(path, DAT_00533d24, entry->archive);
             asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&work->resources.demonMessages), 0);
         }
     }

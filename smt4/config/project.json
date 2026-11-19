@@ -58792,12 +58792,12 @@
     },
     {
       "address": "0x2be624",
-      "function": "textFormatBuffer",
+      "function": "__2sprintf",
       "module": "_code",
-      "object": "build/obj/_code/002b/textFormatBuffer.o",
+      "object": "build/obj/_code/002b/__2sprintf.o",
       "size": 40,
-      "source": "src/_code/002b/textFormatBuffer.cpp",
-      "target": "orig/target/_code/002b/textFormatBuffer.o",
+      "source": "src/_code/002b/__2sprintf.cpp",
+      "target": "orig/target/_code/002b/__2sprintf.o",
       "thumb": true
     },
     {

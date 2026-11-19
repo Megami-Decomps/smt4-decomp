@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041b360` (_code @ 0x41b360, 0x580 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, unsigned int, int, int, int);
 int efctSetSpeed(void);
@@ -37,7 +37,6 @@ extern unsigned char DAT_00533f48; /* 0x533f48 */
 extern unsigned char DAT_00533f4c; /* 0x533f4c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -110,7 +109,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2b,0x2f));
   temp_v5 = temp_v6 + *(short *)(temp_v3 + 8);
   temp_v4 = temp_v7 + *(short *)(temp_v3 + 10);
-  textFormatBuffer(temp_v9,&DAT_00533f4c,param_2,(int)*(short *)(temp_v3 + 10));
+  sprintf((char *)temp_v9,(const char *)&DAT_00533f4c,param_2,(int)*(short *)(temp_v3 + 10));
   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(4,0xffffffff,temp_v9);

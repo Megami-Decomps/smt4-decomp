@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the global pool load is placed before the push (retail: right after it), matching smt4 twin (2 diff lines). */
+#include <stdio.h>
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteApi.h"
 #include "event/2dEvent/2dEventTex.h"
@@ -8,7 +8,6 @@ extern "C" {
 s32 buttonHelpGetPanelMode(void);
 s32 buttonHelpGetPanelState(void);
 const char *screenGetEntry(u32);
-void textFormatBuffer(char *, const char *, ...);
 void buttonHelpSetMode(s32);
 void sysPlaySe(s32);
 extern Obj7ECRef g_useCounter;
@@ -51,7 +50,7 @@ void useCounterStart(void)
         if (!state) {
             const char *first = screenGetEntry(0);
             const char *second = screenGetEntry(1);
-            textFormatBuffer(work->savedText, "%s\n%s", first, second);
+            sprintf(work->savedText, "%s\n%s", first, second);
         }
         buttonHelpSetMode(0);
     }

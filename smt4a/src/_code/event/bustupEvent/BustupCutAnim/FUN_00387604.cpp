@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail keeps the camera constants (30.0, 1.0) in callee-saved VFP registers across both camera set-ups and stores the setup fields in a different order; this build reloads/stores them in source order. */
+#include <stdio.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -73,7 +74,6 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
 s32 FUN_002f4540(u32 job);
 s32 FUN_00334848(u32 job);
 void bustupCutAnimDestroy(u32 job);
-void textFormatBuffer(char *buffer, const char *format, u32 id);
 u32 FUN_00387350(const char *path);
 void FUN_00449814(BustupModelNode *node, s32 part);
 void cameraExportParameters(BustupCameraSetup *setup, u32 model);
@@ -114,9 +114,9 @@ u32 FUN_00387604(void)
         block->unk5f0 = 0;
         char path[76];
         for (u32 i = 0; i < BUSTUP_CUT_ENTRIES; i++) {
-            textFormatBuffer(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
+            sprintf(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
             block->models[i] = FUN_00387350(path);
-            textFormatBuffer(path, "event/BustUpEvent/%s.bam", g_bustupCutAnim.ids[i]);
+            sprintf(path, "event/BustUpEvent/%s.bam", g_bustupCutAnim.ids[i]);
             block->lists[i] = reinterpret_cast<u32>(asdMdlManagerCreateSecondList(path, 7));
         }
         block->model = block->models[0];

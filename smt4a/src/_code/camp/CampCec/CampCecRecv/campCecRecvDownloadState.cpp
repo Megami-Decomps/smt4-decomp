@@ -6,6 +6,7 @@
  * `i < 32`, at its end, where this build lays the loop out with its exit code first; and retail stores
  * `pending |= 4` before the item list is cleared, this build in the middle of it. */
 #include "common.h"
+#include <stdio.h>
 #include "camp/CampCec/CampCecRecv.h"
 #include "camp/CampCec/CampCecSetting.h"
 #include "AsdSDK/AsdMemCopy.h"
@@ -504,7 +505,7 @@ s32 campCecRecvDownloadState(CampCecRecv *recv)
             if ((recv->receive.pending & 1) && recv->receive.gift != NULL) {
                 demonId = recv->receive.gift->demonId;
             }
-            textFormatBuffer(path, "camp/CecDevilMsg/%s.mbm",
+            sprintf(path, "camp/CecDevilMsg/%s.mbm",
                              (const char *)FUN_003316b4((s8)nkmBaseGetRecord(demonId)->talkTone)->unk01);
             asdLoadFileAsyncSimple(path, &recv->receive.talkMessages, 0);
             recv->receive.talkLoading = 1;

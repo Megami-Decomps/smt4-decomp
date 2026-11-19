@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00355428` (_code @ 0x355428, 0xed0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
@@ -8,7 +9,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int effectRenderTransformedInstance(...);
@@ -49,7 +49,6 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
@@ -119,7 +118,7 @@ void FUN_00355428(void)
       } while (temp_v7 < 0x10b);
       temp_v4 = DAT_005f16d4;
       FUN_003799d0(DAT_005f16d4);
-      textFormatBuffer(temp_v18,"%s",temp_v4);
+      sprintf((char *)temp_v18,"%s",temp_v4);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(3,0xffffffff,temp_v18);
@@ -296,7 +295,7 @@ void FUN_00355428(void)
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1d20);
         dataFindKindRecordWithAocOverrides(temp_v9,0);
-        textFormatBuffer(temp_v18,"%s",temp_v9);
+        sprintf((char *)temp_v18,"%s",temp_v9);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v8 + 10),
@@ -378,7 +377,7 @@ LAB_00355f74:
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1dc8);
         dataFindKindRecordWithAocOverrides(temp_v9,0);
-        textFormatBuffer(temp_v18,"%s",temp_v9);
+        sprintf((char *)temp_v18,"%s",temp_v9);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v8 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);

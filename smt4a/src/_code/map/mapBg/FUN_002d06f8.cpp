@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d06f8` (_code @ 0x2d06f8, 0x1044 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int asdMemoryAllocTraced(...);
 int modelLoadFileAsyncByName(...);
 int controllerSetDestination(...);
@@ -39,7 +39,6 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapDepartWork; /* 0x58069c */
 extern int DAT_005f1bdc; /* 0x5f1bdc */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: modelLoadFileAsyncByName. */
@@ -236,7 +235,7 @@ LAB_002d0a48:
         *(unsigned int *)(g_mapDepartWork + 0x10) = temp_v3;
         FUN_0040a908();
         FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x10),0x30000);
-        textFormatBuffer(temp_v8,&LAB_002d0b08,*(unsigned int *)(g_mapDepartWork + 0x1c));
+        sprintf((char *)temp_v8,(const char *)&LAB_002d0b08,*(unsigned int *)(g_mapDepartWork + 0x1c));
         modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0x10),temp_v8);
         *(short *)(g_mapDepartWork + 8) = *(short *)(g_mapDepartWork + 8) + 1;
         goto LAB_002d0a48;
@@ -371,37 +370,37 @@ LAB_002d0a48:
   temp_v2 = g_mapDepartWork;
   *(unsigned int *)(g_mapDepartWork + 0xc) = temp_v3;
   temp_v1 = (int)*(short *)(temp_v2 + 0x20);
-  textFormatBuffer(temp_v8,&LAB_002d13d0,temp_v1,temp_v1,(int)*(short *)(temp_v2 + 0x22));
+  sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,temp_v1,temp_v1,(int)*(short *)(temp_v2 + 0x22));
   temp_v2 = gameFlagIsSet(0x9d);
   if ((((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
       ((*(short *)(g_mapDepartWork + 0x22) != 1 ||
-       (textFormatBuffer(temp_v8,&LAB_002d13d0,0x27,0x27,0xf),
+       (sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x27,0x27,0xf),
        *(short *)(g_mapDepartWork + 0x20) == 0x27)))) &&
      ((((*(short *)(g_mapDepartWork + 0x22) != 2 ||
-        (textFormatBuffer(temp_v8,&LAB_002d13d0,0x27,0x27,0x10),
+        (sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x27,0x27,0x10),
         *(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
        ((*(short *)(g_mapDepartWork + 0x22) != 3 ||
-        (textFormatBuffer(temp_v8,&LAB_002d13d0,0x27,0x27,0x11),
+        (sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x27,0x27,0x11),
         *(short *)(g_mapDepartWork + 0x20) == 0x27)))) &&
       ((*(short *)(g_mapDepartWork + 0x22) != 4 ||
-       (textFormatBuffer(temp_v8,&LAB_002d13d0,0x27,0x27,0x12),
+       (sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x27,0x27,0x12),
        *(short *)(g_mapDepartWork + 0x20) == 0x27)))))) {
     if (*(short *)(g_mapDepartWork + 0x22) == 5) {
-      textFormatBuffer(temp_v8,&LAB_002d13d0,0x27,0x27,0x13);
+      sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x27,0x27,0x13);
       if (*(short *)(g_mapDepartWork + 0x20) == 0x2c || *(short *)(g_mapDepartWork + 0x20) == 0x2f) {
-        textFormatBuffer(temp_v8,&LAB_002d13d0,0x2b,0x2b,2);
+        sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x2b,0x2b,2);
       }
       if (*(short *)(g_mapDepartWork + 0x20) == 0x2d || *(short *)(g_mapDepartWork + 0x20) == 0x2e) {
-        textFormatBuffer(temp_v8,&LAB_002d13d0,0x2b,0x2b,1);
+        sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x2b,0x2b,1);
       }
     }
   }
   else {
     if (*(short *)(g_mapDepartWork + 0x20) == 0x2c || *(short *)(g_mapDepartWork + 0x20) == 0x2f) {
-      textFormatBuffer(temp_v8,&LAB_002d13d0,0x2b,0x2b,2);
+      sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x2b,0x2b,2);
     }
     if (*(short *)(g_mapDepartWork + 0x20) == 0x2d || *(short *)(g_mapDepartWork + 0x20) == 0x2e) {
-      textFormatBuffer(temp_v8,&LAB_002d13d0,0x2b,0x2b,1);
+      sprintf((char *)temp_v8,(const char *)&LAB_002d13d0,0x2b,0x2b,1);
     }
   }
   modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0xc),temp_v8);
@@ -416,20 +415,20 @@ LAB_002d0a48:
   temp_v2 = g_mapDepartWork;
   *(unsigned int *)(g_mapDepartWork + 0x14) = temp_v3;
   temp_v1 = (int)*(short *)(temp_v2 + 0x20);
-  textFormatBuffer(temp_v8,&LAB_002d13ec,temp_v1,temp_v1,(int)*(short *)(temp_v2 + 0x22));
+  sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,temp_v1,temp_v1,(int)*(short *)(temp_v2 + 0x22));
   temp_v2 = gameFlagIsSet(0x9d);
   if ((((((temp_v2 != 0) && (*(short *)(g_mapDepartWork + 0x20) == 0x27)) &&
         ((*(short *)(g_mapDepartWork + 0x22) != 1 ||
-         (textFormatBuffer(temp_v8,&LAB_002d13ec,0x27,0x27,0xf),
+         (sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,0x27,0x27,0xf),
          *(short *)(g_mapDepartWork + 0x20) == 0x27)))) &&
        ((*(short *)(g_mapDepartWork + 0x22) != 2 ||
-        (textFormatBuffer(temp_v8,&LAB_002d13ec,0x27,0x27,0x10),
+        (sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,0x27,0x27,0x10),
         *(short *)(g_mapDepartWork + 0x20) == 0x27)))) &&
       ((*(short *)(g_mapDepartWork + 0x22) != 3 ||
-       (textFormatBuffer(temp_v8,&LAB_002d13ec,0x27,0x27,0x11),
+       (sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,0x27,0x27,0x11),
        *(short *)(g_mapDepartWork + 0x20) == 0x27)))) &&
      ((*(short *)(g_mapDepartWork + 0x22) != 4 ||
-      (textFormatBuffer(temp_v8,&LAB_002d13ec,0x27,0x27,0x12),
+      (sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,0x27,0x27,0x12),
       *(short *)(g_mapDepartWork + 0x20) == 0x27)))) {
     if (*(short *)(g_mapDepartWork + 0x22) != 5) {
       modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v8);
@@ -438,13 +437,13 @@ LAB_002d0a48:
       *(short *)(g_mapDepartWork + 8) = *(short *)(g_mapDepartWork + 8) + 1;
       return 0;
     }
-    textFormatBuffer(temp_v8,&LAB_002d13ec,0x27,0x27,0x13);
+    sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,0x27,0x27,0x13);
   }
   if (*(short *)(g_mapDepartWork + 0x20) == 0x2c || *(short *)(g_mapDepartWork + 0x20) == 0x2f) {
-    textFormatBuffer(temp_v8,&LAB_002d13ec,0x2b,0x2b,2);
+    sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,0x2b,0x2b,2);
   }
   if (*(short *)(g_mapDepartWork + 0x20) == 0x2d || *(short *)(g_mapDepartWork + 0x20) == 0x2e) {
-    textFormatBuffer(temp_v8,&LAB_002d13ec,0x2b,0x2b,1);
+    sprintf((char *)temp_v8,(const char *)&LAB_002d13ec,0x2b,0x2b,1);
   }
   modelLoadFileAsyncByName(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v8);
   FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0x14),0x10000);

@@ -1,4 +1,5 @@
 /* Shows a skill's category, target, and description in the button-help panel. */
+#include <stdio.h>
 #include "ui/ButtonHelpGlobal.h"
 #include "shard/PassiveSkill.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -11,7 +12,6 @@ s32 idIsAbove400(s32 id);
 void btlFormatCategoryLabel(char *buffer, u32 category);
 void textEncodeFontSlot(s32 slot, const u8 *text);
 void skillFormatTargetLabel(char *buffer, s32 target);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, RelativeDirectory *directory, u32 index);
 
 void buttonHelpShowSkillDetails(s32 skill)
@@ -30,7 +30,7 @@ void buttonHelpShowSkillDetails(s32 skill)
             const PassiveSkillRecord *record = passiveSkillLookupRecord(skill);
             btlFormatCategoryLabel(label, (record->affinity & 0xFFFF) >> 11);
             textEncodeFontSlot(36, (const u8 *)label);
-            textFormatBuffer(label, "\x82\x72\x82\x85\x82\x8C\x82\x86");
+            sprintf(label, "\x82\x72\x82\x85\x82\x8C\x82\x86");
             textEncodeFontSlot(37, (const u8 *)label);
         } else {
             /* The target/category word is past the shared active-skill prefix. */

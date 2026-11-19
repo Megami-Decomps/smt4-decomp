@@ -1,4 +1,5 @@
 /* NON_MATCHING: draw offsets use ldrd instead of retail's ldm; color-path registers and decimal-formatter layout also differ. */
+#include <stdio.h>
 #include "saveLoadUI/saveLoadUI.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "shard/TextureDrawCall.h"
@@ -15,7 +16,6 @@ void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 d
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 u32 FUN_0036fcd0(void *unit, u32 mode);
 void drawSetColorFromRGBA8(u32 color);
-void textFormatBuffer(char *destination, const char *format, ...);
 void FUN_00180310(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 void FUN_002e1b64(u32 location, s32 x, s32 y, s32 depth);
 
@@ -78,22 +78,22 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     char text[16];
     char time[12];
     drawSetColorFromRGBA8(textColor);
-    textFormatBuffer(text, "%d", record->level);
+    sprintf(text, "%d", record->level);
     position = asdTMTexTableEntryAt(0x2E, 0x74);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x6A, text);
     drawSetColorFromRGBA8(0xB9D7D700);
     u32 hours = record->playSeconds / 3600;
     u32 remainder = record->playSeconds % 3600;
-    textFormatBuffer(time, "%02d", remainder % 60);
+    sprintf(time, "%02d", remainder % 60);
     position = asdTMTexTableEntryAt(0x2E, 0x7C);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
-    textFormatBuffer(time, "%c", ':');
+    sprintf(time, "%c", ':');
     position = asdTMTexTableEntryAt(0x2E, 0x79);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
-    textFormatBuffer(time, "%02d", remainder / 60);
+    sprintf(time, "%02d", remainder / 60);
     position = asdTMTexTableEntryAt(0x2E, 0x7E);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
-    textFormatBuffer(time, "%c", ':');
+    sprintf(time, "%c", ':');
     position = asdTMTexTableEntryAt(0x2E, 0x7A);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     for (s32 index = 0, place = 4; place >= 1; ++index, --place) {
@@ -101,7 +101,7 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
         if (digit == 10) {
             time[index] = ' ';
         } else {
-            textFormatBuffer(time + index, "%d", digit);
+            sprintf(time + index, "%d", digit);
         }
     }
     time[4] = '\0';

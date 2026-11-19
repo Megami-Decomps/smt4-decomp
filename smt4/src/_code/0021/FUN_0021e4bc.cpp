@@ -1,5 +1,6 @@
 /* NON_MATCHING: block layout and register allocation differ - retail shares one `return 0` epilogue between the states, finds the free slot inside the entry scan with the slot index in r0, and reuses the g_mapObj pointer loaded for the entry test. */
 #include "common.h"
+#include <stdio.h>
 
 namespace {
 /* A placement entry of the map's object table. */
@@ -63,7 +64,6 @@ extern "C" {
 extern MapObjWork *g_mapObj;
 s32 dataTableGetRecordFortyFive(void);
 MapObjEntry *mapObjGetCombinedEntry(s32 index);
-void textFormatBuffer(char buffer[128], const char *format, s32 kind);
 u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
 s32 modelHasLoadedAttachment(u32 model);
 void lightOwnerRegister(u32 model, s32 flag);
@@ -104,7 +104,7 @@ u32 FUN_0021e4bc(void)
         char path[128];
         slot->kind = entry->kind;
         slot->name[0] = 0;
-        textFormatBuffer(path, "map/obj/obj_%02d.bam", entry->kind);
+        sprintf(path, "map/obj/obj_%02d.bam", entry->kind);
         slot->model = asdMdlManagerCreateSecondList(path, 7);
         g_mapObj->state = 12;
         return 0;

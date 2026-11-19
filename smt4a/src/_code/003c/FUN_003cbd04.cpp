@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cbd04` (_code @ 0x3cbd04, 0x498 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
@@ -29,7 +29,6 @@ typedef struct {
 extern unsigned char LAB_003cc19c; /* 0x3cc19c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
@@ -124,7 +123,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
     }
     param_1 = param_1 + (temp_v1 + param_2) * 2;
     temp_v4 = FUN_0014bd84(*(unsigned short *)(param_1 + 0x8b70));
-    textFormatBuffer(temp_v7,"%s",temp_v4);
+    sprintf((char *)temp_v7,"%s",temp_v4);
     temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x178));
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10) + param_6,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps &formatted (sp+128) in saved sl for the whole loop and spills the inlined reference search's `name` to the stack slot at sp+128 (reused after formatted); ours keeps name in fp and recomputes the address (147 rows against 150). */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include <string.h>
 
 /* One effect slot of the battle effect set (0x8C bytes). */
@@ -31,7 +32,6 @@ s32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *first, const char *second, s32 count);
 void libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 size);
-void textFormatBuffer(char *destination, const char *format, ...);
 u32 keyedRecordRegisterName(u8 *key);
 u32 FUN_003478dc(u32 value, const char *script);
 
@@ -90,7 +90,7 @@ void FUN_004f8790(BtlEffectWork *work)
         }
         sysMemClear(path, 0x80);
         sysMemClear(formatted, 0x80);
-        textFormatBuffer(formatted, DAT_005284c0, name);
+        __2sprintf(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
         if (libc_strlen(path) == 0) {
             continue;

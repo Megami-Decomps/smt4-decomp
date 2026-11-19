@@ -1,9 +1,9 @@
 /* NON_MATCHING: only the initial bit extraction is scheduled before the prologue vpush (retail lsl follows vpush); the pool order now matches. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "code/Code0014.h"
 
 extern "C" {
-void textFormatBuffer(char* output, const char* format, ...);
 u32 FUN_001628c0(const char* name, u32 volume, s32 category, s32 flags, float gain, float pitch);
 extern const char DAT_0052a96c[];
 extern const char DAT_0052a978[];
@@ -18,9 +18,9 @@ u32 FUN_0047f4cc(u32 sound, float volume, float gain, float pitch)
     u32 variant = (sound >> 4) & 0xf;
     char name[16];
     if (group != 0 && index != 0) {
-        textFormatBuffer(name, DAT_0052a96c, index, group);
+        __2sprintf(name, DAT_0052a96c, index, group);
         if (variant != 0) {
-            textFormatBuffer(name, DAT_0052a980, name,
+            __2sprintf(name, DAT_0052a980, name,
                              variant == 1 ? DAT_0052a978 : DAT_0052a97c);
         }
         u32 baseVolume = FUN_0014af98();

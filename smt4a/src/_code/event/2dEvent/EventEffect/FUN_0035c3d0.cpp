@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild; retail zero-fills the work with integer stores (the float fields 0x14..0x20 and 0x2C are written as ints first, then as 0.0f), keeps the slot array base in r9 and tests the slot index against 2 after allocating, which armcc here orders differently. */
+#include <stdio.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -41,7 +42,6 @@ extern EventSlash *DAT_0057f3c8[2];
 extern EventTextureNode DAT_0057f43c[4];
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 bytes, u32 option);
-void textFormatBuffer(char *buffer, const char *format, ...);
 u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
                    AsdProcFunc onEnd, u32 work, void *owner);
 s32 eventColorTransitionUpdate(u32 handle);
@@ -75,11 +75,11 @@ u32 FUN_0035c3d0(u32 kind, u32 side, u32 argument0, u32 argument1)
         effect->argument0 = 0;
         effect->argument1 = 0;
         char name[68];
-        textFormatBuffer(name, "EvtEftSlash Calc%d", slot);
+        sprintf(name, "EvtEftSlash Calc%d", slot);
         effect->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(name), 3, 0, 0, eventColorTransitionUpdate, NULL, (u32)effect);
-        textFormatBuffer(name, "EvtEftSlash DrawUpLeft%d", slot);
+        sprintf(name, "EvtEftSlash DrawUpLeft%d", slot);
         taskCreateDraw(name, 133, 0, 0, FUN_002835f4, NULL, (u32)effect, (void *)effect->process);
-        textFormatBuffer(name, "EvtEftSlash DrawUpRight%d", slot);
+        sprintf(name, "EvtEftSlash DrawUpRight%d", slot);
         taskCreateDraw(name, 225, 0, 0, FUN_002835f4, NULL, (u32)effect, (void *)effect->process);
         effect->unk10 = 0;
         effect->kind = kind;

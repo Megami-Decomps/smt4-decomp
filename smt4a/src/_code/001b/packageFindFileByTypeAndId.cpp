@@ -1,16 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `packageFindFileByTypeAndId` (_code @ 0x1b2bd8, 0xc4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "runtime/Stdio.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(unsigned int, unsigned char *, unsigned int, unsigned int);
 int packageEntryGetDirectory(void);
 int packageEntryGetFileCount(void);
 
 extern unsigned char LAB_001b2c9c; /* 0x1b2c9c */
 
-/* Supplied declaration required: textFormatBuffer. */
 extern int packageEntryIsLoaded(unsigned int);
 /* Supplied declaration required: packageEntryGetDirectory. */
 /* Supplied declaration required: packageEntryGetFileCount. */
@@ -48,7 +47,7 @@ int packageFindFileByTypeAndId(int param_1,int param_2,char *param_3,unsigned in
               pcVar5 = *(char **)(pcVar5 + 0x3c);
             }
             if (temp_v0 == param_2 && pcVar5 == param_3) {
-              textFormatBuffer(param_4,&LAB_001b2c9c,temp_v6 + 0x24,temp_v2 + temp_v4 * 0x40 + 1);
+              __2sprintf((char *)param_4,(const char *)&LAB_001b2c9c,temp_v6 + 0x24,temp_v2 + temp_v4 * 0x40 + 1);
               return *(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10;
             }
             temp_v4 = temp_v4 + 1;

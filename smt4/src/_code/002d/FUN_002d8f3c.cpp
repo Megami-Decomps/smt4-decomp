@@ -1,4 +1,5 @@
 /* NON_MATCHING: save staging buffers occupy opposite stack slots and saved registers differ. */
+#include <stdio.h>
 #include "gamedata/SaveLoadThreadRequest.h"
 #include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
 
@@ -12,7 +13,6 @@ struct SaveWriteWorker {
 };
 extern "C" {
 extern SaveWriteWorker g_saveLoadThread;
-void textFormatBuffer(char *, const char *, ...);
 void FUN_001db90c(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
 s32 FUN_00214950(u32, const char *);
@@ -26,7 +26,7 @@ extern "C" void FUN_002d8f3c(u32 context)
     char filename[128];
     AsdSaveHeader header;
     g_saveLoadThread.busy = 1;
-    textFormatBuffer(filename, "sdds4game%d.sav", g_saveLoadThread.request->slot);
+    sprintf(filename, "sdds4game%d.sav", g_saveLoadThread.request->slot);
     FUN_001db90c(&header, 0x34534444, 0x454D4147, 0,
                  g_saveLoadThread.request->payloadSize, 0, 0);
     if (asdSaveWriteBlock(file, filename, &header, g_saveLoadThread.request->payload,

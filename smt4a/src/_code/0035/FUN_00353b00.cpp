@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation of the flag mask/index in the loop (retail: index r5, mask r6) and the popup stores (retail uses post-increment `str r2,[r0],#4; str r1,[r0],#16`, the build emits stm and an offset store). */
+#include <stdio.h>
 #include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 #include "code/Code0015.h"
@@ -10,7 +11,6 @@ extern "C" {
 extern u8 DAT_00531ac8; /* 0x531ac8 */
 extern char DAT_0060a198[]; /* 0x60a198 */
 
-extern int textFormatBuffer(char *dst, u8 *src);
 extern int gameFlagIsSet(u32 flag);
 extern int shopGetEntryAvailability(u32 id);
 
@@ -36,7 +36,7 @@ void FUN_00353b00(int popupOpen)
         }
     }
     if (popupOpen == 0 && marked && g_gameState.mapId != 0x24 && gameFlagIsSet(0x408) != 0) {
-        textFormatBuffer(DAT_0060a198, &DAT_00531ac8);
+        sprintf(DAT_0060a198, (const char *)&DAT_00531ac8);
         g_popupState->state = 0x18;
         g_popupState->timer = 0;
         g_popupState->message = DAT_0060a198;

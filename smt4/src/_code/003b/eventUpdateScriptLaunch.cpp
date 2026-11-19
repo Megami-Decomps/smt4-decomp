@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "util/MemoryHelpers_VariantB.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
@@ -21,9 +22,9 @@ void eventUpdateScriptLaunch(EventScriptScene *scene)
     if (scene->substate == 0) {
         g_gameState.event.eventState = 0;
         messageSetConfirmDisplayMode();
-        textFormatBuffer(path, "event/e%03d/e%03d.bf", g_gameState.event.eventId, g_gameState.event.eventId);
+        sprintf(path, "event/e%03d/e%03d.bf", g_gameState.event.eventId, g_gameState.event.eventId);
         scene->scriptData = asdLoadFileSyncDefault(path);
-        textFormatBuffer(path, "event/e%03d/e%03d.mbm", g_gameState.event.eventId, g_gameState.event.eventId);
+        sprintf(path, "event/e%03d/e%03d.mbm", g_gameState.event.eventId, g_gameState.event.eventId);
         scene->messageData = asdLoadFileSyncDefault(path);
         scene->process = scrScriptProcessCreate(scene->scriptData, scene->messageData);
         scriptProcessSetMode(scene->process, 2);

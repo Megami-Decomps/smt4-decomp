@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the order of `mov r1, #47` against `mov r0, r5` before the libc_strrchr call differs (retail sets the path pointer first). */
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -29,7 +30,6 @@ extern const EffectStrings DAT_00528400;
 
 void sysMemClear(void *dest, u32 size);
 void asdMemFree(void *block);
-s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 char *libc_strrchr(const char *string, s32 c);
 
@@ -50,7 +50,7 @@ u32 FUN_004f84ec(EffectOwner *owner)
     sysMemClear(path, sizeof(path));
     const EffectStrings *strings = &DAT_00528400;
     sysMemClear(formatted, sizeof(formatted));
-    textFormatBuffer(formatted, strings->pathFormat, strings->niyariName);
+    sprintf(formatted, strings->pathFormat, strings->niyariName);
     libc_strcpy(path, formatted);
     char *fullPath = path;
     libc_strcpy(slot->name, libc_strrchr(fullPath, '/') + 1);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b3388` (_code @ 0x3b3388, 0x1614 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/Unite/UniteWork.h"
@@ -22,7 +23,6 @@ int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
 int FUN_0031eba0(...);
@@ -81,7 +81,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -342,11 +341,11 @@ LAB_003b35ac:
       if (temp_v21 != 0) {
         temp_v5 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v21 + 0x9107));
         temp_v15 = FUN_002bd068(*(unsigned short *)(temp_v5 + 0x46));
-        textFormatBuffer(temp_v23,&LAB_003b3c9c,temp_v15);
+        sprintf((char *)temp_v23,(const char *)&LAB_003b3c9c,temp_v15);
       }
       else {
         temp_v15 = gameGetPlayerName();
-        textFormatBuffer(temp_v23,&LAB_003b3c9c,temp_v15);
+        sprintf((char *)temp_v23,(const char *)&LAB_003b3c9c,temp_v15);
       }
       temp_v5 = aiStack_e0[temp_v21];
       param_3 = aiStack_d0[temp_v21];
@@ -621,7 +620,7 @@ LAB_003b4444:
                      0x6a);
         temp_v6 = *piVar13;
         dataFindKindRecordWithAocOverrides(temp_v6,0);
-        textFormatBuffer(temp_v23,&LAB_003b4818,temp_v6);
+        sprintf((char *)temp_v23,(const char *)&LAB_003b4818,temp_v6);
         temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0x43));
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,
                             (unsigned char)(in_fpscr >> 0x16) & 3);

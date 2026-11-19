@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003150f4` (_code @ 0x3150f4, 0xbe4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ extern "C" {
 int nkmEnemyFindById(void);
 int bustupViewerResetState(void);
 
-int textFormatBuffer(...);
 int jobStop(unsigned int, int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
@@ -34,7 +34,6 @@ extern unsigned char LAB_003157a4; /* 0x3157a4 */
 extern unsigned int *g_bustupViewer; /* 0x588ff0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: jobStop. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -558,22 +557,22 @@ LAB_003153fc:
                     if (temp_v1 != 1) {
                       if (temp_v1 != 2) {
                         if (temp_v1 != 3) {
-                          textFormatBuffer(temp_v11,&LAB_00315760);
+                          sprintf((char *)temp_v11,(const char *)&LAB_00315760);
                         }
                         else {
-                          textFormatBuffer(temp_v11,&LAB_003157a4);
+                          sprintf((char *)temp_v11,(const char *)&LAB_003157a4);
                         }
                       }
                       else {
-                        textFormatBuffer(temp_v11,&LAB_00315794);
+                        sprintf((char *)temp_v11,(const char *)&LAB_00315794);
                       }
                     }
                     else {
-                      textFormatBuffer(temp_v11,&LAB_00315784);
+                      sprintf((char *)temp_v11,(const char *)&LAB_00315784);
                     }
                   }
                   else {
-                    textFormatBuffer(temp_v11,&LAB_00315774);
+                    sprintf((char *)temp_v11,(const char *)&LAB_00315774);
                   }
                   temp_v1 = puVar3[0x27];
                   if (temp_v1 == 0) {

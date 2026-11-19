@@ -1,5 +1,6 @@
 /* NON_MATCHING: pointer locals (formatted source, full path) now reproduce retail's fp/260-byte frame; remaining: owner/temporary register numbering (r6/r7), the hoisting order of the table base and &formatted, and `mov r1,#47` scheduled before `mov r0,r6`. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
@@ -23,7 +24,6 @@ extern const char DAT_00400804[5][0x20];
 extern const char DAT_004008c4[];
 void memClear(void *dest, u32 size);
 void asdMemFree(void *ptr);
-s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 char *libc_strrchr(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
@@ -47,7 +47,7 @@ u32 FUN_003dadd8(BattleEffectOwner *owner)
         memClear(path, 128);
         const char *effectName = DAT_00400804[i];
         memClear(formatted, 128);
-        textFormatBuffer(formatted, DAT_004008c4, effectName);
+        __2sprintf(formatted, DAT_004008c4, effectName);
         libc_strcpy(path, formattedPath);
         char *fullPath = path;
         libc_strcpy(slot->name, libc_strrchr(fullPath, '/') + 1);

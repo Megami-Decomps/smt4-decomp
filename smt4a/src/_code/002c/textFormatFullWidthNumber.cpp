@@ -1,9 +1,8 @@
-/* NON_MATCHING: the offset's zero is set before the value test and the two pool loads (place start, /10 multiplier) after it; retail sets the zero last. */
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
 s32 libc_sprintf(char* destination, const char* format, ...);
-s32 textFormatBuffer(char* destination, const char* format, ...);
 
 void textFormatFullWidthNumber(char* output, s32 value)
 {
@@ -17,25 +16,25 @@ void textFormatFullWidthNumber(char* output, s32 value)
         if (place <= value) {
             s32 digit = remaining / place;
             if (digit == 0) {
-                offset += textFormatBuffer(output + offset, "\x82\x4F");
+                offset += sprintf(output + offset, "\x82\x4F");
             } else if (digit == 1) {
-                offset += textFormatBuffer(output + offset, "\x82\x50");
+                offset += sprintf(output + offset, "\x82\x50");
             } else if (digit == 2) {
-                offset += textFormatBuffer(output + offset, "\x82\x51");
+                offset += sprintf(output + offset, "\x82\x51");
             } else if (digit == 3) {
-                offset += textFormatBuffer(output + offset, "\x82\x52");
+                offset += sprintf(output + offset, "\x82\x52");
             } else if (digit == 4) {
-                offset += textFormatBuffer(output + offset, "\x82\x53");
+                offset += sprintf(output + offset, "\x82\x53");
             } else if (digit == 5) {
-                offset += textFormatBuffer(output + offset, "\x82\x54");
+                offset += sprintf(output + offset, "\x82\x54");
             } else if (digit == 6) {
-                offset += textFormatBuffer(output + offset, "\x82\x55");
+                offset += sprintf(output + offset, "\x82\x55");
             } else if (digit == 7) {
-                offset += textFormatBuffer(output + offset, "\x82\x56");
+                offset += sprintf(output + offset, "\x82\x56");
             } else if (digit == 8) {
-                offset += textFormatBuffer(output + offset, "\x82\x57");
+                offset += sprintf(output + offset, "\x82\x57");
             } else if (digit == 9) {
-                offset += textFormatBuffer(output + offset, "\x82\x58");
+                offset += sprintf(output + offset, "\x82\x58");
             }
             remaining -= place * digit;
         }

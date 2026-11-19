@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f1558` (_code @ 0x2f1558, 0x1068 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -20,7 +21,6 @@ int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int texDrawCompositeSprite(...);
 int asdTMTexTableEntryAt(...);
@@ -76,7 +76,6 @@ extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
@@ -301,7 +300,7 @@ void FUN_002f1558(int param_1)
         temp_v1 = FUN_0028d24c();
       }
       temp_v10 = aocIndexValueOrDefault((int)temp_v1);
-      textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v10);
+      sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,temp_v10);
       temp_v3 = asdTMTexTableEntryAt(0x15,0x12e);
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -320,7 +319,7 @@ void FUN_002f1558(int param_1)
       temp_v13 = (int)*(short *)(param_1 + temp_v5 * 2 + 0x3480);
       temp_v3 = temp_v13;
       dataFindKindRecordWithAocOverrides(temp_v13,0);
-      textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v3);
+      sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,temp_v3);
       temp_v10 = flagValueRead(temp_v13);
       temp_v3 = asdTMTexTableEntryAt(0x15,0x12e);
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -340,7 +339,7 @@ void FUN_002f1558(int param_1)
     if (temp_v3 != 3) {
       temp_v3 = FUN_00297ca4(param_1,1);
       if (temp_v3 == 0xb) {
-        textFormatBuffer(temp_v18,&LAB_002f1fe8);
+        sprintf((char *)temp_v18,(const char *)&LAB_002f1fe8);
         temp_v3 = asdTMTexTableEntryAt(0x15,0x11c);
         puVar11 = temp_v18;
         fontMeasureLineAdvance(puVar11,3);
@@ -364,7 +363,7 @@ void FUN_002f1558(int param_1)
         if (temp_v3 != 0) {
           if (temp_v15 == temp_v5) {
             temp_v10 = dataTable16Sub2GetRecordS64(temp_v14 & 0xff);
-            textFormatBuffer(temp_v18,&LAB_002f25c0,temp_v10);
+            sprintf((char *)temp_v18,(const char *)&LAB_002f25c0,temp_v10);
             break;
           }
           temp_v15 = temp_v15 + 1;
@@ -374,7 +373,7 @@ void FUN_002f1558(int param_1)
     }
     else {
       temp_v10 = dataTable16Sub2GetRecordS64(temp_v5 & 0xff);
-      textFormatBuffer(temp_v18,&LAB_002f25c0,temp_v10);
+      sprintf((char *)temp_v18,(const char *)&LAB_002f25c0,temp_v10);
     }
     temp_v3 = asdTMTexTableEntryAt(0x15,0x12e);
     VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -396,13 +395,13 @@ void FUN_002f1558(int param_1)
       if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x40) != 0) {
         temp_v6 = (int)(short)temp_v5;
         temp_v9 = aocIndexValueOrDefault(temp_v6);
-        textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
+        sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,temp_v9);
         temp_v9 = appGetRemainingCapacity(temp_v6);
       }
       else {
         temp_v6 = (int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v5 * 2 + 0x341a);
         temp_v9 = aocIndexValueOrDefault(temp_v6);
-        textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
+        sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,temp_v9);
         temp_v9 = appGetRemainingCapacity(temp_v6);
       }
       temp_v16 = 1;
@@ -411,10 +410,10 @@ void FUN_002f1558(int param_1)
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
       nkmBaseGetRecord();
       if (*(char *)(temp_v5 + 10) != '\x01') {
-        textFormatBuffer(temp_v18,&LAB_002f1ff4,&LAB_002f1ff8);
+        sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,&LAB_002f1ff8);
       }
       else {
-        textFormatBuffer(temp_v18,&LAB_002f1ff4,&LAB_002f2000);
+        sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,&LAB_002f2000);
       }
       temp_v9 = 0;
       if (temp_v3 != 0) {
@@ -430,7 +429,7 @@ void FUN_002f1558(int param_1)
     if (temp_v5 != 0) {
       if ((temp_v5 == 1) && (temp_v3 = FUN_0025cc54(), temp_v3 != 0)) {
         puVar11 = temp_v18;
-        textFormatBuffer(puVar11,&LAB_002f1ff4,&LAB_002f2000);
+        sprintf((char *)puVar11,(const char *)&LAB_002f1ff4,&LAB_002f2000);
         temp_v1 = (short)(int)puVar11;
         temp_v9 = 0;
         mapGetSelectedRecordCategoryTable();
@@ -447,14 +446,14 @@ void FUN_002f1558(int param_1)
         if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x40) != 0) {
           temp_v6 = (int)(short)(((short)temp_v5 - (short)temp_v13) + 1);
           temp_v9 = aocIndexValueOrDefault(temp_v6);
-          textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
+          sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,temp_v9);
           temp_v9 = FUN_0029a9d4(temp_v6,1);
         }
         else {
           temp_v6 = (int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 0x10 + (temp_v5 - temp_v13) * 2
                                  + 0x341c);
           temp_v9 = aocIndexValueOrDefault(temp_v6);
-          textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
+          sprintf((char *)temp_v18,(const char *)&LAB_002f1ff4,temp_v9);
           temp_v9 = FUN_0029a9d4(temp_v6,1);
         }
         temp_v16 = 1;
@@ -462,7 +461,7 @@ void FUN_002f1558(int param_1)
     }
     else {
       puVar11 = temp_v18;
-      textFormatBuffer(puVar11,&LAB_002f1ff4,&LAB_002f1ff8);
+      sprintf((char *)puVar11,(const char *)&LAB_002f1ff4,&LAB_002f1ff8);
       temp_v1 = (short)(int)puVar11;
       temp_v9 = 0;
       playerGetMappedCategory();

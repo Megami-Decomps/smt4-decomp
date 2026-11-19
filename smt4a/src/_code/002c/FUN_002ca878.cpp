@@ -1,5 +1,6 @@
 /* NON_MATCHING: counter badge draw; call sequence follows retail, float/int scheduling and the saved-register set are not compared */
 #include "common.h"
+#include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -12,7 +13,6 @@ f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 scale);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 u32 FUN_00180114(u32 id);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void uiDrawItemOrStatusIcon(u32 id, s32 x, s32 y, u32 flags, u32 arg);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
@@ -36,7 +36,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
     for (s32 i = 0; i < 4; i++)
         texDrawTableEntryAtStoredOrigin(2, BADGE_BANK, 0xC18 + i, baseX, y, BADGE_FLAGS);
 
-    textFormatBuffer(label, "%s", FUN_00180114(0x31F));
+    sprintf(label, "%s", FUN_00180114(0x31F));
     stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, BADGE_STEREO_SCALE);
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1C);
     s32 frameX = frame->x + x + stereo;
@@ -51,7 +51,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1D);
     texDrawTableEntryAtStoredOrigin(2, BADGE_BANK, 0xBC2, frame->x + iconX, frame->y + y, BADGE_FLAGS);
 
-    textFormatBuffer(digits, "%d", 99);
+    sprintf(digits, "%d", 99);
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC22);
     drawSetColorFromRGBA8(0xFFFFFFFF);
     FUN_00180310(0, iconX + frame->x, frame->y + y, 1, 2, 0xCE, digits);

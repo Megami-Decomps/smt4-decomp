@@ -1,6 +1,7 @@
 /* NON_MATCHING: allocation only (13 rows). Retail copies x and y to r7/r6 after reserving the frame, converts the
  * first name's coordinates in s1/s0 (built: through s0/s2, as both do for the cursor row's name), loads the row
  * mark's y offsets into r2/r1 and loads the cursor name's depth after the layer. */
+#include <stdio.h>
 #include "camp/Unite/UniteWork.h"
 #include "camp/CampStateQueries.h"
 #include "camp/RenderCtx.h"
@@ -56,7 +57,7 @@ void uniteOptionListDraw(s32 x, s32 y)
             continue;
         }
         texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x1d3, slot->x + x, slot->y + y, 0x6a);
-        textFormatBuffer(name, "%s", record->name);
+        sprintf(name, "%s", record->name);
         TextureTableEntryIV *label = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d5);
         textDrawString(2, 0xff, name, slot->x + label->x + x, slot->y + label->y + y, 0.5859375f, 0.0f, 1.0f);
         if (FUN_00200574(work->optionListIV.ids[top + row]) != 0) {
@@ -95,7 +96,7 @@ void uniteOptionListDraw(s32 x, s32 y)
         renderStackSet(&g_titleScene->scissor, 0);
 
         texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x1d6, slot->x + x, slot->y + y, 0x83);
-        textFormatBuffer(name, "%s", record->name);
+        sprintf(name, "%s", record->name);
         TextureTableEntryIV *label = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d8);
         textDrawString(3, 0xffffffff, name, slot->x + label->x + x, slot->y + label->y + y, 0.48828125f, 0.0f, 1.0f);
         if (FUN_00200574(work->optionListIV.ids[selected]) != 0) {

@@ -1,4 +1,5 @@
 /* NON_MATCHING: native constructs a polymorphic stream through a VTT; its virtual-base hierarchy is not recovered by this scoped handle model. */
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/asdFileHashPackIsOpen.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
@@ -9,7 +10,6 @@ struct FileProbeHandle;
 extern "C" {
 extern u8 g_asdLoadFileUseRawPaths;
 void rt_aeabi_memclr(void *, u32);
-s32 textFormatBuffer(char *, const char *, ...);
 u32 FUN_001860e4(const char *);
 s32 refIsNullOrZero(FileProbeConversionState *);
 u32 FUN_00100836(const char *, u32, FileProbeConversionState *);
@@ -51,9 +51,9 @@ extern "C" u32 asdLoadFileExists(const char *path)
     char fullPath[ASD_FILE_PATH_LEN];
     rt_aeabi_memclr(fullPath, sizeof(fullPath));
     if (g_asdLoadFileUseRawPaths || asdLoadFileHasDevice(path)) {
-        textFormatBuffer(fullPath, path);
+        sprintf(fullPath, path);
     } else {
-        textFormatBuffer(fullPath, "rom:/%s", path);
+        sprintf(fullPath, "rom:/%s", path);
     }
     bool inHashPack = false;
     if (asdFileHashPackIsOpen() && FUN_001860e4(fullPath)) {

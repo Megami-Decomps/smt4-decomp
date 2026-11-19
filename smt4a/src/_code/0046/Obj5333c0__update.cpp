@@ -1,9 +1,9 @@
+#include <stdio.h>
 #include "classes/Obj5333c0.h"
 #include <stddef.h>
 #include "gfx/NamedEffectAttachment.h"
 
 extern "C" {
-s32 textFormatBuffer(char *output, const char *format, ...);
 u8 lookupNameEntry(AsdMdlNode *node, const char *name, EffectAttachmentPosition *position);
 void controllerSetDestination(void *model, EffectAttachmentPosition *position);
 void FUN_00407eb0(SceneTransform *transform, u32 wanted, u32 flags);
@@ -32,11 +32,11 @@ void Obj5333c0::update()
         for (s32 i = 0; i < npcCount; ++i) {
             char name[32];
             EffectAttachmentPosition position;
-            textFormatBuffer(name, "dummy_npc%d", i + 1);
+            sprintf(name, "dummy_npc%d", i + 1);
             if (i == 7) {
-                textFormatBuffer(name, "dummy_npc5");
+                sprintf(name, "dummy_npc5");
             } else if (i == 8) {
-                textFormatBuffer(name, "dummy_npc4");
+                sprintf(name, "dummy_npc4");
             }
             lookupNameEntry(transform->model->node, name, &position);
             controllerSetDestination(npcControllersA[i]->model, &position);

@@ -7,6 +7,7 @@
  * `static`) the count and the address order match and 22 lines remain, the prologue's first adds and the
  * marker-hiding temporary. That helper would have one call site and no other evidence, so the loop
  * stays in place. */
+#include <stdio.h>
 #include "ui/DummyAttachmentWork.h"
 #include "script/scrScriptProcess.h"
 #include "sys/FlagWord.h"
@@ -162,8 +163,8 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
         char messagePath[64];
         char path[64];
         u16 id = dataTable27Sub0GetRecord(&work->npcTable, 0)[work->selected->record].resourceId;
-        textFormatBuffer(path, "quest_center/npc/n%03d/n%03d.bf", id, id);
-        textFormatBuffer(messagePath, "quest_center/npc/n%03d/n%03d.mbm", id, id);
+        sprintf(path, "quest_center/npc/n%03d/n%03d.bf", id, id);
+        sprintf(messagePath, "quest_center/npc/n%03d/n%03d.mbm", id, id);
         asdLoadFileAsyncSimple(path, &work->npcScriptFile, 0);
         asdLoadFileAsyncSimple(messagePath, &work->npcMessageFile, 0);
         work->step++;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b49a0` (_code @ 0x3b49a0, 0x1580 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029_VariantB.h"
@@ -13,7 +14,6 @@ int arrayContainsU16(...);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
 int VectorSignedToFloat(...);
@@ -64,7 +64,6 @@ extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -141,7 +140,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   texDrawTableEntryAtStoredOrigin(2,0x28,0xd2,param_2,param_3,0x6a);
   temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0xd3));
   temp_v2 = gameGetPlayerName();
-  textFormatBuffer(temp_v10,"%s",temp_v2);
+  sprintf((char *)temp_v10,"%s",temp_v2);
   VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(3,0xff,temp_v10);
@@ -149,7 +148,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   texDrawTableEntryAtStoredOrigin(2,0x28,0xd5,param_2,param_3,0x6a);
   temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x28,0xd6));
   temp_v2 = FUN_002bd068(*(unsigned short *)(temp_v14 + 0x46));
-  textFormatBuffer(temp_v10,"%s",temp_v2);
+  sprintf((char *)temp_v10,"%s",temp_v2);
   VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(3,0xff,temp_v10);
@@ -218,7 +217,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
                        1,temp_v17);
           temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xdf));
           temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v27 + 0x14));
-          textFormatBuffer(temp_v10,"%s",temp_v4);
+          sprintf((char *)temp_v10,"%s",temp_v4);
           VectorSignedToFloat((int)*(short *)((int)piVar5 + 10) + (int)*(short *)(temp_v12 + 10) +
                               temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)(short)piVar5[2] + temp_v1,
@@ -233,7 +232,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
         }
         else {
           temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xdf));
-          textFormatBuffer(temp_v10,"\x81| \x81| \x81|");
+          sprintf((char *)temp_v10,"\x81| \x81| \x81|");
           VectorSignedToFloat((int)*(short *)((int)piVar5 + 10) + (int)*(short *)(temp_v12 + 10) +
                               temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)(short)piVar5[2] + temp_v1,
@@ -329,7 +328,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       }
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xfe));
       temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v3 + 0xd114));
-      textFormatBuffer(temp_v10,"%s",temp_v4);
+      sprintf((char *)temp_v10,"%s",temp_v4);
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
@@ -349,7 +348,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     }
     else {
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xfe));
-      textFormatBuffer(temp_v10,"\x81| \x81| \x81|");
+      sprintf((char *)temp_v10,"\x81| \x81| \x81|");
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
@@ -404,7 +403,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           }
           temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xdf));
           temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v22 + 0x34));
-          textFormatBuffer(temp_v10,"%s",temp_v4);
+          sprintf((char *)temp_v10,"%s",temp_v4);
           VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v12 + 10) + param_3
                               ,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
@@ -418,7 +417,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
         }
         else {
           temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xdf));
-          textFormatBuffer(temp_v10,&LAB_003b5f24);
+          sprintf((char *)temp_v10,(const char *)&LAB_003b5f24);
           VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v12 + 10) + param_3
                               ,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
@@ -516,7 +515,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     }
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(temp_v11,0xfe));
     temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v1 + 0x34));
-    textFormatBuffer(temp_v10,&LAB_003b5f20,temp_v4);
+    sprintf((char *)temp_v10,(const char *)&LAB_003b5f20,temp_v4);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,

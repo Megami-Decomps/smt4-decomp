@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fdd1c` (_code @ 0x3fdd1c, 0x55c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "util/MemoryHelpers_Smt4a.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int asdMemoryAlloc(...);
 int FUN_0018eb44(void);
 int FUN_001c3bb8(...);
@@ -62,7 +62,6 @@ extern unsigned char LAB_003fe280; /* 0x3fe280 */
 extern unsigned char LAB_003fe288; /* 0x3fe288 */
 extern unsigned char LAB_003fe290; /* 0x3fe290 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0018eb44. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
@@ -283,7 +282,7 @@ void FUN_003fdd1c(int param_1,unsigned int param_2)
     FUN_001c3bb8(temp_v0,temp_v2 + 0x48,&LAB_003fe288);
     FUN_001c3bb8(temp_v0,temp_v2 + 0x50,&LAB_003fe290);
   }
-  textFormatBuffer(param_1 + 0x214,*(unsigned int *)(*(int *)(param_1 + 0x210) + 0x84));
+  sprintf((char *)(param_1 + 0x214),(const char *)(*(unsigned int *)(*(int *)(param_1 + 0x210) + 0x84)));
   return;
 }
 

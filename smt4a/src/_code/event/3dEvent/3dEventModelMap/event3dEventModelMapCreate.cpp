@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
@@ -28,7 +29,6 @@ void sysMemClear(void *block, u32 size);
 void asdCameraInitializeDefaults(void *object, s32 mode);
 void FUN_001ffba8(Event3dModelMap *map);
 s32 FUN_00162ea4(void);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void asdEnvResetModelBank(char *path, s32 mode);
 u32 asdMdlManagerCreateSecondList(char *path, u32 count);
 s32 FUN_0031bd24(u32 handle);
@@ -48,10 +48,10 @@ void event3dEventModelMapCreate(u32 mapId, u32 variant)
         map->loaded = 0;
     } else {
         char path[64];
-        textFormatBuffer(path, DAT_0052f5bc, map->mapId, map->variant);
+        __2sprintf(path, DAT_0052f5bc, map->mapId, map->variant);
         asdEnvResetModelBank(path, 0);
         map->environmentRequested = 1;
-        textFormatBuffer(path, DAT_0052f598, map->mapId, map->variant);
+        __2sprintf(path, DAT_0052f598, map->mapId, map->variant);
         map->modelList = asdMdlManagerCreateSecondList(path, 0x38);
         map->unk00C = 0;
         map->loaded = 1;

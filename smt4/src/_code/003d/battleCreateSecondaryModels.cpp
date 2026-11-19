@@ -1,6 +1,7 @@
 /* NON_MATCHING: duplicate lookup uses r2 instead of r1 for the slot-stride intermediate. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct BattleAttachmentValues { u32 first, second, third; };
@@ -34,7 +35,6 @@ struct BattleAttachmentMainState {
 
 extern "C" const char DAT_004008dc[];
 extern "C" void memClear(void *destination, u32 size);
-extern "C" void textFormatBuffer(char *destination, const char *format, ...);
 
 
 static inline bool battleHasSecondaryAttachment(const BattleAttachmentOwner *owner,
@@ -65,7 +65,7 @@ extern "C" void battleCreateSecondaryModels(BattleAttachmentOwner *owner, s32 ki
     owner->kind = kind;
     char name[128];
     memClear(name, sizeof(name));
-    textFormatBuffer(name, DAT_004008dc, kind);
+    __2sprintf(name, DAT_004008dc, kind);
     BattleAttachmentMainState *main = reinterpret_cast<BattleAttachmentMainState *>(btlGetMainState());
     for (s32 sourceIndex = 0; sourceIndex < 109; ++sourceIndex) {
         BattleAttachmentSource *source = &main->sources[sourceIndex];

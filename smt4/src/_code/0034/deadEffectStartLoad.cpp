@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct DeadEffect {
 
 void LAB_0034d4f8(void);
 
-s32 textFormatBuffer(char *buffer, const char *path);
 s32 asdLoadFileAsyncDefault(char *path, s32 arg1, s32 arg2, void (*callback)(void), DeadEffect *effect);
 
 /* Starts loading the dead effect model for `effectId`. */
@@ -23,7 +23,7 @@ void deadEffectStartLoad(DeadEffect *effect, u16 effectId)
 
     effect->effectId = effectId;
     effect->loadState = 1;
-    textFormatBuffer(path, "battle/dead_effect/dead_effect%d.bcmdl");
+    sprintf(path, "battle/dead_effect/dead_effect%d.bcmdl");
     effect->unk24 = 0;
     asdLoadFileAsyncDefault(path, 0, 1, LAB_0034d4f8, effect);
 }

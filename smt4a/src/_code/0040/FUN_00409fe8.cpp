@@ -1,4 +1,5 @@
 /* NON_MATCHING: allocation + inline constructor now one conditional initialiser, the negated NPC index is computed once and the cache slot address is shared (151 vs 150 rows); remaining differences are callee-saved numbering (retail: cache r4, id r5, load sl, synchronous r8, index r7, zero r9) and the cache base literal being loaded before the argument moves. */
+#include "runtime/Stdio.h"
 #include "classes/Obj557b08.h"
 #include <new>
 #include "quest_center/qcCtrl.h"
@@ -12,7 +13,6 @@ extern const char DAT_00527250[];
 extern const char DAT_0052726c[];
 
 void *asdOperatorNew(u32 size, u32 option);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 void FUN_003fc1b0(Obj557b08 *model, s32 id);
 void FUN_003fcd20(Obj557b08 *model);
@@ -56,7 +56,7 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
     if (load != 0) {
         if (id < 0) {
             model->id = -npc;
-            textFormatBuffer(path, DAT_00527250, npc);
+            __2sprintf(path, DAT_00527250, npc);
             model->kind = 2;
             model->handle = NULL;
             model->index = npc;
@@ -66,7 +66,7 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
             }
         } else {
             model->id = id;
-            textFormatBuffer(path, DAT_0052726c, id);
+            __2sprintf(path, DAT_0052726c, id);
             model->handle = NULL;
             model->kind = 6;
             model->index = id - 1;

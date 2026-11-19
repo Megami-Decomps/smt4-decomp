@@ -3,6 +3,7 @@
  * sums and of the two centred race labels in the other order, and reads the selected pair's two words with
  * separate `ldr`s where this build uses `ldrd`/`ldm` (and the reverse). */
 #include "common.h"
+#include <stdio.h>
 #include "camp/CampStateQueries.h"
 #include "camp/RenderCtxTitle.h"
 #include "camp/Unite/UniteWork.h"
@@ -59,7 +60,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
     texDrawTableEntryAtStoredOrigin(2, UNITE_TEXTURES, 74, x, y, 201);
 
     TextureTableEntryIV *part = asdTMTexTableEntryAt(UNITE_TEXTURES, 73);
-    textFormatBuffer(text, "\202\145\202\225\202\223\202\211\202\217\202\216\201\100\202\157\202\217\202\223\202\223\202\211\202\202\202\214\202\205\201\106");
+    sprintf(text, "\202\145\202\225\202\223\202\211\202\217\202\216\201\100\202\157\202\217\202\223\202\223\202\211\202\202\202\214\202\205\201\106");
     textDrawString(2, TEXT_WHITE, text, part->x + x, part->y + y, 0.0f, 0.0f, 1.0f);
     part = asdTMTexTableEntryAt(UNITE_TEXTURES, 76);
     FUN_002bdf94(0, part->x + x, part->y + y, 1, 2, 201, "%d", FUN_0029dde0());
@@ -92,10 +93,10 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
             texDrawTableEntryAtStoredOrigin(2, UNITE_TEXTURES, 104, row->x + x, row->y + y, 201);
             texDrawTableEntryAtStoredOrigin(2, UNITE_TEXTURES, 105, row->x + x, row->y + y, 201);
             TextureTableEntryIV *label = asdTMTexTableEntryAt(UNITE_TEXTURES, 110);
-            textFormatBuffer(text, "%s", FUN_002bd068(demon->id));
+            sprintf(text, "%s", FUN_002bd068(demon->id));
             textDrawString(2, TEXT_BLACK, text, row->x + label->x + x, row->y + label->y + y, 0.2f, 0.0f, 1.0f);
             label = asdTMTexTableEntryAt(UNITE_TEXTURES, 111);
-            textFormatBuffer(text, "%s", demonGetRaceLabel(demon->id, 0));
+            sprintf(text, "%s", demonGetRaceLabel(demon->id, 0));
             s32 width = fontMeasureLineAdvance(text, 2);
             textDrawString(2, TEXT_BROWN, text, x + (label->placement->width - width) / 2 + (row->x + label->x),
                            label->y + row->y + y, 0.2f, 0.0f, 1.0f);
@@ -108,7 +109,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
                 texDrawCompositeSprite(2, UNITE_TEXTURES, 8, row->x + label->x + x, label->y + row->y + y, 211);
             }
         } else {
-            textFormatBuffer(text, "\202\163\202\210\202\205\202\222\202\205\201\100\202\201\202\222\202\205\201\100\202\216\202\217\201\100\202\203\202\201\202\216\202\204\202\211\202\204\202\201\202\224\202\205\202\223\201\104");
+            sprintf(text, "\202\163\202\210\202\205\202\222\202\205\201\100\202\201\202\222\202\205\201\100\202\216\202\217\201\100\202\203\202\201\202\216\202\204\202\211\202\204\202\201\202\224\202\205\202\223\201\104");
             TextureTableEntryIV *label = asdTMTexTableEntryAt(UNITE_TEXTURES, 114);
             s32 width = fontMeasureLineAdvance(text, 2);
             s32 centre = (label->placement->width - width) / 2;
@@ -158,10 +159,10 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
         FUN_002580d4(pair->resultId, panel->x + slot->x + x, panel->y + slot->y + y, 226);
 
         part = asdTMTexTableEntryAt(UNITE_TEXTURES, 131);
-        textFormatBuffer(text, "%s", FUN_002bd068(demon->id));
+        sprintf(text, "%s", FUN_002bd068(demon->id));
         textDrawString(3, TEXT_WHITE, text, panel->x + part->x + x, panel->y + part->y + y, 0.2f, 0.0f, 1.0f);
         part = asdTMTexTableEntryAt(UNITE_TEXTURES, 132);
-        textFormatBuffer(text, "%s", demonGetRaceLabel(demon->id, 0));
+        sprintf(text, "%s", demonGetRaceLabel(demon->id, 0));
         s32 width = fontMeasureLineAdvance(text, 3);
         s32 centre = (part->placement->width - width) / 2;
         textDrawString(3, TEXT_WHITE, text, part->x + panel->x + (centre + x),

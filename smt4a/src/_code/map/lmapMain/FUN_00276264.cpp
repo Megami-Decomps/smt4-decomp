@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276264` (_code @ 0x276264, 0x6f00 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "runtime/Stdio.h"
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
@@ -202,7 +203,6 @@ int mapGimicInitializeProcessing(...);
 int FUN_00314b7c(...);
 int lmapRebuildModelContent(void);
 
-int textFormatBuffer(...);
 int gameDataTableGetFlag(void);
 int FUN_002019dc(unsigned int, int);
 int FUN_00215978(...);
@@ -386,7 +386,6 @@ extern unsigned int DAT_005f1cb0; /* 0x5f1cb0 */
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
 /* Supplied declaration required: __ARM_common_memcpy4_9. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: FUN_0013cab8. */
@@ -925,7 +924,7 @@ unsigned int FUN_00276264(void)
     fieldSceneResetEntryState();
     FUN_004bc95c(puVar2[0x10],puVar2[0x12]);
     FUN_0037723c(0);
-    textFormatBuffer(temp_v27,0x276d48,puVar2[0x10] - 100,puVar2[0x10] - 100);
+    __2sprintf((char *)temp_v27,(const char *)(0x276d48),puVar2[0x10] - 100,puVar2[0x10] - 100);
     resourceOwnerLoadNamed(puVar2[0x24db],temp_v27);
     temp_v8 = FUN_0040af60(puVar2[0x24db]);
     if (temp_v8 != 0) {
@@ -949,9 +948,9 @@ unsigned int FUN_00276264(void)
     if (g_lmapMainState[0x10] == 100) {
       return 0;
     }
-    textFormatBuffer(temp_v27,0x276d5c,puVar2[0x10] - 100);
+    __2sprintf((char *)temp_v27,(const char *)(0x276d5c),puVar2[0x10] - 100);
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x2b7,1,0x80);
-    textFormatBuffer(temp_v27,0x276d74,puVar2[0x10] - 100);
+    __2sprintf((char *)temp_v27,(const char *)(0x276d74),puVar2[0x10] - 100);
     temp_v8 = 0x20;
     asdMemoryAllocTraced(0x20,0x276d94,0xe84);
     temp_v22 = 0;
@@ -962,9 +961,9 @@ unsigned int FUN_00276264(void)
     FUN_0040a908();
     FUN_0040a918(puVar2[0x2b8],0x20000);
     modelLoadFileAsyncByName(puVar2[0x2b8],temp_v27);
-    textFormatBuffer(temp_v27,0x276dc4);
+    __2sprintf((char *)temp_v27,(const char *)(0x276dc4));
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x13bd,1,0x80);
-    textFormatBuffer(temp_v27,0x276ddc);
+    __2sprintf((char *)temp_v27,(const char *)(0x276ddc));
     temp_v8 = 0x20;
     asdMemoryAllocTraced(0x20,0x276d94,0xe99);
     temp_v22 = 0;
@@ -980,7 +979,7 @@ unsigned int FUN_00276264(void)
     if (0 < *(int *)(puVar2[0x10] * 4 + 0x5800ac)) {
       do {
         if (((puVar2[0x10] != 0x65) || (temp_v10 != 3 && temp_v10 != 0)) &&
-           (uStack_138 = temp_v10, textFormatBuffer(temp_v27,0x276e04,puVar2[0x10] - 100),
+           (uStack_138 = temp_v10, __2sprintf((char *)temp_v27,(const char *)(0x276e04),puVar2[0x10] - 100),
            puVar19 = g_lmapMainState, g_lmapMainState != (unsigned int *)0x0)) {
           temp_v8 = 0x20;
           asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
@@ -1059,11 +1058,11 @@ LAB_00276eb8:
           scrScriptProcessCreate();
           puVar2[0x27d] = temp_v8;
           *(unsigned int *)(temp_v8 + 0x108) = 3;
-          textFormatBuffer(temp_v27,0x277298,puVar2[0x10] - 100);
+          __2sprintf((char *)temp_v27,(const char *)(0x277298),puVar2[0x10] - 100);
           puVar16 = temp_v27;
           asdLoadFileSyncDefault();
           puVar2[0x27e] = (unsigned int)puVar16;
-          textFormatBuffer(temp_v27,0x2772ac,puVar2[0x10] - 100);
+          __2sprintf((char *)temp_v27,(const char *)(0x2772ac),puVar2[0x10] - 100);
           puVar16 = temp_v27;
           asdLoadFileSyncDefault();
           puVar2[0x27f] = (unsigned int)puVar16;
@@ -1395,7 +1394,7 @@ LAB_00276f5c:
       if (DAT_005f172b != '\0') {
         DAT_005f172b = 0;
         DAT_005f1614 = 1;
-        textFormatBuffer(&DAT_005f1660,&DAT_005f1730);
+        __2sprintf((char *)&DAT_005f1660,(const char *)&DAT_005f1730);
         puVar2[3] = 0x25;
         puVar2[4] = 0;
         return 0;
@@ -1405,7 +1404,7 @@ LAB_00276f5c:
         puVar2[3] = 0x1f;
         puVar2[4] = 0;
         DAT_005f1658 = 500;
-        textFormatBuffer(&DAT_005f1660,0x277cdc);
+        __2sprintf((char *)&DAT_005f1660,(const char *)(0x277cdc));
         return 0;
       }
       if (*(char *)((int)puVar2 + 0x9361) != '\0') {
@@ -1413,7 +1412,7 @@ LAB_00276f5c:
         puVar2[3] = 0x1f;
         puVar2[4] = 0;
         DAT_005f1658 = 500;
-        textFormatBuffer(&DAT_005f1660,0x277ce8);
+        __2sprintf((char *)&DAT_005f1660,(const char *)(0x277ce8));
         return 0;
       }
       if (*(char *)((int)puVar2 + 0x9362) != '\0') {
@@ -1421,7 +1420,7 @@ LAB_00276f5c:
         puVar2[3] = 0x1f;
         puVar2[4] = 0;
         DAT_005f1658 = 0x3c;
-        textFormatBuffer(&DAT_005f1660,0x277cf4);
+        __2sprintf((char *)&DAT_005f1660,(const char *)(0x277cf4));
         return 0;
       }
       if (*(char *)((int)puVar2 + 0x9363) == '\0') {
@@ -1500,7 +1499,7 @@ LAB_00276f5c:
     puVar2[4] = 0;
     puVar16 = &DAT_005f177c;
     DAT_005f1658 = DAT_005f1778;
-    textFormatBuffer(&DAT_005f1660,puVar16);
+    __2sprintf((char *)&DAT_005f1660,(const char *)puVar16);
     break;
   case 0xd:
     *(unsigned char *)((int)puVar2 + 0xe1) = 0;
@@ -1794,7 +1793,7 @@ LAB_00278b38:
                                   if (temp_v8 != 0) {
                                     temp_v8 = buttonHelpIsActionActive(0x13);
                                     if ((temp_v8 != 0) && (temp_v8 = FUN_004a0f5c(), temp_v8 != 0)) {
-                                      textFormatBuffer(&uStack_b0,0x278fdc,temp_v8);
+                                      __2sprintf((char *)&uStack_b0,(const char *)(0x278fdc),temp_v8);
                                       mapIfStart(&uStack_b0);
                                       sysPlayVoice(0x100021c);
                                     }
@@ -2607,11 +2606,11 @@ LAB_00279834:
     mapPlaceSet(0xffffffff,0xffffffff);
     puVar19 = g_lmapMainState;
     messageSetScriptDisplayMode();
-    textFormatBuffer(&uStack_b0,"event/e%03d/e%03d.bf",DAT_005f1658,DAT_005f1658);
+    __2sprintf((char *)&uStack_b0,"event/e%03d/e%03d.bf",DAT_005f1658,DAT_005f1658);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
     puVar19[0x28b] = (unsigned int)puVar10;
-    textFormatBuffer(&uStack_b0,"event/e%03d/e%03d.mbm",DAT_005f1658,DAT_005f1658);
+    __2sprintf((char *)&uStack_b0,"event/e%03d/e%03d.mbm",DAT_005f1658,DAT_005f1658);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
     puVar19[0x28c] = (unsigned int)puVar10;
@@ -3157,11 +3156,11 @@ LAB_0027a030:
     }
     puVar19 = g_lmapMainState;
     messageSetScriptDisplayMode();
-    textFormatBuffer(&uStack_b0,"event/e%03d/e%03d.bf",DAT_005f1658,DAT_005f1658);
+    __2sprintf((char *)&uStack_b0,"event/e%03d/e%03d.bf",DAT_005f1658,DAT_005f1658);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
     puVar19[0x28b] = (unsigned int)puVar10;
-    textFormatBuffer(&uStack_b0,"event/e%03d/e%03d.mbm",DAT_005f1658,DAT_005f1658);
+    __2sprintf((char *)&uStack_b0,"event/e%03d/e%03d.mbm",DAT_005f1658,DAT_005f1658);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
     puVar19[0x28c] = (unsigned int)puVar10;
@@ -3340,11 +3339,11 @@ LAB_0027a030:
     mapPlaceSet(0xffffffff,0xffffffff);
     puVar19 = g_lmapMainState;
     messageSetScriptDisplayMode();
-    textFormatBuffer(&uStack_b0,0x27b440,puVar19[0x281],puVar19[0x281]);
+    __2sprintf((char *)&uStack_b0,(const char *)(0x27b440),puVar19[0x281],puVar19[0x281]);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
     puVar19[0x28b] = (unsigned int)puVar10;
-    textFormatBuffer(&uStack_b0,0x27b458,puVar19[0x281],puVar19[0x281]);
+    __2sprintf((char *)&uStack_b0,(const char *)(0x27b458),puVar19[0x281],puVar19[0x281]);
     puVar10 = &uStack_b0;
     asdLoadFileSyncDefault();
     puVar19[0x28c] = (unsigned int)puVar10;
@@ -3451,7 +3450,7 @@ LAB_0027a030:
     puVar2[4] = 0;
     DAT_005f1658 = 500;
     puVar16 = (unsigned char *)0x27b474;
-    textFormatBuffer(&DAT_005f1660,puVar16);
+    __2sprintf((char *)&DAT_005f1660,(const char *)puVar16);
     break;
   case 0x46:
     temp_v2 = 0xdd;
@@ -3749,7 +3748,7 @@ LAB_0027a030:
     puVar2[4] = temp_v5;
     break;
   case 0x50:
-    textFormatBuffer(temp_v27,0x27bf80,puVar2[0x10] - 100);
+    __2sprintf((char *)temp_v27,(const char *)(0x27bf80),puVar2[0x10] - 100);
     asdEnvResetModelBank(temp_v27,0);
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
@@ -3758,15 +3757,15 @@ LAB_0027a030:
     if (g_lmapMainState[0x10] == 100) {
       return 0;
     }
-    textFormatBuffer(temp_v27,0x276d5c,puVar2[0x10] - 100,puVar2[0x10] - 100);
+    __2sprintf((char *)temp_v27,(const char *)(0x276d5c),puVar2[0x10] - 100,puVar2[0x10] - 100);
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x2b7,1,0x80);
-    textFormatBuffer(temp_v27,0x276dc4);
+    __2sprintf((char *)temp_v27,(const char *)(0x276dc4));
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x13bd,1,0x80);
     temp_v10 = 0;
     if (0 < *(int *)(puVar2[0x10] * 4 + 0x5800ac)) {
       do {
         if (((puVar2[0x10] != 0x65) || (temp_v10 != 3 && temp_v10 != 0)) &&
-           (uStack_138 = temp_v10, textFormatBuffer(temp_v27,0x276e04,puVar2[0x10] - 100),
+           (uStack_138 = temp_v10, __2sprintf((char *)temp_v27,(const char *)(0x276e04),puVar2[0x10] - 100),
            puVar19 = g_lmapMainState, g_lmapMainState != (unsigned int *)0x0)) {
           temp_v8 = 0x20;
           asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);
@@ -4053,7 +4052,7 @@ LAB_0027a030:
     puVar2[4] = 0;
     break;
   case 0x5d:
-    textFormatBuffer(temp_v27,0x27bf80,puVar2[0x10] - 100);
+    __2sprintf((char *)temp_v27,(const char *)(0x27bf80),puVar2[0x10] - 100);
     asdEnvResetModelBank(temp_v27,0);
     FUN_0033e014(g_gameState.mapId,DAT_005f1600);
     puVar2[3] = puVar2[3] + 1;
@@ -4063,15 +4062,15 @@ LAB_0027a030:
     if (g_lmapMainState[0x10] == 100) {
       return 0;
     }
-    textFormatBuffer(temp_v27,0x276d5c,puVar2[0x10] - 100,puVar2[0x10] - 100);
+    __2sprintf((char *)temp_v27,(const char *)(0x276d5c),puVar2[0x10] - 100,puVar2[0x10] - 100);
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x2b7,1,0x80);
-    textFormatBuffer(temp_v27,0x27c89c);
+    __2sprintf((char *)temp_v27,(const char *)(0x27c89c));
     asdLoadFileAsyncWrap(temp_v27,puVar2 + 0x13bd,1,0x80);
     temp_v10 = 0;
     if (0 < *(int *)(puVar2[0x10] * 4 + 0x5800ac)) {
       do {
         if (((puVar2[0x10] != 0x65) || (temp_v10 != 3 && temp_v10 != 0)) &&
-           (uStack_138 = temp_v10, textFormatBuffer(temp_v27,0x276e04,puVar2[0x10] - 100),
+           (uStack_138 = temp_v10, __2sprintf((char *)temp_v27,(const char *)(0x276e04),puVar2[0x10] - 100),
            puVar19 = g_lmapMainState, g_lmapMainState != (unsigned int *)0x0)) {
           temp_v8 = 0x20;
           asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x2a4b);

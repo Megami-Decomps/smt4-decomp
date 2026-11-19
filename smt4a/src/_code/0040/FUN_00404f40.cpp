@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the party member card draw; armcc here keeps the offset pairs and the 0.5664f speed in different registers (retail holds the speed in s16 and the VFP conversions in d8/d9 across the calls), and the layout positions come from calls the draft passed through unchanged. */
 #include "common.h"
+#include <stdio.h>
 #include "addon/PackageSelection.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -14,7 +15,6 @@ void drawSetColorFromRGBA8(u32 color);
 void gxResetColorQuadToWhite(void);
 void *gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
-void textFormatBuffer(u8 *buffer, const char *format, ...);
 void efctPlayVariantSet(u32 effect, s32 x, s32 y, s32 sprite, u32 a, u32 b);
 
 /* Draws one party member card at (x, y): its frame, name and optional badge. */
@@ -56,7 +56,7 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
         gameGetPlayerData();
         name = gameGetPlayerName();
     }
-    textFormatBuffer(text, "%s", name);
+    sprintf((char *)text, "%s", name);
     textDrawString(3, font, (const char *)text, (f32)(nameX + x), (f32)(nameY + y), 0.56640625f, 0.0f, speed);
     TextureTableEntryIV *badge = asdTMTexTableEntryAt(0x32, 0x99);
     efctPlayVariantSet(effect, badge->x + x, badge->y + y, 0x79, arg5, arg6);

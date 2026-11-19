@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00251d98` (_code @ 0x251d98, 0x3d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -12,7 +13,6 @@ int fontMeasureLineAdvance(int [2], int);
 int FUN_002bdf94(int, int, int, int);
 int drawSetColorFromRGBA8(unsigned int);
 int textDrawString(int, unsigned int, int [2]);
-int textFormatBuffer(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
@@ -56,7 +56,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: efctSetSpeed. */
 
@@ -95,13 +94,13 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
             if ((int)param_1->field_0x34 < 0) {
               gameGetPlayerData();
               temp_v5 = gameGetPlayerName();
-              textFormatBuffer(temp_v10,&LAB_0025216c,temp_v5);
+              sprintf((char *)temp_v10,(const char *)&LAB_0025216c,temp_v5);
             }
             else {
               temp_v3 = gameGetUnitRecord();
               if (temp_v3 != 0) {
                 temp_v5 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
-                textFormatBuffer(temp_v10,&LAB_0025216c,temp_v5);
+                sprintf((char *)temp_v10,(const char *)&LAB_0025216c,temp_v5);
               }
             }
             temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x11));
@@ -143,7 +142,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
               temp_v8 = *(unsigned char *)(temp_v3 + 0x48);
             }
           }
-          textFormatBuffer(temp_v11,&LAB_0025217c,temp_v8);
+          sprintf((char *)temp_v11,(const char *)&LAB_0025217c,temp_v8);
           temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x19,0x15));
           puStack_48 = temp_v11;
           temp_v10[0] = 2;

@@ -1,10 +1,10 @@
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
 
 u32 scrGetArg(u32 index);
 int scrSetResult(u32 value);
-int textFormatBuffer(char *buffer, const char *format, ...);
 s32 FUN_002c1d5c(void);
 u32 keyedRecordLoadVerFile(const char *path);
 
@@ -16,7 +16,7 @@ u32 scrCommQueryBattleEffectResource(void)
     u32 result = 0;
 
     if (FUN_002c1d5c() == 0) {
-        textFormatBuffer(path, "battle/effect/EV_%03d.eft", id);
+        sprintf(path, "battle/effect/EV_%03d.eft", id);
         result = keyedRecordLoadVerFile(path);
     }
     scrSetResult(result);

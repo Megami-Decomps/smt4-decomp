@@ -113,6 +113,16 @@ Every match must be one a programmer could have written for a reason.
     name: `/` and `%` for the division helpers, `strcpy` of a literal or a packed-record assignment for
     `__ARM_common_memcpy4_N`. The exceptions are helpers b1454 never emits from C, `__aeabi_memset4`
     for a word-aligned fill and `ll_sdiv` for a 64-bit division, which callers name directly.
+  - `__2sprintf` is armlib's `sprintf`: armcc compiles `sprintf(buf, fmt, ...)` under `<stdio.h>` as a
+    call to it, plus R_ARM_NONE references to the format's `_printf_*` features on the function's first
+    instruction (`build.py` drops them: no bytes). Those keep retail's `push; vpush; sub sp` ahead of the
+    argument moves. Write `sprintf` with `<stdio.h>` (cast a `u8` buffer to `char *`) when retail's
+    prologue has `vpush; sub sp` right after `push`; an inlined helper containing the `sprintf` anchors
+    its caller too. A sunk prologue (`push; ldr; vpush; sub sp`, titleConfigDraw) is a plain variadic
+    call: call `__2sprintf` through `runtime/Stdio.h` there. A `sprintf` whose format armcc cannot read
+    (an `extern const char DAT_x[]`) becomes `__c89sprintf`, which retail never calls: define the format
+    in the unit with the bytes at that address (`static const char s_romPathFormat[] = "rom:/%s";`,
+    smt4a `asdLoadFileAsyncByPath`); relink places it there.
 - **The original was built with armcc `--multifile`.** A caller knew which registers its callees
   really clobber: retail keeps a value in a caller-saved register (`r1`-`r3`, `ip`) across a `bl`,
   or pushes fewer registers than a unit compiled alone does, yet the callees stay out of line. A

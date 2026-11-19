@@ -1,5 +1,6 @@
 /* NON_MATCHING: the stack layout and register allocation differ - retail keeps the current name pointer in the first word of the 128-byte text buffer and fetches the effect work through r7/r8; the control flow and calls are the same. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include <string.h>
 
 extern "C" {
@@ -30,7 +31,6 @@ extern const char DAT_004008c4[];           /* "battle/effect/%s.eft" */
 u32 libc_strlen(const char *s);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
 char *libc_strcpy(char *destination, const char *source);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void memClear(void *block, s32 size);
 s32 keyedRecordFindByName(const char *name);
 void FUN_002276f8(EffectWork *work);
@@ -67,7 +67,7 @@ u32 FUN_003dab2c(EffectWork *work)
         bool selected = false;
         if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
             for (u32 j = 0; j < 11; j++) {
-                textFormatBuffer(text, DAT_00400904, g_btlEffect[0], j);
+                __2sprintf(text, DAT_00400904, g_btlEffect[0], j);
                 if (strcmp(text, name) == 0) {
                     FUN_002276f8(work);
                     *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(work) + 0x3034) = FUN_00246644(j & 0xff, 7, 0);
@@ -85,7 +85,7 @@ u32 FUN_003dab2c(EffectWork *work)
         }
         memClear(path, 0x80);
         memClear(text, 0x80);
-        textFormatBuffer(text, DAT_004008c4, name);
+        __2sprintf(text, DAT_004008c4, name);
         libc_strcpy(path, text);
         if (libc_strlen(path) == 0) {
             continue;

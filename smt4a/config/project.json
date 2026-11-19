@@ -176,12 +176,12 @@
     },
     {
       "address": "0x100388",
-      "function": "textFormatBuffer",
+      "function": "__2sprintf",
       "module": "_code",
-      "object": "build/obj/_code/0010/textFormatBuffer.o",
+      "object": "build/obj/_code/0010/__2sprintf.o",
       "size": 40,
-      "source": "src/_code/0010/textFormatBuffer.cpp",
-      "target": "orig/target/_code/0010/textFormatBuffer.o",
+      "source": "src/_code/0010/__2sprintf.cpp",
+      "target": "orig/target/_code/0010/__2sprintf.o",
       "thumb": true
     },
     {

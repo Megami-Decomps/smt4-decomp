@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022ea70` (_code @ 0x22ea70, 0x720 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_OffsetPosition2D.h"
 
@@ -14,7 +15,6 @@ void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int gameGetPlayerData(...);
 int drawTextAtSnappedRectangle(...);
-int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
 int SBORROW4(...);
@@ -52,7 +52,6 @@ extern unsigned int FUN_00230e04(unsigned short *);
 extern unsigned int FUN_0028fb3c(unsigned int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
-/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
@@ -289,7 +288,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   temp_v0 = *(short *)(temp_v11 + 8);
   temp_v21 = *(short *)(temp_v11 + 10) + temp_v4;
-  textFormatBuffer(temp_v20,&LAB_0022f1a0,temp_v5);
+  sprintf((char *)temp_v20,(const char *)&LAB_0022f1a0,temp_v5);
   drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v21,0,7,temp_v6,temp_v12,temp_v20);
   if (param_2 != 0) {
     temp_v8 = FUN_00230e04(param_4);
@@ -303,7 +302,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     temp_v0 = *(short *)(temp_v5 + 8);
     temp_v1 = *(short *)(temp_v5 + 10);
-    textFormatBuffer(temp_v20,&LAB_0022f1a4,temp_v8);
+    sprintf((char *)temp_v20,(const char *)&LAB_0022f1a4,temp_v8);
     drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
   }
   temp_v8 = FUN_0028fb3c(temp_v22);
@@ -317,7 +316,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   temp_v0 = *(short *)(temp_v5 + 8);
   temp_v1 = *(short *)(temp_v5 + 10);
-  textFormatBuffer(temp_v20,&LAB_0022f1ac,temp_v8);
+  sprintf((char *)temp_v20,(const char *)&LAB_0022f1ac,temp_v8);
   drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
   return;
 }

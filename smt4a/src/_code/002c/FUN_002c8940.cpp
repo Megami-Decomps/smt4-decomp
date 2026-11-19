@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c8940` (_code @ 0x2c8940, 0x6bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -31,7 +31,6 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -82,7 +81,7 @@ void FUN_002c8940(int param_1,int param_2)
         if (temp_v6 != 0) {
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x1d3,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2
                        ,0x6a);
-          textFormatBuffer(temp_v9,"%s",temp_v6 + 8);
+          sprintf((char *)temp_v9,"%s",temp_v6 + 8);
           temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1d5));
           VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -162,7 +161,7 @@ void FUN_002c8940(int param_1,int param_2)
   }
   efctSetSpeed();
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x1d6,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x83);
-  textFormatBuffer(temp_v9,"%s",temp_v4 + 8);
+  sprintf((char *)temp_v9,"%s",temp_v4 + 8);
   temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1d8));
   temp_v6 = (int)*(short *)(temp_v4 + 10);
   VectorSignedToFloat(*(short *)(temp_v8 + 10) + temp_v6 + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);

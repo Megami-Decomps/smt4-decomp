@@ -1,4 +1,5 @@
 /* NON_MATCHING: Debug help/leader/guest drawing is reconstructed; scratch initialization omits retail redundant zero stores, and float temporaries/frame layout differ. */
+#include <stdio.h>
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "gamedata/EncountData.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -23,7 +24,6 @@ void FUN_003bbfdc(DebugHelpText *help, void *entry);
 u32 entryTableCallSlot3(s32 slot);
 u32 dataTable02HasFlaggedItem(s32 index);
 u16 spriteTemplateGetPreferredDevilId(s32 index);
-void textFormatBuffer(char *destination, const char *format, ...);
 }
 
 /* Draw six help lines plus the selected leader and guest labels in the debug panel. */
@@ -60,7 +60,7 @@ extern "C" void FUN_003c2fe8(void *, s32 index)
         textDrawDefaultString(labels.names[dataTable02HasFlaggedItem(index)], 256.0f, 128.0f);
         const char *leader = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(spriteTemplateGetPreferredDevilId(index)));
         char text[32] = {};
-        textFormatBuffer(text, "\x83\x8a\x81\x5b\x83\x5f\x81\x5b\x81\x46%s", leader);
+        sprintf(text, "\x83\x8a\x81\x5b\x83\x5f\x81\x5b\x81\x46%s", leader);
         textDrawDefaultString(text, 256.0f, static_cast<f32>(spacing) + 128.0f);
     }
     textDrawDefaultString("\x83\x51\x83\x58\x83\x67", 256.0f, 170.0f);

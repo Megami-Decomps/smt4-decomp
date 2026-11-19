@@ -1,4 +1,5 @@
 /* NON_MATCHING: the "_FALSE" copy is now strcpy (armcc's __ARM_common_memcpy4_7, buffer in r8 as retail); retail still repeats the "measure the text and add the width" tail in every item-type case where ours merges them into one tail. */
+#include <stdio.h>
 #include <string.h>
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "shard/JobWork.h"
@@ -25,7 +26,6 @@ struct ListBoxMetrics {
 extern "C" {
 
 s32 libc_strlen(const char *text);
-void textFormatBuffer(char *buffer, const char *format, ...);
 
 /* Recomputes the size of the list box from its title and items: the widest item (with its value
  * text) gives the width, the number of visible rows the height. */
@@ -45,7 +45,7 @@ void asdListBoxMarkDirty(u32 listBox)
             case ASD_LISTBOX_PLAIN:
                 break;
             case ASD_LISTBOX_TEXT:
-                textFormatBuffer(text, "_%s", item->text);
+                sprintf(text, "_%s", item->text);
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
             case ASD_LISTBOX_TOGGLE:
@@ -54,14 +54,14 @@ void asdListBoxMarkDirty(u32 listBox)
                 break;
             case ASD_LISTBOX_INT:
                 if (item->flags != 0) {
-                    textFormatBuffer(text, "0x%08X", item->intValue);
+                    sprintf(text, "0x%08X", item->intValue);
                 } else {
-                    textFormatBuffer(text, "_%8d", item->intValue);
+                    sprintf(text, "_%8d", item->intValue);
                 }
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
             case ASD_LISTBOX_FLOAT:
-                textFormatBuffer(text, "_%4.2f", (double)item->floatValue);
+                sprintf(text, "_%4.2f", (double)item->floatValue);
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
             }

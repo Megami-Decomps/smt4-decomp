@@ -1,4 +1,5 @@
 /* NON_MATCHING: draws the camp play log list rows (cursor frame, entry name and its value as text, number or play time h/m); written from the decompilation, argument evaluation and the float conversions of the text positions not compared with retail */
+#include "runtime/Stdio.h"
 #include "gamedata/DataTable.h"
 #include "code/Code0029.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -40,7 +41,6 @@ void uiDrawListScrollBar(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s3
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
 void textFormatFullWidthNumber(char *out, u32 value);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
-void textFormatBuffer(char *out, const char *format, ...);
 void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y);
 s32 fontMeasureLineAdvance(const char *text, u32 font);
 
@@ -67,7 +67,7 @@ void FUN_00194b14(void)
 
         TextureTableEntryIV *nameFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x13);
         char text[64];
-        textFormatBuffer(text, "%s", entry->name);
+        __2sprintf(text, "%s", entry->name);
         textDrawString(2, PLAYLOG_NAME_COLOR, text, (f32)(nameFrame->x + frame->x + x), (f32)(nameFrame->y + frame->y));
 
         TextureTableEntryIV *valueFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x14);
@@ -77,17 +77,17 @@ void FUN_00194b14(void)
             u32 value = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2)];
             if (entry->unit[0] != '0') {
                 textFormatFullWidthNumber(first, value);
-                textFormatBuffer(text, "%s\x81@%s", first, entry->unit);
+                __2sprintf(text, "%s\x81@%s", first, entry->unit);
             } else {
                 textFormatFullWidthNumber(first, value);
-                textFormatBuffer(text, "%s", first);
+                __2sprintf(text, "%s", first);
             }
         } else {
             u32 seconds = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (resourceRunOperationIfUnblocked(log->list) + row) * 2)];
             u32 rest = seconds % PLAYLOG_SECONDS_PER_HOUR;
             textFormatFullWidthNumber(first, seconds / PLAYLOG_SECONDS_PER_HOUR);
             textFormatFullWidthNumber(second, rest / 60);
-            textFormatBuffer(text, "%s\x82g\x81@%s\x82l", first, second);
+            __2sprintf(text, "%s\x82g\x81@%s\x82l", first, second);
         }
         s32 width = fontMeasureLineAdvance(text, 2);
         textDrawString(2, PLAYLOG_VALUE_COLOR, text,

@@ -1,9 +1,9 @@
 /* NON_MATCHING: decimal helper guard lowering, loop signedness, and draw argument spills differ. */
 #include "common.h"
+#include "runtime/Stdio.h"
 
 extern "C" {
 extern const char DAT_00402894[];
-void textFormatBuffer(char *, const char *, ...);
 void FUN_002bdf94(s32, u32, u32, s32, s32, u32, const char *);
 }
 
@@ -37,7 +37,7 @@ void uiDrawSevenDigitNumber(u32 number, u32 x, u32 y, u32 style)
         if (digit == 10) {
             buffer[length] = ' ';
         } else {
-            textFormatBuffer(buffer + length, DAT_00402894, digit);
+            __2sprintf(buffer + length, DAT_00402894, digit);
         }
         ++length;
     }

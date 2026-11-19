@@ -7512,3 +7512,4 @@
 00241058 clearSaveUpdate inferred twin of IV clearSaveUpdate (FUN_001b10e4); the "clearSave C" process clearSaveCreate registers
 00314ef8 btlDebugClose inferred twin of IV btlDebugClose (inferred): stops the debug helper job and clears the owned flags
 0019c920 asdVramBlockListInsert inferred twin of IV asdVramBlockListInsert (inferred): inserts a block into the address-sorted VRAM block list
+00100388 __2sprintf evidence armlib sprintf entry (armcc 4.1 calls sprintf as __2sprintf): twin of smt4 0x2be624 (same 0x28-byte Thumb armlib body), called with smt4's sprintf call shapes

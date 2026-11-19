@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002199fc` (_code @ 0x2199fc, 0xa14 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "addon/LookupRecord.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int vec2GetXInt(...);
@@ -39,7 +39,6 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -147,7 +146,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     texDrawTableEntryAtStoredOrigin(2,0x1a,0xd8,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v8,0x6a);
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdc));
     temp_v4 = (unsigned int)FUN_00180114(*psVar5);
-    textFormatBuffer(temp_v12,&LAB_00219e04,temp_v4);
+    sprintf((char *)temp_v12,(const char *)&LAB_00219e04,temp_v4);
     puVar7 = temp_v12;
     fontMeasureLineAdvance(puVar7,1);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,
@@ -158,7 +157,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     textDrawString(1,temp_v11,temp_v12);
     temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xdd));
     temp_v11 = FUN_0014bf3c(*psVar5,0);
-    textFormatBuffer(temp_v12,&LAB_00219e04,temp_v11);
+    sprintf((char *)temp_v12,(const char *)&LAB_00219e04,temp_v11);
     puVar7 = temp_v12;
     fontMeasureLineAdvance(puVar7,2);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,

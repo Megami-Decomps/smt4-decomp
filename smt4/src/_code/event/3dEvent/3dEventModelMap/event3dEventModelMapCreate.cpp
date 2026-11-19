@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -28,7 +29,6 @@ extern const char DAT_00403698[]; /* "Event3dModelMap_Calc" */
 void FUN_002c2044(void *object, s32 mode);
 void FUN_0018a104(Event3dModelMap *map);
 s32 FUN_002c1d5c(void);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002a09b4(char *path, s32 mode);
 u32 asdMdlManagerCreateSecondList(char *path, u32 count);
 s32 FUN_00221e1c(u32 handle);
@@ -48,10 +48,10 @@ void event3dEventModelMapCreate(u32 mapId, u32 variant)
         map->loaded = 0;
     } else {
         char path[64];
-        textFormatBuffer(path, DAT_00403634, map->mapId, map->variant);
+        __2sprintf(path, DAT_00403634, map->mapId, map->variant);
         FUN_002a09b4(path, 0);
         map->environmentRequested = 1;
-        textFormatBuffer(path, DAT_00403610, map->mapId, map->variant);
+        __2sprintf(path, DAT_00403610, map->mapId, map->variant);
         map->modelList = asdMdlManagerCreateSecondList(path, 0x38);
         map->unk00C = 0;
         map->loaded = 1;

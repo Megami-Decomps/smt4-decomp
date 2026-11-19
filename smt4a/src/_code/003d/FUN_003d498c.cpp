@@ -1,4 +1,5 @@
 /* NON_MATCHING: two instruction-order swaps remain in stack/global setup and fallback-name arguments. */
+#include <stdio.h>
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "quest_center/QuestRecordA.h"
 #include "text/TextDraw.h"
@@ -7,7 +8,6 @@ struct AocSystemA;
 extern "C" {
 void FUN_003dea6c(u32 id, s32 enabled, s32 flags);
 void *FUN_0046c0f8(AocSystemA *system, u32 id);
-void textFormatBuffer(char *output, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 window, s32 mode, u32 color, u32 flags, s32 type, const void *data, s32 entry);
 s32 partyEntryGetByte1(u32 id);
@@ -29,7 +29,7 @@ void FUN_003d498c(u32 id, u32 mode)
         work->messageOwnership.addonOwned = 1;
     } else {
         char path[64];
-        textFormatBuffer(path, "event/quest/quest%03d.mbm", id);
+        sprintf(path, "event/quest/quest%03d.mbm", id);
         messages = asdLoadFileSyncDefault(path);
         work->detailMessages = messages;
         work->messageOwnership.addonOwned = 0;

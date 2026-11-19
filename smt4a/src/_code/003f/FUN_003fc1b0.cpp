@@ -1,4 +1,5 @@
 /* NON_MATCHING: the loaded-flag constant uses R1 instead of retail's R2. */
+#include "runtime/Stdio.h"
 #include "addon/aocMain.h"
 #include "addon/AocSystemA.h"
 
@@ -33,7 +34,6 @@ typedef char DevilResourceLayoutCheck[sizeof(DevilResourceHeader) == 0x28 &&
 
 extern "C" {
 extern const char DAT_0052726c[];
-void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
 bool FUN_00470b18(AocSystemA *system, s32 id, u32 kind);
 void *aocLoadWorldDataFile(AocSystemA *system, s32 id, const char *path);
@@ -41,7 +41,7 @@ void *aocLoadWorldDataFile(AocSystemA *system, s32 id, const char *path);
 void FUN_003fc1b0(DevilResourceWork *work, s32 id)
 {
     char path[0x40];
-    textFormatBuffer(path, DAT_0052726c, id);
+    __2sprintf(path, DAT_0052726c, id);
     work->kind = 6;
     work->index = id - 1;
     DevilResourceHeader *file;

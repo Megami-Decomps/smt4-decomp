@@ -4,6 +4,7 @@
  * the large layout's last overlay where retail shares the small layout's (so the two `nop`s after that call sit in
  * the other layout and the branches between them move by 8 bytes). */
 #include "common.h"
+#include <stdio.h>
 #include "status/StatusStrip.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
@@ -59,7 +60,7 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
     y += panel->originY;
     if (panel->member < 0) {
         PlayerDataIV *player = gameGetPlayerData();
-        textFormatBuffer(name, "%s", gameGetPlayerName());
+        sprintf(name, "%s", gameGetPlayerName());
         level = player->level;
         demon = -1;
         hp = player->hp;
@@ -70,7 +71,7 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
     } else {
         StatBlock *unit = gameGetUnitRecord(panel->member);
         if (unit != NULL) {
-            textFormatBuffer(name, "%s", FUN_002bd068(unit->id));
+            sprintf(name, "%s", FUN_002bd068(unit->id));
             level = unit->level;
             hp = unit->hp;
             mp = unit->mp;
@@ -133,7 +134,7 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
             } else {
                 texDrawTableEntryAtStoredOrigin(2, 0x19, 0x3f, x, y, 0x6f);
                 drawSetColorFromRGBA8(0x292929ff);
-                textFormatBuffer(text, "%d", level);
+                sprintf(text, "%d", level);
                 entry = asdTMTexTableEntryAt(0x19, 0x53);
                 FUN_002bdf94(1, entry->x + x, entry->y + y, 1, 2, 0x79, text);
                 gxResetColorQuadToWhite();
@@ -168,11 +169,11 @@ void statusStripDraw(StatusStrip *panel, s32 x, s32 y, f32 opacity)
             } else if (boosted) {
                 drawSetColorFromRGBA8(0x6ef0ffff);
             }
-            textFormatBuffer(text, "%d", hp);
+            sprintf(text, "%d", hp);
             entry = asdTMTexTableEntryAt(0x19, 0x19);
             FUN_002bdf94(2, entry->x + x, entry->y + y, 1, 4, 0x79, text);
             gxResetColorQuadToWhite();
-            textFormatBuffer(text, "%d", mp);
+            sprintf(text, "%d", mp);
             entry = asdTMTexTableEntryAt(0x19, 0x1d);
             FUN_002bdf94(2, entry->x + x, entry->y + y, 1, 4, 0x79, text);
             statusStripDrawAilments(panel, x, y);

@@ -1,10 +1,10 @@
+#include "runtime/Stdio.h"
 #include "battle/btlPartnerAttack.h"
 #include "script/scrScriptProcess.h"
 struct ScriptProcess;
 extern "C" {
 extern const char DAT_00529854[];
 extern const char DAT_00529870[];
-void textFormatBuffer(char *output, const char *format, ...);
 void asdMemFree(void *memory);
 void FUN_00416610(void *entries);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
@@ -36,10 +36,10 @@ extern "C" void btlPartnerUpdateScript(BtlPartnerAttackA *work)
         char path[32] = {};
         switch (kind) {
         case 0:
-            textFormatBuffer(path, DAT_00529854);
+            __2sprintf(path, DAT_00529854);
             break;
         case 1:
-            textFormatBuffer(path, DAT_00529870);
+            __2sprintf(path, DAT_00529870);
             break;
         }
         asdLoadFileAsyncSimple(path, &work->scriptData, 0);

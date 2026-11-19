@@ -1,8 +1,8 @@
 #include "common.h"
+#include "runtime/Stdio.h"
 
 extern "C" {
 
-void textFormatBuffer(char *dst, const char *fmt);
 void searchWinInitialize(void);
 void sysPlayVoice(u32 voiceId);
 s32 FUN_00162ea4(void);
@@ -34,11 +34,11 @@ s32 searchWinScriptShowMessage(void)
         kind = scrGetArg(0);
         win = DAT_0057f584;
         if (kind == 0) {
-            textFormatBuffer(win->message, DAT_0052fde8);
+            __2sprintf(win->message, DAT_0052fde8);
         } else if (kind == 1) {
-            textFormatBuffer(win->message, DAT_0052fe0c);
+            __2sprintf(win->message, DAT_0052fe0c);
         } else if (kind == 2) {
-            textFormatBuffer(win->message, DAT_0052fe2c);
+            __2sprintf(win->message, DAT_0052fe2c);
         } else {
             return 1;
         }

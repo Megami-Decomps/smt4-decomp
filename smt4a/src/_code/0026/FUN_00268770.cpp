@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00268770` (_code @ 0x268770, 0x2944 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "addon/LookupRecord.h"
@@ -10,7 +11,6 @@ extern "C" {
 
 int table8Type5GetValue(void);
 
-int textFormatBuffer(...);
 int buttonHelpSetText(...);
 int scrScriptProcessCreate(void);
 int listCursorGetRowOfChildIfUnblocked(...);
@@ -78,7 +78,6 @@ extern int recordCompareByKey(...); /* 0x34f378 */
 extern int entryRefCompareByRankOrderId(...); /* 0x35fd60 */
 extern int g_statusDown; /* 0x588fe8 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern int randRange(unsigned int);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
@@ -1523,7 +1522,7 @@ LAB_0026adc4:
       }
     }
     if (temp_v16) {
-      textFormatBuffer(temp_v17,&LAB_0026b0b8);
+      sprintf((char *)temp_v17,(const char *)&LAB_0026b0b8);
       buttonHelpSetText(temp_v17,0xf4f4f4ff);
     }
     else {
@@ -1560,7 +1559,7 @@ LAB_0026adc4:
   }
   if (*(int *)(temp_v2 + 0x518) == 0x14) {
     if (temp_v16) {
-      textFormatBuffer(temp_v17,&LAB_0026b0b8);
+      sprintf((char *)temp_v17,(const char *)&LAB_0026b0b8);
       buttonHelpSetText(temp_v17,0xf4f4f4ff);
     }
     else {
@@ -1569,7 +1568,7 @@ LAB_0026adc4:
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v14 + temp_v6) * 4 + 0x6e2);
       if (temp_v11 != 0) {
         temp_v11 = (unsigned int)dataTable0cSub1GetText((unsigned short)temp_v11);
-        textFormatBuffer(temp_v17,"%s",temp_v11);
+        sprintf((char *)temp_v17,"%s",temp_v11);
         buttonHelpSetText(temp_v17,0xf4f4f4ff);
       }
     }
@@ -1587,7 +1586,7 @@ LAB_0026adc4:
       temp_v13 = *(unsigned short *)(temp_v6 + 0xf48);
       temp_v7 = (unsigned int)FUN_00180114(temp_v13);
       temp_v12 = FUN_0014bf3c(temp_v13,0);
-      textFormatBuffer(temp_v17,"%s  %s",temp_v12,temp_v7);
+      sprintf((char *)temp_v17,"%s  %s",temp_v12,temp_v7);
       puVar16 = temp_v17;
     }
     buttonHelpSetText(puVar16,0xf4f4f4ff);

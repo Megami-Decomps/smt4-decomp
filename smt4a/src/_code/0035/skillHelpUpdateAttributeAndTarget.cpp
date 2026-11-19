@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/ButtonHelpGlobal.h"
 #include "gamedata/SkillDataRecord.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -8,7 +9,6 @@ u32 FUN_0016a0e8(void);
 s32 idIsAbove400(s32 id);
 s32 battleAttributeFormatName(void *output, u32 attribute);
 s32 skillFormatTargetLabel(void *output, u32 target);
-s32 textFormatBuffer(void *output, const char *format, ...);
 s32 asdTextDrawDirectoryEntry(u32 directory, s32 entry, u32 color,
                               s32 flags, s32 kind, u32 context, s32 id);
 
@@ -31,7 +31,7 @@ void skillHelpUpdateAttributeAndTarget(s32 id)
             (static_cast<u32>(record->flags) >> 11) & 31u);
         scrSetStringSlot(0x24, reinterpret_cast<const char *>(text));
         // Shift-JIS full-width "Self", preserved byte for byte.
-        textFormatBuffer(text, "\x82\x72\x82\x85\x82\x8c\x82\x86");
+        sprintf(text, "\x82\x72\x82\x85\x82\x8c\x82\x86");
         scrSetStringSlot(0x25, reinterpret_cast<const char *>(text));
     } else {
         SkillDataRecordA *record = skillDataFindById(id);

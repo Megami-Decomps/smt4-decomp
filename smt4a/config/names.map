@@ -3346,7 +3346,7 @@
 002e0854 resourceQueryByIndex
 002e13fc inputClearActiveValues
 002e6174 npcRoomDebugDrawStartId
-00100388 textFormatBuffer
+00100388 __2sprintf
 0021229c debugDrawText
 00330548 messageAuxDispatch
 002a1a78 processQueryChain

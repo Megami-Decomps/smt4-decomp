@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps a zero in r7 across the draw call (shared by the no-draw result and the final slot clear) and returns the call result in place; built re-materialises the zero and moves the result through r1. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "code/Code0014.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ extern const char DAT_0052a96c[];
 extern const char DAT_0052a978[];
 extern const char DAT_0052a97c[];
 extern const char DAT_0052a980[];
-void textFormatBuffer(char *destination, const char *format, ...);
 s32 FUN_001628c0(const char *text, u8 opacity, s32 mode, s32 flags,
                   f32 scaleX, f32 scaleY);
 }
@@ -31,9 +31,9 @@ extern "C" s32 FUN_0047f7c0(u32 index)
     s32 result = 0;
     if (second != 0 && first != 0) {
         char text[12];
-        textFormatBuffer(text, DAT_0052a96c, first, second);
+        __2sprintf(text, DAT_0052a96c, first, second);
         if (suffix != 0) {
-            textFormatBuffer(text, DAT_0052a980, text,
+            __2sprintf(text, DAT_0052a980, text,
                               suffix == 1 ? DAT_0052a978 : DAT_0052a97c);
         }
         u8 opacity = static_cast<u8>(static_cast<u32>(FUN_0014af98() * fade));

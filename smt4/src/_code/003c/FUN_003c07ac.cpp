@@ -1,4 +1,5 @@
 #include "common.h"
+#include "runtime/Stdio.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ extern const char DAT_004017c0[]; /* "battle/talk/TalkTone%s.mbm" */
 extern const char *DAT_00439b70[]; /* tone file name suffixes */
 
 void asdLoadFileAsyncSimple(const char *path, void **data, s32 flags);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void asdMemFree(void *memory);
 
 /* Load the talk tone file for `tone`; returns 1 once it is loaded. */
@@ -42,7 +42,7 @@ s32 FUN_003c07ac(TalkTone *talk, s32 tone)
         talk->file = NULL;
     }
     talk->tone = tone;
-    textFormatBuffer(path, DAT_004017c0, DAT_00439b70[tone]);
+    __2sprintf(path, DAT_004017c0, DAT_00439b70[tone]);
     asdLoadFileAsyncSimple(path, &talk->file, 0);
     talk->loading = 1;
     talk->state = 3;

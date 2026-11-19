@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation only: retail keeps the path in r4 and the path-buffer pointer in r9, the built code swaps them */
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -12,7 +13,6 @@ extern const char DAT_0040980c[]; /* "rom:/%s" */
 extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 
 s32 asdLoadFileIsPatched(const char *path);
-s32 textFormatBuffer(char *dst, const char *format, ...);
 AsdFileRequest *FUN_00155cb0(const char *path, u8 flag, void (*callback)(void *), void *job);
 void asdFileFinalizeCompletion(void *job);
 void asdFileRequestSetHeapKind(u32 handle, u8 flags);
@@ -28,11 +28,11 @@ void asdLoadFileAsync(const char *path, u32 *result, u32 flags, u32 arg, u32 arg
     memClear(fullPath, ASD_FILE_PATH_LEN);
     dst = fullPath;
     if (g_asdLoadFileUseRawPaths != 0 || asdLoadFileHasDevice(path) != 0) {
-        textFormatBuffer(dst, path);
+        __2sprintf(dst, path);
     } else if (asdLoadFileIsPatched(path) != 0) {
-        textFormatBuffer(dst, DAT_00409800, path);
+        __2sprintf(dst, DAT_00409800, path);
     } else {
-        textFormatBuffer(dst, DAT_0040980c, path);
+        __2sprintf(dst, DAT_0040980c, path);
     }
 
     asdDebugTrace(DAT_00409814, 353);

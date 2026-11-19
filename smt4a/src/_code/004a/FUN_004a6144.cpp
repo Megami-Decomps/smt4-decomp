@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a6144` (_code @ 0x4a6144, 0x4bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "runtime/Stdio.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int dataTable01GetRecordWithAocOverride(void);
@@ -31,7 +31,6 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 extern int vec2GetXInt(void);
@@ -170,7 +169,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v0 = *(short *)(temp_v3 + 8);
     temp_v13 = 0xffffffff;
     temp_v15 = *(short *)(temp_v3 + 10) + temp_v2;
-    textFormatBuffer(temp_v14,"%2d",temp_v12);
+    __2sprintf((char *)temp_v14,"%2d",temp_v12);
     drawTextAtRelativePosition(param_1 + 200,0,temp_v0 + temp_v10,temp_v15,0,7,0xffffffff,temp_v9,temp_v14);
     param_4 = param_4 & 0xffff;
     temp_v6 = 0;
@@ -187,7 +186,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     }
     temp_v0 = *(short *)(temp_v3 + 8);
     temp_v1 = *(short *)(temp_v3 + 10);
-    textFormatBuffer(temp_v14,"%8d",temp_v6);
+    __2sprintf((char *)temp_v14,"%8d",temp_v6);
     drawTextAtRelativePosition(param_1 + 200,0,temp_v10 + temp_v0,temp_v1 + temp_v2,0,7,temp_v13,temp_v9,temp_v14);
   }
   return;

@@ -1,5 +1,6 @@
+#include "runtime/Stdio.h"
 #include "gamedata/EncounterSelection.h"
-/* NON_MATCHING: retail spills r0-r2 and d0-d1 in the prologue (a variadic-style frame), keeps the resource name in a 32-byte buffer at sp, reads the kind back from the stack and runs an empty 21-iteration count-down loop before textFormatBuffer (not reproducible with honest code); this build uses a 0x54-byte buffer and no such loop. */
+/* NON_MATCHING: retail spills r0-r2 and d0-d1 in the prologue (a variadic-style frame), keeps the resource name in a 32-byte buffer at sp, reads the kind back from the stack and runs an empty 21-iteration count-down loop before __2sprintf (not reproducible with honest code); this build uses a 0x54-byte buffer and no such loop. */
 #include "Model/MoriModelContent.h"
 #include "gamedata/DataTable4CValue.h"
 #include "gfx/ControllerModel.h"
@@ -9,7 +10,6 @@
 
 extern "C" {
 extern EnemyExtraModelSource DAT_00582204[];
-void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 s32 FUN_004bc2dc(s32 kind, s32 flag);
 }
@@ -27,7 +27,7 @@ static __inline void ensureEnemyModel(MapEnemyA *owner, s32 slotIndex)
         return;
     }
     char resourceName[0x54];
-    textFormatBuffer(resourceName, "map/all/sym%03d.bam", DAT_00582204[slotIndex].modelId);
+    __2sprintf(resourceName, "map/all/sym%03d.bam", DAT_00582204[slotIndex].modelId);
     MoriModelContent *model = static_cast<MoriModelContent *>(
         asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp", 0x375));
     if (model != NULL) {

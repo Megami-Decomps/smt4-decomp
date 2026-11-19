@@ -1,4 +1,4 @@
-/* NON_MATCHING: recovered 128-byte text/8-byte scoped range buffers and formatter contract; initial button-help global load is scheduled after argument saves. */
+#include <stdio.h>
 #include "ui/ButtonHelpGlobal.h"
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -7,7 +7,6 @@
 
 extern "C" {
 void textFormatFullWidthNumber(char *out, s32 value);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void battleAttributeFormatName(char *buffer, u32 attribute);
 void skillFormatTargetLabel(char *buffer, u32 target);
 void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e, u32 f);
@@ -33,7 +32,7 @@ void FUN_00399e20(s32 textId, u32 flags)
         char minimum[8], maximum[8];
         textFormatFullWidthNumber(minimum, range & 0xF);
         textFormatFullWidthNumber(maximum, first->hitRange >> 4);
-        textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
+        sprintf(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
         scrSetStringSlot(0x25, text);
     }
     battleAttributeFormatName(text, second->traits >> 20);
@@ -41,25 +40,25 @@ void FUN_00399e20(s32 textId, u32 flags)
     skillFormatTargetLabel(text, first->target);
     scrSetStringSlot(0x27, text);
     if (second->element == 0)
-        textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
+        sprintf(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
     if (second->element == 1)
-        textFormatBuffer(text, "\x82\x68\x82\x8E\x82\x93\x82\x94\x82\x81\x82\x8E\x82\x94\x81\x40\x82\x6A\x82\x89\x82\x8C\x82\x8C"); /* Ｉｎｓｔａｎｔ　Ｋｉｌｌ */
+        sprintf(text, "\x82\x68\x82\x8E\x82\x93\x82\x94\x82\x81\x82\x8E\x82\x94\x81\x40\x82\x6A\x82\x89\x82\x8C\x82\x8C"); /* Ｉｎｓｔａｎｔ　Ｋｉｌｌ */
     if (second->element == 5)
-        textFormatBuffer(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E"); /* Ｐｏｉｓｏｎ */
+        sprintf(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E"); /* Ｐｏｉｓｏｎ */
     if (second->element == 6)
-        textFormatBuffer(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83"); /* Ｐａｎｉｃ */
+        sprintf(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83"); /* Ｐａｎｉｃ */
     if (second->element == 7)
-        textFormatBuffer(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90"); /* Ｓｌｅｅｐ */
+        sprintf(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90"); /* Ｓｌｅｅｐ */
     if (second->element == 8)
-        textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8E\x82\x84"); /* Ｂｉｎｄ */
+        sprintf(text, "\x82\x61\x82\x89\x82\x8E\x82\x84"); /* Ｂｉｎｄ */
     if (second->element == 9)
-        textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B"); /* Ｓｉｃｋ */
+        sprintf(text, "\x82\x72\x82\x89\x82\x83\x82\x8B"); /* Ｓｉｃｋ */
     if (second->element == 11)
-        textFormatBuffer(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8D"); /* Ｃｈａｒｍ */
+        sprintf(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8D"); /* Ｃｈａｒｍ */
     if (second->element == 12)
-        textFormatBuffer(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
+        sprintf(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
     if (second->element == 13)
-        textFormatBuffer(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
+        sprintf(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
     scrSetStringSlot(0x28, text);
     if (textId == 0)
         textId = reinterpret_cast<s32>(g_buttonHelp.mbm); /* this function passes the directory as an integer */

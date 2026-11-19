@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214324` (_code @ 0x214324, 0xa70 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
@@ -12,7 +13,6 @@ extern "C" {
 int npcRoomDestroy(void);
 int buttonHelpSetSelectedId(...);
 
-int textFormatBuffer(...);
 int asdSequenceRequest(...);
 int jobStop(unsigned int, int);
 int jobSetIntensity(...);
@@ -57,7 +57,6 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: jobSetIntensity. */
@@ -313,11 +312,11 @@ LAB_002146c0:
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < (int)puVar2[0x39]);
     }
-    textFormatBuffer(&temp_v8,&LAB_00214b8c,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
+    sprintf((char *)&temp_v8,(const char *)&LAB_00214b8c,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
                  *(unsigned short *)puVar2[puVar2[0x3e] + 10]);
     asdLoadFileSyncDefault();
     puVar2[0x16] = (unsigned int)puVar4;
-    textFormatBuffer(&temp_v8,&LAB_00214ba8,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
+    sprintf((char *)&temp_v8,(const char *)&LAB_00214ba8,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
                  *(unsigned short *)puVar2[puVar2[0x3e] + 10]);
     asdLoadFileSyncDefault();
     puVar2[0x17] = (unsigned int)puVar5;

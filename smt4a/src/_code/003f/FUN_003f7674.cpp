@@ -1,5 +1,6 @@
 /* NON_MATCHING: item detail panel draw; the call sequence follows retail (speed is forwarded to every callee) but the kind switch, the sound guard and the saved registers differ */
 #include "common.h"
+#include <stdio.h>
 #include "text/TextDraw.h"
 #include "code/Code0019.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -19,7 +20,6 @@ struct DetailPanel {
 
 extern "C" {
 
-void textFormatBuffer(char *buffer, const char *format, ...);
 void efctSetSpeed(f32 speed);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 scale);
@@ -66,7 +66,7 @@ void FUN_003f7674(DetailPanel *panel, s32 x, s32 y, f32 speed)
     textDrawString(3, 0xFF, name, (f32)nameX, (f32)(frame->y + y), 0.15625f, 0.0f, speed);
 
     char label[76];
-    textFormatBuffer(label, "%s", FUN_003f74a8(panel, panel->item));
+    sprintf(label, "%s", FUN_003f74a8(panel, panel->item));
     FUN_003f757c(panel, x, y, 0xD8, label, 0x4B, 0x4A, 1, 0, speed);
     u16 value = panel->item->kindAndValue;
     if (value >> 8 == DETAIL_KIND_NO_VALUE)

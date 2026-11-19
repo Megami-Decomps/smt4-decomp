@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001eef8c` (_code @ 0x1eef8c, 0x15b4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
@@ -25,7 +26,6 @@ int demonGetRaceLabel(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -71,7 +71,6 @@ extern int listCursorGetRowIfUnblocked(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -143,13 +142,13 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       }
     }
     temp_v7 = (int)FUN_002bd068(*puVar5);
-    textFormatBuffer(temp_v19,"%s",temp_v7);
+    sprintf((char *)temp_v19,"%s",temp_v7);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,temp_v16,temp_v19);
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x4e));
     temp_v16 = demonGetRaceLabel(*puVar5,0);
-    textFormatBuffer(temp_v19,"%s",temp_v16);
+    sprintf((char *)temp_v19,"%s",temp_v16);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xf49800ff,temp_v19);
@@ -208,7 +207,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      0x6f);
         temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x118));
         temp_v15 = (int)FUN_002bd068(*psVar13);
-        textFormatBuffer(temp_v19,"%s",temp_v15);
+        sprintf((char *)temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,1);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -219,7 +218,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         textDrawString(1,0xff,temp_v19,(int)*(short *)(temp_v12 + 10));
         temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x119));
         temp_v15 = demonGetRaceLabel(*psVar13,0);
-        textFormatBuffer(temp_v19,"%s",temp_v15);
+        sprintf((char *)temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,2);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -257,7 +256,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      0x6f);
         temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x118));
         temp_v15 = (int)FUN_002bd068(*psVar13);
-        textFormatBuffer(temp_v19,"%s",temp_v15);
+        sprintf((char *)temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,1);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -268,7 +267,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         textDrawString(1,0xff,temp_v19,(int)*(short *)(temp_v11 + 8));
         temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x119));
         temp_v15 = demonGetRaceLabel(*psVar13,0);
-        textFormatBuffer(temp_v19,"%s",temp_v15);
+        sprintf((char *)temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,2);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -383,7 +382,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = 0x72e027ff;
       }
       temp_v16 = (int)FUN_002bd068(*psVar13);
-      textFormatBuffer(temp_v19,"%s",temp_v16);
+      sprintf((char *)temp_v19,"%s",temp_v16);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
@@ -391,7 +390,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       textDrawString(2,temp_v15,temp_v19,(int)*(short *)(temp_v10 + 8));
       temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x13a));
       temp_v15 = demonGetRaceLabel(*psVar13,0);
-      textFormatBuffer(temp_v19,"%s",temp_v15);
+      sprintf((char *)temp_v19,"%s",temp_v15);
       puVar16 = temp_v19;
       fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
@@ -456,7 +455,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = 0x72e027ff;
       }
       temp_v16 = (int)FUN_002bd068(*psVar13);
-      textFormatBuffer(temp_v19,"%s",temp_v16);
+      sprintf((char *)temp_v19,"%s",temp_v16);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
@@ -464,7 +463,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       textDrawString(2,temp_v15,temp_v19,(int)*(short *)(temp_v10 + 8));
       temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x13a));
       temp_v15 = demonGetRaceLabel(*psVar13,0);
-      textFormatBuffer(temp_v19,"%s",temp_v15);
+      sprintf((char *)temp_v19,"%s",temp_v15);
       puVar16 = temp_v19;
       fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,

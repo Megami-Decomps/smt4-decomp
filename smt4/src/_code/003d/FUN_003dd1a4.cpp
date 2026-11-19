@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dd1a4` (_code @ 0x3dd1a4, 0x4c4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "battle/BtlGlobals.h"
 
@@ -14,7 +15,6 @@ int modelPartSetRotationDegrees(...); // declcheck: local (romwright prototype; 
 int btlGetMainState(...);
 int asdLoadFileAsyncSimple(...);
 int lightOwnerRegister(...);
-int textFormatBuffer(...);
 int libc_strcpy(...);
 int memClear(...);
 void animOwnerSetScale(unsigned int, float);
@@ -45,7 +45,6 @@ extern int libc_strrchr(unsigned char *, unsigned int);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: lightOwnerRegister. */
 extern int modelHasLoadedAttachment(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: animOwnerSetScale. */
@@ -214,7 +213,7 @@ LAB_003dd4ac:
     do {
       memClear(temp_v8,0x80);
       memClear(temp_v10,0x80);
-      textFormatBuffer(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v2 * 0x20);
+      sprintf((char *)temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v2 * 0x20);
       libc_strcpy(temp_v8,temp_v10);
       temp_v3 = param_1 + temp_v2 * 0x8c;
       temp_v4 = libc_strrchr(temp_v8,0x2f);

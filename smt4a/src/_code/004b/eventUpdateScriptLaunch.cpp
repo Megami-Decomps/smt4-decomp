@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "gfx/TransformInterpolation.h"
 #include "script/scrScriptProcess.h"
 
@@ -22,7 +23,6 @@ extern EventScriptLaunchGlobalsView DAT_005f16fc;
 void FUN_004b75d0(TransformInterpolation *);
 void asdMemFree(void *);
 void messageSetScriptDisplayMode();
-void textFormatBuffer(char *, const char *, ...);
 void *asdLoadFileSyncDefault(const char *);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *, const char *);
@@ -49,9 +49,9 @@ void eventUpdateScriptLaunch(EventScriptLaunchWorkView *work)
     EventScriptLaunchGlobalsView *event = &DAT_005f16fc;
     event->result = 0;
     messageSetScriptDisplayMode();
-    textFormatBuffer(path, "event/e%03d/e%03d.bf", event->eventId, event->eventId);
+    sprintf(path, "event/e%03d/e%03d.bf", event->eventId, event->eventId);
     work->bytecode = asdLoadFileSyncDefault(path);
-    textFormatBuffer(path, "event/e%03d/e%03d.mbm", event->eventId, event->eventId);
+    sprintf(path, "event/e%03d/e%03d.mbm", event->eventId, event->eventId);
     work->messages = asdLoadFileSyncDefault(path);
     work->script = scrScriptProcessCreate(work->bytecode, work->messages);
     scriptProcessSetMode(work->script, 2);

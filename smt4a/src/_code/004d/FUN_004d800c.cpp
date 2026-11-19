@@ -1,4 +1,5 @@
 /* NON_MATCHING: Battle-event resource loading and pending-mask stages are complete; the prologue, inline bytecode-load cases, and branch joins differ. */
+#include "runtime/Stdio.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
 
@@ -31,7 +32,6 @@ extern BattleEventPendingMask g_btlEvent;
 extern const char DAT_005285b8[];
 extern const char DAT_00528588[];
 void sysMemClear(void *data, u32 size);
-void textFormatBuffer(char *destination, const char *format, ...);
 u32 FUN_0046c4b4(void *system, u32 aocId);
 void aocQueueType1e(void *system, u32 aocId, void **file, const char *path);
 void aocQueueType1f(void *system, u32 aocId, void **file, const char *path);
@@ -58,7 +58,7 @@ static inline u32 battleEventLoadBytecode(BattleEventLoadStep *step, BtlMainStat
     const BattleEventLoadIdentity *identity = reinterpret_cast<const BattleEventLoadIdentity *>(battle);
     char path[128];
     sysMemClear(path, sizeof(path));
-    textFormatBuffer(path, DAT_00528588, identity->name, identity->name);
+    __2sprintf(path, DAT_00528588, identity->name, identity->name);
     if (FUN_0046c4b4(g_aocSystem, identity->aocId)) {
         aocQueueType1f(g_aocSystem, identity->aocId, &step->scriptFile, path);
     } else {
@@ -80,7 +80,7 @@ extern "C" u32 FUN_004d800c(BattleEventLoadStep *step, BtlMainStateA *battle)
         const BattleEventLoadIdentity *identity = reinterpret_cast<const BattleEventLoadIdentity *>(battle);
         char path[128];
         sysMemClear(path, sizeof(path));
-        textFormatBuffer(path, DAT_005285b8, identity->name, identity->name);
+        __2sprintf(path, DAT_005285b8, identity->name, identity->name);
         if (FUN_0046c4b4(g_aocSystem, identity->aocId)) {
             aocQueueType1e(g_aocSystem, identity->aocId, &step->tableFile, path);
         } else {

@@ -12,7 +12,7 @@ s32 FUN_002e31ba(const char* format, OutputCursor* output, va_list arguments,
                  s32 (*writeCharacter)(u32, OutputCursor*));
 s32 libcFormatAppendByte(u32 character, OutputCursor* output);
 
-s32 textFormatBuffer(u8* destination, const char* format, ...)
+s32 __2sprintf(u8* destination, const char* format, ...)
 {
     va_list arguments;
     va_start(arguments, format);

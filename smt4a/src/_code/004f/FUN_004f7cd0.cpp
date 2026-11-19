@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail loads the reserved-name globals inside the null-guarded tests (not before) and keeps the 128-byte buffer address in sl; stack frame 260 vs 256. */
+#include "runtime/Stdio.h"
 #include "battle/btlEffect.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include <string.h>
@@ -18,7 +19,6 @@ extern const char DAT_00528544[], DAT_0052853c[], DAT_005284c0[];
 u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *first, const char *second, u32 bytes);
 void sysMemClear(void *memory, u32 bytes);
-s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *destination, const char *source);
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 key, const void *data);
@@ -49,7 +49,7 @@ void FUN_004f7cd0(BtlEffectOwnerA *effect)
         char path[128], formatted[128];
         sysMemClear(path, sizeof(path));
         sysMemClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_005284c0, name);
+        __2sprintf(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
         if (libc_strlen(path) != 0) {
             BattleVersionResourceSlot *slot = &owner->versions[index];

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the render-state push/pop, the text buffer frame and the float constant registers differ from retail (233 vs 235 rows); the quest screen drawing is the same. */
 #include "common.h"
+#include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
@@ -33,7 +34,6 @@ void efctSetSpeed(f32 speed);
 void uiFadeDraw(u32 id);
 void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
 u32 FUN_00156850(u16 category, s32 arg);
-void textFormatBuffer(void *buffer, const char *format, u32 value);
 void effectRenderTransformedInstance(void *panel, f32 offset);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void skinObjectUpdateMatrices(RenderCtxA *context);
@@ -110,7 +110,7 @@ u32 uiQuestDrawUpper(void)
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1E, 0x55);
         char text[64];
 
-        textFormatBuffer(text, "%s", FUN_00156850(category, 0));
+        sprintf(text, "%s", FUN_00156850(category, 0));
         textDrawString(3, -1, text, (f32)(label->x + x), (f32)(label->y + y), 0.375f, 0.0f, speed);
         effectRenderTransformedInstance(ui->panel, (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f));
         efctSetSpeed(1.0f);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in textFormatBuffer's literal pool; not written yet. */
+/* NON_MATCHING: found outside every function: its address is in __2sprintf's literal pool; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_001e2e4c for reference (not compiled; its own view of the boundaries):
 
 unsigned long long FUN_001e2e4c(void)

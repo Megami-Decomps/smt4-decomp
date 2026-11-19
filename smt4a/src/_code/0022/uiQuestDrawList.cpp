@@ -1,4 +1,5 @@
 /* NON_MATCHING: 64 lines; same instructions, frame size and block layout. The focused name's scroll x is spilled to sp+44 instead of sp+20 (4 of the lines); the rest are temporary registers in six argument computations (the row plate, name and icon positions, the focused plate and name, the pulse product), where retail also loads the focused name's 0.32 scale last. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "camp/RenderCtxA.h"
@@ -73,7 +74,7 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x1e, 0x9c);
         u32 color = uiQuestDrawRowPlate(id, entry->x + plate->x + x, entry->y + plate->y + y, 0x6f, 0, 0);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x1e, 0x9b);
-        textFormatBuffer(text, "%s", FUN_00156850(id, 0));
+        sprintf(text, "%s", FUN_00156850(id, 0));
         textDrawString(2, color, text, (f32)(entry->x + name->x + x), (f32)(name->y + entry->y + y), 0.45f, 0.0f, alpha);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1e, 0x9a);
         partyDrawCategorySelectionIcon(id, icon->x + entry->x + x, entry->y + icon->y + y, 0x6f);
@@ -139,7 +140,7 @@ void uiQuestDrawList(void)
         TextureTableEntryIV *plate = asdTMTexTableEntryAt(0x1e, 0xb3);
         u32 color = uiQuestDrawRowPlate(id, plate->x + focus->x + x, focus->y + plate->y + y, 0xab, 1, pressed);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x1e, 0xb2);
-        textFormatBuffer(text, "%s", FUN_00156850(id, 0));
+        sprintf(text, "%s", FUN_00156850(id, 0));
         textDrawString(3, color, text, (f32)(focus->x + name->x + x), (f32)(focus->y + name->y + y), 0.32f, 0.0f, alpha);
         if (partyEntryFlagsBit3(id)) {
             texDrawTableEntryAtStoredOrigin(2, 0x1e, 0xb0, focus->x + x, focus->y + y, 0xab);

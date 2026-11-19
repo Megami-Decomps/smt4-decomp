@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00240d88` (_code @ 0x240d88, 0xaa0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -14,7 +15,6 @@ int fontMeasureLineAdvance(...);
 int nkmBaseGetRecord(void);
 int FUN_002bdf94(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
 int VectorSignedToFloat(...);
@@ -42,7 +42,6 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int demonGetRaceLabel(short, unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -157,7 +156,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     texDrawTableEntryAtStoredOrigin(2,0x24,0xd8,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xdc));
     temp_v6 = (unsigned int)FUN_002bd068(*psVar7);
-    textFormatBuffer(temp_v12,"%s",temp_v6);
+    sprintf((char *)temp_v12,"%s",temp_v6);
     puVar9 = temp_v12;
     fontMeasureLineAdvance(puVar9,1);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
@@ -168,7 +167,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     textDrawString(1,temp_v11,temp_v12);
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xdd));
     temp_v11 = demonGetRaceLabel(*psVar7,0);
-    textFormatBuffer(temp_v12,"%s",temp_v11);
+    sprintf((char *)temp_v12,"%s",temp_v11);
     puVar9 = temp_v12;
     fontMeasureLineAdvance(puVar9,2);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,

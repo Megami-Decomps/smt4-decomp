@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "classes/Obj55ac38.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00413e50` (_code @ 0x413e50, 0x37c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -5,7 +6,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int FUN_00103f54(...);
 int holderSetFlagBits(...);
 int _ZN9Obj5596acaSERKS_(unsigned char [52], unsigned int);
@@ -66,7 +66,6 @@ extern unsigned char DAT_0055a9d8; /* 0x55a9d8 */
 extern unsigned char DAT_0055ac40; /* 0x55ac40 */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: _ZN9Obj5596acaSERKS_. */
@@ -218,10 +217,10 @@ void FUN_00413e50(int param_1)
   temp_v0 = gameFlagIsSet(0x580);
   if (temp_v0 != 0) {
     temp_v1 = randRange(0xffff);
-    textFormatBuffer(&temp_v17,"%llu",temp_v1,0);
+    sprintf((char *)&temp_v17,"%llu",temp_v1,0);
   }
   else {
-    textFormatBuffer(&temp_v17,"%llu",temp_v1,temp_v3);
+    sprintf((char *)&temp_v17,"%llu",temp_v1,temp_v3);
   }
   temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v33,&temp_v17);
   FUN_00522a48(&temp_v24,temp_v1);

@@ -1,10 +1,10 @@
 /* NON_MATCHING: uppercase loop is not pair-unrolled; frame/register layout and redundant retail READ-state store differ. */
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 #include "nn/Result.h"
 
 extern "C" {
 void rt_aeabi_memclr(void *, u32);
-s32 textFormatBuffer(char *, const char *, ...);
 u32 libc_strlen(const char *);
 void pathStripScheme(AsdFileHashPack *, char *, u32);
 s32 libc_toupper(s32);
@@ -19,7 +19,7 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
         return 0;
     char path[ASD_FILE_PATH_LEN];
     rt_aeabi_memclr(path, sizeof(path));
-    textFormatBuffer(path, request->path);
+    sprintf(path, request->path);
     pathStripScheme(pack, path, libc_strlen(path));
     s32 length = libc_strlen(path);
     for (s32 index = 0; index < length; ++index)

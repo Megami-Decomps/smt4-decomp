@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003db56c` (_code @ 0x3db56c, 0xb10 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -10,7 +11,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -39,7 +39,6 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -93,7 +92,7 @@ void FUN_003db56c(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0x14,0x57f,temp_v0,temp_v1,0x6a);
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x583));
   temp_v3 = FUN_002e5c2c();
-  textFormatBuffer(temp_v12,"%u",temp_v3);
+  sprintf((char *)temp_v12,"%u",temp_v3);
   FUN_00180310(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v12);
   temp_v5 = 0;
   temp_v2 = uiSearchPrimary(param_1 + 0x10);
@@ -127,21 +126,21 @@ void FUN_003db56c(int param_1)
               if (temp_v4 == 2) {
                 temp_v6 = 0x9b9b9bff;
                 temp_v11 = 0x787878ff;
-                textFormatBuffer(temp_v12,"\?\?\?");
+                sprintf((char *)temp_v12,"\?\?\?");
               }
             }
             else {
               temp_v6 = 0x9b9b9bff;
               temp_v11 = 0xdc0f14ff;
               temp_v3 = dataRecordGetValue(temp_v7);
-              textFormatBuffer(temp_v12,"%d",temp_v3);
+              sprintf((char *)temp_v12,"%d",temp_v3);
             }
           }
           else {
             temp_v6 = 0xffffffff;
             temp_v11 = 0xffffffff;
             temp_v3 = dataRecordGetValue(temp_v7);
-            textFormatBuffer(temp_v12,"%d",temp_v3);
+            sprintf((char *)temp_v12,"%d",temp_v3);
           }
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x594));
           drawSetColorFromRGBA8(temp_v11);
@@ -218,14 +217,14 @@ void FUN_003db56c(int param_1)
           if (temp_v5 == 2) {
             temp_v6 = 0x787878ff;
             temp_v11 = 0x787878ff;
-            textFormatBuffer(temp_v12,"\?\?\?");
+            sprintf((char *)temp_v12,"\?\?\?");
           }
         }
         else {
           temp_v6 = 0x787878ff;
           temp_v11 = 0xdc0f14ff;
           temp_v3 = dataRecordGetValue(temp_v7);
-          textFormatBuffer(temp_v12,"%d",temp_v3);
+          sprintf((char *)temp_v12,"%d",temp_v3);
         }
       }
       else {
@@ -237,7 +236,7 @@ void FUN_003db56c(int param_1)
           temp_v6 = 0x9fe7ffff;
         }
         temp_v3 = dataRecordGetValue(temp_v7);
-        textFormatBuffer(temp_v12,"%d",temp_v3);
+        sprintf((char *)temp_v12,"%d",temp_v3);
       }
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,0x59d));
       drawSetColorFromRGBA8(temp_v11);

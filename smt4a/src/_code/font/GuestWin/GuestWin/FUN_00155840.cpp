@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00155840` (_code @ 0x155840, 0x450 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -9,7 +10,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int dataTable25FindById(...);
 int efctSetSpeed(void);
@@ -35,7 +35,6 @@ typedef struct {
 extern int g_guestWin; /* 0x57f570 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 extern int infoWinHasValue(void);
 /* Supplied declaration required: dataTable25FindById. */
@@ -139,13 +138,13 @@ unsigned int FUN_00155840(void)
       temp_v1 = gameGetOptions();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 300);
       dataTable25FindById(temp_v6);
-      textFormatBuffer(temp_v10,temp_v6);
+      sprintf((char *)temp_v10,(const char *)temp_v6);
     }
     else {
       uiDrawItemOrStatusIcon((int)*(short *)(temp_v1 + 0x62),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24,0);
       temp_v5 = FUN_00180114(*(unsigned short *)(temp_v1 + 0x62));
-      textFormatBuffer(temp_v10,temp_v5);
+      sprintf((char *)temp_v10,(const char *)temp_v5);
     }
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0xd8));
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

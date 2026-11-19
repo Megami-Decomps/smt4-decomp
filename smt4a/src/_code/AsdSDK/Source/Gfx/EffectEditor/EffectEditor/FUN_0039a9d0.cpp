@@ -1,9 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039a9d0` (_code @ 0x39a9d0, 0x4f4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "gfx/EffectEditorStorage.h"
 extern "C" {
 
-int textFormatBuffer(int, unsigned char *, unsigned int);
 int padButtonIsPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(...);
@@ -67,7 +67,6 @@ extern unsigned int DAT_0059ea30; /* 0x59ea30 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
@@ -124,7 +123,7 @@ unsigned int FUN_0039a9d0(unsigned int param_1,int param_2,unsigned int param_3)
       puVar2 = *(unsigned int **)(param_2 + temp_v3 * 0x1c);
       temp_v5 = temp_v6;
       if (puVar2 != (unsigned int *)0x0) {
-        textFormatBuffer(temp_v6,&LAB_0039ad7c,*puVar2);
+        sprintf((char *)temp_v6,(const char *)&LAB_0039ad7c,*puVar2);
         piVar3 = (int *)(temp_v0 + temp_v4 * 0x18);
         temp_v5 = temp_v6 + 0x14;
         *piVar3 = temp_v6;

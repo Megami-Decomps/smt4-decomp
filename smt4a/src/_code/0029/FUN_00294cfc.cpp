@@ -1,4 +1,5 @@
 /* NON_MATCHING: picks a hint popup for a candidate from the list (level window, not yet known or recent) and records it in the recent list; written from the decompilation and the retail disassembly, loop structure and register allocation not compared with retail */
+#include <stdio.h>
 #include "gamedata/DataTable.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -45,7 +46,6 @@ HintCandidates *dataTable02GetRecordWithAocPackage(u32 owner);
 const char *popupSelectWeightedMessage(s32 kind, u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
 const char *dataTable01GetRecordWithAocOverride(u32 id);
-void textFormatBuffer(char *out, const void *format, const char *argument);
 
 static __inline bool hintInList(const u32 *list, s32 count, u32 id)
 {
@@ -113,7 +113,7 @@ void FUN_00294cfc(u32 owner)
         popup->speakerId = slot->id;
         u32 format[19];
         rt_memcpy(format, message, 0x48);
-        textFormatBuffer(g_popupState->text, format, dataTable01GetRecordWithAocOverride((u16)chosen));
+        sprintf(g_popupState->text, (const char *)format, dataTable01GetRecordWithAocOverride((u16)chosen));
 
         /* Move the id to the front of the recent list unless it is already there. */
         s32 index;

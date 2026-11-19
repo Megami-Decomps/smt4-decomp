@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack layout (label/kind/state/value at sp+4..0xd4, name at sp+0xd8) now matches; retail keeps flags in r4 through the first-call branch (a removed hook leaves mov r1,r4 / mov r0,#0 pairs), counts the 22 entries from a loaded constant and keeps the editor pointer in r7 with a different register split; armcc allocates r5-r9 differently. */
+#include <stdio.h>
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
@@ -6,7 +7,6 @@ extern const u8 DAT_00400002;
 extern const u8 DAT_00600001;
 extern const u8 DAT_00400000;
 
-s32 textFormatBuffer(char *dest, const char *format, ...);
 s32 effBlockCopyDataB(void *block, const void *source, s32 size);
 EffectSelectionItem *linkedFindItemByIndex(void *list, s32 index);
 void nodeListFree(void *list);
@@ -50,7 +50,7 @@ u32 FUN_003c8878(u32 flags)
         g_effectEditor.nodeList = NULL;
         if (flags & 8) {
             for (u32 i = 0; i < 22; i++) {
-                textFormatBuffer(name, "GENERAL %d", i);
+                sprintf(name, "GENERAL %d", i);
                 effMenuAppendNamedEntry(g_effectEditor.nodeList, name, 8, i, 0);
             }
         }

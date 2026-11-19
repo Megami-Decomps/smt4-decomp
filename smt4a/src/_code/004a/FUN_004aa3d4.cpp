@@ -1,4 +1,5 @@
 /* NON_MATCHING: global UI ownership is corrected; attack-label resource accessors and shared case exits still differ. */
+#include <stdio.h>
 #include "battle/BtlUiGlobal.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "gamedata/GameDataAccess.h"
@@ -34,7 +35,6 @@ extern u32 g_btlScriptUnit;        /* 0x57113c */
 
 s32 resourceRunOperationIfUnblocked(u8 *list);
 s32 listCursorGetRowIfUnblocked(u8 *list);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 playerPrimaryGetKindValue(void);
 s32 playerSecondaryGetKindValue(void);
 s32 menuStateSetMode4(s32 mode);
@@ -74,10 +74,10 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
         if (partyMember != 0) {
             s32 count = resourceRunOperationIfUnblocked(ui->skillList) + listCursorGetRowIfUnblocked(ui->skillList);
             if (count == 0) {
-                textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+                sprintf(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
                 kindValue = playerPrimaryGetKindValue();
             } else if (count == 1) {
-                textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+                sprintf(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
                 kindValue = playerSecondaryGetKindValue();
             }
         } else if (guard != 0) {
@@ -85,18 +85,18 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
             u16 entry = *(u16 *)(options + 0x12E);
             options = gameGetOptions();
             dataTableGetCategoryEntry(*(s16 *)(options + 0x12C), entry);
-            textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+            sprintf(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
             kindValue = FUN_0022fcb8();
         } else {
             NkmBaseRecordA *record = nkmBaseGetRecord(recordId);
-            textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b", record->kind);
+            sprintf(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b", record->kind);
             kindValue = dataRecordGetKindValue(recordId);
         }
         menuStateSetMode4((s16)kindValue);
         break;
     case 2:
     case 3: {
-        textFormatBuffer(text, "%s", FUN_0014bd84(ui->helpValue));
+        sprintf(text, "%s", FUN_0014bd84(ui->helpValue));
         s32 mode;
         if (partyMember != 0) {
             if (playerHasFlagBit(4) != 0) {
@@ -117,7 +117,7 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
         break;
     }
     case 8:
-        textFormatBuffer(text, "%s", dataFindKindRecordWithAocOverrides(ui->helpValue, 0));
+        sprintf(text, "%s", dataFindKindRecordWithAocOverrides(ui->helpValue, 0));
         FUN_002c13b0((s16)ui->helpValue);
         if (FUN_003f2448(ui->scriptUnit) != 0 && btlScriptUnitHasFlags(ui->scriptUnit) == 0) {
             FUN_002c13d4((s16)ui->helpValue, flagValueRead(ui->helpValue) + 1);
@@ -127,14 +127,14 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
     case 10:
     case 12:
         if (value == 0) {
-            textFormatBuffer(text, "\x82r\x82\x95\x82\x8d\x82\x8d\x82\x8f\x82\x8e");
+            sprintf(text, "\x82r\x82\x95\x82\x8d\x82\x8d\x82\x8f\x82\x8e");
         } else {
-            textFormatBuffer(text, "\x82q\x82\x85\x82\x94\x82\x95\x82\x92\x82\x8e");
+            sprintf(text, "\x82q\x82\x85\x82\x94\x82\x95\x82\x92\x82\x8e");
         }
         menuStateReset();
         break;
     case 11:
-        textFormatBuffer(text, "\x82""e\x82\x8c\x82\x85\x82\x85");
+        sprintf(text, "\x82""e\x82\x8c\x82\x85\x82\x85");
         menuStateReset();
         break;
     default:

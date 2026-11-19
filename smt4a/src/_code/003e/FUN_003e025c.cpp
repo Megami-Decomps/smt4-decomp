@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -36,7 +37,6 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern const char DAT_00528568[];
 BattleCameraDefinition *FUN_003eca48(BtlMainStateA *battle, u16 id);
-void textFormatBuffer(char *output, const char *format, ...);
 void FUN_004f2abc(BtlCameraA *camera, const char *path);
 s32 FUN_004f2294(BtlCameraA *camera);
 void btlCameraObjectCreate(BtlCameraA *camera);
@@ -56,7 +56,7 @@ void FUN_003e025c(BtlStep *step, BtlMainStateA *battle)
                 char path[64] = {0};
                 const BattleCameraCandidateView *candidate =
                     reinterpret_cast<const BattleCameraCandidateView *>(entry->data.candidate);
-                textFormatBuffer(path, DAT_00528568, candidate->cameraId);
+                __2sprintf(path, DAT_00528568, candidate->cameraId);
                 FUN_004f2abc(g_btlCamera, path);
                 step->state = 14;
                 step->counters.unk10 = 0;

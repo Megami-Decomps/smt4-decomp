@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct MapGlobals002df598 {
     /* 0x04 */ MapState002df598 *state;
 } MapGlobals002df598;
 
-void textFormatBuffer(u8 *buffer, const char *format, u32 map, u32 map2, u32 index);
 u32 asdCameraLoadFromFile(u8 *path);
 
 
@@ -23,7 +23,7 @@ void mapCameraLoad(u32 map, u32 index)
 {
     u8 path[64];
 
-    textFormatBuffer(path, "map/m%03d/cam%03d_%02d.bccam", map, map, index);
+    sprintf((char *)path, "map/m%03d/cam%03d_%02d.bccam", map, map, index);
     DAT_004474f0.state->camera = asdCameraLoadFromFile(path);
 }
 

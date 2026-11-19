@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack slots now match (locals declared up front); only the 1.0f load is scheduled after `mov r6, r1` instead of before it. */
+#include "runtime/Stdio.h"
 #include "gfx/NamedEffectAttachment.h"
 #include "gfx/QuaternionWorkspace.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -8,7 +9,6 @@
 extern "C" {
 extern const char DAT_0052607c[];
 void memClearWords(void *destination, u32 size);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 u32 FUN_0019f30c(AsdMdlNode *node, const char *name, RotationQuaternion *rotation);
 void FUN_001b4eb8(void *effect, const EffectAttachmentPosition *position);
 void FUN_001acb48(void *effect, const RotationQuaternion *rotation);
@@ -34,7 +34,7 @@ void FUN_001881e8(AsdMdlObject *model, NamedEffectAttachment *attachments)
             EffectJointEntry *entry = attachments->entries[index];
             void *effect = entry->effect;
             memClearWords(name, sizeof(name));
-            textFormatBuffer(name, DAT_0052607c, entry->index);
+            __2sprintf(name, DAT_0052607c, entry->index);
             if (lookupNameEntry(node, reinterpret_cast<u32>(name), reinterpret_cast<u32 *>(&jointPosition))) {
                 position.x = jointPosition.x;
                 position.y = jointPosition.y;

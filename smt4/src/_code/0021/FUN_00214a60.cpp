@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214a60` (_code @ 0x214a60, 0xfb4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -16,7 +17,6 @@ int gxSetUniformQuadColors(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -77,7 +77,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: gxSetUniformQuadColors. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -269,7 +268,7 @@ unsigned int FUN_00214a60(void)
           textFormatFullWidthTwoDigits(temp_v10 / 10,temp_v31);
           textFormatFullWidthTwoDigits(temp_v10 % 10,temp_v32);
           puStack_120 = temp_v32;
-          textFormatBuffer(temp_v27,"%s\x81F%s%s\x81F%s%s",temp_v28,temp_v33,temp_v30,temp_v31);
+          sprintf((char *)temp_v27,"%s\x81F%s%s\x81F%s%s",temp_v28,temp_v33,temp_v30,temp_v31);
           temp_v9 = libc_strlen(temp_v27);
           VectorSignedToFloat((int)**(short **)(temp_v23 + 0xc) - (temp_v9 * 9) / 2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);

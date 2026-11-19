@@ -1,4 +1,5 @@
 /* NON_MATCHING: count/color prologue scheduling, final variadic argument stores and literal string order differ. */
+#include <stdio.h>
 #include "skill/SkillSlotScreen.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
@@ -8,7 +9,6 @@
 
 extern "C" {
 
-void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(u32 unit, s16 id, s32 x, s32 y, u32 layer, u32 a);
@@ -23,7 +23,7 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
     u32 color = 0xffffffff;
 
     if (screen->slots[index] == 0) {
-        textFormatBuffer(text, "\x81\x7c \x81\x7c \x81\x7c");
+        sprintf(text, "\x81\x7c \x81\x7c \x81\x7c");
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
         textDrawString(2, 0xffffffff, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
         return;
@@ -34,7 +34,7 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
     if (index < count - screen->freedCount) {
         color = 0x9fe7ffff;
     }
-    textFormatBuffer(text, "%s", FUN_0014bd84(screen->slots[index]));
+    sprintf(text, "%s", FUN_0014bd84(screen->slots[index]));
     const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
     textDrawString(2, color, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
     const TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1a, 0x177);

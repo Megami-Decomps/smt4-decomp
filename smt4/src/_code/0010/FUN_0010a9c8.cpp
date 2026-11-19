@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010a9c8` (_code @ 0x10a9c8, 0x540 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -16,7 +17,6 @@ int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int gxResetColorQuadToWhite(void);
 int vec2GetXInt(...);
@@ -47,7 +47,6 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
@@ -120,7 +119,7 @@ unsigned int FUN_0010a9c8(void)
     texDrawCompositeSprite(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)(DAT_0043e190 + 0x68);
     dataFindKindRecordWithAocOverrides(temp_v3,0);
-    textFormatBuffer(temp_v9,"%s",temp_v3);
+    sprintf((char *)temp_v9,"%s",temp_v3);
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xc2));
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

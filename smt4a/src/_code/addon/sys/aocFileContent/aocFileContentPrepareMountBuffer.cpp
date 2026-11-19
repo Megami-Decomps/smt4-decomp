@@ -1,4 +1,5 @@
 /* NON_MATCHING: canonical native constructors and result return recovered; output aggregate is copied from the stack instead of constructed in return storage. */
+#include "runtime/Stdio.h"
 #include <stddef.h>
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match8_AocPoll.h"
@@ -19,7 +20,6 @@ extern const char g_aocMountNameFormat[];
 void asdMemFree(void*);
 void* asdMemoryAlloc(u32, u32, u32, u32, u32);
 void rt_memclr(void*, u32);
-s32 textFormatBuffer(char*, const char*, ...);
 u32 legacyResourceIdRemap(const WindowStatusResult *);
 u32 FUN_0042a410(u32*, u32, u32, u32, u32, u32);
 u32 jyoucyuGetTableEntry(u32);
@@ -50,7 +50,7 @@ WindowStatusOperationResult aocFileContentPrepareMountBuffer(void* context, u32 
     asdDebugTrace(g_aocFileContentSourcePath, 190);
     work->buffer = asdMemoryAlloc(0x100, 0x100, 0, work->bufferSize, 1);
     rt_memclr(work->buffer, work->bufferSize);
-    textFormatBuffer(work->mountName, g_aocMountNameFormat, content);
+    __2sprintf(work->mountName, g_aocMountNameFormat, content);
     return output;
 }
 } // extern "C"

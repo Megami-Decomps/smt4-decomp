@@ -1,5 +1,5 @@
-/* NON_MATCHING: prologue scheduling only (240 rows each, every other instruction agrees): retail loads the collision block address and the zero first and copies the map/second/area arguments to r4/r5/r7 after the field stores; ours copies them before. */
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -28,7 +28,6 @@ extern "C" {
 
 extern MapCollisionState g_mapCollision;
 
-void textFormatBuffer(char *destination, const char *format, ...);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 enabled);
 void asdMemFree(void *block);
 void FUN_0025f954(s32 which);
@@ -53,26 +52,26 @@ void FUN_002a2e98(s32 map, u32 area, s32 second, u32 secondArea)
     u8 *file;
     s32 hasSecond = 0;
     if (map == 100) {
-        textFormatBuffer(path, "map/L000/a000.col");
+        sprintf(path, "map/L000/a000.col");
     } else {
         if ((u32)(map - 101) < 99) {
-            textFormatBuffer(path, "map/L%03d/a%03d_%02d.col", map - 100, map - 100, area);
+            sprintf(path, "map/L%03d/a%03d_%02d.col", map - 100, map - 100, area);
         } else {
-            textFormatBuffer(path, "map/m%03d/a%03d_%02d.col", map, map, area);
+            sprintf(path, "map/m%03d/a%03d_%02d.col", map, map, area);
         }
         if (map == 44 || map == 47) {
-            textFormatBuffer(path, "map/m%03d/a%03d_%02d.col", 43, 43, 2);
+            sprintf(path, "map/m%03d/a%03d_%02d.col", 43, 43, 2);
         }
         if (map == 45 || map == 46) {
-            textFormatBuffer(path, "map/m%03d/a%03d_%02d.col", 43, 43, 1);
+            sprintf(path, "map/m%03d/a%03d_%02d.col", 43, 43, 1);
         }
     }
     if (second != 0) {
         hasSecond = 1;
         if ((u32)(second - 101) < 99) {
-            textFormatBuffer(secondPath, "map/L%03d/a%03d_%02d.col", second - 100, second - 100, secondArea);
+            sprintf(secondPath, "map/L%03d/a%03d_%02d.col", second - 100, second - 100, secondArea);
         } else {
-            textFormatBuffer(secondPath, "map/m%03d/a%03d_%02d.col", second, second, secondArea);
+            sprintf(secondPath, "map/m%03d/a%03d_%02d.col", second, second, secondArea);
         }
     }
     file = static_cast<u8 *>(asdLoadFileWithSize(path, &size, 0));

@@ -1,5 +1,6 @@
 /* Twin of Apocalypse's FUN_004b990c. Retail reads the pending jump's group through its own pool word, so the
  * jump request is a global of its own (g_mapSelection, as in Apocalypse), not a member of g_gameState. */
+#include <stdio.h>
 #include "mikado/mikadoMain.h"
 #include "ui/UiControl.h"
 #include "camp/Camp.h"
@@ -208,10 +209,10 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
 
             camera->talkWork = new MikadoTalkWork;
             FUN_00235250(camera->talkWork);
-            textFormatBuffer(path, "mikado/%s", camera->record->image);
+            sprintf(path, "mikado/%s", camera->record->image);
             if ((camera->record->altFlagA != 0 && gameFlagIsSet(camera->record->altFlagA) != 0) ||
                 (camera->record->altFlagB != 0 && gameFlagIsSet(camera->record->altFlagB) != 0)) {
-                textFormatBuffer(altPath, "mikado/%s", camera->record->altImage);
+                sprintf(altPath, "mikado/%s", camera->record->altImage);
                 FUN_00234f5c(camera->talkWork, path, altPath);
             } else {
                 FUN_00234f5c(camera->talkWork, path, NULL);
@@ -224,7 +225,7 @@ void mikadoCampVisitUpdate(MikadoCamera *camera)
 
                 if (names != NULL) {
                     for (s32 i = 0; i < FUN_0022afb0(table33, camera->record->modelSet); i++) {
-                        textFormatBuffer(path, "mikado/%s.bam", names);
+                        sprintf(path, "mikado/%s.bam", names);
                         camera->modelFiles[i] = fileLoadSync(path, &camera->modelFileSizes[i], 1);
                         names += 0x20;
                     }

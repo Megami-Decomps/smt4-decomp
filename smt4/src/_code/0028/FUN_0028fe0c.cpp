@@ -1,4 +1,4 @@
-/* NON_MATCHING: global-pointer load and stack reservation exchange order in the prologue. */
+#include <stdio.h>
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "quest_center/QuestRecord.h"
 #include "addon/aocMain.h"
@@ -7,7 +7,6 @@
 extern "C" {
 void uiBindRecordRewardText(s32 quest, s32 mode, s32 enabled);
 u32 dataSetFindRequestedFileByKey(AocSystem *system, s32 quest);
-void textFormatBuffer(char *output, const char *format, ...);
 u32 asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
 void asdTextDrawFormatted(u32 text, s32 font, s32 mode, s32 x, s32 y, const char *format, ...);
@@ -28,7 +27,7 @@ void FUN_0028fe0c(u16 quest, u32 state)
             menu->panelView.panel.entryOwnership.borrowed = 1;
         } else {
             char path[64];
-            textFormatBuffer(path, "event/quest/quest%03d.mbm", quest);
+            sprintf(path, "event/quest/quest%03d.mbm", quest);
             directory = asdLoadFileSyncDefault(path);
             menu->panelView.panel.entryDirectory = directory;
             menu->panelView.panel.entryOwnership.borrowed = 0;

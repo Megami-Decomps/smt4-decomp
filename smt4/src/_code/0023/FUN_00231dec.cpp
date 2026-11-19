@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00231dec` (_code @ 0x231dec, 0x768 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "gamedata/MapSaveBlock.h"
 #include "romwright_types.h"
 #include "game/GameState.h"
@@ -13,7 +14,6 @@ int lmapSceneGetObj(int);
 int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
 int FUN_00288f78(...);
 int textDrawString(...);
-int textFormatBuffer(unsigned char [128], unsigned char *);
 int gxResetColorQuadToWhite(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
@@ -48,7 +48,6 @@ extern unsigned int curveEvaluateStandard(int, unsigned int);
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_00288f78. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
@@ -124,7 +123,7 @@ void FUN_00231dec(int param_1)
         libc_strcpy(temp_v9,temp_v3);
       }
       else {
-        textFormatBuffer(temp_v15,&LAB_00232470);
+        sprintf((char *)temp_v15,(const char *)&LAB_00232470);
         libc_strcpy(temp_v9,temp_v15);
       }
     }

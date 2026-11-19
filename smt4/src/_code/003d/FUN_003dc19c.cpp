@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail spills battle state and retains path pointers, adding 16 bytes to the stack frame. */
+#include "runtime/Stdio.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match6_ActionController.h"
@@ -8,7 +9,6 @@ extern "C" {
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *destination, u32 size);
 void asdMemFree(void *memory);
-void textFormatBuffer(char *destination, const char *format, ...);
 char *libc_strrchr(char *path, u32 separator);
 u32 keyedRecordFindByName(const char *name);
 void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
@@ -56,7 +56,7 @@ u32 FUN_003dc19c(ActionController *controller)
         char formatted[128];
         memClear(path, sizeof(path));
         memClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_004008c4, effectName);
+        __2sprintf(formatted, DAT_004008c4, effectName);
         libc_strcpy(path, formatted);
         char *separator = libc_strrchr(path, '/');
         libc_strcpy(load->name, separator + 1);

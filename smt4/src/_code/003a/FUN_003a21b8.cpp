@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a21b8` (_code @ 0x3a21b8, 0x680 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_OffsetPosition2D.h"
 
@@ -11,7 +12,6 @@ int FUN_00230d84(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int drawTextAtSnappedRectangle(...);
-int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
@@ -47,7 +47,6 @@ extern unsigned int itemGetNameOrFallback(short, unsigned int);
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int aocItemGetPrice(unsigned int *);
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
-/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
@@ -182,7 +181,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       }
       temp_v0 = *(short *)(temp_v4 + 8);
       temp_v10 = *(short *)(temp_v4 + 10);
-      textFormatBuffer(temp_v13,"%8d",temp_v7);
+      sprintf((char *)temp_v13,"%8d",temp_v7);
       drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v8,temp_v2,temp_v13);
     }
     else {
@@ -222,7 +221,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v0 = *(short *)(temp_v4 + 8);
     temp_v10 = *(short *)(temp_v4 + 10);
-    textFormatBuffer(temp_v13,&LAB_003a2838,temp_v14);
+    sprintf((char *)temp_v13,(const char *)&LAB_003a2838,temp_v14);
     drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v7,temp_v2,temp_v13);
     if (param_3 == 0) {
       temp_v8 = 0x100;

@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f4cc0` (_code @ 0x3f4cc0, 0x544 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
@@ -26,7 +26,6 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -92,13 +91,13 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
               temp_v7 = *(unsigned short *)(temp_v5 + 100);
               goto LAB_003f510c;
             }
-            textFormatBuffer(temp_v13,"%d",0);
+            sprintf((char *)temp_v13,"%d",0);
           }
           else {
             temp_v5 = gameGetPlayerData();
             temp_v7 = *(unsigned short *)(temp_v5 + 0x62);
 LAB_003f510c:
-            textFormatBuffer(temp_v13,"%d",temp_v7);
+            sprintf((char *)temp_v13,"%d",temp_v7);
             if (temp_v7 >= 100) {
               temp_v11 = 0x6f;
               temp_v10 = param_4;
@@ -129,13 +128,13 @@ LAB_003f510c:
             }
             if (temp_v5 != 0) {
               temp_v3 = FUN_00180114(*(unsigned short *)(temp_v5 + 0x62));
-              textFormatBuffer(&temp_v10,"%s",temp_v3);
+              sprintf((char *)&temp_v10,"%s",temp_v3);
             }
           }
           else {
             gameGetPlayerData();
             temp_v3 = gameGetPlayerName();
-            textFormatBuffer(&temp_v10,"%s",temp_v3);
+            sprintf((char *)&temp_v10,"%s",temp_v3);
           }
           temp_v5 = asdTMTexTableEntryAt(0x11);
           fontMeasureLineAdvance(&temp_v10,1);

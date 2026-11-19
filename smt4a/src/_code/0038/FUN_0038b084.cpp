@@ -1,11 +1,10 @@
-/* NON_MATCHING: The room-global literal load is scheduled before the prologue and its work load precedes index initialization. */
+#include <stdio.h>
 #include "npc_room/NpcRoom.h"
 #include "text/TextDraw.h"
 
 extern "C" {
 extern NpcRoomA *g_npcRoom;
 char *libc_strcpy(char *destination, const char *source);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 void FUN_003c1060(void);
 void questCenterShowDisplayMessage(u32 text, u32 parameter);
 
@@ -22,7 +21,7 @@ void FUN_0038b084(void)
         if (occupant != NULL) {
             libc_strcpy(name, npcRoomOccupantName(occupant));
             textExpandGlyphsToBuffer(name, converted, 0);
-            length += textFormatBuffer(message + length, "%s<br>", converted);
+            length += sprintf(message + length, "%s<br>", converted);
         }
     }
     FUN_003c1060();

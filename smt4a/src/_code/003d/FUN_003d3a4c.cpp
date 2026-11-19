@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "code/Code0035.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d3a4c` (_code @ 0x3d3a4c, 0x6a4 bytes) from smt4a.cxi.
@@ -8,7 +9,6 @@
 
 extern "C" {
 
-int textFormatBuffer(unsigned char [84], unsigned char *);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -39,7 +39,6 @@ extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -111,7 +110,7 @@ void FUN_003d3a4c(int param_1,int param_2)
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v6 + 0x44c));
       temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,1099));
       if (temp_v1) {
-        textFormatBuffer(temp_v15,&LAB_003d3efc);
+        sprintf((char *)temp_v15,(const char *)&LAB_003d3efc);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v9 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,

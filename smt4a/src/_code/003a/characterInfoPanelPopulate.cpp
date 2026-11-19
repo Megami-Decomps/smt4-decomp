@@ -1,6 +1,7 @@
 /* NON_MATCHING: equipment-label zero caching, panel register lifetimes, and portrait-release guard/loop layout differ from retail. */
 #include <string.h>
 #include "common.h"
+#include <stdio.h>
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
@@ -56,7 +57,6 @@ const char *dataFindKindRecordWithAocOverrides(u32 equipment, u32 flags);
 const char *dataTable01GetRecordWithAocOverride(u32 demon);
 const char *FUN_0014bf3c(u32 demon, u32 flags);
 void FUN_001a90f0(char *destination, const char *source);
-void textFormatBuffer(char *destination, const char *format, ...);
 f32 fontMeasureTextWidth(const char *text, u32 font, f32 spacing);
 void statusBustUpPortraitRelease(s32 id, u32 kind);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
@@ -132,7 +132,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
             asdTextFormatStream(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 1, 0.0f);
         } else {
-            textFormatBuffer(buffer, "\x81\x7c\x81\x7c\x81\x7c");
+            sprintf(buffer, "\x81\x7c\x81\x7c\x81\x7c");
             asdTextFormatStream(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)fontMeasureTextWidth(buffer, 2, 0.0f);
         }

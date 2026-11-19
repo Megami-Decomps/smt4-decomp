@@ -1,9 +1,9 @@
+#include "runtime/Stdio.h"
 #include "camp/ScriptPanelResources.h"
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
-void textFormatBuffer(char *output, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **output, s32 mode);
 extern const char DAT_005328e4[];
@@ -31,8 +31,8 @@ void mikadoLoadSceneResources(CampScriptPanelResources *work)
     asdTMTexLoadMainHeap(24, work->textureNode);
     char scriptPath[32];
     char messagePath[32];
-    textFormatBuffer(scriptPath, DAT_005328e4, work->mikado.sceneId, work->mikado.sceneId);
-    textFormatBuffer(messagePath, DAT_005328cc, work->mikado.sceneId, work->mikado.sceneId);
+    __2sprintf(scriptPath, DAT_005328e4, work->mikado.sceneId, work->mikado.sceneId);
+    __2sprintf(messagePath, DAT_005328cc, work->mikado.sceneId, work->mikado.sceneId);
     asdLoadFileAsyncSimple(scriptPath, &work->scriptFileA, 0);
     asdLoadFileAsyncSimple(messagePath, &work->messageFileA, 0);
     work->scriptFileB = asdLoadFileSyncDefault(DAT_005328b4);

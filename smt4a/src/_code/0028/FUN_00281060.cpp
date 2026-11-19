@@ -1,5 +1,6 @@
 /* NON_MATCHING: the glyph table is now the retail data symbol (DAT_0053d3e8, copied to the stack with vldm/vstm); the frame is 8 bytes larger than retail's 36 and the length return/loop scheduling differ. */
 #include "common.h"
+#include "runtime/Stdio.h"
 
 /* The Shift-JIS full-width glyphs for 0-9, the ideographic space and a terminator. */
 struct DigitTable {
@@ -14,7 +15,6 @@ extern const DigitTable DAT_0053d3e8;
 extern const char DAT_0053d400[];
 extern const char DAT_0053d404[];
 extern const char DAT_0053d40c[];
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 
 // Write Shift-JIS full-width digits without a terminator; negative width measures the value.
 s32 FUN_00281060(char *destination, u32 value, s32 width, s32 zeroPad)
@@ -23,7 +23,7 @@ s32 FUN_00281060(char *destination, u32 value, s32 width, s32 zeroPad)
     DigitTable digits = DAT_0053d3e8;
     s32 length = 0;
     if (width < 0 && zeroPad == 0) {
-        textFormatBuffer(buffer, DAT_0053d400, value);
+        __2sprintf(buffer, DAT_0053d400, value);
         width = 0;
         if (buffer[0] == '\0') {
             return length;
@@ -40,9 +40,9 @@ s32 FUN_00281060(char *destination, u32 value, s32 width, s32 zeroPad)
         width = 10;
     }
     if (zeroPad != 0) {
-        textFormatBuffer(buffer, DAT_0053d404, value);
+        __2sprintf(buffer, DAT_0053d404, value);
     } else {
-        textFormatBuffer(buffer, DAT_0053d40c, value);
+        __2sprintf(buffer, DAT_0053d40c, value);
     }
     if (width > 0) {
         const s8 *character = reinterpret_cast<const s8 *>(buffer + (10 - width));

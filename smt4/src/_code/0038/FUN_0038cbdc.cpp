@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038cbdc` (_code @ 0x38cbdc, 0x40c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
@@ -11,7 +12,6 @@ int recordClearWideHandle(...);
 int archiveFileReplaceHandle(int *, int, int);
 int stringFormatUnbounded(...);
 int legacyResourceIdRemap(...);
-int textFormatBuffer(...);
 int FUN_00352e6c(...);
 int FUN_00352f9c(int *, unsigned char [1024], int);
 int FUN_003531dc(...);
@@ -51,7 +51,6 @@ extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: archiveFileReplaceHandle. */
 /* Supplied declaration required: stringFormatUnbounded. */
 /* Supplied declaration required: legacyResourceIdRemap. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00352e6c. */
 /* Supplied declaration required: FUN_00352f9c. */
 /* Supplied declaration required: FUN_003531dc. */
@@ -203,9 +202,9 @@ int * FUN_0038cbdc(int param_1)
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
     FUN_0038b174(temp_v0);
-    textFormatBuffer(temp_v8,&LAB_0038d040);
-    textFormatBuffer(temp_v9,&LAB_0038cfec);
-    textFormatBuffer(temp_v10,&LAB_0038d04c);
+    sprintf((char *)temp_v8,(const char *)&LAB_0038d040);
+    sprintf((char *)temp_v9,(const char *)&LAB_0038cfec);
+    sprintf((char *)temp_v10,(const char *)&LAB_0038d04c);
     temp_v16 = temp_v8;
     while( 1 ) {
       FUN_00352e6c(&temp_v11,*(unsigned int *)(temp_v0 + 0x5a8),*(unsigned int *)(temp_v0 + 0x684),0x40,

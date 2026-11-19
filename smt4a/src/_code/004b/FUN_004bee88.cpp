@@ -1,5 +1,6 @@
 /* NON_MATCHING: register assignment differs (retail keeps y in r6 and the unit in r5; built swaps them) and the notice text buffer frame is 8 bytes larger (200 vs 185 rows); the partner screen drawing is the same. */
 #include "common.h"
+#include <stdio.h>
 #include "camp/RenderCtxA.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -26,7 +27,6 @@ PartnerUnitView *partyGetSlot(u16 index);
 void FUN_004bde34(PartnerScreenView *screen, PartnerUnitView *unit, s32 index, s32 x, s32 y, f32 scale);
 void uiDrawSelectedSpriteIndicator(PartnerScreenView *screen, s32 x, s32 y, f32 scale);
 void efctSetSpeed(f32 speed);
-void textFormatBuffer(void *buffer, const char *format);
 s32 fontMeasureLineAdvance(void *text, u32 kind);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -59,7 +59,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
         TextureTableEntryIV *notice = asdTMTexTableEntryAt(0x11, 0xC4);
         u8 text[76];
 
-        textFormatBuffer(text,
+        sprintf((char *)text,
                          "\202\170\202\217\202\225\201\100\202\204\202\217\201\100\202\216\202\217\202\224\201\100\202\210"
                          "\202\201\202\226\202\205\201\100\202\201\202\216\202\231\201\100\202\220\202\201\202\222\202\224"
                          "\202\216\202\205\202\222\202\223\201\104");

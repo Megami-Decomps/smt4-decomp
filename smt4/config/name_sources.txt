@@ -5000,3 +5000,4 @@
 001f6098 fusionComparePairScoreAscending inferred qsort comparator FUN_00196d78 selects: orders fusion pairs by component score, ascending
 00273fc0 lmapUpdateSceneModels inferred per-frame update of the local map scene's player, marker and stage models (motion frames, poses, visibility)
 001978b4 campDrawCommandMenu inferred draws the camp command menu from CampComTable (command sprites, grid, texture draws)
+002be624 __2sprintf evidence armlib sprintf entry (armcc 4.1 calls sprintf as __2sprintf): retail callers keep the prologue armcc gives a sprintf call under <stdio.h> (R_ARM_NONE _printf_* feature refs on the first instruction), FUN_0022d9c8 IDENTICAL as sprintf; 0x28-byte Thumb armlib body (_printf_char_common with the _sputc writer, then the NUL)

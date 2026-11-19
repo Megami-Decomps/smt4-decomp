@@ -8,7 +8,7 @@ s32 FUN_002c683e(const char *format, u8 **cursor, va_list arguments, ByteWriter 
 void libcFormatAppendByte(u8 value, u8 **cursor);
 
 /* Formats a string and appends its terminating zero byte. */
-s32 textFormatBuffer(u8 *buffer, const char *format, ...)
+s32 __2sprintf(u8 *buffer, const char *format, ...)
 {
     va_list arguments;
     va_start(arguments, format);

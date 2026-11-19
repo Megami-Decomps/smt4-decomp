@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ca09c` (_code @ 0x2ca09c, 0x608 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "game/GameState.h"
@@ -10,7 +11,6 @@ extern "C" {
 int FUN_0025b670(unsigned int);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
@@ -36,7 +36,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0025b670. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -106,7 +105,7 @@ unsigned int FUN_002ca09c(void)
           } while (temp_v9 < 0x10b);
           temp_v3 = g_gameState.recordId;
           FUN_0025b670(g_gameState.recordId);
-          textFormatBuffer(temp_v13,"%s",temp_v3);
+          sprintf((char *)temp_v13,"%s",temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(3,0xffffffff,temp_v13);
@@ -156,7 +155,7 @@ unsigned int FUN_002ca09c(void)
             }
             temp_v7 = (int)*(short *)(temp_v9 + 0x49fd8c);
             dataFindKindRecordWithAocOverrides(temp_v7,0);
-            textFormatBuffer(temp_v13,"%s",temp_v7);
+            sprintf((char *)temp_v13,"%s",temp_v7);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10),
                                 (unsigned char)(in_fpscr >> 0x16) & 3);

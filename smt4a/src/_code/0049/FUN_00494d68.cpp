@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00494d68` (_code @ 0x494d68, 0x750 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int layoutFindTableEntry(...);
@@ -33,7 +33,6 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: layoutFindTableEntry. */
@@ -281,12 +280,12 @@ LAB_00495274:
     }
     temp_v1 = *(short *)(temp_v4 + 8);
     temp_v14 = *(short *)(temp_v4 + 10) + temp_v3;
-    textFormatBuffer(temp_v13,"%8d",temp_v5);
+    sprintf((char *)temp_v13,"%8d",temp_v5);
     if ((*(int *)(param_1 + 0xb40) == 8) &&
        (((temp_v4 = FUN_00498408(param_1,temp_v12), temp_v4 != 0 &&
          (temp_v4 = FUN_001ba3d0(temp_v12), temp_v4 < 2)) || (temp_v4 = FUN_0047fe44(temp_v12), temp_v4 != 0))))
     {
-      textFormatBuffer(temp_v13,"     ---");
+      sprintf((char *)temp_v13,"     ---");
     }
     drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v1 + temp_v11,temp_v14,0,7,temp_v6,temp_v9,temp_v13);
   }
@@ -301,7 +300,7 @@ LAB_00495274:
   }
   temp_v1 = *(short *)(temp_v4 + 8);
   temp_v2 = *(short *)(temp_v4 + 10);
-  textFormatBuffer(temp_v13,"%2d",temp_v5);
+  sprintf((char *)temp_v13,"%2d",temp_v5);
   drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v11 + temp_v1,temp_v2 + temp_v3,0,7,temp_v6,temp_v9,temp_v13);
   return;
 }

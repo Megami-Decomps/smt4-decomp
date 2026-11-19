@@ -1,5 +1,6 @@
 /* NON_MATCHING: live entry-ID reloads restore retail stat/helper argument handling; cursor/row spills occupy a larger frame and empty-slot coordinate/pool scheduling still differ. */
 #include "common.h"
+#include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "util/BitsAndBytes_VariantB.h"
@@ -33,7 +34,6 @@ s32 resourceRunOperationIfUnblocked(u32 *cursor);
 void efctSetSpeed(f32 speed);
 void largeGridDrawButtonStrip(SlotListScreen *screen, s32 x, s32 y, s32 row, f32 scale);
 s32 recordGetModeForId(s32 id);
-void textFormatBuffer(char *output, const char *format, ...);
 void FUN_00185e84(s32 id, s32 x, s32 y, s32 style, s32 a, s32 b);
 s32 recordContainsPairedId(u32 argument, u16 id);
 void partyRecordSetEquippedItemClampRank(u32 argument, u16 id, s32 value);
@@ -76,7 +76,7 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     } else if (mode == 1 || mode == 2 || mode == 6) {
         color = 0xf5ff9fff;
     }
-    textFormatBuffer(text, "%s", FUN_0014bd84(screen->entryIds[entry]));
+    sprintf(text, "%s", FUN_0014bd84(screen->entryIds[entry]));
     SlotIconPosition *nameBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a2));
     textDrawString(3, color, text, (f32)(frame->x + nameBox->x + x), (f32)(frame->y + nameBox->y + y), 0.0f, 0.0f, scale);
     SlotIconPosition *statBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a1));

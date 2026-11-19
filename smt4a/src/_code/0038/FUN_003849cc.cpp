@@ -1,4 +1,5 @@
 /* NON_MATCHING: flag-block/name-table saved registers and incoming level/selector load scheduling differ; branch layout matches. */
+#include <stdio.h>
 #include "gamedata/MapSaveBlockA.h"
 
 extern "C" {
@@ -6,7 +7,6 @@ void FUN_0032725c(u32 index, char *output, s32 level);
 const char *nameTableFind(s32 kind, s32 index);
 const char *dataTableEntryNameById(s32 id, s32 kind);
 void libc_strcpy(char *destination, const char *source);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 
 /* Writes the display name of entry `index` of name table `kind` into `buffer`. Kinds 0x18 and 1001+ use the field names
  * (Shift-JIS, full width); indexes of 100 and up are looked up through FUN_0032725c. */
@@ -47,7 +47,7 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
     char reading[0x3C];
     if (mode == 2) {
         if (kind == 1000) {
-            textFormatBuffer(buffer, "\201H\201H\201H");
+            sprintf(buffer, "\201H\201H\201H");
             return;
         }
         if (kind > 1000) {
@@ -55,7 +55,7 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
                 FUN_0032725c(index - 100, buffer, level);
                 return;
             }
-            textFormatBuffer(buffer, sites[kind - 1000]);
+            sprintf(buffer, sites[kind - 1000]);
             return;
         }
         if (kind == 0x18) {
@@ -63,14 +63,14 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
                 FUN_0032725c(index - 100, buffer, level);
                 return;
             }
-            textFormatBuffer(buffer, places[index]);
+            sprintf(buffer, places[index]);
             return;
         }
         if (kind == 0x65) {
             libc_strcpy(name, dataTableEntryNameById(kind, index));
-            textFormatBuffer(buffer, "%s", name);
+            sprintf(buffer, "%s", name);
             libc_strcpy(reading, nameTableFind(kind, index));
-            textFormatBuffer(buffer, "%s\201@%s", name, reading);
+            sprintf(buffer, "%s\201@%s", name, reading);
             return;
         }
     } else {
@@ -90,7 +90,7 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
                 return;
             }
             if (current != 0) {
-                textFormatBuffer(buffer, places[current]);
+                sprintf(buffer, places[current]);
                 return;
             }
         }
@@ -101,20 +101,20 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
                     FUN_0032725c(index - 100, buffer, -1);
                     return;
                 }
-                textFormatBuffer(buffer, sites[site]);
+                sprintf(buffer, sites[site]);
                 return;
             }
-            textFormatBuffer(buffer, "\202c\202\217\202\215\202\201\202\211\202\216");
+            sprintf(buffer, "\202c\202\217\202\215\202\201\202\211\202\216");
             return;
         }
     }
     if (kind == 0xcb || (kind != 0x65 && kind >= 0x66)) {
         libc_strcpy(name, dataTableEntryNameById(kind, index));
-        textFormatBuffer(buffer, "%s", name);
+        sprintf(buffer, "%s", name);
         return;
     }
     libc_strcpy(name, dataTableEntryNameById(kind, index));
     libc_strcpy(reading, nameTableFind(kind, index));
-    textFormatBuffer(buffer, "%s\201@%s", name, reading);
+    sprintf(buffer, "%s\201@%s", name, reading);
 }
 }

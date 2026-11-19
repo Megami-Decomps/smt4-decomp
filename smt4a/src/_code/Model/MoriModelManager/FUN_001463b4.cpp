@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the constant materialisation and store order of the shader setup block differ (all statement orders tried). */
+#include "runtime/Stdio.h"
 #include "classes/Obj557c48.h"
 #include "classes/Obj557c28.h"
 #include "classes/Obj557b28.h"
@@ -22,7 +23,6 @@ extern "C" {
 extern const char DAT_00526088[];
 extern const char DAT_00526098[];
 void rt_aeabi_memclr(void *buffer, u32 bytes);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 u32 asdLoadFileSyncNoContext(const char *path, u32 *size, u32 mode, u32 flags);
 Obj557d00 *FUN_001581dc(void *setup);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
@@ -37,7 +37,7 @@ void FUN_001463b4(Obj557c48 *manager)
     {
         char path[64];
         rt_aeabi_memclr(path, sizeof(path));
-        textFormatBuffer(path, DAT_00526088);
+        __2sprintf(path, DAT_00526088);
         setup.handle = asdLoadFileSyncNoContext(path, NULL, 1, 0x80);
         setup.mode = 0;
         setup.second = 0x10000;

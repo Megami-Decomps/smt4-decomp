@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046a34c` (_code @ 0x46a34c, 0x4c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int asdOperatorNew(int, int);
 int asdMemoryAllocTraced(int, unsigned char *, int);
 int titleRestartSlotState3(...);
@@ -39,7 +39,6 @@ extern unsigned char LAB_0046a818; /* 0x46a818 */
 extern unsigned char LAB_0046a840; /* 0x46a840 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: textFormatBuffer. */
 extern int _ZN10FloatStateC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
@@ -126,7 +125,7 @@ LAB_0046a3b0:
   temp_v7[0xf] = '\0';
   if (0 < *(int *)(param_1 + 0xabc)) {
     do {
-      textFormatBuffer(temp_v8,&LAB_0046a704,
+      sprintf((char *)temp_v8,(const char *)&LAB_0046a704,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v0 = 0x20;
       asdMemoryAllocTraced(0x20,&LAB_0046a714,0x245);
@@ -144,7 +143,7 @@ LAB_0046a3b0:
       modelPlayClip(temp_v1,0);
       *(int *)(temp_v1 + 0x1fc) = (int)temp_v5;
       handleRegistryRegisterObject(g_handleRegistry,temp_v1);
-      textFormatBuffer(temp_v8,&LAB_0046a74c,
+      sprintf((char *)temp_v8,(const char *)&LAB_0046a74c,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v1 = 0x20;
       asdMemoryAllocTraced(0x20,&LAB_0046a714,0x25a);
@@ -164,7 +163,7 @@ LAB_0046a3b0:
   }
   *(unsigned int *)(param_1 + 0xa5c) = 0x41f00000;
   if (*(char *)(param_1 + 0x1a) == '\x02') {
-    textFormatBuffer(temp_v8,&LAB_0046a768,
+    sprintf((char *)temp_v8,(const char *)&LAB_0046a768,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     temp_v4 = 0x20;
     asdMemoryAllocTraced(0x20,&LAB_0046a714,0x27e);
@@ -180,7 +179,7 @@ LAB_0046a3b0:
     temp_v2 = *(unsigned int *)(*piVar6 + 4);
     handleRegistryRegisterObject(g_handleRegistry,temp_v2);
     modelPlayClip(temp_v2,0,1);
-    textFormatBuffer(temp_v8,&LAB_0046a774,
+    sprintf((char *)temp_v8,(const char *)&LAB_0046a774,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     temp_v2 = g_handleRegistry;
     resourceOwnerLoadNamed(g_handleRegistry,temp_v8);
@@ -203,17 +202,17 @@ LAB_0046a3b0:
                *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),0);
   linkSlotSetFlag1C(*(unsigned int *)(param_1 + 0xcdc),0);
   if (*(char *)(param_1 + 0x10) != '\x0e') {
-    textFormatBuffer(temp_v7 + 0x10,&LAB_0046a77c);
-    textFormatBuffer(temp_v6,&LAB_0046a7a0,(int)*(char *)(param_1 + 0x10));
+    sprintf(temp_v7 + 0x10,(const char *)&LAB_0046a77c);
+    sprintf((char *)temp_v6,(const char *)&LAB_0046a7a0,(int)*(char *)(param_1 + 0x10));
   }
   else {
-    textFormatBuffer(temp_v7 + 0x10,&LAB_0046a77c);
+    sprintf(temp_v7 + 0x10,(const char *)&LAB_0046a77c);
     temp_v4 = gameFlagIsSet(0x103);
     if (temp_v4 != 0) {
-      textFormatBuffer(temp_v6,&LAB_0046a818,(int)*(char *)(param_1 + 0x10));
+      sprintf((char *)temp_v6,(const char *)&LAB_0046a818,(int)*(char *)(param_1 + 0x10));
     }
     else {
-      textFormatBuffer(temp_v6,&LAB_0046a840,(int)*(char *)(param_1 + 0x10));
+      sprintf((char *)temp_v6,(const char *)&LAB_0046a840,(int)*(char *)(param_1 + 0x10));
     }
   }
   asdLoadFileAsyncSimple(temp_v7 + 0x10,param_1 + 0x290,0);

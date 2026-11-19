@@ -1,4 +1,5 @@
 /* NON_MATCHING: the category branch layout now matches (the 9-sprite arm is out of line); retail reaches the show flags through a second base at +0xB00, reloads the category from the object and keeps fewer saved registers (no fp). */
+#include "runtime/Stdio.h"
 #include "shop/shopMain.h"
 #include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -7,7 +8,6 @@ extern "C" {
 s32 FUN_0031d174(const void *selection);
 void FUN_0049339c(void *group, u32 sprite, s32 x, s32 y, s32 depth);
 void FUN_0049368c(void *group, u32 sprite, s32 x, s32 y, s32 depth, s32 enabled);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void drawTextAtRelativePosition(void *group, u32 font, s32 x, s32 y, s32 mode,
     s32 alignment, u32 color, s32 depth, const char *text);
 extern const char DAT_0053617c[];
@@ -59,7 +59,7 @@ void FUN_004957b4(ShopWork *base)
     if (work->quantity == work->maximum)
         color = 0x57D8FFFF;
     char text[32];
-    textFormatBuffer(text, DAT_0053617c, quantity);
+    __2sprintf(text, DAT_0053617c, quantity);
     drawTextAtRelativePosition(work->sprites, 0, labelX + x, labelY + y, 0, 7, color, depth, text);
 }
 }

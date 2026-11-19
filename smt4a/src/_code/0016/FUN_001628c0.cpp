@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail clears a third unused scratch buffer; bounded slot lookup and float-pair copies also schedule differently. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include <stddef.h>
 
 namespace {
@@ -34,7 +35,6 @@ extern VoiceFileRequests DAT_0061978c;
 extern const char DAT_0053629c[]; // "snd/voice/"
 extern const char DAT_00536288[]; // "%s.bcwav"
 void rt_aeabi_memclr(void *data, u32 size);
-void textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcat(char *output, const char *input);
 char *libc_strcpy(char *output, const char *input);
 void *jyoucyuGetTableEntry(u32 id);
@@ -73,9 +73,9 @@ extern "C" u32 FUN_001628c0(const char *name, u32 volume, u8 category, u8 option
     if (jyoucyuGetTableEntry(1) != NULL || FUN_00162ea4() != 0 ||
         DAT_0061978c.disabled != 0 || volume == 0)
         return ~0u;
-    textFormatBuffer(basename, DAT_0053629c);
+    __2sprintf(basename, DAT_0053629c);
     libc_strcat(basename, name);
-    textFormatBuffer(path, DAT_00536288, basename);
+    __2sprintf(path, DAT_00536288, basename);
     asdSoundGetObjectCount();
     s32 index = findFreeVoiceFileSlot();
     if (index == -1)

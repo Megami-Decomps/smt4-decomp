@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e7a8c` (_code @ 0x2e7a8c, 0x1830 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int gxSubmitDrawZeroExtraParams(...);
 int renderCtxResetColorScale(...);
 int renderCtxSelectTexture(...);
@@ -50,7 +50,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxSubmitDrawZeroExtraParams. */
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -596,11 +595,11 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       texDrawTableEntryAtStoredOrigin(2,0x11,0x28,temp_v7,temp_v8,0x9c);
       drawSetColorFromRGBA8(0x9fddddff);
       temp_v11 = gameGetSlotTable();
-      textFormatBuffer(temp_v22,&LAB_002e87dc,*(unsigned char *)(temp_v11 + 0x1ca3));
+      sprintf((char *)temp_v22,(const char *)&LAB_002e87dc,*(unsigned char *)(temp_v11 + 0x1ca3));
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x11,0x2a));
       FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,0,2,0x9c,
                    temp_v22);
-      textFormatBuffer(temp_v22,&LAB_002e87dc,*(unsigned int *)(temp_v2 + 0x28));
+      sprintf((char *)temp_v22,(const char *)&LAB_002e87dc,*(unsigned int *)(temp_v2 + 0x28));
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x11,0x2c));
       FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,1,2,0x9c,
                    temp_v22);

@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c553c` (_code @ 0x2c553c, 0x86c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int asdMemoryAllocTraced(...);
 void FUN_0035d1e0(float x, float z, float heading);
 int controllerSetPosition(...);
@@ -52,7 +52,6 @@ extern int DAT_006105d8; /* 0x6105d8 */
 extern int DAT_006105e0; /* 0x6105e0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 extern int lmapGetSpawnIndex(void);
 extern unsigned int FUN_003857c8(int);
@@ -200,7 +199,7 @@ void FUN_002c553c(void)
   temp_v7 = lmapGetSpawnIndex();
   if (temp_v7 >= 100) {
     temp_v6 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
-    textFormatBuffer(temp_v12,"map/tokyo/a%02d_07.bam",temp_v6);
+    sprintf((char *)temp_v12,"map/tokyo/a%02d_07.bam",temp_v6);
     temp_v9 = 0x20;
     asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x862);
     temp_v7 = 0;
@@ -225,7 +224,7 @@ void FUN_002c553c(void)
     temp_v6 = *(unsigned int *)(DAT_006105d8 + 4);
     modelPlayClip(temp_v6,0,2);
     handleRegistryRegisterObject(g_handleRegistry,temp_v6);
-    textFormatBuffer(temp_v12,"map/obj/obj_25.bam");
+    sprintf((char *)temp_v12,"map/obj/obj_25.bam");
     temp_v9 = 0x20;
     asdMemoryAllocTraced(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x878);
     temp_v7 = 0;
@@ -251,14 +250,14 @@ void FUN_002c553c(void)
     if (0 < (&DAT_0060ffa4)[temp_v7]) {
       temp_v9 = lmapGetSpawnIndex();
       if (temp_v9 != 0) {
-        textFormatBuffer(temp_v12,"map/mr01/mr01_%02d.bam",temp_v7 + 1);
+        sprintf((char *)temp_v12,"map/mr01/mr01_%02d.bam",temp_v7 + 1);
         if (temp_v9 >= 100) {
           temp_v6 = FUN_003857c8((int)*(float *)(temp_v15 + 0x1c4));
-          textFormatBuffer(temp_v12,"map/tokyo/a%02d_%02d.bam",temp_v6,temp_v7 + 1);
+          sprintf((char *)temp_v12,"map/tokyo/a%02d_%02d.bam",temp_v6,temp_v7 + 1);
         }
       }
       else {
-        textFormatBuffer(temp_v12,"map/mr01/mr01_%02d.bam",temp_v7 + 1);
+        sprintf((char *)temp_v12,"map/mr01/mr01_%02d.bam",temp_v7 + 1);
       }
       if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 3)) {
         if (temp_v7 != 4) {

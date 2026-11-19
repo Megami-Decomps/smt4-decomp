@@ -1,4 +1,5 @@
 /* NON_MATCHING: The first argument-save move and accessory vector component loads/conversions/stores differ in order. */
+#include <stdio.h>
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlMain.h"
@@ -23,23 +24,22 @@ extern void *g_mapAccessoryTable;
 s32 FUN_002402c4(BtlMainState *state, const char *path);
 void FUN_002a09b4(const char *path, u32 mode);
 void *dataTableFileGetTable(void *file, u32 section);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 
 void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
 {
     char path[64];
     stage->key0 = area;
     stage->key1 = variant;
-    textFormatBuffer(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, area, variant);
+    sprintf(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, area, variant);
     if (!FUN_002402c4(btlGetMainState(), path)) {
-        textFormatBuffer(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, 1, 1);
+        sprintf(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, 1, 1);
         stage->key0 = 1;
         stage->key1 = 1;
     }
     FUN_002a09b4(path, 0);
-    textFormatBuffer(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, area, variant);
+    sprintf(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, area, variant);
     if (!FUN_002402c4(btlGetMainState(), path)) {
-        textFormatBuffer(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, 1, 1);
+        sprintf(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, 1, 1);
         stage->key0 = 1;
         stage->key1 = 1;
     }
@@ -58,7 +58,7 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
         return;
     for (s32 index = 0; index < 2; ++index) {
         if (record->parts[index].name[0] != '0') {
-            textFormatBuffer(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, record->parts[index].name);
+            sprintf(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, record->parts[index].name);
             stage->scene.nodes[index + 1] = reinterpret_cast<BattleStageNode *>(asdMdlManagerCreateSecondList(path, options));
             NodeVec3 offset = { (f32)record->parts[index].position[0], (f32)record->parts[index].position[1], (f32)record->parts[index].position[2] };
             stage->scene.offsets[index + 1] = offset;

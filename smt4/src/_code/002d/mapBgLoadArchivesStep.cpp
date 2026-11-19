@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "map/mapBg.h"
 #include "map/mapDepart.h"
 #include "event/3dEvent/3dEventEffect.h"
@@ -19,7 +20,7 @@ u32 mapBgLoadArchivesStep()
         if (g_mapDepartWork->skyId <= 0) {
             g_mapDepartWork->state = 10;
         } else {
-            textFormatBuffer(path, "map/sky/sky_%02d.bam", g_mapDepartWork->skyId);
+            sprintf(path, "map/sky/sky_%02d.bam", g_mapDepartWork->skyId);
             asdLoadFileAsyncNoCallback(path, &g_mapDepartWork->dataB, 3, 0x80);
             ++g_mapDepartWork->state;
         }
@@ -31,7 +32,7 @@ u32 mapBgLoadArchivesStep()
         }
         break;
     case 10:
-        textFormatBuffer(path, "map/m%03d/m%03d_%02d.bam", g_mapDepartWork->loadMapId, g_mapDepartWork->loadMapId, g_mapDepartWork->loadAreaId);
+        sprintf(path, "map/m%03d/m%03d_%02d.bam", g_mapDepartWork->loadMapId, g_mapDepartWork->loadMapId, g_mapDepartWork->loadAreaId);
         asdLoadFileAsyncNoCallback(path, &g_mapDepartWork->dataA, 3, 0x80);
         ++g_mapDepartWork->state;
         break;

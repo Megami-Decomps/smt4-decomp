@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail keeps &g_renderCtx in r9, x in r6 and the record in r7 (x/record swapped here) and the icon in r8 instead of a stack slot */
 #include "common.h"
+#include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -20,7 +21,6 @@ f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 s16 dataTable10FindValue(u16 id);
 u32 FUN_00180114(void);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void uiDrawItemOrStatusIcon(s32 icon, s32 x, s32 y, s32 index, s32 flags);
 void drawSetColorFromRGBA8(u32 rgba);
 void FUN_00180310(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
@@ -49,7 +49,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     efctSetSpeed(speed);
     icon = dataTable10FindValue(record->iconId);
     count = record->count;
-    textFormatBuffer(name, "%s", FUN_00180114());
+    sprintf(name, "%s", FUN_00180114());
     parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, depth);
     frameId = 0xbba;
     if (slot == 0) {
@@ -72,7 +72,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
         digits = 3;
         digitsId = slot * 3 + 0xbee;
     }
-    textFormatBuffer(countText, "%d", count);
+    sprintf(countText, "%d", count);
     placement = asdTMTexTableEntryAt(20, digitsId);
     frameX += placement->x;
     frameY = placement->y + y;

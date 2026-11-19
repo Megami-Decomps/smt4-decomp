@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00225ddc` (_code @ 0x225ddc, 0x75c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
@@ -17,7 +18,6 @@ int FUN_004731d8(void);
 int mapRestoreSavedDestination(...);
 int scriptHolderFree2(...);
 
-int textFormatBuffer(...);
 int sysPlaySe(int);
 int messageSetScriptDisplayMode(void);
 int buttonHelpBeginExit(int);
@@ -65,7 +65,6 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
@@ -156,8 +155,8 @@ unsigned int FUN_00225ddc(void)
       temp_v2 = DAT_005e1f70;
       puVar2[5] = DAT_005e1f70;
       puVar2[6] = DAT_005e1f74;
-      textFormatBuffer(temp_v6,"event/e%03d/e%03d.bf",temp_v2,temp_v2);
-      textFormatBuffer(temp_v7,"event/e%03d/e%03d.mbm",puVar2[5],puVar2[5]);
+      sprintf((char *)temp_v6,"event/e%03d/e%03d.bf",temp_v2,temp_v2);
+      sprintf((char *)temp_v7,"event/e%03d/e%03d.mbm",puVar2[5],puVar2[5]);
       temp_v3 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: ARMCC keeps the positive-color cases inline instead of retail's out-of-line tails, changing branch hints and pool layout. */
+#include <stdio.h>
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -6,7 +7,6 @@ extern "C" {
 s32 FUN_004bd098(void *owner, u32 stat);
 s32 FUN_0035e458(u32 stat);
 s32 FUN_0035d89c(u32 stat);
-void textFormatBuffer(char *destination, const char *format, ...);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
 void gxResetColorQuadToWhite(void);
@@ -30,16 +30,16 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
         char text[64];
         u32 color;
         if (minimum >= value) {
-            textFormatBuffer(text, "-");
+            sprintf(text, "-");
             color = 0xFF00FFFF;
         } else if (value < 0) {
-            textFormatBuffer(text, "-");
+            sprintf(text, "-");
             color = 0xDC0F14FF;
         } else if (value >= maximum) {
-            textFormatBuffer(text, "+");
+            sprintf(text, "+");
             color = 0xFBEB39FF;
         } else {
-            textFormatBuffer(text, "+");
+            sprintf(text, "+");
             color = 0x72E027FF;
         }
         drawSetColorFromRGBA8(color);

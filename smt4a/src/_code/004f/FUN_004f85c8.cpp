@@ -1,4 +1,5 @@
 /* NON_MATCHING: scratch buffer layout and inlined request helper address/register scheduling differ; no unused scratch padding is added. */
+#include "runtime/Stdio.h"
 #include "gamedata/PendingResourceRecords.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
@@ -8,7 +9,6 @@ extern "C" {
 extern const char DAT_00528420[3][0x20];
 extern const char DAT_005284c0[];
 void sysMemClear(void *memory, u32 size);
-void textFormatBuffer(char *destination, const char *format, ...);
 char *libc_strcpy(char *destination, const char *source);
 char *libc_strrchr(const char *string, s32 character);
 }
@@ -26,7 +26,7 @@ inline void requestAssistEffect(PendingResourceRecord *record, const char *stem,
     record->flags = 0;
     sysMemClear(path, sizeof(path));
     sysMemClear(formatted, sizeof(formatted));
-    textFormatBuffer(formatted, DAT_005284c0, stem);
+    __2sprintf(formatted, DAT_005284c0, stem);
     libc_strcpy(path, formatted);
     libc_strcpy(record->name, libc_strrchr(path, '/') + 1);
     if (findRecordByKey(record->name) == 0xFF) {

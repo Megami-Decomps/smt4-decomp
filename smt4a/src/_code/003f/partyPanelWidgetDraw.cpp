@@ -77,7 +77,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
     if (widget->slot == -1) {
         PlayerDataA *player = gameGetPlayerData();
 
-        textFormatBuffer(name, "%s", gameGetPlayerName());
+        __2sprintf(name, "%s", gameGetPlayerName());
         id = -1;
         level = player->level;
         hp = player->hp;
@@ -94,7 +94,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
             unit = gameGetSlotRecord(widget->slot);
         }
         if (unit != NULL) {
-            textFormatBuffer(name, "%s", FUN_00180114(unit->id));
+            __2sprintf(name, "%s", FUN_00180114(unit->id));
             id = (s16)unit->id;
             level = unit->level;
             hp = unit->hp;
@@ -175,7 +175,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
                 drawSetColorFromRGBA8(0x292929ff);
                 efctSetSpeed(alpha);
                 char number[76];
-                textFormatBuffer(number, "%d", level);
+                __2sprintf(number, "%d", level);
                 if (level > 99) {
                     TextureTableEntryIV *slot = asdTMTexTableEntryAt(PANEL_SPRITES, 0x80);
                     FUN_00180310(1, slot->x + x, slot->y + y, 1, 3, PANEL_TOP_LAYER, number);
@@ -231,9 +231,9 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
             efctSetSpeed(alpha);
             char number[76];
             if (hp > 9999) {
-                textFormatBuffer(number, "%d", 9999);
+                __2sprintf(number, "%d", 9999);
             } else {
-                textFormatBuffer(number, "%d", hp);
+                __2sprintf(number, "%d", hp);
             }
             TextureTableEntryIV *hpSlot = asdTMTexTableEntryAt(PANEL_SPRITES, 0x19);
             FUN_00180310(10, hpSlot->x + x, hpSlot->y + y, 1, 4, PANEL_TOP_LAYER, number);
@@ -242,7 +242,7 @@ void partyPanelWidgetDraw(PartyPanelWidget *widget, s32 x, s32 y, f32 alpha)
             if (mp <= 9999) {
                 shownMp = mp;
             }
-            textFormatBuffer(number, "%d", shownMp);
+            __2sprintf(number, "%d", shownMp);
             TextureTableEntryIV *mpSlot = asdTMTexTableEntryAt(PANEL_SPRITES, 0x1d);
             FUN_00180310(10, mpSlot->x + x, mpSlot->y + y, 1, 4, PANEL_TOP_LAYER, number);
             partyPanelWidgetDrawAilments(widget, x, y);

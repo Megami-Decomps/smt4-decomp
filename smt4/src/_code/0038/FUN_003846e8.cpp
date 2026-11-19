@@ -1,10 +1,9 @@
-/* NON_MATCHING: stack allocation precedes the initialized-byte load; all other instructions match. */
+#include <stdio.h>
 #include "ui/DummyAttachmentWork.h"
 #include "script/scrScriptProcess.h"
 
 extern "C" {
 void modelGetBoneTranslationByName(AsdMdlNode *, const char *, f32 *);
-void textFormatBuffer(char *, const char *, ...);
 void FUN_002c159c(void *camera, f32 first, f32 second);
 u32 asdCameraGetSavedRenderPairs(void);
 
@@ -22,7 +21,7 @@ void FUN_003846e8(DummyAttachmentWork *work)
     }
     work->initialized = 1;
     for (u32 index = 0; index < 6; ++index) {
-        textFormatBuffer(name, "dummy_npc%d", index + 1);
+        sprintf(name, "dummy_npc%d", index + 1);
         if (work->mode != 2) {
             modelGetBoneTranslationByName(work->source->model->node, name, position);
         } else {

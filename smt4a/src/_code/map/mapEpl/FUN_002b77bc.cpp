@@ -1,4 +1,5 @@
 /* NON_MATCHING: saved registers, local buffer placement, flag preloads and position conversion order differ. */
+#include "runtime/Stdio.h"
 #include "map/mapEpl.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
@@ -16,7 +17,6 @@ void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 cl
 s32 FUN_0038589c(void);
 const MapEplPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
 s32 gameFlagIsSet(s32 flag);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void *FUN_001abbc4(void *data);
 void FUN_001b4eb8(void *object, const f32 *position);
 }
@@ -59,7 +59,7 @@ extern "C" void FUN_002b77bc(s32 map, s32 area)
             (!record->requiredFlag || gameFlagIsSet(record->requiredFlag)) &&
             (!record->excludedFlag || !gameFlagIsSet(record->excludedFlag)) &&
             record->map == map && record->area == area) {
-            textFormatBuffer(path, "effect_editor/%s.EPL", record->name);
+            __2sprintf(path, "effect_editor/%s.EPL", record->name);
             s32 slot = loadMapEffect(path);
             MapEplEntry *entry = &g_mapEpl->entries[slot];
             f32 x = record->x, y = record->y, z = record->z;

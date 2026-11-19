@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "mikado/mikadoMain.h"
 #include "script/scrScriptProcess.h"
 
@@ -7,7 +8,6 @@ extern const char DAT_00404dd4[];
 extern const char DAT_00404dbc[];
 extern const char DAT_00404da4[];
 void asdTMTexTableLoadEntryAsync(s32 group, u32 entry);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 void *asdLoadFileSyncDefault(const char *path);
 
@@ -48,8 +48,8 @@ void mikadoLoadSceneResources(MikadoCamera *camera)
         break;
     }
     asdTMTexTableLoadEntryAsync(0x21, scene->textureEntry);
-    textFormatBuffer(scriptPath, DAT_00404dec, scene->location, scene->location);
-    textFormatBuffer(messagePath, DAT_00404dd4, scene->location, scene->location);
+    __2sprintf(scriptPath, DAT_00404dec, scene->location, scene->location);
+    __2sprintf(messagePath, DAT_00404dd4, scene->location, scene->location);
     asdLoadFileAsyncSimple(scriptPath, &scene->locationScript, 0);
     asdLoadFileAsyncSimple(messagePath, &scene->locationMessages, 0);
     scene->systemScript = asdLoadFileSyncDefault(DAT_00404dbc);

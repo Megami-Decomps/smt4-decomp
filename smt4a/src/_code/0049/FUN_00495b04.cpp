@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00495b04` (_code @ 0x495b04, 0x7d8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
@@ -34,7 +34,6 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -299,7 +298,7 @@ LAB_00495f20:
   }
   temp_v2 = *(short *)(temp_v13 + 8);
   temp_v3 = *(short *)(temp_v13 + 10);
-  textFormatBuffer(temp_v22,"%4d",temp_v8);
+  sprintf((char *)temp_v22,"%4d",temp_v8);
   drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v15,temp_v14,temp_v22);
   if (param_2 != 0) {
     temp_v9 = shopGetEntryPrice(param_4);
@@ -313,7 +312,7 @@ LAB_00495f20:
     }
     temp_v2 = *(short *)(temp_v8 + 8);
     temp_v3 = *(short *)(temp_v8 + 10);
-    textFormatBuffer(temp_v22,"%8d",temp_v9);
+    sprintf((char *)temp_v22,"%8d",temp_v9);
     drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
   }
   temp_v9 = FUN_001ba3d0(temp_v6);
@@ -332,7 +331,7 @@ LAB_00495f20:
   }
   temp_v2 = *(short *)(temp_v8 + 8);
   temp_v3 = *(short *)(temp_v8 + 10);
-  textFormatBuffer(temp_v22,"%2d",temp_v9);
+  sprintf((char *)temp_v22,"%2d",temp_v9);
   drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
   return;
 }

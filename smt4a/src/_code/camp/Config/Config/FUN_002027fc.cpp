@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002027fc` (_code @ 0x2027fc, 0x52c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -9,7 +10,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
@@ -36,7 +36,6 @@ extern int g_config; /* 0x57f230 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -186,7 +185,7 @@ void FUN_002027fc(void)
           }
           configDrawRowFrame(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,0,0,temp_v3);
         }
-        textFormatBuffer(temp_v18,"%s",
+        sprintf((char *)temp_v18,"%s",
                      temp_v2 + *(int *)(temp_v0 + temp_v10 * 8 + 0x98) * 0xc + 0x1e);
         temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x74));
         puVar11 = temp_v18;

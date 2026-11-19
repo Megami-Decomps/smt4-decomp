@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00470e64` (_code @ 0x470e64, 0x318 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int dataTableFileGetTable(...);
 int FUN_001b2ebc(...);
 int packageEntryGetDirectory(...);
@@ -45,7 +45,6 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 extern unsigned int g_aocDisplay; /* 0x57027c */
 
-/* Supplied declaration required: textFormatBuffer. */
 extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: dataTableFileGetTable. */
@@ -137,7 +136,7 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
                 if ((temp_v0 <= temp_v7) || (temp_v12 == 0)) goto LAB_00471070;
                 temp_v9 = (unsigned int *)(temp_v12 + temp_v7 * 0x10);
                 __aeabi_memcpy4(temp_v9,*(int *)(temp_v14 + 0x4c) + temp_v5 * 0x10,0xe);
-                textFormatBuffer(temp_v8,"%s/%s",temp_v10,pcVar9 + 1);
+                sprintf((char *)temp_v8,"%s/%s",temp_v10,pcVar9 + 1);
                 temp_v4 = g_aocDisplay;
                 FUN_001b2ebc(g_aocDisplay,temp_v8,0,temp_v9 + 2,1,0x80,0);
                 temp_v7 = temp_v7 + 1;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the global pool load is placed before the push (retail: right after it); the loop reads count in its condition, which fixed the value/count loads. */
+#include <stdio.h>
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteApi.h"
 #include "status/StatusCamera.h"
@@ -8,7 +8,6 @@ extern "C" {
 s32 FUN_0028d594(void);
 s32 buttonHelpGetSecondaryState(void);
 const char *buttonHelpGetLayoutEntry(u32);
-void textFormatBuffer(char *, const char *, ...);
 void FUN_00295214(u8 value);
 void buttonHelpSetPreset(s32);
 extern Obj7ECRef g_useCounter;
@@ -51,7 +50,7 @@ void useCounterStart(void)
         if (!state) {
             const char *first = buttonHelpGetLayoutEntry(0);
             const char *second = buttonHelpGetLayoutEntry(1);
-            textFormatBuffer(work->savedText, "%s\n%s", first, second);
+            sprintf(work->savedText, "%s\n%s", first, second);
         }
         FUN_00295214(0);
     }

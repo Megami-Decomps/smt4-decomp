@@ -1,11 +1,11 @@
 /* NON_MATCHING: initial flag/name addressing and retained path pointer allocation differ. */
+#include "runtime/Stdio.h"
 #include "shard/Shard004F.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
 
 extern "C" {
-void textFormatBuffer(char *output, const char *format, ...);
 void asdMemFree(void *);
 char *libc_strcpy(char *output, const char *input);
 void sysMemClear(void *memory, u32 size);
@@ -44,7 +44,7 @@ u32 FUN_004f7b84(void *context, const char *name)
     char path[64] = {0};
     char formattedPath[128];
     sysMemClear(formattedPath, 0x80);
-    textFormatBuffer(formattedPath, DAT_005284c0, name);
+    __2sprintf(formattedPath, DAT_005284c0, name);
     libc_strcpy(path, formattedPath);
     libc_strcpy(state->fileName, libc_strrchr(path, '/') + 1);
     if (findRecordByKey(state->fileName) == 0xff) {

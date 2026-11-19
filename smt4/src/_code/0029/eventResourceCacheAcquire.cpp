@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the cache base in r4 from the prologue and builds the entry through the allocation result (r0) in a placement-new style constructor, then copies it to r6; the build allocates r4/r8/r9 differently and lays out the NPC/devil branches in a different order. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 struct AocSystem;
@@ -35,7 +36,6 @@ extern const char DAT_003ff7c8[];
 extern const char DAT_003ff7e4[];
 extern u32 g_aocSystem;
 
-s32 textFormatBuffer(char *output, const char *format, ...);
 void *asdOperatorNew(u32 size, u32 heap);
 s32 asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 void FUN_0033e7c4(ResourceContent *content, s32 id);
@@ -91,7 +91,7 @@ ResourceContent *eventResourceCacheAcquire(s32 id, s32 queueLoad, u32 unused, u3
         if (id < 0) {
             s32 npcId = -id;
             content->id = -npcId;
-            textFormatBuffer(name, DAT_003ff7c8, npcId);
+            __2sprintf(name, DAT_003ff7c8, npcId);
             content->file = NULL;
             content->kind = 4;
             content->index = npcId;
@@ -102,7 +102,7 @@ ResourceContent *eventResourceCacheAcquire(s32 id, s32 queueLoad, u32 unused, u3
             }
         } else {
             content->id = id;
-            textFormatBuffer(name, DAT_003ff7e4, id);
+            __2sprintf(name, DAT_003ff7e4, id);
             content->file = NULL;
             content->kind = 12;
             content->index = id - 1;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00298978` (_code @ 0x298978, 0x85c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 
@@ -10,7 +11,6 @@ int titleRestartSlotState3(...);
 int scrScriptProcessGetEntry(...);
 int scrScriptProcessCreate(...);
 
-int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int jobStop(unsigned int, int);
 int jobSetIntensity(unsigned int, int);
 unsigned int asdLoadFileExists(const char *);
@@ -43,7 +43,6 @@ extern int g_aocMain; /* 0x570260 */
 extern int g_aocSystem; /* 0x570280 */
 extern unsigned int *g_aocJob; /* 0x57f568 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: jobStop. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -217,8 +216,8 @@ unsigned int FUN_00298978(void)
       asdLoadFileSetUseRawPaths(1);
       *(unsigned char *)((int)puVar2 + 0x21) = 1;
     }
-    textFormatBuffer(temp_v4,&LAB_00299154,puVar2[5],puVar2[5]);
-    textFormatBuffer(temp_v5,&LAB_0029916c,puVar2[5],puVar2[5]);
+    sprintf((char *)temp_v4,(const char *)&LAB_00299154,puVar2[5],puVar2[5]);
+    sprintf((char *)temp_v5,(const char *)&LAB_0029916c,puVar2[5],puVar2[5]);
     temp_v1 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
     if (temp_v1 != 0) {
       temp_v1 = g_aocSystem;

@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "map/NpcDummyBindings.h"
 #include "code/Code0015.h"
 #include "title/titleMain.h"
@@ -5,7 +6,6 @@
 
 extern "C" {
 void uiSetFloatPair(void *owner, f32 first, f32 second);
-void textFormatBuffer(char *destination, const char *format, ...);
 u8 lookupNameEntry(NpcDummyModel *model, const char *name, MapVector *position);
 
 static __inline void npcModelClearFlag(NpcDummyModel *model, u32 mask)
@@ -27,11 +27,11 @@ void npcDummyBindingsBindPositions(NpcDummyBindings *bindings)
         }
         bindings->initialized = 1;
         for (s32 index = 0; index < bindings->count; ++index) {
-            textFormatBuffer(name, "dummy_npc%d", index + 1);
+            __2sprintf(name, "dummy_npc%d", index + 1);
             if (index == 7)
-                textFormatBuffer(name, "dummy_npc8");
+                __2sprintf(name, "dummy_npc8");
             else if (index == 8)
-                textFormatBuffer(name, "dummy_npc4");
+                __2sprintf(name, "dummy_npc4");
             NpcDummyModel *model;
             if (bindings->mode != 2) {
                 model = bindings->holder->link->model;

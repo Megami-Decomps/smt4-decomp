@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f8a24` (_code @ 0x3f8a24, 0x8d8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int effectDispatchSelector(...);
 int efctSetSpeed(void);
@@ -42,7 +42,6 @@ extern unsigned char DAT_00528004; /* 0x528004 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -183,10 +182,10 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        textFormatBuffer(temp_v19,temp_v5,temp_v1);
+        sprintf((char *)temp_v19,(const char *)temp_v5,temp_v1);
       }
       else {
-        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
+        sprintf((char *)temp_v19,(const char *)&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5a);
       break;
@@ -202,10 +201,10 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        textFormatBuffer(temp_v19,temp_v5,temp_v1);
+        sprintf((char *)temp_v19,(const char *)temp_v5,temp_v1);
       }
       else {
-        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
+        sprintf((char *)temp_v19,(const char *)&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5d);
       break;
@@ -221,10 +220,10 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        textFormatBuffer(temp_v19,temp_v5,temp_v1);
+        sprintf((char *)temp_v19,(const char *)temp_v5,temp_v1);
       }
       else {
-        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
+        sprintf((char *)temp_v19,(const char *)&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5b);
       break;
@@ -240,19 +239,19 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        textFormatBuffer(temp_v19,temp_v5,temp_v1);
+        sprintf((char *)temp_v19,(const char *)temp_v5,temp_v1);
       }
       else {
-        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
+        sprintf((char *)temp_v19,(const char *)&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5c);
       break;
     case 4:
       if (*(char *)(param_3 + 0x5e) != '\0') {
-        textFormatBuffer(temp_v19,&LAB_003f9308);
+        sprintf((char *)temp_v19,(const char *)&LAB_003f9308);
       }
       else {
-        textFormatBuffer(temp_v19,&LAB_003f9310);
+        sprintf((char *)temp_v19,(const char *)&LAB_003f9310);
       }
       unaff_r7 = 0;
     }

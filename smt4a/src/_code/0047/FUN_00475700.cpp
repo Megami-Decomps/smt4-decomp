@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00475700` (_code @ 0x475700, 0x40c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "addon/AocBufferRequest.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int nn_fnd_DateTime_DateToDays(...);
 int legacyResourceIdRemap(...);
 int FUN_00426eb8(int *, int, unsigned int, unsigned int);
@@ -36,7 +36,6 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: nn_fnd_DateTime_DateToDays. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_00426eb8. */
@@ -197,9 +196,9 @@ int * FUN_00475700(int param_1)
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
     aocApplicationRecreatePrimaryRequest(reinterpret_cast<struct AocMain *>(temp_v0));
-    textFormatBuffer(temp_v8,"ascending");
-    textFormatBuffer(temp_v9,"SET_SALE_INDEX");
-    textFormatBuffer(temp_v10,"integer");
+    sprintf((char *)temp_v8,"ascending");
+    sprintf((char *)temp_v9,"SET_SALE_INDEX");
+    sprintf((char *)temp_v10,"integer");
     temp_v16 = temp_v8;
     while( 1 ) {
       FUN_0042792c(&temp_v11,*(unsigned int *)(temp_v0 + 0x5a8),*(unsigned int *)(temp_v0 + 0x684),0x40,

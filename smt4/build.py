@@ -247,7 +247,12 @@ def link_weak_calls(obj, unit=None):
     makes to them is this NOP (armlink's --inline removed the calls to the empty function); armcc 4.1
     references them strongly. A tail branch to `__aeabi_atexit` (a file's last registration)
     stays: armlink cannot inline a `b`. `__dso_handle`, the atexit argument, is the image base:
-    retail's pool holds `entry`."""
+    retail's pool holds `entry`.
+
+    An R_ARM_NONE relocation is dropped: armcc attaches one per format feature to the first
+    instruction of a function that calls `sprintf` (`_printf_d`, `_printf_percent`, ...) so that
+    armlink pulls those parts of the C library in. It patches no bytes, and retail's objects, which
+    went through armlink, have none; its symbol becomes weak like a removed call's."""
     import struct
     data = bytearray(Path(obj).read_bytes())
     shoff, = struct.unpack_from("<I", data, 0x20)
@@ -277,7 +282,9 @@ def link_weak_calls(obj, unit=None):
                               or (symbol == "__aeabi_atexit" and kind != 29)))
             next_call = (unit is not None and rel[7] == text and kind in (28, 29, 10, 30)
                          and symbol_addresses().get(symbol) == int(unit["address"], 16) + offset + 4)
-            if kind == 28 and symbol in inlined_bodies() and struct.unpack_from("<I", data, code + offset)[0] >> 24 == 0xEB:
+            if kind == 0:  # R_ARM_NONE: a library feature reference, no bytes to patch
+                patched += 1
+            elif kind == 28 and symbol in inlined_bodies() and struct.unpack_from("<I", data, code + offset)[0] >> 24 == 0xEB:
                 struct.pack_into("<I", data, code + offset, inlined_bodies()[symbol])
                 patched += 1
             elif weak_call or next_call:  # BL/B (ARM, Thumb) to an absent weak symbol or the next instruction

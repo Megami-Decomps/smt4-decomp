@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b7e20` (_code @ 0x4b7e20, 0x3dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "event/2dEvent/EventEffect.h"
 
@@ -7,7 +8,6 @@ extern "C" {
 
 int mapMenuDispatchAction(...);
 
-int textFormatBuffer(unsigned char [32], unsigned char *, int);
 int sysPlaySe(...);
 int buttonHelpSetText(int, unsigned int);
 int messageSetMode(...);
@@ -32,7 +32,6 @@ extern unsigned char LAB_004b820c; /* 0x4b820c */
 extern int DAT_0058800c; /* 0x58800c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: messageSetMode. */
@@ -172,7 +171,7 @@ void FUN_004b7e20(int param_1)
         *(unsigned int *)(param_1 + 0x2c) = 0x14;
         return;
       }
-      textFormatBuffer(temp_v4,&LAB_004b8200,*(int *)(param_1 + 0x111c) + 0x6c);
+      sprintf((char *)temp_v4,(const char *)&LAB_004b8200,*(int *)(param_1 + 0x111c) + 0x6c);
       temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x1128),temp_v4);
       messageSetMode(0);
       sysPlaySe(0x92);

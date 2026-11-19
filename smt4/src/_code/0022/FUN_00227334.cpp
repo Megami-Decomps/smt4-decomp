@@ -1,5 +1,5 @@
-/* NON_MATCHING: only the prologue differs: retail loads g_btlUi and the work pointer before materialising the constants 1, 40 and 0 and loads the stack arguments after them, this build hoists the constants first. */
 #include "common.h"
+#include <stdio.h>
 #include "battle/BtlUiGlobal.h"
 #include "gamedata/NkmBaseRecord.h"
 #include "gamedata/SaveLoadProcess.h"
@@ -23,7 +23,6 @@ s32 devilGetCategoryTableId(s32 devilId);
 s32 mapGetSelectedRecordCategoryTable();
 u32 playerGetMappedCategory();
 u32 gameGetSelectedSupportUnitTableId(void);
-s32 textFormatBuffer(char *output, const char *format, ...);
 u32 aocIndexValueOrDefault(u32 index);
 u32 dataFindKindRecordWithAocOverrides(u32 value, s32 mode);
 void FUN_002cd750(s16 value);
@@ -48,26 +47,26 @@ void FUN_00227334(u32 unused, u32 kind, s32 value, s32 isSupport, s32 devilId, s
             u8 *selection = ui->objC.supportSelection.cursor;
             s32 count = resourceRunOperationIfUnblocked(selection) + listCursorGetRowIfUnblocked(selection);
             if (count == 0) {
-                textFormatBuffer(label, "Attack");
+                sprintf(label, "Attack");
                 tableId = playerGetMappedCategory();
             } else if (count == 1) {
-                textFormatBuffer(label, "Shoot");
+                sprintf(label, "Shoot");
                 tableId = mapGetSelectedRecordCategoryTable();
             }
         } else if (isSummon != 0) {
             u16 index = *(u16 *)(gameGetSupportUnitData() + 0x606);
             SupportUnitEntry *entry = supportUnitGetEntry(*(s16 *)(gameGetSupportUnitData() + 0x604), index);
             if (entry->type != 1) {
-                textFormatBuffer(label, "Attack");
+                sprintf(label, "Attack");
             } else {
-                textFormatBuffer(label, "Shoot");
+                sprintf(label, "Shoot");
             }
             tableId = gameGetSelectedSupportUnitTableId();
         } else {
             if (nkmBaseGetRecord(devilId)->element != 1) {
-                textFormatBuffer(label, "Attack");
+                sprintf(label, "Attack");
             } else {
-                textFormatBuffer(label, "Shoot");
+                sprintf(label, "Shoot");
             }
             tableId = devilGetCategoryTableId(devilId);
         }
@@ -75,25 +74,25 @@ void FUN_00227334(u32 unused, u32 kind, s32 value, s32 isSupport, s32 devilId, s
         break;
     case 2:
     case 3:
-        textFormatBuffer(label, "%s", aocIndexValueOrDefault(ui->objD.commandWindow.value));
+        sprintf(label, "%s", aocIndexValueOrDefault(ui->objD.commandWindow.value));
         FUN_00211868(ui->objD.commandWindow.value, isSupport != 0);
         break;
     case 8:
-        textFormatBuffer(label, "%s", dataFindKindRecordWithAocOverrides(ui->objD.commandWindow.value, 0));
+        sprintf(label, "%s", dataFindKindRecordWithAocOverrides(ui->objD.commandWindow.value, 0));
         FUN_002009c4(ui->objD.commandWindow.value);
         break;
     case 9:
     case 10:
     case 12:
         if (value == 0) {
-            textFormatBuffer(label, "Summon");
+            sprintf(label, "Summon");
         } else {
-            textFormatBuffer(label, "Return");
+            sprintf(label, "Return");
         }
         communicationSetResultPointer();
         break;
     case 11:
-        textFormatBuffer(label, "Run");
+        sprintf(label, "Run");
         communicationSetResultPointer();
         break;
     }

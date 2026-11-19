@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00187114` (_code @ 0x187114, 0x1408 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -24,7 +25,6 @@ int FUN_002b6c34(...);
 int aocIndexValueOrDefault(...);
 int FUN_002bdf94(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(...);
 int VectorSignedToFloat(...);
@@ -74,7 +74,6 @@ extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -190,11 +189,11 @@ LAB_0018733c:
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v3 + 0x414));
       temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x40f));
       if (temp_v8 != 0) {
-        textFormatBuffer(temp_v16,"\x81H\x81H\x81H");
+        sprintf((char *)temp_v16,"\x81H\x81H\x81H");
       }
       else {
         temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v4 + 0x482));
-        textFormatBuffer(temp_v16,"%s",temp_v10);
+        sprintf((char *)temp_v16,"%s",temp_v10);
       }
       temp_v6 = *(int *)(temp_v2 + 0x400);
       if (!(temp_v6 == 0xb || temp_v6 == 0xe)) {
@@ -320,7 +319,7 @@ LAB_001876ec:
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e4,param_1,param_2,0xb3);
           texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e5,param_1,param_2,0xb3);
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4e6));
-          textFormatBuffer(temp_v16,"\x82m\x82\x8f\x82\x8e\x82\x85");
+          sprintf((char *)temp_v16,"\x82m\x82\x8f\x82\x8e\x82\x85");
           VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v8 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(2,0x323232ff,temp_v16);
@@ -414,7 +413,7 @@ LAB_001876ec:
                 }
                 temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x50a));
                 temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v19 + 0xa2));
-                textFormatBuffer(temp_v16,"%s",temp_v10);
+                sprintf((char *)temp_v16,"%s",temp_v10);
                 VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v8 + 10) +
                                     param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) +
@@ -459,7 +458,7 @@ LAB_001876ec:
                              *(short *)(temp_v8 + 10) + param_2,0xb5,0,0);
                 temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4f7));
                 temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v19 + 0xa2));
-                textFormatBuffer(temp_v16,"%s",temp_v10);
+                sprintf((char *)temp_v16,"%s",temp_v10);
                 VectorSignedToFloat(*(short *)(temp_v8 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
                 textDrawString(2,0xff,temp_v16);
@@ -550,7 +549,7 @@ LAB_001876e0:
   else {
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x40f));
     temp_v10 = aocIndexValueOrDefault(*(unsigned int *)(temp_v2 + 0x540));
-    textFormatBuffer(temp_v16,"%s",temp_v10);
+    sprintf((char *)temp_v16,"%s",temp_v10);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v8,
@@ -577,10 +576,10 @@ LAB_00187ce0:
     temp_v7 = (unsigned int)*puVar10;
     nkmEnemyFindById();
     if ((temp_v7 == 0) || ((*(unsigned short *)(temp_v7 + 0x16) & 1) != 0)) {
-      textFormatBuffer(temp_v16,"\x82m\x82\x8f\x81@\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93\x81@\x82\x81\x82\x92\x82\x85\x81@\x82\x81\x82\x96\x82\x81\x82\x89\x82\x8c\x82\x81\x82\x82\x82\x8c\x82\x85\x81D");
+      sprintf((char *)temp_v16,"\x82m\x82\x8f\x81@\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93\x81@\x82\x81\x82\x92\x82\x85\x81@\x82\x81\x82\x96\x82\x81\x82\x89\x82\x8c\x82\x81\x82\x82\x82\x8c\x82\x85\x81D");
     }
     else {
-      textFormatBuffer(temp_v16,&LAB_0018851c);
+      sprintf((char *)temp_v16,(const char *)&LAB_0018851c);
     }
     puVar12 = temp_v16;
     fontMeasureLineAdvance(temp_v16,2);

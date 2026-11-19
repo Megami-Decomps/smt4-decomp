@@ -2530,7 +2530,7 @@
 001ff8e0 inputTestEnabledRule
 00210974 inputClearActiveValues
 0021241c npcRoomDebugDrawStartId
-002be624 textFormatBuffer
+002be624 __2sprintf
 002916c0 debugDrawText
 0021193c scrCommMessageDispatchWithTransition
 001fc248 placementUpdateSceneState

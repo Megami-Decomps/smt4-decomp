@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild from asm of the map unit loader's per-frame step; retail runs the clone branch of the load state straight into the finish state by a jump (the draft's goto) and keeps the spawner pointer and the zero constant in registers across the states, which armcc here compiles from separate helpers. */
+#include <stdio.h>
 #include "map/MapGimicGlobal.h"
 
 /* One row of the unit table. */
@@ -16,7 +17,6 @@ extern "C" {
 s32 FUN_0030f6f8(void);
 UnitRow *FUN_0024ad14(s32 index);
 s32 gameFlagIsSet(s32 flag);
-void textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateSecondList(const char *name, u32 flags);
 AsdMdlObject *asdMdlManagerClone(AsdMdlObject *model, u32 flags);
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
@@ -91,7 +91,7 @@ u32 FUN_0027cda0(void)
         MapGimicEntry *slot = &spawner->entries[spawner->slot];
         slot->kind = row->kind;
         char path[128];
-        textFormatBuffer(path, "map/unit/u%03d.bam", row->kind);
+        sprintf(path, "map/unit/u%03d.bam", row->kind);
         if (slot->kind != 14) {
             slot->model = asdMdlManagerCreateSecondList(path, 7);
             slot->ownsModel = 0;

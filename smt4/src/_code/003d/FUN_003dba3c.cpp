@@ -1,5 +1,6 @@
 /* NON_MATCHING: pointer locals (formatted source, full path) reproduce retail's fp/260-byte frame; remaining: owner/temporary register numbering (r6/r7), hoisting order of the table base and &formatted, and `mov r1,#47` scheduled before `mov r0,r7`. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
@@ -24,7 +25,6 @@ extern const char DAT_004008c4[];       /* "battle/effect/%s.eft" */
 
 void memClear(void *dest, u32 size);
 void asdMemFree(void *block);
-s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 char *libc_strrchr(const char *string, s32 c);
 s32 keyedRecordFindByName(const char *name);
@@ -50,7 +50,7 @@ u32 FUN_003dba3c(FlashEffects *effects)
         memClear(path, 0x80);
         const char *effectName = DAT_004007c4[i];
         memClear(formatted, 0x80);
-        textFormatBuffer(formatted, DAT_004008c4, effectName);
+        __2sprintf(formatted, DAT_004008c4, effectName);
         libc_strcpy(path, formattedPath);
         char *fullPath = path;
         libc_strcpy(slot->name, libc_strrchr(fullPath, '/') + 1);

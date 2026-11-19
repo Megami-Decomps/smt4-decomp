@@ -1,4 +1,5 @@
 /* NON_MATCHING: Saved float registers, zero-buffer/conversion scheduling and ailment-name block order differ. */
+#include <stdio.h>
 #include "battle/BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
@@ -13,7 +14,6 @@ struct BattleAilmentChanceView {
     s16 luck;
 };
 extern "C" {
-void textFormatBuffer(char *output, const char *format, ...);
 
 /* Rolls an ailment's luck-adjusted base chance plus the combatant's corresponding modifier. */
 u32 FUN_00245d0c(u32 id, s32 ailment)
@@ -46,13 +46,13 @@ u32 FUN_00245d0c(u32 id, s32 ailment)
     }
     chance += (f32)adjustment * 20.0f;
     if (ailment == 3) {
-        textFormatBuffer(text, "\x8d\x8f\x88\xf3");
+        sprintf(text, "\x8d\x8f\x88\xf3");
     } else if (ailment == 6) {
-        textFormatBuffer(text, "\x8d\xac\x97\x90");
+        sprintf(text, "\x8d\xac\x97\x90");
     } else if (ailment == 7) {
-        textFormatBuffer(text, "\x90\x87\x96\xb0");
+        sprintf(text, "\x90\x87\x96\xb0");
     } else if (ailment == 8) {
-        textFormatBuffer(text, "\x8b\xd9\x94\x9b");
+        sprintf(text, "\x8b\xd9\x94\x9b");
     }
     return (f32)randRange(99) < chance;
 }

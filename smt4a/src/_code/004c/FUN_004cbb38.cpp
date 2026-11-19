@@ -1,5 +1,6 @@
 /* NON_MATCHING: slot search/early-exit layout differs (retail keeps the not-found result in one register shared with the failure state store); register allocation of this/pair also differs. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "gamedata/NkmBaseRecordA.h"
 #include "script/scrScriptProcess.h"
 
@@ -39,7 +40,6 @@ SlotRecordId *gameGetSlotRecord(s32 slot);
 s32 recordContainsPairedId(const void *record, u32 id);
 s32 loadSlotIsLoaded(u32 index);
 s32 FUN_003316b4(s8 variant);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
 void btlTalkBustUpCreate(void);
 void FUN_002c85b0(s32 arg);
@@ -93,7 +93,7 @@ void FUN_004cbb38(TalkScene *scene)
     SavedPair *pair = saveGetSelectedRecordSlot(scene->pairIndex);
     SlotRecordId *record = gameGetSlotRecord(scene->slot);
     char path[64];
-    textFormatBuffer(path, DAT_0052c7c0, FUN_003316b4(nkmBaseGetRecord(record->id)->talkTone) + 1);
+    __2sprintf(path, DAT_0052c7c0, FUN_003316b4(nkmBaseGetRecord(record->id)->talkTone) + 1);
     scene->portraitFile = asdLoadFileSyncDefault(path);
     scene->portrait = scrScriptProcessCreate(scene->portraitData, scene->portraitFile);
     btlTalkBustUpCreate();

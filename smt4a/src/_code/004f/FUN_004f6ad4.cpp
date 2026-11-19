@@ -1,4 +1,5 @@
 /* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
+#include "runtime/Stdio.h"
 #include "battle/BtlEffectLoad.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
@@ -15,7 +16,6 @@ u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *buffer, s32 size);
-void textFormatBuffer(char *buffer, const char *format, ...);
 char *libc_strrchr(char *text, s32 character);
 void btlCameraFinishTransition(BtlEffectWorkA *work);
 u32 FUN_002282c8(u32 first, u32 second, u32 third);
@@ -43,7 +43,7 @@ u32 FUN_004f6ad4(BtlEffectWorkA *work)
                     if (libc_strncmp(name, g_btlEffect.numberedPrefix, libc_strlen(g_btlEffect.numberedPrefix)) == 0) {
                         bool found = false;
                         for (s32 n = 0; n < 11; n++) {
-                            textFormatBuffer(file, DAT_00528534, g_btlEffect.numberedPrefix, n);
+                            __2sprintf(file, DAT_00528534, g_btlEffect.numberedPrefix, n);
                             if (strcmp(file, name) == 0) {
                                 btlCameraFinishTransition(work);
                                 work->numberedEffect = FUN_002282c8(n & 0xff, 7, 0);
@@ -60,7 +60,7 @@ u32 FUN_004f6ad4(BtlEffectWorkA *work)
                 if (name == NULL || strcmp(name, g_btlEffect.ignoredNameB) != 0) {
                     sysMemClear(path, 0x80);
                     sysMemClear(file, 0x80);
-                    textFormatBuffer(file, DAT_005284c0, name);
+                    __2sprintf(file, DAT_005284c0, name);
                     libc_strcpy(path, file);
                     if (libc_strlen(path) != 0) {
                         BtlEffectFileSlot *slot = &work->slots[i];

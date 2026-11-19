@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f3dc` (_code @ 0x19f3dc, 0x6a4 bytes) from smt4_v1.2.0.cxi.
@@ -34,7 +35,6 @@ int scrScriptProcessCreate(int, unsigned int);
 int titleSetSlotValueState2(...);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(int);
-int textFormatBuffer(...);
 int messageSetConfirmDisplayMode(void);
 int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
@@ -96,7 +96,6 @@ extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
 extern int FUN_002c1d5c(void);
 extern int FUN_002c2a04(unsigned int);
@@ -151,8 +150,8 @@ unsigned int FUN_0019f3dc(void)
       temp_v1 = DAT_004937c4;
       puVar2[5] = DAT_004937c4;
       puVar2[6] = DAT_004937c8;
-      textFormatBuffer(temp_v7,"event/e%03d/e%03d.bf",temp_v1,temp_v1);
-      textFormatBuffer(temp_v8,"event/e%03d/e%03d.mbm",puVar2[5],puVar2[5]);
+      sprintf((char *)temp_v7,"event/e%03d/e%03d.bf",temp_v1,temp_v1);
+      sprintf((char *)temp_v8,"event/e%03d/e%03d.mbm",puVar2[5],puVar2[5]);
       temp_v3 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;

@@ -1,6 +1,7 @@
 #include "ui/UiControl.h"
 /* NON_MATCHING: retail's prologue pushes r0-r3 with the saved registers and reads the entry argument from its pushed slot ([sp+96]) instead of keeping it in a register (frame 76 vs 92); the panel/alternate/textId registers also differ. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -33,7 +34,6 @@ void demonIconPanelDrawRow(ProfileEntryDrawView *panel, s32 enabled, u32 textId,
 void FUN_004a7cb0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 fade, f32 scale);
 void FUN_004a7fb8(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 style, s32 fade, f32 scale);
 void FUN_004a7814(ProfileEntryDrawView *panel, u32 first, s32 entry, s32 alternate, s32 fade, u32 second);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 
 /* Draws one entry of the profile panel: its icon, tags and the two number captions. */
 void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 textId, f32 scale)
@@ -83,7 +83,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     }
     s32 captionX = captionEntry->x + baseX;
     s32 captionY = captionEntry->y + baseY;
-    textFormatBuffer(text, "%4d", caption);
+    __2sprintf(text, "%4d", caption);
     drawTextAtRelativePosition(panelLayout(panel), 0, captionX, captionY, 0, 7, color | opacity, fade, text);
 
     record = nkmEnemyFindById(id);
@@ -99,7 +99,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     }
     s32 detailX = detailEntry->x + baseX;
     s32 detailY = detailEntry->y + baseY;
-    textFormatBuffer(text, "%4d", detail);
+    __2sprintf(text, "%4d", detail);
     drawTextAtRelativePosition(panelLayout(panel), 0, detailX, detailY, 0, 7, 0x4ABAE1FF | opacity, fade, text);
 }
 

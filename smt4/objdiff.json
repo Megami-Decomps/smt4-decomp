@@ -116170,13 +116170,13 @@
       "target_path": "orig/target/_code/002b/libc_sprintf.o"
     },
     {
-      "base_path": "build/obj/_code/002b/textFormatBuffer.o",
+      "base_path": "build/obj/_code/002b/__2sprintf.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "textFormatBuffer",
+            "name": "__2sprintf",
             "size": 40,
             "vram": "0x2be624"
           }
@@ -116184,10 +116184,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/textFormatBuffer.cpp"
+        "source_path": "src/_code/002b/__2sprintf.cpp"
       },
-      "name": "_code/002b/textFormatBuffer",
-      "target_path": "orig/target/_code/002b/textFormatBuffer.o"
+      "name": "_code/002b/__2sprintf",
+      "target_path": "orig/target/_code/002b/__2sprintf.o"
     },
     {
       "base_path": "build/obj/_code/002b/dataFindKindRecordWithAocOverrides.o",

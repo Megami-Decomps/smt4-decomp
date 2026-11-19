@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail retains discarded event-ID argument moves and different start-entry tail placement; resource-loading body matches. */
 #include "common.h"
+#include <stdio.h>
 #include "game/GameStateA.h"
 #include "addon/aocMain.h"
 #include "addon/AocDrawText.h"
@@ -11,7 +12,6 @@
 extern "C" {
 extern MapMainState *g_mapMain;
 void messageSetScriptDisplayMode();
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
@@ -26,8 +26,8 @@ u32 mapStartEventScript()
     char scriptPath[128];
     char messagePath[128];
     messageSetScriptDisplayMode();
-    textFormatBuffer(scriptPath, "event/e%03d/e%03d.bf", map->eventId, map->eventId);
-    textFormatBuffer(messagePath, "event/e%03d/e%03d.mbm", map->eventId, map->eventId);
+    sprintf(scriptPath, "event/e%03d/e%03d.bf", map->eventId, map->eventId);
+    sprintf(messagePath, "event/e%03d/e%03d.mbm", map->eventId, map->eventId);
     if (aocPackageGrantsItem(g_aocSystem, map->eventId, 0)) {
         map->script = aocDrawText7(g_aocSystem, map->eventId, 0);
         map->messages = aocDrawText8(g_aocSystem, map->eventId, 0);

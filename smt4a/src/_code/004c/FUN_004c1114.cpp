@@ -1,4 +1,5 @@
-/* NON_MATCHING: readable rebuild from asm of the status-ailment infliction roll; armcc here schedules the VFP chance formula (vmla chains on s16-s18) and the two copies of the property switch differently, and retail's 32-byte name buffer is zeroed by eight stores before the per-ailment textFormatBuffer call. */
+/* NON_MATCHING: readable rebuild from asm of the status-ailment infliction roll; armcc here schedules the VFP chance formula (vmla chains on s16-s18) and the two copies of the property switch differently, and retail's 32-byte name buffer is zeroed by eight stores before the per-ailment __2sprintf call. */
+#include <stdio.h>
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlEntryLookup.h"
 #include "battle/BattleHelpers_Smt4a.h"
@@ -7,7 +8,6 @@
 /* The mask the flags are tested against (g_btlSkillResponseMasks + 0xA8). */
 
 extern "C" {
-void textFormatBuffer(char *buffer, const char *text);
 u32 lcgRandomRange(u32 limit);
 
 /* The resistance of the unit to the property (0 without a unit). */
@@ -86,7 +86,7 @@ u32 FUN_004c1114(u32 id, s32 kind)
         chance = 70.0f;
     chance += resistance * 15.0f;
     char label[32] = { 0 };
-    textFormatBuffer(label, name);
+    sprintf(label, name);
     if ((s32)resistance == 0)
         return 0;
     return chance > (f32)lcgRandomRange(99);

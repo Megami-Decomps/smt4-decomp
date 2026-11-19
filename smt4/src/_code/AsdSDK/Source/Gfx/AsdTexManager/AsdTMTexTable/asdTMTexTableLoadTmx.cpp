@@ -1,4 +1,5 @@
 /* NON_MATCHING: close: relocation loops, string literals and debug traces match; built keeps the flags argument in r9 (retail r5, then spilled to [sp]) and combines the file-flag computation differently */
+#include <stdio.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -8,7 +9,6 @@ extern "C" {
 void *FUN_002b73a8(u32 size, u32 flags);
 void *fileLoadSync(char *path, u8 *size, u32 flags);
 char *FUN_0010024c(char *str, u32 ch);
-void textFormatBuffer(char *dst, const char *format, ...);
 
 extern const char DAT_00409270[];
 extern TexTable g_texTable;
@@ -67,7 +67,7 @@ TexFile *asdTMTexTableLoadTmx(s32 index, u32 flags)
         s32 i;
 
         pathUseSlashes(header->dirPrefix);
-        textFormatBuffer(path, "%s%s.%s", header->dirPrefix, entry->name, "ttd");
+        sprintf(path, "%s%s.%s", header->dirPrefix, entry->name, "ttd");
         fileFlags = (flags & 1) != 0 ? 1 : 0;
         if ((flags & 2) != 0) {
             fileFlags |= 2;
@@ -113,7 +113,7 @@ TexFile *asdTMTexTableLoadTmx(s32 index, u32 flags)
         loaded->image = (u8 *)file;
         loaded->image2 = (u8 *)file;
         pathUseSlashes(header->dirPrefix2);
-        textFormatBuffer(loaded->path, "%s%s/", header->dirPrefix2, (u8 *)file + 4);
+        sprintf(loaded->path, "%s%s/", header->dirPrefix2, (u8 *)file + 4);
         entry->file = loaded;
     }
     return loaded;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00479b6c` (_code @ 0x479b6c, 0x658 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int mathInterpolateTimed(...);
 int texDrawCompositeSprite(...);
@@ -41,7 +41,6 @@ extern int g_aocMain; /* 0x570260 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: mathInterpolateTimed. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -115,10 +114,10 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = temp_v5;
       FUN_00473910(temp_v5,0xb);
       FUN_00473754(temp_v5,temp_v4,temp_v12);
-      textFormatBuffer(temp_v11,"%s",temp_v12);
+      sprintf((char *)temp_v11,"%s",temp_v12);
     }
     else {
-      textFormatBuffer(temp_v11,"%ls",temp_v3);
+      sprintf((char *)temp_v11,"%ls",temp_v3);
     }
     temp_v13 = 0xffffffff;
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
@@ -151,7 +150,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
           temp_v4 = temp_v5;
           FUN_00473910(temp_v5,0x69);
           FUN_00473754(temp_v5,temp_v4,temp_v12);
-          textFormatBuffer(temp_v11,"%s",temp_v12);
+          sprintf((char *)temp_v11,"%s",temp_v12);
         }
         else {
           temp_v12[0] = 0;
@@ -189,7 +188,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
             }
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 0x10);
-          textFormatBuffer(temp_v11,"%ls%s%ls",temp_v5 + 0x5b8,temp_v12,temp_v5 + 0x5f8);
+          sprintf((char *)temp_v11,"%ls%s%ls",temp_v5 + 0x5b8,temp_v12,temp_v5 + 0x5f8);
         }
         temp_v5 = curveEvaluateStandard(temp_v11,2);
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x68));

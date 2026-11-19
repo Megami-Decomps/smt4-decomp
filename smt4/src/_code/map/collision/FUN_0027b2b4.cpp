@@ -1,4 +1,5 @@
 /* NON_MATCHING: loads the map collision files (primary and optional secondary), allocates the work buffers and builds the collision tables for them; written from the decompilation and the retail disassembly, string pool order and the duplicated relocation code not compared with retail */
+#include <stdio.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/FileLoadSync.h"
 
@@ -44,7 +45,6 @@ struct MapCollision {
 extern "C" {
 extern MapCollision g_mapCollision;
 
-void textFormatBuffer(char *out, const char *format, ...);
 void *asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void asdMemFree(void *block);
 void FUN_001c24e4(s32 set);
@@ -56,9 +56,9 @@ void FUN_001c2200(s32 set);
 static __inline void mapCollisionPath(char *path, s32 id, u32 sub)
 {
     if (id - 0x65U < 99)
-        textFormatBuffer(path, "map/L%03d/a%03d_%02d.col", id - MAP_ID_FIELD_BASE, id - MAP_ID_FIELD_BASE, sub);
+        sprintf(path, "map/L%03d/a%03d_%02d.col", id - MAP_ID_FIELD_BASE, id - MAP_ID_FIELD_BASE, sub);
     else
-        textFormatBuffer(path, "map/m%03d/a%03d_%02d.col", id, id, sub);
+        sprintf(path, "map/m%03d/a%03d_%02d.col", id, id, sub);
 }
 
 /* Loads `path`, relocates the table offsets of the file and keeps its pointers in the state. */
@@ -92,9 +92,9 @@ void FUN_0027b2b4(s32 id, u32 sub, s32 secondId, u32 secondSub)
     char path[64];
     char secondPath[68];
     if (id == MAP_ID_SPECIAL_A || id == MAP_ID_SPECIAL_B || id == MAP_ID_SPECIAL_C)
-        textFormatBuffer(path, "map/m%03d/a%03d_%02d.col", MAP_ID_SPECIAL_MAP, MAP_ID_SPECIAL_MAP, 1);
+        sprintf(path, "map/m%03d/a%03d_%02d.col", MAP_ID_SPECIAL_MAP, MAP_ID_SPECIAL_MAP, 1);
     else if (id == MAP_ID_FIELD_BASE)
-        textFormatBuffer(path, "map/L000/a000.col");
+        sprintf(path, "map/L000/a000.col");
     else
         mapCollisionPath(path, id, sub);
     if (secondId != 0) {

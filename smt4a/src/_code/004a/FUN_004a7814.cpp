@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiControl.h"
 /* NON_MATCHING: prologue scheduling only: retail moves panel/value (r0/r1) after the vpush and stack adjust. */
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -10,7 +11,6 @@ struct NumericPanelView {
 typedef char NumericPanelLayoutOffset[offsetof(NumericPanelView, layout) == 0xc8 ? 1 : -1];
 
 extern "C" {
-void textFormatBuffer(char *, const char *, ...);
 
 // Draw a value at its row anchor using the wider-number offset for three-digit values.
 void FUN_004a7814(NumericPanelView *panel, s32 value, s32 row, s32 alternate, u32 opacity, u32 color)
@@ -37,7 +37,7 @@ void FUN_004a7814(NumericPanelView *panel, s32 value, s32 row, s32 alternate, u3
     }
     s32 x = base->x + offset->x;
     s32 y = base->y + offset->y;
-    textFormatBuffer(text, "%2d", value);
+    sprintf(text, "%2d", value);
     drawTextAtRelativePosition(panel->layout, 0, x, y,
                                0, 7, color, opacity, text);
 }

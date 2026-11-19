@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 #include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
 #include "map/PopupStateA.h"
@@ -9,7 +10,6 @@ s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 maximum);
 const char *popupSelectWeightedMessage(s32 category, s32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 
 /* Request a context popup for the selected unit, substituting the action's label. */
 u32 popupTryStartActionLabelPrompt(s32 action, s32 count)
@@ -40,7 +40,7 @@ u32 popupTryStartActionLabelPrompt(s32 action, s32 count)
     work->message = message;
     work->speakerId = unit->id;
     rt_memcpy(format, message, sizeof(format));
-    textFormatBuffer(work->text, format, labels.names[action]);
+    sprintf(work->text, format, labels.names[action]);
     work = g_popupState;
     work->message = work->text;
     return 1;

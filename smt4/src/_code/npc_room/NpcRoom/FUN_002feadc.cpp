@@ -1,4 +1,4 @@
-/* NON_MATCHING: the room-global address load is hoisted before the prologue. */
+#include <stdio.h>
 #include "npc_room/NpcRoom.h"
 
 struct NpcRoomOccupantNameIV {
@@ -10,7 +10,6 @@ extern "C" {
 extern NpcRoomA *g_npcRoom;
 char *libc_strcpy(char *destination, const char *source);
 void textConvertToGlyphPairs(const char *source, char *destination);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void messageMainRequestBanner();
 void scrCommMessageShowText(const char *text, u32 parameter);
 
@@ -27,7 +26,7 @@ void FUN_002feadc()
         if (occupant) {
             libc_strcpy(name, occupant->name);
             textConvertToGlyphPairs(name, converted);
-            length += textFormatBuffer(text + length, "%s<br>", converted);
+            length += sprintf(text + length, "%s<br>", converted);
         }
     }
     messageMainRequestBanner();

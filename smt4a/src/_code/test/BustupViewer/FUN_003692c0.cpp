@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003692c0` (_code @ 0x3692c0, 0x5e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "text/TextDraw.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int libc_strcpy(unsigned char [268], unsigned char *);
 int rt_aeabi_memclr(...);
 
@@ -13,7 +13,6 @@ extern int g_bustupViewer; /* 0x588ff0 */
 extern char s__V_V_V_V_V_V_V_V_V_V_005890d4[113]; /* 0x5890d4 */
 extern unsigned char DAT_006199d8; /* 0x6199d8 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: FUN_0025cc78. */
 /* Supplied declaration required: libc_strcpy. */
@@ -120,31 +119,31 @@ LAB_0036945c:
       switch(temp_v3) {
       case 0:
         if (temp_v1 == 0) {
-          textFormatBuffer(temp_v7,"<2D>");
+          sprintf((char *)temp_v7,"<2D>");
         }
         else if (temp_v1 == 1) {
-          textFormatBuffer(temp_v7,"<3D>");
+          sprintf((char *)temp_v7,"<3D>");
         }
         else if (temp_v1 == 2) {
-          textFormatBuffer(temp_v7,"<3D_2>");
+          sprintf((char *)temp_v7,"<3D_2>");
         }
         else if (temp_v1 == 3) {
-          textFormatBuffer(temp_v7,"<DOT>");
+          sprintf((char *)temp_v7,"<DOT>");
         }
         else {
-          textFormatBuffer(temp_v7,"<SWIN>");
+          sprintf((char *)temp_v7,"<SWIN>");
         }
         break;
       case 1:
         if (*(int *)(temp_v0 + 0x14) == 0) {
 LAB_00369690:
-          textFormatBuffer(temp_v7,"<None>");
+          sprintf((char *)temp_v7,"<None>");
         }
         else if ((temp_v1 == 0 || temp_v1 == 3) || temp_v1 == 4) {
-          textFormatBuffer(temp_v7,"<BG_2D_%03d>");
+          sprintf((char *)temp_v7,"<BG_2D_%03d>");
         }
         else {
-          textFormatBuffer(temp_v7,"<BG_3D_%03d>");
+          sprintf((char *)temp_v7,"<BG_3D_%03d>");
         }
         break;
       case 2:
@@ -152,10 +151,10 @@ LAB_00369690:
         goto LAB_0036973c;
       case 3:
         if (*(char *)(*(int *)(temp_v0 + 0x50) + temp_v0 + 100) == '\0') {
-          textFormatBuffer(temp_v7,"<ENEMY>");
+          sprintf((char *)temp_v7,"<ENEMY>");
         }
         else {
-          textFormatBuffer(temp_v7,"<NPC>");
+          sprintf((char *)temp_v7,"<NPC>");
         }
         break;
       case 4:
@@ -170,18 +169,18 @@ LAB_00369690:
         if (temp_v2 == 0) goto LAB_00369690;
         if (temp_v2 < 0x12d) {
           if (temp_v2 < 200) {
-            textFormatBuffer(temp_v7,"<CHARID_%03d>");
+            sprintf((char *)temp_v7,"<CHARID_%03d>");
           }
           else {
-            textFormatBuffer(temp_v7,"<CHARID_BOSS_%03d>",temp_v2 - 199);
+            sprintf((char *)temp_v7,"<CHARID_BOSS_%03d>",temp_v2 - 199);
           }
         }
         else {
-          textFormatBuffer(temp_v7,"<CHARID_B%03d>",temp_v2 - 300);
+          sprintf((char *)temp_v7,"<CHARID_B%03d>",temp_v2 - 300);
         }
         break;
       case 5:
-        textFormatBuffer(temp_v7,"<%03d>",
+        sprintf((char *)temp_v7,"<%03d>",
                      *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x50) * 4 + 0x54));
         uiObjectSetColorRgb(*(unsigned int *)(temp_v0 + 0xa0),temp_v4);
         FUN_0025cc78((const void *)*(unsigned int *)(temp_v0 + 0xa0),0x76,(int)temp_v5,0x65,1.0f);
@@ -224,7 +223,7 @@ LAB_00369690:
           temp_v4 = *(unsigned int *)(temp_v0 + 0x38);
         }
 LAB_0036973c:
-        textFormatBuffer(temp_v7,"<%d>",temp_v4);
+        sprintf((char *)temp_v7,"<%d>",temp_v4);
         break;
       case 0xe:
         temp_v5 = temp_v5 + temp_v6;
@@ -242,18 +241,18 @@ LAB_0036981c:
         }
         rt_aeabi_memclr(&DAT_006199d8,0x80);
         if (temp_v1 < 100) {
-          textFormatBuffer(&DAT_006199d8,"FRONT_%s",
+          sprintf((char *)&DAT_006199d8,"FRONT_%s",
                        *(unsigned int *)(s__V_V_V_V_V_V_V_V_V_V_005890d4 + temp_v1 * 4));
         }
         else {
-          textFormatBuffer(&DAT_006199d8,"BACK_%s",
+          sprintf((char *)&DAT_006199d8,"BACK_%s",
                        *(unsigned int *)(s__V_V_V_V_V_V_V_V_V_V_005890d4 + (temp_v1 - 100) * 4));
         }
         libc_strcpy(temp_v8,&DAT_006199d8);
-        textFormatBuffer(temp_v7,"<%s>",temp_v8);
+        sprintf((char *)temp_v7,"<%s>",temp_v8);
         break;
       case 0xf:
-        textFormatBuffer(temp_v7,"<%d%%>",
+        sprintf((char *)temp_v7,"<%d%%>",
                      (int)(*(float *)(temp_v0 + *(int *)(temp_v0 + 0x50) * 4 + 0x88) * 100.0f));
       }
       temp_v5 = temp_v5 + temp_v6;

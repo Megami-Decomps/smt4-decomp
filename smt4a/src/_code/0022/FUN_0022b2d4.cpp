@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022b2d4` (_code @ 0x22b2d4, 0x3438 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
@@ -33,7 +34,6 @@ int FUN_00345098(void);
 int table8Type5GetValue(...);
 int VectorUnsignedToFloat(...);
 
-int textFormatBuffer(...);
 int renderCtxSelectDisplayAreaForStereoMode(int);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
@@ -109,7 +109,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
 extern unsigned int FUN_0014bd84(unsigned int);
 extern unsigned int FUN_0014bf3c(short, unsigned int);
@@ -251,19 +250,19 @@ unsigned char FUN_0022b2d4(void)
         texDrawTableEntryAtStoredOrigin(2,0x12,0xb7,temp_v27[5],temp_v27[6]);
       }
       if (*(char *)(temp_v4 + 0x137f) == '\0') {
-        textFormatBuffer(temp_v29,&LAB_0022b6a0);
+        sprintf((char *)temp_v29,(const char *)&LAB_0022b6a0);
       }
       if (*(char *)(temp_v4 + 0x137f) == '\x01') {
-        textFormatBuffer(temp_v29,&LAB_0022b6b0);
+        sprintf((char *)temp_v29,(const char *)&LAB_0022b6b0);
       }
       if (*(char *)(temp_v4 + 0x137f) == '\x02') {
-        textFormatBuffer(temp_v29,&LAB_0022b6b8);
+        sprintf((char *)temp_v29,(const char *)&LAB_0022b6b8);
       }
       if (*(char *)(temp_v4 + 0x137f) == '\x03') {
-        textFormatBuffer(temp_v29,&LAB_0022b6c0);
+        sprintf((char *)temp_v29,(const char *)&LAB_0022b6c0);
       }
       if (*(char *)(temp_v4 + 0x137f) == '\x04') {
-        textFormatBuffer(temp_v29,&LAB_0022b6c8);
+        sprintf((char *)temp_v29,(const char *)&LAB_0022b6c8);
       }
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0xba));
       puVar22 = temp_v29;
@@ -540,18 +539,18 @@ LAB_0022b9b8:
         if (*(char *)(temp_v2 + 0x2017) != '\0') {
           if (*(char *)(temp_v2 + 0x2017) != '\x0e') {
             temp_v6 = FUN_00180114(*psVar20);
-            textFormatBuffer(temp_v29,&LAB_0022c41c,temp_v6);
+            sprintf((char *)temp_v29,(const char *)&LAB_0022c41c,temp_v6);
           }
           else {
-            textFormatBuffer(temp_v29,&LAB_0022c424);
+            sprintf((char *)temp_v29,(const char *)&LAB_0022c424);
           }
         }
         else if (*(char *)(temp_v2 + 0x2018) != '\n') {
           temp_v6 = gameGetPlayerName();
-          textFormatBuffer(temp_v29,&LAB_0022c41c,temp_v6);
+          sprintf((char *)temp_v29,(const char *)&LAB_0022c41c,temp_v6);
         }
         else {
-          textFormatBuffer(temp_v29,&LAB_0022c41c,temp_v28 + 0x1934);
+          sprintf((char *)temp_v29,(const char *)&LAB_0022c41c,temp_v28 + 0x1934);
         }
         temp_v6 = 0xffffffff;
         if ((*(unsigned short *)(temp_v4 + 0x13ac) & 2) != 0) {
@@ -563,15 +562,15 @@ LAB_0022b9b8:
         textDrawString(3,temp_v6,temp_v29);
         if (*(char *)(temp_v2 + 0x2017) != '\0') {
           if ((*(char *)(temp_v2 + 0x2017) == '\x04') && (temp_v3 = gameFlagIsSet(0x1a3), temp_v3 != 0)) {
-            textFormatBuffer(temp_v29,&LAB_0022c42c);
+            sprintf((char *)temp_v29,(const char *)&LAB_0022c42c);
           }
           else {
             temp_v6 = FUN_0014bf3c(*psVar20,0);
-            textFormatBuffer(temp_v29,&LAB_0022c41c,temp_v6);
+            sprintf((char *)temp_v29,(const char *)&LAB_0022c41c,temp_v6);
           }
         }
         else {
-          textFormatBuffer(temp_v29,temp_v28 + 0x2068);
+          sprintf((char *)temp_v29,(const char *)(temp_v28 + 0x2068));
         }
         temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x1d));
         VectorSignedToFloat(temp_v27[6] + *(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1679,7 +1678,7 @@ LAB_0022de2c:
         }
       }
       else {
-        textFormatBuffer(temp_v29,&LAB_0022e370);
+        sprintf((char *)temp_v29,(const char *)&LAB_0022e370);
         VectorSignedToFloat(temp_v27[6] +
                             (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v7 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);

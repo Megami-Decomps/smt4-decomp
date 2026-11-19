@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail retains inline menu-builder setup/NOPs and a loop bound register; clean C++ factors result branches and defaults differently. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
@@ -11,7 +12,6 @@ s32 formattedTextCopyLabel(EffectTextRequest *request, char *buffer);
 s32 FUN_00318cac(EffectTextRequest *request);
 void effectEditorObjectDestroy(EffectTextRequest *request);
 void nodeListOwnerFree(void *owner);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void effMenuAddEntry(void *owner, const char *label, s32 kind, u32 value, s32 flags);
 EffectTextRequest *effMenuCreate(void *owner);
 LinkedItem *linkedFindItemByIndex(LinkedItems *items, s32 index);
@@ -43,7 +43,7 @@ u32 FUN_00242080(u32 flags)
         g_effectEditor.nodeList = NULL;
         if (flags & 8) {
             for (u32 index = 0; index < 22; ++index) {
-                textFormatBuffer(generalLabel, "GENERAL %d", index);
+                sprintf(generalLabel, "GENERAL %d", index);
                 effMenuAddEntry(g_effectEditor.nodeList, generalLabel, 8, index, 0);
             }
         }

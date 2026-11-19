@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001dddd8` (_code @ 0x1dddd8, 0x568 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -13,7 +14,6 @@ int dataTable24Sub0GetRecord(...);
 int resourceRunOperationIfUnblocked(...);
 int FUN_002bdf94(...);
 int textDrawString(int, unsigned int, unsigned char [72]);
-int textFormatBuffer(unsigned char [72], unsigned char *);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
@@ -48,7 +48,6 @@ extern int listCursorGetRowIfUnblocked(int);
 extern int gameDataGetSortPreferences(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -89,7 +88,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     texDrawTableEntryAtStoredOrigin(2,0x24,0x8a,param_1,param_2,0x65);
     texDrawTableEntryAtStoredOrigin(2,0x24,0x4a,param_1,param_2,0x65);
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x49));
-    textFormatBuffer(temp_v13,&LAB_001de0f0);
+    sprintf((char *)temp_v13,(const char *)&LAB_001de0f0);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v13);

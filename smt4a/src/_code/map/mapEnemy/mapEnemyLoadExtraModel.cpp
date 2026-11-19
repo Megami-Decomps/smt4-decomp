@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail loads g_mapEnemy after the push and initialises the count earlier; the calls, flags and stores otherwise match. */
+#include <stdio.h>
 #include "Model/MoriModelContent.h"
 #include "gamedata/DataTable4CValue.h"
 #include "gfx/ControllerModel.h"
@@ -10,7 +11,6 @@
 
 extern "C" {
 extern EnemyExtraModelSource DAT_00582204[];
-void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 }
 
@@ -37,7 +37,7 @@ extern "C" u32 mapEnemyLoadExtraModel(s32 index)
         return 0;
 
     char resourceName[32];
-    textFormatBuffer(resourceName, "map/all/sym%03d.bam", DAT_00582204[index].modelId);
+    sprintf(resourceName, "map/all/sym%03d.bam", DAT_00582204[index].modelId);
     MoriModelContent *model = static_cast<MoriModelContent *>(asdMemoryAllocTraced(
         sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp", 948));
     if (model != NULL)

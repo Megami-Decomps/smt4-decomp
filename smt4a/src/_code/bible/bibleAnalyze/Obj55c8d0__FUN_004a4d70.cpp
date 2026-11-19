@@ -1,4 +1,5 @@
 /* NON_MATCHING: prologue order, fallback-name lifetime and the constant-argument schedule of the final tail call differ. */
+#include "runtime/Stdio.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
@@ -17,7 +18,6 @@ void pointConvertToFloat(f32 *point, s32 x, s32 y);
 u8 buttonHelpIsNotActive(void);
 void FUN_0032d0c8(s32 channel, s32 kind, u32 id, s32 mode);
 const char *dataLookupDisplayName(void *storage, u32 id);
-s32 textFormatBuffer(char *output, const char *format, ...);
 void buttonHelpSetText(const char *message, u32 color);
 extern const char DAT_0052b5bc[];
 extern const char DAT_0052b5c4[];
@@ -57,7 +57,7 @@ void Obj55c8d0::FUN_004a4d70()
             const char *name = dataLookupDisplayName(nameStorage, screen->displayNameId);
             if (!name)
                 name = DAT_0052b5bc;
-            textFormatBuffer(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
+            __2sprintf(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
             buttonHelpSetText(message, 0x323232ff);
         }
     }

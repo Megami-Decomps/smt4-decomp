@@ -1,6 +1,7 @@
 #include "gfx/StereoParallax.h"
 /* NON_MATCHING: the stereo parallax is recomputed per call where retail reuses one value, the kind switch is now a 19-entry jump table from 0 like retail and register assignment differs (225 vs 238 rows); the name plate drawing is the same. */
 #include "common.h"
+#include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include <string.h>
@@ -32,7 +33,6 @@ void drawSetColorFromRGBA8(u32 color);
 void gxResetColorQuadToWhite(void);
 void *gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
-void textFormatBuffer(void *buffer, const char *format, const char *text);
 
 /* Draws the talk window's name plate at (`x`, `y`) with fade `scale`: the frame, then for the
  * current message its portrait (highlighted for even kinds) and the speaker's name. */
@@ -95,7 +95,7 @@ void FUN_004045ac(TalkWindow *window, s32 x, s32 y, f32 scale)
             gameGetPlayerData();
             name = gameGetPlayerName();
         }
-        textFormatBuffer(text, "%s", name);
+        sprintf(text, "%s", name);
         TextureTableEntryIV *nameBox = asdTMTexTableEntryAt(0x32, 5);
         s32 labelX = nameBox->placement->width + plate->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
 

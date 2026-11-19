@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "map/LmapPlayerModel.h"
 #include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
@@ -239,7 +240,6 @@ int naviRegisterTransitionsAndRequest(...);
 int mapGetDepartureIndex(void);
 int commonBgStopChildAndBeginTransition(void);
 int scrScriptProcessCreate(...);
-int textFormatBuffer(...);
 int NaviMain_SetCurrentMap(...);
 void NaviMain_Start(int unused, int requestId);
 int mapRangeWorkReset(void);
@@ -661,7 +661,6 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002bd158. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
@@ -1244,10 +1243,10 @@ LAB_001b8b9c:
     scrScriptProcessCreate();
     puVar14[0x15] = temp_v9;
     *(unsigned int *)(temp_v9 + 0x108) = 3;
-    textFormatBuffer(temp_v21,0x1b8f68,puVar14[0xb],puVar14[0xb]);
+    __2sprintf((char *)temp_v21,(const char *)(0x1b8f68),puVar14[0xb],puVar14[0xb]);
     temp_v16 = asdLoadFileSyncDefault(temp_v21);
     puVar14[0x16] = temp_v16;
-    textFormatBuffer(temp_v21,0x1b8f7c,puVar14[0xb],puVar14[0xb]);
+    __2sprintf((char *)temp_v21,(const char *)(0x1b8f7c),puVar14[0xb],puVar14[0xb]);
     temp_v16 = asdLoadFileSyncDefault(temp_v21);
     puVar14[0x17] = temp_v16;
     temp_v9 = puVar14[0x16];
@@ -1508,7 +1507,7 @@ LAB_001b9210:
       puVar14[9] = 0x36;
       puVar14[10] = 0;
       puVar14[0x19] = (int)DAT_0049fa1c;
-      textFormatBuffer(puVar14 + 0x1a,&DAT_0049fa20);
+      __2sprintf((char *)(puVar14 + 0x1a),(const char *)&DAT_0049fa20);
       return 0;
     }
     if (*(char *)((int)puVar14 + 0x46) != '\0') {
@@ -1517,7 +1516,7 @@ LAB_001b9210:
       puVar14[0x19] = 0xe;
       puVar14[9] = 0x36;
       puVar14[10] = 0;
-      textFormatBuffer(puVar14 + 0x1a,0x1b95dc);
+      __2sprintf((char *)(puVar14 + 0x1a),(const char *)(0x1b95dc));
       return 0;
     }
     if (*(char *)(puVar14 + 0x12) == '\0') {
@@ -1545,7 +1544,7 @@ LAB_001b9210:
         puVar14[9] = 0x36;
         puVar14[10] = 0;
         puVar14[0x19] = DAT_0049fa64;
-        textFormatBuffer(puVar14 + 0x1a,&DAT_0049fa68);
+        __2sprintf((char *)(puVar14 + 0x1a),(const char *)&DAT_0049fa68);
         return 0;
       }
       temp_v9 = conditionalMessageFind(puVar14[0xb],puVar14[0xc]);
@@ -1555,7 +1554,7 @@ LAB_001b9210:
         puVar14[9] = 0x36;
         puVar14[10] = 0;
         puVar14[0x19] = (int)*(short *)(temp_v9 + 6);
-        textFormatBuffer(puVar14 + 0x1a,temp_v9 + 8);
+        __2sprintf((char *)(puVar14 + 0x1a),(const char *)(temp_v9 + 8));
         DAT_0049f9ac = (float)*(unsigned int *)(g_lmapScene + 0x4c);
         DAT_0049f9b0 = (float)*(unsigned int *)(g_lmapScene + 0x1c);
         DAT_0049f9b4 = (float)*(unsigned int *)(g_lmapScene + 0x20);
@@ -1838,7 +1837,7 @@ LAB_001b9210:
           puVar14[9] = 0x36;
           puVar14[10] = 0;
           puVar14[0x19] = DAT_0049f970;
-          textFormatBuffer(puVar14 + 0x1a,&DAT_0049f978);
+          __2sprintf((char *)(puVar14 + 0x1a),(const char *)&DAT_0049f978);
           return 0;
         }
         goto LAB_001bb1d4;
@@ -2125,7 +2124,7 @@ LAB_001ba78c:
                     uStack_1c8 = (unsigned int)DAT_0049fa18;
                     naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
                     puVar14[0x19] = DAT_0049f970;
-                    textFormatBuffer(puVar14 + 0x1a,&DAT_0049f978);
+                    __2sprintf((char *)(puVar14 + 0x1a),(const char *)&DAT_0049f978);
                     return 0;
                   }
                   goto LAB_001ba720;
@@ -2613,7 +2612,7 @@ LAB_001bab90:
                       puVar14[10] = 0;
                       if (DAT_0049f970 != 0) {
                         puVar14[0x19] = DAT_0049f970;
-                        textFormatBuffer(puVar14 + 0x1a,&DAT_0049f978);
+                        __2sprintf((char *)(puVar14 + 0x1a),(const char *)&DAT_0049f978);
                         *(unsigned char *)(puVar14 + 7) = 1;
                       }
                       uStack_1c4 = (unsigned int)DAT_0049fa19;
@@ -3420,7 +3419,7 @@ LAB_001bc008:
     mapPerFrameUpdate();
     if ((int)puVar14[10] >= 11) {
       puVar14[0x19] = DAT_0049fa3c;
-      textFormatBuffer(puVar14 + 0x1a,&DAT_0049fa40);
+      __2sprintf((char *)(puVar14 + 0x1a),(const char *)&DAT_0049fa40);
       DAT_0049fa3a = '\0';
       DAT_0049f934 = 1;
       DAT_0049f93c = 1;
@@ -4276,7 +4275,7 @@ LAB_001bd824:
                   puVar14[0x19] = 0x210;
                   puVar14[9] = 0x36;
                   puVar14[10] = 0;
-                  textFormatBuffer(puVar14 + 0x1a,0x1be078);
+                  __2sprintf((char *)(puVar14 + 0x1a),(const char *)(0x1be078));
                   return 0;
                 }
                 *(unsigned char *)(puVar14 + 8) = 1;
@@ -4621,7 +4620,7 @@ LAB_001bd824:
         puVar14[9] = 0x36;
         puVar14[10] = 0;
         puVar14[0x19] = (int)DAT_0049fa1c;
-        textFormatBuffer(puVar14 + 0x1a,&DAT_0049fa20);
+        __2sprintf((char *)(puVar14 + 0x1a),(const char *)&DAT_0049fa20);
         return 0;
       }
       if (puVar14[9] != 0x15) {
@@ -4731,8 +4730,8 @@ LAB_001bd824:
     mapDepartSetTarget(0xffffffff,0xffffffff);
     puVar23 = g_mapMain;
     messageSetConfirmDisplayMode();
-    textFormatBuffer(temp_v22,0x1be7c0,puVar23[0x19],puVar23[0x19]);
-    textFormatBuffer(temp_v23,0x1be7d8,puVar23[0x19],puVar23[0x19]);
+    __2sprintf((char *)temp_v22,(const char *)(0x1be7c0),puVar23[0x19],puVar23[0x19]);
+    __2sprintf((char *)temp_v23,(const char *)(0x1be7d8),puVar23[0x19],puVar23[0x19]);
     temp_v9 = aocPackageGrantsItem(g_aocSystem,puVar23[0x19],0);
     if (temp_v9 == 0) {
       temp_v16 = asdLoadFileSyncDefault(temp_v22);
@@ -4951,7 +4950,7 @@ LAB_001bec78:
         puVar14[0x19] = 0x20a;
         puVar14[9] = 0x36;
         puVar14[10] = 0;
-        textFormatBuffer(puVar14 + 0x1a,0x1befd0);
+        __2sprintf((char *)(puVar14 + 0x1a),(const char *)(0x1befd0));
         return 0;
       }
       if ((DAT_0049f958 == 0x2802001) && (temp_v10 = gameFlagIsSet(0x291), temp_v10 != 0)) {
@@ -4960,7 +4959,7 @@ LAB_001bec78:
         puVar14[0x19] = 0x20b;
         puVar14[9] = 0x36;
         puVar14[10] = 0;
-        textFormatBuffer(puVar14 + 0x1a,0x1befdc);
+        __2sprintf((char *)(puVar14 + 0x1a),(const char *)(0x1befdc));
         return 0;
       }
     }

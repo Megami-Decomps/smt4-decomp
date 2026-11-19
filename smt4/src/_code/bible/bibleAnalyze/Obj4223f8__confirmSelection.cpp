@@ -1,4 +1,5 @@
 /* NON_MATCHING: Obj4223f8::confirmSelection matches in logic, calls and the virtual panel rebind; retail keeps this+0x500 in a register for the mode flag, passes the shared strings through registers hoisted early, and addresses the state/substate pair with strd, so scheduling and frame size (68 vs 76) differ. */
+#include "runtime/Stdio.h"
 #include "ui/UiSpriteApi.h"
 #include "classes/Obj4223f8.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
@@ -43,7 +44,6 @@ s32 uiAnimationAdvanceChannel(void *channels, s32 index);
 void pointConvertToFloat(FloatPoint *point, s32 x, s32 y);
 void buttonHelpSetPreset(s32 preset);
 const char *dataLookupDisplayName(u8 *scratch, u32 id);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void buttonHelpSetText(const char *text, u32 color);
 u32 flaggedValueHolderGetTotal(const void *holder);
 void FUN_0029da34(s32 a, s32 b, u32 id);
@@ -69,7 +69,7 @@ void Obj4223f8::confirmSelection()
         if (name == NULL) {
             name = DAT_0040226c;
         }
-        textFormatBuffer(text, DAT_00402274, name, DAT_0043d990[2]);
+        __2sprintf(text, DAT_00402274, name, DAT_0043d990[2]);
         buttonHelpSetText(text, 0x323232FF);
     } else {
         BibleDetailEntry *entries = reinterpret_cast<BibleDetailEntry *>(reinterpret_cast<u8 *>(this) + 0x5A8);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: layout and instruction sequence match; only register numbering differs: retail keeps &g_effectEditor in r7, the dir literal in r6 and the locals' base in r5 (loading &g_effectEditor and the result before allocating the frame) and reads the node state through r0, so it reloads the label before the inlined `mov r0, #0` stub; this build uses r6/r5/r7 and r1 and omits that reload. */
+#include <stdio.h>
 #include "gfx/EffectEditorStorage.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ void FUN_00375ec8(EffMenuNode* node);
 void namedObjectFormatFullName(EffMenuNode* node, char* dest);
 void namedObjectFormatName(EffMenuNode* node, char* dest);
 char* libc_strcpy(char* dest, const char* src);
-void textFormatBuffer(char* dest, const char* format, ...);
 __weak void FUN_00362584_hook(void* list, const char* path);
 s32 FUN_0036d12c(EffMenuNode* node, const char* dir); // platform stub: `mov r0, #0; bx lr`
 
@@ -49,7 +49,7 @@ u32 FUN_00362584(void)
         result = 0x400000;
     } else if (input.state == 1 && g_effectEditor.list != NULL) {
         libc_strcpy(g_effectEditorResourceName, input.name);
-        textFormatBuffer(path, "%s%s", "effect_editor/", input.fullName);
+        sprintf(path, "%s%s", "effect_editor/", input.fullName);
         FUN_00362584_hook(g_effectEditor.list, path);
         result = 0x400002;
     }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack-pointer adjustment is scheduled before the first entry load and available=1 swaps r0/r1. */
+#include <stdio.h>
 #include "gamedata/DataTable.h"
 #include "addon/AocSystemA.h"
 
@@ -6,7 +7,6 @@ extern "C" {
 extern void *g_aocDisplay;
 void *dataTableFileGetTable(void *, s32);
 void sysMemClear(void *, u32);
-s32 textFormatBuffer(char *, const char *, ...);
 void aocQueueFileLoad(void *, const char *, AocPackageFile *, u32, u32, AocPackageFile *);
 
 void aocRequestDataEntryFiles(AocPackage *entry)
@@ -61,7 +61,7 @@ void aocRequestDataEntryFiles(AocPackage *entry)
         case 0x3b: {
             char path[0x80];
             sysMemClear(path, sizeof(path));
-            textFormatBuffer(path, "%s/%s", entry->mountName, rows[index].name);
+            sprintf(path, "%s/%s", entry->mountName, rows[index].name);
             AocPackageFile *file = &entry->files[index];
             aocQueueFileLoad(g_aocDisplay, path, file, 1, 0x80, file);
             entry->files[index].available = 1;

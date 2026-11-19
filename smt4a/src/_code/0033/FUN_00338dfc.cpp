@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338dfc` (_code @ 0x338dfc, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "mapnavi/naviMain.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int gameStatePickAvoidingRecent(void);
 int FUN_002c263c(void);
 int gameDataResetFloat(void);
@@ -35,7 +35,6 @@ extern unsigned char uRam005f0cd7; /* 0x5f0cd7 */
 extern int DAT_005f0cf4; /* 0x5f0cf4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
 extern int recordGetScaledMaximum(void);
 extern int gameFlagIsSet(unsigned int);
@@ -75,7 +74,7 @@ void FUN_00338dfc(void)
   }
   temp_v0 = FUN_00272d44();
   if (temp_v0 != 0) {
-    textFormatBuffer(0x5f0cc1,&LAB_0033915c);
+    sprintf((char *)(0x5f0cc1),(const char *)&LAB_0033915c);
   }
   else {
     temp_v0 = playerHasFlagBit(5);
@@ -94,7 +93,7 @@ void FUN_00338dfc(void)
           temp_v0 = temp_v0 + 3;
         }
         if (temp_v0 != 0) {
-          textFormatBuffer(0x5f0cc1,&LAB_00339174);
+          sprintf((char *)(0x5f0cc1),(const char *)&LAB_00339174);
           goto LAB_003391f8;
         }
       }
@@ -135,7 +134,7 @@ LAB_00338f14:
           temp_v0 = temp_v0 + 1;
 LAB_00339020:
           if (temp_v0 != 0) {
-            textFormatBuffer(0x5f0cc1,&LAB_00339198);
+            sprintf((char *)(0x5f0cc1),(const char *)&LAB_00339198);
             goto LAB_003391f8;
           }
         }
@@ -183,7 +182,7 @@ LAB_00339020:
     DAT_005f0cf4 = 0;
     temp_v0 = 0;
     gameStatePickAvoidingRecent();
-    textFormatBuffer(0x5f0cc1,&LAB_00339258,temp_v0 + 1);
+    sprintf((char *)(0x5f0cc1),(const char *)&LAB_00339258,temp_v0 + 1);
   }
 LAB_003391f8:
   if (0 < g_gameState.unk4AC) {

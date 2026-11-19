@@ -1,4 +1,5 @@
 /* NON_MATCHING: loader/source saved registers are swapped (retail loader r5, source r4), the state store is followed by the images/font reload in retail (ours hoists the load) and the final call is if-converted. */
+#include "runtime/Stdio.h"
 #include "battle/BattleEventAssets.h"
 
 extern "C" {
@@ -6,7 +7,6 @@ extern void *g_aocSystem;
 extern const char DAT_005285a0[];
 extern const char DAT_00528588[];
 void sysMemClear(void *buffer, u32 size);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 FUN_0046c4b4(void *system, u32 archiveId);
 void aocQueueType20(void *system, u32 archiveId, void **output, const char *path);
 void aocQueueType1f(void *system, u32 archiveId, void **output, const char *path);
@@ -19,7 +19,7 @@ u32 FUN_004d83b4(BattleEventAssetLoadState *loader, const BattleEventAssetSource
     char imagePath[128];
     char fontPath[128];
     sysMemClear(imagePath, sizeof(imagePath));
-    textFormatBuffer(imagePath, DAT_005285a0, source->name, source->name);
+    __2sprintf(imagePath, DAT_005285a0, source->name, source->name);
     if (FUN_0046c4b4(g_aocSystem, source->archiveId))
         aocQueueType20(g_aocSystem, source->archiveId, &loader->images, imagePath);
     else
@@ -28,7 +28,7 @@ u32 FUN_004d83b4(BattleEventAssetLoadState *loader, const BattleEventAssetSource
     if (loader->images) {
         loader->state = 5;
         sysMemClear(fontPath, sizeof(fontPath));
-        textFormatBuffer(fontPath, DAT_00528588, source->name, source->name);
+        __2sprintf(fontPath, DAT_00528588, source->name, source->name);
         if (FUN_0046c4b4(g_aocSystem, source->archiveId))
             aocQueueType1f(g_aocSystem, source->archiveId, &loader->font, fontPath);
         else

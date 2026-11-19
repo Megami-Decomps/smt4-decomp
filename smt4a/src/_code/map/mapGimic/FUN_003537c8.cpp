@@ -1,10 +1,9 @@
-/* NON_MATCHING: global pointer loads are scheduled differently around the prologue. */
+#include <stdio.h>
 #include "map/MapGimicGlobal.h"
 #include "Model/MoriModelContent.h"
 #include "code/Code001c.h"
 
 extern "C" {
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 
 // Reserve a free gimmick slot and load the requested map-unit model into it.
@@ -22,7 +21,7 @@ void FUN_003537c8(s32 unitId)
         }
     }
     char path[132];
-    textFormatBuffer(path, "map/unit/u%03d.bam", unitId);
+    sprintf(path, "map/unit/u%03d.bam", unitId);
     slot->active = 1;
     slot->id = (s16)unitId;
     void *storage = asdMemoryAllocTraced(

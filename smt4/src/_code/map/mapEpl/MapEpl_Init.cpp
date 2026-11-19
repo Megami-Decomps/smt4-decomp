@@ -1,4 +1,5 @@
 /* NON_MATCHING: free-slot sentinel lifetime, path/file-size stack slots and position conversion/store grouping differ. */
+#include <stdio.h>
 #include "map/mapEpl.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -16,7 +17,6 @@ typedef char MapEffectPlacementRecordSize[sizeof(MapEffectPlacementRecord) == 0x
 extern "C" {
 extern MapEpl *g_mapEpl;
 extern const char g_mapEplSourceFileName[];
-void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSync(const char *path, u32 *size, u32 heap, u32 alignment);
 void *FUN_002a4e98(void *data);
 void FUN_002a3ab0(void *object, const f32 *position);
@@ -46,7 +46,7 @@ void MapEpl_Init(s32 map, s32 area)
         if (placement->map != -1 && placement->map == map && placement->area == area) {
             char path[32];
             u32 fileSize;
-            textFormatBuffer(path, "effect_editor/%s.EPL", placement->name);
+            sprintf(path, "effect_editor/%s.EPL", placement->name);
             s32 slot = -1;
             for (s32 candidate = 0; candidate < MAP_EPL_ENTRIES; ++candidate) {
                 MapEplEntry *entry = &g_mapEpl->entries[candidate];

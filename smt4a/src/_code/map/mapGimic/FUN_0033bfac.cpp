@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033bfac` (_code @ 0x33bfac, 0xa14 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "map/MapGimicGlobal.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int asdMemoryAllocTraced(...);
 int gameFlagIsSet(...);
 int modelLoadFileAsyncByName(...);
@@ -24,7 +24,6 @@ int VectorSignedToFloat(int, int);
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: modelLoadFileAsyncByName. */
@@ -236,7 +235,7 @@ unsigned int FUN_0033bfac(void)
   FUN_003563fc();
   temp_v2 = ((unsigned int)g_mapGimic) + *(short *)(((unsigned int)g_mapGimic) + 0xe) * 0x3c;
   *(unsigned short *)(temp_v2 + 0xa6) = *(unsigned short *)(temp_v1 + 2);
-  textFormatBuffer(temp_v9,"map/unit/u%03d.bam");
+  sprintf((char *)temp_v9,"map/unit/u%03d.bam");
   temp_v1 = (int)*(short *)(temp_v2 + 0xa6);
   if (temp_v1 != 0x2e) {
     if (temp_v1 != 0x36) {

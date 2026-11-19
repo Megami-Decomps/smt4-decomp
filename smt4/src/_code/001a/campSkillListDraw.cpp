@@ -3,6 +3,7 @@
  * frame is 184 bytes (here 176) with the list pointer, name, owner flag and colour spilled to [sp,#156..176] and the
  * text buffer at sp+16, it keeps the row's skill id in fp and the part entries in sl (here swapped), loads g_camp
  * before the first call's constants, and adds some of the x/y sums with their operands in the other order. */
+#include <stdio.h>
 #include "camp/CampState.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
@@ -87,9 +88,9 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
 
         part = asdTMTexTableEntryAt(0x1d, 0x444);
         if (unit < 0) {
-            textFormatBuffer(text, "%d", FUN_0029a9d4(skill, 1));
+            sprintf(text, "%d", FUN_0029a9d4(skill, 1));
         } else {
-            textFormatBuffer(text, "%d", appGetRemainingCapacity(skill));
+            sprintf(text, "%d", appGetRemainingCapacity(skill));
         }
         FUN_002bdf94(0, row->x + part->x + x, part->y + row->y + y, 1, 4, 0x6f, text);
 
@@ -145,9 +146,9 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
 
         part = asdTMTexTableEntryAt(0x1d, 0x44d);
         if (unit < 0) {
-            textFormatBuffer(text, "%d", FUN_0029a9d4(skill, 1));
+            sprintf(text, "%d", FUN_0029a9d4(skill, 1));
         } else {
-            textFormatBuffer(text, "%d", appGetRemainingCapacity(skill));
+            sprintf(text, "%d", appGetRemainingCapacity(skill));
         }
         FUN_002bdf94(0, row->x + part->x + x, part->y + row->y + y, 1, 4, 0x83, text);
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x445, row->x + x, row->y + y, 0x83);
@@ -173,7 +174,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         texDrawCompositeSprite(2, 0x1a, 0x1b, x, y, 0xdd);
         TextureTableEntryIV *box = asdTMTexTableEntryAt(0x1a, 0x544);
         /* "No skills are available." in full-width characters */
-        textFormatBuffer(text, "\x82\x6d\x82\x8f\x81\x40\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x81\x40\x82\x93\x82\x81\x82\x92\x82\x85"
+        sprintf(text, "\x82\x6d\x82\x8f\x81\x40\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x81\x40\x82\x93\x82\x81\x82\x92\x82\x85"
                                "\x81\x40\x82\x81\x82\x96\x82\x81\x82\x89\x82\x8c\x82\x81\x82\x82\x82\x8c\x82\x85\x81\x44");
         s32 width = fontMeasureLineAdvance(text, 2);
         textDrawString(2, 0xffffffff, text, x + (box->x + (box->placement->width - width) / 2), box->y + y, 0.12890625f, 0.0f, 1.0f);

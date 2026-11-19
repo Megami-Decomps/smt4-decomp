@@ -1,5 +1,6 @@
 /* NON_MATCHING: path buffer/outgoing argument reuse and cold branch placement differ; -O2 candidate. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
@@ -47,7 +48,6 @@ void sysMemClear(void *, u32);
 u32 taskCreateDraw(const char *, u32, u32, u32, void (*)(), void (*)(), MovieProcess *, u32);
 s32 asdLoadFileGetUseRawPaths();
 void asdGxPresetRequest(u32);
-void textFormatBuffer(char *, const char *, ...);
 void libc_strcpy(char *, const char *);
 
 // Create the movie process and its per-screen drawing tasks.
@@ -73,12 +73,12 @@ u32 mobiclipProcessCreate(s32 movie, u8 options)
         }
         if (movie != 3) {
             work->special = 0;
-            textFormatBuffer(path, DAT_00532a48 - 16, DAT_00532a48, DAT_00588040[movie]);
+            __2sprintf(path, DAT_00532a48 - 16, DAT_00532a48, DAT_00588040[movie]);
         } else {
             work->special = 1;
             work->unk75 = 0;
             work->unk76 = 0;
-            textFormatBuffer(path, DAT_00532a24, DAT_00588040[3]);
+            __2sprintf(path, DAT_00532a24, DAT_00588040[3]);
         }
         work->state = 2;
         libc_strcpy(work->path, path);

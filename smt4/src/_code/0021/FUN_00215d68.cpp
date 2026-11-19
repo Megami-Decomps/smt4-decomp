@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00215d68` (_code @ 0x215d68, 0xbf4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -21,7 +22,6 @@ int demonGetRaceLabel(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(...);
 int texDrawTableEntryAtStoredOrigin(...);
 int texDrawCompositeSprite(...);
@@ -81,7 +81,6 @@ extern int resourceRunOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -170,11 +169,11 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
       }
     }
     if (temp_v8 == 0) {
-      textFormatBuffer(temp_v15,&LAB_002162d0);
+      sprintf((char *)temp_v15,(const char *)&LAB_002162d0);
     }
     else {
       temp_v4 = (int)FUN_002bd068(*puVar6);
-      textFormatBuffer(temp_v15,&LAB_002162d4,temp_v4);
+      sprintf((char *)temp_v15,(const char *)&LAB_002162d4,temp_v4);
     }
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
@@ -182,7 +181,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
     textDrawString(2,temp_v9,temp_v15);
     temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x4e));
     temp_v9 = demonGetRaceLabel(*puVar6,0);
-    textFormatBuffer(temp_v15,&LAB_002162d4,temp_v9);
+    sprintf((char *)temp_v15,(const char *)&LAB_002162d4,temp_v9);
     VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -299,10 +298,10 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
         }
         if (*(char *)((int)puVar2 + temp_v1 + 0x522a) != '\0') {
           temp_v9 = (int)FUN_002bd068(*psVar10);
-          textFormatBuffer(temp_v15,&LAB_002162d4,temp_v9);
+          sprintf((char *)temp_v15,(const char *)&LAB_002162d4,temp_v9);
         }
         else {
-          textFormatBuffer(temp_v15,&LAB_00216974);
+          sprintf((char *)temp_v15,(const char *)&LAB_00216974);
         }
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -312,7 +311,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
         textDrawString(2,temp_v11,temp_v15,(int)*(short *)(temp_v2 + 8));
         temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x13a));
         temp_v11 = demonGetRaceLabel(*psVar10,0);
-        textFormatBuffer(temp_v15,&LAB_002162d4,temp_v11);
+        sprintf((char *)temp_v15,(const char *)&LAB_002162d4,temp_v11);
         puVar11 = temp_v15;
         fontMeasureLineAdvance(puVar11,2);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,

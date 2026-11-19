@@ -1,5 +1,6 @@
 /* NON_MATCHING: character-grid text entry step of the effect menu (13 x 3 grid plus delete/confirm cells: moves the cursor with wrap, appends/removes the selected character, finishes on confirm/cancel, then draws the entry field and returns the grid's right edge or the result); written from the decompilation, the goto ladder is rebuilt as direction/action handling and the retail grid walk at the end is folded to its two results (last cell character stored, right-edge x returned) */
 #include "common.h"
+#include <stdio.h>
 
 #define KEYBOARD_COLUMNS 13
 #define KEYBOARD_ROWS 3
@@ -46,7 +47,6 @@ extern EffKeyboardView g_effMenuState;
 s32 padIsButtonRepeat(u32 button);
 s32 padIsButtonPressed(u32 button);
 void FUN_002b3fd8(s32 x, s32 y, s32 width, s32 height);
-void textFormatBuffer(u8 buffer[20], const char *format, const u8 *text, s32 *arg);
 
 /* True when either of the two button ids is held/repeating. */
 static __inline bool padRepeat2(u32 a, u32 b)
@@ -141,7 +141,7 @@ s32 FUN_00375ec8(KeyboardState *keyboard)
 
     u8 formatted[20];
     FUN_002b3fd8(x, y, KEYBOARD_FIELD_WIDTH, KEYBOARD_FIELD_HEIGHT);
-    textFormatBuffer(formatted, "%s%s", keyboard->text, &keyboard->formatArg);
+    sprintf((char *)formatted, "%s%s", keyboard->text, &keyboard->formatArg);
     FUN_002b3fd8(x, y + KEYBOARD_LIST_OFFSET_Y, KEYBOARD_FIELD_WIDTH, KEYBOARD_LIST_HEIGHT);
     if (keyboard->result != 0)
         return keyboard->result;

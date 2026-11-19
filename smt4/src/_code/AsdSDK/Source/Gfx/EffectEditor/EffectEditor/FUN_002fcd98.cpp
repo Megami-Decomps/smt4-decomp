@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fcd98` (_code @ 0x2fcd98, 0xfcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
@@ -27,7 +28,6 @@ int effEditorNodeChainApply(...);
 int padAlternateButtonIndex(...);
 int registrationEntryInsert(...);
 int padIsButtonRepeat(...);
-int textFormatBuffer(...);
 int padIsButtonPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int rt_memclr(void);
@@ -117,7 +117,6 @@ extern unsigned char *FUN_0024dd90(void);
 /* Supplied declaration required: FUN_002a3ab0. */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: padIsButtonRepeat. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: padIsButtonPressed. */
 extern int slotIsActive(unsigned int);
 /* Supplied declaration required: memAlloc. */
@@ -316,10 +315,10 @@ LAB_002fd1c8:
       temp_v7 = *(unsigned int *)(temp_v15 + 0x84) & 2;
       if ((*(unsigned int *)(temp_v15 + 0x98) & 1) != 0) {
         if (*(short *)(puVar12 + 4) != 0x14) {
-          textFormatBuffer(temp_v12,&LAB_002fd4d8,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          sprintf((char *)temp_v12,(const char *)&LAB_002fd4d8,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         else {
-          textFormatBuffer(temp_v12,&LAB_002fd508,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          sprintf((char *)temp_v12,(const char *)&LAB_002fd508,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         temp_v15 = temp_v4 + temp_v10 * 0x18;
         *(unsigned char **)(temp_v15 + 8) = &DAT_0044f778;
@@ -333,10 +332,10 @@ LAB_002fd1c8:
       }
       else {
         if (*(short *)(puVar12 + 4) != 0x14) {
-          textFormatBuffer(temp_v12,&LAB_002fd4e4,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          sprintf((char *)temp_v12,(const char *)&LAB_002fd4e4,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         else {
-          textFormatBuffer(temp_v12,&LAB_002fd4f0,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          sprintf((char *)temp_v12,(const char *)&LAB_002fd4f0,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         if (*(short *)(puVar12 + 4) == 0) {
           temp_v8 = 0x44f7b0;

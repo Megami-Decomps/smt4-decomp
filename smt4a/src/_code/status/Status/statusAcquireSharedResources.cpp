@@ -1,4 +1,5 @@
 /* Acquire and initialize the shared status-screen resources and update/draw tasks. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/Shard0033.h"
@@ -141,7 +142,7 @@ void statusAcquireSharedResources(void)
     *(unsigned char *)(workWords + 0x82c) = 1;
     g_gameGlobals.ownsStatusModel = 0;
     *(unsigned char *)((int)workWords + 0x20b1) = 1;
-    textFormatBuffer(reinterpret_cast<char *>(workWords + 0x81a),"");
+    sprintf(reinterpret_cast<char *>(workWords + 0x81a),"");
     workWords[0x82a] = 0xffffffff;
     *(unsigned char *)(workWords + 0x82b) = 0;
     *(unsigned char *)((int)workWords + 0x2012) = 1;
