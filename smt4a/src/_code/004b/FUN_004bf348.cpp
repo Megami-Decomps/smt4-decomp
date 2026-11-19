@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads some 64-bit kind masks as two word loads and others with ldrd, and repeats the queued-action check in each branch without merging the tails; ours uses ldrd throughout and shares the check (164 rows against 203). Logic and constants agree with retail. */
+/* NON_MATCHING: retail reads some 64-bit kind masks as two word loads and others with ldrd; ours picks the other form at several of them, and keeps the first two parameters in r7/r6 where retail has r6/r7 (200 rows against 203, 197 diff lines). Logic and constants agree with retail. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BattleSkillResponseMasks.h"

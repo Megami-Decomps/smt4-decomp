@@ -119624,17 +119624,7 @@
       "size": 432,
       "source": "src/_code/003a/FUN_003a9d48.cpp",
       "target": "orig/target/_code/003a/FUN_003a9d48.o",
-      "thumb": false,
-      "cflags": [
-        "--cpu=MPCore",
-        "--fpmode=fast",
-        "--apcs=/interwork",
-        "--cpp",
-        "--no_rtti",
-        "--no_rtti_data",
-        "-O3",
-        "-Ospace"
-      ]
+      "thumb": false
     },
     {
       "address": "0x3a9ef8",
@@ -163807,17 +163797,7 @@
       "size": 804,
       "source": "src/_code/004b/FUN_004bf348.cpp",
       "target": "orig/target/_code/004b/FUN_004bf348.o",
-      "thumb": false,
-      "cflags": [
-        "--cpu=MPCore",
-        "--fpmode=fast",
-        "--apcs=/interwork",
-        "--cpp",
-        "--no_rtti",
-        "--no_rtti_data",
-        "-O3",
-        "-Ospace"
-      ]
+      "thumb": false
     },
     {
       "address": "0x4bf67c",

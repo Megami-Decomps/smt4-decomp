@@ -74463,17 +74463,7 @@
       "size": 432,
       "source": "src/_code/0031/FUN_00312f14.cpp",
       "target": "orig/target/_code/0031/FUN_00312f14.o",
-      "thumb": false,
-      "cflags": [
-        "--cpu=MPCore",
-        "--fpmode=fast",
-        "--apcs=/interwork",
-        "--cpp",
-        "--no_rtti",
-        "--no_rtti_data",
-        "-O3",
-        "-Ospace"
-      ]
+      "thumb": false
     },
     {
       "address": "0x3130c4",

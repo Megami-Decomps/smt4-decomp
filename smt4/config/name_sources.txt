@@ -4827,7 +4827,7 @@
 002314e8 naviFieldSetCurrentMap inferred [med] sets navi field map; sole caller NaviMain_SetCurrentMap
 00233670 messageIdListInit inferred [high] resets list and fills it with itemCount message ids of group from firstItem
 0023d9b8 itemEffectCheckApplicable inferred [med] returns 0 if item effect would have any effect on target (heal/cure) else 3
-003e0c80 dateTimeGetHour evidence [high] extracts hour:ms/3600000smt4a	FUN_005020c0	dateTimeGetHour	evidence	[high] same body as smt4 FUN_003e0c80
+003e0c80 dateTimeGetHour evidence [high] extracts hour of day from a 64-bit millisecond timestamp (ms / 3600000)
 003e0ce8 dateTimeGetMinute evidence [high] extracts minute of day from a 64-bit millisecond timestamp (ms % 86400000); used by clock functions
 003e0d54 dateTimeGetSecond evidence [high] extracts second of day from a 64-bit millisecond timestamp (ms % 86400000); used by clock functions
 002346ac touchRegionOwnerAddRegion inferred [high] adds a touch region via ifTouchRegionAdd and stores its x/y/w/h and count

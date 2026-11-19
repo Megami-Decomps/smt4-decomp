@@ -116,6 +116,17 @@ Every match must be one a programmer could have written for a reason.
     IPC request stubs match as direct `cmd->header = …; cmd->words[i] = …;` stores (descriptors through
     `ipcMappedBufferDescriptor`), often with softvfp: most of smt4's request stubs at 0x351e54-0x3522f8
     and their smt4a twins at 0x4264d0-0x426a1c carry it, and their forwarders take the twin's flags;
+  - `python -B tools/flag_audit.py [--game G] [--jobs N] [--tsv OUT] [--apply none|evidenced]`
+    (output under `build/`, default `build/flag_audit.tsv`) looks for the flags that evidence points at
+    instead of trying every flag: each unmatched first-party unit is compiled (through `tools/trial.py`)
+    with the distinct cflags of its twin and of its three nearest units on each side, scored raw and
+    `--shape`, and each flag set gets an evidence class: `twin` (the twin carries exactly that set and is proven with it), `run` (the
+    preceding and following first-party units both carry it, or a run of two or more does on one side
+    and the other side is a module boundary), `one-side` (only one adjacent unit does) or `none`. Only
+    proven units count as carrying a set. `--apply evidenced` sets `cflags` (and drops the
+    `NON_MATCHING` comment) only for units that become IDENTICAL with `twin` or `run` evidence;
+    `one-side` hits are listed for review, and `--recheck F,...` re-derives a proven unit's flags with
+    its own cflags ignored (the wave-49 IPC stubs all come back IDENTICAL with `twin` evidence);
   - runtime helpers armcc emits itself are reached through the C that produces them, never called by
     name: `/` and `%` for the division helpers, `strcpy` of a literal or a packed-record assignment for
     `__ARM_common_memcpy4_N`. The exceptions are helpers b1454 never emits from C, `__aeabi_memset4`
