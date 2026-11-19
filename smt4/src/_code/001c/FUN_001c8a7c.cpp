@@ -22,7 +22,7 @@ typedef struct SkillSource {
     u16 skills[8];
 } SkillSource;
 
-void FUN_002b7bca(void *base, s32 count, s32 size, s32 (*compare)(const u16 *, const u16 *));
+void qsort(void *base, s32 count, s32 size, s32 (*compare)(const u16 *, const u16 *));
 s32 FUN_002c6e64(const u16 *left, const u16 *right);
 s32 FUN_0026b738(u16 skill);
 s32 recordContainsPairedId(u32 record, u16 skill);
@@ -34,7 +34,7 @@ static void poolDropDuplicate(SkillSlots *slots)
     for (s32 remaining = 7; remaining != 0; --remaining, ++i) {
         if (slots->pool[1 + i] == slots->pool[0]) {
             slots->pool[1 + i] = 0;
-            FUN_002b7bca(slots->pool, 8, 2, FUN_002c6e64);
+            qsort(slots->pool, 8, 2, FUN_002c6e64);
         }
     }
 }
@@ -69,7 +69,7 @@ void FUN_001c8a7c(SkillSlots *slots, u32 record, SkillSource *source, s32 swapIn
             }
         } else {
             slots->pool[0] = 0;
-            FUN_002b7bca(slots->pool, 8, 2, FUN_002c6e64);
+            qsort(slots->pool, 8, 2, FUN_002c6e64);
         }
         if (FUN_0026b738(replaced) == 0 || recordContainsPairedId(record, source->skills[slot]) != 0) {
             if (FUN_0026b738(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) != 0) {

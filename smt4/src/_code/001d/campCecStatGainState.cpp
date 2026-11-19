@@ -1,6 +1,3 @@
-/* NON_MATCHING: every case body matches; the difference is which copy of the shared `phase++` tail survives
- * (retail keeps phase 6's and sends phase 4 to it, this build keeps phase 4's), which epilogue copy the
- * branches reach (retail's is after phase 10, this build's after phase 9) and phase 10's register choice for 6. */
 #include "addon/LookupRecord.h"
 #include "camp/CecMenu.h"
 #include "camp/CampCec/CampCecView.h"
@@ -66,26 +63,26 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
         break;
     case 1:
         if (scrRunOpcodesStub(menu->talk.process) != 2)
-            return result;
+            break;
         btlTalkBustUpSetUnk2F4(1);
         ++menu->scriptFlow.phase;
         break;
     case 2:
         if (!btlTalkBustUpGetValue())
-            return result;
+            break;
         scrScriptProcessStartEntry(menu->talk.talkProcess, 2);
         ++menu->scriptFlow.phase;
         break;
     case 3:
         if (scrRunOpcodesStub(menu->talk.talkProcess) != 2)
-            return result;
+            break;
         ++menu->scriptFlow.phase;
         break;
     case 4: {
+        s32 amount;
+        s32 scriptEntry = 0;
         libc_strcpy(reinterpret_cast<u32 *>(name), reinterpret_cast<u32 *>(dataTable01FindByIdWithAoc(unit->id)->data));
         textEncodeFontSlot(0, name);
-        s32 amount;
-        s32 scriptEntry;
         if ((amount = (s16)menu->rewardUnit.statGains[0]) > 0) {
             scriptEntry = 2;
             unit->growth.statBonuses[0] += amount;
@@ -136,6 +133,11 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
             unitRecalculateEffectiveStats(unit);
             if (unit->effectiveStats[4] >= 999 && unit->effectiveStats[4] == before)
                 scriptEntry = 13;
+        }
+        if (scriptEntry != 0) {
+            FUN_0029ede8(1, amount, 0xffffffff, 0);
+            scrScriptProcessStartEntry(menu->talk.process, scriptEntry);
+            ++menu->scriptFlow.phase;
         } else {
             gameGlobalsSetSelected(0);
             statusDownSwitchTab(0);
@@ -150,39 +152,38 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
                 FUN_0029bed8(unit->id);
                 menu->loading = 0;
             }
-            return result;
         }
-        FUN_0029ede8(1, amount, 0xffffffff, 0);
-        scrScriptProcessStartEntry(menu->talk.process, scriptEntry);
-        ++menu->scriptFlow.phase;
-        return result;
+        break;
     }
     case 5:
         if (scrRunOpcodesStub(menu->talk.process) == 2)
             --menu->scriptFlow.phase;
-        return result;
+        break;
     case 6:
-        if (!battleTalkIsBustReady() || !FUN_00293f10(FUN_00262f78(), 1))
-            return result;
-        btlTalkBustUpReleaseTexture();
-        btlTalkBustUpSetDemonTexture(unit->id, 1);
-        menu->rewardPortraitPending = 0;
-        gameSetIconDisplayEnabled(1);
-        FUN_0029e788();
-        buttonHelpSetPreset(partyPanelIsActive() ? 0xcc : 0xe3);
-        ++menu->scriptFlow.phase;
+        if (battleTalkIsBustReady() && FUN_00293f10(FUN_00262f78(), 1)) {
+            btlTalkBustUpReleaseTexture();
+            btlTalkBustUpSetDemonTexture(unit->id, 1);
+            menu->rewardPortraitPending = 0;
+            gameSetIconDisplayEnabled(1);
+            FUN_0029e788();
+            if (partyPanelIsActive())
+                buttonHelpSetPreset(0xcc);
+            else
+                buttonHelpSetPreset(0xe3);
+            ++menu->scriptFlow.phase;
+        }
         break;
     case 7:
-        if (!FUN_0029e0f8())
-            return result;
-        gameGlobalsSetSelected(0);
-        FUN_0029c4c8(1);
-        FUN_0029d8f4(&menu->rewardUnit.beforeStatGains, 0, 0);
-        FUN_0029c4e4((u32)FUN_00262f94(), 0);
-        FUN_0029c4ac(0);
-        statusPanelSetOpen(1);
-        FUN_0026d654(0);
-        ++menu->scriptFlow.phase;
+        if (FUN_0029e0f8()) {
+            gameGlobalsSetSelected(0);
+            FUN_0029c4c8(1);
+            FUN_0029d8f4(&menu->rewardUnit.beforeStatGains, 0, 0);
+            FUN_0029c4e4((u32)FUN_00262f94(), 0);
+            FUN_0029c4ac(0);
+            statusPanelSetOpen(1);
+            FUN_0026d654(0);
+            ++menu->scriptFlow.phase;
+        }
         break;
     case 8:
         if (FUN_0029563c() && !FUN_00223c78() && !FUN_001ddc00() && !FUN_00293aac() &&
@@ -192,10 +193,10 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
             ++menu->scriptFlow.phase;
             beginStatusPanelClose();
         }
-        return result;
+        break;
     case 9: {
         if (!FUN_00295618())
-            return result;
+            break;
         menu->rewards.pending &= ~4;
         s32 nextReward = 0;
         if (menu->rewards.pending & 8)
@@ -225,13 +226,13 @@ extern "C" s32 campCecStatGainState(CampCecMenu *menu)
         FUN_0029c4c8(0);
         FUN_0026d670();
         menu->loading = 0;
-        return result;
+        break;
     }
     case 10:
         btlTalkBustUpReleaseTexture();
-        menu->state = 6;
-        result = 2;
         menu->scriptFlow.phase = 0;
+        result = 2;
+        menu->state = 6;
         break;
     }
     return result;

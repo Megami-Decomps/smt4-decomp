@@ -35,7 +35,7 @@ struct AlternateActionSkill {
 extern "C" {
 s32 randRange(u32);
 void btlEntryGetPassiveSkillIds(AlternateActionActor *, u16 *);
-void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
+void qsort(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 FUN_00333670(const void *, const void *);
 s32 halfwordKeyDescendingCompare(const void *, const void *);
 u32 FUN_0022a5d8(s32, AlternateActionActor *, s32);
@@ -65,9 +65,9 @@ u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, Alternate
             }
         }
         if (count) {
-            FUN_002b7bca(skills, 9, 2, FUN_00333670);
+            qsort(skills, 9, 2, FUN_00333670);
             FUN_0022a5d8(10, choice->actor, 1);
-            FUN_002b7bca(skills, count, 2, halfwordKeyDescendingCompare);
+            qsort(skills, count, 2, halfwordKeyDescendingCompare);
             s32 index = randRange((count - 1) & 0xffff);
             choice->command->type = 2;
             choice->command->skill = skills[index];

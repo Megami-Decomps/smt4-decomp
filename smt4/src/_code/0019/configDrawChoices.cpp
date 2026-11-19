@@ -1,13 +1,14 @@
-/* NON_MATCHING: prologue scheduling, floating constants and centered-label arithmetic/conversion registers differ; 91 instructions each. */
-#include "runtime/Stdio.h"
+/* NON_MATCHING: the prologue matches (sprintf with the format defined here); the two float constants swap s16/s17 and
+ * the centered label's x sum and conversion use different registers; 91 instructions each. */
+#include <stdio.h>
 #include "shard/S1ListPanel.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 #include "camp/Config/Config.h"
+static const char s_labelFormat[] = "%s";
 extern "C" {
-extern const char DAT_004028ec[];
 void texDrawCompositeSprite(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 
 // Draw configuration choices with the selected background and horizontally centered labels.
@@ -27,7 +28,7 @@ void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const Configuratio
             texDrawCompositeSprite(2, 0x2f, 8, position->x + x, position->y + y, 0x1f);
         }
         char text[64];
-        __2sprintf(text, DAT_004028ec, choices->labels[index]);
+        sprintf(text, s_labelFormat, choices->labels[index]);
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x2f, 0x41);
         s32 width = fontMeasureLineAdvance(text, 2);
         s32 labelX = position->x + (x + (label->x + (label->placement->width - width) / 2));

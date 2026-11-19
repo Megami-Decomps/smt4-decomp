@@ -1,4 +1,8 @@
-/* NON_MATCHING: 104 lines; twin of smt4a FUN_0032ba8c, same frame and block layout. Retail keeps the row frame's x sum in r0 and loads the render context after it, swaps r1/r2 in the cursor's first blend-state change and the label position's sums, and does not share the unpressed knob draw of the selected row with the unselected row's (it stores that call's stack arguments one by one where this build pairs them). */
+/* NON_MATCHING: 10 rows, registers and scheduling only (same instructions, frame and block layout as retail).
+ * Entering the row frame, retail loads g_titleScene through r0 after spilling the frame's x sum (built: through
+ * r2, before the sums); in the cursor's first blend-state change the stack slot address and the previous state
+ * take r2/r1 (built: r1/r2). The knob's touch test is the negative one (untouched knob first): written the other
+ * way round armcc shares the untouched knob's draw with the unselected row's. */
 #include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
 #include "camp/RenderCtxTitle.h"
@@ -59,10 +63,10 @@ static __inline void titleConfigDrawSlider(s32 rowX, s32 rowY, s32 level, bool i
             texDrawCompositeSprite(2, 0x2f, 6, rowX, rowY, 0x1f);
         }
         mode = ifTouchGetSelectionModeForRegion(menu->slider);
-        if (mode == 1 || mode == 2 || mode == 6) {
-            texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x32, knob->x + rowX, knob->y + rowY, 0x29);
-        } else {
+        if (mode != 1 && mode != 2 && mode != 6) {
             texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x31, knob->x + rowX, knob->y + rowY, 0x29);
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, 0x2f, 0x32, knob->x + rowX, knob->y + rowY, 0x29);
         }
     } else {
         texDrawCompositeSprite(2, 0x2f, 4, rowX, rowY, 0x1f);

@@ -28,7 +28,7 @@ typedef char ItemListDetailLayoutCheck[sizeof(ItemListDetailRecord) == 0x20 &&
 
 extern "C" {
 s32 flaggedValueHolderGetTotal(FlaggedValueHolder *holder);
-void FUN_0035ad50(u32 id, SlotRecordA *record);
+void unitRecordBuildFromSave(u32 id, SlotRecordA *record);
 u32 FUN_002a4b28(u16 id);
 void FUN_0032d0c8(u32 screen, u32 kind, u16 id, const SlotRecordA *record);
 
@@ -51,9 +51,9 @@ void FUN_0032cfe0(ItemListSelectionOwner *owner)
             FUN_0032d0c8(0, 1, (u16)id, slot);
             return;
         }
-        FUN_0035ad50((u16)id, &record);
+        unitRecordBuildFromSave((u16)id, &record);
     } else {
-        FUN_0035ad50((u16)id, &record);
+        unitRecordBuildFromSave((u16)id, &record);
         if (FUN_002a4b28((u16)id) == 0) {
             FUN_0032d0c8(0, 2, (u16)id, &record);
             return;

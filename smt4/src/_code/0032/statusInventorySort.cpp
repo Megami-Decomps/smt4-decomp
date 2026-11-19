@@ -11,7 +11,7 @@ struct StatusSortOptions {
 }
 
 extern "C" {
-void FUN_002b7bca(void*, s32, s32, EntryComparator);
+void qsort(void*, s32, s32, EntryComparator);
 void FUN_0027f3dc(void*, s32, s32, EntryComparator);
 s32 devilSlotCompareRaceDescending(const void*, const void*);
 s32 entryCompareByDataValue(const void*, const void*);
@@ -29,23 +29,23 @@ void statusInventorySort(void)
         &reinterpret_cast<const StatusSortOptions*>(gameDataGetSortPreferences())->inventory;
     if ((*options & 0x7F) == 1) {
         if (*options >> 7) {
-            FUN_002b7bca(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilSlotCompareRaceThenLevel);
+            qsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilSlotCompareRaceThenLevel);
         } else {
-            FUN_002b7bca(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilCompareNonEmptyFirstB);
+            qsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilCompareNonEmptyFirstB);
         }
     }
     if ((*options & 0x7F) == 8) {
         if (*options >> 7) {
-            FUN_002b7bca(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), FUN_002e45f8);
+            qsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), FUN_002e45f8);
         } else {
-            FUN_002b7bca(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), FUN_00206d9c);
+            qsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), FUN_00206d9c);
         }
     }
     if ((*options & 0x7F) == 2) {
         if (*options >> 7) {
-            FUN_002b7bca(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilCompareNonEmptyFirst);
+            qsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilCompareNonEmptyFirst);
         } else {
-            FUN_002b7bca(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilSlotCompareRaceDescending);
+            qsort(status->inventory.entries, status->inventory.count, sizeof(status->inventory.entries[0]), devilSlotCompareRaceDescending);
         }
     }
     if ((*options & 0x7F) != 3) {

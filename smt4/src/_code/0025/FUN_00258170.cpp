@@ -1,6 +1,7 @@
 /* NON_MATCHING: the retail unit inlines the NintendoWare resource accessors (relative-offset link resolution with null checks) with its own register scheduling; this version resolves the same links through one helper and a pointer-chasing helper, so the instruction count and allocation differ. */
-#include "common.h"
+#include "camp/Unite/UniteEffectState.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 namespace {
 /* Resource data stores most links as 32-bit offsets relative to the link itself (0 = none). */
@@ -9,48 +10,31 @@ static inline u32 *relativeLink(u32 *link)
     return *link != 0 ? reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(link) + *link) : NULL;
 }
 
-/* A pair of indices (a model or material, and one of its attributes or mappers). */
-struct ScreenSlot {
-    s16 first;
-    s16 second;
-};
-
 /* Reads the pointer stored `offset` bytes into `base`. */
 static inline u8 *pointerAt(u8 *base, u32 offset)
 {
     return *reinterpret_cast<u8 **>(base + offset);
 }
 
-/* The screen's work block: where its resources live and the slots that select what to scroll. */
-struct ScreenStateWork {
-    /* 0x000 */ u8 unk000[0x84];
-    /* 0x084 */ u8 *root;
-    /* 0x088 */ u8 unk088[0xc];
-    /* 0x094 */ ScreenSlot scrollSlots[64];   /* model, attribute usage minus 4 */
-    /* 0x194 */ s32 scrollCount;
-    /* 0x198 */ ScreenSlot mapperSlots[64];   /* material, texture mapper */
-    /* 0x298 */ s32 mapperCount;
-};
 }
 
 extern "C" {
-extern ScreenStateWork *g_screenStateWork;
 void FUN_003409f8(void *context, u8 buffer[16], f32 *offset);
 void nw_gfx_res_ResTextureMapper_SetTexture(u32 **mapper, u32 texture);
 
 /* Applies the screen's scroll to the model data it draws with: every selected attribute of the selected
    models gets the (u, v) offset FUN_003409f8 computes added to its first two floats, and the texture
    mappers of the selected materials get the context's texture. */
-void FUN_00258170(u8 *context)
+void FUN_00258170(UniteRenderTarget *context)
 {
-    ScreenStateWork *screen = g_screenStateWork;
+    UniteEffectWork *screen = g_screenStateWork;
     u8 buffer[16];
     f32 offset[2];
     FUN_003409f8(context, buffer, offset);
-    u8 *resourceSet = pointerAt(pointerAt(screen->root, 8), 0x2c);
-    for (s32 i = 0; i < screen->scrollCount; i++) {
+    u8 *resourceSet = reinterpret_cast<u8 *>(screen->model->node->sceneNode);
+    for (s32 i = 0; i < screen->materialSets.shapes.count; i++) {
         u32 *modelTable = relativeLink(reinterpret_cast<u32 *>(pointerAt(resourceSet, 8) + 200));
-        u32 *model = relativeLink(&modelTable[screen->scrollSlots[i].first]);
+        u32 *model = relativeLink(&modelTable[screen->materialSets.shapes.pairs[i].kind]);
         if (model != NULL && (~model[0] & 0x10000001) != 0) {
             model = NULL;
         }
@@ -74,7 +58,7 @@ void FUN_00258170(u8 *context)
                 u32 *attributeTable = node[0xb] != 0
                     ? reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(node) + node[0xb] + 0x2c) : NULL;
                 u32 *attribute = relativeLink(&attributeTable[a]);
-                if (static_cast<s32>(attribute[1]) != screen->scrollSlots[i].second + 4) {
+                if (static_cast<s32>(attribute[1]) != screen->materialSets.shapes.pairs[i].index + 4) {
                     continue;
                 }
                 if (static_cast<s32>(attribute[0xc]) >= 0) {
@@ -95,11 +79,11 @@ void FUN_00258170(u8 *context)
             }
         }
     }
-    for (s32 i = 0; i < screen->mapperCount; i++) {
-        u8 *material = pointerAt(pointerAt(pointerAt(resourceSet, 0x164), screen->mapperSlots[i].first * 4), 0x3c);
-        u32 *link = reinterpret_cast<u32 *>(material + 0x274 + screen->mapperSlots[i].second * 4);
+    for (s32 i = 0; i < screen->materialSets.materials.count; i++) {
+        u8 *material = pointerAt(pointerAt(pointerAt(resourceSet, 0x164), screen->materialSets.materials.pairs[i].kind * 4), 0x3c);
+        u32 *link = reinterpret_cast<u32 *>(material + 0x274 + screen->materialSets.materials.pairs[i].index * 4);
         u32 *mapper = relativeLink(link);
-        nw_gfx_res_ResTextureMapper_SetTexture(&mapper, *reinterpret_cast<u32 *>(context + 0xc));
+        nw_gfx_res_ResTextureMapper_SetTexture(&mapper, context->textureHandle);
         *reinterpret_cast<u32 *>(material + 0x2b0) = 0;
     }
 }

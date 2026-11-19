@@ -38,7 +38,7 @@ extern LightRegistry *DAT_005b3c98[2];
 extern void *g_asdModelTransformBuilder[2];
 extern void *g_effAsdLightHandle[2];
 extern LightCount g_asdLightCount[2];
-void FUN_0018e9d8(void *parent, LightRegistry *child);
+void nw_gfx_SceneNode_AttachChild(void *parent, LightRegistry *child);
 void sceneTraverserVisit(void *traverser, void *root);
 
 /* Removes every light of the batch from its registry, then leaves the scene group it was in. */
@@ -74,7 +74,7 @@ void asdMdlLightBatchRemove(LightBatch *batch)
     if (index >= 0 && registry->begin == registry->end) {
         g_asdLightCount[index].render.active = 0;
         g_asdLightCount[index].render.dirty = 0;
-        FUN_0018e9d8(g_asdModelTransformBuilder[index], DAT_005b3c98[index]);
+        nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[index], DAT_005b3c98[index]);
         sceneTraverserVisit(g_effAsdLightHandle[index], g_asdModelTransformBuilder[index]);
     }
     if (batch->owner != NULL) {

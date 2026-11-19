@@ -21,14 +21,14 @@ struct RankScreen {
 
 extern "C" {
 
-void FUN_002b7bca(void* base, u32 count, s32 size, s32 (*compare)(const void*, const void*));
+void qsort(void* base, u32 count, s32 size, s32 (*compare)(const void*, const void*));
 s32 FUN_001d1d34(const void* a, const void* b);
 
 // Sorts the rows, splits them into two groups where the key rises and assigns each row
 // the icon ids that centre it in its group.
 void FUN_001990d4(RankScreen* screen)
 {
-    FUN_002b7bca(screen->rows, screen->count, 0x2c, FUN_001d1d34);
+    qsort(screen->rows, screen->count, 0x2c, FUN_001d1d34);
     s32 groupCount[2] = { 0, 0 };
     s32 count = screen->count;
     s32 group = 0;

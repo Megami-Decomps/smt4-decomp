@@ -1,4 +1,8 @@
-/* NON_MATCHING: 485 vs 491 rows; the scans, the mark loop and every call match. Retail keeps the reflect slot 5 of the quest counter in fp from before btlMainFindActiveEntry and shares one `bl btlReflectCreateKind10` between the two follow-ups (an inline helper taking the slot reproduces both, but has one call site); it keeps the shared slotFlags[slot] = 1 store in the retry branch where armcc keeps it in the status branch; and it picks other scratch registers for the first next-command store, the marked-unit count, the second opposing-side scan and the status-0x400 scan. */
+/* NON_MATCHING: 485 vs 490 rows; the scans, the mark loop, the slot marks and every call match. Retail keeps the reflect
+ * slot 5 of the quest counter in fp from before btlMainFindActiveEntry and shares one `bl btlReflectCreateKind10` between
+ * the two follow-ups (an inline helper taking the slot reproduces both, but has one call site), which also swaps r6/r8
+ * between the active action and the held/current value; and it picks other scratch registers for the first next-command
+ * store, the second opposing-side scan and the status-0x400 scan. */
 #include "battle/BattleCommandController.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleHelpers_Smt4.h"
@@ -28,13 +32,13 @@ void FUN_00246454(s32 a, CommandState *work, BtlEntry *entry);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 s32 battleGetEntryHalfword(s32 id, s32 kind);
 s32 questGetCurrentRecordValue6(void);
-s32 questGetCurrentRecordValue8(void);
-s32 questCurrentGetValue(void);
-u32 questRecordValueIfState2(void);
-u16 FUN_00245cc0(s32 kind);
-void FUN_00255180(s32 unit, s32 kind, s32 value);
+u16 questGetCurrentRecordValue8(void);
+u16 questCurrentGetValue(void);
+u16 questRecordValueIfState2(void);
+s32 FUN_00245cc0(u32 kind);
+void FUN_00255180(u32 unit, s32 kind, s32 value);
 void FUN_003d03f8(BtlMainState **block, CommandState *work, s32 value, s32 kind, BtlActionRecord *record, BtlEntry *entry);
-s32 FUN_003c8880(void);
+u16 FUN_003c8880(void);
 void btlReflectCreateKind10(s32 a, CommandState *work, s32 value, s32 b);
 void FUN_00229754(BtlMainState **block, CommandState *work);
 
@@ -133,12 +137,12 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
                 FUN_0022a5d8(25, entry, 1);
                 data->primaryFlags = 0;
                 handled = true;
-                if ((entry->flags & 10) != 0) {
-                    anyUp = true;
-                    s32 slot = entry->selectionIndex;
-                    if (slot >= 0 && slot < 4)
-                        slotFlags[slot] = 1;
-                }
+                if ((entry->flags & 10) == 0)
+                    continue;
+                anyUp = true;
+                s32 slot = entry->selectionIndex;
+                if (slot >= 0 && slot < 4)
+                    slotFlags[slot] = 1;
             }
         }
         if (anyUp && slotFlags[0] != 0 && slotFlags[1] != 0 && slotFlags[2] != 0 && slotFlags[3] != 0) {
@@ -191,8 +195,7 @@ u32 btlCommandTurnEnd(BtlMainState **block, CommandState *work)
             u32 required = questRecordValueIfState2();
             u32 have = battleGetEntryHalfword(work->record->memberId, 29);
             if (current != 0 && required <= have) {
-                s32 charge = FUN_00245cc0(29);
-                FUN_00255180(work->record->memberId, 29, charge);
+                FUN_00255180(work->record->memberId, 29, FUN_00245cc0(29));
                 FUN_003d03f8(block, work, current, 25, activeAction, active);
                 s32 result = FUN_003c8880();
                 if (result != 0)

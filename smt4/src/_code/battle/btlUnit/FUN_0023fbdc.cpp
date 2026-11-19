@@ -66,7 +66,7 @@ s32 btlFindNthActiveSpecialEntry(ReflectBattle *battle, s32 mode);
 void btlSetSelectedListedValue(s32 value);
 void FUN_003ae720(BtlUi *block, s32 mode);
 void FUN_00240678(ReflectTask *task, ReflectBattle *battle);
-void FUN_002b7bca(ReflectUnit **list, s32 count, s32 stride, void *compare);
+void qsort(ReflectUnit **list, s32 count, s32 stride, void *compare);
 void FUN_0019d7d4(void);
 s32 pairedEntryTableContains(ReflectBattle *battle, u16 id);
 void FUN_0024057c(ReflectBattle *battle, ReflectUnit *unit, s32 a, s32 b, s32 style);
@@ -114,7 +114,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
                 waiting[waitingCount++] = unit;
             }
         }
-        FUN_002b7bca(waiting, waitingCount, 4, FUN_0019d7d4);
+        qsort(waiting, waitingCount, 4, FUN_0019d7d4);
         s16 started = 0;
         s32 firstStarted = 0;
         for (s32 i = 0; i < waitingCount; i++) {

@@ -7513,3 +7513,22 @@
 00314ef8 btlDebugClose inferred twin of IV btlDebugClose (inferred): stops the debug helper job and clears the owned flags
 0019c920 asdVramBlockListInsert inferred twin of IV asdVramBlockListInsert (inferred): inserts a block into the address-sorted VRAM block list
 00100388 __2sprintf evidence armlib sprintf entry (armcc 4.1 calls sprintf as __2sprintf): twin of smt4 0x2be624 (same 0x28-byte Thumb armlib body), called with smt4's sprintf call shapes
+002cf28c effMenuAppendColorRect inferred twin of smt4 FUN_002826d4
+0035a2a4 campCecRecvMenuIdleState inferred twin of smt4 FUN_002e1898 on the receive screen
+0037bd00 campCecRecvDestroy inferred tears down the receive screen and frees g_campCecRecv (shape of campCecDestroyOverlay)
+0039ec04 scrCommCecGetCount inferred twin of smt4 FUN_0030bc90
+00380b04 scrCommBattleSetStatusBit inferred script command: sets or clears a status bit on a battle unit or a save slot record and announces the set
+001414d4 asdSoundRegisteredSetPause inferred pauses or resumes the registered sound with an id (asdSoundRegisteredFind walk)
+00140924 asdSoundRegisteredStop inferred requests a registered sound's stop and retires its node once playback ends
+0013ebe8 asdSoundRegisteredRestart inferred restarts a registered sound and fades it to the requested 0..127 volume
+0038bd74 scrBtlEntryHasCategoryThreeSkill inferred script query: whether an eligible battle entry with the argument id has a category-three skill (inline btlEntryHasCategoryThreeSkill)
+003a8790 scrBtlUnitHasSkillCategory inferred script query over a unit's skills by category (smt4 twin FUN_00311fc4 has the same helper)
+0035ad50 unitRecordBuildFromSave inferred builds a runtime unit record from a saved demon; the saved-record twin of unitRecordBuild
+002cf698 btlEncountInitialize inferred near twin of smt4 btlEncountInitialize
+0018e9d8 nw_gfx_SceneNode_AttachChild inferred SceneNode::attachChild (circular-reference test then children.attach); near twin of smt4 nw_gfx_SceneNode_AttachChild
+0041f110 saveLoadUiWaitPopupDismissed inferred save menu mode 5: waits for the popup to be dismissed, then for the last slot sprite, then enters mode 6
+00420a2c saveLoadUiAdvanceSprites inferred advances the save menu's sprites by one frame (called by every save-menu mode handler)
+0041f5bc saveLoadUiRestartSpritesAndWait inferred save menu mode 13: restarts every sprite and the transition, then waits in mode 15
+0041fd5c saveLoadUiRestartSlotSpritesAndWait inferred save menu mode 14: restarts the slot sprites, then waits in mode 15
+003344b4 statusPreviewMpChange inferred status panel preview of an MP change (campSkillListUpdate passes the selected skill's cost)
+0023b8b0 uniteDrawPanel inferred fusion screen draw task

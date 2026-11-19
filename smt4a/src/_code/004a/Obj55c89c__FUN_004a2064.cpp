@@ -11,7 +11,7 @@ u32 shopListItemGetId(const void *entry);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 s32 rangeGetMinimumLimit(const FlaggedValueHolder *);
 void uiOpenStartAnimations(void *);
-void FUN_0035ad50(u32, UnitRecord *);
+void unitRecordBuildFromSave(u32, UnitRecord *);
 UnitRecord *slotRecordFindById(u32);
 s32 FUN_002a4b28(u32);
 void FUN_0032d0c8(s32, s32, u32, const UnitRecord *);
@@ -70,7 +70,7 @@ void Obj55c89c::FUN_004a2064()
         RosterTail *tail = reinterpret_cast<RosterTail *>(reinterpret_cast<u8 *>(menu) + 0x800);
         if (selected != previous) {
             if (tail->savedList == 0) {
-                FUN_0035ad50((u16)selected, &unit);
+                unitRecordBuildFromSave((u16)selected, &unit);
                 if (FUN_002a4b28((u16)selected))
                     FUN_0032d0c8(0, 1, (u16)selected, &unit);
                 else
@@ -78,7 +78,7 @@ void Obj55c89c::FUN_004a2064()
             } else {
                 selected = rows[flaggedValueHolderGetTotal(&menu->range)].getId();
                 if (tail->sourceKind != 1) {
-                    FUN_0035ad50((u16)selected, &unit);
+                    unitRecordBuildFromSave((u16)selected, &unit);
                     FUN_0032d0c8(0, 1, (u16)selected, &unit);
                 } else {
                     UnitRecord *saved = slotRecordFindById((u16)selected);

@@ -8,7 +8,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_002b7bca(int *, unsigned int, int, unsigned char *);
+int qsort(int *, unsigned int, int, unsigned char *);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -31,7 +31,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int idSlotsFindEntryById(int, unsigned int);
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: memClear. */
 
 
@@ -126,7 +126,7 @@ LAB_0033a884:
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x32);
-  FUN_002b7bca(aiStack_104 + 1,temp_v2,4,&LAB_0019d934);
+  qsort(aiStack_104 + 1,temp_v2,4,&LAB_0019d934);
   if ((param_3 & 0x10000) != 0) {
     temp_v10 = -20.0f;
     temp_v9 = 20.0f;

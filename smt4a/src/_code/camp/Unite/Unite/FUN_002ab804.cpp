@@ -4,6 +4,8 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "gamedata/GameFlags.h"
 #include "romwright_types.h"
+#include "camp/Unite/UniteDraw.h"
+#include "code/Code0015_Smt4a.h"
 
 extern "C" {
 
@@ -11,8 +13,7 @@ int dataTableGetCount(...);
 int dataTableGetEntries(...);
 
 int asdLoadFileWithSize(...);
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
+
 int asdOperatorNew(...);
 int asdMemoryAllocTracked(...);
 int memAlloc(...);
@@ -51,8 +52,8 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } void_stack;
 
-extern int FUN_001f5294(...); /* 0x1f5294 */
-extern int FUN_0023b8b0(...); /* 0x23b8b0 */
+
+
 extern int FUN_0028625c(...); /* 0x28625c */
 extern unsigned char LAB_002abbd8; /* 0x2abbd8 */
 extern unsigned char LAB_002abc10; /* 0x2abc10 */
@@ -71,7 +72,6 @@ extern int *g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
-/* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -143,9 +143,9 @@ void FUN_002ab804(void)
   piVar2[0x2428] = -1;
   mapSettings5BSetValueIfActive(0);
   puVar3 = &LAB_002abc10;
-  asdProcessCreateSimple(&LAB_002abc10,4,0,0,FUN_001f5294,0,0);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_002abc10), 4, 0, 0, FUN_001f5294, NULL, 0);
   piVar2[0xfe] = (int)puVar3;
-  taskCreateDraw(&LAB_002abc20,0xea,0,0,FUN_0023b8b0,0,0,puVar3);
+  taskCreateDraw(reinterpret_cast<const s8 *>(&LAB_002abc20), 0xEA, 0, 0, uniteDrawPanel, NULL, 0, puVar3);
   temp_v1 = 0x1b8;
   asdOperatorNew();
   if (temp_v1 != 0) {

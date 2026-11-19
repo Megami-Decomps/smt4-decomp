@@ -21,7 +21,7 @@ static inline UnitRecord *findComparisonPartyUnit(u32 id)
 }
 
 extern "C" {
-void FUN_0035ad50(u32, UnitRecord *);
+void unitRecordBuildFromSave(u32, UnitRecord *);
 s32 recordGetScaledMaximum(const UnitRecord *);
 
 void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
@@ -35,7 +35,7 @@ void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
     row->flags = 0;
     UnitRecord saved;
     if (compareParty) {
-        FUN_0035ad50(id, &saved);
+        unitRecordBuildFromSave(id, &saved);
         row->level = saved.level;
         row->maximum = recordGetScaledMaximum(&saved);
         row->secondaryMaximum = saved.maxMp;
@@ -45,11 +45,11 @@ void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
         row->otherMaximum = recordGetScaledMaximum(current);
         row->otherSecondaryMaximum = current->maxMp;
     } else {
-        FUN_0035ad50(id, &saved);
+        unitRecordBuildFromSave(id, &saved);
         row->level = saved.level;
         row->maximum = recordGetScaledMaximum(&saved);
         row->secondaryMaximum = saved.maxMp;
-        FUN_0035ad50(id, &saved);
+        unitRecordBuildFromSave(id, &saved);
         row->otherLevel = saved.level;
         row->otherMaximum = recordGetScaledMaximum(&saved);
         row->otherSecondaryMaximum = saved.maxMp;

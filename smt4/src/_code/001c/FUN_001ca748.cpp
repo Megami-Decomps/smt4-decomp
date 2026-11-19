@@ -27,7 +27,7 @@ int sortMenuCreate(...);
 int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int buttonHelpSetText(...);
 int FUN_002a0cc8(...);
-int FUN_002b7bca(...);
+int qsort(...);
 int eventQueueAddUnique(...);
 int statusInventorySort(void);
 
@@ -111,7 +111,7 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: gridNavigationConfigure. */
 /* Supplied declaration required: FUN_002a0cc8. */
 extern int gameDataGetSortPreferences(void);
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int uiSlidingSpriteAdvance(int, unsigned int);
@@ -802,28 +802,28 @@ LAB_001cb104:
         temp_v15 = gameDataGetSortPreferences();
         if ((*(unsigned char *)(temp_v15 + 0x15) & 0x7f) == 1) {
           if ((char)*(unsigned char *)(temp_v15 + 0x15) < '\0') {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,devilIdCompareRankOrderId);
+            qsort(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,devilIdCompareRankOrderId);
           }
           else {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_00206d4c);
+            qsort(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_00206d4c);
           }
         }
         temp_v0 = *(unsigned char *)(temp_v15 + 0x15);
         if ((temp_v0 & 0x7f) == 0x21) {
           if ((char)temp_v0 < '\0') {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_002dc9d4);
+            qsort(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_002dc9d4);
           }
           else {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_001f61c4);
+            qsort(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,FUN_001f61c4);
           }
         }
         temp_v0 = *(unsigned char *)(temp_v15 + 0x15);
         if ((temp_v0 & 0x7f) == 3) {
           if ((char)temp_v0 < '\0') {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,recordCompareByKey);
+            qsort(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,recordCompareByKey);
           }
           else {
-            FUN_002b7bca(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,entryRefCompareByKey);
+            qsort(temp_v6 + 0x5c8,(int)*(short *)(temp_v6 + 0xdc8),4,entryRefCompareByKey);
           }
         }
         *(unsigned char *)(temp_v2 + 0x410) = 1;

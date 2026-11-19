@@ -13,7 +13,7 @@ int idMapLookup(...);
 int passiveSkillLookupRecord(...);
 int dataTable06Sub1GetRecord(...);
 int skillDataFindById(...);
-int FUN_002b7bca(...);
+int qsort(...);
 int nkmBaseGetRecord(...);
 int asdMemFree(...);
 int asdMemoryAlloc(...);
@@ -58,7 +58,7 @@ extern int FUN_0026a604(unsigned int);
 extern int affinityShouldReplaceState(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: skillDataFindById. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -216,8 +216,8 @@ LAB_0029b3f4:
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < param_2);
   }
-  FUN_002b7bca(temp_v13,temp_v14,2,recordCompareCategorySixFirst);
-  FUN_002b7bca(temp_v19,temp_v20,2,dataTable06ComparePriority);
+  qsort(temp_v13,temp_v14,2,recordCompareCategorySixFirst);
+  qsort(temp_v19,temp_v20,2,dataTable06ComparePriority);
   temp_v16 = FUN_00205568(0,temp_v7,param_3,param_4);
   temp_v1 = 0x100;
   asdMemoryAlloc(0x100,0x100,0,temp_v16 << 1,1);

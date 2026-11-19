@@ -1,10 +1,10 @@
-/* NON_MATCHING: only entry instruction scheduling and the switch-index versus sound-flags scratch registers differ. */
+/* NON_MATCHING: only the switch index and the raw sound flags swap r1/r2. */
 #include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "ui/UiControl.h"
 #include "addon/LookupRecord.h"
+#include "code/Code002b_Smt4.h"
 extern "C" {
-u32 FUN_002bfdd4(void);
 void textFormatFullWidthTwoDigits(s32 count, char *text);
 const char *textConvertToGlyphPairs(void *record, s32 variant);
 void dialogSetText(const char *text);

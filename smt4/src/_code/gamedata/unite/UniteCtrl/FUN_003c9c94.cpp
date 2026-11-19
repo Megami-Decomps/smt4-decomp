@@ -44,7 +44,7 @@ struct UniteCtrl {
 
 extern "C" {
 s32 recordCompareRankAndIndex(const RankedRecord *left, const RankedRecord *right);
-void FUN_002b7bca(void *base, s32 count, s32 elementSize, s32 (*compare)(const RankedRecord *, const RankedRecord *));
+void qsort(void *base, s32 count, s32 elementSize, s32 (*compare)(const RankedRecord *, const RankedRecord *));
 
 /* Counts the fusable demons per race, allocates and fills the per-race lists, sorts them and
  * resets the fusion selection state. */
@@ -81,7 +81,7 @@ UniteCtrl *FUN_003c9c94(UniteCtrl *unite)
     }
     for (i = 0; i < UNITE_RACE_COUNT; i++) {
         if (unite->lists[i] != NULL)
-            FUN_002b7bca(unite->lists[i], unite->counts[i], sizeof(UniteDevilEntry), recordCompareRankAndIndex);
+            qsort(unite->lists[i], unite->counts[i], sizeof(UniteDevilEntry), recordCompareRankAndIndex);
     }
     unite->unk11C = 0;
     unite->unk11E = 0;

@@ -1,10 +1,9 @@
-/* NON_MATCHING: result, state and flags use different saved registers; the default voice id is zeroed later than in retail. */
 #include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "ui/UiControl.h"
+#include "code/Code002b_Smt4.h"
 
 extern "C" {
-u32 FUN_002bfdd4();
 u32 FUN_002bfdc4();
 void textFormatFullWidthTwoDigits(s32, char *);
 u32 dataFindKindRecordWithAocOverrides(u32, s32);
@@ -16,10 +15,11 @@ void FUN_002bfc24(s32, u32, u32, u32, f32, f32);
 void mapIfShowItemResultMessage(u32 result, u32 item, s32 count)
 {
     MapIfState *state = g_mapIf.state;
-    u32 flags = FUN_002bfdd4() | 4;
+    u32 message = 0;
+    u32 flags = FUN_002bfdd4();
+    flags |= 4; /* map messages always add flag 4 (scrCommQueueRequest adds it for kinds 1 and 3) */
     state->unk18 = 1;
     state->unk1C = 0;
-    u32 message = 0;
     char text[128];
     char countText[12];
     switch (result) {

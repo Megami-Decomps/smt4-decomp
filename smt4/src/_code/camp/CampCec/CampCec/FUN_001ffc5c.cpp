@@ -18,7 +18,7 @@ void FUN_002ccb7c();
 void FUN_001ebedc();
 void campCecStatGainState();
 void FUN_002110ac();
-void FUN_002e1898();
+void campCecMenuIdleState();
 void FUN_002114fc();
 void FUN_001dbeb8();
 void FUN_001ebe10();
@@ -67,7 +67,7 @@ void FUN_001ffc5c()
     work->handlers[3] = FUN_001ebedc;
     work->handlers[4] = campCecStatGainState;
     work->handlers[5] = FUN_002110ac;
-    work->handlers[6] = FUN_002e1898;
+    work->handlers[6] = campCecMenuIdleState;
     work->handlers[9] = FUN_002114fc;
     work->handlers[7] = FUN_001dbeb8;
     work->handlers[10] = FUN_001ebe10;

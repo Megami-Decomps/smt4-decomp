@@ -29,7 +29,7 @@ s32 fusionComparePairPriority(const void *a, const void *b);
 s32 FUN_001e1540(const void *a, const void *b);
 s32 FUN_002d02b0(const void *a, const void *b);
 u32 FUN_0029ce60(u32 id, s32 a, s32 b, s32 c, s32 d);
-void FUN_002b7bca(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 void FUN_0027f3dc(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
 /* Sort the fusion pair list by the key the player selected. */
@@ -40,16 +40,16 @@ void FUN_00196d78(void)
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {
         if (ascending) {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndId);
+            qsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndId);
         } else {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndIdDescending);
+            qsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndIdDescending);
         }
     }
     if ((*setting & 0x7f) == 2) {
         if (ascending) {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByParentLevelRaceId);
+            qsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByParentLevelRaceId);
         } else {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), uniteComparePairsDescending);
+            qsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), uniteComparePairsDescending);
         }
     }
     if ((*setting & 0x7f) == 7) {
@@ -67,9 +67,9 @@ void FUN_00196d78(void)
             work->pairSortIV.pairScores[work->pairSortIV.sortedPairs[i]] = score;
         }
         if (ascending) {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairScoreAscending);
+            qsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairScoreAscending);
         } else {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairPriority);
+            qsort(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairPriority);
         }
     }
     if ((*setting & 0x7f) == 3) {

@@ -17,7 +17,7 @@ extern "C" {
 extern BattleVersionResources *DAT_00435d18;
 extern BattleAppearanceTiming DAT_00439a20;
 s32 compareDistanceFromOrigin(const void *left, const void *right);
-void FUN_002b7bca(void *entries, s32 count, u32 size, s32 (*compare)(const void *, const void *));
+void qsort(void *entries, s32 count, u32 size, s32 (*compare)(const void *, const void *));
 void FUN_0024057c(BtlMainState *state, BtlActionRecord *action, s32 mode, s32 flags, s32 kind);
 void btlReflectInitKind9(s32 delay, s32 mode, BtlActionRecord *action, u32 effect, s32 kind);
 void FUN_0024082c(BtlCamera *main, s32 duration);
@@ -33,7 +33,7 @@ void FUN_00336bec(BtlMainState *state)
         if ((action->status & 1) && (action->status & 2))
             actions[count++] = action;
     }
-    FUN_002b7bca(actions, count, sizeof(actions[0]), compareDistanceFromOrigin);
+    qsort(actions, count, sizeof(actions[0]), compareDistanceFromOrigin);
     s16 order = 0;
     for (s32 i = 0; i < count; ++i) {
         BtlActionRecord *action = actions[i];

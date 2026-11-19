@@ -1,4 +1,7 @@
-/* NON_MATCHING: 48 lines, registers only (same instructions, frame and block layout). Retail keeps the row frame's x sum in r0 (spilled and reloaded into r3) and its y sum in r1 where this build swaps them; in the frame's two blend-state changes the stack slot address and the previous state take r2/r1 instead of r1/r2; the label position's y and x sums take r1/r0 instead of r0/r1. */
+/* NON_MATCHING: 24 rows, registers only (same instructions, frame and block layout as retail). Retail keeps the
+ * row frame's x sum in r0 (spilled and reloaded into r3) and its y sum in r1 where this build swaps them; in the
+ * cursor's two blend-state changes the stack slot address and the previous state take r2/r1 (built: r1/r2); the
+ * label position's y and x sums take r1/r0 (built: r0/r1). */
 #include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
 #include "camp/RenderCtxA.h"
@@ -64,10 +67,10 @@ static void titleConfigDrawSlider(s32 rowX, s32 rowY, s32 level, bool isSelected
             texDrawCompositeSprite(2, 0x24, 6, rowX, rowY, 0x1f);
         }
         mode = recordGetModeForId(menu->touchRegions[3]);
-        if (mode == 1 || mode == 2 || mode == 6) {
-            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x32, knob->x + rowX, knob->y + rowY, 0x29);
-        } else {
+        if (mode != 1 && mode != 2 && mode != 6) {
             texDrawTableEntryAtStoredOrigin(2, 0x24, 0x31, knob->x + rowX, knob->y + rowY, 0x29);
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x32, knob->x + rowX, knob->y + rowY, 0x29);
         }
     } else {
         texDrawCompositeSprite(2, 0x24, 4, rowX, rowY, 0x1f);

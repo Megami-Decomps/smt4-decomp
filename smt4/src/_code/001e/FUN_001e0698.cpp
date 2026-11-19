@@ -8,7 +8,7 @@ extern "C" {
 extern u8 LAB_0032c6c8;
 #define REQUEST_CALLBACK (&LAB_0032c6c8)
 
-int FUN_002b7bca(u32 arg0, u32 arg1, int size, u8 *callback);
+int qsort(u32 arg0, u32 arg1, int size, u8 *callback);
 u32 fileSlotLoad(u32 arg);
 u32 dataTableGetCount(u32 arg);
 u32 dataTableGetEntries(void);
@@ -24,11 +24,11 @@ u32 FUN_001e0698(void)
     selected = dataTableGet(0x16, 0);
     other = dataTableGetEntries();
     selected = dataTableGetCount(selected);
-    FUN_002b7bca(other, selected, 0x60, REQUEST_CALLBACK);
+    qsort(other, selected, 0x60, REQUEST_CALLBACK);
     selected = dataTableGet(0x16, 1);
     other = dataTableGetEntries();
     selected = dataTableGetCount(selected);
-    FUN_002b7bca(other, selected, 0x60, REQUEST_CALLBACK);
+    qsort(other, selected, 0x60, REQUEST_CALLBACK);
     return result;
 }
 

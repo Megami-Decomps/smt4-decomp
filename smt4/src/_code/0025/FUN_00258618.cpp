@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
 #include "camp/RenderCtxTitle.h"
+#include "camp/Unite/UniteEffectState.h"
 
 /* A 4x4 matrix stored row by row. */
 struct Matrix44 {
@@ -34,13 +35,6 @@ struct LogoObject {
     /* 0x10 */ LogoBox *box;
 };
 
-/* The title screen's draw request: the logo to draw and the screen holder. */
-struct TitleLogoRequest {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ LogoObject *logo;
-    /* 0x08 */ ScreenHolder *holder;
-};
-
 extern "C" {
 void FUN_002f5288(ScreenHolder *holder, s32 mode);
 void FUN_00343324(RenderCtx *context, const Matrix44 *projection, s32 mode);
@@ -53,7 +47,7 @@ void renderCtxResetColorScale(RenderCtx *context);
 
 /* Draws the title logo under a flat orthographic projection the size of the screen, with the
    render states the logo needs pushed for the draw and popped afterwards. */
-void FUN_00258618(TitleLogoRequest *request)
+void FUN_00258618(UniteRenderTarget *request)
 {
     FUN_002f5288(request->holder, 0);
     ScreenSize *screen = request->holder->screen;
@@ -85,13 +79,13 @@ void FUN_00258618(TitleLogoRequest *request)
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(5, 1));
     renderCtxPushG(g_titleScene, flagsPackFourBooleans(1, 1, 1, 1));
 
-    LogoBox *box = request->logo->box;
+    LogoBox *box = request->texture->box;
     f32 position[3];
     position[0] = 0.0f + (f32)-box->offsetX;
     position[1] = (f32)request->holder->screen->height - 143.0f;
     position[0] = position[0] + (f32)(s32)((f32)(request->holder->screen->width - box->width) * 0.5f);
     position[2] = 0.0f;
-    FUN_0023e024(request->logo, FUN_003deab0(request->logo, 0), position, -1, 1, 1.0f);
+    FUN_0023e024(request->texture, FUN_003deab0(request->texture, 0), position, -1, 1, 1.0f);
 
     renderStackPop(&g_titleScene->additional.stackG);
     renderStackPop(&g_titleScene->additional.stackC);

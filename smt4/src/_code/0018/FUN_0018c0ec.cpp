@@ -73,7 +73,7 @@ int FUN_00295cec(...);
 int soundSlotStopById(...);
 int slotUnitIsInActiveParty(...);
 int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
-int FUN_002b7bca(...);
+int qsort(...);
 int eventQueueAddUnique(...);
 int timerStart(...);
 int spriteStartAnimationByIndex(...);
@@ -220,7 +220,7 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: buttonHelpSetContext. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
@@ -929,7 +929,7 @@ LAB_0018d058:
           piVar17 = (int *)(temp_v2 + 0xcf74);
           *piVar17 = 0;
           *(unsigned int *)(temp_v2 + 0xcf78) = 0;
-          FUN_002b7bca(temp_v29,0x19,0x620,partyCompareSlotOrder);
+          qsort(temp_v29,0x19,0x620,partyCompareSlotOrder);
           temp_v4 = 0;
           do {
             if (*(char *)(temp_v2 + temp_v4 * 0x620 + 0x3654) == '\x7f') break;

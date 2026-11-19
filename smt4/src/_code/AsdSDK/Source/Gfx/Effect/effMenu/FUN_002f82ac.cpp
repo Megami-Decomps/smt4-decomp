@@ -37,7 +37,7 @@ void asdMemFree(void *memory);
 void *spriteGroupCreateFromFile(const void *file);
 void handleBlockRefDrop(void **reference);
 void FUN_00282780(u32 x, u32 y, u32 width, u32 height);
-void FUN_002826d4(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 flags);
+void effMenuAppendColorRect(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 flags);
 extern EffMenuLists DAT_004ea7e0;
 u32 sysGetTableWord(s32 index);
 void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 alignment);
@@ -199,7 +199,7 @@ u64 FUN_002f82ac(EffMenuBrowser *menu)
 
     FUN_00282780(menu->x, menu->y, 0xcc, 0xe8);
     if (menu->hasPreview != 0) {
-        FUN_002826d4(menu->x, menu->y + 0xea, 0x80, 0x80, menu->previewAlpha, 0);
+        effMenuAppendColorRect(menu->x, menu->y + 0xea, 0x80, 0x80, menu->previewAlpha, 0);
     }
     u32 drawY = (u32)menu->source;
     u32 rowY = menu->y + 2;

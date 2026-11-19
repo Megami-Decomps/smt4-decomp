@@ -20,7 +20,7 @@ void FUN_00176538(void* light);
 void FUN_001445d4(void);
 void FUN_00141724(void);
 void FUN_00143424(void);
-bool FUN_0018e9d8(ModelSlotList* parent, u32 child);
+bool nw_gfx_SceneNode_AttachChild(ModelSlotList* parent, u32 child);
 
 // Initialize the two model-slot light resources and attach their existing scene nodes.
 void FUN_001399b0(const u32* settings, u32 options)
@@ -41,14 +41,14 @@ void FUN_001399b0(const u32* settings, u32 options)
     FUN_00143424();
     if (g_asdModelSlotArray0[0] != NULL) {
         if (state->node0 != 0) {
-            FUN_0018e9d8(g_asdModelSlotArray0[0], state->node0);
+            nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0[0], state->node0);
         }
         if (state->auxiliaryNode != 0) {
-            FUN_0018e9d8(g_asdModelSlotArray0[0], state->auxiliaryNode);
+            nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0[0], state->auxiliaryNode);
         }
     }
     if (g_asdModelSlotArray0[1] != NULL && state->node1 != 0) {
-        FUN_0018e9d8(g_asdModelSlotArray0[1], state->node1);
+        nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0[1], state->node1);
     }
 }
 }

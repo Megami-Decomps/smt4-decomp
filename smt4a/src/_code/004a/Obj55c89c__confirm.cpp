@@ -50,7 +50,7 @@ void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 u32 slotRecordFindById(u16 id);
 void scriptProcessSetMode(ScriptProcess *script, s32 mode);
 void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
-void FUN_0035ad50(u16 id, u8 *out);
+void unitRecordBuildFromSave(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);
 void FUN_0037c8e4(s32 a, s32 b);
 void FUN_004a3b48(BibleItemMenu *menu);
@@ -83,7 +83,7 @@ void Obj55c89c::confirm()
         }
         sysPlaySe(0x2F);
         u8 detail[300];
-        FUN_0035ad50((u16)id, detail);
+        unitRecordBuildFromSave((u16)id, detail);
         if (FUN_002a4b28((u16)id) != 0) {
             FUN_0032d0c8(0, 1, (u16)id, detail);
         } else {

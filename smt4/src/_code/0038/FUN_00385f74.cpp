@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00141710(...);
 
-int FUN_002b7bca(...);
+int qsort(...);
 int nnnstdMemCpy(...);
 
 int itemVariantReselect(unsigned int);
@@ -157,7 +157,7 @@ extern unsigned char FUN_00387c68; /* 0x387c68 */
 /* Supplied declaration required: packageEntryGetDirectory. */
 /* Supplied declaration required: packageEntryIsLoaded. */
 /* Supplied declaration required: FUN_002b486c. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_0038e2ac. */
@@ -1016,25 +1016,25 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
     } while ((int)temp_v49 < param_1->field_0x310);
   }
   if (param_1->field_0x384 != 0) {
-    FUN_002b7bca(param_1->field_0x388,param_1->field_0x384,0x1b4,&dataCompareUnsignedHalfwordKeys);
+    qsort(param_1->field_0x388,param_1->field_0x384,0x1b4,&dataCompareUnsignedHalfwordKeys);
   }
   if (param_1->field_0x35c != 0) {
-    FUN_002b7bca(param_1->field_0x360,param_1->field_0x35c,0x94,&FUN_003876b0);
+    qsort(param_1->field_0x360,param_1->field_0x35c,0x94,&FUN_003876b0);
   }
   if (param_1->field_0x364 != 0) {
-    FUN_002b7bca(param_1->field_0x368,param_1->field_0x364,0xa8,&FUN_00385b64);
+    qsort(param_1->field_0x368,param_1->field_0x364,0xa8,&FUN_00385b64);
   }
   if (param_1->field_0x374 != 0) {
-    FUN_002b7bca(param_1->field_0x378,param_1->field_0x374,0x28,&FUN_00387c68);
+    qsort(param_1->field_0x378,param_1->field_0x374,0x28,&FUN_00387c68);
   }
   if (param_1->field_0x42c != 0) {
-    FUN_002b7bca(param_1->field_0x430,param_1->field_0x42c,0x18,&compareU16Ascending);
+    qsort(param_1->field_0x430,param_1->field_0x42c,0x18,&compareU16Ascending);
   }
   if (param_1->field_0x434 != 0) {
-    FUN_002b7bca(param_1->field_0x438,param_1->field_0x434,0x68,&skillRecordCompareId);
+    qsort(param_1->field_0x438,param_1->field_0x434,0x68,&skillRecordCompareId);
   }
   if (param_1->field_0x43c != 0) {
-    FUN_002b7bca(param_1->field_0x440,param_1->field_0x43c,0x3c,&compareRecordKey);
+    qsort(param_1->field_0x440,param_1->field_0x43c,0x3c,&compareRecordKey);
   }
   temp_v2 = 0;
   if (temp_v2 < param_1->field_0x310) {

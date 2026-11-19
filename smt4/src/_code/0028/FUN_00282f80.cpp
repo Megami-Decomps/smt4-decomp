@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_0027f3dc(...);
 int FUN_0029ee54(...);
-int FUN_002b7bca(...);
+int qsort(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -78,7 +78,7 @@ extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
 /* Supplied declaration required: FUN_0029ee54. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 
 
 void FUN_00282f80(int param_1)
@@ -107,51 +107,51 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0xb) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,itemSortCompareByCategoryAndId);
+        qsort(temp_v1,temp_v2,8,itemSortCompareByCategoryAndId);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,itemSortCompareRankThenKey);
+        qsort(temp_v1,temp_v2,8,itemSortCompareRankThenKey);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x20) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_002f2740);
+        qsort(temp_v1,temp_v2,8,FUN_002f2740);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_00219208);
+        qsort(temp_v1,temp_v2,8,FUN_00219208);
       }
     }
     if ((*pbVar4 & 0x7f) == 0xd) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_002dc72c);
+        qsort(temp_v1,temp_v2,8,FUN_002dc72c);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_001f5f20);
+        qsort(temp_v1,temp_v2,8,FUN_001f5f20);
       }
     }
     if ((*pbVar4 & 0x7f) == 0xf) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,itemCompareCategoryDescendingValueAscending);
+        qsort(temp_v1,temp_v2,8,itemCompareCategoryDescendingValueAscending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,entryCompareClassThenDescendingValue);
+        qsort(temp_v1,temp_v2,8,entryCompareClassThenDescendingValue);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x11) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,recordRankCompareWithTieBreak);
+        qsort(temp_v1,temp_v2,8,recordRankCompareWithTieBreak);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_002190e4);
+        qsort(temp_v1,temp_v2,8,FUN_002190e4);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
@@ -183,34 +183,34 @@ void FUN_00282f80(int param_1)
     }
     if ((*pbVar4 & 0x7f) == 0xb) {
       if ((char)*pbVar4 < '\0') {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_0031324c);
+        qsort(temp_v6,temp_v5,2,FUN_0031324c);
       }
       else {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_002e46f8);
+        qsort(temp_v6,temp_v5,2,FUN_002e46f8);
       }
     }
     if ((*pbVar4 & 0x7f) == 0xe) {
       if ((char)*pbVar4 < '\0') {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_0030be80);
+        qsort(temp_v6,temp_v5,2,FUN_0030be80);
       }
       else {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_002dcce0);
+        qsort(temp_v6,temp_v5,2,FUN_002dcce0);
       }
     }
     if ((*pbVar4 & 0x7f) == 0xf) {
       if ((char)*pbVar4 < '\0') {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_00313184);
+        qsort(temp_v6,temp_v5,2,FUN_00313184);
       }
       else {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_002e44e0);
+        qsort(temp_v6,temp_v5,2,FUN_002e44e0);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x11) {
       if ((char)*pbVar4 < '\0') {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_0030bce8);
+        qsort(temp_v6,temp_v5,2,FUN_0030bce8);
       }
       else {
-        FUN_002b7bca(temp_v6,temp_v5,2,FUN_002dc594);
+        qsort(temp_v6,temp_v5,2,FUN_002dc594);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
@@ -229,21 +229,21 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0xc) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_002f2898);
+        qsort(temp_v1,temp_v2,2,FUN_002f2898);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,dataTable08Sub1CompareRank);
+        qsort(temp_v1,temp_v2,2,dataTable08Sub1CompareRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x10) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,dataTableKeyRankCompare);
+        qsort(temp_v1,temp_v2,2,dataTableKeyRankCompare);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_00207094);
+        qsort(temp_v1,temp_v2,2,FUN_00207094);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
@@ -264,21 +264,21 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x21) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_00313338);
+        qsort(temp_v1,temp_v2,2,FUN_00313338);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,btlDevilCompareRankAscending);
+        qsort(temp_v1,temp_v2,2,btlDevilCompareRankAscending);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x10) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_003132ec);
+        qsort(temp_v1,temp_v2,2,FUN_003132ec);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,dataTable08CompareIds);
+        qsort(temp_v1,temp_v2,2,dataTable08CompareIds);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
@@ -309,31 +309,31 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 6) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareByGroup);
+        qsort(temp_v5,temp_v2,2,dataTable08Sub2CompareByGroup);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,devilRecordCompare);
+        qsort(temp_v5,temp_v2,2,devilRecordCompare);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x11) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareAlternateKeysDescending);
+        qsort(temp_v5,temp_v2,2,dataTable08Sub2CompareAlternateKeysDescending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,idCompareCategoryThenOrder);
+        qsort(temp_v5,temp_v2,2,idCompareCategoryThenOrder);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x12) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_0030bed8);
+        qsort(temp_v5,temp_v2,2,FUN_0030bed8);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002dcd38);
+        qsort(temp_v5,temp_v2,2,FUN_002dcd38);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
@@ -354,31 +354,31 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 6) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08Sub2CompareByGroup);
+        qsort(temp_v4,temp_v2,2,dataTable08Sub2CompareByGroup);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,devilRecordCompare);
+        qsort(temp_v4,temp_v2,2,devilRecordCompare);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x1f) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08Sub2ComparePackedKeyDescending);
+        qsort(temp_v4,temp_v2,2,dataTable08Sub2ComparePackedKeyDescending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_00219530);
+        qsort(temp_v4,temp_v2,2,FUN_00219530);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x13) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08CompareRankAscending);
+        qsort(temp_v4,temp_v2,2,dataTable08CompareRankAscending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,idCompareRankDescendingThenOrder);
+        qsort(temp_v4,temp_v2,2,idCompareRankDescendingThenOrder);
       }
     }
     temp_v0 = *pbVar4;
@@ -408,71 +408,71 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 4) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareBySortKeys);
+        qsort(temp_v5,temp_v2,2,dataTable08Sub2CompareBySortKeys);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08CompareStatDescending);
+        qsort(temp_v5,temp_v2,2,dataTable08CompareStatDescending);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x24) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002e4950);
+        qsort(temp_v5,temp_v2,2,FUN_002e4950);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,btlDevilCompareRankAndOrder);
+        qsort(temp_v5,temp_v2,2,btlDevilCompareRankAndOrder);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x25) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,devilIdCompareGradeAsc);
+        qsort(temp_v5,temp_v2,2,devilIdCompareGradeAsc);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,devilIdCompareGradeDesc);
+        qsort(temp_v5,temp_v2,2,devilIdCompareGradeDesc);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x26) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002e4910);
+        qsort(temp_v5,temp_v2,2,FUN_002e4910);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataComparePrimaryRank);
+        qsort(temp_v5,temp_v2,2,dataComparePrimaryRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x27) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002e4798);
+        qsort(temp_v5,temp_v2,2,FUN_002e4798);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataCompareSecondaryRank);
+        qsort(temp_v5,temp_v2,2,dataCompareSecondaryRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x28) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareByRankAscending);
+        qsort(temp_v5,temp_v2,2,dataTable08Sub2CompareByRankAscending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareByRank);
+        qsort(temp_v5,temp_v2,2,dataTable08Sub2CompareByRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 3) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyDescending);
+        qsort(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyDescending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyAscending);
+        qsort(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyAscending);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x32) {
@@ -493,11 +493,11 @@ void FUN_00282f80(int param_1)
     if ((temp_v0 & 0x7f) == 0x33) {
       if ((char)temp_v0 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08Sub2CompareIds);
+        qsort(temp_v4,temp_v2,2,dataTable08Sub2CompareIds);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,dataTableSortKeyCompare);
+        qsort(temp_v4,temp_v2,2,dataTableSortKeyCompare);
       }
     }
     temp_v0 = *(unsigned char *)(temp_v1 + 0xb);

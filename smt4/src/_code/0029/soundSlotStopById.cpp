@@ -1,4 +1,4 @@
-#include "common.h"
+#include "sound/soundEffect.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {

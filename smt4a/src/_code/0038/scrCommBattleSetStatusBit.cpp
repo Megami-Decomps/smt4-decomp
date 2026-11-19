@@ -1,4 +1,3 @@
-/* NON_MATCHING: saved constants and common return blocks differ; retail clear-action inline hint NOPs are absent. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -13,7 +12,9 @@ void FUN_004fcffc(u32, ScriptUnit *, BattleRosterRecordA *, u32);
 void FUN_004fdb18(u32, ScriptUnit *, BattleRosterRecordA *, u32, u32);
 void btlQueueActionMessage(u32, ScriptUnit *, u32, u32, u32, u32, u32);
 
-u32 FUN_00380b04(void)
+/* Script command: sets or clears a status bit on a battle unit (targets below 109) or on a save slot's record,
+ * and announces it when the bit was set. */
+u32 scrCommBattleSetStatusBit(void)
 {
     s32 target = scrGetArg(0);
     u16 status = scrGetArg(1);
@@ -21,22 +22,23 @@ u32 FUN_00380b04(void)
     ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if (target < 109) {
         BattleRosterRecordA *record = &btlGetMainState()->roster[target];
-        if (!enable) {
+        if (enable) {
+            FUN_004fdb18(0, unit, record, 1u << status, 1);
+            btlQueueActionMessage(0, unit, 0x100025F, 0, 0, 0, 0);
+        } else {
             FUN_004fcffc(0, unit, record, 1u << status);
-            return 1;
         }
-        FUN_004fdb18(0, unit, record, 1u << status, 1);
     } else {
         SlotRecordA *record = gameGetSlotRecord(target - 109);
-        if (!enable) {
+        if (enable) {
+            bitsAt60Set(record, status);
+            if (status != 4 && bitsAt60Test(record, 4))
+                bitsAt60Clear(record, 0x10);
+            btlQueueActionMessage(0, unit, 0x100025F, 0, 0, 0, 0);
+        } else {
             bitsAt60Clear(record, static_cast<u16>(1u << status));
-            return 1;
         }
-        bitsAt60Set(record, status);
-        if (status != 4 && bitsAt60Test(record, 4))
-            bitsAt60Clear(record, 0x10);
     }
-    btlQueueActionMessage(0, unit, 0x100025F, 0, 0, 0, 0);
     return 1;
 }
 }

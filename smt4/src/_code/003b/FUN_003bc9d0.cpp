@@ -1,6 +1,12 @@
-/* NON_MATCHING: the degree conversion's two float constants come out in swapped VFP registers (s2/s1) and the first-call stores schedule differently; folding the two multiplies into one is what armcc does for a single expression. */
+/* NON_MATCHING: with the radians-to-degrees conversion as its own function the two multiplies and their constants match; the FUN_002a8638 out-pointer setup (retail forms &fov last) and the frame-counter load before the two flag stores are scheduled differently. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "script/scrScriptProcess.h"
+
+/* Radians to degrees, as FUN_00341bec and the title menu's FUN_001e9990 convert the same camera field of view. */
+static f32 radiansToDegrees(f32 radians)
+{
+    return radians * 180.0f * 0.31830987f;
+}
 
 extern "C" {
 
@@ -82,8 +88,7 @@ void FUN_003bc9d0(TitleIntro *intro)
         void *camera = asdCameraGetSavedRenderPairs();
         CameraView view;
         FUN_002a8638(intro->camera->node, &view.fov, &view.v[2], &view.v[0], &view.v[1]);
-        f32 degrees = view.fov * 180.0f;
-        view.fov = degrees * 0.31830987f;
+        view.fov = radiansToDegrees(view.fov);
         FUN_002c1e30(camera, 1, view);
         FUN_00298d50(reinterpret_cast<u32>(camera));
         intro->model = asdMdlManagerCreateLoaded(DAT_00407d9c, 0x38);

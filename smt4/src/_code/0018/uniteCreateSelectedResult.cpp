@@ -67,7 +67,7 @@ void uniteMergeInheritedSkillsAndStats(void* context, PartyMemberView* first,
                  PartyMemberView* second, int mode, PartyMemberView* result);
 int arrayContainsU16(const u16* values, int count, u32 value);
 int dataTable06ComparePriority(const void* left, const void* right);
-void FUN_002b7bca(void* base, int count, int elementSize,
+void qsort(void* base, int count, int elementSize,
                   int (*compare)(const void*, const void*));
 int flagCountUnlockedSlots(PartyMemberView* member);
 u32 randNextInRange(u32 maximum);
@@ -150,7 +150,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         }
 
         if (nkmBaseGetRecord(selection->resultId)->race == 51) {
-            FUN_002b7bca(candidates, 32, 2, dataTable06ComparePriority);
+            qsort(candidates, 32, 2, dataTable06ComparePriority);
             const int unlocked = flagCountUnlockedSlots(member);
             for (int i = 0; i < 32; ++i) {
                 if (candidates[i] == 0 ||
@@ -179,8 +179,8 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
                 }
             }
 
-            FUN_002b7bca(member->skills, 8, 2, dataTable06ComparePriority);
-            FUN_002b7bca(candidates, 32, 2, dataTable06ComparePriority);
+            qsort(member->skills, 8, 2, dataTable06ComparePriority);
+            qsort(candidates, 32, 2, dataTable06ComparePriority);
             const int unlocked = flagCountUnlockedSlots(member);
             for (int slot = 0; slot < unlocked; ++slot) {
                 if (member->skills[slot] != 0 || candidates[0] == 0)
@@ -205,7 +205,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
                     member->skills[slot] = candidates[chosen];
                     candidates[chosen] = 0;
                 }
-                FUN_002b7bca(candidates, 32, 2, dataTable06ComparePriority);
+                qsort(candidates, 32, 2, dataTable06ComparePriority);
             }
         }
 

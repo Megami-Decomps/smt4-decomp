@@ -10,7 +10,7 @@ int dataTableGet(...);
 int dataTableGetEntries(void);
 int FUN_001a9698(void);
 int unitRecordBuild(...);
-int FUN_0035ad50(unsigned int, unsigned char [104]);
+int unitRecordBuildFromSave(unsigned int, unsigned char [104]);
 int findSkillMetadataById(void);
 int unitRecomputeDerivedStats(unsigned char [104]);
 int randomGetUpperSixBits(...);
@@ -67,7 +67,7 @@ extern signed char DAT_0057f0ac; /* 0x57f0ac */
 extern int gameGetSlotTable(void);
 extern int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_0035ad50. */
+/* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: findSkillMetadataById. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: unitRecomputeDerivedStats. */
@@ -204,7 +204,7 @@ LAB_004a8864:
       }
     }
     else {
-      FUN_0035ad50(temp_v42,temp_v19);
+      unitRecordBuildFromSave(temp_v42,temp_v19);
     }
   }
   else {

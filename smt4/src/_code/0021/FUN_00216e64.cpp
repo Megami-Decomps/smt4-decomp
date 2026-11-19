@@ -31,7 +31,7 @@ int beginStatusPanelClose(void);
 int FUN_0029d8f4(int, int);
 int scrScriptProcessDestroy(unsigned int);
 int gameGetPlayerData(void);
-int FUN_002b7bca(int, int, int, unsigned char *);
+int qsort(int, int, int, unsigned char *);
 int nkmBaseGetRecord(...);
 int dataTable01FindByIdWithAoc(unsigned int);
 int uiSpriteAdvanceAnimation(int);
@@ -85,7 +85,7 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int gameGetUnitRecord(int);
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: nkmBaseGetRecord. */
@@ -177,7 +177,7 @@ void FUN_00216e64(int param_1)
           }
           temp_v9 = temp_v9 + 1;
         } while (temp_v9 < 8);
-        FUN_002b7bca(temp_v13,8,2,&LAB_002c6e64);
+        qsort(temp_v13,8,2,&LAB_002c6e64);
         temp_v0 = 1;
       }
       *(unsigned char *)(param_1 + 0xd044) = temp_v0;

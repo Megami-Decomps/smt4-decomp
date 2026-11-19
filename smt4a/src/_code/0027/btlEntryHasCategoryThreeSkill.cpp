@@ -1,9 +1,5 @@
 /* Checks all available unit skill sources for a category-three skill. */
-#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "gamedata/BattleUnitSkills.h"
-#include "gamedata/NkmEnemyRecord.h"
-#include "gamedata/SkillDataRecord.h"
-#include "gamedata/NkmEnemyLookup.h"
+#include "battle/BtlEntrySkills.h"
 
 extern "C" {
 

@@ -3,9 +3,9 @@
 #include "battle/ActionStateChannels.h"
 #include "shard/JobWork.h"
 #include "battle/BtlGlobals.h"
+#include "battle/BattleCommandController.h"
 extern "C" {
 s32 jobIsValid(u32 job);
-void FUN_003d2140(ActionStateChannels *channels);
 s32 FUN_003d28d0(ActionStateChannels *channels, s32 state);
 
 /* Commit a pending action state or start its transition, respecting the previous channel. */
@@ -33,11 +33,12 @@ u32 FUN_001e48d0(u32 job)
                 return ~0u;
             ActionStateChannels *current = reinterpret_cast<ActionStateChannels *>(g_btlAction.slots);
             ActionStateChannel *active = &current->entries[current->entries[0].owner->current];
-            active->state = channel->pending;
+            s32 nextPhase = channel->pending;
+            active->state = nextPhase;
             active->frames = 0;
             active->pending = 0;
             active->timer = 0;
-            FUN_003d2140(current);
+            btlCommandEnterPhase(&current->entries[0].battle, nextPhase);
             channel->flags &= ~2u;
             return 0;
         }

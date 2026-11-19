@@ -99,7 +99,7 @@ int statusDisplayBindUnitRecord(...);
 int uniteSelectedFusionIsEnabled(...);
 int FUN_0034a9c4(...);
 int skillHelpUpdateAttributeAndTarget(...);
-int FUN_0035ad50(...);
+int unitRecordBuildFromSave(...);
 int useCounterRelease(void);
 int panelSetTarget(...);
 int FUN_0037c8e4(...);
@@ -335,7 +335,7 @@ extern int uiQuestIsCreated(void);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_00359a08. */
 /* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
-/* Supplied declaration required: FUN_0035ad50. */
+/* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: uniteStartEffectProcesses. */
@@ -402,7 +402,7 @@ extern int FUN_004db65c(int, unsigned short, unsigned short, int *);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
-unsigned int FUN_001f5294(void)
+s32 FUN_001f5294(u32)
 
 {
 /* irregular: 17 goto(s); 160 native warning(s); review required */
@@ -2109,7 +2109,7 @@ LAB_001f77ec:
           }
           ppiVar16 = (int **)slotRecordFindById(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff);
           if (ppiVar16 == (int **)0x0) {
-            FUN_0035ad50(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff,&temp_v25);
+            unitRecordBuildFromSave(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff,&temp_v25);
             ppiVar16 = &temp_v25;
           }
           FUN_0032d0c8(0,1,piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff,ppiVar16);
@@ -2130,7 +2130,7 @@ LAB_001f77ec:
           }
           ppiVar16 = (int **)slotRecordFindById((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf);
           if (ppiVar16 == (int **)0x0) {
-            FUN_0035ad50((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,&temp_v25);
+            unitRecordBuildFromSave((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,&temp_v25);
             ppiVar16 = &temp_v25;
           }
           FUN_0032d0c8(0,1,(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,ppiVar16);
@@ -2347,7 +2347,7 @@ LAB_001f77ec:
                       temp_v10 = piVar19[(unsigned int)temp_v1 * 2 + 0x4ee] & 0x7fff;
                       if (temp_v7 != 1) {
                         if (temp_v7 == 3) {
-                          FUN_0035ad50(temp_v10,&temp_v25);
+                          unitRecordBuildFromSave(temp_v10,&temp_v25);
                         }
                       }
                       else {
@@ -2357,7 +2357,7 @@ LAB_001f77ec:
                       temp_v7 = (piVar19[(unsigned int)temp_v1 * 2 + 0x4ee] & 0x3fffffffU) >> 0xf;
                       if ((piVar19[(unsigned int)temp_v1 * 2 + 0x4ef] & 3U) != 1) {
                         if ((piVar19[(unsigned int)temp_v1 * 2 + 0x4ef] & 3U) == 3) {
-                          FUN_0035ad50(temp_v7,temp_v40);
+                          unitRecordBuildFromSave(temp_v7,temp_v40);
                         }
                       }
                       else {
@@ -2553,7 +2553,7 @@ LAB_001f8d58:
       temp_v10 = piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff;
       if (temp_v7 != 1) {
         if (temp_v7 == 3) {
-          FUN_0035ad50(temp_v10,temp_v40);
+          unitRecordBuildFromSave(temp_v10,temp_v40);
         }
       }
       else {
@@ -2563,7 +2563,7 @@ LAB_001f8d58:
       temp_v7 = (piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf;
       if ((piVar3[temp_v47[0] * 2 + 0x4ef] & 3U) != 1) {
         if ((piVar3[temp_v47[0] * 2 + 0x4ef] & 3U) == 3) {
-          FUN_0035ad50(temp_v7,asStack_170);
+          unitRecordBuildFromSave(temp_v7,asStack_170);
         }
       }
       else {
@@ -2959,7 +2959,7 @@ LAB_001f9868:
         if (*(short *)((int)piVar3 + temp_v4 * 2 + 0x523a) != 0) {
           ppiVar16 = (int **)slotRecordFindById();
           if (ppiVar16 == (int **)0x0) {
-            FUN_0035ad50(*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x523a),temp_v40);
+            unitRecordBuildFromSave(*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x523a),temp_v40);
             ppiVar16 = temp_v40;
           }
           pairLogAppend(*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x523a),
@@ -3062,13 +3062,13 @@ LAB_001f9868:
       }
       ppiVar16 = (int **)slotRecordFindById(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff);
       if (ppiVar16 == (int **)0x0) {
-        FUN_0035ad50(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff,temp_v40);
+        unitRecordBuildFromSave(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff,temp_v40);
         ppiVar16 = temp_v40;
       }
       pairLogAppend(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x7fff,*(unsigned short *)(ppiVar16 + 0x19));
       ppiVar16 = (int **)slotRecordFindById((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf);
       if (ppiVar16 == (int **)0x0) {
-        FUN_0035ad50((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,temp_v40);
+        unitRecordBuildFromSave((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,temp_v40);
         ppiVar16 = temp_v40;
       }
       pairLogAppend((piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,
@@ -3619,7 +3619,7 @@ LAB_001fac1c:
             if (*(char *)((int)piVar3 + temp_v4 + 0x5251) != '\0') {
               ppiVar16 = (int **)slotRecordFindById();
               if (ppiVar16 == (int **)0x0) {
-                FUN_0035ad50(*(unsigned short *)((int)piVar3 + (char)piVar3[0x1a0c] * 2 + 0x5238),
+                unitRecordBuildFromSave(*(unsigned short *)((int)piVar3 + (char)piVar3[0x1a0c] * 2 + 0x5238),
                              &temp_v25);
                 ppiVar16 = &temp_v25;
               }
@@ -3788,7 +3788,7 @@ LAB_001fac1c:
                       temp_v12 = *(char *)((int)piVar19 + temp_v4 + 0x5252);
                       if (temp_v12 != '\x01') {
                         if (temp_v12 == '\x03') {
-                          FUN_0035ad50(temp_v16,temp_v40);
+                          unitRecordBuildFromSave(temp_v16,temp_v40);
                         }
                       }
                       else {

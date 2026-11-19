@@ -93,9 +93,9 @@ struct CampCecMenu {
         } rewards;
     };
     /* 0xD60 */ s8 optionalProcessAvailable;
-    /* 0xD61 */ u8 helpInitialized;
+    /* 0xD61 */ s8 helpInitialized;
     /* 0xD62 */ u8 rewardPortraitPending; /* set when the next reward state brings its portrait back */
-    /* 0xD63 */ u8 savedBannerPending;
+    /* 0xD63 */ s8 savedBannerPending;
     /* 0xD64 */ u8 loading;
     /* 0xD65 */ s8 stopLoader;
     /* 0xD66 */ u8 unkD66[2];

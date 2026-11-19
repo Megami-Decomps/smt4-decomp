@@ -316,6 +316,27 @@ a sibling setter or another user of the same lookup is usually written the same 
 - When retail reaches a field through its own pool word even in a function that already holds the
   enclosing object's base, the field is a separate object: split the symbol (smt4's `g_mapSelection`
   at 0x49FD14 was carved out of `g_gameState`).
+- Which copy of a shared `phase++; break;` tail survives cross-jumping is decided by block nesting:
+  cases written `if (ok) { …; phase++; } break;` merge only with each other, early-exit cases
+  (`if (!ok) break; …; phase++; break;`) form another group. Retail showing two surviving copies of
+  the increment and a `b` into the middle of another case's tail is the sign. End every case with
+  `break` (a `return` inside the switch moves the epilogue copy).
+- A constant or zero loaded into a callee-saved register at entry and stored late often means the
+  same statements were written in both arms of an `if` (an early-return arm that repeats the
+  function's tail); armcc cross-jumps the copies and hoists their constants.
+- armcc's `nop {0}` padding between calls is a layout state: off at entry, on at a conditional-branch
+  target, and a join reached by `b` inherits the jumping arm's state. Unpadded call runs after an
+  if/else mean the shared operation was written in each arm (`if (a) return -f(); return -g();`), not
+  after the join.
+- A switch case whose jump-table entry points into another case's tail is a fall-through
+  (`case A: …; /* fall through */ case B:`).
+- A flag read with `ldrb` through a split large-offset base and tested against 0 is `s8`.
+- A guarded call through a handle (`if (x->handle) call(x->handle, …)`) as an inline helper taking the
+  owning struct gives unconditional argument moves and `blne`; passing the handle predicates the moves.
+- `sprintf` with a format that comes from an extern array compiles to `__c89sprintf`, which retail
+  never calls: define the format in the unit (`static const char fmt[] = "%s/%s";`) with the image's bytes.
+- When a near miss stores fields in a slightly different order, check the stored offsets against a
+  matched sibling first: it may be writing the wrong field (`FUN_0035ad50`).
 - When a call's only difference is the order its vector arguments load in (retail loads the second
   first), the callee probably takes the vector by value: declare it so in the shared header
   (`distSpatial(MapVector, MapVector)`; three by-value floats and six separate floats use the same

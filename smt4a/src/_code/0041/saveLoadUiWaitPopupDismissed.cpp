@@ -1,4 +1,3 @@
-/* NON_MATCHING: enterMode's registers now match; retail stores the new mode before the remembered one (here the remembered mode is stored first). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/SaveSlotHeaderWork.h"
 #include "network/DataStore/DataStoreMain.h"
@@ -7,15 +6,7 @@ extern "C" {
 extern void *g_handleRegistry;
 void ptrListRemoveClearOwner(void *registry, u32 handle);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
-void FUN_00420a2c(SaveSlotHeaderWork *work);
 void FUN_0022e774(void);
-
-/* Switches to another mode, remembering the one it leaves. */
-static void enterMode(SaveSlotHeaderWork *work, u8 mode)
-{
-    work->previousMode = work->mode;
-    work->mode = mode;
-}
 
 static void releaseRegisteredHandle(RegisteredHandle *&handle)
 {
@@ -29,7 +20,7 @@ static void releaseRegisteredHandle(RegisteredHandle *&handle)
 }
 
 // Wait for the player to dismiss the popup, then (state 2) hand control back once the last sprite finishes.
-void FUN_0041f110(SaveSlotHeaderWork *work)
+void saveLoadUiWaitPopupDismissed(SaveSlotHeaderWork *work)
 {
     switch (work->step) {
     case 0:
@@ -37,7 +28,7 @@ void FUN_0041f110(SaveSlotHeaderWork *work)
         ++work->step;
         // Fall through to poll for the dismissal.
     case 1:
-        FUN_00420a2c(work);
+        saveLoadUiAdvanceSprites(work);
         if ((objBStateAllowsAction() || FUN_0022e72c()) && work->popupActive) {
             work->popupActive = 0;
             releaseRegisteredHandle(work->popup);
@@ -46,13 +37,11 @@ void FUN_0041f110(SaveSlotHeaderWork *work)
         }
         return;
     case 2:
-        FUN_00420a2c(work);
-        if (uiSpriteGetCompletionState(&work->sprites[work->spriteCount]) == 0) {
+        saveLoadUiAdvanceSprites(work);
+        if (uiSpriteGetCompletionState(&work->slotSprites[work->spriteCount - 1]) == 0) {
             return;
         }
-        enterMode(work, 6);
-        work->step = 0;
-        work->phase = 0;
+        saveLoadUiChangeMode(work, 6, 0);
         return;
     }
 }

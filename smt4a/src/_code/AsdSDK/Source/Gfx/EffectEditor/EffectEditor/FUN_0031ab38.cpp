@@ -12,7 +12,7 @@ int FUN_00202178(...);
 int effEditorNodeChainApply(int);
 int asdDebugLog(...);
 int FUN_002b3fd8(int, int, int, int);
-int FUN_002cf28c(...);
+int effMenuAppendColorRect(...);
 int effMenuListAppend(void);
 int VectorUnsignedToFloat(int, int);
 
@@ -74,7 +74,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_002b3fd8. */
-/* Supplied declaration required: FUN_002cf28c. */
+/* Supplied declaration required: effMenuAppendColorRect. */
 /* Supplied declaration required: effMenuListAppend. */
 
 
@@ -435,7 +435,7 @@ LAB_0031ad90:
   *(unsigned int *)(temp_v11 + 0x10) = temp_v29;
   *(unsigned int *)(temp_v11 + 0x14) = 0x3d;
   effMenuListAppend();
-  FUN_002cf28c(0xa8,0x10,0x90,0x5a,0,0xff000000);
+  effMenuAppendColorRect(0xa8,0x10,0x90,0x5a,0,0xff000000);
   if (temp_v13 != 0) {
     temp_v20 = 144.0f;
     temp_v22 = 0x42340000;

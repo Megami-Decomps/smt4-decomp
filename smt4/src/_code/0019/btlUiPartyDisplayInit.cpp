@@ -23,7 +23,7 @@ void FUN_0028e9ec(ActorCardAnimations *card);
 void statusBustUpPortraitAcquire(s32 id, s32 byDevilId);
 void uiStoreTextureEntryCenter(UiSpriteState *sprite, u32 textureTable, u32 image);
 void gridNavigationConfigure(GridNavigation *work, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
-void FUN_002b7bca(void *elements, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
+void qsort(void *elements, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_0021960c(const void *a, const void *b);
 u32 btlActorIsDown(u32 actor);
 s32 FUN_0028e9a0(u32 id);
@@ -268,7 +268,7 @@ void btlUiPartyDisplayInit(ActorCardAnimations *card, u32 unit)
             card->usable[count++] = id;
     }
     gridNavigationConfigure(&card->skillBox, count, 6, 1, 0, 1);
-    FUN_002b7bca(card->usable, count, 2, FUN_0021960c);
+    qsort(card->usable, count, 2, FUN_0021960c);
     gridNavigationConfigure(&card->selector, 4, 1, 4, 1, 1);
     s32 flagCount = 0;
     for (i = 0; i < 6; i++) {

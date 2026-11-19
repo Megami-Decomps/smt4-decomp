@@ -1,11 +1,11 @@
 /* NON_MATCHING: armcc schedules the global load before push and the scale load before the text pointer. */
 #include <stdio.h>
 #include "shard/W5_W5Match2_RoomDebugWork.h"
+#include "text/DebugText.h"
 
 extern "C" {
 
 extern RoomDebugWork *g_npcRoomDebug;
-void debugDrawText(u32 color, const char *text, f32 x, f32 y, f32 scale);
 
 /* Show the starting room ID while the debug selector is idle. */
 s32 npcRoomDebugDrawStartId(void)

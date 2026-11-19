@@ -9,7 +9,7 @@ int FUN_002408ac(unsigned int *, int);
 int btlFindNthActiveSpecialEntry(int, int);
 int FUN_002881bc(void);
 int nkmEnemyFindById(void);
-int FUN_002b7bca(int *, int, int, unsigned char *);
+int qsort(int *, int, int, unsigned char *);
 int FUN_002fe394(int, int, unsigned int, int);
 int FUN_00337f98(int, int);
 int __aeabi_memcpy4(...);
@@ -42,7 +42,7 @@ extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: btlFindNthActiveSpecialEntry. */
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: nkmEnemyFindById. */
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_002fe394. */
 /* Supplied declaration required: FUN_00337f98. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -239,7 +239,7 @@ LAB_003343b0:
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 0x32);
     FUN_00337f98(temp_v29,temp_v4 + 0xcc);
-    FUN_002b7bca(&temp_v15,temp_v6,4,&FUN_001921c8);
+    qsort(&temp_v15,temp_v6,4,&FUN_001921c8);
     temp_v7 = 0;
     if (temp_v7 < temp_v6) {
       do {

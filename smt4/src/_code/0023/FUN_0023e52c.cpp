@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemFreeIfNotNull(float *);
-int FUN_002b7bca(...);
+int qsort(...);
 int asdOperatorNewC(void);
 int SBORROW4(unsigned int, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_00439ad0; /* 0x439ad0 */
 extern int randRange(unsigned int);
 /* Supplied declaration required: asdMemFreeIfNotNull. */
 extern int FUN_00293230(int);
-/* Supplied declaration required: FUN_002b7bca. */
+/* Supplied declaration required: qsort. */
 /* Supplied declaration required: asdOperatorNewC. */
 
 
@@ -108,12 +108,12 @@ void FUN_0023e52c(int *param_1,int param_2,int param_3,int param_4,int param_5)
   if (!(param_3 == 1 || param_3 == 2)) {
     if (param_3 != 3) {
       if (param_3 == 5) {
-        FUN_002b7bca(temp_v12,temp_v6,4,&LAB_001b1a24);
+        qsort(temp_v12,temp_v6,4,&LAB_001b1a24);
         goto LAB_0023e7e8;
       }
     }
     else {
-      FUN_002b7bca(temp_v12,temp_v6);
+      qsort(temp_v12,temp_v6);
     }
 LAB_0023e724:
     temp_v0 = temp_v6 / 3;
@@ -147,7 +147,7 @@ LAB_0023e724:
     }
   }
   else {
-    FUN_002b7bca(temp_v12,temp_v6);
+    qsort(temp_v12,temp_v6);
     temp_v9 = (*(float *)((unsigned char *)&(*(float *)((unsigned char *)&DAT_00439ad0 - 0x4)) + 0x4));
     temp_v11 = (*(float *)((unsigned char *)&DAT_00439ad0 - 0x4));
     if (param_3 != 5) {

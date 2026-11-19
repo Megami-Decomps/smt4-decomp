@@ -51,7 +51,7 @@ extern "C" void partyPanelRefreshSelectedItemValues(void* selector, s32 gridSele
             btlItemComputeValues(static_cast<u32>(-1), panel->previewItem, &values.first, &values.second);
         }
         pair40Set(panel->characters[index], values.first, values.second);
-        FUN_003344b4(values.first, values.second);
+        statusPreviewMpChange(values.first, values.second);
         valueSource = 0;
     } else {
         index = getPanelGridIndex(selector, panel);
@@ -60,7 +60,7 @@ extern "C" void partyPanelRefreshSelectedItemValues(void* selector, s32 gridSele
         }
         btlItemComputeValues(panel->entries[index].packedIndex, panel->previewItem, &values.first, &values.second);
         pair40Set(panel->demons[index], values.first, values.second);
-        FUN_003344b4(values.first, values.second);
+        statusPreviewMpChange(values.first, values.second);
         owner = panel->entries[index].packedIndex;
         valueSource = 1;
     }

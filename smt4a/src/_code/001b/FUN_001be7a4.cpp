@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0018e9d8(int, int *);
+int nw_gfx_SceneNode_AttachChild(int, int *);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_0055b5b0; /* 0x55b5b0 */
 
-/* Supplied declaration required: FUN_0018e9d8. */
+/* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 extern int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(int, int *, unsigned int *, unsigned int);
 
 
@@ -42,7 +42,7 @@ int * FUN_001be7a4(int param_1,unsigned int *param_2,unsigned int param_3,int *p
   }
   (**(romwright_code **)(*piVar2 + 0x24))(piVar2,param_4);
   if (param_1 != 0) {
-    FUN_0018e9d8(param_1,piVar2);
+    nw_gfx_SceneNode_AttachChild(param_1,piVar2);
   }
   return piVar2;
 }

@@ -55,7 +55,7 @@ s32 flagValueIsPositive(u32 id);
 s32 FUN_0028e9a0(u32 id);
 s32 FUN_00394d90(u32 id, StatBlock *unit);
 s16 btlMainStateGetPartyCaptureId(BtlMainState *state);
-void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
+void qsort(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_0021960c(const void *a, const void *b);
 void scrollOwnerSelectIndex(ScrollOwner *owner, s32 index);
 s32 FUN_0023dcb8(void);
@@ -132,7 +132,7 @@ void FUN_00199424(PartyMenu *menu)
         }
     }
     gridNavigationConfigure(&menu->skillBox, usableCount, 6, 1, 0, 1);
-    FUN_002b7bca(menu->usable, usableCount, 2, FUN_0021960c);
+    qsort(menu->usable, usableCount, 2, FUN_0021960c);
     scrollOwnerSelectIndex(&menu->scrollOwners[menu->page], 0);
     if (FUN_0023dcb8() != 0) {
         scrollOwnerSelectIndex(&menu->scrollOwners[0], 1);

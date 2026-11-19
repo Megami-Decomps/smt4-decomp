@@ -3,20 +3,15 @@
 #include "map/LmapGlobals.h"
 #include "game/GameState.h"
 #include "map/LmapViewGlobals.h"
-
-struct MapMainView {
-    u8 unk00[0x2c]; // 0x00
-    u32 mapId;      // 0x2c
-    u32 areaId;     // 0x30
-};
+#include "map/mapMain.h"
 
 extern "C" {
-extern MapMainView *g_mapMain;
+extern MapMain *g_mapMain;
 
 // Unless a skip is pending, record the current map and scene position as both saved and target snapshots.
 void mapSaveReturnSnapshot(void)
 {
-    MapMainView *map = g_mapMain;
+    MapMain *map = g_mapMain;
 
     if (g_gameState.map.unk84) {
         g_gameState.map.unk84 = 0;

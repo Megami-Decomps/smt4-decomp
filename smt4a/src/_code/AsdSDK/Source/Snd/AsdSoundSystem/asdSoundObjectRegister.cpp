@@ -1,4 +1,6 @@
-/* NON_MATCHING: the list walk now matches retail (it rechecks for the sound itself at every node); remaining: retail places the empty-list arm after the tail call, keeps `volumeSteps` in ip across the push and copies the 1.0 scale into s1 from the volume's initial value. */
+/* NON_MATCHING: layout now matches retail (the empty-list arm after the tail call); remaining: retail keeps
+ * `volumeSteps` in ip across the push (r4 here), loads the 1.0 into the volume's s0 and copies it to s1 (here the reverse)
+ * and moves `arg` into r1 before the volume test. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
@@ -14,7 +16,10 @@ void asdSoundObjectRegister(AsdSndObject *sound, u32 volumeSteps, u32 arg)
 
     AsdSndStatusApoc *status = &g_asdSoundStatus;
     AsdSndObject *node = status->objects;
-    if (node != NULL) {
+    if (node == NULL) {
+        status->objects = sound;
+        ++status->objectCount;
+    } else {
         for (;;) {
             if (node == sound)
                 break;
@@ -28,9 +33,6 @@ void asdSoundObjectRegister(AsdSndObject *sound, u32 volumeSteps, u32 arg)
             ++status->objectCount;
             break;
         }
-    } else {
-        status->objects = sound;
-        ++status->objectCount;
     }
 
     f32 volume = 1.0f;

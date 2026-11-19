@@ -9,7 +9,7 @@ struct FlaggedDemonSortFlags { u8 mode : 7; u8 reverse : 1; };
 struct FlaggedDemonSortOptions { u8 unk00[0x15]; FlaggedDemonSortFlags sort; };
 extern "C" {
 void gridNavigationConfigure(GridNavigation *, s32, s32, s32, s32, s32);
-void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
+void qsort(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 devilIdCompareRankOrderId(const void *, const void *);
 s32 FUN_00206d4c(const void *, const void *);
 s32 FUN_002dc9d4(const void *, const void *);
@@ -40,21 +40,21 @@ void statusBuildFlaggedDemonList(const u8 *flags)
     const FlaggedDemonSortFlags *options = &reinterpret_cast<const FlaggedDemonSortOptions *>(gameDataGetSortPreferences())->sort;
     if (options->mode == 1) {
         if (!options->reverse)
-            FUN_002b7bca(sorting->flagged.entries, sorting->flagged.count, 4, FUN_00206d4c);
+            qsort(sorting->flagged.entries, sorting->flagged.count, 4, FUN_00206d4c);
         else
-            FUN_002b7bca(sorting->flagged.entries, sorting->flagged.count, 4, devilIdCompareRankOrderId);
+            qsort(sorting->flagged.entries, sorting->flagged.count, 4, devilIdCompareRankOrderId);
     }
     if (options->mode == 0x21) {
         if (!options->reverse)
-            FUN_002b7bca(sorting->flagged.entries, sorting->flagged.count, 4, FUN_001f61c4);
+            qsort(sorting->flagged.entries, sorting->flagged.count, 4, FUN_001f61c4);
         else
-            FUN_002b7bca(sorting->flagged.entries, sorting->flagged.count, 4, FUN_002dc9d4);
+            qsort(sorting->flagged.entries, sorting->flagged.count, 4, FUN_002dc9d4);
     }
     if (options->mode == 3) {
         if (!options->reverse)
-            FUN_002b7bca(sorting->flagged.entries, sorting->flagged.count, 4, entryRefCompareByKey);
+            qsort(sorting->flagged.entries, sorting->flagged.count, 4, entryRefCompareByKey);
         else
-            FUN_002b7bca(sorting->flagged.entries, sorting->flagged.count, 4, recordCompareByKey);
+            qsort(sorting->flagged.entries, sorting->flagged.count, 4, recordCompareByKey);
     }
     status->listActive = 1;
 }

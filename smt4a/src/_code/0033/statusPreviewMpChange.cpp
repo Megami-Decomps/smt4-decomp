@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_003344b4(u32 a, u32 b)
+void statusPreviewMpChange(u32 a, u32 b)
 {
     ObjB *obj = g_gameGlobals.instance;
 

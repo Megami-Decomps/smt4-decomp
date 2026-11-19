@@ -15,7 +15,7 @@ int FUN_00180310(...);
 int FUN_00185e84(...);
 int skillDataFindById(void);
 int unitRecordBuild(...);
-int FUN_0035ad50(...);
+int unitRecordBuildFromSave(...);
 int statDrawClampedDelta(...);
 int partyRecordSetEquippedItemClampRank(...);
 int VectorSignedToFloat(...);
@@ -49,7 +49,7 @@ extern unsigned int FUN_002a6a24(int);
 extern int objectApplyIfUnblocked(int);
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_0035ad50. */
+/* Supplied declaration required: unitRecordBuildFromSave. */
 /* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(int, unsigned int);
 extern int recordContainsPairedId(unsigned char *, int);
@@ -189,7 +189,7 @@ LAB_00288c34:
       }
     }
     else {
-      FUN_0035ad50(*(unsigned short *)(temp_v0 + 0x598),temp_v11);
+      unitRecordBuildFromSave(*(unsigned short *)(temp_v0 + 0x598),temp_v11);
     }
     temp_v3 = recordContainsPairedId(temp_v11,param_3);
     if (temp_v3 == 0) {

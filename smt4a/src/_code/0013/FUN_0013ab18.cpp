@@ -39,9 +39,9 @@ extern SoundChannel g_bgmRequestChannels[2];   /* 0x61951c */
 extern SoundShared g_resourceSharedFlag;
 extern const char DAT_0053621c[8];
 
-s32 FUN_0013ebe8(u32 handle, u32 id, u32 volume, u32 param);
-u32 FUN_00140924(s32 handle, s32 fadeTime);
-s32 FUN_001414d4(u32 handle, s32 direction, u32 fadeTime);
+s32 asdSoundRegisteredRestart(u32 handle, u32 id, u32 volume, u32 param);
+u32 asdSoundRegisteredStop(s32 handle, s32 fadeTime);
+s32 asdSoundRegisteredSetPause(u32 handle, s32 direction, u32 fadeTime);
 const char *soundPlayIfArchiveAvailable(u32 id);
 u32 asdSoundHandleListFind(u32 handle);
 s32 jyoucyuGetTableEntry(u32 index);
@@ -72,7 +72,7 @@ void FUN_0013ab18(void)
                             channel->flags = flags & ~CHANNEL_FADE_WAIT;
                         }
                     } else if ((flags & CHANNEL_FADE_OUT) != 0) {
-                        if (FUN_00140924(channel->handle, channel->fadeTime) != 0) {
+                        if (asdSoundRegisteredStop(channel->handle, channel->fadeTime) != 0) {
                             flags = channel->flags;
                             channel->flags = flags & ~(CHANNEL_STARTED | CHANNEL_FADE_OUT);
                             channel->soundId = 0;
@@ -101,7 +101,7 @@ void FUN_0013ab18(void)
                             }
                         }
                     } else if ((flags & CHANNEL_FADE_IN) != 0) {
-                        if (FUN_001414d4(channel->handle, 0, channel->fadeTime) != 0) {
+                        if (asdSoundRegisteredSetPause(channel->handle, 0, channel->fadeTime) != 0) {
                             channel->flags = (channel->flags & ~CHANNEL_FADE_IN) | CHANNEL_FADED;
                             if (channel->handle == g_resourceSharedFlag.current && (other->flags & CHANNEL_NO_SHARE) == 0) {
                                 if (g_resourceSharedFlag.current == 0) {
@@ -112,7 +112,7 @@ void FUN_0013ab18(void)
                             }
                         }
                     } else if ((flags & CHANNEL_STOP) != 0) {
-                        if (FUN_001414d4(channel->handle, 1, channel->param) != 0) {
+                        if (asdSoundRegisteredSetPause(channel->handle, 1, channel->param) != 0) {
                             flags = channel->flags & ~CHANNEL_STOP;
                             channel->flags = flags;
                             if ((flags & CHANNEL_AFTER_STOP_IN) != 0) {
@@ -146,7 +146,7 @@ void FUN_0013ab18(void)
                             id != 0x100008A && id != 0x100008E && id != 0x1000095) {
                             volume = soundVolumeSettingGet();
                         }
-                        FUN_0013ebe8(channel->handle, channel->soundId, volume, channel->param);
+                        asdSoundRegisteredRestart(channel->handle, channel->soundId, volume, channel->param);
                         channel->flags = channel->flags | CHANNEL_STARTED;
                     }
                 }
