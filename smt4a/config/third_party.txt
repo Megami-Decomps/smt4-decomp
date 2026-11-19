@@ -5,6 +5,7 @@
 0x0010031c copyValueIfDestination between
 0x00100326 FUN_00100326 between
 0x0010032c emptyStub_0010032c between
+0x00100348 FUN_00100348 library
 0x00100380 libc_sprintf name
 0x001003b4 FUN_001003b4 linker
 0x001003bc libc_printfStrDispatch name
@@ -94,6 +95,7 @@
 0x00102b6c multibyteToUtf16 between
 0x00102bbc FUN_00102bbc between
 0x00102c28 libc_strtok name
+0x00102c30 FUN_00102c30 library
 0x00102c58 FUN_00102c58 between
 0x00102c80 FUN_00102c80 between
 0x00102ca4 FUN_00102ca4 callers
@@ -2699,6 +2701,7 @@
 0x0017cdb4 nngxGetError name
 0x0017cff0 nngxBindCmdlist name
 0x0017fcb0 nn_math_ARMv6_MTX44TransposeAsm name
+0x0017fd5c FUN_0017fd5c library
 0x001884c8 FUN_001884c8 callers
 0x00188558 nn_fs_ipc_FileSystem_OpenArchive name
 0x001885b8 FUN_001885b8 between

@@ -426,6 +426,7 @@
 0x00138364 FUN_00138364 callers
 0x00138370 FUN_00138370 callers
 0x001383c0 svcSleepThread name
+0x001383c8 FUN_001383c8 library
 0x001395d4 nn_os_SimpleLock_Initialize name
 0x001395ec nn_os_LightEvent_ClearSignal name
 0x00139650 FUN_00139650 callers

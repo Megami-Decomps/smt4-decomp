@@ -13,7 +13,7 @@ u32 FUN_003a7bac(void)
     if (StatusDownStateA *down = g_statusDown) {
         StatusDownSkillMenuA *menu = &down->menu;
 
-        if (menu->state != 5) {
+        if (menu->step.state != 5) {
             result = 0;
         }
     }

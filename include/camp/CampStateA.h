@@ -26,7 +26,9 @@ typedef struct CampStateA {
     /* 0x0024 */ s32 pendingState;          /* the state the transition state (5) goes on to */
     /* 0x0028 */ s32 previousState;
     /* 0x002C */ u32 unk002C;               /* cleared when the StreetPass script (0x26) starts */
-    /* 0x0030 */ u8 unk0030[0xA];
+    /* 0x0030 */ u8 unk0030[4];
+    /* 0x0034 */ u32 selectedId;          /* the item picked in the item list, for the target states */
+    /* 0x0038 */ u8 unk0038[2];
     /* 0x003A */ u16 buttonHelpValue;       /* ifTouchGetButtonHelpValue when the sort menu opened */
     /* 0x003C */ u8 unk003C;
     /* 0x003D */ u8 locked;
@@ -81,7 +83,9 @@ typedef struct CampStateA {
     /* 0x32A9 */ u8 slotRequestPending;     /* set by menu item 7 with slot request 10 */
     /* 0x32AA */ u8 unk32AA[6];
     /* 0x32B0 */ u8 noticeFlags[7];
-    /* 0x32B7 */ u8 unk32B7[0x109];
+    /* 0x32B7 */ u8 unk32B7[0x101];
+    /* 0x33B8 */ u32 usedItem;              /* the item last used from the item list */
+    /* 0x33BC */ u8 unk33BC[4];
 } CampStateA;
 
 typedef char CampStateAMenuGridOffsetCheck[offsetof(CampStateA, menuGrid) == 0x40 ? 1 : -1];
@@ -99,6 +103,8 @@ typedef char CampStateAPendingOffsetCheck[offsetof(CampStateA, pendingState) == 
     offsetof(CampStateA, statusSelection) == 0xBC && offsetof(CampStateA, menuGroupBorrowed) == 0x32A8 ? 1 : -1];
 typedef char CampStateAMenuFlagsOffsetCheck[offsetof(CampStateA, unk000C) == 0xC && offsetof(CampStateA, unk002C) == 0x2C &&
     offsetof(CampStateA, questMenuOpened) == 0x3178 && offsetof(CampStateA, slotRequestPending) == 0x32A9 ? 1 : -1];
+typedef char CampStateAItemOffsetCheck[offsetof(CampStateA, selectedId) == 0x34 &&
+    offsetof(CampStateA, usedItem) == 0x33B8 ? 1 : -1];
 typedef char CampStateASizeCheck[sizeof(CampStateA) == 0x33C0 ? 1 : -1];
 
 #ifdef __cplusplus

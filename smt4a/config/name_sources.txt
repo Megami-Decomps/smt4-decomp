@@ -7572,3 +7572,18 @@
 003ae3c4 mapRegisterPendingSpawnMarker inferred registers the pending spawn's box effect at a world position
 0013c00c screenFadeSlotDraw inferred twin of smt4 FUN_00107784
 004b726c contentTransitionApplyCommand inferred twin of smt4 contentTransitionApplyCommand (same source: a menu command's destination or request flag, then state 5 or 4)
+00180998 textLayoutDraw inferred twin of smt4 FUN_002b080c (same prototype and callers)
+00164168 textDrawRangeFaded inferred exact twin of smt4 FUN_002b75ec
+0025cc78 textDrawFaded inferred exact twin of smt4 FUN_002598f0
+001911a4 soundRequestQueueFlush evidence exact twin of smt4 soundRequestQueueFlush (shared.py)
+003daf0c campUpdateListInput evidence twin of smt4 campUpdateListInput: the camp item lists' step for states 11, 13 and 14 (same calls, sounds and phases)
+0023eaf8 uiQuestListInput inferred twin of smt4 FUN_001afc0c (same quest list input)
+0036d12c questQueryFalse inferred same callers as smt4 questQueryFalse; returns 0
+00225ddc eventScriptJobUpdate evidence registered by FUN_00291728 as the "EVENT CALC" process update; twin of smt4 FUN_0019f3dc
+004d1470 btlDebugStatusFlagEditorApply inferred battle debug editor: applies the status-flag edits to the selected combatants' masks
+0039fffc effSpiralEmitterUpdate inferred particle emitter update placing particles on a spiral around the emitter axis through g_vectorScratch
+003c4e64 scrCommResultGetPendingValueOrSkill inferred script command: the result screen's pending value (argument set) or the selected unit's skill at valueIndex; without the screen the selected record's values
+004080bc moveCameraCtrlSnapToNode inferred MoveCameraCtrl: selects a route node, snaps position and angles to it and restores the attached actor's destination
+0040a640 statisticsResetShopCounters inferred clears the shop statistics counters for data table 0x18's rows
+00497874 shopDrawEquipmentList inferred draws the shop's equipment page: visible rows, selected row and scroll indicator
+0034dae0 statusScaleUnitDisplayVitals inferred scales an enemy record's max HP/MP by the progression multiplier for display

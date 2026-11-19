@@ -35,7 +35,7 @@ void FUN_003426c0(const DirectoryListPlacement *placement, u32 text, u32 directo
                          textExpandGlyphsToBuffer(FUN_0035aa90(row + first + offset), 0, 0));
             break;
         }
-        FUN_0025cc78(reinterpret_cast<const void *>(text), position->x + anchor->x + x, position->y + anchor->y + y, 0x15, placement->scale);
+        textDrawFaded(reinterpret_cast<const void *>(text), position->x + anchor->x + x, position->y + anchor->y + y, 0x15, placement->scale);
         texDrawTableEntryAtStoredOrigin(2, 0x2E, 0xCE, position->x + x, position->y + y, 0xC);
     }
 }

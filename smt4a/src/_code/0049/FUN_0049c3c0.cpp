@@ -71,7 +71,7 @@ void campButtonHelpAcquire(void);
 void asdTMTexTableLoadSprites(s32 table);
 void FUN_00148bb8(s32 a, s32 b);
 s16 *statisticsGetCounter(u8 kind, u32 sub, s32 column);
-void FUN_0040a640(void);
+void statisticsResetShopCounters(void);
 void statsSetSecondBankFlag(s32 index, s32 value);
 void statsSetFirstBankFlag(s32 index, s32 value);
 s32 bgmGetStateById(u32 id);
@@ -125,7 +125,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     s32 sub = scene->subKind;
     FUN_00148bb8(sub, (u8)scene->kind);
     if (sub == 0)
-        FUN_0040a640();
+        statisticsResetShopCounters();
     if (*progress != 0)
         scene->hasProgress = 1;
     if (scene->mode == 1) {

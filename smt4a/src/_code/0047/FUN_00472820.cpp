@@ -9,7 +9,7 @@ extern "C" {
 
 int textDrawString(...);
 int effectRenderTransformedInstance(unsigned int *);
-int FUN_00164168(...);
+int textDrawRangeFaded(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
@@ -35,7 +35,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_00164168. */
+/* Supplied declaration required: textDrawRangeFaded. */
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
@@ -198,7 +198,7 @@ s32 FUN_00472820(u32 job)
         if (0 < (int)temp_v5) {
           do {
             temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,temp_v2 + temp_v1));
-            FUN_00164168(puVar2[0x107],*(short *)(temp_v6 + 8) + temp_v14,(int)*(short *)(temp_v6 + 10),
+            textDrawRangeFaded(puVar2[0x107],*(short *)(temp_v6 + 8) + temp_v14,(int)*(short *)(temp_v6 + 10),
                          0x13,6,temp_v1);
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < (int)puVar2[4]);

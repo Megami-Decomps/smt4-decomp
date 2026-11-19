@@ -1,52 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00353154` (_code @ 0x353154, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the owner status is an nn::Result (fixes retail's lsrs-before-copy order) and the block status a plain s32; remaining: retail keeps the owner in r5 and the destination in r4, and its frame (80) has an extra 8-byte slot at sp+0 below the translated result (block at sp+16, result at sp+8). */
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
+nn::Result queryFailureResultOrZero(void *owner);
+u32 FUN_0035f7dc(void*);
 
-int recordValidatePair(unsigned int, int, unsigned int);
-int _ZN18WindowStatusResultC1Ej(...);
-int FUN_0035f7dc(void);
-int rt_memcpy(unsigned int, unsigned char [64], int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp58; /* 0x58: local_58 */
-} param_3_stack;
-
-/* Supplied declaration required: recordValidatePair. */
-extern int queryFailureResultOrZero(unsigned int);
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_0035f7dc. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_00353154(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
-
+// Retrieves a status block, copies its public half, and records the translated result.
+WindowStatusResult FUN_00353154(void* owner, void* destination)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  unsigned int uStack_54;
-  unsigned char temp_v2 [64];
-  
-  temp_v0 = queryFailureResultOrZero(param_2);
-  if (temp_v0 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-    return;
-  }
-  puVar2 = temp_v2;
-  FUN_0035f7dc();
-  if (-1 < (int)puVar2) {
-    rt_memcpy(param_3,temp_v2,0x20);
-    puVar2 = (unsigned char *)0x0;
-  }
-  _ZN18WindowStatusResultC1Ej(&temp_v1,puVar2);
-  recordValidatePair(param_2,temp_v1,uStack_54);
-  *param_1 = temp_v1;
-  param_1[1] = uStack_54;
-  return;
+    nn::Result status = queryFailureResultOrZero(owner);
+    if (nnResultIsFailure(status)) {
+        return WindowStatusResult(status);
+    }
+    u8 block[64];
+    s32 blockStatus = FUN_0035f7dc(block);
+    if (!nnResultIsFailure(blockStatus)) {
+        rt_memcpy(destination, block, 32);
+        blockStatus = 0;
+    }
+    WindowStatusResult translated(blockStatus);
+    recordValidatePair(owner, translated);
+    return translated;
 }
-
-} /* extern "C" */
+}

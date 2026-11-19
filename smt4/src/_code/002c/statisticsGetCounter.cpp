@@ -9,9 +9,9 @@ u32 *statisticsGetCounter(s32 bank, s32 row, s32 column)
     StatisticsBankPrefix *statistics = gameGetQuestCenterBlock();
     switch (bank) {
     case 0:
-        return &statistics->primary[(row - 1) * 7 + column];
+        return &statistics->primary[(row - 1) * 7 + column].word;
     case 1:
-        return &statistics->secondary[(row - 1) * 2 + column];
+        return &statistics->secondary[(row - 1) * 2 + column].word;
     }
     return NULL;
 }

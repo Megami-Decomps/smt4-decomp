@@ -1,4 +1,3 @@
-/* NON_MATCHING: the two readiness words are now read before the override test and FUN_00156994 takes its real (model, matrix, dt) arguments, as in retail; retail still copies the manager into a second register (mov r5,r6) and reads its animation set through the original register. */
 #include "common.h"
 
 /* A model in the manager's list. */
@@ -42,46 +41,50 @@ extern ModelOverride *DAT_0056fcb8;
 void FUN_00158038(ModelManager *manager);
 void FUN_00156994(ModelEntry *model, ModelAnimationSet *outMatrix, f32 dt);
 
-// Applies every model's weight to the manager's animation set.
-static __inline void applyModelWeights(ModelManager *self)
+// The animation set in force: the override's while both its low flag bits are set, else the manager's
+// (the same selection as FUN_00146314's activeParameters).
+static __inline ModelAnimationSet *activeAnimations(ModelManager *self)
+{
+    ModelOverride *override = DAT_0056fcb8;
+    if (override != NULL && (override->flags & 1) && (override->flags & 2)) {
+        return &override->embedded;
+    }
+    return self->animations;
+}
+
+// Whether the manager has an animation set and models to weight this frame (an inlined body: retail
+// copies the manager into its own register for it).
+static __inline bool modelWeightsPending(ModelManager *self)
 {
     FUN_00158038(self);
-    if ((self->flags & 2) == 0) {
-        u32 ready = self->unk10;
-        u32 started = self->unk04;
-        ModelAnimationSet *active;
-        ModelOverride *override = DAT_0056fcb8;
-        if (override != NULL && (override->flags & 1) && (override->flags & 2)) {
-            active = &override->embedded;
-        } else {
-            active = self->animations;
-        }
-        if (ready != 0 && started != 0) {
-            ModelEntry **entry;
-            ModelEntry **end;
-            if (active != NULL) {
-                entry = self->begin;
-                end = self->end;
-            }
-            if (active != NULL && entry != end) {
-                ModelAnimationSet *animations = self->animations;
-                if (animations != NULL) {
-                    ModelAnimationSet *base = animations + 1;
-                    do {
-                        FUN_00156994(*entry, base, (*entry)->weight);
-                        entry++;
-                    } while (entry != end);
-                }
-            }
-        }
+    if ((self->flags & 2) != 0) {
+        return false;
     }
+    u32 started = self->unk04;
+    u32 ready = self->unk10;
+    ModelAnimationSet *active = activeAnimations(self);
+    if (ready == 0 || started == 0) {
+        return false;
+    }
+    return active != NULL && self->begin != self->end;
 }
 
 // The model calculation process.
 u32 FUN_00145f94(void)
 {
     ModelManager *manager = g_handleRegistry;
-    applyModelWeights(manager);
+    if (modelWeightsPending(manager)) {
+        ModelAnimationSet *animations = manager->animations;
+        if (animations != NULL) {
+            ModelEntry **entry = manager->begin;
+            ModelEntry **end = manager->end;
+            ModelAnimationSet *base = animations + 1;
+            do {
+                FUN_00156994(*entry, base, (*entry)->weight);
+                entry++;
+            } while (entry != end);
+        }
+    }
     return 0;
 }
 

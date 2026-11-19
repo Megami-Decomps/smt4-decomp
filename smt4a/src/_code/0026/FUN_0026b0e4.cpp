@@ -11,7 +11,7 @@
 
 extern "C" {
 
-int FUN_00164168(...);
+int textDrawRangeFaded(...);
 void FUN_00289418(int x, int y, float alpha);
 
 int dataFindKindRecordWithAocOverrides(...);
@@ -52,7 +52,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164168. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
@@ -503,7 +503,7 @@ LAB_0026b644:
       do {
         temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v11 + 0x48d));
         temp_v10 = resourceRunOperationIfUnblocked(temp_v4 + 0x23c0);
-        FUN_00164168(*(unsigned int *)(temp_v4 + 0x23b8),*(short *)(temp_v2 + 8) + temp_v0,
+        textDrawRangeFaded(*(unsigned int *)(temp_v4 + 0x23b8),*(short *)(temp_v2 + 8) + temp_v0,
                      *(short *)(temp_v2 + 10) + temp_v1,0xb5,6,temp_v10 + temp_v11);
         temp_v11 = temp_v11 + 1;
       } while (temp_v11 < 10);

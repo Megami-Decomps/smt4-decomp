@@ -16,7 +16,7 @@ struct DigitRowOwner {
 extern "C" {
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 alpha);
-void FUN_00164168(u32 sprite, s32 x, s32 y, s32 texture, s32 layer, s32 frame, f32 alpha);
+void textDrawRangeFaded(u32 sprite, s32 x, s32 y, s32 texture, s32 layer, s32 frame, f32 alpha);
 void FUN_003f7674(DigitRowOwner *owner, s32 x, s32 y, f32 alpha);
 
 /* Draws the row of seven frames at (x, y) with `alpha` (frames before the first are skipped),
@@ -31,7 +31,7 @@ void FUN_003f54c4(DigitRowOwner *owner, s32 x, s32 y, f32 alpha)
         s32 frame = owner->firstFrame + i - owner->frameOffset;
         if (frame >= 0) {
             const TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x31, i + 0x51);
-            FUN_00164168(owner->sprite, x + offset + layout->x, layout->y + y, 0xc9, 6, frame, alpha);
+            textDrawRangeFaded(owner->sprite, x + offset + layout->x, layout->y + y, 0xc9, 6, frame, alpha);
         }
     }
     FUN_003f7674(owner, x, y, alpha);

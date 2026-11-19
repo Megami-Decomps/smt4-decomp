@@ -9,7 +9,7 @@ int effectSpawnDefaultArguments(...);
 int gxSetUniformQuadColors(...);
 int texTableRecordCallWithParams(...);
 int libc_strcat(...);
-int FUN_002b75ec(...);
+int textDrawRangeFaded(...);
 int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_002bcf4c(void);
 int textDrawString(...);
@@ -49,7 +49,7 @@ extern int qcGetCenterSlotGroups(unsigned char);
 /* Supplied declaration required: gxSetUniformQuadColors. */
 /* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: FUN_002b75ec. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int gameGetPlayerName(void);
@@ -141,7 +141,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v13 = (float)VectorSignedToFloat((int)temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v14 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b75ec(param_1[0xa3],
+    textDrawRangeFaded(param_1[0xa3],
                  (int)((float)param_1[0x127] + temp_v14 +
                       temp_v13 + ((float)param_1[0xe7] - temp_v12) * 0.5f),
                  (int)((float)param_1[0x128] + temp_v11),0x20,0x80,0);
@@ -174,7 +174,7 @@ void FUN_0038368c(unsigned int *param_1)
     FUN_00235368(&temp_v22);
     temp_v13 = (float)VectorSignedToFloat(temp_v19,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v12 = temp_v9;
-    FUN_002b75ec(param_1[0xa4],
+    textDrawRangeFaded(param_1[0xa4],
                  (int)((float)param_1[0x9d] + (float)param_1[0x129] +
                       temp_v13 + ((float)param_1[0xe9] - temp_v11) * temp_v20),
                  (int)((float)param_1[0x9e] + (float)param_1[0x12a]),0x20,0x80,0);
@@ -189,7 +189,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v25 = temp_v6;
     FUN_00235368(&temp_v22);
     temp_v11 = (float)VectorSignedToFloat(temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b75ec(param_1[0xa5],
+    textDrawRangeFaded(param_1[0xa5],
                  (int)((float)param_1[0x9f] + (float)param_1[299] +
                       temp_v11 + ((float)param_1[0xeb] - temp_v9) * temp_v20),
                  (int)((float)param_1[0xa0] + (float)param_1[300]),0x20,0x80,0);
@@ -204,7 +204,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v25 = temp_v6;
     FUN_00235368(&temp_v22);
     temp_v11 = (float)VectorSignedToFloat(temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b75ec(param_1[0xa6],
+    textDrawRangeFaded(param_1[0xa6],
                  (int)((float)param_1[0xa1] + (float)param_1[0x12d] +
                       temp_v11 + ((float)param_1[0xed] - temp_v12) * temp_v20),
                  (int)((float)param_1[0xa2] + (float)param_1[0x12e]),0x20,0x80,0);

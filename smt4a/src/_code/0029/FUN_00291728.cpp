@@ -14,7 +14,7 @@ void rt_aeabi_memclr(void *memory, u32 size);
 char *libc_strcpy(char *destination, const char *source);
 void dataTableReload(u32 table);
 void dataTableResolveEntryVariants();
-void FUN_00225ddc(JobWork *job);
+s32 eventScriptJobUpdate(u32 job);
 void FUN_00298978(JobWork *job);
 void aocJobRequest(JobWork *job);
 void resourceDefaultFalseCallback(JobWork *job);
@@ -74,7 +74,7 @@ void FUN_00291728(const RequestParameters *parameters)
             libc_strcpy(DAT_005e1f70.path, reinterpret_cast<const char *>(&parameters->word(2)));
         else
             DAT_005e1f70.path[0] = 0;
-        work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00225ddc), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
+        work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventScriptJobUpdate), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
     } else {
         if (jyoucyuGetTableEntry(0) != NULL) {
             dataTableReload(0x19);

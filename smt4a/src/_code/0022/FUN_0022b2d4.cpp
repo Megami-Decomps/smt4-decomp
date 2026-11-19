@@ -20,7 +20,7 @@ int efctCallRoutineWithSpeedOverride(...);
 int FUN_0047fc38(void);
 
 int gameDataBlocksGetSaveData(void);
-int FUN_00164168(...);
+int textDrawRangeFaded(...);
 int FUN_00180310(...);
 int FUN_00183788(...);
 int FUN_00185e84(...);
@@ -116,7 +116,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164168. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -1509,7 +1509,7 @@ LAB_0022e040:
       do {
         temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,(int)temp_v27[(int)temp_v16]));
         temp_v24 = temp_v16;
-        FUN_00164168(*(unsigned int *)(temp_v4 + 0x20b4),temp_v25 + *(short *)(temp_v3 + 8),
+        textDrawRangeFaded(*(unsigned int *)(temp_v4 + 0x20b4),temp_v25 + *(short *)(temp_v3 + 8),
                      temp_v26 + *(short *)(temp_v3 + 10),0xe7,6);
         temp_v21 = (float)((unsigned long long)temp_v22 >> 0x20);
         temp_v20 = (float)((unsigned long long)temp_v23 >> 0x20);

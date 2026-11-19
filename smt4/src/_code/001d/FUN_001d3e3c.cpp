@@ -71,7 +71,7 @@ int mapIfSetMode1(void);
 int mapDepartSetTarget(...);
 int lmapSetSceneId(...);
 int mapConsumePendingJumpRequest(...);
-int FUN_002897f0(...);
+int eventScriptFindCompletionFlag(...);
 int FUN_0028d664(...);
 int tableGroupFindEntryIndex(...);
 int scrScriptProcessCreate(...);
@@ -466,7 +466,7 @@ extern int table1bOr1cGetRecordValue(void);
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
 extern int screenFadesAllReady(void);
-/* Supplied declaration required: FUN_002897f0. */
+/* Supplied declaration required: eventScriptFindCompletionFlag. */
 
 /* Supplied declaration required: FUN_0028a420. */
 /* Supplied declaration required: FUN_0028d664. */
@@ -1754,7 +1754,7 @@ joined_r0x001d6448:
     puVar17[0x27b] = temp_v6;
     *(unsigned int *)(temp_v6 + 0x108) = 2;
     temp_v8 = DAT_0049f970;
-    FUN_002897f0(DAT_0049f970,&DAT_0049f978);
+    eventScriptFindCompletionFlag(DAT_0049f970,&DAT_0049f978);
     puVar17[0x27c] = temp_v8;
     temp_v7 = tableGroupFindEntryIndex(puVar17[0x279],&DAT_0049f978);
     scrScriptProcessStartEntry(puVar17[0x27b],temp_v7);
@@ -2108,7 +2108,7 @@ LAB_001d6bd0:
     puVar17[0x27b] = temp_v6;
     *(unsigned int *)(temp_v6 + 0x108) = 2;
     temp_v8 = DAT_0049f970;
-    FUN_002897f0(DAT_0049f970,&DAT_0049f978);
+    eventScriptFindCompletionFlag(DAT_0049f970,&DAT_0049f978);
     puVar17[0x27c] = temp_v8;
     temp_v7 = tableGroupFindEntryIndex(puVar17[0x279],&DAT_0049f978);
     scrScriptProcessStartEntry(puVar17[0x27b],temp_v7);
@@ -2236,7 +2236,7 @@ LAB_001d6bd0:
     *(unsigned int *)(temp_v6 + 0x108) = 2;
     temp_v7 = reinterpret_cast<unsigned int>(scrScriptProcessGetEntry(reinterpret_cast<ScriptProcess*>(puVar17[0x27b]),puVar17[0x278]));
     temp_v10 = puVar17[0x26f];
-    FUN_002897f0(temp_v10,temp_v7);
+    eventScriptFindCompletionFlag(temp_v10,temp_v7);
     puVar17[0x27c] = temp_v10;
     scrScriptProcessStartEntry(puVar17[0x27b],puVar17[0x278]);
     DAT_0049f934 = '\x01';

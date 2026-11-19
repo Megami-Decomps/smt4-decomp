@@ -40,7 +40,7 @@ void efctSetSpeed(f32 speed);
 void gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
 s32 fontMeasureLineAdvance(const char* text, s32 font);
-void FUN_00164168(u32 icon, s32 x, s32 y, s32 a, f32 speed, s32 b, s32 c);
+void textDrawRangeFaded(u32 icon, s32 x, s32 y, s32 a, f32 speed, s32 b, s32 c);
 
 // Draws the caption panel at (x, y): "<name>" and a second caption string side by side with
 // their frame, then the eight value cells with their mark icons.
@@ -100,7 +100,7 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
             iconShift = 0;
         }
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-        FUN_00164168(panel->icons[row], parallax + iconShift + iconRect->x + baseX, iconRect->y + y, 201, speed, 6, offset);
+        textDrawRangeFaded(panel->icons[row], parallax + iconShift + iconRect->x + baseX, iconRect->y + y, 201, speed, 6, offset);
     }
     efctSetSpeed(1.0f);
 }

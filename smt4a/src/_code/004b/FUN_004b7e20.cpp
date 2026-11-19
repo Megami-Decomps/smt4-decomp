@@ -21,7 +21,7 @@ void FUN_0040738c(unsigned int owner, float frame);
 int linkSlotSetFlag20(unsigned int, int);
 int listSelectItem(unsigned int, int);
 int FUN_00407a80(unsigned int);
-int FUN_004080bc(...);
+int moveCameraCtrlSnapToNode(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int FUN_004b7d88(...);
 int menu4CReset(...);
 int menu4CStartBlock74(...);
@@ -48,7 +48,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: linkSlotSetFlag20. */
 /* Supplied declaration required: listSelectItem. */
 /* Supplied declaration required: FUN_00407a80. */
-/* Supplied declaration required: FUN_004080bc. */
+/* Supplied declaration required: moveCameraCtrlSnapToNode. */
 extern int rosterGetLeaderId(void);
 /* Supplied declaration required: contentTransitionApplyCommand. */
 /* Supplied declaration required: FUN_004b7d88. */
@@ -113,19 +113,19 @@ void FUN_004b7e20(int param_1)
                 if (*(char *)(param_1 + 0x1214) != '\0') {
                   temp_v2 = menu4CGetEntry(param_1 + 0x9c,(int)*(short *)(param_1 + 0x4c));
                   if (!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) {
-                    FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28),
+                    moveCameraCtrlSnapToNode(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28),
                                  (int)*(char *)(temp_v2 + 0x2a));
                   }
                   else {
                     temp_v0 = *(char *)(temp_v2 + 0x2a);
                     if (!(temp_v0 == '\0' || temp_v0 == '\x06')) {
-                      FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28));
+                      moveCameraCtrlSnapToNode(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28));
                       linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),0);
                       temp_v1 = *(unsigned int *)(param_1 + 0x1218);
                     }
                     else {
                       FUN_00407a80(*(unsigned int *)(param_1 + 0x1218));
-                      FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28),
+                      moveCameraCtrlSnapToNode(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28),
                                    (int)*(char *)(temp_v2 + 0x2a));
                       moveCameraCtrlCreateEntry(*(unsigned int *)(param_1 + 0x1218),&LAB_004b820c,0);
                       listSelectItem(*(unsigned int *)(param_1 + 0x1218),0);

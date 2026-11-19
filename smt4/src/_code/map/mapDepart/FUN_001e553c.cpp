@@ -17,7 +17,7 @@ int entrySetParams(unsigned int, int, int);
 int FUN_0025b670(void);
 int FUN_00273358(...);
 int navigationResetTimer(void);
-int FUN_002897f0(int, unsigned char *);
+int eventScriptFindCompletionFlag(int, unsigned char *);
 int messageSlotSet(int);
 int scrScriptProcessStartEntry(...);
 int scrScriptProcessCreate(...);
@@ -72,7 +72,7 @@ extern int unlockFlagTest(unsigned int);
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapDepartSetTarget. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_002897f0. */
+/* Supplied declaration required: eventScriptFindCompletionFlag. */
 /* Supplied declaration required: messageSlotSet. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -198,7 +198,7 @@ unsigned int FUN_001e553c(void)
       *(int *)(temp_v2 + 0x60) = temp_v4;
       *(unsigned int *)(temp_v4 + 0x108) = 2;
       temp_v3 = 0x47;
-      FUN_002897f0(0x47,&LAB_001e59b8);
+      eventScriptFindCompletionFlag(0x47,&LAB_001e59b8);
       *(unsigned int *)(temp_v2 + 100) = temp_v3;
       temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(temp_v2 + 0x58),&LAB_001e59b8);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),temp_v3);

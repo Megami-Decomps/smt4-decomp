@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013bb34` (_code @ 0x13bb34, 0x280 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
 
 int FUN_00148bb8(unsigned int, int);
 int dataTable18Sub0GetCount(void);
-int dataTable18Sub0GetEntries(void);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {

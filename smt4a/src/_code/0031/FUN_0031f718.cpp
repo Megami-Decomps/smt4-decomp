@@ -15,7 +15,7 @@ void unitInitializeFromTemplate(u32, UnitRecord *);
 void unitRecordBuild(s32, UnitRecord *);
 void FUN_0026fd50(UnitPresentationInfo *, UnitRecord *, s32, u32);
 s32 FUN_002b4dcc(UnitRecord *);
-void FUN_0034dae0(UnitPresentationInfo *, s32);
+void statusScaleUnitDisplayVitals(UnitPresentationInfo *, s32);
 
 /* Build the player's or selected demon's presentation and update selection eligibility. */
 void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
@@ -52,7 +52,7 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
         if (gameProgressIsAdvanced()) {
             session->unk2017 = 16;
             memset(unit.skills, 0, sizeof(unit.skills));
-            FUN_0034dae0(info, id);
+            statusScaleUnitDisplayVitals(info, id);
         }
     } else {
         unitRecordBuild((u16)id, &unit);

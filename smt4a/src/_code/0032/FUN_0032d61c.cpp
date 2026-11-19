@@ -22,7 +22,7 @@ int FUN_00180310(...);
 int gxResetColorQuadToWhite(void);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
-int FUN_0025cc78(...);
+int textDrawFaded(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int effectSpawnDefaultArguments(...);
 int devilDispatchTextureResource(int, int, int, int, int);
 int devilIsTextureLoaded(int, int);
@@ -63,7 +63,7 @@ extern int renderCtxPackPassFlags(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0019acdc(short, unsigned int);
 extern unsigned int dataTable10FindValue(unsigned short);
-/* Supplied declaration required: FUN_0025cc78. */
+/* Supplied declaration required: textDrawFaded. */
 extern unsigned int requestIdToCode(unsigned char);
 /* Supplied declaration required: effectSpawnDefaultArguments. */
 /* Supplied declaration required: devilDispatchTextureResource. */
@@ -236,7 +236,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         temp_v14 = (temp_v14 - temp_v22) * temp_v16;
         uiObjectSetColorRgb(param_1[temp_v5 + 0x14],0xffffff00);
         temp_v22 = *param_3;
-        FUN_0025cc78(param_1[temp_v5 + 0x14],
+        textDrawFaded(param_1[temp_v5 + 0x14],
                      *(short *)(temp_v7 + 8) + param_4 + (int)(temp_v15 + temp_v14) + (int)temp_v12,
                      (int)*(short *)(temp_v7 + 10) + param_5 + temp_v0,0x72);
         temp_v5 = temp_v5 + 1;
@@ -263,7 +263,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
             temp_v0 = *(short *)(temp_v7 + 8);
             temp_v1 = *(short *)(temp_v7 + 10);
             uiObjectSetColorRgb(param_1[temp_v5 + 2],0xffffff00);
-            FUN_0025cc78(param_1[temp_v5 + 2],(int)temp_v22 + temp_v11 + temp_v0,temp_v1 + temp_v9,0x72);
+            textDrawFaded(param_1[temp_v5 + 2],(int)temp_v22 + temp_v11 + temp_v0,temp_v1 + temp_v9,0x72);
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 7);
@@ -281,13 +281,13 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,8));
       uiObjectSetColorRgb(*param_1,temp_v6);
       temp_v7 = param_4 + (int)temp_v13;
-      FUN_0025cc78(*param_1,*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
+      textDrawFaded(*param_1,*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,9));
       uiObjectSetColorRgb(param_1[1],temp_v18);
-      FUN_0025cc78(param_1[1],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
+      textDrawFaded(param_1[1],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,10));
       uiObjectSetColorRgb(param_1[0xd],0xffffff00);
-      FUN_0025cc78(param_1[0xd],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72)
+      textDrawFaded(param_1[0xd],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72)
       ;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v13 = (float)(int)temp_v22;
@@ -299,7 +299,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v12 = (float)VectorSignedToFloat((int)**(short **)(temp_v5 + 0xc),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       uiObjectSetColorRgb(param_1[0xe],0x32323200);
-      FUN_0025cc78(param_1[0xe],param_4 + (int)(temp_v14 + (temp_v12 - temp_v22) * temp_v16) + (int)temp_v13,
+      textDrawFaded(param_1[0xe],param_4 + (int)(temp_v14 + (temp_v12 - temp_v22) * temp_v16) + (int)temp_v13,
                    temp_v0 + param_5,0x74);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x25));
       temp_v7 = param_1[0x11];
@@ -307,7 +307,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v1 = *(short *)(temp_v5 + 8);
       temp_v2 = *(short *)(temp_v5 + 10);
       uiObjectSetColorRgb(param_1[0x10],0x32323200);
-      FUN_0025cc78(param_1[0x10],param_4 + (temp_v0 - temp_v7) + (int)temp_v1 + (int)temp_v13,
+      textDrawFaded(param_1[0x10],param_4 + (temp_v0 - temp_v7) + (int)temp_v1 + (int)temp_v13,
                    param_5 + temp_v2,0x74);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x27));
       if ((*(short *)(param_2 + 0x62) != 0) && (*(short *)(param_2 + 0x34) != 0)) {
@@ -345,7 +345,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
                        temp_v19);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x107));
           uiObjectSetColorRgb(param_1[0x12],0xffffff00);
-          FUN_0025cc78(param_1[0x12],*(short *)(temp_v5 + 8) + param_4,
+          textDrawFaded(param_1[0x12],*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);
         }
       }

@@ -17,7 +17,7 @@ int FUN_00180310(...);
 int gxResetColorQuadToWhite(void);
 int nkmBaseGetRecord(void);
 int drawSetColorFromRGBA8(...);
-int FUN_0025cc78(...);
+int textDrawFaded(...); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern int g_campCecRanking; /* 0x57f11c */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0025cc78. */
+/* Supplied declaration required: textDrawFaded. */
 
 
 int FUN_002bfd94(void)
@@ -179,7 +179,7 @@ int FUN_002bfd94(void)
             temp_v1 = *(short *)(temp_v9 + 10);
             temp_v9 = temp_v2 + temp_v7 * 4;
             uiObjectSetColorRgb(*(unsigned int *)(temp_v9 + 0x208),temp_v12);
-            FUN_0025cc78(*(unsigned int *)(temp_v9 + 0x208),temp_v0 + temp_v8 + temp_v4,temp_v3 + temp_v1 + temp_v5
+            textDrawFaded(*(unsigned int *)(temp_v9 + 0x208),temp_v0 + temp_v8 + temp_v4,temp_v3 + temp_v1 + temp_v5
                          ,0x65);
             temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v17));
             texDrawTableEntryAtStoredOrigin(2,0x2e,0x4a5,temp_v4 + *(short *)(temp_v9 + 8) + temp_v8,

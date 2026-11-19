@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail keeps the bounded==0 arm out of line and writes the cursor fields with `str r1, [r0], #4` / writeback chains; armcc here if-converts the zero-skip arm. */
+/* NON_MATCHING: retail compares skip against length in ip (kept for the last arm), computes start + skip once
+ * before the skip > limit test and predicates that arm (strhi/stmhi); the build branches and splits the stores. */
 #include "common.h"
 
 struct SpanSource {
@@ -12,6 +13,8 @@ struct SpanSource {
 };
 
 struct SpanCursor {
+    SpanCursor(SpanSource *source, s32 position, u32 remaining)
+        : source(source), position(position), remaining(remaining) {}
     SpanSource *source; // 0x00
     s32 position;       // 0x04
     u32 remaining;      // 0x08
@@ -22,30 +25,13 @@ extern "C" {
 // Build a cursor over the source; when the source is bounded the cursor is advanced by the source's skip count.
 SpanCursor FUN_0022bc54(SpanSource *source)
 {
-    SpanCursor cursor;
     u32 skip = source->skip;
-    if (source->bounded == 0) {
-        cursor.source = source;
-        cursor.position = 0;
-        cursor.remaining = skip;
-        return cursor;
-    }
-    if (skip == 0 || skip == source->length) {
-        cursor.source = source;
-        cursor.position = source->start;
-        cursor.remaining = source->length;
-        return cursor;
-    }
-    if (skip > source->limit) {
-        cursor.remaining = skip;
-        cursor.source = source;
-        cursor.position = source->start + skip;
-        return cursor;
-    }
-    cursor.source = source;
-    cursor.position = source->start + skip;
-    cursor.remaining = source->length + skip;
-    return cursor;
+    if (source->bounded == 0)
+        return SpanCursor(source, 0, skip);
+    if (skip == 0 || skip == source->length)
+        return SpanCursor(source, source->start, source->length);
+    if (skip > source->limit)
+        return SpanCursor(source, source->start + skip, skip);
+    return SpanCursor(source, source->start + skip, source->length + skip);
 }
-
 } /* extern "C" */

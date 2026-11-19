@@ -1,49 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00351e54` (_code @ 0x351e54, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Sends service command 0x24 (header 0x240042) with a value, a buffer handle and a static buffer descriptor for `buffer`,
+ * restoring the thread's previous static-buffer slots afterwards; returns the reply word on success. */
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
 extern "C" {
+extern u32 DAT_004655f8;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern unsigned char LAB_00240042; /* 0x240042 */
-extern unsigned int DAT_004655f8; /* 0x4655f8 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_00351e54(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+s32 FUN_00351e54(u32 handle, u32 buffer, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v3 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned char **)(temp_v3 + 0x80) = &LAB_00240042;
-  *(unsigned int *)(temp_v3 + 0x84) = param_3;
-  *(unsigned int *)(temp_v3 + 0x8c) = param_1;
-  *(unsigned int *)(temp_v3 + 0x88) = 0x800002;
-  temp_v0 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  temp_v4 = *(unsigned int *)(temp_v0 + 0x180);
-  temp_v5 = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned int *)(temp_v0 + 0x180) = 0x800002;
-  *(unsigned int *)(temp_v0 + 0x184) = param_2;
-  temp_v1 = DAT_004655f8;
-  software_interrupt(0x32);
-  temp_v2 = DAT_004655f8 & 0x80000000;
-  *(unsigned int *)(temp_v0 + 0x180) = temp_v4;
-  *(unsigned int *)(temp_v0 + 0x184) = temp_v5;
-  if (temp_v2 == 0) {
-    temp_v1 = *(unsigned int *)(temp_v3 + 0x84);
-  }
-  return temp_v1;
-}
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    nn::os::SetIpcWord(command, 0, 0x240042);
+    nn::os::SetIpcWord(command, 1, value);
+    nn::os::SetIpcWord(command, 2, 0x800002);
+    nn::os::SetIpcWord(command, 3, handle);
 
-} /* extern "C" */
+    /* The static buffer descriptor pair lives at thread-local storage + 0x180. */
+    u32 *descriptor = (u32 *)((u8 *)nn::os::GetThreadLocalStorage() + 0x180);
+    u64 savedDescriptor = *(u64 *)descriptor;
+
+    descriptor[0] = 0x800002;
+    descriptor[1] = buffer;
+    s32 result = nn::svc::SendSyncRequest(DAT_004655f8);
+    *(u64 *)descriptor = savedDescriptor;
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
+}
+}

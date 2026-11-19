@@ -27,7 +27,7 @@ void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void effectRenderTransformedInstance(UiSpriteState *sprite, f32 offset);
-void FUN_00164168(u32 message, s32 x, s32 y, u32 color, s32 mode, s32 flags, f32 scale);
+void textDrawRangeFaded(u32 message, s32 x, s32 y, u32 color, s32 mode, s32 flags, f32 scale);
 
 void FUN_00416664(BattleLabelEntryViewA *entries)
 {
@@ -47,7 +47,7 @@ void FUN_00416664(BattleLabelEntryViewA *entries)
             s32 centerX = anchor->x + anchor->placement->width / 2;
             s32 y = anchor->y;
             if (entry->kind == 2 && (uiSpriteGetScaleDone(&entry->sprite) & (s8)entry->sprite.alphaDone)) {
-                FUN_00164168(entry->message, entry->position.x + centerX - entry->textWidth / 2 + offset,
+                textDrawRangeFaded(entry->message, entry->position.x + centerX - entry->textWidth / 2 + offset,
                              entry->position.y + y, 61, 6, 0, 1.0f);
             }
         }

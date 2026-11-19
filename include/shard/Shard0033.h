@@ -137,14 +137,17 @@ typedef struct ObjB {
     /* 0x20D4 */ u8 block20D4[4];
     /* 0x20D8 */ u8 unk20D8[0xE];
     /* 0x20E6 */ u8 unk20E6;
-    /* 0x20E7 */ u8 unk20E7[9];
+    /* 0x20E7 */ u8 unk20E7;
+    /* 0x20E8 */ s32 scaledMaxHp;
+    /* 0x20EC */ s32 scaledMaxMp;
     /* 0x20F0 */ s8 unk20F0;
 } ObjB;
 
 typedef char ObjBSessionOffsetsCheck[sizeof(ObjB) == 0x20F4 &&
     offsetof(ObjB, sessionSelection.pending) == 0x137D &&
     offsetof(ObjB, sessionDisplay.active) == 0x2010 &&
-    offsetof(ObjB, sessionEligibility.allowed) == 0x2032 ? 1 : -1];
+    offsetof(ObjB, sessionEligibility.allowed) == 0x2032 &&
+    offsetof(ObjB, scaledMaxHp) == 0x20E8 && offsetof(ObjB, scaledMaxMp) == 0x20EC ? 1 : -1];
 typedef char ObjBMenuSpriteOffsetsCheck[
     offsetof(ObjB, statusSprites.status) == 0x418 && offsetof(ObjB, statusModelPosition) == 0x2038 &&
     offsetof(ObjB, unk20E6) == 0x20E6 &&

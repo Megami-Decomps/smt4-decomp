@@ -15,7 +15,7 @@ void messageSetConfirmDisplayMode(void);
 s32 aocPackageGrantsItem(AocSystem *system, u32 event, u32 kind);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
-s32 FUN_002897f0(u32 event, char *entryName);
+s32 eventScriptFindCompletionFlag(u32 event, char *entryName);
 s32 tableGroupFindEntryIndex(TableGroupHeader *table, const char *entryName);
 void scrScriptProcessStartEntry(ScriptProcess *process, u32 entry);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
@@ -62,7 +62,7 @@ u32 FUN_00270e34(void)
     ScriptProcess *process = scrScriptProcessCreate(map->scriptData, messages);
     map->scriptProcess = process;
     scriptProcessSetMode(process, 2);
-    map->completionFlag = FUN_002897f0(event->event, event->entryName);
+    map->completionFlag = eventScriptFindCompletionFlag(event->event, event->entryName);
     u32 entry = tableGroupFindEntryIndex(static_cast<TableGroupHeader *>(map->scriptData), event->entryName);
     scrScriptProcessStartEntry(static_cast<ScriptProcess *>(map->scriptProcess), entry);
     return 1;

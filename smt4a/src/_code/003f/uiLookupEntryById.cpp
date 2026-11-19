@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `push {r4, r5, r6}` where armcc emits `ldr r2, [r0]`. */
 #include "common.h"
 
 extern "C" {
@@ -13,15 +12,16 @@ struct LookupOwner {
     /* 0x1ff8 */ LookupEntry *entries;
 };
 
-LookupEntry * uiLookupEntryById(LookupOwner *owner, s32 id)
+/* Finds the entry with the given id among the owner's fifty entries. */
+LookupEntry *uiLookupEntryById(LookupOwner *owner, s32 id)
 {
-    LookupEntry *entries = owner->entries;
+    LookupEntry *result = NULL;
     for (s32 i = 0; i < 50; i++) {
-        if (entries[i].id == id) {
-            return &entries[i];
+        if (owner->entries[i].id == id) {
+            return &owner->entries[i];
         }
     }
-    return NULL;
+    return result;
 }
 
 } /* extern "C" */

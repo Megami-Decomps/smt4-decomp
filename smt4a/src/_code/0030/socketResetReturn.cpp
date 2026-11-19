@@ -1,14 +1,7 @@
-#include "common.h"
+#include "network/OnlineSocket.h"
 
-extern "C" {
-
-void socketReset(void);
-
-/* Runs socketReset and returns `object`. */
-void *socketResetReturn(void *object)
+/* Reset the socket and return it to the caller. */
+extern "C" OnlineSocket *socketResetReturn(OnlineSocket *socket)
 {
-    socketReset();
-    return object;
+    return socketResetAndReturn(socket);
 }
-
-} /* extern "C" */

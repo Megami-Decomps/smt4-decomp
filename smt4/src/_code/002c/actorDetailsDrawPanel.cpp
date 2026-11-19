@@ -4,6 +4,7 @@
  * (retail: before), and the style switch's last branch is inverted. renderCtxPushA(context, flags)
  * gives retail's call order (8 lines differ once registers are ignored) but moves &g_titleScene
  * from r7 to sl, which makes 178 lines differ. */
+#include "text/TextDraw.h"
 #include <stdio.h>
 #include "shard/Shard0034.h"
 #include "shard/TextureDrawCall.h"
@@ -25,7 +26,6 @@ void FUN_002b64b8(void);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_002bdf94(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 void asdTextSetBaseColor(void *text, u32 color);
-void FUN_002598f0(const void *text, s32 x, s32 y, s32 fade, f32 scale);
 void itemDrawCategoryBadge(s32 skill, s32 x, s32 y, s32 depth, s32 mode);
 
 /* Render the actor's portrait, values, skill list, and labels with temporary UI state. */
@@ -95,7 +95,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             textX -= 4;
         }
         asdTextSetBaseColor(texts->values[index], 0xFFFFFF00);
-        FUN_002598f0(texts->values[index], row->x + x + textX + offset,
+        textDrawFaded(texts->values[index], row->x + x + textX + offset,
                       row->y + y + textY, 0x72, transform->alpha);
     }
     if (expanded != 0) {
@@ -118,7 +118,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             s32 textX = rowX + position->x;
             s32 textY = position->y + rowY;
             asdTextSetBaseColor(texts->skills[index], 0);
-            FUN_002598f0(texts->skills[index], offset + textX, textY, 0x72, transform->alpha);
+            textDrawFaded(texts->skills[index], offset + textX, textY, 0x72, transform->alpha);
         }
     }
     u32 labelColor;
@@ -140,24 +140,24 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     }
     position = asdTMTexTableEntryAt(0x39, 8);
     asdTextSetBaseColor(texts->name, nameColor);
-    FUN_002598f0(texts->name, position->x + x + offset, position->y + y, 0x72, transform->alpha);
+    textDrawFaded(texts->name, position->x + x + offset, position->y + y, 0x72, transform->alpha);
     position = asdTMTexTableEntryAt(0x39, 9);
     asdTextSetBaseColor(texts->secondaryName, labelColor);
-    FUN_002598f0(texts->secondaryName, position->x + x + offset, position->y + y, 0x72, transform->alpha);
+    textDrawFaded(texts->secondaryName, position->x + x + offset, position->y + y, 0x72, transform->alpha);
     position = asdTMTexTableEntryAt(0x39, 10);
     asdTextSetBaseColor(texts->thirdLabel, labelColor);
-    FUN_002598f0(texts->thirdLabel, position->x + x + offset, position->y + y, 0x72, transform->alpha);
+    textDrawFaded(texts->thirdLabel, position->x + x + offset, position->y + y, 0x72, transform->alpha);
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     position = asdTMTexTableEntryAt(0x39, 0x24);
     s32 textX = position->x + (position->placement->width - texts->centeredWidth) / 2;
     s32 textY = position->y;
     asdTextSetBaseColor(texts->centeredValue, valueColor);
-    FUN_002598f0(texts->centeredValue, x + textX + offset, y + textY, 0x74, transform->alpha);
+    textDrawFaded(texts->centeredValue, x + textX + offset, y + textY, 0x74, transform->alpha);
     position = asdTMTexTableEntryAt(0x39, 0x25);
     textX = position->placement->width - texts->rightAlignedWidth + position->x;
     textY = position->y;
     asdTextSetBaseColor(texts->rightAlignedValue, valueColor);
-    FUN_002598f0(texts->rightAlignedValue, x + textX + offset, y + textY, 0x74, transform->alpha);
+    textDrawFaded(texts->rightAlignedValue, x + textX + offset, y + textY, 0x74, transform->alpha);
     position = asdTMTexTableEntryAt(0x39, 0x27);
     if (stats->specialValue == 0) {
         sprintf(text, "--");

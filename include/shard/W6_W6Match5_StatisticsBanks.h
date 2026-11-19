@@ -1,12 +1,40 @@
 #ifndef SHARD_W6_W6MATCH5_STATISTICS_BANKS_H
 #define SHARD_W6_W6MATCH5_STATISTICS_BANKS_H
 
-#include "common.h"
+#include "gamedata/GameDataAccess.h"
+#include <stddef.h>
+
+union StatisticsCounter {
+    u32 word;
+    struct {
+        /* 0x00 */ u16 count;
+        /* 0x02 */ u8 rolledMask;
+        /* 0x03 */ u8 countdown : 5;
+        u8 flags : 3;
+    } fields;
+};
 
 struct StatisticsBankPrefix {
-    u8 unk00[0x1c];
-    u32 primary[12 * 7]; // 0x01c: seven counters per row
-    u32 secondary[2]; // 0x16c: first row of a two-counters-per-row bank
+    /* 0x000 */ u8 unk00[0x1c];
+    /* 0x01C */ StatisticsCounter primary[12 * 7]; // seven counters per row
+    /* 0x16C */ StatisticsCounter secondary[2]; // first row of a two-counters-per-row bank
 };
+
+typedef char StatisticsBankLayoutCheck[sizeof(StatisticsCounter) == 4 &&
+    offsetof(StatisticsBankPrefix, primary) == 0x1c &&
+    offsetof(StatisticsBankPrefix, secondary) == 0x16c ? 1 : -1];
+
+/* Look up a counter by bank and one-based row. */
+static __inline StatisticsCounter *statisticsFindCounter(s32 bank, s32 row, s32 column)
+{
+    StatisticsBankPrefix *statistics = reinterpret_cast<StatisticsBankPrefix *>(gameDataBlocksGetStats());
+    switch (bank) {
+    case 0:
+        return &statistics->primary[(row - 1) * 7 + column];
+    case 1:
+        return &statistics->secondary[(row - 1) * 2 + column];
+    }
+    return NULL;
+}
 
 #endif

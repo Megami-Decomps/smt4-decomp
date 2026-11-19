@@ -13,7 +13,7 @@ void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const NamedSortRecord *, const NamedSortRecord *));
 
 // Resolve a name/key pair to its original table index in the 0x820 identifier range.
-u32 FUN_002897f0(u16 id, const NamedRecordName *name)
+u32 eventScriptFindCompletionFlag(u16 id, const NamedRecordName *name)
 {
     NamedSortRecord key;
     for (s32 word = 0; word < 3; ++word)

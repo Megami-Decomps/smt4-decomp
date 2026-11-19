@@ -15,7 +15,7 @@ s32 campIsState85(void);
 void FUN_00202400(void);
 
 /* Opens a special quest's detail on its first special page (page 0 when it has none); the same block
- * is inlined in uiQuestReturnToList, FUN_00334560 and FUN_0023eaf8. */
+ * is inlined in uiQuestReturnToList, FUN_00334560 and uiQuestListInput. */
 static __inline void uiQuestSelectSpecialDetailPage(u16 id)
 {
     UiQuestApoc *quest = g_uiQuest;
@@ -28,7 +28,7 @@ static __inline void uiQuestSelectSpecialDetailPage(u16 id)
         if (index >= quest->listState.count)
             index = 0;
         quest->listState.selection = index;
-        quest->listState.previousSelection = index;
+        quest->listState.nextSelection = index;
     }
 }
 

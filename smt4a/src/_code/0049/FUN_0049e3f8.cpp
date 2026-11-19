@@ -11,7 +11,7 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 scale);
-void FUN_00164168(u32 icon, s32 x, s32 y, s32 z, s32 a, s32 value);
+void textDrawRangeFaded(u32 icon, s32 x, s32 y, s32 z, s32 a, s32 value);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void FUN_0049ec78(ListPanel *panel, PanelRow *row, s32 x, s32 y, s32 z);
 void stereoSpriteDrawSelectedChoice(ListPanel *panel, PanelRow *row, s32 x, s32 y, s32 z);
@@ -48,7 +48,7 @@ void FUN_0049e3f8(ListPanel *panel)
                 s32 entry = panel->scroll + j;
 
                 if (row->first <= entry && entry <= row->last && row->iconIndex >= 0) {
-                    FUN_00164168(panel->icons[row->iconIndex], sprite->x + x + offset, sprite->y + y, 0x6A, 6,
+                    textDrawRangeFaded(panel->icons[row->iconIndex], sprite->x + x + offset, sprite->y + y, 0x6A, 6,
                                  entry - row->first);
                 }
             }

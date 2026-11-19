@@ -3,9 +3,10 @@
 #include "common.h"
 
 extern "C" {
-/* Draw/layout flags and a character limit, followed by x, y, depth and opacity.
+/* Draw/layout at x, y with flags and a character limit, then depth and opacity
+ * (the callers' schedules give this parameter order).
  * Returns the maximum line width. Mode 16 measures without drawing. */
-f32 FUN_002b080c(void *text, u32 flags, s32 limit, f32 x, f32 y, f32 depth, f32 opacity);
+f32 textLayoutDraw(const void *text, f32 x, f32 y, u32 flags, s32 limit, f32 depth, f32 opacity);
 f32 FUN_002b0800(void *text, f32 x, f32 y, f32 depth, f32 opacity);
 f32 effectSpawnDefaultArguments(void *text);
 }

@@ -81,7 +81,7 @@ extern unsigned int FUN_0019eaa0(unsigned short);
 /* WARNING: Removing unreachable block (ram,0x00180fd0) */
 /* WARNING: Removing unreachable block (ram,0x00180fe0) */
 
-void FUN_00180998(int *param_1, int arg1, int arg2)
+void textLayoutDraw(int *param_1, int arg1, int arg2)
 
 {
 /* irregular: 3 goto(s); irregular input(s): in_d11, in_d15, in_fpscr, in_s0, in_s2, in_s3; 19 native warning(s); review required */

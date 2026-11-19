@@ -55,7 +55,7 @@ extern void linkSlotSetFlag20(u32 handle, s32 enable);
 extern void listSelectItem(u32 handle, s32 index);
 extern void FUN_00407ab0(u32 handle, u8 *path, u8 *altPath);
 extern void FUN_00407eb0(u32 handle, s32 kind, s32 flag);
-extern void FUN_004080bc(u32 handle, s32 a, s32 b);
+extern void moveCameraCtrlSnapToNode(u32 handle, s32 a, s32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 extern void mapSceneInitializeScriptAndEntry(MikadoPanel *panel);
 extern MikadoMenuEntry *menu4CGetCurrentEntry(u8 *menu);
 
@@ -88,7 +88,7 @@ void FUN_004b8598(MikadoPanel *panel)
                 FUN_00407ab0(panel->cacheHandle, path, NULL);
             }
             current = menu4CGetCurrentEntry(panel->menu);
-            FUN_004080bc(panel->cacheHandle, 0, -1);
+            moveCameraCtrlSnapToNode(panel->cacheHandle, 0, -1);
             FUN_00407eb0(panel->cacheHandle, current->kind, 1);
             if (panel->entry->tableType >= 0) {
                 typeEntries = (u8 *)dataTable33Entries(scratch, panel->entry->tableType);

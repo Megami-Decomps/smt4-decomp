@@ -9,7 +9,7 @@ void namedObjectFormatFullName(EffMenuNode* node, char* dest);
 void namedObjectFormatName(EffMenuNode* node, char* dest);
 char* libc_strcpy(char* dest, const char* src);
 __weak void FUN_00362584_hook(void* list, const char* path);
-s32 FUN_0036d12c(EffMenuNode* node, const char* dir); // platform stub: `mov r0, #0; bx lr`
+s32 questQueryFalse(EffMenuNode* node, const char* dir); // platform stub: `mov r0, #0; bx lr`
 
 struct EffectEditorNameResult {
     char fullName[50];
@@ -37,7 +37,7 @@ u32 FUN_00362584(void)
         namedObjectFormatName(g_effectEditor.label, input.name);
         input.state = g_effectEditor.label->unk08;
         if (input.state == 1) {
-            if (FUN_0036d12c(g_effectEditor.label, dir)) {
+            if (questQueryFalse(g_effectEditor.label, dir)) {
                 engineFreeCallback(g_effectEditor.label);
                 g_effectEditor.label = NULL;
             } else {

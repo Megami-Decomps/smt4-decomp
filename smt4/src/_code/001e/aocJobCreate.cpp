@@ -30,7 +30,7 @@ void fileSlotReloadRaw(s32 slot);
 void dataTable19ResolveVariants(void);
 char *libc_strcpy(char *destination, const char *source);
 
-s32 FUN_0019f3dc(void);
+s32 eventScriptJobUpdate(u32 job);
 s32 FUN_001e4d70(void);
 void aocJobEnable(void);
 s32 campQueryFalse(void);
@@ -63,7 +63,7 @@ void aocJobCreate(const AocJobTarget *target)
         } else {
             DAT_004937c4.name[0] = 0;
         }
-        job->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0019f3dc), reinterpret_cast<AsdProcFunc>(aocJobEnable), 0);
+        job->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventScriptJobUpdate), reinterpret_cast<AsdProcFunc>(aocJobEnable), 0);
     } else {
         if (jyoucyuGetTableEntry(2) == 0) {
             fileSlotReloadRaw(0x19);

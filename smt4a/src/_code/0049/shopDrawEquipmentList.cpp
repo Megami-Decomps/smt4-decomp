@@ -1,4 +1,4 @@
-/* NON_MATCHING: selected-state predicate layout and list/indicator register allocation differ. */
+/* NON_MATCHING: retail loads the list color with writeback and reads the page from the adjusted base. */
 #include "shard/Shard0049.h"
 #include "code/Code002a.h"
 
@@ -25,7 +25,7 @@ s32 flaggedValueHolderGetTotal(FlaggedValueHolder *holder);
 void FUN_00494d68(EquipmentMenuState *work, s32 row, s32 selected, const EquipmentMenuItem *item);
 void size40Set(void *indicator, u32 offset, u32 selection);
 
-void FUN_00497874(EquipmentMenuState *work, u32 background)
+void shopDrawEquipmentList(EquipmentMenuState *work, u32 background)
 {
     u32 color = work->detail.color;
     switch (work->page) {
@@ -40,8 +40,12 @@ void FUN_00497874(EquipmentMenuState *work, u32 background)
     FUN_0049368c(&work->detail.region, 100, 0, 0, color, 1);
     FUN_00494574(work, work->page);
     u32 state = work->transition.state;
-    bool highlight = (state == 7 || state == 11) || (state == 8 || state == 12) ||
-                     (state == 9 || state == 13) || (state == 17 || state == 18);
+    bool highlight;
+    if (state == 7 || state == 11 || state == 8 || state == 12 ||
+        state == 9 || state == 13 || state == 17 || state == 18)
+        highlight = true;
+    else
+        highlight = false;
     EquipmentMenuCursor *cursor = &work->cursors[work->page];
     EquipmentMenuItem *items = work->pages[work->page].items;
     s32 top = FUN_002a482c(cursor);

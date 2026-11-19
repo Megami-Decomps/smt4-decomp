@@ -1,4 +1,3 @@
-/* NON_MATCHING: with the table lookup in a helper the shared destination store matches; only the departure pointer's register differs (retail allocates it last, r8, with group/map/target in r5/r6/r7; the build takes r6). */
 #include "map/MapDepartTarget.h"
 #include "gamedata/DataTableAccess_AocTable23.h"
 #include "game/GameState.h"
@@ -6,8 +5,8 @@
 extern "C" {
 s32 dataTable23Type1CountWithAoc(void);
 
-/* The destination table 23 gives the target, or -1 when it has none. */
-static __inline s32 mapDepartFindDestination(s32 group, s32 map, u32 target)
+/* The destination table 23 gives the target, or -1 when it has none (the twin of smt4a mapPlaceFind). */
+static s32 mapDepartFindDestination(s32 group, s32 map, u32 target)
 {
     if (target != static_cast<u32>(-1)) {
         for (s32 index = 0; index < dataTable23Type1CountWithAoc(); ++index) {
@@ -25,10 +24,9 @@ static __inline s32 mapDepartFindDestination(s32 group, s32 map, u32 target)
 // Save the requested target and resolve its destination through table 23.
 void mapDepartSetTarget(s32 group, s32 map, u32 target)
 {
-    MapDepartTarget *departure = &g_mapSelection.selection;
-    departure->group = group;
-    departure->map = map;
-    departure->target = target;
-    departure->destination = mapDepartFindDestination(group, map, target);
+    g_mapSelection.selection.group = group;
+    g_mapSelection.selection.map = map;
+    g_mapSelection.selection.target = target;
+    g_mapSelection.selection.destination = mapDepartFindDestination(group, map, target);
 }
 }

@@ -8,6 +8,8 @@
 #include "classes/Obj55ca08.h"
 #include "classes/SelectionState.h"
 #include "classes/UShortVec3.h"
+#include "shard/S1Mover.h"
+#include "map/MapVector.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 
@@ -21,16 +23,62 @@ public:
     u8 unk52C[0x17F0 - 0x4CC - sizeof(FloatState)];
 };
 
+/* The position and angle data for a camera route node. */
+struct MikadoRouteNodeA {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ Vec3f position;
+    /* 0x28 */ u8 unk28[8];
+    /* 0x30 */ Vec3f *angles;
+};
+struct MikadoRouteTableA {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ MikadoRouteNodeA **nodes;
+};
+struct MikadoRouteResourceA {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ MikadoRouteTableA *table;
+};
+class Obj557b18;
+struct MikadoRouteActorA {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ Obj557b18 *controller;
+};
+
 /* Apocalypse's counterpart (0x7A0 bytes, mikado/moveCamera/MoveCameraCtrl.cpp): the scene's camera
  * controller; its floating-point state sits at 0x4F0. */
 class MikadoTalkWorkA {
 public:
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
     static void operator delete(void *block);
-    u8 unk000[0x4F0];
-    FloatState state;
-    u8 unk550[0x7A0 - 0x4F0 - sizeof(FloatState)];
+    /* 0x000 */ s32 nodeCount;
+    /* 0x004 */ s32 selectedNode;
+    /* 0x008 */ u8 unk008[8];
+    /* 0x010 */ u32 elapsed;
+    /* 0x014 */ u8 moving;
+    /* 0x015 */ u8 hasActorDestination;
+    /* 0x016 */ u8 unk016[6];
+    /* 0x01C */ MikadoRouteActorA *actor;
+    /* 0x020 */ u8 unk020[0x4D0];
+    /* 0x4F0 */ FloatState state;
+    /* 0x550 */ u8 unk550[0x44];
+    /* 0x594 */ MikadoRouteResourceA *route;
+    /* 0x598 */ s32 routeMode;
+    /* 0x59C */ u8 unk59C[0x18];
+    /* 0x5B4 */ Vec3f position;
+    /* 0x5C0 */ Vec3f angles;
+    /* 0x5CC */ u8 unk5CC[0x3C];
+    /* 0x608 */ MapVector actorDestination;
+    /* 0x614 */ MapVector savedActorDestination;
+    /* 0x620 */ u8 unk620[0x180];
 };
+
+typedef char MikadoRouteOffsetCheck[
+    offsetof(MikadoRouteNodeA, position) == 0x1C && offsetof(MikadoRouteNodeA, angles) == 0x30 &&
+    offsetof(MikadoTalkWorkA, actor) == 0x1C && offsetof(MikadoTalkWorkA, route) == 0x594 &&
+    offsetof(MikadoTalkWorkA, position) == 0x5B4 && offsetof(MikadoTalkWorkA, angles) == 0x5C0 &&
+    offsetof(MikadoTalkWorkA, actorDestination) == 0x608 ? 1 : -1];
+
+extern "C" void moveCameraCtrlSnapToNode(MikadoTalkWorkA *camera, s32 index, s32 mode);
 
 /* A row of data table 33's type list (a mikado location): 0x88 bytes in both games. */
 struct MikadoRecord {

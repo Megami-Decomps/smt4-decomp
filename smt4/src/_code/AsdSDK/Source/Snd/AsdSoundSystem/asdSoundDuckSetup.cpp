@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail loads the duck address before the enable test and compares the level as an integer (vmov ip, s0; cmp ip, #0x3f800000). */
+/* NON_MATCHING: retail loads the duck address into r0 between the enable test and its branch and shares the active-flag
+ * store between both arms (the clear arm stores it last); the build loads the address in each arm. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
@@ -12,7 +13,7 @@ void asdSoundDuckSetup(f32 level, s32 enable, u32 holdFrames, u32 unk08, u32 fad
         AsdSndDuck *duck = &g_asdSoundDuck;
         duck->flags |= 1;
         duck->level = level;
-        if (level <= 0.0f) {
+        if (duck->level <= 0.0f) {
             duck->level = 0.0f;
         }
         if (duck->level > 1.0f) {

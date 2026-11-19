@@ -26,19 +26,23 @@ void FUN_00157e98(void *target, const void *parameters);
 void effectRestoreSavedRenderPairs(RenderCtxA *context, u32 value);
 void holderFlushPending(RegisteredHandle *holder);
 
+// The render parameters in force: the override's while both its low flag bits are set, else the
+// registry's (the same selection as FUN_00145f94's activeAnimations).
+static __inline const void *activeParameters(HandleRegistryView *registry)
+{
+    RenderParameterOverride *override = DAT_0056fcb8;
+    if (override != NULL && (override->flags & 1) && (override->flags & 2)) {
+        return override->parameters;
+    }
+    return registry->defaultParameters;
+}
+
 u32 FUN_00146314()
 {
     HandleRegistryView *registry = g_handleRegistry;
     if (FUN_00158124(registry)) {
         void *target = registry->target;
-        const void *parameters;
-        RenderParameterOverride *override = DAT_0056fcb8;
-        if (override && (override->flags & 1) && (override->flags & 2)) {
-            parameters = override->parameters;
-        } else {
-            parameters = registry->defaultParameters;
-        }
-        FUN_00157e98(target, parameters);
+        FUN_00157e98(target, activeParameters(registry));
     }
     effectRestoreSavedRenderPairs(g_renderCtx, asdCameraGetSavedRenderPairs());
     RegisteredHandle **end = g_handleRegistry->end;

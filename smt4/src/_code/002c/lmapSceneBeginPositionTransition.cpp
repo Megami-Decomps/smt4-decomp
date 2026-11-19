@@ -1,4 +1,4 @@
-/* NON_MATCHING: through a step pointer the scaled stores match; the compiler still drops the unscaled step.x store and pairs y/z into a vstmia (retail stores all three singly), and retail's g_lmapScene pool word has no relocation in the target object. */
+/* NON_MATCHING: through a step pointer the scaled stores match; the compiler still drops the unscaled step.x store and pairs y/z into a vstmia (retail stores all three singly) (the pool rows then differ only by that one-instruction shift). */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "map/LmapGlobals.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"

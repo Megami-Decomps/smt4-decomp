@@ -112,7 +112,10 @@ Every match must be one a programmer could have written for a reason.
   - `--fpu=softvfp`: code built without VFP. Retail copies 8- and 12-byte values through core
     registers (`ldrd`/`strd`, `ldm`/`stm`) where a VFP build uses `vldm`/`vstm` (Apocalypse's request
     and IPC library, the cfg stubs, the GPU command-buffer module). Prefer the flag when the module's
-    neighbours or the function's twin carry it too; a register-only difference alone is weak evidence;
+    neighbours or the function's twin carry it too; a register-only difference alone is weak evidence.
+    IPC request stubs match as direct `cmd->header = …; cmd->words[i] = …;` stores (descriptors through
+    `ipcMappedBufferDescriptor`), often with softvfp: most of smt4's request stubs at 0x351e54-0x3522f8
+    and their smt4a twins at 0x4264d0-0x426a1c carry it, and their forwarders take the twin's flags;
   - runtime helpers armcc emits itself are reached through the C that produces them, never called by
     name: `/` and `%` for the division helpers, `strcpy` of a literal or a packed-record assignment for
     `__ARM_common_memcpy4_N`. The exceptions are helpers b1454 never emits from C, `__aeabi_memset4`
@@ -367,6 +370,16 @@ a sibling setter or another user of the same lookup is usually written the same 
   `if (a) { … } else if (b) { … } else break; call();` (shopQuantityStep's substeps 6 and 9).
 - `cmp; mov rN, #const; rsbne; bl` is one call written in both arms with the operand negated in one:
   `if (x) f(v, 0); else f(-v, 0);` (shopQuantityStep's price change).
+- `ldrlt r0, =A; ldrgt r0, =B; beq; bl f` is two calls, `if (v > e) f(B); else if (v < e) f(A);`, not
+  one call with a colour variable (smt4 `FUN_00283f80`'s stat comparison).
+- A default-0 id set by a run of independent `if (c == K) id = …;` (no `else`) keeps the zero live in a
+  callee-saved register from its declaration (retail's `mov sl, #0` at entry, parameters spilled with
+  `push {r0-r3, …}`); an `else if` chain folds the zero away (smt4 `FUN_00283f80`).
+- armcc's hex escapes are greedy: `"\x82e"` is the single escape `\x82e` (one byte), not 0x82 then
+  `e`. Write `"\x82\x65"` or split the literal (`"\x82" "e"`); check Shift-JIS strings against the image.
+- Known unsolved: a six-register prologue with `mov r5, r0` before `mov r4, r1` and a load through r5
+  (smt4 `FUN_002072f0`, `FUN_001b18f0`; smt4a `FUN_002ce730`, `FUN_00290978`, `FUN_00241874`). Helpers,
+  `const` parameters, local copies and multifile did not move it; don't spend long on it.
 - A guarded call through a handle (`if (x->handle) call(x->handle, …)`) as an inline helper taking the
   owning struct gives unconditional argument moves and `blne`; passing the handle predicates the moves.
 - `sprintf` with a format that comes from an extern array compiles to `__c89sprintf`, which retail

@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_00124c60(...);
-int FUN_002b75ec(...);
+int textDrawRangeFaded(...);
 int FUN_002b7638(...);
 int effectRenderTransformedInstance(...);
 int asdTextSetBaseColor(...);
@@ -47,7 +47,7 @@ extern int ifTouchIsActive(void);
 /* Supplied declaration required: titleOverlayDraw. */
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_002b753c(unsigned int);
-/* Supplied declaration required: FUN_002b75ec. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -354,7 +354,7 @@ LAB_00117048:
           renderCtxCalculateStereoParallax(g_titleScene);
           temp_v16 = 6;
           temp_v17 = temp_v9;
-          FUN_002b75ec(*(unsigned int *)(temp_v4 + 4),(int)*(short *)(temp_v10 + 8) + (int)temp_v12);
+          textDrawRangeFaded(*(unsigned int *)(temp_v4 + 4),(int)*(short *)(temp_v10 + 8) + (int)temp_v12);
           temp_v9 = temp_v9 + 1;
         } while (temp_v9 < temp_v8);
       }
@@ -399,7 +399,7 @@ LAB_00117048:
         if ((temp_v11 && temp_v9 != temp_v5) && temp_v8 < 0 == (temp_v11 && SBORROW4(temp_v9,temp_v5))) {
           temp_v17 = (int)*(char *)(temp_v4 + temp_v5 + 0x3c);
           temp_v16 = 6;
-          FUN_002b75ec(*(unsigned int *)(temp_v4 + 4),
+          textDrawRangeFaded(*(unsigned int *)(temp_v4 + 4),
                        (((int)*(short *)(temp_v10 + 0x4b0) + (int)temp_v1 + (int)temp_v3 / 2) -
                        (int)*(short *)(temp_v4 + temp_v5 * 2 + 0x4c) / 2) + (int)temp_v12,
                        (int)*(short *)(temp_v10 + 0x4b2) + (int)temp_v2,0x3d);

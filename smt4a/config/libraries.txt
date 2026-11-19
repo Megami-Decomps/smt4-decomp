@@ -10,3 +10,11 @@ arm 0x100000 0x100024 CTR-SDK-crt0 image entry point; calls the SDK's init routi
 # armlib's setlocale (only the "C" locale exists), position-independent C library code placed before
 # rt_fpResultDispatch (smt4's twin FUN_0014d9f0 is already third-party).
 arm 0x1bc5ac 0x1bc5ec armlib setlocale: strcmp against "C"; returns the locale name, or NULL for any other locale
+# armlib's __aeabi_lasr (64-bit arithmetic shift right), the same 10 instructions as smt4's FUN_001383c8.
+arm 0x17fd5c 0x17fd84 armlib __aeabi_lasr: subs r3, r2, #32; bpl; lsr/orr/asr pair, asr #31 for the high path
+# libc strstr in Thumb (movs register moves, as the neighbouring libc_strtok at 0x102c28).
+thumb 0x102c30 0x102c58 armlib strstr: byte compare loop restarting at haystack+1, returns the haystack pointer or 0
+# armlib's vsnprintf-style wrapper: Thumb, takes the output routine's address pc-relatively (ROPI library
+# code), calls the format engine FUN_002e31ba and appends the terminator; between libc entries 0x10032c and
+# libc_sprintf 0x100380 (smt4's FUN_0010034e block is already third-party).
+thumb 0x100348 0x10037a armlib vsnprintf wrapper: add r3, pc callback, format engine call, libcFormatAppendByte terminator

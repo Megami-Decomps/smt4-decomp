@@ -1,4 +1,4 @@
-/* NON_MATCHING: same logic; armcc numbers the registers differently (global address r3/zero r2 vs retail r1/r3) and ends the pending path with beq->bx instead of bxeq lr */
+/* NON_MATCHING: retail reaches g_deferredMapModels through a pool word 672 bytes on (after the functions that follow it), keeps the address in r1 (r2 in the build) and returns with bxeq lr where the build branches to its final bx lr. */
 #include "map/DeferredModels.h"
 
 extern "C" {
@@ -11,11 +11,7 @@ extern DeferredModelWork *g_deferredMapModels; /* 0x447e58 */
 void FUN_00271010(u8 pending)
 {
     g_deferredMapModels->updating = 0;
-    if (pending != 0) {
-        if (g_deferredMapModels->pending != 0) {
-            FUN_00271064();
-        }
-    } else {
+    if (pending == 0) {
         s32 i = 0;
         do {
             DeferredModelEntry *entry = &g_deferredMapModels->entries[i];
@@ -24,6 +20,8 @@ void FUN_00271010(u8 pending)
             }
             i++;
         } while (i < 64);
+    } else if (g_deferredMapModels->pending != 0) {
+        FUN_00271064();
     }
 }
 

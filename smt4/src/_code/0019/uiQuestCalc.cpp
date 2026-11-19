@@ -27,7 +27,7 @@ int gameOptionsHasEnabledParameters(void);
 int SBORROW4(...);
 int VectorUnsignedToFloat(...);
 
-int FUN_001afc0c(void);
+int uiQuestListInput(void);
 int FUN_00290404(void);
 int uiQuestRefreshButtonHelp(void);
 int scrScriptProcessStartEntry(...);
@@ -50,7 +50,7 @@ extern int g_uiQuest; /* 0x43dd50 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: uiQuestStartSelected. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_001afc0c. */
+/* Supplied declaration required: uiQuestListInput. */
 /* Supplied declaration required: uiFadeRequestHalf. */
 /* Supplied declaration required: FUN_0028fe0c. */
 /* Supplied declaration required: uiQuestCountDetailPages. */
@@ -250,7 +250,7 @@ s32 uiQuestCalc(u32 job)
     temp_v7 = *(unsigned int *)(temp_v1 + 0xc);
     break;
   case 2:
-    FUN_001afc0c();
+    uiQuestListInput();
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 3:

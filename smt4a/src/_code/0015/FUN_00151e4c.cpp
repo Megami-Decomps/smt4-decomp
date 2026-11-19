@@ -8,7 +8,7 @@
 extern "C" {
 
 int positionStateSet(...);
-int FUN_00164168(...);
+int textDrawRangeFaded(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00168bec(...);
@@ -46,7 +46,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: FUN_00164168. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int npcRoomGetEntryValue(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
@@ -108,7 +108,7 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
         FUN_001696d4(param_1->field_0x4,temp_v3);
         temp_v5 = (int)in_s0;
         in_s0 = (float)temp_v8;
-        FUN_00164168(param_1->field_0x4,
+        textDrawRangeFaded(param_1->field_0x4,
                      ((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) +
                      ((int)**(short **)(temp_v1 + 0xc) >> 1)) - (temp_v5 >> 1),
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10),0x33,6,temp_v3);
@@ -149,7 +149,7 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
           *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 0xb;
           positionStateSet(param_1->field_0x4,0,0x5a5a5aff);
         }
-        FUN_00164168(param_1->field_0x4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0x33,
+        textDrawRangeFaded(param_1->field_0x4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0x33,
                      6,temp_v4);
         temp_v6 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3)
         ;

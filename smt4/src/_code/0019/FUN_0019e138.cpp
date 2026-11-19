@@ -14,7 +14,7 @@ int asdMemFree(void);
 int jobStop(...);
 
 int FUN_001f4f14(...);
-int FUN_0021799c(void);
+int btlUiTargetListStep(void);
 int FUN_00222b5c(...);
 int playSceneResumeState(...);
 int FUN_00287188(...);
@@ -102,7 +102,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: messageMainApplyClose. */
 /* Supplied declaration required: FUN_00205cc8. */
 /* Supplied declaration required: FUN_00206b80. */
-/* Supplied declaration required: FUN_0021799c. */
+/* Supplied declaration required: btlUiTargetListStep. */
 /* Supplied declaration required: FUN_00222b5c. */
 /* Supplied declaration required: FUN_002251d4. */
 /* Supplied declaration required: playSceneResumeState. */
@@ -519,7 +519,7 @@ LAB_0019e7b8:
     eventQueueAddUniqueIfValid(0x100016e);
     break;
   case 10:
-    FUN_0021799c();
+    btlUiTargetListStep();
     temp_v4 = FUN_002dc3ec(temp_v0 + 0x2460);
     if ((temp_v4 == 0) || (*(int *)(temp_v0 + 0x7d78) == 4)) {
       temp_v7 = 1;

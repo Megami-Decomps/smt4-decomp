@@ -37,7 +37,7 @@ int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int asdMemFree(...);
 int asdMemFreeSlot(unsigned int);
-int FUN_0023eaf8(void);
+int uiQuestListInput(void);
 int FUN_0023ff10(void);
 int questMarkSelectedSpecialDetail(void);
 int questUiPlaySelectionSound(void);
@@ -65,7 +65,7 @@ extern int gameDataBlocksGetSaveData(void);
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: asdMemFreeSlot. */
 extern int useCounterIsFinished(void);
-/* Supplied declaration required: FUN_0023eaf8. */
+/* Supplied declaration required: uiQuestListInput. */
 /* Supplied declaration required: FUN_0023ff10. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: uiFadeRequestHalf. */
@@ -202,7 +202,7 @@ unsigned int uiQuestCalc(void)
     temp_v7 = *(unsigned int *)(temp_v1 + 0xc);
     break;
   case 2:
-    FUN_0023eaf8();
+    uiQuestListInput();
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 3:

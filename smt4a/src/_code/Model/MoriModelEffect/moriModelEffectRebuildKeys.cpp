@@ -1,4 +1,4 @@
-/* NON_MATCHING: recovered selected EPL payload, cloned-data argument/return, allocation-failure lifetime, and source path; key/vector initialization and entry-loop register scheduling differ. */
+/* NON_MATCHING: recovered selected EPL payload, cloned-data argument/return, allocation-failure lifetime, and source path; only the inlined vector growth (_C_insert_aux) differs: retail stores end-of-storage, finish, start as three plain stores where the build uses a post-indexed str + stm. */
 #include "common.h"
 #include <vector>
 #include <new>
@@ -51,7 +51,7 @@ void moriModelEffectRebuildKeys(MoriModelEffect* effect)
     effect->keys.clear();
     s32 entryCount = asdAtbcGetEntryCount(table);
     effect->keyCount = 0;
-    for (s32 entry = 0; entryCount > entry; entry++) {
+    for (s32 entry = 0; entry < entryCount; entry++) {
         AtbcCursor* cursor = static_cast<AtbcCursor*>(FUN_001ad70c(table, entry));
         u32 key = 0xffffffff;
         u32 index = cursor->first;

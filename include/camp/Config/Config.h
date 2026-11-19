@@ -12,7 +12,9 @@
 typedef struct ConfigWork {
     /* 0x00 */ GridNavigation cursor;
     /* 0x64 */ s32 state;
-    /* 0x68 */ u8 unk68[0xC];
+    /* 0x68 */ u8 unk68[8];
+    /* 0x70 */ s16 touchGroupImage;       /* the touch region requested for the option frame's image */
+    /* 0x72 */ u8 unk72[2];
     /* 0x74 */ s16 countA;
     /* 0x76 */ s16 touchGroup;
     /* 0x78 */ s16 choiceRegions[3];
@@ -34,11 +36,19 @@ typedef char ConfigWorkLayoutCheck[offsetof(ConfigWork, selectedChoice) == 0x80 
 
 /* Table 0x36, section 0: the row heading and labels for its choice buttons. */
 struct ConfigurationChoices {
-    char heading[30];
-    char labels[3][10];
-    u8 unk3C[0x44];
+    /* 0x00 */ char heading[30];
+    /* 0x1E */ char labels[3][10];
+    /* 0x3C */ char help[0x44];           /* the row's help text */
 };
-typedef char ConfigChoicesStrideCheck[sizeof(ConfigurationChoices) == 0x80 ? 1 : -1];
+typedef char ConfigChoicesStrideCheck[sizeof(ConfigurationChoices) == 0x80 &&
+    offsetof(ConfigurationChoices, help) == 0x3C ? 1 : -1];
+
+/* Table 0x36, section 1 (0x50 bytes): the help text of one choice of the first row. */
+struct ConfigHelpRecord {
+    /* 0x00 */ char text[0x50];
+};
+typedef char ConfigWorkTouchOffsets[offsetof(ConfigWork, touchGroupImage) == 0x70 &&
+    offsetof(ConfigWork, countA) == 0x74 ? 1 : -1];
 /* FUN_0019715c tail-calls the draw with its third (unused here) display parameter in r2. */
 extern "C" void configDrawOptionPanel(s32 x, s32 y, s32 display);
 extern "C" void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices);

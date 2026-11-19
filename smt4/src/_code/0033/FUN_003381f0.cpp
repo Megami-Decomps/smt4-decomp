@@ -1,4 +1,4 @@
-/* NON_MATCHING: same loops, but retail reloads the 0x48bc offset constant each iteration and allocates an extra register (push {r4}); built hoists it and uses ip/r3 only. */
+/* NON_MATCHING: register allocation only: in the unrolled search loop retail loads the first id into r4 (push {r4}) where armcc reuses ip, the register holding the 0x48bc offset. */
 #include "common.h"
 
 struct BattleMainStateIds {

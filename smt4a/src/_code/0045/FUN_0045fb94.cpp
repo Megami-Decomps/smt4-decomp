@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001911a4(unsigned int, int);
+int soundRequestQueueFlush(unsigned int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int nn_os_LightEvent_Wait(int);
 int nn_os_LightEvent_TryWait(void);
 int objectResetDefaultsAsync(int *);
@@ -12,7 +12,7 @@ int playerInitReset(int *);
 
 typedef int romwright_code(...);
 extern unsigned int objectCommandQueueGet(void);
-/* Supplied declaration required: FUN_001911a4. */
+/* Supplied declaration required: soundRequestQueueFlush. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 /* Supplied declaration required: nn_os_LightEvent_TryWait. */
 /* Supplied declaration required: objectResetDefaultsAsync. */
@@ -32,7 +32,7 @@ void FUN_0045fb94(int *param_1)
   temp_v2 = temp_v0 + 4;
   nn_os_LightEvent_TryWait();
   if (temp_v2 == 0) {
-    FUN_001911a4(temp_v1,1);
+    soundRequestQueueFlush(temp_v1,1);
     nn_os_LightEvent_Wait(temp_v0 + 4);
   }
   objectResetDefaultsAsync(param_1);

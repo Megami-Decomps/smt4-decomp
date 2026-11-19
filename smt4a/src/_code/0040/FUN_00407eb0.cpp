@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail splits the 12-byte point copies as ldrd/stm {x,y} + str z and places the index==0 (home) arm after the epilogue; built copies whole Vec3s with ldm/stm and keeps the arm inline */
+/* NON_MATCHING: retail loads each node's look pointer before copying its position and splits the 12-byte
+ * copies (ldrd/stm of x/y, then z); the build reloads the pointer after the position copy and copies whole
+ * vectors. Single-use `look` pointer locals taken before the copies score better but are schedule steering. */
 #include "common.h"
 
 extern "C" {
@@ -61,13 +63,10 @@ void controllerSetDestination(u32 handle, Vec3 *destination);
 void FUN_00407eb0(CameraController *ctrl, s32 index, s32 immediate)
 {
     if (immediate != 0) {
-        CameraNode *node = ctrl->source->table->nodes[index];
-        Vec3 position = node->position;
-        Vec3 look = *node->look;
-        ctrl->destination.position = position;
-        ctrl->destination.look = look;
-        ctrl->current.position = position;
-        ctrl->current.look = look;
+        const CameraNode *node = ctrl->source->table->nodes[index];
+        ctrl->destination.position = node->position;
+        ctrl->destination.look = *node->look;
+        ctrl->current = ctrl->destination;
         FUN_00407598(ctrl);
         if (ctrl->hasSecond != 0) {
             ctrl->secondDestination = ctrl->secondTable[index];
@@ -81,8 +80,8 @@ void FUN_00407eb0(CameraController *ctrl, s32 index, s32 immediate)
             ctrl->destination.position = ctrl->home.position;
             ctrl->destination.look = ctrl->home.look;
         } else {
-            CameraNode *node = ctrl->source->table->nodes[index];
-            ctrl->destination.position = node->position;
+            const CameraNode *node = ctrl->source->table->nodes[index];
+                ctrl->destination.position = node->position;
             ctrl->destination.look = *node->look;
         }
         ctrl->step.position.x = (ctrl->destination.position.x - ctrl->current.position.x) * 0.1f;

@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int FUN_001911a4(fn_0019102c_arg0 *, unsigned int);
+extern int soundRequestQueueFlush(fn_0019102c_arg0 *, unsigned int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 /* Supplied declaration required: FUN_001a5db8. */
 /* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue. */
 extern int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryDequeue(void **, int **);
@@ -78,7 +78,7 @@ joined_r0x001910b4:
     if (pfVar6 == (fn_0019102c_arg0 *)0x0) {
       do {
         do {
-          temp_v0 = FUN_001911a4(param_1,1);
+          temp_v0 = soundRequestQueueFlush(param_1,1);
           do {
             ppvVar3 = &param_1->field_0xb4;
             nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Dequeue();

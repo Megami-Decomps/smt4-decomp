@@ -55,7 +55,7 @@ void nw_ut_internal_LinkListImpl_insert(void *list, void *end, void *node);
 void *__aeabi_vec_ctor_nocookie_nodtor(void *begin, void (*construct)(void *), u32 stride, u32 count);
 void *objectCommandQueueGet(void);
 void FUN_00191260(void *queue);
-u32 FUN_001911a4(void *queue, u32 value);
+u32 soundRequestQueueFlush(void *queue, u32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void FUN_00161d8c(void *bucket);
 void FUN_00161da4(void *bucket);
 void callbackListInitialize(void *bucket);
@@ -97,5 +97,5 @@ extern "C" void FUN_00147c10(ObjectGroup *group)
     sortByPriority<callbackListInitialize>(&group->third);
     void *queue = objectCommandQueueGet();
     FUN_00191260(queue);
-    FUN_001911a4(queue, 0);
+    soundRequestQueueFlush(queue, 0);
 }

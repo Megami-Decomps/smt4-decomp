@@ -2,14 +2,7 @@
 #include "common.h"
 #include "code/Code0015.h"
 #include "gamedata/DataTableAccess.h"
-
-/* A table entry of 0x94 bytes (accessed fields). */
-struct TableEntry {
-    u8 id;          // 0x00
-    u8 kind;        // 0x01
-    u16 variant;    // 0x02
-    u8 unk04[0x90];
-};
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 /* The per-entry roll state: the current result, the rolled-tier mask and a countdown. */
 struct RollState {
@@ -26,7 +19,6 @@ struct RollRow {
 };
 
 extern "C" {
-TableEntry *dataTable18Sub0GetEntries(void);
 RollState *statisticsGetCounter(u8 kind, u32 id, u16 variant);
 s32 FUN_00148bb8(u32 id, u8 kind);
 u16 *dataTableFindCategoryVariant(u8 kind, u32 id, u16 variant);
@@ -35,12 +27,12 @@ s32 randRange(u32 maximum);
 /* Roll every table entry's pending result: count down active results and draw new ones from the chance rows. */
 void FUN_004cd960(void)
 {
-    TableEntry *entries = dataTable18Sub0GetEntries();
+    const StatisticsTableEntry *entries = dataTable18Sub0GetEntries();
     s32 count = dataTable18Sub0GetCount();
     for (s32 n = 0; n < count; n++) {
-        u32 id = entries[n].id;
-        u8 kind = entries[n].kind;
-        u16 variant = entries[n].variant;
+        u32 id = entries[n].row;
+        u8 kind = entries[n].bank;
+        u16 variant = entries[n].column;
         if (kind != 0) {
             if (variant == 6)
                 variant = 0;

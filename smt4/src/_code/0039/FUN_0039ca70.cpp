@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail shares the "step = 0/1" store between cases 0 and 2, reloads g_gameState
- * for the flag write and places the commonBgStopChildAndBeginTransition arm last; armcc here keeps case 2 separate */
 #include "map/mapDepart.h"
 #include "bible/bibleAnalyze.h"
 #include "game/GameState.h"
@@ -15,8 +13,13 @@ struct Unk39ca70Phase {
     /* 0x10 */ u32 flags;
 };
 
-extern "C" {
+/* Same helper as the Apocalypse twin (Obj532300::FUN_0048d1c8). */
+static __inline void flagsClearBits(u32 *flags, u32 bits)
+{
+    *flags &= ~bits;
+}
 
+extern "C" {
 
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
@@ -31,10 +34,10 @@ void FUN_0039ca70(Unk39ca70Phase *phase)
     case 0:
         if (g_gameState.map.bgResetPending != 0) {
             g_gameState.map.bgResetPending = 0;
-            if (gameFlagIsSet(22)) {
-                commonBgReset();
-            } else {
+            if (!gameFlagIsSet(22)) {
                 commonBgStopChildAndBeginTransition();
+            } else {
+                commonBgReset();
             }
         }
         buttonHelpSelectMapPreset();
@@ -46,7 +49,7 @@ void FUN_0039ca70(Unk39ca70Phase *phase)
         }
         break;
     case 2:
-        phase->flags &= ~UNK39CA70_FLAG_BUSY;
+        flagsClearBits(&phase->flags, UNK39CA70_FLAG_BUSY);
         phase->result = 2;
         phase->step = 0;
         break;

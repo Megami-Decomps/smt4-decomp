@@ -1,4 +1,3 @@
-/* NON_MATCHING: the final tail call (retail's `b` to the list-remove function at 0x431e1c has no symbol or unit, hence no relocation; build emits R_ARM_JUMP24 FUN_00431e1c) and register allocation (retail walks the list through a copy of the head address). */
 #include "common.h"
 
 extern "C" {
@@ -17,27 +16,33 @@ void FUN_00431e1c(void *list, void *node);
 
 extern u8 DAT_00647604;  /* list of top level heap regions */
 
+/* The innermost region of `list` whose range holds `address` (the body of nnFndFindNestedRange,
+ * which armcc inlined here one level deep). */
+static HeapRegion *findContainingRegion(void *list, void *address)
+{
+    HeapRegion *region = NULL;
+
+    while ((region = nn_fnd_detail_GetNextListObject(list, region)) != NULL) {
+        if ((u8 *)address >= region->begin && (u8 *)address < region->end) {
+            HeapRegion *nested = nnFndFindNestedRange(region->list, address);
+
+            if (nested == NULL) {
+                nested = region;
+            }
+            return nested;
+        }
+    }
+    return NULL;
+}
+
 /* Removes the block at `node` from the block list of the region that holds it (the list of the
  * top level regions when none does). */
 void nnFndDetailRemoveBlockFromRegion(void *node)
 {
     void *list = &DAT_00647604;
-    HeapRegion *region = NULL;
-
-    for (;;) {
-        region = nn_fnd_detail_GetNextListObject(&DAT_00647604, region);
-        if (region == NULL) {
-            break;
-        }
-        if ((u8 *)node >= region->begin && (u8 *)node < region->end) {
-            HeapRegion *nested = nnFndFindNestedRange(region->list, node);
-
-            if (nested == NULL) {
-                nested = region;
-            }
-            list = nested->list;
-            break;
-        }
+    HeapRegion *region = findContainingRegion(&DAT_00647604, node);
+    if (region != NULL) {
+        list = region->list;
     }
     FUN_00431e1c(list, node);
 }

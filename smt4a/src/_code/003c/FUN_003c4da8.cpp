@@ -20,7 +20,7 @@ u32 FUN_003c4da8(void)
     u32 result;
 
     if (table != NULL) {
-        EngineUnit *unit = &table->units[table->current];
+        EngineUnit *unit = table->selectedUnit();
 
         if (arg != 0) {
             result = unit->id;

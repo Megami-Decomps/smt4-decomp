@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_002897f0(...);
+int eventScriptFindCompletionFlag(...);
 
 int asdLoadFileSetUseRawPaths(int);
 int FUN_00282bfc(int, int);
@@ -48,7 +48,7 @@ extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: screenFadeSlotReset. */
 /* Supplied declaration required: msgWindowReset. */
-/* Supplied declaration required: FUN_002897f0. */
+/* Supplied declaration required: eventScriptFindCompletionFlag. */
 
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: commonBgAcquire. */
@@ -234,7 +234,7 @@ unsigned int FUN_001e4d70(void)
       puVar1[7] = 0;
       temp_v3 = reinterpret_cast<unsigned int>(scrScriptProcessGetEntry(reinterpret_cast<ScriptProcess*>(puVar1[0xc]),puVar1[6]));
       temp_v4 = puVar1[5];
-      FUN_002897f0(temp_v4,temp_v3);
+      eventScriptFindCompletionFlag(temp_v4,temp_v3);
       puVar1[7] = temp_v4;
       return 0;
     }

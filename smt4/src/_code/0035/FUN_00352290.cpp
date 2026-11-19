@@ -1,44 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00352290` (_code @ 0x352290, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
+#include "nn/os/IpcStaticBuffer.h"
+#include <string.h>
 
 extern "C" {
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
+extern u32 DAT_00472a58; /* service session handle */
 
-/* stack frame of param_4: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp14; /* 0x14: local_14 */
-} param_4_stack;
-
-extern unsigned int DAT_00472a58; /* 0x472a58 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_00352290(unsigned int param_1,unsigned char param_2,unsigned int param_3,int param_4)
-
+/* IPC request 0x1005 with a flag byte, a count, a buffer of count 8-byte records read from `input`
+ * and a buffer of count 24-byte records written to `output`; returns the transport result, or the
+ * service's result word when the transport succeeded. */
+s32 FUN_00352290(void *output, u8 flag, const void *input, s32 count)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x10050084;
-  *(unsigned char *)(temp_v1 + 0x84) = param_2;
-  *(int *)(temp_v1 + 0x88) = param_4;
-  *(unsigned int *)(temp_v1 + 0x8c) = (param_4 << 7) | 10;
-  *(unsigned int *)(temp_v1 + 0x90) = param_3;
-  *(unsigned int *)(temp_v1 + 0x98) = param_1;
-  *(unsigned int *)(temp_v1 + 0x94) = (param_4 * 0x180) | 0xc;
-  software_interrupt(0x32);
-  temp_v0 = DAT_00472a58;
-  if ((DAT_00472a58 & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
+    cmd->header = 0x10050084;
+    memcpy(&cmd->words[0], &flag, sizeof(flag));
+    cmd->words[1] = count;
+    cmd->words[2] = ipcMappedBufferDescriptor(count * 8, 10);
+    cmd->words[3] = (u32)input;
+    cmd->words[4] = ipcMappedBufferDescriptor(count * 24, 12);
+    cmd->words[5] = (u32)output;
+    s32 result = nn::svc::SendSyncRequest(DAT_00472a58);
+    if (nnResultIsSuccess(result)) {
+        result = cmd->words[0];
+    }
+    return result;
 }
 
 } /* extern "C" */

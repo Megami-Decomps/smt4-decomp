@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_00164168(...);
+int textDrawRangeFaded(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
@@ -23,7 +23,7 @@ typedef struct {
 extern int g_infoWin; /* 0x57f574 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_00164168. */
+/* Supplied declaration required: textDrawRangeFaded. */
 extern int btlMainIsRunning(void);
 extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
@@ -164,15 +164,15 @@ char FUN_00155ca8(void)
                  (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1]);
     temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(8,0x89));
     if (*(char *)(temp_v1 + 0x33) != '\0') {
-      FUN_00164168(*(unsigned int *)(temp_v1 + 0x328),*(short *)(temp_v6 + 8) + temp_v2,
+      textDrawRangeFaded(*(unsigned int *)(temp_v1 + 0x328),*(short *)(temp_v6 + 8) + temp_v2,
                    *(short *)(temp_v6 + 10) + temp_v3,0xc9,6,0);
     }
     else {
-      FUN_00164168(*(unsigned int *)(temp_v1 + 0x328),
+      textDrawRangeFaded(*(unsigned int *)(temp_v1 + 0x328),
                    (int)*(short *)(temp_v6 + 8) + *(int *)(temp_v1 + 0x18) + temp_v2,
                    *(short *)(temp_v6 + 10) + temp_v3,0xc9,6,0);
       if (*(char *)(temp_v1 + 0x32) != '\0') {
-        FUN_00164168(*(unsigned int *)(temp_v1 + 0x328),
+        textDrawRangeFaded(*(unsigned int *)(temp_v1 + 0x328),
                      (int)*(short *)(temp_v6 + 8) + *(int *)(temp_v1 + 0x1c) + temp_v2,
                      *(short *)(temp_v6 + 10) + temp_v3,0xc9,6,0);
       }

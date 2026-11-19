@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_002b75ec(...);
+int textDrawRangeFaded(...);
 int effectRenderTransformedInstance(unsigned int *);
 int renderCtxCalculateStereoParallax(int);
 int textDrawString(...);
@@ -32,7 +32,7 @@ extern float DAT_00433180; /* 0x433180 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b75ec. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: textDrawString. */
@@ -194,7 +194,7 @@ unsigned int FUN_0038a478(void)
         if (0 < (int)temp_v6) {
           do {
             temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,temp_v1 + temp_v4));
-            FUN_002b75ec(puVar2[0x107],*(short *)(temp_v2 + 8) + temp_v11,(int)*(short *)(temp_v2 + 10),
+            textDrawRangeFaded(puVar2[0x107],*(short *)(temp_v2 + 8) + temp_v11,(int)*(short *)(temp_v2 + 10),
                          0x13,6,temp_v4);
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < (int)puVar2[4]);

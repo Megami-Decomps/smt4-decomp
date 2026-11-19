@@ -1469,7 +1469,7 @@ code_r0x0032d518:
     }
     break;
   case 0x2b:
-    FUN_0018b978();
+    configUpdate();
     iVar7 = func_0x00192a78();
     if (iVar7 != 0) {
       FUN_00299900(0);

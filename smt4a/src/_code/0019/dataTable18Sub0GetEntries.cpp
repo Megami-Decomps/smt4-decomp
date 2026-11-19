@@ -1,16 +1,12 @@
-#include "common.h"
+#include "gamedata/DataTable.h"
 #include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
 
-int dataTableGet(int arg0, int arg1);
-int dataTableGetEntries(void);
-
-/* Selects table entry (24, 0), then returns the table's entries. */
-int dataTable18Sub0GetEntries(void)
+/* Returns the rows of table 0x18, section 0. */
+const StatisticsTableEntry *dataTable18Sub0GetEntries(void)
 {
-    dataTableGet(24, 0);
-    return dataTableGetEntries();
+    return static_cast<const StatisticsTableEntry *>(dataTableGetEntries(dataTableGet(0x18, 0)));
 }
 
 } /* extern "C" */

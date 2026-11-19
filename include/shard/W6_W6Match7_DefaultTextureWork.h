@@ -81,7 +81,7 @@ s32 gfxDefaultTexturesInitialize(DefaultTextureWork *work);
 extern "C" {
 #endif
 
-s32 FUN_00126830(u32 handle, u32 value);
+f32 FUN_00126830(const void *text, s32 limit);
 
 #ifdef __cplusplus
 }

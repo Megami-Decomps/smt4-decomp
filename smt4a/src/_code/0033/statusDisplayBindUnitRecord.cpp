@@ -45,7 +45,7 @@ s32 gameProgressIsAdvanced();
 s32 btlMainIsRunning();
 s32 btlIsDefeatSuppressed();
 void FUN_0026fd50(StatusDisplayPane *pane, StatusUnitRecord *record, s32 mode, const u32 *parameters);
-void FUN_0034dae0(StatusDisplayPane *pane, u16 id);
+void statusScaleUnitDisplayVitals(StatusDisplayPane *pane, u16 id);
 s32 FUN_002b4dcc(StatusUnitRecord *record);
 }
 
@@ -80,7 +80,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
     FUN_0026fd50(pane, record, 0, parameters);
     if (useBaseStats != 0) {
         if (gameProgressIsAdvanced()) {
-            FUN_0034dae0(pane, record->id);
+            statusScaleUnitDisplayVitals(pane, record->id);
         } else {
             const NkmEnemyRecordA *base = nkmEnemyFindById(record->id);
             if (base != NULL) {

@@ -1,4 +1,9 @@
-/* NON_MATCHING: readable rewrite of the battle debug editor job (nine states, same calls and strings as retail); armcc places the shared menu-open blocks and allocates the action-scan index/pointer registers differently. */
+/* NON_MATCHING: the nine states, calls and strings are retail's, and the enemy position editor (state 7) is the
+ * inlined step retail shows (it copies the incoming state register). What still differs (built is 36 rows longer):
+ * armcc keeps the `job->state = N; break;` tail of a later case where retail keeps case 0's copy and sends every
+ * other state change to it; it if-converts state 2's fallback store, keeps a second copy of the mode menu and of the
+ * `return -1` epilogue that retail shares, and in state 0 walks the actions with the pointer in r0 and the index in
+ * r1 where retail advances the incoming state register and counts in r0. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/btlHelp.h"
@@ -132,10 +137,35 @@ static __inline void debugListClose(BattleDebugEditorJob *job)
     job->list = 0;
 }
 
-/* Drives the battle debug editor: root menu, mode menu, action/enemy/camera editors and the position arrangement load. */
-u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
+/* The enemy position editor (state 7): B closes it; otherwise the three list values become the
+ * selected enemy's position, in its editor record and in its battle unit. */
+static __inline void debugEnemyPositionStep(BattleDebugEditorJob *job, BtlMainState *state)
 {
-    u32 next;
+    if (padIsButtonPressed(1)) {
+        debugListClose(job);
+        job->state = 3;
+    } else {
+        struct EnemyEditorRecords {
+            u8 unk0000[0x1E98];
+            u8 *records;
+        };
+        u32 list = job->list;
+        EditorUnitPosition *record = reinterpret_cast<EditorUnitPosition *>(
+            reinterpret_cast<EnemyEditorRecords *>(state)->records + job->selection * 0x114);
+        btlFindEntryBlockByMemberId(state, job->selection);
+        EditorUnitPosition *unit = FUN_0033a5ec(state, job->selection);
+        record->position.x = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 1));
+        record->position.y = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 2));
+        record->position.z = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 3));
+        unit->position.x = record->position.x;
+        unit->position.y = record->position.y;
+        unit->position.z = record->position.z;
+    }
+}
+
+/* Drives the battle debug editor: root menu, mode menu, action/enemy/camera editors and the position arrangement load. */
+u32 btlDebugEditorStep(BattleDebugEditorJob *job, BtlMainState *state)
+{
     switch (job->state) {
     case 0:
         if (state != NULL) {
@@ -156,7 +186,7 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
             }
         }
         debugMenuOpenRoot(job, state);
-        next = 1;
+        job->state = 1;
         break;
     case 1:
         if (padIsButtonPressed(0)) {
@@ -164,19 +194,20 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
             debugListClose(job);
             if (selected == 0) {
                 debugMenuOpenMode(job, state);
-                next = 2;
+                job->state = 2;
+                break;
             } else if (selected == 1) {
-                next = 5;
+                job->state = 5;
+                break;
             } else if (selected == 2) {
-                next = 6;
+                job->state = 6;
+                break;
             } else {
                 return 0xFFFFFFFF;
             }
         } else if (padIsButtonPressed(1)) {
             debugListClose(job);
             return 0xFFFFFFFF;
-        } else {
-            return 0;
         }
         break;
     case 2:
@@ -185,18 +216,18 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
             debugListClose(job);
             if (selected == 0) {
                 FUN_003d8a18(job, state);
-                next = 3;
+                job->state = 3;
+                break;
             } else if (selected == 1) {
                 debugMenuOpenCamera(job, state);
-                return 0;
             } else {
-                next = 0;
+                job->state = 0;
+                break;
             }
         } else if (padIsButtonPressed(1)) {
             debugListClose(job);
-            next = 0;
-        } else {
-            return 0;
+            job->state = 0;
+            break;
         }
         break;
     case 6: {
@@ -210,42 +241,25 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
         if (file->kind == 1)
             FUN_003d9628(job, state, file);
         job->state = 0;
-        return 0;
+        break;
     }
     case 3:
         if (padIsButtonPressed(0)) {
             FUN_003d8b34(job, state, state->editor.job);
-            next = 7;
+            job->state = 7;
+            break;
         } else if (padIsButtonPressed(1)) {
-            next = 0;
+            job->state = 0;
+            break;
         } else {
             btlDebugNavigateActionEditor(job, state);
-            return 0;
         }
         break;
     case 5:
-        next = 0;
+        job->state = 0;
         break;
     case 7:
-        if (padIsButtonPressed(1)) {
-            debugListClose(job);
-            next = 3;
-        } else {
-            struct EnemyEditorRecords {
-                u8 unk0000[0x1E98];
-                u8 *records;
-            };
-            u32 list = job->list;
-            EditorUnitPosition *record = reinterpret_cast<EditorUnitPosition *>(
-                reinterpret_cast<EnemyEditorRecords *>(state)->records + job->selection * 0x114);
-            btlFindEntryBlockByMemberId(state, job->selection);
-            EditorUnitPosition *unit = FUN_0033a5ec(state, job->selection);
-            record->position.x = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 1));
-            record->position.y = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 2));
-            record->position.z = *reinterpret_cast<const u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(list), 3));
-            unit->position = record->position;
-            return 0;
-        }
+        debugEnemyPositionStep(job, state);
         break;
     case 4:
         if (padIsButtonPressed(0)) {
@@ -253,24 +267,24 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
             debugListClose(job);
             if (selected == 0 || selected == 1 || selected == 2) {
                 btlCameraEditorInitializeList(job, state, state->editor.job, (u16)selected);
-                next = 8;
+                job->state = 8;
+                break;
             } else {
                 debugMenuOpenMode(job, state);
-                next = 2;
+                job->state = 2;
+                break;
             }
         } else if (padIsButtonPressed(1)) {
             debugListClose(job);
             debugMenuOpenMode(job, state);
-            next = 2;
-        } else {
-            return 0;
+            job->state = 2;
+            break;
         }
         break;
     case 8:
         if (padIsButtonPressed(1)) {
             debugListClose(job);
             debugMenuOpenCamera(job, state);
-            return 0;
         } else {
             u32 list = job->list;
             u32 mode = job->cameraMode;
@@ -287,15 +301,11 @@ u32 FUN_003d8f60(BattleDebugEditorJob *job, BtlMainState *state)
             } else if (mode == 2) {
                 g_btlMain->editorValue = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(list), 0);
             }
-            return 0;
         }
+        break;
     case 9:
         return 0xFFFFFFFF;
-    default:
-        return 0;
     }
-    job->state = next;
     return 0;
 }
 }
-

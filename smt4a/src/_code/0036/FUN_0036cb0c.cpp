@@ -64,7 +64,7 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
     } else {
         uiObjectSetColorRgb(text, 0x9fe7ffff);
     }
-    FUN_0025cc78(reinterpret_cast<const void *>(text), frame->x + caption->x,
+    textDrawFaded(reinterpret_cast<const void *>(text), frame->x + caption->x,
                  frame->y + caption->y, 0x15, 1.0f);
     uiObjectSetColorRgb(text, 0xffffffff);
     if (mode == 1) {

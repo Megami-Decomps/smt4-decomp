@@ -102,7 +102,7 @@ int FUN_0037e1b0(...);
 int FUN_003a7788(void);
 int FUN_003a7c00(...);
 int FUN_003d386c(...);
-int FUN_003daf0c(...);
+int campUpdateListInput(...);
 
 int campChangeState(...);
 int FUN_00215bbc(void);
@@ -359,7 +359,7 @@ extern int sceneHolderUpdate(void);
 /* Supplied declaration required: FUN_003d386c. */
 /* Supplied declaration required: titleSetSlotValueState2. */
 /* Supplied declaration required: FUN_003da8f4. */
-/* Supplied declaration required: FUN_003daf0c. */
+/* Supplied declaration required: campUpdateListInput. */
 /* Supplied declaration required: FUN_003dc628. */
 extern int FUN_003deee4(unsigned int);
 extern unsigned char FUN_003e42f0(void);
@@ -924,7 +924,7 @@ unsigned int FUN_003d56dc(void)
     break;
   case 10:
     temp_v6 = 0xb;
-    FUN_003daf0c(temp_v6);
+    campUpdateListInput(temp_v6);
     break;
   case 0xb:
     temp_v4 = FUN_00284e94();
@@ -1018,10 +1018,10 @@ LAB_003d6870:
     break;
   case 0xf:
     temp_v6 = 0xd;
-    FUN_003daf0c(temp_v6);
+    campUpdateListInput(temp_v6);
     break;
   case 0x10:
-    FUN_003daf0c(0xe);
+    campUpdateListInput(0xe);
     break;
   case 0x11:
     campSkillListUpdate();

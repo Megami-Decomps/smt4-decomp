@@ -24,7 +24,10 @@ typedef struct UiQuestPanel {
     /* 0xC4 */ s8 detailMode;   /* 0 = list view */
     /* 0xC5 */ u8 unkC5[3];
     /* 0xC8 */ s32 selection;
-    /* 0xCC */ u8 unkCC[4];
+    union {
+        /* 0xCC */ u8 unkCC[4];
+        /* 0xCC */ s32 nextSelection; /* the category a left/right press moves to */
+    };
     /* 0xD0 */ s32 page;
     /* 0xD4 */ u32 texts[3];    /* asdText handles */
     union {
@@ -33,7 +36,7 @@ typedef struct UiQuestPanel {
     };
     /* 0xE4 */ u32 sysImages;   /* event/quest/QuestSys.mbm */
     /* 0xE8 */ u8 unkE8[9];
-    /* 0xF1 */ u8 confirming;   /* a confirmation is pending */
+    /* 0xF1 */ s8 confirming;   /* a confirmation is pending */
     /* 0xF2 */ u8 unkF2;
     /* 0xF3 */ u8 unkF3;
     /* 0xF4 */ s8 unkF4;
@@ -42,10 +45,10 @@ typedef struct UiQuestPanel {
         /* 0xF6 */ u8 unkF6[2];
         struct {
             u8 padding;
-            /* 0xF7 */ u8 borrowed;
+            /* 0xF7 */ s8 borrowed;
         } entryOwnership;
     };
-    /* 0xF8 */ u8 choice;       /* the answer given to the pending confirmation */
+    /* 0xF8 */ s8 choice;       /* the answer given to the pending confirmation */
     union {
         /* 0xF9 */ u8 unkF9[0x67];
         struct {
@@ -86,8 +89,17 @@ typedef struct UiQuest {
     /* 0x97E */ s16 questId;
     /* 0x980 */ u16 unk980;
     /* 0x982 */ u16 selectedId;
-    /* 0x984 */ u16 detailMode;
-    /* 0x986 */ u8 unk986[0x76];
+    /* 0x984 */ s16 detailMode;
+    union {
+        /* 0x986 */ u8 unk986[0x76];
+        struct {
+            /* 0x986 */ u8 unk986BeforeRegions[0x56];
+            /* 0x9DC */ s16 rowRegions[11];    /* touch regions of the visible list rows */
+            /* 0x9F2 */ s16 scrollUpRegion;    /* touch regions of the list's scroll bar: its two arrows */
+            /* 0x9F4 */ s16 scrollDownRegion;
+            /* 0x9F6 */ s16 scrollThumbRegion; /* and its thumb */
+        } touch;
+    };
 
     /* The state history as the array it is: state, then previousState. */
     s32 *states()
@@ -114,6 +126,9 @@ static __inline void uiQuestEnterState(UiQuest *quest, s32 next)
 typedef char UiQuestSizeCheck[sizeof(UiQuest) == 0x9FC && offsetof(UiQuest, resources) == 0x14 &&
     offsetof(UiQuest, sprites) == 0x34 && offsetof(UiQuest, script.process) == 0x5B4 &&
     offsetof(UiQuest, selectedId) == 0x982 && offsetof(UiQuest, detailMode) == 0x984 ? 1 : -1];
+typedef char UiQuestTouchOffsets[offsetof(UiQuest, touch.rowRegions) == 0x9DC &&
+    offsetof(UiQuest, touch.scrollUpRegion) == 0x9F2 && offsetof(UiQuest, touch.scrollThumbRegion) == 0x9F6 &&
+    offsetof(UiQuestPanel, nextSelection) == 0xCC ? 1 : -1];
 typedef char UiQuestPanelOffsets[offsetof(UiQuestPanel, texts) == 0xD4 && offsetof(UiQuestPanel, sysImages) == 0xE4 &&
     offsetof(UiQuestPanel, confirming) == 0xF1 ? 1 : -1];
 typedef char UiQuestSelectorOffsets[

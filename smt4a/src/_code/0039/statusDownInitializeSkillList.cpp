@@ -1,4 +1,4 @@
-/* NON_MATCHING: menu-owned slot copies and parent-relative selector setup match; final state/phase reset uses two stores instead of retail's paired stm. */
+/* NON_MATCHING: the final step reset uses strd instead of retail's stm and reuses a different register for the zero phase. */
 #include "status/StatusDownA.h"
 #include "gamedata/GamePlayerData.h"
 
@@ -27,7 +27,7 @@ void statusDownInitializeSkillList()
     StatusDownStateA *screen = g_statusDown;
     StatusDownSkillMenuA *menu = &screen->menu;
     menu->rows[0].idWord = 0;
-    menu->state = 1;
+    menu->step.state = 1;
     menu->rows[0].level = 0;
     menu->rows[1].idWord = 0;
     menu->rows[1].level = 0;
@@ -66,7 +66,6 @@ void statusDownInitializeSkillList()
         gameGlobalsSetMenuOpenFlag(1);
         menu->activatedSession = 1;
     }
-    menu->state = 0;
-    menu->phase = 0;
+    menu->step = statusDownSkillStep(0, 0);
 }
 }

@@ -1,45 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `ipcServiceRequest04WithBuffer` (_code @ 0x3520fc, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the mode byte, the push {r0-r3} spill, the handle strd and the descriptor's constant register match; retail loads buffer/size with one ldrd (buffer r0, size r1) and stores size, handle, buffer, descriptor in that order, armcc loads size into r0 and buffer into r1 with two ldr and stores the buffer first (also with --fpu=softvfp). */
+/* Sends service command 0x04 with a mode byte, a 64-bit handle and an output buffer with its size
+ * (header 0x10040102, a mapped-buffer descriptor); returns the reply word on success. */
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
+#include "nn/os/IpcStaticBuffer.h"
+#include <string.h>
 
 extern "C" {
+extern u32 DAT_00472a58;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-/* stack frame of param_6: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp18; /* 0x18: local_18 */
-} param_6_stack;
-
-extern unsigned int DAT_00472a58; /* 0x472a58 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int ipcServiceRequest04WithBuffer(unsigned char param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,int param_6)
-
+s32 ipcServiceRequest04WithBuffer(u8 mode, u64 handle, void *buffer, u32 size)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x10040102;
-  *(unsigned char *)(temp_v1 + 0x84) = param_1;
-  *(int *)(temp_v1 + 0x90) = param_6;
-  *(unsigned int *)(temp_v1 + 0x88) = param_3;
-  *(unsigned int *)(temp_v1 + 0x8c) = param_4;
-  *(unsigned int *)(temp_v1 + 0x98) = param_5;
-  *(unsigned int *)(temp_v1 + 0x94) = (param_6 << 5) | 10;
-  software_interrupt(0x32);
-  temp_v0 = DAT_00472a58;
-  if ((DAT_00472a58 & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    command->header = 0x10040102;
+    memcpy(&command->words[0], &mode, sizeof(mode));
+    command->words[3] = size;
+    memcpy(&command->words[1], &handle, sizeof(handle));
+    command->words[5] = (u32)buffer;
+    command->words[4] = ipcMappedBufferDescriptor(size * 2, 10);
+    s32 result = nn::svc::SendSyncRequest(DAT_00472a58);
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

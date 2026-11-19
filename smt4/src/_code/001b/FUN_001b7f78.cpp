@@ -63,7 +63,7 @@ int mapStatesReleaseMarks(void);
 int entryTableMarkDestroy(void);
 int mapCollisionRelease(void);
 int FUN_00281784(void);
-int FUN_002897f0(...);
+int eventScriptFindCompletionFlag(...);
 int aocBufferQueueDisplay(...);
 int FUN_00289de4(...);
 int scrScriptProcessDestroy(...);
@@ -628,7 +628,7 @@ extern int dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
 extern int screenFadesAllReady(void);
-/* Supplied declaration required: FUN_002897f0. */
+/* Supplied declaration required: eventScriptFindCompletionFlag. */
 
 /* Supplied declaration required: commonBgStopChildAndBeginTransition. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
@@ -4745,7 +4745,7 @@ LAB_001be80c:
       *(unsigned int *)(temp_v10 + 0x108) = 2;
       temp_v16 = reinterpret_cast<unsigned int>(scrScriptProcessGetEntry(reinterpret_cast<ScriptProcess*>(puVar23[0x25]),puVar23[0x22]));
       temp_v13 = puVar23[0x19];
-      FUN_002897f0(temp_v13,temp_v16);
+      eventScriptFindCompletionFlag(temp_v13,temp_v16);
       puVar23[0x26] = temp_v13;
       scrScriptProcessStartEntry(puVar23[0x25],puVar23[0x22]);
       DAT_0049f934 = 1;

@@ -15,7 +15,7 @@ int table8Type5GetValue(...);
 int fadeObjectResetIfActive(...);
 int statusDownDrawSkillRow(...);
 int fontMeasureLineAdvance(...);
-int FUN_002b75ec(...);
+int textDrawRangeFaded(...);
 int nkmBaseGetRecord(void);
 
 int FUN_00187114(int, int);
@@ -77,7 +77,7 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: FUN_002b75ec. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: nkmBaseGetRecord. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
@@ -473,7 +473,7 @@ LAB_001ccb9c:
       do {
         temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v12 + 0x48d));
         temp_v7 = resourceRunOperationIfUnblocked(temp_v10 + 0x22a8);
-        FUN_002b75ec(*(unsigned int *)(temp_v10 + 0x22a0),*(short *)(temp_v13 + 8) + temp_v1,
+        textDrawRangeFaded(*(unsigned int *)(temp_v10 + 0x22a0),*(short *)(temp_v13 + 8) + temp_v1,
                      *(short *)(temp_v13 + 10) + temp_v2,0xb5,6,temp_v7 + temp_v12);
         temp_v12 = temp_v12 + 1;
       } while (temp_v12 < 8);

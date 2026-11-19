@@ -11,7 +11,7 @@ char *textExpandGlyphsToBuffer(const char *text, char *out, s32 size);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
 
 /* Draws the whole text at integer x/y with an 8-bit fade amount and a scale. */
-void FUN_0025cc78(const void *text, s32 x, s32 y, s32 fade, f32 scale);
+void textDrawFaded(const void *text, s32 x, s32 y, s32 fade, f32 scale);
 
 /* Sets the colour word of a text or sprite object (the low byte is cleared). */
 void uiObjectSetColorRgb(u32 handle, u32 color);

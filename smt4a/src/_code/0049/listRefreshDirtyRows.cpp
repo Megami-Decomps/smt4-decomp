@@ -39,7 +39,7 @@ u32 flaggedValueHolderGetTotal(ListRange *);
 void FUN_00497d20(ListRefreshState *, s32 row, s32 selected, u32 value);
 void size40Set(ListRangeRenderer *, u32 start, u32 selection);
 void FUN_004986b0(ListRefreshState *);
-void FUN_00497874(ListRefreshState *);
+void shopDrawEquipmentList(ListRefreshState *);
 void FUN_00497a6c(ListRefreshState *);
 void FUN_004957b4(ListRefreshState *);
 
@@ -73,7 +73,7 @@ void listRefreshDirtyRows(ListRefreshState *state)
     } else if (state->flags & 0x200) {
         FUN_004986b0(state);
     } else if (state->flags & 0x400) {
-        FUN_00497874(state);
+        shopDrawEquipmentList(state);
     } else if (state->flags & 0x800) {
         FUN_00497a6c(state);
     }

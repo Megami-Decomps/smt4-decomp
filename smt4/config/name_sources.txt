@@ -5045,3 +5045,13 @@
 001e981c jyoucyuDrawLoadingOverlay inferred twin of smt4a jyoucyuDrawLoadingOverlay (same draws: white backdrop, resident sprite until status 100)
 00107784 screenFadeSlotDraw inferred draws the selected screen-fade slot's colour at its interpolated opacity over the whole render target
 0026f824 playerInitNewGame inferred clears money, sets the stock count to 8, gives the starting equipment and builds the default player name for a new game
+002b080c textLayoutDraw inferred lays out/draws text at (x, y) with flags and a character limit, then depth and opacity; mode 16 measures, returns the widest line (callers' parameter order recovered by paramorder.py)
+002b75ec textDrawRangeFaded inferred draws a character range of the text at integer x, y with opacity (256 - fade) / 256 through FUN_002b080c
+002598f0 textDrawFaded inferred draws the whole text at integer x, y with opacity (256 - fade) / 256 through FUN_002b080c
+001afc0c uiQuestListInput inferred quest list input: scrolling, selection, detail page and sort for the quest panel (g_uiQuest)
+0021799c btlUiTargetListStep inferred steps the battle card target list (touch region search, target states 0-4, timer)
+003d8f60 btlDebugEditorStep inferred the battle debug editor job's state machine (action editor, enemy position editing in state 7)
+0019f3dc eventScriptJobUpdate evidence registered by aocJobCreate as the "EVENT CALC" process update; steps the event script job's request
+002897f0 eventScriptFindCompletionFlag inferred its result is stored as the event's completion flag and later passed to gameFlagSetValue (FUN_0019f3dc); Apocalypse inlines a `mov r0, #0` stub of it
+00283f80 equipListDrawRowDetails inferred draws an equipment list row's details (name, category badge, attack/defence values compared with the equipped item)
+0018b978 configUpdate inferred the config screen's update (choices, help, touch regions); smt4a's configUpdate is the same screen

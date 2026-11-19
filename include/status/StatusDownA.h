@@ -23,6 +23,19 @@ typedef struct StatusDownSkillRow {
     /* 0x04 */ s32 level;
 } StatusDownSkillRow;
 
+/* State and substep of the skill menu's interaction. */
+struct StatusDownSkillStep {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u32 phase;
+};
+
+/* Build the two-word cursor state before changing the menu step. */
+static __inline StatusDownSkillStep statusDownSkillStep(u32 state, u32 phase)
+{
+    StatusDownSkillStep step = { state, phase };
+    return step;
+}
+
 /* The skill menu (Apocalypse), with its camp message and script data. */
 typedef struct StatusDownSkillMenuA {
     /* 0x00 */ StatusDownSkillRow rows[8];
@@ -32,8 +45,7 @@ typedef struct StatusDownSkillMenuA {
     /* 0x48 */ s32 selection[2];        /* the selected row; the one compared with */
     /* 0x50 */ PlayerDataA *source;     /* the unit whose skills are listed (NULL: the player) */
     /* 0x54 */ GridNavigation controller;
-    /* 0xB8 */ u32 state;
-    /* 0xBC */ u32 phase;
+    /* 0xB8 */ StatusDownSkillStep step;
     /* 0xC0 */ void *dataA;             /* camp messages */
     /* 0xC4 */ void *dataB;             /* camp script */
     /* 0xC8 */ ScriptProcess *process;
@@ -138,6 +150,7 @@ typedef char StatusDownStateALayoutCheck[
     offsetof(StatusDownStateA, grid) == 0x23C0 &&
     offsetof(StatusDownStateA, panelEnabled) == 0x24AA &&
     offsetof(StatusDownStateA, menu) == 0x24AC &&
+    offsetof(StatusDownSkillMenuA, step) == 0xB8 && sizeof(StatusDownSkillStep) == 8 &&
     offsetof(StatusDownStateA, menu.process) == 0x2574 &&
     offsetof(StatusDownStateA, menu.activatedSession) == 0x2580 &&
     offsetof(StatusDownStateA, block2588) == 0x2588 &&

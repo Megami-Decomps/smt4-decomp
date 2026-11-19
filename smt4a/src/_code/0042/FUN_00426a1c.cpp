@@ -1,6 +1,6 @@
-/* NON_MATCHING: retail copies the three stack words (id, flags) with core ldm/stm; armcc -Otime uses vldm/vstm here. */
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcStaticBuffer.h"
 #include <string.h>
 
 extern "C" {
@@ -14,7 +14,7 @@ s32 FUN_00426a1c(u32 *reply, u32 descriptorAddress, u32 count, u64 id, u32 flags
     command->words[0] = count;
     memcpy(&command->words[1], &id, sizeof id);
     command->words[3] = flags;
-    command->words[4] = (count * 0x180) | 0xC;
+    command->words[4] = ipcMappedBufferDescriptor(count * 24, 0xC);
     command->words[5] = descriptorAddress;
     s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
     if (nnResultIsSuccess(result)) {

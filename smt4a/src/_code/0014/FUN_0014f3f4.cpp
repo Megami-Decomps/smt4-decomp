@@ -11,7 +11,7 @@ int uiObjectSetColorRgb(...);
 int effectRenderTransformedInstance(...);
 int FUN_00163ec4(...);
 int FUN_00164034(...);
-int FUN_00164168(...);
+int textDrawRangeFaded(...);
 int messageWindowDrawSprites(...);
 int gxResetColorQuadToWhite(void);
 int SBORROW4(...);
@@ -58,7 +58,7 @@ extern int FUN_00162848(unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_00163ec4. */
 /* Supplied declaration required: FUN_00164034. */
-/* Supplied declaration required: FUN_00164168. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: FUN_00164490. */
 extern int jobGetWork(void);
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -508,7 +508,7 @@ LAB_0014fe60:
           renderCtxCalculateStereoParallax(g_renderCtx);
           temp_v20 = 6;
           temp_v21 = temp_v12;
-          FUN_00164168(*(unsigned int *)(temp_v5 + 4),(int)*(short *)(temp_v11 + 8) + (int)temp_v24);
+          textDrawRangeFaded(*(unsigned int *)(temp_v5 + 4),(int)*(short *)(temp_v11 + 8) + (int)temp_v24);
           temp_v12 = temp_v12 + 1;
         } while (temp_v12 < temp_v8);
       }
@@ -562,7 +562,7 @@ LAB_0014fe60:
         if ((temp_v13 && temp_v12 != temp_v8) && temp_v6 < 0 == (temp_v13 && SBORROW4(temp_v12,temp_v8))) {
           temp_v21 = (int)*(char *)(temp_v5 + temp_v8 + 0x3c);
           temp_v20 = 6;
-          FUN_00164168(*(unsigned int *)(temp_v5 + 4),
+          textDrawRangeFaded(*(unsigned int *)(temp_v5 + 4),
                        (((int)*(short *)(temp_v11 + 0x5a0) + (int)temp_v2 + (int)temp_v4 / 2) -
                        (int)*(short *)(temp_v5 + temp_v8 * 2 + 0x4c) / 2) + (int)temp_v18,
                        (int)*(short *)(temp_v11 + 0x5a2) + (int)temp_v3,0x3d);
@@ -582,7 +582,7 @@ LAB_0014fe60:
        (*(unsigned char *)(temp_v8 + 0x8cc) & *(unsigned char *)(temp_v8 + 0x8cb)) != 0)) {
       temp_v20 = 6;
       temp_v21 = 0;
-      FUN_00164168(*(unsigned int *)(temp_v5 + 4),
+      textDrawRangeFaded(*(unsigned int *)(temp_v5 + 4),
                    (((int)*(short *)(temp_v8 + 0x85c) +
                     (int)*(short *)(temp_v6 + 8) + (int)**(short **)(temp_v6 + 0xc) / 2) -
                    (int)*(short *)(temp_v5 + 0x60) / 2) + (int)temp_v18,

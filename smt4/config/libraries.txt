@@ -14,3 +14,6 @@ arm 0x155afc 0x155b2c armlib floating-point NaN check: two flag-setting tests, t
 # NintendoWare sound: nw::snd::internal::WaveArchiveFileReader's constructor, right after
 # WaveArchiveFile::FileHeader::GetFileBlockOffset (0x2a7a94): checks the "CWAR" signature and calls GetFileBlockOffset.
 arm 0x2a7ac4 0x2a7b70 NintendoWare-snd WaveArchiveFileReader constructor; CWAR signature test; calls nw_snd WaveArchiveFile FileHeader GetFileBlockOffset
+# armlib's __aeabi_lasr (64-bit arithmetic shift right): no frame, `subs r3, r2, #32; bpl` picks the
+# high-word path, no test for shifts of 0 or 64+ (C cannot write it without UB); smt4a twin FUN_0017fd5c.
+arm 0x1383c8 0x1383f0 armlib __aeabi_lasr: subs r3, r2, #32; bpl; lsr/orr/asr pair, asr #31 for the high path

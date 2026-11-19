@@ -47,7 +47,7 @@ s32 gameFlagIsSet(s32 flag);
 MenuEntry *menu4CGetEntry(void *entries, s32 index);
 void menu4CScrollToKind(void *entries, s32 kind);
 void FUN_004b6bc4(ScriptMenu *menu, s32 selected, s32 mode);
-void FUN_004080bc(u32 sound, s32 a, u32 b);
+void moveCameraCtrlSnapToNode(u32 sound, s32 a, u32 b); // declcheck: local (the shared declaration does not compile here or changes this unit)
 
 /* Runs an entry's availability script and tests its flags: true when it is available. */
 static bool entryAvailable(ScriptMenu *menu, MenuEntry *entry)
@@ -100,7 +100,7 @@ void FUN_004b8ba0(ScriptMenu *menu)
         FUN_004b6bc4(menu, menu->selected, (menu->flags & 0x10000000) != 0 ? 4 : 3);
         menu->state = 4;
         menu->subState = 0;
-        FUN_004080bc(menu->sound, 0, 0xFFFFFFFF);
+        moveCameraCtrlSnapToNode(menu->sound, 0, 0xFFFFFFFF);
         return;
     default:
         return;

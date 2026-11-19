@@ -2,6 +2,7 @@
 #define CLASSES_OBJECTCOMMANDREQUESTS_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* The payload word of a command: one word, or a flag and an option byte. */
 union ObjectCommandPayload {
@@ -15,9 +16,10 @@ union ObjectCommandPayload {
 /* Apocalypse's object command queue (the sound manager's request list): a command is a node of
  * `words` words taken from the queue, stamped with its token, filled in and appended. */
 struct ObjectCommand {
-    /* 0x00 */ u32 next;
+    /* 0x00 */ ObjectCommand *next;
     /* 0x04 */ u8 kind;
-    /* 0x05 */ u8 unk05[7];
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 sequence;  /* the batch sequence, set when its batch is published */
     /* 0x0C */ u32 token;
     /* 0x10 */ u32 owner;
     /* 0x14 */ ObjectCommandPayload payload;
@@ -54,9 +56,16 @@ struct ObjectCursorOwner {
 };
 
 struct ObjectCommandQueue {
-    /* 0x000 */ u8 unk000[0x184];
+    /* 0x000 */ u8 unk000[0x16C];
+    /* 0x16C */ ObjectCommand *head;   /* the pending batch */
+    /* 0x170 */ ObjectCommand *tail;
+    /* 0x174 */ u32 nextSequence;
+    /* 0x178 */ u8 unk178[0xC];
     /* 0x184 */ u32 token;
 };
+typedef char ObjectCommandQueueLayoutCheck[offsetof(ObjectCommandQueue, head) == 0x16C &&
+    offsetof(ObjectCommandQueue, nextSequence) == 0x174 && offsetof(ObjectCommandQueue, token) == 0x184 &&
+    offsetof(ObjectCommand, sequence) == 0x08 && offsetof(ObjectCommand, token) == 0x0C ? 1 : -1];
 
 extern "C" {
 ObjectCommandQueue *objectCommandQueueGet(void);

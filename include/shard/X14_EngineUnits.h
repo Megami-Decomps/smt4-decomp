@@ -25,6 +25,8 @@ typedef struct ResultExperienceTotal {
 /* Apocalypse's result screen work (0x7F58 bytes, resultCreate): IV's ResultWork is result/Result.h.
  * Held by g_engineCleanupOwner.instance; "Result CALC" is its process. */
 typedef struct ResultWorkA {
+    EngineUnit *selectedUnit() { return &units[current]; }
+
     /* 0x0000 */ u8 unk0000[0x20];
     /* 0x0020 */ UiSpriteState originSprite;    /* origin of the upper-screen result sprites */
     /* 0x00AC */ UiSpriteState listSprites[10]; /* the list cursor is the first */
@@ -55,7 +57,9 @@ typedef struct ResultWorkA {
     /* 0x753C */ u8 reserveMarkers[3];
     /* 0x753F */ u8 partyMarkers[24];
     /* 0x7557 */ u8 markersPending;
-    /* 0x7558 */ u8 unk7558[0x78];
+    /* 0x7558 */ u8 unk7558[0x70];
+    /* 0x75C8 */ s32 valueIndex;               /* index of the selected unit's skill */
+    /* 0x75CC */ u32 pendingValue;            /* result script's alternate value */
     /* 0x75D0 */ u32 unk75D0;                   /* reported by scrCommGetChildValue */
     /* 0x75D4 */ u8 unk75D4[0x29C];
     /* 0x7870 */ ResultExperienceTotal experience[0x25];
@@ -97,7 +101,8 @@ typedef char ResultWorkAOffsetsCheck[
     offsetof(ResultWorkA, banner) == 0x854 && offsetof(ResultWorkA, state) == 0x4364 &&
     offsetof(ResultWorkA, timer) == 0x437C && offsetof(ResultWorkA, process) == 0x43A0 &&
     offsetof(ResultWorkA, reserveMarkers) == 0x753C && offsetof(ResultWorkA, partyMarkers) == 0x753F &&
-    offsetof(ResultWorkA, markersPending) == 0x7557 && offsetof(ResultWorkA, unk75D0) == 0x75D0 &&
+    offsetof(ResultWorkA, markersPending) == 0x7557 && offsetof(ResultWorkA, valueIndex) == 0x75C8 &&
+    offsetof(ResultWorkA, pendingValue) == 0x75CC && offsetof(ResultWorkA, unk75D0) == 0x75D0 &&
     offsetof(ResultWorkA, experience) == 0x7870 && offsetof(ResultWorkA, drawTask) == 0x7F38 &&
     sizeof(ResultWorkA) == 0x7F58 ? 1 : -1];
 

@@ -88,7 +88,7 @@ void FUN_0025cfe4(int param_1,int param_2)
           FUN_001677c0();
         }
         uiObjectSetColorRgb(*(unsigned int *)(param_1 + iVar11 * 4),0xffffffff);
-        FUN_0025cc78(*(unsigned int *)(param_1 + iVar11 * 4),
+        textDrawFaded(*(unsigned int *)(param_1 + iVar11 * 4),
                      *(int *)(param_2 + 4) + (int)*(short *)(iVar2 + 8) + (int)*(short *)(iVar4 + 8)
                      ,*(short *)(iVar4 + 10) + iVar10 +
                       *(int *)(param_2 + 8) + (int)*(short *)(iVar2 + 10),0x65);

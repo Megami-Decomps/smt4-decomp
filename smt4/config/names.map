@@ -5377,3 +5377,13 @@
 001e981c jyoucyuDrawLoadingOverlay
 00107784 screenFadeSlotDraw
 0026f824 playerInitNewGame
+002b080c textLayoutDraw
+002b75ec textDrawRangeFaded
+002598f0 textDrawFaded
+001afc0c uiQuestListInput
+0021799c btlUiTargetListStep
+003d8f60 btlDebugEditorStep
+0019f3dc eventScriptJobUpdate
+002897f0 eventScriptFindCompletionFlag
+00283f80 equipListDrawRowDetails
+0018b978 configUpdate

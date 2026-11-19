@@ -5,7 +5,7 @@
 
 struct SpriteInfo;
 extern "C" {
-void FUN_002598f0(u32 text, s32 x, s32 y, u32 parameter, f32 scale);
+void textDrawFaded(u32 text, s32 x, s32 y, u32 parameter, f32 scale); // declcheck: local (the shared declaration does not compile here or changes this unit)
 void asdTextDrawDirectoryEntry(u32 text, u32 a, s32 b, u32 c, u32 d, u32 e, s32 f);
 void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 void asdTextSetBaseColor(u32 text, u32 color);
@@ -29,7 +29,7 @@ void FUN_002ec2e0(u32 text, u32 param2, s32 param3, s32 param4, s32 row, u32 spr
     texDrawTableEntryAtStoredOrigin(2, 0x39, 0xE3, origin->x, origin->y, 0xD);
     asdTextDrawDirectoryEntry(text, 3, -1, 0, 3, param2, param3 + row + param4);
     asdTextSetBaseColor(text, 0xFFFFFFFF);
-    FUN_002598f0(text, origin->x + label->x, origin->y + label->y, 0x15, 1.0f);
+    textDrawFaded(text, origin->x + label->x, origin->y + label->y, 0x15, 1.0f);
     asdTextSetBaseColor(text, 0x320202FF);
 }
 }

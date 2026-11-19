@@ -22,7 +22,7 @@ void renderCtxPopState(RenderCtx *scene, u32 slot);
 void texDrawCompositeSprite(u32 screen, u32 group, u32 id, s32 x, s32 y, u32 priority);
 f32 FUN_00126830(u8 *view, s32 index);
 void positionStateSet(f32 scale, u8 *view, u32 a, u32 color);
-void FUN_002b75ec(f32 scale, u8 *view, s32 x, s32 y, u32 style, u32 priority, s32 index);
+void textDrawRangeFaded(f32 scale, u8 *view, s32 x, s32 y, u32 style, u32 priority, s32 index);
 
 /* Draw the row selector of the menu: one sprite per row, the selected one highlighted. */
 void FUN_001189a4(RowMenu *menu)
@@ -51,7 +51,7 @@ void FUN_001189a4(RowMenu *menu)
                 *reinterpret_cast<u32 *>(menu->view + 0xB0) = 11;
                 positionStateSet(0.0f, menu->view, 0, 0x5A5A5AFF);
             }
-            FUN_002b75ec(1.0f, menu->view, sprite->x, sprite->y - 4, 0x33, 6, i);
+            textDrawRangeFaded(1.0f, menu->view, sprite->x, sprite->y - 4, 0x33, 6, i);
         }
     } else if (menu->mode == 19) {
         TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x3A, 0x97);
@@ -65,7 +65,7 @@ void FUN_001189a4(RowMenu *menu)
                 *reinterpret_cast<u32 *>(menu->view + 0xB0) = 14;
             }
             s32 width = static_cast<s32>(FUN_00126830(menu->view, i));
-            FUN_002b75ec(1.0f, menu->view, frame->x + sprite->x + (frame->placement->width >> 1) - (width >> 1),
+            textDrawRangeFaded(1.0f, menu->view, frame->x + sprite->x + (frame->placement->width >> 1) - (width >> 1),
                          frame->y + sprite->y, 0x33, 6, i);
         }
     } else {

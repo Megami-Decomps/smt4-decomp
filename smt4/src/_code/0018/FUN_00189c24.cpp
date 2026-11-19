@@ -1,4 +1,7 @@
-/* NON_MATCHING: same control flow, calls, frame and switch table; armcc keeps the constant 350 in fp for the two id checks and spills the quest+0x500 base, where retail reloads 350 from the pool each time and keeps the base in fp, so the callee-saved registers differ. */
+/* NON_MATCHING: 14 lines. Retail leaves the `if (!listed)` test in place for the switch arms that keep `listed` true
+ * (this build jumps past it: four branch targets), and forms the report list's address in r0 before copying it to r6
+ * (this build forms it in r6). `listed` is declared at the top (C89 style); declared in the loop the
+ * function is 304 lines off, so the remaining difference may be the original's declaration placement. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "quest_center/QuestRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -59,6 +62,7 @@ void FUN_00189c24(void)
     UiQuest *quest = g_uiQuest;
     s32 reportCount = 0;
     s32 openCount = 0;
+    bool listed;
 
     memClear(quest->cursor.alternate.ids, sizeof(quest->cursor.alternate.ids));
     rt_memclr(quest->list, sizeof(quest->list));
@@ -75,7 +79,7 @@ void FUN_00189c24(void)
             quest->cursor.alternate.ids[reportCount++] = id;
             continue;
         }
-        bool listed = true;
+        listed = true;
         if (quest->panelView.panel.confirming != 0) {
             QuestRecord *record = questDataGetRecord(id);
             if (record == NULL || record->kind != 0)
@@ -85,7 +89,7 @@ void FUN_00189c24(void)
             if (idIsAtLeast350(id) == 0) {
                 if (record->area == 0)
                     continue;
-                switch ((s8)quest->panelView.panel.choice) {
+                switch (quest->panelView.panel.choice) {
                 case 0:
                     continue;
                 case 1:

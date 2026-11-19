@@ -14,7 +14,7 @@ int textFormatFullWidthNumber(...);
 int questIsCompleted(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int questDataGetRecord(void);
-int FUN_002b75ec(...);
+int textDrawRangeFaded(...);
 int effectRenderTransformedInstance(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
@@ -61,7 +61,7 @@ extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
 extern int gameGetFlagBlock(void);
 /* Supplied declaration required: questDataGetRecord. */
-/* Supplied declaration required: FUN_002b75ec. */
+/* Supplied declaration required: textDrawRangeFaded. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bd068(unsigned int);
@@ -309,10 +309,10 @@ LAB_00198518:
       texDrawTableEntryAtStoredOrigin(2,0x29,0x23,temp_v6,temp_v13,0x6a);
     }
     temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x25));
-    FUN_002b75ec(*(unsigned int *)(temp_v3 + 0x5d8),*(short *)(temp_v11 + 8) + temp_v6,
+    textDrawRangeFaded(*(unsigned int *)(temp_v3 + 0x5d8),*(short *)(temp_v11 + 8) + temp_v6,
                  *(short *)(temp_v11 + 10) + temp_v13,0x6f,6,0);
     temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x26));
-    FUN_002b75ec(*(unsigned int *)(temp_v3 + 0x5d8),*(short *)(temp_v11 + 8) + temp_v6,
+    textDrawRangeFaded(*(unsigned int *)(temp_v3 + 0x5d8),*(short *)(temp_v11 + 8) + temp_v6,
                  *(short *)(temp_v11 + 10) + temp_v13,0x6f,6,1);
   }
   temp_v31 = (float)temp_v20;
@@ -403,7 +403,7 @@ LAB_00198518:
     temp_v6 = 0;
     do {
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x34));
-      FUN_002b75ec(*(unsigned int *)(temp_v3 + 0x5d4),*(short *)(temp_v8 + 8) + temp_v11,
+      textDrawRangeFaded(*(unsigned int *)(temp_v3 + 0x5d4),*(short *)(temp_v8 + 8) + temp_v11,
                    (int)*(short *)(temp_v8 + 10) + temp_v6 * 0x11 + temp_v13,0x6f,6,temp_v6);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 7);
@@ -493,7 +493,7 @@ LAB_00198de4:
     temp_v6 = 0;
     do {
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x34));
-      FUN_002b75ec(*(unsigned int *)(temp_v3 + 0x5dc),*(short *)(temp_v8 + 8) + temp_v11,
+      textDrawRangeFaded(*(unsigned int *)(temp_v3 + 0x5dc),*(short *)(temp_v8 + 8) + temp_v11,
                    (int)*(short *)(temp_v8 + 10) + temp_v6 * 0x11 + temp_v13,0x6f,6,temp_v6);
       temp_v17 = (float)((unsigned long long)temp_v20 >> 0x20);
       temp_v6 = temp_v6 + 1;

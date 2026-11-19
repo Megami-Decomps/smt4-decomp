@@ -14,7 +14,7 @@ extern char s__V_V_V_V_V_V_V_V_V_V_005890d4[113]; /* 0x5890d4 */
 extern unsigned char DAT_006199d8; /* 0x6199d8 */
 
 /* Supplied declaration required: uiObjectSetColorRgb. */
-/* Supplied declaration required: FUN_0025cc78. */
+/* Supplied declaration required: textDrawFaded. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
@@ -183,7 +183,7 @@ LAB_00369690:
         sprintf((char *)temp_v7,"<%03d>",
                      *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x50) * 4 + 0x54));
         uiObjectSetColorRgb(*(unsigned int *)(temp_v0 + 0xa0),temp_v4);
-        FUN_0025cc78((const void *)*(unsigned int *)(temp_v0 + 0xa0),0x76,(int)temp_v5,0x65,1.0f);
+        textDrawFaded((const void *)*(unsigned int *)(temp_v0 + 0xa0),0x76,(int)temp_v5,0x65,1.0f);
         break;
       case 6:
       case 0xb:

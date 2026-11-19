@@ -1,10 +1,10 @@
+#include "text/TextDraw.h"
 #include "shard/S3UiLookup.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void texDrawCompositeSprite(u32 screen, u32 resource, u32 kind, s32 x, s32 y, u32 mode);
 void asdTextSetBaseColor(UiTextObject *text, u32 color);
-void FUN_002598f0(UiTextObject *text, s32 x, s32 y, u32 flags, f32 opacity);
 }
 
 /* Place the UI frame and horizontally center its text inside the resource width. */
@@ -17,6 +17,6 @@ extern "C" void uiDrawCenteredResourceText(UiCenteredText *owner, const UiTextPl
     TextureTableEntryIV *metrics = asdTMTexTableEntryAt(57, 158);
     s32 inset = (metrics->placement->width - owner->width) / 2;
     asdTextSetBaseColor(owner->text, 0xFFFFFF00);
-    FUN_002598f0(owner->text, metrics->x + placement->x + inset + x,
+    textDrawFaded(owner->text, metrics->x + placement->x + inset + x,
                  placement->y + metrics->y + y, 112, placement->opacity);
 }

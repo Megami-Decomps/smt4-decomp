@@ -31,7 +31,7 @@ struct ObjectStreamOwner {
 
 extern "C" {
 ObjectCommandQueue *FUN_00191330(void);
-s32 FUN_001911a4(ObjectCommandQueue *queue, s32 value);
+s32 soundRequestQueueFlush(ObjectCommandQueue *queue, s32 value); // declcheck: local (the shared declaration does not compile here or changes this unit)
 u8 FUN_00463e10(ObjectStreamTarget *target, ObjectCommand *command, u8 *request, u32 start, ObjectLevelPair level);
 u8 FUN_004645ec(ObjectStreamTarget *target, ObjectCommand *command, u8 *request, u32 start, ObjectLevelPair level);
 }
@@ -62,5 +62,5 @@ extern "C" void FUN_00463a9c(ObjectStreamOwner *owner)
     command->payload.bytes.flag = value;
     command->owner = target->id;
     listAppendNode(queue, command);
-    FUN_001911a4(queue, 1);
+    soundRequestQueueFlush(queue, 1);
 }

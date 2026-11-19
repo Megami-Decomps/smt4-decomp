@@ -1,25 +1,33 @@
-/* NON_MATCHING: the flag spill matches (memcpy of the byte parameters); retail copies the saved receive buffer through core registers (ldrd/strd r6:r7) where armcc uses VFP d8 (the library appears to be built without VFP block copies, --fpu=none reproduces it) */
+/* Sends service command 0x2D (header 0x2d0082) with two flag bytes and an input buffer handle, and a static buffer
+ * descriptor for `outputAddress`, restoring the thread's previous static-buffer slots afterwards; returns the reply word on success. */
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 #include <string.h>
 
 extern "C" {
 extern u32 DAT_004655f8;
 
-u32 FUN_00352008(u32 inputAddress, u32 outputAddress, u8 firstFlag, u8 secondFlag)
+s32 FUN_00352008(u32 inputAddress, u32 outputAddress, u8 firstFlag, u8 secondFlag)
 {
-    nn::os::IpcCommandBuffer* command = nn::os::GetIpcCommandBuffer();
-    command->header = 0x002d0082;
-    memcpy(&command->words[0], &firstFlag, sizeof(firstFlag));
-    memcpy(&command->words[1], &secondFlag, sizeof(secondFlag));
-    command->words[3] = inputAddress;
-    command->words[2] = 0x00800002;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    nn::os::SetIpcWord(command, 0, 0x2d0082);
+    memcpy(&command->words[0], &firstFlag, sizeof firstFlag);
+    memcpy(&command->words[1], &secondFlag, sizeof secondFlag);
+    nn::os::SetIpcWord(command, 3, 0x800002);
+    nn::os::SetIpcWord(command, 4, inputAddress);
 
-    u64* receiveBuffer = reinterpret_cast<u64*>(nn::os::GetIpcCommandBuffer() + 1);
-    u64 savedReceiveBuffer = *receiveBuffer;
-    *receiveBuffer = (static_cast<u64>(outputAddress) << 32) | 0x00800002;
+    /* The static buffer descriptor pair lives at thread-local storage + 0x180. */
+    u32 *descriptor = (u32 *)((u8 *)nn::os::GetThreadLocalStorage() + 0x180);
+    u64 savedDescriptor = *(u64 *)descriptor;
+
+    descriptor[0] = 0x800002;
+    descriptor[1] = outputAddress;
     s32 result = nn::svc::SendSyncRequest(DAT_004655f8);
-    *receiveBuffer = savedReceiveBuffer;
-    return nnResultIsSuccess(result) ? command->words[0] : static_cast<u32>(result);
+    *(u64 *)descriptor = savedDescriptor;
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
 }
 }

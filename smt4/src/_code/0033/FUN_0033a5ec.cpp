@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail checks two table entries per iteration; the readable key search is not paired. */
 #include "common.h"
 
 struct IndexedEntry {
@@ -15,9 +14,10 @@ struct LookupState {
 /* Finds a matching key among the fifty lookup entries. */
 extern "C" IndexedEntry *FUN_0033a5ec(LookupState *lookup, s32 key)
 {
+    IndexedEntry *result = NULL;
     for (s32 index = 0; index < 50; ++index) {
         if (lookup->entries[index].key == key)
             return &lookup->entries[index];
     }
-    return NULL;
+    return result;
 }

@@ -11,6 +11,25 @@ struct ActorCardAnimationState {
     u8 blocked[6];
     u16 counters[6][5];
 };
+/* IV: one enemy of the target list the party display shows while a target is picked (0x2C bytes). */
+struct ActorCardTarget {
+    /* 0x00 */ u16 id;                             /* the enemy's devil id */
+    /* 0x02 */ u16 hp;
+    /* 0x04 */ u16 mp;
+    /* 0x06 */ u16 ailments;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ f32 sortKey;                        /* the list is sorted by it, descending */
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ u8 selectable;
+    /* 0x19 */ u8 unk19[7];
+    /* 0x20 */ s32 touchImage;                     /* the texture entry its touch region comes from */
+    /* 0x24 */ s32 markImage;
+    /* 0x28 */ s8 active;                          /* the enemy under the cursor */
+    /* 0x29 */ u8 unk29[3];
+};
+/* The touch regions of the target list: the back button, then one per enemy. */
+#define ACTOR_CARD_TARGET_REGION_BACK 17
+#define ACTOR_CARD_TARGET_REGION_FIRST 18
 /* IV: the battle UI's party display and party menu (0x59C0 bytes). */
 struct ActorCardAnimations {
     /* 0x0000 */ UiResourceParameters resources;  /* every sprite's animation tables */
@@ -65,7 +84,21 @@ struct ActorCardAnimations {
     /* 0x38D1 */ s8 vacant[5];                     /* the panel has no unit (0: the player) */
     /* 0x38D6 */ u8 unk38D6[0x1E];
     /* 0x38F4 */ s16 unitIndices[5];               /* slot table index of a panel's unit (< 0: none) */
-    /* 0x38FE */ u8 unk38FE[0x2052];
+    /* 0x38FE */ u8 unk38FE[0x1E16];
+    /* 0x5714 */ s16 touchRegionCount;
+    /* 0x5716 */ s16 touchRegions[32];             /* registered touch-region ids (see ACTOR_CARD_TARGET_REGION_*) */
+    /* 0x5756 */ u8 unk5756[2];
+    /* 0x5758 */ s32 targetCount;
+    /* 0x575C */ s8 targetLocked;                  /* touching a row does not move the cursor */
+    /* 0x575D */ u8 targetTouched;                 /* a touch moved the cursor this frame */
+    /* 0x575E */ u8 targetLayoutChosen;
+    /* 0x575F */ s8 targetSingleGroup;             /* the enemies form one group (one row of regions) */
+    /* 0x5760 */ ActorCardTarget targets[10];
+    /* 0x5918 */ u32 targetState;                  /* 1: opening, 2: choosing, 3: status page, 4: closed */
+    /* 0x591C */ s32 targetTimer;
+    /* 0x5920 */ s32 categoryIndex;                /* which ailment tints the previewed enemy */
+    /* 0x5924 */ u8 unk5924;
+    /* 0x5925 */ u8 unk5925[0x2B];
     /* 0x5950 */ ActorCardAnimationState animation;
     /* 0x59BC */ u32 messageFile;                  /* the loaded battle/BattleUI.mbm */
 };
@@ -164,6 +197,12 @@ struct ActorCardAnimationsA {
     /* 0x4BB0 */ s32 portraitIds[4];               /* the portraits acquired for the panels (0: the player, -1) */
     /* 0x4BC0 */ u32 unk4BC0;
 };
+typedef char ActorCardTargetOffsetsCheck[sizeof(ActorCardTarget) == 0x2C &&
+    offsetof(ActorCardTarget, active) == 0x28 && offsetof(ActorCardAnimations, touchRegionCount) == 0x5714 &&
+    offsetof(ActorCardAnimations, targetCount) == 0x5758 && offsetof(ActorCardAnimations, targets) == 0x5760 &&
+    offsetof(ActorCardAnimations, targetState) == 0x5918 && offsetof(ActorCardAnimations, unk5924) == 0x5924 &&
+    offsetof(ActorCardAnimations, unk11A0) == 0x11A0 && offsetof(ActorCardAnimations, slide) == 0x12B8 &&
+    offsetof(ActorCardAnimations, unk3060) == 0x3060 && offsetof(ActorCardAnimations, unk307C) == 0x307C ? 1 : -1];
 typedef char ActorCardAnimationOffsetsCheck[
     offsetof(ActorCardAnimations, unit) == 0x3040 &&
     offsetof(ActorCardAnimations, memberFrames) == 0x73C &&

@@ -76,7 +76,7 @@ void FUN_0034a544(void)
         down->menu.rows[i].idWord = 0;
         down->menu.rows[i].level = 0;
     }
-    down->menu.state = 1;
+    down->menu.step.state = 1;
     fillTwoWordsWithByte((u32 *)down->menu.selection, -1);
     down->menu.changed = 0;
     down->menu.source = NULL;

@@ -7,7 +7,7 @@
 
 extern "C" {
 
-int FUN_00283f80(...);
+int equipListDrawRowDetails(...);
 int FUN_0028f870(...);
 int gameGetPlayerData(void);
 int texDrawCompositeSprite(...);
@@ -26,7 +26,7 @@ typedef struct {
 
 extern int g_camp; /* 0x43da90 */
 
-/* Supplied declaration required: FUN_00283f80. */
+/* Supplied declaration required: equipListDrawRowDetails. */
 /* Supplied declaration required: FUN_0028f870. */
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);
@@ -70,7 +70,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x509,temp_v11,param_3,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50b,temp_v11,param_3,0x6a);
     puVar2 = (unsigned short *)gameGetPlayerData();
-    FUN_00283f80(temp_v10,0,*puVar2,temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,0,*puVar2,temp_v11,param_3);
     break;
   case 0x12:
     temp_v9 = g_camp + 0x308;
@@ -81,7 +81,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50c,temp_v11,param_3,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50d,temp_v11,param_3,0x6a);
     temp_v3 = gameGetPlayerData();
-    FUN_00283f80(temp_v10,0,*(unsigned short *)(temp_v3 + 2),temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,0,*(unsigned short *)(temp_v3 + 2),temp_v11,param_3);
     break;
   case 0x13:
     temp_v9 = g_camp + 0x36c;
@@ -91,7 +91,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50a,temp_v11,param_3,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50b,temp_v11,param_3,0x6a);
     temp_v3 = gameGetPlayerData();
-    FUN_00283f80(temp_v10,0,*(unsigned short *)(temp_v3 + 4),temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,0,*(unsigned short *)(temp_v3 + 4),temp_v11,param_3);
     break;
   case 0x14:
     temp_v9 = g_camp + 0x3d0;
@@ -101,7 +101,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50e,temp_v11,param_3,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50f,temp_v11,param_3,0x6a);
     temp_v3 = gameGetPlayerData();
-    FUN_00283f80(temp_v10,0,*(unsigned short *)(temp_v3 + 6),temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,0,*(unsigned short *)(temp_v3 + 6),temp_v11,param_3);
     break;
   case 0x15:
     temp_v9 = g_camp + 0x434;
@@ -111,7 +111,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50e,temp_v11,param_3,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50f,temp_v11,param_3,0x6a);
     temp_v3 = gameGetPlayerData();
-    FUN_00283f80(temp_v10,0,*(unsigned short *)(temp_v3 + 8),temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,0,*(unsigned short *)(temp_v3 + 8),temp_v11,param_3);
     break;
   case 0x16:
     temp_v9 = g_camp + 0x498;
@@ -121,7 +121,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50e,temp_v11,param_3,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50f,temp_v11,param_3,0x6a);
     temp_v3 = gameGetPlayerData();
-    FUN_00283f80(temp_v10,0,*(unsigned short *)(temp_v3 + 10),temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,0,*(unsigned short *)(temp_v3 + 10),temp_v11,param_3);
     break;
   case 0x17:
     temp_v9 = g_camp + 0x4fc;
@@ -131,7 +131,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50e,temp_v11,param_3,0x6a);
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x50f,temp_v11,param_3,0x6a);
     temp_v3 = gameGetPlayerData();
-    FUN_00283f80(temp_v10,0,*(unsigned short *)(temp_v3 + 0xc),temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,0,*(unsigned short *)(temp_v3 + 0xc),temp_v11,param_3);
   }
   temp_v3 = g_camp;
   temp_v8 = temp_v11;
@@ -188,7 +188,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     temp_v4 = FUN_0029ee54((const void *)(temp_v9));
     if (temp_v4 <= temp_v1 + temp_v3) break;
     temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
-    FUN_00283f80(temp_v10,temp_v3 + 2,*(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2),temp_v11,param_3);
+    equipListDrawRowDetails(temp_v10,temp_v3 + 2,*(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2),temp_v11,param_3);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 9);
   FUN_0028f870(temp_v9,temp_v11,param_3,0);

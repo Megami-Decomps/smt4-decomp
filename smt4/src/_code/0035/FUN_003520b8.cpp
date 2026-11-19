@@ -1,25 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003520b8` (_code @ 0x3520b8, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+s32 FUN_0035221c(u32 *out, u32 handle, s32 count, u8 mode, u32 a, u32 b, u32 c);
 
-int FUN_0035221c(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: FUN_0035221c. */
-
-
-void FUN_003520b8(void)
-
+/* Forwards the complete service request (the twin of Apocalypse's FUN_004267dc). */
+s32 FUN_003520b8(u32 *out, u32 handle, s32 count, u8 mode, u32 a, u32 b, u32 c)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0035221c();
-  return;
+    return FUN_0035221c(out, handle, count, mode, a, b, c);
 }
-
-} /* extern "C" */
+}

@@ -32,7 +32,7 @@ void FUN_003f5b14(void *owner, s32 y, u32 color, s32 firstX, s32 secondX, f32 al
 void FUN_003f5d94(void *owner, s32 x, s32 y, f32 alpha);
 void FUN_003f6e24(void *owner, s32 x, s32 y, f32 alpha);
 void FUN_003f78f8(void *owner, s32 x, s32 y, f32 alpha);
-void FUN_00164168(void *panel, s32 x, s32 y, u32 color, u32 layer, s32 value, f32 alpha);
+void textDrawRangeFaded(void *panel, s32 x, s32 y, u32 color, u32 layer, s32 value, f32 alpha);
 
 // Draw the camp status screen for its current mode at the main sprite's position, then reset the draw speed.
 void FUN_003f82b8(CampStatusScreen *screen)
@@ -71,7 +71,7 @@ void FUN_003f82b8(CampStatusScreen *screen)
             s32 value = screen->scroll + i - screen->scrollBase;
             if (value >= 0) {
                 TextureTableEntryIV *frame = asdTMTexTableEntryAt(49, 252 + i);
-                FUN_00164168(screen->panel, frame->x + baseX + parallax, frame->y + y, 201, 6, value, speed);
+                textDrawRangeFaded(screen->panel, frame->x + baseX + parallax, frame->y + y, 201, 6, value, speed);
             }
         }
         FUN_003f78f8(screen, baseX, y, speed);

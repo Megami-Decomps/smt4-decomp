@@ -67,7 +67,7 @@ void FUN_0035a3f0(void);
 void FUN_0035a7c4(void);
 void dataSceneWaitStep(void);
 void menuPollModeScript(void);
-void FUN_0036d12c(void);
+void questQueryFalse(void);
 void stateMachineRun(void);
 void FUN_0025d578(void);
 void FUN_002a28c0(void);
@@ -118,7 +118,7 @@ void FUN_00344348(u8 fromMenu)
     recv->handlers[6] = FUN_0035a7c4;
     recv->handlers[7] = dataSceneWaitStep;
     recv->handlers[8] = menuPollModeScript;
-    recv->finishHandler = FUN_0036d12c;
+    recv->finishHandler = questQueryFalse;
 
     u8* network = FUN_0031cf00();
     recv->restriction = 0;

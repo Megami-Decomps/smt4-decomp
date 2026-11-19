@@ -3,7 +3,7 @@
 extern "C" {
 
 
-s32 FUN_0036d12c(void)
+s32 questQueryFalse(void)
 {
     return 0;
 }

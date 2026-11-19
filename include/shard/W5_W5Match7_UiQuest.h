@@ -60,7 +60,7 @@ struct UiQuestApoc {
         /* 0x910 */ u8 unk910[0xc];
         struct {
             /* 0x910 */ s32 selection;
-            /* 0x914 */ s32 previousSelection;
+            /* 0x914 */ s32 nextSelection;   /* the category being moved to (equal to selection at rest) */
             /* 0x918 */ s32 count;
         } listState;
     };
@@ -70,7 +70,7 @@ struct UiQuestApoc {
     /* 0x934 */ u32 detailTimer;        /* frames since a quest was picked */
     /* 0x938 */ f32 focusSpeed;
     /* 0x93c */ u8 repositioned;        /* the list cursor was moved onto the focused quest */
-    /* 0x93d */ u8 unk93D;
+    /* 0x93d */ s8 unk93D;
     /* 0x93e */ u8 unk93E;
     /* 0x93f */ s8 state;
     /* 0x940 */ s8 active;
@@ -79,7 +79,7 @@ struct UiQuestApoc {
         u8 unk942[3];
         struct {
             u8 unk942;
-            /* 0x943 */ u8 addonOwned;
+            /* 0x943 */ s8 addonOwned;
         } messageOwnership;
     };
     /* 0x945 */ u8 unk945;
