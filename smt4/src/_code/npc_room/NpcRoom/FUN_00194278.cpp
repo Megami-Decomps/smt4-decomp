@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00194278` (_code @ 0x194278, 0x898 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
@@ -29,7 +30,6 @@ int asdTMTexTableReleaseNode(int, int);
 int jobSetIntensity(unsigned int, int);
 int buttonHelpSetContext(...);
 int buttonHelpSetPreset(...);
-int textFormatBuffer(...);
 int asdMemFree(...);
 int jobStop(unsigned int, int);
 int asdSequenceRequest(...);
@@ -82,7 +82,6 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: buttonHelpSetContext. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern short *dataTableGetEntries(void);
@@ -279,11 +278,11 @@ LAB_001945e8:
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 8);
-    textFormatBuffer(&temp_v9,&LAB_00194a44,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
+    sprintf((char *)&temp_v9,(const char *)&LAB_00194a44,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
                  *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
     temp_v3 = asdLoadFileSyncDefault(&temp_v9);
     puVar3[0x16] = temp_v3;
-    textFormatBuffer(&temp_v9,&LAB_00194a60,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
+    sprintf((char *)&temp_v9,(const char *)&LAB_00194a60,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
                  *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
     temp_v3 = asdLoadFileSyncDefault(&temp_v9);
     puVar3[0x17] = temp_v3;

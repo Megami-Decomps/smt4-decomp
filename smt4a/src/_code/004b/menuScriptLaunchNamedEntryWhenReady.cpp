@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "shard/Shard004B.h"
 
 struct ScriptEntryName {
@@ -20,7 +21,6 @@ struct ScriptEntryLaunchWork {
 
 extern "C" {
 s32 FUN_004ba698(Menu4C* menu);
-s32 textFormatBuffer(u8* destination, const char* format, ...);
 u32 tableGroupFindEntryIndex(u32 group, const u8* name);
 s32 scrScriptProcessStartEntry(u32 job, u32 entry);
 
@@ -28,7 +28,7 @@ void menuScriptLaunchNamedEntryWhenReady(ScriptEntryLaunchWork* work)
 {
     u8 name[36];
     if (FUN_004ba698(&work->menu)) {
-        textFormatBuffer(name, "%s", work->entry->name);
+        sprintf((char *)name, "%s", work->entry->name);
         u32 index = tableGroupFindEntryIndex(work->tableGroup, name);
         scrScriptProcessStartEntry(work->scriptJob, index);
         work->state = 4;

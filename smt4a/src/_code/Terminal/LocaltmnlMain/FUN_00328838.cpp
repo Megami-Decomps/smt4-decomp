@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328838` (_code @ 0x328838, 0x1238 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "gfx/CameraAnimationApply.h"
 #include "title/titleMain.h"
@@ -38,7 +39,6 @@ int linkHolderClearFlag(...);
 int resourceOwnerReleaseAll(void);
 int VectorFloatToUnsigned(double, int);
 
-int textFormatBuffer(...);
 int padQueryLogicalKey(...);
 int asdLoadFileSyncNoContext(...);
 int sysPlaySe(...);
@@ -122,7 +122,6 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
@@ -449,16 +448,16 @@ unsigned int FUN_00328838(void)
     }
     temp_v4 = g_localTmnl;
     if (*(int *)(*(int *)(g_localTmnl + 0x560) * 0x10 + 0x56fcd8) == 0) {
-      textFormatBuffer(&temp_v9,&DAT_00526180);
+      sprintf((char *)&temp_v9,(const char *)&DAT_00526180);
     }
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 1) {
-      textFormatBuffer(&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
+      sprintf((char *)&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
     }
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 2) {
-      textFormatBuffer(&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
+      sprintf((char *)&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
     }
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 3) {
-      textFormatBuffer(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
+      sprintf((char *)&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
     }
     placeWinStartText(&temp_v9);
     sysPlaySe(0x92);
@@ -606,16 +605,16 @@ unsigned int FUN_00328838(void)
     if (*(char *)(temp_v0 + 0x558) == '\0') {
       if (*(int *)(temp_v0 + 0x554) == 0x56) {
         if (*(int *)(*(int *)(g_localTmnl + 0x560) * 0x10 + 0x56fcd8) == 0) {
-          textFormatBuffer(&temp_v9,&DAT_00526180);
+          sprintf((char *)&temp_v9,(const char *)&DAT_00526180);
         }
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 1) {
-          textFormatBuffer(&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
+          sprintf((char *)&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
         }
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 2) {
-          textFormatBuffer(&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
+          sprintf((char *)&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
         }
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 3) {
-          textFormatBuffer(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
+          sprintf((char *)&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
         }
         placeWinStartText(&temp_v9);
         if (*(char *)(temp_v0 + 0x558) != '\0') {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation and scheduling differ (menu/loop index swap, mode byte base hoisted into a register in retail, flag materialised as mov #1/moveq #0); logic matches retail. */
 #include "common.h"
+#include <stdio.h>
 #include "gamedata/NkmBaseRecordA.h"
 #include "code/Code002a.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -7,7 +8,6 @@
 extern "C" {
 s32 rangeGetMinimumLimit(void *list);
 u32 FUN_004a8750(u32 id, u32 kind, bool flag, bool high, u32 extra);
-int textFormatBuffer(char *buffer, const char *format, u32 value);
 extern s32 g_animatedPageSelection[];
 extern u32 g_entryWindowNumberFirst[20];
 extern s32 g_entryWindowCaptionX[10];
@@ -100,7 +100,7 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
         offset = layoutFindTableEntry(menu->sprites, 0x4C6);
         g_entryWindowCaptionX[i] = offset->x + x;
         g_entryWindowCaptionX[10 + i] = offset->y + y;
-        textFormatBuffer((char *)&g_entryWindowCaptionX[20] + i * 0x20, "%8u", shown);
+        sprintf((char *)&g_entryWindowCaptionX[20] + i * 0x20, "%8u", shown);
         g_entryWindowColors[i] = shownColor;
     }
 }

@@ -122,7 +122,10 @@ it still links as retail bytes, with the reason:
 
 The compiled objects never went through armlink, so `build.py` repeats what armlink did to retail
 after each compile: a branch to an undefined `__weak` function or to the very next instruction
-becomes a NOP (`mov r0, r0`; `mov r8, r8` twice in Thumb). Retail target objects, in turn, hold calls
+becomes a NOP (`mov r0, r0`; `mov r8, r8` twice in Thumb). It also drops armcc's R_ARM_NONE
+relocations: a `sprintf` call under `<stdio.h>` puts one per format feature (`_printf_d`, `_printf_percent`)
+on the function's first instruction for armlink's library selection; they patch no bytes, and their
+symbols stay as weak undefined ones. Retail target objects, in turn, hold calls
 in the compiler's form (`bl` with a relocation; the linker chose `blx`), and mark a string literal
 that code addresses pc-relatively as data. relink links with `--no-warn-mismatch` because retail mixes
 units built for different CPUs (`--cpu=5TE` runtime code next to MPCore code), and accepts a compiled

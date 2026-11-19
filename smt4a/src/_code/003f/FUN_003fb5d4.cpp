@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fb5d4` (_code @ 0x3fb5d4, 0x39c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -7,7 +8,6 @@ struct TexNode;
 
 extern "C" {
 
-int textFormatBuffer(...);
 int refIsNullOrZero(...);
 int asdLoadFileWithSize(...);
 int archivePathDeviceOpen(...);
@@ -48,7 +48,6 @@ typedef struct {
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: asdLoadFileWithSize. */
@@ -153,7 +152,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
     temp_v5[3] = '\0';
     if (*(short *)((int)param_1->field_0x10 + 4) != 0) {
       do {
-        textFormatBuffer(temp_v8,"battle/devil/%s.bcmdl",(void *)((int)param_1->field_0x14 + temp_v3 * 0x20));
+        sprintf((char *)temp_v8,"battle/devil/%s.bcmdl",(void *)((int)param_1->field_0x14 + temp_v3 * 0x20));
         puVar9 = temp_v8;
         puVar4 = temp_v6;
         temp_v9 = 0;

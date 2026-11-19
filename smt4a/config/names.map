@@ -2359,7 +2359,7 @@
 0050d6f8 clearWordAndByte
 0050d708 clearWordHalfByte
 0050d71c clearTwoWords
-0050d72c clearTwoWordsAndByte
+0050d72c __ARM_common_memclr4_9
 0050d778 fillThreeWordsWithByte
 0050d794 fillTwoWordsWithByte
 00501f28 copy0x70Bytes
@@ -3346,7 +3346,7 @@
 002e0854 resourceQueryByIndex
 002e13fc inputClearActiveValues
 002e6174 npcRoomDebugDrawStartId
-00100388 textFormatBuffer
+00100388 __2sprintf
 0021229c debugDrawText
 00330548 messageAuxDispatch
 002a1a78 processQueryChain
@@ -6966,3 +6966,6 @@
 00385384 mapIfTriggerNearbyProximityRecord
 00416840 messageIndicatorsUpdate
 00156868 dataTableGetNamePayload
+00241058 clearSaveUpdate
+00314ef8 btlDebugClose
+0019c920 asdVramBlockListInsert

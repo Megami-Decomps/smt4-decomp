@@ -1,4 +1,5 @@
 /* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail; the body is still the raw decompiler control-flow draft, so branch layout and register allocation differ. */
+#include "map/LmapPlayerModel.h"
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "map/MapActionMarker.h"
@@ -15,7 +16,6 @@ int mapIfActivateRecord(int, unsigned int);
 int mapInterfaceSetStateTwo(void);
 int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
-int mapDepartSpawnPlayerEffect(unsigned int);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(int);
 int mapEaseSceneHeading(void);

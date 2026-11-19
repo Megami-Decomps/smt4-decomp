@@ -1,4 +1,5 @@
 /* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the stream allocation; the stream constructor is inlined there. */
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "sys/RuntimeObjects.h"
@@ -9,7 +10,6 @@ void sysFatalBreak(void);
 AsdHashPackHeader *asdLoadFileSync(s32 *result, u32 zero, const char *path, u32 *size, u32 arg, u32 priority);
 void *asdMemoryAllocTraced(u32 size, const char *file, int line);
 void rt_aeabi_memclr(char *buf, u32 size);
-s32 textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00158900(void *stream, const char *path, s32 mode);
 
 /* Loads the pack file `path` into `pack` (replacing what it held) and opens a stream on
@@ -62,7 +62,7 @@ s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *str
         return result;
     }
     rt_aeabi_memclr(fullPath, ASD_FILE_PATH_LEN);
-    textFormatBuffer(fullPath, "rom:/%s", streamPath);
+    sprintf(fullPath, "rom:/%s", streamPath);
     result = FUN_00158900((u8 *)pack->stream + 4, fullPath, 1);
     return result;
 }

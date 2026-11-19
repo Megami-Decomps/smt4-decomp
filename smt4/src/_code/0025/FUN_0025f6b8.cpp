@@ -6,6 +6,7 @@
  * position through VFP registers) where this build hoists them, and armcc here cross-jumps two calls retail
  * keeps apart (the HP gauge's gain/loss calls, the gauge scissor). */
 #include "common.h"
+#include <stdio.h>
 #include "shard/PlayScene.h"
 #include "shard/GameOptions.h"
 #include "shard/TextureDrawCall.h"
@@ -294,14 +295,14 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
                     mpChange = -mpChange;
                 }
             }
-            textFormatBuffer(levelText, "%d", scene->party.levels[member]);
+            sprintf(levelText, "%d", scene->party.levels[member]);
 
             s32 warning = 0;
             if (member == 0) {
                 PlayerDataIV *player = gameGetPlayerData();
                 maxHp = btlSourceGetMaxHp((BtlUnitSource *)player);
                 maxMp = player->maxMp;
-                textFormatBuffer(name, "%s", gameGetPlayerName());
+                sprintf(name, "%s", gameGetPlayerName());
                 warning = FUN_00288ddc(maxHp, (u32)-1);
             } else if (scene->party.unitIndices[member] >= 0) {
                 StatBlock *unit;
@@ -314,7 +315,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
                 }
                 maxHp = btlLinkGetMaxHp((BtlUnitLink *)unit);
                 maxMp = unit->maxMp;
-                textFormatBuffer(name, "%s", FUN_002bd068(unit->id));
+                sprintf(name, "%s", FUN_002bd068(unit->id));
                 warning = FUN_00288ddc(maxHp, unit->id);
             }
 
@@ -332,14 +333,14 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             if (hp < 0) {
                 hp = 0;
             }
-            textFormatBuffer(hpText, "%d", hp);
+            sprintf(hpText, "%d", hp);
             if (mp > maxMp) {
                 mp = maxMp;
             }
             if (mp < 0) {
                 mp = 0;
             }
-            textFormatBuffer(mpText, "%d", mp);
+            sprintf(mpText, "%d", mp);
 
             entry = asdTMTexTableEntryAt(21, 28);
             s32 advance = fontMeasureLineAdvance(name, 1);
@@ -623,14 +624,14 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             SupportUnitRecord *record = supportUnitGetEntry((s16)guest->unk604, guest->supportIndex);
             FUN_002b6940(record->demon.id, entry->x + x, entry->y + y - shift, 66);
             gxResetColorQuadToWhite();
-            textFormatBuffer(name, FUN_002bcf4c(((GameOptions *)gameGetSupportUnitData())->unk604)->name);
+            sprintf(name, FUN_002bcf4c(((GameOptions *)gameGetSupportUnitData())->unk604)->name);
         } else {
             if (guest->guest.ailments & 2) {
                 drawSetColorFromRGBA8(categoryGetColor(1));
             }
             uiDrawDemonIcon((s16)guest->unk46, entry->x + x, entry->y + y - shift, 66, 0);
             gxResetColorQuadToWhite();
-            textFormatBuffer(name, FUN_002bd068(guest->unk46));
+            sprintf(name, FUN_002bd068(guest->unk46));
         }
         entry = asdTMTexTableEntryAt(21, 0x6E);
         textDrawString(2, 0xFF, name, entry->x + x, entry->y + y - shift, 0.72265625f, 0.0f, alpha);

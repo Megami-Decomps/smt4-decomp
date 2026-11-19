@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011aa94` (_code @ 0x11aa94, 0x444 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/GameDataAccess.h"
@@ -12,7 +13,6 @@ int FUN_002b6940(...);
 int renderCtxCalculateStereoParallax(int);
 int FUN_002bcf4c(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int FUN_002be90c(...);
 int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
@@ -43,7 +43,6 @@ extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
@@ -138,13 +137,13 @@ unsigned int FUN_0011aa94(void)
       temp_v1 = gameGetSupportUnitData();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + 0x604);
       FUN_002bcf4c(temp_v5);
-      textFormatBuffer(temp_v10,temp_v5);
+      sprintf((char *)temp_v10,(const char *)temp_v5);
     }
     else {
       uiDrawDemonIcon((int)*(short *)(temp_v1 + 0x46),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24,0);
       temp_v6 = FUN_002bd068(*(unsigned short *)(temp_v1 + 0x46));
-      textFormatBuffer(temp_v10,temp_v6);
+      sprintf((char *)temp_v10,(const char *)temp_v6);
     }
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0xd8));
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

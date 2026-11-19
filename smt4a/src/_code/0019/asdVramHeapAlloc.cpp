@@ -1,29 +1,10 @@
-/* NON_MATCHING: instruction-for-instruction identical to retail except that the build also pushes/pops r8 (unused). */
-#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-
-struct AsdVramBlockA {
-    /* 0x00 */ u32 addr;
-    /* 0x04 */ u32 size;
-    /* 0x08 */ u32 poolId;
-    /* 0x0c */ AsdVramBlockA *prev;
-    /* 0x10 */ AsdVramBlockA *next;
-};
-
-struct AsdVramBlockListA {
-    /* 0x00 */ AsdVramBlockA *head;
-    /* 0x04 */ AsdVramBlockA *tail;
-    /* 0x08 */ s32 count;
-};
-
-struct AsdVramHeapA {
-    /* 0x00 */ AsdVramBlockListA used;
-    /* 0x0c */ AsdVramBlockListA free;
-    /* 0x18 */ u32 freeBytes;
-};
+/* NON_MATCHING: instruction-for-instruction identical to retail except that the build also pushes/pops r8 (unused):
+ * retail's five-register push across the asdVramBlockListInsert calls is the multifile case (a multifile run with asdVramBlockListInsert
+ * gives retail's push, but then allocates the loop registers differently). */
+#include "AsdSDK/asdVramBlockListInsert.h"
 
 extern "C" {
 extern AsdMemoryApoc g_asdMemory;
-void FUN_0019c920(AsdVramHeapA *, AsdVramBlockA *);
 
 static __inline AsdVramBlockA *takeBlockDescriptor(AsdMemTable *table)
 {
@@ -66,7 +47,7 @@ u32 asdVramHeapAlloc(AsdVramHeapA *heap, u32 size)
                 free->addr += size;
                 free->size -= size;
                 heap->freeBytes -= block->size;
-                FUN_0019c920(heap, block);
+                asdVramBlockListInsert(&heap->used, block);
                 return block->addr;
             }
             heap->freeBytes -= free->size;
@@ -83,7 +64,7 @@ u32 asdVramHeapAlloc(AsdVramHeapA *heap, u32 size)
             free->prev = NULL;
             free->next = NULL;
             --heap->free.count;
-            FUN_0019c920(heap, free);
+            asdVramBlockListInsert(&heap->used, free);
             return free->addr;
         }
     }

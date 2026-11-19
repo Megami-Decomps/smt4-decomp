@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMotionChannelApi.h"
 /* NON_MATCHING: sets up the quest counter scene (area models, talk work, message files); written from the decompilation and the retail disassembly, the string pool order and local table copy not compared with retail */
+#include <stdio.h>
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "classes/FloatState.h"
 #include <new>
@@ -45,7 +46,6 @@ struct QuestCounterScene {
 
 extern "C" {
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
-void textFormatBuffer(char *out, const char *format, ...);
 void FUN_002a09b4(const char *path, s32 flag);
 
 void animOwnerSetScale(AsdMdlObject *model, f32 scale);
@@ -92,14 +92,14 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
 
     char path[144];
     for (u32 i = 0; i < QUEST_NPC_COUNT; i++) {
-        textFormatBuffer(path, "%s_npc%d.bam", areaNames[scene->area], i + 1);
+        sprintf(path, "%s_npc%d.bam", areaNames[scene->area], i + 1);
         scene->npcModels[i] = asdMdlManagerCreateLoaded(path, 7);
         lightOwnerRegister(scene->npcModels[i], 1);
         modelSetAnimationChannels(scene->npcModels[i], 0, 0.0f);
         animOwnerSetScale(scene->npcModels[i], 0.0f);
         FUN_002e1230(scene->npcModels[i], 0);
 
-        textFormatBuffer(path, "%s_npc%d_add1.bam", areaNames[scene->area], i + 1);
+        sprintf(path, "%s_npc%d_add1.bam", areaNames[scene->area], i + 1);
         scene->npcModelsAdd[i] = asdMdlManagerCreateLoaded(path, 7);
         lightOwnerRegister(scene->npcModelsAdd[i], 1);
         modelSetAnimationChannels(scene->npcModelsAdd[i], 0, 0.0f);
@@ -112,10 +112,10 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
     scene->unkD44 = 30.0f;
 
     if (scene->mode == QUEST_MODE_BACKGROUND) {
-        textFormatBuffer(path, "%s.bam", areaNames[scene->area]);
+        sprintf(path, "%s.bam", areaNames[scene->area]);
         scene->background = asdMdlManagerCreateLoaded(path, 7);
         lightOwnerRegister(scene->background, 1);
-        textFormatBuffer(path, "%s.bcenv", areaNames[scene->area]);
+        sprintf(path, "%s.bcenv", areaNames[scene->area]);
         FUN_002a09b4(path, 0);
     }
 
@@ -131,8 +131,8 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
 
     char fileName[64];
     char tableName[64];
-    textFormatBuffer(fileName, "quest_center/center/center%02d.bf", scene->questId);
-    textFormatBuffer(tableName, "quest_center/center/center%02d.mbm", scene->questId);
+    sprintf(fileName, "quest_center/center/center%02d.bf", scene->questId);
+    sprintf(tableName, "quest_center/center/center%02d.mbm", scene->questId);
     asdLoadFileAsyncSimple(fileName, &scene->messageFile, 0);
     asdLoadFileAsyncSimple(tableName, &scene->messageTable, 0);
 

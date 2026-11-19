@@ -76,7 +76,7 @@ void FUN_00189c24(void)
             continue;
         }
         bool listed = true;
-        if (quest->panel.confirming != 0) {
+        if (quest->panelView.panel.confirming != 0) {
             QuestRecord *record = questDataGetRecord(id);
             if (record == NULL || record->kind != 0)
                 continue;
@@ -85,7 +85,7 @@ void FUN_00189c24(void)
             if (idIsAtLeast350(id) == 0) {
                 if (record->area == 0)
                     continue;
-                switch ((s8)quest->panel.choice) {
+                switch ((s8)quest->panelView.panel.choice) {
                 case 0:
                     continue;
                 case 1:
@@ -117,7 +117,7 @@ void FUN_00189c24(void)
         quest->list[openCount++] = id;
     }
     FUN_002b7bca(quest->cursor.alternate.ids, reportCount, sizeof(u16), dataTable1bOr1cCompareRecordKeys);
-    void *reportList = quest->panel.alternate.cursor;
+    void *reportList = quest->panelView.panel.alternate.cursor;
     gridNavigationConfigure(reportList, reportCount, 10, 1, 1, 1);
     gridNavigationConfigure(quest->cursor.data, openCount, 10, 1, 1, 1);
     uiQuestSortListByEntryKind(0);
@@ -136,7 +136,7 @@ void FUN_00189c24(void)
             }
         }
     }
-    if (quest->panel.confirming != 0)
+    if (quest->panelView.panel.confirming != 0)
         return;
     if (quest->cursor.alternate.ids[gameGetSavedRecordOrFallback(0)->top + gameGetSavedRecordOrFallback(0)->position] == 0 ||
         gameGetSavedRecordOrFallback(0)->top + FUN_0029d644(reportList) > FUN_0029ee54(reportList)) {

@@ -1,11 +1,11 @@
 /* NON_MATCHING: only entry instruction scheduling and the switch-index versus sound-flags scratch registers differ. */
+#include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "ui/UiControl.h"
 #include "addon/LookupRecord.h"
 extern "C" {
 u32 FUN_002bfdd4(void);
 void textFormatFullWidthTwoDigits(s32 count, char *text);
-void textFormatBuffer(char *output, const char *format, ...);
 const char *textConvertToGlyphPairs(void *record, s32 variant);
 void dialogSetText(const char *text);
 u32 FUN_002bfdc4(void);
@@ -24,7 +24,7 @@ void mapIfShowRemainingRequirementDialog(u32 kind, u32 item, s32 count)
     case 7:
         textFormatFullWidthTwoDigits(count, number);
         /* Full-width English: "%s type(s) of demon remaining." */
-        textFormatBuffer(text, "%s\x81\x40\x82\x94\x82\x99\x82\x90\x82\x85\x81\x69\x82\x93\x81\x6a\x81\x40\x82\x8f\x82\x86\x81\x40\x82\x84\x82\x85\x82\x8d\x82\x8f\x82\x8e\x81\x40\x82\x92\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87\x81\x44", number);
+        sprintf(text, "%s\x81\x40\x82\x94\x82\x99\x82\x90\x82\x85\x81\x69\x82\x93\x81\x6a\x81\x40\x82\x8f\x82\x86\x81\x40\x82\x84\x82\x85\x82\x8d\x82\x8f\x82\x8e\x81\x40\x82\x92\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87\x81\x44", number);
         sound = 0x61ABF;
         break;
     case 8:
@@ -32,7 +32,7 @@ void mapIfShowRemainingRequirementDialog(u32 kind, u32 item, s32 count)
     case 11:
         textFormatFullWidthTwoDigits(count, number);
         /* Full-width English: "%s: %s Remaining". */
-        textFormatBuffer(text, "%s\x81\x46\x81\x40%s\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", textConvertToGlyphPairs(dataTable01FindByIdWithAoc(item), 0), number);
+        sprintf(text, "%s\x81\x46\x81\x40%s\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", textConvertToGlyphPairs(dataTable01FindByIdWithAoc(item), 0), number);
         break;
     case 6:
     case 10:

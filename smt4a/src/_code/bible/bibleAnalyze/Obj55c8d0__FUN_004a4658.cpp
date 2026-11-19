@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack frame (key/message placement), saved-register numbering and the state/step STRD pair differ; branch layout now matches. */
+#include "runtime/Stdio.h"
 #include "ui/UiSpriteApi.h"
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
@@ -47,7 +48,6 @@ s32 entryDispatchUpdate(void *buttons, s32 index);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 void sysPlaySe(u32 sound);
 const char *dataLookupDisplayName(u32 *key, u32 id);
-s32 textFormatBuffer(char *output, const char *format, ...);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_0032d0c8(s32 first, s32 second, u16 id, s32 fourth);
 void gameGlobalsSetMenuOpenFlag(u8 value);
@@ -80,7 +80,7 @@ void Obj55c8d0::FUN_004a4658()
         if (name == NULL)
             name = DAT_0052b5bc;
         char message[80];
-        textFormatBuffer(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
+        __2sprintf(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
         buttonHelpSetText(message, 0x323232FF);
     } else {
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);

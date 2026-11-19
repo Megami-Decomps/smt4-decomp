@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the two operands of the rank comparison are reversed. */
 #include "common.h"
+#include <stdio.h>
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 
 extern "C" {
@@ -50,7 +51,6 @@ extern s32 dataTable27Sub0GetCount(u8 *table);
 extern s32 gameFlagIsSet(s32 flag);
 extern void FUN_002b7bca(void *base, s32 count, s32 size, s32 (*compare)(const HunterPick *, const HunterPick *));
 extern s32 randBetween(s32 low, s32 high);
-extern s32 textFormatBuffer(u8 *destination, const char *format, ...);
 extern void FUN_0031e2bc(u32 text, u8 *name, s32 flag);
 
 /* Whether a record with this record's id has already been picked. */
@@ -114,9 +114,9 @@ void FUN_003832fc(HunterCompany *company)
             }
             if (!found)
                 pose = randBetween(1, 2);
-            textFormatBuffer(name, "hunter_company_npc%d_%d", i + 1, pose);
+            sprintf((char *)name, "hunter_company_npc%d_%d", i + 1, pose);
             FUN_0031e2bc(company->nameSlots[i]->text, name, 0);
-            textFormatBuffer(name, "hunter_company_npc%d_%d_add1", i + 1, pose);
+            sprintf((char *)name, "hunter_company_npc%d_%d_add1", i + 1, pose);
             FUN_0031e2bc(company->addSlots[i]->text, name, 0);
         }
     }

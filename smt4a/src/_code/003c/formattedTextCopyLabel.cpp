@@ -13,9 +13,9 @@ u32 formattedTextCopyLabel(FormattedTextSource* source, char* output)
     }
     const char* prefix = source->prefix->text;
     if (prefix != NULL) {
-        textFormatBuffer(output, DAT_00544ab8, prefix, item->text);
+        __2sprintf(output, DAT_00544ab8, prefix, item->text);
     } else {
-        textFormatBuffer(output, DAT_00544ac0, item->text);
+        __2sprintf(output, DAT_00544ac0, item->text);
     }
     return source->item->id;
 }

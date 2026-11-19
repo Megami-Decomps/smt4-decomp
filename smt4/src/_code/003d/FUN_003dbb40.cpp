@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 namespace {
@@ -26,7 +27,6 @@ extern "C" {
 extern FilePathStrings DAT_004008a4;
 void memClear(void *block, u32 size);
 void asdMemFree(void *block);
-void textFormatBuffer(char *buffer, const char *format, const char *arg);
 char *libc_strcpy(char *dst, const char *src);
 const u8 *libc_strrchr(const u8 *string, u32 character);
 s32 keyedRecordFindByName(const char *name);
@@ -54,7 +54,7 @@ s32 FUN_003dbb40(LoadedFileOwner *owner)
     memClear(path, sizeof(path));
     FilePathStrings *strings = &DAT_004008a4;
     memClear(formatted, sizeof(formatted));
-    textFormatBuffer(formatted, strings->format, strings->base);
+    sprintf(formatted, strings->format, strings->base);
     libc_strcpy(path, formatted);
     char *fullPath = path;
     libc_strcpy(file->name, fileNameFromPath(fullPath));

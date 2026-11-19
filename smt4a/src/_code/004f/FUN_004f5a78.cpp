@@ -1,4 +1,5 @@
 /* NON_MATCHING: work/global pointers and path buffers use different saved registers; return branches differ. */
+#include "runtime/Stdio.h"
 #include "battle/BattleMovementEffects.h"
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -10,7 +11,6 @@ extern const char DAT_00528380[4][32];
 extern const char DAT_005284c0[];
 void sysMemClear(void *, u32);
 void asdMemFree(void *);
-void textFormatBuffer(char *, const char *, ...);
 char *libc_strcpy(char *, const char *);
 char *libc_strrchr(char *, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
@@ -37,7 +37,7 @@ u32 FUN_004f5a78(BattleMovementEffects *work)
             char formatted[128];
             sysMemClear(path, 128);
             sysMemClear(formatted, 128);
-            textFormatBuffer(formatted, DAT_005284c0, DAT_00528380[i]);
+            __2sprintf(formatted, DAT_005284c0, DAT_00528380[i]);
             libc_strcpy(path, formatted);
             libc_strcpy(resource->key, libc_strrchr(path, '/') + 1);
             if (findRecordByKey(resource->key) == 0xFF) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018c0ec` (_code @ 0x18c0ec, 0x3164 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
 #include "code/Code0020_Smt4.h"
@@ -63,7 +64,6 @@ int gridNavigationConfigure(...);
 int nkmBaseGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
 int dataTable01FindByIdWithAoc(...);
-int textFormatBuffer(...);
 int libc_strcpy(...);
 
 int FUN_00295a18(...);
@@ -72,7 +72,7 @@ int gameMoneyAdd(...);
 int FUN_00295cec(...);
 int soundSlotStopById(...);
 int slotUnitIsInActiveParty(...);
-int uiStoreTextureEntryCenter(...);
+int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
 int timerStart(...);
@@ -231,7 +231,6 @@ extern int sys43e188GetState(void);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: libc_strcpy. */
@@ -1076,7 +1075,7 @@ LAB_0018d058:
       }
       pcVar18 = (char *)0x0;
 LAB_0018da7c:
-      textFormatBuffer(&temp_v35,&LAB_0018dd60,pcVar18 + 1);
+      sprintf((char *)&temp_v35,(const char *)&LAB_0018dd60,pcVar18 + 1);
       temp_v9 = asdLoadFileSyncDefault(&temp_v35);
       *(unsigned int *)(temp_v2 + 0x3578) = temp_v9;
       temp_v15 = *(unsigned int *)(temp_v2 + 0x3570);

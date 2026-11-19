@@ -1,4 +1,5 @@
 /* NON_MATCHING: rename polling stack grouping and callback scheduling have not yet been matched. */
+#include <stdio.h>
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "gfx/EffectKeyboard.h"
 
@@ -14,7 +15,6 @@ s32 FUN_00375ec8(KeyboardState *keyboard);
 void namedObjectFormatFullName(NamedObject *object, char *destination);
 s32 namedObjectFormatName(NamedObject *object, char *destination);
 void engineFreeCallback(void *allocation);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 s32 resourceDefaultFalseCallback(void *object, const char *path);
 __weak void effectEditorPublishDebugText(void *object, const char *text);
 
@@ -48,7 +48,7 @@ u32 FUN_002feb40()
     if (text.result == 2)
         return 0x400000;
     if (text.result == 1 && g_effectEditor.block != NULL) {
-        textFormatBuffer(text.message, "%s%s", directory, text.fullName);
+        sprintf(text.message, "%s%s", directory, text.fullName);
         effectEditorPublishDebugText(g_effectEditor.block, text.message);
         status = 0x400002;
     }

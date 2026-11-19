@@ -1,11 +1,11 @@
 /* NON_MATCHING: the digit table lands at sp+16 in a 44-byte frame (retail sp+12, 36 bytes) and the second early exit returns r4 instead of sharing the r6 exit; the digit loop now matches retail's counted loop */
 #include "common.h"
+#include "runtime/Stdio.h"
 
 extern "C" {
 extern const char DAT_00409710[];
 extern const char DAT_00409714[];
 extern const char DAT_0040971c[];
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 
 // Write Shift-JIS full-width digits without a terminator; negative width measures the value.
 s32 FUN_001dba90(char *destination, u32 value, s32 width, s32 zeroPad)
@@ -18,7 +18,7 @@ s32 FUN_001dba90(char *destination, u32 value, s32 width, s32 zeroPad)
     };
     s32 length = 0;
     if (width < 0 && zeroPad == 0) {
-        textFormatBuffer(buffer, DAT_00409710, value);
+        __2sprintf(buffer, DAT_00409710, value);
         width = 0;
         if (buffer[0] == '\0') {
             return length;
@@ -35,9 +35,9 @@ s32 FUN_001dba90(char *destination, u32 value, s32 width, s32 zeroPad)
         width = 10;
     }
     if (zeroPad != 0) {
-        textFormatBuffer(buffer, DAT_00409714, value);
+        __2sprintf(buffer, DAT_00409714, value);
     } else {
-        textFormatBuffer(buffer, DAT_0040971c, value);
+        __2sprintf(buffer, DAT_0040971c, value);
     }
     const s8 *character = reinterpret_cast<const s8 *>(buffer + (10 - width));
     for (; width > 0; --width, ++character) {

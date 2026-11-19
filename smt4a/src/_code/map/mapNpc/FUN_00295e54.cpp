@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00295e54` (_code @ 0x295e54, 0x5ec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(unsigned char [68], unsigned char *);
 int asdMemoryAllocTraced(int, unsigned char *, int);
 int modelLoadFileAsyncByName(void);
 int FUN_00295d40(void);
@@ -30,7 +30,6 @@ extern int g_aocSystem; /* 0x570280 */
 extern int *DAT_00581280; /* 0x581280 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTraced. */
 /* Supplied declaration required: modelLoadFileAsyncByName. */
 /* Supplied declaration required: FUN_00295d40. */
@@ -178,7 +177,7 @@ LAB_002960c8:
     *(unsigned char *)((int)piVar12 + temp_v3 * 0x3c + 0xf) = 0;
     *(short *)(piVar12 + temp_v3 * 0xf + 5) = (short)DAT_00581280[1];
     *(short *)((int)piVar12 + temp_v3 * 0x3c + 0x12) = (short)*(char *)(temp_v5 + 0x37);
-    textFormatBuffer(temp_v12,&LAB_00296450);
+    sprintf((char *)temp_v12,(const char *)&LAB_00296450);
     if (param_1 >= 0x65) {
       temp_v1 = *(short *)((int)piVar12 + temp_v3 * 0x3c + 0x12);
       temp_v8 = 0;

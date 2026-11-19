@@ -1,64 +1,43 @@
-/* NON_MATCHING: the search and null setup now match (IV's while-loop search); retail keeps the heap in r5 and the block in r4 (swapped here) and loads the second merge's links into r2/r1 (r1/r2 here). */
-#include "common.h"
-
-// Apocalypse's block nodes have a pool field before their links, unlike the shared IV prefix.
-struct VramFreeNodeA {
-    u32 address;
-    u32 size;
-    u32 allocated;
-    VramFreeNodeA *previous;
-    VramFreeNodeA *next;
-};
-struct VramFreeListA {
-    VramFreeNodeA *first;
-    VramFreeNodeA *last;
-    s32 count;
-};
-struct VramHeapStateA {
-    VramFreeListA used;
-    VramFreeListA free;
-    u32 freeBytes;
-};
-struct VramNodePoolA { u32 unk00; u32 available; };
-struct VramMemoryGlobalsA { u8 prefix[0x18]; VramNodePoolA *pool; };
+/* NON_MATCHING: the search and null setup now match (IV's while-loop search); retail keeps the heap in r5 and the block in r4
+ * (swapped here) and loads the second merge's links into r2/r1 (r1/r2 here). The unit is IDENTICAL built with --fpu=softvfp. */
+#include "AsdSDK/asdVramBlockListInsert.h"
 
 extern "C" {
-extern VramMemoryGlobalsA g_asdMemory;
-void FUN_0019c920(VramFreeListA *, VramFreeNodeA *);
+extern AsdMemoryApoc g_asdMemory;
 
-static __inline void unlinkBlock(VramFreeListA *list, VramFreeNodeA *block)
+static __inline void unlinkBlock(AsdVramBlockListA *list, AsdVramBlockA *block)
 {
-    VramFreeNodeA *previous = block->previous;
-    VramFreeNodeA *next = block->next;
+    AsdVramBlockA *previous = block->prev;
+    AsdVramBlockA *next = block->next;
     if (previous != NULL)
         previous->next = next;
     else
-        list->first = next;
+        list->head = next;
     if (next != NULL)
-        next->previous = previous;
+        next->prev = previous;
     else
-        list->last = previous;
-    block->previous = NULL;
+        list->tail = previous;
+    block->prev = NULL;
     block->next = NULL;
     --list->count;
 }
 
-/* Returns a node to the node pool. */
-static __inline void releaseNode(VramFreeNodeA *node)
+/* Returns a descriptor to the g_asdMemory.table pool. */
+static __inline void releaseNode(AsdVramBlockA *node)
 {
-    node->allocated = 0;
-    node->address = 0;
+    node->poolId = 0;
+    node->addr = 0;
     node->size = 0;
-    node->previous = NULL;
+    node->prev = NULL;
     node->next = NULL;
-    ++g_asdMemory.pool->available;
+    ++g_asdMemory.table->count; /* retail counts up here as well as on taking a descriptor */
 }
 
-static __inline void mergeNext(VramFreeListA *list, VramFreeNodeA *block)
+static __inline void mergeNext(AsdVramBlockListA *list, AsdVramBlockA *block)
 {
     if (block != NULL) {
-        VramFreeNodeA *next = block->next;
-        if (next != NULL && block->address + block->size == next->address) {
+        AsdVramBlockA *next = block->next;
+        if (next != NULL && block->addr + block->size == next->addr) {
             block->size += next->size;
             unlinkBlock(list, next);
             releaseNode(next);
@@ -66,11 +45,11 @@ static __inline void mergeNext(VramFreeListA *list, VramFreeNodeA *block)
     }
 }
 
-static __inline VramFreeNodeA *findBlock(VramFreeListA *list, u32 address)
+static __inline AsdVramBlockA *findBlock(AsdVramBlockListA *list, u32 address)
 {
-    VramFreeNodeA *block = list->first;
+    AsdVramBlockA *block = list->head;
     while (block != NULL) {
-        if (block->address == address)
+        if (block->addr == address)
             return block;
         block = block->next;
     }
@@ -78,13 +57,13 @@ static __inline VramFreeNodeA *findBlock(VramFreeListA *list, u32 address)
 }
 
 // Return a used VRAM run to the sorted free list and coalesce adjacent runs.
-void asdVramHeapFree(VramHeapStateA *heap, u32 address)
+void asdVramHeapFree(AsdVramHeapA *heap, u32 address)
 {
-    VramFreeNodeA *block = findBlock(&heap->used, address);
+    AsdVramBlockA *block = findBlock(&heap->used, address);
     unlinkBlock(&heap->used, block);
     heap->freeBytes += block->size;
-    FUN_0019c920(&heap->free, block);
+    asdVramBlockListInsert(&heap->free, block);
     mergeNext(&heap->free, block);
-    mergeNext(&heap->free, block->previous);
+    mergeNext(&heap->free, block->prev);
 }
 }

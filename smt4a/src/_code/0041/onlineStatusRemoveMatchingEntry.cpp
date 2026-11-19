@@ -1,4 +1,5 @@
 /* NON_MATCHING: string temporary frames, list cursor allocation and erase-loop guards differ; -O2 candidate. */
+#include <stdio.h>
 #include "shard/W4_Match4_Obj559ecc.h"
 
 struct OnlineKey { u32 words[3]; };
@@ -39,7 +40,6 @@ extern "C" {
 void _ZN18OnlineResultRecordaSERKS_(OnlineKey *, const OnlineKey *);
 s32 _ZNK18OnlineResultRecord7isValidEv(const OnlineKey *);
 u64 FUN_004311c0(u32);
-s32 textFormatBuffer(char *, const char *, ...);
 s32 strEqualsNullSafe(const char *, const char *);
 void FUN_00117bc8(OnlineStatusEntry *, const OnlineStatusEntry *);
 void _ZN9Obj557c908setStateEj(OnlineStatusOwner *, s32);
@@ -54,7 +54,7 @@ void onlineStatusRemoveMatchingEntry(OnlineStatusOwner *owner, const OnlineStatu
     }
     u64 value = FUN_004311c0(0x19a2);
     char buffer[24] = {0};
-    textFormatBuffer(buffer, "%llu", value);
+    sprintf(buffer, "%llu", value);
     for (OnlineStatusEntry *entry = owner->begin; entry != owner->end; ++entry) {
         if (!entry->id)
             continue;

@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046b18c` (_code @ 0x46b18c, 0x834 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int libc_strcat(...);
 int textExpandGlyphsToBuffer(unsigned char [64], unsigned char [136], int);
 int sysPlaySe(...);
@@ -22,7 +22,7 @@ int sysMemClear(unsigned int *, int);
 int buttonHelpSetSelectedId(int);
 int messageSetIndexedFlag(unsigned int, unsigned int);
 int modelPlayClip(...);
-int pickObjStart(unsigned int *, unsigned char *);
+int pickObjStart(unsigned int *, unsigned char *); // declcheck: local (romwright prototype; its types do not fit classes/Obj5333c0.h: including it fails to compile)
 int FUN_0046a278(unsigned int *, unsigned int);
 int candidateGetPreferredValue(...);
 
@@ -35,7 +35,6 @@ extern unsigned char LAB_0046b4e0; /* 0x46b4e0 */
 extern unsigned char LAB_0046b8f0; /* 0x46b8f0 */
 extern unsigned char LAB_0046b910; /* 0x46b910 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: textExpandGlyphsToBuffer. */
 /* Supplied declaration required: sysPlaySe. */
@@ -206,8 +205,8 @@ void FUN_0046b18c(unsigned int *param_1)
   case 2:
     temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
-    textFormatBuffer(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
-    textFormatBuffer(temp_v8,&LAB_0046b910,temp_v0);
+    sprintf((char *)temp_v7,(const char *)&LAB_0046b8f0,temp_v0,temp_v0);
+    sprintf((char *)temp_v8,(const char *)&LAB_0046b910,temp_v0);
     asdLoadFileAsyncSimple(temp_v7,param_1 + 0xa7,0);
     asdLoadFileAsyncSimple(temp_v8,param_1 + 0xa8,0);
     param_1[2] = param_1[2] + 1;
@@ -279,8 +278,8 @@ void FUN_0046b18c(unsigned int *param_1)
     sysPlaySe(0xa4);
     temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
-    textFormatBuffer(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
-    textFormatBuffer(temp_v8,&LAB_0046b910,temp_v0);
+    sprintf((char *)temp_v7,(const char *)&LAB_0046b8f0,temp_v0,temp_v0);
+    sprintf((char *)temp_v8,(const char *)&LAB_0046b910,temp_v0);
     asdLoadFileAsyncSimple(temp_v7,param_1 + 0xa7,0);
     asdLoadFileAsyncSimple(temp_v8,param_1 + 0xa8,0);
     *param_1 = *param_1 | 0x100;

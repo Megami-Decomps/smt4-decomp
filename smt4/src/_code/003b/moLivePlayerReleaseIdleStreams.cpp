@@ -28,10 +28,8 @@ struct IdleStreamPlayer {
 extern "C" void moLivePlayerReleaseIdleStreams(IdleStreamPlayer *player)
 {
     ObjectHandleMap::iterator it = player->streams.begin();
-    ObjectHandleMap::iterator current;
     while (it != player->streams.end()) {
-        current = it;
-        it++;
+        ObjectHandleMap::iterator current = it++;
         IdleStream *stream = static_cast<IdleStreamEntry *>(current->second.object)->stream;
         if (stream->active != 0 || stream->queued != 0) {
             stream->active = 0;

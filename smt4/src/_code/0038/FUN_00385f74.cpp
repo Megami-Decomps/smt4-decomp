@@ -139,7 +139,7 @@ typedef struct {
 
 extern unsigned char compareU16Ascending; /* 0x14147c */
 extern unsigned char compareRecordKey; /* 0x151b78 */
-extern unsigned char FUN_00151b88; /* 0x151b88 */
+extern unsigned char skillRecordCompareId; /* 0x151b88 */
 extern unsigned char FUN_00385b64; /* 0x385b64 */
 extern unsigned char dataCompareUnsignedHalfwordKeys; /* 0x385b74 */
 extern unsigned char FUN_003876b0; /* 0x3876b0 */
@@ -1031,7 +1031,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
     FUN_002b7bca(param_1->field_0x430,param_1->field_0x42c,0x18,&compareU16Ascending);
   }
   if (param_1->field_0x434 != 0) {
-    FUN_002b7bca(param_1->field_0x438,param_1->field_0x434,0x68,&FUN_00151b88);
+    FUN_002b7bca(param_1->field_0x438,param_1->field_0x434,0x68,&skillRecordCompareId);
   }
   if (param_1->field_0x43c != 0) {
     FUN_002b7bca(param_1->field_0x440,param_1->field_0x43c,0x3c,&compareRecordKey);

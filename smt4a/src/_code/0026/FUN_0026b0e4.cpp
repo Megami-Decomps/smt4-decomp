@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026b0e4` (_code @ 0x26b0e4, 0x10ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -13,7 +14,6 @@ extern "C" {
 int FUN_00164168(...);
 void FUN_00289418(int x, int y, float alpha);
 
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
@@ -50,7 +50,6 @@ extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164168. */
@@ -449,7 +448,7 @@ LAB_0026b644:
     if (*(short *)(temp_v24 + 0x4a) < 1) {
       texDrawCompositeSprite(2,0x12,0x1b,temp_v0,temp_v1,0xdd);
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x544));
-      textFormatBuffer(&temp_v17,&DAT_00536b70);
+      sprintf((char *)&temp_v17,(const char *)&DAT_00536b70);
       ppuVar10 = &temp_v17;
       fontMeasureLineAdvance(ppuVar10,2);
       VectorSignedToFloat(temp_v0 + (int)*(short *)(temp_v11 + 8) +

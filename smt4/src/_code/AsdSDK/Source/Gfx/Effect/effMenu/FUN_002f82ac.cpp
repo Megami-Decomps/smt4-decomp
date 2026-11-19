@@ -1,4 +1,5 @@
 /* NON_MATCHING: rewritten from the raw draft (effect-editor file browser step); callee argument lists follow the draft's intent and the result is not compared with retail beyond compiling. */
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 
 struct AsdTexture;
@@ -35,7 +36,6 @@ AsdTexture *textureCreateFromImage(const void *image);
 void asdMemFree(void *memory);
 void *spriteGroupCreateFromFile(const void *file);
 void handleBlockRefDrop(void **reference);
-s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_00282780(u32 x, u32 y, u32 width, u32 height);
 void FUN_002826d4(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 flags);
 extern EffMenuLists DAT_004ea7e0;
@@ -81,9 +81,9 @@ static __inline void browserEntryPath(EffMenuBrowser *menu, EffMenuTextNode *ent
 {
     if (entry != NULL) {
         if (menu->source->unk04 != 0) {
-            textFormatBuffer(path, "%s%s", menu->source->unk04, entry->name);
+            __2sprintf(path, "%s%s", menu->source->unk04, entry->name);
         } else {
-            textFormatBuffer(path, DAT_004102f0, entry->name);
+            __2sprintf(path, DAT_004102f0, entry->name);
         }
     }
 }

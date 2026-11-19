@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "camp/ScriptPanelResources.h"
 #include "ui/UiControl.h"
 #include "camp/Camp.h"
@@ -205,10 +206,10 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
 
             work->talkWork = new MikadoTalkWorkA;
             soundResetSpatialState(work->talkWork);
-            textFormatBuffer(path, "%s%s", g_mikadoPathPrefix, work->panel.record->image);
+            sprintf(path, "%s%s", g_mikadoPathPrefix, work->panel.record->image);
             if ((work->panel.record->altFlagA != 0 && gameFlagIsSet(work->panel.record->altFlagA) != 0) ||
                 (work->panel.record->altFlagB != 0 && gameFlagIsSet(work->panel.record->altFlagB) != 0)) {
-                textFormatBuffer(altPath, "%s%s", g_mikadoPathPrefix, work->panel.record->altImage);
+                sprintf(altPath, "%s%s", g_mikadoPathPrefix, work->panel.record->altImage);
                 FUN_00407ab0(work->talkWork, path, altPath);
             } else {
                 FUN_00407ab0(work->talkWork, path, NULL);
@@ -221,7 +222,7 @@ void mikadoCampVisitUpdate(CampScriptPanelResources *work)
 
                 if (names != NULL) {
                     for (s32 i = 0; i < dataTable33TypeCount(table33, work->panel.record->modelSet); i++) {
-                        textFormatBuffer(path, "%s%s.bam", g_mikadoPathPrefix, names);
+                        sprintf(path, "%s%s.bam", g_mikadoPathPrefix, names);
                         moveCameraCtrlCreateEntry(work->talkWork, path, i);
                         names += 0x20;
                     }

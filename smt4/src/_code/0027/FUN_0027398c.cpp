@@ -1,4 +1,5 @@
 /* NON_MATCHING: the unused event/e%03d/e%03d.bf/.mbm path buffers are restored; only the state-4 store sharing, saved-register numbering (r5/r6) and frame setup order differ. */
+#include <stdio.h>
 #include "addon/AocMain.h"
 #include "quest_center/QuestRecord.h"
 #include "quest_center/QuestRuntime.h"
@@ -23,7 +24,6 @@ s32 aocPackageGrantsItem(AocSystem *system, u16 id, u32 kind);
 void aocQueueType07(AocSystem *system, u32 id, void **output, u32 flags);
 void aocQueueType08(AocSystem *system, u32 id, void **output, u32 flags);
 void buttonHelpSetPreset(u32 preset);
-void textFormatBuffer(char *output, const char *format, ...);
 u32 tableGroupFindEntryIndex(void *commands, const char *entry);
 void scrScriptProcessStartEntry(ScriptProcess *script, u32 entry);
 
@@ -40,8 +40,8 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
         char commandPath[128];
         char messagePath[128];
         u16 package = definition->event.package;
-        textFormatBuffer(commandPath, "event/e%03d/e%03d.bf", package, package);
-        textFormatBuffer(messagePath, "event/e%03d/e%03d.mbm", package, package);
+        sprintf(commandPath, "event/e%03d/e%03d.bf", package, package);
+        sprintf(messagePath, "event/e%03d/e%03d.mbm", package, package);
         if (aocPackageGrantsItem(g_aocSystem, definition->event.package, 1)) {
             aocQueueType07(g_aocSystem, package, &work->commands, 0);
             aocQueueType08(g_aocSystem, package, &work->messages, 0);
@@ -63,7 +63,7 @@ u32 FUN_0027398c(QuestAddonScriptWork *work)
         work->script = scrScriptProcessCreate(work->commands, work->messages);
         work->script->mode = 2;
         char entryName[128];
-        textFormatBuffer(entryName, "e%03d_%02d", definition->event.package, definition->event.entry);
+        sprintf(entryName, "e%03d_%02d", definition->event.package, definition->event.entry);
         u32 entry = tableGroupFindEntryIndex(work->commands, entryName);
         scrScriptProcessStartEntry(work->script, entry);
         work->state = 2;

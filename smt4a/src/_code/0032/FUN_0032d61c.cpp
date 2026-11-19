@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032d61c` (_code @ 0x32d644, 0xbb8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
@@ -10,7 +11,6 @@ extern "C" {
 int FUN_00169a1c(...);
 int nkmBaseGetRecord(void);
 
-int textFormatBuffer(...);
 int uiObjectSetColorRgb(...);
 int renderCtxSelectDisplayAreaForStereoMode(int);
 int texDrawCompositeSprite(...);
@@ -47,7 +47,6 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -208,10 +207,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       texDrawTableEntryAtStoredOrigin(2,0x2e,0xe,param_4 + temp_v5,param_5,0x73);
       temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x10));
       if (*(unsigned short *)(param_2 + 0x36) >= 10) {
-        textFormatBuffer(temp_v19,"%d");
+        sprintf((char *)temp_v19,"%d");
       }
       else {
-        textFormatBuffer(temp_v19," %d");
+        sprintf((char *)temp_v19," %d");
       }
       drawSetColorFromRGBA8(0xffffff00);
       FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + param_4 + temp_v5,*(short *)(temp_v7 + 10) + param_5,0
@@ -312,10 +311,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
                    param_5 + temp_v2,0x74);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x27));
       if ((*(short *)(param_2 + 0x62) != 0) && (*(short *)(param_2 + 0x34) != 0)) {
-        textFormatBuffer(temp_v19,"%d");
+        sprintf((char *)temp_v19,"%d");
       }
       else {
-        textFormatBuffer(temp_v19,"--");
+        sprintf((char *)temp_v19,"--");
       }
       drawSetColorFromRGBA8(0x32323200);
       param_4 = (int)temp_v13 + param_4;
@@ -341,7 +340,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
           FUN_00169a1c(*(unsigned short *)(temp_v10 + 0x9c),*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x105));
-          textFormatBuffer(temp_v19,"%d",*(unsigned short *)(param_2 + 0x3a));
+          sprintf((char *)temp_v19,"%d",*(unsigned short *)(param_2 + 0x3a));
           FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                        temp_v19);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x107));

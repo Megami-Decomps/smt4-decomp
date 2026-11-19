@@ -1,4 +1,5 @@
 /* NON_MATCHING: per-frame step of the lmap intro/exit scene (eases the camera, then a state machine: set up the camera behind the player, wait, hand to the map, and the exit steps that switch back to scene 1 / 0x10); written from the decompilation, the arguments of mathDistanceBetweenPoints / mathPositionHeadingDegrees / the trig helpers are not recovered (called with the angle where one is visible) and the u32 copies of the float targets are kept */
+#include "map/LmapPlayerModel.h"
 #include "common.h"
 #include "map/LmapGlobals.h"
 #include "util/TrigF32.h"
@@ -30,7 +31,6 @@ extern "C" {
 void mapIfActivateRecord(s32 active, u32 record);
 void lmapSetSceneId(u32 scene);
 void FUN_0027fc14(s32 mode);
-void mapDepartSpawnPlayerEffect(s32 mode);
 void mapSelectContainingRegions(void);
 void FUN_002804ec(f32 *position);
 void mapEaseSceneHeading(void);

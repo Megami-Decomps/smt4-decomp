@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029a284` (_code @ 0x29a284, 0x688 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
@@ -12,7 +13,6 @@ int skillDataFindById(void);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
@@ -48,7 +48,6 @@ extern int listCursorGetRowIfUnblocked(void);
 extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -157,15 +156,15 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x42b));
   if ((param_7 == 0) || (param_3 != 0)) {
     if (param_6 != 0) {
-      textFormatBuffer(temp_v10,&LAB_0029a6cc);
+      sprintf((char *)temp_v10,(const char *)&LAB_0029a6cc);
     }
     else {
       temp_v4 = aocIndexValueOrDefault(param_3);
-      textFormatBuffer(temp_v10,&LAB_0029a710,temp_v4);
+      sprintf((char *)temp_v10,(const char *)&LAB_0029a710,temp_v4);
     }
   }
   else {
-    textFormatBuffer(temp_v10,&LAB_0029a6d8);
+    sprintf((char *)temp_v10,(const char *)&LAB_0029a6d8);
     temp_v5 = 0x5a5a5aff;
   }
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,
@@ -211,7 +210,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     ;
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x52a));
     if (param_3 == 0) {
-      textFormatBuffer(temp_v10,&LAB_0029a918);
+      sprintf((char *)temp_v10,(const char *)&LAB_0029a918);
       FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                    temp_v10);

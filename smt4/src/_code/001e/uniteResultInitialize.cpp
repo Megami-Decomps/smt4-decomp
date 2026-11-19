@@ -4,6 +4,7 @@
 #include "quest_center/qcMain.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers_UiResourceParameters.h"
 #include "common.h"
+#include <stdio.h>
 #include "gamedata/NkmBaseRecord.h"
 #include "shard/W6_W6Match1_Table25Record.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
@@ -148,7 +149,7 @@ void uniteResultInitialize(void)
     work->scriptFile = asdLoadFileSyncDefault("battle/DevilLvUp.bf");
     char path[64];
     const NkmBaseRecord *record = getDevilRecord(work->resultDevil);
-    textFormatBuffer(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_002cdecc((s8)devilRecordGetTone(record))->unk01));
+    sprintf(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_002cdecc((s8)devilRecordGetTone(record))->unk01));
     work->messageFile = asdLoadFileSyncDefault(path);
     work->script = scrScriptProcessCreate(work->scriptFile, work->messageFile);
     drawParameterBlockClear(&work->resources);

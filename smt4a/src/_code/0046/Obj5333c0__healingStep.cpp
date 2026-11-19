@@ -1,13 +1,13 @@
 #include "classes/Obj5333c0.h"
+#include "script/scrScriptProcess.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/PartyMoney.h"
 
 extern "C" {
 void sysPlaySe(s32 id);
-void pickObjStart(void *scene, const char *name);
 void messageSetMode(s32 mode);
 void messageMainSetTargetFlags(s32 flags);
-s32 scrRunOpcodesStub(u32 script);
+
 s32 messageGetChoiceResult(void);
 s32 messageDismissNumericBanner(s32 value);
 const u32 *gameGetSlotTable(void);

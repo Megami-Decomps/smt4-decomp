@@ -1,4 +1,5 @@
 /* NON_MATCHING: only game-state base address reuse across formatting calls differs. */
+#include "runtime/Stdio.h"
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 
@@ -12,7 +13,6 @@ struct MapSceneResourceView {
 };
 extern "C" {
 extern const char DAT_00531b14[], DAT_00531af8[], DAT_00531b50[], DAT_00531b34[];
-s32 textFormatBuffer(char *, const char *, ...);
 void resourceOwnerLoadNamed(ResourceOwner *, const char *);
 s32 FUN_0040af60(ResourceOwner *);
 void FUN_0040afe0(ResourceOwner *, s32, s32);
@@ -23,15 +23,15 @@ void FUN_002bceb0(MapSceneResourceView *scene)
     char environmentPath[128];
     char modelPath[128];
     if (g_gameState.darkZone) {
-        textFormatBuffer(environmentPath, DAT_00531b14, scene->mapId, scene->mapId, scene->areaId);
-        textFormatBuffer(modelPath, DAT_00531af8, scene->mapId, scene->mapId, scene->areaId);
+        __2sprintf(environmentPath, DAT_00531b14, scene->mapId, scene->mapId, scene->areaId);
+        __2sprintf(modelPath, DAT_00531af8, scene->mapId, scene->mapId, scene->areaId);
     }
     if (g_gameState.progressEnabled) {
-        textFormatBuffer(environmentPath, DAT_00531b50, 24, 24, 1);
-        textFormatBuffer(modelPath, DAT_00531b34, 24, 24, 1);
+        __2sprintf(environmentPath, DAT_00531b50, 24, 24, 1);
+        __2sprintf(modelPath, DAT_00531b34, 24, 24, 1);
     } else {
-        textFormatBuffer(environmentPath, DAT_00531b50, scene->mapId, scene->mapId, scene->areaId);
-        textFormatBuffer(modelPath, DAT_00531b34, scene->mapId, scene->mapId, scene->areaId);
+        __2sprintf(environmentPath, DAT_00531b50, scene->mapId, scene->mapId, scene->areaId);
+        __2sprintf(modelPath, DAT_00531b34, scene->mapId, scene->mapId, scene->areaId);
     }
     resourceOwnerLoadNamed(scene->owner, modelPath);
     if (FUN_0040af60(scene->owner)) {

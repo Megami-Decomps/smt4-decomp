@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00288b20` (_code @ 0x288b20, 0x768 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -36,7 +36,6 @@ typedef struct {
 extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -162,15 +161,15 @@ LAB_00288c34:
   }
   if ((param_7 == 0) || (param_3 != 0)) {
     if (param_6 != 0) {
-      textFormatBuffer(temp_v13,"\x81H\x81H\x81H");
+      sprintf((char *)temp_v13,"\x81H\x81H\x81H");
     }
     else {
       temp_v6 = FUN_0014bd84(param_3);
-      textFormatBuffer(temp_v13,"%s",temp_v6);
+      sprintf((char *)temp_v13,"%s",temp_v6);
     }
   }
   else {
-    textFormatBuffer(temp_v13,"\x82m\x82\x85\x82\x97\x81@\x82\x92\x82\x85\x82\x87\x82\x89\x82\x93\x82\x94\x82\x92\x82\x81\x82\x94\x82\x89\x82\x8f\x82\x8e\x81@\x82\x90\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81I");
+    sprintf((char *)temp_v13,"\x82m\x82\x85\x82\x97\x81@\x82\x92\x82\x85\x82\x87\x82\x89\x82\x93\x82\x94\x82\x92\x82\x81\x82\x94\x82\x89\x82\x8f\x82\x8e\x81@\x82\x90\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81I");
     temp_v5 = 0x9b9b9bff;
   }
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,
@@ -226,7 +225,7 @@ LAB_00288c34:
                      "%d",temp_v5);
       }
       else {
-        textFormatBuffer(temp_v13,"---");
+        sprintf((char *)temp_v13,"---");
         FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                      temp_v13);

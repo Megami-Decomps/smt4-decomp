@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00285b58` (_code @ 0x285b58, 0x6a4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "event/2dEvent/2dEventTex.h"
@@ -8,7 +9,6 @@
 
 extern "C" {
 
-int textFormatBuffer(unsigned char [64], unsigned char *);
 int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
@@ -35,7 +35,6 @@ extern unsigned char LAB_00285f14; /* 0x285f14 */
 extern unsigned char LAB_00285f24; /* 0x285f24 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
@@ -88,14 +87,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     texDrawCompositeSprite(2,0x1a,1,param_1,param_2,0x65);
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x8a,param_1,param_2,0x65);
     temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x49);
-    textFormatBuffer(temp_v11,&LAB_00285eec);
+    sprintf((char *)temp_v11,(const char *)&LAB_00285eec);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v11);
     temp_v2 = computeCountLimit();
     if (temp_v2 >= 999) {
       temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x279);
-      textFormatBuffer(temp_v11,&LAB_00285f14);
+      sprintf((char *)temp_v11,(const char *)&LAB_00285f14);
       VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffff57ff,temp_v11);

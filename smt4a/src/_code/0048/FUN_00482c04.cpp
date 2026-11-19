@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "gamedata/MapSaveBlockA.h"
 #include "game/GameStateA.h"
 /* NON_MATCHING: readable rebuild of the nearest-talk-target selection; retail keeps the best distance and id in s/r registers across the dispatch with the sphere test inlined as vsqrt and merges the three pickup branches' common stores, which armcc here schedules differently. */
@@ -43,7 +44,6 @@ struct TalkTargetSet {
 extern "C" {
 
 u8 *gameGetPlayerData(void);
-void textFormatBuffer(char *buffer, const char *format, u32 a, u32 b);
 void FUN_00376fa4(u32 id);
 void sequenceRequestDefer(s32 sequence, u32 arg);
 void soundActorStartOnFreeChannel(u32 id);
@@ -81,7 +81,7 @@ u32 FUN_00482c04(TalkTargetSet *set)
                     if (target->deferred != 0) {
                         g_gameState.scriptPending = 1;
                         g_gameState.scriptId = target->sequence;
-                        textFormatBuffer(g_gameState.scriptName, "%d_%d", target->sequence, target->sequenceArg);
+                        sprintf(g_gameState.scriptName, "%d_%d", target->sequence, target->sequenceArg);
                     } else {
                         sequenceRequestDefer(target->sequence, target->sequenceArg);
                     }

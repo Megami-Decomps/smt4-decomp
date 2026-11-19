@@ -1,3 +1,7 @@
+/* NON_MATCHING: 8 lines, register numbers only: retail loads the 0x2DB4 offset and the current value into r2
+ * (previous address in r1) and keeps them to the tail call; this build swaps r1/r2. The same r1/r2 swap as
+ * the IV twin FUN_001dd930. Passing (reset, 0, current) to FUN_003e416c reproduces it, but that callee takes
+ * no arguments (it reads the area through gameDataBlockGetArea2D68), so the match was a one-caller prototype. */
 #include "common.h"
 
 struct ResetState {
@@ -21,7 +25,7 @@ struct GameDataBlocks {
 
 extern "C" {
 extern GameDataBlocks g_gameDataBlocks;
-void FUN_003e416c(ResetState* state, u32 zero, u32 savedValue);
+void FUN_003e416c(void);
 
 /* Zeroes the reset state's words and its halfword. */
 static __inline void resetStateClear(ResetState *state)
@@ -33,13 +37,12 @@ static __inline void resetStateClear(ResetState *state)
     state->unk10 = 0;
 }
 
-/* Remembers the current value as the previous one, clears the reset state and restarts it with that value. */
+/* Remembers the current value as the previous one, clears the reset state and refills it (FUN_003e416c). */
 void FUN_00284fdc(void)
 {
     GameData* data = g_gameDataBlocks.data;
-    u32 savedValue = data->currentValue;
-    data->previousValue = savedValue;
+    data->previousValue = data->currentValue;
     resetStateClear(&data->reset);
-    FUN_003e416c(&data->reset, 0, savedValue);
+    FUN_003e416c();
 }
 }

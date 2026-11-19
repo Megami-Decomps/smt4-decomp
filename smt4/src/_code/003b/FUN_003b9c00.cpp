@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail inlines the availability check three times with separate stack buffers, keeps the script and group in stack slots and holds the three scan results in r8/r9/fp; this version shares one helper, so register allocation and frame size differ. The scan logic and calls are the same. */
 #include "common.h"
+#include <stdio.h>
 
 namespace {
 /* A row of the list window (the entry type, its script name and the two flags gating it). */
@@ -41,7 +42,6 @@ struct ListWindow {
 extern "C" {
 extern s32 DAT_0044cfb8;                 /* set by the script when it rejects the entry */
 ListEntry *FUN_0022b238(void *list, s32 index);
-void textFormatBuffer(char *buffer, const char *format, ...);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
 s32 scrRunOpcodesStub(u32 script);
@@ -60,7 +60,7 @@ static s32 entryIsAvailable(ListWindow *window, ListEntry *entry)
     u32 script = window->script;
     u32 group = window->scriptGroup;
     DAT_0044cfb8 = 0;
-    textFormatBuffer(name, "%s", entry->name);
+    sprintf(name, "%s", entry->name);
     scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
     while (scrRunOpcodesStub(script) != 2) {
     }

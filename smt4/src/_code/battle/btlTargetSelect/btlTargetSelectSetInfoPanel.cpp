@@ -1,4 +1,5 @@
 /* NON_MATCHING: option argument reload/scratch allocation and two-float projection copies differ; -O2 candidate. */
+#include <stdio.h>
 #include "battle/btlTargetSelect.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "code/Code0027.h"
@@ -36,7 +37,6 @@ extern "C" {
 extern BtlTargetSelect *g_btlTargetSelect;
 const char *demonGetRaceLabel(u32, u32);
 u8 FUN_0029e9cc(u32);
-void textFormatBuffer(char *, const char *, ...);
 void FUN_002630e0(TargetInfoProjection *, u32, u32, const TargetInfoPosition *);
 
 void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32 option0, u32 option1,
@@ -45,9 +45,9 @@ void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32
     BtlTargetSelect *selection = g_btlTargetSelect;
     const NkmEnemyRecord *definition = nkmEnemyFindById(id);
     const char *name = reinterpret_cast<const char *>(dataTable01FindByIdWithAoc(id));
-    textFormatBuffer(targetInfoPanel(selection)->name, "%s", name);
+    sprintf(targetInfoPanel(selection)->name, "%s", name);
     const char *category = demonGetRaceLabel(id, 0);
-    textFormatBuffer(targetInfoPanel(selection)->categoryName, "%s", category);
+    sprintf(targetInfoPanel(selection)->categoryName, "%s", category);
     targetInfoPanel(selection)->level = FUN_0029e9cc(id);
     targetInfoPanel(selection)->category = definition->level;
     for (u32 i = 0; i < 8; ++i)

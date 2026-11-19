@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e9990` (_code @ 0x1e9990, 0xf4c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "game/GameState.h"
 #include "romwright_types.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -90,7 +91,6 @@ extern unsigned int *g_titleMain; /* 0x44e300 */
 extern unsigned char DAT_0049f950; /* 0x49f950 */
 extern unsigned int DAT_0049fc74; /* 0x49fc74 */
 extern unsigned int DAT_0049fc88; /* 0x49fc88 */
-extern int DAT_0049fd14; /* 0x49fd14 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019213c. */
@@ -625,18 +625,18 @@ LAB_001ea4cc:
         else {
           FUN_0026fe0c();
           FUN_0026faa4();
-          if (DAT_0049fd14 >= 200) {
-            temp_v10 = (unsigned int *)(DAT_0049fd14 - 200);
+          if (g_mapSelection.selection.group >= 200) {
+            temp_v10 = (unsigned int *)(g_mapSelection.selection.group - 200);
             temp_v6 = 4;
             temp_v5 = 0xe;
           }
           else {
-            if (DAT_0049fd14 < 100) {
+            if (g_mapSelection.selection.group < 100) {
               DAT_0049f950 = 1;
             }
             temp_v6 = 0;
             ppuVar11 = (unsigned int **)0x0;
-            if (DAT_0049fd14 < 100) {
+            if (g_mapSelection.selection.group < 100) {
               temp_v5 = 6;
             }
             else {

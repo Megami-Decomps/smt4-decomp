@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfc24` (_code @ 0x2bfc24, 0x178 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
@@ -8,7 +9,6 @@ extern "C" {
 int FUN_00126468(void);
 int asdLoadFileAsyncDefault(unsigned char [64], int, int, unsigned char *, unsigned char *);
 int libc_strcat(unsigned char [64], unsigned char [72]);
-int textFormatBuffer(...);
 int rt_aeabi_memclr(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -26,7 +26,6 @@ extern signed char DAT_004c581a; /* 0x4c581a */
 /* Supplied declaration required: FUN_00126468. */
 /* Supplied declaration required: asdLoadFileAsyncDefault. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -54,10 +53,10 @@ unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,
      (param_3 == 0)) {
     return 0xffffffff;
   }
-  textFormatBuffer(temp_v3,&LAB_002bfda0);
-  textFormatBuffer(temp_v4,&LAB_002bfdac,param_2);
+  sprintf((char *)temp_v3,(const char *)&LAB_002bfda0);
+  sprintf((char *)temp_v4,(const char *)&LAB_002bfdac,param_2);
   libc_strcat(temp_v3,temp_v4);
-  textFormatBuffer(temp_v2,&LAB_002bfdb4,temp_v3);
+  sprintf((char *)temp_v2,(const char *)&LAB_002bfdb4,temp_v3);
   FUN_00126468();
   temp_v1 = 0;
   do {

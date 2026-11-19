@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f197c` (_code @ 0x2f197c, 0xe38 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -8,7 +9,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int FUN_0014bf3c(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
@@ -74,7 +74,6 @@ extern unsigned char LAB_002f27b4; /* 0x2f27b4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -184,11 +183,11 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
     }
   }
   if (temp_v7 == 0) {
-    textFormatBuffer(temp_v14,&LAB_002f1f30);
+    sprintf((char *)temp_v14,(const char *)&LAB_002f1f30);
   }
   else {
     temp_v4 = FUN_00180114(*puVar6);
-    textFormatBuffer(temp_v14,&LAB_002f1f34,temp_v4);
+    sprintf((char *)temp_v14,(const char *)&LAB_002f1f34,temp_v4);
   }
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
@@ -196,7 +195,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   textDrawString(2,temp_v8,temp_v14);
   temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4e));
   temp_v8 = FUN_0014bf3c(*puVar6,0);
-  textFormatBuffer(temp_v14,&LAB_002f1f34,temp_v8);
+  sprintf((char *)temp_v14,(const char *)&LAB_002f1f34,temp_v8);
   VectorSignedToFloat(*(short *)(temp_v7 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -346,10 +345,10 @@ LAB_002f2034:
       }
       if (*(char *)((int)puVar2 + temp_v1 + 0x5252) != '\0') {
         temp_v8 = FUN_00180114(*psVar10);
-        textFormatBuffer(temp_v14,&LAB_002f1f34,temp_v8);
+        sprintf((char *)temp_v14,(const char *)&LAB_002f1f34,temp_v8);
       }
       else {
-        textFormatBuffer(temp_v14,&LAB_002f27b4);
+        sprintf((char *)temp_v14,(const char *)&LAB_002f27b4);
       }
       VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -359,7 +358,7 @@ LAB_002f2034:
       textDrawString(2,temp_v11,temp_v14,(int)*(short *)(temp_v2 + 8));
       temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x13a));
       temp_v11 = FUN_0014bf3c(*psVar10,0);
-      textFormatBuffer(temp_v14,&LAB_002f24ec,temp_v11);
+      sprintf((char *)temp_v14,(const char *)&LAB_002f24ec,temp_v11);
       puVar11 = temp_v14;
       fontMeasureLineAdvance(puVar11,2);
       VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,

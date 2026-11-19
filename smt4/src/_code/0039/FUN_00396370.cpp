@@ -1,4 +1,5 @@
 /* NON_MATCHING: close: retail loads the target position as x then a y/z vldmia pair and moves r0/-1 after the prologue vpush; built groups the VFP loads differently and uses r0 rather than r1 for the list counters */
+#include <stdio.h>
 #include "gamedata/MapSaveBlock.h"
 #include "map/LmapGlobals.h"
 #include <math.h>
@@ -50,7 +51,6 @@ static __inline f32 mapVectorDistance(const MapVector &a, const MapVector &b)
 extern "C" {
 void FUN_0027d8b4(u16 value);
 void sequenceRequestDefer(s32 id, s32 argument);
-void textFormatBuffer(char *buffer, const char *format, ...);
 
 /* Picks the nearest interactable within 150 units of the camera, runs its talk or event action and
  * removes it from the list. Returns the id of the last one handled, or -1. */
@@ -97,7 +97,7 @@ s32 FUN_00396370(TalkTargetList *list)
                             } else {
                                 g_gameState.event.scriptPending = 1;
                                 g_gameState.event.scriptId = target->sequenceId;
-                                textFormatBuffer(g_gameState.event.scriptName, "e%03d_%02d", target->sequenceId,
+                                sprintf(g_gameState.event.scriptName, "e%03d_%02d", target->sequenceId,
                                                  target->sequenceArgument);
                             }
                         }

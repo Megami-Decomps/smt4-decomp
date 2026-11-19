@@ -1,5 +1,6 @@
 #include "font/TextGlyphEncoding.h"
 #include "map/MapSpawn.h"
+#include <stdio.h>
 #include "addon/QuestScriptLoader.h"
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3e3c` (_code @ 0x1d3e3c, 0x5448 bytes) from smt4_v1.2.0.cxi.
@@ -170,7 +171,6 @@ int FUN_0028527c(int);
 int gameRestoreWorkSave(int);
 int asdLoadFileAsyncSimple(...);
 int FUN_002a09b4(...);
-int textFormatBuffer(...);
 int FUN_002f3694(void);
 int MapIf_Register(unsigned int, int);
 int NaviMain_SetCurrentMap(unsigned int);
@@ -312,7 +312,6 @@ extern unsigned int DAT_0049fc30; /* 0x49fc30 */
 extern signed char DAT_0049fc64; /* 0x49fc64 */
 extern unsigned int DAT_0049fc84; /* 0x49fc84 */
 extern int DAT_0049fc88; /* 0x49fc88 */
-extern int DAT_0049fd14; /* 0x49fd14 */
 extern int DAT_0049fd18; /* 0x49fd18 */
 extern int DAT_0049fd1c; /* 0x49fd1c */
 extern unsigned int DAT_0049fd20; /* 0x49fd20 */
@@ -501,7 +500,7 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: buttonHelpSetPresetDefault. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: textFormatBuffer. */
+/* Supplied declaration required: FUN_002bd158. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: soundPlaySeUnpanned. */
@@ -608,7 +607,7 @@ unsigned int FUN_001d3e3c(void)
     *(unsigned char *)(puVar7 + 5) = 1;
     *(unsigned char *)(puVar7 + 0x266) = 0;
     *(unsigned char *)((int)puVar7 + 0x999) = 0;
-    temp_v6 = DAT_0049fd14;
+    temp_v6 = g_mapSelection.selection.group;
     DAT_0049fb70 = 0x44160000;
     DAT_0049fb74 = 0x41a00000;
     DAT_0049fb78 = 0x3c;
@@ -689,15 +688,15 @@ unsigned int FUN_001d3e3c(void)
       *(unsigned int *)(temp_v6 + 0x4c) = DAT_0049fc30;
       *(unsigned int *)(temp_v6 + 0x50) = temp_v7;
       DAT_0049fc14 = 0;
-      DAT_0049fd14 = 0;
+      g_mapSelection.selection.group = 0;
       mapIfSetMode2();
       puVar7[3] = 2;
       actorApplyAlpha();
       return 0;
     }
-    if (DAT_0049fd14 != -1) {
+    if (g_mapSelection.selection.group != -1) {
       DAT_0049fb9c = 0;
-      puVar7[0x10] = DAT_0049fd14;
+      puVar7[0x10] = g_mapSelection.selection.group;
       DAT_0049f920 = DAT_0049fd18;
       g_gameState.mapId = temp_v6;
       puVar7[0x12] = DAT_0049fd18;
@@ -757,7 +756,7 @@ unsigned int FUN_001d3e3c(void)
   case 2:
     mapMarkVisitedAndUpdateRegionFlags(puVar7[0x10],puVar7[0x12]);
     FUN_002f3694();
-    textFormatBuffer(temp_v29,&LAB_001d47f4,puVar7[0x10] - 100);
+    sprintf((char *)temp_v29,(const char *)&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
     DAT_0049f942 = 0;
     mapSetDepartureIndex(0);
@@ -777,14 +776,14 @@ unsigned int FUN_001d3e3c(void)
     if (g_lmapMainState[0x10] == 100) {
       return 0;
     }
-    textFormatBuffer(temp_v29,&LAB_001d480c,puVar7[0x10] - 100,puVar7[0x10] - 100);
+    sprintf((char *)temp_v29,(const char *)&LAB_001d480c,puVar7[0x10] - 100,puVar7[0x10] - 100);
     asdLoadFileAsyncSimple(temp_v29,puVar7 + 0x2a6,1);
     temp_v6 = 0;
     if (0 < *(int *)(puVar7[0x10] * 4 + 0x446ee8)) {
       do {
         if (puVar7[0x10] != 0x65 || temp_v6 != 3) {
           temp_v15 = temp_v6;
-          textFormatBuffer(temp_v29,&LAB_001d4828,puVar7[0x10] - 100);
+          sprintf((char *)temp_v29,(const char *)&LAB_001d4828,puVar7[0x10] - 100);
           puVar17 = g_lmapMainState;
           if (g_lmapMainState != (unsigned int *)0x0) {
             temp_v7 = asdMdlManagerCreateSecondList(temp_v29,0x1c0);
@@ -927,12 +926,12 @@ unsigned int FUN_001d3e3c(void)
         puVar7[3] = 0x1d;
         puVar7[4] = 0;
         DAT_0049f970 = DAT_0049fa64;
-        textFormatBuffer(&DAT_0049f978,&DAT_0049fa68);
+        sprintf((char *)&DAT_0049f978,(const char *)&DAT_0049fa68);
       }
       else if (DAT_0049fa1a != '\0') {
         DAT_0049fa1a = '\0';
         DAT_0049f934 = '\x01';
-        textFormatBuffer(&DAT_0049f978,&DAT_0049fa20);
+        sprintf((char *)&DAT_0049f978,(const char *)&DAT_0049fa20);
         puVar7[3] = 0x23;
         puVar7[4] = 0;
       }
@@ -1584,7 +1583,7 @@ joined_r0x001d535c:
       temp_v6 = FUN_0027398c(g_aocMain + 0xa8);
       if (temp_v6 != 0) {
         helpResourcesRelease(g_aocMain + 0xa8);
-        if (DAT_0049fd14 >= 0) {
+        if (g_mapSelection.selection.group >= 0) {
           (*(unsigned short *)((unsigned char *)&temp_v15 + 0)) = romwright_piece_1_1((char)g_gameState.mapId - 'd',2);
           temp_v15 = (((unsigned int)(temp_v15) & 0xff000000U) | (((unsigned int)(romwright_piece_1_2((char)DAT_0049f920,(unsigned short)temp_v15)) & 0xffffffU) << 0));
           temp_v15 = romwright_piece_1_3((char)DAT_0049f924,((unsigned int)temp_v15 & 0xffffffU));
@@ -1743,10 +1742,10 @@ joined_r0x001d6448:
     mapDepartSetTarget(0xffffffff,0xffffffff);
     puVar17 = g_lmapMainState;
     messageSetConfirmDisplayMode();
-    textFormatBuffer(temp_v30,"event/e%03d/e%03d.bf",DAT_0049f970,DAT_0049f970);
+    sprintf((char *)temp_v30,"event/e%03d/e%03d.bf",DAT_0049f970,DAT_0049f970);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x279] = temp_v7;
-    textFormatBuffer(temp_v30,"event/e%03d/e%03d.mbm",DAT_0049f970,DAT_0049f970);
+    sprintf((char *)temp_v30,"event/e%03d/e%03d.mbm",DAT_0049f970,DAT_0049f970);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x27a] = temp_v7;
     temp_v6 = puVar17[0x279];
@@ -1780,7 +1779,7 @@ LAB_001d6bd0:
       *(unsigned char *)((int)puVar7 + 10) = 1;
       return 0;
     }
-    if (DAT_0049fd14 == -1) {
+    if (g_mapSelection.selection.group == -1) {
       FUN_00273840(0);
       FUN_002644a8();
       DAT_0049f934 = 0;
@@ -1825,7 +1824,7 @@ LAB_001d6bd0:
       return 0;
     }
     if (DAT_0049f970 != 0) goto LAB_001d6bd0;
-    if (DAT_0049fd14 == -1) {
+    if (g_mapSelection.selection.group == -1) {
       FUN_00273840(0);
       FUN_002644a8();
       DAT_0049f934 = 0;
@@ -1871,7 +1870,7 @@ LAB_001d6bd0:
       return 0;
     }
     if (DAT_0049f970 != 0) goto LAB_001d6bd0;
-    if (DAT_0049fd14 == -1) {
+    if (g_mapSelection.selection.group == -1) {
       buttonHelpSelectMapPreset();
       FUN_002644a8();
       DAT_0049f934 = 0;
@@ -2097,10 +2096,10 @@ LAB_001d6bd0:
     }
     puVar17 = g_lmapMainState;
     messageSetConfirmDisplayMode();
-    textFormatBuffer(temp_v30,"event/e%03d/e%03d.bf",DAT_0049f970,DAT_0049f970);
+    sprintf((char *)temp_v30,"event/e%03d/e%03d.bf",DAT_0049f970,DAT_0049f970);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x279] = temp_v7;
-    textFormatBuffer(temp_v30,"event/e%03d/e%03d.mbm",DAT_0049f970,DAT_0049f970);
+    sprintf((char *)temp_v30,"event/e%03d/e%03d.mbm",DAT_0049f970,DAT_0049f970);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x27a] = temp_v7;
     temp_v6 = puVar17[0x279];
@@ -2122,7 +2121,7 @@ LAB_001d6bd0:
     if (temp_v6 == 0) {
       return 0;
     }
-    if (DAT_0049fd14 == -1) {
+    if (g_mapSelection.selection.group == -1) {
       temp_v6 = FUN_002c2a04(0);
       if (temp_v6 == 3) {
         FUN_002c29d8(0,10,0xff);
@@ -2224,10 +2223,10 @@ LAB_001d6bd0:
     mapDepartSetTarget(0xffffffff,0xffffffff);
     puVar17 = g_lmapMainState;
     messageSetConfirmDisplayMode();
-    textFormatBuffer(temp_v30,&LAB_001d7420,puVar17[0x26f],puVar17[0x26f]);
+    sprintf((char *)temp_v30,(const char *)&LAB_001d7420,puVar17[0x26f],puVar17[0x26f]);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x279] = temp_v7;
-    textFormatBuffer(temp_v30,&LAB_001d7438,puVar17[0x26f],puVar17[0x26f]);
+    sprintf((char *)temp_v30,(const char *)&LAB_001d7438,puVar17[0x26f],puVar17[0x26f]);
     temp_v7 = asdLoadFileSyncDefault(temp_v30);
     puVar17[0x27a] = temp_v7;
     temp_v6 = puVar17[0x279];
@@ -2279,7 +2278,7 @@ LAB_001d6bd0:
     if (temp_v6 != 0) {
       return 0;
     }
-    if (DAT_0049fd14 == -1) {
+    if (g_mapSelection.selection.group == -1) {
       buttonHelpSelectMapPreset();
       temp_v7 = 0xb;
       DAT_0049fb47 = 0;
@@ -2546,7 +2545,7 @@ LAB_001d6bd0:
     puVar7[4] = temp_v4;
     break;
   case 0x40:
-    textFormatBuffer(temp_v29,&LAB_001d47f4,puVar7[0x10] - 100);
+    sprintf((char *)temp_v29,(const char *)&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
     puVar7[3] = puVar7[3] + 1;
     puVar7[4] = 0;
@@ -2555,14 +2554,14 @@ LAB_001d6bd0:
     if (g_lmapMainState[0x10] == 100) {
       return 0;
     }
-    textFormatBuffer(temp_v29,&LAB_001d480c,puVar7[0x10] - 100,puVar7[0x10] - 100);
+    sprintf((char *)temp_v29,(const char *)&LAB_001d480c,puVar7[0x10] - 100,puVar7[0x10] - 100);
     asdLoadFileAsyncSimple(temp_v29,puVar7 + 0x2a6,1);
     temp_v6 = 0;
     if (0 < *(int *)(puVar7[0x10] * 4 + 0x446ee8)) {
       do {
         if (puVar7[0x10] != 0x65 || temp_v6 != 3) {
           temp_v15 = temp_v6;
-          textFormatBuffer(temp_v29,&LAB_001d4828,puVar7[0x10] - 100);
+          sprintf((char *)temp_v29,(const char *)&LAB_001d4828,puVar7[0x10] - 100);
           puVar17 = g_lmapMainState;
           if (g_lmapMainState != (unsigned int *)0x0) {
             temp_v7 = asdMdlManagerCreateSecondList(temp_v29,0x1c0);
@@ -2868,7 +2867,7 @@ LAB_001d6bd0:
     puVar7[3] = temp_v6;
     break;
   case 0x4d:
-    textFormatBuffer(temp_v29,&LAB_001d47f4,puVar7[0x10] - 100);
+    sprintf((char *)temp_v29,(const char *)&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
     FUN_00277b5c(g_gameState.mapId,DAT_0049f920);
     temp_v6 = puVar7[3] + 1;
@@ -2880,14 +2879,14 @@ LAB_001d6bd0:
     if (g_lmapMainState[0x10] == 100) {
       return 0;
     }
-    textFormatBuffer(temp_v29,&LAB_001d480c,puVar7[0x10] - 100,puVar7[0x10] - 100);
+    sprintf((char *)temp_v29,(const char *)&LAB_001d480c,puVar7[0x10] - 100,puVar7[0x10] - 100);
     asdLoadFileAsyncSimple(temp_v29,puVar7 + 0x2a6,1);
     temp_v6 = 0;
     if (0 < *(int *)(puVar7[0x10] * 4 + 0x446ee8)) {
       do {
         if (puVar7[0x10] != 0x65 || temp_v6 != 3) {
           temp_v15 = temp_v6;
-          textFormatBuffer(temp_v29,&LAB_001d4828,puVar7[0x10] - 100);
+          sprintf((char *)temp_v29,(const char *)&LAB_001d4828,puVar7[0x10] - 100);
           puVar17 = g_lmapMainState;
           if (g_lmapMainState != (unsigned int *)0x0) {
             temp_v7 = asdMdlManagerCreateSecondList(temp_v29,0x1c0);
@@ -3073,7 +3072,7 @@ LAB_001d884c:
       pcVar9 = (char *)dataTableGetRecord23();
       mapDepartSetTarget((int)*pcVar9,(int)pcVar9[1],pcVar9[2]);
     }
-    if ((DAT_0049fd14 < 200) && (DAT_0049fd14 >= 100)) {
+    if ((g_mapSelection.selection.group < 200) && (g_mapSelection.selection.group >= 100)) {
       temp_v6 = 0x57;
     }
     else {
@@ -3084,8 +3083,8 @@ LAB_001d884c:
   case 0x57:
     mapStatesReleaseMarks();
     mapCollisionRelease();
-    g_gameState.mapId = DAT_0049fd14;
-    puVar7[0x10] = DAT_0049fd14;
+    g_gameState.mapId = g_mapSelection.selection.group;
+    puVar7[0x10] = g_mapSelection.selection.group;
     DAT_0049f920 = DAT_0049fd18;
     puVar7[0x12] = DAT_0049fd18;
     table23FindRecordByKey(puVar7[0x10],puVar7[0x12],DAT_0049fd1c);
@@ -3413,21 +3412,21 @@ joined_r0x001d8c24:
       temp_v7 = 4;
       puVar14 = &temp_v15;
     }
-    else if (DAT_0049fd14 >= 200) {
-      temp_v15 = DAT_0049fd14 - 200;
+    else if (g_mapSelection.selection.group >= 200) {
+      temp_v15 = g_mapSelection.selection.group - 200;
       temp_v10 = 4;
       temp_v7 = 0xe;
       puVar14 = &temp_v15;
     }
     else {
-      if (DAT_0049fd14 == -1) {
+      if (g_mapSelection.selection.group == -1) {
         jobStop(*g_lmapMainState,0);
         soundChannelStopAll(0xf);
         return 0xffffffff;
       }
       temp_v10 = 0;
       puVar14 = (unsigned int *)0x0;
-      if (DAT_0049fd14 < 100) {
+      if (g_mapSelection.selection.group < 100) {
         temp_v7 = 6;
       }
       else {
@@ -3456,10 +3455,10 @@ LAB_001d46d4:
   scrScriptProcessCreate();
   puVar7[0x26b] = temp_v6;
   *(unsigned int *)(temp_v6 + 0x108) = 3;
-  textFormatBuffer(temp_v29,&LAB_001d4844,puVar7[0x10] - 100);
+  sprintf((char *)temp_v29,(const char *)&LAB_001d4844,puVar7[0x10] - 100);
   temp_v7 = asdLoadFileSyncDefault(temp_v29);
   puVar7[0x26c] = temp_v7;
-  textFormatBuffer(temp_v29,&LAB_001d4858,puVar7[0x10] - 100);
+  sprintf((char *)temp_v29,(const char *)&LAB_001d4858,puVar7[0x10] - 100);
   temp_v7 = asdLoadFileSyncDefault(temp_v29);
   puVar7[0x26d] = temp_v7;
   temp_v6 = puVar7[0x26c];
@@ -3550,7 +3549,7 @@ LAB_001d4774:
   FUN_00277d2c(puVar7[0x10],puVar7[0x12]);
   mapSkyTableLoad(puVar7[0x10]);
   mapEntryTriggerForScene(1);
-  if (DAT_0049fd14 != -1) {
+  if (g_mapSelection.selection.group != -1) {
     mapDepartSetTarget(0xffffffff,0xffffffff);
     mapIfSetMode1();
   }

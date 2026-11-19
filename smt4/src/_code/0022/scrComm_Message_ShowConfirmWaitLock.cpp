@@ -1,4 +1,3 @@
-/* NON_MATCHING: all but the g_messageMain base register match (showMessage helper as in scrComm_Message_ShowConfirmWait): retail loads &g_messageMain into the dead frame result r0 after the compare, this build into r1 before it. */
 #include "ui/MessageMain.h"
 #include "script/ScriptArgs.h"
 
@@ -19,11 +18,11 @@ void scrComm_Message_ShowConfirmWaitLock(void)
 {
     scrCommMessageSetMode(0);
     if (scrGetCommandFrame() == 0) {
-        MessageWindow *panel = g_messageMain.banner;
-        if (panel != 0) {
-            panel->unk030 = 1;
+        if (g_messageMain.banner != NULL) {
+            g_messageMain.banner->unk030 = 1;
         }
-        panel->unk031 = 1;
+        /* retail stores this flag without the null check */
+        g_messageMain.banner->unk031 = 1;
     }
     if (g_messageMain.window != NULL) {
         g_messageMain.window->displayMode = 0x14;

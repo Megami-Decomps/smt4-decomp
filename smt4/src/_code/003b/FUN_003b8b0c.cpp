@@ -1,4 +1,5 @@
-/* NON_MATCHING: one instruction is scheduled differently: retail sets the NULL register (mov r7, #0) between the two adds that form &work->firstProcess. */
+/* NON_MATCHING: one instruction is scheduled differently: retail sets the NULL register (mov r7, #0) between the two adds that form &work->firstProcess.
+ * A copy of the parameter into a local gives IDENTICAL; not kept (a meaningless temporary; the twin takes its work directly). */
 #include "camp/CampScriptCleanup.h"
 #include "map/mapDepart.h"
 #include "camp/Camp.h"

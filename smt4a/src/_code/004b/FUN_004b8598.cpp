@@ -1,5 +1,5 @@
-/* NON_MATCHING: prologue order only - retail schedules `sub sp` after `ldr r1,[r0,#144]; mov r7,r0`, armcc emits it right after the push */
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
 
@@ -47,7 +47,6 @@ typedef struct MikadoPanel {
 } MikadoPanel;
 
 extern const char g_mikadoPathPrefix[];
-extern int textFormatBuffer(u8 *destination, const char *format, ...);
 extern int gameFlagIsSet(s32 flag);
 extern int placeWinStartText(u8 *name);
 extern void moveCameraCtrlCreateEntry(u32 handle, u8 *path, s32 index);
@@ -80,10 +79,10 @@ void FUN_004b8598(MikadoPanel *panel)
             u8 scratch[8];
 
             panel->cacheLoaded = 1;
-            textFormatBuffer(path, "%s%s", g_mikadoPathPrefix, panel->entry->image);
+            sprintf((char *)path, "%s%s", g_mikadoPathPrefix, panel->entry->image);
             if ((panel->entry->altFlagA != 0 && gameFlagIsSet(panel->entry->altFlagA) != 0) ||
                 (panel->entry->altFlagB != 0 && gameFlagIsSet(panel->entry->altFlagB) != 0)) {
-                textFormatBuffer(altPath, "%s%s", g_mikadoPathPrefix, panel->entry->altImage);
+                sprintf((char *)altPath, "%s%s", g_mikadoPathPrefix, panel->entry->altImage);
                 FUN_00407ab0(panel->cacheHandle, path, altPath);
             } else {
                 FUN_00407ab0(panel->cacheHandle, path, NULL);
@@ -95,7 +94,7 @@ void FUN_004b8598(MikadoPanel *panel)
                 typeEntries = (u8 *)dataTable33Entries(scratch, panel->entry->tableType);
                 if (typeEntries != NULL) {
                     for (i = 0; i < dataTable33TypeCount(scratch, panel->entry->tableType); i++) {
-                        textFormatBuffer(path, "%s%s.bam", g_mikadoPathPrefix, typeEntries);
+                        sprintf((char *)path, "%s%s.bam", g_mikadoPathPrefix, typeEntries);
                         moveCameraCtrlCreateEntry(panel->cacheHandle, path, i);
                         typeEntries += 0x20;
                     }

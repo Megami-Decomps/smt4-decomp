@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -40,7 +41,7 @@ extern "C" void titleDbgBgCreate()
     TitleDebugBackground *background = g_titleDbgBg;
     TitleDebugText *text = &g_titleDbgBg->text;
     text->mode = 0;
-    textFormatBuffer(text->display, "%s %s", s_buildDate, s_buildTime);
+    sprintf(text->display, "%s %s", s_buildDate, s_buildTime);
     background->freeOnEnd = 0;
     background->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TBG C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(taskRunInitializationState), reinterpret_cast<AsdProcFunc>(titleDbgBgFree), 0);
     taskCreateDraw("TBG U", 0x75, 0, 0, titleDbgBgDraw, 0, 0, background->job);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027e0d8` (_code @ 0x27e0d8, 0x1cd0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 #include "gamedata/GameFlags.h"
@@ -60,7 +61,6 @@ int linkHolderApplyFirst(...);
 int slotTargetApplyActiveValue(...);
 int linkHolderSetFlag(...);
 
-int textFormatBuffer(...);
 int asdCameraInitializeDefaults(...);
 int FUN_0013cab8(...);
 int padQueryLogicalKey(...);
@@ -158,7 +158,6 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
@@ -583,7 +582,7 @@ unsigned int FUN_0027e0d8(void)
           break;
         }
         FUN_003870a8(puVar3);
-        textFormatBuffer(temp_v12,&DAT_00526210,
+        sprintf((char *)temp_v12,(const char *)&DAT_00526210,
                      s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
         placeWinStartText(temp_v12);
         puVar3[4] = 4;
@@ -864,7 +863,7 @@ LAB_0027edcc:
     if (temp_v7 != 0) break;
     if (*(char *)(puVar3 + 0x15c) == '\0') {
       if (puVar3[0x15b] == 0x56) {
-        textFormatBuffer(temp_v12,&DAT_00526210,
+        sprintf((char *)temp_v12,(const char *)&DAT_00526210,
                      s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
         placeWinStartText(temp_v12);
         if (*(char *)(puVar3 + 0x15c) != '\0') {
@@ -1119,7 +1118,7 @@ LAB_0027edcc:
     temp_v7 = scrRunOpcodesStub(puVar3[10]);
     if (temp_v7 != 2) break;
     FUN_003870a8(puVar3);
-    textFormatBuffer(temp_v12,&DAT_00526210,
+    sprintf((char *)temp_v12,(const char *)&DAT_00526210,
                  s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
     placeWinStartText(temp_v12);
     puVar3[4] = 4;

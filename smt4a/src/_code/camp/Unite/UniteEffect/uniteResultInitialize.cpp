@@ -6,6 +6,7 @@
 #include "ui/ParamsClearPacket.h"
 #include "script/scrScriptProcess.h"
 #include "common.h"
+#include <stdio.h>
 #include "gamedata/NkmBaseRecordA.h"
 #include "shard/W6_W6Match1_Table25Record.h"
 #include "classes/Obj557af8.h"
@@ -178,7 +179,7 @@ void uniteResultInitialize(void)
     work->scriptFile = reinterpret_cast<u32>(asdLoadFileSyncDefault("battle/DevilLvUp.bf"));
     char path[64];
     const NkmBaseRecordA *record = getDevilRecord(work->resultDevil);
-    textFormatBuffer(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_003316b4((s8)devilRecordGetTone(record))->unk01));
+    sprintf(path, "battle/DevilMsg/%s.mbm", reinterpret_cast<const char *>(FUN_003316b4((s8)devilRecordGetTone(record))->unk01));
     work->messageFile = reinterpret_cast<u32>(asdLoadFileSyncDefault(path));
     work->script = reinterpret_cast<u32>(scrScriptProcessCreate(reinterpret_cast<void *>(work->scriptFile), reinterpret_cast<void *>(work->messageFile)));
     paramsClearPacket(&work->resources);

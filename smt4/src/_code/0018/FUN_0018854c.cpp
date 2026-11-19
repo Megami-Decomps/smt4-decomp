@@ -21,7 +21,7 @@ int FUN_002992e0(...);
 int playerRecalcStatsFromEquipment(...);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int objectPartRunUnlessLocked(...);
+int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int buttonHelpSetText(...);
 int buttonHelpSetPreset(...);
 int soundPlaySeUnpanned(...);
@@ -87,7 +87,7 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: sortMenuCreate. */
 /* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-extern int FUN_0029e958(int);
+extern int FUN_0029e958(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 /* Supplied declaration required: buttonHelpSetText. */
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(int);

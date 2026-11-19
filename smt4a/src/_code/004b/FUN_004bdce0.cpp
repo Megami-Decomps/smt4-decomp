@@ -1,4 +1,5 @@
 /* NON_MATCHING: Saved float registers, prologue scheduling and centered-coordinate load/add ordering differ. */
+#include "runtime/Stdio.h"
 #include "shard/Shard0037.h"
 #include "shard/S3UiLookup.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -13,7 +14,6 @@ struct BattleRosterLabelMode {
 extern "C" {
 extern const char DAT_0052d838[];
 BattleRosterRecordA *partyGetSlot(u32 id);
-void textFormatBuffer(char *output, const char *format, ...);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
 
 /* Centers each active roster member's label in its layout slot, dimming unselected members in mode two. */
@@ -30,7 +30,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
                 labelAlpha = dimAlpha;
             }
             char text[64];
-            textFormatBuffer(text, DAT_0052d838, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
+            __2sprintf(text, DAT_0052d838, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
             TextureTableEntryIV *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
             s32 width = fontMeasureLineAdvance(text, 1);
             s32 offset = (placement->placement->width - width) / 2;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003909d0` (_code @ 0x3909d0, 0x628 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0023_VariantB.h"
@@ -11,7 +12,6 @@ int FUN_002347b8(...);
 int texTableRecordCallWithParams(...);
 int FUN_002b7d30(int, int);
 int textDrawString(...);
-int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderCtxSelectTexture(int, unsigned int);
@@ -46,7 +46,6 @@ extern int aocIsEntryIndexValid(int, int);
 /* Supplied declaration required: texTableRecordCallWithParams. */
 /* Supplied declaration required: FUN_002b7d30. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -115,10 +114,10 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = temp_v5;
       FUN_0023478c(temp_v5,0xb);
       FUN_002347b8(temp_v5,temp_v4,temp_v13);
-      textFormatBuffer(temp_v12,"%s",temp_v13);
+      sprintf((char *)temp_v12,"%s",temp_v13);
     }
     else {
-      textFormatBuffer(temp_v12,"%ls",temp_v3);
+      sprintf((char *)temp_v12,"%ls",temp_v3);
     }
     if (*(char *)(temp_v3 + 0x9b3) == '\0') {
       temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x3a,0x61));
@@ -147,7 +146,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
           temp_v4 = temp_v5;
           FUN_0023478c(temp_v5,0x69);
           FUN_002347b8(temp_v5,temp_v4,temp_v13);
-          textFormatBuffer(temp_v12,"%s",temp_v13);
+          sprintf((char *)temp_v12,"%s",temp_v13);
         }
         else {
           temp_v13[0] = 0;
@@ -184,7 +183,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
           psVar7[-2] = 0x4481;
           *psVar7 = psVar7[-1];
           psVar7[-1] = temp_v1;
-          textFormatBuffer(temp_v12,"%ls%s%ls",temp_v5 + 0x5b8,temp_v13,temp_v5 + 0x5f8);
+          sprintf((char *)temp_v12,"%ls%s%ls",temp_v5 + 0x5b8,temp_v13,temp_v5 + 0x5f8);
         }
         temp_v5 = curveEvaluateStandard(temp_v12,2);
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x3a,0x68));

@@ -1,3 +1,4 @@
+#include "camp/CampMenuEntry.h"
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -17,7 +18,6 @@ extern "C" {
 s32 guestWinRequestClose(void);
 s32 FUN_0028fc60(u32 id);
 void campReleaseScreenTouchRegions(GridNavigation *list, s32 flag);
-s32 dataTable15GetUnlockedEntryId(s32 category, u32 part);
 void FUN_00299900(s32 arg);
 void messageDismissNumericBanner(s32 arg);
 void FUN_0029e328(s32 id);
@@ -29,7 +29,6 @@ s32 FUN_0029efd8(GridNavigation *list, s32 flag);
 s32 uiScrollHandleActionsOrTouch(GridNavigation *list, const TextureTableEntryIV *touchArea, s16 *rowRegions, s32 thumbRegion, s32 previousRegion, s32 nextRegion, s8 *touched, s32 a, s32 b);
 void eventQueueAddUniqueIfValid(u32 event);
 s32 FUN_002c1658(s32 button, s32 mode);
-u32 objectPartRunUnlessLocked(GridNavigation *part);
 u8 buttonHelpGetStatus(void);
 
 /* Switches the camp to `state`, remembering the previous one. */

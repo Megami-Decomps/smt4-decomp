@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "script/ScriptEntryLookup.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e4d70` (_code @ 0x1e4d70, 0x7cc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -24,7 +25,6 @@ int scrScriptProcessCreate(int, unsigned int);
 int soundChannelStopAll(int);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(int);
-int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int messageSetConfirmDisplayMode(void);
 int gameFlagIsSet(void);
 int asdMemFree(void);
@@ -65,7 +65,6 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
 /* Supplied declaration required: gameFlagIsSet. */
@@ -184,8 +183,8 @@ unsigned int FUN_001e4d70(void)
       asdLoadFileSetUseRawPaths(1);
       *(unsigned char *)((int)puVar1 + 0x21) = 1;
     }
-    textFormatBuffer(temp_v5,&LAB_001e54bc,puVar1[5],puVar1[5]);
-    textFormatBuffer(temp_v6,&LAB_001e54d4,puVar1[5],puVar1[5]);
+    sprintf((char *)temp_v5,(const char *)&LAB_001e54bc,puVar1[5],puVar1[5]);
+    sprintf((char *)temp_v6,(const char *)&LAB_001e54d4,puVar1[5],puVar1[5]);
     temp_v0 = aocPackageGrantsItem(g_aocSystem,puVar1[5],0);
     if (temp_v0 != 0) {
       temp_v0 = g_aocSystem;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: step function of the mikado gate scene (starts the entry script for the current gate, runs it, swaps the gate model and closes into the dialog phase, or hands over to the content transition); written from the decompilation, the step ladder is rebuilt as a switch and the register/branch layout not compared with retail */
+#include <stdio.h>
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "ui/UiControl.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
@@ -89,7 +90,6 @@ void scrScriptProcessStartEntry(u32 script, u32 entry);
 void buttonHelpSetText(s32 a, u32 color);
 void messageStatesSetFirst(s32 flag);
 void buttonHelpSetPreset(s32 preset);
-void textFormatBuffer(u8 buffer[36], const char *format, const char *text);
 void modelLoadBamAndEnable(NodeEnableOwner *model, const char *path);
 s32 scrRunOpcodesStub(u32 script);
 s32 listUpdateRevealTransition(void *block);
@@ -131,7 +131,7 @@ void FUN_003b8e58(GateScene *scene)
         }
         {
             u8 name[36];
-            textFormatBuffer(name, "%s", scene->text->name);
+            sprintf((char *)name, "%s", scene->text->name);
             u32 entry = tableGroupFindEntryIndex(scene->tableGroup, name);
             messageStatesSetFirst(0);
             buttonHelpSetPreset(GATE_BUTTON_PRESET);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 #include <string.h>
 #include "shard/W6_W6Match5_EntryCollection.h"
 
@@ -8,7 +9,6 @@ extern const char *const DAT_00403390[8];
 const char *aocEntryDataById(u32 index, u32 group);
 const char *aocIndexValueOrDefault(u32 index);
 s32 libc_sprintf(char *output, const char *format, ...);
-void textFormatBuffer(char *output, const char *format, ...);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 void uiFormatIndexedDisplayName(u32 unused, s32 kind, s32 index, char *output)
@@ -35,13 +35,13 @@ void uiFormatIndexedDisplayName(u32 unused, s32 kind, s32 index, char *output)
     if (kind == 4) {
         const char *names[21];
         __aeabi_memcpy4(names, DAT_0040333c, sizeof(names));
-        textFormatBuffer(output, "%s", names[index]);
+        sprintf(output, "%s", names[index]);
         return;
     }
     if (kind == 5) {
         const char *names[8];
         memcpy(names, DAT_00403390, sizeof(names));
-        textFormatBuffer(output, "%s", names[index]);
+        sprintf(output, "%s", names[index]);
     }
 }
 }

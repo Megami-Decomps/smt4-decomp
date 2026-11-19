@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033149c` (_code @ 0x33149c, 0xa00 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -16,7 +17,6 @@ int FUN_002b6b8c(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -53,7 +53,6 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
@@ -95,7 +94,7 @@ void FUN_0033149c(int param_1)
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x57f,temp_v0,temp_v1,0x6a);
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x583));
   temp_v3 = FUN_00295cec();
-  textFormatBuffer(temp_v13,"%u",temp_v3);
+  sprintf((char *)temp_v13,"%u",temp_v3);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v13);
   temp_v9 = 0;
   temp_v2 = FUN_0029d644(param_1 + 0x10);
@@ -130,7 +129,7 @@ void FUN_0033149c(int param_1)
               if (temp_v5 == 2) {
                 temp_v11 = 0x5a5a5aff;
                 temp_v12 = 0x787878ff;
-                textFormatBuffer(temp_v13,"\?\?\?");
+                sprintf((char *)temp_v13,"\?\?\?");
               }
             }
             else {
@@ -138,7 +137,7 @@ void FUN_0033149c(int param_1)
               temp_v12 = 0xdc0f14ff;
               temp_v5 = temp_v10;
               dataTable0BGetValueById(temp_v10);
-              textFormatBuffer(temp_v13,"%d",temp_v5);
+              sprintf((char *)temp_v13,"%d",temp_v5);
             }
           }
           else {
@@ -146,7 +145,7 @@ void FUN_0033149c(int param_1)
             temp_v11 = 0xff;
             temp_v5 = temp_v10;
             dataTable0BGetValueById(temp_v10);
-            textFormatBuffer(temp_v13,"%d",temp_v5);
+            sprintf((char *)temp_v13,"%d",temp_v5);
           }
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x594));
           drawSetColorFromRGBA8(temp_v12);
@@ -230,7 +229,7 @@ void FUN_0033149c(int param_1)
           if (temp_v5 == 2) {
             temp_v11 = 0x787878ff;
             temp_v12 = 0x787878ff;
-            textFormatBuffer(temp_v13,"\?\?\?");
+            sprintf((char *)temp_v13,"\?\?\?");
           }
         }
         else {
@@ -238,7 +237,7 @@ void FUN_0033149c(int param_1)
           temp_v12 = 0xdc0f14ff;
           temp_v5 = temp_v10;
           dataTable0BGetValueById(temp_v10);
-          textFormatBuffer(temp_v13,"%d",temp_v5);
+          sprintf((char *)temp_v13,"%d",temp_v5);
         }
       }
       else {
@@ -246,7 +245,7 @@ void FUN_0033149c(int param_1)
         temp_v12 = 0xffffffff;
         temp_v5 = temp_v10;
         dataTable0BGetValueById(temp_v10);
-        textFormatBuffer(temp_v13,"%d",temp_v5);
+        sprintf((char *)temp_v13,"%d",temp_v5);
       }
       temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x59d));
       drawSetColorFromRGBA8(temp_v12);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: constant materialisation only - retail loads each layout entry id (0x576/0x577/0x578/0x579/0x57d) and the 0x598 field offset from the literal pool, while armcc here derives them from one register and folds the offset; control flow and calls are identical. */
+#include <stdio.h>
 #include "status/StatusDownA.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -13,7 +14,6 @@ void FUN_00185e84(s16 demon, s32 x, s32 y, u32 slot, s32 a, s32 b);
 void statDrawClampedDelta(PlayerDataA *source, s32 other, s32 x, s32 y, u32 slot, s32 a);
 u32 FUN_003df57c(u32 demon, u32 flag);
 u32 skillGetAdjustedCost(PlayerDataA *source, u32 other);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 slot, const char *format, u32 value);
 
 /* Draws one demon row of the status list at (x, y): its panel, name, power and level readouts. */
@@ -40,7 +40,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
     efctSetSpeed(speed);
     if (demon == 0) {
         TextureTableEntryIV *name = asdTMTexTableEntryAt(18, 0x579);
-        textFormatBuffer(text, "\x81| \x81| \x81|");
+        sprintf(text, "\x81| \x81| \x81|");
         textDrawString(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
         return;
     }
@@ -57,7 +57,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
         power = skillGetAdjustedCost(list->source, demon);
     }
     TextureTableEntryIV *name = asdTMTexTableEntryAt(18, 0x579);
-    textFormatBuffer(text, "%s", FUN_0014bd84(demon));
+    sprintf(text, "%s", FUN_0014bd84(demon));
     textDrawString(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
     TextureTableEntryIV *level = asdTMTexTableEntryAt(18, 0x57d);
     FUN_00180310(1, level->x + x, level->y + y, 1, 4, 221, "%d", power);

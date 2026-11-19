@@ -36,7 +36,7 @@ typedef struct {
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: playSceneSetState. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
-extern int objectPartRunUnlessLocked(int);
+extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: skillDataFindById. */
 /* Supplied declaration required: itemTableGetItemRecord. */

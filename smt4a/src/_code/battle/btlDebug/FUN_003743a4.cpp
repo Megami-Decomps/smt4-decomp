@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003743a4` (_code @ 0x3743a4, 0x12cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
@@ -18,7 +19,6 @@ int dataRecordGetKindValue(...);
 int playerSecondaryGetKindValue(void);
 int playerPrimaryGetKindValue(void);
 
-int textFormatBuffer(...);
 int FUN_0014bd84(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
@@ -52,7 +52,6 @@ extern unsigned int DAT_00573bfc; /* 0x573bfc */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0014bd84. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
@@ -353,7 +352,7 @@ void FUN_003743a4(int param_1)
               texDrawTableEntryAtStoredOrigin(2,0xd,0x11f,temp_v4);
               temp_v8 = (int)(short)*(unsigned int *)(param_1 + 0x3e18);
               temp_v9 = FUN_0014bd84(temp_v8);
-              textFormatBuffer(temp_v19,"%s",temp_v9);
+              sprintf((char *)temp_v19,"%s",temp_v9);
               temp_v3 = FUN_003df57c(temp_v8,1);
               temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12e));
               VectorSignedToFloat(*(short *)(temp_v6 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -371,7 +370,7 @@ void FUN_003743a4(int param_1)
             }
           }
           else {
-            textFormatBuffer(temp_v19,&LAB_00375678);
+            sprintf((char *)temp_v19,(const char *)&LAB_00375678);
             temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x11c));
             puVar10 = temp_v19;
             fontMeasureLineAdvance(puVar10,3);
@@ -392,7 +391,7 @@ void FUN_003743a4(int param_1)
           if (!((DAT_00573bfc & *(unsigned int *)(temp_v3 + 0x45ac)) == 0 &&
                (DAT_00573bf8 & *(unsigned int *)(temp_v3 + 0x45a8)) == 0)) {
             temp_v9 = FUN_002f8e98(temp_v5 & 0xff);
-            textFormatBuffer(temp_v19,"%s",temp_v9);
+            sprintf((char *)temp_v19,"%s",temp_v9);
           }
           else {
             temp_v13 = 0;
@@ -405,7 +404,7 @@ void FUN_003743a4(int param_1)
               if (temp_v3 != 0) {
                 if (temp_v13 == temp_v5) {
                   temp_v9 = FUN_002f8e98(temp_v12 & 0xff);
-                  textFormatBuffer(temp_v19,"%s",temp_v9);
+                  sprintf((char *)temp_v19,"%s",temp_v9);
                   break;
                 }
                 temp_v13 = temp_v13 + 1;
@@ -431,7 +430,7 @@ void FUN_003743a4(int param_1)
         temp_v8 = (int)*(short *)(param_1 + temp_v5 * 2 + 0x3ca8);
         temp_v3 = temp_v8;
         dataFindKindRecordWithAocOverrides(temp_v8,0);
-        textFormatBuffer(temp_v19,"%s",temp_v3);
+        sprintf((char *)temp_v19,"%s",temp_v3);
         temp_v3 = flagValueRead(temp_v8);
         temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12e));
         VectorSignedToFloat(*(short *)(temp_v6 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -468,7 +467,7 @@ void FUN_003743a4(int param_1)
         temp_v1 = 0;
       }
       temp_v9 = FUN_0014bd84();
-      textFormatBuffer(temp_v19,"%s",temp_v9);
+      sprintf((char *)temp_v19,"%s",temp_v9);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x12e));
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -508,13 +507,13 @@ void FUN_003743a4(int param_1)
              (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bf4) == 0)) {
           temp_v8 = (int)(short)temp_v5;
           temp_v9 = FUN_0014bd84(temp_v8);
-          textFormatBuffer(temp_v19,"%s",temp_v9);
+          sprintf((char *)temp_v19,"%s",temp_v9);
           temp_v3 = skillGetAdjustedCost(temp_v17,temp_v8);
         }
         else {
           temp_v8 = (int)*(short *)(param_1 + *piVar15 * 0x10 + temp_v5 * 2 + 0x3c42);
           temp_v9 = FUN_0014bd84(temp_v8);
-          textFormatBuffer(temp_v19,"%s",temp_v9);
+          sprintf((char *)temp_v19,"%s",temp_v9);
           temp_v3 = skillGetAdjustedCost(temp_v17,temp_v8);
         }
         temp_v14 = 1;
@@ -523,10 +522,10 @@ void FUN_003743a4(int param_1)
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v17 + 0x62);
         nkmBaseGetRecord();
         if (*(char *)(temp_v5 + 0xc) != '\x01') {
-          textFormatBuffer(temp_v19,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+          sprintf((char *)temp_v19,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
         }
         else {
-          textFormatBuffer(temp_v19,"%s","\x82r\x82\x88\x82\x8f\x82\x8f\x82\x94");
+          sprintf((char *)temp_v19,"%s","\x82r\x82\x88\x82\x8f\x82\x8f\x82\x94");
         }
         temp_v3 = 0;
         if (temp_v17 != (unsigned char *)0x0) {
@@ -542,7 +541,7 @@ void FUN_003743a4(int param_1)
       if (temp_v5 != 0) {
         if ((temp_v5 == 1) && (temp_v3 = FUN_002fa75c(), temp_v3 != 0)) {
           puVar10 = temp_v19;
-          textFormatBuffer(puVar10,"%s","\x82r\x82\x88\x82\x8f\x82\x8f\x82\x94");
+          sprintf((char *)puVar10,"%s","\x82r\x82\x88\x82\x8f\x82\x8f\x82\x94");
           temp_v1 = (short)(int)puVar10;
           temp_v3 = 0;
           playerSecondaryGetKindValue();
@@ -560,13 +559,13 @@ void FUN_003743a4(int param_1)
                (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bf4) == 0)) {
             temp_v8 = (int)(short)(((short)temp_v5 - (short)temp_v6) + 1);
             temp_v9 = FUN_0014bd84(temp_v8);
-            textFormatBuffer(temp_v19,"%s",temp_v9);
+            sprintf((char *)temp_v19,"%s",temp_v9);
             temp_v3 = FUN_003df57c(temp_v8,1);
           }
           else {
             temp_v8 = (int)*(short *)(param_1 + *piVar15 * 0x10 + (temp_v5 - temp_v6) * 2 + 0x3c44);
             temp_v9 = FUN_0014bd84(temp_v8);
-            textFormatBuffer(temp_v19,"%s",temp_v9);
+            sprintf((char *)temp_v19,"%s",temp_v9);
             temp_v3 = FUN_003df57c(temp_v8,1);
           }
           temp_v14 = 1;
@@ -574,7 +573,7 @@ void FUN_003743a4(int param_1)
       }
       else {
         puVar10 = temp_v19;
-        textFormatBuffer(puVar10,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+        sprintf((char *)puVar10,"%s","\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
         temp_v1 = (short)(int)puVar10;
         temp_v3 = 0;
         playerPrimaryGetKindValue();

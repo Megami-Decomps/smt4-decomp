@@ -1,4 +1,5 @@
 /* NON_MATCHING: structure, unrolled search and hour/minute blocks match; only the record count lives in r2 where retail keeps it in r3 (and the loop temp swaps with it). */
+#include <stdio.h>
 #include "gamedata/CampComTable.h"
 
 static CampComRecord *findStatusDescriptionRecord(u32 id)
@@ -17,7 +18,6 @@ static CampComRecord *findStatusDescriptionRecord(u32 id)
 extern "C" {
 extern char DAT_005e1ebc[];
 u32 gameDataBlocksGetSelectedValue(void);
-void textFormatBuffer(char *output, const char *format, ...);
 
 /* Finds a status description, appending the rounded-up play time for the duration entry. */
 char *dataTable15Sub0FindEntry(u32 id)
@@ -34,11 +34,11 @@ char *dataTable15Sub0FindEntry(u32 id)
     u32 hours = seconds / 3600;
     u32 minutes = (seconds - hours * 3600) / 60;
     if (hours == 0) {
-        textFormatBuffer(time, "%02d\x82\x6c", minutes);
+        sprintf(time, "%02d\x82\x6c", minutes);
     } else {
-        textFormatBuffer(time, "%d\x82\x67\x81\x40%02d\x82\x6c", hours, minutes);
+        sprintf(time, "%d\x82\x67\x81\x40%02d\x82\x6c", hours, minutes);
     }
-    textFormatBuffer(DAT_005e1ebc, "%s%s", match->text, time);
+    sprintf(DAT_005e1ebc, "%s%s", match->text, time);
     return DAT_005e1ebc;
 }
 }

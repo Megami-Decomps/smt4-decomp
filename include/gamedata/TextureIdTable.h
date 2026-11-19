@@ -2,6 +2,7 @@
 #define GAMEDATA_TEXTURE_ID_TABLE_H
 
 #include "gamedata/DataTable.h"
+#include "util/BinarySearch.h"
 
 /* A 4-byte row of data table 0x47, sorted by id: the node of texture table 0x34 the id shows
  * (negative: none). */
@@ -12,8 +13,6 @@ struct TextureIdRecord {
 typedef char TextureIdRecordSizeCheck[sizeof(TextureIdRecord) == 4 ? 1 : -1];
 
 extern "C" {
-void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
-    s32 (*compare)(const void *, const void *));
 s32 textureIdRecordCompare(const void *left, const void *right);
 }
 

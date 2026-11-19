@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the final 64-bit `flags &= ~ownedFlags`: retail loads both words with ldm/ldrd
- * and clears the low word with mvn+and; the build uses two ldr and bic for each word. */
 #include "shard/X14_BtlUiClose.h"
 #include "shard/JobWork.h"
 #include "battle/BtlUiGlobal.h"
@@ -15,16 +13,16 @@ extern BtlUiCloseState DAT_005715f8;
 
 /* Closes the battle UI: releases the UI block and the helper job, stops the UI's job and clears
  * the display flags the UI owned. */
-void FUN_00314ef8(u32 job)
+void btlDebugClose(u32 job)
 {
     BtlUiCloseWork *work = (BtlUiCloseWork *)jobGetWork(job);
-    BtlUiHelper *helper;
 
     if (g_btlUiBlock != NULL) {
         FUN_004aa780(g_btlUiBlock, 0);
     }
-    helper = DAT_005715f8.helper;
-    if (helper != NULL) {
+    if (DAT_005715f8.helper != NULL) {
+        BtlUiHelper *helper = DAT_005715f8.helper;
+
         DAT_005715f8.helperActive = 0;
         if (jobIsValid(helper->job) != 0) {
             FUN_003592dc(helper->job);

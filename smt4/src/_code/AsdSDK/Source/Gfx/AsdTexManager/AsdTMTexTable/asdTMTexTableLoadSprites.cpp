@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 155 vs built 148 rows, 194 diff lines. */
+#include <stdio.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -9,7 +10,6 @@ void *fileLoadSync(char *path, u8 *size, u32 flags);
 TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_0010024c(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
-void textFormatBuffer(char *dst, const char *format, ...);
 void __aeabi_memcpy4(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
@@ -42,7 +42,7 @@ s32 asdTMTexTableLoadSprites(s32 idx)
             }
         }
         libc_strcpy(header->dirPrefix, dir);
-        textFormatBuffer(path, LAB_002c4e84, header->dirPrefix, entry->name, LAB_002c4e78, LAB_002c4e74);
+        sprintf(path, LAB_002c4e84, header->dirPrefix, entry->name, LAB_002c4e78, LAB_002c4e74);
         file = (u32 *)fileLoadSync(path, size, 0);
         if (file != NULL) {
             TexSprList *list = (TexSprList *)asdMemAlloc(0x100, 0x100, 0, 8, 1);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: camera-parameter aggregate register loads, allocation scratch and stripped-call NOPs differ. */
+#include <stdio.h>
 #include "Model/MoriModelContent.h"
 #include "gfx/CameraMatrixCache.h"
 #include "gfx/CameraParameters.h"
@@ -36,7 +37,6 @@ typedef char FountainInitializationOffsets[
 extern "C" {
 extern LockedObj *g_handleRegistry;
 void *asdMemoryAllocTraced(u32 bytes, const char *file, u32 line);
-s32 textFormatBuffer(char *output, const char *format, ...);
 void resourceOwnerLoadNamed(LockedObj *owner, const char *name);
 u8 FUN_0040af60(LockedObj *owner);
 void FUN_0040ae70(LockedObj *owner, u32 enabled);
@@ -68,7 +68,7 @@ void FUN_004cdddc(FountainInitializationView *work)
     modelLoadFileAsyncByName(list, "fountain/ch001.bam");
     char name[128];
     for (s32 index = 0; index < 3; ++index) {
-        textFormatBuffer(name, "fountain/obj%03d.bam", index + 1);
+        sprintf(name, "fountain/obj%03d.bam", index + 1);
         list = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), file, 0x198));
         if (list != NULL)
             list = modelListInit(list);

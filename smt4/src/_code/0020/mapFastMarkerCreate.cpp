@@ -1,8 +1,8 @@
+#include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-void textFormatBuffer(char *output, const char *format, ...);
 void lightOwnerRegister(AsdMdlObject *model, u32 enabled);
 void modelPartSetRotationDegrees(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
@@ -21,7 +21,7 @@ void mapFastMarkerCreate(f32 x, f32 y, f32 z, f32 heading)
     pose->position.z = z;
     pose->position.w = heading;
     char path[128];
-    textFormatBuffer(path, "map/all/lmap_fast.bam");
+    sprintf(path, "map/all/lmap_fast.bam");
     pose->model = asdMdlManagerCreateLoaded(path, 7);
     lightOwnerRegister(pose->model, 1);
     nodeSetTranslation(pose->model->node, 0, &pose->position.x);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: nameStartsWith/nameEquals keep retail's repeated null tests; retail loads each g_btlEffect prefix after its test, keeps the &formatted pointer in a callee-saved register and uses a 260-byte frame. */
+#include "runtime/Stdio.h"
 #include "shard/W6_W6Match6_EffectLoader.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -27,7 +28,6 @@ static __inline bool nameEquals(const char *name, const char *other)
     return name && !strcmp(name, other);
 }
 
-void textFormatBuffer(char *, const char *, ...);
 u32 keyedRecordRegisterName(void *);
 u32 FUN_00249e54(u32, const char *);
 
@@ -54,7 +54,7 @@ void battleLoadVersionEffectResources(VersionEffectLoader *loader)
             char formattedPath[128];
             memClear(path, sizeof(path));
             memClear(formattedPath, sizeof(formattedPath));
-            textFormatBuffer(formattedPath, DAT_004008c4, name);
+            __2sprintf(formattedPath, DAT_004008c4, name);
             libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(formattedPath));
             if (libc_strlen(path)) {
                 EffectResource *resource = &loader->versionResources[slot];

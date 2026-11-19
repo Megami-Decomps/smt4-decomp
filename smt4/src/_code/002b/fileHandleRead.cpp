@@ -1,39 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `fileHandleRead` (_code @ 0x2b4e00, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ported from smt4a fileHandleRead; only the order of the two argument set-ups before the second TryRead call
+ * differs (retail: add r0, r4, #4 then mov r1, sp), as in the twin. */
+/* Reads from a file. In result-recording mode the result is stored in the file and the call reports success; otherwise a
+ * failure is fatal. Returns 1 on success. */
+#include "nn/Result.h"
+#include "util/PlatformResultCheck.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
+struct FileHandle {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 base[0x14];     /* nn::fs::detail::FileBase */
+    /* 0x18 */ s32 result;
+    /* 0x1C */ u8 recordResult;
+};
 
-int sysReportCheckFailure(unsigned int, int);
+s32 nn_fs_detail_FileBase_TryRead(void *file, s32 *bytesRead, void *buffer, u32 size); // declcheck: local (protos__code.h has only the decompiler's undefined4 prototype; the smt4a twin declares the same)
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: sysReportCheckFailure. */
-extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
-
-
-int fileHandleRead(int param_1,unsigned int param_2,unsigned int param_3,int *param_4)
-
+s32 fileHandleRead(FileHandle *file, void *buffer, u32 size, s32 *bytesRead)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *temp_v1;
-  
-  temp_v1 = param_4;
-  if (*(char *)(param_1 + 0x1c) != '\0') {
-    temp_v0 = nn_fs_detail_FileBase_TryRead(param_1 + 4,param_4,param_2,param_3);
-    *(unsigned int *)(param_1 + 0x18) = temp_v0;
-    return ((int)temp_v0 >> 0x1f) + 1;
-  }
-  temp_v0 = nn_fs_detail_FileBase_TryRead(param_1 + 4,(int *)&temp_v1,param_2,param_3);
-  if ((int)temp_v0 < 0) {
-    sysReportCheckFailure(temp_v0,0x2b4e50);
-  }
-  *param_4 = (int)temp_v1;
-  return 1;
+    if (file->recordResult != 0) {
+        file->result = nn_fs_detail_FileBase_TryRead(file->base, bytesRead, buffer, size);
+        return nnResultIsSuccess(file->result);
+    }
+    s32 count;
+    s32 result = nn_fs_detail_FileBase_TryRead(file->base, &count, buffer, size);
+    checkPlatformResult(result, __current_pc());
+    *bytesRead = count;
+    return 1;
 }
-
-} /* extern "C" */
+}

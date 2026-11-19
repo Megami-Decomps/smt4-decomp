@@ -1114,13 +1114,13 @@
       "target_path": "orig/target/_code/0010/libc_sprintf.o"
     },
     {
-      "base_path": "build/obj/_code/0010/textFormatBuffer.o",
+      "base_path": "build/obj/_code/0010/__2sprintf.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "textFormatBuffer",
+            "name": "__2sprintf",
             "size": 40,
             "vram": "0x100388"
           }
@@ -1128,10 +1128,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/textFormatBuffer.cpp"
+        "source_path": "src/_code/0010/__2sprintf.cpp"
       },
-      "name": "_code/0010/textFormatBuffer",
-      "target_path": "orig/target/_code/0010/textFormatBuffer.o"
+      "name": "_code/0010/__2sprintf",
+      "target_path": "orig/target/_code/0010/__2sprintf.o"
     },
     {
       "base_path": "build/obj/_code/0010/FUN_001003b4.o",
@@ -82660,13 +82660,13 @@
       "target_path": "orig/target/_code/0019/workScalarGet.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_0019c920.o",
+      "base_path": "build/obj/_code/0019/asdVramBlockListInsert.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0019c920",
+            "name": "asdVramBlockListInsert",
             "size": 148,
             "vram": "0x19c920"
           }
@@ -82674,10 +82674,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_0019c920.cpp"
+        "source_path": "src/_code/0019/asdVramBlockListInsert.cpp"
       },
-      "name": "_code/0019/FUN_0019c920",
-      "target_path": "orig/target/_code/0019/FUN_0019c920.o"
+      "name": "_code/0019/asdVramBlockListInsert",
+      "target_path": "orig/target/_code/0019/asdVramBlockListInsert.o"
     },
     {
       "base_path": "build/obj/_code/0019/FUN_0019c9b4.o",
@@ -117290,13 +117290,13 @@
       "target_path": "orig/target/_code/0024/FUN_0024101c.o"
     },
     {
-      "base_path": "build/obj/_code/clear_save/clearSave/FUN_00241058.o",
+      "base_path": "build/obj/_code/clear_save/clearSave/clearSaveUpdate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00241058",
+            "name": "clearSaveUpdate",
             "size": 1476,
             "vram": "0x241058"
           }
@@ -117305,10 +117305,10 @@
           "_code",
           "clear_save/clearSave"
         ],
-        "source_path": "src/_code/clear_save/clearSave/FUN_00241058.cpp"
+        "source_path": "src/_code/clear_save/clearSave/clearSaveUpdate.cpp"
       },
-      "name": "_code/clear_save/clearSave/FUN_00241058",
-      "target_path": "orig/target/_code/clear_save/clearSave/FUN_00241058.o"
+      "name": "_code/clear_save/clearSave/clearSaveUpdate",
+      "target_path": "orig/target/_code/clear_save/clearSave/clearSaveUpdate.o"
     },
     {
       "base_path": "build/obj/_code/0024/uniteComparePairsAscending.o",
@@ -185474,13 +185474,13 @@
       "target_path": "orig/target/_code/0031/FUN_00314ed0.o"
     },
     {
-      "base_path": "build/obj/_code/0031/FUN_00314ef8.o",
+      "base_path": "build/obj/_code/0031/btlDebugClose.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00314ef8",
+            "name": "btlDebugClose",
             "size": 180,
             "vram": "0x314ef8"
           }
@@ -185488,10 +185488,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0031/FUN_00314ef8.cpp"
+        "source_path": "src/_code/0031/btlDebugClose.cpp"
       },
-      "name": "_code/0031/FUN_00314ef8",
-      "target_path": "orig/target/_code/0031/FUN_00314ef8.o"
+      "name": "_code/0031/btlDebugClose",
+      "target_path": "orig/target/_code/0031/btlDebugClose.o"
     },
     {
       "base_path": "build/obj/_code/0031/lmapJobQueryZero.o",
@@ -342291,13 +342291,13 @@
       "target_path": "orig/target/_code/0050/clearTwoWords.o"
     },
     {
-      "base_path": "build/obj/_code/0050/clearTwoWordsAndByte.o",
+      "base_path": "build/obj/_code/0050/__ARM_common_memclr4_9.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "clearTwoWordsAndByte",
+            "name": "__ARM_common_memclr4_9",
             "size": 20,
             "vram": "0x50d72c"
           }
@@ -342305,10 +342305,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0050/clearTwoWordsAndByte.cpp"
+        "source_path": "src/_code/0050/__ARM_common_memclr4_9.cpp"
       },
-      "name": "_code/0050/clearTwoWordsAndByte",
-      "target_path": "orig/target/_code/0050/clearTwoWordsAndByte.o"
+      "name": "_code/0050/__ARM_common_memclr4_9",
+      "target_path": "orig/target/_code/0050/__ARM_common_memclr4_9.o"
     },
     {
       "base_path": "build/obj/_code/0050/__ARM_common_memcpy4_7.o",

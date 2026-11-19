@@ -1,4 +1,5 @@
 /* NON_MATCHING: only two moves before the equipment loop are swapped (retail sets the index register before the equipment base). */
+#include <stdio.h>
 #include "gamedata/GamePlayerData.h"
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -24,7 +25,6 @@ void FUN_003c1ef4(u32 mode);
 void playerRecalcStatsFromEquipment(u32 slot);
 void FUN_001dd930(void);
 char *gameDataGetPlayerName(void);
-void textFormatBuffer(char *destination, const char *format, ...);
 extern const InitialEquipment DAT_00404378;
 /* The default player name and the format the player's display name is built with. */
 struct DefaultPlayerTexts {
@@ -66,7 +66,7 @@ void FUN_0026f824(s32 mode)
         player->hp = player->maxHp;
         player->mp = player->maxMp;
         FUN_001dd930();
-        textFormatBuffer(gameDataGetPlayerName(), texts->nameFormat);
+        sprintf(gameDataGetPlayerName(), texts->nameFormat);
         FUN_00295a18(0x370, 1);
     }
 }

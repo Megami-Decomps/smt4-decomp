@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+class Obj4206e8; // player model holder
+
 extern "C" {
 
 int asdMdlManagerMarkDestroy(void);
@@ -42,9 +44,10 @@ extern unsigned int asdMdlManagerCreateFromSourceAndNode(int, unsigned int, unsi
 /* Supplied declaration required: FUN_003353cc. */
 
 
-void FUN_00297684(int param_1)
+void FUN_00297684(Obj4206e8 *owner)
 
 {
+  s32 param_1 = reinterpret_cast<s32>(owner);
 /* irregular: irregular input(s): in_r12; 13 native warning(s); review required */
   int temp_v0;
   int *piVar2;

@@ -14,7 +14,7 @@ void FUN_00223cf0(void)
 {
     UiQuest *quest = g_uiQuest;
 
-    quest->panel.detailMode = 0;
+    quest->panelView.panel.detailMode = 0;
     if (quest->state != 13) {
         uiQuestLoadResources();
         FUN_0028fe0c(quest->list[resourceRunOperationIfUnblocked(quest->cursor.data) + listCursorGetRowIfUnblocked(quest->cursor.data)], 1);

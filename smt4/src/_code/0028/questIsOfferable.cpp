@@ -1,14 +1,8 @@
 #include "map/mapDepart.h"
 #include "quest_center/QuestRecord.h"
 #include "quest_center/QuestStatus.h"
+#include "quest_center/QuestRuntime.h"
 #include "game/GameState.h"
-
-struct QuestRuntimeStatus {
-    u8 flags;
-    u8 unk01[3];
-
-    u32 completed() const { return (flags & 8) >> 3; }
-};
 
 extern "C" {
 u32 questRequirementsMet(u16 questId);
@@ -43,7 +37,7 @@ bool questIsOfferable(u16 questId)
     if (record->excludedQuests[1] != 0 && questIsCompleted(record->excludedQuests[1]) != 0) {
         return false;
     }
-    u32 completed = reinterpret_cast<const QuestRuntimeStatus *>(questGetRuntimeStatus(questId))->completed();
+    u32 completed = (questGetRuntimeStatus(questId)->flags & 8) >> 3;
     if (completed != 0 && (record->flags & 2) == 0) {
         return false;
     }

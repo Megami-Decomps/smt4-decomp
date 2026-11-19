@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ca748` (_code @ 0x1ca748, 0x22a8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_ScrollList.h"
 #include "shard/TextureDrawCall.h"
@@ -14,7 +15,6 @@ int FUN_0029212c(...);
 int FUN_0029bd4c(void);
 int buttonHelpShowSkillDetails(...);
 int nkmBaseGetRecord(...);
-int textFormatBuffer(...);
 
 int FUN_0026ab64(...);
 int devilCreateRaceEffect(...);
@@ -24,7 +24,7 @@ int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int objectPartRunUnlessLocked(...);
+int objectPartRunUnlessLocked(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int buttonHelpSetText(...);
 int FUN_002a0cc8(...);
 int FUN_002b7bca(...);
@@ -33,7 +33,7 @@ int statusInventorySort(void);
 
 int FUN_0026adb4(void);
 int FUN_0026ae68(void);
-int uiStoreTextureEntryCenter(...);
+int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int flaggedEntrySetValueA(...);
 int ifTouchGetSelectionModeForRegion(...);
 int flaggedEntryGetValueA(...);
@@ -121,7 +121,6 @@ extern int querySlotHasHandle(void);
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 extern unsigned int soundPlaySeUnpanned(unsigned int);
@@ -1266,7 +1265,7 @@ LAB_001cc6b4:
       }
     }
     if (temp_v17) {
-      textFormatBuffer(temp_v18,&LAB_001cc740);
+      sprintf((char *)temp_v18,(const char *)&LAB_001cc740);
       buttonHelpSetText(temp_v18,0x323232ff);
     }
     else {
@@ -1303,7 +1302,7 @@ LAB_001cc6b4:
   }
   if (*(int *)(temp_v2 + 0x400) == 0x11) {
     if (temp_v17) {
-      textFormatBuffer(temp_v18,&LAB_001cc740);
+      sprintf((char *)temp_v18,(const char *)&LAB_001cc740);
       buttonHelpSetText(temp_v18,0x323232ff);
     }
     else {
@@ -1312,7 +1311,7 @@ LAB_001cc6b4:
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v15 + temp_v6) * 4 + 0x5ca);
       if (temp_v11 != 0) {
         temp_v11 = (unsigned int)dataTable0cSub1GetText((unsigned short)temp_v11);
-        textFormatBuffer(temp_v18,&LAB_001cca08,temp_v11);
+        sprintf((char *)temp_v18,(const char *)&LAB_001cca08,temp_v11);
         buttonHelpSetText(temp_v18,0x323232ff);
       }
     }
@@ -1333,7 +1332,7 @@ LAB_001cc6b4:
       dataTable0cLookupById(*(unsigned short *)(temp_v11 + 0x38));
       temp_v7 = FUN_002bd068(temp_v14);
       temp_v12 = demonGetRaceLabel(temp_v14,0);
-      textFormatBuffer(temp_v18,&LAB_001cca0c,temp_v12,temp_v7);
+      sprintf((char *)temp_v18,(const char *)&LAB_001cca0c,temp_v12,temp_v7);
       puVar16 = temp_v18;
     }
     buttonHelpSetText(puVar16,0x323232ff);

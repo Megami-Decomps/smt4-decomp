@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (189 vs 210 rows); retail keeps the address of the 0x80-byte block at +0x56c in a register and schedules the field clears differently */
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/AsdMemUtil.h"
 
 struct Vec3 {
@@ -37,7 +38,6 @@ struct MikadoScene {
 
 extern "C" {
 
-void textFormatBuffer(char* out, const char* format, ...);
 u32 asdMdlManagerCreateLoaded(const char* name, s32 mode);
 void lightOwnerRegister(u32 model, s32 arg);
 void FUN_00341340(MikadoScene* scene, const char* name);
@@ -60,15 +60,15 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
     scene->hasMarkers = 0;
     memClear(&scene->cameraBlock, 0x80);
     if (override != NULL) {
-        textFormatBuffer(path, "%s.bam", override);
+        sprintf(path, "%s.bam", override);
     } else {
-        textFormatBuffer(path, "%s.bam", name);
+        sprintf(path, "%s.bam", name);
     }
     scene->model = asdMdlManagerCreateLoaded(path, 7);
     lightOwnerRegister(scene->model, 1);
-    textFormatBuffer(path, "%s.bccam", name);
+    sprintf(path, "%s.bccam", name);
     FUN_00341340(scene, path);
-    textFormatBuffer(path, "%s.bcenv", name);
+    sprintf(path, "%s.bcenv", name);
     FUN_002a09b4(path, 0);
     FUN_002a04f0(0);
 
@@ -109,10 +109,10 @@ void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
     }
     if (scene->dummyCount > 0) {
         scene->hasMarkers = 1;
-        textFormatBuffer(path, "mikado/yaji.bam");
+        sprintf(path, "mikado/yaji.bam");
         scene->arrowModel = asdMdlManagerCreateLoaded(path, 7);
         lightOwnerRegister(scene->arrowModel, 1);
-        textFormatBuffer(path, "mikado/point.bam");
+        sprintf(path, "mikado/point.bam");
         scene->pointModel = asdMdlManagerCreateLoaded(path, 7);
         lightOwnerRegister(scene->pointModel, 1);
         scene->markerPos = scene->dummies[0];

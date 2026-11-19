@@ -1,4 +1,5 @@
 /* NON_MATCHING: render-context wrapper and conditional slide offset recovered; panel x-coordinate VFP conversion/register scheduling differs. */
+#include <stdio.h>
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
@@ -24,7 +25,6 @@ void efctSetSpeed(f32 speed);
 void gxResetColorQuadToWhite(void);
 void FUN_00355428(void);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
-void textFormatBuffer(char *buffer, const char *format, ...);
 
 /* Draws the departure screen's panels under a temporary render-state preset; state 14 slides the
    result panel in and shows its counter. */
@@ -67,7 +67,7 @@ u32 FUN_00329a90(void)
             asdTMTexTableEntryAt(19, 0x1103);
             texDrawTableEntryAtStoredOrigin(2, 19, 0x1242, (s32)((f32)panel->x + offset + (f32)frame->x), panel->y + frame->y, 11);
             char text[32];
-            textFormatBuffer(text, "%d\201@\202l\202\201\202\203\202\203\202\201", depart->value);
+            sprintf(text, "%d\201@\202l\202\201\202\203\202\203\202\201", depart->value);
             textDrawString(2, 0xffffffff, text, (f32)panel->x + offset + (f32)counter->x,
                          (f32)(panel->y + counter->y), 0.0f, 1.0f, 1.0f);
         }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: reserved-name field references materialize separate addresses instead of retaining the global base; table-offset and path-buffer registers differ. */
+#include "runtime/Stdio.h"
 #include "battle/btlEffect.h"
 #include <string.h>
 
@@ -11,7 +12,6 @@ u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *first, const char *second, u32 length);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 bytes);
-void textFormatBuffer(char *destination, const char *format, ...);
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 id, const char *version);
 }
@@ -59,7 +59,7 @@ extern "C" void FUN_004f9278(BtlEffectOwnerA *owner)
             continue;
         sysMemClear(path, sizeof(path));
         sysMemClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_005284c0, name);
+        __2sprintf(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
         if (libc_strlen(path) == 0)
             continue;

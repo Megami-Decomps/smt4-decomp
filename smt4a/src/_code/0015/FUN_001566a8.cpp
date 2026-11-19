@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "code/Code0016.h"
 /* NON_MATCHING: retail reloads the DAT_0061978c base (r1) after asdSoundGetObjectCount instead of keeping it in r4, and assigns group/flags to sl/r9 the other way round. */
 #include "sound/VoiceLoadQueue.h"
@@ -10,7 +11,6 @@ extern const char DAT_00536294[];
 extern const char DAT_00536288[];
 void rt_aeabi_memclr(void *memory, u32 size);
 s32 FUN_00162ea4(void);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 char *libc_strcat(char *destination, const char *source);
 char *libc_strcpy(char *destination, const char *source);
 u32 asdSoundGetObjectCount(void);
@@ -46,10 +46,10 @@ extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
         return failure;
     if (DAT_0061978c.disabled != 0 || kind == 0)
         return failure;
-    textFormatBuffer(directory, DAT_0053629c);
-    textFormatBuffer(number, DAT_00536294, id);
+    __2sprintf(directory, DAT_0053629c);
+    __2sprintf(number, DAT_00536294, id);
     libc_strcat(directory, number);
-    textFormatBuffer(path, DAT_00536288, directory);
+    __2sprintf(path, DAT_00536288, directory);
     asdSoundGetObjectCount();
     s32 index = findFreeVoiceLoadRequest();
     if (index == -1)

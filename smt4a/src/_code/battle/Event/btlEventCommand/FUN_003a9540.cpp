@@ -1,10 +1,10 @@
+#include <stdio.h>
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 extern "C" {
 s32 scrGetCommandFrame(void);
 const char *scrGetArgString(u32 index);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
 void FUN_004d854c(u32 *owner);
@@ -32,7 +32,7 @@ u32 FUN_003a9540(void)
     }
     const char *name = scrGetArgString(0);
     char path[64] = {};
-    textFormatBuffer(path, "battle/model/%s.bam", name);
+    sprintf(path, "battle/model/%s.bam", name);
     if (state->eventModel.owner == NULL) {
         u32 *owner = (u32 *)asdMemoryAllocTraced(0x24,
             "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Event\\btlEventCommand.cpp", 0x54b);

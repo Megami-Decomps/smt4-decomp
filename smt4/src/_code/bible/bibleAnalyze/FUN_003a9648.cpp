@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP argument setup (the sliding-offset float and the text position) and the pool-constant loads are scheduled differently; the draw sequence is the same. */
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
 
@@ -48,7 +49,6 @@ extern u32 DAT_0043d990[];
 void uiRectDrawAtBottomRight(void *panel, s32 id, s32 a, s32 b, s32 slide, f32 offset);
 void FUN_00231bcc(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
 u32 dataLookupDisplayName(u8 *out, u32 id);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 AnalyzeTextBox *FUN_002bf4f0(void *panel, u32 id);
 s32 curveEvaluateStandard(const char *text, s32 mode);
 void drawTextAtSnappedRectangle(void *panel, s32 a, s32 b, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
@@ -77,7 +77,7 @@ void FUN_003a9648(AnalyzeWork *work)
     char text[64];
     u32 name = dataLookupDisplayName(nameBuffer, ((AnalyzeWorkView *)work)->targetId);
 
-    textFormatBuffer(text, "%s%s", name, DAT_0043d990[1]);
+    sprintf(text, "%s%s", name, DAT_0043d990[1]);
     AnalyzeTextBox *box = FUN_002bf4f0(work->panel, 0x102B);
     s32 width = curveEvaluateStandard(text, 2);
 

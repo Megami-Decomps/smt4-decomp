@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a26dc` (_code @ 0x1a26dc, 0xb40 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029.h"
@@ -18,7 +19,6 @@ int gameDataGetPlayerName(void);
 int libc_bsearch(...);
 int fontMeasureLineAdvance(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
@@ -54,7 +54,6 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -134,10 +133,10 @@ unsigned int FUN_001a26dc(void)
     temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x2a));
     temp_v8 = terminalGetCharacterDisplayName(*(unsigned int *)(temp_v2 + 0x7ec));
     if (temp_v8 != 0) {
-      textFormatBuffer(temp_v11,"%s");
+      sprintf((char *)temp_v11,"%s");
     }
     else {
-      textFormatBuffer(temp_v11,"\x83}\x83b\x83v\x96\xbc\x8e\xe6\x93\xbe\x8e\xb8\x94s");
+      sprintf((char *)temp_v11,"\x83}\x83b\x83v\x96\xbc\x8e\xe6\x93\xbe\x8e\xb8\x94s");
     }
     puVar6 = temp_v11;
     fontMeasureLineAdvance(puVar6,2);
@@ -197,11 +196,11 @@ unsigned int FUN_001a26dc(void)
           puVar7 = (unsigned short *)(unsigned int)*(unsigned char *)(temp_v8 + temp_v3 + temp_v2 + 0x758);
           tmnlGetEntryText(puVar7);
         }
-        textFormatBuffer(temp_v11,"%s",puVar7);
+        sprintf((char *)temp_v11,"%s",puVar7);
       }
       else {
         temp_v5 = gameDataGetPlayerName();
-        textFormatBuffer(temp_v11,"%s",temp_v5);
+        sprintf((char *)temp_v11,"%s",temp_v5);
         temp_v8 = gameFlagIsSet(0x668);
         if (((temp_v8 != 0) && (temp_v8 = gameFlagIsSet(0x1d7), temp_v8 == 0)) ||
            (temp_v8 = gameFlagIsSet(0x263), temp_v8 != 0)) {
@@ -289,11 +288,11 @@ unsigned int FUN_001a26dc(void)
         puVar7 = (unsigned short *)(unsigned int)*(unsigned char *)(temp_v7 + temp_v4 + temp_v2 + 0x758);
         tmnlGetEntryText(puVar7);
       }
-      textFormatBuffer(temp_v11,"%s",puVar7);
+      sprintf((char *)temp_v11,"%s",puVar7);
     }
     else {
       temp_v5 = gameDataGetPlayerName();
-      textFormatBuffer(temp_v11,"%s",temp_v5);
+      sprintf((char *)temp_v11,"%s",temp_v5);
       temp_v4 = gameFlagIsSet(0x668);
       if (((temp_v4 != 0) && (temp_v4 = gameFlagIsSet(0x1d7), temp_v4 == 0)) ||
          (temp_v4 = gameFlagIsSet(0x263), temp_v4 != 0)) {

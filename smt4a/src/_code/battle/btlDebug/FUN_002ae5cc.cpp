@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ae5cc` (_code @ 0x2ae5cc, 0x2c98 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -32,7 +33,6 @@ int FUN_003eb200(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int vec2GetXInt(...);
 int efctSetSpeed(...);
@@ -101,7 +101,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int gameGetPlayerName(void);
 extern int saveSlotFindSelected(void);
@@ -485,7 +484,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v49 = -temp_v49;
         }
       }
-      textFormatBuffer(temp_v39,"%d",(int)*(short *)(temp_v15 + 0x4206));
+      sprintf((char *)temp_v39,"%d",(int)*(short *)(temp_v15 + 0x4206));
       temp_v1 = *(short *)(temp_v15 + 0x4210);
       temp_v48 = 0;
       if (temp_v1 != -1) {
@@ -504,7 +503,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v30 = (int)temp_v1;
             temp_v31 = (int)*(short *)(temp_v8 + 0x10);
             temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v8 + 0x62));
-            textFormatBuffer(temp_v32,"%s",temp_v12);
+            sprintf((char *)temp_v32,"%s",temp_v12);
             temp_v48 = heldAmountLessThan(temp_v30,*(unsigned short *)(temp_v8 + 0x62));
           }
         }
@@ -514,7 +513,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v30 = (int)temp_v1;
           temp_v31 = (int)*(short *)(temp_v7 + 0x10);
           temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v7 + 0x62));
-          textFormatBuffer(temp_v32,"%s",temp_v12);
+          sprintf((char *)temp_v32,"%s",temp_v12);
           temp_v48 = (unsigned int)(*(short *)(temp_v7 + 0xe) < temp_v30);
         }
       }
@@ -525,7 +524,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
         temp_v30 = (int)(short)temp_v8;
         temp_v31 = (int)*(short *)(temp_v13 + 0x1e);
         temp_v12 = gameGetPlayerName();
-        textFormatBuffer(temp_v32,"%s",temp_v12);
+        sprintf((char *)temp_v32,"%s",temp_v12);
         temp_v48 = heldAmountLessThan(temp_v30,0xffffffff);
         if (temp_v7 < 1) {
           reinterpret_cast<int>(btlGetMainState());
@@ -560,14 +559,14 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       if (temp_v29 < 0) {
         temp_v29 = 0;
       }
-      textFormatBuffer(temp_v36,"%d",temp_v29);
+      sprintf((char *)temp_v36,"%d",temp_v29);
       if (temp_v31 < temp_v8) {
         temp_v8 = temp_v31;
       }
       if (temp_v8 < 0) {
         temp_v8 = 0;
       }
-      textFormatBuffer(temp_v40,"%d",temp_v8);
+      sprintf((char *)temp_v40,"%d",temp_v8);
       temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x1c));
       puVar12 = temp_v32;
       fontMeasureLineAdvance(puVar12,1);
@@ -1121,7 +1120,7 @@ LAB_002afb00:
       gxResetColorQuadToWhite();
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v3 + 300);
       dataTable25FindById(temp_v11);
-      textFormatBuffer(temp_v32,temp_v11);
+      sprintf((char *)temp_v32,(const char *)temp_v11);
       temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x6e));
       temp_v20 = 0.0f;
       VectorSignedToFloat((*(short *)(temp_v4 + 10) + temp_v16) - temp_v28,(unsigned char)(in_fpscr >> 0x16) & 3

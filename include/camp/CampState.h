@@ -40,11 +40,19 @@ typedef struct CampState {
     /* 0x00AE */ u8 unk00AE[2];
     /* 0x00B0 */ GridNavigation grids[12]; /* grids[3] lists skills, grids[5..11] the equipment */
     /* 0x0560 */ u8 unk0560[0xE8];
-    /* 0x0648 */ UiSpriteState sprites[14];  /* [1] the selection timer, [2] marker, [3] background */
+    union {
+        /* 0x0648 */ UiSpriteState sprites[14];  /* [1] the selection timer, [2] marker, [3] background */
+        struct {
+            /* 0x0648 */ UiSpriteState menuOrigin;
+            /* 0x06D4 */ UiSpriteState other[4];
+            /* 0x0904 */ UiSpriteState commandIcons[8];
+            /* 0x0D64 */ UiSpriteState selectedIcon;
+        } commands;
+    };
     /* 0x0DF0 */ union {
         s16 touchRegions[37];               /* registered touch-region ids, -1 when unused */
         struct {
-            /* 0x0DF0 */ s16 unk0DF0[9];
+            /* 0x0DF0 */ s16 commandRegions[9];
             /* 0x0E02 */ s16 scrollRegions[5];  /* scroll thumb, previous, next, then two buttons */
             /* 0x0E0C */ s16 rowRegions[11];    /* one per visible list row */
             /* 0x0E22 */ s16 unitRegions[3];
@@ -81,7 +89,8 @@ typedef struct CampState {
 typedef char CampStateMenuGridOffsetCheck[offsetof(CampState, menuGrid) == 0x34 ? 1 : -1];
 typedef char CampStateHelpOffsetCheck[offsetof(CampState, unitSelectActive) == 0xAB ? 1 : -1];
 typedef char CampStateGridsOffsetCheck[offsetof(CampState, grids) == 0xB0 ? 1 : -1];
-typedef char CampStateSpritesOffsetCheck[offsetof(CampState, sprites) == 0x648 ? 1 : -1];
+typedef char CampStateSpritesOffsetCheck[offsetof(CampState, sprites) == 0x648 &&
+    offsetof(CampState, commands.commandIcons) == 0x904 && offsetof(CampState, commands.selectedIcon) == 0xD64 ? 1 : -1];
 typedef char CampStateTouchOffsetCheck[offsetof(CampState, touchRegions) == 0xDF0 &&
     offsetof(CampState, touch.rowRegions) == 0xE0C && offsetof(CampState, touch.unitSlotRegions) == 0xE28 ? 1 : -1];
 typedef char CampStateSkillsOffsetCheck[offsetof(CampState, skills) == 0xE3C ? 1 : -1];

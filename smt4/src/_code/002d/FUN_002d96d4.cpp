@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d96d4` (_code @ 0x2d96d4, 0x14d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
 #include "status/StatusCamera.h"
@@ -24,7 +25,6 @@ int demonGetRaceLabel(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(void);
 int texDrawTableEntryAtStoredOrigin(...);
 int texDrawCompositeSprite(...);
@@ -80,7 +80,7 @@ extern int partyClassifyRequestedSources(unsigned int, unsigned int, unsigned ch
 extern int FUN_0029d644(unsigned int *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
-extern int objectPartRunUnlessLocked(unsigned int *);
+extern int objectPartRunUnlessLocked(unsigned int *); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 /* Supplied declaration required: itemGetFlagBit1. */
 extern int listCursorGetRowIfUnblocked(unsigned int *);
@@ -94,7 +94,6 @@ extern int listCursorGetRowIfUnblocked(unsigned int *);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawTableEntryAtStoredOrigin. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -170,7 +169,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
     texDrawTableEntryAtStoredOrigin(2,0x24,0xd0,param_1,param_2,0x65);
     texDrawTableEntryAtStoredOrigin(2,0x24,0x4a,param_1,param_2,0x65);
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0x49));
-    textFormatBuffer(temp_v20,"\x82e\x82\x95\x82\x93\x82\x89\x82\x8f\x82\x8e\x81@\x82o\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81F");
+    sprintf((char *)temp_v20,"\x82e\x82\x95\x82\x93\x82\x89\x82\x8f\x82\x8e\x81@\x82o\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81F");
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v4 + 8),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -224,7 +223,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             }
             temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xf9));
             temp_v9 = demonGetRaceLabel(*psVar8,0);
-            textFormatBuffer(temp_v20,"%s",temp_v9);
+            sprintf((char *)temp_v20,"%s",temp_v9);
             puVar13 = temp_v20;
             fontMeasureLineAdvance(puVar13,2);
             VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2
@@ -236,11 +235,11 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             textDrawString(2,0x7a4c00ff,temp_v20,(int)*(short *)(temp_v3 + 8));
             temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xf8));
             if (temp_v25 != 0) {
-              textFormatBuffer(temp_v20,"\?\?\?");
+              sprintf((char *)temp_v20,"\?\?\?");
             }
             else {
               temp_v9 = (int)FUN_002bd068(*psVar8);
-              textFormatBuffer(temp_v20,"%s",temp_v9);
+              sprintf((char *)temp_v20,"%s",temp_v9);
             }
             VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2
                                 ,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -374,7 +373,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         }
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xff));
         temp_v11 = demonGetRaceLabel(*psVar8,0);
-        textFormatBuffer(temp_v20,&LAB_002daba4,temp_v11);
+        sprintf((char *)temp_v20,(const char *)&LAB_002daba4,temp_v11);
         puVar13 = temp_v20;
         fontMeasureLineAdvance(puVar13,3);
         VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
@@ -386,11 +385,11 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         textDrawString(3,0xffffffff,temp_v20,(int)*(short *)(temp_v3 + 8));
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xfe));
         if (temp_v25 != 0) {
-          textFormatBuffer(temp_v20,&LAB_002daba8);
+          sprintf((char *)temp_v20,(const char *)&LAB_002daba8);
         }
         else {
           temp_v11 = (int)FUN_002bd068(*psVar8);
-          textFormatBuffer(temp_v20,&LAB_002daba4,temp_v11);
+          sprintf((char *)temp_v20,(const char *)&LAB_002daba4,temp_v11);
         }
         VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -542,11 +541,11 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           temp_v5 = 0xffffffff;
           temp_v9 = 0xffffffff;
           if (temp_v25 != 0) {
-            textFormatBuffer(temp_v20,"\?\?\?");
+            sprintf((char *)temp_v20,"\?\?\?");
           }
           else {
             temp_v11 = (int)FUN_002bd068(*puVar10);
-            textFormatBuffer(temp_v20,"%s",temp_v11);
+            sprintf((char *)temp_v20,"%s",temp_v11);
           }
           temp_v6 = FUN_0029dde0();
           if (temp_v6 < *(unsigned char *)((int)puVar10 + 3)) {
@@ -571,7 +570,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           textDrawString(1,temp_v5,temp_v20);
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x24,0xdd));
           temp_v5 = demonGetRaceLabel(*puVar10,0);
-          textFormatBuffer(temp_v20,"%s",temp_v5);
+          sprintf((char *)temp_v20,"%s",temp_v5);
           puVar13 = temp_v20;
           fontMeasureLineAdvance(puVar13,2);
           VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,

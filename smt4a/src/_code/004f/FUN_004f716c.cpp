@@ -1,5 +1,6 @@
 /* NON_MATCHING: same as the IV twin - the stack layout differs (retail keeps the current name pointer in the first word of the 128-byte text buffer) and registers are allocated differently; control flow and calls are the same. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
 #include <string.h>
@@ -32,7 +33,6 @@ extern const char DAT_005284c0[];           /* "battle/effect/%s.eft" */
 u32 libc_strlen(const char *s);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
 char *libc_strcpy(char *destination, const char *source);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void sysMemClear(void *block, s32 size);
 void btlCameraFinishTransition(EffectWork *work);
 u32 FUN_002282c8(u32 index, u32 kind, u32 flag);
@@ -67,7 +67,7 @@ u32 FUN_004f716c(EffectWork *work)
         bool selected = false;
         if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
             for (u32 j = 0; j < 11; j++) {
-                textFormatBuffer(text, DAT_00528534, g_btlEffect[0], j);
+                __2sprintf(text, DAT_00528534, g_btlEffect[0], j);
                 if (strcmp(text, name) == 0) {
                     btlCameraFinishTransition(work);
                     *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(work) + 0x33a8) = FUN_002282c8(j & 0xff, 7, 0);
@@ -85,7 +85,7 @@ u32 FUN_004f716c(EffectWork *work)
         }
         sysMemClear(path, 0x80);
         sysMemClear(text, 0x80);
-        textFormatBuffer(text, DAT_005284c0, name);
+        __2sprintf(text, DAT_005284c0, name);
         libc_strcpy(path, text);
         if (libc_strlen(path) == 0) {
             continue;

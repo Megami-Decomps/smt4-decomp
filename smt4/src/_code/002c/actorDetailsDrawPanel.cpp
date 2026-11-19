@@ -4,6 +4,7 @@
  * (retail: before), and the style switch's last branch is inverted. renderCtxPushA(context, flags)
  * gives retail's call order (8 lines differ once registers are ignored) but moves &g_titleScene
  * from r7 to sl, which makes 178 lines differ. */
+#include <stdio.h>
 #include "shard/Shard0034.h"
 #include "shard/TextureDrawCall.h"
 #include "code/Code0029.h"
@@ -21,7 +22,6 @@ void texDrawCompositeSprite(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 d
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void textureLoadOptionalDemonModel(s32 portrait, s32 x, s32 y, s32 depth, s32 mode);
 void FUN_002b64b8(void);
-void textFormatBuffer(char *destination, const char *format, ...);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_002bdf94(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
 void asdTextSetBaseColor(void *text, u32 color);
@@ -77,9 +77,9 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x39, 0x10);
     char text[16];
     if (profile->level >= 10) {
-        textFormatBuffer(text, "%d", profile->level);
+        sprintf(text, "%d", profile->level);
     } else {
-        textFormatBuffer(text, " %d", profile->level);
+        sprintf(text, " %d", profile->level);
     }
     drawSetColorFromRGBA8(0);
     FUN_002bdf94(0, position->x + x + offset, position->y + y, 0, 5, 0x73, text);
@@ -160,9 +160,9 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     FUN_002598f0(texts->rightAlignedValue, x + textX + offset, y + textY, 0x74, transform->alpha);
     position = asdTMTexTableEntryAt(0x39, 0x27);
     if (stats->specialValue == 0) {
-        textFormatBuffer(text, "--");
+        sprintf(text, "--");
     } else {
-        textFormatBuffer(text, "%d", stats->specialValue);
+        sprintf(text, "%d", stats->specialValue);
     }
     drawSetColorFromRGBA8(valueColor);
     FUN_002bdf94(0, x + offset + position->x, position->y + y, 0, 5, 0x74, text);

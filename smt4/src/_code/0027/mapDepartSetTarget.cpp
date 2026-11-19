@@ -25,7 +25,7 @@ static __inline s32 mapDepartFindDestination(s32 group, s32 map, u32 target)
 // Save the requested target and resolve its destination through table 23.
 void mapDepartSetTarget(s32 group, s32 map, u32 target)
 {
-    MapDepartTarget *departure = &g_gameState.jumpRequest.selection;
+    MapDepartTarget *departure = &g_mapSelection.selection;
     departure->group = group;
     departure->map = map;
     departure->target = target;

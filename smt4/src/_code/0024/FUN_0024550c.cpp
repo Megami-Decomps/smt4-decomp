@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail computes the state pointer before the frame setup, keeps a zero in r8 and loads g_btlEffect inside each state branch; armcc here hoists the global load above the state tests and tail-merges the return-1 paths. */
+#include "runtime/Stdio.h"
 #include "battle/BtlEffectLoad.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include <string.h>
@@ -10,7 +11,6 @@ extern const char DAT_004008c4[];
 
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
-void textFormatBuffer(char *buffer, const char *format, ...);
 char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
 u32 keyedRecordRegisterName(const char *key);
@@ -68,7 +68,7 @@ u32 FUN_0024550c(MoveOutEffectWork *loader)
             slot->flags = 0;
             memClear(path, sizeof(path));
             memClear(formatted, sizeof(formatted));
-            textFormatBuffer(formatted, DAT_004008c4, DAT_00400804 + i * 0x20);
+            __2sprintf(formatted, DAT_004008c4, DAT_00400804 + i * 0x20);
             libc_strcpy(path, formatted);
             libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
             if (keyedRecordFindByName(slot->name) == 0xFF) {

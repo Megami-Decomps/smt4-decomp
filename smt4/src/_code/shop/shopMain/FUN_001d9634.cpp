@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the shop main's per-frame phase machine (create the selection scene, wait for its load, tear it down, then request the next sequence); armcc here orders the shop singleton's lazy allocation (inlined twice in retail) and the story-flag screen list differently. */
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 #include "game/GameState.h"
 
@@ -47,7 +48,6 @@ void sceneRunLoadingPhaseUpdate(void);
 void FUN_003a3914(void);
 u32 _ZN9Obj55ca08D1Ev(u8 *touch);
 void asdMemFreeNonNull(u8 *block);
-void textFormatBuffer(u8 *buffer, const char *format, s32 a, s32 b);
 void asdSequenceRequest(s32 kind, s32 *arguments, s32 flag);
 s32 FUN_00287304(void);
 s32 gameStateIsFlagSetAndLarge(void);
@@ -133,7 +133,7 @@ u32 FUN_001d9634(void)
             u8 buffer[24];
             arguments[0] = 0x4B;
             arguments[1] = -1;
-            textFormatBuffer(buffer, "e%03d_%02d", 0x4B, which);
+            sprintf((char *)buffer, "e%03d_%02d", 0x4B, which);
             asdSequenceRequest(4, arguments, 0x20);
         } else if (FUN_00287304() != 0) {
             if (gameStateIsFlagSetAndLarge() != 0) {

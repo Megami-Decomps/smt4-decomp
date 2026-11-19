@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014f3f4` (_code @ 0x14f3f4, 0x11a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -16,7 +17,6 @@ int gxResetColorQuadToWhite(void);
 int SBORROW4(...);
 
 int CONCAT44(int, double);
-int textFormatBuffer(...);
 int renderCtxSelectDisplayAreaForStereoMode(...);
 int textDrawString(...);
 int FUN_00164490(int);
@@ -51,7 +51,6 @@ extern signed char DAT_005e204c; /* 0x5e204c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: renderCtxSelectDisplayAreaForStereoMode. */
 /* Supplied declaration required: textDrawString. */
@@ -203,7 +202,7 @@ char FUN_0014f3f4(void)
       temp_v20 = -0xff01;
       temp_v21 = temp_v6 * 3;
       temp_v6 = temp_v6 * 0xc;
-      textFormatBuffer(&temp_v22,
+      sprintf((char *)&temp_v22,
                    "犂袂薂鎂袂膂䂁蒂薂钂薂莂钂薂蒂䦁䂁撂颂薂銂莂覂鎂薂䂁莂膂閂钂覂辂躂䦁"
                    ,*(unsigned int *)
                      ("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 4));
@@ -217,7 +216,7 @@ char FUN_0014f3f4(void)
       temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(4,0xabec));
       temp_v20 = *(int *)("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 8)
       ;
-      textFormatBuffer(&temp_v22,"%s\x81|%s\x81|%s",
+      sprintf((char *)&temp_v22,"%s\x81|%s\x81|%s",
                    *(unsigned int *)
                     ("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v21 * 4),
                    *(unsigned int *)

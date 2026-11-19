@@ -1,4 +1,5 @@
 /* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail; the body is still the raw decompiler control-flow draft, so branch layout and register allocation differ. */
+#include "map/LmapPlayerModel.h"
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/TrigF32.h"
@@ -10,7 +11,6 @@ extern "C" {
 int FUN_0019db68(void);
 int mapInterfaceSetStateTwo(void);
 int FUN_0027fae4(void);
-int mapDepartSpawnPlayerEffect(...);
 int buttonHelpSetPreset(int);
 
 int mapDestroyOverlayModel(void);

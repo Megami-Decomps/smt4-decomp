@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the two packed-color computations differ: retail loads the RGBA floats with scalar vldr (b/a as a vldm pair in the first) and a different scheduling. */
 #include "common.h"
+#include <stdio.h>
 #include "classes/Obj557bd8.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -14,15 +15,14 @@ struct TexHeader {
 };
 
 extern "C" {
-s32 textFormatBuffer(char *output, const char *format, ...);
 TexHeader *asdTMTexTableGetHeaderValue(u32 group, s32 index);
 }
 
 /* Builds the target selection information panel: sprite metrics, colors and texture modes. */
 Obj557bd8::Obj557bd8()
 {
-    textFormatBuffer(labelText, "");
-    textFormatBuffer(detailText, "");
+    sprintf(labelText, "");
+    sprintf(detailText, "");
     labelMode = 1;
     labelVisible = 0;
     detailVisible = 0;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f3958` (_code @ 0x1f3958, 0x758 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
@@ -14,7 +15,6 @@ int FUN_0028f870(...);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int VectorSignedToFloat(...);
 
@@ -45,7 +45,6 @@ extern int resourceRunOperationIfUnblocked(int);
 extern int aocIndexValueOrDefault(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 
@@ -120,7 +119,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
         }
         temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x45c));
         temp_v8 = FUN_0028d1f4(temp_v10);
-        textFormatBuffer(temp_v9,"%d",temp_v8);
+        sprintf((char *)temp_v9,"%d",temp_v8);
         FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,8,0x6f,
                      temp_v9);
@@ -131,14 +130,14 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
       }
       else {
         temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x454));
-        textFormatBuffer(temp_v9,&LAB_001f40c0);
+        sprintf((char *)temp_v9,(const char *)&LAB_001f40c0);
         VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         textDrawString(2,0x5a5a5aff,temp_v9,(int)*(short *)(temp_v1 + 8));
         temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x45c));
-        textFormatBuffer(temp_v9,&LAB_001f40f8);
+        sprintf((char *)temp_v9,(const char *)&LAB_001f40f8);
         FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                      (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0x6f,
                      temp_v9);
@@ -160,7 +159,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
                (int)*(short *)(temp_v5 + temp_v0 * 2 + 0xe0c));
   if ((temp_v7 == 0) || (table8Type5GetValue(), temp_v7 == 0)) {
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x460));
-    textFormatBuffer(temp_v9,&LAB_001f40c0);
+    sprintf((char *)temp_v9,(const char *)&LAB_001f40c0);
     VectorSignedToFloat((int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
@@ -169,7 +168,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
     texDrawTableEntryAtStoredOrigin(2,0x1d,0x45e,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,0x83)
     ;
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x468));
-    textFormatBuffer(temp_v9,&LAB_001f40f8);
+    sprintf((char *)temp_v9,(const char *)&LAB_001f40f8);
     FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,1,8,0x83,
                  temp_v9);
@@ -199,7 +198,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
   texDrawTableEntryAtStoredOrigin(2,0x1d,0x45e,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,0x83);
   temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x468));
   temp_v8 = FUN_0028d1f4(temp_v7);
-  textFormatBuffer(temp_v9,"%d",temp_v8);
+  sprintf((char *)temp_v9,"%d",temp_v8);
   FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,1,8,0x83,
                temp_v9);

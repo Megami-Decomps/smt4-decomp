@@ -7,7 +7,9 @@
  * own pool word where retail addresses it as g_lmapScene+4 (one module data block, not declared as such);
  * (4) a few cross-jumped tails (mode 4's last step into mode 36's, mode 28's stateTime store) and
  * writeback-vs-plain state stores; (5) case 28/37 `previous` loads (vldmia vs vldr). */
+#include "map/LmapPlayerModel.h"
 #include "map/LmapGlobals.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMotionValueApi.h"
 #include "map/LmapViewGlobals.h"
 #include "game/GameState.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
@@ -32,11 +34,10 @@ void FUN_002d424c(void);
 void FUN_002d4874(void);
 void FUN_0021df18(void);
 void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading);
-f32 FUN_0027f94c(LmapScript *model);
+
 
 void lmapSetSceneId(u32 sceneId);
 void mapEaseSceneHeading(void);
-void mapDepartSpawnPlayerEffect(s32 variant);
 void FUN_0027fc14(s32 mode);
 void FUN_0027fae4(f32 x, f32 y, f32 z);
 u32 FUN_002804ec(MapVector *position);

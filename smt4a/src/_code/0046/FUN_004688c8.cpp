@@ -1,340 +1,201 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004688c8` (_code @ 0x4688c8, 0x5c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "gamedata/GameFlags.h"
-#include "test/BustupViewer.h"
-#include "shard/W6_W6Match6_ItemIcon.h"
+/* NON_MATCHING: armcc keeps an extra address of the selected quest in r8 during reward
+ * processing. The resulting stack frame and literal-pool positions differ from retail. */
+#include "camp/RenderCtx.h"
+#include "classes/Obj5333c0.h"
 #include "code/Code001b.h"
+#include "gamedata/GameDataAccess.h"
+#include "gamedata/GameFlags.h"
+#include "result/ResultSpoils.h"
+#include "script/scrScriptProcess.h"
+#include "shard/W5_W5Match7_UiQuest.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
+#include "sys/FlagWord.h"
+#include "test/BustupViewer.h"
+#include "ui/UiControl.h"
 
 extern "C" {
-
-int sysPlaySe(int);
-int buttonHelpSetText(int, unsigned int);
-int messageSetMode(int);
-int questDataGetRecord(void);
-int partyFindSlotById(int);
-int resultCreate(int);
-int uiQuestCreate(void);
-int uniteReleaseExit(void);
-int FUN_00331714(int *);
-int uiQuestClose(void);
-int stateHolder4Request(int);
-int FUN_003dec50(void);
-int FUN_003df168(int *, int);
-int FUN_00417a60(int);
-int FUN_00417e08(int);
-int pickObjStart(unsigned int *, unsigned char *);
-int flagValueSub(int, unsigned int);
-int FUN_004d0d70(void);
-
-/* stack frame of param_1: 15 slot(s), 60 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern unsigned char LAB_00468d60; /* 0x468d60 */
-extern unsigned char LAB_00468d74; /* 0x468d74 */
-extern unsigned char LAB_00468d84; /* 0x468d84 */
-extern unsigned char LAB_00468e88; /* 0x468e88 */
-
-extern int engineCleanupIsDone(void);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: messageSetScriptDisplayMode. */
-/* Supplied declaration required: buttonHelpSetText. */
-/* Supplied declaration required: messageSetMode. */
-extern int idIsAtLeast350(unsigned int);
-extern int gameFlagEntryGetBit(unsigned int, unsigned int);
-/* Supplied declaration required: questDataGetRecord. */
-extern int goalConditionsSatisfied(unsigned int);
-/* Supplied declaration required: partyFindSlotById. */
-extern int scrRunOpcodesStub(unsigned int);
-extern int screenFadeIsBusy(void);
-extern int FUN_002a746c(void);
-/* Supplied declaration required: resultCreate. */
-/* Supplied declaration required: uiQuestCreate. */
-extern unsigned int FUN_0031f8cc(void);
-/* Supplied declaration required: uniteReleaseExit. */
-/* Supplied declaration required: FUN_00331714. */
-/* Supplied declaration required: uiQuestClose. */
-extern int stateHolder4IsD(void);
-/* Supplied declaration required: stateHolder4Request. */
-/* Supplied declaration required: FUN_003dec50. */
-/* Supplied declaration required: FUN_003df168. */
-/* Supplied declaration required: FUN_00417a60. */
-/* Supplied declaration required: FUN_00417e08. */
-/* Supplied declaration required: pickObjStart. */
-/* Supplied declaration required: flagValueSub. */
-/* Supplied declaration required: FUN_004d0d70. */
-
-
-void FUN_004688c8(unsigned int *param_1)
-
-{
-/* irregular: 4 goto(s); 20 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  unsigned short *puVar5;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  
-  switch(param_1[2]) {
-  case 0:
-  case 0xb:
-    temp_v4 = 0;
-    do {
-      temp_v1 = temp_v4;
-      questDataGetRecord();
-      if (((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\0')) &&
-         (temp_v2 = gameFlagEntryGetBit(temp_v4,1), temp_v2 != 0)) {
-        temp_v0 = *(short *)(temp_v1 + 0x124);
-        temp_v2 = idIsAtLeast350(temp_v4);
-        if ((temp_v2 == 0) && (temp_v0 != 0)) {
-          switch(temp_v0) {
-          case 1:
-            if ((char)param_1[6] == '\0') goto LAB_004689f8;
-            break;
-          case 2:
-          case 3:
-          case 4:
-          case 5:
-          case 6:
-          case 7:
-          case 8:
-          case 0xe:
-            if ((char)param_1[6] == '\x01') goto LAB_004689f8;
-            break;
-          case 9:
-            if ((char)param_1[6] == '\x02') goto LAB_004689f8;
-            break;
-          case 10:
-          case 0xb:
-          case 0xc:
-          case 0xd:
-            if ((char)param_1[6] == '\x03') goto LAB_004689f8;
-          }
-        }
-        else {
-LAB_004689f8:
-          temp_v2 = goalConditionsSatisfied(temp_v4);
-          if (temp_v2 != 0) {
-            if (param_1[2] != 0xb) {
-              sysPlaySe(0xa5);
-              buttonHelpSetText(0,0xf4f4f4ff);
-              messageSetMode(1);
-              pickObjStart(param_1,&LAB_00468d60);
-              temp_v4 = param_1[2] + 1;
-            }
-            else {
-              uiQuestCreate();
-              stateHolder4Request((int)(char)param_1[4]);
-              temp_v4 = 3;
-            }
-            param_1[2] = temp_v4;
-            return;
-          }
-        }
-      }
-      temp_v4 = (temp_v4 + 1) & 0xffff;
-    } while (temp_v4 < 400);
-    if (param_1[2] == 0xb) {
-      param_1[1] = 5;
-      param_1[2] = 0;
-      return;
-    }
-    sysPlaySe(0xa5);
-    pickObjStart(param_1,&LAB_00468d74);
-    temp_v4 = 10;
-    break;
-  case 1:
-    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
-    if (temp_v2 != 2) {
-      return;
-    }
-    param_1[2] = param_1[2] + 1;
-  case 2:
-    uiQuestCreate();
-    stateHolder4Request((int)(char)param_1[4]);
-    temp_v4 = param_1[2] + 1;
-    break;
-  case 3:
-    temp_v2 = stateHolder4IsD();
-    if (temp_v2 != 0) {
-      temp_v4 = FUN_0031f8cc();
-      param_1[0x283] = temp_v4;
-      param_1[2] = 4;
-      stateHolder4Request((int)(char)param_1[4]);
-      sysPlaySe(0xa5);
-    }
-    temp_v2 = FUN_002a746c();
-    if (temp_v2 == 0) {
-      return;
-    }
-    uiQuestClose();
-    temp_v4 = 5;
-    break;
-  case 4:
-    temp_v2 = FUN_002a746c();
-    if (temp_v2 == 0) {
-      return;
-    }
-    uiQuestClose();
-    *param_1 = *param_1 & 0xffffffdf;
-    pickObjStart(param_1,&LAB_00468d84);
-    temp_v4 = 6;
-    break;
-  case 5:
-    *param_1 = *param_1 & 0xffffffdf;
-    param_1[1] = 5;
-    param_1[2] = 0;
-    messageSetMode(0);
-    return;
-  case 6:
-    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
-    if (temp_v2 != 2) {
-      return;
-    }
-    if ((*param_1 & 0x10000) == 0) {
-      temp_v4 = 0xb;
-    }
-    else {
-      puVar4 = (unsigned short *)(param_1[0x283] & 0xffff);
-      questDataGetRecord();
-      temp_v4 = (unsigned int)*puVar4;
-      questDataGetRecord();
-      temp_v2 = 0;
-      do {
-        temp_v3 = temp_v4 + temp_v2 * 8;
-        if (*(short *)(temp_v3 + 0x100) != 1) {
-          if (*(short *)(temp_v3 + 0x100) == 2) {
-            partyFindSlotById(*(unsigned short *)(temp_v3 + 0x102));
-            FUN_004d0d70();
-          }
-        }
-        else {
-          flagValueSub(*(unsigned short *)(temp_v3 + 0x102),*(unsigned int *)(temp_v3 + 0x104));
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 4);
-      temp_v2 = 0;
-      do {
-        temp_v3 = temp_v4 + temp_v2 * 2;
-        temp_v0 = *(short *)(temp_v3 + 0xe0);
-        if (temp_v0 != 0) {
-          gameFlagSetValue(temp_v0, 1, 1);
-        }
-        temp_v0 = *(short *)(temp_v3 + 0xe6);
-        if (temp_v0 != 0) {
-          gameFlagSetValue(temp_v0,0,1);
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 3);
-      resultCreate(1);
-      temp_v17 = 0;
-      temp_v18 = 0;
-      temp_v5 = 0;
-      temp_v6 = 0;
-      temp_v7 = 0;
-      temp_v8 = 0;
-      temp_v9 = 0;
-      temp_v10 = 0;
-      temp_v11 = 0;
-      temp_v12 = 0;
-      temp_v13 = 0;
-      temp_v14 = 0;
-      temp_v15 = 0;
-      temp_v16 = 0;
-      puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-      questDataGetRecord();
-      FUN_003df168(&temp_v5,*puVar5);
-      FUN_00331714(&temp_v5);
-      puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-      questDataGetRecord();
-      temp_v2 = FUN_001bd118(*puVar5);
-      if (temp_v2 == 0) {
-        puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-        questDataGetRecord();
-        FUN_00417e08(*puVar5);
-      }
-      temp_v4 = 7;
-    }
-    break;
-  case 7:
-    temp_v2 = engineCleanupIsDone();
-    if (temp_v2 == 0) {
-      return;
-    }
-    uniteReleaseExit();
-    messageSetScriptDisplayMode();
-    puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
-    questDataGetRecord();
-    FUN_00417a60(*puVar5);
-    FUN_003dec50();
-    sysPlaySe(0xa5);
-    pickObjStart(param_1,&LAB_00468e88);
-    temp_v4 = 8;
-    break;
-  case 8:
-    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
-    if (temp_v2 != 2) {
-      return;
-    }
-    param_1[2] = 0xb;
-    messageSetMode(0);
-    return;
-  case 9:
-    temp_v2 = screenFadeIsBusy();
-    if (temp_v2 != 0) {
-      return;
-    }
-    temp_v2 = buttonHelpStateIsNot3();
-    if (temp_v2 == 0) {
-      return;
-    }
-    param_1[1] = 0x12;
-    param_1[2] = 0;
-    return;
-  case 10:
-    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
-    if (temp_v2 != 2) {
-      return;
-    }
-    temp_v4 = 5;
-    break;
-  default:
-    return;
-  }
-  param_1[2] = temp_v4;
-  return;
+void sysPlaySe(u32 id);
+void buttonHelpSetText(const s8 *text, u32 color);
+u8 idIsAtLeast350(u32 id);
+s32 goalConditionsSatisfied(s32 id);
+void resultCreate(s32 mode);
+void uiQuestCreate(void);
+void uiQuestClose(void);
+void uniteReleaseExit(void);
+u8 stateHolder4IsD(void);
+u8 FUN_002a746c(void);
+u16 FUN_0031f8cc(void);
+void FUN_003dec50(void);
+u8 FUN_00417a60(u32 id);
+u32 FUN_00417e08(u16 id);
+void flagValueSub(s32 id, u32 amount);
+u32 FUN_004d0d70(u32 slot);
+u32 screenFadeIsBusy(void);
 }
 
-} /* extern "C" */
+// Look for a ready delivery quest, prompt for it, apply the requirements and rewards, then reopen the list.
+extern "C" void FUN_004688c8(Obj5333c0 *scene)
+{
+    typedef char DeliveryFieldsCheck[offsetof(Obj5333c0, location) == 0x18 &&
+        offsetof(Obj5333c0, script) == 0x2B4 && offsetof(Obj5333c0, deliveryQuest) == 0xA0C ? 1 : -1];
+    switch (scene->substate) {
+    case 0:
+    case 11: {
+        bool found = false;
+        for (u16 id = 0; id < 400; ++id) {
+            const QuestRecordA *record = questDataGetRecord(id);
+            if (record == NULL || record->kind != 0 || !gameFlagEntryGetBit(id, 1))
+                continue;
+            u16 kind = record->filterKind;
+            if (idIsAtLeast350(id) == 0 && kind != 0) {
+                switch (kind) {
+                case 1:
+                    if (scene->location != 0)
+                        continue;
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 14:
+                    if (scene->location != 1)
+                        continue;
+                    break;
+                case 9:
+                    if (scene->location != 2)
+                        continue;
+                    break;
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                    if (scene->location != 3)
+                        continue;
+                    break;
+                default:
+                    continue;
+                }
+            }
+            if (goalConditionsSatisfied(id)) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            if (scene->substate == 11) {
+                uiQuestCreate();
+                stateHolder4Request(scene->kind);
+                scene->substate = 3;
+            } else {
+                sysPlaySe(0xA5);
+                buttonHelpSetText(NULL, 0xF4F4F4FF);
+                messageSetMode(1);
+                pickObjStart(scene, "qc_DeliveryStart");
+                ++scene->substate;
+            }
+            return;
+        }
+        if (scene->substate == 11) {
+            scene->startState(5);
+            return;
+        }
+        sysPlaySe(0xA5);
+        pickObjStart(scene, "qc_DeliveryNG");
+        scene->substate = 10;
+        break;
+    }
+    case 1:
+        if (scrRunOpcodesStub(*scene->script) != 2)
+            break;
+        ++scene->substate;
+        // The opening script has finished; open the quest menu now.
+    case 2:
+        uiQuestCreate();
+        stateHolder4Request(scene->kind);
+        ++scene->substate;
+        break;
+    case 3:
+        if (stateHolder4IsD()) {
+            scene->deliveryQuest = FUN_0031f8cc();
+            scene->substate = 4;
+            stateHolder4Request(scene->kind);
+            sysPlaySe(0xA5);
+        }
+        if (FUN_002a746c()) {
+            uiQuestClose();
+            scene->substate = 5;
+        }
+        break;
+    case 4:
+        if (FUN_002a746c()) {
+            uiQuestClose();
+            flagWordClear(&scene->flags, 0x20);
+            pickObjStart(scene, "qc_DeliveryItem");
+            scene->substate = 6;
+        }
+        break;
+    case 5:
+        flagWordClear(&scene->flags, 0x20);
+        scene->startState(5);
+        messageSetMode(0);
+        break;
+    case 6:
+        if (scrRunOpcodesStub(*scene->script) != 2)
+            break;
+        if (scene->flags & 0x10000) {
+            const QuestRecordA *record = questDataGetRecord(scene->deliveryQuestId());
+            for (s32 i = 0; i < 4; ++i) {
+                const u16 kind = record->requirements[i].kind;
+                if (kind == 1)
+                    flagValueSub(record->requirements[i].id, record->requirements[i].count);
+                else if (kind == 2)
+                    FUN_004d0d70(partyFindSlotById(record->requirements[i].id));
+            }
+            for (s32 i = 0; i < 3; ++i) {
+                if (u16 flag = record->setFlags[i])
+                    gameFlagSetValue(flag, 1, 1);
+                if (u16 flag = record->clearFlags[i])
+                    gameFlagSetValue(flag, 0, 1);
+            }
+            resultCreate(1);
+            ResultSpoilsA spoils;
+            FUN_003df168(&spoils, scene->deliveryQuestId());
+            FUN_00331714(&spoils);
+            if (FUN_001bd118(scene->deliveryQuestId()) == 0)
+                FUN_00417e08(scene->deliveryQuestId());
+            scene->substate = 7;
+        } else {
+            scene->substate = 11;
+        }
+        return;
+    case 7:
+        if (engineCleanupIsDone()) {
+            uniteReleaseExit();
+            messageSetScriptDisplayMode();
+            FUN_00417a60(scene->deliveryQuestId());
+            FUN_003dec50();
+            sysPlaySe(0xA5);
+            pickObjStart(scene, "qc_QuestClear");
+            scene->substate = 8;
+        }
+        break;
+    case 8:
+        if (scrRunOpcodesStub(*scene->script) == 2) {
+            scene->substate = 11;
+            messageSetMode(0);
+        }
+        break;
+    case 9:
+        if (!screenFadeIsBusy() && buttonHelpStateIsNot3())
+            scene->startState(18);
+        break;
+    case 10:
+        if (scrRunOpcodesStub(*scene->script) == 2)
+            scene->substate = 5;
+        break;
+    }
+}

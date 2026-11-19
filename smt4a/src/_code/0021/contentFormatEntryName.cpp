@@ -1,8 +1,8 @@
 #include "common.h"
+#include <stdio.h>
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 extern "C" {
 s32 libc_sprintf(char *destination, const char *format, ...);
-void textFormatBuffer(char *destination, const char *format, const char *text);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 const char *FUN_0014bd84(u32 id);
 const char *FUN_00180114(u32 id);
@@ -30,10 +30,10 @@ void contentFormatEntryName(u32 context, s32 category, s32 id, char *destination
     } else if (category == 5) {
         const char *names[21];
         __aeabi_memcpy4(names, DAT_0052f2b4, sizeof(names));
-        textFormatBuffer(destination, "%s", names[id]);
+        sprintf(destination, "%s", names[id]);
     } else if (category == 6) {
         EntryLabelNames names = DAT_0052f308;
-        textFormatBuffer(destination, "%s", names.names[id]);
+        sprintf(destination, "%s", names.names[id]);
     }
 }
 }

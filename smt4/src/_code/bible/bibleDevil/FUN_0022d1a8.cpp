@@ -1,5 +1,6 @@
 /* NON_MATCHING: bible devil stat rows; the stat lookup is one inline helper here while retail expands separate branch trees per use, and the row arrays are addressed through one struct instead of six literal bases */
 #include "common.h"
+#include <stdio.h>
 #include "gamedata/NkmBaseRecord.h"
 
 #define BIBLE_STAT_ROWS 10
@@ -49,7 +50,6 @@ extern BibleDevilRows g_bibleDevilRows;
 
 s32 FUN_0029e924(void *list);
 s32 rangeLimitMin(void *list);
-void textFormatBuffer(char *buffer, const char *format, u32 value);
 u32 FUN_0029ce60(u32 devilId, s32 column, s32 flag);
 BibleLayoutPoint *FUN_002bf4f0(void *layout, s32 id);
 
@@ -125,7 +125,7 @@ void FUN_0022d1a8(BibleDevilWork *work)
         BibleLayoutPoint *value2 = FUN_002bf4f0(work->layout, 0x4C6);
         g_bibleDevilRows.x[i] = value2->x + labelX;
         g_bibleDevilRows.y[i] = value2->y + labelY;
-        textFormatBuffer(g_bibleDevilRows.text[i], "%d", shown);
+        sprintf(g_bibleDevilRows.text[i], "%d", shown);
         g_bibleDevilRows.textColor[i] = textColor;
     }
 }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00269dc8(void);
+int uiQuestCreate(void);
 int messageSlotSet(int a);
 int scrCommMessageSetMode(...);
 int uiQuestClose(void);
@@ -20,7 +20,7 @@ u8 FUN_002cddcc(void)
     arg = scrGetArg(0);
     if (scrGetCommandFrame() == 0) {
         scrCommMessageSetMode(1);
-        FUN_00269dc8();
+        uiQuestCreate();
         FUN_002fec80(arg);
     }
     done = FUN_002fec60();

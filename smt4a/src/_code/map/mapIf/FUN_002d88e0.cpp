@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "event/bustupEvent/BustupTex.h"
 #include "Model/MoriModelContent.h"
@@ -8,7 +9,6 @@ namespace {
 struct MapIfSpawnPose { f32 x, y, z, heading; };
 }
 extern "C" {
-s32 textFormatBuffer(char *output, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 
 // Create the map's lmap fast model at the supplied position and heading.
@@ -24,7 +24,7 @@ void FUN_002d88e0(MapIfSpawnPose pose)
     slot->position.z = pose.z;
     slot->position.w = pose.heading;
     char path[128];
-    textFormatBuffer(path, "map/all/lmap_fast.bam");
+    sprintf(path, "map/all/lmap_fast.bam");
     MoriModelContent *resource = static_cast<MoriModelContent *>(
         asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 0x1745));
     if (resource != NULL)

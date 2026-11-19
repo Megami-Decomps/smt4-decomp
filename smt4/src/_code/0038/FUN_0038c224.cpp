@@ -1,4 +1,5 @@
 /* NON_MATCHING: typed owner-aware allocations retain returned array/item buffers; result, DateTime and iterator layouts and other raw callee contracts remain unrecovered. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_ArchiveIcon.h"
 #include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
@@ -14,7 +15,6 @@ int FUN_0026281c(...);
 int FUN_002b4b80(int, int);
 int wstrlenU16(...);
 int FUN_002ba81c(...);
-int textFormatBuffer(...);
 int memClear(...);
 int jyoucyuGetTableEntry(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
@@ -81,7 +81,6 @@ extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: FUN_002b4b80. */
 /* Supplied declaration required: wstrlenU16. */
 /* Supplied declaration required: FUN_002ba81c. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -508,7 +507,7 @@ int FUN_0038c224(int param_1)
           temp_v9 = FUN_00234474(temp_v17,temp_v37);
           if (temp_v9 != 0) {
             FUN_002c5e80(temp_v9,0,10);
-            textFormatBuffer(temp_v16 + 0x980,&LAB_0038cbd4,temp_v9);
+            sprintf((char *)(temp_v16 + 0x980),(const char *)&LAB_0038cbd4,temp_v9);
           }
         }
         temp_v9 = temp_v16 + 0x980;

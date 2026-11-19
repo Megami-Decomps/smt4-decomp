@@ -1,4 +1,5 @@
 /* NON_MATCHING: the 18 resource words are explicit zero stores (retail has no memclr) and rows now match 131/131; retail hoists a callee-saved zero (r5) to function entry and keeps g_eplSlots in r6, ours uses the loop-local zero and r5. */
+#include <stdio.h>
 #include "shard/W4_Match3_EplSlots.h"
 #include "game/GameStateA.h"
 #include "AsdSDK/AsdDebug.h"
@@ -7,7 +8,6 @@ extern "C" {
 extern const char DAT_00531a18[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void tripleClear(void *triple);
-void textFormatBuffer(char *destination, const char *format, ...);
 void *asdLoadFileSyncNoContext(const char *path, u32 *sizes, u32 mode, u32 alignment);
 void *FUN_001abbc4(void *buffer);
 
@@ -48,7 +48,7 @@ void FUN_002b75b0(void)
         }
     }
     if (g_gameState.mapId == 0x26) {
-        textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
+        sprintf(path, "effect_editor/SIBUKI.EPL");
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {
             slot->buffer = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
@@ -56,7 +56,7 @@ void FUN_002b75b0(void)
         }
     }
     if (g_gameState.mapId == 0x2B || g_gameState.mapId == 0x2C || g_gameState.mapId == 0x2F) {
-        textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
+        sprintf(path, "effect_editor/SIBUKI.EPL");
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {
             slot->buffer = asdLoadFileSyncNoContext(path, &size, 1, 0x80);

@@ -8,7 +8,7 @@
 extern "C" {
 
 int FUN_002630e0(unsigned int *, int, unsigned int);
-int uiStoreTextureEntryCenter(...);
+int uiStoreTextureEntryCenter(...); // declcheck: local (romwright prototype; its types do not fit ui/UiTexturePlacement.h: including it fails to compile)
 int FUN_002963ec(...);
 int FUN_003adca8(int, int, unsigned int);
 

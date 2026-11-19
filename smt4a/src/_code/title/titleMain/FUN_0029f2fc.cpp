@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029f2fc` (_code @ 0x29f2fc, 0x1724 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -26,7 +27,6 @@ int commonBgStopChildAndBeginTransition(void);
 int FUN_003c91e8(void);
 int gameFlagsSetFlagsFromTaggedGroupEntries(...);
 
-int textFormatBuffer(...);
 int jobStop(...);
 int ifTouchRegionRemove(void);
 int sysPlaySe(...);
@@ -77,7 +77,6 @@ extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: __ARM_common_memcpy4_9. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern int gameDataBlocksGetSaveData(void);
@@ -579,7 +578,7 @@ LAB_0029fb00:
       temp_v7 = puVar5[2];
       dataTableGet(0x3a,0);
       temp_v5 = dataTableGetEntries();
-      textFormatBuffer(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
+      sprintf((char *)&temp_v13,(const char *)(temp_v5 + temp_v7 * 100 + 0x14),&LAB_0029ff54);
       buttonHelpSetText(&temp_v13,0xf4f4f4ff);
       if (*(char *)(puVar5 + 0xf) != '\0') {
         commonBgReset();
@@ -700,7 +699,7 @@ LAB_0029fb00:
     temp_v7 = puVar4[2];
     dataTableGet(0x3a,0);
     temp_v5 = dataTableGetEntries();
-    textFormatBuffer(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
+    sprintf((char *)&temp_v13,(const char *)(temp_v5 + temp_v7 * 100 + 0x14),&LAB_0029ff54);
     buttonHelpSetText(&temp_v13,0xf4f4f4ff);
     if (((*(char *)((int)puVar4 + 0x3f) != '\0') || (temp_v5 = buttonHelpIsActionActive(1), temp_v5 != 0)) ||
        (temp_v5 = padButtonIsPressed(0), temp_v5 != 0)) {

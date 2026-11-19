@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a968c` (_code @ 0x2a968c, 0x998 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -44,7 +44,6 @@ typedef struct {
 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -104,12 +103,12 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x16b,param_1,param_2,0x6f);
     texDrawTableEntryAtStoredOrigin(2,0x1a,0x16c,param_1,param_2,0x74);
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x168));
-    textFormatBuffer(temp_v7,"%s","\x82h\x82\x8e\x82\x88\x82\x85\x82\x92\x82\x89\x82\x94\x82\x89\x82\x8e\x82\x87");
+    sprintf((char *)temp_v7,"%s","\x82h\x82\x8e\x82\x88\x82\x85\x82\x92\x82\x89\x82\x94\x82\x89\x82\x8e\x82\x87");
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,0xff,temp_v7);
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x169));
-    textFormatBuffer(temp_v7,"%s","\x82o\x82\x81\x82\x92\x82\x85\x82\x8e\x82\x94\x81@\x82r\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93");
+    sprintf((char *)temp_v7,"%s","\x82o\x82\x81\x82\x92\x82\x85\x82\x8e\x82\x94\x81@\x82r\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93");
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,0xff,temp_v7);
@@ -143,13 +142,13 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     }
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4d));
     temp_v2 = FUN_00180114(*psVar3);
-    textFormatBuffer(temp_v7,"%s",temp_v2);
+    sprintf((char *)temp_v7,"%s",temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v7);
     temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4e));
     temp_v2 = FUN_0014bf3c(*psVar3,0);
-    textFormatBuffer(temp_v7,"%s",temp_v2);
+    sprintf((char *)temp_v7,"%s",temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0x57d8ffff,temp_v7);
@@ -233,7 +232,7 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x171,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                    0x65);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x178));
-      textFormatBuffer(temp_v7,"\x82m\x82\x8f\x82\x8e\x82\x85");
+      sprintf((char *)temp_v7,"\x82m\x82\x8f\x82\x8e\x82\x85");
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,

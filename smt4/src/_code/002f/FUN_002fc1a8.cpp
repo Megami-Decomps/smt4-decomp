@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail loads the flag address (ldr r7) before `sub sp, #260`; built emits it after the sub */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
+#include <stdio.h>
 #include "shard/W6_W6Match2_TextureHolder.h"
 
 extern "C" {
 
-s32 textFormatBuffer(char *output, const char *format, ...);
 u32 asdLoadFileSync(const char *path, u32 a, u32 b, u32 c);
 void asdMemFree(void *block);
 
@@ -21,7 +21,7 @@ void FUN_002fc1a8(void)
     if (g_effectTexturesLoaded == 0) {
         i = 0;
         do {
-            textFormatBuffer(path, "effect/tex/be_%04d.stex", i + 1);
+            sprintf(path, "effect/tex/be_%04d.stex", i + 1);
             void *file = (void *)asdLoadFileSync(path, 0, 1, 0x80);
             g_effectTextures[i] = asdEffectTextureCreate(file);
             asdMemFree(file);

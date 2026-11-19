@@ -1,9 +1,9 @@
 /* NON_MATCHING: filename buffers start eight bytes later (retail keeps 8 spare bytes after them); flag-clear temp register and the id-store order differ. */
+#include "runtime/Stdio.h"
 #include "gfx/VersionedTextureRequest.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
-void textFormatBuffer(char *, const char *, ...);
 char *libc_strcpy(char *, const char *);
 void asdMemFree(const void *);
 void memClear(void *, u32);
@@ -26,7 +26,7 @@ u32 FUN_003db258(VersionedTextureOwner *owner, const char *effect)
     char path[64] = {0};
     char formatted[128];
     memClear(formatted, 0x80);
-    textFormatBuffer(formatted, DAT_004008c4, effect);
+    __2sprintf(formatted, DAT_004008c4, effect);
     libc_strcpy(path, formatted);
     libc_strcpy(request->name, libc_strrchr(path, '/') + 1);
     if (keyedRecordFindByName(request->name) == 0xff) {

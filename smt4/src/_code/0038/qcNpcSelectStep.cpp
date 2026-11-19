@@ -1,9 +1,16 @@
-/* NON_MATCHING: 36 lines, all scheduling and register choices: the order of the hoisted field
- * addresses in the prologue, the choice count's increment (retail reloads it after storing the
- * choice), the cursor load in the highlight loop, one temporary in the first marker-hiding loop,
- * and step 4's last two stores (retail stores the step before the flags). */
+/* NON_MATCHING: 24 lines, registers and prologue order only: the choice count read for the list store
+ * (retail r1, built r0), one temporary in the first marker-hiding loop, and the order of the hoisted
+ * field addresses in the prologue (retail computes &choiceCount first). The highlight loop matches now
+ * that the offered NPC's number is read before the cursor test. Retail's address order says the
+ * choice-list loop of step 0 is an inlined function body: as a helper (with a 128-byte glyph buffer and
+ * `path` declared before `messagePath`, which then give retail's 260-byte frame, and choiceNpc a plain
+ * `static`) the count and the address order match and 22 lines remain, the prologue's first adds and the
+ * marker-hiding temporary. That helper would have one call site and no other evidence, so the loop
+ * stays in place. */
+#include <stdio.h>
 #include "ui/DummyAttachmentWork.h"
 #include "script/scrScriptProcess.h"
+#include "sys/FlagWord.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -52,6 +59,18 @@ static __inline AnimOwner *selectedNpcAnim(DummyAttachmentWork *work)
     return (AnimOwner *)work->primary[work->selected->npc - 1];
 }
 
+/* The 1-based marker number of the NPC offered as choice `choice`. */
+static __inline s32 choiceNpc(DummyAttachmentWork *work, s32 choice)
+{
+    return work->npcEntries[work->choices[choice]].npc;
+}
+
+/* Whether the chosen NPC's motion has finished. */
+static u32 selectedNpcIsFinished(DummyAttachmentWork *work)
+{
+    return effIsFinished(work->primary[work->selected->npc - 1]->node);
+}
+
 /* Hide every offered NPC's selection marker. */
 static __inline void hideChoiceMarkers(DummyAttachmentWork *work)
 {
@@ -70,7 +89,7 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
     case 0:
         /* Let the previous NPC's motion finish, then put it back to rest. */
         if (work->selected != NULL) {
-            if (!effIsFinished(work->primary[work->selected->npc - 1]->node))
+            if (!selectedNpcIsFinished(work))
                 return;
             FUN_00210194(selectedNpcModel(work), 0.0f);
             animOwnerSetScale(selectedNpcModel(work), 0.0f);
@@ -89,7 +108,8 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
             textConvertToGlyphPairs(name, glyphs);
             libc_strcat(work->choiceText, glyphs);
             libc_strcat(work->choiceText, DAT_004058cc);
-            work->choices[work->choiceCount++] = i;
+            work->choices[work->choiceCount] = i;
+            work->choiceCount++;
             if (work->choiceCount >= sizeof(work->choices) / sizeof(work->choices[0]))
                 break;
         }
@@ -110,12 +130,14 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
             work->cursor = messageTargetGetValue();
             if (work->cursor == -1)
                 return;
-            work->playback.requested = work->npcEntries[work->choices[work->cursor]].npc;
+            work->playback.requested = choiceNpc(work, work->cursor);
             for (s32 i = 0; i < work->choiceCount; i++) {
+                s32 npc = choiceNpc(work, i);
+
                 if (work->cursor == i)
-                    asdMdlObjectShow(work->secondary[work->npcEntries[work->choices[i]].npc - 1]);
+                    asdMdlObjectShow(work->secondary[npc - 1]);
                 else
-                    asdMdlObjectHide(work->secondary[work->npcEntries[work->choices[i]].npc - 1]);
+                    asdMdlObjectHide(work->secondary[npc - 1]);
             }
             return;
         }
@@ -125,7 +147,7 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
             animOwnerSetScale(selectedNpcModel(work), 1.0f);
             FUN_002e1230(selectedNpcAnim(work), 0);
             work->step++;
-            work->flags |= 0x100;
+            flagWordSet(&work->flags, 0x100);
             hideChoiceMarkers(work);
             buttonHelpSetPreset(0xa2);
             work->lastChoice = work->cursor;
@@ -134,15 +156,15 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
         /* Cancelled. */
         work->step = 5;
         work->playback.requested = 0;
-        work->flags &= ~0x100;
+        flagWordClear(&work->flags, 0x100);
         hideChoiceMarkers(work);
         break;
     case 2: {
         char messagePath[64];
         char path[64];
         u16 id = dataTable27Sub0GetRecord(&work->npcTable, 0)[work->selected->record].resourceId;
-        textFormatBuffer(path, "quest_center/npc/n%03d/n%03d.bf", id, id);
-        textFormatBuffer(messagePath, "quest_center/npc/n%03d/n%03d.mbm", id, id);
+        sprintf(path, "quest_center/npc/n%03d/n%03d.bf", id, id);
+        sprintf(messagePath, "quest_center/npc/n%03d/n%03d.mbm", id, id);
         asdLoadFileAsyncSimple(path, &work->npcScriptFile, 0);
         asdLoadFileAsyncSimple(messagePath, &work->npcMessageFile, 0);
         work->step++;
@@ -151,7 +173,7 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
     case 3:
         if (work->npcScriptFile == 0 || work->npcMessageFile == 0)
             return;
-        if (!effIsFinished(work->primary[work->selected->npc - 1]->node))
+        if (!selectedNpcIsFinished(work))
             return;
         FUN_00210194(selectedNpcModel(work), work->unkD44);
         animOwnerSetScale(selectedNpcModel(work), 0.0f);
@@ -184,10 +206,10 @@ void qcNpcSelectStep(DummyAttachmentWork *work)
             work->npcMessageFile = 0;
         }
         work->step = 0;
-        work->flags &= ~0x100;
+        flagWordClear(&work->flags, 0x100);
         break;
     case 5:
-        work->flags &= ~0x100;
+        flagWordClear(&work->flags, 0x100);
         work->state = 5;
         work->step = 0;
         break;

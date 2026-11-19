@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b7c4` (_code @ 0x33b7c4, 0x634 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "gamedata/MapSaveBlockA.h"
 #include "romwright_types.h"
 #include "map/MapEnemyGlobal.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int libm_cosf(void);
 int libm_sinf(void);
 int mapPlayActorKindSound(char *, int);
@@ -50,7 +50,6 @@ extern int DAT_005f1be0; /* 0x5f1be0 */
 extern int DAT_005f1be8; /* 0x5f1be8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: libm_cosf. */
@@ -122,7 +121,7 @@ unsigned int FUN_0033b7c4(void)
               }
               DAT_005f1776 = 1;
               DAT_005f1778 = *(unsigned int *)(temp_v4 + 0x9c);
-              textFormatBuffer(&DAT_005f177c,&LAB_0033bc8c,*(unsigned int *)(temp_v4 + 0x9c),
+              sprintf((char *)&DAT_005f177c,(const char *)&LAB_0033bc8c,*(unsigned int *)(temp_v4 + 0x9c),
                            *(unsigned int *)(temp_v4 + 0xa0));
             }
             else {
@@ -204,7 +203,7 @@ LAB_0033baac:
                   }
                   DAT_005f1776 = 1;
                   DAT_005f1778 = *(unsigned int *)(temp_v6 + 0x9c);
-                  textFormatBuffer(&DAT_005f177c,&LAB_0033bc8c,*(unsigned int *)(temp_v6 + 0x9c),
+                  sprintf((char *)&DAT_005f177c,(const char *)&LAB_0033bc8c,*(unsigned int *)(temp_v6 + 0x9c),
                                *(unsigned int *)(temp_v6 + 0xa0));
                 }
                 else if (*(int *)(temp_v6 + 0x9c) != 0) {

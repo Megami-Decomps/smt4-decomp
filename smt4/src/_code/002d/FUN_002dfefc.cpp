@@ -1,4 +1,5 @@
 /* NON_MATCHING: byte-index division is retained in a shifted register instead of retail's deferred ASR; zero/bitmask registers differ. */
+#include "runtime/Stdio.h"
 #include "gamedata/MapSaveBlock.h"
 #include "map/MapIfTimer.h"
 #include <stddef.h>
@@ -11,7 +12,6 @@ extern char DAT_004b7608[];
 extern const char DAT_00404464[];
 u32 FUN_002bfdd4(void);
 s32 appCheckPurchaseRequirements(u32 app);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 layer, u32 entry, u32 first, u32 second, f32 scaleX, f32 scaleY);
 
@@ -35,7 +35,7 @@ void FUN_002dfefc(s32 suppressNotification)
     }
     if (suppressNotification == 0 && discovered && g_gameState.mapId != 0x24 && gameFlagIsSet(0x408) != 0) {
         DAT_004b7608[0] = '\0';
-        textFormatBuffer(DAT_004b7608, DAT_00404464);
+        __2sprintf(DAT_004b7608, DAT_00404464);
         MapIfTimer *timer = g_mapIfTimer;
         timer->unk14 = reinterpret_cast<u32>(DAT_004b7608);
         timer->state = 3;

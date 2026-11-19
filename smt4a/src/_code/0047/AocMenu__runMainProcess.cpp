@@ -1,6 +1,7 @@
 /* NON_MATCHING: every branch and call matches; retail keeps the archive result at sp+8, the text pointer at
  * sp+16 and the previous slot at sp+24 (built: sp+16, sp+12, sp+4), reads the failed result before storing the
  * error kind, and so schedules the first description call's stack arguments differently (22 rows). */
+#include <stdio.h>
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "classes/Obj422214Owner.h"
@@ -255,7 +256,7 @@ void AocMenu::runMainProcess()
         char name[0x80];
         Obj422214Owner *record = selectedRecord(main, this);
         sysMemClear(name, sizeof(name));
-        textFormatBuffer(name, "%ls", record);
+        sprintf(name, "%ls", record);
         scrSetStringSlot(0, name);
         buttonHelpSetEnabled(1);
         if (scrRunOpcodesStub(script) != 2) {

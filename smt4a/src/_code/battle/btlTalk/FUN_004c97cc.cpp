@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (210 vs 228 rows); retail's load-stage fallthrough and mask tests are laid out differently */
 #include "common.h"
+#include <stdio.h>
 #include "gamedata/NkmBaseRecordA.h"
 #include "bible/bibleAnalyze.h"
 #include "battle/BtlUiGlobal.h"
@@ -61,7 +62,6 @@ extern s32 g_btlCamera;
 extern u32 g_btlActionReflect;
 
 SideRecord* btlFindEntryBlockByMemberId(BattleMain* battle, u32 id);
-void textFormatBuffer(char* out, const char* format, ...);
 void asdLoadFileAsyncSimple(const char* path, u32* out, s32 flag);
 void FUN_004f741c(u8* aux);
 s32 FUN_004f2708(s32 camera, BattleMain* battle, s32 flag);
@@ -87,10 +87,10 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
     case 0: {
         SideRecord* side = btlFindEntryBlockByMemberId(window->battle, window->sideId);
         NkmBaseRecordA *info = nkmBaseGetRecord(side->id);
-        textFormatBuffer(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->talkTone]);
+        sprintf(path, "battle/talk/Tone%s.tbb", g_btlTalkToneNames[info->talkTone]);
         asdLoadFileAsyncSimple(path, &window->toneFile, 1);
         window->modeA = info->talkTone;
-        textFormatBuffer(path, "battle/talk/TalkTone%s.mbm", g_btlTalkToneNames[info->talkTone]);
+        sprintf(path, "battle/talk/TalkTone%s.mbm", g_btlTalkToneNames[info->talkTone]);
         asdLoadFileAsyncSimple(path, &window->toneModel, 1);
         asdLoadFileAsyncSimple("battle/talk/talk.bf", &window->talkFile, 1);
         FUN_004f741c(g_btlAux);

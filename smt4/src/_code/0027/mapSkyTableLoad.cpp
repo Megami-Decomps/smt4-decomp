@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct MapTable {
 
 extern MapTable g_mapTable;
 
-s32 textFormatBuffer(char *path, const char *format, ...);
 u32 asdLoadFileSyncDefault(const char *path);
 
 /* Loads the sky table of map `map` (maps 100 and up use the L directory with the map number minus 100). */
@@ -20,11 +20,11 @@ void mapSkyTableLoad(s32 map)
 
     g_mapTable.unk8 = 0x80;
     if (map >= 100) {
-        textFormatBuffer(path, "/map/L%03d/SKY%03d.TBL", map - 100, map);
+        sprintf(path, "/map/L%03d/SKY%03d.TBL", map - 100, map);
         g_mapTable.sky = asdLoadFileSyncDefault(path);
         return;
     }
-    textFormatBuffer(path, "/map/m%03d/SKY%03d.TBL", map, map);
+    sprintf(path, "/map/m%03d/SKY%03d.TBL", map, map);
     g_mapTable.sky = asdLoadFileSyncDefault(path);
 }
 

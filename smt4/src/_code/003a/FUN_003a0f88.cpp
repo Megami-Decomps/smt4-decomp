@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation only (retail keeps the y offset in r7 and the constant 1 in r9, ours the other way round, so the two stack-argument stores use strd instead of stm; the frame setup order differs likewise) */
+#include <stdio.h>
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 
@@ -38,7 +39,6 @@ u32 flaggedEntryGetValueByState(const ChoicePanelEntry *entry);
 const SpritePosition *FUN_002bf4f0(void *sprites, u32 id);
 void uiRectDrawAtBottomRight(void *sprites, s32 mode, s32 x, s32 y, s32 depth);
 void FUN_00231bcc(void *sprites, u32 image, s32 x, s32 y, s32 depth, u32 flags);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void drawTextAtRelativePosition(void *sprites, s32 a, s32 x, s32 y, s32 b, u32 mode, u32 color, s32 depth,
                                 const char *text);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
@@ -81,7 +81,7 @@ void FUN_003a0f88(ChoicePanel *panel)
     if (panel->value == panel->selected) {
         color = 0xf49800ff;
     }
-    textFormatBuffer(number, "%2d", value);
+    sprintf(number, "%2d", value);
     drawTextAtRelativePosition(panel->sprites, 0, x + numberPos->x, y + numberPos->y, 0, 7, color, depth, number);
 }
 

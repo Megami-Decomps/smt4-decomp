@@ -1,5 +1,6 @@
 /* NON_MATCHING: script-load transition registers and shared continuation/cold-block layout differ from retail. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/DataTable.h"
 
@@ -31,7 +32,6 @@ extern void *g_aocSystem;
 extern void *DAT_00435d18;
 extern const char DAT_00400968[];
 extern const char DAT_00400938[];
-void textFormatBuffer(char *destination, const char *format, ...);
 s32 FUN_0022a2c4(void *system, u32 id);
 void aocQueueType1e(void *system, u32 id, void **output, const char *name);
 void aocQueueType1f(void *system, u32 id, void **output, const char *name);
@@ -64,7 +64,7 @@ static inline u32 loadBattleEventScript(BattleEventWork *work, BattleEventContex
 {
     char name[128];
     memClear(name, sizeof(name));
-    textFormatBuffer(name, DAT_00400938, context->eventName, context->eventName);
+    __2sprintf(name, DAT_00400938, context->eventName, context->eventName);
     if (FUN_0022a2c4(g_aocSystem, context->aocId))
         aocQueueType1f(g_aocSystem, context->aocId, &work->scriptData, name);
     else
@@ -95,7 +95,7 @@ extern "C" u32 battleEventProcessUpdate(BattleEventWork *work, BattleEventContex
     case 1: {
         char name[128];
         memClear(name, sizeof(name));
-        textFormatBuffer(name, DAT_00400968, context->eventName, context->eventName);
+        __2sprintf(name, DAT_00400968, context->eventName, context->eventName);
         if (FUN_0022a2c4(g_aocSystem, context->aocId))
             aocQueueType1e(g_aocSystem, context->aocId, &work->tableData, name);
         else

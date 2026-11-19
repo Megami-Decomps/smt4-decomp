@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "status/StatusFlagLabels.h"
 
 struct FlagLabelRecord {
@@ -12,7 +13,6 @@ extern const char DAT_00528130[];
 extern const char DAT_00528138[];
 extern const char DAT_00528140[];
 u32 entryTableCallSlot3(u32 table);
-void textFormatBuffer(char *output, const char *format, ...);
 const char *gameGetPlayerName();
 const char *dataTable01GetRecordWithAocOverride(u16 message);
 }
@@ -26,16 +26,16 @@ extern "C" void uiDrawFlagLabels(void *, const FlagLabelRecord *record)
     char label[12] = {};
     const char *description = NULL;
     if (DAT_005715f8[2] & record->flags) {
-        textFormatBuffer(label, DAT_00528128);
+        __2sprintf(label, DAT_00528128);
         description = gameGetPlayerName();
     } else if (record->flags & DAT_005715f8[3]) {
-        textFormatBuffer(label, DAT_00528130);
+        __2sprintf(label, DAT_00528130);
         description = dataTable01GetRecordWithAocOverride(record->message);
     } else if (record->flags & DAT_005715f8[5]) {
-        textFormatBuffer(label, DAT_00528138);
+        __2sprintf(label, DAT_00528138);
         description = dataTable01GetRecordWithAocOverride(record->message);
     } else if (DAT_005715f8[4] & record->flags) {
-        textFormatBuffer(label, DAT_00528140);
+        __2sprintf(label, DAT_00528140);
         description = dataTable01GetRecordWithAocOverride(record->message);
     }
     drawFlagLabelLine(label, 0);

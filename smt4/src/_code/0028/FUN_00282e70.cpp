@@ -1,8 +1,8 @@
+#include "camp/CampMenuEntry.h"
 #include "ui/PartyPanelState.h"
 #include "code/Code0029_VariantB.h"
 
 extern "C" {
-s32 objectPartRunUnlessLocked(void *part);
 
 /* Reports whether the current or pending panel mode has finished its transition: the mode's part
  * is idle (listCursorGetRowIfUnblocked and objectPartRunUnlessLocked both return 0), or for mode 10 no

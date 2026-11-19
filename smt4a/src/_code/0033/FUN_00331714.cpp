@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "mapnavi/naviMain.h"
 #include "code/Code001b.h"
+#include "result/ResultSpoils.h"
 
 extern "C" {
 
@@ -59,9 +60,10 @@ extern int mapMainIsBusy(void);
 /* WARNING: Removing unreachable block (ram,0x00331824) */
 /* WARNING: Removing unreachable block (ram,0x00331828) */
 
-void FUN_00331714(int param_1)
+void FUN_00331714(const ResultSpoilsA *spoils)
 
 {
+  s32 param_1 = reinterpret_cast<s32>(spoils);
 /* irregular: irregular input(s): in_fpscr; 18 native warning(s); review required */
   short temp_v0;
   char temp_v1;

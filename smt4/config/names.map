@@ -2530,7 +2530,7 @@
 001ff8e0 inputTestEnabledRule
 00210974 inputClearActiveValues
 0021241c npcRoomDebugDrawStartId
-002be624 textFormatBuffer
+002be624 __2sprintf
 002916c0 debugDrawText
 0021193c scrCommMessageDispatchWithTransition
 001fc248 placementUpdateSceneState
@@ -5330,3 +5330,14 @@
 002036b8 uniteOptionListDraw
 00254058 dataTable24FindById
 00287704 qcGetCenterSlotGroups
+00269dc8 uiQuestCreate
+001956c4 uiQuestCalc
+001ad9f0 uiQuestDrawUpper
+001ddc7c uiQuestDrawLower
+001b10e4 clearSaveUpdate
+003b992c eventUpdateScriptLaunch
+00151b88 skillRecordCompareId
+002dc7a0 fusionComparePairsByRaceLevelAndIdDescending
+001f6098 fusionComparePairScoreAscending
+00273fc0 lmapUpdateSceneModels
+001978b4 campDrawCommandMenu

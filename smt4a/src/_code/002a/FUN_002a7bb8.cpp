@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a7bb8` (_code @ 0x2a7bb8, 0x1abc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -11,7 +12,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int FUN_0014bf3c(...);
 int textDrawString(...);
 int texDrawCompositeSprite(int, int, int, int, int, int);
@@ -54,7 +54,6 @@ extern unsigned char LAB_002a967c; /* 0x2a967c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0014bf3c. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -148,13 +147,13 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
     }
   }
   temp_v7 = (int)FUN_00180114(*puVar5);
-  textFormatBuffer(temp_v20,"%s",temp_v7);
+  sprintf((char *)temp_v20,"%s",temp_v7);
   VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(2,temp_v18,temp_v20);
   temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4e));
   temp_v18 = FUN_0014bf3c(*puVar5,0);
-  textFormatBuffer(temp_v20,"%s",temp_v18);
+  sprintf((char *)temp_v20,"%s",temp_v18);
   VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(2,0x57d8ffff,temp_v20);
@@ -217,7 +216,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
                   );
       temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x118));
       temp_v17 = (int)FUN_00180114(*psVar13);
-      textFormatBuffer(temp_v20,"%s",temp_v17);
+      sprintf((char *)temp_v20,"%s",temp_v17);
       puVar16 = temp_v20;
       fontMeasureLineAdvance(puVar16,1);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -228,7 +227,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       textDrawString(1,0xffffffff,temp_v20,(int)*(short *)(temp_v12 + 10));
       temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x119));
       temp_v17 = FUN_0014bf3c(*psVar13,0);
-      textFormatBuffer(temp_v20,"%s",temp_v17);
+      sprintf((char *)temp_v20,"%s",temp_v17);
       puVar16 = temp_v20;
       fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -276,7 +275,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
                   );
       temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x118));
       temp_v17 = (int)FUN_00180114(*psVar13);
-      textFormatBuffer(temp_v20,"%s",temp_v17);
+      sprintf((char *)temp_v20,"%s",temp_v17);
       puVar16 = temp_v20;
       fontMeasureLineAdvance(puVar16,1);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -287,7 +286,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       textDrawString(1,0xffffffff,temp_v20,(int)*(short *)(temp_v11 + 8));
       temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x119));
       temp_v17 = FUN_0014bf3c(*psVar13,0);
-      textFormatBuffer(temp_v20,"%s",temp_v17);
+      sprintf((char *)temp_v20,"%s",temp_v17);
       puVar16 = temp_v20;
       fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -334,11 +333,11 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       FUN_002f3a90();
       temp_v11 = uniteSelectedFusionIsEnabled();
       if (temp_v11 != 0) {
-        textFormatBuffer(temp_v22,"-");
+        sprintf((char *)temp_v22,"-");
         temp_v14 = 0;
       }
       else {
-        textFormatBuffer(temp_v22,"%d",temp_v14);
+        sprintf((char *)temp_v22,"%d",temp_v14);
       }
       piVar21 = (int *)gameGetSlotTable();
       if (*piVar21 < temp_v14) {
@@ -440,7 +439,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
     temp_v17 = 0xf5ff9fff;
   }
   temp_v18 = (int)FUN_00180114(*psVar13);
-  textFormatBuffer(temp_v20,"%s",temp_v18);
+  sprintf((char *)temp_v20,"%s",temp_v18);
   VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v8,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v9,
@@ -448,7 +447,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   textDrawString(2,temp_v17,temp_v20,(int)*(short *)(temp_v11 + 8));
   temp_v14 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x13a));
   temp_v17 = FUN_0014bf3c(*psVar13,0);
-  textFormatBuffer(temp_v20,"%s",temp_v17);
+  sprintf((char *)temp_v20,"%s",temp_v17);
   puVar16 = temp_v20;
   fontMeasureLineAdvance(puVar16,2);
   VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v14 + 10) + temp_v8,
@@ -529,7 +528,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
     temp_v17 = 0xf5ff9fff;
   }
   temp_v18 = (int)FUN_00180114(*psVar13);
-  textFormatBuffer(temp_v20,"%s",temp_v18);
+  sprintf((char *)temp_v20,"%s",temp_v18);
   VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v8,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v14 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v9,
@@ -537,7 +536,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   textDrawString(2,temp_v17,temp_v20,(int)*(short *)(temp_v11 + 8));
   temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x13a));
   temp_v17 = FUN_0014bf3c(*psVar13,0);
-  textFormatBuffer(temp_v20,"%s",temp_v17);
+  sprintf((char *)temp_v20,"%s",temp_v17);
   puVar16 = temp_v20;
   fontMeasureLineAdvance(puVar16,2);
   VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v6 + 10) + temp_v8,
@@ -605,11 +604,11 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   FUN_002f3a90();
   temp_v3 = uniteSelectedFusionIsEnabled();
   if (temp_v3 != 0) {
-    textFormatBuffer(temp_v22,&LAB_002a967c);
+    sprintf((char *)temp_v22,(const char *)&LAB_002a967c);
     temp_v16 = 0;
   }
   else {
-    textFormatBuffer(temp_v22,"%d",temp_v16);
+    sprintf((char *)temp_v22,"%d",temp_v16);
   }
   piVar21 = (int *)gameGetSlotTable();
   if (*piVar21 < temp_v16) {

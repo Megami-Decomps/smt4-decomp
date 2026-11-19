@@ -16,8 +16,8 @@ int __aeabi_uidivmod(...);
 
 int FUN_0020ffe8(...);
 int objSetAnglesDegrees(...);
-int nodeGroupSetScale(...);
-int nodeOwnerSetTranslations(...);
+int nodeGroupSetScale(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
+int nodeOwnerSetTranslations(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int FUN_00293f10(...);
 int aocHandleButtons(...);
 int statusBustUpPortraitAcquire(int, int);
@@ -31,7 +31,7 @@ int resourceReleaseReference(void);
 int FUN_00294fe0(...);
 int FUN_002950e8(...);
 int statusBustUpPortraitRelease(...);
-int FUN_00297684(...);
+int FUN_00297684(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int FUN_0029ae60(int);
 int lmapSceneSetUnk134(int);
 int FUN_002a09b4(unsigned char *, int);

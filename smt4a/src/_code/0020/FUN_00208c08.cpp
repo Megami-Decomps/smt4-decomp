@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00208c08` (_code @ 0x208c08, 0x1518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
@@ -25,7 +26,6 @@ int aocHandleButtons(...);
 int FUN_0040ae70(...);
 int VectorSignedToFloat(...);
 
-int textFormatBuffer(int, unsigned int);
 int asdOperatorNew(void);
 int uiSpriteAdvanceAnimation(...);
 int nkmEnemyFindById(void);
@@ -68,7 +68,6 @@ extern int DAT_00588fd4; /* 0x588fd4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: padQueryLogicalKey. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -173,7 +172,7 @@ unsigned int FUN_00208c08(void)
   }
   if ((*(char *)(temp_v2 + 0x20ac) == '\0') && (*(int *)(temp_v2 + 0x20cc) != 0)) {
     temp_v4 = FUN_002f72dc(temp_v2);
-    textFormatBuffer(temp_v2 + 0x2068,temp_v4);
+    sprintf((char *)(temp_v2 + 0x2068),(const char *)temp_v4);
     *(unsigned char *)(temp_v2 + 0x20ac) = 1;
   }
   switch(*(unsigned int *)(temp_v2 + 0x1368)) {

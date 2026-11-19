@@ -1,5 +1,6 @@
 /* NON_MATCHING: assist-slot loop, path buffers and cache-name addresses use different saved registers. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -17,7 +18,6 @@ extern const char DAT_00528480[2][32];
 extern const char DAT_005284c0[];
 void sysMemClear(void *memory, u32 size);
 void asdMemFree(void *memory);
-void textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *output, const char *input);
 const char *libc_strrchr(const char *text, u32 character);
 
@@ -36,7 +36,7 @@ u32 FUN_004f9c40(AssistEffectOwner *owner)
         char path[128], formatted[128];
         sysMemClear(path, sizeof(path));
         sysMemClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_005284c0, DAT_00528480[i]);
+        __2sprintf(formatted, DAT_005284c0, DAT_00528480[i]);
         libc_strcpy(path, formatted);
         const char *name = libc_strrchr(path, '/');
         libc_strcpy(slot->name, name + 1);

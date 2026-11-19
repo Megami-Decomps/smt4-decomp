@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the initial g_buttonHelp address load is scheduled two instructions later (retail loads it before `sub sp`). */
+#include <stdio.h>
 #include "ui/ButtonHelpGlobal.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
@@ -9,7 +9,6 @@
 
 extern "C" {
 void textFormatFullWidthNumber(char *, u32);
-s32 textFormatBuffer(char *, const char *, ...);
 void textEncodeFontSlot(u32, const char *);
 void btlFormatCategoryLabel(char *, u32);
 void skillFormatTargetLabel(char *, s32);
@@ -34,7 +33,7 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
         char minimum[8], maximum[8];
         textFormatFullWidthNumber(minimum, hits & 0xf);
         textFormatFullWidthNumber(maximum, entry->hitRange >> 4);
-        textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); // CP932 full-width wave dash.
+        sprintf(text, "%s\x81\x60%s", minimum, maximum); // CP932 full-width wave dash.
         textEncodeFontSlot(0x25, text);
     }
     btlFormatCategoryLabel(text, entry->traits >> 20);
@@ -43,19 +42,19 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
     textEncodeFontSlot(0x27, text);
     // The original labels are full-width Latin characters encoded in CP932.
     if ((s8)entry->element == 0)
-        textFormatBuffer(text, "\x82\x6d\x82\x8f\x82\x8e\x82\x85"); // None
+        sprintf(text, "\x82\x6d\x82\x8f\x82\x8e\x82\x85"); // None
     if ((s8)entry->element == 1)
-        textFormatBuffer(text, "\x82\x6a\x82\x6e"); // KO
+        sprintf(text, "\x82\x6a\x82\x6e"); // KO
     if ((s8)entry->element == 5)
-        textFormatBuffer(text, "\x82\x6f\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e"); // Poison
+        sprintf(text, "\x82\x6f\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e"); // Poison
     if ((s8)entry->element == 6)
-        textFormatBuffer(text, "\x82\x6f\x82\x81\x82\x8e\x82\x89\x82\x83"); // Panic
+        sprintf(text, "\x82\x6f\x82\x81\x82\x8e\x82\x89\x82\x83"); // Panic
     if ((s8)entry->element == 7)
-        textFormatBuffer(text, "\x82\x72\x82\x8c\x82\x85\x82\x85\x82\x90"); // Sleep
+        sprintf(text, "\x82\x72\x82\x8c\x82\x85\x82\x85\x82\x90"); // Sleep
     if ((s8)entry->element == 8)
-        textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8e\x82\x84"); // Bind
+        sprintf(text, "\x82\x61\x82\x89\x82\x8e\x82\x84"); // Bind
     if ((s8)entry->element == 9)
-        textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8b"); // Sick
+        sprintf(text, "\x82\x72\x82\x89\x82\x83\x82\x8b"); // Sick
     textEncodeFontSlot(0x28, text);
     FUN_001f4568(1, 0, 0, text);
     textEncodeFontSlot(0x29, text);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: rewritten from retail; retail forms the first id address through a pool offset and the second from 0x5A8 without sharing them, and orders the selected/unselected setup differently. */
 #include "common.h"
+#include <stdio.h>
 
 /* A layout slot: the position of an element relative to the panel. */
 struct LayoutSlot {
@@ -62,7 +63,6 @@ s32 FUN_00262cb0(u16 id);
 s32 table8Type5GetValue(s32 id);
 void FUN_002b6c34(s16 id, s32 x, s32 y, s32 alpha, s32 a, s32 b);
 void pairCopy(u8 *layout, ScreenPoint *point);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 void drawTextAtRelativePosition(u8 *layout, s32 a, s32 x, s32 y, s32 b, s32 c, u32 color, s32 alpha, const char *text);
 
 /* Draws one row of the panel: its name box, the demon icon with its id and the count. */
@@ -110,7 +110,7 @@ void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
     f32 iconY = (f32)(icon->y + baseY) + origin.y;
     s32 shown = table8Type5GetValue(id);
     FUN_002b6c34((s16)shown, (s32)iconX, (s32)iconY, alpha, 0, 0);
-    textFormatBuffer(text, "%8d", panel->list.entries[row].count);
+    sprintf(text, "%8d", panel->list.entries[row].count);
     LayoutSlot *countBox;
     if (selected == 0)
         countBox = FUN_002bf4f0(panel->layout, 0x4DE);

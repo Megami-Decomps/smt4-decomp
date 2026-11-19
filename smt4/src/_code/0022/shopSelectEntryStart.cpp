@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
@@ -16,7 +17,6 @@ typedef struct ShopScene {
 
 u32 dataTable17Sub0GetRecord(u32 *scratch, s32 id);
 u32 textConvertToGlyphPairs(u32 record, s32 arg);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 s32 scrScriptProcessStartEntry(u32 process, u32 entry);
 s32 scrRunOpcodesStub(u32 process);
@@ -42,7 +42,7 @@ void shopSelectEntryStart(ShopScene *scene, s32 mode)
         }
         record = dataTable17Sub0GetRecord(&scratch, id);
         name = textConvertToGlyphPairs(record, 0);
-        textFormatBuffer(scene->text, "%s%s<br>", scene->text, name);
+        sprintf(scene->text, "%s%s<br>", scene->text, name);
     }
     scrScriptProcessStartEntry(scene->process, tableGroupFindEntryIndex(scene->tableGroup, entryName));
     scrRunOpcodesStub(scene->process);

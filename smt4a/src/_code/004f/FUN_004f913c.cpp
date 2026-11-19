@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack frame is 272 rather than 292 bytes; effect-ID offset and temporary path addresses are folded differently. */
+#include "runtime/Stdio.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleMovementEffects.h"
 #include "gfx/RangeAnimationSelection.h"
@@ -12,7 +13,6 @@ BattleEffectNameRecord *FUN_003f01d0(void *battle, u32 id);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 size);
 void asdMemFree(void *memory);
-s32 textFormatBuffer(char *destination, const char *format, ...);
 char *libc_strrchr(char *text, u32 character);
 void asdLoadFileAsyncSimple(const char *path, char **output, u32 flags);
 extern const char DAT_005284c0[];
@@ -48,7 +48,7 @@ u32 FUN_004f913c(RangeAnimationOwner *owner)
         resource->flags = 0;
         sysMemClear(path, sizeof(path));
         sysMemClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_005284c0, name);
+        __2sprintf(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
         libc_strcpy(resource->key, libc_strrchr(path, '/') + 1);
         if (findRecordByKey(resource->key) == 0xff) {

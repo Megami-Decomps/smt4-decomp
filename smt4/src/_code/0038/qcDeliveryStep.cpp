@@ -1,7 +1,10 @@
 /* NON_MATCHING: 8 lines, one schedule: when step 8 queues the delivery event, retail holds the flag
  * word in r1 and loads slotSetRequest's first and third arguments around the update
  * (ldr r1; mov r2,#255; mov r0,#0; orr; str; mov r1,#10); this build updates it in r0 with the second
- * and third arguments loaded first (ldr r0; mov r2,#255; mov r1,#10; orr; str; mov r0,#0). */
+ * and third arguments loaded first (ldr r0; mov r2,#255; mov r1,#10; orr; str; mov r0,#0).
+ * A static __inline helper shared with qcBoardStep that takes 0xff and 0 as single-use by-value
+ * parameters (and hard-codes the second fade) reproduces it; the parameters exist only for the
+ * schedule, so that form is not used. */
 #include "ui/DummyAttachmentWork.h"
 #include "sys/FlagWord.h"
 #include "script/scrScriptProcess.h"
@@ -29,7 +32,7 @@ u32 questIsCompleted(int index);
 u32 questReadRuntimeFlag(u32 questId, u32 selector);
 u32 goalConditionsSatisfied(u32 id);
 u8 idIsAtLeast350(u32 value);
-void FUN_00269dc8(void);
+void uiQuestCreate(void);
 void uiQuestAnswerConfirm(s8 choice);
 u8 FUN_002e31b0(void);
 u16 uiQuestGetCurrentEntryId(void);
@@ -109,7 +112,7 @@ void qcDeliveryStep(DummyAttachmentWork *work)
         }
         if (found) {
             if (work->step == 11) {
-                FUN_00269dc8();
+                uiQuestCreate();
                 uiQuestAnswerConfirm(work->kind);
                 work->step = 3;
             } else {
@@ -136,7 +139,7 @@ void qcDeliveryStep(DummyAttachmentWork *work)
         }
         work->step++;
     case 2:
-        FUN_00269dc8();
+        uiQuestCreate();
         uiQuestAnswerConfirm(work->kind);
         work->step++;
         break;

@@ -24,7 +24,7 @@ int sysMemClear(unsigned int [32], int);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int messageDismissNumericBannerForced(void);
 int gameFlagSlotSetEnableBit(...);
-int idOwnerGetRecordHalf(void);
+int idOwnerGetRecordHalf(void); // declcheck: local (romwright prototype; its types do not fit classes/Obj5333c0.h: including it fails to compile)
 int QuestCenter_GetActiveEntry(void);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */

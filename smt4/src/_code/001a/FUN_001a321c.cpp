@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a321c` (_code @ 0x1a321c, 0x3b10 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -33,7 +34,6 @@ int FUN_00293ac0(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(void);
 int texDrawTableEntryAtStoredOrigin(...);
 int texDrawCompositeSprite(...);
@@ -139,7 +139,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
@@ -252,19 +251,19 @@ s32 FUN_001a321c(u32 unusedHandle)
         texDrawTableEntryAtStoredOrigin(2,0x1a,0xb7,temp_v28,temp_v30,0x83);
       }
       if (*(char *)(temp_v7 + 0x12ef) == '\0') {
-        textFormatBuffer(temp_v35,&LAB_001a35ec);
+        sprintf((char *)temp_v35,(const char *)&LAB_001a35ec);
       }
       if (*(char *)(temp_v7 + 0x12ef) == '\x01') {
-        textFormatBuffer(temp_v35,&LAB_001a35fc);
+        sprintf((char *)temp_v35,(const char *)&LAB_001a35fc);
       }
       if (*(char *)(temp_v7 + 0x12ef) == '\x02') {
-        textFormatBuffer(temp_v35,&LAB_001a3604);
+        sprintf((char *)temp_v35,(const char *)&LAB_001a3604);
       }
       if (*(char *)(temp_v7 + 0x12ef) == '\x03') {
-        textFormatBuffer(temp_v35,&LAB_001a360c);
+        sprintf((char *)temp_v35,(const char *)&LAB_001a360c);
       }
       if (*(char *)(temp_v7 + 0x12ef) == '\x04') {
-        textFormatBuffer(temp_v35,&LAB_001a3614);
+        sprintf((char *)temp_v35,(const char *)&LAB_001a3614);
       }
       temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0xba));
       puVar9 = temp_v35;
@@ -478,18 +477,18 @@ LAB_001a3ea8:
             if (*pcVar21 != '\0') {
               if (*pcVar21 != '\r') {
                 temp_v21 = FUN_002bd068(*puVar18);
-                textFormatBuffer(temp_v35,&LAB_001a43d4,temp_v21);
+                sprintf((char *)temp_v35,(const char *)&LAB_001a43d4,temp_v21);
               }
               else {
-                textFormatBuffer(temp_v35,&LAB_001a43e0);
+                sprintf((char *)temp_v35,(const char *)&LAB_001a43e0);
               }
             }
             else if (*temp_v38 != '\t') {
               temp_v21 = gameGetPlayerName();
-              textFormatBuffer(temp_v35,&LAB_001a43d4,temp_v21);
+              sprintf((char *)temp_v35,(const char *)&LAB_001a43d4,temp_v21);
             }
             else {
-              textFormatBuffer(temp_v35,&LAB_001a43d4,temp_v34 + 0x189c);
+              sprintf((char *)temp_v35,(const char *)&LAB_001a43d4,temp_v34 + 0x189c);
             }
             temp_v21 = 0xffffffff;
             if ((*(unsigned short *)(temp_v7 + 0x1314) & 2) != 0) {
@@ -503,10 +502,10 @@ LAB_001a3ea8:
             textDrawString(3,temp_v21,temp_v35);
             if (*pcVar21 != '\0') {
               temp_v21 = demonGetRaceLabel(*puVar18,0);
-              textFormatBuffer(temp_v35,&LAB_001a43d4,temp_v21);
+              sprintf((char *)temp_v35,(const char *)&LAB_001a43d4,temp_v21);
             }
             else {
-              textFormatBuffer(temp_v35,&LAB_001a43e4);
+              sprintf((char *)temp_v35,(const char *)&LAB_001a43e4);
             }
             temp_v10 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x1d));
             VectorSignedToFloat((int)temp_v30 + (int)*(short *)(temp_v10 + 10),
@@ -1623,7 +1622,7 @@ LAB_001a68b0:
                 }
               }
               else {
-                textFormatBuffer(temp_v35,&LAB_001a6d40);
+                sprintf((char *)temp_v35,(const char *)&LAB_001a6d40);
                 VectorSignedToFloat((int)temp_v30 +
                                     (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v11 + 10),
                                     (unsigned char)(in_fpscr >> 0x16) & 3);

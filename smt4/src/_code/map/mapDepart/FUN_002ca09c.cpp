@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ca09c` (_code @ 0x2ca09c, 0x608 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "game/GameState.h"
@@ -10,7 +11,6 @@ extern "C" {
 int FUN_0025b670(unsigned int);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int gxResetColorQuadToWhite(void);
 int texDrawCompositeSprite(...);
@@ -31,13 +31,11 @@ typedef struct {
 
 extern int g_mapDepart; /* 0x4475b8 */
 extern int g_titleScene; /* 0x44ea00 */
-extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0025b670. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -107,7 +105,7 @@ unsigned int FUN_002ca09c(void)
           } while (temp_v9 < 0x10b);
           temp_v3 = g_gameState.recordId;
           FUN_0025b670(g_gameState.recordId);
-          textFormatBuffer(temp_v13,"%s",temp_v3);
+          sprintf((char *)temp_v13,"%s",temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(3,0xffffffff,temp_v13);
@@ -125,7 +123,7 @@ unsigned int FUN_002ca09c(void)
           texDrawCompositeSprite(2,0x1c,0x1e,(int)temp_v12,0,0xb);
         }
         temp_v2 = 0;
-        if (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6))) {
+        if (temp_v2 < (*(short *)((unsigned char *)&g_mapDepartState + 0xa6))) {
           do {
             temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,temp_v2 + 0x1105));
             temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,temp_v2 + 0x110d));
@@ -157,7 +155,7 @@ unsigned int FUN_002ca09c(void)
             }
             temp_v7 = (int)*(short *)(temp_v9 + 0x49fd8c);
             dataFindKindRecordWithAocOverrides(temp_v7,0);
-            textFormatBuffer(temp_v13,"%s",temp_v7);
+            sprintf((char *)temp_v13,"%s",temp_v7);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10),
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -187,7 +185,7 @@ unsigned int FUN_002ca09c(void)
             texDrawTableEntryAtStoredOrigin(2,0xd,(int)temp_v0 % 10,(int)(temp_v10 + (float)temp_v11 + temp_v12),
                          (int)*(short *)(temp_v15 + 10) + (int)*(short *)(temp_v1 + 10),0xb);
             temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6)));
+          } while (temp_v2 < (*(short *)((unsigned char *)&g_mapDepartState + 0xa6)));
         }
       }
     }

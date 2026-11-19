@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028a888` (_code @ 0x28a888, 0x7a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "code/Code0035.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int itemTableGetItemRecord(void);
 int itemTableGetEquipmentRecord(void);
 int skillDataFindById(void);
@@ -39,7 +39,6 @@ extern unsigned char LAB_0028b068; /* 0x28b068 */
 extern unsigned char LAB_0028b078; /* 0x28b078 */
 extern unsigned char LAB_0028b084; /* 0x28b084 */
 
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(void);
 extern unsigned int itemGetStackLimit(int);
 /* Supplied declaration required: itemTableGetItemRecord. */
@@ -114,13 +113,13 @@ void FUN_0028a888(int param_1)
       skillFormatTargetLabel(temp_v12,(*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5);
     }
     else if ((*(unsigned int *)(temp_v6 + 0x68) & 0x20) != 0) {
-      textFormatBuffer(temp_v12,"\x82o\x82\x81\x82\x92\x82\x94\x82\x8e\x82\x85\x82\x92");
+      sprintf((char *)temp_v12,"\x82o\x82\x81\x82\x92\x82\x94\x82\x8e\x82\x85\x82\x92");
     }
     else if ((*(unsigned char *)(temp_v6 + 0x3a) & 0x80) != 0) {
-      textFormatBuffer(temp_v12,"\x82`\x82\x8c\x82\x8c\x81@\x82\x81\x82\x8c\x82\x8c\x82\x89\x82\x85\x82\x93");
+      sprintf((char *)temp_v12,"\x82`\x82\x8c\x82\x8c\x81@\x82\x81\x82\x8c\x82\x8c\x82\x89\x82\x85\x82\x93");
     }
     else {
-      textFormatBuffer(temp_v12,"\x82P\x81@\x82\x81\x82\x8c\x82\x8c\x82\x99");
+      sprintf((char *)temp_v12,"\x82P\x81@\x82\x81\x82\x8c\x82\x8c\x82\x99");
     }
     scrSetStringSlot(0x24,temp_v12);
     temp_v3 = itemGetStackLimit(param_1);
@@ -138,7 +137,7 @@ void FUN_0028a888(int param_1)
     else {
       textFormatFullWidthNumber(temp_v10,temp_v0 & 0xf);
       textFormatFullWidthNumber(temp_v13,*(unsigned char *)(param_1 + 0x28) >> 4);
-      textFormatBuffer(temp_v12,"%s\x81`%s",temp_v10,temp_v13);
+      sprintf((char *)temp_v12,"%s\x81`%s",temp_v10,temp_v13);
       scrSetStringSlot(0x25,temp_v12);
     }
     battleAttributeFormatName(temp_v12,*(unsigned int *)(param_1 + 0x24) >> 0x14);
@@ -146,34 +145,34 @@ void FUN_0028a888(int param_1)
     skillFormatTargetLabel(temp_v12,*(unsigned char *)(param_1 + 0x29));
     scrSetStringSlot(0x27,temp_v12);
     if (*(char *)(param_1 + 0x2b) == '\0') {
-      textFormatBuffer(temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
+      sprintf((char *)temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
     }
     if (*(char *)(param_1 + 0x2b) == '\x01') {
-      textFormatBuffer(temp_v12,"\x82h\x82\x8e\x82\x93\x82\x94\x82\x81\x82\x8e\x82\x94\x81@\x82j\x82\x89\x82\x8c\x82\x8c");
+      sprintf((char *)temp_v12,"\x82h\x82\x8e\x82\x93\x82\x94\x82\x81\x82\x8e\x82\x94\x81@\x82j\x82\x89\x82\x8c\x82\x8c");
     }
     if (*(char *)(param_1 + 0x2b) == '\x05') {
-      textFormatBuffer(temp_v12,"\x82o\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
+      sprintf((char *)temp_v12,"\x82o\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
     }
     if (*(char *)(param_1 + 0x2b) == '\x06') {
-      textFormatBuffer(temp_v12,"\x82o\x82\x81\x82\x8e\x82\x89\x82\x83");
+      sprintf((char *)temp_v12,"\x82o\x82\x81\x82\x8e\x82\x89\x82\x83");
     }
     if (*(char *)(param_1 + 0x2b) == '\a') {
-      textFormatBuffer(temp_v12,"\x82r\x82\x8c\x82\x85\x82\x85\x82\x90");
+      sprintf((char *)temp_v12,"\x82r\x82\x8c\x82\x85\x82\x85\x82\x90");
     }
     if (*(char *)(param_1 + 0x2b) == '\b') {
-      textFormatBuffer(temp_v12,"\x82a\x82\x89\x82\x8e\x82\x84");
+      sprintf((char *)temp_v12,"\x82a\x82\x89\x82\x8e\x82\x84");
     }
     if (*(char *)(param_1 + 0x2b) == '\t') {
-      textFormatBuffer(temp_v12,"\x82r\x82\x89\x82\x83\x82\x8b");
+      sprintf((char *)temp_v12,"\x82r\x82\x89\x82\x83\x82\x8b");
     }
     if (*(char *)(param_1 + 0x2b) == '\v') {
-      textFormatBuffer(temp_v12,"\x82b\x82\x88\x82\x81\x82\x92\x82\x8d");
+      sprintf((char *)temp_v12,"\x82b\x82\x88\x82\x81\x82\x92\x82\x8d");
     }
     if (*(char *)(param_1 + 0x2b) == '\f') {
-      textFormatBuffer(temp_v12,"\x82c\x82\x81\x82\x9a\x82\x85");
+      sprintf((char *)temp_v12,"\x82c\x82\x81\x82\x9a\x82\x85");
     }
     if (*(char *)(param_1 + 0x2b) == '\r') {
-      textFormatBuffer(temp_v12,"\x82l\x82\x95\x82\x94\x82\x85");
+      sprintf((char *)temp_v12,"\x82l\x82\x95\x82\x94\x82\x85");
     }
     temp_v3 = 0x28;
     break;
@@ -209,14 +208,14 @@ void FUN_0028a888(int param_1)
       textFormatFullWidthNumber(temp_v18,temp_v9);
       if (temp_v8 != 0) {
         if (temp_v8 >= 1) {
-          textFormatBuffer(temp_v12,"\x81{%s");
+          sprintf((char *)temp_v12,"\x81{%s");
         }
         else {
-          textFormatBuffer(temp_v12,&LAB_0028b030);
+          sprintf((char *)temp_v12,(const char *)&LAB_0028b030);
         }
       }
       else {
-        textFormatBuffer(temp_v12,&LAB_0028b028);
+        sprintf((char *)temp_v12,(const char *)&LAB_0028b028);
       }
       scrSetStringSlot(temp_v4 + 0x24,temp_v12);
       temp_v4 = temp_v4 + 1;
@@ -260,7 +259,7 @@ void FUN_0028a888(int param_1)
       if ('\0' < temp_v10[temp_v4]) {
         if (0 < temp_v9) {
           puVar8 = temp_v12 + (int)puVar11;
-          textFormatBuffer(puVar8,&LAB_0028b038);
+          sprintf((char *)puVar8,(const char *)&LAB_0028b038);
           puVar11 = puVar11 + (int)puVar8;
         }
         if (temp_v4 != 0) {
@@ -269,31 +268,31 @@ void FUN_0028a888(int param_1)
               if (temp_v4 != 3) {
                 if (temp_v4 == 4) {
                   puVar8 = temp_v12 + (int)puVar11;
-                  textFormatBuffer(puVar8,&LAB_0028b078);
+                  sprintf((char *)puVar8,(const char *)&LAB_0028b078);
                   puVar11 = puVar11 + (int)puVar8;
                 }
               }
               else {
                 puVar8 = temp_v12 + (int)puVar11;
-                textFormatBuffer(puVar8,&LAB_0028b068);
+                sprintf((char *)puVar8,(const char *)&LAB_0028b068);
                 puVar11 = puVar11 + (int)puVar8;
               }
             }
             else {
               puVar8 = temp_v12 + (int)puVar11;
-              textFormatBuffer(puVar8,&LAB_0028b05c);
+              sprintf((char *)puVar8,(const char *)&LAB_0028b05c);
               puVar11 = puVar11 + (int)puVar8;
             }
           }
           else {
             puVar8 = temp_v12 + (int)puVar11;
-            textFormatBuffer(puVar8,&LAB_0028b04c);
+            sprintf((char *)puVar8,(const char *)&LAB_0028b04c);
             puVar11 = puVar11 + (int)puVar8;
           }
         }
         else {
           puVar8 = temp_v12 + (int)puVar11;
-          textFormatBuffer(puVar8,&LAB_0028b03c);
+          sprintf((char *)puVar8,(const char *)&LAB_0028b03c);
           puVar11 = puVar11 + (int)puVar8;
         }
         temp_v8 = 0;
@@ -304,7 +303,7 @@ void FUN_0028a888(int param_1)
             puVar11 = puVar11 + temp_v7;
             if ((temp_v8 < 0x14) && ('\0' < acStack_a4[temp_v8 + temp_v2 + 0xa5])) {
               puVar8 = temp_v12 + (int)puVar11;
-              textFormatBuffer(puVar8,&LAB_0028b084);
+              sprintf((char *)puVar8,(const char *)&LAB_0028b084);
               puVar11 = puVar11 + (int)puVar8;
             }
             temp_v8 = temp_v8 + 1;
@@ -317,10 +316,10 @@ void FUN_0028a888(int param_1)
     scrSetStringSlot(0x29,temp_v12);
     if (*(short *)(temp_v6 + 0x3a) != 0) {
       temp_v3 = FUN_0014bd84();
-      textFormatBuffer(temp_v12,"%s",temp_v3);
+      sprintf((char *)temp_v12,"%s",temp_v3);
     }
     else {
-      textFormatBuffer(temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
+      sprintf((char *)temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
     }
     temp_v3 = 0x2a;
   }

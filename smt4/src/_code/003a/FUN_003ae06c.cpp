@@ -1,4 +1,5 @@
 /* NON_MATCHING: field addresses match (overlay at 0xC9D8); retail loads the g_btlUi pointer after the push and sign-extends textId only at the FUN_001ecb54 call (the callee takes it as s16-width), build has no sxth. */
+#include <stdio.h>
 #include "battle/BtlUiGlobal.h"
 #include "gamedata/SaveLoadProcess.h"
 #include "gamedata/DataTableAccess_Smt4.h"
@@ -15,7 +16,6 @@ struct BattleMessageOverlay {
 };
 }
 extern "C" {
-void textFormatBuffer(char *buffer, const char *format, ...);
 void communicationBeginTransition(s32 mode);
 
 /* Initializes a battle message request and begins displaying its selected text. */
@@ -29,7 +29,7 @@ void FUN_003ae06c(u32 unused, s32 textId, u32 parameter)
     ui->unkC9E0 = 0;
     char text[64];
     text[0] = '\0';
-    textFormatBuffer(text, "%s", dataTable0BFindById(static_cast<u16>(ui->textId)));
+    sprintf(text, "%s", dataTable0BFindById(static_cast<u16>(ui->textId)));
     FUN_001ecb54(textId);
     comWinSetText(reinterpret_cast<const u8*>(text));
     communicationBeginTransition(0);

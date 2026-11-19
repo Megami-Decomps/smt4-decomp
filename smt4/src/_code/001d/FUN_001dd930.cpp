@@ -1,4 +1,6 @@
-/* NON_MATCHING: the reset block now matches through its sub-struct pointer; retail copies current to previous through one pooled 0x986C offset (ldr [r2, r0], add #4), this build forms both addresses with separate add pairs. */
+/* NON_MATCHING: retail loads the current value into r2 (offset in r2, previous address in r1) and keeps it there to the tail call;
+ * this build swaps r1/r2. The twin smt4a FUN_00284fdc has the same swap (it matched only by passing (reset, 0, current)
+ * to a callee that takes no arguments, a one-caller prototype; it is NON_MATCHING again). */
 #include "common.h"
 
 __packed struct HistoryReset {
@@ -20,20 +22,25 @@ struct HistoryGlobals {
 extern "C" {
 
 extern HistoryGlobals g_gameDataBlocks;
-extern void FUN_00334e18(void *state);
+void FUN_00334e18(void);
+
+/* Zeroes the reset words and count (the twin, smt4a FUN_00284fdc, clears through the same helper). */
+static __inline void resetClear(HistoryReset *state)
+{
+    state->first = 0;
+    state->second = 0;
+    state->third = 0;
+    state->fourth = 0;
+    state->count = 0;
+}
 
 /* Saves the current history value, clears the reset region and refreshes it. */
 void FUN_001dd930(void)
 {
     HistoryData *data = g_gameDataBlocks.data;
     data->previous = data->current;
-    HistoryReset *reset = &data->reset;
-    reset->first = 0;
-    reset->second = 0;
-    reset->third = 0;
-    reset->fourth = 0;
-    reset->count = 0;
-    FUN_00334e18(reset);
+    resetClear(&data->reset);
+    FUN_00334e18();
 }
 
 } /* extern "C" */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (214 vs 194 rows); retail interleaves the float conversions with the rect loads, repeats the parallax call per cell and unrolls the row/mark scans differently */
 #include "common.h"
+#include <stdio.h>
 #include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -38,7 +39,6 @@ extern const char DAT_0052d134[];
 void efctSetSpeed(f32 speed);
 void gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
-void textFormatBuffer(char* out, const char* format, ...);
 s32 fontMeasureLineAdvance(const char* text, s32 font);
 void FUN_00164168(u32 icon, s32 x, s32 y, s32 a, f32 speed, s32 b, s32 c);
 
@@ -55,13 +55,13 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
         gameGetPlayerData();
         name = gameGetPlayerName();
     }
-    textFormatBuffer(text, "%s", name);
+    sprintf(text, "%s", name);
     s32 nameWidth = fontMeasureLineAdvance(text, 2);
     TextureTableEntryIV* frame = asdTMTexTableEntryAt(50, 9);
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     textDrawString(2, color, text, (f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
 
-    textFormatBuffer(text, "\x82\x60\x82\x95\x82\x94\x82\x88\x82\x8f\x82\x92");
+    sprintf(text, "\x82\x60\x82\x95\x82\x94\x82\x88\x82\x8f\x82\x92");
     s32 suffixWidth = fontMeasureLineAdvance(text, 2);
     TextureTableEntryIV* suffix = asdTMTexTableEntryAt(50, 10);
     s32 suffixOffset = suffix->placement->width;

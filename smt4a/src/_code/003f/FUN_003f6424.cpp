@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the zero constant into fp and keeps `10 == category` as `mov r1,#10; cmp r1, r0 lsr #8`; the value-box float conversions are scheduled differently and the sprite is re-extended (uxth) before the draw call. */
 #include "common.h"
+#include <stdio.h>
 #include "gamedata/NkmBaseRecordA.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -18,7 +19,6 @@ extern "C" {
 void efctSetSpeed(f32 speed);
 void FUN_00169a1c(s32 sprite, s32 x, s32 y, s32 z);
 const char* FUN_003f74a8(u32 id, PanelRecord* record);
-void textFormatBuffer(char* out, const char* format, ...);
 void FUN_003f533c(u32 id, s32 x, s32 y, s32 z, u32 flags, s32 a, s32 b, s32 c, s32 d, s32 e, f32 scale);
 
 // The icon sprite of a record category, or 0 when it has none.
@@ -68,7 +68,7 @@ void FUN_003f6424(f32 scale, u32 id, PanelRecord* record, u32 flags, s32 x, s32 
     s32 nameX = nameBox->x + x;
     s32 nameY = nameBox->y + y;
     char text[64];
-    textFormatBuffer(text, "%s", FUN_003f74a8(id, record));
+    sprintf(text, "%s", FUN_003f74a8(id, record));
     textDrawString(2, 0xffffffff, text, (f32)nameX, (f32)nameY, (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
 
     TextureTableEntryIV* valueBox = asdTMTexTableEntryAt(0x31, 0x83);

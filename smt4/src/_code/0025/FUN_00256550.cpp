@@ -1,4 +1,5 @@
 /* NON_MATCHING: the g_gameState+0x200 limit access now matches retail; retail addresses the extra-model slot as (map + index*8 + 0x3000) with the fields at +76/+80/+81 instead of forming the slot pointer. */
+#include <stdio.h>
 #include "map/MapEnemyGlobal.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 extern EnemyExtraModelSource DAT_00448ca8[];
-void textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
 
 /* Lazily create an extra enemy model, respecting the configured live-model limit. */
@@ -28,7 +28,7 @@ s32 FUN_00256550(u32 index)
         return 0;
     }
     char path[36];
-    textFormatBuffer(path, "map/all/sym%03d.bam", DAT_00448ca8[index].modelId);
+    sprintf(path, "map/all/sym%03d.bam", DAT_00448ca8[index].modelId);
     entry->model = asdMdlManagerCreateLoaded(path, 0x1C0);
     lightOwnerRegister(entry->model, 1);
     AsdMdlObject *model = entry->model;

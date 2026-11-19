@@ -1,4 +1,5 @@
 /* NON_MATCHING: same frame (0x104) and stack arrays; about 135 lines differ once r8/r9 are exchanged. Retail keeps the menu in r9 and loads the idle state 6 into r8 before the switch, storing it with `streq r8` / `str r8` in steps 0 and 1; this build keeps the menu in r8 and materialises 6 at each store. Retail rotates the card-banking loop (an entry test on the count alone) and reads the card's demon id into r0 with the card saved in r1; it loads g_campCec's address before the `== 1` test, keeps the reward-loop counter in fp, and places the no-reward exit (state 6) after the shared runWinClose tail. */
+#include <stdio.h>
 #include "camp/CecMenu.h"
 #include "event/2dEvent/Npc2d.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -285,7 +286,7 @@ s32 campCecInboxState(CampCecMenu *work)
                 if ((work->rewards.pending & 1) && work->rewardUnit.offeredDemon != NULL) {
                     id = work->rewardUnit.offeredDemon->id;
                 }
-                textFormatBuffer(path, "camp/CecDevilMsg/%s.mbm", FUN_002cdecc((s8)nkmBaseGetRecord(id)->talkTone)->unk01);
+                sprintf(path, "camp/CecDevilMsg/%s.mbm", FUN_002cdecc((s8)nkmBaseGetRecord(id)->talkTone)->unk01);
                 asdLoadFileAsyncSimple(path, &work->talk.messages, 0);
                 work->savedBannerPending = 1;
                 messageDismissNumericBanner(1);

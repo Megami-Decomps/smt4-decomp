@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fe640` (_code @ 0x1fe640, 0xe18 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
@@ -10,7 +11,6 @@ int asdListBoxFindItem(...);
 int padGetNormalizedAnalogStick(float *, float *, int);
 int FUN_002aed34(...);
 int gfxDrawQuadFourColors(...);
-int textFormatBuffer(...);
 int padIsButtonPressed(...);
 int jobGetWork(...);
 int renderCtxSelectTexture(...);
@@ -64,7 +64,6 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002aed34. */
 /* Supplied declaration required: gfxDrawQuadFourColors. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: jobGetWork. */
 extern int slotIsActive(unsigned int);
@@ -263,7 +262,7 @@ joined_r0x001feb24:
             (*(romwright_code *)piVar2[0x1f])(&temp_v19,temp_v22,temp_v1 + 6);
             switch(*(unsigned char *)(temp_v1 + 4)) {
             case 1:
-              textFormatBuffer(&temp_v15,&LAB_001fef20,temp_v1 + 0x106);
+              sprintf((char *)&temp_v15,(const char *)&LAB_001fef20,temp_v1 + 0x106);
               temp_v2 = (*(romwright_code *)piVar2[0x20])(&temp_v15);
               temp_v19 = (float)VectorSignedToFloat(piVar2[0x16],(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v12 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -287,10 +286,10 @@ joined_r0x001feb24:
               break;
             case 3:
               if (*(char *)(temp_v1 + 5) != '\0') {
-                textFormatBuffer(&temp_v15,&LAB_001fef3c,*(unsigned int *)(temp_v1 + 0x208));
+                sprintf((char *)&temp_v15,(const char *)&LAB_001fef3c,*(unsigned int *)(temp_v1 + 0x208));
               }
               else {
-                textFormatBuffer(&temp_v15,&LAB_001fef44,*(unsigned int *)(temp_v1 + 0x208));
+                sprintf((char *)&temp_v15,(const char *)&LAB_001fef44,*(unsigned int *)(temp_v1 + 0x208));
               }
               temp_v2 = (*(romwright_code *)piVar2[0x20])(&temp_v15);
               temp_v19 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -298,7 +297,7 @@ joined_r0x001feb24:
               (*(romwright_code *)piVar2[0x1f])(&temp_v19,&temp_v21,&temp_v15);
               break;
             case 4:
-              textFormatBuffer(&temp_v15,&LAB_001fef4c,SUB84((double)*(float *)(temp_v1 + 0x20c),0),
+              sprintf((char *)&temp_v15,(const char *)&LAB_001fef4c,SUB84((double)*(float *)(temp_v1 + 0x20c),0),
                            (int)((unsigned long long)(double)*(float *)(temp_v1 + 0x20c) >> 0x20));
               temp_v2 = (*(romwright_code *)piVar2[0x20])(&temp_v15);
               temp_v19 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -317,7 +316,7 @@ joined_r0x001feb24:
               temp_v12 = (float)VectorUnsignedToFloat
                                         ((temp_v4 + 1) * piVar2[0x16],(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v19 = temp_v19 - temp_v12;
-              textFormatBuffer(&temp_v15,&LAB_001fef54,temp_v1 + 0x106);
+              sprintf((char *)&temp_v15,(const char *)&LAB_001fef54,temp_v1 + 0x106);
               pfVar4 = &temp_v15;
               FUN_002aed34(0,pfVar4);
               break;
@@ -337,13 +336,13 @@ joined_r0x001feb24:
                 temp_v12 = (float)VectorSignedToFloat(piVar2[0x16] * 0xb,(unsigned char)(in_fpscr >> 0x16) & 3)
                 ;
                 temp_v19 = temp_v19 - temp_v12;
-                textFormatBuffer(&temp_v15,&LAB_001fef68,*(unsigned int *)(temp_v1 + 0x208));
+                sprintf((char *)&temp_v15,(const char *)&LAB_001fef68,*(unsigned int *)(temp_v1 + 0x208));
                 pfVar4 = &temp_v15;
               }
               else {
                 temp_v12 = (float)VectorSignedToFloat(piVar2[0x16] * 9,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v19 = temp_v19 - temp_v12;
-                textFormatBuffer(&temp_v15,&LAB_001fef44,*(unsigned int *)(temp_v1 + 0x208));
+                sprintf((char *)&temp_v15,(const char *)&LAB_001fef44,*(unsigned int *)(temp_v1 + 0x208));
                 pfVar4 = &temp_v15;
               }
               FUN_002aed34(0,pfVar4);
@@ -351,7 +350,7 @@ joined_r0x001feb24:
             case 4:
               temp_v12 = (float)VectorSignedToFloat(piVar2[0x16] << 3,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v19 = temp_v19 - temp_v12;
-              textFormatBuffer(&temp_v15,&LAB_001fef4c,SUB84((double)*(float *)(temp_v1 + 0x20c),0),
+              sprintf((char *)&temp_v15,(const char *)&LAB_001fef4c,SUB84((double)*(float *)(temp_v1 + 0x20c),0),
                            (int)((unsigned long long)(double)*(float *)(temp_v1 + 0x20c) >> 0x20));
               FUN_002aed34(0,&temp_v15);
               break;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: global work-pointer store scheduling, pooled format addressing and playback-flag branch layout differ. */
+#include "runtime/Stdio.h"
 #include "mobiclip_ctrl/MobiclipCtrlProcess.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
@@ -39,7 +40,6 @@ void FUN_001dd280(void* work);
 void mobiclipProcessDestroy(void* work);
 void FUN_00201830(void* work);
 s32 asdLoadFileGetUseRawPaths(void);
-void textFormatBuffer(char* destination, const char* format, ...);
 char* libc_strcpy(char* destination, const char* source);
 
 u32 FUN_002ef6b8(s32 movie, u8 option)
@@ -59,7 +59,7 @@ u32 FUN_002ef6b8(s32 movie, u8 option)
         work->state = 9;
     } else if (movie != -1) {
         char path[0x40];
-        textFormatBuffer(path, DAT_00404ec8, DAT_00404ed8, DAT_0044d060[movie]);
+        __2sprintf(path, DAT_00404ec8, DAT_00404ed8, DAT_0044d060[movie]);
         work->state = 2;
         libc_strcpy(work->path, path);
         work->standby = 0;

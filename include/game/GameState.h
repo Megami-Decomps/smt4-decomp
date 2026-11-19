@@ -1,10 +1,13 @@
-/* The global game state block of Shin Megami Tensei IV (`g_gameState`, 0x49f91c, 0x678 bytes).
+/* The global game state block of Shin Megami Tensei IV (`g_gameState`, 0x49f91c, 0x3f8 bytes), and the two
+ * objects that follow it: the pending map jump (`g_mapSelection`, 0x49fd14) and the departure state
+ * (`g_mapDepartState`, 0x49fd38). Every retail user of those two reaches them through its own pool word,
+ * also where it holds the g_gameState base, so they are not members of the game state.
  * Apocalypse's block has its own layout: game/GameStateA.h. Only the fields read so far are named;
  * unknown bytes are padding named by offset.
  *
  * The event (0x100) and map (0x200) blocks are nested because retail treats their starts as objects:
  * FUN_002080e8 reaches map.savedLocationSet through `add r1, gs, #0x200; ldrb [r1, #0xF8]`, a
- * byte a flat struct would load straight from the base, and FUN_003b992c / FUN_002080e8 keep the
+ * byte a flat struct would load straight from the base, and eventUpdateScriptLaunch / FUN_002080e8 keep the
  * block address in its own register. (A `g_gameState+0x100/0x200/0x400` pool word alone is not
  * evidence: armcc folds those itself for ldrsb/ldrh/vldr fields out of range.) Apocalypse's state
  * (GameStateA) has the same fields 0x34 bytes later and stays flat: no unit there needs a block. */
@@ -16,7 +19,8 @@
 #include "map/MapDepartTarget.h"
 #include <stddef.h>
 
-/* A pending map jump (0x3F8): where to go, and the pose to arrive with. */
+/* A pending map jump (g_mapSelection, 0x49fd14; Apocalypse's g_mapSelection is the same 0x24 bytes): where to go,
+ * and the pose to arrive with. */
 struct GameStateJumpRequest {
     /* 0x00 */ MapDepartTarget selection; /* group, map, target object (-1: none), destination */
     /* 0x10 */ MapVector position;
@@ -30,7 +34,7 @@ struct GameStateFile {
     /* 0x04 */ u32 buffer;
 };
 
-/* The departure's block (0x41C), reset as one when a map is entered. */
+/* The departure's block (g_mapDepartState + 0), reset as one when a map is entered. */
 struct GameStateDepartBlock {
     /* 0x00 */ u8 unk00[0x50];
     /* 0x50 */ u32 value;
@@ -251,12 +255,16 @@ typedef struct GameState {
     /* 0x3EC */ s32 stageOverride;      /* -1: derive the stage from the data table */
     /* 0x3F0 */ s32 groupOverride;      /* -1: derive the group from the data table */
     /* 0x3F4 */ u8 unk3F4[4];
-    /* 0x3F8 */ GameStateJumpRequest jumpRequest;
-    /* 0x41C */ GameStateDepartBlock depart;
-    /* 0x4C4 */ u8 unk4C4[0x1B4];
 } GameState;
 
-typedef char GameStateLayoutCheck[sizeof(GameState) == 0x678 && sizeof(GameStateEventBlock) == 0x100 &&
+/* What follows g_gameState (0x49fd38, 0x25c bytes): the departure block and unknown state. */
+struct GameStateDepart {
+    /* 0x000 */ GameStateDepartBlock depart;
+    /* 0x0A8 */ u8 unk0A8[0x1B4];
+};
+typedef char MapDepartStateSizeCheck[sizeof(GameStateDepart) == 0x25C ? 1 : -1];
+
+typedef char GameStateLayoutCheck[sizeof(GameState) == 0x3F8 && sizeof(GameStateEventBlock) == 0x100 &&
     sizeof(GameStateMapBlock) == 0xFC && offsetof(GameState, event) == 0x100 && offsetof(GameState, map) == 0x200 ? 1 : -1];
 typedef char GameStateHeadOffsets[offsetof(GameState, resumeMode) == 0x14 && offsetof(GameState, loading) == 0x22 &&
     offsetof(GameState, bgmId) == 0x28 && offsetof(GameState, retainCampResources) == 0x34 &&
@@ -275,11 +283,13 @@ typedef char GameStateLocationOffsets[offsetof(GameState, savedMapId) == 0x2FC &
     offsetof(GameState, suppressStep) == 0x348 && offsetof(GameState, encounterBlocked) == 0x364 ? 1 : -1];
 typedef char GameStateTailOffsets[offsetof(GameState, mapMode) == 0x370 && offsetof(GameState, environmentPreset) == 0x390 &&
     offsetof(GameState, overlayKind) == 0x3A8 && offsetof(GameState, showAllEntries) == 0x3E0 &&
-    offsetof(GameState, jumpRequest) == 0x3F8 && offsetof(GameState, depart) == 0x41C &&
-    offsetof(GameState, depart.counterB) == 0x4C2 && sizeof(GameStateJumpRequest) == 0x24 ? 1 : -1];
+    offsetof(GameState, groupOverride) == 0x3F0 && sizeof(GameStateJumpRequest) == 0x24 &&
+    offsetof(GameStateDepart, depart.counterB) == 0xA6 ? 1 : -1];
 
 extern "C" {
 extern GameState g_gameState;
+extern GameStateJumpRequest g_mapSelection; /* 0x49fd14, right after g_gameState */
+extern GameStateDepart g_mapDepartState;     /* 0x49fd38 */
 }
 
 #endif

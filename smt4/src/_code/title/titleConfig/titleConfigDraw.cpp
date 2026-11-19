@@ -102,7 +102,7 @@ s32 titleConfigDraw(void)
         u32 setting = resourceRunOperationIfUnblocked(config->cursor) + row;
         if (setting < 3) {
             TitleConfigHelpEntry *labels = (TitleConfigHelpEntry *)dataTableGetEntries(dataTableGet(0x3a, 1));
-            textFormatBuffer(text, "%s", &labels[setting]);
+            __2sprintf(text, "%s", &labels[setting]);
             textDrawString(2, color, text, (f32)(entry->x + labelEntry->x + x), (f32)(entry->y + labelEntry->y + y), 0.0f,
                            0.0f, 1.0f);
         }

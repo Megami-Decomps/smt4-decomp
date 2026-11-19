@@ -16,12 +16,12 @@ void FUN_003115b4(u32 questId)
     UiQuest *quest = g_uiQuest;
     quest->questId = questId;
     s32 alternate = FUN_00298f88(questId);
-    quest->panel.detailMode = alternate;
-    quest->panel.unkF2 = 1;
+    quest->panelView.panel.detailMode = alternate;
+    quest->panelView.panel.unkF2 = 1;
     void *cursor;
     u16 *ids;
     if (alternate != 0) {
-        cursor = quest->panel.alternate.cursor;
+        cursor = quest->panelView.panel.alternate.cursor;
         ids = quest->cursor.alternate.ids;
     } else {
         cursor = &quest->cursor;

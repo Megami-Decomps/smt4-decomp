@@ -1,4 +1,5 @@
 /* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
+#include "runtime/Stdio.h"
 #include "battle/BtlEffectLoad.h"
 #include <string.h>
 
@@ -13,7 +14,6 @@ u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *buffer, s32 size);
-void textFormatBuffer(char *buffer, const char *format, ...);
 char *libc_strrchr(char *text, s32 character);
 s32 keyedRecordFindByName(const char *key);
 void FUN_002276f8(BtlEffectWork *work);
@@ -43,7 +43,7 @@ u32 FUN_003da5e8(BtlEffectWork *work)
                     if (libc_strncmp(name, g_btlEffect.numberedPrefix, libc_strlen(g_btlEffect.numberedPrefix)) == 0) {
                         bool found = false;
                         for (s32 n = 0; n < 11; n++) {
-                            textFormatBuffer(file, DAT_00400904, g_btlEffect.numberedPrefix, n);
+                            __2sprintf(file, DAT_00400904, g_btlEffect.numberedPrefix, n);
                             if (strcmp(file, name) == 0) {
                                 FUN_002276f8(work);
                                 work->numberedIndex = n;
@@ -60,7 +60,7 @@ u32 FUN_003da5e8(BtlEffectWork *work)
                 if (name == NULL || strcmp(name, g_btlEffect.ignoredNameB) != 0) {
                     memClear(path, 0x80);
                     memClear(file, 0x80);
-                    textFormatBuffer(file, DAT_004008c4, name);
+                    __2sprintf(file, DAT_004008c4, name);
                     libc_strcpy(path, file);
                     if (libc_strlen(path) != 0) {
                         BtlEffectFileSlot *slot = &work->slots[i];

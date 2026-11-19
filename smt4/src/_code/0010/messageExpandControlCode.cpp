@@ -1,6 +1,7 @@
 /* Apocalypse's twin is FUN_00141f8c. The ruby-code swaps are calls to textCodeSwapBytes, which armlink inlined
  * (config/inlined.txt). */
 #include "common.h"
+#include <stdio.h>
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
 #include "addon/AocSystem_Smt4.h"
@@ -52,10 +53,10 @@ u32 messageExpandControlCode(s32 code, const u16 *text, u16 *out, s32 *index, s3
             libc_strcpy(name, (const char *)gameGetPlayerName());
             FUN_002bd0f8(out, position, (const u16 *)name, measureOnly);
         } else if (who == 1) {
-            textFormatBuffer(name, "\x81u\x83o\x83O\x81@\x82o\x82" "b\x82P\x81v");
+            sprintf(name, "\x81u\x83o\x83O\x81@\x82o\x82" "b\x82P\x81v");
             FUN_002bd0f8(out, position, (const u16 *)name, measureOnly);
         } else if (who == 2) {
-            textFormatBuffer(name, "\x81u\x83o\x83O\x81@\x82o\x82" "b\x82Q\x81v");
+            sprintf(name, "\x81u\x83o\x83O\x81@\x82o\x82" "b\x82Q\x81v");
             FUN_002bd0f8(out, position, (const u16 *)name, measureOnly);
         }
         ++*index;

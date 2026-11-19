@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail keeps the 0xffffffff text color/0x6b in sl/r9 (set after the null check) and the switch flag in r1 */
 #include "common.h"
+#include <stdio.h>
 #include "addon/PackageSelection.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -17,7 +18,6 @@ void drawSetColorFromRGBA8(u32 rgba);
 void gxResetColorQuadToWhite(void);
 void gameGetPlayerData(void);
 const char *gameGetPlayerName(void);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void efctPlayVariantSet(u32 unused, u32 target, u32 slot, s32 index, s32 useFirstSet, s32 useSecondSet, f32 speed);
 
 /* Draws one content list entry: its frame, name and badge, at the given offset. */
@@ -79,7 +79,7 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
             gameGetPlayerData();
             name = gameGetPlayerName();
         }
-        textFormatBuffer(text, "%s", name);
+        sprintf(text, "%s", name);
         textDrawString(2, textColor, text, (f32)(placement->x + x), (f32)(placement->y + y), 0.56640625f, 0.0f, speed);
         placement = asdTMTexTableEntryAt(0x32, 0x65);
         efctPlayVariantSet(effect, placement->x + x, placement->y + y, 0x79, useFirstSet, useSecondSet, speed);

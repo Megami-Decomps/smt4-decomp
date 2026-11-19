@@ -1,4 +1,5 @@
 /* NON_MATCHING: canonical SDK result construction matches; full-path pointer reuse, saved registers and stack allocation differ. */
+#include "runtime/Stdio.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "nn/Result.h"
 #include <stddef.h>
@@ -40,7 +41,6 @@ extern s8 g_asdLoadFileUseRawPaths;
 extern const char DAT_0053d4c0[];
 void rt_aeabi_memclr(void *data, u32 size);
 void sysMemClear(void *data, u32 size);
-void textFormatBuffer(char *output, const char *format, ...);
 s32 asdLoadFileHasDevice(const char *path);
 void pathSetWithRomPrefix(AsdSyncFileRecordA *record, const char *path);
 void asdLoadConfigureModeFlags(AsdSyncFileRecordA *record, u32 flags);
@@ -54,9 +54,9 @@ void *asdLoadFileSync(s32 *result, void *context, const char *path, u32 *size, u
     char fullPath[ASD_FILE_PATH_LEN];
     rt_aeabi_memclr(fullPath, sizeof(fullPath));
     if (g_asdLoadFileUseRawPaths != 0 || asdLoadFileHasDevice(path) != 0)
-        textFormatBuffer(fullPath, path);
+        __2sprintf(fullPath, path);
     else
-        textFormatBuffer(fullPath, DAT_0053d4c0, path);
+        __2sprintf(fullPath, DAT_0053d4c0, path);
     AsdSyncFileRecordA record;
     record.state = 0;
     record.lifetime = 1;

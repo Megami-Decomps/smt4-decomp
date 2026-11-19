@@ -20,7 +20,7 @@ typedef struct PartySlots {
 PartySlots *gameGetSlotTable(void);
 void *gameGetPlayerData(void);
 void resultSetMenuState(ResultWork *result, s32 arg);
-void FUN_00269dc8(void);
+void uiQuestCreate(void);
 void FUN_00203640(u16 battleId);
 s32 mapMainIsBusy(void);
 s32 lmapMainIsRunning(void);
@@ -45,7 +45,7 @@ void resultApplySpoils(ResultSpoils *spoils)
 
     gameGetPlayerData();
     resultSetMenuState(result, 0);
-    FUN_00269dc8();
+    uiQuestCreate();
     FUN_00203640(spoils->sourceId);
     if (mapMainIsBusy() != 0 || lmapMainIsRunning() != 0) {
         bgmReleaseStopped();

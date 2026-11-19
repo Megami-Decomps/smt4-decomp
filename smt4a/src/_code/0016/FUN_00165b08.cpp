@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00165b08` (_code @ 0x165b08, 0x808 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "ui/MessageMainA.h"
@@ -12,7 +13,6 @@ extern "C" {
 
 int renderCtxPopState(...);
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int renderStackPushIndexed(RenderCtxA *, int, unsigned int);
@@ -37,7 +37,6 @@ extern unsigned char DAT_00530b54; /* 0x530b54 */
 extern unsigned char DAT_00530b58; /* 0x530b58 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
@@ -148,7 +147,7 @@ void FUN_00165b08(void)
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc3b));
       texDrawTableEntryAtStoredOrigin(2,0x14,0xbc2,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v5,0xbf)
       ;
-      textFormatBuffer(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
+      sprintf((char *)temp_v18,(const char *)&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 * 3 + 0xc52));
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
@@ -157,7 +156,7 @@ void FUN_00165b08(void)
       gxResetColorQuadToWhite();
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
-      textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
+      sprintf((char *)temp_v17,(const char *)&DAT_00530b54,temp_v2);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49));
       puVar8 = temp_v17;
       fontMeasureLineAdvance(puVar8,2);
@@ -210,7 +209,7 @@ LAB_00165eec:
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc3b));
       texDrawTableEntryAtStoredOrigin(2,0x14,0xbc2,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v5,0xbf)
       ;
-      textFormatBuffer(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
+      sprintf((char *)temp_v18,(const char *)&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 * 3 + 0xc52));
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
@@ -219,7 +218,7 @@ LAB_00165eec:
       gxResetColorQuadToWhite();
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
-      textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
+      sprintf((char *)temp_v17,(const char *)&DAT_00530b54,temp_v2);
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49));
       puVar8 = temp_v17;
       fontMeasureLineAdvance(puVar8,2);

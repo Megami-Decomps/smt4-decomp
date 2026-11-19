@@ -4,7 +4,7 @@
 extern "C" {
 
 void asdMdlManagerMarkDestroy(AsdMdlObject *model);
-void FUN_00335144(LmapScript *script);
+void FUN_00335144(Obj4206e8 *holder);
 
 
 void lmapSceneUpdateHandles(void)

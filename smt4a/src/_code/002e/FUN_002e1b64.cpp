@@ -1,5 +1,6 @@
 /* NON_MATCHING: leading-zero helper branching, byte narrowing and text/argument saved registers differ. */
 #include "common.h"
+#include <stdio.h>
 
 /* A digit value of ten denotes a suppressed leading zero. */
 static u8 decimalDigit(u32 value, u8 place)
@@ -19,7 +20,6 @@ static u8 decimalDigit(u32 value, u8 place)
 }
 
 extern "C" {
-void textFormatBuffer(char *, const char *, ...);
 void FUN_00180310(s32, u32, u32, s32, s32, u32, const char *);
 
 /* Draw a seven-column decimal number padded with spaces on the left. */
@@ -32,7 +32,7 @@ void FUN_002e1b64(u32 value, u32 x, u32 y, u32 color)
         if (digit == 10)
             text[column] = ' ';
         else
-            textFormatBuffer(text + column, "%d", digit);
+            sprintf(text + column, "%d", digit);
     }
     text[column] = '\0';
     FUN_00180310(0, x, y, 0, 5, color, text);

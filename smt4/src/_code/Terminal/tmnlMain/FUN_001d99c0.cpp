@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d99c0` (_code @ 0x1d99c0, 0x16f0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "font/PlaceWin.h"
 #include "game/GameState.h"
@@ -10,7 +11,7 @@ extern "C" {
 int asdModelSlotSetColor(...);
 int asdModelSlotSetTint(...);
 int floatInterpolateOverDuration(...);
-int FUN_00297684(void);
+int FUN_00297684(void); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int buttonHelpSetContext(...);
 int VectorSignedToFloat(...);
 
@@ -60,7 +61,6 @@ int titleSetSlotValueState2(...);
 int FUN_002a5704(...);
 int resOwnerRunNodeHandlers(...);
 int buttonHelpSetPreset(...);
-int textFormatBuffer(...);
 int FUN_002c1658(...);
 int FUN_002c29d8(...);
 int FUN_002cf570(...);
@@ -198,7 +198,6 @@ extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: buttonHelpSetContext. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: soundPlaySeUnpanned. */
 /* Supplied declaration required: messageSetConfirmDisplayMode. */
@@ -222,7 +221,7 @@ extern int FUN_002c79c4(unsigned int);
 /* Supplied declaration required: FUN_002cf570. */
 /* Supplied declaration required: FUN_002e2948. */
 /* Supplied declaration required: FUN_002fc008. */
-extern int FUN_00335118(unsigned int);
+extern int FUN_00335118(unsigned int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 
 
 unsigned int FUN_001d99c0(void)
@@ -486,7 +485,7 @@ unsigned int FUN_001d99c0(void)
           else {
             pcVar10 = (char *)gameDataGetPlayerName();
           }
-          textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
+          sprintf((char *)temp_v7,(const char *)&DAT_003ff040,pcVar10);
           placeWinStartText(reinterpret_cast<const u8 *>(temp_v7));
           puVar2[5] = 0;
           scrScriptProcessStartEntry(puVar2[10],
@@ -735,7 +734,7 @@ LAB_001da638:
                 else {
                   pcVar10 = (char *)gameDataGetPlayerName();
                 }
-                textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
+                sprintf((char *)temp_v7,(const char *)&DAT_003ff040,pcVar10);
                 placeWinStartText(reinterpret_cast<const u8 *>(temp_v7));
                 scrScriptProcessStartEntry(puVar2[10],0x18);
                 puVar2[4] = 5;

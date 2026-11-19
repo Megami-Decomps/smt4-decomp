@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH2_FORMATTED_TEXT_SOURCE_H
 
 #include "common.h"
+#include "runtime/Stdio.h"
 
 struct FormattedTextItem {
     u32 id;          // 0x00
@@ -20,7 +21,5 @@ struct FormattedTextSource {
     u8 unk34[0x14];              // 0x34
     FormattedTextPrefix* prefix;  // 0x48
 };
-
-extern "C" s32 textFormatBuffer(char* output, const char* format, ...);
 
 #endif

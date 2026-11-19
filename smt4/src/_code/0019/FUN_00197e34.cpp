@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "quest_center/QuestText.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00197e34` (_code @ 0x197e34, 0x1150 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -19,7 +20,6 @@ int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int vec2GetXInt(...);
 int texDrawCompositeSprite(...);
@@ -68,7 +68,6 @@ extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
@@ -183,7 +182,7 @@ void FUN_00197e34(void)
     drawSkillCategoryLabel(temp_v25,*(short *)(temp_v13 + 8) + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
     temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x12));
     temp_v19 = reinterpret_cast<u32>(FUN_002bcddc(temp_v25,0));
-    textFormatBuffer(temp_v24,"%s",temp_v19);
+    sprintf((char *)temp_v24,"%s",temp_v19);
     temp_v18 = (unsigned long long)(unsigned int)temp_v31 << 0x20;
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -212,7 +211,7 @@ void FUN_00197e34(void)
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x1a));
     temp_v19 = dataTableGetNamePayload(temp_v25);
-    textFormatBuffer(temp_v24,"%s",temp_v19);
+    sprintf((char *)temp_v24,"%s",temp_v19);
     temp_v11 = temp_v4 + (int)temp_v17;
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -227,18 +226,18 @@ void FUN_00197e34(void)
     if (temp_v2 != 1) {
       if (temp_v2 != 3) {
         if (temp_v2 != 4) {
-          textFormatBuffer(temp_v24,"\x81|\x81|\x81|");
+          sprintf((char *)temp_v24,"\x81|\x81|\x81|");
           temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x1b));
         }
         else {
           temp_v19 = aocGetEntryData(psVar14[1]);
-          textFormatBuffer(temp_v24,"%s",temp_v19);
+          sprintf((char *)temp_v24,"%s",temp_v19);
           temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x1b));
         }
       }
       else {
         textFormatFullWidthNumber(temp_v26,psVar14[2]);
-        textFormatBuffer(temp_v24,"%s\x81@\x82l\x82\x81\x82\x83\x82\x83\x82\x81",temp_v26);
+        sprintf((char *)temp_v24,"%s\x81@\x82l\x82\x81\x82\x83\x82\x83\x82\x81",temp_v26);
         temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x1b));
       }
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -252,7 +251,7 @@ void FUN_00197e34(void)
       temp_v13 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x29,0x1c));
       temp_v7 = (unsigned int)(unsigned short)psVar14[1];
       dataFindKindRecordWithAocOverrides(temp_v7,0);
-      textFormatBuffer(temp_v24,"%s",temp_v7);
+      sprintf((char *)temp_v24,"%s",temp_v7);
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffffffff,temp_v24);
@@ -266,7 +265,7 @@ void FUN_00197e34(void)
       textDrawString(2,0xffffffff,temp_v26);
     }
     else {
-      textFormatBuffer(temp_v24,"\x83f\x81[\x83^\x96\xb3\x82\xb5x%d",psVar14[2]);
+      sprintf((char *)temp_v24,"\x83f\x81[\x83^\x96\xb3\x82\xb5x%d",psVar14[2]);
       asdTMTexTableEntryAt(0x29,0x1c);
     }
     temp_v31 = (float)((unsigned long long)temp_v20 >> 0x20);
@@ -431,11 +430,11 @@ LAB_00198518:
         temp_v12 = temp_v21 & 0xffff;
         if ((*(unsigned char *)((unsigned char *)&temp_v21 + 2)) != '\0') {
           dataFindKindRecordWithAocOverrides(temp_v12,0);
-          textFormatBuffer(temp_v24,"%s\x81@%s\x81^%s",temp_v12,temp_v29,temp_v28);
+          sprintf((char *)temp_v24,"%s\x81@%s\x81^%s",temp_v12,temp_v29,temp_v28);
         }
         else {
           temp_v19 = FUN_002bd068(temp_v12);
-          textFormatBuffer(temp_v24,"%s\x81@%s\x81^%s",temp_v19,temp_v29,temp_v28);
+          sprintf((char *)temp_v24,"%s\x81@%s\x81^%s",temp_v19,temp_v29,temp_v28);
         }
         if (temp_v22 < *(unsigned int *)(temp_v23 + 0x170)) {
           temp_v30 = 0;
@@ -471,7 +470,7 @@ LAB_00198518:
         temp_v23 = dataTableGetEntries();
         temp_v10 = dataTableGetCount(temp_v19);
         if ((temp_v12 < temp_v10) && (temp_v23 + temp_v12 * 0x4a != -1)) {
-          textFormatBuffer(temp_v24,"%s");
+          sprintf((char *)temp_v24,"%s");
           VectorSignedToFloat(*(short *)(temp_v27 + 10) + temp_v13 + temp_v8 * 0x11 + 0x11,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v27 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);

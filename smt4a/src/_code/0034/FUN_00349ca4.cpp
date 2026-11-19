@@ -1,4 +1,5 @@
 /* NON_MATCHING: filename literal grouping, backend branch layout and completion-tail scheduling differ. */
+#include <stdio.h>
 #include "gamedata/SaveLoadThreadRequest.h"
 #include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
 #include "shard/Sys43e310.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 void rt_aeabi_memclr(void *, u32);
-s32 textFormatBuffer(char *, const char *, ...);
 char *libc_strcpy(char *, const char *);
 void FUN_00399c90(u32, const char *);
 s32 FUN_0032c8c8(void);
@@ -36,7 +36,7 @@ void FUN_00349ca4(u32 job)
     if (backend != 1) {
         u32 slot = state->request->slot;
         rt_aeabi_memclr(DAT_005e2114, 128);
-        textFormatBuffer(DAT_005e2114, "sdds4game%d.sav", slot);
+        sprintf(DAT_005e2114, "sdds4game%d.sav", slot);
     } else {
         FUN_00399c90(1, "sdds4/");
         if (FUN_0032c8c8()) {
@@ -45,7 +45,7 @@ void FUN_00349ca4(u32 job)
         }
         u32 slot = state->request->slot;
         rt_aeabi_memclr(DAT_005e2114, 128);
-        textFormatBuffer(DAT_005e2114, "%ssdds4game%d.sav", "sdds4/", slot);
+        sprintf(DAT_005e2114, "%ssdds4game%d.sav", "sdds4/", slot);
     }
     char filename[128];
     AsdSaveHeader header;

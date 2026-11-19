@@ -1,4 +1,4 @@
-/* NON_MATCHING: both template blocks are copied to the stack as in retail (116-byte frame matches); the copy of the command block's middle words is split into single loads instead of one vldmia. */
+/* NON_MATCHING: both template blocks are copied as in retail; only the scheduling of the words[5] and words[12] stores around the format-table load differs. */
 #include "shard/TextureCommandTemplates.h"
 
 extern "C" {

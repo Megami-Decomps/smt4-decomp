@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack-frame size, argument register allocation, and path-format literal placement differ from retail. */
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
@@ -7,7 +8,6 @@ extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 
 void rt_aeabi_memclr(void *buf, u32 size);
 s32 asdLoadFileIsPatched(const char *path);
-s32 textFormatBuffer(char *dst, const char *format, ...);
 AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag);
 void asdFileRequestSetHeapKind(AsdFileRequest *request, u8 flags);
 void optionalParameterTrySet(AsdFileRequest *request, u32 priority);
@@ -23,11 +23,11 @@ void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 priority)
 
     rt_aeabi_memclr(fullPath, ASD_FILE_PATH_LEN);
     if (g_asdLoadFileUseRawPaths != 0 || asdLoadFileHasDevice(path) != 0) {
-        textFormatBuffer(fullPath, path);
+        sprintf(fullPath, path);
     } else if (asdLoadFileIsPatched(path) != 0) {
-        textFormatBuffer(fullPath, "patch:/%s", path);
+        sprintf(fullPath, "patch:/%s", path);
     } else {
-        textFormatBuffer(fullPath, "rom:/%s", path);
+        sprintf(fullPath, "rom:/%s", path);
     }
 
     request = asdFileQueueRequest(fullPath, 0);

@@ -57,7 +57,6 @@ extern int g_mapDepart; /* 0x4475b8 */
 extern int DAT_004475bc; /* 0x4475bc */
 extern unsigned int DAT_0049f9c0; /* 0x49f9c0 */
 extern int DAT_0049f9c4; /* 0x49f9c4 */
-extern unsigned int DAT_0049fd38; /* 0x49fd38 */
 extern unsigned char DAT_0049fd78; /* 0x49fd78 */
 extern int DAT_0049fd88; /* 0x49fd88 */
 extern short DAT_0049fddc; /* 0x49fddc */
@@ -213,7 +212,7 @@ unsigned int FUN_001e553c(void)
     *(int *)(g_mapDepart + 0x1c) = temp_v4;
     if (temp_v4 == 1) {
       if (*(int *)(temp_v2 + 0xc) != 0) {
-        DAT_0049fd38 = *(unsigned int *)(temp_v2 + 0x14);
+        *(unsigned int *)&g_mapDepartState = *(unsigned int *)(temp_v2 + 0x14);
         temp_v4 = unlockFlagTest(*(unsigned int *)(temp_v2 + 0x14));
         DAT_0049fd78 = temp_v4 == 0;
         DAT_0049fd88 = 1;
@@ -221,7 +220,7 @@ unsigned int FUN_001e553c(void)
       else {
         temp_v4 = DAT_0049f9c4;
         FUN_0025b670();
-        FUN_001f8da8((int)*(short *)(temp_v4 + 0x24),&DAT_0049fd38,&DAT_0049fd78,&DAT_0049fd88);
+        FUN_001f8da8((int)*(short *)(temp_v4 + 0x24),(unsigned int *)&g_mapDepartState,&DAT_0049fd78,&DAT_0049fd88);
       }
       temp_v8[0] = 0;
       temp_v8[1] = 0;
@@ -247,7 +246,7 @@ unsigned int FUN_001e553c(void)
         temp_v4 = DAT_0049fd88;
         psVar7 = temp_v8;
         puVar9 = (unsigned int *)&temp_v9;
-        puVar12 = &DAT_0049fd38;
+        puVar12 = (unsigned int *)&g_mapDepartState;
         puVar13 = &DAT_0049fd78;
         do {
           temp_v0 = *puVar13;

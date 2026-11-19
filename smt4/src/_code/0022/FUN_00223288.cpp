@@ -6,7 +6,7 @@ extern s32 scrGetArg(u32 index);
 extern s32 scrGetCommandFrame(void);
 extern s32 FUN_00348b00(u32 id);
 extern s32 FUN_002c1d5c(void);
-extern s32 FUN_00269dc8(void);
+extern s32 uiQuestCreate(void);
 extern s32 FUN_003115b4(u32 id);
 extern s32 uiQuestIsIdle(void);
 extern s32 uiQuestClose(void);
@@ -24,7 +24,7 @@ u32 FUN_00223288(void)
         if (FUN_002c1d5c() != 0) {
             return 1;
         }
-        FUN_00269dc8();
+        uiQuestCreate();
         FUN_003115b4(id);
     }
     if (uiQuestIsIdle() == 0) {

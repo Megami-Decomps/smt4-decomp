@@ -1,6 +1,6 @@
 #include "common.h"
+#include <stdio.h>
 extern "C" {
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void buttonHelpSetText(const char *text, u32 color);
 void screenSetColor670(u32 color, s32 row, s32 first, s32 length);
 const char *requestSubmitScrLookup(u8 index, s32 alternate);
@@ -28,7 +28,7 @@ void screenSetContextHint(void *owner, s32 kind, s32 alternate)
     const char *text = requestSubmitScrLookup(lookup, alternate == 0);
     if (kind == 9) {
         char buffer[128];
-        textFormatBuffer(buffer, text, work->amount);
+        sprintf(buffer, text, work->amount);
         buttonHelpSetText(buffer, 0xF4F4F4FF);
         s32 length;
         if (work->amount >= 100)

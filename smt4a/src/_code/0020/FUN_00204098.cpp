@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00204098` (_code @ 0x204098, 0x459c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
@@ -50,7 +51,6 @@ int unitRecomputeDerivedStats(...);
 int getUnlockedSlotCount(...);
 int partyRecordSetEquippedItemClampRank(...);
 
-int textFormatBuffer(...);
 int dataTable01GetRecordWithAocOverride(...);
 int nkmBaseGetRecord(void);
 int asdLoadFileSyncDefault(void);
@@ -173,7 +173,6 @@ extern int DAT_00588c44; /* 0x588c44 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: padQueryLogicalKey. */
@@ -1402,7 +1401,7 @@ LAB_00205528:
       }
       pcVar26 = (char *)0x0;
 LAB_00206230:
-      textFormatBuffer(&temp_v49,"battle/DevilMsg/%s.mbm",pcVar26 + 1);
+      sprintf((char *)&temp_v49,"battle/DevilMsg/%s.mbm",pcVar26 + 1);
       ppcVar15 = &temp_v49;
       asdLoadFileSyncDefault();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;
@@ -2370,7 +2369,7 @@ joined_r0x002073c8:
       }
       pcVar26 = (char *)0x0;
 LAB_00207d0c:
-      textFormatBuffer(&temp_v49,"battle/DevilMsg/%s.mbm",pcVar26 + 1);
+      sprintf((char *)&temp_v49,"battle/DevilMsg/%s.mbm",pcVar26 + 1);
       ppcVar15 = &temp_v49;
       asdLoadFileSyncDefault();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;

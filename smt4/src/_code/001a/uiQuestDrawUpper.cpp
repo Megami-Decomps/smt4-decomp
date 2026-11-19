@@ -2,6 +2,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (221 vs ~221 rows); frame size and register assignment of the helper-inlined ring operations differ */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
+#include <stdio.h>
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -48,7 +49,6 @@ void FUN_00186a48(void);
 f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
 void uiFadeDraw(u32 id);
 void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
-void textFormatBuffer(char* out, const char* format, ...);
 void effectRenderTransformedInstance(void* vec, f32 amount);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void renderCtxApplyTransforms(TitleScene* scene);
@@ -89,7 +89,7 @@ static void ringReplace(DrawStateRing* ring, u32 value)
 
 // Draws the quest screen's skill-category panel (states 0x14-0x16) or hands the other quest
 // states to their shared drawers, with the title scene's render state pushed around it.
-u32 FUN_001ad9f0(void)
+s32 uiQuestDrawUpper(u32 job)
 {
     QuestUi* quest = g_uiQuest;
     renderCtxSelectStereoLayout(g_titleScene);
@@ -121,7 +121,7 @@ u32 FUN_001ad9f0(void)
         drawSkillCategoryLabel(category, labelRect->x + x, labelRect->y + y, 0xa6);
         TextureTableEntryIV* nameRect = asdTMTexTableEntryAt(0x29, 0x55);
         char text[64];
-        textFormatBuffer(text, "%s", FUN_002bcddc(category, 0));
+        sprintf(text, "%s", FUN_002bcddc(category, 0));
         textDrawString(3, -1, text, (f32)(nameRect->x + x), (f32)(nameRect->y + y), 0.375f, 0.0f, 1.0f);
         effectRenderTransformedInstance(pointer, (f32)(s32)renderCtxCalculateStereoParallax(g_titleScene, 0.28f));
         break;

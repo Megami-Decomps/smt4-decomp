@@ -9,8 +9,8 @@ void battleSelectButtonHelpPreset(int);
 int flagBitIsSet(int);
 int FUN_00292f4c(void);
 int FUN_00297b94(int, unsigned int, unsigned int);
-int objectPartRunUnlessLocked(int);
-int FUN_0029e958(...);
+int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
+int FUN_0029e958(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int gridNavigationConfigure(int, int, int, int, int, int);
 int buttonHelpGetMode(void);
 int nkmEnemyFindById(void);

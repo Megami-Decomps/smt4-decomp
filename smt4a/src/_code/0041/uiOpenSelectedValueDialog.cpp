@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail retains empty-vector insertion branches; temporary settings, string, and callback code generation still differs. */
+#include <stdio.h>
 #include "shard/W6_W6Match1_Obj55a5a8.h"
 #include <stddef.h>
 
@@ -43,7 +44,6 @@ typedef char CheckCallbackSize[sizeof(DialogCallback) == 0x14 ? 1 : -1];
 extern "C" {
 extern const DialogCallbackMethod DAT_00532fcc;
 extern const u8 DAT_0055cacc[];
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 u64 FUN_004311c0(u32 id);
 Obj55aff4 _ZN9Obj55aff4C1EPKc(const char *text);
 void FUN_00522a48(Obj55aff4Vector *vector, const Obj55aff4 &text);
@@ -66,7 +66,7 @@ extern "C" void uiOpenSelectedValueDialog(DialogOwner *owner)
     settings.enabled = 1;
     Obj55aff4Vector lines;
     char text[24] = {0};
-    textFormatBuffer(text, "%llu", FUN_004311c0(0x19a2));
+    sprintf(text, "%llu", FUN_004311c0(0x19a2));
     FUN_00522a48(&lines, _ZN9Obj55aff4C1EPKc(text));
     reinterpret_cast<Obj55aff4Vector &>(settings.elements) = lines;
 

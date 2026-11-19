@@ -40,7 +40,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern int uniteStateIsDone(void);
-extern int idListAnyValid(unsigned int);
+extern int idListAnyValid(unsigned int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026e8b8. */
 extern int recordGetModeForId(int);

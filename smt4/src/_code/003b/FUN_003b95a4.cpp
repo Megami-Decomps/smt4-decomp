@@ -1,4 +1,4 @@
-/* NON_MATCHING: two scheduling differences only: retail loads work->node (arg 2) before `mov r4, r0` and compares the model-set index in r1 (ours r0); the instruction multiset is identical (154 rows each). */
+#include <stdio.h>
 #include "font/PlaceWin.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -50,7 +50,6 @@ struct PanelWork {
 extern "C" {
 
 void FUN_003ba754(PanelWork *work);
-void textFormatBuffer(char *destination, const char *format, ...);
 s32 gameFlagIsSet(u32 flag);
 void FUN_00234f5c(NodeEnableOwner *owner, const char *first, const char *second);
 PanelSelection *FUN_0022b8c0(void *selection);
@@ -77,10 +76,10 @@ void FUN_003b95a4(PanelWork *work)
         PanelSelection *selection;
 
         work->recordShown = 1;
-        textFormatBuffer(name, "mikado/%s", work->record->name);
+        sprintf(name, "mikado/%s", work->record->name);
         if ((work->record->primaryFlag != 0 && gameFlagIsSet(work->record->primaryFlag) != 0) ||
             (work->record->secondaryFlag != 0 && gameFlagIsSet(work->record->secondaryFlag) != 0)) {
-            textFormatBuffer(altName, "mikado/%s", work->record->altName);
+            sprintf(altName, "mikado/%s", work->record->altName);
             FUN_00234f5c(work->modelOwner, name, altName);
         } else {
             FUN_00234f5c(work->modelOwner, name, NULL);
@@ -96,7 +95,7 @@ void FUN_003b95a4(PanelWork *work)
                 s32 i;
 
                 for (i = 0; i < FUN_0022afb0(&count, work->record->modelSet); i++) {
-                    textFormatBuffer(name, "mikado/%s.bam", entries);
+                    sprintf(name, "mikado/%s.bam", entries);
                     work->files[i] = fileLoadSync(name, &work->fileSizes[i], 1);
                     entries += 32;
                 }

@@ -21,10 +21,10 @@ struct FusionSortPreferences {
 
 extern "C" {
 s32 fusionComparePairsByRaceLevelAndId(const void *a, const void *b);
-s32 FUN_002dc7a0(const void *a, const void *b);
+s32 fusionComparePairsByRaceLevelAndIdDescending(const void *a, const void *b);
 s32 fusionComparePairsByParentLevelRaceId(const void *a, const void *b);
 s32 uniteComparePairsDescending(const void *a, const void *b);
-s32 FUN_001f6098(const void *a, const void *b);
+s32 fusionComparePairScoreAscending(const void *a, const void *b);
 s32 fusionComparePairPriority(const void *a, const void *b);
 s32 FUN_001e1540(const void *a, const void *b);
 s32 FUN_002d02b0(const void *a, const void *b);
@@ -42,7 +42,7 @@ void FUN_00196d78(void)
         if (ascending) {
             FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndId);
         } else {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_002dc7a0);
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndIdDescending);
         }
     }
     if ((*setting & 0x7f) == 2) {
@@ -67,7 +67,7 @@ void FUN_00196d78(void)
             work->pairSortIV.pairScores[work->pairSortIV.sortedPairs[i]] = score;
         }
         if (ascending) {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_001f6098);
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairScoreAscending);
         } else {
             FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairPriority);
         }

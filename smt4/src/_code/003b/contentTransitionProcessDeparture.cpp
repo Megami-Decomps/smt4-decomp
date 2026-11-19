@@ -1,4 +1,4 @@
-/* NON_MATCHING: the paired flag tests (tst/tsteq through flagsAny) and the hoisted state-17 store now match; remaining: retail places the shared state-17 tail right after the sequence request (the map branches branch back to it), stores state/phase with a separate base instead of the flags writeback, and its pool word names g_gameState+0x3f8. */
+/* NON_MATCHING: the paired flag tests (tst/tsteq through flagsAny) and the hoisted state-17 store now match; remaining: retail places the shared state-17 tail right after the sequence request (the map branches branch back to it), stores state/phase with a separate base instead of the flags writeback. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "map/mapDepart.h"
@@ -54,7 +54,7 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
     if (!flagsAny(flags, 0x200000, 0x40000) && !flagsAny(flags, 0x800000, 0x4000000) &&
         !flagsAny(flags, 0x1000000, 0x2000000) && !flagsAny(flags, 0x8000000, 0x20000000) && (flags & 0x10)) {
         if (flags & 0x80000) {
-            asdSequenceRequest(static_cast<s32>(g_gameState.jumpRequest.selection.group) < 100 ? 6 : 8, NULL, 0);
+            asdSequenceRequest(static_cast<s32>(g_mapSelection.selection.group) < 100 ? 6 : 8, NULL, 0);
             transition->state = 17;
             transition->phase = 0;
             return;

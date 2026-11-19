@@ -1,4 +1,3 @@
-/* NON_MATCHING: all three pushes now match; only the merged draw tail differs: retail copies the origin with one vldmia {s0-s1}, this build loads the two floats separately (x into s1). */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "code/Code0028.h"
@@ -35,6 +34,13 @@ s32 renderCtxPackPassFlags(u32 first, u32 second);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 void renderCtxResetColorScale(RenderCtx *context);
 
+/* Draws one job at the work's origin. */
+static void drawJobAtOrigin(TitleJobWork *work, s32 i)
+{
+    TitleJobOrigin origin = work->origin;
+    FUN_00285584(work->jobs[i], (s32)origin.x, (s32)origin.y);
+}
+
 /* Draws the title scene's jobs with the three render stacks pushed. */
 s32 FUN_001f42d4(u32 job)
 {
@@ -52,16 +58,10 @@ s32 FUN_001f42d4(u32 job)
     for (i = 0; i < work->count; i++) {
         if (g_eventTex->jobsActive) {
             if (jobIsValid(work->jobs[i])) {
-                TitleJobOrigin origin = work->origin;
-                s32 x = (s32)origin.x;
-                s32 y = (s32)origin.y;
-                FUN_00285584(work->jobs[i], x, y);
+                drawJobAtOrigin(work, i);
             }
         } else if (jobIsValid(work->jobs[i]) && jobGetStatus(work->jobs[i]) == 4) {
-            TitleJobOrigin origin = work->origin;
-            s32 x = (s32)origin.x;
-            s32 y = (s32)origin.y;
-            FUN_00285584(work->jobs[i], x, y);
+            drawJobAtOrigin(work, i);
         }
     }
     renderStackPop(&g_titleScene->stackB);

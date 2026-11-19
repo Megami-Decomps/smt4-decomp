@@ -1,10 +1,10 @@
 #include "common.h"
+#include <stdio.h>
 #include "addon/AocPackage.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-extern int textFormatBuffer(char *out, const char *format, const char *dir, const char *name);
 extern int aocQueueFileLoad(u32 context, char *path, void *arg0, int arg1, int size, void *arg2);
 
 extern u32 g_aocDisplay; /* 0x433130 */
@@ -20,7 +20,7 @@ void aocEntryBeginBaseLoad(AocPackage *package)
     package->directoryRequest[2] = 0;
     package->unk44 = 0;
     package->directoryLoaded = 0;
-    textFormatBuffer(path, "%s/%s", package->mountName, "aoc_base.bin");
+    sprintf(path, "%s/%s", package->mountName, "aoc_base.bin");
     aocQueueFileLoad(g_aocDisplay, path, &package->directoryFile, 1, 0x80, package->directoryRequest);
 }
 

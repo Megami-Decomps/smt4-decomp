@@ -17,7 +17,7 @@ static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
 extern "C" {
 
 // Sort fusion pairs by score, then each component's race, descending level and ID.
-s32 FUN_001f6098(const u16 *left, const u16 *right)
+s32 fusionComparePairScoreAscending(const u16 *left, const u16 *right)
 {
     struct PairScoreView {
         u8 unk0000[0x78a0];

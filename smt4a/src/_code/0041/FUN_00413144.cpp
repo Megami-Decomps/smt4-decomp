@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00413144` (_code @ 0x413144, 0x390 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_Obj55ac68.h"
 #include <new>
 
 extern "C" {
 
-int textFormatBuffer(...);
 int FUN_00103f54(...);
 int holderSetFlagBits(...);
 int _ZN9Obj5596acaSERKS_(int, unsigned int);
@@ -65,7 +65,6 @@ extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 extern unsigned char DAT_0055aadc; /* 0x55aadc */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: _ZN9Obj5596acaSERKS_. */
@@ -218,7 +217,7 @@ void FUN_00413144(int param_1)
   temp_v20 = 0;
   temp_v21 = 0;
   temp_v22 = 0;
-  textFormatBuffer(&temp_v17,&LAB_004134e8,temp_v1,temp_v2);
+  sprintf((char *)&temp_v17,(const char *)&LAB_004134e8,temp_v1,temp_v2);
   temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v30,(unsigned int *)&temp_v17);
   FUN_00522a48(&temp_v14,temp_v1);
   reinterpret_cast<Obj55aff4*>(temp_v30)->Obj55aff4::~Obj55aff4();

@@ -1,5 +1,6 @@
 /* NON_MATCHING: sets up the mikado move-camera controller (camera model, camera data, named points and the two marker models); written from the decompilation, allocation tracing and register scheduling not compared with retail */
 #include "common.h"
+#include <stdio.h>
 
 struct McVec3 {
     u32 x, y, z;
@@ -57,7 +58,6 @@ struct MoveCameraCtrl {
 extern "C" {
 extern u32 g_handleRegistry;
 
-void textFormatBuffer(char *out, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, u32 line);
 McModelList *modelListInit(void *memory);
 void resourceOwnerLoadFileSync(void);
@@ -96,7 +96,7 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
     ctrl->hasPoints = 0;
 
     char path[128];
-    textFormatBuffer(path, "%s.bam", dataName);
+    sprintf(path, "%s.bam", dataName);
     ctrl->cameraModel = mcCreateModelList(0xF5);
     resourceOwnerLoadFileSync();
     moriModelContentLoadBody(ctrl->cameraModel, 0);
@@ -107,9 +107,9 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
     controllerSetPosition(object);
     controllerSetPositionXyz(object);
 
-    textFormatBuffer(path, "%s_cam.bch", cameraName);
+    sprintf(path, "%s_cam.bch", cameraName);
     FUN_00407110(ctrl, path);
-    textFormatBuffer(path, "%s.bch", cameraName);
+    sprintf(path, "%s.bch", cameraName);
     u32 registry = g_handleRegistry;
     resourceOwnerLoadNamed(registry, path);
     if (FUN_0040af60(registry) != 0)
@@ -141,7 +141,7 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
 
     if (ctrl->pointCount > 0) {
         ctrl->hasPoints = 1;
-        textFormatBuffer(path, "mikado/yaji.bam");
+        sprintf(path, "mikado/yaji.bam");
         ctrl->arrowModel = mcCreateModelList(0x15E);
         resourceOwnerLoadFileSync();
         FUN_0040ab7c(ctrl->arrowModel, 0);
@@ -152,7 +152,7 @@ void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *data
         controllerSetPosition(arrow);
         controllerSetPositionXyz(arrow);
 
-        textFormatBuffer(path, "mikado/point.bam");
+        sprintf(path, "mikado/point.bam");
         ctrl->pointModel = mcCreateModelList(0x16C);
         resourceOwnerLoadFileSync();
         FUN_0040ab7c(ctrl->pointModel, 0);

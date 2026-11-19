@@ -1,4 +1,5 @@
 /* NON_MATCHING: the free-slot search and the 99/11 state store compile differently (retail keeps the scan counter in r0 with a trailing sxth and conditional strh/beq exits; here it is split over compare/move pairs), the loop bound is re-read in the opposite operand order and the caller-saved scheduling of the record/work pointers differs. */
+#include <stdio.h>
 #include "Model/MoriModelContent.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
 #include "code/Code001c.h"
@@ -55,7 +56,6 @@ extern MapObjWork *g_mapObj;
 
 s32 dataTableGetRecordFortyFive(void);
 MapObjRecord *mapObjGetCombinedEntry(s32 index);
-void textFormatBuffer(char *, const char *, ...);
 void *asdMemoryAllocTraced(u32, const char *, u32);
 char *libc_strcpy(char *, const char *);
 
@@ -98,7 +98,7 @@ u32 FUN_00313138(void)
         slot->kind = record->kind;
         slot->name[0] = 0;
         char resourceName[0x80];
-        textFormatBuffer(resourceName, "map/obj/obj_%02d.bam", record->kind);
+        sprintf(resourceName, "map/obj/obj_%02d.bam", record->kind);
         MoriModelContent *model = static_cast<MoriModelContent *>(
             asdMemoryAllocTraced(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapObj.cpp", 0x16f));
         if (model != NULL) {

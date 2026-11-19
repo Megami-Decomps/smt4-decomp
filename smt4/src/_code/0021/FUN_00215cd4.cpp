@@ -11,8 +11,8 @@ void timerStart(void *sprite, s32 animation, s32 frame);
 void FUN_00215cd4(u32 questId)
 {
     UiQuest *work = g_uiQuest;
-    work->panel.unkF2 = 1;
-    work->panel.detailMode = FUN_00298f88(questId);
+    work->panelView.panel.unkF2 = 1;
+    work->panelView.panel.detailMode = FUN_00298f88(questId);
     work->questId = questId;
     uiQuestLoadResources();
     FUN_0028fe0c(questId, 1);
@@ -21,9 +21,9 @@ void FUN_00215cd4(u32 questId)
     work->nextState = 0x1D;
     QuestRecord *record = questDataGetRecord(questId);
     if (record->flags & 0x40) {
-        work->panel.selection = 2;
+        work->panelView.panel.selection = 2;
     } else {
-        work->panel.selection = 1;
+        work->panelView.panel.selection = 1;
     }
 }
 }

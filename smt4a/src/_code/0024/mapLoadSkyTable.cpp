@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct MapTableState {
     /* 0x08 */ s32 unk08;
 } MapTableState;
 
-s32 textFormatBuffer(char *output, const char *format, ...);
 void *asdLoadFileSyncDefault(const char *path);
 
 extern MapTableState g_mapTable; /* 0x5821c4 */
@@ -24,10 +24,10 @@ void mapLoadSkyTable(s32 map)
     } else if (map == 200) {
         g_mapTable.table = asdLoadFileSyncDefault("/fountain/SKY200.TBL");
     } else if (map >= 100) {
-        textFormatBuffer(path, "/map/L%03d/SKY%03d.TBL", map - 100, map);
+        sprintf(path, "/map/L%03d/SKY%03d.TBL", map - 100, map);
         g_mapTable.table = asdLoadFileSyncDefault(path);
     } else {
-        textFormatBuffer(path, "/map/m%03d/SKY%03d.TBL", map, map);
+        sprintf(path, "/map/m%03d/SKY%03d.TBL", map, map);
         g_mapTable.table = asdLoadFileSyncDefault(path);
     }
 }

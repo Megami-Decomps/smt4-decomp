@@ -1,4 +1,5 @@
 /* Prepares an idle party popup from the selected slot when its unit meets the level limit. */
+#include <stdio.h>
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 #include "gamedata/NkmEnemyLookup.h"
@@ -13,7 +14,6 @@ s32 randRange(s32 maximum);
 const char *popupSelectWeightedMessage(u32 kind, u16 slot);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 u32 dataTable01GetRecordWithAocOverride(u32 value);
-void textFormatBuffer(char *destination, const char *format, u32 value);
 
 void partyTryOpenLevelLimitPopup(void)
 {
@@ -43,7 +43,7 @@ void partyTryOpenLevelLimitPopup(void)
     char format[72];
     rt_memcpy(format, message, sizeof(format));
     u32 value = dataTable01GetRecordWithAocOverride((u16)unitId);
-    textFormatBuffer(g_popupState->text, format, value);
+    sprintf(g_popupState->text, format, value);
     g_popupState->message = g_popupState->text;
 }
 }

@@ -1,11 +1,13 @@
 #pragma once
 #include "common.h"
 
+struct QuestRuntimeStatus;
+
 /* Quest status queries. */
 extern "C" {
 
 u16 QcActive_GetField20(void);
 
-int questGetRuntimeStatus(int index);
+QuestRuntimeStatus *questGetRuntimeStatus(u32 questId);
 
 } /* extern "C" */

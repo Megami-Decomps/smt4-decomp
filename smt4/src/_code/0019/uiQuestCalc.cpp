@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001956c4` (_code @ 0x1956c4, 0x16a4 bytes) from smt4_v1.2.0.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `uiQuestCalc` (_code @ 0x1956c4, 0x16a4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -93,7 +93,7 @@ extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: gameOptionsHasEnabledParameters. */
 
 
-unsigned int FUN_001956c4(void)
+s32 uiQuestCalc(u32 job)
 
 {
 /* irregular: 1 goto(s); irregular input(s): in_fpscr; 34 native warning(s); review required */

@@ -1,4 +1,10 @@
-/* NON_MATCHING: 12 lines, two registers in the ailment lookup: retail keeps the ailment bits in r2 and the count of set bits in r1, this build the other way round. */
+/* NON_MATCHING: 12 lines, two registers in the ailment lookup: retail keeps the ailment bits in r2 and the
+ * count of set bits in r1, this build the other way round. The cause is the order armcc creates the two
+ * locals of panelAilmentColor in: with `count` declared before `ailments` (and still zeroed after the lookup,
+ * as retail does: C89-style declarations at the top of the helper) the unit is IDENTICAL; types, the lookup's
+ * form, the loop's form and the compare's operand order change nothing. Nothing but the diff picks that
+ * declaration order (FUN_003f3f08, the same body as a function, is IDENTICAL in every order), so it is not
+ * applied. */
 #include "code/Code004b.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/SaveSlotRecord.h"

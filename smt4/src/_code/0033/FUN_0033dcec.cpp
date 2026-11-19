@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "code/Code002a.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033dcec` (_code @ 0x33dcec, 0x398 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -11,7 +12,6 @@ int FUN_0017fa3c(...);
 int refIsNullOrZero(...);
 int archivePathDeviceOpen(...);
 int asdTextureCreate(...);
-int textFormatBuffer(...);
 int asdMemFree(...);
 int asdFatalError(...);
 int FUN_002c618c(...);
@@ -55,7 +55,6 @@ extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: archivePathDeviceOpen. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int fileLoadSync(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdFatalError. */
@@ -152,7 +151,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     builtin_strncpy(temp_v6,"h\fB",4);
     if (*(short *)((int)param_1->field_0x10 + 4) != 0) {
       do {
-        textFormatBuffer(temp_v9,&LAB_0033e08c,(void *)((int)param_1->field_0x14 + temp_v4 * 0x20));
+        sprintf((char *)temp_v9,(const char *)&LAB_0033e08c,(void *)((int)param_1->field_0x14 + temp_v4 * 0x20));
         puVar10 = temp_v9;
         puVar4 = temp_v7;
         temp_v10 = 0;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: panel/record register allocation, equipment-label zero caching, and preview-reset branch sharing differ from retail. */
 #include <string.h>
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "code/Code0029.h"
 #include "addon/LookupRecord.h"
 
@@ -44,7 +45,6 @@ void textConvertToGlyphPairs(const char *source, char *destination);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_002a7c80(char *destination, const char *source);
 const char *aocIndexValueOrDefault(u32 skill);
-void textFormatBuffer(char *destination, const char *format, ...);
 f32 FUN_0028f4b4(const char *text, u32 font, f32 spacing);
 void statusBustUpPortraitRelease(s32 id, u32 kind);
 void statusBustUpPortraitAcquire(s32 id, u32 kind);
@@ -117,7 +117,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
             asdTextDrawFormatted(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
         } else {
-            textFormatBuffer(buffer, "\x81\x7c\x81\x7c\x81\x7c");
+            __2sprintf(buffer, "\x81\x7c\x81\x7c\x81\x7c");
             asdTextDrawFormatted(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
         }
@@ -134,7 +134,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     } else if (record->demon == 0) {
         clearCharacterPreview(panel);
     }
-    textFormatBuffer(buffer, DAT_00402898);
+    __2sprintf(buffer, DAT_00402898);
     asdTextDrawFormatted(panel->previewDescription, 2, -1u, 0, 0, buffer);
     panel->previewDescriptionWidth = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
 }

@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047e690` (_code @ 0x47e690, 0x5ec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "runtime/Stdio.h"
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "code/Code0014.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int qsort(int, int, int, unsigned char *);
 int FUN_001628c0(unsigned char *, unsigned int, int, int);
 int gameFlagIsSet(...);
@@ -34,7 +34,6 @@ extern unsigned int DAT_00573cd4; /* 0x573cd4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001628c0. */
 extern int lcgRandomRange(unsigned int);
@@ -251,7 +250,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
           asdOperatorNewD();
           sysMemClear();
           temp_v10 = 0;
-          textFormatBuffer(temp_v21,&LAB_0047ec84);
+          __2sprintf((char *)temp_v21,(const char *)&LAB_0047ec84);
           temp_v1 = 0;
           if (temp_v1 < temp_v5) {
             do {
@@ -289,9 +288,9 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
             puVar10 = (unsigned char *)0x0;
           }
           else {
-            textFormatBuffer(temp_v22,"I%03u%03u");
+            __2sprintf((char *)temp_v22,"I%03u%03u");
             if ((temp_v2 & 0xff) != 0) {
-              textFormatBuffer(temp_v22,"%s%s");
+              __2sprintf((char *)temp_v22,"%s%s");
             }
             temp_v0 = FUN_0014af98();
             temp_v17 = (float)VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);

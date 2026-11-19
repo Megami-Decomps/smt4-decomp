@@ -1,5 +1,6 @@
 /* NON_MATCHING: steps the map depart loader (sky model first, then the map model). The motion selects take their float blend argument (0.0f), the lowered-sky vector is built member-wise (no constant table) and the sky start re-reads g_mapDepartWork like retail; the lowered-sky block layout (retail places it out of line) and register allocation still differ. */
 #include "common.h"
+#include <stdio.h>
 #include "game/GameState.h"
 
 #define DEPART_STATE_SKY_START 0
@@ -59,7 +60,6 @@ void lightOwnerRegister(DepartModel *model, s32 flag);
 void modelSelectPrimaryMotion(DepartMotion *motion, u32 index, f32 blend);
 void modelSelectSecondaryMotion(DepartMotion *motion, u32 index, f32 blend);
 void nodeSetTranslation(DepartMotion *motion, s32 node, DepartVec3 *translation);
-void textFormatBuffer(char *out, const char *format, ...);
 
 /* Starts the loaded model with its first motions. */
 static __inline void departModelStart(DepartModel *model)
@@ -104,7 +104,7 @@ u32 FUN_00208160(void)
             work->state = DEPART_STATE_MAP_START;
             return 0;
         }
-        textFormatBuffer(path, "map/sky/sky_%02d.bam", work->skyId);
+        sprintf(path, "map/sky/sky_%02d.bam", work->skyId);
         work->skyModel = asdMdlManagerCreateSecondList(path, DEPART_SKY_MODEL_FLAGS);
         work->state++;
         /* fall through to the load check */
@@ -127,7 +127,7 @@ u32 FUN_00208160(void)
             work->loadMapId = work->mapId;
             work->loadSubId = work->subId;
         }
-        textFormatBuffer(path, "map/m%03d/m%03d_%02d.bam", work->loadMapId, work->loadMapId, work->loadSubId);
+        sprintf(path, "map/m%03d/m%03d_%02d.bam", work->loadMapId, work->loadMapId, work->loadSubId);
         work->mapModel = asdMdlManagerCreateSecondList(path, DEPART_MAP_MODEL_FLAGS);
         work->state++;
         return 0;

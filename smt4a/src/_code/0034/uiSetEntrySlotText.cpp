@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 #include "text/TextDraw.h"
 
 struct TextSlotPanel {
@@ -12,7 +13,6 @@ struct TextSlotPanel {
 
 extern "C" {
 const char *dataFindKindRecordWithAocOverrides(u32 id, u32 section);
-int textFormatBuffer(char *buffer, const char *format, ...);
 void asdTextFormatStream(u32 handle, u32 mode, u32 color, u32 first, u32 second, const char *text);
 
 void uiSetEntrySlotText(TextSlotPanel *panel, u32 slot, u32 id, u32 value, u32 flags)
@@ -23,7 +23,7 @@ void uiSetEntrySlotText(TextSlotPanel *panel, u32 slot, u32 id, u32 value, u32 f
     const char *entry = dataFindKindRecordWithAocOverrides(id, 0);
     const char *text = textExpandGlyphsToBuffer(entry, 0, 0);
     char buffer[132];
-    textFormatBuffer(buffer, "%s", text);
+    sprintf(buffer, "%s", text);
     asdTextFormatStream(panel->handles[slot], 2, 0xffffffff, 0, 0, buffer);
     panel->ids[slot] = (s16)id;
     panel->values[slot] = value;

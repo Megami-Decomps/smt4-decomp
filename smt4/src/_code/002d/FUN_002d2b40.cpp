@@ -1,4 +1,5 @@
 /* NON_MATCHING: encounter-state address formation and the inlined forced/normal dispatch blocks have different register allocation and branch placement from retail. */
+#include <stdio.h>
 #include "gamedata/MapSaveBlock.h"
 #include "map/MapEnemyGlobal.h"
 #include "map/mapDepart.h"
@@ -9,7 +10,6 @@
 
 extern "C" {
 void gameCounterAddSaturating(u32 flag, s32 value);
-void textFormatBuffer(char *output, const char *format, ...);
 void sequenceRequestDefer(s32 message, u32 argument);
 void sequenceRequestClearDeferred();
 void FUN_0027d8b4(u32 result);
@@ -28,7 +28,7 @@ static __inline void applyEnemyEncounter(MapEnemyEntry *enemy, MapSaveBlock *map
     if ((!forced || enemy->message > 0) && enemy->scriptMode) {
         g_gameState.event.scriptPending = 1;
         g_gameState.event.scriptId = enemy->message;
-        textFormatBuffer(g_gameState.event.scriptName, "e%03d_%02d", enemy->message, enemy->messageArgument);
+        sprintf(g_gameState.event.scriptName, "e%03d_%02d", enemy->message, enemy->messageArgument);
     } else if (forced ? enemy->message > 0 : enemy->message != 0) {
         sequenceRequestDefer(enemy->message, enemy->messageArgument);
     } else if (forced) {

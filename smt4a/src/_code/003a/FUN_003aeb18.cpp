@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the initial button-help global address load follows stack allocation and the first argument save instead of preceding them. */
+#include <stdio.h>
 #include "ui/ButtonHelpGlobal.h"
 #include "code/Code0035.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
@@ -7,7 +7,6 @@
 
 extern "C" {
 void textFormatFullWidthNumber(char *out, s32 value);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002ad414(s32 a, s32 b, s32 c, char *text);
 void battleAttributeFormatName(char *buffer, u32 attribute);
 void skillFormatTargetLabel(char *buffer, u32 target);
@@ -33,7 +32,7 @@ void FUN_003aeb18(s32 textId, u32 flags)
         char minimum[8], maximum[8];
         textFormatFullWidthNumber(minimum, range & 0xF);
         textFormatFullWidthNumber(maximum, first->hitRange >> 4);
-        textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
+        sprintf(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
         scrSetStringSlot(0x25, text);
     }
     battleAttributeFormatName(text, first->traits >> 20);
@@ -41,25 +40,25 @@ void FUN_003aeb18(s32 textId, u32 flags)
     skillFormatTargetLabel(text, first->target);
     scrSetStringSlot(0x27, text);
     if (first->element == 0)
-        textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
+        sprintf(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
     if (first->element == 1)
-        textFormatBuffer(text, "\x82\x68\x82\x8E\x82\x93\x82\x94\x82\x81\x82\x8E\x82\x94\x81\x40\x82\x6A\x82\x89\x82\x8C\x82\x8C"); /* Ｉｎｓｔａｎｔ　Ｋｉｌｌ */
+        sprintf(text, "\x82\x68\x82\x8E\x82\x93\x82\x94\x82\x81\x82\x8E\x82\x94\x81\x40\x82\x6A\x82\x89\x82\x8C\x82\x8C"); /* Ｉｎｓｔａｎｔ　Ｋｉｌｌ */
     if (first->element == 5)
-        textFormatBuffer(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E"); /* Ｐｏｉｓｏｎ */
+        sprintf(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E"); /* Ｐｏｉｓｏｎ */
     if (first->element == 6)
-        textFormatBuffer(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83"); /* Ｐａｎｉｃ */
+        sprintf(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83"); /* Ｐａｎｉｃ */
     if (first->element == 7)
-        textFormatBuffer(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90"); /* Ｓｌｅｅｐ */
+        sprintf(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90"); /* Ｓｌｅｅｐ */
     if (first->element == 8)
-        textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8E\x82\x84"); /* Ｂｉｎｄ */
+        sprintf(text, "\x82\x61\x82\x89\x82\x8E\x82\x84"); /* Ｂｉｎｄ */
     if (first->element == 9)
-        textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B"); /* Ｓｉｃｋ */
+        sprintf(text, "\x82\x72\x82\x89\x82\x83\x82\x8B"); /* Ｓｉｃｋ */
     if (first->element == 11)
-        textFormatBuffer(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8D"); /* Ｃｈａｒｍ */
+        sprintf(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8D"); /* Ｃｈａｒｍ */
     if (first->element == 12)
-        textFormatBuffer(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
+        sprintf(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
     if (first->element == 13)
-        textFormatBuffer(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
+        sprintf(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
     scrSetStringSlot(0x28, text);
     FUN_002ad414(1, 0, 0, text);
     scrSetStringSlot(0x29, text);

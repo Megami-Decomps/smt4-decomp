@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail loads g_config's pool word before the frame is reserved, keeps the priority 11 in fp and
  * g_titleScene's address in sl (built: sl and fp), schedules the first render-state load earlier and the text
  * scale constant later. Both render-state sets read g_titleScene directly, as their siblings do. */
+#include <stdio.h>
 #include "camp/Config/Config.h"
 #include "camp/CampMenuEntry.h"
 #include "camp/RenderCtxTitle.h"
@@ -48,7 +49,7 @@ void configDrawOptionPanel(s32 x, s32 y, s32 /* display */)
     const ConfigurationChoices *entry = variant < count ? &options[variant] : NULL;
     if (entry) {
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x2F, 0x1A);
-        textFormatBuffer(text, "%s", entry->heading);
+        sprintf(text, "%s", entry->heading);
         textDrawString(2, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y),
                        0.0f, 0.0f, 1.0f);
         if (menu->flag == 1)

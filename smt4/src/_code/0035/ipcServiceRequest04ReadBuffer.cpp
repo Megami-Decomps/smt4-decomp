@@ -1,7 +1,9 @@
-/* NON_MATCHING: the thread-pointer read and svc 0x32 now match through nn/svc.h; armcc pairs/orders the command-buffer stores (stm/strd, descriptor order) differently from retail. */
+/* NON_MATCHING: retail loads the header constant into r3 after setting the descriptor's zero id in r2, so the header store follows `mov r2, #0`;
+ * this build loads the header into r2 and stores it first. */
 #include "nn/svc.h"
 #include "nn/Result.h"
 #include "nn/os/IpcCommandBuffer.h"
+#include "nn/os/IpcStaticBuffer.h"
 
 extern "C" {
 
@@ -12,10 +14,10 @@ extern u32 DAT_004719e8; /* service session handle */
 s32 ipcServiceRequest04ReadBuffer(const void *buffer, u32 length)
 {
     nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
-    nn::os::SetIpcWord(cmd, 0, 0x00040042);
-    nn::os::SetIpcWord(cmd, 1, length);
-    nn::os::SetIpcWord(cmd, 2, (0 << 10) | (length << 14) | 2);
-    nn::os::SetIpcWord(cmd, 3, (u32)buffer);
+    cmd->header = 0x00040042;
+    cmd->words[0] = length;
+    cmd->words[1] = ipcStaticBufferDescriptor(length, 0);
+    cmd->words[2] = (u32)buffer;
     s32 result = nn::svc::SendSyncRequest(DAT_004719e8);
     if (nnResultIsSuccess(result)) {
         result = cmd->words[0];

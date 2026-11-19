@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214dc4` (_code @ 0x214dc4, 0x47c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -34,7 +34,6 @@ extern unsigned char LAB_00215248; /* 0x215248 */
 extern int g_playLog; /* 0x57f278 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -108,7 +107,7 @@ void FUN_00214dc4(void)
       temp_v5 = dataTableGetCount(temp_v4);
       if ((temp_v9 < temp_v5) && (temp_v3 = temp_v3 + temp_v9 * 0x40, temp_v3 != 0)) {
         temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x25,0x13));
-        textFormatBuffer(temp_v10,"%s",temp_v3 + 2);
+        sprintf((char *)temp_v10,"%s",temp_v3 + 2);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
@@ -121,14 +120,14 @@ void FUN_00214dc4(void)
             textFormatFullWidthNumber(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v7 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
-            textFormatBuffer(temp_v10,"%s\x81@%s",temp_v11,temp_v3 + 0x37);
+            sprintf((char *)temp_v10,"%s\x81@%s",temp_v11,temp_v3 + 0x37);
           }
           else {
             temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
             textFormatFullWidthNumber(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
-            textFormatBuffer(temp_v10,"%s",temp_v11);
+            sprintf((char *)temp_v10,"%s",temp_v11);
           }
         }
         else {
@@ -137,7 +136,7 @@ void FUN_00214dc4(void)
           temp_v9 = temp_v5 % 0xe10;
           textFormatFullWidthNumber(temp_v11,temp_v5 / 0xe10,temp_v9 * -0x77777777);
           textFormatFullWidthNumber(temp_v12,temp_v9 / 0x3c);
-          textFormatBuffer(temp_v10,&LAB_00215248,temp_v11,temp_v12);
+          sprintf((char *)temp_v10,(const char *)&LAB_00215248,temp_v11,temp_v12);
         }
         puVar9 = temp_v10;
         fontMeasureLineAdvance(puVar9,2);

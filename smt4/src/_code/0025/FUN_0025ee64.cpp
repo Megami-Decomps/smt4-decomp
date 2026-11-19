@@ -35,7 +35,7 @@ extern int idOwnerHasActiveObject(int);
 extern int flagBitIsSet(void);
 extern unsigned int FUN_00293988(void *scene);
 /* Supplied declaration required: btlGetMainState. */
-extern int objectPartRunUnlessLocked(int);
+extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern unsigned int FUN_0029e958(int);
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);

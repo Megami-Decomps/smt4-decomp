@@ -1,5 +1,6 @@
 /* NON_MATCHING: list construction omits mode/normalized-ID arguments; request-record publication and exit-state data accesses also differ. */
 #include "common.h"
+#include <stdio.h>
 #include "game/GameStateA.h"
 
 #define SHOP_STATE_OPEN 0
@@ -55,7 +56,6 @@ s32 gameStateIsFlagSetAndLarge(void);
 void soundChannelStopAll(s32 mask);
 void titleSetSlotValueState2(s32 a, s32 b);
 void asdSequenceRequest(s32 type, s32 *args, s32 size);
-void textFormatBuffer(char *out, const char *format, s32 a, u32 b);
 
 static ShopRequestRecord *shopRequestRecordGet(void)
 {
@@ -128,7 +128,7 @@ s32 FUN_0027dda4(u32 process)
             slot[1] = -1;
             slot[0] = 999;
             char name[24];
-            textFormatBuffer(name, "e%03d_%02d", 999, messageId);
+            sprintf(name, "e%03d_%02d", 999, messageId);
             asdSequenceRequest(4, slot, 0x20);
         } else if (lmapMainGetUnk74() != 0) {
             s32 type = 6;

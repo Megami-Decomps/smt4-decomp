@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6048` (_code @ 0x2f6048, 0x470 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int);
 int textDrawString(int, unsigned int, unsigned char [64]);
 int effectRenderTransformedInstance(...);
 int vec2GetXInt(...);
@@ -34,7 +34,6 @@ extern unsigned char LAB_002f64c4; /* 0x2f64c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
@@ -105,7 +104,7 @@ void FUN_002f6048(int param_1)
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x56));
   temp_v0 = **(short **)(temp_v3 + 0xc);
   temp_v4 = FUN_00156850(temp_v13,0);
-  textFormatBuffer(temp_v12,&LAB_002f64c4,temp_v4);
+  sprintf((char *)temp_v12,(const char *)&LAB_002f64c4,temp_v4);
   puVar6 = temp_v12;
   fontMeasureLineAdvance(puVar6,3);
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1e,0x55));

@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail spills the loaded file pointer to [sp,#4] and hoists the constant 12 (stride base) while we keep the file pointer in a saved register; the frame is 24 bytes larger and the stride add is scheduled differently. */
+#include <stdio.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "AsdSDK/AsdDebug.h"
@@ -9,7 +10,6 @@ extern "C" {
 TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_00100238(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
-void textFormatBuffer(char *dst, const char *format, ...);
 void __aeabi_memcpy4(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
@@ -40,7 +40,7 @@ TexFile *asdTMTexTableLoadSprites(s32 idx)
             }
         }
         libc_strcpy(header->dirPrefix, dir);
-        textFormatBuffer(path, "%s%s%s.%s", header->dirPrefix, entry->name, "GroupTable", "tgd");
+        sprintf(path, "%s%s%s.%s", header->dirPrefix, entry->name, "GroupTable", "tgd");
         file = static_cast<SprFileHeader *>(asdLoadFileWithSize(path, &size, 0));
         if (file != NULL) {
             u8 *src = reinterpret_cast<u8 *>(file + 1);

@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_0014f07c(...);
 int FUN_0015156c(...);
-int asdModelSelectSecondaryMotion(...);
+int asdModelSelectSecondaryMotion(...); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int modelSelectPrimaryMotion(...);
 int FUN_002a5960(...);
 int _ZN9Obj42111cC1Ej(...);

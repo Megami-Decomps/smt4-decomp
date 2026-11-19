@@ -95,6 +95,31 @@ typedef struct AsdVramHeap {
     /* 0x18 */ u32 freeBytes;
 } AsdVramHeap;
 
+/* Apocalypse's VRAM run: a descriptor from the g_asdMemory.table pool, whose 1-based slot sits
+ * before the links (0 while the descriptor is free). */
+typedef struct AsdVramBlockA {
+    /* 0x00 */ u32 addr;
+    /* 0x04 */ u32 size;
+    /* 0x08 */ u32 poolId;
+    /* 0x0c */ struct AsdVramBlockA *prev;
+    /* 0x10 */ struct AsdVramBlockA *next;
+} AsdVramBlockA;
+
+typedef struct AsdVramBlockListA {
+    /* 0x00 */ AsdVramBlockA *head;
+    /* 0x04 */ AsdVramBlockA *tail;
+    /* 0x08 */ s32 count;
+} AsdVramBlockListA;
+
+typedef struct AsdVramHeapA {
+    /* 0x00 */ AsdVramBlockListA used;
+    /* 0x0c */ AsdVramBlockListA free;
+    /* 0x18 */ u32 freeBytes;
+} AsdVramHeapA;
+
+typedef char AsdVramBlockAOffsets[sizeof(AsdVramBlockA) == 0x14 && sizeof(AsdVramHeapA) == 0x1c ? 1 : -1];
+
+
 extern "C" {
 u8 rosterHasLeader(void);
 }

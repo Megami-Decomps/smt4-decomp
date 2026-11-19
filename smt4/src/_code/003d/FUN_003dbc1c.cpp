@@ -1,5 +1,6 @@
 /* NON_MATCHING: name-compare helpers restore retail's repeated null tests; retail keeps the &formatted pointer in a callee-saved register across the loop, spills the inlined search's name and loads each g_btlEffect prefix after its null test. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include <string.h>
@@ -28,7 +29,6 @@ extern const char DAT_004008c4[];           /* "battle/effect/%s.eft" */
 
 u32 libc_strlen(const char *s);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 keyedRecordRegisterName(void *record);
 u32 FUN_00249e54(u32 id, const char *name);
 
@@ -92,7 +92,7 @@ void FUN_003dbc1c(EffectWork *work)
 
         memClear(path, 0x80);
         memClear(formatted, 0x80);
-        textFormatBuffer(formatted, DAT_004008c4, name);
+        __2sprintf(formatted, DAT_004008c4, name);
         libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(formatted));
         if (libc_strlen(path) == 0) {
             continue;

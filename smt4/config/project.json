@@ -15290,12 +15290,12 @@
     },
     {
       "address": "0x151b88",
-      "function": "FUN_00151b88",
+      "function": "skillRecordCompareId",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_00151b88.o",
+      "object": "build/obj/_code/0015/skillRecordCompareId.o",
       "size": 16,
-      "source": "src/_code/0015/FUN_00151b88.cpp",
-      "target": "orig/target/_code/0015/FUN_00151b88.o",
+      "source": "src/_code/0015/skillRecordCompareId.cpp",
+      "target": "orig/target/_code/0015/skillRecordCompareId.o",
       "thumb": false
     },
     {
@@ -20746,12 +20746,12 @@
     },
     {
       "address": "0x1956c4",
-      "function": "FUN_001956c4",
+      "function": "uiQuestCalc",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_001956c4.o",
+      "object": "build/obj/_code/0019/uiQuestCalc.o",
       "size": 5796,
-      "source": "src/_code/0019/FUN_001956c4.cpp",
-      "target": "orig/target/_code/0019/FUN_001956c4.o",
+      "source": "src/_code/0019/uiQuestCalc.cpp",
+      "target": "orig/target/_code/0019/uiQuestCalc.o",
       "thumb": false
     },
     {
@@ -20786,12 +20786,12 @@
     },
     {
       "address": "0x1978b4",
-      "function": "FUN_001978b4",
+      "function": "campDrawCommandMenu",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_001978b4.o",
+      "object": "build/obj/_code/0019/campDrawCommandMenu.o",
       "size": 1408,
-      "source": "src/_code/0019/FUN_001978b4.cpp",
-      "target": "orig/target/_code/0019/FUN_001978b4.o",
+      "source": "src/_code/0019/campDrawCommandMenu.cpp",
+      "target": "orig/target/_code/0019/campDrawCommandMenu.o",
       "thumb": false
     },
     {
@@ -22319,12 +22319,12 @@
     },
     {
       "address": "0x1ad9f0",
-      "function": "FUN_001ad9f0",
+      "function": "uiQuestDrawUpper",
       "module": "_code",
-      "object": "build/obj/_code/001a/FUN_001ad9f0.o",
+      "object": "build/obj/_code/001a/uiQuestDrawUpper.o",
       "size": 856,
-      "source": "src/_code/001a/FUN_001ad9f0.cpp",
-      "target": "orig/target/_code/001a/FUN_001ad9f0.o",
+      "source": "src/_code/001a/uiQuestDrawUpper.cpp",
+      "target": "orig/target/_code/001a/uiQuestDrawUpper.o",
       "thumb": false
     },
     {
@@ -22522,12 +22522,12 @@
     {
       "address": "0x1b10e4",
       "file": "clear_save/clearSave",
-      "function": "FUN_001b10e4",
+      "function": "clearSaveUpdate",
       "module": "_code",
-      "object": "build/obj/_code/clear_save/clearSave/FUN_001b10e4.o",
+      "object": "build/obj/_code/clear_save/clearSave/clearSaveUpdate.o",
       "size": 1460,
-      "source": "src/_code/clear_save/clearSave/FUN_001b10e4.cpp",
-      "target": "orig/target/_code/clear_save/clearSave/FUN_001b10e4.o",
+      "source": "src/_code/clear_save/clearSave/clearSaveUpdate.cpp",
+      "target": "orig/target/_code/clear_save/clearSave/clearSaveUpdate.o",
       "thumb": false
     },
     {
@@ -24750,12 +24750,12 @@
     },
     {
       "address": "0x1ddc7c",
-      "function": "FUN_001ddc7c",
+      "function": "uiQuestDrawLower",
       "module": "_code",
-      "object": "build/obj/_code/001d/FUN_001ddc7c.o",
+      "object": "build/obj/_code/001d/uiQuestDrawLower.o",
       "size": 340,
-      "source": "src/_code/001d/FUN_001ddc7c.cpp",
-      "target": "orig/target/_code/001d/FUN_001ddc7c.o",
+      "source": "src/_code/001d/uiQuestDrawLower.cpp",
+      "target": "orig/target/_code/001d/uiQuestDrawLower.o",
       "thumb": false
     },
     {
@@ -26686,12 +26686,12 @@
     },
     {
       "address": "0x1f6098",
-      "function": "FUN_001f6098",
+      "function": "fusionComparePairScoreAscending",
       "module": "_code",
-      "object": "build/obj/_code/001f/FUN_001f6098.o",
+      "object": "build/obj/_code/001f/fusionComparePairScoreAscending.o",
       "size": 296,
-      "source": "src/_code/001f/FUN_001f6098.cpp",
-      "target": "orig/target/_code/001f/FUN_001f6098.o",
+      "source": "src/_code/001f/fusionComparePairScoreAscending.cpp",
+      "target": "orig/target/_code/001f/fusionComparePairScoreAscending.o",
       "thumb": false
     },
     {
@@ -43914,12 +43914,12 @@
     {
       "address": "0x269dc8",
       "file": "camp/UIQuest/UIQuest",
-      "function": "FUN_00269dc8",
+      "function": "uiQuestCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/UIQuest/UIQuest/FUN_00269dc8.o",
+      "object": "build/obj/_code/camp/UIQuest/UIQuest/uiQuestCreate.o",
       "size": 1408,
-      "source": "src/_code/camp/UIQuest/UIQuest/FUN_00269dc8.cpp",
-      "target": "orig/target/_code/camp/UIQuest/UIQuest/FUN_00269dc8.o",
+      "source": "src/_code/camp/UIQuest/UIQuest/uiQuestCreate.cpp",
+      "target": "orig/target/_code/camp/UIQuest/UIQuest/uiQuestCreate.o",
       "thumb": false
     },
     {
@@ -45278,12 +45278,12 @@
     },
     {
       "address": "0x273fc0",
-      "function": "FUN_00273fc0",
+      "function": "lmapUpdateSceneModels",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_00273fc0.o",
+      "object": "build/obj/_code/0027/lmapUpdateSceneModels.o",
       "size": 2004,
-      "source": "src/_code/0027/FUN_00273fc0.cpp",
-      "target": "orig/target/_code/0027/FUN_00273fc0.o",
+      "source": "src/_code/0027/lmapUpdateSceneModels.cpp",
+      "target": "orig/target/_code/0027/lmapUpdateSceneModels.o",
       "thumb": false
     },
     {
@@ -58792,12 +58792,12 @@
     },
     {
       "address": "0x2be624",
-      "function": "textFormatBuffer",
+      "function": "__2sprintf",
       "module": "_code",
-      "object": "build/obj/_code/002b/textFormatBuffer.o",
+      "object": "build/obj/_code/002b/__2sprintf.o",
       "size": 40,
-      "source": "src/_code/002b/textFormatBuffer.cpp",
-      "target": "orig/target/_code/002b/textFormatBuffer.o",
+      "source": "src/_code/002b/__2sprintf.cpp",
+      "target": "orig/target/_code/002b/__2sprintf.o",
       "thumb": true
     },
     {
@@ -65051,12 +65051,12 @@
     },
     {
       "address": "0x2dc7a0",
-      "function": "FUN_002dc7a0",
+      "function": "fusionComparePairsByRaceLevelAndIdDescending",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002dc7a0.o",
+      "object": "build/obj/_code/002d/fusionComparePairsByRaceLevelAndIdDescending.o",
       "size": 256,
-      "source": "src/_code/002d/FUN_002dc7a0.cpp",
-      "target": "orig/target/_code/002d/FUN_002dc7a0.o",
+      "source": "src/_code/002d/fusionComparePairsByRaceLevelAndIdDescending.cpp",
+      "target": "orig/target/_code/002d/fusionComparePairsByRaceLevelAndIdDescending.o",
       "thumb": false
     },
     {
@@ -101468,12 +101468,12 @@
     },
     {
       "address": "0x3b992c",
-      "function": "FUN_003b992c",
+      "function": "eventUpdateScriptLaunch",
       "module": "_code",
-      "object": "build/obj/_code/003b/FUN_003b992c.o",
+      "object": "build/obj/_code/003b/eventUpdateScriptLaunch.o",
       "size": 292,
-      "source": "src/_code/003b/FUN_003b992c.cpp",
-      "target": "orig/target/_code/003b/FUN_003b992c.o",
+      "source": "src/_code/003b/eventUpdateScriptLaunch.cpp",
+      "target": "orig/target/_code/003b/eventUpdateScriptLaunch.o",
       "thumb": false
     },
     {

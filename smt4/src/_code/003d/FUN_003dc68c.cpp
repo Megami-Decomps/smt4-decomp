@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation and block layout differ (retail keeps the scratch buffer pointer in fp and the effect-name table in r9, and the slot base is not hoisted); logic equivalent. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include <string.h>
 
 /* Names the battle effect loader recognises (g_btlEffect). */
@@ -41,7 +42,6 @@ u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
 void memClear(void *buffer, s32 size);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002276f8(BtlEffectWork *work);
 u32 FUN_00246644(u32 index, u32 a, u32 b);
 char *libc_strrchr(const char *text, s32 character);
@@ -81,7 +81,7 @@ extern "C" u32 FUN_003dc68c(BtlEffectWork *work)
         if (nameStartsWith(name, g_btlEffect.bufferPrefix)) {
             bool found = false;
             for (s32 n = 0; n < 11; n++) {
-                textFormatBuffer(buffer, DAT_00400904, g_btlEffect.bufferPrefix, n);
+                __2sprintf(buffer, DAT_00400904, g_btlEffect.bufferPrefix, n);
                 if (strcmp(buffer, name) == 0) {
                     FUN_002276f8(work);
                     work->bufferHandle = FUN_00246644(n & 0xFF, 7, 0);
@@ -97,7 +97,7 @@ extern "C" u32 FUN_003dc68c(BtlEffectWork *work)
             continue;
         memClear(path, 128);
         memClear(buffer, 128);
-        textFormatBuffer(buffer, DAT_004008c4, name);
+        __2sprintf(buffer, DAT_004008c4, name);
         libc_strcpy(path, buffer);
         if (libc_strlen(path) != 0) {
             EffectSlot *slot = &work->slots[i];

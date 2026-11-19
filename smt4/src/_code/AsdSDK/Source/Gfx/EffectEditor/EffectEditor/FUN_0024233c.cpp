@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024233c` (_code @ 0x24233c, 0x4b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "gfx/EffectEditorStorage.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -18,7 +19,6 @@ int effBlockSetBlobB(unsigned int, unsigned int [2], int);
 int resourceQueueDeferredDestroy(...);
 int registrationEntryInsert(...);
 int effPartInitDefaults(...);
-int textFormatBuffer(int, unsigned char *, unsigned int);
 int padIsButtonPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(...);
@@ -84,7 +84,6 @@ extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
 /* Supplied declaration required: effPartInitDefaults. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
@@ -127,7 +126,7 @@ unsigned char * FUN_0024233c(unsigned int param_1,int param_2,unsigned int param
       puVar2 = *(unsigned int **)(param_2 + temp_v3 * 0x1c);
       temp_v5 = temp_v6;
       if (puVar2 != (unsigned int *)0x0) {
-        textFormatBuffer(temp_v6,&LAB_002426ac,*puVar2);
+        sprintf((char *)temp_v6,(const char *)&LAB_002426ac,*puVar2);
         piVar3 = (int *)(temp_v0 + temp_v4 * 0x18);
         temp_v5 = temp_v6 + 0x14;
         *piVar3 = temp_v6;

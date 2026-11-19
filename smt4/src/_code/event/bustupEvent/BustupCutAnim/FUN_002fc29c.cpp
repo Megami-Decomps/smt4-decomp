@@ -1,4 +1,5 @@
 /* NON_MATCHING: same as the Apocalypse twin - retail keeps the camera constants in callee-saved VFP registers across both camera set-ups and orders the setup stores differently. */
+#include <stdio.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -73,7 +74,6 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
 s32 FUN_002169cc(u32 job);
 s32 jobDrawOrderedChildren(u32 job);
 void bustupCutAnimDestroy(u32 job);
-void textFormatBuffer(char *buffer, const char *format, u32 id);
 u32 asdCameraLoadFromFile(const char *path);
 u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
 void FUN_0024edd4(BustupModelNode *node, s32 part);
@@ -115,9 +115,9 @@ u32 FUN_002fc29c(void)
         block->unk5ec = 0;
         char path[76];
         for (u32 i = 0; i < BUSTUP_CUT_ENTRIES; i++) {
-            textFormatBuffer(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
+            sprintf(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
             block->models[i] = asdCameraLoadFromFile(path);
-            textFormatBuffer(path, "event/BustUpEvent/%s.bam", g_bustupCutAnim.ids[i]);
+            sprintf(path, "event/BustUpEvent/%s.bam", g_bustupCutAnim.ids[i]);
             block->lists[i] = asdMdlManagerCreateSecondList(path, 7);
         }
         block->model = block->models[0];

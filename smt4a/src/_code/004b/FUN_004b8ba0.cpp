@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the menu's entry-availability scan and mode switch (the draft's three copies of the availability script run are one helper here, inlined by retail); armcc here orders the entry loops, the 36-byte name buffer and the mode switch differently. */
 #include "common.h"
+#include "runtime/Stdio.h"
 
 /* One menu entry (only the fields read here). */
 struct MenuEntry {
@@ -39,7 +40,6 @@ extern "C" {
 extern const char DAT_005328fc[];
 extern s32 DAT_0058800c;
 
-void textFormatBuffer(char *buffer, const char *format, const char *name);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
 s32 scrRunOpcodesStub(u32 script);
@@ -56,7 +56,7 @@ static bool entryAvailable(ScriptMenu *menu, MenuEntry *entry)
     u32 script = menu->script;
     u32 table = menu->scriptTable;
     DAT_0058800c = 0;
-    textFormatBuffer(buffer, DAT_005328fc, entry->name);
+    __2sprintf(buffer, DAT_005328fc, entry->name);
     scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(table, buffer));
     while (scrRunOpcodesStub(script) != 2) {
     }

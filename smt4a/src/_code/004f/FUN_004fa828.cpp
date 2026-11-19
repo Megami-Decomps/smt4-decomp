@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fa828` (_code @ 0x4fa828, 0x524 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "battle/BtlGlobals.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int btlGetMainState(...);
 int asdLoadFileAsyncSimple(...);
 int effectColorInitDefault(...);
@@ -35,7 +35,6 @@ typedef struct {
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int g_btlAux; /* 0x573808 */
 
-/* Supplied declaration required: textFormatBuffer. */
 extern int libc_strrchr(unsigned char *, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
@@ -230,7 +229,7 @@ LAB_004fab24:
     do {
       sysMemClear(temp_v12,0x80);
       sysMemClear(temp_v10,0x80);
-      textFormatBuffer(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v4 * 0x20);
+      sprintf((char *)temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v4 * 0x20);
       libc_strcpy(temp_v12,temp_v10);
       temp_v2 = param_1 + temp_v4 * 0x8c;
       temp_v3 = libc_strrchr(temp_v12,0x2f);

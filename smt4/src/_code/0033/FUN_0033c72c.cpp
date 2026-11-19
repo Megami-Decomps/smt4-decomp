@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033c72c` (_code @ 0x33c72c, 0x52c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 
@@ -11,7 +12,6 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int renderCtxCalculateStereoParallax(int);
 int drawSetColorFromRGBA8(void);
 int textDrawString(...);
-int textFormatBuffer(...);
 int gxResetColorQuadToWhite(void);
 int efctSetSpeed(void);
 int VectorFloatToUnsigned(double, int);
@@ -41,7 +41,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gxResetColorQuadToWhite. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -180,11 +179,11 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
         }
         if (temp_v15 == 3) {
           if (*(char *)(param_3 + 0x51) == '\0') {
-            textFormatBuffer(temp_v18,&LAB_0033cc78);
+            sprintf((char *)temp_v18,(const char *)&LAB_0033cc78);
             goto LAB_0033cbe4;
           }
           temp_v5 = 0x33cc70;
-          textFormatBuffer(temp_v18,temp_v5);
+          sprintf((char *)temp_v18,(const char *)temp_v5);
         }
       }
       else {
@@ -200,11 +199,11 @@ joined_r0x0033cb70:
           else {
             puVar4 = (unsigned char *)0x4004a0;
           }
-          textFormatBuffer(temp_v18,puVar4,temp_v2);
+          sprintf((char *)temp_v18,(const char *)puVar4,temp_v2);
         }
         else {
           temp_v5 = 0x400490;
-          textFormatBuffer(temp_v18,temp_v5);
+          sprintf((char *)temp_v18,(const char *)temp_v5);
         }
       }
     }
@@ -212,7 +211,7 @@ joined_r0x0033cb70:
       temp_v2 = (int)*(char *)(param_3 + 0x4e);
       if (temp_v2 != 0) goto joined_r0x0033cb70;
       temp_v5 = 0x400490;
-      textFormatBuffer(temp_v18,temp_v5);
+      sprintf((char *)temp_v18,(const char *)temp_v5);
     }
 LAB_0033cbe4:
     VectorSignedToFloat(0xfb - param_2,(unsigned char)(in_fpscr >> 0x16) & 3);

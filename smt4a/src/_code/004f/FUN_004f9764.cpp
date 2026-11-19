@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps every `name != NULL` test and the name/path/work pointers share registers (mov r6,sp / mov r6,r8); armcc here threads the redundant null tests and keeps separate registers */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "gamedata/GameDataAccess.h"
@@ -45,7 +46,6 @@ extern const char DAT_005284c0[]; /* "battle/effect/%s.eft" */
 u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 char *libc_strcpy(char *dest, const char *src);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void sysMemClear(void *buffer, u32 bytes);
 char *libc_strrchr(const char *text, s32 character);
 void btlCameraFinishTransition(BtlEffectWork *work);
@@ -77,7 +77,7 @@ u32 FUN_004f9764(BtlEffectWork *work)
             }
             if (name != NULL && libc_strncmp(name, g_btlEffect.prefix, libc_strlen(g_btlEffect.prefix)) == 0) {
                 for (n = 0; n < 11; n++) {
-                    textFormatBuffer(text, DAT_00528534, g_btlEffect.prefix, n);
+                    __2sprintf(text, DAT_00528534, g_btlEffect.prefix, n);
                     if (strcmp(text, name) == 0) {
                         btlCameraFinishTransition(work);
                         work->transition = FUN_002282c8(n & 0xff, 7, 0);
@@ -92,7 +92,7 @@ u32 FUN_004f9764(BtlEffectWork *work)
             if (name == NULL || strcmp(name, g_btlEffect.reserved.otherName) != 0) {
                 sysMemClear(path, sizeof(path));
                 sysMemClear(text, sizeof(text));
-                textFormatBuffer(text, DAT_005284c0, name);
+                __2sprintf(text, DAT_005284c0, name);
                 libc_strcpy(path, text);
                 if (libc_strlen(path) != 0) {
                     BtlEffectLoad *load = &work->loads[i];

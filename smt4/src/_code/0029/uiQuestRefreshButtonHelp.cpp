@@ -13,42 +13,42 @@ extern s32 resourceRunOperationIfUnblocked(UiQuestCursor *cursor);
 void uiQuestRefreshButtonHelp(void)
 {
     UiQuest *menu = g_uiQuest;
-    UiQuestPanel *panel = &menu->panel;
+    UiQuestPanel *panel = &menu->panelView.panel;
     u16 current;
 
     if (panel->detailMode != 0) {
-        if (menu->panel.page == 1) {
+        if (menu->panelView.panel.page == 1) {
             buttonHelpSetPreset(0x6C);
         }
-        if (menu->panel.page == 2) {
-            if (menu->panel.selection == 0) {
+        if (menu->panelView.panel.page == 2) {
+            if (menu->panelView.panel.selection == 0) {
                 buttonHelpSetPreset(0x6D);
             }
-            if (menu->panel.selection == 1) {
+            if (menu->panelView.panel.selection == 1) {
                 buttonHelpSetPreset(0x6E);
             }
         }
         return;
     }
-    if (menu->panel.page == 1) {
+    if (menu->panelView.panel.page == 1) {
         buttonHelpSetPreset(0x6F);
     }
-    if (menu->panel.page == 2) {
-        if (menu->panel.selection == 0) {
+    if (menu->panelView.panel.page == 2) {
+        if (menu->panelView.panel.selection == 0) {
             buttonHelpSetPreset(0x70);
         }
-        if (menu->panel.selection == 1) {
+        if (menu->panelView.panel.selection == 1) {
             buttonHelpSetPreset(0x71);
         }
     }
-    if (menu->panel.page == 3) {
-        if (menu->panel.selection == 0) {
+    if (menu->panelView.panel.page == 3) {
+        if (menu->panelView.panel.selection == 0) {
             buttonHelpSetPreset(0x72);
         }
-        if (menu->panel.selection == 1) {
+        if (menu->panelView.panel.selection == 1) {
             buttonHelpSetPreset(0x73);
         }
-        if (menu->panel.selection == 2) {
+        if (menu->panelView.panel.selection == 2) {
             buttonHelpSetPreset(0x74);
         }
     }

@@ -21,7 +21,7 @@ void lmapSceneCreateEffect(void)
         effect = _ZN9Obj4206e8C1Ev(effect);
         effect->vtable = _ZTV9Obj4207c0 + 0x18;
     }
-    g_lmapScene->playerModel = reinterpret_cast<LmapScript *>(effect);
+    g_lmapScene->playerModel = reinterpret_cast<Obj4206e8 *>(effect);
 }
 
 } /* extern "C" */

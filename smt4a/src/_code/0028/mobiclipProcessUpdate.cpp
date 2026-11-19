@@ -1,4 +1,5 @@
 /* NON_MATCHING: inlined UTF-16 path temporaries do not share retail's directory-read workspace; reset/state layout and unused allocator r1 setup also differ. */
+#include <stdio.h>
 #include "mobiclip_ctrl/MobiclipCtrlProcess.h"
 #include "nn/Result.h"
 #include "addon/aocMain.h"
@@ -54,7 +55,6 @@ void objectReleaseIfSet(void *handle);
 s32 padButtonRepeat(u32 button);
 s32 padButtonIsPressed(u32 button);
 u32 FUN_00102bbc(char *destination, const u16 *source, u32 size);
-void textFormatBuffer(char *destination, const char *format, ...);
 void FUN_00139518();
 void FUN_00359738();
 void soundEffectFreeBuffers();
@@ -176,7 +176,7 @@ extern "C" s32 mobiclipProcessUpdate()
         if (padButtonIsPressed(0)) {
             char name[0x40];
             FUN_00102bbc(name, work->entries[work->selected].name, sizeof(name));
-            textFormatBuffer(work->path, "rom:/moflex/%s", name);
+            sprintf(work->path, "rom:/moflex/%s", name);
             work->state = 2;
         } else if (padButtonIsPressed(2)) {
             work->state = 14;

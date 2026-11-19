@@ -1,9 +1,9 @@
 #include "common.h"
+#include "addon/aocMain.h"
 
 namespace { struct Record { u8 padding[13]; u8 enabled; }; }
 
 extern "C" {
-unsigned int packageKindToRecordKind(int param_1);
 Record *packageFindFileRefByName(u32 owner, s32 index, u32 id);
 void packageFileDisableByKindName(u32 owner, u32 group, u32 id)
 {

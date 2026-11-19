@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021775c` (_code @ 0x21775c, 0x7b8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -12,7 +13,6 @@ extern "C" {
 
 int FUN_002027fc(void);
 
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
 int efctSetSpeed(void);
@@ -39,7 +39,6 @@ typedef struct {
 extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -179,7 +178,7 @@ void FUN_0021775c(int param_1,int param_2)
         }
         temp_v5 = (int)asdTMTexTableEntryAt(0x14,0x473);
         temp_v11 = flagValueRead(temp_v10);
-        textFormatBuffer(temp_v13,"%d",temp_v11);
+        sprintf((char *)temp_v13,"%d",temp_v11);
         FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v2,
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,3,0x6f,
                      temp_v13);
@@ -224,7 +223,7 @@ void FUN_0021775c(int param_1,int param_2)
         }
         temp_v8 = (int)asdTMTexTableEntryAt(0x14,0x47a);
         temp_v11 = flagValueRead(temp_v9);
-        textFormatBuffer(temp_v13,"%d",temp_v11);
+        sprintf((char *)temp_v13,"%d",temp_v11);
         FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,3,0x83,
                      temp_v13);

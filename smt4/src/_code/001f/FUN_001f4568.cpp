@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f4568` (_code @ 0x1f4568, 0x3e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ int randomGetLowerTenBits(int, int);
 int randomGetUpperSixBits(int, int);
 int nkmEnemyFindById(void);
 int libc_strcat(...);
-int textFormatBuffer(...);
 
 typedef struct fn_001f4568_arg3 fn_001f4568_arg3;
 struct fn_001f4568_arg3 {
@@ -37,7 +37,6 @@ extern int FUN_00257e40(unsigned char);
 /* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: nkmEnemyFindById. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int libc_strlen(fn_001f4568_arg3 *);
 
 
@@ -170,7 +169,7 @@ void FUN_001f4568(int param_1,int param_2,unsigned int param_3,fn_001f4568_arg3 
 LAB_001f4728:
       switch(pbVar10[(int)unaff_r4]) {
       case 0xb:
-        textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
+        sprintf((char *)temp_v9,"澂辂覂鎂辂躂");
         goto LAB_001f4778;
       case 0xc:
         pcVar6 = "澂膂躂覂莂";
@@ -187,7 +186,7 @@ LAB_001f4728:
       default:
         goto LAB_001f4778;
       }
-      textFormatBuffer(temp_v9,pcVar6);
+      sprintf((char *)temp_v9,pcVar6);
 LAB_001f4778:
       libc_strcat(param_4,temp_v9);
       unaff_r4 = unaff_r4 + 1;
@@ -206,7 +205,7 @@ LAB_001f4778:
 LAB_001f47d4:
       switch(temp_v12[temp_v3]) {
       case 0xb:
-        textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
+        sprintf((char *)temp_v9,"澂辂覂鎂辂躂");
         goto LAB_001f4824;
       case 0xc:
         pcVar6 = "澂膂躂覂莂";
@@ -223,7 +222,7 @@ LAB_001f47d4:
       default:
         goto LAB_001f4824;
       }
-      textFormatBuffer(temp_v9,pcVar6);
+      sprintf((char *)temp_v9,pcVar6);
 LAB_001f4824:
       libc_strcat(param_4,temp_v9);
       temp_v3 = temp_v3 + 1;
@@ -242,7 +241,7 @@ LAB_001f4824:
 LAB_001f4880:
       switch(temp_v11[temp_v3]) {
       case 0xb:
-        textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
+        sprintf((char *)temp_v9,"澂辂覂鎂辂躂");
         goto LAB_001f48d0;
       case 0xc:
         pcVar6 = "澂膂躂覂莂";
@@ -259,7 +258,7 @@ LAB_001f4880:
       default:
         goto LAB_001f48d0;
       }
-      textFormatBuffer(temp_v9,pcVar6);
+      sprintf((char *)temp_v9,pcVar6);
 LAB_001f48d0:
       libc_strcat(param_4,temp_v9);
       temp_v3 = temp_v3 + 1;

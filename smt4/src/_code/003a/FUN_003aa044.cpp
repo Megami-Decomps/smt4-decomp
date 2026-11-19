@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aa044` (_code @ 0x3aa044, 0x4b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "runtime/Stdio.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -11,7 +12,6 @@ int FUN_00231bcc(...);
 int nkmEnemyFindById(void);
 int dataTable01FindByIdWithAoc(void);
 int drawTextAtSnappedRectangle(...);
-int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
 int devilDrawIconRelative(...);
@@ -39,7 +39,6 @@ extern int curveEvaluateStandard(unsigned int, unsigned int);
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
-/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
@@ -170,7 +169,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v1 = *(short *)(temp_v4 + 8);
     temp_v14 = 0xffffffff;
     temp_v16 = *(short *)(temp_v4 + 10) + temp_v3;
-    textFormatBuffer(temp_v15,"%2d",temp_v13);
+    __2sprintf((char *)temp_v15,"%2d",temp_v13);
     drawTextAtRelativePosition(param_1 + 200,0,temp_v1 + temp_v11,temp_v16,0,7,0xffffffff,temp_v10,temp_v15);
     param_4 = param_4 & 0xffff;
     temp_v7 = 0;
@@ -187,7 +186,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     }
     temp_v1 = *(short *)(temp_v4 + 8);
     temp_v2 = *(short *)(temp_v4 + 10);
-    textFormatBuffer(temp_v15,"%8d",temp_v7);
+    __2sprintf((char *)temp_v15,"%8d",temp_v7);
     drawTextAtRelativePosition(param_1 + 200,0,temp_v11 + temp_v1,temp_v2 + temp_v3,0,7,temp_v14,temp_v10,temp_v15);
   }
   return;

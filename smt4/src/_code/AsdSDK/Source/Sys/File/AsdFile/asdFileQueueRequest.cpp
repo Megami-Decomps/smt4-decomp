@@ -1,4 +1,5 @@
 /* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the request allocation. */
+#include <stdio.h>
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include <string.h>
@@ -13,7 +14,6 @@ void resultHandleFailure(void);
 void memClear(void *buf, u32 size);
 s32 libc_strlen(const char *s);
 char *libc_strcpy(char *dst, const char *src);
-s32 textFormatBuffer(char *dst, const char *format, ...);
 
 /* Queues a load request for `path`. A path that names a device ("rom:", "patch:", ...) is used as
  * it is; otherwise the files the patch replaced come from "patch:/" and the rest from "rom:/". */
@@ -61,9 +61,9 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag)
     } else if (strcmp(path, "battle/event/BtlEvent064/BtlEvent064.mbm") == 0 ||
                strcmp(path, "event/e007/e007.mbm") == 0 ||
                strcmp(path, "event/quest/quest122.mbm") == 0) {
-        textFormatBuffer(request->path, "patch:/%s", path);
+        sprintf(request->path, "patch:/%s", path);
     } else {
-        textFormatBuffer(request->path, "rom:/%s", path);
+        sprintf(request->path, "rom:/%s", path);
     }
 
     request->state = ASD_FILE_QUEUED;

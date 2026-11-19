@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cca14` (_code @ 0x1cca14, 0x1494 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -16,7 +17,6 @@ int FUN_0029a284(...);
 int fontMeasureLineAdvance(...);
 int FUN_002b75ec(...);
 int nkmBaseGetRecord(void);
-int textFormatBuffer(...);
 
 int FUN_00187114(int, int);
 int uiDrawListScrollBar(...);
@@ -72,7 +72,7 @@ extern unsigned long long statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0029a284. */
 /* Supplied declaration required: FUN_0029ab54. */
 extern unsigned short *FUN_0029acb0(void);
-extern int objectPartRunUnlessLocked(int);
+extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: listCursorGetRowIfUnblocked. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -82,7 +82,6 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -425,7 +424,7 @@ LAB_001ccb9c:
     if (*(short *)(temp_v25 + 0x32) < 1) {
       texDrawCompositeSprite(2,0x1a,0x1b,temp_v1,temp_v2,0xdd);
       temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x544));
-      textFormatBuffer(&temp_v17,&LAB_001cd814);
+      sprintf((char *)&temp_v17,(const char *)&LAB_001cd814);
       ppuVar8 = &temp_v17;
       fontMeasureLineAdvance(ppuVar8,2);
       VectorSignedToFloat(temp_v1 + (int)*(short *)(temp_v12 + 8) +
@@ -579,7 +578,7 @@ LAB_001cdb08:
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e4,temp_v1,temp_v2,0xb3);
       texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e5,temp_v1,temp_v2,0xb3);
       temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x4e6));
-      textFormatBuffer(&temp_v21,&LAB_001cdebc);
+      sprintf((char *)&temp_v21,(const char *)&LAB_001cdebc);
       VectorSignedToFloat(*(short *)(temp_v12 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v12 + 8) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0x323232ff,&temp_v21);

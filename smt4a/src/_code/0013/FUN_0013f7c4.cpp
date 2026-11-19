@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013f7c4` (_code @ 0x13f7c4, 0x868 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
@@ -15,7 +16,6 @@ int messageDrawPairedFrameSprites(...);
 int FUN_00169e38(...);
 int SBORROW4(...);
 
-int textFormatBuffer(...);
 int FUN_00151e4c(int);
 int dataFindKindRecordWithAocOverrides(...);
 int textDrawString(...);
@@ -44,7 +44,6 @@ extern unsigned char LAB_0013fbc0; /* 0x13fbc0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: messageCreatePanelEffects. */
 /* Supplied declaration required: messageDrawPairedFrameSprites. */
 /* Supplied declaration required: FUN_00151e4c. */
@@ -122,7 +121,7 @@ unsigned int FUN_0013f7c4(void)
     texDrawCompositeSprite(2,8,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)(((int)g_messageMain.banner) + 0x78);
     dataFindKindRecordWithAocOverrides(temp_v3,0);
-    textFormatBuffer(temp_v9,&LAB_0013fbb4,temp_v3);
+    sprintf((char *)temp_v9,(const char *)&LAB_0013fbb4,temp_v3);
     temp_v5 = (int)asdTMTexTableEntryAt(8,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

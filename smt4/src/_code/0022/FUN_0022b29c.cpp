@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail inlines the entry check twice (once per source) sharing one stack buffer for the script name and the iteration state (frame 300 vs 340 here) and orders the header-search/state selection blocks differently; the calls and stores are the same. */
 #include "common.h"
+#include <stdio.h>
 #include "AsdSDK/AsdMemUtil.h"
 #include "game/GameState.h"
 
@@ -76,7 +77,6 @@ MenuEntry *dataTable33GroupGetRecord(TableView *view, u32 group, u32 index);
 s32 dataTable33GroupGetCount(TableView *view, u32 group);
 void entryListReset(void *list);
 void entryListAppend(void *list, MenuEntry *entry);
-void textFormatBuffer(char *buffer, const char *format, ...);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
 s32 scrRunOpcodesStub(u32 script);
@@ -98,7 +98,7 @@ static void listIfAvailable(MenuWindow *window, MenuEntry *entry, char *buckets,
     if (entry->bucket == 0 || buckets[entry->bucket] == '\0') {
         if (entry->name[0] != '0') {
             DAT_0044cfb8 = 0;
-            textFormatBuffer(name, "%s", entry->name);
+            sprintf(name, "%s", entry->name);
             scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
             while (scrRunOpcodesStub(script) != 2) {
             }

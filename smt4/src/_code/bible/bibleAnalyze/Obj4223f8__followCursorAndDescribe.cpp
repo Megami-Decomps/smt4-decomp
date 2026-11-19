@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail tail-calls FUN_0029da34 with `mov r3,#0` live across the removed shopListItemGetId (needs the getter's clobber set) and moves the display-name fallback into r2 with movs/moveq. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include "classes/Obj4223f8.h"
 #include <stddef.h>
 #include "status/StatusCamera.h"
@@ -40,7 +41,6 @@ void pointConvertToFloat(void *, s32, s32);
 s32 flaggedValueHolderGetTotal(void *);
 void FUN_0029da34(s32, s32, u16, s32);
 const char *dataLookupDisplayName(u8 *, u32);
-void textFormatBuffer(char *, const char *, ...);
 void buttonHelpSetText(const char *, u32);
 extern const char DAT_0040226c[];
 extern const char DAT_00402274[];
@@ -72,7 +72,7 @@ void Obj4223f8::followCursorAndDescribe()
         }
         const char *displayName = dataLookupDisplayName(nameBuffer, work->nameId);
         const char *fallback = DAT_0040226c;
-        textFormatBuffer(text, DAT_00402274, displayName == NULL ? fallback : displayName, DAT_0043d990.suffix);
+        __2sprintf(text, DAT_00402274, displayName == NULL ? fallback : displayName, DAT_0043d990.suffix);
         buttonHelpSetText(text, 0x323232ff);
     }
 }

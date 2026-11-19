@@ -1,4 +1,5 @@
 #include "common.h"
+#include <stdio.h>
 #include "shard/S1ModelEffect.h"
 #include "map/mapCommon.h"
 #include "game/GameStateA.h"
@@ -37,7 +38,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.mapDamage = content;
-    textFormatBuffer(path, "map/all/damage.bam");
+    sprintf(path, "map/all/damage.bam");
     resourceOwnerLoadFileSync(g_gameState.mapDamage, path);
     moriModelContentLoadBody(g_gameState.mapDamage, 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x27f));
@@ -45,7 +46,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.areaModels[0] = content;
-    textFormatBuffer(path, "player_arms/arm00.bam");
+    sprintf(path, "player_arms/arm00.bam");
     resourceOwnerLoadFileSync(g_gameState.areaModels[0], path);
     moriModelContentLoadBody(g_gameState.areaModels[0], 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x284));
@@ -53,7 +54,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.areaModels[1] = content;
-    textFormatBuffer(path, "player_arms/arm01.bam");
+    sprintf(path, "player_arms/arm01.bam");
     resourceOwnerLoadFileSync(g_gameState.areaModels[1], path);
     moriModelContentLoadBody(g_gameState.areaModels[1], 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x289));
@@ -61,7 +62,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.areaModels[2] = content;
-    textFormatBuffer(path, "player_arms/arm02.bam");
+    sprintf(path, "player_arms/arm02.bam");
     resourceOwnerLoadFileSync(g_gameState.areaModels[2], path);
     moriModelContentLoadBody(g_gameState.areaModels[2], 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x28e));
@@ -69,7 +70,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.areaModels[3] = content;
-    textFormatBuffer(path, "player_arms/arm03.bam");
+    sprintf(path, "player_arms/arm03.bam");
     resourceOwnerLoadFileSync(g_gameState.areaModels[3], path);
     moriModelContentLoadBody(g_gameState.areaModels[3], 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x293));
@@ -77,7 +78,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.model530 = content;
-    textFormatBuffer(path, "player_arms/arm00.bam");
+    sprintf(path, "player_arms/arm00.bam");
     resourceOwnerLoadFileSync(g_gameState.model530, path);
     moriModelContentLoadBody(g_gameState.model530, 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x299));
@@ -85,7 +86,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.model528 = content;
-    textFormatBuffer(path, "map/all/pl_ring_in.bam");
+    sprintf(path, "map/all/pl_ring_in.bam");
     resourceOwnerLoadFileSync(g_gameState.model528, path);
     moriModelContentLoadBody(g_gameState.model528, 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x29e));
@@ -93,7 +94,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.model52C = content;
-    textFormatBuffer(path, "map/all/pl_ring_out.bam");
+    sprintf(path, "map/all/pl_ring_out.bam");
     resourceOwnerLoadFileSync(g_gameState.model52C, path);
     moriModelContentLoadBody(g_gameState.model52C, 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x2a4));
@@ -101,7 +102,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.sceneControllerResources[0] = content;
-    textFormatBuffer(path, "map/all/area_next.bam");
+    sprintf(path, "map/all/area_next.bam");
     resourceOwnerLoadFileSync(g_gameState.sceneControllerResources[0], path);
     moriModelContentLoadBody(g_gameState.sceneControllerResources[0], 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x2a9));
@@ -109,7 +110,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.sceneControllerResources[1] = content;
-    textFormatBuffer(path, "map/all/ar_hit.bam");
+    sprintf(path, "map/all/ar_hit.bam");
     resourceOwnerLoadFileSync(g_gameState.sceneControllerResources[1], path);
     moriModelContentLoadBody(g_gameState.sceneControllerResources[1], 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x2af));
@@ -117,7 +118,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.sceneControllerResources[2] = content;
-    textFormatBuffer(path, "map/all/area_next_s.bam");
+    sprintf(path, "map/all/area_next_s.bam");
     resourceOwnerLoadFileSync(g_gameState.sceneControllerResources[2], path);
     moriModelContentLoadBody(g_gameState.sceneControllerResources[2], 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x2d2));
@@ -125,7 +126,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.model550 = content;
-    textFormatBuffer(path, "map/all/navarre.bam");
+    sprintf(path, "map/all/navarre.bam");
     resourceOwnerLoadFileSync(g_gameState.model550, path);
     moriModelContentLoadBody(g_gameState.model550, 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x2eb));
@@ -133,7 +134,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.model564 = content;
-    textFormatBuffer(path, "map/all/estm.bam");
+    sprintf(path, "map/all/estm.bam");
     resourceOwnerLoadFileSync(g_gameState.model564, path);
     moriModelContentLoadBody(g_gameState.model564, 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x2f1));
@@ -141,7 +142,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.mapLightEstoma = content;
-    textFormatBuffer(path, "map/all/lestm.bam");
+    sprintf(path, "map/all/lestm.bam");
     resourceOwnerLoadFileSync(g_gameState.mapLightEstoma, path);
     moriModelContentLoadBody(g_gameState.mapLightEstoma, 0);
     content = static_cast<MoriModelContent *>(asdMemoryAllocTraced(sizeof(MoriModelContent), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp", 0x2fe));
@@ -149,7 +150,7 @@ void mapSystemLoadSharedFiles(void)
       content = modelListInit(content);
     }
     g_gameState.model570 = content;
-    textFormatBuffer(path, "map/all/jade_knife.bam");
+    sprintf(path, "map/all/jade_knife.bam");
     resourceOwnerLoadFileSync(g_gameState.model570, path);
     moriModelContentLoadBody(g_gameState.model570, 0);
     FUN_00244220();

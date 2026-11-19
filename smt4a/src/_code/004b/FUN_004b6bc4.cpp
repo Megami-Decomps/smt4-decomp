@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail spills the script-table local (not the script) in the entry loop, keeps the s16 x/y in r2/r3 across uiClampScrollOffset (needs multifile uiClampScrollOffset), and the tail pair stores differ (stm vs vstm/strd) */
+#include <stdio.h>
 #include "map/mapDepart.h"
 #include "game/GameStateA.h"
 
@@ -62,7 +63,6 @@ ResultMenuType *dataTable33Type0GetEntry(u8 *table, u32 index);
 s32 dataTable33Type0Count(u8 *table);
 ResultListEntry *dataTable33GetEntryByGroup(u8 *table, u32 group, u32 index);
 s32 dataTable33GroupCount(u8 *table, u32 group);
-s32 textFormatBuffer(char *output, const char *format, ...);
 s32 FUN_001b4a74(void *list);
 s32 scrScriptProcessStartEntry(void *script, u32 entry);
 s32 scrRunOpcodesStub(void *script);
@@ -123,7 +123,7 @@ void FUN_004b6bc4(ResultMenu *menu, s32 type, s32 group)
 
             if (entry->scriptName[0] != '0') {
                 DAT_0058800c = 0;
-                textFormatBuffer(scriptArg, DAT_005328fc, entry->scriptName);
+                sprintf(scriptArg, DAT_005328fc, entry->scriptName);
                 scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(scriptTable, scriptArg));
                 while (scrRunOpcodesStub(script) != 2) {
                 }
@@ -149,7 +149,7 @@ void FUN_004b6bc4(ResultMenu *menu, s32 type, s32 group)
 
             if (entry->scriptName[0] != '0') {
                 DAT_0058800c = 0;
-                textFormatBuffer(scriptArg, DAT_005328fc, entry->scriptName);
+                sprintf(scriptArg, DAT_005328fc, entry->scriptName);
                 scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(scriptTable, scriptArg));
                 while (scrRunOpcodesStub(script) != 2) {
                 }

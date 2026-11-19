@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f67c4` (_code @ 0x2f67c4, 0x380 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
@@ -27,7 +27,6 @@ extern unsigned char LAB_002f6b94; /* 0x2f6b94 */
 extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(short);
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -88,7 +87,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x561));
     temp_v3 = FUN_0014bd84(temp_v0);
-    textFormatBuffer(temp_v6,&LAB_002f6b8c,temp_v3);
+    sprintf((char *)temp_v6,(const char *)&LAB_002f6b8c,temp_v3);
     VectorSignedToFloat(0xf9 - param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -100,7 +99,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
     return;
   }
   temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x561));
-  textFormatBuffer(temp_v6,&LAB_002f6b80);
+  sprintf((char *)temp_v6,(const char *)&LAB_002f6b80);
   VectorSignedToFloat(0xf9 - param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);

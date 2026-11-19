@@ -1,4 +1,5 @@
 /* NON_MATCHING: inlined marked-opponent search omits retail's state-pointer copy and allocates the roster-index arithmetic differently. */
+#include <stdio.h>
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -18,7 +19,6 @@ static inline BattleRosterRecordA *findFirstMarkedOpponent(BtlMainStateA *state)
 extern "C" {
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void modelOwnerLoadNamed(u32 *owner, const char *name);
 
 // Load the environment submodel belonging to the first marked opponent.
@@ -37,7 +37,7 @@ void FUN_003e9b74(BtlMainStateA *state)
     BattleRosterRecordA *selected = findFirstMarkedOpponent(state);
     BtlCombatantEntryA *entry = btlMainFindEntryByListedId(state, selected->motion.group);
     EnvironmentResourceView *resource = (EnvironmentResourceView *)entry->data.candidate;
-    textFormatBuffer(name, "battle/model/en%03d_sub.bam", resource->identifier);
+    sprintf(name, "battle/model/en%03d_sub.bam", resource->identifier);
     modelOwnerLoadNamed(state->environmentModel.owner, name);
     state->environmentModel.loaded = 1;
 }

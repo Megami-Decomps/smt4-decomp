@@ -1,4 +1,6 @@
-/* NON_MATCHING: register swap only: retail keeps the constant 1 in r8 and the alternate table base in r7, armcc here the reverse. */
+/* NON_MATCHING: register swap only: retail keeps the constant 1 in r8 and the alternate table base in r7, armcc here the reverse.
+ * Copying the parameter into a local (`void *menu` cast to `work`, as the IV twin FUN_003a07a0 casts its ShopWork *)
+ * gives IDENTICAL, but so does a same-type copy, so it is not kept without evidence the parameter had another type. */
 #include "shard/Shard0049.h"
 
 struct EquipmentDetailPair { s32 first, second; };

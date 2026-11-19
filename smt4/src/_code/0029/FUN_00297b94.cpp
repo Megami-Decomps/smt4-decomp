@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "shard/PlayScene.h"
 #include <stddef.h>
@@ -5,7 +6,6 @@
 
 extern "C" {
 const char *FUN_002e38c0(u8 message, s32 alternate);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void buttonHelpSetText(const char *text, u32 color);
 void FUN_00253fe8(u32 color, s32 start, s32 line, s32 length);
 
@@ -33,7 +33,7 @@ void FUN_00297b94(PlayScene *scene, s32 selection, s32 page)
     const char *text = FUN_002e38c0(message, page == 0);
     if (selection == 9) {
         char buffer[128];
-        textFormatBuffer(buffer, text, help->value);
+        sprintf(buffer, text, help->value);
         buttonHelpSetText(buffer, 0x323232FF);
         s32 highlightLength;
         if (help->value >= 100) {

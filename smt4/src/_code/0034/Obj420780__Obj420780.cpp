@@ -1,4 +1,5 @@
 /* NON_MATCHING: color packing's VFP loads, multiplies, conversions and integer scratch registers differ. */
+#include <stdio.h>
 #include "classes/Obj420780.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 
@@ -37,8 +38,8 @@ static __inline u32 packColor(const ColorRecord *color)
 
 Obj420780::Obj420780()
 {
-    textFormatBuffer(title, "");
-    textFormatBuffer(text, "");
+    sprintf(title, "");
+    sprintf(text, "");
     unk28 = 1;
     unk24 = 0;
     order[0] = 0;

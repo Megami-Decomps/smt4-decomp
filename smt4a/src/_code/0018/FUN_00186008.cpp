@@ -1,8 +1,8 @@
 /* NON_MATCHING: only the two `movge` of the palette/magnitude selection are swapped (retail sets the palette first). */
 #include "common.h"
+#include <stdio.h>
 
 extern "C" {
-s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_00180310(u32 palette, s32 x, s32 y, u32 option0, u32 option1, u32 option2,
                   const char *format, ...);
 
@@ -21,9 +21,9 @@ void FUN_00186008(s32 x, s32 y, s32 depth, s32 value)
             magnitude = value;
         }
         if (value < 0) {
-            textFormatBuffer(text, "-%d", magnitude);
+            sprintf(text, "-%d", magnitude);
         } else {
-            textFormatBuffer(text, "+%d", magnitude);
+            sprintf(text, "+%d", magnitude);
         }
         FUN_00180310(palette, x, y, 0, 1, depth + 1, text);
     }

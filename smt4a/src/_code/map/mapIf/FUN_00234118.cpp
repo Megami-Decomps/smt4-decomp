@@ -1,4 +1,5 @@
 /* NON_MATCHING: body, branches and the allocate-then-construct result now match; retail loads &g_mapIf before the store constants and places g_gameState.mapId's pool word before g_mapIf's. */
+#include <stdio.h>
 #include "map/MapIfGlobals.h"
 #include "game/GameStateA.h"
 #include "Model/MoriModelContent.h"
@@ -9,7 +10,6 @@ namespace {
 struct MapIfSpawnPose { f32 x, y, z, heading; };
 }
 extern "C" {
-s32 textFormatBuffer(char *output, const char *format, ...);
 void *asdMemoryAllocTraced(u32 size, const char *file, s32 line);
 
 // Create the map's fast model at the supplied position and heading.
@@ -25,11 +25,11 @@ void FUN_00234118(MapIfSpawnPose pose)
     slot->position.w = pose.heading;
     char path[128];
     if (g_gameState.mapId == 0x18)
-        textFormatBuffer(path, "map/all/m099_fast.bam");
+        sprintf(path, "map/all/m099_fast.bam");
     else
-        textFormatBuffer(path, "map/all/m%03d_fast.bam", g_gameState.mapId);
+        sprintf(path, "map/all/m%03d_fast.bam", g_gameState.mapId);
     if (g_gameState.mapId == 0x2c || g_gameState.mapId == 0x2d || g_gameState.mapId == 0x2e || g_gameState.mapId == 0x2f)
-        textFormatBuffer(path, "map/all/m%03d_fast.bam", 0x2b);
+        sprintf(path, "map/all/m%03d_fast.bam", 0x2b);
     void *memory = asdMemoryAllocTraced(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapIf.cpp", 0x16ee);
     MoriModelContent *resource = static_cast<MoriModelContent *>(memory);
     if (memory != NULL)

@@ -12,16 +12,16 @@ void uiQuestLoadResources(void)
 {
     UiQuest *quest = g_uiQuest;
 
-    quest->panel.sysImages = asdLoadFileSyncDefault("event/quest/QuestSys.mbm");
-    quest->panel.texts[0] = asdTextCreate(0);
-    asdTextSetBaseColor(quest->panel.texts[0], 0x320202ff);
-    positionStateSet(quest->panel.texts[0], 0, 0x646464ff, 0.0f);
-    quest->panel.texts[1] = asdTextCreate(0);
-    asdTextSetBaseColor(quest->panel.texts[1], 0x323232ff);
-    positionStateSet(quest->panel.texts[1], 0, 0x646464ff, 0.0f);
-    quest->panel.texts[2] = asdTextCreate(0);
-    asdTextSetBaseColor(quest->panel.texts[2], 0x320202ff);
-    positionStateSet(quest->panel.texts[2], 0, 0x646464ff, 0.0f);
+    quest->panelView.panel.sysImages = asdLoadFileSyncDefault("event/quest/QuestSys.mbm");
+    quest->panelView.panel.texts[0] = asdTextCreate(0);
+    asdTextSetBaseColor(quest->panelView.panel.texts[0], 0x320202ff);
+    positionStateSet(quest->panelView.panel.texts[0], 0, 0x646464ff, 0.0f);
+    quest->panelView.panel.texts[1] = asdTextCreate(0);
+    asdTextSetBaseColor(quest->panelView.panel.texts[1], 0x323232ff);
+    positionStateSet(quest->panelView.panel.texts[1], 0, 0x646464ff, 0.0f);
+    quest->panelView.panel.texts[2] = asdTextCreate(0);
+    asdTextSetBaseColor(quest->panelView.panel.texts[2], 0x320202ff);
+    positionStateSet(quest->panelView.panel.texts[2], 0, 0x646464ff, 0.0f);
 }
 
 } /* extern "C" */

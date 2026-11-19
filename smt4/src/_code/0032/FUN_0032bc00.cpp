@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032bc00` (_code @ 0x32bc00, 0x678 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -12,7 +13,6 @@ int gxSetMirroredClippedScissor(...);
 int FUN_0029ab54(int, int);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int textDrawString(...);
-int textFormatBuffer(unsigned char [64], unsigned char *);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
 int FUN_002e1ed4(...);
@@ -47,7 +47,6 @@ extern int FUN_0029ee54(int);
 extern int listCursorGetRowIfUnblocked(int);
 extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: texDrawCompositeSprite. */
@@ -109,7 +108,7 @@ void FUN_0032bc00(int param_1,int param_2)
       temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,temp_v5 + 0x44c));
       temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,1099));
       if (temp_v1) {
-        textFormatBuffer(temp_v14,&LAB_0032bffc);
+        sprintf((char *)temp_v14,(const char *)&LAB_0032bffc);
         VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,

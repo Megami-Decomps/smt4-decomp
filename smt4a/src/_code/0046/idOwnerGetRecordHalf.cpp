@@ -1,18 +1,6 @@
-#include "shard/Shard0046.h"
-#include "quest_center/QuestRecordA.h"
+#include "classes/Obj5333c0.h"
 
-extern "C" {
-
-typedef struct IdOwnerA0C {
-    /* 0x000 */ u8 unk000[0xA0C];
-    /* 0xA0C */ u32 unkA0C;
-} IdOwnerA0C;
-
-u16 idOwnerGetRecordHalf(IdOwnerA0C *obj)
+extern "C" u16 idOwnerGetRecordHalf(Obj5333c0 *scene)
 {
-    QuestRecordA *record = questDataGetRecord(obj->unkA0C & 0xFFFF);
-
-    return record->id;
+    return scene->deliveryQuestId();
 }
-
-} /* extern "C" */

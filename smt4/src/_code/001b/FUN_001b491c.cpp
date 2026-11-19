@@ -1,9 +1,9 @@
 #include "map/LmapGlobals.h"
+#include "shard/W6_W6Match1_BattleStageModelA.h"
+#include "status/StatusBustUp.h"
 
 extern "C" {
-void playerModelListCreate(LmapScript *owner, u32 selector);
-void playerModelLoadPart(LmapScript *owner, u8 channel, u32 selector);
-void FUN_00343c58(LmapScript *owner, u8 channel, u32 value, u32 selector);
+void playerModelListCreate(Obj4206e8 *owner, u32 selector);
 
 /* Initializes the three model channels, restoring their saved values when requested. */
 void FUN_001b491c(void)
@@ -15,7 +15,7 @@ void FUN_001b491c(void)
             if (i == 0 || i == 1 || i == 2) {
                 selector = 448;
             }
-            FUN_00343c58(g_lmapScene->playerModel, static_cast<u8>(i), g_lmapScene->channelValues[i], selector);
+            FUN_00343c58(reinterpret_cast<u32>(g_lmapScene->playerModel), static_cast<u8>(i), g_lmapScene->channelValues[i], selector);
         }
     } else {
         for (s32 i = 0; i < 3; ++i) {
@@ -23,7 +23,7 @@ void FUN_001b491c(void)
             if (i == 0 || i == 1 || i == 2) {
                 selector = 448;
             }
-            playerModelLoadPart(g_lmapScene->playerModel, static_cast<u8>(i), selector);
+            playerModelLoadPart(reinterpret_cast<u32>(g_lmapScene->playerModel), static_cast<u8>(i), selector);
         }
     }
 }

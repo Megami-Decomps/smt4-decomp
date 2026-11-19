@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00469400` (_code @ 0x469400, 0x84c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
 
-int textFormatBuffer(int *, unsigned char *, int, unsigned int);
 int qsort(int, unsigned int, int, unsigned char *);
 int gameFlagIsSet(...);
 int resourceObjectSetNamedFlag(...);
@@ -42,7 +42,6 @@ extern unsigned char LAB_00469ccc; /* 0x469ccc */
 extern unsigned char LAB_00469ce4; /* 0x469ce4 */
 extern unsigned char LAB_00469d00; /* 0x469d00 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
@@ -206,10 +205,10 @@ LAB_00469530:
           temp_v9 = randBetween(1,2);
         }
 LAB_00469668:
-        textFormatBuffer(&temp_v14,&LAB_00469948,temp_v5 + 1,temp_v9);
+        sprintf((char *)&temp_v14,(const char *)&LAB_00469948,temp_v5 + 1,temp_v9);
         temp_v6 = param_1 + temp_v5 * 4;
         resourceObjectSetNamedFlag(*(unsigned int *)(*(int *)(temp_v6 + 0xa10) + 4),&temp_v14,0);
-        textFormatBuffer(&temp_v14,&LAB_00469960,temp_v5 + 1,temp_v9);
+        sprintf((char *)&temp_v14,(const char *)&LAB_00469960,temp_v5 + 1,temp_v9);
         resourceObjectSetNamedFlag(*(unsigned int *)(*(int *)(temp_v6 + 0xa34) + 4),&temp_v14,0);
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < *(int *)(param_1 + 0xabc));

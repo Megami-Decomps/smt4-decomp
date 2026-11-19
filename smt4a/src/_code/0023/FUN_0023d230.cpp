@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023d230` (_code @ 0x23d230, 0xa60 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
@@ -10,7 +11,6 @@ extern "C" {
 
 int fontMeasureLineAdvance(...);
 
-int textFormatBuffer(...);
 int textDrawString(...);
 int texDrawCompositeSprite(...);
 int FUN_00180310(...);
@@ -43,7 +43,6 @@ extern unsigned char LAB_0023dcbc; /* 0x23dcbc */
 extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 extern int gameGetPlayerData(void);
@@ -169,11 +168,11 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     }
     if ((int)temp_v8 < 0) {
       temp_v5 = FUN_003df57c(temp_v9,1);
-      textFormatBuffer(temp_v11,"%d",temp_v5);
+      sprintf((char *)temp_v11,"%d",temp_v5);
     }
     else {
       temp_v5 = skillGetAdjustedCost(temp_v12,temp_v9);
-      textFormatBuffer(temp_v11,"%d",temp_v5);
+      sprintf((char *)temp_v11,"%d",temp_v5);
     }
     FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,4,0x6f,
@@ -269,11 +268,11 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     ;
     if ((int)temp_v8 < 0) {
       temp_v5 = FUN_003df57c(temp_v9,1);
-      textFormatBuffer(temp_v11,"%d",temp_v5);
+      sprintf((char *)temp_v11,"%d",temp_v5);
     }
     else {
       temp_v5 = skillGetAdjustedCost(temp_v12,temp_v9);
-      textFormatBuffer(temp_v11,"%d",temp_v5);
+      sprintf((char *)temp_v11,"%d",temp_v5);
     }
     FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                  (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,4,0x83,
@@ -319,7 +318,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
   if (temp_v6 < 1) {
     texDrawCompositeSprite(2,0x12,0x1b,param_1,param_2,0xdd);
     temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x544));
-    textFormatBuffer(temp_v11,&LAB_0023dcbc);
+    sprintf((char *)temp_v11,(const char *)&LAB_0023dcbc);
     puVar8 = temp_v11;
     fontMeasureLineAdvance(puVar8,2);
     VectorSignedToFloat((int)*(short *)(temp_v6 + 8) +

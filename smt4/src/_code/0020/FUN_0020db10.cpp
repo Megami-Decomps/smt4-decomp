@@ -60,8 +60,8 @@ void FUN_0020db10(void)
     }
     lightOwnerRegister(g_lmapScene->stageModel, 1);
     prepareModel(g_lmapScene->stageModel);
-    g_lmapScene->unk168 = 0;
-    g_lmapScene->unk16C = -1;
+    g_lmapScene->actorMotion = 0;
+    g_lmapScene->appliedActorMotion = -1;
 
     g_lmapScene->models[1] = asdMdlManagerCreateFromSource(g_gameState.map.files[5].handle, g_gameState.map.files[5].buffer, 0x1c0);
     lightOwnerRegister(g_lmapScene->models[1], 1);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: every call, filter and the record offset match; retail keeps `sp + 128` hoisted in sl with a 260-byte frame (one extra register and word) for the strcpy source, which this build recomputes with a 256-byte frame. */
 #include "common.h"
+#include "runtime/Stdio.h"
 #include <string.h>
 
 struct BattleNameRecord {
@@ -18,7 +19,6 @@ s32 libc_strlen(const char* text);
 s32 libc_strncmp(const char* a, const char* b, u32 count);
 char* libc_strcpy(char* dest, const char* src);
 void sysMemClear(void* memory, u32 size);
-s32 textFormatBuffer(char* dest, const char* format, ...);
 u8 keyedRecordRegisterName(void* name);
 u8 FUN_003478dc(u8 key, const char* path);
 
@@ -79,7 +79,7 @@ void FUN_004f9e0c(u8* world)
         char formatted[128];
         sysMemClear(copy, sizeof(copy));
         sysMemClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_005284c0, name);
+        __2sprintf(formatted, DAT_005284c0, name);
         libc_strcpy(copy, formatted);
         if (libc_strlen(copy) == 0) {
             continue;

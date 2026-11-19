@@ -1,7 +1,7 @@
+#include "runtime/Stdio.h"
 #include "font/SearchWin/SearchWin.h"
 
 extern "C" {
-void textFormatBuffer(void*, const char*, ...);
 void soundPlaySeUnpanned(u32);
 void searchWinInitialize(void);
 extern SearchWinWork* DAT_0043e170;
@@ -18,9 +18,9 @@ u32 scrComm_SearchWin_Start(void)
         s32 mode = scrGetArg(0);
         SearchWinWork* window = DAT_0043e170;
         if (mode == 0) {
-            textFormatBuffer(window->text, DAT_00403cb0);
+            __2sprintf((char *)window->text, DAT_00403cb0);
         } else if (mode == 1) {
-            textFormatBuffer(window->text, DAT_00403cc4);
+            __2sprintf((char *)window->text, DAT_00403cc4);
         } else {
             return 1;
         }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfd94` (_code @ 0x2bfd94, 0x47c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int uiObjectSetColorRgb(...);
 int texDrawCompositeSprite(...);
 int efctSetSpeed(void);
@@ -35,7 +35,6 @@ typedef struct {
 
 extern int g_campCecRanking; /* 0x57f11c */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: uiObjectSetColorRgb. */
 /* Supplied declaration required: texDrawCompositeSprite. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -190,7 +189,7 @@ int FUN_002bfd94(void)
             temp_v0 = *(short *)(temp_v9 + 8);
             temp_v1 = *(short *)(temp_v9 + 10);
             drawSetColorFromRGBA8(0xffffffff);
-            textFormatBuffer(temp_v14,"%d",temp_v18);
+            sprintf((char *)temp_v14,"%d",temp_v18);
             FUN_00180310(6,temp_v4 + temp_v0 + temp_v8,temp_v3 + temp_v1 + temp_v5,1,3,0x65,temp_v14);
             gxResetColorQuadToWhite();
           }

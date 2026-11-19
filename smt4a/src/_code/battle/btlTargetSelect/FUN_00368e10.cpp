@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00368e10` (_code @ 0x368e10, 0x448 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
 int dataTable01GetRecordWithAocOverride(...);
 int fontMeasureLineAdvance(...);
 int nkmEnemyFindById(...);
@@ -47,7 +47,6 @@ extern int *g_btlTargetSelect; /* 0x57a9a8 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: dataTable01GetRecordWithAocOverride. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -92,9 +91,9 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   nkmEnemyFindById();
   pfVar4 = param_2;
   dataTable01GetRecordWithAocOverride(param_2);
-  textFormatBuffer(*piVar1 + 4,&LAB_00369218,pfVar4);
+  sprintf((char *)(*piVar1 + 4),(const char *)&LAB_00369218,pfVar4);
   temp_v1 = FUN_0014bf3c(param_2,0);
-  textFormatBuffer(*piVar1 + 0x2c,&LAB_00369218,temp_v1);
+  sprintf((char *)(*piVar1 + 0x2c),(const char *)&LAB_00369218,temp_v1);
   temp_v0 = itemIsCollectedWithRelated(param_2);
   *(unsigned char *)(*piVar1 + 0x24) = temp_v0;
   *(unsigned int *)(*piVar1 + 0x28) = pfVar3->field_0x2 & 0xffff7fff;

@@ -12,7 +12,7 @@ int FUN_00282390(void);
 int mathRemPio2f(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
-int modelPartSetRotationDegrees(unsigned int, int);
+int modelPartSetRotationDegrees(unsigned int, int); // declcheck: local (romwright prototype; its types do not fit map/LmapPlayerModel.h: including it fails to compile)
 int nodeSetTranslation(unsigned int, int, int *);
 int modelSetScale(unsigned int);
 int modelSelectPrimaryMotion(unsigned int, unsigned int);

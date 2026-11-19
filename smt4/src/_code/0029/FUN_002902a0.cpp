@@ -25,7 +25,7 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
     UiQuest *quest = g_uiQuest;
     QuestDetailView *detail = (QuestDetailView *)quest;
     quest->questId = (s16)questId;
-    quest->panel.detailMode = FUN_00298f88(questId);
+    quest->panelView.panel.detailMode = FUN_00298f88(questId);
     detail->speed = 0.2088f;
     timerStart(detail->timer, 0, 0);
     if (restoreSelection == 0) {
@@ -34,8 +34,8 @@ void FUN_002902a0(u32 questId, s32 restoreSelection)
         detail->restoreSelection = 1;
         void *cursor;
         u16 *ids;
-        if (quest->panel.detailMode != 0) {
-            cursor = quest->panel.alternate.cursor;
+        if (quest->panelView.panel.detailMode != 0) {
+            cursor = quest->panelView.panel.alternate.cursor;
             ids = quest->cursor.alternate.ids;
         } else {
             cursor = &quest->cursor;

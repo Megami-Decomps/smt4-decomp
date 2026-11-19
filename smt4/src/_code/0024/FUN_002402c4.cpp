@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail hoists the constant 1 into a register (so 0x105 becomes `add sl, r8, #260`) and keeps the zeroing of the file words interleaved with the call setup; stream class and VTT construction match. Needs _ZTT9Obj420c60 rename applied. */
+#include <stdio.h>
 #include "classes/Obj420c60.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -8,7 +9,6 @@ struct MbState {
 
 extern "C" {
 s32 asdLoadFileIsPatched(const char *name);
-s32 textFormatBuffer(char *output, const char *format, ...);
 u32 refIsNullOrZero(s32 *object);
 u32 FUN_002b90c8(const char *text, u32 count, MbState *state);
 u32 FUN_002c618c(wchar_t *destination, const char *text, u32 count, MbState *state);
@@ -19,9 +19,9 @@ s32 FUN_002402c4(void *unused, const char *name)
     char path[256];
     memClear(path, sizeof(path));
     if (asdLoadFileIsPatched(name) != 0) {
-        textFormatBuffer(path, "patch:/%s", name);
+        sprintf(path, "patch:/%s", name);
     } else {
-        textFormatBuffer(path, "rom:/%s", name);
+        sprintf(path, "rom:/%s", name);
     }
     Obj420c60 stream;
     wchar_t widePath[264];

@@ -1,4 +1,5 @@
 /* NON_MATCHING: near (213 rows against 209, same 92-byte frame): same calls, layout ids and float arguments; retail keeps the entry/index in sl/r9 and the x offset in fp where ours uses fp/sl (fp/sl swapped), loads the layout bank id after the parameter spills and reads the rectangle x/y pair in the other order */
+#include <stdio.h>
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 typedef unsigned char u8;
@@ -29,7 +30,6 @@ IconRecord *dataTable10FindValue(s32 id);
 void nkmBaseGetRecord(void);
 void FUN_00169a1c(s32 layout, s32 x, s32 y, s32 depth);
 s32 FUN_003f74a8(u32 id, CardEntry *entry, s32 x, s32 y);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_003f533c(u32 id, s32 x, s32 y, s32 depth, u32 arg, s32 p0, s32 p1, s32 p2, s32 p3, s32 p4, f32 speed);
 
 /* Draws one card of the list: frame parts, the type icon, the formatted label and the stat widget,
@@ -92,7 +92,7 @@ void FUN_003f7164(u32 id, CardEntry *entry, s32 index, u32 arg, s32 offsetX, s32
     s16 labelX = base->x + part->x;
     s16 labelY = base->y + part->y;
     FUN_003f74a8(id, entry, base->x, part->y);
-    textFormatBuffer(label, "%s", id);
+    sprintf(label, "%s", id);
     textDrawString(2, 0xFFFFFFFF, label, (f32)(labelX + offsetX), (f32)(labelY + offsetY), (f32)(0xFB - depth) * 0.00390625f, 0.0f, speed);
 
     part = asdTMTexTableEntryAt(LAYOUT_BANK, 0x83);

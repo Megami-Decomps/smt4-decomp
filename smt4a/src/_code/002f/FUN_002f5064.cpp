@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f5064` (_code @ 0x2f5064, 0x814 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
@@ -11,7 +12,6 @@ int uiSpriteSelectAnim(...);
 int FUN_0020b490(...);
 int roundObjFinish(...);
 
-int textFormatBuffer(...);
 int qsort(int, int, int, unsigned char *);
 int uiSpriteAdvanceAnimation(int);
 int dataTable01GetRecordWithAocOverride(unsigned int);
@@ -59,7 +59,6 @@ typedef struct {
 extern unsigned char LAB_002f5758; /* 0x2f5758 */
 extern unsigned char LAB_00321c94; /* 0x321c94 */
 
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -281,7 +280,7 @@ void FUN_002f5064(int param_1)
       }
       pcVar14 = (char *)0x0;
 LAB_002f56d4:
-      textFormatBuffer(temp_v19,&LAB_002f5758,pcVar14 + 1);
+      sprintf((char *)temp_v19,(const char *)&LAB_002f5758,pcVar14 + 1);
       puVar8 = temp_v19;
       asdLoadFileSyncDefault();
       *(unsigned char **)(param_1 + 0x43b0) = puVar8;

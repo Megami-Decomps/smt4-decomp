@@ -1,4 +1,5 @@
 #include "common.h"
+#include "runtime/Stdio.h"
 #include <string.h>
 #include "text/TextDraw.h"
 #include "AsdSDK/asdTextFormatStream.h"
@@ -17,7 +18,6 @@ struct ExtendedLabelledRecord {
 };
 extern "C" {
 const char *dataTable01GetRecordWithAocOverride(u16 message);
-void textFormatBuffer(char *output, const char *format, ...);
 f32 fontMeasureTextWidth(const char *text, u32 mode, f32 spacing);
 extern const char DAT_0052c008[];
 }
@@ -36,7 +36,7 @@ extern "C" s32 uiDrawExtendedRecordLabel(ExtendedRecordLabels *labels, const Ext
     asdTextFormatStream(labels->handles[1], 2, -1, 0, 0, text);
     strcpy(text, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92");
     asdTextFormatStream(labels->handles[2], 2, -1, 0, 0, text);
-    textFormatBuffer(text, DAT_0052c008);
+    __2sprintf(text, DAT_0052c008);
     asdTextFormatStream(labels->description, 2, -1, 0, 0, text);
     labels->descriptionWidth = static_cast<s32>(fontMeasureTextWidth(text, 2, 0.0f));
     labels->active = 1;

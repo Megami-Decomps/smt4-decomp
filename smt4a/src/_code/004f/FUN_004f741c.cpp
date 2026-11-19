@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack-buffer address caching and effect-name pointer scheduling differ. */
+#include "runtime/Stdio.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -14,7 +15,6 @@ extern const char DAT_00528380[][32];
 extern const char DAT_005284c0[];
 void* sysMemClear(void* destination, u32 size);
 void asdMemFree(void* memory);
-s32 textFormatBuffer(char* destination, const char* format, ...);
 char* libc_strcpy(char* destination, const char* source);
 char* libc_strrchr(char* text, s32 character);
 
@@ -35,7 +35,7 @@ u32 FUN_004f741c(BtlAuxA* auxiliary)
         slot->readiness.flags = 0;
         sysMemClear(path, sizeof(path));
         sysMemClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_005284c0, DAT_00528380[index]);
+        __2sprintf(formatted, DAT_005284c0, DAT_00528380[index]);
         libc_strcpy(path, formatted);
         libc_strcpy(slot->name, libc_strrchr(path, '/') + 1);
         if (findRecordByKey(slot->name) == 0xFF) {

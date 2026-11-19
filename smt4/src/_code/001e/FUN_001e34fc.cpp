@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e34fc` (_code @ 0x1e34fc, 0x438 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 
 extern "C" {
@@ -10,7 +11,6 @@ int nodeSetScale(unsigned int, int);
 int groupedFileTablesCountRecordsOfKind(...);
 int dataTable2AGetEntryWithAoc(void);
 int lightOwnerRegister(int, int);
-int textFormatBuffer(unsigned char [68], unsigned char *);
 int vectorQueuePushPosition(void);
 int FUN_002f479c(void);
 int FUN_002fb4a4(void);
@@ -32,7 +32,6 @@ extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: lightOwnerRegister. */
 extern int modelHasLoadedAttachment(int);
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: vectorQueuePushPosition. */
 /* Supplied declaration required: FUN_002f479c. */
 /* Supplied declaration required: FUN_002fb4a4. */
@@ -171,7 +170,7 @@ LAB_001e3758:
       *(unsigned char *)((int)piVar9 + temp_v4 * 0x38 + 0xf) = 0;
       *(short *)(piVar9 + temp_v4 * 0xe + 5) = (short)g_deferredMapModels[1];
       *(short *)((int)piVar9 + temp_v4 * 0x38 + 0x12) = (short)*(char *)(temp_v3 + 0x33);
-      textFormatBuffer(temp_v7,&LAB_001e3944);
+      sprintf((char *)temp_v7,(const char *)&LAB_001e3944);
       if ((param_1 >= 0x65) && (g_deferredMapModels[2] >= 1)) {
         temp_v3 = asdMdlManagerClone(g_deferredMapModels[0xf],0);
       }

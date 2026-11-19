@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019715c` (_code @ 0x19715c, 0x748 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "camp/Config/Config.h"
 #include "shard/TextureDrawCall.h"
@@ -18,7 +19,6 @@ int FUN_0028fc60(void);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int dataFindKindRecordWithAocOverrides(...);
 int texDrawCompositeSprite(...);
 int VectorSignedToFloat(...);
@@ -52,7 +52,6 @@ extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataFindKindRecordWithAocOverrides. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
@@ -161,7 +160,7 @@ void FUN_0019715c(int param_1,int param_2)
           }
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x473));
           temp_v11 = flagValueRead(temp_v10);
-          textFormatBuffer(temp_v13,"%d",temp_v11);
+          sprintf((char *)temp_v13,"%d",temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,3,0x6f,
                        temp_v13);
@@ -202,7 +201,7 @@ void FUN_0019715c(int param_1,int param_2)
           }
           temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1d,0x47a));
           temp_v11 = flagValueRead(temp_v10);
-          textFormatBuffer(temp_v13,"%d",temp_v11);
+          sprintf((char *)temp_v13,"%d",temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,3,0x83,
                        temp_v13);

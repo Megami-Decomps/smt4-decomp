@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00216e64` (_code @ 0x216e64, 0x7a8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
@@ -33,7 +34,6 @@ int gameGetPlayerData(void);
 int FUN_002b7bca(int, int, int, unsigned char *);
 int nkmBaseGetRecord(...);
 int dataTable01FindByIdWithAoc(unsigned int);
-int textFormatBuffer(...);
 int uiSpriteAdvanceAnimation(int);
 int asdMemFree(unsigned int);
 int FUN_0033bb94(int, unsigned int);
@@ -91,7 +91,6 @@ extern int gameGetUnitRecord(int);
 /* Supplied declaration required: nkmBaseGetRecord. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
-/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: uiSpriteAdvanceAnimation. */
@@ -267,7 +266,7 @@ void FUN_00216e64(int param_1)
       }
       pcVar15 = (char *)0x0;
 LAB_002174ac:
-      textFormatBuffer(temp_v17,&LAB_00217614,pcVar15 + 1);
+      sprintf((char *)temp_v17,(const char *)&LAB_00217614,pcVar15 + 1);
       temp_v4 = asdLoadFileSyncDefault(temp_v17);
       *(unsigned int *)(param_1 + 0x3578) = temp_v4;
       temp_v8 = *(unsigned int *)(param_1 + 0x3570);

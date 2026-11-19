@@ -7,9 +7,9 @@
 extern "C" {
 
 int FUN_0019715c(...);
-int FUN_001978b4(void);
+int campDrawCommandMenu(void);
 int uniteDrawResultPanel(...);
-int dataTable15GetUnlockedEntryId(...);
+int dataTable15GetUnlockedEntryId(...); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
 int itemDrawCategoryBadge(...);
 int textDrawString(...);
 int dataFindKindRecordWithAocOverrides(...);
@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019715c. */
-/* Supplied declaration required: FUN_001978b4. */
+/* Supplied declaration required: campDrawCommandMenu. */
 /* Supplied declaration required: uniteDrawResultPanel. */
 extern int uniteGetState(void);
 /* Supplied declaration required: dataTable15GetUnlockedEntryId. */
@@ -206,7 +206,7 @@ LAB_001a03b8:
       uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                    (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
     }
-    FUN_001978b4();
+    campDrawCommandMenu();
     break;
   case 4:
   case 5:
@@ -241,7 +241,7 @@ LAB_001a03b8:
         temp_v6 = vec2GetYInt(temp_v1 + 0x878);
         uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                      (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
-        FUN_001978b4();
+        campDrawCommandMenu();
       }
       break;
     }
@@ -249,7 +249,7 @@ LAB_001a03b8:
     temp_v6 = vec2GetYInt(temp_v1 + 0x878);
     uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                  (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
-    FUN_001978b4();
+    campDrawCommandMenu();
     break;
   case 0x20:
     if (*(char *)(temp_v1 + 0xab) != '\0') {
@@ -259,7 +259,7 @@ LAB_001a03b8:
         temp_v6 = vec2GetYInt(temp_v1 + 0x878);
         uniteDrawResultPanel(temp_v4,temp_v6,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac),
                      (int)*(short *)(temp_v1 + *(char *)(temp_v1 + 0xad) * 2 + 0xe22));
-        FUN_001978b4();
+        campDrawCommandMenu();
       }
     }
     break;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b72e0` (_code @ 0x1b72e0, 0x6e8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -13,7 +14,6 @@ int FUN_002b7638(...);
 int effectRenderTransformedInstance(int);
 int renderCtxCalculateStereoParallax(...);
 int textDrawString(...);
-int textFormatBuffer(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int renderCtxApplyTransforms(...);
@@ -56,7 +56,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: textFormatBuffer. */
 
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxResetColorScale. */
@@ -202,12 +201,12 @@ int FUN_001b72e0(unsigned int job)
         VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
         textDrawString(3,0xff,"\x83e\x83X\x83g\x83\x81\x83b\x83Z\x81[\x83W\x82\xc5\x82\xb7\x81B");
-        textFormatBuffer(temp_v9,&LAB_001b79c8,DAT_00439c90);
+        sprintf((char *)temp_v9,(const char *)&LAB_001b79c8,DAT_00439c90);
         textDrawString(2,0xffffffff,temp_v9);
-        textFormatBuffer(temp_v9,&LAB_001b79dc,SUB84((double)DAT_00439c94,0),
+        sprintf((char *)temp_v9,(const char *)&LAB_001b79dc,SUB84((double)DAT_00439c94,0),
                      (int)((unsigned long long)(double)DAT_00439c94 >> 0x20));
         textDrawString(2,0xffffffff,temp_v9);
-        textFormatBuffer(temp_v9,&LAB_001b79f4,SUB84((double)DAT_00439c98,0),
+        sprintf((char *)temp_v9,(const char *)&LAB_001b79f4,SUB84((double)DAT_00439c98,0),
                      (int)((unsigned long long)(double)DAT_00439c98 >> 0x20));
         textDrawString(2,0xffffffff,temp_v9);
         VectorSignedToFloat(DAT_00439c8c * 0xc + 8,(unsigned char)(in_fpscr >> 0x16) & 3);

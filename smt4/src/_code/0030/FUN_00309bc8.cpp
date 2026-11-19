@@ -1,4 +1,5 @@
 /* NON_MATCHING: only count-label/text stack placement, frame size and prologue global-load scheduling differ. */
+#include <stdio.h>
 #include "ui/ButtonHelpGlobal.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "bible/bibleDevil.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 void textFormatFullWidthNumber(char *buffer, u32 value);
-void textFormatBuffer(char *buffer, const char *format, ...);
 void textEncodeFontSlot(u32 slot, const char *text);
 void btlFormatCategoryLabel(char *buffer, u32 value);
 void skillFormatTargetLabel(char *buffer, u32 target);
@@ -33,7 +33,7 @@ void FUN_00309bc8(u32 context, u32 depth)
         char countLabels[2][8];
         textFormatFullWidthNumber(countLabels[0], attackCount & 0xF);
         textFormatFullWidthNumber(countLabels[1], firearm->hitRange >> 4);
-        textFormatBuffer(text, "%s\x81\x60%s", countLabels[0], countLabels[1]);
+        sprintf(text, "%s\x81\x60%s", countLabels[0], countLabels[1]);
         textEncodeFontSlot(0x25, text);
     }
     btlFormatCategoryLabel(text, ammunition->traits >> 20);
@@ -42,19 +42,19 @@ void FUN_00309bc8(u32 context, u32 depth)
     textEncodeFontSlot(0x27, text);
     // Full-width English ailment labels in the retail font's Shift-JIS encoding.
     if (ammunition->element == 0) // None
-        textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85");
+        sprintf(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85");
     if (ammunition->element == 1) // KO
-        textFormatBuffer(text, "\x82\x6A\x82\x6E");
+        sprintf(text, "\x82\x6A\x82\x6E");
     if (ammunition->element == 5) // Poison
-        textFormatBuffer(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E");
+        sprintf(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E");
     if (ammunition->element == 6) // Panic
-        textFormatBuffer(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83");
+        sprintf(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83");
     if (ammunition->element == 7) // Sleep
-        textFormatBuffer(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90");
+        sprintf(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90");
     if (ammunition->element == 8) // Bind
-        textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8E\x82\x84");
+        sprintf(text, "\x82\x61\x82\x89\x82\x8E\x82\x84");
     if (ammunition->element == 9) // Sick
-        textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B");
+        sprintf(text, "\x82\x72\x82\x89\x82\x83\x82\x8B");
     textEncodeFontSlot(0x28, text);
     if (context == 0)
         context = reinterpret_cast<u32>(g_buttonHelp.mbm); /* this function passes the directory as an integer */

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (230 vs 306 rows); the compiler unrolls the stage-row search by two while retail keeps a straight loop, and retail zero-fills the name buffer with 16 word stores */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include <stdio.h>
 #include "code/Code001c.h"
 
 // One BAM entry of a stage row: name, and three u16 position components stored as floats.
@@ -50,7 +51,6 @@ extern const char DAT_00527348[];
 u32 dataTableFileGetTable(u32 file, u32 index);
 StageRow* dataTableGetEntries(void);
 u32 dataTableGetCount(u32 table);
-void textFormatBuffer(char* out, const char* format, ...);
 s32 FUN_00240c34(const char* name);
 void resourceOwnerLoadNamed(ResourceOwner* owner, const char* name);
 s32 FUN_0040af60(ResourceOwner* owner);
@@ -88,9 +88,9 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
     char name[64] = { 0 };
     static_cast<void *>(btlGetMainState());
     ResourceOwner* owner = g_handleRegistry;
-    textFormatBuffer(name, "%se%03d_%02d.bch", "battle/battle_map/", stage, substage);
+    sprintf(name, "%se%03d_%02d.bch", "battle/battle_map/", stage, substage);
     if (FUN_00240c34(name) == 0) {
-        textFormatBuffer(name, "%se%03d_%02d.bch", "battle/battle_map/", 1, 1);
+        sprintf(name, "%se%03d_%02d.bch", "battle/battle_map/", 1, 1);
     }
     resourceOwnerLoadNamed(owner, name);
     if (FUN_0040af60(owner) != 0) {
@@ -103,9 +103,9 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
         *owner->flags |= 2;
     }
 
-    textFormatBuffer(name, "%sb%03d_%02d.bam", "battle/battle_map/", stage, substage);
+    sprintf(name, "%sb%03d_%02d.bam", "battle/battle_map/", stage, substage);
     if (FUN_00240c34(name) == 0) {
-        textFormatBuffer(name, "%sb%03d_%02d.bam", "battle/battle_map/", 1, 1);
+        sprintf(name, "%sb%03d_%02d.bam", "battle/battle_map/", 1, 1);
         model->stage = 1;
         model->substage = 1;
     }
@@ -118,7 +118,7 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
     for (s32 i = 0; i < 2; i++) {
         StageBam* bam = &row->bams[i];
         if (bam->name[0] == '0') continue;
-        textFormatBuffer(name, "%s%s.bam", "battle/battle_map/", bam->name);
+        sprintf(name, "%s%s.bam", "battle/battle_map/", bam->name);
         void* bamMemory = asdMemoryAllocTraced(0x20, DAT_00527348, 246);
         model->bamList[i] = bamMemory != NULL ? modelListInit(bamMemory) : NULL;
         modelLoadFileAsyncByName(model->bamList[i], name);

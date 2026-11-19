@@ -1,3 +1,4 @@
+#include "runtime/Stdio.h"
 #include "battle/BattleStageLoadWork.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "shard/JobWork.h"
@@ -7,7 +8,6 @@ struct OrbitScreen;
 extern "C" {
 void FUN_0018a104(OrbitScreen *screen);
 s32 FUN_002c1d5c(void);
-s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002a09b4(const char *file, s32 bank);
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
 void nodeSetTranslation3f(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
@@ -25,10 +25,10 @@ s32 FUN_00221e1c(u32 handle)
     case 0:
         if (!FUN_002c1d5c()) {
             char file[64];
-            textFormatBuffer(file, DAT_00403634, work->stage, work->variant);
+            __2sprintf(file, DAT_00403634, work->stage, work->variant);
             FUN_002a09b4(file, 0);
             work->environmentLoaded = 1;
-            textFormatBuffer(file, DAT_00403610, work->stage, work->variant);
+            __2sprintf(file, DAT_00403610, work->stage, work->variant);
             AsdMdlObject *model = asdMdlManagerCreateSecondList(file, 0x38);
             work->state = 1;
             work->frame = 0;

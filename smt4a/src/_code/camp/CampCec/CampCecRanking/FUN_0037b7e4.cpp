@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037b7e4` (_code @ 0x37b7e4, 0x518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "gamedata/GameFlags.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-int textFormatBuffer(...);
 int asdProcessCreateSimple(...);
 
 int taskCreateDraw(...);
@@ -44,7 +44,6 @@ extern unsigned char DAT_0052c254; /* 0x52c254 */
 extern unsigned char DAT_0052c284; /* 0x52c284 */
 extern unsigned int *g_campCecRanking; /* 0x57f11c */
 
-/* Supplied declaration required: textFormatBuffer. */
 extern int gameDataBlocksGetSaveData(void);
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: uiSpriteStateInitFromSource. */
@@ -166,7 +165,7 @@ void FUN_0037b7e4(void)
       temp_v2 = (unsigned int)*(unsigned short *)(puVar2 + temp_v5 * 3 + 0x31);
       if (temp_v2 != 0) {
         dataTable01GetRecordWithAocOverride();
-        textFormatBuffer(&temp_v7,"%s",temp_v2);
+        sprintf((char *)&temp_v7,"%s",temp_v2);
       }
       else {
         rt_aeabi_memclr(&temp_v7,0x80);
@@ -190,7 +189,7 @@ void FUN_0037b7e4(void)
         temp_v4 = dataTable10FindValue(temp_v0);
         if (temp_v4 != 0) {
           dataTable01GetRecordWithAocOverride();
-          textFormatBuffer(&temp_v7,"%s",temp_v4);
+          sprintf((char *)&temp_v7,"%s",temp_v4);
         }
         else {
           rt_aeabi_memclr(&temp_v7,0x80);

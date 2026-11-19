@@ -1,4 +1,5 @@
 /* NON_MATCHING: return-storage construction matches; prologue, failure-path scheduling and literal-pool order differ. */
+#include "runtime/Stdio.h"
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
@@ -19,7 +20,6 @@ s32 legacyResourceIdRemap(const WindowStatusResult *result);
 void *jyoucyuGetTableEntry(s32 index);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 mode);
 void rt_memclr(void *buffer, u32 size);
-void textFormatBuffer(char *output, const char *format, ...);
 
 /* Queries an add-on archive's size, prepares its mount buffer, or translates the query failure. */
 WindowStatusOperationResult aocFileContentPrepareMountBuffer(AocFileContentBuffer *content, u32 id)
@@ -43,7 +43,7 @@ WindowStatusOperationResult aocFileContentPrepareMountBuffer(AocFileContentBuffe
     asdDebugTrace(DAT_003ff230, 190);
     content->buffer = asdMemoryAlloc(0x100, 0x100, 0, content->size, 1);
     rt_memclr(content->buffer, content->size);
-    textFormatBuffer(content->mount, DAT_003ff228, id);
+    __2sprintf(content->mount, DAT_003ff228, id);
     return operation;
 }
 }
