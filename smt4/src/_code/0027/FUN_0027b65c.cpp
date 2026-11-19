@@ -1,3 +1,4 @@
+#include "gamedata/Table2fCount.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027b65c` (_code @ 0x27b65c, 0xd74 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -8,7 +9,6 @@ int FUN_002a7c80(...);
 
 int aocDataTable23GetEntry(...);
 int FUN_0024f24c(...);
-int dataTable2fSub0GetCount(void);
 int FUN_0025b670(void);
 int FUN_00263cb8(...);
 int FUN_00298dc8(int);
@@ -66,7 +66,6 @@ extern int dataTableGetRecordFortyEight(void);
 extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
 extern int dataTable23Type0CountWithAoc(void);
 /* Supplied declaration required: FUN_0024f24c. */
-/* Supplied declaration required: dataTable2fSub0GetCount. */
 /* Supplied declaration required: FUN_0025b670. */
 /* Supplied declaration required: FUN_00263cb8. */
 extern unsigned int FUN_00276060(int);

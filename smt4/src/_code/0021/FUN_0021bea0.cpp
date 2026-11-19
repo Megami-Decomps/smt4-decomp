@@ -1,3 +1,4 @@
+#include "gamedata/Table2fCount.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021bea0` (_code @ 0x21bea0, 0x7dc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlock.h"
@@ -8,7 +9,6 @@
 extern "C" {
 
 int FUN_001f9334(int);
-int dataTable2fSub0GetCount(void);
 int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_002533f4(int, int, int);
 int mathDistanceBetweenPoints(void);
@@ -68,7 +68,6 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001f9334. */
-/* Supplied declaration required: dataTable2fSub0GetCount. */
 extern int dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_002533f4. */

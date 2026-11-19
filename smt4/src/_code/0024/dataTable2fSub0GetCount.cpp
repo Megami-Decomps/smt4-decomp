@@ -1,14 +1,7 @@
-#include "common.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/Table2fCount.h"
 
-extern "C" {
-
-int dataTableGetCount(void);
-int dataTableGet(int id, int index);
-
-void dataTable2fSub0GetCount(void)
+extern "C" s32 dataTable2fSub0GetCount(void)
 {
-    dataTableGet(0x2f, 0);
-    dataTableGetCount();
+    return static_cast<s32>(dataTableGetCount(dataTableGet(0x2f, 0)));
 }
-
-} /* extern "C" */

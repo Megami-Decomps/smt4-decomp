@@ -1,3 +1,4 @@
+#include "gamedata/Table2fCount.h"
 #include "common.h"
 
 // Private view of the record prefix accessed by this function.
@@ -8,7 +9,6 @@ struct Table2fSub0RecordView {
 };
 
 extern "C" {
-s32 dataTable2fSub0GetCount(void);
 const Table2fSub0RecordView* dataTable2fSub0GetRecord(s32 index);
 s32 gameFlagIsSet(s32 flag);
 
