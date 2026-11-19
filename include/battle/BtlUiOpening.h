@@ -29,7 +29,9 @@ union BtlUiOpeningView {
 /* Callees of the command-selection openers (btlUiStartCommandSelection, FUN_004abe2c). */
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-void eventPanelSelectSpritePreset(BtlUiObjBA *panel, s32 mode, s32 selection, s32 animate, s32 enabled);
+void btlUiStartCommandSelection(u32 unused, s32 mode, s8 first, s8 second, bool firstStrike, bool options);
+void FUN_004abe2c(BtlUiA *unused, s32 mode, s8 first, s8 second, bool firstStrike, bool options);
+void eventPanelSelectSpritePreset(BtlUiObjBA *panel, s32 mode, u8 optionB, u8 optionA, u8 animated);
 void FUN_002cd118(BtlUiObjAA *panel, s32 mode, s32 first, s32 second);
 void FUN_00227af0(const char *message);
 void menuStateReset();

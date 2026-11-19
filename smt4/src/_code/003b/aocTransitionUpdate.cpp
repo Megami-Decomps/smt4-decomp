@@ -34,13 +34,13 @@ static inline void saveSourcePosition(ContentTransition *scene)
 
 extern "C" void aocTransitionUpdate(ContentTransition *scene)
 {
-    if (scene->phase == 0) {
+    if (scene->step.phase == 0) {
         FUN_0022af9c(0);
         FUN_0028d664(&g_aocMain->scriptHolder, 1);
-        scene->phase = 1;
+        scene->step.phase = 1;
         return;
     }
-    if (scene->phase != 1)
+    if (scene->step.phase != 1)
         return;
     s32 status = FUN_0027398c(&g_aocMain->scriptHolder);
     if (status) {
@@ -53,31 +53,31 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
             scene->flags |= 0x10;
             if (g_mapSelection.selection.group < 200)
                 scene->flags |= 0x100100;
-            scene->phase = 0;
-            scene->state = 5;
+            scene->step.phase = 0;
+            scene->step.state = 5;
         } else if (g_gameState.entryValue) {
             saveSourcePosition(scene);
             gameSynchronizeMapState(scene);
             scene->flags |= 0x40100;
-            scene->phase = 0;
-            scene->state = 5;
+            scene->step.phase = 0;
+            scene->step.state = 5;
         } else {
             gameJumpRequestClear();
             FUN_0022af9c(1);
             buttonHelpSelectByProgress(scene);
-            scene->phase = 0;
-            scene->state = 5;
+            scene->step.phase = 0;
+            scene->step.state = 5;
         }
         if (status == 2) {
-            scene->state = 15;
-            scene->phase = 0;
+            scene->step.state = 15;
+            scene->step.phase = 0;
             return;
         }
     }
     u32 flags = g_aocMain->flags;
     g_aocMain->flags = flags & ~0x70u;
     if (flags & 0x10) {
-        scene->state = 15;
-        scene->phase = 0;
+        scene->step.state = 15;
+        scene->step.phase = 0;
     }
 }

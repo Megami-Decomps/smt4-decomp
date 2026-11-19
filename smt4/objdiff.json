@@ -4773,13 +4773,13 @@
       "target_path": "orig/target/_code/0010/randomStateSeed.o"
     },
     {
-      "base_path": "build/obj/_code/0010/FUN_00107784.o",
+      "base_path": "build/obj/_code/0010/screenFadeSlotDraw.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00107784",
+            "name": "screenFadeSlotDraw",
             "size": 348,
             "vram": "0x107784"
           }
@@ -4787,10 +4787,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0010/FUN_00107784.cpp"
+        "source_path": "src/_code/0010/screenFadeSlotDraw.cpp"
       },
-      "name": "_code/0010/FUN_00107784",
-      "target_path": "orig/target/_code/0010/FUN_00107784.o"
+      "name": "_code/0010/screenFadeSlotDraw",
+      "target_path": "orig/target/_code/0010/screenFadeSlotDraw.o"
     },
     {
       "base_path": "build/obj/_code/0010/frameTexReleaseWork.o",
@@ -24139,13 +24139,13 @@
       "target_path": "orig/target/_code/0014/FUN_00141a18.o"
     },
     {
-      "base_path": "build/obj/_code/0014/vectorSetAllOne.o",
+      "base_path": "build/obj/_code/0014/QuadVector__QuadVector.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "vectorSetAllOne",
+            "name": "_ZN10QuadVectorC1Ev",
             "size": 24,
             "vram": "0x141adc"
           }
@@ -24153,10 +24153,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0014/vectorSetAllOne.cpp"
+        "source_path": "src/_code/0014/QuadVector__QuadVector.cpp"
       },
-      "name": "_code/0014/vectorSetAllOne",
-      "target_path": "orig/target/_code/0014/vectorSetAllOne.o"
+      "name": "_code/0014/QuadVector__QuadVector",
+      "target_path": "orig/target/_code/0014/QuadVector__QuadVector.o"
     },
     {
       "base_path": "build/obj/_code/0014/optionalNestedValueGet.o",
@@ -51221,13 +51221,13 @@
       "target_path": "orig/target/_code/sound/soundTest/soundTestActionMenuUpdate.o"
     },
     {
-      "base_path": "build/obj/_code/kernel/jyoucyu/FUN_001e981c.o",
+      "base_path": "build/obj/_code/kernel/jyoucyu/jyoucyuDrawLoadingOverlay.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001e981c",
+            "name": "jyoucyuDrawLoadingOverlay",
             "size": 344,
             "vram": "0x1e981c"
           }
@@ -51236,10 +51236,10 @@
           "_code",
           "kernel/jyoucyu"
         ],
-        "source_path": "src/_code/kernel/jyoucyu/FUN_001e981c.cpp"
+        "source_path": "src/_code/kernel/jyoucyu/jyoucyuDrawLoadingOverlay.cpp"
       },
-      "name": "_code/kernel/jyoucyu/FUN_001e981c",
-      "target_path": "orig/target/_code/kernel/jyoucyu/FUN_001e981c.o"
+      "name": "_code/kernel/jyoucyu/jyoucyuDrawLoadingOverlay",
+      "target_path": "orig/target/_code/kernel/jyoucyu/jyoucyuDrawLoadingOverlay.o"
     },
     {
       "base_path": "build/obj/_code/title/titleMain/FUN_001e9990.o",
@@ -52690,13 +52690,13 @@
       "target_path": "orig/target/_code/001f/uniteGetState.o"
     },
     {
-      "base_path": "build/obj/_code/camp/Unite/Unite/FUN_001f3044.o",
+      "base_path": "build/obj/_code/camp/Unite/Unite/uniteCreate.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001f3044",
+            "name": "uniteCreate",
             "size": 1556,
             "vram": "0x1f3044"
           }
@@ -52705,10 +52705,10 @@
           "_code",
           "camp/Unite/Unite"
         ],
-        "source_path": "src/_code/camp/Unite/Unite/FUN_001f3044.cpp"
+        "source_path": "src/_code/camp/Unite/Unite/uniteCreate.cpp"
       },
-      "name": "_code/camp/Unite/Unite/FUN_001f3044",
-      "target_path": "orig/target/_code/camp/Unite/Unite/FUN_001f3044.o"
+      "name": "_code/camp/Unite/Unite/uniteCreate",
+      "target_path": "orig/target/_code/camp/Unite/Unite/uniteCreate.o"
     },
     {
       "base_path": "build/obj/_code/001f/VX2DecoderRelease.o",
@@ -69936,13 +69936,13 @@
       "target_path": "orig/target/_code/0023/FUN_00233410.o"
     },
     {
-      "base_path": "build/obj/_code/0023/curveEvaluateStandard.o",
+      "base_path": "build/obj/_code/0023/textMeasureOnLayer.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "curveEvaluateStandard",
+            "name": "textMeasureOnLayer",
             "size": 52,
             "vram": "0x23342c"
           }
@@ -69950,10 +69950,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/curveEvaluateStandard.cpp"
+        "source_path": "src/_code/0023/textMeasureOnLayer.cpp"
       },
-      "name": "_code/0023/curveEvaluateStandard",
-      "target_path": "orig/target/_code/0023/curveEvaluateStandard.o"
+      "name": "_code/0023/textMeasureOnLayer",
+      "target_path": "orig/target/_code/0023/textMeasureOnLayer.o"
     },
     {
       "base_path": "build/obj/_code/0023/uiInitializeEightTimerSet.o",
@@ -88602,13 +88602,13 @@
       "target_path": "orig/target/_code/0026/linkHolderApplyFlag.o"
     },
     {
-      "base_path": "build/obj/_code/0026/FUN_0026f824.o",
+      "base_path": "build/obj/_code/0026/playerInitNewGame.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0026f824",
+            "name": "playerInitNewGame",
             "size": 288,
             "vram": "0x26f824"
           }
@@ -88616,10 +88616,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0026/FUN_0026f824.cpp"
+        "source_path": "src/_code/0026/playerInitNewGame.cpp"
       },
-      "name": "_code/0026/FUN_0026f824",
-      "target_path": "orig/target/_code/0026/FUN_0026f824.o"
+      "name": "_code/0026/playerInitNewGame",
+      "target_path": "orig/target/_code/0026/playerInitNewGame.o"
     },
     {
       "base_path": "build/obj/_code/0026/FUN_0026f950.o",

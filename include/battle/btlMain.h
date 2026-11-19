@@ -414,6 +414,10 @@ typedef struct BtlMainStateA {
             /* 0x00EC */ s32 id;
         } encounterSelection;
         struct {
+            u8 prefix[0xA0];
+            /* 0x012C */ s32 row;    /* 1-based row of the "WPartyData" table (0x4E) the battle is fought with, 0 = the player's party */
+        } fixedParty;
+        struct {
             u8 prefix[0x3A4];
             /* 0x0430 */ BattleEncounterSlotA entries[50];
         } encounterSlots;
@@ -732,13 +736,22 @@ typedef struct BtlPartyBlockA {
 typedef struct BtlMainGlobalsA {
     /* 0x00 */ BtlMainStateA *state;
     /* 0x04 */ u8 unk04[8];
-    /* 0x0C */ BtlPartyBlockA *party;
-    /* 0x10 */ void *shared1;
+    union {
+        /* 0x0C */ BtlPartyBlockA *party;
+        /* 0x0C */ struct SavePartySectionA *partyTable; /* the fixed party: a whole party section, kept between battles */
+    };
+    union {
+        /* 0x10 */ void *shared1;
+        /* 0x10 */ u8 *partyFlags;                     /* the fixed party's flag values (0x10B8 bytes) */
+    };
     union {
         /* 0x14 */ u32 unk14;
         /* 0x14 */ void *partySubject;
+        /* 0x14 */ struct SlotRecordA *partyLeader;    /* the fixed party's first unit */
     };
-    /* 0x18 */ u8 unk18[0x0C];
+    /* 0x18 */ struct SavePartySectionA *playerTable; /* the player's own party section while the fixed party replaces it */
+    /* 0x1C */ u8 *playerFlags;                        /* the player's own flag values */
+    /* 0x20 */ u8 unk20[4];
     /* 0x24 */ u32 unk24;
     union {
         /* 0x28 */ u8 unk28[0x38];

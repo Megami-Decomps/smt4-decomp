@@ -1,4 +1,5 @@
-/* NON_MATCHING: same-file data now reproduces retail's single literal base (held state = frame counters - 48) and the single read of pollSucceeded; remaining: retail lays the poll test out inside the loop before its tail (no `continue` branch) and loads the held-state literal before g_padInputState. */
+/* NON_MATCHING: 6 lines, only the literal pool order: retail pools &DAT_004e3c28 ahead of g_padInputState (the
+ * entry loads take the two words in the other order). Code and layout match. */
 #include "common.h"
 
 struct PadReader;
@@ -35,12 +36,13 @@ void FUN_00107934()
     }
     s32 pollSucceeded = g_padInputState.pollSucceeded;
     for (s32 i = 0; i < 31; i++) {
-        u32 buttons = 0;
+        u32 buttons;
         if (DAT_00409ab0[i].disabled == 0) {
-            if (pollSucceeded <= 0) {
+            if (pollSucceeded <= 0)
                 continue;
-            }
             buttons = DAT_004e3c28[0].held;
+        } else {
+            buttons = 0;
         }
         if ((buttons & DAT_00409ab0[i].mask) != 0) {
             ++g_padHeldFrames[i];

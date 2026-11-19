@@ -1,5 +1,6 @@
-/* NON_MATCHING: corrected draw argument order; color copies, float setup scheduling, and global literal-pool order still differ. */
+/* NON_MATCHING: 6 lines, only the literal pool order: retail pools g_btlMainState ahead of g_titleScene (the code is the same). */
 #include "common.h"
+#include "gfx/ColoredQuad.h"
 #include "camp/RenderCtx.h"
 #include <stddef.h>
 #include "camp/RenderCtxTitle.h"
@@ -14,8 +15,6 @@ typedef char BattleOverlayColorOffsetCheck[offsetof(BattleOverlayView, color) ==
 extern "C" {
 extern BattleOverlayView *g_btlMainState;
 void forwardRecoveredCallback(void);
-void gxSubmitDrawZeroExtraParams(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
-                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 s32 renderCtxPackPassFlags(u32 mode, u32 enabled);
 
 // Draw the battle's full-screen color overlay, preserving the current render state.
@@ -25,7 +24,7 @@ s32 FUN_001e4ac0(u32 job)
     renderCtxPushA(g_titleScene, renderCtxPackPassFlags(5, 1));
     renderCtxSelectStereoLayout(g_titleScene);
     renderCtxSelectTexture(g_titleScene, 0);
-    gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
+    gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 400.0f, 240.0f, color, color, color, 0.0f, color);
     forwardRecoveredCallback();
     renderStackPop(&g_titleScene->stackA);
     return 0;

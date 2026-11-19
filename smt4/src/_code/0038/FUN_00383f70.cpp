@@ -1,4 +1,5 @@
 #include "quest_center/QuestText.h"
+#include "gfx/ColoredQuad.h"
 /* NON_MATCHING: selection pointer is hoisted across row draws; saved registers and VFP argument scheduling differ. */
 #include "ui/DebugItemList.h"
 #include "camp/RenderCtx.h"
@@ -8,7 +9,6 @@
 extern "C" {
 extern const char DAT_00405890[];
 extern const char DAT_004058c8[];
-void gxSubmitDrawZeroExtraParams(u32 red, u32 green, u32 blue, u32 alpha, f32 x, f32 y, f32 width, f32 height, f32 scale);
 u32 flaggedEntryGetValueByState(FlaggedValueHolder *selection);
 
 // Draw the visible item names and a cursor, or the empty-list message.
@@ -18,7 +18,7 @@ void FUN_00383f70(DebugItemList *work)
         return;
     }
     renderCtxSelectTexture(g_titleScene, 0);
-    gxSubmitDrawZeroExtraParams(128, 128, 128, 128, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);
+    gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 320.0f, 240.0f, 128, 128, 128, 0.0f, 128);
     // The bounds lie in the holder's byte-aligned padding; adding s32 fields there would move its layout.
     struct ListBoundsView { u8 unk00[4]; s32 count; s32 visible; };
     typedef char ListBoundsOffsetCheck[offsetof(ListBoundsView, count) == 4 &&

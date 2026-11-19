@@ -1,4 +1,5 @@
-/* NON_MATCHING: Mode-byte saves and coordinate/slot store scheduling differ. */
+/* NON_MATCHING: writes the two final -1 slots too early. */
+#include "event/SpatialEffectTask.h"
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -11,8 +12,8 @@ void sysMemClear(void *memory, u32 size);
 u32 FUN_00389b58(u32 selector);
 
 SpatialTaskWorkA *FUN_0031ba34(u32 selector, u32 *activeFlag,
-                              u8 mode, u8 option,
-                              f32 x, f32 y, f32 z, f32 initialValue)
+                              f32 x, f32 y, f32 z, f32 scale,
+                              u8 mode, u8 option)
 {
     SpatialTaskWorkA *state = static_cast<SpatialTaskWorkA *>(
         taskCreate(FUN_002c17dc, 0, 0, 0, 0, 0x168, 3, 0, 0));
@@ -29,8 +30,8 @@ SpatialTaskWorkA *FUN_0031ba34(u32 selector, u32 *activeFlag,
         state->selectorByte = static_cast<u8>(selector);
         state->mode = mode;
         state->option = option;
-        state->initialValue = initialValue;
-        state->currentValue = initialValue;
+        state->initialValue = scale;
+        state->currentValue = scale;
         state->slotA = 0xffffffffu;
         state->slotB = 0xffffffffu;
     }

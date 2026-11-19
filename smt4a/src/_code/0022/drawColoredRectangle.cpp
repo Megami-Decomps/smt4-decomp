@@ -1,10 +1,10 @@
 #include "camp/RenderCtx.h"
+#include "gfx/ColoredQuad.h"
 #include "camp/RenderCtxA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
 s32 renderCtxPackPassFlags(u32, u32);
-void gxSubmitDrawZeroExtraParams(u32, u32, u32, u32, f32, f32, f32, f32, f32);
 
 /* Draws the rectangle in its colour at `depth` under a temporary render-state preset. */
 static __inline void drawColoredRectangle(const ColoredRectangle *box, f32 depth)
@@ -13,8 +13,8 @@ static __inline void drawColoredRectangle(const ColoredRectangle *box, f32 depth
     renderCtxSelectTexture(g_renderCtx, 0);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 0));
-    gxSubmitDrawZeroExtraParams(color, color, color, color,
-                box->left, box->top, box->right - box->left, box->bottom - box->top, depth);
+    gxSubmitDrawZeroExtraParams(box->left, box->top, box->right - box->left, box->bottom - box->top,
+                                color, color, color, depth, color);
     renderStackPop(&g_renderCtx->stackA);
 }
 

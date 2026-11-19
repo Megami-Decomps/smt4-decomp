@@ -4,7 +4,7 @@
 /* Functions in the 0x00160000 code block whose subsystem is not known yet; each declaration matches its definition. */
 extern "C" {
 
-void FUN_00164034(u32 first, u32 second, u32 third, f32 value0, f32 value1, f32 value2, f32 value3, u32 fourth, f32 value4);
+void FUN_00164034(f32 value0, f32 value1, f32 value2, f32 value3, u32 first, u32 second, u32 third, u32 fourth, f32 value4);
 
 u32 texDrawCompositeSprite(u32 flags, u32 bank, u32 node, s32 x, s32 y, s32 depth);
 

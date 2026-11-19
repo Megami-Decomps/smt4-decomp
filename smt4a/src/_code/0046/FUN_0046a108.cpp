@@ -1,5 +1,7 @@
-/* NON_MATCHING: only the load order of the 320.0f/240.0f background arguments differs (retail loads them after the integer colour moves). */
+/* NON_MATCHING: only the loop's textDrawString argument schedule differs: retail converts the line's y in s1 and
+ * sets x (s0 = 24.0f) early; this build converts through s0 and sets x last. */
 #include "common.h"
+#include "gfx/ColoredQuad.h"
 #include <stddef.h>
 #include "text/TextDraw.h"
 #include "camp/RenderCtxA.h"
@@ -27,7 +29,6 @@ typedef char MessageDebugOverlayOffsets[
 extern "C" {
 extern const char DAT_00533528[];
 extern const char DAT_00533560[];
-void gxSubmitDrawZeroExtraParams(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
 const char *FUN_00156850(u16 id, u32 variant);
 s32 FUN_0031d174(const void *queue);
 
@@ -37,7 +38,7 @@ void FUN_0046a108(MessageDebugOverlayView *overlay)
     if (!(overlay->flags & 0x20))
         return;
     renderCtxSelectTexture(g_renderCtx, 0);
-    gxSubmitDrawZeroExtraParams(128, 128, 128, 128, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);
+    gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 320.0f, 240.0f, 128, 128, 128, 0.0f, 128);
     u32 color = 0xFFFFFFFF;
     s32 count = overlay->count;
     if (count > overlay->capacity)

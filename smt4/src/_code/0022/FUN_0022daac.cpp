@@ -1,4 +1,4 @@
-/* NON_MATCHING: prologue and layout-context addressing now match retail; the entry x/y saved registers are swapped (r8/r9) and the y sum is allocated to r1 instead of ip. */
+/* NON_MATCHING: only the saved registers of the entry x/y (retail r8 = x, r9 = y; built the reverse) differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "addon/LookupRecord.h"
@@ -10,8 +10,8 @@ static __inline UiLayoutResourceIV *ownerResource(void *owner)
 
 extern "C" {
 UiLayoutEntryPrefixIV *FUN_002bf4f0(UiLayoutResourceIV *resource, u32 entryId);
-void drawTextAtSnappedRectangle(UiLayoutResourceIV *resource, u32 layer, u32 mask,
-                  u32 convertedValue, f32 x, f32 y, f32 opacity,
+void drawTextAtSnappedRectangle(UiLayoutResourceIV *resource, f32 x, f32 y,
+                  u32 layer, u32 mask, u32 convertedValue, f32 opacity,
                   f32 rotation, f32 scale);
 
 void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
@@ -41,10 +41,10 @@ void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
     const s16 entryY = entry->y;
     const u32 convertedValue = (u32)dataTable01FindByIdWithAoc(value & 0xFFFFU);
     const UiLayoutEntryPrefixIV *anchor = FUN_002bf4f0(ownerResource(owner), anchorId);
-    const s32 y = anchor->y + entryY;
     const s32 x = anchor->x + entryX;
-    drawTextAtSnappedRectangle(ownerResource(owner), layer, mask, convertedValue,
-                 static_cast<f32>(x), static_cast<f32>(y),
+    const s32 y = anchor->y + entryY;
+    drawTextAtSnappedRectangle(ownerResource(owner), static_cast<f32>(x), static_cast<f32>(y), layer,
+                 mask, convertedValue,
                  opacity, 0.0f, 1.0f);
 }
 }

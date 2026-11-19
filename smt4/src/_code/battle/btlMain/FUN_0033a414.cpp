@@ -1,16 +1,16 @@
 #include "battle/BtlResidentLoader.h"
-/* NON_MATCHING: worker wait-result and argument descriptor stack slots and result-predicate lowering differ. */
+/* NON_MATCHING: 37 lines (21 by shape). The wait and the thread launch match; retail materialises the not-timeout test as 0/1 (movne/moveq, teq #1) before branching, and keeps the thread's address in r5 and the wait's result in r7 (swapped here). */
 #include "battle/btlMain.h"
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "sys/ResultReport.h"
+#include "sys/HandleWait.h"
 extern "C" {
 extern const char DAT_00400b68[];
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(u32 heap, u32 alignment, u32 mode, u32 bytes, u32 pageSize, u32 flags);
-s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, bool waitAll, s64 timeout);
 
 void FUN_003f6e74(void);
 void FUN_003f6fe0(void);
@@ -18,6 +18,22 @@ void FUN_003f6f44(void);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor,
     void (*entry)(void *), const void *argument, u32 stackTop, s32 priority,
     s32 processor, u32 flags);
+
+/* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is reported. */
+static __inline void btlStartWorkerThread(void *thread, void (*entry)(void *), void *argument, ThreadStackStorage &stack,
+                                          s32 priority, s32 processor)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.callbacks[0] = FUN_003f6e74;
+    descriptor.callbacks[1] = FUN_003f6fe0;
+    descriptor.callbacks[2] = FUN_003f6f44;
+    s32 result = FUN_002bcc60(thread, &descriptor, entry, &argument, stack.info.address + stack.info.size, priority,
+                              processor, 0);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        resultHandleFailure(result, failed);
+}
 
 // Create the battle worker once its previous invocation is no longer running.
 void FUN_0033a414(BtlMainState *state)
@@ -54,26 +70,9 @@ void FUN_0033a414(BtlMainState *state)
         worker->stack = stack;
         resultReportIfFailed(stack, worker->memory, 0x1000);
     }
-    if (worker->thread) {
-        u32 handle = worker->thread;
-        s32 index;
-        s32 result = FUN_002c40f8(&index, &handle, 1, false, 0);
-        bool failed = nnResultIsFailure(result);
-        if (failed)
-            resultHandleFailure(result, failed);
-        if (nnResultDescription(result) == 0x3FE)
-            return;
-    }
-    ThreadArgumentDescriptor descriptor;
-    descriptor.argumentSize = sizeof(state);
-    descriptor.callbacks[0] = FUN_003f6e74;
-    descriptor.callbacks[1] = FUN_003f6fe0;
-    descriptor.callbacks[2] = FUN_003f6f44;
-    BattleWorkerView *argument = worker;
-    s32 result = FUN_002bcc60(&worker->thread, &descriptor, btlAdvanceResidentResourceLoad, &argument,
-        worker->stack->info.address + worker->stack->info.size, 17, 0, 0);
-    bool failed = nnResultIsFailure(result);
-    if (failed)
-        resultHandleFailure(result, failed);
+    /* A worker that is still running keeps going. */
+    if (worker->thread && !nnResultIsNotTimeout(handleWait(worker->thread, 0)))
+        return;
+    btlStartWorkerThread(&worker->thread, btlAdvanceResidentResourceLoad, worker, *worker->stack, 17, 0);
 }
 }

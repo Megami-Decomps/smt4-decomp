@@ -63,7 +63,11 @@ typedef struct StatusDownStateA {
     /* 0x0528 */ u8 listActive;
     /* 0x0529 */ u8 unk529;
     /* 0x052A */ s8 active;
-    /* 0x052B */ u8 unk52B[0x11];
+    /* 0x052B */ u8 unk52B;
+    /* 0x052C */ s32 unk52C;
+    /* 0x0530 */ s32 unk530;
+    /* 0x0534 */ s32 unk534;
+    /* 0x0538 */ s32 unk538;
     /* 0x053C */ s32 indicatorFirst;
     /* 0x0540 */ s32 indicatorSecond;
     /* 0x0544 */ s16 slots[0x2A];           /* the record id of each row; filled with -1 */

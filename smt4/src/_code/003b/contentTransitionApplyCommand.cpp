@@ -1,4 +1,3 @@
-/* NON_MATCHING: -O2 candidate; case 2 uses flag-store writeback plus separate state/phase stores instead of retail's STRD. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 
 struct ContentTransitionCommand {
@@ -13,10 +12,12 @@ void FUN_0022b29c(ContentTransition *transition, s32 sourceMap, u32 destinationM
 void gameSynchronizeMapState(ContentTransition *transition);
 void __ARM_common_memcpy4_6(ShortJumpDestination *destination, const ShortJumpDestination *source);
 
+/* Applies a menu command to the transition: records its destination or request flag and enters state 5
+ * (state 4 for a map change). */
 void contentTransitionApplyCommand(ContentTransition *transition, const void *commandContext)
 {
-    transition->phase = 0;
-    transition->state = 5;
+    transition->step.phase = 0;
+    transition->step.state = 5;
     ShortJumpDestination destination;
     destination.map = 0;
     destination.area = 0;
@@ -37,8 +38,7 @@ void contentTransitionApplyCommand(ContentTransition *transition, const void *co
         destination.place = command->destination.place;
         __ARM_common_memcpy4_6(&transition->destination, &destination);
         transition->flags |= 0x100010;
-        transition->phase = 0;
-        transition->state = 5;
+        transition->step = contentTransitionStep(5, 0);
         return;
     case 7:
         gameSynchronizeMapState(transition);
@@ -61,8 +61,7 @@ void contentTransitionApplyCommand(ContentTransition *transition, const void *co
         break;
     case 8:
         FUN_0022b29c(transition, (s16)transition->sourceMap, command->destination.map);
-        transition->state = 4;
-        transition->phase = 0;
+        transition->step = contentTransitionStep(4, 0);
         return;
     case 9:
         gameSynchronizeMapState(transition);

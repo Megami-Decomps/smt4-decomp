@@ -1,405 +1,288 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00194278` (_code @ 0x194278, 0x898 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: 30 lines, same size, frame and block layout; registers only. The exit request reads its sequence into r0 through r3 and stores it before the name's address is formed (r1/r2 and one instruction later here), and the two entries into state 3 take the room pointer and the state constant in swapped registers (retail: r1/r0 after the single-event test, r0/r1 with the constant loaded early after the choice). */
 #include <stdio.h>
-#include "romwright_types.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/W6_W6Match1_BgmRequestChannel.h"
-#include "shop/shopMain.h"
+#include <string.h>
+#include "npc_room/NpcRoom.h"
+#include "gamedata/NpcRoomTable.h"
+#include "gamedata/GameDataAccess_VariantG.h"
+#include "util/MemoryHelpers_VariantA.h"
+#include "quest_center/qcMain.h"
 #include "game/GameState.h"
+#include "script/scrScriptProcess.h"
+#include "shop/shopMain.h"
+#include "sys/RuntimeObjects.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 extern "C" {
 
+extern NpcRoom *g_npcRoom;
 
-int npcRoomDestroy(void);
+void npcRoomDestroy(void);
+void titleSetSlotValueState2(s32 screen, s32 frames);
+void bgmRequestSelectedChannelFade(u32 frames);
+void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
+void jobSetIntensity(u32 job, s32 intensity);
+s32 slotIsReady(u32 index);
+u32 scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
+void buttonHelpSetContext(s32 context);
+u8 messageWindowIsState1(void);
+s32 messageTargetGetValue(void);
+void messageMainFinishWindow(void);
+s32 messageMainGetChoiceResult(void);
+void eventTexAddHandle(u32 job);
+s32 tableGroupFindEntryIndex(void *table, const char *name);
+void bgmFadeOut(s32 frames);
+void buttonHelpRelease(void);
+void uiFadeRelease(void);
+void soundChannelStopAll(s32 mask);
+void messageMainClearBannerRequest(void);
+void asdTMTexTableReleaseNode(s32 table, u32 node); // declcheck: local (its only header is Apocalypse's battle talk portrait; npcRoomDestroy declares it the same way)
 
-int scrRunOpcodesStub(...);
-void bgmRequestSelectedChannelFade(unsigned int frames);
-int bgmFadeOut(int);
-int buttonHelpRelease(void);
-int uiFadeRelease(void);
-int messageMainFinishWindow(void);
-int scrScriptProcessStartEntry(...);
-int scrScriptProcessCreate(...);
-int soundChannelStopAll(int);
-int slotSetRequest(...);
-int soundChannelRequestIfEnabled(int, int, int);
-int titleSetSlotValueState2(...);
-int fileSlotFree(int);
-int scrScriptProcessDestroy(...);
-int asdTMTexTableReleaseNode(int, int);
-int jobSetIntensity(unsigned int, int);
-int buttonHelpSetContext(...);
-int buttonHelpSetPreset(...);
-int asdMemFree(...);
-int jobStop(unsigned int, int);
-int asdSequenceRequest(...);
-int messageMainClearBannerRequest(void);
-int eventTexAddHandle(...);
-
-/* stack frame of void: 6 slot(s), 22 byte(s) */
-typedef struct {
-    unsigned short sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp68; /* 0x68: local_68 */
-} void_stack;
-
-extern unsigned char LAB_00194a44; /* 0x194a44 */
-extern unsigned char LAB_00194a60; /* 0x194a60 */
-extern unsigned int *g_npcRoom; /* 0x44d198 */
-
-
-
-
-
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
-extern int slotIsReady(unsigned int);
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: npcRoomDestroy. */
-/* Supplied declaration required: FUN_00290d5c. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
-extern int messageTargetGetValue(void);
-extern int messageWindowIsState1(void);
-/* Supplied declaration required: bgmFadeOut. */
-/* Supplied declaration required: buttonHelpRelease. */
-/* Supplied declaration required: uiFadeRelease. */
-/* Supplied declaration required: messageMainFinishWindow. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: scrScriptProcessCreate. */
-extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: titleSetSlotValueState2. */
-/* Supplied declaration required: fileSlotFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: jobSetIntensity. */
-/* Supplied declaration required: buttonHelpSetContext. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern int gameFlagIsSet(void);
-extern unsigned int dataTableGetCount(unsigned int);
-extern short *dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdSequenceRequest. */
-extern unsigned int asdLoadFileSyncDefault(unsigned int *);
-/* Supplied declaration required: messageMainClearBannerRequest. */
-/* Supplied declaration required: eventTexAddHandle. */
-
-
-unsigned int FUN_00194278(void)
-
+/* Enters `state` and restarts its frame counter. */
+static __inline void npcRoomSetState(s32 state)
 {
-/* irregular: 1 goto(s); 26 native warning(s); review required */
-  short temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  short *psVar7;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  unsigned int temp_v9;
-  unsigned int uStack_64;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned short temp_v14;
-  
-  puVar3 = g_npcRoom;
-  switch(g_npcRoom[0x3c]) {
-  case 0:
-    psVar7 = (short *)(g_npcRoom + 0x40);
-    temp_v5 = asdTMTexTableNodeIsLoaded(2,*(unsigned short *)((int)g_npcRoom + 0x102));
-    if (temp_v5 != 0) {
-      titleSetSlotValueState2(0,1);
-      titleSetSlotValueState2(1);
-      temp_v5 = 0;
-      do {
-        if (((*(short *)(puVar3[9] + temp_v5 * 0x18 + 0x24) != 0) &&
-            (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
-           ((*(short *)(puVar3[9] + temp_v5 * 0x18 + 0x26) == 0 ||
-            (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
-          temp_v9 = (unsigned int)*(unsigned short *)(puVar3[9] + temp_v5 * 0x18 + 0x28);
-          uStack_64 = 0xffffffff;
-          puVar3 = (unsigned int *)(temp_v5 * 0x18 + 0x2a + puVar3[9]);
-          temp_v10 = *puVar3;
-          temp_v11 = puVar3[1];
-          temp_v12 = puVar3[2];
-          temp_v13 = puVar3[3];
-          temp_v14 = *(unsigned short *)(puVar3 + 4);
-          asdSequenceRequest(4,&temp_v9,0x20);
-          puVar3 = g_npcRoom;
-          if (g_npcRoom != (unsigned int *)0x0) {
-            messageMainClearBannerRequest();
-            if (*(short *)(puVar3 + 0x40) == 0x22) {
-              soundChannelStopAll(0xf);
-              bgmFadeOut(0x3c);
+    NpcRoom *room = g_npcRoom;
+    room->state = state;
+    room->unkEC = 0;
+}
+
+/* npcRoomDestroy's body, as the update repeats it when the room is left through an exit. */
+static __inline void npcRoomRelease(void)
+{
+    NpcRoom *room = g_npcRoom;
+    s32 i;
+
+    if (g_npcRoom != NULL) {
+        messageMainClearBannerRequest();
+        if (room->mode == NPC_ROOM_MODE_SPECIAL) {
+            soundChannelStopAll(0xF);
+            bgmFadeOut(0x3C);
+        }
+        asdTMTexTableReleaseNode(2, room->unk102);
+        for (i = 0; i < NPC_ROOM_JOBS; i++) {
+            if (room->jobUsed[i] != 0) {
+                jobStop(room->jobs[i], 0);
             }
-            asdTMTexTableReleaseNode(2,*(unsigned short *)((int)puVar3 + 0x102));
-            temp_v5 = 0;
-            do {
-              if (puVar3[temp_v5 + 10] != 0) {
-                jobStop(puVar3[temp_v5 + 1],0);
-              }
-              temp_v5 = temp_v5 + 1;
-            } while (temp_v5 < 8);
-            scrScriptProcessDestroy(puVar3[0x14]);
-            scrScriptProcessDestroy(puVar3[0x15]);
-            asdMemFree(puVar3[0x13]);
-            asdMemFree(puVar3[0x12]);
-            jobStop(*puVar3,0);
-            asdMemFree(puVar3);
-            g_npcRoom = (unsigned int *)0x0;
-            fileSlotFree(0x35);
-            fileSlotFree(0x1a);
-            buttonHelpRelease();
-            uiFadeRelease();
-          }
-          return 0xffffffff;
         }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 3);
-      if (*psVar7 == 0x22) {
-        bgmRequestSelectedChannelFade(0x1e);
-        soundChannelRequestIfEnabled(0x100005e,0,0x3c);
-      }
-      puVar3[0x41] = 0;
-      temp_v5 = 0;
-      if (temp_v5 < (int)puVar3[0x39]) {
-        do {
-          temp_v2 = 0;
-          do {
-            temp_v7 = (int)*(short *)((int)puVar3 + temp_v2 * 2 + temp_v5 * 0x10 + 100);
-            if (-1 < temp_v7) {
-              jobSetIntensity(puVar3[temp_v7 + 1],0);
+        scrScriptProcessDestroy(room->processA);
+        scrScriptProcessDestroy(room->processB);
+        asdMemFree(room->dataB);
+        asdMemFree(room->dataA);
+        jobStop(room->job, 0);
+        asdMemFree(room);
+        g_npcRoom = NULL;
+        fileSlotFree(0x35);
+        fileSlotFree(0x1A);
+        buttonHelpRelease();
+        uiFadeRelease();
+    }
+}
+
+/* Finds the room's row of table 0. */
+static __inline void npcRoomFindRecord(u16 id)
+{
+    NpcRoom *room = g_npcRoom;
+    room->record = NULL;
+    void *table = dataTableGet(0x35, 0);
+    NpcRoomRecordIV *row = static_cast<NpcRoomRecordIV *>(dataTableGetEntries(table));
+    u32 count = dataTableGetCount(table);
+    for (u32 i = 0; i < count; i++, row++) {
+        if (row->id == id) {
+            room->record = row;
+            break;
+        }
+    }
+}
+
+/* Lists the room's events whose flag conditions hold, up to eight. */
+static __inline void npcRoomCollectEvents(u16 id)
+{
+    NpcRoom *room = g_npcRoom;
+    room->events[0] = NULL;
+    room->events[1] = NULL;
+    room->events[2] = NULL;
+    room->events[3] = NULL;
+    void *table = dataTableGet(0x35, 1);
+    NpcRoomEventRecordIV *row = static_cast<NpcRoomEventRecordIV *>(dataTableGetEntries(table));
+    u32 count = dataTableGetCount(table);
+    room->eventCount = 0;
+    for (u32 i = 0; i < count; i++, row++) {
+        if (row->id == id && (row->requiredFlagA == 0 || gameFlagIsSet(row->requiredFlagA)) &&
+            (row->requiredFlagB == 0 || gameFlagIsSet(row->requiredFlagB)) &&
+            (row->excludedFlagA == 0 || !gameFlagIsSet(row->excludedFlagA)) &&
+            (row->excludedFlagB == 0 || !gameFlagIsSet(row->excludedFlagB))) {
+            room->events[room->eventCount] = row;
+            if (++room->eventCount >= NPC_ROOM_JOBS) {
+                break;
             }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < 8);
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < (int)puVar3[0x39]);
-      }
-      puVar2 = g_npcRoom;
-      g_npcRoom[0x3b] = 0;
-      puVar2[0x3c] = 1;
-    }
-    break;
-  case 1:
-    temp_v5 = slotIsReady(0);
-    if (temp_v5 != 0) break;
-    temp_v5 = puVar3[0x3d];
-    if (temp_v5 < 1) {
-      temp_v5 = scrScriptProcessStartEntry(puVar3[0x14],2);
-      if (temp_v5 != 0) {
-        buttonHelpSetPreset(0xa2);
-        puVar2 = g_npcRoom;
-        g_npcRoom[0x3b] = 0;
-        puVar2[0x3c] = 5;
-      }
-      break;
-    }
-    if (temp_v5 != 1) {
-      if (temp_v5 != 2) {
-        if (temp_v5 < 2) break;
-      }
-      else if (puVar3[0x39] == 1) goto LAB_001945e8;
-      temp_v5 = scrScriptProcessStartEntry(puVar3[0x14],0);
-      if (temp_v5 != 0) {
-        scrScriptProcessStartEntry(puVar3[0x15],1);
-        puVar2 = g_npcRoom;
-        g_npcRoom[0x3b] = 0;
-        puVar2[0x3c] = 2;
-      }
-    }
-    else {
-LAB_001945e8:
-      puVar3[0x3e] = 0;
-      puVar3[0x3f] = 0;
-      puVar2 = g_npcRoom;
-      g_npcRoom[0x3b] = 0;
-      puVar2[0x3c] = 3;
-    }
-    break;
-  case 2:
-    temp_v5 = messageWindowIsState1();
-    if ((temp_v5 != 0) && (temp_v5 = 0, 0 < (int)puVar3[0x39])) {
-      do {
-        temp_v2 = messageTargetGetValue();
-        temp_v7 = 0;
-        do {
-          temp_v1 = (int)*(short *)((int)puVar3 + temp_v7 * 2 + temp_v5 * 0x10 + 100);
-          if (-1 < temp_v1) {
-            jobSetIntensity(puVar3[temp_v1 + 1],temp_v2 == temp_v5);
-          }
-          temp_v7 = temp_v7 + 1;
-        } while (temp_v7 < 8);
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < (int)puVar3[0x39]);
-    }
-    scrRunOpcodesStub(puVar3[0x14]);
-    scrRunOpcodesStub(puVar3[0x15]);
-    temp_v5 = messageBannerIsIdle();
-    if (temp_v5 == 0) break;
-    messageMainFinishWindow();
-    temp_v5 = messageMainGetChoiceResult();
-    if (-1 < temp_v5) {
-      temp_v5 = messageMainGetChoiceResult();
-      puVar3[0x3f] = temp_v5;
-      puVar3[0x3e] = (int)*(short *)(puVar3 + temp_v5 * 4 + 0x19);
-      puVar2 = g_npcRoom;
-      g_npcRoom[0x3b] = 0;
-      puVar2[0x3c] = 3;
-      puVar3[0x41] = puVar3[0x3f];
-      break;
-    }
-    slotSetRequest(0,10,0xff);
-    puVar2 = g_npcRoom;
-    g_npcRoom[0x3b] = 0;
-    puVar2[0x3c] = 6;
-    break;
-  case 3:
-    temp_v5 = 0;
-    do {
-      temp_v2 = (int)*(short *)((int)puVar3 + temp_v5 * 2 + puVar3[0x3f] * 0x10 + 100);
-      if (-1 < temp_v2) {
-        eventTexAddHandle(puVar3[temp_v2 + 1]);
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 8);
-    sprintf((char *)&temp_v9,(const char *)&LAB_00194a44,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
-                 *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
-    temp_v3 = asdLoadFileSyncDefault(&temp_v9);
-    puVar3[0x16] = temp_v3;
-    sprintf((char *)&temp_v9,(const char *)&LAB_00194a60,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
-                 *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
-    temp_v3 = asdLoadFileSyncDefault(&temp_v9);
-    puVar3[0x17] = temp_v3;
-    scrScriptProcessCreate(temp_v3,puVar3[0x16]);
-    puVar3[0x18] = temp_v3;
-    temp_v3 = tableGroupFindEntryIndex(puVar3[0x17],puVar3[puVar3[0x3e] + 10] + 0x16);
-    scrScriptProcessStartEntry(puVar3[0x18],temp_v3);
-    puVar2 = g_npcRoom;
-    g_npcRoom[0x3b] = 0;
-    puVar2[0x3c] = 4;
-    buttonHelpSetContext(0xa2);
-    buttonHelpSetPreset(0xa2);
-    break;
-  case 4:
-    temp_v5 = scrRunOpcodesStub(g_npcRoom[0x18]);
-    if (temp_v5 != 2) break;
-    scrScriptProcessDestroy(puVar3[0x18]);
-    asdMemFree(puVar3[0x17]);
-    asdMemFree(puVar3[0x16]);
-    puVar2 = g_npcRoom;
-    temp_v0 = *(short *)(puVar3 + 0x40);
-    g_npcRoom[9] = 0;
-    temp_v3 = dataTableGet(0x35,0);
-    psVar7 = (short *)dataTableGetEntries();
-    temp_v4 = dataTableGetCount(temp_v3);
-    temp_v6 = 0;
-    if (temp_v4 != 0) {
-      do {
-        if (*psVar7 == temp_v0) {
-          puVar2[9] = (unsigned int)psVar7;
-          break;
         }
-        temp_v6 = temp_v6 + 1;
-        psVar7 = psVar7 + 0x36;
-      } while (temp_v6 < temp_v4);
     }
-    puVar2 = g_npcRoom;
-    temp_v0 = *(short *)(puVar3 + 0x40);
-    g_npcRoom[10] = 0;
-    puVar2[0xb] = 0;
-    puVar2[0xc] = 0;
-    puVar2[0xd] = 0;
-    temp_v3 = dataTableGet(0x35,1);
-    psVar7 = (short *)dataTableGetEntries();
-    temp_v4 = dataTableGetCount(temp_v3);
-    temp_v6 = 0;
-    puVar2[0x3d] = 0;
-    if (temp_v4 != 0) {
-      do {
-        if ((((*psVar7 == temp_v0) && ((psVar7[7] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
-            ((psVar7[8] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
-           (((psVar7[9] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)) &&
-            ((psVar7[10] == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))))) {
-          puVar2[puVar2[0x3d] + 10] = (unsigned int)psVar7;
-          temp_v5 = puVar2[0x3d];
-          puVar2[0x3d] = temp_v5 + 1;
-          if (temp_v5 + 1 >= 8) break;
+}
+
+/* The NPC room's update: fades in, lets the player choose an occupant, plays its event script and lists the
+   events again, until the room is left. Returns -1 once the room has been destroyed. */
+s32 FUN_00194278(void)
+{
+    NpcRoom *room = g_npcRoom;
+
+    switch (room->state) {
+    case 0:
+        if (asdTMTexTableNodeIsLoaded(2, room->unk102)) {
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 1);
+            /* An exit whose flags hold replaces the room at once. */
+            for (s32 i = 0; i < 3; i++) {
+                if (room->record->exits[i].requiredFlag != 0 && gameFlagIsSet(room->record->exits[i].requiredFlag) &&
+                    (room->record->exits[i].excludedFlag == 0 || !gameFlagIsSet(room->record->exits[i].excludedFlag))) {
+                    EntrySequencePacket request;
+                    request.id = room->record->exits[i].sequence;
+                    request.argument = -1;
+                    memcpy(request.name, room->record->exits[i].name, sizeof(room->record->exits[i].name));
+                    asdSequenceRequest(4, &request, sizeof(request));
+                    npcRoomRelease();
+                    return -1;
+                }
+            }
+            if (room->mode == NPC_ROOM_MODE_SPECIAL) {
+                bgmRequestSelectedChannelFade(30);
+                soundChannelRequestIfEnabled(0x100005E, 0, 60);
+            }
+            room->highlightedRow = 0;
+            for (s32 row = 0; row < room->displayCount; row++) {
+                for (s32 column = 0; column < NPC_ROOM_JOBS; column++) {
+                    s32 model = room->displayModels[row][column];
+                    if (model >= 0) {
+                        jobSetIntensity(room->jobs[model], 0);
+                    }
+                }
+            }
+            npcRoomSetState(1);
         }
-        temp_v6 = temp_v6 + 1;
-        psVar7 = psVar7 + 0x6a;
-      } while (temp_v6 < temp_v4);
-    }
-    puVar2 = g_npcRoom;
-    temp_v5 = puVar3[0x3d];
-    if (temp_v5 >= 2) {
-      temp_v8 = temp_v5 == 2;
-      if (temp_v8) {
-        temp_v5 = puVar3[0x39];
-      }
-      if (!temp_v8 || temp_v5 != 1) {
-        g_npcRoom[0x3b] = 0;
-        puVar2[0x3c] = 1;
-        buttonHelpSetContext(0xa0);
-        FUN_00290d5c(0xa0);
         break;
-      }
+    case 1:
+        if (!slotIsReady(0)) {
+            if (room->eventCount <= 0) {
+                /* Nobody is in: the room's own script says so. */
+                if (scrScriptProcessStartEntry(room->processA, 2)) {
+                    buttonHelpSetPreset(0xA2);
+                    npcRoomSetState(5);
+                }
+            } else if (room->eventCount == 1 || (room->eventCount == 2 && room->displayCount == 1)) {
+                room->selectedEvent = 0;
+                room->unkFC = 0;
+                npcRoomSetState(3);
+            } else if (room->eventCount > 1) {
+                if (scrScriptProcessStartEntry(room->processA, 0)) {
+                    scrScriptProcessStartEntry(room->processB, 1);
+                    npcRoomSetState(2);
+                }
+            }
+        }
+        break;
+    case 2:
+        /* The choice of an occupant: the row under the cursor is lit. */
+        if (messageWindowIsState1()) {
+            for (s32 row = 0; row < room->displayCount; row++) {
+                s32 lit = 0;
+                if (messageTargetGetValue() == row) {
+                    lit = 1;
+                }
+                for (s32 column = 0; column < NPC_ROOM_JOBS; column++) {
+                    s32 model = room->displayModels[row][column];
+                    if (model >= 0) {
+                        jobSetIntensity(room->jobs[model], lit);
+                    }
+                }
+            }
+        }
+        scrRunOpcodesStub(room->processA);
+        scrRunOpcodesStub(room->processB);
+        if (messageBannerIsIdle()) {
+            messageMainFinishWindow();
+            if (messageMainGetChoiceResult() >= 0) {
+                room->unkFC = messageMainGetChoiceResult();
+                room->selectedEvent = room->displayModels[room->unkFC][0];
+                npcRoomSetState(3);
+                room->highlightedRow = room->unkFC;
+            } else {
+                slotSetRequest(0, 10, 0xFF);
+                npcRoomSetState(6);
+            }
+        }
+        break;
+    case 3: {
+        char path[64];
+        for (s32 column = 0; column < NPC_ROOM_JOBS; column++) {
+            s32 model = room->displayModels[room->unkFC][column];
+            if (model >= 0) {
+                eventTexAddHandle(room->jobs[model]);
+            }
+        }
+        sprintf(path, "npc_room/n%03d/n%03d.mbm", room->events[room->selectedEvent]->id,
+                   room->events[room->selectedEvent]->id);
+        room->eventMessages = asdLoadFileSyncDefault(path);
+        sprintf(path, "npc_room/n%03d/n%03d.bf", room->events[room->selectedEvent]->id,
+                   room->events[room->selectedEvent]->id);
+        room->eventScript = asdLoadFileSyncDefault(path);
+        room->eventProcess = scrScriptProcessCreate(room->eventScript, room->eventMessages);
+        scrScriptProcessStartEntry(room->eventProcess,
+                                   tableGroupFindEntryIndex(room->eventScript, room->events[room->selectedEvent]->label));
+        npcRoomSetState(4);
+        buttonHelpSetContext(0xA2);
+        buttonHelpSetPreset(0xA2);
+        break;
     }
-    slotSetRequest(0,10,0xff);
-    puVar2 = g_npcRoom;
-    g_npcRoom[0x3b] = 0;
-    puVar2[0x3c] = 6;
-    break;
-  case 5:
-    temp_v5 = scrRunOpcodesStub(g_npcRoom[0x14]);
-    if (temp_v5 != 2) break;
-    slotSetRequest(0,10,0xff);
-    puVar2 = g_npcRoom;
-    g_npcRoom[0x3b] = 0;
-    puVar2[0x3c] = 6;
-    break;
-  case 6:
-    temp_v5 = slotIsReady(0);
-    puVar2 = g_npcRoom;
-    if (temp_v5 == 0) {
-      g_npcRoom[0x3b] = 0;
-      puVar2[0x3c] = 7;
+    case 4:
+        if (scrRunOpcodesStub(room->eventProcess) == 2) {
+            scrScriptProcessDestroy(room->eventProcess);
+            asdMemFree(room->eventScript);
+            asdMemFree(room->eventMessages);
+            /* The event may have changed the flags: list the events again. */
+            npcRoomFindRecord(room->mode);
+            npcRoomCollectEvents(room->mode);
+            if (room->eventCount > 1 && !(room->eventCount == 2 && room->displayCount == 1)) {
+                npcRoomSetState(1);
+                buttonHelpSetContext(0xA0);
+                FUN_00290d5c(0xA0);
+            } else {
+                slotSetRequest(0, 10, 0xFF);
+                npcRoomSetState(6);
+            }
+        }
+        break;
+    case 5:
+        if (scrRunOpcodesStub(room->processA) == 2) {
+            slotSetRequest(0, 10, 0xFF);
+            npcRoomSetState(6);
+        }
+        break;
+    case 6:
+        if (!slotIsReady(0)) {
+            npcRoomSetState(7);
+        }
+        break;
+    case 7:
+        if (g_gameState.map.savedLocationSet) {
+            if (g_gameState.resumeMode == 1) {
+                asdSequenceRequest(6, NULL, 0);
+            }
+            if (g_gameState.resumeMode == 3) {
+                s16 location[2];
+                location[0] = g_gameState.savedMapId - 200;
+                location[1] = g_gameState.savedAreaId;
+                asdSequenceRequest(14, location, sizeof(location));
+            }
+        } else {
+            titleSetSlotValueState2(0, 1);
+            titleSetSlotValueState2(1, 1);
+        }
+        npcRoomDestroy();
+        return -1;
     }
-    break;
-  case 7:
-    if (g_gameState.map.savedLocationSet != '\0') {
-      if (g_gameState.resumeMode == 1) {
-        asdSequenceRequest(6,0);
-      }
-      if (g_gameState.resumeMode == 3) {
-        temp_v9 = romwright_piece_2_2((short)g_gameState.savedAreaId,(short)g_gameState.savedMapId - 200);
-        asdSequenceRequest(0xe,&temp_v9,4);
-      }
-    }
-    else {
-      titleSetSlotValueState2(0,1);
-      titleSetSlotValueState2(1);
-    }
-    npcRoomDestroy();
-    return 0xffffffff;
-  }
-  puVar3[0x3b] = puVar3[0x3b] + 1;
-  return 0;
+    room->unkEC++;
+    return 0;
 }
 
 } /* extern "C" */

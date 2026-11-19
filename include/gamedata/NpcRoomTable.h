@@ -28,6 +28,39 @@ typedef char NpcRoomEventRecordLayoutCheck[
     offsetof(NpcRoomEventRecord, excludedFlagA) == 0x12 &&
     offsetof(NpcRoomEventRecord, param) == 0x52 ? 1 : -1];
 
+/* IV: a way out of a room, taken as the room opens when `requiredFlag` is set and `excludedFlag` (if any) is
+ * clear: sequence 4 is requested with `sequence` and `name`. */
+struct NpcRoomExitIV {
+    /* 0x00 */ u16 requiredFlag;          /* 0 = unused */
+    /* 0x02 */ u16 excludedFlag;
+    /* 0x04 */ u16 sequence;
+    /* 0x06 */ char name[0x12];
+};
+
+/* IV: one 0x6C-byte row of NpcRoomTable.tbb table 0 (data table 0x35, section 0): a room. */
+struct NpcRoomRecordIV {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0x22];
+    /* 0x24 */ NpcRoomExitIV exits[3];
+};
+
+/* IV: one 0xD4-byte row of table 1 (section 1): an event of room `id`, available while its required flags
+ * are set and its excluded flags clear. Its files are npc_room/n<id>/n<id>.mbm and .bf. */
+struct NpcRoomEventRecordIV {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0xC];
+    /* 0x0E */ u16 requiredFlagA;         /* 0 = none; else a game flag that must be set */
+    /* 0x10 */ u16 requiredFlagB;
+    /* 0x12 */ u16 excludedFlagA;         /* 0 = none; else a game flag that must be clear */
+    /* 0x14 */ u16 excludedFlagB;
+    /* 0x16 */ char label[0xBE];          /* the script entry the event starts at */
+};
+
+typedef char NpcRoomRecordIVLayoutCheck[
+    sizeof(NpcRoomExitIV) == 0x18 && sizeof(NpcRoomRecordIV) == 0x6C && offsetof(NpcRoomRecordIV, exits) == 0x24 &&
+    sizeof(NpcRoomEventRecordIV) == 0xD4 && offsetof(NpcRoomEventRecordIV, requiredFlagA) == 0x0E &&
+    offsetof(NpcRoomEventRecordIV, label) == 0x16 ? 1 : -1];
+
 #ifdef __cplusplus
 /* Apocalypse: the first event for `id` whose required/excluded flag conditions hold. */
 extern "C" NpcRoomEventRecord *dataTableFindMatching35(u32 id);

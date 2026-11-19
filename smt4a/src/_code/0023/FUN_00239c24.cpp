@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00239c24` (_code @ 0x239c24, 0x908 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gamedata/MapSaveBlockA.h"
+#include "map/MapSceneAccess_Smt4a.h"
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "romwright_types.h"
 #include "game/GameStateA.h"
 
@@ -23,7 +25,6 @@ int FUN_003273ac(int);
 int FUN_003276f0(...);
 int FUN_00331efc(void);
 int FUN_00398004(int);
-void FUN_003ae3c4(float x, float y, float z);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -63,7 +64,7 @@ extern int lmapGetSpawnIndex(void);
 extern int FUN_003857c8(int);
 /* Supplied declaration required: FUN_00398004. */
 extern int FUN_003adc40(void);
-/* Supplied declaration required: FUN_003ae3c4. */
+/* Supplied declaration required: mapRegisterPendingSpawnMarker. */
 
 void FUN_00239c24(void)
 
@@ -268,11 +269,12 @@ void FUN_00239c24(void)
       }
       FUN_00281b94((int)(short)(int)temp_v17);
     }
-    temp_v3 = (int)gameFlagsGetBlock();
-    if (*(char *)(temp_v3 + 0x1664) != '\0') {
-      temp_v4 = (short)*(char *)(temp_v3 + 0x1665) * 700 + 0x15e;
-      temp_v3 = (short)*(char *)(temp_v3 + 0x1666) * 700 + 0x15e;
-      FUN_003ae3c4((float)temp_v4, 0.0f, (float)temp_v3);
+    const MapSaveBlockA *flags = gameFlagsGetBlock();
+    if (flags->spawnPending != 0) {
+      const BattleVector3 spawnPosition = {
+        (f32)(flags->pendingSpawnX * 700 + 350), 0.0f, (f32)(flags->pendingSpawnZ * 700 + 350)
+      };
+      mapRegisterPendingSpawnMarker(spawnPosition);
     }
   }
   temp_v3 = (int)gameFlagsGetBlock();

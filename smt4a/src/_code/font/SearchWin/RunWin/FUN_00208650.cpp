@@ -1,4 +1,4 @@
-/* NON_MATCHING: label coordinate register allocation and the draw call's argument and literal-pool order differ. */
+/* NON_MATCHING: the label draw and the dot grid match; only the lit-dot computation differs: retail keeps frame / 5 in r0 and adds 4 to it before storing the first predecessor (build: r1, added after the store). */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"

@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int mapMenuDispatchAction(...);
+int contentTransitionApplyCommand(...);
 
 int sysPlaySe(...);
 int buttonHelpSetText(int, unsigned int);
@@ -50,7 +50,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00407a80. */
 /* Supplied declaration required: FUN_004080bc. */
 extern int rosterGetLeaderId(void);
-/* Supplied declaration required: mapMenuDispatchAction. */
+/* Supplied declaration required: contentTransitionApplyCommand. */
 /* Supplied declaration required: FUN_004b7d88. */
 extern int menu4CGetEntry(int, int);
 extern int FUN_004ba698(int);
@@ -216,7 +216,7 @@ void FUN_004b7e20(int param_1)
       if (temp_v2 != 99) {
         return;
       }
-      mapMenuDispatchAction(param_1,*(unsigned int *)(param_1 + 0x111c));
+      contentTransitionApplyCommand(param_1,*(unsigned int *)(param_1 + 0x111c));
       return;
     }
     temp_v2 = FUN_004ba698(param_1 + 0x9c);

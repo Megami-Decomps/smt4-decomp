@@ -1,236 +1,118 @@
-#include <stdio.h>
+/* NON_MATCHING: 89 lines (45 by shape); same control flow, frame size and calls. What differs: the spill slots of the cursor row and the label entry (sp+24/sp+20 in retail, sp+16/sp here); the "???" textDrawString converts y and x through s0/s2 and loads the 0.28 scale last; the hidden rows' icon x loads row->x before icon->x; the scissor call keeps the window's width and height in r0/r7 and moves them into r2/r3 last. */
+#include "status/StatusDownA.h"
 #include "ui/UiSpriteApi.h"
-#include "code/Code0035.h"
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d3a4c` (_code @ 0x3d3a4c, 0x6a4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "ui/AnimatedMessage.h"
+#include "camp/RenderCtxA.h"
+#include "text/TextDraw.h"
+#include "runtime/Stdio.h"
 #include "shard/TextureDrawCall.h"
+#include "event/2dEvent/SmokeFade.h"
+#include "code/Code0035.h"
+#include "code/Code002c.h"
+#include "code/Code002a_Smt4a.h"
+#include "code/Code002c_Smt4a.h"
+#include "code/Code002a_VariantA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
 
 extern "C" {
 
-int textDrawString(...);
-int texDrawCompositeSprite(...);
-int efctSetSpeed(void);
-int uiDrawItemOrStatusIcon(...);
-int statusDownDrawIndicatorPairs(int, int);
-int dataTable0cFindByKey(void);
-int uiDrawListScrollBar(...);
-int gxSetMirroredClippedScissor(...);
+u32 itemIsCollectedWithRelated(u16 id);
+void statusDownDrawIndicatorPairs(s32 x, s32 y);
+const char *dataTable0cFindByKey(u16 id);
+void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint);
+void gxSetMirroredClippedScissor(s32 x, s32 y, s32 width, s32 height, s32 mode);
+void uiDrawListScrollBar(Object *widget, s32 x, s32 y, u32 group, u32 frameId, u32 trackId, u32 trackPressedId, u32 arrowAId,
+                         u32 arrowAPressedId, u32 arrowBId, u32 arrowBPressedId, u32 thumbRegion, s32 arrowARegion,
+                         u32 arrowBRegion, s32 layer, s32 horizontal);
 
-int VectorSignedToFloat(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp98; /* 0x98: local_98 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-} param_2_stack;
-
-extern unsigned char LAB_003d3efc; /* 0x3d3efc */
-extern int g_statusDown; /* 0x588fe8 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: texDrawCompositeSprite. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: uiDrawItemOrStatusIcon. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
-/* Supplied declaration required: statusDownDrawIndicatorPairs. */
-extern int itemIsCollectedWithRelated(unsigned short);
-/* Supplied declaration required: dataTable0cFindByKey. */
-extern int resourceRunOperationIfUnblocked(void);
-extern int listCursorGetRowIfUnblocked(int);
-extern int objectApplyIfUnblocked(int);
-extern unsigned short *FUN_002c7e24(void);
-extern int FUN_002c7e3c(void);
-/* Supplied declaration required: uiDrawListScrollBar. */
-/* Supplied declaration required: gxSetMirroredClippedScissor. */
-/* Supplied declaration required: FUN_0035bd4c. */
-
-
-void FUN_003d3a4c(int param_1,int param_2)
-
+/* Draws the status screen's flagged list at (x, y): the eleven visible rows (icon, name and message; "???" for
+   names that are still hidden), the focused row with its scrolling highlight, and the scroll bar. */
+void FUN_003d3a4c(s32 x, s32 y, f32 alpha)
 {
-/* irregular: irregular input(s): in_fpscr; 13 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned short *puVar8;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  int temp_v11;
-  unsigned int temp_v12;
-  int *piVar15;
-  unsigned char temp_v13;
-  unsigned char temp_v14;
-  unsigned int in_fpscr;
-  unsigned char temp_v15 [84];
-  
-  temp_v2 = g_statusDown;
-  temp_v3 = g_statusDown + 0xee4;
-  temp_v4 = resourceRunOperationIfUnblocked();
-  temp_v5 = listCursorGetRowIfUnblocked(temp_v3);
-  temp_v1 = 0;
-  temp_v6 = FUN_002c7e3c();
-  if (temp_v6 != 0xe) {
-    if (temp_v6 == 7) {
-      puVar8 = (unsigned short *)FUN_002c7e24();
-      temp_v6 = itemIsCollectedWithRelated(*puVar8);
-      if (temp_v6 == 0) {
-        temp_v1 = 1;
-      }
+    StatusDownStateA *screen = g_statusDown;
+    s32 top = resourceRunOperationIfUnblocked(reinterpret_cast<Object *>(&screen->flagged.navigation));
+    s32 cursorRow = listCursorGetRowIfUnblocked(reinterpret_cast<Object *>(&screen->flagged.navigation));
+    bool hidden = false;
+    char text[64];
+
+    u32 kind = FUN_002c7e3c();
+    if (kind == 14) {
+        hidden = true;
+    } else if (kind == 7 && !itemIsCollectedWithRelated(*reinterpret_cast<u16 *>(FUN_002c7e24()))) {
+        hidden = true;
     }
-  }
-  else {
-    temp_v1 = 1;
-  }
-  efctSetSpeed();
-  texDrawCompositeSprite(2,0x12,5,param_1,param_2,0xb3);
-  texDrawCompositeSprite(2,0x12,0xb,param_1,param_2,0xb5);
-  statusDownDrawIndicatorPairs(param_1,param_2);
-  temp_v6 = 0;
-  do {
-    temp_v7 = temp_v2 + (temp_v4 + temp_v6) * 4;
-    if (*(short *)(temp_v7 + 0x6e2) != 0) {
-      temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v6 + 0x44c));
-      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,1099));
-      if (temp_v1) {
-        sprintf((char *)temp_v15,(const char *)&LAB_003d3efc);
-        VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v9 + 10) + param_2,
-                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,
-                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        textDrawString(2,0xff,temp_v15,(int)*(short *)(temp_v9 + 8));
-      }
-      else {
-        temp_v10 = (unsigned int)*(unsigned short *)(temp_v7 + 0x6e2);
-        dataTable0cFindByKey();
-        if (temp_v10 != 0) {
-          VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v9 + 10) + param_2,
-                              (unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,
-                              (unsigned char)(in_fpscr >> 0x16) & 3);
-          textDrawString(2,0xff,temp_v10,(int)*(short *)(temp_v8 + 8));
+
+    efctSetSpeed(alpha);
+    texDrawCompositeSprite(2, 0x12, 5, x, y, 0xb3);
+    texDrawCompositeSprite(2, 0x12, 11, x, y, 0xb5);
+    statusDownDrawIndicatorPairs(x, y);
+
+    for (s32 i = 0; i < 11; i++) {
+        if (screen->flagged.entries[top + i].recordId == 0) {
+            continue;
         }
-      }
-      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x449));
-      if (temp_v1) {
-        temp_v0 = *(short *)(temp_v9 + 10);
-        temp_v9 = (int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v8 + 8);
-        temp_v11 = 0;
-      }
-      else {
-        temp_v0 = *(short *)(temp_v9 + 10);
-        temp_v9 = (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8);
-        temp_v11 = (int)*(short *)(temp_v7 + 0x6e0);
-      }
-      uiDrawItemOrStatusIcon(temp_v11,temp_v9 + param_1,(int)*(short *)(temp_v8 + 10) + (int)temp_v0 + param_2,0xb5,
-                   0);
-      temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x44a));
-      FUN_0035bd4c(*(unsigned short *)(temp_v7 + 0x6e2),
-                   (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,
-                   (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v9 + 10) + param_2,0xb5);
+        TextureTableEntryIV *row = asdTMTexTableEntryAt(0x12, i + 0x44c);
+        TextureTableEntryIV *label = asdTMTexTableEntryAt(0x12, 0x44b);
+        if (hidden) {
+            __2sprintf(text, "\x81\x48\x81\x48\x81\x48");
+            textDrawString((f32)(row->x + label->x + x), (f32)(row->y + label->y + y), 0.28f, 2, 0.0f, 0xff, alpha, text);
+        } else {
+            const char *name = dataTable0cFindByKey(screen->flagged.entries[top + i].recordId);
+            if (name != NULL) {
+                textDrawString((f32)(row->x + label->x + x), (f32)(row->y + label->y + y), 0.28f, 2, 0.0f, 0xff, alpha, name);
+            }
+        }
+        TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x12, 0x449);
+        if (hidden) {
+            uiDrawItemOrStatusIcon(0, icon->x + row->x + x, row->y + icon->y + y, 0xb5, 0);
+        } else {
+            uiDrawItemOrStatusIcon(screen->flagged.entries[top + i].icon, row->x + icon->x + x, row->y + icon->y + y, 0xb5, 0);
+        }
+        TextureTableEntryIV *message = asdTMTexTableEntryAt(0x12, 0x44a);
+        FUN_0035bd4c(screen->flagged.entries[top + i].recordId, row->x + message->x + x, row->y + message->y + y, 0xb5);
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0xb);
-  if ((*(int *)(temp_v2 + 0x518) == 0x14) &&
-     (temp_v4 = temp_v2 + (temp_v5 + temp_v4) * 4, *(short *)(temp_v4 + 0x6e2) != 0)) {
-    temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,temp_v5 + 0x42c));
-    efctSetSpeed();
-    texDrawCompositeSprite(2,0x12,8,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,0xbf);
-    efctSetSpeed();
-    texDrawTableEntryAtStoredOrigin(2,0x12,0x41f,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,0xc4)
-    ;
-    temp_v5 = *(int *)(temp_v2 + 0x530);
-    temp_v12 = 0x420;
-    temp_v13 = temp_v5 == 0;
-    if (temp_v13) {
-      temp_v5 = *(int *)(temp_v2 + 0x534);
+
+    if (screen->track.state == 20) {
+        if (screen->flagged.entries[cursorRow + top].recordId != 0) {
+            TextureTableEntryIV *row = asdTMTexTableEntryAt(0x12, cursorRow + 0x42c);
+            efctSetSpeed(vec2GetSpeed(&screen->sprites[1]) * alpha);
+            texDrawCompositeSprite(2, 0x12, 8, row->x + x, row->y + y, 0xbf);
+            efctSetSpeed(alpha);
+            texDrawTableEntryAtStoredOrigin(2, 0x12, 0x41f, row->x + x, row->y + y, 0xc4);
+            s32 frame = 0x420;
+            if (screen->unk530 == 0 && screen->unk534 == 0 && screen->unk538 == 0 && screen->indicatorFirst == 0 &&
+                screen->indicatorSecond == 0 && screen->unk52C >= 0) {
+                frame = 0x421;
+            }
+            texDrawTableEntryAtStoredOrigin(2, 0x12, frame, row->x + x, row->y + y, 0xc4);
+            texDrawTableEntryAtStoredOrigin(2, 0x12, 0x457, row->x + x, row->y + y, 0xc4);
+
+            TextureTableEntryIV *window = asdTMTexTableEntryAt(0x12, 0x420);
+            renderStackSetCounted(&g_renderCtx->scissor, 3);
+            gxSetMirroredClippedScissor(row->x + window->x + x, row->y + window->y + y, window->placement->width,
+                                        window->placement->height, 1);
+            texDrawTableEntryAtStoredOrigin(2, 0x12, 0x422, vec2GetXInt(&screen->sprites[3]) + x + row->x,
+                                            vec2GetYInt(&screen->sprites[3]) + y + row->y, 0xc9);
+            renderStackSetCounted(&g_renderCtx->scissor, 0);
+
+            TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x12, 0x458);
+            if (hidden) {
+                uiDrawItemOrStatusIcon(0, icon->x + row->x + x, row->y + icon->y + y, 0xc9, 0);
+            } else {
+                uiDrawItemOrStatusIcon(screen->flagged.entries[cursorRow + top].icon, row->x + icon->x + x, row->y + icon->y + y, 0xc9, 0);
+            }
+            TextureTableEntryIV *message = asdTMTexTableEntryAt(0x12, 0x459);
+            FUN_0035bd4c(screen->flagged.entries[cursorRow + top].recordId, row->x + message->x + x, message->y + row->y + y, 0xc9);
+        }
     }
-    if (temp_v13 && temp_v5 == 0) {
-      temp_v5 = *(int *)(temp_v2 + 0x538);
-      temp_v13 = temp_v5 == 0;
-      if (temp_v13) {
-        temp_v5 = *(int *)(temp_v2 + 0x53c);
-      }
-      temp_v14 = temp_v13 && temp_v5 == 0;
-      if (temp_v13 && temp_v5 == 0) {
-        temp_v14 = *(int *)(temp_v2 + 0x540) == 0;
-      }
-      if ((temp_v14) && (-1 < *(int *)(temp_v2 + 0x52c))) {
-        temp_v12 = 0x421;
-      }
+
+    if (objectApplyIfUnblocked(reinterpret_cast<Object *>(&screen->flagged.navigation)) <= 0) {
+        texDrawCompositeSprite(2, 0x12, 0x1b, x, y, 0xdd);
     }
-    texDrawTableEntryAtStoredOrigin(2,0x12,temp_v12,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,0xc4
-                );
-    texDrawTableEntryAtStoredOrigin(2,0x12,0x457,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,0xc4)
-    ;
-    temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x420));
-    temp_v5 = g_renderCtx;
-    piVar15 = (int *)(g_renderCtx + 0x1318);
-    temp_v8 = piVar15[*piVar15 + 2];
-    piVar15[*piVar15 + 2] = 3;
-    if (*(char *)(temp_v5 + 0x1330) != '\0' || temp_v8 != 3) {
-      (**(romwright_code **)(temp_v5 + 0x1334))();
-      *(unsigned char *)(temp_v5 + 0x1330) = 0;
-    }
-    gxSetMirroredClippedScissor((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
-                 (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v7 + 10) + param_2,
-                 (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1],1);
-    temp_v5 = vec2GetYInt((UiSpriteState *)(temp_v2 + 0x1cc));
-    temp_v0 = *(short *)(temp_v6 + 10);
-    temp_v7 = vec2GetXInt((UiSpriteState *)(reinterpret_cast<const void *>(temp_v2 + 0x1cc)));
-    texDrawTableEntryAtStoredOrigin(2,0x12,0x422,temp_v7 + param_1 + (int)*(short *)(temp_v6 + 8),
-                 temp_v5 + param_2 + (int)temp_v0,0xc9);
-    temp_v5 = g_renderCtx;
-    piVar15 = (int *)(g_renderCtx + 0x1318);
-    temp_v7 = piVar15[*piVar15 + 2];
-    piVar15[*piVar15 + 2] = 0;
-    if (*(char *)(temp_v5 + 0x1330) != '\0' || temp_v7 != 0) {
-      (**(romwright_code **)(temp_v5 + 0x1334))();
-      *(unsigned char *)(temp_v5 + 0x1330) = 0;
-    }
-    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x458));
-    if (temp_v1) {
-      temp_v0 = *(short *)(temp_v5 + 10);
-      temp_v5 = (int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v6 + 8);
-      temp_v7 = 0;
-    }
-    else {
-      temp_v0 = *(short *)(temp_v5 + 10);
-      temp_v7 = (int)*(short *)(temp_v4 + 0x6e0);
-      temp_v5 = (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8);
-    }
-    uiDrawItemOrStatusIcon(temp_v7,temp_v5 + param_1,(int)*(short *)(temp_v6 + 10) + (int)temp_v0 + param_2,0xc9,0);
-    temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x459));
-    FUN_0035bd4c(*(unsigned short *)(temp_v4 + 0x6e2),
-                 (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
-                 (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,0xc9);
-  }
-  temp_v4 = objectApplyIfUnblocked(temp_v3);
-  if (temp_v4 < 1) {
-    texDrawCompositeSprite(2,0x12,0x1b,param_1,param_2,0xdd);
-  }
-  texDrawTableEntryAtStoredOrigin(2,0x12,0x5a1,param_1,param_2,0xbf);
-  uiDrawListScrollBar(temp_v3,param_1,param_2,0x12,0x404,0x405,0x406,0x400,0x402,0x401,0x403,
-               (int)*(short *)(temp_v2 + 0x58c),(int)*(short *)(temp_v2 + 0x58e),
-               (int)*(short *)(temp_v2 + 0x590),0xc4,0);
-  return;
+    texDrawTableEntryAtStoredOrigin(2, 0x12, 0x5a1, x, y, 0xbf);
+    uiDrawListScrollBar(reinterpret_cast<Object *>(&screen->flagged.navigation), x, y, 0x12, 0x404, 0x405, 0x406, 0x400, 0x402, 0x401, 0x403, screen->slots[36], screen->slots[37],
+                        screen->slots[38], 0xc4, 0);
 }
 
 } /* extern "C" */

@@ -1,17 +1,8 @@
-/* NON_MATCHING: only two moves before the equipment loop are swapped (retail sets the index register before the equipment base). */
 #include <stdio.h>
 #include "gamedata/GamePlayerData.h"
+#include "gamedata/SaveSlotTableIV.h"
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
-
-/* Local view: stock-count metadata extends beyond the recovered party-slot prefix. */
-struct InitialPlayerSlotsView {
-    u32 flags;
-    u8 unk0004[0x9107];
-    u8 stockCapacity;
-};
-typedef char InitialPlayerSlotsViewOffsetCheck[
-    offsetof(InitialPlayerSlotsView, stockCapacity) == 0x910B ? 1 : -1];
 
 union InitialEquipment {
     u16 ids[8];
@@ -19,7 +10,6 @@ union InitialEquipment {
 };
 extern "C" {
 void FUN_001a1110(void);
-InitialPlayerSlotsView *gameGetSlotTable(void);
 void FUN_00295a18(u32 item, u32 count);
 void FUN_003c1ef4(u32 mode);
 void playerRecalcStatsFromEquipment(u32 slot);
@@ -34,18 +24,19 @@ struct DefaultPlayerTexts {
 extern const DefaultPlayerTexts DAT_00404360;
 
 // Initialize a new game's player record, starting equipment, and inventory capacity.
-void FUN_0026f824(s32 mode)
+void playerInitNewGame(s32 mode)
 {
     FUN_001a1110();
-    InitialPlayerSlotsView *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     if (mode == 0) {
-        slots->flags = 0;
-        slots->stockCapacity = 8;
+        slots->money = 0;
+        slots->stockCount = 8;
         InitialEquipment equipment = DAT_00404378;
-        const u16 *id = equipment.ids;
-        for (u32 index = 0; index < 7; ++index) {
-            if (id[index])
-                FUN_00295a18(id[index], 1);
+        u32 index = 0;
+        while (index < 7) {
+            if (equipment.ids[index] != 0)
+                FUN_00295a18(equipment.ids[index], 1);
+            ++index;
         }
         const DefaultPlayerTexts *texts = &DAT_00404360;
         PlayerDataIV *player = gameGetPlayerData();

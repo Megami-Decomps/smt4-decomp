@@ -7562,3 +7562,13 @@
 0041f4c0 saveLoadUiPrepareSelection inferred readiness gates, touch rebuild, help text, enters mode 13
 003f29c0 btlPopFilteredCommand inferred pops the next pending command that passes the mode/status filter
 003ebca0 btlHasFilteredCommand inferred scans the pending commands with the same filter
+003ebec8 btlMainSetupFixedParty evidence btlMain.cpp debug path (lines 13228-13248); builds or revives the fixed party from the "WPartyData" table (0x4E) and keeps the player's own party section and flag values
+004cfb24 textMeasureOnLayer inferred twin of smt4 curveEvaluateStandard (same source)
+00192824 _ZN10QuadVectorC1Ev evidence twin of smt4 vectorSetAllOne; QuadVector's default constructor (FUN_0050e86c's native array construction calls _ZN10QuadVectorC1Ev)
+002a41a0 eventFilterUpdate evidence registered by eventFilterStart as the "EvtFilter Calc" process; advances the filter's load, fade-in, pulse and fade-out phases
+003c3be8 scrCommStartSpatialEventTaskAtXY inferred script command: allocates a tracked request and starts the spatial effect task at the script's x, y and scale
+004962e4 sceneResourcesAreReady inferred polls the optional loader, the resource object and both texture jobs; 1 when all are ready
+00511420 animationInitLegacyDefaults inferred file initializer of g_legacyAnimationDefaults (origin and template) and the two animation slot arrays
+003ae3c4 mapRegisterPendingSpawnMarker inferred registers the pending spawn's box effect at a world position
+0013c00c screenFadeSlotDraw inferred twin of smt4 FUN_00107784
+004b726c contentTransitionApplyCommand inferred twin of smt4 contentTransitionApplyCommand (same source: a menu command's destination or request flag, then state 5 or 4)

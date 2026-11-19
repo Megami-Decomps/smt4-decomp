@@ -24590,12 +24590,12 @@
     },
     {
       "address": "0x13c00c",
-      "function": "FUN_0013c00c",
+      "function": "screenFadeSlotDraw",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_0013c00c.o",
+      "object": "build/obj/_code/0013/screenFadeSlotDraw.o",
       "size": 348,
-      "source": "src/_code/0013/FUN_0013c00c.cpp",
-      "target": "orig/target/_code/0013/FUN_0013c00c.o",
+      "source": "src/_code/0013/screenFadeSlotDraw.cpp",
+      "target": "orig/target/_code/0013/screenFadeSlotDraw.o",
       "thumb": false
     },
     {
@@ -40158,12 +40158,12 @@
     },
     {
       "address": "0x192824",
-      "function": "vectorSetAllOne",
+      "function": "_ZN10QuadVectorC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0019/vectorSetAllOne.o",
+      "object": "build/obj/_code/0019/QuadVector__QuadVector.o",
       "size": 24,
-      "source": "src/_code/0019/vectorSetAllOne.cpp",
-      "target": "orig/target/_code/0019/vectorSetAllOne.o",
+      "source": "src/_code/0019/QuadVector__QuadVector.cpp",
+      "target": "orig/target/_code/0019/QuadVector__QuadVector.o",
       "thumb": false
     },
     {
@@ -65454,12 +65454,12 @@
     {
       "address": "0x2a41a0",
       "file": "event/2dEvent/EventEffect",
-      "function": "FUN_002a41a0",
+      "function": "eventFilterUpdate",
       "module": "_code",
-      "object": "build/obj/_code/event/2dEvent/EventEffect/FUN_002a41a0.o",
+      "object": "build/obj/_code/event/2dEvent/EventEffect/eventFilterUpdate.o",
       "size": 380,
-      "source": "src/_code/event/2dEvent/EventEffect/FUN_002a41a0.cpp",
-      "target": "orig/target/_code/event/2dEvent/EventEffect/FUN_002a41a0.o",
+      "source": "src/_code/event/2dEvent/EventEffect/eventFilterUpdate.cpp",
+      "target": "orig/target/_code/event/2dEvent/EventEffect/eventFilterUpdate.o",
       "thumb": false
     },
     {
@@ -120215,12 +120215,12 @@
     },
     {
       "address": "0x3ae3c4",
-      "function": "FUN_003ae3c4",
+      "function": "mapRegisterPendingSpawnMarker",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ae3c4.o",
+      "object": "build/obj/_code/003a/mapRegisterPendingSpawnMarker.o",
       "size": 188,
-      "source": "src/_code/003a/FUN_003ae3c4.cpp",
-      "target": "orig/target/_code/003a/FUN_003ae3c4.o",
+      "source": "src/_code/003a/mapRegisterPendingSpawnMarker.cpp",
+      "target": "orig/target/_code/003a/mapRegisterPendingSpawnMarker.o",
       "thumb": false
     },
     {
@@ -124302,12 +124302,12 @@
     {
       "address": "0x3c3be8",
       "file": "event/eventCommand",
-      "function": "FUN_003c3be8",
+      "function": "scrCommStartSpatialEventTaskAtXY",
       "module": "_code",
-      "object": "build/obj/_code/event/eventCommand/FUN_003c3be8.o",
+      "object": "build/obj/_code/event/eventCommand/scrCommStartSpatialEventTaskAtXY.o",
       "size": 184,
-      "source": "src/_code/event/eventCommand/FUN_003c3be8.cpp",
-      "target": "orig/target/_code/event/eventCommand/FUN_003c3be8.o",
+      "source": "src/_code/event/eventCommand/scrCommStartSpatialEventTaskAtXY.cpp",
+      "target": "orig/target/_code/event/eventCommand/scrCommStartSpatialEventTaskAtXY.o",
       "thumb": false
     },
     {
@@ -129789,12 +129789,12 @@
     {
       "address": "0x3ebec8",
       "file": "battle/btlMain",
-      "function": "FUN_003ebec8",
+      "function": "btlMainSetupFixedParty",
       "module": "_code",
-      "object": "build/obj/_code/battle/btlMain/FUN_003ebec8.o",
+      "object": "build/obj/_code/battle/btlMain/btlMainSetupFixedParty.o",
       "size": 1700,
-      "source": "src/_code/battle/btlMain/FUN_003ebec8.cpp",
-      "target": "orig/target/_code/battle/btlMain/FUN_003ebec8.o",
+      "source": "src/_code/battle/btlMain/btlMainSetupFixedParty.cpp",
+      "target": "orig/target/_code/battle/btlMain/btlMainSetupFixedParty.o",
       "thumb": false
     },
     {
@@ -138697,7 +138697,18 @@
       "size": 104,
       "source": "src/_code/0042/FUN_00426940.cpp",
       "target": "orig/target/_code/0042/FUN_00426940.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x4269b0",
@@ -158539,12 +158550,12 @@
     },
     {
       "address": "0x4962e4",
-      "function": "FUN_004962e4",
+      "function": "sceneResourcesAreReady",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_004962e4.o",
+      "object": "build/obj/_code/0049/sceneResourcesAreReady.o",
       "size": 276,
-      "source": "src/_code/0049/FUN_004962e4.cpp",
-      "target": "orig/target/_code/0049/FUN_004962e4.o",
+      "source": "src/_code/0049/sceneResourcesAreReady.cpp",
+      "target": "orig/target/_code/0049/sceneResourcesAreReady.o",
       "thumb": false
     },
     {
@@ -162438,12 +162449,12 @@
     },
     {
       "address": "0x4b726c",
-      "function": "mapMenuDispatchAction",
+      "function": "contentTransitionApplyCommand",
       "module": "_code",
-      "object": "build/obj/_code/004b/mapMenuDispatchAction.o",
+      "object": "build/obj/_code/004b/contentTransitionApplyCommand.o",
       "size": 380,
-      "source": "src/_code/004b/mapMenuDispatchAction.cpp",
-      "target": "orig/target/_code/004b/mapMenuDispatchAction.o",
+      "source": "src/_code/004b/contentTransitionApplyCommand.cpp",
+      "target": "orig/target/_code/004b/contentTransitionApplyCommand.o",
       "thumb": false
     },
     {
@@ -165350,12 +165361,12 @@
     },
     {
       "address": "0x4cfb24",
-      "function": "curveEvaluateStandard",
+      "function": "textMeasureOnLayer",
       "module": "_code",
-      "object": "build/obj/_code/004c/curveEvaluateStandard.o",
+      "object": "build/obj/_code/004c/textMeasureOnLayer.o",
       "size": 52,
-      "source": "src/_code/004c/curveEvaluateStandard.cpp",
-      "target": "orig/target/_code/004c/curveEvaluateStandard.o",
+      "source": "src/_code/004c/textMeasureOnLayer.cpp",
+      "target": "orig/target/_code/004c/textMeasureOnLayer.o",
       "thumb": false
     },
     {
@@ -174805,12 +174816,12 @@
     },
     {
       "address": "0x511420",
-      "function": "FUN_00511420",
+      "function": "animationInitLegacyDefaults",
       "module": "_code",
-      "object": "build/obj/_code/0051/FUN_00511420.o",
+      "object": "build/obj/_code/0051/animationInitLegacyDefaults.o",
       "size": 116,
-      "source": "src/_code/0051/FUN_00511420.cpp",
-      "target": "orig/target/_code/0051/FUN_00511420.o",
+      "source": "src/_code/0051/animationInitLegacyDefaults.cpp",
+      "target": "orig/target/_code/0051/animationInitLegacyDefaults.o",
       "thumb": false
     },
     {

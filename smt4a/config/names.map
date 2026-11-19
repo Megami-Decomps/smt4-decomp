@@ -3319,7 +3319,7 @@
 00226550 mapIfStoreRequestResult
 0013f4ac asdGxAdvancePreset
 00233158 mapEnemyStopJob
-00192824 vectorSetAllOne
+00192824 _ZN10QuadVectorC1Ev
 00144c7c asdCameraFreeWork
 0024481c mapEnemyResetUpdateState
 00272e3c mapDepartRequest
@@ -3399,7 +3399,7 @@
 004d0554 inputIsQuestMenuPressed
 002a48ac recordTrackDirtyValue
 004d8f18 containerGrowCapacity
-004cfb24 curveEvaluateStandard
+004cfb24 textMeasureOnLayer
 003b9a0c dataTableGetRecordFortyEight
 0046c4f4 recordPrepareLinkedOwner
 003b57f4 dataTableGetRecordFortyNine
@@ -6942,7 +6942,7 @@
 002d7c88 mapEnemyLoadExtraModel
 003b078c dataTableSortLookupSections
 0013a9c8 titleTimedOverlayDraw
-004b726c mapMenuDispatchAction
+004b726c contentTransitionApplyCommand
 0041ed4c savedUnitEditorApplyOrClose
 004db2b8 fusionResolveRaceRulePair
 00333de0 statusDownSetSelectedEntry
@@ -7016,3 +7016,10 @@
 0041f4c0 saveLoadUiPrepareSelection
 003f29c0 btlPopFilteredCommand
 003ebca0 btlHasFilteredCommand
+003ebec8 btlMainSetupFixedParty
+002a41a0 eventFilterUpdate
+003c3be8 scrCommStartSpatialEventTaskAtXY
+004962e4 sceneResourcesAreReady
+00511420 animationInitLegacyDefaults
+003ae3c4 mapRegisterPendingSpawnMarker
+0013c00c screenFadeSlotDraw

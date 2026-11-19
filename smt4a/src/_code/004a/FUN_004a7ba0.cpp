@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the Y coordinate temp differs (retail ip, built r1). */
+/* NON_MATCHING: only the saved registers of the base x/y (retail r9 = x, sl = y; built the reverse) differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -7,9 +7,9 @@ extern "C" {
 extern PanelTextDefaultsPrefixA DAT_0057f0ac;
 u32 FUN_002a4b28(u16 textId);
 u32 dataTable01GetRecordWithAocOverride(u16 textId);
-void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
-                                u32 color, u32 textValue,
-                                f32 x, f32 y, f32 opacity,
+void drawTextAtSnappedRectangle(TextLayoutContextA *context, f32 x,
+                                f32 y, u32 style,
+                                u32 color, u32 textValue, f32 opacity,
                                 f32 extraZero, f32 scale);
 
 static __inline TextLayoutContextA *panelTextContext(PanelTextOwnerPrefixA *panel)
@@ -50,7 +50,7 @@ void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, s16 textId,
     const TextureTableEntryIV *offset = layoutFindTableEntry(panelTextContext(panel), offsetEntry);
     s32 x = static_cast<s32>(offset->x) + baseX;
     s32 y = static_cast<s32>(offset->y) + baseY;
-    drawTextAtSnappedRectangle(panelTextContext(panel), style, color, textValue,
-        static_cast<f32>(x), static_cast<f32>(y), opacity, 0.0f, scale);
+    drawTextAtSnappedRectangle(panelTextContext(panel), static_cast<f32>(x), static_cast<f32>(y), style,
+        color, textValue, opacity, 0.0f, scale);
 }
 }

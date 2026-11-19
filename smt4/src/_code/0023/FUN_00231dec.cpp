@@ -44,7 +44,7 @@ extern int DAT_0049f920; /* 0x49f920 */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: lmapSceneGetObj. */
-extern unsigned int curveEvaluateStandard(int, unsigned int);
+extern unsigned int textMeasureOnLayer(int, unsigned int);
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_00288f78. */
 /* Supplied declaration required: textDrawString. */
@@ -129,7 +129,7 @@ void FUN_00231dec(int param_1)
     }
   }
   if (*(char *)(param_1 + 0x12268) != '\0') {
-    temp_v3 = curveEvaluateStandard(temp_v9,2);
+    temp_v3 = textMeasureOnLayer(temp_v9,2);
     temp_v14 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1c,0xfb4));
     temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

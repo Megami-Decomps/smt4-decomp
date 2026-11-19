@@ -45,8 +45,8 @@ extern u32 DAT_0057f0a0[];
 void FUN_0049339c(void *panel, s32 id, s32 a, s32 b, s32 slide, f32 offset);
 void FUN_0049368c(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
 u32 dataLookupDisplayName(u8 *out, u32 id);
-s32 curveEvaluateStandard(const char *text, s32 mode);
-void drawTextAtSnappedRectangle(void *panel, s32 a, s32 b, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
+s32 textMeasureOnLayer(const char *text, s32 mode);
+void drawTextAtSnappedRectangle(void *panel, f32 x, f32 y, s32 a, s32 b, const char *text, f32 scale, f32 c, f32 d);
 s32 FUN_0031d174(void *list);
 void FUN_004a6144(AnalyzeWork *work, s32 index, s32 selected, s32 id);
 void owner4ASetSizeAndCall(AnalyzeWork *work, s32 step);
@@ -74,7 +74,7 @@ void FUN_004a559c(AnalyzeWork *work)
     sprintf(text, "%s%s", name, DAT_0057f0a0[1]);
     TextureTableEntryIV *box = layoutFindTableEntry(work->panel, 0x102B);
 
-    drawTextAtSnappedRectangle(work->panel, 2, -1, text, (f32)(box->x + box->placement->width / 2 - curveEvaluateStandard(text, 2) / 2), (f32)box->y,
+    drawTextAtSnappedRectangle(work->panel, (f32)(box->x + box->placement->width / 2 - textMeasureOnLayer(text, 2) / 2), (f32)box->y, 2, -1, text,
                  opacity, 1.0f, 0.0f);
 
     s32 first = FUN_002a482c(work->list);

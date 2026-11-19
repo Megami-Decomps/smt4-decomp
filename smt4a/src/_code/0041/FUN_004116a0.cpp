@@ -8,6 +8,7 @@
 #include "code/Code0018.h"
 #include "script/scrScriptProcess.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/BtlUiOpening.h"
 
 
 /* The object that owns a script process and a message block. */
@@ -22,7 +23,6 @@ extern u32 g_btlAux;
 
 void asdMemFree(void *block);
 void FUN_004f85c8(u32 aux, s32 value);
-void FUN_004abe2c(BtlUiA *ui, s32 a, s32 b, s32 c, s32 d, s32 e);
 void FUN_003f1b3c(BtlMainStateA *battle, u32 voice, s32 kind, u32 *text, u32 *colorSet);
 void FUN_0047f4cc(u32 handle, f32 red, f32 green, f32 blue);
 void uiNavigatorStart(s32 id, s32 a, s32 b, s32 c, s32 d);

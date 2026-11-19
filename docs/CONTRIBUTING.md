@@ -122,8 +122,10 @@ Every match must be one a programmer could have written for a reason.
     instruction (`build.py` drops them: no bytes). Those keep retail's `push; vpush; sub sp` ahead of the
     argument moves. Write `sprintf` with `<stdio.h>` (cast a `u8` buffer to `char *`) when retail's
     prologue has `vpush; sub sp` right after `push`; an inlined helper containing the `sprintf` anchors
-    its caller too. A sunk prologue (`push; ldr; vpush; sub sp`, titleConfigDraw) is a plain variadic
-    call: call `__2sprintf` through `runtime/Stdio.h` there. A `sprintf` whose format armcc cannot read
+    its caller too. A function that saves no VFP registers can also show `push; ldr; sub sp`: that is
+    still `<stdio.h>` `sprintf` (smt4 `FUN_00194278`). Only a load between `push` and `vpush`
+    (`push; ldr; vpush; sub sp`, titleConfigDraw) is a plain variadic call: call `__2sprintf` through
+    `runtime/Stdio.h` there. A `sprintf` whose format armcc cannot read
     (an `extern const char DAT_x[]`) becomes `__c89sprintf`, which retail never calls: define the format
     in the unit with the bytes at that address (`static const char s_romPathFormat[] = "rom:/%s";`,
     smt4a `asdLoadFileAsyncByPath`); relink places it there.
@@ -383,6 +385,16 @@ a sibling setter or another user of the same lookup is usually written the same 
   `s16`; change the field and the prototypes together.
 - Conversions through `static __inline f32 get(p) { return p->field; }`; rounding as
   `f32 half = 0.5f;` declared first, then `floorf(scaled + half)`.
+- armcc fuses `a * b + c` written as one expression into `vmla`; retail's separate `vmul` then `vadd`
+  means the product was its own statement (`f32 pulse = speed * 0.5f; efctSetSpeed(pulse + 0.5f);`,
+  smt4 `FUN_001a7810`). That is instruction evidence, not allocation.
+- A halved value retail keeps in its own register (`asr r1, r0, #1`) at two draws, where it folds the
+  shift into the add elsewhere, is one variable assigned in both blocks (`s32 centre;` declared once,
+  `centre = (width - textWidth) / 2;` in each), not two block-local temporaries (`uniteDrawResultPanel`).
+- In a sum of two fields and a scalar (`a->x + b->x + x`) only which pointer comes first changes the
+  code (which halfwords load first, which registers the sums go through); where the scalar goes does
+  not. Try both pointer orders, not every permutation (`labelEntry->x + entry->x + x`, smt4
+  `titleConfigDraw`).
 - A plain `static` function that armcc inlines on its own and the same body marked `static __inline`
   do not always schedule alike: once a helper has evidence, try both (the basename helper of
   `FUN_003dbb40`, the same expression as in `FUN_003dadd8` and `FUN_003dba3c`; the map-camera accessor
@@ -401,6 +413,12 @@ a sibling setter or another user of the same lookup is usually written the same 
   `(x, y, z, layer, width, color, height, text)` (the best of all 56 interleavings, scored over all
   its callers), not the register order `(layer, color, text, x, ...)`. A near miss tuned to the wrong
   order (locals computed y-before-x) goes back to the plain call once the prototype is right.
+  More functions have a real interleaved int/float order: `gxSubmitDrawZeroExtraParams(x, y, width,
+  height, color0, color1, color2, depth, color3)` (`gfx/ColoredQuad.h`, the best of 126 orders over its
+  23 callers in both games; six callers became IDENTICAL) and the spatial effect task factories
+  `FUN_00244e1c`/`FUN_0031ba34(selector, flag, x, y, z, scale, mode, option)`
+  (`event/SpatialEffectTask.h`: the scalar position and scale before the two `u8`s). When a callee's
+  callers all miss by a float literal loaded before or after the integer moves, score the orders.
 
 **Helpers**
 - A stack key or temporary in scope at the end (a `bsearch` key, a copied struct) blocks retail's
@@ -413,6 +431,15 @@ a sibling setter or another user of the same lookup is usually written the same 
   and draw bodies between a render push and pop.
 - A state machine's `stepEnter(step, state)` helper that clears the counters and then stores the
   state gives retail's store order.
+- `mov rN, #state; mov rM, #0; strd rN, rM, [rX, #off]` is a two-word state/phase record assigned
+  whole: the record is a struct and a `static __inline` maker returns it (`ContentTransitionStep
+  contentTransitionStep(state, phase)` in `shard/W6_W6Match6_ContentTransition.h`;
+  `BtlUiPanelTimerA panelStartState(state)` with `{frame 0, state}` in `battle/btlUI.h`).
+  `step = contentTransitionStep(2, 0);` keeps the `strd`, two field stores do not.
+- A thread start (`nn::os::Thread::Start`) inlined into its caller is a `static __inline` helper that
+  takes the thread's bound argument by value and passes its address (`&argument`) with the argument
+  descriptor, then reports a failed result (`uniteStartThread`, `campCecStartThread`,
+  `stageStartThread`, `btlStartWorkerThread`; SaveLoad's `startWorkerThread`).
 - A comparator over a lookup sets its `{id, 0}` keys with separate stores and calls the lookup's body
   as a `static __inline` taking the keys by reference.
 

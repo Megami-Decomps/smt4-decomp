@@ -2437,7 +2437,7 @@
 0010a6fc asdGxAdvancePreset
 001a8c54 mapEnemyStopJob
 001b0bec aocBootHasWork
-00141adc vectorSetAllOne
+00141adc _ZN10QuadVectorC1Ev
 0019dc74 mapIfResetTimer
 0010e9f0 asdCameraFreeWork
 001175e4 asdMdlWorkerFreeWork
@@ -2642,7 +2642,7 @@
 00229ad4 battleSetActionKind
 0022a478 recordTrackDirtyValue
 0022c004 containerGrowCapacity
-0023342c curveEvaluateStandard
+0023342c textMeasureOnLayer
 0023a118 systemApplyConfigurationByte
 0023a374 resourceQueryLoadStatus
 0023d20c matrixScaleColumns
@@ -5373,3 +5373,7 @@
 0018a3e0 campSkillListUpdate
 00218480 btlCommandBeginTargetSelection
 0029a284 statusDownDrawSkillRow
+001f3044 uniteCreate
+001e981c jyoucyuDrawLoadingOverlay
+00107784 screenFadeSlotDraw
+0026f824 playerInitNewGame

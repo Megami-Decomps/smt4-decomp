@@ -1,4 +1,8 @@
-/* NON_MATCHING: 64 lines; same instructions, frame size and block layout. The focused name's scroll x is spilled to sp+44 instead of sp+20 (4 of the lines); the rest are temporary registers in six argument computations (the row plate, name and icon positions, the focused plate and name, the pulse product), where retail also loads the focused name's 0.32 scale last. */
+/* NON_MATCHING: 84 rows; same instructions, frame size and block layout. Spill slots: the row's plate colour and
+ * the focused quest id share sp+12 (retail: sp+4 and sp+8) and the focused name's scroll x is at sp+44 (retail:
+ * sp+20), 26 of the rows. The rest are temporary registers in six argument computations (the row plate, name
+ * and icon positions, the focused plate and name, the pulse product); for the focused name retail also moves the
+ * sums through s0/s2 and loads the 0.32 depth last, where this build converts them in s1/s0. */
 #include <stdio.h>
 #include "ui/UiSpriteApi.h"
 #include "shard/W5_W5Match7_UiQuest.h"

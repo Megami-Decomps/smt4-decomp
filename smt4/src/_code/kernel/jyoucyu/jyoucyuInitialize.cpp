@@ -15,7 +15,7 @@ extern JyoucyuStateView* g_jyoucyu;
 s32 jyoucyuLoadStep(u32 handle);
 
 void jyoucyuRequest();
-u32 FUN_001e981c();
+u32 jyoucyuDrawLoadingOverlay();
 
 void* asdMemoryAlloc(u32 size, u32 alignment, u32 flags, u32 category,
                      u32 heap);
@@ -35,7 +35,7 @@ void jyoucyuInitialize(void)
     JyoucyuStateView* state = g_jyoucyu;
 
     state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("JYOUCYU C"), 2, 0, 0, jyoucyuLoadStep, reinterpret_cast<AsdProcFunc>(jyoucyuRequest), 0);
-    taskCreateDraw("JYOUCYU D", 0x84, 0, 0, FUN_001e981c,
+    taskCreateDraw("JYOUCYU D", 0x84, 0, 0, jyoucyuDrawLoadingOverlay,
                    0, 0, state->process);
 }
 }

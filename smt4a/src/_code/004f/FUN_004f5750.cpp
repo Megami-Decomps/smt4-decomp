@@ -1,3 +1,4 @@
+#include "event/SpatialEffectTask.h"
 /* NON_MATCHING: near: same shape, 156 rows against 152; register assignment differs (retail keeps the effect id in sl and the free-slot pointer in r9 and ends both loops at one shared `mov r0,#0`). */
 #include "common.h"
 #include "gamedata/GameDataAccess.h"
@@ -19,7 +20,7 @@ struct Vector3 {
 /* The battle effect manager (observed fields): the active handles, the slot table and per-battle flags. */
 struct BtlEffectManager {
     /* 0x0000 */ s32 handle[EFFECT_LIST_SIZE];
-    /* 0x00C8 */ s32 slot[EFFECT_LIST_SIZE];
+    /* 0x00C8 */ u32 slot[EFFECT_LIST_SIZE];
     /* 0x0190 */ u8 unk0190[0x320C];
     /* 0x339C */ u32 flags;
     /* 0x33A0 */ u8 unk33A0[0x68D0];
@@ -48,7 +49,6 @@ static __inline s32 effectManagerRecordHandle(BtlEffectManager *manager, s32 han
 s32 FUN_00320b44(f32 *scale, s32 index, u32 value);
 Vector3 FUN_004fad68(BtlEffectManager *manager, s32 mode, u32 param, s32 index);
 void FUN_0047ed10(u32 value, s32 a, s32 mode, f32 x, f32 y, f32 z);
-s32 FUN_0031ba34(s32 effect, s32 *slot, s32 a, s32 b, f32 x, f32 y, f32 z, f32 scale);
 void FUN_00260030(s32 entry);
 
 /* Starts effect `effect` for the manager: finds a free slot, plays the effect (scaled by its mode) at
@@ -61,7 +61,7 @@ s32 FUN_004f5750(BtlEffectManager *manager, s32 effect, u32 param, s32 index, Ve
     Vector3 position;
     s32 hasInfo = 0;
     Vector3 offset;
-    s32 *freeSlot;
+    u32 *freeSlot;
     s32 handle;
     s32 i;
 
@@ -91,11 +91,11 @@ s32 FUN_004f5750(BtlEffectManager *manager, s32 effect, u32 param, s32 index, Ve
         FUN_0047ed10(targetValue, 0, mode, position.x, position.y, position.z);
     }
     if (mode == 2 || mode == 5 || mode == 7 || mode == 8 || mode == 9 || mode == 12 || mode == 15) {
-        handle = FUN_0031ba34(effect, freeSlot, 1, 3, position.x, position.y, position.z, 1.0f);
+        handle = reinterpret_cast<s32>(FUN_0031ba34(effect, freeSlot, position.x, position.y, position.z, 1.0f, 1, 3));
         return effectManagerRecordHandle(manager, handle);
     } else {
         f32 scale = 5.6f;
-        s32 flag = 0;
+        u8 flag = 0;
 
         if (mode == 11) {
             scale = 1.0f;
@@ -115,7 +115,7 @@ s32 FUN_004f5750(BtlEffectManager *manager, s32 effect, u32 param, s32 index, Ve
             scale = 1.0f;
             flag = 1;
         }
-        handle = FUN_0031ba34(effect, freeSlot, 0, flag, position.x, position.y, position.z, scale);
+        handle = reinterpret_cast<s32>(FUN_0031ba34(effect, freeSlot, position.x, position.y, position.z, scale, 0, flag));
     }
     return effectManagerRecordHandle(manager, handle);
 }

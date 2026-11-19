@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_0015f490(u32 id, u32 sound, s32 enabled, s32 flags, f32 volume);
+void FUN_0015f490(u32 id, u32 sound, f32 volume, s32 enabled, s32 flags);
 
 extern u64 DAT_00573cc0; /* 0x573cc0 */
 
@@ -14,7 +14,7 @@ void btlPlayEntrySound(u32 id, f32 volume)
     BtlCombatantEntryA *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry != NULL && (entry->flags & DAT_00573cc0) != 0 && entry->data.id != 0) {
-        FUN_0015f490(entry->data.id, 4, 0, 0, volume);
+        FUN_0015f490(entry->data.id, 4, volume, 0, 0);
     }
 }
 

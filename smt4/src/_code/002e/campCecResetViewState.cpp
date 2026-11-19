@@ -1,5 +1,5 @@
 #include "common.h"
-extern "C" void FUN_0020ffe8(u32, s32, f32, f32);
+extern "C" void FUN_0020ffe8(u32, f32, s32, f32); // declcheck: local (code/Code0020_Smt4.h takes an OuterFUN_0020ffe8 *; this caller passes a u32 handle)
 
 struct CampCecViewState {
     f32 unk00;    // 0x00
@@ -31,7 +31,7 @@ void campCecResetViewState(CampCecViewState* state)
     state->counter = 0;
     if (state->pending != 0) {
         state->pending = 0;
-        FUN_0020ffe8(state->handle, 0, 0.0f, 0.0f);
+        FUN_0020ffe8(state->handle, 0.0f, 0, 0.0f);
     }
     statusCameraResetDefaults();
 }

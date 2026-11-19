@@ -1,7 +1,13 @@
-/* NON_MATCHING: same calls, constants, frame and row count as retail (990); what differs is scheduling:
- * retail saves d8-d9 and opens the frame before copying the arguments, loads the position halfwords of a few icon
- * sums and of the two centred race labels in the other order, and reads the selected pair's two words with
- * separate `ldr`s where this build uses `ldrd`/`ldm` (and the reverse). */
+/* NON_MATCHING: same calls, constants, frame and row count as retail (990); 150 rows differ, registers and
+ * scheduling. Retail keeps 1.0 in s16 and 0.0 in s17 (built: the other way round, which alone touches every
+ * text draw and both efctSetSpeed(1.0f) calls); it loads the position halfwords of three FUN_002580d4 icon sums
+ * and of the two centred race labels in another order; the header label's y and x sums stay in r0/r1 (built:
+ * r1/r0); the "no candidates" label's sums go through s0/s2 (built: straight into s1/s0); the selected row's
+ * "new" mark stores its y and depth with two `str`s (built: `strd`); and the cursor's first blend-state change
+ * takes r2/r1 for the slot address and previous state (built: r1/r2).
+ * `centre` is one variable assigned in both blocks: retail keeps the halved width difference in its own register
+ * at both of those draws (`asr r1, r0, #1`) and folds it into the add only where the expression is written inline
+ * (the row's race label). */
 #include "common.h"
 #include <stdio.h>
 #include "camp/CampStateQueries.h"
@@ -42,6 +48,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
 {
     UniteWork *work = (UniteWork *)uniteGetWork();
     char text[64];
+    s32 centre;
 
     if (work == NULL) {
         return;
@@ -112,7 +119,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
             sprintf(text, "\202\163\202\210\202\205\202\222\202\205\201\100\202\201\202\222\202\205\201\100\202\216\202\217\201\100\202\203\202\201\202\216\202\204\202\211\202\204\202\201\202\224\202\205\202\223\201\104");
             TextureTableEntryIV *label = asdTMTexTableEntryAt(UNITE_TEXTURES, 114);
             s32 width = fontMeasureLineAdvance(text, 2);
-            s32 centre = (label->placement->width - width) / 2;
+            centre = (label->placement->width - width) / 2;
             textDrawString(row->x + label->x + (x + centre), label->y + row->y + y, 0.2f, 2,
                            0.0f, TEXT_GREY, 1.0f, text);
         }
@@ -164,7 +171,7 @@ void uniteDrawResultPanel(s32 x, s32 y, u32 selected, s32 cursorSlot, s32 region
         part = asdTMTexTableEntryAt(UNITE_TEXTURES, 132);
         sprintf(text, "%s", demonGetRaceLabel(demon->id, 0));
         s32 width = fontMeasureLineAdvance(text, 3);
-        s32 centre = (part->placement->width - width) / 2;
+        centre = (part->placement->width - width) / 2;
         textDrawString(part->x + panel->x + (centre + x), part->y + panel->y + y, 0.2f, 3,
                        0.0f, TEXT_WHITE, 1.0f, text);
         part = asdTMTexTableEntryAt(UNITE_TEXTURES, 134);

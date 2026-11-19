@@ -1,5 +1,6 @@
 /* NON_MATCHING: real fade-animation speed getter recovered; effect/draw VFP argument placement and render-state pop bookkeeping differ. */
 #include "common.h"
+#include "gfx/ColoredQuad.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxTitle.h"
 #include "ui/UiSpriteApi.h"
@@ -21,7 +22,6 @@ void efctSetSpeed(f32 speed);
 s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
-void gxSubmitDrawZeroExtraParams(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
 void FUN_0038368c(TitleOverlay *overlay);
 void renderCtxResetColorScale(RenderCtx *ctx);
 
@@ -43,7 +43,7 @@ void FUN_003844a0(TitleOverlay *overlay)
         renderCtxSelectTexture(g_titleScene, 0);
         f32 preset = (f32)asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene));
         f32 factor = (f32)asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene));
-        gxSubmitDrawZeroExtraParams(alpha, alpha, alpha, alpha, 0.0f, 0.0f, factor, preset, 0.0f);
+        gxSubmitDrawZeroExtraParams(0.0f, 0.0f, factor, preset, alpha, alpha, alpha, 0.0f, alpha);
         renderStackPop(&g_titleScene->stackA);
     }
     FUN_0038368c(overlay);

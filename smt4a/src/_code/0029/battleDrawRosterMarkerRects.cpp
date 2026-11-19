@@ -1,5 +1,6 @@
 /* NON_MATCHING: the marker mask uses LDM rather than LDRD, and VFP registers/coordinate scheduling and literal order differ; candidate -O2. */
 #include "battle/btlMain.h"
+#include "gfx/ColoredQuad.h"
 #include "battle/BtlEntryLookup.h"
 #include "camp/RenderCtxA.h"
 #include "camp/RenderCtx.h"
@@ -12,8 +13,6 @@
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
 BattleFrameSprite *stateEntryFindById(BtlMainStateA *state, s32 id);
-void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
-    f32 x, f32 y, f32 width, f32 height, f32 depth);
 }
 
 static __inline BattleRosterRecordA *battleRosterAt(BtlMainStateA *state, s32 index)
@@ -28,7 +27,7 @@ static __inline u64 battleMarkerMask(const BtlMainStateA *state)
 
 static __inline void battleDrawMarker(f32 x, f32 y, f32 width, f32 height, u32 color)
 {
-    gxSubmitDrawZeroExtraParams(color, color, color, color, x, y, width, height, 1.0f);
+    gxSubmitDrawZeroExtraParams(x, y, width, height, color, color, color, 1.0f, color);
 }
 
 extern "C" u32 battleDrawRosterMarkerRects(u32 job)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail merges the list header stores as `str [0]` + `stm {[1],[2]}` and walks the twelve register records with post-incremented stores (str [r0], #20 then #4); this build addresses the records by offset and merges the first stores differently. */
+/* NON_MATCHING: the four list header words are stored in a different order (retail: [3], [0], then [1] and [2] with one stm). */
 #include "shard/W6_W6Match7_CombinerState.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -26,8 +26,8 @@ u32 *FUN_0034dc10(void)
     stage.constantColor.g = 0;
     stage.constantColor.b = 0;
     u32 *list = nn_gr_CTR_Combiner_MakeCommand(&combiner, commands);
-    list[1] = 0xf0201;
     list[0] = 0;
+    list[1] = 0xf0201;
     list[2] = 0;
     list[3] = 0xf0202;
     u32 *block = list + 4;
@@ -35,13 +35,12 @@ u32 *FUN_0034dc10(void)
     block[1] = 0x823f0203;
     u32 *record = block + 0x26;
     for (u32 index = 0; index < 12; ++index) {
-        record[1] = 0x803f0232;
-        record[2] = 0;
-        record[3] = 0;
-        record[4] = 0;
-        record[0] = index;
-        record[5] = 0;
-        record += 6;
+        *record++ = index;
+        *record++ = 0x803f0232;
+        *record++ = 0;
+        *record++ = 0;
+        *record++ = 0;
+        *record++ = 0;
     }
     return record;
 }

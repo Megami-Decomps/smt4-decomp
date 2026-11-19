@@ -1,12 +1,11 @@
 /* NON_MATCHING: guide positions and modes reconstructed; constant hoisting and VFP allocation differ. */
 #include "gfx/DebugGuides.h"
+#include "gfx/ColoredQuad.h"
 #include "title/titleMain.h"
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
 s32 padIsButtonPressed(u32 button);
-void gxSubmitDrawZeroExtraParams(u32 color0, u32 color1, u32 color2, u32 color3,
-                  f32 x, f32 y, f32 width, f32 height, f32 z);
 
 // Cycle between no guides, a center guide, and quarter-screen guides.
 u32 FUN_003d8e24(DebugGuidesWork *work)
@@ -19,16 +18,12 @@ u32 FUN_003d8e24(DebugGuidesWork *work)
     renderCtxSelectTexture(g_titleScene, 0);
     switch (work->mode) {
     case 1:
-        gxSubmitDrawZeroExtraParams(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
-                     200.0f, 0.0f, 1.0f, 240.0f, 0.0f);
+        gxSubmitDrawZeroExtraParams(200.0f, 0.0f, 1.0f, 240.0f, 0xFF7F, 0xFF7F, 0xFF7F, 0.0f, 0xFF7F);
         break;
     case 2:
-        gxSubmitDrawZeroExtraParams(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
-                     100.0f, 0.0f, 1.0f, 240.0f, 0.0f);
-        gxSubmitDrawZeroExtraParams(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
-                     200.0f, 0.0f, 1.0f, 240.0f, 0.0f);
-        gxSubmitDrawZeroExtraParams(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,
-                     300.0f, 0.0f, 1.0f, 240.0f, 0.0f);
+        gxSubmitDrawZeroExtraParams(100.0f, 0.0f, 1.0f, 240.0f, 0xFF7F, 0xFF7F, 0xFF7F, 0.0f, 0xFF7F);
+        gxSubmitDrawZeroExtraParams(200.0f, 0.0f, 1.0f, 240.0f, 0xFF7F, 0xFF7F, 0xFF7F, 0.0f, 0xFF7F);
+        gxSubmitDrawZeroExtraParams(300.0f, 0.0f, 1.0f, 240.0f, 0xFF7F, 0xFF7F, 0xFF7F, 0.0f, 0xFF7F);
         break;
     }
     return 0;

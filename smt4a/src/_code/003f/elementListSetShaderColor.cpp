@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail pushes {r4-r7, lr} (no alignment pad) because FUN_003fe298 was compiled in the same multifile run; body matches. */
+/* NON_MATCHING: the body matches, but a standalone build pads the saved registers for the call.
+ * Retail has no pad; a multifile build with the current FUN_003fe298 uses a different clobber set. */
 #include "common.h"
 
 struct ShaderColorState;

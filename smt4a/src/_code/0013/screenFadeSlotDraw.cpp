@@ -1,5 +1,5 @@
-/* NON_MATCHING: only the VFP argument scheduling before gxSubmitDrawZeroExtraParams differs (retail converts the width into s2 before loading the 0.0f constant). */
 #include "camp/RenderCtx.h"
+#include "gfx/ColoredQuad.h"
 #include "camp/RenderCtxA.h"
 #include "shard/W6_W6Match3_SlotState.h"
 
@@ -8,11 +8,9 @@ extern W6Match3SlotState DAT_006357d8[2];
 u32 renderCtxPackPassFlags(u32 kind, bool enabled);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
-void gxSubmitDrawZeroExtraParams(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
-    f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 // Draw the requested fade slot's color over the full selected render target.
-void FUN_0013c00c(s32 index)
+void screenFadeSlotDraw(s32 index)
 {
     W6Match3SlotState *fade = &DAT_006357d8[index];
     u32 color = fade->index;
@@ -26,7 +24,7 @@ void FUN_0013c00c(s32 index)
         renderCtxSelectTexture(g_renderCtx, NULL);
         f32 height = static_cast<f32>(asdGxPresetsGetByKind(renderCtxGetStereoMode(g_renderCtx)));
         f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_renderCtx)));
-        gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
+        gxSubmitDrawZeroExtraParams(0.0f, 0.0f, width, height, color, color, color, 0.0f, color);
         renderStackPop(&g_renderCtx->stackA);
     }
 }

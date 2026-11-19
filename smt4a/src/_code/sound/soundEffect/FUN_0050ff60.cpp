@@ -1,4 +1,5 @@
-/* NON_MATCHING: identical except register allocation of the constants stored at the end (retail uses r1-r3 and pushes only r4; the build holds 60/4000/100 in r5/r6/ip and pushes r4-r6). The atexit registrations are the linker-removed __aeabi_atexit calls. */
+/* NON_MATCHING: the reverb constants use a larger saved-register set, and the smoothing address
+ * and float literals are pooled in a different order. The atexit registrations link to NOPs. */
 #include "classes/Obj421a58.h"
 #include "classes/Obj55be80.h"
 #include <new>

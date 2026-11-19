@@ -12,9 +12,9 @@ void Obj4222ac::start()
     position[2] = 0;
     if (!g_gameState.suppressStep && !g_gameState.inputBlocked) {
         SoundActorQueuePosition sound = {
-            basePosition[0] * (1.0f / 3.0f),
-            basePosition[1] * (1.0f / 3.0f),
-            basePosition[2] * (1.0f / 3.0f)
+            basePosition.x * (1.0f / 3.0f),
+            basePosition.y * (1.0f / 3.0f),
+            basePosition.z * (1.0f / 3.0f)
         };
         eventSoundPlayByKind(id, 0, sound);
     }

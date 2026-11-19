@@ -1,8 +1,7 @@
-/* NON_MATCHING: same instructions as retail (including the g_partyPanel reload); retail compares the argument before reloading the panel pointer into r0 and builds the flag in r1. */
+/* NON_MATCHING: same instructions as retail (including the g_partyPanel reload); retail compares the argument before reloading the panel pointer into r0 and builds the flag in r1. (Declaring an unused `const bool show = visible != 0` in the condition gives retail's order: steering, not used.) */
 #include "ui/PartyPanelStateA.h"
 
 extern "C" {
-
 
 /* Hides the party panel when `visible` is zero and shows it otherwise. */
 void partyPanelSetHidden(s32 visible)

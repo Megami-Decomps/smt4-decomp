@@ -1,4 +1,4 @@
-/* NON_MATCHING: The first argument-save move and accessory vector component loads/conversions/stores differ in order. */
+/* NON_MATCHING: the accessory offset is stored like retail (vstr of z, vstmia of x/y); remaining: the first argument-save move and the order of the halfword loads and conversions (retail loads z and y first, the build y and z). */
 #include <stdio.h>
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
@@ -60,8 +60,7 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
         if (record->parts[index].name[0] != '0') {
             sprintf(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, record->parts[index].name);
             stage->scene.nodes[index + 1] = reinterpret_cast<BattleStageNode *>(asdMdlManagerCreateSecondList(path, options));
-            NodeVec3 offset = { (f32)record->parts[index].position[0], (f32)record->parts[index].position[1], (f32)record->parts[index].position[2] };
-            stage->scene.offsets[index + 1] = offset;
+            stage->scene.offsets[index + 1] = nodeVec3(record->parts[index].position[0], record->parts[index].position[1], record->parts[index].position[2]);
         }
     }
 }

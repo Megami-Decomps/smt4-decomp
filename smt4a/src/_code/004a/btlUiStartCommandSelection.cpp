@@ -4,7 +4,7 @@ extern "C" {
 
 // Start the battle command selection: open its widgets and populate their four valid party-entry
 // identifiers, optionally announcing an enemy first strike.
-void btlUiStartCommandSelection(u32 unused, s32 mode, s8 first, s8 second, s32 firstStrike, s32 options)
+void btlUiStartCommandSelection(u32 unused, s32 mode, s8 first, s8 second, bool firstStrike, bool options)
 {
     BtlUiOpeningView *ui = reinterpret_cast<BtlUiOpeningView *>(g_btlUi.ui);
     ui->opening.state = 1;

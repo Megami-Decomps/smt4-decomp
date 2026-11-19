@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "battle/BtlUiOpening.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_003f0070(...);
 int btlMainFindEntryByListedId(...);
 int FUN_003f26d4(...);
 int itemEffectPlay(...);
-void btlUiStartCommandSelection(unsigned int, int, signed char, signed char, bool, bool);
 int FUN_004a9c84(...);
 int btlFindEntryValue(...);
 int btlSlotSetStoreValue(unsigned int, int, int);

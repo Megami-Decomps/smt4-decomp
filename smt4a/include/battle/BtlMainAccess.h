@@ -22,7 +22,9 @@ struct BtlMainStateExtA : BtlMainStateA {
     /* 0x4D6C */ s32 count;
     /* 0x4D70 */ u8 unk4D70[8];
     /* 0x4D78 */ BtlPanelSlotA slots[12];
-    /* 0x4E38 */ u8 unk4E38[0x20];
+    /* 0x4E38 */ u8 unk4E38[0x10];
+    /* 0x4E48 */ void *snapshot;      /* 0x34A0 bytes, allocated with the battle's party data */
+    /* 0x4E4C */ u8 unk4E4C[0xC];
     /* 0x4E58 */ std::vector<u16> members; /* the ids of the battle members, in order */
 };
 
@@ -30,7 +32,7 @@ typedef char BtlMainStateExtAOffsetCheck[
     sizeof(BtlMainStateA) == 0x4CF0 && offsetof(BtlMainStateExtA, infoWindow) == 0x4D64 &&
     offsetof(BtlMainStateExtA, selected) == 0x4D68 && offsetof(BtlMainStateExtA, count) == 0x4D6C &&
     offsetof(BtlMainStateExtA, slots) == 0x4D78 && offsetof(BtlMainStateExtA, debugDamage) == 0x4D5C &&
-    offsetof(BtlMainStateExtA, members) == 0x4E58 ? 1 : -1];
+    offsetof(BtlMainStateExtA, snapshot) == 0x4E48 && offsetof(BtlMainStateExtA, members) == 0x4E58 ? 1 : -1];
 
 extern "C" {
 

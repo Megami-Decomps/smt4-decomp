@@ -1,4 +1,3 @@
-/* NON_MATCHING: IDENTICAL when compiled with --cpu=MPCore --fpu=softvfp (no VFP: retail copies the three stack words (ldm/stm) with core registers); the default build uses VFP. Needs that unit cflags. */
 #include "nn/svc.h"
 #include "nn/os/IpcStaticBuffer.h"
 #include "nn/Result.h"
@@ -7,7 +6,8 @@
 extern "C" {
 extern u32 DAT_005c149c;
 
-/* Sends IPC command 0x301 describing `count` elements at `a`/`b`/`c`; stores the reply's second word in *out and returns the reply word or the error. */
+/* Built without VFP (--fpu=softvfp, as the IPC wrappers next to it): the three stack words are copied with
+ * core-register ldm/stm. Sends IPC command 0x301 describing `count` elements at `a`/`b`/`c`; stores the reply's second word in *out and returns the reply word or the error. */
 s32 FUN_00426940(u32 *out, u32 handle, s32 count, u8 mode, u32 a, u32 b, u32 c)
 {
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();

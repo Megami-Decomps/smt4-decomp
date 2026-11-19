@@ -39,7 +39,7 @@ struct AnimationOrigin : MapVector {
     }
 };
 struct AnimationLegacyDefaults {
-    AnimationLegacyDefaults() : origin(0.0f, 0.0f, 0.0f) {}
+    AnimationLegacyDefaults(f32 x, f32 y, f32 z) : origin(x, y, z) {}
     AnimationOrigin origin;
     AnimationTemplate animation;
 };

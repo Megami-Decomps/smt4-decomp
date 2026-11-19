@@ -13,7 +13,7 @@ typedef struct {
 typedef struct Actor Actor;
 
 int FUN_003e1114(PhaseState *phase, Actor *actor);
-int FUN_003ebec8(Actor *actor);
+int btlMainSetupFixedParty(Actor *actor);
 int valueAtF0IsReady(Actor *actor);
 int loadSlotMainIsLoaded(Actor *actor);
 int FUN_003f1334(Actor *actor);
@@ -33,7 +33,7 @@ void FUN_003e2470(PhaseState *phase, Actor *actor)
     if (loadSlotIsLoaded(0x4e) == 0) {
         return;
     }
-    FUN_003ebec8(actor);
+    btlMainSetupFixedParty(actor);
     if (valueAtF0IsReady(actor) != 0) {
         phase->state = 4;
         phase->counter10 = 0;

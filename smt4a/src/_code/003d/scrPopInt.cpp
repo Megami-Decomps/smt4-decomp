@@ -1,4 +1,3 @@
-/* NON_MATCHING: the type byte is loaded with the registers of the offset the other way round (retail [slot, types], built [types, slot]) */
 #include "script/ScriptVm.h"
 
 extern "C" {
@@ -7,19 +6,18 @@ extern "C" {
  * resolving variable references. */
 s32 scrPopInt(ScriptProcess *process)
 {
-    s32 slot = --process->depth;
-    u8 *tags = process->tags;
+    --process->depth;
 
-    switch (tags[slot]) {
+    switch (process->tags[process->depth]) {
     case SCRIPT_VM_TAG_INT:
     case SCRIPT_VM_TAG_RETURN_ADDRESS:
-        return process->values[slot].i;
+        return process->values[process->depth].i;
     case SCRIPT_VM_TAG_FLOAT:
-        return (s32)process->values[slot].f;
+        return (s32)process->values[process->depth].f;
     case SCRIPT_VM_TAG_INT_VAR:
-        return g_scrIntVars[process->values[slot].i];
+        return g_scrIntVars[process->values[process->depth].i];
     case SCRIPT_VM_TAG_FLOAT_VAR:
-        return (s32)g_scrFloatVars[process->values[slot].i];
+        return (s32)g_scrFloatVars[process->values[process->depth].i];
     default:
         return 0;
     }

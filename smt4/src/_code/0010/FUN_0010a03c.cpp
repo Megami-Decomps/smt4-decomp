@@ -1,4 +1,5 @@
-/* NON_MATCHING: the capture flags are now reached through base+0xf00 as in retail; armcc still chains the captured/shown tests with conditional loads (retail branches on each) and places the counter update's return block differently (retail falls into FUN_001137fc's call and returns from the end). */
+/* NON_MATCHING: 17 lines from one instruction: armcc predicates the captured-left test into the enabled test
+ * (ldrbne; cmpne), where retail branches on each and returns the zero flag in r0 directly; the rest shifts. */
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "camp/RenderCtx.h"
@@ -28,20 +29,22 @@ u8 FUN_0010a03c(u32 job)
         return 0;
     }
     tex->encEffFrame++;
-    if (tex->encEffFadeOutFrames <= 0) {
+    if (tex->encEffFadeOutFrames > 0) {
+        if (++tex->encEffFadeOutFrames > FRAME_TEX_FADE_OUT_FRAMES) {
+            FrameTexWork *global = g_frameTex;
+            global->encEffFadeActive = 0;
+            global->encEffFadeInFrames = 0;
+            global->encEffFadeOutFrames = 0;
+            global->encEffFrame = 0;
+            global->encEffEnabled = 0;
+            global->encEffCapturedLeft = 0;
+            global->encEffCapturedRight = 0;
+            global->encEffPendingRight = 0;
+            global->unkF98 = 0;
+            return 0;
+        }
+    } else {
         tex->encEffFadeInFrames++;
-    } else if (++tex->encEffFadeOutFrames > FRAME_TEX_FADE_OUT_FRAMES) {
-        FrameTexWork *global = g_frameTex;
-        global->encEffFadeActive = 0;
-        global->encEffFadeInFrames = 0;
-        global->encEffFadeOutFrames = 0;
-        global->encEffFrame = 0;
-        global->encEffEnabled = 0;
-        global->encEffCapturedLeft = 0;
-        global->encEffCapturedRight = 0;
-        global->encEffPendingRight = 0;
-        global->unkF98 = 0;
-        return 0;
     }
     FUN_001137fc(1);
     return 0;

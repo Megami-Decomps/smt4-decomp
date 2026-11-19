@@ -1,18 +1,7 @@
 /* NON_MATCHING: register allocation only (the global base, kind * 3 and the entry pointer land in r7/r5/r4 in retail, r8/r7/r5 here). */
-#include "event/2dEvent/EventEffect.h"
+#include "event/2dEvent/EventFilter.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
-
-struct EventFilterWork {
-    u32 job;
-    u32 unk04;
-    s32 state;
-    s32 timer;
-    f32 scale;
-    f32 offset;
-    u32 kind;
-    s32 duration;
-};
 
 extern "C" {
 
@@ -25,7 +14,7 @@ void asdTMTexTableReleaseNode(u32 table, u32 node);
 void FUN_0039b7fc(void)
 {
     EventFilterWork *work = g_eventEffect.filterState.work;
-    u32 kind = work->kind;
+    u32 kind = work->texture;
 
     if (kind < 6) {
         EventFilterTexture *textures = g_eventEffect.filterTextures;

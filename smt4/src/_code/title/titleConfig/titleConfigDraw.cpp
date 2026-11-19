@@ -1,8 +1,10 @@
-/* NON_MATCHING: 10 rows, registers and scheduling only (same instructions, frame and block layout as retail).
- * Entering the row frame, retail loads g_titleScene through r0 after spilling the frame's x sum (built: through
- * r2, before the sums); in the cursor's first blend-state change the stack slot address and the previous state
- * take r2/r1 (built: r1/r2). The knob's touch test is the negative one (untouched knob first): written the other
- * way round armcc shares the untouched knob's draw with the unselected row's. */
+/* NON_MATCHING: 28 rows in three places, registers and scheduling only (same instructions, frame and block
+ * layout as retail). Entering the row frame, retail loads g_titleScene through r0 after spilling the frame's x
+ * sum (built: through r2, before the sums); in the cursor's first blend-state change the stack slot address and
+ * the previous state take r2/r1 (built: r1/r2); for the label position retail loads the row entry's halfwords
+ * before the label entry's (built: the label's first; written `entry->x + labelEntry->x` the sums go through
+ * s0/s2 instead of straight into s1/s0). The knob's touch test is the negative one (untouched knob first): written
+ * the other way round armcc shares the untouched knob's draw with the unselected row's. */
 #include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
 #include "camp/RenderCtxTitle.h"
@@ -22,7 +24,7 @@ extern "C" {
 extern TitleConfigCallbackView *g_titleConfig;
 
 s32 resourceRunOperationIfUnblocked(const void *list);
-s32 ifTouchGetSelectionModeForRegion(s32 region);
+u8 ifTouchGetSelectionModeForRegion(int id);
 
 /* Draws a row's frame, and the additive cursor over the selected one. */
 static __inline void titleConfigDrawRowFrame(s32 rowX, s32 rowY, bool isSelected)
@@ -107,7 +109,7 @@ s32 titleConfigDraw(void)
         if (setting < 3) {
             TitleConfigHelpEntry *labels = (TitleConfigHelpEntry *)dataTableGetEntries(dataTableGet(0x3a, 1));
             __2sprintf(text, "%s", &labels[setting]);
-            textDrawString((f32)(entry->x + labelEntry->x + x), (f32)(entry->y + labelEntry->y + y), 0.0f, 2, 0.0f, color,
+            textDrawString((f32)(labelEntry->x + entry->x + x), (f32)(labelEntry->y + entry->y + y), 0.0f, 2, 0.0f, color,
                            1.0f, text);
         }
 

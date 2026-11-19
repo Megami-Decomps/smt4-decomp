@@ -7,3 +7,6 @@
 thumb 0x2e2000 0x311800 OnlineCore source paths in the image; Thumb -Ospace block absent from smt4
 # The CTR-SDK's crt0 entry point (smt4's twin): no frame, a run of calls ending in a tail `b svcExitProcess`.
 arm 0x100000 0x100024 CTR-SDK-crt0 image entry point; calls the SDK's init routines and tail-branches to svcExitProcess
+# armlib's setlocale (only the "C" locale exists), position-independent C library code placed before
+# rt_fpResultDispatch (smt4's twin FUN_0014d9f0 is already third-party).
+arm 0x1bc5ac 0x1bc5ec armlib setlocale: strcmp against "C"; returns the locale name, or NULL for any other locale

@@ -78,7 +78,7 @@ static __inline bool lineIsDigit(char c)
     return (u32)(c - LINE_ASCII_ZERO) < 10;
 }
 
-void FUN_0015f490(u32 id, s32 kind, u32 argument, u32 variant, f32 scale)
+void FUN_0015f490(u32 id, s32 kind, f32 scale, u32 argument, u32 variant)
 {
     void *section = dataTableGet(LINE_TABLE, 0);
     LineRecord *records = static_cast<LineRecord *>(dataTableGetEntries(section));

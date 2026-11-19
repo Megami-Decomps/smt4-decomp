@@ -1,4 +1,6 @@
-/* NON_MATCHING: close: retail re-tests the freshly stored valid flag (`cmp r0, #0; beq`), adds the block offset constant before the base and orders the signature load/constant differently; the build folds the redundant test and reassociates the address arithmetic. */
+/* NON_MATCHING: 25 lines; the s8 valid flag gives retail's re-test of the stored flag. Retail copies the info block
+ * pointer before adding the body offset (mov; add), loads the CWAT signature before the block's first word and adds
+ * the 4 to the offset before the file base; the rest is shifted branch targets. */
 #include "common.h"
 
 #define WAVE_ARCHIVE_SIGNATURE 0x52415743 /* "CWAR" */
@@ -9,7 +11,7 @@ struct WaveArchiveFileReader {
     /* 0x00 */ const void *file;
     /* 0x04 */ const void *infoBlock;
     /* 0x08 */ const void *waveBlock;
-    /* 0x0C */ u8 valid;
+    /* 0x0C */ s8 valid;
 
     bool IsAvailable() const { return valid != 0; }
 };

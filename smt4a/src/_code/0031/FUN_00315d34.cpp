@@ -1,5 +1,6 @@
 /* NON_MATCHING: overlay/text argument contracts and the 128-byte text buffer match retail; cached zero/global registers, overlay scheduling and the early loop epilogue still differ. */
 #include "camp/RenderCtx.h"
+#include "gfx/ColoredQuad.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
@@ -31,8 +32,6 @@ struct MapNoticeEntry {
 extern "C" {
 
 s32 renderCtxPackPassFlags(u32 a, u32 b);
-void gxSubmitDrawZeroExtraParams(u32 first, u32 second, u32 third, u32 fourth,
-                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002371b0(void);
 s32 dataTable2ECount(void);
 MapNoticeEntry *dataTable2EGetEntry(s32 index);
@@ -50,7 +49,7 @@ s32 FUN_00315d34(u32 handle)
         renderCtxPushA(context, state);
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         renderCtxSelectTexture(g_renderCtx, NULL);
-        gxSubmitDrawZeroExtraParams(overlay, overlay, overlay, overlay, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
+        gxSubmitDrawZeroExtraParams(0.0f, 0.0f, 400.0f, 240.0f, overlay, overlay, overlay, 0.0f, overlay);
         FUN_002371b0();
         renderStackPop(&g_renderCtx->stackA);
     }

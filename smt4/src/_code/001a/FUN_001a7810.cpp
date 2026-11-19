@@ -1,4 +1,3 @@
-/* NON_MATCHING: branch structure, getter, text coordinates and the background calls now match; armcc still fuses the 0.5*x+0.5 pulse into a vmla (retail: vmul/vadd with one constant register). */
 #include "ui/PartyPanel.h"
 #include "text/TextDraw.h"
 #include "shard/TextureDrawCall.h"
@@ -22,7 +21,9 @@ void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 altern
     if (highlighted != 0) {
         texDrawCompositeSprite(2, 0x24, 11, x, y, 101);
         color = 0xFFFFFFFF;
-        efctSetSpeed(vec2GetSpeed((const UiSpriteState *)(&static_cast<LabelOwnerView *>(owner)->effect)) * 0.5f + 0.5f);
+        /* The highlight pulses between half and full speed; the halving is its own statement (retail: vmul, then vadd, no vmla). */
+        f32 pulse = vec2GetSpeed((const UiSpriteState *)(&static_cast<LabelOwnerView *>(owner)->effect)) * 0.5f;
+        efctSetSpeed(pulse + 0.5f);
     } else if (alternate != 0) {
         texDrawCompositeSprite(2, 0x24, 10, x, y, 101);
         color = 0xFF;

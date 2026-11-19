@@ -25,7 +25,7 @@ extern unsigned int g_aocMain; /* 0x432fc8 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int curveEvaluateStandard(unsigned char *, unsigned int);
+extern int textMeasureOnLayer(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_002347b8. */
 /* Supplied declaration required: textDrawString. */
@@ -82,7 +82,7 @@ int FUN_0038f924(unsigned int task)
   temp_v5 = temp_v2;
   FUN_0023478c(temp_v2,temp_v14[*(int *)(temp_v3 + 0x179c)]);
   FUN_002347b8(temp_v2,temp_v5,temp_v13);
-  temp_v6 = curveEvaluateStandard(temp_v13,3);
+  temp_v6 = textMeasureOnLayer(temp_v13,3);
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x3a,0x2d));
   temp_v4 = (((int)*(short *)(temp_v3 + 8) + ((int)**(short **)(temp_v3 + 0xc) >> 1)) - (temp_v6 >> 1)) - 9;
   VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

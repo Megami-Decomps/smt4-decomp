@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail loads g_config's pool word before the frame is reserved, keeps the priority 11 in fp and
- * g_titleScene's address in sl (built: sl and fp), schedules the first render-state load earlier and the text
- * scale constant later. Both render-state sets read g_titleScene directly, as their siblings do. */
+/* NON_MATCHING: 28 lines; the heading's textDrawString call (real parameter order) and everything after it match.
+ * Retail keeps the priority 11 in fp and g_titleScene's address in sl (built: sl and fp), loads that address after
+ * the frame's coordinate loads (built: before them), and the second render-state set swaps r1/r2. Both render-state
+ * sets read g_titleScene directly, as their siblings do. */
 #include <stdio.h>
 #include "camp/Config/Config.h"
 #include "camp/CampMenuEntry.h"

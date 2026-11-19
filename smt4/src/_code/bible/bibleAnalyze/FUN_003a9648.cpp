@@ -50,8 +50,8 @@ void uiRectDrawAtBottomRight(void *panel, s32 id, s32 a, s32 b, s32 slide, f32 o
 void FUN_00231bcc(void *panel, s32 id, s32 a, s32 b, s32 slide, s32 c);
 u32 dataLookupDisplayName(u8 *out, u32 id);
 AnalyzeTextBox *FUN_002bf4f0(void *panel, u32 id);
-s32 curveEvaluateStandard(const char *text, s32 mode);
-void drawTextAtSnappedRectangle(void *panel, s32 a, s32 b, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
+s32 textMeasureOnLayer(const char *text, s32 mode);
+void drawTextAtSnappedRectangle(void *panel, f32 x, f32 y, s32 a, s32 b, const char *text, f32 scale, f32 c, f32 d);
 s32 FUN_0029e924(void *list);
 s32 flaggedEntryGetValueByState(void *list);
 void FUN_003aa044(AnalyzeWork *work, s32 index, s32 selected, s32 id);
@@ -79,9 +79,9 @@ void FUN_003a9648(AnalyzeWork *work)
 
     sprintf(text, "%s%s", name, DAT_0043d990[1]);
     AnalyzeTextBox *box = FUN_002bf4f0(work->panel, 0x102B);
-    s32 width = curveEvaluateStandard(text, 2);
+    s32 width = textMeasureOnLayer(text, 2);
 
-    drawTextAtSnappedRectangle(work->panel, 2, -1, text, (f32)(box->x + *box->size / 2 - width / 2), (f32)box->y,
+    drawTextAtSnappedRectangle(work->panel, (f32)(box->x + *box->size / 2 - width / 2), (f32)box->y, 2, -1, text,
                  scale, 1.0f, 0.0f);
 
     s32 first = FUN_0029e924(work->list);

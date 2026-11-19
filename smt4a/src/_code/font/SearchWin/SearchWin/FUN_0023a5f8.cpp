@@ -1,16 +1,11 @@
-/* NON_MATCHING: early returns now give retail's shared zero-result epilogue; remaining: the textDrawString argument loads (colour/0.0f/0.566f pool order) and the frame /5 smull operand order. */
+/* NON_MATCHING: first render-stack push schedules depth and previous state differently; second pop loads the stack base into a different register. */
+#include "font/SearchWin/RunWin.h"
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "ui/UiSpriteApi.h"
-
-/* Pushes the evaluated state on the title scene's first stack. */
-static __inline void titleScenePushFirst(RenderCtxA *scene, s32 state)
-{
-    renderStackPushCounted(&scene->stackA, state);
-}
 
 /* Pushes the evaluated state on the title scene's second stack. */
 static __inline void titleScenePushSecond(RenderCtxA *scene, s32 state)
@@ -24,29 +19,8 @@ static __inline void titleScenePopFirst(RenderCtxA *scene)
     renderStackPop(&scene->stackA);
 }
 
-/* Pops the title scene's second stack. */
-static __inline void titleScenePopSecond(RenderCtxA *scene)
-{
-    renderStackPop(&scene->stackB);
-}
-
-/* The run window (only the fields read here). */
-struct RunWin {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s32 active;
-    /* 0x0C */ u8 unk0C[4];
-    /* 0x10 */ s32 frame;
-    /* 0x14 */ u8 visible;
-    /* 0x15 */ u8 unk15[0x23];
-    /* 0x38 */ u8 anchor[0x20];
-    /* 0x58 */ f32 alpha;
-    /* 0x5C */ u8 unk5C[0x68];
-    /* 0xC4 */ u8 label[1];
-};
-
-
 extern "C" {
-extern RunWin *DAT_0057f584;
+extern RunWinWork *DAT_0057f584;
 
 void texDrawCompositeSprite(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 void gxResetColorQuadToWhite(void);
@@ -59,30 +33,29 @@ u32 renderCtxPackPassFlags(s32 a, s32 b);
  * predecessors dimmed, advancing every 5 frames) and the label. Returns 0. */
 u8 FUN_0023a5f8(void)
 {
-    RunWin *win = DAT_0057f584;
-    if (win->active == 0)
+    RunWinWork *win = DAT_0057f584;
+    if (win->state == 0)
         return 0;
-    if (win->visible == 0)
+    if (win->active == 0)
         return 0;
     {
         renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
         RenderCtxA *first = g_renderCtx;
-        titleScenePushFirst(first, renderCtxPackPassFlags(1, 0));
-        s32 x = vec2GetXInt((const UiSpriteState *)win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-        s32 y = vec2GetYInt((const UiSpriteState *)win->anchor);
-        efctSetSpeed(win->alpha);
+        renderCtxPushACountedDirect(first, renderCtxPackPassFlags(1, 0));
+        s32 x = vec2GetXInt(&win->window) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+        s32 y = vec2GetYInt(&win->window);
+        efctSetSpeed(win->window.alpha);
         texDrawCompositeSprite(2, 8, 0x14, x, y, 101);
         RenderCtxA *scene = g_renderCtx;
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         texDrawCompositeSprite(2, 8, 0x15, x, y, 102);
-        titleScenePopSecond(g_renderCtx);
+        renderStackPopChecked(&g_renderCtx->stackB);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x16F);
-        textDrawString((f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f, 0x57D8FFFF, win->alpha,
-                     (const char *)win->label);
-        s32 step = win->frame / 5;
-        s32 lit = step % 8;
+        textDrawString((f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f,
+                       0x57D8FFFF, win->window.alpha, (const char *)win->text);
+        s32 lit = (win->counter / 5) % 8;
         s32 litPrevious = (lit + 7) % 8;
-        s32 lit2 = (step + 4) % 8;
+        s32 lit2 = (win->counter / 5 + 4) % 8;
         s32 lit2Previous = (lit2 + 7) % 8;
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {

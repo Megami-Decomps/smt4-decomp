@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc shrink-wraps the frame after the guard; retail pushes r4/r5 before it and keeps the table base in r4 with the bound loaded in the guarded block. */
+/* NON_MATCHING: the frame (r4/r5 pushed before the guard) and the loop match; retail reuses the loaded zero count (`ldreq` of the bound, `addeq` of the base) where the build re-zeroes it after the branch. */
 #include "shard/W6_W6Match5_NamedLookup.h"
 
 struct NamedRecordCatalog {
@@ -15,17 +15,15 @@ void FUN_0027f3dc(void* records, u32 count, u32 stride,
 /* Numbers the named records up to the first free key and sorts them by name; does nothing once counted. */
 void FUN_0033f784(void)
 {
-    s32 count = DAT_0043e3b0.count;
-    if (count == 0) {
+    if (DAT_0043e3b0.count == 0) {
         NamedSortRecord* records = reinterpret_cast<NamedSortRecord*>(&DAT_0043e3b0 + 1);
-        do {
-            NamedSortRecord* record = &records[count];
-            if (record->key < 0) {
+        s32 count;
+        for (count = 0; count < 2042; ++count) {
+            if (records[count].key < 0) {
                 break;
             }
-            record->index = static_cast<u16>(count);
-            ++count;
-        } while (count < 2042);
+            records[count].index = static_cast<u16>(count);
+        }
         DAT_0043e3b0.count = count;
         FUN_0027f3dc(DAT_0043e3c8, count, sizeof(NamedSortRecord), keyedRecordCompareName);
     }

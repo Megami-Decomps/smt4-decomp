@@ -11,7 +11,7 @@ unsigned int appTryPurchase(unsigned int, int, int);
 int saveGetMapFlag(...);
 int objectFlagSetBit(...);
 int FUN_0026e630(...);
-int FUN_0026f824(int);
+int playerInitNewGame(int);
 int gameCopyPersistentSave(void);
 int FUN_00287c34(int);
 
@@ -68,7 +68,7 @@ extern int gameDataGetWorkBlock(void);
 /* Supplied declaration required: saveGetMapFlag. */
 /* Supplied declaration required: objectFlagSetBit. */
 /* Supplied declaration required: FUN_0026e630. */
-/* Supplied declaration required: FUN_0026f824. */
+/* Supplied declaration required: playerInitNewGame. */
 /* Supplied declaration required: gameCopyPersistentSave. */
 /* Supplied declaration required: FUN_00287c34. */
 extern int flagBitIsSet(unsigned int);
@@ -247,7 +247,7 @@ void FUN_001c36d8(int param_1)
               temp_v28 = gameFlagIsSet(0x464);
               temp_v1 = gameFlagIsSet(0x551);
               gameCopyPersistentSave();
-              FUN_0026f824(0);
+              playerInitNewGame(0);
               FUN_00287c34(0);
               temp_v2 = gameDataBlocksGetSaveData();
               temp_v3 = gameDataGetWorkBlock();

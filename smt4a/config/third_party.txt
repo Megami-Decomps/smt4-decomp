@@ -3449,6 +3449,7 @@
 0x001bbd40 nw_snd_internal_SoundArchiveFile_FileInfo_GetFileLocationType name
 0x001bbd64 nw_snd_internal_SoundArchiveFile_FileInfo_GetInternalFileInfo name
 0x001bbd8c nw_anim_res_ResAnim_IsFullBakedAnim name
+0x001bc5ac FUN_001bc5ac library
 0x001bc604 rt_fpResultDispatch name
 0x001bc6a4 FUN_001bc6a4 between
 0x001bc6a8 nw_gfx_internal_NWCopyVec4Reverse name

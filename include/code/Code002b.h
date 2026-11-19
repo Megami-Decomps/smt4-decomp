@@ -8,7 +8,7 @@ u32 asdLoadFileAsyncDefault(u32 first, u32 second, u32 third, u32 fourth, u32 fi
 
 u32 FUN_002b6ad0(void);
 
-void FUN_002b7638(u32 first, u32 second, u32 third, f32 value0, f32 value1, f32 value2, f32 value3, u32 fourth, f32 value4);
+void FUN_002b7638(f32 value0, f32 value1, f32 value2, f32 value3, u32 first, u32 second, u32 third, u32 fourth, f32 value4);
 
 void gfxDrawQuadFourColors(u32 first, u32 second, u32 third, f32 value0, f32 value1, f32 value2, f32 value3, u32 fourth, f32 value4);
 

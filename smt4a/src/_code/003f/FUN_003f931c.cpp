@@ -47,8 +47,8 @@ struct PanelColor {
 }
 
 extern "C" {
-void FUN_00164034(PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomLeft, PanelColor *bottomRight,
-                  f32 x, f32 y, f32 width, f32 height, f32 depth);
+void FUN_00164034(f32 x, f32 y, f32 width, f32 height, // declcheck: local (code/Code0016.h takes u32 words; this caller passes PanelColor pointers)
+                  PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomLeft, PanelColor *bottomRight, f32 depth);
 void FUN_001692d4(void);
 void efctSetSpeed(f32 speed);
 f32 FUN_001f3f34(f32 a, f32 b, f32 c, f32 d);
@@ -68,7 +68,7 @@ void FUN_003f931c(PanelWork *panel)
     color.b = 0.0f;
     color.a = fade->fadeAlpha * 0.25f * fadeOut * 0.7f;
     renderCtxSelectTexture(g_renderCtx, NULL);
-    FUN_00164034(&color, &color, &color, &color, 0.0f, 0.0f, 400.0f, 240.0f, 0.87109375f);
+    FUN_00164034(0.0f, 0.0f, 400.0f, 240.0f, &color, &color, &color, &color, 0.87109375f);
     FUN_001692d4();
     efctSetSpeed(fadeOut);
     f32 slide = (4.0f - fade->slide) * 24.5f;

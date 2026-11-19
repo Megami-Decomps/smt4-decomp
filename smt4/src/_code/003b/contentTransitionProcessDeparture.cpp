@@ -1,4 +1,4 @@
-/* NON_MATCHING: the paired flag tests (tst/tsteq through flagsAny) and the hoisted state-17 store now match; remaining: retail places the shared state-17 tail right after the sequence request (the map branches branch back to it), stores state/phase with a separate base instead of the flags writeback. */
+/* NON_MATCHING: the flag tests and the state stores (record assignments where retail stores state and phase with one stm) match; remaining: retail places the shared state-17 tail right after the sequence request (the map branches branch back to it) and orders the 6/8 selection's movge/movlt the other way. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "map/mapDepart.h"
@@ -46,8 +46,7 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
             FUN_00249b18(0, 1);
             titleSetSlotValueState2(0, 10);
             transition->flags &= ~0x400000u;
-            transition->state = 5;
-            transition->phase = 0;
+            transition->step = contentTransitionStep(5, 0);
         }
         return;
     }
@@ -55,8 +54,8 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
         !flagsAny(flags, 0x1000000, 0x2000000) && !flagsAny(flags, 0x8000000, 0x20000000) && (flags & 0x10)) {
         if (flags & 0x80000) {
             asdSequenceRequest(static_cast<s32>(g_mapSelection.selection.group) < 100 ? 6 : 8, NULL, 0);
-            transition->state = 17;
-            transition->phase = 0;
+            transition->step.state = 17;
+            transition->step.phase = 0;
             return;
         } else if (flags & 0x100000) {
             s32 map = (s16)transition->destination.map;
@@ -74,13 +73,12 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
             FUN_003b8b0c(transition);
             __ARM_common_memcpy4_6(&transition->sourceMap, &transition->destination);
             mikadoLoadSceneResources(transition);
-            transition->state = 2;
-            transition->phase = 0;
+            transition->step = contentTransitionStep(2, 0);
             transition->flags &= ~0x10u;
             return;
         }
     }
-    transition->state = 17;
-    transition->phase = 0;
+    transition->step.state = 17;
+    transition->step.phase = 0;
 }
 }

@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_00230d84. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern int curveEvaluateStandard(unsigned int, unsigned int);
+extern int textMeasureOnLayer(unsigned int, unsigned int);
 /* Supplied declaration required: nkmEnemyFindById. */
 extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable01FindByIdWithAoc. */
@@ -126,7 +126,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
       temp_v14 = 3;
     }
     temp_v7 = demonGetRaceLabel(param_4 & 0xffff,0);
-    temp_v4 = curveEvaluateStandard(temp_v7,2);
+    temp_v4 = textMeasureOnLayer(temp_v7,2);
     if (param_3 == 0) {
       temp_v9 = 0x105b;
       temp_v12 = 0xff;

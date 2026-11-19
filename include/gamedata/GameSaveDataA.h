@@ -124,6 +124,16 @@ typedef char SaveSlotTableOffsetCheck[offsetof(SaveSlotTableA, entries) == 0x68 
     offsetof(SaveSlotTableA, player) == 0x1CA4 && offsetof(SaveSlotTableA, slots) == 0x1DDC &&
     offsetof(SaveSlotTableA, preferredId) == 0x2C4C && sizeof(SaveSlotTableA) == 0x2C50 ? 1 : -1];
 
+/* Apocalypse: the party section of the save body (body + 4): the slot table and the 0xE0 bytes that follow it,
+ * up to the flag values. The battle saves and restores it as one block (its fixed "WPartyData" parties). */
+typedef struct SavePartySectionA {
+    /* 0x0000 */ SaveSlotTableA slots;
+    /* 0x2C50 */ u8 unk2C50[0xDC];
+    /* 0x2D2C */ u32 unk2D2C;
+} SavePartySectionA;
+
+typedef char SavePartySectionASizeCheck[sizeof(SavePartySectionA) == 0x2D30 ? 1 : -1];
+
 /* Apocalypse: one saved item record (0x50 bytes, 0x501 of them). */
 typedef struct GameSavedItemA {
     /* 0x00 */ u8 unk00[0x16];

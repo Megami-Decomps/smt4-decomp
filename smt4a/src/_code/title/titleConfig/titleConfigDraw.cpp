@@ -1,7 +1,7 @@
-/* NON_MATCHING: 24 rows, registers only (same instructions, frame and block layout as retail). Retail keeps the
- * row frame's x sum in r0 (spilled and reloaded into r3) and its y sum in r1 where this build swaps them; in the
- * cursor's two blend-state changes the stack slot address and the previous state take r2/r1 (built: r1/r2); the
- * label position's y and x sums take r1/r0 (built: r0/r1). */
+/* NON_MATCHING: 36 rows in three places, registers only (same instructions, frame and block layout as retail).
+ * Entering the row frame retail copies the entry to r4 before reading its x through r0 (built: both halfwords
+ * first, x in r2); in the cursor's first blend-state change the stack slot address and the previous state take
+ * r2/r1 (built: r1/r2); the label position's y and x sums end in r1/r0 (built: r0/r1). */
 #include "ui/UiSpriteApi.h"
 #include "title/titleConfig.h"
 #include "camp/RenderCtxA.h"
@@ -26,8 +26,12 @@ f32 jobGetScalarValue(void);
 
 /* Draws a row's frame, and the pulsing cursor over the selected one. Retail inlines this and
  * titleConfigDrawSlider (it re-reads g_titleConfig inside each and shares one spill slot between their x
- * arguments: written in place the frame is 0x84 bytes, not retail's 0x5C); smt4's FUN_002cb054 has the same two. */
-static void titleConfigDrawRowFrame(s32 rowX, s32 rowY, bool isSelected)
+ * arguments: written in place, or left for armcc to inline as plain `static`, the frame is 0x84 bytes, not
+ * retail's 0x5C); smt4's titleConfigDraw has the same two, and the camp screen's configDrawRowFrame is the
+ * out-of-line counterpart (its selection flag is an s32 too: with `bool` parameters armcc
+ * gives the touched knob's draw other registers than the untouched one's and cannot hoist their common argument
+ * setup above the branch as retail does). */
+static __inline void titleConfigDrawRowFrame(s32 rowX, s32 rowY, s32 isSelected)
 {
     TitleConfigA *menu = g_titleConfig;
     if (!isSelected) {
@@ -47,7 +51,7 @@ static void titleConfigDrawRowFrame(s32 rowX, s32 rowY, bool isSelected)
 }
 
 /* Draws a row's slider with its knob at `level`; the selected row's arrows and knob light up while touched. */
-static void titleConfigDrawSlider(s32 rowX, s32 rowY, s32 level, bool isSelected)
+static __inline void titleConfigDrawSlider(s32 rowX, s32 rowY, s32 level, s32 isSelected)
 {
     TitleConfigA *menu = g_titleConfig;
     s32 mode;
@@ -67,10 +71,10 @@ static void titleConfigDrawSlider(s32 rowX, s32 rowY, s32 level, bool isSelected
             texDrawCompositeSprite(2, 0x24, 6, rowX, rowY, 0x1f);
         }
         mode = recordGetModeForId(menu->touchRegions[3]);
-        if (mode != 1 && mode != 2 && mode != 6) {
-            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x31, knob->x + rowX, knob->y + rowY, 0x29);
-        } else {
+        if (mode == 1 || mode == 2 || mode == 6) {
             texDrawTableEntryAtStoredOrigin(2, 0x24, 0x32, knob->x + rowX, knob->y + rowY, 0x29);
+        } else {
+            texDrawTableEntryAtStoredOrigin(2, 0x24, 0x31, knob->x + rowX, knob->y + rowY, 0x29);
         }
     } else {
         texDrawCompositeSprite(2, 0x24, 4, rowX, rowY, 0x1f);

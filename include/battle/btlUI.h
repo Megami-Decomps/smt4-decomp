@@ -244,6 +244,14 @@ struct BtlUiPanelTimerA {
     s32 frame;
     s32 state;
 };
+
+/* A new panel animation phase starts at frame zero. */
+static __inline BtlUiPanelTimerA panelStartState(s32 state)
+{
+    BtlUiPanelTimerA timer = {0, state};
+    return timer;
+}
+
 typedef struct BtlUiObjBA {
     /* 0x000 */ UiResourceParameters parameters;
     /* 0x020 */ UiSpriteState sprites[7];

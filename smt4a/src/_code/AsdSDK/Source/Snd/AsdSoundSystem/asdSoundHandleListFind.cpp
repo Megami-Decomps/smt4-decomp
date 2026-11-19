@@ -1,37 +1,35 @@
-/* NON_MATCHING: the walk matches; retail returns the found value from inside the loop (shared `mov r0, r3` exit) where the build branches to one exit that masks the u32 result to u8. */
 #include "common.h"
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystemA.h"
 
 extern "C" {
-struct SoundHandleList {
-    AsdSndHandleNode *head;
-    s32 count;
-};
-extern SoundHandleList g_soundHandleList;
+/* The registered list (g_asdSoundSystem+0x75C) reached through its own symbol. */
+extern AsdSndHandleList g_soundHandleList;
+
+/* The node registered with `id`, NULL when there is none: asdSoundRegisteredFind's walk over the
+ * same list, reached through g_soundHandleList. */
+static __inline AsdSndHandleNode *soundHandleListFindNode(s32 id)
+{
+    AsdSndHandleList *list = &g_soundHandleList;
+    AsdSndHandleNode *node = list->handles;
+    for (s32 i = 0; i < list->count; ++i) {
+        if (node == NULL) {
+            break;
+        }
+        if (node->id == id) {
+            return node;
+        }
+        node = node->next;
+    }
+    return NULL;
+}
 
 /* The value byte registered with sound `id`, or 0 when it is not registered or has no handle. */
 u8 asdSoundHandleListFind(s32 id)
 {
-    SoundHandleList *list = &g_soundHandleList;
-    AsdSndHandleNode *node;
-    u32 result = 0;
-    s32 i = 0;
-
-    node = list->head;
-    if (0 < list->count) {
-        do {
-            if (node == NULL) {
-                break;
-            }
-            if (node->id == id) {
-                if (node->handle != 0) {
-                    result = node->value;
-                }
-                break;
-            }
-            node = node->next;
-            i++;
-        } while (i < list->count);
+    u8 result = 0;
+    AsdSndHandleNode *node = soundHandleListFindNode(id);
+    if (node != NULL && node->handle != 0) {
+        result = node->value;
     }
     return result;
 }

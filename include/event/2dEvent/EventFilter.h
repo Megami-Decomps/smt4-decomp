@@ -14,4 +14,6 @@ struct EventFilterWork {
 typedef char EventFilterWorkLayoutCheck[
     offsetof(EventFilterWork, state) == 8 && offsetof(EventFilterWork, opacity) == 0x14 &&
     sizeof(EventFilterWork) == 0x20 ? 1 : -1];
+
+extern "C" s32 eventFilterUpdate(u32 process);
 #endif

@@ -17,9 +17,9 @@ void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void Obj42233c::stop()
 {
     if ((flags & 4) != 0) {
-        f32 dx = basePosition[0] - g_lmapScene->pose.position.x;
-        f32 dy = basePosition[1] - g_lmapScene->pose.position.y;
-        f32 dz = basePosition[2] - g_lmapScene->pose.position.z;
+        f32 dx = basePosition.x - g_lmapScene->pose.position.x;
+        f32 dy = basePosition.y - g_lmapScene->pose.position.y;
+        f32 dz = basePosition.z - g_lmapScene->pose.position.z;
         if (sqrtf(dx * dx + dy * dy + dz * dz) > 300.0f) {
             flags = (flags & ~4) | 1;
         }
@@ -34,14 +34,14 @@ void Obj42233c::stop()
     }
     if (handle != 0) {
         f32 translated[3] = {
-            basePosition[0] + offset[0],
-            basePosition[1] + offset[1],
-            basePosition[2] + offset[2]
+            basePosition.x + offset[0],
+            basePosition.y + offset[1],
+            basePosition.z + offset[2]
         };
         AsdMdlObject *node = (AsdMdlObject *)handle;
         nodeSetTranslation(node->node, 0, translated);
-        modelPartSetRotationDegrees(((AsdMdlObject *)handle)->node, 0, rotation[0], rotation[1], rotation[2]);
-        nodeSetScale(((AsdMdlObject *)handle)->node, 0, scale[0], scale[1], scale[2]);
+        modelPartSetRotationDegrees(((AsdMdlObject *)handle)->node, 0, rotation.x, rotation.y, rotation.z);
+        nodeSetScale(((AsdMdlObject *)handle)->node, 0, scale.x, scale.y, scale.z);
         if ((flags & 4) != 0) {
             node = (AsdMdlObject *)handle;
             if ((node->flags & 2) == 0) {

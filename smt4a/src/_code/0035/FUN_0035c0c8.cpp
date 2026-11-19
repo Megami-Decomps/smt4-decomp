@@ -1,4 +1,4 @@
-/* NON_MATCHING: Skip-path VFP load grouping and register allocation differ; this build duplicates the zero-return epilogue. */
+/* NON_MATCHING: retail loads the value/step pair with one vldmia in each arm; the build uses separate vldr loads for the skip arm. */
 #include "event/eventCommand.h"
 #include "shard/JobWork.h"
 
@@ -17,11 +17,11 @@ u32 FUN_0035c0c8(u32 job)
         s32 elapsed = work->elapsed;
         if (skip) {
             work->elapsed = work->duration;
-            work->alpha += work->delta * (f32)(work->duration - elapsed);
-            return 0;
+            value = work->alpha + work->delta * (f32)(work->duration - elapsed);
+        } else {
+            work->elapsed = elapsed + 1;
+            value = work->alpha + work->delta;
         }
-        work->elapsed = elapsed + 1;
-        value = work->alpha + work->delta;
     }
     work->alpha = value;
     return 0;

@@ -1,19 +1,15 @@
-/* NON_MATCHING: retail loads the second resource pair with two ldr and stores step/stepTimer (2, 0) with one strd; armcc here uses ldm (after two adds) and an add + stm. The linker-inlined scriptProcessSetMode now matches the mode stores. */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "script/scrScriptProcess.h"
+#include "shard/W6_W6Match6_ContentTransition.h"
+#include <stddef.h>
 
 #define UNK3BA2BC_FLAG_PENDING 0x10
 
-struct Unk3ba2bcOwner {
-    /* 0x000 */ u8 unk000[0x20];
-    /* 0x020 */ u32 flags;
-    /* 0x024 */ u8 unk024[4];
-    /* 0x028 */ s32 step;
-    /* 0x02C */ s32 stepTimer;
-    /* 0x030 */ u8 unk030[0xC];
-    /* 0x03C */ u8 unk03C[6];
-    /* 0x042 */ u8 unk042[0x5A];
+/* The content transition's object (the mikado camera, MikadoCamera in mikado/mikadoMain.h) past its
+ * ContentTransition head: the parts this step builds. */
+struct Unk3ba2bcOwner : ContentTransition {
+    /* 0x048 */ u8 unk048[0x54];
     /* 0x09C */ u8 sprites[0xCBC];
     /* 0xD58 */ u8 loader[0x24];
     /* 0xD7C */ void *firstResourceA;
@@ -23,6 +19,8 @@ struct Unk3ba2bcOwner {
     /* 0xD8C */ void *secondResourceB;
     /* 0xD90 */ ScriptProcess *secondPart;
 };
+typedef char Unk3ba2bcOwnerLayoutCheck[offsetof(Unk3ba2bcOwner, sprites) == 0x9C &&
+    offsetof(Unk3ba2bcOwner, secondPart) == 0xD90 ? 1 : -1];
 
 extern "C" {
 
@@ -47,10 +45,9 @@ void FUN_003ba2bc(Unk3ba2bcOwner *owner)
     owner->secondPart = scrScriptProcessCreate(owner->secondResourceA, owner->secondResourceB);
     scriptProcessSetMode(owner->secondPart, 2);
     if (owner->flags & UNK3BA2BC_FLAG_PENDING) {
-        __ARM_common_memcpy4_6(owner->unk03C, owner->unk042);
+        __ARM_common_memcpy4_6(&owner->sourceMap, &owner->destination);
         mikadoLoadSceneResources(owner);
-        owner->step = 2;
-        owner->stepTimer = 0;
+        owner->step = contentTransitionStep(2, 0);
         owner->flags &= ~UNK3BA2BC_FLAG_PENDING;
         buttonHelpSelectByProgress(owner);
     }

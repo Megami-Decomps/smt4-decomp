@@ -1,5 +1,5 @@
-/* NON_MATCHING: Saved float registers, prologue scheduling and centered-coordinate load/add ordering differ. */
-#include "runtime/Stdio.h"
+/* NON_MATCHING: the visible counter's zeroing is scheduled after the first call, and the centred coordinates' loads and adds are ordered differently. */
+#include <stdio.h>
 #include "shard/Shard0037.h"
 #include "shard/S3UiLookup.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -11,8 +11,10 @@ struct BattleRosterLabelMode {
     u8 unk00[4];
     u8 mode;
 };
+/* The label format (0x52D838). */
+static const char s_labelFormat[] = "%s";
+
 extern "C" {
-extern const char DAT_0052d838[];
 BattleRosterRecordA *partyGetSlot(u32 id);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
 
@@ -30,17 +32,12 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
                 labelAlpha = dimAlpha;
             }
             char text[64];
-            __2sprintf(text, DAT_0052d838, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
+            sprintf(text, s_labelFormat, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
             TextureTableEntryIV *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
             s32 width = fontMeasureLineAdvance(text, 1);
             s32 offset = (placement->placement->width - width) / 2;
-            s32 labelX = origin->x + (placement->x + offset + x);
-            s32 labelY = placement->y + origin->y + y;
-            u32 color = 0xFFFFFFFF;
-            if ((record->label.flags & 2) != 0) {
-                color = 0xDC0F14FF;
-            }
-            textDrawString((f32)labelX, (f32)labelY, 0.0f, 1, 0.0f, color, labelAlpha, text);
+            textDrawString((f32)(origin->x + (placement->x + offset + x)), (f32)(placement->y + origin->y + y), 0.0f, 1, 0.0f,
+                           (record->label.flags & 2) != 0 ? 0xDC0F14FF : 0xFFFFFFFF, labelAlpha, text);
             ++visible;
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the literal pool order differs: retail places the g_eventEffect address before the 1.0f constant. */
+/* NON_MATCHING: only the literal pool order differs: retail places the g_eventEffect address before the 1.0f constant. (A local reference to g_eventEffect plus a single-use `f32 wave` temporary in case 3 gives retail's bytes: steering, not used.) */
 #include "event/2dEvent/EventFilter.h"
 #include "code/Code0020.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -9,7 +9,7 @@ extern EventFilterTexture DAT_0057f3e8[6];
 f32 libm_cosf(f32);
 
 // Advance the filter's texture loading, fade-in, pulse and fade-out phases.
-u32 FUN_002a41a0(void)
+s32 eventFilterUpdate(u32 process)
 {
     EventFilterWork *work = g_eventEffect.filterState.work;
     switch (work->state) {

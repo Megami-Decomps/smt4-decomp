@@ -1,3 +1,4 @@
+#include "event/SpatialEffectTask.h"
 /* NON_MATCHING: VFP callee-saved numbering only: retail keeps the incoming x/y pair in d8 (s16/s17) and z in s18, built uses s17/s18 and s16 */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -21,7 +22,6 @@ typedef struct EffectOwner {
 
 s32 FUN_001c2b48(u32 effect);
 s32 FUN_00224ab0(f32 *value, s32 index, u32 arg);
-u32 FUN_00244e1c(u32 effect, u32 *slot, s32 flag, s32 mode, Vec3 position, f32 scale);
 void FUN_003947cc(u32 handle, s32 zero, s32 kind, Vec3 position);
 Vec3 FUN_003dd680(EffectOwner *owner, s32 kind, u32 arg, s32 index);
 
@@ -71,7 +71,7 @@ u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexAr
     u32 *slot = findFreeSlot(owner);
     FUN_003947cc(target, 0, kind, position);
     if (kind == 2 || kind == 5 || kind == 7 || kind == 8 || kind == 9 || kind == 12) {
-        return registerHandle(owner, FUN_00244e1c(effect, slot, 1, 3, position, 1.0f));
+        return registerHandle(owner, reinterpret_cast<u32>(FUN_00244e1c(effect, slot, position.x, position.y, position.z, 1.0f, 1, 3)));
     }
     f32 scale = 5.6f;
     if (kind == 11) {
@@ -83,7 +83,7 @@ u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexAr
         FUN_001c2b48(effect);
         owner->flags |= 4;
     }
-    return registerHandle(owner, FUN_00244e1c(effect, slot, 0, 0, position, scale));
+    return registerHandle(owner, reinterpret_cast<u32>(FUN_00244e1c(effect, slot, position.x, position.y, position.z, scale, 0, 0)));
 }
 
 } /* extern "C" */

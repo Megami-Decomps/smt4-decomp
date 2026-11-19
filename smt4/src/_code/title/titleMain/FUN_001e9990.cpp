@@ -15,7 +15,7 @@ int sndObjectForwardField8(...);
 
 int modelEvaluateFirstScalarChannel(...);
 int aocActivateFileGroupFlags(...);
-int FUN_0026f824(...);
+int playerInitNewGame(...);
 int FUN_0026fe0c(void);
 int FUN_0026ff54(void);
 int frameTexCampSetMode(...);
@@ -104,7 +104,7 @@ extern int frameTexPollTransitionComplete(void);
 extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
-/* Supplied declaration required: FUN_0026f824. */
+/* Supplied declaration required: playerInitNewGame. */
 /* Supplied declaration required: FUN_0026faa4. */
 /* Supplied declaration required: FUN_0026fe0c. */
 /* Supplied declaration required: FUN_0026ff54. */
@@ -592,7 +592,7 @@ LAB_001ea4cc:
           }
         }
         else {
-          FUN_0026f824(0);
+          playerInitNewGame(0);
           aocActivateFileGroupFlags(g_aocSystem);
           FUN_00287c34(0);
           DAT_0049fc74 = 0;

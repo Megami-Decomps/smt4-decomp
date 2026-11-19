@@ -84,7 +84,7 @@ extern unsigned int FUN_00492c70(unsigned char *);
 /* Supplied declaration required: FUN_0049325c. */
 /* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_0049368c. */
-extern unsigned int curveEvaluateStandard(int, unsigned int);
+extern unsigned int textMeasureOnLayer(int, unsigned int);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
 
@@ -188,7 +188,7 @@ void FUN_0048a5e4(int param_1)
     }
   }
   if (*(char *)(param_1 + 0x205ac) != '\0') {
-    temp_v2 = curveEvaluateStandard(temp_v9,2);
+    temp_v2 = textMeasureOnLayer(temp_v9,2);
     temp_v14 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x13,0xfb4));
     temp_v11 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

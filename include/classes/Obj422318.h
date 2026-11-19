@@ -44,10 +44,10 @@ public:
     /* 0x18 */ u32 unk18;
     /* 0x1C */ u8 unk1c[8];
     /* 0x24 */ u32 unk24;
-    /* 0x28 */ f32 basePosition[3];
+    /* 0x28 */ NodeVec3 basePosition;
     /* 0x34 */ u8 unk34[0xC];
-    /* 0x40 */ f32 rotation[3];
-    /* 0x4C */ f32 scale[3];
+    /* 0x40 */ NodeVec3 rotation;
+    /* 0x4C */ NodeVec3 scale;
     /* 0x58 */ s32 frames;
     /* 0x5C */ u8 unk5c[4];
     /* 0x60 */ u32 id;          /* the object's id (a spawner stores a devil id; Obj4222ac::start plays its sound) */

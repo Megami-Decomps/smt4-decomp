@@ -11,7 +11,7 @@ struct PreviewAnimationIds { u32 values[3]; };
 typedef char PreviewInteractionOffsets[(offsetof(PreviewInteractionView, animation) == 0x24 && offsetof(PreviewInteractionView, zoomSteps) == 0x28) ? 1 : -1];
 extern "C" {
 extern const PreviewAnimationIds DAT_004028e0;
-void FUN_0020ffe8(void *model, u32 animation, f32 start, f32 blend);
+void FUN_0020ffe8(void *model, f32 start, u32 animation, f32 blend); // declcheck: local (code/Code0020_Smt4.h takes an OuterFUN_0020ffe8 *; this caller passes the preview's model group)
 void nodeGroupSetScale(void *model, f32 x, f32 y, f32 z);
 void statusCameraSetEye(f32 x, f32 y, f32 z);
 void objSetAnglesDegrees(void *model, const f32 *angles);
@@ -55,7 +55,7 @@ extern "C" void FUN_00254650(PreviewInteractionView *work, u32 action)
         break;
     case 4:
         PreviewAnimationIds ids = DAT_004028e0;
-        FUN_0020ffe8(work->preview.modelGroup, ids.values[work->animation], 0.0f, 0.0f);
+        FUN_0020ffe8(work->preview.modelGroup, 0.0f, ids.values[work->animation], 0.0f);
         break;
     }
 }

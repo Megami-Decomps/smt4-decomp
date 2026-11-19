@@ -8,3 +8,9 @@ arm 0x14e6f8 0x14e724 armlib __rt_udiv10 body (sub/lsr #2/#4/#8/#16 reciprocal, 
 # armlib floating point: double to extended-exponent conversion (rebias by 0x7800, rrx) that tail-calls the
 # normaliser FUN_00155a94 for zero/denormal inputs (smt4a twins FUN_001bcd54 / FUN_001c53fc are already third-party).
 arm 0x15284c 0x152884 armlib floating-point conversion: no frame, flag-setting shifts, teqeq/rrx, tail b to the normaliser
+# armlib floating point: the signalling-NaN test of two doubles ((high & ~(low << 1)) < 0) that raises the
+# invalid-operation exception through FUN_0015911c / FUN_00159464 (smt4a's twin FUN_002e4268 is already third-party).
+arm 0x155afc 0x155b2c armlib floating-point NaN check: two flag-setting tests, then calls to the FP exception helpers
+# NintendoWare sound: nw::snd::internal::WaveArchiveFileReader's constructor, right after
+# WaveArchiveFile::FileHeader::GetFileBlockOffset (0x2a7a94): checks the "CWAR" signature and calls GetFileBlockOffset.
+arm 0x2a7ac4 0x2a7b70 NintendoWare-snd WaveArchiveFileReader constructor; CWAR signature test; calls nw_snd WaveArchiveFile FileHeader GetFileBlockOffset

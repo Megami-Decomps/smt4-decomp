@@ -1,4 +1,4 @@
-/* NON_MATCHING: the exclusion-flag tests now stay unfolded like retail; retail also keeps the 0x11 state constant in r6 (hoisted, five saved registers) and finishes the sequence-request arm through the shared exit, and the transition stores are scheduled differently. */
+/* NON_MATCHING: same shape as smt4 contentTransitionProcessDeparture (flag tests and the record stores of state and phase match); remaining: retail places the shared state-17 tail right after the sequence request (the map branches branch back to it) and orders the 6/8 selection's movge/movlt the other way. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "map/MapSelection.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -55,14 +55,16 @@ void FUN_004b9410(ContentTransition *work)
             FUN_004a0bac(0, 1);
             titleSetSlotValueState2(0, 10);
             work->flags &= ~0x400000;
-            work->state = 5;
-            work->phase = 0;
+            work->step = contentTransitionStep(5, 0);
         }
         return;
     }
     if (!departureIsSuperseded(flags) && (flags & 0x10) != 0) {
         if ((flags & 0x80000) != 0) {
             asdSequenceRequest(g_mapSelection.id < 100 ? 6 : 8, 0, 0);
+            work->step.state = 0x11;
+            work->step.phase = 0;
+            return;
         } else if ((flags & 0x100000) != 0) {
             s32 map = (s16)work->destination.map;
             if (map >= 100) {
@@ -77,13 +79,12 @@ void FUN_004b9410(ContentTransition *work)
             campScriptPanelResourcesRelease(work);
             __ARM_common_memcpy4_6(reinterpret_cast<ShortJumpDestination *>(&work->sourceMap), &work->destination);
             mikadoLoadSceneResources(work);
-            work->state = 2;
-            work->phase = 0;
+            work->step = contentTransitionStep(2, 0);
             work->flags &= ~0x10;
             return;
         }
     }
-    work->state = 0x11;
-    work->phase = 0;
+    work->step.state = 0x11;
+    work->step.phase = 0;
 }
 }

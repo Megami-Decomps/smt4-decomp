@@ -27,7 +27,7 @@ void dataTable19ResolveVariants(void);
 void FUN_00201ac8(void);
 void FUN_00211d00(void);
 void statusBustUpAcquire(void);
-void FUN_0026f824(s32 value);
+void playerInitNewGame(s32 value);
 void buttonHelpAcquireResources(void);
 void FUN_002c5620(void);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
@@ -109,7 +109,7 @@ s32 jyoucyuLoadStep(u32 handle)
         break;
     case 11:
         configSettingsResetDefaults();
-        FUN_0026f824(0);
+        playerInitNewGame(0);
         FUN_002c5620();
         mapSystemLoadSharedFiles();
         work->state++;

@@ -1,8 +1,11 @@
-/* NON_MATCHING: work pointer/size allocation, thread creation arguments and handler table stores differ. */
+/* NON_MATCHING: 85 lines (11 by shape); same frame and registers up to the thread launch, where retail takes -2 in r3 and 17 in ip and stores -2/0 through a pointer to sp+8 (17 in r3, -2 in ip and one store less here: every later row is shifted by one). */
 #include "camp/CecMenu.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/ResultReport.h"
+#include "nn/Result.h"
+#include "nn/os/ThreadLaunch.h"
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -36,9 +39,27 @@ void gameDataBlocksAddFlags(s32 flags);
 void gameDataFlagsSetBits(s32 bits);
 s32 nn_cfg_CTR_IsRestrictP2pCec();
 u8 FUN_00359f90();
-u32 FUN_002bcc60(NnOsThread *thread, s32 *info, void (*entry)(CampCecMenu *), CampCecMenu *argument,
-                  s32 stackTop, s32 priority, s32 affinity, s32 flag);
-void asdDebugTrace(const char *path, s32 line);
+s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(CampCecMenu *),
+                 CampCecMenu **argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
+void FUN_003f6eb4(void);
+void FUN_003f6ff0(void);
+void FUN_003f6f74(void);
+
+/* nn::os::Thread::Start: runs `entry(argument)` on a new thread whose stack is `stack`; a failure is fatal. */
+static __inline void campCecStartThread(void *thread, void (*entry)(CampCecMenu *), CampCecMenu *argument,
+                                        ThreadStackStorage &stack, s32 priority, s32 processor)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.callbacks[0] = FUN_003f6eb4;
+    descriptor.callbacks[1] = FUN_003f6ff0;
+    descriptor.callbacks[2] = FUN_003f6f74;
+    s32 result = FUN_002bcc60(thread, &descriptor, entry, &argument, stack.info.address + stack.info.size, priority,
+                              processor, 0);
+    if (nnResultIsFailureExceptSummary(result, 3)) {
+        resultHandleFailure(result);
+    }
+}
 
 // Install the camp screen handlers. When StreetPass is available the worker loads its resources.
 void FUN_001ffc5c()
@@ -61,6 +82,7 @@ void FUN_001ffc5c()
     work->state = -1;
     work->unkD30 = -1;
     work->substate = 0;
+    void (*runScript)() = FUN_001ebe10; /* two states only run the menu's script */
     work->handlers[0] = campCecStopCommThread;
     work->handlers[1] = campCecInboxState;
     work->handlers[2] = FUN_002ccb7c;
@@ -70,9 +92,9 @@ void FUN_001ffc5c()
     work->handlers[6] = campCecMenuIdleState;
     work->handlers[9] = FUN_002114fc;
     work->handlers[7] = FUN_001dbeb8;
-    work->handlers[10] = FUN_001ebe10;
+    work->handlers[10] = runScript;
     work->handlers[8] = FUN_001dc608;
-    work->handlers[11] = FUN_001ebe10;
+    work->handlers[11] = runScript;
     work->handlers[12] = FUN_003105f4;
     work->handlers[13] = FUN_002ece60;
     work->handlers[15] = reinterpret_cast<void (*)()>(&questQueryFalse);
@@ -94,7 +116,7 @@ void FUN_001ffc5c()
         work->savedBannerPending = 0;
         buttonHelpSetPreset(0xB9);
         FUN_002579bc(0);
-        campCecModelSceneInit(work->block0A0);
+        campCecModelSceneInit(g_campCec->block0A0);
         bgmRestart(0);
         soundChannelRequestIfEnabled(0x1000062, 0, 60);
         runWinOpen();
@@ -105,12 +127,18 @@ void FUN_001ffc5c()
         work->loadState = 0;
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\CampCec\\CampCec.cpp", 573);
         work->threadStack = (void *)memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
-        work->taskList = asdOperatorNew(0x18, campCecDrawDimmingOverlay);
+        void *owner; /* the original passes this to operator new uninitialised */
+        ThreadStackStorage *stack = static_cast<ThreadStackStorage *>(asdOperatorNew(sizeof(ThreadStackStorage), owner));
+        if (stack != NULL) {
+            stack->info.unk00 = 0;
+            stack->info.unk04 = 0;
+            stack->info.address = 0;
+            stack->info.size = 0;
+            stack->owned = 0;
+        }
+        work->taskList = stack;
         resultReportIfFailed(work->taskList, work->threadStack, 0x1000);
-        s32 info = 4;
-        u32 result = FUN_002bcc60(&work->thread, &info, campCecLoaderThread, work, 0, 0x11, -2, 0);
-        if ((result & 0x7E00000) != 0x600000 && (s32)result < 0)
-            resultHandleFailure(result);
+        campCecStartThread(&work->thread, campCecLoaderThread, work, *static_cast<ThreadStackStorage *>(work->taskList), 17, -2);
     }
 }
 }

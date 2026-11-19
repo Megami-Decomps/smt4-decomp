@@ -934,6 +934,7 @@
 0x0015599c FUN_0015599c between
 0x001559dc runtimeCopyOptionalWord between
 0x001559ec rt_fpResultDispatch name
+0x00155afc FUN_00155afc library
 0x00155ccc nn_os_AddressSpaceManager_Free name
 0x00155d3c FUN_00155d3c between
 0x00155dd8 nn_dsp_CTR_DSP_FlushDataCache name
@@ -1440,6 +1441,7 @@
 0x002a6a14 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo name
 0x002a6a50 nw_snd_internal_Util_BitFlag_GetValue name
 0x002a7a94 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset name
+0x002a7ac4 FUN_002a7ac4 library
 0x002a7b78 _ZN9Obj421d10C1Ev between
 0x002a7bc0 _ZN2nw4math5MTX448IdentityEv name
 0x002a7c50 nw_gfx_res_ResLookupTable_Dereference name

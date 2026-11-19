@@ -2185,12 +2185,12 @@
     },
     {
       "address": "0x107784",
-      "function": "FUN_00107784",
+      "function": "screenFadeSlotDraw",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_00107784.o",
+      "object": "build/obj/_code/0010/screenFadeSlotDraw.o",
       "size": 348,
-      "source": "src/_code/0010/FUN_00107784.cpp",
-      "target": "orig/target/_code/0010/FUN_00107784.o",
+      "source": "src/_code/0010/screenFadeSlotDraw.cpp",
+      "target": "orig/target/_code/0010/screenFadeSlotDraw.o",
       "thumb": false
     },
     {
@@ -11972,12 +11972,12 @@
     },
     {
       "address": "0x141adc",
-      "function": "vectorSetAllOne",
+      "function": "_ZN10QuadVectorC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0014/vectorSetAllOne.o",
+      "object": "build/obj/_code/0014/QuadVector__QuadVector.o",
       "size": 24,
-      "source": "src/_code/0014/vectorSetAllOne.cpp",
-      "target": "orig/target/_code/0014/vectorSetAllOne.o",
+      "source": "src/_code/0014/QuadVector__QuadVector.cpp",
+      "target": "orig/target/_code/0014/QuadVector__QuadVector.o",
       "thumb": false
     },
     {
@@ -25695,12 +25695,12 @@
     {
       "address": "0x1e981c",
       "file": "kernel/jyoucyu",
-      "function": "FUN_001e981c",
+      "function": "jyoucyuDrawLoadingOverlay",
       "module": "_code",
-      "object": "build/obj/_code/kernel/jyoucyu/FUN_001e981c.o",
+      "object": "build/obj/_code/kernel/jyoucyu/jyoucyuDrawLoadingOverlay.o",
       "size": 344,
-      "source": "src/_code/kernel/jyoucyu/FUN_001e981c.cpp",
-      "target": "orig/target/_code/kernel/jyoucyu/FUN_001e981c.o",
+      "source": "src/_code/kernel/jyoucyu/jyoucyuDrawLoadingOverlay.cpp",
+      "target": "orig/target/_code/kernel/jyoucyu/jyoucyuDrawLoadingOverlay.o",
       "thumb": false
     },
     {
@@ -26454,12 +26454,12 @@
     {
       "address": "0x1f3044",
       "file": "camp/Unite/Unite",
-      "function": "FUN_001f3044",
+      "function": "uniteCreate",
       "module": "_code",
-      "object": "build/obj/_code/camp/Unite/Unite/FUN_001f3044.o",
+      "object": "build/obj/_code/camp/Unite/Unite/uniteCreate.o",
       "size": 1556,
-      "source": "src/_code/camp/Unite/Unite/FUN_001f3044.cpp",
-      "target": "orig/target/_code/camp/Unite/Unite/FUN_001f3044.o",
+      "source": "src/_code/camp/Unite/Unite/uniteCreate.cpp",
+      "target": "orig/target/_code/camp/Unite/Unite/uniteCreate.o",
       "thumb": false
     },
     {
@@ -35265,12 +35265,12 @@
     },
     {
       "address": "0x23342c",
-      "function": "curveEvaluateStandard",
+      "function": "textMeasureOnLayer",
       "module": "_code",
-      "object": "build/obj/_code/0023/curveEvaluateStandard.o",
+      "object": "build/obj/_code/0023/textMeasureOnLayer.o",
       "size": 52,
-      "source": "src/_code/0023/curveEvaluateStandard.cpp",
-      "target": "orig/target/_code/0023/curveEvaluateStandard.o",
+      "source": "src/_code/0023/textMeasureOnLayer.cpp",
+      "target": "orig/target/_code/0023/textMeasureOnLayer.o",
       "thumb": false
     },
     {
@@ -44807,12 +44807,12 @@
     },
     {
       "address": "0x26f824",
-      "function": "FUN_0026f824",
+      "function": "playerInitNewGame",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_0026f824.o",
+      "object": "build/obj/_code/0026/playerInitNewGame.o",
       "size": 288,
-      "source": "src/_code/0026/FUN_0026f824.cpp",
-      "target": "orig/target/_code/0026/FUN_0026f824.o",
+      "source": "src/_code/0026/playerInitNewGame.cpp",
+      "target": "orig/target/_code/0026/playerInitNewGame.o",
       "thumb": false
     },
     {
@@ -83940,7 +83940,18 @@
       "size": 104,
       "source": "src/_code/0035/FUN_0035221c.cpp",
       "target": "orig/target/_code/0035/FUN_0035221c.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=softvfp"
+      ]
     },
     {
       "address": "0x35228c",

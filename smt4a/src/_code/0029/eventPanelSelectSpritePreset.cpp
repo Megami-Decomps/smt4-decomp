@@ -1,5 +1,4 @@
-#include "battle/btlUI.h"
-/* NON_MATCHING: `animated` is a byte argument (its store now follows the option stores as in retail); remaining: armcc stores `initialized` before `mode`, and stores the delay after the writeback frame/state stores where retail stores it first. */
+#include "battle/BtlUiOpening.h"
 #include "ui/UiSpriteApi.h"
 #include "common.h"
 #include "sys/RuntimeObjects.h"
@@ -14,7 +13,7 @@ void eventPanelSelectSpritePreset(BtlUiObjBA *work, s32 mode, u8 optionB, u8 opt
     work->optionA = optionA;
     work->optionB = optionB;
     work->animated = animated;
-    if (mode == 0) {
+    if (work->mode == 0) {
         if (btlIsDefeatSuppressed()) {
             pairSetFirstResetSecond(&work->sprites[0], 41);
             uiSpriteSelectAnim(&work->sprites[0], 0);
@@ -38,7 +37,7 @@ void eventPanelSelectSpritePreset(BtlUiObjBA *work, s32 mode, u8 optionB, u8 opt
             pairSetFirstResetSecond(&work->sprites[5], 9);
             uiSpriteSetKeyframe(&work->sprites[5], 2, 0);
         }
-    } else if (mode == 1) {
+    } else if (work->mode == 1) {
         pairSetFirstResetSecond(&work->sprites[0], 42);
         uiSpriteSelectAnim(&work->sprites[0], 0);
         pairSetSecondResetFirst(&work->sprites[3], 8);
@@ -53,11 +52,9 @@ void eventPanelSelectSpritePreset(BtlUiObjBA *work, s32 mode, u8 optionB, u8 opt
     if (animated) {
         uiSpriteSelectAnim(&work->sprites[6], 4);
         work->delay = 10;
-        work->timer.frame = 0;
-        work->timer.state = 4;
+        work->timer = panelStartState(4);
     } else {
-        work->timer.frame = 0;
-        work->timer.state = 2;
+        work->timer = panelStartState(2);
     }
 }
 }

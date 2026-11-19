@@ -4,7 +4,7 @@
 
 extern "C" {
 
-u32 FUN_0028a0d0(u32 flags, u32 value, u8 first, u8 second, s32 enabled, u32 mode, f32 x, f32 y, f32 z)
+u32 FUN_0028a0d0(u32 flags, u32 value, f32 x, f32 y, f32 z, u8 first, u8 second, s32 enabled, u32 mode)
 {
     struct Request {
         MapVector position;

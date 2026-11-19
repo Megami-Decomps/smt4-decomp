@@ -1,5 +1,8 @@
-/* NON_MATCHING: the effect-speed constant and the pushed-state bookkeeping are scheduled differently (retail holds 1.0f in s16 across the pops and spreads the float arguments of the overlay call over s0-s4). */
+/* NON_MATCHING: 21 lines from two differences: retail reads the fade at 0x200 through a split base (add r0, r5, #480;
+ * vldr s0, [r0, #32]) where this build addresses it directly, and the literal pool's order differs (the rest is
+ * the shifted branch and pool offsets). */
 #include "common.h"
+#include "gfx/ColoredQuad.h"
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "Model/MoriModelShadowMap.h"
@@ -22,7 +25,6 @@ s32 renderCtxPackPassFlags(u32 kind, u32 arg);
 void FUN_0046868c(TitleOverlayA *overlay);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
-void gxSubmitDrawZeroExtraParams(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);
 
@@ -47,7 +49,7 @@ void FUN_0046a868(TitleOverlayA *overlay)
         renderCtxSelectTexture(g_renderCtx, 0);
         f32 preset = (f32)asdGxPresetsGetByKind(renderCtxGetStereoMode(g_renderCtx));
         f32 height = (f32)asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_renderCtx));
-        gxSubmitDrawZeroExtraParams(alpha, alpha, alpha, alpha, 0.0f, 0.0f, height, preset, 0.0f);
+        gxSubmitDrawZeroExtraParams(0.0f, 0.0f, height, preset, alpha, alpha, alpha, 0.0f, alpha);
         renderStackPop(&g_renderCtx->stackA);
     }
     renderStackPop(&g_renderCtx->stackA);

@@ -1,5 +1,5 @@
-/* NON_MATCHING: scheduling only: retail moves r3 after the float argument copies and stores the
- * two -1 fields last; this build hoists both. */
+/* NON_MATCHING: writes the two final -1 slots too early. */
+#include "event/SpatialEffectTask.h"
 #include "shard/S1Mover.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -32,8 +32,8 @@ void FUN_00200c9c(ModelEffectTask *task);
 
 /* Starts the task that plays effect `id` at a position and scale; `doneFlag` (optional) reads 1
  * while it runs. */
-ModelEffectTask *FUN_00244e1c(u32 id, u32 *doneFlag, u8 mode, u8 option, Vec3f position,
-                              f32 scale)
+ModelEffectTask *FUN_00244e1c(u32 id, u32 *doneFlag, f32 x, f32 y, f32 z, f32 scale,
+                              u8 mode, u8 option)
 {
     ModelEffectTask *task = taskCreate(FUN_00200c9c, 0, 0, 0, 0, sizeof(ModelEffectTask), 3, 0, 0);
     if (task != NULL) {
@@ -43,7 +43,9 @@ ModelEffectTask *FUN_00244e1c(u32 id, u32 *doneFlag, u8 mode, u8 option, Vec3f p
         if (doneFlag != NULL) {
             *doneFlag = 1;
         }
-        task->position = position;
+        task->position.x = x;
+        task->position.y = y;
+        task->position.z = z;
         task->id = id;
         task->mode = mode;
         task->option = option;

@@ -53,7 +53,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00473754. */
 /* Supplied declaration required: FUN_00473910. */
 extern int countOwnerIsValidIndex(int, int);
-extern int curveEvaluateStandard(unsigned char *, unsigned int);
+extern int textMeasureOnLayer(unsigned char *, unsigned int);
 
 
 void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
@@ -190,7 +190,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
           } while (temp_v4 < 0x10);
           sprintf((char *)temp_v11,"%ls%s%ls",temp_v5 + 0x5b8,temp_v12,temp_v5 + 0x5f8);
         }
-        temp_v5 = curveEvaluateStandard(temp_v11,2);
+        temp_v5 = textMeasureOnLayer(temp_v11,2);
         temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2f,0x68));
         temp_v5 = ((int)**(short **)(temp_v4 + 0xc) + (int)*(short *)(temp_v4 + 8) + temp_v9) - temp_v5;
         VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);

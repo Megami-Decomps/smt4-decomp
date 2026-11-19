@@ -1,4 +1,4 @@
-#include "event/2dEvent/EventEffect.h"
+#include "event/2dEvent/EventFilter.h"
 #include <string.h>
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -6,21 +6,9 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
-struct EventFilterWork {
-    u32 job;
-    u32 unk04;
-    s32 state;
-    s32 timer;
-    f32 scale;
-    f32 offset;
-    u32 kind;
-    s32 duration;
-};
-
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f3e8[6];
-u32 FUN_002a41a0(void *job);
 u32 FUN_002a3f54(void *job);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, u32 process);
@@ -38,15 +26,15 @@ void eventFilterStart(u32 kind)
     }
     memset(g_eventEffect.filterState.work, 0, sizeof(EventFilterWork));
     EventFilterWork *work = g_eventEffect.filterState.work;
-    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EvtFilter Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002a41a0), NULL, NULL);
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EvtFilter Calc"), 3, 0, 0, eventFilterUpdate, NULL, NULL);
     taskCreateDraw("EvtFilter DrawUpLeft", 0x85, 0, 0, FUN_002a3f54, NULL, NULL, work->job);
     taskCreateDraw("EvtFilter DrawUpRight", 0xe1, 0, 0, FUN_002a3f54, NULL, NULL, work->job);
-    work->kind = kind;
-    work->timer = 0;
+    work->texture = kind;
+    work->frame = 0;
     work->state = 0;
-    work->scale = 1.0f;
-    work->offset = 0.0f;
-    u32 selectedKind = g_eventEffect.filterState.work->kind;
+    work->pulse = 1.0f;
+    work->opacity = 0.0f;
+    u32 selectedKind = g_eventEffect.filterState.work->texture;
     if (selectedKind < 6) {
         if (textureGetIndexedResource(0x35) == NULL) {
             asdTMTexTableLoadTmx(0x35, 0);

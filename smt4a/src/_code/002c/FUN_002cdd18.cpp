@@ -11,12 +11,6 @@ void screenFadeSlotReset(u32 index);
 void workSetStateByte(UiSpriteState *sprite, u8 state);
 }
 
-static __inline BtlUiPanelTimerA panelStartState(s32 state)
-{
-    BtlUiPanelTimerA timer = {0, state};
-    return timer;
-}
-
 /* Advances the panel's state machine by one frame. */
 extern "C" void FUN_002cdd18(BtlUiObjBA *panel)
 {

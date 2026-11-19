@@ -156,12 +156,33 @@ struct SkillDataRecordA {
             u8 prefix[0xD];
             /* 0x39 */ u8 flags;
         } itemUse;
+        struct {
+            u8 prefix[3];
+            /* 0x2F */ u8 target;     /* 4: only a unit without ailments */
+            u8 unk30[8];
+            /* 0x38 */ u8 flags;      /* bit 0: every stat change must apply; bits 1, 3, 4: property tests; bit 2: revives a reserve */
+            /* 0x39 */ u8 unk39;
+            /* 0x3A */ u16 healing;   /* low 12 bits: the HP restored; bit 12: only in an ordinary battle */
+        } usability;                  /* what the battle's usability check (FUN_003ff998) reads */
     };
     union {
-        /* 0x3C */ u32 flags;
+        /* 0x3C */ u32 flags;       /* low 7 bits: the ailment kind cured (FUN_003ff524) */
         /* 0x3C */ u8 menuCategory; /* the category (1-based) battle code tests with btlEntryHasSkillCategory */
     };
-    /* 0x40 */ u8 unk40[0x22];
+    union {
+        /* 0x40 */ u8 unk40[0x22];
+        struct {
+            /* 0x40 */ u8 unk40;
+            /* 0x41 */ s8 valueSlot;     /* 1-based slot of BtlUnitDataA.values, out of range when none */
+            /* 0x42 */ u8 unk42[3];
+            /* 0x45 */ u8 secondCure;    /* a second ailment kind cured */
+            /* 0x46 */ u8 unk46[0x11];
+            /* 0x57 */ u8 raisesMaximum; /* nonzero: needs a unit whose maximum HP can still rise */
+            /* 0x58 */ u8 unk58[8];
+            /* 0x60 */ s8 summons;       /* positive: needs room for another unit */
+            /* 0x61 */ u8 unk61;
+        } usabilityTail;
+    };
     /* 0x62 */ u8 stages[9][2];
     /* 0x74 */ u8 unk74[0x12];
     union {
@@ -207,6 +228,10 @@ struct Table04ExtraRecord {
 };
 typedef char Table04RecordAOffsets[offsetof(SkillDataRecordA, properties) == 0x28 &&
     offsetof(SkillDataRecordA, flags) == 0x3C ? 1 : -1];
+typedef char SkillDataRecordAUsabilityOffsets[offsetof(SkillDataRecordA, usability.target) == 0x2F &&
+    offsetof(SkillDataRecordA, usability.flags) == 0x38 && offsetof(SkillDataRecordA, usability.healing) == 0x3A &&
+    offsetof(SkillDataRecordA, usabilityTail.valueSlot) == 0x41 && offsetof(SkillDataRecordA, usabilityTail.secondCure) == 0x45 &&
+    offsetof(SkillDataRecordA, usabilityTail.raisesMaximum) == 0x57 && offsetof(SkillDataRecordA, usabilityTail.summons) == 0x60 ? 1 : -1];
 typedef char Table04RecordASizeCheck[sizeof(SkillDataRecordA) == 0x88 &&
     offsetof(SkillDataRecordA, stages) == 0x62 && offsetof(SkillDataRecordA, unk86) == 0x86 ? 1 : -1];
 typedef char Table04CategoryOffsetCheck[offsetof(SkillDataRecordA, sort.category) == 0x23 &&

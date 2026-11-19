@@ -123,7 +123,7 @@ extern "C" void lmapUpdateSceneModels(void)
         scene = g_lmapScene;
         scene->moveActive = 0;
         scene->motionTicks = 0;
-        FUN_0020ffe8(reinterpret_cast<OuterFUN_0020ffe8 *>(scene->playerModel), scene->moveMode, 0.0f, scene->moveSpeed);
+        FUN_0020ffe8(reinterpret_cast<OuterFUN_0020ffe8 *>(scene->playerModel), 0.0f, scene->moveMode, scene->moveSpeed);
         g_lmapScene->previousMotionFrame = 0.0f;
     } else {
         ++g_lmapScene->motionTicks;

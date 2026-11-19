@@ -1,4 +1,3 @@
-/* NON_MATCHING: type-array pointer recovers address timing; ldrb base/index register order remains reversed. */
 #include "script/ScriptVm.h"
 
 extern "C" {
@@ -7,18 +6,17 @@ extern "C" {
  * resolving variable references. */
 s32 scrPopInt(ScriptProcess *process)
 {
-    const u8 *tags = process->tags;
-    s32 slot = --process->depth;
-    switch (tags[slot]) {
+    --process->depth;
+    switch (process->tags[process->depth]) {
     case SCRIPT_VM_TAG_INT:
     case SCRIPT_VM_TAG_RETURN_ADDRESS:
-        return process->values[slot].i;
+        return process->values[process->depth].i;
     case SCRIPT_VM_TAG_FLOAT:
-        return (s32)process->values[slot].f;
+        return (s32)process->values[process->depth].f;
     case SCRIPT_VM_TAG_INT_VAR:
-        return g_scrIntVars[process->values[slot].i];
+        return g_scrIntVars[process->values[process->depth].i];
     case SCRIPT_VM_TAG_FLOAT_VAR:
-        return (s32)g_scrFloatVars[process->values[slot].i];
+        return (s32)g_scrFloatVars[process->values[process->depth].i];
     default:
         return 0;
     }

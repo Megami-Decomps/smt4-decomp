@@ -1058,7 +1058,7 @@ code_r0x0032d518:
     iVar7 = FUN_002b89a4(0);
     if (iVar7 != 0) {
       func_0x002c58ac();
-      FUN_001f3044();
+      uniteCreate();
       FUN_00269da0(2);
       puVar9 = DAT_0043da90;
       puVar17 = DAT_0043da90 + 6;

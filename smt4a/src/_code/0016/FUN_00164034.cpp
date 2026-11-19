@@ -8,8 +8,8 @@ void FUN_00186244(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 
 void effectSubmitDefaultParameters(void);
 
 /* Substitutes the shared default for empty integer parameters and submits the scalar parameter block. */
-/* The fourth colour is declared after the first four floats: ABI-equal (r3), and it is the order retail copies the arguments in. */
-void FUN_00164034(u32 first, u32 second, u32 third, f32 value0, f32 value1, f32 value2, f32 value3, u32 fourth, f32 value4)
+/* The four floats are declared before the colours (ABI-equal: r0-r3 and s0-s4): the order its callers schedule the arguments in. */
+void FUN_00164034(f32 value0, f32 value1, f32 value2, f32 value3, u32 first, u32 second, u32 third, u32 fourth, f32 value4)
 {
     if (first == 0) first = DAT_005b3ce8;
     if (second == 0) second = DAT_005b3ce8;

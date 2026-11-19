@@ -1,22 +1,22 @@
 /* NON_MATCHING: byte swaps no longer become REV and the 0.0 depth now lives in s18 like retail; remaining: width/height saved registers swap (retail height r5, width r6), the origin adds take their operands in the other order, and the swap shifts are scheduled differently. */
 #include "camp/RenderCtx.h"
+#include "gfx/ColoredQuad.h"
 #include "title/titleMain.h"
+#include "shard/Shard0036.h"
 
 extern "C" {
 extern TitleScene *g_titleScene;
 extern f32 DAT_004724cc[2];
 s32 renderCtxPackPassFlags(u32 first, u32 second);
-void gxSubmitDrawZeroExtraParams(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
 }
 
 /* The colour with its byte order reversed (0xAABBGGRR <-> 0xRRGGBBAA). */
 static inline u32 menuReverseColorBytes(u32 color)
 {
-    u8 b0 = color;
-    u8 b1 = color >> 8;
-    u8 b2 = color >> 16;
-    u8 b3 = color >> 24;
-    return ((u32)b0 << 24) | ((u32)b1 << 16) | ((u32)b2 << 8) | b3;
+    RgbaWord c;
+    c.word = color;
+    u32 r = c.rgba.r, g = c.rgba.g, b = c.rgba.b, a = c.rgba.a;
+    return (r << 24) | (g << 16) | (b << 8) | a;
 }
 
 extern "C" {
@@ -31,8 +31,8 @@ void effMenuDrawGradientRect(s32 x, s32 y, s32 width, s32 height, u32 firstColor
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, renderCtxPackPassFlags(1, 1));
     renderCtxSelectTexture(g_titleScene, 0);
-    gxSubmitDrawZeroExtraParams(firstColor, firstColor, secondColor, secondColor,
-        (f32)pixelX, (f32)pixelY, (f32)width, (f32)height, depth);
+    gxSubmitDrawZeroExtraParams((f32)pixelX, (f32)pixelY, (f32)width, (f32)height,
+                                firstColor, firstColor, secondColor, depth, secondColor);
     renderStackPop(&g_titleScene->stackA);
 }
 }

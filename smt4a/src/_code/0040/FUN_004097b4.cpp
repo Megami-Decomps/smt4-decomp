@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc hoists the address of context->stereoMode into a callee-saved register (retail reloads [r4,#0x52c] twice), which pushes `mode` and `fade` onto the stack */
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes.h"
+#include "code/Code0016.h"
 
 extern "C" {
 
@@ -11,8 +12,6 @@ u32 renderCtxPackPassFlagsWithAlpha(u32 kind, f32 value);
 u32 flagsPackFourBooleans(s32 first, s32 second, s32 third, s32 fourth);
 u32 FUN_003a48dc(s32 a, s32 b, s32 c, u32 d);
 u32 packThreeFields(u32 a, s32 b, s32 c);
-void FUN_00164034(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2,
-                  f32 value3, f32 value4);
 
 /* Draws one effect quad with its render-state stacks temporarily set from `flags`, then restores them. */
 void FUN_004097b4(RenderCtxA *context, u32 color, u32 fade, u32 flags, f32 alpha)
@@ -40,7 +39,7 @@ void FUN_004097b4(RenderCtxA *context, u32 color, u32 fade, u32 flags, f32 alpha
     renderStackPush(&context->stackB, packNibblesAndByte(1, 0, 0));
     renderStackPush(&context->depthStacks.stackE, FUN_003a48dc(1, fade, 255, 255));
     renderStackPush(&context->depthStacks.stackF, packThreeFields(mode, mode, mode));
-    FUN_00164034(color, color, color, color, 0.0f, 0.0f, height, width, alpha);
+    FUN_00164034(0.0f, 0.0f, height, width, color, color, color, color, alpha);
     renderStackPop(&context->depthStacks.stackF);
     renderStackPop(&context->depthStacks.stackE);
     renderStackPop(&context->stackB);

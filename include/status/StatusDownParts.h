@@ -15,9 +15,17 @@ typedef struct StatusDownTrack {
 
 /* A demon listed by statusBuildFlaggedDemonList: its id and the flag that marks it. */
 typedef struct FlaggedDemonEntry {
-    u16 id;
-    u16 flag;
+    union {
+        u16 id;
+        s16 icon;       /* Apocalypse's list draw (FUN_003d3a4c): the row's icon (uiDrawItemOrStatusIcon) */
+    };
+    union {
+        u16 flag;
+        u16 recordId;   /* Apocalypse's list draw: the table 0x0C record named on the row, 0 = empty row */
+    };
 } FlaggedDemonEntry;
+
+typedef char FlaggedDemonEntrySizeCheck[sizeof(FlaggedDemonEntry) == 4 ? 1 : -1];
 
 /* The demons whose flag is set (statusBuildFlaggedDemonList), with their grid. */
 typedef struct StatusDownFlaggedList {

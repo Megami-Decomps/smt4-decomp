@@ -43,7 +43,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: uiDrawTableTextureAtRectCorner. */
 /* Supplied declaration required: FUN_0049368c. */
-extern int curveEvaluateStandard(unsigned int, unsigned int);
+extern int textMeasureOnLayer(unsigned int, unsigned int);
 /* Supplied declaration required: renderSetClippedScissor. */
 
 
@@ -126,7 +126,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
       temp_v13 = 3;
     }
     temp_v6 = FUN_0014bf3c(param_4 & 0xffff,0);
-    temp_v3 = curveEvaluateStandard(temp_v6,2);
+    temp_v3 = textMeasureOnLayer(temp_v6,2);
     if (param_3 == 0) {
       temp_v8 = 0x105b;
       temp_v11 = 0xff;

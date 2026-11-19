@@ -3,7 +3,7 @@
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
 
-extern "C" void FUN_0015f490(u32 handle, s32 kind, s32 enabled, s32 flags, f32 scale);
+extern "C" void FUN_0015f490(u32 handle, s32 kind, f32 scale, s32 enabled, s32 flags);
 
 extern "C" void FUN_0021b968(ResultWorkA *units, s32 slot, u32 handle, s32 animate)
 {
@@ -21,7 +21,7 @@ extern "C" void FUN_0021b968(ResultWorkA *units, s32 slot, u32 handle, s32 anima
         units->partyMarkers[slot] = 1;
     }
     if (animate && !units->markersPending) {
-        FUN_0015f490(handle, 7, 1, 0, 1.0f);
+        FUN_0015f490(handle, 7, 1.0f, 1, 0);
         units->markersPending = 1;
     }
 }

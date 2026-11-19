@@ -3,8 +3,8 @@
 
 /* Add the rectangle's origin and extent, then snap the text coordinates to pixels. The depth, spacing and
  * opacity arguments are forwarded unchanged (retail tail-calls textDrawString, placed right after). */
-extern "C" f32 drawTextAtSnappedRectangle(const SelectionRectangle *rectangle, u32 layer, u32 color,
-                            const char *text, f32 x, f32 y, f32 depth, f32 spacing,
+extern "C" f32 drawTextAtSnappedRectangle(const SelectionRectangle *rectangle, f32 x, f32 y,
+                            u32 layer, u32 color, const char *text, f32 depth, f32 spacing,
                             f32 opacity)
 {
     f32 snappedX = (f32)(s32)(rectangle->x + rectangle->width + x);

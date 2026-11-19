@@ -1,5 +1,5 @@
-/* NON_MATCHING: only the VFP argument scheduling before gxSubmitDrawZeroExtraParams differs (retail converts the width into s2 before loading the 0.0f constant), as in the Apocalypse twin FUN_0013c00c. */
 #include "camp/RenderCtx.h"
+#include "gfx/ColoredQuad.h"
 #include "shard/W6_W6Match3_SlotState.h"
 #include "camp/RenderCtxTitle.h"
 
@@ -8,11 +8,9 @@ extern W6Match3SlotState DAT_004d9758[2];
 s32 renderCtxPackPassFlags(u32, u32);
 u32 asdGxPresetsGetByKind(u32);
 u32 asdGxPresetsGetHeightByKind(u32);
-void gxSubmitDrawZeroExtraParams(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
-                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
 /* Draw the selected screen-fade color with its current interpolated opacity. */
-void FUN_00107784(s32 index)
+void screenFadeSlotDraw(s32 index)
 {
     W6Match3SlotState *fade = &DAT_004d9758[index];
     u32 color = fade->index;
@@ -27,7 +25,7 @@ void FUN_00107784(s32 index)
     renderCtxSelectTexture(g_titleScene, 0);
     f32 height = static_cast<f32>(asdGxPresetsGetByKind(renderCtxGetStereoMode(g_titleScene)));
     f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(renderCtxGetStereoMode(g_titleScene)));
-    gxSubmitDrawZeroExtraParams(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);
+    gxSubmitDrawZeroExtraParams(0.0f, 0.0f, width, height, color, color, color, 0.0f, color);
     renderStackPop(&g_titleScene->stackA);
 }
 }

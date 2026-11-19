@@ -10,6 +10,8 @@
 #include "gamedata/UnitStats.h"
 
 class RegisteredHandle;
+struct UniteCtrl;
+struct ThreadStackStorage;
 
 /* A demon model shown in the fusion preview. */
 struct UnitePreviewModel {
@@ -57,12 +59,16 @@ struct UniteWork {
         /* 0x0000 */ void *context;
         /* the screen's animated sprites: the result panel and the option list read the same four */
         struct {
-            /* 0x0000 */ u8 unk0000[0x24];
+            /* 0x0000 */ UniteCtrl *ctrl;      /* the fusion rules (gamedata/unite/UniteCtrl.cpp) */
+            /* 0x0004 */ UiResourceParameters resources; /* the animation tables every sprite below plays */
             /* 0x0024 */ UiSpriteState fade;   /* its opacity fades the result panel in, the cursor row's highlight */
             /* 0x00B0 */ UiSpriteState slide;  /* its position scrolls the result highlight, the cursor row's shine */
             /* 0x013C */ UiSpriteState pulse;  /* its opacity pulses the result panel's cursor */
             /* 0x01C8 */ UiSpriteState open;   /* finished once the option list has opened */
             /* 0x0254 */ UiSpriteState listOffset; /* where the demon lists' scroll bar sits in the panel */
+            /* 0x02E0 */ UiSpriteState unk02E0;
+            /* 0x036C */ UiSpriteState unk036C;
+            /* 0x03F8 */ u32 process;          /* the "Unite Calc" process; the draw task is its child */
         } sprites;
         struct {
             /* 0x0000 */ u8 unk0000[0x1C8];
@@ -77,9 +83,12 @@ struct UniteWork {
     /* 0x0404 */ union {
         /* 0x0404 */ u8 unk0404[0x30];
         struct {
-            /* 0x0404 */ u8 unk0404[0x1c];
+            /* 0x0404 */ u8 unk0404[0x18];
+            /* 0x41C */ u32 openedSeconds;     /* the play time when the screen opened */
             s8 mode; /* 0x420 */
-            /* 0x421 */ u8 unk0421[0xB];
+            /* 0x421 */ u8 unk0421[3];
+            /* 0x424 */ void *messageFile;     /* unite/unite.mbm */
+            /* 0x428 */ void *scriptFile;      /* unite/unite.bf */
             /* 0x42C */ u32 scriptProcess;
             /* 0x430 */ u8 active;
             /* 0x431 */ u8 unk0431[3];
@@ -197,7 +206,7 @@ struct UniteWork {
     /* 0x9454 */ u8 unk9454[4];
     /* 0x9458 */ u32 resultIndex;          /* the created unit's index (FUN_0029c0c0) */
     /* 0x945C */ u32 resultLevel;          /* the created unit's level */
-    /* 0x9460 */ u8 unk9460[4];
+    /* 0x9460 */ s32 unk9460;
     /* 0x9464 */ u32 unk9464;
     union {
         /* 0x9468 */ u8 unk9468[0x170];
@@ -211,10 +220,16 @@ struct UniteWork {
             /* 0x9500 */ UniteSubState sub;
             /* 0x95C8 */ void *previewSound;
             /* 0x95CC */ struct AsdMdlObject *previewModel;
+            /* 0x95D0 */ void *camera;         /* camp/jakyou_all.bccam */
         } preview;
     };
     /* 0x95D8 */ s32 unk95D8;
-    /* 0x95DC */ u8 unk95DC[0x18];
+    /* 0x95DC */ s32 unk95DC;
+    /* 0x95E0 */ u8 stopRequested;         /* ends the catalog thread */
+    /* 0x95E1 */ u8 unk95E1[3];
+    /* 0x95E4 */ ThreadStackStorage *stack; /* the catalog thread's stack mapping */
+    /* 0x95E8 */ u8 thread[8];             /* the catalog thread (FUN_001de340) */
+    /* 0x95F0 */ void *stackMemory;        /* the 0x1000 bytes the stack maps */
     /* 0x95F4 */ u8 searchingFrame;        /* 0..39, turns the "searching" grid */
     /* 0x95F5 */ u8 unk95F5[3];
 };
@@ -390,6 +405,14 @@ struct UniteDescriptionEntry {
     /* 0x55 */ char text[1];
 };
 typedef char UniteWorkSizeCheck[sizeof(UniteWork) == 0x95F8 ? 1 : -1];
+typedef char UniteWorkCreateOffsets[
+    offsetof(UniteWork, sprites.resources) == 0x4 && offsetof(UniteWork, sprites.unk02E0) == 0x2E0 &&
+    offsetof(UniteWork, sprites.unk036C) == 0x36C && offsetof(UniteWork, sprites.process) == 0x3F8 &&
+    offsetof(UniteWork, menu.openedSeconds) == 0x41C && offsetof(UniteWork, menu.messageFile) == 0x424 &&
+    offsetof(UniteWork, menu.scriptFile) == 0x428 && offsetof(UniteWork, unk9460) == 0x9460 &&
+    offsetof(UniteWork, preview.camera) == 0x95D0 && offsetof(UniteWork, unk95DC) == 0x95DC &&
+    offsetof(UniteWork, stopRequested) == 0x95E0 && offsetof(UniteWork, stack) == 0x95E4 &&
+    offsetof(UniteWork, thread) == 0x95E8 && offsetof(UniteWork, stackMemory) == 0x95F0 ? 1 : -1];
 typedef char UniteWorkOptionListIVOffsets[
     offsetof(UniteWork, sprites.fade) == 0x24 && offsetof(UniteWork, sprites.slide) == 0xB0 &&
     offsetof(UniteWork, sprites.pulse) == 0x13C && offsetof(UniteWork, sprites.open) == 0x1C8 && offsetof(UniteWork, touchIV.scrollUpRegion) == 0x472 &&

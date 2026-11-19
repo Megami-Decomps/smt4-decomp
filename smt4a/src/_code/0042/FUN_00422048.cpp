@@ -1,4 +1,4 @@
-/* NON_MATCHING: combiner-byte initialization and attribute-command stores are scheduled differently. */
+/* NON_MATCHING: the register records match smt4 FUN_0034dc10's (post-increment stores); remaining: retail stores the four header words through a written-back pointer ([1], [0], then [2] and [3] with writeback) and keeps the zero for the combiner bytes in r5 after the 2 and 14 stores. */
 #include "shard/W6_W6Match7_CombinerState.h"
 
 struct DrawAttributeCommand { u32 index, header, values[4]; };
@@ -22,8 +22,8 @@ u32 *FUN_00422048()
     CombinerState combiner;
     gfxCombinerStateInitialize(&combiner);
     FUN_00158b88(&combiner);
-    combiner.stages[1].color.function = 2;
     combiner.stages[1].color.sources[1] = 14;
+    combiner.stages[1].color.function = 2;
     combiner.stages[1].constantColor.r = 0;
     combiner.stages[1].constantColor.g = 0;
     combiner.stages[1].constantColor.b = 0;
@@ -34,15 +34,15 @@ u32 *FUN_00422048()
     reset->secondHeader = 0xf0202;
     sysMemClear(reset->reset, sizeof(reset->reset));
     reset->reset[1] = 0x823f0203;
-    for (s32 i = 0; i < 12; ++i) {
-        DrawAttributeCommand *attribute = &reset->attributes[i];
-        attribute->header = 0x803f0232;
-        attribute->values[0] = 0;
-        attribute->values[1] = 0;
-        attribute->values[2] = 0;
-        attribute->index = i;
-        attribute->values[3] = 0;
+    u32 *record = (u32 *)reset->attributes;
+    for (u32 index = 0; index < 12; ++index) {
+        *record++ = index;
+        *record++ = 0x803f0232;
+        *record++ = 0;
+        *record++ = 0;
+        *record++ = 0;
+        *record++ = 0;
     }
-    return (u32 *)(reset + 1);
+    return record;
 }
 }

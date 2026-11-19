@@ -1,4 +1,4 @@
-/* NON_MATCHING: the command tail now matches (post-increment stores); the first words merge into an stm, the slot loop uses a different induction pointer and the zero register is r5 not r4. */
+/* NON_MATCHING: the command tail and the slot records (post-increment stores) match; retail stores the first header words one by one with the zero in r4 (build: an stm and the zero in r5), which renames the zero register throughout. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -21,13 +21,12 @@ u32 *FUN_00356e94(void)
     cursor[1] = 0x823F0203;
     cursor += 0x98 / sizeof(u32);
     for (u32 index = 0; index < 12; ++index) {
-        cursor[2] = 0;
-        cursor[3] = 0;
-        cursor[4] = 0;
-        cursor[5] = 0;
-        cursor[0] = index;
-        cursor[1] = 0x803F0232;
-        cursor += 6;
+        *cursor++ = index;
+        *cursor++ = 0x803F0232;
+        *cursor++ = 0;
+        *cursor++ = 0;
+        *cursor++ = 0;
+        *cursor++ = 0;
     }
     *cursor++ = 0;
     *cursor++ = 0x000100E0;

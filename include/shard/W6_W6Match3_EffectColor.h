@@ -18,6 +18,15 @@ static __inline void effectColorCopy(const EffectColor *source, EffectColor *des
     *destination = *source;
 }
 
+// Sets all four channels of a colour (the effect colour resets: white quads, the default gray).
+static __inline void effectColorSet(EffectColor *color, f32 red, f32 green, f32 blue, f32 alpha)
+{
+    color->red = red;
+    color->green = green;
+    color->blue = blue;
+    color->alpha = alpha;
+}
+
 struct EffectRgb {
     f32 red;
     f32 green;

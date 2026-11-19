@@ -40,9 +40,9 @@ void Obj4222ac::updateMotion()
     }
     if (handle != 0) {
         f32 translated[3] = {
-            basePosition[0] + position[0],
-            basePosition[1] + position[1],
-            basePosition[2] + position[2]
+            basePosition.x + position[0],
+            basePosition.y + position[1],
+            basePosition.z + position[2]
         };
         if (g_mapCamera->weight > 0.9f) {
             f32 amount = (g_mapCamera->weight - 0.9f) * 10.0f;
@@ -56,9 +56,9 @@ void Obj4222ac::updateMotion()
             modelPartSetRotationDegrees(modelOf(handle)->node, 0, amount * -60.0f, g_mapCamera->heading + 180.0f, 0);
         } else {
             nodeSetTranslation(reinterpret_cast<AsdMdlNode *>(modelOf(handle)->node), 0, translated);
-            modelPartSetRotationDegrees(modelOf(handle)->node, 0, rotation[0], rotation[1], rotation[2]);
+            modelPartSetRotationDegrees(modelOf(handle)->node, 0, rotation.x, rotation.y, rotation.z);
         }
-        nodeSetScale(modelOf(handle)->node, 0, scale[0], scale[1], scale[2]);
+        nodeSetScale(modelOf(handle)->node, 0, scale.x, scale.y, scale.z);
         AsdMdlObject *node = modelOf(handle);
         if (g_gameState.loading) {
             if ((node->flags & 2) == 0) {

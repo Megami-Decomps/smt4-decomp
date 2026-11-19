@@ -1,18 +1,18 @@
-/* NON_MATCHING: grouped RGB reads become VLDM and VFP allocation/load scheduling differ; retail uses three scalar VLDRs. */
-#include "shard/W6_W6Match3_EffectColor.h"
+/* NON_MATCHING: same operations; retail loads the three scales singly into s4/s3/s2 (the build merges the last two
+ * into vldmia), subtracts them before loading the 0.1f step and storing the state, and stores the steps like a
+ * three-float copy (the third, then the first two with vstmia) where the build stores them singly in order. */
+#include "ui/PanelTransition.h"
 
-extern "C" EffectColorOverride* DAT_00570ab4;
+extern "C" PanelTransition *DAT_00570ab4;
 
-// Prepare RGB step deltas toward neutral gray.
+// Start easing the panel's three scales back to 0.5 in ten steps (state 4).
 extern "C" void effectColorOverrideBeginFadeToGray(void)
 {
-    EffectColorOverride* color = DAT_00570ab4;
-    if (color != NULL) {
-        EffectRgb delta = { 0.5f - color->red, 0.5f - color->green, 0.5f - color->blue };
-        color->enabled = 4;
-        delta.red *= 0.1f;
-        delta.green *= 0.1f;
-        delta.blue *= 0.1f;
-        color->transition.delta = delta;
+    PanelTransition *transition = DAT_00570ab4;
+    if (transition != NULL) {
+        transition->scaleStep[0] = (0.5f - transition->scale[0]) * 0.1f;
+        transition->scaleStep[1] = (0.5f - transition->scale[1]) * 0.1f;
+        transition->scaleStep[2] = (0.5f - transition->scale[2]) * 0.1f;
+        transition->state = 4;
     }
 }

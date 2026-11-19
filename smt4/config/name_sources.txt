@@ -5039,3 +5039,9 @@
 00218480 btlCommandBeginTargetSelection inferred enters battle target selection and previews the skill on the party
 0029a284 statusDownDrawSkillRow inferred draws one skill row of the status screen
 00218460 btlActorCardIsIdle inferred true unless the card is in animation states 1-4; misnamed (no save code)
+001f3044 uniteCreate evidence Unite.cpp debug path (lines 6272, 6307); creates the fusion screen's "Unite Calc" process and "Unite DDraw" task, its work (g_unite) and catalog thread
+0023342c textMeasureOnLayer inferred draws the text off screen (y -20) on the layer and returns textDrawString's advance as an int; FUN_00478ac4 centres its loading message with it
+00141adc _ZN10QuadVectorC1Ev evidence QuadVector's default constructor: passed to __aeabi_vec_ctor_nocookie_nodtor with stride 0x10 and count 4 by every array user; native construction in smt4a FUN_0050e86c emits a call to this symbol
+001e981c jyoucyuDrawLoadingOverlay inferred twin of smt4a jyoucyuDrawLoadingOverlay (same draws: white backdrop, resident sprite until status 100)
+00107784 screenFadeSlotDraw inferred draws the selected screen-fade slot's colour at its interpolated opacity over the whole render target
+0026f824 playerInitNewGame inferred clears money, sets the stock count to 8, gives the starting equipment and builds the default player name for a new game

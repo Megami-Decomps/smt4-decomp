@@ -473,7 +473,7 @@ void FUN_002712dc(void)
             g_mapCamera->values[1] = 0.0f;
             g_lmapScene->unk068 = 0.0f;
             g_lmapScene->pose.position = g_lmapScene->pose.targetPosition;
-            FUN_0020ffe8((OuterFUN_0020ffe8 *)g_lmapScene->playerModel, g_lmapScene->moveMode, 80.0f, 0.0f);
+            FUN_0020ffe8((OuterFUN_0020ffe8 *)g_lmapScene->playerModel, 80.0f, g_lmapScene->moveMode, 0.0f);
             lmapSceneNextState();
             break;
         case 20: {
