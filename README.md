@@ -28,7 +28,7 @@ reconstruction against the original executables. Progress, per game and per func
 
 ## Status and versions
 
-Every function compiles, and about two thirds of the first-party ones are proven; the rest are
+Every function compiles, and about 70% of the first-party ones are proven; the rest are
 still being matched. A function counts once its source compiles to the retail bytes and
 `tools/relink.py` links it back into a byte-identical executable; names, types and source organization
 are still being recovered.
@@ -46,8 +46,8 @@ are listed in `config/third_party.txt` and not counted ([what counts](docs/proje
 
 | Version | First-party functions | Proven by relink | Readable | Third-party (not counted) |
 |---|---|---|---|---|
-| `smt4` | 7,785 | 5,316 | 2,730 | 3,105 |
-| `smt4a` | 9,578 | 6,409 | 3,290 | 7,757 |
+| `smt4` | 7,774 | 5,450 | 2,785 | 3,116 |
+| `smt4a` | 9,571 | 6,575 | 3,369 | 7,763 |
 
 "Proven" is the number that counts: objdiff ignores some operand differences, relink does not. The
 [project notes](docs/project.md#proof) explain the measurements and the six functions per game that
