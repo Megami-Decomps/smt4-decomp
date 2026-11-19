@@ -10,8 +10,11 @@ it reads `<game>/build/report.json` (objdiff, for sizes and the function list) a
 whose link did not match. A function is
 
     registered  relink linked its compiled object into a byte-identical .code;
-    readable    registered, and its source has none of the decompiler's placeholders
-                (FUN_/DAT_/param_N/temp_vN/...) and its own name is a real one;
+    readable    registered, its own name is a real one, and its source (comments aside) has none of
+                the decompiler's placeholders (FUN_/DAT_/param_N/temp_vN/...), no raw offset casts,
+                no use of a field known only by its offset (unkNN/padNN/fieldNN), and no struct of
+                its own: objects are described once, in a shared header. A struct that only this
+                unit uses is allowed when a comment just before it says why: `/* unit-local: ... */`;
     a draft     not registered, but hand-written: a NON_MATCHING note that romwright did not write.
 
 DIR holds the previously published site's `<game>/history.json` files; the current commit is
@@ -56,6 +59,22 @@ PROVEN_LINE = re.compile(r"Proven:\s*IV ([\d,]+),\s*Apocalypse ([\d,]+)")
 PLACEHOLDER = re.compile(r"\b(?:FUN|DAT|LAB|PTR|s)_[0-9a-fA-F]{6,8}\b|\b(?:param|temp_v|local|in_|unaff_)\w*\d\b"
                          r"|\b[a-z]{1,2}Var\d+\b|\bundefined\d?\b")
 COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.S)
+# `*(T *)(p + 0x20)` and `((u8 *)p + 0x20)`: an offset where a field belongs.
+RAW_OFFSET = re.compile(r"\(\s*\(\s*(?:u8|s8|char|u32|uintptr_t)\s*\*\s*\)\s*\w+\s*\+\s*(?:0x[0-9a-fA-F]+|\d+)\s*\)"
+                        r"|\*\s*\(\s*\w+\s*\*\s*\)\s*\(\s*\w+\s*\+\s*0x")
+UNKNOWN_FIELD = re.compile(r"(?:->|\.)\s*(?:unk_?[0-9A-Fa-f]+|pad_?[0-9A-Fa-f]*|field_?[0-9A-Fa-f]+)\b")
+UNIT_STRUCT = re.compile(r"^\s*(?:typedef\s+)?struct\s+\w*\s*(?::[^{;]*)?\{", re.M)
+UNIT_LOCAL = re.compile(r"/\*\s*unit-local:[^*]*\*/\s*(?:typedef\s+)?struct\b")
+
+
+def is_readable(name: str, text: str) -> bool:
+    """The readability check for a proven function (see the module docstring)."""
+    if name.startswith("FUN_"):
+        return False
+    code = COMMENT.sub("", text)
+    if PLACEHOLDER.search(code) or RAW_OFFSET.search(code) or UNKNOWN_FIELD.search(code):
+        return False
+    return len(UNIT_STRUCT.findall(code)) <= len(UNIT_LOCAL.findall(text))
 
 
 def git(*args: str) -> str:
@@ -106,7 +125,7 @@ def load_game(game: str) -> dict:
                 excluded += 1
                 continue
             registered = name in proven
-            readable = registered and not name.startswith("FUN_") and not PLACEHOLDER.search(COMMENT.sub("", text))
+            readable = registered and is_readable(name, text)
             functions.append({
                 "name": name,
                 "size": int(function.get("size", 0)),
@@ -603,7 +622,7 @@ wait in address-numbered folders until someone finds their file.</p>
 <p>Every function in the game, by folder: {folder_count} folders. Search for a function or a file, or
 show only the folders with work left.</p>
 <ul class="legend">
-<li class="readable"><code>readable</code> registered and written to the readability standard</li>
+<li class="readable"><code>readable</code> registered and written to the readability standard: a real name, no decompiler placeholders, no raw offsets or offset-only fields, no private struct views</li>
 <li class="registered"><code>registered</code> proven by relink</li>
 <li class="draft"><code>draft</code> hand-written, not yet matching</li>
 <li class="todo"><code>todo</code> the decompiler's first pass</li>

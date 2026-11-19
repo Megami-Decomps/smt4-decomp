@@ -132,6 +132,17 @@ A done function has none of the decompiler's placeholders:
   constant's meaning isn't obvious. No restating the code.
 - Each source file includes `common.h` (base types, `NULL`) or a header that does.
 
+The progress site counts a proven function as **readable** when a mechanical check passes
+(`tools/progress_site.py`): its own name is real, and its code (comments aside) has no decompiler
+placeholder, no raw offset cast (`*(T *)(p + 0x20)`, `(u8 *)p + 0x20`), no read or write of a field
+known only by its offset (`unkXX`, `padXX`, `fieldXX`: unknown fields may stay in the header, but a
+function that uses one has not worked out what it holds) and no struct declared in the unit. An
+object is described once, in a shared header ([one struct per object](#one-struct-per-object)); a
+type that only this unit uses (a file-local record, say) is allowed when a comment just before it
+says why: `/* unit-local: the sort key array exists only while this function runs */`. The check
+cannot see the rest of the standard (types, names, control flow, comments), which review still
+holds.
+
 ## Consistency rules
 
 Each rule below takes the form most of the proven, readable sources already use (a survey of the

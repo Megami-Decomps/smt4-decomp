@@ -43,14 +43,14 @@ Progress counts first-party code only: Atlus's engine (AsdSDK) and the game. Nin
 NintendoWare, NEX and OnlineCore, Mobiclip and the ARM runtime still relink with everything else, but
 are listed in `config/third_party.txt` and not counted ([what counts](docs/project.md#what-counts)).
 
-Snapshot at `0444aa790`; the [progress site](https://megami-decomps.github.io/smt4-decomp/), which CI
+Snapshot at `b631ffd5f`; the [progress site](https://megami-decomps.github.io/smt4-decomp/), which CI
 publishes from `master` with `tools/progress_site.py`, has the current numbers, per game and per
 function:
 
 | Version | First-party functions | Proven by relink | Proven code bytes | Readable | Third-party (not counted) |
 |---|---|---|---|---|---|
-| `smt4` | 7,774 | 5,450 | 582,618 of 2,411,976 | 2,785 | 3,116 |
-| `smt4a` | 9,571 | 6,575 | 721,104 of 3,133,960 | 3,369 | 7,763 |
+| `smt4` | 7,773 | 5,456 | 584,146 of 2,411,832 | 1,948 | 3,117 |
+| `smt4a` | 9,571 | 6,584 | 722,856 of 3,133,960 | 2,218 | 7,763 |
 
 The function and code badges diverge because about 70% of the first-party functions are proven but
 only about 24% of their code bytes (23% in Apocalypse): the unproven 30% are the large gameplay, UI
@@ -93,8 +93,9 @@ Run these from the repository root, after the Quickstart's relink (they read its
 ends with `fdiff` printing `IDENTICAL` and the [review checklist](docs/CONTRIBUTING.md#review-checklist).
 
 1. **Make a proven function readable.** On the [progress site](https://megami-decomps.github.io/smt4-decomp/),
-   each game's function compendium marks proven functions that still carry decompiler placeholders
-   as `registered` (finished ones are `readable`). Bring one to the
+   each game's function compendium marks proven functions that still carry decompiler placeholders,
+   raw offsets, offset-only fields or a private struct view as `registered` (finished ones are
+   `readable`). Bring one to the
    [readability standard](docs/style-and-naming.md#readability-standard) and give it a real name
    with `tools/names.py`, checking after each step that it still matches:
    `python -B tools/fdiff.py smt4 <function>`
