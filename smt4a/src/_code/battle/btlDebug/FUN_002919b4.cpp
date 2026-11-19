@@ -42,8 +42,8 @@ void FUN_002919b4(BtlMainStateA *battle, s32 menuMode)
     taskCreateDraw((const s8 *)"btlDebug DrawDown", 0xea, 0, 0, lmapJobQueryZero, 0,
         (u32)battle, (void *)battle->uiJobs.menuJob);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlDebug.cpp", 0x11c4);
-    BattleDebugWork *work = (BattleDebugWork *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BattleDebugWork), 1);
-    DAT_005715f8.prefix.work = work;
+    DAT_005715f8.prefix.work = (BattleDebugWork *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BattleDebugWork), 1);
+    BattleDebugWork *work = DAT_005715f8.prefix.work;
     work->menuMode = menuMode;
     work->state = 0;
     DAT_005715f8.prefix.selection = 0;

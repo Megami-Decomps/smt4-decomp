@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the kind in r0 and the message group in r1 (swapped here). */
+/* NON_MATCHING: register allocation only: retail keeps the kind in r0 (here r2) and clears the message with a predicated movlt. */
 #include "common.h"
 
 namespace {
@@ -69,12 +69,13 @@ const char *FUN_003f74a8(void *owner, const ElementInfo *info)
     }
     kind = info->attribute >> 8;
     id = elementMessageGroup(kind);
-    if (id < 0) {
-        message = 0;
-    } else if (kind == 9) {
-        message = 0x29d;
-    } else {
-        message = dataTable10FindValue(id);
+    message = 0;
+    if (id >= 0) {
+        if (kind == 9) {
+            message = 0x29d;
+        } else {
+            message = dataTable10FindValue(id);
+        }
     }
     return FUN_00180114(message);
 }

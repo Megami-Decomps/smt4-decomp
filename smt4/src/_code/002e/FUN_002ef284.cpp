@@ -4,7 +4,7 @@ extern "C" {
 
 int sequenceRequestDefer(u32 a, u32 b);
 int FUN_0027d8b4(u32 a);
-int FUN_002eb674(void);
+int mapSaveSceneReturnSnapshot(void);
 extern u32 scrGetArg(u32 index);
 
 u32 FUN_002ef284(void)
@@ -15,7 +15,7 @@ u32 FUN_002ef284(void)
 
     sequenceRequestDefer(b, c);
     FUN_0027d8b4(a);
-    FUN_002eb674();
+    mapSaveSceneReturnSnapshot();
     return 1;
 }
 

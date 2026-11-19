@@ -1,5 +1,6 @@
 #pragma once
 #include "common.h"
+#include "sys/PlatformFault.h"
 
 /* Functions in the 0x00160000 code block whose subsystem is not known yet; each declaration matches its definition. */
 struct Buffer;
@@ -8,7 +9,6 @@ struct FileHeader;
 struct TextLine;
 extern "C" {
 
-void sysReportCheckFailure(s32 key, u32 address, u32 failed);
 
 void FUN_00168470(s32 id, u32 arg0, u32 arg1, u32 arg2);
 

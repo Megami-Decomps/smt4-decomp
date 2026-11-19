@@ -7,6 +7,7 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "ui/UiSpriteState.h"
 #include "ui/GridNavigation.h"
+#include "gamedata/UnitStats.h"
 
 class RegisteredHandle;
 
@@ -172,6 +173,7 @@ struct UniteWork {
                     u16 unk44;
                     s16 id;
                 } selected;
+                /* 0x6674 */ StatBlock unit;   /* the result as it was shown, restored when the fusion fails */
             };
         } resultSelectionIV;
         struct {
@@ -185,7 +187,10 @@ struct UniteWork {
     };
     /* 0x9450 */ s8 blocked;
     /* 0x9451 */ u8 unk9451[3];
-    /* 0x9454 */ u8 unk9454[0x10];
+    /* 0x9454 */ u8 unk9454[4];
+    /* 0x9458 */ u32 resultIndex;          /* the created unit's index (FUN_0029c0c0) */
+    /* 0x945C */ u32 resultLevel;          /* the created unit's level */
+    /* 0x9460 */ u8 unk9460[4];
     /* 0x9464 */ u32 unk9464;
     union {
         /* 0x9468 */ u8 unk9468[0x170];
@@ -378,6 +383,9 @@ typedef char UniteWorkOptionListIVOffsets[
     offsetof(UniteWork, touchIV.scrollThumbRegion) == 0x476 && offsetof(UniteWork, optionListIV.ids) == 0x9468 &&
     offsetof(UniteWork, optionListIV.list) == 0x9508 ? 1 : -1];
 typedef char UniteWorkPairSortOffsetCheck[offsetof(UniteWorkA, pairSort.pairs) == 0x13B8 && offsetof(UniteWorkA, pairSort.sortedPairs) == 0x6832 && offsetof(UniteWorkA, pairSort.sortedCount) == 0x73EC && offsetof(UniteWorkA, pairSort.pairScores) == 0x73F0 ? 1 : -1];
+typedef char UniteWorkIVResultOffsetCheck[offsetof(UniteWork, resultSelectionIV.unit) == 0x6674 &&
+    offsetof(UniteWork, resultIndex) == 0x9458 && offsetof(UniteWork, resultLevel) == 0x945C &&
+    offsetof(UniteWork, unk9464) == 0x9464 ? 1 : -1];
 typedef char UniteWorkIVPairsOffsetCheck[offsetof(UniteWork, pairListIV.pairs) == 0x1390 ? 1 : -1];
 typedef char UniteWorkPairSortIVOffsetCheck[offsetof(UniteWork, pairSortIV.pairs) == 0x1390 && offsetof(UniteWork, pairSortIV.sortedPairs) == 0x6CE2 && offsetof(UniteWork, pairSortIV.sortedCount) == 0x789C && offsetof(UniteWork, pairSortIV.pairScores) == 0x78A0 ? 1 : -1];
 typedef char UniteWorkIVScoresOffsetCheck[offsetof(UniteWork, pairScoresIV.scores) == 0x78a0 ? 1 : -1];

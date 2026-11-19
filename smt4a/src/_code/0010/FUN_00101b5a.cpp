@@ -78,7 +78,7 @@ unsigned char * FUN_00101b5a(unsigned int param_1,unsigned int param_2,unsigned 
   temp_v20 = param_2;
   temp_v21 = param_3;
   piStack_18 = param_4;
-  temp_v0 = reinterpret_cast<int>(FUN_002e2ec0());
+  temp_v0 = reinterpret_cast<int>(rt_locale());
   temp_v19 = (unsigned int)*(unsigned char *)((int)*(int **)(temp_v0 + 0xc) + **(int **)(temp_v0 + 0xc));
   puVar8 = (unsigned char *)0xffffffff;
   do {

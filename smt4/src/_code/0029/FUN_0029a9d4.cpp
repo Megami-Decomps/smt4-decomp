@@ -38,7 +38,7 @@ s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank)
     s32 baseCost = skill->cost.baseCost;
     s32 discount = 0;
     if (useLearnedRank != 0) {
-        discount += FUN_00283ebc(skill, findLearnedSkillRank(gameGetPlayerData(), skillId), 4);
+        discount += skillSumRankBonuses(skill, findLearnedSkillRank(gameGetPlayerData(), skillId), 4);
     } else {
         if (flagBitIsSet(12) != 0) {
             discount = appCostRecordFindById(12)->discount;

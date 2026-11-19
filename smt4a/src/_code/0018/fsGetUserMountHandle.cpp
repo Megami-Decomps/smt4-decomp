@@ -1,4 +1,5 @@
 #include "nn/Result.h"
+#include "sys/PlatformFault.h"
 
 extern "C" {
 struct LazyValue {
@@ -8,7 +9,6 @@ struct LazyValue {
 
 extern s32 g_moduleValue;        /* the ready word */
 extern LazyValue g_fsUserMount;  /* the same words seen as a record */
-void sysReportCheckFailure(u32 key, u32 address);
 
 /* Returns the lazily initialised value, reporting a fault (the not-initialised result and the address of the check) when it is not ready yet. */
 s32 fsGetUserMountHandle(void)

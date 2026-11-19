@@ -6,7 +6,7 @@ extern "C" {
 s32 gameDataGetRecordValue(void)
 {
     GameSavedRecordA *record = &g_gameDataBlocks.saveBlock->body.record;
-    return record->value;
+    return record->tail.value;
 }
 
 } /* extern "C" */

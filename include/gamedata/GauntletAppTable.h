@@ -22,7 +22,8 @@ struct GauntletAppRecord {
     /* 0x2B */ u8 minimumLevel;
     /* 0x2C */ u16 requiredFlags[3];      /* game flags that must be set, 0 = none */
     /* 0x32 */ u16 requiredApps[3];       /* bits of the bought-app set that must be set, 0 = none */
-    /* 0x38 */ u8 unk38[8];
+    /* 0x38 */ s32 skillCostDiscount;     /* flat SP discount for the skill-cost apps */
+    /* 0x3C */ u8 unk3C[4];
 };
 
 typedef char GauntletAppRecordLayoutCheck[
@@ -31,7 +32,8 @@ typedef char GauntletAppRecordLayoutCheck[
     offsetof(GauntletAppRecord, cost) == 0x26 &&
     offsetof(GauntletAppRecord, minimumLevel) == 0x2B &&
     offsetof(GauntletAppRecord, requiredFlags) == 0x2C &&
-    offsetof(GauntletAppRecord, requiredApps) == 0x32 ? 1 : -1];
+    offsetof(GauntletAppRecord, requiredApps) == 0x32 &&
+    offsetof(GauntletAppRecord, skillCostDiscount) == 0x38 ? 1 : -1];
 
 #ifdef __cplusplus
 /* IV: the rows of section 0 of `table` (dataTableGet(0x0B, 0)). */

@@ -18,7 +18,8 @@ struct BtlEffectFiles {
     /* 0x3054 */ BtlEffectFileSlot singleSlot;
     /* 0x30E0 */ BtlEffectFileSlot sixthSlots[3];
     /* 0x3284 */ BtlEffectFileSlot seventhSlots[2];
-    /* 0x339C */ u8 unk339C[0x48];
+    /* 0x339C */ u32 flags;
+    /* 0x33A0 */ u8 unk33A0[0x44];
     /* 0x33E4 */ BtlEffectFileSlot eighthSlots[3];
     /* 0x3588 */ u8 unk3588[4];
     /* 0x358C */ BtlEffectFileSlot lastSlot;
@@ -26,6 +27,7 @@ struct BtlEffectFiles {
 
 typedef char BtlEffectFilesLayoutCheck[
     offsetof(BtlEffectFiles, markerSlots) == 0x281C && offsetof(BtlEffectFiles, singleSlot) == 0x3054 &&
+    offsetof(BtlEffectFiles, flags) == 0x339C &&
     offsetof(BtlEffectFiles, lastSlot) == 0x358C ? 1 : -1];
 
 #endif

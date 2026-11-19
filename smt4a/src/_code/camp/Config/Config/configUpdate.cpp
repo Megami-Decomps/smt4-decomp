@@ -1,9 +1,12 @@
-/* NON_MATCHING: 499 lines, but only about 75 once register numbers are ignored. Retail keeps -1 in
- * r6 for the whole function (the region fill and the scroll call's two stacked keys; r3 gets its
- * own mvn), lets `help` and the zero constant share r8, loads both placeholder names before the
- * confirm switch (r6, r7 = r6 + 16), places the decided path's common tail after the param == 0
- * branch, and lets state 4 branch into state 5's exit. Every callee-saved register is numbered
- * differently as a result. */
+/* NON_MATCHING: 481 lines, about 100 once register numbers are ignored. Retail keeps -1 in r6 from
+ * before the switch (the region fill and the list call's two stacked page regions; the thumb region in
+ * r3 gets its own mvn), which here only a function-scope `u32` variable holding 0xffffffff reproduces;
+ * it addresses both placeholder names from one base loaded before the confirm switch (r6, r7 = r6 + 16)
+ * and keeps the name in r6; it keeps the work in r5 (r4 here) and copies it to r6 for the cancel path's
+ * sprite loop, as an inlined function taking the work would; the decided path's common tail follows the
+ * param == 0 branch and its state store uses r1 for the work (an inlined function there gives that
+ * layout); the region loop loads the placement into r3 and moves ifTouchRegionAdd's result to r1 before
+ * addressing the slot. */
 #include "camp/Config/Config.h"
 #include "ui/UiSpriteApi.h"
 #include "ui/UiControl.h"
@@ -84,6 +87,17 @@ static __inline const char *configValueName(s32 value)
     return result;
 }
 
+/* The help record of a row; NULL past the table's end. */
+static __inline ConfigHelpRecordA *configHelpRecord(u32 id)
+{
+    void *table = dataTableGet(0x36, 1);
+    ConfigHelpRecordA *entries = static_cast<ConfigHelpRecordA *>(dataTableGetEntries(table));
+    u32 count = dataTableGetCount(table);
+    if (id >= count)
+        return NULL;
+    return &entries[id];
+}
+
 /* Starts the script's opening message for where the screen was opened from. */
 static __inline void configStartTopMessage(ConfigWorkA *config)
 {
@@ -96,14 +110,17 @@ static __inline void configStartTopMessage(ConfigWorkA *config)
     }
 }
 
-/* Advances the frame and the rows; whether the last row's sprite has finished. */
-static __inline s8 configAdvanceSprites(ConfigWorkA *config)
+/* Advances the frame and the rows; whether the last row's sprite is still moving. */
+static __inline bool configAdvanceSprites(ConfigWorkA *config)
 {
     uiSpriteAdvanceAnimation(&config->sprites[0], 1.0f);
     s32 rows = uiSearchPrimary(&config->cursor);
     for (s32 i = 0; i < rows; i++)
         uiSpriteAdvanceAnimation(&config->sprites[i + 1], 1.0f);
-    return uiSpriteGetCompletionState(&config->sprites[rows]);
+    bool moving = true;
+    if (uiSpriteGetCompletionState(&config->sprites[rows]) != 0)
+        moving = false;
+    return moving;
 }
 
 extern "C" {
@@ -113,10 +130,8 @@ extern "C" {
 void configUpdate(void)
 {
     ConfigWorkA *config = g_config;
-    ConfigHelpRecordA *help;
 
     uiSpriteAdvanceAnimation(&config->cursorSprite, 1.0f);
-    help = NULL;
     switch (config->state) {
     case 0:
         if (config->heapA == NULL || config->heapB == NULL)
@@ -146,19 +161,11 @@ void configUpdate(void)
         configSetState(1);
         break;
     case 1: {
-        bool done = configAdvanceSprites(config) != 0;
+        bool moving = configAdvanceSprites(config);
         config->frames++;
-        if (!done)
+        if (moving)
             return;
-        {
-            u32 id = config->rows[config->row].helpId;
-            void *table = dataTableGet(0x36, 1);
-            ConfigHelpRecordA *entries = static_cast<ConfigHelpRecordA *>(dataTableGetEntries(table));
-            const s8 *text = NULL;
-            if (id < dataTableGetCount(table))
-                text = entries[id].text;
-            buttonHelpSetText(text, 0xf4f4f4ff);
-        }
+        buttonHelpSetText(configHelpRecord(config->rows[config->row].helpId)->text, 0xf4f4f4ff);
         configSetState(2);
         break;
     }
@@ -172,12 +179,7 @@ void configUpdate(void)
                                          &blocked, 0, 1) != 0) {
             /* The cursor moved. */
             config->row = listCursorGetRowIfUnblocked(&config->cursor);
-            u32 id = config->rows[config->row].helpId;
-            void *table = dataTableGet(0x36, 1);
-            ConfigHelpRecordA *entries = static_cast<ConfigHelpRecordA *>(dataTableGetEntries(table));
-            if (id < dataTableGetCount(table))
-                help = &entries[id];
-            buttonHelpSetText(help->text, 0xf4f4f4ff);
+            buttonHelpSetText(configHelpRecord(config->rows[config->row].helpId)->text, 0xf4f4f4ff);
             return;
         }
         if (padQueryLogicalKey(0, 1) == 0 && touch != 6) {
@@ -202,7 +204,11 @@ void configUpdate(void)
         if (config->param != 0 && gameDataBlocksGetTableFlag() == config->rows[config->row].value)
             return;
         config = g_config;
-        if (config->param != 0) {
+        if (config->param == 0) {
+            config->previous = gameDataBlocksGetTableFlag();
+            stateModeDispatch(config->rows[config->row].value);
+            scrScriptProcessStartEntry(config->resource, 7);
+        } else {
             gameDataBlocksGetTableFlag();
             if (gameDataBlocksGetTableFlag() == 4 || FUN_003d21dc() != 0 || g_gameState.mapId == 0x2a) {
                 /* The value cannot be changed here. */
@@ -215,10 +221,6 @@ void configUpdate(void)
             config->pendingValue = config->rows[config->row].value;
             stateModeDispatch(config->pendingValue);
             scrScriptProcessStartEntry(config->resource, 9);
-        } else {
-            config->previous = gameDataBlocksGetTableFlag();
-            stateModeDispatch(config->rows[config->row].value);
-            scrScriptProcessStartEntry(config->resource, 7);
         }
         eventQueueAddUnique(0x100020e);
         obj04Finish();
@@ -304,7 +306,7 @@ void configUpdate(void)
         break;
     }
     case 4:
-        if (!configAdvanceSprites(config))
+        if (configAdvanceSprites(config))
             return;
         configSetState(6);
         break;

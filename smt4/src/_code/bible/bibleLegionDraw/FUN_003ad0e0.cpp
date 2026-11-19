@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the scheduling of the state initialisation stores differs (retail stores progress278 before speed and sets r4 before the first float store). */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
@@ -52,14 +51,16 @@ static const u32 sMoveKeys[9] = { 0x140, 0x0, 0x8, 0x0, 0xfec0, 0x4, 0x172, 0x0,
 static const LegionFloatKey sFadeKeys[2] = { { 0.0f, 1.0f, 8 }, { 1.0f, 0.0f, 8 } };
 static const s32 sSpriteKeys[28] = { -3, 0, -3, -3, 0, -3, 0, -3, 0, -3, -3, 0, -3, 0, -3, 0, -3, -2, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0 };
 
+/* Acquires the legion draw: allocates and initialises its state on first use, then (for the first
+ * user) starts its process and builds its four sprites. Counts the users. */
 void FUN_003ad0e0()
 {
     if (g_countdown.count <= 0) {
         if (g_countdown.state == NULL) {
             asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleLegionDraw.cpp", 825);
-            LegionDrawState *state = static_cast<LegionDrawState *>(asdMemAlloc(0x100, 0x100, 0,
+            g_countdown.state = static_cast<LegionDrawState *>(asdMemAlloc(0x100, 0x100, 0,
                 sizeof(LegionDrawState), 1));
-            g_countdown.state = state;
+            LegionDrawState *state = g_countdown.state;
             state->value04 = 0;
             state->selection08 = -1;
             state->value0C = 0;
@@ -78,8 +79,8 @@ void FUN_003ad0e0()
             state->timer284 = 0;
             state->duration288 = randNextInRange(200) + 100;
             state->phase28C = 0;
-            state->speed = -3.0f;
             state->progress278 = 0.0f;
+            state->speed = -3.0f;
             state->timer286 = 0;
             state->duration28A = randNextInRange(200) + 100;
             state->phase28D = 0;

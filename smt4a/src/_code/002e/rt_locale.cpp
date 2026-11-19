@@ -6,7 +6,7 @@ extern "C" {
 extern u8 DAT_0064be6c[];
 
 /* Returns the address of the object at 0x64BE6C. */
-u8 *FUN_002e2ec0(void)
+u8 *rt_locale(void)
 {
     return DAT_0064be6c;
 }

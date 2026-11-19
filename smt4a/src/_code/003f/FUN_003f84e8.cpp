@@ -1,20 +1,47 @@
-/* NON_MATCHING: resource bundle relocation now agrees; paramsInit outgoing argument-store scheduling still differs. */
 #include "ui/UiSpriteApi.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
-
-struct SpritePanelResourceBundle {
-    u8 firstChunk[0x54];
-    u8 secondChunk[0x6C];
-    u8 fifthChunk[0x16C];
-};
-typedef char SpritePanelResourceOffsets[
-    offsetof(SpritePanelResourceBundle, secondChunk) == 0x54 &&
-    offsetof(SpritePanelResourceBundle, fifthChunk) == 0xC0 &&
-    sizeof(SpritePanelResourceBundle) == 0x22C ? 1 : -1];
+#include "ui/UiSpriteState.h"
 
 extern "C" {
-extern const SpritePanelResourceBundle g_spritePanelResourceBundle;
 void paramsClearPacket(UiResourceParameters *);
+
+/* Animation key tables passed to paramsInit; the original file defined them statically. */
+static const UiSpritePositionKey sPanelPositionKeys[] = {
+    {-30, 0, 0, 0, 5, 0, 0},
+    {30, 0, 0, 0, 5, 0, 0},
+    {0, 0, -30, 0, 3, 0, 0},
+    {0, 0, 30, 0, 3, 0, 0},
+    {300, 0, -60, 0, 40, 1, 0},
+    {0, -60, 0, 0, 5, 0, 0},
+    {0, 60, 0, 0, 5, 0, 0},
+};
+static const UiSpriteScalarKey sPanelAlphaKeys[] = {
+    {0.0f, 1.0f, 5, 0, 0},
+    {1.0f, 0.0f, 3, 0, 0},
+    {0.2f, 1.0f, 15, 0, 0},
+    {1.0f, 1.0f, 1, 0, 0},
+    {1.0f, 0.2f, 14, 0, 0},
+    {0.0f, 1.0f, 4, 0, 0},
+    {0.0f, 0.0f, 8, 0, 0},
+    {0.0f, 1.0f, 3, 0, 0},
+    {1.0f, 0.0f, 20, 0, 0},
+};
+static const SpriteAnimationCommand sPanelCommands[] = {
+    {-3, 0, {0, 0, 0}, -3, 2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 3, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 4, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, -2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 5, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 6, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 7, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 8, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, 6, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-3, 0, {0, 0, 0}, -3, -2, 0, {0, 0, 0}, -3, 0, {0, 0, 0}},
+    {-1, 0, {0, 0, 0}, -1, -1, 0, {0, 0, 0}, -1, 0, {0, 0, 0}},
+};
+
 
 
 /* Load the shared animation packet and initialize this panel's individual sprite states. */
@@ -31,9 +58,8 @@ void FUN_003f84e8(void *work)
         offsetof(PanelView, sprites) == 0x16C && sizeof(PanelView) == 0x5CC ? 1 : -1];
     PanelView *panel = (PanelView *)work;
     paramsClearPacket(&panel->parameters);
-    paramsInit(&panel->parameters, g_spritePanelResourceBundle.firstChunk, sizeof(g_spritePanelResourceBundle.firstChunk),
-               g_spritePanelResourceBundle.secondChunk, sizeof(g_spritePanelResourceBundle.secondChunk),
-               NULL, 0, NULL, 0, g_spritePanelResourceBundle.fifthChunk, sizeof(g_spritePanelResourceBundle.fifthChunk));
+    paramsInit(&panel->parameters, sPanelPositionKeys, sizeof(sPanelPositionKeys), sPanelAlphaKeys,
+               sizeof(sPanelAlphaKeys), NULL, 0, NULL, 0, sPanelCommands, sizeof(sPanelCommands));
     uiSpriteStateInitFromSource(&panel->sprites[0], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSetKeyframe(&panel->sprites[0], 1, 0);
     uiSpriteSetImageKeyframe(&panel->sprites[0], 0, 0);

@@ -1,14 +1,14 @@
-/* NON_MATCHING: retail predicates the report (ldreq; moveq r1, pc; bleq) and passes the exact pc; __current_pc() builds the same mov r1, pc but armcc branches around it. */
-#include "common.h"
-struct ResourceHolder { u32 unk00; void *resource; };
-extern "C" {
-/* The fault reporter as these callers use it: the failure bit argument is not set up. */
-void sysReportCheckFailure(u32 key, u32 address);
-/* Reports a missing resource before returning the held pointer. */
-void *FUN_00500924(ResourceHolder *holder)
+/* Built with -Ospace, as its look-alike fsGetUserMountHandle: retail predicates the report call (ldreq; moveq r1, pc; bleq). */
+#include "nn/fs/ArchiveFile.h"
+#include "nn/Result.h"
+#include "sys/PlatformFault.h"
+
+/* Report an unopened file before returning the IPC handle it holds. */
+extern "C" u32 FUN_00500924(FsArchiveFile *file)
 {
-    if (holder->resource == NULL)
-        sysReportCheckFailure((s32)0xE0A046DA, __current_pc());
-    return holder->resource;
-}
+    if (file->handle == 0) {
+        nn::Result unopenedFile(0xE0A046DA);
+        sysReportCheckFailure(unopenedFile, __current_pc());
+    }
+    return file->handle;
 }

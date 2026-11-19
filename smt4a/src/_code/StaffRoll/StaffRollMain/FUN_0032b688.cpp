@@ -31,8 +31,8 @@ s32 staffRollDrawSecondaryColumn(u32 handle);
 void FUN_0032b688(s32 skipFade)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\StaffRoll\\StaffRollMain.cpp", 153);
-    StaffRollWork *work = (StaffRollWork *)asdMemoryAllocTracked(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, sizeof(StaffRollWork), 1);
-    g_staffRoll = work;
+    g_staffRoll = (StaffRollWork *)asdMemoryAllocTracked(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, sizeof(StaffRollWork), 1);
+    StaffRollWork *work = g_staffRoll;
     work->closing = 0;
     work->skip = 0;
     work->speed = 0.0f;

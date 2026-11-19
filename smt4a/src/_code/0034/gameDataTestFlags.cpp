@@ -7,7 +7,7 @@ u8 gameDataTestFlags(u8 mask)
 {
     GameSaveBodyA *sub = &g_gameDataBlocks.saveBlock->body;
 
-    return (mask & sub->record.flags) != 0;
+    return (mask & sub->record.tail.flags) != 0;
 }
 
 }

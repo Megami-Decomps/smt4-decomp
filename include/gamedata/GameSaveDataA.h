@@ -134,13 +134,19 @@ typedef struct GameSavedItemA {
     /* 0x4E */ s16 counter;
 } GameSavedItemA;
 
+/* The saved record from its second word on (save body + 0x27E04). FUN_002c1408 and campCecEditCreate reach its
+ * fields through a pointer to it (base 0x27E04, offsets 8 and 10), the record's own accessors through the record. */
+typedef struct GameSavedRecordTailA {
+    /* 0x00 */ u32 unk04;
+    /* 0x04 */ u32 unk08;
+    /* 0x08 */ s16 value;          /* gameDataGetRecordValue */
+    /* 0x0A */ u8 flag0e;
+    /* 0x0B */ u8 flags;
+} GameSavedRecordTailA;
+
 typedef struct GameSavedRecordA {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 unk08;
-    /* 0x0C */ s16 value;          /* gameDataGetRecordValue */
-    /* 0x0E */ u8 flag0e;
-    /* 0x0F */ u8 flags;
+    /* 0x04 */ GameSavedRecordTailA tail;
 } GameSavedRecordA;
 
 typedef struct GameSavedPairA {
@@ -232,11 +238,11 @@ typedef struct GameSaveDataA {
 typedef char GameSavedItemAOffsetCheck[sizeof(GameSavedItemA) == 0x50 && offsetof(GameSavedItemA, flags) == 0x16 &&
     offsetof(GameSavedItemA, bits) == 0x36 && offsetof(GameSavedItemA, counter) == 0x4E ? 1 : -1];
 typedef char GameSaveBodyAOffsetCheck[offsetof(GameSaveBodyA, slots) == 0x4 && offsetof(GameSaveBodyA, area2CE0) == 0x2CE0 &&
-    offsetof(GameSaveBodyA, record.unk04) == 0x27E04 && offsetof(GameSaveBodyA, halves.halves) == 0x2803C &&
+    offsetof(GameSaveBodyA, record.tail.unk04) == 0x27E04 && offsetof(GameSaveBodyA, halves.halves) == 0x2803C &&
     offsetof(GameSaveBodyA, area.area282C8) == 0x282C8 && offsetof(GameSaveBodyA, unk02D30) == 0x2D30 && offsetof(GameSaveBodyA, mapBlock) == 0x3DEC && offsetof(GameSaveBodyA, flagBlock) == 0x54D0 &&
     offsetof(GameSaveBodyA, items) == 0x5E84 && offsetof(GameSaveBodyA, flagRows) == 0x1EED4 && offsetof(GameSaveBodyA, questCenter) == 0x21254 && offsetof(GameSaveBodyA, runtime.playerName) == 0x22198 && offsetof(GameSaveBodyA, tableFlag) == 0x27E3C && offsetof(GameSaveBodyA, status.flags) == 0x27FB8 &&
     offsetof(GameSaveBodyA, block214C8) == 0x214C8 && offsetof(GameSaveBodyA, runtime.unk21D8C) == 0x21D8C &&
-    offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 && offsetof(GameSaveBodyA, record.value) == 0x27E0C &&
+    offsetof(GameSaveBodyA, pairs.entries) == 0x270C4 && offsetof(GameSaveBodyA, record.tail.value) == 0x27E0C &&
     offsetof(GameSaveBodyA, saveState) == 0x27E1E && offsetof(GameSaveBodyA, entryFlags) == 0x27E50 &&
     offsetof(GameSaveBodyA, work.savedFlags) == 0x27EB8 && offsetof(GameSaveBodyA, tail.block28390) == 0x28390 &&
     sizeof(GameSaveBodyA) == 0x2A71C && sizeof(GameSaveDataA) == 0x2A7A4 ? 1 : -1];

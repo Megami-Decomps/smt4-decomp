@@ -7,9 +7,9 @@ struct Context {
     u8 gap;
     s8 callbackOffset;
 };
-Context **libcLocaleGetCtypeTable();
+Context **rt_ctype_table();
 s16 FUN_002e3cb8(u16 *output,const u16 *input,u32 value) {
-    Context *context=*libcLocaleGetCtypeTable();
+    Context *context=*rt_ctype_table();
     if(context->mode==1) return (*(s16 (**)(u16 *,const u16 *,u32))((u8 *)context+context->callbackOffset+0x103))(output,input,value);
     if(input && *input) {
         *output=*input;

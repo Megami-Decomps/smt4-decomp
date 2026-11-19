@@ -16,7 +16,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001010f2. */
 extern unsigned int *__aeabi_errno_addr(void);
-extern int *libcLocaleGetCtypeTable(void);
+extern int *rt_ctype_table(void);
 
 
 void libc_strtollParse(unsigned char *param_1,unsigned int *param_2,unsigned int param_3)
@@ -40,7 +40,7 @@ void libc_strtollParse(unsigned char *param_1,unsigned int *param_2,unsigned int
     temp_v3 = (unsigned int)*pbVar5;
     pbVar6 = pbVar5 + 1;
     if (temp_v3 == 0) break;
-    piVar2 = (int *)libcLocaleGetCtypeTable();
+    piVar2 = (int *)rt_ctype_table();
   } while ((*(unsigned char *)(*piVar2 + temp_v3) & 1) != 0);
   pbVar7 = pbVar6;
   if ((temp_v3 != 0x2b) && (pbVar7 = pbVar5, temp_v3 == 0x2d)) {

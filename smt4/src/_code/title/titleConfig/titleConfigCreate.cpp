@@ -1,16 +1,12 @@
-/* NON_MATCHING: process-callback literal/store scheduling and final saved-options tail-call address formation differ from retail. */
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "title/titleConfig.h"
 
 struct TitleConfigWordPair { u32 first, second; };
-union TitleConfigAudioSettings {
-    TitleConfigWordPair words;
-    struct { u8 music, effects, voice; u8 unk03[5]; } values;
-};
 struct TitleConfigCreateWork {
     /* 0x000 */ u32 process;
     /* 0x004 */ u32 unk004;
@@ -23,7 +19,7 @@ struct TitleConfigCreateWork {
     /* 0x028 */ u32 musicStep;
     /* 0x02C */ u32 effectsStep;
     /* 0x030 */ u32 voiceStep;
-    /* 0x034 */ TitleConfigWordPair savedOptions;
+    /* 0x034 */ TitleConfigValues savedOptions;
     /* 0x03C */ UiResourceParameters resources;
     /* 0x05C */ UiSpriteState sprite;
     /* 0x0E8 */ u8 selector[0x64];
@@ -37,7 +33,7 @@ typedef char TitleConfigCreateWorkSize[sizeof(TitleConfigCreateWork) == 0x158 ? 
 extern "C" {
 extern TitleConfigCreateWork *g_titleConfig;
 extern const u8 DAT_00407dd6[];
-extern TitleConfigAudioSettings g_titleConfigValues;
+extern TitleConfigValues g_titleConfigValues;
 u32 taskCreateDraw(const char *name, s32 priority, s32 screen, u32 flags,
                     s32 (*draw)(void), void (*end)(void), void *work, u32 parent);
 s32 titleConfigUpdate(void);
@@ -52,15 +48,14 @@ void buttonHelpSetText(s32 first, u32 color);
 u32 bgmVolumeToStep(u8 volume);
 u32 classifyValueByThreshold(u8 volume);
 u32 calcByteThresholdRank(u8 volume);
-void __ARM_common_memcpy4_8(TitleConfigWordPair *destination, const TitleConfigWordPair *source);
 }
 
 /* Allocate the title configuration menu, its rendering task and its resource requests. */
 extern "C" void titleConfigCreate(void)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\title\\titleConfig.cpp", 829);
-    TitleConfigCreateWork *work = (TitleConfigCreateWork *)asdMemAlloc(0x100, 0x100, 0, 0x158, 1);
-    g_titleConfig = work;
+    g_titleConfig = (TitleConfigCreateWork *)asdMemAlloc(0x100, 0x100, 0, 0x158, 1);
+    TitleConfigCreateWork *work = g_titleConfig;
     work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE_CONFIG_MAIN"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(titleConfigUpdate), reinterpret_cast<AsdProcFunc>(titleConfigDestroy), reinterpret_cast<u32>(work));
     taskCreateDraw("TITLE_CONFIG D", 0xe6, 0, 0, titleConfigDraw, NULL, NULL, work->process);
     drawParameterBlockClear(&work->resources);
@@ -76,8 +71,8 @@ extern "C" void titleConfigCreate(void)
     asdLoadFileAsyncSimple("camp/config.mbm", reinterpret_cast<u32 *>(&work->modelData), 0);
     buttonHelpSetPreset(0x99);
     buttonHelpSetText(0, 0x323232ff);
-    work->musicStep = bgmVolumeToStep(g_titleConfigValues.values.music);
-    work->effectsStep = classifyValueByThreshold(g_titleConfigValues.values.effects);
-    work->voiceStep = calcByteThresholdRank(g_titleConfigValues.values.voice);
-    __ARM_common_memcpy4_8(&work->savedOptions, &g_titleConfigValues.words);
+    work->musicStep = bgmVolumeToStep(g_titleConfigValues.music);
+    work->effectsStep = classifyValueByThreshold(g_titleConfigValues.sound);
+    work->voiceStep = calcByteThresholdRank(g_titleConfigValues.voice);
+    work->savedOptions = g_titleConfigValues;
 }

@@ -7,7 +7,7 @@
 extern "C" {
 
 int btlEntryBuildSummary(unsigned char [2], unsigned int *, unsigned int *);
-int FUN_00283ebc(unsigned int, unsigned int, int);
+int skillSumRankBonuses(unsigned int, unsigned int, int); // declcheck: local (the shared declaration does not compile here or changes this unit)
 int gameGetUnitRecord(...);
 int skillDataFindById(void);
 int itemTableGetEquipmentRecord(void);
@@ -46,7 +46,7 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: btlEntryBuildSummary. */
 /* Supplied declaration required: btlFindEntryBlockByMemberId. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283ebc. */
+/* Supplied declaration required: skillSumRankBonuses. */
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern unsigned int playerGetSkillRank(unsigned int);
@@ -302,7 +302,7 @@ LAB_003be190:
         btlMainFindEntryByListedId(reinterpret_cast<BtlMainState *>(puVar6), param_5);
         if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, skillDataFindById(), temp_v7 != 0)) {
           temp_v3 = playerGetSkillRank(temp_v1);
-          FUN_00283ebc(temp_v7,temp_v3,2);
+          skillSumRankBonuses(temp_v7,temp_v3,2);
         }
         else {
           temp_v7 = 0;

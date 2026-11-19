@@ -6,7 +6,7 @@ typedef struct KeyTable {
     /* 0x0 */ const u8 *flags;
 } KeyTable;
 
-KeyTable *libcLocaleGetCtypeTable(void);
+KeyTable *rt_ctype_table(void);
 
 /* Built with --cpu=5TE -Ospace (see flags_Match4.txt). Derives a key's combined flag word from its raw table byte (the table has 256 entries; others give 0):
  * the extra bits 0x400-0x1000 and 0x80 are computed from the raw bits, 0x20 is cleared when 0x80 isn't set. */
@@ -17,7 +17,7 @@ u32 inputGetKeyFlags(u32 key)
     if (key > 0xFF) {
         return 0;
     }
-    flags = libcLocaleGetCtypeTable()->flags[key];
+    flags = rt_ctype_table()->flags[key];
     if ((flags & 0x98) != 0 && (flags & 0x01) == 0) {
         flags |= 0x400;
     }

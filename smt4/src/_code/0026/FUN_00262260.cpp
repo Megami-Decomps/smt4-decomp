@@ -30,7 +30,7 @@ u32 FUN_00262260(const SkillDataRecord *skill, u32 baseValue, s32 unitIndex)
     if (unitIndex < 0) {
         unitParameter = gameGetPlayerData()->stats[2];
         FUN_00283f30(&skills, 1);
-        rankAdjustment = FUN_00283ebc(skill, playerGetSkillRank(skill->identity.id), 2);
+        rankAdjustment = skillSumRankBonuses(skill, playerGetSkillRank(skill->identity.id), 2);
     } else {
         StatBlock *unit = gameGetUnitRecord(unitIndex);
         if (!unit)

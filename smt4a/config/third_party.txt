@@ -1,5 +1,6 @@
 # Third-party functions, not counted in progress: written by tools/scope.py.
 # <address> <name at the time> <evidence: name | library | linker | callers | between>
+0x00100000 entry library
 0x001002c2 FUN_001002c2 callers
 0x0010031c copyValueIfDestination between
 0x00100326 FUN_00100326 between
@@ -3961,6 +3962,8 @@
 0x002ac020 VX2DecoderRelease callers
 0x002bf158 mobiclipHeapAllocC name
 0x002c919c mobiclipHeapAllocD name
+0x002e2a98 rt_ctype_table name
+0x002e2ec0 rt_locale name
 0x002e2ecc FUN_002e2ecc library
 0x002e2f6a FUN_002e2f6a library
 0x002e2fce FUN_002e2fce library

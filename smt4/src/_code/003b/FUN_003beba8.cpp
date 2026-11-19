@@ -48,7 +48,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     s32 rankBonus = 0;
     if ((btlMainFindEntryByListedId(btlGetMainState(), attackerId)->flags & 2) != 0) {
         const SkillDataRecord* record = skillDataFindById(partyId);
-        if (record != NULL) rankBonus = FUN_00283ebc(record, playerGetSkillRank(partyId), 1);
+        if (record != NULL) rankBonus = skillSumRankBonuses(record, playerGetSkillRank(partyId), 1);
     }
 
     f32 percent = (f32)(u32)rates.critRate * 0.01f;

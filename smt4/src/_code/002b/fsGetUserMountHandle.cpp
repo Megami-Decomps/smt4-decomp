@@ -1,4 +1,5 @@
 #include "nn/Result.h"
+#include "sys/PlatformFault.h"
 
 /* The user file system mount: its handle and the pointer to itself handed to the file layer. */
 struct FsMount {
@@ -11,7 +12,6 @@ extern "C" {
 
 extern FsMount g_fsUserMount;
 extern u32 g_fsArchiveHandleWords; /* the mount's handle, as the mount check sees it */
-void sysReportCheckFailure(u32 key, u32 address);
 
 /* Returns the user file system mount's handle, reporting a fault (the not-mounted result and the
  * address of the check) when the file system is not mounted yet. */

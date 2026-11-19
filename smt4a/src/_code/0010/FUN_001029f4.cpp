@@ -16,7 +16,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int *libcLocaleGetCtypeTable(void);
+extern int *rt_ctype_table(void);
 extern unsigned int *__aeabi_errno_addr(void);
 /* Supplied declaration required: FUN_002e6078. */
 
@@ -40,7 +40,7 @@ unsigned long long FUN_001029f4(unsigned char *param_1,unsigned int *param_2,uns
     temp_v0 = (unsigned int)*pbVar3;
     pbVar4 = pbVar3 + 1;
     if (temp_v0 == 0) break;
-    piVar1 = (int *)libcLocaleGetCtypeTable();
+    piVar1 = (int *)rt_ctype_table();
   } while ((*(unsigned char *)(*piVar1 + temp_v0) & 1) != 0);
   pbVar5 = pbVar4;
   if ((temp_v0 != 0x2b) && (pbVar5 = pbVar3, temp_v0 == 0x2d)) {

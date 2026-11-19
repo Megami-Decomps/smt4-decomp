@@ -320,6 +320,13 @@ a sibling setter or another user of the same lookup is usually written the same 
 - When retail reaches a field through its own pool word even in a function that already holds the
   enclosing object's base, the field is a separate object: split the symbol (smt4's `g_mapSelection`
   at 0x49FD14 was carved out of `g_gameState`).
+- Likewise, a float constant pooled ahead of a global's address where the build pools it after can mean
+  the "array member" a struct points at is a separate adjacent global: declare it as its own object and
+  store `&object` into the pointer (`SoundReverbFilterSize`, smt4 `FUN_00109580`).
+- armcc orders address-taken locals on the stack by reference weight: the most-referenced gets the
+  lowest `sp` offset, ties go by declaration order, and references inside conditionals weigh less. A
+  frame-layout diff (two locals swapped) points at a missing or extra reference to one of them, not at
+  their declaration order (smt4 `uniteCreateSelectedResult`).
 - Which copy of a shared `phase++; break;` tail survives cross-jumping is decided by block nesting:
   cases written `if (ok) { …; phase++; } break;` merge only with each other, early-exit cases
   (`if (!ok) break; …; phase++; break;`) form another group. Retail showing two surviving copies of
@@ -335,6 +342,13 @@ a sibling setter or another user of the same lookup is usually written the same 
 - A switch case whose jump-table entry points into another case's tail is a fall-through
   (`case A: …; /* fall through */ case B:`).
 - A flag read with `ldrb` through a split large-offset base and tested against 0 is `s8`.
+- A byte flag whose `== 0` test retail keeps as its own `ldrb; cmp; bne` block, where the build predicates
+  it (`ldrbeq; cmpeq`), is `s8`, at a direct offset too (`boardState.fullNoticePlayed`, qcBoardStep); `u8`,
+  `bool` and wider types all predicate.
+- Retail sharing one call's copies across `switch` cases, each arm ending in that call, is
+  `if (a) { … } else if (b) { … } else break; call();` (shopQuantityStep's substeps 6 and 9).
+- `cmp; mov rN, #const; rsbne; bl` is one call written in both arms with the operand negated in one:
+  `if (x) f(v, 0); else f(-v, 0);` (shopQuantityStep's price change).
 - A guarded call through a handle (`if (x->handle) call(x->handle, …)`) as an inline helper taking the
   owning struct gives unconditional argument moves and `blne`; passing the handle predicates the moves.
 - `sprintf` with a format that comes from an extern array compiles to `__c89sprintf`, which retail
@@ -386,7 +400,10 @@ a sibling setter or another user of the same lookup is usually written the same 
   pointer: give the sub-struct a type and go through `&work->sub`.
 - Constant tables addressed from one anchor (a `sub` chain from one pool word, such as `paramsInit`
   packets) are `static const` arrays in the unit holding the image's bytes; `relink.py` places them
-  and checks the bytes.
+  and checks the bytes. An extern `DAT_` "bundle" passed in pieces to `paramsInit` is such a set of
+  tables: write them typed (`UiSpritePositionKey`, `UiSpriteScalarKey`, `SpriteAnimationCommand` from
+  `ui/UiSpriteState.h`), named after the unit (`sPanelPositionKeys`), and pass `sizeof` each
+  (smt4a `FUN_003f84e8`, `FUN_0049d3f0`).
 - Data another thread changes (a run flag, a polled state) is `volatile` under the rules above.
 - Sleeps and timeouts take an `nn::fnd::TimeSpan` (`FromMicroSeconds`, `FromMilliSeconds`) by value,
   which rematerialises the constant at each call as retail does.

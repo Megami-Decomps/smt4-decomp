@@ -16,7 +16,7 @@ int FUN_003f26d4(int);
 int FUN_004aa2e0(unsigned int, int);
 int cameraBeginScalarTransition(...);
 int FUN_004f41b0(int, int, int);
-int FUN_004f6d34(void);
+int btlPollVersionedEffectTexture(void);
 int FUN_004f7b84(...);
 int btlQueueDuplicateSuppressedAction(...);
 int FUN_004fd268(...);
@@ -57,7 +57,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_004aa2e0. */
 /* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f41b0. */
-/* Supplied declaration required: FUN_004f6d34. */
+/* Supplied declaration required: btlPollVersionedEffectTexture. */
 /* Supplied declaration required: FUN_004f7b84. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fd268. */
@@ -105,7 +105,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
       }
       if ((param_1[3] & 2) != 0) {
         temp_v0 = g_btlAux;
-        FUN_004f6d34();
+        btlPollVersionedEffectTexture();
         if (temp_v0 == 0) {
           return;
         }

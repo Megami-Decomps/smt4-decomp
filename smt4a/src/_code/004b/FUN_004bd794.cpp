@@ -3,6 +3,24 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
+#include "ui/UiSpriteState.h"
+
+/* Animation key tables passed to paramsInit; the original file defined them statically. */
+static const UiSpritePositionKey sScreenPositionKeys[] = {
+    {320, 0, 0, 0, 8, 0, 0},
+    {-320, 0, 0, 0, 8, 0, 0},
+    {0, 0, -320, 0, 4, 0, 0},
+    {0, 0, 320, 0, 4, 0, 0},
+    {30, 0, 0, 0, 4, 0, 0},
+    {-30, 0, 0, 0, 4, 0, 0},
+    {0, 0, -30, 0, 3, 0, 0},
+    {0, 0, 30, 0, 3, 0, 0},
+};
+static const UiSpriteScalarKey sScreenAlphaKeys[] = {
+    {0.0f, 1.0f, 5, 0, 0},
+    {1.0f, 0.0f, 3, 0, 0},
+};
+
 extern "C" {
 
 /* A party record (only the fields read here): its id is the halfword at 0x12C and its flags the word at 0x130. */
@@ -37,8 +55,6 @@ typedef struct PartnerScreen {
     /* 0x344 */ s32 unk344;
 } PartnerScreen;
 
-extern const u8 DAT_0052d780[];
-extern const u8 DAT_0052d7e0[];
 extern u8 g_callbackOwnerSlots;
 
 void fillThreeWordsWithByte(u32 *words, u8 value);
@@ -123,7 +139,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
             sysPlaySe(0x118);
         }
         paramsClearPacket(screen->params);
-        paramsInit(reinterpret_cast<UiResourceParameters *>(screen->params), DAT_0052d780, 0x60, DAT_0052d7e0, 0x18, NULL, 0, 0, 0, NULL, 0);
+        paramsInit(reinterpret_cast<UiResourceParameters *>(screen->params), sScreenPositionKeys, sizeof(sScreenPositionKeys), sScreenAlphaKeys, sizeof(sScreenAlphaKeys), NULL, 0, 0, 0, NULL, 0);
         for (s32 i = 0; i < 4; i++) {
             uiSpriteStateInitFromSource((UiSpriteState *)((u8 *)screen + 0x30 + i * 0x8C), 0x11, 0, (UiResourceParameters *)(screen->params), 0x6A, 1.0f);
         }

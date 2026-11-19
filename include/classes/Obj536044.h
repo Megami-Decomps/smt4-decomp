@@ -39,7 +39,7 @@ public:
     void itemMenuHandleSelectionInput();
     void FUN_00499fdc();
     void FUN_0049a2b4();
-    void FUN_0049b00c();
+    void shopQuantityStep();
     void shopUpdateCharonRequestTransition();
     void sceneMarkActiveEnterState21();
     void FUN_004969a8();
@@ -57,7 +57,7 @@ protected:
         substate = 0;
     }
 
-    /* The quantity state's helpers, inline in Obj536044__FUN_0049b00c.cpp: the item under the
+    /* The quantity state's helpers, inline in Obj536044__shopQuantityStep.cpp: the item under the
      * category's cursor, what the chosen quantity of it costs, that price shown as a change of the
      * player's macca, and starting an entry of the shop script. */
     EquipmentMenuItem *selectedItem();

@@ -6,7 +6,6 @@ extern "C" {
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 signedKeyRecordCompare(const void *a, const void *b);
-DataTable25Record *aocPackageFindRecordById(AocSystem *system, u32 id);
 u32 dataTableGet(u32 table, u32 index);
 u32 dataTableGetCount(u32 table);
 void *dataTableGetEntries(u32 table);

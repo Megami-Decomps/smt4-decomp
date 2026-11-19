@@ -33,7 +33,7 @@ void FUN_002ea500(void);
 void FUN_002d424c(void);
 void FUN_002d4874(void);
 void FUN_0021df18(void);
-void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading);
+void mapFastModelCreate(f32 x, f32 y, f32 z, f32 heading);
 
 
 void lmapSetSceneId(u32 sceneId);
@@ -648,7 +648,7 @@ void FUN_002712dc(void)
             g_lmapScene->moveMode = 33;
             g_lmapScene->moveSpeed = 0.0f;
             FUN_0027fc14(5);
-            FUN_001a9008(g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z,
+            mapFastModelCreate(g_lmapScene->pose.position.x, g_lmapScene->pose.position.y, g_lmapScene->pose.position.z,
                          g_lmapScene->pose.heading);
             g_lmapScene->pose.targetHeading = g_lmapScene->pose.heading;
             g_lmapScene->pose.targetPosition = g_lmapScene->pose.position;

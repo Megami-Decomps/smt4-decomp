@@ -14,15 +14,7 @@ extern "C" {
 extern TitleConfigA *g_titleConfig;
 extern u8 DAT_00536bec[0x60]; /* two 0x30-byte tables */
 
-struct TitleConfigSettings {
-    /* 0x0 */ u8 music;
-    /* 0x1 */ u8 sound;
-    /* 0x2 */ u8 voice;
-    /* 0x3 */ u8 auxiliary;
-    /* 0x4 */ u8 changed;
-    /* 0x5 */ u8 unk5[3];
-};
-extern TitleConfigSettings g_titleConfigValues;
+extern TitleConfigValues g_titleConfigValues;
 
 void FUN_002a0b58(void);
 void titleConfigDestroy(void);
@@ -39,7 +31,6 @@ void buttonHelpSetText(s32 channel, u32 color);
 GameSaveBodyA *gameDataBlocksGetSaveData(void);
 u32 findByteThresholdTier(u8 value);
 u32 thresholdIndexFind(u8 value);
-void __ARM_common_memcpy4_8(void *destination, const void *source);
 
 /* Creates the config menu: its block, process and draw task, window sprite and cursor, then loads
  * the saved settings (or the defaults) into the menu. */
@@ -72,15 +63,15 @@ void FUN_0037a2e4(void)
             config->settingIndex[0] = categoryGetThresholdIndex(save->titleConfig.values[0]);
             config->settingIndex[1] = findByteThresholdTier(save->titleConfig.values[1]);
             config->settingIndex[2] = thresholdIndexFind(save->titleConfig.values[2]);
-            *reinterpret_cast<u64 *>(config->saved) = *reinterpret_cast<u64 *>(save->titleConfig.values);
-            config->saved[4] = g_titleConfigValues.changed;
+            *reinterpret_cast<u64 *>(&config->saved) = *reinterpret_cast<u64 *>(save->titleConfig.values);
+            config->saved.changed = g_titleConfigValues.changed;
             return;
         }
     }
     config->settingIndex[0] = categoryGetThresholdIndex(g_titleConfigValues.music);
     config->settingIndex[1] = findByteThresholdTier(g_titleConfigValues.sound);
     config->settingIndex[2] = thresholdIndexFind(g_titleConfigValues.voice);
-    __ARM_common_memcpy4_8(config->saved, &g_titleConfigValues);
+    config->saved = g_titleConfigValues;
 }
 
 } /* extern "C" */

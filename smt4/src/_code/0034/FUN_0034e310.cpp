@@ -14,8 +14,8 @@ u32 FUN_0034e310(s32 first, s32 second, s32 capacity)
     for (u32 index = 0; index < DAT_0044d0f8.count; ++index) {
         if (DAT_0044d0f8.entries[index].voice == 0) {
             DAT_0044d0f8.entries[index].capacity = capacity;
-            void *buffer = DAT_0044d0f8.allocator->allocate(capacity * 24, 4);
-            DAT_0044d0f8.entries[index].buffer = buffer;
+            DAT_0044d0f8.entries[index].buffer = DAT_0044d0f8.allocator->allocate(capacity * 24, 4);
+            void *buffer = DAT_0044d0f8.entries[index].buffer;
             if (buffer == NULL) {
                 return 0;
             }

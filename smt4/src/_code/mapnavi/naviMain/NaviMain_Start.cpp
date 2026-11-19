@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical task contracts and the display-state initializer reproduce retail's bases/pool; argument-stack pointer register and final zero-argument scheduling still differ. */
 #include "shard/NaviMain.h"
 #include "mapnavi/NaviMainGlobals.h"
 #include "AsdSDK/AsdDebug.h"
@@ -25,6 +24,13 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
 void NaviMain_ResetFlags(void *settings, u8 value);
 void requestBeginProcessing(void *request, s8 mode, u32 value);
+
+/* Forwards an optional navigation request (the body of navigationRequestFieldMode, inlined here). */
+static __inline void naviRequestFieldMode(s32 mode, u32 value)
+{
+    if (g_naviMain != NULL)
+        requestBeginProcessing(g_naviMain->settings, (s8)mode, value);
+}
 
 /* Initialize display/navigation state; the creator owns the task and close-request prefix. */
 static __inline NaviMain *naviMainInitializeState(NaviMain *navi)
@@ -62,9 +68,7 @@ void NaviMain_Start(s32 unused, s32 requestId)
     navi->drawTask = taskCreateDraw(reinterpret_cast<const s8 *>(DAT_00404cb8), 0xe5, 1, 0, NAVI_DOWN, NULL, reinterpret_cast<u32>(navi), reinterpret_cast<void *>(navi->job));
     navi->tasks.fadeTask = taskCreateDraw(reinterpret_cast<const s8 *>(DAT_00404ca8), 0xe6, 0, 0, naviMainDrawFade, NULL, 0, reinterpret_cast<void *>(navi->job));
     NaviMain_ResetFlags(navi->settings, 1);
-    if (g_naviMain != NULL) {
-        requestBeginProcessing(g_naviMain->settings, 0, 0);
-    }
+    naviRequestFieldMode(0, 0);
 }
 
 } /* extern "C" */

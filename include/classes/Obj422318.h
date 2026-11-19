@@ -49,7 +49,9 @@ public:
     /* 0x40 */ f32 rotation[3];
     /* 0x4C */ f32 scale[3];
     /* 0x58 */ s32 frames;
-    /* 0x5C */ u8 unk5c[0xC];
+    /* 0x5C */ u8 unk5c[4];
+    /* 0x60 */ u32 id;          /* the object's id (a spawner stores a devil id; Obj4222ac::start plays its sound) */
+    /* 0x64 */ u8 unk64[4];
     /* 0x68 */ Obj422318Child *child;
     /* 0x6C */ AsdMdlObject *handle;
     /* 0x70 */ u32 flags;

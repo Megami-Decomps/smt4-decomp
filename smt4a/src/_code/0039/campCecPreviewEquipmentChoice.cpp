@@ -42,7 +42,7 @@ void campCecPreviewEquipmentChoice(u32 itemId)
             modelApplyNonzeroGroupRotation(preview->modelGroup, preview->rotation);
         }
         linkHolderApplyFlag(reinterpret_cast<OutfitPreview *>(edit->unk04), 0);
-        edit->preview.outfitSelectionActive = 0;
+        edit->outfitSelectionActive = 0;
     }
 }
 }

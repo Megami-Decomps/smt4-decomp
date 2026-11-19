@@ -21,7 +21,7 @@ extern BtlAuxA *g_btlAux;
 extern GameOverEyeTimeline g_btlGameOverEyeTimeline;
 extern const char DAT_00530eb0[]; // "Dead_eyes"
 void FUN_004f7b84(BtlAuxA *, const char *);
-u32 FUN_004f6d34(BtlAuxA *);
+u32 btlPollVersionedEffectTexture(BtlAuxA *);
 void FUN_004fdcd8(u32, u32, u32, u32, u32, u32, u32, u32);
 void btlUiPanelStart(BtlUiA *);
 u32 btlReflectQueuePairedParameters(s32 actor, u32 flags, u32 value, u32 parameter,
@@ -43,7 +43,7 @@ u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
         sequence->frame = 0;
         // Fall through while the animation is becoming available.
     case 1:
-        if (!FUN_004f6d34(g_btlAux))
+        if (!btlPollVersionedEffectTexture(g_btlAux))
             return 0;
         sequence->phase = 2;
         break;

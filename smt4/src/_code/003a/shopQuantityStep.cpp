@@ -1,12 +1,11 @@
-/* NON_MATCHING: about 70 lines once branch targets are set aside; the flow, the blocks, the frame and the
- * pool match except for the points below
- * (Apocalypse's Obj536044::FUN_0049b00c is the same state and differs the same way):
- * - numericStepperSetup's stores (written in field order) are scheduled differently: retail stores
- *   the value/maximum pair first and then minimum/row with one stm;
- * - the two idle lines are written in substeps 6 and 9: retail keeps "shop_itembuy" in substep 6 and
- *   substep 9 jumps to it; this build keeps the copy of substep 9;
- * - schedules: the sign flip against messageTargetSetValue's second argument, and the category load
- *   in r1 before FUN_0029212c and in substep 10. */
+/* NON_MATCHING: 44 lines, the same rows and pool as retail; three register schedules remain
+ * (Apocalypse's Obj536044::shopQuantityStep is the same state and differs the same way):
+ * - numericStepperSetup: retail keeps the starting value in r0 and stores the value/maximum pair before
+ *   it loads the minimum, so the stores stay in field order; this build holds the value in r1 and
+ *   stores minimum/row first. (Naming the starting value in a local before the call gives retail's
+ *   code; a temporary with one use, so it is not written.)
+ * - the selected item's id before FUN_0029212c (substep 2) and in substep 10: retail loads the
+ *   category into r1 and builds the two table addresses in r1-r3; this build uses r0-r2. */
 #include "shop/ShopScreen.h"
 #include "shop/shopMain.h"
 #include "sys/FlagWord.h"
@@ -89,10 +88,11 @@ static __inline void shopShowPriceChange(ShopScreen *screen)
 {
     s32 price = shopQuantityPrice(screen);
 
-    if (screen->slot != 8) {
-        price = -price;
+    if (screen->slot == 8) {
+        messageTargetSetValue(price, 0);
+    } else {
+        messageTargetSetValue(-price, 0);
     }
-    messageTargetSetValue(price, 0);
 }
 
 /* Starts entry `name` of the shop script. */
@@ -291,11 +291,12 @@ void shopQuantityStep(ShopScreen *screen)
             if (screen->slot == 8) {
                 messageMainSetEnabled(0);
                 shopStartScript(screen, "shop_selloff");
-                scrRunOpcodesStub(screen->process);
             } else if (screen->slot == 7) {
                 shopStartScript(screen, "shop_itembuy");
-                scrRunOpcodesStub(screen->process);
+            } else {
+                break;
             }
+            scrRunOpcodesStub(screen->process);
         }
         break;
     case 7: {
@@ -361,11 +362,12 @@ void shopQuantityStep(ShopScreen *screen)
             screen->substep = 3;
             if (screen->slot == 8) {
                 shopStartScript(screen, "shop_selloff");
-                scrRunOpcodesStub(screen->process);
             } else if (screen->slot == 7) {
                 shopStartScript(screen, "shop_itembuy");
-                scrRunOpcodesStub(screen->process);
+            } else {
+                break;
             }
+            scrRunOpcodesStub(screen->process);
         }
         break;
     case 10:

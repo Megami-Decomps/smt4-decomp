@@ -5,7 +5,6 @@ extern "C" {
 
 
 extern s32 playSceneIsFadeInDone(BtlUiObjA *scene);
-extern s32 recordQueryStateThree(BtlUiObjB *timer);
 extern void playSceneFadeOutStart(BtlUiObjA *scene);
 extern void playSceneTimerSubStartReverse(BtlUiObjB *timer);
 

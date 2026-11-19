@@ -47,7 +47,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable41FindById. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
-extern int FUN_003ddfd8(void);
+extern int bgmHasPendingResume(void);
 extern int actorIsActive(void);
 extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: partyGetSlotPreferredFirst. */
@@ -103,7 +103,7 @@ void FUN_00331714(const ResultSpoilsA *spoils)
     resourceTableReleaseHandles();
   }
   else {
-    temp_v5 = FUN_003ddfd8();
+    temp_v5 = bgmHasPendingResume();
     if (temp_v5 == 0) {
       bgmRequestSelectedChannelFade(0x1e);
     }

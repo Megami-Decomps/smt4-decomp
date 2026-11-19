@@ -43,7 +43,7 @@ char *libc_strcpy(char *destination, const char *source);
 void textEncodeFontSlot(s32 slot, const char *text);
 void infoWinSetMessage(u32 window, u32 message);
 void dialogOpen(s32 index, s32 flag);
-void FUN_00212120(u16 value);
+void infoWinOpenEntry(u16 value);
 
 /* Per-frame update of the battle help queue: drops finished messages from the front, then starts
  * the first waiting one (opening its dialog) and counts the frames the others have shown. */
@@ -90,7 +90,7 @@ u32 FUN_001b5498(void)
                             }
                             textEncodeFontSlot(entry->textSlot, name);
                         }
-                        FUN_00212120(entry->value);
+                        infoWinOpenEntry(entry->value);
                         break;
                     }
                     entry->timer = 1;

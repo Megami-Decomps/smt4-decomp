@@ -1,4 +1,3 @@
-/* NON_MATCHING: code matches (the integer values are written through the table pointer, giving retail's stm and table store, as in the smt4 twin FUN_00109580); only the literal pool order differs: retail places the 0.4f constant before the parameter block's address. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -12,6 +11,7 @@ extern "C" {
 extern const char DAT_00536228[];
 SoundReverbEffect DAT_0061964c;
 SoundReverbParameters DAT_0061975c;
+SoundReverbFilterSize g_soundReverbFilterSize;
 extern void *g_soundEffectBuffers[2];
 s32 nw_snd_FxReverb_SetParam(SoundReverbEffect *effect,
                              const SoundReverbParameters *parameters);
@@ -21,7 +21,7 @@ s32 nw_snd_FxReverb_AssignWorkBuffer(SoundReverbEffect *effect,
                                     void *buffer, u32 size);
 s32 queueRequesterNode(u32 bus, SoundReverbEffect *effect);
 
-void FUN_0013ddf0(void)
+void soundEffectInitializeReverb(void)
 {
     if (jyoucyuGetTableEntry(1) != NULL)
         return;
@@ -30,11 +30,10 @@ void FUN_0013ddf0(void)
     DAT_0061975c.integerParameters[2] = 30;
     DAT_0061975c.scalarParameters[0] = 0.5f;
     DAT_0061975c.scalarParameters[1] = 0.8f;
-    s32 *table = DAT_0061975c.integerValues;
-    table[0] = 3040;
-    table[1] = 3680;
-    table[2] = 2080;
-    DAT_0061975c.integerTable = table;
+    g_soundReverbFilterSize.lengths[0] = 3040;
+    g_soundReverbFilterSize.lengths[1] = 3680;
+    g_soundReverbFilterSize.lengths[2] = 2080;
+    DAT_0061975c.filterSize = &g_soundReverbFilterSize;
     DAT_0061975c.additionalScalars[0] = 0.4f;
     DAT_0061975c.additionalScalars[1] = 0.4f;
     DAT_0061975c.flags[1] = 1;

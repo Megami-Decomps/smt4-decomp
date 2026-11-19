@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0043d624(void);
 
-extern int *libcLocaleGetCtypeTable(void);
+extern int *rt_ctype_table(void);
 /* Supplied declaration required: FUN_0043d624. */
 
 
@@ -23,7 +23,7 @@ unsigned int FUN_00441ef4(int param_1,char *param_2,int param_3)
     }
     FUN_0043d624();
     if ((param_2 != (char *)0x0) &&
-       (temp_v0 = *param_2, piVar2 = (int *)libcLocaleGetCtypeTable(),
+       (temp_v0 = *param_2, piVar2 = (int *)rt_ctype_table(),
        (*(unsigned char *)(*piVar2 + (int)temp_v0) & 0x38) == 0)) {
       return 1;
     }

@@ -1,9 +1,9 @@
 /* NON_MATCHING: creates the StreetPass (cec) edit screen: its block, update and draw tasks, mode handlers, the
  * edited record's page and files, and the count of party members able to take part. Same calls, stores and
- * control flow as retail (342 rows each); what differs: retail reads the save body's u16/u8 through a pointer to
- * body+0x27E04 (offsets 8 and 10; this build indexes 0x27E0C/0x27E0E from a literal), which also shifts the
- * registers the handler pointers and the table's constants cycle through (retail r0-r3, here ip too, with the
- * last two stores merged into a stm), and retail reloads the edited record before campCecDispatchMode. */
+ * control flow as retail; what differs: retail reloads the edited record pointer (edit->unk08) after copying its
+ * profile into edit->profile (one row more, which shifts every pool offset after it), reuses r1 for the address
+ * of the second state pair (this build r2), and holds the saved record's flag byte and the ten handler pointers
+ * in r2 with the table's constant 8 loaded early in r3 (this build: r3, with 23 in r2). */
 #include "shard/Shard0032.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -56,11 +56,6 @@ void positionStateSet(u32 object, u32 first, u32 second, f32 scale);
 void sysPlaySe(u32 id);
 void rt_aeabi_memclr(void *destination, u32 size);
 
-/* The edited record's first 14 bytes (its equipment ids), kept unaligned at 0x17A of the screen's block. */
-__packed struct CecEditEquipment {
-    u16 ids[7];
-};
-
 void campCecEditCreate(u8 openMode)
 {
     if (g_campCecEdit == NULL) {
@@ -110,8 +105,9 @@ void campCecEditCreate(u8 openMode)
     edit->unk189 = 0;
 
     GameSaveBodyA *save = (GameSaveBodyA *)gameDataBlocksGetSaveData();
-    edit->unk10A = edit->unk108 = save->record.value;
-    edit->unk10D = save->record.flag0e;
+    GameSavedRecordTailA *saved = &save->record.tail;
+    edit->unk10A = edit->unk108 = saved->value;
+    edit->unk10D = saved->flag0e;
 
     edit->table.handlers[0] = FUN_00359dc4;
     edit->table.handlers[2] = FUN_00342e24;
@@ -154,10 +150,7 @@ void campCecEditCreate(u8 openMode)
     /* the player wears the edited record's equipment while the screen is open */
     __aeabi_memcpy4(edit->unk16C, gameGetPlayerData(), 0xe);
     __aeabi_memcpy4(gameGetPlayerData(), edit->unk08, 0xe);
-    {
-        u16 *record = edit->unk08;
-        *(CecEditEquipment *)edit->unk17A = *(CecEditEquipment *)record;
-    }
+    edit->profile = *(const CecProfile *)edit->unk08;
     campCecDispatchMode((u32)edit->unk08);
     edit->unk0C = (u32 *)campCecDrawPageCreate();
     characterInfoPanelPopulate(edit->unk0C, edit->unk08, edit->unk58);

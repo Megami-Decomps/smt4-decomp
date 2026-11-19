@@ -9,6 +9,7 @@
 #include "common.h"
 #include "battle/BattleUiRequests.h"
 #include "battle/BattleUiActionSlot.h"
+#include "ui/UiSpriteState.h"
 #include <stddef.h>
 
 /* Only the byte column is recovered, not the true boundaries of the underlying records. */
@@ -19,7 +20,15 @@ typedef struct BtlUiColumnRecord {
 
 /* Shin Megami Tensei IV layout. */
 typedef struct BtlUiObjA { /* 0x0000 */ u8 unk[0x21F8]; } BtlUiObjA;
-typedef struct BtlUiObjB { /* 0x000 */ u8 unk[0x260]; } BtlUiObjB;
+typedef struct BtlUiObjB {
+    /* 0x000 */ u8 unk000[0x1C4];
+    /* 0x1C4 */ UiSpriteState timer;
+    /* 0x250 */ u8 unk250[0x10];
+} BtlUiObjB;
+typedef char BtlUiObjBLayoutCheck[
+    sizeof(BtlUiObjB) == 0x260 && offsetof(BtlUiObjB, timer) == 0x1C4 ? 1 : -1];
+
+extern "C" s32 recordQueryStateThree(BtlUiObjB *owner);
 /* One unit's UI record, copied in whole from the caller. */
 typedef struct BtlUiUnitRecord {
     /* 0x000 */ u8 unk000[0x46];

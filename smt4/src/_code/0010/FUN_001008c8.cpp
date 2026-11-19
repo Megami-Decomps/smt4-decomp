@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int *libcLocaleGetCtypeTable(void);
+extern int *rt_ctype_table(void);
 
 
 unsigned int FUN_001008c8(unsigned short *param_1,int param_2,unsigned int param_3)
@@ -15,7 +15,7 @@ unsigned int FUN_001008c8(unsigned short *param_1,int param_2,unsigned int param
   unsigned int temp_v0;
   int temp_v1;
   
-  piVar1 = (int *)libcLocaleGetCtypeTable();
+  piVar1 = (int *)rt_ctype_table();
   temp_v1 = *piVar1;
   if (*(char *)(temp_v1 + 0x101) == '\x01') {
     temp_v0 = (*(romwright_code *)(temp_v1 + *(int *)(temp_v1 + 0x103) + 0x103))(param_1,param_2,param_3);

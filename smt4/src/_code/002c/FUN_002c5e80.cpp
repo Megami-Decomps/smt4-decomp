@@ -18,7 +18,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_00100d1c. */
 extern unsigned int *__aeabi_errno_addr(void);
-extern int *libcLocaleGetCtypeTable(void);
+extern int *rt_ctype_table(void);
 
 
 unsigned long long FUN_002c5e80(unsigned char *param_1,unsigned int *param_2,unsigned int param_3)
@@ -40,7 +40,7 @@ unsigned long long FUN_002c5e80(unsigned char *param_1,unsigned int *param_2,uns
     temp_v0 = (unsigned int)*pbVar3;
     pbVar4 = pbVar3 + 1;
     if (temp_v0 == 0) break;
-    piVar1 = (int *)libcLocaleGetCtypeTable();
+    piVar1 = (int *)rt_ctype_table();
   } while ((*(unsigned char *)(*piVar1 + temp_v0) & 1) != 0);
   pbVar5 = pbVar4;
   if ((temp_v0 != 0x2b) && (pbVar5 = pbVar3, temp_v0 == 0x2d)) {

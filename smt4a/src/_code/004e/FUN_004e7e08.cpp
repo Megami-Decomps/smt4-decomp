@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of a battle action's reflect-skill step machine (draft: the returned value of FUN_004f6d34 and the two effect names restored from the code pool); armcc here shares the property comparison and the state-store tail differently. */
+/* NON_MATCHING: readable rebuild from asm of a battle action's reflect-skill step machine (draft: the returned value of btlPollVersionedEffectTexture and the two effect names restored from the code pool); armcc here shares the property comparison and the state-store tail differently. */
 #include "common.h"
 #include "battle/btlAction.h"
 #include "battle/BtlUiGlobal.h"
@@ -39,7 +39,7 @@ extern u32 g_btlActionReflect;
 s32 btlScriptUnitHasFlags(ActionOwner *owner);
 s32 btlFindEntryValue(s32 entry, u32 property);
 s32 btlGetPropertyMaximum(u32 property);
-s32 FUN_004f6d34(s32 aux);
+s32 btlPollVersionedEffectTexture(s32 aux);
 s32 chainCountIdUnflagged(u32 chain, ReflectAction *action);
 void FUN_004fdcd8(s32 a, ReflectAction *action, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 void FUN_004aa3d4(BtlUiA *block, s32 a, s32 b, u32 effect, u32 skill, s32 c);
@@ -79,7 +79,7 @@ u32 FUN_004e7e08(ActionContext *context, ReflectAction *action)
             FUN_004f7b84(g_btlAux, "ef_d_rastcand");
         next = 1;
     } else if (action->step == 1) {
-        if (FUN_004f6d34(g_btlAux) == 0)
+        if (btlPollVersionedEffectTexture(g_btlAux) == 0)
             return 0;
         action->step = 2;
         return 0;

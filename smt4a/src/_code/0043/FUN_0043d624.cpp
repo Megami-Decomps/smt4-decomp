@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int *libcLocaleGetCtypeTable(void);
+extern int *rt_ctype_table(void);
 
 
 char * FUN_0043d624(char *param_1,unsigned char *param_2)
@@ -37,7 +37,7 @@ char * FUN_0043d624(char *param_1,unsigned char *param_2)
   
   temp_v1 = *param_1;
   temp_v9 = 0;
-  piVar7 = (int *)libcLocaleGetCtypeTable();
+  piVar7 = (int *)rt_ctype_table();
   temp_v10 = *piVar7;
 LAB_0043d648:
   temp_v8 = (int)temp_v1;

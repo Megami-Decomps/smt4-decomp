@@ -18,7 +18,7 @@ void FUN_00136c40(void)
 {
     asdDebugHookPtrInt(NULL, 0x04000000);
     asdDebugHookPtrInt(NULL, 0x04000027);
-    EncodingTableSlot* slot = reinterpret_cast<EncodingTableSlot*>(FUN_002e2ec0());
+    EncodingTableSlot* slot = reinterpret_cast<EncodingTableSlot*>(rt_locale());
     slot->characterTable = FUN_00197c2c(0, NULL) + 1;
     slot->conversionTable = FUN_001bc5ac(0, NULL);
 }

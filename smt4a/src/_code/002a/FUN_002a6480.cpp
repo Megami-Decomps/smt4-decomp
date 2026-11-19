@@ -7,7 +7,7 @@ extern "C" {
 void FUN_002a6480(u16 value)
 {
     GameSavedRecordA *record = &g_gameDataBlocks.saveBlock->body.record;
-    record->value = value;
+    record->tail.value = value;
 }
 
 } /* extern "C" */

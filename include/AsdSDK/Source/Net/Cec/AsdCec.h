@@ -42,9 +42,15 @@ typedef struct AsdCecMessage {
     /* 0x00 */ u8 data[360];
 } AsdCecMessage;
 
-/* A message id as GetMessageId hands it out. */
+/* A message id as GetMessageId hands it out (nn::cec::CTR::MessageId: 8 bytes, cleared by
+ * cecMessageIdClear's two word stores). */
 typedef struct AsdCecMessageId {
-    /* 0x00 */ u8 data[12];
+    /* 0x00 */ u8 data[8];
 } AsdCecMessageId;
+
+/* One entry of a box's message index (12 bytes: 33 of them fill 0x18c bytes). */
+typedef struct AsdCecMessageIndexEntry {
+    /* 0x00 */ u8 data[12];
+} AsdCecMessageIndexEntry;
 
 #endif

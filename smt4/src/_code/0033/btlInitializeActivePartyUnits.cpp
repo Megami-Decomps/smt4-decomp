@@ -20,7 +20,7 @@ u32 randomGetLowerTenBits(u32 record, u32 index);
 u32 randomGetUpperSixBits(u32 record, u32 index);
 
 /* Seed the player and each occupied active-party slot into the battle's unit table. */
-void FUN_003370ac(BtlPartyInitializationStateIV *world)
+void btlInitializeActivePartyUnits(BtlPartyInitializationStateIV *world)
 {
     if (world->resetRequested != 0) {
         FUN_0033adf8(world, world->resetRequested);

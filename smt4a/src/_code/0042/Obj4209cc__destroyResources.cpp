@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail keeps this in r6 and the part slot pointer in r7, and does not predicate the ptrListRemoveClearOwner call (cmp r0, #0; beq; mov r1, r0; ldr r0, [r7]; bl) where this build emits movs r1, r0; ldrne; blne with different registers for this/part/slot */
+/* NON_MATCHING: the part loop now matches (Obj4209ccPart::destroy); retail does not predicate the ptrListRemoveClearOwner call
+ * (cmp r0, #0; nop; beq; mov r1, r0; ldr r0, [r7]; bl) where this build emits movs r1, r0; ldrne; blne. */
 #include "classes/Obj4209cc.h"
 #include "Model/MoriModelManager.h"
 
@@ -9,10 +10,8 @@ void objectVectorClear(ModelResourceItems *items);
 /* Destroys a part, hands its memory back to the allocator it came from and clears its slot. */
 static void releasePart(Obj4209ccPart **slot)
 {
-    Obj4209ccPart *part = *slot;
-    if (part != NULL) {
-        part->~Obj4209ccPart();
-        part->allocator->release(part);
+    if (*slot != NULL) {
+        (*slot)->destroy();
         *slot = NULL;
     }
 }

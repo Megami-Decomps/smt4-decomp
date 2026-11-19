@@ -1,4 +1,4 @@
-/* NON_MATCHING: same instructions and registers (589 rows); retail's frame is 52 bytes where built needs 60: retail keeps every temporary point in the outgoing-argument words at sp+0 and gives the stick, touch and rectangle values their own slots, built shares those and keeps two point slots, so most stack offsets differ. Retail also reads alternateNaviMap through the g_gameState+0x400 base it already holds and stores the drag flag through r1. */
+/* NON_MATCHING: 282 lines, about 40 once stack offsets are ignored (589 rows each). Retail's frame is 52 bytes where built needs 60: retail keeps every temporary point in one slot at sp+0 (shared with the outgoing-argument words), the first and last scroll values in one slot, and gives the stick, touch and rectangle values their own slots; built keeps two point slots and two value slots, so most stack offsets differ and the rectangle is reloaded with ldm. Retail also reads alternateNaviMap through the g_gameState+0x400 base it still holds (it keeps the compared map in r8, built in r7), stores the drag flag through r1, and finishes the released-touch flag store before loading stillFrames. */
 #include "common.h"
 #include "game/GameStateA.h"
 #include "gamedata/MapSaveBlockA.h"
@@ -107,8 +107,7 @@ void naviMapHandleInput(NavigationFadeWork *work)
             if (g_gameState.naviMapPending && !FUN_00384cf4())
                 return;
             sysPlayVoice(0x100020e);
-            switch (save->layout) {
-            case 6: {
+            if (save->layout == 6) {
                 work->interpolation.flags = (work->interpolation.flags & ~0x30000) | 0x2000000;
                 work->flag7B90 = 1;
                 work->flag7B91 = 1;
@@ -119,9 +118,7 @@ void naviMapHandleInput(NavigationFadeWork *work)
                 save->layout = 12;
                 work->interpolation.drag.zoomOutTimer = 5;
                 work->interpolation.drag.zoomInTimer = 0;
-                break;
-            }
-            case 12: {
+            } else if (save->layout == 12) {
                 work->interpolation.flags = (work->interpolation.flags & ~0x30000) | 0x2000000;
                 work->flag7B90 = 1;
                 work->flag7B91 = 1;
@@ -132,8 +129,6 @@ void naviMapHandleInput(NavigationFadeWork *work)
                 save->layout = 6;
                 work->interpolation.drag.zoomOutTimer = 0;
                 work->interpolation.drag.zoomInTimer = 5;
-                break;
-            }
             }
         } else if (padButtonIsPressed(5)) {
             if (g_gameState.naviMapPending && !FUN_00384cf4())

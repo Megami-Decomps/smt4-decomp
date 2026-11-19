@@ -75,8 +75,8 @@ void FUN_002df4b0(void *work);
 void FUN_00240c64(void *start, s32 kind)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\dds\\program\\battle\\btlMain.cpp", 0x11F);
-    BattleMainState *state = (BattleMainState *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x4E68, 1);
-    g_btlMain.state = state;
+    g_btlMain.state = (BattleMainState *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x4E68, 1);
+    BattleMainState *state = g_btlMain.state;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\dds\\program\\battle\\btlMain.cpp", 0x123);
     g_btlMain.slotTableCopy = (u8 *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x2D30, 1);
     __aeabi_memcpy4(g_btlMain.slotTableCopy, gameGetSlotTable(), 0x2D30);

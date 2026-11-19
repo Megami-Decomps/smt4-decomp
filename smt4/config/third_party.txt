@@ -1,5 +1,6 @@
 # Third-party functions, not counted in progress: written by tools/scope.py.
 # <address> <name at the time> <evidence: name | library | linker | callers | between>
+0x00100000 entry library
 0x00100330 FUN_00100330 linker
 0x00100338 libc_printfStrDispatch name
 0x0010034e FUN_0010034e between
@@ -424,6 +425,7 @@
 0x00138350 sysThreadStorageReset between
 0x00138364 FUN_00138364 callers
 0x00138370 FUN_00138370 callers
+0x001383c0 svcSleepThread name
 0x001395d4 nn_os_SimpleLock_Initialize name
 0x001395ec nn_os_LightEvent_ClearSignal name
 0x00139650 FUN_00139650 callers
@@ -620,6 +622,7 @@
 0x00144924 FUN_00144924 between
 0x0014493c _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_ name
 0x00144f44 nn_os_Thread_ThreadStart name
+0x00144f88 svcExitThread name
 0x00146518 nn_fs_GetPriority name
 0x00146538 FUN_00146538 between
 0x00146540 nn_fs_detail_FileBase_TrySetPosition name
@@ -1066,6 +1069,7 @@
 0x0015c608 nw_snd_internal_driver_StreamBufferPool_Alloc name
 0x0015c6bc FUN_0015c6bc between
 0x0015c7b0 nw_snd_internal_driver_VoiceManager_FreeVoice name
+0x0015c7dc FUN_0015c7dc library
 0x0015d0d8 FUN_0015d0d8 callers
 0x0015d0f8 FUN_0015d0f8 callers
 0x0015d19c FUN_0015d19c callers
@@ -1727,7 +1731,9 @@
 0x002c6644 __aeabi_errno_addr name
 0x002c66c4 FUN_002c66c4 linker
 0x002c66cc __aeabi_vec_dtor name
+0x002c6a04 rt_locale name
 0x002c6a20 __aeabi_uidivmod name
+0x002c6a50 rt_ctype_table name
 0x002fea94 mobiclipProcessDestroy name
 0x0032b9e0 mobiclipPollUntilReady name
 0x0032bb74 mobiclipCtrlShutdown name

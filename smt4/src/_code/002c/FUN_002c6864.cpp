@@ -1,8 +1,8 @@
 /* NON_MATCHING: The composite hex loop is pair-unrolled; the default locale name uses a literal relocation instead of retail's ADR. */
+#include "camp/CampCec/CampCecView.h"
 #include "common.h"
 
 extern "C" {
-u8 *libcLocaleGetTables(void);
 extern u8 LAB_002c69fc;
 
 /* Returns a category name, or formats all five encoded references for a composite request. */
@@ -11,7 +11,7 @@ u8 *FUN_002c6864(u8 *buffer, u32 categories)
     if ((categories & ~(0u - categories)) != 0) {
         u8 *cursor = buffer + 1;
         *buffer = '*';
-        const u32 *references = reinterpret_cast<const u32 *>(libcLocaleGetTables());
+        const u32 *references = reinterpret_cast<const u32 *>(rt_locale());
         for (s32 category = 0; category < 5; ++category) {
             u32 reference = references[category];
             for (s32 digitIndex = 0; digitIndex < 8; ++digitIndex) {
@@ -25,11 +25,11 @@ u8 *FUN_002c6864(u8 *buffer, u32 categories)
     }
     u32 reference;
     switch (categories) {
-    case 1: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[0]; break;
-    case 2: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[1]; break;
-    case 4: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[2]; break;
-    case 8: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[3]; break;
-    case 16: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[4]; break;
+    case 1: reference = reinterpret_cast<const u32 *>(rt_locale())[0]; break;
+    case 2: reference = reinterpret_cast<const u32 *>(rt_locale())[1]; break;
+    case 4: reference = reinterpret_cast<const u32 *>(rt_locale())[2]; break;
+    case 8: reference = reinterpret_cast<const u32 *>(rt_locale())[3]; break;
+    case 16: reference = reinterpret_cast<const u32 *>(rt_locale())[4]; break;
     default: return NULL;
     }
     if (reference == 0) {

@@ -1,0 +1,5 @@
+# Library blocks for tools/scope.py: <arm|thumb|any> <start> <end> <library> <evidence>
+# The CTR-SDK's crt0 entry point: no frame, a run of calls ending in a tail `b svcExitProcess`.
+arm 0x100000 0x100024 CTR-SDK-crt0 image entry point; calls the SDK's init routines and tail-branches to svcExitProcess
+# NintendoWare sound: placed right after nw_snd_internal_driver_VoiceManager_FreeVoice and calls Voice_Free.
+arm 0x15c7dc 0x15c818 NintendoWare-snd linked inside the nw::snd::internal::driver block; calls nw_snd Voice_Free

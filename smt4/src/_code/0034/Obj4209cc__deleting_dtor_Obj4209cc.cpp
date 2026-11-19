@@ -1,14 +1,17 @@
 #include "classes/Obj4209cc.h"
 
 
-/* Destroys the part and hands its memory back to the allocator it came from. */
+/* The class's operator delete: the object came from the default heap. */
+inline void Obj4209cc::operator delete(void *block)
+{
+    asdMemFreeNonNull(block);
+}
+
+/* Destroys the part in the slot, if any, and clears the slot. */
 static void releasePart(Obj4209ccPart **slot)
 {
-    Obj4209ccPart *part = *slot;
-
-    if (part != NULL) {
-        part->~Obj4209ccPart();
-        part->allocator->release(part);
+    if (*slot != NULL) {
+        (*slot)->destroy();
         *slot = NULL;
     }
 }

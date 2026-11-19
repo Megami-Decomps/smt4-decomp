@@ -9,7 +9,7 @@ s32 FUN_00333ea8(u32 id, u32 index)
     if (entry == NULL)
         return 0;
     s32 maximum = entry->cost.baseCost;
-    s32 remaining = maximum - FUN_00283ebc(entry, index, 4);
+    s32 remaining = maximum - skillSumRankBonuses(entry, index, 4);
     if (remaining <= 0)
         return 1;
     return remaining;

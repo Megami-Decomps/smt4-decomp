@@ -7,6 +7,7 @@
 #include "script/ScriptVm.h"
 struct ScriptProcess;
 #include "gamedata/GameSaveDataA.h"
+#include "camp/CampCec/CecProfile.h"
 #include <stddef.h>
 
 /* A menu object; only the fields the helpers touch are named. */
@@ -176,8 +177,8 @@ typedef struct StateAtF4 {
     /* 0x0FC */ s32 unk0FC;              /* -1 on creation */
     /* 0x100 */ s32 unk100;
     /* 0x104 */ s32 activeMemberCount;   /* party members with neither ailment bit 10 nor bit 1 */
-    /* 0x108 */ u16 unk108;              /* the save block's u16 at 0x27E0C, twice */
-    /* 0x10A */ u16 unk10A;
+    /* 0x108 */ s16 unk108;              /* the saved record's value (save body + 0x27E0C), twice */
+    /* 0x10A */ s16 unk10A;
     /* 0x10C */ u8 unk10C;
     /* 0x10D */ u8 unk10D;               /* the save block's byte at 0x27E0E */
     /* 0x10E */ u8 imageActive;
@@ -207,13 +208,8 @@ typedef struct StateAtF4 {
     /* 0x154 */ u8 unk154;               /* 1 on creation */
     /* 0x155 */ u8 unk155[0x17];
     /* 0x16C */ u8 unk16C[0xE];          /* the player's equipment when the screen opened */
-    union {
-        /* 0x17A */ u8 unk17A[0xF];
-        struct {
-            u8 unk17A[0xE];
-            /* 0x188 */ u8 outfitSelectionActive;
-        } preview;
-    };
+    /* 0x17A */ CecProfile profile;      /* the edited record's profile (its first 14 bytes) while the screen is open */
+    /* 0x188 */ u8 outfitSelectionActive;
     /* 0x189 */ u8 unk189;
     /* 0x18A */ u8 unk18A[2];
     /* 0x18C */ u32 unk18C;
@@ -231,7 +227,7 @@ typedef char StateAtF4DispatchOffsetCheck[
     offsetof(StateAtF4, unk154) == 0x154 && offsetof(StateAtF4, unk18C) == 0x18C &&
     sizeof(StateAtF4) == 0x198 ? 1 : -1];
 typedef char StateAtF4OutfitSelectionOffsetCheck[
-    offsetof(StateAtF4, preview.outfitSelectionActive) == 0x188 ? 1 : -1];
+    offsetof(StateAtF4, profile) == 0x17A && offsetof(StateAtF4, outfitSelectionActive) == 0x188 ? 1 : -1];
 
 typedef struct FlagAt4 {
     /* 0x00 */ u8 unk00[4];

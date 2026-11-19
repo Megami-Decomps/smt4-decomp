@@ -1,4 +1,4 @@
-/* NON_MATCHING: identical except instruction scheduling of the literal-pool loads (retail loads the runner global's address after the constructor, this build hoists it before the process call). */
+/* NON_MATCHING: only the process call's argument setup differs, as in FUN_0020e5f0 and FUN_00231464: retail loads the update callback before storing the global and forms the stack-argument pointer in r6 (the build in r0, loading the end callback early). */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
@@ -36,8 +36,8 @@ s32 FUN_002efa8c(u32 handle);
 /* Creates the save/load runner and its four tasks (the runner process, then the three draw tasks parented to it). */
 void FUN_002c75c0(void)
 {
-    SaveLoadRunner *runner = new SaveLoadRunner;
-    DAT_00588e2c = runner;
+    DAT_00588e2c = new SaveLoadRunner;
+    SaveLoadRunner *runner = DAT_00588e2c;
     runner->job = asdProcessCreateSimple(DAT_00533f80, 4, 0, 0, runnerShutdown, FUN_002ef9ec, 0);
     taskCreateDraw(DAT_00533f70, 0x83, 0, 0, saveLoadDrawUpdate, NULL, NULL, runner->job);
     taskCreateDraw(DAT_00533f60, 0xdf, 0, 0, saveLoadDrawUpdate, NULL, NULL, runner->job);
