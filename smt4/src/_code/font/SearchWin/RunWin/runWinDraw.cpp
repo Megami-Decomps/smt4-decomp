@@ -1,4 +1,3 @@
-/* NON_MATCHING: dots, pool order and divisions now match, and the early returns give retail's zero-result epilogue; the label coordinates load point.y/point.x into other registers (and schedule the z/width float loads and r2 argument differently). */
 #include "ui/UiSpriteApi.h"
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
@@ -52,10 +51,8 @@ u8 runWinDraw(void)
     texDrawTableEntryAtStoredOrigin(2, 14, 0x151, x, 0, 111);
     renderStackPop(&g_titleScene->stackB);
     TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x153);
-    u32 color = 0xF49800FF;
-    f32 labelY = (f32)(labelPoint->y + y);
-    f32 labelX = (f32)(labelPoint->x + (x - 14));
-    textDrawString(4, color, reinterpret_cast<const char *>(win->label), labelX, labelY, 0.56640625f, 0.0f, win->alpha);
+    textDrawString((f32)(labelPoint->x + (x - 14)), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f, 0xF49800FF, win->alpha,
+                   reinterpret_cast<const char *>(win->label));
     s32 lit = (win->frame / 5) % 8;
     s32 litPrevious = (lit + 7) % 8;
     s32 lit2 = (win->frame / 5 + 4) % 8;

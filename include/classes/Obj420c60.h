@@ -2,12 +2,11 @@
 #define CLASSES_OBJ420C60_H
 
 #include "common.h"
+#include "nn/fs/ArchivePath.h"
 
 extern "C" void asdFatalError(void);
 extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
-class Obj420c60File;
-extern "C" s32 archivePathDeviceOpen(Obj420c60File *file, const wchar_t *path, s32 mode);
 
 /* The file handle the stream owns, with its bookkeeping words; closing it is part of destroying it
  * (the low bit of the handle is an error mark). */
@@ -36,7 +35,7 @@ public:
         unk10 = 0;
         unk04 = 0;
         unk08 = 0;
-        return archivePathDeviceOpen(this, path, mode);
+        return archivePathDeviceOpen(&handle, reinterpret_cast<const u16 *>(path), mode);
     }
 
     /* 0x00 */ u32 handle;

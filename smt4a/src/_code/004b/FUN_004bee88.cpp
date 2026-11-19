@@ -66,8 +66,8 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
         s32 width = fontMeasureLineAdvance(text, 3);
         s32 offset = (notice->placement->width - width) / 2;
 
-        textDrawString(3, -1, (const char *)text, (f32)(x + notice->x + offset),
-                     (f32)(notice->y + y), 0.0f, 0.0f, scale);
+        textDrawString((f32)(x + notice->x + offset), (f32)(notice->y + y), 0.0f, 3,
+                     0.0f, -1, scale, (const char *)text);
         efctSetSpeed(1.0f);
     }
     efctSetSpeed(scale);

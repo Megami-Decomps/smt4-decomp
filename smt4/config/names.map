@@ -2580,7 +2580,7 @@
 002592b8 effectSpawnDefaultArguments
 00259b34 matrixCopyFull
 001f5f00 sequenceRequestZeroArgument
-00218460 saveIsSelectionOutsideRange
+00218460 btlActorCardIsIdle
 0022e480 _ZN18SelectionRectangleC1Ev
 00234888 recordIsEnabledAndPresent
 0023a198 stringFormatUnbounded
@@ -5362,3 +5362,16 @@
 002d4e58 lmapRestoreSpawnPose
 0033361c bgmHasPendingResume
 002eb674 mapSaveSceneReturnSnapshot
+0014e6f8 rt_udiv10
+0012113c nw_snd_SoundArchivePlayer_Initialize
+0012fa30 nw_snd_SoundArchivePlayer_SetupMram
+0014204c nw_snd_SoundArchive_ReadSoundArchivePlayerInfo
+001db90c asdSaveHeaderInit
+0010d3f8 asdSoundSlotCStart
+001e071c btlUiPartyDisplayDraw
+003291dc gauntletAppMenuUpdate
+001a1f8c sortMenuUpdate
+001add9c uniteDrawPanel
+0018a3e0 campSkillListUpdate
+00218480 btlCommandBeginTargetSelection
+0029a284 statusDownDrawSkillRow

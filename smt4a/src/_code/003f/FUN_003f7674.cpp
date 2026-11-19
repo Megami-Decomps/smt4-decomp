@@ -63,7 +63,7 @@ void FUN_003f7674(DetailPanel *panel, s32 x, s32 y, f32 speed)
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x31, 0x46);
     fontMeasureLineAdvance(name, 3);
     s32 nameX = frame->x + x + stereo;
-    textDrawString(3, 0xFF, name, (f32)nameX, (f32)(frame->y + y), 0.15625f, 0.0f, speed);
+    textDrawString((f32)nameX, (f32)(frame->y + y), 0.15625f, 3, 0.0f, 0xFF, speed, name);
 
     char label[76];
     sprintf(label, "%s", FUN_003f74a8(panel, panel->item));

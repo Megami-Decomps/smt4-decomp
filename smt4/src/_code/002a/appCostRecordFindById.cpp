@@ -10,7 +10,7 @@ s32 unsignedKeyRecordCompare(const void *left, const void *right);
 
 /* Binary-searches the gauntlet apps (GauntletAppTable.tbb) for app `id`;
  * NULL when the table is missing. */
-void *appCostRecordFindById(u16 id)
+void *appCostRecordFindById(u32 id)
 {
     GauntletAppRecord key;
     void *section = dataTableGet(0xB, 0);

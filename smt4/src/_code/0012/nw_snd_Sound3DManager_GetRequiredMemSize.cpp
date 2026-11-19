@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int FUN_0014204c(unsigned int, int *);
+extern int nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(unsigned int, int *);
 
 
 int nw_snd_Sound3DManager_GetRequiredMemSize(unsigned int param_1,unsigned int param_2)
@@ -24,7 +24,7 @@ int nw_snd_Sound3DManager_GetRequiredMemSize(unsigned int param_1,unsigned int p
   int temp_v4;
   
   temp_v1 = 0;
-  temp_v0 = FUN_0014204c(param_2,temp_v2);
+  temp_v0 = nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(param_2,temp_v2);
   if (temp_v0 != 0) {
     temp_v1 = temp_v4 + temp_v2[0] + temp_v3;
   }

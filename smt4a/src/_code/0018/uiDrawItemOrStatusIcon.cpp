@@ -63,22 +63,24 @@ void uiDrawItemOrStatusIcon(s32 id, s32 x, s32 y, s32 z, s32 tint)
     }
     if (FUN_00191f18(g_aocSystem, record->model) != 0) {
         FUN_00191ea8(g_aocSystem, record->model, x, y, z);
-    } else if (record->model < 0x200) {
-        s32 icon = record->model;
-        IconRect rect;
-        rect.left = icon / 16 * 16;
-        rect.right = rect.left + 16;
-        rect.top = icon % 16 * 32;
-        rect.bottom = rect.top + 32;
-        FUN_001849bc(2, 27, 0, x, y, z, &rect);
     } else {
-        s32 icon = record->model - 0x200;
-        IconRect rect;
-        rect.left = icon / 16 * 16;
-        rect.right = rect.left + 16;
-        rect.top = icon % 16 * 32;
-        rect.bottom = rect.top + 32;
-        FUN_001849bc(2, 27, 3000, x, y, z, &rect);
+        const s32 image = record->model;
+        if (image < 0x200) {
+            IconRect rect;
+            rect.left = image / 16 * 16;
+            rect.right = rect.left + 16;
+            rect.top = image % 16 * 32;
+            rect.bottom = rect.top + 32;
+            FUN_001849bc(2, 27, 0, x, y, z, &rect);
+        } else {
+            s32 icon = image - 0x200;
+            IconRect rect;
+            rect.left = icon / 16 * 16;
+            rect.right = rect.left + 16;
+            rect.top = icon % 16 * 32;
+            rect.bottom = rect.top + 32;
+            FUN_001849bc(2, 27, 3000, x, y, z, &rect);
+        }
     }
     if (tint != 0) {
         gxResetColorQuadToWhite();

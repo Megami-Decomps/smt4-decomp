@@ -62,6 +62,7 @@ struct UniteWork {
             /* 0x00B0 */ UiSpriteState slide;  /* its position scrolls the result highlight, the cursor row's shine */
             /* 0x013C */ UiSpriteState pulse;  /* its opacity pulses the result panel's cursor */
             /* 0x01C8 */ UiSpriteState open;   /* finished once the option list has opened */
+            /* 0x0254 */ UiSpriteState listOffset; /* where the demon lists' scroll bar sits in the panel */
         } sprites;
         struct {
             /* 0x0000 */ u8 unk0000[0x1C8];
@@ -86,6 +87,7 @@ struct UniteWork {
         struct {
             /* 0x0404 */ s32 previous;
             /* 0x0408 */ s32 saved;
+            /* 0x040C */ s32 returnTo;
         } history;
         struct {
             u8 prefix404[0x14];
@@ -106,6 +108,11 @@ struct UniteWork {
             /* 0x474 */ s16 scrollDownRegion;
             /* 0x476 */ s16 scrollThumbRegion;
         } touchIV;
+        struct {
+            /* 0x0438 */ u8 unk0438[0xB0];
+            /* 0x04E8 */ ScrollSelection sourceList;
+            /* 0x054C */ ScrollSelection partnerList;
+        } selectionListsIV;
         struct {
             /* 0x0438 */ u8 unk0438[0x188];
             u16 demons[1201]; /* 0x5c0 */
@@ -151,7 +158,7 @@ struct UniteWork {
         struct {
             /* 0x0438 */ u8 unk0438[0x8FF8];
             /* 0x9430 */ u8 opened;
-            /* 0x9431 */ u8 ready;
+            /* 0x9431 */ s8 ready;
         } eventFlagsIV;
         struct {
             u8 unk0438BeforePortraits[0x5DDC];
@@ -207,7 +214,9 @@ struct UniteWork {
         } preview;
     };
     /* 0x95D8 */ s32 unk95D8;
-    /* 0x95DC */ u8 unk95DC[0x1C];
+    /* 0x95DC */ u8 unk95DC[0x18];
+    /* 0x95F4 */ u8 searchingFrame;        /* 0..39, turns the "searching" grid */
+    /* 0x95F5 */ u8 unk95F5[3];
 };
 
 /* The fusion screen's work (Apocalypse layout, 0x92C0 bytes, kept by g_unite). The first 0x438 bytes
@@ -371,6 +380,10 @@ typedef char UniteWorkADrawOffsets[
 
 typedef char UniteWorkBlockedOffsetCheck[
     offsetof(UniteWork, blocked) == 0x9450 && sizeof(UniteWork) == 0x95F8 ? 1 : -1];
+typedef char UniteWorkDrawOffsets[
+    offsetof(UniteWork, sprites.listOffset) == 0x254 && offsetof(UniteWork, history.returnTo) == 0x40C &&
+    offsetof(UniteWork, selectionListsIV.sourceList) == 0x4E8 && offsetof(UniteWork, selectionListsIV.partnerList) == 0x54C &&
+    offsetof(UniteWork, searchingFrame) == 0x95F4 ? 1 : -1];
 
 struct UniteDescriptionEntry {
     /* 0x00 */ u8 unk00[0x55];

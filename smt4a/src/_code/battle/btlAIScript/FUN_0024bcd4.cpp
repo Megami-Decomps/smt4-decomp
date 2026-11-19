@@ -59,7 +59,7 @@ int sysMemClear(...);
 int FUN_003756c8(void);
 int stateAtCIs4(...);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
-int FUN_003ebca0(void);
+int btlHasFilteredCommand(void);
 int btlFindSelectionIndexByOrdinal(unsigned int, int);
 int FUN_003f034c(...);
 int FUN_003f26d4(unsigned int);
@@ -219,7 +219,7 @@ extern int FUN_003e9964(unsigned int);
 /* Supplied declaration required: btlActionPrepareFromSource. */
 /* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
 /* Supplied declaration required: FUN_003ebad4. */
-/* Supplied declaration required: FUN_003ebca0. */
+/* Supplied declaration required: btlHasFilteredCommand. */
 extern int FUN_003ed878(unsigned int);
 /* Supplied declaration required: FUN_003ee734. */
 /* Supplied declaration required: btlFindSelectionIndexByOrdinal. */
@@ -688,7 +688,7 @@ LAB_0024c88c:
          (temp_v3 = btlUiIsMenuReady(g_btlUiBlock), temp_v3 == 0)))) ||
        (temp_v3 = FUN_004ab8a4(g_btlUiBlock), temp_v3 == 0)) goto LAB_0024d75c;
     temp_v5 = temp_v2;
-    FUN_003ebca0();
+    btlHasFilteredCommand();
     if (temp_v5 != 0) {
       temp_v6 = 0x17;
     }

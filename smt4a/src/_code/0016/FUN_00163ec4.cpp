@@ -35,8 +35,8 @@ extern "C" f32 FUN_00163ec4(TextDrawStatePrefixA *state, s32 x, s32 y,
     if (g_asdTextDefaults.adjustmentEnabled != 0)
         drawX = renderCtxCalculateStereoParallax(g_renderCtx, fraction) + drawX;
 
-    const f32 advance = textDrawString(state->resource, color, state->text,
-                                    drawX, drawY, 0.0f, state->scale, opacity);
+    const f32 advance = textDrawString(drawX, drawY, 0.0f,
+                                    state->resource, state->scale, color, opacity, state->text);
     const f32 displacement = (advance + drawX) - originalX;
     return displacement > 0.0f ? displacement : 0.0f;
 }

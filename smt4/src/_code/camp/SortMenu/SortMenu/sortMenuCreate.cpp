@@ -30,7 +30,7 @@ extern "C" {
 extern SortMenuSingleton g_useCounter;
 void __aeabi_memset4(void *destination, u32 bytes, s32 value);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
-s32 FUN_001a1f8c(u32);
+s32 sortMenuUpdate(u32);
 s32 FUN_001a26dc(u32);
 void drawParameterBlockClear(UiResourceParameters *);
 
@@ -44,7 +44,7 @@ void sortMenuCreate(u32 owner, u8 option)
         }
         SortMenuWork *work = g_useCounter.work;
         memClear(work, sizeof(SortMenuWork));
-        work->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>("SORT CALC"), 2, 0, 0, FUN_001a1f8c, NULL, 0);
+        work->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>("SORT CALC"), 2, 0, 0, sortMenuUpdate, NULL, 0);
         work->draw = taskCreateDraw("SORT DDRAW", 231, 0, 0, FUN_001a26dc, NULL, 0, work->calculate);
         SortMenuWork *current = g_useCounter.work;
         drawParameterBlockClear(&current->parameters);
@@ -62,8 +62,8 @@ void sortMenuCreate(u32 owner, u8 option)
         uiSpriteStateInitFromSource(&current->sprites[12], 30, 0, &current->parameters, 1, 1.0f);
         spriteStartAnimationByIndex(&current->sprites[12], 1);
         __aeabi_memset4(current->ids, sizeof(current->ids), -1);
-        current->frame = 0;
-        current->initialized = 1;
+        current->state = 0;
+        current->ascending = 1;
         work->option = option;
         work->owner = owner;
     }

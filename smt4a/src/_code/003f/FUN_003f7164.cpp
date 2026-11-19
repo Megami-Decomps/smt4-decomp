@@ -93,11 +93,11 @@ void FUN_003f7164(u32 id, CardEntry *entry, s32 index, u32 arg, s32 offsetX, s32
     s16 labelY = base->y + part->y;
     FUN_003f74a8(id, entry, base->x, part->y);
     sprintf(label, "%s", id);
-    textDrawString(2, 0xFFFFFFFF, label, (f32)(labelX + offsetX), (f32)(labelY + offsetY), (f32)(0xFB - depth) * 0.00390625f, 0.0f, speed);
+    textDrawString((f32)(labelX + offsetX), (f32)(labelY + offsetY), (f32)(0xFB - depth) * 0.00390625f, 2, 0.0f, 0xFFFFFFFF, speed, label);
 
     part = asdTMTexTableEntryAt(LAYOUT_BANK, 0x83);
-    textDrawString(2, 0xFF, (const char *)(entry + 2), (f32)(part->x + base->x + offsetX), (f32)(part->y + base->y + offsetY),
-                 (f32)(0xFB - depth) * 0.00390625f, 0.0f, speed);
+    textDrawString((f32)(part->x + base->x + offsetX), (f32)(part->y + base->y + offsetY), (f32)(0xFB - depth) * 0.00390625f, 2, 0.0f,
+                 0xFF, speed, (const char *)(entry + 2));
     FUN_003f533c(id, base->x + offsetX, base->y + offsetY, depth + 5, arg, 0x84, 0x85, 0x86, 0xFF, 0, speed);
 }
 

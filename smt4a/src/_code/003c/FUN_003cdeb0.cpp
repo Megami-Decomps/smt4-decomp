@@ -78,7 +78,7 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     }
     sprintf(text, "%s", FUN_0014bd84(screen->entryIds[entry]));
     SlotIconPosition *nameBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a2));
-    textDrawString(3, color, text, (f32)(frame->x + nameBox->x + x), (f32)(frame->y + nameBox->y + y), 0.0f, 0.0f, scale);
+    textDrawString((f32)(frame->x + nameBox->x + x), (f32)(frame->y + nameBox->y + y), 0.0f, 3, 0.0f, color, scale, text);
     SlotIconPosition *statBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a1));
     FUN_00185e84((s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0, 0);
     if (!recordContainsPairedId(argument, screen->entryIds[entry])) {

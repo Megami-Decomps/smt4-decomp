@@ -1,10 +1,10 @@
-/* NON_MATCHING: two instruction-order swaps remain in stack/global setup and fallback-name arguments. */
+/* NON_MATCHING: one scheduling difference: retail computes the description's address (`add r0, r0, #116`) after the
+ * other two textExpandGlyphsToBuffer arguments, the build before them. */
 #include <stdio.h>
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "quest_center/QuestRecordA.h"
 #include "text/TextDraw.h"
 #include "addon/AocSystemA.h"
-struct AocSystemA;
 extern "C" {
 void FUN_003dea6c(u32 id, s32 enabled, s32 flags);
 void *FUN_0046c0f8(AocSystemA *system, u32 id);
@@ -17,6 +17,7 @@ s32 questHasSpecialDetailPage(u32 id);
 s32 itemDataGetCategory(u32 id);
 void uiQuestRefreshDetailPages(u32 id);
 
+/* Loads the quest's text and populates the main and optional detail pages. */
 void FUN_003d498c(u32 id, u32 mode)
 {
     UiQuestApoc *work = g_uiQuest;
@@ -41,7 +42,7 @@ void FUN_003d498c(u32 id, u32 mode)
     FUN_003dea6c(id, 1, 0);
     s32 detail = FUN_003de464(id, mode);
     if (detail < 0) {
-        const char *name = textExpandGlyphsToBuffer(questDataGetRecord(id)->description, 0, 0);
+        const char *name = textExpandGlyphsToBuffer(questDataGetRecord(id)->description, NULL, 0);
         asdTextFormatStream(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, "%s", name);
     } else {
         asdTextDrawDirectoryEntry(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, reinterpret_cast<const void *>(work->messages), detail);

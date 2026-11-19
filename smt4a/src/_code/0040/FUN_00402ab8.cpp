@@ -59,13 +59,13 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
     s32 nameWidth = fontMeasureLineAdvance(text, 2);
     TextureTableEntryIV* frame = asdTMTexTableEntryAt(50, 9);
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    textDrawString(2, color, text, (f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
+    textDrawString((f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 2, 0.0f, color, speed, text);
 
     sprintf(text, "\x82\x60\x82\x95\x82\x94\x82\x88\x82\x8f\x82\x92");
     s32 suffixWidth = fontMeasureLineAdvance(text, 2);
     TextureTableEntryIV* suffix = asdTMTexTableEntryAt(50, 10);
     s32 suffixOffset = suffix->placement->width;
-    textDrawString(2, color, text, (f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
+    textDrawString((f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 2, 0.0f, color, speed, text);
     texDrawTableEntryAtStoredOrigin(2, 50, 10, frame->x - nameWidth - suffixOffset + x + shift, frame->y + y, 201);
 
     s32 baseX = shift + x;

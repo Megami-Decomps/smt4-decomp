@@ -11,7 +11,7 @@ int jyoucyuGetTableEntry(...);
 int skillDataFindById(void);
 int FUN_003e892c(int);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
-int FUN_003ebca0(void);
+int btlHasFilteredCommand(void);
 int FUN_004abba8(...);
 int btlUiIdsRefresh(unsigned int);
 int FUN_004c1114(...);
@@ -79,7 +79,7 @@ extern int FUN_003e48bc(void);
 extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003e892c. */
 /* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
-/* Supplied declaration required: FUN_003ebca0. */
+/* Supplied declaration required: btlHasFilteredCommand. */
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: FUN_004abba8. */
 /* Supplied declaration required: btlUiIdsRefresh. */
@@ -113,7 +113,7 @@ void FUN_003984ac(int param_1)
   unsigned char temp_v8;
   
   temp_v6 = param_1;
-  FUN_003ebca0();
+  btlHasFilteredCommand();
   if (temp_v6 != 0) {
     temp_v2 = 0xc;
   }

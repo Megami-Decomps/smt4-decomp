@@ -57,8 +57,8 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
         u32 color = 0xFFFFFFFF;
         if (!recordAcceptsStickDirection(itemId))
             color = 0x5A5A5AFF;
-        textDrawString(3, color, name, rowEntry->x + part->x + x, rowEntry->y + part->y + y,
-                       0.5f, 0.0f, 1.0f);
+        textDrawString(rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 3, 0.0f,
+                       color, 1.0f, name);
     }
     part = asdTMTexTableEntryAt(texture, 0x52F);
     sprintf(text, "%d", flagValueRead(itemId));
@@ -107,7 +107,7 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
         if (item->traitBits.attribute == 0x11)
             sprintf(text, "\x82`\x82\x8C\x82\x8D\x82\x89\x82\x87\x82\x88\x82\x94\x82\x99"); // Almighty
         part = asdTMTexTableEntryAt(texture, 0x528);
-        textDrawString(3, 0xFFFFFFFF, text, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 0.0f, 1.0f);
+        textDrawString(rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 3, 0.0f, 0xFFFFFFFF, 1.0f, text);
         if (item->element != 0) {
             part = asdTMTexTableEntryAt(texture, 0x529);
             messageKindForward(item->element, rowEntry->x + part->x + (x + 24), part->y + rowEntry->y + y, layer);
@@ -131,7 +131,7 @@ extern "C" void campDrawSelectedEquipmentDetails(s32 category, s32 row, u32 item
         if (item->target == 6)
             sprintf(text, "\x82l\x82\x95\x82\x8C\x82\x94\x82\x89"); // Multi
         part = asdTMTexTableEntryAt(texture, 0x543);
-        textDrawString(3, 0xFFFFFFFF, text, rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 0.0f, 1.0f);
+        textDrawString(rowEntry->x + part->x + x, rowEntry->y + part->y + y, 0.5f, 3, 0.0f, 0xFFFFFFFF, 1.0f, text);
         u8 hitRange = item->hitRange;
         if ((hitRange & 15) == (hitRange >> 4))
             sprintf(text, "%d", hitRange & 15);

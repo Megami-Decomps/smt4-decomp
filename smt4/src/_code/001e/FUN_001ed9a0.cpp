@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (209 rows against 209): same flow, constants, render-target push/pop and float maths; retail reads `visible` through a pointer to a 0x300 sub-block of the save/load UI (add r0,r4,#768; ldrb [r0,#84]) and the entry-lock byte as (ui+index)+844, keeps the zero constant in r7 instead of r6, and loads the three globals in a different order, which a flat struct does not reproduce */
 #include "gamedata/SaveLoadUITable.h"
+#include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 typedef unsigned char u8;
 typedef signed char s8;
@@ -65,7 +66,6 @@ void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 scale);
 s32 texDrawCompositeSprite(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 s32 libc_strlen(const char *text);
-s32 textDrawString(s32 a, s32 b, const char *text, f32 x, f32 y, f32 z, f32 w, f32 speed);
 s32 gxSetUniformQuadColors(f32 *color);
 s32 screenDrawShadedRect(s32 x, s32 y, s32 w, s32 h, s32 depth);
 
@@ -121,7 +121,7 @@ u8 FUN_001ed9a0(void)
                 s32 length = libc_strlen(text);
                 s32 half = (s32)((f32)(length * height) * 0.5f);
                 f32 x = (f32)caption->x + (f32)(width - half) * 0.5f + (f32)parallax;
-                textDrawString(4, -1, text, x, (f32)caption->y, 0.0f, 0.0f, 1.0f);
+                textDrawString(x, (f32)caption->y, 0.0f, 4, 0.0f, -1, 1.0f, text);
                 renderTargetPop(g_titleScene);
                 efctSetSpeed(1.0f);
             }

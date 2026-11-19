@@ -1,27 +1,16 @@
-/* NON_MATCHING: same stores and calls; retail keeps zero in r2 and -1 in r3 so the pair store is one `strd r2, [r1, #4]` from the node base, built allocates zero in r1 and uses stm */
+/* NON_MATCHING: same stores and registers; retail materialises the critical section's -1 lock count (`mvn r3, #0`) after its first word is stored, the build before the first store. */
 #include "common.h"
 #include <new>
+#include "nn/os/CriticalSection.h"
 
 extern "C" {
 
-struct LinkPair {
-    LinkPair() : next(0), index(-1) {}
-    /* 0x00 */ u32 next;
-    /* 0x04 */ s32 index;
-};
-
-struct LinkNode {
-    LinkNode() : head(0) {}
-    /* 0x00 */ u32 head;
-    /* 0x04 */ LinkPair link;
-};
-
 struct SharedState {
-    SharedState() : first(0), enabled(1), flagA(0), flagB(0) {}
+    SharedState() : first(0), enabled(1), lock(nn::os::CRITICAL_SECTION_DEFERRED), flagA(0), flagB(0) {}
     /* 0x00 */ u32 first;
     /* 0x04 */ u8 enabled;
     /* 0x05 */ u8 unk05[3];
-    /* 0x08 */ LinkNode node;
+    /* 0x08 */ nn::os::CriticalSection lock;
     /* 0x14 */ u8 flagA;
     /* 0x15 */ u8 flagB;
 };

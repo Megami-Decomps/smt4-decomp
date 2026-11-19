@@ -39,9 +39,9 @@ s32 messageWindowDrawJob(u32 job)
         s32 count = FUN_002347b8(main, entry, strings);
         for (s32 index = 0; index < count; ++index) {
             const TextureTableEntryIV *position = asdTMTexTableEntryAt(0x3A, index + 0x43);
-            textDrawString(3, 0xFC4F46FF, reinterpret_cast<const char *>(strings[index]),
-                          (f32)(position->x + x), (f32)(position->y + y),
-                          0.5f, 0.0f, 1.0f);
+            textDrawString((f32)(position->x + x), (f32)(position->y + y), 0.5f,
+                          3, 0.0f,
+                          0xFC4F46FF, 1.0f, reinterpret_cast<const char *>(strings[index]));
         }
         renderStackPop(&g_titleScene->stackA);
     }

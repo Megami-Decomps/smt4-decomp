@@ -1,8 +1,8 @@
-/* NON_MATCHING: anchor/head setup matches; retail keeps the zero in r3 and stores rightmost/count with one strd (r2,r3, r4/r5 saved), built stores them with two str. */
+/* NON_MATCHING: retail saves r4/r5 around the stores ({r4, r5} pushed and popped, never used) and sets the zero after the sentinel's first link stores; otherwise identical. */
 #include "classes/Obj422380.h"
 
-/* An empty container: the anchor node and both ends point back at the anchor. */
+/* An empty tree: the root and both ends point at the sentinel node, which links to itself. */
 Obj422380::Obj422380()
-    : head(&anchor), anchor(&anchor), color(0), leftmost(head), rightmost(head), count(0)
+    : root(&nil), leftmost(root), rightmost(root), count(0)
 {
 }

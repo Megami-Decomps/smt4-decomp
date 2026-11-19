@@ -3,7 +3,7 @@
 extern "C" {
 u32 FUN_00141ff8(u32 resource);
 s32 FUN_00142014(u32 resource, u32 id, ModelBufferRequirements *requirements);
-s32 FUN_0014204c(u32 resource, ModelObjectRequirements *requirements);
+s32 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(u32 resource, ModelObjectRequirements *requirements);
 
 static __inline u32 modelAlignedStorage(u32 bytes)
 {
@@ -23,7 +23,7 @@ s32 FUN_0012201c(u32 unused, u32 resource)
         }
     }
     ModelObjectRequirements objects;
-    if (FUN_0014204c(resource, &objects)) {
+    if (nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(resource, &objects)) {
         bytes += modelAlignedStorage(objects.modelCount * 0x558);
         bytes += modelAlignedStorage(objects.materialCount * 0x460);
         bytes += modelAlignedStorage(objects.animationCount * 0x2BD4);

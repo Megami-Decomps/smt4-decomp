@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlUiGlobal.h"
+#include "battle/BtlPositionedRequestsA.h"
 
 struct Vec3 {
     f32 x;
@@ -59,8 +60,6 @@ BtlSide *btlMainFindEntryByListedId(void *main, s32 index);
 Vec3 FUN_003e7fa4(void *main, s32 index, s32 arg);
 s32 randBetween(s32 minimum, s32 maximum);
 u32 FUN_004a94a8(BtlUiA *block, s32 bank);
-u32 FUN_004a9588(BtlUiA *block, u32 value, u8 first, u8 second, s32 enabled, u8 mode, f32 x, f32 y, f32 z);
-u32 FUN_004a9f00(BtlUiA *block, s32 category, u32 text, u32 color, u32 style, u32 value, s32 x, s32 y);
 
 #define MASK64(offset) (*reinterpret_cast<u64 *>(g_btlActionReflect + (offset)))
 
@@ -94,13 +93,13 @@ void FUN_0040cd6c(u32 unused, EffectStep *step)
         addVec3(position, DAT_005e1c2c);
         s32 kind = step->kind;
         if (kind == 0 || kind == 2) {
-            step->handle = FUN_004a9588(g_btlUiBlock, step->firstId, kind == 2, 0, step->emphasised != 0, 1, position.x, position.y, position.z);
+            step->handle = btlUiQueuePositionedRequest(g_btlUiBlock, step->firstId, position.x, position.y, position.z, kind == 2, 0, step->emphasised != 0, 1);
         } else if (kind == 1 || kind == 3) {
-            step->handle = FUN_004a9588(g_btlUiBlock, step->firstId, kind == 3, 1, step->emphasised != 0, 1, position.x, position.y, position.z);
+            step->handle = btlUiQueuePositionedRequest(g_btlUiBlock, step->firstId, position.x, position.y, position.z, kind == 3, 1, step->emphasised != 0, 1);
         } else if (kind == 4 || kind == 5) {
             u8 enabled = kind == 5;
-            step->handle = FUN_004a9588(g_btlUiBlock, step->firstId, enabled, 0, step->emphasised != 0, 1, position.x, position.y, position.z);
-            step->handle = FUN_004a9588(g_btlUiBlock, step->secondId, enabled, 1, step->emphasised != 0, 1, position.x, position.y, position.z);
+            step->handle = btlUiQueuePositionedRequest(g_btlUiBlock, step->firstId, position.x, position.y, position.z, enabled, 0, step->emphasised != 0, 1);
+            step->handle = btlUiQueuePositionedRequest(g_btlUiBlock, step->secondId, position.x, position.y, position.z, enabled, 1, step->emphasised != 0, 1);
         } else {
             step->result = 0;
             return;
@@ -129,13 +128,13 @@ void FUN_0040cd6c(u32 unused, EffectStep *step)
         }
         s32 kind = step->kind;
         if (kind == 0 || kind == 2) {
-            step->handle = FUN_004a9f00(g_btlUiBlock, category, step->firstId, kind == 2, 0, step->emphasised != 0, x, y);
+            step->handle = btlUiQueueSlotPositionRequest(g_btlUiBlock, category, step->firstId, kind == 2, 0, step->emphasised != 0, x, y);
         } else if (kind == 1 || kind == 3) {
-            step->handle = FUN_004a9f00(g_btlUiBlock, category, step->firstId, kind == 3, 1, step->emphasised != 0, x, y);
+            step->handle = btlUiQueueSlotPositionRequest(g_btlUiBlock, category, step->firstId, kind == 3, 1, step->emphasised != 0, x, y);
         } else if (kind == 4 || kind == 5) {
-            u32 color = kind == 5;
-            step->handle = FUN_004a9f00(g_btlUiBlock, category, step->firstId, color, 0, step->emphasised != 0, x, y);
-            step->handle = FUN_004a9f00(g_btlUiBlock, category, step->secondId, color, 1, step->emphasised != 0, x, y);
+            u8 color = kind == 5;
+            step->handle = btlUiQueueSlotPositionRequest(g_btlUiBlock, category, step->firstId, color, 0, step->emphasised != 0, x, y);
+            step->handle = btlUiQueueSlotPositionRequest(g_btlUiBlock, category, step->secondId, color, 1, step->emphasised != 0, x, y);
         } else {
             step->result = 0;
             return;

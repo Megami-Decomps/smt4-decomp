@@ -111,7 +111,7 @@ u32 uiQuestDrawUpper(void)
         char text[64];
 
         sprintf(text, "%s", FUN_00156850(category, 0));
-        textDrawString(3, -1, text, (f32)(label->x + x), (f32)(label->y + y), 0.375f, 0.0f, speed);
+        textDrawString((f32)(label->x + x), (f32)(label->y + y), 0.375f, 3, 0.0f, -1, speed, text);
         effectRenderTransformedInstance(ui->panel, (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f));
         efctSetSpeed(1.0f);
         break;

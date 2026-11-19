@@ -18,12 +18,16 @@ struct ModelMatrixUploadOwner {
     /* 0xB3 */ u8 unkB3[7];
     /* 0xBA */ u8 modelRegister;
 };
+/* A block of prebuilt model commands; the upload copies it by value. */
+struct ModelCommandList {
+    /* 0x00 */ const u32 *commands;
+    /* 0x04 */ u32 wordCount;
+};
 struct ModelMatrixUploadSource {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u32 program;
     /* 0x08 */ u8 unk08[8];
-    /* 0x10 */ const u32 *commands;
-    /* 0x14 */ u32 wordCount;
+    /* 0x10 */ ModelCommandList commandList;
     /* 0x18 */ u8 unk18[0x24];
     /* 0x3C */ f32 projection[16];
     /* 0x7C */ f32 model[12];
@@ -35,6 +39,7 @@ typedef char ModelMatrixUploadOffsetsCheck[
     offsetof(ModelMatrixUploadOwner, writer) == 0xAC &&
     offsetof(ModelMatrixUploadOwner, projectionRegister) == 0xB2 &&
     offsetof(ModelMatrixUploadOwner, modelRegister) == 0xBA &&
+    offsetof(ModelMatrixUploadSource, commandList) == 0x10 &&
     offsetof(ModelMatrixUploadSource, projection) == 0x3C &&
     offsetof(ModelMatrixUploadSource, model) == 0x7C ? 1 : -1];
 #endif

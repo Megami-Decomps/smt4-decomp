@@ -57,7 +57,7 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
         name = gameGetPlayerName();
     }
     sprintf((char *)text, "%s", name);
-    textDrawString(3, font, (const char *)text, (f32)(nameX + x), (f32)(nameY + y), 0.56640625f, 0.0f, speed);
+    textDrawString((f32)(nameX + x), (f32)(nameY + y), 0.56640625f, 3, 0.0f, font, speed, (const char *)text);
     TextureTableEntryIV *badge = asdTMTexTableEntryAt(0x32, 0x99);
     efctPlayVariantSet(effect, badge->x + x, badge->y + y, 0x79, arg5, arg6);
     if (card->content.badge != 0) {

@@ -1,28 +1,15 @@
-/* NON_MATCHING: restored adjacent player-name getter tail call and delayed search-key initialization; id comparison register and comparator-address scheduling still differ. */
-#include "common.h"
-#include "gamedata/DataTable.h"
+/* NON_MATCHING: only the table search's comparator address is allocated and scheduled differently. */
+#include "gamedata/NameLabelTable.h"
 
 #define RANK_LABEL_SAVE_BLOCK 0x3E
 #define RANK_LABEL_LAST_ID 0x69
-#define RANK_LABEL_TABLE 0x38
-
-
-/* A record of data table 0x38 (0x68 bytes); `id` at 0 is the search key and the label follows it. */
-struct RankLabelRecord {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u16 label[0x33];
-};
 
 extern "C" {
 u8 *gameDataGetPlayerName(void);
 
-void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-s32 arrayCompareSignedHalfword(const void *a, const void *b);
-
-
+/* Looks up a caption, using fixed encoded rank labels for the special IDs. */
 u16 *FUN_00261468(u32 id)
 {
-
     if (id >= RANK_LABEL_LAST_ID + 1) {
         return NULL;
     } else {
@@ -67,13 +54,7 @@ u16 *FUN_00261468(u32 id)
         else if (id == 0x68)
             return (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\146\201\152";   /* 　　　　　　　　３ｒｄ　（Ｇ） */
         else {
-            RankLabelRecord key;
-            void *table = dataTableGet(RANK_LABEL_TABLE, 0);
-            void *entries = dataTableGetEntries(table);
-            u32 count = dataTableGetCount(table);
-            key.id = id;
-            RankLabelRecord *record = (RankLabelRecord *)libc_bsearch(&key, entries, count, sizeof(RankLabelRecord), arrayCompareSignedHalfword);
-            return record->label;
+            return nameLabelTableFindA(id)->token;
         }
     }
 }

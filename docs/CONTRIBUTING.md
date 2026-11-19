@@ -243,7 +243,16 @@ a sibling setter or another user of the same lookup is usually written the same 
   `u64` parameters for values passed in `r2:r3`.
 - An `s8` field at a large offset gives retail's literal base register (`add #0xF00`,
   `g_gameState+0x100`), even when a zero test makes the load itself unsigned. Check signedness before
-  reshaping a layout.
+  reshaping a layout. It holds for a small struct inside an array too: an `s8 active` byte in
+  `AsdSndSlotC` made retail's split base (`add r0, r1, #1536` then `[r0, #130]`/`[r0, #146]`, smt4
+  `FUN_0010d3f8`), where a `u8` addresses each slot from the sound base.
+- A pre-indexed load with writeback followed by its neighbour (`ldr rA, [rB, #N]!; ldr rC, [rB, #4]`) is
+  an 8-byte struct copied by value into a local (`ModelCommandList list = source->commandList;`, smt4a
+  `FUN_00157c3c`); two field reads compile to two plain offsets.
+- A clock or calendar call that fills a caller's 8-byte value returns it by value: write
+  `DateTimeValue now = clockGetTicksAsMicroseconds(); header->timestamp = FUN_002ad66c(&now);`
+  (smt4 `FUN_001db90c`, smt4a `FUN_00280bd0`). The ABI is the same hidden result pointer, but the
+  output-pointer form allocates and copies the stack slots differently.
 - Keep packing local to genuinely unaligned members, with size and offset assertions: packing a whole
   record downgrades its aligned word accesses.
 - A float-shaped stack argument does not prove a variadic callee: a one-word integer/float payload
@@ -261,6 +270,13 @@ a sibling setter or another user of the same lookup is usually written the same 
   `(mask & flags)` per test.
 
 **Control flow**
+- A mode of a `switch`-driven update may be its own `static s32 modeName(work)` called as
+  `case N: return modeName(work);` only where retail shows the inlined body for that mode: its own
+  epilogue or return copy, a copy of the parameter into another register, constants hoisted for that
+  mode alone. Write complete mode bodies, name each for its mode, keep the modes without such evidence
+  in place, and never pick the split by score alone (the Gauntlet app menu's modes 1-3, smt4a
+  `FUN_003ce598` and smt4 `FUN_003291dc`: mode 2 starts `mov r5, r4`, modes 2 and 3 end in their own
+  epilogues returning the zero register).
 - `if (T *p = field)` keeps a null check armcc would otherwise merge away; `a == NULL || b == NULL`
   written as two early returns returns `r0` directly.
 - A positive-first `if (x) { ...; return 1; } return 0;` stops shrink-wrapping; a wrapper that retail
@@ -375,6 +391,16 @@ a sibling setter or another user of the same lookup is usually written the same 
   in the wrong place still links and runs, but it changes where armcc loads the float literals
   against the integer argument moves. Settle the order from the callee's definition and all its
   callers, not from one caller's match.
+- armcc evaluates and schedules arguments in declaration order, so a callee's real parameter order
+  shows in every caller even when the registers agree. `debugDrawText(u32 color, f32 x, f32 y,
+  f32 alpha, const char *text)` takes the text last: every caller loads the opacity literal between
+  the text and the colour moves, and only the orders with the text last matched all its callers in
+  both games (four of them became IDENTICAL).
+- armcc evaluates and schedules a call's arguments in the callee's declared parameter order, so the
+  real order shows in every caller's schedule even where the registers agree: `textDrawString` is
+  `(x, y, z, layer, width, color, height, text)` (the best of all 56 interleavings, scored over all
+  its callers), not the register order `(layer, color, text, x, ...)`. A near miss tuned to the wrong
+  order (locals computed y-before-x) goes back to the plain call once the prototype is right.
 
 **Helpers**
 - A stack key or temporary in scope at the end (a `bsearch` key, a copied struct) blocks retail's
@@ -466,9 +492,9 @@ local view or prototype, and keep the contract.
   (`UniteWork *work = (UniteWork *)jobGetWork(job);`) in every callback of that job. For registered
   process or draw callbacks, compare the body with its registrar and recover the callback's parameter
   and result types too.
-- **`text/TextDraw.h`**: `f32 FUN_00162790(layer, color, text, x, y, z, width, height)` (smt4's
-  `FUN_002be5a4`). The last three floats are depth, letter spacing and opacity and are always passed
-  (a caller with fewer arguments reuses retail's `s2`-`s4` values: check them at the retail call
+- **`text/TextDraw.h`**: `f32 textDrawString(x, y, z, layer, width, color, height, text)` (r0-r2 hold
+  layer, color, text; s0-s4 x, y, z, width, height). z, width and height are depth, letter spacing
+  and opacity and are always passed (a caller with fewer arguments reuses retail's `s2`-`s4` values: check them at the retail call
   site); the result is the drawn advance. Text held as bytes or `u16` is cast to `const char *`.
 - **`gamedata/Table04Record.h`**: data table 4's 0x88-byte record (the search stride and the key
   buffer prove it) and `dataTable04FindById`; callers that read other fields cast the result to their

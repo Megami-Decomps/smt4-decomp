@@ -81,7 +81,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     gxResetColorQuadToWhite();
     placement = asdTMTexTableEntryAt(20, slot + 0xbe5);
     frameX = placement->x + (placement->placement->width - fontMeasureLineAdvance(name, 2)) / 2 + x + parallax;
-    textDrawString(2, 0xff, name, (f32)frameX, (f32)(placement->y + y), 1.0f, 0.0f, speed);
+    textDrawString((f32)frameX, (f32)(placement->y + y), 1.0f, 2, 0.0f, 0xff, speed, name);
     efctSetSpeed(savedSpeed);
 }
 

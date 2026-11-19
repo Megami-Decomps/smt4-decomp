@@ -43,14 +43,14 @@ void FUN_0046a108(MessageDebugOverlayView *overlay)
     if (count > overlay->capacity)
         count = overlay->capacity;
     if (count == 0) {
-        textDrawString(2, color, DAT_00533528, 8.0f, 8.0f, 0.0f, 1.0f, 1.0f);
+        textDrawString(8.0f, 8.0f, 0.0f, 2, 1.0f, color, 1.0f, DAT_00533528);
         return;
     }
     for (s32 index = 0; index < count; ++index) {
         const char *text = FUN_00156850(overlay->messages()[index].message, 0);
-        textDrawString(2, color, text, 24.0f, (f32)(index * 14 + 8), 0.0f, 1.0f, 1.0f);
+        textDrawString(24.0f, (f32)(index * 14 + 8), 0.0f, 2, 1.0f, color, 1.0f, text);
     }
     s32 nextLine = FUN_0031d174(&overlay->queueType);
-    textDrawString(2, color, DAT_00533560, 8.0f, (f32)(nextLine * 14 + 8), 0.0f, 1.0f, 1.0f);
+    textDrawString(8.0f, (f32)(nextLine * 14 + 8), 0.0f, 2, 1.0f, color, 1.0f, DAT_00533560);
 }
 }

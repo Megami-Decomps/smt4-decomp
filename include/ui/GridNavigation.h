@@ -22,7 +22,8 @@ struct GridNavigation {
     u8 padding54[8];
     u16 row;
     u16 column;
-    u8 padding60[2];
+    s8 changed;   /* 0x60: the selection moved this frame */
+    s8 unk61;     /* 0x61: set with `changed` while the list scrolls */
     u8 empty;
     u8 padding63;
 };

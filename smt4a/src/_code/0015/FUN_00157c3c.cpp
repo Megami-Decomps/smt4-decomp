@@ -1,4 +1,4 @@
-/* NON_MATCHING: writer/selector load scheduling, model-command argument registers and segment metadata store merging differ. */
+/* NON_MATCHING: the command list now copies as retail does; retail loads owner->writer after the program argument and writer->cursor before the projection register, the build schedules both loads the other way. */
 #include "gfx/ModelMatrixUpload.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "Model/MoriModelEffect.h"
@@ -30,8 +30,9 @@ void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source
     FUN_0019a270(commands, model, 0xBF02C1);
     commands += 14;
     writer->cursor = commands;
-    const u32 *modelCommands = source->commands;
-    u32 bytes = source->wordCount << 2;
+    ModelCommandList list = source->commandList;
+    const u32 *modelCommands = list.commands;
+    u32 bytes = list.wordCount << 2;
     if (commands != NULL && modelCommands != NULL) {
         commands = gpuCmdPadToAlign16(commands, ((reinterpret_cast<u32>(commands) - reinterpret_cast<u32>(writer->segmentBegin)) & ~3u) + 24);
         writer->cursor = commands;

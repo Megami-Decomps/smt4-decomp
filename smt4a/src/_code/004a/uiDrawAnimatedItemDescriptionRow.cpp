@@ -73,6 +73,6 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
             text = reinterpret_cast<const char *>(FUN_0014bd84(effect));
     }
     TextureTableEntryIV *position = asdTMTexTableEntryAt(12, 135);
-    textDrawString(2, 255, text, static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 0.0f, speed);
+    textDrawString(static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 2, 0.0f, 255, speed, text);
     efctSetSpeed(1.0f);
 }

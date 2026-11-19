@@ -1,4 +1,4 @@
-/* NON_MATCHING: the stores and call arguments share registers as in retail; retail loads the state address before the first call, keeps the status byte update in r0 and stores the volume with a post-incrementing `vstmia r0!` before the integer `stm`. */
+/* NON_MATCHING: retail stores the duck volume with `add r0, r4, #488; vstmia r0!, {s0}` and the four frame counts from that written-back base; the build stores the volume with vstr and bases the stm at +492 (as in the smt4a twin FUN_0013ae58). */
 #include "common.h"
 #include "shard/W6_W6Match7_SoundInit.h"
 
@@ -31,38 +31,33 @@ void asdSoundDuckSetup(s32 enabled, f32 volume, s32 attack,
 s32 fileLoadSync(const char* path, u32* size, u32 flags);
 }
 
-// Records the sound-ducking settings and applies them.
-static __inline void soundDuckConfigure(SoundDuckSettingsView *settings, f32 volume, s32 attack,
-                                        s32 hold, s32 mode, s32 release)
-{
-    settings->unk00 = volume;
-    settings->unk04 = attack;
-    settings->unk08 = hold;
-    settings->unk0c = mode;
-    settings->unk10 = release;
-    asdSoundDuckSetup(1, volume, attack, hold, mode, release);
-}
-
 extern "C" {
 
 // Initialize sound defaults and load the voice-pan table if entry 1 is absent.
 void FUN_00106650(void)
 {
+    SoundStateView *state = &DAT_004c5634;
     if (jyoucyuGetTableEntry(1) != 0) {
         return;
     }
 
     FUN_0010dd80();
-    DAT_004c5634.unk1e5 = 0x60;
-    DAT_004c5634.unk1e4 |= 3;
-    DAT_004c5634.unk1e6 = 0;
+    state->unk1e5 = 0x60;
+    state->unk1e4 |= 3;
+    state->unk1e6 = 0;
     asdSoundSetVolumeIfEnabled(1);
 
-    soundDuckConfigure(&DAT_004c5634.unk1e8, 0.7f, 5, 30, 1, 20);
+    SoundDuckSettingsView *duck = &state->unk1e8;
+    duck->unk00 = 0.7f;
+    duck->unk04 = 5;
+    duck->unk08 = 30;
+    duck->unk0c = 1;
+    duck->unk10 = 20;
+    asdSoundDuckSetup(1, duck->unk00, duck->unk04, duck->unk08, duck->unk0c, duck->unk10);
 
     u32 size = 0;
-    if (DAT_004c5634.unk1e0 == 0) {
-        DAT_004c5634.unk1e0 = fileLoadSync("snd/voice_pan.tbl", &size, 0);
+    if (state->unk1e0 == 0) {
+        state->unk1e0 = fileLoadSync("snd/voice_pan.tbl", &size, 0);
     }
 }
 }

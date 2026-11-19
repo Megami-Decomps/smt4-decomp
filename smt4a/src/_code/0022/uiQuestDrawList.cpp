@@ -75,7 +75,7 @@ void uiQuestDrawList(void)
         u32 color = uiQuestDrawRowPlate(id, entry->x + plate->x + x, entry->y + plate->y + y, 0x6f, 0, 0);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x1e, 0x9b);
         sprintf(text, "%s", FUN_00156850(id, 0));
-        textDrawString(2, color, text, (f32)(entry->x + name->x + x), (f32)(name->y + entry->y + y), 0.45f, 0.0f, alpha);
+        textDrawString((f32)(entry->x + name->x + x), (f32)(name->y + entry->y + y), 0.45f, 2, 0.0f, color, alpha, text);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1e, 0x9a);
         partyDrawCategorySelectionIcon(id, icon->x + entry->x + x, entry->y + icon->y + y, 0x6f);
         TextureTableEntryIV *mark = asdTMTexTableEntryAt(0x1e, 0x9d);
@@ -141,7 +141,7 @@ void uiQuestDrawList(void)
         u32 color = uiQuestDrawRowPlate(id, plate->x + focus->x + x, focus->y + plate->y + y, 0xab, 1, pressed);
         TextureTableEntryIV *name = asdTMTexTableEntryAt(0x1e, 0xb2);
         sprintf(text, "%s", FUN_00156850(id, 0));
-        textDrawString(3, color, text, (f32)(focus->x + name->x + x), (f32)(focus->y + name->y + y), 0.32f, 0.0f, alpha);
+        textDrawString((f32)(focus->x + name->x + x), (f32)(focus->y + name->y + y), 0.32f, 3, 0.0f, color, alpha, text);
         if (partyEntryFlagsBit3(id)) {
             texDrawTableEntryAtStoredOrigin(2, 0x1e, 0xb0, focus->x + x, focus->y + y, 0xab);
         } else {

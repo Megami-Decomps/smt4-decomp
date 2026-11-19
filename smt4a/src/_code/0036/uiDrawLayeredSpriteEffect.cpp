@@ -1,4 +1,3 @@
-/* NON_MATCHING: instructions match except the resource-address and zero-float literal pool entries are reversed. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -19,7 +18,7 @@ void uiDrawLayeredSpriteEffect(s32 x, s32 y, f32 speed)
     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x270, anchor->x + x, anchor->y + y, 0x65);
     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x171, anchor->x + x, anchor->y + y, 0x65);
     TextureTableEntryIV *caption = asdTMTexTableEntryAt(0x1a, 0x178);
-    textDrawString(2, 0xffffffff, (const char *)g_layeredSpriteEffectResource,
-                  caption->x + anchor->x + x, anchor->y + caption->y + y, 0.0f, 0.0f, speed);
+    textDrawString(caption->x + anchor->x + x, anchor->y + caption->y + y, 0.0f,
+                  2, 0.0f, 0xffffffff, speed, (const char *)g_layeredSpriteEffectResource);
 }
 }

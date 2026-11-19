@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ec120` (_code @ 0x4ec120, 0x7fc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlUiObjCQuery.h"
 
 extern "C" {
 
@@ -55,7 +56,6 @@ extern int FUN_003e69ac(unsigned int);
 extern int FUN_003e7adc(int);
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: btlUiClearEntryStates. */
-extern int FUN_004aa768(unsigned int, int);
 extern int FUN_004aaf80(unsigned int);
 extern int FUN_004ab784(unsigned int);
 extern int FUN_004abac8(unsigned int);
@@ -272,7 +272,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     }
     temp_v4 = 0;
     do {
-      temp_v6 = FUN_004aa768(g_btlUiBlock,temp_v4);
+      temp_v6 = FUN_004aa768(reinterpret_cast<BtlUiA *>(g_btlUiBlock), temp_v4);
       if (temp_v6 == 0) {
         return (int *)0x0;
       }

@@ -8,6 +8,13 @@ class StatusScreenModel {
 public:
     virtual ~StatusScreenModel();
 };
+/* Enters game state `state` with its step counter cleared. */
+static __inline void gameSetState(s32 state)
+{
+    g_gameGlobals.data->unk10 = 0;
+    g_gameGlobals.data->activeState = state;
+}
+
 extern "C" {
 void nodeOwnerSetTranslations(StatusScreenModel *, const Vec3 *);
 void statusCameraDestroy();
@@ -52,8 +59,6 @@ void *script = lmapSceneGetScript();
         timerStart(&sprites[8 + i], 5, 0);
         timerStart(&sprites[18 + i], 5, 0);
     }
-    GameData *current = g_gameGlobals.data;
-    current->unk10 = 0;
-    current->activeState = 2;
+    gameSetState(2);
 }
 }

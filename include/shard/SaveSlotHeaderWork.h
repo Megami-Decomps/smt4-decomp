@@ -23,7 +23,8 @@ struct SaveSlotHeaderWork {
     u8 flag0f;                  /* 0x0f */
     u8 flag10;                  /* 0x10 */
     u8 flag11;                  /* 0x11 */
-    u8 unk12[2];
+    u8 busy;                    /* 0x12: suppresses the return to idle */
+    u8 unk13;
     u8 isLoad;                  /* 0x14: picks the slot list FUN_0041dbdc rebuilds */
     u8 ready;                   /* 0x15 */
     u8 unk16[2];
@@ -47,7 +48,9 @@ struct SaveSlotHeaderWork {
     s32 selected;               /* 0x2f8: the chosen slot, mirrored in g_saveLoadUIBase */
     u8 unk2fc[0x10];
     u8 slotBusy;                /* 0x30c: set while one of the save slots' requests is active */
-    u8 unk30d[0x13f];
+    u8 unk30d[0x12f];
+    s16 touchRegions[6];        /* 0x43c: menu rows and the three fixed buttons */
+    s32 touchRegionCount;      /* 0x448 */
     u8 pending;                 /* 0x44c */
     u8 confirmed;               /* 0x44d */
     u8 canceled;                /* 0x44e */
@@ -69,10 +72,25 @@ typedef char SaveSlotHeaderWorkCheck[
 typedef char SaveSlotHeaderWorkMidCheck[
     offsetof(SaveSlotHeaderWork, recordIndex) == 0x05 && offsetof(SaveSlotHeaderWork, suspended) == 0x68 &&
     offsetof(SaveSlotHeaderWork, headers) == 0x6c && offsetof(SaveSlotHeaderWork, slotBusy) == 0x30c &&
+    offsetof(SaveSlotHeaderWork, touchRegions) == 0x43c && offsetof(SaveSlotHeaderWork, touchRegionCount) == 0x448 &&
     offsetof(SaveSlotHeaderWork, pending) == 0x44c ? 1 : -1];
 typedef char SaveSlotHeaderWorkTailCheck[
     offsetof(SaveSlotHeaderWork, transitionCounter) == 0x620 && offsetof(SaveSlotHeaderWork, transition) == 0x6ec &&
     sizeof(SaveSlotHeaderWork) == 0x6f8 ? 1 : -1];
+
+/* The three fixed buttons' touch-region IDs. */
+struct SaveSlotFixedRegionsA {
+    s32 first;
+    s32 second;
+    s32 third;
+};
+
+/* The touch-region indices the full menu keeps after its transition widgets. */
+struct SaveSlotTouchWorkA : SaveSlotHeaderWork {
+    u8 unk6f8[0x24];
+    SaveSlotFixedRegionsA fixedButtonRegions; /* 0x71c */
+};
+typedef char SaveSlotTouchWorkACheck[offsetof(SaveSlotTouchWorkA, fixedButtonRegions) == 0x71c ? 1 : -1];
 
 extern "C" {
 extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
@@ -81,7 +99,7 @@ void saveLoadUiAdvanceSprites(SaveSlotHeaderWork *ui);
 }
 
 /* Moves the save menu to another mode, remembering the one it leaves, restarting its steps and setting the mode to
- * follow it (0: none; `ui->phase` keeps the pending one). FUN_0041eeec's saveLoadTransition is the same. */
+ * follow it (0: none; `ui->phase` keeps the pending one). saveLoadUiSuspendOrRestart's saveLoadTransition is the same. */
 static __inline void saveLoadUiSetMode(SaveSlotHeaderWork *ui, u8 mode, u8 next)
 {
     ui->previousMode = ui->mode;

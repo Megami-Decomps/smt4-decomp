@@ -114,8 +114,8 @@ s32 FUN_00315d34(u32 handle)
             texDrawTableEntryAtStoredOrigin(2, 8, sprite, (s32)offset, 0, 0xB);
         char text[128];
         FUN_003849cc(screen->notice.id, screen->notice.arg, 0, text, -1);
-        textDrawString(3, 0xFFFFFFFF, text, (f32)frame->x + offset, (f32)frame->y,
-                      0.0f, 1.0f, 1.0f);
+        textDrawString((f32)frame->x + offset, (f32)frame->y, 0.0f, 3, 1.0f,
+                      0xFFFFFFFF, 1.0f, text);
         renderStackPop(&g_renderCtx->stackA);
     }
     return 0;

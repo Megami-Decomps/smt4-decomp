@@ -114,8 +114,8 @@ s32 titleConfigDraw(void)
         if (setting < 3) {
             TitleConfigLabelA *labels = (TitleConfigLabelA *)dataTableGetEntries(dataTableGet(0x3a, 1));
             __2sprintf(text, "%s", labels[setting].text);
-            textDrawString(2, color, text, (f32)(entry->x + labelEntry->x + x), (f32)(entry->y + labelEntry->y + y), 0.0f,
-                           0.0f, alpha);
+            textDrawString((f32)(entry->x + labelEntry->x + x), (f32)(entry->y + labelEntry->y + y), 0.0f, 2, 0.0f, color,
+                           alpha, text);
         }
 
         if (isSelected) {

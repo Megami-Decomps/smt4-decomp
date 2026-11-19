@@ -50,8 +50,8 @@ void configDrawOptionPanel(s32 x, s32 y, s32 /* display */)
     if (entry) {
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x2F, 0x1A);
         sprintf(text, "%s", entry->heading);
-        textDrawString(2, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y),
-                       0.0f, 0.0f, 1.0f);
+        textDrawString((f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 2, 0.0f,
+                       color, 1.0f, text);
         if (menu->flag == 1)
             configDrawChoices(3, frame->x + x, frame->y + y, menu->selectedChoice[resourceRunOperationIfUnblocked(&menu->cursor)], entry);
         else

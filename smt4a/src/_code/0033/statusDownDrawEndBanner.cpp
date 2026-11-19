@@ -25,7 +25,7 @@ void statusDownDrawEndBanner(u32 x, s32 y, f32 alpha)
     s32 textY = y + anchor->y;
     const TextureTableEntryIV *baseline = asdTMTexTableEntryAt(0x12, 0x561);
     textY += baseline->y;
-    textDrawString(2, ~0u, (const char *)text, (f32)textX, (f32)textY, 0.2f, 0.0f, alpha);
+    textDrawString((f32)textX, (f32)textY, 0.2f, 2, 0.0f, ~0u, alpha, (const char *)text);
     efctSetSpeed(1.0f);
 }
 }

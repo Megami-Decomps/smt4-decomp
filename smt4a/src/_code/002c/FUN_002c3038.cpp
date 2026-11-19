@@ -75,12 +75,12 @@ u32 FUN_002c3038(u32 handle)
         for (s32 row = 0; row < shown; row++) {
             u32 color = 0xFFFFFFFF;
             if (work->selected == row + first) {
-                textDrawString(2, 0xFF00FF, (const char *)kMarker, 8.0f, (f32)(row * 14), 0.1f, 0.0f, 1.0f);
+                textDrawString(8.0f, (f32)(row * 14), 0.1f, 2, 0.0f, 0xFF00FF, 1.0f, (const char *)kMarker);
                 color = 0xFF00FF;
             }
             u16 name[0x20];
             FUN_00102bbc(name, work->entries + (row + first) * 0x228, 0x40);
-            textDrawString(2, color, (const char *)name, 20.0f, (f32)(row * 14), 0.1f, 1.0f, 1.0f);
+            textDrawString(20.0f, (f32)(row * 14), 0.1f, 2, 1.0f, color, 1.0f, (const char *)name);
         }
     }
     skinObjectUpdateMatrices(g_renderCtx);

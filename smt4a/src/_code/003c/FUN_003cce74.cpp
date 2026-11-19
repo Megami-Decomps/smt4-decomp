@@ -50,7 +50,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
             color = GRID_COLOR_SPECIAL;
         sprintf(text, "%s", FUN_0014bd84(entry));
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
-        textDrawString(2, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 0.0f, speed);
+        textDrawString((f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 2, 0.0f, color, speed, text);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1A, 0x1A1);
         FUN_00185e84(entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0, 0);
         if (recordContainsPairedId(owner, entry) == 0)
@@ -65,7 +65,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
             color = GRID_COLOR_SPECIAL;
         sprintf(text, "\x81\x7C \x81\x7C \x81\x7C");
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
-        textDrawString(3, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 0.0f, speed);
+        textDrawString((f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 3, 0.0f, color, speed, text);
     }
 }
 

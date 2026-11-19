@@ -7,7 +7,7 @@ void* libc_bsearch(const void*, const void*, u32, u32,
                    s32 (*)(const void*, const void*));
 
 // Looks up the cost of gauntlet app `id` (0 when there is none).
-u16 dataTable0BGetValueById(u16 id)
+u16 dataTable0BGetValueById(u32 id)
 {
     void* section = dataTableGet(0x0b, 0);
     if (section != NULL) {

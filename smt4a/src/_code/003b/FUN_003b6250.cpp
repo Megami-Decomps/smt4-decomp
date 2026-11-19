@@ -30,9 +30,9 @@ f32 FUN_003b6250(s32 x, s32 y, f32 speed)
     efctSetSpeed(speed);
     const TextureTableEntryIV *effect = asdTMTexTableEntryAt(0x1a, 0x1a2);
 
-    return textDrawString(3, color, (const char *)g_layeredSpriteEffectResource,
-                       static_cast<f32>(effect->x + strip->x + x),
-                       static_cast<f32>(strip->y + effect->y + y),
-                       0.0f, 0.0f, speed);
+    return textDrawString(static_cast<f32>(effect->x + strip->x + x), static_cast<f32>(strip->y + effect->y + y), 0.0f,
+                       3,
+                       0.0f,
+                       color, speed, (const char *)g_layeredSpriteEffectResource);
 }
 }

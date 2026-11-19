@@ -51,7 +51,7 @@ void FUN_00165778(ItemBadge* badge, TextureTableEntryIV* frame)
 {
     s32 captionWidth = fontMeasureLineAdvance(badge->caption, 4);
     s32 left = (frame->placement->width - captionWidth) / 2;
-    textDrawString(4, -1, badge->caption, (f32)left, 6.0f, 0.57f, 0.0f, badge->textAlpha);
+    textDrawString((f32)left, 6.0f, 0.57f, 4, 0.0f, -1, badge->textAlpha, badge->caption);
     uiDrawItemCategoryIcon(badge->category, left - 13, 8, 121, 0);
     skinObjectUpdateMatrices(g_renderCtx);
 

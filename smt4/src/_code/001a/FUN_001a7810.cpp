@@ -1,5 +1,6 @@
 /* NON_MATCHING: branch structure, getter, text coordinates and the background calls now match; armcc still fuses the 0.5*x+0.5 pulse into a vmla (retail: vmul/vadd with one constant register). */
 #include "ui/PartyPanel.h"
+#include "text/TextDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S3UiLookup.h"
 #include <stddef.h>
@@ -11,8 +12,6 @@ void texDrawCompositeSprite(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 d
 void efctSetSpeed(f32 speed);
 const u16 *dataTable24Sub0GetRecordS90(u32 id);
 s32 fontMeasureLineAdvance(const u16 *text, s32 font);
-void textDrawString(s32 layer, u32 color, const u16 *text,
-                  f32 x, f32 y, f32 scale, f32 angle, f32 speed);
 
 // Draw a highlighted/ordinary selector background, availability icon and centered label.
 void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 alternate, f32 speed)
@@ -42,6 +41,6 @@ void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 altern
     s32 centered = (position->placement->width - textWidth) / 2;
     f32 textX = position->x + (centered + x);
     f32 textY = position->y + y;
-    textDrawString(2, color, text, textX, textY, 0.55f, 0.0f, speed);
+    textDrawString(textX, textY, 0.55f, 2, 0.0f, color, speed, (const char *)text);
 }
 }

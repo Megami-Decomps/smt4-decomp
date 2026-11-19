@@ -4,7 +4,7 @@
 extern "C" {
 ArchivePathDevice* FUN_00197c78(const u16*);
 
-u32 archivePathDeviceOpen(u32* output, const u16* fullPath, u32 flags)
+s32 archivePathDeviceOpen(u32* output, const u16* fullPath, u32 flags)
 {
     ArchivePathDevice* device = FUN_00197c78(fullPath);
     if (device == NULL) {

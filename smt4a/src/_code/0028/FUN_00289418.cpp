@@ -38,8 +38,8 @@ void FUN_00289418(s32 x, s32 y, f32 alpha)
         sprintf((char *)text, "撂躂蒂＀");
         s32 textWidth = fontMeasureLineAdvance(text, 3);
         TextureTableEntryIV *label = asdTMTexTableEntryAt(0x12, 0x579);
-        textDrawString(3, color, (const char *)text, (f32)(x + banner->x + (banner->placement->width - textWidth) / 2),
-                     (f32)(label->y + banner->y + y), 0.2f, 0.0f, alpha);
+        textDrawString((f32)(x + banner->x + (banner->placement->width - textWidth) / 2), (f32)(label->y + banner->y + y), 0.2f, 3,
+                     0.0f, color, alpha, (const char *)text);
         efctSetSpeed(1.0f);
     } else {
         statusDownDrawEndBanner(x, y, alpha);

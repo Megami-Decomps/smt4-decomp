@@ -1,4 +1,4 @@
-/* NON_MATCHING: jump table, u16 parameters, callee contracts and the packed-pair field stores match; the case-4 output words are stored separately (retail ldrd/strd) and callee-saved register roles differ. */
+/* NON_MATCHING: retail leaves the rejected case-4 pair through the shared exit (`mov r7, #0; b` to `mov r0, r7`), the build returns 0 directly (`moveq r0, #0`). */
 #include "gamedata/PackedIdentifiers.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
@@ -30,14 +30,12 @@ extern "C" u32 FUN_004dc3b4(void *context, u16 firstId, u16 secondId, PackedIden
         const NkmBaseRecordA *first = nkmBaseGetRecord(firstId);
         const NkmBaseRecordA *second = nkmBaseGetRecord(secondId);
         const RaceFusionRecipe *recipe = dataTable05FindByPriorityAndKey(first->race, second->race);
-        if (firstId != secondId && recipe != NULL) {
-            output->firstIdentifier = firstId;
-            output->secondIdentifier = secondId;
-            output->resultIdentifier = recipe->result;
-            accepted = 1;
-        } else {
-            accepted = 0;
-        }
+        if (firstId == secondId || recipe == NULL)
+            return 0;
+        output->firstIdentifier = firstId;
+        output->secondIdentifier = secondId;
+        output->resultIdentifier = recipe->result;
+        accepted = 1;
         break;
     }
     }

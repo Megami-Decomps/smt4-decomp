@@ -12,7 +12,7 @@ int libm_sinf(void);
 int calcHeadingRoundedToCardinalDirection(void);
 int FUN_002b56e0(void);
 int mathAngleDeltaDegrees(void);
-int FUN_002d1780(void);
+int lmapViewUpdateOrbitSequence(void);
 int FUN_002d1e44(float *);
 int FUN_0030250c(void);
 int FUN_003026d8(void);
@@ -166,7 +166,7 @@ void FUN_00395904(void)
     piVar6[0x22] = temp_v10;
     break;
   case 5:
-    FUN_002d1780();
+    lmapViewUpdateOrbitSequence();
     break;
   case 6:
     temp_v21 = 0.017453292f;

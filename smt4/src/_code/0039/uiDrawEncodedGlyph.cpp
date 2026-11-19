@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc merges the highlighted draw branches and tail-calls the global speed setter, unlike retail. */
 #include "common.h"
+#include "text/TextDraw.h"
 
 struct GlyphDirectory;
 struct GlyphDirectoryVtable {
@@ -14,7 +15,6 @@ struct GlyphRecordTable {
     GlyphDirectory *directory; // 0x08
 };
 extern "C" GlyphRecordTable *recordTableGet(u32 kind);
-extern "C" void textDrawString(u32 layer, u32 color, const u8 *text, f32 x, f32 y, f32 scale, f32 depth, f32 opacity);
 extern "C" void efctSetSpeed(f32 speed);
 
 // Draw one encoded glyph with the requested highlight, dimming and effect speed.
@@ -39,8 +39,8 @@ extern "C" void uiDrawEncodedGlyph(void *, s32 code, s32 x, s32 y, s32 dimmed, s
     text[1] = static_cast<u8>(code);
     text[2] = 0;
     if (highlighted)
-        textDrawString(4, color, text, static_cast<f32>(x), static_cast<f32>(y), 0.0f, 0.0f, opacity);
+        textDrawString(static_cast<f32>(x), static_cast<f32>(y), 0.0f, 4, 0.0f, color, opacity, (const char *)text);
     else
-        textDrawString(3, color, text, static_cast<f32>(x), static_cast<f32>(y), 0.0f, 0.0f, opacity);
+        textDrawString(static_cast<f32>(x), static_cast<f32>(y), 0.0f, 3, 0.0f, color, opacity, (const char *)text);
     efctSetSpeed(speed);
 }

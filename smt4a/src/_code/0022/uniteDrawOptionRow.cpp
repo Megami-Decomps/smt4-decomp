@@ -38,6 +38,6 @@ void uniteDrawOptionRow(UniteWorkA *work, s32 index, s32 x, s32 y, s32 selected,
     const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(26, 164);
     s32 width = fontMeasureLineAdvance(name, 2);
     s32 offset = (anchor->placement->width - width) / 2;
-    textDrawString(2, color, name, (f32)(anchor->x + (offset + x)), (f32)(anchor->y + y), 0.55f, 0.0f, opacity);
+    textDrawString((f32)(anchor->x + (offset + x)), (f32)(anchor->y + y), 0.55f, 2, 0.0f, color, opacity, name);
 }
 }

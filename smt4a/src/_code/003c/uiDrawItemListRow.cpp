@@ -28,9 +28,9 @@ void uiDrawItemListRow(s32 x, s32 y, s32 message, s32 category, u32 color, u32 i
     if (message > 0) {
         const char *text = dataFindKindRecordWithAocOverrides(message, 0);
         if (text)
-            textDrawString(3, color, text, (f32)(label->x + x), (f32)(label->y + y), 0.24f, 0.0f, effect);
+            textDrawString((f32)(label->x + x), (f32)(label->y + y), 0.24f, 3, 0.0f, color, effect, text);
         return;
     }
-    textDrawString(3, color, DAT_0052bfdc, (f32)(label->x + x), (f32)(label->y + y), 0.24f, 0.0f, effect);
+    textDrawString((f32)(label->x + x), (f32)(label->y + y), 0.24f, 3, 0.0f, color, effect, DAT_0052bfdc);
 }
 }

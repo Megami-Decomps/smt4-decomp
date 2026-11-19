@@ -46,8 +46,8 @@ void FUN_0016631c(MenuState *menu, const TextureTableEntryIV *layout)
     }
     s32 left = (layout->placement->width - (labelWidth + numberWidth + 13 + signWidth)) / 2;
     const TextureTableEntryIV *labelMetric = asdTMTexTableEntryAt(8, 0x68);
-    textDrawString(4, -1, caption->label, (f32)(left + 13 + signWidth),
-        (f32)labelMetric->y, 0.57f, 0.0f, caption->sprite.alpha);
+    textDrawString((f32)(left + 13 + signWidth), (f32)labelMetric->y, 0.57f, 4,
+        0.0f, -1, caption->sprite.alpha, caption->label);
     const TextureTableEntryIV *numberMetric = asdTMTexTableEntryAt(8, 0x19D);
     FUN_00186008(left + labelWidth + 13 + signWidth, numberMetric->y, 0x79, caption->value);
     FUN_00185e84(caption->icon, left + signWidth, 8, 0x79, 0, 0);

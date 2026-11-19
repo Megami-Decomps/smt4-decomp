@@ -81,7 +81,7 @@ typedef struct CampState {
     /* 0x2490 */ s32 categoryTimers[25];   /* index 0 is the player, 1..24 the unit slots */
     /* 0x24F4 */ s32 categoryIndices[25];
     /* 0x2558 */ u32 categoryColors[25];
-    /* 0x25BC */ u8 unk25BC;
+    /* 0x25BC */ s8 menuGroupBorrowed;      /* leaving the skill list puts the menu back on group 1 */
     /* 0x25BD */ u8 slotRequestPending;     /* set by menu item 7 with slot request 10 */
     /* 0x25BE */ u8 unk25BE[6];
 } CampState;

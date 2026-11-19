@@ -99,7 +99,7 @@ void FUN_004045ac(TalkWindow *window, s32 x, s32 y, f32 scale)
         TextureTableEntryIV *nameBox = asdTMTexTableEntryAt(0x32, 5);
         s32 labelX = nameBox->placement->width + plate->x + x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
 
-        textDrawString(3, nameColor, text, (f32)labelX, (f32)(plate->y + y), (f32)(256 - depth) * 0.00390625f, 0.0f, scale);
+        textDrawString((f32)labelX, (f32)(plate->y + y), (f32)(256 - depth) * 0.00390625f, 3, 0.0f, nameColor, scale, text);
     }
     efctSetSpeed(1.0f);
 }

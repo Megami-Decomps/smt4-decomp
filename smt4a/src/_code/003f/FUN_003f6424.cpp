@@ -69,13 +69,13 @@ void FUN_003f6424(f32 scale, u32 id, PanelRecord* record, u32 flags, s32 x, s32 
     s32 nameY = nameBox->y + y;
     char text[64];
     sprintf(text, "%s", FUN_003f74a8(id, record));
-    textDrawString(2, 0xffffffff, text, (f32)nameX, (f32)nameY, (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
+    textDrawString((f32)nameX, (f32)nameY, (f32)(0xfb - z) * 0.00390625f, 2, 0.0f, 0xffffffff, scale, text);
 
     TextureTableEntryIV* valueBox = asdTMTexTableEntryAt(0x31, 0x83);
     s32 valueX = valueBox->x + x;
     s32 valueY = valueBox->y + y;
-    textDrawString(2, 0xff, reinterpret_cast<const char*>(record) + 4, (f32)valueX, (f32)valueY,
-                 (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
+    textDrawString((f32)valueX, (f32)valueY, (f32)(0xfb - z) * 0.00390625f, 2, 0.0f,
+                 0xff, scale, reinterpret_cast<const char*>(record) + 4);
     FUN_003f533c(id, x, y, z + 5, flags, 0x84, 0x85, 0x86, 0xff, 0, scale);
 }
 

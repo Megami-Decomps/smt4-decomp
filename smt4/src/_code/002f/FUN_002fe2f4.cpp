@@ -1,4 +1,4 @@
-/* NON_MATCHING: the 64-bit limit compare now matches (sbcs/movlt); retail reads the limit as two ldr and updates `used` then `total` with ldrd/strd through r2:r3 and r4:r5, the build reads both with ldm and hoists the `total` load above the `used` store. */
+/* NON_MATCHING: the 64-bit limit compare now matches (sbcs/movlt); retail reads the limit as two ldr and updates `used` then `total` with ldrd/strd through r2:r3 and r4:r5, the build reads both with ldm and hoists the `total` load above the `used` store. Declaring `total` volatile gives IDENTICAL (retail keeps its load after the `used` store), but nothing yet shows another thread reads it, so it is not applied. */
 #include "common.h"
 #include "nn/Result.h"
 #include "nn/svc.h"

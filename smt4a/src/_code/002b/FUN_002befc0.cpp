@@ -1,4 +1,5 @@
 #include "common.h"
+#include "nn/fs/ArchivePath.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct RequestOwner {
 } RequestOwner;
 
 void pathBuildWide(u32 id, u8 buffer[500], s32 kind);
-void archivePathDeviceOpen(u32 *request, u8 buffer[500], s32 mode);
 
 /* Clears the request's pending words and submits it with the loaded record. */
 static void requestSubmit(u32 *request, u8 *buffer, s32 mode)
@@ -22,7 +22,7 @@ static void requestSubmit(u32 *request, u8 *buffer, s32 mode)
     request[4] = 0;
     request[1] = 0;
     request[2] = 0;
-    archivePathDeviceOpen(request, buffer, mode);
+    archivePathDeviceOpen(request, reinterpret_cast<const u16 *>(buffer), mode);
 }
 
 /* Loads the id's record into a scratch buffer, clears the owner's request words and submits the record: mode 2 when `kind` is 1, else mode 1. */

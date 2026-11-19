@@ -14,7 +14,7 @@ extern "C" {
 void renderCtxSelectDisplayAreaForStereoMode(RenderCtxA *context);
 s32 renderCtxPackPassFlags(u32 a, u32 b);
 s32 FUN_003da8f4(s32 cursor, u32 value);
-void FUN_0021775c(s32 item, u32 mode);
+void campDrawDetailArea(s32 item, u32 mode);
 void FUN_00217f14(void);
 void FUN_00288538(s32 flag);
 s32 uniteGetState(void);
@@ -66,10 +66,10 @@ u32 FUN_00227418(void)
         campDrawItemDetail(camp);
         break;
     case 4: case 5: case 0x2B: case 0x2C:
-        FUN_0021775c(campCursorItem(camp), 0);
+        campDrawDetailArea(campCursorItem(camp), 0);
         break;
     case 0xA: case 0xF: case 0x10: case 0x11: case 0x13: case 0x1D: case 0x2E: case 0x2F:
-        FUN_0021775c(campCursorItem(camp), 1);
+        campDrawDetailArea(campCursorItem(camp), 1);
         break;
     case 0xD:
         FUN_00288538(1);

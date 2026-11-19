@@ -13,7 +13,7 @@ struct SaveWriteWorker {
 };
 extern "C" {
 extern SaveWriteWorker g_saveLoadThread;
-void FUN_001db90c(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
+void asdSaveHeaderInit(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
 s32 FUN_00214950(u32, const char *);
 u32 FUN_002cbe70(s32 mode);
@@ -27,7 +27,7 @@ extern "C" void FUN_002d8f3c(u32 context)
     AsdSaveHeader header;
     g_saveLoadThread.busy = 1;
     sprintf(filename, "sdds4game%d.sav", g_saveLoadThread.request->slot);
-    FUN_001db90c(&header, 0x34534444, 0x454D4147, 0,
+    asdSaveHeaderInit(&header, 0x34534444, 0x454D4147, 0,
                  g_saveLoadThread.request->payloadSize, 0, 0);
     if (asdSaveWriteBlock(file, filename, &header, g_saveLoadThread.request->payload,
                           g_saveLoadThread.request->payloadSize) == 0) {

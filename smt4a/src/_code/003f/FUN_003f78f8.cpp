@@ -49,12 +49,12 @@ void FUN_003f78f8(NoticeWork *work, s32 x, s32 y, f32 speed)
     TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x31, 0xF1);
 
     fontMeasureLineAdvance(tag, 3);
-    textDrawString(3, 0xFF, tag, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);
+    textDrawString((f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 3, 1.0f, 0xFF, speed, tag);
     FUN_003f757c(work, x, y, 0xD8, heading, 0xF6, 0xF5, 0, 1, speed);
     uiDrawStereoKindIcon(work, x, y, 0xD8, 0xB, 0x106, speed);
     parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     layout = asdTMTexTableEntryAt(0x31, 0xFB);
-    textDrawString(3, -1, body, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);
+    textDrawString((f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 3, 1.0f, -1, speed, body);
     efctSetSpeed(1.0f);
 }
 

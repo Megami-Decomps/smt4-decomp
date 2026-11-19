@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern int FUN_0014204c(unsigned int, int *);
+extern int nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(unsigned int, int *);
 /* Supplied declaration required: nw_snd_internal_PoolImpl_CreateImpl. */
 
 
@@ -35,7 +35,7 @@ nw_snd_Sound3DManager_Initialize_120F48
   }
   else {
     temp_v2 = 0;
-    temp_v1 = FUN_0014204c(param_2,temp_v3);
+    temp_v1 = nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(param_2,temp_v3);
     if (temp_v1 != 0) {
       temp_v2 = temp_v5 + temp_v3[0] + temp_v4;
     }

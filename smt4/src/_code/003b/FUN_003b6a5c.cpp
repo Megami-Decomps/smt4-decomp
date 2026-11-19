@@ -1,5 +1,6 @@
 /* NON_MATCHING: near: 203 rows against 204; retail keeps the text colour in a callee-saved register and the work pointer in r7 (ours r8) and loads the frame/digit y offsets before the x offsets; the draw sequence and leading-zero logic agree. */
 #include "common.h"
+#include "text/TextDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -16,7 +17,6 @@ struct CounterWork {
 extern "C" {
 
 void textFormatFullWidthTwoDigits(u32 digit, char *text);
-void textDrawString(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
 void gxResetColorQuadToWhite(void);
 
 /* Draws the counter frame at (x, y) and the work's value (clamped to 9999) as four digit images,
@@ -45,28 +45,28 @@ void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
     value %= 1000;
     if (thousands != 0) {
         textFormatFullWidthTwoDigits(thousands, text);
-        textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
-                     0.0f, 0.0f, 1.0f);
+        textDrawString((f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y), 0.0f, 3, 0.0f,
+                     COUNTER_TEXT_COLOR, 1.0f, text);
     }
     hundreds = value / 100;
     value %= 100;
     if (thousands != 0 || hundreds != 0) {
         digit = asdTMTexTableEntryAt(COUNTER_GROUP, 0xC9);
         textFormatFullWidthTwoDigits(hundreds, text);
-        textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
-                     0.0f, 0.0f, 1.0f);
+        textDrawString((f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y), 0.0f, 3, 0.0f,
+                     COUNTER_TEXT_COLOR, 1.0f, text);
     }
     tens = value / 10;
     if (thousands != 0 || hundreds != 0 || tens != 0) {
         digit = asdTMTexTableEntryAt(COUNTER_GROUP, 0xC8);
         textFormatFullWidthTwoDigits(tens, text);
-        textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
-                     0.0f, 0.0f, 1.0f);
+        textDrawString((f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y), 0.0f, 3, 0.0f,
+                     COUNTER_TEXT_COLOR, 1.0f, text);
     }
     digit = asdTMTexTableEntryAt(COUNTER_GROUP, 0xC7);
     textFormatFullWidthTwoDigits(value % 10, text);
-    textDrawString(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
-                 0.0f, 0.0f, 1.0f);
+    textDrawString((f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y), 0.0f, 3, 0.0f,
+                 COUNTER_TEXT_COLOR, 1.0f, text);
     gxResetColorQuadToWhite();
 }
 

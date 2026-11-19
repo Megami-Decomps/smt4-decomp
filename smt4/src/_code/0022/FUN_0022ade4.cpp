@@ -48,9 +48,9 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
         color = 0x323232ff;
         layer = 2;
     }
-    textDrawString(layer, color, reinterpret_cast<const char *>(work->entries[entryIndex]),
-                 static_cast<f32>(labelX + x), static_cast<f32>(labelY + y),
-                 opacity, 0.0f, scale);
+    textDrawString(static_cast<f32>(labelX + x), static_cast<f32>(labelY + y), opacity,
+                 layer, 0.0f,
+                 color, scale, reinterpret_cast<const char *>(work->entries[entryIndex]));
     if (state) {
         const TextureTableEntryIV *layout = asdTMTexTableEntryAt(42, row + 21);
         s32 markX = layout->x;

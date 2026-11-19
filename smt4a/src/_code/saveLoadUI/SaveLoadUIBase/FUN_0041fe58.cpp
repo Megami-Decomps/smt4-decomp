@@ -4,6 +4,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "saveLoadUI/SaveLoadInteractionsA.h"
 
 extern "C" {
 
@@ -88,7 +89,6 @@ void paramsClearPacket(void *packet);
 
 u8 saveLoadProcessGetState(void);
 void sysPlaySe(u32 id);
-void FUN_0041f020(SaveLoadUI *ui, s32 arg);
 void gridNavigationConfigure(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
 void flaggedEntrySetValueA(void *list, s32 value);
 void scrollOwnerSetValue(void *list, s32 value);
@@ -147,7 +147,7 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     ui->unk300 = 0;
     sysPlaySe(0xAA);
     ui->scrollRange = 0;
-    FUN_0041f020(ui, 1);
+    saveLoadUiRebuildTouchRegions(reinterpret_cast<SaveSlotHeaderWork *>(ui), 1);
     s32 cursor = g_saveLoadUIBase.savedCursor;
     s32 top = cursor - 1;
 

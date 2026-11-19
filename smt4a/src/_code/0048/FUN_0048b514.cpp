@@ -71,8 +71,8 @@ void FUN_0048b514(SpinnerWork *work)
     TextureTableEntryIV *label = asdTMTexTableEntryAt(19, 0x1120);
     char text[27];
     __aeabi_memcpy4(text, "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44", sizeof(text));
-    textDrawString(4, g_uiTextFontSettings.font, text, (f32)(vec2GetXInt((UiSpriteState *)anchor) - 20 + label->x), (f32)label->y, 0.0f,
-                 0.0f, 1.0f);
+    textDrawString((f32)(vec2GetXInt((UiSpriteState *)anchor) - 20 + label->x), (f32)label->y, 0.0f, 4, 0.0f, g_uiTextFontSettings.font,
+                 1.0f, text);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
     uiSpriteAdvanceAnimation((UiSpriteState *)anchor, 1.0f);

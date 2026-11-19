@@ -8,7 +8,7 @@
 
 extern "C" {
 u32 renderCtxPackPassFlags(u32, u32);
-void FUN_0028cb88(BtlUiObjCA *);
+void btlUiPartyDisplayDraw(BtlUiObjCA *);
 void renderCtxResetColorScale(RenderCtxA *);
 
 u32 FUN_00298674(void)
@@ -27,7 +27,7 @@ u32 FUN_00298674(void)
             RenderCtxA *ctx = g_renderCtx;
             renderCtxPushA(ctx, renderCtxPackPassFlags(1, 0));
             if (FUN_00284e94())
-                FUN_0028cb88(&ui->objC);
+                btlUiPartyDisplayDraw(&ui->objC);
             renderStackPop(&g_renderCtx->stackA);
             skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
             renderCtxResetColorScale(g_renderCtx);

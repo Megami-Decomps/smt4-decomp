@@ -18,7 +18,7 @@ void *jyoucyuGetTableEntry(u32 index);
 void asdSoundInitialize(s32 auxiliaryMode);
 void FUN_001096ec(const char *path, s32 arg1, s32 arg2);
 void *asdSoundGetStringBlock(void);
-u32 FUN_0010d3f8(u32 id);
+u32 asdSoundSlotCStart(u32 id);
 s32 asdSoundSlotBCreate(u32 index, u32 heapSize);
 s32 asdSoundSlotAActivate(u32 index, s32 heapSize);
 u32 FUN_00119da8(u32 value);
@@ -38,8 +38,8 @@ void soundSetupArchiveAndSlots(void)
             FUN_001096ec("rom:/snd/sdds4.bcsar", 1, 0);
         }
         asdSoundGetStringBlock();
-        FUN_0010d3f8(0);
-        FUN_0010d3f8(1);
+        asdSoundSlotCStart(0);
+        asdSoundSlotCStart(1);
         asdSoundSlotBCreate(0, 0xd0000);
         asdSoundSlotBCreate(1, 0x220000);
         asdSoundSlotBCreate(2, 0x80000);

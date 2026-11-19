@@ -12,7 +12,7 @@ s32 FUN_0033fe6c(s32 side, s32 mode, ConsumableRecord *action, s32 enabled);
 s32 itemEffectCheckApplicable(s32 side, s32 mode, SkillDataRecord *skill);
 
 // Dispatch supported table-eight actions and skill targets unless the battle suppresses them.
-u32 FUN_0025043c(s32 side, u16 actionId)
+u32 FUN_0025043c(s32 side, u32 actionId)
 {
     if (actionId == 0)
         return 1;

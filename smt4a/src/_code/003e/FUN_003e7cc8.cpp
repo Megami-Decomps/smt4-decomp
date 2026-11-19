@@ -1,4 +1,5 @@
-/* NON_MATCHING: same code size and shape as retail, but armcc lays out the group-insertion block and allocates registers differently in the two grouping loops (twin of smt4 FUN_003364d0). */
+/* NON_MATCHING: register allocation and comparison scheduling within the two grouping loops differ (twin of SMT IV FUN_003364d0). */
+#include <string.h>
 #include "common.h"
 
 // The fields of an action record (0x1d0 bytes in Apocalypse) the grouping reads and writes.
@@ -33,10 +34,7 @@ s32 sortCompareWeightDescending(const void *a, const void *b);
 struct ActionGroup {
     s16 member;  // 0x00 first action of the group, -1 when unused
     u16 pad02;
-    union {
-        f32 position;  // 0x04 key of an enemy-side group
-        u32 bits;      // 0x04 the key as stored
-    };
+    f32 position;  // 0x04 key of an enemy-side group
 };
 
 // True when `other` belongs to the same group as `action`.
@@ -63,31 +61,31 @@ extern "C" void FUN_003e7cc8(ActionStateA *state, u32 flags)
 
     for (s32 index = 4; index < 54; index++) {
         ActionRecordA *action = &state->actions[index];
-        if ((action->status & 1) && (action->status & 0x80)) {
-            if (action->status & 0x10) {
-                for (s32 g = 0; g < 10; g++) {
-                    if (groups[g].member < 0) {
-                        groupCount++;
-                        groups[g].member = action->memberId;
-                        groups[g].bits = *reinterpret_cast<u32 *>(&action->positionZ);
-                        break;
-                    }
-                    ActionRecordA *other = &state->actions[groups[g].member];
-                    if ((other->status & 0x10) && other->groupKey == action->groupKey)
-                        break;
+        if (!(action->status & 1) || !(action->status & 0x80))
+            continue;
+        if (action->status & 0x10) {
+            for (s32 g = 0; g < 10; g++) {
+                if (groups[g].member < 0) {
+                    groupCount++;
+                    groups[g].member = action->memberId;
+                    memcpy(&groups[g].position, &action->positionZ, sizeof(f32));
+                    break;
                 }
-            } else {
-                for (s32 g = 0; g < 10; g++) {
-                    if (groups[g].member < 0) {
-                        groupCount++;
-                        groups[g].member = action->memberId;
-                        groups[g].bits = *reinterpret_cast<u32 *>(&action->positionZ);
-                        break;
-                    }
-                    ActionRecordA *other = &state->actions[groups[g].member];
-                    if (!(other->status & 0x10) && other->positionZ == action->positionZ)
-                        break;
+                ActionRecordA *other = &state->actions[groups[g].member];
+                if ((other->status & 0x10) && other->groupKey == action->groupKey)
+                    break;
+            }
+        } else {
+            for (s32 g = 0; g < 10; g++) {
+                if (groups[g].member < 0) {
+                    groupCount++;
+                    groups[g].member = action->memberId;
+                    memcpy(&groups[g].position, &action->positionZ, sizeof(f32));
+                    break;
                 }
+                ActionRecordA *other = &state->actions[groups[g].member];
+                if (!(other->status & 0x10) && other->positionZ == action->positionZ)
+                    break;
             }
         }
     }
@@ -99,8 +97,11 @@ extern "C" void FUN_003e7cc8(ActionStateA *state, u32 flags)
             for (s32 g = 0; g < 10; g++) {
                 if (groups[g].member < 0)
                     continue;
-                if (action->memberId == groups[g].member ||
-                    sameGroup(&state->actions[groups[g].member], action)) {
+                if (action->memberId == groups[g].member) {
+                    action->category = g;
+                    break;
+                }
+                if (sameGroup(&state->actions[groups[g].member], action)) {
                     action->category = g;
                     break;
                 }

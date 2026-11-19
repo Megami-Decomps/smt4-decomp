@@ -1,12 +1,12 @@
 /* NON_MATCHING: saved-register set, global-address reuse, and backend argument scheduling differ. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
+#include "nn/fs/ArchivePath.h"
 #include "nn/Result.h"
 
 extern "C" {
 s32 refIsNullOrZero(MoviePathConversionState *);
 s32 FUN_00100836(const char *, u32, MoviePathConversionState *);
 u16 *FUN_002e3c44(u16 *, const char *, s32, MoviePathConversionState *);
-u32 archivePathDeviceOpen(u32 *, const u16 *, u32);
 void sysFatalBreak(void);
 void FUN_0042230c(void *, void *, void *);
 u32 FUN_00422648(void *);

@@ -2,6 +2,13 @@
 #include "shard/GameGlobals.h"
 #include "status/StatusBustUp.h"
 
+/* Enters game state `state` with its step counter cleared. */
+static __inline void gameSetState(s32 state)
+{
+    g_gameGlobals.data->unk10 = 0;
+    g_gameGlobals.data->activeState = state;
+}
+
 // Requests the selected transition mode and enters the transition state.
 extern "C" void FUN_002992e0(s32 mode)
 {
@@ -12,6 +19,5 @@ extern "C" void FUN_002992e0(s32 mode)
     } else if (mode == 2) {
         playerModelLoadPart(g_gameGlobals.data->unk1E80, 2, 7);
     }
-    g_gameGlobals.data->unk10 = 0;
-    g_gameGlobals.data->activeState = 6;
+    gameSetState(6);
 }

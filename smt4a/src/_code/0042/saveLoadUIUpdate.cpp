@@ -25,11 +25,11 @@ struct DataBlockTable {
 extern "C" {
 void saveLoadUIStart(SaveSlotHeaderWork *ui);
 void FUN_0041f6e0(SaveSlotHeaderWork *ui);
-void FUN_0041f4c0(SaveSlotHeaderWork *ui);
+void saveLoadUiPrepareSelection(SaveSlotHeaderWork *ui);
 void FUN_0041f22c(SaveSlotHeaderWork *ui);
 void saveLoadUiWaitPopupDismissed(SaveSlotHeaderWork *ui);
 void savedUnitEditorApplyOrClose(SaveSlotHeaderWork *ui);
-void FUN_0041eeec(SaveSlotHeaderWork *ui);
+void saveLoadUiSuspendOrRestart(SaveSlotHeaderWork *ui);
 void saveLoadUiRestartSpritesAndWait(SaveSlotHeaderWork *ui);
 void saveLoadUiRestartSlotSpritesAndWait(SaveSlotHeaderWork *ui);
 void FUN_0041e3a0(SaveSlotHeaderWork *ui, s32 resetHeader);
@@ -62,7 +62,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         FUN_0041f6e0(ui);
         break;
     case 3:
-        FUN_0041f4c0(ui);
+        saveLoadUiPrepareSelection(ui);
         break;
     case 4:
         FUN_0041f22c(ui);
@@ -135,7 +135,7 @@ extern "C" void saveLoadUIUpdate(SaveSlotHeaderWork *ui)
         saveLoadUiChangeMode(ui, 11, 0);
         break;
     case 11:
-        FUN_0041eeec(ui);
+        saveLoadUiSuspendOrRestart(ui);
         break;
     case 12:
         if (FUN_0026c3a0() != 0) {

@@ -1,14 +1,8 @@
 #include "battle/BtlUiGlobal.h"
-#include "code/Code004a_Smt4a.h"
+#include "battle/BtlUiObjCQuery.h"
 
-extern "C" {
-
-void FUN_002fa73c(BtlUiObjCA *obj);
-
-
-void FUN_004aa768(void)
+/* Tests the card in the globally active battle UI. */
+extern "C" bool FUN_004aa768(BtlUiA *, s32 index)
 {
-    FUN_002fa73c(&g_btlUi.ui->objC);
+    return btlActorCardIsIdle(reinterpret_cast<const ActorCardAnimationsA *>(&g_btlUi.ui->objC), index);
 }
-
-} /* extern "C" */

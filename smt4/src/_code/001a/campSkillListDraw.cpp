@@ -83,7 +83,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
             } else {
                 color = 0x5a5a5aff;
             }
-            textDrawString(2, color, name, row->x + part->x + x, row->y + part->y + y, 0.55f, 0.0f, 1.0f);
+            textDrawString(row->x + part->x + x, row->y + part->y + y, 0.55f, 2, 0.0f, color, 1.0f, name);
         }
 
         part = asdTMTexTableEntryAt(0x1d, 0x444);
@@ -140,7 +140,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
             } else {
                 color = 0x5a5a5aff;
             }
-            textDrawString(3, color, name, row->x + part->x + x, row->y + part->y + y, 0.5f, 0.0f, 1.0f);
+            textDrawString(row->x + part->x + x, row->y + part->y + y, 0.5f, 3, 0.0f, color, 1.0f, name);
         }
         texDrawTableEntryAtStoredOrigin(2, 0x1d, 0x446, row->x + x, row->y + y, 0x83);
 
@@ -177,7 +177,7 @@ void campSkillListDraw(s32 x, s32 y, s32 drawCursor)
         sprintf(text, "\x82\x6d\x82\x8f\x81\x40\x82\x93\x82\x8b\x82\x89\x82\x8c\x82\x8c\x81\x40\x82\x93\x82\x81\x82\x92\x82\x85"
                                "\x81\x40\x82\x81\x82\x96\x82\x81\x82\x89\x82\x8c\x82\x81\x82\x82\x82\x8c\x82\x85\x81\x44");
         s32 width = fontMeasureLineAdvance(text, 2);
-        textDrawString(2, 0xffffffff, text, x + (box->x + (box->placement->width - width) / 2), box->y + y, 0.12890625f, 0.0f, 1.0f);
+        textDrawString(x + (box->x + (box->placement->width - width) / 2), box->y + y, 0.12890625f, 2, 0.0f, 0xffffffff, 1.0f, text);
     }
 }
 

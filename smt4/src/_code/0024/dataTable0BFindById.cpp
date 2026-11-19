@@ -8,7 +8,7 @@ void* libc_bsearch(const void*, const void*, u32, u32,
                    s32 (*)(const void*, const void*));
 
 // Binary-search the gauntlet apps (GauntletAppTable.tbb) for app `id`.
-GauntletAppRecord *dataTable0BFindById(u16 id)
+GauntletAppRecord *dataTable0BFindById(u32 id)
 {
     void* section = dataTableGet(0x0b, 0);
     if (section != NULL) {

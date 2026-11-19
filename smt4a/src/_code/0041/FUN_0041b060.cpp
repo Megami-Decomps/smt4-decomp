@@ -28,7 +28,7 @@ void FUN_0041b060(FramedBadgeOwner *owner, const UiScaledDrawPosition *position,
     TextureTableEntryIV *metrics = asdTMTexTableEntryAt(0x2B, 0x8A);
     s32 width = fontMeasureLineAdvance(text, 4);
     s32 offset = (metrics->placement->width - width) / 2;
-    textDrawString(4, 0x646464FF, text, (f32)(offset + (position->x + metrics->x)), (f32)(metrics->y + position->y), 0.0f, 0.0f, position->speed);
+    textDrawString((f32)(offset + (position->x + metrics->x)), (f32)(metrics->y + position->y), 0.0f, 4, 0.0f, 0x646464FF, position->speed, text);
     texDrawTableEntryAtStoredOrigin(2, 0x2B, 0x96, position->x, position->y, 2);
     texDrawTableEntryAtStoredOrigin(2, 0x2B, owner->frame, position->x, position->y, 2);
     FUN_0041af74(owner, value, position, 0x646464FF);
