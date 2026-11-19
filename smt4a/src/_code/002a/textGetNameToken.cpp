@@ -1,13 +1,5 @@
-/* NON_MATCHING: id is homed in R4 before all tests, comparator setup differs, and the player-name call is not tail-called; alternate optimization candidate. */
-#include "gamedata/DataTable.h"
-
-namespace {
-struct NameTokenRecord {
-    /* 0x00 */ s16 id;
-    /* 0x02 */ u8 text[1];
-    /* 0x03 */ u8 unk03[0x65]; // Full table-row extent is 0x68.
-};
-}
+/* NON_MATCHING: table search and literal-address scheduling still differ. */
+#include "gamedata/NameLabelTable.h"
 
 extern "C" {
 extern u8 g_fractionTextOneQuarter[];
@@ -25,9 +17,6 @@ extern u8 g_fractionTextTwoFifths[];
 extern u8 g_fractionTextThreeFifths[];
 extern u8 g_fractionTextFourFifths[];
 extern u8 g_fractionTextFourSixths[];
-s32 arrayCompareSignedHalfword(const s16*, const s16*);
-void* libc_bsearch(const void*, const void*, u32, u32,
-                   s32 (*)(const s16*, const s16*));
 u8* gameDataGetPlayerName();
 
 /* Resolve display-name tokens, including the player name and fixed-width fractions. */
@@ -54,13 +43,6 @@ u8* textGetNameToken(u32 id)
     if (id == 0x67) return g_fractionTextFourQuarters;
     if (id == 0x68) return g_fractionTextFourSixths;
 
-    void* section = dataTableGet(0x38, 0);
-    const void* entries = dataTableGetEntries(section);
-    const u32 count = dataTableGetCount(section);
-    NameTokenRecord key;
-    key.id = static_cast<s16>(id);
-    NameTokenRecord* record = static_cast<NameTokenRecord*>(
-        libc_bsearch(&key, entries, count, sizeof(NameTokenRecord), arrayCompareSignedHalfword));
-    return record->text;
+    return reinterpret_cast<u8 *>(nameLabelTableFindA(id)->token);
 }
 } // extern "C"

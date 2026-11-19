@@ -47,7 +47,7 @@ void FUN_0023dcec(UniteWorkA *work, s32 row, s32 x, s32 y, s32 selected,
     }
     const char *text = dataTableGetEntry24Member(work->optionNamesA.ids[row]);
     const TextureTableEntryIV *anchor = asdTMTexTableEntryAt(0x1A, 0xA4);
-    textDrawString(2, style, text, (f32)(anchor->x + x), (f32)(anchor->y + y),
-                 0.55f, 0.0f, scale);
+    textDrawString((f32)(anchor->x + x), (f32)(anchor->y + y), 0.55f, 2, 0.0f,
+                 style, scale, text);
 }
 }

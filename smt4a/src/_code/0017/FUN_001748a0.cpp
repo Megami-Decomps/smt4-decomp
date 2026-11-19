@@ -1,12 +1,12 @@
 /* NON_MATCHING: inlined conversion loops use fewer saved registers, and native result-assert macro lowering differs. */
 #include "nw/snd/SoundArchiveDisk.h"
+#include "nn/fs/ArchivePath.h"
 #include "nn/Result.h"
 
 extern "C" {
 void refIsNullOrZero(MoviePathConversionState *conversion);
 u32 FUN_00100836(const char *text, u32 encoding, MoviePathConversionState *conversion);
 s32 FUN_002e3c44(u16 *output, const char *text, u32 bytes, MoviePathConversionState *conversion);
-s32 archivePathDeviceOpen(MovieOpenFile *file, const u16 *path, u32 mode);
 void sysReportCheckFailure(u32 result, const void *location);
 }
 
@@ -33,7 +33,7 @@ static inline s32 openNativeFile(MovieOpenFile *file, const char *path)
     file->sizeHigh = 0;
     file->positionLow = 0;
     file->positionHigh = 0;
-    return archivePathDeviceOpen(file, widePath, 1);
+    return archivePathDeviceOpen(&file->handle, widePath, 1);
 }
 
 // Convert a multibyte path and open its native file, optionally retaining errors instead of asserting.

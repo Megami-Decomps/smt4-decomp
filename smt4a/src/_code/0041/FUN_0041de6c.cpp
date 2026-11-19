@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "saveLoadUI/SaveLoadInteractionsA.h"
 #include "code/Code0023.h"
 #include "code/Code002c.h"
 #include "code/Code002a_Smt4a.h"
@@ -70,9 +71,9 @@ extern int byteArr5Get4(void);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
-void FUN_0041de6c(int param_1)
-
+void FUN_0041de6c(SaveSlotHeaderWork *ui)
 {
+  s32 param_1 = reinterpret_cast<s32>(ui);
 /* irregular: 22 native warning(s); review required */
   int temp_v0;
   unsigned short *puVar2;

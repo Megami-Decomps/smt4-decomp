@@ -9,7 +9,7 @@
 extern "C" {
 
 int fadeObjectResetIfActive(...);
-int FUN_0029a284(...);
+int statusDownDrawSkillRow(...);
 int nkmEnemyFindById(void);
 int fontMeasureLineAdvance(...);
 
@@ -53,7 +53,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
-/* Supplied declaration required: FUN_0029a284. */
+/* Supplied declaration required: statusDownDrawSkillRow. */
 /* Supplied declaration required: appGetRemainingCapacity. */
 extern unsigned int FUN_0029a9d4(unsigned short, unsigned int);
 extern int FUN_0029aafc(void);
@@ -526,7 +526,7 @@ LAB_00187b88:
 LAB_00187690:
     temp_v1 = *(short *)(temp_v2 + temp_v15 * 2 + 0x482);
     if (temp_v1 != 0) {
-      FUN_0029a284(param_1,param_2,temp_v1,temp_v15 + 0x42c,temp_v17,temp_v8,0,
+      statusDownDrawSkillRow(param_1,param_2,temp_v1,temp_v15 + 0x42c,temp_v17,temp_v8,0,
                    *(unsigned char *)(temp_v15 + temp_v2 + 0x4c2));
     }
 LAB_001876e0:
@@ -544,7 +544,7 @@ LAB_001876e0:
   texDrawTableEntryAtStoredOrigin(2,0x1a,0x4e5,temp_v8,param_2,0xb3);
   texDrawCompositeSprite(2,0x1a,0x13,param_1,param_2,0xb3);
   if ((*(int *)(temp_v2 + 0x400) == 0xb) && (temp_v4 = FUN_0029ee54(temp_v18), temp_v4 - 1 == temp_v15)) {
-    FUN_0029a284(temp_v8,param_2,*(unsigned int *)(temp_v2 + 0x540) & 0xffff,0x435,temp_v17,0,0,0);
+    statusDownDrawSkillRow(temp_v8,param_2,*(unsigned int *)(temp_v2 + 0x540) & 0xffff,0x435,temp_v17,0,0,0);
   }
   else {
     temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x40f));

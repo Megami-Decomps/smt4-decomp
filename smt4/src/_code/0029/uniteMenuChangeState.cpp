@@ -26,6 +26,16 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     UniteWork *work = g_unite;
     u8 member[1552];
     switch (state) {
+    case 0x22:
+    case 0x23:
+        buttonHelpSetPreset(0x58);
+        break;
+    case 0x15:
+    case 0x1C:
+        buttonHelpSetPreset(0x9E);
+        FUN_002a0cc8(1);
+        FUN_0029c424(1);
+        break;
     case 3:
         buttonHelpSetPreset(0x5C);
         break;
@@ -42,26 +52,25 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         s32 selected = resourceRunOperationIfUnblocked(work->firstListIV.cursor);
         selected += listCursorGetRowIfUnblocked(work->firstListIV.cursor);
         u32 index = work->firstListIV.indices[selected];
-        const UnitePairEntryIV *pair = &work->pairListIV.pairs[index];
         if (work->firstListIV.kind == 0) {
-            FUN_0029dc74(pair->resultId, member);
-            FUN_0029da34(0, 1, pair->resultId, member);
+            FUN_0029dc74(work->pairListIV.pairs[index].resultId, member);
+            FUN_0029da34(0, 1, work->pairListIV.pairs[index].resultId, member);
         }
         if (work->firstListIV.kind == 1) {
-            const void *selectedMember = partyMemberFindById(pair->firstId);
+            const void *selectedMember = partyMemberFindById(work->pairListIV.pairs[index].firstId);
             if (selectedMember == NULL) {
-                unitInitializeFromSavedRecord(pair->firstId, member);
+                unitInitializeFromSavedRecord(work->pairListIV.pairs[index].firstId, member);
                 selectedMember = member;
             }
-            FUN_0029da34(0, 1, pair->firstId, selectedMember);
+            FUN_0029da34(0, 1, work->pairListIV.pairs[index].firstId, selectedMember);
         }
         if (work->firstListIV.kind == 2) {
-            const void *selectedMember = partyMemberFindById(pair->secondId);
+            const void *selectedMember = partyMemberFindById(work->pairListIV.pairs[index].secondId);
             if (selectedMember == NULL) {
-                unitInitializeFromSavedRecord(pair->secondId, member);
+                unitInitializeFromSavedRecord(work->pairListIV.pairs[index].secondId, member);
                 selectedMember = member;
             }
-            FUN_0029da34(0, 1, pair->secondId, selectedMember);
+            FUN_0029da34(0, 1, work->pairListIV.pairs[index].secondId, selectedMember);
         }
         break;
     }
@@ -81,12 +90,6 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
             FUN_002b8454(3, 0, 0, 1);
         }
         break;
-    case 0x15:
-    case 0x1C:
-        buttonHelpSetPreset(0x9E);
-        FUN_002a0cc8(1);
-        FUN_0029c424(1);
-        break;
     case 0x1A: {
         buttonHelpSetPreset(0x59);
         const void *table = dataTableGet(0x24, 2);
@@ -104,10 +107,6 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
         work->history.saved = work->state;
         timerStart(work->event.timer, 3, 0);
         FUN_002a0cc8(1);
-        break;
-    case 0x22:
-    case 0x23:
-        buttonHelpSetPreset(0x58);
         break;
     case 0:
     case 1:

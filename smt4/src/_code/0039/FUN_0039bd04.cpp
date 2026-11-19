@@ -70,7 +70,7 @@ void FUN_0039bd04(TitleLoadingScene *scene)
 
     TextureTableEntryIV *caption = asdTMTexTableEntryAt(0x1C, 0x1120);
     char text[0x1B] = "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44";
-    textDrawString(4, DAT_0044cdd0, text, (f32)(vec2GetXInt((const UiSpriteState *)origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
+    textDrawString((f32)(vec2GetXInt((const UiSpriteState *)origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 4, 0.0f, DAT_0044cdd0, 1.0f, text);
     renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
     uiSpriteAdvanceAnimation((UiSpriteState *)origin);

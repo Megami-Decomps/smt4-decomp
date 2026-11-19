@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f3044` (_code @ 0x1f3044, 0x614 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "camp/Unite/UniteDraw.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "camp/PlayLog/PlayLog.h"
@@ -45,7 +46,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0017ff9c; /* 0x17ff9c */
-extern int FUN_001add9c(...); /* 0x1add9c */
 extern int FUN_001de340(...); /* 0x1de340 */
 extern unsigned char LAB_001f3454; /* 0x1f3454 */
 extern unsigned char LAB_001f3464; /* 0x1f3464 */
@@ -126,7 +126,7 @@ void FUN_001f3044(void)
   puVar2 = &LAB_001f3454;
   asdProcessCreateSimple(&LAB_001f3454,2,0,0,&LAB_0017ff9c,0,0);
   piVar1[0xfe] = (int)puVar2;
-  taskCreateDraw(&LAB_001f3464,0xe6,0,0,FUN_001add9c,0,0,puVar2);
+  taskCreateDraw(&LAB_001f3464,0xe6,0,0,uniteDrawPanel,0,0,puVar2);
   temp_v0 = 0x180;
   asdOperatorNew();
   if (temp_v0 != 0) {

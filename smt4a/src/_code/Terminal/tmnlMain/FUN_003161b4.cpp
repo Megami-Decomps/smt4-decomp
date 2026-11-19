@@ -21,8 +21,8 @@ u32 FUN_003161b4(void)
         return 1;
     }
     if (work->state == 1) {
-        textDrawString(3, 0xFFFFFFFF, (const char *)(DAT_0056df38[work->selection] + 7),
-                      150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+        textDrawString(150.0f, 0.0f, 0.0f,
+                      3, 1.0f, 0xFFFFFFFF, 1.0f, (const char *)(DAT_0056df38[work->selection] + 7));
     }
     RenderCtxA* context = g_renderCtx;
     u32 value = renderCtxPackPassFlags(1, 0);

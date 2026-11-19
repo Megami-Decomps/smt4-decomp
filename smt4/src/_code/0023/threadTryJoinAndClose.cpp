@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail materialises the timeout compare as a bool (movne/moveq/teq, then movne r0,#0) where this build folds it into one branch; the frame `sub sp` is scheduled after the first handle load. */
+/* NON_MATCHING: only the frame `sub sp` differs: retail schedules it after the first handle read (the linker-inlined handleObjectGetHandle), the build before. */
 #include "common.h"
 #include "nn/Result.h"
 #include "sys/HandleWait.h"
@@ -6,14 +6,16 @@
 
 extern "C" {
 
-/* Joins the thread, finalizes it and closes its handle; returns 0 if a poll of the handle times out first, else 1. */
+/* Joins the thread, finalizes it and closes its handle; returns 0 while a zero-timeout poll of the handle still times out, else 1. */
 u32 threadTryJoinAndClose(KernelThreadObject *thread)
 {
-    if (threadGetHandle(thread) != 0) {
+    bool running = false;
+    if (handleObjectGetHandle(thread) != 0) {
         s32 result = handleWait(thread->handle, 0);
-        if (nnResultIsNotTimeout(result) != 1) {
-            return 0;
-        }
+        running = nnResultIsNotTimeout(result) != 1;
+    }
+    if (running) {
+        return 0;
     }
     handleWait(thread->handle, -1);
     thread->finalized = 1;

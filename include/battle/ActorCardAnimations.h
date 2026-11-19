@@ -110,7 +110,9 @@ struct ActorCardAnimationsA {
     /* 0x3894 */ u8 unk3894;
     /* 0x3895 */ u8 unk3895[0x1B];
     /* 0x38B0 */ u8 unk38B0;
-    /* 0x38B1 */ u8 unk38B1[9];
+    /* 0x38B1 */ u8 unk38B1[4];
+    /* 0x38B5 */ u8 unk38B5;
+    /* 0x38B6 */ u8 unk38B6[4];
     /* 0x38BA */ u8 unk38BA;
     /* 0x38BB */ u8 unk38BB[0x191];
     /* 0x3A4C */ GridNavigation pageBox;
@@ -136,7 +138,9 @@ struct ActorCardAnimationsA {
     /* 0x4210 */ s16 unitIndices[5];               /* slot table index of a panel's unit (< 0: none) */
     /* 0x421A */ u8 unk421A[6];
     /* 0x4220 */ s32 memberModelIds[3];            /* the demon shown in a party member's panel, 0: none */
-    /* 0x422C */ u8 unk422C[0x8E3];
+    /* 0x422C */ u8 unk422C[0x8AC];
+    /* 0x4AD8 */ s32 unk4AD8;
+    /* 0x4ADC */ u8 unk4ADC[0x33];
     /* 0x4B0F */ u8 unk4B0F;
     /* 0x4B10 */ u32 unk4B10;
     /* 0x4B14 */ u16 unk4B14;
@@ -183,6 +187,8 @@ typedef char ActorCardAnimationOffsetsCheck[
     offsetof(ActorCardAnimationsA, vacant) == 0x41ED &&
     offsetof(ActorCardAnimationsA, unitIndices) == 0x4210 &&
     offsetof(ActorCardAnimationsA, memberModelIds) == 0x4220 &&
+    offsetof(ActorCardAnimationsA, unk38B5) == 0x38B5 &&
+    offsetof(ActorCardAnimationsA, unk4AD8) == 0x4AD8 &&
     offsetof(ActorCardAnimationsA, unk4B0F) == 0x4B0F &&
     offsetof(ActorCardAnimationsA, messageFile) == 0x4B98 &&
     offsetof(ActorCardAnimationsA, portraitIds) == 0x4BB0 &&

@@ -13,7 +13,7 @@ extern "C" {
 int FUN_00204ed0(...);
 int table8Type5GetValue(...);
 int fadeObjectResetIfActive(...);
-int FUN_0029a284(...);
+int statusDownDrawSkillRow(...);
 int fontMeasureLineAdvance(...);
 int FUN_002b75ec(...);
 int nkmBaseGetRecord(void);
@@ -69,7 +69,7 @@ extern unsigned long long statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: uiDrawListScrollBar. */
 /* Supplied declaration required: gxSetMirroredClippedScissor. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
-/* Supplied declaration required: FUN_0029a284. */
+/* Supplied declaration required: statusDownDrawSkillRow. */
 /* Supplied declaration required: FUN_0029ab54. */
 extern unsigned short *FUN_0029acb0(void);
 extern int objectPartRunUnlessLocked(int); // declcheck: local (romwright prototype; its types do not fit camp/CampMenuEntry.h: including it fails to compile)
@@ -592,7 +592,7 @@ LAB_001cdb08:
         }
         temp_v17 = (unsigned char *)0x1;
         temp_v18 = 0;
-        FUN_0029a284(temp_v1,temp_v2,temp_v8 & 0xffff,temp_v12 + 0x42c,0,0);
+        statusDownDrawSkillRow(temp_v1,temp_v2,temp_v8 & 0xffff,temp_v12 + 0x42c,0,0);
       }
     }
 LAB_001cdd1c:
@@ -627,7 +627,7 @@ LAB_001cdd1c:
         table8Type5GetValue(temp_v8);
         temp_v17 = (unsigned char *)0x1;
         temp_v18 = 0;
-        FUN_0029a284(temp_v1,temp_v2,temp_v8,0x435,0,0);
+        statusDownDrawSkillRow(temp_v1,temp_v2,temp_v8,0x435,0,0);
       }
       else {
         temp_v9 = (unsigned int)*(unsigned short *)(temp_v10 + temp_v12 * 2 + 0x2370);
@@ -638,7 +638,7 @@ LAB_001cdd1c:
         }
         temp_v17 = (unsigned char *)0x1;
         temp_v18 = 0;
-        FUN_0029a284(temp_v1,temp_v2,temp_v8 & 0xffff,temp_v12 + 0x42c,0,0);
+        statusDownDrawSkillRow(temp_v1,temp_v2,temp_v8 & 0xffff,temp_v12 + 0x42c,0,0);
       }
     }
   }

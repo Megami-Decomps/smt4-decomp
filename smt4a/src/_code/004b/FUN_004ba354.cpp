@@ -89,7 +89,7 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
         texDrawTableEntryAtStoredOrigin(2, 0xB, itemId, x + offset->x, y + offset->y, alpha, icon->y);
         gxResetColorQuadToWhite();
     }
-    textDrawString(mode, mask, (const char *)item, (f32)(icon->x + x), (f32)(icon->y + y), fade, 0.0f, menu->speed);
+    textDrawString((f32)(icon->x + x), (f32)(icon->y + y), fade, mode, 0.0f, mask, menu->speed, (const char *)item);
 }
 
 } /* extern "C" */

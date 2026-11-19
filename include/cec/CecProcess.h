@@ -17,9 +17,12 @@ class Obj557ec0;
 struct CecProcess {
     /* 0x000 */ u32 unk000;
     /* 0x004 */ Obj420a1c *messageBox;  /* the StreetPass message-box object */
-    /* 0x008 */ u8 unk008[0x70];
-    /* 0x078 */ s32 producedBatches;     /* inbox batches the worker queued */
-    /* 0x07C */ s32 consumedBatches;
+    /* 0x008 */ u8 unk008[0x64];
+    /* 0x06C */ s32 nextMessageIndex;    /* the next inbox message the worker reads */
+    /* 0x070 */ s32 messageCount;        /* messages in the inbox */
+    /* 0x074 */ u8 unk074[4];
+    /* 0x078 */ u32 producedBatches;     /* inbox batches the worker queued (a ring of 12 slots) */
+    /* 0x07C */ u32 consumedBatches;
     /* 0x080 */ CecProcessSlot slots[12];
     /* 0x410 */ u8 unk410[0x10];
     /* 0x420 */ u8 lock[8];              /* critical section over the batch counters */
@@ -32,6 +35,7 @@ struct CecProcess {
 };
 
 typedef char CecProcessOffsetCheck[offsetof(CecProcess, producedBatches) == 0x78 &&
+    offsetof(CecProcess, nextMessageIndex) == 0x6C && offsetof(CecProcess, messageCount) == 0x70 &&
     offsetof(CecProcess, slots) == 0x80 && offsetof(CecProcess, lock) == 0x420 &&
     offsetof(CecProcess, thread) == 0x42C && offsetof(CecProcess, buffer) == 0x44C &&
     sizeof(CecProcess) == 0x460 ? 1 : -1];

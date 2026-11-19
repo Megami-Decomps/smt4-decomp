@@ -1,4 +1,4 @@
-/* NON_MATCHING: tree/parent saved registers and initial sentinel setup differ; build preserves one additional register. */
+/* NON_MATCHING: built --multifile with treeSkew/treeSplit (config: retail pushes {r4-r7, lr} with no alignment pad); only `add nil, r0, #4` is scheduled before `mov tree, r0` in retail, after it (from the copy) in the build. */
 #include "shard/W6_W6Match3_AATreeNode.h"
 
 /* An AA tree: its root, the nil sentinel every leaf links to, and the extreme nodes. */
@@ -30,7 +30,7 @@ void FUN_004d8f4c(AATree *tree, AATreeNode *node)
         tree->last = node;
     }
     tree->count++;
-    for (parent = node->parent; parent != nil; parent = parent->parent) {
+    while ((parent = node->parent) != nil) {
         AATreeNode **link = parent->left == node ? &parent->left : &parent->right;
         treeSkew(link);
         treeSplit(link);

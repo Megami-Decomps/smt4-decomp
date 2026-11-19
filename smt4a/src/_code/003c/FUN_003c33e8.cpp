@@ -25,7 +25,7 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
     if (screen->slots[index] == 0) {
         sprintf(text, "\x81\x7c \x81\x7c \x81\x7c");
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
-        textDrawString(2, 0xffffffff, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
+        textDrawString(label->x + x, label->y + y, 0.0f, 2, 0.0f, 0xffffffff, effect, text);
         return;
     }
     texDrawTableEntryAtStoredOrigin(2, 0x1a, 0x174, x, y, 0x6a);
@@ -36,7 +36,7 @@ void FUN_003c33e8(SkillSlotScreen *screen, s32 index, u32 unit, s32 count, s32 x
     }
     sprintf(text, "%s", FUN_0014bd84(screen->slots[index]));
     const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1a, 0x178);
-    textDrawString(2, color, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
+    textDrawString(label->x + x, label->y + y, 0.0f, 2, 0.0f, color, effect, text);
     const TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1a, 0x177);
     FUN_00185e84(screen->slots[index], icon->x + x, icon->y + y, 0x74, 0, 0);
     if (recordContainsPairedId(unit, screen->slots[index]) == 0) {

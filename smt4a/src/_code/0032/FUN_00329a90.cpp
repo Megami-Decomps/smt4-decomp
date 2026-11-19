@@ -68,8 +68,8 @@ u32 FUN_00329a90(void)
             texDrawTableEntryAtStoredOrigin(2, 19, 0x1242, (s32)((f32)panel->x + offset + (f32)frame->x), panel->y + frame->y, 11);
             char text[32];
             sprintf(text, "%d\201@\202l\202\201\202\203\202\203\202\201", depart->value);
-            textDrawString(2, 0xffffffff, text, (f32)panel->x + offset + (f32)counter->x,
-                         (f32)(panel->y + counter->y), 0.0f, 1.0f, 1.0f);
+            textDrawString((f32)panel->x + offset + (f32)counter->x, (f32)(panel->y + counter->y), 0.0f, 2,
+                         1.0f, 0xffffffff, 1.0f, text);
         }
         renderStackPop(&g_renderCtx->stackA);
     }

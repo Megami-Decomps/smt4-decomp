@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002248f8` (_code @ 0x2248f8, 0x14e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlPositionedRequestsA.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -32,7 +33,6 @@ int devilIsTextureLoaded(...);
 int pairQueueAppend(...);
 int controllerStartInterpolation(...);
 int FUN_0047f66c(...);
-int FUN_004a9588(...);
 int FUN_004aa0b0(...);
 int VectorSignedToFloat(...);
 
@@ -181,7 +181,7 @@ extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: cyclingPanelAdvance. */
 /* Supplied declaration required: FUN_003f9970. */
 /* Supplied declaration required: FUN_0047f66c. */
-/* Supplied declaration required: FUN_004a9588. */
+/* Supplied declaration required: btlUiQueuePositionedRequest. */
 /* Supplied declaration required: FUN_004aa0b0. */
 /* Supplied declaration required: FUN_004ab10c. */
 
@@ -648,9 +648,8 @@ LAB_00225054:
       temp_v4 = 0;
       do {
         temp_v10 = randRange(0xf);
-        temp_v16 = 1;
-        temp_v17 = 1;
-        FUN_004a9588(temp_v0,temp_v10 + 0x14,0);
+        btlUiQueuePositionedRequest(reinterpret_cast<BtlUiA *>(temp_v0), temp_v10 + 0x14,
+                     0.0f, 0.0f, 0.0f, 0, 0, 1, 1);
         FUN_004aa0b0(temp_v0,2,1);
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 8);
@@ -709,12 +708,10 @@ LAB_002255d4:
           temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v7));
           temp_v10 = (short)(temp_v3 - 0x14) + 0x11;
           temp_v21 = (short)(temp_v2 - 0x14) + 0x27;
-          temp_v16 = temp_v20;
-          temp_v17 = 0;
-          VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v21,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v20 = temp_v10;
-          FUN_004a9588(temp_v19,temp_v18,0,temp_v11);
+          btlUiQueuePositionedRequest(reinterpret_cast<BtlUiA *>(temp_v19), temp_v18,
+                       f32(*(s16 *)(temp_v4 + 8) + temp_v21), f32(*(s16 *)(temp_v4 + 10) + temp_v10),
+                       0.0f, 0, temp_v11, 1, 0);
           temp_v10 = g_btlUiBlock;
           temp_v4 = DAT_0057a9c4;
           temp_v18 = 2;

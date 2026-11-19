@@ -1,4 +1,5 @@
 #include "ui/UiSpriteApi.h"
+#include "text/TextDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -16,7 +17,6 @@ const char *dataTable24Sub0GetRecordS90(u32 index);
 s32 sceneSelectionGetSlotId(void);
 void efctSetSpeed(f32 speed);
 void texDrawCompositeSprite(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
-void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 shear, f32 speed);
 void uiFormatIndexedDisplayName(SlotPanel *panel, u32 name, s32 slot, char *buffer);
 
 /* Draw one slot entry: its frame sprites, the selection highlight, its name and its price line. */
@@ -53,9 +53,9 @@ void uiSlotEntryDraw(f32 speed, SlotPanel *panel, u32 id, s32 x, s32 y, s32 sele
     }
     const char *title = dataTable24Sub0GetRecordS90(id);
     TextureTableEntryIV *rect = asdTMTexTableEntryAt(0x24, 0xa4);
-    textDrawString(2, nameColor, title, rect->x + x, rect->y + y, 0.55f, 0.0f, speed);
+    textDrawString(rect->x + x, rect->y + y, 0.55f, 2, 0.0f, nameColor, speed, title);
     rect = asdTMTexTableEntryAt(0x24, 0xa6);
     uiFormatIndexedDisplayName(panel, name, slot, text);
-    textDrawString(2, detailColor, text, rect->x + x, rect->y + y, 0.55f, 0.0f, speed);
+    textDrawString(rect->x + x, rect->y + y, 0.55f, 2, 0.0f, detailColor, speed, text);
 }
 }

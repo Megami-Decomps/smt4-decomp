@@ -8,7 +8,7 @@ extern "C" {
 int FUN_001177e0(void);
 int FUN_00119c28(...);
 int FUN_00121030(unsigned char *, unsigned char *, unsigned int, unsigned int);
-int FUN_0012113c(...);
+int nw_snd_SoundArchivePlayer_Initialize(...);
 int soundArchiveLoadInfoBlock(unsigned char *, unsigned int, unsigned int);
 int FUN_00121824(unsigned char *, unsigned char *);
 int FUN_0012201c(unsigned char *, unsigned char *);
@@ -69,7 +69,7 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_001177e0. */
 /* Supplied declaration required: FUN_00119c28. */
 /* Supplied declaration required: FUN_00121030. */
-/* Supplied declaration required: FUN_0012113c. */
+/* Supplied declaration required: nw_snd_SoundArchivePlayer_Initialize. */
 /* Supplied declaration required: soundArchiveLoadInfoBlock. */
 /* Supplied declaration required: FUN_00121824. */
 /* Supplied declaration required: FUN_0012201c. */
@@ -144,7 +144,7 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   temp_v6 = temp_v1;
   temp_v7 = param_3;
   DAT_004e23dc = temp_v1;
-  FUN_0012113c(&DAT_004e20ec,&g_asdSound,&DAT_004e21ac,DAT_004e23d8);
+  nw_snd_SoundArchivePlayer_Initialize(&DAT_004e20ec,&g_asdSound,&DAT_004e21ac,DAT_004e23d8);
   if (param_2 != 0) {
     puVar4 = &DAT_004e26ec;
     DAT_004e3134 = '\x01';

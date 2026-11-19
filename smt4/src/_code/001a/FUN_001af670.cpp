@@ -1,4 +1,5 @@
 #include "common.h"
+#include "text/TextDraw.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanel.h"
 #include "code/Code001a_Smt4.h"
@@ -11,7 +12,6 @@ const u16 *dataTable24Sub0GetRecordS90(u32);
 s32 FUN_002240b4(u32);
 void texDrawCompositeSprite(s32, s32, s32, s32, s32, s32);
 void efctSetSpeed(f32);
-void textDrawString(s32, u32, const u16 *, f32, f32, f32, f32, f32);
 
 // Draw a highlighted or ordinary entry label with its availability indicator.
 void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 speed)
@@ -42,6 +42,6 @@ void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 s
     }
     const u16 *text = dataTable24Sub0GetRecordS90(entryId);
     const TextureTableEntryIV *offset = asdTMTexTableEntryAt(36, 0xA4);
-    textDrawString(2, color, text, (f32)(offset->x + x), (f32)(offset->y + y), 0.55f, 0.0f, speed);
+    textDrawString((f32)(offset->x + x), (f32)(offset->y + y), 0.55f, 2, 0.0f, color, speed, (const char *)text);
 }
 }

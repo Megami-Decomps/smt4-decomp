@@ -30,7 +30,10 @@ typedef struct StatusDownState {
     /* 0x0411 */ u8 unk411;
     /* 0x0412 */ u8 unk412;
     /* 0x0413 */ u8 mode;                   /* skill-selection mode */
-    /* 0x0414 */ u8 unk414[0x10];
+    /* 0x0414 */ s32 unk414;
+    /* 0x0418 */ s32 unk418;
+    /* 0x041C */ s32 unk41C;
+    /* 0x0420 */ s32 unk420;
     /* 0x0424 */ s32 indicatorFirst;
     /* 0x0428 */ s32 indicatorSecond;
     /* 0x042C */ u8 slots[0x29];            /* filled with 0xFF */
@@ -52,8 +55,10 @@ typedef struct StatusDownState {
     /* 0x053C */ u32 unk53C;
     /* 0x0540 */ u32 unk540;
     /* 0x0544 */ s32 selection;             /* -1 when none */
-    /* 0x0548 */ u8 dirty;
-    /* 0x0549 */ u8 unk549[0xB];
+    /* 0x0548 */ s8 dirty;
+    /* 0x0549 */ u8 unk549[3];
+    /* 0x054C */ s32 markedRow;             /* the row lit while `dirty` is set */
+    /* 0x0550 */ u8 unk550[4];
     /* 0x0554 */ u32 entryUnk00;            /* the selected entry's description record */
     /* 0x0558 */ u32 entryUnk04;
     /* 0x055C */ u32 entryUnk08;
@@ -88,6 +93,8 @@ typedef char StatusDownStateLayoutCheck[
     offsetof(StatusDownState, slots) == 0x42C &&
     offsetof(StatusDownState, touchRegionCount) == 0x480 &&
     offsetof(StatusDownState, list) == 0x4D4 &&
+    offsetof(StatusDownState, unk414) == 0x414 && offsetof(StatusDownState, indicatorFirst) == 0x424 &&
+    offsetof(StatusDownState, markedRow) == 0x54C && offsetof(StatusDownState, entryUnk00) == 0x554 &&
     offsetof(StatusDownState, window) == 0x564 &&
     offsetof(StatusDownState, flagged) == 0x5C8 &&
     offsetof(StatusDownState, inventory.count) == 0x2230 &&

@@ -48,12 +48,12 @@ static __inline void asdSoundReleaseAuxSlot(u32 index)
 static __inline void asdSoundReleaseSlotC(u32 index)
 {
     AsdSndSlotC *slot = &g_asdSound.slotsC[index];
-    if (slot->pad0e[0] != 0) {
+    if (slot->active != 0) {
         if (slot->handle != 0) {
             basicSoundStopOrFadeOut(slot->handle, 0);
             nw_snd_SoundHandle_DetachSound(&slot->handle);
         }
-        slot->pad0e[0] = 0;
+        slot->active = 0;
         if (index < ASD_SND_SLOT_C_COUNT) {
             if (slot->handle != 0)
                 basicSoundStopOrFadeOut(slot->handle, 0);

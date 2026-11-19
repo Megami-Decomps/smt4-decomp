@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the final call's argument setup order differs (retail sets r1, r0, then r2 = options; built sets r2 first). */
 #include "common.h"
+#include "nn/fs/ArchivePath.h"
 
 struct DecodeStateView {
     u32 unk00; // 0x00
@@ -19,7 +20,6 @@ s32 refIsNullOrZero(DecodeStateView* state);
 s32 FUN_00100836(const char* source, u32 encoding, DecodeStateView* state);
 s32 FUN_002e3c44(u16* output, const char* source, s32 byteCount,
                  DecodeStateView* state);
-s32 archivePathDeviceOpen(TextObjectView* object, const u16* text, u32 options);
 
 // Decode source units into a temporary UTF-16-sized buffer, reset the object, and load it.
 void FUN_00158900(TextObjectView* object, const char* source, u32 options)
@@ -47,6 +47,6 @@ void FUN_00158900(TextObjectView* object, const char* source, u32 options)
     object->unk10 = 0;
     object->unk04 = 0;
     object->unk08 = 0;
-    archivePathDeviceOpen(object, text, options);
+    archivePathDeviceOpen(&object->unk00, text, options);
 }
 }

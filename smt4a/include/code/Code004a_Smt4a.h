@@ -10,6 +10,4 @@ void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 altern
 
 void FUN_004a92d0(struct BtlUiA *ui, u32 first, u32 second);
 
-void FUN_004aa768(void);
-
 } /* extern "C" */

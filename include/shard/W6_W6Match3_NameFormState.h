@@ -50,7 +50,7 @@ void asdModelAdvanceCommandCursorBetween(u32 a, u32 b);
 extern "C" {
 #endif
 
-void *appCostRecordFindById(u16 id);
+void *appCostRecordFindById(u32 id);
 
 #ifdef __cplusplus
 }

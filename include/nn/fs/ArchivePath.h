@@ -22,5 +22,9 @@ class ArchivePathDevice {
 public:
     virtual u32 open(u32* result, const ArchivePathDescriptor* path, u32 flags);
 };
+/* Opens an archive-qualified UTF-16 path on its archive's device and stores the file handle on success.
+ * Returns the device's result code, or 0xC8804465 when no device owns the archive name. The callers' code
+ * (FUN_00220330's, FUN_00317d48's) shows a plain integer, not an nn::Result class value. */
+extern "C" s32 archivePathDeviceOpen(u32 *handle, const u16 *path, u32 mode);
 typedef char ArchivePathDescriptorSizeCheck[sizeof(ArchivePathDescriptor) == 12 ? 1 : -1];
 #endif

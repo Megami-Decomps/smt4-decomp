@@ -6,7 +6,7 @@
 #include "camp/RenderCtxTitle.h"
 
 extern "C" {
-void FUN_001e071c(BtlUiObjC *);
+void btlUiPartyDisplayDraw(BtlUiObjC *);
 void renderCtxResetColorScale(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
 s32 renderCtxPackPassFlags(u32, u32);
@@ -29,7 +29,7 @@ s32 FUN_001e4bf0(u32 job)
             renderCtxSelectStereoLayout(g_titleScene);
             renderCtxPushA(g_titleScene, renderCtxPackPassFlags(1, 0));
             if (FUN_0028a318())
-                FUN_001e071c(&ui->objC);
+                btlUiPartyDisplayDraw(&ui->objC);
             renderStackPop(&g_titleScene->stackA);
             renderCtxApplyTransforms(g_titleScene);
             renderCtxResetColorScale(g_titleScene);

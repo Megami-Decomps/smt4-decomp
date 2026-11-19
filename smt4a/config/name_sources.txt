@@ -7543,3 +7543,22 @@
 0033f188 lmapRestoreSpawnPose inferred twin of smt4 FUN_002d4e58
 003ddfd8 bgmHasPendingResume inferred twin of smt4 FUN_0033361c
 0042d694 cecMakeResourceId inferred byte-identical retail twin of smt4 cecMakeResourceId
+002e3560 rt_udiv10 evidence twin of smt4 FUN_0014e6f8, armlib __rt_udiv10
+0015e420 nw_snd_SoundArchivePlayer_Initialize inferred twin of smt4 FUN_0012113c; becomes third-party
+00173f38 nw_snd_SoundArchivePlayer_SetupMram inferred twin of smt4 FUN_0012fa30
+001784b0 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo inferred twin of smt4 FUN_0014204c
+00280bd0 asdSaveHeaderInit inferred twin of smt4 FUN_001db90c
+0028cb88 btlUiPartyDisplayDraw inferred twin of smt4 FUN_001e071c
+003ce598 gauntletAppMenuUpdate evidence registered as the "GauntletApp CALC" process
+0021775c campDrawDetailArea inferred draws the camp menu's detail area for the selected item at the primary sprite
+002d1780 lmapViewUpdateOrbitSequence inferred steps the local map view's orbit phases
+00412248 btlIntroUpdate inferred dispatches the battle introduction states
+003b2008 btlTalkPickRandomFreeEntry inferred random enabled, unused negotiation entry of a category (category 6 counts twice)
+004a9588 btlUiQueuePositionedRequest inferred reuses or opens a request group at a position and appends a request; returns the group index
+004a9f00 btlUiQueueSlotPositionRequest inferred adds the slot layout's origin and queues the request at zero depth
+002fa73c btlActorCardIsIdle inferred twin of smt4 saveIsSelectionOutsideRange
+0041eeec saveLoadUiSuspendOrRestart inferred suspends the save screen or restarts the idle selection
+0041f020 saveLoadUiRebuildTouchRegions inferred removes and registers the save menu's touch regions
+0041f4c0 saveLoadUiPrepareSelection inferred readiness gates, touch rebuild, help text, enters mode 13
+003f29c0 btlPopFilteredCommand inferred pops the next pending command that passes the mode/status filter
+003ebca0 btlHasFilteredCommand inferred scans the pending commands with the same filter

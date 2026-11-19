@@ -32,7 +32,7 @@ void FUN_0049d244(MenuCaptionView *view, s32 x, s32 y, f32 alpha)
     texDrawTableEntryAtStoredOrigin(2, 51, 3, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 101);
     TextureTableEntryIV *info = asdTMTexTableEntryAt(51, 4);
     s32 captionX = info->x + ((s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + x);
-    textDrawString(3, 0xFFFFFFFF, (const char *)view->caption->text,
-        (f32)captionX, (f32)(info->y + y), (f32)150 * (1.0f / 256.0f), 0.0f, alpha);
+    textDrawString((f32)captionX, (f32)(info->y + y), (f32)150 * (1.0f / 256.0f),
+        3, 0.0f, 0xFFFFFFFF, alpha, (const char *)view->caption->text);
 }
 }

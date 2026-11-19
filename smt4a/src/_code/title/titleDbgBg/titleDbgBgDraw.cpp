@@ -1,4 +1,3 @@
-/* NON_MATCHING: prologue, early return, stack-address order and both label arms (via the drawDebugLabel inline) match retail; the build hoists the width move (vmov s3,s16) above the branch where retail repeats it inside each arm and copies the height from it last. */
 #include "camp/RenderCtx.h"
 #include "camp/RenderCtxA.h"
 #include "text/TextDraw.h"
@@ -21,7 +20,7 @@ f32 FUN_00182884(s32 mode, void *display, f32 x, f32 y);
 /* Draws a white debug label on the title background. */
 static __inline void drawDebugLabel(const char *text, f32 x, f32 y)
 {
-    textDrawString(3, 0xffffffff, text, x, y, 0.0f, 1.0f, 1.0f);
+    textDrawString(x, y, 0.0f, 3, 1.0f, 0xffffffff, 1.0f, text);
 }
 
 // Draw the debug title background, loading-source label and game title.

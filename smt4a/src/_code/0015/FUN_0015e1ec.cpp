@@ -3,7 +3,7 @@
 
 extern "C" {
 void nw_snd_internal_PoolImpl_CreateImpl(void *pool, void *buffer, u32 size, u32 elementSize);
-s32 FUN_001784b0(const void *archive, ArchivePoolCounts *counts);
+s32 nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(const void *archive, ArchivePoolCounts *counts);
 
 /* Creates the archive pool once and records bytes remaining after its counted elements. */
 u32 FUN_0015e1ec(SoundArchivePool *state, const void *archive, void *buffer, u32 size)
@@ -13,7 +13,7 @@ u32 FUN_0015e1ec(SoundArchivePool *state, const void *archive, void *buffer, u32
     }
     u32 reservedBytes = 0;
     ArchivePoolCounts counts;
-    if (FUN_001784b0(archive, &counts)) {
+    if (nw_snd_SoundArchive_ReadSoundArchivePlayerInfo(archive, &counts)) {
         reservedBytes = counts.thirdCount + (counts.firstCount + counts.secondCount);
         reservedBytes *= 0x2c;
     }

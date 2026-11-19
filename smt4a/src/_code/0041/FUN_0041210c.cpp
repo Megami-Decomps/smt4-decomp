@@ -21,7 +21,7 @@ typedef char BattleAnimationControllerViewOffsetsCheck[
 
 extern "C" {
 void FUN_00410f84(BattleAnimationControllerView *controller);
-void FUN_00412248(BattleAnimationControllerView *controller);
+void btlIntroUpdate(BattleAnimationControllerView *controller);
 void messageIndicatorsUpdate(void *argument);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
 
@@ -37,7 +37,7 @@ u32 FUN_0041210c(BattleAnimationControllerView *controller)
         controller->unk10 = 0;
         controller->unk14 = 0;
     }
-    FUN_00412248(controller);
+    btlIntroUpdate(controller);
     BtlStateB *battle = reinterpret_cast<BtlStateB *>(btlGetMainState());
     if (controller->state != 1 && controller->state != 2) {
         for (s32 index = 0; index < 12; ++index) {

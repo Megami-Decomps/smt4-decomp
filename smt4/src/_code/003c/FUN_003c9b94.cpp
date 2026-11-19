@@ -1,4 +1,4 @@
-/* NON_MATCHING: jump table now matches (explicit case 0); register assignment of the parameters, a stray sxth on the second id and the paired bitfield stores differ. */
+/* NON_MATCHING: as the smt4a twin FUN_004dc3b4: retail leaves the rejected case-4 pair through the shared exit (`mov r7, #0; b` to `mov r0, r7`), the build returns 0 directly (`moveq r0, #0`). */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/PackedIdentifiers.h"
@@ -36,10 +36,10 @@ u32 FUN_003c9b94(LeveledLists *owner, u16 firstId, u16 secondId,
         const DevilCombinationTableEntryPrefixIV *entry =
             dataTable05FindByPriorityAndKey(first->race, second->race);
         if (firstId == secondId || entry == NULL)
-            break;
+            return 0;
         output->firstIdentifier = firstId;
-        output->resultIdentifier = entry->result;
         output->secondIdentifier = secondId;
+        output->resultIdentifier = entry->result;
         accepted = 1;
         break;
     }

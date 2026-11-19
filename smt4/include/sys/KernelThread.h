@@ -13,7 +13,7 @@ struct KernelThreadObject {
 
 void nn_os_Thread_FinalizeImpl(KernelThreadObject *thread);
 /* One-instruction getter (armlink inlines it): the thread's kernel handle. */
-u32 threadGetHandle(const KernelThreadObject *thread);
+u32 handleObjectGetHandle(const KernelThreadObject *thread);
 void svcCloseHandle(s32 handle);
 
 } /* extern "C" */

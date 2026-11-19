@@ -53,7 +53,7 @@ u8 FUN_00208650(void)
         texDrawTableEntryAtStoredOrigin(2, 8, 0x151, x, 0, 111);
         renderStackPop(&g_renderCtx->stackB);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x153);
-        textDrawString(4, 0x57D8FFFF, (const char *)win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f, win->alpha);
+        textDrawString((f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f, 0x57D8FFFF, win->alpha, (const char *)win->label);
         s32 lit = (win->frame / 5) % 8;
         s32 litPrevious = (lit + 7) % 8;
         s32 lit2 = (win->frame / 5 + 4) % 8;

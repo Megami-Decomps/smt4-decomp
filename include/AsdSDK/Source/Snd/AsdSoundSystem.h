@@ -50,7 +50,8 @@ typedef struct AsdSndSlotC {
     /* 0x08 */ u32 unk08;
     /* 0x0c */ u8 flag;
     /* 0x0d */ u8 volume;
-    /* 0x0e */ u8 pad0e[2];
+    /* 0x0e */ s8 active;  /* the slot is playing */
+    /* 0x0f */ u8 pad0f;
 } AsdSndSlotC;
 
 /* An auxiliary slot (0x3c bytes, two of them): a heap restored to its saved state when selected. */

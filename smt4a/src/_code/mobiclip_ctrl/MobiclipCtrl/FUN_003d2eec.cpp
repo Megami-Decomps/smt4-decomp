@@ -1,12 +1,12 @@
 /* NON_MATCHING: the result test (nnResultIsFailure) now matches; retail reaches the movie globals (0x617e58..0x618504, DAT_00588024) from shared literal bases with `sub rX, rY, #imm`, i.e. they were defined in the same file, while this unit addresses each global from its own literal. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
+#include "nn/fs/ArchivePath.h"
 #include "nn/Result.h"
 
 extern "C" {
 s32 refIsNullOrZero(MoviePathConversionState *state);
 s32 FUN_00100836(const char *text, u32 limit, MoviePathConversionState *state);
 u16 *FUN_002e3c44(u16 *output, const char *text, s32 consumed, MoviePathConversionState *state);
-u32 archivePathDeviceOpen(u32 *handle, const u16 *path, u32 mode);
 void sysFatalBreak(void);
 void FUN_0042230c(void *stream, void *handle, void *reader);
 u32 FUN_00422648(void *stream);

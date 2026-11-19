@@ -1,4 +1,3 @@
-/* NON_MATCHING: early returns give retail's shared zero-result epilogue and the one-expression x its add order; 6 lines remain: the textDrawString call loads its colour/text/0.0f/0.566f arguments in a different order (same in the run/search-window siblings). */
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
@@ -29,9 +28,9 @@ u8 placeWinDraw(void)
     s32 y = vec2GetYInt(&window->animation);
     texDrawCompositeSprite(2, 8, 0xe, translatedX, y, 0x65);
     TextureTableEntryIV *sprite = asdTMTexTableEntryAt(8, 0x10b);
-    textDrawString(3, 0xffffffff, window->text,
-                  static_cast<f32>(sprite->x + translatedX),
-                  static_cast<f32>(sprite->y + y), 0.56640625f, 0.0f, 1.0f);
+    textDrawString(static_cast<f32>(sprite->x + translatedX), static_cast<f32>(sprite->y + y), 0.56640625f,
+                  3,
+                  0.0f, 0xffffffff, 1.0f, window->text);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);

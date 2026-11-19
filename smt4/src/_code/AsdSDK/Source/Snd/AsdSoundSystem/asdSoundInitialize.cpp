@@ -103,7 +103,7 @@ void asdSoundInitialize(s32 auxiliaryMode)
         sound->slotsC[slot].unk08 = 0;
         sound->slotsC[slot].flag = 0;
         sound->slotsC[slot].volume = ASD_SND_VOLUME_DEFAULT;
-        sound->slotsC[slot].pad0e[0] = 0;
+        sound->slotsC[slot].active = 0;
     }
     for (s32 slot = 0; slot < ASD_SND_SLOT_A_COUNT; ++slot) {
         sound->slotsA[slot].volume = ASD_SND_VOLUME_DEFAULT;

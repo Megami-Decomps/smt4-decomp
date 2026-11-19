@@ -64,3 +64,4 @@ partyWidgetSetUnitId = 0xe5801034; // 0x34956c in FUN_003493dc: str r1,[r0,#0x34
 partyWidgetSetIsCharacter = 0xe5c01021; // 0x3495a0 in FUN_003493dc: strb r1,[r0,#0x21] in place of the call
 textCodeSwapBytes = 0xe6bf0fb0; // 0x142198 0x142224 (FUN_00141f8c, after mov r0, r6: the ruby code 0xF812 is moved into r0, byte-swapped by rev16 and copied to r2, where a source byte swap folds the constant or swaps into r2 before the index store)
 uiSpriteGetScaleDone = 0xe1d008d8; // 0x4168b0 (FUN_00416840, after add r0, r5, #20; result copied by mov r8, r0) 0x416784 (FUN_00416664, after mov r0, r7): the sprite address is formed in r0 and read with ldrsb #136, which a direct field read folds into the load
+handleObjectGetHandle = 0xe5900000; // 0x47d75c (threadTryJoinAndClose: mov r4, r0, then a lone ldr r0, [r0] tested and reloaded from r4 for svc 0x24; IV row 0x10fcb0)

@@ -40,7 +40,9 @@ u32 FUN_00298e00(u32 id);
 
 u8 FUN_0029563c(void);
 
-void debugDrawText(TextRenderer* renderer, const char* text, f32 x, f32 y, f32 alpha);
+/* Draws a Shift-JIS debug caption with a packed RGBA colour and its own opacity. The text comes last:
+ * every caller loads the opacity literal between the text and the colour moves. */
+void debugDrawText(u32 color, f32 x, f32 y, f32 alpha, const char* text);
 
 u32 FUN_00299fc0(void);
 

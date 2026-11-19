@@ -1,4 +1,3 @@
-/* NON_MATCHING: second selection store recomputes the element address; retail keeps it in r0 (element pointer with fields at +0x30/+0x34 from the 0x1000 base). */
 /* Resets active model animation players and publishes their selected animation indices. */
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
@@ -57,9 +56,10 @@ void FUN_003d9d9c(void *object)
             ModelView *model = slot->model;
             model->flags |= 2;
             model->player->part->enabled = 0;
-            if (slot->listIndex >= 0) {
-                owner->tail.selections[slot->listIndex].animation = slot->animation;
-                owner->tail.selections[slot->listIndex].index = slot->listIndex;
+            s32 index = slot->listIndex;
+            if (index >= 0) {
+                owner->tail.selections[index].animation = slot->animation;
+                owner->tail.selections[index].index = slot->listIndex;
             }
         }
     }

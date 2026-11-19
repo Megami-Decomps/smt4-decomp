@@ -17,7 +17,7 @@ TableEntry * dataTable29Sub0GetEntryWithAoc(u32 index);
 
 TableEntry * dataTable29GetEntryWithAoc(u32 index);
 
-GauntletAppRecord *dataTable0BFindById(u16 id);
+GauntletAppRecord *dataTable0BFindById(u32 id);
 
 DataTable54Record * dataTable54FindById(u32 id);
 

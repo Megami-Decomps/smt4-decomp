@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the zero for the handle reset into r6 at entry, reloads the handle before the zero-timeout wait, and tests the "not timed out" bool through movne/moveq + teq #1; the build folds both. */
+/* NON_MATCHING: retail hoists the zero for the handle reset into r6 at entry (`mov r6, #0` after the first handle read, `str r6, [r4]` at the end); the build materialises it at the store. */
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 #include "nn/svc.h"
@@ -29,7 +29,11 @@ extern "C" {
 // finalizes it, closes its handle and returns true.
 bool threadTryJoinAndClose(NnOsThread *thread)
 {
-    if (thread->handle != 0 && !threadTryWait(thread)) {
+    bool running = false;
+    if (handleObjectGetHandle(thread) != 0) {
+        running = threadTryWait(thread) != 1;
+    }
+    if (running) {
         return false;
     }
     threadWait(thread, -1);

@@ -29,14 +29,14 @@ void FUN_00383f70(DebugItemList *work)
         count = bounds->visible;
     }
     if (count == 0) {
-        textDrawString(2, ~0u, DAT_00405890, 8.0f, 8.0f, 0.0f, 1.0f, 1.0f);
+        textDrawString(8.0f, 8.0f, 0.0f, 2, 1.0f, ~0u, 1.0f, DAT_00405890);
         return;
     }
     for (s32 row = 0; row < count; ++row) {
         const char *text = FUN_002bcddc(work->items[row].id, 0);
-        textDrawString(2, ~0u, text, 24.0f, (f32)(row * 14 + 8), 0.0f, 1.0f, 1.0f);
+        textDrawString(24.0f, (f32)(row * 14 + 8), 0.0f, 2, 1.0f, ~0u, 1.0f, text);
     }
     s32 selected = flaggedEntryGetValueByState(&work->selection);
-    textDrawString(2, ~0u, DAT_004058c8, 8.0f, (f32)(selected * 14 + 8), 0.0f, 1.0f, 1.0f);
+    textDrawString(8.0f, (f32)(selected * 14 + 8), 0.0f, 2, 1.0f, ~0u, 1.0f, DAT_004058c8);
 }
 }

@@ -12,7 +12,7 @@ struct BattleActionDetails {
 
 extern "C" {
 void btlCommandMenuResolveLayout(BtlUiObjC *, s16 *kind, s16 *id);
-void FUN_00218480(BtlUiObjC *);
+void btlCommandBeginTargetSelection(BtlUiObjC *);
 void FUN_0028bfe4(BtlUiObjC *);
 s32 playSceneIsFadeInDone(BtlUiObjA *);
 void playSceneFadeOutStart(BtlUiObjA *);
@@ -43,7 +43,7 @@ void btlUiRouteSelectedAction(void)
     }
     if (ui->panelState.requiresTargetSelection) {
         ui->panelState.state = 12;
-        FUN_00218480(selection);
+        btlCommandBeginTargetSelection(selection);
     } else {
         ui->panelState.state = 8;
         FUN_0028bfe4(selection);

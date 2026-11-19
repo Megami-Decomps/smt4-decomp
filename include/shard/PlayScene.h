@@ -46,7 +46,9 @@ typedef struct PlayScene {
     /* 0x3058 */ u8 unk3058[0x4];
     /* 0x305C */ u32 unk305C;
     /* 0x3060 */ u8 unk3060;
-    /* 0x3061 */ u8 unk3061[0x11];
+    /* 0x3061 */ u8 unk3061[0x3];
+    /* 0x3064 */ s32 unk3064;          /* -1 when target selection starts */
+    /* 0x3068 */ u8 unk3068[0xA];
     /* 0x3072 */ s16 slotCount;        /* number of slots[] that are in use (>= 0) */
     /* 0x3074 */ s16 slots[4];
     /* 0x307C */ u8 unk307C[0x3];
@@ -71,7 +73,8 @@ typedef struct PlayScene {
         struct {
             u8 unk30EC[0x320];
             /* 0x340C */ s32 modelIds[4];         /* the demon model shown in a panel (> 0) */
-            u8 unk341C[0x44];
+            u8 unk341C[0x40];
+            /* 0x345C */ u8 targetEnabled[4];     /* whether the command can target a panel */
             /* 0x3460 */ s32 hpDeltas[4];         /* a pending HP change shown on the gauge */
             /* 0x3470 */ s32 mpDeltas[4];
             u8 unk3480[0x9C];
@@ -142,6 +145,7 @@ typedef char PlaySceneMemberSpriteOffsets[
     offsetof(PlayScene, guestActor) == 0x3040 ? 1 : -1];
 typedef char PlayScenePartyOffsets[
     offsetof(PlayScene, party.modelIds) == 0x340C && offsetof(PlayScene, party.hpDeltas) == 0x3460 &&
+    offsetof(PlayScene, party.targetEnabled) == 0x345C && offsetof(PlayScene, party.mpDeltas) == 0x3470 &&
     offsetof(PlayScene, party.ailmentCursors) == 0x351C && offsetof(PlayScene, party.gaugeAnimating) == 0x37BC &&
     offsetof(PlayScene, party.hpAnimations) == 0x37C8 && offsetof(PlayScene, party.gaugeRising) == 0x3804 &&
     offsetof(PlayScene, party.shakeTimers) == 0x385C && offsetof(PlayScene, party.originX) == 0x3884 &&

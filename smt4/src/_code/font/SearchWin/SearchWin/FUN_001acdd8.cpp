@@ -79,8 +79,8 @@ u8 FUN_001acdd8(void)
         texDrawCompositeSprite(2, 14, 0x15, x, y, 102);
         titleScenePopSecond(g_titleScene);
         TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(14, 0x16F);
-        textDrawString(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
-                     win->alpha);
+        textDrawString((f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 4, 0.0f, 0xF49800FF, win->alpha,
+                     reinterpret_cast<const char *>(win->label));
         s32 step = win->frame / 5;
         s32 lit = step % 8;
         s32 litPrevious = (lit + 7) % 8;

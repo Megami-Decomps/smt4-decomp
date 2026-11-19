@@ -48,9 +48,9 @@ int FUN_003e49e8(void);
 int FUN_003e854c(...);
 int FUN_003e892c(...);
 int btlFindFirstEntryMatchingCategoryAndRequiredMask(void);
-int FUN_003ebca0(void);
+int btlHasFilteredCommand(void);
 int FUN_003f26d4(...);
-int FUN_003f29c0(...);
+int btlPopFilteredCommand(...);
 int gameCounterAddSaturating(...);
 int FUN_004aa2e0(...);
 int FUN_004abba8(...);
@@ -230,7 +230,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: btlActionPrepareFromSource. */
 /* Supplied declaration required: FUN_003ea69c. */
 /* Supplied declaration required: btlFindFirstEntryMatchingCategoryAndRequiredMask. */
-/* Supplied declaration required: FUN_003ebca0. */
+/* Supplied declaration required: btlHasFilteredCommand. */
 /* Supplied declaration required: btlMainBuffersFree. */
 /* Supplied declaration required: FUN_003ecfb4. */
 /* Supplied declaration required: FUN_003ee138. */
@@ -239,7 +239,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003f135c. */
 /* Supplied declaration required: FUN_003f1d74. */
 /* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: FUN_003f29c0. */
+/* Supplied declaration required: btlPopFilteredCommand. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_0041817c. */
@@ -695,7 +695,7 @@ LAB_002bb21c:
     *(unsigned int *)(temp_v7 + 0x45a4) = *(unsigned int *)(temp_v7 + 0x45a4) & ~DAT_00573a74 & ~DAT_00573a4c;
     *puVar20 = *puVar20 & temp_v10 & ~temp_v9;
     temp_v6 = temp_v7;
-    FUN_003ebca0();
+    btlHasFilteredCommand();
     temp_v4 = DAT_005739cc;
     temp_v3 = DAT_005739c8;
     temp_v2 = DAT_005739a4;
@@ -753,7 +753,7 @@ LAB_002bb21c:
     break;
   case 0xd:
     temp_v6 = temp_v7;
-    FUN_003f29c0(temp_v7,temp_v22);
+    btlPopFilteredCommand(temp_v7,temp_v22);
     if (temp_v6 != 0) {
       BattleActionScale scale = { (s32)temp_v22[2] };
       FUN_002b4f28(reinterpret_cast<BtlMainStateA *>(temp_v7),temp_v22[0],temp_v22[1],scale,temp_v22[3]);
@@ -938,7 +938,7 @@ LAB_002bbdec:
       }
     }
     temp_v6 = temp_v7;
-    FUN_003ebca0();
+    btlHasFilteredCommand();
     if (temp_v6 == 0) {
       if (0 < *(int *)(temp_v7 + 0xe8)) {
         temp_v9 = temp_v7 + 0x4c00;

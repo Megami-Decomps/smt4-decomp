@@ -29,6 +29,10 @@ struct NnOsHandle {
     }
 };
 
+/* The handle object's one-instruction getter (`ldr r0, [r0]`), inlined by armlink at every call
+ * (`config/inlined.txt`). IV's sys/KernelThread.h declares it on its own thread view. */
+extern "C" u32 handleObjectGetHandle(const NnOsHandle *object);
+
 typedef char NnOsHandleLayoutCheck[
     sizeof(NnOsHandle) == 4 && offsetof(NnOsHandle, handle) == 0 ? 1 : -1];
 

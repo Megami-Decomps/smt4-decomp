@@ -1,4 +1,3 @@
-/* NON_MATCHING: x is now one expression (offset + parallax) and the text position adds the frame offset second, like retail; remaining: the text call loads its color/depth constants in a different order. */
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -31,9 +30,9 @@ u32 placeWindowDrawLabel(void)
     s32 y = vec2GetYInt(&window->animation);
     texDrawCompositeSprite(2, 0xe, 0xe, x, y, 0x65);
     TextureTableEntryIV *frame = asdTMTexTableEntryAt(0xe, 0x10b);
-    textDrawString(3, 0xffffffff, window->text,
-        static_cast<f32>(x + frame->x), static_cast<f32>(y + frame->y),
-        0.56640625f, 0.0f, 1.0f);
+    textDrawString(static_cast<f32>(x + frame->x), static_cast<f32>(y + frame->y), 0.56640625f,
+        3, 0.0f,
+        0xffffffff, 1.0f, window->text);
     gxResetColorQuadToWhite();
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);

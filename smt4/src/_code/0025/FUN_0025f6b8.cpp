@@ -347,7 +347,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             s32 center = (entry->placement->width - advance) / 2;
             s32 nameX = x + center + entry->x;
             s32 nameY = entry->y + y;
-            textDrawString(1, (u32)-1, name, nameX, nameY, 0.9f, 0.0f, alpha);
+            textDrawString(nameX, nameY, 0.9f, 1, 0.0f, (u32)-1, alpha, name);
             if (isLowThreshold(hp, maxHp)) {
                 drawSetColorFromRGBA8(0xDC0F14FF);
             } else if (warning != 0) {
@@ -634,7 +634,7 @@ void FUN_0025f6b8(PlayScene *scene, s32 expanded, s32 allLit, s32 lift, s32 dimG
             sprintf(name, FUN_002bd068(guest->unk46));
         }
         entry = asdTMTexTableEntryAt(21, 0x6E);
-        textDrawString(2, 0xFF, name, entry->x + x, entry->y + y - shift, 0.72265625f, 0.0f, alpha);
+        textDrawString(entry->x + x, entry->y + y - shift, 0.72265625f, 2, 0.0f, 0xFF, alpha, name);
 
         if (FUN_002b6ad0() != 0 && (scene->state == 0x1F || scene->mode == 0x1F)) {
             if (scene->unk3081 != 0) {

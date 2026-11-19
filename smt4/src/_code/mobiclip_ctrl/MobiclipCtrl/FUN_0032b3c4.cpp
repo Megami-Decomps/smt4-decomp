@@ -1,12 +1,12 @@
 /* NON_MATCHING: the result test now matches (nnResultIsFailure: lsrs + blne); remaining: retail keeps the constants 0 (r9) and 1 (r8) in registers, derives 0x105 as r8 + 260 and the open-file globals from one base (r7), so its saved-register set is r4-sl and the global address reuse differs. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
+#include "nn/fs/ArchivePath.h"
 #include "nn/Result.h"
 
 extern "C" {
 s32 refIsNullOrZero(MoviePathConversionState *);
 s32 FUN_002b90c8(const char *, u32, MoviePathConversionState *);
 u16 *FUN_002c618c(u16 *, const char *, s32, MoviePathConversionState *);
-u32 archivePathDeviceOpen(u32 *, const u16 *, u32);
 void asdFatalError(void);
 void FUN_0034dddc(void *, void *, void *);
 u32 FUN_0034e134(void *);

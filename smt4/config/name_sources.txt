@@ -5025,3 +5025,17 @@
 002d4e58 lmapRestoreSpawnPose inferred restores the spawn position, snapshots and headings from table 23
 0033361c bgmHasPendingResume inferred tests the two BGM request channels' flag bits 2 and 0x20
 002eb674 mapSaveSceneReturnSnapshot inferred saves the scene's return position snapshot
+0014e6f8 rt_udiv10 evidence armlib __rt_udiv10: the shift-and-add divide by ten with the addpl/addmi remainder fix-up (named like rt_locale, ll_udiv10); third-party by library row
+0012113c nw_snd_SoundArchivePlayer_Initialize inferred NW4C SoundArchivePlayer::Initialize: heap range check, SetupMram, then SetupStrmBuffer (GetRequiredStrmBufferSize body inlined); becomes third-party
+0012fa30 nw_snd_SoundArchivePlayer_SetupMram inferred called by SoundArchivePlayer_Initialize before the stream buffer setup
+0014204c nw_snd_SoundArchive_ReadSoundArchivePlayerInfo inferred fills the player info whose stream channel count both Initialize and GetRequiredStreamBufferSize read
+001db90c asdSaveHeaderInit inferred initialises an AsdSaveHeader: magics, version, size, timestamp from the clock, flags, optional metadata
+0010d3f8 asdSoundSlotCStart inferred marks one-sound slot C active at the default volume and reselects the active slots
+001e071c btlUiPartyDisplayDraw inferred draws the battle UI party panels for the scene state (transitional states draw the state they come from)
+003291dc gauntletAppMenuUpdate evidence twin of smt4a FUN_003ce598 ("GauntletApp CALC")
+001a1f8c sortMenuUpdate evidence registered as "SORT CALC" in sortMenuCreate
+001add9c uniteDrawPanel evidence twin of smt4a uniteDrawPanel (same source)
+0018a3e0 campSkillListUpdate evidence twin of smt4a campSkillListUpdate
+00218480 btlCommandBeginTargetSelection inferred enters battle target selection and previews the skill on the party
+0029a284 statusDownDrawSkillRow inferred draws one skill row of the status screen
+00218460 btlActorCardIsIdle inferred true unless the card is in animation states 1-4; misnamed (no save code)

@@ -33,7 +33,7 @@ void configDrawChoices(s32 count, s32 x, s32 y, s32 selected, const Configuratio
         s32 width = fontMeasureLineAdvance(text, 2);
         s32 labelX = position->x + (x + (label->x + (label->placement->width - width) / 2));
         s32 labelY = position->y + label->y + y;
-        textDrawString(2, color, text, static_cast<f32>(labelX), static_cast<f32>(labelY), 0.0f, 0.0f, 1.0f);
+        textDrawString(static_cast<f32>(labelX), static_cast<f32>(labelY), 0.0f, 2, 0.0f, color, 1.0f, text);
     }
 }
 }

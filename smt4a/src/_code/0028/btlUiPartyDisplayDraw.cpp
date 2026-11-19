@@ -1,0 +1,205 @@
+#include "ui/UiSpriteApi.h"
+#include "battle/ActorCardAnimations.h"
+#include "camp/RenderCtx.h"
+#include "camp/RenderCtxA.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantC.h"
+#include "util/BitsAndBytes.h"
+#include "ui/AnimatedMessage.h"
+
+extern "C" {
+
+void renderCtxResetColorScale(RenderCtxA *context);
+/* The party panels: `expanded` selects the wide layout, `allLit` lights every panel, `lift` raises them by
+   that many steps and `dimGuest` darkens the guest panel. */
+void FUN_002ae5cc(ActorCardAnimationsA *scene, s32 expanded, s32 allLit, s32 lift, s32 dimGuest);
+void FUN_002fa4dc(ActorCardAnimationsA *scene, s32 forceFull);
+void FUN_003741cc(ActorCardAnimationsA *scene);
+void FUN_0028f740(ActorCardAnimationsA *scene);
+void FUN_0028d270(ActorCardAnimationsA *scene);
+void FUN_003743a4(ActorCardAnimationsA *scene);
+void saveSlotDrawClippedGaugeFrame(ActorCardAnimationsA *scene, s32 amount);
+void selectionPanelDrawMarkers(ActorCardAnimationsA *scene, s32 drawAll);
+
+/* Draws the battle UI's party display for the scene's state. */
+void btlUiPartyDisplayDraw(ActorCardAnimationsA *scene)
+{
+    s32 state;
+    s32 mode;
+    s32 lift;
+
+    renderCtxSelectDisplayAreaForStereoMode(g_renderCtx);
+    gxResetColorQuadToWhite();
+    /* Nothing is drawn once the display has slid out. */
+    if ((scene->state == 6 && scene->unk4AD8 == 3 && uiSpriteGetCompletionState(&scene->slide)) ||
+        ((scene->state == 0x2B || scene->state == 0x2C) && uiSpriteGetCompletionState(&scene->slide))) {
+        return;
+    }
+    /* Transitional states draw the state they come from. */
+    state = scene->state;
+    if (state == 2) {
+        state = scene->mode;
+    }
+    if (state == 6 || state == 3 || state == 4 || state == 5) {
+        state = scene->mode;
+    }
+    if (state == 0x2B || state == 0x2C) {
+        state = scene->mode;
+    }
+    switch (state) {
+    case 1:
+    case 23:
+    case 26:
+    case 27:
+    case 45:
+        FUN_002ae5cc(scene, 0, 0, 0, 0);
+        FUN_002fa4dc(scene, 0);
+        FUN_003741cc(scene);
+        FUN_0028f740(scene);
+        break;
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 20:
+    case 21:
+        FUN_002ae5cc(scene, 0, 0, 0, 0);
+        FUN_002fa4dc(scene, 0);
+        FUN_003741cc(scene);
+        FUN_0028f740(scene);
+        FUN_0028d270(scene);
+        break;
+    case 16:
+        FUN_002ae5cc(scene, 1, 1, scene->unk3878, 0);
+        FUN_002fa4dc(scene, 1);
+        FUN_0028f740(scene);
+        FUN_0028d270(scene);
+        break;
+    case 17:
+    case 41:
+        FUN_002ae5cc(scene, 0, 0, 0, 0);
+        FUN_002fa4dc(scene, 0);
+        FUN_0028f740(scene);
+        FUN_0028d270(scene);
+        break;
+    case 18:
+    case 19:
+        FUN_002ae5cc(scene, 0, 0, 0, 0);
+        FUN_002fa4dc(scene, 0);
+        FUN_003741cc(scene);
+        FUN_0028f740(scene);
+        FUN_0028d270(scene);
+        FUN_003743a4(scene);
+        break;
+    case 22:
+        FUN_002ae5cc(scene, 0, 1, 0, 0);
+        FUN_002fa4dc(scene, 0);
+        FUN_0028f740(scene);
+        selectionPanelDrawMarkers(scene, 1);
+        break;
+    case 24:
+    case 25:
+    case 28:
+        lift = 8 - scene->unk3878;
+        if (lift < 0) {
+            lift = 0;
+        }
+        mode = scene->mode;
+        if (mode != 34 && mode != 35 && mode != 36) {
+            FUN_002ae5cc(scene, 1, 0, lift, 0);
+        } else {
+            FUN_002ae5cc(scene, 1, 1, lift, 0);
+        }
+        break;
+    case 29:
+        mode = scene->mode;
+        if (mode == 34 || mode == 35 || mode == 36) {
+            FUN_002ae5cc(scene, 1, 1, 0, 0);
+            FUN_002fa4dc(scene, 1);
+        } else {
+            FUN_002ae5cc(scene, 1, 0, 0, 0);
+            FUN_002fa4dc(scene, 0);
+        }
+        if (scene->mode == 26 && scene->unitIndices[scene->page] != -1) {
+            break;
+        }
+        saveSlotDrawClippedGaugeFrame(scene, 0);
+        break;
+    case 40:
+        FUN_002ae5cc(scene, 1, 0, 0, 0);
+        FUN_002fa4dc(scene, 0);
+        saveSlotDrawClippedGaugeFrame(scene, 0);
+        break;
+    case 31:
+        FUN_002ae5cc(scene, 1, 0, 0, 0);
+        break;
+    case 32:
+        if (scene->unk38B5) {
+            FUN_002ae5cc(scene, 1, 0, 0, 0);
+            break;
+        }
+        /* fall through */
+    case 14:
+    case 15:
+    case 30:
+    case 33:
+    case 42:
+    case 46:
+    case 47:
+    case 48:
+        FUN_002ae5cc(scene, 1, 1, 0, 0);
+        break;
+    case 34:
+        FUN_002ae5cc(scene, 0, 1, 0, 1);
+        FUN_002fa4dc(scene, 1);
+        FUN_0028f740(scene);
+        selectionPanelDrawMarkers(scene, 0);
+        break;
+    case 36:
+        FUN_002ae5cc(scene, 0, 0, 0, 0);
+        FUN_002fa4dc(scene, 0);
+        FUN_0028f740(scene);
+        selectionPanelDrawMarkers(scene, 0);
+        break;
+    case 35:
+        FUN_002ae5cc(scene, 0, 1, 0, 1);
+        FUN_002fa4dc(scene, 1);
+        FUN_0028f740(scene);
+        selectionPanelDrawMarkers(scene, 1);
+        break;
+    case 37:
+    case 38:
+        mode = scene->mode;
+        if (mode != 34 && mode != 35 && mode != 36) {
+            FUN_002ae5cc(scene, 0, 0, 0, 0);
+            FUN_002fa4dc(scene, 0);
+        } else {
+            FUN_002ae5cc(scene, 0, 1, 0, 1);
+            FUN_002fa4dc(scene, 1);
+        }
+        FUN_003741cc(scene);
+        FUN_0028f740(scene);
+        break;
+    case 39:
+        mode = scene->mode;
+        if (mode == 29 || mode == 32 || mode == 30 || mode == 25 || scene->page == 4) {
+            FUN_002ae5cc(scene, 1, 0, 0, 0);
+        } else {
+            FUN_002ae5cc(scene, 0, 0, 0, 0);
+            FUN_002fa4dc(scene, 0);
+            FUN_003741cc(scene);
+            FUN_0028f740(scene);
+        }
+        break;
+    }
+    if (scene->state == 6) {
+        FUN_003743a4(scene);
+    }
+    RenderCtxA *context = g_renderCtx;
+    renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
+    skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
+    renderCtxResetColorScale(g_renderCtx);
+}
+
+} /* extern "C" */

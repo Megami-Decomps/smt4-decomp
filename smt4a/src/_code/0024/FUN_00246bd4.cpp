@@ -21,7 +21,7 @@ int mapFastModelCreate(...);
 int calcHeadingRoundedToCardinalDirection(...);
 int effPartClone(...);
 int FUN_002b56e0(...);
-int FUN_002d1780(...);
+int lmapViewUpdateOrbitSequence(...);
 int FUN_002d1e44(...);
 int FUN_003026d8(...);
 int FUN_003128d8(...);
@@ -339,7 +339,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapTrapGetUnk3C. */
 /* Supplied declaration required: mapTrapArm. */
 /* Supplied declaration required: FUN_002c2d44. */
-/* Supplied declaration required: FUN_002d1780. */
+/* Supplied declaration required: lmapViewUpdateOrbitSequence. */
 /* Supplied declaration required: FUN_002d1e44. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: mapIfReleasePanel. */
@@ -6443,7 +6443,7 @@ code_r0x00303460:
       piVar18[0x22] = temp_v6;
       break;
     case 5:
-      FUN_002d1780();
+      lmapViewUpdateOrbitSequence();
       break;
     case 6:
       temp_v19 = 0.017453292f;

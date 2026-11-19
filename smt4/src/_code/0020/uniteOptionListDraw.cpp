@@ -59,7 +59,7 @@ void uniteOptionListDraw(s32 x, s32 y)
         texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x1d3, slot->x + x, slot->y + y, 0x6a);
         sprintf(name, "%s", record->name);
         TextureTableEntryIV *label = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d5);
-        textDrawString(2, 0xff, name, slot->x + label->x + x, slot->y + label->y + y, 0.5859375f, 0.0f, 1.0f);
+        textDrawString(slot->x + label->x + x, slot->y + label->y + y, 0.5859375f, 2, 0.0f, 0xff, 1.0f, name);
         if (FUN_00200574(work->optionListIV.ids[top + row]) != 0) {
             TextureTableEntryIV *mark = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d4);
             texDrawCompositeSprite(2, UNITE_SPRITES, 7, slot->x + mark->x + x, slot->y + mark->y + y, 0x6a);
@@ -98,7 +98,7 @@ void uniteOptionListDraw(s32 x, s32 y)
         texDrawTableEntryAtStoredOrigin(2, UNITE_SPRITES, 0x1d6, slot->x + x, slot->y + y, 0x83);
         sprintf(name, "%s", record->name);
         TextureTableEntryIV *label = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d8);
-        textDrawString(3, 0xffffffff, name, slot->x + label->x + x, slot->y + label->y + y, 0.48828125f, 0.0f, 1.0f);
+        textDrawString(slot->x + label->x + x, slot->y + label->y + y, 0.48828125f, 3, 0.0f, 0xffffffff, 1.0f, name);
         if (FUN_00200574(work->optionListIV.ids[selected]) != 0) {
             TextureTableEntryIV *mark = asdTMTexTableEntryAt(UNITE_SPRITES, 0x1d7);
             texDrawCompositeSprite(2, UNITE_SPRITES, 7, slot->x + mark->x + x, mark->y + slot->y + y, 0x83);

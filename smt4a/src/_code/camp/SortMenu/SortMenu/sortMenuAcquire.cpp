@@ -65,8 +65,8 @@ void sortMenuAcquire(u32 owner, u8 option)
         uiSpriteStateInitFromSource(&current->sprites[12], 21, 0, &current->parameters, 1, 1.0f);
         uiSpriteSelectAnim(&current->sprites[12], 2);
         __aeabi_memset4(current->ids, sizeof(current->ids), -1);
-        current->frame = 0;
-        current->initialized = 1;
+        current->state = 0;
+        current->ascending = 1;
         work->option = option;
         work->owner = owner;
     }

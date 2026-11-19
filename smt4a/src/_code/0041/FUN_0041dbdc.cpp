@@ -1,6 +1,7 @@
 /* NON_MATCHING: prologue order only: retail copies `selected` to r5 (movs r5, r1) and stores the selected byte after `mov r0, #1`; built stores it before. */
 #include "common.h"
 #include "gamedata/GameDataAccess_Shard0031.h"
+#include "saveLoadUI/SaveLoadInteractionsA.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ typedef struct Menu {
 } Menu;
 
 s32 sysPlaySe(u32 id);
-s32 FUN_0041f020(Menu *menu, s32 selected);
 s32 __aeabi_memcpy4(void *dest, void *src, s32 size);
 s32 resourceRunOperationIfUnblocked(Entry *entry);
 s32 FUN_0041fc24(Menu *menu);
@@ -49,7 +49,7 @@ void FUN_0041dbdc(Menu *menu, s32 selected)
         menu->bonus = 0;
     }
     sysPlaySe(se);
-    FUN_0041f020(menu, selected);
+    saveLoadUiRebuildTouchRegions(reinterpret_cast<SaveSlotHeaderWork *>(menu), selected);
     if (selected != 0) {
         __aeabi_memcpy4(&menu->entryA, &menu->current, 100);
         __aeabi_memcpy4(&menu->current, &menu->entryB, 100);

@@ -33,9 +33,9 @@ void textDrawEncodedGlyph(void *, u32 code, s32 x, s32 y, s32 dim, s32 highlight
     text[1] = (char)code;
     text[2] = 0;
     if (highlighted != 0) {
-        textDrawString(4, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
+        textDrawString((f32)x, (f32)y, 0.0f, 4, 0.0f, color, drawAlpha, text);
     } else {
-        textDrawString(3, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
+        textDrawString((f32)x, (f32)y, 0.0f, 3, 0.0f, color, drawAlpha, text);
     }
     efctSetSpeed(alpha);
 }

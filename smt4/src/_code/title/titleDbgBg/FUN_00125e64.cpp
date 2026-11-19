@@ -33,13 +33,13 @@ u32 FUN_00125e64()
         renderStackPop(&g_titleScene->stackA);
         if (jyoucyuGetTableEntry(0) != NULL) {
             // Shift-JIS: full-width "PC load".
-            textDrawString(3, 0xFFFFFFFF, "\x82\x6F\x82\x62\x83\x8D\x81\x5B\x83\x68", 296.0f, 194.0f, 0.0f, 1.0f, 1.0f);
+            textDrawString(296.0f, 194.0f, 0.0f, 3, 1.0f, 0xFFFFFFFF, 1.0f, "\x82\x6F\x82\x62\x83\x8D\x81\x5B\x83\x68");
         } else {
             // Shift-JIS: full-width "ROM load".
-            textDrawString(3, 0xFFFFFFFF, "\x82\x71\x82\x6E\x82\x6C\x83\x8D\x81\x5B\x83\x68", 296.0f, 194.0f, 0.0f, 1.0f, 1.0f);
+            textDrawString(296.0f, 194.0f, 0.0f, 3, 1.0f, 0xFFFFFFFF, 1.0f, "\x82\x71\x82\x6E\x82\x6C\x83\x8D\x81\x5B\x83\x68");
         }
         // Shift-JIS: the Japanese Shin Megami Tensei IV title.
-        textDrawString(3, 0xFFFFFFFF, "\x90\x5E\x81\x45\x8F\x97\x90\x5F\x93\x5D\x90\xB6\x87\x57", 296.0f, 208.0f, 0.0f, 1.0f, 1.0f);
+        textDrawString(296.0f, 208.0f, 0.0f, 3, 1.0f, 0xFFFFFFFF, 1.0f, "\x90\x5E\x81\x45\x8F\x97\x90\x5F\x93\x5D\x90\xB6\x87\x57");
         FUN_002aed34(1, work->parameters, 228.0f, 228.0f);
     }
     return 0;

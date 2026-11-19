@@ -80,7 +80,7 @@ void FUN_00404050(u32 effect, f32 speed, u32 handle, s32 x, s32 y, s32 useFirstS
             name = gameGetPlayerName();
         }
         sprintf(text, "%s", name);
-        textDrawString(2, textColor, text, (f32)(placement->x + x), (f32)(placement->y + y), 0.56640625f, 0.0f, speed);
+        textDrawString((f32)(placement->x + x), (f32)(placement->y + y), 0.56640625f, 2, 0.0f, textColor, speed, text);
         placement = asdTMTexTableEntryAt(0x32, 0x65);
         efctPlayVariantSet(effect, placement->x + x, placement->y + y, 0x79, useFirstSet, useSecondSet, speed);
         if (entry->content.badge != 0) {

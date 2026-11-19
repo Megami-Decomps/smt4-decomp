@@ -1,4 +1,4 @@
-/* NON_MATCHING: tree and parent trade r4/r6 and an extra r8 is saved (register allocation only). */
+/* NON_MATCHING: built --multifile with treeSkew/treeSplit (config: retail pushes {r4-r7, lr} with no alignment pad); only `add nil, r0, #4` is scheduled before `mov tree, r0` in retail, after it (from the copy) in the build. */
 #include "shard/W6_W6Match3_AATreeNode.h"
 
 extern "C" {
@@ -32,7 +32,7 @@ void FUN_00396f3c(AATree *tree, AATreeNode *node)
         tree->rightmost = node;
     }
     tree->count++;
-    for (parent = node->parent; parent != nil; parent = parent->parent) {
+    while ((parent = node->parent) != nil) {
         AATreeNode **link = parent->left == node ? &parent->left : &parent->right;
 
         treeSkew(link);

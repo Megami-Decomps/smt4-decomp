@@ -21,7 +21,7 @@ extern "C" void FUN_003f757c(u32, s32 x, s32 y, s32 depth, const char *text,
         alignment = (sprite->placement->width - fontMeasureLineAdvance(text, 3)) / 2;
     }
     s32 screenX = sprite->x + x + s32(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f)) + alignment;
-    textDrawString(3, -1, text, f32(screenX), f32(sprite->y + y),
-                 f32(251 - depth) * 0.00390625f, 0.0f, speed);
+    textDrawString(f32(screenX), f32(sprite->y + y), f32(251 - depth) * 0.00390625f, 3, 0.0f,
+                 -1, speed, text);
     efctSetSpeed(1.0f);
 }

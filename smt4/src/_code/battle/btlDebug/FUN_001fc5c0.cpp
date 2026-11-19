@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the debug-state base in r1 and the state in r0, moves the work pointer after the NULL test, and ends the dispatch with bne/b; case layout matches. */
+/* NON_MATCHING: retail moves the work pointer to r5 after the NULL test and ends the state chain with `cmp #14; bne; b` (state 14's body placed before state 12's); the build tests 14 with beq and moves the pointer first. */
 #include "common.h"
 #include "shard/JobWork.h"
 
@@ -41,25 +41,20 @@ s32 FUN_001fc5c0(u32 handle)
     if (menu == NULL) {
         return 0;
     }
-    switch (menu->state) {
-    case 1:
+    if (menu->state == 1) {
         FUN_003c2fe8(menu, g_btlDebugState.value);
-        break;
-    case 10:
+    } else if (menu->state == 10) {
         if (asdListBoxGetSelectedItemId(menu->listBox) == 11) {
             textDrawDefaultString(aocIndexValueOrDefault(work->aocIndex), 256.0f, 42.0f);
         }
-        break;
-    case 14:
+    } else if (menu->state == 14) {
         if (asdListBoxGetSelectedItemId(menu->listBox) == 0) {
             uiDrawFlagLabels(menu, FUN_002561d8(work, menu->unit, 1));
         }
-        break;
-    case 12:
+    } else if (menu->state == 12) {
         if (asdListBoxGetSelectedItemId(menu->listBox) == 0) {
             uiDrawFlagLabels(menu, FUN_002561d8(work, menu->unit, 1));
         }
-        break;
     }
     return 0;
 }

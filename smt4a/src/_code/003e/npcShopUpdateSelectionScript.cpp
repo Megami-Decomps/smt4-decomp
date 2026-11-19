@@ -1,4 +1,4 @@
-/* NON_MATCHING: the cancel/special-selection state blocks are placed before initialization instead of at the function tail; all other instructions match. */
+/* Starts the selection script for the previous shop state, then handles its result. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -55,22 +55,8 @@ static __inline void npcShopChangeState(NpcShopSelectWork *work, s32 state)
 
 extern "C" void npcShopUpdateSelectionScript(NpcShopSelectWork *work)
 {
-    if (work->step != 0) {
-        if (work->step == 1 && scrRunOpcodesStub(work->script) == 2 && panelIsMissingOrFlagClear()) {
-            s32 selected = messageGetChoiceResult();
-            if (selected == -1) {
-                npcShopChangeState(work, 7);
-            } else if (selected == 3) {
-                npcShopChangeState(work, 6);
-            } else {
-                work->selected = selected;
-                npcShopChangeState(work, 4);
-            }
-            FUN_003c3e14();
-            obj04Finish();
-            return;
-        }
-    } else {
+    switch (work->step) {
+    case 0:
         if (work->names[0].id != 0) {
             scrSetStringSlot(0, dataFindKindRecordWithAocOverrides(work->names[0].id, 0));
         }
@@ -91,5 +77,21 @@ extern "C" void npcShopUpdateSelectionScript(NpcShopSelectWork *work)
             npcShopStartEntry(work, g_npcShopSelectDefaultEntryName);
         }
         ++work->step;
+        break;
+    case 1:
+        if (scrRunOpcodesStub(work->script) == 2 && panelIsMissingOrFlagClear()) {
+            s32 selected = messageGetChoiceResult();
+            if (selected == -1) {
+                npcShopChangeState(work, 7);
+            } else if (selected == 3) {
+                npcShopChangeState(work, 6);
+            } else {
+                work->selected = selected;
+                npcShopChangeState(work, 4);
+            }
+            FUN_003c3e14();
+            obj04Finish();
+        }
+        break;
     }
 }

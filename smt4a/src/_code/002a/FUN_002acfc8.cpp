@@ -26,14 +26,14 @@ extern "C" void FUN_002acfc8(const char *text, s32 x, s32 y)
     if (length != 0) {
         rt_memcpy(segment, text, length);
         segment[length] = '\0';
-        textDrawString(2, buttonHelpNormalTextStyle(work), segment, (f32)x, (f32)y, 0.93f, 0.0f, 1.0f);
+        textDrawString((f32)x, (f32)y, 0.93f, 2, 0.0f, buttonHelpNormalTextStyle(work), 1.0f, segment);
         prefixWidth = fontMeasureLineAdvance(segment, 2);
     }
     length = work->text.highlightLength;
     rt_memcpy(segment, text + work->text.highlightStart, length);
     segment[length] = '\0';
-    textDrawString(2, work->text.highlightStyle, segment, (f32)(x + prefixWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+    textDrawString((f32)(x + prefixWidth), (f32)y, 0.93f, 2, 0.0f, work->text.highlightStyle, 1.0f, segment);
     s32 highlightWidth = fontMeasureLineAdvance(segment, 2);
     rt_memcpy(segment, text + work->text.highlightStart + work->text.highlightLength, 64 - work->text.highlightStart - work->text.highlightLength);
-    textDrawString(2, buttonHelpNormalTextStyle(work), segment, (f32)(x + highlightWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+    textDrawString((f32)(x + highlightWidth), (f32)y, 0.93f, 2, 0.0f, buttonHelpNormalTextStyle(work), 1.0f, segment);
 }

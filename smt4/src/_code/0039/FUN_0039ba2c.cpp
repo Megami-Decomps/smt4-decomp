@@ -44,7 +44,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
     s32 textWidth = (s32)FUN_0028f4b4(text, 2, 0.0f);
     f32 center = (f32)((info->placement->width - textWidth) / 2);
     f32 x = (f32)(vec2GetXInt(&banner->sprite) + info->x) + center + origin.x;
-    textDrawString(2, DAT_0044cdc8.color, reinterpret_cast<const char *>(text), x, (f32)info->y + origin.y, 0.0f, 0.0f, 1.0f);
+    textDrawString(x, (f32)info->y + origin.y, 0.0f, 2, 0.0f, DAT_0044cdc8.color, 1.0f, reinterpret_cast<const char *>(text));
     renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
     uiSpriteAdvanceAnimation(&banner->sprite);

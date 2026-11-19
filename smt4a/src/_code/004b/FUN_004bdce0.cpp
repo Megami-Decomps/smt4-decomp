@@ -40,7 +40,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
             if ((record->label.flags & 2) != 0) {
                 color = 0xDC0F14FF;
             }
-            textDrawString(1, color, text, (f32)labelX, (f32)labelY, 0.0f, 0.0f, labelAlpha);
+            textDrawString((f32)labelX, (f32)labelY, 0.0f, 1, 0.0f, color, labelAlpha, text);
             ++visible;
         }
     }

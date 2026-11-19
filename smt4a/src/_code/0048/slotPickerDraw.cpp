@@ -77,8 +77,8 @@ void slotPickerDraw(SlotPicker *picker)
 
         label[0] = picker->slotText[i][0];
         label[1] = picker->slotText[i][1];
-        textDrawString(4, color, label, (f32)(slot->x + text->x + parallax), (f32)(slot->y + text->y), 0.91796875f, 0.0f,
-                     scale);
+        textDrawString((f32)(slot->x + text->x + parallax), (f32)(slot->y + text->y), 0.91796875f, 4, 0.0f, color, scale,
+                     label);
     }
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);

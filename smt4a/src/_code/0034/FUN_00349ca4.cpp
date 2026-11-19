@@ -11,7 +11,7 @@ char *libc_strcpy(char *, const char *);
 void FUN_00399c90(u32, const char *);
 s32 FUN_0032c8c8(void);
 void FUN_002c7388(u32, const char *, u32, u32);
-void FUN_00280bd0(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
+void asdSaveHeaderInit(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
 s32 FUN_002ef7f0(u32, const char *);
 void colorForMode(u32);
@@ -50,7 +50,7 @@ void FUN_00349ca4(u32 job)
     char filename[128];
     AsdSaveHeader header;
     libc_strcpy(filename, DAT_005e2114);
-    FUN_00280bd0(&header, 0x34534444, 0x454d4147, 0, state->request->payloadSize, 0, 0);
+    asdSaveHeaderInit(&header, 0x34534444, 0x454d4147, 0, state->request->payloadSize, 0, 0);
     if (!asdSaveWriteBlock(backend, filename, &header, state->request->payload, state->request->payloadSize)) {
         if (backend == 0) {
             state->result = FUN_002ef7f0(job, filename) == 1 ? 6 : -1;

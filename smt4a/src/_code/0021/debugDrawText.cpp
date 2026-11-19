@@ -8,7 +8,7 @@ void FUN_00181ae0(u32 color, TextFont*, const char*, u32,
                   f32, f32, f32, f32, f32, f32, f32, f32);
 
 // Draw with the current font at depth 0 and unit scale; `alpha` is the last argument.
-void debugDrawText(u32 color, const char *text, f32 x, f32 y, f32 alpha)
+void debugDrawText(u32 color, f32 x, f32 y, f32 alpha, const char *text)
 {
     f32 zero = 0.0f;
     u32 length = libc_strlen(text);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the Searching caption's textDrawString argument schedule and literal-pool order differ. */
 #include "camp/Unite/UniteDraw.h"
 #include "camp/Unite/UniteGlobals.h"
 #include "camp/Unite/UnitePreferences.h"
@@ -22,7 +21,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 
 static __inline void drawDebugLabel(const char *text)
 {
-    debugDrawText(0xFF, text, 8.0f, 8.0f, 1.0f);
+    debugDrawText(0xFF, 8.0f, 8.0f, 1.0f, text);
 }
 
 // Draw the visible fusion panel, including its opening sprite and optional touch overlay.
@@ -170,8 +169,8 @@ extern "C" s32 uniteDrawPanel(u32)
         texDrawTableEntryAtStoredOrigin(2, 0x1A, 0x1D9, 0, 0, 0xFB);
         texDrawCompositeSprite(2, 0x1A, 0x13, 0, 0, 0xFB);
         const TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1DC);
-        textDrawString(4, 0x57D8FFFF, "\x82r\x82\x85\x82\x81\x82\x92\x82\x83\x82\x88\x82\x89\x82\x8E\x82\x87",
-                       (f32)label->x, (f32)label->y, 0.01953125f, 0.0f, 1.0f);
+        textDrawString((f32)label->x, (f32)label->y, 0.01953125f,
+                       4, 0.0f, 0x57D8FFFF, 1.0f, "\x82r\x82\x85\x82\x81\x82\x92\x82\x83\x82\x88\x82\x89\x82\x8E\x82\x87");
         work->optionNamesA.highlightFrame = (u8)(work->optionNamesA.highlightFrame + 1) % 40;
         uiDrawRotatingGridHighlights(0x1E0, work->optionNamesA.highlightFrame);
     }

@@ -56,7 +56,7 @@ extern "C" s32 aocMenuDrawGuideDown(u32 job)
             TextureTableEntryIV *sprite = asdTMTexTableEntryAt(47, 67 + i);
             s32 textX = sprite->x + x;
             s32 textY = sprite->y + y;
-            textDrawString(3, color, (const char *)&text[i], static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 0.0f, 1.0f);
+            textDrawString(static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 3, 0.0f, color, 1.0f, (const char *)&text[i]);
         }
         renderStackPop(&g_renderCtx->stackA);
     }

@@ -17,11 +17,13 @@ void FUN_0025cc78(const void *text, s32 x, s32 y, s32 fade, f32 scale);
 void uiObjectSetColorRgb(u32 handle, u32 color);
 
 /* Draws `text` on `layer` with a colour word at (x, y, z) with default scale 1.0 and zero offsets; width and
- * height are the two trailing float arguments. Returns the drawn extent (smt4). */
-f32 textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+ * height are the last two float arguments. Returns the drawn extent (smt4). The parameter order is the one
+ * retail's callers evaluate their arguments in (integers still go in r0-r2 as layer, color, text, floats in
+ * s0-s4 as x, y, z, width, height). */
+f32 textDrawString(f32 x, f32 y, f32 z, u32 layer, f32 width, u32 color, f32 height, const char *text);
 
 /* smt4a's twin of textDrawString: same arguments and result (the drawn extent, left in s0). */
-f32 textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+f32 textDrawString(f32 x, f32 y, f32 z, u32 layer, f32 width, u32 color, f32 height, const char *text);
 
 } /* extern "C" */
 

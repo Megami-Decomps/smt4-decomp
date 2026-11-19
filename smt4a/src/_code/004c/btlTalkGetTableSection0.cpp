@@ -1,19 +1,14 @@
-#include "shard/Shard004C.h"
+#include "battle/btlTalk.h"
 #include "battle/BattleHelpers_Smt4a.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 
 extern "C" {
 
-typedef struct PtrAt8 {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s32 *target;
-} PtrAt8;
-
-extern void* dataTableFileGetTable(s32 *target, u32 section);
-
-void* btlTalkGetTableSection0(PtrAt8 *obj)
+/* Returns the first table in the negotiation data file, if it is loaded. */
+void *btlTalkGetTableSection0(BtlTalkA *talk)
 {
-    if (obj->target != NULL) {
-        return dataTableFileGetTable(obj->target, 0);
+    if (talk->tableFile != NULL) {
+        return dataTableFileGetTable(reinterpret_cast<u32>(talk->tableFile), 0);
     }
     return NULL;
 }

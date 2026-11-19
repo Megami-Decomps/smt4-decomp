@@ -38,7 +38,7 @@ void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
     s32 width = static_cast<s32>(fontMeasureTextWidth(text, 3, 1.0f));
     s32 textX = anchor->x + number->x + x + (56 - width) / 2;
     s32 textY = anchor->y + number->y + y;
-    textDrawString(3, 0x9FDDDDFF, text, static_cast<f32>(textX), static_cast<f32>(textY), 0.0f, 1.0f, 1.0f);
+    textDrawString(static_cast<f32>(textX), static_cast<f32>(textY), 0.0f, 3, 1.0f, 0x9FDDDDFF, 1.0f, text);
     gxResetColorQuadToWhite();
 }
 }

@@ -10,7 +10,7 @@ int holderStartOnce(...);
 int trackerMoveTo(...);
 int FUN_0015e1ec(...);
 int FUN_0015e314(unsigned char *, unsigned char *, unsigned int, unsigned int);
-int FUN_0015e420(...);
+int nw_snd_SoundArchivePlayer_Initialize(...);
 int soundArchiveLoadInfoBlock(unsigned char *, unsigned int, unsigned int);
 int FUN_0015ea28(unsigned char *, unsigned char *);
 int FUN_0015fea8(unsigned char *, unsigned char *, int);
@@ -72,7 +72,7 @@ extern unsigned int DAT_0064c01c; /* 0x64c01c */
 /* Supplied declaration required: trackerMoveTo. */
 /* Supplied declaration required: FUN_0015e1ec. */
 /* Supplied declaration required: FUN_0015e314. */
-/* Supplied declaration required: FUN_0015e420. */
+/* Supplied declaration required: nw_snd_SoundArchivePlayer_Initialize. */
 /* Supplied declaration required: soundArchiveLoadInfoBlock. */
 /* Supplied declaration required: FUN_0015ea28. */
 extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
@@ -146,7 +146,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   temp_v6 = temp_v1;
   temp_v7 = param_3;
   DAT_0063e6c4 = temp_v1;
-  FUN_0015e420(&DAT_0063e37c,&g_asdSoundSystem,&DAT_0063e494,DAT_0063e6c0);
+  nw_snd_SoundArchivePlayer_Initialize(&DAT_0063e37c,&g_asdSoundSystem,&DAT_0063e494,DAT_0063e6c0);
   if (param_2 != 0) {
     puVar4 = &DAT_0063ea3c;
     DAT_0063f4c4 = '\x01';

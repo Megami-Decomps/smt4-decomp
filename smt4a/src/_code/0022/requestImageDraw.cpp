@@ -1,6 +1,6 @@
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtxA.h"
-/* NON_MATCHING: nine requestIdToCode calls unrolled as in retail (needs multifile for the preserved 1000 in r1); the push now matches (counted push helper); remaining: the final pop loads g_renderCtx into r4 directly where retail goes through r0. */
+/* NON_MATCHING: built --multifile with requestIdToCode (config: retail keeps the 1000 in r1 across its nine calls); remaining: the final pop loads g_renderCtx into r4 directly where retail goes through r0. */
 #include "font/SearchWin/RunWin.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"

@@ -41,7 +41,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
     if (demon == 0) {
         TextureTableEntryIV *name = asdTMTexTableEntryAt(18, 0x579);
         sprintf(text, "\x81| \x81| \x81|");
-        textDrawString(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+        textDrawString(name->x + x, name->y + y, 0.2f, 3, 0.0f, color, speed, text);
         return;
     }
     texDrawTableEntryAtStoredOrigin(2, 18, 0x576, x, y, 206);
@@ -58,7 +58,7 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
     }
     TextureTableEntryIV *name = asdTMTexTableEntryAt(18, 0x579);
     sprintf(text, "%s", FUN_0014bd84(demon));
-    textDrawString(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+    textDrawString(name->x + x, name->y + y, 0.2f, 3, 0.0f, color, speed, text);
     TextureTableEntryIV *level = asdTMTexTableEntryAt(18, 0x57d);
     FUN_00180310(1, level->x + x, level->y + y, 1, 4, 221, "%d", power);
     efctSetSpeed(1.0f);

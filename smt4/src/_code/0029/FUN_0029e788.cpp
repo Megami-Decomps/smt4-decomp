@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the 0x12DC mode offset from its own pool word for the final store (the build derives it from 0x12F0) and schedules the kind-offset load after the instance load. */
+/* NON_MATCHING: after the flag clear, retail loads the instance before the 0x1E60 offset and derives 0x1E67 into the same register (the build loads the offset first and uses r3). */
 #include "ui/UiSpriteApi.h"
 #include "shard/Shard0033.h"
 #include "font/ComWin/ComWin.h"
@@ -35,6 +35,13 @@ typedef char MenuSessionResetOffsetsCheck[offsetof(MenuSessionResetViewIV, first
     offsetof(MenuSessionResetViewIV, flag1e60) == 0x1e60 &&
     offsetof(MenuSessionResetViewIV, kind) == 0x1e67 ? 1 : -1];
 
+/* Enters game state `state` with its step counter cleared. */
+static void gameSetState(s32 state)
+{
+    g_gameGlobals.data->unk10 = 0;
+    g_gameGlobals.data->activeState = state;
+}
+
 extern "C" {
 
 void FUN_0029e788()
@@ -57,7 +64,6 @@ void FUN_0029e788()
     session->flag12f0 = 0;
     session->second = 0;
     session->active = 0;
-    current->state = 0;
-    current->mode = 1;
+    gameSetState(1);
 }
 }

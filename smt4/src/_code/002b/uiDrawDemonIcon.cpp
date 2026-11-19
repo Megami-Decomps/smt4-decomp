@@ -1,4 +1,3 @@
-/* NON_MATCHING: atlas-region address hoisting, top-field reload elimination and coordinate-store scheduling differ by three rows; -O2 may preserve the retail shape. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/NkmEnemyLookup.h"
 #include "ui/UiControl.h"
@@ -46,6 +45,8 @@ void FUN_002b04e8(s32 layer, u32 group, u32 image, s32 x, s32 y, u32 style,
                   const DemonIconRect* region);
 void gxResetColorQuadToWhite(void);
 
+/* Draws demon `demon`'s icon (the unknown/special placeholders for negative ids and flagged
+ * demons), tinted when `highlight` is set and the demon's party unit has flag 2 set. */
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
 {
     if ((s32)demon < 0) {
@@ -71,8 +72,8 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
         effectSubmitPackageRequest(g_aocSystem, record->image, x, y, style);
     } else {
         const s32 image = record->image;
-        DemonIconRect region;
         if (image < 0x200) {
+            DemonIconRect region;
             region.left = (image / 16) * 16;
             region.right = region.left + 16;
             region.top = (image % 16) * 32;
@@ -80,6 +81,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
             FUN_002b04e8(2, 0x25, 0, x, y, style, &region);
         } else {
             const s32 index = image - 0x200;
+            DemonIconRect region;
             region.left = (index / 16) * 16;
             region.right = region.left + 16;
             region.top = (index % 16) * 32;

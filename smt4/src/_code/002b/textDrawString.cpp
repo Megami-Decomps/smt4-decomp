@@ -8,7 +8,7 @@ f32 FUN_002b2b88(u32 second, u32 first, const char *text, u32 length, f32 x, f32
                  f32 scale, f32 offsetX, f32 offsetY, f32 width, f32 height);
 
 // Forward a text draw request with its length and default scale (1.0) and zero offsets; returns the drawn extent.
-f32 textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height)
+f32 textDrawString(f32 x, f32 y, f32 z, u32 layer, f32 width, u32 color, f32 height, const char *text)
 {
     f32 offset = 0.0f;
     u32 length = libc_strlen(text);

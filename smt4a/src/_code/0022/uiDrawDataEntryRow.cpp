@@ -55,9 +55,9 @@ void uiDrawDataEntryRow(EntryListScreen *screen, s32 index, s32 x, s32 y, f32 ba
     }
     const char *name = dataTableGetEntry24Member(screen->entries[index]);
     const TextureTableEntryIV *namePos = asdTMTexTableEntryAt(0x1a, 0xa4);
-    textDrawString(2, nameColor, name, namePos->x + x, namePos->y + y, 0.55f, 0.0f, baseSpeed * speed);
+    textDrawString(namePos->x + x, namePos->y + y, 0.55f, 2, 0.0f, nameColor, baseSpeed * speed, name);
     const TextureTableEntryIV *detailPos = asdTMTexTableEntryAt(0x1a, 0xa6);
     contentFormatEntryName(screen, entry, field, detail);
-    textDrawString(2, detailColor, detail, detailPos->x + x, detailPos->y + y, 0.55f, 0.0f, baseSpeed * speed);
+    textDrawString(detailPos->x + x, detailPos->y + y, 0.55f, 2, 0.0f, detailColor, baseSpeed * speed, detail);
 }
 }

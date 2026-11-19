@@ -22,7 +22,7 @@ void FUN_0048b260(AnimatedMessageWork *work)
     s32 textWidth = static_cast<s32>(fontMeasureTextWidth(text, 2, 0.0f));
     f32 center = static_cast<f32>((info->placement->width - textWidth) / 2);
     f32 x = static_cast<f32>(vec2GetXInt(&work->sprites[1]) + info->x) + center + position.x;
-    textDrawString(2, g_uiTextFontSettings.font, text, x, static_cast<f32>(info->y) + position.y, 0.0f, 0.0f, 1.0f);
+    textDrawString(x, static_cast<f32>(info->y) + position.y, 0.0f, 2, 0.0f, g_uiTextFontSettings.font, 1.0f, text);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
     uiSpriteAdvanceAnimation(&work->sprites[1], 1.0f);

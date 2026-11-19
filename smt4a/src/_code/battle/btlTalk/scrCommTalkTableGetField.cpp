@@ -1,33 +1,11 @@
 /* NON_MATCHING: retail retains extra >=11 remainder-dispatch paths and places the two switches differently; alternate switch lowering may explain these differences. */
 #include "battle/btlTalk.h"
+#include "battle/BattleHelpers_Smt4a.h"
 #include "gamedata/DataTable.h"
-
-struct TalkFieldSet {
-    u16 values[5];
-    u8 smallValues[2];
-    u16 extraValues[2];
-    u32 words[2];
-};
-
-struct TalkFieldGroup {
-    u8 flags[4];
-    TalkFieldSet entries[3];
-};
-
-struct TalkTableRecord {
-    u16 values[3];
-    u8 smallValues[2];
-    TalkFieldGroup groups[3];
-    s16 enabled;
-    u8 unkEe[2];
-};
-
-struct PtrAt8;
 extern "C" {
 extern BtlTalkA* g_btlTalk;
 s32 scrGetArg(u32 index);
 void scrSetResult(u32 result);
-void* btlTalkGetTableSection0(PtrAt8* object);
 
 u32 scrCommTalkTableGetField(void)
 {
@@ -35,12 +13,12 @@ u32 scrCommTalkTableGetField(void)
     const s32 groupIndex = scrGetArg(1);
     const s32 field = scrGetArg(2);
     u32 result = 0xffffffff;
-    void* section = btlTalkGetTableSection0((PtrAt8*)g_btlTalk);
+    void *section = btlTalkGetTableSection0(g_btlTalk);
     dataTableGetCount(section);
-    const TalkTableRecord* records = (const TalkTableRecord*)dataTableGetEntries(section);
+    const BtlTalkTableRecordA *records = static_cast<const BtlTalkTableRecordA *>(dataTableGetEntries(section));
 
     if (groupIndex != 0) {
-        const TalkFieldGroup* group = &records[recordIndex].groups[groupIndex - 1];
+        const BtlTalkTableGroupA *group = &records[recordIndex].groups[groupIndex - 1];
         if (field < 4) {
             result = group->flags[field];
         } else {
@@ -61,13 +39,13 @@ u32 scrCommTalkTableGetField(void)
             }
         }
     } else {
-        const TalkTableRecord* record = &records[recordIndex];
+        const BtlTalkTableRecordA *record = &records[recordIndex];
         switch (field) {
         case 0: result = record->values[0]; break;
         case 1: result = record->values[1]; break;
         case 2: result = record->values[2]; break;
-        case 3: result = record->smallValues[0]; break;
-        case 4: result = record->smallValues[1]; break;
+        case 3: result = record->category; break;
+        case 4: result = record->unk07; break;
         }
     }
     scrSetResult(result);

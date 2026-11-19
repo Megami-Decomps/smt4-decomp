@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical render push/pop recovered; terminal-name VFP literal loads remain scheduled differently. */
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "camp/RenderCtxTitle.h"
@@ -16,7 +15,7 @@ u32 FUN_0021f354()
     TerminalDrawWork *work = g_tmnl;
     if ((u32)(work->state - 1) < 98) {
         if (work->state == 1)
-            textDrawString(3, -1, g_tmnlEntries[work->nameIndex].text, 150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+            textDrawString(150.0f, 0.0f, 0.0f, 3, 1.0f, -1, 1.0f, g_tmnlEntries[work->nameIndex].text);
         RenderCtx *scene = g_titleScene;
         renderCtxPushA(scene, renderCtxPackPassFlags(1, 0));
         renderStackPop(&g_titleScene->stackA);

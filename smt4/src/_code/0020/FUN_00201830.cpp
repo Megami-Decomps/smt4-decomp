@@ -1,5 +1,6 @@
 /* NON_MATCHING: float-constant registers are loaded in the opposite order (retail s17=0.0, s16=1.0), the render-stack push is scheduled differently, and the list branch is laid out before the overlay branch; 160 rows each. */
 #include "camp/RenderCtx.h"
+#include "text/TextDraw.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "camp/RenderCtxTitle.h"
 
@@ -28,7 +29,6 @@ void FUN_0032accc(void);
 void gfxDrawQuadFourColors(const EffectColor *first, const EffectColor *second, const EffectColor *third,
                   const EffectColor *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_0026281c(char *text, const u8 *item, s32 size);
-void textDrawString(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 a, f32 b);
 
 /* Draws the debug list job: a screen-wide fade overlay, or (in list mode) a window of up to ten item
  * names with the cursor row marked. */
@@ -77,11 +77,11 @@ u32 FUN_00201830(void)
             char text[64];
 
             if (work->cursor == i + first) {
-                textDrawString(2, 0xFF00FF, "> ", 8.0f, (f32)(i * 14), 0.1f, 0.0f, 1.0f);
+                textDrawString(8.0f, (f32)(i * 14), 0.1f, 2, 0.0f, 0xFF00FF, 1.0f, "> ");
                 color = 0xFF00FF;
             }
             FUN_0026281c(text, work->items + (i + first) * DEBUG_ITEM_SIZE, 0x40);
-            textDrawString(2, color, text, 20.0f, (f32)(i * 14), 0.1f, 1.0f, 1.0f);
+            textDrawString(20.0f, (f32)(i * 14), 0.1f, 2, 1.0f, color, 1.0f, text);
         }
     }
     renderCtxApplyTransforms(g_titleScene);

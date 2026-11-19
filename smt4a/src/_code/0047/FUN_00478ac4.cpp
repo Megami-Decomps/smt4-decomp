@@ -44,7 +44,7 @@ s32 FUN_00478ac4(u32 job)
     TextureTableEntryIV *frameLayout = asdTMTexTableEntryAt(0x2F, 0x2D);
     s32 left = (frameLayout->x + (frameLayout->placement->width >> 1) - (width >> 1)) - 9;
 
-    textDrawString(3, 0x57D8FFFF, (const char *)text, (f32)left, (f32)frameLayout->y, 0.5f, 0.0f, 1.0f);
+    textDrawString((f32)left, (f32)frameLayout->y, 0.5f, 3, 0.0f, 0x57D8FFFF, 1.0f, (const char *)text);
     s32 step = frame / 5;
     s32 first = step % 8;
     s32 second = (step + 4) % 8;

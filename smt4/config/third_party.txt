@@ -807,6 +807,7 @@
 0x0014e66c FUN_0014e66c between
 0x0014e674 rt_memmove_w name
 0x0014e6f4 FUN_0014e6f4 callers
+0x0014e6f8 FUN_0014e6f8 library
 0x0014f528 nn_fs_ipc_FileSystem_GetPriority name
 0x0014f560 FUN_0014f560 callers
 0x0014f610 nn_dsp_CTR_DSP_SetSemaphore name
@@ -890,6 +891,7 @@
 0x00152604 FUN_00152604 between
 0x00152608 nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue name
 0x00152688 frem callers
+0x0015284c FUN_0015284c library
 0x0015335c nn_snd_CTR_MasterManager_GetAuxCallback name
 0x00153374 FUN_00153374 between
 0x00153394 FUN_00153394 between

@@ -626,7 +626,7 @@ code_r0x0032d518:
     campUpdateListInput(0xd);
     break;
   case 0xe:
-    FUN_0018a3e0();
+    campSkillListUpdate();
     break;
   case 0xf:
     iVar7 = FUN_0028a318();

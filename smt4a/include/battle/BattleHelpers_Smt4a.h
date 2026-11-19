@@ -3,7 +3,7 @@
 
 /* BattleHelpers (declarations migrated from callers). */
 struct BtlMainStateA;
-struct PtrAt8;
+struct BtlTalkA;
 struct BtlStageWork;
 extern "C" {
 
@@ -13,7 +13,7 @@ void btlQueueDuplicateSuppressedAction(s32 id, s32 target, u32 value);
 
 void btlActionMarkRandomStatusTarget(BtlMainStateA **context, u32 status);
 
-void* btlTalkGetTableSection0(PtrAt8 *obj);
+void *btlTalkGetTableSection0(BtlTalkA *talk);
 
 void btlStageResetAndClearCameraFlag(BtlStageWork *work);
 

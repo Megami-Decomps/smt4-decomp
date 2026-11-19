@@ -1,14 +1,14 @@
 #include "sys/ProcessResult.h"
+#include "nn/fs/ArchivePath.h"
 #include "shard/RomFileOpenState.h"
 #include "sys/FilePaths.h"
 #include "nn/Result.h"
 
-extern "C" s32 archivePathDeviceOpen(RomOpenFile *file, const u8 *path, u32 mode);
 
 static __inline s32 romFileOpen(RomOpenFile *file, const u8 *path, u32 mode)
 {
     romOpenFileInitialize(file);
-    return archivePathDeviceOpen(file, path, mode);
+    return archivePathDeviceOpen(&file->unk00, reinterpret_cast<const u16 *>(path), mode);
 }
 
 // Normalize a path, open the file when `mode` is 1 (the only supported mode) and report the resulting status.

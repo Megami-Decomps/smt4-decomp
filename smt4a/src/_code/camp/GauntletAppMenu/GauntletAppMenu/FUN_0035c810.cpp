@@ -33,7 +33,7 @@ void uiSpriteSetKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
 void uiSpriteSetImageKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
 void uiSpriteSelectAnim(GauntletSprite *sprite, s32 anim);
 void *asdLoadFileSyncDefault(const char *path);
-void FUN_003ce598(void);
+void gauntletAppMenuUpdate(void);
 void gauntletAppMenuExit(void);
 void gauntletAppMenuDestroy(void);
 
@@ -76,7 +76,7 @@ u32 FUN_0035c810(void)
     }
     menu = g_gauntletAppMenu;
     sysMemClear(menu, 0x538);
-    menu->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GauntletApp CALC"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_003ce598), reinterpret_cast<AsdProcFunc>(gauntletAppMenuDestroy), NULL);
+    menu->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GauntletApp CALC"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(gauntletAppMenuUpdate), reinterpret_cast<AsdProcFunc>(gauntletAppMenuDestroy), NULL);
     menu->list.drawTask = taskCreateDraw("GauntletApp DDRAW", 234, 0, 0, gauntletAppMenuExit, NULL, NULL, menu->task);
     if (gameFlagIsSet(0x520)) {
         menu->list.forceFirst = 1;

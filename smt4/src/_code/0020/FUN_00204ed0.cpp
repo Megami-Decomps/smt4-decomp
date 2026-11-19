@@ -23,7 +23,7 @@ void FUN_00204ed0(s32 x, s32 y, s32 id, u32 frame, u32 color)
     if (id != 0) {
         const TextureTableEntryIV *namePos = asdTMTexTableEntryAt(0x1a, 0x40f);
         sprintf(text, "%s", aocIndexValueOrDefault(id));
-        textDrawString(2, color, text, namePos->x + base->x + x, base->y + namePos->y + y, 0.29296875f, 0.0f, 1.0f);
+        textDrawString(namePos->x + base->x + x, base->y + namePos->y + y, 0.29296875f, 2, 0.0f, color, 1.0f, text);
         const TextureTableEntryIV *iconPos = asdTMTexTableEntryAt(0x1a, 0x40e);
         FUN_002b6c34(id, iconPos->x + base->x + x, base->y + iconPos->y + y, 0xb5, 0, 0);
         const TextureTableEntryIV *numberPos = asdTMTexTableEntryAt(0x1a, 0x521);
@@ -33,7 +33,7 @@ void FUN_00204ed0(s32 x, s32 y, s32 id, u32 frame, u32 color)
     }
     const TextureTableEntryIV *namePos = asdTMTexTableEntryAt(0x1a, 0x40f);
     sprintf(text, "\x82m\x82\x85\x82\x97\x81@\x82\x92\x82\x85\x82\x87\x82\x89\x82\x93\x82\x94\x82\x92\x82\x81\x82\x94\x82\x89\x82\x8f\x82\x8e\x81@\x82\x90\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81I");
-    textDrawString(2, 0x5a5a5aff, text, namePos->x + base->x + x, base->y + namePos->y + y, 0.29296875f, 0.0f, 1.0f);
+    textDrawString(namePos->x + base->x + x, base->y + namePos->y + y, 0.29296875f, 2, 0.0f, 0x5a5a5aff, 1.0f, text);
     const TextureTableEntryIV *numberPos = asdTMTexTableEntryAt(0x1a, 0x521);
     sprintf(text, "---");
     FUN_002bdf94(0, base->x + numberPos->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);

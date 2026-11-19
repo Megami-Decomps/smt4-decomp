@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include "script/ScriptVm.h"
+#include <stddef.h>
 
 struct BtlTalkOwner;
 
@@ -44,13 +45,48 @@ typedef struct BtlTalk {
 
 typedef char BtlTalkSizeCheck[sizeof(BtlTalk) == 0xCC ? 1 : -1];
 
-/* The same block in Apocalypse; only the three trailing values are named. */
+/* Negotiation work in Apocalypse. The 0x100-byte used-marker array is
+ * initialized to -1 by the session creator. */
 typedef struct BtlTalkA {
-    /* 0x000 */ u8 unk000[0x138];
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ void *tableFile;
+    /* 0x00C */ u8 unk00C[0x24];
+    /* 0x030 */ s32 actorId;
+    /* 0x034 */ s32 used[64];
+    /* 0x134 */ u8 unk134[4];
     /* 0x138 */ u32 unk138;
     /* 0x13C */ u32 unk13C;
     /* 0x140 */ u32 unk140;
 } BtlTalkA;
+
+typedef char BtlTalkAPrefixCheck[offsetof(BtlTalkA, tableFile) == 8 &&
+    offsetof(BtlTalkA, actorId) == 0x30 && offsetof(BtlTalkA, used) == 0x34 &&
+    offsetof(BtlTalkA, unk138) == 0x138 ? 1 : -1];
+
+struct BtlTalkTableFieldSetA {
+    u16 values[5];
+    u8 smallValues[2];
+    u16 extraValues[2];
+    u32 words[2];
+};
+
+struct BtlTalkTableGroupA {
+    u8 flags[4];
+    BtlTalkTableFieldSetA entries[3];
+};
+
+struct BtlTalkTableRecordA {
+    /* 0x00 */ u16 values[3];
+    /* 0x06 */ u8 category;
+    /* 0x07 */ u8 unk07;
+    /* 0x08 */ BtlTalkTableGroupA groups[3];
+    /* 0xEC */ s16 enabled;
+    /* 0xEE */ u16 requiredFlag;
+};
+
+typedef char BtlTalkTableRecordACheck[sizeof(BtlTalkTableRecordA) == 0xf0 &&
+    offsetof(BtlTalkTableRecordA, groups) == 8 && offsetof(BtlTalkTableRecordA, enabled) == 0xec &&
+    offsetof(BtlTalkTableRecordA, requiredFlag) == 0xee ? 1 : -1];
 
 /* Work area of the job that owns the talk screen (Shin Megami Tensei IV). */
 typedef struct BtlTalkOwner {

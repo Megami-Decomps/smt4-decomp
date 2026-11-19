@@ -3,3 +3,8 @@
 arm 0x100000 0x100024 CTR-SDK-crt0 image entry point; calls the SDK's init routines and tail-branches to svcExitProcess
 # NintendoWare sound: placed right after nw_snd_internal_driver_VoiceManager_FreeVoice and calls Voice_Free.
 arm 0x15c7dc 0x15c818 NintendoWare-snd linked inside the nw::snd::internal::driver block; calls nw_snd Voice_Free
+# armlib's __rt_udiv10: the shift-and-add divide by ten with the addpl/addmi remainder fix-up (smt4a's twin FUN_002e3560 is already third-party).
+arm 0x14e6f8 0x14e724 armlib __rt_udiv10 body (sub/lsr #2/#4/#8/#16 reciprocal, subs; addpl; addmi #10; bx lr)
+# armlib floating point: double to extended-exponent conversion (rebias by 0x7800, rrx) that tail-calls the
+# normaliser FUN_00155a94 for zero/denormal inputs (smt4a twins FUN_001bcd54 / FUN_001c53fc are already third-party).
+arm 0x15284c 0x152884 armlib floating-point conversion: no frame, flag-setting shifts, teqeq/rrx, tail b to the normaliser

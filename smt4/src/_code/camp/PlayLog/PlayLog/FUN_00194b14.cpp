@@ -41,7 +41,7 @@ void uiDrawListScrollBar(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s3
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
 void textFormatFullWidthNumber(char *out, u32 value);
 void texDrawCompositeSprite(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
-void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y);
+void textDrawString(f32 x, f32 y, u32 layer, u32 color, const char *text); // declcheck: local (z/width/height not recovered: retail reuses s2-s4)
 s32 fontMeasureLineAdvance(const char *text, u32 font);
 
 void FUN_00194b14(void)
@@ -68,7 +68,7 @@ void FUN_00194b14(void)
         TextureTableEntryIV *nameFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x13);
         char text[64];
         __2sprintf(text, "%s", entry->name);
-        textDrawString(2, PLAYLOG_NAME_COLOR, text, (f32)(nameFrame->x + frame->x + x), (f32)(nameFrame->y + frame->y));
+        textDrawString((f32)(nameFrame->x + frame->x + x), (f32)(nameFrame->y + frame->y), 2, PLAYLOG_NAME_COLOR, text);
 
         TextureTableEntryIV *valueFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x14);
         char first[16];
@@ -90,9 +90,9 @@ void FUN_00194b14(void)
             __2sprintf(text, "%s\x82g\x81@%s\x82l", first, second);
         }
         s32 width = fontMeasureLineAdvance(text, 2);
-        textDrawString(2, PLAYLOG_VALUE_COLOR, text,
-                     (f32)(frame->x + x + (valueFrame->x + valueFrame->placement->width - width)),
-                     (f32)(frame->y + valueFrame->y));
+        textDrawString((f32)(frame->x + x + (valueFrame->x + valueFrame->placement->width - width)), (f32)(frame->y + valueFrame->y), 2,
+                     PLAYLOG_VALUE_COLOR,
+                     text);
     }
 }
 

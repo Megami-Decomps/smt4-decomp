@@ -30,7 +30,7 @@ static void choiceCaptionDrawBody(ChoiceCaptionWork *work, s32 first)
     f32 x = (f32)(offset + (availableWidth - width) / 2 + metrics->x);
     f32 y = (f32)metrics->y;
     const char *text = first != 0 ? work->first : work->second;
-    textDrawString(4, 0xFFFFFFFF, text, x, y, 0.0f, 0.0f, work->alpha);
+    textDrawString(x, y, 0.0f, 4, 0.0f, 0xFFFFFFFF, work->alpha, text);
 }
 
 /* Draws the selected caption over its stereo-shifted frame with the owner's opacity. */

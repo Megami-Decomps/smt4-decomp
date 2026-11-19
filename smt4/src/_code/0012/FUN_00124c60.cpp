@@ -22,8 +22,8 @@ static __inline f32 asdTextDrawAt(AsdText *text, f32 left, f32 top, f32 alpha)
         } else {
             opacity = (u8)(u32)(alpha * 255.0f);
         }
-        f32 right = textDrawString(text->unk50, g_asdTextDefaults.flags | opacity, text->text, left,
-                                 top, 0.0f, text->scale, alpha);
+        f32 right = textDrawString(left, top, 0.0f, text->unk50,
+                                 text->scale, g_asdTextDefaults.flags | opacity, alpha, text->text);
         f32 drawn = right + left - left;
         if (drawn > 0.0f) {
             width = drawn;

@@ -59,7 +59,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
 
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1F);
     s32 labelX = frame->x + (frame->placement->width - fontMeasureLineAdvance(label, 2)) / 2 + x + stereo;
-    textDrawString(2, 0xFF, label, (f32)labelX, (f32)(frame->y + y), 1.0f, 0.0f, speed);
+    textDrawString((f32)labelX, (f32)(frame->y + y), 1.0f, 2, 0.0f, 0xFF, speed, label);
     efctSetSpeed(savedSpeed);
 }
 

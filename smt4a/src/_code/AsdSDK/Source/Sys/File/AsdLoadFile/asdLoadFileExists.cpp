@@ -1,5 +1,6 @@
 /* NON_MATCHING: native constructs a polymorphic stream through a VTT; its virtual-base hierarchy is not recovered by this scoped handle model. */
 #include <stdio.h>
+#include "nn/fs/ArchivePath.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/asdFileHashPackIsOpen.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
@@ -14,7 +15,6 @@ u32 FUN_001860e4(const char *);
 s32 refIsNullOrZero(FileProbeConversionState *);
 u32 FUN_00100836(const char *, u32, FileProbeConversionState *);
 u32 FUN_002e3c44(u16 *, const char *, u32, FileProbeConversionState *);
-u32 archivePathDeviceOpen(FileProbeHandle *, const u16 *, u32);
 void sysFatalBreak();
 void vcallSlot12IfValid(u32);
 }
@@ -40,7 +40,7 @@ struct FileProbeHandle {
     u32 open(const u16 *path)
     {
         state[0] = state[1] = state[2] = state[3] = 0;
-        return archivePathDeviceOpen(this, path, 1);
+        return archivePathDeviceOpen(&handle, path, 1);
     }
     ~FileProbeHandle() { close(); }
 };
