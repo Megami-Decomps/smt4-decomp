@@ -1,5 +1,10 @@
 # Shared map resources (Apocalypse)
 
+- **Games:** Apocalypse
+- **Functions:** `mapSystemLoadSharedFiles` (smt4a `0x2326B4`), matched in `e04a5605a`
+- **Headers:** `include/game/GameStateA.h`, `include/map/mapCommon.h` (new)
+- **Twin status:** IV's `mapSystemLoadSharedFiles` (smt4 `0x1A8748`) is proven; its code differs, so `tools/shared.py` does not pair them
+
 `mapSystemLoadSharedFiles` at `0x002326B4` loads the field map's scripts and model
 content. Its IV counterpart already has the same name; IV retains file handles,
 while Apocalypse constructs fifteen `MoriModelContent` owners.

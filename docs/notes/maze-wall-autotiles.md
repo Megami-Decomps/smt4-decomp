@@ -1,5 +1,10 @@
 # Apocalypse maze wall auto-tiles
 
+- **Games:** Apocalypse
+- **Functions:** `mapRebuildWallAutoTiles` (smt4a `0x2C5468`), matched in `8cc7b7029`
+- **Headers:** none changed; the grid is `MapSaveBlockA` from `include/gamedata/MapSaveBlockA.h`
+- **Twin status:** no twin paired by `tools/shared.py`
+
 `mapRebuildWallAutoTiles` (`002C5468`, 208 bytes) visits the interior of the
 saved maze grid. For each state-2 wall it tests its four state-1 neighbors
 (west/east/north/south bits 1/2/4/8) and writes the corresponding tile and variant.
@@ -19,7 +24,7 @@ matching-tool changes are involved. The grid layout remains the shared
 retain their original addresses.
 
 The final stock report and matched relink include the initializer and this
-function, bringing Apocalypse to 9,234 proven functions without losing any
+function, adding it to Apocalypse's proven set in `8cc7b7029` without losing any
 prior match; the resulting `.code` is byte-identical to the original. Both
 complete compiled arrays were also independently checked against the original
-image. The three previously documented Linux host build failures are unchanged.
+image. The [known host failures](../troubleshooting.md#known-host-failures) are unchanged.

@@ -1,5 +1,10 @@
 # Battle resident-resource loader
 
+- **Games:** IV
+- **Functions:** `btlAdvanceResidentResourceLoad` (smt4 `0x339B64`), matched in `7ddd14000`
+- **Headers:** `include/battle/BtlResidentLoader.h` (new), `include/battle/btlMain.h`; `include/script/scrScriptProcess.h` declares the factory
+- **Twin status:** Apocalypse's loader, smt4a `FUN_003f0794`, is `NON_MATCHING` (not paired by `tools/shared.py`)
+
 IV `btlAdvanceResidentResourceLoad` (`00339B64`) is the battle worker's
 lock-protected resource initialization state machine. It copies the resident
 message/table/script handles, creates their script process, waits for the other
@@ -30,7 +35,7 @@ fixed here. It is not included in this match.
 Verification: all 604 raw text/pool bytes and normalized relocations match.
 All 765 previously proven transitive consumers of the changed battle header
 remain identical. The thread-launch caller's bytes and relocations are unchanged.
-Both stock relinks are byte-identical to retail, with 6388 IV and 9236 Apocalypse
-functions proven and none lost. Local full builds retain the same three known
-host failures per game (wibo teardown and overlong STL filenames); native CI is
-the complete-build gate.
+Both stock relinks at `7ddd14000` are byte-identical to retail, with no proven
+function lost. Local full builds show only the
+[known host failures](../troubleshooting.md#known-host-failures) (wibo teardown and
+overlong STL filenames); native CI is the complete-build gate.

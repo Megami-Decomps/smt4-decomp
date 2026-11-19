@@ -1,5 +1,10 @@
 # Scissor coordinate packing
 
+- **Games:** both
+- **Functions:** `gxSetMirroredClippedScissor` (smt4 `0x29A17C`, smt4a `0x35AE58`), matched in `27993a460`
+- **Headers:** `include/gfx/ScissorCoordinates.h` (new); a `packScissorCoordinates` row in each game's `config/inlined.txt`
+- **Twin status:** a near-twin pair, both proven; the clipping callers `gxSetClippedBottomScreenScissor` / `renderSetClippedScissor` (also a near pair) are unproven
+
 `packScissorCoordinates` is an inferred name for a removed leaf helper whose
 ordinary C body is `return x | (y << 16);`, with two `u32` arguments. The pinned
 compiler emits `orr r0, r0, r1, lsl #16` followed by `bx lr` for this body.

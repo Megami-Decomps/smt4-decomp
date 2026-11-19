@@ -1,5 +1,10 @@
 # Fusion-result initialization and source-visible tone access
 
+- **Games:** both
+- **Functions:** `uniteResultInitialize` (smt4 `0x1EEA88`, matched in `011a15af8`, key types corrected in `392290a34`; smt4a `0x2A74AC`, matched in `10d3b9499`)
+- **Headers:** none changed; a `uniteRenderTargetSetTexture` row in `smt4a/config/inlined.txt` (IV uses the existing `devilRecordGetTone` row)
+- **Twin status:** both proven; not paired by `tools/shared.py`
+
 `uniteResultInitialize` (SMT IV, `001eea88`) sets up the fusion-result
 presentation: material textures and a render target, the two/three/four-material
 stage and camera, the result demon's tone-specific message script, and sprites.

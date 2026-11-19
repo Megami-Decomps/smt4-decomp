@@ -6,9 +6,9 @@ address neighbours were built with, and how good the evidence for that flag set 
 
 armcc 4.1 built most units with the project's default flags (-O3 -Otime, VFP); some modules were built
 with others (`--fpu=softvfp`, `--cpu=5TE`, `-Ospace`, `-O2`, ...), recorded per unit as `cflags` in
-`<game>/config/project.json`. docs/CONTRIBUTING.md allows a non-default flag only with evidence that
-the unit was built that way. This script looks for the flags that evidence would point at, instead of
-trying every flag:
+`<game>/config/project.json`. docs/matching-guide.md ("Compiler and flags") allows a non-default flag
+only with evidence that the unit was built that way. This script looks for the flags that evidence
+would point at, instead of trying every flag:
 
 For every unmatched first-party unit (not proven by `build/relink/proof.json`, not 100% in
 `build/report.json`, not listed in `config/third_party.txt`) the candidate flag sets are the distinct

@@ -2,7 +2,22 @@
 
 Each note records the retail evidence for a match whose fix went beyond the function itself: a
 shared declaration, a header, an `inlined.txt` row or a data table. The general techniques are in
-[CONTRIBUTING.md](../CONTRIBUTING.md); these notes cover single cases.
+the [matching guide](../matching-guide.md) and the rules in [CONTRIBUTING.md](../CONTRIBUTING.md);
+these notes cover single cases.
+
+Every note opens with the same four-line header, under its title:
+
+```markdown
+- **Games:** IV, Apocalypse or both
+- **Functions:** each function matched, with its game and address, and the commit it was matched in
+- **Headers:** the shared headers (and configuration rows) the fix added or changed, or "none changed"
+- **Twin status:** the other game's counterpart and whether it is proven or paired by `tools/shared.py`
+```
+
+A note names the commit its match landed in rather than the repository's proven totals, which
+change with every wave; the twin status records the state when the header was written (`abab670c2`),
+and the [progress site](https://megami-decomps.github.io/smt4-decomp/) has the current one. Host
+build failures unrelated to the match link to [Troubleshooting](../troubleshooting.md#known-host-failures).
 
 - [scissor-coordinate-packing](scissor-coordinate-packing.md): the inlined, since removed `packScissorCoordinates` helper behind the scissor setters.
 - [scroll-output-contract](scroll-output-contract.md): the signed output argument of the touch-list scroll helpers.

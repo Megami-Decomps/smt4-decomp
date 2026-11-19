@@ -1,5 +1,10 @@
 # Apocalypse battle event panel
 
+- **Games:** Apocalypse
+- **Functions:** `btlEventPanelInitialize` (smt4a `0x2CDAD4`), matched in `e116e911f`; argument contracts of `FUN_004a9a50` and `FUN_0035bd4c`
+- **Headers:** `include/battle/btlUI.h` (`BtlUiObjBA`), `include/code/Code0035.h`
+- **Twin status:** no twin paired by `tools/shared.py`; no IV counterpart identified
+
 `btlEventPanelInitialize` (`002CDAD4`, 568 code bytes plus its literal pool)
 initializes the event panel at `BtlUiA::objB` (`+0x24BC`). The next widget begins
 at `+0x28C4`, independently bounding this panel to `0x408` bytes. Its initializer,
@@ -44,7 +49,7 @@ renderer or turn-icon reconstruction is included.
 The stock per-function comparison is identical (including the pool-to-data
 relationship), both full reports preserve every previously proven function,
 and both matched relinks reproduce the original `.code` hashes. Apocalypse
-adds this initializer to the proven set (9,233); IV remains at 6,386. The local
-Linux runner retains its three known unrelated build failures per game (one
-compiler-host teardown failure and two long-path failures); native CI is the
-separate complete-build gate.
+adds this initializer to the proven set in `e116e911f`; IV's proven set is
+unchanged. The local Linux runner shows only the
+[known host failures](../troubleshooting.md#known-host-failures), unrelated to this match;
+native CI is the separate complete-build gate.

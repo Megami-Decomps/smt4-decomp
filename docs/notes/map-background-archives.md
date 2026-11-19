@@ -1,5 +1,10 @@
 # Map background archive loading
 
+- **Games:** IV
+- **Functions:** `mapBgLoadArchivesStep` (smt4 `0x2D1CE0`), matched in `5b5db02eb`
+- **Headers:** `include/map/mapBg.h` (new), `include/map/mapDepart.h`
+- **Twin status:** Apocalypse's expanded counterpart is unmatched and not paired by `tools/shared.py`
+
 IV `mapBgLoadArchivesStep` (formerly `FUN_002d1ce0`) advances the optional sky
 and destination-map BAM requests kept by `g_mapDepartWork`.
 

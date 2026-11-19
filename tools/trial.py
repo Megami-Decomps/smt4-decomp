@@ -25,8 +25,8 @@ later rows; `--keep` still requires a strictly better raw score.
 `--flags` scores, instead of variants, the current source under other compiler flags (-O2/-O3,
 -Otime/-Ospace, --fpu=softvfp and their combinations) and in a `--multifile` run with each direct
 callee that has a unit, without editing config/project.json. These are diagnostics: a flag or a
-multifile partner that helps is a lead, and needs the evidence docs/CONTRIBUTING.md asks for before
-it goes into the config.
+multifile partner that helps is a lead, and needs the evidence docs/matching-guide.md ("Compiler and
+flags") asks for before it goes into the config.
 """
 
 import argparse
@@ -234,7 +234,7 @@ def main():
           + ("; scores shown as shape/raw" if args.shape else ""))
     if args.flags:
         print("DIAGNOSTICS ONLY: a flag or multifile partner that scores better is a lead, not evidence; see "
-              "docs/CONTRIBUTING.md (\"Compiler flags need evidence\", \"--multifile\") before changing config/project.json")
+              "docs/matching-guide.md (\"Compiler and flags\") before changing config/project.json")
     width = max(len(label) for _i, label, _r in rows)
     for _index, label, result in order:
         shown = "FAIL" if result["score"] is None else str(result["score"])

@@ -1,5 +1,10 @@
 # Shared status-screen resource acquisition
 
+- **Games:** both
+- **Functions:** `statusAcquireSharedResources` (smt4 `0x28C040`, smt4a `0x2C7E6C`), matched together in `ea3f72fa7`
+- **Headers:** none changed
+- **Twin status:** both proven; not paired by `tools/shared.py`
+
 `statusAcquireSharedResources` (IV `0x0028c040`, Apocalypse `0x002c7e6c`) initializes the shared
 status-screen instance on its first reference and increments its reference count.
 
@@ -36,8 +41,8 @@ Validation uses the stock compiler and project workflow:
   `30c2fde6c31bdf2c2b08c74183523118a5eec048f0e0bf48f5b46fd136c495a1`.
   Apocalypse SHA-256:
   `0b5338c4eace771ae809a06977a785ea4e00fd41c63e58d3f05fa6a255561bbe`.
-- Each local full compile retains three pre-existing host failures: one compiler
-  host failure and two overlong source paths. None is changed by this work.
+- Each local full compile shows only the
+  [known host failures](../troubleshooting.md#known-host-failures), none changed by this work.
 
 No special compiler flags, altered match selection, or instruction patching was
 introduced for this function.

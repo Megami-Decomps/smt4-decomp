@@ -37,7 +37,7 @@ jobs:
           python-version: '3.12'
 
       # One declaration per function, global and struct: the lines a change adds may not redeclare what a
-      # shared header declares (docs/CONTRIBUTING.md, "One struct per object").
+      # shared header declares (docs/style-and-naming.md, "One struct per object").
       - name: Declaration check
         env:
           BASE: ${{ github.event.pull_request.base.sha || github.event.before }}

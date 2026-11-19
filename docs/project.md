@@ -1,5 +1,48 @@
 # Project layout, names and provenance
 
+## Pipeline
+
+```
+your dump (.cxi, .3ds, .cia)
+  |  build.py split        checks the build, cuts each retail function into orig/target/**.o
+  v
+src/**/*.cpp --build.py--> build/obj/**.o
+  |                        armcc 4.1 b1454: native on Windows, through wibo elsewhere,
+  |                        retried under Wine when wibo crashes
+  v
+build.py report            objdiff, compiled object against retail target -> build/report.json
+  |
+  v
+fdiff.py / trial.py        one function: disassembly and relocations against retail -> IDENTICAL
+  |
+  v
+relink.py --matched        links every 100% function into the .code and compares it byte for byte
+  |                        -> MATCH, build/relink/proof.json
+  v
+progress_site.py           CI renders the progress site from report.json and proof.json
+```
+
+`build.py` runs in a game directory (`smt4/`, `smt4a/`), `relink.py` there as `../tools/relink.py`;
+the other tools run from the repository root. Host problems are in
+[Troubleshooting](troubleshooting.md).
+
+## Tools cheat sheet
+
+| Tool | Question it answers | Invocation |
+|---|---|---|
+| `tools/triage.py` | Which unproven functions are closest, and what kind of diff stands in the way? | `python -B tools/triage.py --games smt4` (writes `build/triage.tsv`) |
+| `tools/shared.py` | Which functions do both games share, and which unproven ones have a proven twin? | `python -B tools/shared.py --list port` |
+| `tools/similar.py` | Which proven functions look most like each unproven one? | `python -B tools/similar.py --top 3` (writes `build/similar.tsv`) |
+| `tools/fdiff.py` | How does my source differ from retail? | `python -B tools/fdiff.py smt4 <function> --shape` |
+| `tools/trial.py` | Which of these source variants (or flags) scores best? | `python -B tools/trial.py smt4 <function> variants.py --show 2` |
+| `tools/usercheck.py` | Did my header or declaration change move any unit's score? | `python -B tools/usercheck.py master` |
+| `tools/declcheck.py` | Does my change redeclare something a shared header declares? | `python -B tools/declcheck.py master` |
+| `tools/names.py` | How do I name a function or global everywhere at once? | `python -B tools/names.py apply ROWS.tsv` (`check` validates only) |
+| `tools/relink.py` | Does the whole `.code` still relink byte-identical, and what is proven? | `cd smt4 && python -B ../tools/relink.py --matched` |
+| `tools/flag_audit.py` | Which unmatched units match under the flags their twin or neighbours were built with? | `python -B tools/flag_audit.py --game smt4 --apply none` |
+| `tools/worktrees.py` | How do I work on several functions in parallel? | `python -B tools/worktrees.py create NAME`, later `patch NAME` and `remove NAME` |
+| `tools/progress_site.py` | What would the progress site show for this checkout? | `python -B tools/progress_site.py --out build/site` |
+
 ## Layout
 
 ```
@@ -17,7 +60,8 @@ smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, b
                            project.json entry, the armlink lookups for its symbols, armcc, build.py);
                            --force compiles every unit
 include/              headers both games share: structs and accessors, by original source file
-docs/                 the contribution guide and these notes; docs/notes/ holds the evidence for single matches
+docs/                 the contribution guide, matching guide, style and naming, troubleshooting and these
+                      notes; docs/notes/ holds the evidence for single matches
 tools/relink.py       links the whole .code from the compiled objects and compares it with retail;
                       --matched writes <game>/build/relink/proof.json, what the progress site credits
 tools/split.py        rebuilds the retail target objects (`build.py split`); tools/n3ds.py reads the dump,

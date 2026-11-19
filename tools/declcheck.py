@@ -9,14 +9,15 @@ struct of a name that a shared header declares.
 Shared headers are everything under include/ and each game's <game>/include/. A unit (`<game>/src/**.cpp`)
 that writes its own prototype or `extern` of a name one of them declares, or its own `struct X {` for a
 type one of them defines, keeps a second description of something that already has one (see
-docs/CONTRIBUTING.md, "One struct per object"). Only lines the change adds are checked: moving a
+docs/style-and-naming.md, "One struct per object"). Only lines the change adds are checked: moving a
 declaration into a shared header never fails, even while older units still carry local copies. A local
 declaration kept on purpose (the shared one's types change this caller's code) carries the comment
 `// declcheck: local (reason)` on its line.
 
 It also reports, without failing, each `static` (or `static __inline`/`inline`) function the change adds
 to a unit that the unit then calls only once: such a helper needs evidence besides the diff (a twin, a
-sibling doing the same, a header declaring it, or a real function's body; see docs/CONTRIBUTING.md).
+sibling doing the same, a header declaring it, or a real function's body; see docs/CONTRIBUTING.md,
+"Matching rules").
 """
 import os
 import re

@@ -1,5 +1,10 @@
 # Scroll helper output contract
 
+- **Games:** both
+- **Functions:** `uiScrollHandleActionsOrTouch` (smt4 `0x29F5D8`, smt4a `0x3450D4`), matched in `c3c9a70ba`; signed output contract in `bcc662fd4`
+- **Headers:** `include/classes/Obj422594.h`
+- **Twin status:** both proven; not paired by `tools/shared.py`
+
 `uiScrollHandleActionsOrTouch` writes a signed byte containing zero or one,
 not a C++ `bool` object. The callee alone cannot distinguish these contracts:
 both use a byte store. Native consumers establish the signed declaration.

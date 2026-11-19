@@ -16,8 +16,7 @@
 A work-in-progress **matching decompilation** of *Shin Megami Tensei IV* and *Shin Megami Tensei IV:
 Apocalypse* for Nintendo 3DS. The goal is to understand and document how the games work by
 reconstructing readable source code from their retail binaries. Matching builds verify the
-reconstruction against the original executables. Progress, per game and per function, is on the
-[progress site](https://megami-decomps.github.io/smt4-decomp/).
+reconstruction against the original executables.
 
 > [!IMPORTANT]
 > **This is a binary reconstruction and analysis project for understanding and documenting how the
@@ -44,10 +43,18 @@ Progress counts first-party code only: Atlus's engine (AsdSDK) and the game. Nin
 NintendoWare, NEX and OnlineCore, Mobiclip and the ARM runtime still relink with everything else, but
 are listed in `config/third_party.txt` and not counted ([what counts](docs/project.md#what-counts)).
 
-| Version | First-party functions | Proven by relink | Readable | Third-party (not counted) |
-|---|---|---|---|---|
-| `smt4` | 7,774 | 5,450 | 2,785 | 3,116 |
-| `smt4a` | 9,571 | 6,575 | 3,369 | 7,763 |
+Snapshot at `0444aa790`; the [progress site](https://megami-decomps.github.io/smt4-decomp/), which CI
+publishes from `master` with `tools/progress_site.py`, has the current numbers, per game and per
+function:
+
+| Version | First-party functions | Proven by relink | Proven code bytes | Readable | Third-party (not counted) |
+|---|---|---|---|---|---|
+| `smt4` | 7,774 | 5,450 | 582,618 of 2,411,976 | 2,785 | 3,116 |
+| `smt4a` | 9,571 | 6,575 | 721,104 of 3,133,960 | 3,369 | 7,763 |
+
+The function and code badges diverge because about 70% of the first-party functions are proven but
+only about 24% of their code bytes (23% in Apocalypse): the unproven 30% are the large gameplay, UI
+and state-machine routines, which hold about 76% of the bytes.
 
 "Proven" is the number that counts: objdiff ignores some operand differences, relink does not. The
 [project notes](docs/project.md#proof) explain the measurements and the six functions per game that
@@ -57,11 +64,13 @@ were hand-written assembly.
 
 Requirements:
 
-- Windows, or Linux/macOS (the compiler then runs through [wibo](https://github.com/decompals/wibo),
-  which `build.py fetch` downloads).
+- Windows, or Linux/macOS: there armcc runs through [wibo](https://github.com/decompals/wibo), which
+  `build.py fetch` downloads; when wibo crashes on a unit, `build.py` compiles it again under Wine if
+  Wine is installed ([troubleshooting](docs/troubleshooting.md)).
 - Python 3.10+ and `git`.
 - Your own decrypted dump: the IV v1.2.0 update (the installed NCCH or a decrypted `.cia`), or the
   Apocalypse cartridge (`.3ds`/`.cci`, or its partition 0).
+- A short checkout path (36 characters or fewer: the longest unit path adds 222 more).
 
 ```sh
 git clone https://github.com/Megami-Decomps/smt4-decomp.git
@@ -78,24 +87,38 @@ python ../tools/relink.py --matched # links every matched function into the reta
 `build.py split` refuses any other build of the game. `relink.py` prints `MATCH` when the linked
 `.code` is byte-identical to retail and lists every function it kept as retail bytes, with the reason.
 
+## Pick your first task
+
+Run these from the repository root, after the Quickstart's relink (they read its proof). Each lane
+ends with `fdiff` printing `IDENTICAL` and the [review checklist](docs/CONTRIBUTING.md#review-checklist).
+
+1. **Make a proven function readable.** On the [progress site](https://megami-decomps.github.io/smt4-decomp/),
+   each game's function compendium marks proven functions that still carry decompiler placeholders
+   as `registered` (finished ones are `readable`). Bring one to the
+   [readability standard](docs/style-and-naming.md#readability-standard) and give it a real name
+   with `tools/names.py`, checking after each step that it still matches:
+   `python -B tools/fdiff.py smt4 <function>`
+2. **Port a twin.** List the unproven functions whose twin in the other game is proven, largest
+   first, with the twin's source and the struct offsets to change:
+   `python -B tools/shared.py --list port`
+3. **Match a new function.** Sort the unproven functions by what their diff looks like (it writes
+   `build/triage.tsv`), pick one and work on it with `tools/fdiff.py <game> <function> --shape`:
+   `python -B tools/triage.py`
+
 ## Documentation and contributing
 
-Start with the [contribution guide](docs/CONTRIBUTING.md): pick a function, make
-`python tools/fdiff.py <game> <function>` print `IDENTICAL` with readable C++, name it with
-`tools/names.py`, and verify that `relink.py --matched` still prints `MATCH`.
-[`sys/Task/Task`](smt4/src/_code/sys/Task/Task/) with [`include/sys/Task.h`](include/sys/Task.h) is the
-reference for what a finished file looks like.
+Start with the [contribution guide](docs/CONTRIBUTING.md): the loop for one function (porting its
+twin included: Apocalypse reuses most of IV's code), the matching rules and the review checklist.
+[`sys/Task/Task`](smt4/src/_code/sys/Task/Task/) with [`include/sys/Task.h`](include/sys/Task.h) is
+the reference for readable code: four of its five functions are matched in both games, and
+`taskCreate` is still `NON_MATCHING`. The [documentation index](docs/README.md) lists the rest:
 
-Apocalypse reuses most of IV's engine and game code. The contribution guide also covers porting a
-matched function to its twin in the other game.
-
-The [documentation index](docs/README.md) groups the available references:
-
-- **Code reconstruction:** the matching rules, the readability standard and naming.
-- **Project notes:** layout, shared code between the games, where names and source-file placements
-  come from, and what counts as proven.
-- **Match notes:** the retail evidence for single matches that changed a shared declaration, a
-  header or the configuration.
+- **[Matching guide](docs/matching-guide.md):** the armcc 4.1 cookbook, sweeps, compiler flags.
+- **[Style and naming](docs/style-and-naming.md):** shared declarations, readability, consistency, names.
+- **[Troubleshooting](docs/troubleshooting.md):** wibo and Wine, path length, known host failures.
+- **[Project notes](docs/project.md):** the pipeline, a tools cheat sheet, layout, provenance, what
+  counts as proven.
+- **[Match notes](docs/notes/README.md):** the retail evidence behind single matches.
 
 ## Acknowledgements
 

@@ -1,5 +1,10 @@
 # Destination availability and interaction variants
 
+- **Games:** Apocalypse
+- **Functions:** `lmapRefreshDestinationAvailability` (smt4a `0x491C60`), matched in `7cbcbee10`; the call contract of `FUN_004083a8` and its caller `FUN_004920d4` (still `NON_MATCHING`)
+- **Headers:** `include/map/InteractionFlags.h` (new), `include/map/LmapDestinationListsA.h` (new)
+- **Twin status:** no twin paired by `tools/shared.py`
+
 Apocalypse `lmapRefreshDestinationAvailability` (formerly `FUN_00491c60`)
 refreshes the normal and extra map-destination lists. Its 996-byte function
 and 8-byte literal pool (1004 bytes total), including relocations, now match
